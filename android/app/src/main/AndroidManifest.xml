@@ -1,0 +1,53 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.anonymous.cocolonmvp">
+
+  <!-- Unity 側 minSdkVersion=23 を無視して、Cocolon 側の 24 を適用 -->
+  <uses-sdk tools:overrideLibrary="com.unity3d.player" />
+
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+  <application
+      android:name="com.anonymous.cocolonmvp.MainApplication"
+      android:label="cocolonmvp"
+      android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:allowBackup="true"
+      android:theme="@style/AppTheme"
+      android:supportsRtl="true">
+
+    <!-- MainActivity を直接 AppCompat にする -->
+    <activity
+        android:name=".MainActivity"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
+        android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:exported="true"
+        android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="cocolonmvp"/>
+      </intent-filter>
+    </activity>
+
+    <!-- Unity Player Activity -->
+    <activity
+        android:name="com.unity3d.player.UnityPlayerActivity"
+        android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard|navigation"
+        android:exported="true"
+        android:screenOrientation="portrait"
+        android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+  </application>
+</manifest>

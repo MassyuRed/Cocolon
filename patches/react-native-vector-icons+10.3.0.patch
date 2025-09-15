@@ -1,0 +1,100 @@
+diff --git a/node_modules/react-native-vector-icons/android/build.gradle b/node_modules/react-native-vector-icons/android/build.gradle
+index 3e615e9..41bf6d7 100644
+--- a/node_modules/react-native-vector-icons/android/build.gradle
++++ b/node_modules/react-native-vector-icons/android/build.gradle
+@@ -1,54 +1,60 @@
+-buildscript {
+-    ext.safeExtGet = {prop, fallback ->
+-        rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+-    }
+-    repositories {
+-        google()
+-        gradlePluginPortal()
+-    }
+-    dependencies {
+-        classpath("com.android.tools.build:gradle:7.0.4")
+-    }
++def safeExtGet(prop, fallback) {
++  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+ }
+ 
+ def isNewArchitectureEnabled() {
+-    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
++  return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+ }
+ 
+ apply plugin: 'com.android.library'
+ if (isNewArchitectureEnabled()) {
+-    apply plugin: 'com.facebook.react'
++  apply plugin: 'com.facebook.react'
+ }
+ 
+ android {
+-    namespace = "com.oblador.vectoricons"
+-    compileSdkVersion safeExtGet('compileSdkVersion', 31)
++  namespace "com.oblador.vectoricons"
++  compileSdkVersion safeExtGet('compileSdkVersion', 34)
+ 
+-    defaultConfig {
+-        minSdkVersion safeExtGet('minSdkVersion', 21)
+-        targetSdkVersion safeExtGet('targetSdkVersion', 31)
+-        buildConfigField("boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString())
+-    }
+-    sourceSets {
+-        main {
+-            if (isNewArchitectureEnabled()) {
+-                java.srcDirs += ['src/newarch']
+-            } else {
+-                java.srcDirs += ['src/oldarch']
+-            }
+-        }
++  defaultConfig {
++    minSdkVersion safeExtGet('minSdkVersion', 24)
++    targetSdkVersion safeExtGet('targetSdkVersion', 34)
++    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
++    consumerProguardFiles "consumer-rules.pro"
++  }
++
++  buildFeatures {
++    buildConfig true
++  }
++
++  compileOptions {
++    sourceCompatibility JavaVersion.VERSION_17
++    targetCompatibility JavaVersion.VERSION_17
++  }
++
++  lint {
++    abortOnError false
++  }
++
++  sourceSets {
++    main {
++      if (isNewArchitectureEnabled()) {
++        java.srcDirs += ['src/newarch']
++      } else {
++        java.srcDirs += ['src/oldarch']
++      }
+     }
++  }
+ }
+ 
+ repositories {
+-    maven {
+-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+-        url "$projectDir/../node_modules/react-native/android"
+-    }
+-    mavenCentral()
+-    google()
++  mavenLocal()
++  mavenCentral()
++  maven { url "$rootDir/../node_modules/react-native/android" }
++  maven { url "$projectDir/../node_modules/react-native/android" }
++  maven { url "$rootDir/../node_modules/jsc-android/dist" }
++  google()
+ }
+ 
+ dependencies {
+-    implementation 'com.facebook.react:react-native:+'
++  implementation 'com.facebook.react:react-native:+'
+ }

@@ -1,0 +1,486 @@
+diff --git a/node_modules/@react-native-community/blur/android/build.gradle b/node_modules/@react-native-community/blur/android/build.gradle
+index acb9a88..2f969c0 100644
+--- a/node_modules/@react-native-community/blur/android/build.gradle
++++ b/node_modules/@react-native-community/blur/android/build.gradle
+@@ -1,143 +1,59 @@
+-buildscript {
+-  repositories {
+-      google()
+-      mavenCentral()
+-  }
+-
+-  dependencies {
+-    classpath 'com.android.tools.build:gradle:3.5.3'
+-  }
++def safeExtGet(prop, fallback) {
++  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+ }
+ 
+ def isNewArchitectureEnabled() {
+-  return rootProject.hasProperty("newArchEnabled") &&  rootProject.getProperty("newArchEnabled") == "true"
++  return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+ }
+ 
+ apply plugin: 'com.android.library'
+ 
+-if (isNewArchitectureEnabled()) {
+-  apply plugin: 'com.facebook.react'
+-}
+-
+-def getExtOrDefault(name) {
+-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['Blur_' + name]
+-}
+-
+-def getExtOrIntegerDefault(name) {
+-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['Blur_' + name]).toInteger()
+-}
+-
+ android {
+-  compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
+   namespace "com.reactnativecommunity.blurview"
+ 
++  compileSdkVersion safeExtGet('compileSdkVersion', 34)
++
+   defaultConfig {
+-    minSdkVersion getExtOrIntegerDefault('minSdkVersion')
+-    targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
++    minSdkVersion safeExtGet('minSdkVersion', 24)
++    targetSdkVersion safeExtGet('targetSdkVersion', 34)
++    consumerProguardFiles "consumer-rules.pro"
+     buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+   }
+-  buildTypes {
+-    release {
+-      minifyEnabled false
+-    }
+-  }
+ 
+-  lintOptions {
+-    disable 'GradleCompatible'
+-  }
++  buildFeatures { buildConfig true }
+ 
+   compileOptions {
+-    sourceCompatibility JavaVersion.VERSION_1_8
+-    targetCompatibility JavaVersion.VERSION_1_8
++    sourceCompatibility JavaVersion.VERSION_17
++    targetCompatibility JavaVersion.VERSION_17
+   }
+ 
++  lint { disable 'GradleCompatible' }
++
+   sourceSets {
+     main {
+       if (isNewArchitectureEnabled()) {
+-        java.srcDirs += ['src/newarch']
++        if (file('src/newarch').exists()) {
++          java.srcDirs += ['src/newarch']
++        }
+       } else {
+-        java.srcDirs += ['src/oldarch']
++        if (file('src/oldarch').exists()) {
++          java.srcDirs += ['src/oldarch']
++        }
+       }
+     }
+   }
+ }
+ 
+ repositories {
++  mavenLocal()
+   mavenCentral()
+   google()
+   maven { url 'https://jitpack.io' }
+-
+-  def found = false
+-  def defaultDir = null
+-  def androidSourcesName = 'React Native sources'
+-
+-  if (rootProject.ext.has('reactNativeAndroidRoot')) {
+-    defaultDir = rootProject.ext.get('reactNativeAndroidRoot')
+-  } else {
+-    defaultDir = new File(
+-      projectDir,
+-      '/../../../node_modules/react-native/android'
+-    )
+-  }
+-
+-  if (defaultDir.exists()) {
+-    maven {
+-      url defaultDir.toString()
+-      name androidSourcesName
+-    }
+-
+-    logger.info(":${project.name}:reactNativeAndroidRoot ${defaultDir.canonicalPath}")
+-    found = true
+-  } else {
+-    def parentDir = rootProject.projectDir
+-
+-    1.upto(5, {
+-      if (found) return true
+-      parentDir = parentDir.parentFile
+-
+-      def androidSourcesDir = new File(
+-        parentDir,
+-        'node_modules/react-native'
+-      )
+-
+-      def androidPrebuiltBinaryDir = new File(
+-        parentDir,
+-        'node_modules/react-native/android'
+-      )
+-
+-      if (androidPrebuiltBinaryDir.exists()) {
+-        maven {
+-          url androidPrebuiltBinaryDir.toString()
+-          name androidSourcesName
+-        }
+-
+-        logger.info(":${project.name}:reactNativeAndroidRoot ${androidPrebuiltBinaryDir.canonicalPath}")
+-        found = true
+-      } else if (androidSourcesDir.exists()) {
+-        maven {
+-          url androidSourcesDir.toString()
+-          name androidSourcesName
+-        }
+-
+-        logger.info(":${project.name}:reactNativeAndroidRoot ${androidSourcesDir.canonicalPath}")
+-        found = true
+-      }
+-    })
+-  }
+-
+-  if (!found) {
+-    throw new GradleException(
+-      "${project.name}: unable to locate React Native android sources. " +
+-      "Ensure you have you installed React Native as a dependency in your project and try again."
+-    )
+-  }
+ }
+ 
+-
+ dependencies {
+-  //noinspection GradleDynamicVersion
+-  implementation "com.facebook.react:react-native:+"
+-  // From node_modules
+-
+-  implementation 'com.github.Dimezis:BlurView:version-2.0.4'
++  implementation "com.facebook.react:react-android:0.73.9"
++  implementation "com.github.Dimezis:BlurView:version-3.1.0"
+ }
++
++
+diff --git a/node_modules/@react-native-community/blur/android/build/generated/source/buildConfig/debug/com/reactnativecommunity/blurview/BuildConfig.java b/node_modules/@react-native-community/blur/android/build/generated/source/buildConfig/debug/com/reactnativecommunity/blurview/BuildConfig.java
+new file mode 100644
+index 0000000..6b09d26
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/generated/source/buildConfig/debug/com/reactnativecommunity/blurview/BuildConfig.java
+@@ -0,0 +1,12 @@
++/**
++ * Automatically generated file. DO NOT MODIFY
++ */
++package com.reactnativecommunity.blurview;
++
++public final class BuildConfig {
++  public static final boolean DEBUG = Boolean.parseBoolean("true");
++  public static final String LIBRARY_PACKAGE_NAME = "com.reactnativecommunity.blurview";
++  public static final String BUILD_TYPE = "debug";
++  // Field from default config.
++  public static final boolean IS_NEW_ARCHITECTURE_ENABLED = false;
++}
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml b/node_modules/@react-native-community/blur/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+new file mode 100644
+index 0000000..23500b3
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.reactnativecommunity.blurview" > <!-- ライブラリ側では manifest は空でOK。package 属性は書かない -->
++    <uses-sdk android:minSdkVersion="24" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json b/node_modules/@react-native-community/blur/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+new file mode 100644
+index 0000000..625095c
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+@@ -0,0 +1,18 @@
++{
++  "version": 3,
++  "artifactType": {
++    "type": "AAPT_FRIENDLY_MERGED_MANIFESTS",
++    "kind": "Directory"
++  },
++  "applicationId": "com.reactnativecommunity.blurview",
++  "variantName": "debug",
++  "elements": [
++    {
++      "type": "SINGLE",
++      "filters": [],
++      "attributes": [],
++      "outputFile": "AndroidManifest.xml"
++    }
++  ],
++  "elementType": "File"
++}
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties b/node_modules/@react-native-community/blur/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+new file mode 100644
+index 0000000..1211b1e
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+@@ -0,0 +1,6 @@
++aarFormatVersion=1.0
++aarMetadataVersion=1.0
++minCompileSdk=1
++minCompileSdkExtension=0
++minAndroidGradlePluginVersion=1.0.0
++coreLibraryDesugaringEnabled=false
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json b/node_modules/@react-native-community/blur/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+new file mode 100644
+index 0000000..9e26dfe
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar b/node_modules/@react-native-community/blur/android/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar
+new file mode 100644
+index 0000000..24fe9f9
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar b/node_modules/@react-native-community/blur/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar
+new file mode 100644
+index 0000000..4d8d776
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt b/node_modules/@react-native-community/blur/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+new file mode 100644
+index 0000000..079a86e
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+@@ -0,0 +1,10 @@
++int attr blurRadius 0x0
++int attr downsampleFactor 0x0
++int attr overlayColor 0x0
++int color default_overlay_color 0x0
++int integer default_blur_radius 0x0
++int integer default_downsample_factor 0x0
++int[] styleable BlurringView { 0x0, 0x0, 0x0 }
++int styleable BlurringView_blurRadius 0
++int styleable BlurringView_downsampleFactor 1
++int styleable BlurringView_overlayColor 2
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+new file mode 100644
+index 0000000..57820ef
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+@@ -0,0 +1 @@
++#Mon Sep 15 11:22:37 GMT+09:00 2025
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml
+new file mode 100644
+index 0000000..0dc94a7
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <color name="default_overlay_color">#AAFFFFFF</color>
++    <integer name="default_blur_radius">15</integer>
++    <integer name="default_downsample_factor">8</integer>
++    <declare-styleable name="BlurringView">
++        <attr format="integer" name="blurRadius"/>
++        <attr format="integer" name="downsampleFactor"/>
++        <attr format="color" name="overlayColor"/>
++    </declare-styleable>
++</resources>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+new file mode 100644
+index 0000000..5a1ec8c
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\res"><file path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\res\values\attr.xml" qualifiers=""><declare-styleable name="BlurringView">
++        <attr format="integer" name="blurRadius"/>
++        <attr format="integer" name="downsampleFactor"/>
++        <attr format="color" name="overlayColor"/>
++    </declare-styleable></file><file path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\res\values\defaults.xml" qualifiers=""><integer name="default_blur_radius">15</integer><integer name="default_downsample_factor">8</integer><color name="default_overlay_color">#AAFFFFFF</color></file></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\build\generated\res\resValues\debug"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="BlurringView">
++        <attr format="integer" name="blurRadius"/>
++        <attr format="integer" name="downsampleFactor"/>
++        <attr format="color" name="overlayColor"/>
++    </declare-styleable></configuration></mergedItems></merger>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+new file mode 100644
+index 0000000..06bdbb8
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\debug\jniLibs"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+new file mode 100644
+index 0000000..7a37143
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\debug\shaders"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/incremental/packageDebugAssets/merger.xml b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+new file mode 100644
+index 0000000..36c5f86
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\assets"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\debug\assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\build\intermediates\shader_assets\debug\compileDebugShaders\out"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewManager.class b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewManager.class
+new file mode 100644
+index 0000000..dfbd761
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewManager.class differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewManagerImpl.class b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewManagerImpl.class
+new file mode 100644
+index 0000000..4686b7d
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewManagerImpl.class differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewPackage.class b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewPackage.class
+new file mode 100644
+index 0000000..56d04ec
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BlurViewPackage.class differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BuildConfig.class b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BuildConfig.class
+new file mode 100644
+index 0000000..e0ec0d9
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/reactnativecommunity/blurview/BuildConfig.class differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt b/node_modules/@react-native-community/blur/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+new file mode 100644
+index 0000000..5f02a86
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+@@ -0,0 +1,9 @@
++R_DEF: Internal format may change without notice
++local
++attr? blurRadius
++attr? downsampleFactor
++attr? overlayColor
++color default_overlay_color
++integer default_blur_radius
++integer default_downsample_factor
++styleable BlurringView blurRadius downsampleFactor overlayColor
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt b/node_modules/@react-native-community/blur/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+new file mode 100644
+index 0000000..aa1450c
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+@@ -0,0 +1,6 @@
++1<?xml version="1.0" encoding="utf-8"?>
++2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++3    package="com.reactnativecommunity.blurview" > <!-- ライブラリ側では manifest は空でOK。package 属性は書かない -->
++4    <uses-sdk android:minSdkVersion="24" />
++5
++6</manifest>
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml b/node_modules/@react-native-community/blur/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+new file mode 100644
+index 0000000..23500b3
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.reactnativecommunity.blurview" > <!-- ライブラリ側では manifest は空でOK。package 属性は書かない -->
++    <uses-sdk android:minSdkVersion="24" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json b/node_modules/@react-native-community/blur/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+new file mode 100644
+index 0000000..0637a08
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+@@ -0,0 +1 @@
++[]
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt b/node_modules/@react-native-community/blur/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+new file mode 100644
+index 0000000..08f4ebe
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+@@ -0,0 +1 @@
++0 Warning/Error
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/packaged_res/debug/packageDebugResources/values/values.xml b/node_modules/@react-native-community/blur/android/build/intermediates/packaged_res/debug/packageDebugResources/values/values.xml
+new file mode 100644
+index 0000000..0dc94a7
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/packaged_res/debug/packageDebugResources/values/values.xml
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <color name="default_overlay_color">#AAFFFFFF</color>
++    <integer name="default_blur_radius">15</integer>
++    <integer name="default_downsample_factor">8</integer>
++    <declare-styleable name="BlurringView">
++        <attr format="integer" name="blurRadius"/>
++        <attr format="integer" name="downsampleFactor"/>
++        <attr format="color" name="overlayColor"/>
++    </declare-styleable>
++</resources>
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar b/node_modules/@react-native-community/blur/android/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar
+new file mode 100644
+index 0000000..2f490bb
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar differ
+diff --git a/node_modules/@react-native-community/blur/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt b/node_modules/@react-native-community/blur/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+new file mode 100644
+index 0000000..f695186
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+@@ -0,0 +1,8 @@
++com.reactnativecommunity.blurview
++attr blurRadius
++attr downsampleFactor
++attr overlayColor
++color default_overlay_color
++integer default_blur_radius
++integer default_downsample_factor
++styleable BlurringView blurRadius downsampleFactor overlayColor
+diff --git a/node_modules/@react-native-community/blur/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/@react-native-community/blur/android/build/outputs/logs/manifest-merger-debug-report.txt
+new file mode 100644
+index 0000000..12644fb
+--- /dev/null
++++ b/node_modules/@react-native-community/blur/android/build/outputs/logs/manifest-merger-debug-report.txt
+@@ -0,0 +1,16 @@
++-- Merging decision tree log ---
++manifest
++ADDED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml:2:1-4:12
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml:2:1-4:12
++	package
++		INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml
++	xmlns:android
++		ADDED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml:2:11-69
++uses-sdk
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml
++	android:targetSdkVersion
++		INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml
++	android:minSdkVersion
++		INJECTED from C:\Users\disor\cocolon-mvp\node_modules\@react-native-community\blur\android\src\main\AndroidManifest.xml
+diff --git a/node_modules/@react-native-community/blur/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/@react-native-community/blur/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+new file mode 100644
+index 0000000..3368d6e
+Binary files /dev/null and b/node_modules/@react-native-community/blur/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
+diff --git a/node_modules/@react-native-community/blur/android/src/main/AndroidManifest.xml b/node_modules/@react-native-community/blur/android/src/main/AndroidManifest.xml
+index 56e4bde..02b096c 100644
+--- a/node_modules/@react-native-community/blur/android/src/main/AndroidManifest.xml
++++ b/node_modules/@react-native-community/blur/android/src/main/AndroidManifest.xml
+@@ -1 +1,4 @@
+-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.reactnativecommunity.blurview"></manifest>
+\ No newline at end of file
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android">
++    <!-- ライブラリ側では manifest は空でOK。package 属性は書かない -->
++</manifest>

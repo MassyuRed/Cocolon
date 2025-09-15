@@ -1,0 +1,128 @@
+diff --git a/node_modules/react-native-svg/android/build.gradle b/node_modules/react-native-svg/android/build.gradle
+index 5dfc225..97ccdac 100644
+--- a/node_modules/react-native-svg/android/build.gradle
++++ b/node_modules/react-native-svg/android/build.gradle
+@@ -1,91 +1,58 @@
+-buildscript {
+-    // The Android Gradle plugin is only required when opening the android folder stand-alone.
+-    // This avoids unnecessary downloads and potential conflicts when the library is included as a
+-    // module dependency in an application project.
+-    if (project == rootProject) {
+-        repositories {
+-            mavenCentral()
+-            google()
+-        }
++// react-native-svg @13.14.0 - AGP8/JDK17 対応版
++// 方針A（13.x）：codegen に依存しないため com.facebook.react プラグインは不要。
+ 
+-        dependencies {
+-            classpath("com.android.tools.build:gradle:7.4.2")
+-            classpath "com.diffplug.spotless:spotless-plugin-gradle:6.17.0"
+-        }
+-    }
++plugins {
++    id 'com.android.library'
++    id 'org.jetbrains.kotlin.android'
+ }
+ 
++// newArch フラグは BuildConfig だけ参照（任意）
+ def isNewArchitectureEnabled() {
+-    // To opt-in for the New Architecture, you can either:
+-    // - Set `newArchEnabled` to true inside the `gradle.properties` file
+-    // - Invoke gradle with `-newArchEnabled=true`
+-    // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
+     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+ }
+ 
+-if (isNewArchitectureEnabled()) {
+-    apply plugin: "com.facebook.react"
+-}
+-
+-if (project == rootProject) {
+-    apply from: 'spotless.gradle'
+-}
+-
+-apply plugin: 'com.android.library'
+-
+-def safeExtGet(prop, fallback) {
+-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+-}
+-
+ android {
+-    compileSdkVersion safeExtGet('compileSdkVersion', 28)
+-    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+-    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+-        namespace "com.horcrux.svg"
+-    }
+-    // Used to override the NDK path/version on internal CI or by allowing
+-    // users to customize the NDK path/version from their root project (e.g. for M1 support)
+-    if (rootProject.hasProperty("ndkPath")) {
+-        ndkPath rootProject.ext.ndkPath
+-    }
+-    if (rootProject.hasProperty("ndkVersion")) {
+-        ndkVersion rootProject.ext.ndkVersion
+-    }
++    namespace "com.horcrux.svg"
++    compileSdk 34
+ 
+     defaultConfig {
+-        minSdkVersion safeExtGet('minSdkVersion', 16)
+-        //noinspection OldTargetApi
+-        targetSdkVersion safeExtGet('targetSdkVersion', 28)
+-        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+-
++        minSdk 24
++        targetSdk 34
+         consumerProguardFiles 'proguard-rules.pro'
++        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+     }
+-    lintOptions {
+-        abortOnError false
++
++    // AGP8 では library の BuildConfig はデフォルト無効 → 明示的に有効化
++    buildFeatures { buildConfig true }
++
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_17
++        targetCompatibility JavaVersion.VERSION_17
+     }
++    kotlinOptions { jvmTarget = '17' }
+ 
+-    sourceSets.main {
+-        java {
+-            if (!isNewArchitectureEnabled()) {
+-                srcDirs += [
+-                    "src/paper/java",
+-                    "build/generated/source/codegen/java"
+-                ]
++    // 13.x は paper 実装を使う。codegen ディレクトリは存在しなくても無害。
++    sourceSets {
++        main {
++            java {
++                srcDirs += ["src/paper/java", "build/generated/source/codegen/java"]
+             }
+         }
+     }
++
++    // Lint の失敗で止めたくない場合は有効化（任意）
++    // lint { abortOnError = false }
+ }
+ 
+ repositories {
++    google()
+     mavenCentral()
+     mavenLocal()
+-    google()
+-    maven {
+-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+-        url "$rootDir/../node_modules/react-native/android"
+-    }
++    // React Android の AAR を解決
++    maven { url "$rootDir/../node_modules/react-native/android" }
+ }
+ 
+ dependencies {
+-    implementation 'com.facebook.react:react-native:+'
++    // RN 0.73 系は 'react-android' を明示固定するのが安定
++    implementation("com.facebook.react:react-android:0.73.9")
+ }

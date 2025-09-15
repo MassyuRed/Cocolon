@@ -1,0 +1,371 @@
+diff --git a/node_modules/react-native-svg/android/build.gradle b/node_modules/react-native-svg/android/build.gradle
+index 73b7b2f..c3002aa 100644
+--- a/node_modules/react-native-svg/android/build.gradle
++++ b/node_modules/react-native-svg/android/build.gradle
+@@ -1,83 +1,104 @@
+-buildscript {
+-    // The Android Gradle plugin is only required when opening the android folder stand-alone.
+-    // This avoids unnecessary downloads and potential conflicts when the library is included as a
+-    // module dependency in an application project.
+-    if (project == rootProject) {
+-        repositories {
+-            mavenCentral()
+-            google()
+-        }
+-
+-        dependencies {
+-            classpath("com.android.tools.build:gradle:7.4.2")
+-            classpath "com.diffplug.spotless:spotless-plugin-gradle:6.17.0"
+-        }
+-    }
++/*
++ * react-native-svg (v14.1.0) — Android build.gradle
++ * RN 0.73.x / AGP 8.x 互換の最小安定版:
++ *  - React Gradle Plugin（com.facebook.react）を常時適用 → Paper Codegen 生成を有効化
++ *  - compileSdk / targetSdk を 34 に固定
++ *  - Java 17 でビルド
++ */
++plugins {
++    id 'com.android.library'
++    // Kotlinは未使用なので不要（入っていても害はありません）
+ }
+ 
+-def isNewArchitectureEnabled() {
+-    // To opt-in for the New Architecture, you can either:
+-    // - Set `newArchEnabled` to true inside the `gradle.properties` file
+-    // - Invoke gradle with `-newArchEnabled=true`
+-    // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
+-    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+-}
++apply plugin: 'com.facebook.react' // ★ New Arch の有無に関係なく常時適用（Paper Codegen 生成のため）
+ 
+-if (isNewArchitectureEnabled()) {
+-    apply plugin: "com.facebook.react"
++def safeExtGet(prop, fallback) {
++    return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+ }
+ 
+-if (project == rootProject) {
+-    apply from: 'spotless.gradle'
++def resolveReactNativeDirectory() {
++    def rnFromExt = safeExtGet('REACT_NATIVE_NODE_MODULES_DIR', null)
++    if (rnFromExt != null) {
++        return file(rnFromExt)
++    }
++    // node resolver 経由（monorepo等にも対応）
++    def resolved = file(
++        providers.exec {
++            workingDir(rootDir)
++            commandLine('node', '--print', "require.resolve('react-native/package.json')")
++        }.standardOutput.asText.get().trim()
++    )
++    if (resolved.exists()) {
++        return resolved.parentFile
++    }
++    throw new GradleException("[react-native-svg] Unable to resolve react-native in node_modules. Define REACT_NATIVE_NODE_MODULES_DIR in app/build.gradle if needed.")
+ }
+ 
+-apply plugin: 'com.android.library'
++def reactNativeRootDir = resolveReactNativeDirectory()
++def reactNativeProperties = new Properties()
++file("$reactNativeRootDir/ReactAndroid/gradle.properties").withInputStream { reactNativeProperties.load(it) }
++def REACT_NATIVE_VERSION = reactNativeProperties.getProperty("VERSION_NAME") ?: "0.73.9"
+ 
+-def safeExtGet(prop, fallback) {
+-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
++def getFrescoVersion() {
++    def fresco = null
++    file("$reactNativeRootDir/gradle/libs.versions.toml").withInputStream { stream ->
++        stream.eachLine { line ->
++            if (line.contains("fresco") && !line.contains("ref")) {
++                def kv = line.split("=")
++                if (kv.size() == 2) {
++                    fresco = kv[1].trim().replaceAll(/["']/, "")
++                }
++            }
++        }
++    }
++    return fresco ?: "3.2.0"
+ }
++def FRESCO_VERSION = getFrescoVersion()
+ 
+ android {
+-    compileSdkVersion safeExtGet('compileSdkVersion', 28)
+-    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+-    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+-        namespace "com.horcrux.svg"
+-    }
+-    if (agpVersion.tokenize('.')[0].toInteger() >= 8) {
+-        buildFeatures {
+-            buildConfig = true
+-        }
+-    }
+-    // Used to override the NDK path/version on internal CI or by allowing
+-    // users to customize the NDK path/version from their root project (e.g. for M1 support)
+-    if (rootProject.hasProperty("ndkPath")) {
+-        ndkPath rootProject.ext.ndkPath
+-    }
+-    if (rootProject.hasProperty("ndkVersion")) {
+-        ndkVersion rootProject.ext.ndkVersion
+-    }
++    namespace "com.horcrux.svg"
++
++    // 以前は 28 にフォールバックしていたため、明示的に 34 を使用
++    compileSdkVersion safeExtGet('compileSdkVersion', 34)
+ 
+     defaultConfig {
+-        minSdkVersion safeExtGet('minSdkVersion', 16)
+-        //noinspection OldTargetApi
+-        targetSdkVersion safeExtGet('targetSdkVersion', 28)
+-        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
++        minSdkVersion safeExtGet('minSdkVersion', 24)
++        targetSdkVersion safeExtGet('targetSdkVersion', 34)
++
++        // このライブラリは Paper（旧アーキテクチャ）で動作させる
++        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
+ 
+         consumerProguardFiles 'proguard-rules.pro'
+     }
++
++    buildFeatures {
++        buildConfig true
++    }
++
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_17
++        targetCompatibility JavaVersion.VERSION_17
++    }
++
++    // ◆通常は Codegen を使う（上の com.facebook.react が生成）。
++    //   もし環境都合で Codegen が動かず "viewmanagers.* が見つからない" のままなら、
++    //   下のブロックをアンコメントして「Paper 専用ソースだけをコンパイル」に切り替えてください（最後の「Plan B」参照）。
++    // sourceSets {
++    //     main {
++    //         java.srcDirs = ["src/paper/java"]
++    //     }
++    // }
++
+     lintOptions {
+         abortOnError false
+     }
+ 
+-    sourceSets.main {
+-        java {
+-            if (!isNewArchitectureEnabled()) {
+-                srcDirs += [
+-                    "src/paper/java",
+-                    "build/generated/source/codegen/java"
+-                ]
+-            }
+-        }
++    // 任意: ルートで ndkPath/ndkVersion を上書きしている場合の追従
++    if (rootProject.hasProperty("ndkPath")) {
++        ndkPath rootProject.ext.ndkPath
++    }
++    if (rootProject.hasProperty("ndkVersion")) {
++        ndkVersion rootProject.ext.ndkVersion
+     }
+ }
+ 
+@@ -85,12 +106,19 @@ repositories {
+     mavenCentral()
+     mavenLocal()
+     google()
+-    maven {
+-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+-        url "$rootDir/../node_modules/react-native/android"
+-    }
++    // React Native AAR
++    maven { url "$reactNativeRootDir/android" }
+ }
+ 
+ dependencies {
+-    implementation 'com.facebook.react:react-native:+'
++    // アプリ側と同じ RN AAR に固定（APIミスマッチ防止）
++    implementation("com.facebook.react:react-android:${REACT_NATIVE_VERSION}")
++
++    implementation("com.facebook.fresco:fresco:${FRESCO_VERSION}") {
++        exclude group: 'com.facebook.soloader'
++    }
++    implementation("com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}") {
++        exclude group: 'com.facebook.soloader'
++    }
++    implementation("com.facebook.fresco:middleware:${FRESCO_VERSION}")
+ }
+diff --git a/node_modules/react-native-svg/android/build/generated/source/buildConfig/debug/com/horcrux/svg/BuildConfig.java b/node_modules/react-native-svg/android/build/generated/source/buildConfig/debug/com/horcrux/svg/BuildConfig.java
+new file mode 100644
+index 0000000..1f8c210
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/generated/source/buildConfig/debug/com/horcrux/svg/BuildConfig.java
+@@ -0,0 +1,10 @@
++/**
++ * Automatically generated file. DO NOT MODIFY
++ */
++package com.horcrux.svg;
++
++public final class BuildConfig {
++  public static final boolean DEBUG = Boolean.parseBoolean("true");
++  public static final String LIBRARY_PACKAGE_NAME = "com.horcrux.svg";
++  public static final String BUILD_TYPE = "debug";
++}
+diff --git a/node_modules/react-native-svg/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml b/node_modules/react-native-svg/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+new file mode 100644
+index 0000000..037933a
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.horcrux.svg" >
++
++    <uses-sdk android:minSdkVersion="24" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json b/node_modules/react-native-svg/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+new file mode 100644
+index 0000000..8fa1366
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+@@ -0,0 +1,18 @@
++{
++  "version": 3,
++  "artifactType": {
++    "type": "AAPT_FRIENDLY_MERGED_MANIFESTS",
++    "kind": "Directory"
++  },
++  "applicationId": "com.horcrux.svg",
++  "variantName": "debug",
++  "elements": [
++    {
++      "type": "SINGLE",
++      "filters": [],
++      "attributes": [],
++      "outputFile": "AndroidManifest.xml"
++    }
++  ],
++  "elementType": "File"
++}
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties b/node_modules/react-native-svg/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+new file mode 100644
+index 0000000..1211b1e
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+@@ -0,0 +1,6 @@
++aarFormatVersion=1.0
++aarMetadataVersion=1.0
++minCompileSdk=1
++minCompileSdkExtension=0
++minAndroidGradlePluginVersion=1.0.0
++coreLibraryDesugaringEnabled=false
+diff --git a/node_modules/react-native-svg/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json b/node_modules/react-native-svg/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+new file mode 100644
+index 0000000..9e26dfe
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar b/node_modules/react-native-svg/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar
+new file mode 100644
+index 0000000..2268cce
+Binary files /dev/null and b/node_modules/react-native-svg/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar differ
+diff --git a/node_modules/react-native-svg/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt b/node_modules/react-native-svg/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-svg/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/react-native-svg/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+new file mode 100644
+index 0000000..314435c
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+@@ -0,0 +1 @@
++#Mon Sep 15 17:11:20 GMT+09:00 2025
+diff --git a/node_modules/react-native-svg/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml b/node_modules/react-native-svg/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+new file mode 100644
+index 0000000..08f200c
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\build\generated\res\resValues\debug"/></dataSet><mergedItems/></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt b/node_modules/react-native-svg/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+new file mode 100644
+index 0000000..78ac5b8
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+@@ -0,0 +1,2 @@
++R_DEF: Internal format may change without notice
++local
+diff --git a/node_modules/react-native-svg/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt b/node_modules/react-native-svg/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+new file mode 100644
+index 0000000..e764d9f
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+@@ -0,0 +1,7 @@
++1<?xml version="1.0" encoding="utf-8"?>
++2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++3    package="com.horcrux.svg" >
++4
++5    <uses-sdk android:minSdkVersion="24" />
++6
++7</manifest>
+diff --git a/node_modules/react-native-svg/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml b/node_modules/react-native-svg/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+new file mode 100644
+index 0000000..037933a
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.horcrux.svg" >
++
++    <uses-sdk android:minSdkVersion="24" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json b/node_modules/react-native-svg/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+new file mode 100644
+index 0000000..0637a08
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+@@ -0,0 +1 @@
++[]
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt b/node_modules/react-native-svg/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+new file mode 100644
+index 0000000..08f4ebe
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+@@ -0,0 +1 @@
++0 Warning/Error
+\ No newline at end of file
+diff --git a/node_modules/react-native-svg/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt b/node_modules/react-native-svg/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+new file mode 100644
+index 0000000..6ba6ea2
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+@@ -0,0 +1 @@
++com.horcrux.svg
+diff --git a/node_modules/react-native-svg/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/react-native-svg/android/build/outputs/logs/manifest-merger-debug-report.txt
+new file mode 100644
+index 0000000..67aaa15
+--- /dev/null
++++ b/node_modules/react-native-svg/android/build/outputs/logs/manifest-merger-debug-report.txt
+@@ -0,0 +1,15 @@
++-- Merging decision tree log ---
++manifest
++ADDED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml:1:1-2:12
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml:1:1-2:12
++	package
++		ADDED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml:1:11-36
++		INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml
++uses-sdk
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml
++INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml
++	android:targetSdkVersion
++		INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml
++	android:minSdkVersion
++		INJECTED from C:\Users\disor\cocolon-mvp\node_modules\react-native-svg\android\src\main\AndroidManifest.xml
