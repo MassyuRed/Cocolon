@@ -26,3 +26,12 @@
 # ProGuard による最適化/rename 対象外にする
 -keep class com.anonymous.cocolonmvp.MainApplication { *; }
 -dontwarn com.anonymous.cocolonmvp.MainApplication
+
+# --- BlurView / @react-native-community/blur を難読化で壊さない（A案）
+-keep class eightbitlab.com.blurview.** { *; }
+-dontwarn eightbitlab.com.blurview.**
+-keep class com.reactnativecommunity.blur.** { *; }
+-dontwarn com.reactnativecommunity.blur.**
+
+# （保険）Kotlin メタデータ
+-keep class kotlin.Metadata { *; }

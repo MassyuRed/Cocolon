@@ -32,9 +32,3 @@ applyNativeModulesSettingsGradle(settings)
 // モジュール
 include(":app")
 
-// Unity（任意）
-def unityEnabled = providers.gradleProperty("unityEnabled").getOrElse("false").toBoolean()
-if (unityEnabled) {
-  include(":unityLibrary")
-  project(":unityLibrary").projectDir = new File(rootDir, "unityLibrary")
-}

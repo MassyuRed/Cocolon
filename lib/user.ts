@@ -1,4 +1,20 @@
 // lib/user.ts
+import { supabase } from "./supabase";
 
-// 仮の固定UUID（Supabaseの users テーブルで実在するIDを入れてね）
-export const CURRENT_USER_ID = "1cc2b272-68b3-4e0d-b349-46fbe0a0f7e4";
+/**
+ * Supabase Auth から「今ログインしているユーザーID」を取得する。
+ * ログインしていなければ null。
+ */
+export async function getCurrentUserId(): Promise<string | null> {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.warn("[getCurrentUserId] auth.getUser error:", error);
+    return null;
+  }
+  const user = data.user;
+  if (!user) {
+    console.warn("[getCurrentUserId] no user in session");
+    return null;
+  }
+  return user.id;
+}

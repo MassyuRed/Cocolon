@@ -4,9 +4,9 @@ plugins {
   id 'org.jetbrains.kotlin.android'
 }
 
-/* ← react { jsEngine = "jsc" } は削除（無効なプロパティ） */
+/* react { jsEngine = "jsc" } は使わない（未知プロパティになるので削除済み） */
 
-ext.react = [ enableHermes: false ]   // 互換のため残しても害なし（実切替は gradle.properties）
+ext.react = [ enableHermes: true ]   // 互換のため残してOK（実切替は gradle.properties）
 
 // Autolink（PackageList 生成）
 apply from: "$rootDir/../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"
@@ -14,20 +14,25 @@ applyNativeModulesAppBuildGradle(project)
 
 android {
   namespace "com.anonymous.cocolonmvp"
-  compileSdkVersion 34
+
+  // ルートの ext を優先して拾う（未設定ならフォールバック）
+  compileSdkVersion rootProject.ext.has("compileSdkVersion") ? rootProject.ext.compileSdkVersion : 34
 
   defaultConfig {
     applicationId "com.anonymous.cocolonmvp"
-    minSdkVersion 24
-    targetSdkVersion 34
+    minSdkVersion     (rootProject.ext.has("minSdkVersion")    ? rootProject.ext.minSdkVersion    : 24)
+    targetSdkVersion  (rootProject.ext.has("targetSdkVersion") ? rootProject.ext.targetSdkVersion : 34)
     versionCode 1
     versionName "1.0.0"
 
+    // NewArch/Hermes は明示的に無効（BuildConfig 参照用）
     buildConfigField "boolean", "NEW_ARCH_ENABLED", "false"
     buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
-    buildConfigField "boolean", "IS_HERMES_ENABLED", "false"
+    buildConfigField "boolean", "IS_HERMES_ENABLED", "true"
+
 
     multiDexEnabled true
+    // （必要なら）ここに ndk { abiFilters "arm64-v8a" } を追加して 64bit のみに絞れる
   }
 
   signingConfigs {
@@ -42,15 +47,18 @@ android {
   buildTypes {
     debug {
       signingConfig signingConfigs.debug
-      minifyEnabled true
+      // ▼ Blur のランタイム例外（R8最適化由来）を避けるため Debug は難読化オフ
+      minifyEnabled false
       shrinkResources false
       proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+
     }
     release {
       signingConfig signingConfigs.debug
       minifyEnabled true
       shrinkResources false
       proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+
     }
   }
 
@@ -64,50 +72,52 @@ android {
 
   kotlinOptions { jvmTarget = "17" }
 
+  // AGP8 準拠の packaging 設定（JNI/Resources を分離）
   packagingOptions {
-    pickFirsts += [
-      '**/libc++_shared.so'
-    ]
-    excludes += [
-      'com/unity3d/ads/BuildConfig.class',
-      'com/unity3d/ads/BuildConfig$*.class',
-      'lib/**/libhermes.so',
-      'lib/**/libhermes-executor-debug.so',
-      'lib/**/libhermes-executor-release.so',
-      'lib/**/libhermes-inspector.so'
-    ]
+    jniLibs {
+      // Unity と他依存で衝突しがちな c++ 共有ライブラリを最小 pickFirst
+      pickFirsts += ['**/libc++_shared.so']
+      // Unity 側で本当に必要な場合のみ有効化：
+      // useLegacyPackaging true
+    }
+    resources {
+      excludes += [
+        'com/unity3d/ads/BuildConfig.class',
+        'com/unity3d/ads/BuildConfig$*.class',
+      ]
+    }
   }
 }
 
 repositories {
   google()
   mavenCentral()
-  maven { url 'https://jitpack.io' }  // BlurView 用
-  flatDir { dirs "$projectDir/libs", "$rootDir/libs" }   // Unity AAR
+  maven { url 'https://jitpack.io' }                    // BlurView は JitPack から取得
 }
 
 dependencies {
-  // RN 本体（固定運用のままでOK）
+  // RN 本体（Hermes を含む標準構成）
   implementation("com.facebook.react:react-android:0.73.9") {
-    exclude group: "com.facebook.react", module: "hermes-android"
-    exclude group: "com.facebook.react", module: "hermes-engine"
-    exclude group: "com.facebook",       module: "hermes"
   }
 
-  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+  coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.0.4"
   implementation "androidx.core:core-splashscreen:1.0.1"
   implementation "com.google.android.material:material:1.12.0"
   implementation "androidx.multidex:multidex:2.0.1"
   implementation "androidx.appcompat:appcompat:1.7.0"
 
-  // Unity AAR
-  debugImplementation(name: "unityLibrary-debug", ext: "aar")
-  releaseImplementation(name: "unityLibrary-release", ext: "aar")
 
   // JSC（Hermes無効時に必要）
-  implementation(name: "android-jsc-r250231", ext: "aar")
+
+  // ★ BlurView を 1.6.6 に厳格固定（JitPack 座標）
+  implementation("com.github.Dimezis:BlurView") {
+    version { strictly 'version-1.6.6' }
+  }
 
   // 手動リンクはしない（Autolinkに任せる）
   // implementation project(':react-native-community_blur')
   // implementation project(':react-native-linear-gradient')
 }
+
+// Vector Icons のフォントを確実に同梱（タブアイコン用）
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

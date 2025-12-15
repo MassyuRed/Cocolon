@@ -1,10 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.anonymous.cocolonmvp">
-
-  <!-- Unity 側 minSdkVersion=23 を無視して、Cocolon 側の 24 を適用 -->
-  <uses-sdk tools:overrideLibrary="com.unity3d.player" />
-
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -40,14 +36,5 @@
         <data android:scheme="cocolonmvp"/>
       </intent-filter>
     </activity>
-
-    <!-- Unity Player Activity -->
-    <activity
-        android:name="com.unity3d.player.UnityPlayerActivity"
-        android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard|navigation"
-        android:exported="true"
-        android:screenOrientation="portrait"
-        android:theme="@style/Theme.AppCompat.NoActionBar" />
-
   </application>
 </manifest>

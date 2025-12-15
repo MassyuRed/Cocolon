@@ -1,37 +1,22 @@
 package com.anonymous.cocolonmvp;
 
 import android.app.Application;
+import android.content.res.Configuration;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.PackageList;
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
+import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-  // BuildConfig の boolean を安全に読むユーティリティ（UNITY_ENABLED 判定に使用）
-  private static boolean readBuildConfigFlag(String fieldName, boolean defaultValue) {
-    try {
-      Class<?> bc = Class.forName("com.anonymous.cocolonmvp.BuildConfig");
-      Field f = bc.getField(fieldName);
-      Object v = f.get(null);
-      if (v instanceof Boolean) return (Boolean) v;
-      return defaultValue;
-    } catch (Throwable t) {
-      return defaultValue;
-    }
-  }
-
-  private static boolean isUnityEnabledFlag() {
-    return readBuildConfigFlag("UNITY_ENABLED", false);
-  }
-
   private final ReactNativeHost mReactNativeHost =
-      new ReactNativeHost(this) {
+      new DefaultReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
@@ -39,27 +24,26 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          // ★ Autolink（RN CLI/Gradle）で検出されたネイティブパッケージを一括登録
           List<ReactPackage> packages = new PackageList(this).getPackages();
-
-          // ★ Unity ブリッジ（任意）：AAR 連携に加えて ReactPackage が存在する場合のみ追加
-          if (isUnityEnabledFlag()) {
-            try {
-              Class<?> clazz = Class.forName("com.anonymous.cocolonmvp.UnityLauncherPackage");
-              ReactPackage unityPackage =
-                  (ReactPackage) clazz.getDeclaredConstructor().newInstance();
-              packages.add(unityPackage);
-            } catch (Throwable ignored) {
-              // Unity の ReactPackage が無い環境では何もしない
-            }
-          }
-
+          // 手動で追加が必要なパッケージがあればここに追加（現状はなし）
+          // 例: packages.add(new MyReactNativePackage());
           return packages;
         }
 
         @Override
         protected String getJSMainModuleName() {
           return "index";
+        }
+
+        @Override
+        protected boolean isNewArchEnabled() {
+          return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+        }
+
+        @Override
+        protected Boolean isHermesEnabled() {
+          // gradle.properties の hermesEnabled を BuildConfig に反映した値
+          return BuildConfig.IS_HERMES_ENABLED;
         }
       };
 
@@ -73,5 +57,15 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     // RN 0.73 では必須ではないが、入っていても問題ない初期化
     SoLoader.init(this, /* native exopackage */ false);
+
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+      // New Architecture 有効時のネイティブエントリポイント
+      DefaultNewArchitectureEntryPoint.load();
+    }
+  }
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
   }
 }

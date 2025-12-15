@@ -12,6 +12,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-community/blur": "^4.4.1",
     "@react-native-community/slider": "5.0.1",
     "@react-navigation/bottom-tabs": "^7.4.7",
@@ -19,9 +20,12 @@
     "@react-navigation/material-top-tabs": "7.3.6",
     "@react-navigation/native": "^7.1.17",
     "@supabase/supabase-js": "2.56.1",
+    "jsc-android": "^250231.0.0",
     "react": "18.2.0",
     "react-native": "0.73.9",
     "react-native-gesture-handler": "^2.14.0",
+    "react-native-get-random-values": "^1.11.0",
+    "react-native-html-to-pdf": "0.12.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-pager-view": "6.9.1",
     "react-native-reanimated": "3.6.0",
@@ -30,6 +34,7 @@
     "react-native-svg": "13.14.0",
     "react-native-svg-transformer": "1.5.1",
     "react-native-tab-view": "3.5.2",
+    "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "10.3.0",
     "react-native-webview": "13.6.3"
   },
