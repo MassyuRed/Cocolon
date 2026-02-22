@@ -26,12 +26,12 @@ jobs:
       - name: Build iOS archive
         working-directory: ios
         run: |
-          xcodebuild             -workspace tempCocolon.xcworkspace             -scheme tempCocolon             -configuration Release             -archivePath build/tempCocolon.xcarchive             archive
+          xcodebuild -workspace "tempCocolon.xcworkspace" -scheme "tempCocolon" -configuration "Release" -destination "generic/platform=iOS" -archivePath "build/tempCocolon.xcarchive" archive
 
       - name: Export IPA
         working-directory: ios
         run: |
-          xcodebuild             -exportArchive             -archivePath build/tempCocolon.xcarchive             -exportOptionsPlist ExportOptions.plist             -exportPath build
+          xcodebuild -exportArchive -archivePath "build/tempCocolon.xcarchive" -exportOptionsPlist "ExportOptions.plist" -exportPath build
 
       - name: Upload to TestFlight
         working-directory: ios
