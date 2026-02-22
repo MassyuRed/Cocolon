@@ -21,32 +21,35 @@ jobs:
           npm install
 
       - name: Install CocoaPods
-        run: |
-          cd ios
-          pod install
+        working-directory: ios
+        run: pod install
 
       - name: Build iOS archive
+        working-directory: ios
         run: |
           xcodebuild \
-            -workspace ios/Cocolon.xcworkspace \
-            -scheme Cocolon \
+            -workspace tempCocolon.xcworkspace \
+            -scheme tempCocolon \
             -configuration Release \
-            -archivePath build/Cocolon.xcarchive \
+            -archivePath build/tempCocolon.xcarchive \
             archive
 
       - name: Export IPA
+        working-directory: ios
         run: |
           xcodebuild \
             -exportArchive \
-            -archivePath build/Cocolon.xcarchive \
-            -exportOptionsPlist ios/exportOptions.plist \
+            -archivePath build/tempCocolon.xcarchive \
+            -exportOptionsPlist ExportOptions.plist \
             -exportPath build
 
       - name: Upload to TestFlight
+        working-directory: ios
         run: |
+          IPA_PATH=$(ls build/*.ipa | head -n 1)
           xcrun altool \
             --upload-app \
             --type ios \
-            --file build/Cocolon.ipa \
+            --file "$IPA_PATH" \
             --username "${{ secrets.APPLE_ID }}" \
             --password "${{ secrets.APPLE_APP_PASSWORD }}"
