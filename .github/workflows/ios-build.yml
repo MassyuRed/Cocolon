@@ -9,44 +9,35 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
-        run: |
-          npm install
+        run: npm ci
 
       - name: Install CocoaPods
-        run: |
-          cd ios
-          pod install
+        working-directory: ios
+        run: pod install
 
       - name: Build iOS archive
+        working-directory: ios
         run: |
-          xcodebuild \
-            -workspace ios/tempCocolon.xcworkspace
-            -scheme tempCocolon
-            -configuration Release \
-            -archivePath build/Cocolon.xcarchive \
-            archive
+          xcodebuild             -workspace tempCocolon.xcworkspace             -scheme tempCocolon             -configuration Release             -archivePath build/tempCocolon.xcarchive             archive
 
       - name: Export IPA
+        working-directory: ios
         run: |
-          xcodebuild \
-            -exportArchive \
-            -archivePath build/Cocolon.xcarchive \
-            -exportOptionsPlist ios/ExportOptions.plist
-            -exportPath build
+          xcodebuild             -exportArchive             -archivePath build/tempCocolon.xcarchive             -exportOptionsPlist ExportOptions.plist             -exportPath build
 
       - name: Upload to TestFlight
+        working-directory: ios
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
         run: |
-          xcrun altool \
-            --upload-app \
-            --type ios \
-            --file build/Cocolon.ipa \
-            --username "${{ secrets.APPLE_ID }}" \
-            --password "${{ secrets.APPLE_APP_PASSWORD }}"
+          IPA_PATH=$(ls build/*.ipa | head -n 1)
+          xcrun altool             --upload-app             --type ios             --file "$IPA_PATH"             --username "$APPLE_ID"             --password "$APPLE_APP_PASSWORD"
