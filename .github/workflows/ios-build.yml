@@ -28,8 +28,8 @@ jobs:
       - name: Build iOS archive
         run: |
           xcodebuild \
-            -workspace ios/Cocolon.xcworkspace \
-            -scheme Cocolon \
+            -workspace ios/tempCocolon.xcworkspace
+            -scheme tempCocolon
             -configuration Release \
             -archivePath build/Cocolon.xcarchive \
             archive
@@ -39,7 +39,7 @@ jobs:
           xcodebuild \
             -exportArchive \
             -archivePath build/Cocolon.xcarchive \
-            -exportOptionsPlist ios/exportOptions.plist \
+            -exportOptionsPlist ios/ExportOptions.plist
             -exportPath build
 
       - name: Upload to TestFlight
