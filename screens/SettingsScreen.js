@@ -1,16 +1,17 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
   Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Switch,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
+import { supabase } from "../lib/supabase";
+import { useAuth } from "../AuthContext";
 
 // 🎨 テーマコンテキスト
 import {
@@ -19,37 +20,116 @@ import {
   THEME_LABELS_JA,
 } from "../theme/ThemeContext";
 
+// UI (Design System)
+import CocolonButton from "../components/CocolonButton";
+import CocolonPressable from "../components/CocolonPressable";
+
+import CocolonSwitch from "../components/CocolonSwitch";
 // ここを変えると Setting のパネル高さを調整できる
 // ※ 本改修で「背景＆タイトル固定 / パネル内スクロール」に変更したため、
 //    minHeight は見た目の基準として残しつつ、パネル自体は flex で収まるようにしています。
-const PANEL_MIN_HEIGHT = 690;
+const PANEL_MIN_HEIGHT = 680;
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }) {
   const { colors, themeName, setThemeName } = useTheme();
+  const { signOut, authLoading, user } = useAuth();
   const styles = useMemo(() => createStyles(colors), [colors]);
 
-  const [isNotificationOn, setIsNotificationOn] = useState(true);
-  const [isMemoShareOn, setIsMemoShareOn] = useState(false);
+  const [localProcessing, setLocalProcessing] = useState(false);
+  const isBusy = authLoading || localProcessing;
 
-  const handleExport = () => {
+  const isDark = themeName === THEME_VARIANTS.DARK;
+
+  // Push通知（受信）のON/OFF（アプリ内設定）
+  const [pushEnabled, setPushEnabled] = useState(true);
+  const [pushLoading, setPushLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      // 未ログイン時は既定ONとして扱う
+      if (!user?.id) {
+        if (!cancelled) {
+          setPushEnabled(true);
+          setPushLoading(false);
+        }
+        return;
+      }
+
+      setPushLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("push_enabled")
+          .eq("id", user.id)
+          .single();
+
+        if (error) throw error;
+
+        // null/未設定は ON 扱い（後方互換）
+        const enabled = data?.push_enabled;
+        if (!cancelled) setPushEnabled(enabled !== false);
+      } catch (e) {
+        console.warn("SettingsScreen: load push_enabled failed", e);
+        if (!cancelled) setPushEnabled(true);
+      } finally {
+        if (!cancelled) setPushLoading(false);
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id]);
+
+  const updatePushEnabled = async (next) => {
+    if (isBusy || pushLoading) return;
+
+    if (!user?.id) {
+      Alert.alert("通知設定", "ログイン情報が取得できませんでした。");
+      return;
+    }
+
+    const prev = pushEnabled;
+    setPushEnabled(next);
+
+    setLocalProcessing(true);
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ push_enabled: next })
+        .eq("id", user.id);
+
+      if (error) throw error;
+    } catch (e) {
+      console.warn("SettingsScreen: update push_enabled failed", e);
+      setPushEnabled(prev);
+      Alert.alert("通知設定の更新に失敗しました", String(e?.message || e));
+    } finally {
+      setLocalProcessing(false);
+    }
+  };
+
+
+  // サブスク加入状況（SubscriptionSelect へ移動）
+  const openSubscriptionSelect = () => {
+    try {
+      if (navigation?.navigate) {
+        navigation.navigate("SubscriptionSelect");
+        return;
+      }
+    } catch {
+      // no-op
+    }
     Alert.alert(
-      "データエクスポート",
-      "CSV/Excelで保存する機能は後で追加予定です📂"
+      "サブスク",
+      "加入状況画面を開けませんでした。もう一度お試しください。"
     );
   };
 
-  const handleReset = () => {
-    Alert.alert("データリセット", "本当に全データを削除しますか？", [
-      { text: "キャンセル", style: "cancel" },
-      {
-        text: "削除する",
-        style: "destructive",
-        onPress: () => console.log("データ削除実行"),
-      },
-    ]);
-  };
 
-  const isDark = themeName === THEME_VARIANTS.DARK;
 
   // テーマ選択肢（key は内部値、ラベルは ThemeContext 側で集約管理）
   const themeOptions = [
@@ -57,6 +137,126 @@ export default function SettingsScreen() {
     { key: THEME_VARIANTS.LIGHT },
     { key: THEME_VARIANTS.DARK },
   ];
+
+  const handleLogout = () => {
+    if (isBusy) return;
+
+    Alert.alert("ログアウト", "ログアウトしますか？", [
+      { text: "キャンセル", style: "cancel" },
+      {
+        text: "ログアウト",
+        style: "destructive",
+        onPress: async () => {
+          setLocalProcessing(true);
+          try {
+            await signOut();
+          } finally {
+            setLocalProcessing(false);
+          }
+        },
+      },
+    ]);
+  };
+
+  const handleDeleteAccount = () => {
+    if (isBusy) return;
+
+    if (!user?.id) {
+      Alert.alert("アカウント削除", "ログイン情報が取得できませんでした。");
+      return;
+    }
+
+    Alert.alert(
+      "アカウント削除",
+      "この操作は取り消せません。\n\nアカウントに紐づくデータを削除してログアウトします。",
+      [
+        { text: "キャンセル", style: "cancel" },
+        {
+          text: "削除する",
+          style: "destructive",
+          onPress: async () => {
+            setLocalProcessing(true);
+            try {
+              const uid = user.id;
+              const failed = [];
+
+              const tryDelete = async (label, fn) => {
+                try {
+                  const { error } = await fn();
+                  if (error) throw error;
+                } catch (e) {
+                  console.warn(`SettingsScreen: delete ${label} failed`, e);
+                  failed.push(label);
+                }
+              };
+
+              // ※ auth.users の削除はクライアント権限では行えないため、
+              //   アプリ側で削除可能なデータをベストエフォートで消します。
+              await tryDelete("report_reads", () =>
+                supabase.from("report_reads").delete().eq("user_id", uid)
+              );
+              await tryDelete("friend_requests", () =>
+                supabase
+                  .from("friend_requests")
+                  .delete()
+                  .or(`requester_user_id.eq.${uid},requested_user_id.eq.${uid}`)
+              );
+              await tryDelete("friendships", () =>
+                supabase
+                  .from("friendships")
+                  .delete()
+                  .or(`user_id.eq.${uid},friend_user_id.eq.${uid}`)
+              );
+              await tryDelete("myprofile_requests", () =>
+                supabase
+                  .from("myprofile_requests")
+                  .delete()
+                  .or(`requester_user_id.eq.${uid},requested_user_id.eq.${uid}`)
+              );
+              await tryDelete("myprofile_links", () =>
+                supabase
+                  .from("myprofile_links")
+                  .delete()
+                  .or(`owner_user_id.eq.${uid},viewer_user_id.eq.${uid}`)
+              );
+              await tryDelete("myprofile_reports", () =>
+                supabase.from("myprofile_reports").delete().eq("user_id", uid)
+              );
+              await tryDelete("myweb_reports", () =>
+                supabase.from("myweb_reports").delete().eq("user_id", uid)
+              );
+              await tryDelete("emotions", () =>
+                supabase.from("emotions").delete().eq("user_id", uid)
+              );
+              await tryDelete("profiles", () =>
+                supabase.from("profiles").delete().eq("id", uid)
+              );
+
+              // 最後にログアウト
+              await signOut();
+
+              if (failed.length > 0) {
+                Alert.alert(
+                  "アカウント削除",
+                  "一部のデータを削除できませんでしたが、ログアウトしました。"
+                );
+              } else {
+                Alert.alert("アカウント削除", "削除が完了しました。ログアウトしました。");
+              }
+            } catch (e) {
+              console.error("SettingsScreen: delete account failed", e);
+              Alert.alert(
+                "アカウント削除に失敗しました",
+                String(e?.message || e)
+              );
+            } finally {
+              setLocalProcessing(false);
+            }
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -67,16 +267,7 @@ export default function SettingsScreen() {
 
       {/* 画面全体は固定（背景＆タイトル固定） */}
       <View style={styles.screenContainer}>
-        {/* ブランドヘッダー（全画面共通） */}
-        <View style={styles.appTitleWrapper}>
-          <Text style={styles.appTitleText}>Emlis</Text>
-          <Text style={styles.appSubtitleText}>
-            ～Emotion Limbic Internal Structure～
-          </Text>
-        </View>
-
-        {/* メインパネル（パネル内でスクロール） */}
-        <View style={styles.panel}>
+        {/* コンテンツ（スクロール） */}
           {/* パネルヘッダー */}
           <View style={styles.panelHeader}>
             <Text style={styles.panelTitle}>Setting</Text>
@@ -89,132 +280,136 @@ export default function SettingsScreen() {
           >
             {/* カラーテーマ */}
             <View style={styles.section}>
-              <Text style={styles.sectionLabel}>カラーテーマ</Text>
+              <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>カラーテーマ</Text>
               <View style={styles.themeRow}>
                 {themeOptions.map((opt) => {
                   const active = themeName === opt.key;
                   const label = THEME_LABELS_JA[opt.key] ?? opt.key;
                   return (
-                    <TouchableOpacity
+                    <CocolonButton
                       key={opt.key}
-                      style={[styles.themeChip, active && styles.themeChipActive]}
+                      variant={active ? "primary" : "secondary"}
                       onPress={() => setThemeName(opt.key)}
-                      activeOpacity={0.85}
+                      accessibilityLabel={`テーマ ${label} を選択`}
+                      style={{ marginBottom: 8 }}
+                      textStyle={{
+                        fontSize: 12,
+                        fontWeight: active ? "700" : "600",
+                      }}
                     >
-                      <Text
-                        style={[
-                          styles.themeChipLabel,
-                          active && styles.themeChipLabelActive,
-                        ]}
-                      >
-                        {label}
-                      </Text>
-                    </TouchableOpacity>
+                      {label}
+                    </CocolonButton>
                   );
                 })}
               </View>
             </View>
 
-            {/* 環境設定セクション */}
+
+
+            {/* サブスク */}
             <View style={styles.section}>
-              <Text style={styles.sectionLabel}>環境設定</Text>
+              <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>サブスク</Text>
+
               <View style={styles.card}>
-                <Row
-                  styles={styles}
-                  colors={colors}
-                  icon="notifications-outline"
-                  label="通知"
-                  control={
-                    <Switch
-                      value={isNotificationOn}
-                      onValueChange={setIsNotificationOn}
-                      trackColor={{ false: "#CBD5E1", true: "#C7D2FE" }}
-                      thumbColor={
-                        isNotificationOn ? colors.GOLD_BUTTON : "#FFFFFF"
-                      }
-                    />
-                  }
-                />
-                <Divider styles={styles} />
-                <Row
-                  styles={styles}
-                  colors={colors}
-                  icon="share-social-outline"
-                  label="メモの共有"
-                  control={
-                    <Switch
-                      value={isMemoShareOn}
-                      onValueChange={setIsMemoShareOn}
-                      trackColor={{ false: "#CBD5E1", true: "#C7D2FE" }}
-                      thumbColor={
-                        isMemoShareOn ? colors.GOLD_BUTTON : "#FFFFFF"
-                      }
-                    />
-                  }
-                />
+                <CocolonPressable
+                  style={styles.row}
+                  onPress={openSubscriptionSelect}
+                  disabled={isBusy}
+                  accessibilityLabel="サブスク加入状況を開く"
+                >
+                  <View style={styles.rowLeft}>
+                    <View style={styles.rowIconWrap}>
+                      <Ionicons
+                        name="card-outline"
+                        size={18}
+                        color={colors.TEXT_ON_LIGHT}
+                      />
+                    </View>
+                    <Text style={styles.rowLabel}>サブスク加入状況</Text>
+                  </View>
+
+                  <Ionicons
+                    name="chevron-forward"
+                    size={18}
+                    color={colors.TEXT_SUBTLE}
+                  />
+                </CocolonPressable>
+              </View>
+            </View>
+            {/* 通知 */}
+            <View style={styles.section}>
+              <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>通知</Text>
+
+              <View style={styles.card}>
+                <View style={styles.row}>
+                  <View style={styles.rowLeft}>
+                    <View style={styles.rowIconWrap}>
+                      <Ionicons
+                        name="notifications-outline"
+                        size={18}
+                        color={colors.TEXT_ON_LIGHT}
+                      />
+                    </View>
+                    <Text style={styles.rowLabel}>通知を受け取る</Text>
+                  </View>
+
+                  <CocolonSwitch
+                    value={pushEnabled}
+                    onValueChange={updatePushEnabled}
+                    disabled={pushLoading || isBusy}
+                  />
+                </View>
               </View>
             </View>
 
-            {/* データ関連アクション */}
+            {/* カラーテーマの下に、ログアウト / アカウント削除 */}
             <View style={styles.section}>
-              <Text style={styles.sectionLabel}>データ</Text>
               <View style={styles.actionsColumn}>
-                <TouchableOpacity
-                  style={[styles.actionButton, styles.goldButton]}
-                  onPress={handleExport}
-                  activeOpacity={0.85}
+                <CocolonButton
+                  variant="primary"
+                  onPress={handleLogout}
+                  disabled={isBusy}
+                  accessibilityLabel="ログアウト"
+                  style={{ marginTop: 8 }}
                 >
-                  <Ionicons
-                    name="download-outline"
-                    size={18}
-                    color={colors.TEXT_ON_LIGHT}
-                    style={{ marginRight: 6 }}
-                  />
-                  <Text style={styles.goldButtonText}>
-                    データをエクスポート
-                  </Text>
-                </TouchableOpacity>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Ionicons
+                      name="log-out-outline"
+                      size={18}
+                      color="#fff"
+                      style={{ marginRight: 6 }}
+                    />
+                    <Text style={styles.goldButtonText}>ログアウト</Text>
+                  </View>
+                </CocolonButton>
 
-                <TouchableOpacity
-                  style={[styles.actionButton, styles.dangerButton]}
-                  onPress={handleReset}
-                  activeOpacity={0.85}
+                <CocolonButton
+                  variant="primary"
+                  onPress={handleDeleteAccount}
+                  disabled={isBusy}
+                  accessibilityLabel="アカウント削除"
+                  style={{
+                    marginTop: 8,
+                    backgroundColor: "#EF4444",
+                    borderColor: "#B91C1C",
+                  }}
                 >
-                  <Ionicons
-                    name="trash-outline"
-                    size={18}
-                    color="#fff"
-                    style={{ marginRight: 6 }}
-                  />
-                  <Text style={styles.dangerButtonText}>
-                    全データをリセット
-                  </Text>
-                </TouchableOpacity>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Ionicons
+                      name="person-remove-outline"
+                      size={18}
+                      color="#fff"
+                      style={{ marginRight: 6 }}
+                    />
+                    <Text style={styles.dangerButtonText}>アカウント削除</Text>
+                  </View>
+                </CocolonButton>
               </View>
             </View>
           </ScrollView>
-        </View>
       </View>
     </SafeAreaView>
   );
-}
-
-function Row({ icon, label, control, styles, colors }) {
-  return (
-    <View style={styles.row}>
-      <View style={styles.rowLeft}>
-        <View style={styles.rowIconWrap}>
-          <Ionicons name={icon} size={18} color={colors.GOLD_BUTTON} />
-        </View>
-        <Text style={styles.rowLabel}>{label}</Text>
-      </View>
-      <View style={{ transform: [{ scale: 0.95 }] }}>{control}</View>
-    </View>
-  );
-}
-
-function Divider({ styles }) {
-  return <View style={styles.divider} />;
 }
 
 function createStyles(COLORS) {
@@ -223,7 +418,7 @@ function createStyles(COLORS) {
   return StyleSheet.create({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.BG_SILVER,
+      backgroundColor: COLORS.PANEL_BG,
     },
 
     // 画面全体（固定）
@@ -231,7 +426,8 @@ function createStyles(COLORS) {
       flex: 1,
       paddingTop: 16,
       paddingBottom: 16,
-      alignItems: "center",
+      paddingHorizontal: 18,
+      alignItems: "stretch",
     },
 
     // Emlis ヘッダー
@@ -256,7 +452,7 @@ function createStyles(COLORS) {
     // メインパネル（内部スクロール）
     panel: {
       width: "94%",
-      flex: 1,
+      height: PANEL_MIN_HEIGHT,
       minHeight: 0,
       backgroundColor: COLORS.PANEL_BG,
       borderRadius: 26,
@@ -296,7 +492,7 @@ function createStyles(COLORS) {
     },
     sectionLabel: {
       fontSize: 12,
-      color: COLORS.TEXT_SUBTLE,
+      color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
     },
 
@@ -326,6 +522,7 @@ function createStyles(COLORS) {
     },
     themeChipLabel: {
       fontSize: 12,
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
       textAlign: "center",
     },
@@ -408,7 +605,7 @@ function createStyles(COLORS) {
       borderColor: "#B91C1C",
     },
     goldButtonText: {
-      color: COLORS.TEXT_ON_LIGHT,
+      color: "#fff",
       fontWeight: "800",
       fontSize: 15,
     },

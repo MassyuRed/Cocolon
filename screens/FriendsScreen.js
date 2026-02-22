@@ -4,6 +4,7 @@ import {
   Alert,
   FlatList,
   Modal,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -12,22 +13,31 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
+  Share,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
+import { useUnread } from "../UnreadContext";
+
+import CocolonPressable from "../components/CocolonPressable";
 
 // 🔧 ここを変えると Friend 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
 
-// ===== MashOS 設定 =====
-// Expo を想定: EXPO_PUBLIC_MASHOS_URL を設定しておくと便利
-// 例) EXPO_PUBLIC_MASHOS_URL=https://xxxxx.ngrok.app
-const MASHOS_BASE_URL =
-  (typeof process !== "undefined" &&
-    process.env &&
-    (process.env.EXPO_PUBLIC_MASHOS_URL || process.env.MASHOS_BASE_URL)) ||
-  "http://localhost:8765";
+// ---- API base ----
+// 現在は MashOS(MyModel API) を Render 上で稼働させているため、
+// 開発ビルド / 本番ビルドを問わず同じクラウド URL を利用する。
+// （ローカル API に戻したい場合はここを書き換える）
+const API_BASE = "https://mashos-api.onrender.com";
+
+// Friend（申請/承認）API
+const FRIEND_REQUEST_ENDPOINT = `${API_BASE}/friends/request`;
+const FRIEND_REQUESTS_ENDPOINT = `${API_BASE}/friends/requests`; // /{id}/accept | /{id}/reject | /{id}/cancel
+const FRIEND_REMOVE_ENDPOINT = `${API_BASE}/friends/remove`;
+
+const FRIEND_NOTIFICATION_SETTINGS_ENDPOINT = `${API_BASE}/friends/notification-settings`;
 
 // ===== 表示用定数 =====
 const STRENGTH_LABEL = {
@@ -35,6 +45,53 @@ const STRENGTH_LABEL = {
   medium: "中",
   strong: "強",
 };
+
+const ACCOUNT_ROUTE_CANDIDATES = [
+  "Account",
+  "AccountPage",
+  "AccountScreen",
+  "UserAccount",
+  "UserPage",
+  "UserProfile",
+  "Profile",
+];
+
+function navigateToAccount(navigation, userId) {
+  if (!userId) return;
+
+  const params = { viewedUserId: userId, userId, user_id: userId };
+
+  let nav = navigation;
+  while (nav) {
+    const state = nav.getState?.();
+    const routeNames = state?.routeNames;
+
+    if (Array.isArray(routeNames)) {
+      const name = ACCOUNT_ROUTE_CANDIDATES.find((c) => routeNames.includes(c));
+      if (name) {
+        try {
+          nav.navigate(name, params);
+        } catch {
+          // noop
+        }
+        return;
+      }
+    }
+
+    nav = nav.getParent?.();
+  }
+
+  // fallback
+  try {
+    navigation?.navigate?.(ACCOUNT_ROUTE_CANDIDATES[0], params);
+  } catch {
+    // noop
+  }
+}
+
+function stripParensJP(label) {
+  return String(label || "").replace(/（.*?）/g, "").trim();
+}
 
 function emotionTint(emotion) {
   switch (emotion) {
@@ -47,7 +104,7 @@ function emotionTint(emotion) {
     case "不安":
       return { bg: "rgba(56,189,248,0.12)", text: "#0369A1" }; // cyan-ish
     case "平穏":
-      return { bg: "rgba(129,140,248,0.12)", text: "#3730A3" }; // calm
+      return { bg: "rgba(234,179,8,0.12)", text: "#A16207" }; // calm
     default:
       return { bg: "rgba(107,114,128,0.12)", text: "#374151" };
   }
@@ -65,88 +122,201 @@ function formatTimeLabel(iso) {
   });
 }
 
-async function getAccessTokenOrThrow() {
-  const { data, error } = await supabase.auth.getSession();
-  if (error) throw error;
-  const token = data?.session?.access_token;
-  if (!token) {
-    throw new Error(
-      "ログイン情報が取得できませんでした（access_token が空です）"
-    );
+function buildErrorMessage(err) {
+  if (!err) return "エラーが発生しました。";
+  if (err.name === "AbortError")
+    return "接続がタイムアウトしました（ネットワークを確認してください）。";
+  const msg = String(err.message || err);
+  if (/Network/i.test(msg)) return "サーバーへの接続に失敗しました。";
+  return `エラー：${msg}`;
+}
+
+async function getAuthContext() {
+  let userId = null;
+  let accessToken = null;
+
+  try {
+    const { data, error } = await supabase.auth.getUser();
+    if (!error) {
+      userId = data?.user?.id ?? null;
+    }
+  } catch (e) {
+    console.warn("FriendsScreen: failed to resolve userId", e);
   }
-  return token;
+
+  try {
+    const { data: sessionData } = await supabase.auth.getSession();
+    accessToken = sessionData?.session?.access_token ?? null;
+  } catch (e) {
+    console.warn("FriendsScreen: failed to resolve auth session", e);
+  }
+
+  return { userId, accessToken };
 }
 
-async function getUserIdOrThrow() {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  const uid = data?.user?.id;
-  if (!uid) throw new Error("ユーザーIDが取得できませんでした");
-  return uid;
-}
+async function postJsonWithAuth(url, body) {
+  const { accessToken } = await getAuthContext();
+  if (!accessToken) {
+    throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
+  }
 
-async function mashosFetchJson(path, { method = "GET", body } = {}) {
-  const token = await getAccessTokenOrThrow();
-  const res = await fetch(`${MASHOS_BASE_URL}${path}`, {
-    method,
+  const res = await fetch(url, {
+    method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
     },
-    body: body ? JSON.stringify(body) : undefined,
+    body: JSON.stringify(body || {}),
   });
 
-  const text = await res.text();
-  let json;
-  try {
-    json = text ? JSON.parse(text) : null;
-  } catch {
-    json = { raw: text };
-  }
-
   if (!res.ok) {
-    const msg =
-      json?.detail || json?.message || json?.error || json?.raw || "API Error";
-    throw new Error(msg);
+    let detail = `HTTP ${res.status}`;
+    try {
+      const j = await res.json();
+      if (j && j.detail) detail = j.detail;
+    } catch {}
+    const error = new Error(detail);
+    error.httpStatus = res.status;
+    throw error;
   }
 
-  return json;
+  return await res.json();
 }
 
-export default function FriendsScreen() {
+async function getJsonWithAuth(url) {
+  const { accessToken } = await getAuthContext();
+  if (!accessToken) {
+    throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
+  }
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!res.ok) {
+    let detail = `HTTP ${res.status}`;
+    try {
+      const j = await res.json();
+      if (j && j.detail) detail = j.detail;
+    } catch {}
+    const error = new Error(detail);
+    error.httpStatus = res.status;
+    throw error;
+  }
+
+  return await res.json();
+}
+
+export default function FriendsScreen(props) {
   const { colors, themeName } = useTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
 
+  const { getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
+
+  const FEED_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
+  const MANAGE_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
+
+  const prefetchedFeedItems = useMemo(() => {
+    try {
+      const entry = getPrefetchEntryFresh
+        ? getPrefetchEntryFresh("Friends", "feed", FEED_PREFETCH_MAX_AGE_MS)
+        : getPrefetchEntry("Friends", "feed");
+      const v = entry?.value;
+      const items = Array.isArray(v?.items) ? v.items : null;
+      return items;
+    } catch {
+      return null;
+    }
+  }, [getPrefetchEntry, getPrefetchEntryFresh]);
+  const prefetchedManage = useMemo(() => {
+    try {
+      const entry = getPrefetchEntryFresh
+        ? getPrefetchEntryFresh("Friends", "manage", MANAGE_PREFETCH_MAX_AGE_MS)
+        : getPrefetchEntry("Friends", "manage");
+      const v = entry?.value;
+      return v && typeof v === "object" ? v : null;
+    } catch {
+      return null;
+    }
+  }, [getPrefetchEntry, getPrefetchEntryFresh]);
+
+  const { navigation, hasUnreadFriendRequests = false, onOpenFriendManage } = props || {};
+
+  const handlePressGuide = useCallback(() => {
+    // Cocolonガイド（Friend）
+    try {
+      if (navigation?.navigate) {
+        navigation.navigate("CocolonGuide", { screenId: "friend" });
+        return;
+      }
+    } catch {
+      // noop
+    }
+
+    // Fallback: parent navigation（念のため）
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      if (parent && typeof parent.navigate === "function") {
+        parent.navigate("CocolonGuide", { screenId: "friend" });
+      }
+    } catch {
+      // noop
+    }
+  }, [navigation]);
+
   // ===== feed（既存） =====
-  const [feed, setFeed] = useState([]); // { id, ownerName, items[], timeLabel }
-  const [loading, setLoading] = useState(true);
+  const [feed, setFeed] = useState(() => (Array.isArray(prefetchedFeedItems) ? prefetchedFeedItems : [])); // { id, ownerName, items[], timeLabel }
+  const [loading, setLoading] = useState(() => !Array.isArray(prefetchedFeedItems));
   const [errorMsg, setErrorMsg] = useState("");
 
-  // ===== friend 管理（追加） =====
+  // ===== friend 管理（MyProfile 方式に統一） =====
   const [modalVisible, setModalVisible] = useState(false);
-  const [tab, setTab] = useState("friends"); // friends | requests | add
   const [manageLoading, setManageLoading] = useState(false);
-  const [manageError, setManageError] = useState("");
+  const [manageMessage, setManageMessage] = useState("");
 
-  const [myProfile, setMyProfile] = useState(null); // { id, displayName, friendCode }
-  const [friendsList, setFriendsList] = useState([]); // { userId, displayName }
+  const [myProfile, setMyProfile] = useState(() => prefetchedManage?.myProfile || null); // { id, displayName, friendCode }
+  const [friendsList, setFriendsList] = useState(() => (Array.isArray(prefetchedManage?.friendsList) ? prefetchedManage.friendsList : [])); // approved: { userId, displayName, friendCode }
+  const [incoming, setIncoming] = useState(() => (Array.isArray(prefetchedManage?.incoming) ? prefetchedManage.incoming : [])); // pending: { id, requesterUserId, requesterName, createdAt }
+  const [outgoing, setOutgoing] = useState(() => (Array.isArray(prefetchedManage?.outgoing) ? prefetchedManage.outgoing : [])); // pending: { id, requestedUserId, requestedName, friendCode, createdAt }
 
-  const [incoming, setIncoming] = useState([]); // pending: { id, requesterUserId, requesterName, timeLabel }
-  const [outgoing, setOutgoing] = useState([]); // pending: { id, requestedUserId, requestedName, timeLabel }
+  // ===== 通知設定（フレンドごと） =====
+  const [friendNotifMap, setFriendNotifMap] = useState(() => (prefetchedManage?.friendNotifMap && typeof prefetchedManage.friendNotifMap === "object" ? prefetchedManage.friendNotifMap : {})); // { [friendUserId]: boolean }
+  const [friendNotifBusy, setFriendNotifBusy] = useState({}); // { [friendUserId]: boolean }
 
   const [friendCodeInput, setFriendCodeInput] = useState("");
-  const [sending, setSending] = useState(false);
-  const [actingRequestId, setActingRequestId] = useState(null);
+  const handleShareMyFriendCode = useCallback(async () => {
+    const code = String(myProfile?.friendCode || "").trim();
+    if (!code) {
+      setManageMessage("フレンドコードが取得できていません。");
+      return;
+    }
 
-  const loadFeed = useCallback(async () => {
-    setLoading(true);
+    try {
+      // ※ネイティブ依存を増やさないため「Share」で共有導線を出す（コード自体は長押しでコピー可能）
+      await Share.share({ message: code });
+    } catch (e) {
+      console.warn("FriendsScreen: share friend code failed", e);
+      setManageMessage("共有に失敗しました。");
+    }
+  }, [myProfile?.friendCode]);
+
+
+  const loadFeed = useCallback(async (opts) => {
+    const silent = !!opts?.silent;
+    if (!silent) {
+      setLoading(true);
+    }
     setErrorMsg("");
     try {
       const { data, error } = await supabase
         .from("friend_emotion_feed")
         .select("id, owner_name, items, created_at")
         .order("created_at", { ascending: false })
-        .limit(50);
+        .limit(20);
 
       if (error) throw error;
 
@@ -160,6 +330,16 @@ export default function FriendsScreen() {
       }));
 
       setFeed(mapped);
+
+      // cache (used by app-level preload / next open)
+      try {
+        const { userId } = await getAuthContext();
+        if (userId) {
+          setPrefetch("Friends", "feed", { userId, items: mapped });
+        }
+      } catch {
+        // noop
+      }
     } catch (e) {
       console.error("friend feed load error:", e);
       setErrorMsg(String(e?.message || e));
@@ -202,14 +382,21 @@ export default function FriendsScreen() {
         displayName: again?.display_name || "",
         friendCode: again?.friend_code || "",
       });
-      return;
+      return {
+        id: uid,
+        displayName: again?.display_name || "",
+        friendCode: again?.friend_code || "",
+      };
     }
 
-    setMyProfile({
+    const profile = {
       id: uid,
       displayName: data.display_name || "",
       friendCode: data.friend_code || "",
-    });
+    };
+
+    setMyProfile(profile);
+    return profile;
   }, []);
 
   const loadFriendsList = useCallback(async (uid) => {
@@ -227,28 +414,36 @@ export default function FriendsScreen() {
 
     if (ids.length === 0) {
       setFriendsList([]);
-      return;
+      return [];
     }
 
     // profiles は誰でも参照OKのポリシー想定
     const { data: profs, error: pErr } = await supabase
       .from("profiles")
-      .select("id, display_name")
+      .select("id, display_name, friend_code")
       .in("id", ids);
 
     if (pErr) throw pErr;
 
     const map = new Map();
     (Array.isArray(profs) ? profs : []).forEach((p) => {
-      map.set(p.id, p.display_name || "Friend");
+      map.set(p.id, {
+        displayName: p.display_name || "Friend",
+        friendCode: p.friend_code || null,
+      });
     });
 
-    const list = rows.map((r) => ({
-      userId: r.friend_user_id,
-      displayName: map.get(r.friend_user_id) || "Friend",
-    }));
+    const list = rows.map((r) => {
+      const p = map.get(r.friend_user_id) || {};
+      return {
+        userId: r.friend_user_id,
+        displayName: p.displayName || "Friend",
+        friendCode: p.friendCode || null,
+      };
+    });
 
     setFriendsList(list);
+    return list;
   }, []);
 
   const loadRequests = useCallback(async (uid) => {
@@ -282,131 +477,448 @@ export default function FriendsScreen() {
     if (idList.length > 0) {
       const { data: profs, error: pErr } = await supabase
         .from("profiles")
-        .select("id, display_name")
+        .select("id, display_name, friend_code")
         .in("id", idList);
 
       if (pErr) throw pErr;
 
       profileMap = new Map(
-        (Array.isArray(profs) ? profs : []).map((p) => [p.id, p.display_name || "Friend"])
+        (Array.isArray(profs) ? profs : []).map((p) => [
+          p.id,
+          {
+            displayName: p.display_name || "Friend",
+            friendCode: p.friend_code || null,
+          },
+        ])
       );
     }
 
-    setIncoming(
-      inRows.map((r) => ({
+    const incomingMapped = inRows.map((r) => {
+      const p = profileMap.get(r.requester_user_id) || {};
+      return {
         id: r.id,
         requesterUserId: r.requester_user_id,
-        requesterName: profileMap.get(r.requester_user_id) || "Friend",
-        timeLabel: formatTimeLabel(r.created_at),
-      }))
-    );
+        requesterName: p.displayName || "Friend",
+        createdAt: r.created_at || null,
+      };
+    });
 
-    setOutgoing(
-      outRows.map((r) => ({
+    const outgoingMapped = outRows.map((r) => {
+      const p = profileMap.get(r.requested_user_id) || {};
+      return {
         id: r.id,
         requestedUserId: r.requested_user_id,
-        requestedName: profileMap.get(r.requested_user_id) || "Friend",
-        timeLabel: formatTimeLabel(r.created_at),
-      }))
-    );
+        requestedName: p.displayName || "Friend",
+        friendCode: p.friendCode || null,
+        createdAt: r.created_at || null,
+      };
+    });
+
+    setIncoming(incomingMapped);
+    setOutgoing(outgoingMapped);
+    return { incoming: incomingMapped, outgoing: outgoingMapped };
   }, []);
 
-  const loadManageAll = useCallback(async () => {
-    setManageLoading(true);
-    setManageError("");
+  const loadFriendNotificationSettings = useCallback(async () => {
+    try {
+      const json = await getJsonWithAuth(FRIEND_NOTIFICATION_SETTINGS_ENDPOINT);
+
+      const list = Array.isArray(json)
+        ? json
+        : Array.isArray(json?.settings)
+        ? json.settings
+        : Array.isArray(json?.data)
+        ? json.data
+        : [];
+
+      const map = {};
+      list.forEach((s) => {
+        const friendId =
+          s?.friend_user_id ||
+          s?.owner_user_id ||
+          s?.friendUserId ||
+          s?.ownerUserId ||
+          s?.friend_id ||
+          s?.friendId;
+
+        if (!friendId) return;
+
+        const enabled =
+          s?.is_enabled ?? s?.isEnabled ?? s?.enabled ?? s?.is_on ?? s?.isOn;
+
+        if (typeof enabled === "boolean") {
+          map[friendId] = enabled;
+        }
+      });
+
+      setFriendNotifMap(map);
+      return map;
+    } catch (e) {
+      // API 未対応/テーブル未作成でも Friend 管理自体は動かしたいので、ここはデフォルトON扱いにする
+      console.warn("FriendsScreen: notification settings load failed", e);
+      setFriendNotifMap({});
+      return {};
+    }
+  }, []);
+
+  const loadManageAll = useCallback(async (opts) => {
+    const silent = !!opts?.silent;
+    if (!silent) {
+      setManageLoading(true);
+    }
 
     try {
-      const uid = await getUserIdOrThrow();
-      await Promise.all([
-        loadMyProfile(uid),
-        loadFriendsList(uid),
-        loadRequests(uid),
+      const { userId } = await getAuthContext();
+      if (!userId) {
+        setMyProfile(null);
+        setFriendsList([]);
+        setIncoming([]);
+        setOutgoing([]);
+        setManageMessage("ログイン情報が取得できませんでした。");
+        return;
+      }
+
+      const [profile, friends, reqs, notifMap] = await Promise.all([
+        loadMyProfile(userId),
+        loadFriendsList(userId),
+        loadRequests(userId),
+        loadFriendNotificationSettings(),
       ]);
+
+      // cache (used by app-level preload / next open)
+      try {
+        setPrefetch("Friends", "manage", {
+          userId,
+          myProfile: profile || null,
+          friendsList: Array.isArray(friends) ? friends : [],
+          incoming: Array.isArray(reqs?.incoming) ? reqs.incoming : [],
+          outgoing: Array.isArray(reqs?.outgoing) ? reqs.outgoing : [],
+          friendNotifMap:
+            notifMap && typeof notifMap === "object" ? notifMap : {},
+        });
+      } catch {
+        // noop
+      }
     } catch (e) {
       console.error("friends manage load error:", e);
-      setManageError(String(e?.message || e));
+      setManageMessage(buildErrorMessage(e));
     } finally {
       setManageLoading(false);
     }
-  }, [loadFriendsList, loadMyProfile, loadRequests]);
+  }, [loadFriendsList, loadMyProfile, loadRequests, loadFriendNotificationSettings, setPrefetch]);
 
   useEffect(() => {
-    loadFeed();
-  }, [loadFeed]);
-
-  useEffect(() => {
-    if (modalVisible) {
-      // モーダルを開いたら最新を取得
-      loadManageAll();
+    // If feed was preloaded at app start, render immediately and refresh silently.
+    if (Array.isArray(prefetchedFeedItems)) {
+      loadFeed({ silent: true });
+      return;
     }
-  }, [modalVisible, loadManageAll]);
+    loadFeed();
+  }, [loadFeed, prefetchedFeedItems]);
 
-  const sendRequest = useCallback(async () => {
-    const code = friendCodeInput.trim();
-    if (!code) {
-      Alert.alert("入力が必要です", "相手のフレンドコードを入力してね");
+  useEffect(() => {
+    if (!modalVisible) return;
+
+    // モーダルを開いたら最新を取得（メッセージは一旦クリア）
+    setManageMessage("");
+
+    // If manage data was preloaded at app start, render immediately and refresh silently.
+    if (prefetchedManage) {
+      setMyProfile((prev) => prev || prefetchedManage?.myProfile || null);
+      setFriendsList((prev) =>
+        prev && prev.length > 0
+          ? prev
+          : Array.isArray(prefetchedManage?.friendsList)
+          ? prefetchedManage.friendsList
+          : []
+      );
+      setIncoming((prev) =>
+        prev && prev.length > 0
+          ? prev
+          : Array.isArray(prefetchedManage?.incoming)
+          ? prefetchedManage.incoming
+          : []
+      );
+      setOutgoing((prev) =>
+        prev && prev.length > 0
+          ? prev
+          : Array.isArray(prefetchedManage?.outgoing)
+          ? prefetchedManage.outgoing
+          : []
+      );
+      setFriendNotifMap((prev) =>
+        prev && Object.keys(prev || {}).length > 0
+          ? prev
+          : prefetchedManage?.friendNotifMap &&
+            typeof prefetchedManage.friendNotifMap === "object"
+          ? prefetchedManage.friendNotifMap
+          : {}
+      );
+
+      loadManageAll({ silent: true });
       return;
     }
 
-    setSending(true);
-    setManageError("");
+    loadManageAll();
+  }, [modalVisible, loadManageAll, prefetchedManage]);
+
+  const handleSendFriendCode = useCallback(async () => {
+    const code = friendCodeInput.trim();
+    if (!code || manageLoading) return;
+
+    setManageMessage("");
+    setManageLoading(true);
 
     try {
-      await mashosFetchJson("/friends/request", {
-        method: "POST",
-        body: { friend_code: code },
-      });
+      const json = await postJsonWithAuth(FRIEND_REQUEST_ENDPOINT, { friend_code: code });
 
-      Alert.alert("送信しました", "フレンド申請を送りました");
-      setFriendCodeInput("");
-      setTab("requests");
+      if (json?.status === "ok") {
+        setManageMessage("申請を送信しました。承認されるまでお待ちください。");
+        setFriendCodeInput("");
+      } else if (json?.status === "already_pending") {
+        setManageMessage("すでに承認待ちの申請があります。");
+      } else if (json?.status === "already_registered") {
+        setManageMessage("すでにフレンドです。");
+        setFriendCodeInput("");
+      } else {
+        setManageMessage("申請処理を完了しました。");
+      }
+
       await loadManageAll();
     } catch (e) {
-      console.error("send friend request error:", e);
-      Alert.alert("送信できませんでした", String(e?.message || e));
+      setManageMessage(buildErrorMessage(e));
     } finally {
-      setSending(false);
+      setManageLoading(false);
     }
-  }, [friendCodeInput, loadManageAll]);
+  }, [friendCodeInput, loadManageAll, manageLoading]);
 
-  const acceptRequest = useCallback(
+  const handleAcceptRequest = useCallback(
     async (requestId) => {
-      setActingRequestId(requestId);
-      setManageError("");
+      if (!requestId || manageLoading) return;
+
+      setManageMessage("");
+      setManageLoading(true);
+
       try {
-        await mashosFetchJson(`/friends/requests/${requestId}/accept`, {
-          method: "POST",
-        });
-        Alert.alert("承諾しました", "フレンドになりました");
+        await postJsonWithAuth(`${FRIEND_REQUESTS_ENDPOINT}/${requestId}/accept`, {});
+        setManageMessage("申請を承認しました。");
         await loadManageAll();
       } catch (e) {
-        console.error("accept request error:", e);
-        Alert.alert("承諾できませんでした", String(e?.message || e));
+        setManageMessage(buildErrorMessage(e));
       } finally {
-        setActingRequestId(null);
+        setManageLoading(false);
       }
     },
-    [loadManageAll]
+    [loadManageAll, manageLoading]
   );
 
-  const rejectRequest = useCallback(
+  const handleRejectRequest = useCallback(
     async (requestId) => {
-      setActingRequestId(requestId);
-      setManageError("");
+      if (!requestId || manageLoading) return;
+
+      setManageMessage("");
+      setManageLoading(true);
+
       try {
-        await mashosFetchJson(`/friends/requests/${requestId}/reject`, {
-          method: "POST",
-        });
-        Alert.alert("拒否しました", "申請を拒否しました");
+        await postJsonWithAuth(`${FRIEND_REQUESTS_ENDPOINT}/${requestId}/reject`, {});
+        setManageMessage("申請を拒否しました。");
         await loadManageAll();
       } catch (e) {
-        console.error("reject request error:", e);
-        Alert.alert("拒否できませんでした", String(e?.message || e));
+        setManageMessage(buildErrorMessage(e));
       } finally {
-        setActingRequestId(null);
+        setManageLoading(false);
       }
     },
-    [loadManageAll]
+    [loadManageAll, manageLoading]
+  );
+
+  const handleCancelOutgoingRequest = useCallback(
+    (req) => {
+      const requestId = req?.id || null;
+      const label = req?.requestedName || "相手";
+      if (!requestId || manageLoading) return;
+
+      Alert.alert(
+        "申請を取り下げますか？",
+        `「${stripParensJP(label)}」への申請を取り下げます。\n\n※ 相手側の承認待ち一覧からも消えます。`,
+        [
+          { text: "やめる", style: "cancel" },
+          {
+            text: "取り下げ",
+            style: "destructive",
+            onPress: async () => {
+              setManageMessage("");
+              setManageLoading(true);
+
+              try {
+                await postJsonWithAuth(`${FRIEND_REQUESTS_ENDPOINT}/${requestId}/cancel`, {});
+                setManageMessage("申請を取り下げました。");
+                await loadManageAll();
+              } catch (e) {
+                const msg = buildErrorMessage(e);
+                setManageMessage(msg);
+                Alert.alert("取り下げに失敗しました", msg);
+              } finally {
+                setManageLoading(false);
+              }
+            },
+          },
+        ]
+      );
+    },
+    [loadManageAll, manageLoading]
+  );
+
+  const handleResendOutgoingRequest = useCallback(
+    (req) => {
+      const requestId = req?.id || null;
+      const label = req?.requestedName || "相手";
+      const code = (req?.friendCode || "").trim();
+
+      if (!requestId || manageLoading) return;
+      if (!code) {
+        Alert.alert(
+          "再送できません",
+          "相手のフレンドコードが取得できなかったため、再送できませんでした。\n\nフレンドコードを確認して、再度申請してください。"
+        );
+        return;
+      }
+
+      Alert.alert(
+        "申請を再送しますか？",
+        `「${stripParensJP(label)}」への申請を再送します。\n\n※ 一度取り下げてから、同じフレンドコードへ申請を送り直します。\n※ これにより相手側の一覧で“新しい申請”として並び直されます。`,
+        [
+          { text: "やめる", style: "cancel" },
+          {
+            text: "再送する",
+            onPress: async () => {
+              setManageMessage("");
+              setManageLoading(true);
+
+              try {
+                // 1) cancel current pending (best-effort)
+                //    ※ すでに pending でない / すでに存在しない場合でも「再送」は続行する
+                try {
+                  await postJsonWithAuth(
+                    `${FRIEND_REQUESTS_ENDPOINT}/${requestId}/cancel`,
+                    {}
+                  );
+                } catch (cancelErr) {
+                  const hs = cancelErr?.httpStatus;
+                  if (hs !== 400 && hs !== 404) {
+                    throw cancelErr;
+                  }
+                  console.warn("FriendsScreen: resend cancel skipped", cancelErr);
+                }
+                // 2) send again
+                const json = await postJsonWithAuth(FRIEND_REQUEST_ENDPOINT, { friend_code: code });
+
+                if (json?.status === "ok") {
+                  setManageMessage("申請を再送しました。承認されるまでお待ちください。");
+                } else if (json?.status === "already_pending") {
+                  setManageMessage("すでに承認待ちの申請があります（再送が反映されない場合があります）。");
+                } else if (json?.status === "already_registered") {
+                  setManageMessage("すでにフレンドです。");
+                } else {
+                  setManageMessage("再送処理を完了しました。");
+                }
+
+                await loadManageAll();
+              } catch (e) {
+                const msg = buildErrorMessage(e);
+                setManageMessage(msg);
+                Alert.alert("再送に失敗しました", msg);
+              } finally {
+                setManageLoading(false);
+              }
+            },
+          },
+        ]
+      );
+    },
+    [loadManageAll, manageLoading]
+  );
+
+  const handleToggleFriendNotification = useCallback(
+    async (friend) => {
+      const friendUserId = friend?.userId || null;
+      if (!friendUserId) return;
+      if (manageLoading) return;
+      if (friendNotifBusy?.[friendUserId]) return;
+
+      const currentEnabled = friendNotifMap?.[friendUserId] !== false; // undefined は ON 扱い
+      const nextEnabled = !currentEnabled;
+
+      // optimistic update（体感を軽く）
+      setFriendNotifMap((prev) => ({ ...(prev || {}), [friendUserId]: nextEnabled }));
+      setFriendNotifBusy((prev) => ({ ...(prev || {}), [friendUserId]: true }));
+
+      try {
+        await postJsonWithAuth(
+          `${FRIEND_NOTIFICATION_SETTINGS_ENDPOINT}/${friendUserId}`,
+          { is_enabled: nextEnabled }
+        );
+      } catch (e) {
+        // rollback
+        setFriendNotifMap((prev) => ({ ...(prev || {}), [friendUserId]: currentEnabled }));
+        const msg = buildErrorMessage(e);
+        Alert.alert("通知設定の更新に失敗しました", msg);
+      } finally {
+        setFriendNotifBusy((prev) => {
+          const next = { ...(prev || {}) };
+          delete next[friendUserId];
+          return next;
+        });
+      }
+    },
+    [friendNotifBusy, friendNotifMap, manageLoading]
+  );
+
+  const handleOpenApprovedFriendMenu = useCallback(
+    (friend) => {
+      const friendUserId = friend?.userId || null;
+      const label = friend?.displayName || "Friend";
+
+      if (!friendUserId || manageLoading) return;
+
+      Alert.alert(
+        "フレンド",
+        `「${stripParensJP(label)}」をフレンドから削除しますか？`,
+        [
+          { text: "やめる", style: "cancel" },
+          {
+            text: "フレンド削除",
+            style: "destructive",
+            onPress: async () => {
+              setManageMessage("");
+              setManageLoading(true);
+
+              try {
+                const { userId } = await getAuthContext();
+                if (!userId) {
+                  throw new Error("ログイン情報が取得できませんでした。");
+                }
+
+                // API側（service role）で双方向の friendships を削除して、確実にフレンド解除する
+                await postJsonWithAuth(FRIEND_REMOVE_ENDPOINT, {
+                  friend_user_id: friendUserId,
+                });
+
+                setManageMessage("フレンドを削除しました。");
+                await loadManageAll();
+              } catch (e) {
+                const msg = buildErrorMessage(e);
+                setManageMessage(msg);
+                Alert.alert("削除に失敗しました", msg);
+              } finally {
+                setManageLoading(false);
+              }
+            },
+          },
+        ]
+      );
+    },
+    [loadManageAll, manageLoading]
   );
 
   const renderFeedItem = ({ item }) => {
@@ -414,9 +926,6 @@ export default function FriendsScreen() {
     return (
       <View style={styles.row}>
         <View style={styles.left}>
-          <View style={styles.avatar}>
-            <Ionicons name="person-circle-outline" size={28} color="#6B7280" />
-          </View>
           <Text style={styles.name}>{item.ownerName}</Text>
         </View>
 
@@ -459,30 +968,79 @@ export default function FriendsScreen() {
       />
       {/* 画面全体は固定（背景＆タイトル固定） */}
       <View style={styles.screenContainer}>
-        {/* Emlis ヘッダー */}
-        <View style={styles.appTitleWrapper}>
-          <Text style={styles.appTitleText}>Emlis</Text>
-          <Text style={styles.appSubtitleText}>
-            ～Emotion Limbic Internal Structure～
-          </Text>
-        </View>
-
-        {/* ゴールド枠パネル */}
-        <View style={styles.panel}>
-          {/* パネルヘッダー：Frend */}
+        {/* パネルヘッダー：Friend */}
           <View style={styles.panelHeader}>
-            <Text style={styles.panelTitle}>Frend</Text>
-            <TouchableOpacity
-              onPress={() => setModalVisible(true)}
-              style={styles.friendPill}
-              activeOpacity={0.85}
+            <View style={styles.panelTitleRow}>
+            <Text style={styles.panelTitle}>Friend</Text>
+            <CocolonPressable
+              style={styles.guideTitleButton}
+              onPress={handlePressGuide}
+              accessibilityLabel="Friendのガイドを開く"
             >
               <Ionicons
-                name="people-circle-outline"
-                size={22}
+                name="help-circle-outline"
+                size={20}
                 color={colors.TEXT_ON_LIGHT}
               />
-            </TouchableOpacity>
+            </CocolonPressable>
+          </View>
+
+            {/* 右上：更新（フィード再取得） + フレンド管理 */}
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <CocolonPressable
+                onPress={loadFeed}
+                style={[
+                  styles.friendPill,
+                  { marginRight: 10 },
+                  loading && { opacity: 0.5 },
+                ]}
+disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+                ) : (
+                  <Ionicons
+                    name="refresh"
+                    size={20}
+                    color={colors.TEXT_ON_LIGHT}
+                  />
+                )}
+              </CocolonPressable>
+
+              <CocolonPressable
+                onPress={() => {
+                  setModalVisible(true);
+                  try {
+                    if (typeof onOpenFriendManage === "function") {
+                      onOpenFriendManage();
+                    }
+                  } catch {
+                    // noop
+                  }
+                }}
+                style={[styles.friendPill, { position: "relative" }]}
+>
+                <Ionicons
+                  name="people-circle-outline"
+                  size={20}
+                  color={colors.TEXT_ON_LIGHT}
+                />
+                {hasUnreadFriendRequests ? (
+                  <View
+                    pointerEvents="none"
+                    style={{
+                      position: "absolute",
+                      top: 2,
+                      right: 2,
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      backgroundColor: "#EF4444",
+                    }}
+                  />
+                ) : null}
+              </CocolonPressable>
+            </View>
           </View>
 
           <ScrollView
@@ -490,262 +1048,324 @@ export default function FriendsScreen() {
             contentContainerStyle={styles.panelScrollContent}
             showsVerticalScrollIndicator={false}
           >
+            <Text style={[styles.lead, { fontWeight: "700" }]}>フレンドログ</Text>
 
-            <Text style={styles.lead}>つながっている人たちの最新の心の動き</Text>
-
-          {/* フィードカード */}
-          <View style={styles.card}>
-            {errorMsg ? (
-              <View style={styles.centerBox}>
-                <Text style={styles.errorText}>取得エラー: {errorMsg}</Text>
-                <TouchableOpacity
-                  style={styles.retryBtn}
-                  onPress={loadFeed}
-                  activeOpacity={0.85}
-                >
-                  <Text style={styles.retryText}>再読み込み</Text>
-                </TouchableOpacity>
-              </View>
-            ) : loading ? (
-              <View style={styles.centerBox}>
-                <ActivityIndicator size="small" />
-              </View>
-            ) : feed.length === 0 ? (
-              <View style={styles.centerBox}>
-                <Text style={styles.emptyText}>
-                  まだフレンドの感情ログがありません
-                </Text>
-              </View>
-            ) : (
-              <FlatList
-                data={feed}
-                keyExtractor={(item) => String(item.id)}
-                renderItem={renderFeedItem}
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
-                scrollEnabled={false} // パネル全体は ScrollView がスクロール担当
-              />
-            )}
-          </View>
-
+            {/* フィードカード */}
+            <View style={styles.card}>
+              {errorMsg ? (
+                <View style={styles.centerBox}>
+                  <Text style={styles.errorText}>取得エラー: {errorMsg}</Text>
+                  <TouchableOpacity
+                    style={styles.retryBtn}
+                    onPress={loadFeed}
+                    activeOpacity={0.85}
+                  >
+                    <Text style={styles.retryText}>再読み込み</Text>
+                  </TouchableOpacity>
+                </View>
+              ) : loading ? (
+                <View style={styles.centerBox}>
+                  <ActivityIndicator size="small" />
+                </View>
+              ) : feed.length === 0 ? (
+                <View style={styles.centerBox}>
+                  <Text style={styles.emptyText}>
+                    まだフレンドの感情ログがありません
+                  </Text>
+                </View>
+              ) : (
+                <FlatList
+                  data={feed}
+                  keyExtractor={(item) => String(item.id)}
+                  renderItem={renderFeedItem}
+                  ItemSeparatorComponent={() => <View style={styles.separator} />}
+                  scrollEnabled={false} // パネル全体は ScrollView がスクロール担当
+                />
+              )}
+            </View>
           </ScrollView>
-        </View>
       </View>
 
-      {/* FAB */}
-      <TouchableOpacity
-        style={styles.fab}
-        activeOpacity={0.85}
-        onPress={() => {
-          setTab("add");
-          setModalVisible(true);
-        }}
-      >
-        <Ionicons name="person-add-outline" size={24} color="#fff" />
-      </TouchableOpacity>
-
-      {/* フレンド管理モーダル */}
+      {/* フレンド管理モーダル（MyProfile 方式） */}
       <Modal
         visible={modalVisible}
-        animationType="fade"
         transparent
+        animationType="fade"
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeaderRow}>
-              <Text style={styles.modalTitle}>フレンド</Text>
-              <TouchableOpacity
-                onPress={loadManageAll}
-                activeOpacity={0.85}
-                style={styles.iconBtn}
-              >
-                <Ionicons name="refresh" size={18} color={styles.modalTitle.color} />
-              </TouchableOpacity>
-            </View>
+        <Pressable
+          style={styles.modalBackdrop}
+          onPress={() => setModalVisible(false)}
+        />
 
-            {/* 自分のフレンドコード */}
-            <View style={styles.myCodeBox}>
-              <Text style={styles.myCodeLabel}>あなたのフレンドコード</Text>
-              <Text style={styles.myCodeValue}>
-                {myProfile?.friendCode ? myProfile.friendCode : "（未設定）"}
+        <View style={styles.manageCard}>
+          <View style={styles.manageHeader}>
+            <Text style={styles.manageTitle}>フレンド</Text>
+            <Pressable
+              style={styles.manageCloseBtn}
+              onPress={() => setModalVisible(false)}
+            >
+              <Ionicons name="close" size={20} color="#374151" />
+            </Pressable>
+          </View>
+
+          <View style={styles.manageIntroCard}>
+            <Text style={styles.manageIntroText}>
+              フレンドコードで申請。{"\n"}相手が承認するとフレンドになります。{"\n"}承認済みになると、ここに一覧表示されます。
+            </Text>
+          </View>
+
+          <ScrollView
+            style={styles.manageScroll}
+            contentContainerStyle={styles.manageScrollContent}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.manageSection}>
+              <Text style={styles.manageSectionTitle}>あなたのフレンドコード</Text>
+              <View style={styles.codeRow}>
+                <View style={styles.codePill}>
+                  <Text style={styles.codeText} selectable>
+                    {myProfile?.friendCode || "（未取得）"}
+                  </Text>
+                </View>
+
+                <Pressable
+                  style={[
+                    styles.copyBtn,
+                    (!myProfile?.friendCode || manageLoading) &&
+                      styles.copyBtnDisabled,
+                  ]}
+                  onPress={handleShareMyFriendCode}
+                  disabled={!myProfile?.friendCode || manageLoading}
+                >
+                  <Ionicons name="copy-outline" size={18} color="#374151" />
+                </Pressable>
+              </View>
+              <Text style={styles.manageHelpText}>
+                このコードを相手に教えると、{"\n"}相手があなたへフレンド申請を送れます。
               </Text>
             </View>
 
-            {/* タブ */}
-            <View style={styles.tabRow}>
-              <TouchableOpacity
-                onPress={() => setTab("friends")}
-                style={[styles.tabBtn, tab === "friends" && styles.tabBtnActive]}
-                activeOpacity={0.85}
-              >
-                <Text
+            <View style={styles.manageSection}>
+              <Text style={styles.manageSectionTitle}>
+                他ユーザーのフレンドコードに申請
+              </Text>
+              <View style={styles.manageRow}>
+                <TextInput
+                  style={styles.manageInput}
+                  placeholder="相手のフレンドコードを入力"
+                  placeholderTextColor={colors.TEXT_ON_LIGHT}
+                  value={friendCodeInput}
+                  onChangeText={setFriendCodeInput}
+                  autoCapitalize="characters"
+                  autoCorrect={false}
+                />
+                <CocolonPressable
                   style={[
-                    styles.tabText,
-                    tab === "friends" && styles.tabTextActive,
+                    styles.smallButton,
+                    (!friendCodeInput.trim() || manageLoading) &&
+                      styles.smallButtonDisabled,
                   ]}
+                  onPress={handleSendFriendCode}
+                  disabled={!friendCodeInput.trim() || manageLoading}
                 >
-                  一覧
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setTab("requests")}
-                style={[styles.tabBtn, tab === "requests" && styles.tabBtnActive]}
-                activeOpacity={0.85}
-              >
-                <Text
-                  style={[
-                    styles.tabText,
-                    tab === "requests" && styles.tabTextActive,
-                  ]}
-                >
-                  申請
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setTab("add")}
-                style={[styles.tabBtn, tab === "add" && styles.tabBtnActive]}
-                activeOpacity={0.85}
-              >
-                <Text
-                  style={[styles.tabText, tab === "add" && styles.tabTextActive]}
-                >
-                  追加
-                </Text>
-              </TouchableOpacity>
+                  {manageLoading ? (
+                    <ActivityIndicator color="#FFFFFF" />
+                  ) : (
+                    <Text style={styles.smallButtonText}>申請</Text>
+                  )}
+                </CocolonPressable>
+              </View>
+
+              {manageMessage ? (
+                <Text style={styles.manageMessage}>{manageMessage}</Text>
+              ) : null}
             </View>
 
-            {manageError ? (
-              <Text style={styles.manageErrorText}>{manageError}</Text>
-            ) : null}
-
-            {manageLoading ? (
-              <View style={styles.centerBox}>
-                <ActivityIndicator size="small" />
+            <View style={styles.manageSection}>
+              <View style={styles.manageSectionHeaderRow}>
+                <Text style={styles.manageSectionTitle}>受信した申請</Text>
+                <Pressable style={styles.ghostBtn} onPress={loadManageAll}>
+                  <Ionicons name="refresh" size={16} color="#374151" />
+                </Pressable>
               </View>
-            ) : (
-              <ScrollView
-                style={{ maxHeight: 420 }}
-                showsVerticalScrollIndicator={false}
-              >
-                {/* タブ: フレンド一覧 */}
-                {tab === "friends" ? (
-                  <View style={{ marginTop: 8 }}>
-                    {friendsList.length === 0 ? (
-                      <Text style={styles.emptyText}>まだフレンドがいません</Text>
-                    ) : (
-                      friendsList.map((f) => (
-                        <View key={f.userId} style={styles.modalRow}>
-                          <Ionicons
-                            name="person-outline"
-                            size={18}
-                            color={styles.friendName.color}
-                            style={{ marginRight: 6 }}
-                          />
-                          <Text style={styles.friendName}>{f.displayName}</Text>
-                        </View>
-                      ))
-                    )}
-                  </View>
-                ) : null}
 
-                {/* タブ: 申請 */}
-                {tab === "requests" ? (
-                  <View style={{ marginTop: 8 }}>
-                    <Text style={styles.sectionTitle}>届いた申請</Text>
-                    {incoming.length === 0 ? (
-                      <Text style={styles.emptyText}>届いている申請はありません</Text>
-                    ) : (
-                      incoming.map((r) => (
-                        <View key={r.id} style={styles.requestRow}>
-                          <View style={{ flex: 1 }}>
-                            <Text style={styles.requestName}>{r.requesterName}</Text>
-                            <Text style={styles.requestTime}>{r.timeLabel}</Text>
-                          </View>
-                          <TouchableOpacity
-                            style={styles.smallBtn}
-                            onPress={() => acceptRequest(r.id)}
-                            disabled={actingRequestId === r.id}
-                            activeOpacity={0.85}
-                          >
-                            <Text style={styles.smallBtnText}>承諾</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            style={[styles.smallBtn, styles.smallBtnOutline]}
-                            onPress={() => rejectRequest(r.id)}
-                            disabled={actingRequestId === r.id}
-                            activeOpacity={0.85}
-                          >
-                            <Text style={[styles.smallBtnText, styles.smallBtnTextOutline]}
-                            >
-                              拒否
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
-                      ))
-                    )}
-
-                    <View style={{ height: 12 }} />
-
-                    <Text style={styles.sectionTitle}>送った申請</Text>
-                    {outgoing.length === 0 ? (
-                      <Text style={styles.emptyText}>送った申請はありません</Text>
-                    ) : (
-                      outgoing.map((r) => (
-                        <View key={r.id} style={styles.requestRow}>
-                          <View style={{ flex: 1 }}>
-                            <Text style={styles.requestName}>{r.requestedName}</Text>
-                            <Text style={styles.requestTime}>{r.timeLabel}</Text>
-                          </View>
-                          <Text style={styles.pendingPill}>pending</Text>
-                        </View>
-                      ))
-                    )}
-                  </View>
-                ) : null}
-
-                {/* タブ: 追加 */}
-                {tab === "add" ? (
-                  <View style={{ marginTop: 8 }}>
-                    <Text style={styles.sectionTitle}>フレンドを追加</Text>
-                    <Text style={styles.helpText}>
-                      相手のフレンドコードを入力して申請を送ります
+              {incoming.length === 0 ? (
+                <Text style={styles.manageEmptyText}>
+                  受信中の申請はありません。
+                </Text>
+              ) : (
+                incoming.map((r) => (
+                  <View key={String(r.id)} style={styles.requestCard}>
+                    <Text style={styles.requestName} numberOfLines={1}>
+                      {r.requesterName || "(unknown)"}
                     </Text>
-
-                    <TextInput
-                      value={friendCodeInput}
-                      onChangeText={setFriendCodeInput}
-                      placeholder="例: A1B2C3D4E5"
-                      placeholderTextColor={colors.TEXT_SUBTLE}
-                      autoCapitalize="characters"
-                      style={styles.input}
-                    />
-
-                    <TouchableOpacity
-                      style={[styles.primaryBtn, sending && { opacity: 0.6 }]}
-                      onPress={sendRequest}
-                      disabled={sending}
-                      activeOpacity={0.85}
-                    >
-                      <Text style={styles.primaryBtnText}>
-                        {sending ? "送信中..." : "申請を送る"}
+                    {r.createdAt ? (
+                      <Text style={styles.ownerSub}>
+                        申請日: {formatTimeLabel(r.createdAt)}
                       </Text>
-                    </TouchableOpacity>
-
-                    <Text style={styles.helpText2}>
-                      ※通信先: {MASHOS_BASE_URL}
-                    </Text>
+                    ) : null}
+                    <View style={styles.requestActions}>
+                      <Pressable
+                        style={[
+                          styles.requestBtn,
+                          styles.requestBtnOk,
+                          manageLoading && styles.requestBtnDisabled,
+                        ]}
+                        disabled={manageLoading}
+                        onPress={() => handleAcceptRequest(r.id)}
+                      >
+                        <Text style={styles.requestBtnText}>承認</Text>
+                      </Pressable>
+                      <Pressable
+                        style={[
+                          styles.requestBtn,
+                          styles.requestBtnSpacer,
+                          styles.requestBtnNo,
+                          manageLoading && styles.requestBtnDisabled,
+                        ]}
+                        disabled={manageLoading}
+                        onPress={() => handleRejectRequest(r.id)}
+                      >
+                        <Text style={styles.requestBtnText}>拒否</Text>
+                      </Pressable>
+                    </View>
                   </View>
-                ) : null}
-              </ScrollView>
-            )}
+                ))
+              )}
+            </View>
 
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.closeButtonText}>閉じる</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={styles.manageSection}>
+              <Text style={styles.manageSectionTitle}>承認済み</Text>
+              {friendsList.length === 0 ? (
+                <Text style={styles.manageEmptyText}>
+                  登録済みはまだありません。
+                </Text>
+              ) : (
+                friendsList.map((f) => (
+                  <View key={String(f.userId)} style={styles.ownerRow}>
+                    <View style={{ flex: 1 }}>
+                      <TouchableOpacity
+                        onPress={() => navigateToAccount(navigation, f.userId)}
+                        activeOpacity={0.85}
+                        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                      >
+                        <Text style={styles.ownerName} numberOfLines={1}>
+                          {f.displayName || "Friend"}
+                        </Text>
+                      </TouchableOpacity>
+                      {f.friendCode ? (
+                        <Text style={styles.ownerSub}>ID: {f.friendCode}</Text>
+                      ) : null}
+                    </View>
+
+
+                    <Pressable
+                      style={[
+                        styles.copyBtn,
+                        (manageLoading || friendNotifBusy?.[f.userId]) &&
+                          styles.copyBtnDisabled,
+                      ]}
+                      disabled={manageLoading || !!friendNotifBusy?.[f.userId]}
+                      onPress={() => handleToggleFriendNotification(f)}
+                    >
+                      {friendNotifBusy?.[f.userId] ? (
+                        <ActivityIndicator size="small" color="#374151" />
+                      ) : (
+                        <Ionicons
+                          name={
+                            friendNotifMap?.[f.userId] === false
+                              ? "notifications-off-outline"
+                              : "notifications-outline"
+                          }
+                          size={18}
+                          color={
+                            friendNotifMap?.[f.userId] === false
+                              ? "#9CA3AF"
+                              : colors.BRAND_GOLD || colors.GOLD_BUTTON || "#A16207"
+                          }
+                        />
+                      )}
+                    </Pressable>
+
+                    <Pressable
+                      style={[
+                        styles.copyBtn,
+                        manageLoading && styles.copyBtnDisabled,
+                      ]}
+                      disabled={manageLoading}
+                      onPress={() => handleOpenApprovedFriendMenu(f)}
+                    >
+                      <Text style={[styles.actionBtnText, styles.actionBtnDangerText]}>削除</Text>
+                    </Pressable>
+                  </View>
+                ))
+              )}
+            </View>
+
+            {outgoing.length > 0 ? (
+              <View style={styles.manageSection}>
+                <Text style={styles.manageSectionTitle}>申請中（承認待ち）</Text>
+                <Text style={styles.manageHelpText}>
+                  承認されるとフレンド一覧に追加されます。
+                </Text>
+
+                {outgoing.map((o) => (
+                  <View key={String(o.id)} style={styles.ownerRow}>
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.ownerName} numberOfLines={1}>
+                        {o.requestedName || "Friend"}
+                      </Text>
+                      {o.friendCode ? (
+                        <Text style={styles.ownerSub}>ID: {o.friendCode}</Text>
+                      ) : null}
+                      {o.createdAt ? (
+                        <Text style={styles.ownerSub}>
+                          申請日: {formatTimeLabel(o.createdAt)}
+                        </Text>
+                      ) : null}
+                    </View>
+
+                    <View style={styles.pendingActionsCol}>
+                      <Text style={styles.pendingTag}>承認待ち</Text>
+
+                      <View style={styles.pendingActionsRow}>
+                        <Pressable
+                          disabled={manageLoading}
+                          style={[
+                            styles.actionBtn,
+                            manageLoading && styles.actionBtnDisabled,
+                          ]}
+                          onPress={() => handleResendOutgoingRequest(o)}
+                        >
+                          <Text style={styles.actionBtnText}>再送</Text>
+                        </Pressable>
+
+                        <Pressable
+                          disabled={manageLoading}
+                          style={[
+                            styles.actionBtn,
+                            styles.actionBtnDanger,
+                            manageLoading && styles.actionBtnDisabled,
+                          ]}
+                          onPress={() => handleCancelOutgoingRequest(o)}
+                        >
+                          <Text
+                            style={[
+                              styles.actionBtnText,
+                              styles.actionBtnDangerText,
+                            ]}
+                          >
+                            取り下げ
+                          </Text>
+                        </Pressable>
+                      </View>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            ) : null}
+          </ScrollView>
         </View>
       </Modal>
     </SafeAreaView>
@@ -754,20 +1374,21 @@ export default function FriendsScreen() {
 
 function createStyles(COLORS) {
   const TEXT_MAIN = COLORS.TEXT_ON_LIGHT;
-  const TEXT_SUB = "#6B7280";
+  const TEXT_SUB = COLORS.TEXT_ON_LIGHT;
 
   const ACCENT = COLORS.GOLD_BUTTON;
 
   return StyleSheet.create({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.BG_SILVER,
+      backgroundColor: COLORS.PANEL_BG,
     },
     screenContainer: {
       flex: 1,
       paddingTop: 16,
       paddingBottom: 16,
-      alignItems: "center",
+      paddingHorizontal: 18,
+      alignItems: "stretch",
     },
 
     // Emlis ロゴ
@@ -818,6 +1439,21 @@ function createStyles(COLORS) {
       color: COLORS.TITLE_GOLD,
       letterSpacing: 0.8,
     },
+    panelTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    guideTitleButton: {
+      width: 36,
+      height: 32,
+      borderRadius: 12,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: COLORS.FIELD_BG,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      marginLeft: 10,
+    },
 
     panelScroll: {
       flex: 1,
@@ -827,23 +1463,18 @@ function createStyles(COLORS) {
     },
 
     friendPill: {
-      flexDirection: "row",
+      width: 42,
+      height: 38,
+      borderRadius: 12,
       alignItems: "center",
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      borderRadius: 999,
+      justifyContent: "center",
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 4,
     },
 
     lead: {
-      color: COLORS.TEXT_SUBTLE,
+      color: TEXT_SUB,
       fontSize: 12,
       marginBottom: 10,
     },
@@ -872,17 +1503,6 @@ function createStyles(COLORS) {
     left: {
       flexDirection: "row",
       alignItems: "center",
-    },
-    avatar: {
-      width: 34,
-      height: 34,
-      borderRadius: 17,
-      backgroundColor: "#F3F4F6",
-      alignItems: "center",
-      justifyContent: "center",
-      marginRight: 8,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
     },
     name: {
       fontWeight: "700",
@@ -958,237 +1578,289 @@ function createStyles(COLORS) {
     retryText: {
       color: TEXT_MAIN,
       fontSize: 12,
+      fontWeight: "600",
     },
 
-    fab: {
+    // ---- Modal（MyProfile 方式） ----
+    modalBackdrop: {
       position: "absolute",
-      right: 18,
-      bottom: 26,
-      width: 56,
-      height: 56,
-      borderRadius: 28,
-      backgroundColor: ACCENT,
-      alignItems: "center",
-      justifyContent: "center",
-      elevation: 5,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0,0,0,0.25)",
+    },
+
+    manageCard: {
+      position: "absolute",
+      top: 70,
+      left: 20,
+      right: 20,
+      bottom: 70,
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 16,
+      padding: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
       shadowColor: "#000",
       shadowOpacity: 0.18,
-      shadowRadius: 12,
-      shadowOffset: { width: 0, height: 8 },
-    },
-
-    modalOverlay: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "rgba(0,0,0,0.4)",
-    },
-    modalContent: {
-      backgroundColor: COLORS.FIELD_BG,
-      padding: 18,
-      borderRadius: 16,
-      width: "86%",
-      elevation: 10,
-      shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 20,
+      shadowRadius: 22,
       shadowOffset: { width: 0, height: 12 },
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      elevation: 12,
     },
-
-    modalHeaderRow: {
+    manageHeader: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      paddingBottom: 8,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      marginBottom: 10,
     },
-    iconBtn: {
+    manageTitle: {
+      fontSize: 15,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    manageCloseBtn: {
+      paddingHorizontal: 6,
+      paddingVertical: 4,
+      borderRadius: 10,
+    },
+
+    manageIntroCard: {
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
       paddingHorizontal: 10,
-      paddingVertical: 6,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-    },
-
-    modalTitle: {
-      fontSize: 18,
-      fontWeight: "800",
-      marginBottom: 10,
-      color: TEXT_MAIN,
-    },
-
-    myCodeBox: {
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      borderRadius: 12,
       paddingVertical: 10,
-      paddingHorizontal: 12,
-      backgroundColor: COLORS.FIELD_BG,
       marginBottom: 10,
     },
-    myCodeLabel: {
+    manageIntroText: {
       fontSize: 12,
-      color: COLORS.TEXT_SUBTLE,
-      marginBottom: 4,
-    },
-    myCodeValue: {
-      fontSize: 16,
-      fontWeight: "800",
-      color: TEXT_MAIN,
-      letterSpacing: 0.8,
+      lineHeight: 18,
+      color: TEXT_SUB,
     },
 
-    tabRow: {
+    manageScroll: { flex: 1 },
+    manageScrollContent: { paddingBottom: 18 },
+
+    manageSection: { marginBottom: 14 },
+    manageSectionHeaderRow: {
       flexDirection: "row",
+      alignItems: "center",
       justifyContent: "space-between",
-      marginBottom: 10,
-      gap: 8,
+      marginBottom: 6,
     },
-    tabBtn: {
-      flex: 1,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
+    manageSectionTitle: {
+      fontSize: 13,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
+    },
+    manageHelpText: {
+      fontSize: 11,
+      lineHeight: 16,
+      color: TEXT_SUB,
+      marginTop: 6,
+    },
+
+    codeRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+
+    copyBtn: {
+      marginLeft: 8,
+      paddingHorizontal: 10,
       paddingVertical: 8,
       borderRadius: 999,
-      alignItems: "center",
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
     },
-    tabBtnActive: {
-      backgroundColor: ACCENT,
-      borderColor: ACCENT,
-    },
-    tabText: {
-      fontWeight: "800",
-      color: TEXT_MAIN,
-      fontSize: 12,
-    },
-    tabTextActive: {
-      color: "#fff",
+    copyBtnDisabled: {
+      opacity: 0.5,
     },
 
-    sectionTitle: {
+    codePill: {
+      alignSelf: "flex-start",
+      borderRadius: 999,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      backgroundColor: COLORS.PANEL_BG,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+    },
+    codeText: {
       fontSize: 13,
       fontWeight: "800",
-      color: TEXT_MAIN,
-      marginBottom: 6,
+      letterSpacing: 0.5,
+      color: COLORS.TEXT_ON_LIGHT,
     },
 
-    helpText: {
-      fontSize: 12,
-      color: COLORS.TEXT_SUBTLE,
-      marginBottom: 10,
-    },
-
-    helpText2: {
-      fontSize: 11,
-      color: COLORS.TEXT_SUBTLE,
-      marginTop: 10,
-      textAlign: "center",
-    },
-
-    input: {
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 12,
-      paddingVertical: 10,
-      paddingHorizontal: 12,
-      color: TEXT_MAIN,
-      fontSize: 14,
-    },
-
-    primaryBtn: {
-      marginTop: 10,
-      paddingVertical: 10,
-      alignItems: "center",
-      backgroundColor: ACCENT,
-      borderRadius: 999,
-    },
-    primaryBtnText: {
-      color: "#fff",
-      fontWeight: "800",
-    },
-
-    manageErrorText: {
-      color: "#B91C1C",
-      fontSize: 12,
-      marginBottom: 6,
-      textAlign: "center",
-    },
-
-    modalRow: {
+    manageRow: {
       flexDirection: "row",
       alignItems: "center",
-      marginVertical: 6,
     },
-    friendName: {
-      fontSize: 16,
+    manageInput: {
+      flex: 1,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 10,
+      paddingVertical: Platform.OS === "ios" ? 10 : 8,
+      fontSize: 13,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    smallButton: {
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 70,
+      marginLeft: 8,
+    },
+    smallButtonDisabled: {
+      opacity: 0.5,
+    },
+    smallButtonText: {
+      color: "#FFFFFF",
+      fontWeight: "800",
+      fontSize: 13,
+    },
+
+    manageMessage: {
+      marginTop: 8,
+      fontSize: 12,
+      lineHeight: 16,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    manageEmptyText: {
+      fontSize: 12,
       color: TEXT_SUB,
     },
 
-    requestRow: {
-      flexDirection: "row",
-      alignItems: "center",
+    requestCard: {
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 10,
       paddingVertical: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: "#EEE",
-      gap: 8,
+      marginBottom: 8,
     },
     requestName: {
-      fontSize: 14,
-      fontWeight: "800",
-      color: TEXT_MAIN,
+      fontSize: 13,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
     },
-    requestTime: {
-      marginTop: 2,
-      fontSize: 11,
-      color: COLORS.TEXT_SUBTLE,
+    requestActions: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      marginTop: 8,
     },
-
-    smallBtn: {
+    requestBtn: {
       paddingHorizontal: 12,
       paddingVertical: 8,
       borderRadius: 999,
-      backgroundColor: ACCENT,
     },
-    smallBtnText: {
-      color: "#fff",
-      fontWeight: "800",
+    requestBtnSpacer: { marginLeft: 8 },
+    requestBtnOk: { backgroundColor: "#10B981" },
+    requestBtnNo: { backgroundColor: "#EF4444" },
+    requestBtnDisabled: { opacity: 0.6 },
+    requestBtnText: {
+      color: "#FFFFFF",
       fontSize: 12,
+      fontWeight: "800",
     },
 
-    smallBtnOutline: {
-      backgroundColor: "transparent",
+    ownerRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 14,
       borderWidth: 1,
-      borderColor: ACCENT,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
+      marginBottom: 8,
     },
-    smallBtnTextOutline: {
-      color: ACCENT,
+    ownerName: {
+      fontSize: 13,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    ownerSub: {
+      fontSize: 11,
+      color: TEXT_SUB,
+      marginTop: 2,
     },
 
-    pendingPill: {
+    ghostBtn: {
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+    },
+    ghostBtnText: {
+      fontSize: 12,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+
+    pendingTag: {
+      fontSize: 11,
+      fontWeight: "800",
+      color: TEXT_SUB,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+    },
+    pendingActionsCol: {
+      alignItems: "flex-end",
+      justifyContent: "center",
+      marginLeft: 10,
+    },
+    pendingActionsRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 6,
+    },
+
+    actionBtn: {
       paddingHorizontal: 10,
       paddingVertical: 6,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      color: TEXT_SUB,
-      fontSize: 12,
-      overflow: "hidden",
+      marginLeft: 8,
     },
-
-    closeButton: {
-      marginTop: 16,
-      paddingVertical: 10,
-      alignItems: "center",
-      backgroundColor: ACCENT,
-      borderRadius: 999,
+    actionBtnText: {
+      fontSize: 11,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
     },
-    closeButtonText: {
-      color: "#fff",
-      fontWeight: "700",
+    actionBtnDanger: {
+      // border は同じだが、テキスト色で「取り下げ」を示す
+    },
+    actionBtnDangerText: {
+      color: "#B91C1C",
+    },
+    actionBtnDisabled: {
+      opacity: 0.5,
     },
   });
 }

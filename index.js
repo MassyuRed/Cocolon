@@ -37,6 +37,21 @@ if (!Array.prototype.findLastIndex) {
   });
 }
 
+// ------------------------------------------------------------
+// Push: FCM background handler
+// - Needed for data-only messages when app is in background/killed
+// - If you rely on "notification" payload, Android shows notifications automatically
+// ------------------------------------------------------------
+import messaging from '@react-native-firebase/messaging';
+
+messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  try {
+    console.log('[push] setBackgroundMessageHandler:', remoteMessage?.messageId, remoteMessage?.data || null);
+  } catch {
+    // noop
+  }
+});
+
 import App from './App';
 import { name as appName } from './app.json';
 

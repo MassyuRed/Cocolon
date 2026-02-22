@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "697599602296",
+    "project_id": "coclon-69a3f",
+    "storage_bucket": "coclon-69a3f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697599602296:android:4e3271b7dd04cdb8d7878d",
+        "android_client_info": {
+          "package_name": "com.anonymous.cocolonmvp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBcVJBkA-uyFWe5556GOuIUq_Ka41YLFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697599602296:android:4e8d079b37f3e5aad7878d",
+        "android_client_info": {
+          "package_name": "com.cocolon.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBcVJBkA-uyFWe5556GOuIUq_Ka41YLFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

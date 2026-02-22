@@ -24,6 +24,8 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.3.2")
         // ✅ Kotlin Gradle Plugin
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}")
+        // ✅ Google Services Gradle Plugin（Firebase）
+        classpath("com.google.gms:google-services:4.4.4")
         // ❌ React Native Gradle Plugin は未使用（classpath を追加しない）
     }
 }

@@ -1,0 +1,89 @@
+diff --git a/node_modules/react-native-reanimated/Common/cpp/NativeModules/NativeReanimatedModule.cpp b/node_modules/react-native-reanimated/Common/cpp/NativeModules/NativeReanimatedModule.cpp
+--- a/node_modules/react-native-reanimated/Common/cpp/NativeModules/NativeReanimatedModule.cpp
++++ b/node_modules/react-native-reanimated/Common/cpp/NativeModules/NativeReanimatedModule.cpp
+@@ -152,7 +152,7 @@
+     const jsi::Value &worklet) {
+   auto shareableWorklet = extractShareableOrThrow<ShareableWorklet>(
+       rt, worklet, "[Reanimated] Only worklets can be scheduled to run on UI.");
+-  uiScheduler_->scheduleOnUI([=] {
++  uiScheduler_->scheduleOnUI([=, this] {
+ #if JS_RUNTIME_HERMES
+     // JSI's scope defined here allows for JSI-objects to be cleared up after
+     // each runtime loop. Within these loops we typically create some temporary
+@@ -227,7 +227,7 @@
+       rt, worklet, "[Reanimated] Event handler must be a worklet.");
+   int emitterReactTagInt = emitterReactTag.asNumber();
+ 
+-  uiScheduler_->scheduleOnUI([=] {
++  uiScheduler_->scheduleOnUI([=, this] {
+     auto handler = std::make_shared<WorkletEventHandler>(
+         newRegistrationId, eventNameStr, emitterReactTagInt, handlerShareable);
+     eventHandlerRegistry_->registerEventHandler(std::move(handler));
+@@ -241,7 +241,7 @@
+     const jsi::Value &registrationId) {
+   uint64_t id = registrationId.asNumber();
+   uiScheduler_->scheduleOnUI(
+-      [=] { eventHandlerRegistry_->unregisterEventHandler(id); });
++      [=, this] { eventHandlerRegistry_->unregisterEventHandler(id); });
+ }
+ 
+ jsi::Value NativeReanimatedModule::getViewProp(
+@@ -258,7 +258,7 @@
+   const auto funPtr = std::make_shared<jsi::Function>(
+       callback.getObject(rnRuntime).asFunction(rnRuntime));
+ 
+-  uiScheduler_->scheduleOnUI([=]() {
++  uiScheduler_->scheduleOnUI([=, this]() {
+     jsi::Runtime &uiRuntime = uiWorkletRuntime_->getJSIRuntime();
+     const auto propNameValue =
+         jsi::String::createFromUtf8(uiRuntime, propNameStr);
+@@ -266,7 +266,7 @@
+         obtainPropFunction_(uiRuntime, viewTagInt, propNameValue);
+     const auto resultStr = resultValue.asString(uiRuntime).utf8(uiRuntime);
+ 
+-    jsScheduler_->scheduleOnJS([=](jsi::Runtime &rnRuntime) {
++    jsScheduler_->scheduleOnJS([=, this](jsi::Runtime &rnRuntime) {
+       const auto resultValue =
+           jsi::String::createFromUtf8(rnRuntime, resultStr);
+       funPtr->call(rnRuntime, resultValue);
+@@ -712,7 +712,7 @@
+       handlerWorklet,
+       "[Reanimated] Keyboard event handler must be a worklet.");
+   return subscribeForKeyboardEventsFunction_(
+-      [=](int keyboardState, int height) {
++      [=, this](int keyboardState, int height) {
+         uiWorkletRuntime_->runGuarded(
+             shareableHandler, jsi::Value(keyboardState), jsi::Value(height));
+       },
+
+diff --git a/node_modules/react-native-reanimated/Common/cpp/ReanimatedRuntime/WorkletRuntimeDecorator.cpp b/node_modules/react-native-reanimated/Common/cpp/ReanimatedRuntime/WorkletRuntimeDecorator.cpp
+--- a/node_modules/react-native-reanimated/Common/cpp/ReanimatedRuntime/WorkletRuntimeDecorator.cpp
++++ b/node_modules/react-native-reanimated/Common/cpp/ReanimatedRuntime/WorkletRuntimeDecorator.cpp
+@@ -3,6 +3,7 @@
+ #include "ReanimatedJSIUtils.h"
+ #include "Shareables.h"
+ #include "WorkletRuntime.h"
++#include <vector>
+ 
+ #ifdef ANDROID
+ #include "Logger.h"
+@@ -105,13 +106,14 @@
+             auto argsArray =
+                 shareableArgs->getJSValue(rt).asObject(rt).asArray(rt);
+-             auto argsSize = argsArray.size(rt);
++             const size_t argsSize = static_cast<size_t>(argsArray.size(rt));
+-            // number of arguments is typically relatively small so it is ok to
+-            // to use VLAs here, hence disabling the lint rule
+-            jsi::Value args[argsSize]; // NOLINT(runtime/arrays)
++            // number of arguments is typically relatively small; use std::vector
++            // to avoid VLA issues with newer NDK/Clang settings (-Werror).
++            std::vector<jsi::Value> args(argsSize);
+             for (size_t i = 0; i < argsSize; i++) {
+               args[i] = argsArray.getValueAtIndex(rt, i);
+             }
+-            remoteFun.asObject(rt).asFunction(rt).call(rt, args, argsSize);
++            const jsi::Value* argv = argsSize ? args.data() : nullptr;
++            remoteFun.asObject(rt).asFunction(rt).call(rt, argv, argsSize);
+           }
+         });
+       });

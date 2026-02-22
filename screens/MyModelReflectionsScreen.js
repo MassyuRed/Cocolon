@@ -1,0 +1,2908 @@
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Keyboard,
+  Modal,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+
+import { useTheme } from "../theme/ThemeContext";
+import { supabase } from "../lib/supabase";
+import { getCurrentUserId } from "../lib/user";
+import { useUnread } from "../UnreadContext";
+import { useSubscription } from "../SubscriptionContext";
+
+// UI (Design System)
+import CocolonButton from "../components/CocolonButton";
+import CocolonPressable from "../components/CocolonPressable";
+import CocolonBackButton from "../components/CocolonBackButton";
+import { makeUiTokens } from "../ui/uiTokens";
+
+/**
+ * MyModelReflectionsScreen (2026-02 New Q&A Architecture)
+ * -------------------------------------------
+ * - 自由入力Q&A（/mymodel/infer）を廃止
+ * - 「質問を生成」→ リストから選択 → 応答本文を表示
+ * - RN側は基本表示のみ（処理は MashOS API 側へ）
+ */
+
+const PANEL_MIN_HEIGHT = 690;
+
+// ---- API base ----
+// Prefer Expo env var if present (avoid hard-coding across dev/prod)
+const API_BASE = String(
+  (typeof process !== "undefined" && process?.env?.EXPO_PUBLIC_MYMODEL_API_URL) ||
+    "https://mashos-api.onrender.com"
+).replace(/\/+$/, "");
+
+// New Q&A endpoints (MashOS)
+const QNA_LIST_ENDPOINT = `${API_BASE}/mymodel/qna/list`;
+const QNA_DETAIL_ENDPOINT = `${API_BASE}/mymodel/qna/detail`;
+const QNA_VIEW_ENDPOINT = `${API_BASE}/mymodel/qna/view`;
+// Echoes / Discoveries (MashOS)
+const QNA_ECHOES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/submit`;
+const QNA_ECHOES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/history`;
+const QNA_DISCOVERIES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/submit`;
+const QNA_DISCOVERIES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/history`;
+const QNA_ECHOES_DELETE_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/delete`;
+const QNA_DISCOVERIES_DELETE_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/delete`;
+
+const SORT_PRESET = Object.freeze({
+  newest: { sort: "newest" },
+  resonances: { sort: "popular", metric: "resonances" },
+  discoveries: { sort: "popular", metric: "discoveries" },
+});
+
+// Echoes / Discoveries UI labels (UI語彙は人間思考)
+const ECHO_STRENGTH_OPTIONS = Object.freeze([
+  { key: "small", label: "静かに響いた", subLabel: "響き（小）" },
+  { key: "medium", label: "心が動いた", subLabel: "響き（中）" },
+  { key: "large", label: "深く響いた", subLabel: "響き（大）" },
+]);
+
+const DISCOVERY_CATEGORY_OPTIONS = Object.freeze([
+  { key: "new_perspective", label: "新しい視点だった" },
+  { key: "different_fun", label: "自分と違って面白い" },
+  { key: "well_worded", label: "言語化がすごい" },
+  { key: "not_sorted", label: "まだ整理できない" },
+  { key: "shocked", label: "衝撃を受けた" },
+]);
+
+function buildErrorMessage(err) {
+  if (!err) return "エラーが発生しました。";
+  if (err?.name === "AbortError")
+    return "接続がタイムアウトしました（ネットワークを確認してください）。";
+  const msg = String(err?.message || err);
+  if (/Network/i.test(msg)) return "サーバーへの接続に失敗しました。";
+  return `エラー：${msg}`;
+}
+
+
+function formatMetricCount(value) {
+  const n = Number(value ?? 0) || 0;
+  return n > 999 ? "999+" : String(n);
+}
+
+
+// navigation の state を再帰的に探索して、指定 routeName が存在するか確認
+export default function MyModelReflectionsScreen({ route, onOpenSubscription, onTabUnreadChange } = {}) {
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
+  const navigation = useNavigation();
+
+  const isIOS = Platform.OS === "ios";
+  const { height: windowHeight } = useWindowDimensions();
+  const [keyboardInset, setKeyboardInset] = useState(0);
+
+  // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える（InputScreen と同仕様）
+  const inputMaxHeight = useMemo(() => {
+    const h = windowHeight || 0;
+    if (!h) return 520;
+
+    // キーボード表示中は、画面に収まる範囲を優先して上限を決める（それ以上は TextInput 内でスクロール）
+    if (keyboardInset > 0) {
+      const remaining = h - keyboardInset;
+      return Math.max(160, Math.floor(remaining - 60));
+    }
+
+    // キーボード未表示時は、画面の大半まで伸ばせるようにする
+    return Math.max(260, Math.floor(h * 0.75));
+  }, [windowHeight, keyboardInset]);
+
+  // メモ入力がキーボードに隠れないようにスクロール追従（InputScreen と同仕様）
+  const modalLastFocusTargetRef = useRef(null);
+  const modalLastScrollRef = useRef(null);
+
+  const echoesModalScrollRef = useRef(null);
+  const discoveryModalScrollRef = useRef(null);
+
+  const scrollToFocusedInput = useCallback((extraOffset = 110) => {
+    const sv = modalLastScrollRef.current;
+    const target = modalLastFocusTargetRef.current;
+    if (!sv || !target) return;
+    try {
+      sv.scrollResponderScrollNativeHandleToKeyboard(target, extraOffset, true);
+    } catch {
+      // noop
+    }
+  }, []);
+
+  useEffect(() => {
+    const showEvt =
+      Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
+    const hideEvt =
+      Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
+
+    const onShow = (e) => {
+      const h = e?.endCoordinates?.height ?? 0;
+      setKeyboardInset(h);
+      requestAnimationFrame(() => {
+        scrollToFocusedInput();
+      });
+    };
+
+    const onHide = () => {
+      setKeyboardInset(0);
+    };
+
+    const subShow = Keyboard.addListener(showEvt, onShow);
+    const subHide = Keyboard.addListener(hideEvt, onHide);
+
+    return () => {
+      subShow.remove();
+      subHide.remove();
+    };
+  }, [scrollToFocusedInput]);
+
+  const { setUnread, getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
+  const { myModelRangeLabel } = useSubscription();
+
+  // Tab reselect helper: used to ignore async results after a "reset to main"
+  const resetSeqRef = useRef(0);
+
+  // Prefetch freshness
+  const PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
+
+  // 照会対象（フォロー一覧などから遷移した場合は route params で指定）
+  const initialViewedUserId =
+    route?.params?.viewedUserId ||
+    route?.params?.targetUserId ||
+    route?.params?.userId ||
+    null;
+
+  // 画面内で「今どのユーザーのMyModelを見ているか」を切り替え可能にする
+  const [activeViewedUserId, setActiveViewedUserId] = useState(
+    initialViewedUserId ? String(initialViewedUserId) : null
+  );
+
+  // viewer（自分）の user_id（表示/フォロー一覧取得用）
+  const [viewerUserId, setViewerUserId] = useState(null);
+
+  // 現在の target（MyModel所有者）の表示名
+  const [targetDisplayName, setTargetDisplayName] = useState("（取得中）");
+  const [targetNameLoading, setTargetNameLoading] = useState(false);
+
+  // Follow picker（フォロー中ユーザーの一覧）
+  const [userPickerVisible, setUserPickerVisible] = useState(false);
+  const [followingLoading, setFollowingLoading] = useState(false);
+  const [followingError, setFollowingError] = useState("");
+  const [followingUsers, setFollowingUsers] = useState([]);
+
+  // --- UI state ---
+  const [pickerVisible, setPickerVisible] = useState(false);
+  const [sortMode, setSortMode] = useState("newest"); // newest | resonances | discoveries
+
+  const [listLoading, setListLoading] = useState(false);
+  const [listError, setListError] = useState("");
+  const [qnaItems, setQnaItems] = useState([]);
+  const [listMeta, setListMeta] = useState(null);
+
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [detailLoadingId, setDetailLoadingId] = useState(null);
+  const [selected, setSelected] = useState(null);
+
+  const [echoesDeleting, setEchoesDeleting] = useState(false);
+
+  // --- Echoes (響き) ---
+  const [echoesModalVisible, setEchoesModalVisible] = useState(false);
+  const [echoesStrength, setEchoesStrength] = useState(null); // small|medium|large
+  const [echoesMemo, setEchoesMemo] = useState("");
+  // 展開式メモ入力（InputScreen と同仕様）
+  const [echoesMemoActive, setEchoesMemoActive] = useState(false);
+  const echoesMemoInputRef = useRef(null);
+  const [echoesMemoContentHeight, setEchoesMemoContentHeight] = useState(44);
+  const [echoesSubmitting, setEchoesSubmitting] = useState(false);
+  const [echoesSubmitError, setEchoesSubmitError] = useState("");
+
+  // --- Discoveries (気づき) ---
+  const [discoveryModalVisible, setDiscoveryModalVisible] = useState(false);
+  const [discoveryCategory, setDiscoveryCategory] = useState(null);
+  const [discoveryMemo, setDiscoveryMemo] = useState("");
+  // 展開式メモ入力（InputScreen と同仕様）
+  const [discoveryMemoActive, setDiscoveryMemoActive] = useState(false);
+  const discoveryMemoInputRef = useRef(null);
+  const [discoveryMemoContentHeight, setDiscoveryMemoContentHeight] = useState(44);
+  const [discoverySubmitting, setDiscoverySubmitting] = useState(false);
+  const [discoveryDeleting, setDiscoveryDeleting] = useState(false);
+  const [discoverySubmitError, setDiscoverySubmitError] = useState("");
+
+  // My (viewer) latest Discovery for the selected Reflection
+  // - Used to show "発見済み" state and to prefill the modal in view mode.
+  const [myDiscoveryLatest, setMyDiscoveryLatest] = useState(null);
+  const [myDiscoveryLatestLoading, setMyDiscoveryLatestLoading] = useState(false);
+  const [myDiscoveryLatestError, setMyDiscoveryLatestError] = useState("");
+
+
+  // ---------------------------------------------------------
+// Tab reselect (when already on MyModel tab)
+// - Re-tapping the active tab returns to the "main" state:
+//   closes modals and clears the selected Reflection detail.
+// ---------------------------------------------------------
+const resetToMain = useCallback(() => {
+  resetSeqRef.current += 1;
+
+  // close modal-like UIs
+  setPickerVisible(false);
+  setUserPickerVisible(false);
+  setEchoesModalVisible(false);
+  setDiscoveryModalVisible(false);
+  // clear detail selection
+  setSelected(null);
+
+  // best-effort: clear modal inputs/errors so they don't persist
+  setEchoesStrength(null);
+  setEchoesMemo("");
+  setEchoesSubmitError("");
+  setDiscoveryCategory(null);
+  setDiscoveryMemo("");
+  setDiscoverySubmitError("");
+
+  setMyDiscoveryLatest(null);
+  setMyDiscoveryLatestLoading(false);
+  setMyDiscoveryLatestError("");
+
+  // best-effort: stop spinners / clear fetched modal data
+  setDetailLoading(false);
+  setDetailLoadingId(null);
+}, []);
+
+useEffect(() => {
+  if (!navigation?.addListener) return;
+
+  const unsubscribe = navigation.addListener("tabPress", () => {
+    // Only when re-tapping the already-focused tab.
+    if (navigation.isFocused()) {
+      resetToMain();
+    }
+  });
+
+  return unsubscribe;
+}, [navigation, resetToMain]);
+
+  // 画面遷移（Account など）で MyModelScreen が裏に回ったとき、
+  // Modal が「表示状態のまま残る」ことでタップが吸われる事故を防ぐ
+  useEffect(() => {
+    if (!navigation?.addListener) return;
+    const unsubscribe = navigation.addListener("blur", () => {
+          setPickerVisible(false);
+      setUserPickerVisible(false);
+      setEchoesModalVisible(false);
+      setDiscoveryModalVisible(false);
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  // BottomTab の未読バッジ（赤丸）連動（UnreadContext）
+  // - 画面内の "New"（is_new）を検知して、タブ側の赤●に同期する
+  // - 起動時prefetchで付いた赤●を、qnaItems初期空で誤って消さないため、
+  //   「QnA一覧を1回でも取得した後（listMetaがある時）」だけ qnaItems 由来で同期する
+  useEffect(() => {
+    if (!listMeta) return;
+
+    const hasUnread = (qnaItems || []).some((x) => !!x?.is_new);
+
+    try {
+      setUnread("MyModel", "qnaNew", hasUnread);
+    } catch {
+      // noop
+    }
+
+    // backward compat（過去実装の onTabUnreadChange が残っていても同期できるように）
+    try {
+      if (typeof onTabUnreadChange === "function") {
+        onTabUnreadChange(hasUnread);
+      }
+    } catch {
+      // noop
+    }
+  }, [qnaItems, listMeta, setUnread, onTabUnreadChange]);
+
+  // route params が変わった場合も追従（例：他画面から viewedUserId で遷移）
+  useEffect(() => {
+    setActiveViewedUserId(initialViewedUserId ? String(initialViewedUserId) : null);
+  }, [initialViewedUserId]);
+
+  // viewer user id を取得（MyModel表示名 / フォロー一覧取得に利用）
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const id = await getCurrentUserId();
+        if (!cancelled) setViewerUserId(id ? String(id) : null);
+      } catch {
+        if (!cancelled) setViewerUserId(null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+
+  // 「MyModel：ユーザー名」表示用
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      const targetId = String(activeViewedUserId || viewerUserId || "");
+      if (!targetId) {
+        if (!cancelled) setTargetDisplayName("未ログイン");
+        return;
+      }
+
+      setTargetNameLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("display_name")
+          .eq("id", targetId)
+          .single();
+
+        if (error) throw error;
+
+        if (!cancelled) {
+          const nm = String(data?.display_name || "").trim();
+          setTargetDisplayName(nm || "（未設定）");
+        }
+      } catch {
+        if (!cancelled) setTargetDisplayName("（取得失敗）");
+      } finally {
+        if (!cancelled) setTargetNameLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [activeViewedUserId, viewerUserId]);
+
+
+  const openSubscriptionSelect = () => {
+    try {
+      if (typeof onOpenSubscription === "function") {
+        onOpenSubscription();
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
+    try {
+      if (navigation && typeof navigation.navigate === "function") {
+        navigation.navigate("SubscriptionSelect");
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
+    Alert.alert(
+      "プラン画面を開けません",
+      "プラン画面を開けませんでした。もう一度お試しください。"
+    );
+  };
+
+  async function getAuthContext() {
+    let userId = null;
+    let accessToken = null;
+    try {
+      userId = await getCurrentUserId();
+    } catch (e) {
+      console.warn("MyModelScreen: failed to resolve userId", e);
+    }
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      accessToken = sessionData?.session?.access_token ?? null;
+    } catch (e) {
+      console.warn("MyModelScreen: failed to resolve auth session", e);
+    }
+    return { userId, accessToken };
+  }
+
+
+  const loadFollowingUsers = useCallback(async () => {
+    setFollowingLoading(true);
+    setFollowingError("");
+
+    try {
+      const myUserId = await getCurrentUserId().catch(() => null);
+      if (!myUserId) {
+        setFollowingUsers([]);
+        setFollowingError("ログインが必要です");
+        return;
+      }
+
+      const { data: linkRows, error: linkErr } = await supabase
+        .from("myprofile_links")
+        .select("owner_user_id")
+        .eq("viewer_user_id", myUserId);
+
+      if (linkErr) throw linkErr;
+
+      const ownerIds = (linkRows || [])
+        .map((x) => x?.owner_user_id)
+        .filter(Boolean)
+        .map((x) => String(x));
+
+      if (ownerIds.length === 0) {
+        setFollowingUsers([]);
+        return;
+      }
+
+      const { data: profRows, error: profErr } = await supabase
+        .from("profiles")
+        .select("id, display_name")
+        .in("id", ownerIds);
+
+      if (profErr) throw profErr;
+
+      const nameMap = new Map(
+        (profRows || []).map((p) => [
+          String(p.id),
+          String(p.display_name || "").trim(),
+        ])
+      );
+
+      const uniq = [];
+      const seen = new Set();
+      for (const id of ownerIds) {
+        if (seen.has(id)) continue;
+        seen.add(id);
+        const nm = nameMap.get(id);
+        uniq.push({ user_id: id, display_name: nm || "（未設定）" });
+      }
+
+      setFollowingUsers(uniq);
+    } catch (e) {
+      setFollowingError(String(e?.message || e));
+      setFollowingUsers([]);
+    } finally {
+      setFollowingLoading(false);
+    }
+  }, []);
+
+  const openUserPicker = useCallback(async () => {
+    const myUserId = await getCurrentUserId().catch(() => null);
+    if (!myUserId) {
+      Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+      return;
+    }
+
+    setUserPickerVisible(true);
+    await loadFollowingUsers();
+  }, [loadFollowingUsers]);
+
+  const selectTargetUser = useCallback((nextUserId) => {
+    const uid = nextUserId ? String(nextUserId) : null;
+    setActiveViewedUserId(uid);
+    setUserPickerVisible(false);
+
+    // 表示中の応答やメタ情報はリセット（別ユーザーの混入を避ける）
+    setSelected(null);
+    setQnaItems([]);
+    setListMeta(null);
+    setListError("");
+  }, []);
+
+  const resolveTargetUserId = useCallback(
+    async (viewerUserId) => {
+      const viewedId = activeViewedUserId ? String(activeViewedUserId) : null;
+      if (viewedId) return viewedId;
+      return String(viewerUserId || "");
+    },
+    [activeViewedUserId]
+  );
+
+  const buildListUrl = useCallback(
+    (targetUserId, mode) => {
+      const preset = SORT_PRESET[String(mode || "newest")] || SORT_PRESET.newest;
+      const params = new URLSearchParams();
+      if (targetUserId) params.append("target_user_id", String(targetUserId));
+      if (preset.sort) params.append("sort", preset.sort);
+      if (preset.metric) params.append("metric", preset.metric);
+      return `${QNA_LIST_ENDPOINT}?${params.toString()}`;
+    },
+    []
+  );
+
+  const loadQnaList = useCallback(
+    async (mode, opts) => {
+      const silent = !!opts?.silent;
+      if (!silent) {
+        setListLoading(true);
+      }
+      setListError("");
+      try {
+        const { userId, accessToken } = await getAuthContext();
+        if (!accessToken) {
+          Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+          return;
+        }
+
+        const targetUserId = await resolveTargetUserId(userId);
+        const url = buildListUrl(targetUserId, mode);
+
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+          throw new Error(String(msg));
+        }
+
+        const items = Array.isArray(json?.items) ? json.items : [];
+        const meta = json?.meta || null;
+
+        setQnaItems(items);
+        setListMeta(meta);
+
+        // cache（次回表示を即時化）
+        try {
+          const cacheKey = `qnaList:${String(targetUserId || "").trim()}:${String(mode || "newest").trim() || "newest"}`;
+          if (String(targetUserId || "").trim()) {
+            setPrefetch("MyModel", cacheKey, {
+              userId: userId || null,
+              targetUserId,
+              mode: String(mode || "newest"),
+              items,
+              meta,
+            });
+          }
+        } catch {
+          // noop
+        }
+      } catch (e) {
+        setListError(String(e?.message || e));
+      } finally {
+        setListLoading(false);
+      }
+    },
+    [buildListUrl, resolveTargetUserId]
+  );
+
+  const openPicker = useCallback(async () => {
+    setPickerVisible(true);
+
+    // まずキャッシュ（アプリ起動時プリロード）を即反映
+    try {
+      const targetId = activeViewedUserId || viewerUserId;
+      const cacheKey = targetId ? `qnaList:${String(targetId)}:${String(sortMode || "newest")}` : null;
+      const entry = cacheKey
+        ? getPrefetchEntryFresh
+          ? getPrefetchEntryFresh("MyModel", cacheKey, PREFETCH_MAX_AGE_MS)
+          : getPrefetchEntry("MyModel", cacheKey)
+        : null;
+      const cached = entry?.value;
+      const cachedItems = Array.isArray(cached?.items) ? cached.items : null;
+      const cachedMeta = cached?.meta || null;
+
+      if (cachedItems) {
+        setQnaItems(cachedItems);
+        setListMeta(cachedMeta);
+        setListError("");
+        setListLoading(false);
+
+        // 最新はバックグラウンドで更新
+        loadQnaList(sortMode, { silent: true });
+        return;
+      }
+    } catch {
+      // noop
+    }
+
+    await loadQnaList(sortMode);
+  }, [
+    activeViewedUserId,
+    viewerUserId,
+    sortMode,
+    loadQnaList,
+    getPrefetchEntry,
+    getPrefetchEntryFresh,
+  ]);
+
+  const changeSortMode = useCallback(
+    async (nextMode) => {
+      const m = String(nextMode || "newest");
+      setSortMode(m);
+
+      // まずキャッシュを即反映して、切替の体感を速くする
+      try {
+        const targetId = activeViewedUserId || viewerUserId;
+        const cacheKey = targetId ? `qnaList:${String(targetId)}:${String(m || "newest")}` : null;
+        const entry = cacheKey
+          ? getPrefetchEntryFresh
+            ? getPrefetchEntryFresh("MyModel", cacheKey, PREFETCH_MAX_AGE_MS)
+            : getPrefetchEntry("MyModel", cacheKey)
+          : null;
+        const cached = entry?.value;
+        const cachedItems = Array.isArray(cached?.items) ? cached.items : null;
+        const cachedMeta = cached?.meta || null;
+
+        if (cachedItems) {
+          setQnaItems(cachedItems);
+          setListMeta(cachedMeta);
+          setListError("");
+          setListLoading(false);
+
+          // 最新はバックグラウンドで更新
+          await loadQnaList(m, { silent: true });
+          return;
+        }
+      } catch {
+        // noop
+      }
+
+      await loadQnaList(m);
+    },
+    [activeViewedUserId, viewerUserId, loadQnaList, getPrefetchEntry, getPrefetchEntryFresh]
+  );
+
+  const fetchDetail = useCallback(
+    async (item) => {
+      if (!item?.q_instance_id) return;
+      if (detailLoading) return;
+      const resetSeq = resetSeqRef.current;
+      setDetailLoadingId(String(item.q_instance_id));
+      setDetailLoading(true);
+      try {
+        const { userId, accessToken } = await getAuthContext();
+        if (!accessToken) {
+          Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+          return;
+        }
+
+        const params = new URLSearchParams();
+        params.append("q_instance_id", String(item.q_instance_id));
+        const url = `${QNA_DETAIL_ENDPOINT}?${params.toString()}`;
+
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+          throw new Error(String(msg));
+        }
+
+
+        // If the user re-tapped the tab to reset while this request was in-flight, ignore the result.
+        if (resetSeq !== resetSeqRef.current) return;
+        setSelected(json);
+        setPickerVisible(false);
+
+        // view event (best-effort)
+        try {
+          const res2 = await fetch(QNA_VIEW_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify({
+              q_instance_id: String(item.q_instance_id),
+              q_key: String(item.q_key || ""),
+            }),
+          });
+          const j2 = await res2.json().catch(() => null);
+          if (res2.ok && j2) {
+            // Update detail counts
+            setSelected((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    views: j2.views ?? prev.views,
+                    resonances: j2.resonances ?? prev.resonances,
+                    is_new: false,
+                  }
+                : prev
+            );
+
+            // Update list item (New badge off + views)
+            setQnaItems((prev) =>
+              (prev || []).map((x) => {
+                if (x?.q_instance_id !== item.q_instance_id) return x;
+                return {
+                  ...x,
+                  views: j2.views ?? x.views,
+                  resonances: j2.resonances ?? x.resonances,
+                  is_new: false,
+                };
+              })
+            );
+          }
+        } catch {
+          // ignore
+        }
+      } catch (e) {
+        Alert.alert("読み込みに失敗しました", buildErrorMessage(e));
+      } finally {
+        setDetailLoading(false);
+        setDetailLoadingId(null);
+      }
+    },
+    [detailLoading]
+  );
+
+  // ---------------------------------------------------------
+  // My latest Discovery (viewer-specific) for the selected Reflection
+  // - Used for "発見済み" label + prefill in view mode.
+  // ---------------------------------------------------------
+  useEffect(() => {
+    const qid = selected?.q_instance_id ? String(selected.q_instance_id) : "";
+    const qk = selected?.q_key ? String(selected.q_key) : "";
+
+    // Clear cache on selection change
+    setMyDiscoveryLatest(null);
+    setMyDiscoveryLatestError("");
+    setMyDiscoveryLatestLoading(false);
+
+    if (!qid) return;
+
+    // 自分のReflectionでは「発見」はない（他人に対して行う）
+    const isSelf =
+      !activeViewedUserId ||
+      (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
+    if (isSelf) return;
+
+    let cancelled = false;
+    (async () => {
+      setMyDiscoveryLatestLoading(true);
+      try {
+        const { accessToken } = await getAuthContext();
+        if (!accessToken) return;
+
+        const params = new URLSearchParams();
+        params.append("q_instance_id", qid);
+        if (qk) params.append("q_key", qk);
+        params.append("limit", "1");
+        const url = `${QNA_DISCOVERIES_HISTORY_ENDPOINT}?${params.toString()}`;
+
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+          throw new Error(String(msg));
+        }
+
+        if (cancelled) return;
+        const items = Array.isArray(json?.items) ? json.items : [];
+        const latest = items && items.length > 0 ? items[0] : null;
+        setMyDiscoveryLatest(latest);
+      } catch (e) {
+        if (cancelled) return;
+        setMyDiscoveryLatest(null);
+        setMyDiscoveryLatestError(buildErrorMessage(e));
+      } finally {
+        if (cancelled) return;
+        setMyDiscoveryLatestLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selected?.q_instance_id, selected?.q_key, activeViewedUserId, viewerUserId]);
+
+
+  // ---------------------------------------------------------
+  // Echoes / Discoveries (UI -> MashOS API)
+  // ---------------------------------------------------------
+
+  const openEchoesModal = useCallback((prefill = null) => {
+    const st = prefill && typeof prefill === "object" ? prefill.strength : null;
+    const memo = prefill && typeof prefill === "object" ? prefill.memo : "";
+
+    setEchoesStrength(st || null);
+    setEchoesMemo(memo ? String(memo) : "");
+    setEchoesMemoActive(false);
+    setEchoesMemoContentHeight(44);
+    setEchoesSubmitError("");
+    setEchoesModalVisible(true);
+  }, []);
+
+  const closeEchoesModal = useCallback(() => {
+    setEchoesModalVisible(false);
+    setEchoesStrength(null);
+    setEchoesMemo("");
+    setEchoesMemoActive(false);
+    setEchoesMemoContentHeight(44);
+    setEchoesSubmitError("");
+  }, []);
+
+  const handleResonancePress = useCallback(async () => {
+    if (!selected?.q_instance_id) return;
+
+    const already = !!(selected?.is_resonated ?? selected?.resonated);
+    if (!already) {
+      openEchoesModal();
+      return;
+    }
+
+    // "済み" の場合：前回入力を表示する（best-effort）
+    try {
+      const { accessToken } = await getAuthContext();
+      if (!accessToken) {
+        openEchoesModal();
+        return;
+      }
+
+      const params = new URLSearchParams();
+      params.append("q_instance_id", String(selected.q_instance_id));
+      if (selected?.q_key) params.append("q_key", String(selected.q_key));
+      params.append("limit", "1");
+
+      const url = `${QNA_ECHOES_HISTORY_ENDPOINT}?${params.toString()}`;
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+        throw new Error(String(msg));
+      }
+
+      openEchoesModal({
+        strength: json?.my_strength || null,
+        memo: json?.my_memo || "",
+      });
+    } catch (e) {
+      openEchoesModal();
+      setEchoesSubmitError(buildErrorMessage(e));
+    }
+  }, [selected, openEchoesModal]);
+
+  const submitEchoes = useCallback(async () => {
+    if (!selected?.q_instance_id) return;
+
+    const already = !!(selected?.is_resonated ?? selected?.resonated);
+    if (already) {
+      Alert.alert("送信済みです", "共鳴はすでに送信されています。必要なら一度解除してから送信してください。");
+      return;
+    }
+
+    if (!echoesStrength) {
+      Alert.alert("強度を選択してください", "響き（小/中/大）を選んでから送信してください。");
+      return;
+    }
+
+        const resetSeq = resetSeqRef.current;
+    const qidNow = String(selected.q_instance_id);
+
+setEchoesSubmitting(true);
+    setEchoesSubmitError("");
+
+    try {
+      const { userId, accessToken } = await getAuthContext();
+      if (!accessToken) {
+        Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+        return;
+      }
+
+      const res = await fetch(QNA_ECHOES_SUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          q_instance_id: String(selected.q_instance_id),
+          q_key: String(selected.q_key || ""),
+          strength: String(echoesStrength),
+          memo: echoesMemo ? String(echoesMemo) : null,
+        }),
+      });
+
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+        throw new Error(String(msg));
+      }
+
+            // Echoes送信が成功した時点で「共鳴確定」される（サーバ側で+1）
+      if (resetSeq !== resetSeqRef.current) return;
+
+      const nextResonances =
+        typeof json?.resonances === "number"
+          ? json.resonances
+          : Number(selected?.resonances ?? 0) || 0;
+
+      const nextResonated =
+        typeof json?.resonated === "boolean"
+          ? json.resonated
+          : typeof json?.is_resonated === "boolean"
+          ? json.is_resonated
+          : true;
+
+      setSelected((prev) => {
+        if (!prev) return prev;
+        if (String(prev.q_instance_id) !== qidNow) return prev;
+        return {
+          ...prev,
+          resonances: nextResonances,
+          is_resonated: nextResonated,
+          resonated: nextResonated,
+        };
+      });
+
+      setQnaItems((prev) =>
+        (prev || []).map((x) => {
+          if (String(x?.q_instance_id) !== qidNow) return x;
+          return {
+            ...x,
+            resonances: nextResonances,
+          };
+        })
+      );
+
+closeEchoesModal();
+      Alert.alert("送信しました", "響きを記録しました。");
+    } catch (e) {
+      setEchoesSubmitError(buildErrorMessage(e));
+    } finally {
+      setEchoesSubmitting(false);
+    }
+  }, [selected, echoesStrength, echoesMemo, closeEchoesModal]);
+
+  const confirmDeleteEchoes = useCallback(() => {
+    if (!selected?.q_instance_id) return;
+
+    const beforeResonated = !!(selected?.is_resonated ?? selected?.resonated);
+    if (!beforeResonated) {
+      Alert.alert("解除できません", "まだ共鳴していません。");
+      return;
+    }
+
+    Alert.alert(
+      "共鳴を解除しますか？",
+      "Echoes/共鳴は削除されます。この操作は元に戻せません。",
+      [
+        { text: "キャンセル", style: "cancel" },
+        {
+          text: "削除する",
+          style: "destructive",
+          onPress: () => {
+            (async () => {
+              setEchoesDeleting(true);
+              setEchoesSubmitError("");
+              try {
+                const { accessToken } = await getAuthContext();
+                if (!accessToken) {
+                  Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+                  return;
+                }
+
+                const qidNow = String(selected.q_instance_id);
+
+                const res = await fetch(QNA_ECHOES_DELETE_ENDPOINT, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+                  body: JSON.stringify({
+                    q_instance_id: qidNow,
+                    q_key: String(selected.q_key || ""),
+                  }),
+                });
+
+                const json = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                  const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+                  throw new Error(String(msg));
+                }
+
+                if (
+                  typeof json?.resonated !== "boolean" ||
+                  typeof json?.resonances !== "number"
+                ) {
+                  throw new Error("サーバー応答が不正です（resonated/resonances）");
+                }
+
+                const nextResonated = json.resonated;
+                const nextResonances = json.resonances;
+
+                setSelected((prev) => {
+                  if (!prev) return prev;
+                  if (String(prev.q_instance_id) !== qidNow) return prev;
+                  return {
+                    ...prev,
+                    resonances: nextResonances,
+                    is_resonated: nextResonated,
+                    resonated: nextResonated,
+                  };
+                });
+
+                setQnaItems((prev) =>
+                  (prev || []).map((x) => {
+                    if (String(x?.q_instance_id) !== qidNow) return x;
+                    return {
+                      ...x,
+                      resonances: nextResonances,
+                    };
+                  })
+                );
+
+                closeEchoesModal();
+                Alert.alert("解除しました", "共鳴を解除しました。");
+              } catch (e) {
+                setEchoesSubmitError(buildErrorMessage(e));
+              } finally {
+                setEchoesDeleting(false);
+              }
+            })();
+          },
+        },
+      ]
+    );
+  }, [selected, closeEchoesModal]);
+
+  const openDiscoveryModal = useCallback((prefill = null) => {
+    const cat = prefill && typeof prefill === "object" ? prefill.category : null;
+    const memo = prefill && typeof prefill === "object" ? prefill.memo : "";
+
+    setDiscoveryCategory(cat || null);
+    setDiscoveryMemo(memo ? String(memo) : "");
+    setDiscoveryMemoActive(false);
+    setDiscoveryMemoContentHeight(44);
+    setDiscoverySubmitError("");
+    setDiscoveryModalVisible(true);
+  }, []);
+
+  const closeDiscoveryModal = useCallback(() => {
+    setDiscoveryModalVisible(false);
+    setDiscoveryCategory(null);
+    setDiscoveryMemo("");
+    setDiscoveryMemoActive(false);
+    setDiscoveryMemoContentHeight(44);
+    setDiscoverySubmitError("");
+  }, []);
+
+  const handleDiscoveryPress = useCallback(() => {
+    if (!selected?.q_instance_id) return;
+    if (myDiscoveryLatestLoading) return;
+
+    const already = !!(
+      myDiscoveryLatest &&
+      (myDiscoveryLatest.category || myDiscoveryLatest.id || myDiscoveryLatest.created_at)
+    );
+
+    if (already) {
+      openDiscoveryModal({
+        category: myDiscoveryLatest?.category || null,
+        memo: myDiscoveryLatest?.memo || "",
+      });
+      return;
+    }
+
+    openDiscoveryModal();
+  }, [selected, myDiscoveryLatest, myDiscoveryLatestLoading, openDiscoveryModal]);
+
+  const submitDiscovery = useCallback(async () => {
+    if (!selected?.q_instance_id) return;
+
+    const already = !!(
+      myDiscoveryLatest &&
+      (myDiscoveryLatest.category || myDiscoveryLatest.id || myDiscoveryLatest.created_at)
+    );
+    if (already) {
+      Alert.alert("保存済みです", "発見はすでに送信されています。必要なら一度解除してから保存してください。");
+      return;
+    }
+
+    if (!discoveryCategory) {
+      Alert.alert("カテゴリを選択してください", "気づきの種類を選んでから保存してください。");
+      return;
+    }
+
+    setDiscoverySubmitting(true);
+    setDiscoverySubmitError("");
+
+    try {
+      const { userId, accessToken } = await getAuthContext();
+      if (!accessToken) {
+        Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+        return;
+      }
+
+      const res = await fetch(QNA_DISCOVERIES_SUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          q_instance_id: String(selected.q_instance_id),
+          q_key: String(selected.q_key || ""),
+          category: String(discoveryCategory),
+          memo: discoveryMemo ? String(discoveryMemo) : null,
+        }),
+      });
+
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+        throw new Error(String(msg));
+      }
+
+      const qidNow = String(selected.q_instance_id);
+
+      setSelected((prev) => {
+        if (!prev) return prev;
+        if (String(prev.q_instance_id) !== qidNow) return prev;
+
+        const before =
+          Number(
+            prev?.discoveries ??
+              prev?.discoveries_count ??
+              prev?.discovery_count ??
+              prev?.discoveryCount ??
+              0
+          ) || 0;
+
+        return {
+          ...prev,
+          discoveries: before + 1,
+        };
+      });
+
+      setQnaItems((prev) =>
+        (prev || []).map((x) => {
+          if (String(x?.q_instance_id) !== qidNow) return x;
+          const before =
+            Number(
+              x?.discoveries ??
+                x?.discoveries_count ??
+                x?.discovery_count ??
+                x?.discoveryCount ??
+                0
+            ) || 0;
+          return {
+            ...x,
+            discoveries: before + 1,
+          };
+        })
+      );
+
+      // "済み" 状態にする（前回入力の表示用）
+      setMyDiscoveryLatest({
+        id: `local_${Date.now()}`,
+        category: String(discoveryCategory),
+        memo: discoveryMemo ? String(discoveryMemo) : null,
+        created_at: new Date().toISOString(),
+      });
+
+      closeDiscoveryModal();
+      Alert.alert("保存しました", "気づきを記録しました。");
+    } catch (e) {
+      setDiscoverySubmitError(buildErrorMessage(e));
+    } finally {
+      setDiscoverySubmitting(false);
+    }
+  }, [selected, myDiscoveryLatest, discoveryCategory, discoveryMemo, closeDiscoveryModal]);
+
+  const confirmDeleteDiscovery = useCallback(() => {
+    if (!selected?.q_instance_id) return;
+
+    Alert.alert(
+      "発見を解除しますか？",
+      "Discoveriesは削除されます。この操作は元に戻せません。",
+      [
+        { text: "キャンセル", style: "cancel" },
+        {
+          text: "削除する",
+          style: "destructive",
+          onPress: () => {
+            (async () => {
+              setDiscoveryDeleting(true);
+              setDiscoverySubmitError("");
+              try {
+                const { accessToken } = await getAuthContext();
+                if (!accessToken) {
+                  Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+                  return;
+                }
+
+                const qidNow = String(selected.q_instance_id);
+
+                const res = await fetch(QNA_DISCOVERIES_DELETE_ENDPOINT, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+                  body: JSON.stringify({
+                    q_instance_id: qidNow,
+                    q_key: String(selected.q_key || ""),
+                  }),
+                });
+
+                const json = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                  const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+                  throw new Error(String(msg));
+                }
+
+                if (typeof json?.discoveries !== "number") {
+                  throw new Error("サーバー応答が不正です（discoveries）");
+                }
+
+                const nextDiscoveries = json.discoveries;
+
+                setSelected((prev) => {
+                  if (!prev) return prev;
+                  if (String(prev.q_instance_id) !== qidNow) return prev;
+                  return {
+                    ...prev,
+                    discoveries: nextDiscoveries,
+                  };
+                });
+
+                setQnaItems((prev) =>
+                  (prev || []).map((x) => {
+                    if (String(x?.q_instance_id) !== qidNow) return x;
+                    return {
+                      ...x,
+                      discoveries: nextDiscoveries,
+                    };
+                  })
+                );
+
+                // "済み" 状態を解除
+                setMyDiscoveryLatest(null);
+                setMyDiscoveryLatestError("");
+
+                closeDiscoveryModal();
+                Alert.alert("解除しました", "発見を解除しました。");
+              } catch (e) {
+                setDiscoverySubmitError(buildErrorMessage(e));
+              } finally {
+                setDiscoveryDeleting(false);
+              }
+            })();
+          },
+        },
+      ]
+    );
+  }, [selected, closeDiscoveryModal]);
+
+
+  const isDark = themeName === "dark";
+
+  const effectiveTierLabel = useMemo(() => {
+    // SubscriptionContext を基準に表示（画面ごとに tier を持たない）
+    if (myModelRangeLabel) return myModelRangeLabel;
+
+    // fail-soft（provider未mount / tier未確定 など）：従来の meta をフォールバックに使う
+    const eff = listMeta?.effective_tier;
+    if (eff === "standard") return "Standard";
+    if (eff === "light") return "Light";
+    return eff ? String(eff) : "";
+  }, [myModelRangeLabel, listMeta]);
+
+  const isSelfTarget =
+    !activeViewedUserId ||
+    (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
+
+  const isResonatedNow = !!(selected?.is_resonated ?? selected?.resonated);
+  const isDiscoveredNow = !!(
+    myDiscoveryLatest &&
+    (myDiscoveryLatest.category || myDiscoveryLatest.id || myDiscoveryLatest.created_at)
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        barStyle={isDark ? "light-content" : "dark-content"}
+        backgroundColor={colors.BG_SILVER}
+      />
+
+      <ScrollView style={styles.body} contentContainerStyle={styles.bodyContent}>
+        <View style={styles.panelHeader}>
+          <CocolonBackButton fallbackRouteName="MyModel" />
+          <Text style={styles.panelTitle}>Reflections</Text>
+          <View style={styles.panelHeaderRightPlaceholder} />
+        </View>
+
+        <View style={styles.qnaIntroCard}>
+          <Text style={styles.qnaIntroTitle}>Reflections</Text>
+          <Text style={styles.qnaIntroText}>
+            フォローしたユーザーのMyModelを使用できます。
+          </Text>
+
+          {/* Main action */}
+          <View style={styles.actions}>
+            <View style={styles.targetRow}>
+              <Text style={styles.targetLabel}>MyModel：</Text>
+              <CocolonPressable
+                onPress={openUserPicker}
+                style={styles.targetNamePressable}
+              >
+                <Text style={styles.targetName} numberOfLines={1}>
+                  {isSelfTarget
+                    ? "自分"
+                    : targetNameLoading
+                    ? "（読み込み中）"
+                    : targetDisplayName}
+                </Text>
+                <Ionicons
+                  name="chevron-down"
+                  size={16}
+                  color={colors.TEXT_ON_LIGHT}
+                  style={{ marginLeft: 6 }}
+                />
+              </CocolonPressable>
+            </View>
+
+            <CocolonButton variant="primary" onPress={openPicker}>
+              <View style={styles.btnRow}>
+                <Ionicons
+                  name="sparkles-outline"
+                  size={18}
+                  color="#FFFFFF"
+                  style={{ marginRight: 6 }}
+                />
+                <Text style={styles.goldButtonText}>問いを生成</Text>
+              </View>
+            </CocolonButton>
+            {effectiveTierLabel ? (
+              <Text style={styles.tierHintText}>表示範囲: {effectiveTierLabel}</Text>
+            ) : null}
+          </View>
+
+          {/* Selected detail */}
+          {selected || detailLoading ? (
+            <View style={styles.responseGroup}>
+              {selected?.title && !detailLoading ? (
+                <>
+                  <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【問い】</Text>
+                  <View style={styles.responseCard}>
+                    <Text style={[styles.detailTitle, { marginBottom: 0 }]}>{selected.title}</Text>
+                  </View>
+
+                  <Text
+                    style={[
+                      styles.responseLabel,
+                      { fontWeight: "700", marginTop: 12 },
+                    ]}
+                  >
+                    【応答】
+                  </Text>
+                  <View style={styles.responseCard}>
+                    <Text style={styles.responseText}>{selected.body}</Text>
+
+                    <View style={styles.metricsRow}>
+                        <View style={styles.metricPill}>
+                          <Ionicons
+                            name="heart-outline"
+                            size={14}
+                            color={colors.TEXT_SUBTLE}
+                            style={{ marginRight: 6 }}
+                          />
+                          <Text style={styles.metricText}>
+                            {formatMetricCount(selected?.resonances ?? 0)}
+                          </Text>
+                        </View>
+
+                        <View style={styles.metricPill}>
+                          <Ionicons
+                            name="bulb-outline"
+                            size={14}
+                            color={colors.TEXT_SUBTLE}
+                            style={{ marginRight: 6 }}
+                          />
+                          <Text style={styles.metricText}>
+                            {formatMetricCount(
+                              selected?.discoveries ??
+                                selected?.discoveries_count ??
+                                selected?.discovery_count ??
+                                selected?.discoveryCount ??
+                                0
+                            )}
+                          </Text>
+                        </View>
+
+
+                      </View>
+
+                    {!isSelfTarget ? (
+                      <>
+                      <View style={styles.metricsActions}>
+                        <CocolonPressable
+                          onPress={handleResonancePress}
+                          style={[
+                            styles.resonanceBtn,
+                            isResonatedNow && { opacity: 0.92 },
+                            (echoesSubmitting || echoesDeleting) && { opacity: 0.7 },
+                          ]}
+                          disabled={echoesSubmitting || echoesDeleting}
+                        >
+                          <View style={styles.btnRow}>
+                            <Ionicons
+                              name={isResonatedNow ? "heart" : "heart-outline"}
+                              size={14}
+                              color="#FFFFFF"
+                              style={{ marginRight: 6 }}
+                            />
+                            <Text style={styles.resonanceBtnText}>
+                              {isResonatedNow ? "共鳴済み" : "共鳴"}
+                            </Text>
+                          </View>
+                        </CocolonPressable>
+
+                        <CocolonPressable
+                          onPress={handleDiscoveryPress}
+                          style={[
+                            styles.discoveryBtn,
+                            isDiscoveredNow && { opacity: 0.92 },
+                            (discoverySubmitting || myDiscoveryLatestLoading) && { opacity: 0.7 },
+                          ]}
+                          disabled={discoverySubmitting || myDiscoveryLatestLoading}
+                        >
+                          <View style={styles.btnRow}>
+                            <Ionicons
+                              name="bulb-outline"
+                              size={14}
+                              color={colors.TITLE_GOLD}
+                              style={{ marginRight: 6 }}
+                            />
+                            <Text style={styles.discoveryBtnText}>
+                              {isDiscoveredNow ? "発見済み" : "発見"}
+                            </Text>
+                          </View>
+                        </CocolonPressable>
+                      </View>
+                      {myDiscoveryLatestError ? (
+                        <Text style={[styles.modeErrorText, { marginTop: 8 }]}>
+                          発見状態の取得に失敗: {myDiscoveryLatestError}
+                        </Text>
+                      ) : null}
+                      </>
+                    ) : null}
+
+                  </View>
+                </>
+              ) : (
+                <>
+                  <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【応答】</Text>
+                  <View style={styles.responseCard}>
+                    <Text style={styles.responseText}>読み込み中…</Text>
+                  </View>
+                </>
+              )}
+            </View>
+          ) : null}
+
+          {listError ? (
+            <Text style={styles.modeErrorText}>一覧取得に失敗: {listError}</Text>
+          ) : null}
+        </View>
+
+        </ScrollView>
+
+      {/* Target user picker modal */}
+      <Modal
+        visible={userPickerVisible}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setUserPickerVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>フォロー中のユーザー</Text>
+              <Pressable
+                onPress={() => setUserPickerVisible(false)}
+                style={styles.modalCloseBtn}
+              >
+                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+              </Pressable>
+            </View>
+
+            {followingLoading ? (
+              <View style={styles.modalLoading}>
+                <ActivityIndicator color={colors.TEXT_SUBTLE} />
+                <Text style={styles.modalLoadingText}>読み込み中…</Text>
+              </View>
+            ) : (
+              <ScrollView style={styles.listArea}>
+                {/* 自分に戻る */}
+                <Pressable
+                  onPress={() => selectTargetUser(null)}
+                  style={[
+                    styles.listRow,
+                    isSelfTarget && styles.listRowActive,
+                  ]}
+                >
+                  <View style={{ flex: 1 }}>
+                    <View style={styles.rowTitleLine}>
+                      <Text style={styles.rowTitle} numberOfLines={1}>
+                        自分に戻る
+                      </Text>
+                      {isSelfTarget ? (
+                        <View style={styles.activeBadge}>
+                          <Text style={styles.activeBadgeText}>使用中</Text>
+                        </View>
+                      ) : null}
+                    </View>
+                  </View>
+                  {isSelfTarget ? (
+                    <Ionicons
+                      name="checkmark"
+                      size={18}
+                      color={colors.TEXT_SUBTLE}
+                      style={{ marginLeft: 10 }}
+                    />
+                  ) : (
+                    <Ionicons
+                      name="chevron-forward"
+                      size={18}
+                      color={colors.TEXT_SUBTLE}
+                      style={{ marginLeft: 10 }}
+                    />
+                  )}
+                </Pressable>
+
+                {(followingUsers || []).length > 0 ? (
+                  (followingUsers || []).map((u) => {
+                    const isActive =
+                      activeViewedUserId &&
+                      String(activeViewedUserId) === String(u.user_id);
+                    return (
+                      <Pressable
+                        key={u.user_id}
+                        onPress={() => selectTargetUser(u.user_id)}
+                        style={[
+                          styles.listRow,
+                          isActive && styles.listRowActive,
+                        ]}
+                      >
+                        <View style={{ flex: 1 }}>
+                          <View style={styles.rowTitleLine}>
+                            <Text style={styles.rowTitle} numberOfLines={1}>
+                              {u.display_name}
+                            </Text>
+                            {isActive ? (
+                              <View style={styles.activeBadge}>
+                                <Text style={styles.activeBadgeText}>使用中</Text>
+                              </View>
+                            ) : null}
+                          </View>
+                        </View>
+                        {isActive ? (
+                          <Ionicons
+                            name="checkmark"
+                            size={18}
+                            color={colors.TEXT_SUBTLE}
+                            style={{ marginLeft: 10 }}
+                          />
+                        ) : (
+                          <Ionicons
+                            name="chevron-forward"
+                            size={18}
+                            color={colors.TEXT_SUBTLE}
+                            style={{ marginLeft: 10 }}
+                          />
+                        )}
+                      </Pressable>
+                    );
+                  })
+                ) : (
+                  <View style={styles.pickerEmptyInline}>
+                    <Text style={styles.modalEmptyText}>
+                      フォロー中のユーザーがいません。
+                    </Text>
+                    {followingError ? (
+                      <Text style={styles.modeErrorText}>取得に失敗: {followingError}</Text>
+                    ) : null}
+                  </View>
+                )}
+              </ScrollView>
+            )}
+          </View>
+        </View>
+      </Modal>
+
+      {/* Picker modal */}
+      <Modal
+        visible={pickerVisible}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setPickerVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>問いを選ぶ</Text>
+              <Pressable
+                onPress={() => setPickerVisible(false)}
+                style={styles.modalCloseBtn}
+              >
+                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+              </Pressable>
+            </View>
+
+            <View style={styles.sortRow}>
+              {[
+                { key: "newest", label: "新着" },
+                { key: "resonances", label: "人気(共鳴)" },
+                { key: "discoveries", label: "人気(発見)" },
+              ].map((x) => {
+                const active = sortMode === x.key;
+                return (
+                  <Pressable
+                    key={x.key}
+                    onPress={() => changeSortMode(x.key)}
+                    style={[styles.sortPill, active && styles.sortPillActive]}
+                    disabled={listLoading}
+                  >
+                    <Text
+                      style={[
+                        styles.sortPillText,
+                        active && styles.sortPillTextActive,
+                      ]}
+                    >
+                      {x.label}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+
+            {listLoading ? (
+              <View style={styles.modalLoading}>
+                <ActivityIndicator color={colors.TEXT_SUBTLE} />
+                <Text style={styles.modalLoadingText}>読み込み中…</Text>
+              </View>
+            ) : (qnaItems || []).length > 0 ? (
+              <ScrollView style={styles.listArea}>
+                {(qnaItems || []).map((it) => (
+                  <Pressable
+                    key={it.q_instance_id}
+                    onPress={() => fetchDetail(it)}
+                    style={styles.listRow}
+                    disabled={detailLoading}
+                  >
+                    <View style={{ flex: 1 }}>
+                      <View style={styles.rowTitleLine}>
+                        <Text style={styles.rowTitle} numberOfLines={2}>
+                          {it.title}
+                        </Text>
+                        {it.is_new ? (
+                          <View style={styles.newBadge}>
+                            <Text style={styles.newBadgeText}>New</Text>
+                          </View>
+                        ) : null}
+                      </View>
+
+                      <View style={styles.rowMetaLine}>
+                        <View style={styles.rowMetaItem}>
+                          <Ionicons
+                            name="heart-outline"
+                            size={14}
+                            color={colors.TEXT_SUBTLE}
+                            style={{ marginRight: 6 }}
+                          />
+                          <Text style={styles.rowMetaText}>
+                            {it.resonances ?? 0}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                    {detailLoading && String(detailLoadingId) === String(it.q_instance_id) ? (
+                      <ActivityIndicator
+                        color={colors.TEXT_SUBTLE}
+                        style={{ marginLeft: 10 }}
+                      />
+                    ) : (
+                      <Ionicons
+                        name="chevron-forward"
+                        size={18}
+                        color={colors.TEXT_SUBTLE}
+                        style={{ marginLeft: 10 }}
+                      />
+                    )}
+                  </Pressable>
+                ))}
+              </ScrollView>
+            ) : (
+              <View style={styles.modalEmpty}>
+                <Text style={styles.modalEmptyText}>
+                  まだ表示できる問いがありません。
+                  {"\n"}
+                  MyModel Create で回答するとここに出ます。
+                </Text>
+              </View>
+            )}
+          </View>
+        </View>
+      </Modal>
+
+      {/* Echoes submit modal */}
+      <Modal
+        visible={echoesModalVisible}
+        animationType="fade"
+        transparent
+        onRequestClose={closeEchoesModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Echoes</Text>
+              <Pressable onPress={closeEchoesModal} style={styles.modalCloseBtn}>
+                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+              </Pressable>
+            </View>
+
+            <ScrollView
+              ref={echoesModalScrollRef}
+              style={styles.listArea}
+              contentContainerStyle={{ paddingBottom: 24 + keyboardInset }}
+              keyboardShouldPersistTaps="handled"
+            >
+              {echoesDeleting ? (
+                <View style={styles.inlineLoadingRow}>
+                  <ActivityIndicator color={colors.TEXT_SUBTLE} />
+                  <Text style={styles.inlineLoadingText}>共鳴を解除中…</Text>
+                </View>
+              ) : null}
+              <Text style={styles.modalDescText}>このReflectionsはどう響きましたか？</Text>
+
+              <View style={{ marginTop: 6 }}>
+                {(ECHO_STRENGTH_OPTIONS || []).map((opt) => {
+                  const active = echoesStrength === opt.key;
+                  return (
+                    <Pressable
+                      key={opt.key}
+                      onPress={() => setEchoesStrength(opt.key)}
+                      style={[
+                        styles.choiceCard,
+                        active && styles.choiceCardActive,
+                      ]}
+                      disabled={echoesSubmitting || echoesDeleting || isResonatedNow}
+                    >
+                      <View style={styles.choiceTitleRow}>
+                        <Text
+                          style={[
+                            styles.choiceTitle,
+                            active && styles.choiceTitleActive,
+                          ]}
+                        >
+                          {opt.label}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.choiceSub,
+                            active && styles.choiceSubActive,
+                          ]}
+                        >
+                          {opt.subLabel}
+                        </Text>
+                      </View>
+                    </Pressable>
+                  );
+                })}
+              </View>
+
+              <View style={{ marginTop: 10 }}>
+                <Text style={styles.inputLabel}>メモ（任意）</Text>
+
+                {echoesMemoActive ? (
+                  <View style={[styles.memoCard, styles.memoCardExpanded]}>
+                    <TextInput
+                      ref={echoesMemoInputRef}
+                      style={[
+                        styles.memoInput,
+                        {
+                          flex: 0,
+                          width: "100%",
+                          height: Math.min(
+                            Math.max(echoesMemoContentHeight || 44, 44),
+                            inputMaxHeight
+                          ),
+                        },
+                      ]}
+                      placeholder="ここに書いてください。"
+                      {...(isIOS ? { defaultValue: echoesMemo } : { value: echoesMemo })}
+                      onChangeText={setEchoesMemo}
+                      {...(isIOS
+                        ? {
+                            onChange: (e) =>
+                              setEchoesMemo(e?.nativeEvent?.text ?? ""),
+                          }
+                        : {})}
+                      multiline
+                      scrollEnabled
+                      textAlignVertical="top"
+                      placeholderTextColor={colors.TEXT_ON_LIGHT}
+                      editable={!isResonatedNow && !echoesSubmitting && !echoesDeleting}
+                      showSoftInputOnFocus={!isResonatedNow && !echoesSubmitting && !echoesDeleting}
+                      onFocus={(e) => {
+                        modalLastScrollRef.current = echoesModalScrollRef.current;
+                        modalLastFocusTargetRef.current =
+                          e?.target ?? e?.nativeEvent?.target ?? null;
+                        requestAnimationFrame(() => scrollToFocusedInput());
+                      }}
+                      onBlur={() => {
+                        modalLastScrollRef.current = null;
+                        modalLastFocusTargetRef.current = null;
+                        setEchoesMemoActive(false);
+                      }}
+                      onContentSizeChange={(e) => {
+                        const h = e?.nativeEvent?.contentSize?.height ?? 0;
+                        if (h) setEchoesMemoContentHeight(h);
+                        requestAnimationFrame(() => scrollToFocusedInput());
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <CocolonPressable
+                    style={[styles.memoCard, styles.memoCardCollapsed]}
+                    onPress={() => {
+                      setEchoesMemoActive(true);
+                      setTimeout(() => {
+                        try {
+                          echoesMemoInputRef.current?.focus?.();
+                        } catch {
+                          // noop
+                        }
+                      }, 50);
+                    }}
+                    accessibilityLabel="Echoesのメモを入力する"
+                  >
+                    <View style={styles.collapsedRow}>
+                      <View style={styles.collapsedLeft}>
+                        <Ionicons
+                          name="create-outline"
+                          size={18}
+                          color={colors.TEXT_SUBTLE}
+                          style={{ marginRight: 8 }}
+                        />
+                        <Text
+                          style={[
+                            styles.collapsedText,
+                            !(echoesMemo && echoesMemo.trim().length > 0) &&
+                              styles.collapsedTextPlaceholder,
+                          ]}
+                          numberOfLines={1}
+                        >
+                          {echoesMemo && echoesMemo.trim().length > 0
+                            ? echoesMemo.replace(/\s+/g, " ").trim()
+                            : "ここに書いてください。"}
+                        </Text>
+                      </View>
+                      <Ionicons
+                        name="chevron-down"
+                        size={18}
+                        color={colors.TEXT_SUBTLE}
+                      />
+                    </View>
+                  </CocolonPressable>
+                )}
+              </View>
+
+              {echoesSubmitError ? (
+                <Text style={styles.modeErrorText}>{echoesSubmitError}</Text>
+              ) : null}
+
+              <CocolonButton
+                variant="primary"
+                style={[
+                  { marginTop: 14 },
+                  (!echoesStrength || echoesSubmitting || echoesDeleting || isResonatedNow) && {
+                    opacity: 0.7,
+                  },
+                ]}
+                onPress={submitEchoes}
+                disabled={!echoesStrength || echoesSubmitting || echoesDeleting || isResonatedNow}
+              >
+                <View style={styles.btnRow}>
+                  {echoesSubmitting ? (
+                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons
+                      name={isResonatedNow ? "checkmark" : "save-outline"}
+                      size={16}
+                      color="#FFFFFF"
+                      style={{ marginRight: 6 }}
+                    />
+                  )}
+                  <Text style={styles.goldButtonText}>
+                    {isResonatedNow ? "保存済み" : "保存"}
+                  </Text>
+                </View>
+              </CocolonButton>
+
+              <CocolonButton
+                variant="secondary"
+                style={[
+                  styles.historyBtn,
+                  { marginTop: 10 },
+                  (!isResonatedNow || echoesSubmitting || echoesDeleting) && { opacity: 0.7 },
+                ]}
+                onPress={confirmDeleteEchoes}
+                disabled={!isResonatedNow || echoesSubmitting || echoesDeleting}
+              >
+                <View style={styles.btnRow}>
+                  {echoesDeleting ? (
+                    <ActivityIndicator color="#B91C1C" style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons
+                      name="trash-outline"
+                      size={16}
+                      color="#B91C1C"
+                      style={{ marginRight: 6 }}
+                    />
+                  )}
+                  <Text style={[styles.historyBtnText, { color: "#B91C1C" }]}>
+                    共鳴を解除
+                  </Text>
+                </View>
+              </CocolonButton>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Discoveries submit modal */}
+      <Modal
+        visible={discoveryModalVisible}
+        animationType="fade"
+        transparent
+        onRequestClose={closeDiscoveryModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Discoveries</Text>
+              <Pressable onPress={closeDiscoveryModal} style={styles.modalCloseBtn}>
+                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+              </Pressable>
+            </View>
+
+            <ScrollView
+              ref={discoveryModalScrollRef}
+              style={styles.listArea}
+              contentContainerStyle={{ paddingBottom: 24 + keyboardInset }}
+              keyboardShouldPersistTaps="handled"
+            >
+              <Text style={styles.modalDescText}>このReflectionsの「気づき」を選んでください。</Text>
+
+              <View style={{ marginTop: 6 }}>
+                {(DISCOVERY_CATEGORY_OPTIONS || []).map((opt) => {
+                  const active = discoveryCategory === opt.key;
+                  return (
+                    <Pressable
+                      key={opt.key}
+                      onPress={() => setDiscoveryCategory(opt.key)}
+                      style={[
+                        styles.choiceCard,
+                        active && styles.choiceCardActive,
+                      ]}
+                      disabled={discoverySubmitting || discoveryDeleting || isDiscoveredNow}
+                    >
+                      <View style={styles.choiceTitleRow}>
+                        <Text
+                          style={[
+                            styles.choiceTitle,
+                            active && styles.choiceTitleActive,
+                          ]}
+                        >
+                          {opt.label}
+                        </Text>
+                      </View>
+                    </Pressable>
+                  );
+                })}
+              </View>
+
+              <View style={{ marginTop: 10 }}>
+                <Text style={styles.inputLabel}>メモ（任意）</Text>
+
+                {discoveryMemoActive ? (
+                  <View style={[styles.memoCard, styles.memoCardExpanded]}>
+                    <TextInput
+                      ref={discoveryMemoInputRef}
+                      style={[
+                        styles.memoInput,
+                        {
+                          flex: 0,
+                          width: "100%",
+                          height: Math.min(
+                            Math.max(discoveryMemoContentHeight || 44, 44),
+                            inputMaxHeight
+                          ),
+                        },
+                      ]}
+                      placeholder="ここに書いてください。"
+                      {...(isIOS ? { defaultValue: discoveryMemo } : { value: discoveryMemo })}
+                      onChangeText={setDiscoveryMemo}
+                      {...(isIOS
+                        ? {
+                            onChange: (e) =>
+                              setDiscoveryMemo(e?.nativeEvent?.text ?? ""),
+                          }
+                        : {})}
+                      multiline
+                      scrollEnabled
+                      textAlignVertical="top"
+                      placeholderTextColor={colors.TEXT_ON_LIGHT}
+                      editable={!isDiscoveredNow && !discoverySubmitting && !discoveryDeleting}
+                      showSoftInputOnFocus={!isDiscoveredNow && !discoverySubmitting && !discoveryDeleting}
+                      onFocus={(e) => {
+                        modalLastScrollRef.current = discoveryModalScrollRef.current;
+                        modalLastFocusTargetRef.current =
+                          e?.target ?? e?.nativeEvent?.target ?? null;
+                        requestAnimationFrame(() => scrollToFocusedInput());
+                      }}
+                      onBlur={() => {
+                        modalLastScrollRef.current = null;
+                        modalLastFocusTargetRef.current = null;
+                        setDiscoveryMemoActive(false);
+                      }}
+                      onContentSizeChange={(e) => {
+                        const h = e?.nativeEvent?.contentSize?.height ?? 0;
+                        if (h) setDiscoveryMemoContentHeight(h);
+                        requestAnimationFrame(() => scrollToFocusedInput());
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <CocolonPressable
+                    style={[styles.memoCard, styles.memoCardCollapsed]}
+                    onPress={() => {
+                      setDiscoveryMemoActive(true);
+                      setTimeout(() => {
+                        try {
+                          discoveryMemoInputRef.current?.focus?.();
+                        } catch {
+                          // noop
+                        }
+                      }, 50);
+                    }}
+                    accessibilityLabel="Discoveriesのメモを入力する"
+                  >
+                    <View style={styles.collapsedRow}>
+                      <View style={styles.collapsedLeft}>
+                        <Ionicons
+                          name="create-outline"
+                          size={18}
+                          color={colors.TEXT_SUBTLE}
+                          style={{ marginRight: 8 }}
+                        />
+                        <Text
+                          style={[
+                            styles.collapsedText,
+                            !(discoveryMemo && discoveryMemo.trim().length > 0) &&
+                              styles.collapsedTextPlaceholder,
+                          ]}
+                          numberOfLines={1}
+                        >
+                          {discoveryMemo && discoveryMemo.trim().length > 0
+                            ? discoveryMemo.replace(/\s+/g, " ").trim()
+                            : "ここに書いてください。"}
+                        </Text>
+                      </View>
+                      <Ionicons
+                        name="chevron-down"
+                        size={18}
+                        color={colors.TEXT_SUBTLE}
+                      />
+                    </View>
+                  </CocolonPressable>
+                )}
+              </View>
+
+              {discoverySubmitError ? (
+                <Text style={styles.modeErrorText}>{discoverySubmitError}</Text>
+              ) : null}
+
+              <CocolonButton
+                variant="primary"
+                style={[
+                  { marginTop: 14 },
+                  (!discoveryCategory || discoverySubmitting || discoveryDeleting || isDiscoveredNow) && {
+                    opacity: 0.7,
+                  },
+                ]}
+                onPress={submitDiscovery}
+                disabled={!discoveryCategory || discoverySubmitting || discoveryDeleting || isDiscoveredNow}
+              >
+                <View style={styles.btnRow}>
+                  {discoverySubmitting ? (
+                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons
+                      name={isDiscoveredNow ? "checkmark" : "save-outline"}
+                      size={16}
+                      color="#FFFFFF"
+                      style={{ marginRight: 6 }}
+                    />
+                  )}
+                  <Text style={styles.goldButtonText}>
+                    {isDiscoveredNow ? "保存済み" : "保存"}
+                  </Text>
+                </View>
+              </CocolonButton>
+
+              <CocolonButton
+                variant="secondary"
+                style={[
+                  styles.historyBtn,
+                  { marginTop: 10 },
+                  (discoverySubmitting || discoveryDeleting) && { opacity: 0.7 },
+                ]}
+                onPress={confirmDeleteDiscovery}
+                disabled={discoverySubmitting || discoveryDeleting}
+              >
+                <View style={styles.btnRow}>
+                  {discoveryDeleting ? (
+                    <ActivityIndicator color="#B91C1C" style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons
+                      name="trash-outline"
+                      size={16}
+                      color="#B91C1C"
+                      style={{ marginRight: 6 }}
+                    />
+                  )}
+                  <Text style={[styles.historyBtnText, { color: "#B91C1C" }]}>
+                    発見を解除
+                  </Text>
+                </View>
+              </CocolonButton>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+    </SafeAreaView>
+  );
+}
+
+function createStyles(COLORS, ui) {
+  const font = ui?.font || {};
+  const text = ui?.text || {};
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    body: { flex: 1 },
+    bodyContent: {
+      paddingTop: 16,
+      paddingHorizontal: 18,
+      alignItems: "stretch",
+      paddingBottom: 32,
+      minHeight: PANEL_MIN_HEIGHT,
+    },
+
+    // Header
+    panelHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 16,
+    },
+    panelTitle: {
+      fontSize: 20,
+      fontWeight: "800",
+      color: COLORS.TITLE_GOLD,
+      letterSpacing: 0.8,
+    },
+    headerRight: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    panelHeaderRightPlaceholder: {
+      width: 30,
+    },
+
+    // Intro
+    qnaIntroCard: {
+      borderRadius: 18,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      marginBottom: 12,
+    },
+    qnaIntroTitle: {
+      fontSize: 13,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 4,
+    },
+    qnaIntroText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+
+    // History
+    historyCard: {
+      borderRadius: 18,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      marginBottom: 12,
+    },
+    historyCardTitle: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    historyEntry: {
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+    },
+    historyEntryText: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+
+    
+    // Recommend
+    recoCard: {
+      borderRadius: 18,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      marginBottom: 12,
+    },
+    recoHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 8,
+    },
+    recoTitle: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    recoSummaryText: {
+      marginTop: 6,
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
+    },
+    recoRefreshBtn: {
+      width: 34,
+      height: 34,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    recoToggleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 4,
+      marginBottom: 10,
+    },
+    recoTogglePill: {
+      flex: 1,
+      marginRight: 8,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    recoTogglePillActive: {
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    recoToggleText: {
+      fontSize: 11,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    recoToggleTextActive: {
+      color: "#FFFFFF",
+    },
+    recoSectionLabel: {
+      fontSize: font.sectionLabel ?? 12,
+      fontWeight: "800",
+      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
+    recoPillScroll: { marginTop: 8 },
+    recoPillContent: { paddingRight: 6 },
+    recoPill: {
+      marginRight: 8,
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      maxWidth: 220,
+    },
+    recoPillActive: {
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    recoPillText: {
+      fontSize: 11,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    recoPillTextActive: {
+      color: "#FFFFFF",
+    },
+    recoUserRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      marginBottom: 8,
+    },
+    recoUserName: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    recoUserSub: {
+      marginTop: 2,
+      fontSize: font.description ?? 9,
+      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+    },
+    recoEmptyText: {
+      marginTop: 8,
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.85,
+    },
+    recoLoadingRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 8,
+    },
+    recoLoadingText: {
+      marginLeft: 10,
+      fontSize: 12,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.85,
+    },
+
+// Buttons
+    actions: { marginTop: 6, marginBottom: 10 },
+    targetRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 10,
+    },
+    targetLabel: {
+      fontSize: font.sectionLabel ?? 12,
+      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
+    targetNamePressable: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 6,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      maxWidth: "80%",
+    },
+    targetName: {
+      fontSize: 12,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    goldButton: {
+      paddingVertical: 12,
+      paddingHorizontal: 18,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      alignItems: "center",
+      justifyContent: "center",
+      shadowColor: "#000",
+      shadowOpacity: 0.14,
+      shadowRadius: 12,
+      shadowOffset: { width: 0, height: 6 },
+      elevation: 6,
+    },
+    goldButtonText: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: "#FFFFFF",
+      letterSpacing: 0.6,
+    },
+    btnRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    tierHintText: {
+      marginTop: 8,
+      fontSize: font.description ?? 9,
+      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
+
+    // Response
+    responseGroup: { marginTop: 12 },
+    responseLabel: {
+      fontSize: font.sectionLabel ?? 12,
+      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
+    },
+    responseCard: {
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      shadowColor: "#000",
+      shadowOpacity: 0.1,
+      shadowRadius: 14,
+      shadowOffset: { width: 0, height: 6 },
+      elevation: 6,
+    },
+    detailTitle: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 10,
+    },
+    responseText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    responseEmpty: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.85,
+    },
+
+    metricsRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 14,
+    },
+    metricPill: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      marginRight: 8,
+      backgroundColor: COLORS.PANEL_BG,
+    },
+    metricText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 34,
+      textAlign: "right",
+      fontVariant: ["tabular-nums"],
+    },
+    resonanceBtn: {
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 8,
+      minWidth: 86,
+    },
+    resonanceBtnText: {
+      fontSize: 12,
+      fontWeight: "900",
+      color: "#FFFFFF",
+    },
+
+    metricsActions: {
+      marginTop: 10,
+      alignSelf: "flex-end",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    discoveryBtn: {
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 78,
+    },
+    discoveryBtnText: {
+      fontSize: 12,
+      fontWeight: "900",
+      color: COLORS.TITLE_GOLD,
+    },
+
+    historyBtn: {
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    historyBtnText: {
+      fontSize: 12,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+
+    // Echoes/Discoveries modal UI
+    modalDescText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
+    },
+    inlineLoadingRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 10,
+    },
+    inlineLoadingText: {
+      marginLeft: 10,
+      fontSize: 12,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.85,
+    },
+    choiceCard: {
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      marginBottom: 8,
+    },
+    choiceCardActive: {
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+    },
+    choiceTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    choiceTitle: {
+      flex: 1,
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+      paddingRight: 10,
+    },
+    choiceTitleActive: {
+      color: COLORS.TITLE_GOLD,
+    },
+    choiceSub: {
+      fontSize: 11,
+      fontWeight: "900",
+      color: COLORS.TEXT_SUBTLE,
+    },
+    choiceSubActive: {
+      color: COLORS.TITLE_GOLD,
+    },
+
+    inputLabel: {
+      fontSize: font.sectionLabel ?? 12,
+      fontWeight: "900",
+      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
+    },
+    /** メモ入力カード（InputScreenと同仕様：展開式） */
+    memoCard: {
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      shadowColor: "#000",
+      shadowOpacity: 0.1,
+      shadowRadius: 14,
+      shadowOffset: { width: 0, height: 6 },
+      elevation: 6,
+    },
+    memoCardCollapsed: {
+      minHeight: 54,
+      justifyContent: "center",
+    },
+    memoCardExpanded: {
+      minHeight: 120,
+    },
+    collapsedRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    collapsedLeft: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+      paddingRight: 8,
+    },
+    collapsedText: {
+      flex: 1,
+      fontSize: 14,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    collapsedTextPlaceholder: {
+      color: COLORS.TEXT_SUBTLE,
+    },
+    memoInput: {
+      flex: 1,
+      minHeight: 90,
+      fontSize: 14,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlignVertical: "top",
+    },
+
+
+    // Error text (re-using old naming)
+    modeErrorText: {
+      marginTop: 10,
+      fontSize: 11,
+      lineHeight: 16,
+      color: "#B91C1C",
+    },
+
+    // Upgrade CTA
+
+    // Modal
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: "rgba(0,0,0,0.35)",
+      paddingHorizontal: 16,
+      justifyContent: "center",
+    },
+    modalCard: {
+      borderRadius: 22,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      maxHeight: "82%",
+    },
+    modalHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 10,
+    },
+    modalTitle: {
+      fontSize: 14,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    modalCloseBtn: {
+      width: 36,
+      height: 36,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: COLORS.FIELD_BG,
+    },
+
+    sortRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 10,
+    },
+    sortPill: {
+      flex: 1,
+      marginHorizontal: 4,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    sortPillActive: {
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    sortPillText: {
+      fontSize: 11,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    sortPillTextActive: {
+      color: "#FFFFFF",
+    },
+
+    modalLoading: {
+      paddingVertical: 20,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    modalLoadingText: {
+      marginTop: 10,
+      fontSize: 12,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
+    },
+
+    listArea: { paddingBottom: 4 },
+    listRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      marginBottom: 8,
+    },
+    listRowActive: {
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+    },
+    activeBadge: {
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: 999,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      alignSelf: "flex-start",
+    },
+    activeBadgeText: {
+      fontSize: 10,
+      fontWeight: "900",
+      color: "#FFFFFF",
+    },
+    pickerEmptyInline: {
+      paddingVertical: 18,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
+    rowTitleLine: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+    },
+    rowTitle: {
+      flex: 1,
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+      paddingRight: 10,
+    },
+    newBadge: {
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: 999,
+      backgroundColor: "#EF4444",
+      alignSelf: "flex-start",
+    },
+    newBadgeText: {
+      fontSize: 10,
+      fontWeight: "900",
+      color: "#FFFFFF",
+    },
+    rowMetaLine: {
+      marginTop: 8,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    rowMetaItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginRight: 12,
+    },
+    rowMetaText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+
+    modalEmpty: {
+      paddingVertical: 18,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    modalEmptyText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
+      textAlign: "center",
+    },
+  });
+}
