@@ -138,6 +138,7 @@ export default function MyModelScreen({ route } = {}) {
   const [trendingError, setTrendingError] = useState("");
   const [trendingItems, setTrendingItems] = useState([]);
   const [activeTrending, setActiveTrending] = useState(null);
+  const [trendingMode, setTrendingMode] = useState("overall"); // overall | resonance | views
 
   const [holdersLoading, setHoldersLoading] = useState(false);
   const [holdersError, setHoldersError] = useState("");
@@ -191,8 +192,8 @@ export default function MyModelScreen({ route } = {}) {
     // まずキャッシュ（アプリ起動時プリロード）を即反映して、体感を速くする
     try {
       const entry = getPrefetchEntryFresh
-        ? getPrefetchEntryFresh("MyModel", "trending", PREFETCH_MAX_AGE_MS)
-        : getPrefetchEntry("MyModel", "trending");
+        ? getPrefetchEntryFresh("MyModel", `trending:${trendingMode}`, PREFETCH_MAX_AGE_MS)
+        : getPrefetchEntry("MyModel", `trending:${trendingMode}`);
       const cached = entry?.value;
       const items = Array.isArray(cached?.items) ? cached.items : null;
       if (items) {
@@ -209,15 +210,15 @@ export default function MyModelScreen({ route } = {}) {
     const hasCache = (() => {
       try {
         const entry = getPrefetchEntryFresh
-          ? getPrefetchEntryFresh("MyModel", "trending", PREFETCH_MAX_AGE_MS)
-          : getPrefetchEntry("MyModel", "trending");
+          ? getPrefetchEntryFresh("MyModel", `trending:${trendingMode}`, PREFETCH_MAX_AGE_MS)
+          : getPrefetchEntry("MyModel", `trending:${trendingMode}`);
         return Array.isArray(entry?.value?.items);
       } catch {
         return false;
       }
     })();
 
-    loadTrending({ silent: hasCache });
+    loadTrending({ silent: hasCache, mode: trendingMode });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -369,6 +370,7 @@ export default function MyModelScreen({ route } = {}) {
       setTrendingLoading(true);
     }
     setTrendingError("");
+    const mode = String(opts?.mode || "overall").trim() || "overall";
     try {
       const { userId, accessToken } = await getAuthContext();
       if (!accessToken) {
@@ -380,6 +382,7 @@ export default function MyModelScreen({ route } = {}) {
 
       const params = new URLSearchParams();
       params.append("limit", "20");
+      params.append("mode", mode);
       const url = `${QNA_TRENDING_ENDPOINT}?${params.toString()}`;
 
       const res = await fetch(url, {
@@ -420,7 +423,7 @@ export default function MyModelScreen({ route } = {}) {
 
       // cache
       try {
-        setPrefetch("MyModel", "trending", { userId: userId || null, items: list });
+        setPrefetch("MyModel", `trending:${mode}`, { userId: userId || null, items: list });
       } catch {
         // noop
       }
@@ -691,7 +694,7 @@ export default function MyModelScreen({ route } = {}) {
                     if (recoMode === "user") {
                       loadRecommendUsers();
                     } else {
-                      loadTrending();
+                      loadTrending({ mode: trendingMode });
                     }
                   }}
                   style={styles.recoRefreshBtn}
@@ -798,6 +801,73 @@ export default function MyModelScreen({ route } = {}) {
               ) : (
                 <>
                   <Text style={styles.recoSectionLabel}>トレンドの問い</Text>
+
+                  <View style={[styles.recoToggleRow, { marginTop: 8, marginBottom: 6 }]}>
+                    <Pressable
+                      onPress={() => {
+                        const next = "overall";
+                        setTrendingMode(next);
+                        loadTrending({ mode: next });
+                      }}
+                      style={[
+                        styles.recoTogglePill,
+                        trendingMode === "overall" && styles.recoTogglePillActive,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.recoToggleText,
+                          trendingMode === "overall" && styles.recoToggleTextActive,
+                        ]}
+                      >
+                        総合
+                      </Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={() => {
+                        const next = "resonance";
+                        setTrendingMode(next);
+                        loadTrending({ mode: next });
+                      }}
+                      style={[
+                        styles.recoTogglePill,
+                        trendingMode === "resonance" && styles.recoTogglePillActive,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.recoToggleText,
+                          trendingMode === "resonance" && styles.recoToggleTextActive,
+                        ]}
+                      >
+                        共鳴
+                      </Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={() => {
+                        const next = "views";
+                        setTrendingMode(next);
+                        loadTrending({ mode: next });
+                      }}
+                      style={[
+                        styles.recoTogglePill,
+                        { marginRight: 0 },
+                        trendingMode === "views" && styles.recoTogglePillActive,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.recoToggleText,
+                          trendingMode === "views" && styles.recoToggleTextActive,
+                        ]}
+                      >
+                        閲覧
+                      </Text>
+                    </Pressable>
+                  </View>
+
 
                   {trendingLoading ? (
                     <View style={styles.recoLoadingRow}>
