@@ -132,6 +132,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const [followerCount, setFollowerCount] = useState(0);
   const [followCountLoading, setFollowCountLoading] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowRequested, setIsFollowRequested] = useState(false);
   const [followActionLoading, setFollowActionLoading] = useState(false);
 
   // ステータス（アカウント公開情報）
@@ -312,6 +313,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       const followingCnt = Number(json?.following_count ?? 0) || 0;
       const followerCnt = Number(json?.follower_count ?? 0) || 0;
       const isFollowingServer = !!json?.is_following;
+      const isFollowRequestedServer = !!json?.is_follow_requested;
 
       setFollowingCount(followingCnt);
       setFollowerCount(followerCnt);
@@ -320,8 +322,10 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       const isSelfNow = !!user && String(targetUserId || "") === String(user.id);
       if (user && !isSelfNow) {
         setIsFollowing(isFollowingServer);
+        setIsFollowRequested(!isFollowingServer && isFollowRequestedServer);
       } else {
         setIsFollowing(false);
+        setIsFollowRequested(false);
       }
     } catch (e) {
       console.warn("refreshFollowState error:", e);
@@ -457,7 +461,12 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
         throw new Error(detail);
       }
 
-      setIsFollowing(!isFollowing);
+      const json = await res.json().catch(() => ({}));
+      const nextFollowing = !!json?.is_following;
+      const nextRequested = !!json?.is_follow_requested && !nextFollowing;
+
+      setIsFollowing(nextFollowing);
+      setIsFollowRequested(nextRequested);
 
       await refreshFollowState();
     } catch (e) {
@@ -959,36 +968,52 @@ const onRestorePurchases = async () => {
             <TouchableOpacity
               style={[
                 styles.followBtn,
-                isFollowing && styles.followBtnFollowing,
+                (isFollowing || isFollowRequested) && styles.followBtnFollowing,
                 { marginTop: 0, marginBottom: 16 },
                 (loading || followActionLoading) && styles.editNameBtnDisabled,
               ]}
               onPress={onToggleFollow}
               activeOpacity={0.85}
-              disabled={loading || followActionLoading}
-              accessibilityLabel={isFollowing ? "フォロー解除" : "フォローする"}
+              disabled={loading || followActionLoading || isFollowRequested}
+              accessibilityLabel={
+                isFollowing ? "フォロー解除" : isFollowRequested ? "申請中" : "フォローする"
+              }
             >
               {followActionLoading ? (
                 <ActivityIndicator
                   size="small"
-                  color={isFollowing ? colors.TEXT_ON_LIGHT : "#FFFFFF"}
+                  color={
+                    isFollowing || isFollowRequested
+                      ? colors.TEXT_ON_LIGHT
+                      : "#FFFFFF"
+                  }
                   style={{ marginRight: 6 }}
                 />
               ) : (
                 <Ionicons
-                  name={isFollowing ? "checkmark" : "person-add-outline"}
+                  name={
+                    isFollowing
+                      ? "checkmark"
+                      : isFollowRequested
+                      ? "time-outline"
+                      : "person-add-outline"
+                  }
                   size={18}
-                  color={isFollowing ? colors.TEXT_ON_LIGHT : "#FFFFFF"}
+                  color={
+                    isFollowing || isFollowRequested
+                      ? colors.TEXT_ON_LIGHT
+                      : "#FFFFFF"
+                  }
                   style={{ marginRight: 6 }}
                 />
               )}
               <Text
                 style={[
                   styles.followBtnText,
-                  !isFollowing && styles.followBtnTextOnGold,
+                  !isFollowing && !isFollowRequested && styles.followBtnTextOnGold,
                 ]}
               >
-                {isFollowing ? "フォロー中" : "フォローする"}
+                {isFollowing ? "フォロー中" : isFollowRequested ? "申請中" : "フォローする"}
               </Text>
             </TouchableOpacity>
           ) : null}
