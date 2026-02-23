@@ -1359,7 +1359,7 @@ closeEchoesModal();
         <View style={styles.qnaIntroCard}>
           <Text style={styles.qnaIntroTitle}>Reflections</Text>
           <Text style={styles.qnaIntroText}>
-            フォローしたユーザーのMyModelを使用できます。
+            閲覧したいMyModelを選択し、Reflectionを生成してください。
           </Text>
 
           {/* Main action */}
@@ -1394,7 +1394,7 @@ closeEchoesModal();
                   color="#FFFFFF"
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.goldButtonText}>問いを生成</Text>
+                <Text style={styles.goldButtonText}>Reflectionを生成</Text>
               </View>
             </CocolonButton>
             {effectiveTierLabel ? (
