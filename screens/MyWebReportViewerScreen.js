@@ -13,6 +13,7 @@ import {
   Share,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Svg, { Circle, G } from "react-native-svg";
 import CocolonBackButton from "../components/CocolonBackButton";
 
 // ✅ Supabase（週報の履歴で days が保存されていないケースのフォールバック再計算に使用）
@@ -22,8 +23,8 @@ import { getCurrentUserId } from "../lib/user";
 // 🎨 Theme
 import { useTheme } from "../theme/ThemeContext";
 // Subscription (MyWeb paywall)
-// - free: weekly/monthly are chart-only (no text / no PDF)
-// - plus/premium: can view full text + PDF
+// - free: Light表示
+// - plus/premium: Standard表示（Deepは将来拡張）
 const MYMODEL_API_BASE_URL =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
 const SUBSCRIPTION_ME_ENDPOINT = `${MYMODEL_API_BASE_URL}/subscription/me`;
@@ -51,6 +52,10 @@ function canViewMyWebFullText(tier) {
   return tier === "plus" || tier === "premium";
 }
 
+function canViewMyWebDeep(tier) {
+  return tier === "premium";
+}
+
 
 /**
  * MyWebReportViewerScreen
@@ -66,11 +71,11 @@ function canViewMyWebFullText(tier) {
 const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
 
 const EMOTIONS = [
-  { key: "joy", label: "喜び", color: "#FACC15" },
-  { key: "sadness", label: "悲しみ", color: "#60A5FA" },
-  { key: "anxiety", label: "不安", color: "#34D399" },
-  { key: "anger", label: "怒り", color: "#F87171" },
-  { key: "calm", label: "平穏", color: "#A78BFA" },
+  { key: "joy", label: "喜び", color: "#10B981" },
+  { key: "sadness", label: "悲しみ", color: "#6366F1" },
+  { key: "anxiety", label: "不安", color: "#38BDF8" },
+  { key: "anger", label: "怒り", color: "#EF4444" },
+  { key: "calm", label: "平穏", color: "#EAB308" },
 ];
 
 const JP_TO_KEY = {
@@ -80,6 +85,259 @@ const JP_TO_KEY = {
   怒り: "anger",
   平穏: "calm",
 };
+
+const SELF_INSIGHT_LABELS = new Set(["自己理解", "SelfInsight"]);
+const TIME_BUCKET_ORDER = ["0-6", "6-12", "12-18", "18-24"];
+
+function normalizeEmotionMap(raw) {
+  const src = raw && typeof raw === "object" ? raw : {};
+  return {
+    joy: coerceNum(src.joy),
+    sadness: coerceNum(src.sadness),
+    anxiety: coerceNum(src.anxiety),
+    anger: coerceNum(src.anger),
+    calm: coerceNum(src.calm) + coerceNum(src.peace),
+  };
+}
+
+function computeDominantKey(weightedCounts) {
+  const counts = normalizeEmotionMap(weightedCounts);
+  let dominantKey = null;
+  let maxVal = 0;
+  EMOTIONS.forEach((emotion) => {
+    const v = coerceNum(counts[emotion.key]);
+    if (v > maxVal) {
+      maxVal = v;
+      dominantKey = v > 0 ? emotion.key : null;
+    }
+  });
+  return dominantKey;
+}
+
+function normalizeTimeBucketRows(raw) {
+  if (!Array.isArray(raw)) return [];
+
+  const normalized = TIME_BUCKET_ORDER.map((bucket) => ({
+    bucket,
+    label: bucket,
+    inputCount: 0,
+    weightedTotal: 0,
+    counts: { joy: 0, sadness: 0, anxiety: 0, anger: 0, calm: 0 },
+    weightedCounts: { joy: 0, sadness: 0, anxiety: 0, anger: 0, calm: 0 },
+    sharePct: { joy: 0, sadness: 0, anxiety: 0, anger: 0, calm: 0 },
+    dominantKey: null,
+  }));
+
+  raw.forEach((item) => {
+    if (!item || typeof item !== "object") return;
+    const bucketKey = String(item.bucket || item.label || item.bucketKey || "").trim();
+    const idx = TIME_BUCKET_ORDER.indexOf(bucketKey);
+    if (idx === -1) return;
+
+    const counts = normalizeEmotionMap(item.counts);
+    const weightedCounts = normalizeEmotionMap(item.weightedCounts || item.weighted_counts);
+    const sharePctRaw = normalizeEmotionMap(item.sharePct || item.share_pct);
+    const weightedTotalRaw = coerceNum(item.weightedTotal ?? item.weighted_total);
+    const weightedTotal =
+      weightedTotalRaw > 0
+        ? weightedTotalRaw
+        : Object.values(weightedCounts).reduce((sum, value) => sum + coerceNum(value), 0);
+
+    let sharePct = sharePctRaw;
+    const hasSharePct = Object.values(sharePctRaw).some((value) => coerceNum(value) > 0);
+    if (!hasSharePct && weightedTotal > 0) {
+      sharePct = EMOTIONS.reduce((acc, emotion) => {
+        acc[emotion.key] = Math.round((coerceNum(weightedCounts[emotion.key]) / weightedTotal) * 100);
+        return acc;
+      }, {});
+    }
+
+    const dominantKey =
+      mapKey(item.dominantKey || item.dominant_key || item.dominant) ||
+      computeDominantKey(weightedCounts);
+
+    normalized[idx] = {
+      bucket: bucketKey,
+      label: String(item.label || bucketKey),
+      inputCount: coerceNum(item.inputCount ?? item.input_count),
+      weightedTotal,
+      counts,
+      weightedCounts,
+      sharePct: normalizeEmotionMap(sharePct),
+      dominantKey: dominantKey || null,
+    };
+  });
+
+  return normalized;
+}
+
+function extractStandardTimeBuckets(contentJson, standardReport) {
+  const candidates = [
+    standardReport?.features?.timeBuckets,
+    standardReport?.features?.time_buckets,
+    standardReport?.timeBuckets,
+    standardReport?.time_buckets,
+    contentJson?.timeBuckets,
+    contentJson?.time_buckets,
+    contentJson?.metrics?.timeBuckets,
+    contentJson?.metrics?.time_buckets,
+  ];
+
+  for (const candidate of candidates) {
+    const rows = normalizeTimeBucketRows(candidate);
+    if (rows.length > 0) return rows;
+  }
+  return [];
+}
+
+
+function emotionLabelJa(value) {
+  if (!value) return "";
+  const mapped = mapKey(value);
+  const emotion = EMOTIONS.find((item) => item.key === mapped);
+  return emotion?.label || String(value || "");
+}
+
+function formatMinutesJa(value) {
+  const mins = coerceNum(value);
+  if (mins <= 0) return "—";
+  if (mins >= 60) {
+    const hours = Math.floor(mins / 60);
+    const remain = mins % 60;
+    return remain > 0 ? `${hours}時間${remain}分` : `${hours}時間`;
+  }
+  return `${mins}分`;
+}
+
+function normalizeDeepTransitionEdges(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => {
+      const fromLabelJa = String(item.fromLabelJa || item.from_label_ja || emotionLabelJa(item.fromLabel || item.from_label) || "");
+      const toLabelJa = String(item.toLabelJa || item.to_label_ja || emotionLabelJa(item.toLabel || item.to_label) || "");
+      const routeLabel =
+        String(item.routeLabel || item.route_label || "").trim() ||
+        (fromLabelJa && toLabelJa ? `${fromLabelJa} → ${toLabelJa}` : "");
+      return {
+        routeLabel,
+        count: coerceNum(item.count),
+        share: coerceNum(item.share),
+        meanMinutes: coerceNum(item.meanMinutes ?? item.mean_minutes),
+        dominantTimeBuckets: Array.isArray(item.dominantTimeBuckets || item.dominant_time_buckets)
+          ? (item.dominantTimeBuckets || item.dominant_time_buckets)
+          : [],
+      };
+    })
+    .filter((item) => item.routeLabel)
+    .sort((a, b) => b.count - a.count);
+}
+
+function normalizeDeepRecoveryRows(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => {
+      const fromLabelJa = String(item.fromLabelJa || item.from_label_ja || emotionLabelJa(item.fromLabel || item.from_label) || "");
+      const toLabelJa = String(item.toLabelJa || item.to_label_ja || emotionLabelJa(item.toLabel || item.to_label) || "");
+      const routeLabel =
+        String(item.routeLabel || item.route_label || "").trim() ||
+        (fromLabelJa && toLabelJa ? `${fromLabelJa} → ${toLabelJa}` : "");
+      return {
+        routeLabel,
+        count: coerceNum(item.count),
+        meanMinutes: coerceNum(item.meanMinutes ?? item.mean_minutes),
+        medianMinutes: coerceNum(item.medianMinutes ?? item.median_minutes),
+      };
+    })
+    .filter((item) => item.routeLabel)
+    .sort((a, b) => {
+      if (a.meanMinutes === b.meanMinutes) return b.count - a.count;
+      return a.meanMinutes - b.meanMinutes;
+    });
+}
+
+function normalizeControlPatterns(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      patternId: String(item.patternId || item.pattern_id || item.label || "pattern"),
+      label: String(item.label || "制御傾向"),
+      description: String(item.description || "").trim(),
+      routes: Array.isArray(item.transitionRouteLabels || item.transition_route_labels)
+        ? (item.transitionRouteLabels || item.transition_route_labels)
+        : [],
+      memoTriggers: Array.isArray(item.memoTriggers || item.memo_triggers)
+        ? (item.memoTriggers || item.memo_triggers)
+        : [],
+    }))
+    .slice(0, 5);
+}
+
+function extractStructuralReport(contentJson) {
+  const structural = contentJson?.deepReport || contentJson?.structural_report;
+  return structural && typeof structural === "object" ? structural : null;
+}
+
+function getTopEmotionPairs(sharePct, limit = 2) {
+  const src = normalizeEmotionMap(sharePct);
+  return EMOTIONS.map((emotion) => ({
+    key: emotion.key,
+    label: emotion.label,
+    pct: coerceNum(src[emotion.key]),
+  }))
+    .filter((item) => item.pct > 0)
+    .sort((a, b) => b.pct - a.pct)
+    .slice(0, limit);
+}
+
+function PieRingChart({ shares, size = 88, strokeWidth = 14, trackColor = "#E5E7EB" }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const normalizedShares = normalizeEmotionMap(shares);
+  const segments = EMOTIONS.map((emotion) => ({
+    key: emotion.key,
+    color: emotion.color,
+    value: Math.max(0, Math.min(100, coerceNum(normalizedShares[emotion.key]))),
+  })).filter((segment) => segment.value > 0);
+
+  let offset = 0;
+
+  return (
+    <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <Circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        stroke={trackColor}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <G rotation="-90" origin={`${size / 2}, ${size / 2}`}>
+        {segments.map((segment) => {
+          const arcLength = (segment.value / 100) * circumference;
+          const element = (
+            <Circle
+              key={segment.key}
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              stroke={segment.color}
+              strokeWidth={strokeWidth}
+              fill="none"
+              strokeDasharray={`${arcLength} ${Math.max(circumference - arcLength, 0)}`}
+              strokeDashoffset={-offset}
+              strokeLinecap={segments.length === 1 ? "round" : "butt"}
+            />
+          );
+          offset += arcLength;
+          return element;
+        })}
+      </G>
+    </Svg>
+  );
+}
 
 function mapKey(maybeJpOrKey) {
   if (!maybeJpOrKey) return null;
@@ -148,6 +406,7 @@ function buildDaysFromRows(rows) {
       : [];
 
     for (const it of details) {
+      if (SELF_INSIGHT_LABELS.has(String(it?.type || "").trim())) continue;
       const k = mapKey(it?.type);
       if (!k) continue;
       const w = STRENGTH_SCORE[it?.strength] || 0;
@@ -275,12 +534,15 @@ function escapeHtml(s) {
     .replace(/'/g, "&#039;");
 }
 
-function formatRange(periodStart, periodEnd) {
+function formatRange(periodStart, periodEnd, reportType) {
   try {
     const s = new Date(periodStart);
     const e = new Date(periodEnd);
     if (Number.isNaN(s.getTime()) || Number.isNaN(e.getTime())) return "";
     const md = (d) => `${d.getMonth() + 1}/${d.getDate()}`;
+    if (reportType === "daily") {
+      return `${s.getFullYear()}/${s.getMonth() + 1}/${s.getDate()}（1日）`;
+    }
     return `${md(s)} ～ ${md(e)}`;
   } catch {
     return "";
@@ -308,6 +570,13 @@ export default function MyWebReportViewerScreen({
     (async () => {
       setTierLoading(true);
       try {
+        // ✅ /myweb/reports/ready から viewer_tier を渡せる場合は、それを優先（subscription/me 呼び出しを省略）
+        const tierFromReport = report?.viewer_tier;
+        if (tierFromReport) {
+          if (!cancelled) setSubscriptionTier(normalizeSubscriptionTier(tierFromReport));
+          return;
+        }
+
         // Supabase セッションからアクセストークン取得
         let accessToken = null;
         try {
@@ -350,7 +619,40 @@ export default function MyWebReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [report?.viewer_tier]);
+
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const reportId = report?.id;
+        if (!reportId) return;
+
+        const userId = await getCurrentUserId();
+        if (!userId || cancelled) return;
+
+        const { error } = await supabase
+          .from("report_reads")
+          .upsert(
+            { user_id: userId, report_id: reportId },
+            {
+              onConflict: "user_id,report_id",
+              ignoreDuplicates: true,
+            }
+          );
+
+        if (error) throw error;
+      } catch (e) {
+        console.warn("MyWebReportViewerScreen: failed to mark report read", e);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [report?.id]);
 
 
   const themed = useMemo(() => {
@@ -401,17 +703,6 @@ export default function MyWebReportViewerScreen({
 
   const title = report?.title || "Report";
   const reportType = report?.report_type || "";
-const isTextLocked = useMemo(() => {
-    // Free(またはプラン未確定/失敗)は 週報・月報の本文を非表示（グラフのみ）
-    if (reportType !== "weekly" && reportType !== "monthly") return false;
-    if (tierLoading) return true; // fail-closed
-    return !canViewMyWebFullText(subscriptionTier);
-  }, [reportType, subscriptionTier, tierLoading]);
-
-  const range = useMemo(() => {
-    if (!report?.period_start || !report?.period_end) return "";
-    return formatRange(report.period_start, report.period_end);
-  }, [report?.period_start, report?.period_end]);
 
   const contentText = report?.content_text || "";
   const contentJson = useMemo(
@@ -419,100 +710,109 @@ const isTextLocked = useMemo(() => {
     [report?.content_json]
   );
 
+  const standardReport = useMemo(() => {
+    const std = contentJson?.standardReport || contentJson?.standard_report;
+    return std && typeof std === "object" ? std : null;
+  }, [contentJson]);
+
+  const deepReport = useMemo(() => extractStructuralReport(contentJson), [contentJson]);
+
+  const canViewStandardText = useMemo(
+    () => canViewMyWebFullText(subscriptionTier),
+    [subscriptionTier]
+  );
+  const canViewDeepText = useMemo(
+    () => canViewMyWebDeep(subscriptionTier),
+    [subscriptionTier]
+  );
+
+  const hasStandardText = useMemo(() => {
+    if (!standardReport || typeof standardReport !== "object") return false;
+    return Boolean(
+      (typeof standardReport.contentText === "string" && standardReport.contentText.trim()) ||
+        (typeof standardReport.content_text === "string" && standardReport.content_text.trim()) ||
+        (typeof standardReport.text === "string" && standardReport.text.trim())
+    );
+  }, [standardReport]);
+
+  const hasStructuralText = useMemo(() => {
+    if (!deepReport || typeof deepReport !== "object") return false;
+    return Boolean(
+      (typeof deepReport.contentText === "string" && deepReport.contentText.trim()) ||
+        (typeof deepReport.content_text === "string" && deepReport.content_text.trim()) ||
+        (typeof deepReport.text === "string" && deepReport.text.trim())
+    );
+  }, [deepReport]);
+
+  const hasStructuralData = useMemo(() => {
+    if (!deepReport || typeof deepReport !== "object") return false;
+    return Boolean(
+      (Array.isArray(deepReport.transitionEdges) && deepReport.transitionEdges.length > 0) ||
+      (Array.isArray(deepReport.recoveryTime) && deepReport.recoveryTime.length > 0) ||
+      (Array.isArray(deepReport.controlPatterns) && deepReport.controlPatterns.length > 0)
+    );
+  }, [deepReport]);
+
+  const showStandardUpgradeCard = useMemo(() => {
+    if (tierLoading) return false;
+    return !canViewStandardText && hasStandardText;
+  }, [tierLoading, canViewStandardText, hasStandardText]);
+
+  const showDeepUpgradeCard = useMemo(() => {
+    if (tierLoading) return false;
+    if (subscriptionTier !== "plus") return false;
+    return !canViewDeepText && (hasStructuralText || hasStructuralData);
+  }, [tierLoading, subscriptionTier, canViewDeepText, hasStructuralText, hasStructuralData]);
+
+  const range = useMemo(() => {
+    if (!report?.period_start || !report?.period_end) return "";
+    return formatRange(report.period_start, report.period_end, reportType);
+  }, [report?.period_start, report?.period_end, reportType]);
+
   // ===== v3 text resolution (prefer structured content_json over legacy content_text) =====
   const displayText = useMemo(() => {
     const legacy = String(contentText || "");
 
-    // Standard (Plus) text: content_json.standardReport.contentText
     let stdText = "";
+    let deepText = "";
     try {
-      const std = contentJson?.standardReport || contentJson?.standard_report;
-      if (std && typeof std === "object") {
-        if (typeof std.contentText === "string") stdText = std.contentText;
-        else if (typeof std.content_text === "string") stdText = std.content_text;
-        else if (typeof std.text === "string") stdText = std.text;
+      if (standardReport && typeof standardReport === "object") {
+        if (typeof standardReport.contentText === "string") stdText = standardReport.contentText;
+        else if (typeof standardReport.content_text === "string") stdText = standardReport.content_text;
+        else if (typeof standardReport.text === "string") stdText = standardReport.text;
       }
-      if (!stdText && typeof contentJson?.standardText === "string")
+      if (!stdText && typeof contentJson?.standardText === "string") {
         stdText = contentJson.standardText;
-      if (!stdText && typeof contentJson?.standard_text === "string")
+      }
+      if (!stdText && typeof contentJson?.standard_text === "string") {
         stdText = contentJson.standard_text;
+      }
+
+      if (deepReport && typeof deepReport === "object") {
+        if (typeof deepReport.contentText === "string") deepText = deepReport.contentText;
+        else if (typeof deepReport.content_text === "string") deepText = deepReport.content_text;
+        else if (typeof deepReport.text === "string") deepText = deepReport.text;
+      }
     } catch {
       stdText = "";
+      deepText = "";
     }
 
-    // Structural (Premium) text: content_json.structuralReport.sections
-    let structuralText = "";
-    try {
-      const structural =
-        contentJson?.structuralReport ||
-        contentJson?.structural_report ||
-        contentJson?.astorMeta?.report ||
-        contentJson?.astor_meta?.report ||
-        contentJson?.meta?.report ||
-        null;
-
-      const sections =
-        (structural &&
-          (structural.sections ||
-            structural?.meta?.report?.sections ||
-            structural?.report?.sections)) ||
-        [];
-
-      if (Array.isArray(sections)) {
-        const blocks = [];
-
-        for (const sec of sections) {
-          if (!sec || typeof sec !== "object") continue;
-
-          const rawTitle =
-            (typeof sec.title === "string" && sec.title) ||
-            (typeof sec.heading === "string" && sec.heading) ||
-            (typeof sec.label === "string" && sec.label) ||
-            "";
-
-          // Avoid exposing internal keys like snake_case when title isn't provided.
-          const title =
-            rawTitle && !String(rawTitle).includes("_")
-              ? String(rawTitle).trim()
-              : "";
-
-          let body =
-            (typeof sec.text === "string" && sec.text) ||
-            (typeof sec.content === "string" && sec.content) ||
-            (typeof sec.body === "string" && sec.body) ||
-            "";
-
-          if (!body && Array.isArray(sec.paragraphs)) {
-            body = sec.paragraphs
-              .filter((x) => typeof x === "string" && x.trim())
-              .join("\n");
-          }
-          if (!body && Array.isArray(sec.lines)) {
-            body = sec.lines
-              .filter((x) => typeof x === "string" && x.trim())
-              .join("\n");
-          }
-
-          const block = [title, body].filter(Boolean).join("\n").trim();
-          if (block) blocks.push(block);
-        }
-
-        structuralText = blocks.join("\n\n").trim();
-      }
-    } catch {
-      structuralText = "";
+    if (canViewDeepText) {
+      const parts = [stdText, deepText].filter((part) => typeof part === "string" && part.trim());
+      return parts.length > 0 ? parts.join("\n\n") : legacy;
     }
-
-    // Choose by subscription tier (fallback gracefully)
-    if (subscriptionTier === "premium") return structuralText || stdText || legacy;
-    if (subscriptionTier === "plus") return stdText || legacy;
-    return stdText || legacy;
-  }, [contentJson, contentText, subscriptionTier]);
+    if (canViewStandardText) return stdText || legacy;
+    return legacy;
+  }, [canViewDeepText, canViewStandardText, contentJson, contentText, standardReport, deepReport]);
 
   // ===== Monthly chart data (stored in content_json.metrics.weeks) =====
   const monthlyWeeks = useMemo(() => {
     if (reportType !== "monthly") return [];
-    const weeks = contentJson?.metrics?.weeks || contentJson?.weeks;
+    const weeks =
+      contentJson?.metrics?.weeks ||
+      contentJson?.weeks ||
+      standardReport?.features?.weeks;
     if (!Array.isArray(weeks)) return [];
     return weeks.map((w, idx) => ({
       index: typeof w?.index === "number" ? w.index : idx,
@@ -531,7 +831,7 @@ const isTextLocked = useMemo(() => {
             coerceNum(w?.anger) +
             coerceNum(w?.calm),
     }));
-  }, [reportType, contentJson]);
+  }, [reportType, contentJson, standardReport]);
 
   const monthlyMaxSum = useMemo(() => {
     const sums = monthlyWeeks.map((w) => coerceNum(w.total));
@@ -553,7 +853,7 @@ const isTextLocked = useMemo(() => {
     }
 
     // ① 保存済み days があればそれを採用（新形式）
-    const savedDays = contentJson?.days;
+    const savedDays = contentJson?.days || standardReport?.features?.days;
     if (Array.isArray(savedDays)) {
       setWeeklyDays(
         savedDays.map((d) => ({
@@ -593,8 +893,9 @@ const isTextLocked = useMemo(() => {
 
         const { data, error } = await supabase
           .from("emotions")
-          .select("created_at, emotions, emotion_details")
+          .select("created_at, emotions, emotion_details, is_secret")
           .eq("user_id", userId)
+          .eq("is_secret", false)
           .gte("created_at", startIso)
           .lte("created_at", endIso)
           .order("created_at", { ascending: true });
@@ -620,7 +921,7 @@ const isTextLocked = useMemo(() => {
     return () => {
       cancelled = true;
     };
-  }, [reportType, contentJson, report?.period_start, report?.period_end]);
+  }, [reportType, contentJson, standardReport, report?.period_start, report?.period_end]);
 
   const weeklyMaxSum = useMemo(() => {
     const sums = weeklyDays.map(
@@ -634,6 +935,73 @@ const isTextLocked = useMemo(() => {
     return Math.max(...sums, 1);
   }, [weeklyDays]);
 
+  const standardTimeBuckets = useMemo(() => {
+    if (reportType !== "weekly" && reportType !== "monthly") return [];
+    return extractStandardTimeBuckets(contentJson, standardReport);
+  }, [reportType, contentJson, standardReport]);
+
+  const showStandardTimeBuckets = useMemo(() => {
+    if (!canViewStandardText) return false;
+    if (reportType !== "weekly" && reportType !== "monthly") return false;
+    return Array.isArray(standardTimeBuckets) && standardTimeBuckets.length > 0;
+  }, [canViewStandardText, reportType, standardTimeBuckets]);
+
+
+  const deepTransitionEdges = useMemo(() => {
+    if (!deepReport) return [];
+    return normalizeDeepTransitionEdges(
+      deepReport.transitionEdges ||
+      deepReport.transition_edges ||
+      deepReport.features?.transitionEdges ||
+      deepReport.features?.transition_edges
+    );
+  }, [deepReport]);
+
+  const deepRecoveryRows = useMemo(() => {
+    if (!deepReport) return [];
+    return normalizeDeepRecoveryRows(
+      deepReport.recoveryTime ||
+      deepReport.recovery_time ||
+      deepReport.features?.recoveryTime ||
+      deepReport.features?.recovery_time
+    );
+  }, [deepReport]);
+
+  const deepControlPatterns = useMemo(() => {
+    if (!deepReport) return [];
+    return normalizeControlPatterns(
+      deepReport.controlPatterns ||
+      deepReport.control_patterns ||
+      deepReport.features?.controlPatterns ||
+      deepReport.features?.control_patterns
+    );
+  }, [deepReport]);
+
+  const deepTransitionMaxCount = useMemo(() => {
+    return Math.max(...deepTransitionEdges.map((item) => coerceNum(item.count)), 1);
+  }, [deepTransitionEdges]);
+
+  const deepRecoveryMaxMinutes = useMemo(() => {
+    return Math.max(...deepRecoveryRows.map((item) => coerceNum(item.meanMinutes)), 1);
+  }, [deepRecoveryRows]);
+
+  const showDeepTransitionChart = useMemo(() => {
+    if (!canViewDeepText) return false;
+    if (reportType !== "weekly" && reportType !== "monthly") return false;
+    return Array.isArray(deepTransitionEdges) && deepTransitionEdges.length > 0;
+  }, [canViewDeepText, reportType, deepTransitionEdges]);
+
+  const showDeepRecoveryChart = useMemo(() => {
+    if (!canViewDeepText) return false;
+    if (reportType !== "weekly" && reportType !== "monthly") return false;
+    return Array.isArray(deepRecoveryRows) && deepRecoveryRows.length > 0;
+  }, [canViewDeepText, reportType, deepRecoveryRows]);
+
+  const showDeepPatterns = useMemo(() => {
+    if (!canViewDeepText) return false;
+    return Array.isArray(deepControlPatterns) && deepControlPatterns.length > 0;
+  }, [canViewDeepText, deepControlPatterns]);
+
   return (
     <SafeAreaView
       style={[styles.container, themed.container, { backgroundColor: screenBg }]}
@@ -645,6 +1013,9 @@ const isTextLocked = useMemo(() => {
         <Text style={[styles.headerTitle, themed.headerTitle]} numberOfLines={1}>
           {title}
         </Text>
+        {/*
+          PDF保存ボタンは将来的に復活させる可能性があるため、
+          実装は残したまま一時的に非表示にしています。
         {!isTextLocked && String(displayText || "").trim() ? (
           <TouchableOpacity
             style={styles.pdfBtn}
@@ -661,6 +1032,8 @@ const isTextLocked = useMemo(() => {
         ) : (
           <View style={{ width: 70 }} />
         )}
+        */}
+        <View style={{ width: 70 }} />
       </View>
 
       {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
@@ -830,12 +1203,205 @@ const isTextLocked = useMemo(() => {
           </View>
         ) : null}
 
-        
-        {/* ===== Text (stored snapshot) ===== */}
-        {isTextLocked ? (
+        {showStandardTimeBuckets ? (
           <View style={[styles.chartCard, themed.chartCard]}>
             <Text style={[styles.chartTitle, themed.chartTitle]}>
-              {tierLoading ? "プラン情報を確認中…" : "本文はPlus会員以上で閲覧できます"}
+              時間帯ごとの感情傾向
+            </Text>
+
+            <View style={styles.legendRow}>
+              {EMOTIONS.map((e) => (
+                <View key={`tb-legend-${e.key}`} style={styles.legendItem}>
+                  <View style={[styles.legendDot, { backgroundColor: e.color }]} />
+                  <Text style={[styles.legendText, themed.legendText]}>{e.label}</Text>
+                </View>
+              ))}
+            </View>
+
+            <View style={styles.timeBucketGrid}>
+              {standardTimeBuckets.map((bucketRow) => {
+                const dominantEmotion = EMOTIONS.find((emotion) => emotion.key === bucketRow?.dominantKey);
+                const topPairs = getTopEmotionPairs(bucketRow?.sharePct, 2);
+
+                return (
+                  <View
+                    key={bucketRow?.bucket || bucketRow?.label}
+                    style={[
+                      styles.timeBucketCard,
+                      {
+                        backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
+                        borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                      },
+                    ]}
+                  >
+                    <View style={styles.timeBucketHeader}>
+                      <Text style={[styles.timeBucketTitle, themed.chartTitle]}>
+                        {bucketRow?.label || bucketRow?.bucket || "—"}
+                      </Text>
+                      <Text style={[styles.timeBucketMeta, themed.gridLabel]}>
+                        入力 {coerceNum(bucketRow?.inputCount)}件
+                      </Text>
+                    </View>
+
+                    <View style={styles.timeBucketChartWrap}>
+                      <PieRingChart
+                        shares={bucketRow?.sharePct}
+                        trackColor={isDark ? colors.CARD_BORDER : "#E5E7EB"}
+                      />
+                      <View style={styles.timeBucketCenter}>
+                        <Text style={[styles.timeBucketCenterMain, themed.chartTitle]}>
+                          {dominantEmotion?.label || "—"}
+                        </Text>
+                        <Text style={[styles.timeBucketCenterSub, themed.gridLabel]}>
+                          中心感情
+                        </Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.timeBucketSummary}>
+                      {topPairs.length > 0 ? (
+                        topPairs.map((pair) => (
+                          <Text
+                            key={`${bucketRow?.bucket || bucketRow?.label}-${pair.key}`}
+                            style={[styles.timeBucketSummaryText, themed.legendText]}
+                          >
+                            {pair.label} {pair.pct}%
+                          </Text>
+                        ))
+                      ) : (
+                        <Text style={[styles.timeBucketSummaryText, themed.legendText]}>
+                          まだ十分な入力がありません
+                        </Text>
+                      )}
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        ) : null}
+
+
+        {showDeepTransitionChart ? (
+          <View style={[styles.chartCard, themed.chartCard]}>
+            <Text style={[styles.chartTitle, themed.chartTitle]}>
+              よく見られた感情の流れ
+            </Text>
+            <View style={styles.deepList}>
+              {deepTransitionEdges.slice(0, 5).map((edge, idx) => {
+                const ratio = Math.max(8, Math.min(100, Math.round((coerceNum(edge.count) / (deepTransitionMaxCount || 1)) * 100)));
+                return (
+                  <View key={`${edge.routeLabel}-${idx}`} style={styles.deepRow}>
+                    <View style={styles.deepRowHeader}>
+                      <Text style={[styles.deepRowTitle, themed.chartTitle]}>{edge.routeLabel}</Text>
+                      <Text style={[styles.deepRowMeta, themed.gridLabel]}>{coerceNum(edge.count)}回</Text>
+                    </View>
+                    <View style={[styles.deepBarTrack, { backgroundColor: isDark ? colors.CARD_BORDER : "#E5E7EB" }]}>
+                      <View
+                        style={[
+                          styles.deepBarFill,
+                          {
+                            width: `${ratio}%`,
+                            backgroundColor: isDark ? colors.TEXT_ON_LIGHT : "#111827",
+                          },
+                        ]}
+                      />
+                    </View>
+                    <Text style={[styles.deepRowSub, themed.legendText]}>
+                      平均 {formatMinutesJa(edge.meanMinutes)}
+                      {edge.share > 0 ? ` ・ ${edge.share}%` : ""}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        ) : null}
+
+        {showDeepRecoveryChart ? (
+          <View style={[styles.chartCard, themed.chartCard]}>
+            <Text style={[styles.chartTitle, themed.chartTitle]}>
+              切り替わり時間
+            </Text>
+            <View style={styles.deepList}>
+              {deepRecoveryRows.slice(0, 5).map((row, idx) => {
+                const ratio = Math.max(8, Math.min(100, Math.round((coerceNum(row.meanMinutes) / (deepRecoveryMaxMinutes || 1)) * 100)));
+                return (
+                  <View key={`${row.routeLabel}-${idx}`} style={styles.deepRow}>
+                    <View style={styles.deepRowHeader}>
+                      <Text style={[styles.deepRowTitle, themed.chartTitle]}>{row.routeLabel}</Text>
+                      <Text style={[styles.deepRowMeta, themed.gridLabel]}>平均 {formatMinutesJa(row.meanMinutes)}</Text>
+                    </View>
+                    <View style={[styles.deepBarTrack, { backgroundColor: isDark ? colors.CARD_BORDER : "#E5E7EB" }]}>
+                      <View
+                        style={[
+                          styles.deepBarFill,
+                          {
+                            width: `${ratio}%`,
+                            backgroundColor: isDark ? colors.BORDER_GOLD || colors.TEXT_ON_LIGHT : "#F59E0B",
+                          },
+                        ]}
+                      />
+                    </View>
+                    <Text style={[styles.deepRowSub, themed.legendText]}>
+                      観測 {coerceNum(row.count)}回
+                      {row.medianMinutes > 0 ? ` ・ 中央値 ${formatMinutesJa(row.medianMinutes)}` : ""}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        ) : null}
+
+        {showDeepPatterns ? (
+          <View style={[styles.chartCard, themed.chartCard]}>
+            <Text style={[styles.chartTitle, themed.chartTitle]}>
+              観測された制御パターン
+            </Text>
+            <View style={styles.deepList}>
+              {deepControlPatterns.slice(0, 5).map((pattern) => {
+                const firstMemo = Array.isArray(pattern.memoTriggers) && pattern.memoTriggers.length > 0
+                  ? pattern.memoTriggers[0]
+                  : null;
+                const firstKeyword = firstMemo && typeof firstMemo === "object" ? String(firstMemo.keyword || "").trim() : "";
+                return (
+                  <View
+                    key={pattern.patternId}
+                    style={[
+                      styles.patternCard,
+                      {
+                        backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
+                        borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                      },
+                    ]}
+                  >
+                    <Text style={[styles.patternTitle, themed.chartTitle]}>{pattern.label}</Text>
+                    {pattern.description ? (
+                      <Text style={[styles.patternDesc, themed.legendText]}>{pattern.description}</Text>
+                    ) : null}
+                    {Array.isArray(pattern.routes) && pattern.routes.length > 0 ? (
+                      <Text style={[styles.patternMeta, themed.legendText]}>
+                        代表的な流れ: {pattern.routes.slice(0, 2).join(" / ")}
+                      </Text>
+                    ) : null}
+                    {firstKeyword ? (
+                      <Text style={[styles.patternMeta, themed.legendText]}>
+                        思考トリガー候補: 「{firstKeyword}」
+                      </Text>
+                    ) : null}
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        ) : null}
+        
+        {/* ===== Text (stored snapshot) ===== */}
+        {showStandardUpgradeCard ? (
+          <View style={[styles.chartCard, themed.chartCard]}>
+            <Text style={[styles.chartTitle, themed.chartTitle]}>
+              {tierLoading ? "プラン情報を確認中…" : "Standard分析はPlus会員以上で閲覧できます"}
             </Text>
 
             {tierLoading ? (
@@ -847,10 +1413,10 @@ const isTextLocked = useMemo(() => {
             ) : null}
 
             <Text style={[styles.p, themed.p]}>
-              無料会員は週報・月報はグラフのみ表示です。
+              現在はLight版を表示しています。
             </Text>
             <Text style={[styles.p, themed.p]}>
-              Plus会員以上で本文の閲覧とPDF出力が利用できます。
+              Plus会員以上で、より詳しい観測コメントを閲覧できます。
             </Text>
 
             {!tierLoading ? (
@@ -887,7 +1453,67 @@ const isTextLocked = useMemo(() => {
               </TouchableOpacity>
             ) : null}
           </View>
-        ) : displayText ? (
+        ) : null}
+
+
+        {showDeepUpgradeCard ? (
+          <View style={[styles.chartCard, themed.chartCard]}>
+            <Text style={[styles.chartTitle, themed.chartTitle]}>
+              {tierLoading ? "プラン情報を確認中…" : "Deep分析はPremium会員で閲覧できます"}
+            </Text>
+
+            {tierLoading ? (
+              <View style={{ paddingVertical: 10 }}>
+                <ActivityIndicator
+                  color={isDark ? colors.TEXT_ON_LIGHT : undefined}
+                />
+              </View>
+            ) : null}
+
+            <Text style={[styles.p, themed.p]}>
+              現在はStandard版を表示しています。
+            </Text>
+            <Text style={[styles.p, themed.p]}>
+              Premium会員で、感情の流れ・切り替わり時間・制御パターンまで閲覧できます。
+            </Text>
+
+            {!tierLoading ? (
+              <TouchableOpacity
+                style={[styles.paywallBtn, themed.paywallBtn]}
+                onPress={() => {
+                  if (typeof onOpenSubscription === "function") {
+                    try {
+                      onOpenSubscription?.();
+                    } catch {
+                      // no-op
+                    }
+                    return;
+                  }
+                  Alert.alert(
+                    "プラン確認",
+                    "加入画面を開けませんでした。もう一度お試しください。"
+                  );
+                }}
+                activeOpacity={0.85}
+              >
+                <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
+                  プランを見る
+                </Text>
+                <Ionicons
+                  name="chevron-forward"
+                  size={18}
+                  color={
+                    isDark
+                      ? colors.ACCENT_TEXT || colors.TEXT_ON_LIGHT
+                      : "#111827"
+                  }
+                />
+              </TouchableOpacity>
+            ) : null}
+          </View>
+        ) : null}
+
+        {displayText ? (
           displayText.split("\n").map((line, idx) => (
             <Text key={`l-${idx}`} style={[styles.p, themed.p]}>
               {line}
@@ -1042,5 +1668,127 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 2,
     borderTopRightRadius: 2,
     marginTop: 1,
+  },
+
+  timeBucketGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginTop: 4,
+  },
+  timeBucketCard: {
+    width: "48.5%",
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  timeBucketHeader: {
+    marginBottom: 8,
+  },
+  timeBucketTitle: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: "#111827",
+  },
+  timeBucketMeta: {
+    marginTop: 2,
+    fontSize: 11,
+    color: "#6B7280",
+  },
+  timeBucketChartWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 4,
+  },
+  timeBucketCenter: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  timeBucketCenterMain: {
+    fontSize: 12,
+    fontWeight: "800",
+    color: "#111827",
+  },
+  timeBucketCenterSub: {
+    marginTop: 1,
+    fontSize: 10,
+    color: "#6B7280",
+  },
+  timeBucketSummary: {
+    marginTop: 8,
+    minHeight: 34,
+    justifyContent: "center",
+  },
+  timeBucketSummaryText: {
+    fontSize: 11,
+    lineHeight: 16,
+    color: "#4B5563",
+  },
+
+  deepList: {
+    marginTop: 4,
+  },
+  deepRow: {
+    marginBottom: 12,
+  },
+  deepRowHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 6,
+  },
+  deepRowTitle: {
+    flex: 1,
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#111827",
+    marginRight: 8,
+  },
+  deepRowMeta: {
+    fontSize: 11,
+    color: "#6B7280",
+  },
+  deepBarTrack: {
+    width: "100%",
+    height: 8,
+    borderRadius: 999,
+    overflow: "hidden",
+  },
+  deepBarFill: {
+    height: 8,
+    borderRadius: 999,
+  },
+  deepRowSub: {
+    marginTop: 6,
+    fontSize: 11,
+    lineHeight: 16,
+    color: "#4B5563",
+  },
+  patternCard: {
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  patternTitle: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: "#111827",
+    marginBottom: 4,
+  },
+  patternDesc: {
+    fontSize: 12,
+    lineHeight: 18,
+    color: "#4B5563",
+  },
+  patternMeta: {
+    marginTop: 4,
+    fontSize: 11,
+    lineHeight: 16,
+    color: "#4B5563",
   },
 });
