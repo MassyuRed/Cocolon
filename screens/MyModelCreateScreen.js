@@ -476,7 +476,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
           <View style={styles.introCard}>
             <Text style={styles.introTitle}>問いに答えて、MyModelを構築</Text>
             <Text style={styles.introText}>
-              全てに答える必要はありません。{"\n"}「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}{"\n"}「回答済み」となった問いの編集は、Plus会員以上で利用できます。
+              全てに答える必要はありません。{"\n"}「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}{"\n"}2ページ目以降はPlus会員以上で利用できます。
             </Text>
             <View style={styles.progressRow}>
               <Text style={styles.progressText}>
@@ -568,13 +568,13 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
                       {hasAnswer ? (
                         <View style={[styles.qStatusPill, styles.qStatusPillAnswered]}>
                           <Ionicons
-                            name={q.can_edit ? "checkmark-circle-outline" : "lock-closed-outline"}
+                            name="checkmark-circle-outline"
                             size={14}
                             color={colors.ACCENT_TEXT}
                             style={{ marginRight: 4 }}
                           />
                           <Text style={[styles.qStatusText, styles.qStatusTextAnswered]}>
-                            {q.can_edit ? "回答済み" : "回答済み（編集不可）"}
+                            回答済み
                           </Text>
                         </View>
                       ) : (

@@ -33,8 +33,12 @@ const MYMODEL_API_BASE_URL =
 
 const TAB_FOLLOWING = "following";
 const TAB_FOLLOWERS = "followers";
+const TAB_REQUESTS = "requests";
+const TAB_REQUESTED = "requested";
 
 function normalizeTab(t) {
+  if (t === TAB_REQUESTS) return TAB_REQUESTS;
+  if (t === TAB_REQUESTED) return TAB_REQUESTED;
   return t === TAB_FOLLOWERS ? TAB_FOLLOWERS : TAB_FOLLOWING;
 }
 
@@ -128,6 +132,9 @@ export default function FollowListScreen({ navigation, route }) {
   const [followingCount, setFollowingCount] = useState(0);
   const [followerCount, setFollowerCount] = useState(0);
   const [countLoading, setCountLoading] = useState(false);
+  const [requestCount, setRequestCount] = useState(0);
+  const [requestedCount, setRequestedCount] = useState(0);
+  const [requestActionLoadingId, setRequestActionLoadingId] = useState(null);
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
@@ -139,6 +146,14 @@ export default function FollowListScreen({ navigation, route }) {
     setTab(next);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route?.params?.initialTab]);
+
+  // 自分以外の一覧で「承認待ち」タブが選ばれてしまった場合はフォロー中へ戻す
+  useEffect(() => {
+    if (!isSelfList && (tab === TAB_REQUESTS || tab === TAB_REQUESTED)) {
+      setTab(TAB_FOLLOWING);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSelfList, tab]);
 
   const refreshCounts = useCallback(async () => {
     if (!viewedUserId) return;
@@ -178,12 +193,59 @@ export default function FollowListScreen({ navigation, route }) {
       if (Number.isFinite(followerCnt)) {
         setFollowerCount(followerCnt);
       }
+      // 自分の一覧の場合のみ、承認待ち（フォロー申請）の件数も取得する
+      if (user && isSelfList) {
+        try {
+          const rres = await fetch(
+            `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/incoming?limit=300`,
+            {
+              method: "GET",
+              headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+            }
+          );
+
+          if (rres.ok) {
+            const rjson = await rres.json().catch(() => ({}));
+            const reqs = Array.isArray(rjson?.requests) ? rjson.requests : [];
+            const total = Number(rjson?.total_items);
+            setRequestCount(Number.isFinite(total) ? total : reqs.length);
+          } else {
+            setRequestCount(0);
+          }
+        } catch {
+          // no-op
+        }
+        // 自分が送った申請（申請中）の件数も取得する（MashOS API 経由）
+        try {
+          const ores = await fetch(
+            `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/outgoing?limit=300`,
+            {
+              method: "GET",
+              headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+            }
+          );
+
+          if (ores.ok) {
+            const ojson = await ores.json().catch(() => ({}));
+            const oreqs = Array.isArray(ojson?.requests) ? ojson.requests : [];
+            const ototal = Number(ojson?.total_items);
+            setRequestedCount(Number.isFinite(ototal) ? ototal : oreqs.length);
+          } else {
+            setRequestedCount(0);
+          }
+        } catch {
+          setRequestedCount(0);
+        }
+      } else {
+        setRequestCount(0);
+        setRequestedCount(0);
+      }
     } catch (e) {
       // no-op（一覧取得でエラー表示するため）
     } finally {
       setCountLoading(false);
     }
-  }, [viewedUserId]);
+  }, [viewedUserId, user, isSelfList]);
 
   const loadList = useCallback(async () => {
     if (!viewedUserId) return;
@@ -201,15 +263,82 @@ export default function FollowListScreen({ navigation, route }) {
         accessToken = null;
       }
 
-      const res = await fetch(
-        `${MYMODEL_API_BASE_URL}/myprofile/follow-list?target_user_id=${encodeURIComponent(
-          String(viewedUserId)
-        )}&tab=${encodeURIComponent(String(tab))}`,
-        {
-          method: "GET",
-          headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+      // 「承認待ち」タブは自分の一覧のみ表示する（他ユーザーの申請は見られない）
+      if ((tab === TAB_REQUESTS || tab === TAB_REQUESTED) && !isSelfList) {
+        setRows([]);
+        return;
+      }
+
+
+      // 「申請中」タブ（自分が送ったフォロー申請）は MashOS API 経由で取得する
+      if (tab === TAB_REQUESTED) {
+        if (!user || !isSelfList) {
+          setRows([]);
+          setRequestedCount(0);
+          return;
         }
-      );
+
+        if (!accessToken) {
+          throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
+        }
+
+        const ores = await fetch(
+          `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/outgoing?limit=300`,
+          {
+            method: "GET",
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        );
+
+        if (!ores.ok) {
+          let msg = `HTTP ${ores.status}`;
+          try {
+            const j = await ores.json();
+            if (j && typeof j.detail === "string") msg = j.detail;
+          } catch {
+            // ignore
+          }
+          throw new Error(msg);
+        }
+
+        const ojson = await ores.json().catch(() => ({}));
+        const reqs = Array.isArray(ojson?.requests) ? ojson.requests : [];
+        const total = Number(ojson?.total_items);
+        setRequestedCount(Number.isFinite(total) ? total : reqs.length);
+
+        const list = reqs
+          .map((r) => {
+            const targetId = safeString(r?.target_user_id).trim();
+            const requestId = safeString(r?.request_id).trim();
+            if (!targetId || !requestId) return null;
+
+            return {
+              id: targetId,
+              display_name: safeString(r?.target_display_name) || "（未設定）",
+              myprofile_code: safeString(r?.target_myprofile_code) || "",
+              _follow_request_id: requestId,
+              _request_created_at: safeString(r?.created_at) || "",
+              _request_target_user_id: targetId,
+            };
+          })
+          .filter(Boolean);
+
+        setRows(list);
+        return;
+      }
+
+
+      const url =
+        tab === TAB_REQUESTS
+          ? `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/incoming?limit=300`
+          : `${MYMODEL_API_BASE_URL}/myprofile/follow-list?target_user_id=${encodeURIComponent(
+              String(viewedUserId)
+            )}&tab=${encodeURIComponent(String(tab))}`;
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+      });
 
       if (!res.ok) {
         let msg = `HTTP ${res.status}`;
@@ -223,8 +352,33 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
-      const list = Array.isArray(json?.rows) ? json.rows : [];
-      setRows(list);
+
+      if (tab === TAB_REQUESTS) {
+        const reqs = Array.isArray(json?.requests) ? json.requests : [];
+        const total = Number(json?.total_items);
+        setRequestCount(Number.isFinite(total) ? total : reqs.length);
+
+        const list = reqs
+          .map((r) => {
+            const requesterId = safeString(r?.requester_user_id).trim();
+            const requestId = safeString(r?.request_id).trim();
+            if (!requesterId || !requestId) return null;
+
+            return {
+              id: requesterId,
+              display_name: safeString(r?.requester_display_name) || "（未設定）",
+              myprofile_code: safeString(r?.requester_myprofile_code) || "",
+              _follow_request_id: requestId,
+              _request_created_at: safeString(r?.created_at) || "",
+            };
+          })
+          .filter(Boolean);
+
+        setRows(list);
+      } else {
+        const list = Array.isArray(json?.rows) ? json.rows : [];
+        setRows(list);
+      }
     } catch (e) {
       console.warn("FollowListScreen loadList error:", e);
       setRows([]);
@@ -232,7 +386,7 @@ export default function FollowListScreen({ navigation, route }) {
     } finally {
       setLoading(false);
     }
-  }, [tab, viewedUserId]);
+  }, [tab, viewedUserId, user, isSelfList]);
 
   useEffect(() => {
     refreshCounts();
@@ -338,6 +492,141 @@ export default function FollowListScreen({ navigation, route }) {
     }
   };
 
+  const actOnFollowRequest = async (requestId, action) => {
+    const reqId = safeString(requestId).trim();
+    if (!reqId) return;
+
+    // 自分の承認待ち一覧のみ操作できる
+    if (!user || !isSelfList) return;
+
+    if (requestActionLoadingId) return;
+
+    setRequestActionLoadingId(reqId);
+
+    try {
+      setErrorText("");
+
+      let accessToken = null;
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        accessToken = sessionData?.session?.access_token ?? null;
+      } catch {
+        accessToken = null;
+      }
+
+      if (!accessToken) {
+        throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
+      }
+
+      const endpoint =
+        action === "approve"
+          ? "/myprofile/follow-requests/approve"
+          : "/myprofile/follow-requests/reject";
+
+      const res = await fetch(`${MYMODEL_API_BASE_URL}${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ request_id: reqId }),
+      });
+
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try {
+          const j = await res.json();
+          if (j && typeof j.detail === "string") msg = j.detail;
+        } catch {
+          // ignore
+        }
+        throw new Error(msg);
+      }
+
+      // 一覧から除去
+      setRows((prev) =>
+        prev.filter((r) => String(r?._follow_request_id || "") !== String(reqId))
+      );
+      setRequestCount((prev) => {
+        const n = Number(prev);
+        if (!Number.isFinite(n)) return 0;
+        return Math.max(0, n - 1);
+      });
+
+      refreshCounts();
+    } catch (e) {
+      console.warn("actOnFollowRequest error:", e);
+      setErrorText(String(e?.message || e));
+    } finally {
+      setRequestActionLoadingId(null);
+    }
+  };
+
+
+  const cancelOutgoingFollowRequest = async (targetUserId, requestId) => {
+    const tgt = String(targetUserId || "").trim();
+    const reqId = String(requestId || tgt || "").trim();
+    if (!tgt) return;
+
+    // 自分の「申請中」一覧のみ操作できる
+    if (!user || !isSelfList) return;
+
+    if (requestActionLoadingId) return;
+
+    setRequestActionLoadingId(reqId);
+
+    try {
+      setErrorText("");
+
+      let accessToken = null;
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        accessToken = sessionData?.session?.access_token ?? null;
+      } catch {
+        accessToken = null;
+      }
+
+      if (!accessToken) {
+        throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
+      }
+
+      const res = await fetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-request/cancel`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ target_user_id: tgt }),
+      });
+
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try {
+          const j = await res.json();
+          if (j && typeof j.detail === "string") msg = j.detail;
+        } catch {
+          // ignore
+        }
+        throw new Error(msg);
+      }
+
+      // 一覧から除去
+      setRows((prev) => prev.filter((r) => String(r?.id || "") !== String(tgt)));
+      setRequestedCount((prev) => {
+        const n = Number(prev);
+        if (!Number.isFinite(n)) return 0;
+        return Math.max(0, n - 1);
+      });
+
+      refreshCounts();
+    } catch (e) {
+      console.warn("cancelOutgoingFollowRequest error:", e);
+      setErrorText(String(e?.message || e));
+    } finally {
+      setRequestActionLoadingId(null);
+    }
+  };
+
   const renderItem = ({ item }) => {
     const name = safeString(item?.display_name) || "（未設定）";
     const isSelf = !!user && String(item?.id || "") === String(user.id);
@@ -361,11 +650,103 @@ export default function FollowListScreen({ navigation, route }) {
               />
             ) : null}
           </View>
+          {(tab === TAB_REQUESTS || tab === TAB_REQUESTED) && item?._request_created_at ? (
+            <Text style={styles.rowSub} numberOfLines={1}>
+              申請: {String(item?._request_created_at || "").slice(0, 10)}
+            </Text>
+          ) : null}
         </View>
 
         <View style={styles.rowRight}>
           {isSelf ? (
             <Text style={styles.selfTag}>あなた</Text>
+          ) : tab === TAB_REQUESTS && isSelfList ? (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity
+                style={[styles.qnaBtn, !!requestActionLoadingId && { opacity: 0.5 }]}
+                activeOpacity={0.8}
+                onPress={() =>
+                  actOnFollowRequest(item?._follow_request_id, "approve")
+                }
+                disabled={!item?._follow_request_id || !!requestActionLoadingId}
+              >
+                {String(requestActionLoadingId || "") ===
+                String(item?._follow_request_id || "") ? (
+                  <ActivityIndicator
+                    size="small"
+                    color={colors.TEXT_ON_LIGHT}
+                    style={{ marginRight: 6 }}
+                  />
+                ) : (
+                  <Ionicons
+                    name="checkmark"
+                    size={16}
+                    color={colors.TEXT_ON_LIGHT}
+                    style={{ marginRight: 6 }}
+                  />
+                )}
+                <Text style={styles.qnaBtnText}>承認</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  styles.qnaBtn,
+                  { marginLeft: 8 },
+                  !!requestActionLoadingId && { opacity: 0.5 },
+                ]}
+                activeOpacity={0.8}
+                onPress={() =>
+                  actOnFollowRequest(item?._follow_request_id, "reject")
+                }
+                disabled={!item?._follow_request_id || !!requestActionLoadingId}
+              >
+                {String(requestActionLoadingId || "") ===
+                String(item?._follow_request_id || "") ? (
+                  <ActivityIndicator
+                    size="small"
+                    color={colors.TEXT_ON_LIGHT}
+                    style={{ marginRight: 6 }}
+                  />
+                ) : (
+                  <Ionicons
+                    name="close"
+                    size={16}
+                    color={colors.TEXT_ON_LIGHT}
+                    style={{ marginRight: 6 }}
+                  />
+                )}
+                <Text style={styles.qnaBtnText}>拒否</Text>
+              </TouchableOpacity>
+            </View>
+          ) : tab === TAB_REQUESTED && isSelfList ? (
+            <TouchableOpacity
+              style={[styles.qnaBtn, !!requestActionLoadingId && { opacity: 0.5 }]}
+              activeOpacity={0.8}
+              onPress={() =>
+                cancelOutgoingFollowRequest(
+                  item?._request_target_user_id || item?.id,
+                  item?._follow_request_id
+                )
+              }
+              disabled={!item?.id || !!requestActionLoadingId}
+            >
+              {String(requestActionLoadingId || "") ===
+              String(item?._follow_request_id || "") ? (
+                <ActivityIndicator
+                  size="small"
+                  color={colors.TEXT_ON_LIGHT}
+                  style={{ marginRight: 6 }}
+                />
+              ) : (
+                <Ionicons
+                  name="close"
+                  size={16}
+                  color={colors.TEXT_ON_LIGHT}
+                  style={{ marginRight: 6 }}
+                />
+              )}
+              <Text style={styles.qnaBtnText}>取消</Text>
+            </TouchableOpacity>
           ) : isSelfList ? (
             <TouchableOpacity
               style={styles.qnaBtn}
@@ -387,7 +768,13 @@ export default function FollowListScreen({ navigation, route }) {
   };
 
   const emptyText =
-    tab === TAB_FOLLOWING ? "フォロー中のユーザーはいません。" : "フォロワーはいません。";
+    tab === TAB_FOLLOWING
+      ? "フォロー中のユーザーはいません。"
+      : tab === TAB_FOLLOWERS
+      ? "フォロワーはいません。"
+      : tab === TAB_REQUESTED
+      ? "申請中のユーザーはいません。"
+      : "承認待ちの申請はありません。";
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -443,6 +830,32 @@ export default function FollowListScreen({ navigation, route }) {
             {countLoading ? "…" : `(${String(followerCount)})`}
           </Text>
         </TouchableOpacity>
+
+        {isSelfList ? (
+          <>
+            <TouchableOpacity
+              style={[styles.tab, tab === TAB_REQUESTED && styles.tabActive]}
+              onPress={() => setTab(TAB_REQUESTED)}
+              activeOpacity={0.85}
+            >
+              <Text style={[styles.tabText, tab === TAB_REQUESTED && styles.tabTextActive]}>
+                申請中{" "}
+                {countLoading ? "…" : `(${String(requestedCount)})`}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.tab, tab === TAB_REQUESTS && styles.tabActive]}
+              onPress={() => setTab(TAB_REQUESTS)}
+              activeOpacity={0.85}
+            >
+              <Text style={[styles.tabText, tab === TAB_REQUESTS && styles.tabTextActive]}>
+                承認待ち{" "}
+                {countLoading ? "…" : `(${String(requestCount)})`}
+              </Text>
+            </TouchableOpacity>
+          </>
+        ) : null}
       </View>
 
       {/* エラー表示 */}

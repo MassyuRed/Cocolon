@@ -23,6 +23,8 @@ import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
+import { useTutorial } from "../TutorialContext";
+import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
 
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
@@ -79,6 +81,34 @@ const DISCOVERY_CATEGORY_OPTIONS = Object.freeze([
   { key: "not_sorted", label: "まだ整理できない" },
   { key: "shocked", label: "衝撃を受けた" },
 ]);
+
+const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
+const TUTORIAL_SELF_USER_ID = "tutorial-self";
+const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
+  {
+    id: "tutorial-reflection-mock-1",
+    q_instance_id: "tutorial-q-mock-1",
+    q_key: "tutorial-holiday",
+    title: TUTORIAL_REFLECTION_QUESTION,
+    body:
+      "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
+    owner_user_id: "tutorial-follow-1",
+    display_name: "朝霧 澪",
+    friend_code: "MIO123",
+    is_tutorial: true,
+    tutorial_kind: "mock",
+    created_at: "2026-01-01T09:00:00.000Z",
+    resonances: 4,
+    discoveries: 2,
+    views: 12,
+    is_new: true,
+  },
+]);
+
+const TUTORIAL_TOTAL_STEPS = 23;
+const STEP_REFLECTIONS_SELF_VIEW = 18;
+const STEP_REFLECTIONS_SWITCH_AND_REACT = 19;
+const STEP_FRIENDS_START = 20;
 
 function buildErrorMessage(err) {
   if (!err) return "エラーが発生しました。";
@@ -169,6 +199,20 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
 
   const { setUnread, getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
   const { myModelRangeLabel } = useSubscription();
+  const {
+    isTutorialMode,
+    tutorialStep,
+    tutorialReflections,
+    setTutorialReflections,
+    setTutorialStep,
+  } = useTutorial();
+
+  const targetUserPickerWrapRef = useRef(null);
+  const responseCardWrapRef = useRef(null);
+  const metricsActionsWrapRef = useRef(null);
+  const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const tutorialPickUserRowRef = useRef(null);
+  const [tutorialPickUserRect, setTutorialPickUserRect] = useState(null);
 
   // Tab reselect helper: used to ignore async results after a "reset to main"
   const resetSeqRef = useRef(0);
@@ -245,6 +289,195 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
   const [myDiscoveryLatestLoading, setMyDiscoveryLatestLoading] = useState(false);
   const [myDiscoveryLatestError, setMyDiscoveryLatestError] = useState("");
 
+  const tutorialBaseReflections = useMemo(() => {
+    const safe = Array.isArray(tutorialReflections) ? tutorialReflections : [];
+    const selfItems = safe.filter(
+      (item) => String(item?.tutorial_kind || "") === "self"
+    );
+    const hasMock = safe.some(
+      (item) => String(item?.tutorial_kind || "") === "mock"
+    );
+    const mockItems = hasMock
+      ? safe.filter((item) => String(item?.tutorial_kind || "") === "mock")
+      : TUTORIAL_MOCK_REFLECTIONS.map((item) => ({ ...item }));
+    const otherItems = safe.filter((item) => {
+      const kind = String(item?.tutorial_kind || "");
+      return kind !== "self" && kind !== "mock";
+    });
+
+    return [...selfItems, ...mockItems, ...otherItems];
+  }, [tutorialReflections]);
+
+  const tutorialFollowingUsers = useMemo(() => {
+    const seen = new Set();
+    return tutorialBaseReflections
+      .filter((item) => String(item?.owner_user_id || "") !== TUTORIAL_SELF_USER_ID)
+      .map((item) => ({
+        user_id: String(item?.owner_user_id || ""),
+        display_name: String(item?.display_name || "模擬ユーザー"),
+      }))
+      .filter((item) => {
+        if (!item.user_id || seen.has(item.user_id)) return false;
+        seen.add(item.user_id);
+        return true;
+      });
+  }, [tutorialBaseReflections]);
+
+  const updateTutorialReflection = useCallback(
+    (qInstanceId, updater) => {
+      if (!isTutorialMode) return;
+      const qid = String(qInstanceId || "");
+      if (!qid) return;
+
+      setTutorialReflections((prev) => {
+        const safePrev = Array.isArray(prev) ? prev : [];
+        let changed = false;
+        const next = safePrev.map((item) => {
+          if (String(item?.q_instance_id || "") !== qid) return item;
+          changed = true;
+          return typeof updater === "function" ? updater(item) : item;
+        });
+        return changed ? next : safePrev;
+      });
+    },
+    [isTutorialMode, setTutorialReflections]
+  );
+
+  const getTutorialSortedItems = useCallback(
+    (targetUserId, mode) => {
+      const targetId = String(targetUserId || TUTORIAL_SELF_USER_ID);
+      const baseItems = tutorialBaseReflections.filter((item) => {
+        const ownerId = String(item?.owner_user_id || "");
+        if (targetId === TUTORIAL_SELF_USER_ID) {
+          return ownerId === TUTORIAL_SELF_USER_ID;
+        }
+        return ownerId === targetId;
+      });
+
+      const items = baseItems.map((item) => ({ ...item }));
+      const getDateScore = (value) => {
+        const t = Date.parse(value || "");
+        return Number.isFinite(t) ? t : 0;
+      };
+      const getMetric = (item, key) =>
+        Number(item?.[key] ?? item?.[`${key}_count`] ?? 0) || 0;
+
+      if (String(mode || "newest") === "resonances") {
+        return items.sort(
+          (a, b) =>
+            getMetric(b, "resonances") - getMetric(a, "resonances") ||
+            getDateScore(b?.created_at) - getDateScore(a?.created_at)
+        );
+      }
+
+      if (String(mode || "newest") === "discoveries") {
+        return items.sort(
+          (a, b) =>
+            getMetric(b, "discoveries") - getMetric(a, "discoveries") ||
+            getDateScore(b?.created_at) - getDateScore(a?.created_at)
+        );
+      }
+
+      return items.sort(
+        (a, b) => getDateScore(b?.created_at) - getDateScore(a?.created_at)
+      );
+    },
+    [tutorialBaseReflections]
+  );
+
+  useEffect(() => {
+    if (!isTutorialMode) return;
+    setTutorialReflections((prev) => {
+      const safePrev = Array.isArray(prev) ? prev : [];
+      const hasMock = safePrev.some(
+        (item) => String(item?.tutorial_kind || "") === "mock"
+      );
+      if (hasMock) return safePrev;
+      return [...safePrev, ...TUTORIAL_MOCK_REFLECTIONS.map((item) => ({ ...item }))];
+    });
+  }, [isTutorialMode, setTutorialReflections]);
+
+  const setTutorialListAndSelectFirst = useCallback(
+    (targetUserId, mode) => {
+      if (!isTutorialMode) return;
+
+      const items = getTutorialSortedItems(targetUserId, mode);
+      setQnaItems(items);
+      setListMeta({ is_tutorial: true, total_items: items.length });
+      setSelected(items.length > 0 ? { ...items[0], is_new: false } : null);
+
+      setPickerVisible(false);
+      setDetailLoading(false);
+      setDetailLoadingId(null);
+    },
+    [isTutorialMode, getTutorialSortedItems]
+  );
+
+  useEffect(() => {
+    if (!isTutorialMode) return;
+    if (typeof tutorialStep === "number" && tutorialStep < STEP_REFLECTIONS_SELF_VIEW) {
+      setTutorialStep(STEP_REFLECTIONS_SELF_VIEW);
+    }
+  }, [isTutorialMode, tutorialStep, setTutorialStep]);
+
+  useEffect(() => {
+    if (!isTutorialMode) return;
+
+    if (tutorialStep === STEP_REFLECTIONS_SELF_VIEW) {
+      if (activeViewedUserId !== null) {
+        setActiveViewedUserId(null);
+      }
+      setTutorialListAndSelectFirst(TUTORIAL_SELF_USER_ID, sortMode);
+      return;
+    }
+
+    if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && activeViewedUserId) {
+      setTutorialListAndSelectFirst(activeViewedUserId, sortMode);
+    }
+  }, [
+    isTutorialMode,
+    tutorialStep,
+    sortMode,
+    activeViewedUserId,
+    setTutorialListAndSelectFirst,
+  ]);
+
+  const measureTutorialSpot = useCallback(async () => {
+    if (!isTutorialMode) return;
+
+    let ref = null;
+    if (tutorialStep === STEP_REFLECTIONS_SELF_VIEW) {
+      ref = responseCardWrapRef;
+    } else if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT) {
+      ref = activeViewedUserId ? metricsActionsWrapRef : targetUserPickerWrapRef;
+    }
+
+    const rect = ref ? await measureTutorialTarget(ref) : null;
+    setTutorialTargetRect(rect);
+  }, [isTutorialMode, tutorialStep, activeViewedUserId]);
+
+  useEffect(() => {
+    measureTutorialSpot();
+  }, [measureTutorialSpot, selected, userPickerVisible, pickerVisible]);
+
+  const measureTutorialPickUserSpot = useCallback(async () => {
+    if (!isTutorialMode) return;
+    if (tutorialStep !== STEP_REFLECTIONS_SWITCH_AND_REACT) {
+      setTutorialPickUserRect(null);
+      return;
+    }
+    if (!userPickerVisible || !!activeViewedUserId) {
+      setTutorialPickUserRect(null);
+      return;
+    }
+
+    const rect = await measureTutorialTarget(tutorialPickUserRowRef);
+    setTutorialPickUserRect(rect);
+  }, [isTutorialMode, tutorialStep, userPickerVisible, activeViewedUserId]);
+
+  useEffect(() => {
+    measureTutorialPickUserSpot();
+  }, [measureTutorialPickUserSpot, followingUsers, followingLoading]);
 
   // ---------------------------------------------------------
 // Tab reselect (when already on MyModel tab)
@@ -310,6 +543,15 @@ useEffect(() => {
   // - 起動時prefetchで付いた赤●を、qnaItems初期空で誤って消さないため、
   //   「QnA一覧を1回でも取得した後（listMetaがある時）」だけ qnaItems 由来で同期する
   useEffect(() => {
+    if (isTutorialMode) {
+      try {
+        setUnread("MyModel", "qnaNew", false);
+      } catch {
+        // noop
+      }
+      return;
+    }
+
     if (!listMeta) return;
 
     const hasUnread = (qnaItems || []).some((x) => !!x?.is_new);
@@ -328,7 +570,7 @@ useEffect(() => {
     } catch {
       // noop
     }
-  }, [qnaItems, listMeta, setUnread, onTabUnreadChange]);
+  }, [isTutorialMode, qnaItems, listMeta, setUnread, onTabUnreadChange]);
 
   // route params が変わった場合も追従（例：他画面から viewedUserId で遷移）
   useEffect(() => {
@@ -357,6 +599,29 @@ useEffect(() => {
     let cancelled = false;
 
     (async () => {
+      if (isTutorialMode) {
+        const tutorialTargetId = String(activeViewedUserId || "");
+        if (!tutorialTargetId) {
+          if (!cancelled) {
+            setTargetDisplayName("自分");
+            setTargetNameLoading(false);
+          }
+          return;
+        }
+
+        const tutorialTarget = tutorialFollowingUsers.find(
+          (item) => String(item?.user_id || "") === tutorialTargetId
+        );
+
+        if (!cancelled) {
+          setTargetDisplayName(
+            String(tutorialTarget?.display_name || "模擬ユーザー")
+          );
+          setTargetNameLoading(false);
+        }
+        return;
+      }
+
       const targetId = String(activeViewedUserId || viewerUserId || "");
       if (!targetId) {
         if (!cancelled) setTargetDisplayName("未ログイン");
@@ -387,7 +652,7 @@ useEffect(() => {
     return () => {
       cancelled = true;
     };
-  }, [activeViewedUserId, viewerUserId]);
+  }, [isTutorialMode, activeViewedUserId, viewerUserId, tutorialFollowingUsers]);
 
 
   const openSubscriptionSelect = () => {
@@ -436,6 +701,12 @@ useEffect(() => {
   const loadFollowingUsers = useCallback(async () => {
     setFollowingLoading(true);
     setFollowingError("");
+
+    if (isTutorialMode) {
+      setFollowingUsers(tutorialFollowingUsers);
+      setFollowingLoading(false);
+      return;
+    }
 
     try {
       const myUserId = await getCurrentUserId().catch(() => null);
@@ -492,9 +763,15 @@ useEffect(() => {
     } finally {
       setFollowingLoading(false);
     }
-  }, []);
+  }, [isTutorialMode, tutorialFollowingUsers]);
 
   const openUserPicker = useCallback(async () => {
+    if (isTutorialMode) {
+      setUserPickerVisible(true);
+      await loadFollowingUsers();
+      return;
+    }
+
     const myUserId = await getCurrentUserId().catch(() => null);
     if (!myUserId) {
       Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
@@ -503,7 +780,7 @@ useEffect(() => {
 
     setUserPickerVisible(true);
     await loadFollowingUsers();
-  }, [loadFollowingUsers]);
+  }, [isTutorialMode, loadFollowingUsers]);
 
   const selectTargetUser = useCallback((nextUserId) => {
     const uid = nextUserId ? String(nextUserId) : null;
@@ -546,6 +823,17 @@ useEffect(() => {
       }
       setListError("");
       try {
+        if (isTutorialMode) {
+          const targetUserId = await resolveTargetUserId(TUTORIAL_SELF_USER_ID);
+          const items = getTutorialSortedItems(targetUserId, mode);
+          setQnaItems(items);
+          setListMeta({
+            is_tutorial: true,
+            total_items: items.length,
+          });
+          return;
+        }
+
         const { userId, accessToken } = await getAuthContext();
         if (!accessToken) {
           Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
@@ -596,11 +884,22 @@ useEffect(() => {
         setListLoading(false);
       }
     },
-    [buildListUrl, resolveTargetUserId]
+    [
+      isTutorialMode,
+      buildListUrl,
+      resolveTargetUserId,
+      getTutorialSortedItems,
+      setPrefetch,
+    ]
   );
 
   const openPicker = useCallback(async () => {
     setPickerVisible(true);
+
+    if (isTutorialMode) {
+      await loadQnaList(sortMode);
+      return;
+    }
 
     // まずキャッシュ（アプリ起動時プリロード）を即反映
     try {
@@ -631,6 +930,7 @@ useEffect(() => {
 
     await loadQnaList(sortMode);
   }, [
+    isTutorialMode,
     activeViewedUserId,
     viewerUserId,
     sortMode,
@@ -643,6 +943,11 @@ useEffect(() => {
     async (nextMode) => {
       const m = String(nextMode || "newest");
       setSortMode(m);
+
+      if (isTutorialMode) {
+        await loadQnaList(m);
+        return;
+      }
 
       // まずキャッシュを即反映して、切替の体感を速くする
       try {
@@ -673,7 +978,14 @@ useEffect(() => {
 
       await loadQnaList(m);
     },
-    [activeViewedUserId, viewerUserId, loadQnaList, getPrefetchEntry, getPrefetchEntryFresh]
+    [
+      isTutorialMode,
+      activeViewedUserId,
+      viewerUserId,
+      loadQnaList,
+      getPrefetchEntry,
+      getPrefetchEntryFresh,
+    ]
   );
 
   const fetchDetail = useCallback(
@@ -684,6 +996,38 @@ useEffect(() => {
       setDetailLoadingId(String(item.q_instance_id));
       setDetailLoading(true);
       try {
+        if (isTutorialMode) {
+          const qidNow = String(item.q_instance_id);
+          const nextViews = (Number(item?.views ?? 0) || 0) + 1;
+          const nextSelected = {
+            ...item,
+            views: nextViews,
+            is_new: false,
+          };
+
+          if (resetSeq !== resetSeqRef.current) return;
+          setSelected(nextSelected);
+          setPickerVisible(false);
+
+          setQnaItems((prev) =>
+            (prev || []).map((x) => {
+              if (String(x?.q_instance_id || "") !== qidNow) return x;
+              return {
+                ...x,
+                views: nextViews,
+                is_new: false,
+              };
+            })
+          );
+
+          updateTutorialReflection(qidNow, (prev) => ({
+            ...prev,
+            views: nextViews,
+            is_new: false,
+          }));
+          return;
+        }
+
         const { userId, accessToken } = await getAuthContext();
         if (!accessToken) {
           Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
@@ -706,7 +1050,6 @@ useEffect(() => {
           const msg = json?.detail || json?.message || `HTTP ${res.status}`;
           throw new Error(String(msg));
         }
-
 
         // If the user re-tapped the tab to reset while this request was in-flight, ignore the result.
         if (resetSeq !== resetSeqRef.current) return;
@@ -763,7 +1106,7 @@ useEffect(() => {
         setDetailLoadingId(null);
       }
     },
-    [detailLoading]
+    [detailLoading, isTutorialMode, updateTutorialReflection]
   );
 
   // ---------------------------------------------------------
@@ -778,6 +1121,11 @@ useEffect(() => {
     setMyDiscoveryLatest(null);
     setMyDiscoveryLatestError("");
     setMyDiscoveryLatestLoading(false);
+
+    if (isTutorialMode) {
+      setMyDiscoveryLatest(selected?.tutorial_my_discovery || null);
+      return;
+    }
 
     if (!qid) return;
 
@@ -830,7 +1178,14 @@ useEffect(() => {
     return () => {
       cancelled = true;
     };
-  }, [selected?.q_instance_id, selected?.q_key, activeViewedUserId, viewerUserId]);
+  }, [
+    isTutorialMode,
+    selected?.q_instance_id,
+    selected?.q_key,
+    selected?.tutorial_my_discovery,
+    activeViewedUserId,
+    viewerUserId,
+  ]);
 
 
   // ---------------------------------------------------------
@@ -860,6 +1215,20 @@ useEffect(() => {
 
   const handleResonancePress = useCallback(async () => {
     if (!selected?.q_instance_id) return;
+
+    if (isTutorialMode) {
+      const already = !!(selected?.is_resonated ?? selected?.resonated);
+      if (!already) {
+        openEchoesModal();
+        return;
+      }
+
+      openEchoesModal({
+        strength: selected?.tutorial_my_echo?.strength || null,
+        memo: selected?.tutorial_my_echo?.memo || "",
+      });
+      return;
+    }
 
     const already = !!(selected?.is_resonated ?? selected?.resonated);
     if (!already) {
@@ -902,7 +1271,7 @@ useEffect(() => {
       openEchoesModal();
       setEchoesSubmitError(buildErrorMessage(e));
     }
-  }, [selected, openEchoesModal]);
+  }, [isTutorialMode, selected, openEchoesModal]);
 
   const submitEchoes = useCallback(async () => {
     if (!selected?.q_instance_id) return;
@@ -918,13 +1287,60 @@ useEffect(() => {
       return;
     }
 
-        const resetSeq = resetSeqRef.current;
+    const resetSeq = resetSeqRef.current;
     const qidNow = String(selected.q_instance_id);
 
-setEchoesSubmitting(true);
+    setEchoesSubmitting(true);
     setEchoesSubmitError("");
 
     try {
+      if (isTutorialMode) {
+        const nextResonances = (Number(selected?.resonances ?? 0) || 0) + 1;
+        const nextEcho = {
+          strength: String(echoesStrength),
+          memo: echoesMemo ? String(echoesMemo) : "",
+          created_at: new Date().toISOString(),
+        };
+
+        if (resetSeq !== resetSeqRef.current) return;
+
+        setSelected((prev) => {
+          if (!prev) return prev;
+          if (String(prev.q_instance_id) !== qidNow) return prev;
+          return {
+            ...prev,
+            resonances: nextResonances,
+            is_resonated: true,
+            resonated: true,
+            tutorial_my_echo: nextEcho,
+          };
+        });
+
+        setQnaItems((prev) =>
+          (prev || []).map((x) => {
+            if (String(x?.q_instance_id || "") !== qidNow) return x;
+            return {
+              ...x,
+              resonances: nextResonances,
+              is_resonated: true,
+              resonated: true,
+              tutorial_my_echo: nextEcho,
+            };
+          })
+        );
+
+        updateTutorialReflection(qidNow, (prev) => ({
+          ...prev,
+          resonances: nextResonances,
+          is_resonated: true,
+          resonated: true,
+          tutorial_my_echo: nextEcho,
+        }));
+        closeEchoesModal();
+        Alert.alert("チュートリアルに記録しました", "この共鳴はチュートリアル用の記録です。");
+        return;
+      }
+
       const { userId, accessToken } = await getAuthContext();
       if (!accessToken) {
         Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
@@ -951,7 +1367,7 @@ setEchoesSubmitting(true);
         throw new Error(String(msg));
       }
 
-            // Echoes送信が成功した時点で「共鳴確定」される（サーバ側で+1）
+      // Echoes送信が成功した時点で「共鳴確定」される（サーバ側で+1）
       if (resetSeq !== resetSeqRef.current) return;
 
       const nextResonances =
@@ -987,14 +1403,21 @@ setEchoesSubmitting(true);
         })
       );
 
-closeEchoesModal();
+      closeEchoesModal();
       Alert.alert("送信しました", "響きを記録しました。");
     } catch (e) {
       setEchoesSubmitError(buildErrorMessage(e));
     } finally {
       setEchoesSubmitting(false);
     }
-  }, [selected, echoesStrength, echoesMemo, closeEchoesModal]);
+  }, [
+    isTutorialMode,
+    selected,
+    echoesStrength,
+    echoesMemo,
+    closeEchoesModal,
+    updateTutorialReflection,
+  ]);
 
   const confirmDeleteEchoes = useCallback(() => {
     if (!selected?.q_instance_id) return;
@@ -1002,6 +1425,74 @@ closeEchoesModal();
     const beforeResonated = !!(selected?.is_resonated ?? selected?.resonated);
     if (!beforeResonated) {
       Alert.alert("解除できません", "まだ共鳴していません。");
+      return;
+    }
+
+    if (isTutorialMode) {
+      Alert.alert(
+        "共鳴を解除しますか？",
+        "Echoes/共鳴は削除されます。この操作は元に戻せません。",
+        [
+          { text: "キャンセル", style: "cancel" },
+          {
+            text: "削除する",
+            style: "destructive",
+            onPress: () => {
+              (async () => {
+                setEchoesDeleting(true);
+                setEchoesSubmitError("");
+                try {
+                  const qidNow = String(selected.q_instance_id);
+                  const nextResonances = Math.max(
+                    0,
+                    (Number(selected?.resonances ?? 0) || 0) - 1
+                  );
+
+                  setSelected((prev) => {
+                    if (!prev) return prev;
+                    if (String(prev.q_instance_id) !== qidNow) return prev;
+                    return {
+                      ...prev,
+                      resonances: nextResonances,
+                      is_resonated: false,
+                      resonated: false,
+                      tutorial_my_echo: null,
+                    };
+                  });
+
+                  setQnaItems((prev) =>
+                    (prev || []).map((x) => {
+                      if (String(x?.q_instance_id || "") !== qidNow) return x;
+                      return {
+                        ...x,
+                        resonances: nextResonances,
+                        is_resonated: false,
+                        resonated: false,
+                        tutorial_my_echo: null,
+                      };
+                    })
+                  );
+
+                  updateTutorialReflection(qidNow, (prev) => ({
+                    ...prev,
+                    resonances: nextResonances,
+                    is_resonated: false,
+                    resonated: false,
+                    tutorial_my_echo: null,
+                  }));
+
+                  closeEchoesModal();
+                  Alert.alert("解除しました", "チュートリアル共鳴を解除しました。");
+                } catch (e) {
+                  setEchoesSubmitError(buildErrorMessage(e));
+                } finally {
+                  setEchoesDeleting(false);
+                }
+              })();
+            },
+          },
+        ]
+      );
       return;
     }
 
@@ -1087,7 +1578,7 @@ closeEchoesModal();
         },
       ]
     );
-  }, [selected, closeEchoesModal]);
+  }, [isTutorialMode, selected, closeEchoesModal, updateTutorialReflection]);
 
   const openDiscoveryModal = useCallback((prefill = null) => {
     const cat = prefill && typeof prefill === "object" ? prefill.category : null;
@@ -1151,6 +1642,76 @@ closeEchoesModal();
     setDiscoverySubmitError("");
 
     try {
+      if (isTutorialMode) {
+        const qidNow = String(selected.q_instance_id);
+        const nextDiscovery = {
+          id: `tutorial-discovery-${Date.now()}`,
+          category: String(discoveryCategory),
+          memo: discoveryMemo ? String(discoveryMemo) : null,
+          created_at: new Date().toISOString(),
+        };
+
+        setSelected((prev) => {
+          if (!prev) return prev;
+          if (String(prev.q_instance_id) !== qidNow) return prev;
+
+          const before =
+            Number(
+              prev?.discoveries ??
+                prev?.discoveries_count ??
+                prev?.discovery_count ??
+                prev?.discoveryCount ??
+                0
+            ) || 0;
+
+          return {
+            ...prev,
+            discoveries: before + 1,
+            tutorial_my_discovery: nextDiscovery,
+          };
+        });
+
+        setQnaItems((prev) =>
+          (prev || []).map((x) => {
+            if (String(x?.q_instance_id || "") !== qidNow) return x;
+            const before =
+              Number(
+                x?.discoveries ??
+                  x?.discoveries_count ??
+                  x?.discovery_count ??
+                  x?.discoveryCount ??
+                  0
+              ) || 0;
+            return {
+              ...x,
+              discoveries: before + 1,
+              tutorial_my_discovery: nextDiscovery,
+            };
+          })
+        );
+
+        updateTutorialReflection(qidNow, (prev) => {
+          const before =
+            Number(
+              prev?.discoveries ??
+                prev?.discoveries_count ??
+                prev?.discovery_count ??
+                prev?.discoveryCount ??
+                0
+            ) || 0;
+          return {
+            ...prev,
+            discoveries: before + 1,
+            tutorial_my_discovery: nextDiscovery,
+          };
+        });
+
+        setMyDiscoveryLatest(nextDiscovery);
+        closeDiscoveryModal();
+        Alert.alert("チュートリアルに保存しました", "この発見はチュートリアル用の記録です。");
+        return;
+      }
+
       const { userId, accessToken } = await getAuthContext();
       if (!accessToken) {
         Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
@@ -1231,10 +1792,90 @@ closeEchoesModal();
     } finally {
       setDiscoverySubmitting(false);
     }
-  }, [selected, myDiscoveryLatest, discoveryCategory, discoveryMemo, closeDiscoveryModal]);
+  }, [
+    isTutorialMode,
+    selected,
+    myDiscoveryLatest,
+    discoveryCategory,
+    discoveryMemo,
+    closeDiscoveryModal,
+    updateTutorialReflection,
+  ]);
 
   const confirmDeleteDiscovery = useCallback(() => {
     if (!selected?.q_instance_id) return;
+
+    if (isTutorialMode) {
+      Alert.alert(
+        "発見を解除しますか？",
+        "Discoveriesは削除されます。この操作は元に戻せません。",
+        [
+          { text: "キャンセル", style: "cancel" },
+          {
+            text: "削除する",
+            style: "destructive",
+            onPress: () => {
+              (async () => {
+                setDiscoveryDeleting(true);
+                setDiscoverySubmitError("");
+                try {
+                  const qidNow = String(selected.q_instance_id);
+                  const nextDiscoveries = Math.max(
+                    0,
+                    Number(
+                      selected?.discoveries ??
+                        selected?.discoveries_count ??
+                        selected?.discovery_count ??
+                        selected?.discoveryCount ??
+                        0
+                    ) - 1
+                  );
+
+                  setSelected((prev) => {
+                    if (!prev) return prev;
+                    if (String(prev.q_instance_id) !== qidNow) return prev;
+                    return {
+                      ...prev,
+                      discoveries: nextDiscoveries,
+                      tutorial_my_discovery: null,
+                    };
+                  });
+
+                  setQnaItems((prev) =>
+                    (prev || []).map((x) => {
+                      if (String(x?.q_instance_id || "") !== qidNow) return x;
+                      return {
+                        ...x,
+                        discoveries: nextDiscoveries,
+                        tutorial_my_discovery: null,
+                      };
+                    })
+                  );
+
+                  updateTutorialReflection(qidNow, (prev) => ({
+                    ...prev,
+                    discoveries: nextDiscoveries,
+                    tutorial_my_discovery: null,
+                  }));
+
+                  // "済み" 状態を解除
+                  setMyDiscoveryLatest(null);
+                  setMyDiscoveryLatestError("");
+
+                  closeDiscoveryModal();
+                  Alert.alert("解除しました", "チュートリアル発見を解除しました。");
+                } catch (e) {
+                  setDiscoverySubmitError(buildErrorMessage(e));
+                } finally {
+                  setDiscoveryDeleting(false);
+                }
+              })();
+            },
+          },
+        ]
+      );
+      return;
+    }
 
     Alert.alert(
       "発見を解除しますか？",
@@ -1316,12 +1957,14 @@ closeEchoesModal();
         },
       ]
     );
-  }, [selected, closeDiscoveryModal]);
+  }, [isTutorialMode, selected, closeDiscoveryModal, updateTutorialReflection]);
 
 
   const isDark = themeName === "dark";
 
   const effectiveTierLabel = useMemo(() => {
+    if (isTutorialMode) return "";
+
     // SubscriptionContext を基準に表示（画面ごとに tier を持たない）
     if (myModelRangeLabel) return myModelRangeLabel;
 
@@ -1330,7 +1973,7 @@ closeEchoesModal();
     if (eff === "standard") return "Standard";
     if (eff === "light") return "Light";
     return eff ? String(eff) : "";
-  }, [myModelRangeLabel, listMeta]);
+  }, [isTutorialMode, myModelRangeLabel, listMeta]);
 
   const isSelfTarget =
     !activeViewedUserId ||
@@ -1359,12 +2002,17 @@ closeEchoesModal();
         <View style={styles.qnaIntroCard}>
           <Text style={styles.qnaIntroTitle}>Reflections</Text>
           <Text style={styles.qnaIntroText}>
-            フォローしたユーザーのMyModelを使用できます。
+            閲覧したいMyModelを選択し、Reflectionを生成してください。
           </Text>
+          {isTutorialMode ? (
+            <Text style={styles.tierHintText}>
+              まずは自分のReflectionを確認し、その後に模擬ユーザーへ切り替えると「他ユーザーのReflectionも閲覧できる」流れが分かります。
+            </Text>
+          ) : null}
 
           {/* Main action */}
           <View style={styles.actions}>
-            <View style={styles.targetRow}>
+            <View ref={targetUserPickerWrapRef} collapsable={false} style={styles.targetRow}>
               <Text style={styles.targetLabel}>MyModel：</Text>
               <CocolonPressable
                 onPress={openUserPicker}
@@ -1394,7 +2042,7 @@ closeEchoesModal();
                   color="#FFFFFF"
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.goldButtonText}>問いを生成</Text>
+                <Text style={styles.goldButtonText}>Reflectionを生成</Text>
               </View>
             </CocolonButton>
             {effectiveTierLabel ? (
@@ -1404,7 +2052,7 @@ closeEchoesModal();
 
           {/* Selected detail */}
           {selected || detailLoading ? (
-            <View style={styles.responseGroup}>
+            <View ref={responseCardWrapRef} collapsable={false} style={styles.responseGroup}>
               {selected?.title && !detailLoading ? (
                 <>
                   <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【問い】</Text>
@@ -1459,7 +2107,7 @@ closeEchoesModal();
 
                     {!isSelfTarget ? (
                       <>
-                      <View style={styles.metricsActions}>
+                      <View ref={metricsActionsWrapRef} collapsable={false} style={styles.metricsActions}>
                         <CocolonPressable
                           onPress={handleResonancePress}
                           style={[
@@ -1561,9 +2209,18 @@ closeEchoesModal();
                 {/* 自分に戻る */}
                 <Pressable
                   onPress={() => selectTargetUser(null)}
+                  disabled={
+                    isTutorialMode &&
+                    tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT &&
+                    !activeViewedUserId
+                  }
                   style={[
                     styles.listRow,
                     isSelfTarget && styles.listRowActive,
+                    isTutorialMode &&
+                      tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT &&
+                      !activeViewedUserId &&
+                      { opacity: 0.5 },
                   ]}
                 >
                   <View style={{ flex: 1 }}>
@@ -1596,13 +2253,22 @@ closeEchoesModal();
                 </Pressable>
 
                 {(followingUsers || []).length > 0 ? (
-                  (followingUsers || []).map((u) => {
+                  (followingUsers || []).map((u, idx) => {
                     const isActive =
                       activeViewedUserId &&
                       String(activeViewedUserId) === String(u.user_id);
                     return (
                       <Pressable
                         key={u.user_id}
+                        ref={
+                          isTutorialMode &&
+                          tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT &&
+                          !activeViewedUserId &&
+                          idx === 0
+                            ? tutorialPickUserRowRef
+                            : undefined
+                        }
+                        collapsable={false}
                         onPress={() => selectTargetUser(u.user_id)}
                         style={[
                           styles.listRow,
@@ -1652,6 +2318,24 @@ closeEchoesModal();
               </ScrollView>
             )}
           </View>
+
+          <TutorialOverlay
+            visible={
+              !!isTutorialMode &&
+              tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT &&
+              !!userPickerVisible &&
+              !activeViewedUserId &&
+              !!tutorialPickUserRect
+            }
+            targetRect={tutorialPickUserRect}
+            title="模擬ユーザーを選択"
+            message="このユーザーを選択して、Reflectionを見てみましょう。"
+            step={tutorialStep}
+            totalSteps={TUTORIAL_TOTAL_STEPS}
+            mode="action"
+            showPrimaryButton={false}
+            actionHint="ユーザー名を押してください"
+          />
         </View>
       </Modal>
 
@@ -1760,9 +2444,9 @@ closeEchoesModal();
             ) : (
               <View style={styles.modalEmpty}>
                 <Text style={styles.modalEmptyText}>
-                  まだ表示できる問いがありません。
-                  {"\n"}
-                  MyModel Create で回答するとここに出ます。
+                  {isTutorialMode
+                    ? "まだチュートリアルReflectionがありません。\n先にMyModel画面で回答を作成してください。"
+                    : 'まだ表示できるReflectionがありません。\n入力内容が蓄積されるとここに表示されます。'}
                 </Text>
               </View>
             )}
@@ -1798,7 +2482,7 @@ closeEchoesModal();
                   <Text style={styles.inlineLoadingText}>共鳴を解除中…</Text>
                 </View>
               ) : null}
-              <Text style={styles.modalDescText}>このReflectionsはどう響きましたか？</Text>
+              <Text style={styles.modalDescText}>このReflectionのどこに、どんなふうに響きましたか？</Text>
 
               <View style={{ marginTop: 6 }}>
                 {(ECHO_STRENGTH_OPTIONS || []).map((opt) => {
@@ -1837,7 +2521,7 @@ closeEchoesModal();
               </View>
 
               <View style={{ marginTop: 10 }}>
-                <Text style={styles.inputLabel}>メモ（任意）</Text>
+                <Text style={styles.inputLabel}>感じたこと・考えたこと（任意）</Text>
 
                 {echoesMemoActive ? (
                   <View style={[styles.memoCard, styles.memoCardExpanded]}>
@@ -1854,7 +2538,7 @@ closeEchoesModal();
                           ),
                         },
                       ]}
-                      placeholder="ここに書いてください。"
+                      placeholder="どこに響いたか、なぜそう感じたかを書いてください。"
                       {...(isIOS ? { defaultValue: echoesMemo } : { value: echoesMemo })}
                       onChangeText={setEchoesMemo}
                       {...(isIOS
@@ -1900,7 +2584,7 @@ closeEchoesModal();
                         }
                       }, 50);
                     }}
-                    accessibilityLabel="Echoesのメモを入力する"
+                    accessibilityLabel="Echoesで感じたことを入力する"
                   >
                     <View style={styles.collapsedRow}>
                       <View style={styles.collapsedLeft}>
@@ -1920,7 +2604,7 @@ closeEchoesModal();
                         >
                           {echoesMemo && echoesMemo.trim().length > 0
                             ? echoesMemo.replace(/\s+/g, " ").trim()
-                            : "ここに書いてください。"}
+                            : "どこに響いたか、なぜそう感じたかを書いてください。"}
                         </Text>
                       </View>
                       <Ionicons
@@ -2018,7 +2702,7 @@ closeEchoesModal();
               contentContainerStyle={{ paddingBottom: 24 + keyboardInset }}
               keyboardShouldPersistTaps="handled"
             >
-              <Text style={styles.modalDescText}>このReflectionsの「気づき」を選んでください。</Text>
+              <Text style={styles.modalDescText}>このReflectionから、どんな気づきがありましたか？</Text>
 
               <View style={{ marginTop: 6 }}>
                 {(DISCOVERY_CATEGORY_OPTIONS || []).map((opt) => {
@@ -2049,7 +2733,7 @@ closeEchoesModal();
               </View>
 
               <View style={{ marginTop: 10 }}>
-                <Text style={styles.inputLabel}>メモ（任意）</Text>
+                <Text style={styles.inputLabel}>気づいたこと・考えたこと（任意）</Text>
 
                 {discoveryMemoActive ? (
                   <View style={[styles.memoCard, styles.memoCardExpanded]}>
@@ -2066,7 +2750,7 @@ closeEchoesModal();
                           ),
                         },
                       ]}
-                      placeholder="ここに書いてください。"
+                      placeholder="何に気づいたか、なぜそう思ったかを書いてください。"
                       {...(isIOS ? { defaultValue: discoveryMemo } : { value: discoveryMemo })}
                       onChangeText={setDiscoveryMemo}
                       {...(isIOS
@@ -2112,7 +2796,7 @@ closeEchoesModal();
                         }
                       }, 50);
                     }}
-                    accessibilityLabel="Discoveriesのメモを入力する"
+                    accessibilityLabel="Discoveriesで気づいたことを入力する"
                   >
                     <View style={styles.collapsedRow}>
                       <View style={styles.collapsedLeft}>
@@ -2132,7 +2816,7 @@ closeEchoesModal();
                         >
                           {discoveryMemo && discoveryMemo.trim().length > 0
                             ? discoveryMemo.replace(/\s+/g, " ").trim()
-                            : "ここに書いてください。"}
+                            : "何に気づいたか、なぜそう思ったかを書いてください。"}
                         </Text>
                       </View>
                       <Ionicons
@@ -2207,6 +2891,82 @@ closeEchoesModal();
           </View>
         </View>
       </Modal>
+
+      <TutorialOverlay
+        visible={
+          !!isTutorialMode &&
+          (tutorialStep === STEP_REFLECTIONS_SELF_VIEW ||
+            tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT) &&
+          !(
+            tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT &&
+            !activeViewedUserId &&
+            !tutorialTargetRect
+          )
+        }
+        targetRect={tutorialTargetRect}
+        title={
+          tutorialStep === STEP_REFLECTIONS_SELF_VIEW
+            ? "自分のReflection"
+            : activeViewedUserId
+            ? "他ユーザーのReflection"
+            : "模擬ユーザーへ切り替え"
+        }
+        message={
+          tutorialStep === STEP_REFLECTIONS_SELF_VIEW
+            ? "フォロワーにはこのように表示されます。自分の作成したReflectionを確認できます。"
+            : activeViewedUserId
+            ? "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』、新しい気づきを得たら『発見』でリアクションできます。（チュートリアルでは説明のみです）"
+            : "『MyModel：自分』を押して、模擬ユーザーを選んでください。"
+        }
+        step={tutorialStep}
+        totalSteps={TUTORIAL_TOTAL_STEPS}
+        mode={
+          tutorialStep === STEP_REFLECTIONS_SELF_VIEW
+            ? "info"
+            : activeViewedUserId
+            ? "info"
+            : "action"
+        }
+        showPrimaryButton={
+          tutorialStep === STEP_REFLECTIONS_SELF_VIEW ||
+          (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && !!activeViewedUserId)
+        }
+        nextLabel={
+          tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && !!activeViewedUserId
+            ? "Friendsへ"
+            : "次へ"
+        }
+        onNext={() => {
+          if (!isTutorialMode) return;
+          if (tutorialStep === STEP_REFLECTIONS_SELF_VIEW) {
+            setTutorialStep(STEP_REFLECTIONS_SWITCH_AND_REACT);
+            return;
+          }
+
+          if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && activeViewedUserId) {
+            setTutorialStep(STEP_FRIENDS_START);
+
+            try {
+              if (navigation?.navigate) {
+                navigation.navigate("Friends");
+                return;
+              }
+            } catch {
+              // noop
+            }
+
+            try {
+              const parent =
+                typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+              if (parent && typeof parent.navigate === "function") {
+                parent.navigate("Friends");
+              }
+            } catch {
+              // noop
+            }
+          }
+        }}
+      />
 
     </SafeAreaView>
   );

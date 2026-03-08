@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ActivityIndicator, AppState, Platform, StatusBar } from "react-native";
+import { Text, View, ActivityIndicator, AppState, Platform, StatusBar, Alert } from "react-native";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { NavigationContainer, createNavigationContainerRef } from "@react-navigation/native";
+import { NavigationContainer, createNavigationContainerRef, StackActions } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   createBottomTabNavigator,
@@ -21,6 +21,7 @@ import InputScreen from "./screens/InputScreen";
 import CocolonGuideScreen from "./screens/CocolonGuideScreen";
 import MyWebScreen from "./screens/MyWebScreen";
 import MyModelScreen from "./screens/MyModelScreen";
+import MyModelCreateScreen from "./screens/MyModelCreateScreen";
 import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
 import FriendsScreen from "./screens/FriendsScreen";
 import SettingsScreen from "./screens/SettingsScreen";
@@ -52,6 +53,7 @@ import { UnreadProvider, useUnread } from "./UnreadContext";
 
 // 🧾 Subscription tier (free/plus/premium)
 import { SubscriptionProvider, useSubscription } from "./SubscriptionContext";
+import { TutorialProvider, useTutorial } from "./TutorialContext";
 
 // IAP: purchase completion → MashOS /subscription/update → finishTransaction
 import { startIapPurchaseObserver, stopIapPurchaseObserver } from "./lib/iap/iapService";
@@ -68,6 +70,13 @@ import { getCurrentUserId } from "./lib/user";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
+
+const InputStack = createNativeStackNavigator();
+const MyWebStack = createNativeStackNavigator();
+const MyModelStack = createNativeStackNavigator();
+const RankingStack = createNativeStackNavigator();
+const FriendsStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
 
 async function resolveCurrentUserId() {
@@ -98,7 +107,7 @@ const HIDDEN_SCREENS = new Set([]);
 const MAIN_TAB_ROUTES = new Set(["Input", "MyWeb", "MyModel", "RankingTop", "Friends", "Settings"]);
 
 // MyModel sub-screens (treated as MyModel in the tab bar)
-const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelReflections", "MyModelReflectionsScreen"]);
+const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen"]);
 
 // Frame line width
 const FRAME_BORDER_WIDTH = 2;
@@ -262,6 +271,194 @@ function CocolonTabBar(props) {
   );
 }
 
+
+// ------------------------------------------------------------
+// Tab stack navigators
+// - Keep navigation state within each tab while allowing tab switching.
+// ------------------------------------------------------------
+function InputStackNavigator() {
+  return (
+    <InputStack.Navigator initialRouteName="Input" screenOptions={{ headerShown: false }}>
+      <InputStack.Screen name="Input" component={InputScreen} />
+      <InputStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+      {/* Common screens (kept inside each tab stack to preserve state) */}
+      <InputStack.Screen name="Account" component={AccountScreen} />
+      <InputStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <InputStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </InputStack.Navigator>
+  );
+}
+
+function MyWebStackNavigator({ onSetMymodelLinkPayload }) {
+  return (
+    <MyWebStack.Navigator initialRouteName="MyWeb" screenOptions={{ headerShown: false }}>
+      <MyWebStack.Screen name="MyWeb">
+        {(navProps) => (
+          <MyWebScreen
+            {...navProps}
+            onOpenMyProfile={(payload) => {
+              // payload を保持してから MyModel タブへ遷移
+              try {
+                onSetMymodelLinkPayload?.(payload || null);
+              } catch {
+                // noop
+              }
+              try {
+                navProps?.navigation?.navigate("MyModel");
+              } catch (e) {
+                // navigation が無い場合は何もしない（落ちないように）
+              }
+            }}
+            onOpenSubscription={() => {
+              // MyWeb paywall CTA → SubscriptionSelect（tab内スタック）
+              try {
+                navProps?.navigation?.navigate("SubscriptionSelect");
+              } catch (e) {
+                // navigation が無い場合は何もしない（落ちないように）
+              }
+            }}
+          />
+        )}
+      </MyWebStack.Screen>
+
+      {/* Common screens (kept inside each tab stack to preserve state) */}
+      <MyWebStack.Screen name="Account" component={AccountScreen} />
+      <MyWebStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+
+      <MyWebStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <MyWebStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </MyWebStack.Navigator>
+  );
+}
+
+function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload }) {
+  return (
+    <MyModelStack.Navigator initialRouteName="MyModel" screenOptions={{ headerShown: false }}>
+      <MyModelStack.Screen name="MyModel">
+        {(navProps) => (
+          <MyModelScreen
+            {...navProps}
+            linkPayload={linkPayload}
+            onConsumeLinkPayload={onConsumeLinkPayload}
+            onOpenSubscription={() => {
+              // MyModel paywall CTA → SubscriptionSelect（tab内スタック）
+              try {
+                navProps?.navigation?.navigate("SubscriptionSelect");
+              } catch (e) {
+                // navigation が無い場合は何もしない（落ちないように）
+              }
+            }}
+          />
+        )}
+      </MyModelStack.Screen>
+
+      <MyModelStack.Screen name="MyModelCreate">
+        {(navProps) => (
+          <MyModelCreateScreen
+            {...navProps}
+            onBack={() => {
+              try {
+                if (navProps?.navigation?.canGoBack?.()) {
+                  navProps.navigation.goBack();
+                  return;
+                }
+              } catch {
+                // noop
+              }
+
+              try {
+                navProps?.navigation?.navigate("MyModel");
+              } catch {
+                // noop
+              }
+            }}
+            onOpenSubscription={() => {
+              try {
+                navProps?.navigation?.navigate("SubscriptionSelect");
+              } catch {
+                // noop
+              }
+            }}
+          />
+        )}
+      </MyModelStack.Screen>
+
+      <MyModelStack.Screen name="MyModelReflections" component={MyModelReflectionsScreen} />
+      <MyModelStack.Screen name="EchoesHistoryList" component={EchoesHistoryListScreen} />
+      <MyModelStack.Screen name="DiscoveriesHistoryList" component={DiscoveriesHistoryListScreen} />
+      <MyModelStack.Screen name="EchoesHistoryDetail" component={EchoesHistoryDetailScreen} />
+      <MyModelStack.Screen name="DiscoveriesHistoryDetail" component={DiscoveriesHistoryDetailScreen} />
+
+      {/* Common screens (kept inside each tab stack to preserve state) */}
+      <MyModelStack.Screen name="Account" component={AccountScreen} />
+      <MyModelStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+
+      <MyModelStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <MyModelStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </MyModelStack.Navigator>
+  );
+}
+
+function RankingStackNavigator() {
+  return (
+    <RankingStack.Navigator initialRouteName="RankingTop" screenOptions={{ headerShown: false }}>
+      <RankingStack.Screen name="RankingTop" component={RankingTopScreen} />
+      <RankingStack.Screen name="RankingEmotion" component={EmotionRankingScreen} />
+      <RankingStack.Screen name="RankingInputCount" component={InputCountRankingScreen} />
+      <RankingStack.Screen name="RankingInputLength" component={InputLengthRankingScreen} />
+      <RankingStack.Screen name="RankingMyModelQuestions" component={MyModelQuestionsRankingScreen} />
+      <RankingStack.Screen name="RankingMyModelResonances" component={MyModelEchoesRankingScreen} />
+      <RankingStack.Screen name="RankingMyModelDiscoveries" component={MyModelDiscoveriesRankingScreen} />
+      <RankingStack.Screen name="RankingLoginStreak" component={LoginStreakRankingScreen} />
+
+      {/* Common screens (kept inside each tab stack to preserve state) */}
+      <RankingStack.Screen name="Account" component={AccountScreen} />
+      <RankingStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+
+      <RankingStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <RankingStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </RankingStack.Navigator>
+  );
+}
+
+function FriendsStackNavigator({ hasUnreadFriendRequests, onOpenFriendManage }) {
+  return (
+    <FriendsStack.Navigator initialRouteName="Friends" screenOptions={{ headerShown: false }}>
+      <FriendsStack.Screen name="Friends">
+        {(navProps) => (
+          <FriendsScreen
+            {...navProps}
+            hasUnreadFriendRequests={hasUnreadFriendRequests}
+            onOpenFriendManage={onOpenFriendManage}
+          />
+        )}
+      </FriendsStack.Screen>
+
+      {/* Common screens (kept inside each tab stack to preserve state) */}
+      <FriendsStack.Screen name="Account" component={AccountScreen} />
+      <FriendsStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+
+      <FriendsStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <FriendsStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </FriendsStack.Navigator>
+  );
+}
+
+function SettingsStackNavigator() {
+  return (
+    <SettingsStack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+
+      {/* Common screens (kept inside each tab stack to preserve state) */}
+      <SettingsStack.Screen name="Account" component={AccountScreen} />
+      <SettingsStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+
+      <SettingsStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <SettingsStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </SettingsStack.Navigator>
+  );
+}
+
 function MainTabs() {
   const { colors } = useTheme();
 
@@ -270,6 +467,7 @@ function MainTabs() {
     getFeatureUnread,
     setUnread,
     setUnreadGroup,
+    clearScope,
     // Prefetch cache
     getPrefetchEntryFresh,
     setPrefetch,
@@ -301,13 +499,13 @@ function MainTabs() {
   }, []);
 
   const handleMainTabPress = React.useCallback(
-    (pressedTabName, navigation, e) => {
+    (pressedTabName, navigation, route, e) => {
       const currentRoute =
         typeof activeRouteName === "string" ? activeRouteName : "";
       const currentActiveTab = getTabBarActiveName(currentRoute);
 
-      // Only intercept when the pressed tab is already the active tab (as shown in the UI),
-      // but the actual current route is a different screen (sub-screen).
+      // 1) When the pressed tab is already the "active" tab in the UI (e.g. MyProfile is treated as MyModel),
+      // but the actual current route is a different screen, jump back to the real tab route.
       if (
         currentActiveTab === pressedTabName &&
         currentRoute !== pressedTabName
@@ -322,10 +520,52 @@ function MainTabs() {
         } catch {
           // noop
         }
+        return;
+      }
+
+      // 2) When the user re-taps the currently focused tab, pop that tab's stack back to its root.
+      // This preserves cross-tab state while keeping the "reselect -> main screen" behavior.
+      try {
+        const isFocused = !!navigation?.isFocused?.();
+        if (!isFocused) return;
+
+        const nestedState = route?.state;
+        const nestedIndex =
+          typeof nestedState?.index === "number" ? nestedState.index : 0;
+
+        if (nestedIndex > 0) {
+          try {
+            e?.preventDefault?.();
+          } catch {
+            // noop
+          }
+
+          const targetKey = nestedState?.key;
+          if (targetKey) {
+            try {
+              navigation?.dispatch?.({
+                ...StackActions.popToTop(),
+                target: targetKey,
+              });
+            } catch {
+              // noop
+            }
+          } else {
+            // Fallback: at least jump to the tab route itself
+            try {
+              navigation?.navigate?.(pressedTabName);
+            } catch {
+              // noop
+            }
+          }
+        }
+      } catch {
+        // noop
       }
     },
     [activeRouteName, getTabBarActiveName]
   );
+
 
 
 
@@ -340,7 +580,7 @@ function MainTabs() {
 
 // ------------------------------------------------------------
 // Unread badge (MyModel Create)
-// - Goal: show the MyWeb tab red dot even before the user opens MyWeb,
+// - Goal: show the MyModel tab red dot even before the user opens MyModel,
 //   so they notice "MyModel Create" exists.
 // - Rule:
 //   * light : show if not all answered (has unanswered) — includes 0/10 to advertise existence
@@ -393,6 +633,7 @@ const refreshMyModelCreateUnreadBadge = React.useCallback(async () => {
     const accessToken = sessionData?.session?.access_token ?? null;
     if (!accessToken) {
       setUnread("MyWeb", "mymodelCreate", false);
+      setUnread("MyModel", "mymodelCreate", false);
       return;
     }
 
@@ -427,10 +668,12 @@ const refreshMyModelCreateUnreadBadge = React.useCallback(async () => {
     const standardHasUnanswered = !!standardJson?.meta?.has_unanswered;
     const standardDot = standardTotal > 0 && standardHasUnanswered;
 
-    setUnread("MyWeb", "mymodelCreate", !!(lightDot || standardDot));
+    setUnread("MyWeb", "mymodelCreate", false);
+    setUnread("MyModel", "mymodelCreate", !!(lightDot || standardDot));
   } catch (e) {
     // best-effort (don't crash the app due to badge)
     setUnread("MyWeb", "mymodelCreate", false);
+    setUnread("MyModel", "mymodelCreate", false);
   }
 }, []);
 
@@ -478,13 +721,54 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
   // - This mirrors MyWebScreen's unread badge logic (best-effort).
   // ------------------------------------------------------------
   const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
-    const TYPES = ["weekly", "monthly"];
-    const LIMIT = 20; // 直近N件の中に未読があるかを見る
+    const TYPES = ["daily", "weekly", "monthly"];
+    const LIMIT = 1; // MyWeb画面と同じく「最新1件」が未読かどうかだけを見る
+    const MYWEB_REPORTS_READY_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ready`;
+
+    const extractReadyItems = (payload) => {
+      if (Array.isArray(payload?.items)) return payload.items;
+      if (Array.isArray(payload?.reports)) return payload.reports;
+      if (Array.isArray(payload?.data?.items)) return payload.data.items;
+      if (Array.isArray(payload?.data?.reports)) return payload.data.reports;
+      if (Array.isArray(payload)) return payload;
+      return [];
+    };
+
+    const fetchReadyReports = async (accessToken, reportType, limit = 1) => {
+      const url = `${MYWEB_REPORTS_READY_ENDPOINT}?report_type=${encodeURIComponent(
+        reportType
+      )}&limit=${encodeURIComponent(limit)}`;
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        const err = new Error(`ready failed: ${res.status}`);
+        err.status = res.status;
+        err.body = text;
+        throw err;
+      }
+
+      const json = await res.json();
+      return extractReadyItems(json);
+    };
 
     try {
       const userId = await resolveCurrentUserId();
-      if (!userId) {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token ?? null;
+
+      if (!userId || !accessToken) {
+        try {
+          clearScope("MyWeb");
+        } catch {
+          // noop
+        }
         setUnreadGroup("MyWeb", {
+          daily: false,
           weekly: false,
           monthly: false,
           selfStructure: false,
@@ -493,32 +777,33 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
       }
 
       const idsByType = {
+        daily: [],
         weekly: [],
         monthly: [],
         selfStructure: [],
       };
 
-      // 1) MyWeb（週/月）の直近レポートIDを取得
+      // 1) MyWeb（日/週/月）は画面と同じ READY API から最新1件のIDを取る
       await Promise.all(
         TYPES.map(async (t) => {
-          const { data, error } = await supabase
-            .from("myweb_reports")
-            .select("id")
-            .eq("user_id", userId)
-            .eq("report_type", t)
-            .order("generated_at", { ascending: false })
-            .order("updated_at", { ascending: false })
-            .limit(LIMIT);
-
-          if (error) throw error;
-
-          idsByType[t] = (Array.isArray(data) ? data : [])
-            .map((r) => r?.id)
-            .filter(Boolean);
+          try {
+            const readyItems = await fetchReadyReports(accessToken, t, LIMIT);
+            idsByType[t] = (Array.isArray(readyItems) ? readyItems : [])
+              .map((r) => String(r?.id || ""))
+              .filter(Boolean)
+              .slice(0, LIMIT);
+          } catch (e) {
+            console.warn(
+              "MainTabs: failed to fetch READY report ids for unread badge",
+              t,
+              e?.status || e?.message || e
+            );
+            idsByType[t] = [];
+          }
         })
       );
 
-      // 1b) 自己構造（月次）の直近レポートIDを取得（Plus/Premiumのみ）
+      // 1b) 自己構造（月次）の最新1件（Plus/Premiumのみ）
       if (isPaid) {
         const { data: selfData, error: selfErr } = await supabase
           .from("myprofile_reports")
@@ -533,21 +818,23 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
         if (selfErr) throw selfErr;
 
         idsByType.selfStructure = (Array.isArray(selfData) ? selfData : [])
-          .map((r) => r?.id)
-          .filter(Boolean);
+          .map((r) => String(r?.id || ""))
+          .filter(Boolean)
+          .slice(0, LIMIT);
       } else {
         idsByType.selfStructure = [];
       }
 
       const allIds = Array.from(
         new Set([
+          ...idsByType.daily,
           ...idsByType.weekly,
           ...idsByType.monthly,
           ...idsByType.selfStructure,
         ])
       );
 
-      // 2) 直近レポートIDの中で、既読済みIDをまとめて取得
+      // 2) 表示対象IDの中で、既読済みIDをまとめて取得（文字列化して比較ズレを防ぐ）
       let readSet = new Set();
       if (allIds.length > 0) {
         const { data: reads, error: rErr } = await supabase
@@ -560,26 +847,44 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
         readSet = new Set(
           (Array.isArray(reads) ? reads : [])
-            .map((r) => r?.report_id)
+            .map((r) => String(r?.report_id || ""))
             .filter(Boolean)
         );
       }
 
-      // 3) タイプ別に「未読が1つでもあるか」を判定
+      const isLatestUnread = (ids) => {
+        const latestId = Array.isArray(ids) && ids.length > 0 ? ids[0] : null;
+        return !!latestId && !readSet.has(latestId);
+      };
+
+      try {
+        clearScope("MyWeb");
+      } catch {
+        // noop
+      }
+
+      // 3) 画面と同じく「最新1件」の未読だけでタブ状態を作る
       setUnreadGroup("MyWeb", {
-        weekly: idsByType.weekly.some((id) => !readSet.has(id)),
-        monthly: idsByType.monthly.some((id) => !readSet.has(id)),
-        selfStructure: idsByType.selfStructure.some((id) => !readSet.has(id)),
+        daily: isLatestUnread(idsByType.daily),
+        weekly: isLatestUnread(idsByType.weekly),
+        monthly: isLatestUnread(idsByType.monthly),
+        selfStructure: isLatestUnread(idsByType.selfStructure),
       });
     } catch (e) {
       console.warn("MainTabs: failed to refresh MyWeb unread badges", e);
+      try {
+        clearScope("MyWeb");
+      } catch {
+        // noop
+      }
       setUnreadGroup("MyWeb", {
+        daily: false,
         weekly: false,
         monthly: false,
         selfStructure: false,
       });
     }
-  }, [isPaid]);
+  }, [isPaid, setUnreadGroup, clearScope]);
 
   const refreshFriendsUnreadBadge = React.useCallback(async () => {
     try {
@@ -1342,8 +1647,16 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
           const icon = (
             <Ionicons name={iconName} size={size} color={color} />
           );
-          // Unread dot: show when the current tab has any unread flags (from UnreadContext)
-          const showUnreadDot = !!getScopeUnread(route.name);
+          // Unread dot:
+          // - MyModel tab should mirror the visible Home badge only.
+          //   Screen UI currently shows only `mymodelCreate`, while scope may also contain
+          //   hidden flags like `qnaNew`. Using scope-wide unread here causes
+          //   “screen has no unread, but lower tab is still red”.
+          // - Other tabs can keep using scope-wide unread.
+          const showUnreadDot =
+            route.name === "MyModel" || route.name === "MyProfile"
+              ? !!getFeatureUnread("MyModel", "mymodelCreate")
+              : !!getScopeUnread(route.name);
 
           // Keep wrapper for legacy tabs (Friends / MyWeb) to avoid layout changes.
           // For other tabs, wrap only when we actually need to show the dot.
@@ -1426,59 +1739,35 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
       {/* 5つの通常タブ */}
       <Tab.Screen
         name="Input"
-        component={InputScreen}
+        component={InputStackNavigator}
         listeners={({ navigation, route }) => ({
-          tabPress: (e) => handleMainTabPress(route.name, navigation, e),
+          tabPress: (e) => handleMainTabPress(route.name, navigation, route, e),
         })}
       />
       <Tab.Screen
         name="MyWeb"
         listeners={({ navigation, route }) => ({
-          tabPress: (e) => handleMainTabPress(route.name, navigation, e),
+          tabPress: (e) => handleMainTabPress(route.name, navigation, route, e),
         })}
       >
-        {(navProps) => (
-          <MyWebScreen
-            {...navProps}
-            onOpenMyProfile={(payload) => {
-              // payload を保持してから MyModel タブへ遷移
-              setMymodelLinkPayload(payload || null);
-              try {
-                navProps?.navigation?.navigate("MyModel");
-              } catch (e) {
-                // navigation が無い場合は何もしない（落ちないように）
-              }
-            }}
-            onOpenSubscription={() => {
-              // MyWeb paywall CTA → SubscriptionSelect（hidden screen）
-              try {
-                navProps?.navigation?.navigate("SubscriptionSelect");
-              } catch (e) {
-                // navigation が無い場合は何もしない（落ちないように）
-              }
-            }}
+        {(tabProps) => (
+          <MyWebStackNavigator
+            {...tabProps}
+            onSetMymodelLinkPayload={setMymodelLinkPayload}
           />
         )}
       </Tab.Screen>
       <Tab.Screen
         name="MyModel"
         listeners={({ navigation, route }) => ({
-          tabPress: (e) => handleMainTabPress(route.name, navigation, e),
+          tabPress: (e) => handleMainTabPress(route.name, navigation, route, e),
         })}
       >
-        {(navProps) => (
-          <MyModelScreen
-            {...navProps}
+        {(tabProps) => (
+          <MyModelStackNavigator
+            {...tabProps}
             linkPayload={mymodelLinkPayload}
             onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
-            onOpenSubscription={() => {
-              // MyModel paywall CTA → SubscriptionSelect（hidden screen）
-              try {
-                navProps?.navigation?.navigate("SubscriptionSelect");
-              } catch (e) {
-                // navigation が無い場合は何もしない（落ちないように）
-              }
-            }}
           />
         )}
       </Tab.Screen>
@@ -1490,38 +1779,31 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
           tabBarButton: () => null,
         }}
       >
-        {(navProps) => (
-          <MyModelScreen
-            {...navProps}
+        {(tabProps) => (
+          <MyModelStackNavigator
+            {...tabProps}
             linkPayload={mymodelLinkPayload}
             onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
-            onOpenSubscription={() => {
-              // MyModel paywall CTA → SubscriptionSelect（hidden screen）
-              try {
-                navProps?.navigation?.navigate("SubscriptionSelect");
-              } catch (e) {
-                // navigation が無い場合は何もしない（落ちないように）
-              }
-            }}
           />
         )}
       </Tab.Screen>
+
       <Tab.Screen
         name="RankingTop"
-        component={RankingTopScreen}
+        component={RankingStackNavigator}
         listeners={({ navigation, route }) => ({
-          tabPress: (e) => handleMainTabPress(route.name, navigation, e),
+          tabPress: (e) => handleMainTabPress(route.name, navigation, route, e),
         })}
       />
-            <Tab.Screen
+      <Tab.Screen
         name="Friends"
         listeners={({ navigation, route }) => ({
-          tabPress: (e) => handleMainTabPress(route.name, navigation, e),
+          tabPress: (e) => handleMainTabPress(route.name, navigation, route, e),
         })}
       >
-        {(navProps) => (
-          <FriendsScreen
-            {...navProps}
+        {(tabProps) => (
+          <FriendsStackNavigator
+            {...tabProps}
             hasUnreadFriendRequests={hasUnreadFriendRequests}
             onOpenFriendManage={async () => {
               // UX: モーダルを開いた瞬間に赤●を消し、裏で既読化 → 再チェック
@@ -1534,121 +1816,12 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
       </Tab.Screen>
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsStackNavigator}
         listeners={({ navigation, route }) => ({
-          tabPress: (e) => handleMainTabPress(route.name, navigation, e),
+          tabPress: (e) => handleMainTabPress(route.name, navigation, route, e),
         })}
       />
-
-
-      {/* hidden screens（タブバーには出さない） */}
-      <Tab.Screen
-        name="CocolonGuide"
-        component={CocolonGuideScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <Tab.Screen
-        name="Account"
-        component={AccountScreen}
-        options={{
-          tabBarButton: () => null, // 念のためボタンも描画しない
-        }}
-      />
-      <Tab.Screen
-        name="SubscriptionSelect"
-        component={SubscriptionSelectScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-      <Tab.Screen
-        name="FollowListScreen"
-        component={FollowListScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <Tab.Screen
-        name="MyModelReflections"
-        component={MyModelReflectionsScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      <Tab.Screen
-        name="EchoesHistoryList"
-        component={EchoesHistoryListScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-      <Tab.Screen
-        name="DiscoveriesHistoryList"
-        component={DiscoveriesHistoryListScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-
-      <Tab.Screen
-        name="EchoesHistoryDetail"
-        component={EchoesHistoryDetailScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-      <Tab.Screen
-        name="DiscoveriesHistoryDetail"
-        component={DiscoveriesHistoryDetailScreen}
-        options={{
-          tabBarButton: () => null,
-        }}
-      />
-
-      {/* ranking screens（タブバーには出さない） */}
-      <Tab.Screen
-        name="RankingEmotion"
-        component={EmotionRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-      <Tab.Screen
-        name="RankingInputCount"
-        component={InputCountRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-      <Tab.Screen
-        name="RankingInputLength"
-        component={InputLengthRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-      <Tab.Screen
-        name="RankingMyModelQuestions"
-        component={MyModelQuestionsRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-      <Tab.Screen
-        name="RankingMyModelResonances"
-        component={MyModelEchoesRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-      <Tab.Screen
-        name="RankingMyModelDiscoveries"
-        component={MyModelDiscoveriesRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-      <Tab.Screen
-        name="RankingLoginStreak"
-        component={LoginStreakRankingScreen}
-        options={{ tabBarButton: () => null }}
-      />
-
-    </Tab.Navigator>
+</Tab.Navigator>
     </GlobalFrameLayout>
   );
 }
@@ -1755,6 +1928,158 @@ function RootStackNavigator() {
 
 function RootNavigator() {
   const { session, initializing, recoveryMode } = useAuth();
+  const {
+    isTutorialMode,
+    tutorialCompleted,
+    tutorialSkipped,
+    setTutorialCompleted,
+    setTutorialSkipped,
+    startTutorial,
+    skipTutorial,
+  } = useTutorial();
+
+  const [tutorialFlagsLoaded, setTutorialFlagsLoaded] = useState(false);
+  const [profileTutorialCompleted, setProfileTutorialCompleted] = useState(false);
+  const [profileTutorialSkipped, setProfileTutorialSkipped] = useState(false);
+  const [tutorialPromptShownThisSession, setTutorialPromptShownThisSession] =
+    useState(false);
+  const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
+    useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    if (!session || recoveryMode) {
+      setTutorialFlagsLoaded(false);
+      setProfileTutorialCompleted(false);
+      setProfileTutorialSkipped(false);
+      setTutorialPromptShownThisSession(false);
+      setTutorialPromptDismissedThisSession(false);
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    setTutorialFlagsLoaded(false);
+    setProfileTutorialCompleted(false);
+    setProfileTutorialSkipped(false);
+    setTutorialPromptShownThisSession(false);
+    setTutorialPromptDismissedThisSession(false);
+
+    (async () => {
+      try {
+        const userId = session?.user?.id ?? null;
+        if (!userId) {
+          if (!cancelled) {
+            setTutorialCompleted(false);
+            setTutorialSkipped(false);
+            setTutorialFlagsLoaded(true);
+          }
+          return;
+        }
+
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("tutorial_completed, tutorial_skipped")
+          .eq("id", userId)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (!cancelled) {
+          const nextCompleted = data?.tutorial_completed === true;
+          const nextSkipped = data?.tutorial_skipped === true;
+
+          setProfileTutorialCompleted(nextCompleted);
+          setProfileTutorialSkipped(nextSkipped);
+          setTutorialCompleted(nextCompleted);
+          setTutorialSkipped(nextSkipped);
+          setTutorialFlagsLoaded(true);
+        }
+      } catch (e) {
+        console.warn("RootNavigator: failed to load tutorial flags", e);
+        if (!cancelled) {
+          setProfileTutorialCompleted(false);
+          setProfileTutorialSkipped(false);
+          setTutorialCompleted(false);
+          setTutorialSkipped(false);
+          setTutorialFlagsLoaded(true);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    session?.user?.id,
+    recoveryMode,
+    setTutorialCompleted,
+    setTutorialSkipped,
+  ]);
+
+  useEffect(() => {
+    if (!session || recoveryMode) return;
+    if (!tutorialFlagsLoaded) return;
+    if (isTutorialMode) return;
+    if (profileTutorialCompleted || profileTutorialSkipped) return;
+    if (tutorialPromptShownThisSession || tutorialPromptDismissedThisSession) return;
+
+    const timer = setTimeout(() => {
+      setTutorialPromptShownThisSession(true);
+
+      Alert.alert(
+        "チュートリアル",
+        "初回ログイン向けチュートリアルを開始しますか？\n\n基本的な使い方を、保存されない形で体験できます。",
+        [
+          {
+            text: "今回はしない",
+            style: "cancel",
+            onPress: () => {
+              setTutorialPromptDismissedThisSession(true);
+            },
+          },
+          {
+            text: "今後表示しない",
+            onPress: async () => {
+              setTutorialPromptDismissedThisSession(true);
+              setProfileTutorialSkipped(true);
+              await skipTutorial();
+            },
+          },
+          {
+            text: "開始する",
+            onPress: () => {
+              setTutorialPromptDismissedThisSession(true);
+              startTutorial();
+              try {
+                if (navigationRef.isReady()) {
+                  navigationRef.navigate("Input");
+                }
+              } catch {
+                // noop
+              }
+            },
+          },
+        ]
+      );
+    }, 250);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [
+    isTutorialMode,
+    profileTutorialCompleted,
+    profileTutorialSkipped,
+    recoveryMode,
+    session,
+    skipTutorial,
+    startTutorial,
+    tutorialFlagsLoaded,
+    tutorialPromptDismissedThisSession,
+    tutorialPromptShownThisSession,
+  ]);
 
 
   // ------------------------------------------------------------
@@ -1904,6 +2229,7 @@ export default function App() {
     <SafeAreaProvider>
       <ThemeProvider>
       <SubscriptionProvider>
+      <TutorialProvider>
       <UnreadProvider>
       <AuthProvider>
         <NavigationContainer
@@ -1917,6 +2243,7 @@ export default function App() {
         </NavigationContainer>
       </AuthProvider>
       </UnreadProvider>
+      </TutorialProvider>
       </SubscriptionProvider>
     </ThemeProvider>
     </SafeAreaProvider>

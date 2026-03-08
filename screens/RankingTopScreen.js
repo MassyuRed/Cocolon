@@ -26,6 +26,14 @@ export default function RankingTopScreen({ navigation }) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
+  const handlePressGuide = () => {
+    try {
+      navigation?.navigate?.("CocolonGuide", { screenId: "RankingTopScreen" });
+    } catch {
+      // noop
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -38,7 +46,20 @@ export default function RankingTopScreen({ navigation }) {
       >
         {/* Header */}
         <View style={styles.panelHeader}>
-          <Text style={styles.panelTitle}>Ranking</Text>
+          <View style={styles.panelTitleRow}>
+            <Text style={styles.panelTitle}>Ranking</Text>
+            <CocolonPressable
+              style={styles.guideTitleButton}
+              onPress={handlePressGuide}
+              accessibilityLabel="ガイドを開く"
+            >
+              <Ionicons
+                name="help-circle-outline"
+                size={20}
+                color={colors.TEXT_ON_LIGHT}
+              />
+            </CocolonPressable>
+          </View>
         </View>
 
         <View style={styles.section}>
@@ -182,6 +203,21 @@ function createStyles(COLORS, ui) {
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
       letterSpacing: 0.8,
+    },
+    panelTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    guideTitleButton: {
+      width: 36,
+      height: 32,
+      borderRadius: 12,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: COLORS.FIELD_BG,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      marginLeft: 10,
     },
     backBtn: {
       width: 54,

@@ -12,6 +12,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
+import { useTutorial } from "../TutorialContext";
+import { useUnread } from "../UnreadContext";
 
 // 🎨 テーマコンテキスト
 import {
@@ -33,6 +35,8 @@ const PANEL_MIN_HEIGHT = 680;
 export default function SettingsScreen({ navigation }) {
   const { colors, themeName, setThemeName } = useTheme();
   const { signOut, authLoading, user } = useAuth();
+  const { startTutorial } = useTutorial();
+  const { setUnread } = useUnread();
   const styles = useMemo(() => createStyles(colors), [colors]);
 
   const [localProcessing, setLocalProcessing] = useState(false);
@@ -126,6 +130,63 @@ export default function SettingsScreen({ navigation }) {
     Alert.alert(
       "サブスク",
       "加入状況画面を開けませんでした。もう一度お試しください。"
+    );
+  };
+
+
+
+  const openTutorialRestart = () => {
+    if (isBusy) return;
+
+    Alert.alert(
+      "チュートリアル",
+      "チュートリアルを最初から再体験しますか？\n\n本番データは変更されません。",
+      [
+        { text: "キャンセル", style: "cancel" },
+        {
+          text: "開始する",
+          onPress: () => {
+            try {
+              startTutorial();
+            } catch {
+              // noop
+            }
+
+            try {
+              setUnread("Friends", "tutorial", false);
+            } catch {
+              // noop
+            }
+
+            try {
+              const parent =
+                typeof navigation?.getParent === "function"
+                  ? navigation.getParent()
+                  : null;
+              if (parent && typeof parent.navigate === "function") {
+                parent.navigate("Input");
+                return;
+              }
+            } catch {
+              // noop
+            }
+
+            try {
+              if (navigation?.navigate) {
+                navigation.navigate("Input");
+                return;
+              }
+            } catch {
+              // noop
+            }
+
+            Alert.alert(
+              "チュートリアル",
+              "チュートリアルを開始状態にしました。Homeから体験を始めてください。"
+            );
+          },
+        },
+      ]
     );
   };
 
@@ -322,7 +383,7 @@ export default function SettingsScreen({ navigation }) {
                       <Ionicons
                         name="card-outline"
                         size={18}
-                        color={colors.TEXT_ON_LIGHT}
+                        color="#000"
                       />
                     </View>
                     <Text style={styles.rowLabel}>サブスク加入状況</Text>
@@ -347,7 +408,7 @@ export default function SettingsScreen({ navigation }) {
                       <Ionicons
                         name="notifications-outline"
                         size={18}
-                        color={colors.TEXT_ON_LIGHT}
+                        color="#000"
                       />
                     </View>
                     <Text style={styles.rowLabel}>通知を受け取る</Text>
@@ -360,6 +421,41 @@ export default function SettingsScreen({ navigation }) {
                   />
                 </View>
               </View>
+            </View>
+
+            {/* チュートリアル */}
+            <View style={styles.section}>
+              <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>チュートリアル</Text>
+
+              <View style={styles.card}>
+                <CocolonPressable
+                  style={styles.row}
+                  onPress={openTutorialRestart}
+                  disabled={isBusy}
+                  accessibilityLabel="チュートリアルを再体験する"
+                >
+                  <View style={styles.rowLeft}>
+                    <View style={styles.rowIconWrap}>
+                      <Ionicons
+                        name="school-outline"
+                        size={18}
+                        color="#000"
+                      />
+                    </View>
+                    <Text style={styles.rowLabel}>チュートリアルを再体験する</Text>
+                  </View>
+
+                  <Ionicons
+                    name="chevron-forward"
+                    size={18}
+                    color={colors.TEXT_SUBTLE}
+                  />
+                </CocolonPressable>
+              </View>
+
+              <Text style={styles.sectionHelpText}>
+                感情入力・Reflection・フレンド通知の流れを、本番保存なしで体験できます。
+              </Text>
             </View>
 
             {/* カラーテーマの下に、ログアウト / アカウント削除 */}
@@ -494,6 +590,13 @@ function createStyles(COLORS) {
       fontSize: 12,
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
+    },
+
+    sectionHelpText: {
+      marginTop: 8,
+      fontSize: 11,
+      lineHeight: 16,
+      color: TEXT_SUB,
     },
 
     // テーマ選択（縦に3つ並べる）

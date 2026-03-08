@@ -368,11 +368,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
             <PlanCard
               title="Plus会員"
               price="月額300円"
-              subtitle="レポート閲覧 / PDF保存 / MyModelCreate拡張"
+              subtitle="レポート閲覧 / MyModelCreate拡張"
               features={[
                 "MyWeb：感情構造分析レポート本文閲覧",
                 "MyWeb：自己構造分析レポート履歴＋本文閲覧",
-                "MyWeb：分析レポートPDF保存",
                 "MyWeb：MyModelCreate 30問すべて利用可能（編集可）",
                 "MyModel：Echoes履歴をすべて閲覧可能",
                 "MyModel：Discoveries履歴をすべて閲覧可能",

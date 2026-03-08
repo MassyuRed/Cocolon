@@ -254,6 +254,7 @@ export default function MyWebHistoryScreen({ onBack }) {
       emotions: { color: colors.TEXT_ON_LIGHT },
       memo: { color: colors.TEXT_SUBTLE },
       memoLabel: { color: colors.TEXT_SUBTLE },
+      categoryValue: { color: colors.TEXT_SUBTLE },
       secretBtn: {
         backgroundColor: colors.PANEL_BG,
         borderColor: colors.CARD_BORDER,
@@ -342,6 +343,7 @@ export default function MyWebHistoryScreen({ onBack }) {
       emotions: Array.isArray(d?.emotions) ? d.emotions : [],
       memo: d?.memo || "",
       memoAction: d?.memo_action || "",
+      categories: Array.isArray(d?.category) ? d.category : [],
       details: Array.isArray(d?.emotion_details) ? d.emotion_details : [],
       strengthAvg:
         typeof d?.emotion_strength_avg === "number" ? d.emotion_strength_avg : null,
@@ -691,7 +693,7 @@ export default function MyWebHistoryScreen({ onBack }) {
             />
             <TextInput
               style={[styles.searchInput, themed.searchInput]}
-              placeholder="履歴を検索（メモ/行動メモ・感情・日付・強/中/弱）"
+              placeholder="履歴を検索（メモ/行動メモ・感情・カテゴリ・日付・強/中/弱）"
               placeholderTextColor={isDark ? colors.TEXT_SUBTLE : "#9CA3AF"}
               value={query}
               onChangeText={setQuery}
@@ -1063,6 +1065,14 @@ export default function MyWebHistoryScreen({ onBack }) {
                   <Text style={[styles.memo, themed.memo]}>{renderHitText(item.memoAction)}</Text>
                 </View>
               )}
+              {!!item.categories?.length && (
+                <View style={styles.memoBlock}>
+                  <Text style={[styles.memoLabel, themed.memoLabel]}>選択カテゴリ</Text>
+                  <Text style={[styles.categoryValue, themed.categoryValue]}>
+                    {renderHitText(item.categories.join(" / "))}
+                  </Text>
+                </View>
+              )}
             </View>
           )}
           ListEmptyComponent={
@@ -1251,4 +1261,5 @@ const styles = StyleSheet.create({
   memoBlock: { marginTop: 6 },
   memoLabel: { fontSize: 11, fontWeight: "700", color: "#6B7280" },
   memo: { color: "#6B7280", marginTop: 4, fontStyle: "italic" },
+  categoryValue: { color: "#6B7280", marginTop: 4 },
 });

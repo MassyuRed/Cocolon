@@ -42,6 +42,7 @@ function normalizeScreenId(raw) {
   if (lower === "myweb" || lower.includes("myweb")) return "myweb";
   if (lower === "mymodel" || lower.includes("mymodel")) return "mymodel";
   if (lower === "friend" || lower === "friends" || lower.includes("friend")) return "friend";
+  if (lower === "ranking" || lower.includes("ranking")) return "ranking";
 
   return lower;
 }
@@ -51,22 +52,27 @@ function getGuideContent(screenIdNorm) {
     home: {
       title: "Home",
       quick:
-        "ここは今の気持ちを入力する場所です。感情を選び、必要ならメモを書いて送信すると、後から振り返りや分析に使えます。",
+        "こちらは「感情入力」を行う画面です。\n\n今感じた気持ちを、そのまま選んで記録できます。\n日記のように使うこともできますが、\nおすすめは「感情に気づいた瞬間に入力する」使い方です。\n\nSNSのような感覚で、こまめに入力してみてください。\n\n「自己理解ボタン」は、\n気づきや発見を整理したいときや、\n自分について能動的に言葉を残したいときに使います。\n\n感情は、選択のみでも送信できます。\n\nまた、Homeから移動できる「アカウントページ」では、\nアカウント設定やステータス確認ができます。\n一度ご確認ください。",
     },
     myweb: {
       title: "MyWeb",
       quick:
-        "ここでは感情の履歴や分析レポートを確認できます。見たい項目を選ぶと、履歴・週/月レポートなどの詳細画面に移動します。",
+        "こちらは、入力した自己情報や感情の履歴を確認する画面です。\n\nこれまでに入力した情報の検索や確認ができるほか、\n入力内容をもとに作成された「分析レポート」を見ることができます。\n\n「MyModelCreate」を活用すると、\nMyModel画面で「Reflections機能」を使用できるようになります。\n\nすべての問いに答える必要はありません。\n気になる問いだけでも、気軽に入力してみてください。",
     },
     mymodel: {
       title: "MyModel",
       quick:
-        "ここではMyModelの機能を使って自己理解を深めます。おすすめの探索やReflections、履歴の入口から各機能へ進めます。",
+        "こちらは、入力した自己情報をもとに構築された「MyModel」を使用できる画面です。\n\n「Reflections機能」を使うことで、\n自分のMyModelから生成されたReflectionや、\nフォローしているユーザーのReflectionを閲覧できます。\n\n「おすすめ機能」では、\nまだフォローしていないユーザーを探すことも可能です。\n\nさらに、「Echoes機能」や「Discoveries機能」により、\n他のユーザーのReflectionにリアクションすることができます。\nその内容は「履歴」から確認できます。\n\nぜひ、さまざまなReflectionを閲覧してみてください。",
     },
     friend: {
       title: "Friend",
       quick:
-        "ここではフレンドの感情ログを見たり、フレンド管理を行えます。右上から更新やフレンド申請・承認などの管理に進めます。",
+        "こちらは、フレンド登録やフレンドログを確認できる画面です。\n\n他のユーザーとフレンド登録をすると、\nフレンドが「感情入力」を行った際に、\n選択された感情のみが通知されます。\n（メモ内容は共有されません）\n\n身近な方とフレンド登録をして、\n「感情のみの非言語交信」をお楽しみください。",
+    },
+    ranking: {
+      title: "Ranking",
+      quick:
+        "こちらは、ランキングを閲覧できる画面です。\n\n複数のランキング項目から、\n上位100位までのユーザーを表示します。\n\nランキングに表示されているユーザーをタップすると、\nそのユーザーの「アカウントページ」を閲覧できます。\n\nぜひ、ランキング上位を目指してみてください。",
     },
     unknown: {
       title: "ガイド",
@@ -182,7 +188,7 @@ export default function CocolonGuideScreen({ route } = {}) {
         <View style={styles.card}>
           {mode === "quick" ? (
             <>
-              <Text style={styles.sectionTitle}>この画面について</Text>
+              <Text style={styles.sectionTitle}>画面説明</Text>
               <Text style={styles.bodyText}>{content?.quick || ""}</Text>
             </>
           ) : (
@@ -196,9 +202,6 @@ export default function CocolonGuideScreen({ route } = {}) {
           )}
         </View>
 
-        <Text style={styles.noteText}>
-          ※ 今回のテスト版では「簡易」のみを先行実装しています。
-        </Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -228,7 +231,7 @@ function createStyles(COLORS, ui) {
     headerTitle: {
       flex: 1,
       textAlign: "center",
-      fontSize: 15,
+      fontSize: 20,
       fontWeight: "900",
       color: COLORS.TITLE_GOLD,
       letterSpacing: 0.6,

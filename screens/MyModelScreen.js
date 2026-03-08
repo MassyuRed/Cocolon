@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   ActivityIndicator,
   Alert,
+  AppState,
   Keyboard,
   Modal,
   Platform,
@@ -11,6 +12,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useWindowDimensions,
   View,
 } from "react-native";
@@ -22,10 +24,13 @@ import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
+import { useTutorial } from "../TutorialContext";
 
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
+import UnreadBadge from "../components/UnreadBadge";
+import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
 import { makeUiTokens } from "../ui/uiTokens";
 
 /**
@@ -53,6 +58,33 @@ const MYMODEL_RECOMMEND_USERS_ENDPOINT = `${API_BASE}/mymodel/recommend/users`;
 // Recommend questions endpoint (MashOS)
 const QNA_TRENDING_ENDPOINT = `${API_BASE}/mymodel/qna/trending`;
 const QNA_HOLDERS_ENDPOINT = `${API_BASE}/mymodel/qna/holders`;
+const GLOBAL_SUMMARY_ENDPOINT = `${API_BASE}/global_summary`;
+
+const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
+const MYMODEL_TUTORIAL_STEP_START = 14;
+const MYMODEL_TUTORIAL_STEP_END = 17;
+const TUTORIAL_TOTAL_STEPS = 23;
+
+const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
+  {
+    id: "tutorial-reflection-mock-1",
+    q_instance_id: "tutorial-q-mock-1",
+    q_key: "tutorial-holiday",
+    title: TUTORIAL_REFLECTION_QUESTION,
+    body:
+      "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
+    owner_user_id: "tutorial-follow-1",
+    display_name: "佐藤 花子",
+    friend_code: "HANAKO123",
+    is_tutorial: true,
+    tutorial_kind: "mock",
+    created_at: "2026-01-01T09:00:00.000Z",
+    resonances: 4,
+    discoveries: 2,
+    views: 12,
+    is_new: true,
+  },
+]);
 
 // navigation の state を再帰的に探索して、指定 routeName が存在するか確認
 function hasRouteNameInState(state, routeName) {
@@ -104,16 +136,40 @@ export default function MyModelScreen({ route } = {}) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const navigation = useNavigation();
 
-  const { setUnread, getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } =
-    useUnread();
+  const {
+    setUnread,
+    getFeatureUnread,
+    getPrefetchEntry,
+    getPrefetchEntryFresh,
+    setPrefetch,
+  } = useUnread();
   const { myModelRangeLabel } = useSubscription();
+  const {
+    isTutorialMode,
+    tutorialStep,
+    tutorialReflections,
+    setTutorialReflections,
+    setTutorialStep,
+  } = useTutorial();
+
+  const { height: windowHeight } = useWindowDimensions();
+  const screenRootRef = useRef(null);
+  const tutorialScrollRef = useRef(null);
+  const tutorialScrollYRef = useRef(0);
+  const myModelTitleRef = useRef(null);
+  const reflectionsButtonRef = useRef(null);
+  const createButtonRef = useRef(null);
+  const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const modalOverlayRootRef = useRef(null);
+  const tutorialCreateInputWrapRef = useRef(null);
+  const tutorialCreateSaveButtonRef = useRef(null);
+  const [tutorialModalTargetRect, setTutorialModalTargetRect] = useState(null);
 
   // Tab reselect helper: used to ignore async results after a "reset to main"
   const resetSeqRef = useRef(0);
 
   // Prefetch freshness
   const PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
-
 
   // 照会対象（フォロー一覧などから遷移した場合は route params で指定）
   const initialViewedUserId =
@@ -124,6 +180,8 @@ export default function MyModelScreen({ route } = {}) {
 
   // Home では対象ユーザー切替を持たず、Reflections 画面側で切り替えます（重複排除）
   const targetUserId = initialViewedUserId ? String(initialViewedUserId) : null;
+
+  const unreadMyModelCreate = !!getFeatureUnread("MyModel", "mymodelCreate");
 
   // Recommend (users)
   const [recoModalVisible, setRecoModalVisible] = useState(false);
@@ -138,6 +196,7 @@ export default function MyModelScreen({ route } = {}) {
   const [trendingError, setTrendingError] = useState("");
   const [trendingItems, setTrendingItems] = useState([]);
   const [activeTrending, setActiveTrending] = useState(null);
+  const [trendingMode, setTrendingMode] = useState("overall"); // overall | resonance | views
 
   const [holdersLoading, setHoldersLoading] = useState(false);
   const [holdersError, setHoldersError] = useState("");
@@ -145,8 +204,248 @@ export default function MyModelScreen({ route } = {}) {
 
   const [recoMode, setRecoMode] = useState("question"); // question | user
 
+  const [globalReflectionCount, setGlobalReflectionCount] = useState(null);
+  const [globalEchoCount, setGlobalEchoCount] = useState(null);
+  const [globalDiscoveryCount, setGlobalDiscoveryCount] = useState(null);
+  const appStateRef = useRef(AppState.currentState);
+
+  const [tutorialCreateVisible, setTutorialCreateVisible] = useState(false);
+  const [tutorialCreateAnswer, setTutorialCreateAnswer] = useState("");
+  const [tutorialCreateSubmitting, setTutorialCreateSubmitting] = useState(false);
+  const [tutorialCreateError, setTutorialCreateError] = useState("");
+
+
+  const fetchGlobalSummary = useCallback(async () => {
+    try {
+      const res = await fetch(GLOBAL_SUMMARY_ENDPOINT, { method: "GET" });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(String(json?.detail || json?.message || `HTTP ${res.status}`));
+      }
+
+      const reflectionRaw =
+        json?.reflection_count ?? json?.reflection_views ?? json?.reflection_view_count;
+      const echoRaw = json?.echo_count;
+      const discoveryRaw = json?.discovery_count;
+
+      const nextReflectionCount = Number(reflectionRaw);
+      const nextEchoCount = Number(echoRaw);
+      const nextDiscoveryCount = Number(discoveryRaw);
+
+      if (Number.isFinite(nextReflectionCount)) {
+        setGlobalReflectionCount(nextReflectionCount);
+      }
+      if (Number.isFinite(nextEchoCount)) {
+        setGlobalEchoCount(nextEchoCount);
+      }
+      if (Number.isFinite(nextDiscoveryCount)) {
+        setGlobalDiscoveryCount(nextDiscoveryCount);
+      }
+    } catch {
+      // keep previous values
+    }
+  }, []);
+
 
   const isDark = themeName === "dark";
+  const tutorialSelfReflection = useMemo(
+    () =>
+      (Array.isArray(tutorialReflections) ? tutorialReflections : []).find(
+        (item) => String(item?.tutorial_kind || "") === "self"
+      ) || null,
+    [tutorialReflections]
+  );
+  const tutorialHasSelfReflection = !!tutorialSelfReflection;
+
+  const isMyModelTutorialStep =
+    !!isTutorialMode &&
+    tutorialStep >= MYMODEL_TUTORIAL_STEP_START &&
+    tutorialStep <= MYMODEL_TUTORIAL_STEP_END;
+  const isMyModelTutorialVisible =
+    isMyModelTutorialStep && !tutorialCreateVisible;
+  const tutorialCreateAnswerFilled =
+    String(tutorialCreateAnswer || "").trim().length > 0;
+
+  const handleTutorialScroll = useCallback((e) => {
+    tutorialScrollYRef.current =
+      e?.nativeEvent?.contentOffset?.y ?? tutorialScrollYRef.current;
+  }, []);
+
+  const getTutorialTargetRef = useCallback(() => {
+    if (!isMyModelTutorialVisible) return null;
+
+    switch (tutorialStep) {
+      case 14:
+        return myModelTitleRef;
+      case 15:
+      case 16:
+        return createButtonRef;
+      case 17:
+        return reflectionsButtonRef;
+      default:
+        return null;
+    }
+  }, [isMyModelTutorialVisible, tutorialStep]);
+
+  const tutorialOverlayConfig = useMemo(() => {
+    if (!isMyModelTutorialVisible) return null;
+
+    switch (tutorialStep) {
+      case 14:
+        return {
+          step: 14,
+          mode: "info",
+          title: "MyModel",
+          message: "ここでは\nReflectionを作り、閲覧できます",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(15),
+        };
+      case 15:
+        return {
+          step: 15,
+          mode: "info",
+          title: "MyModel Create",
+          message: "まずはここで\nReflectionを作成します",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(16),
+        };
+      case 16:
+        return {
+          step: 16,
+          mode: "action",
+          title: "作成してみましょう",
+          message: "MyModel Createを開いて\nReflectionを作ってみましょう",
+          actionHint: "MyModel Create を押してください",
+        };
+      case 17:
+        return {
+          step: 17,
+          mode: "action",
+          title: "Reflectionsで確認できます",
+          message: "作成したReflectionは\nReflectionsで確認できます\n\n開いてみましょう",
+          actionHint: "Reflections を押してください",
+        };
+      default:
+        return null;
+    }
+  }, [isMyModelTutorialVisible, tutorialStep, setTutorialStep]);
+
+  const tutorialModalOverlayConfig = useMemo(() => {
+    if (!isTutorialMode || !tutorialCreateVisible || tutorialStep !== 16) {
+      return null;
+    }
+
+    if (!tutorialCreateAnswerFilled) {
+      return {
+        step: 16,
+        mode: "action",
+        title: "回答を書いてみましょう",
+        message: "ここに回答を書いてみましょう",
+        actionHint: "入力欄を押して回答してください",
+        footerText: "この問い1つで、作成から閲覧までの流れを体験できます。",
+      };
+    }
+
+    return {
+      step: 16,
+      mode: "action",
+      title: "保存しましょう",
+      message: "入力できたら保存しましょう",
+      actionHint: "保存 を押してください",
+      footerText: "チュートリアル用のReflectionとして、本番データに影響せず保存されます。",
+    };
+  }, [
+    isTutorialMode,
+    tutorialCreateVisible,
+    tutorialStep,
+    tutorialCreateAnswerFilled,
+  ]);
+
+  const syncTutorialTargetRect = useCallback(async () => {
+    if (!isMyModelTutorialVisible) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const targetRef = getTutorialTargetRef();
+    if (!targetRef || !screenRootRef.current) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const firstRect = await measureTutorialTarget(targetRef, screenRootRef);
+    if (!firstRect) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const lowerSafeLine = Math.max(220, windowHeight - 260);
+    const upperSafeLine = 90;
+    if (firstRect.bottom > lowerSafeLine || firstRect.y < upperSafeLine) {
+      const nextScrollY = Math.max(
+        0,
+        tutorialScrollYRef.current + firstRect.y - 130
+      );
+
+      try {
+        tutorialScrollRef.current?.scrollTo?.({
+          y: nextScrollY,
+          animated: true,
+        });
+      } catch {
+        // noop
+      }
+
+      setTimeout(async () => {
+        const nextRect = await measureTutorialTarget(targetRef, screenRootRef);
+        setTutorialTargetRect(nextRect);
+      }, 260);
+      return;
+    }
+
+    setTutorialTargetRect(firstRect);
+  }, [getTutorialTargetRef, isMyModelTutorialVisible, windowHeight]);
+
+  useEffect(() => {
+    if (!isTutorialMode || !tutorialHasSelfReflection) return;
+    if (tutorialStep < MYMODEL_TUTORIAL_STEP_START || tutorialStep >= 17) return;
+    setTutorialStep(17);
+  }, [isTutorialMode, tutorialHasSelfReflection, tutorialStep, setTutorialStep]);
+
+  useEffect(() => {
+    if (!isMyModelTutorialVisible) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      syncTutorialTargetRect();
+    }, 80);
+
+    return () => clearTimeout(timer);
+  }, [
+    isMyModelTutorialVisible,
+    tutorialStep,
+    tutorialCreateVisible,
+    tutorialHasSelfReflection,
+    tutorialCreateAnswer,
+    syncTutorialTargetRect,
+  ]);
+
+  const syncTutorialModalTargetRect = useCallback(async () => {
+    if (!tutorialModalOverlayConfig || !modalOverlayRootRef.current) {
+      setTutorialModalTargetRect(null);
+      return;
+    }
+
+    const targetRef = tutorialCreateAnswerFilled
+      ? tutorialCreateSaveButtonRef
+      : tutorialCreateInputWrapRef;
+
+    const rect = await measureTutorialTarget(targetRef, modalOverlayRootRef);
+    setTutorialModalTargetRect(rect);
+  }, [tutorialModalOverlayConfig, tutorialCreateAnswerFilled]);
+
   // ---------------------------------------------------------
   // Tab reselect (when already on MyModel tab)
   // - Re-tapping the active tab returns to the "main" state:
@@ -157,10 +456,12 @@ export default function MyModelScreen({ route } = {}) {
 
     // close modal-like UIs
     setRecoModalVisible(false);
+    setTutorialCreateVisible(false);
 
     // best-effort: clear modal state so it doesn't persist
     setRecoUsersLoading(false);
     setRecoUsersError("");
+    setTutorialCreateError("");
   }, []);
 
   useEffect(() => {
@@ -186,13 +487,58 @@ export default function MyModelScreen({ route } = {}) {
     return unsubscribe;
   }, [navigation, resetToMain]);
 
+  useEffect(() => {
+    if (isTutorialMode) {
+      setGlobalReflectionCount(null);
+      setGlobalEchoCount(null);
+      setGlobalDiscoveryCount(null);
+      return;
+    }
+
+    fetchGlobalSummary();
+
+    if (!navigation?.addListener) return;
+    const unsubscribe = navigation.addListener("focus", () => {
+      fetchGlobalSummary();
+    });
+
+    return unsubscribe;
+  }, [navigation, fetchGlobalSummary, isTutorialMode]);
+
+  useEffect(() => {
+    if (isTutorialMode) return;
+
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (/inactive|background/.test(appStateRef.current) && nextAppState === "active") {
+        fetchGlobalSummary();
+      }
+      appStateRef.current = nextAppState;
+    });
+
+    return () => {
+      try {
+        subscription?.remove?.();
+      } catch {
+        // noop
+      }
+    };
+  }, [fetchGlobalSummary, isTutorialMode]);
+
   // Recommend: trending questions (global) -> holders (users who answered the question)
   useEffect(() => {
+    if (isTutorialMode) {
+      setTrendingItems([]);
+      setActiveTrending(null);
+      setTrendingError("");
+      setTrendingLoading(false);
+      return;
+    }
+
     // まずキャッシュ（アプリ起動時プリロード）を即反映して、体感を速くする
     try {
       const entry = getPrefetchEntryFresh
-        ? getPrefetchEntryFresh("MyModel", "trending", PREFETCH_MAX_AGE_MS)
-        : getPrefetchEntry("MyModel", "trending");
+        ? getPrefetchEntryFresh("MyModel", `trending:${trendingMode}`, PREFETCH_MAX_AGE_MS)
+        : getPrefetchEntry("MyModel", `trending:${trendingMode}`);
       const cached = entry?.value;
       const items = Array.isArray(cached?.items) ? cached.items : null;
       if (items) {
@@ -209,19 +555,20 @@ export default function MyModelScreen({ route } = {}) {
     const hasCache = (() => {
       try {
         const entry = getPrefetchEntryFresh
-          ? getPrefetchEntryFresh("MyModel", "trending", PREFETCH_MAX_AGE_MS)
-          : getPrefetchEntry("MyModel", "trending");
+          ? getPrefetchEntryFresh("MyModel", `trending:${trendingMode}`, PREFETCH_MAX_AGE_MS)
+          : getPrefetchEntry("MyModel", `trending:${trendingMode}`);
         return Array.isArray(entry?.value?.items);
       } catch {
         return false;
       }
     })();
 
-    loadTrending({ silent: hasCache });
+    loadTrending({ silent: hasCache, mode: trendingMode });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isTutorialMode]);
 
   useEffect(() => {
+    if (isTutorialMode) return;
     if (recoMode !== "question") return;
 
     const qid =
@@ -233,9 +580,16 @@ export default function MyModelScreen({ route } = {}) {
       loadHolders(qid);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTrending, recoMode]);
+  }, [activeTrending, recoMode, isTutorialMode]);
 
   useEffect(() => {
+    if (isTutorialMode) {
+      setRecoUsers([]);
+      setRecoUsersError("");
+      setRecoUsersLoading(false);
+      return;
+    }
+
     if (recoMode === "user") {
       // まずキャッシュ（アプリ起動時プリロード）を即反映
       try {
@@ -267,7 +621,7 @@ export default function MyModelScreen({ route } = {}) {
       loadRecommendUsers({ silent: hasCache });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recoMode]);
+  }, [recoMode, isTutorialMode]);
 
   async function getAuthContext() {
     let userId = null;
@@ -285,6 +639,142 @@ export default function MyModelScreen({ route } = {}) {
     }
     return { userId, accessToken };
   }
+
+  useEffect(() => {
+    if (!isTutorialMode || !tutorialHasSelfReflection) return;
+    setTutorialStep((prev) => (prev < 17 ? 17 : prev));
+  }, [isTutorialMode, tutorialHasSelfReflection, setTutorialStep]);
+
+  useEffect(() => {
+    if (!isMyModelTutorialVisible) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      syncTutorialTargetRect();
+    }, 80);
+
+    return () => clearTimeout(timer);
+  }, [
+    isMyModelTutorialVisible,
+    tutorialStep,
+    tutorialHasSelfReflection,
+    syncTutorialTargetRect,
+  ]);
+
+  useEffect(() => {
+    if (!tutorialModalOverlayConfig) {
+      setTutorialModalTargetRect(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      syncTutorialModalTargetRect();
+    }, 80);
+
+    return () => clearTimeout(timer);
+  }, [tutorialModalOverlayConfig, syncTutorialModalTargetRect]);
+
+  const openTutorialCreate = useCallback(() => {
+    setTutorialCreateAnswer(String(tutorialSelfReflection?.body || ""));
+    setTutorialCreateError("");
+    setTutorialCreateVisible(true);
+  }, [tutorialSelfReflection]);
+
+  const closeTutorialCreate = useCallback(() => {
+    if (tutorialCreateSubmitting) return;
+    setTutorialCreateVisible(false);
+    setTutorialCreateError("");
+  }, [tutorialCreateSubmitting]);
+
+  const navigateToReflections = useCallback(() => {
+    if (!navigation?.navigate) return;
+
+    const routeName = resolveReflectionsRouteName(navigation);
+    const params =
+      targetUserId != null
+        ? { viewedUserId: String(targetUserId), targetUserId: String(targetUserId) }
+        : {};
+
+    try {
+      navigation.navigate(routeName, params);
+    } catch {
+      Alert.alert(
+        "Reflections画面を開けません",
+        "Reflections画面が navigation に未登録の可能性があります。\nApp.js に MyModelReflectionsScreen を登録してください。"
+      );
+    }
+  }, [navigation, targetUserId]);
+
+  const saveTutorialReflection = useCallback(() => {
+    const answer = String(tutorialCreateAnswer || "").trim();
+    if (!answer) {
+      setTutorialCreateError("回答を入力してください。");
+      return;
+    }
+
+    setTutorialCreateSubmitting(true);
+    try {
+      const createdAt = new Date().toISOString();
+      const selfReflection = {
+        id: "tutorial-reflection-self",
+        q_instance_id: "tutorial-q-self",
+        q_key: "tutorial-holiday",
+        title: TUTORIAL_REFLECTION_QUESTION,
+        body: answer,
+        owner_user_id: "tutorial-self",
+        display_name: "自分",
+        friend_code: "YOU",
+        is_tutorial: true,
+        tutorial_kind: "self",
+        created_at: createdAt,
+        resonances: 0,
+        discoveries: 0,
+        views: 0,
+        is_new: true,
+      };
+
+      setTutorialReflections((prev) => {
+        const safePrev = Array.isArray(prev) ? prev : [];
+        const others = safePrev.filter(
+          (item) => String(item?.tutorial_kind || "") !== "self"
+        );
+        const hasMock = others.some(
+          (item) => String(item?.tutorial_kind || "") === "mock"
+        );
+        const mockItems = hasMock
+          ? others
+          : TUTORIAL_MOCK_REFLECTIONS.map((item) => ({ ...item }));
+
+        return [selfReflection, ...mockItems];
+      });
+      setTutorialStep((prev) => (prev < 17 ? 17 : prev));
+      setTutorialCreateVisible(false);
+      setTutorialCreateError("");
+    } finally {
+      setTutorialCreateSubmitting(false);
+    }
+  }, [
+    tutorialCreateAnswer,
+    setTutorialReflections,
+    setTutorialStep,
+    navigateToReflections,
+  ]);
+
+  const showTutorialRecommendInfo = useCallback(() => {
+    Alert.alert(
+      "おすすめ（チュートリアル）",
+      "本番ではここから新しいユーザーや問いを探せます。\n\nチュートリアルでは、Reflections画面で模擬ユーザーのReflectionを閲覧できます。"
+    );
+  }, []);
+
+  const showTutorialHistoryInfo = useCallback(() => {
+    Alert.alert(
+      "履歴（チュートリアル）",
+      "本番では、共鳴や発見を行うと Echoes / Discoveries の履歴が蓄積されます。\n\nチュートリアルでは、まずReflectionの作成と閲覧の流れを確認してください。"
+    );
+  }, []);
 
   const openAccount = useCallback(
     (targetUserId) => {
@@ -369,6 +859,7 @@ export default function MyModelScreen({ route } = {}) {
       setTrendingLoading(true);
     }
     setTrendingError("");
+    const mode = String(opts?.mode || "overall").trim() || "overall";
     try {
       const { userId, accessToken } = await getAuthContext();
       if (!accessToken) {
@@ -380,6 +871,7 @@ export default function MyModelScreen({ route } = {}) {
 
       const params = new URLSearchParams();
       params.append("limit", "20");
+      params.append("mode", mode);
       const url = `${QNA_TRENDING_ENDPOINT}?${params.toString()}`;
 
       const res = await fetch(url, {
@@ -420,7 +912,7 @@ export default function MyModelScreen({ route } = {}) {
 
       // cache
       try {
-        setPrefetch("MyModel", "trending", { userId: userId || null, items: list });
+        setPrefetch("MyModel", `trending:${mode}`, { userId: userId || null, items: list });
       } catch {
         // noop
       }
@@ -496,25 +988,49 @@ export default function MyModelScreen({ route } = {}) {
   }, []);
 
 
-  const openReflections = useCallback(() => {
+  const openMyModelCreate = useCallback(() => {
+    if (isTutorialMode) {
+      openTutorialCreate();
+      return;
+    }
+
     if (!navigation?.navigate) return;
 
-    const routeName = resolveReflectionsRouteName(navigation);
-
-    const params =
-      targetUserId != null
-        ? { viewedUserId: String(targetUserId), targetUserId: String(targetUserId) }
-        : {};
-
     try {
-      navigation.navigate(routeName, params);
+      navigation.navigate("MyModelCreate");
     } catch {
       Alert.alert(
-        "Reflections画面を開けません",
-        "Reflections画面が navigation に未登録の可能性があります。\nApp.js に MyModelReflectionsScreen を登録してください。"
+        "MyModel Createを開けません",
+        "MyModel Create画面が navigation に未登録の可能性があります。\nApp.js に MyModelCreateScreen を登録してください。"
       );
     }
-  }, [navigation, targetUserId]);
+  }, [navigation, isTutorialMode, openTutorialCreate]);
+
+  const openReflections = useCallback(() => {
+    if (isTutorialMode && !tutorialHasSelfReflection) {
+      Alert.alert(
+        "先にReflectionを作成しましょう",
+        `チュートリアルでは、まず「${TUTORIAL_REFLECTION_QUESTION}」に答えると、作成から閲覧までの流れが分かります。`,
+        [
+          { text: "閉じる", style: "cancel" },
+          { text: "作成する", onPress: openTutorialCreate },
+        ]
+      );
+      return;
+    }
+
+    if (isTutorialMode) {
+      setTutorialStep((prev) => (prev < 18 ? 18 : prev));
+    }
+
+    navigateToReflections();
+  }, [
+    isTutorialMode,
+    tutorialHasSelfReflection,
+    openTutorialCreate,
+    navigateToReflections,
+    setTutorialStep,
+  ]);
 
   const handlePressGuide = useCallback(() => {
     // 1) normal navigate
@@ -544,15 +1060,21 @@ export default function MyModelScreen({ route } = {}) {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
 
-      <ScrollView style={styles.body} contentContainerStyle={styles.bodyContent}>
+      <ScrollView
+        ref={tutorialScrollRef}
+        style={styles.body}
+        contentContainerStyle={styles.bodyContent}
+        onScroll={handleTutorialScroll}
+        scrollEventThrottle={16}
+      >
         <View style={styles.panelHeader}>
-          <View style={styles.panelTitleRow}>
+          <View ref={myModelTitleRef} collapsable={false} style={styles.panelTitleRow}>
             <Text style={styles.panelTitle}>MyModel</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
@@ -569,17 +1091,135 @@ export default function MyModelScreen({ route } = {}) {
           <View style={styles.headerRight} />
         </View>
 
+        {isTutorialMode ? (
+          <View style={styles.recoCard}>
+            <Text style={styles.recoTitle}>チュートリアル</Text>
+            <Text style={styles.recoSummaryText}>
+              この画面では、1つの問いに答えてReflectionが作られ、Reflectionsで閲覧できる流れを体験します。
+            </Text>
+            <Text style={styles.recoSummaryText}>
+              {tutorialHasSelfReflection
+                ? "作成済みのReflectionがあります。次はReflectionsで、自分の回答や模擬ユーザーのReflectionを見てみましょう。"
+                : `まずは「${TUTORIAL_REFLECTION_QUESTION}」に答えてみましょう。`}
+            </Text>
+            <Text style={styles.recoSummaryText}>
+              チュートリアル中の記録は本番データには保存されません。
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.globalSummaryBlock}>
+            <View style={styles.globalSummaryInner}>
+              <View style={styles.globalSummaryHeaderRow}>
+                <Ionicons
+                  name="radio-outline"
+                  size={14}
+                  color={colors.TITLE_GOLD}
+                  style={styles.globalSummaryIcon}
+                />
+                <Text style={styles.globalSummaryLabel}>今日の全体活動</Text>
+              </View>
+              <Text style={styles.globalSummaryText}>
+                {`今日、全体で ${
+                  typeof globalReflectionCount === "number" ? globalReflectionCount : "—"
+                } 回のReflection閲覧がありました`}
+              </Text>
+              <Text style={styles.globalSummaryText}>
+                {`今日、全体で ${
+                  typeof globalEchoCount === "number" ? globalEchoCount : "—"
+                } 回の共鳴がありました`}
+              </Text>
+              <Text style={styles.globalSummaryText}>
+                {`今日、全体で ${
+                  typeof globalDiscoveryCount === "number" ? globalDiscoveryCount : "—"
+                } 回の発見がありました`}
+              </Text>
+            </View>
+          </View>
+        )}
+
+        {/* Home / Target + Reflections entry */}
+        <View style={styles.qnaIntroCard}>
+          <Text style={styles.qnaIntroTitle}>Reflections</Text>
+          <Text style={styles.qnaIntroText}>
+            {isTutorialMode
+              ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
+              : "フォローしたユーザーのMyModelを使用できます。"}
+          </Text>
+
+          <View style={styles.actions}>
+            <View ref={reflectionsButtonRef} collapsable={false}>
+              <CocolonButton variant="primary" onPress={openReflections}>
+                <View style={styles.btnRow}>
+                  <Ionicons
+                    name="open-outline"
+                    size={18}
+                    color="#FFFFFF"
+                    style={{ marginRight: 6 }}
+                  />
+                  <Text style={styles.goldButtonText}>Reflectionsを開く</Text>
+                </View>
+              </CocolonButton>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.recoCard}>
+          <View style={styles.createTitleRow}>
+            <Text style={styles.recoTitle}>MyModel Create</Text>
+            <UnreadBadge
+              visible={unreadMyModelCreate}
+              style={styles.createUnreadBadge}
+            />
+          </View>
+          <Text style={styles.recoSummaryText}>
+            {isTutorialMode
+              ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionが作られる流れを体験します。`
+              : "Reflectionsで使うためのReflectionを作成します。"}
+          </Text>
+
+          <View ref={createButtonRef} collapsable={false}>
+            <CocolonButton
+              variant="primary"
+              style={{ marginTop: 10 }}
+              onPress={openMyModelCreate}
+            >
+              <View style={styles.btnRow}>
+                <Ionicons
+                  name="create-outline"
+                  size={18}
+                  color="#FFFFFF"
+                  style={{ marginRight: 6 }}
+                />
+                <Text style={styles.goldButtonText}>
+                  {isTutorialMode
+                    ? tutorialHasSelfReflection
+                      ? "チュートリアルReflectionを更新"
+                      : "チュートリアルReflectionを作成"
+                    : "Reflectionを作成"}
+                </Text>
+              </View>
+            </CocolonButton>
+          </View>
+        </View>
+
         {/* Recommend */}
         <View style={styles.recoCard}>
           <Text style={styles.recoTitle}>おすすめ</Text>
           <Text style={styles.recoSummaryText}>
-            新しいユーザーを探すことができます。
+            {isTutorialMode
+              ? "本番ではここから新しいユーザーを探せます。チュートリアルではReflections画面に模擬ユーザーを用意しています。"
+              : "新しいユーザーを探すことができます。"}
           </Text>
 
           <CocolonButton
             variant="primary"
             style={{ marginTop: 10 }}
             onPress={() => {
+              if (isTutorialMode) {
+                showTutorialRecommendInfo();
+                return;
+              }
+
               const alreadyUser = recoMode === "user";
               setRecoMode("user");
               setRecoModalVisible(true);
@@ -597,31 +1237,8 @@ export default function MyModelScreen({ route } = {}) {
               />
               <Text style={styles.goldButtonText}>新しいユーザーを探す</Text>
             </View>
-          </CocolonButton>
-        </View>
-
-        {/* Home / Target + Reflections entry */}
-        <View style={styles.qnaIntroCard}>
-          <Text style={styles.qnaIntroTitle}>Reflections</Text>
-          <Text style={styles.qnaIntroText}>
-            フォローしたユーザーのMyModelを使用できます。
-          </Text>
-
-          <View style={styles.actions}>
-
-            <CocolonButton variant="primary" onPress={openReflections}>
-              <View style={styles.btnRow}>
-                <Ionicons
-                  name="open-outline"
-                  size={18}
-                  color="#FFFFFF"
-                  style={{ marginRight: 6 }}
-                />
-                <Text style={styles.goldButtonText}>Reflectionsを開く</Text>
-              </View>
             </CocolonButton>
           </View>
-        </View>
 
         {/* History */}
         <View style={styles.historyCard}>
@@ -629,7 +1246,13 @@ export default function MyModelScreen({ route } = {}) {
           <View style={{ marginTop: 8 }}>
             <CocolonButton
               variant="secondary"
-              onPress={() => navigation.navigate("EchoesHistoryList")}
+              onPress={() => {
+                if (isTutorialMode) {
+                  showTutorialHistoryInfo();
+                  return;
+                }
+                navigation.navigate("EchoesHistoryList");
+              }}
               style={styles.historyEntry}
             >
               <View style={[styles.btnRow, { width: "100%" }]}>
@@ -651,7 +1274,13 @@ export default function MyModelScreen({ route } = {}) {
 
             <CocolonButton
               variant="secondary"
-              onPress={() => navigation.navigate("DiscoveriesHistoryList")}
+              onPress={() => {
+                if (isTutorialMode) {
+                  showTutorialHistoryInfo();
+                  return;
+                }
+                navigation.navigate("DiscoveriesHistoryList");
+              }}
               style={[styles.historyEntry, { marginTop: 8 }]}
             >
               <View style={[styles.btnRow, { width: "100%" }]}>
@@ -674,6 +1303,118 @@ export default function MyModelScreen({ route } = {}) {
         </View>
       </ScrollView>
 
+      {tutorialOverlayConfig ? (
+        <TutorialOverlay
+          visible={isMyModelTutorialVisible}
+          targetRect={tutorialTargetRect}
+          title={tutorialOverlayConfig.title}
+          message={tutorialOverlayConfig.message}
+          step={tutorialOverlayConfig.step}
+          totalSteps={TUTORIAL_TOTAL_STEPS}
+          mode={tutorialOverlayConfig.mode}
+          nextLabel={tutorialOverlayConfig.nextLabel}
+          onNext={tutorialOverlayConfig.onNext}
+          actionHint={tutorialOverlayConfig.actionHint}
+          cardPlacement="bottom"
+        />
+      ) : null}
+
+      <Modal
+        visible={tutorialCreateVisible}
+        animationType="fade"
+        transparent
+        onRequestClose={closeTutorialCreate}
+      >
+        <View ref={modalOverlayRootRef} style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>チュートリアル Reflection</Text>
+              <Pressable
+                onPress={closeTutorialCreate}
+                style={styles.modalCloseBtn}
+                disabled={tutorialCreateSubmitting}
+              >
+                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+              </Pressable>
+            </View>
+
+            <ScrollView style={styles.listArea} keyboardShouldPersistTaps="handled">
+              <View style={styles.tutorialQuestionCard}>
+                <Text style={styles.tutorialQuestionLabel}>問い</Text>
+                <Text style={styles.recoSummaryText}>{TUTORIAL_REFLECTION_QUESTION}</Text>
+              </View>
+
+              <Text style={[styles.recoSectionLabel, { marginTop: 10 }]}>あなたの回答</Text>
+              <View ref={tutorialCreateInputWrapRef} collapsable={false}>
+                <TextInput
+                style={styles.tutorialTextArea}
+                placeholder="ここに回答を書いてください。"
+                placeholderTextColor={colors.TEXT_SUBTLE}
+                value={tutorialCreateAnswer}
+                onChangeText={(v) => {
+                  setTutorialCreateAnswer(v);
+                  if (tutorialCreateError) setTutorialCreateError("");
+                }}
+                multiline
+                textAlignVertical="top"
+                editable={!tutorialCreateSubmitting}
+                />
+              </View>
+
+              <Text style={styles.tutorialHelperText}>
+                {isTutorialMode && tutorialStep === 16
+                  ? "この問いに答えて保存すると、チュートリアル用のReflectionが作成されます。本番データには保存されません。"
+                  : "チュートリアルでは、この1つの回答だけでReflectionの作成から閲覧までの流れを体験します。本番データには保存されません。"}
+              </Text>
+
+              {tutorialCreateError ? (
+                <Text style={styles.modeErrorText}>{tutorialCreateError}</Text>
+              ) : null}
+
+              <View ref={tutorialCreateSaveButtonRef} collapsable={false}>
+                <CocolonButton
+                variant="primary"
+                style={{ marginTop: 12 }}
+                onPress={saveTutorialReflection}
+                disabled={tutorialCreateSubmitting}
+              >
+                <View style={styles.btnRow}>
+                  {tutorialCreateSubmitting ? (
+                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons
+                      name="save-outline"
+                      size={18}
+                      color="#FFFFFF"
+                      style={{ marginRight: 6 }}
+                    />
+                  )}
+                  <Text style={styles.goldButtonText}>保存</Text>
+                </View>
+                </CocolonButton>
+              </View>
+            </ScrollView>
+          </View>
+
+          {tutorialModalOverlayConfig ? (
+            <TutorialOverlay
+              visible={!!tutorialModalOverlayConfig}
+              targetRect={tutorialModalTargetRect}
+              title={tutorialModalOverlayConfig.title}
+              message={tutorialModalOverlayConfig.message}
+              step={tutorialModalOverlayConfig.step}
+              totalSteps={TUTORIAL_TOTAL_STEPS}
+              mode={tutorialModalOverlayConfig.mode}
+              nextLabel={tutorialModalOverlayConfig.nextLabel}
+              onNext={tutorialModalOverlayConfig.onNext}
+              actionHint={tutorialModalOverlayConfig.actionHint}
+              footerText={tutorialModalOverlayConfig.footerText}
+            />
+          ) : null}
+        </View>
+      </Modal>
+
+
       {/* Recommend modal */}
       <Modal
         visible={recoModalVisible}
@@ -691,7 +1432,7 @@ export default function MyModelScreen({ route } = {}) {
                     if (recoMode === "user") {
                       loadRecommendUsers();
                     } else {
-                      loadTrending();
+                      loadTrending({ mode: trendingMode });
                     }
                   }}
                   style={styles.recoRefreshBtn}
@@ -798,6 +1539,73 @@ export default function MyModelScreen({ route } = {}) {
               ) : (
                 <>
                   <Text style={styles.recoSectionLabel}>トレンドの問い</Text>
+
+                  <View style={[styles.recoToggleRow, { marginTop: 8, marginBottom: 6 }]}>
+                    <Pressable
+                      onPress={() => {
+                        const next = "overall";
+                        setTrendingMode(next);
+                        loadTrending({ mode: next });
+                      }}
+                      style={[
+                        styles.recoTogglePill,
+                        trendingMode === "overall" && styles.recoTogglePillActive,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.recoToggleText,
+                          trendingMode === "overall" && styles.recoToggleTextActive,
+                        ]}
+                      >
+                        総合
+                      </Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={() => {
+                        const next = "resonance";
+                        setTrendingMode(next);
+                        loadTrending({ mode: next });
+                      }}
+                      style={[
+                        styles.recoTogglePill,
+                        trendingMode === "resonance" && styles.recoTogglePillActive,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.recoToggleText,
+                          trendingMode === "resonance" && styles.recoToggleTextActive,
+                        ]}
+                      >
+                        共鳴
+                      </Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={() => {
+                        const next = "views";
+                        setTrendingMode(next);
+                        loadTrending({ mode: next });
+                      }}
+                      style={[
+                        styles.recoTogglePill,
+                        { marginRight: 0 },
+                        trendingMode === "views" && styles.recoTogglePillActive,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.recoToggleText,
+                          trendingMode === "views" && styles.recoToggleTextActive,
+                        ]}
+                      >
+                        閲覧
+                      </Text>
+                    </Pressable>
+                  </View>
+
 
                   {trendingLoading ? (
                     <View style={styles.recoLoadingRow}>
@@ -956,6 +1764,35 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
     },
+    globalSummaryBlock: {
+      marginBottom: 14,
+    },
+    globalSummaryInner: {
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingVertical: 8,
+    },
+    globalSummaryHeaderRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 4,
+    },
+    globalSummaryIcon: {
+      marginRight: 6,
+    },
+    globalSummaryLabel: {
+      fontSize: 11,
+      fontWeight: "800",
+      letterSpacing: 0.3,
+      color: "#000000",
+    },
+    globalSummaryText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: "#000000",
+      marginBottom: 2,
+    },
 
     // Recommend
     recoCard: {
@@ -978,6 +1815,13 @@ function createStyles(COLORS, ui) {
       lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
       opacity: 0.9,
+    },
+    createTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    createUnreadBadge: {
+      marginLeft: 8,
     },
     recoRefreshBtn: {
       width: 34,
@@ -1289,6 +2133,40 @@ function createStyles(COLORS, ui) {
       paddingVertical: 18,
       alignItems: "center",
       justifyContent: "center",
+    },
+    tutorialQuestionCard: {
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+    },
+    tutorialQuestionLabel: {
+      fontSize: 11,
+      fontWeight: "900",
+      color: COLORS.TITLE_GOLD,
+      marginBottom: 4,
+    },
+    tutorialTextArea: {
+      marginTop: 8,
+      minHeight: 120,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      fontSize: 13,
+      lineHeight: 19,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    tutorialHelperText: {
+      marginTop: 8,
+      fontSize: 11,
+      lineHeight: 16,
+      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
     },
     modeErrorText: {
       marginTop: 10,
