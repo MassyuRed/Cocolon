@@ -249,7 +249,7 @@ export default function MyModelEchoesRankingScreen({ navigation }) {
                 <RankingRow
                   key={`${r?.user_id || "user"}-${idx}`}
                   styles={styles}
-                  isPrivateAccount={!!(r?.is_private_account)}
+                  isPrivateAccount={!!(r?.is_private_account ?? r?.isPrivateAccount)}
                   onPressLeft={
                     userId ? () => navigateToAccount(navigation, userId) : undefined
                   }
