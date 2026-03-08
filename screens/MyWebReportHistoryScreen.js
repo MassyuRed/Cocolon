@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -27,6 +27,55 @@ const SUBSCRIPTION_ME_ENDPOINT = `${MYMODEL_API_BASE_URL}/subscription/me`;
 
 // Phase2: MyWeb（配布/生成）はMashOS側でensure（オンデマンド）
 const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ensure`;
+// Phase2: View is API-driven (READY only)
+const MYWEB_REPORTS_READY_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ready`;
+
+async function getAccessToken() {
+  try {
+    const { data: sessionData } = await supabase.auth.getSession();
+    return sessionData?.session?.access_token ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function extractReadyItems(payload) {
+  if (Array.isArray(payload?.items)) return payload.items;
+  if (Array.isArray(payload?.reports)) return payload.reports;
+  if (Array.isArray(payload?.data?.items)) return payload.data.items;
+  if (Array.isArray(payload?.data?.reports)) return payload.data.reports;
+  if (Array.isArray(payload)) return payload;
+  return [];
+}
+
+async function fetchReadyReports(accessToken, reportType, limit = 50) {
+  const url = `${MYWEB_REPORTS_READY_ENDPOINT}?report_type=${encodeURIComponent(
+    reportType
+  )}&limit=${encodeURIComponent(limit)}`;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    const err = new Error(`ready failed: ${res.status}`);
+    err.status = res.status;
+    err.body = text;
+    throw err;
+  }
+
+  const json = await res.json();
+  return {
+    json,
+    items: extractReadyItems(json),
+    viewerTier: typeof json?.viewer_tier === "string" ? json.viewer_tier : null,
+  };
+}
 
 function normalizeSubscriptionTier(raw) {
   const v = String(raw || "").trim();
@@ -66,6 +115,12 @@ const TYPE_JP = Object.freeze({
   weekly: "週報",
   monthly: "月報",
 });
+
+function normalizeReportType(raw) {
+  const v = String(raw || "").trim().toLowerCase();
+  if (v === "daily" || v === "weekly" || v === "monthly") return v;
+  return "weekly";
+}
 
 function formatDateJP(iso) {
   try {
@@ -205,7 +260,7 @@ function escapeHtml(s) {
 }
 
 export default function MyWebReportHistoryScreen({
-  reportType = "daily",
+  reportType,
   onBack,
   onOpenReport,
   onGenerateLatest,
@@ -216,6 +271,9 @@ export default function MyWebReportHistoryScreen({
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  const normalizedReportType = useMemo(() => normalizeReportType(reportType), [reportType]);
+  const loadSeqRef = useRef(0);
 
   const { themeName, colors } = useTheme();
   const isDark = themeName === "dark";
@@ -278,10 +336,14 @@ export default function MyWebReportHistoryScreen({
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    console.log("HISTORY reportType =", normalizedReportType, "raw =", reportType ?? "(missing)");
+  }, [normalizedReportType, reportType]);
+
   const nowJstLabel = useMemo(() => formatJstDateTime(nowTick), [nowTick]);
   const nextDistUtcMs = useMemo(
-    () => getNextDistributionUtcMs(reportType, nowTick),
-    [reportType, nowTick]
+    () => getNextDistributionUtcMs(normalizedReportType, nowTick),
+    [normalizedReportType, nowTick]
   );
   const nextJstLabel = useMemo(
     () => formatJstDateTime(nextDistUtcMs),
@@ -289,10 +351,12 @@ export default function MyWebReportHistoryScreen({
   );
 
   const isTextLocked = useMemo(() => {
-    if (reportType !== "weekly" && reportType !== "monthly") return false;
-    if (tierLoading) return true; // fail-closed
-    return !canViewMyWebFullText(subscriptionTier);
-  }, [reportType, subscriptionTier, tierLoading]);
+    if (normalizedReportType !== "weekly" && normalizedReportType !== "monthly") return false;
+    return false;
+  }, [normalizedReportType]);
+
+  const shouldEnsureOnOpen =
+    normalizedReportType === "weekly" || normalizedReportType === "monthly";
 
   const themed = useMemo(() => {
     if (!isDark) return {};
@@ -343,23 +407,25 @@ export default function MyWebReportHistoryScreen({
     };
   }, [isDark, colors]);
 
-  const title = `${TYPE_LABEL[reportType] || "Report"}の履歴`;
+  const title = `${TYPE_LABEL[normalizedReportType] || "Report"}の履歴`;
   const load = useCallback(async () => {
+    const loadSeq = ++loadSeqRef.current;
+    const isStale = () => loadSeq !== loadSeqRef.current;
+
+    console.log("HISTORY load start =", {
+      loadSeq,
+      reportType: normalizedReportType,
+      rawReportType: reportType ?? null,
+    });
+
     setErrorMsg("");
     setLoading(true);
     try {
-      // ✅ Phase2: まずMashOS側で「あるべき最新レポート」が無ければ生成する（冪等）
-      // （生成に失敗しても履歴表示は継続）
-      try {
-        let accessToken = null;
-        try {
-          const { data: sessionData } = await supabase.auth.getSession();
-          accessToken = sessionData?.session?.access_token ?? null;
-        } catch {
-          accessToken = null;
-        }
+      const accessToken = await getAccessToken();
 
-        if (accessToken) {
+      // ✅ weekly / monthly は不足時のみ ensure、daily は配布済み READY を読むだけにする
+      try {
+        if (accessToken && shouldEnsureOnOpen) {
           const res = await fetch(MYWEB_REPORTS_ENSURE_ENDPOINT, {
             method: "POST",
             headers: {
@@ -367,7 +433,7 @@ export default function MyWebReportHistoryScreen({
               Authorization: `Bearer ${accessToken}`,
             },
             body: JSON.stringify({
-              types: [reportType],
+              types: [normalizedReportType],
               force: false,
             }),
           });
@@ -385,70 +451,122 @@ export default function MyWebReportHistoryScreen({
         console.warn("MyWebReportHistoryScreen: myweb/reports/ensure failed", e);
       }
 
-      const userId = await getCurrentUserId();
-      if (!userId) {
+      if (!accessToken) {
+        if (isStale()) return;
         setRows([]);
-        setErrorMsg("ユーザー情報を取得できませんでした（ログインしてください）");
+        setReadIdSet(new Set());
+        setErrorMsg("ログイン情報を取得できませんでした（ログインしてください）");
         return;
       }
 
-      const q = supabase
-        .from("myweb_reports")
-        .select("id, report_type, title, period_start, period_end, generated_at, updated_at")
-        .eq("user_id", userId)
-        .eq("report_type", reportType)
-        .order("period_end", { ascending: false })
-        .limit(60);
-
-      const { data, error } = await q;
-
-      if (error) {
+      // ✅ Phase2: 履歴は /myweb/reports/ready から取得（READY/PUBLISHED + retention/tier はAPIで統一）
+      let ready;
+      try {
+        ready = await fetchReadyReports(accessToken, normalizedReportType, 50);
+      } catch (err) {
+        if (isStale()) return;
         setRows([]);
         setReadIdSet(new Set());
-        setErrorMsg(String(error.message || "取得に失敗しました"));
-      } else {
-        const list = Array.isArray(data) ? data : [];
-        setRows(list);
+        setErrorMsg(`取得に失敗しました (${err?.status || "network"})`);
+        console.warn(
+          "MyWebReportHistoryScreen: myweb/reports/ready failed",
+          err?.status,
+          err?.body || err?.message || err
+        );
+        return;
+      }
 
-        // ✅ 既読状態の取得（report_reads）
-        try {
-          const ids = list.map((r) => String(r?.id || "")).filter(Boolean);
-          if (ids.length === 0) {
-            setReadIdSet(new Set());
-          } else {
-            const { data: reads, error: rErr } = await supabase
-              .from("report_reads")
-              .select("report_id")
-              .eq("user_id", userId)
-              .in("report_id", ids);
+      console.log("READY viewerTier =", ready?.viewerTier);
+      console.log(
+        "READY items length =",
+        Array.isArray(ready?.items) ? ready.items.length : "no-items"
+      );
 
-            if (rErr) {
-              // 既読テーブル未導入/権限不足等でも、履歴表示自体は継続
-              setReadIdSet(new Set());
-            } else {
-              const set = new Set(
-                (Array.isArray(reads) ? reads : [])
-                  .map((x) => String(x?.report_id || ""))
-                  .filter(Boolean)
-              );
-              setReadIdSet(set);
+      if (typeof ready?.viewerTier === "string") {
+        setSubscriptionTier(normalizeSubscriptionTier(ready.viewerTier));
+      }
+
+      let list = Array.isArray(ready?.items) ? ready.items : [];
+
+      // ensure 直後は inspect 完了前で READY がまだ見えないことがあるため、
+      // 空配列のときだけ短時間だけ再取得する。
+      if (list.length === 0) {
+        for (const waitMs of [1200, 2500]) {
+          await delay(waitMs);
+          try {
+            const retryReady = await fetchReadyReports(accessToken, normalizedReportType, 50);
+            if (typeof retryReady?.viewerTier === "string") {
+              setSubscriptionTier(normalizeSubscriptionTier(retryReady.viewerTier));
             }
+            list = Array.isArray(retryReady?.items) ? retryReady.items : [];
+            console.log(
+              "READY retry items length =",
+              Array.isArray(retryReady?.items) ? retryReady.items.length : "no-items",
+              "waitMs =",
+              waitMs
+            );
+            if (list.length > 0) break;
+          } catch {
+            // ignore retry failure and keep the best-effort result
           }
-        } catch {
-          setReadIdSet(new Set());
         }
       }
+
+      if (isStale()) {
+        console.log("HISTORY stale load ignored =", {
+          loadSeq,
+          reportType: normalizedReportType,
+        });
+        return;
+      }
+
+      setRows(list);
+      console.log("rows set:", list.length, "reportType =", normalizedReportType);
+
+      // ✅ 既読状態の取得（report_reads）: 既読はSupabase側のローカル機能として保持（失敗しても履歴表示は継続）
+      try {
+        const userId = await getCurrentUserId();
+        const ids = list.map((r) => String(r?.id || "")).filter(Boolean);
+        if (!userId || ids.length === 0) {
+          setReadIdSet(new Set());
+        } else {
+          const { data: reads, error: rErr } = await supabase
+            .from("report_reads")
+            .select("report_id")
+            .eq("user_id", userId)
+            .in("report_id", ids);
+
+          if (rErr) {
+            setReadIdSet(new Set());
+          } else {
+            const set = new Set(
+              (Array.isArray(reads) ? reads : [])
+                .map((x) => String(x?.report_id || ""))
+                .filter(Boolean)
+            );
+            setReadIdSet(set);
+          }
+        }
+      } catch {
+        setReadIdSet(new Set());
+      }
     } catch (e) {
+      if (isStale()) return;
       setRows([]);
       setReadIdSet(new Set());
       setErrorMsg(String(e?.message || e));
     } finally {
-      setLoading(false);
+      if (!isStale()) {
+        setLoading(false);
+      }
     }
-  }, [reportType]);
+  }, [normalizedReportType, reportType, shouldEnsureOnOpen]);
 
   useEffect(() => {
     load();
+    return () => {
+      loadSeqRef.current += 1;
+    };
   }, [load]);
 
   const onRefresh = useCallback(async () => {
@@ -460,31 +578,35 @@ export default function MyWebReportHistoryScreen({
   const handleOpen = useCallback(
     async (id) => {
       try {
-        const userId = await getCurrentUserId();
-        if (!userId) {
-          Alert.alert("エラー", "ユーザー情報を取得できませんでした。");
-          return;
+        const rid = String(id);
+
+        // ✅ レポート本体は /myweb/reports/ready 由来の rows から取得（表示ロジックをAPIに統一）
+        let data = rows.find((r) => String(r?.id || "") === rid) || null;
+
+        // 念のため: rows に見つからない場合は ready を再取得（best-effort）
+        if (!data) {
+          const accessToken = await getAccessToken();
+          if (accessToken) {
+            try {
+              const ready = await fetchReadyReports(accessToken, normalizedReportType, 50);
+              const list = Array.isArray(ready?.items) ? ready.items : [];
+              data = list.find((r) => String(r?.id || "") === rid) || null;
+            } catch {
+              data = null;
+            }
+          }
         }
 
-        
-        const selectCols = isTextLocked
-          ? "id, report_type, title, period_start, period_end, content_json, generated_at, updated_at"
-          : "id, report_type, title, period_start, period_end, content_text, content_json, generated_at, updated_at";
-
-const { data, error } = await supabase
-          .from("myweb_reports")
-          .select(selectCols)
-          .eq("id", id)
-          .eq("user_id", userId)
-          .single();
-
-        if (error) {
-          Alert.alert("取得エラー", String(error.message || "レポートの取得に失敗しました"));
+        if (!data) {
+          Alert.alert("取得エラー", "レポートの取得に失敗しました。");
           return;
         }
 
         // ✅ 既読を記録（失敗しても閲覧は継続）
         try {
+          const userId = await getCurrentUserId();
+          if (!userId) throw new Error("user_id missing");
+
           const { error: insErr } = await supabase
             .from("report_reads")
             .insert({ user_id: userId, report_id: id });
@@ -503,12 +625,13 @@ const { data, error } = await supabase
           // ignore
         }
 
-        if (onOpenReport) onOpenReport(data);
+        // viewer_tier を渡して Viewer 側で追加の subscription/me を省略できるようにする（後方互換）
+        if (onOpenReport) onOpenReport({ ...data, viewer_tier: subscriptionTier });
       } catch (e) {
         Alert.alert("エラー", String(e?.message || e));
       }
     },
-    [onOpenReport, isTextLocked]
+    [onOpenReport, rows, normalizedReportType, subscriptionTier]
   );
 
   const handleExport = useCallback(async (id) => {
@@ -519,8 +642,8 @@ const { data, error } = await supabase
         Alert.alert("プラン確認中", "プラン情報を確認しています。もう一度お試しください。");
         return;
       }
-      const jp = TYPE_JP[reportType] || "レポート";
-      const msg = `無料会員は${jp}はグラフのみ表示です。\n\nPlus会員以上で本文の閲覧とPDF出力が利用できます。`;
+      const jp = TYPE_JP[normalizedReportType] || "レポート";
+      const msg = `無料会員の${jp}はグラフのみ表示です。\n\nPlus会員以上で本文の閲覧とPDF出力が利用できます。`;
       const buttons = [];
       if (typeof onOpenSubscription === "function") {
         buttons.push({
@@ -540,34 +663,62 @@ const { data, error } = await supabase
     }
 
 
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        Alert.alert("エラー", "ユーザー情報を取得できませんでした。");
+      const rid = String(id);
+
+      // ✅ export対象も /myweb/reports/ready 由来の rows から解決（表示ロジックをAPIに統一）
+      let data = rows.find((r) => String(r?.id || "") === rid) || null;
+
+      // 念のため: rows に見つからない場合は ready を再取得（best-effort）
+      if (!data) {
+        const accessToken = await getAccessToken();
+        if (accessToken) {
+          try {
+            const ready = await fetchReadyReports(accessToken, normalizedReportType, 50);
+            const list = Array.isArray(ready?.items) ? ready.items : [];
+            data = list.find((r) => String(r?.id || "") === rid) || null;
+          } catch {
+            data = null;
+          }
+        }
+      }
+
+      if (!data) {
+        Alert.alert("取得エラー", "レポートの取得に失敗しました。");
         return;
       }
 
-      const { data, error } = await supabase
-        .from("myweb_reports")
-        .select("title, content_text")
-        .eq("id", id)
-        .eq("user_id", userId)
-        .single();
+      // v3: prefer content_json.standardReport.contentText; fallback to legacy content_text
+      let text = String(data?.content_text || "");
+      try {
+        const cj = data?.content_json;
+        const std = cj?.standardReport || cj?.standard_report;
+        const stdText =
+          (typeof std?.contentText === "string" && std.contentText) ||
+          (typeof std?.content_text === "string" && std.content_text) ||
+          (typeof std?.text === "string" && std.text) ||
+          (typeof cj?.standardText === "string" && cj.standardText) ||
+          (typeof cj?.standard_text === "string" && cj.standard_text) ||
+          "";
+        if (!text.trim() && String(stdText || "").trim()) text = String(stdText);
+      } catch {
+        // ignore
+      }
 
-      if (error) {
-        Alert.alert("取得エラー", String(error.message || "レポートの取得に失敗しました"));
+      if (!text.trim()) {
+        Alert.alert("PDF保存", "本文がありませんでした。");
         return;
       }
 
-      await exportTextToPdf(data?.title || title, data?.content_text || "");
+      await exportTextToPdf(data?.title || title, text);
     } catch (e) {
       Alert.alert("PDF保存エラー", String(e?.message || e));
     }
-  }, [title, isTextLocked, tierLoading, reportType, onOpenSubscription]);
+  }, [title, isTextLocked, tierLoading, normalizedReportType, onOpenSubscription, rows]);
 
   const headerLabel = useMemo(() => {
-    const jp = TYPE_JP[reportType] || "レポート";
+    const jp = TYPE_JP[normalizedReportType] || "レポート";
     return `${jp}履歴`;
-  }, [reportType]);
+  }, [normalizedReportType]);
 
   return (
     <SafeAreaView style={[styles.container, themed.container]}>
@@ -593,7 +744,7 @@ const { data, error } = await supabase
           </Text>
 
 
-            {(reportType === "weekly" || reportType === "monthly") &&
+            {(normalizedReportType === "weekly" || normalizedReportType === "monthly") &&
             !tierLoading &&
             isTextLocked ? (
               <TouchableOpacity
@@ -675,7 +826,7 @@ const { data, error } = await supabase
                   {item.title || title}
                 </Text>
                 <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
-                  {formatRangeJP(item.period_start, item.period_end, reportType)}
+                  {formatRangeJP(item.period_start, item.period_end, normalizedReportType)}
                 </Text>
                 <Text style={[styles.rowMeta, themed.rowMeta]} numberOfLines={1}>
                   作成: {formatDateJP(item.generated_at || item.updated_at || item.period_end)}
