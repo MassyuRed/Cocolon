@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -15,16 +15,26 @@ import {
   View,
   Platform,
   Share,
+  useWindowDimensions,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
 import { useUnread } from "../UnreadContext";
+import { useTutorial } from "../TutorialContext";
 
 import CocolonPressable from "../components/CocolonPressable";
+import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
 
 // 🔧 ここを変えると Friend 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
+
+const TUTORIAL_TOTAL_STEPS = 23;
+const STEP_FRIENDS_OVERVIEW = 20;
+const STEP_FRIENDS_NOTIFICATION = 21;
+const STEP_FRIENDS_LOG = 22;
+const STEP_FRIENDS_COMPLETE = 23;
+const DEFAULT_TUTORIAL_FRIEND_NAME = "朝霧 澪";
 
 // ---- API base ----
 // 現在は MashOS(MyModel API) を Render 上で稼働させているため、
@@ -38,6 +48,8 @@ const FRIEND_REQUESTS_ENDPOINT = `${API_BASE}/friends/requests`; // /{id}/accept
 const FRIEND_REMOVE_ENDPOINT = `${API_BASE}/friends/remove`;
 
 const FRIEND_NOTIFICATION_SETTINGS_ENDPOINT = `${API_BASE}/friends/notification-settings`;
+const FRIEND_FEED_ENDPOINT = `${API_BASE}/friends/feed`;
+const FRIEND_MANAGE_ENDPOINT = `${API_BASE}/friends/manage`;
 
 // ===== 表示用定数 =====
 const STRENGTH_LABEL = {
@@ -214,7 +226,19 @@ export default function FriendsScreen(props) {
   const { colors, themeName } = useTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
 
-  const { getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
+  const {
+    isTutorialMode,
+    tutorialEmotions,
+    tutorialFriendFeed,
+    tutorialReflections,
+    tutorialStep,
+    setTutorialStep,
+    addTutorialFriendFeedItem,
+    endTutorial,
+    hasTutorialFriendLog,
+  } = useTutorial();
+
+  const { getPrefetchEntry, getPrefetchEntryFresh, setPrefetch, setUnread } = useUnread();
 
   const FEED_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
   const MANAGE_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
@@ -244,6 +268,63 @@ export default function FriendsScreen(props) {
   }, [getPrefetchEntry, getPrefetchEntryFresh]);
 
   const { navigation, hasUnreadFriendRequests = false, onOpenFriendManage } = props || {};
+  const { height: windowHeight } = useWindowDimensions();
+  const screenRootRef = useRef(null);
+  const tutorialScrollRef = useRef(null);
+  const tutorialScrollYRef = useRef(0);
+  const panelTitleRowRef = useRef(null);
+  const tutorialIntroRef = useRef(null);
+  const tutorialNotificationRef = useRef(null);
+  const tutorialFeedCardRef = useRef(null);
+  const tutorialCompleteButtonWrapRef = useRef(null);
+  const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const [tutorialNotificationShown, setTutorialNotificationShown] = useState(false);
+  const tutorialNotificationFlowRef = useRef(false);
+
+  const isFriendsTutorialVisible =
+    !!isTutorialMode &&
+    tutorialStep >= STEP_FRIENDS_OVERVIEW &&
+    tutorialStep <= STEP_FRIENDS_COMPLETE;
+
+  const tutorialMockFriendName = useMemo(() => {
+    const safe = Array.isArray(tutorialReflections) ? tutorialReflections : [];
+    const mock = safe.find(
+      (item) =>
+        String(item?.tutorial_kind || "") === "mock" &&
+        String(item?.display_name || item?.owner_name || "").trim()
+    );
+    const other = safe.find(
+      (item) =>
+        String(item?.tutorial_kind || "") !== "self" &&
+        String(item?.display_name || item?.owner_name || "").trim()
+    );
+    return String(
+      mock?.display_name ||
+        mock?.owner_name ||
+        other?.display_name ||
+        other?.owner_name ||
+        DEFAULT_TUTORIAL_FRIEND_NAME
+    ).trim();
+  }, [tutorialReflections]);
+
+  const tutorialDisplayFeed = useMemo(() => {
+    const safeFeed = Array.isArray(tutorialFriendFeed) ? tutorialFriendFeed : [];
+    return safeFeed.map((item, index) => ({
+      ...item,
+      id: item?.id || `tutorial-friend-feed-${index}`,
+      ownerName: tutorialMockFriendName,
+      owner_name: tutorialMockFriendName,
+    }));
+  }, [tutorialFriendFeed, tutorialMockFriendName]);
+
+  const tutorialNotificationText = useMemo(() => {
+    const latest = tutorialDisplayFeed.length > 0 ? tutorialDisplayFeed[0] : null;
+    const first = Array.isArray(latest?.items) && latest.items.length > 0 ? latest.items[0] : null;
+    const emotion = String(first?.type || "感情");
+    const strength = STRENGTH_LABEL[first?.strength] || "";
+    const suffix = strength ? `（${strength}）` : "";
+    return `${tutorialMockFriendName}さんが感情を入力しました：${emotion}${suffix}`;
+  }, [tutorialDisplayFeed, tutorialMockFriendName]);
 
   const handlePressGuide = useCallback(() => {
     // Cocolonガイド（Friend）
@@ -268,8 +349,11 @@ export default function FriendsScreen(props) {
     }
   }, [navigation]);
 
+
   // ===== feed（既存） =====
-  const [feed, setFeed] = useState(() => (Array.isArray(prefetchedFeedItems) ? prefetchedFeedItems : [])); // { id, ownerName, items[], timeLabel }
+  const [feed, setFeed] = useState(() =>
+    Array.isArray(prefetchedFeedItems) ? prefetchedFeedItems : []
+  ); // { id, ownerName, items[], timeLabel }
   const [loading, setLoading] = useState(() => !Array.isArray(prefetchedFeedItems));
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -304,29 +388,277 @@ export default function FriendsScreen(props) {
     }
   }, [myProfile?.friendCode]);
 
+  const handleTutorialScroll = useCallback((e) => {
+    tutorialScrollYRef.current =
+      e?.nativeEvent?.contentOffset?.y ?? tutorialScrollYRef.current;
+  }, []);
+
+  const getTutorialTargetRef = useCallback(() => {
+    if (!isFriendsTutorialVisible) return null;
+
+    switch (tutorialStep) {
+      case STEP_FRIENDS_OVERVIEW:
+        return tutorialIntroRef;
+      case STEP_FRIENDS_NOTIFICATION:
+        return tutorialNotificationShown ? tutorialNotificationRef : tutorialIntroRef;
+      case STEP_FRIENDS_LOG:
+        return tutorialFeedCardRef;
+      case STEP_FRIENDS_COMPLETE:
+        return tutorialCompleteButtonWrapRef;
+      default:
+        return null;
+    }
+  }, [isFriendsTutorialVisible, tutorialNotificationShown, tutorialStep]);
+
+  const syncTutorialTargetRect = useCallback(async () => {
+    if (!isFriendsTutorialVisible) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const targetRef = getTutorialTargetRef();
+    if (!targetRef || !screenRootRef.current) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const firstRect = await measureTutorialTarget(targetRef, screenRootRef);
+    if (!firstRect) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const lowerSafeLine = Math.max(220, windowHeight - 260);
+    const upperSafeLine = 90;
+
+    if (firstRect.bottom > lowerSafeLine || firstRect.y < upperSafeLine) {
+      const nextScrollY = Math.max(
+        0,
+        tutorialScrollYRef.current + firstRect.y - 130
+      );
+
+      try {
+        tutorialScrollRef.current?.scrollTo?.({
+          y: nextScrollY,
+          animated: true,
+        });
+      } catch {
+        // noop
+      }
+
+      setTimeout(async () => {
+        const nextRect = await measureTutorialTarget(targetRef, screenRootRef);
+        setTutorialTargetRect(nextRect);
+      }, 260);
+      return;
+    }
+
+    setTutorialTargetRect(firstRect);
+  }, [getTutorialTargetRef, isFriendsTutorialVisible, windowHeight]);
+
+  const tutorialOverlayConfig = useMemo(() => {
+    if (!isFriendsTutorialVisible) return null;
+
+    switch (tutorialStep) {
+      case STEP_FRIENDS_OVERVIEW:
+        return {
+          step: STEP_FRIENDS_OVERVIEW,
+          title: "Friend",
+          message:
+            "ここではフレンドの感情を観測することができます。\nこのあと模擬ユーザーから通知が届き、フレンドログに反映されます。",
+          mode: "info",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(STEP_FRIENDS_NOTIFICATION),
+        };
+      case STEP_FRIENDS_NOTIFICATION:
+        return {
+          step: STEP_FRIENDS_NOTIFICATION,
+          title: "フレンド通知",
+          message: tutorialNotificationShown
+            ? `${tutorialMockFriendName}さんが感情を入力しました。\n通知とログを確認してみましょう。`
+            : `${tutorialMockFriendName}さんからの通知を準備しています。\n通知が届くまでこのままお待ちください。`,
+          mode: "info",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(STEP_FRIENDS_LOG),
+          primaryDisabled: !tutorialNotificationShown || !hasTutorialFriendLog,
+          footerText:
+            tutorialNotificationShown && hasTutorialFriendLog
+              ? "通知を確認できたら次へ進みましょう。"
+              : "通知を待っています…",
+        };
+      case STEP_FRIENDS_LOG:
+        return {
+          step: STEP_FRIENDS_LOG,
+          title: "フレンドログ",
+          message:
+            "フレンド通知では感情のみ表示されます。\nメモの内容は表示されません。",
+          mode: "info",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(STEP_FRIENDS_COMPLETE),
+        };
+      case STEP_FRIENDS_COMPLETE:
+        return {
+          step: STEP_FRIENDS_COMPLETE,
+          title: "チュートリアル完了",
+          message:
+            "確認できたら、このボタンでチュートリアルを完了します。",
+          mode: "action",
+          actionHint: "スポットライトの場所を押してください",
+          showPrimaryButton: false,
+        };
+      default:
+        return null;
+    }
+  }, [
+    hasTutorialFriendLog,
+    isFriendsTutorialVisible,
+    tutorialMockFriendName,
+    tutorialNotificationShown,
+    tutorialStep,
+    setTutorialStep,
+  ]);
+
+  useEffect(() => {
+    if (!isFriendsTutorialVisible) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      syncTutorialTargetRect();
+    }, 80);
+
+    return () => clearTimeout(timer);
+  }, [
+    isFriendsTutorialVisible,
+    tutorialStep,
+    tutorialNotificationShown,
+    hasTutorialFriendLog,
+    syncTutorialTargetRect,
+  ]);
+
+  // Tutorial: MyModelで見た模擬ユーザー名で通知を出し、フレンドログへ反映する。
+  useEffect(() => {
+    if (!isTutorialMode) {
+      tutorialNotificationFlowRef.current = false;
+      setTutorialNotificationShown(false);
+      return;
+    }
+
+    if (hasTutorialFriendLog) {
+      setTutorialNotificationShown(true);
+    }
+
+    if (tutorialStep < STEP_FRIENDS_NOTIFICATION) return;
+    if (tutorialNotificationFlowRef.current) return;
+
+    tutorialNotificationFlowRef.current = true;
+
+    const timer = setTimeout(() => {
+      const iso = new Date().toISOString();
+      const latest =
+        Array.isArray(tutorialEmotions) && tutorialEmotions.length > 0
+          ? tutorialEmotions[tutorialEmotions.length - 1]
+          : null;
+      const sourceItems = Array.isArray(latest?.emotions)
+        ? latest.emotions
+        : Array.isArray(latest?.items)
+        ? latest.items
+        : [];
+      const items = sourceItems.length > 0
+        ? sourceItems.slice(0, 3).map((item) => ({
+            type: item?.type || "喜び",
+            strength: item?.strength || "medium",
+          }))
+        : [{ type: "喜び", strength: "medium" }];
+
+      if (!hasTutorialFriendLog) {
+        try {
+          addTutorialFriendFeedItem({
+            id: `tutorial-friend-feed-${Date.now()}`,
+            ownerName: tutorialMockFriendName,
+            owner_name: tutorialMockFriendName,
+            items,
+            emotions: items,
+            created_at: iso,
+            timeLabel: formatTimeLabel(iso),
+            is_tutorial: true,
+          });
+        } catch {
+          // noop
+        }
+      }
+
+      try {
+        setUnread?.("Friends", "feed", true);
+        setUnread?.("Friends", "tutorialFeed", true);
+      } catch {
+        // noop
+      }
+
+      const first = items[0] || { type: "喜び", strength: "medium" };
+      const label = STRENGTH_LABEL[first.strength] || "";
+      const suffix = label ? `（${label}）` : "";
+
+      setTutorialNotificationShown(true);
+
+      Alert.alert(
+        "フレンド通知",
+        `${tutorialMockFriendName}さんが感情を入力しました：${first.type}${suffix}
+Friendでフレンドログを確認できます。`
+      );
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [
+    isTutorialMode,
+    tutorialStep,
+    tutorialEmotions,
+    hasTutorialFriendLog,
+    tutorialMockFriendName,
+    addTutorialFriendFeedItem,
+    setUnread,
+  ]);
+
+
 
   const loadFeed = useCallback(async (opts) => {
+    if (isTutorialMode) {
+      setErrorMsg("");
+      setLoading(false);
+      setFeed(Array.isArray(tutorialDisplayFeed) ? tutorialDisplayFeed : []);
+      return;
+    }
+
     const silent = !!opts?.silent;
     if (!silent) {
       setLoading(true);
     }
     setErrorMsg("");
     try {
-      const { data, error } = await supabase
-        .from("friend_emotion_feed")
-        .select("id, owner_name, items, created_at")
-        .order("created_at", { ascending: false })
-        .limit(20);
+      const json = await getJsonWithAuth(FRIEND_FEED_ENDPOINT);
+      const rows = Array.isArray(json)
+        ? json
+        : Array.isArray(json?.items)
+        ? json.items
+        : Array.isArray(json?.data)
+        ? json.data
+        : [];
 
-      if (error) throw error;
-
-      const rows = Array.isArray(data) ? data : [];
-
-      const mapped = rows.map((row) => ({
-        id: row.id,
-        ownerName: row.owner_name || "Friend",
-        items: Array.isArray(row.items) ? row.items : [],
-        timeLabel: formatTimeLabel(row.created_at),
+      const mapped = rows.map((row, index) => ({
+        id: row?.id || `friend-feed-${index}`,
+        ownerName:
+          String(row?.ownerName || row?.owner_name || row?.ownerNameLabel || "").trim() ||
+          "Friend",
+        items: Array.isArray(row?.items)
+          ? row.items.map((it) => ({
+              type: String(it?.type || it?.emotion || "").trim() || "感情",
+              strength: String(it?.strength || "").trim() || undefined,
+            }))
+          : [],
+        timeLabel:
+          String(row?.timeLabel || "").trim() ||
+          formatTimeLabel(row?.created_at || row?.createdAt || null),
       }));
 
       setFeed(mapped);
@@ -347,8 +679,7 @@ export default function FriendsScreen(props) {
     } finally {
       setLoading(false);
     }
-  }, []);
-
+  }, [isTutorialMode, tutorialDisplayFeed, setPrefetch]);
   const loadMyProfile = useCallback(async (uid) => {
     const { data, error } = await supabase
       .from("profiles")
@@ -578,21 +909,72 @@ export default function FriendsScreen(props) {
         return;
       }
 
-      const [profile, friends, reqs, notifMap] = await Promise.all([
-        loadMyProfile(userId),
-        loadFriendsList(userId),
-        loadRequests(userId),
-        loadFriendNotificationSettings(),
-      ]);
+      const json = await getJsonWithAuth(FRIEND_MANAGE_ENDPOINT);
+
+      const profileRaw = json?.myProfile && typeof json.myProfile === "object"
+        ? json.myProfile
+        : null;
+      const profile = profileRaw
+        ? {
+            id: String(profileRaw?.id || userId || "").trim() || userId,
+            displayName: String(
+              profileRaw?.displayName || profileRaw?.display_name || ""
+            ).trim(),
+            friendCode: String(
+              profileRaw?.friendCode || profileRaw?.friend_code || ""
+            ).trim(),
+          }
+        : null;
+
+      const friends = (Array.isArray(json?.friendsList) ? json.friendsList : []).map((f) => ({
+        userId: String(f?.userId || f?.user_id || "").trim(),
+        displayName:
+          String(f?.displayName || f?.display_name || "").trim() || "Friend",
+        friendCode:
+          String(f?.friendCode || f?.friend_code || "").trim() || null,
+      }));
+
+      const incomingMapped = (Array.isArray(json?.incoming) ? json.incoming : []).map((r) => ({
+        id: r?.id,
+        requesterUserId: String(
+          r?.requesterUserId || r?.requester_user_id || ""
+        ).trim(),
+        requesterName:
+          String(r?.requesterName || r?.requester_name || "").trim() || "Friend",
+        createdAt: r?.createdAt || r?.created_at || null,
+      }));
+
+      const outgoingMapped = (Array.isArray(json?.outgoing) ? json.outgoing : []).map((r) => ({
+        id: r?.id,
+        requestedUserId: String(
+          r?.requestedUserId || r?.requested_user_id || ""
+        ).trim(),
+        requestedName:
+          String(r?.requestedName || r?.requested_name || "").trim() || "Friend",
+        friendCode:
+          String(r?.friendCode || r?.friend_code || "").trim() || null,
+        createdAt: r?.createdAt || r?.created_at || null,
+      }));
+
+      const notifMap =
+        json?.friendNotifMap && typeof json.friendNotifMap === "object"
+          ? json.friendNotifMap
+          : {};
+
+      setMyProfile(profile);
+      setFriendsList(friends);
+      setIncoming(incomingMapped);
+      setOutgoing(outgoingMapped);
+      setFriendNotifMap(notifMap);
 
       // cache (used by app-level preload / next open)
       try {
         setPrefetch("Friends", "manage", {
           userId,
           myProfile: profile || null,
-          friendsList: Array.isArray(friends) ? friends : [],
-          incoming: Array.isArray(reqs?.incoming) ? reqs.incoming : [],
-          outgoing: Array.isArray(reqs?.outgoing) ? reqs.outgoing : [],
+          friendsList: friends,
+          incoming: incomingMapped,
+          outgoing: outgoingMapped,
           friendNotifMap:
             notifMap && typeof notifMap === "object" ? notifMap : {},
         });
@@ -605,22 +987,40 @@ export default function FriendsScreen(props) {
     } finally {
       setManageLoading(false);
     }
-  }, [loadFriendsList, loadMyProfile, loadRequests, loadFriendNotificationSettings, setPrefetch]);
+  }, [setPrefetch]);
+
 
   useEffect(() => {
+    if (isTutorialMode) return;
     // If feed was preloaded at app start, render immediately and refresh silently.
     if (Array.isArray(prefetchedFeedItems)) {
       loadFeed({ silent: true });
       return;
     }
     loadFeed();
-  }, [loadFeed, prefetchedFeedItems]);
+  }, [isTutorialMode, loadFeed, prefetchedFeedItems]);
 
   useEffect(() => {
     if (!modalVisible) return;
 
     // モーダルを開いたら最新を取得（メッセージは一旦クリア）
     setManageMessage("");
+
+    // Tutorial: no DB/API calls. Show mock data only.
+    if (isTutorialMode) {
+      setManageLoading(false);
+      setMyProfile({ id: "tutorial", displayName: "あなた", friendCode: "TUTORIAL" });
+      setFriendsList([
+        { userId: "tutorial_friend_1", displayName: tutorialMockFriendName, friendCode: "FRIEND-001" },
+      ]);
+      setIncoming([]);
+      setOutgoing([]);
+      setFriendNotifMap({});
+      setManageMessage(
+        "チュートリアルではフレンド申請/管理は模擬表示です。本番データには反映されません。"
+      );
+      return;
+    }
 
     // If manage data was preloaded at app start, render immediately and refresh silently.
     if (prefetchedManage) {
@@ -660,9 +1060,17 @@ export default function FriendsScreen(props) {
     }
 
     loadManageAll();
-  }, [modalVisible, loadManageAll, prefetchedManage]);
+  }, [modalVisible, loadManageAll, prefetchedManage, isTutorialMode, tutorialMockFriendName]);
 
   const handleSendFriendCode = useCallback(async () => {
+    if (isTutorialMode) {
+      Alert.alert(
+        "チュートリアル",
+        "フレンド申請はチュートリアルでは実行されません（本番データには保存されません）。"
+      );
+      return;
+    }
+
     const code = friendCodeInput.trim();
     if (!code || manageLoading) return;
 
@@ -690,10 +1098,14 @@ export default function FriendsScreen(props) {
     } finally {
       setManageLoading(false);
     }
-  }, [friendCodeInput, loadManageAll, manageLoading]);
+  }, [isTutorialMode, friendCodeInput, loadManageAll, manageLoading]);
 
   const handleAcceptRequest = useCallback(
     async (requestId) => {
+      if (isTutorialMode) {
+        Alert.alert("チュートリアル", "承認操作はチュートリアルでは実行されません。");
+        return;
+      }
       if (!requestId || manageLoading) return;
 
       setManageMessage("");
@@ -709,11 +1121,15 @@ export default function FriendsScreen(props) {
         setManageLoading(false);
       }
     },
-    [loadManageAll, manageLoading]
+    [isTutorialMode, loadManageAll, manageLoading]
   );
 
   const handleRejectRequest = useCallback(
     async (requestId) => {
+      if (isTutorialMode) {
+        Alert.alert("チュートリアル", "拒否操作はチュートリアルでは実行されません。");
+        return;
+      }
       if (!requestId || manageLoading) return;
 
       setManageMessage("");
@@ -729,11 +1145,16 @@ export default function FriendsScreen(props) {
         setManageLoading(false);
       }
     },
-    [loadManageAll, manageLoading]
+    [isTutorialMode, loadManageAll, manageLoading]
   );
 
   const handleCancelOutgoingRequest = useCallback(
     (req) => {
+      if (isTutorialMode) {
+        Alert.alert("チュートリアル", "取り下げ操作はチュートリアルでは実行されません。"
+        );
+        return;
+      }
       const requestId = req?.id || null;
       const label = req?.requestedName || "相手";
       if (!requestId || manageLoading) return;
@@ -766,11 +1187,16 @@ export default function FriendsScreen(props) {
         ]
       );
     },
-    [loadManageAll, manageLoading]
+    [isTutorialMode, loadManageAll, manageLoading]
   );
 
   const handleResendOutgoingRequest = useCallback(
     (req) => {
+      if (isTutorialMode) {
+        Alert.alert("チュートリアル", "再送操作はチュートリアルでは実行されません。"
+        );
+        return;
+      }
       const requestId = req?.id || null;
       const label = req?.requestedName || "相手";
       const code = (req?.friendCode || "").trim();
@@ -836,11 +1262,18 @@ export default function FriendsScreen(props) {
         ]
       );
     },
-    [loadManageAll, manageLoading]
+    [isTutorialMode, loadManageAll, manageLoading]
   );
 
   const handleToggleFriendNotification = useCallback(
     async (friend) => {
+      if (isTutorialMode) {
+        Alert.alert(
+          "チュートリアル",
+          "通知設定の切り替えはチュートリアルでは実行されません。"
+        );
+        return;
+      }
       const friendUserId = friend?.userId || null;
       if (!friendUserId) return;
       if (manageLoading) return;
@@ -871,11 +1304,16 @@ export default function FriendsScreen(props) {
         });
       }
     },
-    [friendNotifBusy, friendNotifMap, manageLoading]
+    [isTutorialMode, friendNotifBusy, friendNotifMap, manageLoading]
   );
 
   const handleOpenApprovedFriendMenu = useCallback(
     (friend) => {
+      if (isTutorialMode) {
+        Alert.alert("チュートリアル", "フレンド削除はチュートリアルでは実行されません。"
+        );
+        return;
+      }
       const friendUserId = friend?.userId || null;
       const label = friend?.displayName || "Friend";
 
@@ -918,8 +1356,70 @@ export default function FriendsScreen(props) {
         ]
       );
     },
-    [loadManageAll, manageLoading]
+    [isTutorialMode, loadManageAll, manageLoading]
   );
+
+
+  const openInputTab = useCallback(() => {
+    try {
+      navigation?.navigate?.("Input");
+      return;
+    } catch {
+      // noop
+    }
+
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      if (parent && typeof parent.navigate === "function") {
+        parent.navigate("Input");
+      }
+    } catch {
+      // noop
+    }
+  }, [navigation]);
+
+  const handleCompleteTutorial = useCallback(() => {
+    if (!isTutorialMode) return;
+
+    if (!hasTutorialFriendLog) {
+      Alert.alert(
+        "チュートリアル",
+        "まずはフレンド通知が届き、フレンドログに反映されるのを確認してください。"
+      );
+      return;
+    }
+
+    Alert.alert(
+      "チュートリアルを完了しますか？",
+      "ここでチュートリアルを終了し、本番モードへ切り替えます。\n\n今後の入力は実際のデータとして保存されます。",
+      [
+        { text: "まだ続ける", style: "cancel" },
+        {
+          text: "完了する",
+          onPress: async () => {
+            try {
+              await Promise.resolve(endTutorial?.());
+              try {
+                setUnread?.("Friends", "tutorialFeed", false);
+                setUnread?.("Friends", "tutorial", false);
+              } catch {
+                // noop
+              }
+
+              Alert.alert(
+                "チュートリアル完了",
+                "チュートリアルが完了しました。これからは本番モードで利用できます。",
+                [{ text: "Inputへ", onPress: openInputTab }]
+              );
+            } catch (e) {
+              Alert.alert("完了できませんでした", buildErrorMessage(e));
+            }
+          },
+        },
+      ]
+    );
+  }, [isTutorialMode, hasTutorialFriendLog, endTutorial, setUnread, openInputTab]);
 
   const renderFeedItem = ({ item }) => {
     const items = item.items || [];
@@ -960,6 +1460,14 @@ export default function FriendsScreen(props) {
 
   const isDark = themeName === "dark";
 
+  const effectiveFeed = isTutorialMode
+    ? Array.isArray(tutorialDisplayFeed)
+      ? tutorialDisplayFeed
+      : []
+    : feed;
+  const effectiveLoading = isTutorialMode ? false : loading;
+  const effectiveErrorMsg = isTutorialMode ? "" : errorMsg;
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar
@@ -967,10 +1475,10 @@ export default function FriendsScreen(props) {
         backgroundColor={colors.BG_SILVER}
       />
       {/* 画面全体は固定（背景＆タイトル固定） */}
-      <View style={styles.screenContainer}>
+      <View ref={screenRootRef} style={styles.screenContainer}>
         {/* パネルヘッダー：Friend */}
           <View style={styles.panelHeader}>
-            <View style={styles.panelTitleRow}>
+            <View ref={panelTitleRowRef} style={styles.panelTitleRow}>
             <Text style={styles.panelTitle}>Friend</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
@@ -988,15 +1496,24 @@ export default function FriendsScreen(props) {
             {/* 右上：更新（フィード再取得） + フレンド管理 */}
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <CocolonPressable
-                onPress={loadFeed}
+                onPress={() => {
+                  if (isTutorialMode) {
+                    Alert.alert(
+                      "チュートリアル",
+                      "チュートリアルでは本番のフレンドログを取得せず、模擬の通知/ログだけを表示します。"
+                    );
+                    return;
+                  }
+                  loadFeed();
+                }}
                 style={[
                   styles.friendPill,
                   { marginRight: 10 },
-                  loading && { opacity: 0.5 },
+                  effectiveLoading && { opacity: 0.5 },
                 ]}
-disabled={loading}
+                disabled={effectiveLoading}
               >
-                {loading ? (
+                {effectiveLoading ? (
                   <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
                 ) : (
                   <Ionicons
@@ -1009,7 +1526,16 @@ disabled={loading}
 
               <CocolonPressable
                 onPress={() => {
+                  if (isTutorialMode) {
+                    Alert.alert(
+                      "チュートリアル",
+                      "チュートリアルではフレンド管理（申請/承認）は行いません。\n\nフレンド通知の体験は、フレンドログで確認できます。"
+                    );
+                    return;
+                  }
+
                   setModalVisible(true);
+
                   try {
                     if (typeof onOpenFriendManage === "function") {
                       onOpenFriendManage();
@@ -1044,30 +1570,73 @@ disabled={loading}
           </View>
 
           <ScrollView
+            ref={tutorialScrollRef}
             style={styles.panelScroll}
             contentContainerStyle={styles.panelScrollContent}
             showsVerticalScrollIndicator={false}
+            onScroll={handleTutorialScroll}
+            scrollEventThrottle={16}
           >
             <Text style={[styles.lead, { fontWeight: "700" }]}>フレンドログ</Text>
 
+            {isTutorialMode ? (
+              <View ref={tutorialIntroRef} collapsable={false} style={styles.manageIntroCard}>
+                <Text style={styles.manageIntroText}>
+                  チュートリアルでは、仮のフレンドから通知が届く体験をします。
+                  {"\n"}
+                  まもなく通知が届き、この下のフレンドログに反映されます。
+                  {"\n"}
+                  ※ 本番データには保存されません。
+                </Text>
+              </View>
+            ) : null}
+
+            {isTutorialMode && tutorialNotificationShown ? (
+              <View
+                ref={tutorialNotificationRef}
+                collapsable={false}
+                style={styles.tutorialNotificationCard}
+              >
+                <View style={styles.tutorialNotificationHeader}>
+                  <Ionicons
+                    name="notifications-outline"
+                    size={16}
+                    color={colors.TITLE_GOLD}
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.tutorialNotificationTitle}>通知</Text>
+                </View>
+                <Text style={styles.tutorialNotificationText}>{tutorialNotificationText}</Text>
+              </View>
+            ) : null}
+
             {/* フィードカード */}
-            <View style={styles.card}>
-              {errorMsg ? (
+            <View ref={tutorialFeedCardRef} style={styles.card}>
+              {effectiveErrorMsg ? (
                 <View style={styles.centerBox}>
-                  <Text style={styles.errorText}>取得エラー: {errorMsg}</Text>
+                  <Text style={styles.errorText}>取得エラー: {effectiveErrorMsg}</Text>
                   <TouchableOpacity
                     style={styles.retryBtn}
-                    onPress={loadFeed}
+                    onPress={() => {
+                      if (isTutorialMode) {
+                        Alert.alert(
+                          "チュートリアル",
+                          "チュートリアルでは本番のフレンドログを取得せず、模擬の通知/ログだけを表示します。"
+                        );
+                        return;
+                      }
+                      loadFeed();
+                    }}
                     activeOpacity={0.85}
                   >
                     <Text style={styles.retryText}>再読み込み</Text>
                   </TouchableOpacity>
                 </View>
-              ) : loading ? (
+              ) : effectiveLoading ? (
                 <View style={styles.centerBox}>
                   <ActivityIndicator size="small" />
                 </View>
-              ) : feed.length === 0 ? (
+              ) : effectiveFeed.length === 0 ? (
                 <View style={styles.centerBox}>
                   <Text style={styles.emptyText}>
                     まだフレンドの感情ログがありません
@@ -1075,7 +1644,7 @@ disabled={loading}
                 </View>
               ) : (
                 <FlatList
-                  data={feed}
+                  data={effectiveFeed}
                   keyExtractor={(item) => String(item.id)}
                   renderItem={renderFeedItem}
                   ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -1083,8 +1652,56 @@ disabled={loading}
                 />
               )}
             </View>
+
+            {isTutorialMode ? (
+              <View style={styles.tutorialCompleteCard}>
+                <Text style={styles.tutorialCompleteText}>
+                  フレンド通知の体験を確認できたら、チュートリアルを完了して本番モードへ進みます。
+                </Text>
+
+                <View ref={tutorialCompleteButtonWrapRef} collapsable={false}>
+                  <CocolonPressable
+                    style={[
+                      styles.tutorialCompleteButton,
+                      (!hasTutorialFriendLog || tutorialStep !== STEP_FRIENDS_COMPLETE) && styles.tutorialCompleteButtonDisabled,
+                    ]}
+                    onPress={handleCompleteTutorial}
+                    disabled={!hasTutorialFriendLog || tutorialStep !== STEP_FRIENDS_COMPLETE}
+                    accessibilityLabel="チュートリアルを完了する"
+                  >
+                    <Ionicons
+                      name="checkmark-circle-outline"
+                      size={18}
+                      color="#FFFFFF"
+                      style={{ marginRight: 6 }}
+                    />
+                    <Text style={styles.tutorialCompleteButtonText}>
+                      チュートリアルを完了する
+                    </Text>
+                  </CocolonPressable>
+                </View>
+              </View>
+            ) : null}
           </ScrollView>
       </View>
+
+      {isFriendsTutorialVisible && tutorialOverlayConfig ? (
+        <TutorialOverlay
+          visible={true}
+          targetRect={tutorialTargetRect}
+          title={tutorialOverlayConfig.title}
+          message={tutorialOverlayConfig.message}
+          step={tutorialOverlayConfig.step}
+          totalSteps={TUTORIAL_TOTAL_STEPS}
+          mode={tutorialOverlayConfig.mode}
+          nextLabel={tutorialOverlayConfig.nextLabel}
+          onNext={tutorialOverlayConfig.onNext}
+          primaryDisabled={tutorialOverlayConfig.primaryDisabled}
+          showPrimaryButton={tutorialOverlayConfig.showPrimaryButton}
+          footerText={tutorialOverlayConfig.footerText}
+          actionHint={tutorialOverlayConfig.actionHint}
+        />
+      ) : null}
 
       {/* フレンド管理モーダル（MyProfile 方式） */}
       <Modal
@@ -1368,6 +1985,7 @@ disabled={loading}
           </ScrollView>
         </View>
       </Modal>
+
     </SafeAreaView>
   );
 }
@@ -1579,6 +2197,66 @@ function createStyles(COLORS) {
       color: TEXT_MAIN,
       fontSize: 12,
       fontWeight: "600",
+    },
+
+    tutorialNotificationCard: {
+      marginTop: 12,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+    },
+    tutorialNotificationHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 8,
+    },
+    tutorialNotificationTitle: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    tutorialNotificationText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: TEXT_SUB,
+    },
+
+    tutorialCompleteCard: {
+      marginTop: 12,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+    },
+    tutorialCompleteText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: TEXT_SUB,
+      marginBottom: 10,
+    },
+    tutorialCompleteButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 14,
+      paddingVertical: 12,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    tutorialCompleteButtonDisabled: {
+      opacity: 0.5,
+    },
+    tutorialCompleteButtonText: {
+      color: "#FFFFFF",
+      fontSize: 13,
+      fontWeight: "800",
     },
 
     // ---- Modal（MyProfile 方式） ----
