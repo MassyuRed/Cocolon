@@ -253,7 +253,7 @@ export default function InputCountRankingScreen({ navigation }) {
                   onPressLeft={
                     userId ? () => navigateToAccount(navigation, userId) : undefined
                   }
-                  isPrivateAccount={!!(r?.is_private_account)}
+                  isPrivateAccount={!!(r?.is_private_account || r?.isPrivateAccount)}
                   left={`${r?.rank ?? idx + 1}位  ${r?.display_name || r?.name || "—"}`}
                   sub={null}
                   right={`${r?.input_count ?? r?.count ?? 0}`}
