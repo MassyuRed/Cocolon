@@ -384,6 +384,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   useEffect(() => {
     refreshFollowState();
     refreshAccountStatus();
+    loadAccountVisibilityMe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, targetUserId]);
 
@@ -395,6 +396,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     const unsubscribe = navigation.addListener("focus", () => {
       refreshFollowState();
       refreshAccountStatus();
+      loadAccountVisibilityMe();
     });
 
     return unsubscribe;
@@ -496,6 +498,20 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const isDark = themeName === "dark";
 
   const isSelf = !!user && String(targetUserId || "") === String(user.id);
+
+  const isPrivateAccount = !!(
+    (isSelf && accountVisibility?.is_private_account) ||
+      (!isSelf && (accountStatus?.is_private_account || accountStatus?.isPrivateAccount))
+  );
+
+  const isFriendCodePublic = !!(
+    accountStatus?.is_friend_code_public ??
+      accountStatus?.isFriendCodePublic ??
+      accountStatus?.friend_code_public ??
+      accountStatus?.friendCodePublic
+  );
+
+  const canShowFriendCode = !user || isSelf || isFriendCodePublic;
 
   const statusValue = (key, fallbackKeys = []) => {
     const obj = accountStatus && typeof accountStatus === "object" ? accountStatus : null;
@@ -1045,7 +1061,35 @@ const onRestorePurchases = async () => {
                     </Pressable>
                   ) : null
                 }
-                value={loading ? "…" : displayName || "（未設定）"}
+                value={
+                  loading ? (
+                    "…"
+                  ) : (
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                        maxWidth: "100%",
+                      }}
+                    >
+                      <Text
+                        style={[styles.profileRowValue, { flexShrink: 1 }]}
+                        numberOfLines={1}
+                      >
+                        {displayName || "（未設定）"}
+                      </Text>
+                      {isPrivateAccount ? (
+                        <Ionicons
+                          name="shield-outline"
+                          size={14}
+                          color={colors.TITLE_GOLD}
+                          style={{ marginLeft: 6, opacity: 0.7 }}
+                        />
+                      ) : null}
+                    </View>
+                  )
+                }
               />
               <ProfileRow
                 styles={styles}
@@ -1061,32 +1105,35 @@ const onRestorePurchases = async () => {
                 onPress={() => openFollowList("followers")}
                 disabled={!targetUserId}
               />
-              <ProfileRow
-                styles={styles}
-                label="フレンドコード"
-                labelAction={
-                  isSelf && user ? (
-                    <Pressable
-                      style={[
-                        styles.labelIconBtn,
-                        (loading || !String(friendCode || "").trim()) &&
-                          styles.labelIconBtnDisabled,
-                      ]}
-                      onPress={onCopyFriendCode}
-                      disabled={loading || !String(friendCode || "").trim()}
-                      accessibilityLabel="フレンドコードをコピー"
-                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                      <Ionicons
-                        name="copy-outline"
-                        size={12}
-                        color={colors.TEXT_ON_LIGHT}
-                      />
-                    </Pressable>
-                  ) : null
-                }
-                value={userIdForDisplay}
-              />
+              {canShowFriendCode ? (
+                <ProfileRow
+                  styles={styles}
+                  label="フレンドコード"
+                  labelAction={
+                    user ? (
+                      <Pressable
+                        style={[
+                          styles.labelIconBtn,
+                          (loading || !String(friendCode || "").trim()) &&
+                            styles.labelIconBtnDisabled,
+                        ]}
+                        onPress={onCopyFriendCode}
+                        disabled={loading || !String(friendCode || "").trim()}
+                        accessibilityLabel="フレンドコードをコピー"
+                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                      >
+                        <Ionicons
+                          name="copy-outline"
+                          size={12}
+                          color={colors.TEXT_ON_LIGHT}
+                        />
+                      </Pressable>
+                    ) : null
+                  }
+                  value={userIdForDisplay}
+                />
+              ) : null}
+
             </View>
 
             <Text
