@@ -312,7 +312,7 @@ export default function LoginStreakRankingScreen({ navigation }) {
                 <RankingRow
                   key={`${userId || "user"}-${idx}`}
                   styles={styles}
-                  isPrivateAccount={!!(r?.is_private_account)}
+                  isPrivateAccount={!!(r?.is_private_account ?? r?.isPrivateAccount)}
                   onPressLeft={
                     userId ? () => navigateToAccount(navigation, userId) : undefined
                   }
