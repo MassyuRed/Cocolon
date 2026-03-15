@@ -19,6 +19,7 @@ import { supabase } from "../lib/supabase";
 // UI
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
+import { apiFetch } from "../lib/apiClient";
 
 /**
  * EchoesHistoryListScreen
@@ -94,7 +95,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
         resolvedOrder
       )}&limit=${PAGE_LIMIT}&offset=${resolvedOffset}`;
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -221,6 +222,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
               navigation?.navigate?.("EchoesHistoryDetail", {
                 q_instance_id: item?.q_instance_id,
                 q_key: item?.q_key,
+                owner_display_name: item?.owner_display_name,
               });
             } catch (e) {
               Alert.alert("準備中", "履歴詳細画面はこれから作成します。");

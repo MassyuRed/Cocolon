@@ -23,18 +23,17 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Supabase
 import { supabase } from "../lib/supabase";
-import { getCurrentUserId } from "../lib/user";
+import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 既存
 import MyWebHistoryScreen from "./MyWebHistoryScreen";
-import WeeklyReportMockScreen from "./WeeklyReportMockScreen";
-import MonthlyReportMockScreen from "./MonthlyReportMockScreen";
 import MyWebReportHistoryScreen from "./MyWebReportHistoryScreen";
 import MyWebReportViewerScreen from "./MyWebReportViewerScreen";
 import DeepInsightScreen from "./DeepInsightScreen";
 import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen";
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
+import TodayQuestionHistoryScreen from "./TodayQuestionHistoryScreen";
 
 // 🎨 テーマコンテキスト
 import { useTheme } from "../theme/ThemeContext";
@@ -62,47 +61,6 @@ const TUTORIAL_TOTAL_STEPS = 23;
 const MYMODEL_API_BASE_URL =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
 const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ensure`;
-const MYWEB_REPORTS_READY_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ready`;
-
-async function getAccessToken() {
-  try {
-    const { data: sessionData } = await supabase.auth.getSession();
-    return sessionData?.session?.access_token ?? null;
-  } catch {
-    return null;
-  }
-}
-
-function extractReadyItems(payload) {
-  if (Array.isArray(payload?.items)) return payload.items;
-  if (Array.isArray(payload?.reports)) return payload.reports;
-  if (Array.isArray(payload?.data?.items)) return payload.data.items;
-  if (Array.isArray(payload?.data?.reports)) return payload.data.reports;
-  if (Array.isArray(payload)) return payload;
-  return [];
-}
-
-async function fetchReadyReports(accessToken, reportType, limit = 1) {
-  const url = `${MYWEB_REPORTS_READY_ENDPOINT}?report_type=${encodeURIComponent(
-    reportType
-  )}&limit=${encodeURIComponent(limit)}`;
-
-  const res = await fetch(url, {
-    method: "GET",
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    const err = new Error(`ready failed: ${res.status}`);
-    err.status = res.status;
-    err.body = text;
-    throw err;
-  }
-
-  const json = await res.json();
-  return extractReadyItems(json);
-}
 
 function useThemedStyles() {
   const { colors, themeName } = useTheme();
@@ -112,7 +70,7 @@ function useThemedStyles() {
   return { styles, colors, themeName, isDark, ui };
 }
 
-export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange }) {
+export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange, route: screenRoute, tabRoute }) {
   const { setUnreadGroup, clearScope } = useUnread();
   const { ensurePaid, ensurePremium, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
@@ -135,6 +93,40 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   const [selectedReport, setSelectedReport] = useState(null);
   const [selectedSelfReport, setSelectedSelfReport] = useState(null);
   const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState("home");
+
+  const clearExternalOpenParams = useCallback(
+    (patch) => {
+      try {
+        navigation?.setParams?.(patch);
+      } catch {
+        // noop
+      }
+      try {
+        const parentNav =
+          typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+        parentNav?.setParams?.(patch);
+      } catch {
+        // noop
+      }
+    },
+    [navigation]
+  );
+
+  useEffect(() => {
+    const shouldOpen = !!(tabRoute?.params?.openTodayQuestionHistory || screenRoute?.params?.openTodayQuestionHistory);
+    if (!shouldOpen) return;
+    setRoute("todayQuestionHistory");
+    clearExternalOpenParams({
+      openTodayQuestionHistory: false,
+      openTodayQuestionHistoryAt: null,
+    });
+  }, [
+    clearExternalOpenParams,
+    screenRoute?.params?.openTodayQuestionHistory,
+    screenRoute?.params?.openTodayQuestionHistoryAt,
+    tabRoute?.params?.openTodayQuestionHistory,
+    tabRoute?.params?.openTodayQuestionHistoryAt,
+  ]);
 
   // 未読バッジ（●）用：MyWeb（日/週/月）ごとの未読状態
   // 画面内では MyWebScreen 自身の refreshUnreadBadges() を唯一の truth にする。
@@ -467,206 +459,50 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     if (!reportId) return;
 
     try {
-      const userId = await getCurrentUserId();
-      if (!userId) return;
-
-      const { error } = await supabase
-        .from("report_reads")
-        .upsert(
-          { user_id: userId, report_id: reportId },
-          {
-            onConflict: "user_id,report_id",
-            ignoreDuplicates: true,
-          }
-        );
-
-      if (error) throw error;
+      await apiPost("/report-reads/mark", {
+        report_id: reportId,
+        report_table: "myweb_reports",
+        report_scope: "myweb",
+      });
     } catch (e) {
-      // 既読付けに失敗しても致命的ではないので握りつぶす（ログだけ）
       console.warn("MyWebScreen: failed to mark report read", e);
     }
-  }, [isPaid]);
+  }, []);
 
   // MyWeb（日/週/月）の未読状態を更新
   const refreshUnreadBadges = useCallback(async () => {
     const refreshSeq = ++unreadRefreshSeqRef.current;
     const isStale = () => refreshSeq !== unreadRefreshSeqRef.current;
-    const TYPES = ["daily", "weekly", "monthly"];
-    const BADGE_TARGET_LIMIT = 1; // Homeのバッジは「最新の表示可能レポート」が未読かどうかだけを見る
 
     try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        if (isStale()) return;
-        setUnreadByType({ daily: false, weekly: false, monthly: false, selfStructure: false });
-        setUnreadResolved(true);
-        return;
-      }
-
-      const accessToken = await getAccessToken();
-      if (!accessToken) {
-        if (isStale()) return;
-        setUnreadByType({ daily: false, weekly: false, monthly: false, selfStructure: false });
-        setUnreadResolved(true);
-        return;
-      }
-
-      // 1) 履歴/Viewer と同じ READY API を使って、実際に見えている最新レポートIDを取る
-      const idsByType = {
-        daily: [],
-        weekly: [],
-        monthly: [],
-        selfStructure: [],
-      };
-
-      await Promise.all(
-        TYPES.map(async (t) => {
-          try {
-            const readyItems = await fetchReadyReports(accessToken, t, BADGE_TARGET_LIMIT);
-            idsByType[t] = (Array.isArray(readyItems) ? readyItems : [])
-              .map((r) => String(r?.id || ""))
-              .filter(Boolean)
-              .slice(0, BADGE_TARGET_LIMIT);
-          } catch (e) {
-            console.warn(
-              "MyWebScreen: failed to fetch READY report ids for unread badge",
-              t,
-              e?.status || e?.message || e
-            );
-            idsByType[t] = [];
-          }
-        })
-      );
-
-      // 1b) 自己構造（月次）は引き続き Supabase 直読。ただし Homeバッジ用に最新1件だけを見る。
-      // - Free では未読バッジ対象外のため取得しない（RLS/負荷対策）
-      if (isPaid) {
-        try {
-          const { data: selfData, error: selfErr } = await supabase
-            .from("myprofile_reports")
-            .select("id")
-            .eq("user_id", userId)
-            .eq("report_type", "monthly")
-            .order("period_end", { ascending: false })
-            .order("generated_at", { ascending: false })
-            .order("updated_at", { ascending: false })
-            .limit(BADGE_TARGET_LIMIT);
-
-          if (!selfErr) {
-            idsByType.selfStructure = (Array.isArray(selfData) ? selfData : [])
-              .map((r) => String(r?.id || ""))
-              .filter(Boolean)
-              .slice(0, BADGE_TARGET_LIMIT);
-          } else {
-            idsByType.selfStructure = [];
-          }
-        } catch (e) {
-          // best-effort: selfStructure は取得できなくても週/月の未読判定は続行する
-          idsByType.selfStructure = [];
-        }
-      } else {
-        idsByType.selfStructure = [];
-      }
-
-      const allIds = Array.from(
-        new Set([
-          ...idsByType.daily,
-          ...idsByType.weekly,
-          ...idsByType.monthly,
-          ...idsByType.selfStructure,
-        ])
-      );
-
-      // 2) 表示対象IDの中で、既読済みIDをまとめて取得
-      let readSet = new Set();
-      if (allIds.length > 0) {
-        const { data: reads, error: rErr } = await supabase
-          .from("report_reads")
-          .select("report_id")
-          .eq("user_id", userId)
-          .in("report_id", allIds);
-
-        if (rErr) throw rErr;
-
-        readSet = new Set(
-          (Array.isArray(reads) ? reads : [])
-            .map((r) => String(r?.report_id || ""))
-            .filter(Boolean)
-        );
-      }
+      const query = new URLSearchParams({
+        limit: "1",
+        include_self_structure: isPaid ? "true" : "false",
+      }).toString();
+      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
+      const unread = json?.unread_by_type || {};
 
       if (isStale()) return;
 
-      // 3) Homeの未読バッジは「最新の1件」が未読かどうかで判定する
-      const isLatestUnread = (ids) => {
-        const latestId = Array.isArray(ids) && ids.length > 0 ? ids[0] : null;
-        return !!latestId && !readSet.has(latestId);
-      };
-
       setUnreadByType({
-        daily: isLatestUnread(idsByType.daily),
-        weekly: isLatestUnread(idsByType.weekly),
-        monthly: isLatestUnread(idsByType.monthly),
-        selfStructure: isLatestUnread(idsByType.selfStructure),
+        daily: !!unread?.daily,
+        weekly: !!unread?.weekly,
+        monthly: !!unread?.monthly,
+        selfStructure: !!unread?.selfStructure,
       });
       setUnreadResolved(true);
     } catch (e) {
       if (isStale()) return;
-      // 通信失敗時に false を流し込むと、
-      // 「一度消えた/付いた」が発生しやすいので前回値を維持する。
       console.warn("MyWebScreen: failed to refresh unread badges", e);
     }
   }, [isPaid]);
 
-  const refreshWeeklySummary = useCallback(async () => {
+  const refreshHomeSummaries = useCallback(async () => {
     setWeeklySummary((prev) => ({
       ...prev,
       loading: true,
       error: "",
     }));
-
-    try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        setWeeklySummary({
-          loading: false,
-          count: 0,
-          top: [],
-          error: "",
-        });
-        return;
-      }
-
-      const range = getWeeklyRangeForNow();
-      const { data, error } = await supabase
-        .from("emotions")
-        .select("id, emotions")
-        .eq("user_id", userId)
-        .gte("created_at", range.start.toISOString())
-        .lte("created_at", range.end.toISOString())
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-
-      const summary = summarize(Array.isArray(data) ? data : []);
-      setWeeklySummary({
-        loading: false,
-        count: summary.count,
-        top: summary.top,
-        error: "",
-      });
-    } catch (e) {
-      console.warn("MyWebScreen: failed to refresh weekly summary", e);
-      setWeeklySummary({
-        loading: false,
-        count: 0,
-        top: [],
-        error: String(e?.message || e || ""),
-      });
-    }
-  }, []);
-
-  const refreshMonthlySummary = useCallback(async () => {
     setMonthlySummary((prev) => ({
       ...prev,
       loading: true,
@@ -674,40 +510,34 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     }));
 
     try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        setMonthlySummary({ loading: false, count: 0, error: "" });
-        return;
-      }
+      const json = await apiGet("/myweb/home-summary");
+      const weekly = json?.weekly || {};
+      const monthly = json?.monthly || {};
 
-      // Month range (JST)
-      const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
-      const now = new Date();
-      const nowJst = new Date(now.getTime() + JST_OFFSET_MS);
-      const y = nowJst.getUTCFullYear();
-      const mon = nowJst.getUTCMonth(); // 0-based
-
-      const monthStartUtcMs = Date.UTC(y, mon, 1, 0, 0, 0) - JST_OFFSET_MS;
-      const nextMonthStartUtcMs = Date.UTC(y, mon + 1, 1, 0, 0, 0) - JST_OFFSET_MS;
-
-      const monthStartIso = new Date(monthStartUtcMs).toISOString();
-      const monthEndIso = new Date(nextMonthStartUtcMs).toISOString();
-
-      const res = await supabase
-        .from("emotions")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", userId)
-        .gte("created_at", monthStartIso)
-        .lt("created_at", monthEndIso);
-
-      const c = typeof res?.count === "number" ? res.count : 0;
-      setMonthlySummary({ loading: false, count: c, error: "" });
+      setWeeklySummary({
+        loading: false,
+        count: typeof weekly?.count === "number" ? weekly.count : 0,
+        top: Array.isArray(weekly?.top) ? weekly.top : [],
+        error: String(weekly?.error || ""),
+      });
+      setMonthlySummary({
+        loading: false,
+        count: typeof monthly?.count === "number" ? monthly.count : 0,
+        error: String(monthly?.error || ""),
+      });
     } catch (e) {
-      console.warn("MyWebScreen: failed to refresh monthly summary", e);
+      console.warn("MyWebScreen: failed to refresh home summaries", e);
+      const message = String(e?.message || e || "");
+      setWeeklySummary({
+        loading: false,
+        count: 0,
+        top: [],
+        error: message,
+      });
       setMonthlySummary({
         loading: false,
         count: 0,
-        error: String(e?.message || e || ""),
+        error: message,
       });
     }
   }, []);
@@ -776,6 +606,70 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     });
   }, [openSelfStructureRoute]);
 
+  useEffect(() => {
+    const shouldOpenReportHistory = !!(
+      tabRoute?.params?.openReportHistory || screenRoute?.params?.openReportHistory
+    );
+    const nextReportType = String(
+      tabRoute?.params?.openReportHistoryType || screenRoute?.params?.openReportHistoryType || ""
+    ).trim().toLowerCase();
+
+    if (shouldOpenReportHistory && ["daily", "weekly", "monthly"].includes(nextReportType)) {
+      setSelectedReport(null);
+      setReportType(nextReportType);
+      setRoute("reportHistory");
+      clearExternalOpenParams({
+        openReportHistory: false,
+        openReportHistoryType: null,
+        openReportHistoryAt: null,
+      });
+      return;
+    }
+
+    const shouldOpenSelfReportHistory = !!(
+      tabRoute?.params?.openSelfReportHistory || screenRoute?.params?.openSelfReportHistory
+    );
+    if (shouldOpenSelfReportHistory) {
+      openSelfStructureRoute({
+        targetRoute: "selfReportHistory",
+        backRoute: "home",
+      });
+      clearExternalOpenParams({
+        openSelfReportHistory: false,
+        openSelfReportHistoryAt: null,
+      });
+      return;
+    }
+
+    const shouldOpenDistributionHome = !!(
+      tabRoute?.params?.openDistributionHome || screenRoute?.params?.openDistributionHome
+    );
+    if (shouldOpenDistributionHome) {
+      setRoute("home");
+      clearExternalOpenParams({
+        openDistributionHome: false,
+        openDistributionHomeAt: null,
+      });
+    }
+  }, [
+    clearExternalOpenParams,
+    openSelfStructureRoute,
+    screenRoute?.params?.openDistributionHome,
+    screenRoute?.params?.openDistributionHomeAt,
+    screenRoute?.params?.openReportHistory,
+    screenRoute?.params?.openReportHistoryAt,
+    screenRoute?.params?.openReportHistoryType,
+    screenRoute?.params?.openSelfReportHistory,
+    screenRoute?.params?.openSelfReportHistoryAt,
+    tabRoute?.params?.openDistributionHome,
+    tabRoute?.params?.openDistributionHomeAt,
+    tabRoute?.params?.openReportHistory,
+    tabRoute?.params?.openReportHistoryAt,
+    tabRoute?.params?.openReportHistoryType,
+    tabRoute?.params?.openSelfReportHistory,
+    tabRoute?.params?.openSelfReportHistoryAt,
+  ]);
+
   const openSelfReportView = useCallback((report) => {
     setSelectedSelfReport(report || null);
     setRoute("selfReportView");
@@ -820,10 +714,10 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       // free -> subscription誘導（自己構造分析レポートと同様にポップアップを挟む）
       Alert.alert(
         "Deep Insight",
-        "Deep InsightはPremium会員以上で利用できます。\n\nPremium会員以上で本文の閲覧が可能になります。",
+        "Deep InsightはPremiumで提供予定です。\n\n※Premiumは準備中です。",
         [
           { text: "閉じる", style: "cancel" },
-          { text: "プランを見る", onPress: openSubscriptionSelect },
+          { text: "プラン内容を見る", onPress: openSubscriptionSelect },
         ]
       );
     } catch {
@@ -895,7 +789,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         const accessToken = sessionData?.session?.access_token ?? null;
         if (!accessToken) return;
 
-        const res = await fetch(MYWEB_REPORTS_ENSURE_ENDPOINT, {
+        const res = await apiFetch(MYWEB_REPORTS_ENSURE_ENDPOINT, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -916,20 +810,18 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       } finally {
         // 生成/配布の追いつかせ後に、未読バッジを更新
         refreshUnreadBadges();
-        refreshWeeklySummary();
-        refreshMonthlySummary();
+        refreshHomeSummaries();
       }
     })();
-  }, [refreshUnreadBadges, refreshWeeklySummary, refreshMonthlySummary]);
+  }, [refreshUnreadBadges, refreshHomeSummaries]);
 
   // Home に戻ったタイミングでも更新
   useEffect(() => {
     if (route === "home") {
       refreshUnreadBadges();
-      refreshWeeklySummary();
-      refreshMonthlySummary();
+      refreshHomeSummaries();
     }
-  }, [route, refreshUnreadBadges, refreshWeeklySummary, refreshMonthlySummary]);
+  }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
   return (
     <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
@@ -945,8 +837,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           onBack={() => {
             setRoute("home");
             refreshUnreadBadges();
-            refreshWeeklySummary();
-            refreshMonthlySummary();
+            refreshHomeSummaries();
           }}
           onOpenReport={openReportView}
           onGenerateLatest={() => setRoute(reportType)}
@@ -968,8 +859,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           onBack={() => {
             setRoute("home");
             refreshUnreadBadges();
-            refreshWeeklySummary();
-            refreshMonthlySummary();
+            refreshHomeSummaries();
           }}
           onOpenReport={openSelfReportView}
           onGenerateLatest={() =>
@@ -991,16 +881,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         <SelfStructureReportGenerateScreen
           onBack={() => setRoute(selfReportGenerateBackRoute)}
         />
-      ) : route === "weekly" ? (
-        <WeeklyReportMockScreen
-          onBack={() => setRoute("reportHistory")}
-          onOpenMyProfile={onOpenMyProfile}
-        />
-      ) : route === "monthly" ? (
-        <MonthlyReportMockScreen
-          onBack={() => setRoute("reportHistory")}
-          onOpenMyProfile={onOpenMyProfile}
-        />
+      ) : route === "todayQuestionHistory" ? (
+        <TodayQuestionHistoryScreen onBack={() => setRoute("home")} />
       ) : route === "deepInsight" ? (
         <DeepInsightScreen onBack={() => setRoute("home")} />
       ) : (
@@ -1026,6 +908,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           onOpenSelfReportHistory={openSelfReportHistory}
           onOpenMyModelBuild={openMyModelBuild}
           onOpenDeepInsight={openDeepInsight}
+          onOpenTodayQuestionHistory={() => setRoute("todayQuestionHistory")}
           unreadDaily={unreadResolved && unreadByType.daily}
           unreadWeekly={unreadResolved && unreadByType.weekly}
           unreadMonthly={unreadResolved && unreadByType.monthly}
@@ -1047,6 +930,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
           actionHint={tutorialOverlayConfig.actionHint}
+          cardPlacement={
+            tutorialStep === 11 || tutorialStep === 12 ? "top" : "bottom"
+          }
         />
       ) : null}
     </SafeAreaView>
@@ -1069,6 +955,7 @@ function MyWebHome({
   onOpenSelfReportHistory,
   onOpenMyModelBuild,
   onOpenDeepInsight,
+  onOpenTodayQuestionHistory,
   unreadDaily,
   unreadWeekly,
   unreadMonthly,
@@ -1294,6 +1181,19 @@ function MyWebHome({
               color={colors.TEXT_SUBTLE}
             />
           </CocolonPressable>
+
+          <CocolonPressable
+            style={[styles.historyInlineLink, { marginTop: 8 }]}
+            onPress={onOpenTodayQuestionHistory}
+            accessibilityLabel="今日の問い履歴を見る"
+          >
+            <Text style={styles.historyInlineText}>今日の問い履歴を見る</Text>
+            <Ionicons
+              name="chevron-forward"
+              size={16}
+              color={colors.TEXT_SUBTLE}
+            />
+          </CocolonPressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -1345,252 +1245,6 @@ function QuickLink({
         />
       </View>
     </CocolonPressable>
-  );
-}
-
-/* 以下、WeeklyReportScreen / MonthlyReportScreen は
-   いまはルーティングで使ってないけど、
-   getCurrentUserId ベースで Supabase を読むように修正済み。内容は省略せず全部貼っておくね。 */
-
-function getWeeklyRangeForNow() {
-  const now = new Date();
-  const end = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-    23,
-    59,
-    59,
-    999
-  );
-  const start = new Date(end);
-  start.setDate(end.getDate() - 6);
-  start.setHours(0, 0, 0, 0);
-  return { start, end };
-}
-
-function getMonthlyRangeForNow() {
-  const now = new Date();
-  const start = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    1,
-    0,
-    0,
-    0,
-    0
-  );
-  const end = new Date(
-    now.getFullYear(),
-    now.getMonth() + 1,
-    0,
-    23,
-    59,
-    59,
-    999
-  );
-  return { start, end };
-}
-
-function WeeklyReportScreen({ onBack }) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [rows, setRows] = useState([]);
-
-  const { styles } = useThemedStyles();
-
-  const range = useMemo(() => getWeeklyRangeForNow(), []);
-  const title = useMemo(() => {
-    const s = range.start;
-    const e = range.end;
-    const fmt = (d) => `${d.getMonth() + 1}/${d.getDate()}`;
-    return `週報  ${fmt(s)} 〜 ${fmt(e)}`;
-  }, [range]);
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        setError("ユーザー情報を取得できませんでした");
-        setRows([]);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("emotions")
-        .select("id, created_at, emotions, memo")
-        .eq("user_id", userId)
-        .gte("created_at", range.start.toISOString())
-        .lte("created_at", range.end.toISOString())
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      setRows(data || []);
-    } catch (e) {
-      setError(String(e?.message || e));
-    } finally {
-      setLoading(false);
-    }
-  }, [range.start, range.end]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  const summary = useMemo(() => summarize(rows), [rows]);
-
-  return (
-    <View style={styles.reportContainer}>
-      <Header title={title} onBack={onBack} />
-      {loading ? (
-        <ActivityIndicator style={{ marginTop: 16 }} />
-      ) : error ? (
-        <Text style={styles.error}>取得エラー: {error}</Text>
-      ) : (
-        <ReportBody summary={summary} rows={rows} />
-      )}
-    </View>
-  );
-}
-
-function MonthlyReportScreen({ onBack }) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [rows, setRows] = useState([]);
-
-  const { styles } = useThemedStyles();
-
-  const range = useMemo(() => getMonthlyRangeForNow(), []);
-  const title = useMemo(() => {
-    const s = range.start;
-    return `月報  ${s.getFullYear()}/${s.getMonth() + 1}`;
-  }, [range]);
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        setError("ユーザー情報を取得できませんでした");
-        setRows([]);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("emotions")
-        .select("id, created_at, emotions, memo")
-        .eq("user_id", userId)
-        .gte("created_at", range.start.toISOString())
-        .lte("created_at", range.end.toISOString())
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      setRows(data || []);
-    } catch (e) {
-      setError(String(e?.message || e));
-    } finally {
-      setLoading(false);
-    }
-  }, [range.start, range.end]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  const summary = useMemo(() => summarize(rows), [rows]);
-
-  return (
-    <View style={styles.reportContainer}>
-      <Header title={title} onBack={onBack} />
-      {loading ? (
-        <ActivityIndicator style={{ marginTop: 16 }} />
-      ) : error ? (
-        <Text style={styles.error}>取得エラー: {error}</Text>
-      ) : (
-        <ReportBody summary={summary} rows={rows} />
-      )}
-    </View>
-  );
-}
-
-function Header({ title, onBack }) {
-  const { styles } = useThemedStyles();
-
-  return (
-    <View style={styles.headerRow}>
-      <CocolonPressable onPress={onBack} style={styles.backBtn} accessibilityLabel="戻る">
-        <Ionicons
-          name="chevron-back-outline"
-          size={20}
-          color="#374151"
-        />
-        <Text style={styles.backText}>MyWeb</Text>
-      </CocolonPressable>
-      <Text style={styles.reportTitle}>{title}</Text>
-      <View style={{ width: 64 }} />
-    </View>
-  );
-}
-
-function summarize(rows) {
-  const count = rows.length;
-  const emotionCounts = {};
-  for (const r of rows) {
-    const arr = Array.isArray(r.emotions) ? r.emotions : [];
-    for (const e of arr) emotionCounts[e] = (emotionCounts[e] || 0) + 1;
-  }
-  const top = Object.entries(emotionCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 3);
-  return { count, top };
-}
-
-function ReportBody({ summary, rows }) {
-  const { styles } = useThemedStyles();
-
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.summaryCard}>
-        <Text style={styles.summaryTitle}>この期間のまとめ</Text>
-        <Text style={styles.summaryItem}>入力件数：{summary.count}</Text>
-        <Text style={styles.summaryItem}>
-          主要感情：
-          {summary.top
-            .map(([k, v]) => `${k}(${v})`)
-            .join(" / ") || "—"}
-        </Text>
-      </View>
-
-      <FlatList
-        data={rows}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => (
-          <View style={styles.row}>
-            <Text style={styles.dateText}>
-              {new Date(item.created_at).toLocaleString("ja-JP", {
-                month: "numeric",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </Text>
-            <Text style={styles.emotionsText}>
-              {(item.emotions || []).join(", ")}
-            </Text>
-            {!!item.memo && (
-              <Text style={styles.memoText}>{item.memo}</Text>
-            )}
-          </View>
-        )}
-        ListEmptyComponent={
-          <Text style={{ padding: 12, color: "#374151" }}>
-            この期間の入力はありません
-          </Text>
-        }
-        contentContainerStyle={{ paddingBottom: 20 }}
-      />
-    </View>
   );
 }
 

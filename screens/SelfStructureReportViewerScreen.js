@@ -241,22 +241,8 @@ export default function SelfStructureReportViewerScreen({
         <Text style={[styles.headerTitle, themed.headerTitle]} numberOfLines={1}>
           {title}
         </Text>
-        {canViewFullText && String(contentText || "").trim() ? (
-          <TouchableOpacity
-            style={[styles.pdfBtn, themed.pdfBtn]}
-            onPress={() => exportTextToPdf(title, contentText)}
-            activeOpacity={0.85}
-          >
-            <Ionicons
-              name="download-outline"
-              size={18}
-              color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
-            />
-            <Text style={[styles.pdfText, themed.pdfText]}>PDF</Text>
-          </TouchableOpacity>
-        ) : (
-          <View style={{ width: 70 }} />
-        )}
+        {/* PDF保存ボタンは非表示 */}
+        <View style={{ width: 70 }} />
       </View>
 
       {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}

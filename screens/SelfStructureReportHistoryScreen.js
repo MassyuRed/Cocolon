@@ -14,17 +14,18 @@ import {
   Share,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { supabase } from "../lib/supabase";
-import { getCurrentUserId } from "../lib/user";
+import { apiGet, apiPost } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
 
 const TYPE_LABEL = Object.freeze({
-  monthly: "SelfMonthlyReport",
+  monthly: "自己構造",
 });
 
 const TYPE_JP = Object.freeze({
-  monthly: "自己構造（月次）",
+  monthly: "自己構造",
 });
+
+const HISTORY_PAGE_LIMIT = 60;
 
 function formatDateJP(iso) {
   try {
@@ -153,79 +154,31 @@ async function exportTextToPdf(title, text) {
 // === Read/Unread (report_reads) ===
 // MyWeb と同じ既読管理テーブルを利用する。
 // 既読の判定は report_id で行う（myweb_reports / myprofile_reports をまたいでも uuid は衝突しない想定）。
-async function fetchReadReportIdSet(userId, reportIds) {
+async function fetchReadReportIdSet(reportIds) {
   try {
     const ids = Array.isArray(reportIds) ? reportIds.filter(Boolean) : [];
-    if (!userId || ids.length === 0) return new Set();
-
-    const { data, error } = await supabase
-      .from("report_reads")
-      .select("report_id")
-      .eq("user_id", userId)
-      .in("report_id", ids);
-
-    if (error) return new Set();
-    return new Set((data || []).map((r) => r.report_id));
+    if (ids.length === 0) return new Set();
+    const query = ids.map((id) => `report_ids=${encodeURIComponent(String(id))}`).join("&");
+    const json = await apiGet(`/report-reads/status?${query}`);
+    const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
+    return new Set(readIds.map((r) => String(r || "")).filter(Boolean));
   } catch {
     return new Set();
   }
 }
 
-async function markReportAsRead(userId, reportId) {
-  if (!userId || !reportId) return false;
-  const now = new Date().toISOString();
-
-  // 既存の Supabase スキーマ差異を吸収するため、複数パターンで upsert を試す
-  const candidates = [
-    {
-      row: { user_id: userId, report_id: reportId, read_at: now },
-      onConflict: "user_id,report_id",
-    },
-    {
-      row: {
-        user_id: userId,
-        report_id: reportId,
-        report_table: "myprofile_reports",
-        read_at: now,
-      },
-      onConflict: "user_id,report_table,report_id",
-    },
-    {
-      row: {
-        user_id: userId,
-        report_id: reportId,
-        report_scope: "myprofile",
-        read_at: now,
-      },
-      onConflict: "user_id,report_scope,report_id",
-    },
-    {
-      row: { user_id: userId, report_id: reportId, scope: "myprofile", read_at: now },
-      onConflict: "user_id,scope,report_id",
-    },
-    // fallback (read_at 無し)
-    { row: { user_id: userId, report_id: reportId }, onConflict: "user_id,report_id" },
-    {
-      row: { user_id: userId, report_id: reportId, report_table: "myprofile_reports" },
-      onConflict: "user_id,report_table,report_id",
-    },
-    {
-      row: { user_id: userId, report_id: reportId, report_scope: "myprofile" },
-      onConflict: "user_id,report_scope,report_id",
-    },
-    {
-      row: { user_id: userId, report_id: reportId, scope: "myprofile" },
-      onConflict: "user_id,scope,report_id",
-    },
-  ];
-
-  for (const c of candidates) {
-    const { error } = await supabase
-      .from("report_reads")
-      .upsert(c.row, { onConflict: c.onConflict });
-    if (!error) return true;
+async function markReportAsRead(reportId) {
+  if (!reportId) return false;
+  try {
+    await apiPost("/report-reads/mark", {
+      report_id: String(reportId),
+      report_table: "myprofile_reports",
+      report_scope: "myprofile",
+    });
+    return true;
+  } catch {
+    return false;
   }
-  return false;
 }
 
 export default function SelfStructureReportHistoryScreen({
@@ -237,6 +190,9 @@ export default function SelfStructureReportHistoryScreen({
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [nextOffset, setNextOffset] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
   const { themeName, colors } = useTheme();
@@ -279,88 +235,75 @@ export default function SelfStructureReportHistoryScreen({
 
   const title = `${TYPE_LABEL[reportType] || "Report"}の履歴`;
 
-  const load = useCallback(async () => {
+  const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
     setErrorMsg("");
-    setLoading(true);
+    if (append) setLoadingMore(true);
+    else setLoading(true);
     try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        setRows([]);
-        setErrorMsg("ユーザー情報を取得できませんでした（ログインしてください）");
-        return;
-      }
-
-      const q = supabase
-        .from("myprofile_reports")
-        .select(
-          "id, report_type, title, period_start, period_end, generated_at, updated_at"
-        )
-        .eq("user_id", userId)
-        .eq("report_type", reportType)
-        .order("period_end", { ascending: false })
-        .limit(60);
-
-      const { data, error } = await q;
-
-      if (error) {
-        setRows([]);
-        setErrorMsg(String(error.message || "取得に失敗しました"));
-      } else {
-        const baseRows = Array.isArray(data) ? data : [];
-
-        // 既読情報を付与（既読の行は少し暗く表示）
-        const readSet = await fetchReadReportIdSet(
-          userId,
-          baseRows.map((r) => r.id)
-        );
-        setRows(baseRows.map((r) => ({ ...r, isRead: readSet.has(r.id) })));
-      }
+      const json = await apiGet(
+        `/myprofile/reports/history?report_type=${encodeURIComponent(reportType)}&limit=${HISTORY_PAGE_LIMIT}&offset=${encodeURIComponent(offset)}`
+      );
+      const baseRows = Array.isArray(json?.items) ? json.items : [];
+      const readSet = await fetchReadReportIdSet(baseRows.map((r) => r.id));
+      const mapped = baseRows.map((r) => ({ ...r, isRead: readSet.has(r.id) }));
+      setRows((prev) => {
+        if (!append) return mapped;
+        const existing = new Set((prev || []).map((r) => String(r?.id || "")));
+        const merged = [...(prev || [])];
+        for (const row of mapped) {
+          const id = String(row?.id || "");
+          if (!id || existing.has(id)) continue;
+          existing.add(id);
+          merged.push(row);
+        }
+        return merged;
+      });
+      setHasMore(Boolean(json?.has_more));
+      setNextOffset(
+        typeof json?.next_offset === "number"
+          ? json.next_offset
+          : json?.next_offset != null
+            ? Number(json.next_offset)
+            : null
+      );
     } catch (e) {
-      setRows([]);
+      if (!append) setRows([]);
+      setHasMore(false);
+      setNextOffset(null);
       setErrorMsg(String(e?.message || e));
     } finally {
-      setLoading(false);
+      if (append) setLoadingMore(false);
+      else setLoading(false);
     }
   }, [reportType]);
 
   useEffect(() => {
-    load();
+    load({ append: false, offset: 0 });
   }, [load]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await load();
+    await load({ append: false, offset: 0 });
     setRefreshing(false);
   }, [load]);
+
+  const loadMore = useCallback(async () => {
+    if (loading || refreshing || loadingMore || !hasMore || nextOffset == null) return;
+    await load({ append: true, offset: nextOffset });
+  }, [loading, refreshing, loadingMore, hasMore, nextOffset, load]);
 
   const handleOpen = useCallback(
     async (id) => {
       try {
-        const userId = await getCurrentUserId();
-        if (!userId) {
-          Alert.alert("エラー", "ユーザー情報を取得できませんでした。");
+        const json = await apiGet(`/myprofile/reports/${encodeURIComponent(String(id))}`);
+        const data = json?.item;
+        if (!data) {
+          Alert.alert("取得エラー", "レポートの取得に失敗しました");
           return;
         }
 
-        const { data, error } = await supabase
-          .from("myprofile_reports")
-          .select(
-            "id, report_type, title, period_start, period_end, content_text, content_json, generated_at, updated_at"
-          )
-          .eq("id", id)
-          .eq("user_id", userId)
-          .single();
-
-        if (error) {
-          Alert.alert(
-            "取得エラー",
-            String(error.message || "レポートの取得に失敗しました")
-          );
-          return;
-        }
-        // 開いたら既読にする（失敗しても閲覧は継続）
         try {
-          const ok = await markReportAsRead(userId, id);
+          const ok = await markReportAsRead(id);
           if (ok) {
             setRows((prev) =>
               (prev || []).map((r) =>
@@ -383,24 +326,10 @@ export default function SelfStructureReportHistoryScreen({
   const handleExport = useCallback(
     async (id) => {
       try {
-        const userId = await getCurrentUserId();
-        if (!userId) {
-          Alert.alert("エラー", "ユーザー情報を取得できませんでした。");
-          return;
-        }
-
-        const { data, error } = await supabase
-          .from("myprofile_reports")
-          .select("title, content_text")
-          .eq("id", id)
-          .eq("user_id", userId)
-          .single();
-
-        if (error) {
-          Alert.alert(
-            "取得エラー",
-            String(error.message || "レポートの取得に失敗しました")
-          );
+        const json = await apiGet(`/myprofile/reports/${encodeURIComponent(String(id))}`);
+        const data = json?.item;
+        if (!data) {
+          Alert.alert("取得エラー", "レポートの取得に失敗しました");
           return;
         }
 
@@ -455,7 +384,7 @@ export default function SelfStructureReportHistoryScreen({
             style={{ marginRight: 6 }}
           />
           <Text style={[styles.generateText, themed.generateText]}>
-            最新の自己構造分析レポートを生成
+            現在の自己構造を見る
           </Text>
         </TouchableOpacity>
       </View>
@@ -492,7 +421,7 @@ export default function SelfStructureReportHistoryScreen({
                   themed.listEmptyText,
                 ]}
               >
-                まだ履歴がありません（「最新の自己構造分析レポートを生成」から作成できます）
+                まだ履歴がありません（変化があった月だけここに表示されます）
               </Text>
             ) : null
           }
@@ -521,6 +450,21 @@ export default function SelfStructureReportHistoryScreen({
               />
             </TouchableOpacity>
           )}
+          ListFooterComponent={
+            loadingMore ? (
+              <View style={styles.listFooter}>
+                <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
+              </View>
+            ) : hasMore ? (
+              <TouchableOpacity
+                style={styles.loadMoreBtn}
+                onPress={loadMore}
+                activeOpacity={0.85}
+              >
+                <Text style={[styles.loadMoreText, themed.rowMeta]}>さらに表示</Text>
+              </TouchableOpacity>
+            ) : <View style={styles.listFooterSpacer} />
+          }
         />
       )}
     </SafeAreaView>
@@ -578,6 +522,10 @@ const styles = StyleSheet.create({
   rowTitle: { fontSize: 14, fontWeight: "800", color: "#111827" },
   rowSub: { marginTop: 2, fontSize: 12, color: "#374151" },
   rowMeta: { marginTop: 2, fontSize: 11, color: "#6B7280" },
+  listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
+  listFooterSpacer: { height: 12 },
+  loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
+  loadMoreText: { fontSize: 13, fontWeight: "700", color: "#374151" },
 
   iconBtn: {
     marginLeft: 10,

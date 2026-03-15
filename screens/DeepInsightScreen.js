@@ -21,6 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
+import { apiFetch } from "../lib/apiClient";
 
 // ---- API base ----
 // MyProfile と同様に、まずは Render 上の MashOS API を利用
@@ -184,7 +185,7 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
       if (!accessToken) throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
 
       const url = `${QUESTIONS_ENDPOINT}?lang=ja`;
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -283,7 +284,7 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
         return;
       }
 
-      const res = await fetch(ANSWERS_ENDPOINT, {
+      const res = await apiFetch(ANSWERS_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

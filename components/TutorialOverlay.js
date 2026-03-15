@@ -97,6 +97,8 @@ export function measureTutorialTarget(targetRef, rootRef) {
         y: Number(y),
         width: Number(width),
         height: Number(height),
+        right: Number(x) + Number(width),
+        bottom: Number(y) + Number(height),
       });
     };
 

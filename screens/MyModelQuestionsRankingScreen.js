@@ -15,6 +15,7 @@ import CocolonBackButton from "../components/CocolonBackButton";
 
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
+import { apiFetch } from "../lib/apiClient";
 
 const API_BASE =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
@@ -32,7 +33,7 @@ async function fetchJsonWithAuth(url) {
   const token = await getAccessToken();
   if (!token) throw new Error("access_token が取得できませんでした");
 
-  const res = await fetch(url, {
+  const res = await apiFetch(url, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

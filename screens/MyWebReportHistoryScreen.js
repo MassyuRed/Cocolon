@@ -16,7 +16,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
-import { getCurrentUserId } from "../lib/user";
+import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
 // Subscription (MyWeb paywall)
 // - free: weekly/monthly are chart-only (no text / no PDF)
@@ -29,6 +29,7 @@ const SUBSCRIPTION_ME_ENDPOINT = `${MYMODEL_API_BASE_URL}/subscription/me`;
 const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ensure`;
 // Phase2: View is API-driven (READY only)
 const MYWEB_REPORTS_READY_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ready`;
+const READY_PAGE_LIMIT = 50;
 
 async function getAccessToken() {
   try {
@@ -52,11 +53,11 @@ function extractReadyItems(payload) {
   return [];
 }
 
-async function fetchReadyReports(accessToken, reportType, limit = 50) {
+async function fetchReadyReports(accessToken, reportType, { limit = READY_PAGE_LIMIT, offset = 0 } = {}) {
   const url = `${MYWEB_REPORTS_READY_ENDPOINT}?report_type=${encodeURIComponent(
     reportType
-  )}&limit=${encodeURIComponent(limit)}`;
-  const res = await fetch(url, {
+  )}&limit=${encodeURIComponent(limit)}&offset=${encodeURIComponent(offset)}`;
+  const res = await apiFetch(url, {
     method: "GET",
     headers: { Authorization: `Bearer ${accessToken}` },
   });
@@ -74,6 +75,13 @@ async function fetchReadyReports(accessToken, reportType, limit = 50) {
     json,
     items: extractReadyItems(json),
     viewerTier: typeof json?.viewer_tier === "string" ? json.viewer_tier : null,
+    hasMore: Boolean(json?.has_more),
+    nextOffset:
+      typeof json?.next_offset === "number"
+        ? json.next_offset
+        : json?.next_offset != null
+          ? Number(json.next_offset)
+          : null,
   };
 }
 
@@ -102,7 +110,7 @@ function canViewMyWebFullText(tier) {
 
 
 // 🕛 配布スケジュール（JST固定）
-import { formatJstDateTime, getNextDistributionUtcMs } from "./MyWebReportScheduler";
+import { formatJstDateTime, getNextDistributionUtcMs } from "./MyWebReportScheduleUtils";
 
 const TYPE_LABEL = Object.freeze({
   daily: "DailyReport",
@@ -270,6 +278,9 @@ export default function MyWebReportHistoryScreen({
   const [readIdSet, setReadIdSet] = useState(() => new Set()); // report_id string
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [nextOffset, setNextOffset] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
   const normalizedReportType = useMemo(() => normalizeReportType(reportType), [reportType]);
@@ -301,7 +312,7 @@ export default function MyWebReportHistoryScreen({
           return;
         }
 
-        const res = await fetch(SUBSCRIPTION_ME_ENDPOINT, {
+        const res = await apiFetch(SUBSCRIPTION_ME_ENDPOINT, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -426,7 +437,7 @@ export default function MyWebReportHistoryScreen({
       // ✅ weekly / monthly は不足時のみ ensure、daily は配布済み READY を読むだけにする
       try {
         if (accessToken && shouldEnsureOnOpen) {
-          const res = await fetch(MYWEB_REPORTS_ENSURE_ENDPOINT, {
+          const res = await apiFetch(MYWEB_REPORTS_ENSURE_ENDPOINT, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -455,6 +466,8 @@ export default function MyWebReportHistoryScreen({
         if (isStale()) return;
         setRows([]);
         setReadIdSet(new Set());
+        setHasMore(false);
+        setNextOffset(null);
         setErrorMsg("ログイン情報を取得できませんでした（ログインしてください）");
         return;
       }
@@ -462,11 +475,13 @@ export default function MyWebReportHistoryScreen({
       // ✅ Phase2: 履歴は /myweb/reports/ready から取得（READY/PUBLISHED + retention/tier はAPIで統一）
       let ready;
       try {
-        ready = await fetchReadyReports(accessToken, normalizedReportType, 50);
+        ready = await fetchReadyReports(accessToken, normalizedReportType, { limit: READY_PAGE_LIMIT, offset: 0 });
       } catch (err) {
         if (isStale()) return;
         setRows([]);
         setReadIdSet(new Set());
+        setHasMore(false);
+        setNextOffset(null);
         setErrorMsg(`取得に失敗しました (${err?.status || "network"})`);
         console.warn(
           "MyWebReportHistoryScreen: myweb/reports/ready failed",
@@ -486,7 +501,8 @@ export default function MyWebReportHistoryScreen({
         setSubscriptionTier(normalizeSubscriptionTier(ready.viewerTier));
       }
 
-      let list = Array.isArray(ready?.items) ? ready.items : [];
+      let activeReady = ready;
+      let list = Array.isArray(activeReady?.items) ? activeReady.items : [];
 
       // ensure 直後は inspect 完了前で READY がまだ見えないことがあるため、
       // 空配列のときだけ短時間だけ再取得する。
@@ -494,7 +510,8 @@ export default function MyWebReportHistoryScreen({
         for (const waitMs of [1200, 2500]) {
           await delay(waitMs);
           try {
-            const retryReady = await fetchReadyReports(accessToken, normalizedReportType, 50);
+            const retryReady = await fetchReadyReports(accessToken, normalizedReportType, { limit: READY_PAGE_LIMIT, offset: 0 });
+            activeReady = retryReady;
             if (typeof retryReady?.viewerTier === "string") {
               setSubscriptionTier(normalizeSubscriptionTier(retryReady.viewerTier));
             }
@@ -521,31 +538,20 @@ export default function MyWebReportHistoryScreen({
       }
 
       setRows(list);
+      setHasMore(Boolean(activeReady?.hasMore));
+      setNextOffset(activeReady?.nextOffset ?? null);
       console.log("rows set:", list.length, "reportType =", normalizedReportType);
 
-      // ✅ 既読状態の取得（report_reads）: 既読はSupabase側のローカル機能として保持（失敗しても履歴表示は継続）
+      // 既読状態は report-reads API から取得
       try {
-        const userId = await getCurrentUserId();
         const ids = list.map((r) => String(r?.id || "")).filter(Boolean);
-        if (!userId || ids.length === 0) {
+        if (ids.length === 0) {
           setReadIdSet(new Set());
         } else {
-          const { data: reads, error: rErr } = await supabase
-            .from("report_reads")
-            .select("report_id")
-            .eq("user_id", userId)
-            .in("report_id", ids);
-
-          if (rErr) {
-            setReadIdSet(new Set());
-          } else {
-            const set = new Set(
-              (Array.isArray(reads) ? reads : [])
-                .map((x) => String(x?.report_id || ""))
-                .filter(Boolean)
-            );
-            setReadIdSet(set);
-          }
+          const query = ids.map((id) => `report_ids=${encodeURIComponent(id)}`).join("&");
+          const json = await apiGet(`/report-reads/status?${query}`);
+          const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
+          setReadIdSet(new Set(readIds.map((x) => String(x || "")).filter(Boolean)));
         }
       } catch {
         setReadIdSet(new Set());
@@ -554,6 +560,8 @@ export default function MyWebReportHistoryScreen({
       if (isStale()) return;
       setRows([]);
       setReadIdSet(new Set());
+      setHasMore(false);
+      setNextOffset(null);
       setErrorMsg(String(e?.message || e));
     } finally {
       if (!isStale()) {
@@ -575,6 +583,55 @@ export default function MyWebReportHistoryScreen({
     setRefreshing(false);
   }, [load]);
 
+  const loadMore = useCallback(async () => {
+    if (loading || refreshing || loadingMore || !hasMore || nextOffset == null) return;
+    setLoadingMore(true);
+    try {
+      const accessToken = await getAccessToken();
+      if (!accessToken) return;
+      const ready = await fetchReadyReports(accessToken, normalizedReportType, {
+        limit: READY_PAGE_LIMIT,
+        offset: nextOffset,
+      });
+      if (typeof ready?.viewerTier === "string") {
+        setSubscriptionTier(normalizeSubscriptionTier(ready.viewerTier));
+      }
+      const list = Array.isArray(ready?.items) ? ready.items : [];
+      setRows((prev) => {
+        const existing = new Set((prev || []).map((r) => String(r?.id || "")));
+        const merged = [...(prev || [])];
+        for (const item of list) {
+          const id = String(item?.id || "");
+          if (!id || existing.has(id)) continue;
+          existing.add(id);
+          merged.push(item);
+        }
+        return merged;
+      });
+      setHasMore(Boolean(ready?.hasMore));
+      setNextOffset(ready?.nextOffset ?? null);
+      try {
+        const ids = list.map((r) => String(r?.id || "")).filter(Boolean);
+        if (ids.length > 0) {
+          const query = ids.map((id) => `report_ids=${encodeURIComponent(id)}`).join("&");
+          const json = await apiGet(`/report-reads/status?${query}`);
+          const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
+          setReadIdSet((prev) => {
+            const next = new Set(prev);
+            for (const rid of readIds) next.add(String(rid || ""));
+            return next;
+          });
+        }
+      } catch {
+        // ignore incremental read-status failure
+      }
+    } catch (e) {
+      console.warn("MyWebReportHistoryScreen: loadMore failed", e);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [loading, refreshing, loadingMore, hasMore, nextOffset, normalizedReportType]);
+
   const handleOpen = useCallback(
     async (id) => {
       try {
@@ -588,7 +645,7 @@ export default function MyWebReportHistoryScreen({
           const accessToken = await getAccessToken();
           if (accessToken) {
             try {
-              const ready = await fetchReadyReports(accessToken, normalizedReportType, 50);
+              const ready = await fetchReadyReports(accessToken, normalizedReportType, { limit: Math.max(rows.length, READY_PAGE_LIMIT), offset: 0 });
               const list = Array.isArray(ready?.items) ? ready.items : [];
               data = list.find((r) => String(r?.id || "") === rid) || null;
             } catch {
@@ -602,20 +659,13 @@ export default function MyWebReportHistoryScreen({
           return;
         }
 
-        // ✅ 既読を記録（失敗しても閲覧は継続）
+        // 既読を記録（失敗しても閲覧は継続）
         try {
-          const userId = await getCurrentUserId();
-          if (!userId) throw new Error("user_id missing");
-
-          const { error: insErr } = await supabase
-            .from("report_reads")
-            .insert({ user_id: userId, report_id: id });
-
-          // 既に既読（PK重複）の場合は無視する
-          const msg = String(insErr?.message || "");
-          const isDup = /duplicate key|already exists|23505/i.test(msg);
-          if (insErr && !isDup) throw insErr;
-
+          await apiPost("/report-reads/mark", {
+            report_id: String(id),
+            report_table: "myweb_reports",
+            report_scope: "myweb",
+          });
           setReadIdSet((prev) => {
             const next = new Set(prev);
             next.add(String(id));
@@ -673,7 +723,7 @@ export default function MyWebReportHistoryScreen({
         const accessToken = await getAccessToken();
         if (accessToken) {
           try {
-            const ready = await fetchReadyReports(accessToken, normalizedReportType, 50);
+            const ready = await fetchReadyReports(accessToken, normalizedReportType, { limit: Math.max(rows.length, READY_PAGE_LIMIT), offset: 0 });
             const list = Array.isArray(ready?.items) ? ready.items : [];
             data = list.find((r) => String(r?.id || "") === rid) || null;
           } catch {
@@ -836,6 +886,21 @@ export default function MyWebReportHistoryScreen({
               <Ionicons name="chevron-forward" size={18} color={isDark ? colors.TEXT_SUBTLE : "#9CA3AF"} />
             </TouchableOpacity>
           )}
+          ListFooterComponent={
+            loadingMore ? (
+              <View style={styles.listFooter}>
+                <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
+              </View>
+            ) : hasMore ? (
+              <TouchableOpacity
+                style={styles.loadMoreBtn}
+                onPress={loadMore}
+                activeOpacity={0.85}
+              >
+                <Text style={[styles.loadMoreText, themed.rowMeta]}>さらに表示</Text>
+              </TouchableOpacity>
+            ) : <View style={styles.listFooterSpacer} />
+          }
         />
       )}
     </SafeAreaView>
@@ -920,6 +985,10 @@ const styles = StyleSheet.create({
   rowTitle: { fontSize: 14, fontWeight: "800", color: "#111827" },
   rowSub: { marginTop: 2, fontSize: 12, color: "#374151" },
   rowMeta: { marginTop: 2, fontSize: 11, color: "#6B7280" },
+  listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
+  listFooterSpacer: { height: 12 },
+  loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
+  loadMoreText: { fontSize: 13, fontWeight: "700", color: "#374151" },
 
   iconBtn: {
     marginLeft: 10,

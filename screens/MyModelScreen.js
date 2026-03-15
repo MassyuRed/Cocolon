@@ -32,6 +32,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import UnreadBadge from "../components/UnreadBadge";
 import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
 import { makeUiTokens } from "../ui/uiTokens";
+import { apiFetch } from "../lib/apiClient";
 
 /**
  * MyModelScreen (Home)
@@ -74,7 +75,7 @@ const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
     body:
       "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
     owner_user_id: "tutorial-follow-1",
-    display_name: "佐藤 花子",
+    display_name: "華恋",
     friend_code: "HANAKO123",
     is_tutorial: true,
     tutorial_kind: "mock",
@@ -161,6 +162,7 @@ export default function MyModelScreen({ route } = {}) {
   const createButtonRef = useRef(null);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const modalOverlayRootRef = useRef(null);
+  const tutorialCreateQuestionInputWrapRef = useRef(null);
   const tutorialCreateInputWrapRef = useRef(null);
   const tutorialCreateSaveButtonRef = useRef(null);
   const [tutorialModalTargetRect, setTutorialModalTargetRect] = useState(null);
@@ -217,7 +219,7 @@ export default function MyModelScreen({ route } = {}) {
 
   const fetchGlobalSummary = useCallback(async () => {
     try {
-      const res = await fetch(GLOBAL_SUMMARY_ENDPOINT, { method: "GET" });
+      const res = await apiFetch(GLOBAL_SUMMARY_ENDPOINT, { method: "GET" });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
         throw new Error(String(json?.detail || json?.message || `HTTP ${res.status}`));
@@ -440,7 +442,7 @@ export default function MyModelScreen({ route } = {}) {
 
     const targetRef = tutorialCreateAnswerFilled
       ? tutorialCreateSaveButtonRef
-      : tutorialCreateInputWrapRef;
+      : tutorialCreateQuestionInputWrapRef;
 
     const rect = await measureTutorialTarget(targetRef, modalOverlayRootRef);
     setTutorialModalTargetRect(rect);
@@ -817,7 +819,7 @@ export default function MyModelScreen({ route } = {}) {
       params.append("limit", "20");
       const url = `${MYMODEL_RECOMMEND_USERS_ENDPOINT}?${params.toString()}`;
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -874,7 +876,7 @@ export default function MyModelScreen({ route } = {}) {
       params.append("mode", mode);
       const url = `${QNA_TRENDING_ENDPOINT}?${params.toString()}`;
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -947,7 +949,7 @@ export default function MyModelScreen({ route } = {}) {
       // default: exclude_followed=true / exclude_self=true (API側デフォルト)
       const url = `${QNA_HOLDERS_ENDPOINT}?${params.toString()}`;
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -1212,7 +1214,7 @@ export default function MyModelScreen({ route } = {}) {
           </Text>
 
           <CocolonButton
-            variant="primary"
+            variant="secondary"
             style={{ marginTop: 10 }}
             onPress={() => {
               if (isTutorialMode) {
@@ -1232,10 +1234,10 @@ export default function MyModelScreen({ route } = {}) {
               <Ionicons
                 name="search-outline"
                 size={18}
-                color="#FFFFFF"
+                color={colors.TEXT_ON_LIGHT}
                 style={{ marginRight: 6 }}
               />
-              <Text style={styles.goldButtonText}>新しいユーザーを探す</Text>
+              <Text style={styles.neutralButtonText}>新しいユーザーを探す</Text>
             </View>
             </CocolonButton>
           </View>
@@ -1339,26 +1341,28 @@ export default function MyModelScreen({ route } = {}) {
             </View>
 
             <ScrollView style={styles.listArea} keyboardShouldPersistTaps="handled">
-              <View style={styles.tutorialQuestionCard}>
-                <Text style={styles.tutorialQuestionLabel}>問い</Text>
-                <Text style={styles.recoSummaryText}>{TUTORIAL_REFLECTION_QUESTION}</Text>
-              </View>
+              <View ref={tutorialCreateQuestionInputWrapRef} collapsable={false}>
+                <View style={styles.tutorialQuestionCard}>
+                  <Text style={styles.tutorialQuestionLabel}>問い</Text>
+                  <Text style={styles.recoSummaryText}>{TUTORIAL_REFLECTION_QUESTION}</Text>
+                </View>
 
-              <Text style={[styles.recoSectionLabel, { marginTop: 10 }]}>あなたの回答</Text>
-              <View ref={tutorialCreateInputWrapRef} collapsable={false}>
-                <TextInput
-                style={styles.tutorialTextArea}
-                placeholder="ここに回答を書いてください。"
-                placeholderTextColor={colors.TEXT_SUBTLE}
-                value={tutorialCreateAnswer}
-                onChangeText={(v) => {
-                  setTutorialCreateAnswer(v);
-                  if (tutorialCreateError) setTutorialCreateError("");
-                }}
-                multiline
-                textAlignVertical="top"
-                editable={!tutorialCreateSubmitting}
-                />
+                <Text style={[styles.recoSectionLabel, { marginTop: 10 }]}>あなたの回答</Text>
+                <View ref={tutorialCreateInputWrapRef} collapsable={false}>
+                  <TextInput
+                  style={styles.tutorialTextArea}
+                  placeholder="ここに回答を書いてください。"
+                  placeholderTextColor={colors.TEXT_SUBTLE}
+                  value={tutorialCreateAnswer}
+                  onChangeText={(v) => {
+                    setTutorialCreateAnswer(v);
+                    if (tutorialCreateError) setTutorialCreateError("");
+                  }}
+                  multiline
+                  textAlignVertical="top"
+                  editable={!tutorialCreateSubmitting}
+                  />
+                </View>
               </View>
 
               <Text style={styles.tutorialHelperText}>
@@ -1785,12 +1789,12 @@ function createStyles(COLORS, ui) {
       fontSize: 11,
       fontWeight: "800",
       letterSpacing: 0.3,
-      color: "#000000",
+      color: COLORS.TEXT_ON_LIGHT,
     },
     globalSummaryText: {
       fontSize: 12,
       lineHeight: 18,
-      color: "#000000",
+      color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 2,
     },
 
@@ -1970,6 +1974,12 @@ function createStyles(COLORS, ui) {
       fontSize: 13,
       fontWeight: "900",
       color: "#FFFFFF",
+      letterSpacing: 0.6,
+    },
+    neutralButtonText: {
+      fontSize: 13,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
       letterSpacing: 0.6,
     },
 

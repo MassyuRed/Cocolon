@@ -1,0 +1,39 @@
+name: phase6-contract-guards
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  contract-guards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
+            services/ai_inference/requirements.txt
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r services/ai_inference/requirements.txt
+          pip install pytest python-multipart
+
+      - name: Guard RN surface from direct Supabase usage
+        run: python scripts/check_no_direct_supabase.py
+
+      - name: Run API contract tests
+        env:
+          SUPABASE_URL: https://example.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: test-service-role
+          MYMODEL_APP_NAME: Cocolon Test App
+        run: pytest -q tests/contract

@@ -14,8 +14,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
-import { getCurrentUserId } from "../lib/user";
 import { useTheme } from "../theme/ThemeContext";
+import { apiJson, apiFetch } from "../lib/apiClient";
 
 const API_BASE = "https://mashos-api.onrender.com";
 const EMOTION_SECRET_URL = `${API_BASE}/emotion/secret`;
@@ -394,7 +394,7 @@ export default function MyWebHistoryScreen({ onBack }) {
         };
 
         const doFetch = async (payload) => {
-          return await fetch(EMOTION_HISTORY_SEARCH_URL, {
+          return await apiFetch(EMOTION_HISTORY_SEARCH_URL, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -531,7 +531,7 @@ export default function MyWebHistoryScreen({ onBack }) {
           return;
         }
 
-        const res = await fetch(EMOTION_SECRET_URL, {
+        const res = await apiFetch(EMOTION_SECRET_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -576,34 +576,9 @@ export default function MyWebHistoryScreen({ onBack }) {
     setDeletingId(row.id);
     setErrorMsg("");
     try {
-      const userId = await getCurrentUserId();
-      if (!userId) {
-        setErrorMsg("ユーザー情報を取得できませんでした（ログインしてください）");
-        return;
-      }
-
-      // NOTE:
-      // - PostgREST は条件に一致する行が 0 件でもエラーにならない（204）ため、
-      //   「画面上は消えたがDBからは消えていない」状態を避けるために、
-      //   delete の戻り（deletedRows）で実際に削除できたかを判定する。
-      const { data: deletedRows, error } = await supabase
-        .from("emotions")
-        .delete()
-        .eq("id", row.id)
-        .eq("user_id", userId)
-        .select("id");
-
-      if (error) {
-        setErrorMsg(String(error.message || "削除に失敗しました"));
-        return;
-      }
-
-      // 0件なら、権限（RLS）/条件不一致などで削除できていない可能性が高い
-      if (!Array.isArray(deletedRows) || deletedRows.length === 0) {
-        setErrorMsg("削除できませんでした（権限設定/RLSをご確認ください）");
-        return;
-      }
-
+      await apiJson(`/emotion/history/${encodeURIComponent(String(row.id))}`, {
+        method: "DELETE",
+      });
       setRows((prev) => prev.filter((r) => r.id !== row.id));
     } catch (e) {
       setErrorMsg(String(e?.message || e));

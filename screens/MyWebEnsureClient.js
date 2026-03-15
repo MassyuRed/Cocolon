@@ -2,6 +2,7 @@
 // Phase2.5: クライアント側の「生成/集計/保存」を廃止し、MashOS(MyWeb ensure API)に寄せるための薄いAPIクライアント
 
 import { supabase } from "../lib/supabase";
+import { apiFetch } from "../lib/apiClient";
 
 // MashOS base
 const API_BASE =
@@ -38,7 +39,7 @@ export async function ensureMyWebReports({ types, force = false, signal } = {}) 
   const headers = { "Content-Type": "application/json" };
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
 
-  const res = await fetch(ENSURE_ENDPOINT, {
+  const res = await apiFetch(ENSURE_ENDPOINT, {
     method: "POST",
     headers,
     body: JSON.stringify({ types: t, force: !!force }),

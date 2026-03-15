@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Text, View, ActivityIndicator, AppState, Platform, StatusBar, Alert } from "react-native";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { NavigationContainer, createNavigationContainerRef, StackActions } from "@react-navigation/native";
@@ -67,6 +67,7 @@ import {
 // Supabase (Friends unread badge)
 import { supabase } from "./lib/supabase";
 import { getCurrentUserId } from "./lib/user";
+import { apiGet, apiPost, apiFetch } from "./lib/apiClient";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
@@ -173,13 +174,13 @@ function GlobalFrameLayout({ children, frameEnabled }) {
 }
 
 // ------------------------------------------------------------
-// Push notification tap -> open Friends tab
-// - Keep this minimal: current Push spec uses only emotion content
-// - Any notification tap opens the Friends screen
+// Push notification tap -> open target tab
+// - Friends / Input / MyWeb を通知 data から選ぶ
+// - 未知の通知は Friends にフォールバックする
 // ------------------------------------------------------------
 export const navigationRef = createNavigationContainerRef();
 
-let __pendingOpenFriendsFromNotification = false;
+let __pendingOpenRouteFromNotification = null;
 
 function hasRouteName(state, targetName) {
   if (!state) return false;
@@ -193,31 +194,90 @@ function hasRouteName(state, targetName) {
   return false;
 }
 
-function canNavigateToFriends() {
+function canNavigateToRoute(targetName) {
   try {
     const rootState = navigationRef.getRootState();
-    return hasRouteName(rootState, "Friends");
+    return hasRouteName(rootState, targetName);
   } catch {
     return false;
   }
 }
 
-function tryOpenFriendsIfPending() {
-  if (!__pendingOpenFriendsFromNotification) return;
+function buildMyWebNotificationParams(data) {
+  const now = Date.now();
+  const type = String(data?.type || "").trim().toLowerCase();
+  const openMode = String(data?.open_mode || "").trim();
+  const reportType = String(data?.report_type || "").trim().toLowerCase();
+  const selfReportType = String(data?.self_report_type || "").trim().toLowerCase();
+
+  if (type === "report_distribution") {
+    if (openMode === "reportHistory" && ["daily", "weekly", "monthly"].includes(reportType)) {
+      return {
+        openReportHistory: true,
+        openReportHistoryType: reportType,
+        openReportHistoryAt: now,
+      };
+    }
+    if (openMode === "selfReportHistory" && selfReportType === "monthly") {
+      return {
+        openSelfReportHistory: true,
+        openSelfReportHistoryAt: now,
+      };
+    }
+    return {
+      openDistributionHome: true,
+      openDistributionHomeAt: now,
+    };
+  }
+
+  if (["daily", "weekly", "monthly"].includes(reportType)) {
+    return {
+      openReportHistory: true,
+      openReportHistoryType: reportType,
+      openReportHistoryAt: now,
+    };
+  }
+
+  return {
+    openDistributionHome: true,
+    openDistributionHomeAt: now,
+  };
+}
+
+function resolveNotificationTargetRoute(remoteMessage) {
+  const data = remoteMessage?.data || {};
+  const type = String(data?.type || "").trim().toLowerCase();
+  const screen = String(data?.screen || "").trim();
+
+  if (type === "today_question" || screen === "Input") {
+    return { name: "Input" };
+  }
+  if (type === "report_distribution") {
+    return { name: "MyWeb", params: buildMyWebNotificationParams(data) };
+  }
+  if (type === "myweb_report" || screen === "MyWeb") {
+    return { name: "MyWeb", params: buildMyWebNotificationParams(data) };
+  }
+  return { name: "Friends" };
+}
+
+function tryOpenRouteIfPending() {
+  const target = __pendingOpenRouteFromNotification;
+  if (!target?.name) return;
   if (!navigationRef.isReady()) return;
-  if (!canNavigateToFriends()) return;
+  if (!canNavigateToRoute(target.name)) return;
 
   try {
-    navigationRef.navigate("Friends");
-    __pendingOpenFriendsFromNotification = false;
+    navigationRef.navigate(target.name, target.params || undefined);
+    __pendingOpenRouteFromNotification = null;
   } catch {
     // keep pending; will retry when navigation becomes ready
   }
 }
 
-function requestOpenFriendsFromNotification() {
-  __pendingOpenFriendsFromNotification = true;
-  tryOpenFriendsIfPending();
+function requestOpenRouteFromNotification(remoteMessage) {
+  __pendingOpenRouteFromNotification = resolveNotificationTargetRoute(remoteMessage);
+  tryOpenRouteIfPending();
 }
 
 // ★ カスタムTabBar：hidden screens（Account/SubscriptionSelect）を非表示にしつつ、幅は5つ分で均等に
@@ -289,13 +349,14 @@ function InputStackNavigator() {
   );
 }
 
-function MyWebStackNavigator({ onSetMymodelLinkPayload }) {
+function MyWebStackNavigator({ onSetMymodelLinkPayload, route: tabRoute }) {
   return (
     <MyWebStack.Navigator initialRouteName="MyWeb" screenOptions={{ headerShown: false }}>
       <MyWebStack.Screen name="MyWeb">
         {(navProps) => (
           <MyWebScreen
             {...navProps}
+            tabRoute={tabRoute}
             onOpenMyProfile={(payload) => {
               // payload を保持してから MyModel タブへ遷移
               try {
@@ -574,9 +635,6 @@ function MainTabs() {
   // - Screen-level: can update unread in real time while mounted
   const hasUnreadFriendRequests = !!getFeatureUnread("Friends", "requests");
 
-  // Friend request unread cursor (fallback for when DB table is unavailable)
-  const friendRequestsLastReadAtRef = React.useRef("1970-01-01T00:00:00Z");
-
 
 // ------------------------------------------------------------
 // Unread badge (MyModel Create)
@@ -611,7 +669,7 @@ const pingActivityLogin = React.useCallback(async () => {
     if (!accessToken) return;
 
     const url = `${MYMODEL_API_BASE_URL}/activity/login`;
-    const res = await fetch(url, {
+    const res = await apiFetch(url, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -641,7 +699,7 @@ const refreshMyModelCreateUnreadBadge = React.useCallback(async () => {
       const url = `${MYMODEL_API_BASE_URL}/mymodel/create/questions?build_tier=${encodeURIComponent(
         tier
       )}`;
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: { Authorization: `Bearer ${accessToken}` },
       });
@@ -687,7 +745,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
     }
 
     const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/unread`;
-    const res = await fetch(url, {
+    const res = await apiFetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -721,154 +779,23 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
   // - This mirrors MyWebScreen's unread badge logic (best-effort).
   // ------------------------------------------------------------
   const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
-    const TYPES = ["daily", "weekly", "monthly"];
-    const LIMIT = 1; // MyWeb画面と同じく「最新1件」が未読かどうかだけを見る
-    const MYWEB_REPORTS_READY_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ready`;
-
-    const extractReadyItems = (payload) => {
-      if (Array.isArray(payload?.items)) return payload.items;
-      if (Array.isArray(payload?.reports)) return payload.reports;
-      if (Array.isArray(payload?.data?.items)) return payload.data.items;
-      if (Array.isArray(payload?.data?.reports)) return payload.data.reports;
-      if (Array.isArray(payload)) return payload;
-      return [];
-    };
-
-    const fetchReadyReports = async (accessToken, reportType, limit = 1) => {
-      const url = `${MYWEB_REPORTS_READY_ENDPOINT}?report_type=${encodeURIComponent(
-        reportType
-      )}&limit=${encodeURIComponent(limit)}`;
-
-      const res = await fetch(url, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        const err = new Error(`ready failed: ${res.status}`);
-        err.status = res.status;
-        err.body = text;
-        throw err;
-      }
-
-      const json = await res.json();
-      return extractReadyItems(json);
-    };
-
     try {
-      const userId = await resolveCurrentUserId();
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-
-      if (!userId || !accessToken) {
-        try {
-          clearScope("MyWeb");
-        } catch {
-          // noop
-        }
-        setUnreadGroup("MyWeb", {
-          daily: false,
-          weekly: false,
-          monthly: false,
-          selfStructure: false,
-        });
-        return;
-      }
-
-      const idsByType = {
-        daily: [],
-        weekly: [],
-        monthly: [],
-        selfStructure: [],
-      };
-
-      // 1) MyWeb（日/週/月）は画面と同じ READY API から最新1件のIDを取る
-      await Promise.all(
-        TYPES.map(async (t) => {
-          try {
-            const readyItems = await fetchReadyReports(accessToken, t, LIMIT);
-            idsByType[t] = (Array.isArray(readyItems) ? readyItems : [])
-              .map((r) => String(r?.id || ""))
-              .filter(Boolean)
-              .slice(0, LIMIT);
-          } catch (e) {
-            console.warn(
-              "MainTabs: failed to fetch READY report ids for unread badge",
-              t,
-              e?.status || e?.message || e
-            );
-            idsByType[t] = [];
-          }
-        })
-      );
-
-      // 1b) 自己構造（月次）の最新1件（Plus/Premiumのみ）
-      if (isPaid) {
-        const { data: selfData, error: selfErr } = await supabase
-          .from("myprofile_reports")
-          .select("id")
-          .eq("user_id", userId)
-          .eq("report_type", "monthly")
-          .order("period_end", { ascending: false })
-          .order("generated_at", { ascending: false })
-          .order("updated_at", { ascending: false })
-          .limit(LIMIT);
-
-        if (selfErr) throw selfErr;
-
-        idsByType.selfStructure = (Array.isArray(selfData) ? selfData : [])
-          .map((r) => String(r?.id || ""))
-          .filter(Boolean)
-          .slice(0, LIMIT);
-      } else {
-        idsByType.selfStructure = [];
-      }
-
-      const allIds = Array.from(
-        new Set([
-          ...idsByType.daily,
-          ...idsByType.weekly,
-          ...idsByType.monthly,
-          ...idsByType.selfStructure,
-        ])
-      );
-
-      // 2) 表示対象IDの中で、既読済みIDをまとめて取得（文字列化して比較ズレを防ぐ）
-      let readSet = new Set();
-      if (allIds.length > 0) {
-        const { data: reads, error: rErr } = await supabase
-          .from("report_reads")
-          .select("report_id")
-          .eq("user_id", userId)
-          .in("report_id", allIds);
-
-        if (rErr) throw rErr;
-
-        readSet = new Set(
-          (Array.isArray(reads) ? reads : [])
-            .map((r) => String(r?.report_id || ""))
-            .filter(Boolean)
-        );
-      }
-
-      const isLatestUnread = (ids) => {
-        const latestId = Array.isArray(ids) && ids.length > 0 ? ids[0] : null;
-        return !!latestId && !readSet.has(latestId);
-      };
-
+      const query = new URLSearchParams({
+        limit: String(LIMIT),
+        include_self_structure: isPaid ? "true" : "false",
+      }).toString();
+      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
+      const unread = json?.unread_by_type || {};
       try {
         clearScope("MyWeb");
       } catch {
         // noop
       }
-
-      // 3) 画面と同じく「最新1件」の未読だけでタブ状態を作る
       setUnreadGroup("MyWeb", {
-        daily: isLatestUnread(idsByType.daily),
-        weekly: isLatestUnread(idsByType.weekly),
-        monthly: isLatestUnread(idsByType.monthly),
-        selfStructure: isLatestUnread(idsByType.selfStructure),
+        daily: !!unread?.daily,
+        weekly: !!unread?.weekly,
+        monthly: !!unread?.monthly,
+        selfStructure: !!unread?.selfStructure,
       });
     } catch (e) {
       console.warn("MainTabs: failed to refresh MyWeb unread badges", e);
@@ -888,35 +815,8 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
   const refreshFriendsUnreadBadge = React.useCallback(async () => {
     try {
-      const userId = await resolveCurrentUserId();
-      if (!userId) {
-        setUnread("Friends", "feed", false);
-        return;
-      }
-
-      // 1) 最後に既読化した時刻（無ければ epoch 扱い）
-      const { data: readRow, error: readErr } = await supabase
-        .from("friend_feed_reads")
-        .select("last_read_at")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      if (readErr) throw readErr;
-
-      const lastReadAt = readRow?.last_read_at || "1970-01-01T00:00:00Z";
-
-      // 2) last_read_at より新しいログが1件でもあれば未読
-      const { data: newerRows, error: newerErr } = await supabase
-        .from("friend_emotion_feed")
-        .select("id, created_at")
-        .eq("viewer_user_id", userId)
-        .gt("created_at", lastReadAt)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (newerErr) throw newerErr;
-
-      setUnread("Friends", "feed", Array.isArray(newerRows) && newerRows.length > 0);
+      const json = await apiGet("/friends/unread-status");
+      setUnread("Friends", "feed", !!json?.feed_unread);
     } catch (e) {
       console.warn("MainTabs: failed to refresh Friends unread badge", e);
       setUnread("Friends", "feed", false);
@@ -926,44 +826,8 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
   const refreshFriendRequestsUnreadBadge = React.useCallback(async () => {
     try {
-      const userId = await resolveCurrentUserId();
-      if (!userId) {
-        setUnread("Friends", "requests", false);
-        return;
-      }
-
-      // 1) 最後に「申請一覧（モーダル）」を開いた時刻（無ければ epoch 扱い）
-      //    - friend_request_reads が無い / RLS / 一時的エラーの場合は、ローカルRefをフォールバックする
-      let lastReadAt = friendRequestsLastReadAtRef.current || "1970-01-01T00:00:00Z";
-
-      try {
-        const { data: readRow, error: readErr } = await supabase
-          .from("friend_request_reads")
-          .select("last_read_at")
-          .eq("user_id", userId)
-          .maybeSingle();
-
-        if (!readErr) {
-          lastReadAt = readRow?.last_read_at || lastReadAt;
-          friendRequestsLastReadAtRef.current = lastReadAt;
-        }
-      } catch {
-        // ignore (fallback to ref)
-      }
-
-      // 2) last_read_at より新しい「受信した pending 申請」が1件でもあれば未読
-      const { data: newerRows, error: newerErr } = await supabase
-        .from("friend_requests")
-        .select("id, created_at")
-        .eq("requested_user_id", userId)
-        .eq("status", "pending")
-        .gt("created_at", lastReadAt)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (newerErr) throw newerErr;
-
-      setUnread("Friends", "requests", Array.isArray(newerRows) && newerRows.length > 0);
+      const json = await apiGet("/friends/unread-status");
+      setUnread("Friends", "requests", !!json?.requests_unread);
     } catch (e) {
       console.warn("MainTabs: failed to refresh Friend request unread badge", e);
       setUnread("Friends", "requests", false);
@@ -972,37 +836,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
   const markFriendRequestsRead = React.useCallback(async () => {
     try {
-      const userId = await resolveCurrentUserId();
-      if (!userId) return;
-
-      // server-side created_at をカーソルにする（端末時刻ズレ対策）
-      const { data: latestRows, error: latestErr } = await supabase
-        .from("friend_requests")
-        .select("created_at")
-        .eq("requested_user_id", userId)
-        .eq("status", "pending")
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (latestErr) throw latestErr;
-
-      const lastReadAt =
-        Array.isArray(latestRows) && latestRows.length > 0
-          ? latestRows[0]?.created_at
-          : new Date().toISOString();
-
-      // fallback cursor（DB が無い場合でもこのsession中は既読化できる）
-      friendRequestsLastReadAtRef.current = lastReadAt;
-
-      // DB があれば永続化（無ければエラーになってもOK）
-      const { error: upErr } = await supabase
-        .from("friend_request_reads")
-        .upsert({ user_id: userId, last_read_at: lastReadAt }, { onConflict: "user_id" });
-
-      if (upErr) {
-        // warn only（fallback already updated）
-        console.warn("MainTabs: friend_request_reads upsert failed", upErr);
-      }
+      await apiPost("/friends/unread/read-requests", {});
     } catch (e) {
       console.warn("MainTabs: failed to mark Friend requests read", e);
     }
@@ -1010,29 +844,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
   const markFriendsFeedRead = React.useCallback(async () => {
     try {
-      const userId = await resolveCurrentUserId();
-      if (!userId) return;
-
-      // server-side created_at をカーソルにする（端末時刻ズレ対策）
-      const { data: latestRows, error: latestErr } = await supabase
-        .from("friend_emotion_feed")
-        .select("created_at")
-        .eq("viewer_user_id", userId)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (latestErr) throw latestErr;
-
-      const lastReadAt =
-        Array.isArray(latestRows) && latestRows.length > 0
-          ? latestRows[0]?.created_at
-          : new Date().toISOString();
-
-      const { error: upErr } = await supabase
-        .from("friend_feed_reads")
-        .upsert({ user_id: userId, last_read_at: lastReadAt }, { onConflict: "user_id" });
-
-      if (upErr) throw upErr;
+      await apiPost("/friends/unread/read-feed", {});
     } catch (e) {
       console.warn("MainTabs: failed to mark Friends feed read", e);
     }
@@ -1080,7 +892,6 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
       const userId = await resolveCurrentUserId();
       if (!userId) return;
 
-      // Fresh cache? Skip fetching.
       try {
         const fresh = getPrefetchEntryFresh?.("Friends", "feed", PREFETCH_MAX_AGE_MS);
         if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) {
@@ -1090,24 +901,22 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
         // noop
       }
 
-      const { data, error } = await supabase
-        .from("friend_emotion_feed")
-        .select("id, owner_name, items, created_at")
-        .eq("viewer_user_id", userId)
-        .order("created_at", { ascending: false })
-        .limit(20);
+      const json = await apiGet("/friends/feed");
+      const rows = Array.isArray(json?.items)
+        ? json.items
+        : Array.isArray(json?.data)
+        ? json.data
+        : Array.isArray(json)
+        ? json
+        : [];
 
-      if (error) throw error;
-
-      const rows = Array.isArray(data) ? data : [];
       const mapped = rows.map((row) => ({
-        id: row.id,
-        ownerName: row.owner_name || "Friend",
-        items: Array.isArray(row.items) ? row.items : [],
-        timeLabel: formatTimeLabel(row.created_at),
+        id: row?.id,
+        ownerName: row?.ownerName || row?.owner_name || "Friend",
+        items: Array.isArray(row?.items) ? row.items : [],
+        timeLabel: row?.timeLabel || formatTimeLabel(row?.created_at || row?.createdAt || null),
       }));
 
-      // cache (used by FriendsScreen to render immediately)
       try {
         setPrefetch("Friends", "feed", { userId, items: mapped });
       } catch {
@@ -1123,7 +932,6 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
       const userId = await resolveCurrentUserId();
       if (!userId) return;
 
-      // Fresh cache? Skip fetching.
       try {
         const fresh = getPrefetchEntryFresh?.("Friends", "manage", PREFETCH_MAX_AGE_MS);
         if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) {
@@ -1133,208 +941,26 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
         // noop
       }
 
-      // 1) My profile
-      let myProfile = {
-        id: userId,
-        displayName: "",
-        friendCode: "",
-      };
+      const json = await apiGet("/friends/manage");
+      const payload = json && typeof json === "object" ? json : {};
 
-      try {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("id, display_name, friend_code")
-          .eq("id", userId)
-          .maybeSingle();
-
-        if (!error && data) {
-          myProfile = {
-            id: userId,
-            displayName: data.display_name || "User",
-            friendCode: data.friend_code || "",
-          };
-        }
-      } catch {
-        // ignore
-      }
-
-      // 2) Approved friends
-      let friendsList = [];
-      try {
-        const { data, error } = await supabase
-          .from("friendships")
-          .select("friend_user_id, created_at")
-          .eq("user_id", userId)
-          .order("created_at", { ascending: false });
-
-        if (!error) {
-          const rows = Array.isArray(data) ? data : [];
-          const ids = rows.map((r) => r?.friend_user_id).filter(Boolean);
-
-          let profileMap = new Map();
-          if (ids.length > 0) {
-            const { data: profs, error: pErr } = await supabase
-              .from("profiles")
-              .select("id, display_name, friend_code")
-              .in("id", ids);
-
-            if (!pErr) {
-              profileMap = new Map(
-                (Array.isArray(profs) ? profs : []).map((p) => [
-                  p.id,
-                  {
-                    displayName: p.display_name || "Friend",
-                    friendCode: p.friend_code || null,
-                  },
-                ])
-              );
-            }
-          }
-
-          friendsList = rows.map((r) => {
-            const p = profileMap.get(r.friend_user_id) || {};
-            return {
-              userId: r.friend_user_id,
-              displayName: p.displayName || "Friend",
-              friendCode: p.friendCode || null,
-            };
-          });
-        }
-      } catch {
-        // ignore
-      }
-
-      // 3) Pending requests
-      let incoming = [];
-      let outgoing = [];
-      try {
-        const [inRes, outRes] = await Promise.all([
-          supabase
-            .from("friend_requests")
-            .select("id, requester_user_id, created_at")
-            .eq("requested_user_id", userId)
-            .eq("status", "pending")
-            .order("created_at", { ascending: false }),
-          supabase
-            .from("friend_requests")
-            .select("id, requested_user_id, created_at")
-            .eq("requester_user_id", userId)
-            .eq("status", "pending")
-            .order("created_at", { ascending: false }),
-        ]);
-
-        const inRows = Array.isArray(inRes?.data) ? inRes.data : [];
-        const outRows = Array.isArray(outRes?.data) ? outRes.data : [];
-
-        const needProfileIds = new Set();
-        inRows.forEach((r) => r.requester_user_id && needProfileIds.add(r.requester_user_id));
-        outRows.forEach((r) => r.requested_user_id && needProfileIds.add(r.requested_user_id));
-
-        let profileMap = new Map();
-        const idList = Array.from(needProfileIds);
-        if (idList.length > 0) {
-          const { data: profs, error: pErr } = await supabase
-            .from("profiles")
-            .select("id, display_name, friend_code")
-            .in("id", idList);
-          if (!pErr) {
-            profileMap = new Map(
-              (Array.isArray(profs) ? profs : []).map((p) => [
-                p.id,
-                {
-                  displayName: p.display_name || "Friend",
-                  friendCode: p.friend_code || null,
-                },
-              ])
-            );
-          }
-        }
-
-        incoming = inRows.map((r) => {
-          const p = profileMap.get(r.requester_user_id) || {};
-          return {
-            id: r.id,
-            requesterUserId: r.requester_user_id,
-            requesterName: p.displayName || "Friend",
-            createdAt: r.created_at || null,
-          };
-        });
-
-        outgoing = outRows.map((r) => {
-          const p = profileMap.get(r.requested_user_id) || {};
-          return {
-            id: r.id,
-            requestedUserId: r.requested_user_id,
-            requestedName: p.displayName || "Friend",
-            friendCode: p.friendCode || null,
-            createdAt: r.created_at || null,
-          };
-        });
-      } catch {
-        // ignore
-      }
-
-      // 4) Friend notification settings (best-effort)
-      let friendNotifMap = {};
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        const accessToken = sessionData?.session?.access_token ?? null;
-        if (accessToken) {
-          const url = `${MYMODEL_API_BASE_URL}/friends/notification-settings`;
-          const res = await fetch(url, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${accessToken}` },
-          });
-          const json = await res.json().catch(() => null);
-          if (res.ok) {
-            const list = Array.isArray(json)
-              ? json
-              : Array.isArray(json?.settings)
-              ? json.settings
-              : Array.isArray(json?.data)
-              ? json.data
-              : [];
-
-            const map = {};
-            list.forEach((s) => {
-              const friendId =
-                s?.friend_user_id ||
-                s?.owner_user_id ||
-                s?.friendUserId ||
-                s?.ownerUserId ||
-                s?.friend_id ||
-                s?.friendId;
-
-              if (!friendId) return;
-
-              const enabled =
-                s?.is_enabled ?? s?.isEnabled ?? s?.enabled ?? s?.is_on ?? s?.isOn;
-
-              if (typeof enabled === "boolean") {
-                map[friendId] = enabled;
-              }
-            });
-            friendNotifMap = map;
-          }
-        }
-      } catch {
-        // ignore
-      }
-
-      // cache (used by FriendsScreen to open the manage modal instantly)
       try {
         setPrefetch("Friends", "manage", {
           userId,
-          myProfile,
-          friendsList,
-          incoming,
-          outgoing,
-          friendNotifMap,
+          myProfile: payload?.myProfile || null,
+          friendsList: Array.isArray(payload?.friendsList) ? payload.friendsList : [],
+          incoming: Array.isArray(payload?.incoming) ? payload.incoming : [],
+          outgoing: Array.isArray(payload?.outgoing) ? payload.outgoing : [],
+          friendNotifMap:
+            payload?.friendNotifMap && typeof payload.friendNotifMap === "object"
+              ? payload.friendNotifMap
+              : {},
+          incomingPendingCount: Number(payload?.incomingPendingCount || 0) || 0,
         });
       } catch {
         // noop
       }
-    } catch {
+    } catch (e) {
       // fail-soft
     }
   }, [setPrefetch, getPrefetchEntryFresh]);
@@ -1360,7 +986,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
         if (!isFresh) {
           const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/trending?limit=20`;
-          const res = await fetch(url, { method: "GET", headers });
+          const res = await apiFetch(url, { method: "GET", headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
             const items = Array.isArray(json?.items) ? json.items : [];
@@ -1379,7 +1005,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
 
         if (!isFresh) {
           const url = `${MYMODEL_API_BASE_URL}/mymodel/recommend/users?limit=20`;
-          const res = await fetch(url, { method: "GET", headers });
+          const res = await apiFetch(url, { method: "GET", headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
             const users = Array.isArray(json?.users)
@@ -1412,7 +1038,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
           params.append("sort", "newest");
 
           const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/list?${params.toString()}`;
-          const res = await fetch(url, { method: "GET", headers });
+          const res = await apiFetch(url, { method: "GET", headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
             const items = Array.isArray(json?.items) ? json.items : [];
@@ -1531,40 +1157,28 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
   }, [runAllUnreadPrefetch]);
 
 
-  // Friend requests: realtime updates（アプリ起動中に申請が来てもバッジが反映されるように）
+  // Friend requests: API polling updates
+  // - Keep tab badge fresh without direct realtime table subscription from RN.
   useEffect(() => {
-    let channel = null;
     let cancelled = false;
+    let intervalId = null;
 
-    (async () => {
-      const userId = await resolveCurrentUserId();
-      if (!userId || cancelled) return;
-
+    const tick = async () => {
+      if (cancelled) return;
       try {
-        channel = supabase
-          .channel(`friend_requests_badge_${userId}`)
-          .on(
-            "postgres_changes",
-            {
-              event: "*",
-              schema: "public",
-              table: "friend_requests",
-              filter: `requested_user_id=eq.${userId}`,
-            },
-            () => {
-              refreshFriendRequestsUnreadBadge();
-            }
-          )
-          .subscribe();
-      } catch (e) {
-        console.warn("MainTabs: friend_requests realtime subscribe failed", e);
+        await refreshFriendRequestsUnreadBadge();
+      } catch {
+        // noop
       }
-    })();
+    };
+
+    tick();
+    intervalId = setInterval(tick, 30 * 1000);
 
     return () => {
       cancelled = true;
       try {
-        if (channel) supabase.removeChannel(channel);
+        if (intervalId) clearInterval(intervalId);
       } catch {
         // noop
       }
@@ -1978,17 +1592,11 @@ function RootNavigator() {
           return;
         }
 
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("tutorial_completed, tutorial_skipped")
-          .eq("id", userId)
-          .maybeSingle();
-
-        if (error) throw error;
+        const json = await apiGet("/account/profile/me");
 
         if (!cancelled) {
-          const nextCompleted = data?.tutorial_completed === true;
-          const nextSkipped = data?.tutorial_skipped === true;
+          const nextCompleted = json?.tutorial_completed === true;
+          const nextSkipped = json?.tutorial_skipped === true;
 
           setProfileTutorialCompleted(nextCompleted);
           setProfileTutorialSkipped(nextSkipped);
@@ -2161,7 +1769,7 @@ useEffect(() => {
   if (!session || recoveryMode) return;
 
   const t = setTimeout(() => {
-    tryOpenFriendsIfPending();
+    tryOpenRouteIfPending();
   }, 0);
 
   return () => {
@@ -2194,14 +1802,38 @@ useEffect(() => {
 }
 
 export default function App() {
+  const bootstrapAlertShownRef = useRef(false);
+
+  useEffect(() => {
+    let alive = true;
+
+    (async () => {
+      try {
+        const json = await apiGet("/app/bootstrap", { auth: false });
+        const message = String(json?.maintenance_message || "").trim();
+
+        if (alive && message && !bootstrapAlertShownRef.current) {
+          bootstrapAlertShownRef.current = true;
+          Alert.alert("お知らせ", message);
+        }
+      } catch (e) {
+        console.log("[bootstrap] fetch failed:", e?.message || e);
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   // ------------------------------------------------------------
-  // Push: open Friends tab when user taps a push notification
+  // Push: open the target screen when user taps a push notification
   // - Works for background -> foreground and quit -> launch
   // ------------------------------------------------------------
   useEffect(() => {
     // When the app is in background and the user taps the notification
-    const unsubscribeOpened = messaging().onNotificationOpenedApp(() => {
-      requestOpenFriendsFromNotification();
+    const unsubscribeOpened = messaging().onNotificationOpenedApp((remoteMessage) => {
+      requestOpenRouteFromNotification(remoteMessage);
     });
 
     // When the app is quit and is launched by tapping the notification
@@ -2209,7 +1841,7 @@ export default function App() {
       .getInitialNotification()
       .then((remoteMessage) => {
         if (remoteMessage) {
-          requestOpenFriendsFromNotification();
+          requestOpenRouteFromNotification(remoteMessage);
         }
       })
       .catch((e) => {
@@ -2236,7 +1868,7 @@ export default function App() {
           ref={navigationRef}
           onReady={() => {
             // If a notification tap happened very early, attempt navigation now.
-            tryOpenFriendsIfPending();
+            tryOpenRouteIfPending();
           }}
         >
           <RootNavigator />

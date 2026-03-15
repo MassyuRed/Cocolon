@@ -32,7 +32,7 @@ android {
     applicationId "com.anonymous.cocolonmvp"
     minSdkVersion 24
     targetSdkVersion 35
-    versionCode 5
+    versionCode 7
     versionName "1.0.0"
 
     // NewArch/Hermes は明示的に無効（BuildConfig 参照用）

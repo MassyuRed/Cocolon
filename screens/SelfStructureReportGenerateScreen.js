@@ -16,26 +16,23 @@ import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { useTheme } from "../theme/ThemeContext";
+import { apiFetch } from "../lib/apiClient";
 
-// MyProfile（月次自己構造レポート）: MashOS主導（閲覧＝生成を廃止）
+// MyProfile（現在の自己構造）: latest viewer
 const API_BASE =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
-const MYPROFILE_MONTHLY_ENSURE_ENDPOINT = `${API_BASE}/myprofile/monthly/ensure`;
+const MYPROFILE_LATEST_ENDPOINT = `${API_BASE}/myprofile/latest`;
 
 // Subscription (plan/tier)
 const SUBSCRIPTION_ME_ENDPOINT = `${API_BASE}/subscription/me`;
 
-// 最新自己構造レポート（プレビュー用）の固定期間キー（DB上の1行を使い回す）
-const LATEST_REPORT_PERIOD_START = "1970-01-01T00:00:00.000Z";
-const LATEST_REPORT_PERIOD_END = "1970-01-01T00:00:00.000Z";
-
 // ---- MyProfile: 3 modes (Light/Standard/Deep) ----
 const TIER_PERMISSION_MAP = Object.freeze({
-  free: ["light"],
-  plus: ["light", "standard"],
-  premium: ["light", "standard", "deep"],
+  free: [],
+  plus: ["standard"],
+  premium: ["standard", "deep"],
 });
-const MODE_LABEL = Object.freeze({ light: "Light", standard: "Standard", deep: "Deep" });
+const MODE_LABEL = Object.freeze({ standard: "Standard", deep: "Deep" });
 
 function normalizeSubscriptionTier(tier) {
   const t = String(tier || "").toLowerCase().trim();
@@ -50,28 +47,35 @@ function normalizeSubscriptionTier(tier) {
 function normalizeMyProfileMode(mode) {
   const m = String(mode || "").toLowerCase().trim();
   if (m === "light" || m === "standard" || m === "deep") return m;
-  return "light";
+  return "standard";
 }
+
+function subscriptionTierLabel(tier) {
+  const t = normalizeSubscriptionTier(tier);
+  if (t === "premium") return "Premium会員";
+  if (t === "plus") return "Plus会員";
+  return "無料会員";
+}
+
 
 function coerceAllowedModes(maybeAllowedModes, tier) {
   if (Array.isArray(maybeAllowedModes) && maybeAllowedModes.length > 0) {
     const cleaned = maybeAllowedModes
       .map((x) => normalizeMyProfileMode(x))
-      .filter(Boolean);
+      .filter((x) => x === "standard" || x === "deep");
     const uniq = [];
     cleaned.forEach((m) => {
       if (!uniq.includes(m)) uniq.push(m);
     });
-    return uniq.length > 0 ? uniq : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["light"];
+    return uniq.length > 0 ? uniq : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["standard"];
   }
-  return TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["light"];
+  return TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["standard"];
 }
 
 function defaultModeForTier(tier, allowedModes) {
-  const allowed = Array.isArray(allowedModes) && allowedModes.length > 0 ? allowedModes : ["light"];
-  const t = normalizeSubscriptionTier(tier);
-  if ((t === "plus" || t === "premium") && allowed.includes("standard")) return "standard";
-  return allowed[0] || "light";
+  const allowed = Array.isArray(allowedModes) && allowedModes.length > 0 ? allowedModes : ["standard"];
+  if (allowed.includes("standard")) return "standard";
+  return allowed[0] || "standard";
 }
 
 async function fetchSubscriptionMe(accessToken, signal) {
@@ -79,7 +83,7 @@ async function fetchSubscriptionMe(accessToken, signal) {
     return { tier: "free", allowedModes: TIER_PERMISSION_MAP.free, raw: null };
   }
 
-  const res = await fetch(SUBSCRIPTION_ME_ENDPOINT, {
+  const res = await apiFetch(SUBSCRIPTION_ME_ENDPOINT, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -262,7 +266,7 @@ export default function SelfStructureReportGenerateScreen({ onBack }) {
 
     // ---- Subscription / report mode (Step7: UI) ----
   const [subscriptionTier, setSubscriptionTier] = useState("free");
-  const [allowedModes, setAllowedModes] = useState(TIER_PERMISSION_MAP.free);
+  const [allowedModes, setAllowedModes] = useState(TIER_PERMISSION_MAP.plus);
   const [reportMode, setReportMode] = useState("standard");
   const [tierLoading, setTierLoading] = useState(false);
   const [tierError, setTierError] = useState("");
@@ -306,8 +310,8 @@ const [loading, setLoading] = useState(true);
 
   const reportTitle = useMemo(() => {
     const base = titleRange
-      ? `自己構造レポート：${titleRange}（28日分）`
-      : "自己構造レポート（月次）";
+      ? `現在の自己構造：${titleRange}`
+      : "現在の自己構造";
     return base;
   }, [titleRange]);
 
@@ -368,7 +372,7 @@ const run = useCallback(async ({ force = false } = {}) => {
       allowed =
         Array.isArray(sub?.allowedModes) && sub.allowedModes.length > 0
           ? sub.allowedModes
-          : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["light"];
+          : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["standard"];
 
       safeSet(() => {
         setSubscriptionTier(tier);
@@ -396,23 +400,22 @@ const run = useCallback(async ({ force = false } = {}) => {
       safeSet(() => setReportMode(effectiveMode));
     }
 
-    // ---- MashOS主導：月次レポート ensure（閲覧で毎回生成しない） ----
-    const ensurePayload = {
-      force: !!force,
+    const qs = new URLSearchParams({
+      ensure: "true",
+      force: force ? "true" : "false",
       report_mode: effectiveMode,
-    };
+    });
 
     const fetchOpts = {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(ensurePayload),
     };
     if (controller) fetchOpts.signal = controller.signal;
 
-    const res = await fetch(MYPROFILE_MONTHLY_ENSURE_ENDPOINT, fetchOpts);
+    const res = await apiFetch(`${MYPROFILE_LATEST_ENDPOINT}?${qs.toString()}`, fetchOpts);
 
     if (!res.ok) {
       let detail = `HTTP ${res.status}`;
@@ -456,7 +459,7 @@ const run = useCallback(async ({ force = false } = {}) => {
     safeSet(() => {
       setReportText(text);
       setMeta({
-        source: "myprofile/monthly/ensure",
+        source: "myprofile/latest",
         report_mode: json?.report_mode || effectiveMode,
         subscription_tier_client: tier,
         ensure: {
@@ -536,23 +539,11 @@ const run = useCallback(async ({ force = false } = {}) => {
               color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
             />
             <Text style={[styles.smallBtnText, themed.smallBtnText]}>
-              再生成
+              更新
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => exportTextToPdf(reportTitle, reportText || "")}
-            style={[styles.smallBtn, themed.smallBtn]}
-            activeOpacity={0.85}
-            disabled={!reportText}
-          >
-            <Ionicons
-              name="download-outline"
-              size={16}
-              color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
-            />
-            <Text style={[styles.smallBtnText, themed.smallBtnText]}>PDF</Text>
-          </TouchableOpacity>
+          {/* PDF保存ボタンは非表示 */}
         </View>
       </View>
 
@@ -560,10 +551,10 @@ const run = useCallback(async ({ force = false } = {}) => {
       <Text style={[styles.title, themed.title]}>{reportTitle}</Text>
 
 
-      {/* 🧭 生成モード（Light / Standard / Deep） */}
+      {/* 🧭 表示モード（Standard / Deep） */}
       <View style={[styles.modeCard, themed.bodyCard]}>
         <View style={styles.modeHeaderRow}>
-          <Text style={[styles.modeTitle, themed.p]}>生成モード</Text>
+          <Text style={[styles.modeTitle, themed.p]}>表示モード</Text>
 
           {tierLoading ? (
             <ActivityIndicator
@@ -572,22 +563,18 @@ const run = useCallback(async ({ force = false } = {}) => {
             />
           ) : (
             <Text style={[styles.modeTierText, themed.empty]}>
-              Plan: {subscriptionTier}
+              現在のプラン：{subscriptionTierLabel(subscriptionTier)}
             </Text>
           )}
         </View>
 
         <View style={styles.modeButtonsRow}>
-          {["light", "standard", "deep"].map((m) => {
+          {["standard", "deep"].map((m) => {
             const allowed = (allowedModes || []).includes(m);
             const active = reportMode === m;
 
             const iconName =
-              m === "light"
-                ? "flash-outline"
-                : m === "standard"
-                ? "layers-outline"
-                : "analytics-outline";
+              m === "standard" ? "layers-outline" : "analytics-outline";
 
             const iconColor = !allowed
               ? isDark
@@ -618,11 +605,14 @@ const run = useCallback(async ({ force = false } = {}) => {
                     const label = MODE_LABEL[m] || m;
                     const msg =
                       m === "deep"
-                        ? `「${label}」はPremium会員のみ利用できます。\n\nプランを確認しますか？`
-                        : `「${label}」はPlus会員以上で利用できます。\n\nプランを確認しますか？`;
+                        ? `「${label}」はPremiumで提供予定です。\n\n※Premiumは準備中です。`
+                        : `「${label}」はPlus会員のみ利用できます。\n\nプランを確認しますか？`;
                     Alert.alert("プランが必要です", msg, [
                       { text: "あとで", style: "cancel" },
-                      { text: "プランを見る", onPress: openSubscriptionSelect },
+                      {
+                        text: m === "deep" ? "プラン内容を見る" : "プランを見る",
+                        onPress: openSubscriptionSelect,
+                      },
                     ]);
                     return;
                   }
@@ -652,12 +642,12 @@ const run = useCallback(async ({ force = false } = {}) => {
 
         {!!tierError ? (
           <Text style={[styles.modeErrorText, themed.errorText]}>
-            Plan情報の取得に失敗しました（暫定で free 扱い）: {tierError}
+            プラン情報を確認できませんでした。利用できる表示モードをご確認ください。
           </Text>
         ) : null}
 
         <Text style={[styles.modeHint, themed.empty]}>
-          ※モード変更後は「再生成」を押すと反映されます。DeepはPremiumのみ。
+          ※モード変更後は「更新」を押すと反映されます。DeepはPremiumで提供予定です。
         </Text>
       </View>
 

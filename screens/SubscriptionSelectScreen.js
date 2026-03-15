@@ -1,7 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  Linking,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -18,11 +20,30 @@ import { makeUiTokens } from "../ui/uiTokens";
 import {
   ensureIapConnection,
   purchase,
+  restoreAvailablePurchases,
+  syncPurchaseToSubscriptionTier,
   IAP_PRODUCT_IDS,
 } from "../lib/iap/iapService";
+import { supabase } from "../lib/supabase";
 
-// テスト配布用：サブスク導入時は false に戻すだけで復帰します
-const IS_TEST_BUILD = true;
+const TERMS_URL = String(
+  (typeof process !== "undefined" && process?.env?.EXPO_PUBLIC_TERMS_URL) || ""
+).trim();
+
+const PRIVACY_URL = String(
+  (typeof process !== "undefined" && process?.env?.EXPO_PUBLIC_PRIVACY_URL) || ""
+).trim();
+
+const ANDROID_PACKAGE_NAME = String(
+  (typeof process !== "undefined" &&
+    process?.env?.EXPO_PUBLIC_ANDROID_PACKAGE_NAME) ||
+    ""
+).trim();
+
+const IOS_MANAGE_SUBSCRIPTIONS_URL =
+  "https://apps.apple.com/account/subscriptions";
+
+const PLUS_TRIAL_OFFER_TAG = "trial_1m_new_user";
 
 const SUB_TIER_LABEL = {
   free: "無料会員",
@@ -36,42 +57,54 @@ function normalizeSubscriptionTier(raw) {
   return "free";
 }
 
+function buildManageSubscriptionUrl(productId) {
+  if (Platform.OS === "ios") {
+    return IOS_MANAGE_SUBSCRIPTIONS_URL;
+  }
+
+  const sku = String(productId || "").trim();
+  if (ANDROID_PACKAGE_NAME && sku) {
+    return `https://play.google.com/store/account/subscriptions?sku=${encodeURIComponent(
+      sku
+    )}&package=${encodeURIComponent(ANDROID_PACKAGE_NAME)}`;
+  }
+
+  return "https://play.google.com/store/account/subscriptions";
+}
+
 function buildIapErrorMessage(err) {
-  if (!err) return "購入処理に失敗しました。時間をおいて再度お試しください。";
+  if (!err) return "お申し込みを完了できませんでした。時間をおいてもう一度お試しください。";
+
   const code = String(err?.code || "");
   const msg = String(err?.message || err);
 
-  // よくあるケース（表示はユーザー向けに簡潔に）
   if (
     /E_USER_CANCELLED/i.test(code) ||
     /USER_CANCELLED/i.test(code) ||
     /cancel/i.test(msg)
   ) {
-    return "購入をキャンセルしました。";
+    return "お申し込みをキャンセルしました。";
   }
   if (/E_ITEM_UNAVAILABLE/i.test(code)) {
-    return "このプランは現在購入できません。";
+    return "このプランは現在お申し込みいただけません。";
   }
   if (/E_NETWORK/i.test(code) || /network/i.test(msg)) {
-    return "通信エラーが発生しました。ネットワーク状況を確認してお試しください。";
+    return "通信環境をご確認のうえ、もう一度お試しください。";
   }
   if (/E_SERVICE_ERROR/i.test(code) || /service/i.test(msg)) {
-    return "購入サービスに接続できませんでした。時間をおいて再度お試しください。";
+    return "ただいまお申し込みページを開けませんでした。時間をおいてお試しください。";
   }
 
-  // デバッグ用途：開発中だけ詳細を出す（本番ユーザーに内部情報を見せない）
-  if (typeof __DEV__ !== "undefined" && __DEV__ && msg) {
-    return `購入処理に失敗しました。\n\n詳細: ${msg}`;
-  }
-
-  return "購入処理に失敗しました。時間をおいて再度お試しください。";
+  return "お申し込みを完了できませんでした。時間をおいてもう一度お試しください。";
 }
 
 function PlanCard({
   title,
   price,
   subtitle,
+  subtitleHighlighted = false,
   features,
+  noteLines = [],
   isCurrent,
   recommended,
   onPress,
@@ -93,8 +126,18 @@ function PlanCard({
               </View>
             ) : null}
           </View>
+
           <Text style={styles.planPrice}>{price}</Text>
-          {subtitle ? <Text style={styles.planSubtitle}>{subtitle}</Text> : null}
+          {subtitle ? (
+            <Text
+              style={[
+                styles.planSubtitle,
+                subtitleHighlighted && styles.planSubtitleHighlighted,
+              ]}
+            >
+              {subtitle}
+            </Text>
+          ) : null}
         </View>
 
         {isCurrent ? (
@@ -116,6 +159,16 @@ function PlanCard({
           </Text>
         ))}
       </View>
+
+      {Array.isArray(noteLines) && noteLines.length > 0 ? (
+        <View style={{ marginTop: 8 }}>
+          {noteLines.map((t, idx) => (
+            <Text key={`note-${idx}`} style={styles.planNote}>
+              {t}
+            </Text>
+          ))}
+        </View>
+      ) : null}
 
       {(() => {
         const disabled = !!isCurrent || !!ctaDisabled || !!ctaLoading;
@@ -150,8 +203,8 @@ function PlanCard({
               {isCurrent
                 ? "このプランを利用中"
                 : ctaLoading
-                ? "処理中…"
-                : (ctaTextOverride ?? "このプランを選択")}
+                ? "お手続き中…"
+                : ctaTextOverride ?? "このプランを選ぶ"}
             </Text>
           </TouchableOpacity>
         );
@@ -166,17 +219,27 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
-  const { tier: ctxTier, loading: ctxLoading, refreshTier } = useSubscription();
+  const {
+    tier: ctxTier,
+    loading: ctxLoading,
+    plusTrialEligible,
+    plusTrialConsumed,
+    refreshTier,
+  } = useSubscription();
   const loading = !!ctxLoading || ctxTier === "unknown";
   const tier = loading ? "free" : normalizeSubscriptionTier(ctxTier);
 
-  // IAP（アプリ内課金）
   const [iapReady, setIapReady] = useState(false);
-  const [iapInitError, setIapInitError] = useState("");
   const [purchaseBusyPlan, setPurchaseBusyPlan] = useState("");
+  const [restoreLoading, setRestoreLoading] = useState(false);
 
+  const refreshScreenState = useCallback(
+    async ({ force = false } = {}) => {
+      await refreshTier({ force }).catch(() => null);
+    },
+    [refreshTier]
+  );
 
-  // IAP 初期化（接続は App 側で observer が使うので、ここでは切断しない）
   useEffect(() => {
     let cancelled = false;
 
@@ -185,12 +248,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
         await ensureIapConnection();
         if (!cancelled) {
           setIapReady(true);
-          setIapInitError("");
         }
-      } catch (e) {
+      } catch {
         if (!cancelled) {
           setIapReady(false);
-          setIapInitError(String(e?.message || e));
         }
       }
     })();
@@ -201,106 +262,204 @@ export default function SubscriptionSelectScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    // Ensure latest tier on entry (best-effort)
-    refreshTier({ force: true }).catch(() => null);
-  }, [refreshTier]);
+    refreshScreenState({ force: true }).catch(() => null);
+  }, [refreshScreenState]);
 
   const currentLabel = SUB_TIER_LABEL[tier] || "無料会員";
+  const currentPriceLabel =
+    tier === "plus" ? "月額300円" : tier === "premium" ? "月額980円" : "";
 
-  const onSelectPlus = async () => {
+  const showPlusTrial = tier === "free" && plusTrialEligible;
+  const isTrialStatusUnavailable =
+    tier === "free" && !ctxLoading && !plusTrialEligible && !plusTrialConsumed;
+  const actionBusy = !!purchaseBusyPlan || restoreLoading;
+
+  const plusNoteLines = showPlusTrial
+    ? [
+        "無料期間終了後は、月額300円で自動更新されます。",
+        "解約はいつでも行えます。",
+      ]
+    : [
+        "月額300円で自動更新されます。",
+        "解約はいつでも行えます。",
+      ];
+
+  const openExternalPage = useCallback(async (url) => {
+    if (!url) {
+      Alert.alert(
+        "ページを開けませんでした",
+        "時間をおいてもう一度お試しください。"
+      );
+      return;
+    }
+
+    try {
+      await Linking.openURL(url);
+    } catch {
+      Alert.alert(
+        "ページを開けませんでした",
+        "時間をおいてもう一度お試しください。"
+      );
+    }
+  }, []);
+
+  const onRestorePurchases = useCallback(async () => {
+    if (actionBusy) return;
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData?.session?.access_token ?? null;
+    if (!accessToken) {
+      Alert.alert("ログインが必要です", "購入内容の復元にはログインが必要です。");
+      return;
+    }
+
+    setRestoreLoading(true);
+
+    try {
+      const purchases = await restoreAvailablePurchases();
+
+      if (!Array.isArray(purchases) || purchases.length === 0) {
+        Alert.alert(
+          "購入内容が見つかりませんでした",
+          "復元できる購入内容が見つかりませんでした。"
+        );
+        return;
+      }
+
+      const normalized = purchases.map((p) => ({
+        purchase: p,
+        productId: String(p?.productId || p?.product_id || "").trim(),
+      }));
+
+      const premiumPurchase =
+        IAP_PRODUCT_IDS?.premium &&
+        normalized.find((x) => x.productId === IAP_PRODUCT_IDS.premium)?.purchase;
+
+      const plusPurchase =
+        IAP_PRODUCT_IDS?.plus &&
+        normalized.find((x) => x.productId === IAP_PRODUCT_IDS.plus)?.purchase;
+
+      const targetPurchase = premiumPurchase || plusPurchase || null;
+
+      if (!targetPurchase) {
+        Alert.alert(
+          "購入内容が見つかりませんでした",
+          "復元できる購入内容が見つかりませんでした。"
+        );
+        return;
+      }
+
+      await syncPurchaseToSubscriptionTier(targetPurchase);
+      await refreshScreenState({ force: true });
+
+      Alert.alert("復元が完了しました", "ご購入内容を復元しました。");
+    } catch {
+      Alert.alert(
+        "復元できませんでした",
+        "購入内容を復元できませんでした。時間をおいてもう一度お試しください。"
+      );
+    } finally {
+      setRestoreLoading(false);
+    }
+  }, [actionBusy, refreshScreenState]);
+
+  const onOpenManageSubscription = useCallback(async () => {
+    const productId =
+      tier === "premium" ? IAP_PRODUCT_IDS?.premium : IAP_PRODUCT_IDS?.plus;
+    const url = buildManageSubscriptionUrl(productId);
+    await openExternalPage(url);
+  }, [openExternalPage, tier]);
+
+  const onSelectPlus = useCallback(async () => {
     if (tier === "plus") return;
     if (purchaseBusyPlan) return;
 
-    // MVP: ダウングレードはストアの管理画面で（アプリ内は将来対応）
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData?.session?.access_token ?? null;
+    if (!accessToken) {
+      Alert.alert("ログインが必要です", "お申し込みにはログインが必要です。");
+      return;
+    }
+
     if (tier === "premium") {
       Alert.alert(
-        "プラン変更",
-        "Premium会員からPlus会員への変更は、現在アプリ内では対応していません。\n\nサブスクリプションの管理画面から変更できます。"
+        "プランの確認",
+        "現在のプラン変更は、サブスクリプション管理から行えます。"
       );
       return;
     }
 
     if (!iapReady) {
       Alert.alert(
-        "購入できません",
-        "購入機能の準備ができていません。\n\n通信状態を確認して、もう一度お試しください。"
+        "お申し込みができませんでした",
+        "ただいまお申し込みページを開けませんでした。時間をおいてもう一度お試しください。"
       );
       return;
     }
 
     setPurchaseBusyPlan("plus");
+
     try {
       const productId = IAP_PRODUCT_IDS?.plus;
       if (!productId) {
-        Alert.alert("購入できません", "IAP商品ID（Plus）が未設定です。");
+        Alert.alert(
+          "お申し込みができませんでした",
+          "時間をおいてもう一度お試しください。"
+        );
         return;
       }
 
-      const { purchase: p } = await purchase(productId);
+      if (loading) {
+        Alert.alert(
+          "確認中です",
+          "プラン情報を確認しています。少し時間をおいて、もう一度お試しください。"
+        );
+        return;
+      }
+
+      if (isTrialStatusUnavailable) {
+        Alert.alert(
+          "お申し込みができませんでした",
+          "無料トライアルの対象状況を確認できませんでした。通信環境をご確認のうえ、もう一度お試しください。"
+        );
+        return;
+      }
+
+      const allowTrial = tier === "free" && plusTrialEligible;
+
+      const { purchase: p } = await purchase(productId, {
+        allowTrial,
+        offerTag: PLUS_TRIAL_OFFER_TAG,
+      });
+
       if (!p) {
         Alert.alert(
-          "Plus会員",
-          "購入処理が完了しませんでした。もう一度お試しください。"
+          "お申し込みができませんでした",
+          "時間をおいてもう一度お試しください。"
         );
         return;
       }
 
       Alert.alert(
-        "購入が完了しました",
-        "プラン反映のため、数秒後に右上の更新ボタンで状態を確認できます。\n\n反映まで時間がかかる場合があります。"
+        "お申し込みが完了しました",
+        "プラン情報を更新しています。反映まで少し時間がかかる場合があります。"
       );
 
-      await refreshTier({ force: true });
+      await refreshScreenState({ force: true });
     } catch (e) {
-      console.warn("IAP purchase failed:", e?.message || e);
-      Alert.alert("購入に失敗しました", buildIapErrorMessage(e));
+      Alert.alert("お申し込みができませんでした", buildIapErrorMessage(e));
     } finally {
       setPurchaseBusyPlan("");
     }
-  };
-
-  const onSelectPremium = async () => {
-    if (tier === "premium") return;
-    if (purchaseBusyPlan) return;
-
-    if (!iapReady) {
-      Alert.alert(
-        "購入できません",
-        "購入機能の準備ができていません。\n\n通信状態を確認して、もう一度お試しください。"
-      );
-      return;
-    }
-
-    setPurchaseBusyPlan("premium");
-    try {
-      const productId = IAP_PRODUCT_IDS?.premium;
-      if (!productId) {
-        Alert.alert("購入できません", "IAP商品ID（Premium）が未設定です。");
-        return;
-      }
-
-      const { purchase: p } = await purchase(productId);
-      if (!p) {
-        Alert.alert(
-          "Premium会員",
-          "購入処理が完了しませんでした。もう一度お試しください。"
-        );
-        return;
-      }
-
-      Alert.alert(
-        "購入が完了しました",
-        "プラン反映のため、数秒後に右上の更新ボタンで状態を確認できます。\n\n反映まで時間がかかる場合があります。"
-      );
-
-      await refreshTier({ force: true });
-    } catch (e) {
-      console.warn("IAP purchase failed:", e?.message || e);
-      Alert.alert("購入に失敗しました", buildIapErrorMessage(e));
-    } finally {
-      setPurchaseBusyPlan("");
-    }
-  };
+  }, [
+    iapReady,
+    isTrialStatusUnavailable,
+    loading,
+    plusTrialEligible,
+    purchaseBusyPlan,
+    refreshScreenState,
+    tier,
+  ]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -313,16 +472,15 @@ export default function SubscriptionSelectScreen({ navigation }) {
           contentContainerStyle={{ paddingBottom: 24 }}
           showsVerticalScrollIndicator={false}
         >
-          {/* ヘッダー */}
           <View style={styles.header}>
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="Home"
               style={styles.backButton}
             />
-            <Text style={styles.headerTitle}>Subscription</Text>
+            <Text style={styles.headerTitle}>サブスクリプション</Text>
             <TouchableOpacity
-              onPress={() => refreshTier({ force: true }).catch(() => null)}
+              onPress={() => refreshScreenState({ force: true }).catch(() => null)}
               style={styles.refreshBtn}
               activeOpacity={0.75}
             >
@@ -331,57 +489,45 @@ export default function SubscriptionSelectScreen({ navigation }) {
           </View>
 
           <View style={styles.card}>
-            <Text style={[styles.sectionLabel, { color: "#000", fontWeight: "900" }]}>
-              サブスク状況
-            </Text>
+            <Text style={styles.sectionLabel}>現在のプラン</Text>
             {loading ? (
               <ActivityIndicator />
             ) : (
               <View style={styles.currentRow}>
                 <Text style={styles.currentPlan}>{currentLabel}</Text>
-                {(tier !== "free" && false) ? (
-                  <Text style={styles.currentPlanSub}>
-                    {tier === "plus" ? "月額300円" : "月額980円"}
-                  </Text>
+                {currentPriceLabel ? (
+                  <Text style={styles.currentPlanSub}>{currentPriceLabel}</Text>
                 ) : null}
               </View>
             )}
 
-            {!loading && tier !== "free" && false ? (
-              <View style={styles.statusHintBox}>
-                <Text style={styles.statusHintText}>
-                  {"サブスクリプションの変更・解約は、App Store / Google Play の管理画面から行えます。"}
-                </Text>
-              </View>
-            ) : null}
-
-            {(typeof __DEV__ !== "undefined" && __DEV__ && iapInitError && false) ? (
-              <Text style={styles.debugText}>IAP初期化: {iapInitError}</Text>
-            ) : null}
-
             <View style={styles.sectionDivider} />
 
-            <Text style={[styles.sectionLabel, { color: "#000", fontWeight: "900" }]}>
-              サブスク内容と加入
-            </Text>
+            <Text style={styles.sectionLabel}>プランを選ぶ</Text>
 
             <PlanCard
               title="Plus会員"
               price="月額300円"
-              subtitle="レポート閲覧 / MyModelCreate拡張"
+              subtitle={
+                showPlusTrial
+                  ? "１ヵ月無料トライアル（初回限定）"
+                  : "レポート閲覧 / MyModelCreate拡張"
+              }
+              subtitleHighlighted={showPlusTrial}
               features={[
-                "MyWeb：感情構造分析レポート本文閲覧",
-                "MyWeb：自己構造分析レポート履歴＋本文閲覧",
-                "MyWeb：MyModelCreate 30問すべて利用可能（編集可）",
-                "MyModel：Echoes履歴をすべて閲覧可能",
-                "MyModel：Discoveries履歴をすべて閲覧可能",
+                "履歴関連：表示期間１年",
+                "MyWeb：感情構造分析レポートが深くなります",
+                "MyWeb：自己構造分析レポートを閲覧できます",
+                "MyWeb：今日の問いを履歴から編集できます",
+                "MyModel：MyModelCreateの20問すべてを利用できます",
+                "MyModel：MyModelCreateを入力後に編集できます",
               ]}
+              noteLines={plusNoteLines}
               isCurrent={tier === "plus"}
-              recommended={tier !== "premium"} // Premium中はおすすめ出さない
+              recommended={tier !== "premium"}
               onPress={onSelectPlus}
-              ctaDisabled={IS_TEST_BUILD || !!purchaseBusyPlan}
-              ctaLoading={IS_TEST_BUILD ? false : purchaseBusyPlan === "plus"}
-              ctaTextOverride={IS_TEST_BUILD ? "準備中" : undefined}
+              ctaDisabled={restoreLoading || purchaseBusyPlan === "premium"}
+              ctaLoading={purchaseBusyPlan === "plus"}
               styles={styles}
               colors={colors}
             />
@@ -391,43 +537,70 @@ export default function SubscriptionSelectScreen({ navigation }) {
               price="月額980円"
               subtitle="Deepモード / DeepInsight / 生成・分析機能"
               features={[
-                "MyWeb：感情構造分析レポートにDeepモード追加",
-                "MyWeb：自己構造分析レポートにDeepモード追加",
-                "MyWeb：DeepInsight解放",
-                "MyModel：Reflectionを入力内容から生成（secret除く）",
-                "MyModel：自己紹介文生成",
-                "MyModel：Echoes履歴の分析機能",
-                "MyModel：Discoveries履歴の分析機能",
+                "MyWeb：感情構造分析レポートに Deep モードが追加されます",
+                "MyWeb：自己構造分析レポートに Deep モードが追加されます",
+                "MyWeb：DeepInsight を利用できます",
+                "MyModel：Reflection を入力内容から生成できます",
+                "MyModel：自己紹介文を生成できます",
+                "MyModel：Echoes履歴の分析機能を利用できます",
+                "MyModel：Discoveries履歴の分析機能を利用できます",
               ]}
+              noteLines={["※Premiumは準備中です。"]}
               isCurrent={tier === "premium"}
               recommended={false}
-              onPress={onSelectPremium}
-              ctaDisabled={IS_TEST_BUILD || !!purchaseBusyPlan}
-              ctaLoading={IS_TEST_BUILD ? false : purchaseBusyPlan === "premium"}
-              ctaTextOverride={IS_TEST_BUILD ? "準備中" : undefined}
+              onPress={undefined}
+              ctaDisabled={true}
+              ctaLoading={false}
+              ctaTextOverride="準備中"
               styles={styles}
               colors={colors}
             />
 
-            <View style={styles.planCard}>
-              <View style={styles.planHeaderRow}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.planTitle}>Architect会員</Text>
-                  </View>
-                </View>
-              </View>
+            <View style={styles.noteBox}>
+              <Text style={styles.noteTitle}>お手続き</Text>
 
-              <View style={styles.architectSecretWrap}>
-                <Ionicons
-                  name="ban-outline"
-                  size={72}
-                  color={colors.TEXT_SUBTLE}
-                  style={{ marginBottom: 6 }}
-                />
-                <Text style={styles.architectSecretTitle}>TOP SECRET</Text>
-                <Text style={styles.architectSecretSub}>ACCESS DENIED</Text>
-              </View>
+              <TouchableOpacity
+                style={[styles.linkButton, styles.linkButtonFirst]}
+                onPress={onRestorePurchases}
+                disabled={actionBusy}
+                activeOpacity={0.75}
+              >
+                <Text style={styles.linkButtonText}>
+                  {restoreLoading ? "購入内容を確認しています…" : "購入内容を復元"}
+                </Text>
+                <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+              </TouchableOpacity>
+
+              {tier !== "free" ? (
+                <TouchableOpacity
+                  style={styles.linkButton}
+                  onPress={onOpenManageSubscription}
+                  activeOpacity={0.75}
+                >
+                  <Text style={styles.linkButtonText}>
+                    サブスクリプションを管理
+                  </Text>
+                  <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+                </TouchableOpacity>
+              ) : null}
+
+              <TouchableOpacity
+                style={styles.linkButton}
+                onPress={() => openExternalPage(TERMS_URL)}
+                activeOpacity={0.75}
+              >
+                <Text style={styles.linkButtonText}>利用規約</Text>
+                <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.linkButton}
+                onPress={() => openExternalPage(PRIVACY_URL)}
+                activeOpacity={0.75}
+              >
+                <Text style={styles.linkButtonText}>プライバシーポリシー</Text>
+                <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -444,7 +617,12 @@ function createStyles(COLORS, ui) {
 
   return StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: COLORS.PANEL_BG },
-    container: { flex: 1, paddingHorizontal: 18, paddingTop: 16, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      paddingHorizontal: 18,
+      paddingTop: 16,
+      backgroundColor: COLORS.PANEL_BG,
+    },
 
     header: {
       flexDirection: "row",
@@ -464,7 +642,12 @@ function createStyles(COLORS, ui) {
       paddingVertical: 20,
     },
 
-    sectionLabel: { fontSize: font.sectionLabel ?? 12, color: text.subtle ?? COLORS.TEXT_SUBTLE, marginBottom: spacing.sm ?? 8 },
+    sectionLabel: {
+      fontSize: font.sectionLabel ?? 12,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: spacing.sm ?? 8,
+      fontWeight: "800",
+    },
 
     currentRow: { marginBottom: 8 },
     currentPlan: {
@@ -476,26 +659,6 @@ function createStyles(COLORS, ui) {
       marginTop: spacing.xs ?? 4,
       fontSize: font.sectionLabel ?? 12,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-    },
-    debugText: {
-      marginTop: 6,
-      fontSize: font.description ?? 10,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 14,
-    },
-
-    statusHintBox: {
-      marginTop: 10,
-      padding: 10,
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-    },
-    statusHintText: {
-      fontSize: 11,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
     },
 
     sectionDivider: {
@@ -536,6 +699,10 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
       lineHeight: 16,
     },
+    planSubtitleHighlighted: {
+      color: COLORS.TITLE_GOLD,
+      fontWeight: "900",
+    },
     recommendBadge: {
       paddingHorizontal: 8,
       paddingVertical: 4,
@@ -572,26 +739,11 @@ function createStyles(COLORS, ui) {
       lineHeight: 18,
       marginBottom: 2,
     },
-
-    architectSecretWrap: {
-      marginTop: 10,
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: 140,
-      paddingVertical: 18,
-    },
-    architectSecretTitle: {
-      fontSize: 20,
-      fontWeight: "900",
-      letterSpacing: 2,
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    },
-    architectSecretSub: {
-      marginTop: 4,
-      fontSize: 12,
-      fontWeight: "900",
-      letterSpacing: 2,
+    planNote: {
+      fontSize: 11,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+      lineHeight: 16,
+      marginBottom: 2,
     },
 
     planCta: {
@@ -630,11 +782,23 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
-    noteText: {
-      fontSize: 11,
-      color: COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
-      marginBottom: 4,
+
+    linkButton: {
+      minHeight: 44,
+      paddingVertical: 12,
+      borderTopWidth: 1,
+      borderTopColor: COLORS.CARD_BORDER,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    linkButtonFirst: {
+      borderTopWidth: 0,
+    },
+    linkButtonText: {
+      fontSize: 13,
+      fontWeight: "800",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
   });
 }

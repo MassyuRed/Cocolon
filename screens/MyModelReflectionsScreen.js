@@ -21,6 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
+import { apiGet, apiFetch } from "../lib/apiClient";
 import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
 import { useTutorial } from "../TutorialContext";
@@ -84,6 +85,7 @@ const DISCOVERY_CATEGORY_OPTIONS = Object.freeze([
 
 const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
 const TUTORIAL_SELF_USER_ID = "tutorial-self";
+const TUTORIAL_MOCK_FRIEND_NAME = "華恋";
 const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
   {
     id: "tutorial-reflection-mock-1",
@@ -93,7 +95,7 @@ const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
     body:
       "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
     owner_user_id: "tutorial-follow-1",
-    display_name: "朝霧 澪",
+    display_name: TUTORIAL_MOCK_FRIEND_NAME,
     friend_code: "MIO123",
     is_tutorial: true,
     tutorial_kind: "mock",
@@ -207,12 +209,14 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
     setTutorialStep,
   } = useTutorial();
 
-  const targetUserPickerWrapRef = useRef(null);
-  const responseCardWrapRef = useRef(null);
+  const screenRootRef = useRef(null);
+  const myModelSelectorRef = useRef(null);
+  const qaBlockRef = useRef(null);
   const metricsActionsWrapRef = useRef(null);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const tutorialPickUserRowRef = useRef(null);
   const [tutorialPickUserRect, setTutorialPickUserRect] = useState(null);
+  const [tutorialOtherReflectionPhase, setTutorialOtherReflectionPhase] = useState("select");
 
   // Tab reselect helper: used to ignore async results after a "reset to main"
   const resetSeqRef = useRef(0);
@@ -442,23 +446,69 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
     setTutorialListAndSelectFirst,
   ]);
 
+  useEffect(() => {
+    if (!isTutorialMode || tutorialStep !== STEP_REFLECTIONS_SWITCH_AND_REACT) {
+      setTutorialOtherReflectionPhase("select");
+      return;
+    }
+
+    if (!activeViewedUserId) {
+      setTutorialOtherReflectionPhase("select");
+      return;
+    }
+
+    setTutorialOtherReflectionPhase((prev) =>
+      prev === "select" ? "view" : prev
+    );
+  }, [isTutorialMode, tutorialStep, activeViewedUserId]);
+
   const measureTutorialSpot = useCallback(async () => {
-    if (!isTutorialMode) return;
+    if (!isTutorialMode || !screenRootRef.current) {
+      setTutorialTargetRect(null);
+      return;
+    }
 
     let ref = null;
     if (tutorialStep === STEP_REFLECTIONS_SELF_VIEW) {
-      ref = responseCardWrapRef;
+      ref = qaBlockRef;
     } else if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT) {
-      ref = activeViewedUserId ? metricsActionsWrapRef : targetUserPickerWrapRef;
+      if (!activeViewedUserId) {
+        ref = myModelSelectorRef;
+      } else if (tutorialOtherReflectionPhase === "view") {
+        ref = qaBlockRef;
+      } else {
+        ref = metricsActionsWrapRef;
+      }
     }
 
-    const rect = ref ? await measureTutorialTarget(ref) : null;
+    const rect = ref ? await measureTutorialTarget(ref, screenRootRef) : null;
     setTutorialTargetRect(rect);
-  }, [isTutorialMode, tutorialStep, activeViewedUserId]);
+  }, [
+    isTutorialMode,
+    tutorialStep,
+    activeViewedUserId,
+    tutorialOtherReflectionPhase,
+  ]);
 
   useEffect(() => {
-    measureTutorialSpot();
-  }, [measureTutorialSpot, selected, userPickerVisible, pickerVisible]);
+    if (!isTutorialMode) {
+      setTutorialTargetRect(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      measureTutorialSpot();
+    }, 80);
+
+    return () => clearTimeout(timer);
+  }, [
+    isTutorialMode,
+    measureTutorialSpot,
+    selected,
+    userPickerVisible,
+    pickerVisible,
+    tutorialOtherReflectionPhase,
+  ]);
 
   const measureTutorialPickUserSpot = useCallback(async () => {
     if (!isTutorialMode) return;
@@ -615,7 +665,7 @@ useEffect(() => {
 
         if (!cancelled) {
           setTargetDisplayName(
-            String(tutorialTarget?.display_name || "模擬ユーザー")
+            String(tutorialTarget?.display_name || TUTORIAL_MOCK_FRIEND_NAME)
           );
           setTargetNameLoading(false);
         }
@@ -630,16 +680,12 @@ useEffect(() => {
 
       setTargetNameLoading(true);
       try {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("display_name")
-          .eq("id", targetId)
-          .single();
-
-        if (error) throw error;
+        const json = await apiGet(
+          `/account/profile?target_user_id=${encodeURIComponent(targetId)}`
+        );
 
         if (!cancelled) {
-          const nm = String(data?.display_name || "").trim();
+          const nm = String(json?.display_name || "").trim();
           setTargetDisplayName(nm || "（未設定）");
         }
       } catch {
@@ -716,43 +762,18 @@ useEffect(() => {
         return;
       }
 
-      const { data: linkRows, error: linkErr } = await supabase
-        .from("myprofile_links")
-        .select("owner_user_id")
-        .eq("viewer_user_id", myUserId);
-
-      if (linkErr) throw linkErr;
-
-      const ownerIds = (linkRows || [])
-        .map((x) => x?.owner_user_id)
-        .filter(Boolean)
-        .map((x) => String(x));
-
-      if (ownerIds.length === 0) {
-        setFollowingUsers([]);
-        return;
-      }
-
-      const { data: profRows, error: profErr } = await supabase
-        .from("profiles")
-        .select("id, display_name")
-        .in("id", ownerIds);
-
-      if (profErr) throw profErr;
-
-      const nameMap = new Map(
-        (profRows || []).map((p) => [
-          String(p.id),
-          String(p.display_name || "").trim(),
-        ])
+      const json = await apiGet(
+        `/myprofile/follow-list?target_user_id=${encodeURIComponent(myUserId)}&tab=following&limit=1000`
       );
 
+      const rows = Array.isArray(json?.rows) ? json.rows : [];
       const uniq = [];
       const seen = new Set();
-      for (const id of ownerIds) {
-        if (seen.has(id)) continue;
+      for (const row of rows) {
+        const id = String(row?.id || "").trim();
+        if (!id || seen.has(id)) continue;
         seen.add(id);
-        const nm = nameMap.get(id);
+        const nm = String(row?.display_name || "").trim();
         uniq.push({ user_id: id, display_name: nm || "（未設定）" });
       }
 
@@ -843,7 +864,7 @@ useEffect(() => {
         const targetUserId = await resolveTargetUserId(userId);
         const url = buildListUrl(targetUserId, mode);
 
-        const res = await fetch(url, {
+        const res = await apiFetch(url, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -1038,7 +1059,7 @@ useEffect(() => {
         params.append("q_instance_id", String(item.q_instance_id));
         const url = `${QNA_DETAIL_ENDPOINT}?${params.toString()}`;
 
-        const res = await fetch(url, {
+        const res = await apiFetch(url, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -1058,7 +1079,7 @@ useEffect(() => {
 
         // view event (best-effort)
         try {
-          const res2 = await fetch(QNA_VIEW_ENDPOINT, {
+          const res2 = await apiFetch(QNA_VIEW_ENDPOINT, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -1148,7 +1169,7 @@ useEffect(() => {
         params.append("limit", "1");
         const url = `${QNA_DISCOVERIES_HISTORY_ENDPOINT}?${params.toString()}`;
 
-        const res = await fetch(url, {
+        const res = await apiFetch(url, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -1250,7 +1271,7 @@ useEffect(() => {
       params.append("limit", "1");
 
       const url = `${QNA_ECHOES_HISTORY_ENDPOINT}?${params.toString()}`;
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -1347,7 +1368,7 @@ useEffect(() => {
         return;
       }
 
-      const res = await fetch(QNA_ECHOES_SUBMIT_ENDPOINT, {
+      const res = await apiFetch(QNA_ECHOES_SUBMIT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1517,7 +1538,7 @@ useEffect(() => {
 
                 const qidNow = String(selected.q_instance_id);
 
-                const res = await fetch(QNA_ECHOES_DELETE_ENDPOINT, {
+                const res = await apiFetch(QNA_ECHOES_DELETE_ENDPOINT, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -1718,7 +1739,7 @@ useEffect(() => {
         return;
       }
 
-      const res = await fetch(QNA_DISCOVERIES_SUBMIT_ENDPOINT, {
+      const res = await apiFetch(QNA_DISCOVERIES_SUBMIT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1898,7 +1919,7 @@ useEffect(() => {
 
                 const qidNow = String(selected.q_instance_id);
 
-                const res = await fetch(QNA_DISCOVERIES_DELETE_ENDPOINT, {
+                const res = await apiFetch(QNA_DISCOVERIES_DELETE_ENDPOINT, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -1986,7 +2007,7 @@ useEffect(() => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -2006,32 +2027,34 @@ useEffect(() => {
           </Text>
           {isTutorialMode ? (
             <Text style={styles.tierHintText}>
-              まずは自分のReflectionを確認し、その後に模擬ユーザーへ切り替えると「他ユーザーのReflectionも閲覧できる」流れが分かります。
+              まずは自分のReflectionを確認し、その後に華恋へ切り替えると「他ユーザーのReflectionも閲覧できる」流れが分かります。
             </Text>
           ) : null}
 
           {/* Main action */}
           <View style={styles.actions}>
-            <View ref={targetUserPickerWrapRef} collapsable={false} style={styles.targetRow}>
+            <View style={styles.targetRow}>
               <Text style={styles.targetLabel}>MyModel：</Text>
-              <CocolonPressable
-                onPress={openUserPicker}
-                style={styles.targetNamePressable}
-              >
-                <Text style={styles.targetName} numberOfLines={1}>
-                  {isSelfTarget
-                    ? "自分"
-                    : targetNameLoading
-                    ? "（読み込み中）"
-                    : targetDisplayName}
-                </Text>
-                <Ionicons
-                  name="chevron-down"
-                  size={16}
-                  color={colors.TEXT_ON_LIGHT}
-                  style={{ marginLeft: 6 }}
-                />
-              </CocolonPressable>
+              <View ref={myModelSelectorRef} collapsable={false}>
+                <CocolonPressable
+                  onPress={openUserPicker}
+                  style={styles.targetNamePressable}
+                >
+                  <Text style={styles.targetName} numberOfLines={1}>
+                    {isSelfTarget
+                      ? "自分"
+                      : targetNameLoading
+                      ? "（読み込み中）"
+                      : targetDisplayName}
+                  </Text>
+                  <Ionicons
+                    name="chevron-down"
+                    size={16}
+                    color={colors.TEXT_ON_LIGHT}
+                    style={{ marginLeft: 6 }}
+                  />
+                </CocolonPressable>
+              </View>
             </View>
 
             <CocolonButton variant="primary" onPress={openPicker}>
@@ -2052,26 +2075,27 @@ useEffect(() => {
 
           {/* Selected detail */}
           {selected || detailLoading ? (
-            <View ref={responseCardWrapRef} collapsable={false} style={styles.responseGroup}>
+            <View style={styles.responseGroup}>
               {selected?.title && !detailLoading ? (
                 <>
-                  <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【問い】</Text>
-                  <View style={styles.responseCard}>
-                    <Text style={[styles.detailTitle, { marginBottom: 0 }]}>{selected.title}</Text>
-                  </View>
+                  <View ref={qaBlockRef} collapsable={false}>
+                    <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【問い】</Text>
+                    <View style={styles.responseCard}>
+                      <Text style={[styles.detailTitle, { marginBottom: 0 }]}>{selected.title}</Text>
+                    </View>
 
-                  <Text
-                    style={[
-                      styles.responseLabel,
-                      { fontWeight: "700", marginTop: 12 },
-                    ]}
-                  >
-                    【応答】
-                  </Text>
-                  <View style={styles.responseCard}>
-                    <Text style={styles.responseText}>{selected.body}</Text>
+                    <Text
+                      style={[
+                        styles.responseLabel,
+                        { fontWeight: "700", marginTop: 12 },
+                      ]}
+                    >
+                      【応答】
+                    </Text>
+                    <View style={styles.responseCard}>
+                      <Text style={styles.responseText}>{selected.body}</Text>
 
-                    <View style={styles.metricsRow}>
+                      <View style={styles.metricsRow}>
                         <View style={styles.metricPill}>
                           <Ionicons
                             name="heart-outline"
@@ -2101,12 +2125,12 @@ useEffect(() => {
                             )}
                           </Text>
                         </View>
-
-
                       </View>
+                    </View>
+                  </View>
 
-                    {!isSelfTarget ? (
-                      <>
+                  {!isSelfTarget ? (
+                    <>
                       <View ref={metricsActionsWrapRef} collapsable={false} style={styles.metricsActions}>
                         <CocolonPressable
                           onPress={handleResonancePress}
@@ -2157,10 +2181,8 @@ useEffect(() => {
                           発見状態の取得に失敗: {myDiscoveryLatestError}
                         </Text>
                       ) : null}
-                      </>
-                    ) : null}
-
-                  </View>
+                    </>
+                  ) : null}
                 </>
               ) : (
                 <>
@@ -2328,8 +2350,8 @@ useEffect(() => {
               !!tutorialPickUserRect
             }
             targetRect={tutorialPickUserRect}
-            title="模擬ユーザーを選択"
-            message="このユーザーを選択して、Reflectionを見てみましょう。"
+            title="華恋を選択"
+            message="華恋を選択して、Reflectionを見てみましょう。"
             step={tutorialStep}
             totalSteps={TUTORIAL_TOTAL_STEPS}
             mode="action"
@@ -2897,35 +2919,31 @@ useEffect(() => {
           !!isTutorialMode &&
           (tutorialStep === STEP_REFLECTIONS_SELF_VIEW ||
             tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT) &&
-          !(
-            tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT &&
-            !activeViewedUserId &&
-            !tutorialTargetRect
-          )
+          !!tutorialTargetRect
         }
         targetRect={tutorialTargetRect}
         title={
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW
             ? "自分のReflection"
-            : activeViewedUserId
-            ? "他ユーザーのReflection"
-            : "模擬ユーザーへ切り替え"
+            : !activeViewedUserId
+            ? "華恋へ切り替え"
+            : "他ユーザーのReflection"
         }
         message={
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW
             ? "フォロワーにはこのように表示されます。自分の作成したReflectionを確認できます。"
-            : activeViewedUserId
-            ? "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』、新しい気づきを得たら『発見』でリアクションできます。（チュートリアルでは説明のみです）"
-            : "『MyModel：自分』を押して、模擬ユーザーを選んでください。"
+            : !activeViewedUserId
+            ? "『MyModel：自分』を押して、華恋を選んでください。"
+            : tutorialOtherReflectionPhase === "view"
+            ? "このように他ユーザーのReflectionが表示されます。"
+            : "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』、新しい気づきを得たら『発見』でリアクションできます。（チュートリアルでは説明のみです）"
         }
         step={tutorialStep}
         totalSteps={TUTORIAL_TOTAL_STEPS}
         mode={
-          tutorialStep === STEP_REFLECTIONS_SELF_VIEW
-            ? "info"
-            : activeViewedUserId
-            ? "info"
-            : "action"
+          tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && !activeViewedUserId
+            ? "action"
+            : "info"
         }
         showPrimaryButton={
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW ||
@@ -2933,8 +2951,15 @@ useEffect(() => {
         }
         nextLabel={
           tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && !!activeViewedUserId
-            ? "Friendsへ"
+            ? tutorialOtherReflectionPhase === "view"
+              ? "次へ"
+              : "Friendsへ"
             : "次へ"
+        }
+        cardPlacement={
+          tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && !!activeViewedUserId
+            ? "top"
+            : "bottom"
         }
         onNext={() => {
           if (!isTutorialMode) return;
@@ -2944,6 +2969,11 @@ useEffect(() => {
           }
 
           if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && activeViewedUserId) {
+            if (tutorialOtherReflectionPhase === "view") {
+              setTutorialOtherReflectionPhase("react");
+              return;
+            }
+
             setTutorialStep(STEP_FRIENDS_START);
 
             try {

@@ -12,7 +12,7 @@ import {
 
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
-import { supabase } from "../lib/supabase";
+import { apiGet, getAccessToken } from "../lib/apiClient";
 
 // UI
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -37,6 +37,7 @@ const API_BASE = String(
 
 const QNA_DETAIL_ENDPOINT = `${API_BASE}/mymodel/qna/detail`;
 const DISCOVERIES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/history`;
+const HISTORY_PAGE_LIMIT = 50;
 
 const DISCOVERY_CATEGORY_OPTIONS = Object.freeze([
   { key: "new_perspective", label: "新しい視点だった" },
@@ -83,7 +84,7 @@ export default function DiscoveriesHistoryDetailScreen({ navigation, route }) {
 
   const qInstanceId = String(route?.params?.q_instance_id || route?.params?.qInstanceId || "").trim();
 
-  // Optional (best-effort): list -> detail can pass this; if not provided, we try to resolve from Supabase
+  // Optional (best-effort): list -> detail can pass this; if not provided, we try to resolve from API
   const [ownerDisplayName, setOwnerDisplayName] = useState(() => {
     const v =
       route?.params?.owner_display_name ||
@@ -99,24 +100,27 @@ export default function DiscoveriesHistoryDetailScreen({ navigation, route }) {
 
   const [detail, setDetail] = useState(null);
   const [history, setHistory] = useState(null);
+  const [timelineItems, setTimelineItems] = useState([]);
+  const [historyLoadingMore, setHistoryLoadingMore] = useState(false);
+  const [historyHasMore, setHistoryHasMore] = useState(false);
+  const [historyNextOffset, setHistoryNextOffset] = useState(null);
 
   const abortRef = useRef(null);
 
   const resolveOwnerNameIfNeeded = useCallback(
-    async (qId) => {
+    async (qId, signal) => {
       try {
         if (ownerDisplayName) return;
         const ownerUserId = parseOwnerUserIdFromInstanceId(qId);
         if (!ownerUserId) return;
 
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("display_name")
-          .eq("id", ownerUserId)
-          .maybeSingle();
-
-        if (!error && data?.display_name) {
-          setOwnerDisplayName(String(data.display_name));
+        const json = await apiGet(
+          `/account/profile?target_user_id=${encodeURIComponent(ownerUserId)}`,
+          { signal }
+        );
+        const name = String(json?.display_name || "").trim();
+        if (name) {
+          setOwnerDisplayName(name);
         }
       } catch {
         // ignore (best-effort)
@@ -147,42 +151,34 @@ export default function DiscoveriesHistoryDetailScreen({ navigation, route }) {
       else setLoading(true);
 
       try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        const accessToken = sessionData?.session?.access_token ?? null;
+        const accessToken = await getAccessToken();
         if (!accessToken) throw new Error("ログイン情報が取得できませんでした。");
 
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        };
-
-        const detailUrl = `${QNA_DETAIL_ENDPOINT}?q_instance_id=${encodeURIComponent(qInstanceId)}`;
-        const historyUrl = `${DISCOVERIES_HISTORY_ENDPOINT}?q_instance_id=${encodeURIComponent(
-          qInstanceId
-        )}&limit=200&offset=0`;
-
-        const [detailRes, historyRes] = await Promise.all([
-          fetch(detailUrl, { method: "GET", headers, signal: controller.signal }),
-          fetch(historyUrl, { method: "GET", headers, signal: controller.signal }),
+        const [detailJson, historyJson] = await Promise.all([
+          apiGet(`/mymodel/qna/detail?q_instance_id=${encodeURIComponent(qInstanceId)}`, {
+            signal: controller.signal,
+          }),
+          apiGet(
+            `/mymodel/qna/discoveries/history?q_instance_id=${encodeURIComponent(qInstanceId)}&limit=${HISTORY_PAGE_LIMIT}&offset=0`,
+            { signal: controller.signal }
+          ),
         ]);
 
-        const detailJson = await detailRes.json().catch(() => null);
-        if (!detailRes.ok) {
-          const msg = detailJson?.detail ? String(detailJson.detail) : null;
-          throw new Error(msg || "Reflectionの取得に失敗しました。");
-        }
-
-        const historyJson = await historyRes.json().catch(() => null);
-        if (!historyRes.ok) {
-          const msg = historyJson?.detail ? String(historyJson.detail) : null;
-          throw new Error(msg || "Discoveries履歴の取得に失敗しました。");
-        }
-
+        const nextHistory = historyJson && typeof historyJson === "object" ? historyJson : null;
         setDetail(detailJson && typeof detailJson === "object" ? detailJson : null);
-        setHistory(historyJson && typeof historyJson === "object" ? historyJson : null);
+        setHistory(nextHistory);
+        setTimelineItems(Array.isArray(nextHistory?.items) ? nextHistory.items : []);
+        setHistoryHasMore(Boolean(nextHistory?.has_more));
+        setHistoryNextOffset(
+          typeof nextHistory?.next_offset === "number"
+            ? nextHistory.next_offset
+            : nextHistory?.next_offset != null
+              ? Number(nextHistory.next_offset)
+              : null
+        );
 
         setErrorText("");
-        resolveOwnerNameIfNeeded(qInstanceId);
+        resolveOwnerNameIfNeeded(qInstanceId, controller.signal);
       } catch (e) {
         const msg = String(e?.message || e || "エラーが発生しました。");
         setErrorText(msg);
@@ -209,7 +205,41 @@ export default function DiscoveriesHistoryDetailScreen({ navigation, route }) {
     fetchAll({ isRefresh: true });
   }, [fetchAll]);
 
-  const timelineItems = Array.isArray(history?.items) ? history.items : [];
+  const loadMoreHistory = useCallback(async () => {
+    if (loading || refreshing || historyLoadingMore || !historyHasMore || historyNextOffset == null) return;
+    setHistoryLoadingMore(true);
+    try {
+      const json = await apiGet(
+        `/mymodel/qna/discoveries/history?q_instance_id=${encodeURIComponent(qInstanceId)}&limit=${HISTORY_PAGE_LIMIT}&offset=${historyNextOffset}`
+      );
+      const nextItems = Array.isArray(json?.items) ? json.items : [];
+      setTimelineItems((prev) => {
+        const existing = new Set((prev || []).map((item) => String(item?.id || item?.created_at || "")));
+        const merged = [...(prev || [])];
+        for (const item of nextItems) {
+          const key = String(item?.id || item?.created_at || "");
+          if (!key || existing.has(key)) continue;
+          existing.add(key);
+          merged.push(item);
+        }
+        return merged;
+      });
+      setHistory((prev) => (prev && typeof prev === "object" ? { ...prev, ...json, items: undefined } : json));
+      setHistoryHasMore(Boolean(json?.has_more));
+      setHistoryNextOffset(
+        typeof json?.next_offset === "number"
+          ? json.next_offset
+          : json?.next_offset != null
+            ? Number(json.next_offset)
+            : null
+      );
+    } catch (e) {
+      console.warn("DiscoveriesHistoryDetailScreen.js: loadMore failed", e);
+    } finally {
+      setHistoryLoadingMore(false);
+    }
+  }, [loading, refreshing, historyLoadingMore, historyHasMore, historyNextOffset, qInstanceId]);
+
   const latest = timelineItems.length > 0 ? timelineItems[0] : null;
 
   const Header = useMemo(() => {
@@ -269,12 +299,6 @@ export default function DiscoveriesHistoryDetailScreen({ navigation, route }) {
               {Number(history?.total ?? 0) || 0}
             </Text>
           </View>
-
-          {history?.is_limited ? (
-            <Text style={styles.limitNote}>
-              Freeプランでは直近{Number(history?.limit ?? 0) || 0}件まで表示されます。
-            </Text>
-          ) : null}
         </View>
 
         <Text style={styles.listTitle}>タイムライン</Text>
@@ -369,6 +393,17 @@ export default function DiscoveriesHistoryDetailScreen({ navigation, route }) {
             }
             ListEmptyComponent={
               <Text style={styles.subtleText}>まだ履歴がありません。</Text>
+            }
+            ListFooterComponent={
+              historyLoadingMore ? (
+                <View style={styles.listFooter}>
+                  <ActivityIndicator size="small" color={colors.TITLE_GOLD} />
+                </View>
+              ) : historyHasMore ? (
+                <CocolonPressable style={styles.loadMoreBtn} onPress={loadMoreHistory} accessibilityLabel="さらに履歴を読み込む">
+                  <Text style={styles.loadMoreText}>さらに表示</Text>
+                </CocolonPressable>
+              ) : <View style={styles.listFooterSpacer} />
             }
           />
         )}
@@ -492,6 +527,10 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
 
+    listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
+    listFooterSpacer: { height: 12 },
+    loadMoreBtn: { borderRadius: 14, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG, alignItems: "center", justifyContent: "center", paddingHorizontal: 14, paddingVertical: 10, marginBottom: 16 },
+    loadMoreText: { fontSize: 13, fontWeight: "700", color: COLORS.TEXT_ON_LIGHT },
     listTitle: {
       marginTop: 4,
       marginBottom: 8,

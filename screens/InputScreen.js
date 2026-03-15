@@ -19,7 +19,12 @@ import {
 } from "react-native";
 
 // Supabase Auth
-import { supabase } from "../lib/supabase";
+import { apiGet, apiPost } from "../lib/apiClient";
+import {
+  getTodayQuestionCurrent,
+  submitTodayQuestionAnswer,
+  resolveLocalTimezoneName,
+} from "../lib/todayQuestionApi";
 
 // テーマ
 import { useTheme } from "../theme/ThemeContext";
@@ -33,15 +38,15 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import { makeUiTokens } from "../ui/uiTokens";
 import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
+import TodayQuestionCard from "../components/TodayQuestionCard";
+import TodayQuestionModal from "../components/TodayQuestionModal";
 
 // MashOS Emotion Submit API
 // ※ 現在は MashOS を Render 上で稼働させているため、
 //   開発ビルド / 本番ビルドを問わず同じクラウド URL を利用する。
 //   （ローカル API に戻したい場合はここを書き換える）
 
-const EMOTION_API_BASE_URL = "https://mashos-api.onrender.com";
-const EMOTION_SUBMIT_URL = `${EMOTION_API_BASE_URL}/emotion/submit`;
-const GLOBAL_SUMMARY_URL = `${EMOTION_API_BASE_URL}/global_summary`;
+const GLOBAL_SUMMARY_PATH = "/global_summary";
 
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
@@ -50,6 +55,10 @@ const PANEL_MIN_HEIGHT = 690;
 const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
 
 const SELF_INSIGHT = "自己理解";
+
+function getInputLocalTimezoneName() {
+  return resolveLocalTimezoneName("Asia/Tokyo");
+}
 
 // 感情ボタンの配置（2段構成：下段右は空き）
 const EMOTION_ROWS = [
@@ -149,12 +158,7 @@ const appStateRef = useRef(AppState.currentState);
 
 const fetchGlobalSummary = useCallback(async () => {
   try {
-    const res = await fetch(GLOBAL_SUMMARY_URL, { method: "GET" });
-    const json = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      throw new Error(String(json?.detail || json?.message || `HTTP ${res.status}`));
-    }
-
+    const json = await apiGet(GLOBAL_SUMMARY_PATH, { auth: false });
     const nextEmotionUsers = Number(json?.emotion_users);
     if (Number.isFinite(nextEmotionUsers)) {
       setGlobalEmotionUsers(nextEmotionUsers);
@@ -171,6 +175,18 @@ const [homeMonthCount, setHomeMonthCount] = useState(null);
 const [homeWeekCount, setHomeWeekCount] = useState(null);
 const [homeStreakDays, setHomeStreakDays] = useState(null);
 
+const [todayQuestionBundle, setTodayQuestionBundle] = useState(null);
+const [todayQuestionLoading, setTodayQuestionLoading] = useState(false);
+const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
+const [todayQuestionModalVisible, setTodayQuestionModalVisible] = useState(false);
+const dismissedTodayQuestionDayRef = useRef(null);
+const todayQuestionRequestIdRef = useRef(0);
+
+const clearTodayQuestionUi = useCallback(() => {
+  setTodayQuestionBundle(null);
+  setTodayQuestionModalVisible(false);
+  setTodayQuestionLoading(false);
+}, []);
 
 const homeBadgeLabel = useMemo(() => {
   const m = typeof homeMonthCount === "number" ? homeMonthCount : null;
@@ -211,118 +227,27 @@ const homeBadgeLabel = useMemo(() => {
 
 const refreshHomeCounts = useCallback(async () => {
   try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    const uid = session?.user?.id;
-    if (!uid) return;
+    const json = await apiGet("/input/summary");
+    const todayCount = Number(json?.today_count ?? 0);
+    const weekCount = Number(json?.week_count ?? 0);
+    const monthCount = Number(json?.month_count ?? 0);
+    const streakDays = Number(json?.streak_days ?? 0);
 
-    const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
-    const now = new Date();
-    const nowJst = new Date(now.getTime() + JST_OFFSET_MS);
-    const y = nowJst.getUTCFullYear();
-    const mon = nowJst.getUTCMonth(); // 0-based
-    const day = nowJst.getUTCDate();
+    setHomeTodayCount(Number.isFinite(todayCount) ? todayCount : 0);
+    setHomeWeekCount(Number.isFinite(weekCount) ? weekCount : 0);
+    setHomeMonthCount(Number.isFinite(monthCount) ? monthCount : 0);
+    setHomeStreakDays(Number.isFinite(streakDays) ? streakDays : 0);
 
-    const dayStartUtcMs = Date.UTC(y, mon, day, 0, 0, 0) - JST_OFFSET_MS;
-    const dayEndUtcMs = dayStartUtcMs + 24 * 60 * 60 * 1000;
-    const monthStartUtcMs = Date.UTC(y, mon, 1, 0, 0, 0) - JST_OFFSET_MS;
-    const nextMonthStartUtcMs = Date.UTC(y, mon + 1, 1, 0, 0, 0) - JST_OFFSET_MS;
-
-    const dayStartIso = new Date(dayStartUtcMs).toISOString();
-    const dayEndIso = new Date(dayEndUtcMs).toISOString();
-    const monthStartIso = new Date(monthStartUtcMs).toISOString();
-    const monthEndIso = new Date(nextMonthStartUtcMs).toISOString();
-
-    // 週（JST）は日曜始まりで計算（emotion_weekly の考え方に合わせる）
-    const dow = nowJst.getUTCDay(); // 0=Sun .. 6=Sat (JSTベース)
-    const weekStartUtcMs = Date.UTC(y, mon, day - dow, 0, 0, 0) - JST_OFFSET_MS;
-    const weekEndUtcMs = weekStartUtcMs + 7 * 24 * 60 * 60 * 1000;
-    const weekStartIso = new Date(weekStartUtcMs).toISOString();
-    const weekEndIso = new Date(weekEndUtcMs).toISOString();
-
-    // 連続日数計算用（直近の入力だけ取得して日付セット化）
-    const streakWindowStartIso = new Date(
-      dayStartUtcMs - 35 * 24 * 60 * 60 * 1000
-    ).toISOString();
-
-    const todayRes = await supabase
-      .from("emotions")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", uid)
-      .gte("created_at", dayStartIso)
-      .lt("created_at", dayEndIso);
-
-    const monthRes = await supabase
-      .from("emotions")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", uid)
-      .gte("created_at", monthStartIso)
-      .lt("created_at", monthEndIso);
-
-
-    const weekRes = await supabase
-      .from("emotions")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", uid)
-      .gte("created_at", weekStartIso)
-      .lt("created_at", weekEndIso);
-
-    const streakRes = await supabase
-      .from("emotions")
-      .select("created_at")
-      .eq("user_id", uid)
-      .gte("created_at", streakWindowStartIso)
-      .lt("created_at", dayEndIso)
-      .order("created_at", { ascending: false })
-      .limit(500);
-
-    if (typeof todayRes.count === "number") setHomeTodayCount(todayRes.count);
-    if (typeof monthRes.count === "number") setHomeMonthCount(monthRes.count);
-    if (typeof weekRes.count === "number") setHomeWeekCount(weekRes.count);
-
-    // 連続観測日数（JST基準）
-    try {
-      const rows = Array.isArray(streakRes?.data) ? streakRes.data : [];
-      const JST_OFFSET_MS2 = 9 * 60 * 60 * 1000;
-
-      const toDateKeyJst = (iso) => {
-        const d = new Date(iso);
-        const dj = new Date(d.getTime() + JST_OFFSET_MS2);
-        const yy = dj.getUTCFullYear();
-        const mm = String(dj.getUTCMonth() + 1).padStart(2, "0");
-        const dd = String(dj.getUTCDate()).padStart(2, "0");
-        return `${yy}-${mm}-${dd}`;
-      };
-
-      const dateSet = new Set();
-      for (const r of rows) {
-        if (r?.created_at) dateSet.add(toDateKeyJst(r.created_at));
-      }
-
-      // 今日に入力が無い場合は「昨日までの連続」を維持表示する（朝イチで0になるのを避ける）
-      const base = dateSet.has(toDateKeyJst(new Date().toISOString()))
-        ? new Date(now.getTime() + JST_OFFSET_MS2)
-        : new Date(now.getTime() + JST_OFFSET_MS2 - 24 * 60 * 60 * 1000);
-
-      let streak = 0;
-      for (let i = 0; i < 60; i += 1) {
-        const t = new Date(base.getTime() - i * 24 * 60 * 60 * 1000);
-        const key = (() => {
-          const yy = t.getUTCFullYear();
-          const mm = String(t.getUTCMonth() + 1).padStart(2, "0");
-          const dd = String(t.getUTCDate()).padStart(2, "0");
-          return `${yy}-${mm}-${dd}`;
-        })();
-        if (dateSet.has(key)) streak += 1;
-        else break;
-      }
-      setHomeStreakDays(streak);
-    } catch {
-      // noop
-    }
-  } catch {
-    // noop
+    return {
+      todayCount,
+      weekCount,
+      monthCount,
+      streakDays,
+      lastInputAt: json?.last_input_at || null,
+    };
+  } catch (e) {
+    console.warn("InputScreen: refreshHomeCounts failed", e);
+    return null;
   }
 }, []);
 
@@ -381,11 +306,125 @@ useEffect(() => {
   };
 }, [fetchGlobalSummary]);
 
+const loadTodayQuestion = useCallback(async () => {
+  const requestId = todayQuestionRequestIdRef.current + 1;
+  todayQuestionRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearTodayQuestionUi();
+    return;
+  }
+
+  const timezoneName = getInputLocalTimezoneName();
+  setTodayQuestionLoading(true);
+  try {
+    const json = await getTodayQuestionCurrent({ timezone_name: timezoneName });
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
+
+    setTodayQuestionBundle(json || null);
+
+    const unanswered = json?.question && json?.answer_status !== "answered";
+    const serviceDayKey = String(json?.service_day_key || "");
+    if (
+      unanswered &&
+      serviceDayKey &&
+      dismissedTodayQuestionDayRef.current !== serviceDayKey
+    ) {
+      setTodayQuestionModalVisible(true);
+    } else {
+      setTodayQuestionModalVisible(false);
+    }
+  } catch (e) {
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
+    console.warn("InputScreen: loadTodayQuestion failed", e);
+    clearTodayQuestionUi();
+  } finally {
+    if (todayQuestionRequestIdRef.current === requestId) {
+      setTodayQuestionLoading(false);
+    }
+  }
+}, [clearTodayQuestionUi, isTutorialMode]);
+
+useEffect(() => {
+  loadTodayQuestion();
+
+  let unsubscribe = null;
+  try {
+    unsubscribe = navigation?.addListener?.("focus", loadTodayQuestion);
+  } catch {
+    // noop
+  }
+
+  return () => {
+    try {
+      if (typeof unsubscribe === "function") unsubscribe();
+    } catch {
+      // noop
+    }
+  };
+}, [navigation, loadTodayQuestion]);
+
+const handleDismissTodayQuestionModal = useCallback(() => {
+  const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
+  if (serviceDayKey) {
+    dismissedTodayQuestionDayRef.current = serviceDayKey;
+  }
+  setTodayQuestionModalVisible(false);
+}, [todayQuestionBundle?.service_day_key]);
+
+const handleOpenTodayQuestionHistory = useCallback(() => {
+  try {
+    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+    if (parent && typeof parent.navigate === "function") {
+      parent.navigate("MyWeb", {
+        openTodayQuestionHistory: true,
+        openTodayQuestionHistoryAt: Date.now(),
+      });
+      return;
+    }
+  } catch {
+    // noop
+  }
+
+  try {
+    navigation?.navigate?.("MyWeb", {
+      openTodayQuestionHistory: true,
+      openTodayQuestionHistoryAt: Date.now(),
+    });
+  } catch {
+    // noop
+  }
+}, [navigation]);
+
+const handleSubmitTodayQuestion = useCallback(async (payload) => {
+  if (!todayQuestionBundle?.question?.question_id) return;
+
+  setTodayQuestionSubmitting(true);
+  try {
+    await submitTodayQuestionAnswer({
+      service_day_key: todayQuestionBundle?.service_day_key,
+      question_id: todayQuestionBundle?.question?.question_id,
+      sequence_no: todayQuestionBundle?.progress?.sequence_no,
+      ...payload,
+    });
+    showToast("今日の問いを保存しました");
+    dismissedTodayQuestionDayRef.current = String(todayQuestionBundle?.service_day_key || "");
+    await loadTodayQuestion();
+    setTodayQuestionModalVisible(false);
+  } catch (e) {
+    console.warn("InputScreen: submitTodayQuestion failed", e);
+    Alert.alert("今日の問い", String(e?.message || "保存に失敗しました。"));
+  } finally {
+    setTodayQuestionSubmitting(false);
+  }
+}, [loadTodayQuestion, showToast, todayQuestionBundle]);
+
 const { height: windowHeight } = useWindowDimensions();
 
   const screenRootRef = useRef(null);
   const emotionAreaRef = useRef(null);
   const memoSectionRef = useRef(null);
+  const memoToggleButtonRef = useRef(null);
   const okButtonRef = useRef(null);
   const strengthRowRefs = useRef({});
   const currentScrollYRef = useRef(0);
@@ -395,6 +434,7 @@ const { height: windowHeight } = useWindowDimensions();
     isTutorialMode &&
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
+  const shouldHideTodayQuestionForTutorial = isTutorialMode;
 
   // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える
   const inputMaxHeight = useMemo(() => {
@@ -499,7 +539,7 @@ const { height: windowHeight } = useWindowDimensions();
         return strengthRowRefs.current?.[selectedType] || emotionAreaRef;
       }
       case 4:
-        return memoSectionRef;
+        return memoToggleButtonRef;
       case 5:
       case 6:
         return okButtonRef;
@@ -546,7 +586,7 @@ const { height: windowHeight } = useWindowDimensions();
           mode: "info",
           title: "メモも使えます",
           message:
-            "ここにはメモを書くこともできます\n\nメモを書くと\n分析レポートの精度が上がります",
+            "必要なときはここからメモ入力ができます\n\nメモを書くと\n分析レポートの精度が上がります",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(5),
         };
@@ -558,6 +598,7 @@ const { height: windowHeight } = useWindowDimensions();
           message: "入力が終わったら\nこのボタンで送信します",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(6),
+          cardPlacement: "top",
         };
       case 6:
         return {
@@ -566,6 +607,7 @@ const { height: windowHeight } = useWindowDimensions();
           title: "送信してみましょう",
           message: "感情を送信してみましょう",
           actionHint: "「この内容でOK」を押してください",
+          cardPlacement: "top",
         };
       default:
         return null;
@@ -613,15 +655,42 @@ const { height: windowHeight } = useWindowDimensions();
   useEffect(() => {
     if (!isTutorialMode) return;
     if (tutorialStep > 0) return;
-    setTutorialStep(1);
-  }, [isTutorialMode, tutorialStep, setTutorialStep]);
+    if (!!todayQuestionBundle?.question || todayQuestionModalVisible || todayQuestionLoading) {
+      return;
+    }
+
+    const frame = requestAnimationFrame(() => {
+      setTutorialStep(1);
+    });
+
+    return () => {
+      try {
+        cancelAnimationFrame(frame);
+      } catch {
+        // noop
+      }
+    };
+  }, [
+    isTutorialMode,
+    tutorialStep,
+    !!todayQuestionBundle?.question,
+    todayQuestionLoading,
+    todayQuestionModalVisible,
+    setTutorialStep,
+  ]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
-    if (tutorialStep < 4) return;
-    if (showMemoSection) return;
+    todayQuestionRequestIdRef.current += 1;
+    clearTodayQuestionUi();
+  }, [clearTodayQuestionUi, isTutorialMode]);
+
+  useEffect(() => {
+    if (!isTutorialMode) return;
+    if (tutorialStep >= 4) return;
+    if (!showMemoSection) return;
     if (isSelfInsightSelected) return;
-    setShowMemoSection(true);
+    setShowMemoSection(false);
   }, [isTutorialMode, tutorialStep, showMemoSection, isSelfInsightSelected]);
 
   useEffect(() => {
@@ -643,6 +712,10 @@ const { height: windowHeight } = useWindowDimensions();
     memo,
     memoAction,
     keyboardInset,
+    shouldHideTodayQuestionForTutorial,
+    !!todayQuestionBundle?.question,
+    todayQuestionLoading,
+    todayQuestionModalVisible,
     syncTutorialTargetRect,
   ]);
 
@@ -829,101 +902,32 @@ const { height: windowHeight } = useWindowDimensions();
               // noop
             }
 
-            Alert.alert(
-              "フレンド通知",
-              `${tutorialFriendName}さんが感情を入力しました。
-Friendでフレンドログを確認できます。`,
-              [
-                { text: "あとで確認", style: "cancel" },
-                {
-                  text: "Friendを見る",
-                  onPress: () => {
-                    try {
-                      navigation?.navigate?.("Friends");
-                      return;
-                    } catch {
-                      // noop
-                    }
-
-                    try {
-                      const parent =
-                        typeof navigation?.getParent === "function"
-                          ? navigation.getParent()
-                          : null;
-                      parent?.navigate?.("Friends");
-                    } catch {
-                      // noop
-                    }
-                  },
-                },
-              ]
-            );
-
             tutorialFriendNotifyTimerRef.current = null;
           }, 3000);
         }
 
-        Alert.alert(
-          "チュートリアル入力を記録しました",
-          "この入力はチュートリアル用の記録です。本番データには保存されません。\n\n感情入力を蓄積すると分析レポートが作成され、メモを書くと分析レポートの精度が上がります。\n\n次はMyWebで流れを確認できます。",
-          [
-            { text: "このまま続ける", style: "cancel" },
-            {
-              text: "MyWebを見る",
-              onPress: () => {
-                try {
-                  navigation?.navigate?.("MyWeb");
-                } catch {
-                  // noop
-                }
-              },
-            },
-          ]
-        );
+        requestAnimationFrame(() => {
+          try {
+            navigation?.navigate?.("MyWeb");
+            return;
+          } catch {
+            // noop
+          }
+
+          try {
+            const parent =
+              typeof navigation?.getParent === "function"
+                ? navigation.getParent()
+                : null;
+            parent?.navigate?.("MyWeb");
+          } catch {
+            // noop
+          }
+        });
         return;
       }
 
-      // 0) Supabase Auth から現在のセッション（JWT）を取得
-      const {
-        data: { session },
-        error: sessionError,
-      } = await supabase.auth.getSession();
-
-      if (sessionError) {
-        console.warn("getSession error:", sessionError);
-      }
-
-      const accessToken = session?.access_token;
-      if (!accessToken) {
-        console.warn(
-          "No access token. Emotion submit will be unauthenticated."
-        );
-      }
-
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      if (accessToken) {
-        headers["Authorization"] = `Bearer ${accessToken}`;
-      }
-
-      const res = await fetch(EMOTION_SUBMIT_URL, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        console.error("Emotion submit error:", res.status, text);
-        Alert.alert(
-          "保存エラー",
-          "感情の保存に失敗しました。しばらくしてからもう一度試してください。"
-        );
-        return;
-      }
-
-      console.log("Emotion submit accepted:", res.status);
+      await apiPost("/emotion/submit", payload);
       // 送信が成功したら、入力状態をリセットし、完了メッセージ（Toast）を表示する
       setSelectedEmotions([]);
       setMemo("");
@@ -939,67 +943,12 @@ Friendでフレンドログを確認できます。`,
       // まずは軽い即時フィードバック（カウント取得失敗時のフォールバックにもなる）
       showToast(`記録しました
 主感情：${dominantType}${dominantSuffix}`);
-
-      // 2) 今日/今月の観測回数（JST）を取得して、トースト文言を強化（失敗時は無視）
-      const uid = session?.user?.id;
-      if (uid) {
-        (async () => {
-          try {
-            const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
-            const now = new Date();
-            const nowJst = new Date(now.getTime() + JST_OFFSET_MS);
-            const y = nowJst.getUTCFullYear();
-            const mon = nowJst.getUTCMonth(); // 0-based
-            const day = nowJst.getUTCDate();
-
-            const dayStartUtcMs = Date.UTC(y, mon, day, 0, 0, 0) - JST_OFFSET_MS;
-            const dayEndUtcMs = dayStartUtcMs + 24 * 60 * 60 * 1000;
-            const monthStartUtcMs = Date.UTC(y, mon, 1, 0, 0, 0) - JST_OFFSET_MS;
-            const nextMonthStartUtcMs = Date.UTC(y, mon + 1, 1, 0, 0, 0) - JST_OFFSET_MS;
-
-            const dayStartIso = new Date(dayStartUtcMs).toISOString();
-            const dayEndIso = new Date(dayEndUtcMs).toISOString();
-            const monthStartIso = new Date(monthStartUtcMs).toISOString();
-            const monthEndIso = new Date(nextMonthStartUtcMs).toISOString();
-
-            const todayRes = await supabase
-              .from("emotions")
-              .select("id", { count: "exact", head: true })
-              .eq("user_id", uid)
-              .gte("created_at", dayStartIso)
-              .lt("created_at", dayEndIso);
-
-            const monthRes = await supabase
-              .from("emotions")
-              .select("id", { count: "exact", head: true })
-              .eq("user_id", uid)
-              .gte("created_at", monthStartIso)
-              .lt("created_at", monthEndIso);
-
-            const todayCount =
-              typeof todayRes.count === "number" ? todayRes.count : null;
-            const monthCount =
-              typeof monthRes.count === "number" ? monthRes.count : null;
-
-            if (todayCount != null && monthCount != null) {
-              setHomeTodayCount(todayCount);
-              setHomeMonthCount(monthCount);
-              showToast(
-                `今日の観測：${todayCount}回目 / 今月：${monthCount}回達成
-主感情：${dominantType}${dominantSuffix}`
-              );
-            }
-          } catch {
-            // noop（カウント取得はbest-effort）
-          }
-        })();
-      }
-
-      // 週/連続も含めて常設表示を更新（best-effort）
-      try {
-        refreshHomeCounts();
-      } catch {
-        // noop
+      const summaryPromise = refreshHomeCounts();
+      void fetchGlobalSummary();
+      const summary = await summaryPromise;
+      if (summary?.todayCount != null && summary?.monthCount != null) {
+        showToast(`今日の観測：${summary.todayCount}回目 / 今月：${summary.monthCount}回達成
+主感情：${dominantType}${dominantSuffix}`);
       }
     } catch (error) {
       console.error("入力処理エラー:", error);
@@ -1151,6 +1100,20 @@ ${String(error?.message || error)}`
                   </View>
                 ) : null}
               </View>
+
+              {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
+                <View style={{ marginBottom: 14 }}>
+                  <TodayQuestionCard
+                    question={todayQuestionBundle?.question}
+                    answerSummary={todayQuestionBundle?.answer_summary || null}
+                    loading={todayQuestionLoading}
+                    submitting={todayQuestionSubmitting}
+                    showHistoryButton
+                    onSubmit={handleSubmitTodayQuestion}
+                    onOpenHistory={handleOpenTodayQuestionHistory}
+                  />
+                </View>
+              ) : null}
 
               {/* 「今の気持ちを入力」エリア */}
               <View
@@ -1655,36 +1618,53 @@ ${String(error?.message || error)}`
                 </View>
 
                 {!isSelfInsightSelected ? (
-                  <CocolonPressable
-                    style={styles.memoToggleButton}
-                    onPress={() => {
-                      if (showMemoSection) {
-                        setActiveField(null);
-                        Keyboard.dismiss();
-                      }
-                      setShowMemoSection((prev) => !prev);
-                    }}
-                    accessibilityLabel={
-                      showMemoSection
-                        ? "メモ入力を閉じる"
-                        : "メモ入力を開く"
-                    }
+                  <View
+                    ref={memoToggleButtonRef}
+                    collapsable={false}
+                    style={styles.memoToggleButtonWrapper}
                   >
-                    <Ionicons
-                      name={showMemoSection ? "chevron-up" : "chevron-down"}
-                      size={18}
-                      color="#000000"
-                      style={{ marginRight: 6 }}
-                    />
-                    <Text style={styles.memoToggleText}>
-                      {showMemoSection ? "メモを閉じる" : "メモを書く"}
-                    </Text>
-                  </CocolonPressable>
+                    <CocolonPressable
+                      style={styles.memoToggleButton}
+                      onPress={() => {
+                        if (showMemoSection) {
+                          setActiveField(null);
+                          Keyboard.dismiss();
+                        }
+                        setShowMemoSection((prev) => !prev);
+                      }}
+                      accessibilityLabel={
+                        showMemoSection
+                          ? "メモ入力を閉じる"
+                          : "メモ入力を開く"
+                      }
+                    >
+                      <Ionicons
+                        name={showMemoSection ? "chevron-up" : "chevron-down"}
+                        size={18}
+                        color="#000000"
+                        style={{ marginRight: 6 }}
+                      />
+                      <Text style={styles.memoToggleText}>
+                        {showMemoSection ? "メモを閉じる" : "メモを書く"}
+                      </Text>
+                    </CocolonPressable>
+                  </View>
                 ) : null}
               </View>
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+<TodayQuestionModal
+  visible={!shouldHideTodayQuestionForTutorial && todayQuestionModalVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
+  question={todayQuestionBundle?.question}
+  answerSummary={todayQuestionBundle?.answer_summary || null}
+  loading={todayQuestionLoading}
+  submitting={todayQuestionSubmitting}
+  onClose={handleDismissTodayQuestionModal}
+  onSubmit={handleSubmitTodayQuestion}
+  onOpenHistory={handleOpenTodayQuestionHistory}
+/>
+
 {tutorialOverlayConfig ? (
   <TutorialOverlay
     visible={!!tutorialOverlayConfig}
@@ -1697,6 +1677,7 @@ ${String(error?.message || error)}`
     nextLabel={tutorialOverlayConfig.nextLabel}
     onNext={tutorialOverlayConfig.onNext}
     actionHint={tutorialOverlayConfig.actionHint}
+    cardPlacement={tutorialOverlayConfig.cardPlacement}
   />
 ) : null}
 
@@ -1822,12 +1803,12 @@ function createStyles(COLORS, ui) {
       fontSize: 11,
       fontWeight: "800",
       letterSpacing: 0.3,
-      color: "#000000",
+      color: COLORS.TEXT_ON_LIGHT,
     },
     globalSummaryText: {
       fontSize: 12,
       lineHeight: 18,
-      color: "#000000",
+      color: COLORS.TEXT_ON_LIGHT,
     },
     accountIconButton: {
       width: 42,
@@ -1870,7 +1851,7 @@ function createStyles(COLORS, ui) {
     homeStatsLabel: {
       fontSize: 12,
       fontWeight: "700",
-      color: "#111111",
+      color: COLORS.TEXT_ON_LIGHT,
     },
     homeStatsValue: {
       fontSize: 12,
@@ -2213,6 +2194,9 @@ function createStyles(COLORS, ui) {
     buttonWrapper: {
       marginTop: 8,
       width: "100%",
+    },
+    memoToggleButtonWrapper: {
+      alignSelf: "stretch",
     },
     memoToggleButton: {
       marginTop: 10,

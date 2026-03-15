@@ -28,6 +28,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import CocolonButton from "../components/CocolonButton";
 import { makeUiTokens } from "../ui/uiTokens";
+import { apiFetch } from "../lib/apiClient";
 
 // ---- API base ----
 const API_BASE =
@@ -158,6 +159,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
   const [draftAnswers, setDraftAnswers] = useState({});
   const [originalAnswers, setOriginalAnswers] = useState({});
   const [draftSecrets, setDraftSecrets] = useState({});
+  const [originalSecrets, setOriginalSecrets] = useState({});
 
 
   const [page, setPage] = useState(0);
@@ -194,7 +196,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
       if (!accessToken) throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
 
       const url = `${QUESTIONS_ENDPOINT}?build_tier=light`;
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -255,14 +257,17 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
       const initDraft = {};
       const initOriginal = {};
       const initSecrets = {};
+      const initOriginalSecrets = {};
       for (const q of qs) {
         initDraft[q.id] = q.answer_text || "";
         initOriginal[q.id] = q.answer_text || "";
         initSecrets[q.id] = !!q.is_secret;
+        initOriginalSecrets[q.id] = !!q.is_secret;
       }
       setDraftAnswers(initDraft);
       setOriginalAnswers(initOriginal);
       setDraftSecrets(initSecrets);
+      setOriginalSecrets(initOriginalSecrets);
       setFocusedQuestionId(null);
       setAnswerHeights({});
     } catch (e) {
@@ -271,6 +276,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
       setDraftAnswers({});
       setOriginalAnswers({});
       setDraftSecrets({});
+      setOriginalSecrets({});
       setFocusedQuestionId(null);
       setAnswerHeights({});
       setMeta(null);
@@ -301,26 +307,41 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
       const currTrim = curr.trim();
       const orig = String(originalAnswers?.[q.id] ?? "");
       const origTrim = orig.trim();
+      const currSecret = !!draftSecrets?.[q.id];
+      const origSecret = !!originalSecrets?.[q.id];
+      const answerChanged = currTrim !== origTrim;
+      const secretChanged = currSecret !== origSecret;
 
-      // New / update
-      if (currTrim.length > 0) {
-        // 末尾スペースなどは保存しない（trim）
-        payload.push({
-          question_id: q.id,
-          answer_text: currTrim,
-          is_secret: !!draftSecrets?.[q.id],
-        });
+      if (!answerChanged && !secretChanged) continue;
+
+      if (!q.can_edit && answerChanged) continue;
+
+      if (answerChanged) {
+        if (currTrim.length > 0) {
+          payload.push({
+            question_id: q.id,
+            answer_text: currTrim,
+            is_secret: currSecret,
+          });
+          continue;
+        }
+
+        if (origTrim.length > 0 && q.can_edit) {
+          payload.push({ question_id: q.id, answer_text: "", is_secret: currSecret });
+        }
         continue;
       }
 
-      // Clear (only if it used to exist)
-      if (origTrim.length > 0 && q.can_edit) {
-        payload.push({ question_id: q.id, answer_text: "", is_secret: false });
+      if (secretChanged && currTrim.length > 0) {
+        payload.push({
+          question_id: q.id,
+          is_secret: currSecret,
+        });
       }
     }
 
     return payload;
-  }, [questions, draftAnswers, originalAnswers, draftSecrets]);
+  }, [questions, draftAnswers, originalAnswers, draftSecrets, originalSecrets]);
 
   const canSave = useMemo(() => {
     if (loading || saving) return false;
@@ -344,7 +365,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
         return;
       }
 
-      const res = await fetch(ANSWERS_ENDPOINT, {
+      const res = await apiFetch(ANSWERS_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -438,6 +459,16 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
   const placeholderDefault =
     String(uiTexts?.placeholder_default || "一言でも大丈夫です").trim() ||
     "一言でも大丈夫です";
+  const introSubscriptionBenefit =
+    String(
+      uiTexts?.intro_subscription_benefit ||
+        "サブスク加入することで、回答後編集と追加の問いが表示されます。"
+    ).trim() || "サブスク加入することで、回答後編集と追加の問いが表示されます。";
+  const introSecretToggleNote =
+    String(
+      uiTexts?.intro_secret_toggle_note ||
+        "（シークレットメモのオンオフ切り替えは可能です。）"
+    ).trim() || "（シークレットメモのオンオフ切り替えは可能です。）";
 
   const answeredCount = Number(meta?.answered_count ?? 0) || 0;
   const totalQuestions = Number(meta?.total_questions ?? 10) || 10;
@@ -476,7 +507,11 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
           <View style={styles.introCard}>
             <Text style={styles.introTitle}>問いに答えて、MyModelを構築</Text>
             <Text style={styles.introText}>
-              全てに答える必要はありません。{"\n"}「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}{"\n"}2ページ目以降はPlus会員以上で利用できます。
+              全てに答える必要はありません。{"\n"}
+              「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}
+              {introSubscriptionBenefit}{"\n"}
+              {introSecretToggleNote}{"\n"}{"\n"}
+              2ページ目以降はPlus会員以上で利用できます。
             </Text>
             <View style={styles.progressRow}>
               <Text style={styles.progressText}>
@@ -549,6 +584,8 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
                 const isExpanded = focusedQuestionId === q.id;
                 const rawAnswer = String(draftAnswers?.[q.id] ?? "");
                 const hasAnswer = rawAnswer.trim().length > 0;
+                const answeredStatusLabel =
+                  hasAnswer && !q.can_edit ? "回答済み（編集不可）" : "回答済み";
                 const previewLine = hasAnswer ? rawAnswer.trim().split(/\r?\n/)[0] : "";
 
                 const placeholder = String(q.placeholder || placeholderDefault);
@@ -574,7 +611,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
                             style={{ marginRight: 4 }}
                           />
                           <Text style={[styles.qStatusText, styles.qStatusTextAnswered]}>
-                            回答済み
+                            {answeredStatusLabel}
                           </Text>
                         </View>
                       ) : (

@@ -16,9 +16,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Svg, { Circle, G } from "react-native-svg";
 import CocolonBackButton from "../components/CocolonBackButton";
 
-// ✅ Supabase（週報の履歴で days が保存されていないケースのフォールバック再計算に使用）
 import { supabase } from "../lib/supabase";
-import { getCurrentUserId } from "../lib/user";
+import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 🎨 Theme
 import { useTheme } from "../theme/ThemeContext";
@@ -592,7 +591,7 @@ export default function MyWebReportViewerScreen({
           return;
         }
 
-        const res = await fetch(SUBSCRIPTION_ME_ENDPOINT, {
+        const res = await apiFetch(SUBSCRIPTION_ME_ENDPOINT, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -628,22 +627,13 @@ export default function MyWebReportViewerScreen({
     (async () => {
       try {
         const reportId = report?.id;
-        if (!reportId) return;
+        if (!reportId || cancelled) return;
 
-        const userId = await getCurrentUserId();
-        if (!userId || cancelled) return;
-
-        const { error } = await supabase
-          .from("report_reads")
-          .upsert(
-            { user_id: userId, report_id: reportId },
-            {
-              onConflict: "user_id,report_id",
-              ignoreDuplicates: true,
-            }
-          );
-
-        if (error) throw error;
+        await apiPost("/report-reads/mark", {
+          report_id: String(reportId),
+          report_table: "myweb_reports",
+          report_scope: "myweb",
+        });
       } catch (e) {
         console.warn("MyWebReportViewerScreen: failed to mark report read", e);
       }
@@ -872,15 +862,14 @@ export default function MyWebReportViewerScreen({
       return;
     }
 
-    // ② 旧形式（days 未保存）の場合: 期間内 emotions から再計算して生成画面と同じグラフを復元
+    // ② 旧形式（days 未保存）の場合: API 側で復元（server-owned fallback）
     let cancelled = false;
 
     (async () => {
-      const startIso = report?.period_start;
-      const endIso = report?.period_end;
-      if (!startIso || !endIso) {
+      const reportId = report?.id ? String(report.id) : "";
+      if (!reportId) {
         setWeeklyDays([]);
-        setWeeklyDaysError("期間情報が不足しています。");
+        setWeeklyDaysError("レポートIDが不足しています。");
         return;
       }
 
@@ -888,22 +877,8 @@ export default function MyWebReportViewerScreen({
       setWeeklyDaysError("");
 
       try {
-        const userId = await getCurrentUserId();
-        if (!userId) throw new Error("ユーザー情報を取得できませんでした。");
-
-        const { data, error } = await supabase
-          .from("emotions")
-          .select("created_at, emotions, emotion_details, is_secret")
-          .eq("user_id", userId)
-          .eq("is_secret", false)
-          .gte("created_at", startIso)
-          .lte("created_at", endIso)
-          .order("created_at", { ascending: true });
-
-        if (error) throw error;
-
-        const rows = Array.isArray(data) ? data : [];
-        const buckets = buildDaysFromRows(rows);
+        const json = await apiGet(`/myweb/reports/${encodeURIComponent(reportId)}/weekly-days`);
+        const buckets = Array.isArray(json?.days) ? json.days : [];
 
         if (!cancelled) {
           setWeeklyDays(buckets);
@@ -921,7 +896,7 @@ export default function MyWebReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, [reportType, contentJson, standardReport, report?.period_start, report?.period_end]);
+  }, [reportType, contentJson, standardReport, report?.id, report?.period_start, report?.period_end]);
 
   const weeklyMaxSum = useMemo(() => {
     const sums = weeklyDays.map(
@@ -1459,7 +1434,7 @@ export default function MyWebReportViewerScreen({
         {showDeepUpgradeCard ? (
           <View style={[styles.chartCard, themed.chartCard]}>
             <Text style={[styles.chartTitle, themed.chartTitle]}>
-              {tierLoading ? "プラン情報を確認中…" : "Deep分析はPremium会員で閲覧できます"}
+              {tierLoading ? "プラン情報を確認中…" : "Deep分析はPremiumで提供予定です"}
             </Text>
 
             {tierLoading ? (
@@ -1474,7 +1449,10 @@ export default function MyWebReportViewerScreen({
               現在はStandard版を表示しています。
             </Text>
             <Text style={[styles.p, themed.p]}>
-              Premium会員で、感情の流れ・切り替わり時間・制御パターンまで閲覧できます。
+              Deep分析は、感情の流れ・切り替わり時間・制御パターンまで確認できる機能として提供予定です。
+            </Text>
+            <Text style={[styles.p, themed.p]}>
+              ※Premiumは準備中です。
             </Text>
 
             {!tierLoading ? (
@@ -1497,7 +1475,7 @@ export default function MyWebReportViewerScreen({
                 activeOpacity={0.85}
               >
                 <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
-                  プランを見る
+                  プラン内容を見る
                 </Text>
                 <Ionicons
                   name="chevron-forward"

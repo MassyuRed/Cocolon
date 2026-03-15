@@ -29,12 +29,20 @@ function normalizeTier(raw) {
   return VALID_TIERS.has(t) ? t : DEFAULT_TIER;
 }
 
+function normalizeConsumedAt(raw) {
+  const v = String(raw || "").trim();
+  return v || null;
+}
+
 const SubscriptionContext = createContext(null);
 
 export function SubscriptionProvider({ children }) {
   const [tier, _setTier] = useState("unknown"); // unknown | free | plus | premium
   const [allowedMyProfileModes, setAllowedMyProfileModes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [plusTrialEligible, setPlusTrialEligible] = useState(false);
+  const [plusTrialConsumed, setPlusTrialConsumed] = useState(false);
+  const [plusTrialConsumedAt, setPlusTrialConsumedAt] = useState(null);
 
   const tierRef = useRef("unknown");
   const lastFetchedAtRef = useRef(0);
@@ -45,6 +53,22 @@ export function SubscriptionProvider({ children }) {
     const v = String(next || "unknown").trim().toLowerCase() || "unknown";
     tierRef.current = v;
     if (mountedRef.current) _setTier(v);
+  }, []);
+
+  const applyPlusTrialState = useCallback((payload) => {
+    if (!mountedRef.current) return;
+
+    setPlusTrialEligible(Boolean(payload?.plus_trial_eligible));
+    setPlusTrialConsumed(Boolean(payload?.plus_trial_consumed));
+    setPlusTrialConsumedAt(normalizeConsumedAt(payload?.plus_trial_consumed_at));
+  }, []);
+
+  const resetPlusTrialState = useCallback(() => {
+    if (!mountedRef.current) return;
+
+    setPlusTrialEligible(false);
+    setPlusTrialConsumed(false);
+    setPlusTrialConsumedAt(null);
   }, []);
 
   useEffect(() => {
@@ -93,6 +117,7 @@ export function SubscriptionProvider({ children }) {
           if (!accessToken) {
             setTier(DEFAULT_TIER);
             if (mountedRef.current) setAllowedMyProfileModes([]);
+            resetPlusTrialState();
             lastFetchedAtRef.current = Date.now();
             return DEFAULT_TIER;
           }
@@ -122,12 +147,17 @@ export function SubscriptionProvider({ children }) {
             );
           }
 
+          applyPlusTrialState(json);
+
           lastFetchedAtRef.current = Date.now();
           return nextTier;
         } catch {
           // fail-soft:
           // - If we already know the tier, keep it.
           // - If unknown, fall back to free.
+          // - Trial state is fail-closed: hide trial when it can't be confirmed.
+          resetPlusTrialState();
+
           const prev = tierRef.current;
           if (!prev || prev === "unknown") {
             setTier(DEFAULT_TIER);
@@ -151,7 +181,7 @@ export function SubscriptionProvider({ children }) {
         inFlightRef.current = null;
       }
     },
-    [setTier]
+    [applyPlusTrialState, resetPlusTrialState, setTier]
   );
 
   // Ensure tier is known (used by gating on tap)
@@ -173,7 +203,6 @@ export function SubscriptionProvider({ children }) {
     return t === "premium";
   }, [ensureTier]);
 
-  
   // Auto refresh: mount + foreground
   useEffect(() => {
     refreshTier({ force: true }).catch(() => null);
@@ -210,6 +239,7 @@ export function SubscriptionProvider({ children }) {
         } else {
           setTier(DEFAULT_TIER);
           setAllowedMyProfileModes([]);
+          resetPlusTrialState();
         }
       });
 
@@ -225,7 +255,7 @@ export function SubscriptionProvider({ children }) {
         // noop
       }
     };
-  }, [refreshTier, setTier]);
+  }, [refreshTier, resetPlusTrialState, setTier]);
 
   const value = useMemo(() => {
     const norm = tier === "unknown" ? "unknown" : normalizeTier(tier);
@@ -245,6 +275,9 @@ export function SubscriptionProvider({ children }) {
       tier: norm,
       loading,
       allowedMyProfileModes,
+      plusTrialEligible,
+      plusTrialConsumed,
+      plusTrialConsumedAt,
       isPlus,
       isPremium,
       isPaid,
@@ -255,7 +288,18 @@ export function SubscriptionProvider({ children }) {
       refreshTier,
       ensureTier,
     };
-  }, [allowedMyProfileModes, ensureTier, ensurePaid, ensurePremium, loading, refreshTier, tier]);
+  }, [
+    allowedMyProfileModes,
+    ensureTier,
+    ensurePaid,
+    ensurePremium,
+    loading,
+    plusTrialConsumed,
+    plusTrialConsumedAt,
+    plusTrialEligible,
+    refreshTier,
+    tier,
+  ]);
 
   return (
     <SubscriptionContext.Provider value={value}>
@@ -273,6 +317,9 @@ export function useSubscription() {
       tier: "unknown",
       loading: false,
       allowedMyProfileModes: [],
+      plusTrialEligible: false,
+      plusTrialConsumed: false,
+      plusTrialConsumedAt: null,
       isPlus: false,
       isPremium: false,
       isPaid: false,

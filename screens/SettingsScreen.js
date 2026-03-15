@@ -6,11 +6,11 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
 import { useTutorial } from "../TutorialContext";
 import { useUnread } from "../UnreadContext";
@@ -27,6 +27,16 @@ import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 
 import CocolonSwitch from "../components/CocolonSwitch";
+import { apiGet, apiPatch, apiPost } from "../lib/apiClient";
+import {
+  getTodayQuestionSettings,
+  patchTodayQuestionSettings,
+  resolveLocalTimezoneName,
+} from "../lib/todayQuestionApi";
+import {
+  getReportDistributionSettings,
+  patchReportDistributionSettings,
+} from "../lib/reportDistributionApi";
 // ここを変えると Setting のパネル高さを調整できる
 // ※ 本改修で「背景＆タイトル固定 / パネル内スクロール」に変更したため、
 //    minHeight は見た目の基準として残しつつ、パネル自体は flex で収まるようにしています。
@@ -37,16 +47,26 @@ export default function SettingsScreen({ navigation }) {
   const { signOut, authLoading, user } = useAuth();
   const { startTutorial } = useTutorial();
   const { setUnread } = useUnread();
-  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const [localProcessing, setLocalProcessing] = useState(false);
   const isBusy = authLoading || localProcessing;
 
   const isDark = themeName === THEME_VARIANTS.DARK;
+  const styles = useMemo(() => createStyles(colors, isDark), [colors, isDark]);
 
   // Push通知（受信）のON/OFF（アプリ内設定）
   const [pushEnabled, setPushEnabled] = useState(true);
   const [pushLoading, setPushLoading] = useState(true);
+
+  const [todayQuestionNotificationEnabled, setTodayQuestionNotificationEnabled] = useState(true);
+  const [todayQuestionDeliveryTime, setTodayQuestionDeliveryTime] = useState("18:00");
+  const [todayQuestionTimezone, setTodayQuestionTimezone] = useState(resolveLocalTimezoneName("Asia/Tokyo"));
+  const [todayQuestionLoading, setTodayQuestionLoading] = useState(true);
+
+  const [reportDistributionNotificationEnabled, setReportDistributionNotificationEnabled] = useState(true);
+  const [reportDistributionDeliveryTime, setReportDistributionDeliveryTime] = useState("00:00");
+  const [reportDistributionTimezone, setReportDistributionTimezone] = useState(resolveLocalTimezoneName("Asia/Tokyo"));
+  const [reportDistributionLoading, setReportDistributionLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -63,16 +83,8 @@ export default function SettingsScreen({ navigation }) {
 
       setPushLoading(true);
       try {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("push_enabled")
-          .eq("id", user.id)
-          .single();
-
-        if (error) throw error;
-
-        // null/未設定は ON 扱い（後方互換）
-        const enabled = data?.push_enabled;
+        const json = await apiGet("/account/profile/me");
+        const enabled = json?.push_enabled;
         if (!cancelled) setPushEnabled(enabled !== false);
       } catch (e) {
         console.warn("SettingsScreen: load push_enabled failed", e);
@@ -83,6 +95,92 @@ export default function SettingsScreen({ navigation }) {
     };
 
     load();
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadTodayQuestionSettings = async () => {
+      if (!user?.id) {
+        if (!cancelled) {
+          setTodayQuestionNotificationEnabled(true);
+          setTodayQuestionDeliveryTime("18:00");
+          setTodayQuestionTimezone(resolveLocalTimezoneName("Asia/Tokyo"));
+          setTodayQuestionLoading(false);
+        }
+        return;
+      }
+
+      setTodayQuestionLoading(true);
+      try {
+        const json = await getTodayQuestionSettings({
+          timezone_name: resolveLocalTimezoneName("Asia/Tokyo"),
+        });
+        const settings = json?.settings ?? json ?? {};
+        if (!cancelled) {
+          setTodayQuestionNotificationEnabled(settings?.notification_enabled !== false);
+          setTodayQuestionDeliveryTime(String(settings?.delivery_time_local || "18:00"));
+          setTodayQuestionTimezone(String(settings?.timezone_name || resolveLocalTimezoneName("Asia/Tokyo")));
+        }
+      } catch (e) {
+        console.warn("SettingsScreen: load today question settings failed", e);
+        if (!cancelled) {
+          setTodayQuestionNotificationEnabled(true);
+          setTodayQuestionDeliveryTime("18:00");
+          setTodayQuestionTimezone(resolveLocalTimezoneName("Asia/Tokyo"));
+        }
+      } finally {
+        if (!cancelled) setTodayQuestionLoading(false);
+      }
+    };
+
+    loadTodayQuestionSettings();
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadReportDistributionSettings = async () => {
+      if (!user?.id) {
+        if (!cancelled) {
+          setReportDistributionNotificationEnabled(true);
+          setReportDistributionDeliveryTime("00:00");
+          setReportDistributionTimezone(resolveLocalTimezoneName("Asia/Tokyo"));
+          setReportDistributionLoading(false);
+        }
+        return;
+      }
+
+      setReportDistributionLoading(true);
+      try {
+        const json = await getReportDistributionSettings({
+          timezone_name: resolveLocalTimezoneName("Asia/Tokyo"),
+        });
+        const settings = json?.settings ?? json ?? {};
+        if (!cancelled) {
+          setReportDistributionNotificationEnabled(settings?.notification_enabled !== false);
+          setReportDistributionDeliveryTime(String(settings?.delivery_time_local || "00:00"));
+          setReportDistributionTimezone(String(settings?.timezone_name || resolveLocalTimezoneName("Asia/Tokyo")));
+        }
+      } catch (e) {
+        console.warn("SettingsScreen: load report distribution settings failed", e);
+        if (!cancelled) {
+          setReportDistributionNotificationEnabled(true);
+          setReportDistributionDeliveryTime("00:00");
+          setReportDistributionTimezone(resolveLocalTimezoneName("Asia/Tokyo"));
+        }
+      } finally {
+        if (!cancelled) setReportDistributionLoading(false);
+      }
+    };
+
+    loadReportDistributionSettings();
     return () => {
       cancelled = true;
     };
@@ -101,16 +199,71 @@ export default function SettingsScreen({ navigation }) {
 
     setLocalProcessing(true);
     try {
-      const { error } = await supabase
-        .from("profiles")
-        .update({ push_enabled: next })
-        .eq("id", user.id);
-
-      if (error) throw error;
+      await apiPatch("/account/profile/me", { push_enabled: next });
     } catch (e) {
       console.warn("SettingsScreen: update push_enabled failed", e);
       setPushEnabled(prev);
       Alert.alert("通知設定の更新に失敗しました", String(e?.message || e));
+    } finally {
+      setLocalProcessing(false);
+    }
+  };
+
+  const saveTodayQuestionSettings = async () => {
+    if (isBusy || todayQuestionLoading) return;
+
+    if (!user?.id) {
+      Alert.alert("今日の問い通知", "ログイン情報が取得できませんでした。");
+      return;
+    }
+
+    const hhmm = String(todayQuestionDeliveryTime || "").trim();
+    if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hhmm)) {
+      Alert.alert("今日の問い通知", "通知する時間は 18:00 のように入力してください。");
+      return;
+    }
+
+    setLocalProcessing(true);
+    try {
+      await patchTodayQuestionSettings({
+        notification_enabled: !!todayQuestionNotificationEnabled,
+        delivery_time_local: hhmm,
+        timezone_name: String(todayQuestionTimezone || resolveLocalTimezoneName("Asia/Tokyo")),
+      });
+      Alert.alert("今日の問い通知", "通知設定を保存しました。");
+    } catch (e) {
+      console.warn("SettingsScreen: save today question settings failed", e);
+      Alert.alert("今日の問い通知", String(e?.message || "通知設定の保存に失敗しました。"));
+    } finally {
+      setLocalProcessing(false);
+    }
+  };
+
+  const saveReportDistributionSettings = async () => {
+    if (isBusy || reportDistributionLoading) return;
+
+    if (!user?.id) {
+      Alert.alert("レポート配布通知", "ログイン情報が取得できませんでした。");
+      return;
+    }
+
+    const hhmm = String(reportDistributionDeliveryTime || "").trim();
+    if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hhmm)) {
+      Alert.alert("レポート配布通知", "通知する時間は 00:00 のように入力してください。");
+      return;
+    }
+
+    setLocalProcessing(true);
+    try {
+      await patchReportDistributionSettings({
+        notification_enabled: !!reportDistributionNotificationEnabled,
+        delivery_time_local: hhmm,
+        timezone_name: String(reportDistributionTimezone || resolveLocalTimezoneName("Asia/Tokyo")),
+      });
+      Alert.alert("レポート配布通知", "通知設定を保存しました。");
+    } catch (e) {
+      console.warn("SettingsScreen: save report distribution settings failed", e);
+      Alert.alert("レポート配布通知", String(e?.message || "通知設定の保存に失敗しました。"));
     } finally {
       setLocalProcessing(false);
     }
@@ -238,64 +391,10 @@ export default function SettingsScreen({ navigation }) {
           onPress: async () => {
             setLocalProcessing(true);
             try {
-              const uid = user.id;
-              const failed = [];
-
-              const tryDelete = async (label, fn) => {
-                try {
-                  const { error } = await fn();
-                  if (error) throw error;
-                } catch (e) {
-                  console.warn(`SettingsScreen: delete ${label} failed`, e);
-                  failed.push(label);
-                }
-              };
-
-              // ※ auth.users の削除はクライアント権限では行えないため、
-              //   アプリ側で削除可能なデータをベストエフォートで消します。
-              await tryDelete("report_reads", () =>
-                supabase.from("report_reads").delete().eq("user_id", uid)
-              );
-              await tryDelete("friend_requests", () =>
-                supabase
-                  .from("friend_requests")
-                  .delete()
-                  .or(`requester_user_id.eq.${uid},requested_user_id.eq.${uid}`)
-              );
-              await tryDelete("friendships", () =>
-                supabase
-                  .from("friendships")
-                  .delete()
-                  .or(`user_id.eq.${uid},friend_user_id.eq.${uid}`)
-              );
-              await tryDelete("myprofile_requests", () =>
-                supabase
-                  .from("myprofile_requests")
-                  .delete()
-                  .or(`requester_user_id.eq.${uid},requested_user_id.eq.${uid}`)
-              );
-              await tryDelete("myprofile_links", () =>
-                supabase
-                  .from("myprofile_links")
-                  .delete()
-                  .or(`owner_user_id.eq.${uid},viewer_user_id.eq.${uid}`)
-              );
-              await tryDelete("myprofile_reports", () =>
-                supabase.from("myprofile_reports").delete().eq("user_id", uid)
-              );
-              await tryDelete("myweb_reports", () =>
-                supabase.from("myweb_reports").delete().eq("user_id", uid)
-              );
-              await tryDelete("emotions", () =>
-                supabase.from("emotions").delete().eq("user_id", uid)
-              );
-              await tryDelete("profiles", () =>
-                supabase.from("profiles").delete().eq("id", uid)
-              );
-
-              // 最後にログアウト
+              const json = await apiPost("/account/delete", {});
               await signOut();
 
+              const failed = Array.isArray(json?.failed_tables) ? json.failed_tables : [];
               if (failed.length > 0) {
                 Alert.alert(
                   "アカウント削除",
@@ -420,6 +519,120 @@ export default function SettingsScreen({ navigation }) {
                     disabled={pushLoading || isBusy}
                   />
                 </View>
+
+                <View style={styles.divider} />
+
+                <View style={styles.row}>
+                  <View style={styles.rowLeft}>
+                    <View style={styles.rowIconWrap}>
+                      <Ionicons
+                        name="help-circle-outline"
+                        size={18}
+                        color="#000"
+                      />
+                    </View>
+                    <Text style={styles.rowLabel}>今日の問い通知</Text>
+                  </View>
+
+                  <CocolonSwitch
+                    value={todayQuestionNotificationEnabled}
+                    onValueChange={setTodayQuestionNotificationEnabled}
+                    disabled={todayQuestionLoading || isBusy || !pushEnabled}
+                  />
+                </View>
+
+                <View style={styles.divider} />
+
+                <View style={styles.inlineBlock}>
+                  <Text style={styles.subLabel}>通知する時間</Text>
+                  <TextInput
+                    value={todayQuestionDeliveryTime}
+                    onChangeText={setTodayQuestionDeliveryTime}
+                    editable={!todayQuestionLoading && !isBusy}
+                    placeholder="18:00"
+                    placeholderTextColor={isDark ? "rgba(255,255,255,0.45)" : "#9CA3AF"}
+                    style={styles.inlineInput}
+                    keyboardType="numbers-and-punctuation"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    selectionColor={colors.TITLE_GOLD}
+                  />
+                  {!pushEnabled ? (
+                    <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
+                      「通知を受け取る」がオフのため、今日の問いのお知らせは届きません。
+                    </Text>
+                  ) : null}
+
+                  <View style={{ marginTop: 12 }}>
+                    <CocolonButton
+                      variant="secondary"
+                      onPress={saveTodayQuestionSettings}
+                      disabled={todayQuestionLoading || isBusy}
+                      loading={todayQuestionLoading && !todayQuestionDeliveryTime}
+                    >
+                      今日の問い通知を保存
+                    </CocolonButton>
+                  </View>
+                </View>
+
+                <View style={styles.divider} />
+
+                <View style={styles.row}>
+                  <View style={styles.rowLeft}>
+                    <View style={styles.rowIconWrap}>
+                      <Ionicons
+                        name="document-text-outline"
+                        size={18}
+                        color="#000"
+                      />
+                    </View>
+                    <Text style={styles.rowLabel}>レポート配布通知</Text>
+                  </View>
+
+                  <CocolonSwitch
+                    value={reportDistributionNotificationEnabled}
+                    onValueChange={setReportDistributionNotificationEnabled}
+                    disabled={reportDistributionLoading || isBusy || !pushEnabled}
+                  />
+                </View>
+
+                <View style={styles.divider} />
+
+                <View style={styles.inlineBlock}>
+                  <Text style={styles.subLabel}>通知する時間</Text>
+                  <TextInput
+                    value={reportDistributionDeliveryTime}
+                    onChangeText={setReportDistributionDeliveryTime}
+                    editable={!reportDistributionLoading && !isBusy}
+                    placeholder="00:00"
+                    placeholderTextColor={isDark ? "rgba(255,255,255,0.45)" : "#9CA3AF"}
+                    style={styles.inlineInput}
+                    keyboardType="numbers-and-punctuation"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    selectionColor={colors.TITLE_GOLD}
+                  />
+
+                  <Text style={[styles.sectionHelpText, { marginTop: 10, marginBottom: 0 }]}>
+                    日報・週報・月報などのレポートをまとめてお知らせします。
+                  </Text>
+                  {!pushEnabled ? (
+                    <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
+                      「通知を受け取る」がオフのため、レポートのお知らせは届きません。
+                    </Text>
+                  ) : null}
+
+                  <View style={{ marginTop: 12 }}>
+                    <CocolonButton
+                      variant="secondary"
+                      onPress={saveReportDistributionSettings}
+                      disabled={reportDistributionLoading || isBusy}
+                      loading={reportDistributionLoading && !reportDistributionDeliveryTime}
+                    >
+                      レポート配布通知を保存
+                    </CocolonButton>
+                  </View>
+                </View>
               </View>
             </View>
 
@@ -508,8 +721,9 @@ export default function SettingsScreen({ navigation }) {
   );
 }
 
-function createStyles(COLORS) {
+function createStyles(COLORS, isDark = false) {
   const TEXT_SUB = COLORS.TEXT_ON_LIGHT;
+  const TIME_TEXT = isDark ? COLORS.TEXT_ON_LIGHT : "#111111";
 
   return StyleSheet.create({
     safeArea: {
@@ -679,6 +893,24 @@ function createStyles(COLORS) {
     divider: {
       height: 1,
       backgroundColor: "#F1F5F9",
+    },
+
+    inlineBlock: {
+      paddingVertical: 12,
+    },
+    subLabel: {
+      fontSize: 13,
+      fontWeight: "700",
+      color: TIME_TEXT,
+      marginBottom: 8,
+    },
+    inlineInput: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: TIME_TEXT,
+      paddingVertical: 4,
+      paddingHorizontal: 0,
+      backgroundColor: "transparent",
     },
 
     // アクションボタン群

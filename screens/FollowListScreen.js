@@ -14,6 +14,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
+import { apiFetch } from "../lib/apiClient";
 
 // MyModel（MashOS）API
 const MYMODEL_API_BASE_URL =
@@ -169,7 +170,7 @@ export default function FollowListScreen({ navigation, route }) {
         accessToken = null;
       }
 
-      const res = await fetch(
+      const res = await apiFetch(
         `${MYMODEL_API_BASE_URL}/myprofile/follow-stats?target_user_id=${encodeURIComponent(
           String(viewedUserId)
         )}`,
@@ -196,7 +197,7 @@ export default function FollowListScreen({ navigation, route }) {
       // 自分の一覧の場合のみ、承認待ち（フォロー申請）の件数も取得する
       if (user && isSelfList) {
         try {
-          const rres = await fetch(
+          const rres = await apiFetch(
             `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/incoming?limit=300`,
             {
               method: "GET",
@@ -217,7 +218,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
         // 自分が送った申請（申請中）の件数も取得する（MashOS API 経由）
         try {
-          const ores = await fetch(
+          const ores = await apiFetch(
             `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/outgoing?limit=300`,
             {
               method: "GET",
@@ -282,7 +283,7 @@ export default function FollowListScreen({ navigation, route }) {
           throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
         }
 
-        const ores = await fetch(
+        const ores = await apiFetch(
           `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/outgoing?limit=300`,
           {
             method: "GET",
@@ -335,7 +336,7 @@ export default function FollowListScreen({ navigation, route }) {
               String(viewedUserId)
             )}&tab=${encodeURIComponent(String(tab))}`;
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method: "GET",
         headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
       });
@@ -427,7 +428,7 @@ export default function FollowListScreen({ navigation, route }) {
           throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
         }
 
-        const res = await fetch(`${MYMODEL_API_BASE_URL}/myprofile/unfollow`, {
+        const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/unfollow`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -461,7 +462,7 @@ export default function FollowListScreen({ navigation, route }) {
           throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
         }
 
-        const res = await fetch(`${MYMODEL_API_BASE_URL}/myprofile/remove-follower`, {
+        const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/remove-follower`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -523,7 +524,7 @@ export default function FollowListScreen({ navigation, route }) {
           ? "/myprofile/follow-requests/approve"
           : "/myprofile/follow-requests/reject";
 
-      const res = await fetch(`${MYMODEL_API_BASE_URL}${endpoint}`, {
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -590,7 +591,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
       }
 
-      const res = await fetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-request/cancel`, {
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-request/cancel`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

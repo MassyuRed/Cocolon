@@ -25,6 +25,7 @@ import { useTutorial } from "../TutorialContext";
 
 import CocolonPressable from "../components/CocolonPressable";
 import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
+import { apiFetch } from "../lib/apiClient";
 
 // 🔧 ここを変えると Friend 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
@@ -34,7 +35,7 @@ const STEP_FRIENDS_OVERVIEW = 20;
 const STEP_FRIENDS_NOTIFICATION = 21;
 const STEP_FRIENDS_LOG = 22;
 const STEP_FRIENDS_COMPLETE = 23;
-const DEFAULT_TUTORIAL_FRIEND_NAME = "朝霧 澪";
+const DEFAULT_TUTORIAL_FRIEND_NAME = "華恋";
 
 // ---- API base ----
 // 現在は MashOS(MyModel API) を Render 上で稼働させているため、
@@ -172,7 +173,7 @@ async function postJsonWithAuth(url, body) {
     throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
   }
 
-  const res = await fetch(url, {
+  const res = await apiFetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -201,7 +202,7 @@ async function getJsonWithAuth(url) {
     throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
   }
 
-  const res = await fetch(url, {
+  const res = await apiFetch(url, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -465,7 +466,7 @@ export default function FriendsScreen(props) {
           step: STEP_FRIENDS_OVERVIEW,
           title: "Friend",
           message:
-            "ここではフレンドの感情を観測することができます。\nこのあと模擬ユーザーから通知が届き、フレンドログに反映されます。",
+            `ここではフレンドの感情を観測することができます。\nこのあと${tutorialMockFriendName}さんから通知が届き、フレンドログに反映されます。`,
           mode: "info",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(STEP_FRIENDS_NOTIFICATION),
@@ -596,17 +597,7 @@ export default function FriendsScreen(props) {
         // noop
       }
 
-      const first = items[0] || { type: "喜び", strength: "medium" };
-      const label = STRENGTH_LABEL[first.strength] || "";
-      const suffix = label ? `（${label}）` : "";
-
       setTutorialNotificationShown(true);
-
-      Alert.alert(
-        "フレンド通知",
-        `${tutorialMockFriendName}さんが感情を入力しました：${first.type}${suffix}
-Friendでフレンドログを確認できます。`
-      );
     }, 500);
 
     return () => clearTimeout(timer);
@@ -680,175 +671,9 @@ Friendでフレンドログを確認できます。`
       setLoading(false);
     }
   }, [isTutorialMode, tutorialDisplayFeed, setPrefetch]);
-  const loadMyProfile = useCallback(async (uid) => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("id, display_name, friend_code")
-      .eq("id", uid)
-      .maybeSingle();
+  // Phase 4: legacy direct Supabase manage helpers removed.
+  // Manage read path is unified via GET /friends/manage (loadManageAll).
 
-    if (error) throw error;
-
-    // profiles が未作成の場合は、最小プロフィールを作る（friend_code はDB側で自動生成）
-    if (!data) {
-      const { error: insErr } = await supabase
-        .from("profiles")
-        .insert({ id: uid, display_name: "User" });
-
-      // すでに作成済み等で失敗しても、次の SELECT を試す
-      if (insErr) {
-        console.warn("profiles insert fallback error:", insErr);
-      }
-
-      const { data: again, error: againErr } = await supabase
-        .from("profiles")
-        .select("id, display_name, friend_code")
-        .eq("id", uid)
-        .maybeSingle();
-
-      if (againErr) throw againErr;
-
-      setMyProfile({
-        id: uid,
-        displayName: again?.display_name || "",
-        friendCode: again?.friend_code || "",
-      });
-      return {
-        id: uid,
-        displayName: again?.display_name || "",
-        friendCode: again?.friend_code || "",
-      };
-    }
-
-    const profile = {
-      id: uid,
-      displayName: data.display_name || "",
-      friendCode: data.friend_code || "",
-    };
-
-    setMyProfile(profile);
-    return profile;
-  }, []);
-
-  const loadFriendsList = useCallback(async (uid) => {
-    // friendships は「自分の行」だけ select できる想定
-    const { data, error } = await supabase
-      .from("friendships")
-      .select("friend_user_id, created_at")
-      .eq("user_id", uid)
-      .order("created_at", { ascending: false });
-
-    if (error) throw error;
-
-    const rows = Array.isArray(data) ? data : [];
-    const ids = rows.map((r) => r.friend_user_id).filter(Boolean);
-
-    if (ids.length === 0) {
-      setFriendsList([]);
-      return [];
-    }
-
-    // profiles は誰でも参照OKのポリシー想定
-    const { data: profs, error: pErr } = await supabase
-      .from("profiles")
-      .select("id, display_name, friend_code")
-      .in("id", ids);
-
-    if (pErr) throw pErr;
-
-    const map = new Map();
-    (Array.isArray(profs) ? profs : []).forEach((p) => {
-      map.set(p.id, {
-        displayName: p.display_name || "Friend",
-        friendCode: p.friend_code || null,
-      });
-    });
-
-    const list = rows.map((r) => {
-      const p = map.get(r.friend_user_id) || {};
-      return {
-        userId: r.friend_user_id,
-        displayName: p.displayName || "Friend",
-        friendCode: p.friendCode || null,
-      };
-    });
-
-    setFriendsList(list);
-    return list;
-  }, []);
-
-  const loadRequests = useCallback(async (uid) => {
-    const { data: inData, error: inErr } = await supabase
-      .from("friend_requests")
-      .select("id, requester_user_id, created_at")
-      .eq("requested_user_id", uid)
-      .eq("status", "pending")
-      .order("created_at", { ascending: false });
-
-    if (inErr) throw inErr;
-
-    const { data: outData, error: outErr } = await supabase
-      .from("friend_requests")
-      .select("id, requested_user_id, created_at")
-      .eq("requester_user_id", uid)
-      .eq("status", "pending")
-      .order("created_at", { ascending: false });
-
-    if (outErr) throw outErr;
-
-    const inRows = Array.isArray(inData) ? inData : [];
-    const outRows = Array.isArray(outData) ? outData : [];
-
-    const needProfileIds = new Set();
-    inRows.forEach((r) => r.requester_user_id && needProfileIds.add(r.requester_user_id));
-    outRows.forEach((r) => r.requested_user_id && needProfileIds.add(r.requested_user_id));
-
-    let profileMap = new Map();
-    const idList = Array.from(needProfileIds);
-    if (idList.length > 0) {
-      const { data: profs, error: pErr } = await supabase
-        .from("profiles")
-        .select("id, display_name, friend_code")
-        .in("id", idList);
-
-      if (pErr) throw pErr;
-
-      profileMap = new Map(
-        (Array.isArray(profs) ? profs : []).map((p) => [
-          p.id,
-          {
-            displayName: p.display_name || "Friend",
-            friendCode: p.friend_code || null,
-          },
-        ])
-      );
-    }
-
-    const incomingMapped = inRows.map((r) => {
-      const p = profileMap.get(r.requester_user_id) || {};
-      return {
-        id: r.id,
-        requesterUserId: r.requester_user_id,
-        requesterName: p.displayName || "Friend",
-        createdAt: r.created_at || null,
-      };
-    });
-
-    const outgoingMapped = outRows.map((r) => {
-      const p = profileMap.get(r.requested_user_id) || {};
-      return {
-        id: r.id,
-        requestedUserId: r.requested_user_id,
-        requestedName: p.displayName || "Friend",
-        friendCode: p.friendCode || null,
-        createdAt: r.created_at || null,
-      };
-    });
-
-    setIncoming(incomingMapped);
-    setOutgoing(outgoingMapped);
-    return { incoming: incomingMapped, outgoing: outgoingMapped };
-  }, []);
 
   const loadFriendNotificationSettings = useCallback(async () => {
     try {
@@ -1379,47 +1204,21 @@ Friendでフレンドログを確認できます。`
     }
   }, [navigation]);
 
-  const handleCompleteTutorial = useCallback(() => {
-    if (!isTutorialMode) return;
+  const handleCompleteTutorial = useCallback(async () => {
+    if (!isTutorialMode || !hasTutorialFriendLog) return;
 
-    if (!hasTutorialFriendLog) {
-      Alert.alert(
-        "チュートリアル",
-        "まずはフレンド通知が届き、フレンドログに反映されるのを確認してください。"
-      );
-      return;
+    try {
+      await Promise.resolve(endTutorial?.());
+      try {
+        setUnread?.("Friends", "tutorialFeed", false);
+        setUnread?.("Friends", "tutorial", false);
+      } catch {
+        // noop
+      }
+    } catch (e) {
+      console.warn("FriendsScreen: failed to complete tutorial", e);
     }
-
-    Alert.alert(
-      "チュートリアルを完了しますか？",
-      "ここでチュートリアルを終了し、本番モードへ切り替えます。\n\n今後の入力は実際のデータとして保存されます。",
-      [
-        { text: "まだ続ける", style: "cancel" },
-        {
-          text: "完了する",
-          onPress: async () => {
-            try {
-              await Promise.resolve(endTutorial?.());
-              try {
-                setUnread?.("Friends", "tutorialFeed", false);
-                setUnread?.("Friends", "tutorial", false);
-              } catch {
-                // noop
-              }
-
-              Alert.alert(
-                "チュートリアル完了",
-                "チュートリアルが完了しました。これからは本番モードで利用できます。",
-                [{ text: "Inputへ", onPress: openInputTab }]
-              );
-            } catch (e) {
-              Alert.alert("完了できませんでした", buildErrorMessage(e));
-            }
-          },
-        },
-      ]
-    );
-  }, [isTutorialMode, hasTutorialFriendLog, endTutorial, setUnread, openInputTab]);
+  }, [isTutorialMode, hasTutorialFriendLog, endTutorial, setUnread]);
 
   const renderFeedItem = ({ item }) => {
     const items = item.items || [];
@@ -1582,7 +1381,7 @@ Friendでフレンドログを確認できます。`
             {isTutorialMode ? (
               <View ref={tutorialIntroRef} collapsable={false} style={styles.manageIntroCard}>
                 <Text style={styles.manageIntroText}>
-                  チュートリアルでは、仮のフレンドから通知が届く体験をします。
+                  チュートリアルでは、{tutorialMockFriendName}さんから通知が届く体験をします。
                   {"\n"}
                   まもなく通知が届き、この下のフレンドログに反映されます。
                   {"\n"}
@@ -1667,7 +1466,7 @@ Friendでフレンドログを確認できます。`
                     ]}
                     onPress={handleCompleteTutorial}
                     disabled={!hasTutorialFriendLog || tutorialStep !== STEP_FRIENDS_COMPLETE}
-                    accessibilityLabel="チュートリアルを完了する"
+                    accessibilityLabel="完了にする"
                   >
                     <Ionicons
                       name="checkmark-circle-outline"
@@ -1676,7 +1475,7 @@ Friendでフレンドログを確認できます。`
                       style={{ marginRight: 6 }}
                     />
                     <Text style={styles.tutorialCompleteButtonText}>
-                      チュートリアルを完了する
+                      完了にする
                     </Text>
                   </CocolonPressable>
                 </View>

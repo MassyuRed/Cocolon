@@ -27,9 +27,48 @@ import {
   syncPurchaseToSubscriptionTier,
 } from "../lib/iap/iapService";
 import { getPlanSku } from "../lib/iap/iapConfig";
+import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 🔧 ここを変えると Account 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
+const DISPLAY_NAME_MAX_LENGTH = 20;
+const DISPLAY_NAME_TAKEN_MESSAGE = "このユーザー名はすでに使われています。";
+
+function normalizeDisplayName(value) {
+  return String(value || "").trim();
+}
+
+function mapDisplayNameConflictMessage(errorLike) {
+  const raw = String(errorLike?.message || errorLike || "");
+  const lower = raw.toLowerCase();
+  if (lower.includes("profiles_display_name_unique")) {
+    return DISPLAY_NAME_TAKEN_MESSAGE;
+  }
+  if (
+    lower.includes("display_name") &&
+    (lower.includes("unique") || lower.includes("duplicate") || lower.includes("already"))
+  ) {
+    return DISPLAY_NAME_TAKEN_MESSAGE;
+  }
+  return "";
+}
+
+async function checkDisplayNameAvailability(candidate, excludeUserId = null) {
+  const normalized = normalizeDisplayName(candidate);
+  if (!normalized) return false;
+
+  try {
+    const { data, error } = await supabase.rpc("is_display_name_available", {
+      p_candidate: normalized,
+      p_exclude_user_id: excludeUserId || null,
+    });
+    if (error) throw error;
+    return typeof data === "boolean" ? data : !!data;
+  } catch (e) {
+    console.warn("AccountScreen: display name availability check failed", e);
+    return null;
+  }
+}
 
 // MyModel（MashOS）API
 const MYMODEL_API_BASE_URL =
@@ -85,7 +124,7 @@ async function fetchSubscriptionMe() {
     };
   }
 
-  const res = await fetch(`${MYMODEL_API_BASE_URL}/subscription/me`, {
+  const res = await apiFetch(`${MYMODEL_API_BASE_URL}/subscription/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -143,6 +182,8 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   // ユーザー名の再設定（編集）
   const [nameDraft, setNameDraft] = useState("");
   const [nameSaving, setNameSaving] = useState(false);
+  const [nameChecking, setNameChecking] = useState(false);
+  const [nameError, setNameError] = useState("");
   const [nameEditOpen, setNameEditOpen] = useState(false);
 
   // アカウント設定（公開 / 非公開）
@@ -173,19 +214,19 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
           return;
         }
 
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("display_name, friend_code, myprofile_code")
-          .eq("id", targetUserId || user.id)
-          .single();
+        const isSelfNow = String(targetUserId || "") === String(user.id);
+        const json = isSelfNow
+          ? await apiGet("/account/profile/me")
+          : await apiGet(
+              `/account/profile?target_user_id=${encodeURIComponent(
+                String(targetUserId || user.id)
+              )}`
+            );
 
-        if (error) {
-          console.warn("profile fetch error:", error);
-        }
         if (!cancelled) {
-          if (data?.display_name) setDisplayName(data.display_name);
-          if (data?.friend_code) setFriendCode(data.friend_code);
-          if (data?.myprofile_code) setMyProfileCode(data.myprofile_code);
+          setDisplayName(String(json?.display_name || ""));
+          setFriendCode(String(json?.friend_code || ""));
+          setMyProfileCode(String(json?.myprofile_code || ""));
         }
       } catch (e) {
         console.warn("loadProfile error:", e);
@@ -253,28 +294,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   // - 指定: myProfileCode（myprofile_code）を起点に owner_user_id を解決してから follow/unfollow
   // ------------------------------
 
-  const resolveOwnerUserIdByMyProfileCode = async (code) => {
-    const c = String(code || "").trim();
-    if (!c) return null;
-
-    try {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("id")
-        .eq("myprofile_code", c)
-        .single();
-
-      if (error) {
-        console.warn("resolveOwnerUserIdByMyProfileCode error:", error);
-        return null;
-      }
-      return data?.id || null;
-    } catch (e) {
-      console.warn("resolveOwnerUserIdByMyProfileCode error:", e);
-      return null;
-    }
-  };
-
   const refreshFollowState = async () => {
     if (!targetUserId) return;
 
@@ -290,7 +309,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       }
 
       const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await fetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-stats?${qs}`, {
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-stats?${qs}`, {
         method: "GET",
         headers: accessToken
           ? {
@@ -353,7 +372,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       }
 
       const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await fetch(`${MYMODEL_API_BASE_URL}/account/status?${qs}`, {
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/status?${qs}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -415,55 +434,18 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     if (isSelfNow) return;
 
     const code = String(myProfileCode || "").trim();
-    if (!code) {
+    if (!code && !targetUserId) {
       Alert.alert("準備中", "相手のMyModelIDがまだ取得できていません。");
       return;
     }
 
     setFollowActionLoading(true);
     try {
-      const ownerUserId = (await resolveOwnerUserIdByMyProfileCode(code)) || targetUserId;
-
-      if (!ownerUserId) {
-        Alert.alert("エラー", "フォロー先ユーザーが解決できませんでした。");
-        return;
-      }
-
-      // Supabase RLS の影響を避けるため、follow/unfollow は MashOS API 経由で行う
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error(
-          "アクセストークンが取得できませんでした。再ログインしてください。"
-        );
-      }
-
       const endpoint = isFollowing ? "/myprofile/unfollow" : "/myprofile/follow";
-      const res = await fetch(`${MYMODEL_API_BASE_URL}${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({ owner_user_id: ownerUserId }),
-      });
-
-      if (!res.ok) {
-        let detail = `HTTP ${res.status}`;
-        try {
-          const j = await res.json();
-          if (j && typeof j.detail === "string") detail = j.detail;
-        } catch {}
-        throw new Error(detail);
-      }
-
-      const json = await res.json().catch(() => ({}));
+      const body = code
+        ? { myprofile_code: code }
+        : { owner_user_id: targetUserId };
+      const json = await apiPost(endpoint, body);
       const nextFollowing = !!json?.is_following;
       const nextRequested = !!json?.is_follow_requested && !nextFollowing;
 
@@ -540,6 +522,8 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     }
     if (!isSelf) return;
     setNameDraft(displayName || "");
+    setNameError("");
+    setNameChecking(false);
     setNameEditOpen(true);
   };
 
@@ -586,8 +570,9 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   };
 
   const closeNameEdit = () => {
-    if (nameSaving) return;
+    if (nameSaving || nameChecking) return;
     setNameEditOpen(false);
+    setNameError("");
   };
 
   const loadAccountVisibilityMe = async () => {
@@ -607,7 +592,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
         throw new Error("アクセストークンが取得できませんでした");
       }
 
-      const res = await fetch(`${MYMODEL_API_BASE_URL}/account/visibility/me`, {
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/visibility/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -662,7 +647,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
         throw new Error("アクセストークンが取得できませんでした");
       }
 
-      const res = await fetch(`${MYMODEL_API_BASE_URL}/account/visibility/me`, {
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/visibility/me`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -717,7 +702,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   }, [accountSettingsOpen]);
 
   const saveDisplayName = async () => {
-    if (nameSaving) return;
+    if (nameSaving || nameChecking) return;
 
     if (!user) {
       Alert.alert("ログインが必要です", "ユーザー名の編集にはログインが必要です。");
@@ -725,21 +710,43 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     }
     if (!isSelf) return;
 
-    const nextName = String(nameDraft || "").trim();
+    const nextName = normalizeDisplayName(nameDraft);
 
     if (!nextName) {
+      setNameError("ユーザー名を入力してください。");
       Alert.alert("入力してください", "ユーザー名を入力してください。");
       return;
     }
 
+    if (nextName.length > DISPLAY_NAME_MAX_LENGTH) {
+      const message = `ユーザー名は${DISPLAY_NAME_MAX_LENGTH}文字以内で入力してください。`;
+      setNameError(message);
+      Alert.alert("文字数オーバー", message);
+      return;
+    }
+
+    setNameError("");
+    setNameChecking(true);
+    try {
+      const available = await checkDisplayNameAvailability(nextName, user.id);
+      if (available === false) {
+        setNameError(DISPLAY_NAME_TAKEN_MESSAGE);
+        return;
+      }
+    } finally {
+      setNameChecking(false);
+    }
+
     setNameSaving(true);
     try {
-      // profiles.display_name を更新（行が無い場合も考慮して upsert）
-      const { error: upsertErr } = await supabase
+      const { error: profileError } = await supabase
         .from("profiles")
-        .upsert({ id: user.id, display_name: nextName });
+        .update({ display_name: nextName })
+        .eq("id", user.id);
 
-      if (upsertErr) throw upsertErr;
+      if (profileError) {
+        throw profileError;
+      }
 
       // Auth の user_metadata も同期（失敗しても profiles 側が更新できていればOK）
       try {
@@ -752,14 +759,19 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
       setDisplayName(nextName);
       setNameEditOpen(false);
+      setNameError("");
       Alert.alert("更新完了", "ユーザー名を更新しました。");
     } catch (e) {
+      const friendlyMessage = mapDisplayNameConflictMessage(e) || String(e?.message || e);
+      if (friendlyMessage === DISPLAY_NAME_TAKEN_MESSAGE) {
+        setNameError(friendlyMessage);
+      }
       console.warn("profile update error:", e);
-      Alert.alert("更新に失敗しました", String(e?.message || e));
+      Alert.alert("更新に失敗しました", friendlyMessage);
     } finally {
       setNameSaving(false);
     }
-};
+  };
 
 const refreshSubscriptionState = async () => {
   // 未ログインなら free 表示で固定
@@ -1220,7 +1232,7 @@ const onRestorePurchases = async () => {
               <TouchableOpacity
                 style={styles.nameModalCloseBtn}
                 onPress={closeNameEdit}
-                disabled={nameSaving}
+                disabled={nameSaving || nameChecking}
                 activeOpacity={0.8}
               >
                 <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
@@ -1234,18 +1246,31 @@ const onRestorePurchases = async () => {
               placeholder="ユーザー名"
               placeholderTextColor={colors.TEXT_SUBTLE}
               value={nameDraft}
-              onChangeText={setNameDraft}
-              editable={!nameSaving}
+              onChangeText={(value) => {
+                setNameDraft(value);
+                if (nameError) setNameError("");
+              }}
+              editable={!nameSaving && !nameChecking}
               autoCapitalize="none"
               autoCorrect={false}
+              maxLength={DISPLAY_NAME_MAX_LENGTH}
               returnKeyType="done"
+              onSubmitEditing={saveDisplayName}
             />
+
+            {nameError ? (
+              <Text style={styles.nameErrorText}>{nameError}</Text>
+            ) : nameChecking ? (
+              <Text style={styles.nameHelperText}>ユーザー名の重複を確認しています…</Text>
+            ) : (
+              <Text style={styles.nameHelperText}>※ユーザー名は他ユーザーに公開されます。（{DISPLAY_NAME_MAX_LENGTH}文字まで）</Text>
+            )}
 
             <View style={styles.nameModalActions}>
               <TouchableOpacity
                 style={[styles.nameModalBtn, styles.nameModalBtnGhost]}
                 onPress={closeNameEdit}
-                disabled={nameSaving}
+                disabled={nameSaving || nameChecking}
                 activeOpacity={0.85}
               >
                 <Text style={[styles.nameModalBtnText, styles.nameModalBtnGhostText]}>
@@ -1257,13 +1282,13 @@ const onRestorePurchases = async () => {
                 style={[
                   styles.nameModalBtn,
                   styles.nameModalBtnPrimary,
-                  nameSaving && styles.nameModalBtnDisabled,
+                  (nameSaving || nameChecking) && styles.nameModalBtnDisabled,
                 ]}
                 onPress={saveDisplayName}
-                disabled={nameSaving}
+                disabled={nameSaving || nameChecking}
                 activeOpacity={0.85}
               >
-                {nameSaving ? (
+                {nameSaving || nameChecking ? (
                   <ActivityIndicator size="small" color="#FFFFFF" />
                 ) : (
                   <Text style={[styles.nameModalBtnText, styles.nameModalBtnPrimaryText]}>
@@ -1913,6 +1938,18 @@ function createStyles(COLORS) {
       paddingVertical: 10,
       fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
+    },
+    nameHelperText: {
+      marginTop: 8,
+      fontSize: 11,
+      lineHeight: 16,
+      color: COLORS.TEXT_SUBTLE,
+    },
+    nameErrorText: {
+      marginTop: 8,
+      fontSize: 11,
+      lineHeight: 16,
+      color: "#B91C1C",
     },
     nameModalActions: {
       flexDirection: "row",
