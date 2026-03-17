@@ -4,7 +4,6 @@ import {
   Alert,
   AppState,
   Keyboard,
-  KeyboardAvoidingView,
   Modal,
   Platform,
   Pressable,
@@ -32,6 +31,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import UnreadBadge from "../components/UnreadBadge";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay, {
+  measureTutorialTarget,
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
@@ -135,6 +135,29 @@ function resolveReflectionsRouteName(navigation) {
   return "MyModelReflections";
 }
 
+function mergeTutorialRects(...rects) {
+  const validRects = rects.filter(Boolean);
+  if (!validRects.length) return null;
+
+  const left = Math.min(...validRects.map((rect) => Number(rect.x) || 0));
+  const top = Math.min(...validRects.map((rect) => Number(rect.y) || 0));
+  const right = Math.max(
+    ...validRects.map((rect) => Number(rect.right ?? ((Number(rect.x) || 0) + (Number(rect.width) || 0))) || 0)
+  );
+  const bottom = Math.max(
+    ...validRects.map((rect) => Number(rect.bottom ?? ((Number(rect.y) || 0) + (Number(rect.height) || 0))) || 0)
+  );
+
+  return {
+    x: left,
+    y: top,
+    width: Math.max(0, right - left),
+    height: Math.max(0, bottom - top),
+    right,
+    bottom,
+  };
+}
+
 export default function MyModelScreen({ route } = {}) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -172,7 +195,6 @@ export default function MyModelScreen({ route } = {}) {
   const tutorialCreateScrollYRef = useRef(0);
   const tutorialCreateQuestionInputWrapRef = useRef(null);
   const tutorialCreateInputWrapRef = useRef(null);
-  const tutorialCreateInputRef = useRef(null);
   const tutorialCreateSaveButtonRef = useRef(null);
   const [tutorialModalTargetRect, setTutorialModalTargetRect] = useState(null);
   const [tutorialModalOverlayMetrics, setTutorialModalOverlayMetrics] = useState(null);
@@ -275,9 +297,6 @@ export default function MyModelScreen({ route } = {}) {
     tutorialStep <= MYMODEL_TUTORIAL_STEP_END;
   const isMyModelTutorialVisible =
     isMyModelTutorialStep && !tutorialCreateVisible;
-  const tutorialCreateAnswerFilled =
-    String(tutorialCreateAnswer || "").trim().length > 0;
-
   const handleTutorialScroll = useCallback((e) => {
     tutorialScrollYRef.current =
       e?.nativeEvent?.contentOffset?.y ?? tutorialScrollYRef.current;
@@ -342,7 +361,21 @@ export default function MyModelScreen({ route } = {}) {
     }
   }, [isMyModelTutorialVisible, tutorialStep, setTutorialStep]);
 
-  const tutorialModalOverlayConfig = null;
+  const tutorialModalOverlayConfig = useMemo(() => {
+    if (!isTutorialMode || !tutorialCreateVisible || tutorialStep !== 16) {
+      return null;
+    }
+
+    return {
+      step: 16,
+      mode: "action",
+      title: "作成してみましょう",
+      message: "回答を入力したら、保存ボタンを押してください",
+      actionHint: "入力して保存してください",
+      footerText:
+        "この問い1つで、Reflectionの作成から閲覧までの流れを体験できます。",
+    };
+  }, [isTutorialMode, tutorialCreateVisible, tutorialStep]);
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isMyModelTutorialVisible) {
@@ -423,32 +456,26 @@ export default function MyModelScreen({ route } = {}) {
       return null;
     }
 
-    const targetRef = tutorialCreateAnswerFilled
-      ? tutorialCreateSaveButtonRef
-      : tutorialCreateQuestionInputWrapRef;
+    const measureOptions = {
+      maxAttempts: 3,
+      settleFrames: 1,
+      coordinateSpace: "window",
+      overlayWindowRect: tutorialModalOverlayMetrics?.overlayWindowRect,
+    };
 
-    return syncTutorialSpotlightTarget({
-      enabled: true,
-      targetRef,
-      rootRef: modalOverlayRootRef,
-      scrollRef: tutorialCreateScrollRef,
-      currentScrollYRef: tutorialCreateScrollYRef,
-      overlayMetrics: tutorialModalOverlayMetrics,
-      windowHeight,
-      safeInsets,
-      cardPlacement: tutorialModalOverlayConfig?.cardPlacement || "bottom",
-      measureOptions: {
-        maxAttempts: 3,
-        settleFrames: 1,
-      },
-    });
-  }, [
-    tutorialModalOverlayConfig,
-    tutorialCreateAnswerFilled,
-    tutorialModalOverlayMetrics,
-    windowHeight,
-    safeInsets,
-  ]);
+    const questionRect = await measureTutorialTarget(
+      tutorialCreateQuestionInputWrapRef,
+      modalOverlayRootRef,
+      measureOptions
+    );
+    const saveRect = await measureTutorialTarget(
+      tutorialCreateSaveButtonRef,
+      modalOverlayRootRef,
+      measureOptions
+    );
+
+    return mergeTutorialRects(questionRect, saveRect) || questionRect || saveRect;
+  }, [tutorialModalOverlayConfig, tutorialModalOverlayMetrics]);
 
   // ---------------------------------------------------------
   // Tab reselect (when already on MyModel tab)
@@ -676,8 +703,6 @@ export default function MyModelScreen({ route } = {}) {
     };
   }, [
     tutorialModalOverlayConfig,
-    tutorialCreateAnswer,
-    tutorialCreateAnswerFilled,
     tutorialCreateSubmitting,
     tutorialModalOverlayMetrics,
     syncTutorialModalTargetRect,
@@ -716,7 +741,6 @@ export default function MyModelScreen({ route } = {}) {
   }, [navigation, targetUserId]);
 
   const saveTutorialReflection = useCallback(() => {
-    Keyboard.dismiss();
     const answer = String(tutorialCreateAnswer || "").trim();
     if (!answer) {
       setTutorialCreateError("回答を入力してください。");
@@ -1345,111 +1369,105 @@ export default function MyModelScreen({ route } = {}) {
         onRequestClose={closeTutorialCreate}
       >
         <View ref={modalOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
-          <KeyboardAvoidingView
-            style={styles.modalKeyboardAvoider}
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
-            keyboardVerticalOffset={safeInsets.top + 12}
-          >
-            <View style={styles.modalCard}>
-              <View style={styles.modalHeader}>
-                <Text style={styles.modalTitle}>チュートリアル Reflection</Text>
-                <Pressable
-                  onPress={closeTutorialCreate}
-                  style={styles.modalCloseBtn}
-                  disabled={tutorialCreateSubmitting}
-                >
-                  <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
-                </Pressable>
-              </View>
-
-              <ScrollView
-                ref={tutorialCreateScrollRef}
-                style={styles.listArea}
-                contentContainerStyle={styles.modalScrollContent}
-                keyboardShouldPersistTaps="always"
-                keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}
-                scrollEventThrottle={16}
-                onScroll={(e) => {
-                  tutorialCreateScrollYRef.current =
-                    e?.nativeEvent?.contentOffset?.y ?? tutorialCreateScrollYRef.current;
-                }}
+          <View style={styles.modalCard}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>チュートリアル Reflection</Text>
+              <Pressable
+                onPress={closeTutorialCreate}
+                style={styles.modalCloseBtn}
+                disabled={tutorialCreateSubmitting}
               >
-                <Text style={styles.tutorialModalInstruction}>
-                  回答を入力したら、下の保存ボタンを押してください。
-                </Text>
+                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+              </Pressable>
+            </View>
 
-                <View ref={tutorialCreateQuestionInputWrapRef} collapsable={false}>
-                  <View style={styles.tutorialQuestionCard}>
-                    <Text style={styles.tutorialQuestionLabel}>問い</Text>
-                    <Text style={styles.recoSummaryText}>{TUTORIAL_REFLECTION_QUESTION}</Text>
-                  </View>
-
-                  <Text style={[styles.recoSectionLabel, { marginTop: 10 }]}>あなたの回答</Text>
-                  <View ref={tutorialCreateInputWrapRef} collapsable={false}>
-                    <TextInput
-                      ref={tutorialCreateInputRef}
-                      style={styles.tutorialTextArea}
-                      placeholder="ここに回答を書いてください。"
-                      placeholderTextColor={colors.TEXT_SUBTLE}
-                      value={tutorialCreateAnswer}
-                      onChangeText={(v) => {
-                        setTutorialCreateAnswer(v);
-                        if (tutorialCreateError) setTutorialCreateError("");
-                      }}
-                      multiline
-                      textAlignVertical="top"
-                      editable={!tutorialCreateSubmitting}
-                    />
-                  </View>
+            <ScrollView
+              ref={tutorialCreateScrollRef}
+              style={styles.listArea}
+              contentContainerStyle={styles.modalScrollContent}
+              keyboardShouldPersistTaps="always"
+              keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}
+              scrollEventThrottle={16}
+              onScroll={(e) => {
+                tutorialCreateScrollYRef.current =
+                  e?.nativeEvent?.contentOffset?.y ?? tutorialCreateScrollYRef.current;
+              }}
+            >
+              <View ref={tutorialCreateQuestionInputWrapRef} collapsable={false}>
+                <View style={styles.tutorialQuestionCard}>
+                  <Text style={styles.tutorialQuestionLabel}>問い</Text>
+                  <Text style={styles.recoSummaryText}>{TUTORIAL_REFLECTION_QUESTION}</Text>
                 </View>
 
-                <Text style={styles.tutorialHelperText}>
-                  回答は保存ボタンを押したタイミングで完了として扱われます。チュートリアル用のReflectionとして保存され、本番データには影響しません。
-                </Text>
-
-                {tutorialCreateError ? (
-                  <Text style={styles.modeErrorText}>{tutorialCreateError}</Text>
-                ) : null}
-              </ScrollView>
-
-              <View ref={tutorialCreateSaveButtonRef} collapsable={false} style={styles.modalFooter}>
-                <Pressable
-                  onPress={Keyboard.dismiss}
-                  style={styles.tutorialKeyboardDismissButton}
-                  disabled={tutorialCreateSubmitting}
-                >
-                  <Ionicons
-                    name="chevron-down-outline"
-                    size={16}
-                    color={colors.TEXT_ON_LIGHT}
-                    style={{ marginRight: 4 }}
+                <Text style={[styles.recoSectionLabel, { marginTop: 10 }]}>あなたの回答</Text>
+                <View ref={tutorialCreateInputWrapRef} collapsable={false}>
+                  <TextInput
+                  style={styles.tutorialTextArea}
+                  placeholder="ここに回答を書いてください。"
+                  placeholderTextColor={colors.TEXT_SUBTLE}
+                  value={tutorialCreateAnswer}
+                  onChangeText={(v) => {
+                    setTutorialCreateAnswer(v);
+                    if (tutorialCreateError) setTutorialCreateError("");
+                  }}
+                  multiline
+                  textAlignVertical="top"
+                  editable={!tutorialCreateSubmitting}
                   />
-                  <Text style={styles.tutorialKeyboardDismissText}>キーボードを閉じる</Text>
-                </Pressable>
+                </View>
+              </View>
 
+              <Text style={styles.tutorialHelperText}>
+                {isTutorialMode && tutorialStep === 16
+                  ? "この問いに答えて保存すると、チュートリアル用のReflectionが作成されます。本番データには保存されません。"
+                  : "チュートリアルでは、この1つの回答だけでReflectionの作成から閲覧までの流れを体験します。本番データには保存されません。"}
+              </Text>
+
+              {tutorialCreateError ? (
+                <Text style={styles.modeErrorText}>{tutorialCreateError}</Text>
+              ) : null}
+
+              <View ref={tutorialCreateSaveButtonRef} collapsable={false}>
                 <CocolonButton
-                  variant="primary"
-                  style={styles.tutorialSaveButton}
-                  onPress={saveTutorialReflection}
-                  disabled={tutorialCreateSubmitting}
-                >
-                  <View style={styles.btnRow}>
-                    {tutorialCreateSubmitting ? (
-                      <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
-                    ) : (
-                      <Ionicons
-                        name="save-outline"
-                        size={18}
-                        color="#FFFFFF"
-                        style={{ marginRight: 6 }}
-                      />
-                    )}
-                    <Text style={styles.goldButtonText}>保存</Text>
-                  </View>
+                variant="primary"
+                style={{ marginTop: 12 }}
+                onPress={saveTutorialReflection}
+                disabled={tutorialCreateSubmitting}
+              >
+                <View style={styles.btnRow}>
+                  {tutorialCreateSubmitting ? (
+                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons
+                      name="save-outline"
+                      size={18}
+                      color="#FFFFFF"
+                      style={{ marginRight: 6 }}
+                    />
+                  )}
+                  <Text style={styles.goldButtonText}>保存</Text>
+                </View>
                 </CocolonButton>
               </View>
-            </View>
-          </KeyboardAvoidingView>
+            </ScrollView>
+          </View>
+
+          {tutorialModalOverlayConfig ? (
+            <TutorialOverlay
+              visible={!!tutorialModalOverlayConfig}
+              targetRect={tutorialModalTargetRect}
+              title={tutorialModalOverlayConfig.title}
+              message={tutorialModalOverlayConfig.message}
+              step={tutorialModalOverlayConfig.step}
+              totalSteps={TUTORIAL_TOTAL_STEPS}
+              mode={tutorialModalOverlayConfig.mode}
+              nextLabel={tutorialModalOverlayConfig.nextLabel}
+              onNext={tutorialModalOverlayConfig.onNext}
+              actionHint={tutorialModalOverlayConfig.actionHint}
+              footerText={tutorialModalOverlayConfig.footerText}
+              onMetricsChange={setTutorialModalOverlayMetrics}
+            />
+          ) : null}
         </View>
       </Modal>
 
@@ -2055,9 +2073,6 @@ function createStyles(COLORS, ui) {
       paddingHorizontal: 16,
       justifyContent: "center",
     },
-    modalKeyboardAvoider: {
-      width: "100%",
-    },
     modalCard: {
       borderRadius: 22,
       borderWidth: 1,
@@ -2111,36 +2126,8 @@ function createStyles(COLORS, ui) {
       opacity: 0.9,
       textAlign: "center",
     },
-    listArea: { flex: 1 },
-    modalScrollContent: {
-      paddingBottom: 8,
-    },
-    modalFooter: {
-      marginTop: 12,
-      paddingTop: 10,
-      borderTopWidth: 1,
-      borderTopColor: COLORS.CARD_BORDER,
-    },
-    tutorialKeyboardDismissButton: {
-      alignSelf: "flex-end",
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      marginBottom: 8,
-    },
-    tutorialKeyboardDismissText: {
-      fontSize: 11,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    tutorialSaveButton: {
-      marginTop: 0,
-    },
+    listArea: { paddingBottom: 4 },
+    modalScrollContent: { paddingBottom: 12 },
 
     // Recommend users list rows
     recoUserRow: {
@@ -2225,13 +2212,6 @@ function createStyles(COLORS, ui) {
       fontWeight: "900",
       color: COLORS.TITLE_GOLD,
       marginBottom: 4,
-    },
-    tutorialModalInstruction: {
-      fontSize: 12,
-      lineHeight: 18,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 10,
     },
     tutorialTextArea: {
       marginTop: 8,
