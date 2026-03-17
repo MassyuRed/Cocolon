@@ -896,12 +896,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       ) : route === "deepInsight" ? (
         <DeepInsightScreen onBack={() => setRoute("home")} />
       ) : (
-        <View
-          style={[
-            styles.safeContent,
-            { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
-          ]}
-        >
+        <View style={styles.safeContent}>
         <MyWebHome
           styles={styles}
           colors={colors}

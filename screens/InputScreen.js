@@ -1012,12 +1012,7 @@ ${String(error?.message || error)}`
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      <View
-        style={[
-          styles.safeContent,
-          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
-        ]}
-      >
+      <View style={styles.safeContent}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}

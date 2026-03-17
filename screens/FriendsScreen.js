@@ -1280,12 +1280,7 @@ export default function FriendsScreen(props) {
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      <View
-        style={[
-          styles.safeContent,
-          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
-        ]}
-      >
+      <View style={styles.safeContent}>
       {/* 画面全体は固定（背景＆タイトル固定） */}
       <View style={styles.screenContainer}>
         {/* パネルヘッダー：Friend */}

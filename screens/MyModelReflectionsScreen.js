@@ -2137,12 +2137,7 @@ useEffect(() => {
         backgroundColor={colors.BG_SILVER}
       />
 
-      <View
-        style={[
-          styles.safeContent,
-          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
-        ]}
-      >
+      <View style={styles.safeContent}>
       <ScrollView
         ref={tutorialBodyScrollRef}
         style={styles.body}
