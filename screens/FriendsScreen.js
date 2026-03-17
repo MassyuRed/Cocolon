@@ -5,7 +5,6 @@ import {
   FlatList,
   Modal,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -1276,13 +1275,19 @@ export default function FriendsScreen(props) {
   const effectiveErrorMsg = isTutorialMode ? "" : errorMsg;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
+      <View
+        style={[
+          styles.safeContent,
+          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
+        ]}
+      >
       {/* 画面全体は固定（背景＆タイトル固定） */}
-      <View ref={screenRootRef} collapsable={false} style={styles.screenContainer}>
+      <View style={styles.screenContainer}>
         {/* パネルヘッダー：Friend */}
           <View style={styles.panelHeader}>
             <View ref={panelTitleRowRef} collapsable={false} style={styles.panelTitleRow}>
@@ -1490,6 +1495,7 @@ export default function FriendsScreen(props) {
               </View>
             ) : null}
           </ScrollView>
+      </View>
       </View>
 
       {isFriendsTutorialVisible && tutorialOverlayConfig ? (
@@ -1795,7 +1801,7 @@ export default function FriendsScreen(props) {
         </View>
       </Modal>
 
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -1809,6 +1815,9 @@ function createStyles(COLORS) {
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
+    },
+    safeContent: {
+      flex: 1,
     },
     screenContainer: {
       flex: 1,

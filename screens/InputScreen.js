@@ -7,7 +7,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -1008,11 +1007,17 @@ ${String(error?.message || error)}`
   };
 
   return (
-    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.safeArea}>
+    <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
+      <View
+        style={[
+          styles.safeContent,
+          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
+        ]}
+      >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -1680,6 +1685,7 @@ ${String(error?.message || error)}`
   onSubmit={handleSubmitTodayQuestion}
   onOpenHistory={handleOpenTodayQuestionHistory}
 />
+      </View>
 
 {tutorialOverlayConfig ? (
   <TutorialOverlay
@@ -1715,7 +1721,7 @@ ${String(error?.message || error)}`
   </View>
 ) : null}
 
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -1726,6 +1732,9 @@ function createStyles(COLORS, ui) {
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
+    },
+    safeContent: {
+      flex: 1,
     },
     scrollContainer: {
       paddingTop: 16,

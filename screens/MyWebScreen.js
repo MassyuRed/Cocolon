@@ -11,7 +11,6 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -835,7 +834,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
   return (
-    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
+    <View ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -897,6 +896,12 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       ) : route === "deepInsight" ? (
         <DeepInsightScreen onBack={() => setRoute("home")} />
       ) : (
+        <View
+          style={[
+            styles.safeContent,
+            { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
+          ]}
+        >
         <MyWebHome
           styles={styles}
           colors={colors}
@@ -927,6 +932,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           weeklySummary={weeklySummary}
           monthlySummary={monthlySummary}
         />
+        </View>
       )}
 
       {tutorialOverlayConfig ? (
@@ -947,7 +953,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           }
         />
       ) : null}
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -1267,6 +1273,7 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create({
     // ルート
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    safeContent: { flex: 1 },
 
     // MyWeb Home 用
     scrollContainer: {

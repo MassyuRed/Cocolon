@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -118,7 +118,7 @@ export function waitForTutorialFrames(frameCount = DEFAULT_SETTLE_FRAMES) {
   });
 }
 
-function measureTutorialTargetOnce(targetRef, rootRef) {
+function measureTutorialTargetLegacyOnce(targetRef, rootRef) {
   return new Promise((resolve) => {
     const targetNode = targetRef?.current ?? targetRef ?? null;
     const rootNode = rootRef?.current ?? rootRef ?? null;
@@ -168,13 +168,58 @@ function measureTutorialTargetOnce(targetRef, rootRef) {
   });
 }
 
-/**
- * targetRef をチュートリアル用に測定する helper。
- * - rootRef が渡された場合は root 基準のローカル座標で返します。
- * - rootRef が無い場合は window 座標を返します。
- * - 同じ要素を複数フレームで再測定し、値が安定した矩形を優先します。
- */
-export async function measureTutorialTarget(targetRef, rootRef, options = {}) {
+function measureNodeRectInWindowOnce(nodeRef) {
+  return new Promise((resolve) => {
+    const node = nodeRef?.current ?? nodeRef ?? null;
+
+    if (!node) {
+      resolve(null);
+      return;
+    }
+
+    const finish = (x, y, width, height) => {
+      resolve(
+        normalizeMeasuredRect({
+          x,
+          y,
+          width,
+          height,
+        })
+      );
+    };
+
+    const fail = () => resolve(null);
+
+    requestAnimationFrame(() => {
+      try {
+        if (typeof node.measureInWindow === "function") {
+          node.measureInWindow((x, y, width, height) => {
+            finish(x, y, width, height);
+          });
+          return;
+        }
+
+        if (typeof node.measure === "function") {
+          node.measure((x, y, width, height, pageX, pageY) => {
+            finish(
+              isFiniteNumber(pageX) ? pageX : x,
+              isFiniteNumber(pageY) ? pageY : y,
+              width,
+              height
+            );
+          });
+          return;
+        }
+      } catch {
+        // noop
+      }
+
+      fail();
+    });
+  });
+}
+
+async function measureNodeRectInWindow(nodeRef, options = {}) {
   const maxAttempts = Math.max(
     1,
     Math.floor(Number(options.maxAttempts) || DEFAULT_MAX_MEASURE_ATTEMPTS)
@@ -192,7 +237,102 @@ export async function measureTutorialTarget(targetRef, rootRef, options = {}) {
       await waitForTutorialFrames(attempt > 0 ? Math.max(1, settleFrames) : settleFrames);
     }
 
-    const rect = await measureTutorialTargetOnce(targetRef, rootRef);
+    const rect = await measureNodeRectInWindowOnce(nodeRef);
+    if (!rect) {
+      return previousRect;
+    }
+
+    if (previousRect && rectsAlmostEqual(previousRect, rect, tolerance)) {
+      return rect;
+    }
+
+    previousRect = rect;
+  }
+
+  return previousRect;
+}
+
+function localizeRectToContainerWindowRect(targetWindowRect, containerWindowRect) {
+  const safeTargetRect = normalizeMeasuredRect(targetWindowRect);
+  const safeContainerRect = normalizeMeasuredRect(containerWindowRect);
+
+  if (!safeTargetRect || !safeContainerRect) {
+    return safeTargetRect;
+  }
+
+  return normalizeMeasuredRect({
+    x: safeTargetRect.x - safeContainerRect.x,
+    y: safeTargetRect.y - safeContainerRect.y,
+    width: safeTargetRect.width,
+    height: safeTargetRect.height,
+  });
+}
+
+/**
+ * targetRef をチュートリアル用に測定する helper。
+ * - rootRef が渡された場合は root 基準のローカル座標で返します。
+ * - rootRef が無い場合は window 座標を返します。
+ * - 同じ要素を複数フレームで再測定し、値が安定した矩形を優先します。
+ */
+export async function measureTutorialTarget(targetRef, rootRef, options = {}) {
+  const maxAttempts = Math.max(
+    1,
+    Math.floor(Number(options.maxAttempts) || DEFAULT_MAX_MEASURE_ATTEMPTS)
+  );
+  const settleFrames = Math.max(0, Math.floor(Number(options.settleFrames) || 0));
+  const tolerance = Math.max(
+    0.25,
+    Number(options.tolerance) || DEFAULT_MEASURE_TOLERANCE
+  );
+  const overlayWindowRect = normalizeMeasuredRect(
+    options.overlayWindowRect || options.coordinateSpaceRect
+  );
+  const shouldPreferWindowSpace =
+    options.coordinateSpace === "window" || !!overlayWindowRect;
+
+  if (shouldPreferWindowSpace) {
+    const containerWindowRect =
+      overlayWindowRect ||
+      (rootRef
+        ? await measureNodeRectInWindow(rootRef, {
+            maxAttempts,
+            settleFrames,
+            tolerance,
+          })
+        : null);
+
+    let previousWindowRect = null;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      if (attempt > 0 || settleFrames > 0) {
+        await waitForTutorialFrames(
+          attempt > 0 ? Math.max(1, settleFrames) : settleFrames
+        );
+      }
+
+      const nextWindowRect = await measureNodeRectInWindowOnce(targetRef);
+      if (!nextWindowRect) {
+        return localizeRectToContainerWindowRect(previousWindowRect, containerWindowRect);
+      }
+
+      if (previousWindowRect && rectsAlmostEqual(previousWindowRect, nextWindowRect, tolerance)) {
+        return localizeRectToContainerWindowRect(nextWindowRect, containerWindowRect);
+      }
+
+      previousWindowRect = nextWindowRect;
+    }
+
+    return localizeRectToContainerWindowRect(previousWindowRect, containerWindowRect);
+  }
+
+  let previousRect = null;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    if (attempt > 0 || settleFrames > 0) {
+      await waitForTutorialFrames(attempt > 0 ? Math.max(1, settleFrames) : settleFrames);
+    }
+
+    const rect = await measureTutorialTargetLegacyOnce(targetRef, rootRef);
     if (!rect) {
       return previousRect;
     }
@@ -327,7 +467,15 @@ export async function syncTutorialSpotlightTarget({
 }) {
   if (!enabled) return null;
 
-  const firstRect = await measureTutorialTarget(targetRef, rootRef, measureOptions);
+  const resolvedMeasureOptions = {
+    ...(measureOptions || {}),
+    coordinateSpace: "window",
+    overlayWindowRect:
+      normalizeMeasuredRect(overlayMetrics?.overlayWindowRect) ||
+      normalizeMeasuredRect(measureOptions?.overlayWindowRect),
+  };
+
+  const firstRect = await measureTutorialTarget(targetRef, rootRef, resolvedMeasureOptions);
   if (!firstRect) return null;
 
   const viewport = buildTutorialViewport({
@@ -365,8 +513,8 @@ export async function syncTutorialSpotlightTarget({
 
   return (
     (await measureTutorialTarget(targetRef, rootRef, {
+      ...resolvedMeasureOptions,
       settleFrames: 0,
-      ...(measureOptions || {}),
     })) || firstRect
   );
 }
@@ -408,8 +556,10 @@ export default function TutorialOverlay({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const overlayRootRef = useRef(null);
   const [cardHeight, setCardHeight] = useState(DEFAULT_CARD_FALLBACK_HEIGHT);
   const [overlayLayout, setOverlayLayout] = useState({ width: 0, height: 0 });
+  const [overlayWindowRect, setOverlayWindowRect] = useState(null);
 
   const screenWidth = Math.max(1, overlayLayout.width || windowWidth);
   const screenHeight = Math.max(1, overlayLayout.height || windowHeight);
@@ -499,6 +649,67 @@ export default function TutorialOverlay({
     };
   }, [holeRect, screenWidth, screenHeight, targetTouchPadding]);
 
+  const syncOverlayWindowRect = useCallback(async () => {
+    if (!visible) {
+      setOverlayWindowRect(null);
+      return;
+    }
+
+    const nextRect = await measureNodeRectInWindow(overlayRootRef, {
+      maxAttempts: 2,
+      settleFrames: 0,
+      tolerance: DEFAULT_MEASURE_TOLERANCE,
+    });
+
+    setOverlayWindowRect((prev) => {
+      if (!nextRect) return prev ?? null;
+      return rectsAlmostEqual(prev, nextRect, DEFAULT_MEASURE_TOLERANCE) ? prev : nextRect;
+    });
+  }, [visible]);
+
+  useLayoutEffect(() => {
+    if (!visible) {
+      setOverlayWindowRect(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    const run = async () => {
+      await waitForTutorialFrames(1);
+      if (cancelled) return;
+
+      const nextRect = await measureNodeRectInWindow(overlayRootRef, {
+        maxAttempts: 2,
+        settleFrames: 0,
+        tolerance: DEFAULT_MEASURE_TOLERANCE,
+      });
+
+      if (cancelled) return;
+
+      setOverlayWindowRect((prev) => {
+        if (!nextRect) return prev ?? null;
+        return rectsAlmostEqual(prev, nextRect, DEFAULT_MEASURE_TOLERANCE)
+          ? prev
+          : nextRect;
+      });
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    visible,
+    screenWidth,
+    screenHeight,
+    insets.top,
+    insets.right,
+    insets.bottom,
+    insets.left,
+  ]);
+
   useEffect(() => {
     if (typeof onMetricsChange !== "function") return;
 
@@ -507,6 +718,7 @@ export default function TutorialOverlay({
         ? {
             overlayWidth: screenWidth,
             overlayHeight: screenHeight,
+            overlayWindowRect,
             cardHeight,
             cardRect: resolvedCardRect,
             cardPlacement: shouldMoveCardToTop ? "top" : "bottom",
@@ -539,6 +751,7 @@ export default function TutorialOverlay({
 
   return (
     <View
+      ref={overlayRootRef}
       collapsable={false}
       pointerEvents="box-none"
       testID={testID}
@@ -554,6 +767,8 @@ export default function TutorialOverlay({
         ) {
           setOverlayLayout({ width: nextWidth, height: nextHeight });
         }
+
+        syncOverlayWindowRect();
       }}
     >
       {holeRect ? (

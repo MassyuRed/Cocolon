@@ -7,7 +7,6 @@ import {
   Modal,
   Platform,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -1097,12 +1096,18 @@ export default function MyModelScreen({ route } = {}) {
 
 
   return (
-    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
+    <View ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
 
+      <View
+        style={[
+          styles.safeContent,
+          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
+        ]}
+      >
       <ScrollView
         ref={tutorialScrollRef}
         style={styles.body}
@@ -1339,6 +1344,7 @@ export default function MyModelScreen({ route } = {}) {
           </View>
         </View>
       </ScrollView>
+      </View>
 
       {tutorialOverlayConfig ? (
         <TutorialOverlay
@@ -1777,7 +1783,7 @@ export default function MyModelScreen({ route } = {}) {
           </View>
         </View>
       </Modal>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -1786,6 +1792,7 @@ function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    safeContent: { flex: 1 },
     body: { flex: 1 },
     bodyContent: {
       paddingTop: 16,

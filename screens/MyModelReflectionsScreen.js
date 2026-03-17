@@ -6,7 +6,6 @@ import {
   Modal,
   Platform,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -2132,12 +2131,18 @@ useEffect(() => {
   );
 
   return (
-    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
+    <View ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
 
+      <View
+        style={[
+          styles.safeContent,
+          { paddingTop: safeInsets.top, paddingBottom: safeInsets.bottom },
+        ]}
+      >
       <ScrollView
         ref={tutorialBodyScrollRef}
         style={styles.body}
@@ -2335,6 +2340,7 @@ useEffect(() => {
         </View>
 
         </ScrollView>
+      </View>
 
       {/* Target user picker modal */}
       <Modal
@@ -3148,7 +3154,7 @@ useEffect(() => {
         }}
       />
 
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -3157,6 +3163,7 @@ function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    safeContent: { flex: 1 },
     body: { flex: 1 },
     bodyContent: {
       paddingTop: 16,
