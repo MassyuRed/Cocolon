@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -17,33 +17,70 @@ const DEFAULT_CARD_BOTTOM_MARGIN = 16;
 const DEFAULT_CARD_FALLBACK_HEIGHT = 188;
 const DEFAULT_ACTION_HINT = "スポットライトの場所を押してください";
 const DEFAULT_NEXT_LABEL = "次へ";
+const DEFAULT_TARGET_TOUCH_PADDING = 8;
+const DEFAULT_TARGET_HIT_SLOP = 12;
+const DEFAULT_TARGET_GAP = 12;
+const DEFAULT_MEASURE_TOLERANCE = 0.75;
+const DEFAULT_SETTLE_FRAMES = 2;
+const DEFAULT_MAX_MEASURE_ATTEMPTS = 3;
 
 function isFiniteNumber(value) {
   return Number.isFinite(Number(value));
 }
 
-function normalizeTargetRect(rect, screenWidth, screenHeight, padding) {
+function clamp(value, min, max) {
+  if (!isFiniteNumber(value)) return min;
+  return Math.min(Math.max(Number(value), min), max);
+}
+
+function normalizeMeasuredRect(rect) {
   if (!rect) return null;
-  const rawX = Number(rect.x ?? rect.left ?? 0);
-  const rawY = Number(rect.y ?? rect.top ?? 0);
-  const rawWidth = Number(rect.width ?? 0);
-  const rawHeight = Number(rect.height ?? 0);
+
+  const x = Number(rect.x ?? rect.left ?? 0);
+  const y = Number(rect.y ?? rect.top ?? 0);
+  const width = Number(rect.width ?? 0);
+  const height = Number(rect.height ?? 0);
 
   if (
-    !isFiniteNumber(rawX) ||
-    !isFiniteNumber(rawY) ||
-    !isFiniteNumber(rawWidth) ||
-    !isFiniteNumber(rawHeight) ||
-    rawWidth <= 0 ||
-    rawHeight <= 0
+    !isFiniteNumber(x) ||
+    !isFiniteNumber(y) ||
+    !isFiniteNumber(width) ||
+    !isFiniteNumber(height) ||
+    width <= 0 ||
+    height <= 0
   ) {
     return null;
   }
 
-  const x = Math.max(0, rawX - padding);
-  const y = Math.max(0, rawY - padding);
-  const right = Math.min(screenWidth, rawX + rawWidth + padding);
-  const bottom = Math.min(screenHeight, rawY + rawHeight + padding);
+  return {
+    x,
+    y,
+    width,
+    height,
+    right: x + width,
+    bottom: y + height,
+  };
+}
+
+function rectsAlmostEqual(a, b, tolerance = DEFAULT_MEASURE_TOLERANCE) {
+  if (!a || !b) return false;
+  const t = Math.max(0.25, Number(tolerance) || DEFAULT_MEASURE_TOLERANCE);
+  return (
+    Math.abs(a.x - b.x) <= t &&
+    Math.abs(a.y - b.y) <= t &&
+    Math.abs(a.width - b.width) <= t &&
+    Math.abs(a.height - b.height) <= t
+  );
+}
+
+function normalizeTargetRect(rect, screenWidth, screenHeight, padding) {
+  const safeRect = normalizeMeasuredRect(rect);
+  if (!safeRect) return null;
+
+  const x = clamp(safeRect.x - padding, 0, screenWidth);
+  const y = clamp(safeRect.y - padding, 0, screenHeight);
+  const right = clamp(safeRect.right + padding, 0, screenWidth);
+  const bottom = clamp(safeRect.bottom + padding, 0, screenHeight);
 
   const width = Math.max(0, right - x);
   const height = Math.max(0, bottom - y);
@@ -60,18 +97,28 @@ function normalizeTargetRect(rect, screenWidth, screenHeight, padding) {
   };
 }
 
-/**
- * targetRef をチュートリアル用に測定する helper。
- *
- * 使い方の基本:
- * - 画面rootに ref を付ける
- * - スポットライト対象にも ref を付ける
- * - measureTutorialTarget(targetRef, rootRef)
- *
- * rootRef が渡された場合は root 基準のローカル座標で返します。
- * rootRef が無い場合は window 座標を返します。
- */
-export function measureTutorialTarget(targetRef, rootRef) {
+export function waitForTutorialFrames(frameCount = DEFAULT_SETTLE_FRAMES) {
+  const total = Math.max(1, Math.floor(Number(frameCount) || DEFAULT_SETTLE_FRAMES));
+
+  return new Promise((resolve) => {
+    let remaining = total;
+
+    const step = () => {
+      requestAnimationFrame(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+          resolve();
+          return;
+        }
+        step();
+      });
+    };
+
+    step();
+  });
+}
+
+function measureTutorialTargetOnce(targetRef, rootRef) {
   return new Promise((resolve) => {
     const targetNode = targetRef?.current ?? targetRef ?? null;
     const rootNode = rootRef?.current ?? rootRef ?? null;
@@ -82,24 +129,14 @@ export function measureTutorialTarget(targetRef, rootRef) {
     }
 
     const finish = (x, y, width, height) => {
-      if (
-        !isFiniteNumber(x) ||
-        !isFiniteNumber(y) ||
-        !isFiniteNumber(width) ||
-        !isFiniteNumber(height)
-      ) {
-        resolve(null);
-        return;
-      }
-
-      resolve({
-        x: Number(x),
-        y: Number(y),
-        width: Number(width),
-        height: Number(height),
-        right: Number(x) + Number(width),
-        bottom: Number(y) + Number(height),
-      });
+      resolve(
+        normalizeMeasuredRect({
+          x,
+          y,
+          width,
+          height,
+        })
+      );
     };
 
     const fail = () => resolve(null);
@@ -115,6 +152,13 @@ export function measureTutorialTarget(targetRef, rootRef) {
           targetNode.measureInWindow(finish);
           return;
         }
+
+        if (typeof targetNode.measure === "function") {
+          targetNode.measure((x, y, width, height) => {
+            finish(x, y, width, height);
+          });
+          return;
+        }
       } catch {
         // noop
       }
@@ -125,16 +169,215 @@ export function measureTutorialTarget(targetRef, rootRef) {
 }
 
 /**
+ * targetRef をチュートリアル用に測定する helper。
+ * - rootRef が渡された場合は root 基準のローカル座標で返します。
+ * - rootRef が無い場合は window 座標を返します。
+ * - 同じ要素を複数フレームで再測定し、値が安定した矩形を優先します。
+ */
+export async function measureTutorialTarget(targetRef, rootRef, options = {}) {
+  const maxAttempts = Math.max(
+    1,
+    Math.floor(Number(options.maxAttempts) || DEFAULT_MAX_MEASURE_ATTEMPTS)
+  );
+  const settleFrames = Math.max(0, Math.floor(Number(options.settleFrames) || 0));
+  const tolerance = Math.max(
+    0.25,
+    Number(options.tolerance) || DEFAULT_MEASURE_TOLERANCE
+  );
+
+  let previousRect = null;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    if (attempt > 0 || settleFrames > 0) {
+      await waitForTutorialFrames(attempt > 0 ? Math.max(1, settleFrames) : settleFrames);
+    }
+
+    const rect = await measureTutorialTargetOnce(targetRef, rootRef);
+    if (!rect) {
+      return previousRect;
+    }
+
+    if (previousRect && rectsAlmostEqual(previousRect, rect, tolerance)) {
+      return rect;
+    }
+
+    previousRect = rect;
+  }
+
+  return previousRect;
+}
+
+function buildFallbackCardRect({
+  overlayHeight,
+  safeTop,
+  safeBottom,
+  cardPlacement,
+  cardBottomMargin,
+  cardHeight,
+}) {
+  const fallbackPlacement = cardPlacement === "top" ? "top" : "bottom";
+  const cardBottom = Math.max(safeBottom, cardBottomMargin) + 8;
+  const cardTopBase = Math.max(safeTop, 12) + 12;
+  const top =
+    fallbackPlacement === "top"
+      ? cardTopBase
+      : Math.max(cardTopBase, overlayHeight - cardBottom - cardHeight);
+
+  return {
+    x: 0,
+    y: top,
+    width: 1,
+    height: cardHeight,
+    right: 1,
+    bottom: top + cardHeight,
+  };
+}
+
+export function buildTutorialViewport({
+  overlayMetrics,
+  windowHeight,
+  safeInsets,
+  cardPlacement = "bottom",
+  cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
+  targetGap = DEFAULT_TARGET_GAP,
+  fallbackCardHeight = DEFAULT_CARD_FALLBACK_HEIGHT,
+}) {
+  const overlayHeight = Math.max(
+    1,
+    Number(overlayMetrics?.overlayHeight) || Number(windowHeight) || 1
+  );
+  const safeTop = Math.max(
+    0,
+    Number(overlayMetrics?.safeInsets?.top ?? safeInsets?.top ?? 0) || 0
+  );
+  const safeBottom = Math.max(
+    0,
+    Number(overlayMetrics?.safeInsets?.bottom ?? safeInsets?.bottom ?? 0) || 0
+  );
+  const gap = Math.max(8, Number(targetGap) || DEFAULT_TARGET_GAP);
+  const cardRect =
+    normalizeMeasuredRect(overlayMetrics?.cardRect) ||
+    buildFallbackCardRect({
+      overlayHeight,
+      safeTop,
+      safeBottom,
+      cardPlacement,
+      cardBottomMargin,
+      cardHeight:
+        Number(overlayMetrics?.cardHeight) ||
+        Number(fallbackCardHeight) ||
+        DEFAULT_CARD_FALLBACK_HEIGHT,
+    });
+  const resolvedPlacement =
+    overlayMetrics?.cardPlacement || (cardPlacement === "top" ? "top" : "bottom");
+
+  const top =
+    resolvedPlacement === "top"
+      ? clamp(cardRect.bottom + gap, 0, overlayHeight)
+      : clamp(safeTop + gap, 0, overlayHeight);
+  const bottom =
+    resolvedPlacement === "top"
+      ? clamp(overlayHeight - safeBottom - gap, 0, overlayHeight)
+      : clamp(cardRect.y - gap, 0, overlayHeight);
+
+  return {
+    top,
+    bottom: Math.max(top + 1, bottom),
+    overlayHeight,
+    safeTop,
+    safeBottom,
+    gap,
+    cardRect,
+    cardPlacement: resolvedPlacement,
+  };
+}
+
+function getTutorialScrollDelta(rect, viewport, scrollPadding) {
+  const safeRect = normalizeMeasuredRect(rect);
+  if (!safeRect || !viewport) return 0;
+
+  const padding = Math.max(0, Number(scrollPadding) || 0);
+
+  if (safeRect.y < viewport.top) {
+    return safeRect.y - viewport.top - padding;
+  }
+
+  if (safeRect.bottom > viewport.bottom) {
+    return safeRect.bottom - viewport.bottom + padding;
+  }
+
+  return 0;
+}
+
+export async function syncTutorialSpotlightTarget({
+  enabled = true,
+  targetRef,
+  rootRef,
+  scrollRef,
+  currentScrollYRef,
+  overlayMetrics,
+  windowHeight,
+  safeInsets,
+  cardPlacement = "bottom",
+  cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
+  targetGap = DEFAULT_TARGET_GAP,
+  scrollPadding = 24,
+  settleFrames = DEFAULT_SETTLE_FRAMES,
+  measureOptions,
+}) {
+  if (!enabled) return null;
+
+  const firstRect = await measureTutorialTarget(targetRef, rootRef, measureOptions);
+  if (!firstRect) return null;
+
+  const viewport = buildTutorialViewport({
+    overlayMetrics,
+    windowHeight,
+    safeInsets,
+    cardPlacement,
+    cardBottomMargin,
+    targetGap,
+  });
+
+  const delta = getTutorialScrollDelta(firstRect, viewport, scrollPadding);
+  if (Math.abs(delta) < 1) {
+    return firstRect;
+  }
+
+  const scrollNode = scrollRef?.current;
+  if (!scrollNode || typeof scrollNode.scrollTo !== "function") {
+    return firstRect;
+  }
+
+  const currentY = Number(currentScrollYRef?.current ?? 0) || 0;
+  const nextScrollY = Math.max(0, currentY + delta);
+
+  try {
+    scrollNode.scrollTo({ y: nextScrollY, animated: false });
+    if (currentScrollYRef && typeof currentScrollYRef === "object") {
+      currentScrollYRef.current = nextScrollY;
+    }
+  } catch {
+    return firstRect;
+  }
+
+  await waitForTutorialFrames(Math.max(1, Number(settleFrames) || DEFAULT_SETTLE_FRAMES));
+
+  return (
+    (await measureTutorialTarget(targetRef, rootRef, {
+      settleFrames: 0,
+      ...(measureOptions || {}),
+    })) || firstRect
+  );
+}
+
+/**
  * TutorialOverlay
  *
  * - 画面の最後の child として重ねて使う共通コンポーネント
  * - info モード: 対象UIは押せず、下部カードの「次へ」で進む
  * - action モード: 対象UIだけ押せる（穴あきスポットライト）
- *
- * 注意:
- * - Modal は使っていません
- * - 透過した穴を通して underlying UI を押せるようにするため、
- *   各 screen 内に absolute overlay として配置してください
+ * - onTargetPress が渡された action モードでは、穴の上に透明な proxy Pressable を置きます
  */
 export default function TutorialOverlay({
   visible,
@@ -146,12 +389,16 @@ export default function TutorialOverlay({
   mode = "info", // "info" | "action"
   nextLabel = DEFAULT_NEXT_LABEL,
   onNext,
+  onTargetPress,
+  onMetricsChange,
   primaryDisabled = false,
   showPrimaryButton,
   actionHint = DEFAULT_ACTION_HINT,
   footerText,
   targetPadding = DEFAULT_TARGET_PADDING,
   targetRadius = DEFAULT_TARGET_RADIUS,
+  targetTouchPadding = DEFAULT_TARGET_TOUCH_PADDING,
+  targetHitSlop = DEFAULT_TARGET_HIT_SLOP,
   dimOpacity = DEFAULT_DIM_OPACITY,
   cardSideMargin = DEFAULT_CARD_SIDE_MARGIN,
   cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
@@ -160,8 +407,12 @@ export default function TutorialOverlay({
 }) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [cardHeight, setCardHeight] = useState(DEFAULT_CARD_FALLBACK_HEIGHT);
+  const [overlayLayout, setOverlayLayout] = useState({ width: 0, height: 0 });
+
+  const screenWidth = Math.max(1, overlayLayout.width || windowWidth);
+  const screenHeight = Math.max(1, overlayLayout.height || windowHeight);
 
   const holeRect = useMemo(
     () =>
@@ -205,22 +456,105 @@ export default function TutorialOverlay({
       const cardTopIfBottom = screenHeight - cardBottom - cardHeight;
       return holeRect.bottom > cardTopIfBottom - 12;
     }
-    // auto
     const cardTopIfBottom = screenHeight - cardBottom - cardHeight;
     return holeRect.bottom > cardTopIfBottom - 12;
   }, [holeRect, cardPlacement, screenHeight, cardBottom, cardHeight]);
+
+  const resolvedCardTop = shouldMoveCardToTop
+    ? cardTopBase
+    : Math.max(cardTopBase, screenHeight - cardBottom - cardHeight);
+  const resolvedCardRect = useMemo(
+    () => ({
+      x: cardSideMargin,
+      y: resolvedCardTop,
+      width: Math.max(0, screenWidth - cardSideMargin * 2),
+      height: cardHeight,
+      right: Math.max(cardSideMargin, screenWidth - cardSideMargin),
+      bottom: resolvedCardTop + cardHeight,
+    }),
+    [cardSideMargin, resolvedCardTop, screenWidth, cardHeight]
+  );
 
   const cardPositionStyle = shouldMoveCardToTop
     ? { top: cardTopBase }
     : { bottom: cardBottom };
 
+  const shouldUseProxyTarget =
+    visible && mode === "action" && typeof onTargetPress === "function" && !!holeRect;
+
+  const proxyTargetRect = useMemo(() => {
+    if (!holeRect) return null;
+
+    const expandBy = Math.max(0, Number(targetTouchPadding) || 0);
+    const left = clamp(holeRect.x - expandBy, 0, screenWidth);
+    const top = clamp(holeRect.y - expandBy, 0, screenHeight);
+    const right = clamp(holeRect.right + expandBy, 0, screenWidth);
+    const bottom = clamp(holeRect.bottom + expandBy, 0, screenHeight);
+
+    return {
+      left,
+      top,
+      width: Math.max(0, right - left),
+      height: Math.max(0, bottom - top),
+    };
+  }, [holeRect, screenWidth, screenHeight, targetTouchPadding]);
+
+  useEffect(() => {
+    if (typeof onMetricsChange !== "function") return;
+
+    onMetricsChange(
+      visible
+        ? {
+            overlayWidth: screenWidth,
+            overlayHeight: screenHeight,
+            cardHeight,
+            cardRect: resolvedCardRect,
+            cardPlacement: shouldMoveCardToTop ? "top" : "bottom",
+            holeRect,
+            safeInsets: {
+              top: insets.top,
+              right: insets.right,
+              bottom: insets.bottom,
+              left: insets.left,
+            },
+          }
+        : null
+    );
+  }, [
+    visible,
+    onMetricsChange,
+    screenWidth,
+    screenHeight,
+    cardHeight,
+    resolvedCardRect,
+    shouldMoveCardToTop,
+    holeRect,
+    insets.top,
+    insets.right,
+    insets.bottom,
+    insets.left,
+  ]);
+
   if (!visible) return null;
 
   return (
     <View
+      collapsable={false}
       pointerEvents="box-none"
       testID={testID}
       style={styles.overlayRoot}
+      onLayout={(e) => {
+        const nextWidth = Number(e?.nativeEvent?.layout?.width) || 0;
+        const nextHeight = Number(e?.nativeEvent?.layout?.height) || 0;
+
+        if (
+          nextWidth > 0 &&
+          nextHeight > 0 &&
+          (overlayLayout.width !== nextWidth || overlayLayout.height !== nextHeight)
+        ) {
+          setOverlayLayout({ width: nextWidth, height: nextHeight });
+        }
+      }}
     >
       {holeRect ? (
         <>
@@ -291,6 +625,25 @@ export default function TutorialOverlay({
             />
           ) : null}
 
+          {shouldUseProxyTarget && proxyTargetRect ? (
+            <Pressable
+              onPress={onTargetPress}
+              hitSlop={Math.max(0, Number(targetHitSlop) || DEFAULT_TARGET_HIT_SLOP)}
+              style={[
+                styles.proxyTarget,
+                {
+                  left: proxyTargetRect.left,
+                  top: proxyTargetRect.top,
+                  width: proxyTargetRect.width,
+                  height: proxyTargetRect.height,
+                  borderRadius:
+                    Math.max(0, Number(targetRadius) || DEFAULT_TARGET_RADIUS) +
+                    Math.max(0, Number(targetTouchPadding) || 0),
+                },
+              ]}
+            />
+          ) : null}
+
           <View
             pointerEvents="none"
             style={[
@@ -308,9 +661,7 @@ export default function TutorialOverlay({
           />
         </>
       ) : (
-        <Pressable
-          style={[styles.fullScrim, { backgroundColor: overlayColor }]}
-        />
+        <Pressable style={[styles.fullScrim, { backgroundColor: overlayColor }]} />
       )}
 
       <View
@@ -341,15 +692,11 @@ export default function TutorialOverlay({
               },
             ]}
           >
-            <Text style={[styles.stepText, { color: subtleColor }]}>
-              Step {step} / {totalSteps}
-            </Text>
+            <Text style={[styles.stepText, { color: subtleColor }]}>Step {step} / {totalSteps}</Text>
           </View>
         ) : null}
 
-        {title ? (
-          <Text style={[styles.title, { color: titleColor }]}>{title}</Text>
-        ) : null}
+        {title ? <Text style={[styles.title, { color: titleColor }]}>{title}</Text> : null}
 
         {message ? (
           <Text style={[styles.message, { color: bodyColor }]}>{message}</Text>
@@ -365,16 +712,14 @@ export default function TutorialOverlay({
               },
             ]}
           >
-            <Text style={[styles.actionHintText, { color: subtleColor }]}>
+            <Text style={[styles.actionHintText, { color: subtleColor }]}> 
               {actionHint || DEFAULT_ACTION_HINT}
             </Text>
           </View>
         ) : null}
 
         {footerText ? (
-          <Text style={[styles.footerText, { color: subtleColor }]}>
-            {footerText}
-          </Text>
+          <Text style={[styles.footerText, { color: subtleColor }]}>{footerText}</Text>
         ) : null}
 
         {effectiveShowPrimaryButton ? (
@@ -390,7 +735,7 @@ export default function TutorialOverlay({
               },
             ]}
           >
-            <Text style={[styles.primaryButtonText, { color: buttonTextColor }]}>
+            <Text style={[styles.primaryButtonText, { color: buttonTextColor }]}> 
               {nextLabel || DEFAULT_NEXT_LABEL}
             </Text>
           </Pressable>
@@ -413,6 +758,10 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   holeBlocker: {
+    position: "absolute",
+    backgroundColor: "transparent",
+  },
+  proxyTarget: {
     position: "absolute",
     backgroundColor: "transparent",
   },

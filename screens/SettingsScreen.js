@@ -1,12 +1,14 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
+  FlatList,
+  Modal,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -41,6 +43,256 @@ import {
 // ※ 本改修で「背景＆タイトル固定 / パネル内スクロール」に変更したため、
 //    minHeight は見た目の基準として残しつつ、パネル自体は flex で収まるようにしています。
 const PANEL_MIN_HEIGHT = 680;
+const TIME_PICKER_ITEM_HEIGHT = 44;
+const TIME_PICKER_VISIBLE_ROWS = 5;
+const TIME_PICKER_HEIGHT = TIME_PICKER_ITEM_HEIGHT * TIME_PICKER_VISIBLE_ROWS;
+const TIME_PICKER_VERTICAL_PADDING =
+  (TIME_PICKER_HEIGHT - TIME_PICKER_ITEM_HEIGHT) / 2;
+
+const HOUR_OPTIONS = Array.from({ length: 24 }, (_, index) =>
+  String(index).padStart(2, "0")
+);
+const MINUTE_OPTIONS = ["00", "30"];
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function normalizeHalfHour(hourValue, minuteValue) {
+  let hour = Number.isFinite(hourValue) ? hourValue : 0;
+  let minute = Number.isFinite(minuteValue) ? minuteValue : 0;
+
+  if (minute < 15) {
+    minute = 0;
+  } else if (minute < 45) {
+    minute = 30;
+  } else {
+    minute = 0;
+    hour = (hour + 1) % 24;
+  }
+
+  return {
+    hour: clamp(hour, 0, 23),
+    minute,
+  };
+}
+
+function parseTimeParts(value, fallback = "00:00") {
+  const rawValue = String(value || "").trim();
+  const rawFallback = String(fallback || "00:00").trim();
+  const match = rawValue.match(/^(?:([01]\d|2[0-3])):([0-5]\d)$/);
+  const fallbackMatch = rawFallback.match(/^(?:([01]\d|2[0-3])):([0-5]\d)$/);
+
+  const safeHour = Number(match?.[1] ?? fallbackMatch?.[1] ?? 0);
+  const safeMinute = Number(match?.[2] ?? fallbackMatch?.[2] ?? 0);
+  const normalized = normalizeHalfHour(safeHour, safeMinute);
+
+  return {
+    hourLabel: String(normalized.hour).padStart(2, "0"),
+    minuteLabel: String(normalized.minute).padStart(2, "0"),
+  };
+}
+
+function buildTimeString(hourLabel, minuteLabel) {
+  return `${String(hourLabel).padStart(2, "0")}:${String(minuteLabel).padStart(2, "0")}`;
+}
+
+function normalizeDisplayTime(value, fallback = "00:00") {
+  const { hourLabel, minuteLabel } = parseTimeParts(value, fallback);
+  return buildTimeString(hourLabel, minuteLabel);
+}
+
+function TimeWheelColumn({
+  options,
+  selectedValue,
+  onChange,
+  disabled,
+  styles,
+  accessibilityLabel,
+}) {
+  const listRef = useRef(null);
+  const selectedIndex = Math.max(0, options.indexOf(selectedValue));
+
+  const scrollToIndex = (index, animated = true) => {
+    const safeIndex = clamp(index, 0, options.length - 1);
+    listRef.current?.scrollToOffset({
+      offset: safeIndex * TIME_PICKER_ITEM_HEIGHT,
+      animated,
+    });
+  };
+
+  const settleAtOffset = (offsetY) => {
+    const nextIndex = clamp(
+      Math.round((Number(offsetY) || 0) / TIME_PICKER_ITEM_HEIGHT),
+      0,
+      options.length - 1
+    );
+    scrollToIndex(nextIndex);
+    onChange(options[nextIndex]);
+  };
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      scrollToIndex(selectedIndex, false);
+    }, 0);
+
+    return () => clearTimeout(timerId);
+  }, [selectedIndex]);
+
+  return (
+    <FlatList
+      ref={listRef}
+      data={options}
+      keyExtractor={(item) => item}
+      style={styles.timePickerColumnList}
+      contentContainerStyle={styles.timePickerColumnContent}
+      scrollEnabled={!disabled}
+      nestedScrollEnabled
+      bounces={false}
+      overScrollMode="never"
+      showsVerticalScrollIndicator={false}
+      snapToInterval={TIME_PICKER_ITEM_HEIGHT}
+      decelerationRate="fast"
+      onMomentumScrollEnd={(event) =>
+        settleAtOffset(event?.nativeEvent?.contentOffset?.y)
+      }
+      onScrollEndDrag={(event) =>
+        settleAtOffset(event?.nativeEvent?.contentOffset?.y)
+      }
+      getItemLayout={(_, index) => ({
+        length: TIME_PICKER_ITEM_HEIGHT,
+        offset: TIME_PICKER_ITEM_HEIGHT * index,
+        index,
+      })}
+      renderItem={({ item, index }) => {
+        const isActive = index === selectedIndex;
+
+        return (
+          <Pressable
+            onPress={() => {
+              if (disabled) return;
+              scrollToIndex(index);
+              onChange(item);
+            }}
+            disabled={disabled}
+            accessibilityRole="button"
+            accessibilityLabel={`${accessibilityLabel} ${item}`}
+            style={styles.timePickerItem}
+          >
+            <Text
+              style={[
+                styles.timePickerItemText,
+                isActive && styles.timePickerItemTextActive,
+              ]}
+            >
+              {item}
+            </Text>
+          </Pressable>
+        );
+      }}
+    />
+  );
+}
+
+function TimePickerModal({
+  visible,
+  title,
+  value,
+  onCancel,
+  onConfirm,
+  styles,
+}) {
+  const [draftHour, setDraftHour] = useState("00");
+  const [draftMinute, setDraftMinute] = useState("00");
+
+  useEffect(() => {
+    if (!visible) return;
+
+    const { hourLabel, minuteLabel } = parseTimeParts(value);
+    setDraftHour(hourLabel);
+    setDraftMinute(minuteLabel);
+  }, [visible, value]);
+
+  const draftValue = buildTimeString(draftHour, draftMinute);
+
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onCancel}
+    >
+      <View style={styles.timePickerModalRoot}>
+        <Pressable style={styles.timePickerBackdrop} onPress={onCancel} />
+
+        <View style={styles.timePickerCard}>
+          <Text style={styles.timePickerEyebrow}>通知時刻</Text>
+          <Text style={styles.timePickerTitle}>{title}</Text>
+          <Text style={styles.timePickerValueLabel}>{draftValue}</Text>
+
+          <View style={styles.timePickerMetaRow}>
+            <View style={styles.timePickerMetaBadge}>
+              <Text style={styles.timePickerMetaBadgeText}>30分刻み</Text>
+            </View>
+            <Text style={styles.timePickerHint}>上下にスワイプして選択</Text>
+          </View>
+
+          <View style={styles.timePickerColumnGuideRow}>
+            <Text style={styles.timePickerColumnGuideText}>時</Text>
+            <View style={styles.timePickerColumnGuideSpacer} />
+            <Text style={styles.timePickerColumnGuideText}>分</Text>
+          </View>
+
+          <View style={styles.timePickerWheelFrame}>
+            <View pointerEvents="none" style={styles.timePickerSelectionBand} />
+            <View pointerEvents="none" style={styles.timePickerSelectionBandTopLine} />
+            <View pointerEvents="none" style={styles.timePickerSelectionBandBottomLine} />
+            <View pointerEvents="none" style={styles.timePickerFadeTop} />
+            <View pointerEvents="none" style={styles.timePickerFadeBottom} />
+
+            <View style={styles.timePickerColumn}>
+              <TimeWheelColumn
+                options={HOUR_OPTIONS}
+                selectedValue={draftHour}
+                onChange={setDraftHour}
+                disabled={!visible}
+                styles={styles}
+                accessibilityLabel="時間"
+              />
+            </View>
+
+            <Text style={styles.timePickerSeparator}>:</Text>
+
+            <View style={styles.timePickerColumn}>
+              <TimeWheelColumn
+                options={MINUTE_OPTIONS}
+                selectedValue={draftMinute}
+                onChange={setDraftMinute}
+                disabled={!visible}
+                styles={styles}
+                accessibilityLabel="分"
+              />
+            </View>
+          </View>
+
+          <View style={styles.timePickerActions}>
+            <View style={styles.timePickerActionButton}>
+              <CocolonButton variant="secondary" onPress={onCancel}>
+                キャンセル
+              </CocolonButton>
+            </View>
+
+            <View style={styles.timePickerActionButton}>
+              <CocolonButton variant="primary" onPress={() => onConfirm(draftValue)}>
+                決定
+              </CocolonButton>
+            </View>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+}
 
 export default function SettingsScreen({ navigation }) {
   const { colors, themeName, setThemeName } = useTheme();
@@ -67,6 +319,7 @@ export default function SettingsScreen({ navigation }) {
   const [reportDistributionDeliveryTime, setReportDistributionDeliveryTime] = useState("00:00");
   const [reportDistributionTimezone, setReportDistributionTimezone] = useState(resolveLocalTimezoneName("Asia/Tokyo"));
   const [reportDistributionLoading, setReportDistributionLoading] = useState(true);
+  const [timePickerTarget, setTimePickerTarget] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -122,7 +375,9 @@ export default function SettingsScreen({ navigation }) {
         const settings = json?.settings ?? json ?? {};
         if (!cancelled) {
           setTodayQuestionNotificationEnabled(settings?.notification_enabled !== false);
-          setTodayQuestionDeliveryTime(String(settings?.delivery_time_local || "18:00"));
+          setTodayQuestionDeliveryTime(
+            normalizeDisplayTime(settings?.delivery_time_local || "18:00", "18:00")
+          );
           setTodayQuestionTimezone(String(settings?.timezone_name || resolveLocalTimezoneName("Asia/Tokyo")));
         }
       } catch (e) {
@@ -165,7 +420,9 @@ export default function SettingsScreen({ navigation }) {
         const settings = json?.settings ?? json ?? {};
         if (!cancelled) {
           setReportDistributionNotificationEnabled(settings?.notification_enabled !== false);
-          setReportDistributionDeliveryTime(String(settings?.delivery_time_local || "00:00"));
+          setReportDistributionDeliveryTime(
+            normalizeDisplayTime(settings?.delivery_time_local || "00:00", "00:00")
+          );
           setReportDistributionTimezone(String(settings?.timezone_name || resolveLocalTimezoneName("Asia/Tokyo")));
         }
       } catch (e) {
@@ -219,7 +476,7 @@ export default function SettingsScreen({ navigation }) {
 
     const hhmm = String(todayQuestionDeliveryTime || "").trim();
     if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hhmm)) {
-      Alert.alert("今日の問い通知", "通知する時間は 18:00 のように入力してください。");
+      Alert.alert("今日の問い通知", "通知時刻を選択してください。");
       return;
     }
 
@@ -249,7 +506,7 @@ export default function SettingsScreen({ navigation }) {
 
     const hhmm = String(reportDistributionDeliveryTime || "").trim();
     if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hhmm)) {
-      Alert.alert("レポート配布通知", "通知する時間は 00:00 のように入力してください。");
+      Alert.alert("レポート配布通知", "通知時刻を選択してください。");
       return;
     }
 
@@ -268,6 +525,44 @@ export default function SettingsScreen({ navigation }) {
       setLocalProcessing(false);
     }
   };
+
+  const openTimePicker = (target) => {
+    if (isBusy) return;
+
+    if (target === "todayQuestion" && todayQuestionLoading) return;
+    if (target === "reportDistribution" && reportDistributionLoading) return;
+
+    setTimePickerTarget(target);
+  };
+
+  const closeTimePicker = () => {
+    setTimePickerTarget(null);
+  };
+
+  const confirmTimePicker = (nextValue) => {
+    if (timePickerTarget === "todayQuestion") {
+      setTodayQuestionDeliveryTime(nextValue);
+    }
+
+    if (timePickerTarget === "reportDistribution") {
+      setReportDistributionDeliveryTime(nextValue);
+    }
+
+    setTimePickerTarget(null);
+  };
+
+  const activeTimePickerConfig =
+    timePickerTarget === "todayQuestion"
+      ? {
+          title: "今日の問いの通知時刻",
+          value: todayQuestionDeliveryTime,
+        }
+      : timePickerTarget === "reportDistribution"
+        ? {
+            title: "レポート配布の通知時刻",
+            value: reportDistributionDeliveryTime,
+          }
+        : null;
 
 
   // サブスク加入状況（SubscriptionSelect へ移動）
@@ -544,19 +839,35 @@ export default function SettingsScreen({ navigation }) {
                 <View style={styles.divider} />
 
                 <View style={styles.inlineBlock}>
-                  <Text style={styles.subLabel}>通知する時間</Text>
-                  <TextInput
-                    value={todayQuestionDeliveryTime}
-                    onChangeText={setTodayQuestionDeliveryTime}
-                    editable={!todayQuestionLoading && !isBusy}
-                    placeholder="18:00"
-                    placeholderTextColor={isDark ? "rgba(255,255,255,0.45)" : "#9CA3AF"}
-                    style={styles.inlineInput}
-                    keyboardType="numbers-and-punctuation"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    selectionColor={colors.TITLE_GOLD}
-                  />
+                  <Text style={styles.subLabel}>通知時刻</Text>
+                  <CocolonPressable
+                    style={[
+                      styles.timeField,
+                      (todayQuestionLoading || isBusy) && styles.timeFieldDisabled,
+                    ]}
+                    onPress={() => openTimePicker("todayQuestion")}
+                    disabled={todayQuestionLoading || isBusy}
+                    accessibilityLabel="今日の問い通知の時間を選択"
+                  >
+                    <View style={styles.timeFieldValueWrap}>
+                      <Text style={styles.timeFieldCaption}>現在の設定</Text>
+                      <Text style={styles.timeFieldText}>{todayQuestionDeliveryTime}</Text>
+                    </View>
+
+                    <View style={styles.timeFieldMeta}>
+                      <View style={styles.timeFieldChip}>
+                        <Text style={styles.timeFieldChipText}>30分刻み</Text>
+                      </View>
+                      <Ionicons
+                        name="chevron-down"
+                        size={18}
+                        color={colors.TEXT_SUBTLE}
+                      />
+                    </View>
+                  </CocolonPressable>
+                  <Text style={[styles.sectionHelpText, { marginTop: 8, marginBottom: 0 }]}>
+                    タップすると、ホイールで通知時間をお選びいただけます。
+                  </Text>
                   {!pushEnabled ? (
                     <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
                       「通知を受け取る」がオフのため、今日の問いのお知らせは届きません。
@@ -599,22 +910,38 @@ export default function SettingsScreen({ navigation }) {
                 <View style={styles.divider} />
 
                 <View style={styles.inlineBlock}>
-                  <Text style={styles.subLabel}>通知する時間</Text>
-                  <TextInput
-                    value={reportDistributionDeliveryTime}
-                    onChangeText={setReportDistributionDeliveryTime}
-                    editable={!reportDistributionLoading && !isBusy}
-                    placeholder="00:00"
-                    placeholderTextColor={isDark ? "rgba(255,255,255,0.45)" : "#9CA3AF"}
-                    style={styles.inlineInput}
-                    keyboardType="numbers-and-punctuation"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    selectionColor={colors.TITLE_GOLD}
-                  />
+                  <Text style={styles.subLabel}>通知時刻</Text>
+                  <CocolonPressable
+                    style={[
+                      styles.timeField,
+                      (reportDistributionLoading || isBusy) && styles.timeFieldDisabled,
+                    ]}
+                    onPress={() => openTimePicker("reportDistribution")}
+                    disabled={reportDistributionLoading || isBusy}
+                    accessibilityLabel="レポート配布通知の時間を選択"
+                  >
+                    <View style={styles.timeFieldValueWrap}>
+                      <Text style={styles.timeFieldCaption}>現在の設定</Text>
+                      <Text style={styles.timeFieldText}>{reportDistributionDeliveryTime}</Text>
+                    </View>
+
+                    <View style={styles.timeFieldMeta}>
+                      <View style={styles.timeFieldChip}>
+                        <Text style={styles.timeFieldChipText}>30分刻み</Text>
+                      </View>
+                      <Ionicons
+                        name="chevron-down"
+                        size={18}
+                        color={colors.TEXT_SUBTLE}
+                      />
+                    </View>
+                  </CocolonPressable>
 
                   <Text style={[styles.sectionHelpText, { marginTop: 10, marginBottom: 0 }]}>
                     日報・週報・月報などのレポートをまとめてお知らせします。
+                  </Text>
+                  <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
+                    タップすると、ホイールで通知時間をお選びいただけます。
                   </Text>
                   {!pushEnabled ? (
                     <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
@@ -717,6 +1044,15 @@ export default function SettingsScreen({ navigation }) {
             </View>
           </ScrollView>
       </View>
+
+      <TimePickerModal
+        visible={!!activeTimePickerConfig}
+        title={activeTimePickerConfig?.title || "通知時間"}
+        value={activeTimePickerConfig?.value || "00:00"}
+        onCancel={closeTimePicker}
+        onConfirm={confirmTimePicker}
+        styles={styles}
+      />
     </SafeAreaView>
   );
 }
@@ -904,13 +1240,259 @@ function createStyles(COLORS, isDark = false) {
       color: TIME_TEXT,
       marginBottom: 8,
     },
-    inlineInput: {
-      fontSize: 18,
+    timeField: {
+      minHeight: 60,
+      borderRadius: 18,
+      borderWidth: 1,
+      borderColor: isDark ? "rgba(212,175,55,0.28)" : "rgba(180,146,72,0.22)",
+      backgroundColor: isDark ? "rgba(255,255,255,0.04)" : "#FFFFFF",
+      paddingHorizontal: 14,
+      paddingVertical: 12,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      shadowColor: "#000",
+      shadowOpacity: isDark ? 0.18 : 0.08,
+      shadowRadius: 12,
+      shadowOffset: { width: 0, height: 6 },
+      elevation: 3,
+    },
+    timeFieldDisabled: {
+      opacity: 0.55,
+    },
+    timeFieldValueWrap: {
+      flexShrink: 1,
+    },
+    timeFieldCaption: {
+      marginBottom: 4,
+      fontSize: 10,
       fontWeight: "700",
+      letterSpacing: 0.6,
       color: TIME_TEXT,
-      paddingVertical: 4,
-      paddingHorizontal: 0,
-      backgroundColor: "transparent",
+    },
+    timeFieldText: {
+      fontSize: 24,
+      fontWeight: "800",
+      color: TIME_TEXT,
+      letterSpacing: 1.2,
+      fontVariant: ["tabular-nums"],
+    },
+    timeFieldMeta: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 12,
+    },
+    timeFieldChip: {
+      marginRight: 8,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 999,
+      backgroundColor: isDark ? "rgba(212,175,55,0.12)" : "rgba(180,146,72,0.1)",
+      borderWidth: 1,
+      borderColor: isDark ? "rgba(212,175,55,0.2)" : "rgba(180,146,72,0.16)",
+    },
+    timeFieldChipText: {
+      fontSize: 10,
+      fontWeight: "800",
+      letterSpacing: 0.3,
+      color: COLORS.TITLE_GOLD,
+    },
+    timePickerModalRoot: {
+      flex: 1,
+      justifyContent: "center",
+      paddingHorizontal: 20,
+    },
+    timePickerBackdrop: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(15, 23, 42, 0.46)",
+    },
+    timePickerCard: {
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 18,
+      paddingTop: 18,
+      paddingBottom: 16,
+      shadowColor: "#000",
+      shadowOpacity: 0.2,
+      shadowRadius: 20,
+      shadowOffset: { width: 0, height: 12 },
+      elevation: 12,
+    },
+    timePickerEyebrow: {
+      fontSize: 10,
+      fontWeight: "800",
+      color: TIME_TEXT,
+      textAlign: "center",
+      letterSpacing: 1.2,
+      marginBottom: 4,
+    },
+    timePickerTitle: {
+      fontSize: 16,
+      fontWeight: "800",
+      color: COLORS.TITLE_GOLD,
+      textAlign: "center",
+      letterSpacing: 0.4,
+    },
+    timePickerValueLabel: {
+      marginTop: 6,
+      marginBottom: 10,
+      fontSize: 30,
+      fontWeight: "800",
+      color: TIME_TEXT,
+      textAlign: "center",
+      letterSpacing: 1.4,
+      fontVariant: ["tabular-nums"],
+    },
+    timePickerMetaRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 12,
+    },
+    timePickerMetaBadge: {
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      borderRadius: 999,
+      backgroundColor: isDark ? "rgba(212,175,55,0.14)" : "rgba(180,146,72,0.1)",
+      borderWidth: 1,
+      borderColor: isDark ? "rgba(212,175,55,0.24)" : "rgba(180,146,72,0.16)",
+      marginRight: 8,
+    },
+    timePickerMetaBadgeText: {
+      fontSize: 10,
+      fontWeight: "800",
+      letterSpacing: 0.4,
+      color: COLORS.TITLE_GOLD,
+    },
+    timePickerHint: {
+      fontSize: 11,
+      fontWeight: "600",
+      color: TIME_TEXT,
+    },
+    timePickerColumnGuideRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 8,
+    },
+    timePickerColumnGuideText: {
+      width: 92,
+      textAlign: "center",
+      fontSize: 11,
+      fontWeight: "700",
+      letterSpacing: 1,
+      color: TIME_TEXT,
+    },
+    timePickerColumnGuideSpacer: {
+      width: 28,
+      marginHorizontal: 2,
+    },
+    timePickerWheelFrame: {
+      height: TIME_PICKER_HEIGHT,
+      borderRadius: 22,
+      borderWidth: 1,
+      borderColor: isDark ? "rgba(212,175,55,0.18)" : COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      position: "relative",
+    },
+    timePickerSelectionBand: {
+      position: "absolute",
+      left: 12,
+      right: 12,
+      top: TIME_PICKER_VERTICAL_PADDING,
+      height: TIME_PICKER_ITEM_HEIGHT,
+      borderRadius: 14,
+      backgroundColor: isDark ? "rgba(255,255,255,0.07)" : "rgba(15,23,42,0.05)",
+      borderWidth: 1,
+      borderColor: isDark ? "rgba(212,175,55,0.14)" : "rgba(180,146,72,0.12)",
+    },
+    timePickerSelectionBandTopLine: {
+      position: "absolute",
+      left: 20,
+      right: 20,
+      top: TIME_PICKER_VERTICAL_PADDING,
+      height: 1,
+      backgroundColor: isDark ? "rgba(212,175,55,0.45)" : "rgba(180,146,72,0.3)",
+      zIndex: 1,
+    },
+    timePickerSelectionBandBottomLine: {
+      position: "absolute",
+      left: 20,
+      right: 20,
+      top: TIME_PICKER_VERTICAL_PADDING + TIME_PICKER_ITEM_HEIGHT - 1,
+      height: 1,
+      backgroundColor: isDark ? "rgba(212,175,55,0.45)" : "rgba(180,146,72,0.3)",
+      zIndex: 1,
+    },
+    timePickerFadeTop: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      height: TIME_PICKER_VERTICAL_PADDING,
+      backgroundColor: isDark ? "rgba(16,24,32,0.22)" : "rgba(255,255,255,0.5)",
+    },
+    timePickerFadeBottom: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: TIME_PICKER_VERTICAL_PADDING,
+      backgroundColor: isDark ? "rgba(16,24,32,0.22)" : "rgba(255,255,255,0.5)",
+    },
+    timePickerColumn: {
+      width: 92,
+      height: "100%",
+      justifyContent: "center",
+    },
+    timePickerColumnList: {
+      flex: 1,
+    },
+    timePickerColumnContent: {
+      paddingVertical: TIME_PICKER_VERTICAL_PADDING,
+    },
+    timePickerItem: {
+      height: TIME_PICKER_ITEM_HEIGHT,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    timePickerItemText: {
+      fontSize: 21,
+      fontWeight: "600",
+      color: COLORS.TEXT_SUBTLE,
+      letterSpacing: 0.8,
+      opacity: 0.78,
+    },
+    timePickerItemTextActive: {
+      color: TIME_TEXT,
+      fontWeight: "800",
+      fontSize: 24,
+      opacity: 1,
+    },
+    timePickerSeparator: {
+      width: 28,
+      textAlign: "center",
+      fontSize: 26,
+      fontWeight: "800",
+      color: TIME_TEXT,
+      marginHorizontal: 2,
+    },
+    timePickerActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginTop: 16,
+      marginHorizontal: -4,
+    },
+    timePickerActionButton: {
+      flex: 1,
+      marginHorizontal: 4,
     },
 
     // アクションボタン群

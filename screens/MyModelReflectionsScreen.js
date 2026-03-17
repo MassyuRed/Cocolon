@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
@@ -25,7 +26,10 @@ import { apiGet, apiFetch } from "../lib/apiClient";
 import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
 import { useTutorial } from "../TutorialContext";
-import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
+import TutorialOverlay, {
+  syncTutorialSpotlightTarget,
+  waitForTutorialFrames,
+} from "../components/TutorialOverlay";
 
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
@@ -137,6 +141,7 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
 
   const isIOS = Platform.OS === "ios";
   const { height: windowHeight } = useWindowDimensions();
+  const safeInsets = useSafeAreaInsets();
   const [keyboardInset, setKeyboardInset] = useState(0);
 
   // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える（InputScreen と同仕様）
@@ -210,12 +215,19 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
   } = useTutorial();
 
   const screenRootRef = useRef(null);
+  const tutorialBodyScrollRef = useRef(null);
+  const tutorialBodyScrollYRef = useRef(0);
   const myModelSelectorRef = useRef(null);
   const qaBlockRef = useRef(null);
   const metricsActionsWrapRef = useRef(null);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
+  const tutorialPickUserOverlayRootRef = useRef(null);
+  const tutorialPickUserScrollRef = useRef(null);
+  const tutorialPickUserScrollYRef = useRef(0);
   const tutorialPickUserRowRef = useRef(null);
   const [tutorialPickUserRect, setTutorialPickUserRect] = useState(null);
+  const [tutorialPickUserOverlayMetrics, setTutorialPickUserOverlayMetrics] = useState(null);
   const [tutorialOtherReflectionPhase, setTutorialOtherReflectionPhase] = useState("select");
 
   // Tab reselect helper: used to ignore async results after a "reset to main"
@@ -462,27 +474,28 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
     );
   }, [isTutorialMode, tutorialStep, activeViewedUserId]);
 
-  const measureTutorialSpot = useCallback(async () => {
-    if (!isTutorialMode || !screenRootRef.current) {
-      setTutorialTargetRect(null);
-      return;
+  const getTutorialTargetRef = useCallback(() => {
+    if (!isTutorialMode) {
+      return null;
     }
 
-    let ref = null;
     if (tutorialStep === STEP_REFLECTIONS_SELF_VIEW) {
-      ref = qaBlockRef;
-    } else if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT) {
-      if (!activeViewedUserId) {
-        ref = myModelSelectorRef;
-      } else if (tutorialOtherReflectionPhase === "view") {
-        ref = qaBlockRef;
-      } else {
-        ref = metricsActionsWrapRef;
-      }
+      return qaBlockRef;
     }
 
-    const rect = ref ? await measureTutorialTarget(ref, screenRootRef) : null;
-    setTutorialTargetRect(rect);
+    if (tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT) {
+      if (!activeViewedUserId) {
+        return myModelSelectorRef;
+      }
+
+      if (tutorialOtherReflectionPhase === "view") {
+        return qaBlockRef;
+      }
+
+      return metricsActionsWrapRef;
+    }
+
+    return null;
   }, [
     isTutorialMode,
     tutorialStep,
@@ -490,44 +503,155 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
     tutorialOtherReflectionPhase,
   ]);
 
-  useEffect(() => {
+  const syncTutorialTargetRect = useCallback(async () => {
+    if (!isTutorialMode || !screenRootRef.current) {
+      return null;
+    }
+
+    const targetRef = getTutorialTargetRef();
+    if (!targetRef) {
+      return null;
+    }
+
+    return syncTutorialSpotlightTarget({
+      enabled: isTutorialMode,
+      targetRef,
+      rootRef: screenRootRef,
+      scrollRef: tutorialBodyScrollRef,
+      currentScrollYRef: tutorialBodyScrollYRef,
+      overlayMetrics: tutorialOverlayMetrics,
+      windowHeight,
+      safeInsets,
+      cardPlacement:
+        tutorialStep === STEP_REFLECTIONS_SWITCH_AND_REACT && !!activeViewedUserId
+          ? "top"
+          : "bottom",
+      measureOptions: {
+        maxAttempts: 3,
+        settleFrames: 1,
+      },
+    });
+  }, [
+    getTutorialTargetRef,
+    isTutorialMode,
+    tutorialOverlayMetrics,
+    windowHeight,
+    safeInsets,
+    tutorialStep,
+    activeViewedUserId,
+  ]);
+
+  useLayoutEffect(() => {
     if (!isTutorialMode) {
       setTutorialTargetRect(null);
+      setTutorialOverlayMetrics(null);
       return;
     }
 
-    const timer = setTimeout(() => {
-      measureTutorialSpot();
-    }, 80);
+    let cancelled = false;
 
-    return () => clearTimeout(timer);
+    const run = async () => {
+      await waitForTutorialFrames(2);
+      if (cancelled) return;
+
+      const rect = await syncTutorialTargetRect();
+      if (!cancelled) {
+        setTutorialTargetRect(rect);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
   }, [
     isTutorialMode,
-    measureTutorialSpot,
+    tutorialStep,
     selected,
     userPickerVisible,
     pickerVisible,
     tutorialOtherReflectionPhase,
+    activeViewedUserId,
+    tutorialOverlayMetrics,
+    syncTutorialTargetRect,
   ]);
 
-  const measureTutorialPickUserSpot = useCallback(async () => {
-    if (!isTutorialMode) return;
+  const syncTutorialPickUserRect = useCallback(async () => {
+    if (!isTutorialMode) {
+      return null;
+    }
     if (tutorialStep !== STEP_REFLECTIONS_SWITCH_AND_REACT) {
-      setTutorialPickUserRect(null);
-      return;
+      return null;
     }
-    if (!userPickerVisible || !!activeViewedUserId) {
+    if (!userPickerVisible || !!activeViewedUserId || !tutorialPickUserOverlayRootRef.current) {
+      return null;
+    }
+
+    return syncTutorialSpotlightTarget({
+      enabled: true,
+      targetRef: tutorialPickUserRowRef,
+      rootRef: tutorialPickUserOverlayRootRef,
+      scrollRef: tutorialPickUserScrollRef,
+      currentScrollYRef: tutorialPickUserScrollYRef,
+      overlayMetrics: tutorialPickUserOverlayMetrics,
+      windowHeight,
+      safeInsets,
+      cardPlacement: "bottom",
+      measureOptions: {
+        maxAttempts: 3,
+        settleFrames: 1,
+      },
+    });
+  }, [
+    isTutorialMode,
+    tutorialStep,
+    userPickerVisible,
+    activeViewedUserId,
+    tutorialPickUserOverlayMetrics,
+    windowHeight,
+    safeInsets,
+  ]);
+
+  useLayoutEffect(() => {
+    if (
+      !isTutorialMode ||
+      tutorialStep !== STEP_REFLECTIONS_SWITCH_AND_REACT ||
+      !userPickerVisible ||
+      !!activeViewedUserId
+    ) {
       setTutorialPickUserRect(null);
+      setTutorialPickUserOverlayMetrics(null);
       return;
     }
 
-    const rect = await measureTutorialTarget(tutorialPickUserRowRef);
-    setTutorialPickUserRect(rect);
-  }, [isTutorialMode, tutorialStep, userPickerVisible, activeViewedUserId]);
+    let cancelled = false;
 
-  useEffect(() => {
-    measureTutorialPickUserSpot();
-  }, [measureTutorialPickUserSpot, followingUsers, followingLoading]);
+    const run = async () => {
+      await waitForTutorialFrames(2);
+      if (cancelled) return;
+
+      const rect = await syncTutorialPickUserRect();
+      if (!cancelled) {
+        setTutorialPickUserRect(rect);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    isTutorialMode,
+    tutorialStep,
+    userPickerVisible,
+    activeViewedUserId,
+    followingUsers,
+    followingLoading,
+    tutorialPickUserOverlayMetrics,
+    syncTutorialPickUserRect,
+  ]);
 
   // ---------------------------------------------------------
 // Tab reselect (when already on MyModel tab)
@@ -787,6 +911,7 @@ useEffect(() => {
   }, [isTutorialMode, tutorialFollowingUsers]);
 
   const openUserPicker = useCallback(async () => {
+    tutorialPickUserScrollYRef.current = 0;
     if (isTutorialMode) {
       setUserPickerVisible(true);
       await loadFollowingUsers();
@@ -2013,7 +2138,16 @@ useEffect(() => {
         backgroundColor={colors.BG_SILVER}
       />
 
-      <ScrollView style={styles.body} contentContainerStyle={styles.bodyContent}>
+      <ScrollView
+        ref={tutorialBodyScrollRef}
+        style={styles.body}
+        contentContainerStyle={styles.bodyContent}
+        scrollEventThrottle={16}
+        onScroll={(e) => {
+          tutorialBodyScrollYRef.current =
+            e?.nativeEvent?.contentOffset?.y ?? tutorialBodyScrollYRef.current;
+        }}
+      >
         <View style={styles.panelHeader}>
           <CocolonBackButton fallbackRouteName="MyModel" />
           <Text style={styles.panelTitle}>Reflections</Text>
@@ -2209,7 +2343,7 @@ useEffect(() => {
         transparent
         onRequestClose={() => setUserPickerVisible(false)}
       >
-        <View style={styles.modalOverlay}>
+        <View ref={tutorialPickUserOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
           <View style={styles.modalCard}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>フォロー中のユーザー</Text>
@@ -2227,7 +2361,15 @@ useEffect(() => {
                 <Text style={styles.modalLoadingText}>読み込み中…</Text>
               </View>
             ) : (
-              <ScrollView style={styles.listArea}>
+              <ScrollView
+                ref={tutorialPickUserScrollRef}
+                style={styles.listArea}
+                scrollEventThrottle={16}
+                onScroll={(e) => {
+                  tutorialPickUserScrollYRef.current =
+                    e?.nativeEvent?.contentOffset?.y ?? tutorialPickUserScrollYRef.current;
+                }}
+              >
                 {/* 自分に戻る */}
                 <Pressable
                   onPress={() => selectTargetUser(null)}
@@ -2357,6 +2499,14 @@ useEffect(() => {
             mode="action"
             showPrimaryButton={false}
             actionHint="ユーザー名を押してください"
+            onTargetPress={() => {
+              const tutorialUserId =
+                followingUsers?.[0]?.user_id ?? tutorialFollowingUsers?.[0]?.user_id ?? null;
+              if (tutorialUserId) {
+                selectTargetUser(tutorialUserId);
+              }
+            }}
+            onMetricsChange={setTutorialPickUserOverlayMetrics}
           />
         </View>
       </Modal>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -24,7 +24,11 @@ import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 
 import CocolonPressable from "../components/CocolonPressable";
-import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import TutorialOverlay, {
+  syncTutorialSpotlightTarget,
+  waitForTutorialFrames,
+} from "../components/TutorialOverlay";
 import { apiFetch } from "../lib/apiClient";
 
 // 🔧 ここを変えると Friend 画面のパネル高さが変わる
@@ -270,6 +274,7 @@ export default function FriendsScreen(props) {
 
   const { navigation, hasUnreadFriendRequests = false, onOpenFriendManage } = props || {};
   const { height: windowHeight } = useWindowDimensions();
+  const safeInsets = useSafeAreaInsets();
   const screenRootRef = useRef(null);
   const tutorialScrollRef = useRef(null);
   const tutorialScrollYRef = useRef(0);
@@ -279,6 +284,7 @@ export default function FriendsScreen(props) {
   const tutorialFeedCardRef = useRef(null);
   const tutorialCompleteButtonWrapRef = useRef(null);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const [tutorialNotificationShown, setTutorialNotificationShown] = useState(false);
   const tutorialNotificationFlowRef = useRef(false);
 
@@ -413,49 +419,37 @@ export default function FriendsScreen(props) {
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isFriendsTutorialVisible) {
-      setTutorialTargetRect(null);
-      return;
+      return null;
     }
 
     const targetRef = getTutorialTargetRef();
     if (!targetRef || !screenRootRef.current) {
-      setTutorialTargetRect(null);
-      return;
+      return null;
     }
 
-    const firstRect = await measureTutorialTarget(targetRef, screenRootRef);
-    if (!firstRect) {
-      setTutorialTargetRect(null);
-      return;
-    }
-
-    const lowerSafeLine = Math.max(220, windowHeight - 260);
-    const upperSafeLine = 90;
-
-    if (firstRect.bottom > lowerSafeLine || firstRect.y < upperSafeLine) {
-      const nextScrollY = Math.max(
-        0,
-        tutorialScrollYRef.current + firstRect.y - 130
-      );
-
-      try {
-        tutorialScrollRef.current?.scrollTo?.({
-          y: nextScrollY,
-          animated: true,
-        });
-      } catch {
-        // noop
-      }
-
-      setTimeout(async () => {
-        const nextRect = await measureTutorialTarget(targetRef, screenRootRef);
-        setTutorialTargetRect(nextRect);
-      }, 260);
-      return;
-    }
-
-    setTutorialTargetRect(firstRect);
-  }, [getTutorialTargetRef, isFriendsTutorialVisible, windowHeight]);
+    return syncTutorialSpotlightTarget({
+      enabled: isFriendsTutorialVisible,
+      targetRef,
+      rootRef: screenRootRef,
+      scrollRef: tutorialScrollRef,
+      currentScrollYRef: tutorialScrollYRef,
+      overlayMetrics: tutorialOverlayMetrics,
+      windowHeight,
+      safeInsets,
+      cardPlacement: tutorialOverlayConfig?.cardPlacement || "bottom",
+      measureOptions: {
+        maxAttempts: 3,
+        settleFrames: 1,
+      },
+    });
+  }, [
+    getTutorialTargetRef,
+    isFriendsTutorialVisible,
+    safeInsets,
+    tutorialOverlayConfig?.cardPlacement,
+    tutorialOverlayMetrics,
+    windowHeight,
+  ]);
 
   const tutorialOverlayConfig = useMemo(() => {
     if (!isFriendsTutorialVisible) return null;
@@ -519,22 +513,36 @@ export default function FriendsScreen(props) {
     setTutorialStep,
   ]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isFriendsTutorialVisible) {
       setTutorialTargetRect(null);
+      setTutorialOverlayMetrics(null);
       return;
     }
 
-    const timer = setTimeout(() => {
-      syncTutorialTargetRect();
-    }, 80);
+    let cancelled = false;
 
-    return () => clearTimeout(timer);
+    const run = async () => {
+      await waitForTutorialFrames(2);
+      if (cancelled) return;
+
+      const nextRect = await syncTutorialTargetRect();
+      if (!cancelled) {
+        setTutorialTargetRect(nextRect);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
   }, [
     isFriendsTutorialVisible,
     tutorialStep,
     tutorialNotificationShown,
     hasTutorialFriendLog,
+    tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
 
@@ -1274,10 +1282,10 @@ export default function FriendsScreen(props) {
         backgroundColor={colors.BG_SILVER}
       />
       {/* 画面全体は固定（背景＆タイトル固定） */}
-      <View ref={screenRootRef} style={styles.screenContainer}>
+      <View ref={screenRootRef} collapsable={false} style={styles.screenContainer}>
         {/* パネルヘッダー：Friend */}
           <View style={styles.panelHeader}>
-            <View ref={panelTitleRowRef} style={styles.panelTitleRow}>
+            <View ref={panelTitleRowRef} collapsable={false} style={styles.panelTitleRow}>
             <Text style={styles.panelTitle}>Friend</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
@@ -1410,7 +1418,7 @@ export default function FriendsScreen(props) {
             ) : null}
 
             {/* フィードカード */}
-            <View ref={tutorialFeedCardRef} style={styles.card}>
+            <View ref={tutorialFeedCardRef} collapsable={false} style={styles.card}>
               {effectiveErrorMsg ? (
                 <View style={styles.centerBox}>
                   <Text style={styles.errorText}>取得エラー: {effectiveErrorMsg}</Text>
@@ -1495,6 +1503,8 @@ export default function FriendsScreen(props) {
           mode={tutorialOverlayConfig.mode}
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
+          onTargetPress={tutorialStep === STEP_FRIENDS_COMPLETE ? handleCompleteTutorial : undefined}
+          onMetricsChange={setTutorialOverlayMetrics}
           primaryDisabled={tutorialOverlayConfig.primaryDisabled}
           showPrimaryButton={tutorialOverlayConfig.showPrimaryButton}
           footerText={tutorialOverlayConfig.footerText}

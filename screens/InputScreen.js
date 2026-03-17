@@ -1,5 +1,5 @@
 import Ionicons from "react-native-vector-icons/Ionicons";
-import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState, useMemo } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -37,7 +37,11 @@ import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import { makeUiTokens } from "../ui/uiTokens";
-import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import TutorialOverlay, {
+  syncTutorialSpotlightTarget,
+  waitForTutorialFrames,
+} from "../components/TutorialOverlay";
 import TodayQuestionCard from "../components/TodayQuestionCard";
 import TodayQuestionModal from "../components/TodayQuestionModal";
 
@@ -420,6 +424,7 @@ const handleSubmitTodayQuestion = useCallback(async (payload) => {
 }, [loadTodayQuestion, showToast, todayQuestionBundle]);
 
 const { height: windowHeight } = useWindowDimensions();
+  const safeInsets = useSafeAreaInsets();
 
   const screenRootRef = useRef(null);
   const emotionAreaRef = useRef(null);
@@ -429,6 +434,7 @@ const { height: windowHeight } = useWindowDimensions();
   const strengthRowRefs = useRef({});
   const currentScrollYRef = useRef(0);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
 
   const isInputTutorialStep =
     isTutorialMode &&
@@ -616,41 +622,37 @@ const { height: windowHeight } = useWindowDimensions();
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isInputTutorialStep) {
-      setTutorialTargetRect(null);
-      return;
+      return null;
     }
 
     const targetRef = getTutorialTargetRef();
     if (!targetRef || !screenRootRef.current) {
-      setTutorialTargetRect(null);
-      return;
+      return null;
     }
 
-    const firstRect = await measureTutorialTarget(targetRef, screenRootRef);
-    if (!firstRect) {
-      setTutorialTargetRect(null);
-      return;
-    }
-
-    const lowerSafeLine = Math.max(220, windowHeight - 260);
-    const upperSafeLine = 90;
-    if (firstRect.bottom > lowerSafeLine || firstRect.y < upperSafeLine) {
-      const nextScrollY = Math.max(0, currentScrollYRef.current + firstRect.y - 130);
-      try {
-        scrollRef.current?.scrollTo?.({ y: nextScrollY, animated: true });
-      } catch {
-        // noop
-      }
-
-      setTimeout(async () => {
-        const nextRect = await measureTutorialTarget(targetRef, screenRootRef);
-        setTutorialTargetRect(nextRect);
-      }, 260);
-      return;
-    }
-
-    setTutorialTargetRect(firstRect);
-  }, [getTutorialTargetRef, isInputTutorialStep, windowHeight]);
+    return syncTutorialSpotlightTarget({
+      enabled: isInputTutorialStep,
+      targetRef,
+      rootRef: screenRootRef,
+      scrollRef,
+      currentScrollYRef,
+      overlayMetrics: tutorialOverlayMetrics,
+      windowHeight,
+      safeInsets,
+      cardPlacement: tutorialOverlayConfig?.cardPlacement || "bottom",
+      measureOptions: {
+        maxAttempts: 3,
+        settleFrames: 1,
+      },
+    });
+  }, [
+    getTutorialTargetRef,
+    isInputTutorialStep,
+    safeInsets,
+    tutorialOverlayConfig?.cardPlacement,
+    tutorialOverlayMetrics,
+    windowHeight,
+  ]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
@@ -693,17 +695,30 @@ const { height: windowHeight } = useWindowDimensions();
     setShowMemoSection(false);
   }, [isTutorialMode, tutorialStep, showMemoSection, isSelfInsightSelected]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isInputTutorialStep) {
       setTutorialTargetRect(null);
+      setTutorialOverlayMetrics(null);
       return;
     }
 
-    const timer = setTimeout(() => {
-      syncTutorialTargetRect();
-    }, 80);
+    let cancelled = false;
 
-    return () => clearTimeout(timer);
+    const run = async () => {
+      await waitForTutorialFrames(2);
+      if (cancelled) return;
+
+      const nextRect = await syncTutorialTargetRect();
+      if (!cancelled) {
+        setTutorialTargetRect(nextRect);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
   }, [
     isInputTutorialStep,
     tutorialStep,
@@ -716,6 +731,7 @@ const { height: windowHeight } = useWindowDimensions();
     !!todayQuestionBundle?.question,
     todayQuestionLoading,
     todayQuestionModalVisible,
+    tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
 
@@ -1676,6 +1692,8 @@ ${String(error?.message || error)}`
     mode={tutorialOverlayConfig.mode}
     nextLabel={tutorialOverlayConfig.nextLabel}
     onNext={tutorialOverlayConfig.onNext}
+    onTargetPress={tutorialStep === 6 ? handleOk : undefined}
+    onMetricsChange={setTutorialOverlayMetrics}
     actionHint={tutorialOverlayConfig.actionHint}
     cardPlacement={tutorialOverlayConfig.cardPlacement}
   />

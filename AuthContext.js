@@ -5,14 +5,6 @@ import { supabase } from "./lib/supabase"; // ← 既存のクライアントを
 
 const AuthContext = createContext(null);
 
-const CONFIRMATION_GUIDE_LINES = [
-  "no-reply@emlis.app から確認メールを送信しました。",
-  "迷惑メールフォルダに入る場合もあります。",
-  "メール内のリンクを開いて本登録を完了してください。",
-];
-
-const CONFIRMATION_GUIDE_TEXT = CONFIRMATION_GUIDE_LINES.join("\n");
-
 // URL の ?query と #hash の両方から params を拾う
 function parseUrlParams(url) {
   const params = new URLSearchParams();
@@ -138,24 +130,13 @@ export function AuthProvider({ children }) {
 
     (async () => {
       try {
-        // まずは 1 行を確実に作る。
-        // profiles.display_name が NOT NULL のため、id だけの insert だと 23502 で落ちる。
-        // 既存 row は上書きしたくないので、id 衝突時は ignore する。
-        const initialDisplayName = String(displayName || "").trim() || "ユーザー";
+        // まずは 1 行を確実に作る（DB トリガーがあっても安全）
         const { error: insertError } = await supabase
           .from("profiles")
-          .upsert(
-            {
-              id: userId,
-              display_name: initialDisplayName,
-              push_platform: Platform?.OS || null,
-              push_enabled: true,
-            },
-            { onConflict: "id", ignoreDuplicates: true }
-          );
+          .insert({ id: userId }, { ignoreDuplicates: true });
 
         if (insertError) {
-          console.warn("profiles ensure upsert error:", insertError);
+          console.warn("profiles ensure insert error:", insertError);
         }
 
         // display_name / push_platform が NULL のまま残るケース対策（既存値は上書きしない）
@@ -243,6 +224,7 @@ export function AuthProvider({ children }) {
       }
     };
   }, [session?.user?.id]);
+
 
   // Deep Link（Auth callback: signup / magiclink / recovery）を拾う
   useEffect(() => {
@@ -334,13 +316,11 @@ export function AuthProvider({ children }) {
         process.env.SIGNUP_REDIRECT_URL ||
         "cocolon://auth-callback";
 
-      const safeDisplayName = String(displayName || "").trim() || "ユーザー";
-
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { display_name: safeDisplayName },
+          data: { display_name: displayName || "ユーザー" },
           emailRedirectTo,
           // 旧バージョン互換（supabase-js v1 系）
           redirectTo: emailRedirectTo,
@@ -359,14 +339,15 @@ export function AuthProvider({ children }) {
       if (!user || !signupSession) {
         return {
           needsConfirmation: true,
-          message: CONFIRMATION_GUIDE_TEXT,
+          message:
+            "サインアップしました。メールを確認して本登録を完了してください。",
         };
       }
 
       // profiles に display_name を保存（friend_code は DB 側で自動生成）
       const { error: profileError } = await supabase.from("profiles").upsert({
         id: user.id,
-        display_name: safeDisplayName,
+        display_name: displayName || "ユーザー",
         push_platform: Platform?.OS || null,
       });
 
@@ -399,7 +380,7 @@ export function AuthProvider({ children }) {
         const msg = String(error?.message || "");
         if (msg.toLowerCase().includes("email not confirmed")) {
           throw new Error(
-            `メールアドレスが確認されていません。\n${CONFIRMATION_GUIDE_TEXT}\n本登録完了後にログインしてください。`
+            "メールアドレスが確認されていません。受信箱の確認メールを開いて認証を完了してからログインしてください。"
           );
         }
 
@@ -429,6 +410,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+
   // 確認メールを再送（Confirm email が有効なとき用）
   const resendSignupConfirmationEmail = async ({ email }) => {
     setAuthError("");
@@ -456,7 +438,7 @@ export function AuthProvider({ children }) {
       });
 
       if (error) throw error;
-      return { ok: true, message: CONFIRMATION_GUIDE_TEXT };
+      return { ok: true };
     } catch (e) {
       setAuthError(e.message ?? String(e));
       throw e;
@@ -536,7 +518,13 @@ export function AuthProvider({ children }) {
       completePasswordRecovery,
       cancelRecoveryMode,
     }),
-    [session, initializing, authLoading, authError, recoveryMode]
+    [
+      session,
+      initializing,
+      authLoading,
+      authError,
+      recoveryMode,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

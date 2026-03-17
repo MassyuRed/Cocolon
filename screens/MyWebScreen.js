@@ -1,5 +1,6 @@
 import React, {
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   useCallback,
@@ -48,7 +49,11 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonButton from "../components/CocolonButton";
 import UnreadBadge from "../components/UnreadBadge";
 import { makeUiTokens } from "../ui/uiTokens";
-import TutorialOverlay, { measureTutorialTarget } from "../components/TutorialOverlay";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import TutorialOverlay, {
+  syncTutorialSpotlightTarget,
+  waitForTutorialFrames,
+} from "../components/TutorialOverlay";
 
 // Home / MyModel の見た目に合わせたパネル高さ（だいたいの値）
 const PANEL_MIN_HEIGHT = 690;
@@ -76,9 +81,11 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
   const { height: windowHeight } = useWindowDimensions();
+  const safeInsets = useSafeAreaInsets();
   const tutorialScrollRef = useRef(null);
   const tutorialScrollYRef = useRef(0);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
+  const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const myWebTitleRef = useRef(null);
   const myWebDailyRef = useRef(null);
   const myWebWeeklyRef = useRef(null);
@@ -345,48 +352,38 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isMyWebTutorialVisible) {
-      setTutorialTargetRect(null);
-      return;
+      return null;
     }
 
     const targetRef = getTutorialTargetRef();
     if (!targetRef || !screenRootRef.current) {
-      setTutorialTargetRect(null);
-      return;
+      return null;
     }
 
-    const firstRect = await measureTutorialTarget(targetRef, screenRootRef);
-    if (!firstRect) {
-      setTutorialTargetRect(null);
-      return;
-    }
-
-    const lowerSafeLine = Math.max(220, windowHeight - 260);
-    const upperSafeLine = 90;
-    if (firstRect.bottom > lowerSafeLine || firstRect.y < upperSafeLine) {
-      const nextScrollY = Math.max(
-        0,
-        tutorialScrollYRef.current + firstRect.y - 130
-      );
-
-      try {
-        tutorialScrollRef.current?.scrollTo?.({
-          y: nextScrollY,
-          animated: true,
-        });
-      } catch {
-        // noop
-      }
-
-      setTimeout(async () => {
-        const nextRect = await measureTutorialTarget(targetRef, screenRootRef);
-        setTutorialTargetRect(nextRect);
-      }, 260);
-      return;
-    }
-
-    setTutorialTargetRect(firstRect);
-  }, [getTutorialTargetRef, isMyWebTutorialVisible, windowHeight]);
+    return syncTutorialSpotlightTarget({
+      enabled: isMyWebTutorialVisible,
+      targetRef,
+      rootRef: screenRootRef,
+      scrollRef: tutorialScrollRef,
+      currentScrollYRef: tutorialScrollYRef,
+      overlayMetrics: tutorialOverlayMetrics,
+      windowHeight,
+      safeInsets,
+      cardPlacement:
+        tutorialStep === 11 || tutorialStep === 12 ? "top" : "bottom",
+      measureOptions: {
+        maxAttempts: 3,
+        settleFrames: 1,
+      },
+    });
+  }, [
+    getTutorialTargetRef,
+    isMyWebTutorialVisible,
+    safeInsets,
+    tutorialStep,
+    tutorialOverlayMetrics,
+    windowHeight,
+  ]);
 
   // In tutorial mode, keep MyWeb on "home" during the MyWeb steps.
   useEffect(() => {
@@ -398,22 +395,36 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     setRoute("home");
   }, [isMyWebTutorialStep, route]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isMyWebTutorialVisible) {
       setTutorialTargetRect(null);
+      setTutorialOverlayMetrics(null);
       return;
     }
 
-    const timer = setTimeout(() => {
-      syncTutorialTargetRect();
-    }, 80);
+    let cancelled = false;
 
-    return () => clearTimeout(timer);
+    const run = async () => {
+      await waitForTutorialFrames(2);
+      if (cancelled) return;
+
+      const nextRect = await syncTutorialTargetRect();
+      if (!cancelled) {
+        setTutorialTargetRect(nextRect);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
   }, [
     isMyWebTutorialVisible,
     tutorialStep,
     weeklySummary?.loading,
     monthlySummary?.loading,
+    tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
 
@@ -929,6 +940,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           mode={tutorialOverlayConfig.mode}
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
+          onMetricsChange={setTutorialOverlayMetrics}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={
             tutorialStep === 11 || tutorialStep === 12 ? "top" : "bottom"

@@ -24,26 +24,24 @@ import {
   syncPurchaseToSubscriptionTier,
   IAP_PRODUCT_IDS,
 } from "../lib/iap/iapService";
+import {
+  IAP_TRIAL_OFFER_TAGS,
+  SUBSCRIPTION_PUBLIC_CONFIG,
+  SUBSCRIPTION_PUBLIC_CONFIG_AUDIT,
+} from "../lib/iap/iapConfig";
 import { supabase } from "../lib/supabase";
-
-const TERMS_URL = String(
-  (typeof process !== "undefined" && process?.env?.EXPO_PUBLIC_TERMS_URL) || ""
-).trim();
-
-const PRIVACY_URL = String(
-  (typeof process !== "undefined" && process?.env?.EXPO_PUBLIC_PRIVACY_URL) || ""
-).trim();
-
-const ANDROID_PACKAGE_NAME = String(
-  (typeof process !== "undefined" &&
-    process?.env?.EXPO_PUBLIC_ANDROID_PACKAGE_NAME) ||
-    ""
-).trim();
 
 const IOS_MANAGE_SUBSCRIPTIONS_URL =
   "https://apps.apple.com/account/subscriptions";
 
-const PLUS_TRIAL_OFFER_TAG = "trial_1m_new_user";
+const TERMS_URL = String(SUBSCRIPTION_PUBLIC_CONFIG?.termsUrl || "").trim();
+const PRIVACY_URL = String(SUBSCRIPTION_PUBLIC_CONFIG?.privacyUrl || "").trim();
+const ANDROID_PACKAGE_NAME = String(
+  SUBSCRIPTION_PUBLIC_CONFIG?.androidPackageName || ""
+).trim();
+const PLUS_TRIAL_OFFER_TAG = String(
+  IAP_TRIAL_OFFER_TAGS?.android?.plus || "trial_1m_new_user"
+).trim();
 
 const SUB_TIER_LABEL = {
   free: "無料会員",
@@ -72,10 +70,42 @@ function buildManageSubscriptionUrl(productId) {
   return "https://play.google.com/store/account/subscriptions";
 }
 
+function formatEntitlementStatusLabel(status) {
+  const s = String(status || "").trim().toLowerCase();
+  if (s === "active") return "有効";
+  if (s === "grace_period") return "更新猶予中";
+  if (s === "account_hold") return "支払い保留中";
+  if (s === "pending") return "手続き中";
+  if (s === "paused") return "一時停止中";
+  if (s === "cancelled") return "更新停止";
+  if (s === "expired") return "期限切れ";
+  if (s === "revoked") return "取り消し";
+  return "";
+}
+
+function formatExpiresAtLabel(raw) {
+  const value = String(raw || "").trim();
+  if (!value) return "";
+  try {
+    const dt = new Date(value);
+    if (Number.isNaN(dt.getTime())) return "";
+    return new Intl.DateTimeFormat("ja-JP", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(dt);
+  } catch {
+    return "";
+  }
+}
+
 function buildIapErrorMessage(err) {
   if (!err) return "お申し込みを完了できませんでした。時間をおいてもう一度お試しください。";
 
   const code = String(err?.code || "");
+  const apiCode = String(err?.apiCode || "");
   const msg = String(err?.message || err);
 
   if (
@@ -93,6 +123,28 @@ function buildIapErrorMessage(err) {
   }
   if (/E_SERVICE_ERROR/i.test(code) || /service/i.test(msg)) {
     return "ただいまお申し込みページを開けませんでした。時間をおいてお試しください。";
+  }
+
+  if (apiCode === "purchase_already_claimed") {
+    return "この購入情報は、すでに別のCocolonアカウントに紐づいています。";
+  }
+  if (apiCode === "subscription_pending") {
+    return "購入手続きは開始されていますが、ストア側でまだ確定していません。確定後にもう一度お試しください。";
+  }
+  if (apiCode === "subscription_account_hold") {
+    return "サブスクリプションが支払い保留中です。ストアのお支払い設定をご確認ください。";
+  }
+  if (apiCode === "subscription_revoked") {
+    return "このサブスクリプションは取り消されています。";
+  }
+  if (apiCode === "subscription_inactive") {
+    return "このサブスクリプションは現在有効ではありません。";
+  }
+  if (apiCode === "verification_unavailable") {
+    return "ただいま購入確認サーバーの準備中です。時間をおいて再度お試しください。";
+  }
+  if (apiCode === "verification_failed") {
+    return "ストアの購入確認に失敗しました。時間をおいてもう一度お試しください。";
   }
 
   return "お申し込みを完了できませんでした。時間をおいてもう一度お試しください。";
@@ -224,6 +276,9 @@ export default function SubscriptionSelectScreen({ navigation }) {
     loading: ctxLoading,
     plusTrialEligible,
     plusTrialConsumed,
+    entitlementStatus,
+    expiresAt,
+    autoRenew,
     refreshTier,
   } = useSubscription();
   const loading = !!ctxLoading || ctxTier === "unknown";
@@ -265,9 +320,21 @@ export default function SubscriptionSelectScreen({ navigation }) {
     refreshScreenState({ force: true }).catch(() => null);
   }, [refreshScreenState]);
 
+  useEffect(() => {
+    if (!__DEV__) return;
+    const warnings = Array.isArray(SUBSCRIPTION_PUBLIC_CONFIG_AUDIT?.warnings)
+      ? SUBSCRIPTION_PUBLIC_CONFIG_AUDIT.warnings
+      : [];
+    if (warnings.length > 0) {
+      console.warn("[SubscriptionConfig]", warnings.join(" | "));
+    }
+  }, []);
+
   const currentLabel = SUB_TIER_LABEL[tier] || "無料会員";
   const currentPriceLabel =
     tier === "plus" ? "月額300円" : tier === "premium" ? "月額980円" : "";
+  const entitlementStatusLabel = formatEntitlementStatusLabel(entitlementStatus);
+  const expiresAtLabel = formatExpiresAtLabel(expiresAt);
 
   const showPlusTrial = tier === "free" && plusTrialEligible;
   const isTrialStatusUnavailable =
@@ -284,11 +351,11 @@ export default function SubscriptionSelectScreen({ navigation }) {
         "解約はいつでも行えます。",
       ];
 
-  const openExternalPage = useCallback(async (url) => {
+  const openExternalPage = useCallback(async (url, label = "ページ") => {
     if (!url) {
       Alert.alert(
         "ページを開けませんでした",
-        "時間をおいてもう一度お試しください。"
+        `${label}のURLが未設定です。env設定をご確認ください。`
       );
       return;
     }
@@ -298,7 +365,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
     } catch {
       Alert.alert(
         "ページを開けませんでした",
-        "時間をおいてもう一度お試しください。"
+        `${label}を開けませんでした。時間をおいてもう一度お試しください。`
       );
     }
   }, []);
@@ -353,11 +420,8 @@ export default function SubscriptionSelectScreen({ navigation }) {
       await refreshScreenState({ force: true });
 
       Alert.alert("復元が完了しました", "ご購入内容を復元しました。");
-    } catch {
-      Alert.alert(
-        "復元できませんでした",
-        "購入内容を復元できませんでした。時間をおいてもう一度お試しください。"
-      );
+    } catch (e) {
+      Alert.alert("復元できませんでした", buildIapErrorMessage(e));
     } finally {
       setRestoreLoading(false);
     }
@@ -367,7 +431,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
     const productId =
       tier === "premium" ? IAP_PRODUCT_IDS?.premium : IAP_PRODUCT_IDS?.plus;
     const url = buildManageSubscriptionUrl(productId);
-    await openExternalPage(url);
+    await openExternalPage(url, "サブスクリプション管理");
   }, [openExternalPage, tier]);
 
   const onSelectPlus = useCallback(async () => {
@@ -427,7 +491,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
       const allowTrial = tier === "free" && plusTrialEligible;
 
-      const { purchase: p } = await purchase(productId, {
+      const { purchase: p, updateRes } = await purchase(productId, {
         allowTrial,
         offerTag: PLUS_TRIAL_OFFER_TAG,
       });
@@ -440,10 +504,11 @@ export default function SubscriptionSelectScreen({ navigation }) {
         return;
       }
 
-      Alert.alert(
-        "お申し込みが完了しました",
-        "プラン情報を更新しています。反映まで少し時間がかかる場合があります。"
-      );
+      const completionMessage = updateRes?.entitlement_status === "pending"
+        ? "購入手続きは始まっています。ストア側で確定し次第、プランが反映されます。"
+        : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。";
+
+      Alert.alert("お申し込みが完了しました", completionMessage);
 
       await refreshScreenState({ force: true });
     } catch (e) {
@@ -497,6 +562,14 @@ export default function SubscriptionSelectScreen({ navigation }) {
                 <Text style={styles.currentPlan}>{currentLabel}</Text>
                 {currentPriceLabel ? (
                   <Text style={styles.currentPlanSub}>{currentPriceLabel}</Text>
+                ) : null}
+                {entitlementStatusLabel ? (
+                  <Text style={styles.currentPlanMeta}>状態：{entitlementStatusLabel}</Text>
+                ) : null}
+                {expiresAtLabel ? (
+                  <Text style={styles.currentPlanMeta}>
+                    {autoRenew ? "次回更新予定" : "有効期限"}：{expiresAtLabel}
+                  </Text>
                 ) : null}
               </View>
             )}
@@ -586,7 +659,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={styles.linkButton}
-                onPress={() => openExternalPage(TERMS_URL)}
+                onPress={() => openExternalPage(TERMS_URL, "利用規約")}
                 activeOpacity={0.75}
               >
                 <Text style={styles.linkButtonText}>利用規約</Text>
@@ -595,7 +668,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={styles.linkButton}
-                onPress={() => openExternalPage(PRIVACY_URL)}
+                onPress={() => openExternalPage(PRIVACY_URL, "プライバシーポリシー")}
                 activeOpacity={0.75}
               >
                 <Text style={styles.linkButtonText}>プライバシーポリシー</Text>
@@ -659,6 +732,12 @@ function createStyles(COLORS, ui) {
       marginTop: spacing.xs ?? 4,
       fontSize: font.sectionLabel ?? 12,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+    currentPlanMeta: {
+      marginTop: 4,
+      fontSize: font.description ?? 11,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      lineHeight: 16,
     },
 
     sectionDivider: {
