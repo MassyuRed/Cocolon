@@ -1385,7 +1385,7 @@ export default function MyModelScreen({ route } = {}) {
               ref={tutorialCreateScrollRef}
               style={styles.listArea}
               contentContainerStyle={styles.modalScrollContent}
-              keyboardShouldPersistTaps="always"
+              keyboardShouldPersistTaps="handled"
               keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}
               scrollEventThrottle={16}
               onScroll={(e) => {
@@ -1453,20 +1453,29 @@ export default function MyModelScreen({ route } = {}) {
           </View>
 
           {tutorialModalOverlayConfig ? (
-            <TutorialOverlay
-              visible={!!tutorialModalOverlayConfig}
-              targetRect={tutorialModalTargetRect}
-              title={tutorialModalOverlayConfig.title}
-              message={tutorialModalOverlayConfig.message}
-              step={tutorialModalOverlayConfig.step}
-              totalSteps={TUTORIAL_TOTAL_STEPS}
-              mode={tutorialModalOverlayConfig.mode}
-              nextLabel={tutorialModalOverlayConfig.nextLabel}
-              onNext={tutorialModalOverlayConfig.onNext}
-              actionHint={tutorialModalOverlayConfig.actionHint}
-              footerText={tutorialModalOverlayConfig.footerText}
-              onMetricsChange={setTutorialModalOverlayMetrics}
-            />
+            <View
+              style={StyleSheet.absoluteFill}
+              pointerEvents="box-none"
+              onStartShouldSetResponderCapture={() => {
+                Keyboard.dismiss();
+                return false;
+              }}
+            >
+              <TutorialOverlay
+                visible={!!tutorialModalOverlayConfig}
+                targetRect={tutorialModalTargetRect}
+                title={tutorialModalOverlayConfig.title}
+                message={tutorialModalOverlayConfig.message}
+                step={tutorialModalOverlayConfig.step}
+                totalSteps={TUTORIAL_TOTAL_STEPS}
+                mode={tutorialModalOverlayConfig.mode}
+                nextLabel={tutorialModalOverlayConfig.nextLabel}
+                onNext={tutorialModalOverlayConfig.onNext}
+                actionHint={tutorialModalOverlayConfig.actionHint}
+                footerText={tutorialModalOverlayConfig.footerText}
+                onMetricsChange={setTutorialModalOverlayMetrics}
+              />
+            </View>
           ) : null}
         </View>
       </Modal>
