@@ -6,6 +6,7 @@ import {
   AppState,
   Keyboard,
   KeyboardAvoidingView,
+  Linking,
   Platform,
   ScrollView,
   StatusBar,
@@ -24,6 +25,7 @@ import {
   submitTodayQuestionAnswer,
   resolveLocalTimezoneName,
 } from "../lib/todayQuestionApi";
+import { getNoticesCurrent, markNoticePopupSeen } from "../lib/noticeApi";
 
 // テーマ
 import { useTheme } from "../theme/ThemeContext";
@@ -43,6 +45,8 @@ import TutorialOverlay, {
 } from "../components/TutorialOverlay";
 import TodayQuestionCard from "../components/TodayQuestionCard";
 import TodayQuestionModal from "../components/TodayQuestionModal";
+import NoticeModal from "../components/NoticeModal";
+import UnreadBadge from "../components/UnreadBadge";
 
 // MashOS Emotion Submit API
 // ※ 現在は MashOS を Render 上で稼働させているため、
@@ -189,6 +193,22 @@ const clearTodayQuestionUi = useCallback(() => {
   setTodayQuestionBundle(null);
   setTodayQuestionModalVisible(false);
   setTodayQuestionLoading(false);
+}, []);
+
+const [noticeFeatureEnabled, setNoticeFeatureEnabled] = useState(true);
+const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
+const [noticePopup, setNoticePopup] = useState(null);
+const [noticeLoading, setNoticeLoading] = useState(false);
+const [noticeModalVisible, setNoticeModalVisible] = useState(false);
+const dismissedNoticeIdRef = useRef(null);
+const noticeRequestIdRef = useRef(0);
+
+const clearNoticeUi = useCallback(() => {
+  setNoticeFeatureEnabled(true);
+  setNoticeUnreadCount(0);
+  setNoticePopup(null);
+  setNoticeModalVisible(false);
+  setNoticeLoading(false);
 }, []);
 
 const homeBadgeLabel = useMemo(() => {
@@ -366,6 +386,82 @@ useEffect(() => {
     }
   };
 }, [navigation, loadTodayQuestion]);
+
+const loadNotices = useCallback(async () => {
+  const requestId = noticeRequestIdRef.current + 1;
+  noticeRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearNoticeUi();
+    return;
+  }
+
+  setNoticeLoading(true);
+  try {
+    const json = await getNoticesCurrent();
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
+
+    const featureEnabled = json?.feature_enabled !== false;
+    const unreadCount = Math.max(0, Number(json?.unread_count) || 0);
+    const popupNotice = json?.popup_notice && typeof json?.popup_notice === "object"
+      ? json.popup_notice
+      : null;
+    const popupNoticeId = String(popupNotice?.notice_id || "").trim();
+
+    setNoticeFeatureEnabled(featureEnabled);
+    setNoticeUnreadCount(unreadCount);
+    setNoticePopup(popupNotice);
+
+    if (
+      featureEnabled &&
+      popupNotice &&
+      popupNoticeId &&
+      dismissedNoticeIdRef.current !== popupNoticeId
+    ) {
+      setNoticeModalVisible(true);
+    } else {
+      setNoticeModalVisible(false);
+    }
+  } catch (e) {
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
+    console.warn("InputScreen: loadNotices failed", e);
+    clearNoticeUi();
+  } finally {
+    if (noticeRequestIdRef.current === requestId) {
+      setNoticeLoading(false);
+    }
+  }
+}, [clearNoticeUi, isTutorialMode]);
+
+useEffect(() => {
+  loadNotices();
+
+  let unsubscribe = null;
+  try {
+    unsubscribe = navigation?.addListener?.("focus", loadNotices);
+  } catch {
+    // noop
+  }
+
+  return () => {
+    try {
+      if (typeof unsubscribe === "function") unsubscribe();
+    } catch {
+      // noop
+    }
+  };
+}, [navigation, loadNotices]);
+
+const markCurrentNoticePopupSeen = useCallback(async () => {
+  const noticeId = String(noticePopup?.notice_id || "").trim();
+  if (!noticeId) return;
+  dismissedNoticeIdRef.current = noticeId;
+  try {
+    await markNoticePopupSeen({ notice_id: noticeId });
+  } catch (e) {
+    console.warn("InputScreen: markNoticePopupSeen failed", e);
+  }
+}, [noticePopup?.notice_id]);
 
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
@@ -656,7 +752,13 @@ const { height: windowHeight } = useWindowDimensions();
   useEffect(() => {
     if (!isTutorialMode) return;
     if (tutorialStep > 0) return;
-    if (!!todayQuestionBundle?.question || todayQuestionModalVisible || todayQuestionLoading) {
+    if (
+      !!todayQuestionBundle?.question ||
+      todayQuestionModalVisible ||
+      todayQuestionLoading ||
+      noticeModalVisible ||
+      noticeLoading
+    ) {
       return;
     }
 
@@ -677,6 +779,8 @@ const { height: windowHeight } = useWindowDimensions();
     !!todayQuestionBundle?.question,
     todayQuestionLoading,
     todayQuestionModalVisible,
+    noticeLoading,
+    noticeModalVisible,
     setTutorialStep,
   ]);
 
@@ -684,7 +788,9 @@ const { height: windowHeight } = useWindowDimensions();
     if (!isTutorialMode) return;
     todayQuestionRequestIdRef.current += 1;
     clearTodayQuestionUi();
-  }, [clearTodayQuestionUi, isTutorialMode]);
+    noticeRequestIdRef.current += 1;
+    clearNoticeUi();
+  }, [clearNoticeUi, clearTodayQuestionUi, isTutorialMode]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
@@ -730,6 +836,8 @@ const { height: windowHeight } = useWindowDimensions();
     !!todayQuestionBundle?.question,
     todayQuestionLoading,
     todayQuestionModalVisible,
+    noticeLoading,
+    noticeModalVisible,
     tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
@@ -977,15 +1085,91 @@ ${String(error?.message || error)}`
     }
   };
 
-  const handlePressNotifications = () => {
-    // 将来：お知らせ一覧を実装したら、既読化したタイミングで setUnread("Input", "notifications", false) を呼ぶ
+  const handleOpenNoticeHistory = useCallback(async () => {
+    const openNoticeId = String(noticePopup?.notice_id || "").trim() || null;
+    setNoticeModalVisible(false);
+    await markCurrentNoticePopupSeen();
     try {
-      setUnread("Input", "notifications", false);
+      navigation?.navigate?.("NoticeHistory", {
+        open_notice_id: openNoticeId,
+        open_notice_at: Date.now(),
+      });
     } catch {
       // noop
     }
-    Alert.alert("お知らせ", "ここにお知らせ一覧を表示（実装予定）");
-  };
+  }, [markCurrentNoticePopupSeen, navigation, noticePopup?.notice_id]);
+
+  const openNoticeInternalRoute = useCallback((routeName, params = {}) => {
+    const safeRouteName = String(routeName || "").trim();
+    if (!safeRouteName) return false;
+    try {
+      navigation?.navigate?.(safeRouteName, params);
+      return true;
+    } catch {
+      // noop
+    }
+    try {
+      const parent =
+        typeof navigation?.getParent === "function"
+          ? navigation.getParent()
+          : null;
+      parent?.navigate?.(safeRouteName, params);
+      return true;
+    } catch {
+      // noop
+    }
+    return false;
+  }, [navigation]);
+
+  const handlePressNoticeCta = useCallback(async () => {
+    const cta = noticePopup?.cta && typeof noticePopup.cta === "object"
+      ? noticePopup.cta
+      : null;
+    const kind = String(cta?.kind || "none").trim().toLowerCase();
+    if (!cta || !kind || kind === "none") {
+      return;
+    }
+
+    setNoticeModalVisible(false);
+    await markCurrentNoticePopupSeen();
+
+    if (kind === "url") {
+      const url = String(cta?.url || "").trim();
+      if (!url) return;
+      try {
+        await Linking.openURL(url);
+      } catch (e) {
+        Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
+      }
+      return;
+    }
+
+    if (kind === "internal_route") {
+      const routeName = String(cta?.route || "").trim();
+      if (!routeName) return;
+      const params = cta?.params && typeof cta.params === "object" ? cta.params : {};
+      const opened = openNoticeInternalRoute(routeName, params);
+      if (!opened) {
+        Alert.alert("お知らせ", "遷移先を開けませんでした。");
+      }
+    }
+  }, [markCurrentNoticePopupSeen, noticePopup, openNoticeInternalRoute]);
+
+  const handleDismissNoticeModal = useCallback(async () => {
+    setNoticeModalVisible(false);
+    await markCurrentNoticePopupSeen();
+  }, [markCurrentNoticePopupSeen]);
+
+  const handlePressNotifications = useCallback(() => {
+    try {
+      navigation?.navigate?.("NoticeHistory", {
+        open_notice_id: null,
+        open_notice_at: Date.now(),
+      });
+    } catch {
+      // noop
+    }
+  }, [navigation]);
 
   const handlePressGuide = () => {
     if (navigation && navigation.navigate) {
@@ -1071,6 +1255,12 @@ ${String(error?.message || error)}`
                       size={20}
                       color={colors.TEXT_ON_LIGHT}
                     />
+                    {noticeFeatureEnabled && noticeUnreadCount > 0 ? (
+                      <UnreadBadge
+                        variant="dot"
+                        style={styles.noticeBadgeDot}
+                      />
+                    ) : null}
                   </CocolonPressable>
                 </View>
               </View>
@@ -1670,8 +1860,16 @@ ${String(error?.message || error)}`
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+<NoticeModal
+  visible={!isTutorialMode && noticeFeatureEnabled && noticeModalVisible && !!noticePopup}
+  notice={noticePopup}
+  loading={noticeLoading}
+  onClose={handleDismissNoticeModal}
+  onOpenHistory={handleOpenNoticeHistory}
+  onPressCta={handlePressNoticeCta}
+/>
 <TodayQuestionModal
-  visible={!shouldHideTodayQuestionForTutorial && todayQuestionModalVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
+  visible={!shouldHideTodayQuestionForTutorial && !noticeModalVisible && todayQuestionModalVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
   question={todayQuestionBundle?.question}
   answerSummary={todayQuestionBundle?.answer_summary || null}
   loading={todayQuestionLoading}
@@ -1852,6 +2050,13 @@ function createStyles(COLORS, ui) {
       backgroundColor: COLORS.FIELD_BG,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
+      position: "relative",
+      overflow: "visible",
+    },
+    noticeBadgeDot: {
+      position: "absolute",
+      top: 8,
+      right: 8,
     },
 
     /** 今日の観測（常設） */

@@ -19,6 +19,7 @@ import AuthScreen from "./AuthScreen";
 // Screens
 import InputScreen from "./screens/InputScreen";
 import CocolonGuideScreen from "./screens/CocolonGuideScreen";
+import NoticeHistoryScreen from "./screens/NoticeHistoryScreen";
 import MyWebScreen from "./screens/MyWebScreen";
 import MyModelScreen from "./screens/MyModelScreen";
 import MyModelCreateScreen from "./screens/MyModelCreateScreen";
@@ -341,6 +342,7 @@ function InputStackNavigator() {
     <InputStack.Navigator initialRouteName="Input" screenOptions={{ headerShown: false }}>
       <InputStack.Screen name="Input" component={InputScreen} />
       <InputStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+      <InputStack.Screen name="NoticeHistory" component={NoticeHistoryScreen} />
       {/* Common screens (kept inside each tab stack to preserve state) */}
       <InputStack.Screen name="Account" component={AccountScreen} />
       <InputStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />

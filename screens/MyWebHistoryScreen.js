@@ -929,6 +929,7 @@ export default function MyWebHistoryScreen({ onBack }) {
                       styles.secretBtn,
                       themed.secretBtn,
                       styles.secretBtnSpacer,
+                      { display: "none" },
                       item.isSecret && [styles.secretBtnOn, themed.secretBtnOn],
                     ]}
                     activeOpacity={0.85}
