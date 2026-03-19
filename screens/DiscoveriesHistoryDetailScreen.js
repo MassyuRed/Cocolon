@@ -467,7 +467,7 @@ function createStyles(COLORS, ui) {
     },
     metaText: {
       fontSize: font.sectionLabel ?? 12,
-      color: text.subtle ?? COLORS.TEXT_SUBTLE,
+      color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
     sectionLabel: {
       fontSize: font.sectionLabel ?? 12,
@@ -499,7 +499,7 @@ function createStyles(COLORS, ui) {
     },
     subtleText: {
       fontSize: font.sectionLabel ?? 12,
-      color: text.subtle ?? COLORS.TEXT_SUBTLE,
+      color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
 
     // Key-Value rows
@@ -524,7 +524,7 @@ function createStyles(COLORS, ui) {
     limitNote: {
       marginTop: 10,
       fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
 
     listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
@@ -573,12 +573,12 @@ function createStyles(COLORS, ui) {
     timelineSubtle: {
       marginTop: 6,
       fontSize: font.sectionLabel ?? 12,
-      color: text.subtle ?? COLORS.TEXT_SUBTLE,
+      color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
     timelineTime: {
       marginTop: 2,
       fontSize: font.sectionLabel ?? 12,
-      color: text.subtle ?? COLORS.TEXT_SUBTLE,
+      color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
 
     // Loading / Error

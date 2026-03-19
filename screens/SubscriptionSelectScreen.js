@@ -588,7 +588,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
               }
               subtitleHighlighted={showPlusTrial}
               features={[
-                "履歴関連：表示期間１年",
+                "履歴全般：表示期間１年",
                 "MyWeb：感情構造分析レポートが深くなります",
                 "MyWeb：自己構造分析レポートを閲覧できます",
                 "MyWeb：今日の問いを履歴から編集できます",

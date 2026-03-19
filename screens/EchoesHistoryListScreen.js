@@ -464,13 +464,13 @@ function createStyles(COLORS, ui) {
     },
     metaLabel: {
       fontSize: font.sectionLabel ?? 12,
-      color: text.subtle ?? COLORS.TEXT_SUBTLE,
+      color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
       fontWeight: "700",
     },
     metaValue: {
       flex: 1,
       fontSize: font.sectionLabel ?? 12,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginLeft: 4,
       fontWeight: "700",
     },
@@ -489,7 +489,7 @@ function createStyles(COLORS, ui) {
     },
     emptyText: {
       fontSize: font.body ?? 14,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       textAlign: "center",
     },
 

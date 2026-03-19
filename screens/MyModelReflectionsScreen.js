@@ -1303,6 +1303,15 @@ useEffect(() => {
         const json = await res.json().catch(() => ({}));
         if (!res.ok) {
           const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+          if (
+            Number(res.status) === 404 &&
+            /discoveries history not found/i.test(String(msg))
+          ) {
+            if (cancelled) return;
+            setMyDiscoveryLatest(null);
+            setMyDiscoveryLatestError("");
+            return;
+          }
           throw new Error(String(msg));
         }
 
@@ -2594,6 +2603,21 @@ useEffect(() => {
                           />
                           <Text style={styles.rowMetaText}>
                             {it.resonances ?? 0}
+                          </Text>
+                        </View>
+                        <View style={styles.rowMetaItem}>
+                          <Ionicons
+                            name="bulb-outline"
+                            size={14}
+                            color={colors.TEXT_SUBTLE}
+                            style={{ marginRight: 6 }}
+                          />
+                          <Text style={styles.rowMetaText}>
+                            {it.discoveries ??
+                              it.discoveries_count ??
+                              it.discovery_count ??
+                              it.discoveryCount ??
+                              0}
                           </Text>
                         </View>
                       </View>
