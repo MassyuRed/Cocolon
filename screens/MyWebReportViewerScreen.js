@@ -21,6 +21,7 @@ import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 🎨 Theme
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
 // Subscription (MyWeb paywall)
 // - free: Light表示
 // - plus/premium: Standard表示（Deepは将来拡張）
@@ -548,6 +549,37 @@ function formatRange(periodStart, periodEnd, reportType) {
   }
 }
 
+function isEmotionReportType(reportType) {
+  return reportType === "daily" || reportType === "weekly" || reportType === "monthly";
+}
+
+function normalizeTrialHeadline(raw) {
+  const text = String(raw || "").trim();
+  return text || "1か月無料トライアル";
+}
+
+function buildStandardUpgradeCardCopy({ showTrialPromo, trialHeadline }) {
+  if (showTrialPromo) {
+    return {
+      badge: "初回限定",
+      headline: normalizeTrialHeadline(trialHeadline),
+      lead: "今の気持ちを、もっと深く読めます",
+      bodyStrong: "加入すると、気持ちの流れや背景が、今よりていねいにわかるレポートになります。",
+      note: "今は短めのレポートを表示しています。まずは無料で試して、自分に合うか確かめられます。",
+      ctaLabel: "無料で試してみる",
+    };
+  }
+
+  return {
+    badge: null,
+    headline: null,
+    lead: "今の気持ちを、もっと深く読めます",
+    bodyStrong: "加入すると、気持ちの流れや背景が、今よりていねいにわかるレポートになります。",
+    note: "今は短めのレポートを表示しています。",
+    ctaLabel: "プランを見る",
+  };
+}
+
 export default function MyWebReportViewerScreen({
   report,
   onBack,
@@ -558,6 +590,12 @@ export default function MyWebReportViewerScreen({
   const { themeName, colors } = useTheme();
   const isDark = themeName === "dark";
   const screenBg = isDark ? colors.BG_SILVER : "#FFFFFF";
+  const {
+    plusTrialEligible,
+    plusTrialConsumed,
+    loading: subscriptionStateLoading,
+    subscriptionBootstrap,
+  } = useSubscription();
 
   // Subscription tier (fail-closed: unknown => free)
   const [subscriptionTier, setSubscriptionTier] = useState("free");
@@ -683,6 +721,15 @@ export default function MyWebReportViewerScreen({
         borderColor: colors.BORDER_GOLD,
       },
       paywallBtnText: { color: colors.ACCENT_TEXT },
+      paywallLead: { color: colors.TEXT_ON_LIGHT },
+      paywallBodyStrong: { color: colors.TEXT_ON_LIGHT },
+      paywallNote: { color: colors.TEXT_SUBTLE },
+      paywallTrialBadge: {
+        backgroundColor: colors.FIELD_BG || colors.PANEL_BG || colors.BG_SILVER,
+        borderColor: colors.BORDER_GOLD,
+      },
+      paywallTrialBadgeText: { color: colors.TITLE_GOLD || colors.TEXT_ON_LIGHT },
+      paywallTrialHeadline: { color: colors.TITLE_GOLD || colors.TEXT_ON_LIGHT },
       gridLabel: { color: colors.TEXT_SUBTLE },
       gridDivider: { backgroundColor: colors.CARD_BORDER },
       colLabel: { color: colors.TEXT_SUBTLE },
@@ -716,43 +763,32 @@ export default function MyWebReportViewerScreen({
     [subscriptionTier]
   );
 
-  const hasStandardText = useMemo(() => {
-    if (!standardReport || typeof standardReport !== "object") return false;
-    return Boolean(
-      (typeof standardReport.contentText === "string" && standardReport.contentText.trim()) ||
-        (typeof standardReport.content_text === "string" && standardReport.content_text.trim()) ||
-        (typeof standardReport.text === "string" && standardReport.text.trim())
-    );
-  }, [standardReport]);
+  const plusPlan = useMemo(() => {
+    const plans = subscriptionBootstrap?.plans;
+    return plans && typeof plans === "object" ? plans.plus || null : null;
+  }, [subscriptionBootstrap]);
 
-  const hasStructuralText = useMemo(() => {
-    if (!deepReport || typeof deepReport !== "object") return false;
-    return Boolean(
-      (typeof deepReport.contentText === "string" && deepReport.contentText.trim()) ||
-        (typeof deepReport.content_text === "string" && deepReport.content_text.trim()) ||
-        (typeof deepReport.text === "string" && deepReport.text.trim())
-    );
-  }, [deepReport]);
+  const showPlusTrialPromo = useMemo(() => {
+    if (subscriptionTier !== "free") return false;
+    if (subscriptionStateLoading) return false;
+    const trialEnabled = plusPlan?.trial?.enabled !== false;
+    return trialEnabled && plusTrialEligible && !plusTrialConsumed;
+  }, [subscriptionTier, subscriptionStateLoading, plusPlan, plusTrialEligible, plusTrialConsumed]);
 
-  const hasStructuralData = useMemo(() => {
-    if (!deepReport || typeof deepReport !== "object") return false;
-    return Boolean(
-      (Array.isArray(deepReport.transitionEdges) && deepReport.transitionEdges.length > 0) ||
-      (Array.isArray(deepReport.recoveryTime) && deepReport.recoveryTime.length > 0) ||
-      (Array.isArray(deepReport.controlPatterns) && deepReport.controlPatterns.length > 0)
-    );
-  }, [deepReport]);
+  const standardUpgradeCardCopy = useMemo(
+    () =>
+      buildStandardUpgradeCardCopy({
+        showTrialPromo: showPlusTrialPromo,
+        trialHeadline: plusPlan?.trial?.subtitle,
+      }),
+    [showPlusTrialPromo, plusPlan]
+  );
 
   const showStandardUpgradeCard = useMemo(() => {
     if (tierLoading) return false;
-    return !canViewStandardText && hasStandardText;
-  }, [tierLoading, canViewStandardText, hasStandardText]);
-
-  const showDeepUpgradeCard = useMemo(() => {
-    if (tierLoading) return false;
-    if (subscriptionTier !== "plus") return false;
-    return !canViewDeepText && (hasStructuralText || hasStructuralData);
-  }, [tierLoading, subscriptionTier, canViewDeepText, hasStructuralText, hasStructuralData]);
+    if (subscriptionTier !== "free") return false;
+    return isEmotionReportType(reportType);
+  }, [tierLoading, subscriptionTier, reportType]);
 
   const range = useMemo(() => {
     if (!report?.period_start || !report?.period_end) return "";
@@ -1375,24 +1411,39 @@ export default function MyWebReportViewerScreen({
         {/* ===== Text (stored snapshot) ===== */}
         {showStandardUpgradeCard ? (
           <View style={[styles.chartCard, themed.chartCard]}>
-            <Text style={[styles.chartTitle, themed.chartTitle]}>
-              {tierLoading ? "プラン情報を確認中…" : "Standard分析はPlus会員以上で閲覧できます"}
-            </Text>
-
             {tierLoading ? (
               <View style={{ paddingVertical: 10 }}>
                 <ActivityIndicator
                   color={isDark ? colors.TEXT_ON_LIGHT : undefined}
                 />
               </View>
-            ) : null}
+            ) : (
+              <>
+                {standardUpgradeCardCopy.badge ? (
+                  <View style={[styles.paywallTrialBadge, themed.paywallTrialBadge]}>
+                    <Text style={[styles.paywallTrialBadgeText, themed.paywallTrialBadgeText]}>
+                      {standardUpgradeCardCopy.badge}
+                    </Text>
+                  </View>
+                ) : null}
 
-            <Text style={[styles.p, themed.p]}>
-              現在はLight版を表示しています。
-            </Text>
-            <Text style={[styles.p, themed.p]}>
-              Plus会員以上で、より詳しい観測コメントを閲覧できます。
-            </Text>
+                {standardUpgradeCardCopy.headline ? (
+                  <Text style={[styles.paywallTrialHeadline, themed.paywallTrialHeadline]}>
+                    {standardUpgradeCardCopy.headline}
+                  </Text>
+                ) : null}
+
+                <Text style={[styles.paywallLead, themed.paywallLead]}>
+                  {standardUpgradeCardCopy.lead}
+                </Text>
+                <Text style={[styles.paywallBodyStrong, themed.paywallBodyStrong]}>
+                  {standardUpgradeCardCopy.bodyStrong}
+                </Text>
+                <Text style={[styles.paywallNote, themed.paywallNote]}>
+                  {standardUpgradeCardCopy.note}
+                </Text>
+              </>
+            )}
 
             {!tierLoading ? (
               <TouchableOpacity
@@ -1414,7 +1465,7 @@ export default function MyWebReportViewerScreen({
                 activeOpacity={0.85}
               >
                 <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
-                  プランを見る
+                  {standardUpgradeCardCopy.ctaLabel}
                 </Text>
                 <Ionicons
                   name="chevron-forward"
@@ -1431,65 +1482,7 @@ export default function MyWebReportViewerScreen({
         ) : null}
 
 
-        {showDeepUpgradeCard ? (
-          <View style={[styles.chartCard, themed.chartCard]}>
-            <Text style={[styles.chartTitle, themed.chartTitle]}>
-              {tierLoading ? "プラン情報を確認中…" : "Deep分析はPremiumで提供予定です"}
-            </Text>
-
-            {tierLoading ? (
-              <View style={{ paddingVertical: 10 }}>
-                <ActivityIndicator
-                  color={isDark ? colors.TEXT_ON_LIGHT : undefined}
-                />
-              </View>
-            ) : null}
-
-            <Text style={[styles.p, themed.p]}>
-              現在はStandard版を表示しています。
-            </Text>
-            <Text style={[styles.p, themed.p]}>
-              Deep分析は、感情の流れ・切り替わり時間・制御パターンまで確認できる機能として提供予定です。
-            </Text>
-            <Text style={[styles.p, themed.p]}>
-              ※Premiumは準備中です。
-            </Text>
-
-            {!tierLoading ? (
-              <TouchableOpacity
-                style={[styles.paywallBtn, themed.paywallBtn]}
-                onPress={() => {
-                  if (typeof onOpenSubscription === "function") {
-                    try {
-                      onOpenSubscription?.();
-                    } catch {
-                      // no-op
-                    }
-                    return;
-                  }
-                  Alert.alert(
-                    "プラン確認",
-                    "加入画面を開けませんでした。もう一度お試しください。"
-                  );
-                }}
-                activeOpacity={0.85}
-              >
-                <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
-                  プラン内容を見る
-                </Text>
-                <Ionicons
-                  name="chevron-forward"
-                  size={18}
-                  color={
-                    isDark
-                      ? colors.ACCENT_TEXT || colors.TEXT_ON_LIGHT
-                      : "#111827"
-                  }
-                />
-              </TouchableOpacity>
-            ) : null}
-          </View>
-        ) : null}
+        {/* Plus では Premium への誘導カードは表示しない */}
 
         {displayText ? (
           displayText.split("\n").map((line, idx) => (
@@ -1571,6 +1564,46 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#111827",
     marginRight: 2,
+  },
+  paywallLead: {
+    fontSize: 18,
+    lineHeight: 25,
+    fontWeight: "900",
+    color: "#111827",
+  },
+  paywallBodyStrong: {
+    marginTop: 10,
+    fontSize: 14,
+    lineHeight: 21,
+    fontWeight: "700",
+    color: "#111827",
+  },
+  paywallNote: {
+    marginTop: 8,
+    fontSize: 13,
+    lineHeight: 19,
+    color: "#4B5563",
+  },
+  paywallTrialBadge: {
+    alignSelf: "flex-start",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "#F59E0B",
+    backgroundColor: "#FEF3C7",
+    marginBottom: 8,
+  },
+  paywallTrialBadgeText: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#92400E",
+  },
+  paywallTrialHeadline: {
+    fontSize: 24,
+    lineHeight: 31,
+    fontWeight: "900",
+    color: "#B45309",
   },
 
   // chart

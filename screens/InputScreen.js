@@ -1434,7 +1434,7 @@ ${String(error?.message || error)}`
 
               <View style={styles.section}>
                 <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>
-                  自分のことで発見や気づきがあったときは、自己理解モードで入力してみましょう
+                  自分のことで発見や気づきがあったときはこちら
                 </Text>
                 <CocolonPressable
                   onPress={() => toggleEmotion(SELF_INSIGHT)}
