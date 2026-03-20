@@ -19,29 +19,23 @@ import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import {
   ensureIapConnection,
-  purchase,
+  requestSubscriptionForPlan,
   restoreAvailablePurchases,
   syncPurchaseToSubscriptionTier,
-  IAP_PRODUCT_IDS,
 } from "../lib/iap/iapService";
 import {
-  IAP_TRIAL_OFFER_TAGS,
-  SUBSCRIPTION_PUBLIC_CONFIG,
-  SUBSCRIPTION_PUBLIC_CONFIG_AUDIT,
-} from "../lib/iap/iapConfig";
+  getPurchaseSku,
+  getRecognizedSkusForPlan,
+  getSubscriptionLinks,
+  getSubscriptionPlanConfig,
+  getSubscriptionPolicy,
+  getTrialOfferTag,
+} from "../lib/iap/iapRuntimeCatalog";
+import { SUBSCRIPTION_PUBLIC_CONFIG_AUDIT } from "../lib/iap/iapConfig";
 import { supabase } from "../lib/supabase";
 
 const IOS_MANAGE_SUBSCRIPTIONS_URL =
   "https://apps.apple.com/account/subscriptions";
-
-const TERMS_URL = String(SUBSCRIPTION_PUBLIC_CONFIG?.termsUrl || "").trim();
-const PRIVACY_URL = String(SUBSCRIPTION_PUBLIC_CONFIG?.privacyUrl || "").trim();
-const ANDROID_PACKAGE_NAME = String(
-  SUBSCRIPTION_PUBLIC_CONFIG?.androidPackageName || ""
-).trim();
-const PLUS_TRIAL_OFFER_TAG = String(
-  IAP_TRIAL_OFFER_TAGS?.android?.plus || "trial_1m_new_user"
-).trim();
 
 const SUB_TIER_LABEL = {
   free: "無料会員",
@@ -55,16 +49,18 @@ function normalizeSubscriptionTier(raw) {
   return "free";
 }
 
-function buildManageSubscriptionUrl(productId) {
+function buildManageSubscriptionUrl(productId, policy = {}) {
   if (Platform.OS === "ios") {
-    return IOS_MANAGE_SUBSCRIPTIONS_URL;
+    return String(policy?.ios_manage_url || IOS_MANAGE_SUBSCRIPTIONS_URL).trim();
   }
 
+  const mode = String(policy?.android_manage_mode || "specific_subscription").trim();
+  const packageName = String(policy?.android_package_name || "").trim();
   const sku = String(productId || "").trim();
-  if (ANDROID_PACKAGE_NAME && sku) {
+  if (mode === "specific_subscription" && packageName && sku) {
     return `https://play.google.com/store/account/subscriptions?sku=${encodeURIComponent(
       sku
-    )}&package=${encodeURIComponent(ANDROID_PACKAGE_NAME)}`;
+    )}&package=${encodeURIComponent(packageName)}`;
   }
 
   return "https://play.google.com/store/account/subscriptions";
@@ -150,6 +146,18 @@ function buildIapErrorMessage(err) {
   return "お申し込みを完了できませんでした。時間をおいてもう一度お試しください。";
 }
 
+function asStringArray(value, fallback = []) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item || "").trim()).filter(Boolean);
+  }
+  return fallback;
+}
+
+function asStringOrNull(value) {
+  const v = String(value || "").trim();
+  return v || null;
+}
+
 function PlanCard({
   title,
   price,
@@ -179,7 +187,7 @@ function PlanCard({
             ) : null}
           </View>
 
-          <Text style={styles.planPrice}>{price}</Text>
+          {price ? <Text style={styles.planPrice}>{price}</Text> : null}
           {subtitle ? (
             <Text
               style={[
@@ -280,6 +288,9 @@ export default function SubscriptionSelectScreen({ navigation }) {
     expiresAt,
     autoRenew,
     refreshTier,
+    refreshSubscriptionBootstrap,
+    subscriptionBootstrap,
+    subscriptionBootstrapLoading,
   } = useSubscription();
   const loading = !!ctxLoading || ctxTier === "unknown";
   const tier = loading ? "free" : normalizeSubscriptionTier(ctxTier);
@@ -288,11 +299,44 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const [purchaseBusyPlan, setPurchaseBusyPlan] = useState("");
   const [restoreLoading, setRestoreLoading] = useState(false);
 
+  const bootstrap = subscriptionBootstrap || {};
+  const links = useMemo(
+    () => ({
+      ...(getSubscriptionLinks() || {}),
+      ...(bootstrap?.links || {}),
+    }),
+    [bootstrap]
+  );
+  const policy = useMemo(
+    () => ({
+      ...(getSubscriptionPolicy() || {}),
+      ...(bootstrap?.policy || {}),
+    }),
+    [bootstrap]
+  );
+  const plusPlan = useMemo(
+    () => ({
+      ...(getSubscriptionPlanConfig("plus") || {}),
+      ...(bootstrap?.plans?.plus || {}),
+    }),
+    [bootstrap]
+  );
+  const premiumPlan = useMemo(
+    () => ({
+      ...(getSubscriptionPlanConfig("premium") || {}),
+      ...(bootstrap?.plans?.premium || {}),
+    }),
+    [bootstrap]
+  );
+
   const refreshScreenState = useCallback(
     async ({ force = false } = {}) => {
-      await refreshTier({ force }).catch(() => null);
+      await Promise.allSettled([
+        refreshSubscriptionBootstrap({ force }),
+        refreshTier({ force }),
+      ]);
     },
-    [refreshTier]
+    [refreshSubscriptionBootstrap, refreshTier]
   );
 
   useEffect(() => {
@@ -332,16 +376,42 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
   const currentLabel = SUB_TIER_LABEL[tier] || "無料会員";
   const currentPriceLabel =
-    tier === "plus" ? "月額300円" : tier === "premium" ? "月額980円" : "";
+    tier === "plus"
+      ? asStringOrNull(plusPlan?.price_label)
+      : tier === "premium"
+      ? asStringOrNull(premiumPlan?.price_label)
+      : "";
   const entitlementStatusLabel = formatEntitlementStatusLabel(entitlementStatus);
   const expiresAtLabel = formatExpiresAtLabel(expiresAt);
 
-  const showPlusTrial = tier === "free" && plusTrialEligible;
+  const plusPurchaseSku = getPurchaseSku("plus", Platform.OS);
+  const premiumPurchaseSku = getPurchaseSku("premium", Platform.OS);
+  const plusRecognizedSkus = useMemo(
+    () => new Set(getRecognizedSkusForPlan("plus", Platform.OS)),
+    [subscriptionBootstrap]
+  );
+  const premiumRecognizedSkus = useMemo(
+    () => new Set(getRecognizedSkusForPlan("premium", Platform.OS)),
+    [subscriptionBootstrap]
+  );
+
+  const salesEnabled = bootstrap?.sales_enabled !== false;
+  const clientSalesEnabled = bootstrap?.client_sales_enabled !== false;
+  const clientSalesDisabledReason = asStringOrNull(bootstrap?.client_sales_disabled_reason);
+  const reviewNotice = asStringOrNull(policy?.review_notice);
+
+  const showPlusTrial =
+    tier === "free" &&
+    plusTrialEligible &&
+    plusPlan?.trial?.enabled !== false;
   const isTrialStatusUnavailable =
     tier === "free" && !ctxLoading && !plusTrialEligible && !plusTrialConsumed;
   const actionBusy = !!purchaseBusyPlan || restoreLoading;
 
-  const plusNoteLines = showPlusTrial
+  const plusNoteLines = asStringArray(plusPlan?.note_lines, [])
+    .concat([])
+    .filter(Boolean);
+  const defaultPlusNoteLines = showPlusTrial
     ? [
         "無料期間終了後は、月額300円で自動更新されます。",
         "解約はいつでも行えます。",
@@ -351,11 +421,13 @@ export default function SubscriptionSelectScreen({ navigation }) {
         "解約はいつでも行えます。",
       ];
 
+  const resolvedPlusNoteLines = plusNoteLines.length > 0 ? plusNoteLines : defaultPlusNoteLines;
+
   const openExternalPage = useCallback(async (url, label = "ページ") => {
     if (!url) {
       Alert.alert(
         "ページを開けませんでした",
-        `${label}のURLが未設定です。env設定をご確認ください。`
+        `${label}のURLが未設定です。サブスク設定をご確認ください。`
       );
       return;
     }
@@ -398,15 +470,9 @@ export default function SubscriptionSelectScreen({ navigation }) {
         productId: String(p?.productId || p?.product_id || "").trim(),
       }));
 
-      const premiumPurchase =
-        IAP_PRODUCT_IDS?.premium &&
-        normalized.find((x) => x.productId === IAP_PRODUCT_IDS.premium)?.purchase;
-
-      const plusPurchase =
-        IAP_PRODUCT_IDS?.plus &&
-        normalized.find((x) => x.productId === IAP_PRODUCT_IDS.plus)?.purchase;
-
-      const targetPurchase = premiumPurchase || plusPurchase || null;
+      const premiumPurchase = normalized.find((x) => premiumRecognizedSkus.has(x.productId))?.purchase;
+      const plusPurchase = normalized.find((x) => plusRecognizedSkus.has(x.productId))?.purchase;
+      const targetPurchase = premiumPurchase || plusPurchase || normalized[0]?.purchase || null;
 
       if (!targetPurchase) {
         Alert.alert(
@@ -425,14 +491,18 @@ export default function SubscriptionSelectScreen({ navigation }) {
     } finally {
       setRestoreLoading(false);
     }
-  }, [actionBusy, refreshScreenState]);
+  }, [
+    actionBusy,
+    plusRecognizedSkus,
+    premiumRecognizedSkus,
+    refreshScreenState,
+  ]);
 
   const onOpenManageSubscription = useCallback(async () => {
-    const productId =
-      tier === "premium" ? IAP_PRODUCT_IDS?.premium : IAP_PRODUCT_IDS?.plus;
-    const url = buildManageSubscriptionUrl(productId);
+    const productId = tier === "premium" ? premiumPurchaseSku : plusPurchaseSku;
+    const url = buildManageSubscriptionUrl(productId, policy);
     await openExternalPage(url, "サブスクリプション管理");
-  }, [openExternalPage, tier]);
+  }, [openExternalPage, plusPurchaseSku, policy, premiumPurchaseSku, tier]);
 
   const onSelectPlus = useCallback(async () => {
     if (tier === "plus") return;
@@ -456,7 +526,16 @@ export default function SubscriptionSelectScreen({ navigation }) {
     if (!iapReady) {
       Alert.alert(
         "お申し込みができませんでした",
-        "ただいまお申し込みページを開けませんでした。時間をおいてもう一度お試しください。"
+        "ただいまお申し込みページを開けませんでした。時間をおいてお試しください。"
+      );
+      return;
+    }
+
+    if (!salesEnabled || !clientSalesEnabled || plusPlan?.purchasable === false) {
+      Alert.alert(
+        "現在受付を停止しています",
+        clientSalesDisabledReason ||
+          "ただいまPlus会員のお申し込み受付を停止しています。時間をおいてご確認ください。"
       );
       return;
     }
@@ -464,11 +543,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
     setPurchaseBusyPlan("plus");
 
     try {
-      const productId = IAP_PRODUCT_IDS?.plus;
-      if (!productId) {
+      if (!plusPurchaseSku) {
         Alert.alert(
           "お申し込みができませんでした",
-          "時間をおいてもう一度お試しください。"
+          "プラン設定の反映待ちです。時間をおいてもう一度お試しください。"
         );
         return;
       }
@@ -491,9 +569,9 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
       const allowTrial = tier === "free" && plusTrialEligible;
 
-      const { purchase: p, updateRes } = await purchase(productId, {
+      const { purchase: p, updateRes } = await requestSubscriptionForPlan("plus", {
         allowTrial,
-        offerTag: PLUS_TRIAL_OFFER_TAG,
+        offerTag: getTrialOfferTag("plus", Platform.OS),
       });
 
       if (!p) {
@@ -504,9 +582,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
         return;
       }
 
-      const completionMessage = updateRes?.entitlement_status === "pending"
-        ? "購入手続きは始まっています。ストア側で確定し次第、プランが反映されます。"
-        : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。";
+      const completionMessage =
+        updateRes?.entitlement_status === "pending"
+          ? "購入手続きは始まっています。ストア側で確定し次第、プランが反映されます。"
+          : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。";
 
       Alert.alert("お申し込みが完了しました", completionMessage);
 
@@ -517,14 +596,27 @@ export default function SubscriptionSelectScreen({ navigation }) {
       setPurchaseBusyPlan("");
     }
   }, [
+    clientSalesDisabledReason,
+    clientSalesEnabled,
     iapReady,
     isTrialStatusUnavailable,
     loading,
+    plusPlan,
+    plusPurchaseSku,
     plusTrialEligible,
     purchaseBusyPlan,
     refreshScreenState,
+    salesEnabled,
     tier,
   ]);
+
+  const plusSubtitle = showPlusTrial
+    ? asStringOrNull(plusPlan?.trial?.subtitle) || "１ヵ月無料トライアル（初回限定）"
+    : asStringOrNull(plusPlan?.subtitle);
+
+  const plusFeatures = asStringArray(plusPlan?.features, []);
+  const premiumFeatures = asStringArray(premiumPlan?.features, []);
+  const premiumNoteLines = asStringArray(premiumPlan?.note_lines, ["※Premiumは準備中です。"]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -574,60 +666,64 @@ export default function SubscriptionSelectScreen({ navigation }) {
               </View>
             )}
 
+            {subscriptionBootstrapLoading ? (
+              <View style={{ marginTop: 8, marginBottom: 4 }}>
+                <Text style={styles.currentPlanMeta}>販売設定を確認しています…</Text>
+              </View>
+            ) : null}
+            {reviewNotice ? <Text style={styles.planNote}>{reviewNotice}</Text> : null}
+            {!salesEnabled || !clientSalesEnabled ? (
+              <Text style={styles.planNoteError}>
+                {clientSalesDisabledReason || "現在はサブスクリプション販売を停止しています。"}
+              </Text>
+            ) : null}
+
             <View style={styles.sectionDivider} />
 
             <Text style={styles.sectionLabel}>プランを選ぶ</Text>
 
-            <PlanCard
-              title="Plus会員"
-              price="月額300円"
-              subtitle={
-                showPlusTrial
-                  ? "１ヵ月無料トライアル（初回限定）"
-                  : "レポート閲覧 / MyModelCreate拡張"
-              }
-              subtitleHighlighted={showPlusTrial}
-              features={[
-                "履歴全般：表示期間１年",
-                "MyWeb：感情構造分析レポートが深くなります",
-                "MyWeb：自己構造分析レポートを閲覧できます",
-                "MyWeb：今日の問いを履歴から編集できます",
-                "MyModel：MyModelCreateの20問すべてを利用できます",
-                "MyModel：MyModelCreateを入力後に編集できます",
-              ]}
-              noteLines={plusNoteLines}
-              isCurrent={tier === "plus"}
-              recommended={tier !== "premium"}
-              onPress={onSelectPlus}
-              ctaDisabled={restoreLoading || purchaseBusyPlan === "premium"}
-              ctaLoading={purchaseBusyPlan === "plus"}
-              styles={styles}
-              colors={colors}
-            />
+            {plusPlan?.visible === false ? null : (
+              <PlanCard
+                title={asStringOrNull(plusPlan?.title) || "Plus会員"}
+                price={asStringOrNull(plusPlan?.price_label) || "月額300円"}
+                subtitle={plusSubtitle}
+                subtitleHighlighted={showPlusTrial}
+                features={plusFeatures}
+                noteLines={resolvedPlusNoteLines}
+                isCurrent={tier === "plus"}
+                recommended={plusPlan?.recommended !== false && tier !== "premium"}
+                onPress={onSelectPlus}
+                ctaDisabled={
+                  restoreLoading ||
+                  purchaseBusyPlan === "premium" ||
+                  plusPlan?.purchasable === false ||
+                  !salesEnabled ||
+                  !clientSalesEnabled
+                }
+                ctaLoading={purchaseBusyPlan === "plus"}
+                ctaTextOverride={asStringOrNull(plusPlan?.cta_label)}
+                styles={styles}
+                colors={colors}
+              />
+            )}
 
-            <PlanCard
-              title="Premium会員"
-              price="月額980円"
-              subtitle="Deepモード / DeepInsight / 生成・分析機能"
-              features={[
-                "MyWeb：感情構造分析レポートに Deep モードが追加されます",
-                "MyWeb：自己構造分析レポートに Deep モードが追加されます",
-                "MyWeb：DeepInsight を利用できます",
-                "MyModel：Reflection を入力内容から生成できます",
-                "MyModel：自己紹介文を生成できます",
-                "MyModel：Echoes履歴の分析機能を利用できます",
-                "MyModel：Discoveries履歴の分析機能を利用できます",
-              ]}
-              noteLines={["※Premiumは準備中です。"]}
-              isCurrent={tier === "premium"}
-              recommended={false}
-              onPress={undefined}
-              ctaDisabled={true}
-              ctaLoading={false}
-              ctaTextOverride="準備中"
-              styles={styles}
-              colors={colors}
-            />
+            {premiumPlan?.visible === false ? null : (
+              <PlanCard
+                title={asStringOrNull(premiumPlan?.title) || "Premium会員"}
+                price={asStringOrNull(premiumPlan?.price_label) || "月額980円"}
+                subtitle={asStringOrNull(premiumPlan?.subtitle)}
+                features={premiumFeatures}
+                noteLines={premiumNoteLines}
+                isCurrent={tier === "premium"}
+                recommended={!!premiumPlan?.recommended}
+                onPress={undefined}
+                ctaDisabled={true}
+                ctaLoading={false}
+                ctaTextOverride={asStringOrNull(premiumPlan?.cta_label) || "準備中"}
+                styles={styles}
+                colors={colors}
+              />
+            )}
 
             <View style={styles.noteBox}>
               <Text style={styles.noteTitle}>お手続き</Text>
@@ -635,7 +731,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
               <TouchableOpacity
                 style={[styles.linkButton, styles.linkButtonFirst]}
                 onPress={onRestorePurchases}
-                disabled={actionBusy}
+                disabled={actionBusy || policy?.restore_enabled === false}
                 activeOpacity={0.75}
               >
                 <Text style={styles.linkButtonText}>
@@ -644,7 +740,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
                 <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
               </TouchableOpacity>
 
-              {tier !== "free" ? (
+              {tier !== "free" && policy?.manage_enabled !== false ? (
                 <TouchableOpacity
                   style={styles.linkButton}
                   onPress={onOpenManageSubscription}
@@ -659,7 +755,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={styles.linkButton}
-                onPress={() => openExternalPage(TERMS_URL, "利用規約")}
+                onPress={() => openExternalPage(links?.terms_url, "利用規約")}
                 activeOpacity={0.75}
               >
                 <Text style={styles.linkButtonText}>利用規約</Text>
@@ -668,12 +764,23 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={styles.linkButton}
-                onPress={() => openExternalPage(PRIVACY_URL, "プライバシーポリシー")}
+                onPress={() => openExternalPage(links?.privacy_url, "プライバシーポリシー")}
                 activeOpacity={0.75}
               >
                 <Text style={styles.linkButtonText}>プライバシーポリシー</Text>
                 <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
               </TouchableOpacity>
+
+              {links?.support_url ? (
+                <TouchableOpacity
+                  style={styles.linkButton}
+                  onPress={() => openExternalPage(links?.support_url, "サポート")}
+                  activeOpacity={0.75}
+                >
+                  <Text style={styles.linkButtonText}>サポート</Text>
+                  <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+                </TouchableOpacity>
+              ) : null}
             </View>
           </View>
         </ScrollView>
@@ -823,6 +930,12 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
       lineHeight: 16,
       marginBottom: 2,
+    },
+    planNoteError: {
+      marginTop: 6,
+      fontSize: 11,
+      color: COLORS.ERROR || "#B00020",
+      lineHeight: 16,
     },
 
     planCta: {

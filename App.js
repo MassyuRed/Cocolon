@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, View, ActivityIndicator, AppState, Platform, StatusBar, Alert } from "react-native";
+import { Text, View, ActivityIndicator, AppState, Platform, StatusBar, Alert, TouchableOpacity } from "react-native";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { NavigationContainer, createNavigationContainerRef, StackActions } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -107,6 +107,8 @@ const HIDDEN_SCREENS = new Set([]);
 
 // Bottom tabs that should be shown in the tab bar (always 5)
 const MAIN_TAB_ROUTES = new Set(["Input", "MyWeb", "MyModel", "RankingTop", "Friends", "Settings"]);
+const SELF_STRUCTURE_LATEST_STATUS_POLL_MS = 20 * 1000;
+const SELF_STRUCTURE_BANNER_AUTO_HIDE_MS = 4500;
 
 // MyModel sub-screens (treated as MyModel in the tab bar)
 const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen"]);
@@ -536,7 +538,19 @@ function MainTabs() {
     setPrefetch,
   } = useUnread();
 
-  const { isPaid } = useSubscription();
+  const { isPaid, loading: subscriptionLoading } = useSubscription();
+  const { isTutorialMode } = useTutorial();
+  const insets = useSafeAreaInsets();
+  const [isAppActive, setIsAppActive] = useState(
+    () => (AppState?.currentState || "active") === "active"
+  );
+  const [selfStructureBanner, setSelfStructureBanner] = useState({
+    visible: false,
+    reportMode: "standard",
+  });
+  const selfStructureBannerHideTimerRef = useRef(null);
+  const selfStructureLatestVersionRef = useRef(null);
+  const selfStructureLatestInitializedRef = useRef(false);
 
   // 現在表示中の route 名（hidden screens 判定に使う）
   const [activeRouteName, setActiveRouteName] = useState("Input");
@@ -737,43 +751,30 @@ const refreshMyModelCreateUnreadBadge = React.useCallback(async () => {
   }
 }, []);
 
-const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
+const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
   try {
-    const { data: sessionData } = await supabase.auth.getSession();
-    const accessToken = sessionData?.session?.access_token ?? null;
-    if (!accessToken) {
+    if (isTutorialMode) {
+      setUnread("MyModel", "reflectionsNew", false);
       setUnread("MyModel", "qnaNew", false);
       return;
     }
 
-    const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/unread`;
-    const res = await apiFetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const json = await res.json().catch(() => null);
-    if (!res.ok) {
-      setUnread("MyModel", "qnaNew", false);
-      return;
-    }
-
+    const json = await apiGet("/mymodel/qna/unread-status");
     const hasUnread =
       typeof json?.has_unread === "boolean"
         ? json.has_unread
         : typeof json?.hasUnread === "boolean"
         ? json.hasUnread
-        : Number(json?.unread_count ?? json?.unreadCount ?? 0) > 0;
+        : false;
 
-    setUnread("MyModel", "qnaNew", !!hasUnread);
+    setUnread("MyModel", "reflectionsNew", !!hasUnread);
+    setUnread("MyModel", "qnaNew", false);
   } catch (e) {
     // best-effort (don't crash the app due to badge)
+    setUnread("MyModel", "reflectionsNew", false);
     setUnread("MyModel", "qnaNew", false);
   }
-}, []);
+}, [isTutorialMode, setUnread]);
 
   // ------------------------------------------------------------
   // Unread badge (MyWeb tab: reports)
@@ -1108,7 +1109,7 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
       refreshFriendsUnreadBadge,
       refreshFriendRequestsUnreadBadge,
       refreshMyModelCreateUnreadBadge,
-      refreshMyModelQnaUnreadBadge,
+      refreshMyModelReflectionsUnreadBadge,
       refreshMyWebReportsUnreadBadge,
       runAllScreenPrefetch,
     ];
@@ -1127,10 +1128,142 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
     refreshFriendsUnreadBadge,
     refreshFriendRequestsUnreadBadge,
     refreshMyModelCreateUnreadBadge,
-    refreshMyModelQnaUnreadBadge,
+    refreshMyModelReflectionsUnreadBadge,
     refreshMyWebReportsUnreadBadge,
     runAllScreenPrefetch,
   ]);
+
+  const clearSelfStructureBannerTimer = React.useCallback(() => {
+    try {
+      if (selfStructureBannerHideTimerRef.current) {
+        clearTimeout(selfStructureBannerHideTimerRef.current);
+      }
+    } catch {
+      // noop
+    }
+    selfStructureBannerHideTimerRef.current = null;
+  }, []);
+
+  const hideSelfStructureBanner = React.useCallback(() => {
+    clearSelfStructureBannerTimer();
+    setSelfStructureBanner((prev) =>
+      prev.visible ? { ...prev, visible: false } : prev
+    );
+  }, [clearSelfStructureBannerTimer]);
+
+  const showSelfStructureBanner = React.useCallback(
+    (reportMode = "standard") => {
+      clearSelfStructureBannerTimer();
+      setSelfStructureBanner({
+        visible: true,
+        reportMode: reportMode === "deep" ? "deep" : "standard",
+      });
+      selfStructureBannerHideTimerRef.current = setTimeout(() => {
+        setSelfStructureBanner((prev) => ({ ...prev, visible: false }));
+      }, SELF_STRUCTURE_BANNER_AUTO_HIDE_MS);
+    },
+    [clearSelfStructureBannerTimer]
+  );
+
+  const openSelfStructureLatestFromBanner = React.useCallback(() => {
+    const reportMode = selfStructureBanner.reportMode === "deep" ? "deep" : "standard";
+    hideSelfStructureBanner();
+    try {
+      if (navigationRef.isReady()) {
+        navigationRef.navigate("MyWeb", {
+          openSelfReportLatest: true,
+          openSelfReportLatestMode: reportMode,
+          openSelfReportLatestAt: Date.now(),
+        });
+      }
+    } catch {
+      // noop
+    }
+  }, [hideSelfStructureBanner, selfStructureBanner.reportMode]);
+
+  useEffect(() => {
+    return () => {
+      clearSelfStructureBannerTimer();
+    };
+  }, [clearSelfStructureBannerTimer]);
+
+  useEffect(() => {
+    const handler = (state) => {
+      setIsAppActive(state === "active");
+    };
+
+    const sub = AppState?.addEventListener
+      ? AppState.addEventListener("change", handler)
+      : null;
+
+    return () => {
+      try {
+        if (sub && typeof sub.remove === "function") sub.remove();
+        else if (AppState?.removeEventListener)
+          AppState.removeEventListener("change", handler);
+      } catch {
+        // noop
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (subscriptionLoading) return;
+    if (isPaid) return;
+
+    hideSelfStructureBanner();
+    selfStructureLatestInitializedRef.current = false;
+    selfStructureLatestVersionRef.current = null;
+  }, [hideSelfStructureBanner, isPaid, subscriptionLoading]);
+
+  const refreshSelfStructureLatestStatus = React.useCallback(async () => {
+    if (subscriptionLoading || !isPaid || !isAppActive) return;
+
+    try {
+      const json = await apiGet("/myprofile/latest/status");
+      const nextVersionKey = String(json?.version_key || "").trim() || null;
+      const hasVisibleContent = !!json?.has_visible_content;
+      const reportMode =
+        String(json?.saved_report_mode || "").trim().toLowerCase() === "deep"
+          ? "deep"
+          : "standard";
+
+      if (!selfStructureLatestInitializedRef.current) {
+        selfStructureLatestInitializedRef.current = true;
+        selfStructureLatestVersionRef.current = nextVersionKey;
+        return;
+      }
+
+      if ((selfStructureLatestVersionRef.current || null) !== nextVersionKey) {
+        selfStructureLatestVersionRef.current = nextVersionKey;
+        if (nextVersionKey && hasVisibleContent) {
+          showSelfStructureBanner(reportMode);
+        }
+      }
+    } catch {
+      // noop
+    }
+  }, [isAppActive, isPaid, showSelfStructureBanner, subscriptionLoading]);
+
+  useEffect(() => {
+    if (subscriptionLoading || !isPaid || !isAppActive) return undefined;
+
+    let intervalId = null;
+    const tick = () => {
+      refreshSelfStructureLatestStatus().catch(() => null);
+    };
+
+    tick();
+    intervalId = setInterval(tick, SELF_STRUCTURE_LATEST_STATUS_POLL_MS);
+
+    return () => {
+      try {
+        if (intervalId) clearInterval(intervalId);
+      } catch {
+        // noop
+      }
+    };
+  }, [isAppActive, isPaid, refreshSelfStructureLatestStatus, subscriptionLoading]);
 
   // 起動時・復帰時に Friends 未読をチェック（Friend画面を開かなくても分かるようにする）
   useEffect(() => {
@@ -1264,14 +1397,18 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
             <Ionicons name={iconName} size={size} color={color} />
           );
           // Unread dot:
-          // - MyModel tab should mirror the visible Home badge only.
-          //   Screen UI currently shows only `mymodelCreate`, while scope may also contain
-          //   hidden flags like `qnaNew`. Using scope-wide unread here causes
-          //   “screen has no unread, but lower tab is still red”.
+          // - MyModel tab should mirror the visible Home badges only.
+          //   Screen UI currently surfaces `mymodelCreate` and `reflectionsNew`.
+          //   We intentionally do not use scope-wide unread here, otherwise legacy / hidden
+          //   feature keys can keep the lower tab red while the Home screen shows nothing.
           // - Other tabs can keep using scope-wide unread.
           const showUnreadDot =
             route.name === "MyModel" || route.name === "MyProfile"
-              ? !!getFeatureUnread("MyModel", "mymodelCreate")
+              ? !!(
+                  getFeatureUnread("MyModel", "mymodelCreate") ||
+                  (!isTutorialMode &&
+                    getFeatureUnread("MyModel", "reflectionsNew"))
+                )
               : !!getScopeUnread(route.name);
 
           // Keep wrapper for legacy tabs (Friends / MyWeb) to avoid layout changes.
@@ -1438,6 +1575,57 @@ const refreshMyModelQnaUnreadBadge = React.useCallback(async () => {
         })}
       />
 </Tab.Navigator>
+      {selfStructureBanner.visible ? (
+        <View
+          pointerEvents="box-none"
+          style={{
+            position: "absolute",
+            top: frameEnabled ? insets.top + 58 : insets.top + 12,
+            left: 12,
+            right: 12,
+            zIndex: 30,
+          }}
+        >
+          <TouchableOpacity
+            activeOpacity={0.92}
+            onPress={openSelfStructureLatestFromBanner}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              borderWidth: 1,
+              borderColor: colors.BORDER_GOLD,
+              backgroundColor: colors.PANEL_BG,
+              borderRadius: 14,
+              paddingHorizontal: 14,
+              paddingVertical: 12,
+              shadowColor: "#000000",
+              shadowOpacity: 0.12,
+              shadowRadius: 12,
+              shadowOffset: { width: 0, height: 4 },
+              elevation: 4,
+            }}
+          >
+            <Ionicons
+              name="notifications-outline"
+              size={18}
+              color={colors.TITLE_GOLD}
+              style={{ marginRight: 10 }}
+            />
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  color: colors.TEXT_ON_LIGHT,
+                  fontSize: 13,
+                  fontWeight: "700",
+                }}
+              >
+                自己構造分析レポートが更新されました
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </GlobalFrameLayout>
   );
 }
@@ -1544,6 +1732,7 @@ function RootStackNavigator() {
 
 function RootNavigator() {
   const { session, initializing, recoveryMode } = useAuth();
+  const { subscriptionBootstrapLoaded } = useSubscription();
   const {
     isTutorialMode,
     tutorialCompleted,
@@ -1712,7 +1901,7 @@ function RootNavigator() {
 // - recoveryMode のときは止める（AuthScreen に留まる仕様と整合）
 // ------------------------------------------------------------
 useEffect(() => {
-  if (!session || recoveryMode) {
+  if (!session || recoveryMode || !subscriptionBootstrapLoaded) {
     stopIapPurchaseObserver();
     return;
   }
@@ -1725,7 +1914,7 @@ useEffect(() => {
   return () => {
     stopIapPurchaseObserver();
   };
-}, [!!session, recoveryMode]);
+}, [!!session, recoveryMode, subscriptionBootstrapLoaded]);
 
 
 // ------------------------------------------------------------

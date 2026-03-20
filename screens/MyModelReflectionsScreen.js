@@ -57,6 +57,7 @@ const API_BASE = String(
 const QNA_LIST_ENDPOINT = `${API_BASE}/mymodel/qna/list`;
 const QNA_DETAIL_ENDPOINT = `${API_BASE}/mymodel/qna/detail`;
 const QNA_VIEW_ENDPOINT = `${API_BASE}/mymodel/qna/view`;
+const QNA_UNREAD_STATUS_ENDPOINT = `${API_BASE}/mymodel/qna/unread-status`;
 // Echoes / Discoveries (MashOS)
 const QNA_ECHOES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/submit`;
 const QNA_ECHOES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/history`;
@@ -711,40 +712,6 @@ useEffect(() => {
     return unsubscribe;
   }, [navigation]);
 
-  // BottomTab の未読バッジ（赤丸）連動（UnreadContext）
-  // - 画面内の "New"（is_new）を検知して、タブ側の赤●に同期する
-  // - 起動時prefetchで付いた赤●を、qnaItems初期空で誤って消さないため、
-  //   「QnA一覧を1回でも取得した後（listMetaがある時）」だけ qnaItems 由来で同期する
-  useEffect(() => {
-    if (isTutorialMode) {
-      try {
-        setUnread("MyModel", "qnaNew", false);
-      } catch {
-        // noop
-      }
-      return;
-    }
-
-    if (!listMeta) return;
-
-    const hasUnread = (qnaItems || []).some((x) => !!x?.is_new);
-
-    try {
-      setUnread("MyModel", "qnaNew", hasUnread);
-    } catch {
-      // noop
-    }
-
-    // backward compat（過去実装の onTabUnreadChange が残っていても同期できるように）
-    try {
-      if (typeof onTabUnreadChange === "function") {
-        onTabUnreadChange(hasUnread);
-      }
-    } catch {
-      // noop
-    }
-  }, [isTutorialMode, qnaItems, listMeta, setUnread, onTabUnreadChange]);
-
   // route params が変わった場合も追従（例：他画面から viewedUserId で遷移）
   useEffect(() => {
     setActiveViewedUserId(initialViewedUserId ? String(initialViewedUserId) : null);
@@ -866,6 +833,115 @@ useEffect(() => {
     return { userId, accessToken };
   }
 
+  const refreshHomeReflectionsUnread = useCallback(
+    async (providedAccessToken = null) => {
+      if (isTutorialMode) {
+        try {
+          setUnread("MyModel", "reflectionsNew", false);
+          setUnread("MyModel", "qnaNew", false);
+        } catch {
+          // noop
+        }
+        try {
+          if (typeof onTabUnreadChange === "function") {
+            onTabUnreadChange(false);
+          }
+        } catch {
+          // noop
+        }
+        return false;
+      }
+
+      try {
+        let accessToken = providedAccessToken;
+        if (!accessToken) {
+          const { data: sessionData } = await supabase.auth.getSession();
+          accessToken = sessionData?.session?.access_token ?? null;
+        }
+        if (!accessToken) {
+          setUnread("MyModel", "reflectionsNew", false);
+          setUnread("MyModel", "qnaNew", false);
+          try {
+            if (typeof onTabUnreadChange === "function") {
+              onTabUnreadChange(false);
+            }
+          } catch {
+            // noop
+          }
+          return false;
+        }
+
+        const res = await apiFetch(QNA_UNREAD_STATUS_ENDPOINT, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const json = await res.json().catch(() => null);
+        const hasUnread =
+          !!res.ok &&
+          (typeof json?.has_unread === "boolean"
+            ? json.has_unread
+            : typeof json?.hasUnread === "boolean"
+            ? json.hasUnread
+            : false);
+
+        try {
+          setUnread("MyModel", "reflectionsNew", !!hasUnread);
+          setUnread("MyModel", "qnaNew", false);
+        } catch {
+          // noop
+        }
+        try {
+          if (typeof onTabUnreadChange === "function") {
+            onTabUnreadChange(!!hasUnread);
+          }
+        } catch {
+          // noop
+        }
+        return !!hasUnread;
+      } catch {
+        try {
+          setUnread("MyModel", "reflectionsNew", false);
+          setUnread("MyModel", "qnaNew", false);
+        } catch {
+          // noop
+        }
+        try {
+          if (typeof onTabUnreadChange === "function") {
+            onTabUnreadChange(false);
+          }
+        } catch {
+          // noop
+        }
+        return false;
+      }
+    },
+    [isTutorialMode, onTabUnreadChange, setUnread]
+  );
+
+
+  // MyModel Home の Reflections NEW は screen-local 集計ではなく
+  // server-owned unread-status を単独で再同期する。
+  useEffect(() => {
+    void refreshHomeReflectionsUnread();
+  }, [refreshHomeReflectionsUnread]);
+
+  useEffect(() => {
+    if (!navigation?.addListener) return undefined;
+    const unsubscribe = navigation.addListener("focus", () => {
+      Promise.resolve(refreshHomeReflectionsUnread()).catch(() => null);
+    });
+    return () => {
+      try {
+        if (typeof unsubscribe === "function") unsubscribe();
+        else if (unsubscribe && typeof unsubscribe.remove === "function") unsubscribe.remove();
+      } catch {
+        // noop
+      }
+    };
+  }, [navigation, refreshHomeReflectionsUnread]);
 
   const loadFollowingUsers = useCallback(async () => {
     setFollowingLoading(true);
@@ -1240,6 +1316,7 @@ useEffect(() => {
                 };
               })
             );
+            void refreshHomeReflectionsUnread(accessToken);
           }
         } catch {
           // ignore
@@ -1251,7 +1328,7 @@ useEffect(() => {
         setDetailLoadingId(null);
       }
     },
-    [detailLoading, isTutorialMode, updateTutorialReflection]
+    [detailLoading, isTutorialMode, refreshHomeReflectionsUnread, updateTutorialReflection]
   );
 
   // ---------------------------------------------------------

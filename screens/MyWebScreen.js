@@ -66,6 +66,11 @@ const MYMODEL_API_BASE_URL =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
 const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ensure`;
 
+function normalizeMyProfileMode(mode) {
+  const value = String(mode || "").trim().toLowerCase();
+  return value === "deep" ? "deep" : "standard";
+}
+
 function useThemedStyles() {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -99,6 +104,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   const [selectedReport, setSelectedReport] = useState(null);
   const [selectedSelfReport, setSelectedSelfReport] = useState(null);
   const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState("home");
+  const [selfReportGenerateMode, setSelfReportGenerateMode] = useState("standard");
 
   const clearExternalOpenParams = useCallback(
     (patch) => {
@@ -602,12 +608,16 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     [ensurePaid, navigation]
   );
 
-  const openSelfReportLatest = useCallback(() => {
-    openSelfStructureRoute({
-      targetRoute: "selfReportGenerate",
-      backRoute: "home",
-    });
-  }, [openSelfStructureRoute]);
+  const openSelfReportLatest = useCallback(
+    (nextMode = "standard") => {
+      setSelfReportGenerateMode(normalizeMyProfileMode(nextMode));
+      openSelfStructureRoute({
+        targetRoute: "selfReportGenerate",
+        backRoute: "home",
+      });
+    },
+    [openSelfStructureRoute]
+  );
 
   const openSelfReportHistory = useCallback(() => {
     openSelfStructureRoute({
@@ -632,6 +642,26 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         openReportHistory: false,
         openReportHistoryType: null,
         openReportHistoryAt: null,
+      });
+      return;
+    }
+
+    const shouldOpenSelfReportLatest = !!(
+      tabRoute?.params?.openSelfReportLatest || screenRoute?.params?.openSelfReportLatest
+    );
+    if (shouldOpenSelfReportLatest) {
+      const nextMode = normalizeMyProfileMode(
+        tabRoute?.params?.openSelfReportLatestMode || screenRoute?.params?.openSelfReportLatestMode
+      );
+      setSelfReportGenerateMode(nextMode);
+      openSelfStructureRoute({
+        targetRoute: "selfReportGenerate",
+        backRoute: "home",
+      });
+      clearExternalOpenParams({
+        openSelfReportLatest: false,
+        openSelfReportLatestMode: null,
+        openSelfReportLatestAt: null,
       });
       return;
     }
@@ -669,6 +699,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     screenRoute?.params?.openReportHistory,
     screenRoute?.params?.openReportHistoryAt,
     screenRoute?.params?.openReportHistoryType,
+    screenRoute?.params?.openSelfReportLatest,
+    screenRoute?.params?.openSelfReportLatestAt,
+    screenRoute?.params?.openSelfReportLatestMode,
     screenRoute?.params?.openSelfReportHistory,
     screenRoute?.params?.openSelfReportHistoryAt,
     tabRoute?.params?.openDistributionHome,
@@ -676,6 +709,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     tabRoute?.params?.openReportHistory,
     tabRoute?.params?.openReportHistoryAt,
     tabRoute?.params?.openReportHistoryType,
+    tabRoute?.params?.openSelfReportLatest,
+    tabRoute?.params?.openSelfReportLatestAt,
+    tabRoute?.params?.openSelfReportLatestMode,
     tabRoute?.params?.openSelfReportHistory,
     tabRoute?.params?.openSelfReportHistoryAt,
   ]);
@@ -872,12 +908,13 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
             refreshHomeSummaries();
           }}
           onOpenReport={openSelfReportView}
-          onGenerateLatest={() =>
+          onGenerateLatest={() => {
+            setSelfReportGenerateMode("standard");
             openSelfStructureRoute({
               targetRoute: "selfReportGenerate",
               backRoute: "selfReportHistory",
-            })
-          }
+            });
+          }}
         />
       ) : route === "selfReportView" ? (
         <SelfStructureReportViewerScreen
@@ -889,6 +926,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         />
       ) : route === "selfReportGenerate" ? (
         <SelfStructureReportGenerateScreen
+          key={`selfReportGenerate:${selfReportGenerateMode}`}
+          initialReportMode={selfReportGenerateMode}
           onBack={() => setRoute(selfReportGenerateBackRoute)}
         />
       ) : route === "todayQuestionHistory" ? (

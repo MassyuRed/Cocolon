@@ -217,7 +217,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack }) {
+export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard" }) {
   const { themeName, colors } = useTheme();
   const isDark = themeName === "dark";
 
@@ -267,7 +267,7 @@ export default function SelfStructureReportGenerateScreen({ onBack }) {
     // ---- Subscription / report mode (Step7: UI) ----
   const [subscriptionTier, setSubscriptionTier] = useState("free");
   const [allowedModes, setAllowedModes] = useState(TIER_PERMISSION_MAP.plus);
-  const [reportMode, setReportMode] = useState("standard");
+  const [reportMode, setReportMode] = useState(() => normalizeMyProfileMode(initialReportMode));
   const [tierLoading, setTierLoading] = useState(false);
   const [tierError, setTierError] = useState("");
 
@@ -727,6 +727,7 @@ const styles = StyleSheet.create({
 
   // 🧭 mode selector
   modeCard: {
+    display: "none",
     marginHorizontal: 12,
     marginBottom: 10,
     borderWidth: 1,

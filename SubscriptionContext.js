@@ -9,15 +9,20 @@ import React, {
 } from "react";
 import { AppState } from "react-native";
 import { supabase } from "./lib/supabase";
-import { SUBSCRIPTION_PUBLIC_CONFIG } from "./lib/iap/iapConfig";
+import {
+  buildFallbackSubscriptionBootstrap,
+  clearSubscriptionRuntimeCatalog,
+  hydrateSubscriptionRuntimeCatalog,
+} from "./lib/iap/iapRuntimeCatalog";
+import {
+  getSubscriptionBootstrap,
+  getSubscriptionMe,
+} from "./lib/subscriptionApi";
 
-const API_BASE = String(
-  SUBSCRIPTION_PUBLIC_CONFIG.apiBaseUrl || "https://mashos-api.onrender.com"
-).replace(/\/+$/, "");
-
-const SUBSCRIPTION_ME_ENDPOINT = `${API_BASE}/subscription/me`;
 const VALID_TIERS = new Set(["free", "plus", "premium"]);
 const DEFAULT_TIER = "free";
+const REFRESH_TTL_MS = 10 * 1000;
+const BOOTSTRAP_REFRESH_TTL_MS = 30 * 1000;
 
 function normalizeTier(raw) {
   const t = String(raw || "").trim().toLowerCase();
@@ -48,16 +53,36 @@ export function SubscriptionProvider({ children }) {
   const [autoRenew, setAutoRenew] = useState(false);
   const [store, setStore] = useState(null);
   const [productId, setProductId] = useState(null);
+  const [subscriptionBootstrap, setSubscriptionBootstrap] = useState(() =>
+    buildFallbackSubscriptionBootstrap()
+  );
+  const [subscriptionBootstrapLoading, setSubscriptionBootstrapLoading] = useState(false);
+  const [subscriptionBootstrapLoaded, setSubscriptionBootstrapLoaded] = useState(false);
+  const [subscriptionBootstrapError, setSubscriptionBootstrapError] = useState(null);
 
   const tierRef = useRef("unknown");
   const lastFetchedAtRef = useRef(0);
   const inFlightRef = useRef(null);
+  const lastBootstrapFetchedAtRef = useRef(0);
+  const bootstrapInFlightRef = useRef(null);
+  const bootstrapRef = useRef(buildFallbackSubscriptionBootstrap());
   const mountedRef = useRef(true);
 
   const setTier = useCallback((next) => {
     const v = String(next || "unknown").trim().toLowerCase() || "unknown";
     tierRef.current = v;
     if (mountedRef.current) _setTier(v);
+  }, []);
+
+  const applyBootstrap = useCallback((payload) => {
+    const normalized = hydrateSubscriptionRuntimeCatalog(payload || buildFallbackSubscriptionBootstrap());
+    bootstrapRef.current = normalized;
+    if (mountedRef.current) {
+      setSubscriptionBootstrap(normalized);
+      setSubscriptionBootstrapLoaded(true);
+      setSubscriptionBootstrapError(null);
+    }
+    return normalized;
   }, []);
 
   const applySubscriptionState = useCallback((payload) => {
@@ -90,10 +115,60 @@ export function SubscriptionProvider({ children }) {
 
   useEffect(() => {
     mountedRef.current = true;
+    applyBootstrap(buildFallbackSubscriptionBootstrap());
     return () => {
       mountedRef.current = false;
+      clearSubscriptionRuntimeCatalog();
     };
-  }, []);
+  }, [applyBootstrap]);
+
+  const refreshSubscriptionBootstrap = useCallback(
+    async ({ force = false } = {}) => {
+      const now = Date.now();
+      if (
+        !force &&
+        subscriptionBootstrapLoaded &&
+        now - (Number(lastBootstrapFetchedAtRef.current || 0) || 0) < BOOTSTRAP_REFRESH_TTL_MS
+      ) {
+        return bootstrapRef.current;
+      }
+
+      if (bootstrapInFlightRef.current) {
+        try {
+          return await bootstrapInFlightRef.current;
+        } catch {
+          return bootstrapRef.current;
+        }
+      }
+
+      const p = (async () => {
+        if (mountedRef.current) setSubscriptionBootstrapLoading(true);
+        try {
+          const json = await getSubscriptionBootstrap();
+          const normalized = applyBootstrap(json);
+          lastBootstrapFetchedAtRef.current = Date.now();
+          return normalized;
+        } catch (err) {
+          const fallback = applyBootstrap(buildFallbackSubscriptionBootstrap());
+          if (mountedRef.current) {
+            setSubscriptionBootstrapError(String(err?.message || err || "subscription bootstrap failed"));
+          }
+          lastBootstrapFetchedAtRef.current = Date.now();
+          return fallback;
+        } finally {
+          if (mountedRef.current) setSubscriptionBootstrapLoading(false);
+        }
+      })();
+
+      bootstrapInFlightRef.current = p;
+      try {
+        return await p;
+      } finally {
+        bootstrapInFlightRef.current = null;
+      }
+    },
+    [applyBootstrap, subscriptionBootstrapLoaded]
+  );
 
   const refreshTier = useCallback(
     async ({ force = false } = {}) => {
@@ -104,7 +179,7 @@ export function SubscriptionProvider({ children }) {
         !force &&
         cur &&
         cur !== "unknown" &&
-        now - (Number(lastFetchedAtRef.current || 0) || 0) < 10 * 1000
+        now - (Number(lastFetchedAtRef.current || 0) || 0) < REFRESH_TTL_MS
       ) {
         return cur;
       }
@@ -132,18 +207,7 @@ export function SubscriptionProvider({ children }) {
             return DEFAULT_TIER;
           }
 
-          const res = await fetch(SUBSCRIPTION_ME_ENDPOINT, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          });
-
-          const json = await res.json().catch(() => null);
-          if (!res.ok) {
-            throw new Error(String(json?.detail || json?.message || `HTTP ${res.status}`));
-          }
-
+          const json = await getSubscriptionMe();
           const nextTier = normalizeTier(json?.subscription_tier);
           setTier(nextTier);
 
@@ -199,10 +263,12 @@ export function SubscriptionProvider({ children }) {
   }, [ensureTier]);
 
   useEffect(() => {
+    refreshSubscriptionBootstrap({ force: true }).catch(() => null);
     refreshTier({ force: true }).catch(() => null);
 
     const handler = (state) => {
       if (state === "active") {
+        refreshSubscriptionBootstrap({ force: false }).catch(() => null);
         refreshTier({ force: false }).catch(() => null);
       }
     };
@@ -216,13 +282,14 @@ export function SubscriptionProvider({ children }) {
         // noop
       }
     };
-  }, [refreshTier]);
+  }, [refreshSubscriptionBootstrap, refreshTier]);
 
   useEffect(() => {
     let authSub = null;
 
     try {
       const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+        refreshSubscriptionBootstrap({ force: true }).catch(() => null);
         if (session?.access_token) {
           refreshTier({ force: true }).catch(() => null);
         } else {
@@ -243,7 +310,7 @@ export function SubscriptionProvider({ children }) {
         // noop
       }
     };
-  }, [refreshTier, resetSubscriptionState, setTier]);
+  }, [refreshSubscriptionBootstrap, refreshTier, resetSubscriptionState, setTier]);
 
   const value = useMemo(() => {
     const norm = tier === "unknown" ? "unknown" : normalizeTier(tier);
@@ -271,6 +338,10 @@ export function SubscriptionProvider({ children }) {
       autoRenew,
       store,
       productId,
+      subscriptionBootstrap,
+      subscriptionBootstrapLoading,
+      subscriptionBootstrapLoaded,
+      subscriptionBootstrapError,
       isPlus,
       isPremium,
       isPaid,
@@ -279,6 +350,7 @@ export function SubscriptionProvider({ children }) {
       ensurePaid,
       ensurePremium,
       refreshTier,
+      refreshSubscriptionBootstrap,
       ensureTier,
     };
   }, [
@@ -295,8 +367,13 @@ export function SubscriptionProvider({ children }) {
     plusTrialConsumedAt,
     plusTrialEligible,
     productId,
+    refreshSubscriptionBootstrap,
     refreshTier,
     store,
+    subscriptionBootstrap,
+    subscriptionBootstrapError,
+    subscriptionBootstrapLoaded,
+    subscriptionBootstrapLoading,
     tier,
   ]);
 
@@ -307,6 +384,7 @@ export function useSubscription() {
   const ctx = useContext(SubscriptionContext);
 
   if (!ctx) {
+    const fallbackBootstrap = buildFallbackSubscriptionBootstrap();
     return {
       tier: "unknown",
       loading: false,
@@ -320,10 +398,15 @@ export function useSubscription() {
       autoRenew: false,
       store: null,
       productId: null,
+      subscriptionBootstrap: fallbackBootstrap,
+      subscriptionBootstrapLoading: false,
+      subscriptionBootstrapLoaded: false,
+      subscriptionBootstrapError: null,
       isPlus: false,
       isPremium: false,
       isPaid: false,
       refreshTier: async () => "unknown",
+      refreshSubscriptionBootstrap: async () => fallbackBootstrap,
       ensureTier: async () => "unknown",
       ensurePaid: async () => false,
       ensurePremium: async () => false,

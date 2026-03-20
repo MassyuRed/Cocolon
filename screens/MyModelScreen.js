@@ -216,6 +216,7 @@ export default function MyModelScreen({ route } = {}) {
   const targetUserId = initialViewedUserId ? String(initialViewedUserId) : null;
 
   const unreadMyModelCreate = !!getFeatureUnread("MyModel", "mymodelCreate");
+  const unreadReflections = !isTutorialMode && !!getFeatureUnread("MyModel", "reflectionsNew");
 
   // Recommend (users)
   const [recoModalVisible, setRecoModalVisible] = useState(false);
@@ -1173,7 +1174,13 @@ export default function MyModelScreen({ route } = {}) {
 
         {/* Home / Target + Reflections entry */}
         <View style={styles.qnaIntroCard}>
-          <Text style={styles.qnaIntroTitle}>Reflections</Text>
+          <View style={styles.qnaIntroTitleRow}>
+            <Text style={styles.qnaIntroTitle}>Reflections</Text>
+            <UnreadBadge
+              visible={unreadReflections}
+              style={styles.createUnreadBadge}
+            />
+          </View>
           <Text style={styles.qnaIntroText}>
             {isTutorialMode
               ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
@@ -1985,11 +1992,16 @@ function createStyles(COLORS, ui) {
       paddingVertical: 10,
       marginBottom: 12,
     },
+    qnaIntroTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 4,
+    },
     qnaIntroTitle: {
       fontSize: 13,
       fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 4,
+      marginBottom: 0,
     },
     qnaIntroText: {
       fontSize: 12,
