@@ -1184,7 +1184,7 @@ export default function MyModelScreen({ route } = {}) {
           <Text style={styles.qnaIntroText}>
             {isTutorialMode
               ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
-              : "自分とフォローしているユーザーが、\n作成したReflection（一問一答内容）を閲覧できます。"}
+              : "自分とフォローしているユーザーが作成した\nReflection（一問一答内容）を閲覧できます。"}
           </Text>
 
           <View style={styles.actions}>

@@ -37,6 +37,13 @@ import { supabase } from "../lib/supabase";
 const IOS_MANAGE_SUBSCRIPTIONS_URL =
   "https://apps.apple.com/account/subscriptions";
 
+const SUBSCRIPTION_LEGAL_LINKS = Object.freeze({
+  termsUrl:
+    "https://sunrise-arrow-09e.notion.site/Emlis-32a49f5dde6980358773d45f4c42c037?pvs=143",
+  privacyUrl:
+    "https://sunrise-arrow-09e.notion.site/Emlis-32a49f5dde6980db9adfddb7bfcce6b4?pvs=143",
+});
+
 const SUB_TIER_LABEL = {
   free: "無料会員",
   plus: "Plus会員",
@@ -304,6 +311,8 @@ export default function SubscriptionSelectScreen({ navigation }) {
     () => ({
       ...(getSubscriptionLinks() || {}),
       ...(bootstrap?.links || {}),
+      terms_url: SUBSCRIPTION_LEGAL_LINKS.termsUrl,
+      privacy_url: SUBSCRIPTION_LEGAL_LINKS.privacyUrl,
     }),
     [bootstrap]
   );
