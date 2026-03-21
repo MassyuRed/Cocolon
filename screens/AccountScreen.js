@@ -27,7 +27,7 @@ import {
   syncPurchaseToSubscriptionTier,
 } from "../lib/iap/iapService";
 import { getPlanSku } from "../lib/iap/iapConfig";
-import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
+import { apiGet, apiPost, apiPatch, apiFetch } from "../lib/apiClient";
 
 // 🔧 ここを変えると Account 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
@@ -53,17 +53,15 @@ function mapDisplayNameConflictMessage(errorLike) {
   return "";
 }
 
-async function checkDisplayNameAvailability(candidate, excludeUserId = null) {
+async function checkDisplayNameAvailability(candidate) {
   const normalized = normalizeDisplayName(candidate);
   if (!normalized) return false;
 
   try {
-    const { data, error } = await supabase.rpc("is_display_name_available", {
-      p_candidate: normalized,
-      p_exclude_user_id: excludeUserId || null,
-    });
-    if (error) throw error;
-    return typeof data === "boolean" ? data : !!data;
+    const json = await apiGet(
+      `/account/display-name/availability?candidate=${encodeURIComponent(normalized)}`
+    );
+    return typeof json?.available === "boolean" ? json.available : !!json?.available;
   } catch (e) {
     console.warn("AccountScreen: display name availability check failed", e);
     return null;
@@ -728,7 +726,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     setNameError("");
     setNameChecking(true);
     try {
-      const available = await checkDisplayNameAvailability(nextName, user.id);
+      const available = await checkDisplayNameAvailability(nextName);
       if (available === false) {
         setNameError(DISPLAY_NAME_TAKEN_MESSAGE);
         return;
@@ -739,16 +737,11 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
     setNameSaving(true);
     try {
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .update({ display_name: nextName })
-        .eq("id", user.id);
+      const json = await apiPatch("/account/profile/me", {
+        display_name: nextName,
+      });
 
-      if (profileError) {
-        throw profileError;
-      }
-
-      // Auth の user_metadata も同期（失敗しても profiles 側が更新できていればOK）
+      // Auth の user_metadata も同期（失敗しても server-owned profile 側が更新できていればOK）
       try {
         await supabase.auth.updateUser({
           data: { display_name: nextName },
@@ -757,7 +750,9 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
         console.warn("updateUser metadata failed:", e);
       }
 
-      setDisplayName(nextName);
+      const resolvedDisplayName = normalizeDisplayName(json?.display_name || nextName);
+      setDisplayName(resolvedDisplayName || nextName);
+      setNameDraft(resolvedDisplayName || nextName);
       setNameEditOpen(false);
       setNameError("");
       Alert.alert("更新完了", "ユーザー名を更新しました。");

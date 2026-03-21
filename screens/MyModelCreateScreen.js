@@ -138,7 +138,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
 
   const promptSubscriptionForLockedPages = useCallback(() => {
     Alert.alert(
-      "MyModel Create",
+      "ReflectionCreate",
       "2ページ目以降はPlus会員以上で利用できます。\n\nPlus会員以上で全ての問いに回答できるようになります。",
       [
         { text: "閉じる", style: "cancel" },
@@ -498,7 +498,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
           <View style={styles.panelHeader}>
             <CocolonBackButton onPress={onBack} style={{ width: 72 }} />
 
-            <Text style={styles.panelTitle}>MyModel Create</Text>
+            <Text style={styles.panelTitle}>ReflectionCreate</Text>
 
             <View style={{ width: 72 }} />
           </View>

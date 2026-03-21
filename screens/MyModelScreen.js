@@ -336,7 +336,7 @@ export default function MyModelScreen({ route } = {}) {
         return {
           step: 15,
           mode: "info",
-          title: "MyModel Create",
+          title: "ReflectionCreate",
           message: "まずはここで\nReflectionを作成します",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(16),
@@ -346,8 +346,8 @@ export default function MyModelScreen({ route } = {}) {
           step: 16,
           mode: "action",
           title: "作成してみましょう",
-          message: "MyModel Createを開いて\nReflectionを作ってみましょう",
-          actionHint: "MyModel Create を押してください",
+          message: "ReflectionCreateを開いて\nReflectionを作ってみましょう",
+          actionHint: "ReflectionCreate を押してください",
         };
       case 17:
         return {
@@ -1034,8 +1034,8 @@ export default function MyModelScreen({ route } = {}) {
       navigation.navigate("MyModelCreate");
     } catch {
       Alert.alert(
-        "MyModel Createを開けません",
-        "MyModel Create画面が navigation に未登録の可能性があります。\nApp.js に MyModelCreateScreen を登録してください。"
+        "ReflectionCreateを開けません",
+        "ReflectionCreate画面が navigation に未登録の可能性があります。\nApp.js に MyModelCreateScreen を登録してください。"
       );
     }
   }, [navigation, isTutorialMode, openTutorialCreate]);
@@ -1184,7 +1184,7 @@ export default function MyModelScreen({ route } = {}) {
           <Text style={styles.qnaIntroText}>
             {isTutorialMode
               ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
-              : "フォローしたユーザーのMyModelを使用できます。"}
+              : "こちらで自分とフォローしているユーザーが、\n作成したReflection（一問一答内容）を閲覧できます。"}
           </Text>
 
           <View style={styles.actions}>
@@ -1206,7 +1206,7 @@ export default function MyModelScreen({ route } = {}) {
 
         <View style={styles.recoCard}>
           <View style={styles.createTitleRow}>
-            <Text style={styles.recoTitle}>MyModel Create</Text>
+            <Text style={styles.recoTitle}>ReflectionCreate</Text>
             <UnreadBadge
               visible={unreadMyModelCreate}
               style={styles.createUnreadBadge}
@@ -1215,7 +1215,7 @@ export default function MyModelScreen({ route } = {}) {
           <Text style={styles.recoSummaryText}>
             {isTutorialMode
               ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionが作られる流れを体験します。`
-              : "Reflectionsで使うためのReflectionを作成します。"}
+              : "こちらで一問一答に答えることができます。\n答えた一問一答内容をReflectionと呼びます。\n作成したReflection数はアカウントページで確認できます。"}
           </Text>
 
           <View ref={createButtonRef} collapsable={false}>

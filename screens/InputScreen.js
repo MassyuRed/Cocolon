@@ -6,7 +6,6 @@ import {
   AppState,
   Keyboard,
   KeyboardAvoidingView,
-  Linking,
   Platform,
   ScrollView,
   StatusBar,
@@ -25,13 +24,19 @@ import {
   submitTodayQuestionAnswer,
   resolveLocalTimezoneName,
 } from "../lib/todayQuestionApi";
-import { getNoticesCurrent, markNoticePopupSeen } from "../lib/noticeApi";
+import {
+  getNoticesCurrent,
+  markNoticePopupSeen,
+  markNoticesRead,
+} from "../lib/noticeApi";
+import { openNoticeAction } from "../lib/noticeActionRuntime";
 
 // テーマ
 import { useTheme } from "../theme/ThemeContext";
 
 import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
+import { useSubscription } from "../SubscriptionContext";
 
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
@@ -96,6 +101,13 @@ const TUTORIAL_TOTAL_STEPS = 23;
 export default function InputScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
+  const {
+    tier: subscriptionTier,
+    loading: subscriptionLoading,
+    plusTrialEligible,
+    plusTrialConsumed,
+    subscriptionBootstrap,
+  } = useSubscription();
   const {
     isTutorialMode,
     tutorialStep,
@@ -463,6 +475,26 @@ const markCurrentNoticePopupSeen = useCallback(async () => {
   }
 }, [noticePopup?.notice_id]);
 
+const markCurrentNoticeRead = useCallback(async () => {
+  const noticeId = String(noticePopup?.notice_id || "").trim();
+  if (!noticeId) return;
+  try {
+    const res = await markNoticesRead({ notice_ids: [noticeId] });
+    const nextUnreadCount = Math.max(0, Number(res?.unread_count) || 0);
+    setNoticeUnreadCount(nextUnreadCount);
+    setNoticePopup((prev) => {
+      if (String(prev?.notice_id || "").trim() !== noticeId) return prev;
+      return {
+        ...(prev || {}),
+        is_read: true,
+        read_at: prev?.read_at || new Date().toISOString(),
+      };
+    });
+  } catch (e) {
+    console.warn("InputScreen: markNoticesRead failed", e);
+  }
+}, [noticePopup?.notice_id]);
+
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
   if (serviceDayKey) {
@@ -613,6 +645,24 @@ const { height: windowHeight } = useWindowDimensions();
 
   const doNotNotifyFriends = !sendFriendNotification;
   const isDark = themeName === "dark";
+
+  const plusPlan = useMemo(() => {
+    const plans = subscriptionBootstrap?.plans;
+    return plans && typeof plans === "object" ? plans.plus || null : null;
+  }, [subscriptionBootstrap]);
+
+  const showInputTrialPromoCard = useMemo(() => {
+    if (subscriptionTier !== "free") return false;
+    if (subscriptionLoading) return false;
+    const trialEnabled = plusPlan?.trial?.enabled !== false;
+    return trialEnabled && plusTrialEligible && !plusTrialConsumed;
+  }, [
+    plusPlan,
+    plusTrialConsumed,
+    plusTrialEligible,
+    subscriptionLoading,
+    subscriptionTier,
+  ]);
 
   const isSelfInsightSelected = selectedEmotions.some(
     (e) => e.type === SELF_INSIGHT
@@ -1121,39 +1171,19 @@ ${String(error?.message || error)}`
     return false;
   }, [navigation]);
 
-  const handlePressNoticeCta = useCallback(async () => {
-    const cta = noticePopup?.cta && typeof noticePopup.cta === "object"
-      ? noticePopup.cta
-      : null;
-    const kind = String(cta?.kind || "none").trim().toLowerCase();
-    if (!cta || !kind || kind === "none") {
-      return;
-    }
+  const handlePressNoticeAction = useCallback(async (action) => {
+    if (!action) return;
 
     setNoticeModalVisible(false);
     await markCurrentNoticePopupSeen();
+    await markCurrentNoticeRead();
 
-    if (kind === "url") {
-      const url = String(cta?.url || "").trim();
-      if (!url) return;
-      try {
-        await Linking.openURL(url);
-      } catch (e) {
-        Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
-      }
-      return;
+    try {
+      await openNoticeAction(action, { openInternalRoute: openNoticeInternalRoute });
+    } catch (e) {
+      Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
     }
-
-    if (kind === "internal_route") {
-      const routeName = String(cta?.route || "").trim();
-      if (!routeName) return;
-      const params = cta?.params && typeof cta.params === "object" ? cta.params : {};
-      const opened = openNoticeInternalRoute(routeName, params);
-      if (!opened) {
-        Alert.alert("お知らせ", "遷移先を開けませんでした。");
-      }
-    }
-  }, [markCurrentNoticePopupSeen, noticePopup, openNoticeInternalRoute]);
+  }, [markCurrentNoticePopupSeen, markCurrentNoticeRead, openNoticeInternalRoute]);
 
   const handleDismissNoticeModal = useCallback(async () => {
     setNoticeModalVisible(false);
@@ -1189,6 +1219,16 @@ ${String(error?.message || error)}`
       );
     }
   };
+
+  const handlePressSubscription = useCallback(() => {
+    const opened = openNoticeInternalRoute("SubscriptionSelect");
+    if (!opened) {
+      Alert.alert(
+        "サブスクリプション",
+        "サブスクリプション画面を開けませんでした。"
+      );
+    }
+  }, [openNoticeInternalRoute]);
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
@@ -1264,6 +1304,21 @@ ${String(error?.message || error)}`
                   </CocolonPressable>
                 </View>
               </View>
+
+              {showInputTrialPromoCard ? (
+                <View style={styles.inputTrialPromoCard}>
+                  <Text style={styles.inputTrialPromoHeadline}>
+                    １ヵ月無料トライアル実施中！
+                  </Text>
+                  <CocolonPressable
+                    style={styles.inputTrialPromoButton}
+                    onPress={handlePressSubscription}
+                    accessibilityLabel="サブスクリプションページを開く"
+                  >
+                    <Text style={styles.inputTrialPromoButtonText}>無料で試す</Text>
+                  </CocolonPressable>
+                </View>
+              ) : null}
 
               <View style={styles.globalSummaryBlock}>
                 <View style={styles.globalSummaryInner}>
@@ -1866,7 +1921,7 @@ ${String(error?.message || error)}`
   loading={noticeLoading}
   onClose={handleDismissNoticeModal}
   onOpenHistory={handleOpenNoticeHistory}
-  onPressCta={handlePressNoticeCta}
+  onPressAction={handlePressNoticeAction}
 />
 <TodayQuestionModal
   visible={!shouldHideTodayQuestionForTutorial && !noticeModalVisible && todayQuestionModalVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
@@ -2001,6 +2056,47 @@ function createStyles(COLORS, ui) {
     headerRight: {
       flexDirection: "row",
       alignItems: "center",
+    },
+    inputTrialPromoCard: {
+      marginBottom: 14,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: "#FFFFFF",
+      paddingHorizontal: 14,
+      paddingVertical: 12,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      shadowColor: "#000",
+      shadowOpacity: 0.08,
+      shadowRadius: 8,
+      shadowOffset: { width: 0, height: 4 },
+      elevation: 3,
+    },
+    inputTrialPromoHeadline: {
+      flex: 1,
+      marginRight: 12,
+      fontSize: 14,
+      lineHeight: 20,
+      fontWeight: "800",
+      color: "#000000",
+    },
+    inputTrialPromoButton: {
+      flexShrink: 0,
+      minHeight: 38,
+      paddingHorizontal: 14,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: COLORS.BORDER_GOLD,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    inputTrialPromoButtonText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: "#FFFFFF",
     },
     globalSummaryBlock: {
       marginBottom: 14,

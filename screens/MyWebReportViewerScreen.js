@@ -565,7 +565,7 @@ function buildStandardUpgradeCardCopy({ showTrialPromo, trialHeadline }) {
       headline: normalizeTrialHeadline(trialHeadline),
       lead: "今の気持ちを、もっと深く読めます",
       bodyStrong: "加入すると、気持ちの流れや背景が、今よりていねいにわかるレポートになります。",
-      note: "今は短めのレポートを表示しています。まずは無料で試して、自分に合うか確かめられます。",
+      note: null,
       ctaLabel: "無料で試してみる",
     };
   }
@@ -1439,9 +1439,11 @@ export default function MyWebReportViewerScreen({
                 <Text style={[styles.paywallBodyStrong, themed.paywallBodyStrong]}>
                   {standardUpgradeCardCopy.bodyStrong}
                 </Text>
-                <Text style={[styles.paywallNote, themed.paywallNote]}>
-                  {standardUpgradeCardCopy.note}
-                </Text>
+                {standardUpgradeCardCopy.note ? (
+                  <Text style={[styles.paywallNote, themed.paywallNote]}>
+                    {standardUpgradeCardCopy.note}
+                  </Text>
+                ) : null}
               </>
             )}
 

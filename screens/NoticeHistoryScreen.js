@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   Alert,
   FlatList,
-  Linking,
   Platform,
   SafeAreaView,
   StatusBar,
@@ -17,7 +16,12 @@ import { useTheme } from "../theme/ThemeContext";
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
+import NoticeRichText from "../components/NoticeRichText";
 import UnreadBadge from "../components/UnreadBadge";
+import {
+  getNoticeButtonActions,
+  openNoticeAction,
+} from "../lib/noticeActionRuntime";
 import {
   getNoticesHistory,
   markNoticesRead,
@@ -55,10 +59,6 @@ function formatNoticeDateTimeLabel(value) {
   } catch {
     return raw;
   }
-}
-
-function normalizeCta(raw) {
-  return raw && typeof raw === "object" ? raw : {};
 }
 
 export default function NoticeHistoryScreen({ navigation, route }) {
@@ -235,34 +235,17 @@ export default function NoticeHistoryScreen({ navigation, route }) {
     return false;
   }, [navigation]);
 
-  const handlePressCta = useCallback(async (item) => {
-    const cta = normalizeCta(item?.cta);
-    const kind = String(cta?.kind || "none").trim().toLowerCase();
-    if (!kind || kind === "none") return;
+  const handlePressAction = useCallback(async (item, action) => {
+    if (!action) return;
 
     if (!item?.is_read && item?.notice_id) {
       await markReadForIds([String(item.notice_id)]);
     }
 
-    if (kind === "url") {
-      const url = String(cta?.url || "").trim();
-      if (!url) return;
-      try {
-        await Linking.openURL(url);
-      } catch (e) {
-        Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
-      }
-      return;
-    }
-
-    if (kind === "internal_route") {
-      const routeName = String(cta?.route || "").trim();
-      if (!routeName) return;
-      const params = cta?.params && typeof cta.params === "object" ? cta.params : {};
-      const opened = openInternalRoute(routeName, params);
-      if (!opened) {
-        Alert.alert("お知らせ", "遷移先を開けませんでした。");
-      }
+    try {
+      await openNoticeAction(action, { openInternalRoute });
+    } catch (e) {
+      Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
     }
   }, [markReadForIds, openInternalRoute]);
 
@@ -274,10 +257,8 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   const renderItem = useCallback(({ item }) => {
     const noticeId = String(item?.notice_id || "");
     const expanded = expandedId === noticeId;
-    const cta = normalizeCta(item?.cta);
-    const ctaLabel = String(cta?.label || "").trim();
-    const hasCta = !!ctaLabel && String(cta?.kind || "none").trim().toLowerCase() !== "none";
     const category = String(item?.category || "").trim();
+    const buttonActions = getNoticeButtonActions(item?.actions, item?.cta);
 
     return (
       <View style={styles.itemCard}>
@@ -306,9 +287,14 @@ export default function NoticeHistoryScreen({ navigation, route }) {
 
         {expanded ? (
           <View style={styles.itemBody}>
-            <Text style={styles.bodyText}>
-              {String(item?.body || "").trim() || "本文はありません。"}
-            </Text>
+            <NoticeRichText
+              body={String(item?.body || "").trim() || "本文はありません。"}
+              bodySegments={item?.body_segments}
+              actions={item?.actions}
+              onPressAction={(action) => handlePressAction(item, action)}
+              textStyle={styles.bodyText}
+              linkStyle={styles.bodyLinkText}
+            />
 
             <View style={styles.metaBlock}>
               <Text style={styles.metaText}>
@@ -327,22 +313,25 @@ export default function NoticeHistoryScreen({ navigation, route }) {
               </View>
             ) : null}
 
-            {hasCta ? (
-              <View style={styles.ctaButtonWrap}>
+            {buttonActions.map((action, index) => (
+              <View
+                key={`${String(action?.key || action?.label || index)}-${index}`}
+                style={styles.ctaButtonWrap}
+              >
                 <CocolonButton
                   variant="secondary"
-                  onPress={() => handlePressCta(item)}
-                  accessibilityLabel={ctaLabel}
+                  onPress={() => handlePressAction(item, action)}
+                  accessibilityLabel={String(action?.label || "")}
                 >
-                  {ctaLabel}
+                  {String(action?.label || "")}
                 </CocolonButton>
               </View>
-            ) : null}
+            ))}
           </View>
         ) : null}
       </View>
     );
-  }, [colors.TEXT_SUBTLE, expandedId, handlePressCta, handleToggleItem, styles]);
+  }, [colors.TEXT_SUBTLE, expandedId, handlePressAction, handleToggleItem, styles]);
 
   const header = useMemo(() => (
     <View>
@@ -550,6 +539,11 @@ function createStyles(COLORS) {
       fontSize: 14,
       lineHeight: 22,
       color: COLORS.TEXT_ON_LIGHT,
+    },
+    bodyLinkText: {
+      color: COLORS.TITLE_GOLD,
+      textDecorationLine: "underline",
+      fontWeight: "700",
     },
     metaBlock: {
       marginTop: 12,

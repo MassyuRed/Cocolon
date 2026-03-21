@@ -887,6 +887,7 @@ function createStyles(COLORS, ui) {
     },
     planSubtitleHighlighted: {
       color: COLORS.TITLE_GOLD,
+      fontSize: font.button ?? 15,
       fontWeight: "900",
     },
     recommendBadge: {

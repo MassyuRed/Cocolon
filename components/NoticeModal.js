@@ -11,7 +11,9 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { getNoticeButtonActions } from "../lib/noticeActionRuntime";
 import CocolonButton from "./CocolonButton";
+import NoticeRichText from "./NoticeRichText";
 
 function formatNoticeDateLabel(value) {
   const raw = String(value || "").trim();
@@ -34,16 +36,18 @@ export default function NoticeModal({
   loading = false,
   onClose,
   onOpenHistory,
-  onPressCta,
+  onPressAction,
 }) {
   const { colors } = useTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
   const title = String(notice?.title || "お知らせ").trim() || "お知らせ";
   const body = String(notice?.body || "").trim();
-  const ctaLabel = String(notice?.cta?.label || "").trim();
-  const hasCta =
-    !!ctaLabel && String(notice?.cta?.kind || "none").trim().toLowerCase() !== "none";
   const publishedLabel = formatNoticeDateLabel(notice?.published_at);
+  const buttonActions = useMemo(
+    () => getNoticeButtonActions(notice?.actions, notice?.cta),
+    [notice?.actions, notice?.cta],
+  );
+  const hasButtonActions = buttonActions.length > 0;
 
   return (
     <Modal
@@ -85,26 +89,34 @@ export default function NoticeModal({
                 contentContainerStyle={styles.bodyScrollContent}
                 showsVerticalScrollIndicator={false}
               >
-                <Text style={styles.bodyText}>
-                  {body || "現在表示できる本文はありません。"}
-                </Text>
+                <NoticeRichText
+                  body={body || "現在表示できる本文はありません。"}
+                  bodySegments={notice?.body_segments}
+                  actions={notice?.actions}
+                  onPressAction={onPressAction}
+                  textStyle={styles.bodyText}
+                  linkStyle={styles.bodyLinkText}
+                />
               </ScrollView>
 
-              {hasCta ? (
-                <View style={styles.buttonBlock}>
+              {buttonActions.map((action, index) => (
+                <View
+                  key={`${String(action?.key || action?.label || index)}-${index}`}
+                  style={styles.buttonBlock}
+                >
                   <CocolonButton
-                    variant="primary"
-                    onPress={onPressCta}
-                    accessibilityLabel={ctaLabel}
+                    variant={index === 0 ? "primary" : "secondary"}
+                    onPress={() => onPressAction?.(action)}
+                    accessibilityLabel={String(action?.label || "")}
                   >
-                    {ctaLabel}
+                    {String(action?.label || "")}
                   </CocolonButton>
                 </View>
-              ) : null}
+              ))}
 
               <View style={styles.buttonBlock}>
                 <CocolonButton
-                  variant={hasCta ? "secondary" : "primary"}
+                  variant={hasButtonActions ? "secondary" : "primary"}
                   onPress={onOpenHistory}
                   accessibilityLabel="お知らせ履歴を開く"
                 >
@@ -202,6 +214,11 @@ function createStyles(COLORS) {
       fontSize: 14,
       lineHeight: 22,
       color: COLORS.TEXT_ON_LIGHT,
+    },
+    bodyLinkText: {
+      color: COLORS.TITLE_GOLD,
+      textDecorationLine: "underline",
+      fontWeight: "700",
     },
     buttonBlock: {
       marginTop: 12,

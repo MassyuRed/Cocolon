@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   useWindowDimensions,
@@ -13,8 +14,13 @@ const DEFAULT_DIM_OPACITY = 0.62;
 const DEFAULT_TARGET_PADDING = 8;
 const DEFAULT_TARGET_RADIUS = 16;
 const DEFAULT_CARD_SIDE_MARGIN = 16;
-const DEFAULT_CARD_BOTTOM_MARGIN = 16;
-const DEFAULT_CARD_FALLBACK_HEIGHT = 188;
+const DEFAULT_CARD_BOTTOM_MARGIN = 8;
+const DEFAULT_CARD_EDGE_OFFSET = 8;
+const DEFAULT_CARD_FALLBACK_HEIGHT = 168;
+const DEFAULT_CARD_MIN_HEIGHT = 72;
+const DEFAULT_CARD_MAX_HEIGHT = 220;
+const DEFAULT_CARD_MAX_HEIGHT_RATIO = 0.34;
+const DEFAULT_CARD_PLACEMENT_SWAP_BUFFER = 16;
 const DEFAULT_ACTION_HINT = "スポットライトの場所を押してください";
 const DEFAULT_NEXT_LABEL = "次へ";
 const DEFAULT_TARGET_TOUCH_PADDING = 8;
@@ -23,6 +29,105 @@ const DEFAULT_TARGET_GAP = 12;
 const DEFAULT_MEASURE_TOLERANCE = 0.75;
 const DEFAULT_SETTLE_FRAMES = 2;
 const DEFAULT_MAX_MEASURE_ATTEMPTS = 3;
+
+function getCardAnchors({
+  safeTop,
+  safeBottom,
+  cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
+}) {
+  return {
+    topBase: Math.max(0, Number(safeTop) || 0) + DEFAULT_CARD_EDGE_OFFSET,
+    bottomOffset:
+      Math.max(0, Number(safeBottom) || 0) +
+      Math.max(0, Number(cardBottomMargin) || DEFAULT_CARD_BOTTOM_MARGIN),
+  };
+}
+
+function getCardAvailableHeights({
+  holeRect,
+  screenHeight,
+  cardTopBase,
+  cardBottom,
+  targetGap = DEFAULT_TARGET_GAP,
+}) {
+  const resolvedScreenHeight = Math.max(0, Number(screenHeight) || 0);
+  const resolvedCardTopBase = Math.max(0, Number(cardTopBase) || 0);
+  const resolvedCardBottom = Math.max(0, Number(cardBottom) || 0);
+  const bottomAnchorY = Math.max(0, resolvedScreenHeight - resolvedCardBottom);
+  const fullHeight = Math.max(0, bottomAnchorY - resolvedCardTopBase);
+
+  if (!holeRect) {
+    return {
+      fullHeight,
+      topHeight: fullHeight,
+      bottomHeight: fullHeight,
+    };
+  }
+
+  const gap = Math.max(8, Number(targetGap) || DEFAULT_TARGET_GAP);
+
+  return {
+    fullHeight,
+    topHeight: Math.max(0, holeRect.y - resolvedCardTopBase - gap),
+    bottomHeight: Math.max(0, bottomAnchorY - holeRect.bottom - gap),
+  };
+}
+
+function getCardHeightCap(screenHeight) {
+  const compactMaxHeight = Math.floor(
+    Math.max(0, Number(screenHeight) || 0) * DEFAULT_CARD_MAX_HEIGHT_RATIO
+  );
+
+  return Math.max(
+    DEFAULT_CARD_MIN_HEIGHT,
+    Math.min(DEFAULT_CARD_MAX_HEIGHT, compactMaxHeight || DEFAULT_CARD_MAX_HEIGHT)
+  );
+}
+
+function resolveCardPlacement({
+  preferredPlacement,
+  holeRect,
+  availableTopHeight,
+  availableBottomHeight,
+  estimatedCardHeight,
+  minUsableHeight = DEFAULT_CARD_MIN_HEIGHT,
+}) {
+  const preferred =
+    preferredPlacement === "top" || preferredPlacement === "bottom"
+      ? preferredPlacement
+      : availableBottomHeight >= availableTopHeight
+        ? "bottom"
+        : "top";
+
+  if (!holeRect) {
+    return preferred;
+  }
+
+  const alternate = preferred === "top" ? "bottom" : "top";
+  const preferredHeight = preferred === "top" ? availableTopHeight : availableBottomHeight;
+  const alternateHeight = alternate === "top" ? availableTopHeight : availableBottomHeight;
+  const comfortableHeight = Math.min(
+    Math.max(0, Number(estimatedCardHeight) || DEFAULT_CARD_FALLBACK_HEIGHT),
+    Math.max(0, Number(minUsableHeight) || DEFAULT_CARD_MIN_HEIGHT)
+  );
+
+  if (preferredHeight >= comfortableHeight) {
+    return preferred;
+  }
+
+  if (alternateHeight >= comfortableHeight) {
+    return alternate;
+  }
+
+  if (
+    preferredPlacement !== "auto" &&
+    preferredHeight >= alternateHeight - DEFAULT_CARD_PLACEMENT_SWAP_BUFFER
+  ) {
+    return preferred;
+  }
+
+  return alternateHeight > preferredHeight ? alternate : preferred;
+}
 
 function isFiniteNumber(value) {
   return Number.isFinite(Number(value));
@@ -356,20 +461,27 @@ function buildFallbackCardRect({
   cardHeight,
 }) {
   const fallbackPlacement = cardPlacement === "top" ? "top" : "bottom";
-  const cardBottom = Math.max(safeBottom, cardBottomMargin) + 8;
-  const cardTopBase = Math.max(safeTop, 12) + 12;
+  const { topBase, bottomOffset } = getCardAnchors({
+    safeTop,
+    safeBottom,
+    cardBottomMargin,
+  });
+  const fallbackCardHeight = Math.min(
+    Number(cardHeight) || DEFAULT_CARD_FALLBACK_HEIGHT,
+    getCardHeightCap(overlayHeight)
+  );
   const top =
     fallbackPlacement === "top"
-      ? cardTopBase
-      : Math.max(cardTopBase, overlayHeight - cardBottom - cardHeight);
+      ? topBase
+      : Math.max(topBase, overlayHeight - bottomOffset - fallbackCardHeight);
 
   return {
     x: 0,
     y: top,
     width: 1,
-    height: cardHeight,
+    height: fallbackCardHeight,
     right: 1,
-    bottom: top + cardHeight,
+    bottom: top + fallbackCardHeight,
   };
 }
 
@@ -596,38 +708,76 @@ export default function TutorialOverlay({
   const buttonTextColor = colors?.ACCENT_TEXT || "#FFFFFF";
   const stepPillBackground = colors?.PANEL_BG || "rgba(255,255,255,0.08)";
 
-  const cardBottom = Math.max(insets.bottom, cardBottomMargin) + 8;
-  const cardTopBase = Math.max(insets.top, 12) + 12;
+  const { topBase: cardTopBase, bottomOffset: cardBottom } = useMemo(
+    () =>
+      getCardAnchors({
+        safeTop: insets.top,
+        safeBottom: insets.bottom,
+        cardBottomMargin,
+      }),
+    [insets.top, insets.bottom, cardBottomMargin]
+  );
 
-  const shouldMoveCardToTop = useMemo(() => {
-    if (!holeRect) return cardPlacement === "top";
-    if (cardPlacement === "top") return true;
-    if (cardPlacement === "bottom") {
-      const cardTopIfBottom = screenHeight - cardBottom - cardHeight;
-      return holeRect.bottom > cardTopIfBottom - 12;
-    }
-    const cardTopIfBottom = screenHeight - cardBottom - cardHeight;
-    return holeRect.bottom > cardTopIfBottom - 12;
-  }, [holeRect, cardPlacement, screenHeight, cardBottom, cardHeight]);
+  const { topHeight: topAvailableHeight, bottomHeight: bottomAvailableHeight } = useMemo(
+    () =>
+      getCardAvailableHeights({
+        holeRect,
+        screenHeight,
+        cardTopBase,
+        cardBottom,
+      }),
+    [holeRect, screenHeight, cardTopBase, cardBottom]
+  );
 
-  const resolvedCardTop = shouldMoveCardToTop
-    ? cardTopBase
-    : Math.max(cardTopBase, screenHeight - cardBottom - cardHeight);
+  const softCardHeightCap = useMemo(() => getCardHeightCap(screenHeight), [screenHeight]);
+  const minimumVisibleCardHeight = effectiveShowPrimaryButton ? 116 : 72;
+
+  const resolvedCardPlacement = useMemo(
+    () =>
+      resolveCardPlacement({
+        preferredPlacement: cardPlacement,
+        holeRect,
+        availableTopHeight: topAvailableHeight,
+        availableBottomHeight: bottomAvailableHeight,
+        estimatedCardHeight: softCardHeightCap,
+        minUsableHeight: minimumVisibleCardHeight,
+      }),
+    [
+      cardPlacement,
+      holeRect,
+      topAvailableHeight,
+      bottomAvailableHeight,
+      softCardHeightCap,
+      minimumVisibleCardHeight,
+    ]
+  );
+
+  const resolvedAvailableHeight =
+    resolvedCardPlacement === "top" ? topAvailableHeight : bottomAvailableHeight;
+  const resolvedCardMaxHeight = holeRect
+    ? Math.max(1, Math.min(resolvedAvailableHeight, softCardHeightCap))
+    : softCardHeightCap;
+  const measuredCardHeight = Math.min(cardHeight, resolvedCardMaxHeight);
+  const resolvedCardTop =
+    resolvedCardPlacement === "top"
+      ? cardTopBase
+      : Math.max(cardTopBase, screenHeight - cardBottom - measuredCardHeight);
   const resolvedCardRect = useMemo(
     () => ({
       x: cardSideMargin,
       y: resolvedCardTop,
       width: Math.max(0, screenWidth - cardSideMargin * 2),
-      height: cardHeight,
+      height: measuredCardHeight,
       right: Math.max(cardSideMargin, screenWidth - cardSideMargin),
-      bottom: resolvedCardTop + cardHeight,
+      bottom: resolvedCardTop + measuredCardHeight,
     }),
-    [cardSideMargin, resolvedCardTop, screenWidth, cardHeight]
+    [cardSideMargin, resolvedCardTop, screenWidth, measuredCardHeight]
   );
 
-  const cardPositionStyle = shouldMoveCardToTop
-    ? { top: cardTopBase }
-    : { bottom: cardBottom };
+  const cardPositionStyle =
+    resolvedCardPlacement === "top"
+      ? { top: cardTopBase }
+      : { bottom: cardBottom };
 
   const shouldUseProxyTarget =
     visible && mode === "action" && typeof onTargetPress === "function" && !!holeRect;
@@ -719,9 +869,9 @@ export default function TutorialOverlay({
             overlayWidth: screenWidth,
             overlayHeight: screenHeight,
             overlayWindowRect,
-            cardHeight,
+            cardHeight: measuredCardHeight,
             cardRect: resolvedCardRect,
-            cardPlacement: shouldMoveCardToTop ? "top" : "bottom",
+            cardPlacement: resolvedCardPlacement,
             holeRect,
             safeInsets: {
               top: insets.top,
@@ -737,9 +887,9 @@ export default function TutorialOverlay({
     onMetricsChange,
     screenWidth,
     screenHeight,
-    cardHeight,
+    measuredCardHeight,
     resolvedCardRect,
-    shouldMoveCardToTop,
+    resolvedCardPlacement,
     holeRect,
     insets.top,
     insets.right,
@@ -885,6 +1035,7 @@ export default function TutorialOverlay({
           {
             left: cardSideMargin,
             right: cardSideMargin,
+            maxHeight: resolvedCardMaxHeight,
             backgroundColor: cardBackgroundColor,
             borderColor: cardBorderColor,
           },
@@ -897,45 +1048,54 @@ export default function TutorialOverlay({
           }
         }}
       >
-        {typeof step === "number" && typeof totalSteps === "number" ? (
-          <View
-            style={[
-              styles.stepPill,
-              {
-                backgroundColor: stepPillBackground,
-                borderColor: cardBorderColor,
-              },
-            ]}
-          >
-            <Text style={[styles.stepText, { color: subtleColor }]}>Step {step} / {totalSteps}</Text>
-          </View>
-        ) : null}
+        <ScrollView
+          style={styles.cardScroll}
+          contentContainerStyle={styles.cardScrollContent}
+          bounces={false}
+          alwaysBounceVertical={false}
+          nestedScrollEnabled
+          showsVerticalScrollIndicator={cardHeight >= resolvedCardMaxHeight - 1}
+        >
+          {typeof step === "number" && typeof totalSteps === "number" ? (
+            <View
+              style={[
+                styles.stepPill,
+                {
+                  backgroundColor: stepPillBackground,
+                  borderColor: cardBorderColor,
+                },
+              ]}
+            >
+              <Text style={[styles.stepText, { color: subtleColor }]}>Step {step} / {totalSteps}</Text>
+            </View>
+          ) : null}
 
-        {title ? <Text style={[styles.title, { color: titleColor }]}>{title}</Text> : null}
+          {title ? <Text style={[styles.title, { color: titleColor }]}>{title}</Text> : null}
 
-        {message ? (
-          <Text style={[styles.message, { color: bodyColor }]}>{message}</Text>
-        ) : null}
+          {message ? (
+            <Text style={[styles.message, { color: bodyColor }]}>{message}</Text>
+          ) : null}
 
-        {mode === "action" ? (
-          <View
-            style={[
-              styles.actionHintWrap,
-              {
-                backgroundColor: stepPillBackground,
-                borderColor: cardBorderColor,
-              },
-            ]}
-          >
-            <Text style={[styles.actionHintText, { color: subtleColor }]}> 
-              {actionHint || DEFAULT_ACTION_HINT}
-            </Text>
-          </View>
-        ) : null}
+          {mode === "action" ? (
+            <View
+              style={[
+                styles.actionHintWrap,
+                {
+                  backgroundColor: stepPillBackground,
+                  borderColor: cardBorderColor,
+                },
+              ]}
+            >
+              <Text style={[styles.actionHintText, { color: subtleColor }]}> 
+                {actionHint || DEFAULT_ACTION_HINT}
+              </Text>
+            </View>
+          ) : null}
 
-        {footerText ? (
-          <Text style={[styles.footerText, { color: subtleColor }]}>{footerText}</Text>
-        ) : null}
+          {footerText ? (
+            <Text style={[styles.footerText, { color: subtleColor }]}>{footerText}</Text>
+          ) : null}
+        </ScrollView>
 
         {effectiveShowPrimaryButton ? (
           <Pressable
@@ -989,23 +1149,32 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "absolute",
-    borderRadius: 22,
+    borderRadius: 20,
     borderWidth: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+    overflow: "hidden",
     shadowColor: "#000",
-    shadowOpacity: 0.18,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 14,
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 12,
+  },
+  cardScroll: {
+    flexGrow: 0,
+    flexShrink: 1,
+    minHeight: 0,
+  },
+  cardScrollContent: {
+    paddingBottom: 2,
   },
   stepPill: {
     alignSelf: "flex-start",
     borderRadius: 999,
     borderWidth: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    marginBottom: 10,
+    paddingHorizontal: 9,
+    paddingVertical: 3,
+    marginBottom: 8,
   },
   stepText: {
     fontSize: 11,
@@ -1013,45 +1182,45 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   title: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: "900",
-    lineHeight: 22,
+    lineHeight: 20,
   },
   message: {
-    marginTop: 8,
-    fontSize: 14,
-    lineHeight: 21,
+    marginTop: 6,
+    fontSize: 13,
+    lineHeight: 19,
     fontWeight: "500",
   },
   actionHintWrap: {
-    marginTop: 14,
-    borderRadius: 14,
+    marginTop: 12,
+    borderRadius: 12,
     borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
   },
   actionHintText: {
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 11,
+    lineHeight: 16,
     fontWeight: "700",
   },
   footerText: {
-    marginTop: 10,
+    marginTop: 8,
     fontSize: 12,
-    lineHeight: 18,
+    lineHeight: 17,
   },
   primaryButton: {
-    marginTop: 16,
-    minHeight: 48,
+    marginTop: 12,
+    minHeight: 42,
     borderRadius: 999,
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 18,
+    paddingHorizontal: 16,
   },
   primaryButtonText: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "900",
-    letterSpacing: 0.4,
+    letterSpacing: 0.3,
   },
 });
