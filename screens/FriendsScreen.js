@@ -469,7 +469,7 @@ export default function FriendsScreen(props) {
           step: STEP_FRIENDS_NOTIFICATION,
           title: "フレンド通知",
           message: tutorialNotificationShown
-            ? `${tutorialMockFriendName}さんが感情を入力しました。\n通知とログを確認してみましょう。`
+            ? `${tutorialMockFriendName}さんが感情を入力しました。\nアプリの通知をオンにしていると、このように通知が届きます。`
             : `${tutorialMockFriendName}さんからの通知を準備しています。\n通知が届くまでこのままお待ちください。`,
           mode: "info",
           nextLabel: "次へ",

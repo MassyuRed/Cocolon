@@ -1184,7 +1184,7 @@ export default function MyModelScreen({ route } = {}) {
           <Text style={styles.qnaIntroText}>
             {isTutorialMode
               ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
-              : "こちらで自分とフォローしているユーザーが、\n作成したReflection（一問一答内容）を閲覧できます。"}
+              : "自分とフォローしているユーザーが、\n作成したReflection（一問一答内容）を閲覧できます。"}
           </Text>
 
           <View style={styles.actions}>
@@ -1215,7 +1215,7 @@ export default function MyModelScreen({ route } = {}) {
           <Text style={styles.recoSummaryText}>
             {isTutorialMode
               ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionが作られる流れを体験します。`
-              : "こちらで一問一答に答えることができます。\n答えた一問一答内容をReflectionと呼びます。\n作成したReflection数はアカウントページで確認できます。"}
+              : "一問一答に答えることができます。\n答えた一問一答内容をReflectionと呼びます。\n作成したReflection数はアカウントページで確認できます。"}
           </Text>
 
           <View ref={createButtonRef} collapsable={false}>
