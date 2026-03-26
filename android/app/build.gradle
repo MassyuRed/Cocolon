@@ -1,86 +1,87 @@
 plugins {
   id 'com.android.application'
-  id 'com.facebook.react'       // RN 0.73 の Gradle プラグイン
   id 'org.jetbrains.kotlin.android'
+  id 'com.facebook.react'
 }
 
-/* react { jsEngine = "jsc" } は使わない（未知プロパティになるので削除済み） */
-
-ext.react = [ enableHermes: true ]   // 互換のため残してOK（実切替は gradle.properties）
-
-// Autolink（PackageList 生成）
-apply from: "$rootDir/../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"
-applyNativeModulesAppBuildGradle(project)
-
+react {
+  autolinkLibrariesWithApp()
+}
 
 // --- Release signing (Emlis) ---
 def keystoreProperties = new java.util.Properties()
-def keystorePropertiesFile = rootProject.file("key.properties")
+def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
   keystoreProperties.load(new java.io.FileInputStream(keystorePropertiesFile))
 } else {
-  throw new GradleException("Missing key.properties for release signing. Create android/key.properties before building a release.")
+  throw new GradleException('Missing key.properties for release signing. Create android/key.properties before building a release.')
 }
 
 android {
-  namespace "com.anonymous.cocolonmvp"
-
-  // ルートの ext を優先して拾う（未設定ならフォールバック）
-  compileSdkVersion 35
+  namespace 'com.anonymous.cocolonmvp'
+  ndkVersion rootProject.ext.ndkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+  compileSdk rootProject.ext.compileSdkVersion
 
   defaultConfig {
-    applicationId "com.anonymous.cocolonmvp"
-    minSdkVersion 24
-    targetSdkVersion 35
-    versionCode 10
-    versionName "1.0.0"
+    applicationId 'com.anonymous.cocolonmvp'
+    minSdk rootProject.ext.minSdkVersion
+    targetSdk rootProject.ext.targetSdkVersion
+    versionCode 14
+    versionName '1.0.0'
 
-    // NewArch/Hermes は明示的に無効（BuildConfig 参照用）
-    buildConfigField "boolean", "NEW_ARCH_ENABLED", "false"
-    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
-    buildConfigField "boolean", "IS_HERMES_ENABLED", "true"
-
+    buildConfigField 'boolean', 'NEW_ARCH_ENABLED', 'false'
+    buildConfigField 'boolean', 'IS_NEW_ARCHITECTURE_ENABLED', 'false'
+    buildConfigField 'boolean', 'IS_HERMES_ENABLED', 'true'
 
     multiDexEnabled true
     missingDimensionStrategy 'store', 'play'
-    // （必要なら）ここに ndk { abiFilters "arm64-v8a" } を追加して 64bit のみに絞れる
+
+    ndk {
+      abiFilters 'arm64-v8a', 'x86_64'
+    }
+
+    externalNativeBuild {
+      cmake {
+        arguments '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON'
+      }
+    }
   }
 
   signingConfigs {
     debug {
-      storeFile file("debug.keystore")
-      storePassword "android"
-      keyAlias "androiddebugkey"
-      keyPassword "android"
+      storeFile file('debug.keystore')
+      storePassword 'android'
+      keyAlias 'androiddebugkey'
+      keyPassword 'android'
     }
-  
+
     release {
-      storeFile file(keystoreProperties["storeFile"])
-      storePassword keystoreProperties["storePassword"]
-      keyAlias keystoreProperties["keyAlias"]
-      keyPassword keystoreProperties["keyPassword"]
+      storeFile file(keystoreProperties['storeFile'])
+      storePassword keystoreProperties['storePassword']
+      keyAlias keystoreProperties['keyAlias']
+      keyPassword keystoreProperties['keyPassword']
     }
   }
 
   buildTypes {
     debug {
       signingConfig signingConfigs.debug
-      // ▼ Blur のランタイム例外（R8最適化由来）を避けるため Debug は難読化オフ
       minifyEnabled false
       shrinkResources false
-      proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
     release {
       signingConfig signingConfigs.release
       minifyEnabled true
       shrinkResources false
-      proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
 
-  buildFeatures { buildConfig true }
+  buildFeatures {
+    buildConfig true
+  }
 
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_17
@@ -88,15 +89,13 @@ android {
     coreLibraryDesugaringEnabled true
   }
 
-  kotlinOptions { jvmTarget = "17" }
+  kotlinOptions {
+    jvmTarget = '17'
+  }
 
-  // AGP8 準拠の packaging 設定（JNI/Resources を分離）
   packagingOptions {
     jniLibs {
-      // Unity と他依存で衝突しがちな c++ 共有ライブラリを最小 pickFirst
       pickFirsts += ['**/libc++_shared.so']
-      // Unity 側で本当に必要な場合のみ有効化：
-      // useLegacyPackaging true
     }
     resources {
       excludes += [
@@ -110,35 +109,23 @@ android {
 repositories {
   google()
   mavenCentral()
-  maven { url 'https://jitpack.io' }                    // BlurView は JitPack から取得
+  maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-  // RN 本体（Hermes を含む標準構成）
-  implementation("com.facebook.react:react-android:0.73.9") {
-  }
+  implementation('com.facebook.react:react-android')
+  implementation('com.facebook.react:hermes-android')
 
-  coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.0.4"
-  implementation "androidx.core:core-splashscreen:1.0.1"
-  implementation "com.google.android.material:material:1.12.0"
-  implementation "androidx.multidex:multidex:2.0.1"
-  implementation "androidx.appcompat:appcompat:1.7.0"
+  coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+  implementation 'androidx.core:core-splashscreen:1.0.1'
+  implementation 'com.google.android.material:material:1.12.0'
+  implementation 'androidx.multidex:multidex:2.0.1'
+  implementation 'androidx.appcompat:appcompat:1.7.0'
 
-
-  // JSC（Hermes無効時に必要）
-
-  // ★ BlurView を 1.6.6 に厳格固定（JitPack 座標）
-  implementation("com.github.Dimezis:BlurView") {
+  implementation('com.github.Dimezis:BlurView') {
     version { strictly 'version-1.6.6' }
   }
-
-  // 手動リンクはしない（Autolinkに任せる）
-  // implementation project(':react-native-community_blur')
-  // implementation project(':react-native-linear-gradient')
 }
 
-// Vector Icons のフォントを確実に同梱（タブアイコン用）
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-
-// Firebase（google-services.json の処理）
+apply from: '../../node_modules/react-native-vector-icons/fonts.gradle'
 apply plugin: 'com.google.gms.google-services'

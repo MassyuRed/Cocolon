@@ -1,42 +1,43 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-// ▼ 全モジュールに採用させる SDK レベルをルートで強制定義（safeExtGet が拾う）
-ext {
-    compileSdkVersion = 34
-    targetSdkVersion  = 34
-    minSdkVersion     = 24
-}
-
 buildscript {
     ext {
-        kotlin_version = '1.9.22'
+        buildToolsVersion = "35.0.0"
+        minSdkVersion = 24
+        compileSdkVersion = 35
+        targetSdkVersion = 35
+        ndkVersion = "27.1.12297006"
+        kotlinVersion = "2.0.21"
     }
     repositories {
         google()
         mavenCentral()
-        // Gradle Plugin Portal は保険で残す（不要なら消してもOK）
         gradlePluginPortal()
-        // ❌ React Native AAR のための node_modules 参照は settings.gradle に集約したのでここでは不要
-        // maven { url("$rootDir/../node_modules/react-native/android") }
     }
     dependencies {
-        // ✅ Android Gradle Plugin
-        classpath("com.android.tools.build:gradle:8.3.2")
-        // ✅ Kotlin Gradle Plugin
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}")
-        // ✅ Google Services Gradle Plugin（Firebase）
+        classpath("com.android.tools.build:gradle:8.9.0")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("com.google.gms:google-services:4.4.4")
-        // ❌ React Native Gradle Plugin は未使用（classpath を追加しない）
     }
 }
 
-// ❌ Kotlin の jvmTarget はモジュール側（例: android/app/build.gradle）に記述する方針に統一
-// ここ（root）では指定しない。
-// 参考（app 側例）:
-// android {
-//   kotlinOptions { jvmTarget = "17" }
-//   compileOptions {
-//     sourceCompatibility JavaVersion.VERSION_17
-//     targetCompatibility JavaVersion.VERSION_17
-//   }
-// }
+apply plugin: "com.facebook.react.rootproject"
+
+subprojects { subproject ->
+    if (subproject.name == "react-native-reanimated") {
+        subproject.afterEvaluate {
+            def androidExt = subproject.extensions.findByName("android")
+            if (androidExt != null) {
+                androidExt.defaultConfig {
+                    externalNativeBuild {
+                        cmake {
+                            arguments "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                            cppFlags "-Wno-error=vla-cxx-extension", "-Wno-error=deprecated-this-capture"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

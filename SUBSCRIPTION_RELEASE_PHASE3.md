@@ -34,7 +34,7 @@ Example body:
   "ios_bundle_id": "com.example.cocolon",
   "android_package_name": "com.example.cocolon",
   "plus_sku_ios": "cocolon_plus_monthly",
-  "plus_sku_android": "cocolon_plus_monthly",
+  "plus_sku_android": "emlis",
   "premium_sku_ios": "cocolon_premium_monthly",
   "premium_sku_android": "cocolon_premium_monthly",
   "terms_url": "https://example.com/terms",

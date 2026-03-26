@@ -610,6 +610,47 @@ function MainTabs() {
         const nestedIndex =
           typeof nestedState?.index === "number" ? nestedState.index : 0;
 
+        // MyWeb keeps part of its sub-navigation in screen-local state (`MyWebScreen.route`).
+        // Re-selecting the tab must therefore signal the screen to reset to "home",
+        // not only pop the navigator stack.
+        if (pressedTabName === "MyWeb") {
+          try {
+            e?.preventDefault?.();
+          } catch {
+            // noop
+          }
+
+          if (nestedIndex > 0) {
+            const targetKey = nestedState?.key;
+            if (targetKey) {
+              try {
+                navigation?.dispatch?.({
+                  ...StackActions.popToTop(),
+                  target: targetKey,
+                });
+              } catch {
+                // noop
+              }
+            } else {
+              try {
+                navigation?.navigate?.(pressedTabName);
+              } catch {
+                // noop
+              }
+            }
+          }
+
+          try {
+            navigation?.navigate?.("MyWeb", {
+              openDistributionHome: true,
+              openDistributionHomeAt: Date.now(),
+            });
+          } catch {
+            // noop
+          }
+          return;
+        }
+
         if (nestedIndex > 0) {
           try {
             e?.preventDefault?.();
@@ -784,7 +825,8 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
   const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
     try {
       const query = new URLSearchParams({
-        limit: String(LIMIT),
+        // Keep in sync with MyWebScreen.refreshUnreadBadges(): we only need existence.
+        limit: "1",
         include_self_structure: isPaid ? "true" : "false",
       }).toString();
       const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);

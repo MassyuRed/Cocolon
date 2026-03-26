@@ -1,17 +1,20 @@
 package com.anonymous.cocolonmvp;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 
-import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactNativeHost;
-import com.facebook.react.ReactPackage;
 import com.facebook.react.PackageList;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactHost;
+import com.facebook.react.ReactNativeHost;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
+import com.facebook.react.defaults.DefaultReactHost;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -23,11 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
-        protected List<ReactPackage> getPackages() {
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // 手動で追加が必要なパッケージがあればここに追加（現状はなし）
-          // 例: packages.add(new MyReactNativePackage());
-          return packages;
+        protected java.util.List<com.facebook.react.ReactPackage> getPackages() {
+          return new PackageList(this).getPackages();
         }
 
         @Override
@@ -42,7 +42,6 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected Boolean isHermesEnabled() {
-          // gradle.properties の hermesEnabled を BuildConfig に反映した値
           return BuildConfig.IS_HERMES_ENABLED;
         }
       };
@@ -53,13 +52,16 @@ public class MainApplication extends Application implements ReactApplication {
   }
 
   @Override
+  public ReactHost getReactHost() {
+    return DefaultReactHost.getDefaultReactHost(getApplicationContext(), getReactNativeHost());
+  }
+
+  @Override
   public void onCreate() {
     super.onCreate();
-    // RN 0.73 では必須ではないが、入っていても問題ない初期化
-    SoLoader.init(this, /* native exopackage */ false);
+    initSoLoaderCompat(this);
 
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-      // New Architecture 有効時のネイティブエントリポイント
       DefaultNewArchitectureEntryPoint.load();
     }
   }
@@ -67,5 +69,41 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
+  }
+
+  private static void initSoLoaderCompat(Context context) {
+    try {
+      Object mergedSoMappingInstance = getOpenSourceMergedSoMappingInstance();
+      if (mergedSoMappingInstance != null) {
+        for (Method method : SoLoader.class.getMethods()) {
+          if (!"init".equals(method.getName())) {
+            continue;
+          }
+
+          Class<?>[] parameterTypes = method.getParameterTypes();
+          if (parameterTypes.length == 2
+              && Context.class.isAssignableFrom(parameterTypes[0])
+              && !boolean.class.equals(parameterTypes[1])
+              && parameterTypes[1].isInstance(mergedSoMappingInstance)) {
+            method.invoke(null, context, mergedSoMappingInstance);
+            return;
+          }
+        }
+      }
+
+      SoLoader.init(context, false);
+    } catch (IllegalAccessException | InvocationTargetException e) {
+      throw new RuntimeException("Failed to initialize SoLoader", e);
+    }
+  }
+
+  private static Object getOpenSourceMergedSoMappingInstance() {
+    try {
+      Class<?> mergedSoMappingClass =
+          Class.forName("com.facebook.react.soloader.OpenSourceMergedSoMapping");
+      return mergedSoMappingClass.getField("INSTANCE").get(null);
+    } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+      return null;
+    }
   }
 }
