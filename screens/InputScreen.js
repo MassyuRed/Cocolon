@@ -545,6 +545,36 @@ const clearNoticeUi = useCallback(() => {
   setNoticeLoading(false);
 }, []);
 
+const homeBadgeLabel = useMemo(() => {
+  const m = typeof homeMonthCount === "number" ? homeMonthCount : null;
+  const w = typeof homeWeekCount === "number" ? homeWeekCount : null;
+  const s = typeof homeStreakDays === "number" ? homeStreakDays : null;
+
+  if (m != null && m >= 60) return "観測レジェンド";
+
+  if (s != null) {
+    if (s >= 30) return "連続30日観測";
+    if (s >= 14) return "連続2週間観測";
+    if (s >= 7) return "連続1週間観測";
+    if (s >= 3) return "連続3日観測";
+  }
+
+  if (w != null) {
+    if (w >= 7) return "今週コンプリート";
+    if (w >= 5) return "今週ハイペース";
+  }
+
+  if (m != null) {
+    if (m >= 30) return "観測マスター";
+    if (m >= 15) return "観測ルーティン";
+    if (m >= 7) return "一週間観測";
+    if (m >= 3) return "観測ウォームアップ";
+    if (m >= 1) return "初観測";
+  }
+
+  return null;
+}, [homeMonthCount, homeWeekCount, homeStreakDays]);
+
 const getInputPrefetchEntryAny = useCallback((key) => {
   try {
     return getPrefetchEntry?.("Input", key) || null;
