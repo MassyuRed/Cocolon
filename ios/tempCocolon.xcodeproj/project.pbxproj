@@ -505,6 +505,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1BA6D8E8E334903156780F37 /* Pods-tempCocolon.debug.xcconfig */;
 			buildSettings = {
+				APS_ENVIRONMENT = development;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -535,6 +536,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAEE91BEF34D0BC5CCE16F4B /* Pods-tempCocolon.release.xcconfig */;
 			buildSettings = {
+				APS_ENVIRONMENT = production;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
