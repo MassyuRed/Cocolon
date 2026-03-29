@@ -68,13 +68,7 @@ import {
 // Supabase (Friends unread badge)
 import { supabase } from "./lib/supabase";
 import { getCurrentUserId } from "./lib/user";
-import { apiGet, apiPost, apiFetch, invalidateApiCache } from "./lib/apiClient";
-import {
-  clearStartupSnapshotCache,
-  loadStartupSnapshotCache,
-  saveStartupSnapshotCache,
-  STARTUP_SNAPSHOT_LOCAL_TTL_MS,
-} from "./lib/startupSnapshotCache";
+import { apiGet, apiPost, apiFetch } from "./lib/apiClient";
 import UnreadBadge from "./components/UnreadBadge";
 
 const Tab = createBottomTabNavigator();
@@ -122,67 +116,6 @@ const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList
 
 // Frame line width
 const FRAME_BORDER_WIDTH = 2;
-const APP_STARTUP_API_CACHE_TTL_MS = 15 * 1000;
-const APP_STARTUP_BOOT_WAIT_MS = 650;
-const APP_STARTUP_CONTEXT_FRESH_MS = 20 * 1000;
-const APP_TIMEZONE_FALLBACK = "Asia/Tokyo";
-
-function isRecordObject(value) {
-  return !!value && typeof value === "object" && !Array.isArray(value);
-}
-
-function pickRecord(value) {
-  return isRecordObject(value) ? value : {};
-}
-
-function resolveStartupPayloadRoot(payload) {
-  const root = pickRecord(payload);
-  if (isRecordObject(root?.startup)) return root.startup;
-  return root;
-}
-
-function resolveStartupSectionMap(payload) {
-  const startupRoot = resolveStartupPayloadRoot(payload);
-  return pickRecord(startupRoot?.sections);
-}
-
-function hasStartupSection(payload, ...sectionNames) {
-  const sections = resolveStartupSectionMap(payload);
-  return sectionNames.some((name) => {
-    const key = String(name || "").trim();
-    return !!key && Object.prototype.hasOwnProperty.call(sections, key);
-  });
-}
-
-function resolveAppTimezoneName() {
-  try {
-    const formatter =
-      typeof Intl !== "undefined" && typeof Intl.DateTimeFormat === "function"
-        ? Intl.DateTimeFormat()
-        : null;
-    const options =
-      formatter && typeof formatter.resolvedOptions === "function"
-        ? formatter.resolvedOptions()
-        : null;
-    const timezoneName = options?.timeZone;
-    if (typeof timezoneName === "string" && timezoneName.trim()) {
-      return timezoneName.trim();
-    }
-  } catch {
-    // noop
-  }
-  return APP_TIMEZONE_FALLBACK;
-}
-
-function buildAppStartupPath(timezoneName = resolveAppTimezoneName()) {
-  const params = new URLSearchParams();
-  const normalizedTimezoneName = String(timezoneName || "").trim();
-  if (normalizedTimezoneName) {
-    params.set("timezone_name", normalizedTimezoneName);
-  }
-  const query = params.toString();
-  return query ? `/app/startup?${query}` : "/app/startup";
-}
 
 // ------------------------------------------------------------
 // Global fixed logo header (theme-aware)
@@ -604,8 +537,6 @@ function MainTabs() {
     // Prefetch cache
     getPrefetchEntryFresh,
     setPrefetch,
-    applyStartupSnapshot,
-    hasFreshStartup,
   } = useUnread();
 
   const { isPaid, loading: subscriptionLoading } = useSubscription();
@@ -884,10 +815,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
       return;
     }
 
-    const json = await apiGet("/mymodel/qna/unread-status", {
-      cacheTtlMs: 10 * 1000,
-      staleOk: true,
-    });
+    const json = await apiGet("/mymodel/qna/unread-status");
     const hasUnread =
       typeof json?.has_unread === "boolean"
         ? json.has_unread
@@ -916,10 +844,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         limit: "1",
         include_self_structure: isPaid ? "true" : "false",
       }).toString();
-      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`, {
-        cacheTtlMs: 10 * 1000,
-        staleOk: true,
-      });
+      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
       const unread = json?.unread_by_type || {};
       try {
         clearScope("MyWeb");
@@ -948,77 +873,26 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     }
   }, [isPaid, setUnreadGroup, clearScope]);
 
-  const refreshFriendsUnreadSummary = React.useCallback(async () => {
-    try {
-      const json = await apiGet("/friends/unread-status", {
-        cacheTtlMs: 5 * 1000,
-        staleOk: true,
-      });
-      setUnread("Friends", "feed", !!json?.feed_unread);
-      setUnread("Friends", "requests", !!json?.requests_unread);
-      return json && typeof json === "object" ? json : null;
-    } catch (e) {
-      console.warn("MainTabs: failed to refresh Friends unread summary", e);
-      setUnread("Friends", "feed", false);
-      setUnread("Friends", "requests", false);
-      return null;
-    }
-  }, [setUnread]);
-
   const refreshFriendsUnreadBadge = React.useCallback(async () => {
-    const json = await refreshFriendsUnreadSummary();
-    return !!json?.feed_unread;
-  }, [refreshFriendsUnreadSummary]);
+    try {
+      const json = await apiGet("/friends/unread-status");
+      setUnread("Friends", "feed", !!json?.feed_unread);
+    } catch (e) {
+      console.warn("MainTabs: failed to refresh Friends unread badge", e);
+      setUnread("Friends", "feed", false);
+    }
+  }, []);
 
 
   const refreshFriendRequestsUnreadBadge = React.useCallback(async () => {
-    const json = await refreshFriendsUnreadSummary();
-    return !!json?.requests_unread;
-  }, [refreshFriendsUnreadSummary]);
-
-  const refreshMyModelUnreadSummary = React.useCallback(async () => {
-    await Promise.all([
-      Promise.resolve()
-        .then(() => refreshMyModelCreateUnreadBadge())
-        .catch(() => null),
-      Promise.resolve()
-        .then(() => refreshMyModelReflectionsUnreadBadge())
-        .catch(() => null),
-    ]);
-  }, [refreshMyModelCreateUnreadBadge, refreshMyModelReflectionsUnreadBadge]);
-
-  const refreshMyWebUnreadSummary = React.useCallback(async () => {
-    return refreshMyWebReportsUnreadBadge();
-  }, [refreshMyWebReportsUnreadBadge]);
-
-  const fetchAppStartup = React.useCallback(
-    async ({ preferCache = true, forceRefresh = false, source = "background_refresh" } = {}) => {
-      const json = await apiGet(buildAppStartupPath(), {
-        cacheTtlMs: APP_STARTUP_API_CACHE_TTL_MS,
-        forceRefresh: !!forceRefresh,
-        staleOk: !!preferCache && !forceRefresh,
-      });
-
-      applyStartupSnapshot(json, {
-        source,
-        fetchedAt: Date.now(),
-        replaceUnreadScopes: true,
-        replacePrefetchScopes: false,
-      });
-
-      try {
-        const userId = await resolveCurrentUserId();
-        if (userId) {
-          await saveStartupSnapshotCache(userId, json);
-        }
-      } catch {
-        // noop
-      }
-
-      return json;
-    },
-    [applyStartupSnapshot]
-  );
+    try {
+      const json = await apiGet("/friends/unread-status");
+      setUnread("Friends", "requests", !!json?.requests_unread);
+    } catch (e) {
+      console.warn("MainTabs: failed to refresh Friend request unread badge", e);
+      setUnread("Friends", "requests", false);
+    }
+  }, []);
 
   const markFriendRequestsRead = React.useCallback(async () => {
     try {
@@ -1072,123 +946,6 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
       minute: "2-digit",
     });
   }, []);
-
-  const prefetchInputScreenData = React.useCallback(async () => {
-    try {
-      const tasks = [];
-
-      if (!hasFreshPrefetch("Input", "homeCounts", PREFETCH_MAX_AGE_MS)) {
-        tasks.push(
-          apiGet("/input/summary", {
-            cacheTtlMs: 10 * 1000,
-            staleOk: true,
-          })
-            .then((json) => {
-              if (json && typeof json === "object") {
-                setPrefetch("Input", "homeCounts", json);
-              }
-            })
-            .catch(() => null)
-        );
-      }
-
-      if (!hasFreshPrefetch("Input", "globalSummary", PREFETCH_MAX_AGE_MS)) {
-        tasks.push(
-          apiGet("/global_summary", {
-            cacheTtlMs: 15 * 1000,
-            staleOk: true,
-          })
-            .then((json) => {
-              if (json && typeof json === "object") {
-                setPrefetch("Input", "globalSummary", json);
-              }
-            })
-            .catch(() => null)
-        );
-      }
-
-      if (!hasFreshPrefetch("Input", "noticeCurrent", PREFETCH_MAX_AGE_MS)) {
-        tasks.push(
-          apiGet("/notices/current", {
-            cacheTtlMs: 15 * 1000,
-            staleOk: true,
-          })
-            .then((json) => {
-              if (json && typeof json === "object") {
-                setPrefetch("Input", "noticeCurrent", json);
-              }
-            })
-            .catch(() => null)
-        );
-      }
-
-      if (!hasFreshPrefetch("Input", "todayQuestionStatus", PREFETCH_MAX_AGE_MS)) {
-        tasks.push(
-          apiGet("/today-question/status", {
-            cacheTtlMs: 10 * 1000,
-            staleOk: true,
-          })
-            .then((json) => {
-              if (json && typeof json === "object") {
-                setPrefetch("Input", "todayQuestionStatus", json);
-              }
-            })
-            .catch(() => null)
-        );
-      }
-
-      if (tasks.length === 0) return;
-      await Promise.all(tasks);
-    } catch {
-      // noop
-    }
-  }, [hasFreshPrefetch, setPrefetch]);
-
-  const prefetchMyWebScreenData = React.useCallback(async () => {
-    try {
-      const tasks = [];
-
-      if (!hasFreshPrefetch("MyWeb", "unreadStatus", PREFETCH_MAX_AGE_MS)) {
-        const query = new URLSearchParams({
-          limit: "1",
-          include_self_structure: isPaid ? "true" : "false",
-        }).toString();
-
-        tasks.push(
-          apiGet(`/report-reads/myweb-unread-status?${query}`, {
-            cacheTtlMs: 10 * 1000,
-            staleOk: true,
-          })
-            .then((json) => {
-              if (json && typeof json === "object") {
-                setPrefetch("MyWeb", "unreadStatus", json);
-              }
-            })
-            .catch(() => null)
-        );
-      }
-
-      if (!hasFreshPrefetch("MyWeb", "homeSummary", PREFETCH_MAX_AGE_MS)) {
-        tasks.push(
-          apiGet("/myweb/home-summary", {
-            cacheTtlMs: 15 * 1000,
-            staleOk: true,
-          })
-            .then((json) => {
-              if (json && typeof json === "object") {
-                setPrefetch("MyWeb", "homeSummary", json);
-              }
-            })
-            .catch(() => null)
-        );
-      }
-
-      if (tasks.length === 0) return;
-      await Promise.all(tasks);
-    } catch {
-      // noop
-    }
-  }, [hasFreshPrefetch, isPaid, setPrefetch]);
 
   const prefetchFriendsFeed = React.useCallback(async () => {
     try {
@@ -1376,8 +1133,6 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
       __lastScreenPrefetchAtRef.current = now;
 
       const tasks = [
-        prefetchInputScreenData,
-        prefetchMyWebScreenData,
         prefetchFriendsFeed,
         prefetchFriendsManageData,
         prefetchMyModelScreenData,
@@ -1393,13 +1148,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     } catch {
       return Promise.resolve();
     }
-  }, [
-    prefetchInputScreenData,
-    prefetchMyWebScreenData,
-    prefetchFriendsFeed,
-    prefetchFriendsManageData,
-    prefetchMyModelScreenData,
-  ]);
+  }, [prefetchFriendsFeed, prefetchFriendsManageData, prefetchMyModelScreenData]);
 
   // ------------------------------------------------------------
   // Unread badge: prefetch template
@@ -1413,57 +1162,31 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
       // noop
     }
 
-    Promise.resolve()
-      .then(async () => {
-        let startupJson = null;
+    const tasks = [
+      refreshFriendsUnreadBadge,
+      refreshFriendRequestsUnreadBadge,
+      refreshMyModelCreateUnreadBadge,
+      refreshMyModelReflectionsUnreadBadge,
+      refreshMyWebReportsUnreadBadge,
+      runAllScreenPrefetch,
+    ];
 
-        try {
-          const startupFresh = hasFreshStartup(APP_STARTUP_CONTEXT_FRESH_MS);
-          startupJson = await fetchAppStartup({
-            preferCache: !!startupFresh,
-            forceRefresh: !startupFresh,
-            source: startupFresh ? "prefetch_cached" : "prefetch_refresh",
-          });
-        } catch (e) {
-          console.warn("MainTabs: failed to fetch /app/startup", e);
-        }
-
-        const tasks = [
-          !hasStartupSection(startupJson, "friends_unread")
-            ? refreshFriendsUnreadSummary
-            : null,
-          !hasStartupSection(startupJson, "mymodel_create_status", "mymodel_create") ||
-          !hasStartupSection(
-            startupJson,
-            "mymodel_reflections_unread",
-            "mymodel_reflections"
-          )
-            ? refreshMyModelUnreadSummary
-            : null,
-          !hasStartupSection(startupJson, "myweb_unread")
-            ? refreshMyWebUnreadSummary
-            : null,
-          runAllScreenPrefetch,
-        ].filter(Boolean);
-
-        await Promise.all(
-          tasks.map((fn) =>
-            Promise.resolve()
-              .then(() => fn())
-              .catch(() => null)
-          )
-        );
-      })
-      .catch(() => {
-        // noop
-      });
+    Promise.all(
+      tasks.map((fn) =>
+        Promise.resolve()
+          .then(() => fn())
+          .catch(() => null)
+      )
+    ).catch(() => {
+      // noop
+    });
   }, [
     pingActivityLogin,
-    hasFreshStartup,
-    fetchAppStartup,
-    refreshFriendsUnreadSummary,
-    refreshMyModelUnreadSummary,
-    refreshMyWebUnreadSummary,
+    refreshFriendsUnreadBadge,
+    refreshFriendRequestsUnreadBadge,
+    refreshMyModelCreateUnreadBadge,
+    refreshMyModelReflectionsUnreadBadge,
+    refreshMyWebReportsUnreadBadge,
     runAllScreenPrefetch,
   ]);
 
@@ -1635,7 +1358,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     const tick = async () => {
       if (cancelled) return;
       try {
-        await refreshFriendsUnreadSummary();
+        await refreshFriendRequestsUnreadBadge();
       } catch {
         // noop
       }
@@ -1652,7 +1375,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         // noop
       }
     };
-  }, [refreshFriendsUnreadSummary]);
+  }, [refreshFriendRequestsUnreadBadge]);
 
 
   // Friends を開いたら「既読扱い」にする（タブの赤●を消す）
@@ -1664,12 +1387,14 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
 
     (async () => {
       await markFriendsFeedRead();
-      await refreshFriendsUnreadSummary();
+      await refreshFriendsUnreadBadge();
+      await refreshFriendRequestsUnreadBadge();
     })();
   }, [
     activeRouteName,
     markFriendsFeedRead,
-    refreshFriendsUnreadSummary,
+    refreshFriendsUnreadBadge,
+    refreshFriendRequestsUnreadBadge,
   ]);
 
   return (
@@ -1891,7 +1616,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
               // UX: モーダルを開いた瞬間に赤●を消し、裏で既読化 → 再チェック
               setUnread("Friends", "requests", false);
               await markFriendRequestsRead();
-              await refreshFriendsUnreadSummary();
+              await refreshFriendRequestsUnreadBadge();
             }}
           />
         )}
@@ -2071,13 +1796,7 @@ function RootNavigator() {
     startTutorial,
     skipTutorial,
   } = useTutorial();
-  const { applyStartupSnapshot, resetAll } = useUnread();
 
-  const previousSessionUserIdRef = useRef(null);
-  const startupBootUserIdRef = useRef(null);
-  const startupBootRequestIdRef = useRef(0);
-  const [startupBootDone, setStartupBootDone] = useState(false);
-  const [startupBootTimedOut, setStartupBootTimedOut] = useState(false);
   const [tutorialFlagsLoaded, setTutorialFlagsLoaded] = useState(false);
   const [profileTutorialCompleted, setProfileTutorialCompleted] = useState(false);
   const [profileTutorialSkipped, setProfileTutorialSkipped] = useState(false);
@@ -2085,128 +1804,6 @@ function RootNavigator() {
     useState(false);
   const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
     useState(false);
-
-  useEffect(() => {
-    const currentUserId = String(session?.user?.id || "").trim() || null;
-    const previousUserId = previousSessionUserIdRef.current;
-
-    if (previousUserId && previousUserId !== currentUserId) {
-      resetAll();
-      try {
-        invalidateApiCache();
-      } catch {
-        // noop
-      }
-      clearStartupSnapshotCache(previousUserId).catch(() => null);
-    }
-
-    previousSessionUserIdRef.current = currentUserId;
-
-    if (!currentUserId) {
-      startupBootUserIdRef.current = null;
-      setStartupBootDone(false);
-      setStartupBootTimedOut(false);
-    }
-  }, [session?.user?.id, resetAll]);
-
-  useEffect(() => {
-    let cancelled = false;
-    const currentUserId = String(session?.user?.id || "").trim();
-
-    if (!session || recoveryMode || !currentUserId) {
-      setStartupBootDone(false);
-      setStartupBootTimedOut(false);
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    const requestId = startupBootRequestIdRef.current + 1;
-    startupBootRequestIdRef.current = requestId;
-    startupBootUserIdRef.current = currentUserId;
-    setStartupBootDone(false);
-    setStartupBootTimedOut(false);
-
-    const timeoutId = setTimeout(() => {
-      if (cancelled) return;
-      if (startupBootRequestIdRef.current !== requestId) return;
-      if (startupBootUserIdRef.current !== currentUserId) return;
-      setStartupBootTimedOut(true);
-    }, APP_STARTUP_BOOT_WAIT_MS);
-
-    const clearBootTimer = () => {
-      try {
-        clearTimeout(timeoutId);
-      } catch {
-        // noop
-      }
-    };
-
-    (async () => {
-      let cacheApplied = false;
-
-      try {
-        const cached = await loadStartupSnapshotCache(currentUserId, {
-          maxAgeMs: STARTUP_SNAPSHOT_LOCAL_TTL_MS,
-        });
-
-        if (cancelled) return;
-        if (startupBootRequestIdRef.current !== requestId) return;
-        if (startupBootUserIdRef.current !== currentUserId) return;
-
-        if (cached?.payload) {
-          const cachedFetchedAt = new Date(cached.saved_at).getTime();
-
-          applyStartupSnapshot(cached.payload, {
-            source: "local_cache",
-            fetchedAt:
-              Number.isFinite(cachedFetchedAt) && cachedFetchedAt > 0
-                ? cachedFetchedAt
-                : Date.now(),
-            replaceUnreadScopes: true,
-            replacePrefetchScopes: false,
-          });
-
-          cacheApplied = true;
-          setStartupBootDone(true);
-          clearBootTimer();
-        }
-
-        const json = await apiGet(buildAppStartupPath(), {
-          cacheTtlMs: APP_STARTUP_API_CACHE_TTL_MS,
-          forceRefresh: true,
-          staleOk: false,
-        });
-
-        if (cancelled) return;
-        if (startupBootRequestIdRef.current !== requestId) return;
-        if (startupBootUserIdRef.current !== currentUserId) return;
-
-        applyStartupSnapshot(json, {
-          source: cacheApplied ? "network_refresh" : "network_boot",
-          fetchedAt: Date.now(),
-          replaceUnreadScopes: true,
-          replacePrefetchScopes: false,
-        });
-
-        await saveStartupSnapshotCache(currentUserId, json);
-
-        if (cancelled) return;
-        if (startupBootRequestIdRef.current !== requestId) return;
-        if (startupBootUserIdRef.current !== currentUserId) return;
-
-        setStartupBootDone(true);
-        clearBootTimer();
-      } catch (e) {
-        console.warn("RootNavigator: failed to bootstrap /app/startup", e);
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-      clearBootTimer();
-    };
-  }, [applyStartupSnapshot, recoveryMode, session?.user?.id]);
 
   useEffect(() => {
     let cancelled = false;
@@ -2443,14 +2040,6 @@ useEffect(() => {
   // ログインしていないときは AuthScreen を表示
   if (!session) {
     return <AuthScreen />;
-  }
-
-  if (!startupBootDone && !startupBootTimedOut) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator />
-      </View>
-    );
   }
 
   // ログイン済みならメインタブを表示

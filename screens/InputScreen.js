@@ -23,10 +23,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../AuthContext";
 import { apiGet, apiPost } from "../lib/apiClient";
 import {
+  getTodayQuestionCurrent,
   submitTodayQuestionAnswer,
   resolveLocalTimezoneName,
 } from "../lib/todayQuestionApi";
 import {
+  getNoticesCurrent,
   markNoticePopupSeen,
   markNoticesRead,
 } from "../lib/noticeApi";
@@ -203,146 +205,6 @@ async function loadInputDraft(userId) {
 //   （ローカル API に戻したい場合はここを書き換える）
 
 const GLOBAL_SUMMARY_PATH = "/global_summary";
-const INPUT_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000;
-const INPUT_SUMMARY_CACHE_TTL_MS = 10 * 1000;
-const GLOBAL_SUMMARY_CACHE_TTL_MS = 15 * 1000;
-const NOTICE_CURRENT_CACHE_TTL_MS = 15 * 1000;
-const TODAY_QUESTION_STATUS_CACHE_TTL_MS = 10 * 1000;
-const TODAY_QUESTION_CURRENT_CACHE_TTL_MS = 10 * 1000;
-
-function buildTodayQuestionPath(basePath, timezoneName) {
-  const search = new URLSearchParams();
-  const normalizedTimezone = String(timezoneName || "").trim();
-  if (normalizedTimezone) {
-    search.set("timezone_name", normalizedTimezone);
-  }
-  const qs = search.toString();
-  return qs ? `${basePath}?${qs}` : basePath;
-}
-
-function normalizeHomeCountsPayload(payload) {
-  if (!payload || typeof payload !== "object") return null;
-
-  const todayCount = Number(payload?.today_count ?? payload?.todayCount ?? 0);
-  const weekCount = Number(payload?.week_count ?? payload?.weekCount ?? 0);
-  const monthCount = Number(payload?.month_count ?? payload?.monthCount ?? 0);
-  const streakDays = Number(payload?.streak_days ?? payload?.streakDays ?? 0);
-
-  return {
-    todayCount: Number.isFinite(todayCount) ? todayCount : 0,
-    weekCount: Number.isFinite(weekCount) ? weekCount : 0,
-    monthCount: Number.isFinite(monthCount) ? monthCount : 0,
-    streakDays: Number.isFinite(streakDays) ? streakDays : 0,
-    lastInputAt: payload?.last_input_at || payload?.lastInputAt || null,
-  };
-}
-
-function extractGlobalEmotionUsers(payload) {
-  const nextEmotionUsers = Number(payload?.emotion_users);
-  return Number.isFinite(nextEmotionUsers) ? nextEmotionUsers : null;
-}
-
-function normalizeNoticeCurrentPayload(payload) {
-  if (!payload || typeof payload !== "object") return null;
-
-  const featureEnabled = payload?.feature_enabled !== false;
-  const unreadCount = Math.max(0, Number(payload?.unread_count) || 0);
-  const popupNotice =
-    payload?.popup_notice && typeof payload?.popup_notice === "object"
-      ? payload.popup_notice
-      : null;
-  const popupNoticeId = String(popupNotice?.notice_id || "").trim();
-
-  return {
-    featureEnabled,
-    unreadCount,
-    popupNotice,
-    popupNoticeId,
-  };
-}
-
-function buildNoticeCurrentPrefetchPayload({
-  featureEnabled = true,
-  unreadCount = 0,
-  popupNotice = null,
-} = {}) {
-  const normalizedUnreadCount = Math.max(0, Number(unreadCount) || 0);
-  return {
-    feature_enabled: featureEnabled !== false,
-    unread_count: normalizedUnreadCount,
-    has_unread: normalizedUnreadCount > 0,
-    badge: {
-      count: normalizedUnreadCount,
-    },
-    popup_notice:
-      popupNotice && typeof popupNotice === "object" ? popupNotice : null,
-  };
-}
-
-function hasTodayQuestionRenderableQuestion(bundle) {
-  const question = bundle?.question;
-  return !!(
-    question &&
-    typeof question === "object" &&
-    String(question?.question_id || "").trim() &&
-    typeof question?.text === "string" &&
-    question.text.trim().length > 0
-  );
-}
-
-function shouldShowTodayQuestionModal(bundle, dismissedServiceDayKey = null) {
-  if (!hasTodayQuestionRenderableQuestion(bundle)) return false;
-  if (String(bundle?.answer_status || "").trim() === "answered") return false;
-
-  const serviceDayKey = String(bundle?.service_day_key || "").trim();
-  if (!serviceDayKey) return false;
-  return dismissedServiceDayKey !== serviceDayKey;
-}
-
-function deriveTodayQuestionStatusFromBundle(bundle) {
-  const payload = bundle && typeof bundle === "object" ? bundle : null;
-  if (!payload) return null;
-
-  const question =
-    payload?.question && typeof payload?.question === "object"
-      ? {
-          question_id: String(payload?.question?.question_id || "").trim(),
-          question_key: payload?.question?.question_key || null,
-          version: Number(payload?.question?.version ?? 1) || 1,
-          choice_count:
-            Number(
-              payload?.question?.choice_count ??
-                (Array.isArray(payload?.question?.choices)
-                  ? payload.question.choices.length
-                  : 0)
-            ) || 0,
-          free_text_enabled: payload?.question?.free_text_enabled !== false,
-        }
-      : null;
-
-  const answerStatus =
-    String(payload?.answer_status || "").trim() || "unanswered";
-  const isAnsweredToday = answerStatus === "answered";
-  const hasCurrentQuestion = !!(question?.question_id || isAnsweredToday);
-
-  return {
-    service_day_key: String(payload?.service_day_key || "").trim(),
-    question: question && question.question_id ? question : null,
-    answer_status: answerStatus,
-    answer_summary: payload?.answer_summary || null,
-    delivery:
-      payload?.delivery && typeof payload?.delivery === "object"
-        ? payload.delivery
-        : {},
-    progress:
-      payload?.progress && typeof payload?.progress === "object"
-        ? payload.progress
-        : {},
-    has_current_question: hasCurrentQuestion,
-    should_prompt: !!(question?.question_id && !isAnsweredToday),
-    is_answered_today: isAnsweredToday,
-  };
-}
 
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
@@ -400,7 +262,7 @@ const TUTORIAL_TOTAL_STEPS = 23;
  */
 export default function InputScreen({ navigation }) {
   const { colors, themeName } = useTheme();
-  const { setUnread, getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
+  const { setUnread } = useUnread();
   const {
     tier: subscriptionTier,
     loading: subscriptionLoading,
@@ -505,6 +367,19 @@ useEffect(() => {
 const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
 const appStateRef = useRef(AppState.currentState);
 
+const fetchGlobalSummary = useCallback(async () => {
+  try {
+    const json = await apiGet(GLOBAL_SUMMARY_PATH, { auth: false });
+    const nextEmotionUsers = Number(json?.emotion_users);
+    if (Number.isFinite(nextEmotionUsers)) {
+      setGlobalEmotionUsers(nextEmotionUsers);
+    }
+  } catch {
+    // keep previous value
+  }
+}, []);
+
+  
 // --- Home summary (persistent: today / this month) ---
 const [homeTodayCount, setHomeTodayCount] = useState(null);
 const [homeMonthCount, setHomeMonthCount] = useState(null);
@@ -517,11 +392,6 @@ const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
 const [todayQuestionModalVisible, setTodayQuestionModalVisible] = useState(false);
 const dismissedTodayQuestionDayRef = useRef(null);
 const todayQuestionRequestIdRef = useRef(0);
-const todayQuestionBundleRef = useRef(null);
-
-useEffect(() => {
-  todayQuestionBundleRef.current = todayQuestionBundle;
-}, [todayQuestionBundle]);
 
 const clearTodayQuestionUi = useCallback(() => {
   setTodayQuestionBundle(null);
@@ -550,8 +420,12 @@ const homeBadgeLabel = useMemo(() => {
   const w = typeof homeWeekCount === "number" ? homeWeekCount : null;
   const s = typeof homeStreakDays === "number" ? homeStreakDays : null;
 
-  if (m != null && m >= 60) return "観測レジェンド";
+  // まずは月間の大きな称号（最上位）
+  if (m != null) {
+    if (m >= 60) return "観測レジェンド";
+  }
 
+  // 連続観測（“継続”を強調）
   if (s != null) {
     if (s >= 30) return "連続30日観測";
     if (s >= 14) return "連続2週間観測";
@@ -559,11 +433,13 @@ const homeBadgeLabel = useMemo(() => {
     if (s >= 3) return "連続3日観測";
   }
 
+  // 週内の観測密度（“今週”を強調）
   if (w != null) {
     if (w >= 7) return "今週コンプリート";
     if (w >= 5) return "今週ハイペース";
   }
 
+  // 月間（中位以下）
   if (m != null) {
     if (m >= 30) return "観測マスター";
     if (m >= 15) return "観測ルーティン";
@@ -575,489 +451,39 @@ const homeBadgeLabel = useMemo(() => {
   return null;
 }, [homeMonthCount, homeWeekCount, homeStreakDays]);
 
-const getInputPrefetchEntryAny = useCallback((key) => {
+
+const refreshHomeCounts = useCallback(async () => {
   try {
-    return getPrefetchEntry?.("Input", key) || null;
-  } catch {
-    return null;
-  }
-}, [getPrefetchEntry]);
+    const json = await apiGet("/input/summary");
+    const todayCount = Number(json?.today_count ?? 0);
+    const weekCount = Number(json?.week_count ?? 0);
+    const monthCount = Number(json?.month_count ?? 0);
+    const streakDays = Number(json?.streak_days ?? 0);
 
-const getInputPrefetchEntryFresh = useCallback(
-  (key, maxAgeMs = INPUT_PREFETCH_MAX_AGE_MS) => {
-    try {
-      return getPrefetchEntryFresh?.("Input", key, maxAgeMs) || null;
-    } catch {
-      return null;
-    }
-  },
-  [getPrefetchEntryFresh]
-);
+    setHomeTodayCount(Number.isFinite(todayCount) ? todayCount : 0);
+    setHomeWeekCount(Number.isFinite(weekCount) ? weekCount : 0);
+    setHomeMonthCount(Number.isFinite(monthCount) ? monthCount : 0);
+    setHomeStreakDays(Number.isFinite(streakDays) ? streakDays : 0);
 
-const hasFreshInputPrefetch = useCallback(
-  (key, maxAgeMs = INPUT_PREFETCH_MAX_AGE_MS) => {
-    return !!getInputPrefetchEntryFresh(key, maxAgeMs);
-  },
-  [getInputPrefetchEntryFresh]
-);
-
-const applyHomeCountsPayload = useCallback((payload) => {
-  const normalized = normalizeHomeCountsPayload(payload);
-  if (!normalized) return false;
-
-  setHomeTodayCount(normalized.todayCount);
-  setHomeWeekCount(normalized.weekCount);
-  setHomeMonthCount(normalized.monthCount);
-  setHomeStreakDays(normalized.streakDays);
-  return true;
-}, []);
-
-const applyGlobalSummaryPayload = useCallback((payload) => {
-  const nextEmotionUsers = extractGlobalEmotionUsers(payload);
-  if (!Number.isFinite(nextEmotionUsers)) return false;
-  setGlobalEmotionUsers(nextEmotionUsers);
-  return true;
-}, []);
-
-const syncTodayQuestionBundlePayload = useCallback((payload, options = {}) => {
-  const normalizedBundle =
-    payload && typeof payload === "object" ? payload : null;
-
-  if (!normalizedBundle) {
-    if (options?.clearWhenEmpty) {
-      setTodayQuestionBundle(null);
-      setTodayQuestionModalVisible(false);
-    }
-    return false;
-  }
-
-  setTodayQuestionBundle(normalizedBundle);
-  if (
-    shouldShowTodayQuestionModal(
-      normalizedBundle,
-      dismissedTodayQuestionDayRef.current
-    )
-  ) {
-    setTodayQuestionModalVisible(true);
-  } else {
-    setTodayQuestionModalVisible(false);
-  }
-  return hasTodayQuestionRenderableQuestion(normalizedBundle);
-}, []);
-
-const syncNoticePayload = useCallback((payload, options = {}) => {
-  const normalized = normalizeNoticeCurrentPayload(payload);
-  if (!normalized) {
-    if (options?.clearWhenEmpty) {
-      clearNoticeUi();
-    }
-    return false;
-  }
-
-  setNoticeFeatureEnabled(normalized.featureEnabled);
-  setNoticeUnreadCount(normalized.unreadCount);
-  setNoticePopup(normalized.popupNotice);
-
-  const shouldOpen =
-    normalized.featureEnabled &&
-    normalized.popupNotice &&
-    normalized.popupNoticeId &&
-    dismissedNoticeIdRef.current !== normalized.popupNoticeId;
-  setNoticeModalVisible(shouldOpen);
-  return true;
-}, [clearNoticeUi]);
-
-const applyHomeCountsPrefetch = useCallback(() => {
-  const entry = getInputPrefetchEntryAny("homeCounts");
-  return applyHomeCountsPayload(entry?.value);
-}, [applyHomeCountsPayload, getInputPrefetchEntryAny]);
-
-const applyGlobalSummaryPrefetch = useCallback(() => {
-  const entry = getInputPrefetchEntryAny("globalSummary");
-  return applyGlobalSummaryPayload(entry?.value);
-}, [applyGlobalSummaryPayload, getInputPrefetchEntryAny]);
-
-const applyNoticePrefetch = useCallback(() => {
-  if (isTutorialMode) {
-    clearNoticeUi();
-    return false;
-  }
-
-  const entry = getInputPrefetchEntryAny("noticeCurrent");
-  const applied = syncNoticePayload(entry?.value);
-  if (applied) {
-    setNoticeLoading(false);
-  }
-  return applied;
-}, [clearNoticeUi, getInputPrefetchEntryAny, isTutorialMode, syncNoticePayload]);
-
-const applyTodayQuestionPrefetch = useCallback(() => {
-  if (isTutorialMode) {
-    clearTodayQuestionUi();
     return {
-      applied: false,
-      hasRenderableQuestion: false,
-      hasCurrentQuestion: false,
-      shouldPrompt: false,
+      todayCount,
+      weekCount,
+      monthCount,
+      streakDays,
+      lastInputAt: json?.last_input_at || null,
     };
-  }
-
-  const popupEntry = getInputPrefetchEntryAny("todayQuestionPopup");
-  if (popupEntry?.value && hasTodayQuestionRenderableQuestion(popupEntry.value)) {
-    const rendered = syncTodayQuestionBundlePayload(popupEntry.value);
-    setTodayQuestionLoading(false);
-    return {
-      applied: true,
-      hasRenderableQuestion: rendered,
-      hasCurrentQuestion: true,
-      shouldPrompt: shouldShowTodayQuestionModal(
-        popupEntry.value,
-        dismissedTodayQuestionDayRef.current
-      ),
-      serviceDayKey: String(popupEntry?.value?.service_day_key || "").trim(),
-    };
-  }
-
-  const status = getInputPrefetchEntryAny("todayQuestionStatus")?.value;
-  if (!status || typeof status !== "object") {
-    return {
-      applied: false,
-      hasRenderableQuestion: false,
-      hasCurrentQuestion: false,
-      shouldPrompt: false,
-    };
-  }
-
-  const serviceDayKey = String(status?.service_day_key || "").trim();
-  const hasCurrentQuestion = !!(
-    status?.has_current_question ||
-    status?.question ||
-    String(status?.answer_status || "").trim() === "answered"
-  );
-  const shouldPrompt = !!status?.should_prompt;
-  const currentBundle = todayQuestionBundleRef.current;
-  const currentBundleDayKey = String(currentBundle?.service_day_key || "").trim();
-  const hasRenderableQuestion =
-    hasTodayQuestionRenderableQuestion(currentBundle) &&
-    (!serviceDayKey || currentBundleDayKey === serviceDayKey);
-
-  if (!hasCurrentQuestion) {
-    setTodayQuestionBundle(null);
-    setTodayQuestionModalVisible(false);
-  } else if (!hasRenderableQuestion && serviceDayKey && currentBundleDayKey && currentBundleDayKey !== serviceDayKey) {
-    setTodayQuestionBundle(null);
-  }
-
-  if (!shouldPrompt) {
-    setTodayQuestionModalVisible(false);
-  }
-  setTodayQuestionLoading(false);
-
-  return {
-    applied: true,
-    hasRenderableQuestion,
-    hasCurrentQuestion,
-    shouldPrompt,
-    serviceDayKey,
-  };
-}, [
-  clearTodayQuestionUi,
-  getInputPrefetchEntryAny,
-  isTutorialMode,
-  syncTodayQuestionBundlePayload,
-]);
-
-const refreshHomeCounts = useCallback(async (options = {}) => {
-  const { forceRefresh = false } = options || {};
-
-  try {
-    const json = await apiGet("/input/summary", {
-      cacheTtlMs: INPUT_SUMMARY_CACHE_TTL_MS,
-      staleOk: !forceRefresh,
-      forceRefresh,
-    });
-    applyHomeCountsPayload(json);
-    if (json && typeof json === "object") {
-      setPrefetch("Input", "homeCounts", json);
-    }
-    return normalizeHomeCountsPayload(json);
   } catch (e) {
     console.warn("InputScreen: refreshHomeCounts failed", e);
     return null;
   }
-}, [applyHomeCountsPayload, setPrefetch]);
-
-const fetchGlobalSummary = useCallback(async (options = {}) => {
-  const { forceRefresh = false } = options || {};
-
-  try {
-    const json = await apiGet(GLOBAL_SUMMARY_PATH, {
-      auth: false,
-      cacheTtlMs: GLOBAL_SUMMARY_CACHE_TTL_MS,
-      staleOk: !forceRefresh,
-      forceRefresh,
-    });
-    applyGlobalSummaryPayload(json);
-    if (json && typeof json === "object") {
-      setPrefetch("Input", "globalSummary", json);
-    }
-    return extractGlobalEmotionUsers(json);
-  } catch {
-    return null;
-  }
-}, [applyGlobalSummaryPayload, setPrefetch]);
-
-const revalidateTodayQuestionCurrent = useCallback(async (options = {}) => {
-  const requestId = todayQuestionRequestIdRef.current + 1;
-  todayQuestionRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearTodayQuestionUi();
-    return null;
-  }
-
-  const {
-    showLoading = false,
-    forceRefresh = false,
-    preserveOnError = true,
-  } = options || {};
-
-  const timezoneName = getInputLocalTimezoneName();
-  if (showLoading) {
-    setTodayQuestionLoading(true);
-  }
-
-  try {
-    const json = await apiGet(
-      buildTodayQuestionPath("/today-question/current", timezoneName),
-      {
-        cacheTtlMs: TODAY_QUESTION_CURRENT_CACHE_TTL_MS,
-        staleOk: !forceRefresh,
-        forceRefresh,
-      }
-    );
-
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
-      return null;
-    }
-
-    if (json && typeof json === "object") {
-      syncTodayQuestionBundlePayload(json);
-      setPrefetch("Input", "todayQuestionPopup", json);
-      const statusPayload = deriveTodayQuestionStatusFromBundle(json);
-      if (statusPayload) {
-        setPrefetch("Input", "todayQuestionStatus", statusPayload);
-      }
-    }
-
-    return json || null;
-  } catch (e) {
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
-      return null;
-    }
-
-    console.warn("InputScreen: revalidateTodayQuestionCurrent failed", e);
-    if (!preserveOnError) {
-      clearTodayQuestionUi();
-    }
-    return null;
-  } finally {
-    if (todayQuestionRequestIdRef.current === requestId) {
-      setTodayQuestionLoading(false);
-    }
-  }
-}, [
-  clearTodayQuestionUi,
-  isTutorialMode,
-  setPrefetch,
-  syncTodayQuestionBundlePayload,
-]);
-
-const revalidateTodayQuestionStatus = useCallback(async (options = {}) => {
-  const requestId = todayQuestionRequestIdRef.current + 1;
-  todayQuestionRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearTodayQuestionUi();
-    return null;
-  }
-
-  const {
-    showLoading = false,
-    forceRefresh = false,
-    preserveOnError = true,
-  } = options || {};
-
-  const timezoneName = getInputLocalTimezoneName();
-  if (showLoading) {
-    setTodayQuestionLoading(true);
-  }
-
-  try {
-    const json = await apiGet(
-      buildTodayQuestionPath("/today-question/status", timezoneName),
-      {
-        cacheTtlMs: TODAY_QUESTION_STATUS_CACHE_TTL_MS,
-        staleOk: !forceRefresh,
-        forceRefresh,
-      }
-    );
-
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
-      return null;
-    }
-
-    if (json && typeof json === "object") {
-      setPrefetch("Input", "todayQuestionStatus", json);
-
-      const serviceDayKey = String(json?.service_day_key || "").trim();
-      const hasCurrentQuestion = !!(
-        json?.has_current_question ||
-        json?.question ||
-        String(json?.answer_status || "").trim() === "answered"
-      );
-      const currentBundle = todayQuestionBundleRef.current;
-      const currentBundleDayKey = String(currentBundle?.service_day_key || "").trim();
-      const hasRenderableQuestion =
-        hasTodayQuestionRenderableQuestion(currentBundle) &&
-        (!serviceDayKey || currentBundleDayKey === serviceDayKey);
-
-      if (!hasCurrentQuestion) {
-        setTodayQuestionBundle(null);
-        setTodayQuestionModalVisible(false);
-        return json;
-      }
-
-      if (!hasRenderableQuestion) {
-        await revalidateTodayQuestionCurrent({
-          showLoading: showLoading || !!json?.should_prompt,
-          forceRefresh,
-          preserveOnError,
-        });
-        return json;
-      }
-
-      if (
-        json?.should_prompt &&
-        shouldShowTodayQuestionModal(
-          currentBundle,
-          dismissedTodayQuestionDayRef.current
-        )
-      ) {
-        setTodayQuestionModalVisible(true);
-      } else if (!json?.should_prompt) {
-        setTodayQuestionModalVisible(false);
-      }
-    }
-
-    return json || null;
-  } catch (e) {
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
-      return null;
-    }
-
-    console.warn("InputScreen: revalidateTodayQuestionStatus failed", e);
-    if (!preserveOnError) {
-      clearTodayQuestionUi();
-    }
-    return null;
-  } finally {
-    if (todayQuestionRequestIdRef.current === requestId) {
-      setTodayQuestionLoading(false);
-    }
-  }
-}, [
-  clearTodayQuestionUi,
-  isTutorialMode,
-  revalidateTodayQuestionCurrent,
-  setPrefetch,
-]);
-
-const revalidateNoticesCurrent = useCallback(async (options = {}) => {
-  const requestId = noticeRequestIdRef.current + 1;
-  noticeRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearNoticeUi();
-    return null;
-  }
-
-  const {
-    showLoading = false,
-    forceRefresh = false,
-    preserveOnError = true,
-  } = options || {};
-
-  if (showLoading) {
-    setNoticeLoading(true);
-  }
-
-  try {
-    const json = await apiGet("/notices/current", {
-      cacheTtlMs: NOTICE_CURRENT_CACHE_TTL_MS,
-      staleOk: !forceRefresh,
-      forceRefresh,
-    });
-
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
-      return null;
-    }
-
-    if (json && typeof json === "object") {
-      syncNoticePayload(json);
-      setPrefetch("Input", "noticeCurrent", json);
-    }
-
-    return json || null;
-  } catch (e) {
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
-      return null;
-    }
-
-    console.warn("InputScreen: revalidateNoticesCurrent failed", e);
-    if (!preserveOnError) {
-      clearNoticeUi();
-    }
-    return null;
-  } finally {
-    if (noticeRequestIdRef.current === requestId) {
-      setNoticeLoading(false);
-    }
-  }
-}, [clearNoticeUi, isTutorialMode, setPrefetch, syncNoticePayload]);
+}, []);
 
 useEffect(() => {
-  if (isTutorialMode) return;
-  applyHomeCountsPrefetch();
-  applyGlobalSummaryPrefetch();
-}, [applyGlobalSummaryPrefetch, applyHomeCountsPrefetch, isTutorialMode]);
-
-useEffect(() => {
-  if (isTutorialMode) return;
-  applyNoticePrefetch();
-}, [applyNoticePrefetch, isTutorialMode]);
-
-useEffect(() => {
-  if (isTutorialMode) return;
-  applyTodayQuestionPrefetch();
-}, [applyTodayQuestionPrefetch, isTutorialMode]);
-
-useEffect(() => {
-  if (isTutorialMode) return;
-
-  applyHomeCountsPrefetch();
-  if (!hasFreshInputPrefetch("homeCounts", INPUT_SUMMARY_CACHE_TTL_MS)) {
-    void refreshHomeCounts();
-  }
+  refreshHomeCounts();
 
   let unsubscribe = null;
   try {
-    unsubscribe = navigation?.addListener?.("focus", () => {
-      applyHomeCountsPrefetch();
-      if (!hasFreshInputPrefetch("homeCounts", INPUT_SUMMARY_CACHE_TTL_MS)) {
-        void refreshHomeCounts();
-      }
-    });
+    unsubscribe = navigation?.addListener?.("focus", refreshHomeCounts);
   } catch {
     // noop
   }
@@ -1069,30 +495,14 @@ useEffect(() => {
       // noop
     }
   };
-}, [
-  applyHomeCountsPrefetch,
-  hasFreshInputPrefetch,
-  isTutorialMode,
-  navigation,
-  refreshHomeCounts,
-]);
+}, [navigation, refreshHomeCounts]);
 
 useEffect(() => {
-  if (isTutorialMode) return;
-
-  applyGlobalSummaryPrefetch();
-  if (!hasFreshInputPrefetch("globalSummary", GLOBAL_SUMMARY_CACHE_TTL_MS)) {
-    void fetchGlobalSummary();
-  }
+  fetchGlobalSummary();
 
   let unsubscribe = null;
   try {
-    unsubscribe = navigation?.addListener?.("focus", () => {
-      applyGlobalSummaryPrefetch();
-      if (!hasFreshInputPrefetch("globalSummary", GLOBAL_SUMMARY_CACHE_TTL_MS)) {
-        void fetchGlobalSummary();
-      }
-    });
+    unsubscribe = navigation?.addListener?.("focus", fetchGlobalSummary);
   } catch {
     // noop
   }
@@ -1104,143 +514,12 @@ useEffect(() => {
       // noop
     }
   };
-}, [
-  applyGlobalSummaryPrefetch,
-  fetchGlobalSummary,
-  hasFreshInputPrefetch,
-  isTutorialMode,
-  navigation,
-]);
-
-useEffect(() => {
-  if (isTutorialMode) return;
-
-  const prefetched = applyTodayQuestionPrefetch();
-  const needsCurrentBody =
-    prefetched?.hasCurrentQuestion && !prefetched?.hasRenderableQuestion;
-
-  if (needsCurrentBody) {
-    void revalidateTodayQuestionCurrent({
-      showLoading: !prefetched?.applied,
-      preserveOnError: !!prefetched?.applied,
-    });
-  } else if (!hasFreshInputPrefetch("todayQuestionStatus", TODAY_QUESTION_STATUS_CACHE_TTL_MS)) {
-    void revalidateTodayQuestionStatus({
-      showLoading: !prefetched?.applied,
-      preserveOnError: !!prefetched?.applied,
-    });
-  }
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", () => {
-      const nextPrefetched = applyTodayQuestionPrefetch();
-      const nextNeedsCurrentBody =
-        nextPrefetched?.hasCurrentQuestion && !nextPrefetched?.hasRenderableQuestion;
-
-      if (nextNeedsCurrentBody) {
-        void revalidateTodayQuestionCurrent({
-          showLoading: false,
-          preserveOnError: true,
-        });
-      } else if (!hasFreshInputPrefetch("todayQuestionStatus", TODAY_QUESTION_STATUS_CACHE_TTL_MS)) {
-        void revalidateTodayQuestionStatus({
-          showLoading: false,
-          preserveOnError: true,
-        });
-      }
-    });
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [
-  applyTodayQuestionPrefetch,
-  hasFreshInputPrefetch,
-  isTutorialMode,
-  navigation,
-  revalidateTodayQuestionCurrent,
-  revalidateTodayQuestionStatus,
-]);
-
-useEffect(() => {
-  if (isTutorialMode) return;
-
-  const prefetched = applyNoticePrefetch();
-  if (!hasFreshInputPrefetch("noticeCurrent", NOTICE_CURRENT_CACHE_TTL_MS)) {
-    void revalidateNoticesCurrent({
-      showLoading: !prefetched,
-      preserveOnError: prefetched,
-    });
-  }
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", () => {
-      const nextPrefetched = applyNoticePrefetch();
-      if (!hasFreshInputPrefetch("noticeCurrent", NOTICE_CURRENT_CACHE_TTL_MS)) {
-        void revalidateNoticesCurrent({
-          showLoading: false,
-          preserveOnError: nextPrefetched,
-        });
-      }
-    });
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [
-  applyNoticePrefetch,
-  hasFreshInputPrefetch,
-  isTutorialMode,
-  navigation,
-  revalidateNoticesCurrent,
-]);
+}, [navigation, fetchGlobalSummary]);
 
 useEffect(() => {
   const subscription = AppState.addEventListener("change", (nextAppState) => {
     if (/inactive|background/.test(appStateRef.current) && nextAppState === "active") {
-      applyGlobalSummaryPrefetch();
-      if (!hasFreshInputPrefetch("globalSummary", GLOBAL_SUMMARY_CACHE_TTL_MS)) {
-        void fetchGlobalSummary();
-      }
-
-      applyNoticePrefetch();
-      if (!hasFreshInputPrefetch("noticeCurrent", NOTICE_CURRENT_CACHE_TTL_MS)) {
-        void revalidateNoticesCurrent({
-          showLoading: false,
-          preserveOnError: true,
-        });
-      }
-
-      const prefetched = applyTodayQuestionPrefetch();
-      const needsCurrentBody =
-        prefetched?.hasCurrentQuestion && !prefetched?.hasRenderableQuestion;
-      if (needsCurrentBody) {
-        void revalidateTodayQuestionCurrent({
-          showLoading: false,
-          preserveOnError: true,
-        });
-      } else if (!hasFreshInputPrefetch("todayQuestionStatus", TODAY_QUESTION_STATUS_CACHE_TTL_MS)) {
-        void revalidateTodayQuestionStatus({
-          showLoading: false,
-          preserveOnError: true,
-        });
-      }
+      fetchGlobalSummary();
     }
     appStateRef.current = nextAppState;
   });
@@ -1252,79 +531,161 @@ useEffect(() => {
       // noop
     }
   };
-}, [
-  applyGlobalSummaryPrefetch,
-  applyNoticePrefetch,
-  applyTodayQuestionPrefetch,
-  fetchGlobalSummary,
-  hasFreshInputPrefetch,
-  revalidateNoticesCurrent,
-  revalidateTodayQuestionCurrent,
-  revalidateTodayQuestionStatus,
-]);
+}, [fetchGlobalSummary]);
+
+const loadTodayQuestion = useCallback(async () => {
+  const requestId = todayQuestionRequestIdRef.current + 1;
+  todayQuestionRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearTodayQuestionUi();
+    return;
+  }
+
+  const timezoneName = getInputLocalTimezoneName();
+  setTodayQuestionLoading(true);
+  try {
+    const json = await getTodayQuestionCurrent({ timezone_name: timezoneName });
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
+
+    setTodayQuestionBundle(json || null);
+
+    const unanswered = json?.question && json?.answer_status !== "answered";
+    const serviceDayKey = String(json?.service_day_key || "");
+    if (
+      unanswered &&
+      serviceDayKey &&
+      dismissedTodayQuestionDayRef.current !== serviceDayKey
+    ) {
+      setTodayQuestionModalVisible(true);
+    } else {
+      setTodayQuestionModalVisible(false);
+    }
+  } catch (e) {
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
+    console.warn("InputScreen: loadTodayQuestion failed", e);
+    clearTodayQuestionUi();
+  } finally {
+    if (todayQuestionRequestIdRef.current === requestId) {
+      setTodayQuestionLoading(false);
+    }
+  }
+}, [clearTodayQuestionUi, isTutorialMode]);
+
+useEffect(() => {
+  loadTodayQuestion();
+
+  let unsubscribe = null;
+  try {
+    unsubscribe = navigation?.addListener?.("focus", loadTodayQuestion);
+  } catch {
+    // noop
+  }
+
+  return () => {
+    try {
+      if (typeof unsubscribe === "function") unsubscribe();
+    } catch {
+      // noop
+    }
+  };
+}, [navigation, loadTodayQuestion]);
+
+const loadNotices = useCallback(async () => {
+  const requestId = noticeRequestIdRef.current + 1;
+  noticeRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearNoticeUi();
+    return;
+  }
+
+  setNoticeLoading(true);
+  try {
+    const json = await getNoticesCurrent();
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
+
+    const featureEnabled = json?.feature_enabled !== false;
+    const unreadCount = Math.max(0, Number(json?.unread_count) || 0);
+    const popupNotice = json?.popup_notice && typeof json?.popup_notice === "object"
+      ? json.popup_notice
+      : null;
+    const popupNoticeId = String(popupNotice?.notice_id || "").trim();
+
+    setNoticeFeatureEnabled(featureEnabled);
+    setNoticeUnreadCount(unreadCount);
+    setNoticePopup(popupNotice);
+
+    if (
+      featureEnabled &&
+      popupNotice &&
+      popupNoticeId &&
+      dismissedNoticeIdRef.current !== popupNoticeId
+    ) {
+      setNoticeModalVisible(true);
+    } else {
+      setNoticeModalVisible(false);
+    }
+  } catch (e) {
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
+    console.warn("InputScreen: loadNotices failed", e);
+    clearNoticeUi();
+  } finally {
+    if (noticeRequestIdRef.current === requestId) {
+      setNoticeLoading(false);
+    }
+  }
+}, [clearNoticeUi, isTutorialMode]);
+
+useEffect(() => {
+  loadNotices();
+
+  let unsubscribe = null;
+  try {
+    unsubscribe = navigation?.addListener?.("focus", loadNotices);
+  } catch {
+    // noop
+  }
+
+  return () => {
+    try {
+      if (typeof unsubscribe === "function") unsubscribe();
+    } catch {
+      // noop
+    }
+  };
+}, [navigation, loadNotices]);
 
 const markCurrentNoticePopupSeen = useCallback(async () => {
   const noticeId = String(noticePopup?.notice_id || "").trim();
   if (!noticeId) return;
-
   dismissedNoticeIdRef.current = noticeId;
-  const popupSeenAt = noticePopup?.popup_seen_at || new Date().toISOString();
-  const nextPopup = {
-    ...(noticePopup || {}),
-    popup_seen_at: popupSeenAt,
-  };
-
-  setNoticePopup(nextPopup);
-  setPrefetch(
-    "Input",
-    "noticeCurrent",
-    buildNoticeCurrentPrefetchPayload({
-      featureEnabled: noticeFeatureEnabled,
-      unreadCount: noticeUnreadCount,
-      popupNotice: nextPopup,
-    })
-  );
-
   try {
     await markNoticePopupSeen({ notice_id: noticeId });
   } catch (e) {
     console.warn("InputScreen: markNoticePopupSeen failed", e);
   }
-}, [
-  noticeFeatureEnabled,
-  noticePopup,
-  noticeUnreadCount,
-  setPrefetch,
-]);
+}, [noticePopup?.notice_id]);
 
 const markCurrentNoticeRead = useCallback(async () => {
   const noticeId = String(noticePopup?.notice_id || "").trim();
   if (!noticeId) return;
-
   try {
     const res = await markNoticesRead({ notice_ids: [noticeId] });
     const nextUnreadCount = Math.max(0, Number(res?.unread_count) || 0);
-    const nextPopup = {
-      ...(noticePopup || {}),
-      is_read: true,
-      read_at: noticePopup?.read_at || new Date().toISOString(),
-    };
-
     setNoticeUnreadCount(nextUnreadCount);
-    setNoticePopup(nextPopup);
-    setPrefetch(
-      "Input",
-      "noticeCurrent",
-      buildNoticeCurrentPrefetchPayload({
-        featureEnabled: noticeFeatureEnabled,
-        unreadCount: nextUnreadCount,
-        popupNotice: nextPopup,
-      })
-    );
+    setNoticePopup((prev) => {
+      if (String(prev?.notice_id || "").trim() !== noticeId) return prev;
+      return {
+        ...(prev || {}),
+        is_read: true,
+        read_at: prev?.read_at || new Date().toISOString(),
+      };
+    });
   } catch (e) {
     console.warn("InputScreen: markNoticesRead failed", e);
   }
-}, [noticeFeatureEnabled, noticePopup, setPrefetch]);
+}, [noticePopup?.notice_id]);
 
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
@@ -1371,11 +732,7 @@ const handleSubmitTodayQuestion = useCallback(async (payload) => {
     });
     showToast("今日の問いを保存しました");
     dismissedTodayQuestionDayRef.current = String(todayQuestionBundle?.service_day_key || "");
-    await revalidateTodayQuestionCurrent({
-      showLoading: false,
-      forceRefresh: true,
-      preserveOnError: false,
-    });
+    await loadTodayQuestion();
     setTodayQuestionModalVisible(false);
   } catch (e) {
     console.warn("InputScreen: submitTodayQuestion failed", e);
@@ -1383,7 +740,7 @@ const handleSubmitTodayQuestion = useCallback(async (payload) => {
   } finally {
     setTodayQuestionSubmitting(false);
   }
-}, [revalidateTodayQuestionCurrent, showToast, todayQuestionBundle]);
+}, [loadTodayQuestion, showToast, todayQuestionBundle]);
 
 const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -2201,8 +1558,8 @@ const { height: windowHeight } = useWindowDimensions();
       setIsSecret(false);
       Keyboard.dismiss();
 
-      void refreshHomeCounts({ forceRefresh: true });
-      void fetchGlobalSummary({ forceRefresh: true });
+      void refreshHomeCounts();
+      void fetchGlobalSummary();
 
       if (inputFeedbackText) {
         openInputFeedbackModal({

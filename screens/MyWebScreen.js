@@ -21,7 +21,9 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import { apiGet, apiPost } from "../lib/apiClient";
+// Supabase
+import { supabase } from "../lib/supabase";
+import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 既存
 import MyWebHistoryScreen from "./MyWebHistoryScreen";
@@ -59,126 +61,14 @@ const MYWEB_TUTORIAL_STEP_START = 7;
 const MYWEB_TUTORIAL_STEP_END = 13;
 const TUTORIAL_TOTAL_STEPS = 23;
 
-const MYWEB_UNREAD_PREFETCH_MAX_AGE_MS = 10 * 1000;
-const MYWEB_HOME_SUMMARY_PREFETCH_MAX_AGE_MS = 15 * 1000;
+// Phase2: MyWeb（配布/生成）はMashOS側でensure（オンデマンド）
+const MYMODEL_API_BASE_URL =
+  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
+const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ensure`;
 
 function normalizeMyProfileMode(mode) {
   const value = String(mode || "").trim().toLowerCase();
   return value === "deep" ? "deep" : "standard";
-}
-
-function isObjectRecord(value) {
-  return !!value && typeof value === "object" && !Array.isArray(value);
-}
-
-function pickMyWebPrefetchEntry({
-  getPrefetchEntry,
-  getPrefetchEntryFresh,
-  key,
-  maxAgeMs,
-  allowStale = true,
-}) {
-  try {
-    const freshEntry = getPrefetchEntryFresh?.("MyWeb", key, maxAgeMs) || null;
-    if (freshEntry?.value !== undefined) {
-      return { entry: freshEntry, fresh: true };
-    }
-  } catch {
-    // noop
-  }
-
-  if (!allowStale) {
-    return { entry: null, fresh: false };
-  }
-
-  try {
-    const staleEntry = getPrefetchEntry?.("MyWeb", key) || null;
-    if (staleEntry?.value !== undefined) {
-      return { entry: staleEntry, fresh: false };
-    }
-  } catch {
-    // noop
-  }
-
-  return { entry: null, fresh: false };
-}
-
-function normalizeMyWebUnreadFlags(payload) {
-  const unread = isObjectRecord(payload?.unread_by_type)
-    ? payload.unread_by_type
-    : isObjectRecord(payload)
-    ? payload
-    : {};
-
-  return {
-    daily: !!unread?.daily,
-    weekly: !!unread?.weekly,
-    monthly: !!unread?.monthly,
-    selfStructure: !!(unread?.selfStructure ?? unread?.self_structure),
-  };
-}
-
-function sameMyWebUnreadFlags(a, b) {
-  return !!(
-    a &&
-    b &&
-    !!a.daily === !!b.daily &&
-    !!a.weekly === !!b.weekly &&
-    !!a.monthly === !!b.monthly &&
-    !!a.selfStructure === !!b.selfStructure
-  );
-}
-
-function buildWeeklySummaryState(summaryPayload) {
-  const weekly = isObjectRecord(summaryPayload?.weekly)
-    ? summaryPayload.weekly
-    : isObjectRecord(summaryPayload)
-    ? summaryPayload
-    : {};
-
-  return {
-    loading: false,
-    count: typeof weekly?.count === "number" ? weekly.count : Number(weekly?.count || 0) || 0,
-    top: Array.isArray(weekly?.top) ? weekly.top : [],
-    error: String(weekly?.error || ""),
-  };
-}
-
-function buildMonthlySummaryState(summaryPayload) {
-  const monthly = isObjectRecord(summaryPayload?.monthly)
-    ? summaryPayload.monthly
-    : isObjectRecord(summaryPayload)
-    ? summaryPayload
-    : {};
-
-  return {
-    loading: false,
-    count:
-      typeof monthly?.count === "number" ? monthly.count : Number(monthly?.count || 0) || 0,
-    error: String(monthly?.error || ""),
-  };
-}
-
-function sameWeeklySummaryState(a, b) {
-  return !!(
-    a &&
-    b &&
-    !!a.loading === !!b.loading &&
-    Number(a.count || 0) === Number(b.count || 0) &&
-    String(a.error || "") === String(b.error || "") &&
-    JSON.stringify(Array.isArray(a.top) ? a.top : []) ===
-      JSON.stringify(Array.isArray(b.top) ? b.top : [])
-  );
-}
-
-function sameMonthlySummaryState(a, b) {
-  return !!(
-    a &&
-    b &&
-    !!a.loading === !!b.loading &&
-    Number(a.count || 0) === Number(b.count || 0) &&
-    String(a.error || "") === String(b.error || "")
-  );
 }
 
 function useThemedStyles() {
@@ -190,13 +80,7 @@ function useThemedStyles() {
 }
 
 export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange, route: screenRoute, tabRoute }) {
-  const {
-    setUnreadGroup,
-    clearScope,
-    getPrefetchEntry,
-    getPrefetchEntryFresh,
-    setPrefetch,
-  } = useUnread();
+  const { setUnreadGroup, clearScope } = useUnread();
   const { ensurePaid, ensurePremium, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
@@ -260,67 +144,25 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   // 画面内では MyWebScreen 自身の refreshUnreadBadges() を唯一の truth にする。
   // UnreadContext は初期プリロードやタブ用の外部キャッシュとして扱い、
   // ここへ逆流させない（false -> true -> false の点滅を防ぐ）。
-  const [unreadByType, setUnreadByType] = useState(() => {
-    const seeded = pickMyWebPrefetchEntry({
-      getPrefetchEntry,
-      getPrefetchEntryFresh,
-      key: "unreadStatus",
-      maxAgeMs: MYWEB_UNREAD_PREFETCH_MAX_AGE_MS,
-      allowStale: true,
-    });
-    return seeded.entry?.value
-      ? normalizeMyWebUnreadFlags(seeded.entry.value)
-      : {
-          daily: false,
-          weekly: false,
-          monthly: false,
-          selfStructure: false,
-        };
+  const [unreadByType, setUnreadByType] = useState({
+    daily: false,
+    weekly: false,
+    monthly: false,
+    selfStructure: false,
   });
-  const [unreadResolved, setUnreadResolved] = useState(() => {
-    const seeded = pickMyWebPrefetchEntry({
-      getPrefetchEntry,
-      getPrefetchEntryFresh,
-      key: "unreadStatus",
-      maxAgeMs: MYWEB_UNREAD_PREFETCH_MAX_AGE_MS,
-      allowStale: true,
-    });
-    return !!seeded.entry?.value;
+  const [unreadResolved, setUnreadResolved] = useState(false);
+
+  const [weeklySummary, setWeeklySummary] = useState({
+    loading: true,
+    count: 0,
+    top: [],
+    error: "",
   });
 
-  const [weeklySummary, setWeeklySummary] = useState(() => {
-    const seeded = pickMyWebPrefetchEntry({
-      getPrefetchEntry,
-      getPrefetchEntryFresh,
-      key: "homeSummary",
-      maxAgeMs: MYWEB_HOME_SUMMARY_PREFETCH_MAX_AGE_MS,
-      allowStale: true,
-    });
-    return seeded.entry?.value
-      ? buildWeeklySummaryState(seeded.entry.value)
-      : {
-          loading: true,
-          count: 0,
-          top: [],
-          error: "",
-        };
-  });
-
-  const [monthlySummary, setMonthlySummary] = useState(() => {
-    const seeded = pickMyWebPrefetchEntry({
-      getPrefetchEntry,
-      getPrefetchEntryFresh,
-      key: "homeSummary",
-      maxAgeMs: MYWEB_HOME_SUMMARY_PREFETCH_MAX_AGE_MS,
-      allowStale: true,
-    });
-    return seeded.entry?.value
-      ? buildMonthlySummaryState(seeded.entry.value)
-      : {
-          loading: true,
-          count: 0,
-          error: "",
-        };
+  const [monthlySummary, setMonthlySummary] = useState({
+    loading: true,
+    count: 0,
+    error: "",
   });
 
   // (hooks moved to the top of the component)
@@ -643,225 +485,78 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     }
   }, []);
 
-  const applyMyWebPrefetch = useCallback(
-    (options = {}) => {
-      const allowStale = options?.allowStale !== false;
-      const unreadSeed = pickMyWebPrefetchEntry({
-        getPrefetchEntry,
-        getPrefetchEntryFresh,
-        key: "unreadStatus",
-        maxAgeMs: MYWEB_UNREAD_PREFETCH_MAX_AGE_MS,
-        allowStale,
-      });
-      const homeSeed = pickMyWebPrefetchEntry({
-        getPrefetchEntry,
-        getPrefetchEntryFresh,
-        key: "homeSummary",
-        maxAgeMs: MYWEB_HOME_SUMMARY_PREFETCH_MAX_AGE_MS,
-        allowStale,
-      });
-
-      let appliedUnread = false;
-      let appliedHomeSummary = false;
-
-      if (unreadSeed.entry?.value) {
-        const nextUnread = normalizeMyWebUnreadFlags(unreadSeed.entry.value);
-        setUnreadByType((prev) =>
-          sameMyWebUnreadFlags(prev, nextUnread) ? prev : nextUnread
-        );
-        setUnreadResolved(true);
-        appliedUnread = true;
-      }
-
-      if (homeSeed.entry?.value) {
-        const nextWeeklySummary = buildWeeklySummaryState(homeSeed.entry.value);
-        const nextMonthlySummary = buildMonthlySummaryState(homeSeed.entry.value);
-
-        setWeeklySummary((prev) =>
-          sameWeeklySummaryState(prev, nextWeeklySummary) ? prev : nextWeeklySummary
-        );
-        setMonthlySummary((prev) =>
-          sameMonthlySummaryState(prev, nextMonthlySummary) ? prev : nextMonthlySummary
-        );
-        appliedHomeSummary = true;
-      }
-
-      return {
-        appliedUnread,
-        unreadFresh: !!unreadSeed.fresh,
-        appliedHomeSummary,
-        homeSummaryFresh: !!homeSeed.fresh,
-      };
-    },
-    [getPrefetchEntry, getPrefetchEntryFresh]
-  );
-
   // MyWeb（日/週/月）の未読状態を更新
-  const refreshUnreadBadges = useCallback(
-    async (options = {}) => {
-      const refreshSeq = ++unreadRefreshSeqRef.current;
-      const isStale = () => refreshSeq !== unreadRefreshSeqRef.current;
-      const forceRefresh = !!options?.forceRefresh;
+  const refreshUnreadBadges = useCallback(async () => {
+    const refreshSeq = ++unreadRefreshSeqRef.current;
+    const isStale = () => refreshSeq !== unreadRefreshSeqRef.current;
 
-      try {
-        const query = new URLSearchParams({
-          limit: "1",
-          include_self_structure: isPaid ? "true" : "false",
-        }).toString();
-        const json = await apiGet(`/report-reads/myweb-unread-status?${query}`, {
-          cacheTtlMs: 10 * 1000,
-          staleOk: !forceRefresh,
-          forceRefresh,
-        });
-        const nextUnread = normalizeMyWebUnreadFlags(json);
-        const fetchedAt = Date.now();
-
-        if (isStale()) return json;
-
-        setUnreadByType((prev) =>
-          sameMyWebUnreadFlags(prev, nextUnread) ? prev : nextUnread
-        );
-        setUnreadResolved(true);
-
-        try {
-          setPrefetch("MyWeb", "unreadStatus", json, { fetchedAt });
-        } catch {
-          // noop
-        }
-
-        return json;
-      } catch (e) {
-        if (isStale()) return null;
-        console.warn("MyWebScreen: failed to refresh unread badges", e);
-        return null;
-      }
-    },
-    [isPaid, setPrefetch]
-  );
-
-  const refreshHomeSummaries = useCallback(
-    async (options = {}) => {
-      const forceRefresh = !!options?.forceRefresh;
-      const showLoading = !!options?.showLoading;
-
-      if (showLoading) {
-        setWeeklySummary((prev) => ({
-          ...prev,
-          loading: true,
-          error: "",
-        }));
-        setMonthlySummary((prev) => ({
-          ...prev,
-          loading: true,
-          error: "",
-        }));
-      }
-
-      try {
-        const json = await apiGet("/myweb/home-summary", {
-          cacheTtlMs: 15 * 1000,
-          staleOk: !forceRefresh,
-          forceRefresh,
-        });
-        const nextWeeklySummary = buildWeeklySummaryState(json);
-        const nextMonthlySummary = buildMonthlySummaryState(json);
-        const fetchedAt = Date.now();
-
-        setWeeklySummary((prev) =>
-          sameWeeklySummaryState(prev, nextWeeklySummary) ? prev : nextWeeklySummary
-        );
-        setMonthlySummary((prev) =>
-          sameMonthlySummaryState(prev, nextMonthlySummary) ? prev : nextMonthlySummary
-        );
-
-        try {
-          setPrefetch("MyWeb", "homeSummary", json, { fetchedAt });
-        } catch {
-          // noop
-        }
-
-        return json;
-      } catch (e) {
-        console.warn("MyWebScreen: failed to refresh home summaries", e);
-        const message = String(e?.message || e || "");
-
-        if (showLoading) {
-          setWeeklySummary({
-            loading: false,
-            count: 0,
-            top: [],
-            error: message,
-          });
-          setMonthlySummary({
-            loading: false,
-            count: 0,
-            error: message,
-          });
-        } else {
-          setWeeklySummary((prev) => ({
-            ...prev,
-            loading: false,
-            error: prev?.count > 0 ? String(prev?.error || "") : message,
-          }));
-          setMonthlySummary((prev) => ({
-            ...prev,
-            loading: false,
-            error: prev?.count > 0 ? String(prev?.error || "") : message,
-          }));
-        }
-
-        return null;
-      }
-    },
-    [setPrefetch]
-  );
-
-  const triggerEnsureLikelyMissingReports = useCallback(async () => {
     try {
-      await apiPost("/myweb/reports/ensure", {
-        types: ["weekly", "monthly"],
-        force: false,
+      const query = new URLSearchParams({
+        limit: "1",
+        include_self_structure: isPaid ? "true" : "false",
+      }).toString();
+      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
+      const unread = json?.unread_by_type || {};
+
+      if (isStale()) return;
+
+      setUnreadByType({
+        daily: !!unread?.daily,
+        weekly: !!unread?.weekly,
+        monthly: !!unread?.monthly,
+        selfStructure: !!unread?.selfStructure,
+      });
+      setUnreadResolved(true);
+    } catch (e) {
+      if (isStale()) return;
+      console.warn("MyWebScreen: failed to refresh unread badges", e);
+    }
+  }, [isPaid]);
+
+  const refreshHomeSummaries = useCallback(async () => {
+    setWeeklySummary((prev) => ({
+      ...prev,
+      loading: true,
+      error: "",
+    }));
+    setMonthlySummary((prev) => ({
+      ...prev,
+      loading: true,
+      error: "",
+    }));
+
+    try {
+      const json = await apiGet("/myweb/home-summary");
+      const weekly = json?.weekly || {};
+      const monthly = json?.monthly || {};
+
+      setWeeklySummary({
+        loading: false,
+        count: typeof weekly?.count === "number" ? weekly.count : 0,
+        top: Array.isArray(weekly?.top) ? weekly.top : [],
+        error: String(weekly?.error || ""),
+      });
+      setMonthlySummary({
+        loading: false,
+        count: typeof monthly?.count === "number" ? monthly.count : 0,
+        error: String(monthly?.error || ""),
       });
     } catch (e) {
-      console.warn("MyWebScreen: myweb/reports/ensure failed", e);
+      console.warn("MyWebScreen: failed to refresh home summaries", e);
+      const message = String(e?.message || e || "");
+      setWeeklySummary({
+        loading: false,
+        count: 0,
+        top: [],
+        error: message,
+      });
+      setMonthlySummary({
+        loading: false,
+        count: 0,
+        error: message,
+      });
     }
   }, []);
-
-  const hasHomeSummaryState = !weeklySummary.loading || !monthlySummary.loading;
-
-  const syncMyWebHome = useCallback(
-    async (options = {}) => {
-      const forceRefresh = !!options?.forceRefresh;
-      const prefetchState = applyMyWebPrefetch({ allowStale: true });
-      const tasks = [];
-
-      if (forceRefresh || !prefetchState.unreadFresh) {
-        tasks.push(refreshUnreadBadges({ forceRefresh }));
-      }
-
-      if (forceRefresh || !prefetchState.homeSummaryFresh) {
-        tasks.push(
-          refreshHomeSummaries({
-            forceRefresh,
-            showLoading: !prefetchState.appliedHomeSummary && !hasHomeSummaryState,
-          })
-        );
-      }
-
-      if (tasks.length === 0) {
-        return prefetchState;
-      }
-
-      await Promise.all(
-        tasks.map((task) =>
-          Promise.resolve(task).catch(() => null)
-        )
-      );
-
-      return prefetchState;
-    },
-    [applyMyWebPrefetch, hasHomeSummaryState, refreshHomeSummaries, refreshUnreadBadges]
-  );
 
 
   const openReportHistory = (type) => {
@@ -1033,7 +728,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       try {
         await markReportRead(report);
       } finally {
-        refreshUnreadBadges({ forceRefresh: true });
+        refreshUnreadBadges();
       }
     },
     [markReportRead, refreshUnreadBadges]
@@ -1129,38 +824,50 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
   // Phase2: MyWebを開いたタイミングで、サーバ側の配布状態をオンデマンドで追いつかせる
   // （端末タイマーによる自動生成は停止し、MashOS主導へ移行）
-  // ここでは fire-and-forget にして、Home の描画を待たせない。
   const ensuredRef = useRef(false);
   useEffect(() => {
     if (ensuredRef.current) return;
     ensuredRef.current = true;
 
-    Promise.resolve()
-      .then(() => triggerEnsureLikelyMissingReports())
-      .catch(() => null);
-  }, [triggerEnsureLikelyMissingReports]);
+    (async () => {
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        const accessToken = sessionData?.session?.access_token ?? null;
+        if (!accessToken) return;
 
+        const res = await apiFetch(MYWEB_REPORTS_ENSURE_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            types: ["weekly", "monthly"],
+            force: false,
+          }),
+        });
+
+        if (!res.ok) {
+          const t = await res.text();
+          console.warn("MyWebScreen: myweb/reports/ensure failed", res.status, t);
+        }
+      } catch (e) {
+        console.warn("MyWebScreen: myweb/reports/ensure failed", e);
+      } finally {
+        // 生成/配布の追いつかせ後に、未読バッジを更新
+        refreshUnreadBadges();
+        refreshHomeSummaries();
+      }
+    })();
+  }, [refreshUnreadBadges, refreshHomeSummaries]);
+
+  // Home に戻ったタイミングでも更新
   useEffect(() => {
-    if (route !== "home") return;
-
-    Promise.resolve()
-      .then(() => syncMyWebHome())
-      .catch(() => null);
-  }, [route, syncMyWebHome]);
-
-  useEffect(() => {
-    if (!navigation?.addListener) return;
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      if (routeRef.current !== "home") return;
-
-      Promise.resolve()
-        .then(() => syncMyWebHome())
-        .catch(() => null);
-    });
-
-    return unsubscribe;
-  }, [navigation, syncMyWebHome]);
+    if (route === "home") {
+      refreshUnreadBadges();
+      refreshHomeSummaries();
+    }
+  }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
@@ -1175,6 +882,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           reportType={reportType}
           onBack={() => {
             setRoute("home");
+            refreshUnreadBadges();
+            refreshHomeSummaries();
           }}
           onOpenReport={openReportView}
           onGenerateLatest={() => setRoute(reportType)}
@@ -1185,6 +894,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           report={selectedReport}
           onBack={() => {
             setRoute("reportHistory");
+            refreshUnreadBadges();
           }}
           onOpenMyProfile={onOpenMyProfile}
           onOpenSubscription={openSubscriptionSelect}
@@ -1194,7 +904,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           reportType="monthly"
           onBack={() => {
             setRoute("home");
-            refreshUnreadBadges({ forceRefresh: true });
+            refreshUnreadBadges();
+            refreshHomeSummaries();
           }}
           onOpenReport={openSelfReportView}
           onGenerateLatest={() => {
@@ -1210,6 +921,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           report={selectedSelfReport}
           onBack={() => {
             setRoute("selfReportHistory");
+            refreshUnreadBadges();
           }}
         />
       ) : route === "selfReportGenerate" ? (

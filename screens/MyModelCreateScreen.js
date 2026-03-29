@@ -505,14 +505,10 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
 
           {/* 説明 */}
           <View style={styles.introCard}>
-            <Text style={styles.introTitle}>問いに答えて、Reflectionを作成</Text>
+            <Text style={styles.introTitle}>問いに答えて、MyModelを構築</Text>
             <Text style={styles.introText}>
-              質問に答えることでReflectionを作成できます。{"\n"}
-              こちらで作成した内容をReflectionsで閲覧したり、{"\n"}
-              フォローしてもらうことで他ユーザーに公開可能です。{"\n"}
-              シークレットメモをオンにすれば内容を非公開にできます。{"\n"}
-              全てに答えなくても「保存する」を押せば、{"\n"}
-              答えた問いのみ「回答済み」となります。{"\n"}
+              全てに答える必要はありません。{"\n"}
+              「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}
               {introSubscriptionBenefit}{"\n"}
               {introSecretToggleNote}{"\n"}{"\n"}
               2ページ目以降はPlus会員以上で利用できます。
