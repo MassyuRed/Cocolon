@@ -16,6 +16,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
 import { useSubscription } from "../SubscriptionContext";
+import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 import CocolonButton from "../components/CocolonButton";
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
@@ -28,7 +29,11 @@ const HISTORY_PAGE_LIMIT = 60;
 
 export default function TodayQuestionHistoryScreen({ onBack }) {
   const { colors, themeName } = useTheme();
-  const { isPaid } = useSubscription();
+  const {
+    isPaid,
+    tier: subscriptionTier,
+    loading: subscriptionLoading,
+  } = useSubscription();
   const styles = useMemo(() => createStyles(colors), [colors]);
   const { height: windowHeight } = useWindowDimensions();
   const isIOS = Platform.OS === "ios";
@@ -48,6 +53,11 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
     if (!h) return 520;
     return Math.max(260, Math.floor(h * 0.75));
   }, [windowHeight]);
+  const historyRetentionLabel = useMemo(
+    () => getHistoryRetentionLabel(subscriptionTier),
+    [subscriptionTier]
+  );
+  const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
     if (append) setLoadingMore(true);
@@ -231,6 +241,12 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
               過去の回答を編集すると、自己構造分析に即時反映されます。
             </Text>
           )}
+
+          {showHistoryRetentionLabel ? (
+            <Text style={styles.historyRetentionText}>
+              {historyRetentionLabel}
+            </Text>
+          ) : null}
 
           {loading ? (
             <View style={styles.loadingWrap}>
@@ -482,6 +498,13 @@ function createStyles(COLORS) {
       fontSize: 12,
       lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
+    },
+    historyRetentionText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      fontWeight: "600",
       marginBottom: 12,
     },
     loadingWrap: {

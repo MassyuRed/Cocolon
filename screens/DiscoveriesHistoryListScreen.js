@@ -13,8 +13,10 @@ import {
 import { useFocusEffect } from "@react-navigation/native";
 
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { supabase } from "../lib/supabase";
+import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 
 // UI
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -56,10 +58,16 @@ function formatDateTime(isoString) {
 
 export default function DiscoveriesHistoryListScreen({ navigation }) {
   const { colors, themeName } = useTheme();
+  const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const isDark = String(themeName || "").toLowerCase() === "dark";
+  const historyRetentionLabel = useMemo(
+    () => getHistoryRetentionLabel(subscriptionTier),
+    [subscriptionTier]
+  );
+  const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
   const [order, setOrder] = useState("newest"); // newest | oldest
   const [items, setItems] = useState([]);
@@ -275,6 +283,10 @@ export default function DiscoveriesHistoryListScreen({ navigation }) {
           <View style={styles.headerSide} />
         </View>
 
+        {showHistoryRetentionLabel ? (
+          <Text style={styles.historyRetentionText}>{historyRetentionLabel}</Text>
+        ) : null}
+
         <View style={styles.sortRow}>
           <Text style={styles.sortLabel}>並び替え</Text>
 
@@ -390,6 +402,12 @@ function createStyles(COLORS, ui) {
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
       letterSpacing: 0.8,
+    },
+    historyRetentionText: {
+      marginBottom: 10,
+      fontSize: font.sectionLabel ?? 12,
+      fontWeight: "600",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
 
     // Sort

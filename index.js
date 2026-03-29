@@ -37,6 +37,28 @@ if (!Array.prototype.findLastIndex) {
   });
 }
 
+if (typeof globalThis.WeakRef !== 'function') {
+  class WeakRefPolyfill {
+    constructor(target) {
+      this._target = target;
+    }
+
+    deref() {
+      return this._target;
+    }
+  }
+
+  Object.defineProperty(globalThis, 'WeakRef', {
+    value: WeakRefPolyfill,
+    writable: true,
+    configurable: true,
+  });
+
+  if (typeof global !== 'undefined' && typeof global.WeakRef !== 'function') {
+    global.WeakRef = WeakRefPolyfill;
+  }
+}
+
 // ------------------------------------------------------------
 // Push: FCM background handler
 // - Needed for data-only messages when app is in background/killed

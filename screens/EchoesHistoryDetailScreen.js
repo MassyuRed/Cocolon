@@ -11,8 +11,13 @@ import {
 } from "react-native";
 
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { apiGet, getAccessToken } from "../lib/apiClient";
+import {
+  getHistoryRetentionLabel,
+  pickHistoryRetentionTier,
+} from "../lib/historyRetentionLabel";
 
 // UI
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -81,6 +86,7 @@ function parseOwnerUserIdFromInstanceId(qInstanceId) {
 
 export default function EchoesHistoryDetailScreen({ navigation, route }) {
   const { colors, themeName } = useTheme();
+  const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
@@ -110,6 +116,16 @@ export default function EchoesHistoryDetailScreen({ navigation, route }) {
   const [historyNextOffset, setHistoryNextOffset] = useState(null);
 
   const abortRef = useRef(null);
+  const resolvedHistoryTier = useMemo(
+    () => pickHistoryRetentionTier(history?.subscription_tier, subscriptionTier),
+    [history?.subscription_tier, subscriptionTier]
+  );
+  const historyRetentionLabel = useMemo(
+    () => getHistoryRetentionLabel(resolvedHistoryTier),
+    [resolvedHistoryTier]
+  );
+  const showHistoryRetentionLabel =
+    !!historyRetentionLabel && (!subscriptionLoading || resolvedHistoryTier !== "unknown");
 
   const resolveOwnerNameIfNeeded = useCallback(
     async (qId, signal) => {
@@ -325,10 +341,14 @@ export default function EchoesHistoryDetailScreen({ navigation, route }) {
           </View>
         </View>
 
+        {showHistoryRetentionLabel ? (
+          <Text style={styles.historyRetentionText}>{historyRetentionLabel}</Text>
+        ) : null}
+
         <Text style={styles.listTitle}>タイムライン</Text>
       </View>
     );
-  }, [styles, ownerDisplayName, detail, history]);
+  }, [styles, ownerDisplayName, detail, history, historyRetentionLabel, showHistoryRetentionLabel]);
 
   const renderItem = useCallback(
     ({ item }) => {
@@ -549,6 +569,13 @@ function createStyles(COLORS, ui) {
     listFooterSpacer: { height: 12 },
     loadMoreBtn: { borderRadius: 14, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG, alignItems: "center", justifyContent: "center", paddingHorizontal: 14, paddingVertical: 10, marginBottom: 16 },
     loadMoreText: { fontSize: 13, fontWeight: "700", color: COLORS.TEXT_ON_LIGHT },
+    historyRetentionText: {
+      marginTop: 2,
+      marginBottom: 8,
+      fontSize: font.sectionLabel ?? 12,
+      fontWeight: "600",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
     listTitle: {
       marginTop: 4,
       marginBottom: 8,

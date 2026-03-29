@@ -400,8 +400,28 @@ export function AuthProvider({ children }) {
     setAuthError("");
     setAuthLoading(true);
     try {
+      const currentUserId = session?.user?.id;
+      if (currentUserId) {
+        try {
+          const { error: clearPushError } = await supabase
+            .from("profiles")
+            .update({
+              push_token: null,
+              push_token_updated_at: new Date().toISOString(),
+            })
+            .eq("id", currentUserId);
+
+          if (clearPushError) {
+            console.warn("profiles push_token clear error:", clearPushError);
+          }
+        } catch (clearErr) {
+          console.warn("profiles push_token clear exception:", clearErr);
+        }
+      }
+
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+      lastSyncedPushRef.current = { userId: null, token: null };
       setRecoveryMode(false);
     } catch (e) {
       setAuthError(e.message ?? String(e));

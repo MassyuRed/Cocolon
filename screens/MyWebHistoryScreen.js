@@ -15,7 +15,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
 import { apiJson, apiFetch } from "../lib/apiClient";
+import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 
 const API_BASE = "https://mashos-api.onrender.com";
 const EMOTION_SECRET_URL = `${API_BASE}/emotion/secret`;
@@ -211,7 +213,13 @@ export default function MyWebHistoryScreen({ onBack }) {
   const [deletingId, setDeletingId] = useState(null);
 
   const { themeName, colors } = useTheme();
+  const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
+  const historyRetentionLabel = useMemo(
+    () => getHistoryRetentionLabel(subscriptionTier),
+    [subscriptionTier]
+  );
+  const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
   const themed = useMemo(() => {
     if (!isDark) return {};
     return {
@@ -875,6 +883,17 @@ export default function MyWebHistoryScreen({ onBack }) {
           </View>
         ) : null}
 
+        {showHistoryRetentionLabel ? (
+          <Text
+            style={[
+              styles.historyRetentionText,
+              { color: isDark ? colors.TEXT_ON_LIGHT : "#111827" },
+            ]}
+          >
+            {historyRetentionLabel}
+          </Text>
+        ) : null}
+
         {hasMore ? (
           <Text style={[styles.noticeText, themed.noticeText]}>
             下にスクロールして続きを読み込み
@@ -1175,6 +1194,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#F9FAFB",
   },
   conditionText: { flex: 1, fontSize: 12, color: "#6B7280" },
+  historyRetentionText: {
+    marginTop: 8,
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#111827",
+  },
 
   error: { padding: 12, color: "#B91C1C" },
   rowTop: {

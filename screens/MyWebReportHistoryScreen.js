@@ -18,6 +18,7 @@ import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
 import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
+import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 // Subscription (MyWeb paywall)
 // - free: weekly/monthly are chart-only (no text / no PDF)
 // - plus/premium: can view full text + PDF
@@ -769,6 +770,11 @@ export default function MyWebReportHistoryScreen({
     const jp = TYPE_JP[normalizedReportType] || "レポート";
     return `${jp}履歴`;
   }, [normalizedReportType]);
+  const historyRetentionLabel = useMemo(
+    () => getHistoryRetentionLabel(subscriptionTier),
+    [subscriptionTier]
+  );
+  const showHistoryRetentionLabel = !tierLoading && !!historyRetentionLabel;
 
   return (
     <SafeAreaView style={[styles.container, themed.container]}>
@@ -831,6 +837,17 @@ export default function MyWebReportHistoryScreen({
             ) : null}
 
         </View>
+
+        {showHistoryRetentionLabel ? (
+          <Text
+            style={[
+              styles.historyRetentionText,
+              { color: isDark ? colors.TEXT_ON_LIGHT : "#111827" },
+            ]}
+          >
+            {historyRetentionLabel}
+          </Text>
+        ) : null}
       </View>
 
       {/* エラー */}
@@ -924,6 +941,12 @@ const styles = StyleSheet.create({
   headerTitle: { fontSize: 20, fontWeight: "800", color: "#111827" },
 
   topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
+  historyRetentionText: {
+    marginTop: 8,
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#111827",
+  },
 
   scheduleCard: {
     borderWidth: 1,

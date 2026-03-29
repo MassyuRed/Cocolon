@@ -6,6 +6,7 @@ import {
   AppState,
   Keyboard,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   ScrollView,
   StatusBar,
@@ -16,16 +17,16 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Supabase Auth
+import { useAuth } from "../AuthContext";
 import { apiGet, apiPost } from "../lib/apiClient";
 import {
-  getTodayQuestionCurrent,
   submitTodayQuestionAnswer,
   resolveLocalTimezoneName,
 } from "../lib/todayQuestionApi";
 import {
-  getNoticesCurrent,
   markNoticePopupSeen,
   markNoticesRead,
 } from "../lib/noticeApi";
@@ -53,12 +54,295 @@ import TodayQuestionModal from "../components/TodayQuestionModal";
 import NoticeModal from "../components/NoticeModal";
 import UnreadBadge from "../components/UnreadBadge";
 
+// 未送信下書きは InputScreen 内で自己完結させ、
+// Metro の外部 helper 解決に依存しないようにする。
+
+const INPUT_DRAFT_TTL_HOURS = 48;
+const INPUT_DRAFT_TTL_MS = INPUT_DRAFT_TTL_HOURS * 60 * 60 * 1000;
+const INPUT_DRAFT_STORAGE_VERSION = 1;
+const INPUT_DRAFT_KEY_PREFIX = "cocolon.inputDraft.v1";
+const VALID_STRENGTHS = new Set(["weak", "medium", "strong"]);
+
+function normalizeDraftUserId(userId) {
+  return String(userId || "").trim();
+}
+
+function buildInputDraftStorageKey(userId) {
+  const normalizedUserId = normalizeDraftUserId(userId);
+  if (!normalizedUserId) return null;
+  return `${INPUT_DRAFT_KEY_PREFIX}:${normalizedUserId}`;
+}
+
+function normalizeDraftEmotionEntry(entry) {
+  const type = String(entry?.type || "").trim();
+  const strength = VALID_STRENGTHS.has(entry?.strength)
+    ? entry.strength
+    : "medium";
+  if (!type) return null;
+  return { type, strength };
+}
+
+function normalizeDraftStringArray(values) {
+  if (!Array.isArray(values)) return [];
+
+  const seen = new Set();
+  const nextValues = [];
+
+  for (const value of values) {
+    const normalized = String(value || "").trim();
+    if (!normalized || seen.has(normalized)) continue;
+    seen.add(normalized);
+    nextValues.push(normalized);
+  }
+
+  return nextValues;
+}
+
+function normalizeInputDraftData(data = {}) {
+  const selectedEmotions = Array.isArray(data?.selectedEmotions)
+    ? data.selectedEmotions
+        .map((entry) => normalizeDraftEmotionEntry(entry))
+        .filter(Boolean)
+    : [];
+
+  return {
+    selectedEmotions,
+    memo: String(data?.memo || ""),
+    memoAction: String(data?.memoAction || ""),
+    selectedCategories: normalizeDraftStringArray(data?.selectedCategories),
+    isSecret: data?.isSecret === true,
+    sendFriendNotification: data?.sendFriendNotification !== false,
+  };
+}
+
+function hasInputDraftContent(data = {}) {
+  const normalized = normalizeInputDraftData(data);
+  return (
+    normalized.selectedEmotions.length > 0 ||
+    normalized.memo.trim().length > 0 ||
+    normalized.memoAction.trim().length > 0 ||
+    normalized.selectedCategories.length > 0
+  );
+}
+
+function isInputDraftExpired(savedAt, nowMs = Date.now()) {
+  const savedAtMs = new Date(savedAt).getTime();
+  if (!Number.isFinite(savedAtMs)) return true;
+  return nowMs - savedAtMs > INPUT_DRAFT_TTL_MS;
+}
+
+async function clearInputDraft(userId) {
+  const storageKey = buildInputDraftStorageKey(userId);
+  if (!storageKey) return;
+  await AsyncStorage.removeItem(storageKey);
+}
+
+async function saveInputDraft(userId, data = {}) {
+  const storageKey = buildInputDraftStorageKey(userId);
+  const normalizedUserId = normalizeDraftUserId(userId);
+  if (!storageKey || !normalizedUserId) return null;
+
+  const normalizedData = normalizeInputDraftData(data);
+  if (!hasInputDraftContent(normalizedData)) {
+    await clearInputDraft(normalizedUserId);
+    return null;
+  }
+
+  const payload = {
+    version: INPUT_DRAFT_STORAGE_VERSION,
+    userId: normalizedUserId,
+    savedAt: new Date().toISOString(),
+    data: normalizedData,
+  };
+
+  await AsyncStorage.setItem(storageKey, JSON.stringify(payload));
+  return payload;
+}
+
+async function loadInputDraft(userId) {
+  const storageKey = buildInputDraftStorageKey(userId);
+  const normalizedUserId = normalizeDraftUserId(userId);
+  if (!storageKey || !normalizedUserId) return null;
+
+  const raw = await AsyncStorage.getItem(storageKey);
+  if (!raw) return null;
+
+  let parsed = null;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    await clearInputDraft(normalizedUserId);
+    return null;
+  }
+
+  const normalizedData = normalizeInputDraftData(parsed?.data || {});
+  const savedAt = parsed?.savedAt || null;
+
+  if (
+    parsed?.version !== INPUT_DRAFT_STORAGE_VERSION ||
+    String(parsed?.userId || "").trim() !== normalizedUserId ||
+    !savedAt ||
+    isInputDraftExpired(savedAt) ||
+    !hasInputDraftContent(normalizedData)
+  ) {
+    await clearInputDraft(normalizedUserId);
+    return null;
+  }
+
+  return {
+    version: INPUT_DRAFT_STORAGE_VERSION,
+    userId: normalizedUserId,
+    savedAt,
+    data: normalizedData,
+  };
+}
+
 // MashOS Emotion Submit API
 // ※ 現在は MashOS を Render 上で稼働させているため、
 //   開発ビルド / 本番ビルドを問わず同じクラウド URL を利用する。
 //   （ローカル API に戻したい場合はここを書き換える）
 
 const GLOBAL_SUMMARY_PATH = "/global_summary";
+const INPUT_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000;
+const INPUT_SUMMARY_CACHE_TTL_MS = 10 * 1000;
+const GLOBAL_SUMMARY_CACHE_TTL_MS = 15 * 1000;
+const NOTICE_CURRENT_CACHE_TTL_MS = 15 * 1000;
+const TODAY_QUESTION_STATUS_CACHE_TTL_MS = 10 * 1000;
+const TODAY_QUESTION_CURRENT_CACHE_TTL_MS = 10 * 1000;
+
+function buildTodayQuestionPath(basePath, timezoneName) {
+  const search = new URLSearchParams();
+  const normalizedTimezone = String(timezoneName || "").trim();
+  if (normalizedTimezone) {
+    search.set("timezone_name", normalizedTimezone);
+  }
+  const qs = search.toString();
+  return qs ? `${basePath}?${qs}` : basePath;
+}
+
+function normalizeHomeCountsPayload(payload) {
+  if (!payload || typeof payload !== "object") return null;
+
+  const todayCount = Number(payload?.today_count ?? payload?.todayCount ?? 0);
+  const weekCount = Number(payload?.week_count ?? payload?.weekCount ?? 0);
+  const monthCount = Number(payload?.month_count ?? payload?.monthCount ?? 0);
+  const streakDays = Number(payload?.streak_days ?? payload?.streakDays ?? 0);
+
+  return {
+    todayCount: Number.isFinite(todayCount) ? todayCount : 0,
+    weekCount: Number.isFinite(weekCount) ? weekCount : 0,
+    monthCount: Number.isFinite(monthCount) ? monthCount : 0,
+    streakDays: Number.isFinite(streakDays) ? streakDays : 0,
+    lastInputAt: payload?.last_input_at || payload?.lastInputAt || null,
+  };
+}
+
+function extractGlobalEmotionUsers(payload) {
+  const nextEmotionUsers = Number(payload?.emotion_users);
+  return Number.isFinite(nextEmotionUsers) ? nextEmotionUsers : null;
+}
+
+function normalizeNoticeCurrentPayload(payload) {
+  if (!payload || typeof payload !== "object") return null;
+
+  const featureEnabled = payload?.feature_enabled !== false;
+  const unreadCount = Math.max(0, Number(payload?.unread_count) || 0);
+  const popupNotice =
+    payload?.popup_notice && typeof payload?.popup_notice === "object"
+      ? payload.popup_notice
+      : null;
+  const popupNoticeId = String(popupNotice?.notice_id || "").trim();
+
+  return {
+    featureEnabled,
+    unreadCount,
+    popupNotice,
+    popupNoticeId,
+  };
+}
+
+function buildNoticeCurrentPrefetchPayload({
+  featureEnabled = true,
+  unreadCount = 0,
+  popupNotice = null,
+} = {}) {
+  const normalizedUnreadCount = Math.max(0, Number(unreadCount) || 0);
+  return {
+    feature_enabled: featureEnabled !== false,
+    unread_count: normalizedUnreadCount,
+    has_unread: normalizedUnreadCount > 0,
+    badge: {
+      count: normalizedUnreadCount,
+    },
+    popup_notice:
+      popupNotice && typeof popupNotice === "object" ? popupNotice : null,
+  };
+}
+
+function hasTodayQuestionRenderableQuestion(bundle) {
+  const question = bundle?.question;
+  return !!(
+    question &&
+    typeof question === "object" &&
+    String(question?.question_id || "").trim() &&
+    typeof question?.text === "string" &&
+    question.text.trim().length > 0
+  );
+}
+
+function shouldShowTodayQuestionModal(bundle, dismissedServiceDayKey = null) {
+  if (!hasTodayQuestionRenderableQuestion(bundle)) return false;
+  if (String(bundle?.answer_status || "").trim() === "answered") return false;
+
+  const serviceDayKey = String(bundle?.service_day_key || "").trim();
+  if (!serviceDayKey) return false;
+  return dismissedServiceDayKey !== serviceDayKey;
+}
+
+function deriveTodayQuestionStatusFromBundle(bundle) {
+  const payload = bundle && typeof bundle === "object" ? bundle : null;
+  if (!payload) return null;
+
+  const question =
+    payload?.question && typeof payload?.question === "object"
+      ? {
+          question_id: String(payload?.question?.question_id || "").trim(),
+          question_key: payload?.question?.question_key || null,
+          version: Number(payload?.question?.version ?? 1) || 1,
+          choice_count:
+            Number(
+              payload?.question?.choice_count ??
+                (Array.isArray(payload?.question?.choices)
+                  ? payload.question.choices.length
+                  : 0)
+            ) || 0,
+          free_text_enabled: payload?.question?.free_text_enabled !== false,
+        }
+      : null;
+
+  const answerStatus =
+    String(payload?.answer_status || "").trim() || "unanswered";
+  const isAnsweredToday = answerStatus === "answered";
+  const hasCurrentQuestion = !!(question?.question_id || isAnsweredToday);
+
+  return {
+    service_day_key: String(payload?.service_day_key || "").trim(),
+    question: question && question.question_id ? question : null,
+    answer_status: answerStatus,
+    answer_summary: payload?.answer_summary || null,
+    delivery:
+      payload?.delivery && typeof payload?.delivery === "object"
+        ? payload.delivery
+        : {},
+    progress:
+      payload?.progress && typeof payload?.progress === "object"
+        ? payload.progress
+        : {},
+    has_current_question: hasCurrentQuestion,
+    should_prompt: !!(question?.question_id && !isAnsweredToday),
+    is_answered_today: isAnsweredToday,
+  };
+}
 
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
@@ -70,6 +354,22 @@ const SELF_INSIGHT = "自己理解";
 
 function getInputLocalTimezoneName() {
   return resolveLocalTimezoneName("Asia/Tokyo");
+}
+
+function formatDraftSavedAt(savedAt) {
+  const savedAtMs = new Date(savedAt).getTime();
+  if (!Number.isFinite(savedAtMs)) return "";
+
+  try {
+    return new Date(savedAtMs).toLocaleString("ja-JP", {
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return "";
+  }
 }
 
 // 感情ボタンの配置（2段構成：下段右は空き）
@@ -100,7 +400,7 @@ const TUTORIAL_TOTAL_STEPS = 23;
  */
 export default function InputScreen({ navigation }) {
   const { colors, themeName } = useTheme();
-  const { setUnread } = useUnread();
+  const { setUnread, getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
   const {
     tier: subscriptionTier,
     loading: subscriptionLoading,
@@ -108,6 +408,7 @@ export default function InputScreen({ navigation }) {
     plusTrialConsumed,
     subscriptionBootstrap,
   } = useSubscription();
+  const { session } = useAuth();
   const {
     isTutorialMode,
     tutorialStep,
@@ -117,6 +418,7 @@ export default function InputScreen({ navigation }) {
   } = useTutorial();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
+  const currentUserId = String(session?.user?.id || "").trim();
 
   const isIOS = Platform.OS === "ios";
 
@@ -137,10 +439,31 @@ export default function InputScreen({ navigation }) {
   const [submitting, setSubmitting] = useState(false);
   const [keyboardInset, setKeyboardInset] = useState(0);
 
-// --- Toast (lightweight feedback after submit) ---
+// --- Lightweight toast / input feedback modal ---
 const toastTimerRef = useRef(null);
 const tutorialFriendNotifyTimerRef = useRef(null);
 const [toastMessage, setToastMessage] = useState(null);
+const [inputFeedbackModalVisible, setInputFeedbackModalVisible] = useState(false);
+const [inputFeedbackModalText, setInputFeedbackModalText] = useState("");
+const [inputFeedbackModalDominantLabel, setInputFeedbackModalDominantLabel] = useState("");
+const draftSaveTimerRef = useRef(null);
+const draftLoadRequestIdRef = useRef(0);
+const latestInputDraftDataRef = useRef(null);
+const [pendingInputDraft, setPendingInputDraft] = useState(null);
+const [draftRestoreModalVisible, setDraftRestoreModalVisible] = useState(false);
+const [draftBootstrapComplete, setDraftBootstrapComplete] = useState(false);
+
+const openInputFeedbackModal = useCallback(({ commentText, dominantLabel = "" }) => {
+  const nextCommentText = String(commentText || "").trim();
+  if (!nextCommentText) return;
+  setInputFeedbackModalText(nextCommentText);
+  setInputFeedbackModalDominantLabel(String(dominantLabel || "").trim());
+  setInputFeedbackModalVisible(true);
+}, []);
+
+const closeInputFeedbackModal = useCallback(() => {
+  setInputFeedbackModalVisible(false);
+}, []);
 
 const showToast = useCallback((msg) => {
   try {
@@ -169,25 +492,19 @@ useEffect(() => {
     } catch {
       // noop
     }
+    try {
+      if (draftSaveTimerRef.current) {
+        clearTimeout(draftSaveTimerRef.current);
+      }
+    } catch {
+      // noop
+    }
   };
 }, []);
 
 const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
 const appStateRef = useRef(AppState.currentState);
 
-const fetchGlobalSummary = useCallback(async () => {
-  try {
-    const json = await apiGet(GLOBAL_SUMMARY_PATH, { auth: false });
-    const nextEmotionUsers = Number(json?.emotion_users);
-    if (Number.isFinite(nextEmotionUsers)) {
-      setGlobalEmotionUsers(nextEmotionUsers);
-    }
-  } catch {
-    // keep previous value
-  }
-}, []);
-
-  
 // --- Home summary (persistent: today / this month) ---
 const [homeTodayCount, setHomeTodayCount] = useState(null);
 const [homeMonthCount, setHomeMonthCount] = useState(null);
@@ -200,6 +517,11 @@ const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
 const [todayQuestionModalVisible, setTodayQuestionModalVisible] = useState(false);
 const dismissedTodayQuestionDayRef = useRef(null);
 const todayQuestionRequestIdRef = useRef(0);
+const todayQuestionBundleRef = useRef(null);
+
+useEffect(() => {
+  todayQuestionBundleRef.current = todayQuestionBundle;
+}, [todayQuestionBundle]);
 
 const clearTodayQuestionUi = useCallback(() => {
   setTodayQuestionBundle(null);
@@ -223,75 +545,489 @@ const clearNoticeUi = useCallback(() => {
   setNoticeLoading(false);
 }, []);
 
-const homeBadgeLabel = useMemo(() => {
-  const m = typeof homeMonthCount === "number" ? homeMonthCount : null;
-  const w = typeof homeWeekCount === "number" ? homeWeekCount : null;
-  const s = typeof homeStreakDays === "number" ? homeStreakDays : null;
-
-  // まずは月間の大きな称号（最上位）
-  if (m != null) {
-    if (m >= 60) return "観測レジェンド";
-  }
-
-  // 連続観測（“継続”を強調）
-  if (s != null) {
-    if (s >= 30) return "連続30日観測";
-    if (s >= 14) return "連続2週間観測";
-    if (s >= 7) return "連続1週間観測";
-    if (s >= 3) return "連続3日観測";
-  }
-
-  // 週内の観測密度（“今週”を強調）
-  if (w != null) {
-    if (w >= 7) return "今週コンプリート";
-    if (w >= 5) return "今週ハイペース";
-  }
-
-  // 月間（中位以下）
-  if (m != null) {
-    if (m >= 30) return "観測マスター";
-    if (m >= 15) return "観測ルーティン";
-    if (m >= 7) return "一週間観測";
-    if (m >= 3) return "観測ウォームアップ";
-    if (m >= 1) return "初観測";
-  }
-
-  return null;
-}, [homeMonthCount, homeWeekCount, homeStreakDays]);
-
-
-const refreshHomeCounts = useCallback(async () => {
+const getInputPrefetchEntryAny = useCallback((key) => {
   try {
-    const json = await apiGet("/input/summary");
-    const todayCount = Number(json?.today_count ?? 0);
-    const weekCount = Number(json?.week_count ?? 0);
-    const monthCount = Number(json?.month_count ?? 0);
-    const streakDays = Number(json?.streak_days ?? 0);
+    return getPrefetchEntry?.("Input", key) || null;
+  } catch {
+    return null;
+  }
+}, [getPrefetchEntry]);
 
-    setHomeTodayCount(Number.isFinite(todayCount) ? todayCount : 0);
-    setHomeWeekCount(Number.isFinite(weekCount) ? weekCount : 0);
-    setHomeMonthCount(Number.isFinite(monthCount) ? monthCount : 0);
-    setHomeStreakDays(Number.isFinite(streakDays) ? streakDays : 0);
+const getInputPrefetchEntryFresh = useCallback(
+  (key, maxAgeMs = INPUT_PREFETCH_MAX_AGE_MS) => {
+    try {
+      return getPrefetchEntryFresh?.("Input", key, maxAgeMs) || null;
+    } catch {
+      return null;
+    }
+  },
+  [getPrefetchEntryFresh]
+);
 
+const hasFreshInputPrefetch = useCallback(
+  (key, maxAgeMs = INPUT_PREFETCH_MAX_AGE_MS) => {
+    return !!getInputPrefetchEntryFresh(key, maxAgeMs);
+  },
+  [getInputPrefetchEntryFresh]
+);
+
+const applyHomeCountsPayload = useCallback((payload) => {
+  const normalized = normalizeHomeCountsPayload(payload);
+  if (!normalized) return false;
+
+  setHomeTodayCount(normalized.todayCount);
+  setHomeWeekCount(normalized.weekCount);
+  setHomeMonthCount(normalized.monthCount);
+  setHomeStreakDays(normalized.streakDays);
+  return true;
+}, []);
+
+const applyGlobalSummaryPayload = useCallback((payload) => {
+  const nextEmotionUsers = extractGlobalEmotionUsers(payload);
+  if (!Number.isFinite(nextEmotionUsers)) return false;
+  setGlobalEmotionUsers(nextEmotionUsers);
+  return true;
+}, []);
+
+const syncTodayQuestionBundlePayload = useCallback((payload, options = {}) => {
+  const normalizedBundle =
+    payload && typeof payload === "object" ? payload : null;
+
+  if (!normalizedBundle) {
+    if (options?.clearWhenEmpty) {
+      setTodayQuestionBundle(null);
+      setTodayQuestionModalVisible(false);
+    }
+    return false;
+  }
+
+  setTodayQuestionBundle(normalizedBundle);
+  if (
+    shouldShowTodayQuestionModal(
+      normalizedBundle,
+      dismissedTodayQuestionDayRef.current
+    )
+  ) {
+    setTodayQuestionModalVisible(true);
+  } else {
+    setTodayQuestionModalVisible(false);
+  }
+  return hasTodayQuestionRenderableQuestion(normalizedBundle);
+}, []);
+
+const syncNoticePayload = useCallback((payload, options = {}) => {
+  const normalized = normalizeNoticeCurrentPayload(payload);
+  if (!normalized) {
+    if (options?.clearWhenEmpty) {
+      clearNoticeUi();
+    }
+    return false;
+  }
+
+  setNoticeFeatureEnabled(normalized.featureEnabled);
+  setNoticeUnreadCount(normalized.unreadCount);
+  setNoticePopup(normalized.popupNotice);
+
+  const shouldOpen =
+    normalized.featureEnabled &&
+    normalized.popupNotice &&
+    normalized.popupNoticeId &&
+    dismissedNoticeIdRef.current !== normalized.popupNoticeId;
+  setNoticeModalVisible(shouldOpen);
+  return true;
+}, [clearNoticeUi]);
+
+const applyHomeCountsPrefetch = useCallback(() => {
+  const entry = getInputPrefetchEntryAny("homeCounts");
+  return applyHomeCountsPayload(entry?.value);
+}, [applyHomeCountsPayload, getInputPrefetchEntryAny]);
+
+const applyGlobalSummaryPrefetch = useCallback(() => {
+  const entry = getInputPrefetchEntryAny("globalSummary");
+  return applyGlobalSummaryPayload(entry?.value);
+}, [applyGlobalSummaryPayload, getInputPrefetchEntryAny]);
+
+const applyNoticePrefetch = useCallback(() => {
+  if (isTutorialMode) {
+    clearNoticeUi();
+    return false;
+  }
+
+  const entry = getInputPrefetchEntryAny("noticeCurrent");
+  const applied = syncNoticePayload(entry?.value);
+  if (applied) {
+    setNoticeLoading(false);
+  }
+  return applied;
+}, [clearNoticeUi, getInputPrefetchEntryAny, isTutorialMode, syncNoticePayload]);
+
+const applyTodayQuestionPrefetch = useCallback(() => {
+  if (isTutorialMode) {
+    clearTodayQuestionUi();
     return {
-      todayCount,
-      weekCount,
-      monthCount,
-      streakDays,
-      lastInputAt: json?.last_input_at || null,
+      applied: false,
+      hasRenderableQuestion: false,
+      hasCurrentQuestion: false,
+      shouldPrompt: false,
     };
+  }
+
+  const popupEntry = getInputPrefetchEntryAny("todayQuestionPopup");
+  if (popupEntry?.value && hasTodayQuestionRenderableQuestion(popupEntry.value)) {
+    const rendered = syncTodayQuestionBundlePayload(popupEntry.value);
+    setTodayQuestionLoading(false);
+    return {
+      applied: true,
+      hasRenderableQuestion: rendered,
+      hasCurrentQuestion: true,
+      shouldPrompt: shouldShowTodayQuestionModal(
+        popupEntry.value,
+        dismissedTodayQuestionDayRef.current
+      ),
+      serviceDayKey: String(popupEntry?.value?.service_day_key || "").trim(),
+    };
+  }
+
+  const status = getInputPrefetchEntryAny("todayQuestionStatus")?.value;
+  if (!status || typeof status !== "object") {
+    return {
+      applied: false,
+      hasRenderableQuestion: false,
+      hasCurrentQuestion: false,
+      shouldPrompt: false,
+    };
+  }
+
+  const serviceDayKey = String(status?.service_day_key || "").trim();
+  const hasCurrentQuestion = !!(
+    status?.has_current_question ||
+    status?.question ||
+    String(status?.answer_status || "").trim() === "answered"
+  );
+  const shouldPrompt = !!status?.should_prompt;
+  const currentBundle = todayQuestionBundleRef.current;
+  const currentBundleDayKey = String(currentBundle?.service_day_key || "").trim();
+  const hasRenderableQuestion =
+    hasTodayQuestionRenderableQuestion(currentBundle) &&
+    (!serviceDayKey || currentBundleDayKey === serviceDayKey);
+
+  if (!hasCurrentQuestion) {
+    setTodayQuestionBundle(null);
+    setTodayQuestionModalVisible(false);
+  } else if (!hasRenderableQuestion && serviceDayKey && currentBundleDayKey && currentBundleDayKey !== serviceDayKey) {
+    setTodayQuestionBundle(null);
+  }
+
+  if (!shouldPrompt) {
+    setTodayQuestionModalVisible(false);
+  }
+  setTodayQuestionLoading(false);
+
+  return {
+    applied: true,
+    hasRenderableQuestion,
+    hasCurrentQuestion,
+    shouldPrompt,
+    serviceDayKey,
+  };
+}, [
+  clearTodayQuestionUi,
+  getInputPrefetchEntryAny,
+  isTutorialMode,
+  syncTodayQuestionBundlePayload,
+]);
+
+const refreshHomeCounts = useCallback(async (options = {}) => {
+  const { forceRefresh = false } = options || {};
+
+  try {
+    const json = await apiGet("/input/summary", {
+      cacheTtlMs: INPUT_SUMMARY_CACHE_TTL_MS,
+      staleOk: !forceRefresh,
+      forceRefresh,
+    });
+    applyHomeCountsPayload(json);
+    if (json && typeof json === "object") {
+      setPrefetch("Input", "homeCounts", json);
+    }
+    return normalizeHomeCountsPayload(json);
   } catch (e) {
     console.warn("InputScreen: refreshHomeCounts failed", e);
     return null;
   }
-}, []);
+}, [applyHomeCountsPayload, setPrefetch]);
+
+const fetchGlobalSummary = useCallback(async (options = {}) => {
+  const { forceRefresh = false } = options || {};
+
+  try {
+    const json = await apiGet(GLOBAL_SUMMARY_PATH, {
+      auth: false,
+      cacheTtlMs: GLOBAL_SUMMARY_CACHE_TTL_MS,
+      staleOk: !forceRefresh,
+      forceRefresh,
+    });
+    applyGlobalSummaryPayload(json);
+    if (json && typeof json === "object") {
+      setPrefetch("Input", "globalSummary", json);
+    }
+    return extractGlobalEmotionUsers(json);
+  } catch {
+    return null;
+  }
+}, [applyGlobalSummaryPayload, setPrefetch]);
+
+const revalidateTodayQuestionCurrent = useCallback(async (options = {}) => {
+  const requestId = todayQuestionRequestIdRef.current + 1;
+  todayQuestionRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearTodayQuestionUi();
+    return null;
+  }
+
+  const {
+    showLoading = false,
+    forceRefresh = false,
+    preserveOnError = true,
+  } = options || {};
+
+  const timezoneName = getInputLocalTimezoneName();
+  if (showLoading) {
+    setTodayQuestionLoading(true);
+  }
+
+  try {
+    const json = await apiGet(
+      buildTodayQuestionPath("/today-question/current", timezoneName),
+      {
+        cacheTtlMs: TODAY_QUESTION_CURRENT_CACHE_TTL_MS,
+        staleOk: !forceRefresh,
+        forceRefresh,
+      }
+    );
+
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
+      return null;
+    }
+
+    if (json && typeof json === "object") {
+      syncTodayQuestionBundlePayload(json);
+      setPrefetch("Input", "todayQuestionPopup", json);
+      const statusPayload = deriveTodayQuestionStatusFromBundle(json);
+      if (statusPayload) {
+        setPrefetch("Input", "todayQuestionStatus", statusPayload);
+      }
+    }
+
+    return json || null;
+  } catch (e) {
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
+      return null;
+    }
+
+    console.warn("InputScreen: revalidateTodayQuestionCurrent failed", e);
+    if (!preserveOnError) {
+      clearTodayQuestionUi();
+    }
+    return null;
+  } finally {
+    if (todayQuestionRequestIdRef.current === requestId) {
+      setTodayQuestionLoading(false);
+    }
+  }
+}, [
+  clearTodayQuestionUi,
+  isTutorialMode,
+  setPrefetch,
+  syncTodayQuestionBundlePayload,
+]);
+
+const revalidateTodayQuestionStatus = useCallback(async (options = {}) => {
+  const requestId = todayQuestionRequestIdRef.current + 1;
+  todayQuestionRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearTodayQuestionUi();
+    return null;
+  }
+
+  const {
+    showLoading = false,
+    forceRefresh = false,
+    preserveOnError = true,
+  } = options || {};
+
+  const timezoneName = getInputLocalTimezoneName();
+  if (showLoading) {
+    setTodayQuestionLoading(true);
+  }
+
+  try {
+    const json = await apiGet(
+      buildTodayQuestionPath("/today-question/status", timezoneName),
+      {
+        cacheTtlMs: TODAY_QUESTION_STATUS_CACHE_TTL_MS,
+        staleOk: !forceRefresh,
+        forceRefresh,
+      }
+    );
+
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
+      return null;
+    }
+
+    if (json && typeof json === "object") {
+      setPrefetch("Input", "todayQuestionStatus", json);
+
+      const serviceDayKey = String(json?.service_day_key || "").trim();
+      const hasCurrentQuestion = !!(
+        json?.has_current_question ||
+        json?.question ||
+        String(json?.answer_status || "").trim() === "answered"
+      );
+      const currentBundle = todayQuestionBundleRef.current;
+      const currentBundleDayKey = String(currentBundle?.service_day_key || "").trim();
+      const hasRenderableQuestion =
+        hasTodayQuestionRenderableQuestion(currentBundle) &&
+        (!serviceDayKey || currentBundleDayKey === serviceDayKey);
+
+      if (!hasCurrentQuestion) {
+        setTodayQuestionBundle(null);
+        setTodayQuestionModalVisible(false);
+        return json;
+      }
+
+      if (!hasRenderableQuestion) {
+        await revalidateTodayQuestionCurrent({
+          showLoading: showLoading || !!json?.should_prompt,
+          forceRefresh,
+          preserveOnError,
+        });
+        return json;
+      }
+
+      if (
+        json?.should_prompt &&
+        shouldShowTodayQuestionModal(
+          currentBundle,
+          dismissedTodayQuestionDayRef.current
+        )
+      ) {
+        setTodayQuestionModalVisible(true);
+      } else if (!json?.should_prompt) {
+        setTodayQuestionModalVisible(false);
+      }
+    }
+
+    return json || null;
+  } catch (e) {
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
+      return null;
+    }
+
+    console.warn("InputScreen: revalidateTodayQuestionStatus failed", e);
+    if (!preserveOnError) {
+      clearTodayQuestionUi();
+    }
+    return null;
+  } finally {
+    if (todayQuestionRequestIdRef.current === requestId) {
+      setTodayQuestionLoading(false);
+    }
+  }
+}, [
+  clearTodayQuestionUi,
+  isTutorialMode,
+  revalidateTodayQuestionCurrent,
+  setPrefetch,
+]);
+
+const revalidateNoticesCurrent = useCallback(async (options = {}) => {
+  const requestId = noticeRequestIdRef.current + 1;
+  noticeRequestIdRef.current = requestId;
+
+  if (isTutorialMode) {
+    clearNoticeUi();
+    return null;
+  }
+
+  const {
+    showLoading = false,
+    forceRefresh = false,
+    preserveOnError = true,
+  } = options || {};
+
+  if (showLoading) {
+    setNoticeLoading(true);
+  }
+
+  try {
+    const json = await apiGet("/notices/current", {
+      cacheTtlMs: NOTICE_CURRENT_CACHE_TTL_MS,
+      staleOk: !forceRefresh,
+      forceRefresh,
+    });
+
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
+      return null;
+    }
+
+    if (json && typeof json === "object") {
+      syncNoticePayload(json);
+      setPrefetch("Input", "noticeCurrent", json);
+    }
+
+    return json || null;
+  } catch (e) {
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
+      return null;
+    }
+
+    console.warn("InputScreen: revalidateNoticesCurrent failed", e);
+    if (!preserveOnError) {
+      clearNoticeUi();
+    }
+    return null;
+  } finally {
+    if (noticeRequestIdRef.current === requestId) {
+      setNoticeLoading(false);
+    }
+  }
+}, [clearNoticeUi, isTutorialMode, setPrefetch, syncNoticePayload]);
 
 useEffect(() => {
-  refreshHomeCounts();
+  if (isTutorialMode) return;
+  applyHomeCountsPrefetch();
+  applyGlobalSummaryPrefetch();
+}, [applyGlobalSummaryPrefetch, applyHomeCountsPrefetch, isTutorialMode]);
+
+useEffect(() => {
+  if (isTutorialMode) return;
+  applyNoticePrefetch();
+}, [applyNoticePrefetch, isTutorialMode]);
+
+useEffect(() => {
+  if (isTutorialMode) return;
+  applyTodayQuestionPrefetch();
+}, [applyTodayQuestionPrefetch, isTutorialMode]);
+
+useEffect(() => {
+  if (isTutorialMode) return;
+
+  applyHomeCountsPrefetch();
+  if (!hasFreshInputPrefetch("homeCounts", INPUT_SUMMARY_CACHE_TTL_MS)) {
+    void refreshHomeCounts();
+  }
 
   let unsubscribe = null;
   try {
-    unsubscribe = navigation?.addListener?.("focus", refreshHomeCounts);
+    unsubscribe = navigation?.addListener?.("focus", () => {
+      applyHomeCountsPrefetch();
+      if (!hasFreshInputPrefetch("homeCounts", INPUT_SUMMARY_CACHE_TTL_MS)) {
+        void refreshHomeCounts();
+      }
+    });
   } catch {
     // noop
   }
@@ -303,14 +1039,30 @@ useEffect(() => {
       // noop
     }
   };
-}, [navigation, refreshHomeCounts]);
+}, [
+  applyHomeCountsPrefetch,
+  hasFreshInputPrefetch,
+  isTutorialMode,
+  navigation,
+  refreshHomeCounts,
+]);
 
 useEffect(() => {
-  fetchGlobalSummary();
+  if (isTutorialMode) return;
+
+  applyGlobalSummaryPrefetch();
+  if (!hasFreshInputPrefetch("globalSummary", GLOBAL_SUMMARY_CACHE_TTL_MS)) {
+    void fetchGlobalSummary();
+  }
 
   let unsubscribe = null;
   try {
-    unsubscribe = navigation?.addListener?.("focus", fetchGlobalSummary);
+    unsubscribe = navigation?.addListener?.("focus", () => {
+      applyGlobalSummaryPrefetch();
+      if (!hasFreshInputPrefetch("globalSummary", GLOBAL_SUMMARY_CACHE_TTL_MS)) {
+        void fetchGlobalSummary();
+      }
+    });
   } catch {
     // noop
   }
@@ -322,12 +1074,143 @@ useEffect(() => {
       // noop
     }
   };
-}, [navigation, fetchGlobalSummary]);
+}, [
+  applyGlobalSummaryPrefetch,
+  fetchGlobalSummary,
+  hasFreshInputPrefetch,
+  isTutorialMode,
+  navigation,
+]);
+
+useEffect(() => {
+  if (isTutorialMode) return;
+
+  const prefetched = applyTodayQuestionPrefetch();
+  const needsCurrentBody =
+    prefetched?.hasCurrentQuestion && !prefetched?.hasRenderableQuestion;
+
+  if (needsCurrentBody) {
+    void revalidateTodayQuestionCurrent({
+      showLoading: !prefetched?.applied,
+      preserveOnError: !!prefetched?.applied,
+    });
+  } else if (!hasFreshInputPrefetch("todayQuestionStatus", TODAY_QUESTION_STATUS_CACHE_TTL_MS)) {
+    void revalidateTodayQuestionStatus({
+      showLoading: !prefetched?.applied,
+      preserveOnError: !!prefetched?.applied,
+    });
+  }
+
+  let unsubscribe = null;
+  try {
+    unsubscribe = navigation?.addListener?.("focus", () => {
+      const nextPrefetched = applyTodayQuestionPrefetch();
+      const nextNeedsCurrentBody =
+        nextPrefetched?.hasCurrentQuestion && !nextPrefetched?.hasRenderableQuestion;
+
+      if (nextNeedsCurrentBody) {
+        void revalidateTodayQuestionCurrent({
+          showLoading: false,
+          preserveOnError: true,
+        });
+      } else if (!hasFreshInputPrefetch("todayQuestionStatus", TODAY_QUESTION_STATUS_CACHE_TTL_MS)) {
+        void revalidateTodayQuestionStatus({
+          showLoading: false,
+          preserveOnError: true,
+        });
+      }
+    });
+  } catch {
+    // noop
+  }
+
+  return () => {
+    try {
+      if (typeof unsubscribe === "function") unsubscribe();
+    } catch {
+      // noop
+    }
+  };
+}, [
+  applyTodayQuestionPrefetch,
+  hasFreshInputPrefetch,
+  isTutorialMode,
+  navigation,
+  revalidateTodayQuestionCurrent,
+  revalidateTodayQuestionStatus,
+]);
+
+useEffect(() => {
+  if (isTutorialMode) return;
+
+  const prefetched = applyNoticePrefetch();
+  if (!hasFreshInputPrefetch("noticeCurrent", NOTICE_CURRENT_CACHE_TTL_MS)) {
+    void revalidateNoticesCurrent({
+      showLoading: !prefetched,
+      preserveOnError: prefetched,
+    });
+  }
+
+  let unsubscribe = null;
+  try {
+    unsubscribe = navigation?.addListener?.("focus", () => {
+      const nextPrefetched = applyNoticePrefetch();
+      if (!hasFreshInputPrefetch("noticeCurrent", NOTICE_CURRENT_CACHE_TTL_MS)) {
+        void revalidateNoticesCurrent({
+          showLoading: false,
+          preserveOnError: nextPrefetched,
+        });
+      }
+    });
+  } catch {
+    // noop
+  }
+
+  return () => {
+    try {
+      if (typeof unsubscribe === "function") unsubscribe();
+    } catch {
+      // noop
+    }
+  };
+}, [
+  applyNoticePrefetch,
+  hasFreshInputPrefetch,
+  isTutorialMode,
+  navigation,
+  revalidateNoticesCurrent,
+]);
 
 useEffect(() => {
   const subscription = AppState.addEventListener("change", (nextAppState) => {
     if (/inactive|background/.test(appStateRef.current) && nextAppState === "active") {
-      fetchGlobalSummary();
+      applyGlobalSummaryPrefetch();
+      if (!hasFreshInputPrefetch("globalSummary", GLOBAL_SUMMARY_CACHE_TTL_MS)) {
+        void fetchGlobalSummary();
+      }
+
+      applyNoticePrefetch();
+      if (!hasFreshInputPrefetch("noticeCurrent", NOTICE_CURRENT_CACHE_TTL_MS)) {
+        void revalidateNoticesCurrent({
+          showLoading: false,
+          preserveOnError: true,
+        });
+      }
+
+      const prefetched = applyTodayQuestionPrefetch();
+      const needsCurrentBody =
+        prefetched?.hasCurrentQuestion && !prefetched?.hasRenderableQuestion;
+      if (needsCurrentBody) {
+        void revalidateTodayQuestionCurrent({
+          showLoading: false,
+          preserveOnError: true,
+        });
+      } else if (!hasFreshInputPrefetch("todayQuestionStatus", TODAY_QUESTION_STATUS_CACHE_TTL_MS)) {
+        void revalidateTodayQuestionStatus({
+          showLoading: false,
+          preserveOnError: true,
+        });
+      }
     }
     appStateRef.current = nextAppState;
   });
@@ -339,161 +1222,79 @@ useEffect(() => {
       // noop
     }
   };
-}, [fetchGlobalSummary]);
-
-const loadTodayQuestion = useCallback(async () => {
-  const requestId = todayQuestionRequestIdRef.current + 1;
-  todayQuestionRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearTodayQuestionUi();
-    return;
-  }
-
-  const timezoneName = getInputLocalTimezoneName();
-  setTodayQuestionLoading(true);
-  try {
-    const json = await getTodayQuestionCurrent({ timezone_name: timezoneName });
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
-
-    setTodayQuestionBundle(json || null);
-
-    const unanswered = json?.question && json?.answer_status !== "answered";
-    const serviceDayKey = String(json?.service_day_key || "");
-    if (
-      unanswered &&
-      serviceDayKey &&
-      dismissedTodayQuestionDayRef.current !== serviceDayKey
-    ) {
-      setTodayQuestionModalVisible(true);
-    } else {
-      setTodayQuestionModalVisible(false);
-    }
-  } catch (e) {
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
-    console.warn("InputScreen: loadTodayQuestion failed", e);
-    clearTodayQuestionUi();
-  } finally {
-    if (todayQuestionRequestIdRef.current === requestId) {
-      setTodayQuestionLoading(false);
-    }
-  }
-}, [clearTodayQuestionUi, isTutorialMode]);
-
-useEffect(() => {
-  loadTodayQuestion();
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", loadTodayQuestion);
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [navigation, loadTodayQuestion]);
-
-const loadNotices = useCallback(async () => {
-  const requestId = noticeRequestIdRef.current + 1;
-  noticeRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearNoticeUi();
-    return;
-  }
-
-  setNoticeLoading(true);
-  try {
-    const json = await getNoticesCurrent();
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
-
-    const featureEnabled = json?.feature_enabled !== false;
-    const unreadCount = Math.max(0, Number(json?.unread_count) || 0);
-    const popupNotice = json?.popup_notice && typeof json?.popup_notice === "object"
-      ? json.popup_notice
-      : null;
-    const popupNoticeId = String(popupNotice?.notice_id || "").trim();
-
-    setNoticeFeatureEnabled(featureEnabled);
-    setNoticeUnreadCount(unreadCount);
-    setNoticePopup(popupNotice);
-
-    if (
-      featureEnabled &&
-      popupNotice &&
-      popupNoticeId &&
-      dismissedNoticeIdRef.current !== popupNoticeId
-    ) {
-      setNoticeModalVisible(true);
-    } else {
-      setNoticeModalVisible(false);
-    }
-  } catch (e) {
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
-    console.warn("InputScreen: loadNotices failed", e);
-    clearNoticeUi();
-  } finally {
-    if (noticeRequestIdRef.current === requestId) {
-      setNoticeLoading(false);
-    }
-  }
-}, [clearNoticeUi, isTutorialMode]);
-
-useEffect(() => {
-  loadNotices();
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", loadNotices);
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [navigation, loadNotices]);
+}, [
+  applyGlobalSummaryPrefetch,
+  applyNoticePrefetch,
+  applyTodayQuestionPrefetch,
+  fetchGlobalSummary,
+  hasFreshInputPrefetch,
+  revalidateNoticesCurrent,
+  revalidateTodayQuestionCurrent,
+  revalidateTodayQuestionStatus,
+]);
 
 const markCurrentNoticePopupSeen = useCallback(async () => {
   const noticeId = String(noticePopup?.notice_id || "").trim();
   if (!noticeId) return;
+
   dismissedNoticeIdRef.current = noticeId;
+  const popupSeenAt = noticePopup?.popup_seen_at || new Date().toISOString();
+  const nextPopup = {
+    ...(noticePopup || {}),
+    popup_seen_at: popupSeenAt,
+  };
+
+  setNoticePopup(nextPopup);
+  setPrefetch(
+    "Input",
+    "noticeCurrent",
+    buildNoticeCurrentPrefetchPayload({
+      featureEnabled: noticeFeatureEnabled,
+      unreadCount: noticeUnreadCount,
+      popupNotice: nextPopup,
+    })
+  );
+
   try {
     await markNoticePopupSeen({ notice_id: noticeId });
   } catch (e) {
     console.warn("InputScreen: markNoticePopupSeen failed", e);
   }
-}, [noticePopup?.notice_id]);
+}, [
+  noticeFeatureEnabled,
+  noticePopup,
+  noticeUnreadCount,
+  setPrefetch,
+]);
 
 const markCurrentNoticeRead = useCallback(async () => {
   const noticeId = String(noticePopup?.notice_id || "").trim();
   if (!noticeId) return;
+
   try {
     const res = await markNoticesRead({ notice_ids: [noticeId] });
     const nextUnreadCount = Math.max(0, Number(res?.unread_count) || 0);
+    const nextPopup = {
+      ...(noticePopup || {}),
+      is_read: true,
+      read_at: noticePopup?.read_at || new Date().toISOString(),
+    };
+
     setNoticeUnreadCount(nextUnreadCount);
-    setNoticePopup((prev) => {
-      if (String(prev?.notice_id || "").trim() !== noticeId) return prev;
-      return {
-        ...(prev || {}),
-        is_read: true,
-        read_at: prev?.read_at || new Date().toISOString(),
-      };
-    });
+    setNoticePopup(nextPopup);
+    setPrefetch(
+      "Input",
+      "noticeCurrent",
+      buildNoticeCurrentPrefetchPayload({
+        featureEnabled: noticeFeatureEnabled,
+        unreadCount: nextUnreadCount,
+        popupNotice: nextPopup,
+      })
+    );
   } catch (e) {
     console.warn("InputScreen: markNoticesRead failed", e);
   }
-}, [noticePopup?.notice_id]);
+}, [noticeFeatureEnabled, noticePopup, setPrefetch]);
 
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
@@ -540,7 +1341,11 @@ const handleSubmitTodayQuestion = useCallback(async (payload) => {
     });
     showToast("今日の問いを保存しました");
     dismissedTodayQuestionDayRef.current = String(todayQuestionBundle?.service_day_key || "");
-    await loadTodayQuestion();
+    await revalidateTodayQuestionCurrent({
+      showLoading: false,
+      forceRefresh: true,
+      preserveOnError: false,
+    });
     setTodayQuestionModalVisible(false);
   } catch (e) {
     console.warn("InputScreen: submitTodayQuestion failed", e);
@@ -548,7 +1353,7 @@ const handleSubmitTodayQuestion = useCallback(async (payload) => {
   } finally {
     setTodayQuestionSubmitting(false);
   }
-}, [loadTodayQuestion, showToast, todayQuestionBundle]);
+}, [revalidateTodayQuestionCurrent, showToast, todayQuestionBundle]);
 
 const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -584,6 +1389,119 @@ const { height: windowHeight } = useWindowDimensions();
     return Math.max(260, Math.floor(h * 0.75));
   }, [windowHeight, keyboardInset]);
 
+  const inputDraftData = useMemo(
+    () =>
+      normalizeInputDraftData({
+        selectedEmotions,
+        memo,
+        memoAction,
+        selectedCategories,
+        isSecret,
+        sendFriendNotification,
+      }),
+    [
+      isSecret,
+      memo,
+      memoAction,
+      selectedCategories,
+      selectedEmotions,
+      sendFriendNotification,
+    ]
+  );
+
+  latestInputDraftDataRef.current = inputDraftData;
+
+  const hasCurrentDraftContent = useMemo(
+    () => hasInputDraftContent(inputDraftData),
+    [inputDraftData]
+  );
+
+  const shouldShowDraftRestorePrompt = useMemo(() => {
+    if (!pendingInputDraft) return false;
+    if (isTutorialMode) return false;
+    if (noticeLoading || todayQuestionLoading) return false;
+    if (noticeModalVisible || todayQuestionModalVisible) return false;
+    if (inputFeedbackModalVisible) return false;
+    if (hasCurrentDraftContent) return false;
+    return true;
+  }, [
+    hasCurrentDraftContent,
+    inputFeedbackModalVisible,
+    isTutorialMode,
+    noticeLoading,
+    noticeModalVisible,
+    pendingInputDraft,
+    todayQuestionLoading,
+    todayQuestionModalVisible,
+  ]);
+
+  const draftPersistenceBlocked =
+    !draftBootstrapComplete ||
+    !currentUserId ||
+    isTutorialMode ||
+    !!pendingInputDraft ||
+    draftRestoreModalVisible;
+
+  const clearPersistedInputDraft = useCallback(async () => {
+    if (!currentUserId) return;
+    try {
+      await clearInputDraft(currentUserId);
+    } catch (e) {
+      console.warn("InputScreen: clearInputDraft failed", e);
+    }
+  }, [currentUserId]);
+
+  const persistCurrentInputDraft = useCallback(async () => {
+    if (!currentUserId || isTutorialMode) return;
+
+    const nextDraftData = normalizeInputDraftData(
+      latestInputDraftDataRef.current || {}
+    );
+
+    try {
+      if (hasInputDraftContent(nextDraftData)) {
+        await saveInputDraft(currentUserId, nextDraftData);
+      } else {
+        await clearInputDraft(currentUserId);
+      }
+    } catch (e) {
+      console.warn("InputScreen: persistCurrentInputDraft failed", e);
+    }
+  }, [currentUserId, isTutorialMode]);
+
+  const restorePendingInputDraft = useCallback(() => {
+    const restored = normalizeInputDraftData(pendingInputDraft?.data || {});
+    setSelectedEmotions(restored.selectedEmotions);
+    setMemo(restored.memo);
+    setMemoAction(restored.memoAction);
+    setSelectedCategories(restored.selectedCategories);
+    setIsSecret(restored.isSecret);
+    setSendFriendNotification(restored.sendFriendNotification);
+    setShowMemoSection(
+      restored.selectedEmotions.some((item) => item?.type === SELF_INSIGHT) ||
+        restored.memo.trim().length > 0 ||
+        restored.memoAction.trim().length > 0 ||
+        restored.selectedCategories.length > 0
+    );
+    setActiveField(null);
+    setMemoContentHeight(44);
+    setMemoActionContentHeight(44);
+    Keyboard.dismiss();
+    setDraftRestoreModalVisible(false);
+    setPendingInputDraft(null);
+    showToast("前回の内容を復元しました");
+  }, [pendingInputDraft, showToast]);
+
+  const discardPendingInputDraft = useCallback(async () => {
+    setDraftRestoreModalVisible(false);
+    setPendingInputDraft(null);
+    await clearPersistedInputDraft();
+  }, [clearPersistedInputDraft]);
+
+  const draftRestoreSavedAtLabel = useMemo(
+    () => formatDraftSavedAt(pendingInputDraft?.savedAt),
+    [pendingInputDraft?.savedAt]
+  );
 
   // メモ入力がキーボードに隠れないようにスクロール追従
   const scrollRef = useRef(null);
@@ -642,6 +1560,136 @@ const { height: windowHeight } = useWindowDimensions();
       subHide.remove();
     };
   }, [scrollToFocusedInput]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const requestId = draftLoadRequestIdRef.current + 1;
+    draftLoadRequestIdRef.current = requestId;
+
+    if (!currentUserId || isTutorialMode) {
+      setPendingInputDraft(null);
+      setDraftRestoreModalVisible(false);
+      setDraftBootstrapComplete(true);
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    setDraftBootstrapComplete(false);
+
+    const run = async () => {
+      try {
+        const restored = await loadInputDraft(currentUserId);
+        if (cancelled || draftLoadRequestIdRef.current !== requestId) return;
+
+        if (restored && !hasInputDraftContent(latestInputDraftDataRef.current)) {
+          setPendingInputDraft(restored);
+        } else {
+          setPendingInputDraft(null);
+          setDraftRestoreModalVisible(false);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          console.warn("InputScreen: loadInputDraft failed", e);
+          setPendingInputDraft(null);
+          setDraftRestoreModalVisible(false);
+        }
+      } finally {
+        if (!cancelled && draftLoadRequestIdRef.current === requestId) {
+          setDraftBootstrapComplete(true);
+        }
+      }
+    };
+
+    void run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentUserId, isTutorialMode]);
+
+  useEffect(() => {
+    setDraftRestoreModalVisible(shouldShowDraftRestorePrompt);
+  }, [shouldShowDraftRestorePrompt]);
+
+  useEffect(() => {
+    if (!pendingInputDraft) return;
+    if (!hasCurrentDraftContent) return;
+    setPendingInputDraft(null);
+    setDraftRestoreModalVisible(false);
+  }, [hasCurrentDraftContent, pendingInputDraft]);
+
+  useEffect(() => {
+    try {
+      if (draftSaveTimerRef.current) {
+        clearTimeout(draftSaveTimerRef.current);
+        draftSaveTimerRef.current = null;
+      }
+    } catch {
+      // noop
+    }
+
+    if (draftPersistenceBlocked) return;
+
+    draftSaveTimerRef.current = setTimeout(() => {
+      draftSaveTimerRef.current = null;
+      void persistCurrentInputDraft();
+    }, 1000);
+
+    return () => {
+      try {
+        if (draftSaveTimerRef.current) {
+          clearTimeout(draftSaveTimerRef.current);
+          draftSaveTimerRef.current = null;
+        }
+      } catch {
+        // noop
+      }
+    };
+  }, [
+    draftPersistenceBlocked,
+    persistCurrentInputDraft,
+    inputDraftData,
+  ]);
+
+  useEffect(() => {
+    if (draftPersistenceBlocked) return;
+
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (/inactive|background/.test(String(nextAppState || ""))) {
+        void persistCurrentInputDraft();
+      }
+    });
+
+    return () => {
+      try {
+        subscription?.remove?.();
+      } catch {
+        // noop
+      }
+    };
+  }, [draftPersistenceBlocked, persistCurrentInputDraft]);
+
+  useEffect(() => {
+    if (draftPersistenceBlocked) return;
+
+    let unsubscribe = null;
+    try {
+      unsubscribe = navigation?.addListener?.("blur", () => {
+        void persistCurrentInputDraft();
+      });
+    } catch {
+      // noop
+    }
+
+    return () => {
+      try {
+        if (typeof unsubscribe === "function") unsubscribe();
+      } catch {
+        // noop
+      }
+    };
+  }, [draftPersistenceBlocked, navigation, persistCurrentInputDraft]);
 
   const doNotNotifyFriends = !sendFriendNotification;
   const isDark = themeName === "dark";
@@ -1100,8 +2148,18 @@ const { height: windowHeight } = useWindowDimensions();
         return;
       }
 
-      await apiPost("/emotion/submit", payload);
-      // 送信が成功したら、入力状態をリセットし、完了メッセージ（Toast）を表示する
+      const submitResult = await apiPost("/emotion/submit", payload);
+      const inputFeedbackText = String(
+        submitResult?.input_feedback?.comment_text ||
+          submitResult?.inputFeedback?.commentText ||
+          ""
+      ).trim();
+
+      await clearPersistedInputDraft();
+      setPendingInputDraft(null);
+      setDraftRestoreModalVisible(false);
+
+      // 送信が成功したら、入力状態をリセットし、表示用データを更新する
       setSelectedEmotions([]);
       setMemo("");
       setMemoAction("");
@@ -1113,14 +2171,16 @@ const { height: windowHeight } = useWindowDimensions();
       setIsSecret(false);
       Keyboard.dismiss();
 
-      // まずは軽い即時フィードバック（カウント取得失敗時のフォールバックにもなる）
-      showToast(`記録しました
-主感情：${dominantType}${dominantSuffix}`);
-      const summaryPromise = refreshHomeCounts();
-      void fetchGlobalSummary();
-      const summary = await summaryPromise;
-      if (summary?.todayCount != null && summary?.monthCount != null) {
-        showToast(`今日の観測：${summary.todayCount}回目 / 今月：${summary.monthCount}回達成
+      void refreshHomeCounts({ forceRefresh: true });
+      void fetchGlobalSummary({ forceRefresh: true });
+
+      if (inputFeedbackText) {
+        openInputFeedbackModal({
+          commentText: inputFeedbackText,
+          dominantLabel: `主感情：${dominantType}${dominantSuffix}`,
+        });
+      } else {
+        showToast(`記録しました
 主感情：${dominantType}${dominantSuffix}`);
       }
     } catch (error) {
@@ -1933,6 +2993,131 @@ ${String(error?.message || error)}`
   onSubmit={handleSubmitTodayQuestion}
   onOpenHistory={handleOpenTodayQuestionHistory}
 />
+
+<Modal
+  visible={draftRestoreModalVisible}
+  transparent
+  animationType="fade"
+  onRequestClose={() => {}}
+>
+  <View style={styles.draftRestoreBackdrop}>
+    <View style={styles.draftRestoreCard}>
+      <View style={styles.draftRestoreBadgeRow}>
+        <View style={styles.draftRestoreBadge}>
+          <Ionicons
+            name="save-outline"
+            size={15}
+            color={colors.TITLE_GOLD}
+            style={styles.draftRestoreBadgeIcon}
+          />
+          <Text style={styles.draftRestoreBadgeText}>一時保存した入力</Text>
+        </View>
+      </View>
+
+      <View style={styles.draftRestoreHeader}>
+        <Text style={styles.draftRestoreTitle}>前回の続きから入力できます</Text>
+        <Text style={styles.draftRestoreLeadText}>
+          送信前の内容を、この端末に自動で一時保存しています。
+        </Text>
+      </View>
+
+      <View style={styles.draftRestoreInfoCard}>
+        <View style={styles.draftRestoreInfoRow}>
+          <Ionicons
+            name="time-outline"
+            size={16}
+            color={colors.TITLE_GOLD}
+            style={styles.draftRestoreInfoIcon}
+          />
+          <Text style={styles.draftRestoreInfoText}>
+            {draftRestoreSavedAtLabel
+              ? `${draftRestoreSavedAtLabel} に保存 / 保存期間 ${INPUT_DRAFT_TTL_HOURS}時間`
+              : `保存期間は ${INPUT_DRAFT_TTL_HOURS}時間です`}
+          </Text>
+        </View>
+
+        <Text style={styles.draftRestoreBodyText}>
+          続きから入力する場合は前回の内容を復元し、新しく入力する場合は保存内容を削除して空の状態で開きます。
+        </Text>
+      </View>
+
+      <View style={styles.draftRestoreActionColumn}>
+        <CocolonButton
+          variant="primary"
+          onPress={restorePendingInputDraft}
+          accessibilityLabel="前回の内容を復元して続きから入力する"
+        >
+          続きから入力する
+        </CocolonButton>
+        <View style={styles.draftRestoreSecondaryAction}>
+          <CocolonButton
+            variant="secondary"
+            onPress={discardPendingInputDraft}
+            accessibilityLabel="保存内容を削除して新しく入力する"
+          >
+            新しく入力する
+          </CocolonButton>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+
+<Modal
+  visible={inputFeedbackModalVisible}
+  transparent
+  animationType="fade"
+  onRequestClose={closeInputFeedbackModal}
+>
+  <View style={styles.inputFeedbackBackdrop}>
+    <View
+      style={[
+        styles.inputFeedbackCard,
+        { maxHeight: Math.max(320, Math.min(440, Math.floor((windowHeight || 0) * 0.72) || 420)) },
+      ]}
+    >
+      <View style={styles.inputFeedbackHeader}>
+        <View style={styles.inputFeedbackTitleRow}>
+          <Ionicons
+            name="chatbubble-ellipses-outline"
+            size={18}
+            color={colors.TITLE_GOLD}
+            style={styles.inputFeedbackTitleIcon}
+          />
+          <Text style={styles.inputFeedbackTitle}>いまの受け取り</Text>
+        </View>
+        {inputFeedbackModalDominantLabel ? (
+          <Text style={styles.inputFeedbackMetaText}>
+            {inputFeedbackModalDominantLabel}
+          </Text>
+        ) : null}
+      </View>
+
+      <ScrollView
+        style={[
+          styles.inputFeedbackBodyScroll,
+          { maxHeight: Math.max(150, Math.min(260, Math.floor((windowHeight || 0) * 0.32) || 220)) },
+        ]}
+        contentContainerStyle={styles.inputFeedbackBodyContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.inputFeedbackBodyText}>
+          {inputFeedbackModalText}
+        </Text>
+      </ScrollView>
+
+      <View style={styles.inputFeedbackActionRow}>
+        <CocolonButton
+          variant="secondary"
+          onPress={closeInputFeedbackModal}
+          accessibilityLabel="入力直後コメントを閉じる"
+        >
+          閉じる
+        </CocolonButton>
+      </View>
+    </View>
+  </View>
+</Modal>
       </View>
 
 {tutorialOverlayConfig ? (
@@ -2558,6 +3743,186 @@ function createStyles(COLORS, ui) {
     goldButtonDisabled: {
       opacity: 0.5,
       shadowOpacity: 0.05,
+    },
+
+    draftRestoreBackdrop: {
+      flex: 1,
+      backgroundColor: "rgba(15, 23, 42, 0.34)",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: 24,
+    },
+    draftRestoreCard: {
+      width: "100%",
+      maxWidth: 360,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 18,
+      shadowColor: "#000",
+      shadowOpacity: 0.18,
+      shadowRadius: 18,
+      shadowOffset: { width: 0, height: 10 },
+      elevation: 10,
+    },
+    draftRestoreBadgeRow: {
+      alignItems: "center",
+      marginBottom: 14,
+    },
+    draftRestoreBadge: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 7,
+    },
+    draftRestoreBadgeIcon: {
+      marginRight: 6,
+    },
+    draftRestoreBadgeText: {
+      fontSize: 12,
+      lineHeight: 16,
+      fontWeight: "700",
+      color: COLORS.TITLE_GOLD,
+      textAlign: "center",
+    },
+    draftRestoreHeader: {
+      alignItems: "center",
+      marginBottom: 14,
+    },
+    draftRestoreTitle: {
+      fontSize: 20,
+      lineHeight: 28,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
+    draftRestoreLeadText: {
+      marginTop: 8,
+      fontSize: 14,
+      lineHeight: 22,
+      fontWeight: "600",
+      color: COLORS.TEXT_SUBTLE,
+      textAlign: "center",
+    },
+    draftRestoreInfoCard: {
+      width: "100%",
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    },
+    draftRestoreInfoRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 10,
+    },
+    draftRestoreInfoIcon: {
+      marginRight: 6,
+    },
+    draftRestoreInfoText: {
+      flex: 1,
+      fontSize: 12,
+      lineHeight: 18,
+      fontWeight: "700",
+      color: COLORS.TITLE_GOLD,
+      textAlign: "left",
+    },
+    draftRestoreBodyText: {
+      fontSize: 15,
+      lineHeight: 24,
+      fontWeight: "600",
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "left",
+    },
+    draftRestoreActionColumn: {
+      marginTop: 16,
+      width: "100%",
+      alignSelf: "center",
+    },
+    draftRestoreSecondaryAction: {
+      marginTop: 10,
+    },
+    inputFeedbackBackdrop: {
+      flex: 1,
+      backgroundColor: "rgba(15, 23, 42, 0.38)",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: 24,
+    },
+    inputFeedbackCard: {
+      width: "100%",
+      maxWidth: 360,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 18,
+      shadowColor: "#000",
+      shadowOpacity: 0.18,
+      shadowRadius: 18,
+      shadowOffset: { width: 0, height: 10 },
+      elevation: 10,
+    },
+    inputFeedbackHeader: {
+      alignItems: "center",
+      marginBottom: 14,
+    },
+    inputFeedbackTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    inputFeedbackTitleIcon: {
+      marginRight: 6,
+    },
+    inputFeedbackTitle: {
+      fontSize: 20,
+      lineHeight: 28,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
+    inputFeedbackMetaText: {
+      marginTop: 8,
+      fontSize: 13,
+      lineHeight: 18,
+      fontWeight: "700",
+      color: COLORS.TITLE_GOLD,
+      textAlign: "center",
+    },
+    inputFeedbackBodyScroll: {
+      width: "100%",
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+    },
+    inputFeedbackBodyContent: {
+      paddingHorizontal: 18,
+      paddingVertical: 18,
+    },
+    inputFeedbackBodyText: {
+      fontSize: 16,
+      lineHeight: 28,
+      fontWeight: "600",
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "left",
+    },
+    inputFeedbackActionRow: {
+      marginTop: 16,
+      width: "100%",
+      alignSelf: "center",
     },
 
 /** Toast */

@@ -16,6 +16,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { apiGet, apiPost } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
+import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 
 const TYPE_LABEL = Object.freeze({
   monthly: "自己構造",
@@ -196,7 +198,13 @@ export default function SelfStructureReportHistoryScreen({
   const [errorMsg, setErrorMsg] = useState("");
 
   const { themeName, colors } = useTheme();
+  const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
+  const historyRetentionLabel = useMemo(
+    () => getHistoryRetentionLabel(subscriptionTier),
+    [subscriptionTier]
+  );
+  const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
   const themed = useMemo(() => {
     if (!isDark) return {};
@@ -387,6 +395,17 @@ export default function SelfStructureReportHistoryScreen({
             現在の自己構造を見る
           </Text>
         </TouchableOpacity>
+
+        {showHistoryRetentionLabel ? (
+          <Text
+            style={[
+              styles.historyRetentionText,
+              { color: isDark ? colors.TEXT_ON_LIGHT : "#111827" },
+            ]}
+          >
+            {historyRetentionLabel}
+          </Text>
+        ) : null}
       </View>
 
       {/* エラー */}
@@ -488,6 +507,12 @@ const styles = StyleSheet.create({
   headerTitle: { fontSize: 14, fontWeight: "800", color: "#111827" },
 
   topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
+  historyRetentionText: {
+    marginTop: 8,
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#111827",
+  },
   generateBtn: {
     flexDirection: "row",
     alignItems: "center",

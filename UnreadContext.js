@@ -32,6 +32,8 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
  */
 
 const UnreadContext = createContext(null);
+const STARTUP_META_SCOPE = "App";
+const STARTUP_META_KEY = "startupMeta";
 
 function normStr(v) {
   return String(v || "").trim();
@@ -46,17 +48,312 @@ function normKey(key) {
   return k || "__default";
 }
 
+function isObjectRecord(value) {
+  return !!value && typeof value === "object" && !Array.isArray(value);
+}
+
+function safeClone(value) {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch {
+    return value;
+  }
+}
+
+function normalizeUnreadHydrationState(raw) {
+  if (!isObjectRecord(raw)) return {};
+
+  const next = {};
+  Object.entries(raw).forEach(([scopeRaw, scopeMapRaw]) => {
+    const scope = normScope(scopeRaw);
+    if (!scope || !isObjectRecord(scopeMapRaw)) return;
+
+    const scopeMap = {};
+    Object.entries(scopeMapRaw).forEach(([keyRaw, valueRaw]) => {
+      scopeMap[normKey(keyRaw)] = !!valueRaw;
+    });
+
+    if (Object.keys(scopeMap).length > 0) {
+      next[scope] = scopeMap;
+    }
+  });
+
+  return next;
+}
+
+function normalizePrefetchHydrationState(raw, defaultFetchedAt) {
+  if (!isObjectRecord(raw)) return {};
+
+  const next = {};
+  Object.entries(raw).forEach(([scopeRaw, scopeMapRaw]) => {
+    const scope = normScope(scopeRaw);
+    if (!scope || !isObjectRecord(scopeMapRaw)) return;
+
+    const scopeMap = {};
+    Object.entries(scopeMapRaw).forEach(([keyRaw, entryRaw]) => {
+      const key = normKey(keyRaw);
+      if (isObjectRecord(entryRaw) && Object.prototype.hasOwnProperty.call(entryRaw, "value")) {
+        const fetchedAt = Number(entryRaw?.fetchedAt ?? 0) || defaultFetchedAt;
+        scopeMap[key] = {
+          value: safeClone(entryRaw.value),
+          fetchedAt,
+        };
+        return;
+      }
+
+      scopeMap[key] = {
+        value: safeClone(entryRaw),
+        fetchedAt: defaultFetchedAt,
+      };
+    });
+
+    if (Object.keys(scopeMap).length > 0) {
+      next[scope] = scopeMap;
+    }
+  });
+
+  return next;
+}
+
+function normalizeReplaceScopeSet(replaceScopes, nextState, { defaultToIncomingScopes = false } = {}) {
+  if (replaceScopes === true) {
+    return new Set(Object.keys(nextState || {}));
+  }
+
+  if (typeof replaceScopes === "string") {
+    return new Set([normScope(replaceScopes)].filter(Boolean));
+  }
+
+  if (Array.isArray(replaceScopes)) {
+    return new Set(replaceScopes.map((scope) => normScope(scope)).filter(Boolean));
+  }
+
+  if (defaultToIncomingScopes) {
+    return new Set(Object.keys(nextState || {}));
+  }
+
+  return new Set();
+}
+
+function pickObject(value) {
+  return isObjectRecord(value) ? value : {};
+}
+
+function resolveSection(sections, ...names) {
+  const sectionMap = pickObject(sections);
+  for (const rawName of names) {
+    const name = normStr(rawName);
+    if (!name) continue;
+    if (Object.prototype.hasOwnProperty.call(sectionMap, name)) {
+      return {
+        found: true,
+        value: sectionMap[name],
+      };
+    }
+  }
+  return {
+    found: false,
+    value: undefined,
+  };
+}
+
+function buildStartupHydrationData(rawStartup, options = {}) {
+  const responseRoot = isObjectRecord(rawStartup) ? rawStartup : null;
+  if (!responseRoot) {
+    return {
+      applied: false,
+      fetchedAt: Number(options?.fetchedAt) || Date.now(),
+      unreadPatch: {},
+      prefetchPatch: {},
+      startupMeta: null,
+    };
+  }
+
+  const startupRoot = isObjectRecord(responseRoot?.startup)
+    ? responseRoot.startup
+    : responseRoot;
+  const sections = pickObject(startupRoot?.sections);
+  const unreadPatch = {};
+  const prefetchPatch = {};
+  const fetchedAt = Number(options?.fetchedAt) || Date.now();
+  const source = normStr(options?.source) || null;
+
+  const friendsUnreadSection = resolveSection(sections, "friends_unread");
+  if (friendsUnreadSection.found) {
+    const friendsUnread = pickObject(friendsUnreadSection.value);
+    unreadPatch.Friends = {
+      feed: !!friendsUnread.feed_unread,
+      requests: !!friendsUnread.requests_unread,
+    };
+  }
+
+  const mywebUnreadSection = resolveSection(sections, "myweb_unread");
+  if (mywebUnreadSection.found) {
+    const mywebUnread = pickObject(mywebUnreadSection.value);
+    const unreadByType = pickObject(mywebUnread?.unread_by_type);
+    unreadPatch.MyWeb = {
+      daily: !!unreadByType.daily,
+      weekly: !!unreadByType.weekly,
+      monthly: !!unreadByType.monthly,
+      selfStructure: !!unreadByType.selfStructure,
+    };
+    prefetchPatch.MyWeb = {
+      ...(prefetchPatch.MyWeb || {}),
+      unreadStatus: mywebUnreadSection.value,
+    };
+  }
+
+  const mymodelCreateSection = resolveSection(sections, "mymodel_create_status", "mymodel_create");
+  const mymodelReflectionsSection = resolveSection(
+    sections,
+    "mymodel_reflections_unread",
+    "mymodel_reflections"
+  );
+  if (mymodelCreateSection.found || mymodelReflectionsSection.found) {
+    const mymodelCreate = pickObject(mymodelCreateSection.value);
+    const mymodelReflections = pickObject(mymodelReflectionsSection.value);
+
+    unreadPatch.MyModel = {
+      mymodelCreate: !!(
+        mymodelCreate?.has_any_unanswered ||
+        mymodelCreate?.has_unanswered ||
+        mymodelCreate?.light?.has_unanswered ||
+        mymodelCreate?.standard?.has_unanswered
+      ),
+      reflectionsNew: !!(
+        mymodelReflections?.has_unread ||
+        mymodelReflections?.unread ||
+        mymodelReflections?.has_any_unread ||
+        mymodelReflections?.count
+      ),
+    };
+  }
+
+  const inputSummarySection = resolveSection(sections, "input_summary");
+  if (inputSummarySection.found) {
+    prefetchPatch.Input = {
+      ...(prefetchPatch.Input || {}),
+      homeCounts: inputSummarySection.value,
+    };
+  }
+
+  const globalSummarySection = resolveSection(sections, "global_summary");
+  if (globalSummarySection.found) {
+    prefetchPatch.Input = {
+      ...(prefetchPatch.Input || {}),
+      globalSummary: globalSummarySection.value,
+    };
+  }
+
+  const noticeCurrentSection = resolveSection(sections, "notices_current", "notice_current");
+  if (noticeCurrentSection.found) {
+    prefetchPatch.Input = {
+      ...(prefetchPatch.Input || {}),
+      noticeCurrent: noticeCurrentSection.value,
+    };
+  }
+
+  const todayQuestionStatusSection = resolveSection(sections, "today_question_status", "today_question");
+  if (todayQuestionStatusSection.found) {
+    prefetchPatch.Input = {
+      ...(prefetchPatch.Input || {}),
+      todayQuestionStatus: todayQuestionStatusSection.value,
+    };
+  }
+
+  const todayQuestionPopupSection = resolveSection(sections, "today_question_popup");
+  if (todayQuestionPopupSection.found) {
+    prefetchPatch.Input = {
+      ...(prefetchPatch.Input || {}),
+      todayQuestionPopup: todayQuestionPopupSection.value,
+    };
+  } else if (
+    todayQuestionStatusSection.found &&
+    Array.isArray(todayQuestionStatusSection.value?.question?.choices)
+  ) {
+    prefetchPatch.Input = {
+      ...(prefetchPatch.Input || {}),
+      todayQuestionPopup: todayQuestionStatusSection.value,
+    };
+  }
+
+  const mywebHomeSummarySection = resolveSection(
+    sections,
+    "myweb_home_summary",
+    "myweb_summary",
+    "myweb_home"
+  );
+  if (mywebHomeSummarySection.found) {
+    prefetchPatch.MyWeb = {
+      ...(prefetchPatch.MyWeb || {}),
+      homeSummary: mywebHomeSummarySection.value,
+    };
+  }
+
+  const startupMeta = {
+    source,
+    user_id: normStr(startupRoot?.user_id) || null,
+    schema_version:
+      normStr(startupRoot?.schema_version) || normStr(responseRoot?.schema_version) || null,
+    generated_at: normStr(startupRoot?.generated_at) || null,
+    timezone_name:
+      normStr(startupRoot?.timezone_name) || normStr(responseRoot?.timezone_name) || null,
+    flags: safeClone(pickObject(startupRoot?.flags)),
+    source_versions: safeClone(pickObject(startupRoot?.source_versions)),
+    errors: safeClone(pickObject(startupRoot?.errors)),
+    feature_flags: safeClone(pickObject(responseRoot?.feature_flags)),
+    client_meta: safeClone(
+      pickObject(responseRoot?.client_meta || startupRoot?.client_meta)
+    ),
+    minimum_supported_version: responseRoot?.minimum_supported_version ?? null,
+    recommended_version: responseRoot?.recommended_version ?? null,
+    maintenance_message: responseRoot?.maintenance_message ?? null,
+  };
+
+  const hasMeaningfulStartupMeta = !!(
+    startupMeta.user_id ||
+    startupMeta.schema_version ||
+    startupMeta.generated_at ||
+    startupMeta.timezone_name ||
+    Object.keys(startupMeta.flags || {}).length > 0 ||
+    Object.keys(startupMeta.source_versions || {}).length > 0 ||
+    Object.keys(startupMeta.errors || {}).length > 0 ||
+    Object.keys(startupMeta.feature_flags || {}).length > 0 ||
+    Object.keys(startupMeta.client_meta || {}).length > 0 ||
+    startupMeta.minimum_supported_version ||
+    startupMeta.recommended_version ||
+    startupMeta.maintenance_message
+  );
+
+  if (hasMeaningfulStartupMeta) {
+    prefetchPatch[STARTUP_META_SCOPE] = {
+      ...(prefetchPatch[STARTUP_META_SCOPE] || {}),
+      [STARTUP_META_KEY]: startupMeta,
+    };
+  }
+
+  return {
+    applied:
+      Object.keys(unreadPatch).length > 0 ||
+      Object.keys(prefetchPatch).length > 0 ||
+      hasMeaningfulStartupMeta,
+    fetchedAt,
+    unreadPatch,
+    prefetchPatch,
+    startupMeta,
+  };
+}
+
 export function UnreadProvider({ children, initialState, initialPrefetch }) {
-  const [unreadState, setUnreadState] = useState(() => {
-    if (initialState && typeof initialState === "object") return initialState;
-    return {};
-  });
+  const [unreadState, setUnreadState] = useState(() =>
+    normalizeUnreadHydrationState(initialState)
+  );
 
-
-  const [prefetchState, setPrefetchState] = useState(() => {
-    if (initialPrefetch && typeof initialPrefetch === "object") return initialPrefetch;
-    return {};
-  });
+  const [prefetchState, setPrefetchState] = useState(() =>
+    normalizePrefetchHydrationState(initialPrefetch, Date.now())
+  );
 
   const setUnread = useCallback((scope, key, value) => {
     const s = normScope(scope);
@@ -92,6 +389,33 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
 
       return { ...(prev || {}), [s]: nextScope };
     });
+  }, []);
+
+  const hydrateUnreadState = useCallback((nextState, options = {}) => {
+    const normalizedNext = normalizeUnreadHydrationState(nextState);
+    if (Object.keys(normalizedNext).length === 0) return normalizedNext;
+
+    const replaceScopeSet = normalizeReplaceScopeSet(options?.replaceScopes, normalizedNext, {
+      defaultToIncomingScopes: true,
+    });
+
+    setUnreadState((prev) => {
+      const next = { ...(prev || {}) };
+      Object.entries(normalizedNext).forEach(([scope, patch]) => {
+        if (replaceScopeSet.has(scope)) {
+          next[scope] = patch;
+          return;
+        }
+        const prevScope =
+          next && next[scope] && typeof next[scope] === "object"
+            ? next[scope]
+            : {};
+        next[scope] = { ...prevScope, ...patch };
+      });
+      return next;
+    });
+
+    return normalizedNext;
   }, []);
 
   const clearScope = useCallback((scope) => {
@@ -131,7 +455,6 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
     setUnreadState({});
     setPrefetchState({});
   }, []);
-
 
   // ------------------------------------------------------------
   // Prefetch cache API
@@ -179,6 +502,37 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
 
       return { ...(prev || {}), [s]: nextScope };
     });
+  }, []);
+
+  const hydratePrefetchState = useCallback((nextState, options = {}) => {
+    const fetchedAt =
+      options && typeof options.fetchedAt === "number"
+        ? options.fetchedAt
+        : Date.now();
+    const normalizedNext = normalizePrefetchHydrationState(nextState, fetchedAt);
+    if (Object.keys(normalizedNext).length === 0) return normalizedNext;
+
+    const replaceScopeSet = normalizeReplaceScopeSet(options?.replaceScopes, normalizedNext, {
+      defaultToIncomingScopes: false,
+    });
+
+    setPrefetchState((prev) => {
+      const next = { ...(prev || {}) };
+      Object.entries(normalizedNext).forEach(([scope, patch]) => {
+        if (replaceScopeSet.has(scope)) {
+          next[scope] = patch;
+          return;
+        }
+        const prevScope =
+          next && next[scope] && typeof next[scope] === "object"
+            ? next[scope]
+            : {};
+        next[scope] = { ...prevScope, ...patch };
+      });
+      return next;
+    });
+
+    return normalizedNext;
   }, []);
 
   const clearPrefetchScope = useCallback((scope) => {
@@ -262,6 +616,74 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
     [getPrefetchEntryFresh]
   );
 
+  const getStartupMeta = useCallback(() => {
+    const entry = getPrefetchEntry(STARTUP_META_SCOPE, STARTUP_META_KEY);
+    return entry ? entry.value : null;
+  }, [getPrefetchEntry]);
+
+  const setStartupMeta = useCallback(
+    (meta, options = {}) => {
+      if (!isObjectRecord(meta)) {
+        clearPrefetchKey(STARTUP_META_SCOPE, STARTUP_META_KEY);
+        return null;
+      }
+      setPrefetch(STARTUP_META_SCOPE, STARTUP_META_KEY, meta, options);
+      return meta;
+    },
+    [clearPrefetchKey, setPrefetch]
+  );
+
+  const hasFreshStartup = useCallback(
+    (maxAgeMs) => {
+      const entry = getPrefetchEntryFresh(STARTUP_META_SCOPE, STARTUP_META_KEY, maxAgeMs);
+      const meta = entry?.value;
+      if (!entry || !isObjectRecord(meta)) return false;
+      return !!(
+        normStr(meta?.user_id) ||
+        normStr(meta?.schema_version) ||
+        normStr(meta?.generated_at)
+      );
+    },
+    [getPrefetchEntryFresh]
+  );
+
+  const applyStartupSnapshot = useCallback(
+    (startup, options = {}) => {
+      const built = buildStartupHydrationData(startup, options);
+      if (!built.applied) return built;
+
+      if (Object.keys(built.unreadPatch).length > 0) {
+        hydrateUnreadState(built.unreadPatch, {
+          replaceScopes:
+            options?.replaceUnreadScopes === undefined
+              ? true
+              : options.replaceUnreadScopes,
+        });
+      }
+
+      if (Object.keys(built.prefetchPatch).length > 0) {
+        hydratePrefetchState(built.prefetchPatch, {
+          fetchedAt: built.fetchedAt,
+          replaceScopes:
+            options?.replacePrefetchScopes === undefined
+              ? false
+              : options.replacePrefetchScopes,
+        });
+      }
+
+      return built;
+    },
+    [hydratePrefetchState, hydrateUnreadState]
+  );
+
+  const exportHydrationState = useCallback(() => {
+    return {
+      unreadState: safeClone(unreadState || {}),
+      prefetchState: safeClone(prefetchState || {}),
+      startupMeta: safeClone(getStartupMeta()),
+    };
+  }, [getStartupMeta, prefetchState, unreadState]);
+
   const scopeUnreadMap = useMemo(() => {
     const map = {};
     const entries = Object.entries(unreadState || {});
@@ -297,6 +719,7 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
       scopeUnreadMap,
       setUnread,
       setUnreadGroup,
+      hydrateUnreadState,
       clearScope,
       clearKey,
       resetAll,
@@ -306,18 +729,25 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
       prefetchState,
       setPrefetch,
       setPrefetchGroup,
+      hydratePrefetchState,
       clearPrefetchScope,
       clearPrefetchKey,
       getPrefetchEntry,
       getPrefetchEntryFresh,
       getPrefetch,
       getPrefetchFresh,
+      applyStartupSnapshot,
+      getStartupMeta,
+      setStartupMeta,
+      hasFreshStartup,
+      exportHydrationState,
     }),
     [
       unreadState,
       scopeUnreadMap,
       setUnread,
       setUnreadGroup,
+      hydrateUnreadState,
       clearScope,
       clearKey,
       resetAll,
@@ -326,12 +756,18 @@ export function UnreadProvider({ children, initialState, initialPrefetch }) {
       prefetchState,
       setPrefetch,
       setPrefetchGroup,
+      hydratePrefetchState,
       clearPrefetchScope,
       clearPrefetchKey,
       getPrefetchEntry,
       getPrefetchEntryFresh,
       getPrefetch,
       getPrefetchFresh,
+      applyStartupSnapshot,
+      getStartupMeta,
+      setStartupMeta,
+      hasFreshStartup,
+      exportHydrationState,
     ]
   );
 
