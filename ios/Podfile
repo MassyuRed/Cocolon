@@ -9,10 +9,7 @@ platform :ios, '15.1'
 use_modular_headers!
 prepare_react_native_project!
 
-# Force-disable React Native New Architecture (Fabric/TurboModules) to avoid codegen header issues
 ENV['RCT_NEW_ARCH_ENABLED'] = '0'
-
-flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.disabled
 
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
@@ -26,7 +23,6 @@ target 'tempCocolon' do
   use_react_native!(
     :path => config[:reactNativePath],
     :fabric_enabled => false,
-    :flipper_configuration => flipper_config,
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
@@ -42,5 +38,4 @@ target 'tempCocolon' do
     )
   end
 end
-
 
