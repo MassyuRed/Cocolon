@@ -53,9 +53,49 @@ jobs:
             find node_modules -maxdepth 6 -name "RNCSliderComponentView.h" -print || true
           fi
 
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: |
+            ios/Pods
+            ~/Library/Caches/CocoaPods
+          key: ${{ runner.os }}-cocoapods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cocoapods-
+
       - name: Install CocoaPods
         working-directory: ios
-        run: pod install
+        env:
+          COCOAPODS_DISABLE_STATS: "true"
+        run: |
+          set -euo pipefail
+
+          # Prefer the system git for CocoaPods source downloads on GitHub Actions.
+          export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH"
+          echo "Using git: $(which git)"
+          git --version
+          pod --version
+
+          retry() {
+            local max_attempts="$1"
+            shift
+            local attempt=1
+
+            until "$@"; do
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                echo "Command failed after ${attempt} attempt(s): $*"
+                return 1
+              fi
+
+              echo "Attempt ${attempt} failed. Cleaning CocoaPods caches and retrying..."
+              pod cache clean --all || true
+              rm -rf Pods ~/Library/Caches/CocoaPods || true
+              sleep $((attempt * 15))
+              attempt=$((attempt + 1))
+            done
+          }
+
+          retry 3 pod install --verbose
 
       # --- Code Signing (required for Archive / TestFlight) ---
       # Required Secrets:
