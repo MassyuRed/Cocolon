@@ -290,7 +290,6 @@ export default function SubscriptionSelectScreen({ navigation }) {
     tier: ctxTier,
     loading: ctxLoading,
     plusTrialEligible,
-    plusTrialConsumed,
     entitlementStatus,
     expiresAt,
     autoRenew,
@@ -384,11 +383,13 @@ export default function SubscriptionSelectScreen({ navigation }) {
   }, []);
 
   const currentLabel = SUB_TIER_LABEL[tier] || "無料会員";
+  const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額300円";
+  const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額980円";
   const currentPriceLabel =
     tier === "plus"
-      ? asStringOrNull(plusPlan?.price_label)
+      ? plusPriceLabel
       : tier === "premium"
-      ? asStringOrNull(premiumPlan?.price_label)
+      ? premiumPriceLabel
       : "";
   const entitlementStatusLabel = formatEntitlementStatusLabel(entitlementStatus);
   const expiresAtLabel = formatExpiresAtLabel(expiresAt);
@@ -413,24 +414,24 @@ export default function SubscriptionSelectScreen({ navigation }) {
     tier === "free" &&
     plusTrialEligible &&
     plusPlan?.trial?.enabled !== false;
-  const isTrialStatusUnavailable =
-    tier === "free" && !ctxLoading && !plusTrialEligible && !plusTrialConsumed;
   const actionBusy = !!purchaseBusyPlan || restoreLoading;
 
-  const plusNoteLines = asStringArray(plusPlan?.note_lines, [])
-    .concat([])
-    .filter(Boolean);
+  const plusNoteLines = asStringArray(plusPlan?.note_lines, []).filter(Boolean);
   const defaultPlusNoteLines = showPlusTrial
     ? [
-        "無料期間終了後は、月額300円で自動更新されます。",
-        "解約はいつでも行えます。",
+        `初回1か月無料。無料期間終了後は${plusPriceLabel}が自動更新で課金されます。`,
+        "解約はいつでもストアのサブスクリプション管理から行えます。",
       ]
     : [
-        "月額300円で自動更新されます。",
-        "解約はいつでも行えます。",
+        `${plusPriceLabel}で自動更新されます。`,
+        "解約はいつでもストアのサブスクリプション管理から行えます。",
       ];
 
-  const resolvedPlusNoteLines = plusNoteLines.length > 0 ? plusNoteLines : defaultPlusNoteLines;
+  const resolvedPlusNoteLines = showPlusTrial
+    ? defaultPlusNoteLines
+    : plusNoteLines.length > 0
+    ? plusNoteLines
+    : defaultPlusNoteLines;
 
   const openExternalPage = useCallback(async (url, label = "ページ") => {
     if (!url) {
@@ -568,35 +569,40 @@ export default function SubscriptionSelectScreen({ navigation }) {
         return;
       }
 
-      if (isTrialStatusUnavailable) {
-        Alert.alert(
-          "お申し込みができませんでした",
-          "無料トライアルの対象状況を確認できませんでした。通信環境をご確認のうえ、もう一度お試しください。"
-        );
-        return;
-      }
+      const allowTrial =
+        Platform.OS === "android" && tier === "free" && plusTrialEligible;
 
-      const allowTrial = tier === "free" && plusTrialEligible;
-
-      const { purchase: p, updateRes } = await requestSubscriptionForPlan("plus", {
+      const {
+        purchase: p,
+        updateRes,
+        purchaseInitiated,
+        listenerCompletionPending,
+      } = await requestSubscriptionForPlan("plus", {
         allowTrial,
         offerTag: getTrialOfferTag("plus", Platform.OS),
       });
 
-      if (!p) {
+      if (!p && purchaseInitiated) {
         Alert.alert(
-          "お申し込みができませんでした",
-          "時間をおいてもう一度お試しください。"
+          "お申し込み手続きを開始しました",
+          listenerCompletionPending
+            ? "ストア側で購入確定後、プランが反映されます。反映まで少し時間がかかる場合があります。"
+            : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。"
         );
+        refreshScreenState({ force: true }).catch(() => null);
         return;
       }
 
+      const completionTitle =
+        updateRes?.entitlement_status === "pending"
+          ? "お申し込み手続きを開始しました"
+          : "お申し込みが完了しました";
       const completionMessage =
         updateRes?.entitlement_status === "pending"
           ? "購入手続きは始まっています。ストア側で確定し次第、プランが反映されます。"
           : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。";
 
-      Alert.alert("お申し込みが完了しました", completionMessage);
+      Alert.alert(completionTitle, completionMessage);
 
       await refreshScreenState({ force: true });
     } catch (e) {
@@ -608,7 +614,6 @@ export default function SubscriptionSelectScreen({ navigation }) {
     clientSalesDisabledReason,
     clientSalesEnabled,
     iapReady,
-    isTrialStatusUnavailable,
     loading,
     plusPlan,
     plusPurchaseSku,
@@ -620,7 +625,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
   ]);
 
   const plusSubtitle = showPlusTrial
-    ? asStringOrNull(plusPlan?.trial?.subtitle) || "１ヵ月無料トライアル（初回限定）"
+    ? `初回1か月無料（初回限定）。無料期間終了後は${plusPriceLabel}で自動更新`
     : asStringOrNull(plusPlan?.subtitle);
 
   const plusFeatures = asStringArray(plusPlan?.features, []);
@@ -694,7 +699,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
             {plusPlan?.visible === false ? null : (
               <PlanCard
                 title={asStringOrNull(plusPlan?.title) || "Plus会員"}
-                price={asStringOrNull(plusPlan?.price_label) || "月額300円"}
+                price={plusPriceLabel}
                 subtitle={plusSubtitle}
                 subtitleHighlighted={showPlusTrial}
                 features={plusFeatures}
@@ -719,7 +724,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
             {premiumPlan?.visible === false ? null : (
               <PlanCard
                 title={asStringOrNull(premiumPlan?.title) || "Premium会員"}
-                price={asStringOrNull(premiumPlan?.price_label) || "月額980円"}
+                price={premiumPriceLabel}
                 subtitle={asStringOrNull(premiumPlan?.subtitle)}
                 features={premiumFeatures}
                 noteLines={premiumNoteLines}
