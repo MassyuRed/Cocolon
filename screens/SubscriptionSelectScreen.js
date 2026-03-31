@@ -118,6 +118,9 @@ function buildIapErrorMessage(err) {
   ) {
     return "お申し込みをキャンセルしました。";
   }
+  if (/E_PRODUCT_NOT_FETCHED/i.test(code)) {
+    return "App Store から対象サブスク商品を取得できませんでした。Bundle ID / Product ID / App Store Connect の状態をご確認ください。";
+  }
   if (/E_ITEM_UNAVAILABLE/i.test(code)) {
     return "このプランは現在お申し込みいただけません。";
   }
@@ -151,6 +154,57 @@ function buildIapErrorMessage(err) {
   }
 
   return "お申し込みを完了できませんでした。時間をおいてもう一度お試しください。";
+}
+
+function buildIapDebugMessage(err) {
+  if (!err) return "";
+
+  const parts = [];
+  const code = String(err?.code || "").trim();
+  const apiCode = String(err?.apiCode || "").trim();
+  const responseCode = String(err?.responseCode || "").trim();
+  const message = String(err?.message || "").trim();
+  const debug = err?.debugInfo && typeof err.debugInfo === "object" ? err.debugInfo : {};
+
+  if (code) parts.push(`code=${code}`);
+  if (apiCode) parts.push(`apiCode=${apiCode}`);
+  if (responseCode) parts.push(`responseCode=${responseCode}`);
+  if (debug?.platform) parts.push(`platform=${debug.platform}`);
+  if (debug?.plan) parts.push(`plan=${debug.plan}`);
+  if (debug?.targetSku) parts.push(`sku=${debug.targetSku}`);
+  if (Array.isArray(debug?.productIds)) {
+    parts.push(`fetchedProducts=${debug.productIds.length ? debug.productIds.join(",") : "<none>"}`);
+  }
+  if (Array.isArray(debug?.knownSkus) && debug.knownSkus.length) {
+    parts.push(`knownSkus=${debug.knownSkus.join(",")}`);
+  }
+  if (Array.isArray(debug?.lookupSkusPrimary) && debug.lookupSkusPrimary.length) {
+    parts.push(`lookupPrimary=${debug.lookupSkusPrimary.join(",")}`);
+  }
+  if (Array.isArray(debug?.lookupSkusFallback) && debug.lookupSkusFallback.length) {
+    parts.push(`lookupFallback=${debug.lookupSkusFallback.join(",")}`);
+  }
+  if (message) parts.push(`message=${message}`);
+
+  const attempts = Array.isArray(debug?.lookupAttempts) ? debug.lookupAttempts : [];
+  attempts.slice(0, 3).forEach((attempt, idx) => {
+    const shape = String(attempt?.shape || "").trim() || `attempt${idx + 1}`;
+    const ok = attempt?.ok ? "ok" : "ng";
+    const ids = Array.isArray(attempt?.productIds) ? attempt.productIds.join(",") : "";
+    const errMsg = String(attempt?.error?.message || attempt?.error?.code || "").trim();
+    parts.push(`${shape}=${ok}${ids ? `:${ids}` : ""}${errMsg ? `:${errMsg}` : ""}`);
+  });
+
+  const fallbackErrors = Array.isArray(debug?.fallbackErrors) ? debug.fallbackErrors : [];
+  fallbackErrors.slice(0, 2).forEach((item, idx) => {
+    const fCode = String(item?.code || "").trim();
+    const fMsg = String(item?.message || "").trim();
+    parts.push(`fallback${idx + 1}=${fCode || "<no_code>"}${fMsg ? `:${fMsg}` : ""}`);
+  });
+
+  const text = parts.filter(Boolean).join("\n");
+  if (!text) return "";
+  return text.length > 1400 ? `${text.slice(0, 1400)}…` : text;
 }
 
 function asStringArray(value, fallback = []) {
@@ -606,7 +660,13 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
       await refreshScreenState({ force: true });
     } catch (e) {
-      Alert.alert("お申し込みができませんでした", buildIapErrorMessage(e));
+      const debugMessage = buildIapDebugMessage(e);
+      Alert.alert(
+        "お申し込みができませんでした",
+        debugMessage
+          ? `${buildIapErrorMessage(e)}\n\n---- 診断 ----\n${debugMessage}`
+          : buildIapErrorMessage(e)
+      );
     } finally {
       setPurchaseBusyPlan("");
     }
