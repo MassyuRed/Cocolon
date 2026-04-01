@@ -305,6 +305,7 @@ export default function SettingsScreen({ navigation }) {
 
   const isDark = themeName === THEME_VARIANTS.DARK;
   const styles = useMemo(() => createStyles(colors, isDark), [colors, isDark]);
+  const showNotificationTimeSettings = false; // 時刻設定UIと保存ボタンは一時非表示
 
   // Push通知（受信）のON/OFF（アプリ内設定）
   const [pushEnabled, setPushEnabled] = useState(true);
@@ -466,63 +467,117 @@ export default function SettingsScreen({ navigation }) {
     }
   };
 
-  const saveTodayQuestionSettings = async () => {
-    if (isBusy || todayQuestionLoading) return;
+  const saveTodayQuestionSettings = async ({
+    notificationEnabled = todayQuestionNotificationEnabled,
+    deliveryTime = todayQuestionDeliveryTime,
+    timezoneName = todayQuestionTimezone,
+    showSuccessAlert = true,
+  } = {}) => {
+    if (isBusy || todayQuestionLoading) return false;
 
     if (!user?.id) {
       Alert.alert("今日の問い通知", "ログイン情報が取得できませんでした。");
-      return;
+      return false;
     }
 
-    const hhmm = String(todayQuestionDeliveryTime || "").trim();
+    const hhmm = String(deliveryTime || "").trim();
     if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hhmm)) {
       Alert.alert("今日の問い通知", "通知時刻を選択してください。");
-      return;
+      return false;
     }
 
     setLocalProcessing(true);
     try {
       await patchTodayQuestionSettings({
-        notification_enabled: !!todayQuestionNotificationEnabled,
+        notification_enabled: !!notificationEnabled,
         delivery_time_local: hhmm,
-        timezone_name: String(todayQuestionTimezone || resolveLocalTimezoneName("Asia/Tokyo")),
+        timezone_name: String(timezoneName || resolveLocalTimezoneName("Asia/Tokyo")),
       });
-      Alert.alert("今日の問い通知", "通知設定を保存しました。");
+      if (showSuccessAlert) {
+        Alert.alert("今日の問い通知", "通知設定を保存しました。");
+      }
+      return true;
     } catch (e) {
       console.warn("SettingsScreen: save today question settings failed", e);
       Alert.alert("今日の問い通知", String(e?.message || "通知設定の保存に失敗しました。"));
+      return false;
     } finally {
       setLocalProcessing(false);
     }
   };
 
-  const saveReportDistributionSettings = async () => {
-    if (isBusy || reportDistributionLoading) return;
+  const updateTodayQuestionNotificationEnabled = async (next) => {
+    if (isBusy || todayQuestionLoading || !pushEnabled) return;
+
+    const prev = todayQuestionNotificationEnabled;
+    setTodayQuestionNotificationEnabled(next);
+
+    const ok = await saveTodayQuestionSettings({
+      notificationEnabled: next,
+      deliveryTime: normalizeDisplayTime(todayQuestionDeliveryTime || "18:00", "18:00"),
+      timezoneName: todayQuestionTimezone,
+      showSuccessAlert: false,
+    });
+
+    if (!ok) {
+      setTodayQuestionNotificationEnabled(prev);
+    }
+  };
+
+  const saveReportDistributionSettings = async ({
+    notificationEnabled = reportDistributionNotificationEnabled,
+    deliveryTime = reportDistributionDeliveryTime,
+    timezoneName = reportDistributionTimezone,
+    showSuccessAlert = true,
+  } = {}) => {
+    if (isBusy || reportDistributionLoading) return false;
 
     if (!user?.id) {
       Alert.alert("レポート配布通知", "ログイン情報が取得できませんでした。");
-      return;
+      return false;
     }
 
-    const hhmm = String(reportDistributionDeliveryTime || "").trim();
+    const hhmm = String(deliveryTime || "").trim();
     if (!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hhmm)) {
       Alert.alert("レポート配布通知", "通知時刻を選択してください。");
-      return;
+      return false;
     }
 
     setLocalProcessing(true);
     try {
       await patchReportDistributionSettings({
-        notification_enabled: !!reportDistributionNotificationEnabled,
+        notification_enabled: !!notificationEnabled,
         delivery_time_local: hhmm,
-        timezone_name: String(reportDistributionTimezone || resolveLocalTimezoneName("Asia/Tokyo")),
+        timezone_name: String(timezoneName || resolveLocalTimezoneName("Asia/Tokyo")),
       });
-      Alert.alert("レポート配布通知", "通知設定を保存しました。");
+      if (showSuccessAlert) {
+        Alert.alert("レポート配布通知", "通知設定を保存しました。");
+      }
+      return true;
     } catch (e) {
       console.warn("SettingsScreen: save report distribution settings failed", e);
       Alert.alert("レポート配布通知", String(e?.message || "通知設定の保存に失敗しました。"));
+      return false;
     } finally {
       setLocalProcessing(false);
+    }
+  };
+
+  const updateReportDistributionNotificationEnabled = async (next) => {
+    if (isBusy || reportDistributionLoading || !pushEnabled) return;
+
+    const prev = reportDistributionNotificationEnabled;
+    setReportDistributionNotificationEnabled(next);
+
+    const ok = await saveReportDistributionSettings({
+      notificationEnabled: next,
+      deliveryTime: normalizeDisplayTime(reportDistributionDeliveryTime || "00:00", "00:00"),
+      timezoneName: reportDistributionTimezone,
+      showSuccessAlert: false,
+    });
+
+    if (!ok) {
+      setReportDistributionNotificationEnabled(prev);
     }
   };
 
@@ -831,62 +886,66 @@ export default function SettingsScreen({ navigation }) {
 
                   <CocolonSwitch
                     value={todayQuestionNotificationEnabled}
-                    onValueChange={setTodayQuestionNotificationEnabled}
+                    onValueChange={updateTodayQuestionNotificationEnabled}
                     disabled={todayQuestionLoading || isBusy || !pushEnabled}
                   />
                 </View>
 
                 <View style={styles.divider} />
 
-                <View style={styles.inlineBlock}>
-                  <Text style={styles.subLabel}>通知時刻</Text>
-                  <CocolonPressable
-                    style={[
-                      styles.timeField,
-                      (todayQuestionLoading || isBusy) && styles.timeFieldDisabled,
-                    ]}
-                    onPress={() => openTimePicker("todayQuestion")}
-                    disabled={todayQuestionLoading || isBusy}
-                    accessibilityLabel="今日の問い通知の時間を選択"
-                  >
-                    <View style={styles.timeFieldValueWrap}>
-                      <Text style={styles.timeFieldCaption}>現在の設定</Text>
-                      <Text style={styles.timeFieldText}>{todayQuestionDeliveryTime}</Text>
-                    </View>
+                {showNotificationTimeSettings ? (
+                  <>
+                    <View style={styles.inlineBlock}>
+                      <Text style={styles.subLabel}>通知時刻</Text>
+                      <CocolonPressable
+                        style={[
+                          styles.timeField,
+                          (todayQuestionLoading || isBusy) && styles.timeFieldDisabled,
+                        ]}
+                        onPress={() => openTimePicker("todayQuestion")}
+                        disabled={todayQuestionLoading || isBusy}
+                        accessibilityLabel="今日の問い通知の時間を選択"
+                      >
+                        <View style={styles.timeFieldValueWrap}>
+                          <Text style={styles.timeFieldCaption}>現在の設定</Text>
+                          <Text style={styles.timeFieldText}>{todayQuestionDeliveryTime}</Text>
+                        </View>
 
-                    <View style={styles.timeFieldMeta}>
-                      <View style={styles.timeFieldChip}>
-                        <Text style={styles.timeFieldChipText}>30分刻み</Text>
+                        <View style={styles.timeFieldMeta}>
+                          <View style={styles.timeFieldChip}>
+                            <Text style={styles.timeFieldChipText}>30分刻み</Text>
+                          </View>
+                          <Ionicons
+                            name="chevron-down"
+                            size={18}
+                            color={colors.TEXT_SUBTLE}
+                          />
+                        </View>
+                      </CocolonPressable>
+                      <Text style={[styles.sectionHelpText, { marginTop: 8, marginBottom: 0 }]}>
+                        タップすると、ホイールで通知時間をお選びいただけます。
+                      </Text>
+                      {!pushEnabled ? (
+                        <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
+                          「通知を受け取る」がオフのため、今日の問いのお知らせは届きません。
+                        </Text>
+                      ) : null}
+
+                      <View style={{ marginTop: 12 }}>
+                        <CocolonButton
+                          variant="secondary"
+                          onPress={saveTodayQuestionSettings}
+                          disabled={todayQuestionLoading || isBusy}
+                          loading={todayQuestionLoading && !todayQuestionDeliveryTime}
+                        >
+                          今日の問い通知を保存
+                        </CocolonButton>
                       </View>
-                      <Ionicons
-                        name="chevron-down"
-                        size={18}
-                        color={colors.TEXT_SUBTLE}
-                      />
                     </View>
-                  </CocolonPressable>
-                  <Text style={[styles.sectionHelpText, { marginTop: 8, marginBottom: 0 }]}>
-                    タップすると、ホイールで通知時間をお選びいただけます。
-                  </Text>
-                  {!pushEnabled ? (
-                    <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
-                      「通知を受け取る」がオフのため、今日の問いのお知らせは届きません。
-                    </Text>
-                  ) : null}
 
-                  <View style={{ marginTop: 12 }}>
-                    <CocolonButton
-                      variant="secondary"
-                      onPress={saveTodayQuestionSettings}
-                      disabled={todayQuestionLoading || isBusy}
-                      loading={todayQuestionLoading && !todayQuestionDeliveryTime}
-                    >
-                      今日の問い通知を保存
-                    </CocolonButton>
-                  </View>
-                </View>
-
-                <View style={styles.divider} />
+                    <View style={styles.divider} />
+                  </>
+                ) : null}
 
                 <View style={styles.row}>
                   <View style={styles.rowLeft}>
@@ -902,64 +961,68 @@ export default function SettingsScreen({ navigation }) {
 
                   <CocolonSwitch
                     value={reportDistributionNotificationEnabled}
-                    onValueChange={setReportDistributionNotificationEnabled}
+                    onValueChange={updateReportDistributionNotificationEnabled}
                     disabled={reportDistributionLoading || isBusy || !pushEnabled}
                   />
                 </View>
 
-                <View style={styles.divider} />
+                {showNotificationTimeSettings ? (
+                  <>
+                    <View style={styles.divider} />
 
-                <View style={styles.inlineBlock}>
-                  <Text style={styles.subLabel}>通知時刻</Text>
-                  <CocolonPressable
-                    style={[
-                      styles.timeField,
-                      (reportDistributionLoading || isBusy) && styles.timeFieldDisabled,
-                    ]}
-                    onPress={() => openTimePicker("reportDistribution")}
-                    disabled={reportDistributionLoading || isBusy}
-                    accessibilityLabel="レポート配布通知の時間を選択"
-                  >
-                    <View style={styles.timeFieldValueWrap}>
-                      <Text style={styles.timeFieldCaption}>現在の設定</Text>
-                      <Text style={styles.timeFieldText}>{reportDistributionDeliveryTime}</Text>
-                    </View>
+                    <View style={styles.inlineBlock}>
+                      <Text style={styles.subLabel}>通知時刻</Text>
+                      <CocolonPressable
+                        style={[
+                          styles.timeField,
+                          (reportDistributionLoading || isBusy) && styles.timeFieldDisabled,
+                        ]}
+                        onPress={() => openTimePicker("reportDistribution")}
+                        disabled={reportDistributionLoading || isBusy}
+                        accessibilityLabel="レポート配布通知の時間を選択"
+                      >
+                        <View style={styles.timeFieldValueWrap}>
+                          <Text style={styles.timeFieldCaption}>現在の設定</Text>
+                          <Text style={styles.timeFieldText}>{reportDistributionDeliveryTime}</Text>
+                        </View>
 
-                    <View style={styles.timeFieldMeta}>
-                      <View style={styles.timeFieldChip}>
-                        <Text style={styles.timeFieldChipText}>30分刻み</Text>
+                        <View style={styles.timeFieldMeta}>
+                          <View style={styles.timeFieldChip}>
+                            <Text style={styles.timeFieldChipText}>30分刻み</Text>
+                          </View>
+                          <Ionicons
+                            name="chevron-down"
+                            size={18}
+                            color={colors.TEXT_SUBTLE}
+                          />
+                        </View>
+                      </CocolonPressable>
+
+                      <Text style={[styles.sectionHelpText, { marginTop: 10, marginBottom: 0 }]}>
+                        日報・週報・月報などのレポートをまとめてお知らせします。
+                      </Text>
+                      <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
+                        タップすると、ホイールで通知時間をお選びいただけます。
+                      </Text>
+                      {!pushEnabled ? (
+                        <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
+                          「通知を受け取る」がオフのため、レポートのお知らせは届きません。
+                        </Text>
+                      ) : null}
+
+                      <View style={{ marginTop: 12 }}>
+                        <CocolonButton
+                          variant="secondary"
+                          onPress={saveReportDistributionSettings}
+                          disabled={reportDistributionLoading || isBusy}
+                          loading={reportDistributionLoading && !reportDistributionDeliveryTime}
+                        >
+                          レポート配布通知を保存
+                        </CocolonButton>
                       </View>
-                      <Ionicons
-                        name="chevron-down"
-                        size={18}
-                        color={colors.TEXT_SUBTLE}
-                      />
                     </View>
-                  </CocolonPressable>
-
-                  <Text style={[styles.sectionHelpText, { marginTop: 10, marginBottom: 0 }]}>
-                    日報・週報・月報などのレポートをまとめてお知らせします。
-                  </Text>
-                  <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
-                    タップすると、ホイールで通知時間をお選びいただけます。
-                  </Text>
-                  {!pushEnabled ? (
-                    <Text style={[styles.sectionHelpText, { marginTop: 6, marginBottom: 0 }]}>
-                      「通知を受け取る」がオフのため、レポートのお知らせは届きません。
-                    </Text>
-                  ) : null}
-
-                  <View style={{ marginTop: 12 }}>
-                    <CocolonButton
-                      variant="secondary"
-                      onPress={saveReportDistributionSettings}
-                      disabled={reportDistributionLoading || isBusy}
-                      loading={reportDistributionLoading && !reportDistributionDeliveryTime}
-                    >
-                      レポート配布通知を保存
-                    </CocolonButton>
-                  </View>
-                </View>
+                  </>
+                ) : null}
               </View>
             </View>
 

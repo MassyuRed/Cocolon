@@ -16,7 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { useTheme } from "../theme/ThemeContext";
-import { apiFetch } from "../lib/apiClient";
+import { apiFetch, apiGet } from "../lib/apiClient";
 
 // MyProfile（現在の自己構造）: latest viewer
 const API_BASE =
@@ -217,7 +217,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard" }) {
+export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion }) {
   const { themeName, colors } = useTheme();
   const isDark = themeName === "dark";
 
@@ -470,6 +470,21 @@ const run = useCallback(async ({ force = false } = {}) => {
         server_meta: json?.meta || null,
       });
     });
+
+    if (typeof onLatestSeenVersion === "function") {
+      try {
+        const latestStatusJson = await apiGet("/myprofile/latest/status");
+        const latestVersionKey = String(latestStatusJson?.version_key || "").trim();
+        if (latestVersionKey) {
+          await onLatestSeenVersion(latestVersionKey);
+        }
+      } catch (syncError) {
+        console.warn(
+          "SelfStructureReportGenerateScreen: failed to sync latest seen version",
+          syncError
+        );
+      }
+    }
   } catch (e) {
     // 戻る操作で abort/cancel された場合は握りつぶす（画面はもう無い）
     if (!aliveRef.current) return;
@@ -501,7 +516,7 @@ const run = useCallback(async ({ force = false } = {}) => {
     if (!aliveRef.current) return;
     safeSet(() => setLoading(false));
   }
-  }, [safeSet, reportMode, subscriptionTier, allowedModes]);
+  }, [safeSet, reportMode, subscriptionTier, allowedModes, onLatestSeenVersion]);
 
   useEffect(() => {
     run();

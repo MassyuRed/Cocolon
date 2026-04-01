@@ -44,9 +44,6 @@ export function SubscriptionProvider({ children }) {
   const [tier, _setTier] = useState("unknown");
   const [allowedMyProfileModes, setAllowedMyProfileModes] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [plusTrialEligible, setPlusTrialEligible] = useState(false);
-  const [plusTrialConsumed, setPlusTrialConsumed] = useState(false);
-  const [plusTrialConsumedAt, setPlusTrialConsumedAt] = useState(null);
   const [planCode, setPlanCode] = useState(null);
   const [entitlementStatus, setEntitlementStatus] = useState("none");
   const [expiresAt, setExpiresAt] = useState(null);
@@ -94,9 +91,6 @@ export function SubscriptionProvider({ children }) {
     setAutoRenew(normalizeBoolean(payload?.auto_renew));
     setStore(normalizeStringOrNull(payload?.store));
     setProductId(normalizeStringOrNull(payload?.product_id));
-    setPlusTrialEligible(Boolean(payload?.plus_trial_eligible));
-    setPlusTrialConsumed(Boolean(payload?.plus_trial_consumed));
-    setPlusTrialConsumedAt(normalizeStringOrNull(payload?.plus_trial_consumed_at));
   }, []);
 
   const resetSubscriptionState = useCallback(() => {
@@ -108,9 +102,6 @@ export function SubscriptionProvider({ children }) {
     setAutoRenew(false);
     setStore(null);
     setProductId(null);
-    setPlusTrialEligible(false);
-    setPlusTrialConsumed(false);
-    setPlusTrialConsumedAt(null);
   }, []);
 
   useEffect(() => {
@@ -329,9 +320,6 @@ export function SubscriptionProvider({ children }) {
       tier: norm,
       loading,
       allowedMyProfileModes,
-      plusTrialEligible,
-      plusTrialConsumed,
-      plusTrialConsumedAt,
       planCode,
       entitlementStatus,
       expiresAt,
@@ -363,9 +351,6 @@ export function SubscriptionProvider({ children }) {
     expiresAt,
     loading,
     planCode,
-    plusTrialConsumed,
-    plusTrialConsumedAt,
-    plusTrialEligible,
     productId,
     refreshSubscriptionBootstrap,
     refreshTier,
@@ -389,9 +374,6 @@ export function useSubscription() {
       tier: "unknown",
       loading: false,
       allowedMyProfileModes: [],
-      plusTrialEligible: false,
-      plusTrialConsumed: false,
-      plusTrialConsumedAt: null,
       planCode: null,
       entitlementStatus: "none",
       expiresAt: null,

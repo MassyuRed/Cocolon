@@ -21,7 +21,6 @@ import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 🎨 Theme
 import { useTheme } from "../theme/ThemeContext";
-import { useSubscription } from "../SubscriptionContext";
 // Subscription (MyWeb paywall)
 // - free: Light表示
 // - plus/premium: Standard表示（Deepは将来拡張）
@@ -553,23 +552,7 @@ function isEmotionReportType(reportType) {
   return reportType === "daily" || reportType === "weekly" || reportType === "monthly";
 }
 
-function normalizeTrialHeadline(raw) {
-  const text = String(raw || "").trim();
-  return text || "1か月無料トライアル";
-}
-
-function buildStandardUpgradeCardCopy({ showTrialPromo, trialHeadline }) {
-  if (showTrialPromo) {
-    return {
-      badge: "初回限定",
-      headline: normalizeTrialHeadline(trialHeadline),
-      lead: "今の気持ちを、もっと深く読めます",
-      bodyStrong: "加入すると、気持ちの流れや背景が、今よりていねいにわかるレポートになります。",
-      note: null,
-      ctaLabel: "無料で試してみる",
-    };
-  }
-
+function buildStandardUpgradeCardCopy() {
   return {
     badge: null,
     headline: null,
@@ -590,13 +573,6 @@ export default function MyWebReportViewerScreen({
   const { themeName, colors } = useTheme();
   const isDark = themeName === "dark";
   const screenBg = isDark ? colors.BG_SILVER : "#FFFFFF";
-  const {
-    plusTrialEligible,
-    plusTrialConsumed,
-    loading: subscriptionStateLoading,
-    subscriptionBootstrap,
-  } = useSubscription();
-
   // Subscription tier (fail-closed: unknown => free)
   const [subscriptionTier, setSubscriptionTier] = useState("free");
   const [tierLoading, setTierLoading] = useState(true);
@@ -763,26 +739,7 @@ export default function MyWebReportViewerScreen({
     [subscriptionTier]
   );
 
-  const plusPlan = useMemo(() => {
-    const plans = subscriptionBootstrap?.plans;
-    return plans && typeof plans === "object" ? plans.plus || null : null;
-  }, [subscriptionBootstrap]);
-
-  const showPlusTrialPromo = useMemo(() => {
-    if (subscriptionTier !== "free") return false;
-    if (subscriptionStateLoading) return false;
-    const trialEnabled = plusPlan?.trial?.enabled !== false;
-    return trialEnabled && plusTrialEligible && !plusTrialConsumed;
-  }, [subscriptionTier, subscriptionStateLoading, plusPlan, plusTrialEligible, plusTrialConsumed]);
-
-  const standardUpgradeCardCopy = useMemo(
-    () =>
-      buildStandardUpgradeCardCopy({
-        showTrialPromo: showPlusTrialPromo,
-        trialHeadline: plusPlan?.trial?.subtitle,
-      }),
-    [showPlusTrialPromo, plusPlan]
-  );
+  const standardUpgradeCardCopy = useMemo(() => buildStandardUpgradeCardCopy(), []);
 
   const showStandardUpgradeCard = useMemo(() => {
     if (tierLoading) return false;

@@ -20,6 +20,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Supabase
 import { supabase } from "../lib/supabase";
@@ -65,6 +66,9 @@ const TUTORIAL_TOTAL_STEPS = 23;
 const MYMODEL_API_BASE_URL =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
 const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ensure`;
+const SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
+const SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
+const REPORT_READ_STATUS_CHUNK_SIZE = 60;
 
 function normalizeMyProfileMode(mode) {
   const value = String(mode || "").trim().toLowerCase();
@@ -151,6 +155,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     selfStructure: false,
   });
   const [unreadResolved, setUnreadResolved] = useState(false);
+  const [selfStructureLatestUnread, setSelfStructureLatestUnread] = useState(false);
+  const [selfStructureHistoryUnread, setSelfStructureHistoryUnread] = useState(false);
 
   const [weeklySummary, setWeeklySummary] = useState({
     loading: true,
@@ -485,6 +491,100 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     }
   }, []);
 
+  const fetchReportReadIdSet = useCallback(async (reportIds) => {
+    const ids = Array.from(
+      new Set(
+        (Array.isArray(reportIds) ? reportIds : [])
+          .map((id) => String(id || "").trim())
+          .filter(Boolean)
+      )
+    );
+    if (ids.length === 0) return new Set();
+
+    const readSet = new Set();
+    for (let i = 0; i < ids.length; i += REPORT_READ_STATUS_CHUNK_SIZE) {
+      const chunk = ids.slice(i, i + REPORT_READ_STATUS_CHUNK_SIZE);
+      if (chunk.length === 0) continue;
+      const query = chunk
+        .map((id) => `report_ids=${encodeURIComponent(id)}`)
+        .join("&");
+      const json = await apiGet(`/report-reads/status?${query}`);
+      const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
+      readIds.forEach((id) => {
+        const normalized = String(id || "").trim();
+        if (normalized) readSet.add(normalized);
+      });
+    }
+    return readSet;
+  }, []);
+
+  const getSelfStructureLatestSeenStorageKey = useCallback(async () => {
+    try {
+      const { data } = await supabase.auth.getSession();
+      const userId = String(data?.session?.user?.id || "").trim();
+      return userId
+        ? `${SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
+        : SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
+    } catch {
+      return SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
+    }
+  }, []);
+
+  const fetchSelfStructureLatestUnread = useCallback(async () => {
+    if (subscriptionLoading || !isPaid) return false;
+
+    const storageKey = await getSelfStructureLatestSeenStorageKey();
+    const [statusJson, seenVersionKey] = await Promise.all([
+      apiGet("/myprofile/latest/status"),
+      AsyncStorage.getItem(storageKey),
+    ]);
+
+    const versionKey = String(statusJson?.version_key || "").trim();
+    const hasVisibleContent = !!statusJson?.has_visible_content;
+    const seenKey = String(seenVersionKey || "").trim();
+
+    if (!versionKey || !hasVisibleContent) return false;
+    return versionKey !== seenKey;
+  }, [getSelfStructureLatestSeenStorageKey, isPaid, subscriptionLoading]);
+
+  const fetchSelfStructureHistoryUnread = useCallback(async () => {
+    if (subscriptionLoading || !isPaid) return false;
+
+    const historyJson = await apiGet(
+      `/myprofile/reports/history?report_type=monthly&limit=${SELF_STRUCTURE_HISTORY_FETCH_LIMIT}&offset=0`
+    );
+    const items = Array.isArray(historyJson?.items) ? historyJson.items : [];
+    const ids = items
+      .map((item) => String(item?.id || "").trim())
+      .filter(Boolean);
+
+    if (ids.length === 0) return false;
+
+    const readSet = await fetchReportReadIdSet(ids);
+    return ids.some((id) => !readSet.has(id));
+  }, [fetchReportReadIdSet, isPaid, subscriptionLoading]);
+
+  const markSelfStructureLatestSeen = useCallback(
+    async (versionKey) => {
+      const normalized = String(versionKey || "").trim();
+      if (!normalized) return;
+
+      try {
+        const storageKey = await getSelfStructureLatestSeenStorageKey();
+        await AsyncStorage.setItem(storageKey, normalized);
+      } catch {
+        // noop
+      }
+
+      setSelfStructureLatestUnread(false);
+      setUnreadByType((prev) => ({
+        ...prev,
+        selfStructure: !!selfStructureHistoryUnread,
+      }));
+    },
+    [getSelfStructureLatestSeenStorageKey, selfStructureHistoryUnread]
+  );
+
   // MyWeb（日/週/月）の未読状態を更新
   const refreshUnreadBadges = useCallback(async () => {
     const refreshSeq = ++unreadRefreshSeqRef.current;
@@ -493,25 +593,41 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     try {
       const query = new URLSearchParams({
         limit: "1",
-        include_self_structure: isPaid ? "true" : "false",
+        include_self_structure: "false",
       }).toString();
-      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
+
+      const [json, nextSelfStructureLatestUnread, nextSelfStructureHistoryUnread] =
+        await Promise.all([
+          apiGet(`/report-reads/myweb-unread-status?${query}`),
+          fetchSelfStructureLatestUnread().catch((e) => {
+            console.warn("MyWebScreen: failed to refresh latest self-structure unread badge", e);
+            return false;
+          }),
+          fetchSelfStructureHistoryUnread().catch((e) => {
+            console.warn("MyWebScreen: failed to refresh self-structure history unread badge", e);
+            return false;
+          }),
+        ]);
       const unread = json?.unread_by_type || {};
+      const effectiveSelfStructureUnread =
+        !!nextSelfStructureLatestUnread || !!nextSelfStructureHistoryUnread;
 
       if (isStale()) return;
 
+      setSelfStructureLatestUnread(!!nextSelfStructureLatestUnread);
+      setSelfStructureHistoryUnread(!!nextSelfStructureHistoryUnread);
       setUnreadByType({
         daily: !!unread?.daily,
         weekly: !!unread?.weekly,
         monthly: !!unread?.monthly,
-        selfStructure: !!unread?.selfStructure,
+        selfStructure: effectiveSelfStructureUnread,
       });
       setUnreadResolved(true);
     } catch (e) {
       if (isStale()) return;
       console.warn("MyWebScreen: failed to refresh unread badges", e);
     }
-  }, [isPaid]);
+  }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread]);
 
   const refreshHomeSummaries = useCallback(async () => {
     setWeeklySummary((prev) => ({
@@ -929,6 +1045,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           key={`selfReportGenerate:${selfReportGenerateMode}`}
           initialReportMode={selfReportGenerateMode}
           onBack={() => setRoute(selfReportGenerateBackRoute)}
+          onLatestSeenVersion={markSelfStructureLatestSeen}
         />
       ) : route === "todayQuestionHistory" ? (
         <TodayQuestionHistoryScreen onBack={() => setRoute("home")} />
@@ -962,7 +1079,12 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           unreadDaily={unreadResolved && unreadByType.daily}
           unreadWeekly={unreadResolved && unreadByType.weekly}
           unreadMonthly={unreadResolved && unreadByType.monthly}
-          unreadSelfStructure={unreadResolved && !subscriptionLoading && isPaid ? unreadByType.selfStructure : false}
+          unreadSelfStructureLatest={
+            unreadResolved && !subscriptionLoading && isPaid ? selfStructureLatestUnread : false
+          }
+          unreadSelfStructureHistory={
+            unreadResolved && !subscriptionLoading && isPaid ? selfStructureHistoryUnread : false
+          }
           weeklySummary={weeklySummary}
           monthlySummary={monthlySummary}
         />
@@ -1011,7 +1133,8 @@ function MyWebHome({
   unreadDaily,
   unreadWeekly,
   unreadMonthly,
-  unreadSelfStructure,
+  unreadSelfStructureLatest,
+  unreadSelfStructureHistory,
   weeklySummary,
   monthlySummary,
 }) {
@@ -1188,7 +1311,7 @@ function MyWebHome({
               <Text style={styles.dashboardCardTitle}>自己構造</Text>
               <View style={styles.dashboardCardRight}>
                 <UnreadBadge
-                  visible={unreadSelfStructure}
+                  visible={unreadSelfStructureLatest}
                   style={styles.dashboardUnreadBadge}
                 />
                 <Ionicons
@@ -1209,6 +1332,10 @@ function MyWebHome({
               accessibilityLabel="自己構造レポート履歴を見る"
             >
               <Text style={styles.historyInlineText}>自己構造レポート履歴を見る</Text>
+              <UnreadBadge
+                visible={unreadSelfStructureHistory}
+                style={styles.historyInlineUnreadBadge}
+              />
               <Ionicons
                 name="chevron-forward"
                 size={16}
@@ -1567,6 +1694,9 @@ function createStyles(COLORS, ui) {
       fontWeight: "700",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginRight: 4,
+    },
+    historyInlineUnreadBadge: {
+      marginRight: 6,
     },
 
     // Shared button row (MyModel style)

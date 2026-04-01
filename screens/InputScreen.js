@@ -39,7 +39,6 @@ import { useTheme } from "../theme/ThemeContext";
 
 import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
-import { useSubscription } from "../SubscriptionContext";
 
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
@@ -263,13 +262,6 @@ const TUTORIAL_TOTAL_STEPS = 23;
 export default function InputScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
-  const {
-    tier: subscriptionTier,
-    loading: subscriptionLoading,
-    plusTrialEligible,
-    plusTrialConsumed,
-    subscriptionBootstrap,
-  } = useSubscription();
   const { session } = useAuth();
   const {
     isTutorialMode,
@@ -1081,24 +1073,6 @@ const { height: windowHeight } = useWindowDimensions();
   const doNotNotifyFriends = !sendFriendNotification;
   const isDark = themeName === "dark";
 
-  const plusPlan = useMemo(() => {
-    const plans = subscriptionBootstrap?.plans;
-    return plans && typeof plans === "object" ? plans.plus || null : null;
-  }, [subscriptionBootstrap]);
-
-  const showInputTrialPromoCard = useMemo(() => {
-    if (subscriptionTier !== "free") return false;
-    if (subscriptionLoading) return false;
-    const trialEnabled = plusPlan?.trial?.enabled !== false;
-    return trialEnabled && plusTrialEligible && !plusTrialConsumed;
-  }, [
-    plusPlan,
-    plusTrialConsumed,
-    plusTrialEligible,
-    subscriptionLoading,
-    subscriptionTier,
-  ]);
-
   const isSelfInsightSelected = selectedEmotions.some(
     (e) => e.type === SELF_INSIGHT
   );
@@ -1667,16 +1641,6 @@ ${String(error?.message || error)}`
     }
   };
 
-  const handlePressSubscription = useCallback(() => {
-    const opened = openNoticeInternalRoute("SubscriptionSelect");
-    if (!opened) {
-      Alert.alert(
-        "サブスクリプション",
-        "サブスクリプション画面を開けませんでした。"
-      );
-    }
-  }, [openNoticeInternalRoute]);
-
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
       <StatusBar
@@ -1751,21 +1715,6 @@ ${String(error?.message || error)}`
                   </CocolonPressable>
                 </View>
               </View>
-
-              {showInputTrialPromoCard ? (
-                <View style={styles.inputTrialPromoCard}>
-                  <Text style={styles.inputTrialPromoHeadline}>
-                    １ヵ月無料トライアル実施中！
-                  </Text>
-                  <CocolonPressable
-                    style={styles.inputTrialPromoButton}
-                    onPress={handlePressSubscription}
-                    accessibilityLabel="サブスクリプションページを開く"
-                  >
-                    <Text style={styles.inputTrialPromoButtonText}>無料で試す</Text>
-                  </CocolonPressable>
-                </View>
-              ) : null}
 
               <View style={styles.globalSummaryBlock}>
                 <View style={styles.globalSummaryInner}>
