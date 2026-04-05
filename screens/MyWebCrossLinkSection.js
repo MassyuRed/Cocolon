@@ -1,6 +1,9 @@
 import React, { useMemo } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 /**
  * MyWebCrossLinkSection
@@ -263,6 +266,9 @@ export default function MyWebCrossLinkSection({
   topics = [],
   onOpenMyProfile,
 }) {
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const label = labelForPeriod(reportType);
 
   const list = useMemo(() => {
@@ -356,7 +362,8 @@ export default function MyWebCrossLinkSection({
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   card: {
     marginHorizontal: 12,
     marginBottom: 14,
@@ -400,4 +407,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#F3F4F6",
   },
   openText: { fontSize: 13, color: "#111827", fontWeight: "800" },
-});
+  }, ui));
+}

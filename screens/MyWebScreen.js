@@ -49,6 +49,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonButton from "../components/CocolonButton";
 import UnreadBadge from "../components/UnreadBadge";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
@@ -708,7 +709,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
         Alert.alert(
           "自己構造分析レポート",
-          "自己構造分析レポートはPlus会員以上で利用できます。\n\nPlus会員以上で本文の閲覧が可能になります。",
+          "自己構造分析レポートはPlusプラン以上で利用できます。\n\nPlusプラン以上で本文の閲覧が可能になります。",
           [
             { text: "閉じる", style: "cancel" },
             { text: "プランを見る", onPress: goSubscription },
@@ -876,7 +877,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       // free -> subscription誘導（自己構造分析レポートと同様にポップアップを挟む）
       Alert.alert(
         "Deep Insight",
-        "Deep InsightはPremiumで提供予定です。\n\n※Premiumは準備中です。",
+        "Deep Insight は Premiumプランで利用できます。\n\n続けるには Premiumプランをご確認ください。",
         [
           { text: "閉じる", style: "cancel" },
           { text: "プラン内容を見る", onPress: openSubscriptionSelect },
@@ -888,7 +889,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         "プラン情報を取得できませんでした。通信状況を確認してもう一度お試しください。"
       );
     }
-  }, [ensurePaid, openSubscriptionSelect]);
+  }, [ensurePremium, openSubscriptionSelect]);
 
   // MyModel タブへ移動（ナビが無い場合も落とさない）
   const openMyModelBuild = useCallback(() => {
@@ -1431,7 +1432,7 @@ function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     // ルート
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     safeContent: { flex: 1 },
@@ -1772,6 +1773,6 @@ function createStyles(COLORS, ui) {
     dateText: { fontWeight: "700", color: "#111827", marginBottom: 4 },
     emotionsText: { color: "#374151" },
     memoText: { color: "#374151", marginTop: 4, fontStyle: "italic" },
-  });
+  }, ui));
 }
 

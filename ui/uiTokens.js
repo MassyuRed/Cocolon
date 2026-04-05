@@ -30,11 +30,11 @@ export function makeUiTokens(colors, themeName) {
 
     font: {
       // InputScreen 基準
-      sectionLabel: 12,
-      body: 14,
-      description: 9,
+      sectionLabel: 14,
+      body: 15,
+      description: 10,
       button: 15,
-      title: 20,
+      title: 22,
     },
 
     text: {

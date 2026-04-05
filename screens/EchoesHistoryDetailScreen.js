@@ -526,7 +526,7 @@ function createStyles(COLORS, ui) {
       marginTop: 4,
     },
     mySubText: {
-      fontSize: font.description ?? 9,
+      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
       marginTop: 2,
     },
@@ -561,7 +561,7 @@ function createStyles(COLORS, ui) {
     },
     limitNote: {
       marginTop: 10,
-      fontSize: font.description ?? 9,
+      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
 
@@ -611,7 +611,7 @@ function createStyles(COLORS, ui) {
     },
     timelineSub: {
       marginTop: 2,
-      fontSize: font.description ?? 9,
+      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
     timelineTime: {

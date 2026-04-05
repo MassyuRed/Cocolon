@@ -11,6 +11,7 @@ const TutorialContext = createContext(undefined);
 
 const INITIAL_TUTORIAL_STATE = Object.freeze({
   isTutorialMode: false,
+  tutorialFlagsLoaded: false,
   tutorialCompleted: false,
   tutorialSkipped: false,
   tutorialStep: 0,
@@ -30,6 +31,9 @@ function cloneInitialArrays() {
 export function TutorialProvider({ children }) {
   const [isTutorialMode, setIsTutorialMode] = useState(
     INITIAL_TUTORIAL_STATE.isTutorialMode
+  );
+  const [tutorialFlagsLoaded, setTutorialFlagsLoaded] = useState(
+    INITIAL_TUTORIAL_STATE.tutorialFlagsLoaded
   );
   const [tutorialCompleted, setTutorialCompleted] = useState(
     INITIAL_TUTORIAL_STATE.tutorialCompleted
@@ -141,6 +145,7 @@ export function TutorialProvider({ children }) {
   const value = useMemo(
     () => ({
       isTutorialMode,
+      tutorialFlagsLoaded,
       tutorialCompleted,
       tutorialSkipped,
       tutorialStep,
@@ -149,6 +154,7 @@ export function TutorialProvider({ children }) {
       tutorialFriendFeed,
       hasTutorialFriendLog: tutorialFriendFeed.length > 0,
       setIsTutorialMode,
+      setTutorialFlagsLoaded,
       setTutorialCompleted,
       setTutorialSkipped,
       setTutorialStep,
@@ -166,6 +172,7 @@ export function TutorialProvider({ children }) {
     }),
     [
       isTutorialMode,
+      tutorialFlagsLoaded,
       tutorialCompleted,
       tutorialSkipped,
       tutorialStep,

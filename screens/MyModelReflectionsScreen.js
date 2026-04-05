@@ -35,6 +35,7 @@ import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 /**
  * MyModelReflectionsScreen (2026-02 New Q&A Architecture)
@@ -89,7 +90,7 @@ const DISCOVERY_CATEGORY_OPTIONS = Object.freeze([
 
 const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
 const TUTORIAL_SELF_USER_ID = "tutorial-self";
-const TUTORIAL_MOCK_FRIEND_NAME = "華恋";
+const TUTORIAL_MOCK_FRIEND_NAME = "User";
 const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
   {
     id: "tutorial-reflection-mock-1",
@@ -2243,11 +2244,11 @@ useEffect(() => {
         <View style={styles.qnaIntroCard}>
           <Text style={styles.qnaIntroTitle}>Reflections</Text>
           <Text style={styles.qnaIntroText}>
-            閲覧したいMyModelを選択し、Reflectionを生成してください。
+            閲覧したいMyModelを選択し、Reflectionを表示してください。
           </Text>
           {isTutorialMode ? (
             <Text style={styles.tierHintText}>
-              まずは自分のReflectionを確認し、その後に華恋へ切り替えると「他ユーザーのReflectionも閲覧できる」流れが分かります。
+              まずは自分のReflectionを確認し、その後にUserへ切り替えると「他ユーザーのReflectionも閲覧できる」流れが分かります。
             </Text>
           ) : null}
 
@@ -2285,7 +2286,7 @@ useEffect(() => {
                   color="#FFFFFF"
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.goldButtonText}>Reflectionを生成</Text>
+                <Text style={styles.goldButtonText}>Reflectionを表示</Text>
               </View>
             </CocolonButton>
             {effectiveTierLabel ? (
@@ -2579,8 +2580,8 @@ useEffect(() => {
               !!tutorialPickUserRect
             }
             targetRect={tutorialPickUserRect}
-            title="華恋を選択"
-            message="華恋を選択して、Reflectionを見てみましょう。"
+            title="Userを選択"
+            message="Userを選択して、Reflectionを見てみましょう。"
             step={tutorialStep}
             totalSteps={TUTORIAL_TOTAL_STEPS}
             mode="action"
@@ -3178,14 +3179,14 @@ useEffect(() => {
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW
             ? "自分のReflection"
             : !activeViewedUserId
-            ? "華恋へ切り替え"
+            ? "Userへ切り替え"
             : "他ユーザーのReflection"
         }
         message={
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW
             ? "フォロワーにはこのように表示されます。自分の作成したReflectionを確認できます。"
             : !activeViewedUserId
-            ? "『MyModel：自分』を押して、華恋を選んでください。"
+            ? "『MyModel：自分』を押して、Userを選んでください。"
             : tutorialOtherReflectionPhase === "view"
             ? "このように他ユーザーのReflectionが表示されます。"
             : "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』、新しい気づきを得たら『発見』でリアクションできます。（チュートリアルでは説明のみです）"
@@ -3257,7 +3258,7 @@ useEffect(() => {
 function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     safeContent: { flex: 1 },
     body: { flex: 1 },
@@ -3947,5 +3948,5 @@ function createStyles(COLORS, ui) {
       opacity: 0.9,
       textAlign: "center",
     },
-  });
+  }, ui));
 }

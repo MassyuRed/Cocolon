@@ -30,6 +30,12 @@ function formatNoticeDateLabel(value) {
   }
 }
 
+function normalizeVariant(value) {
+  const variant = String(value || "default").trim().toLowerCase();
+  if (variant === "welcome") return "welcome";
+  return "default";
+}
+
 export default function NoticeModal({
   visible,
   notice,
@@ -37,9 +43,17 @@ export default function NoticeModal({
   onClose,
   onOpenHistory,
   onPressAction,
+  variant = "default",
+  headerLabel = "お知らせ",
+  showPublishedDate = true,
+  showHistoryButton = true,
+  primaryCloseLabel = null,
+  onPrimaryClose,
 }) {
   const { colors } = useTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
+  const normalizedVariant = normalizeVariant(variant);
+  const isWelcomeVariant = normalizedVariant === "welcome";
   const title = String(notice?.title || "お知らせ").trim() || "お知らせ";
   const body = String(notice?.body || "").trim();
   const publishedLabel = formatNoticeDateLabel(notice?.published_at);
@@ -48,6 +62,11 @@ export default function NoticeModal({
     [notice?.actions, notice?.cta],
   );
   const hasButtonActions = buttonActions.length > 0;
+  const canShowHistoryButton =
+    showHistoryButton !== false && typeof onOpenHistory === "function";
+  const resolvedPrimaryCloseLabel = String(primaryCloseLabel || "").trim();
+  const canShowPrimaryClose =
+    !!resolvedPrimaryCloseLabel && typeof onPrimaryClose === "function";
 
   return (
     <Modal
@@ -59,16 +78,26 @@ export default function NoticeModal({
       <View style={styles.backdrop}>
         <Pressable style={styles.overlayTouch} onPress={onClose} />
         <View style={styles.sheet}>
-          <View style={styles.closeRow}>
-            <Pressable
-              style={styles.closeButton}
-              onPress={onClose}
-              accessibilityRole="button"
-              accessibilityLabel="お知らせを閉じる"
-              hitSlop={8}
+          <Pressable
+            style={styles.closeButton}
+            onPress={onClose}
+            accessibilityRole="button"
+            accessibilityLabel="お知らせを閉じる"
+            hitSlop={8}
+          >
+            <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
+          </Pressable>
+
+          <View style={styles.headerRow}>
+            <Text
+              style={[
+                styles.badgeText,
+                isWelcomeVariant ? styles.badgeTextWelcome : null,
+              ]}
+              numberOfLines={1}
             >
-              <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
-            </Pressable>
+              {String(headerLabel || "お知らせ")}
+            </Text>
           </View>
 
           {loading ? (
@@ -77,15 +106,19 @@ export default function NoticeModal({
               <Text style={styles.loadingText}>お知らせを読み込み中…</Text>
             </View>
           ) : (
-            <View style={styles.card}>
-              <Text style={styles.badgeText}>お知らせ</Text>
-              <Text style={styles.title}>{title}</Text>
-              {publishedLabel ? (
+            <View style={[styles.card, isWelcomeVariant ? styles.cardWelcome : null]}>
+              <Text style={[styles.title, isWelcomeVariant ? styles.titleWelcome : null]}>
+                {title}
+              </Text>
+              {showPublishedDate !== false && publishedLabel ? (
                 <Text style={styles.metaText}>配信日: {publishedLabel}</Text>
               ) : null}
 
               <ScrollView
-                style={styles.bodyScroll}
+                style={[
+                  styles.bodyScroll,
+                  isWelcomeVariant ? styles.bodyScrollWelcome : null,
+                ]}
                 contentContainerStyle={styles.bodyScrollContent}
                 showsVerticalScrollIndicator={false}
               >
@@ -94,8 +127,14 @@ export default function NoticeModal({
                   bodySegments={notice?.body_segments}
                   actions={notice?.actions}
                   onPressAction={onPressAction}
-                  textStyle={styles.bodyText}
-                  linkStyle={styles.bodyLinkText}
+                  textStyle={[
+                    styles.bodyText,
+                    isWelcomeVariant ? styles.bodyTextWelcome : null,
+                  ]}
+                  linkStyle={[
+                    styles.bodyLinkText,
+                    isWelcomeVariant ? styles.bodyLinkTextWelcome : null,
+                  ]}
                 />
               </ScrollView>
 
@@ -114,15 +153,29 @@ export default function NoticeModal({
                 </View>
               ))}
 
-              <View style={styles.buttonBlock}>
-                <CocolonButton
-                  variant={hasButtonActions ? "secondary" : "primary"}
-                  onPress={onOpenHistory}
-                  accessibilityLabel="お知らせ履歴を開く"
-                >
-                  履歴で見る
-                </CocolonButton>
-              </View>
+              {canShowHistoryButton ? (
+                <View style={styles.buttonBlock}>
+                  <CocolonButton
+                    variant={hasButtonActions ? "secondary" : "primary"}
+                    onPress={onOpenHistory}
+                    accessibilityLabel="お知らせ履歴を開く"
+                  >
+                    履歴で見る
+                  </CocolonButton>
+                </View>
+              ) : null}
+
+              {canShowPrimaryClose ? (
+                <View style={styles.buttonBlock}>
+                  <CocolonButton
+                    variant={hasButtonActions || canShowHistoryButton ? "secondary" : "primary"}
+                    onPress={onPrimaryClose}
+                    accessibilityLabel={resolvedPrimaryCloseLabel}
+                  >
+                    {resolvedPrimaryCloseLabel}
+                  </CocolonButton>
+                </View>
+              ) : null}
             </View>
           )}
         </View>
@@ -148,14 +201,15 @@ function createStyles(COLORS) {
       backgroundColor: COLORS.PANEL_BG,
       borderWidth: 1,
       borderColor: COLORS.BORDER_GOLD,
-      padding: 8,
+      paddingHorizontal: 8,
+      paddingTop: 10,
+      paddingBottom: 8,
       maxHeight: "82%",
     },
-    closeRow: {
-      alignItems: "flex-end",
-      marginBottom: 4,
-    },
     closeButton: {
+      position: "absolute",
+      top: 10,
+      right: 8,
       width: 36,
       height: 36,
       borderRadius: 12,
@@ -164,6 +218,14 @@ function createStyles(COLORS) {
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
+      zIndex: 2,
+    },
+    headerRow: {
+      minHeight: 38,
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: 56,
+      marginBottom: 8,
     },
     loadingWrap: {
       alignItems: "center",
@@ -184,18 +246,30 @@ function createStyles(COLORS) {
       paddingHorizontal: 16,
       paddingVertical: 16,
     },
+    cardWelcome: {
+      paddingHorizontal: 18,
+      paddingVertical: 18,
+    },
     badgeText: {
       fontSize: 11,
       lineHeight: 16,
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
-      marginBottom: 8,
+      textAlign: "center",
+    },
+    badgeTextWelcome: {
+      fontSize: 18,
+      lineHeight: 26,
     },
     title: {
       fontSize: 18,
       lineHeight: 26,
       fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
+    },
+    titleWelcome: {
+      fontSize: 14,
+      lineHeight: 22,
     },
     metaText: {
       marginTop: 8,
@@ -207,6 +281,10 @@ function createStyles(COLORS) {
       marginTop: 12,
       maxHeight: 260,
     },
+    bodyScrollWelcome: {
+      marginTop: 10,
+      maxHeight: 300,
+    },
     bodyScrollContent: {
       paddingBottom: 4,
     },
@@ -215,10 +293,17 @@ function createStyles(COLORS) {
       lineHeight: 22,
       color: COLORS.TEXT_ON_LIGHT,
     },
+    bodyTextWelcome: {
+      fontSize: 14,
+      lineHeight: 22,
+    },
     bodyLinkText: {
       color: COLORS.TITLE_GOLD,
       textDecorationLine: "underline",
       fontWeight: "700",
+    },
+    bodyLinkTextWelcome: {
+      fontWeight: "800",
     },
     buttonBlock: {
       marginTop: 12,

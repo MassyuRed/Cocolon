@@ -12,6 +12,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
 import { apiFetch } from "../lib/apiClient";
@@ -118,7 +120,8 @@ function resolveAccountRouteName(navigation) {
 
 export default function FollowListScreen({ navigation, route }) {
   const { colors, themeName } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const { user } = useAuth();
 
@@ -891,8 +894,8 @@ export default function FollowListScreen({ navigation, route }) {
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -1042,5 +1045,5 @@ function createStyles(COLORS) {
       color: COLORS.TEXT_ON_LIGHT,
       opacity: 0.85,
     },
-  });
+  }, ui));
 }

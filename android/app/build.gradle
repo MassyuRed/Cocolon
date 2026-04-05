@@ -27,7 +27,7 @@ android {
     applicationId 'com.anonymous.cocolonmvp'
     minSdk rootProject.ext.minSdkVersion
     targetSdk rootProject.ext.targetSdkVersion
-    versionCode 14
+    versionCode 16
     versionName '1.0.0'
 
     buildConfigField 'boolean', 'NEW_ARCH_ENABLED', 'false'

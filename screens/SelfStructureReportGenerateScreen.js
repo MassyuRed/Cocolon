@@ -16,7 +16,10 @@ import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, apiGet } from "../lib/apiClient";
+import SelfStructureDeepRenderer from "../components/selfStructure/SelfStructureDeepRenderer";
 
 // MyProfile（現在の自己構造）: latest viewer
 const API_BASE =
@@ -52,9 +55,9 @@ function normalizeMyProfileMode(mode) {
 
 function subscriptionTierLabel(tier) {
   const t = normalizeSubscriptionTier(tier);
-  if (t === "premium") return "Premium会員";
-  if (t === "plus") return "Plus会員";
-  return "無料会員";
+  if (t === "premium") return "Premiumプラン";
+  if (t === "plus") return "Plusプラン";
+  return "Freeプラン";
 }
 
 
@@ -104,6 +107,19 @@ async function fetchSubscriptionMe(accessToken, signal) {
   );
 
   return { tier, allowedModes, raw: json };
+}
+
+function safeParseJson(raw) {
+  if (!raw) return null;
+  if (typeof raw === "object") return raw;
+  if (typeof raw === "string") {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+  return null;
 }
 
 function escapeHtml(s) {
@@ -219,6 +235,8 @@ async function getAccessToken() {
 
 export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion }) {
   const { themeName, colors } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
   // Navigation: open SubscriptionSelect (hidden screen)
@@ -303,6 +321,7 @@ const [loading, setLoading] = useState(true);
         borderColor: colors.CARD_BORDER,
         backgroundColor: colors.PANEL_BG,
       },
+      sectionLabel: { color: colors.TEXT_ON_LIGHT },
       p: { color: colors.TEXT_ON_LIGHT },
       empty: { color: colors.TEXT_SUBTLE },
     };
@@ -314,6 +333,14 @@ const [loading, setLoading] = useState(true);
       : "現在の自己構造";
     return base;
   }, [titleRange]);
+
+  const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
+  const fetchedReportMode = useMemo(() => {
+    return normalizeMyProfileMode(meta?.report_mode || contentJson?.report_mode || reportMode);
+  }, [meta?.report_mode, contentJson?.report_mode, reportMode]);
+  const hasDeepVisual = useMemo(() => {
+    return fetchedReportMode === "deep" && !!contentJson?.selfStructureDeepVisual;
+  }, [fetchedReportMode, contentJson]);
 
   const handleBack = useCallback(() => {
     // 先に cancel しておく（親の activeView 切替より前に止める）
@@ -429,8 +456,10 @@ const run = useCallback(async ({ force = false } = {}) => {
     }
 
     const json = await res.json();
+    const serverMeta = safeParseJson(json?.meta);
+    const hasVisualContract = !!serverMeta?.selfStructureDeepVisual;
     const text = String(json?.content_text || "").trim();
-    if (!text) {
+    if (!text && !hasVisualContract) {
       throw new Error("レポート本文が空でした。");
     }
 
@@ -620,8 +649,8 @@ const run = useCallback(async ({ force = false } = {}) => {
                     const label = MODE_LABEL[m] || m;
                     const msg =
                       m === "deep"
-                        ? `「${label}」はPremiumで提供予定です。\n\n※Premiumは準備中です。`
-                        : `「${label}」はPlus会員のみ利用できます。\n\nプランを確認しますか？`;
+                        ? `「${label}」はPremiumプランで利用できます。\n\n続けるには Premiumプランをご確認ください。`
+                        : `「${label}」はPlusプランのみ利用できます。\n\nプランを確認しますか？`;
                     Alert.alert("プランが必要です", msg, [
                       { text: "あとで", style: "cancel" },
                       {
@@ -662,7 +691,7 @@ const run = useCallback(async ({ force = false } = {}) => {
         ) : null}
 
         <Text style={[styles.modeHint, themed.empty]}>
-          ※モード変更後は「更新」を押すと反映されます。DeepはPremiumで提供予定です。
+          ※モード変更後は「更新」を押すと反映されます。DeepはPremiumプランで利用できます。
         </Text>
       </View>
 
@@ -679,23 +708,39 @@ const run = useCallback(async ({ force = false } = {}) => {
       )}
 
       {!loading && !errorMsg && (
-        <View style={[styles.bodyCard, themed.bodyCard]}>
-          {reportText ? (
-            reportText.split("\n").map((line, idx) => (
-              <Text key={`l-${idx}`} style={[styles.p, themed.p]}>
-                {line}
-              </Text>
-            ))
-          ) : (
-            <Text style={[styles.empty, themed.empty]}>内容がありません</Text>
-          )}
-        </View>
+        <>
+          {hasDeepVisual ? (
+            <SelfStructureDeepRenderer
+              contentJson={contentJson}
+              colors={colors}
+              isDark={isDark}
+            />
+          ) : null}
+
+          {(reportText || !hasDeepVisual) ? (
+            <View style={[styles.bodyCard, themed.bodyCard]}>
+              {hasDeepVisual && reportText ? (
+                <Text style={[styles.sectionLabel, themed.sectionLabel]}>文章で読む</Text>
+              ) : null}
+              {reportText ? (
+                reportText.split("\n").map((line, idx) => (
+                  <Text key={`l-${idx}`} style={[styles.p, themed.p]}>
+                    {line}
+                  </Text>
+                ))
+              ) : (
+                <Text style={[styles.empty, themed.empty]}>内容がありません</Text>
+              )}
+            </View>
+          ) : null}
+        </>
       )}
     </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
 
   headerRow: {
@@ -803,6 +848,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     padding: 12,
   },
+  sectionLabel: {
+    color: "#111827",
+    fontSize: 12,
+    fontWeight: "800",
+    marginBottom: 8,
+  },
   p: { color: "#374151", fontSize: 14, lineHeight: 20, marginBottom: 4 },
   empty: { padding: 12, color: "#6B7280" },
-});
+  }, ui));
+}

@@ -19,6 +19,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 
@@ -38,7 +40,7 @@ const STEP_FRIENDS_OVERVIEW = 20;
 const STEP_FRIENDS_NOTIFICATION = 21;
 const STEP_FRIENDS_LOG = 22;
 const STEP_FRIENDS_COMPLETE = 23;
-const DEFAULT_TUTORIAL_FRIEND_NAME = "華恋";
+const DEFAULT_TUTORIAL_FRIEND_NAME = "User";
 
 // ---- API base ----
 // 現在は MashOS(MyModel API) を Render 上で稼働させているため、
@@ -228,7 +230,8 @@ async function getJsonWithAuth(url) {
 
 export default function FriendsScreen(props) {
   const { colors, themeName } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const {
     isTutorialMode,
@@ -271,7 +274,7 @@ export default function FriendsScreen(props) {
     }
   }, [getPrefetchEntry, getPrefetchEntryFresh]);
 
-  const { navigation, hasUnreadFriendRequests = false, onOpenFriendManage } = props || {};
+  const { navigation, hasUnreadFriendRequests = false, onOpenFriendManage, onFriendFeedDisplayed } = props || {};
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
   const screenRootRef = useRef(null);
@@ -286,6 +289,7 @@ export default function FriendsScreen(props) {
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const [tutorialNotificationShown, setTutorialNotificationShown] = useState(false);
   const tutorialNotificationFlowRef = useRef(false);
+  const skipNextFocusFeedRefreshRef = useRef(true);
 
   const isFriendsTutorialVisible =
     !!isTutorialMode &&
@@ -657,9 +661,19 @@ export default function FriendsScreen(props) {
         timeLabel:
           String(row?.timeLabel || "").trim() ||
           formatTimeLabel(row?.created_at || row?.createdAt || null),
+        createdAt: row?.createdAt || row?.created_at || null,
       }));
 
       setFeed(mapped);
+
+      const latestDisplayedCreatedAt = mapped.find((item) => item?.createdAt)?.createdAt || null;
+      if (latestDisplayedCreatedAt && typeof onFriendFeedDisplayed === "function") {
+        setTimeout(() => {
+          Promise.resolve(onFriendFeedDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
+            console.warn("FriendsScreen: failed to mark displayed feed as read", callbackError);
+          });
+        }, 0);
+      }
 
       // cache (used by app-level preload / next open)
       try {
@@ -677,7 +691,7 @@ export default function FriendsScreen(props) {
     } finally {
       setLoading(false);
     }
-  }, [isTutorialMode, tutorialDisplayFeed, setPrefetch]);
+  }, [isTutorialMode, onFriendFeedDisplayed, tutorialDisplayFeed, setPrefetch]);
   // Phase 4: legacy direct Supabase manage helpers removed.
   // Manage read path is unified via GET /friends/manage (loadManageAll).
 
@@ -831,6 +845,21 @@ export default function FriendsScreen(props) {
     }
     loadFeed();
   }, [isTutorialMode, loadFeed, prefetchedFeedItems]);
+
+  useEffect(() => {
+    if (isTutorialMode) return undefined;
+    if (!navigation || typeof navigation.addListener !== "function") return undefined;
+
+    const unsubscribe = navigation.addListener("focus", () => {
+      if (skipNextFocusFeedRefreshRef.current) {
+        skipNextFocusFeedRefreshRef.current = false;
+        return;
+      }
+      loadFeed({ silent: true });
+    });
+
+    return typeof unsubscribe === "function" ? unsubscribe : undefined;
+  }, [isTutorialMode, loadFeed, navigation]);
 
   useEffect(() => {
     if (!modalVisible) return;
@@ -1800,13 +1829,13 @@ export default function FriendsScreen(props) {
   );
 }
 
-function createStyles(COLORS) {
+function createStyles(COLORS, ui) {
   const TEXT_MAIN = COLORS.TEXT_ON_LIGHT;
   const TEXT_SUB = COLORS.TEXT_ON_LIGHT;
 
   const ACCENT = COLORS.GOLD_BUTTON;
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -2353,5 +2382,5 @@ function createStyles(COLORS) {
     actionBtnDisabled: {
       opacity: 0.5,
     },
-  });
+  }, ui));
 }

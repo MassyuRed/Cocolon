@@ -21,6 +21,8 @@ import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 
 // 🎨 Theme
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 // Subscription (MyWeb paywall)
 // - free: Light表示
 // - plus/premium: Standard表示（Deepは将来拡張）
@@ -272,6 +274,184 @@ function normalizeControlPatterns(raw) {
         : [],
     }))
     .slice(0, 5);
+}
+
+function normalizeMemoThemes(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      themeId: String(item.themeId || item.theme_id || item.themeLabel || "theme"),
+      themeHint: String(item.themeHint || item.theme_hint || "generic"),
+      themeLabel: String(item.themeLabel || item.theme_label || "前に出ていた言葉"),
+      phraseSamples: Array.isArray(item.phraseSamples || item.phrase_samples)
+        ? (item.phraseSamples || item.phrase_samples)
+        : [],
+      linkedRouteLabels: Array.isArray(item.linkedRouteLabels || item.linked_route_labels)
+        ? (item.linkedRouteLabels || item.linked_route_labels)
+        : [],
+      meaningComment: String(item.meaningComment || item.meaning_comment || "").trim(),
+      dominantTimeBuckets: Array.isArray(item.dominantTimeBuckets || item.dominant_time_buckets)
+        ? (item.dominantTimeBuckets || item.dominant_time_buckets)
+        : [],
+      count: coerceNum(item.count),
+    }))
+    .slice(0, 3);
+}
+
+function normalizePatternEpisodes(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      patternId: String(item.patternId || item.pattern_id || "pattern"),
+      linkedThemeIds: Array.isArray(item.linkedThemeIds || item.linked_theme_ids)
+        ? (item.linkedThemeIds || item.linked_theme_ids)
+        : [],
+      routeLabels: Array.isArray(item.routeLabels || item.route_labels)
+        ? (item.routeLabels || item.route_labels)
+        : [],
+      recoveryRouteLabel: String(item.recoveryRouteLabel || item.recovery_route_label || "").trim(),
+      patternLabel: String(item.patternLabel || item.pattern_label || item.label || "くり返しやすかった流れ").trim(),
+      patternComment: String(item.patternComment || item.pattern_comment || item.description || "").trim(),
+      count: coerceNum(item.count),
+    }))
+    .slice(0, 5);
+}
+
+
+
+const MONTHLY_PHASE_RANK = {
+  first_half: 0,
+  second_half: 1,
+};
+
+function normalizeMonthlyPhaseItems(raw) {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => {
+      const phaseId = String(item.phaseId || item.phase_id || "").trim();
+      const phaseLabel = String(
+        item.phaseLabel ||
+          item.phase_label ||
+          (phaseId === "first_half"
+            ? "前半"
+            : phaseId === "second_half"
+            ? "後半"
+            : "この時期")
+      ).trim();
+
+      const themeLabels = Array.isArray(item.themeLabels || item.theme_labels)
+        ? (item.themeLabels || item.theme_labels)
+        : [];
+      const phraseSamples = Array.isArray(item.phraseSamples || item.phrase_samples)
+        ? (item.phraseSamples || item.phrase_samples)
+        : [];
+      const routeLabels = Array.isArray(item.routeLabels || item.route_labels)
+        ? (item.routeLabels || item.route_labels)
+        : [];
+      const dominantTimeBucketLabels = Array.isArray(
+        item.dominantTimeBucketLabels || item.dominant_time_bucket_labels
+      )
+        ? (item.dominantTimeBucketLabels || item.dominant_time_bucket_labels)
+        : Array.isArray(item.dominantTimeBuckets || item.dominant_time_buckets)
+        ? (item.dominantTimeBuckets || item.dominant_time_buckets)
+        : [];
+
+      const recoveryRouteLabel = String(
+        item.recoveryRouteLabel || item.recovery_route_label || ""
+      ).trim();
+
+      const phaseComment = String(
+        item.phaseComment || item.phase_comment || ""
+      ).trim();
+
+      const phaseFocusLabel = String(
+        item.phaseFocusLabel ||
+          item.phase_focus_label ||
+          themeLabels[0] ||
+          routeLabels[0] ||
+          ""
+      ).trim();
+
+      const count = coerceNum(item.count ?? item.entryCount ?? item.entry_count);
+
+      return {
+        phaseId: phaseId || phaseLabel || "phase",
+        phaseLabel: phaseLabel || "この時期",
+        phaseFocusLabel,
+        themeLabels: themeLabels.filter(Boolean).slice(0, 2),
+        phraseSamples: phraseSamples.filter(Boolean).slice(0, 2),
+        routeLabels: routeLabels.filter(Boolean).slice(0, 2),
+        recoveryRouteLabel,
+        dominantTimeBucketLabels: dominantTimeBucketLabels.filter(Boolean).slice(0, 2),
+        phaseComment,
+        count,
+      };
+    })
+    .filter(
+      (item) =>
+        item.phaseLabel &&
+        (item.phaseComment ||
+          item.themeLabels.length > 0 ||
+          item.phraseSamples.length > 0 ||
+          item.routeLabels.length > 0 ||
+          item.recoveryRouteLabel)
+    )
+    .sort((a, b) => {
+      const ar = MONTHLY_PHASE_RANK[a.phaseId] ?? 99;
+      const br = MONTHLY_PHASE_RANK[b.phaseId] ?? 99;
+      return ar - br;
+    })
+    .slice(0, 2);
+}
+
+function normalizeMonthlyShiftItems(raw) {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      shiftId: String(item.shiftId || item.shift_id || "shift").trim(),
+      fromPhaseLabel: String(
+        item.fromPhaseLabel || item.from_phase_label || "前半"
+      ).trim(),
+      toPhaseLabel: String(
+        item.toPhaseLabel || item.to_phase_label || "後半"
+      ).trim(),
+      shiftLabel: String(item.shiftLabel || item.shift_label || "").trim(),
+      shiftComment: String(item.shiftComment || item.shift_comment || "").trim(),
+      emergingThemeLabels: Array.isArray(item.emergingThemeLabels || item.emerging_theme_labels)
+        ? (item.emergingThemeLabels || item.emerging_theme_labels).filter(Boolean).slice(0, 2)
+        : [],
+      settlingThemeLabels: Array.isArray(item.settlingThemeLabels || item.settling_theme_labels)
+        ? (item.settlingThemeLabels || item.settling_theme_labels).filter(Boolean).slice(0, 2)
+        : [],
+      emergingRouteLabels: Array.isArray(item.emergingRouteLabels || item.emerging_route_labels)
+        ? (item.emergingRouteLabels || item.emerging_route_labels).filter(Boolean).slice(0, 2)
+        : [],
+      settlingRouteLabels: Array.isArray(item.settlingRouteLabels || item.settling_route_labels)
+        ? (item.settlingRouteLabels || item.settling_route_labels).filter(Boolean).slice(0, 2)
+        : [],
+      fromRecoveryRouteLabel: String(
+        item.fromRecoveryRouteLabel || item.from_recovery_route_label || ""
+      ).trim(),
+      toRecoveryRouteLabel: String(
+        item.toRecoveryRouteLabel || item.to_recovery_route_label || ""
+      ).trim(),
+    }))
+    .filter(
+      (item) =>
+        item.shiftLabel ||
+        item.shiftComment ||
+        item.emergingThemeLabels.length > 0 ||
+        item.settlingThemeLabels.length > 0 ||
+        item.emergingRouteLabels.length > 0 ||
+        item.settlingRouteLabels.length > 0
+    )
+    .slice(0, 1);
 }
 
 function extractStructuralReport(contentJson) {
@@ -571,6 +751,8 @@ export default function MyWebReportViewerScreen({
 }) {
   // 🎨 theme
   const { themeName, colors } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
   const screenBg = isDark ? colors.BG_SILVER : "#FFFFFF";
   // Subscription tier (fail-closed: unknown => free)
@@ -945,30 +1127,162 @@ export default function MyWebReportViewerScreen({
     );
   }, [deepReport]);
 
-  const deepTransitionMaxCount = useMemo(() => {
-    return Math.max(...deepTransitionEdges.map((item) => coerceNum(item.count)), 1);
-  }, [deepTransitionEdges]);
 
-  const deepRecoveryMaxMinutes = useMemo(() => {
-    return Math.max(...deepRecoveryRows.map((item) => coerceNum(item.meanMinutes)), 1);
-  }, [deepRecoveryRows]);
+const deepScopeVersion = useMemo(() => {
+  return String(
+    deepReport?.scopeVersion || deepReport?.scope_version || ""
+  ).trim();
+}, [deepReport]);
 
-  const showDeepTransitionChart = useMemo(() => {
-    if (!canViewDeepText) return false;
-    if (reportType !== "weekly" && reportType !== "monthly") return false;
-    return Array.isArray(deepTransitionEdges) && deepTransitionEdges.length > 0;
-  }, [canViewDeepText, reportType, deepTransitionEdges]);
+const deepMemoThemes = useMemo(() => {
+  if (!deepReport) return [];
+  return normalizeMemoThemes(
+    deepReport.memoThemes ||
+    deepReport.memo_themes ||
+    deepReport.features?.memoThemes ||
+    deepReport.features?.memo_themes ||
+    deepReport.summary?.themeItems
+  );
+}, [deepReport]);
 
-  const showDeepRecoveryChart = useMemo(() => {
-    if (!canViewDeepText) return false;
-    if (reportType !== "weekly" && reportType !== "monthly") return false;
-    return Array.isArray(deepRecoveryRows) && deepRecoveryRows.length > 0;
-  }, [canViewDeepText, reportType, deepRecoveryRows]);
+const deepPatternEpisodes = useMemo(() => {
+  if (!deepReport) return [];
+  return normalizePatternEpisodes(
+    deepReport.patternEpisodes ||
+    deepReport.pattern_episodes ||
+    deepReport.features?.patternEpisodes ||
+    deepReport.features?.pattern_episodes ||
+    deepReport.summary?.patternItems
+  );
+}, [deepReport]);
 
-  const showDeepPatterns = useMemo(() => {
-    if (!canViewDeepText) return false;
-    return Array.isArray(deepControlPatterns) && deepControlPatterns.length > 0;
-  }, [canViewDeepText, deepControlPatterns]);
+const isMonthlyDeepV2 = useMemo(() => {
+  return reportType === "monthly" && deepScopeVersion === "myweb.deep.monthly.v2";
+}, [reportType, deepScopeVersion]);
+
+const isWeeklyDeepV2Like = useMemo(() => {
+  if (reportType !== "weekly") return false;
+  if (deepScopeVersion === "myweb.deep.weekly.v2") return true;
+  return deepMemoThemes.length > 0 || deepPatternEpisodes.length > 0;
+}, [reportType, deepScopeVersion, deepMemoThemes, deepPatternEpisodes]);
+
+const deepMonthlyPhaseItems = useMemo(() => {
+  if (!deepReport) return [];
+  return normalizeMonthlyPhaseItems(
+    deepReport.summary?.phaseItems ||
+      deepReport.summary?.phase_items ||
+      deepReport.monthlyPhases ||
+      deepReport.monthly_phases ||
+      deepReport.features?.monthlyPhases ||
+      deepReport.features?.monthly_phases
+  );
+}, [deepReport]);
+
+const deepMonthlyShiftItems = useMemo(() => {
+  if (!deepReport) return [];
+  return normalizeMonthlyShiftItems(
+    deepReport.summary?.shiftItems ||
+      deepReport.summary?.shift_items ||
+      deepReport.monthlyShifts ||
+      deepReport.monthly_shifts ||
+      deepReport.features?.monthlyShifts ||
+      deepReport.features?.monthly_shifts
+  );
+}, [deepReport]);
+
+const deepTransitionMaxCount = useMemo(() => {
+  return Math.max(...deepTransitionEdges.map((item) => coerceNum(item.count)), 1);
+}, [deepTransitionEdges]);
+
+const deepRecoveryMaxMinutes = useMemo(() => {
+  return Math.max(...deepRecoveryRows.map((item) => coerceNum(item.meanMinutes)), 1);
+}, [deepRecoveryRows]);
+
+const showDeepTransitionChart = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (reportType !== "weekly" && reportType !== "monthly") return false;
+  return Array.isArray(deepTransitionEdges) && deepTransitionEdges.length > 0;
+}, [canViewDeepText, reportType, deepTransitionEdges]);
+
+const showDeepRecoveryChart = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (reportType !== "weekly" && reportType !== "monthly") return false;
+  return Array.isArray(deepRecoveryRows) && deepRecoveryRows.length > 0;
+}, [canViewDeepText, reportType, deepRecoveryRows]);
+
+const showDeepMemoThemes = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (!(isWeeklyDeepV2Like || isMonthlyDeepV2)) return false;
+  return Array.isArray(deepMemoThemes) && deepMemoThemes.length > 0;
+}, [canViewDeepText, isWeeklyDeepV2Like, isMonthlyDeepV2, deepMemoThemes]);
+
+const isDeepPatternEpisodeMode = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (!(isWeeklyDeepV2Like || isMonthlyDeepV2)) return false;
+  return Array.isArray(deepPatternEpisodes) && deepPatternEpisodes.length > 0;
+}, [canViewDeepText, isWeeklyDeepV2Like, isMonthlyDeepV2, deepPatternEpisodes]);
+
+const showDeepPatternEpisodes = isDeepPatternEpisodeMode;
+
+const visibleDeepPatterns = useMemo(() => {
+  if (isDeepPatternEpisodeMode) return deepPatternEpisodes;
+  return deepControlPatterns;
+}, [isDeepPatternEpisodeMode, deepPatternEpisodes, deepControlPatterns]);
+
+const showDeepPatterns = useMemo(() => {
+  if (!canViewDeepText) return false;
+  return Array.isArray(visibleDeepPatterns) && visibleDeepPatterns.length > 0;
+}, [canViewDeepText, visibleDeepPatterns]);
+
+const showDeepMonthlyPhases = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (!isMonthlyDeepV2) return false;
+  return Array.isArray(deepMonthlyPhaseItems) && deepMonthlyPhaseItems.length > 0;
+}, [canViewDeepText, isMonthlyDeepV2, deepMonthlyPhaseItems]);
+
+const showDeepMonthlyShift = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (!isMonthlyDeepV2) return false;
+  return Array.isArray(deepMonthlyShiftItems) && deepMonthlyShiftItems.length > 0;
+}, [canViewDeepText, isMonthlyDeepV2, deepMonthlyShiftItems]);
+
+const showDeepMonthlyPhaseSection = useMemo(() => {
+  if (!canViewDeepText) return false;
+  if (!isMonthlyDeepV2) return false;
+  return showDeepMonthlyPhases || showDeepMonthlyShift;
+}, [
+  canViewDeepText,
+  isMonthlyDeepV2,
+  showDeepMonthlyPhases,
+  showDeepMonthlyShift,
+]);
+
+const deepMonthlySectionTitle = useMemo(() => {
+  if (deepMonthlyPhaseItems.length >= 2 || deepMonthlyShiftItems.length > 0) {
+    return "前半と後半で変わっていたこと";
+  }
+  return "今月の中で見えていた流れ";
+}, [deepMonthlyPhaseItems, deepMonthlyShiftItems]);
+
+const deepTransitionSectionTitle = useMemo(() => {
+  if (isWeeklyDeepV2Like && deepMemoThemes.length > 0) {
+    return "言葉と気持ちがつながった流れ";
+  }
+  if (isMonthlyDeepV2) {
+    return "言葉と気持ちがつながった流れ";
+  }
+  return "よく見られた感情の流れ";
+}, [isWeeklyDeepV2Like, isMonthlyDeepV2, deepMemoThemes]);
+
+const deepPatternSectionTitle = useMemo(() => {
+  if (isWeeklyDeepV2Like && isDeepPatternEpisodeMode) {
+    return "今週、くり返しやすかったパターン";
+  }
+  if (isMonthlyDeepV2 && isDeepPatternEpisodeMode) {
+    return "今月、くり返しやすかったパターン";
+  }
+  return "観測された制御パターン";
+}, [isWeeklyDeepV2Like, isMonthlyDeepV2, isDeepPatternEpisodeMode]);
 
   return (
     <SafeAreaView
@@ -1091,7 +1405,7 @@ export default function MyWebReportViewerScreen({
                   <View style={{ padding: 16 }}>
                     <Text
                       style={[
-                        { fontSize: 12, color: "#6B7280" },
+                        { fontSize: ui?.font?.sectionLabel ?? 14, color: "#6B7280" },
                         isDark && themed.emptyText,
                       ]}
                     >
@@ -1250,10 +1564,53 @@ export default function MyWebReportViewerScreen({
         ) : null}
 
 
+        {showDeepMemoThemes ? (
+          <View style={[styles.chartCard, themed.chartCard]}>
+            <Text style={[styles.chartTitle, themed.chartTitle]}>
+              あなたの言葉から見えていたテーマ
+            </Text>
+
+            <View style={styles.deepList}>
+              {deepMemoThemes.slice(0, 2).map((theme) => (
+                <View
+                  key={theme.themeId}
+                  style={[
+                    styles.memoThemeCard,
+                    {
+                      backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
+                      borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.memoThemeTitle, themed.chartTitle]}>{theme.themeLabel}</Text>
+
+                  <View style={styles.memoThemeChipRow}>
+                    {theme.phraseSamples.slice(0, 2).map((phrase) => (
+                      <View key={`${theme.themeId}-${phrase}`} style={styles.memoThemeChip}>
+                        <Text style={styles.memoThemeChipText}>「{phrase}」</Text>
+                      </View>
+                    ))}
+                  </View>
+
+                  {theme.meaningComment ? (
+                    <Text style={[styles.memoThemeMeaning, themed.legendText]}>{theme.meaningComment}</Text>
+                  ) : null}
+
+                  {Array.isArray(theme.linkedRouteLabels) && theme.linkedRouteLabels.length > 0 ? (
+                    <Text style={[styles.memoThemeMeta, themed.legendText]}>
+                      つながりやすかった流れ: {theme.linkedRouteLabels.slice(0, 2).join(" / ")}
+                    </Text>
+                  ) : null}
+                </View>
+              ))}
+            </View>
+          </View>
+        ) : null}
+
         {showDeepTransitionChart ? (
           <View style={[styles.chartCard, themed.chartCard]}>
             <Text style={[styles.chartTitle, themed.chartTitle]}>
-              よく見られた感情の流れ
+              {deepTransitionSectionTitle}
             </Text>
             <View style={styles.deepList}>
               {deepTransitionEdges.slice(0, 5).map((edge, idx) => {
@@ -1325,10 +1682,42 @@ export default function MyWebReportViewerScreen({
         {showDeepPatterns ? (
           <View style={[styles.chartCard, themed.chartCard]}>
             <Text style={[styles.chartTitle, themed.chartTitle]}>
-              観測された制御パターン
+              {deepPatternSectionTitle}
             </Text>
             <View style={styles.deepList}>
-              {deepControlPatterns.slice(0, 5).map((pattern) => {
+              {visibleDeepPatterns.slice(0, 5).map((pattern) => {
+                if (isDeepPatternEpisodeMode) {
+                  return (
+                    <View
+                      key={pattern.patternId}
+                      style={[
+                        styles.patternCard,
+                        {
+                          backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
+                          borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                        },
+                      ]}
+                    >
+                      <Text style={[styles.patternTitle, themed.chartTitle]}>
+                        {pattern.patternLabel || (reportType === "monthly" ? "今月、くり返しやすかった流れ" : "今週、くり返しやすかった流れ")}
+                      </Text>
+                      {pattern.patternComment ? (
+                        <Text style={[styles.patternDesc, themed.legendText]}>{pattern.patternComment}</Text>
+                      ) : null}
+                      {Array.isArray(pattern.routeLabels) && pattern.routeLabels.length > 0 ? (
+                        <Text style={[styles.patternMeta, themed.legendText]}>
+                          代表的な流れ: {pattern.routeLabels.slice(0, 2).join(" / ")}
+                        </Text>
+                      ) : null}
+                      {pattern.recoveryRouteLabel ? (
+                        <Text style={[styles.patternMeta, themed.legendText]}>
+                          戻りやすかった流れ: {pattern.recoveryRouteLabel}
+                        </Text>
+                      ) : null}
+                    </View>
+                  );
+                }
+
                 const firstMemo = Array.isArray(pattern.memoTriggers) && pattern.memoTriggers.length > 0
                   ? pattern.memoTriggers[0]
                   : null;
@@ -1365,6 +1754,106 @@ export default function MyWebReportViewerScreen({
           </View>
         ) : null}
         
+
+{showDeepMonthlyPhaseSection ? (
+  <View style={[styles.chartCard, themed.chartCard]}>
+    <Text style={[styles.chartTitle, themed.chartTitle]}>
+      {deepMonthlySectionTitle}
+    </Text>
+
+    <View style={styles.deepList}>
+      {showDeepMonthlyPhases
+        ? deepMonthlyPhaseItems.slice(0, 2).map((phase) => (
+            <View
+              key={phase.phaseId}
+              style={[
+                styles.patternCard,
+                {
+                  backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
+                  borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                },
+              ]}
+            >
+              <Text style={[styles.patternTitle, themed.chartTitle]}>
+                {phase.phaseFocusLabel
+                  ? `${phase.phaseLabel}: ${phase.phaseFocusLabel}`
+                  : phase.phaseLabel}
+              </Text>
+
+              {phase.phaseComment ? (
+                <Text style={[styles.patternDesc, themed.legendText]}>
+                  {phase.phaseComment}
+                </Text>
+              ) : null}
+
+              {phase.phraseSamples.length > 0 ? (
+                <View style={styles.memoThemeChipRow}>
+                  {phase.phraseSamples.slice(0, 2).map((phrase) => (
+                    <View key={`${phase.phaseId}-${phrase}`} style={styles.memoThemeChip}>
+                      <Text style={styles.memoThemeChipText}>「{phrase}」</Text>
+                    </View>
+                  ))}
+                </View>
+              ) : null}
+
+              {phase.themeLabels.length > 0 ? (
+                <Text style={[styles.patternMeta, themed.legendText]}>
+                  見えやすかったテーマ: {phase.themeLabels.slice(0, 2).join(" / ")}
+                </Text>
+              ) : null}
+
+              {phase.routeLabels.length > 0 ? (
+                <Text style={[styles.patternMeta, themed.legendText]}>
+                  動きやすかった流れ: {phase.routeLabels.slice(0, 2).join(" / ")}
+                </Text>
+              ) : null}
+
+              {phase.recoveryRouteLabel ? (
+                <Text style={[styles.patternMeta, themed.legendText]}>
+                  戻りやすかった流れ: {phase.recoveryRouteLabel}
+                </Text>
+              ) : null}
+            </View>
+          ))
+        : null}
+
+      {showDeepMonthlyShift ? (
+        <View
+          style={[
+            styles.patternCard,
+            {
+              backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
+              borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+            },
+          ]}
+        >
+          <Text style={[styles.patternTitle, themed.chartTitle]}>
+            {deepMonthlyShiftItems[0]?.shiftLabel || "月の中で流れが変化"}
+          </Text>
+
+          {deepMonthlyShiftItems[0]?.shiftComment ? (
+            <Text style={[styles.patternDesc, themed.legendText]}>
+              {deepMonthlyShiftItems[0].shiftComment}
+            </Text>
+          ) : null}
+
+          {deepMonthlyShiftItems[0]?.settlingRouteLabels?.length > 0 ? (
+            <Text style={[styles.patternMeta, themed.legendText]}>
+              前半で目立っていた流れ: {deepMonthlyShiftItems[0].settlingRouteLabels.join(" / ")}
+            </Text>
+          ) : null}
+
+          {deepMonthlyShiftItems[0]?.emergingRouteLabels?.length > 0 ? (
+            <Text style={[styles.patternMeta, themed.legendText]}>
+              後半で増えた流れ: {deepMonthlyShiftItems[0].emergingRouteLabels.join(" / ")}
+            </Text>
+          ) : null}
+        </View>
+      ) : null}
+    </View>
+  </View>
+) : null}
+
         {/* ===== Text (stored snapshot) ===== */}
         {showStandardUpgradeCard ? (
           <View style={[styles.chartCard, themed.chartCard]}>
@@ -1460,7 +1949,8 @@ export default function MyWebReportViewerScreen({
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
 
   header: {
@@ -1761,4 +2251,47 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     color: "#4B5563",
   },
-});
+  memoThemeCard: {
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  memoThemeTitle: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: "#111827",
+  },
+  memoThemeChipRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 8,
+    marginBottom: 4,
+  },
+  memoThemeChip: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 999,
+    backgroundColor: "#F3F4F6",
+    marginRight: 6,
+    marginBottom: 6,
+  },
+  memoThemeChipText: {
+    fontSize: 11,
+    color: "#374151",
+    fontWeight: "600",
+  },
+  memoThemeMeaning: {
+    fontSize: 12,
+    lineHeight: 18,
+    color: "#4B5563",
+  },
+  memoThemeMeta: {
+    marginTop: 4,
+    fontSize: 11,
+    lineHeight: 16,
+    color: "#4B5563",
+  },
+  }, ui));
+}

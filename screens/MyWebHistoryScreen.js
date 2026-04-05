@@ -15,6 +15,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { apiJson, apiFetch } from "../lib/apiClient";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
@@ -213,6 +215,8 @@ export default function MyWebHistoryScreen({ onBack }) {
   const [deletingId, setDeletingId] = useState(null);
 
   const { themeName, colors } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
   const historyRetentionLabel = useMemo(
@@ -1089,7 +1093,8 @@ export default function MyWebHistoryScreen({ onBack }) {
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
     paddingTop: 8,
@@ -1263,4 +1268,5 @@ const styles = StyleSheet.create({
   memoLabel: { fontSize: 11, fontWeight: "700", color: "#6B7280" },
   memo: { color: "#6B7280", marginTop: 4, fontStyle: "italic" },
   categoryValue: { color: "#6B7280", marginTop: 4 },
-});
+  }, ui));
+}

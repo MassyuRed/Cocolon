@@ -13,7 +13,10 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
+import SelfStructureDeepRenderer from "../components/selfStructure/SelfStructureDeepRenderer";
 
 function escapeHtml(s) {
   return String(s)
@@ -105,6 +108,25 @@ async function exportTextToPdf(title, text) {
   );
 }
 
+function safeParseJson(raw) {
+  if (!raw) return null;
+  if (typeof raw === "object") return raw;
+  if (typeof raw === "string") {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+function normalizeMyProfileMode(mode) {
+  const m = String(mode || "").toLowerCase().trim();
+  if (m === "deep") return "deep";
+  return "standard";
+}
+
 function formatRange(periodStart, periodEnd) {
   try {
     const s = new Date(periodStart);
@@ -123,6 +145,8 @@ export default function SelfStructureReportViewerScreen({
   initialAnchorKey = null,
 }) {
   const { themeName, colors } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
   const { isPaid, loading: subscriptionLoading } = useSubscription();
@@ -149,6 +173,11 @@ export default function SelfStructureReportViewerScreen({
       pdfText: { color: colors.TEXT_ON_LIGHT },
 
       range: { color: colors.TEXT_SUBTLE },
+      bodyCard: {
+        borderColor: colors.CARD_BORDER,
+        backgroundColor: colors.PANEL_BG,
+      },
+      sectionLabel: { color: colors.TEXT_ON_LIGHT },
 
       p: { color: colors.TEXT_ON_LIGHT },
       empty: { color: colors.TEXT_SUBTLE },
@@ -165,6 +194,13 @@ export default function SelfStructureReportViewerScreen({
   }, [report?.period_start, report?.period_end]);
 
   const contentText = report?.content_text || "";
+  const contentJson = useMemo(() => safeParseJson(report?.content_json), [report?.content_json]);
+  const fetchedReportMode = useMemo(() => {
+    return normalizeMyProfileMode(contentJson?.report_mode || report?.report_mode);
+  }, [contentJson?.report_mode, report?.report_mode]);
+  const hasDeepVisual = useMemo(() => {
+    return fetchedReportMode === "deep" && !!contentJson?.selfStructureDeepVisual;
+  }, [fetchedReportMode, contentJson]);
 
   // MyWeb → MyProfile の動的リンクなどで「該当ブロックへスクロール」したい場合に使用
   const scrollRef = useRef(null);
@@ -252,43 +288,63 @@ export default function SelfStructureReportViewerScreen({
           <Text style={[styles.empty, themed.empty]}>
             {subscriptionLoading
               ? "プラン情報を確認しています…"
-              : "自己構造分析レポートはPlus会員以上で閲覧できます。"}
+              : "自己構造分析レポートはPlusプラン以上で閲覧できます。"}
           </Text>
-        ) : contentText ? (
-          lines.map((line, idx) => {
-            const isTarget = targetIndex != null && idx === targetIndex;
-
-            if (isTarget) {
-              return (
-                <View
-                  key={`l-${idx}`}
-                  onLayout={(e) => {
-                    const y = e?.nativeEvent?.layout?.y;
-                    if (typeof y === "number") setAnchorY(y);
-                  }}
-                >
-                  <Text style={[styles.p, themed.p, styles.anchorLine, themed.anchorLine]}>
-                    {line}
-                  </Text>
-                </View>
-              );
-            }
-
-            return (
-              <Text key={`l-${idx}`} style={[styles.p, themed.p]}>
-                {line}
-              </Text>
-            );
-          })
         ) : (
-          <Text style={[styles.empty, themed.empty]}>内容がありません</Text>
+          <>
+            {hasDeepVisual ? (
+              <SelfStructureDeepRenderer
+                contentJson={contentJson}
+                colors={colors}
+                isDark={isDark}
+              />
+            ) : null}
+
+            {(contentText || !hasDeepVisual) ? (
+              <View style={[styles.bodyCard, themed.bodyCard]}>
+                {hasDeepVisual && contentText ? (
+                  <Text style={[styles.sectionLabel, themed.sectionLabel]}>文章で読む</Text>
+                ) : null}
+                {contentText ? (
+                  lines.map((line, idx) => {
+                    const isTarget = targetIndex != null && idx === targetIndex;
+
+                    if (isTarget) {
+                      return (
+                        <View
+                          key={`l-${idx}`}
+                          onLayout={(e) => {
+                            const y = e?.nativeEvent?.layout?.y;
+                            if (typeof y === "number") setAnchorY(y);
+                          }}
+                        >
+                          <Text style={[styles.p, themed.p, styles.anchorLine, themed.anchorLine]}>
+                            {line}
+                          </Text>
+                        </View>
+                      );
+                    }
+
+                    return (
+                      <Text key={`l-${idx}`} style={[styles.p, themed.p]}>
+                        {line}
+                      </Text>
+                    );
+                  })
+                ) : (
+                  <Text style={[styles.empty, themed.empty]}>内容がありません</Text>
+                )}
+              </View>
+            ) : null}
+          </>
         )}
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
     paddingTop: 10,
@@ -322,7 +378,21 @@ const styles = StyleSheet.create({
   range: { paddingHorizontal: 12, paddingTop: 8, paddingBottom: 2, color: "#6B7280", fontSize: 12 },
 
   body: { paddingHorizontal: 14, paddingVertical: 12, paddingBottom: 24 },
+  bodyCard: {
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    borderRadius: 12,
+    backgroundColor: "#FFFFFF",
+    padding: 12,
+  },
+  sectionLabel: {
+    color: "#111827",
+    fontSize: 12,
+    fontWeight: "800",
+    marginBottom: 8,
+  },
   p: { fontSize: 14, lineHeight: 20, color: "#111827" },
   anchorLine: { fontWeight: "900" },
   empty: { padding: 16, color: "#6B7280" },
-});
+  }, ui));
+}

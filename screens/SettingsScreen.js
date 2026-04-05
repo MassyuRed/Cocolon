@@ -23,6 +23,8 @@ import {
   THEME_VARIANTS,
   THEME_LABELS_JA,
 } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
@@ -304,7 +306,8 @@ export default function SettingsScreen({ navigation }) {
   const isBusy = authLoading || localProcessing;
 
   const isDark = themeName === THEME_VARIANTS.DARK;
-  const styles = useMemo(() => createStyles(colors, isDark), [colors, isDark]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, isDark, ui), [colors, isDark, ui]);
   const showNotificationTimeSettings = false; // 時刻設定UIと保存ボタンは一時非表示
 
   // Push通知（受信）のON/OFF（アプリ内設定）
@@ -803,7 +806,7 @@ export default function SettingsScreen({ navigation }) {
                       accessibilityLabel={`テーマ ${label} を選択`}
                       style={{ marginBottom: 8 }}
                       textStyle={{
-                        fontSize: 12,
+                        fontSize: ui?.font?.sectionLabel ?? 14,
                         fontWeight: active ? "700" : "600",
                       }}
                     >
@@ -860,7 +863,7 @@ export default function SettingsScreen({ navigation }) {
                         color="#000"
                       />
                     </View>
-                    <Text style={styles.rowLabel}>通知を受け取る</Text>
+                    <Text style={styles.rowLabel}>すべての通知</Text>
                   </View>
 
                   <CocolonSwitch
@@ -1120,11 +1123,11 @@ export default function SettingsScreen({ navigation }) {
   );
 }
 
-function createStyles(COLORS, isDark = false) {
+function createStyles(COLORS, isDark = false, ui) {
   const TEXT_SUB = COLORS.TEXT_ON_LIGHT;
   const TIME_TEXT = isDark ? COLORS.TEXT_ON_LIGHT : "#111111";
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -1594,5 +1597,5 @@ function createStyles(COLORS, isDark = false) {
       fontWeight: "800",
       fontSize: 15,
     },
-  });
+  }, ui));
 }

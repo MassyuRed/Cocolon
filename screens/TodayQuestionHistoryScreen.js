@@ -15,6 +15,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 import CocolonButton from "../components/CocolonButton";
@@ -29,12 +31,13 @@ const HISTORY_PAGE_LIMIT = 60;
 
 export default function TodayQuestionHistoryScreen({ onBack }) {
   const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const {
     isPaid,
     tier: subscriptionTier,
     loading: subscriptionLoading,
   } = useSubscription();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const { height: windowHeight } = useWindowDimensions();
   const isIOS = Platform.OS === "ios";
   const [loading, setLoading] = useState(true);
@@ -163,7 +166,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
       const cur = editState[answerId] || {};
       if (!answerId) return;
       if (!isPaid) {
-        Alert.alert("今日の問い", "編集はPlus会員以上で利用できます。");
+        Alert.alert("今日の問い", "編集はPlusプラン以上で利用できます。");
         return;
       }
 
@@ -234,7 +237,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
 
           {!isPaid ? (
             <Text style={styles.helpText}>
-              履歴の閲覧は全員可能です。編集はPlus会員以上で利用できます。
+              履歴の閲覧は全員可能です。編集はPlusプラン以上で利用できます。
             </Text>
           ) : (
             <Text style={styles.helpText}>
@@ -463,8 +466,8 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -659,5 +662,5 @@ function createStyles(COLORS) {
       fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
     },
-  });
+  }, ui));
 }

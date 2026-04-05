@@ -16,6 +16,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { apiGet, apiPost } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 
@@ -198,6 +200,8 @@ export default function SelfStructureReportHistoryScreen({
   const [errorMsg, setErrorMsg] = useState("");
 
   const { themeName, colors } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
   const historyRetentionLabel = useMemo(
@@ -490,7 +494,8 @@ export default function SelfStructureReportHistoryScreen({
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
     paddingTop: 10,
@@ -570,5 +575,6 @@ const styles = StyleSheet.create({
     color: "#111827",
     fontWeight: "700",
   },
-});
+  }, ui));
+}
 

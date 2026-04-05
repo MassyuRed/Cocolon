@@ -32,7 +32,7 @@ import {
   markNoticePopupSeen,
   markNoticesRead,
 } from "../lib/noticeApi";
-import { openNoticeAction } from "../lib/noticeActionRuntime";
+import { getNoticeButtonActions, openNoticeAction } from "../lib/noticeActionRuntime";
 
 // テーマ
 import { useTheme } from "../theme/ThemeContext";
@@ -45,6 +45,7 @@ import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
@@ -53,6 +54,7 @@ import TutorialOverlay, {
 import TodayQuestionCard from "../components/TodayQuestionCard";
 import TodayQuestionModal from "../components/TodayQuestionModal";
 import NoticeModal from "../components/NoticeModal";
+import TutorialStartModal from "../components/TutorialStartModal";
 import UnreadBadge from "../components/UnreadBadge";
 
 // 未送信下書きは InputScreen 内で自己完結させ、
@@ -63,6 +65,27 @@ const INPUT_DRAFT_TTL_MS = INPUT_DRAFT_TTL_HOURS * 60 * 60 * 1000;
 const INPUT_DRAFT_STORAGE_VERSION = 1;
 const INPUT_DRAFT_KEY_PREFIX = "cocolon.inputDraft.v1";
 const VALID_STRENGTHS = new Set(["weak", "medium", "strong"]);
+
+function isWelcomeNoticePopupCandidate(notice) {
+  const explicitVariant = String(
+    notice?.popup_variant ||
+      notice?.notice_variant ||
+      notice?.modal_variant ||
+      notice?.variant ||
+      "",
+  )
+    .trim()
+    .toLowerCase();
+  if (explicitVariant === "welcome" || explicitVariant === "intro") {
+    return true;
+  }
+
+  const title = String(notice?.title || "").trim();
+  if (title !== "はじめに") return false;
+
+  const buttonActions = getNoticeButtonActions(notice?.actions, notice?.cta);
+  return buttonActions.length === 0;
+}
 
 function normalizeDraftUserId(userId) {
   return String(userId || "").trim();
@@ -255,6 +278,28 @@ const INPUT_TUTORIAL_STEP_START = 1;
 const INPUT_TUTORIAL_STEP_END = 6;
 const TUTORIAL_TOTAL_STEPS = 23;
 
+const STARTUP_POPUP_KIND = Object.freeze({
+  NOTICE: "notice",
+  TUTORIAL: "tutorial",
+  TODAY_QUESTION: "todayQuestion",
+});
+
+const STARTUP_POPUP_PRIORITY = Object.freeze({
+  [STARTUP_POPUP_KIND.NOTICE]: 300,
+  [STARTUP_POPUP_KIND.TUTORIAL]: 200,
+  [STARTUP_POPUP_KIND.TODAY_QUESTION]: 100,
+});
+
+function sortStartupPopupQueue(items = []) {
+  return [...items]
+    .filter(Boolean)
+    .sort(
+      (a, b) =>
+        (STARTUP_POPUP_PRIORITY[b?.kind] || 0) -
+        (STARTUP_POPUP_PRIORITY[a?.kind] || 0)
+    );
+}
+
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
@@ -265,10 +310,15 @@ export default function InputScreen({ navigation }) {
   const { session } = useAuth();
   const {
     isTutorialMode,
+    tutorialFlagsLoaded,
+    tutorialCompleted,
+    tutorialSkipped,
     tutorialStep,
     addTutorialEmotion,
     addTutorialFriendFeedItem,
     setTutorialStep,
+    startTutorial,
+    skipTutorial,
   } = useTutorial();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -381,13 +431,22 @@ const [homeStreakDays, setHomeStreakDays] = useState(null);
 const [todayQuestionBundle, setTodayQuestionBundle] = useState(null);
 const [todayQuestionLoading, setTodayQuestionLoading] = useState(false);
 const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
-const [todayQuestionModalVisible, setTodayQuestionModalVisible] = useState(false);
 const dismissedTodayQuestionDayRef = useRef(null);
 const todayQuestionRequestIdRef = useRef(0);
+const startupCycleIdRef = useRef(0);
+const startupPrepareInFlightRef = useRef(null);
+const startupWindowClosedRef = useRef(false);
+const [startupQueuePreparing, setStartupQueuePreparing] = useState(false);
+const [startupPopupQueue, setStartupPopupQueue] = useState([]);
+const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
+  useState(false);
+
+useEffect(() => {
+  setTutorialPromptDismissedThisSession(false);
+}, [currentUserId]);
 
 const clearTodayQuestionUi = useCallback(() => {
   setTodayQuestionBundle(null);
-  setTodayQuestionModalVisible(false);
   setTodayQuestionLoading(false);
 }, []);
 
@@ -395,7 +454,6 @@ const [noticeFeatureEnabled, setNoticeFeatureEnabled] = useState(true);
 const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
 const [noticePopup, setNoticePopup] = useState(null);
 const [noticeLoading, setNoticeLoading] = useState(false);
-const [noticeModalVisible, setNoticeModalVisible] = useState(false);
 const dismissedNoticeIdRef = useRef(null);
 const noticeRequestIdRef = useRef(0);
 
@@ -403,8 +461,33 @@ const clearNoticeUi = useCallback(() => {
   setNoticeFeatureEnabled(true);
   setNoticeUnreadCount(0);
   setNoticePopup(null);
-  setNoticeModalVisible(false);
   setNoticeLoading(false);
+}, []);
+
+const activeStartupPopup = startupPopupQueue[0] || null;
+const startupModalVisible = !!activeStartupPopup;
+const isNoticeStartupPopupVisible =
+  activeStartupPopup?.kind === STARTUP_POPUP_KIND.NOTICE;
+const isWelcomeNoticeStartupPopup = useMemo(
+  () => isWelcomeNoticePopupCandidate(noticePopup),
+  [noticePopup],
+);
+const isTutorialStartupPopupVisible =
+  activeStartupPopup?.kind === STARTUP_POPUP_KIND.TUTORIAL;
+const isTodayQuestionStartupPopupVisible =
+  activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION;
+
+const closeStartupPopupWindow = useCallback(() => {
+  startupWindowClosedRef.current = true;
+  setStartupQueuePreparing(false);
+  setStartupPopupQueue([]);
+}, []);
+
+const advanceStartupPopupQueue = useCallback(() => {
+  setStartupPopupQueue((prev) => {
+    if (!Array.isArray(prev) || prev.length <= 1) return [];
+    return prev.slice(1);
+  });
 }, []);
 
 const homeBadgeLabel = useMemo(() => {
@@ -525,38 +608,46 @@ useEffect(() => {
   };
 }, [fetchGlobalSummary]);
 
-const loadTodayQuestion = useCallback(async () => {
+const loadTodayQuestion = useCallback(async ({ includeStartupCandidate = true } = {}) => {
   const requestId = todayQuestionRequestIdRef.current + 1;
   todayQuestionRequestIdRef.current = requestId;
 
   if (isTutorialMode) {
     clearTodayQuestionUi();
-    return;
+    return { candidate: null, aborted: false };
   }
 
   const timezoneName = getInputLocalTimezoneName();
   setTodayQuestionLoading(true);
   try {
     const json = await getTodayQuestionCurrent({ timezone_name: timezoneName });
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
+      return { candidate: null, aborted: true };
+    }
 
     setTodayQuestionBundle(json || null);
 
     const unanswered = json?.question && json?.answer_status !== "answered";
     const serviceDayKey = String(json?.service_day_key || "");
-    if (
+    const shouldShowStartupPopup =
+      includeStartupCandidate &&
       unanswered &&
       serviceDayKey &&
-      dismissedTodayQuestionDayRef.current !== serviceDayKey
-    ) {
-      setTodayQuestionModalVisible(true);
-    } else {
-      setTodayQuestionModalVisible(false);
-    }
+      dismissedTodayQuestionDayRef.current !== serviceDayKey;
+
+    return {
+      candidate: shouldShowStartupPopup
+        ? { kind: STARTUP_POPUP_KIND.TODAY_QUESTION }
+        : null,
+      aborted: false,
+    };
   } catch (e) {
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) return;
+    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
+      return { candidate: null, aborted: true };
+    }
     console.warn("InputScreen: loadTodayQuestion failed", e);
     clearTodayQuestionUi();
+    return { candidate: null, aborted: false };
   } finally {
     if (todayQuestionRequestIdRef.current === requestId) {
       setTodayQuestionLoading(false);
@@ -564,38 +655,21 @@ const loadTodayQuestion = useCallback(async () => {
   }
 }, [clearTodayQuestionUi, isTutorialMode]);
 
-useEffect(() => {
-  loadTodayQuestion();
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", loadTodayQuestion);
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [navigation, loadTodayQuestion]);
-
-const loadNotices = useCallback(async () => {
+const loadNotices = useCallback(async ({ includeStartupCandidate = true } = {}) => {
   const requestId = noticeRequestIdRef.current + 1;
   noticeRequestIdRef.current = requestId;
 
   if (isTutorialMode) {
     clearNoticeUi();
-    return;
+    return { candidate: null, aborted: false };
   }
 
   setNoticeLoading(true);
   try {
     const json = await getNoticesCurrent();
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
+      return { candidate: null, aborted: true };
+    }
 
     const featureEnabled = json?.feature_enabled !== false;
     const unreadCount = Math.max(0, Number(json?.unread_count) || 0);
@@ -608,20 +682,26 @@ const loadNotices = useCallback(async () => {
     setNoticeUnreadCount(unreadCount);
     setNoticePopup(popupNotice);
 
-    if (
+    const shouldShowStartupPopup =
+      includeStartupCandidate &&
       featureEnabled &&
       popupNotice &&
       popupNoticeId &&
-      dismissedNoticeIdRef.current !== popupNoticeId
-    ) {
-      setNoticeModalVisible(true);
-    } else {
-      setNoticeModalVisible(false);
-    }
+      dismissedNoticeIdRef.current !== popupNoticeId;
+
+    return {
+      candidate: shouldShowStartupPopup
+        ? { kind: STARTUP_POPUP_KIND.NOTICE }
+        : null,
+      aborted: false,
+    };
   } catch (e) {
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) return;
+    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
+      return { candidate: null, aborted: true };
+    }
     console.warn("InputScreen: loadNotices failed", e);
     clearNoticeUi();
+    return { candidate: null, aborted: false };
   } finally {
     if (noticeRequestIdRef.current === requestId) {
       setNoticeLoading(false);
@@ -629,24 +709,128 @@ const loadNotices = useCallback(async () => {
   }
 }, [clearNoticeUi, isTutorialMode]);
 
-useEffect(() => {
-  loadNotices();
+const buildTutorialStartupCandidate = useCallback(() => {
+  if (!currentUserId) return null;
+  if (!tutorialFlagsLoaded) return null;
+  if (isTutorialMode) return null;
+  if (tutorialCompleted || tutorialSkipped) return null;
+  if (tutorialPromptDismissedThisSession) return null;
+  return { kind: STARTUP_POPUP_KIND.TUTORIAL };
+}, [
+  currentUserId,
+  isTutorialMode,
+  tutorialCompleted,
+  tutorialFlagsLoaded,
+  tutorialPromptDismissedThisSession,
+  tutorialSkipped,
+]);
 
-  let unsubscribe = null;
+const prepareStartupPopupQueue = useCallback(async (cycleId) => {
+  if (!cycleId) return;
+  if (isTutorialMode) {
+    setStartupQueuePreparing(false);
+    setStartupPopupQueue([]);
+    return;
+  }
+
+  const tutorialCandidate = buildTutorialStartupCandidate();
+  const [noticeResult, todayQuestionResult] = await Promise.all([
+    loadNotices({ includeStartupCandidate: true }),
+    loadTodayQuestion({ includeStartupCandidate: true }),
+  ]);
+
+  if (startupCycleIdRef.current !== cycleId) return;
+
+  if (startupWindowClosedRef.current) {
+    setStartupQueuePreparing(false);
+    setStartupPopupQueue([]);
+    return;
+  }
+
+  const nextQueue = sortStartupPopupQueue([
+    noticeResult?.candidate,
+    tutorialCandidate,
+    todayQuestionResult?.candidate,
+  ]);
+
+  setStartupPopupQueue(nextQueue);
+  setStartupQueuePreparing(false);
+}, [
+  buildTutorialStartupCandidate,
+  isTutorialMode,
+  loadNotices,
+  loadTodayQuestion,
+]);
+
+const beginStartupPopupCycle = useCallback(() => {
+  const nextCycleId = startupCycleIdRef.current + 1;
+  startupCycleIdRef.current = nextCycleId;
+  startupPrepareInFlightRef.current = null;
+  startupWindowClosedRef.current = false;
+  setStartupPopupQueue([]);
+
+  if (isTutorialMode) {
+    setStartupQueuePreparing(false);
+    return;
+  }
+
+  setStartupQueuePreparing(true);
+}, [isTutorialMode]);
+
+useEffect(() => {
+  beginStartupPopupCycle();
+
+  let unsubscribeFocus = null;
+  let unsubscribeBlur = null;
   try {
-    unsubscribe = navigation?.addListener?.("focus", loadNotices);
+    unsubscribeFocus = navigation?.addListener?.("focus", beginStartupPopupCycle);
+    unsubscribeBlur = navigation?.addListener?.("blur", () => {
+      startupWindowClosedRef.current = true;
+      setStartupQueuePreparing(false);
+      setStartupPopupQueue([]);
+    });
   } catch {
     // noop
   }
 
   return () => {
+    startupWindowClosedRef.current = true;
     try {
-      if (typeof unsubscribe === "function") unsubscribe();
+      if (typeof unsubscribeFocus === "function") unsubscribeFocus();
+    } catch {
+      // noop
+    }
+    try {
+      if (typeof unsubscribeBlur === "function") unsubscribeBlur();
     } catch {
       // noop
     }
   };
-}, [navigation, loadNotices]);
+}, [beginStartupPopupCycle, navigation]);
+
+useEffect(() => {
+  if (!startupQueuePreparing) return;
+  if (startupWindowClosedRef.current) return;
+  if (isTutorialMode) return;
+  if (currentUserId && !tutorialFlagsLoaded) return;
+
+  const cycleId = startupCycleIdRef.current;
+  if (!cycleId) return;
+  if (startupPrepareInFlightRef.current === cycleId) return;
+
+  startupPrepareInFlightRef.current = cycleId;
+  void prepareStartupPopupQueue(cycleId).finally(() => {
+    if (startupPrepareInFlightRef.current === cycleId) {
+      startupPrepareInFlightRef.current = null;
+    }
+  });
+}, [
+  currentUserId,
+  isTutorialMode,
+  prepareStartupPopupQueue,
+  startupQueuePreparing,
+  tutorialFlagsLoaded,
+]);
 
 const markCurrentNoticePopupSeen = useCallback(async () => {
   const noticeId = String(noticePopup?.notice_id || "").trim();
@@ -684,10 +868,14 @@ const handleDismissTodayQuestionModal = useCallback(() => {
   if (serviceDayKey) {
     dismissedTodayQuestionDayRef.current = serviceDayKey;
   }
-  setTodayQuestionModalVisible(false);
-}, [todayQuestionBundle?.service_day_key]);
+  advanceStartupPopupQueue();
+}, [advanceStartupPopupQueue, todayQuestionBundle?.service_day_key]);
 
 const handleOpenTodayQuestionHistory = useCallback(() => {
+  if (activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
+    closeStartupPopupWindow();
+  }
+
   try {
     const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
     if (parent && typeof parent.navigate === "function") {
@@ -709,7 +897,7 @@ const handleOpenTodayQuestionHistory = useCallback(() => {
   } catch {
     // noop
   }
-}, [navigation]);
+}, [activeStartupPopup?.kind, closeStartupPopupWindow, navigation]);
 
 const handleSubmitTodayQuestion = useCallback(async (payload) => {
   if (!todayQuestionBundle?.question?.question_id) return;
@@ -724,15 +912,60 @@ const handleSubmitTodayQuestion = useCallback(async (payload) => {
     });
     showToast("今日の問いを保存しました");
     dismissedTodayQuestionDayRef.current = String(todayQuestionBundle?.service_day_key || "");
-    await loadTodayQuestion();
-    setTodayQuestionModalVisible(false);
+    if (activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
+      advanceStartupPopupQueue();
+    }
+    await loadTodayQuestion({ includeStartupCandidate: false });
   } catch (e) {
     console.warn("InputScreen: submitTodayQuestion failed", e);
     Alert.alert("今日の問い", String(e?.message || "保存に失敗しました。"));
   } finally {
     setTodayQuestionSubmitting(false);
   }
-}, [loadTodayQuestion, showToast, todayQuestionBundle]);
+}, [
+  activeStartupPopup?.kind,
+  advanceStartupPopupQueue,
+  loadTodayQuestion,
+  showToast,
+  todayQuestionBundle,
+]);
+
+const handleDismissTutorialStartModal = useCallback(() => {
+  setTutorialPromptDismissedThisSession(true);
+  advanceStartupPopupQueue();
+}, [advanceStartupPopupQueue]);
+
+const handleSkipTutorialPermanently = useCallback(async () => {
+  setTutorialPromptDismissedThisSession(true);
+  advanceStartupPopupQueue();
+  try {
+    await skipTutorial();
+  } catch (e) {
+    console.warn("InputScreen: skipTutorial failed", e);
+  }
+}, [advanceStartupPopupQueue, skipTutorial]);
+
+const handleStartTutorialFromModal = useCallback(() => {
+  setTutorialPromptDismissedThisSession(true);
+  closeStartupPopupWindow();
+  startTutorial();
+}, [closeStartupPopupWindow, startTutorial]);
+
+const registerInputInteraction = useCallback(() => {
+  if (startupWindowClosedRef.current) return;
+  if (startupModalVisible) return;
+  closeStartupPopupWindow();
+  if (!isTutorialMode) {
+    void loadNotices({ includeStartupCandidate: false });
+    void loadTodayQuestion({ includeStartupCandidate: false });
+  }
+}, [
+  closeStartupPopupWindow,
+  isTutorialMode,
+  loadNotices,
+  loadTodayQuestion,
+  startupModalVisible,
+]);
 
 const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -798,8 +1031,8 @@ const { height: windowHeight } = useWindowDimensions();
   const shouldShowDraftRestorePrompt = useMemo(() => {
     if (!pendingInputDraft) return false;
     if (isTutorialMode) return false;
+    if (startupQueuePreparing || startupModalVisible) return false;
     if (noticeLoading || todayQuestionLoading) return false;
-    if (noticeModalVisible || todayQuestionModalVisible) return false;
     if (inputFeedbackModalVisible) return false;
     if (hasCurrentDraftContent) return false;
     return true;
@@ -808,10 +1041,10 @@ const { height: windowHeight } = useWindowDimensions();
     inputFeedbackModalVisible,
     isTutorialMode,
     noticeLoading,
-    noticeModalVisible,
     pendingInputDraft,
+    startupModalVisible,
+    startupQueuePreparing,
     todayQuestionLoading,
-    todayQuestionModalVisible,
   ]);
 
   const draftPersistenceBlocked =
@@ -900,6 +1133,7 @@ const { height: windowHeight } = useWindowDimensions();
   }, []);
 
   const openField = (field) => {
+    registerInputInteraction();
     setActiveField(field);
     // state反映後に focus する（render完了を待つ）
     setTimeout(() => {
@@ -1086,6 +1320,21 @@ const { height: windowHeight } = useWindowDimensions();
     (!isSelfInsightSelected || hasMemoInput) &&
     (!requiresCategorySelection || hasSelectedCategories);
 
+  const hasUserStartedInput =
+    selectedEmotions.length > 0 ||
+    memo.trim().length > 0 ||
+    memoAction.trim().length > 0 ||
+    selectedCategories.length > 0 ||
+    showMemoSection ||
+    activeField !== null ||
+    isSecret ||
+    sendFriendNotification === false;
+
+  useEffect(() => {
+    if (!hasUserStartedInput) return;
+    registerInputInteraction();
+  }, [hasUserStartedInput, registerInputInteraction]);
+
   const getTutorialTargetRef = useCallback(() => {
     if (!isInputTutorialStep) return null;
 
@@ -1212,10 +1461,10 @@ const { height: windowHeight } = useWindowDimensions();
     if (!isTutorialMode) return;
     if (tutorialStep > 0) return;
     if (
+      startupQueuePreparing ||
+      startupModalVisible ||
       !!todayQuestionBundle?.question ||
-      todayQuestionModalVisible ||
       todayQuestionLoading ||
-      noticeModalVisible ||
       noticeLoading
     ) {
       return;
@@ -1235,21 +1484,22 @@ const { height: windowHeight } = useWindowDimensions();
   }, [
     isTutorialMode,
     tutorialStep,
+    startupModalVisible,
+    startupQueuePreparing,
     !!todayQuestionBundle?.question,
     todayQuestionLoading,
-    todayQuestionModalVisible,
     noticeLoading,
-    noticeModalVisible,
     setTutorialStep,
   ]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
+    closeStartupPopupWindow();
     todayQuestionRequestIdRef.current += 1;
     clearTodayQuestionUi();
     noticeRequestIdRef.current += 1;
     clearNoticeUi();
-  }, [clearNoticeUi, clearTodayQuestionUi, isTutorialMode]);
+  }, [clearNoticeUi, clearTodayQuestionUi, closeStartupPopupWindow, isTutorialMode]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
@@ -1286,6 +1536,8 @@ const { height: windowHeight } = useWindowDimensions();
   }, [
     isInputTutorialStep,
     tutorialStep,
+    startupModalVisible,
+    startupQueuePreparing,
     selectedEmotions,
     showMemoSection,
     memo,
@@ -1294,9 +1546,7 @@ const { height: windowHeight } = useWindowDimensions();
     shouldHideTodayQuestionForTutorial,
     !!todayQuestionBundle?.question,
     todayQuestionLoading,
-    todayQuestionModalVisible,
     noticeLoading,
-    noticeModalVisible,
     tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
@@ -1314,6 +1564,7 @@ const { height: windowHeight } = useWindowDimensions();
   }, [hasMemoInput, selectedCategories.length]);
 
   const toggleEmotion = (cat) => {
+    registerInputInteraction();
     setSelectedEmotions((prev) => {
       let next = prev;
 
@@ -1348,12 +1599,14 @@ const { height: windowHeight } = useWindowDimensions();
   };
 
   const changeStrength = (cat, s) => {
+    registerInputInteraction();
     setSelectedEmotions((prev) =>
       prev.map((e) => (e.type === cat ? { ...e, strength: s } : e))
     );
   };
 
   const toggleCategory = (category) => {
+    registerInputInteraction();
     if (!hasMemoInput) return;
     const nextCategory = String(category || "").trim();
     if (!nextCategory) return;
@@ -1558,7 +1811,7 @@ ${String(error?.message || error)}`
 
   const handleOpenNoticeHistory = useCallback(async () => {
     const openNoticeId = String(noticePopup?.notice_id || "").trim() || null;
-    setNoticeModalVisible(false);
+    closeStartupPopupWindow();
     await markCurrentNoticePopupSeen();
     try {
       navigation?.navigate?.("NoticeHistory", {
@@ -1568,7 +1821,12 @@ ${String(error?.message || error)}`
     } catch {
       // noop
     }
-  }, [markCurrentNoticePopupSeen, navigation, noticePopup?.notice_id]);
+  }, [
+    closeStartupPopupWindow,
+    markCurrentNoticePopupSeen,
+    navigation,
+    noticePopup?.notice_id,
+  ]);
 
   const openNoticeInternalRoute = useCallback((routeName, params = {}) => {
     const safeRouteName = String(routeName || "").trim();
@@ -1595,7 +1853,7 @@ ${String(error?.message || error)}`
   const handlePressNoticeAction = useCallback(async (action) => {
     if (!action) return;
 
-    setNoticeModalVisible(false);
+    closeStartupPopupWindow();
     await markCurrentNoticePopupSeen();
     await markCurrentNoticeRead();
 
@@ -1604,14 +1862,30 @@ ${String(error?.message || error)}`
     } catch (e) {
       Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
     }
-  }, [markCurrentNoticePopupSeen, markCurrentNoticeRead, openNoticeInternalRoute]);
+  }, [
+    closeStartupPopupWindow,
+    markCurrentNoticePopupSeen,
+    markCurrentNoticeRead,
+    openNoticeInternalRoute,
+  ]);
 
   const handleDismissNoticeModal = useCallback(async () => {
-    setNoticeModalVisible(false);
+    advanceStartupPopupQueue();
     await markCurrentNoticePopupSeen();
-  }, [markCurrentNoticePopupSeen]);
+  }, [advanceStartupPopupQueue, markCurrentNoticePopupSeen]);
+
+  const handlePrimaryNoticeModalAction = useCallback(async () => {
+    advanceStartupPopupQueue();
+    await markCurrentNoticePopupSeen();
+    await markCurrentNoticeRead();
+  }, [
+    advanceStartupPopupQueue,
+    markCurrentNoticePopupSeen,
+    markCurrentNoticeRead,
+  ]);
 
   const handlePressNotifications = useCallback(() => {
+    closeStartupPopupWindow();
     try {
       navigation?.navigate?.("NoticeHistory", {
         open_notice_id: null,
@@ -1620,9 +1894,10 @@ ${String(error?.message || error)}`
     } catch {
       // noop
     }
-  }, [navigation]);
+  }, [closeStartupPopupWindow, navigation]);
 
   const handlePressGuide = () => {
+    closeStartupPopupWindow();
     if (navigation && navigation.navigate) {
       navigation.navigate("CocolonGuide", { screenId: "home" });
     } else {
@@ -1631,6 +1906,7 @@ ${String(error?.message || error)}`
   };
 
   const handlePressAccount = () => {
+    closeStartupPopupWindow();
     if (navigation && navigation.navigate) {
       navigation.navigate("Account");
     } else {
@@ -1662,6 +1938,7 @@ ${String(error?.message || error)}`
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
             scrollEventThrottle={16}
+            onScrollBeginDrag={registerInputInteraction}
             onScroll={(e) => {
               currentScrollYRef.current =
                 e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
@@ -1954,7 +2231,10 @@ ${String(error?.message || error)}`
                     </View>
                     <CocolonSwitch
                       value={doNotNotifyFriends}
-                      onValueChange={(v) => setSendFriendNotification(!v)}
+                      onValueChange={(v) => {
+                        registerInputInteraction();
+                        setSendFriendNotification(!v);
+                      }}
                       trackColor={{
                         false: "#D1D5DB",
                         true: colors.GOLD_BUTTON,
@@ -2015,6 +2295,7 @@ ${String(error?.message || error)}`
                           textAlignVertical="top"
                           placeholderTextColor={colors.TEXT_ON_LIGHT}
                           onFocus={(e) => {
+                            registerInputInteraction();
                             lastFocusTargetRef.current =
                               e?.target ?? e?.nativeEvent?.target ?? null;
                             memoFocusedRef.current = true;
@@ -2110,6 +2391,7 @@ ${String(error?.message || error)}`
                           textAlignVertical="top"
                           placeholderTextColor={colors.TEXT_ON_LIGHT}
                           onFocus={(e) => {
+                            registerInputInteraction();
                             lastFocusTargetRef.current =
                               e?.target ?? e?.nativeEvent?.target ?? null;
                             memoFocusedRef.current = true;
@@ -2231,14 +2513,17 @@ ${String(error?.message || error)}`
                               シークレットメモ
                             </Text>
                             <Text style={styles.preferenceDesc}>
-                              オンにするとMyModel照会時に反映されません。{"\n"}
+                              オンにするとReflectionsに表示されません。{"\n"}
                               分析レポートには反映されます。
                             </Text>
                           </View>
                         </View>
                         <CocolonSwitch
                           value={isSecret}
-                          onValueChange={setIsSecret}
+                          onValueChange={(value) => {
+                            registerInputInteraction();
+                            setIsSecret(value);
+                          }}
                           trackColor={{
                             false: "#D1D5DB",
                             true: colors.GOLD_BUTTON,
@@ -2283,6 +2568,7 @@ ${String(error?.message || error)}`
                     <CocolonPressable
                       style={styles.memoToggleButton}
                       onPress={() => {
+                        registerInputInteraction();
                         if (showMemoSection) {
                           setActiveField(null);
                           Keyboard.dismiss();
@@ -2312,15 +2598,28 @@ ${String(error?.message || error)}`
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
 <NoticeModal
-  visible={!isTutorialMode && noticeFeatureEnabled && noticeModalVisible && !!noticePopup}
+  visible={!isTutorialMode && noticeFeatureEnabled && isNoticeStartupPopupVisible && !!noticePopup}
   notice={noticePopup}
   loading={noticeLoading}
   onClose={handleDismissNoticeModal}
   onOpenHistory={handleOpenNoticeHistory}
   onPressAction={handlePressNoticeAction}
+  variant={isWelcomeNoticeStartupPopup ? "welcome" : "default"}
+  showPublishedDate={!isWelcomeNoticeStartupPopup}
+  showHistoryButton={!isWelcomeNoticeStartupPopup}
+  primaryCloseLabel={isWelcomeNoticeStartupPopup ? "はじめる" : null}
+  onPrimaryClose={
+    isWelcomeNoticeStartupPopup ? handlePrimaryNoticeModalAction : undefined
+  }
+/>
+<TutorialStartModal
+  visible={!isTutorialMode && isTutorialStartupPopupVisible}
+  onDismiss={handleDismissTutorialStartModal}
+  onSkipPermanently={handleSkipTutorialPermanently}
+  onStart={handleStartTutorialFromModal}
 />
 <TodayQuestionModal
-  visible={!shouldHideTodayQuestionForTutorial && !noticeModalVisible && todayQuestionModalVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
+  visible={!shouldHideTodayQuestionForTutorial && isTodayQuestionStartupPopupVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
   question={todayQuestionBundle?.question}
   answerSummary={todayQuestionBundle?.answer_summary || null}
   loading={todayQuestionLoading}
@@ -2420,7 +2719,7 @@ ${String(error?.message || error)}`
             color={colors.TITLE_GOLD}
             style={styles.inputFeedbackTitleIcon}
           />
-          <Text style={styles.inputFeedbackTitle}>いまの受け取り</Text>
+          <Text style={styles.inputFeedbackTitle}>感情入力へのコメント</Text>
         </View>
         {inputFeedbackModalDominantLabel ? (
           <Text style={styles.inputFeedbackMetaText}>
@@ -2446,7 +2745,7 @@ ${String(error?.message || error)}`
         <CocolonButton
           variant="secondary"
           onPress={closeInputFeedbackModal}
-          accessibilityLabel="入力直後コメントを閉じる"
+          accessibilityLabel="感情入力へのコメントを閉じる"
         >
           閉じる
         </CocolonButton>
@@ -2497,7 +2796,7 @@ ${String(error?.message || error)}`
 function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -3292,6 +3591,6 @@ toastText: {
   fontWeight: "700",
   color: COLORS.TEXT_ON_LIGHT,
 },
-  });
+  }, ui));
 }
 

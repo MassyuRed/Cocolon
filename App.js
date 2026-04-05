@@ -487,7 +487,7 @@ function RankingStackNavigator() {
   );
 }
 
-function FriendsStackNavigator({ hasUnreadFriendRequests, onOpenFriendManage }) {
+function FriendsStackNavigator({ hasUnreadFriendRequests, onOpenFriendManage, onFriendFeedDisplayed }) {
   return (
     <FriendsStack.Navigator initialRouteName="Friends" screenOptions={{ headerShown: false }}>
       <FriendsStack.Screen name="Friends">
@@ -496,6 +496,7 @@ function FriendsStackNavigator({ hasUnreadFriendRequests, onOpenFriendManage }) 
             {...navProps}
             hasUnreadFriendRequests={hasUnreadFriendRequests}
             onOpenFriendManage={onOpenFriendManage}
+            onFriendFeedDisplayed={onFriendFeedDisplayed}
           />
         )}
       </FriendsStack.Screen>
@@ -902,9 +903,12 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     }
   }, []);
 
-  const markFriendsFeedRead = React.useCallback(async () => {
+  const markFriendsFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
     try {
-      await apiPost("/friends/unread/read-feed", {});
+      const body = lastSeenCreatedAt
+        ? { last_seen_created_at: lastSeenCreatedAt }
+        : {};
+      await apiPost("/friends/unread/read-feed", body);
     } catch (e) {
       console.warn("MainTabs: failed to mark Friends feed read", e);
     }
@@ -975,6 +979,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         ownerName: row?.ownerName || row?.owner_name || "Friend",
         items: Array.isArray(row?.items) ? row.items : [],
         timeLabel: row?.timeLabel || formatTimeLabel(row?.created_at || row?.createdAt || null),
+        createdAt: row?.createdAt || row?.created_at || null,
       }));
 
       try {
@@ -1378,21 +1383,17 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
   }, [refreshFriendRequestsUnreadBadge]);
 
 
-  // Friends を開いたら「既読扱い」にする（タブの赤●を消す）
+  // Friends を開いた時点では既読を進めず、まず最新状態だけ確認する。
+  // 既読化そのものは FriendsScreen 側で「表示後」に行う。
   useEffect(() => {
     if (activeRouteName !== "Friends") return;
 
-    // UX: タップ直後に赤●を消しておく（裏で既読処理）
-    setUnread("Friends", "feed", false);
-
     (async () => {
-      await markFriendsFeedRead();
       await refreshFriendsUnreadBadge();
       await refreshFriendRequestsUnreadBadge();
     })();
   }, [
     activeRouteName,
-    markFriendsFeedRead,
     refreshFriendsUnreadBadge,
     refreshFriendRequestsUnreadBadge,
   ]);
@@ -1618,6 +1619,10 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
               await markFriendRequestsRead();
               await refreshFriendRequestsUnreadBadge();
             }}
+            onFriendFeedDisplayed={async (lastSeenCreatedAt) => {
+              await markFriendsFeedRead(lastSeenCreatedAt || null);
+              await refreshFriendsUnreadBadge();
+            }}
           />
         )}
       </Tab.Screen>
@@ -1788,42 +1793,24 @@ function RootNavigator() {
   const { session, initializing, recoveryMode } = useAuth();
   const { subscriptionBootstrapLoaded } = useSubscription();
   const {
-    isTutorialMode,
-    tutorialCompleted,
-    tutorialSkipped,
+    setTutorialFlagsLoaded,
     setTutorialCompleted,
     setTutorialSkipped,
-    startTutorial,
-    skipTutorial,
   } = useTutorial();
-
-  const [tutorialFlagsLoaded, setTutorialFlagsLoaded] = useState(false);
-  const [profileTutorialCompleted, setProfileTutorialCompleted] = useState(false);
-  const [profileTutorialSkipped, setProfileTutorialSkipped] = useState(false);
-  const [tutorialPromptShownThisSession, setTutorialPromptShownThisSession] =
-    useState(false);
-  const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
-    useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     if (!session || recoveryMode) {
+      setTutorialCompleted(false);
+      setTutorialSkipped(false);
       setTutorialFlagsLoaded(false);
-      setProfileTutorialCompleted(false);
-      setProfileTutorialSkipped(false);
-      setTutorialPromptShownThisSession(false);
-      setTutorialPromptDismissedThisSession(false);
       return () => {
         cancelled = true;
       };
     }
 
     setTutorialFlagsLoaded(false);
-    setProfileTutorialCompleted(false);
-    setProfileTutorialSkipped(false);
-    setTutorialPromptShownThisSession(false);
-    setTutorialPromptDismissedThisSession(false);
 
     (async () => {
       try {
@@ -1843,8 +1830,6 @@ function RootNavigator() {
           const nextCompleted = json?.tutorial_completed === true;
           const nextSkipped = json?.tutorial_skipped === true;
 
-          setProfileTutorialCompleted(nextCompleted);
-          setProfileTutorialSkipped(nextSkipped);
           setTutorialCompleted(nextCompleted);
           setTutorialSkipped(nextSkipped);
           setTutorialFlagsLoaded(true);
@@ -1852,8 +1837,6 @@ function RootNavigator() {
       } catch (e) {
         console.warn("RootNavigator: failed to load tutorial flags", e);
         if (!cancelled) {
-          setProfileTutorialCompleted(false);
-          setProfileTutorialSkipped(false);
           setTutorialCompleted(false);
           setTutorialSkipped(false);
           setTutorialFlagsLoaded(true);
@@ -1869,69 +1852,7 @@ function RootNavigator() {
     recoveryMode,
     setTutorialCompleted,
     setTutorialSkipped,
-  ]);
-
-  useEffect(() => {
-    if (!session || recoveryMode) return;
-    if (!tutorialFlagsLoaded) return;
-    if (isTutorialMode) return;
-    if (profileTutorialCompleted || profileTutorialSkipped) return;
-    if (tutorialPromptShownThisSession || tutorialPromptDismissedThisSession) return;
-
-    const timer = setTimeout(() => {
-      setTutorialPromptShownThisSession(true);
-
-      Alert.alert(
-        "チュートリアル",
-        "初回ログイン向けチュートリアルを開始しますか？\n\n基本的な使い方を、保存されない形で体験できます。",
-        [
-          {
-            text: "今回はしない",
-            style: "cancel",
-            onPress: () => {
-              setTutorialPromptDismissedThisSession(true);
-            },
-          },
-          {
-            text: "今後表示しない",
-            onPress: async () => {
-              setTutorialPromptDismissedThisSession(true);
-              setProfileTutorialSkipped(true);
-              await skipTutorial();
-            },
-          },
-          {
-            text: "開始する",
-            onPress: () => {
-              setTutorialPromptDismissedThisSession(true);
-              startTutorial();
-              try {
-                if (navigationRef.isReady()) {
-                  navigationRef.navigate("Input");
-                }
-              } catch {
-                // noop
-              }
-            },
-          },
-        ]
-      );
-    }, 250);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [
-    isTutorialMode,
-    profileTutorialCompleted,
-    profileTutorialSkipped,
-    recoveryMode,
-    session,
-    skipTutorial,
-    startTutorial,
-    tutorialFlagsLoaded,
-    tutorialPromptDismissedThisSession,
-    tutorialPromptShownThisSession,
+    setTutorialFlagsLoaded,
   ]);
 
 

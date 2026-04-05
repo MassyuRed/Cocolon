@@ -36,6 +36,7 @@ import TutorialOverlay, {
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch } from "../lib/apiClient";
 
 /**
@@ -79,7 +80,7 @@ const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
     body:
       "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
     owner_user_id: "tutorial-follow-1",
-    display_name: "華恋",
+    display_name: "User",
     friend_code: "HANAKO123",
     is_tutorial: true,
     tutorial_kind: "mock",
@@ -1035,7 +1036,7 @@ export default function MyModelScreen({ route } = {}) {
     } catch {
       Alert.alert(
         "ReflectionCreateを開けません",
-        "ReflectionCreate画面が navigation に未登録の可能性があります。\nApp.js に MyModelCreateScreen を登録してください。"
+        "ReflectionCreate画面が navigation に未登録の可能性があります。\nApp.js に ReflectionCreate画面を登録してください。"
       );
     }
   }, [navigation, isTutorialMode, openTutorialCreate]);
@@ -1184,7 +1185,7 @@ export default function MyModelScreen({ route } = {}) {
           <Text style={styles.qnaIntroText}>
             {isTutorialMode
               ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
-              : "自分とフォローしているユーザーが作成した\nReflection（一問一答内容）を閲覧できます。"}
+              : "自分もしくはフォローしているユーザーが作成した\nReflection（一問一答内容）を閲覧できます。"}
           </Text>
 
           <View style={styles.actions}>
@@ -1794,7 +1795,7 @@ export default function MyModelScreen({ route } = {}) {
 function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     safeContent: { flex: 1 },
     body: { flex: 1 },
@@ -2261,6 +2262,6 @@ function createStyles(COLORS, ui) {
       color: "#B91C1C",
       textAlign: "center",
     },
-  });
+  }, ui));
 }
 

@@ -11,29 +11,60 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - name: Checkout
+      - name: Checkout RN repository
         uses: actions/checkout@v4
+
+      - name: Detect bundled mashos-api sources
+        id: detect-api
+        shell: bash
+        run: |
+          if [ -f "mashos-api/requirements.txt" ]; then
+            echo "path=mashos-api" >> "$GITHUB_OUTPUT"
+          elif [ -f "../mashos-api/requirements.txt" ]; then
+            echo "path=../mashos-api" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout mashos-api repository
+        if: ${{ steps.detect-api.outputs.path == '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          path: mashos-api
+
+      - name: Resolve API source path
+        id: api-root
+        shell: bash
+        run: |
+          if [ -f "mashos-api/requirements.txt" ]; then
+            echo "path=mashos-api" >> "$GITHUB_OUTPUT"
+          elif [ -f "../mashos-api/requirements.txt" ]; then
+            echo "path=../mashos-api" >> "$GITHUB_OUTPUT"
+          else
+            echo "Unable to locate mashos-api sources." >&2
+            exit 1
+          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
-          cache-dependency-path: |
-            services/ai_inference/requirements.txt
+          cache-dependency-path: ${{ steps.api-root.outputs.path }}/requirements.txt
 
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r services/ai_inference/requirements.txt
+          pip install -r "${{ steps.api-root.outputs.path }}/requirements.txt"
           pip install pytest python-multipart
 
       - name: Guard RN surface from direct Supabase usage
-        run: python scripts/check_no_direct_supabase.py
+        run: python "${{ steps.api-root.outputs.path }}/scripts/check_no_direct_supabase.py"
 
       - name: Run API contract tests
         env:
           SUPABASE_URL: https://example.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: test-service-role
           MYMODEL_APP_NAME: Cocolon Test App
-        run: pytest -q tests/contract
+        run: pytest -q "${{ steps.api-root.outputs.path }}/ai/tests/contract"

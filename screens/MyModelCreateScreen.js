@@ -28,6 +28,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import CocolonButton from "../components/CocolonButton";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch } from "../lib/apiClient";
 
 // ---- API base ----
@@ -139,7 +140,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
   const promptSubscriptionForLockedPages = useCallback(() => {
     Alert.alert(
       "ReflectionCreate",
-      "2ページ目以降はPlus会員以上で利用できます。\n\nPlus会員以上で全ての問いに回答できるようになります。",
+      "2ページ目以降はPlusプラン以上で利用できます。\n\nPlusプラン以上で全ての問いに回答できるようになります。",
       [
         { text: "閉じる", style: "cancel" },
         { text: "プランを見る", onPress: openSubscriptionSelect },
@@ -505,13 +506,16 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
 
           {/* 説明 */}
           <View style={styles.introCard}>
-            <Text style={styles.introTitle}>問いに答えて、MyModelを構築</Text>
+            <Text style={styles.introTitle}>問いに答えて、Reflectionを作成</Text>
             <Text style={styles.introText}>
+              一問一答に答えることで、Reflectionを作成できます。{"\n"}
+              作成したReflectionを、フォロワーに公開できます。{"\n"}
+              シークレットメモをオンにすれば、非公開にできます。{"\n"}
               全てに答える必要はありません。{"\n"}
               「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}
               {introSubscriptionBenefit}{"\n"}
               {introSecretToggleNote}{"\n"}{"\n"}
-              2ページ目以降はPlus会員以上で利用できます。
+              2ページ目以降はPlusプラン以上で利用できます。
             </Text>
             <View style={styles.progressRow}>
               <Text style={styles.progressText}>
@@ -733,7 +737,7 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
                           <View style={styles.preferenceTextWrap}>
                             <Text style={styles.preferenceTitle}>シークレットメモ</Text>
                             <Text style={styles.preferenceDesc}>
-                              オンにするとMyModel照会時に反映されません。{"\n"}分析レポートには反映されます。
+                              オンにするとReflectionsに表示されません。{"\n"}分析レポートには反映されます。
                             </Text>
                           </View>
                         </View>
@@ -795,7 +799,7 @@ function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     // ベース
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     body: { flex: 1 },
@@ -1174,5 +1178,5 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       color: COLORS.TEXT_ON_LIGHT,
     },
-  });
+  }, ui));
 }

@@ -13,6 +13,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
@@ -63,7 +65,8 @@ function formatNoticeDateTimeLabel(value) {
 
 export default function NoticeHistoryScreen({ navigation, route }) {
   const { colors, themeName } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
   const isIOS = Platform.OS === "ios";
 
@@ -417,8 +420,8 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -590,5 +593,5 @@ function createStyles(COLORS) {
       fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
     },
-  });
+  }, ui));
 }

@@ -18,6 +18,8 @@ import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
 import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 // Subscription (MyWeb paywall)
 // - free: weekly/monthly are chart-only (no text / no PDF)
@@ -288,6 +290,8 @@ export default function MyWebReportHistoryScreen({
   const loadSeqRef = useRef(0);
 
   const { themeName, colors } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
   // Subscription tier (fail-closed: unknown => free)
@@ -694,11 +698,11 @@ export default function MyWebReportHistoryScreen({
         return;
       }
       const jp = TYPE_JP[normalizedReportType] || "レポート";
-      const msg = `無料会員の${jp}はグラフのみ表示です。\n\nPlus会員以上で本文の閲覧とPDF出力が利用できます。`;
+      const msg = `Freeプランの${jp}はグラフのみ表示です。\n\nPlusプラン以上で本文の閲覧とPDF出力が利用できます。`;
       const buttons = [];
       if (typeof onOpenSubscription === "function") {
         buttons.push({
-          text: "Plus会員になる",
+          text: "Plusプランを見る",
           onPress: () => {
             try {
               onOpenSubscription?.();
@@ -709,7 +713,7 @@ export default function MyWebReportHistoryScreen({
         });
       }
       buttons.push({ text: "OK" });
-      Alert.alert("PDF出力はPlus会員以上", msg, buttons);
+      Alert.alert("PDF出力はPlusプラン以上", msg, buttons);
       return;
     }
 
@@ -822,7 +826,7 @@ export default function MyWebReportHistoryScreen({
                 activeOpacity={0.85}
               >
                 <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
-                  Plus会員になる
+                  Plusプランを見る
                 </Text>
                 <Ionicons
                   name="chevron-forward"
@@ -924,7 +928,8 @@ export default function MyWebReportHistoryScreen({
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
     paddingTop: 10,
@@ -1026,4 +1031,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   iconBtnText: { marginTop: 2, fontSize: 10, color: "#111827", fontWeight: "700" },
-});
+  }, ui));
+}

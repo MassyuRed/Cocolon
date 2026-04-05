@@ -17,6 +17,7 @@ import CocolonBackButton from "../components/CocolonBackButton";
 import { useTheme } from "../theme/ThemeContext";
 import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import {
   ensureIapConnection,
   requestSubscriptionForPlan,
@@ -41,13 +42,24 @@ const SUBSCRIPTION_LEGAL_LINKS = Object.freeze({
     "https://sunrise-arrow-09e.notion.site/Emlis-32a49f5dde6980358773d45f4c42c037?pvs=143",
   privacyUrl:
     "https://sunrise-arrow-09e.notion.site/Emlis-32a49f5dde6980db9adfddb7bfcce6b4?pvs=143",
+  supportUrl: "",
 });
 
 const SUB_TIER_LABEL = {
-  free: "無料会員",
-  plus: "Plus会員",
-  premium: "Premium会員",
+  free: "Freeプラン",
+  plus: "Plusプラン",
+  premium: "Premiumプラン",
 };
+
+const SHOW_IAP_DEBUG_DETAILS = false;
+
+const SUBSCRIPTION_NOTICE_LINES = Object.freeze([
+  "Plusプラン / Premiumプランは月額課金です。ご購入後は各ストアの規約に基づいて自動更新されます。",
+  "料金はご利用の App Store / Google Play アカウントに請求されます。",
+  "解約は各ストアのサブスクリプション管理画面から行えます。",
+  "アプリを削除しただけではサブスクリプションは解約されません。",
+  "解約後も、有効期間が終了するまでは対象プランの機能をご利用いただけます。",
+]);
 
 function normalizeSubscriptionTier(raw) {
   const t = String(raw || "").trim().toLowerCase();
@@ -120,6 +132,9 @@ function buildIapErrorMessage(err) {
   if (/E_PRODUCT_NOT_FETCHED/i.test(code)) {
     return "App Store から対象サブスク商品を取得できませんでした。Bundle ID / Product ID / App Store Connect の状態をご確認ください。";
   }
+  if (/E_ANDROID_SUBSCRIPTION_CHANGE_FALLBACK/i.test(code)) {
+    return "現在のPlusプランからPremiumプランへの変更は、Google Play のサブスクリプション管理からお手続きください。";
+  }
   if (/E_ITEM_UNAVAILABLE/i.test(code)) {
     return "このプランは現在お申し込みいただけません。";
   }
@@ -146,7 +161,7 @@ function buildIapErrorMessage(err) {
     return "このサブスクリプションは現在有効ではありません。";
   }
   if (apiCode === "verification_unavailable") {
-    return "ただいま購入確認サーバーの準備中です。時間をおいて再度お試しください。";
+    return "ただいま購入確認サーバーへ接続できません。時間をおいて再度お試しください。";
   }
   if (apiCode === "verification_failed") {
     return "ストアの購入確認に失敗しました。時間をおいてもう一度お試しください。";
@@ -204,6 +219,28 @@ function buildIapDebugMessage(err) {
   const text = parts.filter(Boolean).join("\n");
   if (!text) return "";
   return text.length > 1400 ? `${text.slice(0, 1400)}…` : text;
+}
+
+function buildIapFailureAlertMessage(err) {
+  const userMessage = buildIapErrorMessage(err);
+  const debugMessage = buildIapDebugMessage(err);
+
+  if (debugMessage && __DEV__) {
+    console.warn("[SubscriptionSelectScreen/IAPDebug]\n" + debugMessage);
+  }
+
+  if (!SHOW_IAP_DEBUG_DETAILS || !debugMessage) {
+    return userMessage;
+  }
+
+  return `${userMessage}\n\n---- 診断 ----\n${debugMessage}`;
+}
+
+function isAndroidPremiumManageFallbackError(err) {
+  return (
+    /E_ANDROID_SUBSCRIPTION_CHANGE_FALLBACK/i.test(String(err?.code || "")) ||
+    err?.requiresManageSubscription === true
+  );
 }
 
 function asStringArray(value, fallback = []) {
@@ -358,15 +395,24 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const [restoreLoading, setRestoreLoading] = useState(false);
 
   const bootstrap = subscriptionBootstrap || {};
-  const links = useMemo(
-    () => ({
-      ...(getSubscriptionLinks() || {}),
-      ...(bootstrap?.links || {}),
-      terms_url: SUBSCRIPTION_LEGAL_LINKS.termsUrl,
-      privacy_url: SUBSCRIPTION_LEGAL_LINKS.privacyUrl,
-    }),
-    [bootstrap]
-  );
+  const links = useMemo(() => {
+    const runtimeLinks = getSubscriptionLinks() || {};
+    const bootstrapLinks = bootstrap?.links || {};
+    return {
+      terms_url:
+        asStringOrNull(bootstrapLinks?.terms_url) ||
+        asStringOrNull(runtimeLinks?.terms_url) ||
+        SUBSCRIPTION_LEGAL_LINKS.termsUrl,
+      privacy_url:
+        asStringOrNull(bootstrapLinks?.privacy_url) ||
+        asStringOrNull(runtimeLinks?.privacy_url) ||
+        SUBSCRIPTION_LEGAL_LINKS.privacyUrl,
+      support_url:
+        asStringOrNull(bootstrapLinks?.support_url) ||
+        asStringOrNull(runtimeLinks?.support_url) ||
+        asStringOrNull(SUBSCRIPTION_LEGAL_LINKS.supportUrl),
+    };
+  }, [bootstrap]);
   const policy = useMemo(
     () => ({
       ...(getSubscriptionPolicy() || {}),
@@ -434,7 +480,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
     }
   }, []);
 
-  const currentLabel = SUB_TIER_LABEL[tier] || "無料会員";
+  const currentLabel = SUB_TIER_LABEL[tier] || "Freeプラン";
   const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額300円";
   const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額980円";
   const currentPriceLabel =
@@ -472,6 +518,14 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
   const resolvedPlusNoteLines =
     plusNoteLines.length > 0 ? plusNoteLines : defaultPlusNoteLines;
+
+  const premiumNoteLines = asStringArray(premiumPlan?.note_lines, []).filter(Boolean);
+  const defaultPremiumNoteLines = [
+    `${premiumPriceLabel}で自動更新されます。`,
+    "解約はいつでもストアのサブスクリプション管理から行えます。",
+  ];
+  const resolvedPremiumNoteLines =
+    premiumNoteLines.length > 0 ? premiumNoteLines : defaultPremiumNoteLines;
 
   const openExternalPage = useCallback(async (url, label = "ページ") => {
     if (!url) {
@@ -522,7 +576,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
       const premiumPurchase = normalized.find((x) => premiumRecognizedSkus.has(x.productId))?.purchase;
       const plusPurchase = normalized.find((x) => plusRecognizedSkus.has(x.productId))?.purchase;
-      const targetPurchase = premiumPurchase || plusPurchase || normalized[0]?.purchase || null;
+      const targetPurchase =
+        Platform.OS === "android"
+          ? normalized[0]?.purchase || null
+          : premiumPurchase || plusPurchase || normalized[0]?.purchase || null;
 
       if (!targetPurchase) {
         Alert.alert(
@@ -585,7 +642,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
       Alert.alert(
         "現在受付を停止しています",
         clientSalesDisabledReason ||
-          "ただいまPlus会員のお申し込み受付を停止しています。時間をおいてご確認ください。"
+          "ただいまPlusプランのお申し込み受付を停止しています。時間をおいてご確認ください。"
       );
       return;
     }
@@ -640,13 +697,30 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
       await refreshScreenState({ force: true });
     } catch (e) {
-      const debugMessage = buildIapDebugMessage(e);
-      Alert.alert(
-        "お申し込みができませんでした",
-        debugMessage
-          ? `${buildIapErrorMessage(e)}\n\n---- 診断 ----\n${debugMessage}`
-          : buildIapErrorMessage(e)
-      );
+      if (
+        Platform.OS === "android" &&
+        tier === "plus" &&
+        isAndroidPremiumManageFallbackError(e)
+      ) {
+        Alert.alert(
+          "Google Play でプラン変更してください",
+          "現在の Plus プランから Premium プランへの変更は、Google Play のサブスクリプション管理からお手続きください。",
+          [
+            { text: "閉じる", style: "cancel" },
+            {
+              text: "Google Play を開く",
+              onPress: () => {
+                onOpenManageSubscription().catch(() => null);
+              },
+            },
+          ]
+        );
+      } else {
+        Alert.alert(
+          "お申し込みができませんでした",
+          buildIapFailureAlertMessage(e)
+        );
+      }
     } finally {
       setPurchaseBusyPlan("");
     }
@@ -663,11 +737,113 @@ export default function SubscriptionSelectScreen({ navigation }) {
     tier,
   ]);
 
+  const onSelectPremium = useCallback(async () => {
+    if (tier === "premium") return;
+    if (purchaseBusyPlan) return;
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData?.session?.access_token ?? null;
+    if (!accessToken) {
+      Alert.alert("ログインが必要です", "お申し込みにはログインが必要です。");
+      return;
+    }
+
+    if (!iapReady) {
+      Alert.alert(
+        "お申し込みができませんでした",
+        "ただいまお申し込みページを開けませんでした。時間をおいてお試しください。"
+      );
+      return;
+    }
+
+    if (!salesEnabled || !clientSalesEnabled || premiumPlan?.purchasable === false) {
+      Alert.alert(
+        "現在受付を停止しています",
+        clientSalesDisabledReason ||
+          "ただいまPremiumプランのお申し込み受付を停止しています。時間をおいてご確認ください。"
+      );
+      return;
+    }
+
+    setPurchaseBusyPlan("premium");
+
+    try {
+      if (!premiumPurchaseSku) {
+        Alert.alert(
+          "お申し込みができませんでした",
+          "プラン設定の反映待ちです。時間をおいてもう一度お試しください。"
+        );
+        return;
+      }
+
+      if (loading) {
+        Alert.alert(
+          "確認中です",
+          "プラン情報を確認しています。少し時間をおいて、もう一度お試しください。"
+        );
+        return;
+      }
+
+      const {
+        purchase: p,
+        updateRes,
+        purchaseInitiated,
+        listenerCompletionPending,
+      } = await requestSubscriptionForPlan(
+        "premium",
+        Platform.OS === "android" && tier === "plus" ? { fromPlan: "plus" } : {}
+      );
+
+      const actionLabel = tier === "plus" ? "プラン変更" : "お申し込み";
+
+      if (!p && purchaseInitiated) {
+        Alert.alert(
+          `${actionLabel}手続きを開始しました`,
+          listenerCompletionPending
+            ? "ストア側で購入確定後、プランが反映されます。反映まで少し時間がかかる場合があります。"
+            : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。"
+        );
+        refreshScreenState({ force: true }).catch(() => null);
+        return;
+      }
+
+      const completionTitle =
+        updateRes?.entitlement_status === "pending"
+          ? `${actionLabel}手続きを開始しました`
+          : `${actionLabel}が完了しました`;
+      const completionMessage =
+        updateRes?.entitlement_status === "pending"
+          ? "購入手続きは始まっています。ストア側で確定し次第、プランが反映されます。"
+          : "プラン情報を更新しています。反映まで少し時間がかかる場合があります。";
+
+      Alert.alert(completionTitle, completionMessage);
+
+      await refreshScreenState({ force: true });
+    } catch (e) {
+      Alert.alert(
+        "お申し込みができませんでした",
+        buildIapFailureAlertMessage(e)
+      );
+    } finally {
+      setPurchaseBusyPlan("");
+    }
+  }, [
+    clientSalesDisabledReason,
+    clientSalesEnabled,
+    iapReady,
+    loading,
+    premiumPlan,
+    premiumPurchaseSku,
+    purchaseBusyPlan,
+    refreshScreenState,
+    salesEnabled,
+    tier,
+  ]);
+
   const plusSubtitle = asStringOrNull(plusPlan?.subtitle);
 
   const plusFeatures = asStringArray(plusPlan?.features, []);
   const premiumFeatures = asStringArray(premiumPlan?.features, []);
-  const premiumNoteLines = asStringArray(premiumPlan?.note_lines, ["※Premiumは準備中です。"]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -735,7 +911,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
             {plusPlan?.visible === false ? null : (
               <PlanCard
-                title={asStringOrNull(plusPlan?.title) || "Plus会員"}
+                title={asStringOrNull(plusPlan?.title) || "Plusプラン"}
                 price={plusPriceLabel}
                 subtitle={plusSubtitle}
                 features={plusFeatures}
@@ -759,21 +935,39 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
             {premiumPlan?.visible === false ? null : (
               <PlanCard
-                title={asStringOrNull(premiumPlan?.title) || "Premium会員"}
+                title={asStringOrNull(premiumPlan?.title) || "Premiumプラン"}
                 price={premiumPriceLabel}
                 subtitle={asStringOrNull(premiumPlan?.subtitle)}
                 features={premiumFeatures}
-                noteLines={premiumNoteLines}
+                noteLines={resolvedPremiumNoteLines}
                 isCurrent={tier === "premium"}
                 recommended={!!premiumPlan?.recommended}
-                onPress={undefined}
-                ctaDisabled={true}
-                ctaLoading={false}
-                ctaTextOverride={asStringOrNull(premiumPlan?.cta_label) || "準備中"}
+                onPress={onSelectPremium}
+                ctaDisabled={
+                  restoreLoading ||
+                  purchaseBusyPlan === "plus" ||
+                  premiumPlan?.purchasable === false ||
+                  !salesEnabled ||
+                  !clientSalesEnabled
+                }
+                ctaLoading={purchaseBusyPlan === "premium"}
+                ctaTextOverride={asStringOrNull(premiumPlan?.cta_label) || "このプランを選ぶ"}
                 styles={styles}
                 colors={colors}
               />
             )}
+
+            <View style={styles.noticeBox}>
+              <Text style={styles.noticeTitle}>注意事項</Text>
+              {SUBSCRIPTION_NOTICE_LINES.map((line, idx) => (
+                <Text key={`notice-${idx}`} style={styles.noticeItem}>
+                  ・{line}
+                </Text>
+              ))}
+              <Text style={styles.noticeFootnote}>
+                詳細は利用規約と各ストアのサブスクリプション管理画面をご確認ください。
+              </Text>
+            </View>
 
             <View style={styles.noteBox}>
               <Text style={styles.noteTitle}>お手続き</Text>
@@ -845,7 +1039,7 @@ function createStyles(COLORS, ui) {
   const radius = ui?.radius || {};
   const spacing = ui?.spacing || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     container: {
       flex: 1,
@@ -1011,6 +1205,33 @@ function createStyles(COLORS, ui) {
       color: text.accentOnButton ?? COLORS.FIELD_BG,
     },
 
+    noticeBox: {
+      marginTop: 18,
+      padding: 12,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+    },
+    noticeTitle: {
+      fontSize: 12,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
+    },
+    noticeItem: {
+      fontSize: 11,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      lineHeight: 18,
+      marginBottom: 4,
+    },
+    noticeFootnote: {
+      marginTop: 4,
+      fontSize: 11,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      lineHeight: 16,
+    },
+
     noteBox: {
       marginTop: 18,
       padding: 12,
@@ -1043,5 +1264,5 @@ function createStyles(COLORS, ui) {
       fontWeight: "800",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
-  });
+  }, ui));
 }

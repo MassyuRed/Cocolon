@@ -15,6 +15,8 @@ import CocolonBackButton from "../components/CocolonBackButton";
 
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch } from "../lib/apiClient";
 
 const API_BASE =
@@ -178,7 +180,8 @@ function RankingRow({ styles, left, right, onPressLeft, isPrivateAccount }) {
 
 export default function MyModelEchoesRankingScreen({ navigation }) {
   const { colors, themeName } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
   const [range, setRange] = useState("day");
@@ -276,8 +279,8 @@ export default function MyModelEchoesRankingScreen({ navigation }) {
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     scrollContainer: {
       paddingTop: 16,
@@ -436,5 +439,5 @@ function createStyles(COLORS) {
       fontWeight: "800",
       fontSize: 12,
     },
-  });
+  }, ui));
 }

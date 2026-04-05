@@ -20,6 +20,7 @@ import { useTheme } from "../theme/ThemeContext";
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 // IAP（購入復元）
 import {
@@ -74,9 +75,9 @@ const MYMODEL_API_BASE_URL =
 
 // Tier → ラベル
 const SUB_TIER_LABEL = {
-  free: "無料会員",
-  plus: "Plus会員",
-  premium: "Premium会員",
+  free: "Freeプラン",
+  plus: "Plusプラン",
+  premium: "Premiumプラン",
 };
 
 // Tier → MyProfile許可モード（フロント仮定義：types.ts が無い前提）
@@ -155,7 +156,7 @@ async function fetchSubscriptionMe() {
 export default function AccountScreen({ navigation, route, viewedUserId }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const { user } = useAuth();
   const routeViewedUserId = route?.params?.viewedUserId;
@@ -505,7 +506,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     return "—";
   };
 
-  const tierLabel = SUB_TIER_LABEL[subTier] || "無料会員";
+  const tierLabel = SUB_TIER_LABEL[subTier] || "Freeプラン";
   const tierPrice =
     subTier === "plus"
       ? "月額480円"
@@ -1146,8 +1147,8 @@ const onRestorePurchases = async () => {
             <Text
               style={{
                 marginTop: 6,
-                fontSize: ui?.font?.description ?? 9,
-                lineHeight: 15,
+                fontSize: ui?.font?.sectionLabel ?? 14,
+                lineHeight: 19,
                 color: ui?.text?.description ?? colors.TEXT_SUBTLE,
               }}
             >
@@ -1443,8 +1444,8 @@ function StatusRow({ styles, label, value }) {
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -2069,5 +2070,5 @@ restoreBtnText: {
       fontWeight: "800",
       color: COLORS.ACCENT_TEXT,
     },
-  });
+  }, ui));
 }

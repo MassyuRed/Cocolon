@@ -543,7 +543,7 @@ function createStyles(COLORS, ui) {
     },
     limitNote: {
       marginTop: 10,
-      fontSize: font.description ?? 9,
+      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? COLORS.TEXT_ON_LIGHT,
     },
 

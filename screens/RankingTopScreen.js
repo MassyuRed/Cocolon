@@ -14,6 +14,7 @@ import { useTheme } from "../theme/ThemeContext";
 // UI (Design System)
 import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 /**
  * RankingTopScreen
@@ -184,7 +185,7 @@ function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     scrollContainer: {
       paddingTop: 16,
@@ -296,5 +297,5 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_ON_LIGHT,
       flex: 1,
     },
-  });
+  }, ui));
 }

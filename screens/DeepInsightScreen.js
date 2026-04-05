@@ -20,6 +20,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { supabase } from "../lib/supabase";
 import { apiFetch } from "../lib/apiClient";
 
@@ -33,7 +35,8 @@ const ANSWERS_ENDPOINT = `${API_BASE}/deep_insight/answers`;
 const PANEL_MIN_HEIGHT = 690;
 export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
   const { colors, themeName } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
   const isIOS = Platform.OS === "ios";
@@ -128,7 +131,7 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
     }
 
     // Fallback (if navigation is unavailable)
-    const title = String(uiConfig?.strings?.paywall_alert_title || "Plus会員が必要です");
+    const title = String(uiConfig?.strings?.paywall_alert_title || "Plusプランが必要です");
     const body = String(
       uiConfig?.strings?.paywall_alert_text ||
         "現在のプランでは「別の問いを受け取る」は利用できません。\n\nプラン画面をご確認ください。"
@@ -608,7 +611,7 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
                 <View style={styles.paywallCard}>
                   <Text style={styles.paywallTitle}>{t("paywall_title", "次の問いの生成は制限されています")}</Text>
                   <Text style={styles.paywallText}>
-                    {t("paywall_text", "現在のプランでは「別の問いを受け取る」は利用できません。Plus会員になると、いつでも新しい問いを生成できます。")}
+                    {t("paywall_text", "現在のプランでは「別の問いを受け取る」は利用できません。Plusプランになると、いつでも新しい問いを生成できます。")}
                   </Text>
                   <Pressable style={styles.paywallBtn} onPress={openSubscriptionSelect}>
                     <Ionicons name="sparkles-outline" size={16} color="#FFFFFF" />
@@ -625,8 +628,8 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     // ベース
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     body: { flex: 1 },
@@ -1017,5 +1020,5 @@ function createStyles(COLORS) {
       color: COLORS.TEXT_ON_DARK,
       textAlign: "center",
     },
-  });
+  }, ui));
 }

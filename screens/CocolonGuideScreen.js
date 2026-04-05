@@ -11,6 +11,7 @@ import {
 
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 // UI (Design System)
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -210,7 +211,7 @@ function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     container: {
       flex: 1,
       backgroundColor: COLORS.PANEL_BG,
@@ -341,5 +342,5 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
       opacity: 0.85,
     },
-  });
+  }, ui));
 }
