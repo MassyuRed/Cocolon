@@ -25,6 +25,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // Supabase
 import { supabase } from "../lib/supabase";
 import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
+import { getTodayQuestionHistory } from "../lib/todayQuestionApi";
 
 // 既存
 import MyWebHistoryScreen from "./MyWebHistoryScreen";
@@ -35,6 +36,10 @@ import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import TodayQuestionHistoryScreen from "./TodayQuestionHistoryScreen";
+import MyWebTopScreen from "./MyWebTopScreen";
+import MyWebEmotionAnalysisScreen from "./MyWebEmotionAnalysisScreen";
+import MyWebSelfStructureScreen from "./MyWebSelfStructureScreen";
+import MyWebInputHistoryMenuScreen from "./MyWebInputHistoryMenuScreen";
 
 // 🎨 テーマコンテキスト
 import { useTheme } from "../theme/ThemeContext";
@@ -60,8 +65,8 @@ import TutorialOverlay, {
 const PANEL_MIN_HEIGHT = 690;
 
 const MYWEB_TUTORIAL_STEP_START = 7;
-const MYWEB_TUTORIAL_STEP_END = 13;
-const TUTORIAL_TOTAL_STEPS = 23;
+const MYWEB_TUTORIAL_STEP_END = 11;
+const TUTORIAL_TOTAL_STEPS = 21;
 
 // Phase2: MyWeb（配布/生成）はMashOS側でensure（オンデマンド）
 const MYMODEL_API_BASE_URL =
@@ -70,6 +75,91 @@ const MYWEB_REPORTS_ENSURE_ENDPOINT = `${MYMODEL_API_BASE_URL}/myweb/reports/ens
 const SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
 const SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
 const REPORT_READ_STATUS_CHUNK_SIZE = 60;
+const ROUTE_HOME = "home";
+const ROUTE_EMOTION_ANALYSIS = "emotionAnalysis";
+const ROUTE_SELF_STRUCTURE = "selfStructure";
+const ROUTE_INPUT_HISTORY = "inputHistory";
+const MYWEB_READY_LIMIT = 1;
+const REPORT_TYPE_LABEL = Object.freeze({
+  daily: "日報",
+  weekly: "週報",
+  monthly: "月報",
+});
+
+function extractReadyItems(payload) {
+  if (Array.isArray(payload?.items)) return payload.items;
+  if (Array.isArray(payload?.reports)) return payload.reports;
+  if (Array.isArray(payload?.data?.items)) return payload.data.items;
+  if (Array.isArray(payload?.data?.reports)) return payload.data.reports;
+  if (Array.isArray(payload)) return payload;
+  return [];
+}
+
+function parseLooseIsoDate(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return null;
+
+  let normalized = raw;
+  if (/^\d{4}-\d{2}-\d{2} \d/.test(normalized)) {
+    normalized = normalized.replace(" ", "T");
+  }
+  if (!(/[zZ]$/.test(normalized) || /[+-]\d{2}:\d{2}$/.test(normalized))) {
+    normalized = `${normalized}Z`;
+  }
+
+  const date = new Date(normalized);
+  if (Number.isNaN(date.getTime())) return null;
+  return date;
+}
+
+function pickLatestIso(values) {
+  let latestValue = null;
+  let latestTime = -Infinity;
+
+  for (const value of Array.isArray(values) ? values : []) {
+    const date = parseLooseIsoDate(value);
+    if (!date) continue;
+    const time = date.getTime();
+    if (time > latestTime) {
+      latestTime = time;
+      latestValue = value;
+    }
+  }
+
+  return latestValue;
+}
+
+function resolveMyWebReportUpdatedAt(item) {
+  if (!item || typeof item !== "object") return null;
+  return (
+    item.generated_at ||
+    item.updated_at ||
+    item.published_at ||
+    item.period_end ||
+    item.created_at ||
+    null
+  );
+}
+
+function resolveSelfStructureUpdatedAt(item) {
+  if (!item || typeof item !== "object") return null;
+  return item.generated_at || item.updated_at || item.period_end || item.created_at || null;
+}
+
+function resolveTodayQuestionUpdatedAt(item) {
+  if (!item || typeof item !== "object") return null;
+  return item.edited_at || item.answered_at || item.updated_at || item.created_at || null;
+}
+
+function formatLatestUpdateLabel(value) {
+  const date = parseLooseIsoDate(value);
+  if (!date) return "最新更新日：--";
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `最新更新日：${year}/${month}/${day}`;
+}
 
 function normalizeMyProfileMode(mode) {
   const value = String(mode || "").trim().toLowerCase();
@@ -85,7 +175,7 @@ function useThemedStyles() {
 }
 
 export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange, route: screenRoute, tabRoute }) {
-  const { setUnreadGroup, clearScope } = useUnread();
+  const { setUnreadGroup, clearScope, getFeatureUnread } = useUnread();
   const { ensurePaid, ensurePremium, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
@@ -96,19 +186,22 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const myWebTitleRef = useRef(null);
-  const myWebDailyRef = useRef(null);
-  const myWebWeeklyRef = useRef(null);
-  const myWebMonthlyRef = useRef(null);
+  const myWebEmotionRef = useRef(null);
   const myWebSelfStructureRef = useRef(null);
-  const myWebHistoryRef = useRef(null);
+  const myWebInputHistoryRef = useRef(null);
+  const myWebGuideRef = useRef(null);
 
 
-  // 'home' | 'history' | 'reportHistory' | 'reportView' | 'selfReportHistory' | 'selfReportView' | 'selfReportGenerate' | 'weekly' | 'monthly' | 'deepInsight'
-  const [route, setRoute] = useState("home");
+  // 'home' | 'emotionAnalysis' | 'selfStructure' | 'inputHistory' | 'history' | 'reportHistory' | 'reportView' | 'selfReportHistory' | 'selfReportView' | 'selfReportGenerate' | 'todayQuestionHistory' | 'deepInsight'
+  const [route, setRoute] = useState(ROUTE_HOME);
   const [reportType, setReportType] = useState("weekly"); // 'daily' | 'weekly' | 'monthly'
   const [selectedReport, setSelectedReport] = useState(null);
   const [selectedSelfReport, setSelectedSelfReport] = useState(null);
-  const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState("home");
+  const [reportHistoryBackRoute, setReportHistoryBackRoute] = useState(ROUTE_EMOTION_ANALYSIS);
+  const [reportViewBackRoute, setReportViewBackRoute] = useState(ROUTE_EMOTION_ANALYSIS);
+  const [historyBackRoute, setHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
+  const [todayQuestionHistoryBackRoute, setTodayQuestionHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
+  const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState(ROUTE_SELF_STRUCTURE);
   const [selfReportGenerateMode, setSelfReportGenerateMode] = useState("standard");
 
   const clearExternalOpenParams = useCallback(
@@ -132,6 +225,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   useEffect(() => {
     const shouldOpen = !!(tabRoute?.params?.openTodayQuestionHistory || screenRoute?.params?.openTodayQuestionHistory);
     if (!shouldOpen) return;
+    setTodayQuestionHistoryBackRoute(ROUTE_INPUT_HISTORY);
     setRoute("todayQuestionHistory");
     clearExternalOpenParams({
       openTodayQuestionHistory: false,
@@ -146,9 +240,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   ]);
 
   // 未読バッジ（●）用：MyWeb（日/週/月）ごとの未読状態
-  // 画面内では MyWebScreen 自身の refreshUnreadBadges() を唯一の truth にする。
-  // UnreadContext は初期プリロードやタブ用の外部キャッシュとして扱い、
-  // ここへ逆流させない（false -> true -> false の点滅を防ぐ）。
+  // 画面内では MyWebScreen 自身の refreshUnreadBadges() を主判定にする。
+  // ただし初期表示は App 側の prefetch / UnreadContext を fallback として使い、
+  // 画面を開いた瞬間の NEW 表示遅延を避ける。
   const [unreadByType, setUnreadByType] = useState({
     daily: false,
     weekly: false,
@@ -156,37 +250,57 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     selfStructure: false,
   });
   const [unreadResolved, setUnreadResolved] = useState(false);
+  const [selfStructureUnreadResolved, setSelfStructureUnreadResolved] = useState(false);
   const [selfStructureLatestUnread, setSelfStructureLatestUnread] = useState(false);
   const [selfStructureHistoryUnread, setSelfStructureHistoryUnread] = useState(false);
 
-  const [weeklySummary, setWeeklySummary] = useState({
-    loading: true,
-    count: 0,
-    top: [],
-    error: "",
-  });
+  const prefetchedUnreadByType = useMemo(
+    () => ({
+      daily: !!getFeatureUnread("MyWeb", "daily"),
+      weekly: !!getFeatureUnread("MyWeb", "weekly"),
+      monthly: !!getFeatureUnread("MyWeb", "monthly"),
+      selfStructure: !!getFeatureUnread("MyWeb", "selfStructure"),
+    }),
+    [getFeatureUnread]
+  );
 
-  const [monthlySummary, setMonthlySummary] = useState({
-    loading: true,
-    count: 0,
-    error: "",
+  const [entryMeta, setEntryMeta] = useState({
+    emotionLatestDate: null,
+    selfStructureLatestDate: null,
+    inputHistoryLatestDate: null,
+    todayCount: 0,
+    weekCount: 0,
+    monthCount: 0,
+    latestReports: {
+      daily: null,
+      weekly: null,
+      monthly: null,
+    },
   });
 
   // (hooks moved to the top of the component)
 
   // BottomTab の未読バッジ（赤丸）連動
   useEffect(() => {
-    // 初回の authoritative 判定が返るまでは、
-    // App 側の prefetch / UnreadContext を上書きしない。
-    if (!unreadResolved) return;
+    // 初回は App 側 prefetch の表示を尊重し、画面側の主判定が返り始めたら同期する。
+    if (!unreadResolved && !selfStructureUnreadResolved) return;
 
-    // 自己構造（selfStructure）は Plus/Premium のみ未読バッジ対象
-    const effectiveSelfStructureUnread = !subscriptionLoading && !!isPaid && !!unreadByType.selfStructure;
+    const nextDaily = unreadResolved ? !!unreadByType.daily : !!prefetchedUnreadByType.daily;
+    const nextWeekly = unreadResolved ? !!unreadByType.weekly : !!prefetchedUnreadByType.weekly;
+    const nextMonthly = unreadResolved ? !!unreadByType.monthly : !!prefetchedUnreadByType.monthly;
+    const effectiveSelfStructureUnread =
+      !subscriptionLoading &&
+      !!isPaid &&
+      !!(
+        selfStructureUnreadResolved
+          ? unreadByType.selfStructure
+          : prefetchedUnreadByType.selfStructure
+      );
 
     const hasUnread = !!(
-      unreadByType.daily ||
-      unreadByType.weekly ||
-      unreadByType.monthly ||
+      nextDaily ||
+      nextWeekly ||
+      nextMonthly ||
       effectiveSelfStructureUnread
     );
 
@@ -209,9 +323,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
       // UnreadContext: "MyWeb" タブの赤●を画面内の未読バッジと同期
       setUnreadGroup("MyWeb", {
-        daily: !!unreadByType.daily,
-        weekly: !!unreadByType.weekly,
-        monthly: !!unreadByType.monthly,
+        daily: nextDaily,
+        weekly: nextWeekly,
+        monthly: nextMonthly,
         selfStructure: !!effectiveSelfStructureUnread,
       });
     } catch {
@@ -222,12 +336,17 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     unreadByType.weekly,
     unreadByType.monthly,
     unreadByType.selfStructure,
+    prefetchedUnreadByType.daily,
+    prefetchedUnreadByType.weekly,
+    prefetchedUnreadByType.monthly,
+    prefetchedUnreadByType.selfStructure,
     isPaid,
     subscriptionLoading,
     onTabUnreadChange,
     setUnreadGroup,
     clearScope,
     unreadResolved,
+    selfStructureUnreadResolved,
   ]);
 
   const { styles, colors, isDark } = useThemedStyles();
@@ -250,16 +369,12 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       case 7:
         return myWebTitleRef;
       case 8:
-        return myWebDailyRef;
+        return myWebEmotionRef;
       case 9:
-        return myWebWeeklyRef;
-      case 10:
-        return myWebMonthlyRef;
-      case 11:
         return myWebSelfStructureRef;
-      case 12:
-        return myWebHistoryRef;
-      case 13:
+      case 10:
+        return myWebInputHistoryRef;
+      case 11:
       default:
         return null;
     }
@@ -273,8 +388,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         return {
           step: 7,
           mode: "info",
-          title: "感情が分析されます",
-          message: "ここでは\nあなたの感情が分析されます",
+          title: "MyWeb",
+          message: "ここでは日々の入力から作成される\nレポートや履歴を確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(8),
         };
@@ -282,8 +397,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         return {
           step: 8,
           mode: "info",
-          title: "日報",
-          message: "1日の感情は\n日報として分析されます",
+          title: "感情分析",
+          message: "ここで日々の入力から作成される\n感情分析のレポートを確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(9),
         };
@@ -291,8 +406,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         return {
           step: 9,
           mode: "info",
-          title: "週報",
-          message: "感情の傾向は\n週単位でも確認できます",
+          title: "自己構造",
+          message: "ここで日々の入力から作成される\n自己構造のレポートを確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(10),
         };
@@ -300,8 +415,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         return {
           step: 10,
           mode: "info",
-          title: "月報",
-          message: "長期の感情の変化も\n分析されます",
+          title: "入力履歴",
+          message: "ここで入力履歴を\n確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(11),
         };
@@ -309,30 +424,11 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         return {
           step: 11,
           mode: "info",
-          title: "自己構造",
-          message:
-            "メモ付き入力を続けると\n\n自己構造分析レポート\nが作られます",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(12),
-        };
-      case 12:
-        return {
-          step: 12,
-          mode: "info",
-          title: "履歴",
-          message: "入力した感情は\nここで履歴として確認できます",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(13),
-        };
-      case 13:
-        return {
-          step: 13,
-          mode: "info",
           title: "次はReflection",
           message: "次はReflectionを作ってみましょう",
           nextLabel: "MyModelへ",
           onNext: () => {
-            setTutorialStep(14);
+            setTutorialStep(12);
             requestAnimationFrame(() => {
               try {
                 if (navigation?.navigate) {
@@ -381,8 +477,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       overlayMetrics: tutorialOverlayMetrics,
       windowHeight,
       safeInsets,
-      cardPlacement:
-        tutorialStep === 11 || tutorialStep === 12 ? "top" : "bottom",
+      cardPlacement: tutorialStep === 10 ? "top" : "bottom",
       measureOptions: {
         maxAttempts: 3,
         settleFrames: 1,
@@ -432,10 +527,11 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       cancelled = true;
     };
   }, [
+    entryMeta.emotionLatestDate,
+    entryMeta.inputHistoryLatestDate,
+    entryMeta.selfStructureLatestDate,
     isMyWebTutorialVisible,
     tutorialStep,
-    weeklySummary?.loading,
-    monthlySummary?.loading,
     tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
@@ -447,6 +543,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   // ------------------------------------------------------------
   const routeRef = useRef(route);
   const unreadRefreshSeqRef = useRef(0);
+  const menuMetaRefreshSeqRef = useRef(0);
   useEffect(() => {
     routeRef.current = route;
   }, [route]);
@@ -591,92 +688,197 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     const refreshSeq = ++unreadRefreshSeqRef.current;
     const isStale = () => refreshSeq !== unreadRefreshSeqRef.current;
 
+    const selfStructureTask = Promise.all([
+      fetchSelfStructureLatestUnread().catch((e) => {
+        console.warn("MyWebScreen: failed to refresh latest self-structure unread badge", e);
+        return false;
+      }),
+      fetchSelfStructureHistoryUnread().catch((e) => {
+        console.warn("MyWebScreen: failed to refresh self-structure history unread badge", e);
+        return false;
+      }),
+    ])
+      .then(([nextSelfStructureLatestUnread, nextSelfStructureHistoryUnread]) => {
+        if (isStale()) return;
+
+        const effectiveSelfStructureUnread =
+          !!nextSelfStructureLatestUnread || !!nextSelfStructureHistoryUnread;
+
+        setSelfStructureLatestUnread(!!nextSelfStructureLatestUnread);
+        setSelfStructureHistoryUnread(!!nextSelfStructureHistoryUnread);
+        setUnreadByType((prev) => ({
+          ...prev,
+          selfStructure: effectiveSelfStructureUnread,
+        }));
+        setSelfStructureUnreadResolved(true);
+      })
+      .catch(() => {
+        // noop
+      });
+
     try {
       const query = new URLSearchParams({
         limit: "1",
         include_self_structure: "false",
       }).toString();
 
-      const [json, nextSelfStructureLatestUnread, nextSelfStructureHistoryUnread] =
-        await Promise.all([
-          apiGet(`/report-reads/myweb-unread-status?${query}`),
-          fetchSelfStructureLatestUnread().catch((e) => {
-            console.warn("MyWebScreen: failed to refresh latest self-structure unread badge", e);
-            return false;
-          }),
-          fetchSelfStructureHistoryUnread().catch((e) => {
-            console.warn("MyWebScreen: failed to refresh self-structure history unread badge", e);
-            return false;
-          }),
-        ]);
+      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
       const unread = json?.unread_by_type || {};
-      const effectiveSelfStructureUnread =
-        !!nextSelfStructureLatestUnread || !!nextSelfStructureHistoryUnread;
 
       if (isStale()) return;
 
-      setSelfStructureLatestUnread(!!nextSelfStructureLatestUnread);
-      setSelfStructureHistoryUnread(!!nextSelfStructureHistoryUnread);
-      setUnreadByType({
+      setUnreadByType((prev) => ({
+        ...prev,
         daily: !!unread?.daily,
         weekly: !!unread?.weekly,
         monthly: !!unread?.monthly,
-        selfStructure: effectiveSelfStructureUnread,
-      });
+      }));
       setUnreadResolved(true);
     } catch (e) {
       if (isStale()) return;
       console.warn("MyWebScreen: failed to refresh unread badges", e);
     }
+
+    void selfStructureTask;
   }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread]);
 
-  const refreshHomeSummaries = useCallback(async () => {
-    setWeeklySummary((prev) => ({
-      ...prev,
-      loading: true,
-      error: "",
-    }));
-    setMonthlySummary((prev) => ({
-      ...prev,
-      loading: true,
-      error: "",
-    }));
+  const fetchLatestReadyReport = useCallback(async (type, { ensure = false } = {}) => {
+    const normalizedType = String(type || "").trim().toLowerCase();
+    if (!["daily", "weekly", "monthly"].includes(normalizedType)) return null;
 
-    try {
-      const json = await apiGet("/myweb/home-summary");
-      const weekly = json?.weekly || {};
-      const monthly = json?.monthly || {};
-
-      setWeeklySummary({
-        loading: false,
-        count: typeof weekly?.count === "number" ? weekly.count : 0,
-        top: Array.isArray(weekly?.top) ? weekly.top : [],
-        error: String(weekly?.error || ""),
-      });
-      setMonthlySummary({
-        loading: false,
-        count: typeof monthly?.count === "number" ? monthly.count : 0,
-        error: String(monthly?.error || ""),
-      });
-    } catch (e) {
-      console.warn("MyWebScreen: failed to refresh home summaries", e);
-      const message = String(e?.message || e || "");
-      setWeeklySummary({
-        loading: false,
-        count: 0,
-        top: [],
-        error: message,
-      });
-      setMonthlySummary({
-        loading: false,
-        count: 0,
-        error: message,
-      });
+    const shouldEnsure = ensure && (normalizedType === "weekly" || normalizedType === "monthly");
+    if (shouldEnsure) {
+      try {
+        await apiPost("/myweb/reports/ensure", {
+          types: [normalizedType],
+          force: false,
+        });
+      } catch (e) {
+        console.warn("MyWebScreen: failed to ensure latest ready report", normalizedType, e);
+      }
     }
+
+    const fetchOnce = async () => {
+      const json = await apiGet(
+        `/myweb/reports/ready?report_type=${encodeURIComponent(
+          normalizedType
+        )}&limit=${MYWEB_READY_LIMIT}&offset=0`
+      );
+      const items = extractReadyItems(json);
+      return items[0] || null;
+    };
+
+    let latest = null;
+    try {
+      latest = await fetchOnce();
+    } catch (e) {
+      console.warn("MyWebScreen: failed to fetch latest ready report", normalizedType, e);
+      if (!shouldEnsure) return null;
+    }
+
+    if (!latest && shouldEnsure) {
+      for (const waitMs of [1200, 2500]) {
+        await new Promise((resolve) => setTimeout(resolve, waitMs));
+        try {
+          latest = await fetchOnce();
+        } catch {
+          latest = null;
+        }
+        if (latest) break;
+      }
+    }
+
+    return latest || null;
   }, []);
 
+  const refreshHomeSummaries = useCallback(async () => {
+    const refreshSeq = ++menuMetaRefreshSeqRef.current;
+    const isStale = () => refreshSeq !== menuMetaRefreshSeqRef.current;
 
-  const openReportHistory = (type) => {
+    const [dailyRes, weeklyRes, monthlyRes, selfLatestStatusRes, homeSummaryRes, todayQuestionRes] =
+      await Promise.allSettled([
+        fetchLatestReadyReport("daily"),
+        fetchLatestReadyReport("weekly"),
+        fetchLatestReadyReport("monthly"),
+        apiGet("/myprofile/latest/status"),
+        apiGet("/myweb/home-summary"),
+        getTodayQuestionHistory({ limit: 1, offset: 0 }),
+      ]);
+
+    if (isStale()) return;
+
+    const dailyLatestReport = dailyRes.status === "fulfilled" ? dailyRes.value : null;
+    const weeklyLatestReport = weeklyRes.status === "fulfilled" ? weeklyRes.value : null;
+    const monthlyLatestReport = monthlyRes.status === "fulfilled" ? monthlyRes.value : null;
+
+    if (dailyRes.status === "rejected") {
+      console.warn("MyWebScreen: failed to refresh daily latest report", dailyRes.reason);
+    }
+    if (weeklyRes.status === "rejected") {
+      console.warn("MyWebScreen: failed to refresh weekly latest report", weeklyRes.reason);
+    }
+    if (monthlyRes.status === "rejected") {
+      console.warn("MyWebScreen: failed to refresh monthly latest report", monthlyRes.reason);
+    }
+
+    const selfLatestStatus =
+      selfLatestStatusRes.status === "fulfilled" && selfLatestStatusRes.value
+        ? selfLatestStatusRes.value
+        : null;
+    if (selfLatestStatusRes.status === "rejected") {
+      console.warn(
+        "MyWebScreen: failed to refresh self-structure latest status",
+        selfLatestStatusRes.reason
+      );
+    }
+
+    const homeSummary = homeSummaryRes.status === "fulfilled" ? homeSummaryRes.value || {} : {};
+    if (homeSummaryRes.status === "rejected") {
+      console.warn("MyWebScreen: failed to refresh home summary", homeSummaryRes.reason);
+    }
+    const inputStatus = homeSummary?.input_status || {};
+
+    const todayQuestionItems =
+      todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
+        ? todayQuestionRes.value.items
+        : [];
+    if (todayQuestionRes.status === "rejected") {
+      console.warn("MyWebScreen: failed to refresh today question history", todayQuestionRes.reason);
+    }
+
+    const todayCount = Number(inputStatus?.today_count ?? 0);
+    const weekCount = Number(inputStatus?.week_count ?? 0);
+    const monthCount = Number(inputStatus?.month_count ?? 0);
+
+    setEntryMeta({
+      emotionLatestDate: pickLatestIso([
+        resolveMyWebReportUpdatedAt(dailyLatestReport),
+        resolveMyWebReportUpdatedAt(weeklyLatestReport),
+        resolveMyWebReportUpdatedAt(monthlyLatestReport),
+      ]),
+      selfStructureLatestDate: pickLatestIso([
+        selfLatestStatus?.has_visible_content
+          ? resolveSelfStructureUpdatedAt(selfLatestStatus)
+          : null,
+      ]),
+      inputHistoryLatestDate: pickLatestIso([
+        inputStatus?.last_input_at,
+        resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
+      ]),
+      todayCount: Number.isFinite(todayCount) ? todayCount : 0,
+      weekCount: Number.isFinite(weekCount) ? weekCount : 0,
+      monthCount: Number.isFinite(monthCount) ? monthCount : 0,
+      latestReports: {
+        daily: dailyLatestReport,
+        weekly: weeklyLatestReport,
+        monthly: monthlyLatestReport,
+      },
+    });
+  }, [fetchLatestReadyReport]);
+
+
+  const openReportHistory = (type, backRoute = ROUTE_EMOTION_ANALYSIS) => {
+    setReportHistoryBackRoute(backRoute);
     setReportType(type);
     setSelectedReport(null);
     setRoute("reportHistory");
@@ -726,22 +928,25 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   );
 
   const openSelfReportLatest = useCallback(
-    (nextMode = "standard") => {
+    (nextMode = "standard", backRoute = ROUTE_SELF_STRUCTURE) => {
       setSelfReportGenerateMode(normalizeMyProfileMode(nextMode));
       openSelfStructureRoute({
         targetRoute: "selfReportGenerate",
-        backRoute: "home",
+        backRoute,
       });
     },
     [openSelfStructureRoute]
   );
 
-  const openSelfReportHistory = useCallback(() => {
-    openSelfStructureRoute({
-      targetRoute: "selfReportHistory",
-      backRoute: "home",
-    });
-  }, [openSelfStructureRoute]);
+  const openSelfReportHistory = useCallback(
+    (backRoute = ROUTE_SELF_STRUCTURE) => {
+      openSelfStructureRoute({
+        targetRoute: "selfReportHistory",
+        backRoute,
+      });
+    },
+    [openSelfStructureRoute]
+  );
 
   useEffect(() => {
     const shouldOpenReportHistory = !!(
@@ -753,6 +958,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
     if (shouldOpenReportHistory && ["daily", "weekly", "monthly"].includes(nextReportType)) {
       setSelectedReport(null);
+      setReportHistoryBackRoute(ROUTE_EMOTION_ANALYSIS);
       setReportType(nextReportType);
       setRoute("reportHistory");
       clearExternalOpenParams({
@@ -773,7 +979,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       setSelfReportGenerateMode(nextMode);
       openSelfStructureRoute({
         targetRoute: "selfReportGenerate",
-        backRoute: "home",
+        backRoute: ROUTE_SELF_STRUCTURE,
       });
       clearExternalOpenParams({
         openSelfReportLatest: false,
@@ -789,7 +995,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     if (shouldOpenSelfReportHistory) {
       openSelfStructureRoute({
         targetRoute: "selfReportHistory",
-        backRoute: "home",
+        backRoute: ROUTE_SELF_STRUCTURE,
       });
       clearExternalOpenParams({
         openSelfReportHistory: false,
@@ -802,7 +1008,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       tabRoute?.params?.openDistributionHome || screenRoute?.params?.openDistributionHome
     );
     if (shouldOpenDistributionHome) {
-      setRoute("home");
+      setRoute(ROUTE_HOME);
       clearExternalOpenParams({
         openDistributionHome: false,
         openDistributionHomeAt: null,
@@ -839,8 +1045,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   }, []);
 
   const openReportView = useCallback(
-    async (report) => {
+    async (report, backRoute = "reportHistory") => {
       setSelectedReport(report || null);
+      setReportViewBackRoute(backRoute);
       setRoute("reportView");
       try {
         await markReportRead(report);
@@ -849,6 +1056,30 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       }
     },
     [markReportRead, refreshUnreadBadges]
+  );
+
+  const openLatestEmotionReport = useCallback(
+    async (type) => {
+      const normalizedType = String(type || "").trim().toLowerCase();
+      const label = REPORT_TYPE_LABEL[normalizedType] || "レポート";
+
+      try {
+        const cachedReport = entryMeta?.latestReports?.[normalizedType] || null;
+        const latestReport =
+          cachedReport || (await fetchLatestReadyReport(normalizedType, { ensure: true }));
+
+        if (!latestReport) {
+          Alert.alert("最新レポート", `最新の${label}はまだありません。`);
+          return;
+        }
+
+        await openReportView(latestReport, ROUTE_EMOTION_ANALYSIS);
+      } catch (e) {
+        console.warn("MyWebScreen: failed to open latest emotion report", normalizedType, e);
+        Alert.alert("取得エラー", `${label}の取得に失敗しました。`);
+      }
+    },
+    [entryMeta?.latestReports, fetchLatestReadyReport, openReportView]
   );
 
   // ✅ Paywall CTA: SubscriptionSelect へ遷移（ナビが無い場合も落とさない）
@@ -978,13 +1209,36 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     })();
   }, [refreshUnreadBadges, refreshHomeSummaries]);
 
-  // Home に戻ったタイミングでも更新
+  // MyWeb 内の入口画面に戻ったタイミングでも更新
   useEffect(() => {
-    if (route === "home") {
+    const shouldRefreshMenuState =
+      route === ROUTE_HOME ||
+      route === ROUTE_EMOTION_ANALYSIS ||
+      route === ROUTE_SELF_STRUCTURE ||
+      route === ROUTE_INPUT_HISTORY;
+
+    if (shouldRefreshMenuState) {
       refreshUnreadBadges();
       refreshHomeSummaries();
     }
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
+
+  const emotionAnalysisUnread = unreadResolved
+    ? !!(unreadByType.daily || unreadByType.weekly || unreadByType.monthly)
+    : !!(
+        prefetchedUnreadByType.daily ||
+        prefetchedUnreadByType.weekly ||
+        prefetchedUnreadByType.monthly
+      );
+  const selfStructureUnread =
+    !subscriptionLoading && isPaid
+      ? selfStructureUnreadResolved
+        ? !!(selfStructureLatestUnread || selfStructureHistoryUnread)
+        : !!prefetchedUnreadByType.selfStructure
+      : false;
+  const emotionUpdateLabel = formatLatestUpdateLabel(entryMeta.emotionLatestDate);
+  const selfStructureUpdateLabel = formatLatestUpdateLabel(entryMeta.selfStructureLatestDate);
+  const inputHistoryUpdateLabel = formatLatestUpdateLabel(entryMeta.inputHistoryLatestDate);
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
@@ -993,34 +1247,87 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         backgroundColor={colors.BG_SILVER}
       />
       {route === "history" ? (
-        <MyWebHistoryScreen onBack={() => setRoute("home")} />
+        <MyWebHistoryScreen
+          onBack={() => {
+            setRoute(historyBackRoute);
+            refreshHomeSummaries();
+          }}
+        />
       ) : route === "reportHistory" ? (
         <MyWebReportHistoryScreen
           reportType={reportType}
           onBack={() => {
-            setRoute("home");
+            setRoute(reportHistoryBackRoute);
             refreshUnreadBadges();
             refreshHomeSummaries();
           }}
-          onOpenReport={openReportView}
-          onGenerateLatest={() => setRoute(reportType)}
+          onOpenReport={(report) => openReportView(report, "reportHistory")}
+          onGenerateLatest={() => openLatestEmotionReport(reportType)}
           onOpenSubscription={openSubscriptionSelect}
         />
       ) : route === "reportView" ? (
         <MyWebReportViewerScreen
           report={selectedReport}
           onBack={() => {
-            setRoute("reportHistory");
+            setRoute(reportViewBackRoute);
             refreshUnreadBadges();
+            refreshHomeSummaries();
           }}
           onOpenMyProfile={onOpenMyProfile}
           onOpenSubscription={openSubscriptionSelect}
         />
+      ) : route === ROUTE_EMOTION_ANALYSIS ? (
+        <View style={styles.safeContent}>
+          <MyWebEmotionAnalysisScreen
+            onBack={() => setRoute(ROUTE_HOME)}
+            onOpenLatestDaily={() => openLatestEmotionReport("daily")}
+            onOpenLatestWeekly={() => openLatestEmotionReport("weekly")}
+            onOpenLatestMonthly={() => openLatestEmotionReport("monthly")}
+            onOpenDailyHistory={() => openReportHistory("daily", ROUTE_EMOTION_ANALYSIS)}
+            onOpenWeeklyHistory={() => openReportHistory("weekly", ROUTE_EMOTION_ANALYSIS)}
+            onOpenMonthlyHistory={() => openReportHistory("monthly", ROUTE_EMOTION_ANALYSIS)}
+            unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
+            unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
+            unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
+          />
+        </View>
+      ) : route === ROUTE_SELF_STRUCTURE ? (
+        <View style={styles.safeContent}>
+          <MyWebSelfStructureScreen
+            onBack={() => setRoute(ROUTE_HOME)}
+            onOpenLatestReport={() => openSelfReportLatest("standard", ROUTE_SELF_STRUCTURE)}
+            onOpenHistory={() => openSelfReportHistory(ROUTE_SELF_STRUCTURE)}
+            unreadLatest={
+              selfStructureUnreadResolved && !subscriptionLoading && isPaid
+                ? selfStructureLatestUnread
+                : false
+            }
+            unreadHistory={
+              selfStructureUnreadResolved && !subscriptionLoading && isPaid
+                ? selfStructureHistoryUnread
+                : false
+            }
+          />
+        </View>
+      ) : route === ROUTE_INPUT_HISTORY ? (
+        <View style={styles.safeContent}>
+          <MyWebInputHistoryMenuScreen
+            onBack={() => setRoute(ROUTE_HOME)}
+            onOpenEmotionHistory={() => {
+              setHistoryBackRoute(ROUTE_INPUT_HISTORY);
+              setRoute("history");
+            }}
+            onOpenTodayQuestionHistory={() => {
+              setTodayQuestionHistoryBackRoute(ROUTE_INPUT_HISTORY);
+              setRoute("todayQuestionHistory");
+            }}
+          />
+        </View>
       ) : route === "selfReportHistory" ? (
         <SelfStructureReportHistoryScreen
           reportType="monthly"
           onBack={() => {
-            setRoute("home");
+            setRoute(ROUTE_SELF_STRUCTURE);
             refreshUnreadBadges();
             refreshHomeSummaries();
           }}
@@ -1045,50 +1352,46 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         <SelfStructureReportGenerateScreen
           key={`selfReportGenerate:${selfReportGenerateMode}`}
           initialReportMode={selfReportGenerateMode}
-          onBack={() => setRoute(selfReportGenerateBackRoute)}
+          onBack={() => {
+            setRoute(selfReportGenerateBackRoute);
+            refreshHomeSummaries();
+          }}
           onLatestSeenVersion={markSelfStructureLatestSeen}
         />
       ) : route === "todayQuestionHistory" ? (
-        <TodayQuestionHistoryScreen onBack={() => setRoute("home")} />
+        <TodayQuestionHistoryScreen
+          onBack={() => {
+            setRoute(todayQuestionHistoryBackRoute);
+            refreshHomeSummaries();
+          }}
+        />
       ) : route === "deepInsight" ? (
-        <DeepInsightScreen onBack={() => setRoute("home")} />
+        <DeepInsightScreen onBack={() => setRoute(ROUTE_HOME)} />
       ) : (
         <View style={styles.safeContent}>
-        <MyWebHome
-          styles={styles}
-          colors={colors}
-          tutorialScrollRef={tutorialScrollRef}
-          onTutorialScroll={handleTutorialScroll}
-          tutorialRefs={{
-            titleRef: myWebTitleRef,
-            dailyRef: myWebDailyRef,
-            weeklyRef: myWebWeeklyRef,
-            monthlyRef: myWebMonthlyRef,
-            selfStructureRef: myWebSelfStructureRef,
-            historyRef: myWebHistoryRef,
-          }}
-          onOpenGuide={openGuide}
-          onOpenHistory={() => setRoute("history")}
-          onOpenDaily={() => openReportHistory("daily")}
-          onOpenWeekly={() => openReportHistory("weekly")}
-          onOpenMonthly={() => openReportHistory("monthly")}
-          onOpenSelfReportLatest={openSelfReportLatest}
-          onOpenSelfReportHistory={openSelfReportHistory}
-          onOpenMyModelBuild={openMyModelBuild}
-          onOpenDeepInsight={openDeepInsight}
-          onOpenTodayQuestionHistory={() => setRoute("todayQuestionHistory")}
-          unreadDaily={unreadResolved && unreadByType.daily}
-          unreadWeekly={unreadResolved && unreadByType.weekly}
-          unreadMonthly={unreadResolved && unreadByType.monthly}
-          unreadSelfStructureLatest={
-            unreadResolved && !subscriptionLoading && isPaid ? selfStructureLatestUnread : false
-          }
-          unreadSelfStructureHistory={
-            unreadResolved && !subscriptionLoading && isPaid ? selfStructureHistoryUnread : false
-          }
-          weeklySummary={weeklySummary}
-          monthlySummary={monthlySummary}
-        />
+          <MyWebTopScreen
+            tutorialScrollRef={tutorialScrollRef}
+            onTutorialScroll={handleTutorialScroll}
+            tutorialRefs={{
+              titleRef: myWebTitleRef,
+              emotionRef: myWebEmotionRef,
+              selfStructureRef: myWebSelfStructureRef,
+              inputHistoryRef: myWebInputHistoryRef,
+              guideRef: myWebGuideRef,
+            }}
+            onOpenGuide={openGuide}
+            onOpenEmotionAnalysis={() => setRoute(ROUTE_EMOTION_ANALYSIS)}
+            onOpenSelfStructure={() => setRoute(ROUTE_SELF_STRUCTURE)}
+            onOpenInputHistory={() => setRoute(ROUTE_INPUT_HISTORY)}
+            emotionUpdateLabel={emotionUpdateLabel}
+            selfStructureUpdateLabel={selfStructureUpdateLabel}
+            inputHistoryUpdateLabel={inputHistoryUpdateLabel}
+            todayCount={entryMeta.todayCount}
+            weekCount={entryMeta.weekCount}
+            monthCount={entryMeta.monthCount}
+            unreadEmotion={emotionAnalysisUnread}
+            unreadSelfStructure={selfStructureUnread}
+          />
         </View>
       )}
 
@@ -1105,9 +1408,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
           onNext={tutorialOverlayConfig.onNext}
           onMetricsChange={setTutorialOverlayMetrics}
           actionHint={tutorialOverlayConfig.actionHint}
-          cardPlacement={
-            tutorialStep === 11 || tutorialStep === 12 ? "top" : "bottom"
-          }
+          cardPlacement={tutorialStep === 10 ? "top" : "bottom"}
         />
       ) : null}
     </View>

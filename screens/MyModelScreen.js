@@ -28,7 +28,6 @@ import { useTutorial } from "../TutorialContext";
 // UI (Design System)
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
-import UnreadBadge from "../components/UnreadBadge";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay, {
   measureTutorialTarget,
@@ -38,6 +37,7 @@ import TutorialOverlay, {
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch } from "../lib/apiClient";
+import { MenuActionCard } from "./MenuActionCardCommon";
 
 /**
  * MyModelScreen (Home)
@@ -65,11 +65,14 @@ const MYMODEL_RECOMMEND_USERS_ENDPOINT = `${API_BASE}/mymodel/recommend/users`;
 const QNA_TRENDING_ENDPOINT = `${API_BASE}/mymodel/qna/trending`;
 const QNA_HOLDERS_ENDPOINT = `${API_BASE}/mymodel/qna/holders`;
 const GLOBAL_SUMMARY_ENDPOINT = `${API_BASE}/global_summary`;
+const GLOBAL_SUMMARY_PASSIVE_ENDPOINT = `${GLOBAL_SUMMARY_ENDPOINT}?mode=ready_first`;
+const GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS = 8000;
+const GLOBAL_SUMMARY_MIN_REFRESH_INTERVAL_MS = 60 * 1000;
 
 const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
-const MYMODEL_TUTORIAL_STEP_START = 14;
-const MYMODEL_TUTORIAL_STEP_END = 17;
-const TUTORIAL_TOTAL_STEPS = 23;
+const MYMODEL_TUTORIAL_STEP_START = 12;
+const MYMODEL_TUTORIAL_STEP_END = 15;
+const TUTORIAL_TOTAL_STEPS = 21;
 
 const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
   {
@@ -159,6 +162,29 @@ function mergeTutorialRects(...rects) {
   };
 }
 
+
+function MyModelHomeActionCard({
+  title,
+  description,
+  buttonLabel,
+  buttonIconName,
+  onPress,
+  badgeVisible = false,
+  accessibilityLabel,
+}) {
+  return (
+    <MenuActionCard
+      title={title}
+      description={description}
+      buttonLabel={buttonLabel}
+      buttonIconName={buttonIconName}
+      onPress={onPress}
+      badgeVisible={badgeVisible}
+      accessibilityLabel={accessibilityLabel}
+    />
+  );
+}
+
 export default function MyModelScreen({ route } = {}) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -244,6 +270,8 @@ export default function MyModelScreen({ route } = {}) {
   const [globalEchoCount, setGlobalEchoCount] = useState(null);
   const [globalDiscoveryCount, setGlobalDiscoveryCount] = useState(null);
   const appStateRef = useRef(AppState.currentState);
+  const globalSummaryLastFetchedAtRef = useRef(0);
+  const globalSummaryInFlightRef = useRef(null);
 
   const [tutorialCreateVisible, setTutorialCreateVisible] = useState(false);
   const [tutorialCreateAnswer, setTutorialCreateAnswer] = useState("");
@@ -251,34 +279,64 @@ export default function MyModelScreen({ route } = {}) {
   const [tutorialCreateError, setTutorialCreateError] = useState("");
 
 
-  const fetchGlobalSummary = useCallback(async () => {
+  const fetchGlobalSummary = useCallback(async (opts = {}) => {
+    const force = opts?.force === true;
+
     try {
-      const res = await apiFetch(GLOBAL_SUMMARY_ENDPOINT, { method: "GET" });
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(String(json?.detail || json?.message || `HTTP ${res.status}`));
+      const now = Date.now();
+      const lastFetchedAt = Number(globalSummaryLastFetchedAtRef.current || 0) || 0;
+      if (!force && now - lastFetchedAt < GLOBAL_SUMMARY_MIN_REFRESH_INTERVAL_MS) {
+        return globalSummaryInFlightRef.current || null;
       }
 
-      const reflectionRaw =
-        json?.reflection_count ?? json?.reflection_views ?? json?.reflection_view_count;
-      const echoRaw = json?.echo_count;
-      const discoveryRaw = json?.discovery_count;
+      if (globalSummaryInFlightRef.current) {
+        return globalSummaryInFlightRef.current;
+      }
 
-      const nextReflectionCount = Number(reflectionRaw);
-      const nextEchoCount = Number(echoRaw);
-      const nextDiscoveryCount = Number(discoveryRaw);
+      const request = (async () => {
+        try {
+          const res = await apiFetch(GLOBAL_SUMMARY_PASSIVE_ENDPOINT, {
+            method: "GET",
+            auth: false,
+            timeoutMs: GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS,
+          });
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            throw new Error(String(json?.detail || json?.message || `HTTP ${res.status}`));
+          }
 
-      if (Number.isFinite(nextReflectionCount)) {
-        setGlobalReflectionCount(nextReflectionCount);
-      }
-      if (Number.isFinite(nextEchoCount)) {
-        setGlobalEchoCount(nextEchoCount);
-      }
-      if (Number.isFinite(nextDiscoveryCount)) {
-        setGlobalDiscoveryCount(nextDiscoveryCount);
-      }
+          const reflectionRaw =
+            json?.reflection_count ?? json?.reflection_views ?? json?.reflection_view_count;
+          const echoRaw = json?.echo_count;
+          const discoveryRaw = json?.discovery_count;
+
+          const nextReflectionCount = Number(reflectionRaw);
+          const nextEchoCount = Number(echoRaw);
+          const nextDiscoveryCount = Number(discoveryRaw);
+
+          if (Number.isFinite(nextReflectionCount)) {
+            setGlobalReflectionCount(nextReflectionCount);
+          }
+          if (Number.isFinite(nextEchoCount)) {
+            setGlobalEchoCount(nextEchoCount);
+          }
+          if (Number.isFinite(nextDiscoveryCount)) {
+            setGlobalDiscoveryCount(nextDiscoveryCount);
+          }
+          globalSummaryLastFetchedAtRef.current = Date.now();
+          return json;
+        } catch {
+          // keep previous values
+          return null;
+        } finally {
+          globalSummaryInFlightRef.current = null;
+        }
+      })();
+
+      globalSummaryInFlightRef.current = request;
+      return request;
     } catch {
-      // keep previous values
+      return null;
     }
   }, []);
 
@@ -308,12 +366,12 @@ export default function MyModelScreen({ route } = {}) {
     if (!isMyModelTutorialVisible) return null;
 
     switch (tutorialStep) {
-      case 14:
+      case 12:
         return myModelTitleRef;
-      case 15:
-      case 16:
+      case 13:
+      case 14:
         return createButtonRef;
-      case 17:
+      case 15:
         return reflectionsButtonRef;
       default:
         return null;
@@ -324,39 +382,39 @@ export default function MyModelScreen({ route } = {}) {
     if (!isMyModelTutorialVisible) return null;
 
     switch (tutorialStep) {
-      case 14:
+      case 12:
         return {
-          step: 14,
+          step: 12,
           mode: "info",
           title: "MyModel",
           message: "ここでは\nReflectionを作り、閲覧できます",
           nextLabel: "次へ",
-          onNext: () => setTutorialStep(15),
+          onNext: () => setTutorialStep(13),
+        };
+      case 13:
+        return {
+          step: 13,
+          mode: "info",
+          title: "作成",
+          message: "まずはここで\nReflectionを作成します",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(14),
+        };
+      case 14:
+        return {
+          step: 14,
+          mode: "action",
+          title: "作成してみましょう",
+          message: "作成を開いて\nReflectionを作ってみましょう",
+          actionHint: "作成 を押してください",
         };
       case 15:
         return {
           step: 15,
-          mode: "info",
-          title: "ReflectionCreate",
-          message: "まずはここで\nReflectionを作成します",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(16),
-        };
-      case 16:
-        return {
-          step: 16,
           mode: "action",
-          title: "作成してみましょう",
-          message: "ReflectionCreateを開いて\nReflectionを作ってみましょう",
-          actionHint: "ReflectionCreate を押してください",
-        };
-      case 17:
-        return {
-          step: 17,
-          mode: "action",
-          title: "Reflectionsで確認できます",
-          message: "作成したReflectionは\nReflectionsで確認できます\n\n開いてみましょう",
-          actionHint: "Reflections を押してください",
+          title: "閲覧で確認できます",
+          message: "作成したReflectionは\n閲覧から確認できます\n\n開いてみましょう",
+          actionHint: "閲覧 を押してください",
         };
       default:
         return null;
@@ -364,12 +422,12 @@ export default function MyModelScreen({ route } = {}) {
   }, [isMyModelTutorialVisible, tutorialStep, setTutorialStep]);
 
   const tutorialModalOverlayConfig = useMemo(() => {
-    if (!isTutorialMode || !tutorialCreateVisible || tutorialStep !== 16) {
+    if (!isTutorialMode || !tutorialCreateVisible || tutorialStep !== 14) {
       return null;
     }
 
     return {
-      step: 16,
+      step: 14,
       mode: "action",
       title: "作成してみましょう",
       message: "回答を入力したら、保存ボタンを押してください",
@@ -415,8 +473,8 @@ export default function MyModelScreen({ route } = {}) {
 
   useEffect(() => {
     if (!isTutorialMode || !tutorialHasSelfReflection) return;
-    if (tutorialStep < MYMODEL_TUTORIAL_STEP_START || tutorialStep >= 17) return;
-    setTutorialStep(17);
+    if (tutorialStep < MYMODEL_TUTORIAL_STEP_START || tutorialStep >= 15) return;
+    setTutorialStep(15);
   }, [isTutorialMode, tutorialHasSelfReflection, tutorialStep, setTutorialStep]);
 
   useLayoutEffect(() => {
@@ -675,7 +733,7 @@ export default function MyModelScreen({ route } = {}) {
 
   useEffect(() => {
     if (!isTutorialMode || !tutorialHasSelfReflection) return;
-    setTutorialStep((prev) => (prev < 17 ? 17 : prev));
+    setTutorialStep((prev) => (prev < 15 ? 15 : prev));
   }, [isTutorialMode, tutorialHasSelfReflection, setTutorialStep]);
 
 
@@ -784,7 +842,7 @@ export default function MyModelScreen({ route } = {}) {
 
         return [selfReflection, ...mockItems];
       });
-      setTutorialStep((prev) => (prev < 17 ? 17 : prev));
+      setTutorialStep((prev) => (prev < 15 ? 15 : prev));
       setTutorialCreateVisible(false);
       setTutorialCreateError("");
     } finally {
@@ -801,13 +859,6 @@ export default function MyModelScreen({ route } = {}) {
     Alert.alert(
       "おすすめ（チュートリアル）",
       "本番ではここから新しいユーザーや問いを探せます。\n\nチュートリアルでは、Reflections画面で模擬ユーザーのReflectionを閲覧できます。"
-    );
-  }, []);
-
-  const showTutorialHistoryInfo = useCallback(() => {
-    Alert.alert(
-      "履歴（チュートリアル）",
-      "本番では、共鳴や発見を行うと Echoes / Discoveries の履歴が蓄積されます。\n\nチュートリアルでは、まずReflectionの作成と閲覧の流れを確認してください。"
     );
   }, []);
 
@@ -1055,7 +1106,7 @@ export default function MyModelScreen({ route } = {}) {
     }
 
     if (isTutorialMode) {
-      setTutorialStep((prev) => (prev < 18 ? 18 : prev));
+      setTutorialStep((prev) => (prev < 16 ? 16 : prev));
     }
 
     navigateToReflections();
@@ -1066,6 +1117,19 @@ export default function MyModelScreen({ route } = {}) {
     navigateToReflections,
     setTutorialStep,
   ]);
+
+  const openReactionHistory = useCallback(() => {
+    if (!navigation?.navigate) return;
+
+    try {
+      navigation.navigate("MyModelReactionHistory");
+    } catch {
+      Alert.alert(
+        "履歴を開けません",
+        "履歴画面が navigation に未登録の可能性があります。"
+      );
+    }
+  }, [navigation]);
 
   const handlePressGuide = useCallback(() => {
     // 1) normal navigate
@@ -1173,89 +1237,51 @@ export default function MyModelScreen({ route } = {}) {
           </View>
         )}
 
-        {/* Home / Target + Reflections entry */}
-        <View style={styles.qnaIntroCard}>
-          <View style={styles.qnaIntroTitleRow}>
-            <Text style={styles.qnaIntroTitle}>Reflections</Text>
-            <UnreadBadge
-              visible={unreadReflections}
-              style={styles.createUnreadBadge}
-            />
-          </View>
-          <Text style={styles.qnaIntroText}>
-            {isTutorialMode
-              ? "作成したReflectionや、模擬ユーザーのReflectionを閲覧して流れを確認できます。"
-              : "自分もしくはフォローしているユーザーが作成した\nReflection（一問一答内容）を閲覧できます。"}
-          </Text>
-
-          <View style={styles.actions}>
-            <View ref={reflectionsButtonRef} collapsable={false}>
-              <CocolonButton variant="primary" onPress={openReflections}>
-                <View style={styles.btnRow}>
-                  <Ionicons
-                    name="open-outline"
-                    size={18}
-                    color="#FFFFFF"
-                    style={{ marginRight: 6 }}
-                  />
-                  <Text style={styles.goldButtonText}>Reflectionsを開く</Text>
-                </View>
-              </CocolonButton>
-            </View>
-          </View>
+        <View ref={reflectionsButtonRef} collapsable={false}>
+          <MyModelHomeActionCard
+            styles={styles}
+            title="閲覧"
+            description={
+              isTutorialMode
+                ? "作成したReflectionや、模擬ユーザーのReflectionを見ながら、MyModelの流れを確認できます。"
+                : "自分、またはフォロー中のユーザーが作成したReflectionを閲覧できます。"
+            }
+            buttonLabel="Reflectionsを開く"
+            buttonIconName="open-outline"
+            onPress={openReflections}
+            badgeVisible={unreadReflections}
+            accessibilityLabel="Reflectionsを開く"
+          />
         </View>
 
-        <View style={styles.recoCard}>
-          <View style={styles.createTitleRow}>
-            <Text style={styles.recoTitle}>ReflectionCreate</Text>
-            <UnreadBadge
-              visible={unreadMyModelCreate}
-              style={styles.createUnreadBadge}
-            />
-          </View>
-          <Text style={styles.recoSummaryText}>
-            {isTutorialMode
-              ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionが作られる流れを体験します。`
-              : "一問一答に答えることができます。\n答えた一問一答内容をReflectionと呼びます。\n作成したReflection数はアカウントページで確認できます。"}
-          </Text>
-
-          <View ref={createButtonRef} collapsable={false}>
-            <CocolonButton
-              variant="primary"
-              style={{ marginTop: 10 }}
-              onPress={openMyModelCreate}
-            >
-              <View style={styles.btnRow}>
-                <Ionicons
-                  name="create-outline"
-                  size={18}
-                  color="#FFFFFF"
-                  style={{ marginRight: 6 }}
-                />
-                <Text style={styles.goldButtonText}>
-                  {isTutorialMode
-                    ? tutorialHasSelfReflection
-                      ? "チュートリアルReflectionを更新"
-                      : "チュートリアルReflectionを作成"
-                    : "Reflectionを作成"}
-                </Text>
-              </View>
-            </CocolonButton>
-          </View>
+        <View ref={createButtonRef} collapsable={false} style={{ marginTop: 16 }}>
+          <MyModelHomeActionCard
+            styles={styles}
+            title="作成"
+            description={
+              isTutorialMode
+                ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionを作成する流れを体験できます。`
+                : "一問一答に答えることでReflectionを作成できます。作成したReflection数はアカウントページで確認できます。"
+            }
+            buttonLabel="Reflectionを作成"
+            buttonIconName="create-outline"
+            onPress={openMyModelCreate}
+            badgeVisible={unreadMyModelCreate}
+            accessibilityLabel="Reflectionを作成"
+          />
         </View>
 
-        {/* Recommend */}
-        <View style={styles.recoCard}>
-          <Text style={styles.recoTitle}>おすすめ</Text>
-          <Text style={styles.recoSummaryText}>
-            {isTutorialMode
-              ? "本番ではここから新しいユーザーを探せます。チュートリアルではReflections画面に模擬ユーザーを用意しています。"
-              : "新しいユーザーを探すことができます。"}
-          </Text>
-
-          <CocolonButton
-            variant="secondary"
-            style={{ marginTop: 10 }}
+        <View style={{ marginTop: 16 }}>
+          <MyModelHomeActionCard
+            styles={styles}
+            title="探す"
+            description={
+              isTutorialMode
+                ? "本番ではここから新しいユーザーを探せます。チュートリアルではReflections画面に模擬ユーザーを用意しています。"
+                : "新しいユーザーを探すことができます。"
+            }
+            buttonLabel="新しいユーザーを探す"
+            buttonIconName="search-outline"
             onPress={() => {
               if (isTutorialMode) {
                 showTutorialRecommendInfo();
@@ -1269,79 +1295,20 @@ export default function MyModelScreen({ route } = {}) {
                 loadRecommendUsers();
               }
             }}
-          >
-            <View style={styles.btnRow}>
-              <Ionicons
-                name="search-outline"
-                size={18}
-                color={colors.TEXT_ON_LIGHT}
-                style={{ marginRight: 6 }}
-              />
-              <Text style={styles.neutralButtonText}>新しいユーザーを探す</Text>
-            </View>
-            </CocolonButton>
-          </View>
+            accessibilityLabel="新しいユーザーを探す"
+          />
+        </View>
 
-        {/* History */}
-        <View style={styles.historyCard}>
-          <Text style={styles.historyCardTitle}>履歴</Text>
-          <View style={{ marginTop: 8 }}>
-            <CocolonButton
-              variant="secondary"
-              onPress={() => {
-                if (isTutorialMode) {
-                  showTutorialHistoryInfo();
-                  return;
-                }
-                navigation.navigate("EchoesHistoryList");
-              }}
-              style={styles.historyEntry}
-            >
-              <View style={[styles.btnRow, { width: "100%" }]}>
-                <Ionicons
-                  name="time-outline"
-                  size={16}
-                  color={colors.TEXT_ON_LIGHT}
-                  style={{ marginRight: 8 }}
-                />
-                <Text style={styles.historyEntryText}>Echoes</Text>
-                <Ionicons
-                  name="chevron-forward"
-                  size={18}
-                  color={colors.TEXT_SUBTLE}
-                  style={{ marginLeft: "auto" }}
-                />
-              </View>
-            </CocolonButton>
-
-            <CocolonButton
-              variant="secondary"
-              onPress={() => {
-                if (isTutorialMode) {
-                  showTutorialHistoryInfo();
-                  return;
-                }
-                navigation.navigate("DiscoveriesHistoryList");
-              }}
-              style={[styles.historyEntry, { marginTop: 8 }]}
-            >
-              <View style={[styles.btnRow, { width: "100%" }]}>
-                <Ionicons
-                  name="document-text-outline"
-                  size={16}
-                  color={colors.TEXT_ON_LIGHT}
-                  style={{ marginRight: 8 }}
-                />
-                <Text style={styles.historyEntryText}>Discoveries</Text>
-                <Ionicons
-                  name="chevron-forward"
-                  size={18}
-                  color={colors.TEXT_SUBTLE}
-                  style={{ marginLeft: "auto" }}
-                />
-              </View>
-            </CocolonButton>
-          </View>
+        <View style={{ marginTop: 16 }}>
+          <MyModelHomeActionCard
+            styles={styles}
+            title="履歴"
+            description="EchoesとDiscoveriesの履歴を確認できます。"
+            buttonLabel="履歴を確認する"
+            buttonIconName="time-outline"
+            onPress={openReactionHistory}
+            accessibilityLabel="履歴を確認する"
+          />
         </View>
       </ScrollView>
       </View>
@@ -1360,9 +1327,9 @@ export default function MyModelScreen({ route } = {}) {
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement || "bottom"}
           onTargetPress={
-            tutorialStep === 16
+            tutorialStep === 14
               ? openTutorialCreate
-              : tutorialStep === 17
+              : tutorialStep === 15
                 ? openReflections
                 : undefined
           }
@@ -1426,7 +1393,7 @@ export default function MyModelScreen({ route } = {}) {
               </View>
 
               <Text style={styles.tutorialHelperText}>
-                {isTutorialMode && tutorialStep === 16
+                {isTutorialMode && tutorialStep === 14
                   ? "この問いに答えて保存すると、チュートリアル用のReflectionが作成されます。本番データには保存されません。"
                   : "チュートリアルでは、この1つの回答だけでReflectionの作成から閲覧までの流れを体験します。本番データには保存されません。"}
               </Text>
@@ -1815,7 +1782,8 @@ function createStyles(COLORS, ui) {
       marginBottom: 16,
     },
     panelTitle: {
-      fontSize: 20,
+      fontSize: 26,
+      lineHeight: 32,
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
       letterSpacing: 0.8,
@@ -1867,6 +1835,68 @@ function createStyles(COLORS, ui) {
       lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 2,
+    },
+
+    homeActionCard: {
+      borderRadius: 26,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 22,
+      paddingTop: 18,
+      paddingBottom: 20,
+      shadowColor: "#000",
+      shadowOpacity: 0.08,
+      shadowRadius: 10,
+      shadowOffset: { width: 0, height: 4 },
+      elevation: 3,
+    },
+    homeActionCardTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    homeActionCardTitle: {
+      flex: 1,
+      fontSize: 16,
+      lineHeight: 22,
+      fontWeight: "800",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      letterSpacing: 0.2,
+    },
+    homeActionCardBadge: {
+      marginLeft: 10,
+    },
+    homeActionCardDescription: {
+      marginTop: 10,
+      fontSize: 14,
+      lineHeight: 21,
+      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+    },
+    homeActionButton: {
+      marginTop: 18,
+      borderRadius: 999,
+      paddingVertical: 16,
+      paddingHorizontal: 18,
+      shadowColor: "#000",
+      shadowOpacity: 0.16,
+      shadowRadius: 10,
+      shadowOffset: { width: 0, height: 6 },
+      elevation: 6,
+    },
+    homeActionButtonRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    homeActionButtonIcon: {
+      marginRight: 10,
+    },
+    homeActionButtonText: {
+      fontSize: 16,
+      lineHeight: 22,
+      fontWeight: "800",
+      color: "#FFFFFF",
+      letterSpacing: 0.2,
     },
 
     // Recommend

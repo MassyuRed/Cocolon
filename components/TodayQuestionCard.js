@@ -20,6 +20,8 @@ export default function TodayQuestionCard({
   loading = false,
   submitting = false,
   compact = false,
+  hideHeader = false,
+  embedded = false,
   showHistoryButton = false,
   onSubmit,
   onOpenHistory,
@@ -75,19 +77,21 @@ export default function TodayQuestionCard({
   };
 
   return (
-    <View style={[styles.card, compact && styles.cardCompact]}>
-      <View style={styles.headerRow}>
-        <View style={styles.headerLeft}>
-          <Ionicons
-            name="help-circle-outline"
-            size={18}
-            color={colors.TITLE_GOLD}
-            style={{ marginRight: 8 }}
-          />
-          <Text style={styles.badgeText}>今日の問い</Text>
+    <View style={[styles.card, compact && styles.cardCompact, embedded && styles.cardEmbedded]}>
+      {!hideHeader ? (
+        <View style={styles.headerRow}>
+          <View style={styles.headerLeft}>
+            <Ionicons
+              name="help-circle-outline"
+              size={18}
+              color={colors.TITLE_GOLD}
+              style={{ marginRight: 8 }}
+            />
+            <Text style={styles.badgeText}>今日の問い</Text>
+          </View>
+          {loading ? <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} /> : null}
         </View>
-        {loading ? <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} /> : null}
-      </View>
+      ) : null}
 
       {question?.text ? <Text style={styles.questionText}>{question.text}</Text> : null}
 
@@ -231,6 +235,17 @@ function createStyles(COLORS) {
     },
     cardCompact: {
       marginTop: 0,
+    },
+    cardEmbedded: {
+      backgroundColor: "transparent",
+      borderWidth: 0,
+      paddingHorizontal: 0,
+      paddingVertical: 0,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      shadowOffset: { width: 0, height: 0 },
+      elevation: 0,
+      borderRadius: 0,
     },
     headerRow: {
       flexDirection: "row",

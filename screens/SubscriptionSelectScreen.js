@@ -84,19 +84,6 @@ function buildManageSubscriptionUrl(productId, policy = {}) {
   return "https://play.google.com/store/account/subscriptions";
 }
 
-function formatEntitlementStatusLabel(status) {
-  const s = String(status || "").trim().toLowerCase();
-  if (s === "active") return "有効";
-  if (s === "grace_period") return "更新猶予中";
-  if (s === "account_hold") return "支払い保留中";
-  if (s === "pending") return "手続き中";
-  if (s === "paused") return "一時停止中";
-  if (s === "cancelled") return "更新停止";
-  if (s === "expired") return "期限切れ";
-  if (s === "revoked") return "取り消し";
-  return "";
-}
-
 function formatExpiresAtLabel(raw) {
   const value = String(raw || "").trim();
   if (!value) return "";
@@ -379,7 +366,6 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const {
     tier: ctxTier,
     loading: ctxLoading,
-    entitlementStatus,
     expiresAt,
     autoRenew,
     refreshTier,
@@ -483,13 +469,6 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const currentLabel = SUB_TIER_LABEL[tier] || "Freeプラン";
   const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額300円";
   const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額980円";
-  const currentPriceLabel =
-    tier === "plus"
-      ? plusPriceLabel
-      : tier === "premium"
-      ? premiumPriceLabel
-      : "";
-  const entitlementStatusLabel = formatEntitlementStatusLabel(entitlementStatus);
   const expiresAtLabel = formatExpiresAtLabel(expiresAt);
 
   const plusPurchaseSku = getPurchaseSku("plus", Platform.OS);
@@ -879,12 +858,6 @@ export default function SubscriptionSelectScreen({ navigation }) {
             ) : (
               <View style={styles.currentRow}>
                 <Text style={styles.currentPlan}>{currentLabel}</Text>
-                {currentPriceLabel ? (
-                  <Text style={styles.currentPlanSub}>{currentPriceLabel}</Text>
-                ) : null}
-                {entitlementStatusLabel ? (
-                  <Text style={styles.currentPlanMeta}>状態：{entitlementStatusLabel}</Text>
-                ) : null}
                 {expiresAtLabel ? (
                   <Text style={styles.currentPlanMeta}>
                     {autoRenew ? "次回更新予定" : "有効期限"}：{expiresAtLabel}

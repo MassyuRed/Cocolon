@@ -24,8 +24,11 @@ import MyWebScreen from "./screens/MyWebScreen";
 import MyModelScreen from "./screens/MyModelScreen";
 import MyModelCreateScreen from "./screens/MyModelCreateScreen";
 import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
+import MyModelReactionHistoryScreen from "./screens/MyModelReactionHistoryScreen";
 import FriendsScreen from "./screens/FriendsScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import SettingsAppSettingsScreen from "./screens/SettingsAppSettingsScreen";
+import SettingsOtherScreen from "./screens/SettingsOtherScreen";
 import AccountScreen from "./screens/AccountScreen"; // アカウント画面
 import SubscriptionSelectScreen from "./screens/SubscriptionSelectScreen"; // ✅ サブスク選択画面（新規）
 import FollowListScreen from "./screens/FollowListScreen"; // フォロー / フォロワー 一覧
@@ -110,9 +113,14 @@ const HIDDEN_SCREENS = new Set([]);
 const MAIN_TAB_ROUTES = new Set(["Input", "MyWeb", "MyModel", "RankingTop", "Friends", "Settings"]);
 const SELF_STRUCTURE_LATEST_STATUS_POLL_MS = 20 * 1000;
 const SELF_STRUCTURE_BANNER_AUTO_HIDE_MS = 4500;
+const SCREEN_PREFETCH_MIN_INTERVAL_MS = 2 * 60 * 1000;
+const SCREEN_PREFETCH_DEFER_MS = 1200;
+const UNREAD_PREFETCH_MIN_INTERVAL_MS = 15 * 1000;
+const FRIENDS_UNREAD_POLL_MS = 30 * 1000;
 
 // MyModel sub-screens (treated as MyModel in the tab bar)
-const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen"]);
+const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory"]);
+const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
 
 // Frame line width
 const FRAME_BORDER_WIDTH = 2;
@@ -122,7 +130,7 @@ const FRAME_BORDER_WIDTH = 2;
 // - Visible only when frameEnabled is true
 // - Fonts are copied from InputScreen.js
 // ------------------------------------------------------------
-function GlobalFrameLayout({ children, frameEnabled }) {
+function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -136,7 +144,13 @@ function GlobalFrameLayout({ children, frameEnabled }) {
   return (
     <View style={{ flex: 1, backgroundColor: colors.BG_SILVER }}>
       {frameEnabled ? (
-        <SafeAreaView edges={["top", "left", "right"]} style={{ backgroundColor: colors.BG_SILVER, paddingTop: androidExtraTop }}>
+        <SafeAreaView
+          edges={["top", "left", "right"]}
+          style={{
+            backgroundColor: colors.BG_SILVER,
+            paddingTop: androidExtraTop,
+          }}
+        >
           <View
             style={{
               alignItems: "center",
@@ -170,6 +184,23 @@ function GlobalFrameLayout({ children, frameEnabled }) {
             </Text>
           </View>
         </SafeAreaView>
+      ) : null}
+
+      {headerBottomSlot ? (
+        <View
+          style={{
+            backgroundColor: colors.BG_SILVER,
+            paddingTop: 8,
+            paddingBottom: 6,
+            paddingHorizontal: 12,
+            borderLeftColor: colors.BORDER_GOLD,
+            borderRightColor: colors.BORDER_GOLD,
+            borderLeftWidth: frameEnabled ? FRAME_BORDER_WIDTH : 0,
+            borderRightWidth: frameEnabled ? FRAME_BORDER_WIDTH : 0,
+          }}
+        >
+          {headerBottomSlot}
+        </View>
       ) : null}
 
       <View style={{ flex: 1 }}>{children}</View>
@@ -265,6 +296,13 @@ function resolveNotificationTargetRoute(remoteMessage) {
   return { name: "Friends" };
 }
 
+function buildMyWebRootNavigationParams(params) {
+  return {
+    screen: "MyWeb",
+    params: params || undefined,
+  };
+}
+
 function tryOpenRouteIfPending() {
   const target = __pendingOpenRouteFromNotification;
   if (!target?.name) return;
@@ -272,7 +310,14 @@ function tryOpenRouteIfPending() {
   if (!canNavigateToRoute(target.name)) return;
 
   try {
-    navigationRef.navigate(target.name, target.params || undefined);
+    if (target.name === "MyWeb") {
+      navigationRef.navigate(
+        "MyWeb",
+        buildMyWebRootNavigationParams(target.params)
+      );
+    } else {
+      navigationRef.navigate(target.name, target.params || undefined);
+    }
     __pendingOpenRouteFromNotification = null;
   } catch {
     // keep pending; will retry when navigation becomes ready
@@ -450,6 +495,7 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload }) {
       </MyModelStack.Screen>
 
       <MyModelStack.Screen name="MyModelReflections" component={MyModelReflectionsScreen} />
+      <MyModelStack.Screen name="MyModelReactionHistory" component={MyModelReactionHistoryScreen} />
       <MyModelStack.Screen name="EchoesHistoryList" component={EchoesHistoryListScreen} />
       <MyModelStack.Screen name="DiscoveriesHistoryList" component={DiscoveriesHistoryListScreen} />
       <MyModelStack.Screen name="EchoesHistoryDetail" component={EchoesHistoryDetailScreen} />
@@ -487,14 +533,28 @@ function RankingStackNavigator() {
   );
 }
 
-function FriendsStackNavigator({ hasUnreadFriendRequests, onOpenFriendManage, onFriendFeedDisplayed }) {
+function FriendsStackNavigator({ hasUnreadFriendRequests, hasUnreadFriendFeed, onOpenFriendManage, onFriendFeedDisplayed }) {
   return (
     <FriendsStack.Navigator initialRouteName="Friends" screenOptions={{ headerShown: false }}>
       <FriendsStack.Screen name="Friends">
         {(navProps) => (
           <FriendsScreen
             {...navProps}
+            screenMode="top"
             hasUnreadFriendRequests={hasUnreadFriendRequests}
+            hasUnreadFriendFeed={hasUnreadFriendFeed}
+            onOpenFriendManage={onOpenFriendManage}
+            onFriendFeedDisplayed={onFriendFeedDisplayed}
+          />
+        )}
+      </FriendsStack.Screen>
+      <FriendsStack.Screen name="FriendLog">
+        {(navProps) => (
+          <FriendsScreen
+            {...navProps}
+            screenMode="log"
+            hasUnreadFriendRequests={hasUnreadFriendRequests}
+            hasUnreadFriendFeed={hasUnreadFriendFeed}
             onOpenFriendManage={onOpenFriendManage}
             onFriendFeedDisplayed={onFriendFeedDisplayed}
           />
@@ -512,9 +572,19 @@ function FriendsStackNavigator({ hasUnreadFriendRequests, onOpenFriendManage, on
 }
 
 function SettingsStackNavigator() {
+  const { colors } = useTheme();
+
   return (
-    <SettingsStack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+    <SettingsStack.Navigator
+      initialRouteName="Settings"
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: colors.PANEL_BG },
+      }}
+    >
       <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="SettingsAppSettings" component={SettingsAppSettingsScreen} />
+      <SettingsStack.Screen name="SettingsOther" component={SettingsOtherScreen} />
 
       {/* Common screens (kept inside each tab stack to preserve state) */}
       <SettingsStack.Screen name="Account" component={AccountScreen} />
@@ -542,7 +612,6 @@ function MainTabs() {
 
   const { isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode } = useTutorial();
-  const insets = useSafeAreaInsets();
   const [isAppActive, setIsAppActive] = useState(
     () => (AppState?.currentState || "active") === "active"
   );
@@ -553,6 +622,7 @@ function MainTabs() {
   const selfStructureBannerHideTimerRef = useRef(null);
   const selfStructureLatestVersionRef = useRef(null);
   const selfStructureLatestInitializedRef = useRef(false);
+  const myWebUnreadRefreshSeqRef = useRef(0);
 
   // 現在表示中の route 名（hidden screens 判定に使う）
   const [activeRouteName, setActiveRouteName] = useState("Input");
@@ -570,7 +640,13 @@ function MainTabs() {
   const getTabBarActiveName = React.useCallback((name) => {
     const n = typeof name === "string" ? name : "";
     const effective =
-      n.startsWith("Ranking") ? "RankingTop" : n === "MyProfile" || MYMODEL_SUB_ROUTES.has(n) ? "MyModel" : n;
+      n.startsWith("Ranking")
+        ? "RankingTop"
+        : n === "MyProfile" || MYMODEL_SUB_ROUTES.has(n)
+          ? "MyModel"
+          : FRIENDS_SUB_ROUTES.has(n)
+            ? "Friends"
+            : n;
 
     // If the current route is not one of the main tabs (Account, SubscriptionSelect, etc),
     // TabBar treats it as "Input" active. Mirror that here.
@@ -707,6 +783,7 @@ function MainTabs() {
   // - App-level: can prefetch unread (e.g., before opening a screen)
   // - Screen-level: can update unread in real time while mounted
   const hasUnreadFriendRequests = !!getFeatureUnread("Friends", "requests");
+  const hasUnreadFriendFeed = !!getFeatureUnread("Friends", "feed");
 
 
 // ------------------------------------------------------------
@@ -728,6 +805,8 @@ const MYMODEL_API_BASE_URL = (
 // - Server computes JST day; client is best-effort (fail-soft)
 // ------------------------------------------------------------
 const __lastActivityLoginPingAtRef = React.useRef(0);
+const __lastUnreadPrefetchAtRef = React.useRef(0);
+const screenPrefetchTimerRef = React.useRef(null);
 
 const pingActivityLogin = React.useCallback(async () => {
   try {
@@ -744,6 +823,7 @@ const pingActivityLogin = React.useCallback(async () => {
     const url = `${MYMODEL_API_BASE_URL}/activity/login`;
     const res = await apiFetch(url, {
       method: "POST",
+      auth: false,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -774,6 +854,7 @@ const refreshMyModelCreateUnreadBadge = React.useCallback(async () => {
       )}`;
       const res = await apiFetch(url, {
         method: "GET",
+        auth: false,
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (!res.ok) return null;
@@ -839,14 +920,11 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
   // - This mirrors MyWebScreen's unread badge logic (best-effort).
   // ------------------------------------------------------------
   const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
-    try {
-      const query = new URLSearchParams({
-        // Keep in sync with MyWebScreen.refreshUnreadBadges(): we only need existence.
-        limit: "1",
-        include_self_structure: isPaid ? "true" : "false",
-      }).toString();
-      const json = await apiGet(`/report-reads/myweb-unread-status?${query}`);
-      const unread = json?.unread_by_type || {};
+    const refreshSeq = ++myWebUnreadRefreshSeqRef.current;
+    const isStale = () => refreshSeq !== myWebUnreadRefreshSeqRef.current;
+
+    const applyBaseUnread = (unread) => {
+      if (isStale()) return;
       try {
         clearScope("MyWeb");
       } catch {
@@ -856,9 +934,43 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         daily: !!unread?.daily,
         weekly: !!unread?.weekly,
         monthly: !!unread?.monthly,
-        selfStructure: !!unread?.selfStructure,
+        selfStructure: false,
       });
+    };
+
+    const applySelfStructureUnread = (value) => {
+      if (isStale()) return;
+      setUnreadGroup("MyWeb", {
+        selfStructure: !!value,
+      });
+    };
+
+    const baseQuery = new URLSearchParams({
+      // Keep in sync with MyWebScreen.refreshUnreadBadges(): show daily/weekly/monthly first.
+      limit: "1",
+      include_self_structure: "false",
+    }).toString();
+
+    const selfStructureQuery = new URLSearchParams({
+      limit: "1",
+      include_self_structure: "true",
+    }).toString();
+
+    const selfStructurePromise = isPaid
+      ? apiGet(`/report-reads/myweb-unread-status?${selfStructureQuery}`)
+          .then((json) => !!json?.unread_by_type?.selfStructure)
+          .catch((e) => {
+            console.warn("MainTabs: failed to refresh MyWeb self-structure unread badge", e);
+            return null;
+          })
+      : Promise.resolve(false);
+
+    try {
+      const json = await apiGet(`/report-reads/myweb-unread-status?${baseQuery}`);
+      const unread = json?.unread_by_type || {};
+      applyBaseUnread(unread);
     } catch (e) {
+      if (isStale()) return;
       console.warn("MainTabs: failed to refresh MyWeb unread badges", e);
       try {
         clearScope("MyWeb");
@@ -871,29 +983,44 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         monthly: false,
         selfStructure: false,
       });
+      return;
     }
+
+    const selfStructureUnread = await selfStructurePromise;
+    if (selfStructureUnread == null) return;
+    applySelfStructureUnread(selfStructureUnread);
   }, [isPaid, setUnreadGroup, clearScope]);
 
-  const refreshFriendsUnreadBadge = React.useCallback(async () => {
+  const refreshFriendsUnreadState = React.useCallback(async () => {
     try {
       const json = await apiGet("/friends/unread-status");
-      setUnread("Friends", "feed", !!json?.feed_unread);
+      const nextFeed = !!json?.feed_unread;
+      const nextRequests = !!json?.requests_unread;
+      setUnread("Friends", "feed", nextFeed);
+      setUnread("Friends", "requests", nextRequests);
+      return {
+        feed: nextFeed,
+        requests: nextRequests,
+      };
     } catch (e) {
-      console.warn("MainTabs: failed to refresh Friends unread badge", e);
+      console.warn("MainTabs: failed to refresh Friends unread state", e);
       setUnread("Friends", "feed", false);
+      setUnread("Friends", "requests", false);
+      return null;
     }
-  }, []);
+  }, [setUnread]);
+
+
+  const refreshFriendsUnreadBadge = React.useCallback(async () => {
+    const next = await refreshFriendsUnreadState();
+    return !!next?.feed;
+  }, [refreshFriendsUnreadState]);
 
 
   const refreshFriendRequestsUnreadBadge = React.useCallback(async () => {
-    try {
-      const json = await apiGet("/friends/unread-status");
-      setUnread("Friends", "requests", !!json?.requests_unread);
-    } catch (e) {
-      console.warn("MainTabs: failed to refresh Friend request unread badge", e);
-      setUnread("Friends", "requests", false);
-    }
-  }, []);
+    const next = await refreshFriendsUnreadState();
+    return !!next?.requests;
+  }, [refreshFriendsUnreadState]);
 
   const markFriendRequestsRead = React.useCallback(async () => {
     try {
@@ -1045,17 +1172,22 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
 
       // 1) Trending (top questions)
       try {
-        const fresh = getPrefetchEntryFresh?.("MyModel", "trending", PREFETCH_MAX_AGE_MS);
+        const trendingMode = "overall";
+        const trendingCacheKey = `trending:${trendingMode}`;
+        const fresh = getPrefetchEntryFresh?.("MyModel", trendingCacheKey, PREFETCH_MAX_AGE_MS);
         const isFresh =
           !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
 
         if (!isFresh) {
-          const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/trending?limit=20`;
-          const res = await apiFetch(url, { method: "GET", headers });
+          const params = new URLSearchParams();
+          params.append("limit", "20");
+          params.append("mode", trendingMode);
+          const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/trending?${params.toString()}`;
+          const res = await apiFetch(url, { method: "GET", auth: false, headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
             const items = Array.isArray(json?.items) ? json.items : [];
-            setPrefetch("MyModel", "trending", { userId, items });
+            setPrefetch("MyModel", trendingCacheKey, { userId, items });
           }
         }
       } catch {
@@ -1070,7 +1202,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
 
         if (!isFresh) {
           const url = `${MYMODEL_API_BASE_URL}/mymodel/recommend/users?limit=20`;
-          const res = await apiFetch(url, { method: "GET", headers });
+          const res = await apiFetch(url, { method: "GET", auth: false, headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
             const users = Array.isArray(json?.users)
@@ -1103,7 +1235,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
           params.append("sort", "newest");
 
           const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/list?${params.toString()}`;
-          const res = await apiFetch(url, { method: "GET", headers });
+          const res = await apiFetch(url, { method: "GET", auth: false, headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
             const items = Array.isArray(json?.items) ? json.items : [];
@@ -1127,13 +1259,13 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     }
   }, [setPrefetch, getPrefetchEntryFresh]);
 
-  const runAllScreenPrefetch = React.useCallback(() => {
+  const runAllScreenPrefetch = React.useCallback(async () => {
     try {
       const now = Date.now();
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
 
-      // Throttle to avoid repeated heavy prefetch on rapid foreground/background flaps
-      if (now - last < 30 * 1000) return Promise.resolve();
+      // Keep screen prefetch aligned with cache freshness so resume/focus spikes do not flood the API.
+      if (now - last < SCREEN_PREFETCH_MIN_INTERVAL_MS) return;
 
       __lastScreenPrefetchAtRef.current = now;
 
@@ -1143,23 +1275,27 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         prefetchMyModelScreenData,
       ];
 
-      return Promise.all(
-        tasks.map((fn) =>
-          Promise.resolve()
-            .then(() => fn())
-            .catch(() => null)
-        )
-      ).then(() => null);
+      for (const fn of tasks) {
+        try {
+          // Run sequentially to avoid burst-loading many endpoints at once.
+          await fn();
+        } catch {
+          // noop
+        }
+      }
     } catch {
-      return Promise.resolve();
+      // noop
     }
   }, [prefetchFriendsFeed, prefetchFriendsManageData, prefetchMyModelScreenData]);
 
   // ------------------------------------------------------------
   // Unread badge: prefetch template
-  // - Add new prefetch tasks by appending one line to `tasks`.
+  // - Keep lightweight badge refresh immediate.
+  // - Defer heavier screen prefetch slightly so app resume does not spike all APIs at once.
   // ------------------------------------------------------------
-  const runAllUnreadPrefetch = React.useCallback(() => {
+  const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
+    const includeScreenPrefetch = opts?.includeScreenPrefetch !== false;
+
     // best-effort: never crash the app due to badge refresh
     try {
       pingActivityLogin();
@@ -1167,13 +1303,22 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
       // noop
     }
 
+    try {
+      const now = Date.now();
+      const last = Number(__lastUnreadPrefetchAtRef.current || 0) || 0;
+      if (now - last < UNREAD_PREFETCH_MIN_INTERVAL_MS) {
+        return;
+      }
+      __lastUnreadPrefetchAtRef.current = now;
+    } catch {
+      // noop
+    }
+
     const tasks = [
-      refreshFriendsUnreadBadge,
-      refreshFriendRequestsUnreadBadge,
+      refreshFriendsUnreadState,
       refreshMyModelCreateUnreadBadge,
       refreshMyModelReflectionsUnreadBadge,
       refreshMyWebReportsUnreadBadge,
-      runAllScreenPrefetch,
     ];
 
     Promise.all(
@@ -1185,10 +1330,27 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     ).catch(() => {
       // noop
     });
+
+    if (includeScreenPrefetch) {
+      try {
+        if (screenPrefetchTimerRef.current) {
+          clearTimeout(screenPrefetchTimerRef.current);
+        }
+      } catch {
+        // noop
+      }
+      screenPrefetchTimerRef.current = setTimeout(() => {
+        Promise.resolve()
+          .then(() => runAllScreenPrefetch())
+          .catch(() => null)
+          .finally(() => {
+            screenPrefetchTimerRef.current = null;
+          });
+      }, SCREEN_PREFETCH_DEFER_MS);
+    }
   }, [
     pingActivityLogin,
-    refreshFriendsUnreadBadge,
-    refreshFriendRequestsUnreadBadge,
+    refreshFriendsUnreadState,
     refreshMyModelCreateUnreadBadge,
     refreshMyModelReflectionsUnreadBadge,
     refreshMyWebReportsUnreadBadge,
@@ -1232,11 +1394,14 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     hideSelfStructureBanner();
     try {
       if (navigationRef.isReady()) {
-        navigationRef.navigate("MyWeb", {
-          openSelfReportLatest: true,
-          openSelfReportLatestMode: reportMode,
-          openSelfReportLatestAt: Date.now(),
-        });
+        navigationRef.navigate(
+          "MyWeb",
+          buildMyWebRootNavigationParams({
+            openSelfReportLatest: true,
+            openSelfReportLatestMode: reportMode,
+            openSelfReportLatestAt: Date.now(),
+          })
+        );
       }
     } catch {
       // noop
@@ -1248,6 +1413,18 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
       clearSelfStructureBannerTimer();
     };
   }, [clearSelfStructureBannerTimer]);
+
+  useEffect(() => {
+    return () => {
+      try {
+        if (screenPrefetchTimerRef.current) {
+          clearTimeout(screenPrefetchTimerRef.current);
+        }
+      } catch {
+        // noop
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handler = (state) => {
@@ -1363,14 +1540,14 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     const tick = async () => {
       if (cancelled) return;
       try {
-        await refreshFriendRequestsUnreadBadge();
+        await refreshFriendsUnreadState();
       } catch {
         // noop
       }
     };
 
     tick();
-    intervalId = setInterval(tick, 30 * 1000);
+    intervalId = setInterval(tick, FRIENDS_UNREAD_POLL_MS);
 
     return () => {
       cancelled = true;
@@ -1380,7 +1557,7 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         // noop
       }
     };
-  }, [refreshFriendRequestsUnreadBadge]);
+  }, [refreshFriendsUnreadState]);
 
 
   // Friends を開いた時点では既読を進めず、まず最新状態だけ確認する。
@@ -1389,17 +1566,56 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     if (activeRouteName !== "Friends") return;
 
     (async () => {
-      await refreshFriendsUnreadBadge();
-      await refreshFriendRequestsUnreadBadge();
+      await refreshFriendsUnreadState();
     })();
-  }, [
-    activeRouteName,
-    refreshFriendsUnreadBadge,
-    refreshFriendRequestsUnreadBadge,
-  ]);
+  }, [activeRouteName, refreshFriendsUnreadState]);
+
+  const selfStructureBannerHud = selfStructureBanner.visible ? (
+    <TouchableOpacity
+      activeOpacity={0.92}
+      onPress={openSelfStructureLatestFromBanner}
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: colors.BORDER_GOLD,
+        backgroundColor: colors.PANEL_BG,
+        borderRadius: 14,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+        shadowColor: "#000000",
+        shadowOpacity: 0.12,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 4,
+      }}
+    >
+      <Ionicons
+        name="notifications-outline"
+        size={18}
+        color={colors.TITLE_GOLD}
+        style={{ marginRight: 10 }}
+      />
+      <View style={{ flex: 1 }}>
+        <Text
+          style={{
+            color: colors.TEXT_ON_LIGHT,
+            fontSize: 13,
+            fontWeight: "700",
+          }}
+        >
+          自己構造分析レポートが更新されました
+        </Text>
+      </View>
+      <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+    </TouchableOpacity>
+  ) : null;
 
   return (
-    <GlobalFrameLayout frameEnabled={frameEnabled}>
+    <GlobalFrameLayout
+      frameEnabled={frameEnabled}
+      headerBottomSlot={selfStructureBannerHud}
+    >
     <Tab.Navigator
       backBehavior="history"
       initialRouteName="Input"
@@ -1613,15 +1829,16 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
           <FriendsStackNavigator
             {...tabProps}
             hasUnreadFriendRequests={hasUnreadFriendRequests}
+            hasUnreadFriendFeed={hasUnreadFriendFeed}
             onOpenFriendManage={async () => {
               // UX: モーダルを開いた瞬間に赤●を消し、裏で既読化 → 再チェック
               setUnread("Friends", "requests", false);
               await markFriendRequestsRead();
-              await refreshFriendRequestsUnreadBadge();
+              await refreshFriendsUnreadState();
             }}
             onFriendFeedDisplayed={async (lastSeenCreatedAt) => {
               await markFriendsFeedRead(lastSeenCreatedAt || null);
-              await refreshFriendsUnreadBadge();
+              await refreshFriendsUnreadState();
             }}
           />
         )}
@@ -1634,57 +1851,6 @@ const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
         })}
       />
 </Tab.Navigator>
-      {selfStructureBanner.visible ? (
-        <View
-          pointerEvents="box-none"
-          style={{
-            position: "absolute",
-            top: frameEnabled ? insets.top + 58 : insets.top + 12,
-            left: 12,
-            right: 12,
-            zIndex: 30,
-          }}
-        >
-          <TouchableOpacity
-            activeOpacity={0.92}
-            onPress={openSelfStructureLatestFromBanner}
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              borderWidth: 1,
-              borderColor: colors.BORDER_GOLD,
-              backgroundColor: colors.PANEL_BG,
-              borderRadius: 14,
-              paddingHorizontal: 14,
-              paddingVertical: 12,
-              shadowColor: "#000000",
-              shadowOpacity: 0.12,
-              shadowRadius: 12,
-              shadowOffset: { width: 0, height: 4 },
-              elevation: 4,
-            }}
-          >
-            <Ionicons
-              name="notifications-outline"
-              size={18}
-              color={colors.TITLE_GOLD}
-              style={{ marginRight: 10 }}
-            />
-            <View style={{ flex: 1 }}>
-              <Text
-                style={{
-                  color: colors.TEXT_ON_LIGHT,
-                  fontSize: 13,
-                  fontWeight: "700",
-                }}
-              >
-                自己構造分析レポートが更新されました
-              </Text>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
-          </TouchableOpacity>
-        </View>
-      ) : null}
     </GlobalFrameLayout>
   );
 }

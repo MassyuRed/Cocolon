@@ -14,6 +14,7 @@ import {
   Share,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import CocolonBackButton from "../components/CocolonBackButton";
 import { apiGet, apiPost } from "../lib/apiClient";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
@@ -362,24 +363,20 @@ export default function SelfStructureReportHistoryScreen({
     <SafeAreaView style={[styles.container, themed.container]}>
       {/* ヘッダー */}
       <View style={[styles.header, themed.header]}>
-        <TouchableOpacity
+        <CocolonBackButton
           onPress={onBack}
           style={styles.backBtn}
-          activeOpacity={0.8}
-        >
-          <Ionicons
-            name="chevron-back-outline"
-            size={20}
-            color={isDark ? colors.TEXT_ON_LIGHT : "#374151"}
-          />
-          <Text style={[styles.backText, themed.backText]}>MyProfile</Text>
-        </TouchableOpacity>
+          accessibilityLabel="自己構造レポート履歴から戻る"
+        />
 
-        <Text style={[styles.headerTitle, themed.headerTitle]}>
+        <Text
+          style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}
+          numberOfLines={1}
+        >
           {headerLabel}
         </Text>
 
-        <View style={{ width: 86 }} />
+        <View style={styles.headerSide} />
       </View>
 
       {/* 操作 */}
@@ -507,9 +504,19 @@ function createStyles(COLORS, ui) {
     alignItems: "center",
     justifyContent: "space-between",
   },
-  backBtn: { flexDirection: "row", alignItems: "center", width: 86 },
+  backBtn: { width: 70, alignItems: "flex-start", justifyContent: "center" },
   backText: { marginLeft: 2, color: "#374151", fontSize: 13, fontWeight: "600" },
-  headerTitle: { fontSize: 14, fontWeight: "800", color: "#111827" },
+  headerSide: { width: 70 },
+  headerTitle: {
+    flex: 1,
+    marginHorizontal: 10,
+    fontSize: 26,
+    lineHeight: 32,
+    fontWeight: "800",
+    letterSpacing: 0.6,
+    color: "#111827",
+    textAlign: "center",
+  },
 
   topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
   historyRetentionText: {

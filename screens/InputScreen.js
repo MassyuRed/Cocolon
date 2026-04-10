@@ -227,6 +227,9 @@ async function loadInputDraft(userId) {
 //   （ローカル API に戻したい場合はここを書き換える）
 
 const GLOBAL_SUMMARY_PATH = "/global_summary";
+const GLOBAL_SUMMARY_PASSIVE_QUERY = `${GLOBAL_SUMMARY_PATH}?mode=ready_first`;
+const GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS = 8000;
+const GLOBAL_SUMMARY_MIN_REFRESH_INTERVAL_MS = 60 * 1000;
 
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
@@ -276,7 +279,7 @@ const CATEGORY_OPTIONS = Object.freeze([
 
 const INPUT_TUTORIAL_STEP_START = 1;
 const INPUT_TUTORIAL_STEP_END = 6;
-const TUTORIAL_TOTAL_STEPS = 23;
+const TUTORIAL_TOTAL_STEPS = 21;
 
 const STARTUP_POPUP_KIND = Object.freeze({
   NOTICE: "notice",
@@ -408,16 +411,47 @@ useEffect(() => {
 
 const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
 const appStateRef = useRef(AppState.currentState);
+const globalSummaryLastFetchedAtRef = useRef(0);
+const globalSummaryInFlightRef = useRef(null);
 
-const fetchGlobalSummary = useCallback(async () => {
+const fetchGlobalSummary = useCallback(async (opts = {}) => {
+  const force = opts?.force === true;
+
   try {
-    const json = await apiGet(GLOBAL_SUMMARY_PATH, { auth: false });
-    const nextEmotionUsers = Number(json?.emotion_users);
-    if (Number.isFinite(nextEmotionUsers)) {
-      setGlobalEmotionUsers(nextEmotionUsers);
+    const now = Date.now();
+    const lastFetchedAt = Number(globalSummaryLastFetchedAtRef.current || 0) || 0;
+    if (!force && now - lastFetchedAt < GLOBAL_SUMMARY_MIN_REFRESH_INTERVAL_MS) {
+      return globalSummaryInFlightRef.current || null;
     }
+
+    if (globalSummaryInFlightRef.current) {
+      return globalSummaryInFlightRef.current;
+    }
+
+    const request = (async () => {
+      try {
+        const json = await apiGet(GLOBAL_SUMMARY_PASSIVE_QUERY, {
+          auth: false,
+          timeoutMs: GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS,
+        });
+        const nextEmotionUsers = Number(json?.emotion_users);
+        if (Number.isFinite(nextEmotionUsers)) {
+          setGlobalEmotionUsers(nextEmotionUsers);
+        }
+        globalSummaryLastFetchedAtRef.current = Date.now();
+        return json;
+      } catch {
+        // keep previous value
+        return null;
+      } finally {
+        globalSummaryInFlightRef.current = null;
+      }
+    })();
+
+    globalSummaryInFlightRef.current = request;
+    return request;
   } catch {
-    // keep previous value
+    return null;
   }
 }, []);
 
@@ -431,6 +465,7 @@ const [homeStreakDays, setHomeStreakDays] = useState(null);
 const [todayQuestionBundle, setTodayQuestionBundle] = useState(null);
 const [todayQuestionLoading, setTodayQuestionLoading] = useState(false);
 const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
+const [isTodayQuestionExpanded, setIsTodayQuestionExpanded] = useState(false);
 const dismissedTodayQuestionDayRef = useRef(null);
 const todayQuestionRequestIdRef = useRef(0);
 const startupCycleIdRef = useRef(0);
@@ -449,6 +484,10 @@ const clearTodayQuestionUi = useCallback(() => {
   setTodayQuestionBundle(null);
   setTodayQuestionLoading(false);
 }, []);
+
+useEffect(() => {
+  setIsTodayQuestionExpanded(false);
+}, [todayQuestionBundle?.service_day_key, todayQuestionBundle?.question?.question_id]);
 
 const [noticeFeatureEnabled, setNoticeFeatureEnabled] = useState(true);
 const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
@@ -476,6 +515,8 @@ const isTutorialStartupPopupVisible =
   activeStartupPopup?.kind === STARTUP_POPUP_KIND.TUTORIAL;
 const isTodayQuestionStartupPopupVisible =
   activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION;
+const isTodayQuestionAnswered = todayQuestionBundle?.answer_status === "answered";
+const todayQuestionStatusLabel = isTodayQuestionAnswered ? "回答済み" : "未回答";
 
 const closeStartupPopupWindow = useCallback(() => {
   startupWindowClosedRef.current = true;
@@ -1786,7 +1827,7 @@ const { height: windowHeight } = useWindowDimensions();
       Keyboard.dismiss();
 
       void refreshHomeCounts();
-      void fetchGlobalSummary();
+      void fetchGlobalSummary({ force: true });
 
       if (inputFeedbackText) {
         openInputFeedbackModal({
@@ -2036,16 +2077,55 @@ ${String(error?.message || error)}`
               </View>
 
               {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
-                <View style={{ marginBottom: 14 }}>
-                  <TodayQuestionCard
-                    question={todayQuestionBundle?.question}
-                    answerSummary={todayQuestionBundle?.answer_summary || null}
-                    loading={todayQuestionLoading}
-                    submitting={todayQuestionSubmitting}
-                    showHistoryButton
-                    onSubmit={handleSubmitTodayQuestion}
-                    onOpenHistory={handleOpenTodayQuestionHistory}
-                  />
+                <View style={styles.todayQuestionAccordionCard}>
+                  <CocolonPressable
+                    style={styles.todayQuestionAccordionHeader}
+                    onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
+                    accessibilityState={{ expanded: isTodayQuestionExpanded }}
+                  >
+                    <Text style={styles.todayQuestionAccordionTitle}>今日の問い</Text>
+                    <View style={styles.todayQuestionAccordionHeaderRight}>
+                      <Text
+                        style={[
+                          styles.todayQuestionAccordionStatus,
+                          isTodayQuestionAnswered && styles.todayQuestionAccordionStatusAnswered,
+                        ]}
+                      >
+                        {todayQuestionStatusLabel}
+                      </Text>
+                      {todayQuestionLoading ? (
+                        <ActivityIndicator
+                          size="small"
+                          color={colors.TEXT_SUBTLE}
+                          style={styles.todayQuestionAccordionSpinner}
+                        />
+                      ) : null}
+                      <Ionicons
+                        name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
+                        size={18}
+                        color={colors.TEXT_ON_LIGHT}
+                      />
+                    </View>
+                  </CocolonPressable>
+
+                  {isTodayQuestionExpanded ? (
+                    <View style={styles.todayQuestionAccordionContent}>
+                      <TodayQuestionCard
+                        question={todayQuestionBundle?.question}
+                        answerSummary={todayQuestionBundle?.answer_summary || null}
+                        loading={todayQuestionLoading}
+                        submitting={todayQuestionSubmitting}
+                        compact
+                        hideHeader
+                        embedded
+                        showHistoryButton
+                        onSubmit={handleSubmitTodayQuestion}
+                        onOpenHistory={handleOpenTodayQuestionHistory}
+                      />
+                    </View>
+                  ) : null}
                 </View>
               ) : null}
 
@@ -2853,7 +2933,8 @@ function createStyles(COLORS, ui) {
       marginBottom: 16,
     },
     panelTitle: {
-      fontSize: 20,
+      fontSize: 26,
+      lineHeight: 32,
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
       letterSpacing: 0.8,
@@ -3012,6 +3093,51 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
+    },
+    todayQuestionAccordionCard: {
+      marginBottom: 14,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      overflow: "hidden",
+    },
+    todayQuestionAccordionHeader: {
+      minHeight: 46,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    todayQuestionAccordionTitle: {
+      fontSize: 12,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    todayQuestionAccordionHeaderRight: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 12,
+    },
+    todayQuestionAccordionStatus: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginRight: 8,
+    },
+    todayQuestionAccordionStatusAnswered: {
+      color: COLORS.TITLE_GOLD,
+    },
+    todayQuestionAccordionSpinner: {
+      marginRight: 6,
+    },
+    todayQuestionAccordionContent: {
+      borderTopWidth: 1,
+      borderTopColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 12,
+      paddingTop: 12,
+      paddingBottom: 12,
     },
 
     /** セクション共通 */

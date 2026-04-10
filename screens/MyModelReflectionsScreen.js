@@ -23,7 +23,6 @@ import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { apiGet, apiFetch } from "../lib/apiClient";
 import { useUnread } from "../UnreadContext";
-import { useSubscription } from "../SubscriptionContext";
 import { useTutorial } from "../TutorialContext";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
@@ -57,7 +56,6 @@ const API_BASE = String(
 // New Q&A endpoints (MashOS)
 const QNA_LIST_ENDPOINT = `${API_BASE}/mymodel/qna/list`;
 const QNA_DETAIL_ENDPOINT = `${API_BASE}/mymodel/qna/detail`;
-const QNA_VIEW_ENDPOINT = `${API_BASE}/mymodel/qna/view`;
 const QNA_UNREAD_STATUS_ENDPOINT = `${API_BASE}/mymodel/qna/unread-status`;
 // Echoes / Discoveries (MashOS)
 const QNA_ECHOES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/submit`;
@@ -112,10 +110,10 @@ const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
   },
 ]);
 
-const TUTORIAL_TOTAL_STEPS = 23;
-const STEP_REFLECTIONS_SELF_VIEW = 18;
-const STEP_REFLECTIONS_SWITCH_AND_REACT = 19;
-const STEP_FRIENDS_START = 20;
+const TUTORIAL_TOTAL_STEPS = 21;
+const STEP_REFLECTIONS_SELF_VIEW = 16;
+const STEP_REFLECTIONS_SWITCH_AND_REACT = 17;
+const STEP_FRIENDS_START = 18;
 
 function buildErrorMessage(err) {
   if (!err) return "エラーが発生しました。";
@@ -206,7 +204,6 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
   }, [scrollToFocusedInput]);
 
   const { setUnread, getPrefetchEntry, getPrefetchEntryFresh, setPrefetch } = useUnread();
-  const { myModelRangeLabel } = useSubscription();
   const {
     isTutorialMode,
     tutorialStep,
@@ -269,7 +266,7 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
   const [listLoading, setListLoading] = useState(false);
   const [listError, setListError] = useState("");
   const [qnaItems, setQnaItems] = useState([]);
-  const [listMeta, setListMeta] = useState(null);
+  const [, setListMeta] = useState(null);
 
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailLoadingId, setDetailLoadingId] = useState(null);
@@ -818,10 +815,12 @@ useEffect(() => {
   };
 
   async function getAuthContext() {
-    let userId = null;
+    let userId = viewerUserId ? String(viewerUserId) : null;
     let accessToken = null;
     try {
-      userId = await getCurrentUserId();
+      if (!userId) {
+        userId = await getCurrentUserId();
+      }
     } catch (e) {
       console.warn("MyModelScreen: failed to resolve userId", e);
     }
@@ -1215,11 +1214,14 @@ useEffect(() => {
       if (!item?.q_instance_id) return;
       if (detailLoading) return;
       const resetSeq = resetSeqRef.current;
-      setDetailLoadingId(String(item.q_instance_id));
+      const qInstanceId = String(item.q_instance_id);
+      const shouldRefreshUnread = !!item?.is_new;
+      const shouldIncludeMyDiscovery = !!activeViewedUserId;
+
+      setDetailLoadingId(qInstanceId);
       setDetailLoading(true);
       try {
         if (isTutorialMode) {
-          const qidNow = String(item.q_instance_id);
           const nextViews = (Number(item?.views ?? 0) || 0) + 1;
           const nextSelected = {
             ...item,
@@ -1233,7 +1235,7 @@ useEffect(() => {
 
           setQnaItems((prev) =>
             (prev || []).map((x) => {
-              if (String(x?.q_instance_id || "") !== qidNow) return x;
+              if (String(x?.q_instance_id || "") !== qInstanceId) return x;
               return {
                 ...x,
                 views: nextViews,
@@ -1242,7 +1244,7 @@ useEffect(() => {
             })
           );
 
-          updateTutorialReflection(qidNow, (prev) => ({
+          updateTutorialReflection(qInstanceId, (prev) => ({
             ...prev,
             views: nextViews,
             is_new: false,
@@ -1250,14 +1252,18 @@ useEffect(() => {
           return;
         }
 
-        const { userId, accessToken } = await getAuthContext();
+        const { accessToken } = await getAuthContext();
         if (!accessToken) {
           Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
           return;
         }
 
         const params = new URLSearchParams();
-        params.append("q_instance_id", String(item.q_instance_id));
+        params.append("q_instance_id", qInstanceId);
+        params.append("mark_viewed", "true");
+        if (shouldIncludeMyDiscovery) {
+          params.append("include_my_discovery_latest", "true");
+        }
         const url = `${QNA_DETAIL_ENDPOINT}?${params.toString()}`;
 
         const res = await apiFetch(url, {
@@ -1273,54 +1279,37 @@ useEffect(() => {
           throw new Error(String(msg));
         }
 
-        // If the user re-tapped the tab to reset while this request was in-flight, ignore the result.
         if (resetSeq !== resetSeqRef.current) return;
-        setSelected(json);
+
+        const nextSelected = {
+          ...(json && typeof json === "object" ? json : {}),
+          my_discovery_latest_loaded:
+            shouldIncludeMyDiscovery || !!json?.my_discovery_latest_loaded,
+        };
+
+        setSelected(nextSelected);
         setPickerVisible(false);
 
-        // view event (best-effort)
-        try {
-          const res2 = await apiFetch(QNA_VIEW_ENDPOINT, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify({
-              q_instance_id: String(item.q_instance_id),
-              q_key: String(item.q_key || ""),
-            }),
-          });
-          const j2 = await res2.json().catch(() => null);
-          if (res2.ok && j2) {
-            // Update detail counts
-            setSelected((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    views: j2.views ?? prev.views,
-                    resonances: j2.resonances ?? prev.resonances,
-                    is_new: false,
-                  }
-                : prev
-            );
+        setQnaItems((prev) =>
+          (prev || []).map((x) => {
+            if (String(x?.q_instance_id || "") !== qInstanceId) return x;
+            return {
+              ...x,
+              views: nextSelected?.views ?? x.views,
+              resonances: nextSelected?.resonances ?? x.resonances,
+              discoveries:
+                nextSelected?.discoveries ??
+                nextSelected?.discoveries_count ??
+                nextSelected?.discovery_count ??
+                nextSelected?.discoveryCount ??
+                x.discoveries,
+              is_new: false,
+            };
+          })
+        );
 
-            // Update list item (New badge off + views)
-            setQnaItems((prev) =>
-              (prev || []).map((x) => {
-                if (x?.q_instance_id !== item.q_instance_id) return x;
-                return {
-                  ...x,
-                  views: j2.views ?? x.views,
-                  resonances: j2.resonances ?? x.resonances,
-                  is_new: false,
-                };
-              })
-            );
-            void refreshHomeReflectionsUnread(accessToken);
-          }
-        } catch {
-          // ignore
+        if (shouldRefreshUnread) {
+          Promise.resolve(refreshHomeReflectionsUnread()).catch(() => null);
         }
       } catch (e) {
         Alert.alert("読み込みに失敗しました", buildErrorMessage(e));
@@ -1329,7 +1318,13 @@ useEffect(() => {
         setDetailLoadingId(null);
       }
     },
-    [detailLoading, isTutorialMode, refreshHomeReflectionsUnread, updateTutorialReflection]
+    [
+      activeViewedUserId,
+      detailLoading,
+      isTutorialMode,
+      refreshHomeReflectionsUnread,
+      updateTutorialReflection,
+    ]
   );
 
   // ---------------------------------------------------------
@@ -1339,6 +1334,10 @@ useEffect(() => {
   useEffect(() => {
     const qid = selected?.q_instance_id ? String(selected.q_instance_id) : "";
     const qk = selected?.q_key ? String(selected.q_key) : "";
+    const hasEmbeddedMyDiscovery =
+      !!selected &&
+      Object.prototype.hasOwnProperty.call(selected, "my_discovery_latest_loaded") &&
+      !!selected?.my_discovery_latest_loaded;
 
     // Clear cache on selection change
     setMyDiscoveryLatest(null);
@@ -1357,6 +1356,11 @@ useEffect(() => {
       !activeViewedUserId ||
       (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
     if (isSelf) return;
+
+    if (hasEmbeddedMyDiscovery) {
+      setMyDiscoveryLatest(selected?.my_discovery_latest || null);
+      return;
+    }
 
     let cancelled = false;
     (async () => {
@@ -1415,6 +1419,8 @@ useEffect(() => {
     selected?.q_instance_id,
     selected?.q_key,
     selected?.tutorial_my_discovery,
+    selected?.my_discovery_latest,
+    selected?.my_discovery_latest_loaded,
     activeViewedUserId,
     viewerUserId,
   ]);
@@ -2194,19 +2200,6 @@ useEffect(() => {
 
   const isDark = themeName === "dark";
 
-  const effectiveTierLabel = useMemo(() => {
-    if (isTutorialMode) return "";
-
-    // SubscriptionContext を基準に表示（画面ごとに tier を持たない）
-    if (myModelRangeLabel) return myModelRangeLabel;
-
-    // fail-soft（provider未mount / tier未確定 など）：従来の meta をフォールバックに使う
-    const eff = listMeta?.effective_tier;
-    if (eff === "standard") return "Standard";
-    if (eff === "light") return "Light";
-    return eff ? String(eff) : "";
-  }, [isTutorialMode, myModelRangeLabel, listMeta]);
-
   const isSelfTarget =
     !activeViewedUserId ||
     (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
@@ -2289,9 +2282,6 @@ useEffect(() => {
                 <Text style={styles.goldButtonText}>Reflectionを表示</Text>
               </View>
             </CocolonButton>
-            {effectiveTierLabel ? (
-              <Text style={styles.tierHintText}>表示範囲: {effectiveTierLabel}</Text>
-            ) : null}
           </View>
 
           {/* Selected detail */}

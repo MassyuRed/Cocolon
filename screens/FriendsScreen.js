@@ -35,11 +35,11 @@ import { apiFetch } from "../lib/apiClient";
 // 🔧 ここを変えると Friend 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
 
-const TUTORIAL_TOTAL_STEPS = 23;
-const STEP_FRIENDS_OVERVIEW = 20;
-const STEP_FRIENDS_NOTIFICATION = 21;
-const STEP_FRIENDS_LOG = 22;
-const STEP_FRIENDS_COMPLETE = 23;
+const TUTORIAL_TOTAL_STEPS = 21;
+const STEP_FRIENDS_OVERVIEW = 18;
+const STEP_FRIENDS_NOTIFICATION = 19;
+const STEP_FRIENDS_LOG = 20;
+const STEP_FRIENDS_COMPLETE = 21;
 const DEFAULT_TUTORIAL_FRIEND_NAME = "User";
 
 // ---- API base ----

@@ -1,9 +1,17 @@
-function isTopLevelTitleStyle(name) {
+function isExactTokenScreenTitleStyle(name) {
   return (
     name === "paneltitle" ||
     name === "headertitle" ||
     name === "screentitle" ||
     name === "pagetitle" ||
+    name === "hometitle" ||
+    name === "subheadertitle"
+  );
+}
+
+function isTopLevelTitleStyle(name) {
+  return (
+    isExactTokenScreenTitleStyle(name) ||
     name === "modaltitle" ||
     name === "dialogtitle" ||
     name === "sheettitle"
@@ -26,6 +34,18 @@ function pickTargetFontSize(styleName, originalSize, ui) {
   const name = String(styleName || "").trim().toLowerCase();
 
   if (shouldSkipStyle(name, originalSize)) return originalSize;
+
+  if (
+    /^(largecardtitle|mediumcardtitle|descriptiontext|largecarddescription|mediumcarddescription)$/.test(
+      name
+    )
+  ) {
+    return originalSize;
+  }
+
+  if (isExactTokenScreenTitleStyle(name)) {
+    return font.title ?? 22;
+  }
 
   if (isTopLevelTitleStyle(name)) {
     return Math.max(originalSize, font.title ?? 22);

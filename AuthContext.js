@@ -396,12 +396,14 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signOut = async () => {
+  const signOut = async (options = {}) => {
+    const { skipPushTokenClear = false, rethrow = false } = options || {};
+
     setAuthError("");
     setAuthLoading(true);
     try {
       const currentUserId = session?.user?.id;
-      if (currentUserId) {
+      if (currentUserId && !skipPushTokenClear) {
         try {
           const { error: clearPushError } = await supabase
             .from("profiles")
@@ -425,6 +427,7 @@ export function AuthProvider({ children }) {
       setRecoveryMode(false);
     } catch (e) {
       setAuthError(e.message ?? String(e));
+      if (rethrow) throw e;
     } finally {
       setAuthLoading(false);
     }

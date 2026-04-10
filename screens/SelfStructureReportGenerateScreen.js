@@ -20,6 +20,7 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, apiGet } from "../lib/apiClient";
 import SelfStructureDeepRenderer from "../components/selfStructure/SelfStructureDeepRenderer";
+import CocolonBackButton from "../components/CocolonBackButton";
 
 // MyProfile（現在の自己構造）: latest viewer
 const API_BASE =
@@ -304,8 +305,7 @@ const [loading, setLoading] = useState(true);
       container: { backgroundColor: colors.BG_SILVER },
 
       headerRow: { backgroundColor: colors.BG_SILVER },
-      backIcon: { color: colors.TEXT_ON_LIGHT },
-      backText: { color: colors.TEXT_ON_LIGHT },
+      headerTitle: { color: colors.TEXT_ON_LIGHT },
 
       smallBtn: {
         borderColor: colors.CARD_BORDER,
@@ -561,14 +561,11 @@ const run = useCallback(async ({ force = false } = {}) => {
     >
       {/* ヘッダー */}
       <View style={[styles.headerRow, themed.headerRow]}>
-        <TouchableOpacity
+        <CocolonBackButton
           onPress={handleBack}
           style={styles.backBtn}
-          activeOpacity={0.85}
-        >
-          <Text style={[styles.backIcon, themed.backIcon]}>←</Text>
-          <Text style={[styles.backText, themed.backText]}>履歴</Text>
-        </TouchableOpacity>
+          accessibilityLabel="現在の自己構造から戻る"
+        />
 
         <View style={styles.headerRight}>
           <TouchableOpacity
@@ -592,7 +589,7 @@ const run = useCallback(async ({ force = false } = {}) => {
       </View>
 
       {/* タイトル */}
-      <Text style={[styles.title, themed.title]}>{reportTitle}</Text>
+      <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{reportTitle}</Text>
 
 
       {/* 🧭 表示モード（Standard / Deep） */}
@@ -750,13 +747,11 @@ function createStyles(COLORS, ui) {
     padding: 12,
   },
   backBtn: {
-    flexDirection: "row",
-    alignItems: "center",
+    width: 70,
+    alignItems: "flex-start",
+    justifyContent: "center",
     paddingVertical: 4,
-    paddingRight: 10,
   },
-  backIcon: { fontSize: 18, color: "#374151", marginRight: 4 },
-  backText: { color: "#374151", fontSize: 13, fontWeight: "600" },
 
   headerRight: { flexDirection: "row", alignItems: "center" },
   smallBtn: {
@@ -777,12 +772,15 @@ function createStyles(COLORS, ui) {
     color: "#111827",
   },
 
-  title: {
-    fontSize: 16,
+  headerTitle: {
+    fontSize: 26,
+    lineHeight: 32,
     fontWeight: "800",
+    letterSpacing: 0.6,
     color: "#111827",
     textAlign: "center",
     marginBottom: 10,
+    paddingHorizontal: 16,
   },
 
   // 🧭 mode selector
