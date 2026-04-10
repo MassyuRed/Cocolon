@@ -236,7 +236,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
               Alert.alert("準備中", "履歴詳細画面はこれから作成します。");
             }
           }}
-          accessibilityLabel="Echoes履歴 詳細へ"
+          accessibilityLabel="共鳴履歴 詳細へ"
         >
           <Text style={styles.itemTitle} numberOfLines={2}>
             {title}
@@ -279,7 +279,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
           </View>
 
           <View style={styles.headerCenter}>
-            <Text style={styles.titleText}>Echoes履歴</Text>
+            <Text style={styles.titleText}>共鳴履歴</Text>
           </View>
 
           {/* Right placeholder (for center alignment) */}
@@ -355,7 +355,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
             onEndReachedThreshold={0.4}
             onEndReached={loadMore}
             ListEmptyComponent={
-              <Text style={styles.emptyText}>Echoes履歴がまだありません。</Text>
+              <Text style={styles.emptyText}>共鳴履歴がまだありません。</Text>
             }
             ListFooterComponent={
               loadingMore ? (

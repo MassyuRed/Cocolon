@@ -233,7 +233,7 @@ export default function DiscoveriesHistoryListScreen({ navigation }) {
               Alert.alert("準備中", "履歴詳細画面はこれから作成します。");
             }
           }}
-          accessibilityLabel="Discoveries履歴 詳細へ"
+          accessibilityLabel="発見履歴 詳細へ"
         >
           <Text style={styles.itemTitle} numberOfLines={2}>
             {title}
@@ -276,7 +276,7 @@ export default function DiscoveriesHistoryListScreen({ navigation }) {
           </View>
 
           <View style={styles.headerCenter}>
-            <Text style={styles.titleText}>Discoveries履歴</Text>
+            <Text style={styles.titleText}>発見履歴</Text>
           </View>
 
           {/* Right placeholder (for center alignment) */}
@@ -352,7 +352,7 @@ export default function DiscoveriesHistoryListScreen({ navigation }) {
             onEndReachedThreshold={0.4}
             onEndReached={loadMore}
             ListEmptyComponent={
-              <Text style={styles.emptyText}>Discoveries履歴がまだありません。</Text>
+              <Text style={styles.emptyText}>発見履歴がまだありません。</Text>
             }
             ListFooterComponent={
               loadingMore ? (

@@ -1303,7 +1303,7 @@ export default function MyModelScreen({ route } = {}) {
           <MyModelHomeActionCard
             styles={styles}
             title="履歴"
-            description="EchoesとDiscoveriesの履歴を確認できます。"
+            description="共鳴と発見の履歴を確認できます。"
             buttonLabel="履歴を確認する"
             buttonIconName="time-outline"
             onPress={openReactionHistory}

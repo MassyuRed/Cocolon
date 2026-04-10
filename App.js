@@ -89,6 +89,7 @@ const UNREAD_PREFETCH_MIN_INTERVAL_MS = 15 * 1000;
 const FRIENDS_UNREAD_POLL_MS = 30 * 1000;
 const MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS = 60 * 1000;
 const MYWEB_STARTUP_REVALIDATE_DELAY_MS = 1800;
+const MYWEB_STARTUP_RETRY_DELAYS_MS = [1200, 2600, 4200];
 
 const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory"]);
 const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
@@ -501,6 +502,7 @@ function MainTabs() {
     clearScope,
     getPrefetchEntryFresh,
     setPrefetch,
+    applyStartupSnapshot,
   } = useUnread();
 
   const { isPaid, loading: subscriptionLoading } = useSubscription();
@@ -739,74 +741,35 @@ function MainTabs() {
     myWebStartupWarmupTimerRef.current = null;
   }, []);
 
-  const applyMyWebUnreadPayload = React.useCallback((payload, source = "live") => {
-    const unreadByType = payload?.unread_by_type && typeof payload.unread_by_type === "object"
-      ? payload.unread_by_type
-      : payload && typeof payload === "object"
-      ? payload
-      : {};
-
-    try { clearScope("MyWeb"); } catch {}
-
-    setUnreadGroup("MyWeb", {
-      daily: !!unreadByType?.daily,
-      weekly: !!unreadByType?.weekly,
-      monthly: !!unreadByType?.monthly,
-      selfStructure: !!(unreadByType?.selfStructure || unreadByType?.self_structure),
-    });
-
-    try {
-      setPrefetch("MyWeb", "unreadStatus", {
-        source,
-        unread_by_type: {
-          daily: !!unreadByType?.daily,
-          weekly: !!unreadByType?.weekly,
-          monthly: !!unreadByType?.monthly,
-          selfStructure: !!(unreadByType?.selfStructure || unreadByType?.self_structure),
-        },
-      });
-    } catch {}
-  }, [clearScope, setPrefetch, setUnreadGroup]);
-
-  const refreshMyWebUnreadFromStartupSnapshot = React.useCallback(async () => {
-    try {
-      const json = await apiGet("/app/startup");
-      const startup = json?.startup && typeof json.startup === "object" ? json.startup : json;
-      const sections = startup?.sections && typeof startup.sections === "object" ? startup.sections : {};
-      const startupPayload = sections?.myweb_unread && typeof sections.myweb_unread === "object" ? sections.myweb_unread : null;
-
-      if (startupPayload?.unread_by_type) {
-        applyMyWebUnreadPayload(startupPayload, "startup");
-        return true;
-      }
-
-      const badges = startup?.badges && typeof startup.badges === "object"
-        ? startup.badges
-        : sections?.badges && typeof sections.badges === "object"
-        ? sections.badges
-        : {};
-      const myWebBadge = badges?.MyWeb && typeof badges.MyWeb === "object"
-        ? badges.MyWeb
-        : badges?.myweb && typeof badges.myweb === "object"
-        ? badges.myweb
-        : null;
-
-      if (myWebBadge) {
-        applyMyWebUnreadPayload({
-          unread_by_type: {
-            daily: !!myWebBadge?.daily,
-            weekly: !!myWebBadge?.weekly,
-            monthly: !!myWebBadge?.monthly,
-            selfStructure: !!(myWebBadge?.selfStructure || myWebBadge?.self_structure),
-          },
-        }, "startup");
-        return true;
-      }
-    } catch (e) {
-      console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
+  const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup" } = {}) => {
+    const params = new URLSearchParams();
+    if (forceRefresh) {
+      params.set("force_refresh", "true");
     }
-    return false;
-  }, [applyMyWebUnreadPayload]);
+    try {
+      const timezoneName = Intl?.DateTimeFormat?.().resolvedOptions?.().timeZone;
+      const normalizedTz = String(timezoneName || "").trim();
+      if (normalizedTz) {
+        params.set("timezone_name", normalizedTz);
+      }
+    } catch {}
+
+    const query = params.toString();
+    const path = query ? `/app/startup?${query}` : "/app/startup";
+    const json = await apiGet(path);
+    return applyStartupSnapshot(json, {
+      source,
+      fetchedAt: Date.now(),
+      replaceUnreadScopes: ["MyWeb"],
+      replacePrefetchScopes: false,
+    });
+  }, [applyStartupSnapshot]);
+
+  const hasMyWebUnreadInStartupHydration = React.useCallback((hydrationResult) => {
+    const patch = hydrationResult?.unreadPatch?.MyWeb;
+    if (!patch || typeof patch !== "object") return false;
+    return !!(patch.daily || patch.weekly || patch.monthly || patch.selfStructure);
+  }, []);
 
   const warmMyWebUnreadAtStartup = React.useCallback(async () => {
     try {
@@ -815,28 +778,59 @@ function MainTabs() {
       if (now - last < MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS) return;
       myWebStartupWarmupLastRunAtRef.current = now;
 
-      const hydrated = await refreshMyWebUnreadFromStartupSnapshot();
-      if (!hydrated) {
-        await refreshMyWebReportsUnreadBadge();
-      }
+      clearMyWebStartupWarmupTimer();
 
       try {
-        await apiPost("/myweb/reports/ensure", {});
+        await apiPost("/myweb/reports/ensure", {
+          types: ["weekly", "monthly"],
+          force: false,
+        });
       } catch (e) {
         console.warn("MainTabs: failed to warm MyWeb ensure on startup", e);
       }
 
-      clearMyWebStartupWarmupTimer();
-      myWebStartupWarmupTimerRef.current = setTimeout(() => {
-        Promise.resolve()
-          .then(() => refreshMyWebReportsUnreadBadge())
-          .catch(() => null)
-          .finally(() => {
-            myWebStartupWarmupTimerRef.current = null;
+      try {
+        const startupHydration = await fetchAndApplyStartupSnapshot({
+          forceRefresh: true,
+          source: "myweb_startup_after_ensure",
+        });
+        if (hasMyWebUnreadInStartupHydration(startupHydration)) {
+          return;
+        }
+      } catch (e) {
+        console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
+      }
+
+      for (let i = 0; i < MYWEB_STARTUP_RETRY_DELAYS_MS.length; i += 1) {
+        const delayMs = Number(MYWEB_STARTUP_RETRY_DELAYS_MS[i] || 0) || 0;
+        if (delayMs > 0) {
+          await new Promise((resolve) => {
+            myWebStartupWarmupTimerRef.current = setTimeout(resolve, delayMs);
           });
-      }, MYWEB_STARTUP_REVALIDATE_DELAY_MS);
+          myWebStartupWarmupTimerRef.current = null;
+        }
+
+        try {
+          const retryHydration = await fetchAndApplyStartupSnapshot({
+            forceRefresh: true,
+            source: `myweb_startup_retry_${i + 1}`,
+          });
+          if (hasMyWebUnreadInStartupHydration(retryHydration)) {
+            return;
+          }
+        } catch (e) {
+          console.warn("MainTabs: failed to revalidate MyWeb startup snapshot", e);
+        }
+      }
+
+      await refreshMyWebReportsUnreadBadge();
     } catch {}
-  }, [clearMyWebStartupWarmupTimer, refreshMyWebReportsUnreadBadge, refreshMyWebUnreadFromStartupSnapshot]);
+  }, [
+    clearMyWebStartupWarmupTimer,
+    fetchAndApplyStartupSnapshot,
+    hasMyWebUnreadInStartupHydration,
+    refreshMyWebReportsUnreadBadge,
+  ]);
 
   const refreshFriendsUnreadState = React.useCallback(async () => {
     try {
