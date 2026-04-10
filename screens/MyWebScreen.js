@@ -1172,6 +1172,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
   // Phase2: MyWebを開いたタイミングで、サーバ側の配布状態をオンデマンドで追いつかせる
   // （端末タイマーによる自動生成は停止し、MashOS主導へ移行）
+  // 下位タブの未読バッジ初回確定は App.js 側で行い、
+  // ここでは MyWeb 画面内のサマリー更新だけを担当する。
   const ensuredRef = useRef(false);
   useEffect(() => {
     if (ensuredRef.current) return;
@@ -1202,12 +1204,11 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
       } catch (e) {
         console.warn("MyWebScreen: myweb/reports/ensure failed", e);
       } finally {
-        // 生成/配布の追いつかせ後に、未読バッジを更新
-        refreshUnreadBadges();
+        // 生成/配布の追いつかせ後に、MyWeb 画面内サマリーのみ更新
         refreshHomeSummaries();
       }
     })();
-  }, [refreshUnreadBadges, refreshHomeSummaries]);
+  }, [refreshHomeSummaries]);
 
   // MyWeb 内の入口画面に戻ったタイミングでも更新
   useEffect(() => {

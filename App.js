@@ -89,7 +89,6 @@ const UNREAD_PREFETCH_MIN_INTERVAL_MS = 15 * 1000;
 const FRIENDS_UNREAD_POLL_MS = 30 * 1000;
 const MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS = 60 * 1000;
 const MYWEB_STARTUP_REVALIDATE_DELAY_MS = 1800;
-const MYWEB_STARTUP_RETRY_DELAYS_MS = [1200, 2600, 4200];
 
 const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory"]);
 const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
@@ -765,12 +764,6 @@ function MainTabs() {
     });
   }, [applyStartupSnapshot]);
 
-  const hasMyWebUnreadInStartupHydration = React.useCallback((hydrationResult) => {
-    const patch = hydrationResult?.unreadPatch?.MyWeb;
-    if (!patch || typeof patch !== "object") return false;
-    return !!(patch.daily || patch.weekly || patch.monthly || patch.selfStructure);
-  }, []);
-
   const warmMyWebUnreadAtStartup = React.useCallback(async () => {
     try {
       const now = Date.now();
@@ -790,45 +783,46 @@ function MainTabs() {
       }
 
       try {
-        const startupHydration = await fetchAndApplyStartupSnapshot({
+        await fetchAndApplyStartupSnapshot({
           forceRefresh: true,
           source: "myweb_startup_after_ensure",
         });
-        if (hasMyWebUnreadInStartupHydration(startupHydration)) {
-          return;
-        }
       } catch (e) {
         console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
       }
 
-      for (let i = 0; i < MYWEB_STARTUP_RETRY_DELAYS_MS.length; i += 1) {
-        const delayMs = Number(MYWEB_STARTUP_RETRY_DELAYS_MS[i] || 0) || 0;
-        if (delayMs > 0) {
-          await new Promise((resolve) => {
-            myWebStartupWarmupTimerRef.current = setTimeout(resolve, delayMs);
-          });
-          myWebStartupWarmupTimerRef.current = null;
-        }
-
-        try {
-          const retryHydration = await fetchAndApplyStartupSnapshot({
-            forceRefresh: true,
-            source: `myweb_startup_retry_${i + 1}`,
-          });
-          if (hasMyWebUnreadInStartupHydration(retryHydration)) {
-            return;
-          }
-        } catch (e) {
-          console.warn("MainTabs: failed to revalidate MyWeb startup snapshot", e);
-        }
+      try {
+        await refreshMyWebReportsUnreadBadge();
+      } catch (e) {
+        console.warn("MainTabs: failed to refresh MyWeb unread badges after startup ensure", e);
       }
 
-      await refreshMyWebReportsUnreadBadge();
+      myWebStartupWarmupTimerRef.current = setTimeout(() => {
+        (async () => {
+          try {
+            await fetchAndApplyStartupSnapshot({
+              forceRefresh: true,
+              source: "myweb_startup_delayed_revalidate",
+            });
+          } catch (e) {
+            console.warn("MainTabs: failed to revalidate MyWeb startup snapshot", e);
+          }
+
+          try {
+            await refreshMyWebReportsUnreadBadge();
+          } catch (e) {
+            console.warn("MainTabs: failed to revalidate MyWeb unread badges", e);
+          } finally {
+            myWebStartupWarmupTimerRef.current = null;
+          }
+        })().catch(() => {
+          myWebStartupWarmupTimerRef.current = null;
+        });
+      }, MYWEB_STARTUP_REVALIDATE_DELAY_MS);
     } catch {}
   }, [
     clearMyWebStartupWarmupTimer,
     fetchAndApplyStartupSnapshot,
-    hasMyWebUnreadInStartupHydration,
     refreshMyWebReportsUnreadBadge,
   ]);
 
