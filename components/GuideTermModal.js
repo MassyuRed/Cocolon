@@ -135,6 +135,8 @@ export default function GuideTermModal({
 }
 
 function createStyles(colors) {
+  const guideDarkSubtext = "#374151";
+
   return StyleSheet.create({
     backdrop: {
       flex: 1,
@@ -208,7 +210,7 @@ function createStyles(colors) {
     readingText: {
       fontSize: 12,
       lineHeight: 18,
-      color: colors.TEXT_SUBTLE,
+      color: guideDarkSubtext,
       marginBottom: 12,
     },
     shortDefText: {

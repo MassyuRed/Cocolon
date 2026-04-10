@@ -112,6 +112,8 @@ export default function GuideRichText({ blocks = [], onPressTerm }) {
 }
 
 function createStyles(colors) {
+  const guideDarkSubtext = "#374151";
+
   return StyleSheet.create({
     paragraph: {
       fontSize: 14,
@@ -160,7 +162,7 @@ function createStyles(colors) {
     noteText: {
       fontSize: 13,
       lineHeight: 22,
-      color: colors.TEXT_SUBTLE,
+      color: guideDarkSubtext,
     },
     termLink: {
       color: colors.TITLE_GOLD,
