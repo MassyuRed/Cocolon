@@ -627,7 +627,6 @@ function MainTabs() {
       const { data: sessionData } = await supabase.auth.getSession();
       const accessToken = sessionData?.session?.access_token ?? null;
       if (!accessToken) {
-        setUnread("MyWeb", "mymodelCreate", false);
         setUnread("MyModel", "mymodelCreate", false);
         return;
       }
@@ -652,10 +651,8 @@ function MainTabs() {
       const standardTotal = Number(standardJson?.meta?.total_questions ?? standardJson?.questions?.length ?? 0) || 0;
       const standardHasUnanswered = !!standardJson?.meta?.has_unanswered;
       const standardDot = standardTotal > 0 && standardHasUnanswered;
-      setUnread("MyWeb", "mymodelCreate", false);
       setUnread("MyModel", "mymodelCreate", !!(lightDot || standardDot));
     } catch {
-      setUnread("MyWeb", "mymodelCreate", false);
       setUnread("MyModel", "mymodelCreate", false);
     }
   }, [MYMODEL_API_BASE_URL, setUnread]);
