@@ -174,7 +174,7 @@ function useThemedStyles() {
   return { styles, colors, themeName, isDark, ui };
 }
 
-export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange, onRefreshTabUnread, route: screenRoute, tabRoute }) {
+export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
   const { getFeatureUnread } = useUnread();
   const { ensurePaid, ensurePremium, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
@@ -279,53 +279,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
   });
 
   // (hooks moved to the top of the component)
-
-  // BottomTab の未読バッジ自体は App.js 側が保持する。
-  // ここでは必要なら親へ現在の集計結果だけ通知する。
-  useEffect(() => {
-    if (!unreadResolved && !selfStructureUnreadResolved) return;
-
-    const nextDaily = unreadResolved ? !!unreadByType.daily : !!prefetchedUnreadByType.daily;
-    const nextWeekly = unreadResolved ? !!unreadByType.weekly : !!prefetchedUnreadByType.weekly;
-    const nextMonthly = unreadResolved ? !!unreadByType.monthly : !!prefetchedUnreadByType.monthly;
-    const effectiveSelfStructureUnread =
-      !subscriptionLoading &&
-      !!isPaid &&
-      !!(
-        selfStructureUnreadResolved
-          ? unreadByType.selfStructure
-          : prefetchedUnreadByType.selfStructure
-      );
-
-    const hasUnread = !!(
-      nextDaily ||
-      nextWeekly ||
-      nextMonthly ||
-      effectiveSelfStructureUnread
-    );
-
-    try {
-      if (typeof onTabUnreadChange === "function") {
-        onTabUnreadChange(hasUnread);
-      }
-    } catch {
-      // noop
-    }
-  }, [
-    unreadByType.daily,
-    unreadByType.weekly,
-    unreadByType.monthly,
-    unreadByType.selfStructure,
-    prefetchedUnreadByType.daily,
-    prefetchedUnreadByType.weekly,
-    prefetchedUnreadByType.monthly,
-    prefetchedUnreadByType.selfStructure,
-    isPaid,
-    subscriptionLoading,
-    onTabUnreadChange,
-    unreadResolved,
-    selfStructureUnreadResolved,
-  ]);
 
   const { styles, colors, isDark } = useThemedStyles();
 
