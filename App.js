@@ -316,8 +316,9 @@ async function resolveSharedProfileUserId(friendCode) {
 
   try {
     const url = `${SHARE_PROFILE_API_BASE_URL}/public/profile/by-friend-code?code=${encodeURIComponent(code)}`;
-    const res = await fetch(url, {
+    const res = await apiFetch(url, {
       method: "GET",
+      auth: false,
       headers: { accept: "application/json" },
     });
 
