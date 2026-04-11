@@ -1977,7 +1977,7 @@ ${String(error?.message || error)}`
               { paddingBottom: 32 + keyboardInset },
             ]}
             keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator
             scrollEventThrottle={16}
             onScrollBeginDrag={registerInputInteraction}
             onScroll={(e) => {
@@ -2788,7 +2788,7 @@ ${String(error?.message || error)}`
     <View
       style={[
         styles.inputFeedbackCard,
-        { maxHeight: Math.max(320, Math.min(440, Math.floor((windowHeight || 0) * 0.72) || 420)) },
+        { maxHeight: Math.max(380, Math.min(620, Math.floor((windowHeight || 0) * 0.84) || 560)) },
       ]}
     >
       <View style={styles.inputFeedbackHeader}>
@@ -2811,10 +2811,10 @@ ${String(error?.message || error)}`
       <ScrollView
         style={[
           styles.inputFeedbackBodyScroll,
-          { maxHeight: Math.max(150, Math.min(260, Math.floor((windowHeight || 0) * 0.32) || 220)) },
+          { maxHeight: Math.max(220, Math.min(420, Math.floor((windowHeight || 0) * 0.52) || 360)) },
         ]}
         contentContainerStyle={styles.inputFeedbackBodyContent}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator
       >
         <Text style={styles.inputFeedbackBodyText}>
           {inputFeedbackModalText}
