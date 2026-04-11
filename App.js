@@ -519,6 +519,8 @@ function MainTabs() {
   const myWebUnreadRefreshSeqRef = useRef(0);
   const myWebStartupWarmupLastRunAtRef = useRef(0);
   const myWebStartupWarmupTimerRef = useRef(null);
+  const myWebStartupWarmupSeqRef = useRef(0);
+  const myWebSubscriptionRefreshPendingRef = useRef(false);
 
   const [activeRouteName, setActiveRouteName] = useState("Input");
   const frameEnabled = !HIDDEN_SCREENS.has(activeRouteName);
@@ -755,15 +757,23 @@ function MainTabs() {
   const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
     const refreshSeq = ++myWebUnreadRefreshSeqRef.current;
     const isStale = () => refreshSeq !== myWebUnreadRefreshSeqRef.current;
+    const canResolveSelfStructureUnread = !subscriptionLoading;
 
     const applyBaseUnread = (unread) => {
       if (isStale()) return;
-      try { clearScope("MyWeb"); } catch {}
       setUnreadGroup("MyWeb", {
         daily: !!unread?.daily,
         weekly: !!unread?.weekly,
         monthly: !!unread?.monthly,
-        selfStructure: false,
+      });
+    };
+
+    const applyBaseUnreadFallback = () => {
+      if (isStale()) return;
+      setUnreadGroup("MyWeb", {
+        daily: false,
+        weekly: false,
+        monthly: false,
       });
     };
 
@@ -774,7 +784,9 @@ function MainTabs() {
 
     const baseQuery = new URLSearchParams({ limit: "1", include_self_structure: "false" }).toString();
 
-    const selfStructurePromise = isPaid
+    const selfStructurePromise = !canResolveSelfStructureUnread
+      ? Promise.resolve(undefined)
+      : isPaid
       ? Promise.all([
           fetchMyWebSelfStructureLatestUnread().catch((e) => {
             console.warn("MainTabs: failed to refresh MyWeb latest self-structure unread badge", e);
@@ -794,23 +806,16 @@ function MainTabs() {
     } catch (e) {
       if (isStale()) return;
       console.warn("MainTabs: failed to refresh MyWeb unread badges", e);
-      try { clearScope("MyWeb"); } catch {}
-      setUnreadGroup("MyWeb", {
-        daily: false,
-        weekly: false,
-        monthly: false,
-        selfStructure: false,
-      });
-      return;
+      applyBaseUnreadFallback();
     }
 
     const selfStructureUnread = await selfStructurePromise;
-    if (selfStructureUnread == null) return;
+    if (selfStructureUnread === undefined) return;
     applySelfStructureUnread(selfStructureUnread);
   }, [
     isPaid,
+    subscriptionLoading,
     setUnreadGroup,
-    clearScope,
     fetchMyWebSelfStructureLatestUnread,
     fetchMyWebSelfStructureHistoryUnread,
   ]);
@@ -824,7 +829,7 @@ function MainTabs() {
     myWebStartupWarmupTimerRef.current = null;
   }, []);
 
-  const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup" } = {}) => {
+  const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup", applyIf } = {}) => {
     const params = new URLSearchParams();
     if (forceRefresh) {
       params.set("force_refresh", "true");
@@ -840,6 +845,15 @@ function MainTabs() {
     const query = params.toString();
     const path = query ? `/app/startup?${query}` : "/app/startup";
     const json = await apiGet(path);
+
+    if (typeof applyIf === "function") {
+      try {
+        if (!applyIf()) return null;
+      } catch {
+        return null;
+      }
+    }
+
     return applyStartupSnapshot(json, {
       source,
       fetchedAt: Date.now(),
@@ -848,70 +862,105 @@ function MainTabs() {
     });
   }, [applyStartupSnapshot]);
 
-  const warmMyWebUnreadAtStartup = React.useCallback(async () => {
+  const revalidateMyWebUnreadFromStartup = React.useCallback(async ({ source = "myweb_startup", applyIf } = {}) => {
+    try {
+      await fetchAndApplyStartupSnapshot({
+        forceRefresh: true,
+        source,
+        applyIf,
+      });
+    } catch (e) {
+      console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
+    }
+
+    if (typeof applyIf === "function") {
+      try {
+        if (!applyIf()) return;
+      } catch {
+        return;
+      }
+    }
+
+    try {
+      await refreshMyWebReportsUnreadBadge();
+    } catch (e) {
+      console.warn("MainTabs: failed to refresh MyWeb unread badges on startup", e);
+    }
+  }, [fetchAndApplyStartupSnapshot, refreshMyWebReportsUnreadBadge]);
+
+  const warmMyWebUnreadAtStartup = React.useCallback(async ({ force = false, sourcePrefix = "myweb_startup" } = {}) => {
     try {
       const now = Date.now();
       const last = Number(myWebStartupWarmupLastRunAtRef.current || 0) || 0;
-      if (now - last < MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS) return;
+      if (!force && now - last < MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS) return;
       myWebStartupWarmupLastRunAtRef.current = now;
 
       clearMyWebStartupWarmupTimer();
 
-      const ensurePromise = Promise.resolve()
-        .then(() =>
-          apiPost("/myweb/reports/ensure", {
-            types: ["weekly", "monthly"],
-            force: false,
-          })
-        )
-        .catch((e) => {
-          console.warn("MainTabs: failed to warm MyWeb ensure on startup", e);
-          return null;
-        });
+      const warmupSeq = ++myWebStartupWarmupSeqRef.current;
+      const isWarmupStale = () => warmupSeq !== myWebStartupWarmupSeqRef.current;
+      const applyIfCurrent = () => !isWarmupStale();
+      const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-      await Promise.allSettled([
-        fetchAndApplyStartupSnapshot({
-          forceRefresh: true,
-          source: "myweb_startup_initial",
-        }).catch((e) => {
-          console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
-          return null;
-        }),
-        refreshMyWebReportsUnreadBadge().catch((e) => {
-          console.warn("MainTabs: failed to refresh MyWeb unread badges on startup", e);
-          return null;
-        }),
-      ]);
+      if (!force) {
+        try {
+          await fetchAndApplyStartupSnapshot({
+            forceRefresh: true,
+            source: `${sourcePrefix}_seed`,
+            applyIf: applyIfCurrent,
+          });
+        } catch (e) {
+          console.warn("MainTabs: failed to seed MyWeb unread from startup snapshot", e);
+        }
+      }
+
+      if (isWarmupStale()) return;
+
+      try {
+        await apiPost("/myweb/reports/ensure", {
+          types: ["weekly", "monthly"],
+          force: false,
+        });
+      } catch (e) {
+        console.warn("MainTabs: failed to warm MyWeb ensure on startup", e);
+      }
+
+      const retryDelays = [0, 1200, 2500];
+      for (let index = 0; index < retryDelays.length; index += 1) {
+        const delayMs = retryDelays[index];
+        if (delayMs > 0) {
+          await wait(delayMs);
+        }
+        if (isWarmupStale()) return;
+        await revalidateMyWebUnreadFromStartup({
+          source: `${sourcePrefix}_after_ensure_${index + 1}`,
+          applyIf: applyIfCurrent,
+        });
+      }
+
+      if (isWarmupStale()) return;
 
       myWebStartupWarmupTimerRef.current = setTimeout(() => {
-        ensurePromise
-          .catch(() => null)
+        Promise.resolve()
           .then(async () => {
-            try {
-              await fetchAndApplyStartupSnapshot({
-                forceRefresh: true,
-                source: "myweb_startup_after_ensure",
-              });
-            } catch (e) {
-              console.warn("MainTabs: failed to revalidate MyWeb startup snapshot", e);
-            }
-
-            try {
-              await refreshMyWebReportsUnreadBadge();
-            } catch (e) {
-              console.warn("MainTabs: failed to revalidate MyWeb unread badges", e);
-            }
+            if (isWarmupStale()) return;
+            await revalidateMyWebUnreadFromStartup({
+              source: `${sourcePrefix}_final_revalidate`,
+              applyIf: applyIfCurrent,
+            });
           })
           .catch(() => null)
           .finally(() => {
-            myWebStartupWarmupTimerRef.current = null;
+            if (!isWarmupStale()) {
+              myWebStartupWarmupTimerRef.current = null;
+            }
           });
       }, MYWEB_STARTUP_REVALIDATE_DELAY_MS);
     } catch {}
   }, [
     clearMyWebStartupWarmupTimer,
     fetchAndApplyStartupSnapshot,
-    refreshMyWebReportsUnreadBadge,
+    revalidateMyWebUnreadFromStartup,
   ]);
 
   const refreshFriendsUnreadState = React.useCallback(async () => {
@@ -1181,6 +1230,7 @@ function MainTabs() {
 
   useEffect(() => {
     return () => {
+      myWebStartupWarmupSeqRef.current += 1;
       clearMyWebStartupWarmupTimer();
     };
   }, [clearMyWebStartupWarmupTimer]);
@@ -1205,6 +1255,23 @@ function MainTabs() {
       } catch {}
     };
   }, []);
+
+  useEffect(() => {
+    if (subscriptionLoading) {
+      myWebSubscriptionRefreshPendingRef.current = true;
+      return;
+    }
+    if (!myWebSubscriptionRefreshPendingRef.current) return;
+    myWebSubscriptionRefreshPendingRef.current = false;
+    Promise.resolve()
+      .then(() =>
+        warmMyWebUnreadAtStartup({
+          force: true,
+          sourcePrefix: isPaid ? "myweb_subscription_ready" : "myweb_subscription_resolved",
+        })
+      )
+      .catch(() => null);
+  }, [isPaid, subscriptionLoading, warmMyWebUnreadAtStartup]);
 
   useEffect(() => {
     if (subscriptionLoading) return;
