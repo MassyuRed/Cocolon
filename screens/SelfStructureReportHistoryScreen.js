@@ -57,12 +57,28 @@ function formatRangeJP(startIso, endIso, reportType) {
     const md = (d) => `${d.getMonth() + 1}/${d.getDate()}`;
 
     if (reportType === "monthly") {
-      return `${md(s)} ～ ${md(e)}（28日）`;
+      return "";
     }
     return `${md(s)} ～ ${md(e)}`;
   } catch {
     return "";
   }
+}
+
+function sanitizeSelfStructureHistoryTitle(title) {
+  const raw = String(title || "").trim();
+  if (!raw) return "";
+  if (/^自己構造レポート[：:]/.test(raw)) {
+    return "自己構造レポート";
+  }
+  return raw;
+}
+
+function sanitizeSelfStructureReportText(text) {
+  return String(text || "").replace(
+    /自己構造分析レポート[（(]月次[）)]/g,
+    "自己構造分析レポート"
+  );
 }
 
 function escapeHtml(s) {
@@ -258,7 +274,11 @@ export default function SelfStructureReportHistoryScreen({
       );
       const baseRows = Array.isArray(json?.items) ? json.items : [];
       const readSet = await fetchReadReportIdSet(baseRows.map((r) => r.id));
-      const mapped = baseRows.map((r) => ({ ...r, isRead: readSet.has(r.id) }));
+      const mapped = baseRows.map((r) => ({
+        ...r,
+        title: sanitizeSelfStructureHistoryTitle(r?.title),
+        isRead: readSet.has(r.id),
+      }));
       setRows((prev) => {
         if (!append) return mapped;
         const existing = new Set((prev || []).map((r) => String(r?.id || "")));
@@ -315,6 +335,12 @@ export default function SelfStructureReportHistoryScreen({
           return;
         }
 
+        const sanitizedData = {
+          ...data,
+          title: sanitizeSelfStructureHistoryTitle(data?.title),
+          content_text: sanitizeSelfStructureReportText(data?.content_text),
+        };
+
         try {
           const ok = await markReportAsRead(id);
           if (ok) {
@@ -328,7 +354,7 @@ export default function SelfStructureReportHistoryScreen({
           // no-op
         }
 
-        if (onOpenReport) onOpenReport(data);
+        if (onOpenReport) onOpenReport(sanitizedData);
       } catch (e) {
         Alert.alert("エラー", String(e?.message || e));
       }
@@ -346,7 +372,10 @@ export default function SelfStructureReportHistoryScreen({
           return;
         }
 
-        await exportTextToPdf(data?.title || title, data?.content_text || "");
+        await exportTextToPdf(
+          sanitizeSelfStructureHistoryTitle(data?.title) || title,
+          sanitizeSelfStructureReportText(data?.content_text)
+        );
       } catch (e) {
         Alert.alert("PDF保存エラー", String(e?.message || e));
       }
@@ -455,9 +484,11 @@ export default function SelfStructureReportHistoryScreen({
                 <Text style={[styles.rowTitle, themed.rowTitle]} numberOfLines={1}>
                   {item.title || title}
                 </Text>
-                <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
-                  {formatRangeJP(item.period_start, item.period_end, reportType)}
-                </Text>
+                {formatRangeJP(item.period_start, item.period_end, reportType) ? (
+                  <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
+                    {formatRangeJP(item.period_start, item.period_end, reportType)}
+                  </Text>
+                ) : null}
                 <Text style={[styles.rowMeta, themed.rowMeta]} numberOfLines={1}>
                   作成: {formatDateJP(item.generated_at || item.updated_at || item.period_end)}
                 </Text>

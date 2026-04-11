@@ -222,6 +222,13 @@ function buildErrorMessage(err) {
   return `エラー：${msg}`;
 }
 
+function sanitizeSelfStructureReportText(text) {
+  return String(text || "").replace(
+    /自己構造分析レポート[（(]月次[）)]/g,
+    "自己構造分析レポート"
+  );
+}
+
 // NOTE: Phase3 で「閲覧=生成」を廃止し、月次は MashOS 側で生成/保存する。
 // そのため、クライアント側のプロンプト組立ロジック（固定文）は不要になった。
 
@@ -295,9 +302,6 @@ const [loading, setLoading] = useState(true);
   const [reportText, setReportText] = useState("");
   const [meta, setMeta] = useState(null);
 
-  const [periodStartISO, setPeriodStartISO] = useState("");
-  const [periodEndISO, setPeriodEndISO] = useState("");
-  const [titleRange, setTitleRange] = useState("");
 
   const themed = useMemo(() => {
     if (!isDark) return {};
@@ -327,12 +331,7 @@ const [loading, setLoading] = useState(true);
     };
   }, [isDark, colors]);
 
-  const reportTitle = useMemo(() => {
-    const base = titleRange
-      ? `現在の自己構造：${titleRange}`
-      : "現在の自己構造";
-    return base;
-  }, [titleRange]);
+  const reportTitle = "現在の自己構造";
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
   const fetchedReportMode = useMemo(() => {
@@ -458,28 +457,11 @@ const run = useCallback(async ({ force = false } = {}) => {
     const json = await res.json();
     const serverMeta = safeParseJson(json?.meta);
     const hasVisualContract = !!serverMeta?.selfStructureDeepVisual;
-    const text = String(json?.content_text || "").trim();
+    const text = sanitizeSelfStructureReportText(
+      String(json?.content_text || "").trim()
+    );
     if (!text && !hasVisualContract) {
       throw new Error("レポート本文が空でした。");
-    }
-
-    const sIso = String(json?.period_start || "").trim();
-    const eIso = String(json?.period_end || "").trim();
-
-    if (sIso && eIso) {
-      try {
-        const s = new Date(sIso);
-        const e = new Date(eIso);
-        safeSet(() => {
-          setPeriodStartISO(sIso);
-          setPeriodEndISO(eIso);
-          setTitleRange(
-            `${s.getMonth() + 1}/${s.getDate()} ～ ${e.getMonth() + 1}/${e.getDate()}`
-          );
-        });
-      } catch {
-        // ignore
-      }
     }
 
     // ★ ここで画面がもう無い（戻った）なら、以降の setState を行わない
