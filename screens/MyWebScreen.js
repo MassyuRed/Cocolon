@@ -174,8 +174,8 @@ function useThemedStyles() {
   return { styles, colors, themeName, isDark, ui };
 }
 
-export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange, route: screenRoute, tabRoute }) {
-  const { setUnreadGroup, clearScope, getFeatureUnread } = useUnread();
+export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadChange, onRefreshTabUnread, route: screenRoute, tabRoute }) {
+  const { getFeatureUnread } = useUnread();
   const { ensurePaid, ensurePremium, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
@@ -280,9 +280,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
 
   // (hooks moved to the top of the component)
 
-  // BottomTab の未読バッジ（赤丸）連動
+  // BottomTab の未読バッジ自体は App.js 側が保持する。
+  // ここでは必要なら親へ現在の集計結果だけ通知する。
   useEffect(() => {
-    // 初回は App 側 prefetch の表示を尊重し、画面側の主判定が返り始めたら同期する。
     if (!unreadResolved && !selfStructureUnreadResolved) return;
 
     const nextDaily = unreadResolved ? !!unreadByType.daily : !!prefetchedUnreadByType.daily;
@@ -311,26 +311,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     } catch {
       // noop
     }
-
-    try {
-      // UnreadContext: "MyWeb" scope は過去バージョンのキーが残ると
-      // Tab 側の判定（scopeUnreadMap）がズレるため、毎回 scope を一旦クリアしてから上書きする。
-      try {
-        clearScope("MyWeb");
-      } catch {
-        // noop
-      }
-
-      // UnreadContext: "MyWeb" タブの赤●を画面内の未読バッジと同期
-      setUnreadGroup("MyWeb", {
-        daily: nextDaily,
-        weekly: nextWeekly,
-        monthly: nextMonthly,
-        selfStructure: !!effectiveSelfStructureUnread,
-      });
-    } catch {
-      // noop
-    }
   }, [
     unreadByType.daily,
     unreadByType.weekly,
@@ -343,8 +323,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     isPaid,
     subscriptionLoading,
     onTabUnreadChange,
-    setUnreadGroup,
-    clearScope,
     unreadResolved,
     selfStructureUnreadResolved,
   ]);
@@ -662,6 +640,14 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     return ids.some((id) => !readSet.has(id));
   }, [fetchReportReadIdSet, isPaid, subscriptionLoading]);
 
+  const requestParentTabUnreadRefresh = useCallback(async () => {
+    try {
+      await onRefreshTabUnread?.();
+    } catch (e) {
+      console.warn("MyWebScreen: failed to request parent MyWeb unread refresh", e);
+    }
+  }, [onRefreshTabUnread]);
+
   const markSelfStructureLatestSeen = useCallback(
     async (versionKey) => {
       const normalized = String(versionKey || "").trim();
@@ -679,8 +665,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
         ...prev,
         selfStructure: !!selfStructureHistoryUnread,
       }));
+      await requestParentTabUnreadRefresh();
     },
-    [getSelfStructureLatestSeenStorageKey, selfStructureHistoryUnread]
+    [getSelfStructureLatestSeenStorageKey, selfStructureHistoryUnread, requestParentTabUnreadRefresh]
   );
 
   // MyWeb（日/週/月）の未読状態を更新
@@ -740,7 +727,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onTabUnreadCh
     }
 
     void selfStructureTask;
-  }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread]);
+    await requestParentTabUnreadRefresh();
+  }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread, requestParentTabUnreadRefresh]);
 
   const fetchLatestReadyReport = useCallback(async (type, { ensure = false } = {}) => {
     const normalizedType = String(type || "").trim().toLowerCase();

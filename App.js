@@ -8,6 +8,7 @@ import {
   BottomTabBar,
 } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import messaging from "@react-native-firebase/messaging";
 
 import { AuthProvider, useAuth } from "./AuthContext";
@@ -89,6 +90,9 @@ const UNREAD_PREFETCH_MIN_INTERVAL_MS = 15 * 1000;
 const FRIENDS_UNREAD_POLL_MS = 30 * 1000;
 const MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS = 60 * 1000;
 const MYWEB_STARTUP_REVALIDATE_DELAY_MS = 1800;
+const MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
+const MYWEB_SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
+const MYWEB_REPORT_READ_STATUS_CHUNK_SIZE = 60;
 
 const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory"]);
 const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
@@ -328,7 +332,7 @@ function InputStackNavigator() {
   );
 }
 
-function MyWebStackNavigator({ onSetMymodelLinkPayload, route: tabRoute }) {
+function MyWebStackNavigator({ onSetMymodelLinkPayload, onRefreshTabUnread, route: tabRoute }) {
   return (
     <MyWebStack.Navigator initialRouteName="MyWeb" screenOptions={{ headerShown: false }}>
       <MyWebStack.Screen name="MyWeb">
@@ -336,6 +340,7 @@ function MyWebStackNavigator({ onSetMymodelLinkPayload, route: tabRoute }) {
           <MyWebScreen
             {...navProps}
             tabRoute={tabRoute}
+            onRefreshTabUnread={onRefreshTabUnread}
             onOpenMyProfile={(payload) => {
               try {
                 onSetMymodelLinkPayload?.(payload || null);
@@ -674,6 +679,79 @@ function MainTabs() {
     }
   }, [isTutorialMode, setUnread]);
 
+  const getMyWebSelfStructureLatestSeenStorageKey = React.useCallback(async () => {
+    try {
+      const { data } = await supabase.auth.getSession();
+      const userId = String(data?.session?.user?.id || "").trim();
+      return userId
+        ? `${MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
+        : MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
+    } catch {
+      return MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
+    }
+  }, []);
+
+  const fetchMyWebReportReadIdSet = React.useCallback(async (reportIds) => {
+    const ids = Array.from(
+      new Set(
+        (Array.isArray(reportIds) ? reportIds : [])
+          .map((id) => String(id || "").trim())
+          .filter(Boolean)
+      )
+    );
+    if (ids.length === 0) return new Set();
+
+    const readSet = new Set();
+    for (let i = 0; i < ids.length; i += MYWEB_REPORT_READ_STATUS_CHUNK_SIZE) {
+      const chunk = ids.slice(i, i + MYWEB_REPORT_READ_STATUS_CHUNK_SIZE);
+      if (chunk.length === 0) continue;
+      const query = chunk
+        .map((id) => `report_ids=${encodeURIComponent(id)}`)
+        .join("&");
+      const json = await apiGet(`/report-reads/status?${query}`);
+      const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
+      readIds.forEach((id) => {
+        const normalized = String(id || "").trim();
+        if (normalized) readSet.add(normalized);
+      });
+    }
+    return readSet;
+  }, []);
+
+  const fetchMyWebSelfStructureLatestUnread = React.useCallback(async () => {
+    if (!isPaid) return false;
+
+    const storageKey = await getMyWebSelfStructureLatestSeenStorageKey();
+    const [statusJson, seenVersionKey] = await Promise.all([
+      apiGet("/myprofile/latest/status"),
+      AsyncStorage.getItem(storageKey),
+    ]);
+
+    const versionKey = String(statusJson?.version_key || "").trim();
+    const hasVisibleContent = !!statusJson?.has_visible_content;
+    const seenKey = String(seenVersionKey || "").trim();
+
+    if (!versionKey || !hasVisibleContent) return false;
+    return versionKey !== seenKey;
+  }, [getMyWebSelfStructureLatestSeenStorageKey, isPaid]);
+
+  const fetchMyWebSelfStructureHistoryUnread = React.useCallback(async () => {
+    if (!isPaid) return false;
+
+    const historyJson = await apiGet(
+      `/myprofile/reports/history?report_type=monthly&limit=${MYWEB_SELF_STRUCTURE_HISTORY_FETCH_LIMIT}&offset=0`
+    );
+    const items = Array.isArray(historyJson?.items) ? historyJson.items : [];
+    const ids = items
+      .map((item) => String(item?.id || "").trim())
+      .filter(Boolean);
+
+    if (ids.length === 0) return false;
+
+    const readSet = await fetchMyWebReportReadIdSet(ids);
+    return ids.some((id) => !readSet.has(id));
+  }, [fetchMyWebReportReadIdSet, isPaid]);
+
   const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
     const refreshSeq = ++myWebUnreadRefreshSeqRef.current;
     const isStale = () => refreshSeq !== myWebUnreadRefreshSeqRef.current;
@@ -695,15 +773,18 @@ function MainTabs() {
     };
 
     const baseQuery = new URLSearchParams({ limit: "1", include_self_structure: "false" }).toString();
-    const selfStructureQuery = new URLSearchParams({ limit: "1", include_self_structure: "true" }).toString();
 
     const selfStructurePromise = isPaid
-      ? apiGet(`/report-reads/myweb-unread-status?${selfStructureQuery}`)
-          .then((json) => !!json?.unread_by_type?.selfStructure)
-          .catch((e) => {
-            console.warn("MainTabs: failed to refresh MyWeb self-structure unread badge", e);
-            return null;
-          })
+      ? Promise.all([
+          fetchMyWebSelfStructureLatestUnread().catch((e) => {
+            console.warn("MainTabs: failed to refresh MyWeb latest self-structure unread badge", e);
+            return false;
+          }),
+          fetchMyWebSelfStructureHistoryUnread().catch((e) => {
+            console.warn("MainTabs: failed to refresh MyWeb self-structure history unread badge", e);
+            return false;
+          }),
+        ]).then(([latestUnread, historyUnread]) => !!latestUnread || !!historyUnread)
       : Promise.resolve(false);
 
     try {
@@ -726,7 +807,13 @@ function MainTabs() {
     const selfStructureUnread = await selfStructurePromise;
     if (selfStructureUnread == null) return;
     applySelfStructureUnread(selfStructureUnread);
-  }, [isPaid, setUnreadGroup, clearScope]);
+  }, [
+    isPaid,
+    setUnreadGroup,
+    clearScope,
+    fetchMyWebSelfStructureLatestUnread,
+    fetchMyWebSelfStructureHistoryUnread,
+  ]);
 
   const clearMyWebStartupWarmupTimer = React.useCallback(() => {
     try {
@@ -1308,7 +1395,13 @@ function MainTabs() {
           name="MyWeb"
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         >
-          {(tabProps) => <MyWebStackNavigator {...tabProps} onSetMymodelLinkPayload={setMymodelLinkPayload} />}
+          {(tabProps) => (
+            <MyWebStackNavigator
+              {...tabProps}
+              onSetMymodelLinkPayload={setMymodelLinkPayload}
+              onRefreshTabUnread={refreshMyWebReportsUnreadBadge}
+            />
+          )}
         </Tab.Screen>
         <Tab.Screen
           name="MyModel"
