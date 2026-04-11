@@ -770,51 +770,55 @@ function MainTabs() {
 
       clearMyWebStartupWarmupTimer();
 
-      try {
-        await apiPost("/myweb/reports/ensure", {
-          types: ["weekly", "monthly"],
-          force: false,
+      const ensurePromise = Promise.resolve()
+        .then(() =>
+          apiPost("/myweb/reports/ensure", {
+            types: ["weekly", "monthly"],
+            force: false,
+          })
+        )
+        .catch((e) => {
+          console.warn("MainTabs: failed to warm MyWeb ensure on startup", e);
+          return null;
         });
-      } catch (e) {
-        console.warn("MainTabs: failed to warm MyWeb ensure on startup", e);
-      }
 
-      try {
-        await fetchAndApplyStartupSnapshot({
+      await Promise.allSettled([
+        fetchAndApplyStartupSnapshot({
           forceRefresh: true,
-          source: "myweb_startup_after_ensure",
-        });
-      } catch (e) {
-        console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
-      }
-
-      try {
-        await refreshMyWebReportsUnreadBadge();
-      } catch (e) {
-        console.warn("MainTabs: failed to refresh MyWeb unread badges after startup ensure", e);
-      }
+          source: "myweb_startup_initial",
+        }).catch((e) => {
+          console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
+          return null;
+        }),
+        refreshMyWebReportsUnreadBadge().catch((e) => {
+          console.warn("MainTabs: failed to refresh MyWeb unread badges on startup", e);
+          return null;
+        }),
+      ]);
 
       myWebStartupWarmupTimerRef.current = setTimeout(() => {
-        (async () => {
-          try {
-            await fetchAndApplyStartupSnapshot({
-              forceRefresh: true,
-              source: "myweb_startup_delayed_revalidate",
-            });
-          } catch (e) {
-            console.warn("MainTabs: failed to revalidate MyWeb startup snapshot", e);
-          }
+        ensurePromise
+          .catch(() => null)
+          .then(async () => {
+            try {
+              await fetchAndApplyStartupSnapshot({
+                forceRefresh: true,
+                source: "myweb_startup_after_ensure",
+              });
+            } catch (e) {
+              console.warn("MainTabs: failed to revalidate MyWeb startup snapshot", e);
+            }
 
-          try {
-            await refreshMyWebReportsUnreadBadge();
-          } catch (e) {
-            console.warn("MainTabs: failed to revalidate MyWeb unread badges", e);
-          } finally {
+            try {
+              await refreshMyWebReportsUnreadBadge();
+            } catch (e) {
+              console.warn("MainTabs: failed to revalidate MyWeb unread badges", e);
+            }
+          })
+          .catch(() => null)
+          .finally(() => {
             myWebStartupWarmupTimerRef.current = null;
-          }
-        })().catch(() => {
-          myWebStartupWarmupTimerRef.current = null;
-        });
+          });
       }, MYWEB_STARTUP_REVALIDATE_DELAY_MS);
     } catch {}
   }, [
