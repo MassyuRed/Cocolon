@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, View, ActivityIndicator, AppState, Platform, StatusBar, Alert, TouchableOpacity } from "react-native";
+import { Text, View, ActivityIndicator, AppState, Platform, StatusBar, Alert, TouchableOpacity, Linking } from "react-native";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { NavigationContainer, createNavigationContainerRef, StackActions } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -93,6 +93,10 @@ const MYWEB_STARTUP_REVALIDATE_DELAY_MS = 1800;
 const MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
 const MYWEB_SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
 const MYWEB_REPORT_READ_STATUS_CHUNK_SIZE = 60;
+
+const SHARE_PROFILE_API_BASE_URL =
+  (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
+const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 
 const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory"]);
 const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
@@ -281,6 +285,106 @@ function requestOpenRouteFromNotification(remoteMessage) {
   __pendingOpenRouteFromNotification = resolveNotificationTargetRoute(remoteMessage);
   tryOpenRouteIfPending();
 }
+
+function extractFriendCodeFromIncomingUrl(rawUrl) {
+  const url = String(rawUrl || "").trim();
+  if (!url) return "";
+
+  const patterns = [
+    /^https?:\/\/emlis\.app\/u\/([^/?#]+)/i,
+    /^cocolon:\/\/u\/([^/?#]+)/i,
+    /^cocolon:\/\/emlis\.app\/u\/([^/?#]+)/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match?.[1]) {
+      try {
+        return decodeURIComponent(match[1]);
+      } catch {
+        return match[1];
+      }
+    }
+  }
+
+  return "";
+}
+
+async function resolveSharedProfileUserId(friendCode) {
+  const code = String(friendCode || "").trim();
+  if (!code) return null;
+
+  try {
+    const url = `${SHARE_PROFILE_API_BASE_URL}/public/profile/by-friend-code?code=${encodeURIComponent(code)}`;
+    const res = await fetch(url, {
+      method: "GET",
+      headers: { accept: "application/json" },
+    });
+
+    if (!res.ok) return null;
+
+    const json = await res.json().catch(() => null);
+    const userId = String(json?.user_id || "").trim();
+    return userId || null;
+  } catch (e) {
+    console.warn("resolveSharedProfileUserId error:", e);
+    return null;
+  }
+}
+
+function requestOpenSharedAccountRoute(viewedUserId) {
+  const userId = String(viewedUserId || "").trim();
+  if (!userId) return;
+
+  __pendingOpenRouteFromNotification = {
+    name: "MyModel",
+    params: {
+      screen: "Account",
+      params: { viewedUserId: userId },
+    },
+  };
+
+  tryOpenRouteIfPending();
+}
+
+async function handleIncomingAppUrl(rawUrl) {
+  const friendCode = extractFriendCodeFromIncomingUrl(rawUrl);
+  if (!friendCode) return false;
+
+  const userId = await resolveSharedProfileUserId(friendCode);
+  if (!userId) return true;
+
+  requestOpenSharedAccountRoute(userId);
+  return true;
+}
+
+const appLinking = {
+  prefixes: APP_LINK_PREFIXES,
+  async getInitialURL() {
+    const url = await Linking.getInitialURL();
+    if (!url) return null;
+
+    const handled = await handleIncomingAppUrl(url);
+    return handled ? null : url;
+  },
+  subscribe(listener) {
+    const subscription = Linking.addEventListener("url", ({ url }) => {
+      Promise.resolve(handleIncomingAppUrl(url))
+        .then((handled) => {
+          if (!handled) listener(url);
+        })
+        .catch(() => {
+          listener(url);
+        });
+    });
+
+    return () => {
+      try {
+        subscription?.remove?.();
+      } catch {}
+    };
+  },
+};
 
 function CocolonTabBar(props) {
   const { colors } = useTheme();
@@ -503,7 +607,6 @@ function MainTabs() {
     getFeatureUnread,
     setUnread,
     setUnreadGroup,
-    clearScope,
     getPrefetchEntryFresh,
     setPrefetch,
     applyStartupSnapshot,
@@ -517,6 +620,12 @@ function MainTabs() {
   const selfStructureLatestVersionRef = useRef(null);
   const selfStructureLatestInitializedRef = useRef(false);
   const myWebUnreadRefreshSeqRef = useRef(0);
+  const myWebUnreadStateRef = useRef({
+    daily: false,
+    weekly: false,
+    monthly: false,
+    selfStructure: false,
+  });
   const myWebStartupWarmupLastRunAtRef = useRef(0);
   const myWebStartupWarmupTimerRef = useRef(null);
   const myWebStartupWarmupSeqRef = useRef(0);
@@ -604,6 +713,112 @@ function MainTabs() {
 
   const hasUnreadFriendRequests = !!getFeatureUnread("Friends", "requests");
   const hasUnreadFriendFeed = !!getFeatureUnread("Friends", "feed");
+
+  useEffect(() => {
+    myWebUnreadStateRef.current = {
+      daily: !!getFeatureUnread("MyWeb", "daily"),
+      weekly: !!getFeatureUnread("MyWeb", "weekly"),
+      monthly: !!getFeatureUnread("MyWeb", "monthly"),
+      selfStructure: !!getFeatureUnread("MyWeb", "selfStructure"),
+    };
+  }, [getFeatureUnread]);
+
+  const applyMyWebUnreadPatch = React.useCallback((patch, options = {}) => {
+    const preserveTruthyKeys = options?.preserveTruthyKeys === true;
+    const targetKeys = Array.isArray(options?.keys) && options.keys.length > 0
+      ? options.keys
+      : ["daily", "weekly", "monthly", "selfStructure"];
+
+    const prev = myWebUnreadStateRef.current || {
+      daily: false,
+      weekly: false,
+      monthly: false,
+      selfStructure: false,
+    };
+
+    const next = { ...prev };
+    const groupPatch = {};
+
+    targetKeys.forEach((rawKey) => {
+      const key = String(rawKey || "").trim();
+      if (!key) return;
+      const incomingValue = !!patch?.[key];
+      const nextValue = preserveTruthyKeys ? (!!prev[key] || incomingValue) : incomingValue;
+      next[key] = nextValue;
+      groupPatch[key] = nextValue;
+    });
+
+    myWebUnreadStateRef.current = next;
+
+    if (Object.keys(groupPatch).length > 0) {
+      setUnreadGroup("MyWeb", groupPatch);
+    }
+
+    return next;
+  }, [setUnreadGroup]);
+
+  const extractMyWebUnreadFromStartupSnapshot = React.useCallback((payload) => {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+
+    const startupRoot =
+      payload?.startup && typeof payload.startup === "object" && !Array.isArray(payload.startup)
+        ? payload.startup
+        : payload;
+
+    const sections =
+      startupRoot?.sections &&
+      typeof startupRoot.sections === "object" &&
+      !Array.isArray(startupRoot.sections)
+        ? startupRoot.sections
+        : null;
+
+    const mywebUnreadSection =
+      sections?.myweb_unread &&
+      typeof sections.myweb_unread === "object" &&
+      !Array.isArray(sections.myweb_unread)
+        ? sections.myweb_unread
+        : null;
+
+    const unreadByType =
+      mywebUnreadSection?.unread_by_type &&
+      typeof mywebUnreadSection.unread_by_type === "object" &&
+      !Array.isArray(mywebUnreadSection.unread_by_type)
+        ? mywebUnreadSection.unread_by_type
+        : null;
+
+    if (!unreadByType) return null;
+
+    return {
+      daily: !!unreadByType.daily,
+      weekly: !!unreadByType.weekly,
+      monthly: !!unreadByType.monthly,
+      selfStructure: !!unreadByType.selfStructure,
+    };
+  }, []);
+
+  const stripMyWebUnreadFromStartupSnapshot = React.useCallback((payload) => {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+
+    try {
+      const cloned = JSON.parse(JSON.stringify(payload));
+      const startupRoot =
+        cloned?.startup && typeof cloned.startup === "object" && !Array.isArray(cloned.startup)
+          ? cloned.startup
+          : cloned;
+
+      if (
+        startupRoot?.sections &&
+        typeof startupRoot.sections === "object" &&
+        !Array.isArray(startupRoot.sections)
+      ) {
+        delete startupRoot.sections.myweb_unread;
+      }
+
+      return cloned;
+    } catch {
+      return null;
+    }
+  }, []);
 
   const MYMODEL_API_BASE_URL = (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
   const __lastActivityLoginPingAtRef = React.useRef(0);
@@ -754,32 +969,50 @@ function MainTabs() {
     return ids.some((id) => !readSet.has(id));
   }, [fetchMyWebReportReadIdSet, isPaid]);
 
-  const refreshMyWebReportsUnreadBadge = React.useCallback(async () => {
+  const clearMyWebStartupWarmupTimer = React.useCallback(() => {
+    try {
+      if (myWebStartupWarmupTimerRef.current) {
+        clearTimeout(myWebStartupWarmupTimerRef.current);
+      }
+    } catch {}
+    myWebStartupWarmupTimerRef.current = null;
+  }, []);
+
+  const refreshMyWebReportsUnreadBadge = React.useCallback(async (options = {}) => {
+    const preserveTruthyKeys = options?.preserveTruthyKeys === true;
+    if (!preserveTruthyKeys) {
+      myWebStartupWarmupSeqRef.current += 1;
+      clearMyWebStartupWarmupTimer();
+    }
+
     const refreshSeq = ++myWebUnreadRefreshSeqRef.current;
     const isStale = () => refreshSeq !== myWebUnreadRefreshSeqRef.current;
     const canResolveSelfStructureUnread = !subscriptionLoading;
 
     const applyBaseUnread = (unread) => {
       if (isStale()) return;
-      setUnreadGroup("MyWeb", {
-        daily: !!unread?.daily,
-        weekly: !!unread?.weekly,
-        monthly: !!unread?.monthly,
-      });
-    };
-
-    const applyBaseUnreadFallback = () => {
-      if (isStale()) return;
-      setUnreadGroup("MyWeb", {
-        daily: false,
-        weekly: false,
-        monthly: false,
-      });
+      applyMyWebUnreadPatch(
+        {
+          daily: !!unread?.daily,
+          weekly: !!unread?.weekly,
+          monthly: !!unread?.monthly,
+        },
+        {
+          preserveTruthyKeys,
+          keys: ["daily", "weekly", "monthly"],
+        }
+      );
     };
 
     const applySelfStructureUnread = (value) => {
       if (isStale()) return;
-      setUnreadGroup("MyWeb", { selfStructure: !!value });
+      applyMyWebUnreadPatch(
+        { selfStructure: !!value },
+        {
+          preserveTruthyKeys,
+          keys: ["selfStructure"],
+        }
+      );
     };
 
     const baseQuery = new URLSearchParams({ limit: "1", include_self_structure: "false" }).toString();
@@ -806,7 +1039,6 @@ function MainTabs() {
     } catch (e) {
       if (isStale()) return;
       console.warn("MainTabs: failed to refresh MyWeb unread badges", e);
-      applyBaseUnreadFallback();
     }
 
     const selfStructureUnread = await selfStructurePromise;
@@ -815,21 +1047,13 @@ function MainTabs() {
   }, [
     isPaid,
     subscriptionLoading,
-    setUnreadGroup,
+    clearMyWebStartupWarmupTimer,
+    applyMyWebUnreadPatch,
     fetchMyWebSelfStructureLatestUnread,
     fetchMyWebSelfStructureHistoryUnread,
   ]);
 
-  const clearMyWebStartupWarmupTimer = React.useCallback(() => {
-    try {
-      if (myWebStartupWarmupTimerRef.current) {
-        clearTimeout(myWebStartupWarmupTimerRef.current);
-      }
-    } catch {}
-    myWebStartupWarmupTimerRef.current = null;
-  }, []);
-
-  const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup", applyIf } = {}) => {
+  const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup", applyIf, preserveTruthyKeys = false } = {}) => {
     const params = new URLSearchParams();
     if (forceRefresh) {
       params.set("force_refresh", "true");
@@ -854,13 +1078,29 @@ function MainTabs() {
       }
     }
 
-    return applyStartupSnapshot(json, {
+    const startupMyWebUnread = extractMyWebUnreadFromStartupSnapshot(json);
+    if (startupMyWebUnread) {
+      applyMyWebUnreadPatch(startupMyWebUnread, {
+        preserveTruthyKeys,
+        keys: ["daily", "weekly", "monthly", "selfStructure"],
+      });
+    }
+
+    const snapshotWithoutMyWebUnread = stripMyWebUnreadFromStartupSnapshot(json);
+    if (!snapshotWithoutMyWebUnread) return null;
+
+    return applyStartupSnapshot(snapshotWithoutMyWebUnread, {
       source,
       fetchedAt: Date.now(),
-      replaceUnreadScopes: ["MyWeb"],
+      replaceUnreadScopes: [],
       replacePrefetchScopes: false,
     });
-  }, [applyStartupSnapshot]);
+  }, [
+    applyMyWebUnreadPatch,
+    applyStartupSnapshot,
+    extractMyWebUnreadFromStartupSnapshot,
+    stripMyWebUnreadFromStartupSnapshot,
+  ]);
 
   const revalidateMyWebUnreadFromStartup = React.useCallback(async ({ source = "myweb_startup", applyIf } = {}) => {
     try {
@@ -868,6 +1108,7 @@ function MainTabs() {
         forceRefresh: true,
         source,
         applyIf,
+        preserveTruthyKeys: true,
       });
     } catch (e) {
       console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
@@ -882,7 +1123,7 @@ function MainTabs() {
     }
 
     try {
-      await refreshMyWebReportsUnreadBadge();
+      await refreshMyWebReportsUnreadBadge({ preserveTruthyKeys: true });
     } catch (e) {
       console.warn("MainTabs: failed to refresh MyWeb unread badges on startup", e);
     }
@@ -908,6 +1149,7 @@ function MainTabs() {
             forceRefresh: true,
             source: `${sourcePrefix}_seed`,
             applyIf: applyIfCurrent,
+            preserveTruthyKeys: true,
           });
         } catch (e) {
           console.warn("MainTabs: failed to seed MyWeb unread from startup snapshot", e);
@@ -1734,6 +1976,7 @@ export default function App() {
               <AuthProvider>
                 <NavigationContainer
                   ref={navigationRef}
+                  linking={appLinking}
                   onReady={() => {
                     tryOpenRouteIfPending();
                   }}
