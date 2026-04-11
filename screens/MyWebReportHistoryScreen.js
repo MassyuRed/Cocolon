@@ -158,13 +158,13 @@ function formatRangeJP(startIso, endIso, reportType) {
     const md = (d) => `${d.getMonth() + 1}/${d.getDate()}`;
 
     if (reportType === "daily") {
-      return `${s.getFullYear()}/${s.getMonth() + 1}/${s.getDate()}（1日）`;
+      return `${s.getFullYear()}/${s.getMonth() + 1}/${s.getDate()}`;
     }
     if (reportType === "weekly") {
-      return `${md(s)} ～ ${md(e)}（7日）`;
+      return `${md(s)} ～ ${md(e)}`;
     }
     if (reportType === "monthly") {
-      return `${md(s)} ～ ${md(e)}（28日）`;
+      return `${md(s)} ～ ${md(e)}`;
     }
     return `${md(s)} ～ ${md(e)}`;
   } catch {
