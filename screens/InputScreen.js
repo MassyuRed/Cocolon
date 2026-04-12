@@ -2799,7 +2799,7 @@ ${String(error?.message || error)}`
             color={colors.TITLE_GOLD}
             style={styles.inputFeedbackTitleIcon}
           />
-          <Text style={styles.inputFeedbackTitle}>感情入力へのコメント</Text>
+          <Text style={styles.inputFeedbackTitle}>入力へのコメント</Text>
         </View>
         {inputFeedbackModalDominantLabel ? (
           <Text style={styles.inputFeedbackMetaText}>
