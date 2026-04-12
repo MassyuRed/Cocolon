@@ -1118,7 +1118,7 @@ function createStyles(COLORS, ui) {
     recommendBadgeText: {
       fontSize: font.description ?? 10,
       fontWeight: "900",
-      color: COLORS.FIELD_BG,
+      color: COLORS.ACCENT_TEXT ?? COLORS.FIELD_BG,
     },
     currentBadge: {
       flexDirection: "row",
