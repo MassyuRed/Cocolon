@@ -244,6 +244,7 @@ export default function MyModelScreen({ route } = {}) {
 
   const unreadMyModelCreate = !!getFeatureUnread("MyModel", "mymodelCreate");
   const unreadReflections = !isTutorialMode && !!getFeatureUnread("MyModel", "reflectionsNew");
+  const unreadEmotionLog = !!getFeatureUnread("Friends", "feed");
 
   // Recommend (users)
   const [recoModalVisible, setRecoModalVisible] = useState(false);
@@ -1131,6 +1132,19 @@ export default function MyModelScreen({ route } = {}) {
     }
   }, [navigation]);
 
+  const openEmotionLog = useCallback(() => {
+    if (!navigation?.navigate) return;
+
+    try {
+      navigation.navigate("EmotionLog");
+    } catch {
+      Alert.alert(
+        "感情ログを開けません",
+        "感情ログ画面が navigation に未登録の可能性があります。"
+      );
+    }
+  }, [navigation]);
+
   const handlePressGuide = useCallback(() => {
     // 1) normal navigate
     try {
@@ -1251,6 +1265,19 @@ export default function MyModelScreen({ route } = {}) {
             onPress={openReflections}
             badgeVisible={unreadReflections}
             accessibilityLabel="Reflectionsを開く"
+          />
+        </View>
+
+        <View style={{ marginTop: 16 }}>
+          <MyModelHomeActionCard
+            styles={styles}
+            title="感情通知"
+            description="フォロー中ユーザーの感情入力を確認できます。"
+            buttonLabel="感情ログを開く"
+            buttonIconName="notifications-outline"
+            onPress={openEmotionLog}
+            badgeVisible={unreadEmotionLog}
+            accessibilityLabel="感情ログを開く"
           />
         </View>
 

@@ -461,9 +461,9 @@ export default function FriendsScreen(props) {
       case STEP_FRIENDS_OVERVIEW:
         return {
           step: STEP_FRIENDS_OVERVIEW,
-          title: "Friend",
+          title: "感情ログ",
           message:
-            `ここではフレンドの感情を観測することができます。\nこのあと${tutorialMockFriendName}さんから通知が届き、フレンドログに反映されます。`,
+            `ここではフォロー中ユーザーの感情を観測できます。\nこのあと${tutorialMockFriendName}さんから通知が届き、感情ログに反映されます。`,
           mode: "info",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(STEP_FRIENDS_NOTIFICATION),
@@ -471,7 +471,7 @@ export default function FriendsScreen(props) {
       case STEP_FRIENDS_NOTIFICATION:
         return {
           step: STEP_FRIENDS_NOTIFICATION,
-          title: "フレンド通知",
+          title: "感情通知",
           message: tutorialNotificationShown
             ? `${tutorialMockFriendName}さんが感情を入力しました。\nアプリの通知をオンにしていると、このように通知が届きます。`
             : `${tutorialMockFriendName}さんからの通知を準備しています。\n通知が届くまでこのままお待ちください。`,
@@ -487,9 +487,9 @@ export default function FriendsScreen(props) {
       case STEP_FRIENDS_LOG:
         return {
           step: STEP_FRIENDS_LOG,
-          title: "フレンドログ",
+          title: "感情ログ",
           message:
-            "フレンド通知では感情のみ表示されます。\nメモの内容は表示されません。",
+            "感情通知では感情のみ表示されます。\nメモの内容は表示されません。",
           mode: "info",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(STEP_FRIENDS_COMPLETE),
@@ -651,7 +651,7 @@ export default function FriendsScreen(props) {
         id: row?.id || `friend-feed-${index}`,
         ownerName:
           String(row?.ownerName || row?.owner_name || row?.ownerNameLabel || "").trim() ||
-          "Friend",
+          "ユーザー",
         items: Array.isArray(row?.items)
           ? row.items.map((it) => ({
               type: String(it?.type || it?.emotion || "").trim() || "感情",
@@ -775,7 +775,7 @@ export default function FriendsScreen(props) {
       const friends = (Array.isArray(json?.friendsList) ? json.friendsList : []).map((f) => ({
         userId: String(f?.userId || f?.user_id || "").trim(),
         displayName:
-          String(f?.displayName || f?.display_name || "").trim() || "Friend",
+          String(f?.displayName || f?.display_name || "").trim() || "ユーザー",
         friendCode:
           String(f?.friendCode || f?.friend_code || "").trim() || null,
       }));
@@ -786,7 +786,7 @@ export default function FriendsScreen(props) {
           r?.requesterUserId || r?.requester_user_id || ""
         ).trim(),
         requesterName:
-          String(r?.requesterName || r?.requester_name || "").trim() || "Friend",
+          String(r?.requesterName || r?.requester_name || "").trim() || "ユーザー",
         createdAt: r?.createdAt || r?.created_at || null,
       }));
 
@@ -796,7 +796,7 @@ export default function FriendsScreen(props) {
           r?.requestedUserId || r?.requested_user_id || ""
         ).trim(),
         requestedName:
-          String(r?.requestedName || r?.requested_name || "").trim() || "Friend",
+          String(r?.requestedName || r?.requested_name || "").trim() || "ユーザー",
         friendCode:
           String(r?.friendCode || r?.friend_code || "").trim() || null,
         createdAt: r?.createdAt || r?.created_at || null,
@@ -1221,6 +1221,55 @@ export default function FriendsScreen(props) {
   );
 
 
+  const handleOpenFollowList = useCallback(async () => {
+    if (isTutorialMode) {
+      Alert.alert(
+        "チュートリアル",
+        "チュートリアルではフォロー管理は行いません。\n\n感情通知の体験は、感情ログで確認できます。"
+      );
+      return;
+    }
+
+    try {
+      const { userId } = await getAuthContext();
+      if (!userId) {
+        throw new Error("ログイン情報が取得できませんでした。");
+      }
+
+      if (navigation?.navigate) {
+        navigation.navigate("FollowListScreen", {
+          viewedUserId: userId,
+          targetUserId: userId,
+          initialTab: "following",
+        });
+        return;
+      }
+    } catch (e) {
+      const msg = buildErrorMessage(e);
+      Alert.alert("フォロー一覧を開けません", msg);
+      return;
+    }
+
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      if (parent && typeof parent.navigate === "function") {
+        const { userId } = await getAuthContext();
+        if (!userId) {
+          throw new Error("ログイン情報が取得できませんでした。");
+        }
+        parent.navigate("FollowListScreen", {
+          viewedUserId: userId,
+          targetUserId: userId,
+          initialTab: "following",
+        });
+      }
+    } catch (e) {
+      const msg = buildErrorMessage(e);
+      Alert.alert("フォロー一覧を開けません", msg);
+    }
+  }, [isTutorialMode, navigation]);
+
   const openInputTab = useCallback(() => {
     try {
       navigation?.navigate?.("Input");
@@ -1315,11 +1364,11 @@ export default function FriendsScreen(props) {
         {/* パネルヘッダー：Friend */}
           <View style={styles.panelHeader}>
             <View ref={panelTitleRowRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>Friend</Text>
+            <Text style={styles.panelTitle}>感情ログ</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
               onPress={handlePressGuide}
-              accessibilityLabel="Friendのガイドを開く"
+              accessibilityLabel="感情ログのガイドを開く"
             >
               <Ionicons
                 name="help-circle-outline"
@@ -1336,7 +1385,7 @@ export default function FriendsScreen(props) {
                   if (isTutorialMode) {
                     Alert.alert(
                       "チュートリアル",
-                      "チュートリアルでは本番のフレンドログを取得せず、模擬の通知/ログだけを表示します。"
+                      "チュートリアルでは本番の感情ログを取得せず、模擬の通知/ログだけを表示します。"
                     );
                     return;
                   }
@@ -1361,46 +1410,15 @@ export default function FriendsScreen(props) {
               </CocolonPressable>
 
               <CocolonPressable
-                onPress={() => {
-                  if (isTutorialMode) {
-                    Alert.alert(
-                      "チュートリアル",
-                      "チュートリアルではフレンド管理（申請/承認）は行いません。\n\nフレンド通知の体験は、フレンドログで確認できます。"
-                    );
-                    return;
-                  }
-
-                  setModalVisible(true);
-
-                  try {
-                    if (typeof onOpenFriendManage === "function") {
-                      onOpenFriendManage();
-                    }
-                  } catch {
-                    // noop
-                  }
-                }}
-                style={[styles.friendPill, { position: "relative" }]}
->
+                onPress={handleOpenFollowList}
+                style={styles.friendPill}
+                accessibilityLabel="フォロー一覧を開く"
+              >
                 <Ionicons
                   name="people-circle-outline"
                   size={20}
                   color={colors.TEXT_ON_LIGHT}
                 />
-                {hasUnreadFriendRequests ? (
-                  <View
-                    pointerEvents="none"
-                    style={{
-                      position: "absolute",
-                      top: 2,
-                      right: 2,
-                      width: 8,
-                      height: 8,
-                      borderRadius: 4,
-                      backgroundColor: "#EF4444",
-                    }}
-                  />
-                ) : null}
               </CocolonPressable>
             </View>
           </View>
@@ -1413,14 +1431,14 @@ export default function FriendsScreen(props) {
             onScroll={handleTutorialScroll}
             scrollEventThrottle={16}
           >
-            <Text style={[styles.lead, { fontWeight: "700" }]}>フレンドログ</Text>
+            <Text style={[styles.lead, { fontWeight: "700" }]}>感情ログ</Text>
 
             {isTutorialMode ? (
               <View ref={tutorialIntroRef} collapsable={false} style={styles.manageIntroCard}>
                 <Text style={styles.manageIntroText}>
                   チュートリアルでは、{tutorialMockFriendName}さんから通知が届く体験をします。
                   {"\n"}
-                  まもなく通知が届き、この下のフレンドログに反映されます。
+                  まもなく通知が届き、この下の感情ログに反映されます。
                   {"\n"}
                   ※ 本番データには保存されません。
                 </Text>
@@ -1440,7 +1458,7 @@ export default function FriendsScreen(props) {
                     color={colors.TITLE_GOLD}
                     style={{ marginRight: 8 }}
                   />
-                  <Text style={styles.tutorialNotificationTitle}>通知</Text>
+                  <Text style={styles.tutorialNotificationTitle}>感情通知</Text>
                 </View>
                 <Text style={styles.tutorialNotificationText}>{tutorialNotificationText}</Text>
               </View>
@@ -1457,7 +1475,7 @@ export default function FriendsScreen(props) {
                       if (isTutorialMode) {
                         Alert.alert(
                           "チュートリアル",
-                          "チュートリアルでは本番のフレンドログを取得せず、模擬の通知/ログだけを表示します。"
+                          "チュートリアルでは本番の感情ログを取得せず、模擬の通知/ログだけを表示します。"
                         );
                         return;
                       }
@@ -1475,7 +1493,7 @@ export default function FriendsScreen(props) {
               ) : effectiveFeed.length === 0 ? (
                 <View style={styles.centerBox}>
                   <Text style={styles.emptyText}>
-                    まだフレンドの感情ログがありません
+                    まだ感情ログがありません
                   </Text>
                 </View>
               ) : (
@@ -1492,7 +1510,7 @@ export default function FriendsScreen(props) {
             {isTutorialMode ? (
               <View style={styles.tutorialCompleteCard}>
                 <Text style={styles.tutorialCompleteText}>
-                  フレンド通知の体験を確認できたら、チュートリアルを完了して本番モードへ進みます。
+                  感情通知の体験を確認できたら、チュートリアルを完了して本番モードへ進みます。
                 </Text>
 
                 <View ref={tutorialCompleteButtonWrapRef} collapsable={false}>
@@ -1544,7 +1562,7 @@ export default function FriendsScreen(props) {
 
       {/* フレンド管理モーダル（MyProfile 方式） */}
       <Modal
-        visible={modalVisible}
+        visible={false && modalVisible}
         transparent
         animationType="fade"
         onRequestClose={() => setModalVisible(false)}

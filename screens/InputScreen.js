@@ -2302,10 +2302,10 @@ ${String(error?.message || error)}`
                       />
                       <View style={styles.preferenceTextWrap}>
                         <Text style={styles.preferenceTitle}>
-                          フレンドに通知しない
+                          感情通知を送らない
                         </Text>
                         <Text style={styles.preferenceDesc}>
-                          オンにすると感情入力がフレンドに通知されません。
+                          オンにすると感情入力がフォロー中ユーザーに通知されません。
                         </Text>
                       </View>
                     </View>
@@ -2327,7 +2327,7 @@ ${String(error?.message || error)}`
                           : undefined
                       }
                       ios_backgroundColor="#D1D5DB"
-                      accessibilityLabel="フレンドに通知しない設定を切り替える"
+                      accessibilityLabel="感情通知を送らない設定を切り替える"
                     />
                   </View>
                 </View>

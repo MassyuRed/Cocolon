@@ -529,7 +529,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const onCopyFriendCode = async () => {
     const code = String(friendCode || "").trim();
     if (!code) {
-      Alert.alert("準備中", "フレンドコードがまだ取得できていません。");
+      Alert.alert("準備中", "共有コードがまだ取得できていません。");
       return;
     }
     try {
@@ -543,7 +543,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const onShareProfile = async () => {
     const code = String(friendCode || "").trim();
     if (!code) {
-      Alert.alert("準備中", "フレンドコードがまだ取得できていません。");
+      Alert.alert("準備中", "共有コードがまだ取得できていません。");
       return;
     }
     const url = `https://emlis.app/u/${code}`;
@@ -1116,7 +1116,7 @@ const onRestorePurchases = async () => {
               {canShowFriendCode ? (
                 <ProfileRow
                   styles={styles}
-                  label="フレンドコード"
+                  label="共有コード"
                   labelAction={
                     user ? (
                       <Pressable
@@ -1127,7 +1127,7 @@ const onRestorePurchases = async () => {
                         ]}
                         onPress={onCopyFriendCode}
                         disabled={loading || !String(friendCode || "").trim()}
-                        accessibilityLabel="フレンドコードをコピー"
+                        accessibilityLabel="共有コードをコピー"
                         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                       >
                         <Ionicons
@@ -1369,7 +1369,7 @@ const onRestorePurchases = async () => {
                 />
 
                 <VisibilitySettingRow
-                  title="フレンドコード表示設定"
+                  title="共有コード表示設定"
                   isPublic={!!accountVisibility.is_friend_code_public}
                   onPressPublic={() =>
                     patchAccountVisibilityMe({ is_friend_code_public: true })

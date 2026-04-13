@@ -513,7 +513,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     if (isBusy || friendNotificationLoading || !pushEnabled) return;
 
     if (!user?.id) {
-      Alert.alert("フレンド通知", "ログイン情報が取得できませんでした。");
+      Alert.alert("感情通知", "ログイン情報が取得できませんでした。");
       return;
     }
 
@@ -526,7 +526,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     } catch (error) {
       console.warn("SettingsAppSettingsScreen: update friend notification failed", error);
       setFriendNotificationEnabled(previous);
-      Alert.alert("フレンド通知", String(error?.message || "通知設定の更新に失敗しました。"));
+      Alert.alert("感情通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
       setLocalProcessing(false);
     }
@@ -601,7 +601,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
           <View style={{ marginTop: 8 }}>
             <SettingSwitchRow
-              label="フレンド通知"
+              label="感情通知"
               value={friendNotificationEnabled}
               onValueChange={updateFriendNotificationEnabled}
               disabled={friendNotificationLoading || isBusy || !pushEnabled}

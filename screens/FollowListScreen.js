@@ -21,6 +21,8 @@ import { apiFetch } from "../lib/apiClient";
 // MyModel（MashOS）API
 const MYMODEL_API_BASE_URL =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
+const FRIEND_NOTIFICATION_SETTINGS_ENDPOINT = `${MYMODEL_API_BASE_URL}/friends/notification-settings`;
+const FRIEND_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
 
 /**
  * FollowListScreen
@@ -47,6 +49,49 @@ function normalizeTab(t) {
 
 function safeString(v) {
   return typeof v === "string" ? v : "";
+}
+
+function extractEmotionNotificationMap(payload) {
+  const rows = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.settings)
+    ? payload.settings
+    : Array.isArray(payload?.data)
+    ? payload.data
+    : [];
+
+  const map = {};
+
+  for (const row of rows) {
+    if (!row || typeof row !== "object") continue;
+
+    const ownerUserId = safeString(
+      row?.owner_user_id ??
+        row?.friend_user_id ??
+        row?.ownerUserId ??
+        row?.friendUserId ??
+        row?.owner_id ??
+        row?.friend_id ??
+        row?.friendId
+    ).trim();
+
+    if (!ownerUserId || ownerUserId === FRIEND_NOTIFICATION_GLOBAL_OWNER_ID) {
+      continue;
+    }
+
+    const enabled =
+      row?.is_enabled ??
+      row?.isEnabled ??
+      row?.enabled ??
+      row?.is_on ??
+      row?.isOn;
+
+    if (typeof enabled === "boolean") {
+      map[ownerUserId] = enabled;
+    }
+  }
+
+  return map;
 }
 
 
@@ -139,6 +184,9 @@ export default function FollowListScreen({ navigation, route }) {
   const [requestCount, setRequestCount] = useState(0);
   const [requestedCount, setRequestedCount] = useState(0);
   const [requestActionLoadingId, setRequestActionLoadingId] = useState(null);
+  const [emotionNotifMap, setEmotionNotifMap] = useState({});
+  const [emotionNotifLoading, setEmotionNotifLoading] = useState(false);
+  const [emotionNotifBusyId, setEmotionNotifBusyId] = useState(null);
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
@@ -401,6 +449,59 @@ export default function FollowListScreen({ navigation, route }) {
     loadList();
   }, [loadList]);
 
+  const loadEmotionNotificationSettings = useCallback(async () => {
+    if (!user || !isSelfList || tab !== TAB_FOLLOWING) {
+      setEmotionNotifMap({});
+      setEmotionNotifLoading(false);
+      return;
+    }
+
+    setEmotionNotifLoading(true);
+    try {
+      let accessToken = null;
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        accessToken = sessionData?.session?.access_token ?? null;
+      } catch {
+        accessToken = null;
+      }
+
+      if (!accessToken) {
+        throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
+      }
+
+      const res = await apiFetch(FRIEND_NOTIFICATION_SETTINGS_ENDPOINT, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try {
+          const j = await res.json();
+          if (j && typeof j.detail === "string") msg = j.detail;
+        } catch {
+          // ignore
+        }
+        throw new Error(msg);
+      }
+
+      const json = await res.json().catch(() => ({}));
+      setEmotionNotifMap(extractEmotionNotificationMap(json));
+    } catch (e) {
+      console.warn("FollowListScreen loadEmotionNotificationSettings error:", e);
+      setEmotionNotifMap({});
+    } finally {
+      setEmotionNotifLoading(false);
+    }
+  }, [user, isSelfList, tab]);
+
+  useEffect(() => {
+    loadEmotionNotificationSettings();
+  }, [loadEmotionNotificationSettings]);
+
   const openMyProfile = (targetId) => {
     if (!navigation?.navigate || !targetId) return;
 
@@ -631,9 +732,73 @@ export default function FollowListScreen({ navigation, route }) {
     }
   };
 
+  const toggleEmotionNotification = async (targetUserId) => {
+    const ownerUserId = String(targetUserId || "").trim();
+    if (!ownerUserId) return;
+    if (!user || !isSelfList || tab !== TAB_FOLLOWING) return;
+    if (emotionNotifBusyId) return;
+
+    const currentEnabled = emotionNotifMap?.[ownerUserId] !== false;
+    const nextEnabled = !currentEnabled;
+
+    setEmotionNotifMap((prev) => ({ ...(prev || {}), [ownerUserId]: nextEnabled }));
+    setEmotionNotifBusyId(ownerUserId);
+
+    try {
+      setErrorText("");
+
+      let accessToken = null;
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        accessToken = sessionData?.session?.access_token ?? null;
+      } catch {
+        accessToken = null;
+      }
+
+      if (!accessToken) {
+        throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
+      }
+
+      const res = await apiFetch(
+        `${FRIEND_NOTIFICATION_SETTINGS_ENDPOINT}/${encodeURIComponent(ownerUserId)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({ is_enabled: nextEnabled }),
+        }
+      );
+
+      if (!res.ok) {
+        let msg = `HTTP ${res.status}`;
+        try {
+          const j = await res.json();
+          if (j && typeof j.detail === "string") msg = j.detail;
+        } catch {
+          // ignore
+        }
+        throw new Error(msg);
+      }
+    } catch (e) {
+      console.warn("toggleEmotionNotification error:", e);
+      setEmotionNotifMap((prev) => ({ ...(prev || {}), [ownerUserId]: currentEnabled }));
+      setErrorText(String(e?.message || e));
+    } finally {
+      setEmotionNotifBusyId(null);
+    }
+  };
+
   const renderItem = ({ item }) => {
     const name = safeString(item?.display_name) || "（未設定）";
     const isSelf = !!user && String(item?.id || "") === String(user.id);
+    const canToggleEmotionNotification =
+      isSelfList && tab === TAB_FOLLOWING && !isSelf;
+    const isEmotionNotificationEnabled =
+      emotionNotifMap?.[String(item?.id || "")] !== false;
+    const isEmotionNotificationBusy =
+      String(emotionNotifBusyId || "") === String(item?.id || "");
 
     return (
       <TouchableOpacity
@@ -657,6 +822,11 @@ export default function FollowListScreen({ navigation, route }) {
           {(tab === TAB_REQUESTS || tab === TAB_REQUESTED) && item?._request_created_at ? (
             <Text style={styles.rowSub} numberOfLines={1}>
               申請: {String(item?._request_created_at || "").slice(0, 10)}
+            </Text>
+          ) : null}
+          {isSelfList && tab === TAB_FOLLOWING && !isSelf ? (
+            <Text style={styles.rowSub} numberOfLines={1}>
+              感情通知: {isEmotionNotificationEnabled ? "ON" : "OFF"}
             </Text>
           ) : null}
         </View>
@@ -751,6 +921,53 @@ export default function FollowListScreen({ navigation, route }) {
               )}
               <Text style={styles.qnaBtnText}>取消</Text>
             </TouchableOpacity>
+          ) : isSelfList && tab === TAB_FOLLOWING ? (
+            <View style={styles.rowRightGroup}>
+              {canToggleEmotionNotification ? (
+                <TouchableOpacity
+                  style={[
+                    styles.iconPill,
+                    (emotionNotifLoading || isEmotionNotificationBusy) && styles.iconPillDisabled,
+                  ]}
+                  activeOpacity={0.8}
+                  onPress={() => toggleEmotionNotification(item?.id)}
+                  disabled={!item?.id || emotionNotifLoading || isEmotionNotificationBusy}
+                  accessibilityLabel={
+                    isEmotionNotificationEnabled
+                      ? "感情通知をオフにする"
+                      : "感情通知をオンにする"
+                  }
+                >
+                  {isEmotionNotificationBusy ? (
+                    <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+                  ) : (
+                    <Ionicons
+                      name={
+                        isEmotionNotificationEnabled
+                          ? "notifications-outline"
+                          : "notifications-off-outline"
+                      }
+                      size={18}
+                      color={colors.TEXT_ON_LIGHT}
+                    />
+                  )}
+                </TouchableOpacity>
+              ) : null}
+
+              <TouchableOpacity
+                style={[styles.qnaBtn, canToggleEmotionNotification && { marginLeft: 8 }]}
+                activeOpacity={0.8}
+                onPress={() => removeFollowLink(item?.id)}
+              >
+                <Ionicons
+                  name="trash-outline"
+                  size={16}
+                  color={colors.TEXT_ON_LIGHT}
+                  style={{ marginRight: 6 }}
+                />
+                <Text style={styles.qnaBtnText}>削除</Text>
+              </TouchableOpacity>
+            </View>
           ) : isSelfList ? (
             <TouchableOpacity
               style={styles.qnaBtn}
@@ -1004,6 +1221,23 @@ function createStyles(COLORS, ui) {
     rowRight: {
       alignItems: "flex-end",
       justifyContent: "center",
+    },
+    rowRightGroup: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    iconPill: {
+      width: 36,
+      height: 36,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    iconPillDisabled: {
+      opacity: 0.5,
     },
 
     qnaBtn: {

@@ -81,7 +81,7 @@ async function resolveCurrentUserId() {
 }
 
 const HIDDEN_SCREENS = new Set([]);
-const MAIN_TAB_ROUTES = new Set(["Input", "MyWeb", "MyModel", "RankingTop", "Friends", "Settings"]);
+const MAIN_TAB_ROUTES = new Set(["Input", "MyWeb", "MyModel", "RankingTop", "Settings"]);
 const SELF_STRUCTURE_LATEST_STATUS_POLL_MS = 20 * 1000;
 const SELF_STRUCTURE_BANNER_AUTO_HIDE_MS = 4500;
 const SCREEN_PREFETCH_MIN_INTERVAL_MS = 2 * 60 * 1000;
@@ -98,7 +98,7 @@ const SHARE_PROFILE_API_BASE_URL =
   (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 
-const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory"]);
+const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
 const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
 const FRAME_BORDER_WIDTH = 2;
 
@@ -255,7 +255,7 @@ function resolveNotificationTargetRoute(remoteMessage) {
   if (type === "myweb_report" || screen === "MyWeb") {
     return { name: "MyWeb", params: buildMyWebNotificationParams(data) };
   }
-  return { name: "Friends" };
+  return { name: "MyModel", params: { screen: "EmotionLog" } };
 }
 
 function buildMyWebRootNavigationParams(params) {
@@ -470,7 +470,7 @@ function MyWebStackNavigator({ onSetMymodelLinkPayload, onRefreshTabUnread, rout
   );
 }
 
-function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload }) {
+function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDisplayed }) {
   return (
     <MyModelStack.Navigator initialRouteName="MyModel" screenOptions={{ headerShown: false }}>
       <MyModelStack.Screen name="MyModel">
@@ -518,6 +518,15 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload }) {
       <MyModelStack.Screen name="DiscoveriesHistoryList" component={DiscoveriesHistoryListScreen} />
       <MyModelStack.Screen name="EchoesHistoryDetail" component={EchoesHistoryDetailScreen} />
       <MyModelStack.Screen name="DiscoveriesHistoryDetail" component={DiscoveriesHistoryDetailScreen} />
+      <MyModelStack.Screen name="EmotionLog">
+        {(navProps) => (
+          <FriendsScreen
+            {...navProps}
+            screenMode="log"
+            onFriendFeedDisplayed={onEmotionLogDisplayed}
+          />
+        )}
+      </MyModelStack.Screen>
       <MyModelStack.Screen name="Account" component={AccountScreen} />
       <MyModelStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <MyModelStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
@@ -654,7 +663,8 @@ function MainTabs() {
       if (routeName === "MyModel" || routeName === "MyProfile") {
         return !!(
           getFeatureUnread("MyModel", "mymodelCreate") ||
-          (!isTutorialMode && getFeatureUnread("MyModel", "reflectionsNew"))
+          (!isTutorialMode && getFeatureUnread("MyModel", "reflectionsNew")) ||
+          getFeatureUnread("Friends", "feed")
         );
       }
       return !!getScopeUnread(routeName);
@@ -1272,7 +1282,7 @@ function MainTabs() {
       const rows = Array.isArray(json?.items) ? json.items : Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
       const mapped = rows.map((row) => ({
         id: row?.id,
-        ownerName: row?.ownerName || row?.owner_name || "Friend",
+        ownerName: row?.ownerName || row?.owner_name || "ユーザー",
         items: Array.isArray(row?.items) ? row.items : [],
         timeLabel: row?.timeLabel || formatTimeLabel(row?.created_at || row?.createdAt || null),
         createdAt: row?.createdAt || row?.created_at || null,
@@ -1584,7 +1594,7 @@ function MainTabs() {
   }, [refreshFriendsUnreadState]);
 
   useEffect(() => {
-    if (activeRouteName !== "Friends") return;
+    if (activeRouteName !== "MyModel") return;
     (async () => { await refreshFriendsUnreadState(); })();
   }, [activeRouteName, refreshFriendsUnreadState]);
 
@@ -1722,6 +1732,10 @@ function MainTabs() {
               {...tabProps}
               linkPayload={mymodelLinkPayload}
               onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
+              onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
+                await markFriendsFeedRead(lastSeenCreatedAt || null);
+                await refreshFriendsUnreadState();
+              }}
             />
           )}
         </Tab.Screen>
@@ -1731,6 +1745,10 @@ function MainTabs() {
               {...tabProps}
               linkPayload={mymodelLinkPayload}
               onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
+              onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
+                await markFriendsFeedRead(lastSeenCreatedAt || null);
+                await refreshFriendsUnreadState();
+              }}
             />
           )}
         </Tab.Screen>
@@ -1739,27 +1757,6 @@ function MainTabs() {
           component={RankingStackNavigator}
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         />
-        <Tab.Screen
-          name="Friends"
-          listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
-        >
-          {(tabProps) => (
-            <FriendsStackNavigator
-              {...tabProps}
-              hasUnreadFriendRequests={hasUnreadFriendRequests}
-              hasUnreadFriendFeed={hasUnreadFriendFeed}
-              onOpenFriendManage={async () => {
-                setUnread("Friends", "requests", false);
-                await markFriendRequestsRead();
-                await refreshFriendsUnreadState();
-              }}
-              onFriendFeedDisplayed={async (lastSeenCreatedAt) => {
-                await markFriendsFeedRead(lastSeenCreatedAt || null);
-                await refreshFriendsUnreadState();
-              }}
-            />
-          )}
-        </Tab.Screen>
         <Tab.Screen
           name="Settings"
           component={SettingsStackNavigator}

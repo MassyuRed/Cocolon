@@ -71,7 +71,7 @@ export const guidesJa = Object.freeze({
       {
         type: "note",
         text:
-          "フレンドへの共有を抑えたいときは「[[term:friend_notifications|フレンドに通知しない]]」を切り替えて使います。",
+          "感情通知の共有を抑えたいときは「[[term:friend_notifications|感情通知を送らない]]」を切り替えて使います。",
       },
     ],
   },
@@ -167,9 +167,9 @@ export const guidesJa = Object.freeze({
     ],
   },
   friend: {
-    title: "Friend",
+    title: "感情ログ",
     summary:
-      "フレンド登録やフレンドログを扱う場所です。相手の感情入力を、言葉を介しすぎずに受け取れます。",
+      "フォロー中ユーザーの感情入力を通知とログで確認する場所です。言葉を介しすぎずに、感情の流れを受け取れます。",
     relatedTerms: [
       "friend",
       "friend_log",
@@ -180,7 +180,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "[[term:friend|Friend]] は、他ユーザーとのつながりを扱う場所です。フレンドになると、相手が行った [[term:emotion_input|感情入力]] の情報を受け取れるようになります。",
+          "この画面では、[[term:friend|フォロー]]しているユーザーが行った [[term:emotion_input|感情入力]] の情報を、[[term:friend_log|感情ログ]] として確認できます。",
       },
       {
         type: "h2",
@@ -189,9 +189,9 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "フレンド申請や承認を行う",
-          "[[term:friend_log|フレンドログ]] で、フレンドの感情入力の流れを確認する",
-          "相手の状態変化を、言葉よりも感情のレベルで受け取る",
+          "フォロー中ユーザーの感情入力を通知で受け取る",
+          "[[term:friend_log|感情ログ]] で、感情入力の流れを確認する",
+          "フォロー一覧で、ユーザーごとに感情通知の受信を切り替える",
         ],
       },
       {
@@ -201,12 +201,12 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "フレンドに共有されるのは主に感情選択の情報で、メモの本文までそのまま渡るわけではありません。必要以上に言語化せず、感情だけを受け取れるのが特徴です。",
+          "通知やログに共有されるのは主に感情選択の情報で、メモの本文までそのまま渡るわけではありません。必要以上に言語化せず、感情だけを受け取れるのが特徴です。",
       },
       {
         type: "note",
         text:
-          "自分の入力を共有したくないときは、Home 側の [[term:friend_notifications|フレンドに通知しない]] を使って調整できます。",
+          "自分の入力を共有したくないときは、Home 側の [[term:friend_notifications|感情通知を送らない]] を使って調整できます。",
       },
     ],
   },
