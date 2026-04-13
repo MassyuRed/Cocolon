@@ -22,7 +22,7 @@ import MyModelScreen from "./screens/MyModelScreen";
 import MyModelCreateScreen from "./screens/MyModelCreateScreen";
 import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
 import MyModelReactionHistoryScreen from "./screens/MyModelReactionHistoryScreen";
-import EmotionLogScreen from "./screens/FriendsScreen";
+import EmotionLogScreen from "./screens/EmotionLogScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SettingsAppSettingsScreen from "./screens/SettingsAppSettingsScreen";
 import SettingsOtherScreen from "./screens/SettingsOtherScreen";
