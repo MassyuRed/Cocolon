@@ -22,7 +22,7 @@ import MyModelScreen from "./screens/MyModelScreen";
 import MyModelCreateScreen from "./screens/MyModelCreateScreen";
 import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
 import MyModelReactionHistoryScreen from "./screens/MyModelReactionHistoryScreen";
-import FriendsScreen from "./screens/FriendsScreen";
+import EmotionLogScreen from "./screens/FriendsScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SettingsAppSettingsScreen from "./screens/SettingsAppSettingsScreen";
 import SettingsOtherScreen from "./screens/SettingsOtherScreen";
@@ -86,7 +86,7 @@ const SELF_STRUCTURE_BANNER_AUTO_HIDE_MS = 4500;
 const SCREEN_PREFETCH_MIN_INTERVAL_MS = 2 * 60 * 1000;
 const SCREEN_PREFETCH_DEFER_MS = 1200;
 const UNREAD_PREFETCH_MIN_INTERVAL_MS = 15 * 1000;
-const FRIENDS_UNREAD_POLL_MS = 30 * 1000;
+const EMOTION_LOG_UNREAD_POLL_MS = 30 * 1000;
 const MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS = 60 * 1000;
 const MYWEB_STARTUP_REVALIDATE_DELAY_MS = 1800;
 const MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
@@ -518,10 +518,10 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
       <MyModelStack.Screen name="DiscoveriesHistoryDetail" component={DiscoveriesHistoryDetailScreen} />
       <MyModelStack.Screen name="EmotionLog">
         {(navProps) => (
-          <FriendsScreen
+          <EmotionLogScreen
             {...navProps}
             screenMode="log"
-            onFriendFeedDisplayed={onEmotionLogDisplayed}
+            onEmotionLogDisplayed={onEmotionLogDisplayed}
           />
         )}
       </MyModelStack.Screen>
@@ -625,7 +625,7 @@ function MainTabs() {
         return !!(
           getFeatureUnread("MyModel", "mymodelCreate") ||
           (!isTutorialMode && getFeatureUnread("MyModel", "reflectionsNew")) ||
-          getFeatureUnread("Friends", "feed")
+          getFeatureUnread("EmotionLog", "feed")
         );
       }
       return !!getScopeUnread(routeName);
@@ -1175,28 +1175,28 @@ function MainTabs() {
     revalidateMyWebUnreadFromStartup,
   ]);
 
-  const refreshFriendsUnreadState = React.useCallback(async () => {
+  const refreshEmotionLogUnreadState = React.useCallback(async () => {
     try {
       const json = await apiGet("/friends/unread-status");
       const nextFeed = !!json?.feed_unread;
       const nextRequests = !!json?.requests_unread;
-      setUnread("Friends", "feed", nextFeed);
-      setUnread("Friends", "requests", nextRequests);
+      setUnread("EmotionLog", "feed", nextFeed);
+      setUnread("EmotionLog", "requests", nextRequests);
       return { feed: nextFeed, requests: nextRequests };
     } catch (e) {
-      console.warn("MainTabs: failed to refresh Friends unread state", e);
-      setUnread("Friends", "feed", false);
-      setUnread("Friends", "requests", false);
+      console.warn("MainTabs: failed to refresh EmotionLog unread state", e);
+      setUnread("EmotionLog", "feed", false);
+      setUnread("EmotionLog", "requests", false);
       return null;
     }
   }, [setUnread]);
 
-  const markFriendsFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
+  const markEmotionLogFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
     try {
       const body = lastSeenCreatedAt ? { last_seen_created_at: lastSeenCreatedAt } : {};
       await apiPost("/friends/unread/read-feed", body);
     } catch (e) {
-      console.warn("MainTabs: failed to mark Friends feed read", e);
+      console.warn("MainTabs: failed to mark EmotionLog feed read", e);
     }
   }, []);
 
@@ -1210,12 +1210,12 @@ function MainTabs() {
     return d.toLocaleString("ja-JP", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
   }, []);
 
-  const prefetchFriendsFeed = React.useCallback(async () => {
+  const prefetchEmotionLogFeed = React.useCallback(async () => {
     try {
       const userId = await resolveCurrentUserId();
       if (!userId) return;
       try {
-        const fresh = getPrefetchEntryFresh?.("Friends", "feed", PREFETCH_MAX_AGE_MS);
+        const fresh = getPrefetchEntryFresh?.("EmotionLog", "feed", PREFETCH_MAX_AGE_MS);
         if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) return;
       } catch {}
 
@@ -1228,7 +1228,7 @@ function MainTabs() {
         timeLabel: row?.timeLabel || formatTimeLabel(row?.created_at || row?.createdAt || null),
         createdAt: row?.createdAt || row?.created_at || null,
       }));
-      try { setPrefetch("Friends", "feed", { userId, items: mapped }); } catch {}
+      try { setPrefetch("EmotionLog", "feed", { userId, items: mapped }); } catch {}
     } catch {}
   }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch]);
 
@@ -1308,12 +1308,12 @@ function MainTabs() {
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
       if (now - last < SCREEN_PREFETCH_MIN_INTERVAL_MS) return;
       __lastScreenPrefetchAtRef.current = now;
-      const tasks = [prefetchFriendsFeed, prefetchMyModelScreenData];
+      const tasks = [prefetchEmotionLogFeed, prefetchMyModelScreenData];
       for (const fn of tasks) {
         try { await fn(); } catch {}
       }
     } catch {}
-  }, [prefetchFriendsFeed, prefetchMyModelScreenData]);
+  }, [prefetchEmotionLogFeed, prefetchMyModelScreenData]);
 
   const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
     const includeScreenPrefetch = opts?.includeScreenPrefetch !== false;
@@ -1327,7 +1327,7 @@ function MainTabs() {
     } catch {}
 
     const tasks = [
-      refreshFriendsUnreadState,
+      refreshEmotionLogUnreadState,
       refreshMyModelCreateUnreadBadge,
       refreshMyModelReflectionsUnreadBadge,
       warmMyWebUnreadAtStartup,
@@ -1350,7 +1350,7 @@ function MainTabs() {
     }
   }, [
     pingActivityLogin,
-    refreshFriendsUnreadState,
+    refreshEmotionLogUnreadState,
     refreshMyModelCreateUnreadBadge,
     refreshMyModelReflectionsUnreadBadge,
     warmMyWebUnreadAtStartup,
@@ -1499,20 +1499,20 @@ function MainTabs() {
     let intervalId = null;
     const tick = async () => {
       if (cancelled) return;
-      try { await refreshFriendsUnreadState(); } catch {}
+      try { await refreshEmotionLogUnreadState(); } catch {}
     };
     tick();
-    intervalId = setInterval(tick, FRIENDS_UNREAD_POLL_MS);
+    intervalId = setInterval(tick, EMOTION_LOG_UNREAD_POLL_MS);
     return () => {
       cancelled = true;
       try { if (intervalId) clearInterval(intervalId); } catch {}
     };
-  }, [refreshFriendsUnreadState]);
+  }, [refreshEmotionLogUnreadState]);
 
   useEffect(() => {
     if (activeRouteName !== "MyModel") return;
-    (async () => { await refreshFriendsUnreadState(); })();
-  }, [activeRouteName, refreshFriendsUnreadState]);
+    (async () => { await refreshEmotionLogUnreadState(); })();
+  }, [activeRouteName, refreshEmotionLogUnreadState]);
 
   const selfStructureBannerHud = selfStructureBanner.visible ? (
     <TouchableOpacity
@@ -1647,8 +1647,8 @@ function MainTabs() {
               linkPayload={mymodelLinkPayload}
               onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
               onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
-                await markFriendsFeedRead(lastSeenCreatedAt || null);
-                await refreshFriendsUnreadState();
+                await markEmotionLogFeedRead(lastSeenCreatedAt || null);
+                await refreshEmotionLogUnreadState();
               }}
             />
           )}
@@ -1660,8 +1660,8 @@ function MainTabs() {
               linkPayload={mymodelLinkPayload}
               onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
               onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
-                await markFriendsFeedRead(lastSeenCreatedAt || null);
-                await refreshFriendsUnreadState();
+                await markEmotionLogFeedRead(lastSeenCreatedAt || null);
+                await refreshEmotionLogUnreadState();
               }}
             />
           )}

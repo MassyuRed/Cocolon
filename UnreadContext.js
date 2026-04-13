@@ -13,7 +13,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
  *
  * Example scopes:
  *   - "MyWeb": { weekly: true, monthly: false, mymodelCreate: true }
- *   - "Friends": { feed: true, requests: false }
+ *   - "EmotionLog": { feed: true, requests: false }
  */
 
 /**
@@ -32,6 +32,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
  */
 
 const UnreadContext = createContext(null);
+const LEGACY_SCOPE_ALIASES = Object.freeze({ Friends: "EmotionLog" });
 const STARTUP_META_SCOPE = "App";
 const STARTUP_META_KEY = "startupMeta";
 
@@ -40,7 +41,8 @@ function normStr(v) {
 }
 
 function normScope(scope) {
-  return normStr(scope);
+  const normalized = normStr(scope);
+  return LEGACY_SCOPE_ALIASES[normalized] || normalized;
 }
 
 function normKey(key) {
@@ -180,12 +182,12 @@ function buildStartupHydrationData(rawStartup, options = {}) {
   const fetchedAt = Number(options?.fetchedAt) || Date.now();
   const source = normStr(options?.source) || null;
 
-  const friendsUnreadSection = resolveSection(sections, "friends_unread");
-  if (friendsUnreadSection.found) {
-    const friendsUnread = pickObject(friendsUnreadSection.value);
-    unreadPatch.Friends = {
-      feed: !!friendsUnread.feed_unread,
-      requests: !!friendsUnread.requests_unread,
+  const emotionLogUnreadSection = resolveSection(sections, "friends_unread");
+  if (emotionLogUnreadSection.found) {
+    const emotionLogUnread = pickObject(emotionLogUnreadSection.value);
+    unreadPatch.EmotionLog = {
+      feed: !!emotionLogUnread.feed_unread,
+      requests: !!emotionLogUnread.requests_unread,
     };
   }
 

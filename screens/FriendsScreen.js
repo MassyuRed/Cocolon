@@ -32,7 +32,7 @@ import TutorialOverlay, {
 } from "../components/TutorialOverlay";
 import { apiFetch } from "../lib/apiClient";
 
-// 🔧 ここを変えると Friend 画面のパネル高さが変わる
+// 🔧 ここを変えると感情ログ画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
 
 const TUTORIAL_TOTAL_STEPS = 21;
@@ -48,7 +48,7 @@ const DEFAULT_TUTORIAL_FRIEND_NAME = "User";
 // （ローカル API に戻したい場合はここを書き換える）
 const API_BASE = "https://mashos-api.onrender.com";
 
-const FRIEND_FEED_ENDPOINT = `${API_BASE}/friends/feed`;
+const EMOTION_LOG_FEED_ENDPOINT = `${API_BASE}/friends/feed`;
 
 // ===== 表示用定数 =====
 const STRENGTH_LABEL = {
@@ -105,14 +105,14 @@ async function getAuthContext() {
       userId = data?.user?.id ?? null;
     }
   } catch (e) {
-    console.warn("FriendsScreen: failed to resolve userId", e);
+    console.warn("EmotionLogScreen: failed to resolve userId", e);
   }
 
   try {
     const { data: sessionData } = await supabase.auth.getSession();
     accessToken = sessionData?.session?.access_token ?? null;
   } catch (e) {
-    console.warn("FriendsScreen: failed to resolve auth session", e);
+    console.warn("EmotionLogScreen: failed to resolve auth session", e);
   }
 
   return { userId, accessToken };
@@ -145,7 +145,7 @@ async function getJsonWithAuth(url) {
   return await res.json();
 }
 
-export default function FriendsScreen(props) {
+export default function EmotionLogScreen(props) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -169,8 +169,8 @@ export default function FriendsScreen(props) {
   const prefetchedFeedItems = useMemo(() => {
     try {
       const entry = getPrefetchEntryFresh
-        ? getPrefetchEntryFresh("Friends", "feed", FEED_PREFETCH_MAX_AGE_MS)
-        : getPrefetchEntry("Friends", "feed");
+        ? getPrefetchEntryFresh("EmotionLog", "feed", FEED_PREFETCH_MAX_AGE_MS)
+        : getPrefetchEntry("EmotionLog", "feed");
       const v = entry?.value;
       const items = Array.isArray(v?.items) ? v.items : null;
       return items;
@@ -178,7 +178,7 @@ export default function FriendsScreen(props) {
       return null;
     }
   }, [getPrefetchEntry, getPrefetchEntryFresh]);
-  const { navigation, onFriendFeedDisplayed } = props || {};
+  const { navigation, onEmotionLogDisplayed } = props || {};
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
   const screenRootRef = useRef(null);
@@ -241,7 +241,7 @@ export default function FriendsScreen(props) {
   }, [tutorialDisplayFeed, tutorialMockFriendName]);
 
   const handlePressGuide = useCallback(() => {
-    // Cocolonガイド（Friend）
+    // Cocolonガイド（感情ログ / guide key は legacy の friend を維持）
     try {
       if (navigation?.navigate) {
         navigation.navigate("CocolonGuide", { screenId: "friend" });
@@ -475,8 +475,8 @@ export default function FriendsScreen(props) {
       }
 
       try {
-        setUnread?.("Friends", "feed", true);
-        setUnread?.("Friends", "tutorialFeed", true);
+        setUnread?.("EmotionLog", "feed", true);
+        setUnread?.("EmotionLog", "tutorialFeed", true);
       } catch {
         // noop
       }
@@ -511,7 +511,7 @@ export default function FriendsScreen(props) {
     }
     setErrorMsg("");
     try {
-      const json = await getJsonWithAuth(FRIEND_FEED_ENDPOINT);
+      const json = await getJsonWithAuth(EMOTION_LOG_FEED_ENDPOINT);
       const rows = Array.isArray(json)
         ? json
         : Array.isArray(json?.items)
@@ -521,7 +521,7 @@ export default function FriendsScreen(props) {
         : [];
 
       const mapped = rows.map((row, index) => ({
-        id: row?.id || `friend-feed-${index}`,
+        id: row?.id || `emotion-log-feed-${index}`,
         ownerName:
           String(row?.ownerName || row?.owner_name || row?.ownerNameLabel || "").trim() ||
           "ユーザー",
@@ -540,10 +540,10 @@ export default function FriendsScreen(props) {
       setFeed(mapped);
 
       const latestDisplayedCreatedAt = mapped.find((item) => item?.createdAt)?.createdAt || null;
-      if (latestDisplayedCreatedAt && typeof onFriendFeedDisplayed === "function") {
+      if (latestDisplayedCreatedAt && typeof onEmotionLogDisplayed === "function") {
         setTimeout(() => {
-          Promise.resolve(onFriendFeedDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
-            console.warn("FriendsScreen: failed to mark displayed feed as read", callbackError);
+          Promise.resolve(onEmotionLogDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
+            console.warn("EmotionLogScreen: failed to mark displayed feed as read", callbackError);
           });
         }, 0);
       }
@@ -552,19 +552,19 @@ export default function FriendsScreen(props) {
       try {
         const { userId } = await getAuthContext();
         if (userId) {
-          setPrefetch("Friends", "feed", { userId, items: mapped });
+          setPrefetch("EmotionLog", "feed", { userId, items: mapped });
         }
       } catch {
         // noop
       }
     } catch (e) {
-      console.error("friend feed load error:", e);
+      console.error("emotion log feed load error:", e);
       setErrorMsg(String(e?.message || e));
       setFeed([]);
     } finally {
       setLoading(false);
     }
-  }, [isTutorialMode, onFriendFeedDisplayed, tutorialDisplayFeed, setPrefetch]);
+  }, [isTutorialMode, onEmotionLogDisplayed, tutorialDisplayFeed, setPrefetch]);
   useEffect(() => {
     if (isTutorialMode) return;
     // If feed was preloaded at app start, render immediately and refresh silently.
@@ -645,13 +645,13 @@ export default function FriendsScreen(props) {
     try {
       await Promise.resolve(endTutorial?.());
       try {
-        setUnread?.("Friends", "tutorialFeed", false);
-        setUnread?.("Friends", "tutorial", false);
+        setUnread?.("EmotionLog", "tutorialFeed", false);
+        setUnread?.("EmotionLog", "tutorial", false);
       } catch {
         // noop
       }
     } catch (e) {
-      console.warn("FriendsScreen: failed to complete tutorial", e);
+      console.warn("EmotionLogScreen: failed to complete tutorial", e);
     }
   }, [isTutorialMode, hasTutorialFriendLog, endTutorial, setUnread]);
 
