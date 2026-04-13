@@ -32,7 +32,6 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
  */
 
 const UnreadContext = createContext(null);
-const LEGACY_SCOPE_ALIASES = Object.freeze({ Friends: "EmotionLog" });
 const STARTUP_META_SCOPE = "App";
 const STARTUP_META_KEY = "startupMeta";
 
@@ -42,7 +41,7 @@ function normStr(v) {
 
 function normScope(scope) {
   const normalized = normStr(scope);
-  return LEGACY_SCOPE_ALIASES[normalized] || normalized;
+  return normalized;
 }
 
 function normKey(key) {

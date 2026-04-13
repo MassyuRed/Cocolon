@@ -318,7 +318,7 @@ export default function InputScreen({ navigation }) {
     tutorialSkipped,
     tutorialStep,
     addTutorialEmotion,
-    addTutorialFriendFeedItem,
+    addTutorialFriendFeedItem: addTutorialEmotionLogFeedItem,
     setTutorialStep,
     startTutorial,
     skipTutorial,
@@ -348,7 +348,7 @@ export default function InputScreen({ navigation }) {
 
 // --- Lightweight toast / input feedback modal ---
 const toastTimerRef = useRef(null);
-const tutorialFriendNotifyTimerRef = useRef(null);
+const tutorialEmotionLogNotifyTimerRef = useRef(null);
 const [toastMessage, setToastMessage] = useState(null);
 const [inputFeedbackModalVisible, setInputFeedbackModalVisible] = useState(false);
 const [inputFeedbackModalText, setInputFeedbackModalText] = useState("");
@@ -393,8 +393,8 @@ useEffect(() => {
       // noop
     }
     try {
-      if (tutorialFriendNotifyTimerRef.current) {
-        clearTimeout(tutorialFriendNotifyTimerRef.current);
+      if (tutorialEmotionLogNotifyTimerRef.current) {
+        clearTimeout(tutorialEmotionLogNotifyTimerRef.current);
       }
     } catch {
       // noop
@@ -1345,7 +1345,7 @@ const { height: windowHeight } = useWindowDimensions();
     };
   }, [draftPersistenceBlocked, navigation, persistCurrentInputDraft]);
 
-  const doNotNotifyFriends = !sendFriendNotification;
+  const doNotSendEmotionNotification = !sendFriendNotification;
   const isDark = themeName === "dark";
 
   const isSelfInsightSelected = selectedEmotions.some(
@@ -1734,15 +1734,15 @@ const { height: windowHeight } = useWindowDimensions();
 
         if (sendFriendNotification) {
           try {
-            if (tutorialFriendNotifyTimerRef.current) {
-              clearTimeout(tutorialFriendNotifyTimerRef.current);
+            if (tutorialEmotionLogNotifyTimerRef.current) {
+              clearTimeout(tutorialEmotionLogNotifyTimerRef.current);
             }
           } catch {
             // noop
           }
 
-          tutorialFriendNotifyTimerRef.current = setTimeout(() => {
-            const tutorialFriendName = "（仮のユーザー名）";
+          tutorialEmotionLogNotifyTimerRef.current = setTimeout(() => {
+            const tutorialUserName = "（仮のユーザー名）";
             const feedCreatedAt = new Date().toISOString();
             const feedTimeLabel = new Date(feedCreatedAt).toLocaleString("ja-JP", {
               month: "numeric",
@@ -1752,10 +1752,10 @@ const { height: windowHeight } = useWindowDimensions();
             });
 
             try {
-              addTutorialFriendFeedItem({
-                id: `tutorial-friend-feed-${Date.now()}`,
-                ownerName: tutorialFriendName,
-                owner_name: tutorialFriendName,
+              addTutorialEmotionLogFeedItem({
+                id: `tutorial-emotion-log-feed-${Date.now()}`,
+                ownerName: tutorialUserName,
+                owner_name: tutorialUserName,
                 items: emotionDetails.map((e) => ({
                   type: e.type,
                   strength: e.strength,
@@ -1773,12 +1773,12 @@ const { height: windowHeight } = useWindowDimensions();
             }
 
             try {
-              setUnread("Friends", "feed", true);
+              setUnread("EmotionLog", "feed", true);
             } catch {
               // noop
             }
 
-            tutorialFriendNotifyTimerRef.current = null;
+            tutorialEmotionLogNotifyTimerRef.current = null;
           }, 3000);
         }
 
@@ -2310,7 +2310,7 @@ ${String(error?.message || error)}`
                       </View>
                     </View>
                     <CocolonSwitch
-                      value={doNotNotifyFriends}
+                      value={doNotSendEmotionNotification}
                       onValueChange={(v) => {
                         registerInputInteraction();
                         setSendFriendNotification(!v);
@@ -2321,7 +2321,7 @@ ${String(error?.message || error)}`
                       }}
                       thumbColor={
                         Platform.OS === "android"
-                          ? doNotNotifyFriends
+                          ? doNotSendEmotionNotification
                             ? "#FFFFFF"
                             : "#F9FAFB"
                           : undefined
@@ -3380,7 +3380,7 @@ function createStyles(COLORS, ui) {
     /**
      * 設定風トグル（文章 + ON/OFF）
      * - シークレットメモ（既存機能）
-     * - フレンド通知（通知しない設定）
+     * - 感情通知（送信しない設定）
      */
     preferenceCard: {
       marginTop: 18,

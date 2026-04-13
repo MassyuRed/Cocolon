@@ -16,11 +16,14 @@ export function normalizeGuideScreenId(raw) {
     return "mymodel";
   }
   if (
-    lower === "friend" ||
-    lower === "friends" ||
-    lower.includes("friend")
+    lower === "emotionlog" ||
+    lower === "emotion_log" ||
+    lower === "emotion-log" ||
+    lower.includes("emotionlog") ||
+    lower.includes("emotion_log") ||
+    lower.includes("emotion-log")
   ) {
-    return "friend";
+    return "emotionlog";
   }
   if (lower === "ranking" || lower.includes("ranking")) {
     return "ranking";
@@ -38,7 +41,7 @@ export const guidesJa = Object.freeze({
       "emotion_input",
       "self_insight_mode",
       "secret_memo",
-      "friend_notifications",
+      "emotion_notifications",
       "today_question",
     ],
     blocks: [
@@ -71,7 +74,7 @@ export const guidesJa = Object.freeze({
       {
         type: "note",
         text:
-          "感情通知の共有を抑えたいときは「[[term:friend_notifications|感情通知を送らない]]」を切り替えて使います。",
+          "感情通知の共有を抑えたいときは「[[term:emotion_notifications|感情通知を送らない]]」を切り替えて使います。",
       },
     ],
   },
@@ -166,21 +169,21 @@ export const guidesJa = Object.freeze({
       },
     ],
   },
-  friend: {
+  emotionlog: {
     title: "感情ログ",
     summary:
       "フォロー中ユーザーの感情入力を通知とログで確認する場所です。言葉を介しすぎずに、感情の流れを受け取れます。",
     relatedTerms: [
-      "friend",
-      "friend_log",
+      "follow",
+      "emotion_log",
       "emotion_input",
-      "friend_notifications",
+      "emotion_notifications",
     ],
     blocks: [
       {
         type: "p",
         text:
-          "この画面では、[[term:friend|フォロー]]しているユーザーが行った [[term:emotion_input|感情入力]] の情報を、[[term:friend_log|感情ログ]] として確認できます。",
+          "この画面では、[[term:follow|フォロー]]しているユーザーが行った [[term:emotion_input|感情入力]] の情報を、[[term:emotion_log|感情ログ]] として確認できます。",
       },
       {
         type: "h2",
@@ -190,7 +193,7 @@ export const guidesJa = Object.freeze({
         type: "ul",
         items: [
           "フォロー中ユーザーの感情入力を通知で受け取る",
-          "[[term:friend_log|感情ログ]] で、感情入力の流れを確認する",
+          "[[term:emotion_log|感情ログ]] で、感情入力の流れを確認する",
           "フォロー一覧で、ユーザーごとに感情通知の受信を切り替える",
         ],
       },
@@ -206,7 +209,7 @@ export const guidesJa = Object.freeze({
       {
         type: "note",
         text:
-          "自分の入力を共有したくないときは、Home 側の [[term:friend_notifications|感情通知を送らない]] を使って調整できます。",
+          "自分の入力を共有したくないときは、Home 側の [[term:emotion_notifications|感情通知を送らない]] を使って調整できます。",
       },
     ],
   },

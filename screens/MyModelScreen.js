@@ -244,7 +244,7 @@ export default function MyModelScreen({ route } = {}) {
 
   const unreadMyModelCreate = !!getFeatureUnread("MyModel", "mymodelCreate");
   const unreadReflections = !isTutorialMode && !!getFeatureUnread("MyModel", "reflectionsNew");
-  const unreadEmotionLog = !!getFeatureUnread("Friends", "feed");
+  const unreadEmotionLog = !!getFeatureUnread("EmotionLog", "feed");
 
   // Recommend (users)
   const [recoModalVisible, setRecoModalVisible] = useState(false);

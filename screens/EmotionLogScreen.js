@@ -40,7 +40,7 @@ const STEP_EMOTION_LOG_OVERVIEW = 18;
 const STEP_EMOTION_LOG_NOTIFICATION = 19;
 const STEP_EMOTION_LOG_FEED = 20;
 const STEP_EMOTION_LOG_COMPLETE = 21;
-const DEFAULT_TUTORIAL_FRIEND_NAME = "User";
+const DEFAULT_TUTORIAL_USER_NAME = "User";
 
 // ---- API base ----
 // 現在は MashOS(MyModel API) を Render 上で稼働させているため、
@@ -153,7 +153,7 @@ export default function EmotionLogScreen(props) {
   const {
     isTutorialMode,
     tutorialEmotions,
-    tutorialFriendFeed: tutorialEmotionLogFeed,
+    tutorialFriendFeed: tutorialEmotionLogFeedItems,
     tutorialReflections,
     tutorialStep,
     setTutorialStep,
@@ -200,7 +200,7 @@ export default function EmotionLogScreen(props) {
     tutorialStep >= STEP_EMOTION_LOG_OVERVIEW &&
     tutorialStep <= STEP_EMOTION_LOG_COMPLETE;
 
-  const tutorialMockFriendName = useMemo(() => {
+  const tutorialMockUserName = useMemo(() => {
     const safe = Array.isArray(tutorialReflections) ? tutorialReflections : [];
     const mock = safe.find(
       (item) =>
@@ -217,19 +217,19 @@ export default function EmotionLogScreen(props) {
         mock?.owner_name ||
         other?.display_name ||
         other?.owner_name ||
-        DEFAULT_TUTORIAL_FRIEND_NAME
+        DEFAULT_TUTORIAL_USER_NAME
     ).trim();
   }, [tutorialReflections]);
 
   const tutorialDisplayFeed = useMemo(() => {
-    const safeFeed = Array.isArray(tutorialEmotionLogFeed) ? tutorialEmotionLogFeed : [];
+    const safeFeed = Array.isArray(tutorialEmotionLogFeedItems) ? tutorialEmotionLogFeedItems : [];
     return safeFeed.map((item, index) => ({
       ...item,
       id: item?.id || `tutorial-emotion-log-feed-${index}`,
-      ownerName: tutorialMockFriendName,
-      owner_name: tutorialMockFriendName,
+      ownerName: tutorialMockUserName,
+      owner_name: tutorialMockUserName,
     }));
-  }, [tutorialEmotionLogFeed, tutorialMockFriendName]);
+  }, [tutorialEmotionLogFeedItems, tutorialMockUserName]);
 
   const tutorialNotificationText = useMemo(() => {
     const latest = tutorialDisplayFeed.length > 0 ? tutorialDisplayFeed[0] : null;
@@ -237,14 +237,14 @@ export default function EmotionLogScreen(props) {
     const emotion = String(first?.type || "感情");
     const strength = STRENGTH_LABEL[first?.strength] || "";
     const suffix = strength ? `（${strength}）` : "";
-    return `${tutorialMockFriendName}さんが感情を入力しました：${emotion}${suffix}`;
-  }, [tutorialDisplayFeed, tutorialMockFriendName]);
+    return `${tutorialMockUserName}さんが感情を入力しました：${emotion}${suffix}`;
+  }, [tutorialDisplayFeed, tutorialMockUserName]);
 
   const handlePressGuide = useCallback(() => {
-    // Cocolonガイド（感情ログ / guide key は legacy の friend を維持）
+    // Cocolonガイド（感情ログ）
     try {
       if (navigation?.navigate) {
-        navigation.navigate("CocolonGuide", { screenId: "friend" });
+        navigation.navigate("CocolonGuide", { screenId: "emotionlog" });
         return;
       }
     } catch {
@@ -256,7 +256,7 @@ export default function EmotionLogScreen(props) {
       const parent =
         typeof navigation?.getParent === "function" ? navigation.getParent() : null;
       if (parent && typeof parent.navigate === "function") {
-        parent.navigate("CocolonGuide", { screenId: "friend" });
+        parent.navigate("CocolonGuide", { screenId: "emotionlog" });
       }
     } catch {
       // noop
@@ -336,7 +336,7 @@ export default function EmotionLogScreen(props) {
           step: STEP_EMOTION_LOG_OVERVIEW,
           title: "感情ログ",
           message:
-            `ここではフォロー中ユーザーの感情を観測できます。\nこのあと${tutorialMockFriendName}さんから通知が届き、感情ログに反映されます。`,
+            `ここではフォロー中ユーザーの感情を観測できます。\nこのあと${tutorialMockUserName}さんから通知が届き、感情ログに反映されます。`,
           mode: "info",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(STEP_EMOTION_LOG_NOTIFICATION),
@@ -346,8 +346,8 @@ export default function EmotionLogScreen(props) {
           step: STEP_EMOTION_LOG_NOTIFICATION,
           title: "感情通知",
           message: tutorialNotificationShown
-            ? `${tutorialMockFriendName}さんが感情を入力しました。\nアプリの通知をオンにしていると、このように通知が届きます。`
-            : `${tutorialMockFriendName}さんからの通知を準備しています。\n通知が届くまでこのままお待ちください。`,
+            ? `${tutorialMockUserName}さんが感情を入力しました。\nアプリの通知をオンにしていると、このように通知が届きます。`
+            : `${tutorialMockUserName}さんからの通知を準備しています。\n通知が届くまでこのままお待ちください。`,
           mode: "info",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(STEP_EMOTION_LOG_FEED),
@@ -383,7 +383,7 @@ export default function EmotionLogScreen(props) {
   }, [
     hasTutorialEmotionLog,
     isEmotionLogTutorialVisible,
-    tutorialMockFriendName,
+    tutorialMockUserName,
     tutorialNotificationShown,
     tutorialStep,
     setTutorialStep,
@@ -461,8 +461,8 @@ export default function EmotionLogScreen(props) {
         try {
           addTutorialEmotionLogFeedItem({
             id: `tutorial-emotion-log-feed-${Date.now()}`,
-            ownerName: tutorialMockFriendName,
-            owner_name: tutorialMockFriendName,
+            ownerName: tutorialMockUserName,
+            owner_name: tutorialMockUserName,
             items,
             emotions: items,
             created_at: iso,
@@ -490,7 +490,7 @@ export default function EmotionLogScreen(props) {
     tutorialStep,
     tutorialEmotions,
     hasTutorialEmotionLog,
-    tutorialMockFriendName,
+    tutorialMockUserName,
     addTutorialEmotionLogFeedItem,
     setUnread,
   ]);
@@ -786,7 +786,7 @@ export default function EmotionLogScreen(props) {
             {isTutorialMode ? (
               <View ref={tutorialIntroRef} collapsable={false} style={styles.manageIntroCard}>
                 <Text style={styles.manageIntroText}>
-                  チュートリアルでは、{tutorialMockFriendName}さんから通知が届く体験をします。
+                  チュートリアルでは、{tutorialMockUserName}さんから通知が届く体験をします。
                   {"\n"}
                   まもなく通知が届き、この下の感情ログに反映されます。
                   {"\n"}

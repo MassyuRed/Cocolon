@@ -10,7 +10,7 @@ export const guideTermsJa = Object.freeze({
       "うれしい出来事があった直後に「喜び」を入力する",
       "少し不安を感じた時点で「不安」を弱めで入力して残す",
     ],
-    relatedTerms: ["self_insight_mode", "secret_memo", "friend_notifications"],
+    relatedTerms: ["self_insight_mode", "secret_memo", "emotion_notifications"],
   },
   self_insight_mode: {
     termId: "self_insight_mode",
@@ -38,8 +38,8 @@ export const guideTermsJa = Object.freeze({
     ],
     relatedTerms: ["emotion_input", "analysis_report"],
   },
-  friend_notifications: {
-    termId: "friend_notifications",
+  emotion_notifications: {
+    termId: "emotion_notifications",
     display: "感情通知を送らない",
     reading: "かんじょうつうちをおくらない",
     shortDef: "感情入力をフォロー中ユーザーへ通知しないための設定です。",
@@ -49,7 +49,7 @@ export const guideTermsJa = Object.freeze({
       "今回は自分の中だけで整理したいときにオンにする",
       "普段は共有するが、一部の入力だけ非共有にしたいときに使う",
     ],
-    relatedTerms: ["friend", "friend_log", "emotion_input"],
+    relatedTerms: ["follow", "emotion_log", "emotion_input"],
   },
   today_question: {
     termId: "today_question",
@@ -194,8 +194,8 @@ export const guideTermsJa = Object.freeze({
     ],
     relatedTerms: ["kyomei", "hakken", "mymodel"],
   },
-  friend: {
-    termId: "friend",
+  follow: {
+    termId: "follow",
     display: "フォロー",
     reading: "フォロー",
     shortDef: "他ユーザーを追い、Reflection や感情通知の対象にする関係です。",
@@ -205,10 +205,10 @@ export const guideTermsJa = Object.freeze({
       "気になるユーザーをフォローして Reflection を読む",
       "感情の流れも受け取りたい相手だけ通知をオンにする",
     ],
-    relatedTerms: ["friend_log", "friend_notifications", "emotion_input"],
+    relatedTerms: ["emotion_log", "emotion_notifications", "emotion_input"],
   },
-  friend_log: {
-    termId: "friend_log",
+  emotion_log: {
+    termId: "emotion_log",
     display: "感情ログ",
     reading: "かんじょうログ",
     shortDef: "フォロー中ユーザーの感情入力の流れを確認するための一覧です。",
@@ -218,7 +218,7 @@ export const guideTermsJa = Object.freeze({
       "最近の相手の気持ちの流れを見る",
       "しばらく会っていない相手の状態変化を感情から知る",
     ],
-    relatedTerms: ["friend", "emotion_input", "friend_notifications"],
+    relatedTerms: ["follow", "emotion_input", "emotion_notifications"],
   },
 });
 
