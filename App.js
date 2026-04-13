@@ -61,7 +61,6 @@ const InputStack = createNativeStackNavigator();
 const MyWebStack = createNativeStackNavigator();
 const MyModelStack = createNativeStackNavigator();
 const RankingStack = createNativeStackNavigator();
-const FriendsStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
 
 async function resolveCurrentUserId() {
@@ -99,7 +98,6 @@ const SHARE_PROFILE_API_BASE_URL =
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 
 const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
-const FRIENDS_SUB_ROUTES = new Set(["FriendLog"]);
 const FRAME_BORDER_WIDTH = 2;
 
 function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
@@ -554,41 +552,6 @@ function RankingStackNavigator() {
   );
 }
 
-function FriendsStackNavigator({ hasUnreadFriendRequests, hasUnreadFriendFeed, onOpenFriendManage, onFriendFeedDisplayed }) {
-  return (
-    <FriendsStack.Navigator initialRouteName="Friends" screenOptions={{ headerShown: false }}>
-      <FriendsStack.Screen name="Friends">
-        {(navProps) => (
-          <FriendsScreen
-            {...navProps}
-            screenMode="top"
-            hasUnreadFriendRequests={hasUnreadFriendRequests}
-            hasUnreadFriendFeed={hasUnreadFriendFeed}
-            onOpenFriendManage={onOpenFriendManage}
-            onFriendFeedDisplayed={onFriendFeedDisplayed}
-          />
-        )}
-      </FriendsStack.Screen>
-      <FriendsStack.Screen name="FriendLog">
-        {(navProps) => (
-          <FriendsScreen
-            {...navProps}
-            screenMode="log"
-            hasUnreadFriendRequests={hasUnreadFriendRequests}
-            hasUnreadFriendFeed={hasUnreadFriendFeed}
-            onOpenFriendManage={onOpenFriendManage}
-            onFriendFeedDisplayed={onFriendFeedDisplayed}
-          />
-        )}
-      </FriendsStack.Screen>
-      <FriendsStack.Screen name="Account" component={AccountScreen} />
-      <FriendsStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
-      <FriendsStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
-      <FriendsStack.Screen name="FollowListScreen" component={FollowListScreen} />
-    </FriendsStack.Navigator>
-  );
-}
-
 function SettingsStackNavigator() {
   const { colors } = useTheme();
   return (
@@ -652,8 +615,6 @@ function MainTabs() {
         ? "RankingTop"
         : n === "MyProfile" || MYMODEL_SUB_ROUTES.has(n)
         ? "MyModel"
-        : FRIENDS_SUB_ROUTES.has(n)
-        ? "Friends"
         : n;
     return MAIN_TAB_ROUTES.has(effective) ? effective : "Input";
   }, []);
@@ -722,8 +683,6 @@ function MainTabs() {
     [activeRouteName, getTabBarActiveName]
   );
 
-  const hasUnreadFriendRequests = !!getFeatureUnread("Friends", "requests");
-  const hasUnreadFriendFeed = !!getFeatureUnread("Friends", "feed");
 
   useEffect(() => {
     myWebUnreadStateRef.current = {
@@ -1232,24 +1191,6 @@ function MainTabs() {
     }
   }, [setUnread]);
 
-  const refreshFriendsUnreadBadge = React.useCallback(async () => {
-    const next = await refreshFriendsUnreadState();
-    return !!next?.feed;
-  }, [refreshFriendsUnreadState]);
-
-  const refreshFriendRequestsUnreadBadge = React.useCallback(async () => {
-    const next = await refreshFriendsUnreadState();
-    return !!next?.requests;
-  }, [refreshFriendsUnreadState]);
-
-  const markFriendRequestsRead = React.useCallback(async () => {
-    try {
-      await apiPost("/friends/unread/read-requests", {});
-    } catch (e) {
-      console.warn("MainTabs: failed to mark Friend requests read", e);
-    }
-  }, []);
-
   const markFriendsFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
     try {
       const body = lastSeenCreatedAt ? { last_seen_created_at: lastSeenCreatedAt } : {};
@@ -1290,31 +1231,6 @@ function MainTabs() {
       try { setPrefetch("Friends", "feed", { userId, items: mapped }); } catch {}
     } catch {}
   }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch]);
-
-  const prefetchFriendsManageData = React.useCallback(async () => {
-    try {
-      const userId = await resolveCurrentUserId();
-      if (!userId) return;
-      try {
-        const fresh = getPrefetchEntryFresh?.("Friends", "manage", PREFETCH_MAX_AGE_MS);
-        if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) return;
-      } catch {}
-
-      const json = await apiGet("/friends/manage");
-      const payload = json && typeof json === "object" ? json : {};
-      try {
-        setPrefetch("Friends", "manage", {
-          userId,
-          myProfile: payload?.myProfile || null,
-          friendsList: Array.isArray(payload?.friendsList) ? payload.friendsList : [],
-          incoming: Array.isArray(payload?.incoming) ? payload.incoming : [],
-          outgoing: Array.isArray(payload?.outgoing) ? payload.outgoing : [],
-          friendNotifMap: payload?.friendNotifMap && typeof payload.friendNotifMap === "object" ? payload.friendNotifMap : {},
-          incomingPendingCount: Number(payload?.incomingPendingCount || 0) || 0,
-        });
-      } catch {}
-    } catch {}
-  }, [getPrefetchEntryFresh, setPrefetch]);
 
   const prefetchMyModelScreenData = React.useCallback(async () => {
     try {
@@ -1392,12 +1308,12 @@ function MainTabs() {
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
       if (now - last < SCREEN_PREFETCH_MIN_INTERVAL_MS) return;
       __lastScreenPrefetchAtRef.current = now;
-      const tasks = [prefetchFriendsFeed, prefetchFriendsManageData, prefetchMyModelScreenData];
+      const tasks = [prefetchFriendsFeed, prefetchMyModelScreenData];
       for (const fn of tasks) {
         try { await fn(); } catch {}
       }
     } catch {}
-  }, [prefetchFriendsFeed, prefetchFriendsManageData, prefetchMyModelScreenData]);
+  }, [prefetchFriendsFeed, prefetchMyModelScreenData]);
 
   const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
     const includeScreenPrefetch = opts?.includeScreenPrefetch !== false;
@@ -1659,13 +1575,12 @@ function MainTabs() {
               case "MyModel":
               case "MyProfile": iconName = "cube-outline"; break;
               case "RankingTop": iconName = "trophy-outline"; break;
-              case "Friends": iconName = "people-outline"; break;
               case "Settings": iconName = "settings-outline"; break;
               default: iconName = "ellipse-outline";
             }
             const icon = <Ionicons name={iconName} size={size} color={color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
-            const shouldWrap = showUnreadBadge || route.name === "Friends" || route.name === "MyWeb";
+            const shouldWrap = showUnreadBadge || route.name === "MyWeb";
             if (!shouldWrap) return icon;
             return (
               <View style={{ width: size + (showUnreadBadge ? 22 : 10), height: size + (showUnreadBadge ? 12 : 10), alignItems: "center", justifyContent: "center", overflow: "visible" }}>
@@ -1696,7 +1611,6 @@ function MainTabs() {
               case "MyModel":
               case "MyProfile": label = "MyModel"; break;
               case "RankingTop": label = "Ranking"; break;
-              case "Friends": label = "Friend"; break;
               case "Settings": label = "Setting"; break;
               default: label = route.name;
             }
