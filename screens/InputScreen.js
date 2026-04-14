@@ -32,6 +32,12 @@ import {
   markNoticePopupSeen,
   markNoticesRead,
 } from "../lib/noticeApi";
+import {
+  cancelEmotionReflection,
+  getEmotionReflectionQuota,
+  previewEmotionReflection,
+  publishEmotionReflection,
+} from "../lib/emotionReflectionApi";
 import { getNoticeButtonActions, openNoticeAction } from "../lib/noticeActionRuntime";
 
 // テーマ
@@ -56,6 +62,7 @@ import TodayQuestionModal from "../components/TodayQuestionModal";
 import NoticeModal from "../components/NoticeModal";
 import TutorialStartModal from "../components/TutorialStartModal";
 import UnreadBadge from "../components/UnreadBadge";
+import EmotionReflectionPreviewModal from "../components/EmotionReflectionPreviewModal";
 
 // 未送信下書きは InputScreen 内で自己完結させ、
 // Metro の外部 helper 解決に依存しないようにする。
@@ -134,7 +141,9 @@ function normalizeInputDraftData(data = {}) {
     memo: String(data?.memo || ""),
     memoAction: String(data?.memoAction || ""),
     selectedCategories: normalizeDraftStringArray(data?.selectedCategories),
-    isSecret: data?.isSecret === true,
+    // 新Reflection仕様ではシークレットメモUIを表導線から外す。
+    // 旧下書きに isSecret が残っていても、新UIでは常に false として扱う。
+    isSecret: false,
     sendFriendNotification: data?.sendFriendNotification !== false,
   };
 }
@@ -344,6 +353,11 @@ export default function InputScreen({ navigation }) {
   const [isSecret, setIsSecret] = useState(false);
   const [sendFriendNotification, setSendFriendNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [reflectionQuota, setReflectionQuota] = useState(null);
+  const [reflectionPreviewVisible, setReflectionPreviewVisible] = useState(false);
+  const [reflectionPreviewLoading, setReflectionPreviewLoading] = useState(false);
+  const [reflectionPublishLoading, setReflectionPublishLoading] = useState(false);
+  const [reflectionPreviewPayload, setReflectionPreviewPayload] = useState(null);
   const [keyboardInset, setKeyboardInset] = useState(0);
 
 // --- Lightweight toast / input feedback modal ---
@@ -1128,7 +1142,7 @@ const { height: windowHeight } = useWindowDimensions();
     setMemo(restored.memo);
     setMemoAction(restored.memoAction);
     setSelectedCategories(restored.selectedCategories);
-    setIsSecret(restored.isSecret);
+    setIsSecret(false);
     setSendFriendNotification(restored.sendFriendNotification);
     setShowMemoSection(
       restored.selectedEmotions.some((item) => item?.type === SELF_INSIGHT) ||
@@ -1360,6 +1374,11 @@ const { height: windowHeight } = useWindowDimensions();
     selectedEmotions.length > 0 &&
     (!isSelfInsightSelected || hasMemoInput) &&
     (!requiresCategorySelection || hasSelectedCategories);
+  const canPreviewReflection =
+    !isTutorialMode &&
+    !reflectionPreviewLoading &&
+    !reflectionPublishLoading &&
+    canSubmit;
 
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
@@ -1368,7 +1387,6 @@ const { height: windowHeight } = useWindowDimensions();
     selectedCategories.length > 0 ||
     showMemoSection ||
     activeField !== null ||
-    isSecret ||
     sendFriendNotification === false;
 
   useEffect(() => {
@@ -1659,32 +1677,194 @@ const { height: windowHeight } = useWindowDimensions();
     });
   };
 
+  const buildEmotionSubmitPayload = useCallback(() => {
+    const emotionDetails = selectedEmotions.map((e) => ({
+      type: e.type,
+      strength: e.strength,
+    }));
+
+    const payload = {
+      emotions: emotionDetails,
+      memo,
+      created_at: new Date().toISOString(),
+      is_secret: false,
+      notify_friends: sendFriendNotification,
+    };
+
+    if (hasMemoInput && selectedCategories.length > 0) {
+      payload.category = selectedCategories;
+    }
+
+    if (memoAction && memoAction.trim().length > 0) {
+      payload.memo_action = memoAction;
+    }
+
+    return payload;
+  }, [
+    hasMemoInput,
+    memo,
+    memoAction,
+    selectedCategories,
+    selectedEmotions,
+    sendFriendNotification,
+  ]);
+
+  const refreshReflectionQuota = useCallback(async () => {
+    if (!currentUserId || isTutorialMode) {
+      setReflectionQuota(null);
+      return null;
+    }
+    try {
+      const json = await getEmotionReflectionQuota();
+      const nextQuota = json && typeof json === "object" ? json : null;
+      setReflectionQuota(nextQuota);
+      return nextQuota;
+    } catch (e) {
+      console.warn("InputScreen: getEmotionReflectionQuota failed", e);
+      return null;
+    }
+  }, [currentUserId, isTutorialMode]);
+
+  useEffect(() => {
+    void refreshReflectionQuota();
+
+    let unsubscribe = null;
+    try {
+      unsubscribe = navigation?.addListener?.("focus", () => {
+        void refreshReflectionQuota();
+      });
+    } catch {
+      // noop
+    }
+
+    return () => {
+      try {
+        if (typeof unsubscribe === "function") unsubscribe();
+      } catch {
+        // noop
+      }
+    };
+  }, [navigation, refreshReflectionQuota]);
+
+  const handlePreviewReflection = useCallback(async () => {
+    if (!canPreviewReflection) return;
+
+    registerInputInteraction();
+    setReflectionPreviewLoading(true);
+    try {
+      const payload = buildEmotionSubmitPayload();
+      const preview = await previewEmotionReflection(payload);
+      const quota = preview?.quota && typeof preview.quota === "object"
+        ? preview.quota
+        : null;
+      if (quota) {
+        setReflectionQuota(quota);
+      }
+      setReflectionPreviewPayload(preview && typeof preview === "object" ? preview : null);
+      setReflectionPreviewVisible(true);
+    } catch (e) {
+      console.warn("InputScreen: previewEmotionReflection failed", e);
+      Alert.alert(
+        "Reflection preview",
+        String(e?.message || "Reflectionの生成に失敗しました。")
+      );
+    } finally {
+      setReflectionPreviewLoading(false);
+    }
+  }, [buildEmotionSubmitPayload, canPreviewReflection, registerInputInteraction]);
+
+  const handleCancelReflectionPreview = useCallback(async () => {
+    const previewId = String(reflectionPreviewPayload?.preview_id || "").trim();
+    setReflectionPreviewVisible(false);
+    if (!previewId) {
+      setReflectionPreviewPayload(null);
+      return;
+    }
+    try {
+      await cancelEmotionReflection(previewId);
+    } catch (e) {
+      console.warn("InputScreen: cancelEmotionReflection failed", e);
+    } finally {
+      setReflectionPreviewPayload(null);
+    }
+  }, [reflectionPreviewPayload?.preview_id]);
+
+  const handlePublishReflection = useCallback(async () => {
+    const previewId = String(reflectionPreviewPayload?.preview_id || "").trim();
+    if (!previewId || reflectionPublishLoading) return;
+
+    setReflectionPublishLoading(true);
+    try {
+      const publishResult = await publishEmotionReflection(previewId);
+      const inputFeedbackText = String(
+        publishResult?.input_feedback?.comment_text || ""
+      ).trim();
+
+      await clearPersistedInputDraft();
+      setPendingInputDraft(null);
+      setDraftRestoreModalVisible(false);
+
+      setSelectedEmotions([]);
+      setMemo("");
+      setMemoAction("");
+      setSelectedCategories([]);
+      setShowMemoSection(false);
+      setActiveField(null);
+      setMemoContentHeight(44);
+      setMemoActionContentHeight(44);
+      setIsSecret(false);
+      Keyboard.dismiss();
+
+      setReflectionPreviewVisible(false);
+      setReflectionPreviewPayload(null);
+
+      const nextQuota = publishResult?.quota && typeof publishResult.quota === "object"
+        ? publishResult.quota
+        : null;
+      if (nextQuota) {
+        setReflectionQuota(nextQuota);
+      } else {
+        void refreshReflectionQuota();
+      }
+
+      void refreshHomeCounts();
+      void fetchGlobalSummary({ force: true });
+
+      if (inputFeedbackText) {
+        openInputFeedbackModal({
+          commentText: inputFeedbackText,
+          dominantLabel: "Reflectionを公開しました",
+        });
+      } else {
+        showToast("Reflectionを公開しました");
+      }
+    } catch (e) {
+      console.warn("InputScreen: publishEmotionReflection failed", e);
+      Alert.alert(
+        "Reflection publish",
+        String(e?.message || "Reflectionの公開に失敗しました。")
+      );
+    } finally {
+      setReflectionPublishLoading(false);
+    }
+  }, [
+    clearPersistedInputDraft,
+    fetchGlobalSummary,
+    openInputFeedbackModal,
+    refreshHomeCounts,
+    refreshReflectionQuota,
+    reflectionPreviewPayload?.preview_id,
+    reflectionPublishLoading,
+    showToast,
+  ]);
+
   const handleOk = async () => {
     if (!canSubmit) return;
     setSubmitting(true);
     try {
       // 1) 入力内容を MashOS Emotion Submit API 用のペイロードに変換
-      const emotionDetails = selectedEmotions.map((e) => ({
-        type: e.type,
-        strength: e.strength,
-      }));
-      const createdAt = new Date().toISOString();
-
-      const payload = {
-        emotions: emotionDetails,
-        memo,
-        created_at: createdAt,
-        is_secret: isSecret,
-        notify_friends: sendFriendNotification,
-      };
-
-      if (hasMemoInput && selectedCategories.length > 0) {
-        payload.category = selectedCategories;
-      }
-
-      if (memoAction && memoAction.trim().length > 0) {
-        payload.memo_action = memoAction;
-      }
+      const payload = buildEmotionSubmitPayload();
+      const emotionDetails = Array.isArray(payload?.emotions) ? payload.emotions : [];
 
       const strengthScore = (s) =>
         s === "strong" ? 3 : s === "medium" ? 2 : s === "weak" ? 1 : 0;
@@ -2575,51 +2755,20 @@ ${String(error?.message || error)}`
                       ) : null}
                     </View>
 
-                    <View style={styles.preferenceCard}>
-                      <View style={styles.preferenceRow}>
-                        <View style={styles.preferenceLeft}>
-                          <Ionicons
-                            name={
-                              isSecret
-                                ? "lock-closed-outline"
-                                : "lock-open-outline"
-                            }
-                            size={18}
-                            color={colors.TEXT_SUBTLE}
-                            style={styles.preferenceIcon}
-                          />
-                          <View style={styles.preferenceTextWrap}>
-                            <Text style={styles.preferenceTitle}>
-                              シークレットメモ
-                            </Text>
-                            <Text style={styles.preferenceDesc}>
-                              オンにするとReflectionsに表示されません。{"\n"}
-                              分析レポートには反映されます。
-                            </Text>
-                          </View>
-                        </View>
-                        <CocolonSwitch
-                          value={isSecret}
-                          onValueChange={(value) => {
-                            registerInputInteraction();
-                            setIsSecret(value);
-                          }}
-                          trackColor={{
-                            false: "#D1D5DB",
-                            true: colors.GOLD_BUTTON,
-                          }}
-                          thumbColor={
-                            Platform.OS === "android"
-                              ? isSecret
-                                ? "#FFFFFF"
-                                : "#F9FAFB"
-                              : undefined
-                          }
-                          ios_backgroundColor="#D1D5DB"
-                          accessibilityLabel="シークレットメモを切り替える"
-                        />
-                      </View>
-                    </View>
+                  </View>
+                ) : null}
+
+                {!isTutorialMode ? (
+                  <View style={styles.buttonWrapper}>
+                    <CocolonButton
+                      variant="secondary"
+                      onPress={handlePreviewReflection}
+                      disabled={!canPreviewReflection}
+                      loading={reflectionPreviewLoading}
+                      accessibilityLabel="Reflection化して確認"
+                    >
+                      Reflection化して確認
+                    </CocolonButton>
                   </View>
                 ) : null}
 
@@ -2833,6 +2982,17 @@ ${String(error?.message || error)}`
     </View>
   </View>
 </Modal>
+
+<EmotionReflectionPreviewModal
+  visible={reflectionPreviewVisible}
+  preview={{
+    ...(reflectionPreviewPayload || {}),
+    quota: reflectionPreviewPayload?.quota || reflectionQuota || null,
+  }}
+  publishLoading={reflectionPublishLoading}
+  onClose={handleCancelReflectionPreview}
+  onPublish={handlePublishReflection}
+/>
       </View>
 
 {tutorialOverlayConfig ? (
