@@ -498,6 +498,17 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
                   return;
                 }
               } catch {}
+
+              const returnToAccount = !!navProps?.route?.params?.returnToAccount;
+              const viewedUserId = navProps?.route?.params?.viewedUserId || null;
+
+              if (returnToAccount) {
+                try {
+                  navProps?.navigation?.navigate("Account", viewedUserId ? { viewedUserId } : undefined);
+                  return;
+                } catch {}
+              }
+
               try {
                 navProps?.navigation?.navigate("MyModel");
               } catch {}
@@ -813,41 +824,6 @@ function MainTabs() {
       if (!res.ok) {}
     } catch {}
   }, []);
-
-  const refreshMyModelCreateUnreadBadge = React.useCallback(async () => {
-    try {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-      if (!accessToken) {
-        setUnread("MyModel", "mymodelCreate", false);
-        return;
-      }
-
-      const fetchTier = async (tier) => {
-        const url = `${MYMODEL_API_BASE_URL}/mymodel/create/questions?build_tier=${encodeURIComponent(tier)}`;
-        const res = await apiFetch(url, {
-          method: "GET",
-          auth: false,
-          headers: { Authorization: `Bearer ${accessToken}` },
-        });
-        if (!res.ok) return null;
-        const json = await res.json().catch(() => null);
-        return json && typeof json === "object" ? json : null;
-      };
-
-      const lightJson = await fetchTier("light");
-      const lightTotal = Number(lightJson?.meta?.total_questions ?? lightJson?.questions?.length ?? 0) || 0;
-      const lightHasUnanswered = !!lightJson?.meta?.has_unanswered;
-      const lightDot = lightTotal > 0 && lightHasUnanswered;
-      const standardJson = await fetchTier("standard");
-      const standardTotal = Number(standardJson?.meta?.total_questions ?? standardJson?.questions?.length ?? 0) || 0;
-      const standardHasUnanswered = !!standardJson?.meta?.has_unanswered;
-      const standardDot = standardTotal > 0 && standardHasUnanswered;
-      setUnread("MyModel", "mymodelCreate", !!(lightDot || standardDot));
-    } catch {
-      setUnread("MyModel", "mymodelCreate", false);
-    }
-  }, [MYMODEL_API_BASE_URL, setUnread]);
 
   const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
     try {
@@ -1328,7 +1304,6 @@ function MainTabs() {
 
     const tasks = [
       refreshEmotionLogUnreadState,
-      refreshMyModelCreateUnreadBadge,
       refreshMyModelReflectionsUnreadBadge,
       warmMyWebUnreadAtStartup,
     ];
@@ -1351,7 +1326,6 @@ function MainTabs() {
   }, [
     pingActivityLogin,
     refreshEmotionLogUnreadState,
-    refreshMyModelCreateUnreadBadge,
     refreshMyModelReflectionsUnreadBadge,
     warmMyWebUnreadAtStartup,
     runAllScreenPrefetch,

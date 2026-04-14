@@ -16,12 +16,8 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
-import { useNavigation } from "@react-navigation/native";
-
 import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
-
-import { useSubscription } from "../SubscriptionContext";
 
 // UI (Design System)
 import CocolonPressable from "../components/CocolonPressable";
@@ -40,19 +36,13 @@ const ANSWERS_ENDPOINT = `${API_BASE}/mymodel/create/answers`;
 // パネル高さ（MyProfile 近似）
 const PANEL_MIN_HEIGHT = 690;
 
-// 5問ずつ表示（ページ制）
-const PAGE_SIZE = 5;
-
-export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
+export default function MyModelCreateScreen({ onBack }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
   const isIOS = Platform.OS === "ios";
 
-  const navigation = useNavigation();
-
-  const { isPaid: isPaidFromCtx, tier: subscriptionTier } = useSubscription();
 
   // キーボードで入力欄が隠れないように追従スクロール
   const scrollRef = useRef(null);
@@ -108,46 +98,6 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
     };
   }, [scrollToFocusedInput]);
 
-  const openSubscriptionSelect = useCallback(() => {
-    if (typeof onOpenSubscription === "function") {
-      try {
-        onOpenSubscription();
-        return;
-      } catch {
-        // fall through
-      }
-    }
-
-    // Navigate to SubscriptionSelect (unify paywall CTA behavior)
-    try {
-      if (navigation && typeof navigation.navigate === "function") {
-        navigation.navigate("SubscriptionSelect");
-        return;
-      }
-      const parent =
-        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-      if (parent && typeof parent.navigate === "function") {
-        parent.navigate("SubscriptionSelect");
-        return;
-      }
-    } catch {
-      // fall through
-    }
-
-    Alert.alert("プラン確認", "加入画面を開けませんでした。もう一度お試しください。");
-  }, [navigation, onOpenSubscription]);
-
-  const promptSubscriptionForLockedPages = useCallback(() => {
-    Alert.alert(
-      "ReflectionCreate",
-      "2ページ目以降はPlusプラン以上で利用できます。\n\nPlusプラン以上で全ての問いに回答できるようになります。",
-      [
-        { text: "閉じる", style: "cancel" },
-        { text: "プランを見る", onPress: openSubscriptionSelect },
-      ]
-    );
-  }, [openSubscriptionSelect]);
-
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -163,15 +113,6 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
   const [originalSecrets, setOriginalSecrets] = useState({});
 
 
-  const [page, setPage] = useState(0);
-
-
-  const isPaidUser = useMemo(() => {
-    // Prefer SubscriptionContext when available; fall back to server meta.
-    if (subscriptionTier && subscriptionTier !== "unknown") return !!isPaidFromCtx;
-    const mTier = String(meta?.subscription_tier || "").trim().toLowerCase();
-    return mTier === "plus" || mTier === "premium";
-  }, [isPaidFromCtx, meta, subscriptionTier]);
 
   async function getAccessToken() {
     const { data } = await supabase.auth.getSession();
@@ -244,16 +185,6 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
       setUiTexts(serverUiTexts);
 
 
-      // ページ位置を維持（無料は1ページ目固定）
-      const tierFromMeta = String(m?.subscription_tier || "").trim().toLowerCase();
-      const paidFromMeta = tierFromMeta === "plus" || tierFromMeta === "premium";
-      const nextTotalPages = Math.max(1, Math.ceil(qs.length / PAGE_SIZE));
-      setPage((prev) => {
-        const p0 = typeof prev === "number" ? prev : 0;
-        if (!paidFromMeta) return 0;
-        return Math.min(Math.max(0, p0), nextTotalPages - 1);
-      });
-
       // Initialize answers (server values)
       const initDraft = {};
       const initOriginal = {};
@@ -282,7 +213,6 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
       setAnswerHeights({});
       setMeta(null);
       setUiTexts({});
-      setPage(0);
     } finally {
       setLoading(false);
     }
@@ -423,39 +353,9 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
     }
   }, [canSave, buildPayloadAnswers, uiTexts, loadQuestions]);
 
-  const totalPages = Math.max(1, Math.ceil((questions?.length || 0) / PAGE_SIZE));
-  const safePage = isPaidUser ? Math.min(page, totalPages - 1) : 0;
-  const pageStart = safePage * PAGE_SIZE;
-  const pageQuestions = (questions || []).slice(pageStart, pageStart + PAGE_SIZE);
-  const canGoPrev = safePage > 0;
-  const canGoNext = isPaidUser && safePage < totalPages - 1;
+  const pageStart = 0;
+  const pageQuestions = questions || [];
 
-  const changePage = useCallback(
-    (next) => {
-      const total = Array.isArray(questions) ? questions.length : 0;
-      const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-      const maxPage = pages - 1;
-      let n = parseInt(String(next), 10);
-      if (!Number.isFinite(n)) n = 0;
-      n = Math.max(0, Math.min(maxPage, n));
-
-      if (!isPaidUser && n > 0) return;
-
-      Keyboard.dismiss();
-      setFocusedQuestionId(null);
-      lastFocusTargetRef.current = null;
-      setPage(n);
-
-      requestAnimationFrame(() => {
-        try {
-          scrollRef.current?.scrollTo?.({ y: 0, animated: true });
-        } catch {
-          // noop
-        }
-      });
-    },
-    [isPaidUser, questions]
-  );
 
   const placeholderDefault =
     String(uiTexts?.placeholder_default || "一言でも大丈夫です").trim() ||
@@ -463,16 +363,16 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
   const introSubscriptionBenefit =
     String(
       uiTexts?.intro_subscription_benefit ||
-        "サブスク加入することで、回答後編集と追加の問いが表示されます。"
-    ).trim() || "サブスク加入することで、回答後編集と追加の問いが表示されます。";
+        "ProfileCreate は固定的な自己紹介 / プロフィール資産です。"
+    ).trim() || "ProfileCreate は固定的な自己紹介 / プロフィール資産です。";
   const introSecretToggleNote =
     String(
       uiTexts?.intro_secret_toggle_note ||
-        "（シークレットメモのオンオフ切り替えは可能です。）"
-    ).trim() || "（シークレットメモのオンオフ切り替えは可能です。）";
+        "シークレットメモをオンにすると、他ユーザーの Account には表示されません。"
+    ).trim() || "シークレットメモをオンにすると、他ユーザーの Account には表示されません。";
 
   const answeredCount = Number(meta?.answered_count ?? 0) || 0;
-  const totalQuestions = Number(meta?.total_questions ?? 10) || 10;
+  const totalQuestions = Number(meta?.total_questions ?? 5) || 5;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -499,35 +399,26 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
           <View style={styles.panelHeader}>
             <CocolonBackButton onPress={onBack} style={{ width: 72 }} />
 
-            <Text style={styles.panelTitle}>ReflectionCreate</Text>
+            <Text style={styles.panelTitle}>ProfileCreate</Text>
 
             <View style={{ width: 72 }} />
           </View>
 
           {/* 説明 */}
           <View style={styles.introCard}>
-            <Text style={styles.introTitle}>問いに答えて、Reflectionを作成</Text>
+            <Text style={styles.introTitle}>5つの問いに答えて、プロフィールを作成</Text>
             <Text style={styles.introText}>
-              一問一答に答えることで、Reflectionを作成できます。{"\n"}
-              作成したReflectionを、フォロワーに公開できます。{"\n"}
-              シークレットメモをオンにすれば、非公開にできます。{"\n"}
-              全てに答える必要はありません。{"\n"}
-              「保存する」を押せば、答えた問いのみ「回答済み」となります。{"\n"}
               {introSubscriptionBenefit}{"\n"}
-              {introSecretToggleNote}{"\n"}{"\n"}
-              2ページ目以降はPlusプラン以上で利用できます。
+              Account 画面で編集される、固定的な自己紹介 / プロフィール資産です。{"\n"}
+              他ユーザーには、回答済みの項目だけが表示されます。{"\n"}
+              全てに答える必要はありません。{"\n"}
+              「保存する」を押すと、答えた内容だけが更新されます。{"\n"}
+              {introSecretToggleNote}
             </Text>
             <View style={styles.progressRow}>
               <Text style={styles.progressText}>
                 回答済み：{answeredCount}/{totalQuestions}
               </Text>
-              <CocolonPressable
-                style={[styles.lockedBtn, { alignSelf: "center", paddingVertical: 6 }]}
-                onPress={openSubscriptionSelect}
-              >
-                <Ionicons name="sparkles-outline" size={16} color="#FFFFFF" />
-                <Text style={styles.lockedBtnText}>プランを見る</Text>
-              </CocolonPressable>
             </View>
           </View>
 
@@ -540,50 +431,6 @@ export default function MyModelCreateScreen({ onBack, onOpenSubscription }) {
             <Text style={styles.emptyText}>いまは質問がありません。</Text>
           ) : (
             <View style={{ marginTop: 6 }}>
-              {totalPages > 1 ? (
-                <View style={styles.pageTabsRow}>
-                  {Array.from({ length: totalPages }).map((_, i) => {
-                    const locked = !isPaidUser && i > 0;
-                    const active = i === safePage;
-
-                    return (
-                      <CocolonPressable
-                        key={`page-${i}`}
-                        style={[
-                          styles.pageTab,
-                          active && styles.pageTabActive,
-                          locked && styles.pageTabLocked,
-                        ]}
-                        onPress={() => {
-                          if (locked) {
-                            promptSubscriptionForLockedPages();
-                            return;
-                          }
-                          changePage(i);
-                        }}
-                      >
-                        {locked ? (
-                          <Ionicons
-                            name="lock-closed-outline"
-                            size={14}
-                            color={colors.BORDER_GOLD}
-                            style={{ marginRight: 4 }}
-                          />
-                        ) : null}
-                        <Text
-                          style={[
-                            styles.pageTabText,
-                            active && styles.pageTabTextActive,
-                          ]}
-                        >
-                          {i + 1}
-                        </Text>
-                      </CocolonPressable>
-                    );
-                  })}
-                </View>
-              ) : null}
-
               {pageQuestions.map((q, idx) => {
                 const isExpanded = focusedQuestionId === q.id;
                 const rawAnswer = String(draftAnswers?.[q.id] ?? "");

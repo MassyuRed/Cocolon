@@ -101,6 +101,33 @@ function formatAllowedModes(modes) {
   return order.filter((m) => arr.includes(m)).join(" / ");
 }
 
+function getNavigatorRouteNames(navigationLike) {
+  try {
+    const state = navigationLike?.getState?.();
+    return Array.isArray(state?.routeNames) ? state.routeNames : [];
+  } catch {
+    return [];
+  }
+}
+
+
+function findNavigationForRoute(navigationLike, routeName) {
+  let current = navigationLike;
+  while (current) {
+    const routeNames = getNavigatorRouteNames(current);
+    if (routeNames.includes(routeName)) {
+      return current;
+    }
+    try {
+      current = current?.getParent?.() || null;
+    } catch {
+      current = null;
+    }
+  }
+  return null;
+}
+
+
 async function fetchSubscriptionMe() {
   const fallbackTier = "free";
   const fallbackModes = TIER_ALLOWED_MYPROFILE_MODES[fallbackTier];
@@ -177,6 +204,11 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const [accountStatus, setAccountStatus] = useState(null);
   const [statusLoading, setStatusLoading] = useState(false);
   const [statusError, setStatusError] = useState("");
+
+  const [profileCreateLoading, setProfileCreateLoading] = useState(false);
+  const [profileCreateError, setProfileCreateError] = useState("");
+  const [profileCreateItems, setProfileCreateItems] = useState([]);
+  const [profileCreateMeta, setProfileCreateMeta] = useState(null);
 
   // ユーザー名の再設定（編集）
   const [nameDraft, setNameDraft] = useState("");
@@ -399,10 +431,98 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   };
 
 
+  const refreshProfileCreate = async () => {
+    if (!targetUserId || !user) {
+      setProfileCreateItems([]);
+      setProfileCreateMeta(null);
+      setProfileCreateError("");
+      return;
+    }
+
+    setProfileCreateLoading(true);
+    setProfileCreateError("");
+    try {
+      let accessToken = null;
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        accessToken = sessionData?.session?.access_token ?? null;
+      } catch {
+        accessToken = null;
+      }
+
+      if (!accessToken) {
+        throw new Error("アクセストークンが取得できませんでした");
+      }
+
+      const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
+      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/profile-create?${qs}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        let detail = `HTTP ${res.status}`;
+        try {
+          const j = await res.json();
+          if (j && typeof j.detail === "string") detail = j.detail;
+        } catch {}
+        throw new Error(detail);
+      }
+
+      const json = await res.json().catch(() => ({}));
+      setProfileCreateItems(Array.isArray(json?.items) ? json.items : []);
+      setProfileCreateMeta(json?.meta && typeof json.meta === "object" ? json.meta : null);
+    } catch (e) {
+      console.warn("refreshProfileCreate error:", e);
+      setProfileCreateItems([]);
+      setProfileCreateMeta(null);
+      setProfileCreateError(String(e?.message || e));
+    } finally {
+      setProfileCreateLoading(false);
+    }
+  };
+
+  const openProfileCreate = () => {
+    if (!user || !isSelf) return;
+
+    const screenParams = {
+      returnToAccount: true,
+      viewedUserId: String(user?.id || targetUserId || ""),
+    };
+
+    const directNav = findNavigationForRoute(navigation, "MyModelCreate");
+    if (directNav) {
+      try {
+        directNav.navigate("MyModelCreate", screenParams);
+        return;
+      } catch {
+        // noop
+      }
+    }
+
+    const tabNav = findNavigationForRoute(navigation, "MyModel");
+    if (tabNav) {
+      try {
+        tabNav.navigate("MyModel", {
+          screen: "MyModelCreate",
+          params: screenParams,
+        });
+        return;
+      } catch {
+        // noop
+      }
+    }
+
+    Alert.alert("開けません", "ProfileCreate を開けませんでした。もう一度お試しください。");
+  };
+
   useEffect(() => {
     refreshFollowState();
     refreshAccountStatus();
     loadAccountVisibilityMe();
+    refreshProfileCreate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, targetUserId]);
 
@@ -415,6 +535,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       refreshFollowState();
       refreshAccountStatus();
       loadAccountVisibilityMe();
+      refreshProfileCreate();
     });
 
     return unsubscribe;
@@ -507,6 +628,10 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   };
 
   const tierLabel = SUB_TIER_LABEL[subTier] || "Freeプラン";
+  const profileCreateTotal = Number(profileCreateMeta?.total_questions ?? 5) || 5;
+  const profileCreateAnsweredCount = Number(profileCreateMeta?.answered_count ?? profileCreateItems.length ?? 0) || 0;
+  const profileCreateVisibleItems = Array.isArray(profileCreateItems) ? profileCreateItems : [];
+
   const tierPrice =
     subTier === "plus"
       ? "月額480円"
@@ -1156,6 +1281,69 @@ const onRestorePurchases = async () => {
             </Text>
           </View>
 
+          <View style={styles.statusSection}>
+            <Text style={styles.statusTitle}>ProfileCreate</Text>
+
+            {profileCreateLoading ? (
+              <ActivityIndicator style={{ marginTop: 6 }} />
+            ) : (
+              <View style={styles.statusCard}>
+                {isSelf ? (
+                  <View style={styles.profileCreateHeaderRow}>
+                    <View style={{ flex: 1, paddingRight: 12 }}>
+                      <Text style={styles.profileCreateSummaryText}>
+                        回答済み：{profileCreateAnsweredCount}/{profileCreateTotal}
+                      </Text>
+                      <Text style={styles.profileCreateHintText}>
+                        固定的な自己紹介 / プロフィール資産として使われます。
+                      </Text>
+                    </View>
+
+                    <TouchableOpacity
+                      style={styles.profileCreateEditBtn}
+                      onPress={openProfileCreate}
+                      activeOpacity={0.85}
+                      disabled={loading}
+                    >
+                      <Ionicons
+                        name="create-outline"
+                        size={16}
+                        color="#FFFFFF"
+                        style={{ marginRight: 6 }}
+                      />
+                      <Text style={styles.profileCreateEditBtnText}>編集する</Text>
+                    </TouchableOpacity>
+                  </View>
+                ) : null}
+
+                {profileCreateVisibleItems.length > 0 ? (
+                  profileCreateVisibleItems.map((item, index) => (
+                    <View
+                      key={String(item?.question_id || index)}
+                      style={[
+                        styles.profileCreateItem,
+                        index === profileCreateVisibleItems.length - 1 && styles.profileCreateItemLast,
+                      ]}
+                    >
+                      <Text style={styles.profileCreateQuestion}>{item?.question_text || ""}</Text>
+                      <Text style={styles.profileCreateAnswer}>{item?.answer_text || ""}</Text>
+                    </View>
+                  ))
+                ) : (
+                  <Text style={styles.profileCreateEmptyText}>
+                    {isSelf
+                      ? "まだ回答はありません。『編集する』から入力できます。"
+                      : "まだ公開されている回答はありません。"}
+                  </Text>
+                )}
+              </View>
+            )}
+
+            {profileCreateError ? (
+              <Text style={styles.statusErrorText}>取得エラー: {profileCreateError}</Text>
+            ) : null}
+          </View>
+
           {/* ステータス */}
           <View style={styles.statusSection}>
             <Text style={styles.statusTitle}>ステータス</Text>
@@ -1565,6 +1753,68 @@ function createStyles(COLORS, ui) {
       fontSize: 10,
       color: COLORS.TEXT_ON_LIGHT,
       opacity: 0.8,
+    },
+    profileCreateHeaderRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingBottom: 10,
+      marginBottom: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+    },
+    profileCreateSummaryText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TITLE_GOLD,
+    },
+    profileCreateHintText: {
+      marginTop: 4,
+      fontSize: 11,
+      lineHeight: 16,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.85,
+    },
+    profileCreateEditBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    profileCreateEditBtnText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: "#FFFFFF",
+    },
+    profileCreateItem: {
+      paddingVertical: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+    },
+    profileCreateItemLast: {
+      borderBottomWidth: 0,
+      paddingBottom: 0,
+    },
+    profileCreateQuestion: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
+    },
+    profileCreateAnswer: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: COLORS.TITLE_GOLD,
+    },
+    profileCreateEmptyText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
     },
     label: {
       fontSize: 12,
