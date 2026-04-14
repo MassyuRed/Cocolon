@@ -66,18 +66,7 @@ export default function RankingTopScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>ランキング一覧</Text>
 
-          <Text style={[styles.sectionLabel, { fontWeight: "800", marginTop: 12 }]}>全ユーザー</Text>
-
-          <QuickLink
-            styles={styles}
-            colors={colors}
-            icon="trophy-outline"
-            label="感情ランキング"
-            subtitle="喜び/悲しみ/怒り/不安/平穏"
-            onPress={() => navigation?.navigate?.("RankingEmotion")}
-          />
-
-          <Text style={[styles.sectionLabel, { fontWeight: "800", marginTop: 18 }]}>個人ユーザー</Text>
+          <Text style={[styles.sectionLabel, { fontWeight: "800", marginTop: 12 }]}>個人ユーザー</Text>
 
           <QuickLink
             styles={styles}

@@ -19,6 +19,7 @@ import CocolonGuideScreen from "./screens/CocolonGuideScreen";
 import NoticeHistoryScreen from "./screens/NoticeHistoryScreen";
 import MyWebScreen from "./screens/MyWebScreen";
 import MyModelScreen from "./screens/MyModelScreen";
+import MyModelEntryScreen from "./screens/MyModelEntryScreen";
 import MyModelCreateScreen from "./screens/MyModelCreateScreen";
 import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
 import MyModelReactionHistoryScreen from "./screens/MyModelReactionHistoryScreen";
@@ -473,7 +474,7 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
     <MyModelStack.Navigator initialRouteName="MyModel" screenOptions={{ headerShown: false }}>
       <MyModelStack.Screen name="MyModel">
         {(navProps) => (
-          <MyModelScreen
+          <MyModelEntryScreen
             {...navProps}
             linkPayload={linkPayload}
             onConsumeLinkPayload={onConsumeLinkPayload}
@@ -623,7 +624,6 @@ function MainTabs() {
     (routeName) => {
       if (routeName === "MyModel" || routeName === "MyProfile") {
         return !!(
-          getFeatureUnread("MyModel", "mymodelCreate") ||
           (!isTutorialMode && getFeatureUnread("MyModel", "reflectionsNew")) ||
           getFeatureUnread("EmotionLog", "feed")
         );
@@ -1609,7 +1609,7 @@ function MainTabs() {
               case "Input": label = "Home"; break;
               case "MyWeb": label = "MyWeb"; break;
               case "MyModel":
-              case "MyProfile": label = "MyModel"; break;
+              case "MyProfile": label = "Nexus"; break;
               case "RankingTop": label = "Ranking"; break;
               case "Settings": label = "Setting"; break;
               default: label = route.name;
