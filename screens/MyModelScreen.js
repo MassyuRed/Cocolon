@@ -206,6 +206,7 @@ export default function MyModelScreen({ route } = {}) {
     setTutorialReflections,
     setTutorialStep,
   } = useTutorial();
+  const tutorialSurfaceEnabled = false;
 
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -243,7 +244,7 @@ export default function MyModelScreen({ route } = {}) {
   const targetUserId = initialViewedUserId ? String(initialViewedUserId) : null;
 
   const unreadMyModelCreate = !!getFeatureUnread("MyModel", "mymodelCreate");
-  const unreadReflections = !isTutorialMode && !!getFeatureUnread("MyModel", "reflectionsNew");
+  const unreadReflections = !(tutorialSurfaceEnabled && isTutorialMode) && !!getFeatureUnread("MyModel", "reflectionsNew");
   const unreadEmotionLog = !!getFeatureUnread("EmotionLog", "feed");
 
   // Recommend (users)
@@ -353,6 +354,7 @@ export default function MyModelScreen({ route } = {}) {
   const tutorialHasSelfReflection = !!tutorialSelfReflection;
 
   const isMyModelTutorialStep =
+    tutorialSurfaceEnabled &&
     !!isTutorialMode &&
     tutorialStep >= MYMODEL_TUTORIAL_STEP_START &&
     tutorialStep <= MYMODEL_TUTORIAL_STEP_END;
@@ -423,7 +425,7 @@ export default function MyModelScreen({ route } = {}) {
   }, [isMyModelTutorialVisible, tutorialStep, setTutorialStep]);
 
   const tutorialModalOverlayConfig = useMemo(() => {
-    if (!isTutorialMode || !tutorialCreateVisible || tutorialStep !== 14) {
+    if (!tutorialSurfaceEnabled || !isTutorialMode || !tutorialCreateVisible || tutorialStep !== 14) {
       return null;
     }
 
@@ -473,7 +475,7 @@ export default function MyModelScreen({ route } = {}) {
   ]);
 
   useEffect(() => {
-    if (!isTutorialMode || !tutorialHasSelfReflection) return;
+    if (!tutorialSurfaceEnabled || !isTutorialMode || !tutorialHasSelfReflection) return;
     if (tutorialStep < MYMODEL_TUTORIAL_STEP_START || tutorialStep >= 15) return;
     setTutorialStep(15);
   }, [isTutorialMode, tutorialHasSelfReflection, tutorialStep, setTutorialStep]);
@@ -733,7 +735,7 @@ export default function MyModelScreen({ route } = {}) {
   }
 
   useEffect(() => {
-    if (!isTutorialMode || !tutorialHasSelfReflection) return;
+    if (!tutorialSurfaceEnabled || !isTutorialMode || !tutorialHasSelfReflection) return;
     setTutorialStep((prev) => (prev < 15 ? 15 : prev));
   }, [isTutorialMode, tutorialHasSelfReflection, setTutorialStep]);
 
@@ -1076,7 +1078,7 @@ export default function MyModelScreen({ route } = {}) {
 
 
   const openMyModelCreate = useCallback(() => {
-    if (isTutorialMode) {
+    if (tutorialSurfaceEnabled && isTutorialMode) {
       openTutorialCreate();
       return;
     }
@@ -1094,7 +1096,7 @@ export default function MyModelScreen({ route } = {}) {
   }, [navigation, isTutorialMode, openTutorialCreate]);
 
   const openReflections = useCallback(() => {
-    if (isTutorialMode && !tutorialHasSelfReflection) {
+    if (tutorialSurfaceEnabled && isTutorialMode && !tutorialHasSelfReflection) {
       Alert.alert(
         "先にReflectionを作成しましょう",
         `チュートリアルでは、まず「${TUTORIAL_REFLECTION_QUESTION}」に答えると、作成から閲覧までの流れが分かります。`,
@@ -1106,7 +1108,7 @@ export default function MyModelScreen({ route } = {}) {
       return;
     }
 
-    if (isTutorialMode) {
+    if (tutorialSurfaceEnabled && isTutorialMode) {
       setTutorialStep((prev) => (prev < 16 ? 16 : prev));
     }
 
@@ -1205,7 +1207,7 @@ export default function MyModelScreen({ route } = {}) {
           <View style={styles.headerRight} />
         </View>
 
-        {isTutorialMode ? (
+        {tutorialSurfaceEnabled && isTutorialMode ? (
           <View style={styles.recoCard}>
             <Text style={styles.recoTitle}>チュートリアル</Text>
             <Text style={styles.recoSummaryText}>
@@ -1256,7 +1258,7 @@ export default function MyModelScreen({ route } = {}) {
             styles={styles}
             title="閲覧"
             description={
-              isTutorialMode
+              tutorialSurfaceEnabled && isTutorialMode
                 ? "作成したReflectionや、模擬ユーザーのReflectionを見ながら、MyModelの流れを確認できます。"
                 : "自分、またはフォロー中のユーザーが作成したReflectionを閲覧できます。"
             }
@@ -1286,7 +1288,7 @@ export default function MyModelScreen({ route } = {}) {
             styles={styles}
             title="作成"
             description={
-              isTutorialMode
+              tutorialSurfaceEnabled && isTutorialMode
                 ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionを作成する流れを体験できます。`
                 : "一問一答に答えることでReflectionを作成できます。作成したReflection数はアカウントページで確認できます。"
             }
@@ -1303,14 +1305,14 @@ export default function MyModelScreen({ route } = {}) {
             styles={styles}
             title="探す"
             description={
-              isTutorialMode
+              tutorialSurfaceEnabled && isTutorialMode
                 ? "本番ではここから新しいユーザーを探せます。チュートリアルではReflections画面に模擬ユーザーを用意しています。"
                 : "新しいユーザーを探すことができます。"
             }
             buttonLabel="新しいユーザーを探す"
             buttonIconName="search-outline"
             onPress={() => {
-              if (isTutorialMode) {
+              if (tutorialSurfaceEnabled && isTutorialMode) {
                 showTutorialRecommendInfo();
                 return;
               }

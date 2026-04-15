@@ -20,11 +20,65 @@ const INITIAL_TUTORIAL_STATE = Object.freeze({
   tutorialFriendFeed: [],
 });
 
+
+const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
+const DEFAULT_TUTORIAL_SELF_REFLECTION = Object.freeze({
+  id: "tutorial-reflection-self",
+  q_instance_id: "tutorial-q-self",
+  q_key: "tutorial-holiday",
+  title: TUTORIAL_REFLECTION_QUESTION,
+  body:
+    "静かな場所でゆっくり休みつつ、好きなことに時間を使える休日が理想です。",
+  owner_user_id: "tutorial-self",
+  display_name: "自分",
+  friend_code: "YOU",
+  is_tutorial: true,
+  tutorial_kind: "self",
+  created_at: "2026-01-01T09:10:00.000Z",
+  resonances: 0,
+  discoveries: 0,
+  views: 0,
+  is_new: true,
+});
+const DEFAULT_TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
+  {
+    id: "tutorial-reflection-mock-1",
+    q_instance_id: "tutorial-q-mock-1",
+    q_key: "tutorial-holiday",
+    title: TUTORIAL_REFLECTION_QUESTION,
+    body:
+      "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
+    owner_user_id: "tutorial-follow-1",
+    display_name: "User",
+    friend_code: "HANAKO123",
+    is_tutorial: true,
+    tutorial_kind: "mock",
+    created_at: "2026-01-01T09:00:00.000Z",
+    resonances: 4,
+    discoveries: 2,
+    views: 12,
+    is_new: true,
+  },
+]);
+
 function cloneInitialArrays() {
   return {
     tutorialEmotions: [],
     tutorialReflections: [],
     tutorialFriendFeed: [],
+  };
+}
+
+
+function cloneTutorialReflectionItem(payload) {
+  return payload ? JSON.parse(JSON.stringify(payload)) : payload;
+}
+
+function buildDefaultTutorialSelfReflection(body) {
+  const nextBody = String(body || "").trim();
+  return {
+    ...cloneTutorialReflectionItem(DEFAULT_TUTORIAL_SELF_REFLECTION),
+    body: nextBody || DEFAULT_TUTORIAL_SELF_REFLECTION.body,
   };
 }
 
@@ -142,6 +196,54 @@ export function TutorialProvider({ children }) {
     setTutorialFriendFeed((prev) => [payload, ...prev]);
   }, []);
 
+  const ensureTutorialReflectionsSeed = useCallback((options = {}) => {
+    const nextSelfBody = String(options?.selfBody || "").trim();
+
+    setTutorialReflections((prev) => {
+      const safePrev = Array.isArray(prev)
+        ? prev.filter(Boolean).map((item) => cloneTutorialReflectionItem(item))
+        : [];
+
+      let changed = false;
+      let nextItems = [...safePrev];
+      const selfIndex = nextItems.findIndex(
+        (item) => String(item?.tutorial_kind || "") === "self"
+      );
+      const hasMock = nextItems.some(
+        (item) => String(item?.tutorial_kind || "") === "mock"
+      );
+
+      if (selfIndex < 0) {
+        nextItems = [buildDefaultTutorialSelfReflection(nextSelfBody), ...nextItems];
+        changed = true;
+      } else if (
+        nextSelfBody &&
+        String(nextItems[selfIndex]?.body || "").trim() !== nextSelfBody
+      ) {
+        nextItems[selfIndex] = {
+          ...nextItems[selfIndex],
+          title:
+            String(nextItems[selfIndex]?.title || "").trim() ||
+            TUTORIAL_REFLECTION_QUESTION,
+          body: nextSelfBody,
+        };
+        changed = true;
+      }
+
+      if (!hasMock) {
+        nextItems = [
+          ...nextItems,
+          ...DEFAULT_TUTORIAL_MOCK_REFLECTIONS.map((item) =>
+            cloneTutorialReflectionItem(item)
+          ),
+        ];
+        changed = true;
+      }
+
+      return changed ? nextItems : prev;
+    });
+  }, []);
+
   const value = useMemo(
     () => ({
       isTutorialMode,
@@ -169,6 +271,7 @@ export function TutorialProvider({ children }) {
       addTutorialEmotion,
       addTutorialReflection,
       addTutorialFriendFeedItem,
+      ensureTutorialReflectionsSeed,
     }),
     [
       isTutorialMode,
@@ -187,6 +290,7 @@ export function TutorialProvider({ children }) {
       addTutorialEmotion,
       addTutorialReflection,
       addTutorialFriendFeedItem,
+      ensureTutorialReflectionsSeed,
     ]
   );
 
