@@ -12,7 +12,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
  *   }
  *
  * Example scopes:
- *   - "MyWeb": { weekly: true, monthly: false, mymodelCreate: true }
+ *   - "MyWeb": { weekly: true, monthly: false }
  *   - "EmotionLog": { feed: true, requests: false }
  */
 
@@ -206,23 +206,15 @@ function buildStartupHydrationData(rawStartup, options = {}) {
     };
   }
 
-  const mymodelCreateSection = resolveSection(sections, "mymodel_create_status", "mymodel_create");
   const mymodelReflectionsSection = resolveSection(
     sections,
     "mymodel_reflections_unread",
     "mymodel_reflections"
   );
-  if (mymodelCreateSection.found || mymodelReflectionsSection.found) {
-    const mymodelCreate = pickObject(mymodelCreateSection.value);
+  if (mymodelReflectionsSection.found) {
     const mymodelReflections = pickObject(mymodelReflectionsSection.value);
 
     unreadPatch.MyModel = {
-      mymodelCreate: !!(
-        mymodelCreate?.has_any_unanswered ||
-        mymodelCreate?.has_unanswered ||
-        mymodelCreate?.light?.has_unanswered ||
-        mymodelCreate?.standard?.has_unanswered
-      ),
       reflectionsNew: !!(
         mymodelReflections?.has_unread ||
         mymodelReflections?.unread ||

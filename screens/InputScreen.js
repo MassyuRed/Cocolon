@@ -1004,7 +1004,8 @@ const handleStartTutorialFromModal = useCallback(() => {
   setTutorialPromptDismissedThisSession(true);
   closeStartupPopupWindow();
   startTutorial();
-}, [closeStartupPopupWindow, startTutorial]);
+  setTutorialStep(INPUT_TUTORIAL_STEP_START);
+}, [closeStartupPopupWindow, setTutorialStep, startTutorial]);
 
 const registerInputInteraction = useCallback(() => {
   if (startupWindowClosedRef.current) return;
