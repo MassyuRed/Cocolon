@@ -28,9 +28,9 @@ import {
   useMyWebMenuStyles,
 } from "./MyWebMenuCommon";
 
-const FRIEND_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
+const EMOTION_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
 
-function resolveFriendNotificationEnabled(payload) {
+function resolveEmotionNotificationEnabled(payload) {
   const list = Array.isArray(payload)
     ? payload
     : Array.isArray(payload?.settings)
@@ -48,7 +48,7 @@ function resolveFriendNotificationEnabled(payload) {
       item?.friend_id ??
       item?.friendId;
 
-    return String(friendUserId || "").trim() === FRIEND_NOTIFICATION_GLOBAL_OWNER_ID;
+    return String(friendUserId || "").trim() === EMOTION_NOTIFICATION_GLOBAL_OWNER_ID;
   });
 
   if (!row || typeof row !== "object") return true;
@@ -358,9 +358,9 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
       setFriendNotificationLoading(true);
       try {
-        const json = await apiGet("/friends/notification-settings");
+        const json = await apiGet("/emotion-notifications/settings");
         if (!cancelled) {
-          setFriendNotificationEnabled(resolveFriendNotificationEnabled(json));
+          setFriendNotificationEnabled(resolveEmotionNotificationEnabled(json));
         }
       } catch (error) {
         console.warn("SettingsAppSettingsScreen: load friend notification settings failed", error);
@@ -384,7 +384,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
   const persistFriendNotificationEnabled = async (next) => {
     await apiPost(
-      `/friends/notification-settings/${encodeURIComponent(FRIEND_NOTIFICATION_GLOBAL_OWNER_ID)}`,
+      `/emotion-notifications/settings/${encodeURIComponent(EMOTION_NOTIFICATION_GLOBAL_OWNER_ID)}`,
       { is_enabled: !!next }
     );
   };

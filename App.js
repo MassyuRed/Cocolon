@@ -1153,7 +1153,7 @@ function MainTabs() {
 
   const refreshEmotionLogUnreadState = React.useCallback(async () => {
     try {
-      const json = await apiGet("/friends/unread-status");
+      const json = await apiGet("/emotion-log/unread-status");
       const nextFeed = !!json?.feed_unread;
       const nextRequests = !!json?.requests_unread;
       setUnread("EmotionLog", "feed", nextFeed);
@@ -1170,7 +1170,7 @@ function MainTabs() {
   const markEmotionLogFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
     try {
       const body = lastSeenCreatedAt ? { last_seen_created_at: lastSeenCreatedAt } : {};
-      await apiPost("/friends/unread/read-feed", body);
+      await apiPost("/emotion-log/unread/read-feed", body);
     } catch (e) {
       console.warn("MainTabs: failed to mark EmotionLog feed read", e);
     }
@@ -1195,7 +1195,7 @@ function MainTabs() {
         if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) return;
       } catch {}
 
-      const json = await apiGet("/friends/feed");
+      const json = await apiGet("/emotion-log/feed");
       const rows = Array.isArray(json?.items) ? json.items : Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
       const mapped = rows.map((row) => ({
         id: row?.id,

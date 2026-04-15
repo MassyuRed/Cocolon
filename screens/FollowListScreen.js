@@ -21,8 +21,8 @@ import { apiFetch } from "../lib/apiClient";
 // MyModel（MashOS）API
 const MYMODEL_API_BASE_URL =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
-const FRIEND_NOTIFICATION_SETTINGS_ENDPOINT = `${MYMODEL_API_BASE_URL}/friends/notification-settings`;
-const FRIEND_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
+const EMOTION_NOTIFICATION_SETTINGS_ENDPOINT = `${MYMODEL_API_BASE_URL}/emotion-notifications/settings`;
+const EMOTION_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
 
 /**
  * FollowListScreen
@@ -75,7 +75,7 @@ function extractEmotionNotificationMap(payload) {
         row?.friendId
     ).trim();
 
-    if (!ownerUserId || ownerUserId === FRIEND_NOTIFICATION_GLOBAL_OWNER_ID) {
+    if (!ownerUserId || ownerUserId === EMOTION_NOTIFICATION_GLOBAL_OWNER_ID) {
       continue;
     }
 
@@ -470,7 +470,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
       }
 
-      const res = await apiFetch(FRIEND_NOTIFICATION_SETTINGS_ENDPOINT, {
+      const res = await apiFetch(EMOTION_NOTIFICATION_SETTINGS_ENDPOINT, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -760,7 +760,7 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const res = await apiFetch(
-        `${FRIEND_NOTIFICATION_SETTINGS_ENDPOINT}/${encodeURIComponent(ownerUserId)}`,
+        `${EMOTION_NOTIFICATION_SETTINGS_ENDPOINT}/${encodeURIComponent(ownerUserId)}`,
         {
           method: "POST",
           headers: {

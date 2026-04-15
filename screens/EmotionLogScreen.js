@@ -48,7 +48,7 @@ const DEFAULT_TUTORIAL_USER_NAME = "User";
 // （ローカル API に戻したい場合はここを書き換える）
 const API_BASE = "https://mashos-api.onrender.com";
 
-const EMOTION_LOG_FEED_ENDPOINT = `${API_BASE}/friends/feed`;
+const EMOTION_LOG_FEED_ENDPOINT = `${API_BASE}/emotion-log/feed`;
 
 // ===== 表示用定数 =====
 const STRENGTH_LABEL = {

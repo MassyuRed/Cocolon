@@ -181,7 +181,12 @@ function buildStartupHydrationData(rawStartup, options = {}) {
   const fetchedAt = Number(options?.fetchedAt) || Date.now();
   const source = normStr(options?.source) || null;
 
-  const emotionLogUnreadSection = resolveSection(sections, "friends_unread");
+  const emotionLogUnreadSection = resolveSection(
+    sections,
+    "emotionlog_unread",
+    "emotion_log_unread",
+    "friends_unread"
+  );
   if (emotionLogUnreadSection.found) {
     const emotionLogUnread = pickObject(emotionLogUnreadSection.value);
     unreadPatch.EmotionLog = {
