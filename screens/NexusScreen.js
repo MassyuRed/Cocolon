@@ -41,7 +41,6 @@ import {
   getNexusReflections,
   getNexusTrendingQuestions,
 } from "../lib/nexusApi";
-import NexusEmotionRankingCard from "./nexus/NexusEmotionRankingCard";
 import NexusReflectionCard from "./nexus/NexusReflectionCard";
 
 const TABS = [
@@ -346,7 +345,7 @@ export default function NexusScreen({ navigation }) {
     }
 
     try {
-      const json = await getNexusEmotionRanking(5);
+      const json = await getNexusEmotionRanking(3, "day");
       setRankingState({
         loading: false,
         items: normalizeEmotionRankingItems(json),
@@ -1067,10 +1066,6 @@ export default function NexusScreen({ navigation }) {
           </CocolonPressable>
         </View>
 
-        <Text style={styles.descriptionText}>
-          フォロー中ユーザーのReflectionや感情の動き、発見をまとめて見られる場所です。
-        </Text>
-
         {isTutorialMode ? (
           <View ref={tutorialCardRef} collapsable={false} style={styles.tutorialEntryCard}>
             <Text style={styles.tutorialEntryTitle}>チュートリアル</Text>
@@ -1090,39 +1085,84 @@ export default function NexusScreen({ navigation }) {
           </View>
         ) : null}
 
-        <NexusEmotionRankingCard
-          items={rankingState.items}
-          loading={rankingState.loading}
-        />
+        {!isTutorialMode ? (
+          <View style={styles.todayOverallEmotionSummary}>
+            <View style={styles.todayOverallEmotionHeader}>
+              <Ionicons
+                name="stats-chart-outline"
+                size={14}
+                color={colors.TITLE_GOLD}
+                style={styles.todayOverallEmotionIcon}
+              />
+              <Text style={styles.todayOverallEmotionTitle}>今日の全体感情</Text>
+            </View>
+
+            {rankingState.loading ? (
+              <Text style={styles.todayOverallEmotionPlaceholder}>読み込み中…</Text>
+            ) : rankingState.items.length <= 0 ? (
+              <Text style={styles.todayOverallEmotionPlaceholder}>
+                今日はまだ表示できる感情がありません。
+              </Text>
+            ) : (
+              <Text style={styles.todayOverallEmotionText}>
+                {rankingState.items
+                  .slice(0, 3)
+                  .map((item) => {
+                    const label =
+                      String(item?.label || "—").trim() || "—";
+                    const value = Number(item?.value);
+                    return `${label} ${Number.isFinite(value) ? value : "—"}`;
+                  })
+                  .join("　")}
+              </Text>
+            )}
+          </View>
+        ) : null}
 
         <View style={styles.tabBar}>
           {TABS.map((tab) => {
             const isActive = activeTab === tab.key;
             const content = (
               <CocolonPressable
-                style={[styles.tabChip, isActive && styles.tabChipActive]}
+                style={styles.tabItem}
                 onPress={() => setActiveTab(tab.key)}
               >
-                <Text
+                <View
                   style={[
-                    styles.tabChipText,
-                    isActive && styles.tabChipTextActive,
+                    styles.tabLabelWrap,
+                    isActive && styles.tabLabelWrapActive,
                   ]}
                 >
-                  {tab.label}
-                </Text>
+                  <Text
+                    style={[
+                      styles.tabLabelText,
+                      isActive && styles.tabLabelTextActive,
+                    ]}
+                  >
+                    {tab.label}
+                  </Text>
+                </View>
               </CocolonPressable>
             );
 
             if (tab.key === "reflection") {
               return (
-                <View key={tab.key} ref={reflectionTabRef} collapsable={false}>
+                <View
+                  key={tab.key}
+                  ref={reflectionTabRef}
+                  collapsable={false}
+                  style={styles.tabItemWrap}
+                >
                   {content}
                 </View>
               );
             }
 
-            return <View key={tab.key}>{content}</View>;
+            return (
+              <View key={tab.key} style={styles.tabItemWrap}>
+                {content}
+              </View>
+            );
           })}
         </View>
 
@@ -1262,11 +1302,38 @@ function createStyles(COLORS, ui) {
           borderWidth: 1,
           borderColor: COLORS.CARD_BORDER,
         },
-        descriptionText: {
+        todayOverallEmotionSummary: {
+          paddingTop: 12,
+          paddingBottom: 12,
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderTopColor: COLORS.CARD_BORDER,
+          borderBottomColor: COLORS.CARD_BORDER,
+          marginBottom: 14,
+        },
+        todayOverallEmotionHeader: {
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 6,
+        },
+        todayOverallEmotionIcon: {
+          marginRight: 6,
+        },
+        todayOverallEmotionTitle: {
+          fontSize: 13,
+          fontWeight: "800",
+          color: COLORS.TEXT_ON_LIGHT,
+        },
+        todayOverallEmotionText: {
+          fontSize: 13,
+          lineHeight: 20,
+          color: COLORS.TEXT_ON_LIGHT,
+          fontWeight: "700",
+        },
+        todayOverallEmotionPlaceholder: {
           fontSize: 13,
           lineHeight: 20,
           color: COLORS.TEXT_SUBTLE,
-          marginBottom: 14,
         },
         tutorialEntryCard: {
           borderRadius: 18,
@@ -1298,31 +1365,38 @@ function createStyles(COLORS, ui) {
         },
         tabBar: {
           flexDirection: "row",
-          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottomWidth: 1,
+          borderBottomColor: COLORS.CARD_BORDER,
           marginBottom: 14,
-          marginHorizontal: -4,
         },
-        tabChip: {
-          marginHorizontal: 4,
-          marginBottom: 8,
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
+        tabItemWrap: {
+          flex: 1,
         },
-        tabChipActive: {
-          backgroundColor: COLORS.GOLD_BUTTON,
-          borderColor: COLORS.GOLD_BUTTON_BORDER,
+        tabItem: {
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: 10,
+          paddingHorizontal: 2,
         },
-        tabChipText: {
-          fontSize: 12,
+        tabLabelWrap: {
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 9,
+          borderBottomWidth: 2,
+          borderBottomColor: "transparent",
+        },
+        tabLabelWrapActive: {
+          borderBottomColor: COLORS.TITLE_GOLD,
+        },
+        tabLabelText: {
+          fontSize: 13,
           fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
+          color: COLORS.TEXT_SUBTLE,
         },
-        tabChipTextActive: {
-          color: COLORS.ACCENT_TEXT,
+        tabLabelTextActive: {
+          color: COLORS.TITLE_GOLD,
         },
         tabContent: {
           marginTop: 2,
