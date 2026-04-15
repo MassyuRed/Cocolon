@@ -55,6 +55,29 @@ const MYMODEL_TUTORIAL_STEP_START = 12;
 const MYMODEL_TUTORIAL_STEP_END = 15;
 const TUTORIAL_TOTAL_STEPS = 21;
 
+const STRENGTH_LABEL = {
+  weak: "弱",
+  medium: "中",
+  strong: "強",
+};
+
+function emotionTint(emotion) {
+  switch (emotion) {
+    case "喜び":
+      return { bg: "rgba(16,185,129,0.12)", text: "#065F46" };
+    case "悲しみ":
+      return { bg: "rgba(99,102,241,0.12)", text: "#3730A3" };
+    case "怒り":
+      return { bg: "rgba(239,68,68,0.12)", text: "#7F1D1D" };
+    case "不安":
+      return { bg: "rgba(56,189,248,0.12)", text: "#0369A1" };
+    case "平穏":
+      return { bg: "rgba(234,179,8,0.12)", text: "#A16207" };
+    default:
+      return { bg: "rgba(107,114,128,0.12)", text: "#374151" };
+  }
+}
+
 function normalizeEmotionRankingItems(json) {
   const items = Array.isArray(json?.items)
     ? json.items
@@ -92,17 +115,18 @@ function normalizeEmotionLogItems(json) {
       ? row.emotions
       : [];
     const ownerName =
-      String(row?.ownerName || row?.owner_name || "ユーザー").trim() ||
-      "ユーザー";
-    const timeLabel = String(
-      row?.timeLabel || row?.created_at || row?.createdAt || ""
-    ).trim();
+      String(
+        row?.ownerName || row?.owner_name || row?.ownerNameLabel || ""
+      ).trim() || "ユーザー";
+    const timeLabel =
+      String(row?.timeLabel || "").trim() ||
+      formatDateLabel(row?.created_at || row?.createdAt || null);
     return {
       id: String(row?.id || `emotion-log-${index}`),
       ownerName,
       timeLabel,
       items: items.map((item) => ({
-        type: String(item?.type || "").trim(),
+        type: String(item?.type || item?.emotion || "").trim() || "感情",
         strength: String(item?.strength || "").trim(),
       })),
     };
@@ -807,24 +831,61 @@ export default function NexusScreen({ navigation }) {
     if (!emotionLogState.items.length) {
       return <Text style={styles.emptyText}>感情通知はまだありません。</Text>;
     }
-    return emotionLogState.items.map((row) => (
-      <View key={row.id} style={styles.simpleCard}>
-        <View style={styles.simpleCardHeader}>
-          <Text style={styles.simpleCardTitle}>{row.ownerName}</Text>
-          <Text style={styles.simpleCardMeta}>{formatDateLabel(row.timeLabel)}</Text>
-        </View>
-        <Text style={styles.simpleCardBody}>
-          {(row.items || [])
-            .map((item) => {
-              const type = String(item?.type || "").trim();
-              const strength = String(item?.strength || "").trim();
-              return strength ? `${type}（${strength}）` : type;
-            })
-            .filter(Boolean)
-            .join(" / ") || "感情入力"}
-        </Text>
+    return (
+      <View style={styles.emotionLogCard}>
+        {emotionLogState.items.map((row, rowIndex) => (
+          <React.Fragment key={row.id}>
+            <View style={styles.emotionLogRow}>
+              <View style={styles.emotionLogLeft}>
+                <Text style={styles.emotionLogName}>{row.ownerName}</Text>
+              </View>
+
+              <View style={styles.emotionLogCenter}>
+                {(row.items || []).length === 0 ? (
+                  <Text style={styles.emotionLogNoEmotion}>
+                    まだ感情が選択されていません
+                  </Text>
+                ) : (
+                  <View style={styles.emotionLogBadgeRow}>
+                    {(row.items || []).map((item, itemIndex) => {
+                      const type = String(item?.type || "").trim() || "感情";
+                      const strengthKey = String(item?.strength || "").trim();
+                      const labelStrength = STRENGTH_LABEL[strengthKey] || "";
+                      const tint = emotionTint(type);
+                      return (
+                        <View
+                          key={`${type}-${strengthKey}-${itemIndex}`}
+                          style={[
+                            styles.emotionLogBadge,
+                            { backgroundColor: tint.bg },
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              styles.emotionLogBadgeText,
+                              { color: tint.text },
+                            ]}
+                          >
+                            {type}
+                            {labelStrength ? `（${labelStrength}）` : ""}
+                          </Text>
+                        </View>
+                      );
+                    })}
+                  </View>
+                )}
+              </View>
+
+              <Text style={styles.emotionLogTime}>{row.timeLabel}</Text>
+            </View>
+
+            {rowIndex < emotionLogState.items.length - 1 ? (
+              <View style={styles.emotionLogSeparator} />
+            ) : null}
+          </React.Fragment>
+        ))}
       </View>
-    ));
+    );
   };
 
   const renderRecommendTab = () => {
@@ -1286,6 +1347,70 @@ function createStyles(COLORS, ui) {
           color: COLORS.TITLE_GOLD,
           marginBottom: 8,
           marginTop: 2,
+        },
+        emotionLogCard: {
+          backgroundColor: COLORS.FIELD_BG,
+          borderRadius: 20,
+          borderWidth: 1,
+          borderColor: COLORS.CARD_BORDER,
+          paddingVertical: 4,
+          shadowColor: "#000",
+          shadowOpacity: 0.06,
+          shadowRadius: 8,
+          shadowOffset: { width: 0, height: 4 },
+          elevation: 3,
+        },
+        emotionLogRow: {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingVertical: 10,
+          paddingHorizontal: 12,
+        },
+        emotionLogLeft: {
+          flexDirection: "row",
+          alignItems: "center",
+        },
+        emotionLogName: {
+          fontWeight: "700",
+          color: COLORS.TEXT_ON_LIGHT,
+          fontSize: 15,
+        },
+        emotionLogCenter: {
+          flex: 1,
+          alignItems: "center",
+        },
+        emotionLogNoEmotion: {
+          fontSize: 12,
+          color: COLORS.TEXT_SUBTLE,
+        },
+        emotionLogBadgeRow: {
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        },
+        emotionLogBadge: {
+          paddingHorizontal: 10,
+          paddingVertical: 4,
+          borderRadius: 999,
+          marginHorizontal: 2,
+          marginVertical: 2,
+        },
+        emotionLogBadgeText: {
+          fontSize: 12,
+          fontWeight: "700",
+        },
+        emotionLogTime: {
+          color: COLORS.TEXT_SUBTLE,
+          fontSize: 12,
+          width: 80,
+          textAlign: "right",
+        },
+        emotionLogSeparator: {
+          height: 1,
+          backgroundColor: "#EEE",
+          marginLeft: 12,
+          marginRight: 12,
         },
         simpleCard: {
           borderRadius: 16,
