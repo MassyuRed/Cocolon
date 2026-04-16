@@ -3219,6 +3219,7 @@ function createStyles(COLORS, ui) {
 
     /** 今日の観測（常設） */
     homeStatsCard: {
+      display: "none",
       marginBottom: 14,
       borderRadius: 14,
       borderWidth: 1,

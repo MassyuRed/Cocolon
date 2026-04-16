@@ -230,6 +230,7 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
 
   // Tab reselect helper: used to ignore async results after a "reset to main"
   const resetSeqRef = useRef(0);
+  const handledOpenQInstanceIdRef = useRef("");
 
   // Prefetch freshness
   const PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
@@ -239,6 +240,21 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
     route?.params?.viewedUserId ||
     route?.params?.targetUserId ||
     route?.params?.userId ||
+    null;
+  const initialOpenQInstanceId =
+    route?.params?.openQInstanceId ||
+    route?.params?.q_instance_id ||
+    null;
+  const initialOpenQKey =
+    route?.params?.openQKey ||
+    route?.params?.q_key ||
+    null;
+  const initialOpenTitle =
+    route?.params?.openTitle ||
+    route?.params?.title ||
+    null;
+  const initialOpenAt =
+    route?.params?.openAt ||
     null;
 
   // 画面内で「今どのユーザーのMyModelを見ているか」を切り替え可能にする
@@ -1216,7 +1232,7 @@ useEffect(() => {
       const resetSeq = resetSeqRef.current;
       const qInstanceId = String(item.q_instance_id);
       const shouldRefreshUnread = !!item?.is_new;
-      const shouldIncludeMyDiscovery = !!activeViewedUserId;
+      const shouldIncludeMyDiscovery = false;
 
       setDetailLoadingId(qInstanceId);
       setDetailLoading(true);
@@ -1297,12 +1313,6 @@ useEffect(() => {
               ...x,
               views: nextSelected?.views ?? x.views,
               resonances: nextSelected?.resonances ?? x.resonances,
-              discoveries:
-                nextSelected?.discoveries ??
-                nextSelected?.discoveries_count ??
-                nextSelected?.discovery_count ??
-                nextSelected?.discoveryCount ??
-                x.discoveries,
               is_new: false,
             };
           })
@@ -1328,100 +1338,41 @@ useEffect(() => {
   );
 
   // ---------------------------------------------------------
-  // My latest Discovery (viewer-specific) for the selected Reflection
-  // - Used for "発見済み" label + prefill in view mode.
+  // Discoveries は廃止済みのため、関連 state は常にクリアしておく
   // ---------------------------------------------------------
   useEffect(() => {
-    const qid = selected?.q_instance_id ? String(selected.q_instance_id) : "";
-    const qk = selected?.q_key ? String(selected.q_key) : "";
-    const hasEmbeddedMyDiscovery =
-      !!selected &&
-      Object.prototype.hasOwnProperty.call(selected, "my_discovery_latest_loaded") &&
-      !!selected?.my_discovery_latest_loaded;
-
-    // Clear cache on selection change
     setMyDiscoveryLatest(null);
     setMyDiscoveryLatestError("");
     setMyDiscoveryLatestLoading(false);
+  }, [selected?.q_instance_id]);
 
-    if (isTutorialMode) {
-      setMyDiscoveryLatest(selected?.tutorial_my_discovery || null);
-      return;
-    }
-
+  // ---------------------------------------------------------
+  // 履歴一覧から直接開かれた場合は、対象Reflectionを自動で表示する
+  // ---------------------------------------------------------
+  useEffect(() => {
+    const qid = String(initialOpenQInstanceId || "").trim();
     if (!qid) return;
+    if (!isTutorialMode && !viewerUserId) return;
 
-    // 自分のReflectionでは「発見」はない（他人に対して行う）
-    const isSelf =
-      !activeViewedUserId ||
-      (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
-    if (isSelf) return;
+    const openKey = `${qid}:${String(activeViewedUserId || initialViewedUserId || viewerUserId || "")}:${String(initialOpenAt || "")}`;
+    if (handledOpenQInstanceIdRef.current === openKey) return;
+    handledOpenQInstanceIdRef.current = openKey;
 
-    if (hasEmbeddedMyDiscovery) {
-      setMyDiscoveryLatest(selected?.my_discovery_latest || null);
-      return;
-    }
-
-    let cancelled = false;
-    (async () => {
-      setMyDiscoveryLatestLoading(true);
-      try {
-        const { accessToken } = await getAuthContext();
-        if (!accessToken) return;
-
-        const params = new URLSearchParams();
-        params.append("q_instance_id", qid);
-        if (qk) params.append("q_key", qk);
-        params.append("limit", "1");
-        const url = `${QNA_DISCOVERIES_HISTORY_ENDPOINT}?${params.toString()}`;
-
-        const res = await apiFetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-          if (
-            Number(res.status) === 404 &&
-            /discoveries history not found/i.test(String(msg))
-          ) {
-            if (cancelled) return;
-            setMyDiscoveryLatest(null);
-            setMyDiscoveryLatestError("");
-            return;
-          }
-          throw new Error(String(msg));
-        }
-
-        if (cancelled) return;
-        const items = Array.isArray(json?.items) ? json.items : [];
-        const latest = items && items.length > 0 ? items[0] : null;
-        setMyDiscoveryLatest(latest);
-      } catch (e) {
-        if (cancelled) return;
-        setMyDiscoveryLatest(null);
-        setMyDiscoveryLatestError(buildErrorMessage(e));
-      } finally {
-        if (cancelled) return;
-        setMyDiscoveryLatestLoading(false);
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
+    void fetchDetail({
+      q_instance_id: qid,
+      q_key: initialOpenQKey ? String(initialOpenQKey) : undefined,
+      title: initialOpenTitle ? String(initialOpenTitle) : undefined,
+      is_new: false,
+    });
   }, [
-    isTutorialMode,
-    selected?.q_instance_id,
-    selected?.q_key,
-    selected?.tutorial_my_discovery,
-    selected?.my_discovery_latest,
-    selected?.my_discovery_latest_loaded,
     activeViewedUserId,
+    fetchDetail,
+    initialOpenQInstanceId,
+    initialOpenQKey,
+    initialOpenTitle,
+    initialOpenAt,
+    initialViewedUserId,
+    isTutorialMode,
     viewerUserId,
   ]);
 
@@ -1454,62 +1405,249 @@ useEffect(() => {
   const handleResonancePress = useCallback(async () => {
     if (!selected?.q_instance_id) return;
 
-    if (isTutorialMode) {
-      const already = !!(selected?.is_resonated ?? selected?.resonated);
-      if (!already) {
-        openEchoesModal();
+    const already = !!(selected?.is_resonated ?? selected?.resonated);
+    const qidNow = String(selected.q_instance_id);
+
+    if (already) {
+      Alert.alert(
+        "共鳴を解除しますか？",
+        "共鳴は削除されます。この操作は元に戻せません。",
+        [
+          { text: "キャンセル", style: "cancel" },
+          {
+            text: "解除する",
+            style: "destructive",
+            onPress: () => {
+              (async () => {
+                setEchoesDeleting(true);
+                setEchoesSubmitError("");
+                try {
+                  if (isTutorialMode) {
+                    const nextResonances = Math.max(
+                      0,
+                      (Number(selected?.resonances ?? 0) || 0) - 1
+                    );
+
+                    setSelected((prev) => {
+                      if (!prev) return prev;
+                      if (String(prev.q_instance_id) !== qidNow) return prev;
+                      return {
+                        ...prev,
+                        resonances: nextResonances,
+                        is_resonated: false,
+                        resonated: false,
+                        tutorial_my_echo: null,
+                      };
+                    });
+
+                    setQnaItems((prev) =>
+                      (prev || []).map((x) => {
+                        if (String(x?.q_instance_id || "") !== qidNow) return x;
+                        return {
+                          ...x,
+                          resonances: nextResonances,
+                          is_resonated: false,
+                          resonated: false,
+                          tutorial_my_echo: null,
+                        };
+                      })
+                    );
+
+                    updateTutorialReflection(qidNow, (prev) => ({
+                      ...prev,
+                      resonances: nextResonances,
+                      is_resonated: false,
+                      resonated: false,
+                      tutorial_my_echo: null,
+                    }));
+                    return;
+                  }
+
+                  const { accessToken } = await getAuthContext();
+                  if (!accessToken) {
+                    Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
+                    return;
+                  }
+
+                  const res = await apiFetch(QNA_ECHOES_DELETE_ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify({
+                      q_instance_id: qidNow,
+                      q_key: String(selected.q_key || ""),
+                    }),
+                  });
+
+                  const json = await res.json().catch(() => ({}));
+                  if (!res.ok) {
+                    const msg = json?.detail || json?.message || `HTTP ${res.status}`;
+                    throw new Error(String(msg));
+                  }
+
+                  const nextResonated =
+                    typeof json?.resonated === "boolean" ? json.resonated : false;
+                  const nextResonances =
+                    typeof json?.resonances === "number"
+                      ? json.resonances
+                      : Math.max(0, (Number(selected?.resonances ?? 0) || 0) - 1);
+
+                  setSelected((prev) => {
+                    if (!prev) return prev;
+                    if (String(prev.q_instance_id) !== qidNow) return prev;
+                    return {
+                      ...prev,
+                      resonances: nextResonances,
+                      is_resonated: nextResonated,
+                      resonated: nextResonated,
+                    };
+                  });
+
+                  setQnaItems((prev) =>
+                    (prev || []).map((x) => {
+                      if (String(x?.q_instance_id || "") !== qidNow) return x;
+                      return {
+                        ...x,
+                        resonances: nextResonances,
+                        is_resonated: nextResonated,
+                        resonated: nextResonated,
+                      };
+                    })
+                  );
+                } catch (e) {
+                  setEchoesSubmitError(buildErrorMessage(e));
+                  Alert.alert("解除に失敗しました", buildErrorMessage(e));
+                } finally {
+                  setEchoesDeleting(false);
+                }
+              })();
+            },
+          },
+        ]
+      );
+      return;
+    }
+
+    const resetSeq = resetSeqRef.current;
+    setEchoesSubmitting(true);
+    setEchoesSubmitError("");
+
+    try {
+      if (isTutorialMode) {
+        const nextResonances = (Number(selected?.resonances ?? 0) || 0) + 1;
+        const nextEcho = {
+          strength: "medium",
+          memo: "",
+          created_at: new Date().toISOString(),
+        };
+
+        if (resetSeq !== resetSeqRef.current) return;
+
+        setSelected((prev) => {
+          if (!prev) return prev;
+          if (String(prev.q_instance_id) !== qidNow) return prev;
+          return {
+            ...prev,
+            resonances: nextResonances,
+            is_resonated: true,
+            resonated: true,
+            tutorial_my_echo: nextEcho,
+          };
+        });
+
+        setQnaItems((prev) =>
+          (prev || []).map((x) => {
+            if (String(x?.q_instance_id || "") !== qidNow) return x;
+            return {
+              ...x,
+              resonances: nextResonances,
+              is_resonated: true,
+              resonated: true,
+              tutorial_my_echo: nextEcho,
+            };
+          })
+        );
+
+        updateTutorialReflection(qidNow, (prev) => ({
+          ...prev,
+          resonances: nextResonances,
+          is_resonated: true,
+          resonated: true,
+          tutorial_my_echo: nextEcho,
+        }));
         return;
       }
 
-      openEchoesModal({
-        strength: selected?.tutorial_my_echo?.strength || null,
-        memo: selected?.tutorial_my_echo?.memo || "",
-      });
-      return;
-    }
-
-    const already = !!(selected?.is_resonated ?? selected?.resonated);
-    if (!already) {
-      openEchoesModal();
-      return;
-    }
-
-    // "済み" の場合：前回入力を表示する（best-effort）
-    try {
       const { accessToken } = await getAuthContext();
       if (!accessToken) {
-        openEchoesModal();
+        Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
         return;
       }
 
-      const params = new URLSearchParams();
-      params.append("q_instance_id", String(selected.q_instance_id));
-      if (selected?.q_key) params.append("q_key", String(selected.q_key));
-      params.append("limit", "1");
-
-      const url = `${QNA_ECHOES_HISTORY_ENDPOINT}?${params.toString()}`;
-      const res = await apiFetch(url, {
-        method: "GET",
+      const res = await apiFetch(QNA_ECHOES_SUBMIT_ENDPOINT, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
+        body: JSON.stringify({
+          q_instance_id: qidNow,
+          q_key: String(selected.q_key || ""),
+          strength: "medium",
+          memo: null,
+        }),
       });
+
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
         const msg = json?.detail || json?.message || `HTTP ${res.status}`;
         throw new Error(String(msg));
       }
 
-      openEchoesModal({
-        strength: json?.my_strength || null,
-        memo: json?.my_memo || "",
+      if (resetSeq !== resetSeqRef.current) return;
+
+      const nextResonances =
+        typeof json?.resonances === "number"
+          ? json.resonances
+          : (Number(selected?.resonances ?? 0) || 0) + 1;
+      const nextResonated =
+        typeof json?.resonated === "boolean"
+          ? json.resonated
+          : typeof json?.is_resonated === "boolean"
+          ? json.is_resonated
+          : true;
+
+      setSelected((prev) => {
+        if (!prev) return prev;
+        if (String(prev.q_instance_id) !== qidNow) return prev;
+        return {
+          ...prev,
+          resonances: nextResonances,
+          is_resonated: nextResonated,
+          resonated: nextResonated,
+        };
       });
+
+      setQnaItems((prev) =>
+        (prev || []).map((x) => {
+          if (String(x?.q_instance_id || "") !== qidNow) return x;
+          return {
+            ...x,
+            resonances: nextResonances,
+            is_resonated: nextResonated,
+            resonated: nextResonated,
+          };
+        })
+      );
     } catch (e) {
-      openEchoesModal();
       setEchoesSubmitError(buildErrorMessage(e));
+      Alert.alert("共鳴に失敗しました", buildErrorMessage(e));
+    } finally {
+      setEchoesSubmitting(false);
     }
-  }, [isTutorialMode, selected, openEchoesModal]);
+  }, [isTutorialMode, selected, updateTutorialReflection]);
 
   const submitEchoes = useCallback(async () => {
     if (!selected?.q_instance_id) return;
@@ -2318,81 +2456,34 @@ useEffect(() => {
                             {formatMetricCount(selected?.resonances ?? 0)}
                           </Text>
                         </View>
-
-                        <View style={styles.metricPill}>
-                          <Ionicons
-                            name="bulb-outline"
-                            size={14}
-                            color={colors.TEXT_SUBTLE}
-                            style={{ marginRight: 6 }}
-                          />
-                          <Text style={styles.metricText}>
-                            {formatMetricCount(
-                              selected?.discoveries ??
-                                selected?.discoveries_count ??
-                                selected?.discovery_count ??
-                                selected?.discoveryCount ??
-                                0
-                            )}
-                          </Text>
-                        </View>
                       </View>
                     </View>
                   </View>
 
                   {!isSelfTarget ? (
-                    <>
-                      <View ref={metricsActionsWrapRef} collapsable={false} style={styles.metricsActions}>
-                        <CocolonPressable
-                          onPress={handleResonancePress}
-                          style={[
-                            styles.resonanceBtn,
-                            isResonatedNow && { opacity: 0.92 },
-                            (echoesSubmitting || echoesDeleting) && { opacity: 0.7 },
-                          ]}
-                          disabled={echoesSubmitting || echoesDeleting}
-                        >
-                          <View style={styles.btnRow}>
-                            <Ionicons
-                              name={isResonatedNow ? "heart" : "heart-outline"}
-                              size={14}
-                              color="#FFFFFF"
-                              style={{ marginRight: 6 }}
-                            />
-                            <Text style={styles.resonanceBtnText}>
-                              {isResonatedNow ? "共鳴済み" : "共鳴"}
-                            </Text>
-                          </View>
-                        </CocolonPressable>
-
-                        <CocolonPressable
-                          onPress={handleDiscoveryPress}
-                          style={[
-                            styles.discoveryBtn,
-                            isDiscoveredNow && { opacity: 0.92 },
-                            (discoverySubmitting || myDiscoveryLatestLoading) && { opacity: 0.7 },
-                          ]}
-                          disabled={discoverySubmitting || myDiscoveryLatestLoading}
-                        >
-                          <View style={styles.btnRow}>
-                            <Ionicons
-                              name="bulb-outline"
-                              size={14}
-                              color={colors.TITLE_GOLD}
-                              style={{ marginRight: 6 }}
-                            />
-                            <Text style={styles.discoveryBtnText}>
-                              {isDiscoveredNow ? "発見済み" : "発見"}
-                            </Text>
-                          </View>
-                        </CocolonPressable>
-                      </View>
-                      {myDiscoveryLatestError ? (
-                        <Text style={[styles.modeErrorText, { marginTop: 8 }]}>
-                          発見状態の取得に失敗: {myDiscoveryLatestError}
-                        </Text>
-                      ) : null}
-                    </>
+                    <View ref={metricsActionsWrapRef} collapsable={false} style={styles.metricsActions}>
+                      <CocolonPressable
+                        onPress={handleResonancePress}
+                        style={[
+                          styles.resonanceBtn,
+                          isResonatedNow && { opacity: 0.92 },
+                          (echoesSubmitting || echoesDeleting) && { opacity: 0.7 },
+                        ]}
+                        disabled={echoesSubmitting || echoesDeleting}
+                      >
+                        <View style={styles.btnRow}>
+                          <Ionicons
+                            name={isResonatedNow ? "heart" : "heart-outline"}
+                            size={14}
+                            color="#FFFFFF"
+                            style={{ marginRight: 6 }}
+                          />
+                          <Text style={styles.resonanceBtnText}>
+                            {isResonatedNow ? "共鳴済み" : "共鳴"}
+                          </Text>
+                        </View>
+                      </CocolonPressable>
+                    </View>
                   ) : null}
                 </>
               ) : (
@@ -2612,7 +2703,6 @@ useEffect(() => {
               {[
                 { key: "newest", label: "新着" },
                 { key: "resonances", label: "人気(共鳴)" },
-                { key: "discoveries", label: "人気(発見)" },
               ].map((x) => {
                 const active = sortMode === x.key;
                 return (
@@ -2671,21 +2761,6 @@ useEffect(() => {
                           />
                           <Text style={styles.rowMetaText}>
                             {it.resonances ?? 0}
-                          </Text>
-                        </View>
-                        <View style={styles.rowMetaItem}>
-                          <Ionicons
-                            name="bulb-outline"
-                            size={14}
-                            color={colors.TEXT_SUBTLE}
-                            style={{ marginRight: 6 }}
-                          />
-                          <Text style={styles.rowMetaText}>
-                            {it.discoveries ??
-                              it.discoveries_count ??
-                              it.discovery_count ??
-                              it.discoveryCount ??
-                              0}
                           </Text>
                         </View>
                       </View>
@@ -3179,7 +3254,7 @@ useEffect(() => {
             ? "『MyModel：自分』を押して、Userを選んでください。"
             : tutorialOtherReflectionPhase === "view"
             ? "このように他ユーザーのReflectionが表示されます。"
-            : "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』、新しい気づきを得たら『発見』でリアクションできます。（チュートリアルでは説明のみです）"
+            : "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』でリアクションできます。共鳴済みを押すと解除できます。"
         }
         step={tutorialStep}
         totalSteps={TUTORIAL_TOTAL_STEPS}

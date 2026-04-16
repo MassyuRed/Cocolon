@@ -213,8 +213,7 @@ function normalizeTutorialReflectionItems(items) {
       views: Number(item?.views || item?.metrics?.views || 0) || 0,
       resonances:
         Number(item?.resonances || item?.metrics?.resonances || 0) || 0,
-      discoveries:
-        Number(item?.discoveries || item?.metrics?.discoveries || 0) || 0,
+      discoveries: 0,
     },
     viewer_state: {
       is_new:
@@ -605,7 +604,7 @@ export default function NexusScreen({ navigation }) {
       try {
         const detail = await getNexusReflectionDetail(qInstanceId, {
           markViewed: true,
-          includeMyDiscoveryLatest: true,
+          includeMyDiscoveryLatest: false,
         });
         setDetailData(detail && typeof detail === "object" ? detail : null);
         setReflectionState((prev) => ({
@@ -622,9 +621,7 @@ export default function NexusScreen({ navigation }) {
                     resonances:
                       Number(detail?.resonances || row?.metrics?.resonances || 0) ||
                       0,
-                    discoveries:
-                      Number(detail?.discoveries || row?.metrics?.discoveries || 0) ||
-                      0,
+                    discoveries: 0,
                   },
                 };
               })
@@ -637,7 +634,7 @@ export default function NexusScreen({ navigation }) {
           body: item?.body || "",
           views: Number(item?.metrics?.views || 0) || 0,
           resonances: Number(item?.metrics?.resonances || 0) || 0,
-          discoveries: Number(item?.metrics?.discoveries || 0) || 0,
+          discoveries: 0,
         });
       } finally {
         setDetailLoading(false);
@@ -937,78 +934,32 @@ export default function NexusScreen({ navigation }) {
     historyMode === "discoveries" ? historyState.discoveries : historyState.echoes;
 
   const renderHistoryTab = () => {
-    if (historyState.loading && !historyState.loadedModes?.[historyMode]) {
+    if (historyState.loading && !historyState.loadedModes?.echoes) {
       return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
     }
-    if (historyState.error && !currentHistoryItems.length) {
+    if (historyState.error && !historyState.echoes.length) {
       return <Text style={styles.errorText}>{historyState.error}</Text>;
+    }
+    if (!historyState.echoes.length) {
+      return <Text style={styles.emptyText}>共鳴したReflectionはまだありません。</Text>;
     }
     return (
       <View>
-        <View style={styles.historySwitchRow}>
+        {historyState.echoes.map((item) => (
           <CocolonPressable
-            style={[
-              styles.historySwitchChip,
-              historyMode === "echoes" && styles.historySwitchChipActive,
-            ]}
-            onPress={() => {
-              setHistoryMode("echoes");
-              if (!historyState.loadedModes?.echoes) {
-                void loadHistory("echoes");
-              }
-            }}
+            key={item.qInstanceId}
+            style={styles.simpleCard}
+            onPress={() => handleOpenReflection(item)}
           >
-            <Text
-              style={[
-                styles.historySwitchText,
-                historyMode === "echoes" && styles.historySwitchTextActive,
-              ]}
-            >
-              共鳴履歴
-            </Text>
+            <View style={styles.simpleCardHeader}>
+              <Text style={styles.simpleCardTitle}>{item.title}</Text>
+              <Text style={styles.simpleCardMeta}>
+                {formatDateLabel(item.savedAt)}
+              </Text>
+            </View>
+            <Text style={styles.simpleCardBody}>{item.ownerDisplayName}</Text>
           </CocolonPressable>
-          <CocolonPressable
-            style={[
-              styles.historySwitchChip,
-              historyMode === "discoveries" && styles.historySwitchChipActive,
-            ]}
-            onPress={() => {
-              setHistoryMode("discoveries");
-              if (!historyState.loadedModes?.discoveries) {
-                void loadHistory("discoveries");
-              }
-            }}
-          >
-            <Text
-              style={[
-                styles.historySwitchText,
-                historyMode === "discoveries" && styles.historySwitchTextActive,
-              ]}
-            >
-              発見履歴
-            </Text>
-          </CocolonPressable>
-        </View>
-
-        {!currentHistoryItems.length ? (
-          <Text style={styles.emptyText}>保存された履歴はまだありません。</Text>
-        ) : (
-          currentHistoryItems.map((item) => (
-            <CocolonPressable
-              key={item.qInstanceId}
-              style={styles.simpleCard}
-              onPress={() => handleOpenReflection(item)}
-            >
-              <View style={styles.simpleCardHeader}>
-                <Text style={styles.simpleCardTitle}>{item.title}</Text>
-                <Text style={styles.simpleCardMeta}>
-                  {formatDateLabel(item.savedAt)}
-                </Text>
-              </View>
-              <Text style={styles.simpleCardBody}>{item.ownerDisplayName}</Text>
-            </CocolonPressable>
-          ))
-        )}
+        ))}
       </View>
     );
   };
@@ -1202,30 +1153,7 @@ export default function NexusScreen({ navigation }) {
                   <Text style={styles.detailMetricText}>
                     echoes {Number(detailData?.resonances || 0) || 0}
                   </Text>
-                  <Text style={styles.detailMetricText}>
-                    discoveries {Number(detailData?.discoveries || 0) || 0}
-                  </Text>
                 </View>
-
-                {detailData?.my_discovery_latest?.category ? (
-                  <View style={styles.detailDiscoveryCard}>
-                    <Text style={styles.detailDiscoveryLabel}>
-                      あなたの最新の発見
-                    </Text>
-                    <Text style={styles.detailDiscoveryText}>
-                      {String(
-                        detailData?.my_discovery_latest?.category || ""
-                      ).trim()}
-                    </Text>
-                    {detailData?.my_discovery_latest?.memo ? (
-                      <Text style={styles.detailDiscoveryMemo}>
-                        {String(
-                          detailData?.my_discovery_latest?.memo || ""
-                        ).trim()}
-                      </Text>
-                    ) : null}
-                  </View>
-                ) : null}
               </ScrollView>
             )}
 
@@ -1303,8 +1231,7 @@ function createStyles(COLORS, ui) {
           borderColor: COLORS.CARD_BORDER,
         },
         todayOverallEmotionSummary: {
-          paddingTop: 12,
-          paddingBottom: 12,
+          paddingVertical: 8,
           borderTopWidth: 1,
           borderBottomWidth: 1,
           borderTopColor: COLORS.CARD_BORDER,
@@ -1314,26 +1241,26 @@ function createStyles(COLORS, ui) {
         todayOverallEmotionHeader: {
           flexDirection: "row",
           alignItems: "center",
-          marginBottom: 6,
+          marginBottom: 4,
         },
         todayOverallEmotionIcon: {
           marginRight: 6,
         },
         todayOverallEmotionTitle: {
-          fontSize: 13,
+          fontSize: 11,
           fontWeight: "800",
+          letterSpacing: 0.3,
           color: COLORS.TEXT_ON_LIGHT,
         },
         todayOverallEmotionText: {
-          fontSize: 13,
-          lineHeight: 20,
+          fontSize: 12,
+          lineHeight: 18,
           color: COLORS.TEXT_ON_LIGHT,
-          fontWeight: "700",
         },
         todayOverallEmotionPlaceholder: {
-          fontSize: 13,
-          lineHeight: 20,
-          color: COLORS.TEXT_SUBTLE,
+          fontSize: 12,
+          lineHeight: 18,
+          color: COLORS.TEXT_ON_LIGHT,
         },
         tutorialEntryCard: {
           borderRadius: 18,

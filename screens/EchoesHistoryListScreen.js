@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   RefreshControl,
   SafeAreaView,
@@ -17,28 +16,16 @@ import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { supabase } from "../lib/supabase";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
-
-// UI
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { apiFetch } from "../lib/apiClient";
 
-/**
- * EchoesHistoryListScreen
- * - Echoes（共鳴）履歴一覧（履歴ありのみ）
- * - 表示：Reflection の問い / ユーザー表示名 / 保存日時
- * - 並び替え：新しい順 / 古い順
- * - 詳細画面は後続フェーズで追加予定（onPress は fail-soft）
- */
-
-// Prefer Expo env var if present (avoid hard-coding across dev/prod)
 const API_BASE = String(
   (typeof process !== "undefined" && process?.env?.EXPO_PUBLIC_MYMODEL_API_URL) ||
     "https://mashos-api.onrender.com"
 ).replace(/\/+$/, "");
 
 const ECHOES_REFLECTIONS_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/reflections`;
-
 const PAGE_LIMIT = 50;
 
 function formatDateTime(isoString) {
@@ -56,6 +43,34 @@ function formatDateTime(isoString) {
   }
 }
 
+function hasRouteNameInState(state, routeName) {
+  if (!state) return false;
+  const routeNames = state?.routeNames;
+  if (Array.isArray(routeNames) && routeNames.includes(routeName)) return true;
+  const routes = state?.routes;
+  if (Array.isArray(routes)) {
+    for (const route of routes) {
+      if (route?.state && hasRouteNameInState(route.state, routeName)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function resolveReflectionsRouteName(navigation) {
+  const candidates = ["MyModelReflections", "MyModelReflectionsScreen"];
+  const root = navigation?.getRootState?.();
+  const local = navigation?.getState?.();
+
+  for (const name of candidates) {
+    if (hasRouteNameInState(root, name) || hasRouteNameInState(local, name)) {
+      return name;
+    }
+  }
+  return "MyModelReflections";
+}
+
 export default function EchoesHistoryListScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
@@ -69,7 +84,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
   );
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
-  const [order, setOrder] = useState("newest"); // newest | oldest
+  const [order, setOrder] = useState("newest");
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -79,87 +94,76 @@ export default function EchoesHistoryListScreen({ navigation }) {
 
   const abortRef = useRef(null);
 
-  const fetchPage = useCallback(
-    async ({ nextOrder, nextOffset, append }) => {
-      const resolvedOrder = String(nextOrder || "newest").toLowerCase();
-      const resolvedOffset = Math.max(0, Number(nextOffset || 0) || 0);
+  const fetchPage = useCallback(async ({ nextOrder, nextOffset, append }) => {
+    const resolvedOrder = String(nextOrder || "newest").toLowerCase();
+    const resolvedOffset = Math.max(0, Number(nextOffset || 0) || 0);
 
-      // Abort previous request (best-effort)
-      try {
-        abortRef.current?.abort?.();
-      } catch {
-        // noop
+    try {
+      abortRef.current?.abort?.();
+    } catch {
+      // noop
+    }
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData?.session?.access_token ?? null;
+    if (!accessToken) {
+      throw new Error("ログイン情報が取得できませんでした。");
+    }
+
+    const url = `${ECHOES_REFLECTIONS_ENDPOINT}?order=${encodeURIComponent(
+      resolvedOrder
+    )}&limit=${PAGE_LIMIT}&offset=${resolvedOffset}`;
+
+    const res = await apiFetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      signal: controller.signal,
+    });
+
+    const json = await res.json().catch(() => null);
+    if (!res.ok) {
+      const detail = json?.detail ? String(json.detail) : null;
+      throw new Error(detail || "履歴の取得に失敗しました。");
+    }
+
+    const nextItems = Array.isArray(json?.items) ? json.items : [];
+    setItems((prev) => {
+      const merged = append ? [...(prev || []), ...nextItems] : nextItems;
+      const seen = new Set();
+      const out = [];
+      for (const item of merged) {
+        const key = String(item?.q_instance_id || "").trim();
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        out.push(item);
       }
-      const controller = new AbortController();
-      abortRef.current = controller;
+      return out;
+    });
 
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-      if (!accessToken) {
-        throw new Error("ログイン情報が取得できませんでした。");
-      }
+    setHasMore(nextItems.length >= PAGE_LIMIT);
+    setErrorText("");
+  }, []);
 
-      const url = `${ECHOES_REFLECTIONS_ENDPOINT}?order=${encodeURIComponent(
-        resolvedOrder
-      )}&limit=${PAGE_LIMIT}&offset=${resolvedOffset}`;
-
-      const res = await apiFetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        signal: controller.signal,
-      });
-
-      const json = await res.json().catch(() => null);
-      if (!res.ok) {
-        const detail = json?.detail ? String(json.detail) : null;
-        throw new Error(detail || "履歴の取得に失敗しました。");
-      }
-
-      const nextItems = Array.isArray(json?.items) ? json.items : [];
-      setItems((prev) => {
-        const merged = append ? [...(prev || []), ...nextItems] : nextItems;
-
-        // Deduplicate by q_instance_id (keep first)
-        const seen = new Set();
-        const out = [];
-        for (const it of merged) {
-          const key = String(it?.q_instance_id || "").trim();
-          if (!key || seen.has(key)) continue;
-          seen.add(key);
-          out.push(it);
-        }
-        return out;
-      });
-
-      setHasMore(nextItems.length >= PAGE_LIMIT);
-      setErrorText("");
-    },
-    []
-  );
-
-  const fetchInitial = useCallback(
-    async (nextOrder = order) => {
-      setLoading(true);
-      setLoadingMore(false);
-      setHasMore(true);
-      try {
-        await fetchPage({ nextOrder, nextOffset: 0, append: false });
-      } finally {
-        setLoading(false);
-      }
-    },
-    [fetchPage, order]
-  );
+  const fetchInitial = useCallback(async (nextOrder = order) => {
+    setLoading(true);
+    setLoadingMore(false);
+    setHasMore(true);
+    try {
+      await fetchPage({ nextOrder, nextOffset: 0, append: false });
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchPage, order]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     try {
       await fetchInitial(order);
-    } catch (e) {
-      // handled in fetchPage -> errorText
     } finally {
       setRefreshing(false);
     }
@@ -167,13 +171,11 @@ export default function EchoesHistoryListScreen({ navigation }) {
 
   const loadMore = useCallback(async () => {
     if (loading || refreshing || loadingMore || !hasMore) return;
-
     setLoadingMore(true);
     try {
       const nextOffset = (items?.length || 0) || 0;
       await fetchPage({ nextOrder: order, nextOffset, append: true });
     } catch (e) {
-      // If it fails, just stop pagination; list still usable
       setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
       setHasMore(false);
     } finally {
@@ -181,7 +183,6 @@ export default function EchoesHistoryListScreen({ navigation }) {
     }
   }, [fetchPage, hasMore, items?.length, loading, loadingMore, order, refreshing]);
 
-  // Fetch when screen is focused (so it reflects latest saves)
   useFocusEffect(
     useCallback(() => {
       fetchInitial(order).catch((e) => {
@@ -199,67 +200,75 @@ export default function EchoesHistoryListScreen({ navigation }) {
     }, [fetchInitial, order])
   );
 
-  // Order toggle
-  const setOrderAndReload = useCallback(
-    async (next) => {
-      const v = String(next || "newest").toLowerCase();
-      if (v === order) return;
-      setOrder(v);
-      try {
-        await fetchInitial(v);
-      } catch (e) {
-        setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
-      }
-    },
-    [fetchInitial, order]
-  );
+  const setOrderAndReload = useCallback(async (next) => {
+    const value = String(next || "newest").toLowerCase();
+    if (value === order) return;
+    setOrder(value);
+    try {
+      await fetchInitial(value);
+    } catch (e) {
+      setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
+    }
+  }, [fetchInitial, order]);
 
-  const renderItem = useCallback(
-    ({ item }) => {
-      const title = String(item?.title || "").trim() || "（未設定）";
-      const owner = String(item?.owner_display_name || "").trim() || "—";
-      const savedAt = formatDateTime(item?.saved_at);
+  const openReflectionDetail = useCallback((item) => {
+    const routeName = resolveReflectionsRouteName(navigation);
+    const params = {
+      viewedUserId: item?.owner_user_id || null,
+      openQInstanceId: item?.q_instance_id || null,
+      openQKey: item?.q_key || null,
+      openTitle: item?.title || null,
+      source: "echoes_history",
+      openAt: Date.now(),
+    };
 
-      return (
-        <CocolonPressable
-          style={styles.card}
-          onPress={() => {
-            // Detail screen is planned in the next phase.
-            // Fail-soft: don't crash if the route isn't registered yet.
-            try {
-              navigation?.navigate?.("EchoesHistoryDetail", {
-                q_instance_id: item?.q_instance_id,
-                q_key: item?.q_key,
-                owner_display_name: item?.owner_display_name,
-              });
-            } catch (e) {
-              Alert.alert("準備中", "履歴詳細画面はこれから作成します。");
-            }
-          }}
-          accessibilityLabel="共鳴履歴 詳細へ"
-        >
-          <Text style={styles.itemTitle} numberOfLines={2}>
-            {title}
+    try {
+      navigation?.navigate?.(routeName, params);
+      return;
+    } catch {
+      // noop
+    }
+
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      parent?.navigate?.(routeName, params);
+    } catch {
+      // noop
+    }
+  }, [navigation]);
+
+  const renderItem = useCallback(({ item }) => {
+    const title = String(item?.title || "").trim() || "（未設定）";
+    const owner = String(item?.owner_display_name || "").trim() || "—";
+    const savedAt = formatDateTime(item?.saved_at);
+
+    return (
+      <CocolonPressable
+        style={styles.card}
+        onPress={() => openReflectionDetail(item)}
+        accessibilityLabel="共鳴したReflectionを開く"
+      >
+        <Text style={styles.itemTitle} numberOfLines={2}>
+          {title}
+        </Text>
+
+        <View style={styles.metaRow}>
+          <Text style={styles.metaLabel}>ユーザー：</Text>
+          <Text style={styles.metaValue} numberOfLines={1}>
+            {owner}
           </Text>
+        </View>
 
-          <View style={styles.metaRow}>
-            <Text style={styles.metaLabel}>ユーザー：</Text>
-            <Text style={styles.metaValue} numberOfLines={1}>
-              {owner}
-            </Text>
-          </View>
-
-          <View style={styles.metaRow}>
-            <Text style={styles.metaLabel}>保存：</Text>
-            <Text style={styles.metaValue} numberOfLines={1}>
-              {savedAt}
-            </Text>
-          </View>
-        </CocolonPressable>
-      );
-    },
-    [navigation, styles]
-  );
+        <View style={styles.metaRow}>
+          <Text style={styles.metaLabel}>共鳴：</Text>
+          <Text style={styles.metaValue} numberOfLines={1}>
+            {savedAt}
+          </Text>
+        </View>
+      </CocolonPressable>
+    );
+  }, [openReflectionDetail, styles]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -282,7 +291,6 @@ export default function EchoesHistoryListScreen({ navigation }) {
             <Text style={styles.titleText}>共鳴履歴</Text>
           </View>
 
-          {/* Right placeholder (for center alignment) */}
           <View style={styles.headerSide} />
         </View>
 
@@ -341,8 +349,8 @@ export default function EchoesHistoryListScreen({ navigation }) {
         ) : (
           <FlatList
             data={items}
-            keyExtractor={(it, idx) =>
-              String(it?.q_instance_id || idx).replace(/\s/g, "")
+            keyExtractor={(item, index) =>
+              String(item?.q_instance_id || index).replace(/\s/g, "")
             }
             renderItem={renderItem}
             contentContainerStyle={[
@@ -355,7 +363,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
             onEndReachedThreshold={0.4}
             onEndReached={loadMore}
             ListEmptyComponent={
-              <Text style={styles.emptyText}>共鳴履歴がまだありません。</Text>
+              <Text style={styles.emptyText}>共鳴したReflectionはまだありません。</Text>
             }
             ListFooterComponent={
               loadingMore ? (
@@ -383,8 +391,6 @@ function createStyles(COLORS, ui) {
       paddingHorizontal: 18,
       paddingBottom: 18,
     },
-
-    // Header
     headerRow: {
       flexDirection: "row",
       alignItems: "center",
@@ -412,8 +418,6 @@ function createStyles(COLORS, ui) {
       fontWeight: "600",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
-
-    // Sort
     sortRow: {
       flexDirection: "row",
       alignItems: "center",
@@ -455,8 +459,6 @@ function createStyles(COLORS, ui) {
     chipTextInactive: {
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
-
-    // List
     listContent: {
       paddingBottom: 24,
     },
@@ -492,13 +494,11 @@ function createStyles(COLORS, ui) {
       marginLeft: 4,
       fontWeight: "700",
     },
-
     loadingBox: {
       paddingTop: 18,
       alignItems: "center",
       justifyContent: "center",
     },
-
     emptyContent: {
       flexGrow: 1,
       alignItems: "center",
@@ -510,14 +510,12 @@ function createStyles(COLORS, ui) {
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       textAlign: "center",
     },
-
     errorText: {
       fontSize: font.sectionLabel ?? 12,
       color: "#EF4444",
       marginBottom: 8,
       fontWeight: "700",
     },
-
     footerLoading: {
       paddingVertical: 12,
       alignItems: "center",
