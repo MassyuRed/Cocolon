@@ -16,11 +16,11 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 function formatRemainingText(quota) {
   const limit = quota?.publish_limit;
   const remaining = quota?.remaining_count;
-  if (limit == null) return "今月のReflection公開回数: 無制限";
+  if (limit == null) return "今月のPiece作成回数: 無制限";
   if (typeof remaining === "number") {
-    return `今月の残り公開回数: ${remaining} / ${limit}`;
+    return `今月の残りPiece作成回数: ${remaining} / ${limit}`;
   }
-  return `今月の公開上限: ${limit}`;
+  return `今月のPiece作成上限: ${limit}`;
 }
 
 export default function EmotionReflectionPreviewModal({
@@ -55,10 +55,10 @@ export default function EmotionReflectionPreviewModal({
                 color={colors.TITLE_GOLD}
                 style={styles.titleIcon}
               />
-              <Text style={styles.title}>Reflection preview</Text>
+              <Text style={styles.title}>Pieceの確認</Text>
             </View>
             <Text style={styles.lead}>
-              この入力だけから生成されたReflectionです。公開する前に内容を確認できます。
+              この入力だけから生成されたPieceです。作成する前に内容を確認できます。
             </Text>
           </View>
 
@@ -73,7 +73,7 @@ export default function EmotionReflectionPreviewModal({
             </View>
 
             <View style={styles.block}>
-              <Text style={styles.blockLabel}>Reflection</Text>
+              <Text style={styles.blockLabel}>Piece</Text>
               <Text style={styles.blockText}>{reflectionText || "—"}</Text>
             </View>
 
@@ -94,7 +94,7 @@ export default function EmotionReflectionPreviewModal({
                 variant="secondary"
                 onPress={onClose}
                 disabled={publishLoading}
-                accessibilityLabel="Reflection previewを閉じる"
+                accessibilityLabel="Pieceの確認を閉じる"
               >
                 やめる
               </CocolonButton>
@@ -104,9 +104,9 @@ export default function EmotionReflectionPreviewModal({
               onPress={onPublish}
               loading={publishLoading}
               disabled={!preview || publishLoading}
-              accessibilityLabel="Reflectionを公開する"
+              accessibilityLabel="Pieceを作成する"
             >
-              公開する
+              Pieceを作成する
             </CocolonButton>
           </View>
         </View>

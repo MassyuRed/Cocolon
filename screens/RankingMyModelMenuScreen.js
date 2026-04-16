@@ -28,18 +28,18 @@ export default function RankingMyModelMenuScreen({ navigation }) {
 
   return (
     <MyModelMenuScroll>
-      <MyModelSubHeader title="MyModel" onBack={handleBack} />
+      <MyModelSubHeader title="Piece" onBack={handleBack} />
 
       <MyModelDescription>
-        MyModelに関するランキングを選んでください。
+        Pieceに関するランキングを選んでください。
       </MyModelDescription>
 
       <MyModelMediumCard
-        title="Reflectionランキング"
-        description="Reflectionのランキングを確認します"
+        title="Pieceランキング"
+        description="Pieceのランキングを確認します"
         onPress={() => navigation?.navigate?.("RankingMyModelQuestions")}
         chevron="forward"
-        accessibilityLabel="Reflectionランキングを開く"
+        accessibilityLabel="Pieceランキングを開く"
       />
 
       <View style={{ marginTop: 12 }}>

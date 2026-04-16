@@ -44,7 +44,7 @@ import {
 import NexusReflectionCard from "./nexus/NexusReflectionCard";
 
 const TABS = [
-  { key: "reflection", label: "Reflection" },
+  { key: "reflection", label: "Piece" },
   { key: "emotion_log", label: "感情通知" },
   { key: "recommend", label: "おすすめ" },
   { key: "history", label: "履歴" },
@@ -204,8 +204,8 @@ function normalizeTutorialReflectionItems(items) {
         String(item?.q_key || item?.question?.q_key || "").trim() ||
         `tutorial-q-${index}`,
       title:
-        String(item?.title || item?.question?.title || "Reflection").trim() ||
-        "Reflection",
+        String(item?.title || item?.question?.title || "Piece").trim() ||
+        "Piece",
     },
     body: String(item?.body || "").trim(),
     created_at: String(item?.created_at || "").trim() || null,
@@ -379,7 +379,7 @@ export default function NexusScreen({ navigation }) {
       setReflectionState({
         loading: false,
         items: [],
-        error: String(e?.message || "Reflectionを読み込めませんでした。"),
+        error: String(e?.message || "Pieceを読み込めませんでした。"),
       });
     }
   }, [isTutorialMode, tutorialReflectionItems]);
@@ -570,8 +570,8 @@ export default function NexusScreen({ navigation }) {
       });
     } catch {
       Alert.alert(
-        "Reflections画面を開けません",
-        "Reflections画面が navigation に未登録の可能性があります。"
+        "Piece一覧を開けません",
+        "Piece一覧画面が navigation に未登録の可能性があります。"
       );
     }
   }, [ensureTutorialReflectionsSeed, navigation, setTutorialStep]);
@@ -583,7 +583,7 @@ export default function NexusScreen({ navigation }) {
         setDetailLoading(false);
         setDetailData({
           title:
-            item?.question?.title || item?.title || item?.question_title || "Reflection",
+            item?.question?.title || item?.title || item?.question_title || "Piece",
           body: item?.body || "",
           views: Number(item?.metrics?.views || item?.views || 0) || 0,
           resonances:
@@ -630,7 +630,7 @@ export default function NexusScreen({ navigation }) {
       } catch (e) {
         console.warn("NexusScreen: load reflection detail failed", e);
         setDetailData({
-          title: item?.question?.title || item?.title || "Reflection",
+          title: item?.question?.title || item?.title || "Piece",
           body: item?.body || "",
           views: Number(item?.metrics?.views || 0) || 0,
           resonances: Number(item?.metrics?.resonances || 0) || 0,
@@ -668,9 +668,9 @@ export default function NexusScreen({ navigation }) {
         return {
           step: 12,
           mode: "info",
-          title: "Nexus",
+          title: "Piece",
           message:
-            "ここでは、公開されたReflectionや感情の動き、発見の流れをまとめて見られます。",
+            "ここでは、公開されたPieceや感情の動きをまとめて見られます。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(13),
         };
@@ -678,9 +678,9 @@ export default function NexusScreen({ navigation }) {
         return {
           step: 13,
           mode: "info",
-          title: "Reflection",
+          title: "Piece",
           message:
-            "公開されたReflectionはこの流れで確認します。まずは Reflection タブを見る場所だと覚えてください。",
+            "公開されたPieceはこの流れで確認します。まずは Piece タブを見る場所だと覚えてください。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(14),
         };
@@ -690,7 +690,7 @@ export default function NexusScreen({ navigation }) {
           mode: "info",
           title: "チュートリアル導線",
           message:
-            "チュートリアルでは、ここからサンプルReflection一覧に進みます。今の root は Nexus のままです。",
+            "チュートリアルでは、ここからサンプルPiece一覧に進みます。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(15),
         };
@@ -700,8 +700,8 @@ export default function NexusScreen({ navigation }) {
           mode: "action",
           title: "開いてみましょう",
           message:
-            "Reflections 一覧を開いて、チュートリアル用のReflectionを確認してみましょう。",
-          actionHint: "Reflections一覧を開く を押してください",
+            "Piece一覧を開いて、チュートリアル用のPieceを確認してみましょう。",
+          actionHint: "Piece一覧を開く を押してください",
         };
       default:
         return null;
@@ -780,7 +780,7 @@ export default function NexusScreen({ navigation }) {
       if (!tutorialReflectionItems.length) {
         return (
           <Text style={styles.emptyText}>
-            チュートリアル用のReflectionを準備しています。
+            チュートリアル用のPieceを準備しています。
           </Text>
         );
       }
@@ -803,7 +803,7 @@ export default function NexusScreen({ navigation }) {
     if (!Array.isArray(reflectionState.items) || reflectionState.items.length <= 0) {
       return (
         <Text style={styles.emptyText}>
-          フォロー中ユーザーのReflectionはまだありません。
+          フォロー中ユーザーのPieceはまだありません。
         </Text>
       );
     }
@@ -941,7 +941,7 @@ export default function NexusScreen({ navigation }) {
       return <Text style={styles.errorText}>{historyState.error}</Text>;
     }
     if (!historyState.echoes.length) {
-      return <Text style={styles.emptyText}>共鳴したReflectionはまだありません。</Text>;
+      return <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>;
     }
     return (
       <View>
@@ -996,7 +996,7 @@ export default function NexusScreen({ navigation }) {
       >
         <View style={styles.panelHeader}>
           <View ref={titleRef} collapsable={false}>
-            <Text style={styles.panelTitle}>Nexus</Text>
+            <Text style={styles.panelTitle}>Piece</Text>
           </View>
           <CocolonPressable
             style={styles.refreshButton}
@@ -1007,7 +1007,7 @@ export default function NexusScreen({ navigation }) {
               if (activeTab === "recommend") void loadRecommend();
               if (activeTab === "history") void loadHistory(historyMode);
             }}
-            accessibilityLabel="Nexusを再読み込みする"
+            accessibilityLabel="Pieceを再読み込みする"
           >
             <Ionicons
               name="refresh-outline"
@@ -1021,16 +1021,16 @@ export default function NexusScreen({ navigation }) {
           <View ref={tutorialCardRef} collapsable={false} style={styles.tutorialEntryCard}>
             <Text style={styles.tutorialEntryTitle}>チュートリアル</Text>
             <Text style={styles.tutorialEntryBody}>
-              今の MyModel の入口は Nexus です。チュートリアルでは、このまま
-              Reflections 一覧へ進んで流れを確認します。
+              チュートリアルでは、このまま
+              Piece一覧へ進んで流れを確認します。
             </Text>
             <View ref={tutorialButtonRef} collapsable={false} style={styles.tutorialEntryButtonWrap}>
               <CocolonButton
                 variant="primary"
                 onPress={handleOpenTutorialReflections}
-                accessibilityLabel="Reflections一覧を開く"
+                accessibilityLabel="Piece一覧を開く"
               >
-                Reflections一覧を開く
+                Piece一覧を開く
               </CocolonButton>
             </View>
           </View>
@@ -1130,7 +1130,7 @@ export default function NexusScreen({ navigation }) {
           <View style={styles.detailCard}>
             <View style={styles.detailHeader}>
               <Text style={styles.detailTitle}>
-                {String(detailData?.title || "Reflection").trim() || "Reflection"}
+                {String(detailData?.title || "Piece").trim() || "Piece"}
               </Text>
             </View>
 
@@ -1161,7 +1161,7 @@ export default function NexusScreen({ navigation }) {
               <CocolonButton
                 variant="secondary"
                 onPress={() => setDetailVisible(false)}
-                accessibilityLabel="Reflection詳細を閉じる"
+                accessibilityLabel="Piece詳細を閉じる"
               >
                 閉じる
               </CocolonButton>

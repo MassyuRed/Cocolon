@@ -2368,25 +2368,25 @@ useEffect(() => {
       >
         <View style={styles.panelHeader}>
           <CocolonBackButton fallbackRouteName="MyModel" />
-          <Text style={styles.panelTitle}>Reflections</Text>
+          <Text style={styles.panelTitle}>Piece</Text>
           <View style={styles.panelHeaderRightPlaceholder} />
         </View>
 
         <View style={styles.qnaIntroCard}>
-          <Text style={styles.qnaIntroTitle}>Reflections</Text>
+          <Text style={styles.qnaIntroTitle}>Piece</Text>
           <Text style={styles.qnaIntroText}>
-            閲覧したいMyModelを選択し、Reflectionを表示してください。
+            見たいユーザーを選び、Pieceを表示してください。
           </Text>
           {isTutorialMode ? (
             <Text style={styles.tierHintText}>
-              まずは自分のReflectionを確認し、その後にUserへ切り替えると「他ユーザーのReflectionも閲覧できる」流れが分かります。
+              まずは自分のPieceを確認し、その後にUserへ切り替えると「他ユーザーのPieceも閲覧できる」流れが分かります。
             </Text>
           ) : null}
 
           {/* Main action */}
           <View style={styles.actions}>
             <View style={styles.targetRow}>
-              <Text style={styles.targetLabel}>MyModel：</Text>
+              <Text style={styles.targetLabel}>対象：</Text>
               <View ref={myModelSelectorRef} collapsable={false}>
                 <CocolonPressable
                   onPress={openUserPicker}
@@ -2417,7 +2417,7 @@ useEffect(() => {
                   color="#FFFFFF"
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.goldButtonText}>Reflectionを表示</Text>
+                <Text style={styles.goldButtonText}>Pieceを表示</Text>
               </View>
             </CocolonButton>
           </View>
@@ -2662,7 +2662,7 @@ useEffect(() => {
             }
             targetRect={tutorialPickUserRect}
             title="Userを選択"
-            message="Userを選択して、Reflectionを見てみましょう。"
+            message="Userを選択して、Pieceを見てみましょう。"
             step={tutorialStep}
             totalSteps={TUTORIAL_TOTAL_STEPS}
             mode="action"
@@ -2785,8 +2785,8 @@ useEffect(() => {
               <View style={styles.modalEmpty}>
                 <Text style={styles.modalEmptyText}>
                   {isTutorialMode
-                    ? "まだチュートリアルReflectionがありません。\n先にMyModel画面で回答を作成してください。"
-                    : 'まだ表示できるReflectionがありません。\n入力内容が蓄積されるとここに表示されます。'}
+                    ? "まだチュートリアルPieceがありません。\n先にPiece画面で回答を作成してください。"
+                    : 'まだ表示できるPieceがありません。\n入力内容が蓄積されるとここに表示されます。'}
                 </Text>
               </View>
             )}
@@ -2822,7 +2822,7 @@ useEffect(() => {
                   <Text style={styles.inlineLoadingText}>共鳴を解除中…</Text>
                 </View>
               ) : null}
-              <Text style={styles.modalDescText}>このReflectionのどこに、どんなふうに響きましたか？</Text>
+              <Text style={styles.modalDescText}>このPieceのどこに、どんなふうに響きましたか？</Text>
 
               <View style={{ marginTop: 6 }}>
                 {(ECHO_STRENGTH_OPTIONS || []).map((opt) => {
@@ -3042,7 +3042,7 @@ useEffect(() => {
               contentContainerStyle={{ paddingBottom: 24 + keyboardInset }}
               keyboardShouldPersistTaps="handled"
             >
-              <Text style={styles.modalDescText}>このReflectionから、どんな気づきがありましたか？</Text>
+              <Text style={styles.modalDescText}>このPieceから、どんな気づきがありましたか？</Text>
 
               <View style={{ marginTop: 6 }}>
                 {(DISCOVERY_CATEGORY_OPTIONS || []).map((opt) => {
@@ -3242,19 +3242,19 @@ useEffect(() => {
         targetRect={tutorialTargetRect}
         title={
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW
-            ? "自分のReflection"
+            ? "自分のPiece"
             : !activeViewedUserId
             ? "Userへ切り替え"
-            : "他ユーザーのReflection"
+            : "他ユーザーのPiece"
         }
         message={
           tutorialStep === STEP_REFLECTIONS_SELF_VIEW
-            ? "フォロワーにはこのように表示されます。自分の作成したReflectionを確認できます。"
+            ? "フォロワーにはこのように表示されます。自分の作成したPieceを確認できます。"
             : !activeViewedUserId
-            ? "『MyModel：自分』を押して、Userを選んでください。"
+            ? "『対象：自分』を押して、Userを選んでください。"
             : tutorialOtherReflectionPhase === "view"
-            ? "このように他ユーザーのReflectionが表示されます。"
-            : "このようにフォローしたユーザーのReflectionを閲覧できます。\n\n共感したら『共鳴』でリアクションできます。共鳴済みを押すと解除できます。"
+            ? "このように他ユーザーのPieceが表示されます。"
+            : "このようにフォローしたユーザーのPieceを閲覧できます。\n\n共感したら『共鳴』でリアクションできます。共鳴済みを押すと解除できます。"
         }
         step={tutorialStep}
         totalSteps={TUTORIAL_TOTAL_STEPS}

@@ -389,8 +389,8 @@ export default function MyModelScreen({ route } = {}) {
         return {
           step: 12,
           mode: "info",
-          title: "MyModel",
-          message: "ここでは\nReflectionを作り、閲覧できます",
+          title: "Piece",
+          message: "ここでは\nPieceを作り、閲覧できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(13),
         };
@@ -399,7 +399,7 @@ export default function MyModelScreen({ route } = {}) {
           step: 13,
           mode: "info",
           title: "作成",
-          message: "まずはここで\nReflectionを作成します",
+          message: "まずはここで\nPieceを作成します",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(14),
         };
@@ -408,7 +408,7 @@ export default function MyModelScreen({ route } = {}) {
           step: 14,
           mode: "action",
           title: "作成してみましょう",
-          message: "作成を開いて\nReflectionを作ってみましょう",
+          message: "作成を開いて\nPieceを作ってみましょう",
           actionHint: "作成 を押してください",
         };
       case 15:
@@ -416,7 +416,7 @@ export default function MyModelScreen({ route } = {}) {
           step: 15,
           mode: "action",
           title: "閲覧で確認できます",
-          message: "作成したReflectionは\n閲覧から確認できます\n\n開いてみましょう",
+          message: "作成したPieceは\n閲覧から確認できます\n\n開いてみましょう",
           actionHint: "閲覧 を押してください",
         };
       default:
@@ -436,7 +436,7 @@ export default function MyModelScreen({ route } = {}) {
       message: "回答を入力したら、保存ボタンを押してください",
       actionHint: "入力して保存してください",
       footerText:
-        "この問い1つで、Reflectionの作成から閲覧までの流れを体験できます。",
+        "この問い1つで、Pieceの作成から閲覧までの流れを体験できます。",
     };
   }, [isTutorialMode, tutorialCreateVisible, tutorialStep]);
 
@@ -797,8 +797,8 @@ export default function MyModelScreen({ route } = {}) {
       navigation.navigate(routeName, params);
     } catch {
       Alert.alert(
-        "Reflections画面を開けません",
-        "Reflections画面が navigation に未登録の可能性があります。\nApp.js に MyModelReflectionsScreen を登録してください。"
+        "Piece一覧を開けません",
+        "Piece一覧画面が navigation に未登録の可能性があります。\nApp.js の登録を確認してください。"
       );
     }
   }, [navigation, targetUserId]);
@@ -861,7 +861,7 @@ export default function MyModelScreen({ route } = {}) {
   const showTutorialRecommendInfo = useCallback(() => {
     Alert.alert(
       "おすすめ（チュートリアル）",
-      "本番ではここから新しいユーザーや問いを探せます。\n\nチュートリアルでは、Reflections画面で模擬ユーザーのReflectionを閲覧できます。"
+      "本番ではここから新しいユーザーや問いを探せます。\n\nチュートリアルでは、Piece画面で模擬ユーザーのPieceを閲覧できます。"
     );
   }, []);
 
@@ -1089,8 +1089,8 @@ export default function MyModelScreen({ route } = {}) {
       navigation.navigate("MyModelCreate");
     } catch {
       Alert.alert(
-        "ReflectionCreateを開けません",
-        "ReflectionCreate画面が navigation に未登録の可能性があります。\nApp.js に ReflectionCreate画面を登録してください。"
+        "Piece作成画面を開けません",
+        "Piece作成画面が navigation に未登録の可能性があります。\nApp.js の登録を確認してください。"
       );
     }
   }, [navigation, isTutorialMode, openTutorialCreate]);
@@ -1098,7 +1098,7 @@ export default function MyModelScreen({ route } = {}) {
   const openReflections = useCallback(() => {
     if (tutorialSurfaceEnabled && isTutorialMode && !tutorialHasSelfReflection) {
       Alert.alert(
-        "先にReflectionを作成しましょう",
+        "先にPieceを作成しましょう",
         `チュートリアルでは、まず「${TUTORIAL_REFLECTION_QUESTION}」に答えると、作成から閲覧までの流れが分かります。`,
         [
           { text: "閉じる", style: "cancel" },
@@ -1191,7 +1191,7 @@ export default function MyModelScreen({ route } = {}) {
       >
         <View style={styles.panelHeader}>
           <View ref={myModelTitleRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>MyModel</Text>
+            <Text style={styles.panelTitle}>Piece</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
               onPress={handlePressGuide}
@@ -1211,11 +1211,11 @@ export default function MyModelScreen({ route } = {}) {
           <View style={styles.recoCard}>
             <Text style={styles.recoTitle}>チュートリアル</Text>
             <Text style={styles.recoSummaryText}>
-              この画面では、1つの問いに答えてReflectionが作られ、Reflectionsで閲覧できる流れを体験します。
+              この画面では、1つの問いに答えてPieceが作られ、Piece一覧で閲覧できる流れを体験します。
             </Text>
             <Text style={styles.recoSummaryText}>
               {tutorialHasSelfReflection
-                ? "作成済みのReflectionがあります。次はReflectionsで、自分の回答や模擬ユーザーのReflectionを見てみましょう。"
+                ? "作成済みのPieceがあります。次はPiece一覧で、自分の回答や模擬ユーザーのPieceを見てみましょう。"
                 : `まずは「${TUTORIAL_REFLECTION_QUESTION}」に答えてみましょう。`}
             </Text>
             <Text style={styles.recoSummaryText}>
@@ -1237,7 +1237,7 @@ export default function MyModelScreen({ route } = {}) {
               <Text style={styles.globalSummaryText}>
                 {`今日、全体で ${
                   typeof globalReflectionCount === "number" ? globalReflectionCount : "—"
-                } 回のReflection閲覧がありました`}
+                } 回のPiece閲覧がありました`}
               </Text>
               <Text style={styles.globalSummaryText}>
                 {`今日、全体で ${
@@ -1259,14 +1259,14 @@ export default function MyModelScreen({ route } = {}) {
             title="閲覧"
             description={
               tutorialSurfaceEnabled && isTutorialMode
-                ? "作成したReflectionや、模擬ユーザーのReflectionを見ながら、MyModelの流れを確認できます。"
-                : "自分、またはフォロー中のユーザーが作成したReflectionを閲覧できます。"
+                ? "作成したPieceや、模擬ユーザーのPieceを見ながら、Pieceの流れを確認できます。"
+                : "自分、またはフォロー中のユーザーが作成したPieceを閲覧できます。"
             }
-            buttonLabel="Reflectionsを開く"
+            buttonLabel="Piece一覧を開く"
             buttonIconName="open-outline"
             onPress={openReflections}
             badgeVisible={unreadReflections}
-            accessibilityLabel="Reflectionsを開く"
+            accessibilityLabel="Piece一覧を開く"
           />
         </View>
 
@@ -1289,14 +1289,14 @@ export default function MyModelScreen({ route } = {}) {
             title="作成"
             description={
               tutorialSurfaceEnabled && isTutorialMode
-                ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Reflectionを作成する流れを体験できます。`
-                : "一問一答に答えることでReflectionを作成できます。作成したReflection数はアカウントページで確認できます。"
+                ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Pieceを作成する流れを体験できます。`
+                : "一問一答に答えることでPieceを作成できます。作成したPiece数はアカウントページで確認できます。"
             }
-            buttonLabel="Reflectionを作成"
+            buttonLabel="Pieceを作成する"
             buttonIconName="create-outline"
             onPress={openMyModelCreate}
             badgeVisible={unreadMyModelCreate}
-            accessibilityLabel="Reflectionを作成"
+            accessibilityLabel="Pieceを作成する"
           />
         </View>
 
@@ -1306,7 +1306,7 @@ export default function MyModelScreen({ route } = {}) {
             title="探す"
             description={
               tutorialSurfaceEnabled && isTutorialMode
-                ? "本番ではここから新しいユーザーを探せます。チュートリアルではReflections画面に模擬ユーザーを用意しています。"
+                ? "本番ではここから新しいユーザーを探せます。チュートリアルではPiece画面に模擬ユーザーを用意しています。"
                 : "新しいユーザーを探すことができます。"
             }
             buttonLabel="新しいユーザーを探す"
@@ -1375,7 +1375,7 @@ export default function MyModelScreen({ route } = {}) {
         <View ref={modalOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
           <View style={styles.modalCard}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>チュートリアル Reflection</Text>
+              <Text style={styles.modalTitle}>チュートリアル Piece</Text>
               <Pressable
                 onPress={closeTutorialCreate}
                 style={styles.modalCloseBtn}
@@ -1423,8 +1423,8 @@ export default function MyModelScreen({ route } = {}) {
 
               <Text style={styles.tutorialHelperText}>
                 {isTutorialMode && tutorialStep === 14
-                  ? "この問いに答えて保存すると、チュートリアル用のReflectionが作成されます。本番データには保存されません。"
-                  : "チュートリアルでは、この1つの回答だけでReflectionの作成から閲覧までの流れを体験します。本番データには保存されません。"}
+                  ? "この問いに答えて保存すると、チュートリアル用のPieceが作成されます。本番データには保存されません。"
+                  : "チュートリアルでは、この1つの回答だけでPieceの作成から閲覧までの流れを体験します。本番データには保存されません。"}
               </Text>
 
               {tutorialCreateError ? (

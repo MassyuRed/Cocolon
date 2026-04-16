@@ -95,14 +95,14 @@ export default function RankingTopScreen({ navigation }) {
             onPress={() => navigation?.navigate?.("RankingInputLength")}
           />
 
-          <Text style={[styles.sectionLabel, { fontWeight: "800", marginTop: 18 }]}>MyModel</Text>
+          <Text style={[styles.sectionLabel, { fontWeight: "800", marginTop: 18 }]}>Piece</Text>
 
           <QuickLink
             styles={styles}
             colors={colors}
             icon="help-circle-outline"
-            label="Reflectionランキング"
-            subtitle="Reflectionの所持数"
+            label="Pieceランキング"
+            subtitle="Pieceの所持数"
             onPress={() => navigation?.navigate?.("RankingMyModelQuestions")}
           />
 
@@ -112,7 +112,7 @@ export default function RankingTopScreen({ navigation }) {
             colors={colors}
             icon="heart-outline"
             label="共鳴数ランキング"
-            subtitle="Reflectionが共鳴された回数"
+            subtitle="Pieceが共鳴された回数"
             onPress={() => navigation?.navigate?.("RankingMyModelResonances")}
           />
         
@@ -122,7 +122,7 @@ export default function RankingTopScreen({ navigation }) {
             colors={colors}
             icon="bulb-outline"
             label="発見数ランキング"
-            subtitle="Reflectionが発見された回数"
+            subtitle="Pieceが発見された回数"
             onPress={() => navigation?.navigate?.("RankingMyModelDiscoveries")}
           />
 </View>

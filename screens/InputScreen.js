@@ -1808,8 +1808,8 @@ const { height: windowHeight } = useWindowDimensions();
     } catch (e) {
       console.warn("InputScreen: previewEmotionReflection failed", e);
       Alert.alert(
-        "Reflection preview",
-        String(e?.message || "Reflectionの生成に失敗しました。")
+        "Pieceの生成",
+        String(e?.message || "Pieceの生成に失敗しました。")
       );
     } finally {
       setReflectionPreviewLoading(false);
@@ -1876,16 +1876,16 @@ const { height: windowHeight } = useWindowDimensions();
       if (inputFeedbackText) {
         openInputFeedbackModal({
           commentText: inputFeedbackText,
-          dominantLabel: "Reflectionを公開しました",
+          dominantLabel: "Pieceを作成しました",
         });
       } else {
-        showToast("Reflectionを公開しました");
+        showToast("Pieceを作成しました");
       }
     } catch (e) {
       console.warn("InputScreen: publishEmotionReflection failed", e);
       Alert.alert(
-        "Reflection publish",
-        String(e?.message || "Reflectionの公開に失敗しました。")
+        "Pieceの作成",
+        String(e?.message || "Pieceの作成に失敗しました。")
       );
     } finally {
       setReflectionPublishLoading(false);
@@ -2836,9 +2836,9 @@ ${String(error?.message || error)}`
                       onPress={handlePreviewReflection}
                       disabled={!canPreviewReflection}
                       loading={reflectionPreviewLoading}
-                      accessibilityLabel="Reflection化して確認"
+                      accessibilityLabel="Pieceを作成する"
                     >
-                      Reflection化して確認
+                      Pieceを作成する
                     </CocolonButton>
                   </View>
                 ) : null}

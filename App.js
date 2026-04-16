@@ -1625,7 +1625,7 @@ function MainTabs() {
               case "Input": label = "Home"; break;
               case "MyWeb": label = "Analysis"; break;
               case "MyModel":
-              case "MyProfile": label = "Nexus"; break;
+              case "MyProfile": label = "Piece"; break;
               case "RankingTop": label = "Ranking"; break;
               case "Settings": label = "Setting"; break;
               default: label = route.name;

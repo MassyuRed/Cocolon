@@ -32,7 +32,7 @@ export default function MyModelReactionHistoryScreen({ navigation }) {
   const showTutorialHistoryInfo = useCallback(() => {
     Alert.alert(
       "履歴（チュートリアル）",
-      "本番では、共鳴したReflectionの履歴がここに蓄積されます。\n\nチュートリアルでは、まずReflectionの作成と閲覧の流れを確認してください。"
+      "本番では、共鳴したPieceの履歴がここに蓄積されます。\n\nチュートリアルでは、まずPieceの作成と閲覧の流れを確認してください。"
     );
   }, []);
 
@@ -49,13 +49,13 @@ export default function MyModelReactionHistoryScreen({ navigation }) {
       <MyModelSubHeader title="履歴" onBack={handleBack} />
 
       <MyModelDescription>
-        共鳴したReflectionの履歴を確認できます。{"\n"}
-        一覧から選ぶと、そのReflection詳細を開きます。
+        共鳴したPieceの履歴を確認できます。{"\n"}
+        一覧から選ぶと、そのPiece詳細を開きます。
       </MyModelDescription>
 
       <MyModelMediumCard
         title="共鳴履歴"
-        description="共鳴したReflectionの履歴を確認します"
+        description="共鳴したPieceの履歴を確認します"
         onPress={openEchoesHistory}
         chevron="forward"
         accessibilityLabel="共鳴履歴を開く"

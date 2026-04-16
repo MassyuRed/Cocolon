@@ -555,7 +555,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
     const code = String(myProfileCode || "").trim();
     if (!code && !targetUserId) {
-      Alert.alert("準備中", "相手のMyModelIDがまだ取得できていません。");
+      Alert.alert("準備中", "相手の共有IDがまだ取得できていません。");
       return;
     }
 
@@ -1374,17 +1374,17 @@ const onRestorePurchases = async () => {
                 />
                 <StatusRow
                   styles={styles}
-                  label="Reflectionの所持数"
+                  label="Pieceの所持数"
                   value={statusValue("mymodel_questions_total", ["mymodelQuestionsTotal", "mymodel_q_total"])}
                 />
                 <StatusRow
                   styles={styles}
-                  label="Reflectionが共鳴された数"
+                  label="Pieceが共鳴された数"
                   value={statusValue("mymodel_resonances_total", ["mymodelResonancesTotal", "resonances_total"])}
                 />
                 <StatusRow
                   styles={styles}
-                  label="Reflectionが発見された数"
+                  label="Pieceが発見された数"
                   value={statusValue("mymodel_discoveries_total", ["mymodelDiscoveriesTotal", "discoveries_total"])}
                 />
               </View>
@@ -1527,7 +1527,7 @@ const onRestorePurchases = async () => {
             ) : (
               <View style={{ marginTop: 10 }}>
                 <VisibilitySettingRow
-                  title="MyModelの公開設定"
+                  title="Pieceの公開設定"
                   description="非公開にすると、フォロー時に承認が必要になります。おすすめにも表示されなくなります"
                   isPublic={!accountVisibility.is_private_account}
                   onPressPublic={() =>
