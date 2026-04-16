@@ -223,10 +223,9 @@ function buildErrorMessage(err) {
 }
 
 function sanitizeSelfStructureReportText(text) {
-  return String(text || "").replace(
-    /自己構造分析レポート[（(]月次[）)]/g,
-    "自己構造分析レポート"
-  );
+  return String(text || "")
+    .replace(/自己構造分析レポート[（(]月次[）)]/g, "自己分析レポート")
+    .replace(/自己構造/g, "自己分析");
 }
 
 // NOTE: Phase3 で「閲覧=生成」を廃止し、月次は MashOS 側で生成/保存する。
@@ -241,7 +240,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion }) {
+export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "現在の自己分析" }) {
   const { themeName, colors } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -331,7 +330,7 @@ const [loading, setLoading] = useState(true);
     };
   }, [isDark, colors]);
 
-  const reportTitle = "現在の自己構造";
+  const reportTitle = titleOverride || "現在の自己分析";
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
   const fetchedReportMode = useMemo(() => {
@@ -429,8 +428,10 @@ const run = useCallback(async ({ force = false } = {}) => {
     const qs = new URLSearchParams({
       ensure: "true",
       force: force ? "true" : "false",
-      report_mode: effectiveMode,
     });
+    if (!useServerDefaultMode) {
+      qs.set("report_mode", effectiveMode);
+    }
 
     const fetchOpts = {
       method: "GET",
@@ -527,7 +528,15 @@ const run = useCallback(async ({ force = false } = {}) => {
     if (!aliveRef.current) return;
     safeSet(() => setLoading(false));
   }
-  }, [safeSet, reportMode, subscriptionTier, allowedModes, onLatestSeenVersion]);
+  }, [
+    safeSet,
+    reportMode,
+    subscriptionTier,
+    allowedModes,
+    onLatestSeenVersion,
+    openSubscriptionSelect,
+    useServerDefaultMode,
+  ]);
 
   useEffect(() => {
     run();
@@ -536,45 +545,13 @@ const run = useCallback(async ({ force = false } = {}) => {
 
 
 
-  return (
-    <ScrollView
-      style={[styles.container, themed.container]}
-      contentContainerStyle={{ paddingBottom: 24 }}
-    >
-      {/* ヘッダー */}
-      <View style={[styles.headerRow, themed.headerRow]}>
-        <CocolonBackButton
-          onPress={handleBack}
-          style={styles.backBtn}
-          accessibilityLabel="現在の自己構造から戻る"
-        />
-
-        <View style={styles.headerRight}>
-          <TouchableOpacity
-            onPress={() => run({ force: true })}
-            style={[styles.smallBtn, themed.smallBtn]}
-            activeOpacity={0.85}
-            disabled={loading}
-          >
-            <Ionicons
-              name="refresh-outline"
-              size={16}
-              color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
-            />
-            <Text style={[styles.smallBtnText, themed.smallBtnText]}>
-              更新
-            </Text>
-          </TouchableOpacity>
-
-          {/* PDF保存ボタンは非表示 */}
-        </View>
-      </View>
-
+  const bodyContent = (
+    <>
       {/* タイトル */}
       <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{reportTitle}</Text>
 
 
-      {/* 🧭 表示モード（Standard / Deep） */}
+      {!useServerDefaultMode ? (
       <View style={[styles.modeCard, themed.bodyCard]}>
         <View style={styles.modeHeaderRow}>
           <Text style={[styles.modeTitle, themed.p]}>表示モード</Text>
@@ -673,6 +650,7 @@ const run = useCallback(async ({ force = false } = {}) => {
           ※モード変更後は「更新」を押すと反映されます。DeepはPremiumプランで利用できます。
         </Text>
       </View>
+      ) : null}
 
       {loading && (
         <View style={{ paddingVertical: 16 }}>
@@ -714,6 +692,48 @@ const run = useCallback(async ({ force = false } = {}) => {
           ) : null}
         </>
       )}
+
+    </>
+  );
+
+  if (embedded) {
+    return <View style={[styles.container, themed.container]}>{bodyContent}</View>;
+  }
+
+  return (
+    <ScrollView
+      style={[styles.container, themed.container]}
+      contentContainerStyle={{ paddingBottom: 24 }}
+    >
+      {!hideHeader ? (
+        <View style={[styles.headerRow, themed.headerRow]}>
+          <CocolonBackButton
+            onPress={handleBack}
+            style={styles.backBtn}
+            accessibilityLabel="現在の自己分析から戻る"
+          />
+
+          <View style={styles.headerRight}>
+            <TouchableOpacity
+              onPress={() => run({ force: true })}
+              style={[styles.smallBtn, themed.smallBtn]}
+              activeOpacity={0.85}
+              disabled={loading}
+            >
+              <Ionicons
+                name="refresh-outline"
+                size={16}
+                color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
+              />
+              <Text style={[styles.smallBtnText, themed.smallBtnText]}>
+                更新
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : null}
+
+      {bodyContent}
     </ScrollView>
   );
 }

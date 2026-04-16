@@ -748,6 +748,9 @@ export default function MyWebReportViewerScreen({
   onBack,
   onOpenMyProfile, // 互換のため残す（今は未使用）
   onOpenSubscription, // ✅ MyWeb paywall CTA（SubscriptionSelectへ）
+  embedded = false,
+  hideHeader = false,
+  onMarkedRead,
 }) {
   // 🎨 theme
   const { themeName, colors } = useTheme();
@@ -830,6 +833,11 @@ export default function MyWebReportViewerScreen({
           report_table: "myweb_reports",
           report_scope: "myweb",
         });
+        try {
+          await onMarkedRead?.(String(reportId));
+        } catch (callbackError) {
+          console.warn("MyWebReportViewerScreen: onMarkedRead callback failed", callbackError);
+        }
       } catch (e) {
         console.warn("MyWebReportViewerScreen: failed to mark report read", e);
       }
@@ -838,7 +846,7 @@ export default function MyWebReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, [report?.id]);
+  }, [onMarkedRead, report?.id]);
 
 
   const themed = useMemo(() => {
@@ -1284,46 +1292,8 @@ const deepPatternSectionTitle = useMemo(() => {
   return "観測された制御パターン";
 }, [isWeeklyDeepV2Like, isMonthlyDeepV2, isDeepPatternEpisodeMode]);
 
-  return (
-    <SafeAreaView
-      style={[styles.container, themed.container, { backgroundColor: screenBg }]}
-    >
-      {/* Header */}
-      <View style={[styles.header, themed.header]}>
-        <CocolonBackButton onPress={onBack} style={styles.backBtn} />
-
-        <Text style={[styles.headerTitle, themed.headerTitle]} numberOfLines={1}>
-          {title}
-        </Text>
-        {/*
-          PDF保存ボタンは将来的に復活させる可能性があるため、
-          実装は残したまま一時的に非表示にしています。
-        {!isTextLocked && String(displayText || "").trim() ? (
-          <TouchableOpacity
-            style={styles.pdfBtn}
-            onPress={() => exportTextToPdf(title, displayText)}
-            activeOpacity={0.85}
-          >
-            <Ionicons
-              name="download-outline"
-              size={18}
-              color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
-            />
-            <Text style={[styles.pdfText, themed.pdfText]}>PDF</Text>
-          </TouchableOpacity>
-        ) : (
-          <View style={{ width: 70 }} />
-        )}
-        */}
-        <View style={{ width: 70 }} />
-      </View>
-
-      {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
-
-      <ScrollView
-        style={{ backgroundColor: screenBg }}
-        contentContainerStyle={[styles.body, themed.body]}
-      >
+  const bodyContent = (
+    <>
         {/* ===== Charts (history) ===== */}
         {reportType === "weekly" ? (
           <View style={[styles.chartCard, themed.chartCard]}>
@@ -1944,6 +1914,65 @@ const deepPatternSectionTitle = useMemo(() => {
 
 
         {/* ✅ 「自己構造トピック候補」パネル（MyWebCrossLinkSection）は不要なので表示しない */}
+
+    </>
+  );
+
+  if (embedded) {
+    return (
+      <View style={{ backgroundColor: screenBg }}>
+        <View style={styles.embeddedHeader}>
+          <Text style={[styles.embeddedTitle, themed.headerTitle]}>{title}</Text>
+          {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
+        </View>
+        <View style={[styles.body, themed.body]}>{bodyContent}</View>
+      </View>
+    );
+  }
+
+  return (
+    <SafeAreaView
+      style={[styles.container, themed.container, { backgroundColor: screenBg }]}
+    >
+      {/* Header */}
+      {!hideHeader ? (
+        <View style={[styles.header, themed.header]}>
+          <CocolonBackButton onPress={onBack} style={styles.backBtn} />
+
+          <Text style={[styles.headerTitle, themed.headerTitle]} numberOfLines={1}>
+            {title}
+          </Text>
+          {/*
+            PDF保存ボタンは将来的に復活させる可能性があるため、
+            実装は残したまま一時的に非表示にしています。
+          {!isTextLocked && String(displayText || "").trim() ? (
+            <TouchableOpacity
+              style={styles.pdfBtn}
+              onPress={() => exportTextToPdf(title, displayText)}
+              activeOpacity={0.85}
+            >
+              <Ionicons
+                name="download-outline"
+                size={18}
+                color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
+              />
+              <Text style={[styles.pdfText, themed.pdfText]}>PDF</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={{ width: 70 }} />
+          )}
+          */}
+          <View style={{ width: 70 }} />
+        </View>
+      ) : null}
+
+      {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
+
+      <ScrollView
+        style={{ backgroundColor: screenBg }}
+        contentContainerStyle={[styles.body, themed.body]}
+      >
+        {bodyContent}
       </ScrollView>
     </SafeAreaView>
   );
@@ -1972,6 +2001,16 @@ function createStyles(COLORS, ui) {
     fontWeight: "800",
     color: "#111827",
     textAlign: "center",
+  },
+  embeddedHeader: {
+    paddingHorizontal: 2,
+    paddingTop: 4,
+    paddingBottom: 6,
+  },
+  embeddedTitle: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#111827",
   },
 
   pdfBtn: {

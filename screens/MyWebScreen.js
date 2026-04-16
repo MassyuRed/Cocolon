@@ -36,7 +36,7 @@ import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import TodayQuestionHistoryScreen from "./TodayQuestionHistoryScreen";
-import MyWebTopScreen from "./MyWebTopScreen";
+import MyWebContentFirstScreen from "./MyWebContentFirstScreen";
 import MyWebEmotionAnalysisScreen from "./MyWebEmotionAnalysisScreen";
 import MyWebSelfStructureScreen from "./MyWebSelfStructureScreen";
 import MyWebInputHistoryMenuScreen from "./MyWebInputHistoryMenuScreen";
@@ -277,6 +277,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
     },
   });
 
+  const [homeSummariesLoading, setHomeSummariesLoading] = useState(false);
+
   // (hooks moved to the top of the component)
 
   const { styles, colors, isDark } = useThemedStyles();
@@ -319,7 +321,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
           step: 7,
           mode: "info",
           title: "Analysis",
-          message: "ここでは日々の入力から作成される\n分析レポートや自己構造を確認できます",
+          message: "ここでは日々の入力から作成される\n分析レポートや自己分析を確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(8),
         };
@@ -336,8 +338,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
         return {
           step: 9,
           mode: "info",
-          title: "自己構造",
-          message: "ここで日々の入力から作成される\n自己構造のレポートを確認できます",
+          title: "自己分析",
+          message: "ここで日々の入力から作成される\n自己分析のレポートを確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(10),
         };
@@ -688,7 +690,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
     const normalizedType = String(type || "").trim().toLowerCase();
     if (!["daily", "weekly", "monthly"].includes(normalizedType)) return null;
 
-    const shouldEnsure = ensure && (normalizedType === "weekly" || normalizedType === "monthly");
+    const shouldEnsure = ensure && (normalizedType === "daily" || normalizedType === "weekly" || normalizedType === "monthly");
     if (shouldEnsure) {
       try {
         await apiPost("/myweb/reports/ensure", {
@@ -737,85 +739,95 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
     const refreshSeq = ++menuMetaRefreshSeqRef.current;
     const isStale = () => refreshSeq !== menuMetaRefreshSeqRef.current;
 
-    const [dailyRes, weeklyRes, monthlyRes, selfLatestStatusRes, homeSummaryRes, todayQuestionRes] =
-      await Promise.allSettled([
-        fetchLatestReadyReport("daily"),
-        fetchLatestReadyReport("weekly"),
-        fetchLatestReadyReport("monthly"),
-        apiGet("/myprofile/latest/status"),
-        apiGet("/myweb/home-summary"),
-        getTodayQuestionHistory({ limit: 1, offset: 0 }),
-      ]);
-
-    if (isStale()) return;
-
-    const dailyLatestReport = dailyRes.status === "fulfilled" ? dailyRes.value : null;
-    const weeklyLatestReport = weeklyRes.status === "fulfilled" ? weeklyRes.value : null;
-    const monthlyLatestReport = monthlyRes.status === "fulfilled" ? monthlyRes.value : null;
-
-    if (dailyRes.status === "rejected") {
-      console.warn("MyWebScreen: failed to refresh daily latest report", dailyRes.reason);
-    }
-    if (weeklyRes.status === "rejected") {
-      console.warn("MyWebScreen: failed to refresh weekly latest report", weeklyRes.reason);
-    }
-    if (monthlyRes.status === "rejected") {
-      console.warn("MyWebScreen: failed to refresh monthly latest report", monthlyRes.reason);
+    if (!isStale()) {
+      setHomeSummariesLoading(true);
     }
 
-    const selfLatestStatus =
-      selfLatestStatusRes.status === "fulfilled" && selfLatestStatusRes.value
-        ? selfLatestStatusRes.value
-        : null;
-    if (selfLatestStatusRes.status === "rejected") {
-      console.warn(
-        "MyWebScreen: failed to refresh self-structure latest status",
-        selfLatestStatusRes.reason
-      );
+    try {
+      const [dailyRes, weeklyRes, monthlyRes, selfLatestStatusRes, homeSummaryRes, todayQuestionRes] =
+        await Promise.allSettled([
+          fetchLatestReadyReport("daily", { ensure: true }),
+          fetchLatestReadyReport("weekly"),
+          fetchLatestReadyReport("monthly"),
+          apiGet("/myprofile/latest/status"),
+          apiGet("/myweb/home-summary"),
+          getTodayQuestionHistory({ limit: 1, offset: 0 }),
+        ]);
+
+      if (isStale()) return;
+
+      const dailyLatestReport = dailyRes.status === "fulfilled" ? dailyRes.value : null;
+      const weeklyLatestReport = weeklyRes.status === "fulfilled" ? weeklyRes.value : null;
+      const monthlyLatestReport = monthlyRes.status === "fulfilled" ? monthlyRes.value : null;
+
+      if (dailyRes.status === "rejected") {
+        console.warn("MyWebScreen: failed to refresh daily latest report", dailyRes.reason);
+      }
+      if (weeklyRes.status === "rejected") {
+        console.warn("MyWebScreen: failed to refresh weekly latest report", weeklyRes.reason);
+      }
+      if (monthlyRes.status === "rejected") {
+        console.warn("MyWebScreen: failed to refresh monthly latest report", monthlyRes.reason);
+      }
+
+      const selfLatestStatus =
+        selfLatestStatusRes.status === "fulfilled" && selfLatestStatusRes.value
+          ? selfLatestStatusRes.value
+          : null;
+      if (selfLatestStatusRes.status === "rejected") {
+        console.warn(
+          "MyWebScreen: failed to refresh self-structure latest status",
+          selfLatestStatusRes.reason
+        );
+      }
+
+      const homeSummary = homeSummaryRes.status === "fulfilled" ? homeSummaryRes.value || {} : {};
+      if (homeSummaryRes.status === "rejected") {
+        console.warn("MyWebScreen: failed to refresh home summary", homeSummaryRes.reason);
+      }
+      const inputStatus = homeSummary?.input_status || {};
+
+      const todayQuestionItems =
+        todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
+          ? todayQuestionRes.value.items
+          : [];
+      if (todayQuestionRes.status === "rejected") {
+        console.warn("MyWebScreen: failed to refresh today question history", todayQuestionRes.reason);
+      }
+
+      const todayCount = Number(inputStatus?.today_count ?? 0);
+      const weekCount = Number(inputStatus?.week_count ?? 0);
+      const monthCount = Number(inputStatus?.month_count ?? 0);
+
+      setEntryMeta({
+        emotionLatestDate: pickLatestIso([
+          resolveMyWebReportUpdatedAt(dailyLatestReport),
+          resolveMyWebReportUpdatedAt(weeklyLatestReport),
+          resolveMyWebReportUpdatedAt(monthlyLatestReport),
+        ]),
+        selfStructureLatestDate: pickLatestIso([
+          selfLatestStatus?.has_visible_content
+            ? resolveSelfStructureUpdatedAt(selfLatestStatus)
+            : null,
+        ]),
+        inputHistoryLatestDate: pickLatestIso([
+          inputStatus?.last_input_at,
+          resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
+        ]),
+        todayCount: Number.isFinite(todayCount) ? todayCount : 0,
+        weekCount: Number.isFinite(weekCount) ? weekCount : 0,
+        monthCount: Number.isFinite(monthCount) ? monthCount : 0,
+        latestReports: {
+          daily: dailyLatestReport,
+          weekly: weeklyLatestReport,
+          monthly: monthlyLatestReport,
+        },
+      });
+    } finally {
+      if (!isStale()) {
+        setHomeSummariesLoading(false);
+      }
     }
-
-    const homeSummary = homeSummaryRes.status === "fulfilled" ? homeSummaryRes.value || {} : {};
-    if (homeSummaryRes.status === "rejected") {
-      console.warn("MyWebScreen: failed to refresh home summary", homeSummaryRes.reason);
-    }
-    const inputStatus = homeSummary?.input_status || {};
-
-    const todayQuestionItems =
-      todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
-        ? todayQuestionRes.value.items
-        : [];
-    if (todayQuestionRes.status === "rejected") {
-      console.warn("MyWebScreen: failed to refresh today question history", todayQuestionRes.reason);
-    }
-
-    const todayCount = Number(inputStatus?.today_count ?? 0);
-    const weekCount = Number(inputStatus?.week_count ?? 0);
-    const monthCount = Number(inputStatus?.month_count ?? 0);
-
-    setEntryMeta({
-      emotionLatestDate: pickLatestIso([
-        resolveMyWebReportUpdatedAt(dailyLatestReport),
-        resolveMyWebReportUpdatedAt(weeklyLatestReport),
-        resolveMyWebReportUpdatedAt(monthlyLatestReport),
-      ]),
-      selfStructureLatestDate: pickLatestIso([
-        selfLatestStatus?.has_visible_content
-          ? resolveSelfStructureUpdatedAt(selfLatestStatus)
-          : null,
-      ]),
-      inputHistoryLatestDate: pickLatestIso([
-        inputStatus?.last_input_at,
-        resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
-      ]),
-      todayCount: Number.isFinite(todayCount) ? todayCount : 0,
-      weekCount: Number.isFinite(weekCount) ? weekCount : 0,
-      monthCount: Number.isFinite(monthCount) ? monthCount : 0,
-      latestReports: {
-        daily: dailyLatestReport,
-        weekly: weeklyLatestReport,
-        monthly: monthlyLatestReport,
-      },
-    });
   }, [fetchLatestReadyReport]);
 
 
@@ -852,8 +864,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
         };
 
         Alert.alert(
-          "自己構造分析レポート",
-          "自己構造分析レポートはPlusプラン以上で利用できます。\n\nPlusプラン以上で本文の閲覧が可能になります。",
+          "自己分析レポート",
+          "自己分析レポートはPlusプラン以上で利用できます。\n\nPlusプラン以上で本文の閲覧が可能になります。",
           [
             { text: "閉じる", style: "cancel" },
             { text: "プランを見る", onPress: goSubscription },
@@ -1134,7 +1146,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
             Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
-            types: ["weekly", "monthly"],
+            types: ["daily", "weekly", "monthly"],
             force: false,
           }),
         });
@@ -1311,7 +1323,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
         <DeepInsightScreen onBack={() => setRoute(ROUTE_HOME)} />
       ) : (
         <View style={styles.safeContent}>
-          <MyWebTopScreen
+          <MyWebContentFirstScreen
             tutorialScrollRef={tutorialScrollRef}
             onTutorialScroll={handleTutorialScroll}
             tutorialRefs={{
@@ -1321,8 +1333,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
               guideRef: myWebGuideRef,
             }}
             onOpenGuide={openGuide}
-            onOpenEmotionAnalysis={() => setRoute(ROUTE_EMOTION_ANALYSIS)}
-            onOpenSelfStructure={() => setRoute(ROUTE_SELF_STRUCTURE)}
             emotionUpdateLabel={emotionUpdateLabel}
             selfStructureUpdateLabel={selfStructureUpdateLabel}
             todayCount={entryMeta.todayCount}
@@ -1330,6 +1340,29 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
             monthCount={entryMeta.monthCount}
             unreadEmotion={emotionAnalysisUnread}
             unreadSelfStructure={selfStructureUnread}
+            unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
+            unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
+            unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
+            unreadSelfStructureLatest={
+              selfStructureUnreadResolved && !subscriptionLoading && isPaid
+                ? selfStructureLatestUnread
+                : false
+            }
+            unreadSelfStructureHistory={
+              selfStructureUnreadResolved && !subscriptionLoading && isPaid
+                ? selfStructureHistoryUnread
+                : false
+            }
+            latestReports={entryMeta.latestReports}
+            homeSummariesLoading={homeSummariesLoading}
+            onOpenDailyHistory={() => openReportHistory("daily", ROUTE_HOME)}
+            onOpenWeeklyHistory={() => openReportHistory("weekly", ROUTE_HOME)}
+            onOpenMonthlyHistory={() => openReportHistory("monthly", ROUTE_HOME)}
+            onOpenSelfHistory={() => openSelfReportHistory(ROUTE_HOME)}
+            onOpenSubscription={openSubscriptionSelect}
+            onRefreshEmotionUnread={refreshUnreadBadges}
+            onLatestSeenVersion={markSelfStructureLatestSeen}
+            isPaid={!subscriptionLoading && isPaid}
           />
         </View>
       )}

@@ -84,14 +84,14 @@ export default function MyWebTopScreen({
 
       <View ref={tutorialRefs?.selfStructureRef} collapsable={false} style={{ marginTop: 16 }}>
         <MenuActionCard
-          title="自己構造"
+          title="自己分析"
           description="考え方や反応の傾向を確認します"
           metaText={selfStructureUpdateLabel}
-          buttonLabel="自己構造を見る"
+          buttonLabel="自己分析を見る"
           buttonIconName="git-network-outline"
           onPress={onOpenSelfStructure}
           badgeVisible={unreadSelfStructure}
-          accessibilityLabel="自己構造を見る"
+          accessibilityLabel="自己分析を見る"
         />
       </View>
 
