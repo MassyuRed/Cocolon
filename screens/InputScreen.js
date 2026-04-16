@@ -926,9 +926,51 @@ const handleDismissTodayQuestionModal = useCallback(() => {
   advanceStartupPopupQueue();
 }, [advanceStartupPopupQueue, todayQuestionBundle?.service_day_key]);
 
+const handleOpenEmotionHistory = useCallback(() => {
+  closeStartupPopupWindow();
+
+  try {
+    navigation?.navigate?.("InputHistory");
+    return;
+  } catch {
+    // noop
+  }
+
+  try {
+    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+    if (parent && typeof parent.navigate === "function") {
+      parent.navigate("Input", {
+        screen: "InputHistory",
+      });
+      return;
+    }
+  } catch {
+    // noop
+  }
+}, [closeStartupPopupWindow, navigation]);
+
 const handleOpenTodayQuestionHistory = useCallback(() => {
   if (activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
     closeStartupPopupWindow();
+  }
+
+  try {
+    navigation?.navigate?.("TodayQuestionHistory");
+    return;
+  } catch {
+    // noop
+  }
+
+  try {
+    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+    if (parent && typeof parent.navigate === "function") {
+      parent.navigate("Input", {
+        screen: "TodayQuestionHistory",
+      });
+      return;
+    }
+  } catch {
+    // noop
   }
 
   try {
@@ -2310,6 +2352,34 @@ ${String(error?.message || error)}`
                 </View>
               ) : null}
 
+              <View style={styles.inputHistoryQuickCard}>
+                <CocolonPressable
+                  style={styles.inputHistoryQuickButton}
+                  onPress={handleOpenEmotionHistory}
+                  accessibilityLabel="入力履歴を開く"
+                >
+                  <View style={styles.inputHistoryQuickLeft}>
+                    <Ionicons
+                      name="time-outline"
+                      size={18}
+                      color={colors.TEXT_SUBTLE}
+                      style={styles.inputHistoryQuickIcon}
+                    />
+                    <View style={styles.inputHistoryQuickTextWrap}>
+                      <Text style={styles.inputHistoryQuickTitle}>入力履歴</Text>
+                      <Text style={styles.inputHistoryQuickSubtitle}>
+                        これまでの感情入力を振り返る
+                      </Text>
+                    </View>
+                  </View>
+                  <Ionicons
+                    name="chevron-forward"
+                    size={18}
+                    color={colors.TEXT_SUBTLE}
+                  />
+                </CocolonPressable>
+              </View>
+
               {/* 「今の気持ちを入力」エリア */}
               <View
                 ref={emotionAreaRef}
@@ -3300,6 +3370,46 @@ function createStyles(COLORS, ui) {
       paddingHorizontal: 12,
       paddingTop: 12,
       paddingBottom: 12,
+    },
+
+    inputHistoryQuickCard: {
+      marginBottom: 14,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      overflow: "hidden",
+    },
+    inputHistoryQuickButton: {
+      minHeight: 56,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    inputHistoryQuickLeft: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+      paddingRight: 12,
+    },
+    inputHistoryQuickIcon: {
+      marginRight: 8,
+    },
+    inputHistoryQuickTextWrap: {
+      flex: 1,
+    },
+    inputHistoryQuickTitle: {
+      fontSize: 13,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    inputHistoryQuickSubtitle: {
+      marginTop: 2,
+      fontSize: 11,
+      lineHeight: 16,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     /** セクション共通 */

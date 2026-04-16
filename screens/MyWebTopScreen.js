@@ -13,13 +13,11 @@ export default function MyWebTopScreen({
   onOpenGuide,
   onOpenEmotionAnalysis,
   onOpenSelfStructure,
-  onOpenInputHistory,
   tutorialScrollRef,
   onTutorialScroll,
   tutorialRefs,
   emotionUpdateLabel,
   selfStructureUpdateLabel,
-  inputHistoryUpdateLabel,
   todayCount = 0,
   weekCount = 0,
   monthCount = 0,
@@ -37,12 +35,12 @@ export default function MyWebTopScreen({
     <MyWebMenuScroll scrollRef={tutorialScrollRef} onScroll={onTutorialScroll}>
       <View style={styles.homeHeaderRow}>
         <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.homeTitleRow}>
-          <Text style={styles.homeTitle}>MyWeb</Text>
+          <Text style={styles.homeTitle}>Analysis</Text>
           <View ref={tutorialRefs?.guideRef} collapsable={false}>
             <CocolonPressable
               style={styles.guideButton}
               onPress={onOpenGuide}
-              accessibilityLabel="MyWebのガイドを開く"
+              accessibilityLabel="Analysisのガイドを開く"
             >
               <Ionicons
                 name="help-circle-outline"
@@ -97,17 +95,6 @@ export default function MyWebTopScreen({
         />
       </View>
 
-      <View ref={tutorialRefs?.inputHistoryRef} collapsable={false} style={{ marginTop: 16 }}>
-        <MenuActionCard
-          title="入力履歴"
-          description="感情入力と今日の問いを振り返ります"
-          metaText={inputHistoryUpdateLabel}
-          buttonLabel="入力履歴を見る"
-          buttonIconName="time-outline"
-          onPress={onOpenInputHistory}
-          accessibilityLabel="入力履歴を見る"
-        />
-      </View>
     </MyWebMenuScroll>
   );
 }

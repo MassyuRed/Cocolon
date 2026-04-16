@@ -188,7 +188,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
   const myWebTitleRef = useRef(null);
   const myWebEmotionRef = useRef(null);
   const myWebSelfStructureRef = useRef(null);
-  const myWebInputHistoryRef = useRef(null);
   const myWebGuideRef = useRef(null);
 
 
@@ -304,7 +303,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
       case 9:
         return myWebSelfStructureRef;
       case 10:
-        return myWebInputHistoryRef;
+        return myWebTitleRef;
       case 11:
       default:
         return null;
@@ -319,8 +318,8 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
         return {
           step: 7,
           mode: "info",
-          title: "MyWeb",
-          message: "ここでは日々の入力から作成される\nレポートや履歴を確認できます",
+          title: "Analysis",
+          message: "ここでは日々の入力から作成される\n分析レポートや自己構造を確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(8),
         };
@@ -346,10 +345,11 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
         return {
           step: 10,
           mode: "info",
-          title: "入力履歴",
-          message: "ここで入力履歴を\n確認できます",
+          title: "履歴はHomeから開きます",
+          message: "入力履歴と今日の問い履歴は\nHomeから確認します。\n\nAnalysisは分析を見る場所です。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(11),
+          cardPlacement: "bottom",
         };
       case 11:
         return {
@@ -408,7 +408,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
       overlayMetrics: tutorialOverlayMetrics,
       windowHeight,
       safeInsets,
-      cardPlacement: tutorialStep === 10 ? "top" : "bottom",
+      cardPlacement: tutorialOverlayConfig?.cardPlacement || "bottom",
       measureOptions: {
         maxAttempts: 3,
         settleFrames: 1,
@@ -419,6 +419,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
     isMyWebTutorialVisible,
     safeInsets,
     tutorialStep,
+    tutorialOverlayConfig?.cardPlacement,
     tutorialOverlayMetrics,
     windowHeight,
   ]);
@@ -1180,7 +1181,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
       : false;
   const emotionUpdateLabel = formatLatestUpdateLabel(entryMeta.emotionLatestDate);
   const selfStructureUpdateLabel = formatLatestUpdateLabel(entryMeta.selfStructureLatestDate);
-  const inputHistoryUpdateLabel = formatLatestUpdateLabel(entryMeta.inputHistoryLatestDate);
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
@@ -1318,16 +1318,13 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
               titleRef: myWebTitleRef,
               emotionRef: myWebEmotionRef,
               selfStructureRef: myWebSelfStructureRef,
-              inputHistoryRef: myWebInputHistoryRef,
               guideRef: myWebGuideRef,
             }}
             onOpenGuide={openGuide}
             onOpenEmotionAnalysis={() => setRoute(ROUTE_EMOTION_ANALYSIS)}
             onOpenSelfStructure={() => setRoute(ROUTE_SELF_STRUCTURE)}
-            onOpenInputHistory={() => setRoute(ROUTE_INPUT_HISTORY)}
             emotionUpdateLabel={emotionUpdateLabel}
             selfStructureUpdateLabel={selfStructureUpdateLabel}
-            inputHistoryUpdateLabel={inputHistoryUpdateLabel}
             todayCount={entryMeta.todayCount}
             weekCount={entryMeta.weekCount}
             monthCount={entryMeta.monthCount}
@@ -1350,7 +1347,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
           onNext={tutorialOverlayConfig.onNext}
           onMetricsChange={setTutorialOverlayMetrics}
           actionHint={tutorialOverlayConfig.actionHint}
-          cardPlacement={tutorialStep === 10 ? "top" : "bottom"}
+          cardPlacement={tutorialOverlayConfig.cardPlacement || "bottom"}
         />
       ) : null}
     </View>

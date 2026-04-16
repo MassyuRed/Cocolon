@@ -18,6 +18,8 @@ import InputScreen from "./screens/InputScreen";
 import CocolonGuideScreen from "./screens/CocolonGuideScreen";
 import NoticeHistoryScreen from "./screens/NoticeHistoryScreen";
 import MyWebScreen from "./screens/MyWebScreen";
+import MyWebHistoryScreen from "./screens/MyWebHistoryScreen";
+import TodayQuestionHistoryScreen from "./screens/TodayQuestionHistoryScreen";
 import MyModelScreen from "./screens/MyModelScreen";
 import MyModelEntryScreen from "./screens/MyModelEntryScreen";
 import MyModelCreateScreen from "./screens/MyModelCreateScreen";
@@ -425,6 +427,50 @@ function InputStackNavigator() {
   return (
     <InputStack.Navigator initialRouteName="Input" screenOptions={{ headerShown: false }}>
       <InputStack.Screen name="Input" component={InputScreen} />
+      <InputStack.Screen
+        name="InputHistory"
+        options={{ headerShown: false }}
+      >
+        {(navProps) => (
+          <MyWebHistoryScreen
+            {...navProps}
+            onBack={() => {
+              try {
+                if (navProps?.navigation?.canGoBack?.()) {
+                  navProps.navigation.goBack();
+                  return;
+                }
+              } catch {}
+
+              try {
+                navProps?.navigation?.navigate?.("Input");
+              } catch {}
+            }}
+          />
+        )}
+      </InputStack.Screen>
+      <InputStack.Screen
+        name="TodayQuestionHistory"
+        options={{ headerShown: false }}
+      >
+        {(navProps) => (
+          <TodayQuestionHistoryScreen
+            {...navProps}
+            onBack={() => {
+              try {
+                if (navProps?.navigation?.canGoBack?.()) {
+                  navProps.navigation.goBack();
+                  return;
+                }
+              } catch {}
+
+              try {
+                navProps?.navigation?.navigate?.("Input");
+              } catch {}
+            }}
+          />
+        )}
+      </InputStack.Screen>
       <InputStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <InputStack.Screen name="NoticeHistory" component={NoticeHistoryScreen} />
       <InputStack.Screen name="Account" component={AccountScreen} />
@@ -1577,7 +1623,7 @@ function MainTabs() {
             let label;
             switch (route.name) {
               case "Input": label = "Home"; break;
-              case "MyWeb": label = "MyWeb"; break;
+              case "MyWeb": label = "Analysis"; break;
               case "MyModel":
               case "MyProfile": label = "Nexus"; break;
               case "RankingTop": label = "Ranking"; break;
