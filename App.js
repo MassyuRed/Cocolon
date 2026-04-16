@@ -31,9 +31,7 @@ import AccountScreen from "./screens/AccountScreen";
 import SubscriptionSelectScreen from "./screens/SubscriptionSelectScreen";
 import FollowListScreen from "./screens/FollowListScreen";
 import EchoesHistoryListScreen from "./screens/EchoesHistoryListScreen";
-import DiscoveriesHistoryListScreen from "./screens/DiscoveriesHistoryListScreen";
 import EchoesHistoryDetailScreen from "./screens/EchoesHistoryDetailScreen";
-import DiscoveriesHistoryDetailScreen from "./screens/DiscoveriesHistoryDetailScreen";
 
 import RankingTopScreen from "./screens/RankingTopScreen";
 import EmotionRankingScreen from "./screens/EmotionRankingScreen";
@@ -98,7 +96,7 @@ const SHARE_PROFILE_API_BASE_URL =
   (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 
-const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "DiscoveriesHistoryList", "EchoesHistoryDetail", "DiscoveriesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
+const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "EchoesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
 const FRAME_BORDER_WIDTH = 2;
 
 function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
@@ -525,9 +523,7 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
       <MyModelStack.Screen name="MyModelReflections" component={MyModelReflectionsScreen} />
       <MyModelStack.Screen name="MyModelReactionHistory" component={MyModelReactionHistoryScreen} />
       <MyModelStack.Screen name="EchoesHistoryList" component={EchoesHistoryListScreen} />
-      <MyModelStack.Screen name="DiscoveriesHistoryList" component={DiscoveriesHistoryListScreen} />
       <MyModelStack.Screen name="EchoesHistoryDetail" component={EchoesHistoryDetailScreen} />
-      <MyModelStack.Screen name="DiscoveriesHistoryDetail" component={DiscoveriesHistoryDetailScreen} />
       <MyModelStack.Screen name="EmotionLog">
         {(navProps) => (
           <EmotionLogScreen

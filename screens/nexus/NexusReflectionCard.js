@@ -79,10 +79,6 @@ export default function NexusReflectionCard({ item, onPress, onPressOwner }) {
           <Ionicons name="heart-outline" size={14} color={colors.TEXT_SUBTLE} style={styles.metricIcon} />
           <Text style={styles.metricText}>{Number(item?.metrics?.resonances || 0)}</Text>
         </View>
-        <View style={styles.metricChip}>
-          <Ionicons name="bulb-outline" size={14} color={colors.TEXT_SUBTLE} style={styles.metricIcon} />
-          <Text style={styles.metricText}>{Number(item?.metrics?.discoveries || 0)}</Text>
-        </View>
       </View>
     </CocolonPressable>
   );
