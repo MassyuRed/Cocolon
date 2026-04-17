@@ -40,7 +40,6 @@ import EmotionRankingScreen from "./screens/EmotionRankingScreen";
 import InputCountRankingScreen from "./screens/InputCountRankingScreen";
 import InputLengthRankingScreen from "./screens/InputLengthRankingScreen";
 import MyModelEchoesRankingScreen from "./screens/MyModelEchoesRankingScreen";
-import MyModelDiscoveriesRankingScreen from "./screens/MyModelDiscoveriesRankingScreen";
 import MyModelQuestionsRankingScreen from "./screens/MyModelQuestionsRankingScreen";
 import LoginStreakRankingScreen from "./screens/LoginStreakRankingScreen";
 import { ThemeProvider, useTheme } from "./theme/ThemeContext";
@@ -596,7 +595,6 @@ function RankingStackNavigator() {
       <RankingStack.Screen name="RankingInputLength" component={InputLengthRankingScreen} />
       <RankingStack.Screen name="RankingMyModelQuestions" component={MyModelQuestionsRankingScreen} />
       <RankingStack.Screen name="RankingMyModelResonances" component={MyModelEchoesRankingScreen} />
-      <RankingStack.Screen name="RankingMyModelDiscoveries" component={MyModelDiscoveriesRankingScreen} />
       <RankingStack.Screen name="RankingLoginStreak" component={LoginStreakRankingScreen} />
       <RankingStack.Screen name="Account" component={AccountScreen} />
       <RankingStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
@@ -1727,7 +1725,6 @@ const InputCountRankingScreenWithFrame = withGlobalFrame(InputCountRankingScreen
 const InputLengthRankingScreenWithFrame = withGlobalFrame(InputLengthRankingScreen);
 const MyModelQuestionsRankingScreenWithFrame = withGlobalFrame(MyModelQuestionsRankingScreen);
 const MyModelEchoesRankingScreenWithFrame = withGlobalFrame(MyModelEchoesRankingScreen);
-const MyModelDiscoveriesRankingScreenWithFrame = withGlobalFrame(MyModelDiscoveriesRankingScreen);
 const LoginStreakRankingScreenWithFrame = withGlobalFrame(LoginStreakRankingScreen);
 
 function RootStackNavigator() {
@@ -1742,7 +1739,6 @@ function RootStackNavigator() {
       <RootStack.Screen name="RankingInputLength" component={InputLengthRankingScreenWithFrame} />
       <RootStack.Screen name="RankingMyModelQuestions" component={MyModelQuestionsRankingScreenWithFrame} />
       <RootStack.Screen name="RankingMyModelResonances" component={MyModelEchoesRankingScreenWithFrame} />
-      <RootStack.Screen name="RankingMyModelDiscoveries" component={MyModelDiscoveriesRankingScreenWithFrame} />
       <RootStack.Screen name="RankingLoginStreak" component={LoginStreakRankingScreenWithFrame} />
     </RootStack.Navigator>
   );

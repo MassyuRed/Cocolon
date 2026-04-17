@@ -224,7 +224,7 @@ export default function MyModelQuestionsRankingScreen({ navigation }) {
         backgroundColor={colors.BG_SILVER}
       />
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        <RankingHeader styles={styles} title="問い所持数ランキング" navigation={navigation} />
+        <RankingHeader styles={styles} title="Piece生成数ランキング" navigation={navigation} />
 
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>集計範囲</Text>
