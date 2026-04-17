@@ -194,7 +194,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / MyWeb</div>
+      <div class="meta">Exported from Cocolon / Analysis</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;

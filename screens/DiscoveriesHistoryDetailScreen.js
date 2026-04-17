@@ -30,7 +30,7 @@ export default function DiscoveriesHistoryDetailScreen({ navigation }) {
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="MyModel"
-              accessibilityLabel="MyModelに戻る"
+              accessibilityLabel="Pieceに戻る"
             />
           </View>
 
@@ -45,7 +45,7 @@ export default function DiscoveriesHistoryDetailScreen({ navigation }) {
           <Text style={styles.messageTitle}>発見詳細は提供していません</Text>
           <Text style={styles.messageText}>
             発見機能は廃止済みです。{"\n"}
-            Reflectionの閲覧と履歴確認は、共鳴導線に統一されています。
+            Pieceの閲覧と履歴確認は、共鳴導線に統一されています。
           </Text>
         </View>
       </View>

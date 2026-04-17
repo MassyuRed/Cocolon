@@ -29,9 +29,9 @@ export const guideTermsJa = Object.freeze({
     termId: "secret_memo",
     display: "シークレットメモ",
     reading: "シークレットメモ",
-    shortDef: "Reflections には出さず、分析には使うメモ設定です。",
+    shortDef: "Piece には出さず、分析には使うメモ設定です。",
     longDef:
-      "メモ内容をそのまま公開したくないときに使う設定です。Reflections 側には表示されませんが、入力内容としては保持されるため、分析レポートなどには反映されます。公開範囲と分析利用を分けたいときに向いています。",
+      "メモ内容をそのまま公開したくないときに使う設定です。Piece 側には表示されませんが、入力内容としては保持されるため、分析レポートなどには反映されます。公開範囲と分析利用を分けたいときに向いています。",
     examples: [
       "個人的すぎる内容を公開せずに残したいとき",
       "自分だけの振り返りとしてメモを書いておきたいとき",
@@ -57,7 +57,7 @@ export const guideTermsJa = Object.freeze({
     reading: "きょうのとい",
     shortDef: "その日ごとに表示される問いです。",
     longDef:
-      "Home や MyWeb から扱える、その日限定または日単位で積み重なる問いです。感情入力とは別に、問いに答えることでその時の考え方や状態を残していけます。",
+      "Home や Analysis から扱える、その日限定または日単位で積み重なる問いです。感情入力とは別に、問いに答えることでその時の考え方や状態を残していけます。",
     examples: [
       "その日のテーマに沿って短く答えを残す",
       "あとから履歴で見返して、その時期の思考を追う",
@@ -105,11 +105,11 @@ export const guideTermsJa = Object.freeze({
   },
   myweb: {
     termId: "myweb",
-    display: "MyWeb",
-    reading: "マイウェブ",
+    display: "Analysis",
+    reading: "アナリシス",
     shortDef: "入力履歴やレポートを振り返るための画面群です。",
     longDef:
-      "Home で行った入力をあとから整理し、流れとして確認するための場所です。履歴・検索・レポートなど、蓄積された自己情報を読み解く役割を持っています。",
+      "Home で行った入力をあとから整理し、分析として確認するための場所です。履歴・検索・レポートなど、蓄積された自己情報を読み解く役割を持っています。",
     examples: [
       "先週の感情入力を見返す",
       "分析レポートから自分の傾向を確認する",
@@ -118,24 +118,24 @@ export const guideTermsJa = Object.freeze({
   },
   mymodel: {
     termId: "mymodel",
-    display: "MyModel",
-    reading: "マイモデル",
-    shortDef: "入力した自己情報をもとに構築された自己モデルを扱う場所です。",
+    display: "Piece画面",
+    reading: "ピースがめん",
+    shortDef: "Pieceや関連する反応を扱う場所です。",
     longDef:
-      "MyModel では、蓄積された自己情報を『問いと答え』や他ユーザーとの反応を通じて立体的に扱います。単に見るだけでなく、答える・読む・反応することで深まっていくのが特徴です。",
+      "Piece画面では、公開された断片や他ユーザーとの反応を通じて自分や他者を立体的に扱います。単に見るだけでなく、読む・反応する・ProfileCreate を整えることで理解を深めていくのが特徴です。",
     examples: [
-      "問いに答えて自分の輪郭を整理する",
-      "他ユーザーの Reflection を読んで理解を広げる",
+      "公開されたPieceを読み、自分との重なりを確かめる",
+      "他ユーザーの Piece を読んで理解を広げる",
     ],
     relatedTerms: ["reflection", "reflection_create", "kyomei", "hakken"],
   },
   reflection: {
     termId: "reflection",
-    display: "Reflection",
-    reading: "リフレクション",
-    shortDef: "問いと答えがセットになった、一問一答形式の情報です。",
+    display: "Piece",
+    reading: "ピース",
+    shortDef: "問いと答えがセットになった、一問一答形式の断片です。",
     longDef:
-      "MyModel の中核になる単位です。ある問いに対して残した答えが1つの Reflection になり、自分や他者の考え方を読んだり比較したりするための土台になります。",
+      "Piece画面の中核になる単位です。ある問いに対して残した答えが1つの Piece になり、自分や他者の考え方を読んだり比較したりするための土台になります。",
     examples: [
       "自分の価値観に関する問いへ答えた内容",
       "他ユーザーがあるテーマについてどう考えているかを見る",
@@ -144,14 +144,14 @@ export const guideTermsJa = Object.freeze({
   },
   reflection_create: {
     termId: "reflection_create",
-    display: "ReflectionCreate",
-    reading: "リフレクションクリエイト",
-    shortDef: "問いに答えて新しい Reflection を作る機能です。",
+    display: "ProfileCreate",
+    reading: "プロフィールクリエイト",
+    shortDef: "固定的な自己紹介 / プロフィール資産を整える機能です。",
     longDef:
-      "提示された問いに対して答えることで、新しい Reflection を作成する機能です。自分の考えや感覚を言語化する入口になり、MyModel を育てる大事な手段の1つです。",
+      "提示された固定質問に答えることで、固定的な自己紹介 / プロフィール資産を整える機能です。Pieceとは別枠で、アカウント上に表示される自己紹介として使われます。",
     examples: [
-      "出てきた問いにその場で答えて Reflection を作る",
-      "あとから見返せる形で自分の考えを残す",
+      "固定質問に答えてプロフィールを整える",
+      "アカウント上に表示される自己紹介を更新する",
     ],
     relatedTerms: ["reflection", "mymodel"],
   },
@@ -159,7 +159,7 @@ export const guideTermsJa = Object.freeze({
     termId: "kyomei",
     display: "共鳴",
     reading: "きょうめい",
-    shortDef: "他ユーザーの Reflection に強く響いたときのリアクションです。",
+    shortDef: "他ユーザーの Piece に強く響いたときのリアクションです。",
     longDef:
       "内容に深く重なった、似た感覚を持った、強く理解できたと感じたときに使うリアクションです。単なる「いいね」よりも、感覚の重なりや理解の深さを示すニュアンスがあります。",
     examples: [
@@ -172,7 +172,7 @@ export const guideTermsJa = Object.freeze({
     termId: "hakken",
     display: "発見",
     reading: "はっけん",
-    shortDef: "他ユーザーの Reflection から新しい気づきを得たときのリアクションです。",
+    shortDef: "他ユーザーの Piece から新しい気づきを得たときのリアクションです。",
     longDef:
       "自分にはなかった見方や整理の仕方に出会ったときに使うリアクションです。『分かる』よりも『新しい視点を得た』という感覚に近い反応です。",
     examples: [
@@ -189,7 +189,7 @@ export const guideTermsJa = Object.freeze({
     longDef:
       "自分が送った反応や受け取った反応を見返すための履歴です。どんな内容に共鳴しやすいか、どんな発見が多いかを追うことで、自分の関心や理解の方向も見えてきます。",
     examples: [
-      "最近どの Reflection に反応したかを見る",
+      "最近どの Piece に反応したかを見る",
       "自分が受け取った共鳴の傾向を確認する",
     ],
     relatedTerms: ["kyomei", "hakken", "mymodel"],
@@ -198,11 +198,11 @@ export const guideTermsJa = Object.freeze({
     termId: "follow",
     display: "フォロー",
     reading: "フォロー",
-    shortDef: "他ユーザーを追い、Reflection や感情通知の対象にする関係です。",
+    shortDef: "他ユーザーを追い、Piece や感情通知の対象にする関係です。",
     longDef:
-      "Cocolon では、人とのつながりをフォローで扱います。フォローすると相手の Reflection を閲覧でき、必要に応じて感情通知の受信対象にもできます。",
+      "Cocolon では、人とのつながりをフォローで扱います。フォローすると相手の Piece を閲覧でき、必要に応じて感情通知の受信対象にもできます。",
     examples: [
-      "気になるユーザーをフォローして Reflection を読む",
+      "気になるユーザーをフォローして Piece を読む",
       "感情の流れも受け取りたい相手だけ通知をオンにする",
     ],
     relatedTerms: ["emotion_log", "emotion_notifications", "emotion_input"],

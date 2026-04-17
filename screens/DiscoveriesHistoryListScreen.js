@@ -30,7 +30,7 @@ export default function DiscoveriesHistoryListScreen({ navigation }) {
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="MyModel"
-              accessibilityLabel="MyModelに戻る"
+              accessibilityLabel="Pieceに戻る"
             />
           </View>
 

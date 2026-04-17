@@ -13,7 +13,7 @@ export default function SettingsScreen() {
     <MyWebMenuScroll>
       <View style={styles.homeHeaderRow}>
         <View style={styles.homeTitleRow}>
-          <Text style={styles.homeTitle}>Setting</Text>
+          <Text style={styles.homeTitle}>Settings</Text>
         </View>
       </View>
 

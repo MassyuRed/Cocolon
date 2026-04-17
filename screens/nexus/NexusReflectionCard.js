@@ -67,7 +67,7 @@ export default function NexusReflectionCard({ item, onPress, onPressOwner }) {
       <Text style={styles.questionLabel}>問い</Text>
       <Text style={styles.questionText}>{title || "—"}</Text>
 
-      <Text style={styles.bodyLabel}>Reflection</Text>
+      <Text style={styles.bodyLabel}>Piece</Text>
       <Text style={styles.bodyText}>{body || "—"}</Text>
 
       <View style={styles.metricsRow}>

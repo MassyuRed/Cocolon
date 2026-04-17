@@ -1625,7 +1625,7 @@ function MainTabs() {
               case "MyModel":
               case "MyProfile": label = "Piece"; break;
               case "RankingTop": label = "Ranking"; break;
-              case "Settings": label = "Setting"; break;
+              case "Settings": label = "Settings"; break;
               default: label = route.name;
             }
             const showUnreadBadge = showTabUnreadBadge(route.name);

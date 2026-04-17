@@ -229,7 +229,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             <CocolonBackButton
               onPress={onBack}
               style={styles.backButton}
-              accessibilityLabel="MyWebに戻る"
+              accessibilityLabel="Analysisに戻る"
             />
             <Text style={styles.headerTitle}>今日の問い履歴</Text>
             <View style={styles.headerSpacer} />

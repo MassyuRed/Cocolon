@@ -584,7 +584,7 @@ export default function MyModelCreateScreen({ onBack }) {
                           <View style={styles.preferenceTextWrap}>
                             <Text style={styles.preferenceTitle}>シークレットメモ</Text>
                             <Text style={styles.preferenceDesc}>
-                              オンにするとReflectionsに表示されません。{"\n"}分析レポートには反映されます。
+                              オンにするとPieceに表示されません。{"\n"}分析レポートには反映されます。
                             </Text>
                           </View>
                         </View>

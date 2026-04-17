@@ -357,9 +357,9 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
         return {
           step: 11,
           mode: "info",
-          title: "次はReflection",
-          message: "次はReflectionを作ってみましょう",
-          nextLabel: "MyModelへ",
+          title: "次はPiece",
+          message: "次はPieceを見てみましょう",
+          nextLabel: "Pieceへ",
           onNext: () => {
             setTutorialStep(12);
             requestAnimationFrame(() => {
@@ -1098,7 +1098,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
       // no-op
     }
 
-    Alert.alert("移動できませんでした", "MyModelを開けませんでした。もう一度お試しください。");
+    Alert.alert("移動できませんでした", "Pieceを開けませんでした。もう一度お試しください。");
   }, [navigation]);
 
   // Cocolonガイド（MyWeb）
@@ -1428,11 +1428,11 @@ function MyWebHome({
         {/* パネルヘッダー：MyWeb */}
         <View style={styles.panelHeader}>
           <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>MyWeb</Text>
+            <Text style={styles.panelTitle}>Analysis</Text>
             <CocolonPressable
               style={styles.guideButton}
               onPress={onOpenGuide}
-              accessibilityLabel="MyWebのガイドを開く"
+              accessibilityLabel="Analysisのガイドを開く"
             >
               <Ionicons
                 name="help-circle-outline"

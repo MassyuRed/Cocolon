@@ -79,7 +79,7 @@ export const guidesJa = Object.freeze({
     ],
   },
   myweb: {
-    title: "MyWeb",
+    title: "Analysis",
     summary:
       "入力した内容やレポートを振り返る場所です。過去の記録を見直し、自分の傾向を確認できます。",
     relatedTerms: [
@@ -92,7 +92,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "[[term:myweb|MyWeb]] は、入力した自己情報や履歴を見返すための場所です。日々の積み重ねを後から整理したいときに使います。",
+          "[[term:myweb|Analysis]] は、入力した自己情報や分析レポートを見返すための場所です。日々の積み重ねを後から整理したいときに使います。",
       },
       {
         type: "h2",
@@ -123,9 +123,9 @@ export const guidesJa = Object.freeze({
     ],
   },
   mymodel: {
-    title: "MyModel",
+    title: "Piece",
     summary:
-      "入力した自己情報をもとに作られた自己モデルを扱う場所です。問いと答えを通じて、自分や他者への理解を深めます。",
+      "Pieceを読んだり反応を見たりする場所です。公開された断片を通じて、自分や他者への理解を深めます。",
     relatedTerms: [
       "mymodel",
       "reflection",
@@ -138,7 +138,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "[[term:mymodel|MyModel]] は、入力した自己情報をもとに構築された自己モデルを扱う場所です。問いに答えたり、他ユーザーの内容を読んだりすることで、理解を深めていきます。",
+          "[[term:mymodel|Piece画面]] は、公開された [[term:reflection|Piece]] や関連する反応を通じて、自分や他者を立体的に見る場所です。読む・反応する・整える流れを通して理解を深めていきます。",
       },
       {
         type: "h2",
@@ -147,8 +147,8 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "[[term:reflection_create|ReflectionCreate]] で問いに答え、新しい [[term:reflection|Reflection]] を作る",
-          "自分やフォロー中ユーザーの [[term:reflection|Reflection]] を読む",
+          "[[term:reflection_create|ProfileCreate]] で固定的な自己紹介 / プロフィール資産を整える",
+          "自分やフォロー中ユーザーの [[term:reflection|Piece]] を読む",
           "内容に対して [[term:kyomei|共鳴]] や [[term:hakken|発見]] を送り、反応を残す",
           "受け取った反応や自分の反応を [[term:reaction_history|履歴]] で確認する",
         ],
@@ -160,12 +160,12 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "Home や MyWeb に蓄積された情報が土台になり、MyModel ではそれを「問いと答え」の形で立体的に扱います。読むだけでも使えますが、答えていくほど自分の輪郭が見えやすくなります。",
+          "Home や [[term:myweb|Analysis]] に蓄積された情報が土台になり、Piece画面ではそれを Piece や反応の流れとして立体的に扱います。読むほど、自分と他者の見え方がはっきりしていきます。",
       },
       {
         type: "note",
         text:
-          "MyModel は単なる閲覧画面ではなく、問いに答えたり、他者に反応したりしながら育っていく場所です。",
+          "Piece画面は単なる閲覧画面ではなく、読む・反応する・ProfileCreate を整える流れの中心になる場所です。",
       },
     ],
   },

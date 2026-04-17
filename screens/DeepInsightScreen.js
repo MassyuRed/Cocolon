@@ -369,7 +369,7 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
 
               <Pressable style={styles.backPill} onPress={onBack}>
                 <Ionicons name="chevron-back" size={16} color={colors.TEXT_SUBTLE} />
-                <Text style={styles.backText}>{t("back_label", "MyWeb")}</Text>
+                <Text style={styles.backText}>{t("back_label", "Analysis")}</Text>
               </Pressable>
             </View>
 
@@ -520,7 +520,7 @@ export default function DeepInsightScreen({ onBack, onOpenSubscription }) {
                               <View style={styles.preferenceTextWrap}>
                                 <Text style={styles.preferenceTitle}>シークレットメモ</Text>
                                 <Text style={styles.preferenceDesc}>
-                                  オンにすると他ユーザーのMyModel照会時に反映されなくなります。
+                                  オンにすると他ユーザーがPiece画面を見たときに反映されなくなります。
                                 </Text>
                               </View>
                             </View>

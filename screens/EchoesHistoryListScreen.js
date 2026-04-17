@@ -247,7 +247,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
       <CocolonPressable
         style={styles.card}
         onPress={() => openReflectionDetail(item)}
-        accessibilityLabel="共鳴したReflectionを開く"
+        accessibilityLabel="共鳴したPieceを開く"
       >
         <Text style={styles.itemTitle} numberOfLines={2}>
           {title}
@@ -283,7 +283,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="MyModel"
-              accessibilityLabel="MyModelに戻る"
+              accessibilityLabel="Pieceに戻る"
             />
           </View>
 
@@ -363,7 +363,7 @@ export default function EchoesHistoryListScreen({ navigation }) {
             onEndReachedThreshold={0.4}
             onEndReached={loadMore}
             ListEmptyComponent={
-              <Text style={styles.emptyText}>共鳴したReflectionはまだありません。</Text>
+              <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>
             }
             ListFooterComponent={
               loadingMore ? (

@@ -98,7 +98,7 @@ export default function EchoesHistoryDetailScreen({ navigation, route }) {
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="MyModel"
-              accessibilityLabel="MyModelに戻る"
+              accessibilityLabel="Pieceに戻る"
             />
           </View>
           <View style={styles.headerCenter}>
@@ -110,15 +110,15 @@ export default function EchoesHistoryDetailScreen({ navigation, route }) {
         <View style={styles.messageCard}>
           {failed ? (
             <>
-              <Text style={styles.messageTitle}>Reflection詳細を開けませんでした</Text>
+              <Text style={styles.messageTitle}>Piece詳細を開けませんでした</Text>
               <Text style={styles.messageText}>
-                共通Reflection詳細の route 登録状況を確認してください。
+                共通Piece詳細画面の登録状況を確認してください。
               </Text>
             </>
           ) : (
             <>
               <ActivityIndicator />
-              <Text style={styles.messageText}>Reflection詳細へ移動しています…</Text>
+              <Text style={styles.messageText}>Piece詳細へ移動しています…</Text>
             </>
           )}
         </View>
