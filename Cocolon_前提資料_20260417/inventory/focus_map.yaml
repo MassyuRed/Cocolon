@@ -1,0 +1,303 @@
+meta:
+  revision_date: '2026-04-17'
+  source_repositories:
+  - Cocolon
+  - mashos-api
+  purpose: 華恋が全体構造を踏まえて修正対象を漏らさず辿るためのシステム別マップ
+read_order:
+- 00_華恋用_READ_FIRST.md
+- 03_Cocolon_命名体系.md
+- 01_Cocolon_全体構造資料.md
+- 02_Cocolon_国家システム資料.md
+- 04_Cocolon_変更テーマ別チェックリスト.md
+- 05_Cocolon_ルールファイル索引.md
+- 06_Cocolon_ファイル名変更保留台帳.md
+systems:
+  app_root:
+    meaning: 全体ナビゲーション、Provider、startup/unread orchestration の中心
+    frontend:
+    - App.js
+    - AuthContext.js
+    - SubscriptionContext.js
+    - TutorialContext.js
+    - UnreadContext.js
+    - index.js
+    backend:
+    - ai/services/ai_inference/app.py
+    - ai/services/ai_inference/api_app_bootstrap.py
+    - ai/services/ai_inference/startup_snapshot_store.py
+    - ai/services/ai_inference/response_microcache.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    - scripts/check_no_direct_supabase.py
+    must_also_check:
+    - startup snapshot / unread の変更は App.js だけで閉じない
+    - public API / response shape を変える時は contract registry と tests を確認する
+  input_home:
+    meaning: 感情入力・Notice・Today Question・Input summary・global summary・EmotionGeneratedPiece
+      の入口
+    frontend:
+    - screens/InputScreen.js
+    - components/NoticeModal.js
+    - components/TodayQuestionCard.js
+    - components/TodayQuestionModal.js
+    - components/EmotionReflectionPreviewModal.js
+    - screens/NoticeHistoryScreen.js
+    - screens/TodayQuestionHistoryScreen.js
+    - lib/noticeApi.js
+    - lib/todayQuestionApi.js
+    - lib/emotionReflectionApi.js
+    backend:
+    - ai/services/ai_inference/api_emotion_submit.py
+    - ai/services/ai_inference/api_notice.py
+    - ai/services/ai_inference/api_today_question.py
+    - ai/services/ai_inference/api_input_summary.py
+    - ai/services/ai_inference/api_global_summary.py
+    - ai/services/ai_inference/api_emotion_reflection.py
+    - ai/services/ai_inference/emotion_reflection_generation_service.py
+    - ai/services/ai_inference/emotion_reflection_store.py
+    - ai/services/ai_inference/startup_snapshot_store.py
+    - ai/services/ai_inference/astor_snapshot_enqueue.py
+    - ai/services/ai_inference/astor_worker.py
+    - ai/services/ai_inference/publish_governance.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - scripts/check_no_direct_supabase.py
+    must_also_check:
+    - 入力起点で派生 state がある場合は worker/governance まで確認する
+    - InputScreen だけ直して終わらせない
+  analysis_myweb:
+    meaning: UI 名は Analysis、内部 canonical は MyWeb の領域
+    frontend:
+    - screens/MyWebScreen.js
+    - screens/MyWebContentFirstScreen.js
+    - screens/MyWebEmotionAnalysisScreen.js
+    - screens/MyWebReportHistoryScreen.js
+    - screens/MyWebReportViewerScreen.js
+    - screens/MyWebHistoryScreen.js
+    - screens/MyWebInputHistoryMenuScreen.js
+    - screens/DeepInsightScreen.js
+    - lib/apiClient.js
+    backend:
+    - ai/services/ai_inference/api_myweb_reports.py
+    - ai/services/ai_inference/api_myweb_reads.py
+    - ai/services/ai_inference/api_report_reads.py
+    - ai/services/ai_inference/api_deep_insight.py
+    - ai/services/ai_inference/api_cron_distribution.py
+    - ai/services/ai_inference/publish_governance.py
+    - ai/services/ai_inference/response_microcache.py
+    - ai/services/ai_inference/astor_material_snapshots.py
+    - ai/services/ai_inference/astor_worker.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    must_also_check:
+    - MyWebScreen は hub なので単一画面として扱わない
+    - 表示変更でも read/unread / publish_governance / report_reads まで確認する
+  self_structure:
+    meaning: 自己構造レポート latest / history / viewer / mode gating
+    frontend:
+    - screens/MyWebSelfStructureScreen.js
+    - screens/SelfStructureReportGenerateScreen.js
+    - screens/SelfStructureReportHistoryScreen.js
+    - screens/SelfStructureReportViewerScreen.js
+    - components/selfStructure/SelfStructureDeepRenderer.js
+    backend:
+    - ai/services/ai_inference/api_myprofile.py
+    - ai/services/ai_inference/api_myprofile_reports_read.py
+    - ai/services/ai_inference/astor_material_snapshots.py
+    - ai/services/ai_inference/astor_worker.py
+    - ai/services/ai_inference/astor_myprofile_report.py
+    - ai/services/ai_inference/analysis_engine/self_structure_engine
+    - ai/services/ai_inference/subscription.py
+    - ai/services/ai_inference/subscription_store.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    must_also_check:
+    - フロントの deep 表記と backend の structural canonical を混同しない
+    - latest preview と history/viewer は同じではない
+  nexus_piece:
+    meaning: Piece 画面全体の内部システム名は Nexus。旧 MyModel 名が route/file/API に残る
+    frontend:
+    - screens/MyModelEntryScreen.js
+    - screens/NexusScreen.js
+    - screens/MyModelScreen.js
+    - screens/MyModelReflectionsScreen.js
+    - screens/MyModelReactionHistoryScreen.js
+    - screens/nexus/NexusReflectionCard.js
+    - lib/nexusApi.js
+    backend:
+    - ai/services/ai_inference/api_nexus.py
+    - ai/services/ai_inference/api_mymodel_qna.py
+    - ai/services/ai_inference/generated_reflection_display.py
+    - ai/services/ai_inference/astor_reflection_store.py
+    - ai/services/ai_inference/astor_reflection_engine.py
+    - ai/services/ai_inference/publish_governance.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    must_also_check:
+    - UI の Piece と内部の Nexus を混同しない
+    - NexusScreen だけで完結しない。Entry / MyModelScreen / Reflections も確認する
+  profile_create:
+    meaning: 固定的な自己紹介 / プロフィール資産。UI 名は ProfileCreate、内部 canonical は MyModelCreate
+    frontend:
+    - screens/MyModelCreateScreen.js
+    - screens/AccountScreen.js
+    backend:
+    - ai/services/ai_inference/api_mymodel_create.py
+    - ai/services/ai_inference/mymodel_entitlements.py
+    - ai/services/ai_inference/subscription.py
+    - ai/services/ai_inference/subscription_store.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    must_also_check:
+    - ProfileCreate と EmotionGeneratedPiece を同じ作成機能として扱わない
+    - UI 名は新名称でも public route/storage canonical は旧名を維持している
+  emotion_generated_piece:
+    meaning: 華恋用の補助用語。Input 起点で current emotion から preview/publish する Piece
+    frontend:
+    - screens/InputScreen.js
+    - components/EmotionReflectionPreviewModal.js
+    - lib/emotionReflectionApi.js
+    backend:
+    - ai/services/ai_inference/api_emotion_reflection.py
+    - ai/services/ai_inference/emotion_reflection_generation_service.py
+    - ai/services/ai_inference/emotion_reflection_store.py
+    - ai/services/ai_inference/reflection_publish_entitlements.py
+    - ai/services/ai_inference/emotion_submit_service.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    must_also_check:
+    - official repo 名ではない。華恋が混乱回避のために使う補助用語
+    - publish 時は emotion submit も巻き込むため input counts / global summary / friend feed
+      へ影響する
+  emotionlog_social:
+    meaning: 内部名は EmotionLog / friends 互換。UI 名は 感情通知
+    frontend:
+    - screens/EmotionLogScreen.js
+    - screens/FollowListScreen.js
+    - screens/AccountScreen.js
+    backend:
+    - ai/services/ai_inference/api_friends.py
+    - ai/services/ai_inference/astor_friend_feed_store.py
+    - ai/services/ai_inference/startup_snapshot_store.py
+    - ai/services/ai_inference/response_microcache.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    must_also_check:
+    - UI は EmotionLog でも backend は /emotion-log と /friends 互換を併存する
+    - 感情通知では memo 本文は出さない設計を崩さない
+  ranking:
+    meaning: ランキング一式
+    frontend:
+    - screens/RankingTopScreen.js
+    - screens/EmotionRankingScreen.js
+    - screens/InputCountRankingScreen.js
+    - screens/InputLengthRankingScreen.js
+    - screens/LoginStreakRankingScreen.js
+    - screens/MyModelQuestionsRankingScreen.js
+    - screens/MyModelEchoesRankingScreen.js
+    - screens/MyModelDiscoveriesRankingScreen.js
+    backend:
+    - ai/services/ai_inference/api_ranking.py
+    - ai/services/ai_inference/api_ranking_login_streak.py
+    - ai/services/ai_inference/api_ranking_mymodel_views.py
+    - ai/services/ai_inference/api_ranking_mymodel_resonances.py
+    - ai/services/ai_inference/api_ranking_mymodel_discoveries.py
+    - ai/services/ai_inference/astor_ranking_boards.py
+    - ai/services/ai_inference/astor_ranking_enqueue.py
+    - ai/services/ai_inference/astor_worker.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    must_also_check:
+    - ランキングは refresh/inspect job を持つので API だけで見ない
+  account_settings:
+    meaning: Account / Settings / Subscription / report distribution
+    frontend:
+    - screens/AccountScreen.js
+    - screens/SettingsScreen.js
+    - screens/SettingsAppSettingsScreen.js
+    - screens/SettingsOtherScreen.js
+    - screens/SubscriptionSelectScreen.js
+    - lib/subscriptionApi.js
+    - lib/reportDistributionApi.js
+    - lib/iap/iapConfig.js
+    - lib/iap/iapService.js
+    backend:
+    - ai/services/ai_inference/api_account_lifecycle.py
+    - ai/services/ai_inference/api_account_status.py
+    - ai/services/ai_inference/api_account_visibility.py
+    - ai/services/ai_inference/api_subscription.py
+    - ai/services/ai_inference/api_report_distribution_settings.py
+    - ai/services/ai_inference/subscription.py
+    - ai/services/ai_inference/subscription_store.py
+    - ai/services/ai_inference/report_distribution_settings_store.py
+    - ai/services/ai_inference/publish_governance.py
+    rule_files:
+    - Cocolon/SUBSCRIPTION_RELEASE_PHASE3.md
+    - Cocolon/SUBSCRIPTION_RELEASE_PHASE4.md
+    - ai/docs/iap_subscription_update.md
+    must_also_check:
+    - 課金 UI / runtime / backend env / live console check が分かれている
+  startup_bootstrap:
+    meaning: /app/bootstrap と /app/startup による起動時断面
+    frontend:
+    - App.js
+    - UnreadContext.js
+    - components/NoticeModal.js
+    - components/TodayQuestionCard.js
+    backend:
+    - ai/services/ai_inference/api_app_bootstrap.py
+    - ai/services/ai_inference/startup_snapshot_store.py
+    - ai/services/ai_inference/api_notice.py
+    - ai/services/ai_inference/api_today_question.py
+    - ai/services/ai_inference/api_report_reads.py
+    - ai/services/ai_inference/api_input_summary.py
+    - ai/services/ai_inference/api_global_summary.py
+    - ai/services/ai_inference/response_microcache.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    must_also_check:
+    - startup sections を増減する時は App.js と startup_snapshot_store.py を必ずペアで見る
+  tutorial:
+    meaning: チュートリアル状態、overlay 測定、proxy press 共通基盤
+    frontend:
+    - TutorialContext.js
+    - components/TutorialOverlay.js
+    - components/TutorialStartModal.js
+    - screens/InputScreen.js
+    - screens/MyWebScreen.js
+    - screens/MyModelScreen.js
+    - screens/MyModelReflectionsScreen.js
+    - screens/EmotionLogScreen.js
+    backend:
+    - ai/docs/TUTORIAL_STABILITY_REDESIGN.md
+    rule_files:
+    - ai/docs/TUTORIAL_STABILITY_REDESIGN.md
+    must_also_check:
+    - tutorial target 測定は screen 個別実装ではなく共通 overlay 基盤で確認する
+    - proxy press を壊す変更は実機差分を生む
+  api_contract:
+    meaning: mobile-facing public API 契約と互換性
+    frontend:
+    - lib/apiClient.js
+    - App.js
+    backend:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    - ai/services/ai_inference/api_contract_registry.py
+    - ai/services/ai_inference/middleware_api_contract.py
+    - ai/tests/contract
+    - scripts/check_no_direct_supabase.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    - ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md
+    must_also_check:
+    - breaking change は新 endpoint/version を作る
+    - existing request/response は additive-only
+    - RN は display-only を守る

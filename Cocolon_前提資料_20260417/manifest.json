@@ -1,0 +1,98 @@
+{
+  "revision_date": "2026-04-17",
+  "source_repositories": [
+    "Cocolon",
+    "mashos-api"
+  ],
+  "source_mode": "local_snapshot",
+  "file_counts": {
+    "Cocolon": 133,
+    "mashos-api": 238
+  },
+  "docs": [
+    {
+      "path": "00_華恋用_READ_FIRST.md",
+      "purpose": "最初に読む運用前提"
+    },
+    {
+      "path": "01_Cocolon_全体構造資料.md",
+      "purpose": "全体構造と入口の復元"
+    },
+    {
+      "path": "02_Cocolon_国家システム資料.md",
+      "purpose": "国家システムと derived state の復元"
+    },
+    {
+      "path": "03_Cocolon_命名体系.md",
+      "purpose": "Piece/Nexus/MyModel/MyWeb/Analysis の解釈ルール"
+    },
+    {
+      "path": "04_Cocolon_変更テーマ別チェックリスト.md",
+      "purpose": "変更テーマから確認順を逆引き"
+    },
+    {
+      "path": "05_Cocolon_ルールファイル索引.md",
+      "purpose": "見落とし禁止の policy/rule file 索引"
+    },
+    {
+      "path": "06_Cocolon_ファイル名変更保留台帳.md",
+      "purpose": "rename phase の backlog"
+    },
+    {
+      "path": "07_Cocolon_最新スナップショット差分.md",
+      "purpose": "前回確認スナップショットとの差分"
+    },
+    {
+      "path": "inventory/focus_map.yaml",
+      "purpose": "system 単位の主要ファイルマップ"
+    },
+    {
+      "path": "inventory/Cocolon_inventory_full.csv",
+      "purpose": "Cocolon 全件 inventory"
+    },
+    {
+      "path": "inventory/mashos-api_inventory_full.csv",
+      "purpose": "mashos-api 全件 inventory"
+    },
+    {
+      "path": "inventory/frontend_endpoint_map.csv",
+      "purpose": "frontend -> endpoint 対応"
+    },
+    {
+      "path": "inventory/backend_route_inventory.csv",
+      "purpose": "backend route 全件"
+    },
+    {
+      "path": "inventory/public_api_registry.csv",
+      "purpose": "public mobile-facing contract 一覧"
+    },
+    {
+      "path": "inventory/worker_job_map.csv",
+      "purpose": "ASTOR worker job family 一覧"
+    }
+  ],
+  "current_snapshot_changed_files": {
+    "Cocolon": [
+      "App.js",
+      "guide/guidesJa.js",
+      "guide/termsJa.js",
+      "lib/iap/iapRuntimeCatalog.js",
+      "screens/DeepInsightScreen.js",
+      "screens/DiscoveriesHistoryDetailScreen.js",
+      "screens/DiscoveriesHistoryListScreen.js",
+      "screens/EchoesHistoryDetailScreen.js",
+      "screens/EchoesHistoryListScreen.js",
+      "screens/MyModelCreateScreen.js",
+      "screens/MyWebReportHistoryScreen.js",
+      "screens/MyWebReportViewerScreen.js",
+      "screens/MyWebScreen.js",
+      "screens/SettingsScreen.js",
+      "screens/TodayQuestionHistoryScreen.js",
+      "screens/nexus/NexusReflectionCard.js"
+    ],
+    "mashos-api": [
+      "ai/services/ai_inference/api_deep_insight.py",
+      "ai/services/ai_inference/subscription_bootstrap_store.py"
+    ]
+  }
+}
