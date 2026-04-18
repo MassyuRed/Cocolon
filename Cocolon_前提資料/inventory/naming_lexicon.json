@@ -69,5 +69,25 @@
       "api_friends.py /emotion-log/*"
     ],
     "assistant_rule": "UI copy として扱う。実装検索は EmotionLog / friends / emotion-log で追う。"
+  },
+  "Cocolon": {
+    "type": "project_name",
+    "current_code_fact": "Whole project / premise-doc / architecture name.",
+    "assistant_rule": "全体プロジェクト名として扱う。app-facing 名とは分ける。"
+  },
+  "Emlis": {
+    "type": "app_facing_name_and_persona",
+    "current_code_fact": "User-facing app / reply persona name used by EmlisAI.",
+    "assistant_rule": "ユーザーに向き合う名として扱う。backend engine 名 EmlisAI とは分ける。"
+  },
+  "EmlisAI": {
+    "type": "backend_immediate_response_engine",
+    "current_code_fact": "Input immediate response engine wired through emotion_submit_service.py and input_feedback.comment_text.",
+    "assistant_rule": "入力直後返答の server-owned engine として扱う。template comment と同一視しない。"
+  },
+  "入力後コメント": {
+    "type": "legacy_surface_term",
+    "current_code_fact": "Public surface still uses input_feedback.comment_text while reply generation is now EmlisAI-driven.",
+    "assistant_rule": "surface 上の見え方として扱う。実装探索は EmlisAI immediate response で行う。"
   }
 }

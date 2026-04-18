@@ -49,7 +49,7 @@ Cocolon,lib/apiClient.js,lib,service_lib,client_service,217,1,lib/supabase.ts,
 Cocolon,lib/emotionReflectionApi.js,lib,service_lib,client_service,18,1,lib/apiClient.js,/emotion/reflection/cancel | /emotion/reflection/preview | /emotion/reflection/publish | /emotion/reflection/quota
 Cocolon,lib/historyRetentionLabel.js,lib,service_lib,client_service,55,0,,
 Cocolon,lib/iap/iapConfig.js,lib,iap,client_service,182,0,,
-Cocolon,lib/iap/iapRuntimeCatalog.js,lib,iap,client_service,458,1,lib/iap/iapConfig.js,
+Cocolon,lib/iap/iapRuntimeCatalog.js,lib,iap,client_service,474,1,lib/iap/iapConfig.js,
 Cocolon,lib/iap/iapService.js,lib,iap,client_service,874,4,lib/subscriptionApi.js | lib/supabase.ts | lib/iap/iapConfig.js | lib/iap/iapRuntimeCatalog.js,
 Cocolon,lib/iap/index.js,lib,iap,client_service,10,0,,
 Cocolon,lib/inputDraftStorage.js,lib,service_lib,client_service,142,0,,

@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-04-17",
+  "revision_date": "2026-04-18",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,7 +7,7 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 133,
-    "mashos-api": 238
+    "mashos-api": 247
   },
   "docs": [
     {
@@ -73,26 +73,27 @@
   ],
   "current_snapshot_changed_files": {
     "Cocolon": [
-      "App.js",
-      "guide/guidesJa.js",
-      "guide/termsJa.js",
-      "lib/iap/iapRuntimeCatalog.js",
-      "screens/DeepInsightScreen.js",
-      "screens/DiscoveriesHistoryDetailScreen.js",
-      "screens/DiscoveriesHistoryListScreen.js",
-      "screens/EchoesHistoryDetailScreen.js",
-      "screens/EchoesHistoryListScreen.js",
-      "screens/MyModelCreateScreen.js",
-      "screens/MyWebReportHistoryScreen.js",
-      "screens/MyWebReportViewerScreen.js",
-      "screens/MyWebScreen.js",
-      "screens/SettingsScreen.js",
-      "screens/TodayQuestionHistoryScreen.js",
-      "screens/nexus/NexusReflectionCard.js"
+      "lib/iap/iapRuntimeCatalog.js"
     ],
     "mashos-api": [
-      "ai/services/ai_inference/api_deep_insight.py",
-      "ai/services/ai_inference/subscription_bootstrap_store.py"
+      "ai/services/ai_inference/api_emotion_reflection.py",
+      "ai/services/ai_inference/api_emotion_submit.py",
+      "ai/services/ai_inference/api_subscription.py",
+      "ai/services/ai_inference/emotion_submit_service.py",
+      "ai/services/ai_inference/subscription_bootstrap_store.py",
+      "ai/services/ai_inference/emlis_ai_capability.py",
+      "ai/services/ai_inference/emlis_ai_context_service.py",
+      "ai/services/ai_inference/emlis_ai_greeting_state_store.py",
+      "ai/services/ai_inference/emlis_ai_prompt.py",
+      "ai/services/ai_inference/emlis_ai_reply_service.py",
+      "ai/services/ai_inference/emlis_ai_style_profile_service.py",
+      "ai/services/ai_inference/emlis_ai_types.py",
+      "ai/services/ai_inference/emlis_ai_world_model_service.py",
+      "ai/services/ai_inference/emotion_history_search_service.py"
     ]
-  }
+  },
+  "external_runtime_notes": [
+    "EmlisAI greeting-state depends on Supabase table emlis_ai_greeting_state.",
+    "Repo inventory below reflects repo-synced structure; DB / patch artifacts may need separate sync."
+  ]
 }

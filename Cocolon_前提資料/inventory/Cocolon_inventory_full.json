@@ -555,7 +555,7 @@
     "kind": "lib",
     "category": "iap",
     "systems": "client_service",
-    "lines": 458,
+    "lines": 474,
     "local_import_count": 1,
     "local_imports": "lib/iap/iapConfig.js",
     "endpoints": ""

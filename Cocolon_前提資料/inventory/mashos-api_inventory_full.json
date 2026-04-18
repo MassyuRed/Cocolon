@@ -697,10 +697,10 @@
     "path": "ai/services/ai_inference/api_emotion_reflection.py",
     "kind": "api",
     "category": "route",
-    "systems": "input_home|nexus_piece",
-    "lines": 265,
+    "systems": "input_home|nexus_piece|emlis_ai_response",
+    "lines": 267,
     "local_import_count": 7,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/emotion_reflection_generation_service.py | ai/services/ai_inference/emotion_reflection_store.py | ai/services/ai_inference/emotion_submit_service.py | ai/services/ai_inference/reflection_publish_entitlements.py | ai/services/ai_inference/subscription.py",
+    "local_imports": "api_emotion_submit | client_compat | emotion_reflection_generation_service | emotion_reflection_store | emotion_submit_service | reflection_publish_entitlements | subscription",
     "routes": "GET /emotion/reflection/quota | POST /emotion/reflection/preview | POST /emotion/reflection/publish | POST /emotion/reflection/cancel"
   },
   {
@@ -719,10 +719,10 @@
     "path": "ai/services/ai_inference/api_emotion_submit.py",
     "kind": "api",
     "category": "route",
-    "systems": "input_home",
-    "lines": 2034,
-    "local_import_count": 16,
-    "local_imports": "ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_core.py | ai/services/ai_inference/astor_friend_feed_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/input_feedback_text_templates.py | ai/services/ai_inference/response_microcache.py",
+    "systems": "input_home|emlis_ai_response",
+    "lines": 1983,
+    "local_import_count": 17,
+    "local_imports": "astor_core | astor_ranking_enqueue | astor_account_status_enqueue | astor_friend_feed_enqueue | astor_global_summary_enqueue | astor_snapshot_enqueue | client_compat | supabase_client | supabase_auth_token_cache | response_microcache | input_feedback_text_templates | subscription_store | subscription | generation_lock | astor_myprofile_report | emotion_submit_service | astor_job_queue",
     "routes": "POST /emotion/submit"
   },
   {
@@ -939,10 +939,10 @@
     "path": "ai/services/ai_inference/api_subscription.py",
     "kind": "api",
     "category": "route",
-    "systems": "account_settings",
+    "systems": "account_settings|emlis_ai_response",
     "lines": 557,
     "local_import_count": 8,
-    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_bootstrap_store.py | ai/services/ai_inference/subscription_projection.py | ai/services/ai_inference/subscription_verifier_android.py | ai/services/ai_inference/subscription_verifier_ios.py",
+    "local_imports": "active_users_store | api_emotion_submit | client_compat | subscription | subscription_bootstrap_store | subscription_projection | subscription_verifier_android | subscription_verifier_ios",
     "routes": "GET /subscription/bootstrap | GET /subscription/me | POST /subscription/update"
   },
   {
@@ -1299,6 +1299,105 @@
   },
   {
     "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_capability.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response|account_settings",
+    "lines": 86,
+    "local_import_count": 2,
+    "local_imports": "emlis_ai_types | subscription",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_context_service.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response|input_home",
+    "lines": 167,
+    "local_import_count": 7,
+    "local_imports": "emlis_ai_greeting_state_store | emlis_ai_types | emotion_history_search_service | supabase_client | today_question_store | api_input_summary | api_myweb_reads",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_greeting_state_store.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response",
+    "lines": 176,
+    "local_import_count": 2,
+    "local_imports": "emlis_ai_types | supabase_client",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_prompt.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response",
+    "lines": 44,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_reply_service.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response|input_home",
+    "lines": 198,
+    "local_import_count": 6,
+    "local_imports": "emlis_ai_capability | emlis_ai_context_service | emlis_ai_style_profile_service | emlis_ai_types | emlis_ai_world_model_service | input_feedback_text_templates",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_style_profile_service.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response",
+    "lines": 91,
+    "local_import_count": 1,
+    "local_imports": "emlis_ai_types",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_types.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response",
+    "lines": 130,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emlis_ai_world_model_service.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response",
+    "lines": 217,
+    "local_import_count": 1,
+    "local_imports": "emlis_ai_types",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/services/ai_inference/emotion_history_search_service.py",
+    "kind": "service",
+    "category": "service_store_governance",
+    "systems": "emlis_ai_response|input_home",
+    "lines": 181,
+    "local_import_count": 1,
+    "local_imports": "supabase_client",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
     "path": "ai/services/ai_inference/emotion_reflection_generation_service.py",
     "kind": "service",
     "category": "service_store_governance",
@@ -1324,10 +1423,10 @@
     "path": "ai/services/ai_inference/emotion_submit_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "",
-    "lines": 171,
-    "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/response_microcache.py",
+    "systems": "input_home|emlis_ai_response",
+    "lines": 219,
+    "local_import_count": 5,
+    "local_imports": "api_emotion_submit | emlis_ai_reply_service | response_microcache | subscription | subscription_store",
     "routes": ""
   },
   {
@@ -1687,10 +1786,10 @@
     "path": "ai/services/ai_inference/subscription_bootstrap_store.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "account_settings|startup_bootstrap",
-    "lines": 809,
-    "local_import_count": 1,
-    "local_imports": "ai/services/ai_inference/supabase_client.py",
+    "systems": "account_settings|startup_bootstrap|emlis_ai_response",
+    "lines": 855,
+    "local_import_count": 2,
+    "local_imports": "emlis_ai_capability | supabase_client",
     "routes": ""
   },
   {

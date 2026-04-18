@@ -1,22 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_machine_first
 title: "Cocolon 全体構造資料"
-revision_date: "2026-04-17"
+revision_date: "2026-04-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 133
-  mashos-api: 238
-purpose: "華恋が修正前に全体像・入口・命名状態を高速復元する"
+  mashos-api: 247
+purpose: "華恋が EmlisAI 実装後の全体像・入口・命名状態を高速復元する"
 ---
 
 # 1. 1行定義
 
 現行の Cocolon は、**App.js / Provider / Tab 導線** を入口に、  
 **Input / Analysis(MyWeb) / Self Structure / Piece(Nexus) / EmotionLog / Ranking / Account/Settings** が並び、  
-裏側で **mashos-api の route / snapshot / worker / publish governance / startup snapshot** が支える構造です。
+裏側で **mashos-api の route / snapshot / worker / publish governance / startup snapshot** が支える構造です。  
+
+今回ここへ新しく入ったのが、**Input 直後返答を server-owned で返す EmlisAI immediate response path** です。
 
 # 2. 全体レイヤ図
 
@@ -32,6 +34,8 @@ flowchart TB
   Account[Account / Settings / Subscription]
   Libs[lib/apiClient + service libs]
   APIs[api_* routes]
+  Save[emotion submit shared service]
+  Emlis[EmlisAI immediate response]
   Queue[astor_job_queue + generation_lock]
   Worker[astor_material_snapshots + astor_worker]
   Gov[publish_governance + startup_snapshot_store + response_microcache]
@@ -53,10 +57,11 @@ flowchart TB
   Account --> Libs
 
   Libs --> APIs
-  APIs --> Queue
+  APIs --> Save
+  Save --> Emlis
+  Save --> Queue
   Queue --> Worker
   Worker --> Gov
-  Gov --> APIs
 ```
 
 # 3. いまの visible 名と internal 名
@@ -71,53 +76,24 @@ flowchart TB
 | EmotionGeneratedPiece | Piece作成 | emotion/reflection flow | `screens/InputScreen.js`, `api_emotion_reflection.py` |
 | 感情通知 | 感情通知 / 感情ログ | EmotionLog / /emotion-log / legacy /friends | `screens/EmotionLogScreen.js`, `api_friends.py` |
 | Settings | Settings | Settings stack | `screens/SettingsScreen.js` |
+| Emlis | Emlis | app-facing persona | `InputScreen.js` / subscription copy / EmlisAI reply |
+| EmlisAI | EmlisAI | immediate response engine | `emotion_submit_service.py`, `emlis_ai_reply_service.py` |
 
-# 4. App.js が現在どう読めるか
+# 4. App / surface 側の current fact
 
-## 4-1. visible tab label は新名称
-```js
-          tabBarLabel: ({ focused, color }) => {
-            let label;
-            switch (route.name) {
-              case "Input": label = "Home"; break;
-              case "MyWeb": label = "Analysis"; break;
-              case "MyModel":
-              case "MyProfile": label = "Piece"; break;
-              case "RankingTop": label = "Ranking"; break;
-              case "Settings": label = "Settings"; break;
-              default: label = route.name;
-```
+## 4-1. Input 直後返答の UI surface は既存導線を使う
 
-この時点での事実は 2 つです。
+EmlisAI は新しい画面を増やしていません。  
+`InputScreen.js` は引き続き `input_feedback.comment_text` を受け取り、入力後モーダルで表示します。  
 
-- **表示名** は `Analysis / Piece / Settings`
-- しかし **route 名** は `MyWeb / MyModel / MyProfile / Settings`
+つまり、**UI の source of truth は変わらず、返答中身だけが server 側で EmlisAI に差し替わった**構造です。
 
-つまり、**表示名の整理は進んでいるが、内部 route/file 名の rename はまだ終わっていない**。
+## 4-2. Cocolon 側の repo-synced 変更は `lib/iap/iapRuntimeCatalog.js`
 
-## 4-2. Piece 領域の入口は MyModelEntryScreen
-```js
-import React from "react";
+Cocolon 側で repo-synced に変わったのは、EmlisAI を plan feature として説明する課金 runtime copy です。  
+Plus / Premium の差分 copy はこのファイルで normalize されます。  
 
-import MyModelScreen from "./MyModelScreen";
-import NexusScreen from "./NexusScreen";
-
-export default function MyModelEntryScreen(props) {
-  const hasLinkPayload = !!props?.linkPayload;
-
-  if (hasLinkPayload) {
-    return <MyModelScreen {...props} />;
-  }
-
-  return <NexusScreen {...props} />;
-```
-
-この時点での事実は次です。
-
-- 通常遷移では `NexusScreen`
-- `linkPayload` がある時だけ `MyModelScreen`
-
-つまり、**Piece 領域の主入口は Nexus に寄っているが、旧 MyModel 名の fallback / legacy 面もまだ残っている**。
+したがって、EmlisAI の体験差分を触る時は backend だけ見ず、**`lib/iap/iapRuntimeCatalog.js` も確認**します。
 
 # 5. システム単位の読み方
 
@@ -133,13 +109,36 @@ export default function MyModelEntryScreen(props) {
 
 backend 側:
 - `api_emotion_submit.py`
+- `emotion_submit_service.py`
 - `api_notice.py`
 - `api_today_question.py`
 - `api_input_summary.py`
 - `api_global_summary.py`
 - `api_emotion_reflection.py`
 
-## 5-2. Analysis / MyWeb
+## 5-2. EmlisAI immediate response
+主対象:
+- `emotion_submit_service.py`
+- `api_emotion_submit.py`
+- `api_emotion_reflection.py`
+- `emlis_ai_capability.py`
+- `emlis_ai_context_service.py`
+- `emlis_ai_world_model_service.py`
+- `emlis_ai_style_profile_service.py`
+- `emlis_ai_reply_service.py`
+- `emlis_ai_greeting_state_store.py`
+- `emotion_history_search_service.py`
+- `input_feedback_text_templates.py`（fallback）
+- `api_subscription.py`
+- `subscription_bootstrap_store.py`
+- `lib/iap/iapRuntimeCatalog.js`
+
+読み方の要点:
+- route ではなく `emotion_submit_service.py` を source of truth として読む
+- EmlisAI は immediate/synchronous path であり、worker family ではない
+- tier 差分は capability と subscription copy をセットで見る
+
+## 5-3. Analysis / MyWeb
 主対象:
 - `screens/MyWebScreen.js`
 - `screens/MyWebContentFirstScreen.js`
@@ -156,7 +155,7 @@ backend 側:
 - `publish_governance.py`
 - `response_microcache.py`
 
-## 5-3. Self Structure
+## 5-4. Self Structure
 主対象:
 - `screens/SelfStructureReportGenerateScreen.js`
 - `screens/SelfStructureReportHistoryScreen.js`
@@ -170,7 +169,7 @@ backend 側:
 - `astor_worker.py`
 - `analysis_engine/self_structure_engine/*`
 
-## 5-4. Piece / Nexus
+## 5-5. Piece / Nexus
 主対象:
 - `screens/MyModelEntryScreen.js`
 - `screens/NexusScreen.js`
@@ -186,180 +185,59 @@ backend 側:
 - `astor_reflection_store.py`
 - `astor_reflection_engine.py`
 
-## 5-5. ProfileCreate
+## 5-6. Account / Settings / Subscription
 主対象:
-- `screens/MyModelCreateScreen.js`
 - `screens/AccountScreen.js`
+- `screens/SettingsScreen.js`
+- `screens/SettingsAppSettingsScreen.js`
+- `screens/SettingsOtherScreen.js`
+- `screens/SubscriptionSelectScreen.js`
+- `lib/subscriptionApi.js`
+- `lib/iap/iapRuntimeCatalog.js`
+- `lib/iap/iapService.js`
 
 backend 側:
-- `api_mymodel_create.py`
-- `mymodel_entitlements.py`
+- `api_subscription.py`
+- `subscription_bootstrap_store.py`
 - `subscription.py`
 - `subscription_store.py`
+- `subscription_projection.py`
 
-## 5-6. EmotionGeneratedPiece
-主対象:
-- `screens/InputScreen.js`
-- `components/EmotionReflectionPreviewModal.js`
-- `lib/emotionReflectionApi.js`
+# 6. current implementation conclusion
 
-backend 側:
-- `api_emotion_reflection.py`
-- `emotion_reflection_generation_service.py`
-- `emotion_reflection_store.py`
-- `emotion_submit_service.py`
-- `reflection_publish_entitlements.py`
+今回の current repo では、EmlisAI は次の形で固定されています。
 
-## 5-7. EmotionLog / 感情通知
-主対象:
-- `screens/EmotionLogScreen.js`
-- `screens/FollowListScreen.js`
-- `screens/AccountScreen.js`
+1. 入力保存は引き続き `emotion_submit_service.persist_emotion_submission()` に集約する
+2. 保存直後に `render_emlis_ai_reply(...)` を呼ぶ
+3. public response は `input_feedback.comment_text` を維持する
+4. additive で `input_feedback.emlis_ai` meta を返す
+5. `/emotion/reflection/publish` でも同じ shared service 由来の返答を使う
+6. subscription bootstrap / IAP copy で Plus / Premium の EmlisAI 価値差分を見せる
 
-backend 側:
-- `api_friends.py`
-- `astor_friend_feed_store.py`
-- `startup_snapshot_store.py`
+# 7. いま特に誤読しやすい点
 
-## 5-8. startup / unread / bootstrap
-主対象:
-- `App.js`
-- `UnreadContext.js`
-- `components/UnreadBadge.js`
+1. **EmlisAI は UI 機能ではなく backend 中枢差し替え**  
+   InputScreen を見ても本体は分からない。
 
-backend 側:
-- `api_app_bootstrap.py`
-- `startup_snapshot_store.py`
-- `api_notice.py`
-- `api_today_question.py`
-- `api_report_reads.py`
-- `api_global_summary.py`
-- `response_microcache.py`
+2. **EmlisAI は worker job ではない**  
+   国家システムにいるが、ASTOR 非同期 path ではなく immediate path である。
 
-# 6. いまの重要コード断面
+3. **subscription copy と capability 決定は別**  
+   plan 文言は `subscription_bootstrap_store.py` と `iapRuntimeCatalog.js`、  
+   実際の tier capability は `emlis_ai_capability.py` と reply path が持つ。
 
-## 6-1. Analysis title はすでに新名称
-```js
-        onScroll={onTutorialScroll}
-      >
-        {/* パネルヘッダー：MyWeb */}
-        <View style={styles.panelHeader}>
-          <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>Analysis</Text>
-            <CocolonPressable
-              style={styles.guideButton}
-              onPress={onOpenGuide}
-              accessibilityLabel="Analysisのガイドを開く"
-            >
-              <Ionicons
-                name="help-circle-outline"
-                size={20}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
-          </View>
-```
-
-## 6-2. ProfileCreate はすでに UI 名として使われている
-```js
-          <View style={styles.panelHeader}>
-            <CocolonBackButton onPress={onBack} style={{ width: 72 }} />
-
-            <Text style={styles.panelTitle}>ProfileCreate</Text>
-
-            <View style={{ width: 72 }} />
-          </View>
-
-          {/* 説明 */}
-          <View style={styles.introCard}>
-            <Text style={styles.introTitle}>5つの問いに答えて、プロフィールを作成</Text>
-            <Text style={styles.introText}>
-              {introSubscriptionBenefit}{"\n"}
-              Account 画面で編集される、固定的な自己紹介 / プロフィール資産です。{"\n"}
-              他ユーザーには、回答済みの項目だけが表示されます。{"\n"}
-              全てに答える必要はありません。{"\n"}
-              「保存する」を押すと、答えた内容だけが更新されます。{"\n"}
-              {introSecretToggleNote}
-            </Text>
-            <View style={styles.progressRow}>
-              <Text style={styles.progressText}>
-                回答済み：{answeredCount}/{totalQuestions}
-              </Text>
-            </View>
-```
-
-## 6-3. Input からは別系統の Piece 作成がある
-```js
-
-                  </View>
-                ) : null}
-
-                {!isTutorialMode ? (
-                  <View style={styles.buttonWrapper}>
-                    <CocolonButton
-                      variant="secondary"
-                      onPress={handlePreviewReflection}
-                      disabled={!canPreviewReflection}
-                      loading={reflectionPreviewLoading}
-                      accessibilityLabel="Pieceを作成する"
-                    >
-                      Pieceを作成する
-                    </CocolonButton>
-                  </View>
-                ) : null}
-
-                <View
-                  ref={okButtonRef}
-                  collapsable={false}
-                  style={styles.buttonWrapper}
-                >
-                  <CocolonButton
-                    variant="primary"
-                    onPress={handleOk}
-```
-
-# 7. 現時点で華恋が特に誤読しやすい点
-
-1. **Analysis = MyWeb**  
-   表示名と internal canonical が違う。
-
-2. **Piece画面 = Nexus surface**  
-   ただし route/file/API には `MyModel` が多数残る。
-
-3. **ProfileCreate と EmotionGeneratedPiece は別物**  
-   どちらも「Pieceっぽく」見えるが、入力起点も保存先の意味も違う。
-
-4. **EmotionLog は /friends 互換を残す**  
-   UI が新しくても backend 互換経路は旧名を維持する。
-
-5. **MyWeb / Self Structure / Piece は画面だけ見ても足りない**  
-   publish / worker / snapshot / unread を裏で持つ。
+4. **`input_feedback_text_templates.py` は fallback**  
+   template を増やしても、本体改善にはならない。
 
 # 8. 最短の確認順
 
-変更指示を受けたら、まず次の順で見る。
+EmlisAI を含む変更指示を受けたら、まず次の順で見ます。
 
 1. `03_Cocolon_命名体系.md`
-2. `inventory/focus_map.yaml`
-3. 該当 system の frontend 入口
-4. 該当 client lib
-5. 該当 backend api_*
-6. 派生 state / publish / startup が絡むなら national system 側
-
-# 9. inventory の使い方
-
-- 全件一覧:  
-  `inventory/Cocolon_inventory_full.csv`  
-  `inventory/mashos-api_inventory_full.csv`
-
-- 画面 / client lib と endpoint 対応:  
-  `inventory/frontend_endpoint_map.csv`
-
-- backend route 一覧:  
-  `inventory/backend_route_inventory.csv`
-
-- public API contract 一覧:  
-  `inventory/public_api_registry.csv`
-
-- worker job 一覧:  
-  `inventory/worker_job_map.csv`
+2. `07_Cocolon_最新スナップショット差分.md`
+3. `inventory/focus_map.yaml`
+4. `emotion_submit_service.py`
+5. `emlis_ai_*` 群
+6. `api_emotion_submit.py` / `api_emotion_reflection.py`
+7. `api_subscription.py` / `subscription_bootstrap_store.py`
+8. `lib/iap/iapRuntimeCatalog.js`

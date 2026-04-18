@@ -1,75 +1,72 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-04-17"
+revision_date: "2026-04-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 133
-  mashos-api: 238
-purpose: "前回確認スナップショットとの差分を華恋向けに要約し、現在どこまで整理が進んだかを固定する"
+  mashos-api: 247
+purpose: "EmlisAI 実装後の repo-synced 差分を華恋向けに要約し、現在どこまで変わったかを固定する"
 ---
 
 # 1. 差分の要点
 
-今回の current snapshot は、**主に名称整理の visible copy cleanup** が入った版です。  
-file 名 / route 名 / public API canonical / storage canonical rename は、まだ実施していません。
+今回の current snapshot は、**Input 直後返答を EmlisAI へ差し替える実装** が入った版です。  
+visible copy cleanup phase の後に、**backend immediate response path と subscription copy** が進みました。
 
-# 2. 変更ファイル数
+# 2. repo-synced 変更ファイル数
 
-- `Cocolon`: 16 files
-- `mashos-api`: 2 files
-- total: 18 files
+- `Cocolon`: 1 files
+- `mashos-api`: 14 files
+- total: 15 files
 
-# 3. 変更ファイル一覧
+# 3. repo-synced 変更ファイル一覧
 
 ## Cocolon
-- `App.js`
-- `guide/guidesJa.js`
-- `guide/termsJa.js`
 - `lib/iap/iapRuntimeCatalog.js`
-- `screens/DeepInsightScreen.js`
-- `screens/DiscoveriesHistoryDetailScreen.js`
-- `screens/DiscoveriesHistoryListScreen.js`
-- `screens/EchoesHistoryDetailScreen.js`
-- `screens/EchoesHistoryListScreen.js`
-- `screens/MyModelCreateScreen.js`
-- `screens/MyWebReportHistoryScreen.js`
-- `screens/MyWebReportViewerScreen.js`
-- `screens/MyWebScreen.js`
-- `screens/SettingsScreen.js`
-- `screens/TodayQuestionHistoryScreen.js`
-- `screens/nexus/NexusReflectionCard.js`
 
 ## mashos-api
-- `ai/services/ai_inference/api_deep_insight.py`
+- `ai/services/ai_inference/api_emotion_reflection.py`
+- `ai/services/ai_inference/api_emotion_submit.py`
+- `ai/services/ai_inference/api_subscription.py`
+- `ai/services/ai_inference/emotion_submit_service.py`
 - `ai/services/ai_inference/subscription_bootstrap_store.py`
+- `ai/services/ai_inference/emlis_ai_capability.py`
+- `ai/services/ai_inference/emlis_ai_context_service.py`
+- `ai/services/ai_inference/emlis_ai_greeting_state_store.py`
+- `ai/services/ai_inference/emlis_ai_prompt.py`
+- `ai/services/ai_inference/emlis_ai_reply_service.py`
+- `ai/services/ai_inference/emlis_ai_style_profile_service.py`
+- `ai/services/ai_inference/emlis_ai_types.py`
+- `ai/services/ai_inference/emlis_ai_world_model_service.py`
+- `ai/services/ai_inference/emotion_history_search_service.py`
 
 # 4. 今回の差分が意味すること
 
 ## 4-1. 進んだこと
-- visible label の `Analysis / Piece / ProfileCreate / Settings` 整理
-- guide / terms / IAP copy の新名称寄せ
-- 一部 backend copy / bootstrap text の新名称寄せ
+- `input_feedback.comment_text` の source of truth を shared save service 側へ寄せた
+- Input 直後返答を EmlisAI immediate response として server-owned 化した
+- `/emotion/submit` と `/emotion/reflection/publish` の返答 path を揃えた
+- Plus / Premium の EmlisAI 価値差分が subscription bootstrap / IAP runtime copy に入った
+- internal helper として `emotion_history_search_service.py` が追加された
+- greeting / style / capability / world model / context / reply の EmlisAI モジュール群が追加された
 
-## 4-2. まだ進んでいないこと
-- file rename
-- stack route rename
-- public API path rename
-- storage canonical rename
+## 4-2. まだ repo-synced で見えないもの
+- greeting-state の DB schema は repo 外（Supabase / patch）で先行適用される場合がある
+- contract / DDL / test の一部は patch 管理と repo sync がズレうる
 
 ## 4-3. だから今の資料運用はこうなる
-- **表示名は新名称で読む**
-- **コード探索は旧 canonical も使って読む**
-- rename phase は別管理する
+- **repo inventory は repo-synced current structure を基準に読む**
+- **DB / patch 側 prerequisites は handoff と rule files で補足する**
+- EmlisAI 本体改善は `emotion_submit_service.py` と `emlis_ai_*` から始める
 
-# 5. 今回の差分を見た上での current operational conclusion
+# 5. current operational conclusion
 
-- `Analysis` は UI 名  
-- `MyWeb` は internal canonical  
-- `Piece` は UI 名 / public concept  
-- `Nexus` は internal system 名  
-- `ProfileCreate` は固定プロフィール資産  
-- `EmotionGeneratedPiece` は華恋用補助用語で、Input 起点 `/emotion/reflection/*` flow を指す
+- EmlisAI は UI 新機能ではなく backend immediate response engine
+- `comment_text` は public contract のまま残る
+- `input_feedback.emlis_ai` は additive meta
+- Free / Plus / Premium の差分は capability + subscription copy の二層で持つ
+- EmlisAI は worker family ではなく synchronous path

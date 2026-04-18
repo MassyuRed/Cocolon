@@ -1,5 +1,5 @@
 meta:
-  revision_date: '2026-04-17'
+  revision_date: '2026-04-18'
   source_repositories:
   - Cocolon
   - mashos-api
@@ -61,12 +61,17 @@ systems:
     - ai/services/ai_inference/astor_snapshot_enqueue.py
     - ai/services/ai_inference/astor_worker.py
     - ai/services/ai_inference/publish_governance.py
+    - ai/services/ai_inference/emotion_submit_service.py
+    - ai/services/ai_inference/emlis_ai_reply_service.py
+    - ai/services/ai_inference/emlis_ai_context_service.py
+    - ai/services/ai_inference/input_feedback_text_templates.py
     rule_files:
     - ai/docs/API_CONTRACT_POLICY.md
     - scripts/check_no_direct_supabase.py
     must_also_check:
     - 入力起点で派生 state がある場合は worker/governance まで確認する
     - InputScreen だけ直して終わらせない
+    - 入力直後返答が絡む場合は EmlisAI immediate response 系も見る
   analysis_myweb:
     meaning: UI 名は Analysis、内部 canonical は MyWeb の領域
     frontend:
@@ -236,12 +241,15 @@ systems:
     - ai/services/ai_inference/subscription_store.py
     - ai/services/ai_inference/report_distribution_settings_store.py
     - ai/services/ai_inference/publish_governance.py
+    - ai/services/ai_inference/emlis_ai_capability.py
+    - ai/services/ai_inference/subscription_bootstrap_store.py
     rule_files:
     - Cocolon/SUBSCRIPTION_RELEASE_PHASE3.md
     - Cocolon/SUBSCRIPTION_RELEASE_PHASE4.md
     - ai/docs/iap_subscription_update.md
     must_also_check:
     - 課金 UI / runtime / backend env / live console check が分かれている
+    - EmlisAI の Plus / Premium 価値差分は subscription runtime と copy をセットで確認する
   startup_bootstrap:
     meaning: /app/bootstrap と /app/startup による起動時断面
     frontend:
@@ -301,3 +309,38 @@ systems:
     - breaking change は新 endpoint/version を作る
     - existing request/response は additive-only
     - RN は display-only を守る
+  emlis_ai_response:
+    meaning: Input 直後返答を server-owned で返す EmlisAI immediate response system。Input
+      と subscription をまたぐ
+    frontend:
+    - screens/InputScreen.js
+    - screens/SubscriptionSelectScreen.js
+    - lib/iap/iapRuntimeCatalog.js
+    backend:
+    - ai/services/ai_inference/emotion_submit_service.py
+    - ai/services/ai_inference/api_emotion_submit.py
+    - ai/services/ai_inference/api_emotion_reflection.py
+    - ai/services/ai_inference/emlis_ai_capability.py
+    - ai/services/ai_inference/emlis_ai_context_service.py
+    - ai/services/ai_inference/emlis_ai_world_model_service.py
+    - ai/services/ai_inference/emlis_ai_style_profile_service.py
+    - ai/services/ai_inference/emlis_ai_reply_service.py
+    - ai/services/ai_inference/emlis_ai_greeting_state_store.py
+    - ai/services/ai_inference/emotion_history_search_service.py
+    - ai/services/ai_inference/input_feedback_text_templates.py
+    - ai/services/ai_inference/api_input_summary.py
+    - ai/services/ai_inference/api_myweb_reads.py
+    - ai/services/ai_inference/today_question_store.py
+    - ai/services/ai_inference/api_subscription.py
+    - ai/services/ai_inference/subscription_bootstrap_store.py
+    rule_files:
+    - ai/docs/API_CONTRACT_POLICY.md
+    - ai/docs/emlis_ai_greeting_state.sql
+    - ai/tests/contract/test_emlis_ai_contracts.py
+    - ai/tests/test_emlis_ai_greeting_state_store.py
+    must_also_check:
+    - comment_text は public contract のまま維持する
+    - Free で history retrieval をしない
+    - Plus から retrieval 必須、Premium は personalization 深度を上げる
+    - greeting-state は DB と repo/doc を同期管理する
+    - template fallback と EmlisAI 本体を混同しない
