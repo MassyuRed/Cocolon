@@ -8,22 +8,22 @@ source_repositories:
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 133
-  mashos-api: 247
-purpose: "華恋が EmlisAI 実装後の全体構造と国家システムを前提に作業できるようにする"
+  mashos-api: 250
+purpose: "華恋が EmlisAI 実装後かつ Piece / ProfileCreate / DeepInsight 再編後の current snapshot を前提に作業できるようにする"
 ---
 
 # これは何か
 
 この一式は **Mash 向けの説明資料ではなく、華恋が作業前提を引き継ぐための運用資料** です。  
-今回の更新では、**EmlisAI の実装が current snapshot に入った後の前提**を固定します。
+今回の更新では、このセッションで行った **PR1〜PR5** の反映後を current snapshot として固定します。
 
 対象スナップショットは次です。
 
 - `Cocolon` : 133 files
-- `mashos-api` : 247 files
+- `mashos-api` : 250 files
 
-重要な更新点は、**Input 直後返答が template 中心から EmlisAI 中心へ変わった**ことです。  
-ただし public surface は維持されており、`input_feedback.comment_text` を引き続き source of truth として扱います。
+今回の最重要更新点は、EmlisAI だけではありません。  
+**Home を唯一の write gate として扱い、Piece / ProfileCreate / DeepInsight の意味を再定義した**ことです。
 
 # 最初の読み順
 
@@ -33,25 +33,15 @@ purpose: "華恋が EmlisAI 実装後の全体構造と国家システムを前�
 4. `07_Cocolon_最新スナップショット差分.md`
 5. `04_Cocolon_変更テーマ別チェックリスト.md`
 6. `05_Cocolon_ルールファイル索引.md`
-7. `inventory/focus_map.yaml`
-8. 必要な inventory / route map / registry
+7. `06_Cocolon_ファイル名変更保留台帳.md`
+8. `inventory/focus_map.yaml`
+9. 必要な inventory / route map / registry
 
-# 今回の EmlisAI 実装で覚えておく一言
+# 今回の再編で覚えておく一言
 
-**EmlisAI は frontend 新機能ではなく、Input 直後返答を server-owned に差し替える cross-cutting response system である。**
+**Home が唯一の write gate、Piece は emotion-generated original reflection のみ、ProfileCreate は Account 内の孤立資産、DeepInsight は current live flow から外した。**
 
-つまり、見た目だけ直しても完結しません。  
-最初に見るべき中枢は `InputScreen.js` ではなく、次の backend 連鎖です。
-
-- `api_emotion_submit.py`
-- `emotion_submit_service.py`
-- `emlis_ai_reply_service.py`
-- `emlis_ai_context_service.py`
-- `emlis_ai_world_model_service.py`
-- `emlis_ai_style_profile_service.py`
-- `input_feedback_text_templates.py`（fallback）
-
-# 作業時の絶対ルール
+# current snapshot の operational conclusion
 
 ## 1. EmlisAI は `input_feedback.comment_text` 契約を壊さない
 
@@ -59,49 +49,43 @@ Input surface は今も `input_feedback.comment_text` を読む前提です。
 EmlisAI を変えても、**public response から `comment_text` を消さない**こと。  
 増やしてよいのは additive meta（例: `input_feedback.emlis_ai`）だけです。
 
-## 2. EmlisAI は server-owned として扱う
+## 2. Home だけを国家システムの write gate として扱う
 
-RN は表示専用です。  
-EmlisAI の最終 capability 決定、履歴 retrieval、greeting state 判定、reply generation は **server 側で完結** させます。  
-client には marketing copy や runtime hint を渡しても、最終判定は渡しません。
+current live flow で国家システムへ入る primary write は次です。
 
-## 3. 履歴 retrieval の設計は tier と一緒に見る
+- 感情入力
+- Today Question 回答
+- Piece preview / publish（emotion-generated only）
 
-今回の実装で固定した体験差分は次です。
+**ProfileCreate と DeepInsight を write gate として再導入しない**こと。
 
-- Free: 履歴参照なし
-- Plus: 履歴 retrieval 必須
-- Premium: retrieval 深度と personalization をさらに上げる
+## 3. Piece は current input だけから作る
 
-したがって、Input の返答を触る時でも **`api_subscription.py` / `subscription_bootstrap_store.py` / `lib/iap/iapRuntimeCatalog.js`** まで必ず確認します。
+Piece は旧 Reflection 全体の総称ではありません。  
+current snapshot では **Input 起点の emotion-generated original reflection** を Piece として読むこと。
 
-## 4. EmlisAI の immediate response path と ASTOR 非同期 path を混同しない
+- Free: 月 5 回
+- Plus: 月 30 回
+- Premium: 無制限
 
-EmlisAI は **保存直後の同期返答**です。  
-worker / publish governance / startup snapshot はそのまま重要ですが、EmlisAI 本体は worker family ではありません。  
-「derived artifact を作る非同期国家システム」と「今すぐ返す EmlisAI」を別物として読むこと。
+## 4. ProfileCreate は Account 内の孤立プロフィール資産
 
-## 5. greeting-state は DB 前提を持つ
+ProfileCreate は固定プロフィール表示 / Account での編集 / 他ユーザーへの自己紹介のための資産です。  
+**ASTOR material snapshot / self structure analysis / ranking / Piece discovery の材料として扱わない**こと。
 
-EmlisAI の時間帯挨拶は `emlis_ai_greeting_state` を前提にします。  
-current repo snapshot には DB 本体は入らないため、**Supabase 側のテーブル状態と repo/doc の DDL をズラさない**こと。
+ただし、internal canonical には `MyModelCreate` が残ります。  
+UI 名と internal canonical を混同しないこと。
 
-## 6. `input_feedback_text_templates.py` は本体ではなく fallback として扱う
+## 5. DeepInsight は current live flow から外した
 
-今後の改善対象は template 文面の追加ではなく、  
-**`emotion_submit_service.py` -> `emlis_ai_reply_service.py` の中枢**です。  
-template 側だけを触って品質改善したつもりにならないこと。
+Analysis 側の入口と public route registration からは外しました。  
+ただし、**physical file / helper / data は repo snapshot に残る場合がある**ため、file 存在だけで live route と誤読しないこと。
 
-# 変更テーマごとの入口
+## 6. Piece count / ranking は legacy key を維持している
 
-- Input / Home / 入力直後返答  
-  → `04_Cocolon_変更テーマ別チェックリスト.md` の `Input / Home` と `EmlisAI immediate response`
-- subscription と EmlisAI 価値差分  
-  → `Account / Settings / Subscription` と `EmlisAI immediate response`
-- contract / additive meta / response shape  
-  → `Public API contract`
-- greeting / 時間帯挨拶 / state  
-  → `EmlisAI immediate response` と `05_Cocolon_ルールファイル索引.md`
+current visible flow では Account / Ranking の Piece 数を generated Piece として扱います。  
+ただし public shape では **`mymodel_questions_total` / `questions_total`** など legacy key を維持しているため、  
+**「意味」と「response key」を分けて読む**こと。
 
 # この資料群を更新する時の最低手順
 
@@ -113,17 +97,12 @@ template 側だけを触って品質改善したつもりにならないこと�
 4. `inventory/mashos-api_inventory_full.*`
 5. `inventory/backend_route_inventory.csv`
 6. `inventory/public_api_registry.csv`
-7. EmlisAI の contract / DDL / test を動かしたなら `05_Cocolon_ルールファイル索引.md`
+7. route / contract / field semantics / orphan cleanup に触ったなら `05_Cocolon_ルールファイル索引.md`
+8. rename / leftover cleanup の判断を進めたなら `06_Cocolon_ファイル名変更保留台帳.md`
 
 # 現時点の運用注意
 
-今回の repo-synced snapshot では **EmlisAI 本体（service / route / subscription copy）は入っている** 一方、  
-greeting-state DDL や一部 contract/test は外部 patch / 外部適用で持つ場合があります。  
-
-したがって、将来の作業時は必ず
-
-- repo snapshot
-- Supabase schema 状態
-- EmlisAI handoff 文書
-
-をセットで確認してください。
+- EmlisAI greeting-state は `emlis_ai_greeting_state` DB 前提を持つ
+- DeepInsight public route は外れていても physical file が残る場合がある
+- `/mymodel/qna/trending` と `/mymodel/qna/holders` は current frontend の visible flow では使っていないが、legacy public route は残る
+- Piece count / ranking は legacy key を維持しているため、DB / RPC / projection 側の意味同期を将来変更時に必ず再確認する

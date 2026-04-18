@@ -7,7 +7,7 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 133,
-    "mashos-api": 247
+    "mashos-api": 250
   },
   "docs": [
     {
@@ -73,27 +73,46 @@
   ],
   "current_snapshot_changed_files": {
     "Cocolon": [
-      "lib/iap/iapRuntimeCatalog.js"
+      "App.js",
+      "screens/AccountScreen.js",
+      "screens/MyModelScreen.js",
+      "lib/iap/iapRuntimeCatalog.js",
+      "guide/guidesJa.js",
+      "guide/termsJa.js",
+      "screens/MyWebScreen.js",
+      "screens/DeepInsightScreen.js",
+      "lib/nexusApi.js",
+      "screens/NexusScreen.js",
+      "screens/RankingTopScreen.js",
+      "screens/MyModelQuestionsRankingScreen.js"
     ],
     "mashos-api": [
-      "ai/services/ai_inference/api_emotion_reflection.py",
-      "ai/services/ai_inference/api_emotion_submit.py",
-      "ai/services/ai_inference/api_subscription.py",
-      "ai/services/ai_inference/emotion_submit_service.py",
       "ai/services/ai_inference/subscription_bootstrap_store.py",
-      "ai/services/ai_inference/emlis_ai_capability.py",
-      "ai/services/ai_inference/emlis_ai_context_service.py",
-      "ai/services/ai_inference/emlis_ai_greeting_state_store.py",
-      "ai/services/ai_inference/emlis_ai_prompt.py",
-      "ai/services/ai_inference/emlis_ai_reply_service.py",
-      "ai/services/ai_inference/emlis_ai_style_profile_service.py",
-      "ai/services/ai_inference/emlis_ai_types.py",
-      "ai/services/ai_inference/emlis_ai_world_model_service.py",
-      "ai/services/ai_inference/emotion_history_search_service.py"
+      "ai/services/ai_inference/app.py",
+      "ai/services/ai_inference/api_contract_registry.py",
+      "ai/docs/PUBLIC_API_REGISTRY.md",
+      "ai/tests/contract/test_api_contract_registry.py",
+      "ai/services/ai_inference/api_deep_insight.py",
+      "ai/services/ai_inference/api_mymodel_create.py",
+      "ai/services/ai_inference/astor_material_snapshots.py",
+      "ai/services/ai_inference/analysis_engine_adapter.py",
+      "ai/services/ai_inference/astor_worker.py",
+      "ai/services/analysis_engine/self_structure_engine/signal_extraction.py",
+      "ai/services/analysis_engine/self_structure_engine/rules.py",
+      "ai/services/analysis_engine/self_structure_engine/fusion.py",
+      "ai/services/ai_inference/astor_myprofile_report.py",
+      "ai/services/ai_inference/astor_myprofile_persona.py",
+      "ai/services/ai_inference/api_nexus.py",
+      "ai/services/ai_inference/api_account_status.py",
+      "ai/services/ai_inference/astor_account_status_store.py",
+      "ai/services/ai_inference/astor_account_status_kernel.py",
+      "ai/services/ai_inference/api_ranking.py",
+      "ai/services/ai_inference/astor_ranking_kernel.py"
     ]
   },
   "external_runtime_notes": [
     "EmlisAI greeting-state depends on Supabase table emlis_ai_greeting_state.",
-    "Repo inventory below reflects repo-synced structure; DB / patch artifacts may need separate sync."
+    "DeepInsight public routes are removed from app registration and public API registry in the current live flow, but legacy physical files may still remain in the repo snapshot.",
+    "Piece count / Piece ranking currently keep legacy response keys such as mymodel_questions_total and questions_total; semantic sync with RPC / projection should be rechecked when changing DB-side logic."
   ]
 }

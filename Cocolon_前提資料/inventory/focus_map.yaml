@@ -3,12 +3,14 @@ meta:
   source_repositories:
   - Cocolon
   - mashos-api
-  purpose: 華恋が全体構造を踏まえて修正対象を漏らさず辿るためのシステム別マップ
+  purpose: 華恋が Home write gate / Piece再定義 / ProfileCreate孤立化 / DeepInsight停止 後の current
+    snapshot を踏まえて修正対象を漏らさず辿るためのシステム別マップ
 read_order:
 - 00_華恋用_READ_FIRST.md
 - 03_Cocolon_命名体系.md
 - 01_Cocolon_全体構造資料.md
 - 02_Cocolon_国家システム資料.md
+- 07_Cocolon_最新スナップショット差分.md
 - 04_Cocolon_変更テーマ別チェックリスト.md
 - 05_Cocolon_ルールファイル索引.md
 - 06_Cocolon_ファイル名変更保留台帳.md
@@ -35,8 +37,8 @@ systems:
     - startup snapshot / unread の変更は App.js だけで閉じない
     - public API / response shape を変える時は contract registry と tests を確認する
   input_home:
-    meaning: 感情入力・Notice・Today Question・Input summary・global summary・EmotionGeneratedPiece
-      の入口
+    meaning: 感情入力・Today Question・EmotionGeneratedPiece を集約する current primary write
+      gate
     frontend:
     - screens/InputScreen.js
     - components/NoticeModal.js
@@ -69,8 +71,8 @@ systems:
     - ai/docs/API_CONTRACT_POLICY.md
     - scripts/check_no_direct_supabase.py
     must_also_check:
-    - 入力起点で派生 state がある場合は worker/governance まで確認する
-    - InputScreen だけ直して終わらせない
+    - Home を唯一の primary write gate として読む
+    - Piece 作成入口を Piece画面 / ProfileCreate / DeepInsight へ戻さない
     - 入力直後返答が絡む場合は EmlisAI immediate response 系も見る
   analysis_myweb:
     meaning: UI 名は Analysis、内部 canonical は MyWeb の領域
@@ -82,13 +84,11 @@ systems:
     - screens/MyWebReportViewerScreen.js
     - screens/MyWebHistoryScreen.js
     - screens/MyWebInputHistoryMenuScreen.js
-    - screens/DeepInsightScreen.js
     - lib/apiClient.js
     backend:
     - ai/services/ai_inference/api_myweb_reports.py
     - ai/services/ai_inference/api_myweb_reads.py
     - ai/services/ai_inference/api_report_reads.py
-    - ai/services/ai_inference/api_deep_insight.py
     - ai/services/ai_inference/api_cron_distribution.py
     - ai/services/ai_inference/publish_governance.py
     - ai/services/ai_inference/response_microcache.py
@@ -99,6 +99,7 @@ systems:
     - ai/docs/PUBLIC_API_REGISTRY.md
     must_also_check:
     - MyWebScreen は hub なので単一画面として扱わない
+    - DeepInsight current live route は外れている。orphan cleanup は別枠で扱う
     - 表示変更でも read/unread / publish_governance / report_reads まで確認する
   self_structure:
     meaning: 自己構造レポート latest / history / viewer / mode gating
@@ -123,7 +124,7 @@ systems:
     - フロントの deep 表記と backend の structural canonical を混同しない
     - latest preview と history/viewer は同じではない
   nexus_piece:
-    meaning: Piece 画面全体の内部システム名は Nexus。旧 MyModel 名が route/file/API に残る
+    meaning: Piece 画面全体の内部システム名は Nexus。current visible flow では read/social 面として扱う
     frontend:
     - screens/MyModelEntryScreen.js
     - screens/NexusScreen.js
@@ -144,9 +145,10 @@ systems:
     - ai/docs/PUBLIC_API_REGISTRY.md
     must_also_check:
     - UI の Piece と内部の Nexus を混同しない
-    - NexusScreen だけで完結しない。Entry / MyModelScreen / Reflections も確認する
+    - current visible flow では Piece 作成入口を持たない
+    - trending / holders UI を勝手に current flow へ戻さない
   profile_create:
-    meaning: 固定的な自己紹介 / プロフィール資産。UI 名は ProfileCreate、内部 canonical は MyModelCreate
+    meaning: 固定的な自己紹介 / プロフィール資産。Account 内の孤立資産として扱う
     frontend:
     - screens/MyModelCreateScreen.js
     - screens/AccountScreen.js
@@ -159,9 +161,11 @@ systems:
     - ai/docs/API_CONTRACT_POLICY.md
     must_also_check:
     - ProfileCreate と EmotionGeneratedPiece を同じ作成機能として扱わない
+    - snapshot / self-structure / ranking / Nexus question corpus へ戻さない
     - UI 名は新名称でも public route/storage canonical は旧名を維持している
   emotion_generated_piece:
-    meaning: 華恋用の補助用語。Input 起点で current emotion から preview/publish する Piece
+    meaning: Input 起点で current emotion から preview / publish する Piece。本セッション後の Piece
+      本体
     frontend:
     - screens/InputScreen.js
     - components/EmotionReflectionPreviewModal.js
@@ -175,7 +179,7 @@ systems:
     rule_files:
     - ai/docs/API_CONTRACT_POLICY.md
     must_also_check:
-    - official repo 名ではない。華恋が混乱回避のために使う補助用語
+    - current input only の仕様を崩さない
     - publish 時は emotion submit も巻き込むため input counts / global summary / friend feed
       へ影響する
   emotionlog_social:
@@ -196,7 +200,7 @@ systems:
     - UI は EmotionLog でも backend は /emotion-log と /friends 互換を併存する
     - 感情通知では memo 本文は出さない設計を崩さない
   ranking:
-    meaning: ランキング一式
+    meaning: ランキング一式。current visible semantics では Piece生成数ランキングも generated Piece を指す
     frontend:
     - screens/RankingTopScreen.js
     - screens/EmotionRankingScreen.js
@@ -208,19 +212,17 @@ systems:
     - screens/MyModelDiscoveriesRankingScreen.js
     backend:
     - ai/services/ai_inference/api_ranking.py
-    - ai/services/ai_inference/api_ranking_login_streak.py
-    - ai/services/ai_inference/api_ranking_mymodel_views.py
-    - ai/services/ai_inference/api_ranking_mymodel_resonances.py
-    - ai/services/ai_inference/api_ranking_mymodel_discoveries.py
     - ai/services/ai_inference/astor_ranking_boards.py
+    - ai/services/ai_inference/astor_ranking_kernel.py
     - ai/services/ai_inference/astor_ranking_enqueue.py
     - ai/services/ai_inference/astor_worker.py
     rule_files:
     - ai/docs/API_CONTRACT_POLICY.md
     must_also_check:
     - ランキングは refresh/inspect job を持つので API だけで見ない
+    - Piece生成数の visible meaning と legacy key 名を混同しない
   account_settings:
-    meaning: Account / Settings / Subscription / report distribution
+    meaning: Account / Settings / Subscription / ProfileCreate / account status
     frontend:
     - screens/AccountScreen.js
     - screens/SettingsScreen.js
@@ -243,13 +245,16 @@ systems:
     - ai/services/ai_inference/publish_governance.py
     - ai/services/ai_inference/emlis_ai_capability.py
     - ai/services/ai_inference/subscription_bootstrap_store.py
+    - ai/services/ai_inference/astor_account_status_store.py
+    - ai/services/ai_inference/astor_account_status_kernel.py
     rule_files:
     - Cocolon/SUBSCRIPTION_RELEASE_PHASE3.md
     - Cocolon/SUBSCRIPTION_RELEASE_PHASE4.md
     - ai/docs/iap_subscription_update.md
     must_also_check:
+    - ProfileCreate は Account-only asset として扱う
     - 課金 UI / runtime / backend env / live console check が分かれている
-    - EmlisAI の Plus / Premium 価値差分は subscription runtime と copy をセットで確認する
+    - Piece数 / account status / ranking semantics をセットで確認する
   startup_bootstrap:
     meaning: /app/bootstrap と /app/startup による起動時断面
     frontend:
@@ -344,3 +349,19 @@ systems:
     - Plus から retrieval 必須、Premium は personalization 深度を上げる
     - greeting-state は DB と repo/doc を同期管理する
     - template fallback と EmlisAI 本体を混同しない
+  deep_insight_legacy:
+    meaning: current live route / current visible flow から外した DeepInsight の orphan
+      cleanup 領域
+    frontend:
+    - screens/DeepInsightScreen.js
+    backend:
+    - ai/services/ai_inference/api_deep_insight.py
+    - ai/services/ai_inference/astor_deep_insight.py
+    - ai/data/config/deep_insight_questions.json
+    rule_files:
+    - ai/docs/PUBLIC_API_REGISTRY.md
+    - ai/services/ai_inference/app.py
+    - ai/services/ai_inference/api_contract_registry.py
+    must_also_check:
+    - file existence だけで live route があると判断しない
+    - physical delete / archive は old-client 依存確認後に行う
