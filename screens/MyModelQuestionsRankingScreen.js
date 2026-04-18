@@ -249,6 +249,7 @@ export default function MyModelQuestionsRankingScreen({ navigation }) {
             rows.map((r, idx) => {
               const userId = r?.user_id || r?.userId || r?.id;
               const count =
+                r?.piece_generated_total ??
                 r?.mymodel_questions_total ??
                 r?.questions_total ??
                 r?.question_total ??

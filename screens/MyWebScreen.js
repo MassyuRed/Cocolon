@@ -31,7 +31,6 @@ import { getTodayQuestionHistory } from "../lib/todayQuestionApi";
 import MyWebHistoryScreen from "./MyWebHistoryScreen";
 import MyWebReportHistoryScreen from "./MyWebReportHistoryScreen";
 import MyWebReportViewerScreen from "./MyWebReportViewerScreen";
-import DeepInsightScreen from "./DeepInsightScreen";
 import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen";
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
@@ -176,7 +175,7 @@ function useThemedStyles() {
 
 export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
   const { getFeatureUnread } = useUnread();
-  const { ensurePaid, ensurePremium, isPaid, loading: subscriptionLoading } = useSubscription();
+  const { ensurePaid, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
   const { height: windowHeight } = useWindowDimensions();
@@ -191,7 +190,7 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
   const myWebGuideRef = useRef(null);
 
 
-  // 'home' | 'emotionAnalysis' | 'selfStructure' | 'inputHistory' | 'history' | 'reportHistory' | 'reportView' | 'selfReportHistory' | 'selfReportView' | 'selfReportGenerate' | 'todayQuestionHistory' | 'deepInsight'
+  // 'home' | 'emotionAnalysis' | 'selfStructure' | 'inputHistory' | 'history' | 'reportHistory' | 'reportView' | 'selfReportHistory' | 'selfReportView' | 'selfReportGenerate' | 'todayQuestionHistory'
   const [route, setRoute] = useState(ROUTE_HOME);
   const [reportType, setReportType] = useState("weekly"); // 'daily' | 'weekly' | 'monthly'
   const [selectedReport, setSelectedReport] = useState(null);
@@ -1049,33 +1048,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
     Alert.alert("プラン確認", "加入画面を開けませんでした。もう一度お試しください。");
   }, [navigation]);
 
-  // ✅ Deep Insight: Premium only
-  const openDeepInsight = useCallback(async () => {
-    try {
-      const ok = await (typeof ensurePremium === "function" ? ensurePremium() : false);
-
-      if (ok) {
-        setRoute("deepInsight");
-        return;
-      }
-
-      // free -> subscription誘導（自己構造分析レポートと同様にポップアップを挟む）
-      Alert.alert(
-        "Deep Insight",
-        "Deep Insight は Premiumプランで利用できます。\n\n続けるには Premiumプランをご確認ください。",
-        [
-          { text: "閉じる", style: "cancel" },
-          { text: "プラン内容を見る", onPress: openSubscriptionSelect },
-        ]
-      );
-    } catch {
-      Alert.alert(
-        "プラン確認",
-        "プラン情報を取得できませんでした。通信状況を確認してもう一度お試しください。"
-      );
-    }
-  }, [ensurePremium, openSubscriptionSelect]);
-
   // MyModel タブへ移動（ナビが無い場合も落とさない）
   const openMyModelBuild = useCallback(() => {
     try {
@@ -1319,8 +1291,6 @@ export default function MyWebScreen({ onOpenMyProfile, navigation, onRefreshTabU
             refreshHomeSummaries();
           }}
         />
-      ) : route === "deepInsight" ? (
-        <DeepInsightScreen onBack={() => setRoute(ROUTE_HOME)} />
       ) : (
         <View style={styles.safeContent}>
           <MyWebContentFirstScreen
@@ -1402,7 +1372,6 @@ function MyWebHome({
   onOpenSelfReportLatest,
   onOpenSelfReportHistory,
   onOpenMyModelBuild,
-  onOpenDeepInsight,
   onOpenTodayQuestionHistory,
   unreadDaily,
   unreadWeekly,
@@ -1791,15 +1760,6 @@ function createStyles(COLORS, ui) {
       marginBottom: 8,
     },
 
-	    // Deep Insight CTA
-	    deepInsightSection: {
-	      marginTop: 10,
-	    },
-	    deepInsightLead: {
-	      fontSize: font.sectionLabel ?? 12,
-	      color: text.description ?? COLORS.TEXT_ON_LIGHT,
-	      marginBottom: 10,
-	    },
     tilesColumn: {
       marginTop: 4,
       flexGrow: 1,

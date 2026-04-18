@@ -39,7 +39,6 @@ import {
   getNexusRecommendUsers,
   getNexusReflectionDetail,
   getNexusReflections,
-  getNexusTrendingQuestions,
 } from "../lib/nexusApi";
 import NexusReflectionCard from "./nexus/NexusReflectionCard";
 
@@ -147,20 +146,6 @@ function normalizeRecommendUsers(json) {
         user?.display_name || user?.name || user?.friend_code || "ユーザー"
       ).trim() || "ユーザー",
     friendCode: String(user?.friend_code || "").trim() || null,
-  }));
-}
-
-function normalizeTrendingQuestions(json) {
-  const items = Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json)
-    ? json
-    : [];
-  return items.map((item, index) => ({
-    qKey: String(item?.q_key || `q-${index}`),
-    title: String(item?.title || "—").trim() || "—",
-    views: Number(item?.views || 0) || 0,
-    resonances: Number(item?.resonances || 0) || 0,
   }));
 }
 
@@ -322,7 +307,6 @@ export default function NexusScreen({ navigation }) {
     loading: false,
     loaded: false,
     users: [],
-    questions: [],
     error: "",
   });
   const [historyState, setHistoryState] = useState({
@@ -421,7 +405,6 @@ export default function NexusScreen({ navigation }) {
         loading: false,
         loaded: true,
         users: [],
-        questions: [],
         error: "",
       });
       return;
@@ -429,15 +412,11 @@ export default function NexusScreen({ navigation }) {
 
     setRecommendState((prev) => ({ ...prev, loading: true, error: "" }));
     try {
-      const [usersJson, questionsJson] = await Promise.all([
-        getNexusRecommendUsers(8),
-        getNexusTrendingQuestions(8),
-      ]);
+      const usersJson = await getNexusRecommendUsers(8);
       setRecommendState({
         loading: false,
         loaded: true,
         users: normalizeRecommendUsers(usersJson),
-        questions: normalizeTrendingQuestions(questionsJson),
         error: "",
       });
     } catch (e) {
@@ -446,7 +425,6 @@ export default function NexusScreen({ navigation }) {
         loading: false,
         loaded: true,
         users: [],
-        questions: [],
         error: String(e?.message || "おすすめを読み込めませんでした。"),
       });
     }
@@ -910,20 +888,6 @@ export default function NexusScreen({ navigation }) {
                 ) : null}
               </View>
             </CocolonPressable>
-          ))
-        )}
-
-        <Text style={styles.subsectionTitle}>いま見られている問い</Text>
-        {recommendState.questions.length <= 0 ? (
-          <Text style={styles.emptyText}>表示できる問いはまだありません。</Text>
-        ) : (
-          recommendState.questions.map((question) => (
-            <View key={question.qKey} style={styles.simpleCard}>
-              <Text style={styles.simpleCardTitle}>{question.title}</Text>
-              <Text style={styles.simpleCardMeta}>
-                views {question.views} / echoes {question.resonances}
-              </Text>
-            </View>
           ))
         )}
       </View>

@@ -97,7 +97,7 @@ const SHARE_PROFILE_API_BASE_URL =
   (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 
-const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "EchoesHistoryDetail", "MyModelCreate", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
+const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "EchoesHistoryDetail", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
 const FRAME_BORDER_WIDTH = 2;
 
 function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
@@ -521,41 +521,6 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
             {...navProps}
             linkPayload={linkPayload}
             onConsumeLinkPayload={onConsumeLinkPayload}
-            onOpenSubscription={() => {
-              try {
-                navProps?.navigation?.navigate("SubscriptionSelect");
-              } catch {}
-            }}
-          />
-        )}
-      </MyModelStack.Screen>
-
-      <MyModelStack.Screen name="MyModelCreate">
-        {(navProps) => (
-          <MyModelCreateScreen
-            {...navProps}
-            onBack={() => {
-              try {
-                if (navProps?.navigation?.canGoBack?.()) {
-                  navProps.navigation.goBack();
-                  return;
-                }
-              } catch {}
-
-              const returnToAccount = !!navProps?.route?.params?.returnToAccount;
-              const viewedUserId = navProps?.route?.params?.viewedUserId || null;
-
-              if (returnToAccount) {
-                try {
-                  navProps?.navigation?.navigate("Account", viewedUserId ? { viewedUserId } : undefined);
-                  return;
-                } catch {}
-              }
-
-              try {
-                navProps?.navigation?.navigate("MyModel");
-              } catch {}
-            }}
             onOpenSubscription={() => {
               try {
                 navProps?.navigation?.navigate("SubscriptionSelect");
@@ -1257,25 +1222,6 @@ function MainTabs() {
       const headers = { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` };
 
       try {
-        const trendingMode = "overall";
-        const trendingCacheKey = `trending:${trendingMode}`;
-        const fresh = getPrefetchEntryFresh?.("MyModel", trendingCacheKey, PREFETCH_MAX_AGE_MS);
-        const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
-        if (!isFresh) {
-          const params = new URLSearchParams();
-          params.append("limit", "20");
-          params.append("mode", trendingMode);
-          const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/trending?${params.toString()}`;
-          const res = await apiFetch(url, { method: "GET", auth: false, headers });
-          const json = await res.json().catch(() => null);
-          if (res.ok) {
-            const items = Array.isArray(json?.items) ? json.items : [];
-            setPrefetch("MyModel", trendingCacheKey, { userId, items });
-          }
-        }
-      } catch {}
-
-      try {
         const fresh = getPrefetchEntryFresh?.("MyModel", "recoUsers", PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
         if (!isFresh) {
@@ -1717,6 +1663,53 @@ function withGlobalFrame(ScreenComponent) {
   };
 }
 
+
+function ProfileCreateScreenWithFrame(props) {
+  const { colors } = useTheme();
+  return (
+    <GlobalFrameLayout frameEnabled={true}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: colors.BG_SILVER,
+          borderLeftColor: colors.BORDER_GOLD,
+          borderRightColor: colors.BORDER_GOLD,
+          borderLeftWidth: FRAME_BORDER_WIDTH,
+          borderRightWidth: FRAME_BORDER_WIDTH,
+        }}
+      >
+        <MyModelCreateScreen
+          {...props}
+          onBack={() => {
+            try {
+              if (props?.navigation?.canGoBack?.()) {
+                props.navigation.goBack();
+                return;
+              }
+            } catch {}
+
+            const viewedUserId = props?.route?.params?.viewedUserId || null;
+
+            try {
+              props?.navigation?.navigate("Account", viewedUserId ? { viewedUserId } : undefined);
+              return;
+            } catch {}
+
+            try {
+              props?.navigation?.navigate("MainTabs");
+            } catch {}
+          }}
+          onOpenSubscription={() => {
+            try {
+              props?.navigation?.navigate("SubscriptionSelect");
+            } catch {}
+          }}
+        />
+      </View>
+    </GlobalFrameLayout>
+  );
+}
+
 const AccountScreenWithFrame = withGlobalFrame(AccountScreen);
 const SubscriptionSelectScreenWithFrame = withGlobalFrame(SubscriptionSelectScreen);
 const FollowListScreenWithFrame = withGlobalFrame(FollowListScreen);
@@ -1732,6 +1725,7 @@ function RootStackNavigator() {
     <RootStack.Navigator initialRouteName="MainTabs" screenOptions={{ headerShown: false }}>
       <RootStack.Screen name="MainTabs" component={MainTabs} />
       <RootStack.Screen name="Account" component={AccountScreenWithFrame} />
+      <RootStack.Screen name="ProfileCreate" component={ProfileCreateScreenWithFrame} />
       <RootStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreenWithFrame} />
       <RootStack.Screen name="FollowListScreen" component={FollowListScreenWithFrame} />
       <RootStack.Screen name="RankingEmotion" component={EmotionRankingScreenWithFrame} />

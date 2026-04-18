@@ -60,6 +60,7 @@ const RANKING_PREVIEWS = [
     range: "year",
     routeName: "RankingMyModelQuestions",
     valueKeys: [
+      "piece_generated_total",
       "mymodel_questions_total",
       "questions_total",
       "question_total",

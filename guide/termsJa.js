@@ -122,25 +122,25 @@ export const guideTermsJa = Object.freeze({
     reading: "ピースがめん",
     shortDef: "Pieceや関連する反応を扱う場所です。",
     longDef:
-      "Piece画面では、公開された断片や他ユーザーとの反応を通じて自分や他者を立体的に扱います。単に見るだけでなく、読む・反応する・ProfileCreate を整えることで理解を深めていくのが特徴です。",
+      "Piece画面では、公開された断片や他ユーザーとの反応を通じて自分や他者を立体的に扱います。読む・反応する流れを通じて理解を深めていくのが特徴です。",
     examples: [
       "公開されたPieceを読み、自分との重なりを確かめる",
       "他ユーザーの Piece を読んで理解を広げる",
     ],
-    relatedTerms: ["reflection", "reflection_create", "kyomei", "hakken"],
+    relatedTerms: ["reflection", "kyomei", "hakken"],
   },
   reflection: {
     termId: "reflection",
     display: "Piece",
     reading: "ピース",
-    shortDef: "問いと答えがセットになった、一問一答形式の断片です。",
+    shortDef: "Home の感情入力から作られる、オリジナルの断片です。",
     longDef:
-      "Piece画面の中核になる単位です。ある問いに対して残した答えが1つの Piece になり、自分や他者の考え方を読んだり比較したりするための土台になります。",
+      "Home で行ったその時の感情入力から生成される、オリジナルの Piece です。ProfileCreate とは別枠で扱われ、公開後は自分や他者の考え方や感じ方を読むための土台になります。",
     examples: [
-      "自分の価値観に関する問いへ答えた内容",
-      "他ユーザーがあるテーマについてどう考えているかを見る",
+      "Home の感情入力から作成した Piece",
+      "公開された自分や他ユーザーの Piece を読む",
     ],
-    relatedTerms: ["reflection_create", "mymodel", "kyomei", "hakken"],
+    relatedTerms: ["mymodel", "kyomei", "hakken"],
   },
   reflection_create: {
     termId: "reflection_create",

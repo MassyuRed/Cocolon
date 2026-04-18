@@ -61,9 +61,6 @@ const API_BASE = String(
 // Recommend users endpoint (MashOS)
 const MYMODEL_RECOMMEND_USERS_ENDPOINT = `${API_BASE}/mymodel/recommend/users`;
 
-// Recommend questions endpoint (MashOS)
-const QNA_TRENDING_ENDPOINT = `${API_BASE}/mymodel/qna/trending`;
-const QNA_HOLDERS_ENDPOINT = `${API_BASE}/mymodel/qna/holders`;
 const GLOBAL_SUMMARY_ENDPOINT = `${API_BASE}/global_summary`;
 const GLOBAL_SUMMARY_PASSIVE_ENDPOINT = `${GLOBAL_SUMMARY_ENDPOINT}?mode=ready_first`;
 const GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS = 8000;
@@ -252,21 +249,6 @@ export default function MyModelScreen({ route } = {}) {
   const [recoUsersLoading, setRecoUsersLoading] = useState(false);
   const [recoUsersError, setRecoUsersError] = useState("");
   const [recoUsers, setRecoUsers] = useState([]);
-
-
-  // --- Recommend (Trending -> Holders) ---
-  // NOTE: Phase 2 - state only (effects/UI will be wired in later phases)
-  const [trendingLoading, setTrendingLoading] = useState(false);
-  const [trendingError, setTrendingError] = useState("");
-  const [trendingItems, setTrendingItems] = useState([]);
-  const [activeTrending, setActiveTrending] = useState(null);
-  const [trendingMode, setTrendingMode] = useState("overall"); // overall | resonance | views
-
-  const [holdersLoading, setHoldersLoading] = useState(false);
-  const [holdersError, setHoldersError] = useState("");
-  const [holderUsers, setHolderUsers] = useState([]);
-
-  const [recoMode, setRecoMode] = useState("question"); // question | user
 
   const [globalReflectionCount, setGlobalReflectionCount] = useState(null);
   const [globalEchoCount, setGlobalEchoCount] = useState(null);
@@ -618,64 +600,7 @@ export default function MyModelScreen({ route } = {}) {
     };
   }, [fetchGlobalSummary, isTutorialMode]);
 
-  // Recommend: trending questions (global) -> holders (users who answered the question)
-  useEffect(() => {
-    if (isTutorialMode) {
-      setTrendingItems([]);
-      setActiveTrending(null);
-      setTrendingError("");
-      setTrendingLoading(false);
-      return;
-    }
-
-    // まずキャッシュ（アプリ起動時プリロード）を即反映して、体感を速くする
-    try {
-      const entry = getPrefetchEntryFresh
-        ? getPrefetchEntryFresh("MyModel", `trending:${trendingMode}`, PREFETCH_MAX_AGE_MS)
-        : getPrefetchEntry("MyModel", `trending:${trendingMode}`);
-      const cached = entry?.value;
-      const items = Array.isArray(cached?.items) ? cached.items : null;
-      if (items) {
-        setTrendingItems(items);
-        setActiveTrending(items[0] || null);
-        setTrendingError("");
-        setTrendingLoading(false);
-      }
-    } catch {
-      // noop
-    }
-
-    // 次に最新を取りに行く（キャッシュがある場合は silent で更新）
-    const hasCache = (() => {
-      try {
-        const entry = getPrefetchEntryFresh
-          ? getPrefetchEntryFresh("MyModel", `trending:${trendingMode}`, PREFETCH_MAX_AGE_MS)
-          : getPrefetchEntry("MyModel", `trending:${trendingMode}`);
-        return Array.isArray(entry?.value?.items);
-      } catch {
-        return false;
-      }
-    })();
-
-    loadTrending({ silent: hasCache, mode: trendingMode });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTutorialMode]);
-
-  useEffect(() => {
-    if (isTutorialMode) return;
-    if (recoMode !== "question") return;
-
-    const qid =
-      activeTrending?.question_id ??
-      activeTrending?.questionId ??
-      activeTrending?.questionID ??
-      null;
-    if (qid != null) {
-      loadHolders(qid);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTrending, recoMode, isTutorialMode]);
-
+  // Recommend: user discovery only
   useEffect(() => {
     if (isTutorialMode) {
       setRecoUsers([]);
@@ -684,38 +609,35 @@ export default function MyModelScreen({ route } = {}) {
       return;
     }
 
-    if (recoMode === "user") {
-      // まずキャッシュ（アプリ起動時プリロード）を即反映
+    try {
+      const entry = getPrefetchEntryFresh
+        ? getPrefetchEntryFresh("MyModel", "recoUsers", PREFETCH_MAX_AGE_MS)
+        : getPrefetchEntry("MyModel", "recoUsers");
+      const cached = entry?.value;
+      const items = Array.isArray(cached?.items) ? cached.items : null;
+      if (items) {
+        setRecoUsers(items);
+        setRecoUsersError("");
+        setRecoUsersLoading(false);
+      }
+    } catch {
+      // noop
+    }
+
+    const hasCache = (() => {
       try {
         const entry = getPrefetchEntryFresh
           ? getPrefetchEntryFresh("MyModel", "recoUsers", PREFETCH_MAX_AGE_MS)
           : getPrefetchEntry("MyModel", "recoUsers");
-        const cached = entry?.value;
-        const items = Array.isArray(cached?.items) ? cached.items : null;
-        if (items) {
-          setRecoUsers(items);
-          setRecoUsersError("");
-          setRecoUsersLoading(false);
-        }
+        return Array.isArray(entry?.value?.items);
       } catch {
-        // noop
+        return false;
       }
+    })();
 
-      const hasCache = (() => {
-        try {
-          const entry = getPrefetchEntryFresh
-            ? getPrefetchEntryFresh("MyModel", "recoUsers", PREFETCH_MAX_AGE_MS)
-            : getPrefetchEntry("MyModel", "recoUsers");
-          return Array.isArray(entry?.value?.items);
-        } catch {
-          return false;
-        }
-      })();
-
-      loadRecommendUsers({ silent: hasCache });
-    }
+    loadRecommendUsers({ silent: hasCache });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recoMode, isTutorialMode]);
+  }, [isTutorialMode]);
 
   async function getAuthContext() {
     let userId = null;
@@ -942,158 +864,14 @@ export default function MyModelScreen({ route } = {}) {
     }
   }, []);
 
-  const loadTrending = useCallback(async (opts) => {
-    const silent = !!opts?.silent;
-    if (!silent) {
-      setTrendingLoading(true);
-    }
-    setTrendingError("");
-    const mode = String(opts?.mode || "overall").trim() || "overall";
-    try {
-      const { userId, accessToken } = await getAuthContext();
-      if (!accessToken) {
-        setTrendingItems([]);
-        setActiveTrending(null);
-        setTrendingError("ログインが必要です");
-        return;
-      }
-
-      const params = new URLSearchParams();
-      params.append("limit", "20");
-      params.append("mode", mode);
-      const url = `${QNA_TRENDING_ENDPOINT}?${params.toString()}`;
-
-      const res = await apiFetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-        throw new Error(String(msg));
-      }
-
-      const list = Array.isArray(json?.items) ? json.items : [];
-      setTrendingItems(list);
-
-      setActiveTrending((prev) => {
-        const prevId =
-          prev?.question_id ?? prev?.questionId ?? prev?.questionID ?? null;
-        if (prevId) {
-          const exists = list.some(
-            (x) =>
-              String(x?.question_id ?? x?.questionId ?? x?.questionID) ===
-              String(prevId)
-          );
-          if (exists) return prev;
-        }
-        return list.length > 0 ? list[0] : null;
-      });
-
-      if (list.length === 0) {
-        setHolderUsers([]);
-        setHoldersError("");
-      }
-
-      // cache
-      try {
-        setPrefetch("MyModel", `trending:${mode}`, { userId: userId || null, items: list });
-      } catch {
-        // noop
-      }
-    } catch (e) {
-      setTrendingItems([]);
-      setActiveTrending(null);
-      setHolderUsers([]);
-      setTrendingError(String(e?.message || e));
-    } finally {
-      setTrendingLoading(false);
-    }
-  }, []);
-
-  const loadHolders = useCallback(async (questionId) => {
-    const qid = questionId != null ? String(questionId) : "";
-    if (!qid) return;
-
-    setHoldersLoading(true);
-    setHoldersError("");
-
-    try {
-      const { userId, accessToken } = await getAuthContext();
-      if (!accessToken) {
-        setHolderUsers([]);
-        setHoldersError("ログインが必要です");
-        return;
-      }
-
-      const params = new URLSearchParams();
-      params.append("question_id", String(qid));
-      params.append("limit", "20");
-      // default: exclude_followed=true / exclude_self=true (API側デフォルト)
-      const url = `${QNA_HOLDERS_ENDPOINT}?${params.toString()}`;
-
-      const res = await apiFetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-        throw new Error(String(msg));
-      }
-
-      const users =
-        (Array.isArray(json?.users) && json.users) ||
-        (Array.isArray(json?.items) && json.items) ||
-        (Array.isArray(json?.rows) && json.rows) ||
-        [];
-
-      setHolderUsers(users);
-
-      // cache
-      try {
-        setPrefetch(`MyModel`, `holders:${qid}`, {
-          userId: userId || null,
-          questionId: qid,
-          items: users,
-        });
-      } catch {
-        // noop
-      }
-    } catch (e) {
-      setHolderUsers([]);
-      setHoldersError(String(e?.message || e));
-    } finally {
-      setHoldersLoading(false);
-    }
-  }, []);
-
-
-  const openMyModelCreate = useCallback(() => {
+    const openMyModelCreate = useCallback(() => {
     if (tutorialSurfaceEnabled && isTutorialMode) {
       openTutorialCreate();
       return;
     }
 
-    if (!navigation?.navigate) return;
-
-    try {
-      navigation.navigate("MyModelCreate");
-    } catch {
-      Alert.alert(
-        "Piece作成画面を開けません",
-        "Piece作成画面が navigation に未登録の可能性があります。\nApp.js の登録を確認してください。"
-      );
-    }
-  }, [navigation, isTutorialMode, openTutorialCreate]);
+    Alert.alert("Homeから作成してください", "Piece の作成は Home 画面から行います。");
+  }, [isTutorialMode, openTutorialCreate, tutorialSurfaceEnabled]);
 
   const openReflections = useCallback(() => {
     if (tutorialSurfaceEnabled && isTutorialMode && !tutorialHasSelfReflection) {
@@ -1283,22 +1061,20 @@ export default function MyModelScreen({ route } = {}) {
           />
         </View>
 
-        <View ref={createButtonRef} collapsable={false} style={{ marginTop: 16 }}>
-          <MyModelHomeActionCard
-            styles={styles}
-            title="作成"
-            description={
-              tutorialSurfaceEnabled && isTutorialMode
-                ? `チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Pieceを作成する流れを体験できます。`
-                : "一問一答に答えることでPieceを作成できます。作成したPiece数はアカウントページで確認できます。"
-            }
-            buttonLabel="Pieceを作成する"
-            buttonIconName="create-outline"
-            onPress={openMyModelCreate}
-            badgeVisible={unreadMyModelCreate}
-            accessibilityLabel="Pieceを作成する"
-          />
-        </View>
+        {tutorialSurfaceEnabled && isTutorialMode ? (
+          <View ref={createButtonRef} collapsable={false} style={{ marginTop: 16 }}>
+            <MyModelHomeActionCard
+              styles={styles}
+              title="作成"
+              description={`チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Pieceを作成する流れを体験できます。`}
+              buttonLabel="Pieceを作成する"
+              buttonIconName="create-outline"
+              onPress={openMyModelCreate}
+              badgeVisible={unreadMyModelCreate}
+              accessibilityLabel="Pieceを作成する"
+            />
+          </View>
+        ) : null}
 
         <View style={{ marginTop: 16 }}>
           <MyModelHomeActionCard
@@ -1317,12 +1093,8 @@ export default function MyModelScreen({ route } = {}) {
                 return;
               }
 
-              const alreadyUser = recoMode === "user";
-              setRecoMode("user");
               setRecoModalVisible(true);
-              if (alreadyUser) {
-                loadRecommendUsers();
-              }
+              loadRecommendUsers();
             }}
             accessibilityLabel="新しいユーザーを探す"
           />
@@ -1499,11 +1271,7 @@ export default function MyModelScreen({ route } = {}) {
               <View style={styles.headerRight}>
                 <Pressable
                   onPress={() => {
-                    if (recoMode === "user") {
-                      loadRecommendUsers();
-                    } else {
-                      loadTrending({ mode: trendingMode });
-                    }
+                    loadRecommendUsers();
                   }}
                   style={styles.recoRefreshBtn}
                 >
@@ -1520,265 +1288,51 @@ export default function MyModelScreen({ route } = {}) {
             </View>
 
             <ScrollView style={styles.listArea}>
-              <View style={styles.recoToggleRow}>
-                <Pressable
-                  onPress={() => setRecoMode("user")}
-                  style={[
-                    styles.recoTogglePill,
-                    recoMode === "user" && styles.recoTogglePillActive,
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.recoToggleText,
-                      recoMode === "user" && styles.recoToggleTextActive,
-                    ]}
-                  >
-                    ユーザーで探す
-                  </Text>
-                </Pressable>
+              <Text style={styles.recoSectionLabel}>アクティブユーザー</Text>
 
-                <Pressable
-                  onPress={() => setRecoMode("question")}
-                  style={[
-                    styles.recoTogglePill,
-                    { marginRight: 0 },
-                    recoMode === "question" && styles.recoTogglePillActive,
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.recoToggleText,
-                      recoMode === "question" && styles.recoToggleTextActive,
-                    ]}
-                  >
-                    問いで探す
-                  </Text>
-                </Pressable>
-              </View>
+              {recoUsersLoading ? (
+                <View style={styles.recoLoadingRow}>
+                  <ActivityIndicator color={colors.TEXT_SUBTLE} />
+                  <Text style={styles.recoLoadingText}>読み込み中…</Text>
+                </View>
+              ) : (recoUsers || []).length > 0 ? (
+                <View style={{ marginTop: 8 }}>
+                  {(recoUsers || []).map((u) => {
+                    const uid = u?.id || u?.user_id || u?.userId;
+                    const name =
+                      String(u?.display_name || "").trim() || "（未設定）";
+                    const handle = String(u?.friend_code || "").trim();
+                    return (
+                      <Pressable
+                        key={String(uid || Math.random())}
+                        onPress={() => openAccount(uid)}
+                        style={styles.recoUserRow}
+                      >
+                        <View style={{ flex: 1, paddingRight: 10 }}>
+                          <Text style={styles.recoUserName} numberOfLines={1}>
+                            {name}
+                          </Text>
+                          <Text style={styles.recoUserSub} numberOfLines={1}>
+                            {handle ? `@${handle}` : " "}
+                          </Text>
+                        </View>
 
-              {recoMode === "user" ? (
-                <>
-                  <Text style={styles.recoSectionLabel}>アクティブユーザー</Text>
-
-                  {recoUsersLoading ? (
-                    <View style={styles.recoLoadingRow}>
-                      <ActivityIndicator color={colors.TEXT_SUBTLE} />
-                      <Text style={styles.recoLoadingText}>読み込み中…</Text>
-                    </View>
-                  ) : (recoUsers || []).length > 0 ? (
-                    <View style={{ marginTop: 8 }}>
-                      {(recoUsers || []).map((u) => {
-                        const uid = u?.id || u?.user_id || u?.userId;
-                        const name =
-                          String(u?.display_name || "").trim() || "（未設定）";
-                        const handle = String(u?.friend_code || "").trim();
-                        return (
-                          <Pressable
-                            key={String(uid || Math.random())}
-                            onPress={() => openAccount(uid)}
-                            style={styles.recoUserRow}
-                          >
-                            <View style={{ flex: 1, paddingRight: 10 }}>
-                              <Text style={styles.recoUserName} numberOfLines={1}>
-                                {name}
-                              </Text>
-                              <Text style={styles.recoUserSub} numberOfLines={1}>
-                                {handle ? `@${handle}` : " "}
-                              </Text>
-                            </View>
-
-                            <Ionicons
-                              name="chevron-forward"
-                              size={18}
-                              color={colors.TEXT_SUBTLE}
-                              style={{ marginLeft: 10 }}
-                            />
-                          </Pressable>
-                        );
-                      })}
-                    </View>
-                  ) : (
-                    <Text style={styles.recoEmptyText}>
-                      {recoUsersError
-                        ? `取得に失敗: ${recoUsersError}`
-                        : "候補ユーザーがいません。"}
-                    </Text>
-                  )}
-                </>
+                        <Ionicons
+                          name="chevron-forward"
+                          size={18}
+                          color={colors.TEXT_SUBTLE}
+                          style={{ marginLeft: 10 }}
+                        />
+                      </Pressable>
+                    );
+                  })}
+                </View>
               ) : (
-                <>
-                  <Text style={styles.recoSectionLabel}>トレンドの問い</Text>
-
-                  <View style={[styles.recoToggleRow, { marginTop: 8, marginBottom: 6 }]}>
-                    <Pressable
-                      onPress={() => {
-                        const next = "overall";
-                        setTrendingMode(next);
-                        loadTrending({ mode: next });
-                      }}
-                      style={[
-                        styles.recoTogglePill,
-                        trendingMode === "overall" && styles.recoTogglePillActive,
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.recoToggleText,
-                          trendingMode === "overall" && styles.recoToggleTextActive,
-                        ]}
-                      >
-                        総合
-                      </Text>
-                    </Pressable>
-
-                    <Pressable
-                      onPress={() => {
-                        const next = "resonance";
-                        setTrendingMode(next);
-                        loadTrending({ mode: next });
-                      }}
-                      style={[
-                        styles.recoTogglePill,
-                        trendingMode === "resonance" && styles.recoTogglePillActive,
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.recoToggleText,
-                          trendingMode === "resonance" && styles.recoToggleTextActive,
-                        ]}
-                      >
-                        共鳴
-                      </Text>
-                    </Pressable>
-
-                    <Pressable
-                      onPress={() => {
-                        const next = "views";
-                        setTrendingMode(next);
-                        loadTrending({ mode: next });
-                      }}
-                      style={[
-                        styles.recoTogglePill,
-                        { marginRight: 0 },
-                        trendingMode === "views" && styles.recoTogglePillActive,
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.recoToggleText,
-                          trendingMode === "views" && styles.recoToggleTextActive,
-                        ]}
-                      >
-                        閲覧
-                      </Text>
-                    </Pressable>
-                  </View>
-
-
-                  {trendingLoading ? (
-                    <View style={styles.recoLoadingRow}>
-                      <ActivityIndicator color={colors.TEXT_SUBTLE} />
-                      <Text style={styles.recoLoadingText}>読み込み中…</Text>
-                    </View>
-                  ) : (trendingItems || []).length > 0 ? (
-                    <View style={styles.recoPillScroll}>
-                      {(trendingItems || []).map((t, idx) => {
-                        const qid =
-                          t?.question_id ?? t?.questionId ?? t?.questionID;
-                        const active =
-                          String(
-                            activeTrending?.question_id ??
-                              activeTrending?.questionId ??
-                              activeTrending?.questionID ??
-                              ""
-                          ) === String(qid ?? "");
-                        const isLast =
-                          idx === (trendingItems || []).length - 1;
-
-                        return (
-                          <Pressable
-                            key={String(t?.q_key || qid || Math.random())}
-                            onPress={() => setActiveTrending(t)}
-                            style={[
-                              styles.recoPill,
-                              active && styles.recoPillActive,
-                              { marginBottom: isLast ? 0 : 8, maxWidth: "100%" },
-                            ]}
-                          >
-                            <Text
-                              style={[
-                                styles.recoPillText,
-                                active && styles.recoPillTextActive,
-                              ]}
-                              numberOfLines={1}
-                            >
-                              {String(t?.title || "").trim() || "（未設定）"}
-                            </Text>
-                          </Pressable>
-                        );
-                      })}
-                    </View>
-                  ) : (
-                    <Text style={styles.recoEmptyText}>
-                      {trendingError
-                        ? `取得に失敗: ${trendingError}`
-                        : "現在トレンドがありません。"}
-                    </Text>
-                  )}
-
-                  <Text style={[styles.recoSectionLabel, { marginTop: 10 }]}>
-                    この問いを答えているユーザー
-                  </Text>
-
-                  {holdersLoading ? (
-                    <View style={styles.recoLoadingRow}>
-                      <ActivityIndicator color={colors.TEXT_SUBTLE} />
-                      <Text style={styles.recoLoadingText}>読み込み中…</Text>
-                    </View>
-                  ) : (holderUsers || []).length > 0 ? (
-                    <View style={{ marginTop: 8 }}>
-                      {(holderUsers || []).map((u) => {
-                        const uid = u?.id || u?.user_id || u?.userId;
-                        const name =
-                          String(u?.display_name || "").trim() || "（未設定）";
-                        const handle = String(u?.friend_code || "").trim();
-                        return (
-                          <Pressable
-                            key={String(uid || Math.random())}
-                            onPress={() => openAccount(uid)}
-                            style={styles.recoUserRow}
-                          >
-                            <View style={{ flex: 1, paddingRight: 10 }}>
-                              <Text style={styles.recoUserName} numberOfLines={1}>
-                                {name}
-                              </Text>
-                              <Text style={styles.recoUserSub} numberOfLines={1}>
-                                {handle ? `@${handle}` : " "}
-                              </Text>
-                            </View>
-
-                            <Ionicons
-                              name="chevron-forward"
-                              size={18}
-                              color={colors.TEXT_SUBTLE}
-                              style={{ marginLeft: 10 }}
-                            />
-                          </Pressable>
-                        );
-                      })}
-                    </View>
-                  ) : (
-                    <Text style={styles.recoEmptyText}>
-                      {holdersError
-                        ? `取得に失敗: ${holdersError}`
-                        : activeTrending
-                        ? "候補ユーザーがいません。"
-                        : "問いを選ぶと候補ユーザーが表示されます。"}
-                    </Text>
-                  )}
-                </>
+                <Text style={styles.recoEmptyText}>
+                  {recoUsersError
+                    ? `取得に失敗: ${recoUsersError}`
+                    : "候補ユーザーがいません。"}
+                </Text>
               )}
             </ScrollView>
           </View>

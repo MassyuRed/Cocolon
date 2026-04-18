@@ -129,7 +129,6 @@ export const guidesJa = Object.freeze({
     relatedTerms: [
       "mymodel",
       "reflection",
-      "reflection_create",
       "kyomei",
       "hakken",
       "reaction_history",
@@ -138,7 +137,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "[[term:mymodel|Piece画面]] は、公開された [[term:reflection|Piece]] や関連する反応を通じて、自分や他者を立体的に見る場所です。読む・反応する・整える流れを通して理解を深めていきます。",
+          "[[term:mymodel|Piece画面]] は、公開された [[term:reflection|Piece]] や関連する反応を通じて、自分や他者を立体的に見る場所です。読む・反応する流れを通して理解を深めていきます。",
       },
       {
         type: "h2",
@@ -147,7 +146,6 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "[[term:reflection_create|ProfileCreate]] で固定的な自己紹介 / プロフィール資産を整える",
           "自分やフォロー中ユーザーの [[term:reflection|Piece]] を読む",
           "内容に対して [[term:kyomei|共鳴]] や [[term:hakken|発見]] を送り、反応を残す",
           "受け取った反応や自分の反応を [[term:reaction_history|履歴]] で確認する",
@@ -165,7 +163,7 @@ export const guidesJa = Object.freeze({
       {
         type: "note",
         text:
-          "Piece画面は単なる閲覧画面ではなく、読む・反応する・ProfileCreate を整える流れの中心になる場所です。",
+          "Piece画面は、Home で作成された Piece を読み、反応しながら理解を深める場所です。",
       },
     ],
   },

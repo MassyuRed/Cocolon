@@ -492,27 +492,21 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       viewedUserId: String(user?.id || targetUserId || ""),
     };
 
-    const directNav = findNavigationForRoute(navigation, "MyModelCreate");
+    const directNav = findNavigationForRoute(navigation, "ProfileCreate");
     if (directNav) {
       try {
-        directNav.navigate("MyModelCreate", screenParams);
+        directNav.navigate("ProfileCreate", screenParams);
         return;
       } catch {
         // noop
       }
     }
 
-    const tabNav = findNavigationForRoute(navigation, "MyModel");
-    if (tabNav) {
-      try {
-        tabNav.navigate("MyModel", {
-          screen: "MyModelCreate",
-          params: screenParams,
-        });
-        return;
-      } catch {
-        // noop
-      }
+    try {
+      navigation?.navigate?.("ProfileCreate", screenParams);
+      return;
+    } catch {
+      // noop
     }
 
     Alert.alert("開けません", "ProfileCreate を開けませんでした。もう一度お試しください。");
@@ -1375,7 +1369,7 @@ const onRestorePurchases = async () => {
                 <StatusRow
                   styles={styles}
                   label="Pieceの所持数"
-                  value={statusValue("mymodel_questions_total", ["mymodelQuestionsTotal", "mymodel_q_total"])}
+                  value={statusValue("piece_generated_total", ["mymodel_questions_total", "mymodelQuestionsTotal", "mymodel_q_total"])}
                 />
                 <StatusRow
                   styles={styles}
