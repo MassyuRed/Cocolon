@@ -5,7 +5,7 @@
     "kind": "support",
     "category": "env_ignore",
     "systems": "",
-    "lines": 29,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -16,7 +16,7 @@
     "kind": "support",
     "category": "env_ignore",
     "systems": "",
-    "lines": 39,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -27,10 +27,10 @@
     "kind": "runtime",
     "category": "root_runtime",
     "systems": "app_root",
-    "lines": 1911,
+    "lines": 1918,
     "local_import_count": 39,
-    "local_imports": "AuthContext.js | AuthScreen.js | screens/InputScreen.js | screens/CocolonGuideScreen.js | screens/NoticeHistoryScreen.js | screens/MyWebScreen.js | screens/MyWebHistoryScreen.js | screens/TodayQuestionHistoryScreen.js | screens/MyModelScreen.js | screens/MyModelEntryScreen.js | screens/MyModelCreateScreen.js | screens/MyModelReflectionsScreen.js | screens/MyModelReactionHistoryScreen.js | screens/EmotionLogScreen.js | screens/SettingsScreen.js | screens/SettingsAppSettingsScreen.js | screens/SettingsOtherScreen.js | screens/AccountScreen.js | screens/SubscriptionSelectScreen.js | screens/FollowListScreen.js | screens/EchoesHistoryListScreen.js | screens/EchoesHistoryDetailScreen.js | screens/RankingTopScreen.js | screens/EmotionRankingScreen.js | screens/InputCountRankingScreen.js | screens/InputLengthRankingScreen.js | screens/MyModelEchoesRankingScreen.js | screens/MyModelQuestionsRankingScreen.js | screens/LoginStreakRankingScreen.js | theme/ThemeContext.js | UnreadContext.js | SubscriptionContext.js | TutorialContext.js | lib/iap/iapService.js | lib/pushToken.js | lib/supabase.ts | lib/user.ts | lib/apiClient.js | components/UnreadBadge.js",
-    "endpoints": "/mymodel/qna/unread-status | /myprofile/latest/status | /app/startup | /myweb/reports/ensure | /emotion-log/unread-status | /emotion-log/unread/read-feed | /emotion-log/feed | /account/profile/me | /app/bootstrap"
+    "local_imports": "AuthContext.js | AuthScreen.js | SubscriptionContext.js | TutorialContext.js | UnreadContext.js | components/UnreadBadge.js | lib/apiClient.js | lib/iap/iapService.js | lib/pushToken.js | lib/supabase.ts | lib/user.ts | screens/AccountScreen.js",
+    "endpoints": "/account/profile/me | /app/bootstrap | /app/startup | /emotion-log/feed | /emotion-log/unread-status | /emotion-log/unread/read-feed | /mymodel/qna/unread-status | /myprofile/latest/status | /myweb/reports/ensure"
   },
   {
     "repo": "Cocolon",
@@ -38,7 +38,7 @@
     "kind": "runtime",
     "category": "root_runtime",
     "systems": "app_root",
-    "lines": 562,
+    "lines": 563,
     "local_import_count": 1,
     "local_imports": "lib/supabase.ts",
     "endpoints": ""
@@ -49,9 +49,86 @@
     "kind": "runtime",
     "category": "root_runtime",
     "systems": "",
-    "lines": 488,
+    "lines": 489,
     "local_import_count": 1,
     "local_imports": "AuthContext.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "README.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "SUBSCRIPTION_RELEASE_PHASE3.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "SUBSCRIPTION_RELEASE_PHASE4.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "SubscriptionContext.js",
+    "kind": "runtime",
+    "category": "root_runtime",
+    "systems": "app_root",
+    "lines": 402,
+    "local_import_count": 3,
+    "local_imports": "lib/iap/iapRuntimeCatalog.js | lib/subscriptionApi.js | lib/supabase.ts",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "TutorialContext.js",
+    "kind": "runtime",
+    "category": "root_runtime",
+    "systems": "app_root",
+    "lines": 313,
+    "local_import_count": 1,
+    "local_imports": "lib/supabase.ts",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "TutorialOverlay.js",
+    "kind": "runtime",
+    "category": "root_runtime",
+    "systems": "",
+    "lines": 494,
+    "local_import_count": 1,
+    "local_imports": "UNRESOLVED:../theme/ThemeContext",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "UnreadContext.js",
+    "kind": "runtime",
+    "category": "root_runtime",
+    "systems": "app_root",
+    "lines": 782,
+    "local_import_count": 0,
+    "local_imports": "",
     "endpoints": ""
   },
   {
@@ -60,7 +137,7 @@
     "kind": "support",
     "category": "config",
     "systems": "",
-    "lines": 4,
+    "lines": 5,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -71,9 +148,9 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 78,
+    "lines": 79,
     "local_import_count": 1,
-    "local_imports": "../theme/ThemeContext",
+    "local_imports": "theme/ThemeContext.js",
     "endpoints": ""
   },
   {
@@ -82,9 +159,9 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 168,
+    "lines": 169,
     "local_import_count": 2,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens",
+    "local_imports": "theme/ThemeContext.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -93,9 +170,9 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 97,
+    "lines": 98,
     "local_import_count": 2,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens",
+    "local_imports": "theme/ThemeContext.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -104,7 +181,7 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 27,
+    "lines": 28,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -115,7 +192,7 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 45,
+    "lines": 46,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -126,9 +203,9 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "input_home|shared_ui",
-    "lines": 228,
+    "lines": 229,
     "local_import_count": 4,
-    "local_imports": "../theme/ThemeContext | components/CocolonButton.js | ../ui/uiTokens | ../ui/applyTypographyTokens",
+    "local_imports": "theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js | components/CocolonButton.js",
     "endpoints": ""
   },
   {
@@ -137,7 +214,7 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 24,
+    "lines": 25,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -148,9 +225,9 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 173,
+    "lines": 174,
     "local_import_count": 1,
-    "local_imports": "../theme/ThemeContext",
+    "local_imports": "theme/ThemeContext.js",
     "endpoints": ""
   },
   {
@@ -159,168 +236,14 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 301,
+    "lines": 302,
     "local_import_count": 1,
-    "local_imports": "../theme/ThemeContext",
+    "local_imports": "theme/ThemeContext.js",
     "endpoints": ""
   },
   {
     "repo": "Cocolon",
     "path": "components/HapticTab.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 18,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/HelloWave.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 40,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/NoticeModal.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "input_home|shared_ui",
-    "lines": 312,
-    "local_import_count": 4,
-    "local_imports": "../theme/ThemeContext | ../lib/noticeActionRuntime | components/CocolonButton.js | components/NoticeRichText.js",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/NoticeRichText.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "input_home|shared_ui",
-    "lines": 56,
-    "local_import_count": 1,
-    "local_imports": "../lib/noticeActionRuntime",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/ParallaxScrollView.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 82,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/selfStructure/SelfStructureDeepRenderer.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 623,
-    "local_import_count": 1,
-    "local_imports": "../../ui/applyTypographyTokens",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/ThemedText.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 60,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/ThemedView.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 14,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/TodayQuestionCard.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "input_home|shared_ui",
-    "lines": 380,
-    "local_import_count": 3,
-    "local_imports": "../theme/ThemeContext | components/CocolonButton.js | components/CocolonPressable.js",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/TodayQuestionModal.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "input_home|shared_ui",
-    "lines": 95,
-    "local_import_count": 2,
-    "local_imports": "../theme/ThemeContext | components/TodayQuestionCard.js",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/TutorialOverlay.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 1226,
-    "local_import_count": 1,
-    "local_imports": "../theme/ThemeContext",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/TutorialStartModal.js",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 202,
-    "local_import_count": 2,
-    "local_imports": "../theme/ThemeContext | components/CocolonButton.js",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/ui/IconSymbol.ios.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 32,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/ui/IconSymbol.tsx",
-    "kind": "component",
-    "category": "shared_component",
-    "systems": "shared_ui",
-    "lines": 41,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "components/ui/TabBarBackground.ios.tsx",
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
@@ -331,13 +254,112 @@
   },
   {
     "repo": "Cocolon",
-    "path": "components/ui/TabBarBackground.tsx",
+    "path": "components/HelloWave.tsx",
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 6,
+    "lines": 41,
     "local_import_count": 0,
     "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/NoticeModal.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "input_home|shared_ui",
+    "lines": 313,
+    "local_import_count": 4,
+    "local_imports": "lib/noticeActionRuntime.js | theme/ThemeContext.js | components/CocolonButton.js | components/NoticeRichText.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/NoticeRichText.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "input_home|shared_ui",
+    "lines": 57,
+    "local_import_count": 1,
+    "local_imports": "lib/noticeActionRuntime.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ParallaxScrollView.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 83,
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ThemedText.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 61,
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ThemedView.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 15,
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/TodayQuestionCard.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "input_home|shared_ui",
+    "lines": 381,
+    "local_import_count": 3,
+    "local_imports": "theme/ThemeContext.js | components/CocolonButton.js | components/CocolonPressable.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/TodayQuestionModal.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "input_home|shared_ui",
+    "lines": 96,
+    "local_import_count": 2,
+    "local_imports": "theme/ThemeContext.js | components/TodayQuestionCard.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/TutorialOverlay.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 1227,
+    "local_import_count": 1,
+    "local_imports": "theme/ThemeContext.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/TutorialStartModal.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 203,
+    "local_import_count": 2,
+    "local_imports": "theme/ThemeContext.js | components/CocolonButton.js",
     "endpoints": ""
   },
   {
@@ -346,9 +368,64 @@
     "kind": "component",
     "category": "shared_component",
     "systems": "shared_ui",
-    "lines": 57,
+    "lines": 58,
     "local_import_count": 1,
-    "local_imports": "../theme/ThemeContext",
+    "local_imports": "theme/ThemeContext.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/selfStructure/SelfStructureDeepRenderer.js",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 624,
+    "local_import_count": 1,
+    "local_imports": "ui/applyTypographyTokens.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ui/IconSymbol.ios.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 33,
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ui/IconSymbol.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 42,
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ui/TabBarBackground.ios.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 20,
+    "local_import_count": 0,
+    "local_imports": "",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "components/ui/TabBarBackground.tsx",
+    "kind": "component",
+    "category": "shared_component",
+    "systems": "shared_ui",
+    "lines": 7,
+    "local_import_count": 0,
+    "local_imports": "",
     "endpoints": ""
   },
   {
@@ -357,7 +434,7 @@
     "kind": "support",
     "category": "text_support",
     "systems": "",
-    "lines": 27,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -368,7 +445,7 @@
     "kind": "support",
     "category": "config",
     "systems": "",
-    "lines": 10,
+    "lines": 11,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -390,7 +467,7 @@
     "kind": "guide",
     "category": "guide_dictionary",
     "systems": "guide",
-    "lines": 255,
+    "lines": 258,
     "local_import_count": 1,
     "local_imports": "guide/termsJa.js",
     "endpoints": ""
@@ -401,7 +478,7 @@
     "kind": "guide",
     "category": "guide_dictionary",
     "systems": "guide",
-    "lines": 230,
+    "lines": 231,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -412,9 +489,9 @@
     "kind": "runtime",
     "category": "root_runtime",
     "systems": "app_root",
-    "lines": 80,
+    "lines": 81,
     "local_import_count": 2,
-    "local_imports": "App.js | ./app.json",
+    "local_imports": "App.js | UNRESOLVED:./app.json",
     "endpoints": ""
   },
   {
@@ -423,7 +500,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 25,
+    "lines": 26,
     "local_import_count": 1,
     "local_imports": "lib/inputDraftStorage.js",
     "endpoints": ""
@@ -434,7 +511,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 216,
+    "lines": 217,
     "local_import_count": 1,
     "local_imports": "lib/supabase.ts",
     "endpoints": ""
@@ -445,10 +522,10 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 17,
+    "lines": 18,
     "local_import_count": 1,
     "local_imports": "lib/apiClient.js",
-    "endpoints": "/emotion/reflection/quota | /emotion/reflection/preview | /emotion/reflection/publish | /emotion/reflection/cancel"
+    "endpoints": "/emotion/reflection/cancel | /emotion/reflection/preview | /emotion/reflection/publish | /emotion/reflection/quota"
   },
   {
     "repo": "Cocolon",
@@ -456,7 +533,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 54,
+    "lines": 55,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -467,7 +544,7 @@
     "kind": "lib",
     "category": "iap",
     "systems": "client_service",
-    "lines": 181,
+    "lines": 182,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -478,7 +555,7 @@
     "kind": "lib",
     "category": "iap",
     "systems": "client_service",
-    "lines": 480,
+    "lines": 475,
     "local_import_count": 1,
     "local_imports": "lib/iap/iapConfig.js",
     "endpoints": ""
@@ -489,9 +566,9 @@
     "kind": "lib",
     "category": "iap",
     "systems": "client_service",
-    "lines": 873,
+    "lines": 874,
     "local_import_count": 4,
-    "local_imports": "lib/iap/iapConfig.js | lib/iap/iapRuntimeCatalog.js | ../supabase | ../subscriptionApi",
+    "local_imports": "lib/subscriptionApi.js | lib/supabase.ts | lib/iap/iapConfig.js | lib/iap/iapRuntimeCatalog.js",
     "endpoints": ""
   },
   {
@@ -500,7 +577,7 @@
     "kind": "lib",
     "category": "iap",
     "systems": "client_service",
-    "lines": 9,
+    "lines": 10,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -511,7 +588,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 141,
+    "lines": 142,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -522,7 +599,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 46,
+    "lines": 51,
     "local_import_count": 1,
     "local_imports": "lib/apiClient.js",
     "endpoints": ""
@@ -533,7 +610,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 138,
+    "lines": 139,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -544,10 +621,10 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 29,
+    "lines": 30,
     "local_import_count": 1,
     "local_imports": "lib/apiClient.js",
-    "endpoints": "/notices/read | /notices/popup-seen"
+    "endpoints": "/notices/popup-seen | /notices/read"
   },
   {
     "repo": "Cocolon",
@@ -555,7 +632,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 194,
+    "lines": 195,
     "local_import_count": 1,
     "local_imports": "lib/supabase.ts",
     "endpoints": ""
@@ -566,7 +643,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 20,
+    "lines": 21,
     "local_import_count": 1,
     "local_imports": "lib/apiClient.js",
     "endpoints": "/report-distribution/settings"
@@ -577,7 +654,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 13,
+    "lines": 14,
     "local_import_count": 1,
     "local_imports": "lib/apiClient.js",
     "endpoints": "/subscription/bootstrap | /subscription/me | /subscription/update"
@@ -588,7 +665,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 37,
+    "lines": 38,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -599,7 +676,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 49,
+    "lines": 50,
     "local_import_count": 1,
     "local_imports": "lib/apiClient.js",
     "endpoints": "/today-question/answers | /today-question/settings"
@@ -610,7 +687,7 @@
     "kind": "lib",
     "category": "service_lib",
     "systems": "client_service",
-    "lines": 20,
+    "lines": 21,
     "local_import_count": 1,
     "local_imports": "lib/supabase.ts",
     "endpoints": ""
@@ -621,7 +698,7 @@
     "kind": "support",
     "category": "text_support",
     "systems": "",
-    "lines": 0,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -632,7 +709,7 @@
     "kind": "support",
     "category": "config",
     "systems": "",
-    "lines": 16,
+    "lines": 17,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -643,7 +720,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 195,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -654,7 +731,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 275,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -665,7 +742,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 371,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -676,7 +753,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 183,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -687,7 +764,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 309,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -698,7 +775,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 89,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -709,7 +786,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 128,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -720,7 +797,7 @@
     "kind": "support",
     "category": "patch_archive",
     "systems": "",
-    "lines": 100,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -731,18 +808,7 @@
     "kind": "support",
     "category": "config",
     "systems": "",
-    "lines": 3,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "README.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 50,
+    "lines": 4,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -753,10 +819,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "account_settings",
-    "lines": 2318,
+    "lines": 2325,
     "local_import_count": 10,
-    "local_imports": "../lib/supabase | ../AuthContext | ../theme/ThemeContext | ../components/CocolonBackButton | ../components/CocolonPressable | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/iap/iapService | ../lib/iap/iapConfig | ../lib/apiClient",
-    "endpoints": "/account/profile/me | /myprofile/unfollow | /myprofile/follow"
+    "local_imports": "AuthContext.js | components/CocolonBackButton.js | components/CocolonPressable.js | lib/apiClient.js | lib/iap/iapConfig.js | lib/iap/iapService.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": "/account/profile/me | /myprofile/follow | /myprofile/unfollow"
   },
   {
     "repo": "Cocolon",
@@ -764,9 +830,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 290,
+    "lines": 291,
     "local_import_count": 8,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../components/CocolonBackButton | ../components/GuideRichText | ../components/GuideTermModal | ../guide/guidesJa | ../guide/termsJa",
+    "local_imports": "components/CocolonBackButton.js | components/GuideRichText.js | components/GuideTermModal.js | guide/guidesJa.js | guide/termsJa.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -775,9 +841,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 1024,
+    "lines": 1025,
     "local_import_count": 5,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/supabase | ../lib/apiClient",
+    "local_imports": "lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -786,9 +852,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 103,
+    "lines": 104,
     "local_import_count": 3,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../components/CocolonBackButton",
+    "local_imports": "components/CocolonBackButton.js | theme/ThemeContext.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -797,9 +863,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 103,
+    "lines": 104,
     "local_import_count": 3,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../components/CocolonBackButton",
+    "local_imports": "components/CocolonBackButton.js | theme/ThemeContext.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -808,9 +874,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 182,
+    "lines": 183,
     "local_import_count": 3,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../components/CocolonBackButton",
+    "local_imports": "components/CocolonBackButton.js | theme/ThemeContext.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -819,9 +885,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 525,
+    "lines": 526,
     "local_import_count": 8,
-    "local_imports": "../theme/ThemeContext | ../SubscriptionContext | ../ui/uiTokens | ../lib/supabase | ../lib/historyRetentionLabel | ../components/CocolonBackButton | ../components/CocolonPressable | ../lib/apiClient",
+    "local_imports": "SubscriptionContext.js | components/CocolonBackButton.js | components/CocolonPressable.js | lib/apiClient.js | lib/historyRetentionLabel.js | lib/supabase.ts | theme/ThemeContext.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -830,9 +896,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "emotionlog_social",
-    "lines": 1471,
+    "lines": 1472,
     "local_import_count": 9,
-    "local_imports": "../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../UnreadContext | ../TutorialContext | ../components/CocolonPressable | ../components/TutorialOverlay | ../lib/apiClient",
+    "local_imports": "TutorialContext.js | UnreadContext.js | components/CocolonPressable.js | components/TutorialOverlay.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -841,9 +907,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 395,
+    "lines": 396,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/emotions"
   },
   {
@@ -852,9 +918,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "emotionlog_social",
-    "lines": 1283,
+    "lines": 1284,
     "local_import_count": 6,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/supabase | ../AuthContext | ../lib/apiClient",
+    "local_imports": "AuthContext.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/myprofile/follow-requests/approve | /myprofile/follow-requests/reject"
   },
   {
@@ -863,9 +929,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "input_home",
-    "lines": 444,
+    "lines": 445,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/input_count"
   },
   {
@@ -876,7 +942,7 @@
     "systems": "input_home",
     "lines": 444,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/input_length"
   },
   {
@@ -885,10 +951,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "input_home",
-    "lines": 3994,
+    "lines": 3995,
     "local_import_count": 21,
-    "local_imports": "../AuthContext | ../lib/apiClient | ../lib/todayQuestionApi | ../lib/noticeApi | ../lib/emotionReflectionApi | ../lib/noticeActionRuntime | ../theme/ThemeContext | ../UnreadContext | ../TutorialContext | ../components/CocolonButton | ../components/CocolonPressable | ../components/CocolonSwitch | ../ui/uiTokens | ../ui/applyTypographyTokens | ../components/TutorialOverlay | ../components/TodayQuestionCard | ../components/TodayQuestionModal | ../components/NoticeModal | ../components/TutorialStartModal | ../components/UnreadBadge | ../components/EmotionReflectionPreviewModal",
-    "endpoints": "/input/summary | /emotion/submit"
+    "local_imports": "AuthContext.js | TutorialContext.js | UnreadContext.js | components/CocolonButton.js | components/CocolonPressable.js | components/CocolonSwitch.js | components/EmotionReflectionPreviewModal.js | components/NoticeModal.js | components/TodayQuestionCard.js | components/TodayQuestionModal.js | components/TutorialOverlay.js | components/TutorialStartModal.js",
+    "endpoints": "/emotion/submit | /global_summary | /input/summary"
   },
   {
     "repo": "Cocolon",
@@ -896,9 +962,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 501,
+    "lines": 502,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/login_streak"
   },
   {
@@ -907,9 +973,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "",
-    "lines": 179,
+    "lines": 180,
     "local_import_count": 5,
-    "local_imports": "../components/CocolonButton | ../components/UnreadBadge | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens",
+    "local_imports": "components/CocolonButton.js | components/UnreadBadge.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -918,9 +984,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 1029,
+    "lines": 1030,
     "local_import_count": 9,
-    "local_imports": "../components/CocolonBackButton | ../theme/ThemeContext | ../lib/supabase | ../components/CocolonPressable | ../components/CocolonSwitch | ../components/CocolonButton | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | components/CocolonButton.js | components/CocolonPressable.js | components/CocolonSwitch.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -929,9 +995,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 439,
+    "lines": 440,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/mymodel_discoveries"
   },
   {
@@ -940,9 +1006,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 443,
+    "lines": 444,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/mymodel_resonances"
   },
   {
@@ -951,7 +1017,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 14,
+    "lines": 15,
     "local_import_count": 2,
     "local_imports": "screens/MyModelScreen.js | screens/NexusScreen.js",
     "endpoints": ""
@@ -962,9 +1028,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 53,
+    "lines": 54,
     "local_import_count": 3,
-    "local_imports": "../components/CocolonPressable | ../components/UnreadBadge | screens/MyWebMenuCommon.js",
+    "local_imports": "components/CocolonPressable.js | components/UnreadBadge.js | screens/MyWebMenuCommon.js",
     "endpoints": ""
   },
   {
@@ -973,7 +1039,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 136,
+    "lines": 137,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -984,9 +1050,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 452,
+    "lines": 453,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient",
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": "/ranking/mymodel_questions"
   },
   {
@@ -995,9 +1061,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 65,
+    "lines": 66,
     "local_import_count": 2,
-    "local_imports": "../TutorialContext | screens/MyModelMenuCommon.js",
+    "local_imports": "TutorialContext.js | screens/MyModelMenuCommon.js",
     "endpoints": ""
   },
   {
@@ -1006,9 +1072,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 4017,
+    "lines": 4018,
     "local_import_count": 12,
-    "local_imports": "../theme/ThemeContext | ../lib/supabase | ../lib/user | ../lib/apiClient | ../UnreadContext | ../TutorialContext | ../components/TutorialOverlay | ../components/CocolonButton | ../components/CocolonPressable | ../components/CocolonBackButton | ../ui/uiTokens | ../ui/applyTypographyTokens",
+    "local_imports": "TutorialContext.js | UnreadContext.js | components/CocolonBackButton.js | components/CocolonButton.js | components/CocolonPressable.js | components/TutorialOverlay.js | lib/apiClient.js | lib/supabase.ts | lib/user.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1017,9 +1083,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 1880,
+    "lines": 2327,
     "local_import_count": 13,
-    "local_imports": "../theme/ThemeContext | ../lib/supabase | ../lib/user | ../UnreadContext | ../SubscriptionContext | ../TutorialContext | ../components/CocolonButton | ../components/CocolonPressable | ../components/TutorialOverlay | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient | screens/MenuActionCardCommon.js",
+    "local_imports": "SubscriptionContext.js | TutorialContext.js | UnreadContext.js | components/CocolonButton.js | components/CocolonPressable.js | components/TutorialOverlay.js | lib/apiClient.js | lib/supabase.ts | lib/user.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1028,9 +1094,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 409,
+    "lines": 410,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonButton | ../components/CocolonPressable | screens/MyWebReportViewerScreen.js | screens/SelfStructureReportGenerateScreen.js | screens/MyWebMenuCommon.js | ../ui/applyTypographyTokens",
+    "local_imports": "components/CocolonButton.js | components/CocolonPressable.js | ui/applyTypographyTokens.js | screens/MyWebMenuCommon.js | screens/MyWebReportViewerScreen.js | screens/SelfStructureReportGenerateScreen.js",
     "endpoints": ""
   },
   {
@@ -1039,9 +1105,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 411,
+    "lines": 412,
     "local_import_count": 3,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens",
+    "local_imports": "theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1050,7 +1116,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 116,
+    "lines": 117,
     "local_import_count": 1,
     "local_imports": "screens/MyWebMenuCommon.js",
     "endpoints": ""
@@ -1061,9 +1127,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 63,
+    "lines": 64,
     "local_import_count": 2,
-    "local_imports": "../lib/supabase | ../lib/apiClient",
+    "local_imports": "lib/apiClient.js | lib/supabase.ts",
     "endpoints": ""
   },
   {
@@ -1072,9 +1138,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 1272,
+    "lines": 1273,
     "local_import_count": 8,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../SubscriptionContext | ../lib/apiClient | ../lib/historyRetentionLabel",
+    "local_imports": "SubscriptionContext.js | components/CocolonBackButton.js | lib/apiClient.js | lib/historyRetentionLabel.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1083,7 +1149,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 44,
+    "lines": 45,
     "local_import_count": 1,
     "local_imports": "screens/MyWebMenuCommon.js",
     "endpoints": ""
@@ -1094,9 +1160,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 414,
+    "lines": 415,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../components/CocolonPressable | ../components/UnreadBadge | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens",
+    "local_imports": "components/CocolonBackButton.js | components/CocolonPressable.js | components/UnreadBadge.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1105,10 +1171,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 1035,
+    "lines": 1036,
     "local_import_count": 8,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../lib/apiClient | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/historyRetentionLabel | screens/MyWebReportScheduleUtils.js",
-    "endpoints": "/report-reads/mark"
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/historyRetentionLabel.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js | screens/MyWebReportScheduleUtils.js",
+    "endpoints": "/g,  | /report-reads/mark"
   },
   {
     "repo": "Cocolon",
@@ -1116,7 +1182,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 59,
+    "lines": 60,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -1127,10 +1193,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 2336,
+    "lines": 2337,
     "local_import_count": 6,
-    "local_imports": "../components/CocolonBackButton | ../lib/supabase | ../lib/apiClient | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens",
-    "endpoints": "/report-reads/mark"
+    "local_imports": "components/CocolonBackButton.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": "/g,  | /report-reads/mark"
   },
   {
     "repo": "Cocolon",
@@ -1138,10 +1204,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 2011,
-    "local_import_count": 24,
-    "local_imports": "../lib/supabase | ../lib/apiClient | ../lib/todayQuestionApi | screens/MyWebHistoryScreen.js | screens/MyWebReportHistoryScreen.js | screens/MyWebReportViewerScreen.js | screens/SelfStructureReportHistoryScreen.js | screens/SelfStructureReportViewerScreen.js | screens/SelfStructureReportGenerateScreen.js | screens/TodayQuestionHistoryScreen.js | screens/MyWebContentFirstScreen.js | screens/MyWebEmotionAnalysisScreen.js | screens/MyWebSelfStructureScreen.js | screens/MyWebInputHistoryMenuScreen.js | ../theme/ThemeContext | ../UnreadContext | ../SubscriptionContext | ../TutorialContext | ../components/CocolonPressable | ../components/CocolonButton | ../components/UnreadBadge | ../ui/uiTokens | ../ui/applyTypographyTokens | ../components/TutorialOverlay",
-    "endpoints": "/report-reads/mark | /myprofile/latest/status | /myweb/reports/ensure | /myweb/home-summary"
+    "lines": 2052,
+    "local_import_count": 25,
+    "local_imports": "SubscriptionContext.js | TutorialContext.js | UnreadContext.js | components/CocolonButton.js | components/CocolonPressable.js | components/TutorialOverlay.js | components/UnreadBadge.js | lib/apiClient.js | lib/supabase.ts | lib/todayQuestionApi.js | theme/ThemeContext.js | ui/applyTypographyTokens.js",
+    "endpoints": "/myprofile/latest/status | /myweb/home-summary | /myweb/reports/ensure | /report-reads/mark"
   },
   {
     "repo": "Cocolon",
@@ -1149,7 +1215,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 48,
+    "lines": 49,
     "local_import_count": 1,
     "local_imports": "screens/MyWebMenuCommon.js",
     "endpoints": ""
@@ -1160,31 +1226,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 100,
+    "lines": 101,
     "local_import_count": 3,
-    "local_imports": "../components/CocolonPressable | screens/MyWebMenuCommon.js | screens/MenuActionCardCommon.js",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "screens/nexus/NexusEmotionRankingCard.js",
-    "kind": "screen",
-    "category": "screen",
-    "systems": "nexus_piece",
-    "lines": 114,
-    "local_import_count": 3,
-    "local_imports": "../../theme/ThemeContext | ../../ui/uiTokens | ../../ui/applyTypographyTokens",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "screens/nexus/NexusReflectionCard.js",
-    "kind": "screen",
-    "category": "screen",
-    "systems": "nexus_piece",
-    "lines": 199,
-    "local_import_count": 4,
-    "local_imports": "../../components/CocolonPressable | ../../theme/ThemeContext | ../../ui/uiTokens | ../../ui/applyTypographyTokens",
+    "local_imports": "components/CocolonPressable.js | screens/MenuActionCardCommon.js | screens/MyWebMenuCommon.js",
     "endpoints": ""
   },
   {
@@ -1193,9 +1237,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "nexus_piece",
-    "lines": 1543,
+    "lines": 1580,
     "local_import_count": 9,
-    "local_imports": "../components/CocolonButton | ../components/CocolonPressable | ../components/TutorialOverlay | ../TutorialContext | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/nexusApi | screens/nexus/NexusReflectionCard.js",
+    "local_imports": "TutorialContext.js | components/CocolonButton.js | components/CocolonPressable.js | components/TutorialOverlay.js | lib/nexusApi.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js | screens/nexus/NexusReflectionCard.js",
     "endpoints": ""
   },
   {
@@ -1204,9 +1248,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "input_home",
-    "lines": 597,
+    "lines": 598,
     "local_import_count": 10,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../components/CocolonBackButton | ../components/CocolonButton | ../components/CocolonPressable | ../components/NoticeRichText | ../components/UnreadBadge | ../lib/noticeActionRuntime | ../lib/noticeApi",
+    "local_imports": "components/CocolonBackButton.js | components/CocolonButton.js | components/CocolonPressable.js | components/NoticeRichText.js | components/UnreadBadge.js | lib/noticeActionRuntime.js | lib/noticeApi.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1215,7 +1259,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "ranking",
-    "lines": 45,
+    "lines": 46,
     "local_import_count": 1,
     "local_imports": "screens/MyModelMenuCommon.js",
     "endpoints": ""
@@ -1226,7 +1270,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "ranking",
-    "lines": 66,
+    "lines": 67,
     "local_import_count": 1,
     "local_imports": "screens/MyModelMenuCommon.js",
     "endpoints": ""
@@ -1237,7 +1281,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "ranking",
-    "lines": 66,
+    "lines": 67,
     "local_import_count": 1,
     "local_imports": "screens/MyModelMenuCommon.js",
     "endpoints": ""
@@ -1248,10 +1292,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "ranking",
-    "lines": 516,
+    "lines": 517,
     "local_import_count": 6,
-    "local_imports": "../lib/supabase | ../lib/apiClient | ../theme/ThemeContext | ../components/CocolonPressable | ../ui/uiTokens | ../ui/applyTypographyTokens",
-    "endpoints": "/ranking/login_streak | /ranking/input_count | /ranking/input_length | /ranking/mymodel_questions | /ranking/mymodel_resonances"
+    "local_imports": "components/CocolonPressable.js | lib/apiClient.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": "/ranking/input_count | /ranking/input_length | /ranking/login_streak | /ranking/mymodel_questions | /ranking/mymodel_resonances"
   },
   {
     "repo": "Cocolon",
@@ -1259,10 +1303,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 860,
+    "lines": 861,
     "local_import_count": 8,
-    "local_imports": "../lib/supabase | ../lib/user | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/apiClient | ../components/selfStructure/SelfStructureDeepRenderer | ../components/CocolonBackButton",
-    "endpoints": "/myprofile/latest/status"
+    "local_imports": "components/CocolonBackButton.js | components/selfStructure/SelfStructureDeepRenderer.js | lib/apiClient.js | lib/supabase.ts | lib/user.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": "/g,  | /myprofile/latest/status"
   },
   {
     "repo": "Cocolon",
@@ -1270,10 +1314,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 618,
+    "lines": 619,
     "local_import_count": 7,
-    "local_imports": "../components/CocolonBackButton | ../lib/apiClient | ../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../SubscriptionContext | ../lib/historyRetentionLabel",
-    "endpoints": "/report-reads/mark"
+    "local_imports": "SubscriptionContext.js | components/CocolonBackButton.js | lib/apiClient.js | lib/historyRetentionLabel.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": "/g,  | /report-reads/mark"
   },
   {
     "repo": "Cocolon",
@@ -1281,10 +1325,10 @@
     "kind": "screen",
     "category": "screen",
     "systems": "analysis_myweb",
-    "lines": 398,
+    "lines": 399,
     "local_import_count": 5,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../SubscriptionContext | ../components/selfStructure/SelfStructureDeepRenderer",
-    "endpoints": ""
+    "local_imports": "SubscriptionContext.js | components/selfStructure/SelfStructureDeepRenderer.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": "/g, "
   },
   {
     "repo": "Cocolon",
@@ -1292,9 +1336,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "account_settings",
-    "lines": 620,
+    "lines": 621,
     "local_import_count": 8,
-    "local_imports": "../AuthContext | ../components/CocolonPressable | ../components/CocolonSwitch | ../lib/apiClient | ../lib/reportDistributionApi | ../lib/todayQuestionApi | ../theme/ThemeContext | screens/MyWebMenuCommon.js",
+    "local_imports": "AuthContext.js | components/CocolonPressable.js | components/CocolonSwitch.js | lib/apiClient.js | lib/reportDistributionApi.js | lib/todayQuestionApi.js | theme/ThemeContext.js | screens/MyWebMenuCommon.js",
     "endpoints": "/account/profile/me | /emotion-notifications/settings"
   },
   {
@@ -1303,9 +1347,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "account_settings",
-    "lines": 168,
+    "lines": 169,
     "local_import_count": 6,
-    "local_imports": "../AuthContext | ../TutorialContext | ../UnreadContext | ../lib/apiClient | ../lib/accountLocalCleanup | screens/MyWebMenuCommon.js",
+    "local_imports": "AuthContext.js | TutorialContext.js | UnreadContext.js | lib/accountLocalCleanup.js | lib/apiClient.js | screens/MyWebMenuCommon.js",
     "endpoints": "/account/delete"
   },
   {
@@ -1314,7 +1358,7 @@
     "kind": "screen",
     "category": "screen",
     "systems": "account_settings",
-    "lines": 46,
+    "lines": 47,
     "local_import_count": 2,
     "local_imports": "screens/MyModelMenuCommon.js | screens/MyWebMenuCommon.js",
     "endpoints": ""
@@ -1325,9 +1369,9 @@
     "kind": "screen",
     "category": "screen",
     "systems": "account_settings",
-    "lines": 1241,
+    "lines": 1242,
     "local_import_count": 9,
-    "local_imports": "../components/CocolonBackButton | ../theme/ThemeContext | ../SubscriptionContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../lib/iap/iapService | ../lib/iap/iapRuntimeCatalog | ../lib/iap/iapConfig | ../lib/supabase",
+    "local_imports": "SubscriptionContext.js | components/CocolonBackButton.js | lib/iap/iapConfig.js | lib/iap/iapRuntimeCatalog.js | lib/iap/iapService.js | lib/supabase.ts | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1336,9 +1380,31 @@
     "kind": "screen",
     "category": "screen",
     "systems": "input_home",
-    "lines": 666,
+    "lines": 667,
     "local_import_count": 9,
-    "local_imports": "../theme/ThemeContext | ../ui/uiTokens | ../ui/applyTypographyTokens | ../SubscriptionContext | ../lib/historyRetentionLabel | ../components/CocolonButton | ../components/CocolonBackButton | ../components/CocolonPressable | ../lib/todayQuestionApi",
+    "local_imports": "SubscriptionContext.js | components/CocolonBackButton.js | components/CocolonButton.js | components/CocolonPressable.js | lib/historyRetentionLabel.js | lib/todayQuestionApi.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "screens/nexus/NexusEmotionRankingCard.js",
+    "kind": "screen",
+    "category": "screen",
+    "systems": "nexus_piece",
+    "lines": 115,
+    "local_import_count": 3,
+    "local_imports": "theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
+    "endpoints": ""
+  },
+  {
+    "repo": "Cocolon",
+    "path": "screens/nexus/NexusReflectionCard.js",
+    "kind": "screen",
+    "category": "screen",
+    "systems": "nexus_piece",
+    "lines": 200,
+    "local_import_count": 4,
+    "local_imports": "components/CocolonPressable.js | theme/ThemeContext.js | ui/applyTypographyTokens.js | ui/uiTokens.js",
     "endpoints": ""
   },
   {
@@ -1347,7 +1413,7 @@
     "kind": "support",
     "category": "script",
     "systems": "",
-    "lines": 74,
+    "lines": 75,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -1358,42 +1424,9 @@
     "kind": "support",
     "category": "script",
     "systems": "",
-    "lines": 112,
+    "lines": 113,
     "local_import_count": 0,
     "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "SUBSCRIPTION_RELEASE_PHASE3.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 63,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "SUBSCRIPTION_RELEASE_PHASE4.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 57,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "SubscriptionContext.js",
-    "kind": "runtime",
-    "category": "root_runtime",
-    "systems": "app_root",
-    "lines": 401,
-    "local_import_count": 3,
-    "local_imports": "lib/supabase.ts | lib/iap/iapRuntimeCatalog.js | lib/subscriptionApi.js",
     "endpoints": ""
   },
   {
@@ -1409,33 +1442,11 @@
   },
   {
     "repo": "Cocolon",
-    "path": "TutorialContext.js",
-    "kind": "runtime",
-    "category": "root_runtime",
-    "systems": "app_root",
-    "lines": 312,
-    "local_import_count": 1,
-    "local_imports": "lib/supabase.ts",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "TutorialOverlay.js",
-    "kind": "runtime",
-    "category": "root_runtime",
-    "systems": "",
-    "lines": 493,
-    "local_import_count": 1,
-    "local_imports": "theme/ThemeContext.js",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
     "path": "ui/applyTypographyTokens.js",
     "kind": "ui",
     "category": "tokens_typography",
     "systems": "shared_ui",
-    "lines": 113,
+    "lines": 114,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""
@@ -1446,18 +1457,7 @@
     "kind": "ui",
     "category": "tokens_typography",
     "systems": "shared_ui",
-    "lines": 79,
-    "local_import_count": 0,
-    "local_imports": "",
-    "endpoints": ""
-  },
-  {
-    "repo": "Cocolon",
-    "path": "UnreadContext.js",
-    "kind": "runtime",
-    "category": "root_runtime",
-    "systems": "app_root",
-    "lines": 781,
+    "lines": 80,
     "local_import_count": 0,
     "local_imports": "",
     "endpoints": ""

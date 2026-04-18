@@ -9,129 +9,578 @@ source_mode: "local_snapshot"
 file_counts:
   Cocolon: 133
   mashos-api: 250
-purpose: "華恋が EmlisAI 実装後かつ Home write gate / Piece再定義後の国家システムを前提に修正できるようにする"
+purpose: "華恋が derived state, worker, publish governance, startup snapshot を前提に修正できるようにする"
 ---
 
 # 1. 1行定義
 
-ここでいう国家システムは、**Home 起点の保存 API 群 + immediate response（EmlisAI） + material snapshot + job queue + worker + publish governance + startup snapshot + read-side API** をまとめた運用全体です。  
-current snapshot では、**ProfileCreate と DeepInsight を live write gate から外し、Home を唯一の primary write gate として扱う**ことが重要です。
+ここでいう国家システムは、**入力保存 API 群 + material snapshot + job queue + worker + publish governance + startup snapshot + read-side API** をまとめた運用全体です。  
+backend だけでは終わらず、**RN surface まで含めて state の流れを固定する**ための資料です。
+
+**2026-04-18 差分:** 国家システムの中に、保存完了直後の `input_feedback` を返す **EmlisAI 同期 immediate path** が加わった。これは queue / worker 系の派生 state とは別の、request 内同期層である。
 
 # 2. 実行パイプライン
 
 ```mermaid
 flowchart LR
-  Home[Home write gate\nInput / TodayQuestion / Piece preview&publish]
-  Save[save APIs\nemotion_submit / today_question / emotion_reflection]
-  Emlis[EmlisAI immediate response\ncontext -> world model -> style -> reply]
+  Gates[Input gates\nInput / ProfileCreate / DeepInsight / Echo-Discovery / TodayQuestion]
+  Save[save APIs\nemotion_submit / mymodel_create / deep_insight / qna / today_question / emotion_reflection]
   Queue[astor_job_queue + generation_lock]
   Snapshot[astor_material_snapshots\ninternal/public]
   Worker[astor_worker\nanalyze / generate / inspect / refresh]
   Gov[publish_governance]
   Startup[startup_snapshot_store]
-  Read[read APIs\nmyweb / myprofile / nexus / emotion-log / notices / report-reads / startup / ranking / account-status]
+  Read[read APIs\nmyweb / myprofile / nexus / emotion-log / notices / report-reads / startup]
   RN[RN surfaces]
-  AccountAsset[ProfileCreate\nAccount-only asset]
-  Legacy[legacy physical leftovers\nDeepInsight file / old qna discovery routes]
 
-  Home --> Save
-  Save --> Emlis --> RN
-  Save --> Queue --> Snapshot --> Worker --> Gov --> Read --> RN
+  Gates --> Save --> Queue --> Snapshot --> Worker --> Gov --> Read --> RN
   Save --> Startup
   Worker --> Startup
   Startup --> Read
-  AccountAsset --> RN
-  Legacy -. not current live write gate .-> RN
 ```
 
-# 3. 入力窓口（current operational reading）
+# 3. 入力窓口（current code fact）
 
-| 入力窓口 | frontend | save API | 国家システム上の位置づけ |
+| 入力窓口 | frontend | save API | 備考 |
 |---|---|---|---|
-| 感情入力 | `screens/InputScreen.js` | `api_emotion_submit.py` | Home write gate の最上流。保存直後に EmlisAI immediate reply を返す |
-| Today Question | `components/TodayQuestionCard.js` | `api_today_question.py` | Home write gate に含める |
-| Piece preview / publish | `screens/InputScreen.js`, `components/EmotionReflectionPreviewModal.js` | `api_emotion_reflection.py` | current input だけから作る Piece。publish 時も shared save service 経由 |
-| ProfileCreate | `screens/MyModelCreateScreen.js` | `api_mymodel_create.py` | Account-only asset。国家システムの primary write gate には入れない |
-| DeepInsight | current visible flow なし | `api_deep_insight.py` legacy file may remain | current live route registration / visible flow から外した |
+| 感情入力 | `screens/InputScreen.js` | `api_emotion_submit.py` | Input の最上流。ranking / account status / global summary / snapshot に波及 |
+| secret 切替 | `MyWebHistory` 系 / Input 周辺 | `api_emotion_secret.py` | public snapshot に直結 |
+| ProfileCreate | `screens/MyModelCreateScreen.js` | `api_mymodel_create.py` | 固定プロフィール資産 |
+| DeepInsight 入力 | `screens/DeepInsightScreen.js` | `api_deep_insight.py` | global 材料側へ入る |
+| Piece 反応 | `screens/MyModelReflectionsScreen.js`, `screens/NexusScreen.js` | `api_mymodel_qna.py` | echoes / discoveries / view |
+| Today Question | `components/TodayQuestionCard.js` | `api_today_question.py` | startup current でも使う |
+| EmotionGeneratedPiece | `screens/InputScreen.js` | `api_emotion_reflection.py` | current emotion から preview/publish |
 
-# 4. current snapshot での国家システムの読み方
+# 4. 中央中枢ファイル
 
-## 4-1. `emotion_submit_service.py` が immediate reply の source of truth
+| ファイル | 現在の役割 |
+|---|---|
+| `ai/services/ai_inference/astor_job_queue.py` | DB job queue |
+| `ai/services/ai_inference/generation_lock.py` | 同一 user / 対象の重複実行抑止 |
+| `ai/services/ai_inference/astor_material_snapshots.py` | global / emotion_period internal/public snapshot |
+| `ai/services/ai_inference/astor_worker.py` | snapshot / analyze / generate / inspect / refresh dispatch |
+| `ai/services/ai_inference/publish_governance.py` | READY / visible content / retention / publish gating |
+| `ai/services/ai_inference/startup_snapshot_store.py` | app startup 用軽量断面 |
+| `ai/services/ai_inference/response_microcache.py` | short TTL cache |
+| `ai/services/ai_inference/api_app_bootstrap.py` | `/app/bootstrap` / `/app/startup` read-side |
+| `ai/services/ai_inference/api_contract_registry.py` | public API contract source of truth |
 
-current snapshot の入力後コメントは route ごとに別実装されず、  
-**`persist_emotion_submission()` で `render_emlis_ai_reply(...)` を呼ぶ**構造です。
+# 5. 現在の重要コード断面
 
-## 4-2. Piece は Home / current input からしか作らない
+## 5-1. emotion submit は入力保存後に downstream を起動する
+```python
+    *,
+    user_id: str,
+    emotion_details: List[Dict[str, Any]],
+    created_at: str,
+    avg_strength: Optional[float],
+    memo: Optional[str],
+    is_secret: bool,
+    notify_friends: bool,
+) -> None:
+    # 1) 感情通知（EmotionLog 用タイムライン + Push）
+    if notify_friends:
+        try:
+            await _notify_follow_viewers_about_emotion(
+                owner_user_id=user_id,
+                emotion_details=emotion_details,
+                created_at=created_at,
+            )
+        except Exception as exc:
+            logger.error("Failed to notify follow viewers about emotion (bg): %s", exc)
 
-`api_emotion_reflection.py` は current input ベースで preview / publish を行います。  
-publish 後の input_feedback も shared save service へ寄せて読むこと。
+    # 2) ASTOR への感情インジェスト（失敗しても致命的ではない）
+    try:
+        astor_payload = AstorEmotionPayload(
+            user_id=user_id,
+            created_at=created_at,
+            emotions=emotion_details,
+            emotion_strength_avg=avg_strength if avg_strength is not None else 0.0,
+            memo=memo,
+            is_secret=bool(is_secret),
+        )
+        astor_req = AstorRequest(
+            mode=AstorMode.EMOTION_INGEST,
+            emotion=astor_payload,
+        )
+        try:
+            astor_engine.handle(astor_req)
+        except Exception as exc:
+            logger.error("ASTOR EmotionIngest failed (bg): %s", exc)
 
-## 4-3. ProfileCreate は国家システム材料として再接続しない
+        # 3) MyProfile 最新レポート（プレビュー）は重いので「別ワーカー」に委譲（Phase 6）
+        #    - Supabase のジョブキュー( astor_jobs )へ enqueue
+        #    - Worker 側が myprofile_reports(latest) を生成/更新する
+        try:
+            if ASTOR_WORKER_QUEUE_ENABLED:
+                from astor_job_queue import enqueue_job as _enqueue_job
 
-この session の設計では、ProfileCreate は **固定プロフィール資産** です。  
-self structure / premium reflection / ranking / question discovery の材料として戻さないこと。
+                await _enqueue_job(
+                    job_key=f"myprofile_latest_refresh:{user_id}",
+                    job_type="myprofile_latest_refresh_v1",
+                    user_id=user_id,
+                    payload={
+                        "trigger": "emotion_submit",
+                        "requested_at": created_at,
+                    },
+                    priority=50,
+                )
+                # 4) Central material snapshots (internal/public) are generated in worker (debounced)
+                try:
+                    if ASTOR_SNAPSHOT_ENQUEUE_ENABLED:
+                        now_dt = datetime.now(timezone.utc).replace(microsecond=0)
+                        delay = ASTOR_SELF_STRUCTURE_DEBOUNCE_SECONDS
+                        run_after_iso = (now_dt + timedelta(seconds=delay)).isoformat().replace("+00:00", "Z")
+                        await _enqueue_job(
+                            job_key=f"snapshot:{user_id}:global:internal",
+                            job_type="snapshot_generate_v1",
+                            user_id=user_id,
+                            payload={
+                                "trigger": "emotion_submit",
+                                "requested_at": created_at,
+                                "scope": "global",
+                                "debounce_seconds": delay,
+                            },
+                            priority=20,
+                            run_after_iso=run_after_iso,
+                        )
+                except Exception as exc:
+                    logger.error("Snapshot enqueue failed (bg): %s", exc)
 
-注意:
-- internal canonical には `MyModelCreate` が残る
-- response key / route canonical / storage canonical が旧名のままでも、意味を Piece や国家システム材料へ戻さない
+                try:
+                    await enqueue_ranking_board_refresh_many(
+                        metric_keys=("emotions", "input_count", "input_length"),
+                        user_id=user_id,
+                        trigger="emotion_submit",
+                        requested_at=created_at,
+                        debounce=True,
+                    )
+                except Exception as exc:
+                    logger.error("Ranking board enqueue failed (bg): %s", exc)
 
-## 4-4. DeepInsight は current live flow から外したが、repo residue は残りうる
+                try:
+                    await enqueue_account_status_refresh(
+                        target_user_id=user_id,
+                        trigger="emotion_submit",
+                        requested_at=created_at,
+                        debounce=True,
+```
 
-DeepInsight については次を分けて読むこと。
+要点:
+- `notify_friends` が true なら social side も作る
+- `myprofile_latest_refresh_v1` を enqueue
+- `snapshot_generate_v1` を enqueue
+- ranking / account status / global summary refresh も enqueue
 
-- live route registration / public registry / current visible flow: 外した
-- physical file / helper / data / table cleanup: 後続 cleanup の対象として残りうる
+## 5-2. secret toggle でも snapshot を即時更新する
+```python
+        # 3) ASTOR patterns の trigger 側も整合（ts で突合）
+        # - created_at が指定されていればそれを優先
+        # - なければ Supabase の返却行から拾う
+        ts = (payload.created_at or updated_row.get("created_at") or "").strip()
+        updated_triggers = 0
+        if ts:
+            try:
+                # NOTE: /emotion/submit が使っている astor_engine インスタンスの
+                # in-memory state を更新することで、次回の ingest/save で上書きされる事故を避ける。
+                updated_triggers = astor_engine._patterns.update_triggers_secret_by_ts(  # type: ignore[attr-defined]
+                    user_id=user_id,
+                    ts=ts,
+                    is_secret=bool(payload.is_secret),
+                )
+            except Exception as exc:
+                logger.error("Failed to update ASTOR triggers secret flag: %s", exc)
 
-**「file がある」ことと「current live system で使っている」ことを同一視しない**こと。
+        # 4) 0件更新（= 対象が無い or 所有者でない）を 404 扱いにする
+        if not updated_row:
+            raise HTTPException(status_code=404, detail="Emotion record not found")
 
-## 4-5. legacy qna discovery route は visible flow と切り分ける
 
-`/mymodel/qna/trending` と `/mymodel/qna/holders` は legacy public route として残る場合があります。  
-ただし current frontend visible flow ではこれを使わず、  
-**generated Piece の read path は Nexus / qna_list 側へ寄せて読む**こと。
+        # 5) secret 切替は public_snapshot に直結するため、中央材料庁（snapshot）を即時更新する
+        #    - privacy/safety の観点で「待たない」方針（emotion/submit のような長いデバウンスは不要）
+        #    - job_key により自然に coalesce される（同一userの snapshot は1行に集約）
+        if ASTOR_WORKER_QUEUE_ENABLED and ASTOR_SNAPSHOT_ENQUEUE_ENABLED:
+            try:
+                from astor_job_queue import enqueue_job as _enqueue_job
 
-## 4-6. Piece count / ranking は key と意味を分ける
+                now_iso = (
+                    datetime.now(timezone.utc)
+                    .replace(microsecond=0)
+                    .isoformat()
+                    .replace("+00:00", "Z")
+                )
+                await _enqueue_job(
+                    job_key=f"snapshot:{user_id}:global:internal",
+                    job_type="snapshot_generate_v1",
+                    user_id=user_id,
+                    payload={
+                        "trigger": "emotion_secret",
+                        "requested_at": now_iso,
+                        "scope": "global",
+                        "emotion_id": payload.emotion_id,
+                        "emotion_created_at": ts or None,
+                        "is_secret": bool(payload.is_secret),
+                    },
+                    priority=40,
+                )
+            except Exception as exc:
+                # enqueue 失敗は API の成功/失敗を左右しない（best-effort）
+                logger.error("Snapshot enqueue failed (emotion_secret): %s", exc)
+        return EmotionSecretUpdateResponse(
+            status="ok",
+            id=updated_row.get("id", payload.emotion_id),
+            is_secret=bool(payload.is_secret),
+            updated_triggers=int(updated_triggers or 0),
+        )
+```
 
-Account / Ranking の current visible meaning は Piece count ですが、  
-public shape / board payload / legacy kernel には `mymodel_questions_total` / `questions_total` が残ります。  
-したがって、
+要点:
+- `is_secret` 切替は public snapshot に直結
+- そのため `snapshot_generate_v1` を即時 enqueue する
 
-- key 名
-- visible meaning
-- DB / RPC / projection の計算根拠
+## 5-3. current emotion だけで動く別 Piece flow がある
+```python
+# -*- coding: utf-8 -*-
+"""api_emotion_reflection.py
 
-を分けて確認します。
+New Reflection flow driven by the current emotion input only.
 
-# 5. EmlisAI と国家システムの関係
+Endpoints
+---------
+- POST /emotion/reflection/preview
+- POST /emotion/reflection/publish
+- POST /emotion/reflection/cancel
+- GET  /emotion/reflection/quota
+"""
 
-EmlisAI は current snapshot でも以下のままです。
+from __future__ import annotations
 
-- route ではなく `emotion_submit_service.py` を source of truth にして読む
-- worker family ではなく immediate/synchronous path として扱う
-- tier 差分は capability と subscription copy をセットで見る
-- `comment_text` public contract を壊さない
+```
 
-# 6. current code で特に誤読しやすい点
+store 側はこう保持する。
+```python
+# -*- coding: utf-8 -*-
+"""emotion_reflection_store.py
 
-1. **ProfileCreate file / route canonical が残っていても、国家システム材料へ戻したわけではない**
-2. **DeepInsight file / helper / table token が残っていても、current live route とは限らない**
-3. **`mymodel_questions_total` は key 名として残っていても、visible semantics は Piece count**
-4. **`/mymodel/qna/trending` と `/holders` は public route が残っていても current visible flow では使っていない**
-5. **EmlisAI は worker job ではなく immediate response**
+Store helpers for the new emotion-generated Reflection flow.
 
-# 7. 修正時の最短判断
+Design
+------
+- Uses the same `mymodel_reflections` table family to keep read-side reuse viable.
+- Draft preview rows are stored with:
+    source_type = emotion_generated
+    status      = draft
+    is_active   = false
+- Publish promotes the same row to ready + active WITHOUT archiving sibling rows.
+"""
 
-- Home write gate を変える  
-  → `InputScreen.js`, `api_emotion_submit.py`, `api_today_question.py`, `api_emotion_reflection.py`, `emotion_submit_service.py`
+from __future__ import annotations
 
-- Piece を変える  
-  → `InputScreen.js`, `EmotionReflectionPreviewModal.js`, `api_emotion_reflection.py`, `reflection_publish_entitlements.py`, `api_nexus.py`, `api_mymodel_qna.py`
+from datetime import datetime, timezone
+from typing import Any, Dict, Optional, Sequence
 
-- ProfileCreate を変える  
-  → `AccountScreen.js`, `MyModelCreateScreen.js`, `api_mymodel_create.py`, `mymodel_entitlements.py`
+from astor_reflection_store import (
+    REFLECTIONS_TABLE,
+    _sb_count,
+    _sb_get_json,
+    _sb_patch_json,
+    _sb_post_json,
+)
+from generated_reflection_display import apply_generated_display_to_content_json
+from reflection_publish_entitlements import get_current_month_window_jst
 
-- DeepInsight residue を cleanup する  
-  → `MyWebScreen.js`, `App.js`, `api_contract_registry.py`, `PUBLIC_API_REGISTRY.md`, `screens/DeepInsightScreen.js`, `api_deep_insight.py`
+EMOTION_REFLECTION_SOURCE_TYPE = "emotion_generated"
+EMOTION_REFLECTION_VERSION = "emotion_reflection.v1"
 
-- Piece count / ranking を変える  
-  → `AccountScreen.js`, `RankingTopScreen.js`, `MyModelQuestionsRankingScreen.js`, `api_account_status.py`, `api_ranking.py`, `astor_account_status_store.py`, `astor_ranking_kernel.py`
+
+def _now_iso_z() -> str:
+```
+
+要点:
+- これは **official repo 名ではないが、華恋用の補助用語では EmotionGeneratedPiece** と呼ぶ
+- `source_type = emotion_generated`
+- `status = draft -> ready`
+- `mymodel_reflections` family を reuse している
+
+## 5-4. startup snapshot は複数 section を束ねる
+```python
+from __future__ import annotations
+
+import asyncio
+import logging
+import os
+from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, Mapping, Optional
+
+from response_microcache import build_cache_key, get_or_compute, invalidate_exact, invalidate_prefix
+
+logger = logging.getLogger("startup_snapshot_store")
+
+
+STARTUP_SNAPSHOT_ENABLED = (os.getenv("STARTUP_SNAPSHOT_ENABLED") or "true").strip().lower() in {"1", "true", "yes", "on"}
+try:
+    STARTUP_SNAPSHOT_CACHE_TTL_SECONDS = float(os.getenv("STARTUP_SNAPSHOT_CACHE_TTL_SECONDS", "25") or "25")
+except Exception:
+    STARTUP_SNAPSHOT_CACHE_TTL_SECONDS = 25.0
+try:
+    STARTUP_SNAPSHOT_REFRESH_THROTTLE_SECONDS = float(os.getenv("STARTUP_SNAPSHOT_REFRESH_THROTTLE_SECONDS", "20") or "20")
+except Exception:
+    STARTUP_SNAPSHOT_REFRESH_THROTTLE_SECONDS = 20.0
+try:
+    STARTUP_SNAPSHOT_SECTION_TIMEOUT_SECONDS = float(os.getenv("STARTUP_SNAPSHOT_SECTION_TIMEOUT_SECONDS", "12") or "12")
+except Exception:
+    STARTUP_SNAPSHOT_SECTION_TIMEOUT_SECONDS = 12.0
+
+JST = timezone(timedelta(hours=9))
+STARTUP_SNAPSHOT_SCHEMA_VERSION = "startup_snapshot.v1"
+STARTUP_SNAPSHOT_SOURCE_VERSIONS: Dict[str, str] = {
+    "schema": STARTUP_SNAPSHOT_SCHEMA_VERSION,
+    "emotion_log_unread": "emotion_log.unread.v1",
+    # Backward-compatible legacy alias for older clients.
+    "friends_unread": "friends.unread.v1",
+    "myweb_unread": "report_reads.myweb_unread.v1",
+    "notices_current": "notices.current.v1",
+    "today_question_light": "today_question.current.light.v1",
+    "input_summary": "input.summary.v1",
+    "global_summary": "global_summary.ready_first.v1",
+```
+
+現在の canonical section:
+- `emotion_log_unread`
+- `friends_unread`（legacy alias）
+- `myweb_unread`
+- `notices_current`
+- `today_question_light`
+- `input_summary`
+- `global_summary`
+
+# 6. worker job family
+
+主要 job 一覧は `inventory/worker_job_map.csv` を見る。  
+ここでは読みに必要な核だけ固定する。
+
+| family | 起点 | 代表 job |
+|---|---|---|
+| snapshot | input / secret / myweb ensure | `snapshot_generate_v1` |
+| emotion analysis | emotion_period snapshot | `analyze_emotion_structure_standard_v1`, `analyze_emotion_structure_deep_v1` |
+| myweb report | emotion analysis / ensure | `generate_emotion_report_v2`, `inspect_emotion_report_v1` |
+| self structure | global snapshot | `analyze_self_structure_standard_v1`, `analyze_self_structure_deep_v1`, `myprofile_latest_refresh_v1` |
+| generated reflection | global public snapshot | `generate_premium_reflections_v1`, `inspect_reflection_v1` |
+| refresh families | input / enqueue helpers | `refresh_ranking_board_v1`, `refresh_account_status_v1`, `refresh_friend_feed_v1`, `refresh_global_summary_v1` と各 inspect |
+
+# 7. public API contract は国家システムの外壁
+
+## 7-1. policy の核
+```md
+# Cocolon Public API Contract Policy
+
+Policy version: `2026-03-20.mymodel-qna-unread-status.v1`
+
+## Core rules
+
+1. RN is display-only.
+2. Existing requests are additive-only.
+3. Existing responses are additive-only.
+4. Breaking changes require a new endpoint or version.
+5. The server absorbs compatibility for older builds.
+6. Every public API response carries policy metadata headers.
+7. Compatibility must be guarded by automated tests.
+8. Deprecated public routes must declare their replacement route/version when one exists.
+
+## Why this policy exists
+
+This policy revision adds `/mymodel/qna/unread-status` so MyModel Home unread
+aggregation stays server-owned across the viewer's accessible reflections, while existing
+v1 routes remain additive-only and backward compatible.
+```
+
+要点:
+- RN is display-only
+- existing request/response are additive-only
+- breaking change は新 endpoint/version
+- compatibility は server 側で吸収
+- response headers と tests で enforce する
+
+## 7-2. だから route 変更は設計フェーズが必要
+`/myweb/*`, `/mymodel/*`, `/friends/*`, `/emotion-log/*` などは  
+**見た目の名称変更だけで勝手に変えない**。  
+変えるなら contract policy と public registry と tests まで同時に触る。
+
+# 8. RN 側の境界ルール
+
+```python
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import os
+import re
+import sys
+from pathlib import Path
+from typing import Iterable, List, Sequence, Tuple
+
+ROOT = Path(__file__).resolve().parents[1]
+FORBIDDEN_PATTERNS: Sequence[Tuple[str, re.Pattern[str]]] = (
+    ("supabase.from(", re.compile(r"\bsupabase\.from\s*\(")),
+    ("supabase.rpc(", re.compile(r"\bsupabase\.rpc\s*\(")),
+    ("supabase.channel(", re.compile(r"\bsupabase\.channel\s*\(")),
+    ("raw fetch(", re.compile(r"(?<![\w$.])fetch\s*\(")),
+)
+SOURCE_SUFFIXES = {".js", ".jsx", ".ts", ".tsx"}
+RN_ROOT_ENV_VARS = ("COCOLON_RN_ROOT", "RN_ROOT")
+
+
+def _looks_like_rn_root(path: Path) -> bool:
+    return (
+        path.is_dir()
+        and (path / "App.js").is_file()
+        and (path / "lib").is_dir()
+        and (path / "screens").is_dir()
+    )
+
+
+
+def _iter_candidate_rn_roots() -> Iterable[Path]:
+    seen: set[str] = set()
+
+    def _yield(path: Path) -> Iterable[Path]:
+        try:
+            resolved = path.resolve()
+        except FileNotFoundError:
+            resolved = path.absolute()
+        key = str(resolved)
+        if key in seen:
+            return
+        seen.add(key)
+        yield path
+
+    for env_name in RN_ROOT_ENV_VARS:
+        value = os.environ.get(env_name)
+        if value:
+            yield from _yield(Path(value).expanduser())
+
+    anchors = [ROOT, ROOT.parent, *ROOT.parents[:2]]
+    candidate_names = ("cocolon-mvp", "RN(アプリ側)")
+    for anchor in anchors:
+        yield from _yield(anchor)
+        for name in candidate_names:
+            yield from _yield(anchor / name)
+```
+
+要点:
+- RN surface では `supabase.from`, `supabase.rpc`, `supabase.channel`, raw `fetch()` を禁止
+- 例外は `lib/apiClient.js`
+- つまり frontend 改修でも data access 境界がある
+
+# 9. Tutorial stability も rule file で持つ
+
+```md
+# Tutorial Stability Redesign
+
+## 目的
+実機ごとの画面サイズ差・Safe Area 差・スクロール途中の測定ズレ・透過穴タップの不安定さをまとめて解消し、チュートリアルのスポットライト位置と押下動作を安定させる。
+
+## 根本原因
+従来実装では、各画面ごとに以下が分散していた。
+
+- `setTimeout(80)` 後に measure
+- 必要なら `scrollTo({ animated: true })`
+- `setTimeout(260)` 後に再 measure
+- スポットライトの穴を通して下層 UI を直接押させる
+- `windowHeight` や固定マージンで可視領域を推定する
+
+この方式では、以下の差異でズレが発生しやすい。
+
+- 実機性能差によるアニメーション完了タイミングの差
+- Safe Area / 画面高さ / フォントスケール差
+- ScrollView の慣性や途中フレームでの測定
+- オーバーレイと下層 UI の z-order / hit area の差
+- composite component と native view の測定差
+
+## 新アーキテクチャ
+
+### 1. 共通測定レイヤーへ統一
+`components/TutorialOverlay.js` に、以下の共通機能を集約した。
+
+- `waitForTutorialFrames(frameCount)`
+- `measureTutorialTarget(targetRef, rootRef, options)`
+- `buildTutorialViewport(...)`
+- `syncTutorialSpotlightTarget(...)`
+
+```
+
+要点:
+- `TutorialOverlay` に共通測定 / 再測定 / proxy press を集約
+- screen 個別の `setTimeout` 調整で直さない
+- tutorial step 変更時はこの rule を先に見る
+
+# 10. いま国家システム改修で特に見落としやすい点
+
+1. **API ensure / cron / worker が混在**  
+   とくに MyWeb は API ensure と worker が同時にいる。片側だけ見ない。
+
+2. **publish_governance を通って初めて visible**  
+   生成されたから見えるわけではない。
+
+3. **startup snapshot が独立した read-side**  
+   badge / popup / light summary を変える時は startup 経路も見る。
+
+4. **EmotionGeneratedPiece は Input と Piece storage を跨ぐ**  
+   Input 側だけでも、Piece 側だけでも完結しない。
+
+# 11. 修正時の最短判断
+
+- public route / response を触る  
+  → contract policy / public registry / tests を確認
+- derived / generated / published content を触る  
+  → `astor_material_snapshots.py`, `astor_worker.py`, `publish_governance.py` を確認
+- unread / startup / popup を触る  
+  → `api_app_bootstrap.py`, `startup_snapshot_store.py`, `App.js` を確認
+- Input から Piece を作る導線を触る  
+  → `api_emotion_reflection.py` と `emotion_reflection_store.py` を確認
+
+# 12. 2026-04-18 EmlisAI 差分
+
+## 12-1. 追加された同期 path
+既存の国家システムは Save -> Queue -> Snapshot -> Worker -> Publish -> Read が主軸だった。  
+今回の差分では、Save の直後に **EmlisAI immediate reply path** が追加された。
+
+```mermaid
+flowchart LR
+  Gates[Input / EmotionGeneratedPiece]
+  SaveApi[api_emotion_submit.py / api_emotion_reflection.py]
+  Shared[emotion_submit_service.py]
+  Emlis[EmlisAI engine]
+  Reply[input_feedback.comment_text + emlis_ai meta]
+  Queue[existing astor_job_queue]
+
+  Gates --> SaveApi --> Shared --> Emlis --> Reply
+  Shared --> Queue
+```
+
+## 12-2. 国家システム上の位置づけ
+- EmlisAI は **保存完了後・レスポンス返却前** に走る
+- worker / publish / startup snapshot を置き換えない
+- `emotion_submit_service.py` が単一注入点
+- `emlis_ai_greeting_state` は publish state ではなく、**対話作法の side-state**
+
+## 12-3. 入力窓口の差分解釈
+- `感情入力` は、保存 API と即時 EmlisAI 返答の二層になった
+- `EmotionGeneratedPiece` は publish 後返答も同じ shared service に揃った
+- `subscription/bootstrap` は sales/runtime だけでなく、EmlisAI の plan meta を配布する役割が増えた
+
+## 12-4. 今回追加された国家システム中枢ファイル
+| ファイル | 役割 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_types.py` | EmlisAI 共通型 |
+| `ai/services/ai_inference/emlis_ai_capability.py` | Free / Plus / Premium capability 解決 |
+| `ai/services/ai_inference/emlis_ai_context_service.py` | current input / 履歴 / summary / greeting state 収集 |
+| `ai/services/ai_inference/emlis_ai_world_model_service.py` | facts / hypotheses 構築 |
+| `ai/services/ai_inference/emlis_ai_style_profile_service.py` | 感性寄り / 理論寄りなどの返し方選択 |
+| `ai/services/ai_inference/emlis_ai_reply_service.py` | 最終返答 orchestration |
+| `ai/services/ai_inference/emlis_ai_greeting_state_store.py` | 時間帯挨拶 state |
+| `ai/services/ai_inference/emotion_history_search_service.py` | 履歴検索の内部 service 化 |
+
+## 12-5. contract 上の注意
+- `/emotion/submit` の primary field は **`input_feedback.comment_text` のまま**
+- `input_feedback.emlis_ai` は nested additive metadata
+- 既存 route/version を変えずに導入されているため、**contract drift は `api_contract_registry.py` と tests/contract で見る**

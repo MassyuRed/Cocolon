@@ -1,0 +1,139 @@
+---
+doc_id: cocolon_current_snapshot_diff
+title: "Cocolon 最新スナップショット差分"
+revision_date: "2026-04-18"
+source_repositories:
+  - Cocolon
+  - mashos-api
+source_mode: "local_snapshot"
+file_counts:
+  Cocolon: 133
+  mashos-api: 250
+purpose: "前回確認スナップショットとの差分を華恋向けに要約し、現在どこまで整理が進んだかを固定する"
+---
+
+# 1. 差分の要点
+
+> この資料は **差分履歴を追記蓄積する形式** で運用する。既存スナップショット記述は残し、今回変更分だけを下に積む。
+
+今回の current snapshot は、**主に名称整理の visible copy cleanup** が入った版です。  
+file 名 / route 名 / public API canonical / storage canonical rename は、まだ実施していません。
+
+# 2. 変更ファイル数
+
+- `Cocolon`: 16 files
+- `mashos-api`: 2 files
+- total: 18 files
+
+# 3. 変更ファイル一覧
+
+## Cocolon
+- `App.js`
+- `guide/guidesJa.js`
+- `guide/termsJa.js`
+- `lib/iap/iapRuntimeCatalog.js`
+- `screens/DeepInsightScreen.js`
+- `screens/DiscoveriesHistoryDetailScreen.js`
+- `screens/DiscoveriesHistoryListScreen.js`
+- `screens/EchoesHistoryDetailScreen.js`
+- `screens/EchoesHistoryListScreen.js`
+- `screens/MyModelCreateScreen.js`
+- `screens/MyWebReportHistoryScreen.js`
+- `screens/MyWebReportViewerScreen.js`
+- `screens/MyWebScreen.js`
+- `screens/SettingsScreen.js`
+- `screens/TodayQuestionHistoryScreen.js`
+- `screens/nexus/NexusReflectionCard.js`
+
+## mashos-api
+- `ai/services/ai_inference/api_deep_insight.py`
+- `ai/services/ai_inference/subscription_bootstrap_store.py`
+
+# 4. 今回の差分が意味すること
+
+## 4-1. 進んだこと
+- visible label の `Analysis / Piece / ProfileCreate / Settings` 整理
+- guide / terms / IAP copy の新名称寄せ
+- 一部 backend copy / bootstrap text の新名称寄せ
+
+## 4-2. まだ進んでいないこと
+- file rename
+- stack route rename
+- public API path rename
+- storage canonical rename
+
+## 4-3. だから今の資料運用はこうなる
+- **表示名は新名称で読む**
+- **コード探索は旧 canonical も使って読む**
+- rename phase は別管理する
+
+# 5. 今回の差分を見た上での current operational conclusion
+
+- `Analysis` は UI 名  
+- `MyWeb` は internal canonical  
+- `Piece` は UI 名 / public concept  
+- `Nexus` は internal system 名  
+- `ProfileCreate` は固定プロフィール資産  
+- `EmotionGeneratedPiece` は華恋用補助用語で、Input 起点 `/emotion/reflection/*` flow を指す
+
+# 6. 2026-04-18 EmlisAI 実装差分
+
+## 6-1. 差分の要点
+今回の差分は、**Input 直後返答を EmlisAI へ差し替える backend immediate reply 実装**です。  
+visible copy cleanup の延長ではなく、`emotion_submit_service.py` を単一注入点にした **新規中枢追加 + 既存 route の additive-only 拡張** が中心です。
+
+## 6-2. 変更ファイル数
+- `Cocolon`: 1 files changed
+- `mashos-api`: 21 files changed/new
+- total: 22 files
+
+## 6-3. 変更ファイル一覧
+
+### Cocolon
+- `lib/iap/iapRuntimeCatalog.js`
+
+### mashos-api（new）
+- `ai/docs/emlis_ai_greeting_state.sql`
+- `ai/services/ai_inference/emlis_ai_capability.py`
+- `ai/services/ai_inference/emlis_ai_context_service.py`
+- `ai/services/ai_inference/emlis_ai_greeting_state_store.py`
+- `ai/services/ai_inference/emlis_ai_prompt.py`
+- `ai/services/ai_inference/emlis_ai_reply_service.py`
+- `ai/services/ai_inference/emlis_ai_style_profile_service.py`
+- `ai/services/ai_inference/emlis_ai_types.py`
+- `ai/services/ai_inference/emlis_ai_world_model_service.py`
+- `ai/services/ai_inference/emotion_history_search_service.py`
+- `ai/tests/contract/test_emlis_ai_contracts.py`
+- `ai/tests/test_emlis_ai_greeting_state_store.py`
+
+### mashos-api（changed）
+- `ai/docs/API_CONTRACT_POLICY.md`
+- `ai/services/ai_inference/api_contract_registry.py`
+- `ai/services/ai_inference/api_emotion_reflection.py`
+- `ai/services/ai_inference/api_emotion_submit.py`
+- `ai/services/ai_inference/api_subscription.py`
+- `ai/services/ai_inference/emotion_submit_service.py`
+- `ai/services/ai_inference/subscription_bootstrap_store.py`
+- `ai/tests/contract/test_api_contract_headers.py`
+- `ai/tests/contract/test_contract_snapshots_phase6e.py`
+
+## 6-4. 今回の差分が意味すること
+### 6-4-1. 進んだこと
+- `input_feedback.comment_text` を維持したまま、EmlisAI の返答生成が追加された
+- `/emotion/submit` と `/emotion/reflection/publish` が同じ shared service を通るようになった
+- `input_feedback.emlis_ai` が nested additive meta として導入された
+- Free / Plus / Premium の capability 分岐が server 側へ追加された
+- greeting-state 用 side-state と contract tests が追加された
+
+### 6-4-2. まだ進んでいないこと
+- public route の新設
+- worker / publish / startup への EmlisAI 本体統合
+- cross-surface memory の本格導入
+- rename phase
+
+## 6-5. current operational conclusion（EmlisAI 版）
+- EmlisAI は **Input immediate reply engine** として読む
+- 主注入点は `emotion_submit_service.py`
+- `input_feedback.comment_text` は stable field、`input_feedback.emlis_ai` は additive-only meta
+- greeting-state は publish/state machine ではなく side-state
+- plan 差分は `subscription_bootstrap_store.py` と server capability の二層で読む

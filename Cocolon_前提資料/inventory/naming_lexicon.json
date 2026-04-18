@@ -19,11 +19,11 @@
   },
   "Piece": {
     "type": "public_concept_and_public_ui_label",
-    "current_code_fact": "InputScreen の preview / publish と api_emotion_reflection.py の current-input flow が現在の Piece 本体。Piece 画面は Nexus read/social surface で、作成入口は Home に固定する。",
-    "assistant_rule": "修飾なしの Piece は原則「emotion-generated original reflection 単体仕様」として解釈する。Piece画面 は Nexus surface として読む。",
+    "current_code_fact": "App.js tab label and NexusScreen title use Piece. MyModelCreateScreen, InputScreen, guides also use Piece / ProfileCreate copy.",
+    "assistant_rule": "修飾なしの Piece は原則『単体データ/単体仕様』として解釈。Piece画面 は Nexus surface として解釈。",
     "subtypes": {
-      "Piece単体": "current input だけから preview / publish される emotion-generated original reflection",
-      "Piece画面": "Nexus surface の public UI label。閲覧・共鳴・発見の read/social 面"
+      "Piece単体": "旧 Reflection の立ち位置の一問一答/断片",
+      "Piece画面": "Nexus surface の public UI label"
     }
   },
   "Nexus": {
@@ -33,21 +33,21 @@
   },
   "ProfileCreate": {
     "type": "public_ui_label",
-    "current_code_fact": "ProfileCreate は Account から開く固定プロフィール資産。内部 canonical / route / storage には MyModelCreate が残る。",
+    "current_code_fact": "MyModelCreateScreen title and api_mymodel_create.py account/profile-create labeling use ProfileCreate.",
     "internal_canonical": [
       "MyModelCreate (file/route/storage canonical remains)"
     ],
-    "assistant_rule": "Account 内の孤立プロフィール資産として読む。Piece 作成元や国家システム材料として扱わない。"
+    "assistant_rule": "固定プロフィール資産。EmotionGeneratedPiece と混同しない。"
   },
   "MyModel": {
     "type": "legacy_name",
-    "current_code_fact": "tab route/file/API canonical across MyModel stack and backend mymodel_* APIs. mymodel_questions_total など legacy key も残る。",
-    "assistant_rule": "旧名・旧 key として扱う。新設計の基準名にはしないが、route / storage / response key では現役なので検索対象から外さない。"
+    "current_code_fact": "tab route/file/API canonical across MyModel stack and backend mymodel_* APIs.",
+    "assistant_rule": "旧名として扱う。新設計の基準名には使わないが、ファイル/route/API では現役なので無視しない。"
   },
   "Reflection": {
     "type": "backend_storage_and_readside_canonical",
-    "current_code_fact": "reflection_* store/engine/entitlement/generated_reflection_* と mymodel_qna の多くは reflection canonical を維持する。",
-    "assistant_rule": "visible copy は Piece へ寄せるが、backend canonical / read-side canonical として reflection を読む。"
+    "current_code_fact": "reflection_* store/engine/entitlement/generated_reflection_* and many mymodel_qna flows still use reflection canonical names.",
+    "assistant_rule": "visible copy では Piece に寄せるが、backend canonical として reflection を読む。"
   },
   "EmotionGeneratedPiece": {
     "type": "assistant_only_working_term",
@@ -70,29 +70,19 @@
     ],
     "assistant_rule": "UI copy として扱う。実装検索は EmotionLog / friends / emotion-log で追う。"
   },
-  "Cocolon": {
-    "type": "project_name",
-    "current_code_fact": "Whole project / premise-doc / architecture name.",
-    "assistant_rule": "全体プロジェクト名として扱う。app-facing 名とは分ける。"
-  },
   "Emlis": {
-    "type": "app_facing_name_and_persona",
-    "current_code_fact": "User-facing app / reply persona name used by EmlisAI.",
-    "assistant_rule": "ユーザーに向き合う名として扱う。backend engine 名 EmlisAI とは分ける。"
+    "type": "public_voice_name",
+    "current_code_fact": "Input immediate reply uses Emlis as first-person reply voice in comment_text.",
+    "assistant_rule": "返答主体の声として扱う。汎用AI名ではなく Emlis の対話人格。"
   },
   "EmlisAI": {
-    "type": "backend_immediate_response_engine",
-    "current_code_fact": "Input immediate response engine wired through emotion_submit_service.py and input_feedback.comment_text.",
-    "assistant_rule": "入力直後返答の server-owned engine として扱う。template comment と同一視しない。"
+    "type": "backend_immediate_reply_engine",
+    "current_code_fact": "emotion_submit_service.py injects emlis_ai_* modules to produce input_feedback for /emotion/submit and /emotion/reflection/publish.",
+    "assistant_rule": "Input 直後返答専用の理解応答 engine として扱う。worker/publish/report 系とは混同しない。"
   },
-  "入力後コメント": {
-    "type": "legacy_surface_term",
-    "current_code_fact": "Public surface still uses input_feedback.comment_text while reply generation is now EmlisAI-driven.",
-    "assistant_rule": "surface 上の見え方として扱う。実装探索は EmlisAI immediate response で行う。"
-  },
-  "DeepInsight": {
-    "type": "legacy_removed_public_flow",
-    "current_code_fact": "current live flow では Analysis の入口と public route 登録から外したが、physical file / data / helper は repo snapshot に残る場合がある。",
-    "assistant_rule": "まずは legacy/orphan cleanup 対象として扱う。file 存在だけで live route と誤読しない。"
+  "input_feedback": {
+    "type": "public_contract_field",
+    "current_code_fact": "Primary field remains input_feedback.comment_text while input_feedback.emlis_ai is additive-only metadata.",
+    "assistant_rule": "comment_text を primary/stable、emlis_ai を nested additive meta として読む。"
   }
 }

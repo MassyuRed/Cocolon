@@ -5,293 +5,7 @@
     "kind": "support",
     "category": "support_config",
     "systems": "",
-    "lines": 3,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/configs/app_ids.yaml",
-    "kind": "support",
-    "category": "config",
-    "systems": "",
-    "lines": 3,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/configs/model_train.yaml",
-    "kind": "support",
-    "category": "config",
-    "systems": "",
-    "lines": 17,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/configs/runtime.yaml",
-    "kind": "support",
-    "category": "config",
-    "systems": "",
-    "lines": 10,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/config/astor_structure_dict.json",
-    "kind": "support",
-    "category": "data",
-    "systems": "national_system",
-    "lines": 243,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/config/deep_insight_questions.json",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 199,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/processed/features.json",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 18,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/processed/structure_dictionary.json",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 851,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/processed/summary.txt",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 3,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/raw/import_template.csv",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 4,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/raw/logs.jsonl",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 5,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/raw/README_ingest.txt",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 35,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/raw/schema.json",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 20,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/raw/template.csv",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 4,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/raw/template.json",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 4,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/data/train/{{AI_NAME}}_interpret_train.jsonl",
-    "kind": "support",
-    "category": "data",
-    "systems": "",
-    "lines": 10,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/api_contract.txt",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "api_contract",
-    "lines": 3,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/API_CONTRACT_POLICY.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "api_contract",
-    "lines": 45,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/data_ingest_guide.txt",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 35,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/emlis_ai_greeting_state.sql",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "emlis_ai_response",
-    "lines": 72,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/iap_subscription_update.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "account_settings",
-    "lines": 120,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 38,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/PUBLIC_API_REGISTRY.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "api_contract",
-    "lines": 106,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/TUTORIAL_STABILITY_REDESIGN.md",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 131,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/docs/{{AI_NAME}}_spec.txt",
-    "kind": "support",
-    "category": "repo_doc",
-    "systems": "",
-    "lines": 6,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/ingestion/mapping_sample.yaml",
-    "kind": "other",
-    "category": "other",
-    "systems": "",
-    "lines": 17,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/ingestion/user_logs_sample.csv",
-    "kind": "other",
-    "category": "other",
-    "systems": "",
-    "lines": 6,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -302,7 +16,7 @@
     "kind": "support",
     "category": "support_config",
     "systems": "",
-    "lines": 9,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -313,7 +27,7 @@
     "kind": "support",
     "category": "support_config",
     "systems": "",
-    "lines": 9,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -324,7 +38,293 @@
     "kind": "support",
     "category": "support_config",
     "systems": "",
-    "lines": 42,
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/configs/app_ids.yaml",
+    "kind": "support",
+    "category": "config",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/configs/model_train.yaml",
+    "kind": "support",
+    "category": "config",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/configs/runtime.yaml",
+    "kind": "support",
+    "category": "config",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/config/astor_structure_dict.json",
+    "kind": "support",
+    "category": "data",
+    "systems": "national_system",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/config/deep_insight_questions.json",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/processed/features.json",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/processed/structure_dictionary.json",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/processed/summary.txt",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/raw/README_ingest.txt",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/raw/import_template.csv",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/raw/logs.jsonl",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/raw/schema.json",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/raw/template.csv",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/raw/template.json",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/data/train/{{AI_NAME}}_interpret_train.jsonl",
+    "kind": "support",
+    "category": "data",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/API_CONTRACT_POLICY.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "api_contract",
+    "lines": 46,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/PUBLIC_API_REGISTRY.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "api_contract",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/TUTORIAL_STABILITY_REDESIGN.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/api_contract.txt",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "api_contract",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/data_ingest_guide.txt",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/emlis_ai_greeting_state.sql",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "emlis_ai",
+    "lines": 73,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/iap_subscription_update.md",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "account_settings",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/docs/{{AI_NAME}}_spec.txt",
+    "kind": "support",
+    "category": "repo_doc",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/ingestion/mapping_sample.yaml",
+    "kind": "other",
+    "category": "other",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/ingestion/user_logs_sample.csv",
+    "kind": "other",
+    "category": "other",
+    "systems": "",
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -335,7 +335,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 65,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -555,7 +555,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 34,
+    "lines": 35,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -566,9 +566,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 675,
+    "lines": 676,
     "local_import_count": 7,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/startup_snapshot_store.py | ai/services/ai_inference/today_question_store.py | ai/services/ai_inference/astor_friend_feed_enqueue.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py",
+    "local_imports": "ai/services/ai_inference/astor_friend_feed_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/startup_snapshot_store.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/today_question_store.py",
     "routes": ""
   },
   {
@@ -577,9 +577,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 239,
+    "lines": 240,
     "local_import_count": 3,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/subscription.py",
+    "local_imports": "ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -588,9 +588,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 509,
-    "local_import_count": 1,
-    "local_imports": "ai/services/analysis_engine/models.py",
+    "lines": 523,
+    "local_import_count": 0,
+    "local_imports": "",
     "routes": ""
   },
   {
@@ -599,10 +599,10 @@
     "kind": "api",
     "category": "route",
     "systems": "account_settings",
-    "lines": 328,
+    "lines": 329,
     "local_import_count": 3,
-    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/account_delete_service.py | ai/services/ai_inference/supabase_client.py",
-    "routes": "/account/display-name/availability | /account/profile/me | /account/profile/me | /account/delete"
+    "local_imports": "ai/services/ai_inference/account_delete_service.py | ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /account/display-name/availability | GET /account/profile/me | PATCH /account/profile/me | POST /account/delete"
   },
   {
     "repo": "mashos-api",
@@ -610,10 +610,10 @@
     "kind": "api",
     "category": "route",
     "systems": "account_settings",
-    "lines": 329,
+    "lines": 330,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_account_status_store.py | ai/services/ai_inference/supabase_client.py",
-    "routes": "/account/status"
+    "routes": "GET /account/status"
   },
   {
     "repo": "mashos-api",
@@ -621,10 +621,10 @@
     "kind": "api",
     "category": "route",
     "systems": "account_settings",
-    "lines": 369,
+    "lines": 370,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_ranking_enqueue.py",
-    "routes": "/account/visibility/me | /account/visibility/me | /account/profile"
+    "routes": "GET /account/visibility/me | PATCH /account/visibility/me | GET /account/profile"
   },
   {
     "repo": "mashos-api",
@@ -632,10 +632,10 @@
     "kind": "api",
     "category": "route",
     "systems": "",
-    "lines": 166,
+    "lines": 167,
     "local_import_count": 3,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_account_status_enqueue.py",
-    "routes": "/activity/login"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_ranking_enqueue.py",
+    "routes": "POST /activity/login"
   },
   {
     "repo": "mashos-api",
@@ -643,10 +643,10 @@
     "kind": "api",
     "category": "route",
     "systems": "startup_bootstrap",
-    "lines": 157,
+    "lines": 158,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/startup_snapshot_store.py",
-    "routes": "/app/bootstrap | /app/startup"
+    "routes": "GET /app/bootstrap | GET /app/startup"
   },
   {
     "repo": "mashos-api",
@@ -654,7 +654,7 @@
     "kind": "api",
     "category": "route",
     "systems": "api_contract",
-    "lines": 158,
+    "lines": 161,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -665,10 +665,10 @@
     "kind": "api",
     "category": "route",
     "systems": "",
-    "lines": 2621,
+    "lines": 2622,
     "local_import_count": 11,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/observability.py | ai/services/ai_inference/cron_run_store.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/api_myweb_reports.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/report_distribution_push_store.py | ai/services/ai_inference/report_distribution_settings_store.py",
-    "routes": "/cron/myweb/daily | /cron/myweb/weekly | /cron/myweb/monthly | /cron/myprofile/monthly | /cron/report-distribution/push"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_myweb_reports.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/cron_run_store.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/observability.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/report_distribution_push_store.py | ai/services/ai_inference/report_distribution_settings_store.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
+    "routes": "POST /cron/myweb/daily | POST /cron/myweb/weekly | POST /cron/myweb/monthly | POST /cron/myprofile/monthly | POST /cron/report-distribution/push"
   },
   {
     "repo": "mashos-api",
@@ -676,10 +676,10 @@
     "kind": "api",
     "category": "route",
     "systems": "",
-    "lines": 505,
+    "lines": 506,
     "local_import_count": 13,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/astor_core.py | ai/services/ai_inference/astor_deep_insight.py | ai/services/ai_inference/astor_deep_insight_question_store.py | ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/ui_text_templates.py | ai/services/ai_inference/deep_insight_strategy.py",
-    "routes": "/deep_insight/questions | /deep_insight/answers"
+    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_core.py | ai/services/ai_inference/astor_deep_insight.py | ai/services/ai_inference/astor_deep_insight_question_store.py | ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/deep_insight_strategy.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
+    "routes": "GET /deep_insight/questions | POST /deep_insight/answers"
   },
   {
     "repo": "mashos-api",
@@ -687,10 +687,10 @@
     "kind": "api",
     "category": "route",
     "systems": "",
-    "lines": 72,
+    "lines": 73,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/supabase_client.py",
-    "routes": "/emotion/history/{emotion_id}"
+    "routes": "DELETE /emotion/history/{emotion_id}"
   },
   {
     "repo": "mashos-api",
@@ -698,21 +698,21 @@
     "kind": "api",
     "category": "route",
     "systems": "",
-    "lines": 519,
+    "lines": 520,
     "local_import_count": 4,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
-    "routes": "/emotion/history/search | /emotion/history/search"
+    "routes": "POST /emotion/history/search | GET /emotion/history/search"
   },
   {
     "repo": "mashos-api",
     "path": "ai/services/ai_inference/api_emotion_reflection.py",
     "kind": "api",
     "category": "route",
-    "systems": "input_home|nexus_piece|emlis_ai_response",
-    "lines": 267,
+    "systems": "input_home|nexus_piece",
+    "lines": 268,
     "local_import_count": 7,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/emotion_reflection_generation_service.py | ai/services/ai_inference/emotion_reflection_store.py | ai/services/ai_inference/emotion_submit_service.py | ai/services/ai_inference/reflection_publish_entitlements.py | ai/services/ai_inference/subscription.py",
-    "routes": "/emotion/reflection/quota | /emotion/reflection/preview | /emotion/reflection/publish | /emotion/reflection/cancel"
+    "routes": "GET /emotion/reflection/quota | POST /emotion/reflection/preview | POST /emotion/reflection/publish | POST /emotion/reflection/cancel"
   },
   {
     "repo": "mashos-api",
@@ -720,21 +720,21 @@
     "kind": "api",
     "category": "route",
     "systems": "input_home",
-    "lines": 207,
+    "lines": 208,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_job_queue.py",
-    "routes": "/emotion/secret"
+    "routes": "POST /emotion/secret"
   },
   {
     "repo": "mashos-api",
     "path": "ai/services/ai_inference/api_emotion_submit.py",
     "kind": "api",
     "category": "route",
-    "systems": "input_home|emlis_ai_response",
-    "lines": 1983,
-    "local_import_count": 17,
-    "local_imports": "ai/services/ai_inference/astor_core.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_friend_feed_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/supabase_auth_token_cache.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/input_feedback_text_templates.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/emotion_submit_service.py",
-    "routes": "/emotion/submit"
+    "systems": "input_home",
+    "lines": 1984,
+    "local_import_count": 11,
+    "local_imports": "ai/services/ai_inference/astor_core.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_friend_feed_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/supabase_auth_token_cache.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/input_feedback_text_templates.py",
+    "routes": "POST /emotion/submit"
   },
   {
     "repo": "mashos-api",
@@ -742,10 +742,10 @@
     "kind": "api",
     "category": "route",
     "systems": "emotionlog_social",
-    "lines": 1551,
+    "lines": 1552,
     "local_import_count": 4,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_friend_feed_store.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/supabase_client.py",
-    "routes": "/friends/request | /friends/requests/{request_id}/accept | /friends/requests/{request_id}/reject | /friends/requests/{request_id}/cancel | /friends/remove | /emotion-log/feed | /friends/feed | /friends/manage | /emotion-log/unread-status | /friends/unread-status | /emotion-log/unread/read-feed | /friends/unread/read-feed | /emotion-log/unread/read-requests | /friends/unread/read-requests | /emotion-notifications/settings | /friends/notification-settings | /emotion-notifications/settings/{friend_user_id} | /friends/notification-settings/{friend_user_id}"
+    "routes": "POST /friends/request | POST /friends/requests/{request_id}/accept | POST /friends/requests/{request_id}/reject | POST /friends/requests/{request_id}/cancel | POST /friends/remove | GET /emotion-log/feed | GET /friends/feed | GET /friends/manage | GET /emotion-log/unread-status | GET /friends/unread-status | POST /emotion-log/unread/read-feed | POST /friends/unread/read-feed | POST /emotion-log/unread/read-requests | POST /friends/unread/read-requests | GET /emotion-notifications/settings | GET /friends/notification-settings | POST /emotion-notifications/settings/{friend_user_id} | POST /friends/notification-settings/{friend_user_id}"
   },
   {
     "repo": "mashos-api",
@@ -753,10 +753,10 @@
     "kind": "api",
     "category": "route",
     "systems": "input_home",
-    "lines": 525,
+    "lines": 526,
     "local_import_count": 4,
-    "local_imports": "ai/services/ai_inference/astor_global_summary_kernel.py | ai/services/ai_inference/astor_global_summary_store.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/astor_global_summary_enqueue.py",
-    "routes": "/global_summary"
+    "local_imports": "ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_global_summary_kernel.py | ai/services/ai_inference/astor_global_summary_store.py | ai/services/ai_inference/response_microcache.py",
+    "routes": "GET /global_summary"
   },
   {
     "repo": "mashos-api",
@@ -764,10 +764,10 @@
     "kind": "api",
     "category": "route",
     "systems": "input_home",
-    "lines": 359,
+    "lines": 360,
     "local_import_count": 3,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/response_microcache.py",
-    "routes": "/input/summary"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /input/summary"
   },
   {
     "repo": "mashos-api",
@@ -775,10 +775,10 @@
     "kind": "api",
     "category": "route",
     "systems": "nexus_piece",
-    "lines": 812,
+    "lines": 823,
     "local_import_count": 9,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/mymodel_entitlements.py | ai/services/ai_inference/reflection_text_formatter.py",
-    "routes": "/mymodel/create/questions | /account/profile-create | /mymodel/create/answers"
+    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/mymodel_entitlements.py | ai/services/ai_inference/reflection_text_formatter.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /mymodel/create/questions | GET /account/profile-create | POST /mymodel/create/answers"
   },
   {
     "repo": "mashos-api",
@@ -786,10 +786,10 @@
     "kind": "api",
     "category": "route",
     "systems": "nexus_piece",
-    "lines": 5475,
+    "lines": 5476,
     "local_import_count": 14,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_mymodel_create.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_identity.py | ai/services/ai_inference/reflection_text_formatter.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/mymodel_entitlements.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/supabase_client.py",
-    "routes": "/mymodel/qna/list | /mymodel/qna/unread | /mymodel/qna/trending | /mymodel/qna/holders | /mymodel/recommend/users | /mymodel/qna/detail | /mymodel/qna/view | /mymodel/qna/resonance | /mymodel/qna/echoes/reflections | /mymodel/qna/echoes/submit | /mymodel/qna/echoes/delete | /mymodel/qna/echoes/history | /mymodel/qna/discoveries/reflections | /mymodel/qna/discoveries/submit | /mymodel/qna/discoveries/delete | /mymodel/qna/discoveries/history | /mymodel/qna/unread-status"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_mymodel_create.py | ai/services/ai_inference/astor_account_status_enqueue.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_ranking_enqueue.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_identity.py | ai/services/ai_inference/mymodel_entitlements.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/reflection_text_formatter.py | ai/services/ai_inference/subscription.py",
+    "routes": "GET /mymodel/qna/list | GET /mymodel/qna/unread | GET /mymodel/qna/trending | GET /mymodel/qna/holders | GET /mymodel/recommend/users | GET /mymodel/qna/detail | POST /mymodel/qna/view | POST /mymodel/qna/resonance | GET /mymodel/qna/echoes/reflections | POST /mymodel/qna/echoes/submit | POST /mymodel/qna/echoes/delete | GET /mymodel/qna/echoes/history | GET /mymodel/qna/discoveries/reflections | POST /mymodel/qna/discoveries/submit | POST /mymodel/qna/discoveries/delete | GET /mymodel/qna/discoveries/history | GET /mymodel/qna/list | GET /mymodel/qna/unread | GET /mymodel/qna/unread-status | GET /mymodel/qna/detail | POST /mymodel/qna/view | POST /mymodel/qna/resonance | GET /mymodel/qna/echoes/reflections | POST /mymodel/qna/echoes/submit | POST /mymodel/qna/echoes/delete | GET /mymodel/qna/echoes/history | GET /mymodel/qna/discoveries/reflections | POST /mymodel/qna/discoveries/submit | POST /mymodel/qna/discoveries/delete | GET /mymodel/qna/discoveries/history"
   },
   {
     "repo": "mashos-api",
@@ -797,10 +797,10 @@
     "kind": "api",
     "category": "route",
     "systems": "self_structure",
-    "lines": 2545,
+    "lines": 2546,
     "local_import_count": 7,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/report_distribution_push_store.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
-    "routes": "/myprofile/request | /myprofile/requests/{request_id}/accept | /myprofile/requests/{request_id}/reject | /myprofile/requests/{request_id}/cancel | /myprofile/follow | /myprofile/unfollow | /myprofile/remove-follower | /myprofile/follow-stats | /myprofile/follow-request/cancel | /myprofile/follow-requests/incoming | /myprofile/follow-requests/outgoing | /myprofile/follow-requests/approve | /myprofile/follow-requests/reject | /myprofile/follow-list | /myprofile/latest/status | /myprofile/latest | /myprofile/monthly/ensure"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/report_distribution_push_store.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "POST /myprofile/request | POST /myprofile/requests/{request_id}/accept | POST /myprofile/requests/{request_id}/reject | POST /myprofile/requests/{request_id}/cancel | POST /myprofile/follow | POST /myprofile/unfollow | POST /myprofile/remove-follower | GET /myprofile/follow-stats | POST /myprofile/follow-request/cancel | GET /myprofile/follow-requests/incoming | GET /myprofile/follow-requests/outgoing | POST /myprofile/follow-requests/approve | POST /myprofile/follow-requests/reject | GET /myprofile/follow-list | GET /myprofile/latest/status | GET /myprofile/latest | POST /myprofile/monthly/ensure"
   },
   {
     "repo": "mashos-api",
@@ -808,10 +808,10 @@
     "kind": "api",
     "category": "route",
     "systems": "self_structure",
-    "lines": 278,
+    "lines": 279,
     "local_import_count": 5,
-    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
-    "routes": "/myprofile/reports/history | /myprofile/reports/{report_id}"
+    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /myprofile/reports/history | GET /myprofile/reports/{report_id}"
   },
   {
     "repo": "mashos-api",
@@ -819,10 +819,10 @@
     "kind": "api",
     "category": "route",
     "systems": "analysis_myweb",
-    "lines": 490,
+    "lines": 491,
     "local_import_count": 7,
-    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/api_input_summary.py",
-    "routes": "/myweb/home-summary | /myweb/reports/{report_id}/weekly-days"
+    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/api_input_summary.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /myweb/home-summary | GET /myweb/reports/{report_id}/weekly-days"
   },
   {
     "repo": "mashos-api",
@@ -830,10 +830,10 @@
     "kind": "api",
     "category": "route",
     "systems": "analysis_myweb",
-    "lines": 5392,
+    "lines": 5393,
     "local_import_count": 10,
-    "local_imports": "ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/astor_myweb_insight.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/astor_material_snapshots.py | ai/services/ai_inference/astor_job_queue.py",
-    "routes": "/myweb/reports/ensure | /myweb/reports/ready | /myweb/reports/{report_id}"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/astor_material_snapshots.py | ai/services/ai_inference/astor_myweb_insight.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "POST /myweb/reports/ensure | GET /myweb/reports/ready | GET /myweb/reports/{report_id}"
   },
   {
     "repo": "mashos-api",
@@ -841,10 +841,10 @@
     "kind": "api",
     "category": "route",
     "systems": "nexus_piece",
-    "lines": 506,
+    "lines": 528,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_mymodel_qna.py | ai/services/ai_inference/generated_reflection_display.py",
-    "routes": "/nexus/reflections | /nexus/emotion-ranking | /nexus/emotion-log | /nexus/recommend/users | /nexus/history/echoes | /nexus/history/discoveries | /nexus/bootstrap"
+    "routes": "GET /nexus/reflections | GET /nexus/emotion-ranking | GET /nexus/emotion-log | GET /nexus/recommend/users | GET /nexus/recommend/questions | GET /nexus/history/echoes | GET /nexus/history/discoveries | GET /nexus/bootstrap"
   },
   {
     "repo": "mashos-api",
@@ -852,10 +852,10 @@
     "kind": "api",
     "category": "route",
     "systems": "input_home",
-    "lines": 169,
+    "lines": 170,
     "local_import_count": 5,
     "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/notice_store.py | ai/services/ai_inference/response_microcache.py",
-    "routes": "/notices/current | /notices/history | /notices/read | /notices/popup-seen"
+    "routes": "GET /notices/current | GET /notices/history | POST /notices/read | POST /notices/popup-seen"
   },
   {
     "repo": "mashos-api",
@@ -863,10 +863,10 @@
     "kind": "api",
     "category": "route",
     "systems": "",
-    "lines": 136,
+    "lines": 137,
     "local_import_count": 0,
     "local_imports": "",
-    "routes": "/public/profile/by-friend-code"
+    "routes": "GET /public/profile/by-friend-code"
   },
   {
     "repo": "mashos-api",
@@ -874,10 +874,10 @@
     "kind": "api",
     "category": "route",
     "systems": "ranking",
-    "lines": 938,
+    "lines": 939,
     "local_import_count": 3,
-    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/astor_ranking_boards.py",
-    "routes": "/ranking/emotions | /ranking/emotions/self | /ranking/input_count | /ranking/input_length | /ranking/mymodel_questions | /ranking/mymodel_used"
+    "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_ranking_boards.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /ranking/emotions | GET /ranking/emotions/self | GET /ranking/input_count | GET /ranking/input_length | GET /ranking/mymodel_questions | GET /ranking/mymodel_used"
   },
   {
     "repo": "mashos-api",
@@ -885,10 +885,10 @@
     "kind": "api",
     "category": "route",
     "systems": "ranking",
-    "lines": 472,
+    "lines": 473,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_ranking.py | ai/services/ai_inference/astor_ranking_boards.py",
-    "routes": "/ranking/emotions | /ranking/emotions/self | /ranking/input_count | /ranking/input_length | /ranking/mymodel_used | /ranking/login_streak"
+    "routes": "GET /ranking/emotions | GET /ranking/emotions/self | GET /ranking/input_count | GET /ranking/input_length | GET /ranking/mymodel_used | GET /ranking/login_streak | GET /ranking/login_streak"
   },
   {
     "repo": "mashos-api",
@@ -896,10 +896,10 @@
     "kind": "api",
     "category": "route",
     "systems": "nexus_piece|ranking",
-    "lines": 173,
+    "lines": 174,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/api_ranking.py | ai/services/ai_inference/astor_ranking_boards.py",
-    "routes": "/ranking/mymodel_discoveries"
+    "routes": "GET /ranking/mymodel_discoveries"
   },
   {
     "repo": "mashos-api",
@@ -907,10 +907,10 @@
     "kind": "api",
     "category": "route",
     "systems": "nexus_piece|ranking",
-    "lines": 176,
+    "lines": 177,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/api_ranking.py | ai/services/ai_inference/astor_ranking_boards.py",
-    "routes": "/ranking/mymodel_resonances"
+    "routes": "GET /ranking/mymodel_resonances"
   },
   {
     "repo": "mashos-api",
@@ -918,10 +918,10 @@
     "kind": "api",
     "category": "route",
     "systems": "nexus_piece|ranking",
-    "lines": 169,
+    "lines": 170,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/api_ranking.py | ai/services/ai_inference/astor_ranking_boards.py",
-    "routes": "/ranking/mymodel_views"
+    "routes": "GET /ranking/mymodel_views"
   },
   {
     "repo": "mashos-api",
@@ -929,10 +929,10 @@
     "kind": "api",
     "category": "route",
     "systems": "account_settings",
-    "lines": 66,
+    "lines": 67,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/report_distribution_settings_store.py",
-    "routes": "/report-distribution/settings | /report-distribution/settings"
+    "routes": "GET /report-distribution/settings | PATCH /report-distribution/settings"
   },
   {
     "repo": "mashos-api",
@@ -940,21 +940,21 @@
     "kind": "api",
     "category": "route",
     "systems": "analysis_myweb",
-    "lines": 515,
+    "lines": 516,
     "local_import_count": 6,
-    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
-    "routes": "/report-reads/status | /report-reads/mark | /report-reads/myweb-unread-status"
+    "local_imports": "ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
+    "routes": "GET /report-reads/status | POST /report-reads/mark | GET /report-reads/myweb-unread-status"
   },
   {
     "repo": "mashos-api",
     "path": "ai/services/ai_inference/api_subscription.py",
     "kind": "api",
     "category": "route",
-    "systems": "account_settings|emlis_ai_response",
-    "lines": 557,
+    "systems": "account_settings",
+    "lines": 558,
     "local_import_count": 8,
     "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_bootstrap_store.py | ai/services/ai_inference/subscription_projection.py | ai/services/ai_inference/subscription_verifier_android.py | ai/services/ai_inference/subscription_verifier_ios.py",
-    "routes": "/subscription/bootstrap | /subscription/me | /subscription/update"
+    "routes": "GET /subscription/bootstrap | GET /subscription/me | POST /subscription/update"
   },
   {
     "repo": "mashos-api",
@@ -962,10 +962,10 @@
     "kind": "api",
     "category": "route",
     "systems": "input_home",
-    "lines": 485,
+    "lines": 486,
     "local_import_count": 8,
-    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/today_question_store.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py",
-    "routes": "/today-question/current | /today-question/status | /today-question/answers | /today-question/history | /today-question/history/{answer_id} | /today-question/settings | /today-question/settings | /cron/today-question/push"
+    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/astor_snapshot_enqueue.py | ai/services/ai_inference/publish_governance.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/today_question_store.py",
+    "routes": "GET /today-question/current | GET /today-question/status | POST /today-question/answers | GET /today-question/history | PATCH /today-question/history/{answer_id} | GET /today-question/settings | PATCH /today-question/settings | POST /cron/today-question/push"
   },
   {
     "repo": "mashos-api",
@@ -973,10 +973,10 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 1580,
-    "local_import_count": 52,
-    "local_imports": "ai/services/ai_inference/middleware_active_user_touch.py | ai/services/ai_inference/middleware_api_contract.py | ai/services/ai_inference/middleware_request_perf.py | ai/services/ai_inference/structure_dict.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_emotion_reflection.py | ai/services/ai_inference/api_emotion_secret.py | ai/services/ai_inference/api_emotion_history_search.py | ai/services/ai_inference/api_emotion_history_manage.py | ai/services/ai_inference/api_friends.py | ai/services/ai_inference/api_myprofile.py | ai/services/ai_inference/api_public_profile.py | ai/services/ai_inference/api_subscription.py | ai/services/ai_inference/subscription_webhooks.py | ai/services/ai_inference/subscription_runtime_config.py | ai/services/ai_inference/subscription_release_config.py | ai/services/ai_inference/subscription_live_console_check.py | ai/services/ai_inference/api_myweb_reports.py | ai/services/ai_inference/api_cron_distribution.py | ai/services/ai_inference/api_ranking.py | ai/services/ai_inference/api_ranking_mymodel_views.py | ai/services/ai_inference/api_ranking_mymodel_resonances.py | ai/services/ai_inference/api_ranking_mymodel_discoveries.py | ai/services/ai_inference/api_ranking_login_streak.py | ai/services/ai_inference/api_activity_login.py | ai/services/ai_inference/api_account_status.py | ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/api_account_lifecycle.py | ai/services/ai_inference/api_app_bootstrap.py | ai/services/ai_inference/api_notice.py | ai/services/ai_inference/api_input_summary.py | ai/services/ai_inference/api_global_summary.py | ai/services/ai_inference/api_report_reads.py | ai/services/ai_inference/api_myweb_reads.py | ai/services/ai_inference/api_myprofile_reports_read.py | ai/services/ai_inference/api_mymodel_create.py | ai/services/ai_inference/api_mymodel_qna.py | ai/services/ai_inference/api_nexus.py | ai/services/ai_inference/api_today_question.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/api_report_distribution_settings.py | ai/services/ai_inference/prompt_templates.py | ai/services/ai_inference/astor_myprofile_persona.py | ai/services/ai_inference/astor_myweb_insight.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/astor_core.py | ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/mashlogic_qa_enhancer.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/request_metrics.py | ai/services/ai_inference/response_microcache.py",
-    "routes": "/myweb/insight | /myweb/insight/weekly | /myweb/insight/monthly | /myweb/insight/weekly | /myweb/insight/monthly | /healthz | /internal/rollover | /mymodel/templates | /mymodel/infer"
+    "lines": 1583,
+    "local_import_count": 53,
+    "local_imports": "ai/services/ai_inference/api_account_lifecycle.py | ai/services/ai_inference/api_account_status.py | ai/services/ai_inference/api_account_visibility.py | ai/services/ai_inference/api_activity_login.py | ai/services/ai_inference/api_app_bootstrap.py | ai/services/ai_inference/api_cron_distribution.py | ai/services/ai_inference/api_deep_insight.py | ai/services/ai_inference/api_emotion_history_manage.py | ai/services/ai_inference/api_emotion_history_search.py | ai/services/ai_inference/api_emotion_reflection.py | ai/services/ai_inference/api_emotion_secret.py | ai/services/ai_inference/api_emotion_submit.py",
+    "routes": "POST /myweb/insight | POST /myweb/insight/weekly | POST /myweb/insight/monthly | GET /myweb/insight/weekly | GET /myweb/insight/monthly | GET /healthz | POST /internal/rollover | GET /mymodel/templates | POST /mymodel/infer"
   },
   {
     "repo": "mashos-api",
@@ -984,7 +984,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "account_settings|national_system",
-    "lines": 222,
+    "lines": 223,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/astor_job_queue.py",
     "routes": ""
@@ -995,9 +995,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "account_settings|national_system",
-    "lines": 168,
+    "lines": 169,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/astor_account_status_store.py",
+    "local_imports": "ai/services/ai_inference/astor_account_status_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1006,7 +1006,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "account_settings|national_system",
-    "lines": 538,
+    "lines": 539,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1017,9 +1017,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 392,
+    "lines": 393,
     "local_import_count": 4,
-    "local_imports": "ai/services/ai_inference/astor_structure_matcher.py | ai/services/ai_inference/astor_myweb_insight.py | ai/services/ai_inference/astor_deep_insight.py | ai/services/ai_inference/astor_patterns.py",
+    "local_imports": "ai/services/ai_inference/astor_deep_insight.py | ai/services/ai_inference/astor_myweb_insight.py | ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/astor_structure_matcher.py",
     "routes": ""
   },
   {
@@ -1028,9 +1028,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 530,
+    "lines": 531,
     "local_import_count": 4,
-    "local_imports": "ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/astor_deep_insight_question_store.py | ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/deep_insight_strategy.py",
+    "local_imports": "ai/services/ai_inference/astor_deep_insight_question_store.py | ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/deep_insight_strategy.py",
     "routes": ""
   },
   {
@@ -1039,7 +1039,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 296,
+    "lines": 297,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1050,7 +1050,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 394,
+    "lines": 395,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1061,7 +1061,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "emotionlog_social|national_system",
-    "lines": 293,
+    "lines": 294,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/astor_job_queue.py",
     "routes": ""
@@ -1072,9 +1072,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "emotionlog_social|national_system",
-    "lines": 241,
+    "lines": 242,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/astor_friend_feed_store.py",
+    "local_imports": "ai/services/ai_inference/astor_friend_feed_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1083,7 +1083,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "emotionlog_social|national_system",
-    "lines": 634,
+    "lines": 635,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1094,7 +1094,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 290,
+    "lines": 291,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/astor_global_summary_store.py | ai/services/ai_inference/astor_job_queue.py",
     "routes": ""
@@ -1105,9 +1105,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 269,
+    "lines": 270,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/astor_global_summary_store.py",
+    "local_imports": "ai/services/ai_inference/astor_global_summary_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1116,7 +1116,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 639,
+    "lines": 640,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1127,7 +1127,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 386,
+    "lines": 387,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1138,9 +1138,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 2479,
+    "lines": 2490,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/reflection_text_formatter.py | ai/services/ai_inference/astor_job_queue.py",
+    "local_imports": "ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/reflection_text_formatter.py",
     "routes": ""
   },
   {
@@ -1149,9 +1149,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|self_structure",
-    "lines": 278,
+    "lines": 281,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/astor_deep_insight_store.py",
+    "local_imports": "ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/astor_patterns.py",
     "routes": ""
   },
   {
@@ -1160,9 +1160,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|self_structure",
-    "lines": 3504,
-    "local_import_count": 9,
-    "local_imports": "ai/services/ai_inference/myprofile_section_text_templates.py | ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/structure_dict.py | ai/services/ai_inference/subscription.py | ai/services/analysis_engine/self_structure_engine/rules.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/generation_lock.py",
+    "lines": 3505,
+    "local_import_count": 8,
+    "local_imports": "ai/services/ai_inference/astor_deep_insight_store.py | ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/generation_lock.py | ai/services/ai_inference/myprofile_section_text_templates.py | ai/services/ai_inference/structure_dict.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1171,7 +1171,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "analysis_myweb|national_system",
-    "lines": 1053,
+    "lines": 1054,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/astor_patterns.py | ai/services/ai_inference/structure_dict.py",
     "routes": ""
@@ -1182,7 +1182,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 423,
+    "lines": 424,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1193,7 +1193,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|ranking",
-    "lines": 521,
+    "lines": 522,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1204,7 +1204,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|ranking",
-    "lines": 231,
+    "lines": 232,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/astor_job_queue.py",
     "routes": ""
@@ -1215,9 +1215,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|ranking",
-    "lines": 420,
+    "lines": 421,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/astor_ranking_boards.py",
+    "local_imports": "ai/services/ai_inference/astor_ranking_boards.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1226,7 +1226,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|nexus_piece",
-    "lines": 1246,
+    "lines": 1247,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/generated_reflection_identity.py",
     "routes": ""
@@ -1237,7 +1237,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system|nexus_piece",
-    "lines": 1204,
+    "lines": 1205,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_identity.py",
     "routes": ""
@@ -1248,7 +1248,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 160,
+    "lines": 161,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/astor_job_queue.py",
     "routes": ""
@@ -1259,7 +1259,7 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 182,
+    "lines": 183,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1270,9 +1270,9 @@
     "kind": "runtime",
     "category": "astor_worker_store",
     "systems": "national_system",
-    "lines": 4541,
-    "local_import_count": 30,
-    "local_imports": "ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/astor_myprofile_report.py | ai/services/ai_inference/astor_material_snapshots.py | ai/services/ai_inference/api_myweb_reports.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/report_distribution_push_store.py | ai/services/ai_inference/generation_lock.py | ai/services/analysis_engine/emotion_structure_engine/weekly.py | ai/services/analysis_engine/emotion_structure_engine/monthly.py | ai/services/analysis_engine/emotion_structure_engine/daily.py | ai/services/analysis_engine/self_structure_engine/signal_extraction.py | ai/services/analysis_engine/self_structure_engine/fusion.py | ai/services/analysis_engine/self_structure_engine/builders.py | ai/services/analysis_engine/models.py | ai/services/ai_inference/analysis_engine_adapter.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/astor_reflection_engine.py | ai/services/ai_inference/astor_reflection_store.py | ai/services/ai_inference/astor_ranking_boards.py | ai/services/ai_inference/astor_ranking_kernel.py | ai/services/ai_inference/astor_account_status_store.py | ai/services/ai_inference/astor_account_status_kernel.py | ai/services/ai_inference/astor_friend_feed_store.py | ai/services/ai_inference/astor_friend_feed_kernel.py | ai/services/ai_inference/astor_global_summary_store.py | ai/services/ai_inference/astor_global_summary_kernel.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/request_metrics.py | ai/services/ai_inference/response_microcache.py",
+    "lines": 4550,
+    "local_import_count": 23,
+    "local_imports": "ai/services/ai_inference/analysis_engine_adapter.py | ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/api_myweb_reports.py | ai/services/ai_inference/astor_account_status_kernel.py | ai/services/ai_inference/astor_account_status_store.py | ai/services/ai_inference/astor_friend_feed_kernel.py | ai/services/ai_inference/astor_friend_feed_store.py | ai/services/ai_inference/astor_global_summary_enqueue.py | ai/services/ai_inference/astor_global_summary_kernel.py | ai/services/ai_inference/astor_global_summary_store.py | ai/services/ai_inference/astor_job_queue.py | ai/services/ai_inference/astor_material_snapshots.py",
     "routes": ""
   },
   {
@@ -1281,7 +1281,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 60,
+    "lines": 61,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1292,7 +1292,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 284,
+    "lines": 285,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/observability.py",
     "routes": ""
@@ -1303,7 +1303,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 155,
+    "lines": 156,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1313,10 +1313,10 @@
     "path": "ai/services/ai_inference/emlis_ai_capability.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response|account_settings",
-    "lines": 86,
-    "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/emlis_ai_types.py | ai/services/ai_inference/subscription.py",
+    "systems": "emlis_ai",
+    "lines": 87,
+    "local_import_count": 1,
+    "local_imports": "ai/services/ai_inference/emlis_ai_types.py",
     "routes": ""
   },
   {
@@ -1324,10 +1324,10 @@
     "path": "ai/services/ai_inference/emlis_ai_context_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response|input_home",
-    "lines": 167,
-    "local_import_count": 7,
-    "local_imports": "ai/services/ai_inference/emlis_ai_greeting_state_store.py | ai/services/ai_inference/emlis_ai_types.py | ai/services/ai_inference/emotion_history_search_service.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/today_question_store.py | ai/services/ai_inference/api_input_summary.py | ai/services/ai_inference/api_myweb_reads.py",
+    "systems": "emlis_ai",
+    "lines": 168,
+    "local_import_count": 5,
+    "local_imports": "ai/services/ai_inference/emlis_ai_greeting_state_store.py | ai/services/ai_inference/emlis_ai_types.py | ai/services/ai_inference/emotion_history_search_service.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/today_question_store.py",
     "routes": ""
   },
   {
@@ -1335,10 +1335,10 @@
     "path": "ai/services/ai_inference/emlis_ai_greeting_state_store.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response",
-    "lines": 177,
-    "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/emlis_ai_types.py | ai/services/ai_inference/supabase_client.py",
+    "systems": "emlis_ai",
+    "lines": 178,
+    "local_import_count": 1,
+    "local_imports": "ai/services/ai_inference/emlis_ai_types.py",
     "routes": ""
   },
   {
@@ -1346,8 +1346,8 @@
     "path": "ai/services/ai_inference/emlis_ai_prompt.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response",
-    "lines": 44,
+    "systems": "emlis_ai",
+    "lines": 45,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1357,8 +1357,8 @@
     "path": "ai/services/ai_inference/emlis_ai_reply_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response|input_home",
-    "lines": 198,
+    "systems": "emlis_ai",
+    "lines": 199,
     "local_import_count": 6,
     "local_imports": "ai/services/ai_inference/emlis_ai_capability.py | ai/services/ai_inference/emlis_ai_context_service.py | ai/services/ai_inference/emlis_ai_style_profile_service.py | ai/services/ai_inference/emlis_ai_types.py | ai/services/ai_inference/emlis_ai_world_model_service.py | ai/services/ai_inference/input_feedback_text_templates.py",
     "routes": ""
@@ -1368,8 +1368,8 @@
     "path": "ai/services/ai_inference/emlis_ai_style_profile_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response",
-    "lines": 91,
+    "systems": "emlis_ai",
+    "lines": 92,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/emlis_ai_types.py",
     "routes": ""
@@ -1379,8 +1379,8 @@
     "path": "ai/services/ai_inference/emlis_ai_types.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response",
-    "lines": 130,
+    "systems": "emlis_ai",
+    "lines": 131,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1390,8 +1390,8 @@
     "path": "ai/services/ai_inference/emlis_ai_world_model_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response",
-    "lines": 217,
+    "systems": "emlis_ai",
+    "lines": 218,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/emlis_ai_types.py",
     "routes": ""
@@ -1401,8 +1401,8 @@
     "path": "ai/services/ai_inference/emotion_history_search_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "emlis_ai_response|input_home",
-    "lines": 181,
+    "systems": "emlis_ai|input_home",
+    "lines": 182,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1413,7 +1413,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 256,
+    "lines": 257,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_identity.py",
     "routes": ""
@@ -1424,7 +1424,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 214,
+    "lines": 215,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/astor_reflection_store.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/reflection_publish_entitlements.py",
     "routes": ""
@@ -1434,8 +1434,8 @@
     "path": "ai/services/ai_inference/emotion_submit_service.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "input_home|emlis_ai_response",
-    "lines": 219,
+    "systems": "",
+    "lines": 220,
     "local_import_count": 5,
     "local_imports": "ai/services/ai_inference/api_emotion_submit.py | ai/services/ai_inference/emlis_ai_reply_service.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
     "routes": ""
@@ -1446,7 +1446,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 1896,
+    "lines": 1897,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/reflection_text_formatter.py",
     "routes": ""
@@ -1457,7 +1457,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 46,
+    "lines": 47,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1468,7 +1468,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 716,
+    "lines": 717,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/astor_reflection_store.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_identity.py",
     "routes": ""
@@ -1479,9 +1479,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "national_system",
-    "lines": 428,
+    "lines": 429,
     "local_import_count": 2,
-    "local_imports": "ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/observability.py",
+    "local_imports": "ai/services/ai_inference/observability.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1490,7 +1490,7 @@
     "kind": "engine",
     "category": "guard",
     "systems": "",
-    "lines": 45,
+    "lines": 46,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1501,7 +1501,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 1332,
+    "lines": 1333,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1512,7 +1512,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 85,
+    "lines": 86,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1523,7 +1523,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 131,
+    "lines": 132,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1534,9 +1534,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 587,
+    "lines": 588,
     "local_import_count": 4,
-    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/supabase_auth_token_cache.py | ai/services/ai_inference/startup_snapshot_store.py",
+    "local_imports": "ai/services/ai_inference/active_users_store.py | ai/services/ai_inference/client_compat.py | ai/services/ai_inference/startup_snapshot_store.py | ai/services/ai_inference/supabase_auth_token_cache.py",
     "routes": ""
   },
   {
@@ -1556,7 +1556,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 62,
+    "lines": 63,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/observability.py | ai/services/ai_inference/request_metrics.py",
     "routes": ""
@@ -1567,7 +1567,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 144,
+    "lines": 145,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/subscription.py",
     "routes": ""
@@ -1578,7 +1578,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "self_structure",
-    "lines": 220,
+    "lines": 221,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1589,7 +1589,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 405,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1600,9 +1600,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 802,
+    "lines": 803,
     "local_import_count": 4,
-    "local_imports": "ai/services/ai_inference/client_compat.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py | ai/services/ai_inference/response_microcache.py",
+    "local_imports": "ai/services/ai_inference/client_compat.py | ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
   },
   {
@@ -1611,7 +1611,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 269,
+    "lines": 270,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1622,7 +1622,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 45,
+    "lines": 46,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1633,7 +1633,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 165,
+    "lines": 166,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1644,7 +1644,7 @@
     "kind": "engine",
     "category": "prompt",
     "systems": "",
-    "lines": 10,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1655,7 +1655,7 @@
     "kind": "engine",
     "category": "prompt",
     "systems": "",
-    "lines": 9,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1666,7 +1666,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "national_system",
-    "lines": 331,
+    "lines": 332,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1677,7 +1677,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 61,
+    "lines": 62,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
     "routes": ""
@@ -1688,7 +1688,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "nexus_piece",
-    "lines": 427,
+    "lines": 428,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1699,7 +1699,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 188,
+    "lines": 189,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1710,7 +1710,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 241,
+    "lines": 242,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1721,7 +1721,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 336,
+    "lines": 337,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1732,7 +1732,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 109,
+    "lines": 110,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1743,7 +1743,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 4,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1754,7 +1754,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "national_system",
-    "lines": 157,
+    "lines": 158,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/request_metrics.py",
     "routes": ""
@@ -1765,9 +1765,9 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "startup_bootstrap",
-    "lines": 382,
+    "lines": 383,
     "local_import_count": 7,
-    "local_imports": "ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/api_friends.py | ai/services/ai_inference/api_global_summary.py | ai/services/ai_inference/api_input_summary.py | ai/services/ai_inference/api_notice.py | ai/services/ai_inference/api_report_reads.py | ai/services/ai_inference/api_today_question.py",
+    "local_imports": "ai/services/ai_inference/api_friends.py | ai/services/ai_inference/api_global_summary.py | ai/services/ai_inference/api_input_summary.py | ai/services/ai_inference/api_notice.py | ai/services/ai_inference/api_report_reads.py | ai/services/ai_inference/api_today_question.py | ai/services/ai_inference/response_microcache.py",
     "routes": ""
   },
   {
@@ -1776,7 +1776,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 148,
+    "lines": 149,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1787,7 +1787,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 170,
+    "lines": 171,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1797,8 +1797,8 @@
     "path": "ai/services/ai_inference/subscription_bootstrap_store.py",
     "kind": "service",
     "category": "service_store_governance",
-    "systems": "account_settings|startup_bootstrap|emlis_ai_response",
-    "lines": 860,
+    "systems": "account_settings|startup_bootstrap",
+    "lines": 856,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/emlis_ai_capability.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1809,7 +1809,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 409,
+    "lines": 410,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1820,10 +1820,10 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 613,
+    "lines": 614,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/subscription_config.py | ai/services/ai_inference/subscription_release_config.py | ai/services/ai_inference/subscription_verifier_android.py",
-    "routes": "/subscription/config/release-check/live"
+    "routes": "GET /subscription/config/release-check/live"
   },
   {
     "repo": "mashos-api",
@@ -1831,7 +1831,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 659,
+    "lines": 660,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1842,10 +1842,10 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 394,
+    "lines": 395,
     "local_import_count": 3,
-    "local_imports": "ai/services/ai_inference/subscription_bootstrap_store.py | ai/services/ai_inference/subscription_verifier_ios.py | ai/services/ai_inference/subscription_verifier_android.py",
-    "routes": "/subscription/config/release-check | /subscription/config/release-check/compare-public"
+    "local_imports": "ai/services/ai_inference/subscription_bootstrap_store.py | ai/services/ai_inference/subscription_verifier_android.py | ai/services/ai_inference/subscription_verifier_ios.py",
+    "routes": "GET /subscription/config/release-check | POST /subscription/config/release-check/compare-public"
   },
   {
     "repo": "mashos-api",
@@ -1853,7 +1853,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 54,
+    "lines": 55,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/subscription_config.py",
     "routes": ""
@@ -1864,7 +1864,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 326,
+    "lines": 327,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/subscription.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1886,7 +1886,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 328,
+    "lines": 329,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/subscription_bootstrap_store.py | ai/services/ai_inference/subscription_projection.py",
     "routes": ""
@@ -1897,7 +1897,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 347,
+    "lines": 348,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/subscription_bootstrap_store.py | ai/services/ai_inference/subscription_projection.py",
     "routes": ""
@@ -1908,10 +1908,10 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "account_settings",
-    "lines": 207,
+    "lines": 208,
     "local_import_count": 3,
     "local_imports": "ai/services/ai_inference/subscription_projection.py | ai/services/ai_inference/subscription_verifier_android.py | ai/services/ai_inference/subscription_verifier_ios.py",
-    "routes": "/subscription/webhooks/google | /subscription/webhooks/apple"
+    "routes": "POST /subscription/webhooks/google | POST /subscription/webhooks/apple"
   },
   {
     "repo": "mashos-api",
@@ -1919,7 +1919,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 194,
+    "lines": 195,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1930,7 +1930,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 407,
+    "lines": 408,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/request_metrics.py",
     "routes": ""
@@ -1941,7 +1941,7 @@
     "kind": "engine",
     "category": "template",
     "systems": "",
-    "lines": 28,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1952,7 +1952,7 @@
     "kind": "engine",
     "category": "template",
     "systems": "",
-    "lines": 28,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1963,7 +1963,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 1456,
+    "lines": 1457,
     "local_import_count": 2,
     "local_imports": "ai/services/ai_inference/response_microcache.py | ai/services/ai_inference/supabase_client.py",
     "routes": ""
@@ -1974,7 +1974,7 @@
     "kind": "service",
     "category": "service_store_governance",
     "systems": "",
-    "lines": 131,
+    "lines": 132,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1985,7 +1985,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 5,
+    "lines": 6,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -1996,7 +1996,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 52,
+    "lines": 53,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2007,7 +2007,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 114,
+    "lines": 115,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2018,7 +2018,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 204,
+    "lines": 205,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2029,7 +2029,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 522,
+    "lines": 523,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2040,7 +2040,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 416,
+    "lines": 417,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2051,9 +2051,9 @@
     "kind": "other",
     "category": "other",
     "systems": "self_structure",
-    "lines": 571,
-    "local_import_count": 2,
-    "local_imports": "ai/services/analysis_engine/models.py | ai/services/analysis_engine/self_structure_engine/rules.py",
+    "lines": 572,
+    "local_import_count": 0,
+    "local_imports": "",
     "routes": ""
   },
   {
@@ -2062,9 +2062,9 @@
     "kind": "other",
     "category": "other",
     "systems": "self_structure",
-    "lines": 801,
-    "local_import_count": 2,
-    "local_imports": "ai/services/analysis_engine/models.py | ai/services/analysis_engine/self_structure_engine/rules.py",
+    "lines": 802,
+    "local_import_count": 0,
+    "local_imports": "",
     "routes": ""
   },
   {
@@ -2073,9 +2073,9 @@
     "kind": "other",
     "category": "other",
     "systems": "self_structure",
-    "lines": 1265,
-    "local_import_count": 1,
-    "local_imports": "ai/services/analysis_engine/models.py",
+    "lines": 1279,
+    "local_import_count": 0,
+    "local_imports": "",
     "routes": ""
   },
   {
@@ -2084,9 +2084,9 @@
     "kind": "other",
     "category": "other",
     "systems": "self_structure",
-    "lines": 473,
-    "local_import_count": 2,
-    "local_imports": "ai/services/analysis_engine/models.py | ai/services/analysis_engine/self_structure_engine/rules.py",
+    "lines": 474,
+    "local_import_count": 0,
+    "local_imports": "",
     "routes": ""
   },
   {
@@ -2095,7 +2095,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 6,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2106,7 +2106,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 27,
+    "lines": 28,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2117,7 +2117,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 91,
+    "lines": 92,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2128,7 +2128,7 @@
     "kind": "other",
     "category": "other",
     "systems": "",
-    "lines": 3,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2150,7 +2150,7 @@
     "kind": "support",
     "category": "test",
     "systems": "account_settings",
-    "lines": 4,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2161,7 +2161,7 @@
     "kind": "support",
     "category": "test",
     "systems": "account_settings",
-    "lines": 9,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2172,7 +2172,7 @@
     "kind": "support",
     "category": "test",
     "systems": "startup_bootstrap",
-    "lines": 7,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2183,7 +2183,7 @@
     "kind": "support",
     "category": "test",
     "systems": "startup_bootstrap",
-    "lines": 14,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2194,7 +2194,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 9,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2205,7 +2205,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 12,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2216,7 +2216,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 5,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2227,7 +2227,7 @@
     "kind": "support",
     "category": "test",
     "systems": "nexus_piece",
-    "lines": 13,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2238,7 +2238,7 @@
     "kind": "support",
     "category": "test",
     "systems": "nexus_piece",
-    "lines": 35,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2249,7 +2249,7 @@
     "kind": "support",
     "category": "test",
     "systems": "nexus_piece",
-    "lines": 36,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2260,7 +2260,7 @@
     "kind": "support",
     "category": "test",
     "systems": "self_structure",
-    "lines": 8,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2271,7 +2271,7 @@
     "kind": "support",
     "category": "test",
     "systems": "self_structure",
-    "lines": 14,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2282,7 +2282,7 @@
     "kind": "support",
     "category": "test",
     "systems": "account_settings",
-    "lines": 5,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2293,7 +2293,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 17,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2304,7 +2304,7 @@
     "kind": "support",
     "category": "test",
     "systems": "account_settings|startup_bootstrap",
-    "lines": 96,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2315,7 +2315,7 @@
     "kind": "support",
     "category": "test",
     "systems": "api_contract",
-    "lines": 229,
+    "lines": 230,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/api_contract_registry.py",
     "routes": ""
@@ -2326,7 +2326,7 @@
     "kind": "support",
     "category": "test",
     "systems": "api_contract",
-    "lines": 154,
+    "lines": 157,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/api_contract_registry.py",
     "routes": ""
@@ -2337,7 +2337,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 552,
+    "lines": 553,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2347,8 +2347,8 @@
     "path": "ai/tests/contract/test_emlis_ai_contracts.py",
     "kind": "support",
     "category": "test",
-    "systems": "emlis_ai_response",
-    "lines": 141,
+    "systems": "emlis_ai|api_contract",
+    "lines": 142,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2359,9 +2359,9 @@
     "kind": "support",
     "category": "test",
     "systems": "nexus_piece",
-    "lines": 612,
-    "local_import_count": 1,
-    "local_imports": "ai/services/ai_inference/generated_reflection_identity.py",
+    "lines": 613,
+    "local_import_count": 4,
+    "local_imports": "ai/services/ai_inference/api_mymodel_qna.py | ai/services/ai_inference/astor_reflection_store.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_identity.py",
     "routes": ""
   },
   {
@@ -2370,9 +2370,9 @@
     "kind": "support",
     "category": "test",
     "systems": "nexus_piece",
-    "lines": 424,
-    "local_import_count": 0,
-    "local_imports": "",
+    "lines": 425,
+    "local_import_count": 3,
+    "local_imports": "ai/services/ai_inference/astor_reflection_engine.py | ai/services/ai_inference/generated_reflection_display.py | ai/services/ai_inference/generated_reflection_maintenance.py",
     "routes": ""
   },
   {
@@ -2381,9 +2381,9 @@
     "kind": "support",
     "category": "test",
     "systems": "nexus_piece",
-    "lines": 259,
-    "local_import_count": 0,
-    "local_imports": "",
+    "lines": 260,
+    "local_import_count": 4,
+    "local_imports": "ai/services/ai_inference/api_mymodel_create.py | ai/services/ai_inference/api_mymodel_qna.py | ai/services/ai_inference/astor_material_snapshots.py | ai/services/ai_inference/reflection_text_formatter.py",
     "routes": ""
   },
   {
@@ -2392,9 +2392,9 @@
     "kind": "support",
     "category": "test",
     "systems": "self_structure",
-    "lines": 232,
-    "local_import_count": 0,
-    "local_imports": "",
+    "lines": 233,
+    "local_import_count": 3,
+    "local_imports": "ai/services/ai_inference/api_myprofile.py | ai/services/ai_inference/subscription.py | ai/services/ai_inference/subscription_store.py",
     "routes": ""
   },
   {
@@ -2403,9 +2403,9 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 301,
-    "local_import_count": 1,
-    "local_imports": "ai/services/ai_inference/notice_store.py",
+    "lines": 302,
+    "local_import_count": 2,
+    "local_imports": "ai/services/ai_inference/api_notice.py | ai/services/ai_inference/notice_store.py",
     "routes": ""
   },
   {
@@ -2414,9 +2414,9 @@
     "kind": "support",
     "category": "test",
     "systems": "national_system",
-    "lines": 385,
-    "local_import_count": 0,
-    "local_imports": "",
+    "lines": 386,
+    "local_import_count": 4,
+    "local_imports": "ai/services/ai_inference/api_global_summary.py | ai/services/ai_inference/api_myprofile_reports_read.py | ai/services/ai_inference/api_myweb_reads.py | ai/services/ai_inference/api_report_reads.py",
     "routes": ""
   },
   {
@@ -2425,7 +2425,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 113,
+    "lines": 114,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2436,9 +2436,9 @@
     "kind": "support",
     "category": "test",
     "systems": "account_settings|startup_bootstrap",
-    "lines": 155,
-    "local_import_count": 0,
-    "local_imports": "",
+    "lines": 156,
+    "local_import_count": 1,
+    "local_imports": "ai/services/ai_inference/api_subscription.py",
     "routes": ""
   },
   {
@@ -2447,7 +2447,7 @@
     "kind": "support",
     "category": "test",
     "systems": "",
-    "lines": 10,
+    "lines": 11,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2457,96 +2457,8 @@
     "path": "ai/tests/test_emlis_ai_greeting_state_store.py",
     "kind": "support",
     "category": "test",
-    "systems": "emlis_ai_response",
-    "lines": 66,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/check_tag_consistency.py",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 21,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/data/raw/import_template.csv",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 4,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/data/train/{{AI_NAME}}_interpret_train.jsonl",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 10,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/docs/data_ingest_guide.txt",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 35,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/import_csv_to_logs.py",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 91,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/import_json_to_logs.py",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 97,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/import_logs.py",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 230,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/tools/import_mapping.yaml",
-    "kind": "support",
-    "category": "tools",
-    "systems": "",
-    "lines": 42,
+    "systems": "emlis_ai",
+    "lines": 67,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2557,7 +2469,95 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 9,
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/check_tag_consistency.py",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": 22,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/data/raw/import_template.csv",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/data/train/{{AI_NAME}}_interpret_train.jsonl",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/docs/data_ingest_guide.txt",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": "",
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/import_csv_to_logs.py",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": 92,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/import_json_to_logs.py",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": 98,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/import_logs.py",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": 231,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/tools/import_mapping.yaml",
+    "kind": "support",
+    "category": "tools",
+    "systems": "",
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2568,7 +2568,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 1,
+    "lines": 2,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2579,7 +2579,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 230,
+    "lines": 231,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2590,7 +2590,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 42,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2601,7 +2601,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 65,
+    "lines": 66,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2612,7 +2612,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 2,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2623,7 +2623,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 6,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2634,7 +2634,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 121,
+    "lines": 122,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2645,7 +2645,7 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 32,
+    "lines": 33,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2656,7 +2656,18 @@
     "kind": "support",
     "category": "tools",
     "systems": "",
-    "lines": 65,
+    "lines": 66,
+    "local_import_count": 0,
+    "local_imports": "",
+    "routes": ""
+  },
+  {
+    "repo": "mashos-api",
+    "path": "ai/training/README.md",
+    "kind": "support",
+    "category": "training",
+    "systems": "",
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2667,7 +2678,7 @@
     "kind": "support",
     "category": "training",
     "systems": "",
-    "lines": 1,
+    "lines": 2,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2675,17 +2686,6 @@
   {
     "repo": "mashos-api",
     "path": "ai/training/eval.py",
-    "kind": "support",
-    "category": "training",
-    "systems": "",
-    "lines": 1,
-    "local_import_count": 0,
-    "local_imports": "",
-    "routes": ""
-  },
-  {
-    "repo": "mashos-api",
-    "path": "ai/training/README.md",
     "kind": "support",
     "category": "training",
     "systems": "",
@@ -2700,7 +2700,7 @@
     "kind": "support",
     "category": "training",
     "systems": "",
-    "lines": 6,
+    "lines": "",
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2711,7 +2711,7 @@
     "kind": "support",
     "category": "training",
     "systems": "",
-    "lines": 121,
+    "lines": 122,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2722,7 +2722,7 @@
     "kind": "support",
     "category": "repo_script",
     "systems": "nexus_piece",
-    "lines": 97,
+    "lines": 98,
     "local_import_count": 1,
     "local_imports": "ai/services/ai_inference/generated_reflection_maintenance.py",
     "routes": ""
@@ -2733,7 +2733,7 @@
     "kind": "support",
     "category": "repo_script",
     "systems": "",
-    "lines": 132,
+    "lines": 133,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
@@ -2744,7 +2744,7 @@
     "kind": "support",
     "category": "repo_script",
     "systems": "",
-    "lines": 277,
+    "lines": 278,
     "local_import_count": 0,
     "local_imports": "",
     "routes": ""
