@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import CocolonPressable from "../components/CocolonPressable";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -40,6 +41,13 @@ const TAB_FOLLOWING = "following";
 const TAB_FOLLOWERS = "followers";
 const TAB_REQUESTS = "requests";
 const TAB_REQUESTED = "requested";
+
+const FOLLOW_TABS = [
+  { key: TAB_FOLLOWING, label: "フォロー中" },
+  { key: TAB_FOLLOWERS, label: "フォロワー" },
+  { key: TAB_REQUESTED, label: "申請中", selfOnly: true },
+  { key: TAB_REQUESTS, label: "承認待ち", selfOnly: true },
+];
 
 function normalizeTab(t) {
   if (t === TAB_REQUESTS) return TAB_REQUESTS;
@@ -190,6 +198,21 @@ export default function FollowListScreen({ navigation, route }) {
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
+
+  const visibleTabs = useMemo(
+    () => FOLLOW_TABS.filter((item) => isSelfList || !item.selfOnly),
+    [isSelfList]
+  );
+
+  const countByTab = useMemo(
+    () => ({
+      [TAB_FOLLOWING]: followingCount,
+      [TAB_FOLLOWERS]: followerCount,
+      [TAB_REQUESTED]: requestedCount,
+      [TAB_REQUESTS]: requestCount,
+    }),
+    [followingCount, followerCount, requestedCount, requestCount]
+  );
 
 
   // 遷移元から initialTab が変わって再表示されるケースに追従
@@ -1029,56 +1052,42 @@ export default function FollowListScreen({ navigation, route }) {
       </View>
 
       {/* タブ */}
-      <View style={styles.tabsRow}>
-        <TouchableOpacity
-          style={[styles.tab, tab === TAB_FOLLOWING && styles.tabActive]}
-          onPress={() => setTab(TAB_FOLLOWING)}
-          activeOpacity={0.85}
-        >
-          <Text style={[styles.tabText, tab === TAB_FOLLOWING && styles.tabTextActive]}>
-            フォロー中{" "}
-            {countLoading ? "…" : `(${String(followingCount)})`}
-          </Text>
-        </TouchableOpacity>
+      <View style={styles.tabBar}>
+        {visibleTabs.map((tabItem) => {
+          const isActive = tab === tabItem.key;
+          const count = countByTab[tabItem.key];
+          const accessibilityLabel =
+            countLoading || !Number.isFinite(Number(count))
+              ? `${tabItem.label}を開く`
+              : `${tabItem.label} ${Number(count)}件を開く`;
 
-        <TouchableOpacity
-          style={[styles.tab, tab === TAB_FOLLOWERS && styles.tabActive]}
-          onPress={() => setTab(TAB_FOLLOWERS)}
-          activeOpacity={0.85}
-        >
-          <Text style={[styles.tabText, tab === TAB_FOLLOWERS && styles.tabTextActive]}>
-            フォロワー{" "}
-            {countLoading ? "…" : `(${String(followerCount)})`}
-          </Text>
-        </TouchableOpacity>
-
-        {isSelfList ? (
-          <>
-            <TouchableOpacity
-              style={[styles.tab, tab === TAB_REQUESTED && styles.tabActive]}
-              onPress={() => setTab(TAB_REQUESTED)}
-              activeOpacity={0.85}
-            >
-              <Text style={[styles.tabText, tab === TAB_REQUESTED && styles.tabTextActive]}>
-                申請中{" "}
-                {countLoading ? "…" : `(${String(requestedCount)})`}
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.tab, tab === TAB_REQUESTS && styles.tabActive]}
-              onPress={() => setTab(TAB_REQUESTS)}
-              activeOpacity={0.85}
-            >
-              <Text style={[styles.tabText, tab === TAB_REQUESTS && styles.tabTextActive]}>
-                承認待ち{" "}
-                {countLoading ? "…" : `(${String(requestCount)})`}
-              </Text>
-            </TouchableOpacity>
-          </>
-        ) : null}
+          return (
+            <View key={tabItem.key} style={styles.tabItemWrap}>
+              <CocolonPressable
+                style={styles.tabItem}
+                onPress={() => setTab(tabItem.key)}
+                accessibilityLabel={accessibilityLabel}
+              >
+                <View
+                  style={[
+                    styles.tabLabelWrap,
+                    isActive && styles.tabLabelWrapActive,
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.tabLabelText,
+                      isActive && styles.tabLabelTextActive,
+                    ]}
+                  >
+                    {tabItem.label}
+                  </Text>
+                </View>
+              </CocolonPressable>
+            </View>
+          );
+        })}
       </View>
-
       {/* エラー表示 */}
       {errorText ? (
         <View style={styles.errorBox}>
@@ -1141,33 +1150,41 @@ function createStyles(COLORS, ui) {
       color: COLORS.TITLE_GOLD,
     },
 
-    tabsRow: {
+    tabBar: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 20,
-      paddingBottom: 10,
+      justifyContent: "space-between",
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      marginHorizontal: 20,
+      marginBottom: 14,
     },
-    tab: {
+    tabItemWrap: {
       flex: 1,
-      paddingVertical: 10,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
+    },
+    tabItem: {
       alignItems: "center",
       justifyContent: "center",
+      paddingTop: 10,
+      paddingHorizontal: 2,
     },
-    tabActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
+    tabLabelWrap: {
+      alignItems: "center",
+      justifyContent: "center",
+      paddingBottom: 9,
+      borderBottomWidth: 2,
+      borderBottomColor: "transparent",
     },
-    tabText: {
-      fontSize: 12,
+    tabLabelWrapActive: {
+      borderBottomColor: COLORS.TITLE_GOLD,
+    },
+    tabLabelText: {
+      fontSize: 13,
       fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
-    tabTextActive: {
-      color: "#FFFFFF",
+    tabLabelTextActive: {
+      color: COLORS.TITLE_GOLD,
     },
 
     errorBox: {

@@ -23,11 +23,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
+import UnreadBadge from "../components/UnreadBadge";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
 import { useTutorial } from "../TutorialContext";
+import { useUnread } from "../UnreadContext";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -43,7 +45,7 @@ import {
 import NexusReflectionCard from "./nexus/NexusReflectionCard";
 
 const TABS = [
-  { key: "reflection", label: "Piece" },
+  { key: "reflection", label: "投稿" },
   { key: "emotion_log", label: "感情通知" },
   { key: "recommend", label: "おすすめ" },
   { key: "history", label: "履歴" },
@@ -256,6 +258,7 @@ function resolveReflectionsRouteName(navigation) {
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
+  const { getFeatureUnread } = useUnread();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
@@ -320,6 +323,15 @@ export default function NexusScreen({ navigation }) {
   const [detailVisible, setDetailVisible] = useState(false);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailData, setDetailData] = useState(null);
+
+  const prefetchedReflectionUnread = !!getFeatureUnread("MyModel", "reflectionsNew");
+  const reflectionHasUnread = Array.isArray(reflectionState.items)
+    ? reflectionState.items.some((item) => item?.viewer_state?.is_new === true)
+    : false;
+  const reflectionUnreadResolved = !reflectionState.loading && !reflectionState.error;
+  const reflectionTabUnread = reflectionUnreadResolved
+    ? reflectionHasUnread
+    : prefetchedReflectionUnread || reflectionHasUnread;
 
   const loadRanking = useCallback(async () => {
     if (isTutorialMode) {
@@ -1048,14 +1060,20 @@ export default function NexusScreen({ navigation }) {
                     isActive && styles.tabLabelWrapActive,
                   ]}
                 >
-                  <Text
-                    style={[
-                      styles.tabLabelText,
-                      isActive && styles.tabLabelTextActive,
-                    ]}
-                  >
-                    {tab.label}
-                  </Text>
+                  <View style={styles.tabLabelRow}>
+                    <Text
+                      style={[
+                        styles.tabLabelText,
+                        isActive && styles.tabLabelTextActive,
+                      ]}
+                    >
+                      {tab.label}
+                    </Text>
+                    <UnreadBadge
+                      visible={tab.key === "reflection" && reflectionTabUnread}
+                      style={styles.tabUnreadBadge}
+                    />
+                  </View>
                 </View>
               </CocolonPressable>
             );
@@ -1278,6 +1296,11 @@ function createStyles(COLORS, ui) {
           borderBottomWidth: 2,
           borderBottomColor: "transparent",
         },
+        tabLabelRow: {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        },
         tabLabelWrapActive: {
           borderBottomColor: COLORS.TITLE_GOLD,
         },
@@ -1288,6 +1311,9 @@ function createStyles(COLORS, ui) {
         },
         tabLabelTextActive: {
           color: COLORS.TITLE_GOLD,
+        },
+        tabUnreadBadge: {
+          marginLeft: 6,
         },
         tabContent: {
           marginTop: 2,

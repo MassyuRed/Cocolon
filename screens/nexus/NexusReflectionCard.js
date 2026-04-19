@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonPressable from "../../components/CocolonPressable";
+import UnreadBadge from "../../components/UnreadBadge";
 import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
@@ -56,11 +57,7 @@ export default function NexusReflectionCard({ item, onPress, onPressOwner }) {
 
         <View style={styles.headerRight}>
           {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
-          {isNew ? (
-            <View style={styles.newBadge}>
-              <Text style={styles.newBadgeText}>NEW</Text>
-            </View>
-          ) : null}
+          <UnreadBadge visible={isNew} style={styles.newBadge} />
         </View>
       </View>
 
@@ -133,17 +130,7 @@ function createStyles(COLORS, ui) {
       marginRight: 8,
     },
     newBadge: {
-      borderRadius: 999,
-      paddingHorizontal: 7,
-      paddingVertical: 3,
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-    },
-    newBadgeText: {
-      fontSize: 10,
-      fontWeight: "800",
-      color: COLORS.ACCENT_TEXT,
+      marginLeft: 8,
     },
     questionLabel: {
       fontSize: 11,

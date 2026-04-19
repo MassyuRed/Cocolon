@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
+import UnreadBadge from "../components/UnreadBadge";
 import MyWebReportViewerScreen from "./MyWebReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import {
@@ -75,12 +76,9 @@ function createLocalStyles(colors, ui) {
         tabLabelTextActive: {
           color: colors.TITLE_GOLD,
         },
-        tabDot: {
-          width: 7,
-          height: 7,
-          borderRadius: 999,
-          backgroundColor: "#EF4444",
+        tabBadge: {
           marginLeft: 6,
+          alignSelf: "center",
         },
         updateLabel: {
           fontSize: 12,
@@ -126,12 +124,9 @@ function createLocalStyles(colors, ui) {
           color: colors.TEXT_ON_LIGHT,
           marginRight: 4,
         },
-        historyInlineDot: {
-          width: 7,
-          height: 7,
-          borderRadius: 999,
-          backgroundColor: "#EF4444",
+        historyInlineBadge: {
           marginRight: 6,
+          alignSelf: "center",
         },
         paywallButtonWrap: {
           marginTop: 12,
@@ -211,7 +206,7 @@ export default function MyWebContentFirstScreen({
     onOpenDailyHistory?.();
   };
 
-  const renderTab = ({ tabKey, label, active, dotVisible, onPress, targetRef = null }) => {
+  const renderTab = ({ tabKey, label, active, badgeVisible, onPress, targetRef = null }) => {
     const content = (
       <CocolonPressable style={localStyles.tabItem} onPress={onPress}>
         <View
@@ -229,7 +224,14 @@ export default function MyWebContentFirstScreen({
             >
               {label}
             </Text>
-            {dotVisible ? <View style={localStyles.tabDot} /> : null}
+            {badgeVisible ? (
+              <UnreadBadge
+                visible={badgeVisible}
+                variant="new"
+                label="NEW"
+                style={localStyles.tabBadge}
+              />
+            ) : null}
           </View>
         </View>
       </CocolonPressable>
@@ -290,7 +292,7 @@ export default function MyWebContentFirstScreen({
             tabKey: tab.key,
             label: tab.label,
             active: activeAnalysisTab === tab.key,
-            dotVisible: tab.key === "emotion" ? unreadEmotion : unreadSelfStructure,
+            badgeVisible: tab.key === "emotion" ? unreadEmotion : unreadSelfStructure,
             onPress: () => setActiveAnalysisTab(tab.key),
             targetRef: tab.key === "emotion" ? tutorialRefs?.emotionRef : tutorialRefs?.selfStructureRef,
           })
@@ -305,7 +307,7 @@ export default function MyWebContentFirstScreen({
                 tabKey: tab.key,
                 label: tab.label,
                 active: activeEmotionReportType === tab.key,
-                dotVisible:
+                badgeVisible:
                   (tab.key === "daily" && unreadDaily) ||
                   (tab.key === "weekly" && unreadWeekly) ||
                   (tab.key === "monthly" && unreadMonthly),
@@ -343,11 +345,14 @@ export default function MyWebContentFirstScreen({
             accessibilityLabel={`${currentEmotionHistoryLabel}の履歴を見る`}
           >
             <Text style={localStyles.historyInlineText}>{currentEmotionHistoryLabel}の履歴を見る</Text>
-            {((activeEmotionReportType === "daily" && unreadDaily) ||
-              (activeEmotionReportType === "weekly" && unreadWeekly) ||
-              (activeEmotionReportType === "monthly" && unreadMonthly)) ? (
-              <View style={localStyles.historyInlineDot} />
-            ) : null}
+            <UnreadBadge
+              visible={(activeEmotionReportType === "daily" && unreadDaily) ||
+                (activeEmotionReportType === "weekly" && unreadWeekly) ||
+                (activeEmotionReportType === "monthly" && unreadMonthly)}
+              variant="new"
+              label="NEW"
+              style={localStyles.historyInlineBadge}
+            />
             <Ionicons
               name="chevron-forward"
               size={16}
@@ -395,7 +400,12 @@ export default function MyWebContentFirstScreen({
             accessibilityLabel="自己分析の履歴を見る"
           >
             <Text style={localStyles.historyInlineText}>自己分析の履歴を見る</Text>
-            {unreadSelfStructureHistory ? <View style={localStyles.historyInlineDot} /> : null}
+            <UnreadBadge
+              visible={unreadSelfStructureHistory}
+              variant="new"
+              label="NEW"
+              style={localStyles.historyInlineBadge}
+            />
             <Ionicons
               name="chevron-forward"
               size={16}
