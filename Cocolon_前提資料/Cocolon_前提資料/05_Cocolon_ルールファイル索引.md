@@ -1,0 +1,50 @@
+---
+doc_id: cocolon_rule_file_index
+title: "Cocolon ルールファイル索引"
+revision_date: "2026-04-19"
+source_repositories:
+  - Cocolon
+  - mashos-api
+source_mode: "local_snapshot"
+purpose: "見落とすと構造誤読や contract 破壊を起こしやすい rule / policy / guard / test を索引化する"
+---
+
+# 1. 先に結論
+
+**rule / policy / contract を持つ変更は、画面や API の見た目より先に rule file を読む。**
+
+# 2. 最重要 rule / policy
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/docs/API_CONTRACT_POLICY.md` | public API の additive-only / 互換性 / header | public route / request / response を触る時 |
+| `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | public route 一覧 / version policy | route 追加・置換・削除を触る時 |
+| `mashos-api/ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md` | RN/API 境界・display-only 原則 | national system と boundary を触る時 |
+| `mashos-api/ai/docs/TUTORIAL_STABILITY_REDESIGN.md` | tutorial 測定 / overlay / proxy press | tutorial を触る時 |
+| `mashos-api/scripts/check_no_direct_supabase.py` | RN からの direct Supabase / raw fetch 禁止 | frontend data access を触る時 |
+
+# 3. contract / regression を守る test 群
+
+- `mashos-api/ai/tests/contract/test_api_contract_registry.py`
+- `mashos-api/ai/tests/contract/test_api_contract_headers.py`
+- `mashos-api/ai/tests/contract/test_contract_snapshots_phase6e.py`
+- `mashos-api/ai/tests/contract/test_notice_contracts.py`
+- `mashos-api/ai/tests/contract/test_generated_reflection_display_contracts.py`
+- `mashos-api/ai/tests/contract/test_mymodel_reflection_display_contracts.py`
+- `mashos-api/ai/tests/contract/test_subscription_bootstrap_contracts.py`
+- `mashos-api/ai/tests/contract/test_emlis_ai_contracts.py`
+- `mashos-api/ai/tests/contract/test_publish_governance.py`
+- `mashos-api/ai/tests/contract/test_rn_surface_guards.py`
+
+# 4. current national system で特に重要な code rule
+
+- `home_gateway/*` を通る Home write は route adapter から分岐しない
+- `access_policy/*` を使う read-side は route file で tier / visibility を再実装しない
+- `startup_snapshot_store.py` と `api_app_bootstrap.py` は startup 断面の中心としてペアで見る
+- `lib/api/client.js` / `lib/apiClient.js` は RN boundary の中心として見る
+
+# 5. ProfileCreate / legacy 命名まわりの注意
+
+- public 名は `ProfileCreate`
+- canonical table 名や legacy text には `mymodel_create_*` が残る
+- そのため rename / cleanup をする時は `03` と `01C` の file block を先に見る

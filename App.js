@@ -22,7 +22,7 @@ import MyWebHistoryScreen from "./screens/MyWebHistoryScreen";
 import TodayQuestionHistoryScreen from "./screens/TodayQuestionHistoryScreen";
 import MyModelScreen from "./screens/MyModelScreen";
 import MyModelEntryScreen from "./screens/MyModelEntryScreen";
-import MyModelCreateScreen from "./screens/MyModelCreateScreen";
+import ProfileCreateScreen from "./screens/ProfileCreateScreen";
 import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
 import MyModelReactionHistoryScreen from "./screens/MyModelReactionHistoryScreen";
 import EmotionLogScreen from "./screens/EmotionLogScreen";
@@ -1678,7 +1678,7 @@ function ProfileCreateScreenWithFrame(props) {
           borderRightWidth: FRAME_BORDER_WIDTH,
         }}
       >
-        <MyModelCreateScreen
+        <ProfileCreateScreen
           {...props}
           onBack={() => {
             try {

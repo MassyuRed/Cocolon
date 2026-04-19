@@ -21,24 +21,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Supabase Auth
 import { useAuth } from "../AuthContext";
-import { apiGet, apiPost } from "../lib/apiClient";
-import {
-  getTodayQuestionCurrent,
-  submitTodayQuestionAnswer,
-  resolveLocalTimezoneName,
-} from "../lib/todayQuestionApi";
-import {
-  getNoticesCurrent,
-  markNoticePopupSeen,
-  markNoticesRead,
-} from "../lib/noticeApi";
+import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
 import {
   cancelEmotionReflection,
-  getEmotionReflectionQuota,
   previewEmotionReflection,
   publishEmotionReflection,
-} from "../lib/emotionReflectionApi";
+} from "../lib/api/home/emotionReflectionApi";
 import { getNoticeButtonActions, openNoticeAction } from "../lib/noticeActionRuntime";
+import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
+import { useHomeActions } from "../features/home/useHomeActions";
 
 // テーマ
 import { useTheme } from "../theme/ThemeContext";
@@ -235,10 +226,6 @@ async function loadInputDraft(userId) {
 //   開発ビルド / 本番ビルドを問わず同じクラウド URL を利用する。
 //   （ローカル API に戻したい場合はここを書き換える）
 
-const GLOBAL_SUMMARY_PATH = "/global_summary";
-const GLOBAL_SUMMARY_PASSIVE_QUERY = `${GLOBAL_SUMMARY_PATH}?mode=ready_first`;
-const GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS = 8000;
-const GLOBAL_SUMMARY_MIN_REFRESH_INTERVAL_MS = 60 * 1000;
 
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
@@ -248,9 +235,6 @@ const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
 
 const SELF_INSIGHT = "自己理解";
 
-function getInputLocalTimezoneName() {
-  return resolveLocalTimezoneName("Asia/Tokyo");
-}
 
 function formatDraftSavedAt(savedAt) {
   const savedAtMs = new Date(savedAt).getTime();
@@ -289,28 +273,6 @@ const CATEGORY_OPTIONS = Object.freeze([
 const INPUT_TUTORIAL_STEP_START = 1;
 const INPUT_TUTORIAL_STEP_END = 6;
 const TUTORIAL_TOTAL_STEPS = 21;
-
-const STARTUP_POPUP_KIND = Object.freeze({
-  NOTICE: "notice",
-  TUTORIAL: "tutorial",
-  TODAY_QUESTION: "todayQuestion",
-});
-
-const STARTUP_POPUP_PRIORITY = Object.freeze({
-  [STARTUP_POPUP_KIND.NOTICE]: 300,
-  [STARTUP_POPUP_KIND.TUTORIAL]: 200,
-  [STARTUP_POPUP_KIND.TODAY_QUESTION]: 100,
-});
-
-function sortStartupPopupQueue(items = []) {
-  return [...items]
-    .filter(Boolean)
-    .sort(
-      (a, b) =>
-        (STARTUP_POPUP_PRIORITY[b?.kind] || 0) -
-        (STARTUP_POPUP_PRIORITY[a?.kind] || 0)
-    );
-}
 
 /**
  * Home（InputScreen）
@@ -353,7 +315,6 @@ export default function InputScreen({ navigation }) {
   const [isSecret, setIsSecret] = useState(false);
   const [sendFriendNotification, setSendFriendNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [reflectionQuota, setReflectionQuota] = useState(null);
   const [reflectionPreviewVisible, setReflectionPreviewVisible] = useState(false);
   const [reflectionPreviewLoading, setReflectionPreviewLoading] = useState(false);
   const [reflectionPublishLoading, setReflectionPublishLoading] = useState(false);
@@ -423,70 +384,7 @@ useEffect(() => {
   };
 }, []);
 
-const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
-const appStateRef = useRef(AppState.currentState);
-const globalSummaryLastFetchedAtRef = useRef(0);
-const globalSummaryInFlightRef = useRef(null);
-
-const fetchGlobalSummary = useCallback(async (opts = {}) => {
-  const force = opts?.force === true;
-
-  try {
-    const now = Date.now();
-    const lastFetchedAt = Number(globalSummaryLastFetchedAtRef.current || 0) || 0;
-    if (!force && now - lastFetchedAt < GLOBAL_SUMMARY_MIN_REFRESH_INTERVAL_MS) {
-      return globalSummaryInFlightRef.current || null;
-    }
-
-    if (globalSummaryInFlightRef.current) {
-      return globalSummaryInFlightRef.current;
-    }
-
-    const request = (async () => {
-      try {
-        const json = await apiGet(GLOBAL_SUMMARY_PASSIVE_QUERY, {
-          auth: false,
-          timeoutMs: GLOBAL_SUMMARY_REQUEST_TIMEOUT_MS,
-        });
-        const nextEmotionUsers = Number(json?.emotion_users);
-        if (Number.isFinite(nextEmotionUsers)) {
-          setGlobalEmotionUsers(nextEmotionUsers);
-        }
-        globalSummaryLastFetchedAtRef.current = Date.now();
-        return json;
-      } catch {
-        // keep previous value
-        return null;
-      } finally {
-        globalSummaryInFlightRef.current = null;
-      }
-    })();
-
-    globalSummaryInFlightRef.current = request;
-    return request;
-  } catch {
-    return null;
-  }
-}, []);
-
-  
-// --- Home summary (persistent: today / this month) ---
-const [homeTodayCount, setHomeTodayCount] = useState(null);
-const [homeMonthCount, setHomeMonthCount] = useState(null);
-const [homeWeekCount, setHomeWeekCount] = useState(null);
-const [homeStreakDays, setHomeStreakDays] = useState(null);
-
-const [todayQuestionBundle, setTodayQuestionBundle] = useState(null);
-const [todayQuestionLoading, setTodayQuestionLoading] = useState(false);
-const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
 const [isTodayQuestionExpanded, setIsTodayQuestionExpanded] = useState(false);
-const dismissedTodayQuestionDayRef = useRef(null);
-const todayQuestionRequestIdRef = useRef(0);
-const startupCycleIdRef = useRef(0);
-const startupPrepareInFlightRef = useRef(null);
-const startupWindowClosedRef = useRef(false);
-const [startupQueuePreparing, setStartupQueuePreparing] = useState(false);
-const [startupPopupQueue, setStartupPopupQueue] = useState([]);
 const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
   useState(false);
 
@@ -494,57 +392,86 @@ useEffect(() => {
   setTutorialPromptDismissedThisSession(false);
 }, [currentUserId]);
 
-const clearTodayQuestionUi = useCallback(() => {
-  setTodayQuestionBundle(null);
-  setTodayQuestionLoading(false);
-}, []);
+const buildTutorialStartupCandidate = useCallback(() => {
+  if (!currentUserId) return null;
+  if (!tutorialFlagsLoaded) return null;
+  if (isTutorialMode) return null;
+  if (tutorialCompleted || tutorialSkipped) return null;
+  if (tutorialPromptDismissedThisSession) return null;
+  return { kind: STARTUP_POPUP_KIND.TUTORIAL };
+}, [
+  currentUserId,
+  isTutorialMode,
+  tutorialCompleted,
+  tutorialFlagsLoaded,
+  tutorialPromptDismissedThisSession,
+  tutorialSkipped,
+]);
+
+const {
+  activeStartupPopup,
+  advanceStartupPopupQueue,
+  closeStartupPopupWindow,
+  globalEmotionUsers,
+  homeMonthCount,
+  homeStreakDays,
+  homeTodayCount,
+  homeWeekCount,
+  isNoticeStartupPopupVisible,
+  isTodayQuestionStartupPopupVisible,
+  isTutorialStartupPopupVisible,
+  loadHomeState,
+  noticeFeatureEnabled,
+  noticeLoading,
+  noticePopup,
+  noticeUnreadCount,
+  reflectionQuota,
+  registerInputInteraction,
+  rememberDismissedNotice,
+  rememberDismissedTodayQuestionDay,
+  setNoticePopup,
+  setNoticeUnreadCount,
+  setReflectionQuota,
+  startupModalVisible,
+  startupQueuePreparing,
+  todayQuestionBundle,
+  todayQuestionLoading,
+} = useHomeState({
+  currentUserId,
+  isTutorialMode,
+  tutorialFlagsLoaded,
+  navigation,
+  buildTutorialStartupCandidate,
+});
+
+const {
+  todayQuestionSubmitting,
+  handleSubmitTodayQuestion,
+  markCurrentNoticePopupSeen,
+  markCurrentNoticeRead,
+} = useHomeActions({
+  noticePopup,
+  todayQuestionBundle,
+  activeStartupPopupKind: activeStartupPopup?.kind,
+  loadHomeState,
+  advanceStartupPopupQueue,
+  rememberDismissedNotice,
+  rememberDismissedTodayQuestionDay,
+  setNoticeUnreadCount,
+  setNoticePopup,
+  showToast,
+});
 
 useEffect(() => {
   setIsTodayQuestionExpanded(false);
 }, [todayQuestionBundle?.service_day_key, todayQuestionBundle?.question?.question_id]);
 
-const [noticeFeatureEnabled, setNoticeFeatureEnabled] = useState(true);
-const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
-const [noticePopup, setNoticePopup] = useState(null);
-const [noticeLoading, setNoticeLoading] = useState(false);
-const dismissedNoticeIdRef = useRef(null);
-const noticeRequestIdRef = useRef(0);
-
-const clearNoticeUi = useCallback(() => {
-  setNoticeFeatureEnabled(true);
-  setNoticeUnreadCount(0);
-  setNoticePopup(null);
-  setNoticeLoading(false);
-}, []);
-
-const activeStartupPopup = startupPopupQueue[0] || null;
-const startupModalVisible = !!activeStartupPopup;
-const isNoticeStartupPopupVisible =
-  activeStartupPopup?.kind === STARTUP_POPUP_KIND.NOTICE;
 const isWelcomeNoticeStartupPopup = useMemo(
   () => isWelcomeNoticePopupCandidate(noticePopup),
   [noticePopup],
 );
-const isTutorialStartupPopupVisible =
-  activeStartupPopup?.kind === STARTUP_POPUP_KIND.TUTORIAL;
-const isTodayQuestionStartupPopupVisible =
-  activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION;
 const isTodayQuestionAnswered = todayQuestionBundle?.answer_status === "answered";
 const todayQuestionStatusLabel = isTodayQuestionAnswered ? "回答済み" : "未回答";
-
-const closeStartupPopupWindow = useCallback(() => {
-  startupWindowClosedRef.current = true;
-  setStartupQueuePreparing(false);
-  setStartupPopupQueue([]);
-}, []);
-
-const advanceStartupPopupQueue = useCallback(() => {
-  setStartupPopupQueue((prev) => {
-    if (!Array.isArray(prev) || prev.length <= 1) return [];
-    return prev.slice(1);
-  });
-}, []);
-
 const homeBadgeLabel = useMemo(() => {
   const m = typeof homeMonthCount === "number" ? homeMonthCount : null;
   const w = typeof homeWeekCount === "number" ? homeWeekCount : null;
@@ -582,349 +509,13 @@ const homeBadgeLabel = useMemo(() => {
 }, [homeMonthCount, homeWeekCount, homeStreakDays]);
 
 
-const refreshHomeCounts = useCallback(async () => {
-  try {
-    const json = await apiGet("/input/summary");
-    const todayCount = Number(json?.today_count ?? 0);
-    const weekCount = Number(json?.week_count ?? 0);
-    const monthCount = Number(json?.month_count ?? 0);
-    const streakDays = Number(json?.streak_days ?? 0);
-
-    setHomeTodayCount(Number.isFinite(todayCount) ? todayCount : 0);
-    setHomeWeekCount(Number.isFinite(weekCount) ? weekCount : 0);
-    setHomeMonthCount(Number.isFinite(monthCount) ? monthCount : 0);
-    setHomeStreakDays(Number.isFinite(streakDays) ? streakDays : 0);
-
-    return {
-      todayCount,
-      weekCount,
-      monthCount,
-      streakDays,
-      lastInputAt: json?.last_input_at || null,
-    };
-  } catch (e) {
-    console.warn("InputScreen: refreshHomeCounts failed", e);
-    return null;
-  }
-}, []);
-
-useEffect(() => {
-  refreshHomeCounts();
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", refreshHomeCounts);
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [navigation, refreshHomeCounts]);
-
-useEffect(() => {
-  fetchGlobalSummary();
-
-  let unsubscribe = null;
-  try {
-    unsubscribe = navigation?.addListener?.("focus", fetchGlobalSummary);
-  } catch {
-    // noop
-  }
-
-  return () => {
-    try {
-      if (typeof unsubscribe === "function") unsubscribe();
-    } catch {
-      // noop
-    }
-  };
-}, [navigation, fetchGlobalSummary]);
-
-useEffect(() => {
-  const subscription = AppState.addEventListener("change", (nextAppState) => {
-    if (/inactive|background/.test(appStateRef.current) && nextAppState === "active") {
-      fetchGlobalSummary();
-    }
-    appStateRef.current = nextAppState;
-  });
-
-  return () => {
-    try {
-      subscription?.remove?.();
-    } catch {
-      // noop
-    }
-  };
-}, [fetchGlobalSummary]);
-
-const loadTodayQuestion = useCallback(async ({ includeStartupCandidate = true } = {}) => {
-  const requestId = todayQuestionRequestIdRef.current + 1;
-  todayQuestionRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearTodayQuestionUi();
-    return { candidate: null, aborted: false };
-  }
-
-  const timezoneName = getInputLocalTimezoneName();
-  setTodayQuestionLoading(true);
-  try {
-    const json = await getTodayQuestionCurrent({ timezone_name: timezoneName });
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
-      return { candidate: null, aborted: true };
-    }
-
-    setTodayQuestionBundle(json || null);
-
-    const unanswered = json?.question && json?.answer_status !== "answered";
-    const serviceDayKey = String(json?.service_day_key || "");
-    const shouldShowStartupPopup =
-      includeStartupCandidate &&
-      unanswered &&
-      serviceDayKey &&
-      dismissedTodayQuestionDayRef.current !== serviceDayKey;
-
-    return {
-      candidate: shouldShowStartupPopup
-        ? { kind: STARTUP_POPUP_KIND.TODAY_QUESTION }
-        : null,
-      aborted: false,
-    };
-  } catch (e) {
-    if (todayQuestionRequestIdRef.current !== requestId || isTutorialMode) {
-      return { candidate: null, aborted: true };
-    }
-    console.warn("InputScreen: loadTodayQuestion failed", e);
-    clearTodayQuestionUi();
-    return { candidate: null, aborted: false };
-  } finally {
-    if (todayQuestionRequestIdRef.current === requestId) {
-      setTodayQuestionLoading(false);
-    }
-  }
-}, [clearTodayQuestionUi, isTutorialMode]);
-
-const loadNotices = useCallback(async ({ includeStartupCandidate = true } = {}) => {
-  const requestId = noticeRequestIdRef.current + 1;
-  noticeRequestIdRef.current = requestId;
-
-  if (isTutorialMode) {
-    clearNoticeUi();
-    return { candidate: null, aborted: false };
-  }
-
-  setNoticeLoading(true);
-  try {
-    const json = await getNoticesCurrent();
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
-      return { candidate: null, aborted: true };
-    }
-
-    const featureEnabled = json?.feature_enabled !== false;
-    const unreadCount = Math.max(0, Number(json?.unread_count) || 0);
-    const popupNotice = json?.popup_notice && typeof json?.popup_notice === "object"
-      ? json.popup_notice
-      : null;
-    const popupNoticeId = String(popupNotice?.notice_id || "").trim();
-
-    setNoticeFeatureEnabled(featureEnabled);
-    setNoticeUnreadCount(unreadCount);
-    setNoticePopup(popupNotice);
-
-    const shouldShowStartupPopup =
-      includeStartupCandidate &&
-      featureEnabled &&
-      popupNotice &&
-      popupNoticeId &&
-      dismissedNoticeIdRef.current !== popupNoticeId;
-
-    return {
-      candidate: shouldShowStartupPopup
-        ? { kind: STARTUP_POPUP_KIND.NOTICE }
-        : null,
-      aborted: false,
-    };
-  } catch (e) {
-    if (noticeRequestIdRef.current !== requestId || isTutorialMode) {
-      return { candidate: null, aborted: true };
-    }
-    console.warn("InputScreen: loadNotices failed", e);
-    clearNoticeUi();
-    return { candidate: null, aborted: false };
-  } finally {
-    if (noticeRequestIdRef.current === requestId) {
-      setNoticeLoading(false);
-    }
-  }
-}, [clearNoticeUi, isTutorialMode]);
-
-const buildTutorialStartupCandidate = useCallback(() => {
-  if (!currentUserId) return null;
-  if (!tutorialFlagsLoaded) return null;
-  if (isTutorialMode) return null;
-  if (tutorialCompleted || tutorialSkipped) return null;
-  if (tutorialPromptDismissedThisSession) return null;
-  return { kind: STARTUP_POPUP_KIND.TUTORIAL };
-}, [
-  currentUserId,
-  isTutorialMode,
-  tutorialCompleted,
-  tutorialFlagsLoaded,
-  tutorialPromptDismissedThisSession,
-  tutorialSkipped,
-]);
-
-const prepareStartupPopupQueue = useCallback(async (cycleId) => {
-  if (!cycleId) return;
-  if (isTutorialMode) {
-    setStartupQueuePreparing(false);
-    setStartupPopupQueue([]);
-    return;
-  }
-
-  const tutorialCandidate = buildTutorialStartupCandidate();
-  const [noticeResult, todayQuestionResult] = await Promise.all([
-    loadNotices({ includeStartupCandidate: true }),
-    loadTodayQuestion({ includeStartupCandidate: true }),
-  ]);
-
-  if (startupCycleIdRef.current !== cycleId) return;
-
-  if (startupWindowClosedRef.current) {
-    setStartupQueuePreparing(false);
-    setStartupPopupQueue([]);
-    return;
-  }
-
-  const nextQueue = sortStartupPopupQueue([
-    noticeResult?.candidate,
-    tutorialCandidate,
-    todayQuestionResult?.candidate,
-  ]);
-
-  setStartupPopupQueue(nextQueue);
-  setStartupQueuePreparing(false);
-}, [
-  buildTutorialStartupCandidate,
-  isTutorialMode,
-  loadNotices,
-  loadTodayQuestion,
-]);
-
-const beginStartupPopupCycle = useCallback(() => {
-  const nextCycleId = startupCycleIdRef.current + 1;
-  startupCycleIdRef.current = nextCycleId;
-  startupPrepareInFlightRef.current = null;
-  startupWindowClosedRef.current = false;
-  setStartupPopupQueue([]);
-
-  if (isTutorialMode) {
-    setStartupQueuePreparing(false);
-    return;
-  }
-
-  setStartupQueuePreparing(true);
-}, [isTutorialMode]);
-
-useEffect(() => {
-  beginStartupPopupCycle();
-
-  let unsubscribeFocus = null;
-  let unsubscribeBlur = null;
-  try {
-    unsubscribeFocus = navigation?.addListener?.("focus", beginStartupPopupCycle);
-    unsubscribeBlur = navigation?.addListener?.("blur", () => {
-      startupWindowClosedRef.current = true;
-      setStartupQueuePreparing(false);
-      setStartupPopupQueue([]);
-    });
-  } catch {
-    // noop
-  }
-
-  return () => {
-    startupWindowClosedRef.current = true;
-    try {
-      if (typeof unsubscribeFocus === "function") unsubscribeFocus();
-    } catch {
-      // noop
-    }
-    try {
-      if (typeof unsubscribeBlur === "function") unsubscribeBlur();
-    } catch {
-      // noop
-    }
-  };
-}, [beginStartupPopupCycle, navigation]);
-
-useEffect(() => {
-  if (!startupQueuePreparing) return;
-  if (startupWindowClosedRef.current) return;
-  if (isTutorialMode) return;
-  if (currentUserId && !tutorialFlagsLoaded) return;
-
-  const cycleId = startupCycleIdRef.current;
-  if (!cycleId) return;
-  if (startupPrepareInFlightRef.current === cycleId) return;
-
-  startupPrepareInFlightRef.current = cycleId;
-  void prepareStartupPopupQueue(cycleId).finally(() => {
-    if (startupPrepareInFlightRef.current === cycleId) {
-      startupPrepareInFlightRef.current = null;
-    }
-  });
-}, [
-  currentUserId,
-  isTutorialMode,
-  prepareStartupPopupQueue,
-  startupQueuePreparing,
-  tutorialFlagsLoaded,
-]);
-
-const markCurrentNoticePopupSeen = useCallback(async () => {
-  const noticeId = String(noticePopup?.notice_id || "").trim();
-  if (!noticeId) return;
-  dismissedNoticeIdRef.current = noticeId;
-  try {
-    await markNoticePopupSeen({ notice_id: noticeId });
-  } catch (e) {
-    console.warn("InputScreen: markNoticePopupSeen failed", e);
-  }
-}, [noticePopup?.notice_id]);
-
-const markCurrentNoticeRead = useCallback(async () => {
-  const noticeId = String(noticePopup?.notice_id || "").trim();
-  if (!noticeId) return;
-  try {
-    const res = await markNoticesRead({ notice_ids: [noticeId] });
-    const nextUnreadCount = Math.max(0, Number(res?.unread_count) || 0);
-    setNoticeUnreadCount(nextUnreadCount);
-    setNoticePopup((prev) => {
-      if (String(prev?.notice_id || "").trim() !== noticeId) return prev;
-      return {
-        ...(prev || {}),
-        is_read: true,
-        read_at: prev?.read_at || new Date().toISOString(),
-      };
-    });
-  } catch (e) {
-    console.warn("InputScreen: markNoticesRead failed", e);
-  }
-}, [noticePopup?.notice_id]);
-
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
   if (serviceDayKey) {
-    dismissedTodayQuestionDayRef.current = serviceDayKey;
+    rememberDismissedTodayQuestionDay(serviceDayKey);
   }
   advanceStartupPopupQueue();
-}, [advanceStartupPopupQueue, todayQuestionBundle?.service_day_key]);
+}, [advanceStartupPopupQueue, rememberDismissedTodayQuestionDay, todayQuestionBundle?.service_day_key]);
 
 const handleOpenEmotionHistory = useCallback(() => {
   closeStartupPopupWindow();
@@ -996,37 +587,6 @@ const handleOpenTodayQuestionHistory = useCallback(() => {
   }
 }, [activeStartupPopup?.kind, closeStartupPopupWindow, navigation]);
 
-const handleSubmitTodayQuestion = useCallback(async (payload) => {
-  if (!todayQuestionBundle?.question?.question_id) return;
-
-  setTodayQuestionSubmitting(true);
-  try {
-    await submitTodayQuestionAnswer({
-      service_day_key: todayQuestionBundle?.service_day_key,
-      question_id: todayQuestionBundle?.question?.question_id,
-      sequence_no: todayQuestionBundle?.progress?.sequence_no,
-      ...payload,
-    });
-    showToast("今日の問いを保存しました");
-    dismissedTodayQuestionDayRef.current = String(todayQuestionBundle?.service_day_key || "");
-    if (activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
-      advanceStartupPopupQueue();
-    }
-    await loadTodayQuestion({ includeStartupCandidate: false });
-  } catch (e) {
-    console.warn("InputScreen: submitTodayQuestion failed", e);
-    Alert.alert("今日の問い", String(e?.message || "保存に失敗しました。"));
-  } finally {
-    setTodayQuestionSubmitting(false);
-  }
-}, [
-  activeStartupPopup?.kind,
-  advanceStartupPopupQueue,
-  loadTodayQuestion,
-  showToast,
-  todayQuestionBundle,
-]);
-
 const handleDismissTutorialStartModal = useCallback(() => {
   setTutorialPromptDismissedThisSession(true);
   advanceStartupPopupQueue();
@@ -1048,22 +608,6 @@ const handleStartTutorialFromModal = useCallback(() => {
   startTutorial();
   setTutorialStep(INPUT_TUTORIAL_STEP_START);
 }, [closeStartupPopupWindow, setTutorialStep, startTutorial]);
-
-const registerInputInteraction = useCallback(() => {
-  if (startupWindowClosedRef.current) return;
-  if (startupModalVisible) return;
-  closeStartupPopupWindow();
-  if (!isTutorialMode) {
-    void loadNotices({ includeStartupCandidate: false });
-    void loadTodayQuestion({ includeStartupCandidate: false });
-  }
-}, [
-  closeStartupPopupWindow,
-  isTutorialMode,
-  loadNotices,
-  loadTodayQuestion,
-  startupModalVisible,
-]);
 
 const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -1594,14 +1138,6 @@ const { height: windowHeight } = useWindowDimensions();
     setTutorialStep,
   ]);
 
-  useEffect(() => {
-    if (!isTutorialMode) return;
-    closeStartupPopupWindow();
-    todayQuestionRequestIdRef.current += 1;
-    clearTodayQuestionUi();
-    noticeRequestIdRef.current += 1;
-    clearNoticeUi();
-  }, [clearNoticeUi, clearTodayQuestionUi, closeStartupPopupWindow, isTutorialMode]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
@@ -1752,42 +1288,6 @@ const { height: windowHeight } = useWindowDimensions();
     sendFriendNotification,
   ]);
 
-  const refreshReflectionQuota = useCallback(async () => {
-    if (!currentUserId || isTutorialMode) {
-      setReflectionQuota(null);
-      return null;
-    }
-    try {
-      const json = await getEmotionReflectionQuota();
-      const nextQuota = json && typeof json === "object" ? json : null;
-      setReflectionQuota(nextQuota);
-      return nextQuota;
-    } catch (e) {
-      console.warn("InputScreen: getEmotionReflectionQuota failed", e);
-      return null;
-    }
-  }, [currentUserId, isTutorialMode]);
-
-  useEffect(() => {
-    void refreshReflectionQuota();
-
-    let unsubscribe = null;
-    try {
-      unsubscribe = navigation?.addListener?.("focus", () => {
-        void refreshReflectionQuota();
-      });
-    } catch {
-      // noop
-    }
-
-    return () => {
-      try {
-        if (typeof unsubscribe === "function") unsubscribe();
-      } catch {
-        // noop
-      }
-    };
-  }, [navigation, refreshReflectionQuota]);
 
   const handlePreviewReflection = useCallback(async () => {
     if (!canPreviewReflection) return;
@@ -1866,12 +1366,9 @@ const { height: windowHeight } = useWindowDimensions();
         : null;
       if (nextQuota) {
         setReflectionQuota(nextQuota);
-      } else {
-        void refreshReflectionQuota();
       }
 
-      void refreshHomeCounts();
-      void fetchGlobalSummary({ force: true });
+      await loadHomeState({ force: true, includeStartupCandidate: false });
 
       if (inputFeedbackText) {
         openInputFeedbackModal({
@@ -1892,10 +1389,8 @@ const { height: windowHeight } = useWindowDimensions();
     }
   }, [
     clearPersistedInputDraft,
-    fetchGlobalSummary,
+    loadHomeState,
     openInputFeedbackModal,
-    refreshHomeCounts,
-    refreshReflectionQuota,
     reflectionPreviewPayload?.preview_id,
     reflectionPublishLoading,
     showToast,
@@ -2026,7 +1521,7 @@ const { height: windowHeight } = useWindowDimensions();
         return;
       }
 
-      const submitResult = await apiPost("/emotion/submit", payload);
+      const submitResult = await submitEmotionInput(payload);
       const inputFeedbackText = String(
         submitResult?.input_feedback?.comment_text ||
           submitResult?.inputFeedback?.commentText ||
@@ -2049,8 +1544,7 @@ const { height: windowHeight } = useWindowDimensions();
       setIsSecret(false);
       Keyboard.dismiss();
 
-      void refreshHomeCounts();
-      void fetchGlobalSummary({ force: true });
+      await loadHomeState({ force: true, includeStartupCandidate: false });
 
       if (inputFeedbackText) {
         openInputFeedbackModal({

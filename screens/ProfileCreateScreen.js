@@ -30,13 +30,13 @@ import { apiFetch } from "../lib/apiClient";
 // ---- API base ----
 const API_BASE =
   process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
-const QUESTIONS_ENDPOINT = `${API_BASE}/mymodel/create/questions`;
-const ANSWERS_ENDPOINT = `${API_BASE}/mymodel/create/answers`;
+const QUESTIONS_ENDPOINT = `${API_BASE}/profile-create/questions`;
+const ANSWERS_ENDPOINT = `${API_BASE}/profile-create/answers`;
 
 // パネル高さ（MyProfile 近似）
 const PANEL_MIN_HEIGHT = 690;
 
-export default function MyModelCreateScreen({ onBack }) {
+export default function ProfileCreateScreen({ onBack }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);

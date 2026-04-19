@@ -1,0 +1,321 @@
+{
+  "revision_date": "2026-04-19",
+  "source_repositories": [
+    "Cocolon",
+    "mashos-api"
+  ],
+  "source_mode": "local_snapshot",
+  "file_counts": {
+    "Cocolon": 140,
+    "mashos-api": 265
+  },
+  "coverage_policy": {
+    "overall_structure_body_includes": 352,
+    "national_system_body_includes": 303,
+    "excluded_from_main_body": 53,
+    "inventory_removed": true,
+    "coverage_principle": "01 には構造対象全件、02 には国家システム対象全件を本文で記載する"
+  },
+  "inclusion_rules": [
+    "現行 runtime で使われるコード",
+    "変更時に一緒に確認しないと漏れが出る shared code / config / policy / contract / test",
+    "現行運用で route / startup / worker / publish / access policy / subscription / auth を拘束するファイル",
+    "まだ live に参照されている legacy / compatibility file"
+  ],
+  "exclusion_rules": [
+    "cache artifact",
+    "backup / hold / disabled patch artifact",
+    "meta / generated artifact, not current app structure source",
+    "sample / training / dataset artifact outside current app runtime-contract structure"
+  ],
+  "docs": [
+    {
+      "path": "00_華恋用_READ_FIRST.md",
+      "purpose": "最初に読む運用前提"
+    },
+    {
+      "path": "01_Cocolon_全体構造資料.md",
+      "purpose": "全体構造総論と読み順"
+    },
+    {
+      "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "purpose": "App root / Home / startup / immediate reply"
+    },
+    {
+      "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
+      "purpose": "Analysis / Piece / EmotionLog / Ranking / Self Structure"
+    },
+    {
+      "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
+      "purpose": "Account / Subscription / ProfileCreate / support / rule / test"
+    },
+    {
+      "path": "02_Cocolon_国家システム資料.md",
+      "purpose": "国家システム総論"
+    },
+    {
+      "path": "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "purpose": "Input / Save / Dispatch"
+    },
+    {
+      "path": "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
+      "purpose": "Snapshot / Worker / Publish / Read"
+    },
+    {
+      "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "purpose": "Contract / Boundary / Test"
+    },
+    {
+      "path": "03_Cocolon_命名体系.md",
+      "purpose": "visible 名と canonical 名の写像"
+    },
+    {
+      "path": "04_Cocolon_変更テーマ別チェックリスト.md",
+      "purpose": "変更テーマからの読む順逆引き"
+    },
+    {
+      "path": "05_Cocolon_ルールファイル索引.md",
+      "purpose": "policy / guard / contract file 索引"
+    },
+    {
+      "path": "06_Cocolon_ファイル名変更保留台帳.md",
+      "purpose": "rename backlog"
+    },
+    {
+      "path": "07_Cocolon_最新スナップショット差分.md",
+      "purpose": "current snapshot の要点と除外理由"
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "Cocolon/.gitignore",
+      "reason": "meta / generated artifact, not current app structure source"
+    },
+    {
+      "path": "Cocolon/crash_log.txt",
+      "reason": "meta / generated artifact, not current app structure source"
+    },
+    {
+      "path": "Cocolon/libs_list.txt",
+      "reason": "meta / generated artifact, not current app structure source"
+    },
+    {
+      "path": "Cocolon/patches/_react-native-svg+14.1.0.patch.archive",
+      "reason": "backup / hold / disabled patch artifact"
+    },
+    {
+      "path": "Cocolon/patches/_react-native-webview+13.6.3.patch.hold",
+      "reason": "backup / hold / disabled patch artifact"
+    },
+    {
+      "path": "Cocolon/patches/react-native-linear-gradient+2.6.2.patch.bak",
+      "reason": "backup / hold / disabled patch artifact"
+    },
+    {
+      "path": "Cocolon/patches/react-native-reanimated+3.6.0.patch.disabled",
+      "reason": "backup / hold / disabled patch artifact"
+    },
+    {
+      "path": "mashos-api/ai/data/config/astor_structure_dict.json",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/processed/features.json",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/processed/structure_dictionary.json",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/processed/summary.txt",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/raw/README_ingest.txt",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/raw/import_template.csv",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/raw/logs.jsonl",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/raw/schema.json",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/raw/template.csv",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/raw/template.json",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/data/train/{{AI_NAME}}_interpret_train.jsonl",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/active_users_store.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/api_emotion_submit.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_account_status_enqueue.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_core.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight_question_store.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight_store.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_friend_feed_enqueue.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_global_summary_enqueue.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_global_summary_store.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_myweb_insight.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_patterns.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_ranking_enqueue.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/astor_structure_matcher.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/client_compat.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/deep_insight_strategy.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/subscription.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/subscription_store.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/__pycache__/supabase_client.cpython-313.pyc",
+      "reason": "cache artifact"
+    },
+    {
+      "path": "mashos-api/ai/services/ai_inference/_samples/lora_load_example.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/services/analysis_engine/templates/README.md",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/services/examples/demo.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/services/structure_engine/extract.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/services/structure_engine/templates/summary.txt",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/tools/data/raw/import_template.csv",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/tools/data/train/{{AI_NAME}}_interpret_train.jsonl",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/tools/training/README.md",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/tools/training/requirements.txt",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/tools/training/train_lora.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/tools/training/trainset_skeleton.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/training/README.md",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/training/build_dataset.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/training/eval.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/training/requirements.txt",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    },
+    {
+      "path": "mashos-api/ai/training/train_lora.py",
+      "reason": "sample / training / dataset artifact outside current app runtime-contract structure"
+    }
+  ],
+  "snapshot_history": [
+    {
+      "snapshot_id": "2026-04-18.previous_premise_baseline",
+      "file_counts": {
+        "Cocolon": 133,
+        "mashos-api": 250
+      }
+    },
+    {
+      "snapshot_id": "2026-04-19.full_body_rebase_c17_m19",
+      "file_counts": {
+        "Cocolon": 140,
+        "mashos-api": 265
+      },
+      "overall_body_includes": 352,
+      "national_body_includes": 303
+    }
+  ]
+}

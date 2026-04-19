@@ -229,22 +229,6 @@ function buildStartupHydrationData(rawStartup, options = {}) {
     };
   }
 
-  const inputSummarySection = resolveSection(sections, "input_summary");
-  if (inputSummarySection.found) {
-    prefetchPatch.Input = {
-      ...(prefetchPatch.Input || {}),
-      homeCounts: inputSummarySection.value,
-    };
-  }
-
-  const globalSummarySection = resolveSection(sections, "global_summary");
-  if (globalSummarySection.found) {
-    prefetchPatch.Input = {
-      ...(prefetchPatch.Input || {}),
-      globalSummary: globalSummarySection.value,
-    };
-  }
-
   const noticeCurrentSection = resolveSection(sections, "notices_current", "notice_current");
   if (noticeCurrentSection.found) {
     prefetchPatch.Input = {
@@ -253,7 +237,7 @@ function buildStartupHydrationData(rawStartup, options = {}) {
     };
   }
 
-  const todayQuestionStatusSection = resolveSection(sections, "today_question_status", "today_question");
+  const todayQuestionStatusSection = resolveSection(sections, "today_question_light", "today_question_status", "today_question");
   if (todayQuestionStatusSection.found) {
     prefetchPatch.Input = {
       ...(prefetchPatch.Input || {}),

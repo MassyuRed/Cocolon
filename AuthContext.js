@@ -2,6 +2,11 @@ import React, { createContext, useContext, useEffect, useMemo, useRef, useState 
 import { Linking, Platform } from "react-native";
 import messaging from "@react-native-firebase/messaging";
 import { supabase } from "./lib/supabase"; // ← 既存のクライアントを使う
+import {
+  clearAccountProfilePushToken,
+  ensureAccountProfile,
+  syncAccountProfilePushToken,
+} from "./lib/api/account/profileApi";
 
 const AuthContext = createContext(null);
 
@@ -107,19 +112,11 @@ export function AuthProvider({ children }) {
           return;
         }
 
-        const { error: ptError } = await supabase
-          .from("profiles")
-          .update({
-            push_token: t,
-            push_platform: Platform?.OS || null,
-            push_token_updated_at: new Date().toISOString(),
-          })
-          .eq("id", userId);
-
-        if (ptError) {
-          console.warn("profiles push_token update error:", ptError);
-          return;
-        }
+        await syncAccountProfilePushToken({
+          token: t,
+          pushPlatform: Platform?.OS || null,
+          updatedAt: new Date().toISOString(),
+        });
 
         // 更新が成功した場合のみ「同期済み」として記録する
         lastSyncedPushRef.current = { userId, token: t };
@@ -130,37 +127,10 @@ export function AuthProvider({ children }) {
 
     (async () => {
       try {
-        // まずは 1 行を確実に作る（DB トリガーがあっても安全）
-        const { error: insertError } = await supabase
-          .from("profiles")
-          .insert({ id: userId }, { ignoreDuplicates: true });
-
-        if (insertError) {
-          console.warn("profiles ensure insert error:", insertError);
-        }
-
-        // display_name / push_platform が NULL のまま残るケース対策（既存値は上書きしない）
-        if (displayName) {
-          const { error: dnError } = await supabase
-            .from("profiles")
-            .update({ display_name: displayName })
-            .eq("id", userId)
-            .is("display_name", null);
-          if (dnError) {
-            console.warn("profiles ensure display_name update error:", dnError);
-          }
-        }
-
-        if (Platform?.OS) {
-          const { error: ppError } = await supabase
-            .from("profiles")
-            .update({ push_platform: Platform.OS })
-            .eq("id", userId)
-            .is("push_platform", null);
-          if (ppError) {
-            console.warn("profiles ensure push_platform update error:", ppError);
-          }
-        }
+        await ensureAccountProfile({
+          displayName,
+          pushPlatform: Platform?.OS || null,
+        });
 
         // push_token を取得できる環境なら同期する（Android/iOS: FCM）
         if (Platform?.OS !== "web") {
@@ -344,15 +314,15 @@ export function AuthProvider({ children }) {
         };
       }
 
-      // profiles に display_name を保存（friend_code は DB 側で自動生成）
-      const { error: profileError } = await supabase.from("profiles").upsert({
-        id: user.id,
-        display_name: displayName || "ユーザー",
-        push_platform: Platform?.OS || null,
-      });
-
-      if (profileError) {
-        console.error("profiles upsert error:", profileError);
+      // profile 行の ensure と初期表示名/端末情報の保存は backend API 経由に統一する
+      try {
+        await ensureAccountProfile({
+          displayName: displayName || "ユーザー",
+          pushPlatform: Platform?.OS || null,
+          accessToken: signupSession?.access_token || null,
+        });
+      } catch (profileError) {
+        console.error("account/profile/me ensure error:", profileError);
         throw profileError;
       }
 
@@ -405,17 +375,9 @@ export function AuthProvider({ children }) {
       const currentUserId = session?.user?.id;
       if (currentUserId && !skipPushTokenClear) {
         try {
-          const { error: clearPushError } = await supabase
-            .from("profiles")
-            .update({
-              push_token: null,
-              push_token_updated_at: new Date().toISOString(),
-            })
-            .eq("id", currentUserId);
-
-          if (clearPushError) {
-            console.warn("profiles push_token clear error:", clearPushError);
-          }
+          await clearAccountProfilePushToken({
+            pushPlatform: Platform?.OS || null,
+          });
         } catch (clearErr) {
           console.warn("profiles push_token clear exception:", clearErr);
         }

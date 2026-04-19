@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { supabase } from "./lib/supabase";
+import { patchAccountProfileMe } from "./lib/api/account/profileApi";
 
 const TutorialContext = createContext(undefined);
 
@@ -111,31 +111,7 @@ export function TutorialProvider({ children }) {
 
   const syncTutorialFlagsToProfile = useCallback(async (patch) => {
     try {
-      let userId = null;
-
-      try {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) throw error;
-        userId = data?.user?.id ?? null;
-      } catch (authError) {
-        const { data: sessionData } = await supabase.auth.getSession();
-        userId = sessionData?.session?.user?.id ?? null;
-      }
-
-      if (!userId) return false;
-
-      const { data: updatedRow, error: updateError } = await supabase
-        .from("profiles")
-        .update(patch)
-        .eq("id", userId)
-        .select("id")
-        .maybeSingle();
-
-      if (updateError) throw updateError;
-      if (!updatedRow?.id) {
-        throw new Error("profiles row not found for tutorial flag update");
-      }
-
+      await patchAccountProfileMe(patch);
       return true;
     } catch (e) {
       console.warn("TutorialContext: failed to sync tutorial flags", e);

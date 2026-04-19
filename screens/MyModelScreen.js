@@ -240,7 +240,6 @@ export default function MyModelScreen({ route } = {}) {
   // Home では対象ユーザー切替を持たず、Reflections 画面側で切り替えます（重複排除）
   const targetUserId = initialViewedUserId ? String(initialViewedUserId) : null;
 
-  const unreadMyModelCreate = !!getFeatureUnread("MyModel", "mymodelCreate");
   const unreadReflections = !(tutorialSurfaceEnabled && isTutorialMode) && !!getFeatureUnread("MyModel", "reflectionsNew");
   const unreadEmotionLog = !!getFeatureUnread("EmotionLog", "feed");
 
@@ -864,7 +863,7 @@ export default function MyModelScreen({ route } = {}) {
     }
   }, []);
 
-    const openMyModelCreate = useCallback(() => {
+  const openPieceCreateFromHome = useCallback(() => {
     if (tutorialSurfaceEnabled && isTutorialMode) {
       openTutorialCreate();
       return;
@@ -1069,8 +1068,8 @@ export default function MyModelScreen({ route } = {}) {
               description={`チュートリアルでは「${TUTORIAL_REFLECTION_QUESTION}」に答えて、Pieceを作成する流れを体験できます。`}
               buttonLabel="Pieceを作成する"
               buttonIconName="create-outline"
-              onPress={openMyModelCreate}
-              badgeVisible={unreadMyModelCreate}
+              onPress={openPieceCreateFromHome}
+              badgeVisible={false}
               accessibilityLabel="Pieceを作成する"
             />
           </View>
