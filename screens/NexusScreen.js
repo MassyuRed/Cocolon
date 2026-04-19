@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
-import UnreadBadge from "../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
@@ -1206,7 +1206,7 @@ export default function NexusScreen({ navigation }) {
                     >
                       {tab.label}
                     </Text>
-                    <UnreadBadge
+                    <ScreenUnreadBadge
                       visible={
                         (tab.key === "reflection" && reflectionTabUnread) ||
                         (tab.key === "emotion_log" && emotionLogTabUnread)

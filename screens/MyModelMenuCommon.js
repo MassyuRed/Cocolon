@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 
 import CocolonPressable from "../components/CocolonPressable";
-import UnreadBadge from "../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import {
   MyWebDescription,
   MyWebMediumCard,
@@ -38,10 +38,8 @@ export function MyModelLargeCard({
             <Text numberOfLines={1} style={styles.largeCardTitle}>
               {title}
             </Text>
-            <UnreadBadge
+            <ScreenUnreadBadge
               visible={badgeVisible}
-              variant="new"
-              label="NEW"
               style={styles.largeCardBadge}
             />
           </View>

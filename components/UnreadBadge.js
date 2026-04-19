@@ -3,6 +3,35 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { useTheme } from "../theme/ThemeContext";
 
+export function BottomTabUnreadBadge({
+  visible = true,
+  style,
+  textStyle,
+}) {
+  return (
+    <UnreadBadge
+      visible={visible}
+      variant="new"
+      label="NEW"
+      style={style}
+      textStyle={textStyle}
+    />
+  );
+}
+
+export function ScreenUnreadBadge({
+  visible = true,
+  style,
+}) {
+  return (
+    <UnreadBadge
+      visible={visible}
+      variant="dot"
+      style={style}
+    />
+  );
+}
+
 export default function UnreadBadge({
   visible = true,
   variant = "new", // "new" | "dot"

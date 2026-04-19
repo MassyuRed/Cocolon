@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
-import UnreadBadge from "../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import MyWebReportViewerScreen from "./MyWebReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import {
@@ -225,10 +225,8 @@ export default function MyWebContentFirstScreen({
               {label}
             </Text>
             {badgeVisible ? (
-              <UnreadBadge
+              <ScreenUnreadBadge
                 visible={badgeVisible}
-                variant="new"
-                label="NEW"
                 style={localStyles.tabBadge}
               />
             ) : null}
@@ -345,12 +343,10 @@ export default function MyWebContentFirstScreen({
             accessibilityLabel={`${currentEmotionHistoryLabel}の履歴を見る`}
           >
             <Text style={localStyles.historyInlineText}>{currentEmotionHistoryLabel}の履歴を見る</Text>
-            <UnreadBadge
+            <ScreenUnreadBadge
               visible={(activeEmotionReportType === "daily" && unreadDaily) ||
                 (activeEmotionReportType === "weekly" && unreadWeekly) ||
                 (activeEmotionReportType === "monthly" && unreadMonthly)}
-              variant="new"
-              label="NEW"
               style={localStyles.historyInlineBadge}
             />
             <Ionicons
@@ -400,10 +396,8 @@ export default function MyWebContentFirstScreen({
             accessibilityLabel="自己分析の履歴を見る"
           >
             <Text style={localStyles.historyInlineText}>自己分析の履歴を見る</Text>
-            <UnreadBadge
+            <ScreenUnreadBadge
               visible={unreadSelfStructureHistory}
-              variant="new"
-              label="NEW"
               style={localStyles.historyInlineBadge}
             />
             <Ionicons

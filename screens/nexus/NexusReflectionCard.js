@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonPressable from "../../components/CocolonPressable";
-import UnreadBadge from "../../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../../components/UnreadBadge";
 import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
@@ -57,7 +57,7 @@ export default function NexusReflectionCard({ item, onPress, onPressOwner }) {
 
         <View style={styles.headerRight}>
           {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
-          <UnreadBadge visible={isNew} style={styles.newBadge} />
+          <ScreenUnreadBadge visible={isNew} style={styles.newBadge} />
         </View>
       </View>
 

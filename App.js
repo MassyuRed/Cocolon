@@ -52,7 +52,7 @@ import { startPushTokenSync, syncPushTokenOnce } from "./lib/pushToken";
 import { supabase } from "./lib/supabase";
 import { getCurrentUserId } from "./lib/user";
 import { apiGet, apiPost, apiFetch } from "./lib/apiClient";
-import UnreadBadge from "./components/UnreadBadge";
+import { BottomTabUnreadBadge } from "./components/UnreadBadge";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
@@ -1546,9 +1546,8 @@ function MainTabs() {
               <View style={{ width: size + (showUnreadBadge ? 22 : 10), height: size + (showUnreadBadge ? 12 : 10), alignItems: "center", justifyContent: "center", overflow: "visible" }}>
                 {icon}
                 {showUnreadBadge ? (
-                  <UnreadBadge
-                    variant="new"
-                    label="NEW"
+                  <BottomTabUnreadBadge
+                    visible={showUnreadBadge}
                     style={{ position: "absolute", top: 0, right: -8, minHeight: 12, paddingHorizontal: 4, paddingVertical: 1 }}
                     textStyle={{ fontSize: 7.5, lineHeight: 8.5, fontWeight: "800" }}
                   />

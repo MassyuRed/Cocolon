@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../components/CocolonButton";
-import UnreadBadge from "../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -37,10 +37,8 @@ export function MenuActionCard({
         <Text numberOfLines={titleNumberOfLines} style={[styles.title, compact ? styles.titleCompact : null]}>
           {title}
         </Text>
-        <UnreadBadge
+        <ScreenUnreadBadge
           visible={badgeVisible}
-          variant="new"
-          label="NEW"
           style={styles.badge}
         />
       </View>

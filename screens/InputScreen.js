@@ -52,7 +52,7 @@ import TodayQuestionCard from "../components/TodayQuestionCard";
 import TodayQuestionModal from "../components/TodayQuestionModal";
 import NoticeModal from "../components/NoticeModal";
 import TutorialStartModal from "../components/TutorialStartModal";
-import UnreadBadge from "../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import EmotionReflectionPreviewModal from "../components/EmotionReflectionPreviewModal";
 
 // 未送信下書きは InputScreen 内で自己完結させ、
@@ -1742,8 +1742,8 @@ ${String(error?.message || error)}`
                       color={colors.TEXT_ON_LIGHT}
                     />
                     {noticeFeatureEnabled && noticeUnreadCount > 0 ? (
-                      <UnreadBadge
-                        variant="dot"
+                      <ScreenUnreadBadge
+                        visible
                         style={styles.noticeBadgeDot}
                       />
                     ) : null}

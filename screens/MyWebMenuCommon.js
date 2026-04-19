@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
-import UnreadBadge from "../components/UnreadBadge";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -88,10 +88,8 @@ export function MyWebLargeCard({
             <Text numberOfLines={1} style={styles.largeCardTitle}>
               {title}
             </Text>
-            <UnreadBadge
+            <ScreenUnreadBadge
               visible={badgeVisible}
-              variant="new"
-              label="NEW"
               style={styles.largeCardBadge}
             />
           </View>
@@ -130,10 +128,8 @@ export function MyWebMediumCard({
       <View style={styles.mediumCardContent}>
         <View style={styles.cardTitleRow}>
           <Text style={styles.mediumCardTitle}>{title}</Text>
-          <UnreadBadge
+          <ScreenUnreadBadge
             visible={badgeVisible}
-            variant="new"
-            label="NEW"
             style={styles.mediumCardBadge}
           />
           <Ionicons name={iconName} size={18} style={styles.chevronIcon} />
@@ -162,10 +158,8 @@ export function MyWebOptionRow({
       <View style={styles.optionRowInner}>
         <View style={styles.optionLabelWrap}>
           <Text style={styles.optionLabel}>{label}</Text>
-          <UnreadBadge
+          <ScreenUnreadBadge
             visible={badgeVisible}
-            variant="new"
-            label="NEW"
             style={styles.optionBadge}
           />
         </View>
