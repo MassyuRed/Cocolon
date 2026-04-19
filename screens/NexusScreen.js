@@ -37,10 +37,13 @@ import {
   getNexusDiscoveriesReflections,
   getNexusEchoesReflections,
   getNexusEmotionLog,
+  getNexusEmotionLogUnreadStatus,
   getNexusEmotionRanking,
   getNexusRecommendUsers,
   getNexusReflectionDetail,
   getNexusReflections,
+  getNexusReflectionsUnreadStatus,
+  markNexusEmotionLogFeedRead,
 } from "../lib/nexusApi";
 import NexusReflectionCard from "./nexus/NexusReflectionCard";
 
@@ -125,6 +128,7 @@ function normalizeEmotionLogItems(json) {
       id: String(row?.id || `emotion-log-${index}`),
       ownerName,
       timeLabel,
+      createdAt: String(row?.createdAt || row?.created_at || "").trim() || null,
       items: items.map((item) => ({
         type: String(item?.type || item?.emotion || "").trim() || "感情",
         strength: String(item?.strength || "").trim(),
@@ -258,7 +262,7 @@ function resolveReflectionsRouteName(navigation) {
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
-  const { getFeatureUnread } = useUnread();
+  const { getFeatureUnread, setUnread } = useUnread();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
@@ -325,6 +329,7 @@ export default function NexusScreen({ navigation }) {
   const [detailData, setDetailData] = useState(null);
 
   const prefetchedReflectionUnread = !!getFeatureUnread("MyModel", "reflectionsNew");
+  const prefetchedEmotionLogUnread = !!getFeatureUnread("EmotionLog", "feed");
   const reflectionHasUnread = Array.isArray(reflectionState.items)
     ? reflectionState.items.some((item) => item?.viewer_state?.is_new === true)
     : false;
@@ -332,6 +337,80 @@ export default function NexusScreen({ navigation }) {
   const reflectionTabUnread = reflectionUnreadResolved
     ? reflectionHasUnread
     : prefetchedReflectionUnread || reflectionHasUnread;
+  const emotionLogTabUnread = prefetchedEmotionLogUnread;
+
+  const latestEmotionLogCreatedAt = useMemo(() => {
+    if (!Array.isArray(emotionLogState.items) || emotionLogState.items.length <= 0) {
+      return null;
+    }
+
+    let latest = null;
+    let latestTime = -Infinity;
+
+    emotionLogState.items.forEach((item) => {
+      const raw = String(item?.createdAt || "").trim();
+      if (!raw) return;
+      const date = new Date(raw);
+      if (Number.isNaN(date.getTime())) return;
+      const time = date.getTime();
+      if (time > latestTime) {
+        latestTime = time;
+        latest = raw;
+      }
+    });
+
+    return latest;
+  }, [emotionLogState.items]);
+
+  const refreshReflectionUnreadState = useCallback(async () => {
+    if (isTutorialMode) {
+      setUnread("MyModel", "reflectionsNew", false);
+      return false;
+    }
+
+    try {
+      const json = await getNexusReflectionsUnreadStatus();
+      const hasUnread =
+        typeof json?.has_unread === "boolean"
+          ? json.has_unread
+          : typeof json?.hasUnread === "boolean"
+          ? json.hasUnread
+          : false;
+      setUnread("MyModel", "reflectionsNew", !!hasUnread);
+      return !!hasUnread;
+    } catch (e) {
+      console.warn("NexusScreen: refreshReflectionUnreadState failed", e);
+      return null;
+    }
+  }, [isTutorialMode, setUnread]);
+
+  const refreshEmotionLogUnreadState = useCallback(async () => {
+    if (isTutorialMode) {
+      setUnread("EmotionLog", "feed", false);
+      setUnread("EmotionLog", "requests", false);
+      return { feed: false, requests: false };
+    }
+
+    try {
+      const json = await getNexusEmotionLogUnreadStatus();
+      const nextFeed = !!json?.feed_unread;
+      const nextRequests = !!json?.requests_unread;
+      setUnread("EmotionLog", "feed", nextFeed);
+      setUnread("EmotionLog", "requests", nextRequests);
+      return { feed: nextFeed, requests: nextRequests };
+    } catch (e) {
+      console.warn("NexusScreen: refreshEmotionLogUnreadState failed", e);
+      return null;
+    }
+  }, [isTutorialMode, setUnread]);
+
+  const refreshNexusUnreadState = useCallback(async () => {
+    await Promise.all([
+      refreshReflectionUnreadState(),
+      refreshEmotionLogUnreadState(),
+    ]);
+  }, [refreshEmotionLogUnreadState, refreshReflectionUnreadState]);
+
 
   const loadRanking = useCallback(async () => {
     if (isTutorialMode) {
@@ -508,9 +587,69 @@ export default function NexusScreen({ navigation }) {
   }, [isTutorialMode, tutorialReflectionItems]);
 
   useEffect(() => {
-    if (activeTab === "emotion_log" && !emotionLogState.loaded && !emotionLogState.loading) {
+    if (isTutorialMode) {
+      setUnread("MyModel", "reflectionsNew", false);
+      return;
+    }
+    if (reflectionState.loading || reflectionState.error) return;
+
+    setUnread("MyModel", "reflectionsNew", reflectionHasUnread);
+  }, [
+    isTutorialMode,
+    reflectionHasUnread,
+    reflectionState.error,
+    reflectionState.loading,
+    setUnread,
+  ]);
+
+  useEffect(() => {
+    if (activeTab !== "emotion_log") return;
+    if (!emotionLogState.loaded || emotionLogState.loading || emotionLogState.error) return;
+    if (!prefetchedEmotionLogUnread || !latestEmotionLogCreatedAt) return;
+    let cancelled = false;
+
+    (async () => {
+      try {
+        await markNexusEmotionLogFeedRead(latestEmotionLogCreatedAt);
+        if (cancelled) return;
+        setUnread("EmotionLog", "feed", false);
+      } catch (e) {
+        console.warn("NexusScreen: failed to mark emotion log feed read", e);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    activeTab,
+    emotionLogState.error,
+    emotionLogState.loaded,
+    emotionLogState.loading,
+    latestEmotionLogCreatedAt,
+    prefetchedEmotionLogUnread,
+    setUnread,
+  ]);
+
+  useEffect(() => {
+    void refreshNexusUnreadState();
+  }, [refreshNexusUnreadState]);
+
+  useEffect(() => {
+    if (!navigation?.addListener) return undefined;
+    const unsubscribe = navigation.addListener("focus", () => {
+      void refreshNexusUnreadState();
+    });
+    return unsubscribe;
+  }, [navigation, refreshNexusUnreadState]);
+
+  useEffect(() => {
+    if (activeTab === "emotion_log") {
       void loadEmotionLog();
     }
+  }, [activeTab, loadEmotionLog]);
+
+  useEffect(() => {
     if (activeTab === "recommend" && !recommendState.loaded && !recommendState.loading) {
       void loadRecommend();
     }
@@ -523,12 +662,9 @@ export default function NexusScreen({ navigation }) {
     }
   }, [
     activeTab,
-    emotionLogState.loaded,
-    emotionLogState.loading,
     historyMode,
     historyState.loadedModes,
     historyState.loading,
-    loadEmotionLog,
     loadHistory,
     loadRecommend,
     recommendState.loaded,
@@ -977,6 +1113,7 @@ export default function NexusScreen({ navigation }) {
           <CocolonPressable
             style={styles.refreshButton}
             onPress={() => {
+              void refreshNexusUnreadState();
               void loadRanking();
               if (activeTab === "reflection") void loadReflections();
               if (activeTab === "emotion_log") void loadEmotionLog();
@@ -1070,7 +1207,10 @@ export default function NexusScreen({ navigation }) {
                       {tab.label}
                     </Text>
                     <UnreadBadge
-                      visible={tab.key === "reflection" && reflectionTabUnread}
+                      visible={
+                        (tab.key === "reflection" && reflectionTabUnread) ||
+                        (tab.key === "emotion_log" && emotionLogTabUnread)
+                      }
                       style={styles.tabUnreadBadge}
                     />
                   </View>
