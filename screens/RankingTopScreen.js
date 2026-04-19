@@ -405,7 +405,7 @@ function createStyles(COLORS, ui) {
     },
     rankingCardTitle: {
       flex: 1,
-      textAlign: "right",
+      textAlign: "left",
       fontSize: 13,
       lineHeight: 18,
       fontWeight: "900",

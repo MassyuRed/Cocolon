@@ -12,12 +12,14 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonPressable from "../components/CocolonPressable";
+import UnreadBadge from "../components/UnreadBadge";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
-import { apiFetch } from "../lib/apiClient";
+import { useUnread } from "../UnreadContext";
+import { apiFetch, apiPost } from "../lib/apiClient";
 
 // MyModel（MashOS）API
 const MYMODEL_API_BASE_URL =
@@ -177,6 +179,7 @@ export default function FollowListScreen({ navigation, route }) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const { user } = useAuth();
+  const { getFeatureUnread, setUnread } = useUnread();
 
   const viewedUserId =
     route?.params?.viewedUserId || route?.params?.targetUserId || user?.id || null;
@@ -198,6 +201,7 @@ export default function FollowListScreen({ navigation, route }) {
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
+  const requestsUnread = isSelfList && !!getFeatureUnread("EmotionLog", "requests");
 
   const visibleTabs = useMemo(
     () => FOLLOW_TABS.filter((item) => isSelfList || !item.selfOnly),
@@ -229,6 +233,27 @@ export default function FollowListScreen({ navigation, route }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelfList, tab]);
+
+  useEffect(() => {
+    if (!isSelfList || tab !== TAB_REQUESTS) return;
+
+    let cancelled = false;
+
+    (async () => {
+      try {
+        await apiPost("/emotion-log/unread/read-requests", {});
+        if (!cancelled) {
+          setUnread("EmotionLog", "requests", false);
+        }
+      } catch (e) {
+        console.warn("FollowListScreen mark requests read error:", e);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isSelfList, setUnread, tab]);
 
   const refreshCounts = useCallback(async () => {
     if (!viewedUserId) return;
@@ -1074,14 +1099,20 @@ export default function FollowListScreen({ navigation, route }) {
                     isActive && styles.tabLabelWrapActive,
                   ]}
                 >
-                  <Text
-                    style={[
-                      styles.tabLabelText,
-                      isActive && styles.tabLabelTextActive,
-                    ]}
-                  >
-                    {tabItem.label}
-                  </Text>
+                  <View style={styles.tabLabelRow}>
+                    <Text
+                      style={[
+                        styles.tabLabelText,
+                        isActive && styles.tabLabelTextActive,
+                      ]}
+                    >
+                      {tabItem.label}
+                    </Text>
+                    <UnreadBadge
+                      visible={tabItem.key === TAB_REQUESTS && requestsUnread}
+                      style={styles.tabUnreadBadge}
+                    />
+                  </View>
                 </View>
               </CocolonPressable>
             </View>
@@ -1175,6 +1206,11 @@ function createStyles(COLORS, ui) {
       borderBottomWidth: 2,
       borderBottomColor: "transparent",
     },
+    tabLabelRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
     tabLabelWrapActive: {
       borderBottomColor: COLORS.TITLE_GOLD,
     },
@@ -1185,6 +1221,10 @@ function createStyles(COLORS, ui) {
     },
     tabLabelTextActive: {
       color: COLORS.TITLE_GOLD,
+    },
+    tabUnreadBadge: {
+      marginLeft: 6,
+      alignSelf: "center",
     },
 
     errorBox: {
