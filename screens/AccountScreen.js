@@ -34,8 +34,13 @@ import { apiGet, apiPost, apiPatch, apiFetch } from "../lib/apiClient";
 const PANEL_MIN_HEIGHT = 695;
 const DISPLAY_NAME_MAX_LENGTH = 20;
 const DISPLAY_NAME_TAKEN_MESSAGE = "このユーザー名はすでに使われています。";
+const LOOKUP_CODE_MAX_LENGTH = 64;
 
 function normalizeDisplayName(value) {
+  return String(value || "").trim();
+}
+
+function normalizeLookupCode(value) {
   return String(value || "").trim();
 }
 
@@ -199,6 +204,11 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [isFollowRequested, setIsFollowRequested] = useState(false);
   const [followActionLoading, setFollowActionLoading] = useState(false);
+  const [lookupCode, setLookupCode] = useState("");
+  const [lookupLoading, setLookupLoading] = useState(false);
+  const [lookupError, setLookupError] = useState("");
+  const [lookupResult, setLookupResult] = useState(null);
+  const [lookupActionLoading, setLookupActionLoading] = useState(false);
 
   // ステータス（アカウント公開情報）
   const [accountStatus, setAccountStatus] = useState(null);
@@ -549,7 +559,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
     const code = String(myProfileCode || "").trim();
     if (!code && !targetUserId) {
-      Alert.alert("準備中", "相手の共有IDがまだ取得できていません。");
+      Alert.alert("準備中", "相手のIDがまだ取得できていません。");
       return;
     }
 
@@ -586,11 +596,95 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     });
   };
 
-  // 画面に表示するのは「短い公開ID（friend_code）」をユーザーIDとして扱う
-  const userIdForDisplay = user ? friendCode || "（生成中）" : "未ログイン";
-  const myProfileIdForDisplay = user
-    ? myProfileCode || "（生成中）"
-    : "未ログイン";
+
+  const openAccountByTargetUserId = (nextTargetUserId) => {
+    const nextUserId = String(nextTargetUserId || "").trim();
+    if (!nextUserId || !navigation?.navigate) return;
+
+    navigation.navigate("Account", { viewedUserId: nextUserId });
+  };
+
+  const runIdLookup = async () => {
+    if (lookupLoading || lookupActionLoading) return;
+
+    if (!user) {
+      Alert.alert("ログインが必要です", "ID検索にはログインが必要です。");
+      return;
+    }
+
+    const code = normalizeLookupCode(lookupCode);
+    if (!code) {
+      setLookupError("IDを入力してください。");
+      setLookupResult(null);
+      return;
+    }
+
+    setLookupLoading(true);
+    setLookupError("");
+    setLookupResult(null);
+
+    try {
+      const json = await apiGet(
+        `/myprofile/lookup?myprofile_code=${encodeURIComponent(code)}`
+      );
+      if (json?.found) {
+        setLookupResult(json);
+      } else {
+        setLookupResult({ status: "ok", found: false, myprofile_code: code });
+      }
+    } catch (e) {
+      console.warn("AccountScreen: id lookup failed", e);
+      setLookupError(String(e?.message || e));
+      setLookupResult(null);
+    } finally {
+      setLookupLoading(false);
+    }
+  };
+
+  const onLookupFollow = async () => {
+    if (lookupLoading || lookupActionLoading) return;
+    if (!user) {
+      Alert.alert("ログインが必要です", "フォローするにはログインが必要です。");
+      return;
+    }
+
+    const code = normalizeLookupCode(lookupResult?.myprofile_code);
+    if (!code) {
+      Alert.alert("準備中", "相手のIDがまだ取得できていません。");
+      return;
+    }
+
+    const lookupTargetUserId = String(lookupResult?.target_user_id || "").trim();
+    if (lookupTargetUserId && String(lookupTargetUserId) === String(user?.id || "")) {
+      return;
+    }
+
+    setLookupActionLoading(true);
+    try {
+      const json = await apiPost("/myprofile/follow", { myprofile_code: code });
+      const nextFollowing = !!json?.is_following;
+      const nextRequested = !!json?.is_follow_requested && !nextFollowing;
+
+      setLookupResult((prev) => {
+        if (!prev || !prev.found) return prev;
+        return {
+          ...prev,
+          is_following: nextFollowing,
+          is_follow_requested: nextRequested,
+        };
+      });
+
+      await refreshFollowState();
+    } catch (e) {
+      console.warn("AccountScreen: lookup follow failed", e);
+      Alert.alert("操作に失敗しました", String(e?.message || e));
+    } finally {
+      setLookupActionLoading(false);
+    }
+  };
+
+  // Connect ID（myprofile_code）を Account 画面の ID 表示として扱う
+  const idForDisplay = user ? myProfileCode || "（生成中）" : "未ログイン";
   const isDark = themeName === "dark";
 
   const isSelf = !!user && String(targetUserId || "") === String(user.id);
@@ -608,6 +702,10 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   );
 
   const canShowFriendCode = !user || isSelf || isFriendCodePublic;
+  const canUseIdLookup = !!user && isSelf;
+  const lookupResultIsSelf =
+    String(lookupResult?.target_user_id || "") !== "" &&
+    String(lookupResult?.target_user_id || "") === String(user?.id || "");
 
   const statusValue = (key, fallbackKeys = []) => {
     const obj = accountStatus && typeof accountStatus === "object" ? accountStatus : null;
@@ -645,17 +743,16 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     setNameEditOpen(true);
   };
 
-  const onCopyFriendCode = async () => {
-    const code = String(friendCode || "").trim();
+  const onCopyId = async () => {
+    const code = String(myProfileCode || "").trim();
     if (!code) {
-      Alert.alert("準備中", "共有コードがまだ取得できていません。");
+      Alert.alert("準備中", "IDがまだ取得できていません。");
       return;
     }
     try {
-      // FriendScreen のフレンド登録ポップアップ内と同じ導線（Share）
       await Share.share({ message: code });
     } catch (e) {
-      console.warn("copy friend code failed:", e);
+      console.warn("copy id failed:", e);
     }
   };
 
@@ -1232,34 +1329,32 @@ const onRestorePurchases = async () => {
                 onPress={() => openFollowList("followers")}
                 disabled={!targetUserId}
               />
-              {canShowFriendCode ? (
-                <ProfileRow
-                  styles={styles}
-                  label="共有コード"
-                  labelAction={
-                    user ? (
-                      <Pressable
-                        style={[
-                          styles.labelIconBtn,
-                          (loading || !String(friendCode || "").trim()) &&
-                            styles.labelIconBtnDisabled,
-                        ]}
-                        onPress={onCopyFriendCode}
-                        disabled={loading || !String(friendCode || "").trim()}
-                        accessibilityLabel="共有コードをコピー"
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                      >
-                        <Ionicons
-                          name="copy-outline"
-                          size={12}
-                          color={colors.TEXT_ON_LIGHT}
-                        />
-                      </Pressable>
-                    ) : null
-                  }
-                  value={userIdForDisplay}
-                />
-              ) : null}
+              <ProfileRow
+                styles={styles}
+                label="ID"
+                labelAction={
+                  user ? (
+                    <Pressable
+                      style={[
+                        styles.labelIconBtn,
+                        (loading || !String(myProfileCode || "").trim()) &&
+                          styles.labelIconBtnDisabled,
+                      ]}
+                      onPress={onCopyId}
+                      disabled={loading || !String(myProfileCode || "").trim()}
+                      accessibilityLabel="IDをコピー"
+                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                    >
+                      <Ionicons
+                        name="copy-outline"
+                        size={12}
+                        color={colors.TEXT_ON_LIGHT}
+                      />
+                    </Pressable>
+                  ) : null
+                }
+                value={idForDisplay}
+              />
 
             </View>
 
@@ -1274,6 +1369,156 @@ const onRestorePurchases = async () => {
               ※フォロー数とフォロワー数をタップすれば、一覧で表示されます。
             </Text>
           </View>
+
+
+          {canUseIdLookup ? (
+            <View style={styles.statusSection}>
+              <Text style={styles.statusTitle}>ID検索</Text>
+
+              <View style={styles.statusCard}>
+                <Text style={styles.lookupHintText}>
+                  IDを入力すると、ユーザーを検索してフォローできます。
+                </Text>
+
+                <View style={styles.lookupInputRow}>
+                  <TextInput
+                    style={styles.lookupInput}
+                    placeholder="IDを入力"
+                    placeholderTextColor={colors.TEXT_SUBTLE}
+                    value={lookupCode}
+                    onChangeText={(value) => {
+                      setLookupCode(value);
+                      if (lookupError) setLookupError("");
+                      if (lookupResult) setLookupResult(null);
+                    }}
+                    editable={!lookupLoading && !lookupActionLoading}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    maxLength={LOOKUP_CODE_MAX_LENGTH}
+                    returnKeyType="search"
+                    onSubmitEditing={runIdLookup}
+                  />
+
+                  <TouchableOpacity
+                    style={[
+                      styles.lookupSearchBtn,
+                      (lookupLoading || lookupActionLoading) &&
+                        styles.lookupSearchBtnDisabled,
+                    ]}
+                    onPress={runIdLookup}
+                    activeOpacity={0.85}
+                    disabled={lookupLoading || lookupActionLoading}
+                  >
+                    {lookupLoading ? (
+                      <ActivityIndicator size="small" color="#FFFFFF" />
+                    ) : (
+                      <Text style={styles.lookupSearchBtnText}>検索</Text>
+                    )}
+                  </TouchableOpacity>
+                </View>
+
+                {lookupError ? (
+                  <Text style={styles.lookupErrorText}>
+                    検索に失敗しました: {lookupError}
+                  </Text>
+                ) : null}
+
+                {lookupResult && lookupResult.found === false ? (
+                  <View style={styles.lookupResultCard}>
+                    <Text style={styles.lookupEmptyText}>
+                      IDに一致するユーザーは見つかりませんでした。
+                    </Text>
+                  </View>
+                ) : null}
+
+                {lookupResult && lookupResult.found ? (
+                  <View style={styles.lookupResultCard}>
+                    <CocolonPressable
+                      style={styles.lookupResultOpenArea}
+                      onPress={() =>
+                        openAccountByTargetUserId(lookupResult?.target_user_id)
+                      }
+                      accessibilityLabel="検索結果のアカウントを開く"
+                    >
+                      <View style={styles.lookupResultHeader}>
+                        <View style={styles.lookupResultMain}>
+                          <View style={styles.lookupResultTitleRow}>
+                            <Text
+                              style={styles.lookupResultName}
+                              numberOfLines={1}
+                            >
+                              {lookupResult?.display_name || "（未設定）"}
+                            </Text>
+                            {lookupResult?.is_private_account ? (
+                              <Ionicons
+                                name="shield-outline"
+                                size={14}
+                                color={colors.TITLE_GOLD}
+                                style={{ marginLeft: 6, opacity: 0.7 }}
+                              />
+                            ) : null}
+                          </View>
+                          <Text style={styles.lookupResultIdText}>
+                            ID: {lookupResult?.myprofile_code || "—"}
+                          </Text>
+                        </View>
+
+                        <Ionicons
+                          name="chevron-forward"
+                          size={18}
+                          color={colors.TEXT_SUBTLE}
+                        />
+                      </View>
+                    </CocolonPressable>
+
+                    <View style={styles.lookupResultActionRow}>
+                      {lookupResultIsSelf ? (
+                        <View style={styles.lookupResultPill}>
+                          <Text style={styles.lookupResultPillText}>あなた</Text>
+                        </View>
+                      ) : lookupResult?.is_following ? (
+                        <View style={styles.lookupResultPill}>
+                          <Text style={styles.lookupResultPillText}>フォロー中</Text>
+                        </View>
+                      ) : lookupResult?.is_follow_requested ? (
+                        <View style={styles.lookupResultPill}>
+                          <Text style={styles.lookupResultPillText}>申請中</Text>
+                        </View>
+                      ) : (
+                        <TouchableOpacity
+                          style={[
+                            styles.lookupFollowBtn,
+                            lookupActionLoading && styles.editNameBtnDisabled,
+                          ]}
+                          onPress={onLookupFollow}
+                          activeOpacity={0.85}
+                          disabled={lookupActionLoading || lookupLoading}
+                        >
+                          {lookupActionLoading ? (
+                            <ActivityIndicator
+                              size="small"
+                              color="#FFFFFF"
+                              style={{ marginRight: 6 }}
+                            />
+                          ) : (
+                            <Ionicons
+                              name="person-add-outline"
+                              size={16}
+                              color="#FFFFFF"
+                              style={{ marginRight: 6 }}
+                            />
+                          )}
+                          <Text style={styles.lookupFollowBtnText}>
+                            フォローする
+                          </Text>
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                  </View>
+                ) : null}
+              </View>
+            </View>
+          ) : null}
 
           <View style={styles.statusSection}>
             <Text style={styles.statusTitle}>ProfileCreate</Text>
@@ -2226,6 +2471,136 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     nameModalBtnPrimaryText: {
+      color: "#FFFFFF",
+    },
+
+    lookupHintText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
+      marginBottom: 10,
+    },
+    lookupInputRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    lookupInput: {
+      flex: 1,
+      minHeight: 42,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
+      fontSize: 14,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    lookupSearchBtn: {
+      marginLeft: 8,
+      minWidth: 72,
+      minHeight: 42,
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    lookupSearchBtnDisabled: {
+      opacity: 0.6,
+    },
+    lookupSearchBtnText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: "#FFFFFF",
+    },
+    lookupErrorText: {
+      marginTop: 8,
+      fontSize: 11,
+      lineHeight: 16,
+      color: "#B91C1C",
+    },
+    lookupResultCard: {
+      marginTop: 12,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+    },
+    lookupEmptyText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_ON_LIGHT,
+      opacity: 0.9,
+    },
+    lookupResultOpenArea: {
+      borderRadius: 12,
+    },
+    lookupResultHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    lookupResultMain: {
+      flex: 1,
+      paddingRight: 12,
+    },
+    lookupResultTitleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    lookupResultName: {
+      flexShrink: 1,
+      fontSize: 13,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    lookupResultIdText: {
+      marginTop: 4,
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TITLE_GOLD,
+      fontWeight: "700",
+    },
+    lookupResultActionRow: {
+      marginTop: 10,
+      flexDirection: "row",
+      justifyContent: "flex-end",
+    },
+    lookupResultPill: {
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    lookupResultPillText: {
+      fontSize: 12,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    lookupFollowBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    lookupFollowBtnText: {
+      fontSize: 12,
+      fontWeight: "800",
       color: "#FFFFFF",
     },
 
