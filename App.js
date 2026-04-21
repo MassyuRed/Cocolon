@@ -52,6 +52,7 @@ import { startPushTokenSync, syncPushTokenOnce } from "./lib/pushToken";
 import { supabase } from "./lib/supabase";
 import { getCurrentUserId } from "./lib/user";
 import { apiGet, apiPost, apiFetch } from "./lib/apiClient";
+import { getNexusReflectionsAsQnaList } from "./lib/nexusApi";
 import { BottomTabUnreadBadge } from "./components/UnreadBadge";
 
 const Tab = createBottomTabNavigator();
@@ -1248,17 +1249,14 @@ function MainTabs() {
         const fresh = getPrefetchEntryFresh?.("MyModel", cacheKey, PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.targetUserId && String(fresh.value.targetUserId) === String(userId);
         if (!isFresh) {
-          const params = new URLSearchParams();
-          params.append("target_user_id", userId);
-          params.append("sort", "newest");
-          const url = `${MYMODEL_API_BASE_URL}/mymodel/qna/list?${params.toString()}`;
-          const res = await apiFetch(url, { method: "GET", auth: false, headers });
-          const json = await res.json().catch(() => null);
-          if (res.ok) {
-            const items = Array.isArray(json?.items) ? json.items : [];
-            const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
-            setPrefetch("MyModel", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
-          }
+          const json = await getNexusReflectionsAsQnaList({
+            targetUserId: userId,
+            mode: "newest",
+            limit: 100,
+          });
+          const items = Array.isArray(json?.items) ? json.items : [];
+          const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
+          setPrefetch("MyModel", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
         }
       } catch {}
     } catch {}

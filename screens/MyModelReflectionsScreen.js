@@ -22,6 +22,11 @@ import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { apiGet, apiFetch } from "../lib/apiClient";
+import {
+  getNexusReflectionDetailQna,
+  getNexusReflectionsAsQnaList,
+  getNexusReflectionsUnreadStatus,
+} from "../lib/nexusApi";
 import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 import TutorialOverlay, {
@@ -53,10 +58,8 @@ const API_BASE = String(
     "https://mashos-api.onrender.com"
 ).replace(/\/+$/, "");
 
-// New Q&A endpoints (MashOS)
-const QNA_LIST_ENDPOINT = `${API_BASE}/mymodel/qna/list`;
-const QNA_DETAIL_ENDPOINT = `${API_BASE}/mymodel/qna/detail`;
-const QNA_UNREAD_STATUS_ENDPOINT = `${API_BASE}/mymodel/qna/unread-status`;
+// Reaction / owner-side compatibility endpoints (MashOS)
+// Public Piece read path is now unified under /nexus/* via lib/nexusApi.
 // Echoes / Discoveries (MashOS)
 const QNA_ECHOES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/submit`;
 const QNA_ECHOES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/history`;
@@ -887,21 +890,13 @@ useEffect(() => {
           return false;
         }
 
-        const res = await apiFetch(QNA_UNREAD_STATUS_ENDPOINT, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        const json = await res.json().catch(() => null);
+        const json = await getNexusReflectionsUnreadStatus();
         const hasUnread =
-          !!res.ok &&
-          (typeof json?.has_unread === "boolean"
+          typeof json?.has_unread === "boolean"
             ? json.has_unread
             : typeof json?.hasUnread === "boolean"
             ? json.hasUnread
-            : false);
+            : false;
 
         try {
           setUnread("MyModel", "reflectionsNew", !!hasUnread);
@@ -1040,15 +1035,12 @@ useEffect(() => {
     [activeViewedUserId]
   );
 
-  const buildListUrl = useCallback(
-    (targetUserId, mode) => {
-      const preset = SORT_PRESET[String(mode || "newest")] || SORT_PRESET.newest;
-      const params = new URLSearchParams();
-      if (targetUserId) params.append("target_user_id", String(targetUserId));
-      if (preset.sort) params.append("sort", preset.sort);
-      if (preset.metric) params.append("metric", preset.metric);
-      return `${QNA_LIST_ENDPOINT}?${params.toString()}`;
-    },
+  const buildListParams = useCallback(
+    (targetUserId, mode) => ({
+      targetUserId: targetUserId ? String(targetUserId) : null,
+      mode: String(mode || "newest"),
+      limit: 100,
+    }),
     []
   );
 
@@ -1078,21 +1070,7 @@ useEffect(() => {
         }
 
         const targetUserId = await resolveTargetUserId(userId);
-        const url = buildListUrl(targetUserId, mode);
-
-        const res = await apiFetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-          throw new Error(String(msg));
-        }
+        const json = await getNexusReflectionsAsQnaList(buildListParams(targetUserId, mode));
 
         const items = Array.isArray(json?.items) ? json.items : [];
         const meta = json?.meta || null;
@@ -1123,7 +1101,7 @@ useEffect(() => {
     },
     [
       isTutorialMode,
-      buildListUrl,
+      buildListParams,
       resolveTargetUserId,
       getTutorialSortedItems,
       setPrefetch,
@@ -1274,26 +1252,10 @@ useEffect(() => {
           return;
         }
 
-        const params = new URLSearchParams();
-        params.append("q_instance_id", qInstanceId);
-        params.append("mark_viewed", "true");
-        if (shouldIncludeMyDiscovery) {
-          params.append("include_my_discovery_latest", "true");
-        }
-        const url = `${QNA_DETAIL_ENDPOINT}?${params.toString()}`;
-
-        const res = await apiFetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
+        const json = await getNexusReflectionDetailQna(qInstanceId, {
+          markViewed: true,
+          includeMyDiscoveryLatest: shouldIncludeMyDiscovery,
         });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-          throw new Error(String(msg));
-        }
 
         if (resetSeq !== resetSeqRef.current) return;
 
