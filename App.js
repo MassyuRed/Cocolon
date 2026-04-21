@@ -837,7 +837,7 @@ function MainTabs() {
         setUnread("MyModel", "qnaNew", false);
         return;
       }
-      const json = await apiGet("/mymodel/qna/unread-status");
+      const json = await apiGet("/nexus/reflections/unread-status");
       const hasUnread = typeof json?.has_unread === "boolean" ? json.has_unread : typeof json?.hasUnread === "boolean" ? json.hasUnread : false;
       setUnread("MyModel", "reflectionsNew", !!hasUnread);
       setUnread("MyModel", "qnaNew", false);
