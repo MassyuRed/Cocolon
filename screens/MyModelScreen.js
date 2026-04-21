@@ -86,7 +86,6 @@ const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
     tutorial_kind: "mock",
     created_at: "2026-01-01T09:00:00.000Z",
     resonances: 4,
-    discoveries: 2,
     views: 12,
     is_new: true,
   },
@@ -251,8 +250,7 @@ export default function MyModelScreen({ route } = {}) {
 
   const [globalReflectionCount, setGlobalReflectionCount] = useState(null);
   const [globalEchoCount, setGlobalEchoCount] = useState(null);
-  const [globalDiscoveryCount, setGlobalDiscoveryCount] = useState(null);
-  const appStateRef = useRef(AppState.currentState);
+    const appStateRef = useRef(AppState.currentState);
   const globalSummaryLastFetchedAtRef = useRef(0);
   const globalSummaryInFlightRef = useRef(null);
 
@@ -291,20 +289,15 @@ export default function MyModelScreen({ route } = {}) {
           const reflectionRaw =
             json?.reflection_count ?? json?.reflection_views ?? json?.reflection_view_count;
           const echoRaw = json?.echo_count;
-          const discoveryRaw = json?.discovery_count;
 
           const nextReflectionCount = Number(reflectionRaw);
           const nextEchoCount = Number(echoRaw);
-          const nextDiscoveryCount = Number(discoveryRaw);
 
           if (Number.isFinite(nextReflectionCount)) {
             setGlobalReflectionCount(nextReflectionCount);
           }
           if (Number.isFinite(nextEchoCount)) {
             setGlobalEchoCount(nextEchoCount);
-          }
-          if (Number.isFinite(nextDiscoveryCount)) {
-            setGlobalDiscoveryCount(nextDiscoveryCount);
           }
           globalSummaryLastFetchedAtRef.current = Date.now();
           return json;
@@ -566,7 +559,6 @@ export default function MyModelScreen({ route } = {}) {
     if (isTutorialMode) {
       setGlobalReflectionCount(null);
       setGlobalEchoCount(null);
-      setGlobalDiscoveryCount(null);
       return;
     }
 
@@ -599,7 +591,7 @@ export default function MyModelScreen({ route } = {}) {
     };
   }, [fetchGlobalSummary, isTutorialMode]);
 
-  // Recommend: user discovery only
+  // Recommend: user suggestions only
   useEffect(() => {
     if (isTutorialMode) {
       setRecoUsers([]);
@@ -747,7 +739,6 @@ export default function MyModelScreen({ route } = {}) {
         tutorial_kind: "self",
         created_at: createdAt,
         resonances: 0,
-        discoveries: 0,
         views: 0,
         is_new: true,
       };
@@ -1020,11 +1011,6 @@ export default function MyModelScreen({ route } = {}) {
                 {`今日、全体で ${
                   typeof globalEchoCount === "number" ? globalEchoCount : "—"
                 } 回の共鳴がありました`}
-              </Text>
-              <Text style={styles.globalSummaryText}>
-                {`今日、全体で ${
-                  typeof globalDiscoveryCount === "number" ? globalDiscoveryCount : "—"
-                } 回の発見がありました`}
               </Text>
             </View>
           </View>

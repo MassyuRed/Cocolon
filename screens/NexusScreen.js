@@ -203,7 +203,6 @@ function normalizeTutorialReflectionItems(items) {
       views: Number(item?.views || item?.metrics?.views || 0) || 0,
       resonances:
         Number(item?.resonances || item?.metrics?.resonances || 0) || 0,
-      discoveries: 0,
     },
     viewer_state: {
       is_new:
@@ -707,8 +706,6 @@ export default function NexusScreen({ navigation }) {
           views: Number(item?.metrics?.views || item?.views || 0) || 0,
           resonances:
             Number(item?.metrics?.resonances || item?.resonances || 0) || 0,
-          discoveries:
-            Number(item?.metrics?.discoveries || item?.discoveries || 0) || 0,
         });
         return;
       }
@@ -723,7 +720,6 @@ export default function NexusScreen({ navigation }) {
       try {
         const detail = await getNexusReflectionDetail(qInstanceId, {
           markViewed: true,
-          includeMyDiscoveryLatest: false,
         });
         setDetailData(detail && typeof detail === "object" ? detail : null);
         setReflectionState((prev) => ({
@@ -740,7 +736,6 @@ export default function NexusScreen({ navigation }) {
                     resonances:
                       Number(detail?.resonances || row?.metrics?.resonances || 0) ||
                       0,
-                    discoveries: 0,
                   },
                 };
               })
@@ -753,7 +748,6 @@ export default function NexusScreen({ navigation }) {
           body: item?.body || "",
           views: Number(item?.metrics?.views || 0) || 0,
           resonances: Number(item?.metrics?.resonances || 0) || 0,
-          discoveries: 0,
         });
       } finally {
         setDetailLoading(false);
@@ -1659,34 +1653,6 @@ function createStyles(COLORS, ui) {
           color: COLORS.TEXT_SUBTLE,
           marginRight: 12,
           marginBottom: 4,
-        },
-        detailDiscoveryCard: {
-          marginTop: 14,
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.PANEL_BG,
-          paddingHorizontal: 12,
-          paddingVertical: 12,
-        },
-        detailDiscoveryLabel: {
-          fontSize: 12,
-          lineHeight: 18,
-          fontWeight: "800",
-          color: COLORS.TITLE_GOLD,
-          marginBottom: 6,
-        },
-        detailDiscoveryText: {
-          fontSize: 13,
-          lineHeight: 20,
-          fontWeight: "700",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
-        detailDiscoveryMemo: {
-          marginTop: 6,
-          fontSize: font.description ?? 12,
-          lineHeight: 18,
-          color: text.description ?? COLORS.TEXT_SUBTLE,
         },
         detailActionRow: {
           marginTop: 16,
