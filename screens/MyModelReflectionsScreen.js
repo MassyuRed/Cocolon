@@ -63,30 +63,13 @@ const API_BASE = String(
 // Echoes / Discoveries (MashOS)
 const QNA_ECHOES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/submit`;
 const QNA_ECHOES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/history`;
-const QNA_DISCOVERIES_SUBMIT_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/submit`;
-const QNA_DISCOVERIES_HISTORY_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/history`;
 const QNA_ECHOES_DELETE_ENDPOINT = `${API_BASE}/mymodel/qna/echoes/delete`;
-const QNA_DISCOVERIES_DELETE_ENDPOINT = `${API_BASE}/mymodel/qna/discoveries/delete`;
-
-const SORT_PRESET = Object.freeze({
-  newest: { sort: "newest" },
-  resonances: { sort: "popular", metric: "resonances" },
-  discoveries: { sort: "popular", metric: "discoveries" },
-});
 
 // Echoes / Discoveries UI labels (UI語彙は人間思考)
 const ECHO_STRENGTH_OPTIONS = Object.freeze([
   { key: "small", label: "静かに響いた", subLabel: "響き（小）" },
   { key: "medium", label: "心が動いた", subLabel: "響き（中）" },
   { key: "large", label: "深く響いた", subLabel: "響き（大）" },
-]);
-
-const DISCOVERY_CATEGORY_OPTIONS = Object.freeze([
-  { key: "new_perspective", label: "新しい視点だった" },
-  { key: "different_fun", label: "自分と違って面白い" },
-  { key: "well_worded", label: "言語化がすごい" },
-  { key: "not_sorted", label: "まだ整理できない" },
-  { key: "shocked", label: "衝撃を受けた" },
 ]);
 
 const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
@@ -107,7 +90,6 @@ const TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
     tutorial_kind: "mock",
     created_at: "2026-01-01T09:00:00.000Z",
     resonances: 4,
-    discoveries: 2,
     views: 12,
     is_new: true,
   },
@@ -127,12 +109,10 @@ function buildErrorMessage(err) {
   return `エラー：${msg}`;
 }
 
-
 function formatMetricCount(value) {
   const n = Number(value ?? 0) || 0;
   return n > 999 ? "999+" : String(n);
 }
-
 
 // navigation の state を再帰的に探索して、指定 routeName が存在するか確認
 export default function MyModelReflectionsScreen({ route, onOpenSubscription, onTabUnreadChange } = {}) {
@@ -166,7 +146,6 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
   const modalLastScrollRef = useRef(null);
 
   const echoesModalScrollRef = useRef(null);
-  const discoveryModalScrollRef = useRef(null);
 
   const scrollToFocusedInput = useCallback((extraOffset = 110) => {
     const sv = modalLastScrollRef.current;
@@ -280,7 +259,7 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
 
   // --- UI state ---
   const [pickerVisible, setPickerVisible] = useState(false);
-  const [sortMode, setSortMode] = useState("newest"); // newest | resonances | discoveries
+  const [sortMode, setSortMode] = useState("newest"); // newest | resonances
 
   const [listLoading, setListLoading] = useState(false);
   const [listError, setListError] = useState("");
@@ -303,24 +282,6 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
   const [echoesMemoContentHeight, setEchoesMemoContentHeight] = useState(44);
   const [echoesSubmitting, setEchoesSubmitting] = useState(false);
   const [echoesSubmitError, setEchoesSubmitError] = useState("");
-
-  // --- Discoveries (気づき) ---
-  const [discoveryModalVisible, setDiscoveryModalVisible] = useState(false);
-  const [discoveryCategory, setDiscoveryCategory] = useState(null);
-  const [discoveryMemo, setDiscoveryMemo] = useState("");
-  // 展開式メモ入力（InputScreen と同仕様）
-  const [discoveryMemoActive, setDiscoveryMemoActive] = useState(false);
-  const discoveryMemoInputRef = useRef(null);
-  const [discoveryMemoContentHeight, setDiscoveryMemoContentHeight] = useState(44);
-  const [discoverySubmitting, setDiscoverySubmitting] = useState(false);
-  const [discoveryDeleting, setDiscoveryDeleting] = useState(false);
-  const [discoverySubmitError, setDiscoverySubmitError] = useState("");
-
-  // My (viewer) latest Discovery for the selected Reflection
-  // - Used to show "発見済み" state and to prefill the modal in view mode.
-  const [myDiscoveryLatest, setMyDiscoveryLatest] = useState(null);
-  const [myDiscoveryLatestLoading, setMyDiscoveryLatestLoading] = useState(false);
-  const [myDiscoveryLatestError, setMyDiscoveryLatestError] = useState("");
 
   const tutorialBaseReflections = useMemo(() => {
     const safe = Array.isArray(tutorialReflections) ? tutorialReflections : [];
@@ -399,14 +360,6 @@ export default function MyModelReflectionsScreen({ route, onOpenSubscription, on
         return items.sort(
           (a, b) =>
             getMetric(b, "resonances") - getMetric(a, "resonances") ||
-            getDateScore(b?.created_at) - getDateScore(a?.created_at)
-        );
-      }
-
-      if (String(mode || "newest") === "discoveries") {
-        return items.sort(
-          (a, b) =>
-            getMetric(b, "discoveries") - getMetric(a, "discoveries") ||
             getDateScore(b?.created_at) - getDateScore(a?.created_at)
         );
       }
@@ -682,7 +635,6 @@ const resetToMain = useCallback(() => {
   setPickerVisible(false);
   setUserPickerVisible(false);
   setEchoesModalVisible(false);
-  setDiscoveryModalVisible(false);
   // clear detail selection
   setSelected(null);
 
@@ -690,13 +642,6 @@ const resetToMain = useCallback(() => {
   setEchoesStrength(null);
   setEchoesMemo("");
   setEchoesSubmitError("");
-  setDiscoveryCategory(null);
-  setDiscoveryMemo("");
-  setDiscoverySubmitError("");
-
-  setMyDiscoveryLatest(null);
-  setMyDiscoveryLatestLoading(false);
-  setMyDiscoveryLatestError("");
 
   // best-effort: stop spinners / clear fetched modal data
   setDetailLoading(false);
@@ -724,8 +669,7 @@ useEffect(() => {
           setPickerVisible(false);
       setUserPickerVisible(false);
       setEchoesModalVisible(false);
-      setDiscoveryModalVisible(false);
-    });
+        });
     return unsubscribe;
   }, [navigation]);
 
@@ -749,7 +693,6 @@ useEffect(() => {
       cancelled = true;
     };
   }, []);
-
 
   // 「MyModel：ユーザー名」表示用
   useEffect(() => {
@@ -806,7 +749,6 @@ useEffect(() => {
       cancelled = true;
     };
   }, [isTutorialMode, activeViewedUserId, viewerUserId, tutorialFollowingUsers]);
-
 
   const openSubscriptionSelect = () => {
     try {
@@ -931,7 +873,6 @@ useEffect(() => {
     },
     [isTutorialMode, onTabUnreadChange, setUnread]
   );
-
 
   // MyModel Home の Reflections NEW は screen-local 集計ではなく
   // server-owned unread-status を単独で再同期する。
@@ -1210,7 +1151,6 @@ useEffect(() => {
       const resetSeq = resetSeqRef.current;
       const qInstanceId = String(item.q_instance_id);
       const shouldRefreshUnread = !!item?.is_new;
-      const shouldIncludeMyDiscovery = false;
 
       setDetailLoadingId(qInstanceId);
       setDetailLoading(true);
@@ -1254,15 +1194,12 @@ useEffect(() => {
 
         const json = await getNexusReflectionDetailQna(qInstanceId, {
           markViewed: true,
-          includeMyDiscoveryLatest: shouldIncludeMyDiscovery,
         });
 
         if (resetSeq !== resetSeqRef.current) return;
 
         const nextSelected = {
           ...(json && typeof json === "object" ? json : {}),
-          my_discovery_latest_loaded:
-            shouldIncludeMyDiscovery || !!json?.my_discovery_latest_loaded,
         };
 
         setSelected(nextSelected);
@@ -1300,15 +1237,6 @@ useEffect(() => {
   );
 
   // ---------------------------------------------------------
-  // Discoveries は廃止済みのため、関連 state は常にクリアしておく
-  // ---------------------------------------------------------
-  useEffect(() => {
-    setMyDiscoveryLatest(null);
-    setMyDiscoveryLatestError("");
-    setMyDiscoveryLatestLoading(false);
-  }, [selected?.q_instance_id]);
-
-  // ---------------------------------------------------------
   // 履歴一覧から直接開かれた場合は、対象Reflectionを自動で表示する
   // ---------------------------------------------------------
   useEffect(() => {
@@ -1337,7 +1265,6 @@ useEffect(() => {
     isTutorialMode,
     viewerUserId,
   ]);
-
 
   // ---------------------------------------------------------
   // Echoes / Discoveries (UI -> MashOS API)
@@ -1918,386 +1845,6 @@ useEffect(() => {
     );
   }, [isTutorialMode, selected, closeEchoesModal, updateTutorialReflection]);
 
-  const openDiscoveryModal = useCallback((prefill = null) => {
-    const cat = prefill && typeof prefill === "object" ? prefill.category : null;
-    const memo = prefill && typeof prefill === "object" ? prefill.memo : "";
-
-    setDiscoveryCategory(cat || null);
-    setDiscoveryMemo(memo ? String(memo) : "");
-    setDiscoveryMemoActive(false);
-    setDiscoveryMemoContentHeight(44);
-    setDiscoverySubmitError("");
-    setDiscoveryModalVisible(true);
-  }, []);
-
-  const closeDiscoveryModal = useCallback(() => {
-    setDiscoveryModalVisible(false);
-    setDiscoveryCategory(null);
-    setDiscoveryMemo("");
-    setDiscoveryMemoActive(false);
-    setDiscoveryMemoContentHeight(44);
-    setDiscoverySubmitError("");
-  }, []);
-
-  const handleDiscoveryPress = useCallback(() => {
-    if (!selected?.q_instance_id) return;
-    if (myDiscoveryLatestLoading) return;
-
-    const already = !!(
-      myDiscoveryLatest &&
-      (myDiscoveryLatest.category || myDiscoveryLatest.id || myDiscoveryLatest.created_at)
-    );
-
-    if (already) {
-      openDiscoveryModal({
-        category: myDiscoveryLatest?.category || null,
-        memo: myDiscoveryLatest?.memo || "",
-      });
-      return;
-    }
-
-    openDiscoveryModal();
-  }, [selected, myDiscoveryLatest, myDiscoveryLatestLoading, openDiscoveryModal]);
-
-  const submitDiscovery = useCallback(async () => {
-    if (!selected?.q_instance_id) return;
-
-    const already = !!(
-      myDiscoveryLatest &&
-      (myDiscoveryLatest.category || myDiscoveryLatest.id || myDiscoveryLatest.created_at)
-    );
-    if (already) {
-      Alert.alert("保存済みです", "発見はすでに送信されています。必要なら一度解除してから保存してください。");
-      return;
-    }
-
-    if (!discoveryCategory) {
-      Alert.alert("カテゴリを選択してください", "気づきの種類を選んでから保存してください。");
-      return;
-    }
-
-    setDiscoverySubmitting(true);
-    setDiscoverySubmitError("");
-
-    try {
-      if (isTutorialMode) {
-        const qidNow = String(selected.q_instance_id);
-        const nextDiscovery = {
-          id: `tutorial-discovery-${Date.now()}`,
-          category: String(discoveryCategory),
-          memo: discoveryMemo ? String(discoveryMemo) : null,
-          created_at: new Date().toISOString(),
-        };
-
-        setSelected((prev) => {
-          if (!prev) return prev;
-          if (String(prev.q_instance_id) !== qidNow) return prev;
-
-          const before =
-            Number(
-              prev?.discoveries ??
-                prev?.discoveries_count ??
-                prev?.discovery_count ??
-                prev?.discoveryCount ??
-                0
-            ) || 0;
-
-          return {
-            ...prev,
-            discoveries: before + 1,
-            tutorial_my_discovery: nextDiscovery,
-          };
-        });
-
-        setQnaItems((prev) =>
-          (prev || []).map((x) => {
-            if (String(x?.q_instance_id || "") !== qidNow) return x;
-            const before =
-              Number(
-                x?.discoveries ??
-                  x?.discoveries_count ??
-                  x?.discovery_count ??
-                  x?.discoveryCount ??
-                  0
-              ) || 0;
-            return {
-              ...x,
-              discoveries: before + 1,
-              tutorial_my_discovery: nextDiscovery,
-            };
-          })
-        );
-
-        updateTutorialReflection(qidNow, (prev) => {
-          const before =
-            Number(
-              prev?.discoveries ??
-                prev?.discoveries_count ??
-                prev?.discovery_count ??
-                prev?.discoveryCount ??
-                0
-            ) || 0;
-          return {
-            ...prev,
-            discoveries: before + 1,
-            tutorial_my_discovery: nextDiscovery,
-          };
-        });
-
-        setMyDiscoveryLatest(nextDiscovery);
-        closeDiscoveryModal();
-        Alert.alert("チュートリアルに保存しました", "この発見はチュートリアル用の記録です。");
-        return;
-      }
-
-      const { userId, accessToken } = await getAuthContext();
-      if (!accessToken) {
-        Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-        return;
-      }
-
-      const res = await apiFetch(QNA_DISCOVERIES_SUBMIT_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          q_instance_id: String(selected.q_instance_id),
-          q_key: String(selected.q_key || ""),
-          category: String(discoveryCategory),
-          memo: discoveryMemo ? String(discoveryMemo) : null,
-        }),
-      });
-
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-        throw new Error(String(msg));
-      }
-
-      const qidNow = String(selected.q_instance_id);
-
-      setSelected((prev) => {
-        if (!prev) return prev;
-        if (String(prev.q_instance_id) !== qidNow) return prev;
-
-        const before =
-          Number(
-            prev?.discoveries ??
-              prev?.discoveries_count ??
-              prev?.discovery_count ??
-              prev?.discoveryCount ??
-              0
-          ) || 0;
-
-        return {
-          ...prev,
-          discoveries: before + 1,
-        };
-      });
-
-      setQnaItems((prev) =>
-        (prev || []).map((x) => {
-          if (String(x?.q_instance_id) !== qidNow) return x;
-          const before =
-            Number(
-              x?.discoveries ??
-                x?.discoveries_count ??
-                x?.discovery_count ??
-                x?.discoveryCount ??
-                0
-            ) || 0;
-          return {
-            ...x,
-            discoveries: before + 1,
-          };
-        })
-      );
-
-      // "済み" 状態にする（前回入力の表示用）
-      setMyDiscoveryLatest({
-        id: `local_${Date.now()}`,
-        category: String(discoveryCategory),
-        memo: discoveryMemo ? String(discoveryMemo) : null,
-        created_at: new Date().toISOString(),
-      });
-
-      closeDiscoveryModal();
-      Alert.alert("保存しました", "気づきを記録しました。");
-    } catch (e) {
-      setDiscoverySubmitError(buildErrorMessage(e));
-    } finally {
-      setDiscoverySubmitting(false);
-    }
-  }, [
-    isTutorialMode,
-    selected,
-    myDiscoveryLatest,
-    discoveryCategory,
-    discoveryMemo,
-    closeDiscoveryModal,
-    updateTutorialReflection,
-  ]);
-
-  const confirmDeleteDiscovery = useCallback(() => {
-    if (!selected?.q_instance_id) return;
-
-    if (isTutorialMode) {
-      Alert.alert(
-        "発見を解除しますか？",
-        "Discoveriesは削除されます。この操作は元に戻せません。",
-        [
-          { text: "キャンセル", style: "cancel" },
-          {
-            text: "削除する",
-            style: "destructive",
-            onPress: () => {
-              (async () => {
-                setDiscoveryDeleting(true);
-                setDiscoverySubmitError("");
-                try {
-                  const qidNow = String(selected.q_instance_id);
-                  const nextDiscoveries = Math.max(
-                    0,
-                    Number(
-                      selected?.discoveries ??
-                        selected?.discoveries_count ??
-                        selected?.discovery_count ??
-                        selected?.discoveryCount ??
-                        0
-                    ) - 1
-                  );
-
-                  setSelected((prev) => {
-                    if (!prev) return prev;
-                    if (String(prev.q_instance_id) !== qidNow) return prev;
-                    return {
-                      ...prev,
-                      discoveries: nextDiscoveries,
-                      tutorial_my_discovery: null,
-                    };
-                  });
-
-                  setQnaItems((prev) =>
-                    (prev || []).map((x) => {
-                      if (String(x?.q_instance_id || "") !== qidNow) return x;
-                      return {
-                        ...x,
-                        discoveries: nextDiscoveries,
-                        tutorial_my_discovery: null,
-                      };
-                    })
-                  );
-
-                  updateTutorialReflection(qidNow, (prev) => ({
-                    ...prev,
-                    discoveries: nextDiscoveries,
-                    tutorial_my_discovery: null,
-                  }));
-
-                  // "済み" 状態を解除
-                  setMyDiscoveryLatest(null);
-                  setMyDiscoveryLatestError("");
-
-                  closeDiscoveryModal();
-                  Alert.alert("解除しました", "チュートリアル発見を解除しました。");
-                } catch (e) {
-                  setDiscoverySubmitError(buildErrorMessage(e));
-                } finally {
-                  setDiscoveryDeleting(false);
-                }
-              })();
-            },
-          },
-        ]
-      );
-      return;
-    }
-
-    Alert.alert(
-      "発見を解除しますか？",
-      "Discoveriesは削除されます。この操作は元に戻せません。",
-      [
-        { text: "キャンセル", style: "cancel" },
-        {
-          text: "削除する",
-          style: "destructive",
-          onPress: () => {
-            (async () => {
-              setDiscoveryDeleting(true);
-              setDiscoverySubmitError("");
-              try {
-                const { accessToken } = await getAuthContext();
-                if (!accessToken) {
-                  Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-                  return;
-                }
-
-                const qidNow = String(selected.q_instance_id);
-
-                const res = await apiFetch(QNA_DISCOVERIES_DELETE_ENDPOINT, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
-                  },
-                  body: JSON.stringify({
-                    q_instance_id: qidNow,
-                    q_key: String(selected.q_key || ""),
-                  }),
-                });
-
-                const json = await res.json().catch(() => ({}));
-                if (!res.ok) {
-                  const msg = json?.detail || json?.message || `HTTP ${res.status}`;
-                  throw new Error(String(msg));
-                }
-
-                if (typeof json?.discoveries !== "number") {
-                  throw new Error("サーバー応答が不正です（discoveries）");
-                }
-
-                const nextDiscoveries = json.discoveries;
-
-                setSelected((prev) => {
-                  if (!prev) return prev;
-                  if (String(prev.q_instance_id) !== qidNow) return prev;
-                  return {
-                    ...prev,
-                    discoveries: nextDiscoveries,
-                  };
-                });
-
-                setQnaItems((prev) =>
-                  (prev || []).map((x) => {
-                    if (String(x?.q_instance_id) !== qidNow) return x;
-                    return {
-                      ...x,
-                      discoveries: nextDiscoveries,
-                    };
-                  })
-                );
-
-                // "済み" 状態を解除
-                setMyDiscoveryLatest(null);
-                setMyDiscoveryLatestError("");
-
-                closeDiscoveryModal();
-                Alert.alert("解除しました", "発見を解除しました。");
-              } catch (e) {
-                setDiscoverySubmitError(buildErrorMessage(e));
-              } finally {
-                setDiscoveryDeleting(false);
-              }
-            })();
-          },
-        },
-      ]
-    );
-  }, [isTutorialMode, selected, closeDiscoveryModal, updateTutorialReflection]);
-
-
   const isDark = themeName === "dark";
 
   const isSelfTarget =
@@ -2305,10 +1852,6 @@ useEffect(() => {
     (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
 
   const isResonatedNow = !!(selected?.is_resonated ?? selected?.resonated);
-  const isDiscoveredNow = !!(
-    myDiscoveryLatest &&
-    (myDiscoveryLatest.category || myDiscoveryLatest.id || myDiscoveryLatest.created_at)
-  );
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
@@ -2982,218 +2525,6 @@ useEffect(() => {
         </View>
       </Modal>
 
-      {/* Discoveries submit modal */}
-      <Modal
-        visible={discoveryModalVisible}
-        animationType="fade"
-        transparent
-        onRequestClose={closeDiscoveryModal}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalCard}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Discoveries</Text>
-              <Pressable onPress={closeDiscoveryModal} style={styles.modalCloseBtn}>
-                <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
-              </Pressable>
-            </View>
-
-            <ScrollView
-              ref={discoveryModalScrollRef}
-              style={styles.listArea}
-              contentContainerStyle={{ paddingBottom: 24 + keyboardInset }}
-              keyboardShouldPersistTaps="handled"
-            >
-              <Text style={styles.modalDescText}>このPieceから、どんな気づきがありましたか？</Text>
-
-              <View style={{ marginTop: 6 }}>
-                {(DISCOVERY_CATEGORY_OPTIONS || []).map((opt) => {
-                  const active = discoveryCategory === opt.key;
-                  return (
-                    <Pressable
-                      key={opt.key}
-                      onPress={() => setDiscoveryCategory(opt.key)}
-                      style={[
-                        styles.choiceCard,
-                        active && styles.choiceCardActive,
-                      ]}
-                      disabled={discoverySubmitting || discoveryDeleting || isDiscoveredNow}
-                    >
-                      <View style={styles.choiceTitleRow}>
-                        <Text
-                          style={[
-                            styles.choiceTitle,
-                            active && styles.choiceTitleActive,
-                          ]}
-                        >
-                          {opt.label}
-                        </Text>
-                      </View>
-                    </Pressable>
-                  );
-                })}
-              </View>
-
-              <View style={{ marginTop: 10 }}>
-                <Text style={styles.inputLabel}>気づいたこと・考えたこと（任意）</Text>
-
-                {discoveryMemoActive ? (
-                  <View style={[styles.memoCard, styles.memoCardExpanded]}>
-                    <TextInput
-                      ref={discoveryMemoInputRef}
-                      style={[
-                        styles.memoInput,
-                        {
-                          flex: 0,
-                          width: "100%",
-                          height: Math.min(
-                            Math.max(discoveryMemoContentHeight || 44, 44),
-                            inputMaxHeight
-                          ),
-                        },
-                      ]}
-                      placeholder="何に気づいたか、なぜそう思ったかを書いてください。"
-                      {...(isIOS ? { defaultValue: discoveryMemo } : { value: discoveryMemo })}
-                      onChangeText={setDiscoveryMemo}
-                      {...(isIOS
-                        ? {
-                            onChange: (e) =>
-                              setDiscoveryMemo(e?.nativeEvent?.text ?? ""),
-                          }
-                        : {})}
-                      multiline
-                      scrollEnabled
-                      textAlignVertical="top"
-                      placeholderTextColor={colors.TEXT_ON_LIGHT}
-                      editable={!isDiscoveredNow && !discoverySubmitting && !discoveryDeleting}
-                      showSoftInputOnFocus={!isDiscoveredNow && !discoverySubmitting && !discoveryDeleting}
-                      onFocus={(e) => {
-                        modalLastScrollRef.current = discoveryModalScrollRef.current;
-                        modalLastFocusTargetRef.current =
-                          e?.target ?? e?.nativeEvent?.target ?? null;
-                        requestAnimationFrame(() => scrollToFocusedInput());
-                      }}
-                      onBlur={() => {
-                        modalLastScrollRef.current = null;
-                        modalLastFocusTargetRef.current = null;
-                        setDiscoveryMemoActive(false);
-                      }}
-                      onContentSizeChange={(e) => {
-                        const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                        if (h) setDiscoveryMemoContentHeight(h);
-                        requestAnimationFrame(() => scrollToFocusedInput());
-                      }}
-                    />
-                  </View>
-                ) : (
-                  <CocolonPressable
-                    style={[styles.memoCard, styles.memoCardCollapsed]}
-                    onPress={() => {
-                      setDiscoveryMemoActive(true);
-                      setTimeout(() => {
-                        try {
-                          discoveryMemoInputRef.current?.focus?.();
-                        } catch {
-                          // noop
-                        }
-                      }, 50);
-                    }}
-                    accessibilityLabel="Discoveriesで気づいたことを入力する"
-                  >
-                    <View style={styles.collapsedRow}>
-                      <View style={styles.collapsedLeft}>
-                        <Ionicons
-                          name="create-outline"
-                          size={18}
-                          color={colors.TEXT_SUBTLE}
-                          style={{ marginRight: 8 }}
-                        />
-                        <Text
-                          style={[
-                            styles.collapsedText,
-                            !(discoveryMemo && discoveryMemo.trim().length > 0) &&
-                              styles.collapsedTextPlaceholder,
-                          ]}
-                          numberOfLines={1}
-                        >
-                          {discoveryMemo && discoveryMemo.trim().length > 0
-                            ? discoveryMemo.replace(/\s+/g, " ").trim()
-                            : "何に気づいたか、なぜそう思ったかを書いてください。"}
-                        </Text>
-                      </View>
-                      <Ionicons
-                        name="chevron-down"
-                        size={18}
-                        color={colors.TEXT_SUBTLE}
-                      />
-                    </View>
-                  </CocolonPressable>
-                )}
-              </View>
-
-              {discoverySubmitError ? (
-                <Text style={styles.modeErrorText}>{discoverySubmitError}</Text>
-              ) : null}
-
-              <CocolonButton
-                variant="primary"
-                style={[
-                  { marginTop: 14 },
-                  (!discoveryCategory || discoverySubmitting || discoveryDeleting || isDiscoveredNow) && {
-                    opacity: 0.7,
-                  },
-                ]}
-                onPress={submitDiscovery}
-                disabled={!discoveryCategory || discoverySubmitting || discoveryDeleting || isDiscoveredNow}
-              >
-                <View style={styles.btnRow}>
-                  {discoverySubmitting ? (
-                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
-                  ) : (
-                    <Ionicons
-                      name={isDiscoveredNow ? "checkmark" : "save-outline"}
-                      size={16}
-                      color="#FFFFFF"
-                      style={{ marginRight: 6 }}
-                    />
-                  )}
-                  <Text style={styles.goldButtonText}>
-                    {isDiscoveredNow ? "保存済み" : "保存"}
-                  </Text>
-                </View>
-              </CocolonButton>
-
-              <CocolonButton
-                variant="secondary"
-                style={[
-                  styles.historyBtn,
-                  { marginTop: 10 },
-                  (discoverySubmitting || discoveryDeleting) && { opacity: 0.7 },
-                ]}
-                onPress={confirmDeleteDiscovery}
-                disabled={discoverySubmitting || discoveryDeleting}
-              >
-                <View style={styles.btnRow}>
-                  {discoveryDeleting ? (
-                    <ActivityIndicator color="#B91C1C" style={{ marginRight: 8 }} />
-                  ) : (
-                    <Ionicons
-                      name="trash-outline"
-                      size={16}
-                      color="#B91C1C"
-                      style={{ marginRight: 6 }}
-                    />
-                  )}
-                  <Text style={[styles.historyBtnText, { color: "#B91C1C" }]}>
-                    発見を解除
-                  </Text>
-                </View>
-              </CocolonButton>
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
-
       <TutorialOverlay
         visible={
           !!isTutorialMode &&
@@ -3654,23 +2985,6 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
     },
-    discoveryBtn: {
-      paddingHorizontal: 14,
-      paddingVertical: 10,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      alignItems: "center",
-      justifyContent: "center",
-      minWidth: 78,
-    },
-    discoveryBtnText: {
-      fontSize: 12,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
-    },
-
     historyBtn: {
       paddingHorizontal: 12,
       paddingVertical: 10,
@@ -3795,7 +3109,6 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
       textAlignVertical: "top",
     },
-
 
     // Error text (re-using old naming)
     modeErrorText: {
