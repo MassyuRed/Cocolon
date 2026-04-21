@@ -31,34 +31,16 @@ export default function RankingMyModelMenuScreen({ navigation }) {
       <MyModelSubHeader title="Piece" onBack={handleBack} />
 
       <MyModelDescription>
-        Pieceに関するランキングを選んでください。
+        Pieceの公開面では、共鳴数を canonical ranking として扱います。
       </MyModelDescription>
 
-      <MyModelMediumCard
-        title="Pieceランキング"
-        description="Pieceのランキングを確認します"
-        onPress={() => navigation?.navigate?.("RankingMyModelQuestions")}
-        chevron="forward"
-        accessibilityLabel="Pieceランキングを開く"
-      />
-
-      <View style={{ marginTop: 12 }}>
+      <View>
         <MyModelMediumCard
           title="共鳴数ランキング"
           description="共鳴数のランキングを確認します"
           onPress={() => navigation?.navigate?.("RankingMyModelResonances")}
           chevron="forward"
           accessibilityLabel="共鳴数ランキングを開く"
-        />
-      </View>
-
-      <View style={{ marginTop: 12 }}>
-        <MyModelMediumCard
-          title="発見数ランキング"
-          description="発見数のランキングを確認します"
-          onPress={() => navigation?.navigate?.("RankingMyModelDiscoveries")}
-          chevron="forward"
-          accessibilityLabel="発見数ランキングを開く"
         />
       </View>
     </MyModelMenuScroll>

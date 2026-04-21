@@ -28,20 +28,17 @@ import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
-import { useAuth } from "../AuthContext";
 import { useTutorial } from "../TutorialContext";
 import { useUnread } from "../UnreadContext";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import {
-  getNexusDiscoveriesReflections,
   getNexusEchoesReflections,
   getNexusEmotionLog,
   getNexusEmotionLogUnreadStatus,
   getNexusEmotionRanking,
   getNexusRecommendUsers,
-  getNexusFollowingUsers,
   getNexusReflectionDetail,
   getNexusReflections,
   getNexusReflectionsUnreadStatus,
@@ -59,13 +56,6 @@ const TABS = [
 const MYMODEL_TUTORIAL_STEP_START = 12;
 const MYMODEL_TUTORIAL_STEP_END = 15;
 const TUTORIAL_TOTAL_STEPS = 21;
-
-const OWNER_FILTER_ALL = "all";
-const OWNER_FILTER_SELF = "self";
-const OWNER_FILTER_USER = "user";
-
-const REFLECTION_ORDER_LATEST = "latest";
-const REFLECTION_ORDER_OLDEST = "oldest";
 
 const STRENGTH_LABEL = {
   weak: "弱",
@@ -162,36 +152,6 @@ function normalizeRecommendUsers(json) {
       ).trim() || "ユーザー",
     friendCode: String(user?.friend_code || "").trim() || null,
   }));
-}
-
-function normalizeFollowListUsers(json) {
-  const rows = Array.isArray(json?.rows)
-    ? json.rows
-    : Array.isArray(json?.users)
-    ? json.users
-    : Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json)
-    ? json
-    : [];
-
-  const deduped = new Map();
-  rows.forEach((row, index) => {
-    const id = String(row?.id || row?.user_id || `follow-user-${index}`).trim();
-    if (!id || deduped.has(id)) return;
-
-    deduped.set(id, {
-      id,
-      displayName:
-        String(
-          row?.display_name || row?.name || row?.friend_code || row?.myprofile_code || "ユーザー"
-        ).trim() || "ユーザー",
-      friendCode:
-        String(row?.friend_code || row?.myprofile_code || "").trim() || null,
-    });
-  });
-
-  return Array.from(deduped.values());
 }
 
 function normalizeSavedReflections(json) {
@@ -301,7 +261,6 @@ function resolveReflectionsRouteName(navigation) {
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
-  const { user, initializing: authInitializing } = useAuth();
   const { getFeatureUnread, setUnread } = useUnread();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -327,14 +286,6 @@ export default function NexusScreen({ navigation }) {
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
 
   const [activeTab, setActiveTab] = useState("reflection");
-  const [historyMode, setHistoryMode] = useState("echoes");
-  const viewerUserId = String(user?.id || "").trim() || null;
-  const [ownerFilterMode, setOwnerFilterMode] = useState(OWNER_FILTER_ALL);
-  const [ownerFilterUserId, setOwnerFilterUserId] = useState(null);
-  const [ownerPickerVisible, setOwnerPickerVisible] = useState(false);
-  const [ownerOptionsLoading, setOwnerOptionsLoading] = useState(false);
-  const [ownerOptions, setOwnerOptions] = useState([]);
-  const [reflectionOrder, setReflectionOrder] = useState(REFLECTION_ORDER_LATEST);
 
   const tutorialReflectionItems = useMemo(
     () => normalizeTutorialReflectionItems(tutorialReflections),
@@ -367,52 +318,12 @@ export default function NexusScreen({ navigation }) {
     loading: false,
     loadedModes: {},
     echoes: [],
-    discoveries: [],
     error: "",
   });
 
   const [detailVisible, setDetailVisible] = useState(false);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailData, setDetailData] = useState(null);
-
-  const selectedOwnerOption = useMemo(() => {
-    if (ownerFilterMode === OWNER_FILTER_SELF && viewerUserId) {
-      return (
-        ownerOptions.find(
-          (option) => option?.mode === OWNER_FILTER_SELF && option?.userId === viewerUserId
-        ) || { mode: OWNER_FILTER_SELF, label: "自分", userId: viewerUserId }
-      );
-    }
-    if (ownerFilterMode === OWNER_FILTER_USER && ownerFilterUserId) {
-      return ownerOptions.find(
-        (option) => option?.mode === OWNER_FILTER_USER && option?.userId === ownerFilterUserId
-      );
-    }
-    return (
-      ownerOptions.find((option) => option?.mode === OWNER_FILTER_ALL) ||
-      { mode: OWNER_FILTER_ALL, label: "すべて", userId: null }
-    );
-  }, [ownerFilterMode, ownerFilterUserId, ownerOptions, viewerUserId]);
-
-  const selectedOwnerLabel = useMemo(() => {
-    if (selectedOwnerOption?.label) return selectedOwnerOption.label;
-    if (ownerFilterMode === OWNER_FILTER_SELF) return "自分";
-    if (ownerFilterMode === OWNER_FILTER_USER) return "ユーザー";
-    return "すべて";
-  }, [ownerFilterMode, selectedOwnerOption]);
-
-  const reflectionEmptyText = useMemo(() => {
-    if (ownerFilterMode === OWNER_FILTER_SELF) {
-      return "自分のPieceはまだありません。";
-    }
-    if (ownerFilterMode === OWNER_FILTER_USER) {
-      return `${selectedOwnerLabel}のPieceはまだありません。`;
-    }
-    return "Pieceはまだありません。";
-  }, [ownerFilterMode, selectedOwnerLabel]);
-
-  const showReflectionControls =
-    !isTutorialMode && activeTab === "reflection" && !!viewerUserId;
 
   const prefetchedReflectionUnread = !!getFeatureUnread("MyModel", "reflectionsNew");
   const prefetchedEmotionLogUnread = !!getFeatureUnread("EmotionLog", "feed");
@@ -497,59 +408,6 @@ export default function NexusScreen({ navigation }) {
     ]);
   }, [refreshEmotionLogUnreadState, refreshReflectionUnreadState]);
 
-  const loadOwnerOptions = useCallback(async () => {
-    if (isTutorialMode) {
-      setOwnerOptions([]);
-      setOwnerOptionsLoading(false);
-      return;
-    }
-    if (authInitializing) return;
-    if (!viewerUserId) {
-      setOwnerOptions([]);
-      setOwnerOptionsLoading(false);
-      return;
-    }
-
-    const baseOptions = [
-      {
-        key: OWNER_FILTER_ALL,
-        mode: OWNER_FILTER_ALL,
-        label: "すべて",
-        userId: null,
-        friendCode: null,
-      },
-      {
-        key: `self:${viewerUserId}`,
-        mode: OWNER_FILTER_SELF,
-        label: "自分",
-        userId: viewerUserId,
-        friendCode: null,
-      },
-    ];
-
-    setOwnerOptionsLoading(true);
-    try {
-      const json = await getNexusFollowingUsers(viewerUserId, 1000);
-      const users = normalizeFollowListUsers(json).filter(
-        (item) => String(item?.id || "").trim() && String(item?.id || "").trim() !== viewerUserId
-      );
-      setOwnerOptions([
-        ...baseOptions,
-        ...users.map((item) => ({
-          key: `user:${item.id}`,
-          mode: OWNER_FILTER_USER,
-          label: item.displayName,
-          userId: item.id,
-          friendCode: item.friendCode,
-        })),
-      ]);
-    } catch (e) {
-      console.warn("NexusScreen: loadOwnerOptions failed", e);
-      setOwnerOptions(baseOptions);
-    } finally {
-      setOwnerOptionsLoading(false);
-    }
-  }, [authInitializing, isTutorialMode, viewerUserId]);
 
   const loadRanking = useCallback(async () => {
     if (isTutorialMode) {
@@ -578,32 +436,14 @@ export default function NexusScreen({ navigation }) {
       });
       return;
     }
-    if (authInitializing) return;
-    if (!viewerUserId) {
-      setReflectionState({
-        loading: false,
-        items: [],
-        error: "",
-      });
-      return;
-    }
-
-    const params = {
-      sort: reflectionOrder,
-      limit: 20,
-    };
-
-    if (ownerFilterMode === OWNER_FILTER_SELF) {
-      params.user_id = viewerUserId;
-    } else if (ownerFilterMode === OWNER_FILTER_USER && ownerFilterUserId) {
-      params.user_id = ownerFilterUserId;
-    } else {
-      params.following_only = false;
-    }
 
     setReflectionState((prev) => ({ ...prev, loading: true, error: "" }));
     try {
-      const json = await getNexusReflections(params);
+      const json = await getNexusReflections({
+        sort: "latest",
+        limit: 20,
+        following_only: true,
+      });
       const items = Array.isArray(json?.items) ? json.items : [];
       setReflectionState({ loading: false, items, error: "" });
     } catch (e) {
@@ -614,15 +454,7 @@ export default function NexusScreen({ navigation }) {
         error: String(e?.message || "Pieceを読み込めませんでした。"),
       });
     }
-  }, [
-    authInitializing,
-    isTutorialMode,
-    ownerFilterMode,
-    ownerFilterUserId,
-    reflectionOrder,
-    tutorialReflectionItems,
-    viewerUserId,
-  ]);
+  }, [isTutorialMode, tutorialReflectionItems]);
 
   const loadEmotionLog = useCallback(async () => {
     if (isTutorialMode) {
@@ -687,8 +519,8 @@ export default function NexusScreen({ navigation }) {
   }, [isTutorialMode]);
 
   const loadHistory = useCallback(
-    async (mode) => {
-      const safeMode = mode === "discoveries" ? "discoveries" : "echoes";
+    async () => {
+      const safeMode = "echoes";
       if (isTutorialMode) {
         setHistoryState((prev) => ({
           ...prev,
@@ -702,10 +534,7 @@ export default function NexusScreen({ navigation }) {
 
       setHistoryState((prev) => ({ ...prev, loading: true, error: "" }));
       try {
-        const json =
-          safeMode === "discoveries"
-            ? await getNexusDiscoveriesReflections(20)
-            : await getNexusEchoesReflections(20);
+        const json = await getNexusEchoesReflections(20);
         const normalized = normalizeSavedReflections(json);
         setHistoryState((prev) => ({
           ...prev,
@@ -730,31 +559,8 @@ export default function NexusScreen({ navigation }) {
 
   useEffect(() => {
     void loadRanking();
-  }, [loadRanking]);
-
-  useEffect(() => {
-    if (activeTab === "reflection") {
-      void loadReflections();
-    }
-  }, [activeTab, loadReflections]);
-
-  useEffect(() => {
-    if (isTutorialMode || authInitializing || !viewerUserId) return;
-    void loadOwnerOptions();
-  }, [authInitializing, isTutorialMode, loadOwnerOptions, viewerUserId]);
-
-  useEffect(() => {
-    if (ownerFilterMode !== OWNER_FILTER_USER || !ownerFilterUserId || ownerOptionsLoading) {
-      return;
-    }
-    const exists = ownerOptions.some(
-      (option) => option?.mode === OWNER_FILTER_USER && option?.userId === ownerFilterUserId
-    );
-    if (!exists) {
-      setOwnerFilterMode(OWNER_FILTER_ALL);
-      setOwnerFilterUserId(null);
-    }
-  }, [ownerFilterMode, ownerFilterUserId, ownerOptions, ownerOptionsLoading]);
+    void loadReflections();
+  }, [loadRanking, loadReflections]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
@@ -843,14 +649,13 @@ export default function NexusScreen({ navigation }) {
     }
     if (
       activeTab === "history" &&
-      !historyState.loadedModes?.[historyMode] &&
+      !historyState.loadedModes?.echoes &&
       !historyState.loading
     ) {
-      void loadHistory(historyMode);
+      void loadHistory();
     }
   }, [
     activeTab,
-    historyMode,
     historyState.loadedModes,
     historyState.loading,
     loadHistory,
@@ -872,32 +677,6 @@ export default function NexusScreen({ navigation }) {
     },
     [isTutorialMode, navigation]
   );
-
-  const handleSelectOwnerOption = useCallback(
-    (option) => {
-      const nextMode = String(option?.mode || OWNER_FILTER_ALL).trim();
-      if (nextMode === OWNER_FILTER_SELF && viewerUserId) {
-        setOwnerFilterMode(OWNER_FILTER_SELF);
-        setOwnerFilterUserId(viewerUserId);
-      } else if (nextMode === OWNER_FILTER_USER && option?.userId) {
-        setOwnerFilterMode(OWNER_FILTER_USER);
-        setOwnerFilterUserId(String(option.userId));
-      } else {
-        setOwnerFilterMode(OWNER_FILTER_ALL);
-        setOwnerFilterUserId(null);
-      }
-      setOwnerPickerVisible(false);
-    },
-    [viewerUserId]
-  );
-
-  const handleSetReflectionOrder = useCallback((nextOrder) => {
-    const safeOrder =
-      nextOrder === REFLECTION_ORDER_OLDEST
-        ? REFLECTION_ORDER_OLDEST
-        : REFLECTION_ORDER_LATEST;
-    setReflectionOrder((prev) => (prev === safeOrder ? prev : safeOrder));
-  }, []);
 
   const handleOpenTutorialReflections = useCallback(() => {
     void ensureTutorialReflectionsSeed();
@@ -1134,111 +913,27 @@ export default function NexusScreen({ navigation }) {
       ));
     }
 
-    return (
-      <View>
-        {renderReflectionControls()}
-
-        {reflectionState.loading ? (
-          <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />
-        ) : reflectionState.error ? (
-          <Text style={styles.errorText}>{reflectionState.error}</Text>
-        ) : !Array.isArray(reflectionState.items) ||
-          reflectionState.items.length <= 0 ? (
-          <Text style={styles.emptyText}>{reflectionEmptyText}</Text>
-        ) : (
-          reflectionState.items.map((item) => (
-            <NexusReflectionCard
-              key={String(item?.q_instance_id || Math.random())}
-              item={item}
-              onPress={() => handleOpenReflection(item)}
-              onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
-            />
-          ))
-        )}
-      </View>
-    );
-  };
-
-  const renderReflectionControls = () => {
-    if (!showReflectionControls) return null;
-
-    return (
-      <View style={styles.reflectionControls}>
-        <Text style={styles.controlLabel}>表示ユーザー</Text>
-        <CocolonPressable
-          style={[
-            styles.ownerFilterButton,
-            ownerOptionsLoading && styles.ownerFilterButtonDisabled,
-          ]}
-          onPress={() => setOwnerPickerVisible(true)}
-          accessibilityLabel="表示ユーザーを選ぶ"
-        >
-          <View style={styles.ownerFilterButtonContent}>
-            <Text style={styles.ownerFilterButtonText} numberOfLines={1}>
-              {selectedOwnerLabel}
-            </Text>
-          </View>
-          {ownerOptionsLoading ? (
-            <ActivityIndicator
-              size="small"
-              color={colors.TITLE_GOLD}
-              style={styles.ownerFilterSpinner}
-            />
-          ) : (
-            <Ionicons
-              name="chevron-down"
-              size={18}
-              color={colors.TEXT_ON_LIGHT}
-              style={styles.ownerFilterChevron}
-            />
-          )}
-        </CocolonPressable>
-
-        <Text style={styles.controlLabel}>表示順</Text>
-        <View style={styles.reflectionSortRow}>
-          <CocolonPressable
-            style={[
-              styles.reflectionSortButton,
-              styles.reflectionSortButtonSpacer,
-              reflectionOrder === REFLECTION_ORDER_LATEST &&
-                styles.reflectionSortButtonActive,
-            ]}
-            onPress={() => handleSetReflectionOrder(REFLECTION_ORDER_LATEST)}
-            accessibilityLabel="新しい順で表示する"
-          >
-            <Text
-              style={[
-                styles.reflectionSortButtonText,
-                reflectionOrder === REFLECTION_ORDER_LATEST &&
-                  styles.reflectionSortButtonTextActive,
-              ]}
-            >
-              新しい順
-            </Text>
-          </CocolonPressable>
-
-          <CocolonPressable
-            style={[
-              styles.reflectionSortButton,
-              reflectionOrder === REFLECTION_ORDER_OLDEST &&
-                styles.reflectionSortButtonActive,
-            ]}
-            onPress={() => handleSetReflectionOrder(REFLECTION_ORDER_OLDEST)}
-            accessibilityLabel="古い順で表示する"
-          >
-            <Text
-              style={[
-                styles.reflectionSortButtonText,
-                reflectionOrder === REFLECTION_ORDER_OLDEST &&
-                  styles.reflectionSortButtonTextActive,
-              ]}
-            >
-              古い順
-            </Text>
-          </CocolonPressable>
-        </View>
-      </View>
-    );
+    if (reflectionState.loading) {
+      return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
+    }
+    if (reflectionState.error) {
+      return <Text style={styles.errorText}>{reflectionState.error}</Text>;
+    }
+    if (!Array.isArray(reflectionState.items) || reflectionState.items.length <= 0) {
+      return (
+        <Text style={styles.emptyText}>
+          フォロー中ユーザーのPieceはまだありません。
+        </Text>
+      );
+    }
+    return reflectionState.items.map((item) => (
+      <NexusReflectionCard
+        key={String(item?.q_instance_id || Math.random())}
+        item={item}
+        onPress={() => handleOpenReflection(item)}
+        onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
+      />
+    ));
   };
 
   const renderEmotionLogTab = () => {
@@ -1340,9 +1035,6 @@ export default function NexusScreen({ navigation }) {
     );
   };
 
-  const currentHistoryItems =
-    historyMode === "discoveries" ? historyState.discoveries : historyState.echoes;
-
   const renderHistoryTab = () => {
     if (historyState.loading && !historyState.loadedModes?.echoes) {
       return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
@@ -1413,11 +1105,10 @@ export default function NexusScreen({ navigation }) {
             onPress={() => {
               void refreshNexusUnreadState();
               void loadRanking();
-              void loadOwnerOptions();
               if (activeTab === "reflection") void loadReflections();
               if (activeTab === "emotion_log") void loadEmotionLog();
               if (activeTab === "recommend") void loadRecommend();
-              if (activeTab === "history") void loadHistory(historyMode);
+              if (activeTab === "history") void loadHistory();
             }}
             accessibilityLabel="Pieceを再読み込みする"
           >
@@ -1542,91 +1233,6 @@ export default function NexusScreen({ navigation }) {
       </ScrollView>
 
       <Modal
-        visible={ownerPickerVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setOwnerPickerVisible(false)}
-      >
-        <View style={styles.pickerBackdrop}>
-          <View style={styles.pickerCard}>
-            <View style={styles.pickerHeader}>
-              <Text style={styles.pickerTitle}>表示ユーザー</Text>
-            </View>
-
-            {ownerOptionsLoading && ownerOptions.length <= 0 ? (
-              <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />
-            ) : (
-              <ScrollView
-                style={styles.pickerScroll}
-                contentContainerStyle={styles.pickerScrollContent}
-                showsVerticalScrollIndicator={false}
-              >
-                {ownerOptions.map((option) => {
-                  const isActive =
-                    (option?.mode === OWNER_FILTER_ALL && ownerFilterMode === OWNER_FILTER_ALL) ||
-                    (option?.mode === OWNER_FILTER_SELF &&
-                      ownerFilterMode === OWNER_FILTER_SELF &&
-                      option?.userId === viewerUserId) ||
-                    (option?.mode === OWNER_FILTER_USER &&
-                      ownerFilterMode === OWNER_FILTER_USER &&
-                      option?.userId === ownerFilterUserId);
-
-                  return (
-                    <CocolonPressable
-                      key={String(option?.key || option?.label || Math.random())}
-                      style={[
-                        styles.pickerOption,
-                        isActive && styles.pickerOptionActive,
-                      ]}
-                      onPress={() => handleSelectOwnerOption(option)}
-                    >
-                      <View style={styles.pickerOptionTextWrap}>
-                        <Text
-                          style={[
-                            styles.pickerOptionText,
-                            isActive && styles.pickerOptionTextActive,
-                          ]}
-                        >
-                          {String(option?.label || "ユーザー")}
-                        </Text>
-                        {option?.friendCode ? (
-                          <Text
-                            style={[
-                              styles.pickerOptionMeta,
-                              isActive && styles.pickerOptionMetaActive,
-                            ]}
-                          >
-                            {option.friendCode}
-                          </Text>
-                        ) : null}
-                      </View>
-                      {isActive ? (
-                        <Ionicons
-                          name="checkmark"
-                          size={18}
-                          color={colors.ACCENT_TEXT}
-                        />
-                      ) : null}
-                    </CocolonPressable>
-                  );
-                })}
-              </ScrollView>
-            )}
-
-            <View style={styles.pickerActionRow}>
-              <CocolonButton
-                variant="secondary"
-                onPress={() => setOwnerPickerVisible(false)}
-                accessibilityLabel="表示ユーザー選択を閉じる"
-              >
-                閉じる
-              </CocolonButton>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
         visible={detailVisible}
         transparent
         animationType="fade"
@@ -1735,76 +1341,6 @@ function createStyles(COLORS, ui) {
           backgroundColor: COLORS.FIELD_BG,
           borderWidth: 1,
           borderColor: COLORS.CARD_BORDER,
-        },
-        reflectionControls: {
-          marginBottom: 14,
-        },
-        controlLabel: {
-          fontSize: 11,
-          fontWeight: "800",
-          letterSpacing: 0.3,
-          color: COLORS.TEXT_ON_LIGHT,
-          marginBottom: 6,
-        },
-        ownerFilterButton: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderRadius: 12,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 12,
-          paddingVertical: 10,
-          marginBottom: 10,
-        },
-        ownerFilterButtonContent: {
-          flex: 1,
-          paddingRight: 10,
-        },
-        ownerFilterButtonDisabled: {
-          opacity: 0.72,
-        },
-        ownerFilterButtonText: {
-          fontSize: 13,
-          fontWeight: "700",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
-        ownerFilterChevron: {
-          marginLeft: 8,
-        },
-        ownerFilterSpinner: {
-          marginLeft: 8,
-        },
-        reflectionSortRow: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
-        reflectionSortButton: {
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-        },
-        reflectionSortButtonSpacer: {
-          marginRight: 8,
-        },
-        reflectionSortButtonActive: {
-          backgroundColor: COLORS.BORDER_GOLD,
-          borderColor: COLORS.BORDER_GOLD,
-        },
-        reflectionSortButtonText: {
-          fontSize: 12,
-          fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
-        reflectionSortButtonTextActive: {
-          color: COLORS.ACCENT_TEXT,
         },
         todayOverallEmotionSummary: {
           paddingVertical: 8,
@@ -2058,86 +1594,6 @@ function createStyles(COLORS, ui) {
         },
         historySwitchTextActive: {
           color: COLORS.ACCENT_TEXT,
-        },
-        pickerBackdrop: {
-          flex: 1,
-          backgroundColor: "rgba(15, 23, 42, 0.38)",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingHorizontal: 24,
-        },
-        pickerCard: {
-          width: "100%",
-          maxWidth: 360,
-          maxHeight: 560,
-          borderRadius: 24,
-          borderWidth: 1,
-          borderColor: COLORS.BORDER_GOLD,
-          backgroundColor: COLORS.PANEL_BG,
-          paddingHorizontal: 20,
-          paddingTop: 20,
-          paddingBottom: 18,
-          shadowColor: "#000",
-          shadowOpacity: 0.18,
-          shadowRadius: 18,
-          shadowOffset: { width: 0, height: 10 },
-          elevation: 10,
-        },
-        pickerHeader: {
-          marginBottom: 12,
-        },
-        pickerTitle: {
-          fontSize: 20,
-          lineHeight: 28,
-          fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
-          textAlign: "center",
-        },
-        pickerScroll: {
-          width: "100%",
-        },
-        pickerScrollContent: {
-          paddingBottom: 4,
-        },
-        pickerOption: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 12,
-          marginBottom: 10,
-        },
-        pickerOptionActive: {
-          backgroundColor: COLORS.BORDER_GOLD,
-          borderColor: COLORS.BORDER_GOLD,
-        },
-        pickerOptionTextWrap: {
-          flex: 1,
-          paddingRight: 10,
-        },
-        pickerOptionText: {
-          fontSize: 14,
-          fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
-        pickerOptionTextActive: {
-          color: COLORS.ACCENT_TEXT,
-        },
-        pickerOptionMeta: {
-          marginTop: 4,
-          fontSize: 11,
-          color: COLORS.TEXT_SUBTLE,
-        },
-        pickerOptionMetaActive: {
-          color: COLORS.ACCENT_TEXT,
-        },
-        pickerActionRow: {
-          marginTop: 8,
-          width: "100%",
         },
         detailBackdrop: {
           flex: 1,

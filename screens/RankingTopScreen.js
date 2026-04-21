@@ -53,23 +53,6 @@ const RANKING_PREVIEWS = [
     valueKeys: ["total_chars", "chars", "value"],
   },
   {
-    key: "pieceGenerated",
-    icon: "help-circle-outline",
-    title: "Piece生成数ランキング",
-    endpoint: "/ranking/mymodel_questions",
-    range: "year",
-    routeName: "RankingMyModelQuestions",
-    valueKeys: [
-      "piece_generated_total",
-      "mymodel_questions_total",
-      "questions_total",
-      "question_total",
-      "question_count",
-      "count",
-      "value",
-    ],
-  },
-  {
     key: "resonances",
     icon: "heart-outline",
     title: "共鳴数ランキング",
