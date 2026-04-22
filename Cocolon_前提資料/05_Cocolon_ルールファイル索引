@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -22,6 +22,7 @@ purpose: "見落とすと構造誤読や contract 破壊を起こしやすい ru
 | `mashos-api/ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md` | RN/API 境界・display-only 原則 | national system と boundary を触る時 |
 | `mashos-api/ai/docs/TUTORIAL_STABILITY_REDESIGN.md` | tutorial 測定 / overlay / proxy press | tutorial を触る時 |
 | `mashos-api/scripts/check_no_direct_supabase.py` | RN からの direct Supabase / raw fetch 禁止 | frontend data access を触る時 |
+| `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md` | 三大要素の canonical owner / compat 隔離 / artifact-only 契約 | Piece / Analysis / EmlisAI の本流固定を触る時 |
 
 # 3. contract / regression を守る test 群
 
@@ -42,6 +43,9 @@ purpose: "見落とすと構造誤読や contract 破壊を起こしやすい ru
 - `access_policy/*` を使う read-side は route file で tier / visibility を再実装しない
 - `startup_snapshot_store.py` と `api_app_bootstrap.py` は startup 断面の中心としてペアで見る
 - `lib/api/client.js` / `lib/apiClient.js` は RN boundary の中心として見る
+- `piece_public_read_service.py` / `api_nexus.py` / `api_mymodel_qna.py` は Piece public read / compat の owner 契約としてペアで見る
+- `report_artifact_read_service.py` は report history/detail の共通 read owner であり、route file で storage/projection fallback を再実装しない
+- `emlis_ai_readers.py` / `input_summary_reader.py` / `analysis_summary_reader.py` は EmlisAI reader boundary であり、EmlisAI 側から route file を直接 import しない
 
 # 5. ProfileCreate / legacy 命名まわりの注意
 

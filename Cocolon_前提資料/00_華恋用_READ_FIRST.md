@@ -1,26 +1,26 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 140
-  mashos-api: 265
+  mashos-api: 275
 purpose: "華恋がこの資料だけで Cocolon の全体構造と国家システムを復元し、修正時に関連ファイル漏れを防ぐための運用資料"
 coverage:
-  total_files: 405
-  included_in_overall_structure: 352
-  included_in_national_system: 303
+  total_files: 415
+  included_in_overall_structure: 362
+  included_in_national_system: 313
   excluded_from_main_body: 53
 ---
 
 # これは何か
 
 この一式は **Mash 向けの説明資料ではなく、華恋が作業前提を引き継ぐための運用資料** です。  
-対象スナップショットは **Cocolon (140 files)** / **mashos-api (265 files)** の現行ローカル版です。
+対象スナップショットは **Cocolon (140 files)** / **mashos-api (275 files)** の現行ローカル版です。
 
 今回の基準面は次の通りです。
 
@@ -29,6 +29,7 @@ coverage:
 - `inventory` は作らない
 - 図は補助であり、正本は **各ファイルの本文ブロック** とする
 - 任意の 1 ファイルを起点に、関係ファイルを本文だけで辿れる状態を目指す
+- 三大要素の構造混在は **2026-04-22 時点で完了判定へ入った**。次段の主戦場は Home / Input / startup / social / subscription / App 全体接続の構造混在である
 
 # まず覚えること
 

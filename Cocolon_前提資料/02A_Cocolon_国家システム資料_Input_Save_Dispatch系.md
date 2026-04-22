@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1386,3 +1386,85 @@ revision_date: "2026-04-19"
   - `mashos-api/ai/services/ai_inference/response_microcache.py`
   - `mashos-api/ai/services/ai_inference/supabase_client.py`
 
+
+## A8. 2026-04-22 差分更新 (EmlisAI reader boundary)
+
+### 差分更新: `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+- repo: `mashos-api`
+- 国家システム区分: `Dispatch`
+- 現行状態: `active`
+- 国家システム上の役割: EmlisAI SourceBundle builder。route module ではなく `emlis_ai_readers.py` から canonical read payload を受ける。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_greeting_state_store.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_types.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py` — from import
+  - `mashos-api/ai/services/ai_inference/emotion_history_search_service.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+  - `mashos-api/ai/services/ai_inference/today_question_store.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_greeting_state_store.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_types.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py`
+  - `mashos-api/ai/services/ai_inference/emotion_history_search_service.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`
+  - `mashos-api/ai/services/ai_inference/today_question_store.py`
+
+### `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+- repo: `mashos-api`
+- 国家システム区分: `Dispatch`
+- 現行状態: `active`
+- 国家システム上の役割: EmlisAI 用の meaning-layer read adapter。input summary と Analysis summary artifact を route 非依存で引き渡す。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/analysis_summary_reader.py` — from import
+  - `mashos-api/ai/services/ai_inference/input_summary_reader.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+  - `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+
+### `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+- repo: `mashos-api`
+- 国家システム区分: `Dispatch`
+- 現行状態: `active`
+- 国家システム上の役割: canonical input summary snapshot を route file 非依存で読む reader。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/response_microcache.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+  - `mashos-api/ai/services/ai_inference/response_microcache.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`
+
+### `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+- repo: `mashos-api`
+- 国家システム区分: `Dispatch`
+- 現行状態: `active`
+- 国家システム上の役割: MyWeb home summary artifact を read-side owner 契約で読む reader。EmlisAI immediate reply と Analysis read の共通部。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/publish_governance.py` — from import
+  - `mashos-api/ai/services/ai_inference/response_microcache.py` — from import
+  - `mashos-api/ai/services/ai_inference/subscription.py` — from import
+  - `mashos-api/ai/services/ai_inference/subscription_store.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+  - `mashos-api/ai/services/ai_inference/publish_governance.py`
+  - `mashos-api/ai/services/ai_inference/response_microcache.py`
+  - `mashos-api/ai/services/ai_inference/subscription.py`
+  - `mashos-api/ai/services/ai_inference/subscription_store.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`

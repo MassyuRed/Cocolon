@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-04-19",
+  "revision_date": "2026-04-22",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,11 +7,11 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 140,
-    "mashos-api": 265
+    "mashos-api": 275
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 352,
-    "national_system_body_includes": 303,
+    "overall_structure_body_includes": 362,
+    "national_system_body_includes": 313,
     "excluded_from_main_body": 53,
     "inventory_removed": true,
     "coverage_principle": "01 には構造対象全件、02 には国家システム対象全件を本文で記載する"

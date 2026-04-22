@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -1927,3 +1927,50 @@ revision_date: "2026-04-19"
 - 落とすと漏れる関連ファイル:
   - なし
 
+
+## C6. 2026-04-22 差分更新 (compat / addendum / schema)
+
+### `mashos-api/ai/services/ai_inference/api_nexus_compat.py`
+- repo: `mashos-api`
+- 国家システム区分: `Boundary`
+- 現行状態: `active`
+- 国家システム上の役割: canonical public surface から外した discoveries route を 410 で隔離する compat route module。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/app.py` — from import
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/app.py`
+  - `mashos-api/ai/services/ai_inference/api_nexus.py`
+
+### `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md`
+- repo: `mashos-api`
+- 国家システム区分: `Contract`
+- 現行状態: `active`
+- 国家システム上の役割: 三大要素の canonical owner / compat 隔離 / artifact-only 契約を補強する addendum。
+- 上流:
+  - なし
+- 下流:
+  - `mashos-api/ai/services/ai_inference/api_nexus.py` — document reference
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py` — document reference
+  - `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py` — document reference
+  - `mashos-api/ai/services/ai_inference/api_myweb_reports.py` — document reference
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` — document reference
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_nexus.py`
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py`
+  - `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py`
+  - `mashos-api/ai/services/ai_inference/api_myweb_reports.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+
+### `mashos-api/ai/docs/emlis_ai_user_models.sql`
+- repo: `mashos-api`
+- 国家システム区分: `Boundary`
+- 現行状態: `active`
+- 国家システム上の役割: EmlisAI derived user model store の schema DDL。immediate reply observation kernel の永続化境界を拘束する。
+- 上流:
+  - なし
+- 下流:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py` — schema support
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py`

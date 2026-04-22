@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -69,3 +69,16 @@ purpose: "変更テーマから 01/02 の読む順を逆引きできるように
 - file block の **直接関係ファイル / 直接参照ファイル / 同時確認ファイル** を全部開く
 - national system に関係する変更は必ず `02` 系へ入る
 - route / request / response / startup / unread / entitlement を触る時は rule file と test を先に見る
+
+
+## 2-7. 三大要素完了反映後の next phase
+1. `07_Cocolon_最新スナップショット差分.md`
+2. `01A` の 2026-04-22 差分更新
+3. `01B` の 2026-04-22 差分更新
+4. `01C` の 2026-04-22 差分更新
+5. `02A` / `02B` / `02C` の 2026-04-22 差分更新
+6. `05_Cocolon_ルールファイル索引.md`
+
+補足:
+- 三大要素は完了判定へ入ったため、次段では Home / Input / startup / social / subscription / App 全体接続を主戦場とする
+- ただし triad 由来の canonical owner 契約 (`api_nexus.py`, `piece_public_read_service.py`, `report_artifact_read_service.py`, `emlis_ai_readers.py`) を前提に読む

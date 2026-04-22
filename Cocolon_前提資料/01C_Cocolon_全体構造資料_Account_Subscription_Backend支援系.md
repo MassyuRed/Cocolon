@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -3762,3 +3762,41 @@ revision_date: "2026-04-19"
 - 修正対象になりうる変更:
   - developer tooling / import/rename helper change
 
+
+## C9. 2026-04-22 差分更新 (support / rule docs)
+
+### `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md`
+- repo: `mashos-api`
+- system: `rule / policy document`
+- 現行状態: `active`
+- 役割: 三大要素の canonical owner / compat 隔離 / artifact-only 契約を固定する addendum。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/api_nexus.py` — document reference
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py` — document reference
+  - `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py` — document reference
+  - `mashos-api/ai/services/ai_inference/api_myweb_reports.py` — document reference
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` — document reference
+- このファイルを直接参照するファイル:
+  - なし
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/api_nexus.py`
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py`
+  - `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py`
+  - `mashos-api/ai/services/ai_inference/api_myweb_reports.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+- 修正対象になりうる変更:
+  - contract/rule file alignment
+
+### `mashos-api/ai/docs/emlis_ai_user_models.sql`
+- repo: `mashos-api`
+- system: `backend support document`
+- 現行状態: `active`
+- 役割: EmlisAI derived user model store の DDL。immediate reply observation kernel が使う compact/deep user model の永続化契約を固定する。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py` — schema support
+- このファイルを直接参照するファイル:
+  - なし
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py`
+- 修正対象になりうる変更:
+  - support / migration document change

@@ -1,6 +1,6 @@
 ---
 title: "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 ---
 
 # 02B. Snapshot / Worker / Publish / Read系
@@ -3148,3 +3148,86 @@ revision_date: "2026-04-19"
   - `mashos-api/ai/tests/contract/test_api_contract_headers.py`
   - `mashos-api/ai/tests/contract/test_contract_snapshots_phase6e.py`
 
+
+## B11. 2026-04-22 差分更新 (三大要素完了反映)
+
+### `mashos-api/ai/services/ai_inference/report_artifact_read_service.py`
+- repo: `mashos-api`
+- 国家システム区分: `Read`
+- 現行状態: `active`
+- 国家システム上の役割: report artifact family (`myweb` / `self_structure`) の history/detail 読取を共通化する read-side service。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/access_policy/viewer_access_policy.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py`
+  - `mashos-api/ai/services/ai_inference/access_policy/viewer_access_policy.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`
+
+### `mashos-api/ai/services/ai_inference/piece_public_read_service.py`
+- repo: `mashos-api`
+- 国家システム区分: `Read`
+- 現行状態: `active`
+- 国家システム上の役割: canonical public Piece body owner。`emotion_generated` source 固定で list/detail/unread-status を構築する。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py` — from import
+  - `mashos-api/ai/services/ai_inference/api_nexus.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/generated_reflection_display.py` — from import
+  - `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py` — from import
+  - `mashos-api/ai/services/ai_inference/piece_public_read_store.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py`
+  - `mashos-api/ai/services/ai_inference/api_nexus.py`
+  - `mashos-api/ai/services/ai_inference/generated_reflection_display.py`
+  - `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py`
+  - `mashos-api/ai/services/ai_inference/piece_public_read_store.py`
+
+### `mashos-api/ai/services/ai_inference/piece_public_read_store.py`
+- repo: `mashos-api`
+- 国家システム区分: `Read`
+- 現行状態: `active`
+- 国家システム上の役割: Piece public read 用の route-neutral repository helper。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py` — from import
+  - `mashos-api/ai/services/ai_inference/piece_public_read_service.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py`
+  - `mashos-api/ai/services/ai_inference/piece_public_read_service.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`
+
+### `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py`
+- repo: `mashos-api`
+- 国家システム区分: `Read`
+- 現行状態: `active`
+- 国家システム上の役割: generated reflection access decision / canonical row resolve helper。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py` — from import
+  - `mashos-api/ai/services/ai_inference/piece_public_read_service.py` — from import
+- 下流:
+  - `mashos-api/ai/services/ai_inference/generated_reflection_display.py` — from import
+  - `mashos-api/ai/services/ai_inference/generated_reflection_identity.py` — from import
+  - `mashos-api/ai/services/ai_inference/piece_public_read_store.py` — from import
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py`
+  - `mashos-api/ai/services/ai_inference/generated_reflection_display.py`
+  - `mashos-api/ai/services/ai_inference/generated_reflection_identity.py`
+  - `mashos-api/ai/services/ai_inference/piece_public_read_service.py`
+  - `mashos-api/ai/services/ai_inference/piece_public_read_store.py`
+
+### 差分更新まとめ: 既存 national-system owner の current override
+- `Cocolon/lib/nexusApi.js` — public Piece hot path の唯一 frontend wrapper。
+- `Cocolon/screens/NexusScreen.js` — canonical public Piece feed/view。
+- `Cocolon/screens/MyModelScreen.js` — owner-side menu only。discoveries summary を現役 surface として持たない。
+- `Cocolon/screens/MyModelReflectionsScreen.js` — owner-side reflection / Echoes management。public list/detail/unread は `nexusApi` 経由。
+- `mashos-api/ai/services/ai_inference/api_nexus.py` — public Piece read の canonical route owner。
+- `mashos-api/ai/services/ai_inference/api_mymodel_qna.py` — compatibility / reaction / owner-side layer。public read body は持たない。
+- `mashos-api/ai/services/ai_inference/api_myprofile.py` — status / trigger façade。latest/monthly refresh は shared refresher へ委譲。
+- `mashos-api/ai/services/ai_inference/api_myprofile_reports_read.py` — façade only。history/detail read 本体は `report_artifact_read_service.py` へ委譲。
+- `mashos-api/ai/services/ai_inference/api_myweb_reads.py` — artifact-only read。`analysis_summary_reader.py` / `input_summary_reader.py` を使う。
+- `mashos-api/ai/services/ai_inference/api_myweb_reports.py` — projection-first runtime only。production module に legacy ready builder / flag を持たない。
+- `mashos-api/ai/services/ai_inference/astor_myprofile_report.py` — latest/monthly shared refresher + builder owner。

@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 140
-  mashos-api: 265
+  mashos-api: 275
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 303
+  included_files_total: 313
   included_files_cocolon: 98
-  included_files_mashos_api: 205
+  included_files_mashos_api: 215
 ---
 
 # 1. 1行定義
@@ -30,12 +30,13 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 - `startup_snapshot_store` は startup 断面
 - `access_policy` は read-side visibility / tier 判定の集約点
 - `EmlisAI` は保存直後 immediate reply path を持つ
+- 2026-04-22 反映で、三大要素の中核 owner は comment / analysis / piece ごとに 1 本流へ固定した
 
 # 3. 章と対象件数
 
-- `02A`: 59 files
-- `02B`: 134 files
-- `02C`: 110 files
+- `02A`: 62 files
+- `02B`: 138 files
+- `02C`: 113 files
 
 # 4. 読み方
 

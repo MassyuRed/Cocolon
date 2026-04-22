@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -1989,3 +1989,88 @@ revision_date: "2026-04-19"
 - 修正対象になりうる変更:
   - input_feedback, world model, context/style/reply
 
+
+## A6. 2026-04-22 差分更新 (EmlisAI reader boundary)
+
+### 差分更新: `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+- repo: `mashos-api`
+- system: `EmlisAI / immediate reply runtime`
+- 現行状態: `active`
+- 現在の役割: SourceBundle builder。`api_input_summary.py` / `api_myweb_reads.py` 直 import をやめ、`emlis_ai_readers.py` を唯一の read adapter boundary として使う。
+- 2026-04-22 時点の直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_greeting_state_store.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_types.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py` — from import
+  - `mashos-api/ai/services/ai_inference/emotion_history_search_service.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+  - `mashos-api/ai/services/ai_inference/today_question_store.py` — from import
+- 2026-04-22 時点で必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+  - `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+  - `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_user_model_store.py`
+- 差分要点:
+  - EmlisAI は route module ではなく meaning-layer reader 契約に依存する
+
+### `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+- repo: `mashos-api`
+- system: `EmlisAI / immediate reply runtime`
+- 現行状態: `active`
+- 役割: EmlisAI 用の meaning-layer read adapter。入力要約と Analysis 要約 artifact を route module 非依存で渡す。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/analysis_summary_reader.py` — from import
+  - `mashos-api/ai/services/ai_inference/input_summary_reader.py` — from import
+- このファイルを直接参照するファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` — from import
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+  - `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+  - `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+- 修正対象になりうる変更:
+  - input_feedback, world model, context/style/reply
+
+### `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+- repo: `mashos-api`
+- system: `EmlisAI / immediate reply runtime`
+- 現行状態: `active`
+- 役割: Route file を経由せず canonical input summary snapshot を組み立てる reader。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/response_microcache.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+- このファイルを直接参照するファイル:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py` — from import
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+  - `mashos-api/ai/services/ai_inference/response_microcache.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`
+- 修正対象になりうる変更:
+  - input_feedback, world model, context/style/reply
+
+### `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+- repo: `mashos-api`
+- system: `EmlisAI / immediate reply runtime`
+- 現行状態: `active`
+- 役割: MyWeb home summary artifact を read-side owner 契約で読む reader。EmlisAI と Analysis read の共通 adapter。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/publish_governance.py` — from import
+  - `mashos-api/ai/services/ai_inference/response_microcache.py` — from import
+  - `mashos-api/ai/services/ai_inference/subscription.py` — from import
+  - `mashos-api/ai/services/ai_inference/subscription_store.py` — from import
+  - `mashos-api/ai/services/ai_inference/supabase_client.py` — from import
+- このファイルを直接参照するファイル:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py` — from import
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py` — from import
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/api_myweb_reads.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+  - `mashos-api/ai/services/ai_inference/publish_governance.py`
+  - `mashos-api/ai/services/ai_inference/response_microcache.py`
+  - `mashos-api/ai/services/ai_inference/subscription.py`
+  - `mashos-api/ai/services/ai_inference/subscription_store.py`
+  - `mashos-api/ai/services/ai_inference/supabase_client.py`
+- 修正対象になりうる変更:
+  - input_feedback, world model, context/style/reply

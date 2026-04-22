@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-04-19"
+revision_date: "2026-04-22"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -11,17 +11,17 @@ purpose: "今回の前提資料リベースと current snapshot の要点を固�
 
 # 1. 今回の基準面
 
-今回の前提資料は、**Cocolon_17.zip** と **mashos-api_19.zip** の現物を基準に、前提資料を repo 分割ではなく **Cocolon の system / flow 単位** でリベースした版です。
+今回の前提資料は、**Cocolon_前提資料(3).zip** を基底に、**Cocolon_6(6).zip** と **mashos-api_6(1).zip** の実ファイル差分を反映した版です。
 
 # 2. coverage 数
 
-- total files: `405`
-- `01` に記載した対象 files: `352`
+- total files: `415`
+- `01` に記載した対象 files: `362`
   - Cocolon: `133`
-  - mashos-api: `219`
-- `02` に記載した国家システム対象 files: `303`
+  - mashos-api: `229`
+- `02` に記載した国家システム対象 files: `313`
   - Cocolon: `98`
-  - mashos-api: `205`
+  - mashos-api: `215`
 - main body から除外した files: `53`
 
 # 3. 今回の structural change 要点
@@ -32,6 +32,24 @@ purpose: "今回の前提資料リベースと current snapshot の要点を固�
 - `read-side visibility` は `access_policy` 前提で記述した
 - `ProfileCreate` を current public 名として扱い、`MyModelCreate` は canonical / legacy 文脈として扱い直した
 - RN と backend を repo 別に分けず、同じ section に混ぜて記述した
+- Piece public read を `api_nexus.py` / `piece_public_read_service.py` に固定した
+- `api_mymodel_qna.py` を compatibility / reaction layer に縮退した
+- Analysis read を `report_artifact_read_service.py` + artifact-only へ寄せた
+- EmlisAI read adapter を `emlis_ai_readers.py` + `input_summary_reader.py` / `analysis_summary_reader.py` へ固定した
+- retired discoveries route は `api_nexus_compat.py` へ quarantined compat route として隔離した
+
+# 3A. 今回追加で本文へ反映した files
+
+- `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md`
+- `mashos-api/ai/docs/emlis_ai_user_models.sql`
+- `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+- `mashos-api/ai/services/ai_inference/api_nexus_compat.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+- `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+- `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py`
+- `mashos-api/ai/services/ai_inference/piece_public_read_service.py`
+- `mashos-api/ai/services/ai_inference/piece_public_read_store.py`
+- `mashos-api/ai/services/ai_inference/report_artifact_read_service.py`
 
 # 4. 01 / 02 の対象外にした files
 
