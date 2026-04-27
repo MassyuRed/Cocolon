@@ -1,0 +1,517 @@
+---
+doc_id: cocolon_current_snapshot_diff
+title: "Cocolon 最新スナップショット差分"
+revision_date: "2026-04-27"
+source_repositories:
+  - Cocolon
+  - mashos-api
+source_mode: "local_snapshot"
+purpose: "今回の前提資料リベースと current snapshot の要点を固定する"
+---
+
+# 1. 今回の基準面
+
+今回の前提資料は、**Cocolon_前提資料(8).zip** を基底に、**Cocolon(108).zip** / **mashos-api(30).zip** / **DB境界v2 SQL結果一式** の実ファイル差分を反映した版です。
+
+# 2. coverage 数
+
+- total files: `408`
+- `01` に記載した current coverage files: `408`
+  - Cocolon: `116`
+  - mashos-api: `292`
+- `02` に記載した current coverage files: `408`
+  - Cocolon: `116`
+  - mashos-api: `292`
+- main body から完全除外した latest files: `0`（support/sampleも本文内に分類付きで記載）
+
+# 3. 今回の structural change 要点
+
+- `inventory` を廃止し、`01/02` 本文に coverage を持たせた
+- `Home write` は `home_gateway` 前提で記述した
+- `Home read` は `/home/state` 前提で記述した
+- `read-side visibility` は `access_policy` 前提で記述した
+- `ProfileCreate` を current public 名として扱い、`MyModelCreate` は canonical / legacy 文脈として扱い直した
+- RN と backend を repo 別に分けず、同じ section に混ぜて記述した
+- Piece public read を `api_nexus.py` / `piece_public_read_service.py` に固定した
+- `api_mymodel_qna.py` を compatibility / reaction layer に縮退した
+- Analysis read を `report_artifact_read_service.py` + artifact-only へ寄せた
+- EmlisAI read adapter を `emlis_ai_readers.py` + `input_summary_reader.py` / `analysis_summary_reader.py` へ固定した
+- retired discoveries route は `api_nexus_compat.py` へ quarantined compat route として隔離した
+
+# 3A. 今回追加で本文へ反映した files
+
+- `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md`
+- `mashos-api/ai/docs/emlis_ai_user_models.sql`
+- `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+- `mashos-api/ai/services/ai_inference/api_nexus_compat.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_readers.py`
+- `mashos-api/ai/services/ai_inference/input_summary_reader.py`
+- `mashos-api/ai/services/ai_inference/piece_generated_reflection_access.py`
+- `mashos-api/ai/services/ai_inference/piece_public_read_service.py`
+- `mashos-api/ai/services/ai_inference/piece_public_read_store.py`
+- `mashos-api/ai/services/ai_inference/report_artifact_read_service.py`
+
+# 4. 2026-04-22版で対象外にしていた files（履歴）
+
+次の files は 2026-04-22 版で current app runtime-contract structure の main body から外していた履歴です。  
+2026-04-25 版では latest full coverage を `01` / `02` 本文に分類付きで記載しているため、完全除外は `0` とします。
+
+- `Cocolon/.gitignore ` — meta / generated artifact, not current app structure source
+- `Cocolon/crash_log.txt ` — meta / generated artifact, not current app structure source
+- `Cocolon/libs_list.txt ` — meta / generated artifact, not current app structure source
+- `Cocolon/patches/_react-native-svg+14.1.0.patch.archive ` — backup / hold / disabled patch artifact
+- `Cocolon/patches/_react-native-webview+13.6.3.patch.hold ` — backup / hold / disabled patch artifact
+- `Cocolon/patches/react-native-linear-gradient+2.6.2.patch.bak ` — backup / hold / disabled patch artifact
+- `Cocolon/patches/react-native-reanimated+3.6.0.patch.disabled ` — backup / hold / disabled patch artifact
+- `mashos-api/ai/data/config/astor_structure_dict.json ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/processed/features.json ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/processed/structure_dictionary.json ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/processed/summary.txt ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/raw/README_ingest.txt ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/raw/import_template.csv ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/raw/logs.jsonl ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/raw/schema.json ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/raw/template.csv ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/raw/template.json ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/data/train/{{AI_NAME}}_interpret_train.jsonl ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/services/ai_inference/__pycache__/active_users_store.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/api_emotion_submit.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_account_status_enqueue.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_core.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight_question_store.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight_store.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_friend_feed_enqueue.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_global_summary_enqueue.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_global_summary_store.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_myweb_insight.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_patterns.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_ranking_enqueue.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/astor_structure_matcher.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/client_compat.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/deep_insight_strategy.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/subscription.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/subscription_store.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/__pycache__/supabase_client.cpython-313.pyc ` — cache artifact
+- `mashos-api/ai/services/ai_inference/_samples/lora_load_example.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/services/analysis_engine/templates/README.md ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/services/examples/demo.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/services/structure_engine/extract.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/services/structure_engine/templates/summary.txt ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/tools/data/raw/import_template.csv ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/tools/data/train/{{AI_NAME}}_interpret_train.jsonl ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/tools/training/README.md ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/tools/training/requirements.txt ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/tools/training/train_lora.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/tools/training/trainset_skeleton.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/training/README.md ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/training/build_dataset.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/training/eval.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/training/requirements.txt ` — sample / training / dataset artifact outside current app runtime-contract structure
+- `mashos-api/ai/training/train_lora.py ` — sample / training / dataset artifact outside current app runtime-contract structure
+
+# 5. current drift 候補
+
+frontend 側に見える endpoint 文字列のうち、backend route 側に直接見えないものを列挙する。
+
+- `/g, ` — callers: `Cocolon/screens/MyWebReportHistoryScreen.js`, `Cocolon/screens/MyWebReportViewerScreen.js`, `Cocolon/screens/SelfStructureReportGenerateScreen.js`, `Cocolon/screens/SelfStructureReportHistoryScreen.js`, `Cocolon/screens/SelfStructureReportViewerScreen.js`
+
+# 6. これ以降の更新原則
+
+- `01` は Cocolon 構造対象の全件 coverage を崩さない
+- `02` は国家システム対象の全件 coverage を崩さない
+- 新しい file を追加したら、必ず 01/02/07/manifest を同時更新する
+- repo を分けて説明せず、RN と backend のつながりで説明する
+
+# 2026-04-25 差分追記: latest snapshot correction
+
+## 1. 今回の基準面
+
+この差分追記の旧基準面は **Cocolon(103).zip** / **mashos-api_8(3).zip** / **SQL結果.zip** です。2026-04-26 の最新基準面は **Cocolon(108).zip** / **mashos-api(30).zip** / **DB境界v2 SQL結果一式** です。既存の 2026-04-22 本文は履歴として保持し、現時点の正本はこの差分追記と `01` / `02` の current coverage section です。
+
+## 2. coverage 数
+
+- total files: `408`
+- Cocolon: `116`
+- mashos-api: `292`
+- 旧資料本文に未掲載だった latest files: `64`
+- latest zip には存在しない旧本文 paths: `71`
+
+## 3. 今回の structural change 要点
+
+- RN側は `Analysis*` / `Piece*` / `Resonance*` / `EmotionPiece*` に寄り、`MyWeb*` / `MyModel*` / `Echoes*` / `Discoveries*` の物理screenは latest zip から消えた。
+- API側は current owner 本体化が進み、旧名称ファイルは runtime 本体ではなく compat façade になった。
+- DB physical name はまだ旧名が実体であり、DB rename は実行しない。境界情報は `08_Cocolon_DB_rename_boundary.md` を正本にする。
+
+## 4. 旧資料本文に未掲載だった latest files
+
+| file | role | current classification |
+| --- | --- | --- |
+| `Cocolon/REMOVE_RETIRED_COMPAT_FILES.txt` | RN app/support | include: RN app structure |
+| `Cocolon/components/EmotionPiecePreviewModal.js` | RN component/shared UI | include: RN app structure |
+| `Cocolon/lib/api/home/emotionPieceApi.js` | frontend API boundary | include: RN app structure |
+| `Cocolon/lib/compat/legacyWireContracts.js` | frontend legacy wire compatibility | include: RN app structure |
+| `Cocolon/lib/emotionPieceApi.js` | frontend API boundary | include: RN app structure |
+| `Cocolon/screens/AnalysisContentFirstScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisCrossLinkSection.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisEmotionScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisEnsureClient.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisHistoryScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisInputHistoryMenuScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisMenuCommon.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisReportHistoryScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisReportScheduleUtils.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisReportViewerScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisSelfStructureScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/AnalysisTopScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/PieceEntryScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/PieceHistoryMenuScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/PieceLibraryScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/PieceMenuCommon.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/PieceResonanceRankingScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/PieceScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/ResonanceHistoryDetailScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/ResonanceHistoryListScreen.js` | RN screen/surface | include: RN app structure |
+| `Cocolon/screens/nexus/NexusPieceCard.js` | RN screen/surface | include: RN app structure |
+| `mashos-api/ai/services/ai_inference/analysis_report_schema.json` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_analysis_compat.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_analysis_reads.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_connect.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_emotion_log.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_emotion_notification_settings.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_emotion_piece.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_follow.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_follow_graph.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_piece_compat.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_piece_runtime.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_ranking_piece_resonances.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_ranking_piece_views.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_relationship_compat.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_retired_legacy_compat.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_self_structure.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/api_self_structure_reports.py` | backend public API owner/compat | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/astor_analysis_insight.py` | ASTOR worker/queue/store | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/astor_emotion_log_feed_enqueue.py` | ASTOR worker/queue/store | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/astor_emotion_log_feed_kernel.py` | ASTOR worker/queue/store | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/astor_emotion_log_feed_store.py` | ASTOR worker/queue/store | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/astor_self_structure_persona.py` | ASTOR worker/queue/store | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/astor_self_structure_report.py` | ASTOR worker/queue/store | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/emotion_piece_store.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_generated_access.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_generated_display.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_generated_identity.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_generated_maintenance.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_generation_engine.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_generation_store.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_publish_entitlements.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/piece_text_formatter.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/profile_create_entitlements.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/route_compat_delegate.py` | backend support | include: backend runtime/contract structure |
+| `mashos-api/ai/services/ai_inference/self_structure_section_text_templates.py` | backend support | include: backend runtime/contract structure |
+
+## 5. latest zip には存在しない旧本文 paths
+
+| old path | latest state | handling |
+| --- | --- | --- |
+| `Cocolon/.gitignore` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/README.md` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/babel.config.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/components/EmotionReflectionPreviewModal.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/crash_log.txt` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/eslint.config.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/expo-env.d.ts` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/lib/api/home/emotionReflectionApi.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/lib/emotionReflectionApi.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/libs_list.txt` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/metro.config.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/@react-native-community+blur+4.4.1.patch` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/@react-native-community+slider+5.0.1.patch` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/_react-native-svg+14.1.0.patch.archive` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/_react-native-webview+13.6.3.patch.hold` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/react-native-linear-gradient+2.6.2.patch.bak` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/react-native-reanimated+3.6.0.patch.disabled` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/react-native-svg+13.14.0.patch` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/patches/react-native-vector-icons+10.3.0.patch` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/react-native.config.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/DeepInsightScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/DiscoveriesHistoryDetailScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/DiscoveriesHistoryListScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/EchoesHistoryDetailScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/EchoesHistoryListScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelDiscoveriesRankingScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelEchoesRankingScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelEntryScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelMenuCommon.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelPromptTemplates.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelQuestionsRankingScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelReactionHistoryScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelReflectionsScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyModelScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebContentFirstScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebCrossLinkSection.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebEmotionAnalysisScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebEnsureClient.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebHistoryScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebInputHistoryMenuScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebMenuCommon.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebReportHistoryScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebReportScheduleUtils.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebReportViewerScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebSelfStructureScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/MyWebTopScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/RankingAllUsersScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/RankingMyModelMenuScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/RankingPersonalUsersScreen.js` | not in latest zip | historical/stale path retained only in older text |
+| `Cocolon/screens/nexus/NexusReflectionCard.js` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/active_users_store.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/api_emotion_submit.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_account_status_enqueue.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_core.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight_question_store.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_deep_insight_store.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_friend_feed_enqueue.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_global_summary_enqueue.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_global_summary_store.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_myweb_insight.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_patterns.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_ranking_enqueue.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/astor_structure_matcher.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/client_compat.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/deep_insight_strategy.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/subscription.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/subscription_store.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/__pycache__/supabase_client.cpython-313.pyc` | not in latest zip | historical/stale path retained only in older text |
+| `mashos-api/ai/services/ai_inference/api_ranking_mymodel_discoveries.py` | not in latest zip | historical/stale path retained only in older text |
+
+
+# 2026-04-26 差分追記: DB bridge/API read-only 移行後 snapshot
+
+## 基準面
+
+- 前提資料基底: `Cocolon_前提資料(8).zip`
+- latest source zip: `Cocolon(108).zip` / `mashos-api(30).zip`
+- latest file count: `Cocolon=116` / `mashos-api=292` / `total=408`
+- `01` 系 coverage: `408/408`, missing `0`
+- `02` 系 coverage: `408/408`, missing `0`
+- Cocolon側 source file path 追加: `0`
+- mashos-api側 source file path 追加: `0`
+
+## このセッションで進んだDB側の流れ
+
+1. DB境界v2を確定した
+2. low risk 7件の current bridge view を作成し、backend-readonly に硬化した
+3. medium 4件の current bridge view を作成し、backend-readonly に硬化した
+4. high risk `pieces` の current bridge view を作成し、backend-readonly に硬化した
+5. すべての bridge view で `security_invoker=true` を確認した
+6. client role (`anon` / `authenticated`) は直接権限なし、`service_role` は `SELECT` のみにした
+7. DB physical rename / drop は行っていない
+
+| phase | current bridge view | old physical source | rows / count | DB state |
+|---|---|---|---:|---|
+| low | `emotion_notification_settings` | `friend_notification_settings` | 1 | `security_invoker=true`, backend-readonly |
+| low | `profile_create_questions` | `mymodel_create_questions` | 20 | `security_invoker=true`, backend-readonly |
+| low | `profile_create_answers` | `mymodel_create_answers` | 21 | `security_invoker=true`, backend-readonly |
+| low | `piece_metrics` | `mymodel_qna_metrics` | 15 | `security_invoker=true`, backend-readonly |
+| low | `piece_reads` | `mymodel_qna_reads` | 35 | `security_invoker=true`, backend-readonly |
+| low | `piece_view_logs` | `mymodel_qna_view_logs` | 26 | `security_invoker=true`, backend-readonly |
+| low | `piece_resonance_logs` | `mymodel_qna_resonance_logs` | 5 | `security_invoker=true`, backend-readonly |
+| medium | `analysis_reports` | `myweb_reports` | 486 | `security_invoker=true`, backend-readonly |
+| medium | `self_structure_reports` | `myprofile_reports` | 10 | `security_invoker=true`, backend-readonly |
+| medium | `emotion_log_feed` | `friend_emotion_feed` | 3211 | `security_invoker=true`, backend-readonly |
+| medium | `emotion_log_feed_summaries` | `friend_feed_summaries` | 1288 | `security_invoker=true`, backend-readonly |
+| high | `pieces` | `mymodel_reflections` | 1695 | `security_invoker=true`, backend-readonly |
+
+
+## このセッションで進んだAPI側の流れ
+
+API側は write path を壊さないため、SELECT-only path だけを current bridge view へ切り替えました。
+
+| area | read-only current view | write/update/delete/upsert old physical |
+|---|---|---|
+| ProfileCreate questions | `profile_create_questions` | n/a |
+| ProfileCreate answers | `profile_create_answers` | `mymodel_create_answers` |
+| Piece metrics/read-state | `piece_metrics`, `piece_reads` | `mymodel_qna_metrics`, `mymodel_qna_reads` |
+| Emotion notification settings | `emotion_notification_settings` | `friend_notification_settings` |
+| Analysis reports | `analysis_reports` | `myweb_reports` |
+| Self Structure reports | `self_structure_reports` | `myprofile_reports` |
+| EmotionLog feed | `emotion_log_feed` | `friend_emotion_feed` |
+| EmotionLog feed summaries | `emotion_log_feed_summaries` | `friend_feed_summaries` |
+| Piece library | `pieces` | `mymodel_reflections` |
+
+
+修正対象として確認するファイル:
+
+- `mashos-api/ai/services/ai_inference/api_profile_create.py`
+- `mashos-api/ai/services/ai_inference/api_piece_runtime.py`
+- `mashos-api/ai/services/ai_inference/api_ranking.py`
+- `mashos-api/ai/services/ai_inference/piece_public_read_store.py`
+- `mashos-api/ai/services/ai_inference/piece_generation_store.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_notification_settings.py`
+- `mashos-api/ai/services/ai_inference/api_follow.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py`
+- `mashos-api/ai/services/ai_inference/analysis_summary_reader.py`
+- `mashos-api/ai/services/ai_inference/api_analysis_reads.py`
+- `mashos-api/ai/services/ai_inference/api_analysis_reports.py`
+- `mashos-api/ai/services/ai_inference/api_cron_distribution.py`
+- `mashos-api/ai/services/ai_inference/api_report_reads.py`
+- `mashos-api/ai/services/ai_inference/api_self_structure.py`
+- `mashos-api/ai/services/ai_inference/app.py`
+- `mashos-api/ai/services/ai_inference/astor_emotion_log_feed_kernel.py`
+- `mashos-api/ai/services/ai_inference/astor_emotion_log_feed_store.py`
+- `mashos-api/ai/services/ai_inference/astor_self_structure_report.py`
+- `mashos-api/ai/services/ai_inference/astor_worker.py`
+- `mashos-api/ai/services/ai_inference/report_artifact_read_service.py`
+- `mashos-api/ai/services/ai_inference/emotion_piece_store.py`
+- `mashos-api/ai/services/ai_inference/piece_generated_access.py`
+- `mashos-api/ai/services/ai_inference/piece_generated_maintenance.py`
+- `mashos-api/ai/services/ai_inference/piece_generated_metrics.py`
+
+## まだ完了扱いにしないもの
+
+- DB physical rename
+- DB table drop
+- DB trigger / function / index / RLS policy rename
+- JSON payload / scalar vocabulary の semantic rewrite
+- API write path の current名切替
+- legacy route retirement
+- contract retirement
+- 旧名称APIファイル削除
+
+## 次の流れ
+
+1. runtime smoke で read-only current bridge view が返ることを確認する
+2. write / update / delete / upsert / insert が旧物理 table のまま成功することを確認する
+3. legacy route / public contract / RN release boundary を棚卸しする
+4. 削除候補ファイルは、contract retirement 後に1件ずつ判定する
+5. DB physical rename / drop は、trigger / function / index / RLS / JSON vocabulary の全棚卸し後に別工程で判断する
+
+現時点で削除してよいファイルは **0件** です。
+
+
+# 2026-04-27 差分追記: public contract registry cleanup / smoke完了 snapshot
+
+## 基準面
+
+- 基底: `Cocolon_前提資料(10).zip`
+- latest source: `Cocolon_5(12).zip` / `mashos-api_5(6).zip`
+- DB確認: `01_bridge_view_runtime_smoke_SELECT_ONLY_v2(1).txt`
+- endpoint確認: `endpoint_smoke_write_result(1).json`
+
+## coverage 数
+
+- total files: `408`
+- Cocolon: `116`
+- mashos-api: `292`
+- `01` に記載した current coverage files: `408`
+- `02` に記載した current coverage files: `408`
+- main body から完全除外した latest files: `0`
+
+## latest zip差分
+
+| repo | added | removed | content changed |
+|---|---:|---:|---:|
+| Cocolon | 0 | 0 | 0 |
+| mashos-api | 0 | 0 | 5 |
+
+content changed files:
+
+- `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md`
+- `mashos-api/ai/services/ai_inference/api_contract_registry.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_log.py`
+- `mashos-api/ai/services/ai_inference/api_nexus.py`
+- `mashos-api/ai/tests/contract/test_api_contract_registry.py`
+
+## public contract registry cleanup結果
+
+追加登録した current public route:
+
+- `GET /account/profile-create`
+- `GET /emotion-log/feed`
+- `GET /emotion-log/unread-status`
+- `POST /emotion-log/unread/read-feed`
+- `GET /emotion-notifications/settings`
+- `POST /emotion-notifications/settings/{friend_user_id}`
+- `GET /nexus/emotion-log`
+- `GET /nexus/emotion-ranking`
+
+整理した legacy friends alias:
+
+- `POST /friends/request` -> `/follow/request`
+- `POST /friends/requests/{request_id}/accept` -> `/follow/requests/{request_id}/accept`
+- `POST /friends/requests/{request_id}/reject` -> `/follow/requests/{request_id}/reject`
+- `POST /friends/requests/{request_id}/cancel` -> `/follow/requests/{request_id}/cancel`
+- `POST /friends/remove` -> `/follow/remove`
+- `GET /friends/notification-settings` -> `/emotion-notifications/settings`
+- `POST /friends/notification-settings/{friend_user_id}` -> `/emotion-notifications/settings/{friend_user_id}`
+
+## DB smoke v2結果
+
+overall pass flags はすべて true です。
+
+| flag | value |
+|---|---|
+| `all_bridge_views_exist` | `true` |
+| `all_old_physical_tables_exist` | `true` |
+| `all_bridge_views_security_invoker` | `true` |
+| `all_row_counts_match_old_physical` | `true` |
+| `all_views_have_service_role_select` | `true` |
+| `all_views_have_no_service_role_write_grants` | `true` |
+| `all_views_have_no_anon_or_authenticated_grants` | `true` |
+| `all_column_name_type_signatures_match_old_physical` | `true` |
+| `all_column_diffs_are_nullability_only` | `true` |
+
+latest row count status:
+
+| current bridge view | old physical table | old rows | bridge rows | match |
+|---|---|---:|---:|---|
+| `pieces` | `mymodel_reflections` | 1695 | 1695 | true |
+| `emotion_notification_settings` | `friend_notification_settings` | 1 | 1 | true |
+| `piece_metrics` | `mymodel_qna_metrics` | 15 | 15 | true |
+| `piece_reads` | `mymodel_qna_reads` | 35 | 35 | true |
+| `piece_resonance_logs` | `mymodel_qna_resonance_logs` | 5 | 5 | true |
+| `piece_view_logs` | `mymodel_qna_view_logs` | 26 | 26 | true |
+| `profile_create_answers` | `mymodel_create_answers` | 21 | 21 | true |
+| `profile_create_questions` | `mymodel_create_questions` | 20 | 20 | true |
+| `analysis_reports` | `myweb_reports` | 487 | 487 | true |
+| `emotion_log_feed` | `friend_emotion_feed` | 3219 | 3219 | true |
+| `emotion_log_feed_summaries` | `friend_feed_summaries` | 1296 | 1296 | true |
+| `self_structure_reports` | `myprofile_reports` | 10 | 10 | true |
+
+## endpoint smoke結果
+
+- `status=pass`
+- `hard_502_count=0`
+- `non_2xx_count=0`
+- `writes_enabled=true`
+- `skipped_count=4`
+
+今回確認できた write endpoint:
+
+- `POST /profile-create/answers` -> `200`
+- `POST /emotion-notifications/settings/{friend_user_id}` -> `200`
+- `POST /report-reads/mark` -> `200`
+
+今回対象外:
+
+- `GET /nexus/pieces/{q_instance_id}`
+- `POST /piece/view`
+- `POST /piece/resonance`
+
+理由: `/nexus/pieces?limit=5` が `total_items=0`, `items=[]` であり、ログインユーザーから見える Piece がなく `q_instance_id` を取得できなかったため。Piece が1件以上公開・閲覧可能になった時点で再確認する。
+
+## まだ完了扱いにしないもの
+
+- DB physical rename
+- DB table drop
+- current bridge view への write 切替
+- legacy route handler 削除
+- 旧名称APIファイル削除
+- `mymodel/qna/*` active legacy named public contract retire
+- Piece write smoke
+
+現時点で削除してよい DB object / API file / RN file は **0件** です。

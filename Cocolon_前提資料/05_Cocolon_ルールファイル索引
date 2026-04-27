@@ -1,0 +1,67 @@
+---
+doc_id: cocolon_rule_file_index
+title: "Cocolon ルールファイル索引"
+revision_date: "2026-04-27"
+source_repositories:
+  - Cocolon
+  - mashos-api
+source_mode: "local_snapshot"
+purpose: "見落とすと構造誤読や contract 破壊を起こしやすい rule / policy / guard / test を索引化する"
+---
+
+# 1. 先に結論
+
+**rule / policy / contract を持つ変更は、画面や API の見た目より先に rule file を読む。**
+
+# 2. 最重要 rule / policy
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/docs/API_CONTRACT_POLICY.md` | public API の additive-only / 互換性 / header | public route / request / response を触る時 |
+| `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | public route 一覧 / version policy | route 追加・置換・削除を触る時 |
+| `mashos-api/ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md` | RN/API 境界・display-only 原則 | national system と boundary を触る時 |
+| `mashos-api/ai/docs/TUTORIAL_STABILITY_REDESIGN.md` | tutorial 測定 / overlay / proxy press | tutorial を触る時 |
+| `mashos-api/scripts/check_no_direct_supabase.py` | RN からの direct Supabase / raw fetch 禁止 | frontend data access を触る時 |
+| `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md` | 三大要素の canonical owner / compat 隔離 / artifact-only 契約 | Piece / Analysis / EmlisAI の本流固定を触る時 |
+
+# 3. contract / regression を守る test 群
+
+- `mashos-api/ai/tests/contract/test_api_contract_registry.py`
+- `mashos-api/ai/tests/contract/test_api_contract_headers.py`
+- `mashos-api/ai/tests/contract/test_contract_snapshots_phase6e.py`
+- `mashos-api/ai/tests/contract/test_notice_contracts.py`
+- `mashos-api/ai/tests/contract/test_generated_reflection_display_contracts.py`
+- `mashos-api/ai/tests/contract/test_mymodel_reflection_display_contracts.py`
+- `mashos-api/ai/tests/contract/test_subscription_bootstrap_contracts.py`
+- `mashos-api/ai/tests/contract/test_emlis_ai_contracts.py`
+- `mashos-api/ai/tests/contract/test_publish_governance.py`
+- `mashos-api/ai/tests/contract/test_rn_surface_guards.py`
+
+# 4. current national system で特に重要な code rule
+
+- `home_gateway/*` を通る Home write は route adapter から分岐しない
+- `access_policy/*` を使う read-side は route file で tier / visibility を再実装しない
+- `startup_snapshot_store.py` と `api_app_bootstrap.py` は startup 断面の中心としてペアで見る
+- `lib/api/client.js` / `lib/apiClient.js` は RN boundary の中心として見る
+- `piece_public_read_service.py` / `api_nexus.py` / `api_mymodel_qna.py` は Piece public read / compat の owner 契約としてペアで見る
+- `report_artifact_read_service.py` は report history/detail の共通 read owner であり、route file で storage/projection fallback を再実装しない
+- `emlis_ai_readers.py` / `input_summary_reader.py` / `analysis_summary_reader.py` は EmlisAI reader boundary であり、EmlisAI 側から route file を直接 import しない
+
+# 5. ProfileCreate / legacy 命名まわりの注意
+
+- public 名は `ProfileCreate`
+- canonical table 名や legacy text には `mymodel_create_*` が残る
+- そのため rename / cleanup をする時は `03` と `01C` の file block を先に見る
+
+
+# 2026-04-27 差分追記: public contract registry cleanup時の必読セット
+
+public route 追加・置換・deprecated整理を行う場合、次の5件を同時確認する。
+
+1. `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md`
+2. `mashos-api/ai/services/ai_inference/api_contract_registry.py`
+3. `mashos-api/ai/services/ai_inference/middleware_api_contract.py`
+4. `mashos-api/ai/tests/contract/test_api_contract_registry.py`
+5. 対象 route handler（今回の差分では `api_emotion_log.py` / `api_nexus.py`）
+
+今回の差分では、route handler 削除ではなく registry / response_model metadata / registry guard の整合だけを行った。legacy route retirement を実施する場合は、RN release boundary と endpoint smoke を別途確認してから行う。
