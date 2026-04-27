@@ -23,10 +23,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
 import {
-  cancelEmotionReflection,
-  previewEmotionReflection,
-  publishEmotionReflection,
-} from "../lib/api/home/emotionReflectionApi";
+  cancelEmotionPiece,
+  previewEmotionPiece,
+  publishEmotionPiece,
+} from "../lib/api/home/emotionPieceApi";
 import { getNoticeButtonActions, openNoticeAction } from "../lib/noticeActionRuntime";
 import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
 import { useHomeActions } from "../features/home/useHomeActions";
@@ -44,6 +44,7 @@ import CocolonSwitch from "../components/CocolonSwitch";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { EMOTION_NOTIFICATION_WIRE } from "../lib/compat/legacyWireContracts";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
@@ -53,7 +54,7 @@ import TodayQuestionModal from "../components/TodayQuestionModal";
 import NoticeModal from "../components/NoticeModal";
 import TutorialStartModal from "../components/TutorialStartModal";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
-import EmotionReflectionPreviewModal from "../components/EmotionReflectionPreviewModal";
+import EmotionPiecePreviewModal from "../components/EmotionPiecePreviewModal";
 
 // 未送信下書きは InputScreen 内で自己完結させ、
 // Metro の外部 helper 解決に依存しないようにする。
@@ -132,10 +133,10 @@ function normalizeInputDraftData(data = {}) {
     memo: String(data?.memo || ""),
     memoAction: String(data?.memoAction || ""),
     selectedCategories: normalizeDraftStringArray(data?.selectedCategories),
-    // 新Reflection仕様ではシークレットメモUIを表導線から外す。
+    // 新Piece仕様ではシークレットメモUIを表導線から外す。
     // 旧下書きに isSecret が残っていても、新UIでは常に false として扱う。
     isSecret: false,
-    sendFriendNotification: data?.sendFriendNotification !== false,
+    sendEmotionNotification: data?.sendEmotionNotification !== false,
   };
 }
 
@@ -255,7 +256,7 @@ function formatDraftSavedAt(savedAt) {
 // 感情ボタンの配置（2段構成：下段右は空き）
 const EMOTION_ROWS = [
   ["喜び", "悲しみ", "怒り"],
-  ["不安", "平穏", SELF_INSIGHT],
+  ["不安", "平穏", null],
 ];
 
 const CATEGORY_OPTIONS = Object.freeze([
@@ -274,17 +275,6 @@ const INPUT_TUTORIAL_STEP_START = 1;
 const INPUT_TUTORIAL_STEP_END = 6;
 const TUTORIAL_TOTAL_STEPS = 21;
 
-
-function getEmotionIconName(type) {
-  if (type === SELF_INSIGHT) return "bulb-outline";
-  if (type === "喜び") return "happy-outline";
-  if (type === "悲しみ") return "sad-outline";
-  if (type === "怒り") return "flash-outline";
-  if (type === "不安") return "alert-circle-outline";
-  return "leaf-outline";
-}
-
-
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
@@ -300,7 +290,7 @@ export default function InputScreen({ navigation }) {
     tutorialSkipped,
     tutorialStep,
     addTutorialEmotion,
-    addTutorialFriendFeedItem: addTutorialEmotionLogFeedItem,
+    addTutorialEmotionLogFeedItem,
     setTutorialStep,
     startTutorial,
     skipTutorial,
@@ -315,18 +305,21 @@ export default function InputScreen({ navigation }) {
   const [memo, setMemo] = useState("");
   const [memoAction, setMemoAction] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [showMemoSection, setShowMemoSection] = useState(false);
+  // 展開式入力（タップで開く）
+  const [activeField, setActiveField] = useState(null); // "memo" | "memoAction" | null
   const memoInputRef = useRef(null);
   const memoActionInputRef = useRef(null);
   const [memoContentHeight, setMemoContentHeight] = useState(44);
   const [memoActionContentHeight, setMemoActionContentHeight] = useState(44);
 
   const [isSecret, setIsSecret] = useState(false);
-  const [sendFriendNotification, setSendFriendNotification] = useState(true);
+  const [sendEmotionNotification, setSendEmotionNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [reflectionPreviewVisible, setReflectionPreviewVisible] = useState(false);
-  const [reflectionPreviewLoading, setReflectionPreviewLoading] = useState(false);
-  const [reflectionPublishLoading, setReflectionPublishLoading] = useState(false);
-  const [reflectionPreviewPayload, setReflectionPreviewPayload] = useState(null);
+  const [piecePreviewVisible, setPiecePreviewVisible] = useState(false);
+  const [piecePreviewLoading, setPiecePreviewLoading] = useState(false);
+  const [piecePublishLoading, setPiecePublishLoading] = useState(false);
+  const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
   const [keyboardInset, setKeyboardInset] = useState(0);
 
 // --- Lightweight toast / input feedback modal ---
@@ -416,37 +409,45 @@ const buildTutorialStartupCandidate = useCallback(() => {
   tutorialSkipped,
 ]);
 
-const {
-  activeStartupPopup,
-  advanceStartupPopupQueue,
-  closeStartupPopupWindow,
-  globalEmotionUsers,
-  isNoticeStartupPopupVisible,
-  isTodayQuestionStartupPopupVisible,
-  isTutorialStartupPopupVisible,
-  loadHomeState,
-  noticeFeatureEnabled,
-  noticeLoading,
-  noticePopup,
-  noticeUnreadCount,
-  reflectionQuota,
-  registerInputInteraction,
-  rememberDismissedNotice,
-  rememberDismissedTodayQuestionDay,
-  setNoticePopup,
-  setNoticeUnreadCount,
-  setReflectionQuota,
-  startupModalVisible,
-  startupQueuePreparing,
-  todayQuestionBundle,
-  todayQuestionLoading,
-} = useHomeState({
+const homeState = useHomeState({
   currentUserId,
   isTutorialMode,
   tutorialFlagsLoaded,
   navigation,
   buildTutorialStartupCandidate,
 });
+
+  const {
+    activeStartupPopup,
+    advanceStartupPopupQueue,
+    closeStartupPopupWindow,
+    globalEmotionUsers,
+    homeMonthCount,
+    homeStreakDays,
+    homeTodayCount,
+    homeWeekCount,
+    isNoticeStartupPopupVisible,
+    isTodayQuestionStartupPopupVisible,
+    isTutorialStartupPopupVisible,
+    loadHomeState,
+    noticeFeatureEnabled,
+    noticeLoading,
+    noticePopup,
+    noticeUnreadCount,
+    registerInputInteraction,
+    rememberDismissedNotice,
+    rememberDismissedTodayQuestionDay,
+    setNoticePopup,
+    setNoticeUnreadCount,
+    startupModalVisible,
+    startupQueuePreparing,
+    todayQuestionBundle,
+    todayQuestionLoading,
+  } = homeState;
+
+  const pieceQuota = homeState.pieceQuota;
+  const setPieceQuota = homeState.setPieceQuota;
+
 
 const {
   todayQuestionSubmitting,
@@ -476,6 +477,42 @@ const isWelcomeNoticeStartupPopup = useMemo(
 );
 const isTodayQuestionAnswered = todayQuestionBundle?.answer_status === "answered";
 const todayQuestionStatusLabel = isTodayQuestionAnswered ? "回答済み" : "未回答";
+const homeBadgeLabel = useMemo(() => {
+  const m = typeof homeMonthCount === "number" ? homeMonthCount : null;
+  const w = typeof homeWeekCount === "number" ? homeWeekCount : null;
+  const s = typeof homeStreakDays === "number" ? homeStreakDays : null;
+
+  // まずは月間の大きな称号（最上位）
+  if (m != null) {
+    if (m >= 60) return "観測レジェンド";
+  }
+
+  // 連続観測（“継続”を強調）
+  if (s != null) {
+    if (s >= 30) return "連続30日観測";
+    if (s >= 14) return "連続2週間観測";
+    if (s >= 7) return "連続1週間観測";
+    if (s >= 3) return "連続3日観測";
+  }
+
+  // 週内の観測密度（“今週”を強調）
+  if (w != null) {
+    if (w >= 7) return "今週コンプリート";
+    if (w >= 5) return "今週ハイペース";
+  }
+
+  // 月間（中位以下）
+  if (m != null) {
+    if (m >= 30) return "観測マスター";
+    if (m >= 15) return "観測ルーティン";
+    if (m >= 7) return "一週間観測";
+    if (m >= 3) return "観測ウォームアップ";
+    if (m >= 1) return "初観測";
+  }
+
+  return null;
+}, [homeMonthCount, homeWeekCount, homeStreakDays]);
+
 
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
@@ -535,7 +572,7 @@ const handleOpenTodayQuestionHistory = useCallback(() => {
   try {
     const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
     if (parent && typeof parent.navigate === "function") {
-      parent.navigate("MyWeb", {
+      parent.navigate("Analysis", {
         openTodayQuestionHistory: true,
         openTodayQuestionHistoryAt: Date.now(),
       });
@@ -546,7 +583,7 @@ const handleOpenTodayQuestionHistory = useCallback(() => {
   }
 
   try {
-    navigation?.navigate?.("MyWeb", {
+    navigation?.navigate?.("Analysis", {
       openTodayQuestionHistory: true,
       openTodayQuestionHistoryAt: Date.now(),
     });
@@ -581,26 +618,20 @@ const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
 
   const screenRootRef = useRef(null);
-  const heroCardRef = useRef(null);
-  const thoughtInputRef = useRef(null);
-  const actionInputRef = useRef(null);
   const emotionAreaRef = useRef(null);
-  const categorySectionRef = useRef(null);
+  const memoSectionRef = useRef(null);
+  const memoToggleButtonRef = useRef(null);
   const okButtonRef = useRef(null);
   const strengthRowRefs = useRef({});
   const currentScrollYRef = useRef(0);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
-  const [heroCardHeaderY, setHeroCardHeaderY] = useState(null);
-  const [heroRailInlineOffsetY, setHeroRailInlineOffsetY] = useState(null);
-  const [compactRailVisible, setCompactRailVisible] = useState(false);
 
   const isInputTutorialStep =
     isTutorialMode &&
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
-  const compactRailTop = Math.max(8, safeInsets.top + 4);
 
   // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える
   const inputMaxHeight = useMemo(() => {
@@ -625,7 +656,7 @@ const { height: windowHeight } = useWindowDimensions();
         memoAction,
         selectedCategories,
         isSecret,
-        sendFriendNotification,
+        sendEmotionNotification,
       }),
     [
       isSecret,
@@ -633,7 +664,7 @@ const { height: windowHeight } = useWindowDimensions();
       memoAction,
       selectedCategories,
       selectedEmotions,
-      sendFriendNotification,
+      sendEmotionNotification,
     ]
   );
 
@@ -704,7 +735,14 @@ const { height: windowHeight } = useWindowDimensions();
     setMemoAction(restored.memoAction);
     setSelectedCategories(restored.selectedCategories);
     setIsSecret(false);
-    setSendFriendNotification(restored.sendFriendNotification);
+    setSendEmotionNotification(restored.sendEmotionNotification);
+    setShowMemoSection(
+      restored.selectedEmotions.some((item) => item?.type === SELF_INSIGHT) ||
+        restored.memo.trim().length > 0 ||
+        restored.memoAction.trim().length > 0 ||
+        restored.selectedCategories.length > 0
+    );
+    setActiveField(null);
     setMemoContentHeight(44);
     setMemoActionContentHeight(44);
     Keyboard.dismiss();
@@ -740,6 +778,20 @@ const { height: windowHeight } = useWindowDimensions();
       // noop
     }
   }, []);
+
+  const openField = (field) => {
+    registerInputInteraction();
+    setActiveField(field);
+    // state反映後に focus する（render完了を待つ）
+    setTimeout(() => {
+      try {
+        if (field === "memo") memoInputRef.current?.focus?.();
+        if (field === "memoAction") memoActionInputRef.current?.focus?.();
+      } catch {
+        // noop
+      }
+    }, 50);
+  };
 
 
   useEffect(() => {
@@ -899,76 +951,40 @@ const { height: windowHeight } = useWindowDimensions();
     };
   }, [draftPersistenceBlocked, navigation, persistCurrentInputDraft]);
 
-  const doNotSendEmotionNotification = !sendFriendNotification;
+  const doNotSendEmotionNotification = !sendEmotionNotification;
   const isDark = themeName === "dark";
-
-  const memoText = memo.trim();
-  const memoActionText = memoAction.trim();
-  const thoughtLength = memoText.length;
-  const actionLength = memoActionText.length;
 
   const isSelfInsightSelected = selectedEmotions.some(
     (e) => e.type === SELF_INSIGHT
   );
-  const hasThought = thoughtLength > 0;
-  const hasAction = actionLength > 0;
-  const hasMemoInput = hasThought || hasAction;
-  const hasEmotion = selectedEmotions.length > 0;
+  const hasMemoInput =
+    memo.trim().length > 0 || memoAction.trim().length > 0;
+  const requiresCategorySelection = hasMemoInput;
   const hasSelectedCategories = selectedCategories.length > 0;
-  const canOpenEmotionStep = hasThought && hasAction;
-  const canOpenCategoryStep = canOpenEmotionStep && hasEmotion;
-  const hasCategoryProgress = canOpenCategoryStep && hasSelectedCategories;
-  const isHeroReady = hasCategoryProgress;
-  const heroStage = isHeroReady
-    ? "ready"
-    : hasEmotion
-      ? "emotionSelected"
-      : canOpenEmotionStep
-        ? "memoDual"
-        : hasMemoInput
-          ? "memoStarted"
-          : "blank";
-  const canSubmit = !submitting && isHeroReady;
-  const canPreviewReflection =
+  const canSubmit =
+    !submitting &&
+    selectedEmotions.length > 0 &&
+    (!isSelfInsightSelected || hasMemoInput) &&
+    (!requiresCategorySelection || hasSelectedCategories);
+  const canPreviewPiece =
     !isTutorialMode &&
-    !reflectionPreviewLoading &&
-    !reflectionPublishLoading &&
-    isHeroReady;
-
-  const heroRailItems = useMemo(() => ([
-    { key: "thought", label: "思考", active: hasThought },
-    { key: "action", label: "行動", active: hasAction },
-    { key: "emotion", label: "感情", active: hasEmotion },
-    { key: "category", label: "カテゴリ", active: hasCategoryProgress },
-    { key: "ready", label: "Ready?", active: isHeroReady, ready: true },
-  ]), [hasThought, hasAction, hasEmotion, hasCategoryProgress, isHeroReady]);
-
-  const updateCompactRailVisibility = useCallback((scrollY = currentScrollYRef.current) => {
-    const headerY = Number(heroCardHeaderY);
-    const inlineOffsetY = Number(heroRailInlineOffsetY);
-    const anchorY =
-      Number.isFinite(headerY) && Number.isFinite(inlineOffsetY)
-        ? headerY + inlineOffsetY
-        : 0;
-    const shouldShow = anchorY > 0 && scrollY >= Math.max(0, anchorY - compactRailTop);
-    setCompactRailVisible((prev) => (prev === shouldShow ? prev : shouldShow));
-  }, [heroCardHeaderY, heroRailInlineOffsetY, compactRailTop]);
+    !piecePreviewLoading &&
+    !piecePublishLoading &&
+    canSubmit;
 
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
-    thoughtLength > 0 ||
-    actionLength > 0 ||
+    memo.trim().length > 0 ||
+    memoAction.trim().length > 0 ||
     selectedCategories.length > 0 ||
-    sendFriendNotification === false;
+    showMemoSection ||
+    activeField !== null ||
+    sendEmotionNotification === false;
 
   useEffect(() => {
     if (!hasUserStartedInput) return;
     registerInputInteraction();
   }, [hasUserStartedInput, registerInputInteraction]);
-
-  useEffect(() => {
-    updateCompactRailVisibility(currentScrollYRef.current);
-  }, [updateCompactRailVisibility]);
 
   const getTutorialTargetRef = useCallback(() => {
     if (!isInputTutorialStep) return null;
@@ -976,18 +992,21 @@ const { height: windowHeight } = useWindowDimensions();
     switch (tutorialStep) {
       case 1:
       case 2:
-        return heroCardRef;
-      case 3:
-      case 4:
         return emotionAreaRef;
+      case 3: {
+        const selectedType = selectedEmotions?.[0]?.type || null;
+        if (!selectedType) return emotionAreaRef;
+        return strengthRowRefs.current?.[selectedType] || emotionAreaRef;
+      }
+      case 4:
+        return memoToggleButtonRef;
       case 5:
-        return categorySectionRef;
       case 6:
         return okButtonRef;
       default:
         return null;
     }
-  }, [isInputTutorialStep, tutorialStep]);
+  }, [isInputTutorialStep, tutorialStep, selectedEmotions, showMemoSection]);
 
   const tutorialOverlayConfig = useMemo(() => {
     if (!isInputTutorialStep) return null;
@@ -997,9 +1016,9 @@ const { height: windowHeight } = useWindowDimensions();
         return {
           step: 1,
           mode: "info",
-          title: "メモから始めます",
+          title: "感情を選びます",
           message:
-            "まずは思考内容と行動内容を書きます。\n\n感情入力カードがHomeの中心です。",
+            "ここで今日の感情を選びます\n\n複数の感情を選ぶこともできます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(2),
         };
@@ -1007,42 +1026,46 @@ const { height: windowHeight } = useWindowDimensions();
         return {
           step: 2,
           mode: "action",
-          title: "書いてみましょう",
-          message: "思考内容と行動内容をどちらも入力してみましょう。",
-          actionHint: "2つのメモ欄を入力してください",
+          title: "感情を選んでみましょう",
+          message: "まずは感情を1つ以上選んでみましょう",
+          actionHint: "感情ボタンを押してください",
         };
       case 3:
         return {
           step: 3,
           mode: "info",
-          title: "次に感情を選びます",
+          title: "感情の強さを選びます",
           message:
-            "メモを書いたあと、その入力に近い感情を選びます。",
+            "感情を選ぶと、弱 / 中 / 強 を選べます\n\n感情の強さも記録されます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(4),
         };
       case 4:
         return {
           step: 4,
-          mode: "action",
-          title: "感情を選びましょう",
-          message: "いまの入力に近い感情を1つ以上選んでください。",
-          actionHint: "感情ボタンを押してください",
+          mode: "info",
+          title: "メモも使えます",
+          message:
+            "必要なときはここからメモ入力ができます\n\nメモを書くと\n分析レポートの精度が上がります",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(5),
         };
       case 5:
         return {
           step: 5,
-          mode: "action",
-          title: "カテゴリを選びましょう",
-          message: "最後にカテゴリを1つ以上選ぶと Ready? が点灯します。",
-          actionHint: "カテゴリを選択してください",
+          mode: "info",
+          title: "送信します",
+          message: "入力が終わったら\nこのボタンで送信します",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(6),
+          cardPlacement: "top",
         };
       case 6:
         return {
           step: 6,
           mode: "action",
           title: "送信してみましょう",
-          message: "Ready? が点いたら、この内容で送信できます。",
+          message: "感情を送信してみましょう",
           actionHint: "「この内容でOK」を押してください",
           cardPlacement: "top",
         };
@@ -1121,54 +1144,13 @@ const { height: windowHeight } = useWindowDimensions();
   ]);
 
 
-
   useEffect(() => {
     if (!isTutorialMode) return;
-    if (tutorialStep !== 2) return;
-    if (!canOpenEmotionStep) return;
-    const frame = requestAnimationFrame(() => {
-      setTutorialStep(3);
-    });
-    return () => {
-      try {
-        cancelAnimationFrame(frame);
-      } catch {
-        // noop
-      }
-    };
-  }, [canOpenEmotionStep, isTutorialMode, tutorialStep, setTutorialStep]);
-
-  useEffect(() => {
-    if (!isTutorialMode) return;
-    if (tutorialStep !== 4) return;
-    if (!hasEmotion) return;
-    const frame = requestAnimationFrame(() => {
-      setTutorialStep(5);
-    });
-    return () => {
-      try {
-        cancelAnimationFrame(frame);
-      } catch {
-        // noop
-      }
-    };
-  }, [hasEmotion, isTutorialMode, tutorialStep, setTutorialStep]);
-
-  useEffect(() => {
-    if (!isTutorialMode) return;
-    if (tutorialStep !== 5) return;
-    if (!hasCategoryProgress) return;
-    const frame = requestAnimationFrame(() => {
-      setTutorialStep(6);
-    });
-    return () => {
-      try {
-        cancelAnimationFrame(frame);
-      } catch {
-        // noop
-      }
-    };
-  }, [hasCategoryProgress, isTutorialMode, tutorialStep, setTutorialStep]);
+    if (tutorialStep >= 4) return;
+    if (!showMemoSection) return;
+    if (isSelfInsightSelected) return;
+    setShowMemoSection(false);
+  }, [isTutorialMode, tutorialStep, showMemoSection, isSelfInsightSelected]);
 
   useLayoutEffect(() => {
     if (!isInputTutorialStep) {
@@ -1200,7 +1182,7 @@ const { height: windowHeight } = useWindowDimensions();
     startupModalVisible,
     startupQueuePreparing,
     selectedEmotions,
-    selectedCategories,
+    showMemoSection,
     memo,
     memoAction,
     keyboardInset,
@@ -1213,13 +1195,18 @@ const { height: windowHeight } = useWindowDimensions();
   ]);
 
   useEffect(() => {
+    if (isSelfInsightSelected) {
+      setShowMemoSection(true);
+    }
+  }, [isSelfInsightSelected]);
+
+  useEffect(() => {
     if (!hasMemoInput && selectedCategories.length > 0) {
       setSelectedCategories([]);
     }
   }, [hasMemoInput, selectedCategories.length]);
 
   const toggleEmotion = (cat) => {
-    if (!canOpenEmotionStep) return;
     registerInputInteraction();
     setSelectedEmotions((prev) => {
       let next = prev;
@@ -1240,6 +1227,16 @@ const { height: windowHeight } = useWindowDimensions();
           : [...prev, { type: cat, strength: "medium" }];
       }
 
+      if (
+        isTutorialMode &&
+        tutorialStep === 2 &&
+        next.some((e) => e.type !== SELF_INSIGHT)
+      ) {
+        requestAnimationFrame(() => {
+          setTutorialStep(3);
+        });
+      }
+
       return next;
     });
   };
@@ -1253,7 +1250,7 @@ const { height: windowHeight } = useWindowDimensions();
 
   const toggleCategory = (category) => {
     registerInputInteraction();
-    if (!canOpenCategoryStep) return;
+    if (!hasMemoInput) return;
     const nextCategory = String(category || "").trim();
     if (!nextCategory) return;
     setSelectedCategories((prev) => {
@@ -1275,7 +1272,7 @@ const { height: windowHeight } = useWindowDimensions();
       memo,
       created_at: new Date().toISOString(),
       is_secret: false,
-      notify_friends: sendFriendNotification,
+      [EMOTION_NOTIFICATION_WIRE.submitField]: sendEmotionNotification,
     };
 
     if (hasMemoInput && selectedCategories.length > 0) {
@@ -1293,60 +1290,60 @@ const { height: windowHeight } = useWindowDimensions();
     memoAction,
     selectedCategories,
     selectedEmotions,
-    sendFriendNotification,
+    sendEmotionNotification,
   ]);
 
 
-  const handlePreviewReflection = useCallback(async () => {
-    if (!canPreviewReflection) return;
+  const handlePreviewPiece = useCallback(async () => {
+    if (!canPreviewPiece) return;
 
     registerInputInteraction();
-    setReflectionPreviewLoading(true);
+    setPiecePreviewLoading(true);
     try {
       const payload = buildEmotionSubmitPayload();
-      const preview = await previewEmotionReflection(payload);
+      const preview = await previewEmotionPiece(payload);
       const quota = preview?.quota && typeof preview.quota === "object"
         ? preview.quota
         : null;
       if (quota) {
-        setReflectionQuota(quota);
+        setPieceQuota(quota);
       }
-      setReflectionPreviewPayload(preview && typeof preview === "object" ? preview : null);
-      setReflectionPreviewVisible(true);
+      setPiecePreviewPayload(preview && typeof preview === "object" ? preview : null);
+      setPiecePreviewVisible(true);
     } catch (e) {
-      console.warn("InputScreen: previewEmotionReflection failed", e);
+      console.warn("InputScreen: previewEmotionPiece failed", e);
       Alert.alert(
         "Pieceの生成",
         String(e?.message || "Pieceの生成に失敗しました。")
       );
     } finally {
-      setReflectionPreviewLoading(false);
+      setPiecePreviewLoading(false);
     }
-  }, [buildEmotionSubmitPayload, canPreviewReflection, registerInputInteraction]);
+  }, [buildEmotionSubmitPayload, canPreviewPiece, registerInputInteraction]);
 
-  const handleCancelReflectionPreview = useCallback(async () => {
-    const previewId = String(reflectionPreviewPayload?.preview_id || "").trim();
-    setReflectionPreviewVisible(false);
+  const handleCancelPiecePreview = useCallback(async () => {
+    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
+    setPiecePreviewVisible(false);
     if (!previewId) {
-      setReflectionPreviewPayload(null);
+      setPiecePreviewPayload(null);
       return;
     }
     try {
-      await cancelEmotionReflection(previewId);
+      await cancelEmotionPiece(previewId);
     } catch (e) {
-      console.warn("InputScreen: cancelEmotionReflection failed", e);
+      console.warn("InputScreen: cancelEmotionPiece failed", e);
     } finally {
-      setReflectionPreviewPayload(null);
+      setPiecePreviewPayload(null);
     }
-  }, [reflectionPreviewPayload?.preview_id]);
+  }, [piecePreviewPayload?.preview_id]);
 
-  const handlePublishReflection = useCallback(async () => {
-    const previewId = String(reflectionPreviewPayload?.preview_id || "").trim();
-    if (!previewId || reflectionPublishLoading) return;
+  const handlePublishPiece = useCallback(async () => {
+    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
+    if (!previewId || piecePublishLoading) return;
 
-    setReflectionPublishLoading(true);
+    setPiecePublishLoading(true);
     try {
-      const publishResult = await publishEmotionReflection(previewId);
+      const publishResult = await publishEmotionPiece(previewId);
       const inputFeedbackText = String(
         publishResult?.input_feedback?.comment_text || ""
       ).trim();
@@ -1359,19 +1356,21 @@ const { height: windowHeight } = useWindowDimensions();
       setMemo("");
       setMemoAction("");
       setSelectedCategories([]);
+      setShowMemoSection(false);
+      setActiveField(null);
       setMemoContentHeight(44);
       setMemoActionContentHeight(44);
       setIsSecret(false);
       Keyboard.dismiss();
 
-      setReflectionPreviewVisible(false);
-      setReflectionPreviewPayload(null);
+      setPiecePreviewVisible(false);
+      setPiecePreviewPayload(null);
 
       const nextQuota = publishResult?.quota && typeof publishResult.quota === "object"
         ? publishResult.quota
         : null;
       if (nextQuota) {
-        setReflectionQuota(nextQuota);
+        setPieceQuota(nextQuota);
       }
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
@@ -1385,20 +1384,20 @@ const { height: windowHeight } = useWindowDimensions();
         showToast("Pieceを作成しました");
       }
     } catch (e) {
-      console.warn("InputScreen: publishEmotionReflection failed", e);
+      console.warn("InputScreen: publishEmotionPiece failed", e);
       Alert.alert(
         "Pieceの作成",
         String(e?.message || "Pieceの作成に失敗しました。")
       );
     } finally {
-      setReflectionPublishLoading(false);
+      setPiecePublishLoading(false);
     }
   }, [
     clearPersistedInputDraft,
     loadHomeState,
     openInputFeedbackModal,
-    reflectionPreviewPayload?.preview_id,
-    reflectionPublishLoading,
+    piecePreviewPayload?.preview_id,
+    piecePublishLoading,
     showToast,
   ]);
 
@@ -1446,6 +1445,8 @@ const { height: windowHeight } = useWindowDimensions();
         setMemo("");
         setMemoAction("");
         setSelectedCategories([]);
+        setShowMemoSection(false);
+        setActiveField(null);
         setMemoContentHeight(44);
         setMemoActionContentHeight(44);
         setIsSecret(false);
@@ -1454,7 +1455,7 @@ const { height: windowHeight } = useWindowDimensions();
         showToast(`チュートリアルに記録しました
 主感情：${dominantType}${dominantSuffix}`);
 
-        if (sendFriendNotification) {
+        if (sendEmotionNotification) {
           try {
             if (tutorialEmotionLogNotifyTimerRef.current) {
               clearTimeout(tutorialEmotionLogNotifyTimerRef.current);
@@ -1506,7 +1507,7 @@ const { height: windowHeight } = useWindowDimensions();
 
         requestAnimationFrame(() => {
           try {
-            navigation?.navigate?.("MyWeb");
+            navigation?.navigate?.("Analysis");
             return;
           } catch {
             // noop
@@ -1517,7 +1518,7 @@ const { height: windowHeight } = useWindowDimensions();
               typeof navigation?.getParent === "function"
                 ? navigation.getParent()
                 : null;
-            parent?.navigate?.("MyWeb");
+            parent?.navigate?.("Analysis");
           } catch {
             // noop
           }
@@ -1541,6 +1542,8 @@ const { height: windowHeight } = useWindowDimensions();
       setMemo("");
       setMemoAction("");
       setSelectedCategories([]);
+      setShowMemoSection(false);
+      setActiveField(null);
       setMemoContentHeight(44);
       setMemoActionContentHeight(44);
       setIsSecret(false);
@@ -1700,10 +1703,8 @@ ${String(error?.message || error)}`
             scrollEventThrottle={16}
             onScrollBeginDrag={registerInputInteraction}
             onScroll={(e) => {
-              const nextScrollY =
+              currentScrollYRef.current =
                 e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
-              currentScrollYRef.current = nextScrollY;
-              updateCompactRailVisibility(nextScrollY);
             }}
           >
 {/* パネルヘッダー */}
@@ -1755,470 +1756,305 @@ ${String(error?.message || error)}`
                 </View>
               </View>
 
-              <View style={styles.todayStatusSection}>
-                <Text style={styles.todayStatusTitle}>今日の状況</Text>
-
-                <View style={styles.globalSummaryBlock}>
-                  <View style={styles.globalSummaryInner}>
-                    <View style={styles.globalSummaryHeaderRow}>
-                      <Ionicons
-                        name="radio-outline"
-                        size={14}
-                        color={colors.TITLE_GOLD}
-                        style={styles.globalSummaryIcon}
-                      />
-                      <Text style={styles.globalSummaryLabel}>今日の全体活動</Text>
-                    </View>
-                    <Text style={styles.globalSummaryText}>
-                      {`今日、全体で ${
-                        typeof globalEmotionUsers === "number" ? globalEmotionUsers : "—"
-                      } 人が感情入力しました`}
-                    </Text>
+              <View style={styles.globalSummaryBlock}>
+                <View style={styles.globalSummaryInner}>
+                  <View style={styles.globalSummaryHeaderRow}>
+                    <Ionicons
+                      name="radio-outline"
+                      size={14}
+                      color={colors.TITLE_GOLD}
+                      style={styles.globalSummaryIcon}
+                    />
+                    <Text style={styles.globalSummaryLabel}>今日の全体活動</Text>
                   </View>
+                  <Text style={styles.globalSummaryText}>
+                    {`今日、全体で ${
+                      typeof globalEmotionUsers === "number" ? globalEmotionUsers : "—"
+                    } 人が感情入力しました`}
+                  </Text>
                 </View>
+              </View>
 
-                {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
-                  <View style={styles.todayQuestionAccordionCard}>
-                    <CocolonPressable
-                      style={styles.todayQuestionAccordionHeader}
-                      onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
-                      accessibilityState={{ expanded: isTodayQuestionExpanded }}
-                    >
-                      <Text style={styles.todayQuestionAccordionTitle}>今日の問い</Text>
-                      <View style={styles.todayQuestionAccordionHeaderRight}>
-                        <Text
-                          style={[
-                            styles.todayQuestionAccordionStatus,
-                            isTodayQuestionAnswered && styles.todayQuestionAccordionStatusAnswered,
-                          ]}
-                        >
-                          {todayQuestionStatusLabel}
-                        </Text>
-                        {todayQuestionLoading ? (
-                          <ActivityIndicator
-                            size="small"
-                            color={colors.TEXT_SUBTLE}
-                            style={styles.todayQuestionAccordionSpinner}
-                          />
-                        ) : null}
-                        <Ionicons
-                          name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
-                          size={18}
-                          color={colors.TEXT_ON_LIGHT}
-                        />
-                      </View>
-                    </CocolonPressable>
-
-                    {isTodayQuestionExpanded ? (
-                      <View style={styles.todayQuestionAccordionContent}>
-                        <TodayQuestionCard
-                          question={todayQuestionBundle?.question}
-                          answerSummary={todayQuestionBundle?.answer_summary || null}
-                          loading={todayQuestionLoading}
-                          submitting={todayQuestionSubmitting}
-                          compact
-                          hideHeader
-                          embedded
-                          showHistoryButton
-                          onSubmit={handleSubmitTodayQuestion}
-                          onOpenHistory={handleOpenTodayQuestionHistory}
-                        />
-                      </View>
-                    ) : null}
+              {/* 今日の観測（常設） */}
+              <View style={styles.homeStatsCard}>
+                <View style={styles.homeStatsRow}>
+                  <Text style={styles.homeStatsLabel}>今日の観測</Text>
+                  <Text style={styles.homeStatsValue}>
+                    {typeof homeTodayCount === "number"
+                      ? `${homeTodayCount}回目`
+                      : "—"}
+                  </Text>
+                </View>
+                {homeBadgeLabel ? (
+                  <View style={styles.homeBadgeRow}>
+                    <Ionicons
+                      name="ribbon-outline"
+                      size={16}
+                      color={colors.TITLE_GOLD}
+                      style={{ marginRight: 6 }}
+                    />
+                    <Text style={styles.homeBadgeText}>{homeBadgeLabel}</Text>
                   </View>
                 ) : null}
-
-                <View style={styles.inputHistoryQuickCard}>
-                  <CocolonPressable
-                    style={styles.inputHistoryQuickButton}
-                    onPress={handleOpenEmotionHistory}
-                    accessibilityLabel="入力履歴を開く"
-                  >
-                    <View style={styles.inputHistoryQuickLeft}>
-                      <Ionicons
-                        name="time-outline"
-                        size={18}
-                        color={colors.TEXT_SUBTLE}
-                        style={styles.inputHistoryQuickIcon}
-                      />
-                      <Text style={styles.inputHistoryQuickTitle}>入力履歴</Text>
-                    </View>
-                    <Ionicons
-                      name="chevron-forward"
-                      size={18}
-                      color={colors.TEXT_SUBTLE}
-                    />
-                  </CocolonPressable>
-                </View>
               </View>
 
-              <View
-                ref={heroCardRef}
-                collapsable={false}
-                onLayout={(e) => {
-                  const nextY = e?.nativeEvent?.layout?.y;
-                  if (Number.isFinite(nextY)) {
-                    setHeroCardHeaderY(nextY);
-                  }
-                }}
-                style={[
-                  styles.heroCardHeader,
-                  heroStage !== "blank" && styles.heroCardHeaderActive,
-                  isHeroReady && styles.heroCardHeaderReady,
-                ]}
-              >
-                <View style={styles.heroHeader}>
-                  <Text style={styles.heroTitle}>今の気持ちを入力</Text>
-                  <View
-                    style={styles.heroRail}
-                    onLayout={(e) => {
-                      const nextY = e?.nativeEvent?.layout?.y;
-                      if (Number.isFinite(nextY)) {
-                        setHeroRailInlineOffsetY(nextY);
-                      }
-                    }}
+              {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
+                <View style={styles.todayQuestionAccordionCard}>
+                  <CocolonPressable
+                    style={styles.todayQuestionAccordionHeader}
+                    onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
+                    accessibilityState={{ expanded: isTodayQuestionExpanded }}
                   >
-                    {heroRailItems.map((item) => (
-                      <View
-                        key={item.key}
+                    <Text style={styles.todayQuestionAccordionTitle}>今日の問い</Text>
+                    <View style={styles.todayQuestionAccordionHeaderRight}>
+                      <Text
                         style={[
-                          styles.heroRailChip,
-                          item.active && styles.heroRailChipOn,
-                          item.ready && styles.heroRailChipReady,
-                          item.ready && item.active && styles.heroRailChipReadyOn,
+                          styles.todayQuestionAccordionStatus,
+                          isTodayQuestionAnswered && styles.todayQuestionAccordionStatusAnswered,
                         ]}
                       >
-                        <Text
-                          style={[
-                            styles.heroRailChipText,
-                            item.active && styles.heroRailChipTextOn,
-                          ]}
-                        >
-                          {item.label}
-                        </Text>
-                      </View>
-                    ))}
+                        {todayQuestionStatusLabel}
+                      </Text>
+                      {todayQuestionLoading ? (
+                        <ActivityIndicator
+                          size="small"
+                          color={colors.TEXT_SUBTLE}
+                          style={styles.todayQuestionAccordionSpinner}
+                        />
+                      ) : null}
+                      <Ionicons
+                        name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
+                        size={18}
+                        color={colors.TEXT_ON_LIGHT}
+                      />
+                    </View>
+                  </CocolonPressable>
+
+                  {isTodayQuestionExpanded ? (
+                    <View style={styles.todayQuestionAccordionContent}>
+                      <TodayQuestionCard
+                        question={todayQuestionBundle?.question}
+                        answerSummary={todayQuestionBundle?.answer_summary || null}
+                        loading={todayQuestionLoading}
+                        submitting={todayQuestionSubmitting}
+                        compact
+                        hideHeader
+                        embedded
+                        showHistoryButton
+                        onSubmit={handleSubmitTodayQuestion}
+                        onOpenHistory={handleOpenTodayQuestionHistory}
+                      />
+                    </View>
+                  ) : null}
+                </View>
+              ) : null}
+
+              <View style={styles.inputHistoryQuickCard}>
+                <CocolonPressable
+                  style={styles.inputHistoryQuickButton}
+                  onPress={handleOpenEmotionHistory}
+                  accessibilityLabel="入力履歴を開く"
+                >
+                  <View style={styles.inputHistoryQuickLeft}>
+                    <Ionicons
+                      name="time-outline"
+                      size={18}
+                      color={colors.TEXT_SUBTLE}
+                      style={styles.inputHistoryQuickIcon}
+                    />
+                    <View style={styles.inputHistoryQuickTextWrap}>
+                      <Text style={styles.inputHistoryQuickTitle}>入力履歴</Text>
+                      <Text style={styles.inputHistoryQuickSubtitle}>
+                        これまでの感情入力を振り返る
+                      </Text>
+                    </View>
                   </View>
+                  <Ionicons
+                    name="chevron-forward"
+                    size={18}
+                    color={colors.TEXT_SUBTLE}
+                  />
+                </CocolonPressable>
+              </View>
+
+              {/* 「今の気持ちを入力」エリア */}
+              <View
+                ref={emotionAreaRef}
+                collapsable={false}
+                style={styles.section}
+              >
+                <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>
+                  感情を選択
+                </Text>
+
+                {/* 感情ボタン群（2段レイアウト） */}
+                <View style={styles.buttons}>
+                  {EMOTION_ROWS.map((row, rowIndex) => (
+                    <View key={`row-${rowIndex}`} style={styles.emotionRow}>
+                      {row.map((cat, colIndex) => {
+                        if (!cat) {
+                          return (
+                            <View
+                              key={`empty-${rowIndex}-${colIndex}`}
+                              style={styles.emotionBlock}
+                            />
+                          );
+                        }
+
+                        const emotion = selectedEmotions.find(
+                          (e) => e.type === cat
+                        );
+                        const on = !!emotion;
+                        const isDisabled = isSelfInsightSelected;
+
+                        return (
+                          <View key={cat} style={styles.emotionBlock}>
+                            <CocolonPressable
+                              onPress={() => toggleEmotion(cat)}
+                              disabled={isDisabled}
+                              style={[
+                                styles.chip,
+                                on && styles.chipOn,
+                                isDisabled && { opacity: 0.45 },
+                              ]}
+                            >
+                              <Ionicons
+                                name={
+                                  cat === "喜び"
+                                    ? "happy-outline"
+                                    : cat === "悲しみ"
+                                    ? "sad-outline"
+                                    : cat === "怒り"
+                                    ? "flash-outline"
+                                    : cat === "不安"
+                                    ? "alert-circle-outline"
+                                    : "leaf-outline"
+                                }
+                                size={16}
+                                color={
+                                  on ? colors.ACCENT_TEXT : colors.TEXT_SUBTLE
+                                }
+                                style={{ marginRight: 4 }}
+                              />
+                              <Text
+                                style={[
+                                  styles.chipText,
+                                  on && styles.chipTextOn,
+                                ]}
+                              >
+                                {cat}
+                              </Text>
+                            </CocolonPressable>
+
+                            <View
+                              ref={(node) => {
+                                strengthRowRefs.current[cat] = node;
+                              }}
+                              collapsable={false}
+                              style={styles.strengthRow}
+                            >
+                              {on &&
+                                ["weak", "medium", "strong"].map((s) => (
+                                  <CocolonPressable
+                                    key={s}
+                                    onPress={() => changeStrength(cat, s)}
+                                    style={[
+                                      styles.strengthChip,
+                                      emotion?.strength === s &&
+                                        styles.strengthChipOn,
+                                    ]}
+                                  >
+                                    <Text
+                                      style={[
+                                        styles.strengthText,
+                                        emotion?.strength === s &&
+                                          styles.strengthTextOn,
+                                      ]}
+                                    >
+                                      {{
+                                        weak: "弱",
+                                        medium: "中",
+                                        strong: "強",
+                                      }[s]}
+                                    </Text>
+                                  </CocolonPressable>
+                                ))}
+                            </View>
+                          </View>
+                        );
+                      })}
+                    </View>
+                  ))}
                 </View>
               </View>
 
-              <View
-                style={[
-                  styles.heroCardBody,
-                  heroStage !== "blank" && styles.heroCardActive,
-                  isHeroReady && styles.heroCardReady,
-                ]}
-              >
-                <View
-                  ref={thoughtInputRef}
-                  collapsable={false}
-                  style={[styles.heroFieldCard, styles.heroFieldCardPrimary]}
+              <View style={styles.section}>
+                <Text style={[styles.sectionLabel, { fontWeight: "700" }]}>
+                  自分のことで発見や気づきがあったときはこちら
+                </Text>
+                <CocolonPressable
+                  onPress={() => toggleEmotion(SELF_INSIGHT)}
+                  style={[
+                    styles.selfInsightCard,
+                    isSelfInsightSelected && styles.selfInsightCardOn,
+                  ]}
+                  accessibilityLabel="自己理解モードを切り替える"
                 >
-                  <View style={styles.heroFieldHeader}>
-                    <Text style={styles.heroFieldTitle}>
-                      思考内容（自己世界の出来事）
-                    </Text>
-                  </View>
-                  <Text style={styles.heroFieldHint}>
-                    何を思った／どう感じた／どう解釈した？
-                  </Text>
-                  <TextInput
-                    ref={memoInputRef}
-                    style={[
-                      styles.memoInput,
-                      styles.heroFieldInput,
-                      {
-                        flex: 0,
-                        width: "100%",
-                        height: Math.min(
-                          Math.max(memoContentHeight || 44, 44),
-                          inputMaxHeight
-                        ),
-                      },
-                    ]}
-                    placeholder="ここに書いてください。"
-                    {...(isIOS ? { defaultValue: memo } : { value: memo })}
-                    onChangeText={setMemo}
-                    {...(isIOS
-                      ? {
-                          onChange: (e) =>
-                            setMemo(e?.nativeEvent?.text ?? ""),
+                  <View style={styles.selfInsightRow}>
+                    <View style={styles.selfInsightLeft}>
+                      <Ionicons
+                        name="bulb-outline"
+                        size={18}
+                        color={
+                          isSelfInsightSelected
+                            ? colors.ACCENT_TEXT
+                            : colors.TEXT_SUBTLE
                         }
-                      : {})}
-                    multiline
-                    scrollEnabled
-                    textAlignVertical="top"
-                    placeholderTextColor={colors.TEXT_ON_LIGHT}
-                    onFocus={(e) => {
-                      registerInputInteraction();
-                      lastFocusTargetRef.current =
-                        e?.target ?? e?.nativeEvent?.target ?? null;
-                      memoFocusedRef.current = true;
-                      focusedFieldRef.current = "memo";
-                      requestAnimationFrame(() => scrollToFocusedInput());
-                    }}
-                    onBlur={() => {
-                      memoFocusedRef.current = false;
-                      focusedFieldRef.current = null;
-                      lastFocusTargetRef.current = null;
-                    }}
-                    onContentSizeChange={(e) => {
-                      const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                      if (h) setMemoContentHeight(h);
-                      if (focusedFieldRef.current !== "memo") return;
-                      requestAnimationFrame(() => scrollToFocusedInput());
-                    }}
-                  />
-                </View>
-
-                <View
-                  ref={actionInputRef}
-                  collapsable={false}
-                  style={styles.heroFieldCard}
-                >
-                  <View style={styles.heroFieldHeader}>
-                    <Text style={styles.heroFieldTitle}>
-                      行動内容（実世界の出来事）
-                    </Text>
+                        style={{ marginRight: 8 }}
+                      />
+                      <Text
+                        style={[
+                          styles.selfInsightText,
+                          isSelfInsightSelected && styles.selfInsightTextOn,
+                        ]}
+                      >
+                        自己理解モード
+                      </Text>
+                    </View>
+                    <Ionicons
+                      name={
+                        isSelfInsightSelected
+                          ? "checkmark-circle"
+                          : "chevron-forward"
+                      }
+                      size={18}
+                      color={
+                        isSelfInsightSelected
+                          ? colors.ACCENT_TEXT
+                          : colors.TEXT_SUBTLE
+                      }
+                    />
                   </View>
-                  <Text style={styles.heroFieldHint}>
-                    何が起きた／何をした（できなかった）／結果どうなった？
-                  </Text>
-                  <TextInput
-                    ref={memoActionInputRef}
-                    style={[
-                      styles.memoInput,
-                      styles.heroFieldInput,
-                      {
-                        flex: 0,
-                        width: "100%",
-                        height: Math.min(
-                          Math.max(memoActionContentHeight || 44, 44),
-                          inputMaxHeight
-                        ),
-                      },
-                    ]}
-                    placeholder="ここに書いてください。"
-                    {...(isIOS
-                      ? { defaultValue: memoAction }
-                      : { value: memoAction })}
-                    onChangeText={setMemoAction}
-                    {...(isIOS
-                      ? {
-                          onChange: (e) =>
-                            setMemoAction(e?.nativeEvent?.text ?? ""),
-                        }
-                      : {})}
-                    multiline
-                    scrollEnabled
-                    textAlignVertical="top"
-                    placeholderTextColor={colors.TEXT_ON_LIGHT}
-                    onFocus={(e) => {
-                      registerInputInteraction();
-                      lastFocusTargetRef.current =
-                        e?.target ?? e?.nativeEvent?.target ?? null;
-                      memoFocusedRef.current = true;
-                      focusedFieldRef.current = "memoAction";
-                      requestAnimationFrame(() => scrollToFocusedInput());
-                    }}
-                    onBlur={() => {
-                      memoFocusedRef.current = false;
-                      focusedFieldRef.current = null;
-                      lastFocusTargetRef.current = null;
-                    }}
-                    onContentSizeChange={(e) => {
-                      const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                      if (h) setMemoActionContentHeight(h);
-                      if (focusedFieldRef.current !== "memoAction") return;
-                      requestAnimationFrame(() => scrollToFocusedInput());
-                    }}
-                  />
-                </View>
+                </CocolonPressable>
+              </View>
 
-                <View
-                  ref={emotionAreaRef}
-                  collapsable={false}
-                  style={[
-                    styles.heroStepBlock,
-                    !canOpenEmotionStep && styles.heroStepBlockLocked,
-                  ]}
-                >
-                  <View style={styles.heroStepHeader}>
-                    <Text style={styles.heroStepTitle}>感情を選択</Text>
-                    <Text style={styles.heroStepHint}>
-                      {canOpenEmotionStep
-                        ? "いまの入力に近い感情を選びます。"
-                        : "思考内容と行動内容の入力後に選択できます。"}
-                    </Text>
-                  </View>
-
-                  <View style={styles.buttons}>
-                    {EMOTION_ROWS.map((row, rowIndex) => (
-                      <View key={`row-${rowIndex}`} style={styles.emotionRow}>
-                        {row.map((cat) => {
-                          const emotion = selectedEmotions.find((e) => e.type === cat);
-                          const on = !!emotion;
-                          const isSelfInsightChip = cat === SELF_INSIGHT;
-                          const isDisabled =
-                            !canOpenEmotionStep ||
-                            (!isSelfInsightChip && isSelfInsightSelected);
-
-                          return (
-                            <View key={cat} style={styles.emotionBlock}>
-                              <CocolonPressable
-                                onPress={() => toggleEmotion(cat)}
-                                disabled={isDisabled}
-                                style={[
-                                  styles.chip,
-                                  on && styles.chipOn,
-                                  isDisabled && styles.heroStepCardLocked,
-                                ]}
-                              >
-                                <Ionicons
-                                  name={getEmotionIconName(cat)}
-                                  size={16}
-                                  color={
-                                    on ? colors.ACCENT_TEXT : colors.TEXT_SUBTLE
-                                  }
-                                  style={{ marginRight: 4 }}
-                                />
-                                <Text
-                                  style={[
-                                    styles.chipText,
-                                    on && styles.chipTextOn,
-                                  ]}
-                                >
-                                  {cat}
-                                </Text>
-                              </CocolonPressable>
-
-                              <View
-                                ref={(node) => {
-                                  strengthRowRefs.current[cat] = node;
-                                }}
-                                collapsable={false}
-                                style={styles.strengthRow}
-                              >
-                                {on && cat !== SELF_INSIGHT
-                                  ? ["weak", "medium", "strong"].map((s) => (
-                                      <CocolonPressable
-                                        key={s}
-                                        onPress={() => changeStrength(cat, s)}
-                                        style={[
-                                          styles.strengthChip,
-                                          emotion?.strength === s &&
-                                            styles.strengthChipOn,
-                                        ]}
-                                      >
-                                        <Text
-                                          style={[
-                                            styles.strengthText,
-                                            emotion?.strength === s &&
-                                              styles.strengthTextOn,
-                                          ]}
-                                        >
-                                          {{
-                                            weak: "弱",
-                                            medium: "中",
-                                            strong: "強",
-                                          }[s]}
-                                        </Text>
-                                      </CocolonPressable>
-                                    ))
-                                  : null}
-                              </View>
-                            </View>
-                          );
-                        })}
-                      </View>
-                    ))}
-                  </View>
-                </View>
-
-                <View
-                  ref={categorySectionRef}
-                  collapsable={false}
-                  style={[
-                    styles.heroStepBlock,
-                    !canOpenCategoryStep && styles.heroStepBlockLocked,
-                  ]}
-                >
-                  <View style={styles.heroStepHeader}>
-                    <Text style={styles.heroStepTitle}>このメモの内容カテゴリ</Text>
-                    <Text style={styles.heroStepHint}>
-                      {canOpenCategoryStep
-                        ? "この出来事や思考に近いカテゴリを、1つ以上選んでください。"
-                        : "感情を選択するとカテゴリを選択できます。"}
-                    </Text>
-                  </View>
-                  <View style={styles.categoryGrid}>
-                    {CATEGORY_OPTIONS.map((category) => {
-                      const isActive = selectedCategories.includes(category);
-                      const isDisabled = !canOpenCategoryStep;
-                      return (
-                        <CocolonPressable
-                          key={category}
-                          onPress={() => toggleCategory(category)}
-                          disabled={isDisabled}
-                          style={[
-                            styles.categoryChip,
-                            isActive && styles.categoryChipOn,
-                            isDisabled && styles.categoryChipDisabled,
-                          ]}
-                          accessibilityLabel={`${category}カテゴリを選択する`}
-                        >
-                          <Text
-                            style={[
-                              styles.categoryChipText,
-                              isActive && styles.categoryChipTextOn,
-                              isDisabled && styles.categoryChipTextDisabled,
-                            ]}
-                          >
-                            {category}
-                          </Text>
-                        </CocolonPressable>
-                      );
-                    })}
-                  </View>
-                  {canOpenCategoryStep && !hasSelectedCategories ? (
-                    <Text style={styles.categoryRequiredText}>
-                      カテゴリを1つ以上選択すると Ready? が点灯します。
-                    </Text>
-                  ) : null}
-                </View>
-
-                <View
-                  style={[
-                    styles.heroFooter,
-                    isHeroReady && styles.heroFooterReady,
-                  ]}
-                >
-                  <View style={styles.heroReadyRow}>
-                    <Text
-                      style={[
-                        styles.heroReadyText,
-                        isHeroReady && styles.heroReadyTextOn,
-                      ]}
-                    >
-                      Ready?
-                    </Text>
-                  </View>
-
-                  <View style={styles.heroFooterSettingRow}>
-                    <View style={styles.heroFooterSettingLeft}>
+              <View style={styles.section}>
+                <View style={styles.preferenceCard}>
+                  <View style={styles.preferenceRow}>
+                    <View style={styles.preferenceLeft}>
                       <Ionicons
                         name="notifications-outline"
                         size={18}
                         color={colors.TEXT_SUBTLE}
-                        style={styles.heroFooterSettingIcon}
+                        style={styles.preferenceIcon}
                       />
-                      <View style={styles.heroFooterSettingTextWrap}>
-                        <Text style={styles.heroFooterSettingTitle}>
+                      <View style={styles.preferenceTextWrap}>
+                        <Text style={styles.preferenceTitle}>
                           感情通知を送らない
                         </Text>
-                        <Text style={styles.heroFooterSettingDesc}>
+                        <Text style={styles.preferenceDesc}>
                           オンにすると感情入力がフォロー中ユーザーに通知されません。
                         </Text>
                       </View>
@@ -2227,7 +2063,7 @@ ${String(error?.message || error)}`
                       value={doNotSendEmotionNotification}
                       onValueChange={(v) => {
                         registerInputInteraction();
-                        setSendFriendNotification(!v);
+                        setSendEmotionNotification(!v);
                       }}
                       trackColor={{
                         false: "#D1D5DB",
@@ -2244,77 +2080,322 @@ ${String(error?.message || error)}`
                       accessibilityLabel="感情通知を送らない設定を切り替える"
                     />
                   </View>
+                </View>
 
-                  {!isTutorialMode ? (
-                    <View style={styles.heroActionWrap}>
-                      <CocolonButton
-                        variant="secondary"
-                        onPress={handlePreviewReflection}
-                        disabled={!canPreviewReflection}
-                        loading={reflectionPreviewLoading}
-                        accessibilityLabel="Pieceを作成する"
-                      >
-                        Pieceを作成する
-                      </CocolonButton>
-                    </View>
-                  ) : null}
-
+                {showMemoSection ? (
                   <View
-                    ref={okButtonRef}
+                    ref={memoSectionRef}
                     collapsable={false}
-                    style={styles.heroActionWrap}
+                    style={styles.memoSection}
                   >
-                    <CocolonButton
-                      variant="primary"
-                      onPress={handleOk}
-                      disabled={!canSubmit}
-                      loading={submitting}
-                      accessibilityLabel="この内容でOK"
+                    <View style={styles.memoRevealDividerBlock}>
+                      <View style={styles.memoRevealDivider} />
+                    </View>
+                    <Text
+                      style={[styles.sectionLabel, { fontWeight: "700" }]}
                     >
-                      この内容でOK
+                      思考内容（自己世界の出来事）：{"\n"}何を思った／どう感じた／どう解釈した？
+                    </Text>
+                    {activeField === "memo" ? (
+                      <View style={[styles.memoCard, styles.memoCardExpanded]}>
+                        <TextInput
+                          ref={memoInputRef}
+                          style={[
+                            styles.memoInput,
+                            {
+                              flex: 0,
+                              width: "100%",
+                              height: Math.min(
+                                Math.max(memoContentHeight || 44, 44),
+                                inputMaxHeight
+                              ),
+                            },
+                          ]}
+                          placeholder="ここに書いてください。"
+                          {...(isIOS ? { defaultValue: memo } : { value: memo })}
+                          onChangeText={setMemo}
+                          {...(isIOS
+                            ? {
+                                onChange: (e) =>
+                                  setMemo(e?.nativeEvent?.text ?? ""),
+                              }
+                            : {})}
+                          multiline
+                          scrollEnabled
+                          textAlignVertical="top"
+                          placeholderTextColor={colors.TEXT_ON_LIGHT}
+                          onFocus={(e) => {
+                            registerInputInteraction();
+                            lastFocusTargetRef.current =
+                              e?.target ?? e?.nativeEvent?.target ?? null;
+                            memoFocusedRef.current = true;
+                            focusedFieldRef.current = "memo";
+                            requestAnimationFrame(() => scrollToFocusedInput());
+                          }}
+                          onBlur={() => {
+                            memoFocusedRef.current = false;
+                            focusedFieldRef.current = null;
+                            lastFocusTargetRef.current = null;
+                            setActiveField(null);
+                          }}
+                          onContentSizeChange={(e) => {
+                            const h = e?.nativeEvent?.contentSize?.height ?? 0;
+                            if (h) setMemoContentHeight(h);
+                            if (focusedFieldRef.current !== "memo") return;
+                            requestAnimationFrame(() => scrollToFocusedInput());
+                          }}
+                        />
+                      </View>
+                    ) : (
+                      <CocolonPressable
+                        style={[styles.memoCard, styles.memoCardCollapsed]}
+                        onPress={() => openField("memo")}
+                        accessibilityLabel="思考内容を入力する"
+                      >
+                        <View style={styles.collapsedRow}>
+                          <View style={styles.collapsedLeft}>
+                            <Ionicons
+                              name="create-outline"
+                              size={18}
+                              color={colors.TEXT_SUBTLE}
+                              style={{ marginRight: 8 }}
+                            />
+                            <Text
+                              style={[
+                                styles.collapsedText,
+                                !(memo && memo.trim().length > 0) &&
+                                  styles.collapsedTextPlaceholder,
+                              ]}
+                              numberOfLines={1}
+                            >
+                              {memo && memo.trim().length > 0
+                                ? memo.replace(/\s+/g, " ").trim()
+                                : "ここに書いてください。"}
+                            </Text>
+                          </View>
+                          <Ionicons
+                            name="chevron-down"
+                            size={18}
+                            color={colors.TEXT_SUBTLE}
+                          />
+                        </View>
+                      </CocolonPressable>
+                    )}
+
+                    <Text
+                      style={[
+                        styles.sectionLabel,
+                        { marginTop: 10, fontWeight: "700" },
+                      ]}
+                    >
+                      行動内容（実世界の出来事）：{"\n"}何が起きた／何をした（できなかった）／結果どうなった？
+                    </Text>
+                    {activeField === "memoAction" ? (
+                      <View style={[styles.memoCard, styles.memoCardExpanded]}>
+                        <TextInput
+                          ref={memoActionInputRef}
+                          style={[
+                            styles.memoInput,
+                            {
+                              flex: 0,
+                              width: "100%",
+                              height: Math.min(
+                                Math.max(memoActionContentHeight || 44, 44),
+                                inputMaxHeight
+                              ),
+                            },
+                          ]}
+                          placeholder="ここに書いてください。"
+                          {...(isIOS
+                            ? { defaultValue: memoAction }
+                            : { value: memoAction })}
+                          onChangeText={setMemoAction}
+                          {...(isIOS
+                            ? {
+                                onChange: (e) =>
+                                  setMemoAction(e?.nativeEvent?.text ?? ""),
+                              }
+                            : {})}
+                          multiline
+                          scrollEnabled
+                          textAlignVertical="top"
+                          placeholderTextColor={colors.TEXT_ON_LIGHT}
+                          onFocus={(e) => {
+                            registerInputInteraction();
+                            lastFocusTargetRef.current =
+                              e?.target ?? e?.nativeEvent?.target ?? null;
+                            memoFocusedRef.current = true;
+                            focusedFieldRef.current = "memoAction";
+                            requestAnimationFrame(() => scrollToFocusedInput());
+                          }}
+                          onBlur={() => {
+                            memoFocusedRef.current = false;
+                            focusedFieldRef.current = null;
+                            lastFocusTargetRef.current = null;
+                            setActiveField(null);
+                          }}
+                          onContentSizeChange={(e) => {
+                            const h = e?.nativeEvent?.contentSize?.height ?? 0;
+                            if (h) setMemoActionContentHeight(h);
+                            if (focusedFieldRef.current !== "memoAction") return;
+                            requestAnimationFrame(() => scrollToFocusedInput());
+                          }}
+                        />
+                      </View>
+                    ) : (
+                      <CocolonPressable
+                        style={[styles.memoCard, styles.memoCardCollapsed]}
+                        onPress={() => openField("memoAction")}
+                        accessibilityLabel="行動内容を入力する"
+                      >
+                        <View style={styles.collapsedRow}>
+                          <View style={styles.collapsedLeft}>
+                            <Ionicons
+                              name="walk-outline"
+                              size={18}
+                              color={colors.TEXT_SUBTLE}
+                              style={{ marginRight: 8 }}
+                            />
+                            <Text
+                              style={[
+                                styles.collapsedText,
+                                !(memoAction && memoAction.trim().length > 0) &&
+                                  styles.collapsedTextPlaceholder,
+                              ]}
+                              numberOfLines={1}
+                            >
+                              {memoAction && memoAction.trim().length > 0
+                                ? memoAction.replace(/\s+/g, " ").trim()
+                                : "ここに書いてください。"}
+                            </Text>
+                          </View>
+                          <Ionicons
+                            name="chevron-down"
+                            size={18}
+                            color={colors.TEXT_SUBTLE}
+                          />
+                        </View>
+                      </CocolonPressable>
+                    )}
+
+                    <View style={styles.categorySection}>
+                      <Text
+                        style={[styles.sectionLabel, { fontWeight: "700" }]}
+                      >
+                        このメモの内容カテゴリ
+                      </Text>
+                      <Text style={styles.categoryHintText}>
+                        {hasMemoInput
+                          ? "この出来事や思考に近いカテゴリを、1つ以上選んでください。"
+                          : "思考内容または行動内容を入力すると選択できます。"}
+                      </Text>
+                      <View style={styles.categoryGrid}>
+                        {CATEGORY_OPTIONS.map((category) => {
+                          const isActive = selectedCategories.includes(category);
+                          const isDisabled = !hasMemoInput;
+                          return (
+                            <CocolonPressable
+                              key={category}
+                              onPress={() => toggleCategory(category)}
+                              disabled={isDisabled}
+                              style={[
+                                styles.categoryChip,
+                                isActive && styles.categoryChipOn,
+                                isDisabled && styles.categoryChipDisabled,
+                              ]}
+                              accessibilityLabel={`${category}カテゴリを選択する`}
+                            >
+                              <Text
+                                style={[
+                                  styles.categoryChipText,
+                                  isActive && styles.categoryChipTextOn,
+                                  isDisabled && styles.categoryChipTextDisabled,
+                                ]}
+                              >
+                                {category}
+                              </Text>
+                            </CocolonPressable>
+                          );
+                        })}
+                      </View>
+                      {hasMemoInput && !hasSelectedCategories ? (
+                        <Text style={styles.categoryRequiredText}>
+                          メモを入力した場合は、カテゴリを1つ以上選択してください。
+                        </Text>
+                      ) : null}
+                    </View>
+
+                  </View>
+                ) : null}
+
+                {!isTutorialMode ? (
+                  <View style={styles.buttonWrapper}>
+                    <CocolonButton
+                      variant="secondary"
+                      onPress={handlePreviewPiece}
+                      disabled={!canPreviewPiece}
+                      loading={piecePreviewLoading}
+                      accessibilityLabel="Pieceを作成する"
+                    >
+                      Pieceを作成する
                     </CocolonButton>
                   </View>
+                ) : null}
+
+                <View
+                  ref={okButtonRef}
+                  collapsable={false}
+                  style={styles.buttonWrapper}
+                >
+                  <CocolonButton
+                    variant="primary"
+                    onPress={handleOk}
+                    disabled={!canSubmit}
+                    loading={submitting}
+                    accessibilityLabel="この内容でOK"
+                  >
+                    この内容でOK
+                  </CocolonButton>
                 </View>
+
+                {!isSelfInsightSelected ? (
+                  <View
+                    ref={memoToggleButtonRef}
+                    collapsable={false}
+                    style={styles.memoToggleButtonWrapper}
+                  >
+                    <CocolonPressable
+                      style={styles.memoToggleButton}
+                      onPress={() => {
+                        registerInputInteraction();
+                        if (showMemoSection) {
+                          setActiveField(null);
+                          Keyboard.dismiss();
+                        }
+                        setShowMemoSection((prev) => !prev);
+                      }}
+                      accessibilityLabel={
+                        showMemoSection
+                          ? "メモ入力を閉じる"
+                          : "メモ入力を開く"
+                      }
+                    >
+                      <Ionicons
+                        name={showMemoSection ? "chevron-up" : "chevron-down"}
+                        size={18}
+                        color="#000000"
+                        style={{ marginRight: 6 }}
+                      />
+                      <Text style={styles.memoToggleText}>
+                        {showMemoSection ? "メモを閉じる" : "メモを書く"}
+                      </Text>
+                    </CocolonPressable>
+                  </View>
+                ) : null}
               </View>
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-      {compactRailVisible ? (
-        <View
-          pointerEvents="none"
-          style={[
-            styles.compactRailOverlay,
-            { top: compactRailTop },
-          ]}
-        >
-          <View style={styles.compactRailInner}>
-            <View style={styles.compactRailRow}>
-              {heroRailItems.map((item) => (
-                <View
-                  key={`compact-${item.key}`}
-                  style={[
-                    styles.heroRailChip,
-                    styles.compactRailChip,
-                    item.active && styles.heroRailChipOn,
-                    item.ready && styles.heroRailChipReady,
-                    item.ready && item.active && styles.heroRailChipReadyOn,
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.heroRailChipText,
-                      styles.compactRailChipText,
-                      item.active && styles.heroRailChipTextOn,
-                    ]}
-                  >
-                    {item.label}
-                  </Text>
-                </View>
-              ))}
-            </View>
-          </View>
-        </View>
-      ) : null}
 <NoticeModal
   visible={!isTutorialMode && noticeFeatureEnabled && isNoticeStartupPopupVisible && !!noticePopup}
   notice={noticePopup}
@@ -2472,15 +2553,15 @@ ${String(error?.message || error)}`
   </View>
 </Modal>
 
-<EmotionReflectionPreviewModal
-  visible={reflectionPreviewVisible}
+<EmotionPiecePreviewModal
+  visible={piecePreviewVisible}
   preview={{
-    ...(reflectionPreviewPayload || {}),
-    quota: reflectionPreviewPayload?.quota || reflectionQuota || null,
+    ...(piecePreviewPayload || {}),
+    quota: piecePreviewPayload?.quota || pieceQuota || null,
   }}
-  publishLoading={reflectionPublishLoading}
-  onClose={handleCancelReflectionPreview}
-  onPublish={handlePublishReflection}
+  publishLoading={piecePublishLoading}
+  onClose={handleCancelPiecePreview}
+  onPublish={handlePublishPiece}
 />
       </View>
 
@@ -2559,7 +2640,7 @@ function createStyles(COLORS, ui) {
       letterSpacing: 0.8,
     },
 
-    /** メインパネル（MyModel共通） */
+    /** メインパネル（Piece共通） */
     panel: {
       width: "94%",
       minHeight: PANEL_MIN_HEIGHT,
@@ -2707,7 +2788,7 @@ function createStyles(COLORS, ui) {
 
     /** 今日の観測（常設） */
     homeStatsCard: {
-      display: "flex",
+      display: "none",
       marginBottom: 14,
       borderRadius: 14,
       borderWidth: 1,
@@ -2799,9 +2880,9 @@ function createStyles(COLORS, ui) {
       overflow: "hidden",
     },
     inputHistoryQuickButton: {
-      minHeight: 46,
+      minHeight: 56,
       paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingVertical: 12,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
@@ -2819,7 +2900,7 @@ function createStyles(COLORS, ui) {
       flex: 1,
     },
     inputHistoryQuickTitle: {
-      fontSize: 12,
+      fontSize: 13,
       fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
     },
@@ -2828,351 +2909,6 @@ function createStyles(COLORS, ui) {
       fontSize: 11,
       lineHeight: 16,
       color: COLORS.TEXT_SUBTLE,
-    },
-
-    todayStatusSection: {
-      marginBottom: 18,
-    },
-    todayStatusTitle: {
-      fontSize: 14,
-      lineHeight: 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      marginBottom: 10,
-    },
-
-    heroCardHeader: {
-      borderTopLeftRadius: 24,
-      borderTopRightRadius: 24,
-      borderWidth: 1,
-      borderBottomWidth: 0,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 14,
-      paddingTop: 16,
-      paddingBottom: 12,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
-    },
-    heroCardHeaderActive: {
-      shadowOpacity: 0.12,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 5,
-    },
-    heroCardHeaderReady: {
-      borderColor: COLORS.BORDER_GOLD,
-      shadowOpacity: 0.16,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 8 },
-      elevation: 8,
-    },
-    heroCardBody: {
-      marginBottom: 18,
-      borderBottomLeftRadius: 24,
-      borderBottomRightRadius: 24,
-      borderWidth: 1,
-      borderTopWidth: 0,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 14,
-      paddingTop: 14,
-      paddingBottom: 16,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
-    },
-    heroCardActive: {
-      shadowOpacity: 0.12,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 5,
-    },
-    heroCardReady: {
-      borderColor: COLORS.BORDER_GOLD,
-      shadowOpacity: 0.16,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 8 },
-      elevation: 8,
-    },
-    heroRailStickyShell: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingTop: 2,
-      paddingBottom: 8,
-    },
-    heroRailStickyInner: {
-      backgroundColor: "transparent",
-      paddingHorizontal: 0,
-      paddingVertical: 0,
-    },
-    compactRailOverlay: {
-      position: "absolute",
-      left: 0,
-      right: 0,
-      paddingHorizontal: 18,
-      paddingTop: 4,
-      paddingBottom: 8,
-      backgroundColor: COLORS.BG_SILVER,
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
-      zIndex: 30,
-      shadowOpacity: 0,
-      shadowRadius: 0,
-      shadowOffset: { width: 0, height: 0 },
-      elevation: 0,
-    },
-    compactRailInner: {
-      backgroundColor: "transparent",
-    },
-    compactRailRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginHorizontal: -3,
-    },
-    heroHeader: {
-      marginBottom: 0,
-    },
-    heroTitle: {
-      fontSize: 20,
-      lineHeight: 28,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 10,
-    },
-    heroRail: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      marginHorizontal: -4,
-      marginBottom: 0,
-    },
-    heroRailChip: {
-      marginHorizontal: 4,
-      marginBottom: 8,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-    },
-    heroRailChipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-    },
-    heroRailChipReady: {
-      borderStyle: "dashed",
-    },
-    heroRailChipReadyOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      borderStyle: "solid",
-    },
-    heroRailChipText: {
-      fontSize: 11,
-      lineHeight: 16,
-      fontWeight: "700",
-      color: COLORS.TEXT_SUBTLE,
-    },
-    heroRailChipTextOn: {
-      color: COLORS.ACCENT_TEXT,
-    },
-    compactRailChip: {
-      marginHorizontal: 3,
-      marginBottom: 0,
-      paddingHorizontal: 8,
-      paddingVertical: 5,
-    },
-    compactRailChipText: {
-      fontSize: 10,
-      lineHeight: 14,
-    },
-    heroDock: {
-      marginTop: 12,
-      minHeight: 50,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
-      flexDirection: "row",
-      flexWrap: "wrap",
-      alignItems: "center",
-    },
-    heroDockChip: {
-      flexDirection: "row",
-      alignItems: "center",
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      marginRight: 8,
-      marginBottom: 8,
-    },
-    heroDockChipText: {
-      fontSize: 12,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    heroDockChipMeta: {
-      fontSize: 11,
-      fontWeight: "700",
-      color: COLORS.TITLE_GOLD,
-      marginLeft: 2,
-    },
-    heroFieldCard: {
-      borderRadius: 18,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 12,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
-    },
-    heroFieldCardPrimary: {
-      borderColor: COLORS.BORDER_GOLD,
-    },
-    heroFieldHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 6,
-    },
-    heroFieldTitle: {
-      flex: 1,
-      fontSize: 14,
-      lineHeight: 20,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-      paddingRight: 10,
-    },
-    heroFieldMeta: {
-      fontSize: 11,
-      lineHeight: 16,
-      fontWeight: "700",
-      color: COLORS.TITLE_GOLD,
-    },
-    heroFieldHint: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 10,
-    },
-    heroFieldInput: {
-      minHeight: 100,
-    },
-    heroStepBlock: {
-      borderRadius: 18,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 12,
-    },
-    heroStepBlockLocked: {
-      opacity: 0.58,
-    },
-    heroStepCardLocked: {
-      opacity: 0.45,
-    },
-    heroStepHeader: {
-      marginBottom: 10,
-    },
-    heroStepTitle: {
-      fontSize: 14,
-      lineHeight: 20,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 4,
-    },
-    heroStepHint: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
-    },
-    heroFooter: {
-      marginTop: 4,
-      borderRadius: 18,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-    },
-    heroFooterReady: {
-      borderColor: COLORS.BORDER_GOLD,
-      backgroundColor: COLORS.FIELD_BG,
-    },
-    heroReadyRow: {
-      alignItems: "flex-start",
-      marginBottom: 10,
-    },
-    heroReadyText: {
-      fontSize: 12,
-      lineHeight: 18,
-      fontWeight: "800",
-      color: COLORS.TEXT_SUBTLE,
-    },
-    heroReadyTextOn: {
-      color: COLORS.TITLE_GOLD,
-    },
-    heroActionWrap: {
-      width: "100%",
-      marginTop: 8,
-    },
-    heroFooterSettingRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      marginBottom: 4,
-    },
-    heroFooterSettingLeft: {
-      flexDirection: "row",
-      alignItems: "flex-start",
-      flex: 1,
-      paddingRight: 12,
-    },
-    heroFooterSettingIcon: {
-      marginTop: 2,
-      marginRight: 8,
-    },
-    heroFooterSettingTextWrap: {
-      flex: 1,
-    },
-    heroFooterSettingTitle: {
-      fontSize: 13,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    heroFooterSettingDesc: {
-      marginTop: 2,
-      fontSize: font.description ?? 9,
-      lineHeight: 15,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
     },
 
     /** セクション共通 */

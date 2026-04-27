@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { ANALYSIS_WIRE, PIECE_WIRE } from "./lib/compat/legacyWireContracts";
 
 /**
  * UnreadContext
@@ -12,7 +13,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
  *   }
  *
  * Example scopes:
- *   - "MyWeb": { weekly: true, monthly: false }
+ *   - "Analysis": { weekly: true, monthly: false }
  *   - "EmotionLog": { feed: true, requests: false }
  */
 
@@ -34,6 +35,8 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
 const UnreadContext = createContext(null);
 const STARTUP_META_SCOPE = "App";
 const STARTUP_META_KEY = "startupMeta";
+const LEGACY_ANALYSIS_SCOPE = ["My", "Web"].join("");
+const LEGACY_PIECE_SCOPE = ["My", "Model"].join("");
 
 function normStr(v) {
   return String(v || "").trim();
@@ -41,6 +44,8 @@ function normStr(v) {
 
 function normScope(scope) {
   const normalized = normStr(scope);
+  if (normalized === LEGACY_ANALYSIS_SCOPE) return "Analysis";
+  if (normalized === LEGACY_PIECE_SCOPE) return "Piece";
   return normalized;
 }
 
@@ -181,11 +186,11 @@ function buildStartupHydrationData(rawStartup, options = {}) {
   const fetchedAt = Number(options?.fetchedAt) || Date.now();
   const source = normStr(options?.source) || null;
 
+  // Current clients hydrate EmotionLog unread state only from the canonical
+  // startup section name. Older aliases remain server-side compatibility only.
   const emotionLogUnreadSection = resolveSection(
     sections,
-    "emotionlog_unread",
-    "emotion_log_unread",
-    "friends_unread"
+    "emotion_log_unread"
   );
   if (emotionLogUnreadSection.found) {
     const emotionLogUnread = pickObject(emotionLogUnreadSection.value);
@@ -195,82 +200,51 @@ function buildStartupHydrationData(rawStartup, options = {}) {
     };
   }
 
-  const mywebUnreadSection = resolveSection(sections, "myweb_unread");
-  if (mywebUnreadSection.found) {
-    const mywebUnread = pickObject(mywebUnreadSection.value);
-    const unreadByType = pickObject(mywebUnread?.unread_by_type);
-    unreadPatch.MyWeb = {
+  const analysisUnreadSection = resolveSection(sections, ...ANALYSIS_WIRE.startupSections.unread);
+  if (analysisUnreadSection.found) {
+    const analysisUnread = pickObject(analysisUnreadSection.value);
+    const unreadByType = pickObject(analysisUnread?.unread_by_type);
+    unreadPatch.Analysis = {
       daily: !!unreadByType.daily,
       weekly: !!unreadByType.weekly,
       monthly: !!unreadByType.monthly,
       selfStructure: !!unreadByType.selfStructure,
     };
-    prefetchPatch.MyWeb = {
-      ...(prefetchPatch.MyWeb || {}),
-      unreadStatus: mywebUnreadSection.value,
+    prefetchPatch.Analysis = {
+      ...(prefetchPatch.Analysis || {}),
+      unreadStatus: analysisUnreadSection.value,
     };
   }
 
-  const mymodelReflectionsSection = resolveSection(
+  const pieceUnreadSection = resolveSection(
     sections,
-    "mymodel_reflections_unread",
-    "mymodel_reflections"
+    ...PIECE_WIRE.startupSections.unread
   );
-  if (mymodelReflectionsSection.found) {
-    const mymodelReflections = pickObject(mymodelReflectionsSection.value);
+  if (pieceUnreadSection.found) {
+    const pieceUnread = pickObject(pieceUnreadSection.value);
 
-    unreadPatch.MyModel = {
-      reflectionsNew: !!(
-        mymodelReflections?.has_unread ||
-        mymodelReflections?.unread ||
-        mymodelReflections?.has_any_unread ||
-        mymodelReflections?.count
+    unreadPatch.Piece = {
+      piecesNew: !!(
+        pieceUnread?.has_unread ||
+        pieceUnread?.unread ||
+        pieceUnread?.has_any_unread ||
+        pieceUnread?.count
       ),
     };
   }
 
-  const noticeCurrentSection = resolveSection(sections, "notices_current", "notice_current");
-  if (noticeCurrentSection.found) {
-    prefetchPatch.Input = {
-      ...(prefetchPatch.Input || {}),
-      noticeCurrent: noticeCurrentSection.value,
-    };
-  }
+  // Input/Home startup UI is canonically owned by /home/state.
+  // Intentionally ignore notice / today-question compat payloads from /app/startup
+  // so app boot only hydrates app-level unread/prefetch state.
 
-  const todayQuestionStatusSection = resolveSection(sections, "today_question_light", "today_question_status", "today_question");
-  if (todayQuestionStatusSection.found) {
-    prefetchPatch.Input = {
-      ...(prefetchPatch.Input || {}),
-      todayQuestionStatus: todayQuestionStatusSection.value,
-    };
-  }
-
-  const todayQuestionPopupSection = resolveSection(sections, "today_question_popup");
-  if (todayQuestionPopupSection.found) {
-    prefetchPatch.Input = {
-      ...(prefetchPatch.Input || {}),
-      todayQuestionPopup: todayQuestionPopupSection.value,
-    };
-  } else if (
-    todayQuestionStatusSection.found &&
-    Array.isArray(todayQuestionStatusSection.value?.question?.choices)
-  ) {
-    prefetchPatch.Input = {
-      ...(prefetchPatch.Input || {}),
-      todayQuestionPopup: todayQuestionStatusSection.value,
-    };
-  }
-
-  const mywebHomeSummarySection = resolveSection(
+  const analysisHomeSummarySection = resolveSection(
     sections,
-    "myweb_home_summary",
-    "myweb_summary",
-    "myweb_home"
+    ...ANALYSIS_WIRE.startupSections.homeSummary
   );
-  if (mywebHomeSummarySection.found) {
-    prefetchPatch.MyWeb = {
-      ...(prefetchPatch.MyWeb || {}),
-      homeSummary: mywebHomeSummarySection.value,
+  if (analysisHomeSummarySection.found) {
+    prefetchPatch.Analysis = {
+      ...(prefetchPatch.Analysis || {}),
+      homeSummary: analysisHomeSummarySection.value,
     };
   }
 

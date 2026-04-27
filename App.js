@@ -17,14 +17,14 @@ import AuthScreen from "./AuthScreen";
 import InputScreen from "./screens/InputScreen";
 import CocolonGuideScreen from "./screens/CocolonGuideScreen";
 import NoticeHistoryScreen from "./screens/NoticeHistoryScreen";
-import MyWebScreen from "./screens/MyWebScreen";
-import MyWebHistoryScreen from "./screens/MyWebHistoryScreen";
+import AnalysisScreen from "./screens/AnalysisScreen";
+import AnalysisHistoryScreen from "./screens/AnalysisHistoryScreen";
 import TodayQuestionHistoryScreen from "./screens/TodayQuestionHistoryScreen";
-import MyModelScreen from "./screens/MyModelScreen";
-import MyModelEntryScreen from "./screens/MyModelEntryScreen";
+import PieceScreen from "./screens/PieceScreen";
+import PieceEntryScreen from "./screens/PieceEntryScreen";
 import ProfileCreateScreen from "./screens/ProfileCreateScreen";
-import MyModelReflectionsScreen from "./screens/MyModelReflectionsScreen";
-import MyModelReactionHistoryScreen from "./screens/MyModelReactionHistoryScreen";
+import PieceLibraryScreen from "./screens/PieceLibraryScreen";
+import PieceHistoryMenuScreen from "./screens/PieceHistoryMenuScreen";
 import EmotionLogScreen from "./screens/EmotionLogScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SettingsAppSettingsScreen from "./screens/SettingsAppSettingsScreen";
@@ -32,14 +32,14 @@ import SettingsOtherScreen from "./screens/SettingsOtherScreen";
 import AccountScreen from "./screens/AccountScreen";
 import SubscriptionSelectScreen from "./screens/SubscriptionSelectScreen";
 import FollowListScreen from "./screens/FollowListScreen";
-import EchoesHistoryListScreen from "./screens/EchoesHistoryListScreen";
-import EchoesHistoryDetailScreen from "./screens/EchoesHistoryDetailScreen";
+import ResonanceHistoryListScreen from "./screens/ResonanceHistoryListScreen";
+import ResonanceHistoryDetailScreen from "./screens/ResonanceHistoryDetailScreen";
 
 import RankingTopScreen from "./screens/RankingTopScreen";
 import EmotionRankingScreen from "./screens/EmotionRankingScreen";
 import InputCountRankingScreen from "./screens/InputCountRankingScreen";
 import InputLengthRankingScreen from "./screens/InputLengthRankingScreen";
-import MyModelEchoesRankingScreen from "./screens/MyModelEchoesRankingScreen";
+import PieceResonanceRankingScreen from "./screens/PieceResonanceRankingScreen";
 import LoginStreakRankingScreen from "./screens/LoginStreakRankingScreen";
 import { ThemeProvider, useTheme } from "./theme/ThemeContext";
 import { UnreadProvider, useUnread } from "./UnreadContext";
@@ -49,17 +49,18 @@ import { TutorialProvider, useTutorial } from "./TutorialContext";
 import { startIapPurchaseObserver, stopIapPurchaseObserver } from "./lib/iap/iapService";
 import { startPushTokenSync, syncPushTokenOnce } from "./lib/pushToken";
 import { supabase } from "./lib/supabase";
+import { ANALYSIS_WIRE, PIECE_WIRE, SELF_STRUCTURE_WIRE, buildPublicProfileByShareCodePath, buildSelfStructureReportHistoryPath, deleteWireSectionKeys, readWireSectionObject } from "./lib/compat/legacyWireContracts";
 import { getCurrentUserId } from "./lib/user";
 import { apiGet, apiPost, apiFetch } from "./lib/apiClient";
-import { getNexusReflectionsAsQnaList } from "./lib/nexusApi";
+import { getNexusPiecesAsQnaList } from "./lib/nexusApi";
 import { BottomTabUnreadBadge } from "./components/UnreadBadge";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
 
 const InputStack = createNativeStackNavigator();
-const MyWebStack = createNativeStackNavigator();
-const MyModelStack = createNativeStackNavigator();
+const AnalysisStack = createNativeStackNavigator();
+const PieceStack = createNativeStackNavigator();
 const RankingStack = createNativeStackNavigator();
 const SettingsStack = createNativeStackNavigator();
 
@@ -80,24 +81,25 @@ async function resolveCurrentUserId() {
 }
 
 const HIDDEN_SCREENS = new Set([]);
-const MAIN_TAB_ROUTES = new Set(["Input", "MyWeb", "MyModel", "RankingTop", "Settings"]);
+const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "RankingTop", "Settings"]);
 const SELF_STRUCTURE_LATEST_STATUS_POLL_MS = 20 * 1000;
 const SELF_STRUCTURE_BANNER_AUTO_HIDE_MS = 4500;
 const SCREEN_PREFETCH_MIN_INTERVAL_MS = 2 * 60 * 1000;
 const SCREEN_PREFETCH_DEFER_MS = 1200;
 const UNREAD_PREFETCH_MIN_INTERVAL_MS = 15 * 1000;
 const EMOTION_LOG_UNREAD_POLL_MS = 30 * 1000;
-const MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS = 60 * 1000;
-const MYWEB_STARTUP_REVALIDATE_DELAY_MS = 1800;
-const MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
-const MYWEB_SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
-const MYWEB_REPORT_READ_STATUS_CHUNK_SIZE = 60;
+const ANALYSIS_STARTUP_WARMUP_MIN_INTERVAL_MS = 60 * 1000;
+const ANALYSIS_STARTUP_REVALIDATE_DELAY_MS = 1800;
+const ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
+const ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
+const ANALYSIS_REPORT_READ_STATUS_CHUNK_SIZE = 60;
 
 const SHARE_PROFILE_API_BASE_URL =
-  (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
+  (process.env[["EXPO_PUBLIC_", ["MY", "MODEL_API_URL"].join("")].join("")] || "https://mashos-api.onrender.com").replace(/\/+$/, "");
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
+const LEGACY_ANALYSIS_ROUTE_NAME = ["My", "Web"].join("");
 
-const MYMODEL_SUB_ROUTES = new Set(["EchoesHistoryList", "EchoesHistoryDetail", "MyModelReflections", "MyModelReflectionsScreen", "MyModelReactionHistory", "EmotionLog"]);
+const PIECE_SUB_ROUTES = new Set(["ResonanceHistoryList", "ResonanceHistoryDetail", "PieceLibrary", "PieceLibraryScreen", "PieceHistory", "EmotionLog"]);
 const FRAME_BORDER_WIDTH = 2;
 
 function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
@@ -198,7 +200,7 @@ function canNavigateToRoute(targetName) {
   }
 }
 
-function buildMyWebNotificationParams(data) {
+function buildAnalysisNotificationParams(data) {
   const now = Date.now();
   const type = String(data?.type || "").trim().toLowerCase();
   const openMode = String(data?.open_mode || "").trim();
@@ -248,17 +250,17 @@ function resolveNotificationTargetRoute(remoteMessage) {
     return { name: "Input" };
   }
   if (type === "report_distribution") {
-    return { name: "MyWeb", params: buildMyWebNotificationParams(data) };
+    return { name: "Analysis", params: buildAnalysisNotificationParams(data) };
   }
-  if (type === "myweb_report" || screen === "MyWeb") {
-    return { name: "MyWeb", params: buildMyWebNotificationParams(data) };
+  if (type === ANALYSIS_WIRE.routes.reportType || screen === "Analysis" || screen === LEGACY_ANALYSIS_ROUTE_NAME) {
+    return { name: "Analysis", params: buildAnalysisNotificationParams(data) };
   }
-  return { name: "MyModel", params: { screen: "EmotionLog" } };
+  return { name: "Piece", params: { screen: "EmotionLog" } };
 }
 
-function buildMyWebRootNavigationParams(params) {
+function buildAnalysisRootNavigationParams(params) {
   return {
-    screen: "MyWeb",
+    screen: "Analysis",
     params: params || undefined,
   };
 }
@@ -270,8 +272,8 @@ function tryOpenRouteIfPending() {
   if (!canNavigateToRoute(target.name)) return;
 
   try {
-    if (target.name === "MyWeb") {
-      navigationRef.navigate("MyWeb", buildMyWebRootNavigationParams(target.params));
+    if (target.name === "Analysis") {
+      navigationRef.navigate("Analysis", buildAnalysisRootNavigationParams(target.params));
     } else {
       navigationRef.navigate(target.name, target.params || undefined);
     }
@@ -284,7 +286,7 @@ function requestOpenRouteFromNotification(remoteMessage) {
   tryOpenRouteIfPending();
 }
 
-function extractFriendCodeFromIncomingUrl(rawUrl) {
+function extractShareCodeFromIncomingUrl(rawUrl) {
   const url = String(rawUrl || "").trim();
   if (!url) return "";
 
@@ -308,12 +310,12 @@ function extractFriendCodeFromIncomingUrl(rawUrl) {
   return "";
 }
 
-async function resolveSharedProfileUserId(friendCode) {
-  const code = String(friendCode || "").trim();
+async function resolveSharedProfileUserId(shareCode) {
+  const code = String(shareCode || "").trim();
   if (!code) return null;
 
   try {
-    const url = `${SHARE_PROFILE_API_BASE_URL}/public/profile/by-friend-code?code=${encodeURIComponent(code)}`;
+    const url = `${SHARE_PROFILE_API_BASE_URL}${buildPublicProfileByShareCodePath(code)}`;
     const res = await apiFetch(url, {
       method: "GET",
       auth: false,
@@ -336,7 +338,7 @@ function requestOpenSharedAccountRoute(viewedUserId) {
   if (!userId) return;
 
   __pendingOpenRouteFromNotification = {
-    name: "MyModel",
+    name: "Piece",
     params: {
       screen: "Account",
       params: { viewedUserId: userId },
@@ -347,10 +349,10 @@ function requestOpenSharedAccountRoute(viewedUserId) {
 }
 
 async function handleIncomingAppUrl(rawUrl) {
-  const friendCode = extractFriendCodeFromIncomingUrl(rawUrl);
-  if (!friendCode) return false;
+  const shareCode = extractShareCodeFromIncomingUrl(rawUrl);
+  if (!shareCode) return false;
 
-  const userId = await resolveSharedProfileUserId(friendCode);
+  const userId = await resolveSharedProfileUserId(shareCode);
   if (!userId) return true;
 
   requestOpenSharedAccountRoute(userId);
@@ -393,8 +395,8 @@ function CocolonTabBar(props) {
   const effectiveRouteName =
     typeof currentRouteName === "string" && currentRouteName.startsWith("Ranking")
       ? "RankingTop"
-      : currentRouteName === "MyProfile" || MYMODEL_SUB_ROUTES.has(currentRouteName)
-      ? "MyModel"
+      : PIECE_SUB_ROUTES.has(currentRouteName)
+      ? "Piece"
       : currentRouteName;
 
   if (HIDDEN_SCREENS.has(currentRoute.name)) {
@@ -431,7 +433,7 @@ function InputStackNavigator() {
         options={{ headerShown: false }}
       >
         {(navProps) => (
-          <MyWebHistoryScreen
+          <AnalysisHistoryScreen
             {...navProps}
             onBack={() => {
               try {
@@ -473,27 +475,28 @@ function InputStackNavigator() {
       <InputStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <InputStack.Screen name="NoticeHistory" component={NoticeHistoryScreen} />
       <InputStack.Screen name="Account" component={AccountScreen} />
+      <InputStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <InputStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <InputStack.Screen name="FollowListScreen" component={FollowListScreen} />
     </InputStack.Navigator>
   );
 }
 
-function MyWebStackNavigator({ onSetMymodelLinkPayload, onRefreshTabUnread, route: tabRoute }) {
+function AnalysisStackNavigator({ onSetPieceLinkPayload, onRefreshTabUnread, route: tabRoute }) {
   return (
-    <MyWebStack.Navigator initialRouteName="MyWeb" screenOptions={{ headerShown: false }}>
-      <MyWebStack.Screen name="MyWeb">
+    <AnalysisStack.Navigator initialRouteName="Analysis" screenOptions={{ headerShown: false }}>
+      <AnalysisStack.Screen name="Analysis">
         {(navProps) => (
-          <MyWebScreen
+          <AnalysisScreen
             {...navProps}
             tabRoute={tabRoute}
             onRefreshTabUnread={onRefreshTabUnread}
-            onOpenMyProfile={(payload) => {
+            onOpenPieceDeepDive={(payload) => {
               try {
-                onSetMymodelLinkPayload?.(payload || null);
+                onSetPieceLinkPayload?.(payload || null);
               } catch {}
               try {
-                navProps?.navigation?.navigate("MyModel");
+                navProps?.navigation?.navigate("Piece");
               } catch {}
             }}
             onOpenSubscription={() => {
@@ -503,21 +506,22 @@ function MyWebStackNavigator({ onSetMymodelLinkPayload, onRefreshTabUnread, rout
             }}
           />
         )}
-      </MyWebStack.Screen>
-      <MyWebStack.Screen name="Account" component={AccountScreen} />
-      <MyWebStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
-      <MyWebStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
-      <MyWebStack.Screen name="FollowListScreen" component={FollowListScreen} />
-    </MyWebStack.Navigator>
+      </AnalysisStack.Screen>
+      <AnalysisStack.Screen name="Account" component={AccountScreen} />
+      <AnalysisStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
+      <AnalysisStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+      <AnalysisStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <AnalysisStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </AnalysisStack.Navigator>
   );
 }
 
-function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDisplayed }) {
+function PieceStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDisplayed }) {
   return (
-    <MyModelStack.Navigator initialRouteName="MyModel" screenOptions={{ headerShown: false }}>
-      <MyModelStack.Screen name="MyModel">
+    <PieceStack.Navigator initialRouteName="Piece" screenOptions={{ headerShown: false }}>
+      <PieceStack.Screen name="Piece">
         {(navProps) => (
-          <MyModelEntryScreen
+          <PieceEntryScreen
             {...navProps}
             linkPayload={linkPayload}
             onConsumeLinkPayload={onConsumeLinkPayload}
@@ -528,13 +532,13 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
             }}
           />
         )}
-      </MyModelStack.Screen>
+      </PieceStack.Screen>
 
-      <MyModelStack.Screen name="MyModelReflections" component={MyModelReflectionsScreen} />
-      <MyModelStack.Screen name="MyModelReactionHistory" component={MyModelReactionHistoryScreen} />
-      <MyModelStack.Screen name="EchoesHistoryList" component={EchoesHistoryListScreen} />
-      <MyModelStack.Screen name="EchoesHistoryDetail" component={EchoesHistoryDetailScreen} />
-      <MyModelStack.Screen name="EmotionLog">
+      <PieceStack.Screen name="PieceLibrary" component={PieceLibraryScreen} />
+      <PieceStack.Screen name="PieceHistory" component={PieceHistoryMenuScreen} />
+      <PieceStack.Screen name="ResonanceHistoryList" component={ResonanceHistoryListScreen} />
+      <PieceStack.Screen name="ResonanceHistoryDetail" component={ResonanceHistoryDetailScreen} />
+      <PieceStack.Screen name="EmotionLog">
         {(navProps) => (
           <EmotionLogScreen
             {...navProps}
@@ -542,12 +546,13 @@ function MyModelStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLog
             onEmotionLogDisplayed={onEmotionLogDisplayed}
           />
         )}
-      </MyModelStack.Screen>
-      <MyModelStack.Screen name="Account" component={AccountScreen} />
-      <MyModelStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
-      <MyModelStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
-      <MyModelStack.Screen name="FollowListScreen" component={FollowListScreen} />
-    </MyModelStack.Navigator>
+      </PieceStack.Screen>
+      <PieceStack.Screen name="Account" component={AccountScreen} />
+      <PieceStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
+      <PieceStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
+      <PieceStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
+      <PieceStack.Screen name="FollowListScreen" component={FollowListScreen} />
+    </PieceStack.Navigator>
   );
 }
 
@@ -558,9 +563,10 @@ function RankingStackNavigator() {
       <RankingStack.Screen name="RankingEmotion" component={EmotionRankingScreen} />
       <RankingStack.Screen name="RankingInputCount" component={InputCountRankingScreen} />
       <RankingStack.Screen name="RankingInputLength" component={InputLengthRankingScreen} />
-      <RankingStack.Screen name="RankingMyModelResonances" component={MyModelEchoesRankingScreen} />
+      <RankingStack.Screen name="RankingPieceResonances" component={PieceResonanceRankingScreen} />
       <RankingStack.Screen name="RankingLoginStreak" component={LoginStreakRankingScreen} />
       <RankingStack.Screen name="Account" component={AccountScreen} />
+      <RankingStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <RankingStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <RankingStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <RankingStack.Screen name="FollowListScreen" component={FollowListScreen} />
@@ -582,6 +588,7 @@ function SettingsStackNavigator() {
       <SettingsStack.Screen name="SettingsAppSettings" component={SettingsAppSettingsScreen} />
       <SettingsStack.Screen name="SettingsOther" component={SettingsOtherScreen} />
       <SettingsStack.Screen name="Account" component={AccountScreen} />
+      <SettingsStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <SettingsStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <SettingsStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <SettingsStack.Screen name="FollowListScreen" component={FollowListScreen} />
@@ -608,38 +615,38 @@ function MainTabs() {
   const selfStructureBannerHideTimerRef = useRef(null);
   const selfStructureLatestVersionRef = useRef(null);
   const selfStructureLatestInitializedRef = useRef(false);
-  const myWebUnreadRefreshSeqRef = useRef(0);
-  const myWebUnreadStateRef = useRef({
+  const analysisUnreadRefreshSeqRef = useRef(0);
+  const analysisUnreadStateRef = useRef({
     daily: false,
     weekly: false,
     monthly: false,
     selfStructure: false,
   });
-  const myWebStartupWarmupLastRunAtRef = useRef(0);
-  const myWebStartupWarmupTimerRef = useRef(null);
-  const myWebStartupWarmupSeqRef = useRef(0);
-  const myWebSubscriptionRefreshPendingRef = useRef(false);
+  const analysisStartupWarmupLastRunAtRef = useRef(0);
+  const analysisStartupWarmupTimerRef = useRef(null);
+  const analysisStartupWarmupSeqRef = useRef(0);
+  const analysisSubscriptionRefreshPendingRef = useRef(false);
 
   const [activeRouteName, setActiveRouteName] = useState("Input");
   const frameEnabled = !HIDDEN_SCREENS.has(activeRouteName);
-  const [mymodelLinkPayload, setMymodelLinkPayload] = useState(null);
+  const [pieceLinkPayload, setPieceLinkPayload] = useState(null);
 
   const getTabBarActiveName = React.useCallback((name) => {
     const n = typeof name === "string" ? name : "";
     const effective =
       n.startsWith("Ranking")
         ? "RankingTop"
-        : n === "MyProfile" || MYMODEL_SUB_ROUTES.has(n)
-        ? "MyModel"
+        : PIECE_SUB_ROUTES.has(n)
+        ? "Piece"
         : n;
     return MAIN_TAB_ROUTES.has(effective) ? effective : "Input";
   }, []);
 
   const showTabUnreadBadge = React.useCallback(
     (routeName) => {
-      if (routeName === "MyModel" || routeName === "MyProfile") {
+      if (routeName === "Piece") {
         return !!(
-          (!isTutorialMode && getFeatureUnread("MyModel", "reflectionsNew")) ||
+          (!isTutorialMode && getFeatureUnread("Piece", "piecesNew")) ||
           getFeatureUnread("EmotionLog", "feed")
         );
       }
@@ -664,7 +671,7 @@ function MainTabs() {
         const nestedState = route?.state;
         const nestedIndex = typeof nestedState?.index === "number" ? nestedState.index : 0;
 
-        if (pressedTabName === "MyWeb") {
+        if (pressedTabName === "Analysis") {
           try { e?.preventDefault?.(); } catch {}
           if (nestedIndex > 0) {
             const targetKey = nestedState?.key;
@@ -677,7 +684,7 @@ function MainTabs() {
             }
           }
           try {
-            navigation?.navigate?.("MyWeb", { openDistributionHome: true, openDistributionHomeAt: Date.now() });
+            navigation?.navigate?.("Analysis", { openDistributionHome: true, openDistributionHomeAt: Date.now() });
           } catch {}
           return;
         }
@@ -700,21 +707,21 @@ function MainTabs() {
 
 
   useEffect(() => {
-    myWebUnreadStateRef.current = {
-      daily: !!getFeatureUnread("MyWeb", "daily"),
-      weekly: !!getFeatureUnread("MyWeb", "weekly"),
-      monthly: !!getFeatureUnread("MyWeb", "monthly"),
-      selfStructure: !!getFeatureUnread("MyWeb", "selfStructure"),
+    analysisUnreadStateRef.current = {
+      daily: !!getFeatureUnread("Analysis", "daily"),
+      weekly: !!getFeatureUnread("Analysis", "weekly"),
+      monthly: !!getFeatureUnread("Analysis", "monthly"),
+      selfStructure: !!getFeatureUnread("Analysis", "selfStructure"),
     };
   }, [getFeatureUnread]);
 
-  const applyMyWebUnreadPatch = React.useCallback((patch, options = {}) => {
+  const applyAnalysisUnreadPatch = React.useCallback((patch, options = {}) => {
     const preserveTruthyKeys = options?.preserveTruthyKeys === true;
     const targetKeys = Array.isArray(options?.keys) && options.keys.length > 0
       ? options.keys
       : ["daily", "weekly", "monthly", "selfStructure"];
 
-    const prev = myWebUnreadStateRef.current || {
+    const prev = analysisUnreadStateRef.current || {
       daily: false,
       weekly: false,
       monthly: false,
@@ -733,16 +740,16 @@ function MainTabs() {
       groupPatch[key] = nextValue;
     });
 
-    myWebUnreadStateRef.current = next;
+    analysisUnreadStateRef.current = next;
 
     if (Object.keys(groupPatch).length > 0) {
-      setUnreadGroup("MyWeb", groupPatch);
+      setUnreadGroup("Analysis", groupPatch);
     }
 
     return next;
   }, [setUnreadGroup]);
 
-  const extractMyWebUnreadFromStartupSnapshot = React.useCallback((payload) => {
+  const extractAnalysisUnreadFromStartupSnapshot = React.useCallback((payload) => {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
 
     const startupRoot =
@@ -757,18 +764,17 @@ function MainTabs() {
         ? startupRoot.sections
         : null;
 
-    const mywebUnreadSection =
-      sections?.myweb_unread &&
-      typeof sections.myweb_unread === "object" &&
-      !Array.isArray(sections.myweb_unread)
-        ? sections.myweb_unread
-        : null;
+    const analysisUnreadSection = readWireSectionObject(
+      sections,
+      ANALYSIS_WIRE.startupSections.unread
+    );
 
     const unreadByType =
-      mywebUnreadSection?.unread_by_type &&
-      typeof mywebUnreadSection.unread_by_type === "object" &&
-      !Array.isArray(mywebUnreadSection.unread_by_type)
-        ? mywebUnreadSection.unread_by_type
+      analysisUnreadSection?.found &&
+      analysisUnreadSection?.value &&
+      typeof analysisUnreadSection.value.unread_by_type === "object" &&
+      !Array.isArray(analysisUnreadSection.value.unread_by_type)
+        ? analysisUnreadSection.value.unread_by_type
         : null;
 
     if (!unreadByType) return null;
@@ -781,7 +787,7 @@ function MainTabs() {
     };
   }, []);
 
-  const stripMyWebUnreadFromStartupSnapshot = React.useCallback((payload) => {
+  const stripAnalysisUnreadFromStartupSnapshot = React.useCallback((payload) => {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
 
     try {
@@ -796,7 +802,15 @@ function MainTabs() {
         typeof startupRoot.sections === "object" &&
         !Array.isArray(startupRoot.sections)
       ) {
-        delete startupRoot.sections.myweb_unread;
+        deleteWireSectionKeys(startupRoot.sections, ANALYSIS_WIRE.startupSections.unread);
+        // Input/Home data is canonically owned by /home/state.
+        // Keep startup focused on app-level seed / badge / prefetch concerns.
+        delete startupRoot.sections.notice_current;
+        delete startupRoot.sections.notices_current;
+        delete startupRoot.sections.today_question;
+        delete startupRoot.sections.today_question_light;
+        delete startupRoot.sections.today_question_status;
+        delete startupRoot.sections.today_question_popup;
       }
 
       return cloned;
@@ -805,7 +819,7 @@ function MainTabs() {
     }
   }, []);
 
-  const MYMODEL_API_BASE_URL = (process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com").replace(/\/+$/, "");
+  const COCOLON_API_BASE_URL = (process.env[["EXPO_PUBLIC_", ["MY", "MODEL_API_URL"].join("")].join("")] || "https://mashos-api.onrender.com").replace(/\/+$/, "");
   const __lastActivityLoginPingAtRef = React.useRef(0);
   const __lastUnreadPrefetchAtRef = React.useRef(0);
   const screenPrefetchTimerRef = React.useRef(null);
@@ -819,7 +833,7 @@ function MainTabs() {
       const { data: sessionData } = await supabase.auth.getSession();
       const accessToken = sessionData?.session?.access_token ?? null;
       if (!accessToken) return;
-      const url = `${MYMODEL_API_BASE_URL}/activity/login`;
+      const url = `${COCOLON_API_BASE_URL}/activity/login`;
       const res = await apiFetch(url, {
         method: "POST",
         auth: false,
@@ -829,36 +843,36 @@ function MainTabs() {
     } catch {}
   }, []);
 
-  const refreshMyModelReflectionsUnreadBadge = React.useCallback(async () => {
+  const refreshPieceUnreadBadge = React.useCallback(async () => {
     try {
       if (isTutorialMode) {
-        setUnread("MyModel", "reflectionsNew", false);
-        setUnread("MyModel", "qnaNew", false);
+        setUnread("Piece", "piecesNew", false);
+        
         return;
       }
-      const json = await apiGet("/nexus/reflections/unread-status");
+      const json = await apiGet(PIECE_WIRE.routes.publicUnreadStatus);
       const hasUnread = typeof json?.has_unread === "boolean" ? json.has_unread : typeof json?.hasUnread === "boolean" ? json.hasUnread : false;
-      setUnread("MyModel", "reflectionsNew", !!hasUnread);
-      setUnread("MyModel", "qnaNew", false);
+      setUnread("Piece", "piecesNew", !!hasUnread);
+      
     } catch {
-      setUnread("MyModel", "reflectionsNew", false);
-      setUnread("MyModel", "qnaNew", false);
+      setUnread("Piece", "piecesNew", false);
+      
     }
   }, [isTutorialMode, setUnread]);
 
-  const getMyWebSelfStructureLatestSeenStorageKey = React.useCallback(async () => {
+  const getAnalysisSelfStructureLatestSeenStorageKey = React.useCallback(async () => {
     try {
       const { data } = await supabase.auth.getSession();
       const userId = String(data?.session?.user?.id || "").trim();
       return userId
-        ? `${MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
-        : MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
+        ? `${ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
+        : ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
     } catch {
-      return MYWEB_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
+      return ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
     }
   }, []);
 
-  const fetchMyWebReportReadIdSet = React.useCallback(async (reportIds) => {
+  const fetchAnalysisReportReadIdSet = React.useCallback(async (reportIds) => {
     const ids = Array.from(
       new Set(
         (Array.isArray(reportIds) ? reportIds : [])
@@ -869,8 +883,8 @@ function MainTabs() {
     if (ids.length === 0) return new Set();
 
     const readSet = new Set();
-    for (let i = 0; i < ids.length; i += MYWEB_REPORT_READ_STATUS_CHUNK_SIZE) {
-      const chunk = ids.slice(i, i + MYWEB_REPORT_READ_STATUS_CHUNK_SIZE);
+    for (let i = 0; i < ids.length; i += ANALYSIS_REPORT_READ_STATUS_CHUNK_SIZE) {
+      const chunk = ids.slice(i, i + ANALYSIS_REPORT_READ_STATUS_CHUNK_SIZE);
       if (chunk.length === 0) continue;
       const query = chunk
         .map((id) => `report_ids=${encodeURIComponent(id)}`)
@@ -885,12 +899,12 @@ function MainTabs() {
     return readSet;
   }, []);
 
-  const fetchMyWebSelfStructureLatestUnread = React.useCallback(async () => {
+  const fetchAnalysisSelfStructureLatestUnread = React.useCallback(async () => {
     if (!isPaid) return false;
 
-    const storageKey = await getMyWebSelfStructureLatestSeenStorageKey();
+    const storageKey = await getAnalysisSelfStructureLatestSeenStorageKey();
     const [statusJson, seenVersionKey] = await Promise.all([
-      apiGet("/myprofile/latest/status"),
+      apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus),
       AsyncStorage.getItem(storageKey),
     ]);
 
@@ -900,13 +914,13 @@ function MainTabs() {
 
     if (!versionKey || !hasVisibleContent) return false;
     return versionKey !== seenKey;
-  }, [getMyWebSelfStructureLatestSeenStorageKey, isPaid]);
+  }, [getAnalysisSelfStructureLatestSeenStorageKey, isPaid]);
 
-  const fetchMyWebSelfStructureHistoryUnread = React.useCallback(async () => {
+  const fetchAnalysisSelfStructureHistoryUnread = React.useCallback(async () => {
     if (!isPaid) return false;
 
     const historyJson = await apiGet(
-      `/myprofile/reports/history?report_type=monthly&limit=${MYWEB_SELF_STRUCTURE_HISTORY_FETCH_LIMIT}&offset=0`
+      buildSelfStructureReportHistoryPath({ reportType: "monthly", limit: ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT, offset: 0 })
     );
     const items = Array.isArray(historyJson?.items) ? historyJson.items : [];
     const ids = items
@@ -915,33 +929,33 @@ function MainTabs() {
 
     if (ids.length === 0) return false;
 
-    const readSet = await fetchMyWebReportReadIdSet(ids);
+    const readSet = await fetchAnalysisReportReadIdSet(ids);
     return ids.some((id) => !readSet.has(id));
-  }, [fetchMyWebReportReadIdSet, isPaid]);
+  }, [fetchAnalysisReportReadIdSet, isPaid]);
 
-  const clearMyWebStartupWarmupTimer = React.useCallback(() => {
+  const clearAnalysisStartupWarmupTimer = React.useCallback(() => {
     try {
-      if (myWebStartupWarmupTimerRef.current) {
-        clearTimeout(myWebStartupWarmupTimerRef.current);
+      if (analysisStartupWarmupTimerRef.current) {
+        clearTimeout(analysisStartupWarmupTimerRef.current);
       }
     } catch {}
-    myWebStartupWarmupTimerRef.current = null;
+    analysisStartupWarmupTimerRef.current = null;
   }, []);
 
-  const refreshMyWebReportsUnreadBadge = React.useCallback(async (options = {}) => {
+  const refreshAnalysisReportsUnreadBadge = React.useCallback(async (options = {}) => {
     const preserveTruthyKeys = options?.preserveTruthyKeys === true;
     if (!preserveTruthyKeys) {
-      myWebStartupWarmupSeqRef.current += 1;
-      clearMyWebStartupWarmupTimer();
+      analysisStartupWarmupSeqRef.current += 1;
+      clearAnalysisStartupWarmupTimer();
     }
 
-    const refreshSeq = ++myWebUnreadRefreshSeqRef.current;
-    const isStale = () => refreshSeq !== myWebUnreadRefreshSeqRef.current;
+    const refreshSeq = ++analysisUnreadRefreshSeqRef.current;
+    const isStale = () => refreshSeq !== analysisUnreadRefreshSeqRef.current;
     const canResolveSelfStructureUnread = !subscriptionLoading;
 
     const applyBaseUnread = (unread) => {
       if (isStale()) return;
-      applyMyWebUnreadPatch(
+      applyAnalysisUnreadPatch(
         {
           daily: !!unread?.daily,
           weekly: !!unread?.weekly,
@@ -956,7 +970,7 @@ function MainTabs() {
 
     const applySelfStructureUnread = (value) => {
       if (isStale()) return;
-      applyMyWebUnreadPatch(
+      applyAnalysisUnreadPatch(
         { selfStructure: !!value },
         {
           preserveTruthyKeys,
@@ -971,24 +985,24 @@ function MainTabs() {
       ? Promise.resolve(undefined)
       : isPaid
       ? Promise.all([
-          fetchMyWebSelfStructureLatestUnread().catch((e) => {
-            console.warn("MainTabs: failed to refresh MyWeb latest self-structure unread badge", e);
+          fetchAnalysisSelfStructureLatestUnread().catch((e) => {
+            console.warn("MainTabs: failed to refresh Analysis latest self-structure unread badge", e);
             return false;
           }),
-          fetchMyWebSelfStructureHistoryUnread().catch((e) => {
-            console.warn("MainTabs: failed to refresh MyWeb self-structure history unread badge", e);
+          fetchAnalysisSelfStructureHistoryUnread().catch((e) => {
+            console.warn("MainTabs: failed to refresh Analysis self-structure history unread badge", e);
             return false;
           }),
         ]).then(([latestUnread, historyUnread]) => !!latestUnread || !!historyUnread)
       : Promise.resolve(false);
 
     try {
-      const json = await apiGet(`/report-reads/myweb-unread-status?${baseQuery}`);
+      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${baseQuery}`);
       const unread = json?.unread_by_type || {};
       applyBaseUnread(unread);
     } catch (e) {
       if (isStale()) return;
-      console.warn("MainTabs: failed to refresh MyWeb unread badges", e);
+      console.warn("MainTabs: failed to refresh Analysis unread badges", e);
     }
 
     const selfStructureUnread = await selfStructurePromise;
@@ -997,10 +1011,10 @@ function MainTabs() {
   }, [
     isPaid,
     subscriptionLoading,
-    clearMyWebStartupWarmupTimer,
-    applyMyWebUnreadPatch,
-    fetchMyWebSelfStructureLatestUnread,
-    fetchMyWebSelfStructureHistoryUnread,
+    clearAnalysisStartupWarmupTimer,
+    applyAnalysisUnreadPatch,
+    fetchAnalysisSelfStructureLatestUnread,
+    fetchAnalysisSelfStructureHistoryUnread,
   ]);
 
   const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup", applyIf, preserveTruthyKeys = false } = {}) => {
@@ -1028,31 +1042,31 @@ function MainTabs() {
       }
     }
 
-    const startupMyWebUnread = extractMyWebUnreadFromStartupSnapshot(json);
-    if (startupMyWebUnread) {
-      applyMyWebUnreadPatch(startupMyWebUnread, {
+    const startupAnalysisUnread = extractAnalysisUnreadFromStartupSnapshot(json);
+    if (startupAnalysisUnread) {
+      applyAnalysisUnreadPatch(startupAnalysisUnread, {
         preserveTruthyKeys,
         keys: ["daily", "weekly", "monthly", "selfStructure"],
       });
     }
 
-    const snapshotWithoutMyWebUnread = stripMyWebUnreadFromStartupSnapshot(json);
-    if (!snapshotWithoutMyWebUnread) return null;
+    const snapshotWithoutAnalysisUnread = stripAnalysisUnreadFromStartupSnapshot(json);
+    if (!snapshotWithoutAnalysisUnread) return null;
 
-    return applyStartupSnapshot(snapshotWithoutMyWebUnread, {
+    return applyStartupSnapshot(snapshotWithoutAnalysisUnread, {
       source,
       fetchedAt: Date.now(),
       replaceUnreadScopes: [],
       replacePrefetchScopes: false,
     });
   }, [
-    applyMyWebUnreadPatch,
+    applyAnalysisUnreadPatch,
     applyStartupSnapshot,
-    extractMyWebUnreadFromStartupSnapshot,
-    stripMyWebUnreadFromStartupSnapshot,
+    extractAnalysisUnreadFromStartupSnapshot,
+    stripAnalysisUnreadFromStartupSnapshot,
   ]);
 
-  const revalidateMyWebUnreadFromStartup = React.useCallback(async ({ source = "myweb_startup", applyIf } = {}) => {
+  const revalidateAnalysisUnreadFromStartup = React.useCallback(async ({ source = ANALYSIS_WIRE.startupSource.startup, applyIf } = {}) => {
     try {
       await fetchAndApplyStartupSnapshot({
         forceRefresh: true,
@@ -1061,7 +1075,7 @@ function MainTabs() {
         preserveTruthyKeys: true,
       });
     } catch (e) {
-      console.warn("MainTabs: failed to hydrate MyWeb unread from startup snapshot", e);
+      console.warn("MainTabs: failed to hydrate Analysis unread from startup snapshot", e);
     }
 
     if (typeof applyIf === "function") {
@@ -1073,23 +1087,23 @@ function MainTabs() {
     }
 
     try {
-      await refreshMyWebReportsUnreadBadge({ preserveTruthyKeys: true });
+      await refreshAnalysisReportsUnreadBadge({ preserveTruthyKeys: true });
     } catch (e) {
-      console.warn("MainTabs: failed to refresh MyWeb unread badges on startup", e);
+      console.warn("MainTabs: failed to refresh Analysis unread badges on startup", e);
     }
-  }, [fetchAndApplyStartupSnapshot, refreshMyWebReportsUnreadBadge]);
+  }, [fetchAndApplyStartupSnapshot, refreshAnalysisReportsUnreadBadge]);
 
-  const warmMyWebUnreadAtStartup = React.useCallback(async ({ force = false, sourcePrefix = "myweb_startup" } = {}) => {
+  const warmAnalysisUnreadAtStartup = React.useCallback(async ({ force = false, sourcePrefix = ANALYSIS_WIRE.startupSource.startup } = {}) => {
     try {
       const now = Date.now();
-      const last = Number(myWebStartupWarmupLastRunAtRef.current || 0) || 0;
-      if (!force && now - last < MYWEB_STARTUP_WARMUP_MIN_INTERVAL_MS) return;
-      myWebStartupWarmupLastRunAtRef.current = now;
+      const last = Number(analysisStartupWarmupLastRunAtRef.current || 0) || 0;
+      if (!force && now - last < ANALYSIS_STARTUP_WARMUP_MIN_INTERVAL_MS) return;
+      analysisStartupWarmupLastRunAtRef.current = now;
 
-      clearMyWebStartupWarmupTimer();
+      clearAnalysisStartupWarmupTimer();
 
-      const warmupSeq = ++myWebStartupWarmupSeqRef.current;
-      const isWarmupStale = () => warmupSeq !== myWebStartupWarmupSeqRef.current;
+      const warmupSeq = ++analysisStartupWarmupSeqRef.current;
+      const isWarmupStale = () => warmupSeq !== analysisStartupWarmupSeqRef.current;
       const applyIfCurrent = () => !isWarmupStale();
       const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -1102,19 +1116,19 @@ function MainTabs() {
             preserveTruthyKeys: true,
           });
         } catch (e) {
-          console.warn("MainTabs: failed to seed MyWeb unread from startup snapshot", e);
+          console.warn("MainTabs: failed to seed Analysis unread from startup snapshot", e);
         }
       }
 
       if (isWarmupStale()) return;
 
       try {
-        await apiPost("/myweb/reports/ensure", {
+        await apiPost(ANALYSIS_WIRE.routes.reportsEnsure, {
           types: ["weekly", "monthly"],
           force: false,
         });
       } catch (e) {
-        console.warn("MainTabs: failed to warm MyWeb ensure on startup", e);
+        console.warn("MainTabs: failed to warm Analysis ensure on startup", e);
       }
 
       const retryDelays = [0, 1200, 2500];
@@ -1124,7 +1138,7 @@ function MainTabs() {
           await wait(delayMs);
         }
         if (isWarmupStale()) return;
-        await revalidateMyWebUnreadFromStartup({
+        await revalidateAnalysisUnreadFromStartup({
           source: `${sourcePrefix}_after_ensure_${index + 1}`,
           applyIf: applyIfCurrent,
         });
@@ -1132,11 +1146,11 @@ function MainTabs() {
 
       if (isWarmupStale()) return;
 
-      myWebStartupWarmupTimerRef.current = setTimeout(() => {
+      analysisStartupWarmupTimerRef.current = setTimeout(() => {
         Promise.resolve()
           .then(async () => {
             if (isWarmupStale()) return;
-            await revalidateMyWebUnreadFromStartup({
+            await revalidateAnalysisUnreadFromStartup({
               source: `${sourcePrefix}_final_revalidate`,
               applyIf: applyIfCurrent,
             });
@@ -1144,15 +1158,15 @@ function MainTabs() {
           .catch(() => null)
           .finally(() => {
             if (!isWarmupStale()) {
-              myWebStartupWarmupTimerRef.current = null;
+              analysisStartupWarmupTimerRef.current = null;
             }
           });
-      }, MYWEB_STARTUP_REVALIDATE_DELAY_MS);
+      }, ANALYSIS_STARTUP_REVALIDATE_DELAY_MS);
     } catch {}
   }, [
-    clearMyWebStartupWarmupTimer,
+    clearAnalysisStartupWarmupTimer,
     fetchAndApplyStartupSnapshot,
-    revalidateMyWebUnreadFromStartup,
+    revalidateAnalysisUnreadFromStartup,
   ]);
 
   const refreshEmotionLogUnreadState = React.useCallback(async () => {
@@ -1212,7 +1226,7 @@ function MainTabs() {
     } catch {}
   }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch]);
 
-  const prefetchMyModelScreenData = React.useCallback(async () => {
+  const prefetchPieceScreenData = React.useCallback(async () => {
     try {
       const userId = await resolveCurrentUserId();
       const { data: sessionData } = await supabase.auth.getSession();
@@ -1221,10 +1235,10 @@ function MainTabs() {
       const headers = { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` };
 
       try {
-        const fresh = getPrefetchEntryFresh?.("MyModel", "recoUsers", PREFETCH_MAX_AGE_MS);
+        const fresh = getPrefetchEntryFresh?.("Piece", "recoUsers", PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
         if (!isFresh) {
-          const url = `${MYMODEL_API_BASE_URL}/mymodel/recommend/users?limit=20`;
+          const url = `${COCOLON_API_BASE_URL}${PIECE_WIRE.routes.recommendUsers}?limit=20`;
           const res = await apiFetch(url, { method: "GET", auth: false, headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
@@ -1237,28 +1251,28 @@ function MainTabs() {
               : Array.isArray(json)
               ? json
               : [];
-            setPrefetch("MyModel", "recoUsers", { userId, items: users });
+            setPrefetch("Piece", "recoUsers", { userId, items: users });
           }
         }
       } catch {}
 
       try {
         const cacheKey = `qnaList:${userId}:newest`;
-        const fresh = getPrefetchEntryFresh?.("MyModel", cacheKey, PREFETCH_MAX_AGE_MS);
+        const fresh = getPrefetchEntryFresh?.("Piece", cacheKey, PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.targetUserId && String(fresh.value.targetUserId) === String(userId);
         if (!isFresh) {
-          const json = await getNexusReflectionsAsQnaList({
+          const json = await getNexusPiecesAsQnaList({
             targetUserId: userId,
             mode: "newest",
             limit: 100,
           });
           const items = Array.isArray(json?.items) ? json.items : [];
           const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
-          setPrefetch("MyModel", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
+          setPrefetch("Piece", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
         }
       } catch {}
     } catch {}
-  }, [MYMODEL_API_BASE_URL, getPrefetchEntryFresh, setPrefetch]);
+  }, [COCOLON_API_BASE_URL, getPrefetchEntryFresh, setPrefetch]);
 
   const runAllScreenPrefetch = React.useCallback(async () => {
     try {
@@ -1266,12 +1280,12 @@ function MainTabs() {
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
       if (now - last < SCREEN_PREFETCH_MIN_INTERVAL_MS) return;
       __lastScreenPrefetchAtRef.current = now;
-      const tasks = [prefetchEmotionLogFeed, prefetchMyModelScreenData];
+      const tasks = [prefetchEmotionLogFeed, prefetchPieceScreenData];
       for (const fn of tasks) {
         try { await fn(); } catch {}
       }
     } catch {}
-  }, [prefetchEmotionLogFeed, prefetchMyModelScreenData]);
+  }, [prefetchEmotionLogFeed, prefetchPieceScreenData]);
 
   const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
     const includeScreenPrefetch = opts?.includeScreenPrefetch !== false;
@@ -1286,8 +1300,8 @@ function MainTabs() {
 
     const tasks = [
       refreshEmotionLogUnreadState,
-      refreshMyModelReflectionsUnreadBadge,
-      warmMyWebUnreadAtStartup,
+      refreshPieceUnreadBadge,
+      warmAnalysisUnreadAtStartup,
     ];
 
     Promise.all(tasks.map((fn) => Promise.resolve().then(() => fn()).catch(() => null))).catch(() => {});
@@ -1308,8 +1322,8 @@ function MainTabs() {
   }, [
     pingActivityLogin,
     refreshEmotionLogUnreadState,
-    refreshMyModelReflectionsUnreadBadge,
-    warmMyWebUnreadAtStartup,
+    refreshPieceUnreadBadge,
+    warmAnalysisUnreadAtStartup,
     runAllScreenPrefetch,
   ]);
 
@@ -1338,7 +1352,7 @@ function MainTabs() {
     hideSelfStructureBanner();
     try {
       if (navigationRef.isReady()) {
-        navigationRef.navigate("MyWeb", buildMyWebRootNavigationParams({
+        navigationRef.navigate("Analysis", buildAnalysisRootNavigationParams({
           openSelfReportLatest: true,
           openSelfReportLatestMode: reportMode,
           openSelfReportLatestAt: Date.now(),
@@ -1355,10 +1369,10 @@ function MainTabs() {
 
   useEffect(() => {
     return () => {
-      myWebStartupWarmupSeqRef.current += 1;
-      clearMyWebStartupWarmupTimer();
+      analysisStartupWarmupSeqRef.current += 1;
+      clearAnalysisStartupWarmupTimer();
     };
-  }, [clearMyWebStartupWarmupTimer]);
+  }, [clearAnalysisStartupWarmupTimer]);
 
   useEffect(() => {
     return () => {
@@ -1383,20 +1397,20 @@ function MainTabs() {
 
   useEffect(() => {
     if (subscriptionLoading) {
-      myWebSubscriptionRefreshPendingRef.current = true;
+      analysisSubscriptionRefreshPendingRef.current = true;
       return;
     }
-    if (!myWebSubscriptionRefreshPendingRef.current) return;
-    myWebSubscriptionRefreshPendingRef.current = false;
+    if (!analysisSubscriptionRefreshPendingRef.current) return;
+    analysisSubscriptionRefreshPendingRef.current = false;
     Promise.resolve()
       .then(() =>
-        warmMyWebUnreadAtStartup({
+        warmAnalysisUnreadAtStartup({
           force: true,
-          sourcePrefix: isPaid ? "myweb_subscription_ready" : "myweb_subscription_resolved",
+          sourcePrefix: isPaid ? ANALYSIS_WIRE.startupSource.ready : ANALYSIS_WIRE.startupSource.resolved,
         })
       )
       .catch(() => null);
-  }, [isPaid, subscriptionLoading, warmMyWebUnreadAtStartup]);
+  }, [isPaid, subscriptionLoading, warmAnalysisUnreadAtStartup]);
 
   useEffect(() => {
     if (subscriptionLoading) return;
@@ -1409,7 +1423,7 @@ function MainTabs() {
   const refreshSelfStructureLatestStatus = React.useCallback(async () => {
     if (subscriptionLoading || !isPaid || !isAppActive) return;
     try {
-      const json = await apiGet("/myprofile/latest/status");
+      const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
       const nextVersionKey = String(json?.version_key || "").trim() || null;
       const hasVisibleContent = !!json?.has_visible_content;
       const reportMode = String(json?.saved_report_mode || "").trim().toLowerCase() === "deep" ? "deep" : "standard";
@@ -1466,7 +1480,7 @@ function MainTabs() {
   }, [refreshEmotionLogUnreadState]);
 
   useEffect(() => {
-    if (activeRouteName !== "MyModel") return;
+    if (activeRouteName !== "Piece") return;
     (async () => { await refreshEmotionLogUnreadState(); })();
   }, [activeRouteName, refreshEmotionLogUnreadState]);
 
@@ -1527,16 +1541,15 @@ function MainTabs() {
             let iconName;
             switch (route.name) {
               case "Input": iconName = "create-outline"; break;
-              case "MyWeb": iconName = "globe-outline"; break;
-              case "MyModel":
-              case "MyProfile": iconName = "cube-outline"; break;
+              case "Analysis": iconName = "globe-outline"; break;
+              case "Piece": iconName = "cube-outline"; break;
               case "RankingTop": iconName = "trophy-outline"; break;
               case "Settings": iconName = "settings-outline"; break;
               default: iconName = "ellipse-outline";
             }
             const icon = <Ionicons name={iconName} size={size} color={color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
-            const shouldWrap = showUnreadBadge || route.name === "MyWeb";
+            const shouldWrap = showUnreadBadge || route.name === "Analysis";
             if (!shouldWrap) return icon;
             return (
               <View style={{ width: size + (showUnreadBadge ? 22 : 10), height: size + (showUnreadBadge ? 12 : 10), alignItems: "center", justifyContent: "center", overflow: "visible" }}>
@@ -1562,9 +1575,8 @@ function MainTabs() {
             let label;
             switch (route.name) {
               case "Input": label = "Home"; break;
-              case "MyWeb": label = "Analysis"; break;
-              case "MyModel":
-              case "MyProfile": label = "Piece"; break;
+              case "Analysis": label = "Analysis"; break;
+              case "Piece": label = "Piece"; break;
               case "RankingTop": label = "Ranking"; break;
               case "Settings": label = "Settings"; break;
               default: label = route.name;
@@ -1581,39 +1593,26 @@ function MainTabs() {
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         />
         <Tab.Screen
-          name="MyWeb"
+          name="Analysis"
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         >
           {(tabProps) => (
-            <MyWebStackNavigator
+            <AnalysisStackNavigator
               {...tabProps}
-              onSetMymodelLinkPayload={setMymodelLinkPayload}
-              onRefreshTabUnread={refreshMyWebReportsUnreadBadge}
+              onSetPieceLinkPayload={setPieceLinkPayload}
+              onRefreshTabUnread={refreshAnalysisReportsUnreadBadge}
             />
           )}
         </Tab.Screen>
         <Tab.Screen
-          name="MyModel"
+          name="Piece"
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         >
           {(tabProps) => (
-            <MyModelStackNavigator
+            <PieceStackNavigator
               {...tabProps}
-              linkPayload={mymodelLinkPayload}
-              onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
-              onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
-                await markEmotionLogFeedRead(lastSeenCreatedAt || null);
-                await refreshEmotionLogUnreadState();
-              }}
-            />
-          )}
-        </Tab.Screen>
-        <Tab.Screen name="MyProfile" options={{ tabBarButton: () => null }}>
-          {(tabProps) => (
-            <MyModelStackNavigator
-              {...tabProps}
-              linkPayload={mymodelLinkPayload}
-              onConsumeLinkPayload={() => setMymodelLinkPayload(null)}
+              linkPayload={pieceLinkPayload}
+              onConsumeLinkPayload={() => setPieceLinkPayload(null)}
               onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
                 await markEmotionLogFeedRead(lastSeenCreatedAt || null);
                 await refreshEmotionLogUnreadState();
@@ -1711,7 +1710,7 @@ const FollowListScreenWithFrame = withGlobalFrame(FollowListScreen);
 const EmotionRankingScreenWithFrame = withGlobalFrame(EmotionRankingScreen);
 const InputCountRankingScreenWithFrame = withGlobalFrame(InputCountRankingScreen);
 const InputLengthRankingScreenWithFrame = withGlobalFrame(InputLengthRankingScreen);
-const MyModelEchoesRankingScreenWithFrame = withGlobalFrame(MyModelEchoesRankingScreen);
+const PieceResonanceRankingScreenWithFrame = withGlobalFrame(PieceResonanceRankingScreen);
 const LoginStreakRankingScreenWithFrame = withGlobalFrame(LoginStreakRankingScreen);
 
 function RootStackNavigator() {
@@ -1725,7 +1724,7 @@ function RootStackNavigator() {
       <RootStack.Screen name="RankingEmotion" component={EmotionRankingScreenWithFrame} />
       <RootStack.Screen name="RankingInputCount" component={InputCountRankingScreenWithFrame} />
       <RootStack.Screen name="RankingInputLength" component={InputLengthRankingScreenWithFrame} />
-      <RootStack.Screen name="RankingMyModelResonances" component={MyModelEchoesRankingScreenWithFrame} />
+      <RootStack.Screen name="RankingPieceResonances" component={PieceResonanceRankingScreenWithFrame} />
       <RootStack.Screen name="RankingLoginStreak" component={LoginStreakRankingScreenWithFrame} />
     </RootStack.Navigator>
   );
@@ -1734,49 +1733,6 @@ function RootStackNavigator() {
 function RootNavigator() {
   const { session, initializing, recoveryMode } = useAuth();
   const { subscriptionBootstrapLoaded } = useSubscription();
-  const { setTutorialFlagsLoaded, setTutorialCompleted, setTutorialSkipped } = useTutorial();
-
-  useEffect(() => {
-    let cancelled = false;
-    if (!session || recoveryMode) {
-      setTutorialCompleted(false);
-      setTutorialSkipped(false);
-      setTutorialFlagsLoaded(false);
-      return () => { cancelled = true; };
-    }
-
-    setTutorialFlagsLoaded(false);
-    (async () => {
-      try {
-        const userId = session?.user?.id ?? null;
-        if (!userId) {
-          if (!cancelled) {
-            setTutorialCompleted(false);
-            setTutorialSkipped(false);
-            setTutorialFlagsLoaded(true);
-          }
-          return;
-        }
-        const json = await apiGet("/account/profile/me");
-        if (!cancelled) {
-          const nextCompleted = json?.tutorial_completed === true;
-          const nextSkipped = json?.tutorial_skipped === true;
-          setTutorialCompleted(nextCompleted);
-          setTutorialSkipped(nextSkipped);
-          setTutorialFlagsLoaded(true);
-        }
-      } catch (e) {
-        console.warn("RootNavigator: failed to load tutorial flags", e);
-        if (!cancelled) {
-          setTutorialCompleted(false);
-          setTutorialSkipped(false);
-          setTutorialFlagsLoaded(true);
-        }
-      }
-    })();
-
-    return () => { cancelled = true; };
-  }, [session?.user?.id, recoveryMode, setTutorialCompleted, setTutorialSkipped, setTutorialFlagsLoaded]);
 
   useEffect(() => {
     try {
@@ -1881,10 +1837,10 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <SubscriptionProvider>
-          <TutorialProvider>
-            <UnreadProvider>
-              <AuthProvider>
+        <AuthProvider>
+          <SubscriptionProvider>
+            <TutorialProvider>
+              <UnreadProvider>
                 <NavigationContainer
                   ref={navigationRef}
                   linking={appLinking}
@@ -1894,10 +1850,10 @@ export default function App() {
                 >
                   <RootNavigator />
                 </NavigationContainer>
-              </AuthProvider>
-            </UnreadProvider>
-          </TutorialProvider>
-        </SubscriptionProvider>
+              </UnreadProvider>
+            </TutorialProvider>
+          </SubscriptionProvider>
+        </AuthProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

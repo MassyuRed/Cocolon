@@ -46,7 +46,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / MyProfile</div>
+      <div class="meta">Exported from Cocolon / Self Structure</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;
@@ -121,7 +121,7 @@ function safeParseJson(raw) {
   return null;
 }
 
-function normalizeMyProfileMode(mode) {
+function normalizeSelfStructureMode(mode) {
   const m = String(mode || "").toLowerCase().trim();
   if (m === "deep") return "deep";
   return "standard";
@@ -196,13 +196,13 @@ export default function SelfStructureReportViewerScreen({
   const contentText = report?.content_text || "";
   const contentJson = useMemo(() => safeParseJson(report?.content_json), [report?.content_json]);
   const fetchedReportMode = useMemo(() => {
-    return normalizeMyProfileMode(contentJson?.report_mode || report?.report_mode);
+    return normalizeSelfStructureMode(contentJson?.report_mode || report?.report_mode);
   }, [contentJson?.report_mode, report?.report_mode]);
   const hasDeepVisual = useMemo(() => {
     return fetchedReportMode === "deep" && !!contentJson?.selfStructureDeepVisual;
   }, [fetchedReportMode, contentJson]);
 
-  // MyWeb → MyProfile の動的リンクなどで「該当ブロックへスクロール」したい場合に使用
+  // Analysis → Self Structure の動的リンクなどで「該当ブロックへスクロール」したい場合に使用
   const scrollRef = useRef(null);
   const [anchorY, setAnchorY] = useState(null);
 

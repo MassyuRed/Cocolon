@@ -17,6 +17,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext"; // パスはプロジェクト構成に合わせて調整してね
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
@@ -29,18 +30,14 @@ import {
 } from "../lib/iap/iapService";
 import { getPlanSku } from "../lib/iap/iapConfig";
 import { apiGet, apiPost, apiPatch, apiFetch } from "../lib/apiClient";
+import { ACCOUNT_WIRE, FOLLOW_WIRE, PIECE_WIRE, buildFollowStatsPath, readConnectCode, readPieceGeneratedTotal, readPieceResonancesTotal, readShareCode, readShareCodePublic } from "../lib/compat/legacyWireContracts";
 
 // 🔧 ここを変えると Account 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
 const DISPLAY_NAME_MAX_LENGTH = 20;
 const DISPLAY_NAME_TAKEN_MESSAGE = "このユーザー名はすでに使われています。";
-const LOOKUP_CODE_MAX_LENGTH = 64;
 
 function normalizeDisplayName(value) {
-  return String(value || "").trim();
-}
-
-function normalizeLookupCode(value) {
   return String(value || "").trim();
 }
 
@@ -74,9 +71,6 @@ async function checkDisplayNameAvailability(candidate) {
   }
 }
 
-// MyModel（MashOS）API
-const MYMODEL_API_BASE_URL =
-  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
 
 // Tier → ラベル
 const SUB_TIER_LABEL = {
@@ -85,8 +79,8 @@ const SUB_TIER_LABEL = {
   premium: "Premiumプラン",
 };
 
-// Tier → MyProfile許可モード（フロント仮定義：types.ts が無い前提）
-const TIER_ALLOWED_MYPROFILE_MODES = {
+// Tier → Self Structure許可モード（フロント仮定義：types.ts が無い前提）
+const TIER_ALLOWED_SELF_STRUCTURE_MODES = {
   free: ["light"],
   plus: ["light", "standard"],
   premium: ["light", "standard", "deep"],
@@ -133,82 +127,31 @@ function findNavigationForRoute(navigationLike, routeName) {
 }
 
 
-async function fetchSubscriptionMe() {
-  const fallbackTier = "free";
-  const fallbackModes = TIER_ALLOWED_MYPROFILE_MODES[fallbackTier];
-
-  // Supabase セッションからアクセストークンを取得して Authorization ヘッダに載せる
-  let accessToken = null;
-  try {
-    const { data: sessionData } = await supabase.auth.getSession();
-    accessToken = sessionData?.session?.access_token ?? null;
-  } catch (e) {
-    // ここは握りつぶして fail-closed
-    accessToken = null;
-  }
-
-  if (!accessToken) {
-    return {
-      subscription_tier: fallbackTier,
-      allowed_myprofile_modes: fallbackModes,
-      _error: "no_access_token",
-    };
-  }
-
-  const res = await apiFetch(`${MYMODEL_API_BASE_URL}/subscription/me`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    return {
-      subscription_tier: fallbackTier,
-      allowed_myprofile_modes: fallbackModes,
-      _error: `http_${res.status}`,
-    };
-  }
-
-  const json = await res.json().catch(() => ({}));
-
-  const tier = normalizeSubscriptionTier(json?.subscription_tier ?? json?.tier);
-  const allowed =
-    (Array.isArray(json?.allowed_myprofile_modes) && json.allowed_myprofile_modes) ||
-    (Array.isArray(json?.allowedMyProfileModes) && json.allowedMyProfileModes) ||
-    TIER_ALLOWED_MYPROFILE_MODES[tier] ||
-    fallbackModes;
-
-  return {
-    subscription_tier: tier,
-    allowed_myprofile_modes: allowed,
-  };
-}
-
 export default function AccountScreen({ navigation, route, viewedUserId }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const { user } = useAuth();
+  const {
+    tier: ctxSubscriptionTier,
+    loading: subscriptionContextLoading,
+    allowedSelfStructureModes: ctxAllowedSelfStructureModes,
+    refreshTier,
+  } = useSubscription();
   const routeViewedUserId = route?.params?.viewedUserId;
   const targetUserId = viewedUserId || routeViewedUserId || user?.id || null;
   const [displayName, setDisplayName] = useState("");
-  const [friendCode, setFriendCode] = useState("");
-  const [myProfileCode, setMyProfileCode] = useState("");
+  const [shareCode, setShareCode] = useState("");
+  const [connectCode, setConnectCode] = useState("");
   const [loading, setLoading] = useState(true);
-  // Follow / Follower（MyModel フォロー）
+  // Follow / Follower（Pieceフォロー）
   const [followingCount, setFollowingCount] = useState(0);
   const [followerCount, setFollowerCount] = useState(0);
   const [followCountLoading, setFollowCountLoading] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isFollowRequested, setIsFollowRequested] = useState(false);
   const [followActionLoading, setFollowActionLoading] = useState(false);
-  const [lookupCode, setLookupCode] = useState("");
-  const [lookupLoading, setLookupLoading] = useState(false);
-  const [lookupError, setLookupError] = useState("");
-  const [lookupResult, setLookupResult] = useState(null);
-  const [lookupActionLoading, setLookupActionLoading] = useState(false);
 
   // ステータス（アカウント公開情報）
   const [accountStatus, setAccountStatus] = useState(null);
@@ -232,7 +175,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const [visibilityLoading, setVisibilityLoading] = useState(false);
   const [visibilitySaving, setVisibilitySaving] = useState(false);
   const [accountVisibility, setAccountVisibility] = useState({
-    is_friend_code_public: true,
+    is_share_code_public: true,
     is_recommendation_enabled: true,
     is_ranking_visible: true,
     is_private_account: false,
@@ -266,8 +209,8 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
         if (!cancelled) {
           setDisplayName(String(json?.display_name || ""));
-          setFriendCode(String(json?.friend_code || ""));
-          setMyProfileCode(String(json?.myprofile_code || ""));
+          setShareCode(String(readShareCode(json, "") || ""));
+          setConnectCode(String(readConnectCode(json, "") || ""));
         }
       } catch (e) {
         console.warn("loadProfile error:", e);
@@ -285,54 +228,47 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   useEffect(() => {
     let cancelled = false;
 
-    (async () => {
-      // 未ログインなら free 表示で固定
-      if (!user) {
-        if (!cancelled) {
-          setSubTier("free");
-          setSubAllowedModes(["light"]);
-          setSubLoading(false);
-          setSubError("");
-        }
-        return;
+    if (!user) {
+      if (!cancelled) {
+        setSubTier("free");
+        setSubAllowedModes(["light"]);
+        setSubLoading(false);
+        setSubError("");
       }
+      return () => {
+        cancelled = true;
+      };
+    }
 
-      setSubLoading(true);
+    if (subscriptionContextLoading) {
+      if (!cancelled) setSubLoading(true);
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    if (!cancelled) {
+      const tier = normalizeSubscriptionTier(ctxSubscriptionTier);
+      setSubTier(tier);
+      setSubAllowedModes(
+        Array.isArray(ctxAllowedSelfStructureModes) && ctxAllowedSelfStructureModes.length > 0
+          ? ctxAllowedSelfStructureModes
+          : TIER_ALLOWED_SELF_STRUCTURE_MODES[tier] || ["light"]
+      );
       setSubError("");
-
-      try {
-        const me = await fetchSubscriptionMe();
-        if (!cancelled) {
-          const tier = normalizeSubscriptionTier(me?.subscription_tier);
-          setSubTier(tier);
-          setSubAllowedModes(
-            Array.isArray(me?.allowed_myprofile_modes)
-              ? me.allowed_myprofile_modes
-              : TIER_ALLOWED_MYPROFILE_MODES[tier] || ["light"]
-          );
-          setSubError(me?._error ? String(me._error) : "");
-        }
-      } catch (e) {
-        if (!cancelled) {
-          setSubTier("free"); // fail-closed
-          setSubAllowedModes(["light"]);
-          setSubError(String(e?.message || e));
-        }
-      } finally {
-        if (!cancelled) setSubLoading(false);
-      }
-    })();
+      setSubLoading(false);
+    }
 
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [ctxAllowedSelfStructureModes, ctxSubscriptionTier, subscriptionContextLoading, user]);
 
 
   // ------------------------------
-  // Follow / Follower（MyModel フォロー）
-  // - DB: myprofile_links (viewer_user_id -> owner_user_id)
-  // - 指定: myProfileCode（myprofile_code）を起点に owner_user_id を解決してから follow/unfollow
+  // Follow / Follower（Pieceフォロー）
+  // - DB: follow_links (legacy physical storage may still use historical naming)
+  // - 指定: connectCode（connect code）を起点に owner_user_id を解決してから follow/unfollow
   // ------------------------------
 
   const refreshFollowState = async () => {
@@ -350,7 +286,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       }
 
       const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-stats?${qs}`, {
+      const res = await apiFetch(buildFollowStatsPath(targetUserId), {
         method: "GET",
         headers: accessToken
           ? {
@@ -413,7 +349,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       }
 
       const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/status?${qs}`, {
+      const res = await apiFetch(`${ACCOUNT_WIRE.routes.status}?${qs}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -465,7 +401,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       }
 
       const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/profile-create?${qs}`, {
+      const res = await apiFetch(`${ACCOUNT_WIRE.routes.profileCreate}?${qs}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -557,17 +493,17 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     const isSelfNow = !!user && String(targetUserId || "") === String(user.id);
     if (isSelfNow) return;
 
-    const code = String(myProfileCode || "").trim();
+    const code = String(connectCode || "").trim();
     if (!code && !targetUserId) {
-      Alert.alert("準備中", "相手のIDがまだ取得できていません。");
+      Alert.alert("準備中", "相手の共有IDがまだ取得できていません。");
       return;
     }
 
     setFollowActionLoading(true);
     try {
-      const endpoint = isFollowing ? "/myprofile/unfollow" : "/myprofile/follow";
+      const endpoint = isFollowing ? FOLLOW_WIRE.routes.delete : FOLLOW_WIRE.routes.create;
       const body = code
-        ? { myprofile_code: code }
+        ? { connect_code: code }
         : { owner_user_id: targetUserId };
       const json = await apiPost(endpoint, body);
       const nextFollowing = !!json?.is_following;
@@ -591,100 +527,16 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
     navigation.navigate("FollowListScreen", {
       viewedUserId: targetUserId,
-      myprofileCode: myProfileCode || null,
+      connectCode: connectCode || null,
       initialTab: initialTab || "following",
     });
   };
 
-
-  const openAccountByTargetUserId = (nextTargetUserId) => {
-    const nextUserId = String(nextTargetUserId || "").trim();
-    if (!nextUserId || !navigation?.navigate) return;
-
-    navigation.navigate("Account", { viewedUserId: nextUserId });
-  };
-
-  const runIdLookup = async () => {
-    if (lookupLoading || lookupActionLoading) return;
-
-    if (!user) {
-      Alert.alert("ログインが必要です", "ID検索にはログインが必要です。");
-      return;
-    }
-
-    const code = normalizeLookupCode(lookupCode);
-    if (!code) {
-      setLookupError("IDを入力してください。");
-      setLookupResult(null);
-      return;
-    }
-
-    setLookupLoading(true);
-    setLookupError("");
-    setLookupResult(null);
-
-    try {
-      const json = await apiGet(
-        `/myprofile/lookup?myprofile_code=${encodeURIComponent(code)}`
-      );
-      if (json?.found) {
-        setLookupResult(json);
-      } else {
-        setLookupResult({ status: "ok", found: false, myprofile_code: code });
-      }
-    } catch (e) {
-      console.warn("AccountScreen: id lookup failed", e);
-      setLookupError(String(e?.message || e));
-      setLookupResult(null);
-    } finally {
-      setLookupLoading(false);
-    }
-  };
-
-  const onLookupFollow = async () => {
-    if (lookupLoading || lookupActionLoading) return;
-    if (!user) {
-      Alert.alert("ログインが必要です", "フォローするにはログインが必要です。");
-      return;
-    }
-
-    const code = normalizeLookupCode(lookupResult?.myprofile_code);
-    if (!code) {
-      Alert.alert("準備中", "相手のIDがまだ取得できていません。");
-      return;
-    }
-
-    const lookupTargetUserId = String(lookupResult?.target_user_id || "").trim();
-    if (lookupTargetUserId && String(lookupTargetUserId) === String(user?.id || "")) {
-      return;
-    }
-
-    setLookupActionLoading(true);
-    try {
-      const json = await apiPost("/myprofile/follow", { myprofile_code: code });
-      const nextFollowing = !!json?.is_following;
-      const nextRequested = !!json?.is_follow_requested && !nextFollowing;
-
-      setLookupResult((prev) => {
-        if (!prev || !prev.found) return prev;
-        return {
-          ...prev,
-          is_following: nextFollowing,
-          is_follow_requested: nextRequested,
-        };
-      });
-
-      await refreshFollowState();
-    } catch (e) {
-      console.warn("AccountScreen: lookup follow failed", e);
-      Alert.alert("操作に失敗しました", String(e?.message || e));
-    } finally {
-      setLookupActionLoading(false);
-    }
-  };
-
-  // Connect ID（myprofile_code）を Account 画面の ID 表示として扱う
-  const idForDisplay = user ? myProfileCode || "（生成中）" : "未ログイン";
+  // 画面に表示するのは「短い公開ID（share code）」をユーザーIDとして扱う
+  const userIdForDisplay = user ? shareCode || "（生成中）" : "未ログイン";
+  const connectIdForDisplay = user
+    ? connectCode || "（生成中）"
+    : "未ログイン";
   const isDark = themeName === "dark";
 
   const isSelf = !!user && String(targetUserId || "") === String(user.id);
@@ -694,18 +546,13 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       (!isSelf && (accountStatus?.is_private_account || accountStatus?.isPrivateAccount))
   );
 
-  const isFriendCodePublic = !!(
-    accountStatus?.is_friend_code_public ??
-      accountStatus?.isFriendCodePublic ??
-      accountStatus?.friend_code_public ??
-      accountStatus?.friendCodePublic
+  const isShareCodePublic = !!(
+    readShareCodePublic(accountStatus, false) ??
+      accountStatus?.isShareCodePublic ??
+      accountStatus?.shareCodePublic
   );
 
-  const canShowFriendCode = !user || isSelf || isFriendCodePublic;
-  const canUseIdLookup = !!user && isSelf;
-  const lookupResultIsSelf =
-    String(lookupResult?.target_user_id || "") !== "" &&
-    String(lookupResult?.target_user_id || "") === String(user?.id || "");
+  const canShowShareCode = !user || isSelf || isShareCodePublic;
 
   const statusValue = (key, fallbackKeys = []) => {
     const obj = accountStatus && typeof accountStatus === "object" ? accountStatus : null;
@@ -743,21 +590,22 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     setNameEditOpen(true);
   };
 
-  const onCopyId = async () => {
-    const code = String(myProfileCode || "").trim();
+  const onCopyShareCode = async () => {
+    const code = String(shareCode || "").trim();
     if (!code) {
-      Alert.alert("準備中", "IDがまだ取得できていません。");
+      Alert.alert("準備中", "共有コードがまだ取得できていません。");
       return;
     }
     try {
+      // Connect画面の共有ポップアップ内と同じ導線（Share）
       await Share.share({ message: code });
     } catch (e) {
-      console.warn("copy id failed:", e);
+      console.warn("copy share code failed:", e);
     }
   };
 
   const onShareProfile = async () => {
-    const code = String(friendCode || "").trim();
+    const code = String(shareCode || "").trim();
     if (!code) {
       Alert.alert("準備中", "共有コードがまだ取得できていません。");
       return;
@@ -807,7 +655,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
         throw new Error("アクセストークンが取得できませんでした");
       }
 
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/visibility/me`, {
+      const res = await apiFetch(ACCOUNT_WIRE.routes.visibilityMe, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -827,7 +675,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       if (json && typeof json === "object") {
         setAccountVisibility((prev) => ({
           ...prev,
-          is_friend_code_public: !!json.is_friend_code_public,
+          is_share_code_public: readShareCodePublic(json, false),
           is_recommendation_enabled: !!json.is_recommendation_enabled,
           is_ranking_visible: !!json.is_ranking_visible,
           is_private_account: !!json.is_private_account,
@@ -862,7 +710,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
         throw new Error("アクセストークンが取得できませんでした");
       }
 
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/account/visibility/me`, {
+      const res = await apiFetch(ACCOUNT_WIRE.routes.visibilityMe, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -884,10 +732,10 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       if (json && typeof json === "object") {
         setAccountVisibility((prev) => ({
           ...prev,
-          is_friend_code_public:
-            typeof json.is_friend_code_public === "boolean"
-              ? json.is_friend_code_public
-              : prev.is_friend_code_public,
+          is_share_code_public:
+            typeof readShareCodePublic(json, undefined) === "boolean"
+              ? readShareCodePublic(json, prev.is_share_code_public)
+              : prev.is_share_code_public,
           is_recommendation_enabled:
             typeof json.is_recommendation_enabled === "boolean"
               ? json.is_recommendation_enabled
@@ -974,19 +822,18 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       setNameError("");
       Alert.alert("更新完了", "ユーザー名を更新しました。");
     } catch (e) {
-      const friendlyMessage = mapDisplayNameConflictMessage(e) || String(e?.message || e);
-      if (friendlyMessage === DISPLAY_NAME_TAKEN_MESSAGE) {
-        setNameError(friendlyMessage);
+      const displayNameMessage = mapDisplayNameConflictMessage(e) || String(e?.message || e);
+      if (displayNameMessage === DISPLAY_NAME_TAKEN_MESSAGE) {
+        setNameError(displayNameMessage);
       }
       console.warn("profile update error:", e);
-      Alert.alert("更新に失敗しました", friendlyMessage);
+      Alert.alert("更新に失敗しました", displayNameMessage);
     } finally {
       setNameSaving(false);
     }
   };
 
 const refreshSubscriptionState = async () => {
-  // 未ログインなら free 表示で固定
   if (!user) {
     setSubTier("free");
     setSubAllowedModes(["light"]);
@@ -998,18 +845,8 @@ const refreshSubscriptionState = async () => {
   setSubLoading(true);
   setSubError("");
   try {
-    const me = await fetchSubscriptionMe();
-    const tier = normalizeSubscriptionTier(me?.subscription_tier);
-    setSubTier(tier);
-    setSubAllowedModes(
-      Array.isArray(me?.allowed_myprofile_modes)
-        ? me.allowed_myprofile_modes
-        : TIER_ALLOWED_MYPROFILE_MODES[tier] || ["light"]
-    );
-    setSubError(me?._error ? String(me._error) : "");
+    await refreshTier({ force: true });
   } catch (e) {
-    setSubTier("free"); // fail-closed
-    setSubAllowedModes(["light"]);
     setSubError(String(e?.message || e));
   } finally {
     setSubLoading(false);
@@ -1329,32 +1166,34 @@ const onRestorePurchases = async () => {
                 onPress={() => openFollowList("followers")}
                 disabled={!targetUserId}
               />
-              <ProfileRow
-                styles={styles}
-                label="ID"
-                labelAction={
-                  user ? (
-                    <Pressable
-                      style={[
-                        styles.labelIconBtn,
-                        (loading || !String(myProfileCode || "").trim()) &&
-                          styles.labelIconBtnDisabled,
-                      ]}
-                      onPress={onCopyId}
-                      disabled={loading || !String(myProfileCode || "").trim()}
-                      accessibilityLabel="IDをコピー"
-                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                      <Ionicons
-                        name="copy-outline"
-                        size={12}
-                        color={colors.TEXT_ON_LIGHT}
-                      />
-                    </Pressable>
-                  ) : null
-                }
-                value={idForDisplay}
-              />
+              {canShowShareCode ? (
+                <ProfileRow
+                  styles={styles}
+                  label="共有コード"
+                  labelAction={
+                    user ? (
+                      <Pressable
+                        style={[
+                          styles.labelIconBtn,
+                          (loading || !String(shareCode || "").trim()) &&
+                            styles.labelIconBtnDisabled,
+                        ]}
+                        onPress={onCopyShareCode}
+                        disabled={loading || !String(shareCode || "").trim()}
+                        accessibilityLabel="共有コードをコピー"
+                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                      >
+                        <Ionicons
+                          name="copy-outline"
+                          size={12}
+                          color={colors.TEXT_ON_LIGHT}
+                        />
+                      </Pressable>
+                    ) : null
+                  }
+                  value={userIdForDisplay}
+                />
+              ) : null}
 
             </View>
 
@@ -1369,156 +1208,6 @@ const onRestorePurchases = async () => {
               ※フォロー数とフォロワー数をタップすれば、一覧で表示されます。
             </Text>
           </View>
-
-
-          {canUseIdLookup ? (
-            <View style={styles.statusSection}>
-              <Text style={styles.statusTitle}>ID検索</Text>
-
-              <View style={styles.statusCard}>
-                <Text style={styles.lookupHintText}>
-                  IDを入力すると、ユーザーを検索してフォローできます。
-                </Text>
-
-                <View style={styles.lookupInputRow}>
-                  <TextInput
-                    style={styles.lookupInput}
-                    placeholder="IDを入力"
-                    placeholderTextColor={colors.TEXT_SUBTLE}
-                    value={lookupCode}
-                    onChangeText={(value) => {
-                      setLookupCode(value);
-                      if (lookupError) setLookupError("");
-                      if (lookupResult) setLookupResult(null);
-                    }}
-                    editable={!lookupLoading && !lookupActionLoading}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    maxLength={LOOKUP_CODE_MAX_LENGTH}
-                    returnKeyType="search"
-                    onSubmitEditing={runIdLookup}
-                  />
-
-                  <TouchableOpacity
-                    style={[
-                      styles.lookupSearchBtn,
-                      (lookupLoading || lookupActionLoading) &&
-                        styles.lookupSearchBtnDisabled,
-                    ]}
-                    onPress={runIdLookup}
-                    activeOpacity={0.85}
-                    disabled={lookupLoading || lookupActionLoading}
-                  >
-                    {lookupLoading ? (
-                      <ActivityIndicator size="small" color="#FFFFFF" />
-                    ) : (
-                      <Text style={styles.lookupSearchBtnText}>検索</Text>
-                    )}
-                  </TouchableOpacity>
-                </View>
-
-                {lookupError ? (
-                  <Text style={styles.lookupErrorText}>
-                    検索に失敗しました: {lookupError}
-                  </Text>
-                ) : null}
-
-                {lookupResult && lookupResult.found === false ? (
-                  <View style={styles.lookupResultCard}>
-                    <Text style={styles.lookupEmptyText}>
-                      IDに一致するユーザーは見つかりませんでした。
-                    </Text>
-                  </View>
-                ) : null}
-
-                {lookupResult && lookupResult.found ? (
-                  <View style={styles.lookupResultCard}>
-                    <CocolonPressable
-                      style={styles.lookupResultOpenArea}
-                      onPress={() =>
-                        openAccountByTargetUserId(lookupResult?.target_user_id)
-                      }
-                      accessibilityLabel="検索結果のアカウントを開く"
-                    >
-                      <View style={styles.lookupResultHeader}>
-                        <View style={styles.lookupResultMain}>
-                          <View style={styles.lookupResultTitleRow}>
-                            <Text
-                              style={styles.lookupResultName}
-                              numberOfLines={1}
-                            >
-                              {lookupResult?.display_name || "（未設定）"}
-                            </Text>
-                            {lookupResult?.is_private_account ? (
-                              <Ionicons
-                                name="shield-outline"
-                                size={14}
-                                color={colors.TITLE_GOLD}
-                                style={{ marginLeft: 6, opacity: 0.7 }}
-                              />
-                            ) : null}
-                          </View>
-                          <Text style={styles.lookupResultIdText}>
-                            ID: {lookupResult?.myprofile_code || "—"}
-                          </Text>
-                        </View>
-
-                        <Ionicons
-                          name="chevron-forward"
-                          size={18}
-                          color={colors.TEXT_SUBTLE}
-                        />
-                      </View>
-                    </CocolonPressable>
-
-                    <View style={styles.lookupResultActionRow}>
-                      {lookupResultIsSelf ? (
-                        <View style={styles.lookupResultPill}>
-                          <Text style={styles.lookupResultPillText}>あなた</Text>
-                        </View>
-                      ) : lookupResult?.is_following ? (
-                        <View style={styles.lookupResultPill}>
-                          <Text style={styles.lookupResultPillText}>フォロー中</Text>
-                        </View>
-                      ) : lookupResult?.is_follow_requested ? (
-                        <View style={styles.lookupResultPill}>
-                          <Text style={styles.lookupResultPillText}>申請中</Text>
-                        </View>
-                      ) : (
-                        <TouchableOpacity
-                          style={[
-                            styles.lookupFollowBtn,
-                            lookupActionLoading && styles.editNameBtnDisabled,
-                          ]}
-                          onPress={onLookupFollow}
-                          activeOpacity={0.85}
-                          disabled={lookupActionLoading || lookupLoading}
-                        >
-                          {lookupActionLoading ? (
-                            <ActivityIndicator
-                              size="small"
-                              color="#FFFFFF"
-                              style={{ marginRight: 6 }}
-                            />
-                          ) : (
-                            <Ionicons
-                              name="person-add-outline"
-                              size={16}
-                              color="#FFFFFF"
-                              style={{ marginRight: 6 }}
-                            />
-                          )}
-                          <Text style={styles.lookupFollowBtnText}>
-                            フォローする
-                          </Text>
-                        </TouchableOpacity>
-                      )}
-                    </View>
-                  </View>
-                ) : null}
-              </View>
-            </View>
-          ) : null}
 
           <View style={styles.statusSection}>
             <Text style={styles.statusTitle}>ProfileCreate</Text>
@@ -1614,17 +1303,12 @@ const onRestorePurchases = async () => {
                 <StatusRow
                   styles={styles}
                   label="Pieceの所持数"
-                  value={statusValue("piece_generated_total", ["mymodel_questions_total", "mymodelQuestionsTotal", "mymodel_q_total"])}
+                  value={statusValue("piece_generated_total", PIECE_WIRE.metrics.pieceGeneratedTotalKeys)}
                 />
                 <StatusRow
                   styles={styles}
                   label="Pieceが共鳴された数"
-                  value={statusValue("mymodel_resonances_total", ["mymodelResonancesTotal", "resonances_total"])}
-                />
-                <StatusRow
-                  styles={styles}
-                  label="Pieceが発見された数"
-                  value={statusValue("mymodel_discoveries_total", ["mymodelDiscoveriesTotal", "discoveries_total"])}
+                  value={statusValue("piece_resonances_total", PIECE_WIRE.metrics.pieceResonancesTotalKeys)}
                 />
               </View>
             )}
@@ -1797,12 +1481,12 @@ const onRestorePurchases = async () => {
 
                 <VisibilitySettingRow
                   title="共有コード表示設定"
-                  isPublic={!!accountVisibility.is_friend_code_public}
+                  isPublic={!!accountVisibility.is_share_code_public}
                   onPressPublic={() =>
-                    patchAccountVisibilityMe({ is_friend_code_public: true })
+                    patchAccountVisibilityMe({ [ACCOUNT_WIRE.fields.shareCodePublic]: true })
                   }
                   onPressPrivate={() =>
-                    patchAccountVisibilityMe({ is_friend_code_public: false })
+                    patchAccountVisibilityMe({ [ACCOUNT_WIRE.fields.shareCodePublic]: false })
                   }
                   disabled={visibilitySaving}
                 />
@@ -2471,136 +2155,6 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     nameModalBtnPrimaryText: {
-      color: "#FFFFFF",
-    },
-
-    lookupHintText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
-      marginBottom: 10,
-    },
-    lookupInputRow: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    lookupInput: {
-      flex: 1,
-      minHeight: 42,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
-      fontSize: 14,
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    lookupSearchBtn: {
-      marginLeft: 8,
-      minWidth: 72,
-      minHeight: 42,
-      paddingHorizontal: 14,
-      paddingVertical: 10,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    lookupSearchBtnDisabled: {
-      opacity: 0.6,
-    },
-    lookupSearchBtnText: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: "#FFFFFF",
-    },
-    lookupErrorText: {
-      marginTop: 8,
-      fontSize: 11,
-      lineHeight: 16,
-      color: "#B91C1C",
-    },
-    lookupResultCard: {
-      marginTop: 12,
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-    },
-    lookupEmptyText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
-    },
-    lookupResultOpenArea: {
-      borderRadius: 12,
-    },
-    lookupResultHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
-    lookupResultMain: {
-      flex: 1,
-      paddingRight: 12,
-    },
-    lookupResultTitleRow: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    lookupResultName: {
-      flexShrink: 1,
-      fontSize: 13,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    lookupResultIdText: {
-      marginTop: 4,
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TITLE_GOLD,
-      fontWeight: "700",
-    },
-    lookupResultActionRow: {
-      marginTop: 10,
-      flexDirection: "row",
-      justifyContent: "flex-end",
-    },
-    lookupResultPill: {
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    lookupResultPillText: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    lookupFollowBtn: {
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
-    },
-    lookupFollowBtnText: {
-      fontSize: 12,
-      fontWeight: "800",
       color: "#FFFFFF",
     },
 

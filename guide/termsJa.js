@@ -62,7 +62,7 @@ export const guideTermsJa = Object.freeze({
       "その日のテーマに沿って短く答えを残す",
       "あとから履歴で見返して、その時期の思考を追う",
     ],
-    relatedTerms: ["today_question_history", "myweb"],
+    relatedTerms: ["today_question_history", "analysis"],
   },
   emotion_input_history: {
     termId: "emotion_input_history",
@@ -75,7 +75,7 @@ export const guideTermsJa = Object.freeze({
       "最近「不安」が増えていたかを見返す",
       "特定の時期に書いたメモを探す",
     ],
-    relatedTerms: ["emotion_input", "myweb", "analysis_report"],
+    relatedTerms: ["emotion_input", "analysis", "analysis_report"],
   },
   today_question_history: {
     termId: "today_question_history",
@@ -88,7 +88,7 @@ export const guideTermsJa = Object.freeze({
       "以前の自分が同じテーマにどう答えていたかを見る",
       "数週間前の考え方の差を比較する",
     ],
-    relatedTerms: ["today_question", "myweb"],
+    relatedTerms: ["today_question", "analysis"],
   },
   analysis_report: {
     termId: "analysis_report",
@@ -101,10 +101,10 @@ export const guideTermsJa = Object.freeze({
       "最近の感情の偏りをつかむ",
       "繰り返し現れるテーマやパターンを見つける",
     ],
-    relatedTerms: ["emotion_input", "myweb", "secret_memo"],
+    relatedTerms: ["emotion_input", "analysis", "secret_memo"],
   },
-  myweb: {
-    termId: "myweb",
+  analysis: {
+    termId: "analysis",
     display: "Analysis",
     reading: "アナリシス",
     shortDef: "入力履歴やレポートを振り返るための画面群です。",
@@ -116,8 +116,8 @@ export const guideTermsJa = Object.freeze({
     ],
     relatedTerms: ["emotion_input_history", "today_question_history", "analysis_report"],
   },
-  mymodel: {
-    termId: "mymodel",
+  piece_screen: {
+    termId: "piece_screen",
     display: "Piece画面",
     reading: "ピースがめん",
     shortDef: "Pieceや関連する反応を扱う場所です。",
@@ -127,10 +127,10 @@ export const guideTermsJa = Object.freeze({
       "公開されたPieceを読み、自分との重なりを確かめる",
       "他ユーザーの Piece を読んで理解を広げる",
     ],
-    relatedTerms: ["reflection", "kyomei", "hakken"],
+    relatedTerms: ["piece", "kyomei", "reaction_history"],
   },
-  reflection: {
-    termId: "reflection",
+  piece: {
+    termId: "piece",
     display: "Piece",
     reading: "ピース",
     shortDef: "Home の感情入力から作られる、オリジナルの断片です。",
@@ -140,10 +140,10 @@ export const guideTermsJa = Object.freeze({
       "Home の感情入力から作成した Piece",
       "公開された自分や他ユーザーの Piece を読む",
     ],
-    relatedTerms: ["mymodel", "kyomei", "hakken"],
+    relatedTerms: ["piece_screen", "kyomei", "reaction_history"],
   },
-  reflection_create: {
-    termId: "reflection_create",
+  profile_create: {
+    termId: "profile_create",
     display: "ProfileCreate",
     reading: "プロフィールクリエイト",
     shortDef: "固定的な自己紹介 / プロフィール資産を整える機能です。",
@@ -153,7 +153,7 @@ export const guideTermsJa = Object.freeze({
       "固定質問に答えてプロフィールを整える",
       "アカウント上に表示される自己紹介を更新する",
     ],
-    relatedTerms: ["reflection", "mymodel"],
+    relatedTerms: ["piece", "piece_screen"],
   },
   kyomei: {
     termId: "kyomei",
@@ -166,33 +166,20 @@ export const guideTermsJa = Object.freeze({
       "自分も同じ感情の流れを経験したとき",
       "相手の言葉が自分の感覚にぴったり重なったとき",
     ],
-    relatedTerms: ["hakken", "reflection", "reaction_history"],
-  },
-  hakken: {
-    termId: "hakken",
-    display: "発見",
-    reading: "はっけん",
-    shortDef: "他ユーザーの Piece から新しい気づきを得たときのリアクションです。",
-    longDef:
-      "自分にはなかった見方や整理の仕方に出会ったときに使うリアクションです。『分かる』よりも『新しい視点を得た』という感覚に近い反応です。",
-    examples: [
-      "相手の答えで自分の考え方の偏りに気づいたとき",
-      "今まで言葉にできなかった感覚を相手が表現していたとき",
-    ],
-    relatedTerms: ["kyomei", "reflection", "reaction_history"],
+    relatedTerms: ["piece", "reaction_history", "piece_screen"],
   },
   reaction_history: {
     termId: "reaction_history",
     display: "履歴",
     reading: "りれき",
-    shortDef: "共鳴や発見などの反応の履歴です。",
+    shortDef: "共鳴などの反応の履歴です。",
     longDef:
-      "自分が送った反応や受け取った反応を見返すための履歴です。どんな内容に共鳴しやすいか、どんな発見が多いかを追うことで、自分の関心や理解の方向も見えてきます。",
+      "自分が送った反応や受け取った反応を見返すための履歴です。どんな内容に共鳴しやすいかを追うことで、自分の関心や理解の方向も見えてきます。",
     examples: [
       "最近どの Piece に反応したかを見る",
       "自分が受け取った共鳴の傾向を確認する",
     ],
-    relatedTerms: ["kyomei", "hakken", "mymodel"],
+    relatedTerms: ["kyomei", "piece_screen", "piece"],
   },
   follow: {
     termId: "follow",

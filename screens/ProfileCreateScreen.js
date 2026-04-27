@@ -25,15 +25,14 @@ import CocolonSwitch from "../components/CocolonSwitch";
 import CocolonButton from "../components/CocolonButton";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
-import { apiFetch } from "../lib/apiClient";
+import { apiFetch, API_BASE_URL } from "../lib/apiClient";
 
 // ---- API base ----
-const API_BASE =
-  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
+const API_BASE = API_BASE_URL;
 const QUESTIONS_ENDPOINT = `${API_BASE}/profile-create/questions`;
 const ANSWERS_ENDPOINT = `${API_BASE}/profile-create/answers`;
 
-// パネル高さ（MyProfile 近似）
+// パネル高さ（Profile 近似）
 const PANEL_MIN_HEIGHT = 690;
 
 export default function ProfileCreateScreen({ onBack }) {

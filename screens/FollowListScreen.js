@@ -20,22 +20,20 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
 import { useUnread } from "../UnreadContext";
 import { apiFetch, apiPost } from "../lib/apiClient";
+import { CONNECT_WIRE, EMOTION_NOTIFICATION_WIRE, FOLLOW_WIRE, buildFollowListPath, buildFollowRequestsPath, buildFollowStatsPath, readEmotionNotificationOwnerId, readRelatedConnectCode } from "../lib/compat/legacyWireContracts";
 
-// MyModel（MashOS）API
-const MYMODEL_API_BASE_URL =
-  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
-const EMOTION_NOTIFICATION_SETTINGS_ENDPOINT = `${MYMODEL_API_BASE_URL}/emotion-notifications/settings`;
-const EMOTION_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
+const EMOTION_NOTIFICATION_SETTINGS_ENDPOINT = EMOTION_NOTIFICATION_WIRE.routes.settings;
+const EMOTION_NOTIFICATION_GLOBAL_OWNER_ID = EMOTION_NOTIFICATION_WIRE.globalOwnerCompatId;
 
 /**
  * FollowListScreen
  * - AccountScreen の「フォロー中 / フォロワー」タップで遷移してくる一覧画面
- * - DB: myprofile_links (viewer_user_id -> owner_user_id)
+ * - DB: follow_links (legacy physical storage may still use historical naming)
  *   - following: viewer_user_id = viewedUserId の owner_user_id 一覧
  *   - followers: owner_user_id = viewedUserId の viewer_user_id 一覧
  *
  * NOTE:
- * - 「照会」は MyProfileScreen で行う想定。
+ * - 「照会」は Profile screen で行う想定。
  *   ルート名はプロジェクト側の Navigator に合わせて必要なら変更してね。
  */
 
@@ -75,15 +73,7 @@ function extractEmotionNotificationMap(payload) {
   for (const row of rows) {
     if (!row || typeof row !== "object") continue;
 
-    const ownerUserId = safeString(
-      row?.owner_user_id ??
-        row?.friend_user_id ??
-        row?.ownerUserId ??
-        row?.friendUserId ??
-        row?.owner_id ??
-        row?.friend_id ??
-        row?.friendId
-    ).trim();
+    const ownerUserId = readEmotionNotificationOwnerId(row, "");
 
     if (!ownerUserId || ownerUserId === EMOTION_NOTIFICATION_GLOBAL_OWNER_ID) {
       continue;
@@ -137,23 +127,6 @@ function hasRouteNameInState(state, routeName) {
     }
   }
   return false;
-}
-
-function resolveMyProfileRouteName(navigation) {
-  // 候補（プロジェクトに合わせて増やしてOK）
-  const candidates = ["MyProfile", "MyProfileScreen"];
-
-  const root = navigation?.getRootState?.();
-  const local = navigation?.getState?.();
-
-  for (const name of candidates) {
-    if (hasRouteNameInState(root, name) || hasRouteNameInState(local, name)) {
-      return name;
-    }
-  }
-
-  // 見つからない場合のデフォルト（プロジェクト側で調整してね）
-  return "MyProfile";
 }
 
 function resolveAccountRouteName(navigation) {
@@ -241,7 +214,7 @@ export default function FollowListScreen({ navigation, route }) {
 
     (async () => {
       try {
-        await apiPost("/emotion-log/unread/read-requests", {});
+        await apiPost(FOLLOW_WIRE.routes.requestsRead, {});
         if (!cancelled) {
           setUnread("EmotionLog", "requests", false);
         }
@@ -270,9 +243,7 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const res = await apiFetch(
-        `${MYMODEL_API_BASE_URL}/myprofile/follow-stats?target_user_id=${encodeURIComponent(
-          String(viewedUserId)
-        )}`,
+        buildFollowStatsPath(viewedUserId),
         {
           method: "GET",
           headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
@@ -297,7 +268,7 @@ export default function FollowListScreen({ navigation, route }) {
       if (user && isSelfList) {
         try {
           const rres = await apiFetch(
-            `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/incoming?limit=300`,
+            buildFollowRequestsPath("incoming", { limit: 300 }),
             {
               method: "GET",
               headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
@@ -318,7 +289,7 @@ export default function FollowListScreen({ navigation, route }) {
         // 自分が送った申請（申請中）の件数も取得する（MashOS API 経由）
         try {
           const ores = await apiFetch(
-            `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/outgoing?limit=300`,
+            buildFollowRequestsPath("outgoing", { limit: 300 }),
             {
               method: "GET",
               headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
@@ -383,7 +354,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const ores = await apiFetch(
-          `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/outgoing?limit=300`,
+          buildFollowRequestsPath("outgoing", { limit: 300 }),
           {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
@@ -415,7 +386,7 @@ export default function FollowListScreen({ navigation, route }) {
             return {
               id: targetId,
               display_name: safeString(r?.target_display_name) || "（未設定）",
-              myprofile_code: safeString(r?.target_myprofile_code) || "",
+              connect_code: readRelatedConnectCode(r, "target") || "",
               _follow_request_id: requestId,
               _request_created_at: safeString(r?.created_at) || "",
               _request_target_user_id: targetId,
@@ -430,10 +401,8 @@ export default function FollowListScreen({ navigation, route }) {
 
       const url =
         tab === TAB_REQUESTS
-          ? `${MYMODEL_API_BASE_URL}/myprofile/follow-requests/incoming?limit=300`
-          : `${MYMODEL_API_BASE_URL}/myprofile/follow-list?target_user_id=${encodeURIComponent(
-              String(viewedUserId)
-            )}&tab=${encodeURIComponent(String(tab))}`;
+          ? buildFollowRequestsPath("incoming", { limit: 300 })
+          : buildFollowListPath({ targetUserId: viewedUserId, tab });
 
       const res = await apiFetch(url, {
         method: "GET",
@@ -467,7 +436,7 @@ export default function FollowListScreen({ navigation, route }) {
             return {
               id: requesterId,
               display_name: safeString(r?.requester_display_name) || "（未設定）",
-              myprofile_code: safeString(r?.requester_myprofile_code) || "",
+              connect_code: readRelatedConnectCode(r, "requester") || "",
               _follow_request_id: requestId,
               _request_created_at: safeString(r?.created_at) || "",
             };
@@ -550,7 +519,7 @@ export default function FollowListScreen({ navigation, route }) {
     loadEmotionNotificationSettings();
   }, [loadEmotionNotificationSettings]);
 
-  const openMyProfile = (targetId) => {
+  const openProfile = (targetId) => {
     if (!navigation?.navigate || !targetId) return;
 
     const routeName = resolveAccountRouteName(navigation);
@@ -580,7 +549,7 @@ export default function FollowListScreen({ navigation, route }) {
           throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
         }
 
-        const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/unfollow`, {
+        const res = await apiFetch(FOLLOW_WIRE.routes.delete, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -614,7 +583,7 @@ export default function FollowListScreen({ navigation, route }) {
           throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
         }
 
-        const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/remove-follower`, {
+        const res = await apiFetch(FOLLOW_WIRE.routes.removeFollower, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -673,10 +642,10 @@ export default function FollowListScreen({ navigation, route }) {
 
       const endpoint =
         action === "approve"
-          ? "/myprofile/follow-requests/approve"
-          : "/myprofile/follow-requests/reject";
+          ? FOLLOW_WIRE.routes.approveRequest
+          : FOLLOW_WIRE.routes.rejectRequest;
 
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}${endpoint}`, {
+      const res = await apiFetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -743,7 +712,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error("ログイン情報が取得できませんでした。再ログインしてください。");
       }
 
-      const res = await apiFetch(`${MYMODEL_API_BASE_URL}/myprofile/follow-request/cancel`, {
+      const res = await apiFetch(FOLLOW_WIRE.routes.cancelRequest, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -852,7 +821,7 @@ export default function FollowListScreen({ navigation, route }) {
       <TouchableOpacity
         style={styles.row}
         activeOpacity={0.75}
-        onPress={() => openMyProfile(item?.id)}
+        onPress={() => openProfile(item?.id)}
       >
         <View style={{ flex: 1, paddingRight: 10 }}>
           <View style={styles.nameRow}>

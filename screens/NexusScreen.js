@@ -34,27 +34,28 @@ import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import {
-  getNexusEchoesReflections,
+  getNexusResonancePieces,
   getNexusEmotionLog,
   getNexusEmotionLogUnreadStatus,
   getNexusEmotionRanking,
   getNexusRecommendUsers,
-  getNexusReflectionDetail,
-  getNexusReflections,
-  getNexusReflectionsUnreadStatus,
+  getNexusPieceDetail,
+  getNexusPieces,
+  getNexusPiecesUnreadStatus,
   markNexusEmotionLogFeedRead,
 } from "../lib/nexusApi";
-import NexusReflectionCard from "./nexus/NexusReflectionCard";
+import { readShareCode } from "../lib/compat/legacyWireContracts";
+import NexusPieceCard from "./nexus/NexusPieceCard";
 
 const TABS = [
-  { key: "reflection", label: "投稿" },
+  { key: "piece", label: "投稿" },
   { key: "emotion_log", label: "感情通知" },
   { key: "recommend", label: "おすすめ" },
   { key: "history", label: "履歴" },
 ];
 
-const MYMODEL_TUTORIAL_STEP_START = 12;
-const MYMODEL_TUTORIAL_STEP_END = 15;
+const PIECE_TUTORIAL_STEP_START = 12;
+const PIECE_TUTORIAL_STEP_END = 15;
 const TUTORIAL_TOTAL_STEPS = 21;
 
 const STRENGTH_LABEL = {
@@ -148,13 +149,13 @@ function normalizeRecommendUsers(json) {
     id: String(user?.id || user?.user_id || `user-${index}`),
     displayName:
       String(
-        user?.display_name || user?.name || user?.friend_code || "ユーザー"
+        user?.display_name || user?.name || readShareCode(user, "") || "ユーザー"
       ).trim() || "ユーザー",
-    friendCode: String(user?.friend_code || "").trim() || null,
+    shareCode: readShareCode(user, null),
   }));
 }
 
-function normalizeSavedReflections(json) {
+function normalizeSavedPieces(json) {
   const items = Array.isArray(json?.items)
     ? json.items
     : Array.isArray(json)
@@ -170,12 +171,12 @@ function normalizeSavedReflections(json) {
   }));
 }
 
-function normalizeTutorialReflectionItems(items) {
+function normalizeTutorialPieceItems(items) {
   const rows = Array.isArray(items) ? items : [];
   return rows.map((item, index) => ({
     q_instance_id:
       String(item?.q_instance_id || "").trim() ||
-      `reflection:tutorial-${index}`,
+      `piece:tutorial-${index}`,
     source_type: "emotion_generated",
     owner: {
       user_id:
@@ -185,9 +186,7 @@ function normalizeTutorialReflectionItems(items) {
         String(
           item?.display_name || item?.owner?.display_name || "ユーザー"
         ).trim() || "ユーザー",
-      friend_code:
-        String(item?.friend_code || item?.owner?.friend_code || "").trim() ||
-        null,
+      share_code: readShareCode(item, null) || readShareCode(item?.owner, null),
     },
     question: {
       q_key:
@@ -244,8 +243,8 @@ function hasRouteNameInState(state, routeName) {
   return false;
 }
 
-function resolveReflectionsRouteName(navigation) {
-  const candidates = ["MyModelReflections", "MyModelReflectionsScreen"];
+function resolvePieceLibraryRouteName(navigation) {
+  const candidates = ["PieceLibrary", "PieceLibraryScreen"];
 
   const root = navigation?.getRootState?.();
   const local = navigation?.getState?.();
@@ -255,7 +254,7 @@ function resolveReflectionsRouteName(navigation) {
       return name;
     }
   }
-  return "MyModelReflections";
+  return "PieceLibrary";
 }
 
 export default function NexusScreen({ navigation }) {
@@ -269,34 +268,34 @@ export default function NexusScreen({ navigation }) {
   const {
     isTutorialMode,
     tutorialStep,
-    tutorialReflections,
+    tutorialPieces,
     setTutorialStep,
-    ensureTutorialReflectionsSeed,
+    ensureTutorialPiecesSeed,
   } = useTutorial();
 
   const screenRootRef = useRef(null);
   const scrollRef = useRef(null);
   const currentScrollYRef = useRef(0);
   const titleRef = useRef(null);
-  const reflectionTabRef = useRef(null);
+  const pieceTabRef = useRef(null);
   const tutorialCardRef = useRef(null);
   const tutorialButtonRef = useRef(null);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
 
-  const [activeTab, setActiveTab] = useState("reflection");
+  const [activeTab, setActiveTab] = useState("piece");
 
-  const tutorialReflectionItems = useMemo(
-    () => normalizeTutorialReflectionItems(tutorialReflections),
-    [tutorialReflections]
+  const tutorialPieceItems = useMemo(
+    () => normalizeTutorialPieceItems(tutorialPieces),
+    [tutorialPieces]
   );
   const isNexusTutorialStep =
     !!isTutorialMode &&
-    tutorialStep >= MYMODEL_TUTORIAL_STEP_START &&
-    tutorialStep <= MYMODEL_TUTORIAL_STEP_END;
+    tutorialStep >= PIECE_TUTORIAL_STEP_START &&
+    tutorialStep <= PIECE_TUTORIAL_STEP_END;
 
   const [rankingState, setRankingState] = useState({ loading: true, items: [] });
-  const [reflectionState, setReflectionState] = useState({
+  const [pieceState, setPieceState] = useState({
     loading: true,
     items: [],
     error: "",
@@ -316,7 +315,7 @@ export default function NexusScreen({ navigation }) {
   const [historyState, setHistoryState] = useState({
     loading: false,
     loadedModes: {},
-    echoes: [],
+    resonances: [],
     error: "",
   });
 
@@ -324,15 +323,15 @@ export default function NexusScreen({ navigation }) {
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailData, setDetailData] = useState(null);
 
-  const prefetchedReflectionUnread = !!getFeatureUnread("MyModel", "reflectionsNew");
+  const prefetchedPieceUnread = !!getFeatureUnread("Piece", "piecesNew");
   const prefetchedEmotionLogUnread = !!getFeatureUnread("EmotionLog", "feed");
-  const reflectionHasUnread = Array.isArray(reflectionState.items)
-    ? reflectionState.items.some((item) => item?.viewer_state?.is_new === true)
+  const pieceHasUnread = Array.isArray(pieceState.items)
+    ? pieceState.items.some((item) => item?.viewer_state?.is_new === true)
     : false;
-  const reflectionUnreadResolved = !reflectionState.loading && !reflectionState.error;
-  const reflectionTabUnread = reflectionUnreadResolved
-    ? reflectionHasUnread
-    : prefetchedReflectionUnread || reflectionHasUnread;
+  const pieceUnreadResolved = !pieceState.loading && !pieceState.error;
+  const pieceTabUnread = pieceUnreadResolved
+    ? pieceHasUnread
+    : prefetchedPieceUnread || pieceHasUnread;
   const emotionLogTabUnread = prefetchedEmotionLogUnread;
 
   const latestEmotionLogCreatedAt = useMemo(() => {
@@ -358,24 +357,24 @@ export default function NexusScreen({ navigation }) {
     return latest;
   }, [emotionLogState.items]);
 
-  const refreshReflectionUnreadState = useCallback(async () => {
+  const refreshPieceUnreadState = useCallback(async () => {
     if (isTutorialMode) {
-      setUnread("MyModel", "reflectionsNew", false);
+      setUnread("Piece", "piecesNew", false);
       return false;
     }
 
     try {
-      const json = await getNexusReflectionsUnreadStatus();
+      const json = await getNexusPiecesUnreadStatus();
       const hasUnread =
         typeof json?.has_unread === "boolean"
           ? json.has_unread
           : typeof json?.hasUnread === "boolean"
           ? json.hasUnread
           : false;
-      setUnread("MyModel", "reflectionsNew", !!hasUnread);
+      setUnread("Piece", "piecesNew", !!hasUnread);
       return !!hasUnread;
     } catch (e) {
-      console.warn("NexusScreen: refreshReflectionUnreadState failed", e);
+      console.warn("NexusScreen: refreshPieceUnreadState failed", e);
       return null;
     }
   }, [isTutorialMode, setUnread]);
@@ -402,10 +401,10 @@ export default function NexusScreen({ navigation }) {
 
   const refreshNexusUnreadState = useCallback(async () => {
     await Promise.all([
-      refreshReflectionUnreadState(),
+      refreshPieceUnreadState(),
       refreshEmotionLogUnreadState(),
     ]);
-  }, [refreshEmotionLogUnreadState, refreshReflectionUnreadState]);
+  }, [refreshEmotionLogUnreadState, refreshPieceUnreadState]);
 
 
   const loadRanking = useCallback(async () => {
@@ -426,34 +425,34 @@ export default function NexusScreen({ navigation }) {
     }
   }, [isTutorialMode]);
 
-  const loadReflections = useCallback(async () => {
+  const loadPieces = useCallback(async () => {
     if (isTutorialMode) {
-      setReflectionState({
+      setPieceState({
         loading: false,
-        items: tutorialReflectionItems,
+        items: tutorialPieceItems,
         error: "",
       });
       return;
     }
 
-    setReflectionState((prev) => ({ ...prev, loading: true, error: "" }));
+    setPieceState((prev) => ({ ...prev, loading: true, error: "" }));
     try {
-      const json = await getNexusReflections({
+      const json = await getNexusPieces({
         sort: "latest",
         limit: 20,
         following_only: true,
       });
       const items = Array.isArray(json?.items) ? json.items : [];
-      setReflectionState({ loading: false, items, error: "" });
+      setPieceState({ loading: false, items, error: "" });
     } catch (e) {
-      console.warn("NexusScreen: loadReflections failed", e);
-      setReflectionState({
+      console.warn("NexusScreen: loadPieces failed", e);
+      setPieceState({
         loading: false,
         items: [],
         error: String(e?.message || "Pieceを読み込めませんでした。"),
       });
     }
-  }, [isTutorialMode, tutorialReflectionItems]);
+  }, [isTutorialMode, tutorialPieceItems]);
 
   const loadEmotionLog = useCallback(async () => {
     if (isTutorialMode) {
@@ -519,7 +518,7 @@ export default function NexusScreen({ navigation }) {
 
   const loadHistory = useCallback(
     async () => {
-      const safeMode = "echoes";
+      const safeMode = "resonances";
       if (isTutorialMode) {
         setHistoryState((prev) => ({
           ...prev,
@@ -533,8 +532,8 @@ export default function NexusScreen({ navigation }) {
 
       setHistoryState((prev) => ({ ...prev, loading: true, error: "" }));
       try {
-        const json = await getNexusEchoesReflections(20);
-        const normalized = normalizeSavedReflections(json);
+        const json = await getNexusResonancePieces(20);
+        const normalized = normalizeSavedPieces(json);
         setHistoryState((prev) => ({
           ...prev,
           loading: false,
@@ -558,40 +557,40 @@ export default function NexusScreen({ navigation }) {
 
   useEffect(() => {
     void loadRanking();
-    void loadReflections();
-  }, [loadRanking, loadReflections]);
+    void loadPieces();
+  }, [loadRanking, loadPieces]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
-    void ensureTutorialReflectionsSeed();
-    if (activeTab !== "reflection") {
-      setActiveTab("reflection");
+    void ensureTutorialPiecesSeed();
+    if (activeTab !== "piece") {
+      setActiveTab("piece");
     }
-  }, [activeTab, ensureTutorialReflectionsSeed, isTutorialMode]);
+  }, [activeTab, ensureTutorialPiecesSeed, isTutorialMode]);
 
   useEffect(() => {
     if (isTutorialMode) {
-      setReflectionState({
+      setPieceState({
         loading: false,
-        items: tutorialReflectionItems,
+        items: tutorialPieceItems,
         error: "",
       });
     }
-  }, [isTutorialMode, tutorialReflectionItems]);
+  }, [isTutorialMode, tutorialPieceItems]);
 
   useEffect(() => {
     if (isTutorialMode) {
-      setUnread("MyModel", "reflectionsNew", false);
+      setUnread("Piece", "piecesNew", false);
       return;
     }
-    if (reflectionState.loading || reflectionState.error) return;
+    if (pieceState.loading || pieceState.error) return;
 
-    setUnread("MyModel", "reflectionsNew", reflectionHasUnread);
+    setUnread("Piece", "piecesNew", pieceHasUnread);
   }, [
     isTutorialMode,
-    reflectionHasUnread,
-    reflectionState.error,
-    reflectionState.loading,
+    pieceHasUnread,
+    pieceState.error,
+    pieceState.loading,
     setUnread,
   ]);
 
@@ -648,7 +647,7 @@ export default function NexusScreen({ navigation }) {
     }
     if (
       activeTab === "history" &&
-      !historyState.loadedModes?.echoes &&
+      !historyState.loadedModes?.resonances &&
       !historyState.loading
     ) {
       void loadHistory();
@@ -677,11 +676,11 @@ export default function NexusScreen({ navigation }) {
     [isTutorialMode, navigation]
   );
 
-  const handleOpenTutorialReflections = useCallback(() => {
-    void ensureTutorialReflectionsSeed();
+  const handleOpenTutorialPieces = useCallback(() => {
+    void ensureTutorialPiecesSeed();
     setTutorialStep((prev) => (prev < 16 ? 16 : prev));
 
-    const routeName = resolveReflectionsRouteName(navigation);
+    const routeName = resolvePieceLibraryRouteName(navigation);
     try {
       navigation?.navigate?.(routeName, {
         tutorialOpenAt: Date.now(),
@@ -692,9 +691,9 @@ export default function NexusScreen({ navigation }) {
         "Piece一覧画面が navigation に未登録の可能性があります。"
       );
     }
-  }, [ensureTutorialReflectionsSeed, navigation, setTutorialStep]);
+  }, [ensureTutorialPiecesSeed, navigation, setTutorialStep]);
 
-  const handleOpenReflection = useCallback(
+  const handleOpenPiece = useCallback(
     async (item) => {
       if (isTutorialMode) {
         setDetailVisible(true);
@@ -718,11 +717,11 @@ export default function NexusScreen({ navigation }) {
       setDetailVisible(true);
       setDetailLoading(true);
       try {
-        const detail = await getNexusReflectionDetail(qInstanceId, {
+        const detail = await getNexusPieceDetail(qInstanceId, {
           markViewed: true,
         });
         setDetailData(detail && typeof detail === "object" ? detail : null);
-        setReflectionState((prev) => ({
+        setPieceState((prev) => ({
           ...prev,
           items: Array.isArray(prev.items)
             ? prev.items.map((row) => {
@@ -742,7 +741,7 @@ export default function NexusScreen({ navigation }) {
             : prev.items,
         }));
       } catch (e) {
-        console.warn("NexusScreen: load reflection detail failed", e);
+        console.warn("NexusScreen: load piece detail failed", e);
         setDetailData({
           title: item?.question?.title || item?.title || "Piece",
           body: item?.body || "",
@@ -763,7 +762,7 @@ export default function NexusScreen({ navigation }) {
       case 12:
         return titleRef;
       case 13:
-        return reflectionTabRef;
+        return pieceTabRef;
       case 14:
         return tutorialCardRef;
       case 15:
@@ -883,48 +882,48 @@ export default function NexusScreen({ navigation }) {
     isNexusTutorialStep,
     tutorialStep,
     activeTab,
-    tutorialReflectionItems.length,
+    tutorialPieceItems.length,
     tutorialOverlayMetrics,
     syncTutorialTargetRect,
   ]);
 
-  const renderReflectionTab = () => {
+  const renderPieceTab = () => {
     if (isTutorialMode) {
-      if (!tutorialReflectionItems.length) {
+      if (!tutorialPieceItems.length) {
         return (
           <Text style={styles.emptyText}>
             チュートリアル用のPieceを準備しています。
           </Text>
         );
       }
-      return tutorialReflectionItems.map((item) => (
-        <NexusReflectionCard
+      return tutorialPieceItems.map((item) => (
+        <NexusPieceCard
           key={String(item?.q_instance_id || Math.random())}
           item={item}
-          onPress={() => handleOpenReflection(item)}
+          onPress={() => handleOpenPiece(item)}
           onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
         />
       ));
     }
 
-    if (reflectionState.loading) {
+    if (pieceState.loading) {
       return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
     }
-    if (reflectionState.error) {
-      return <Text style={styles.errorText}>{reflectionState.error}</Text>;
+    if (pieceState.error) {
+      return <Text style={styles.errorText}>{pieceState.error}</Text>;
     }
-    if (!Array.isArray(reflectionState.items) || reflectionState.items.length <= 0) {
+    if (!Array.isArray(pieceState.items) || pieceState.items.length <= 0) {
       return (
         <Text style={styles.emptyText}>
           フォロー中ユーザーのPieceはまだありません。
         </Text>
       );
     }
-    return reflectionState.items.map((item) => (
-      <NexusReflectionCard
+    return pieceState.items.map((item) => (
+      <NexusPieceCard
         key={String(item?.q_instance_id || Math.random())}
         item={item}
-        onPress={() => handleOpenReflection(item)}
+        onPress={() => handleOpenPiece(item)}
         onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
       />
     ));
@@ -1018,8 +1017,8 @@ export default function NexusScreen({ navigation }) {
             >
               <View style={styles.simpleCardHeader}>
                 <Text style={styles.simpleCardTitle}>{user.displayName}</Text>
-                {user.friendCode ? (
-                  <Text style={styles.simpleCardMeta}>{user.friendCode}</Text>
+                {user.shareCode ? (
+                  <Text style={styles.simpleCardMeta}>{user.shareCode}</Text>
                 ) : null}
               </View>
             </CocolonPressable>
@@ -1030,22 +1029,22 @@ export default function NexusScreen({ navigation }) {
   };
 
   const renderHistoryTab = () => {
-    if (historyState.loading && !historyState.loadedModes?.echoes) {
+    if (historyState.loading && !historyState.loadedModes?.resonances) {
       return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
     }
-    if (historyState.error && !historyState.echoes.length) {
+    if (historyState.error && !historyState.resonances.length) {
       return <Text style={styles.errorText}>{historyState.error}</Text>;
     }
-    if (!historyState.echoes.length) {
+    if (!historyState.resonances.length) {
       return <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>;
     }
     return (
       <View>
-        {historyState.echoes.map((item) => (
+        {historyState.resonances.map((item) => (
           <CocolonPressable
             key={item.qInstanceId}
             style={styles.simpleCard}
-            onPress={() => handleOpenReflection(item)}
+            onPress={() => handleOpenPiece(item)}
           >
             <View style={styles.simpleCardHeader}>
               <Text style={styles.simpleCardTitle}>{item.title}</Text>
@@ -1068,9 +1067,9 @@ export default function NexusScreen({ navigation }) {
         return renderRecommendTab();
       case "history":
         return renderHistoryTab();
-      case "reflection":
+      case "piece":
       default:
-        return renderReflectionTab();
+        return renderPieceTab();
     }
   };
 
@@ -1099,7 +1098,7 @@ export default function NexusScreen({ navigation }) {
             onPress={() => {
               void refreshNexusUnreadState();
               void loadRanking();
-              if (activeTab === "reflection") void loadReflections();
+              if (activeTab === "piece") void loadPieces();
               if (activeTab === "emotion_log") void loadEmotionLog();
               if (activeTab === "recommend") void loadRecommend();
               if (activeTab === "history") void loadHistory();
@@ -1124,7 +1123,7 @@ export default function NexusScreen({ navigation }) {
             <View ref={tutorialButtonRef} collapsable={false} style={styles.tutorialEntryButtonWrap}>
               <CocolonButton
                 variant="primary"
-                onPress={handleOpenTutorialReflections}
+                onPress={handleOpenTutorialPieces}
                 accessibilityLabel="Piece一覧を開く"
               >
                 Piece一覧を開く
@@ -1192,7 +1191,7 @@ export default function NexusScreen({ navigation }) {
                     </Text>
                     <ScreenUnreadBadge
                       visible={
-                        (tab.key === "reflection" && reflectionTabUnread) ||
+                        (tab.key === "piece" && pieceTabUnread) ||
                         (tab.key === "emotion_log" && emotionLogTabUnread)
                       }
                       style={styles.tabUnreadBadge}
@@ -1202,11 +1201,11 @@ export default function NexusScreen({ navigation }) {
               </CocolonPressable>
             );
 
-            if (tab.key === "reflection") {
+            if (tab.key === "piece") {
               return (
                 <View
                   key={tab.key}
-                  ref={reflectionTabRef}
+                  ref={pieceTabRef}
                   collapsable={false}
                   style={styles.tabItemWrap}
                 >
@@ -1257,7 +1256,7 @@ export default function NexusScreen({ navigation }) {
                     views {Number(detailData?.views || 0) || 0}
                   </Text>
                   <Text style={styles.detailMetricText}>
-                    echoes {Number(detailData?.resonances || 0) || 0}
+                    共鳴 {Number(detailData?.resonances || 0) || 0}
                   </Text>
                 </View>
               </ScrollView>
@@ -1287,7 +1286,7 @@ export default function NexusScreen({ navigation }) {
           mode={tutorialOverlayConfig.mode}
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
-          onTargetPress={tutorialStep === 15 ? handleOpenTutorialReflections : undefined}
+          onTargetPress={tutorialStep === 15 ? handleOpenTutorialPieces : undefined}
           onMetricsChange={setTutorialOverlayMetrics}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement}

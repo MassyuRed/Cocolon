@@ -6,6 +6,7 @@ import { useAuth } from "../AuthContext";
 import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import { apiGet, apiPatch, apiPost } from "../lib/apiClient";
+import { EMOTION_NOTIFICATION_WIRE, readEmotionNotificationOwnerId } from "../lib/compat/legacyWireContracts";
 import {
   getReportDistributionSettings,
   patchReportDistributionSettings,
@@ -21,14 +22,14 @@ import {
   useTheme,
 } from "../theme/ThemeContext";
 import {
-  MyWebDescription,
-  MyWebMediumCard,
-  MyWebMenuScroll,
-  MyWebSubHeader,
-  useMyWebMenuStyles,
-} from "./MyWebMenuCommon";
+  AnalysisDescription,
+  AnalysisMediumCard,
+  AnalysisMenuScroll,
+  AnalysisSubHeader,
+  useAnalysisMenuStyles,
+} from "./AnalysisMenuCommon";
 
-const EMOTION_NOTIFICATION_GLOBAL_OWNER_ID = "__global_friend_notifications__";
+const EMOTION_NOTIFICATION_GLOBAL_OWNER_ID = EMOTION_NOTIFICATION_WIRE.globalOwnerCompatId;
 
 function resolveEmotionNotificationEnabled(payload) {
   const list = Array.isArray(payload)
@@ -40,15 +41,9 @@ function resolveEmotionNotificationEnabled(payload) {
     : [];
 
   const row = list.find((item) => {
-    const friendUserId =
-      item?.friend_user_id ??
-      item?.owner_user_id ??
-      item?.friendUserId ??
-      item?.ownerUserId ??
-      item?.friend_id ??
-      item?.friendId;
+    const notificationOwnerUserId = readEmotionNotificationOwnerId(item, "");
 
-    return String(friendUserId || "").trim() === EMOTION_NOTIFICATION_GLOBAL_OWNER_ID;
+    return String(notificationOwnerUserId || "").trim() === EMOTION_NOTIFICATION_GLOBAL_OWNER_ID;
   });
 
   if (!row || typeof row !== "object") return true;
@@ -125,7 +120,7 @@ function SettingChoiceRow({
   onPress,
   rightText,
 }) {
-  const { colors, ui } = useMyWebMenuStyles();
+  const { colors, ui } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
 
   return (
@@ -157,7 +152,7 @@ function SettingSwitchRow({
   onValueChange,
   disabled = false,
 }) {
-  const { colors, ui } = useMyWebMenuStyles();
+  const { colors, ui } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
 
   const handleToggle = () => {
@@ -192,7 +187,7 @@ function SettingSwitchRow({
 export default function SettingsAppSettingsScreen({ navigation }) {
   const { colors, themeName, setThemeName } = useTheme();
   const { user, authLoading } = useAuth();
-  const { ui } = useMyWebMenuStyles();
+  const { ui } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
   const fallbackTimezone = useMemo(
     () => resolveLocalTimezoneName("Asia/Tokyo"),
@@ -211,15 +206,15 @@ export default function SettingsAppSettingsScreen({ navigation }) {
   const [reportDistributionDeliveryTime, setReportDistributionDeliveryTime] = useState("00:00");
   const [reportDistributionTimezone, setReportDistributionTimezone] = useState(fallbackTimezone);
   const [reportDistributionLoading, setReportDistributionLoading] = useState(true);
-  const [friendNotificationEnabled, setFriendNotificationEnabled] = useState(true);
-  const [friendNotificationLoading, setFriendNotificationLoading] = useState(true);
+  const [emotionNotificationEnabled, setEmotionNotificationEnabled] = useState(true);
+  const [emotionNotificationLoading, setEmotionNotificationLoading] = useState(true);
 
   const isBusy = authLoading || localProcessing;
   const notificationSettingsLoading =
     pushLoading ||
     todayQuestionLoading ||
     reportDistributionLoading ||
-    friendNotificationLoading;
+    emotionNotificationLoading;
 
   const themeOptions = [
     { key: THEME_VARIANTS.DEFAULT },
@@ -347,32 +342,32 @@ export default function SettingsAppSettingsScreen({ navigation }) {
   useEffect(() => {
     let cancelled = false;
 
-    const loadFriendNotification = async () => {
+    const loadEmotionNotification = async () => {
       if (!user?.id) {
         if (!cancelled) {
-          setFriendNotificationEnabled(true);
-          setFriendNotificationLoading(false);
+          setEmotionNotificationEnabled(true);
+          setEmotionNotificationLoading(false);
         }
         return;
       }
 
-      setFriendNotificationLoading(true);
+      setEmotionNotificationLoading(true);
       try {
         const json = await apiGet("/emotion-notifications/settings");
         if (!cancelled) {
-          setFriendNotificationEnabled(resolveEmotionNotificationEnabled(json));
+          setEmotionNotificationEnabled(resolveEmotionNotificationEnabled(json));
         }
       } catch (error) {
-        console.warn("SettingsAppSettingsScreen: load friend notification settings failed", error);
+        console.warn("SettingsAppSettingsScreen: load emotion notification settings failed", error);
         if (!cancelled) {
-          setFriendNotificationEnabled(true);
+          setEmotionNotificationEnabled(true);
         }
       } finally {
-        if (!cancelled) setFriendNotificationLoading(false);
+        if (!cancelled) setEmotionNotificationLoading(false);
       }
     };
 
-    loadFriendNotification();
+    loadEmotionNotification();
     return () => {
       cancelled = true;
     };
@@ -382,7 +377,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     setExpandedSection((current) => (current === nextKey ? null : nextKey));
   };
 
-  const persistFriendNotificationEnabled = async (next) => {
+  const persistEmotionNotificationEnabled = async (next) => {
     await apiPost(
       `/emotion-notifications/settings/${encodeURIComponent(EMOTION_NOTIFICATION_GLOBAL_OWNER_ID)}`,
       { is_enabled: !!next }
@@ -402,14 +397,14 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       pushEnabled,
       todayQuestionNotificationEnabled,
       reportDistributionNotificationEnabled,
-      friendNotificationEnabled,
+      emotionNotificationEnabled,
     };
 
     setPushEnabled(nextEnabled);
     if (!nextEnabled) {
       setTodayQuestionNotificationEnabled(false);
       setReportDistributionNotificationEnabled(false);
-      setFriendNotificationEnabled(false);
+      setEmotionNotificationEnabled(false);
     }
 
     setLocalProcessing(true);
@@ -428,7 +423,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
             delivery_time_local: String(reportDistributionDeliveryTime || "00:00"),
             timezone_name: String(reportDistributionTimezone || fallbackTimezone),
           }),
-          persistFriendNotificationEnabled(false),
+          persistEmotionNotificationEnabled(false),
         ]);
 
         const failed = results.find((result) => result.status === "rejected");
@@ -448,7 +443,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       setPushEnabled(previous.pushEnabled);
       setTodayQuestionNotificationEnabled(previous.todayQuestionNotificationEnabled);
       setReportDistributionNotificationEnabled(previous.reportDistributionNotificationEnabled);
-      setFriendNotificationEnabled(previous.friendNotificationEnabled);
+      setEmotionNotificationEnabled(previous.emotionNotificationEnabled);
       Alert.alert("通知設定の更新に失敗しました", String(error?.message || error));
     } finally {
       setLocalProcessing(false);
@@ -509,23 +504,23 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     }
   };
 
-  const updateFriendNotificationEnabled = async (next) => {
-    if (isBusy || friendNotificationLoading || !pushEnabled) return;
+  const updateEmotionNotificationEnabled = async (next) => {
+    if (isBusy || emotionNotificationLoading || !pushEnabled) return;
 
     if (!user?.id) {
       Alert.alert("感情通知", "ログイン情報が取得できませんでした。");
       return;
     }
 
-    const previous = friendNotificationEnabled;
-    setFriendNotificationEnabled(next);
+    const previous = emotionNotificationEnabled;
+    setEmotionNotificationEnabled(next);
 
     setLocalProcessing(true);
     try {
-      await persistFriendNotificationEnabled(next);
+      await persistEmotionNotificationEnabled(next);
     } catch (error) {
-      console.warn("SettingsAppSettingsScreen: update friend notification failed", error);
-      setFriendNotificationEnabled(previous);
+      console.warn("SettingsAppSettingsScreen: update emotion notification failed", error);
+      setEmotionNotificationEnabled(previous);
       Alert.alert("感情通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
       setLocalProcessing(false);
@@ -533,13 +528,13 @@ export default function SettingsAppSettingsScreen({ navigation }) {
   };
 
   return (
-    <MyWebMenuScroll>
-      <MyWebSubHeader title="アプリ設定" onBack={() => navigation.goBack()} />
-      <MyWebDescription>
+    <AnalysisMenuScroll>
+      <AnalysisSubHeader title="アプリ設定" onBack={() => navigation.goBack()} />
+      <AnalysisDescription>
         変更したい設定を選んでください。
-      </MyWebDescription>
+      </AnalysisDescription>
 
-      <MyWebMediumCard
+      <AnalysisMediumCard
         title="カラーテーマ"
         description="アプリの見た目を設定します"
         onPress={() => toggleSection("theme")}
@@ -563,7 +558,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       ) : null}
 
       <View style={{ marginTop: 12 }}>
-        <MyWebMediumCard
+        <AnalysisMediumCard
           title="通知設定"
           description="通知の受け取り方を設定します"
           onPress={() => toggleSection("notifications")}
@@ -602,9 +597,9 @@ export default function SettingsAppSettingsScreen({ navigation }) {
           <View style={{ marginTop: 8 }}>
             <SettingSwitchRow
               label="感情通知"
-              value={friendNotificationEnabled}
-              onValueChange={updateFriendNotificationEnabled}
-              disabled={friendNotificationLoading || isBusy || !pushEnabled}
+              value={emotionNotificationEnabled}
+              onValueChange={updateEmotionNotificationEnabled}
+              disabled={emotionNotificationLoading || isBusy || !pushEnabled}
             />
           </View>
 
@@ -615,6 +610,6 @@ export default function SettingsAppSettingsScreen({ navigation }) {
           ) : null}
         </View>
       ) : null}
-    </MyWebMenuScroll>
+    </AnalysisMenuScroll>
   );
 }

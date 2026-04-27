@@ -18,10 +18,14 @@ import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, API_BASE_URL } from "../lib/apiClient";
+import { PIECE_WIRE } from "../lib/compat/legacyWireContracts";
 
 const API_BASE = API_BASE_URL;
 
 const RANGE_OPTIONS = [
+  { key: "day", label: "今日" },
+  { key: "week", label: "過去7日間" },
+  { key: "month", label: "過去30日間" },
   { key: "year", label: "トータル" },
 ];
 
@@ -119,41 +123,13 @@ function RangeSelector({ styles, colors, value, onChange }) {
 }
 
 function RankingHeader({ styles, title, navigation }) {
-  const handleBack = () => {
-    try {
-      if (navigation?.canGoBack?.() && navigation?.goBack) {
-        navigation.goBack();
-        return;
-      }
-    } catch {
-      // noop
-    }
-
-    // fallback: return to RankingTop tab
-    try {
-      navigation?.navigate?.("MainTabs", { screen: "RankingTop" });
-    } catch {
-      // noop
-    }
-  };
-
   return (
     <View style={styles.panelHeader}>
-      <TouchableOpacity
-        onPress={handleBack}
+      <CocolonBackButton
+        navigation={navigation}
+        fallbackRouteName="RankingTop"
         style={styles.backBtn}
-        activeOpacity={0.85}
-      >
-        <View pointerEvents="none">
-          <CocolonBackButton
-            navigation={navigation}
-            fallbackRouteName="MainTabs"
-            fallbackParams={{ screen: "RankingTop" }}
-            style={{ padding: 0 }}
-          />
-        </View>
-        
-      </TouchableOpacity>
+      />
 
       <Text style={styles.panelTitle}>{title}</Text>
 
@@ -182,43 +158,16 @@ function RankingRow({ styles, left, right, onPressLeft, isPrivateAccount }) {
           </Text>
         ) : null}
 
-        {onPressLeft ? (
-          <View style={[styles.nameRow, styles.nameTap]}>
-            <View style={styles.nameLabelRow}>
-              <Text
-                style={[styles.rowLeft, styles.nameLabelText]}
-                numberOfLines={1}
-              >
-                {nameLabel}
-              </Text>
-              {isPrivateAccount ? (
-                <Ionicons
-                  name="shield-outline"
-                  size={14}
-                  style={styles.privateShield}
-                />
-              ) : null}
-            </View>
+        <View style={[styles.nameRow, onPressLeft && styles.nameTap]}>
+          <View style={styles.nameLabelRow}>
+            <Text style={[styles.rowLeft, styles.nameLabelText]} numberOfLines={1}>
+              {nameLabel}
+            </Text>
+            {isPrivateAccount ? (
+              <Ionicons name="shield-outline" size={14} style={styles.privateShield} />
+            ) : null}
           </View>
-        ) : (
-          <View style={styles.nameRow}>
-            <View style={styles.nameLabelRow}>
-              <Text
-                style={[styles.rowLeft, styles.nameLabelText]}
-                numberOfLines={1}
-              >
-                {nameLabel}
-              </Text>
-              {isPrivateAccount ? (
-                <Ionicons
-                  name="shield-outline"
-                  size={14}
-                  style={styles.privateShield}
-                />
-              ) : null}
-            </View>
-          </View>
-        )}
+        </View>
       </View>
 
       <View style={styles.rowBottom}>
@@ -229,14 +178,13 @@ function RankingRow({ styles, left, right, onPressLeft, isPrivateAccount }) {
   );
 }
 
-
-export default function LoginStreakRankingScreen({ navigation }) {
+export default function PieceResonanceRankingScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
-  const [range, setRange] = useState("year");
+  const [range, setRange] = useState("day");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [rows, setRows] = useState([]);
@@ -245,7 +193,7 @@ export default function LoginStreakRankingScreen({ navigation }) {
     setLoading(true);
     setError("");
     try {
-      const url = new URL("/ranking/login_streak", API_BASE);
+      const url = new URL(PIECE_WIRE.routes.rankingResonances, API_BASE);
       url.searchParams.set("range", range);
       url.searchParams.set("limit", "100");
       const data = await fetchJsonWithAuth(url.toString());
@@ -264,6 +212,7 @@ export default function LoginStreakRankingScreen({ navigation }) {
 
   useEffect(() => {
     if (!error) return;
+    // 画面上にも出すけど、初期は気づきやすいようにアラートも出す
     Alert.alert("ランキング取得エラー", error);
   }, [error]);
 
@@ -274,15 +223,8 @@ export default function LoginStreakRankingScreen({ navigation }) {
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        <RankingHeader
-          styles={styles}
-          title="連続ログインランキング"
-          navigation={navigation}
-        />
+      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        <RankingHeader styles={styles} title="共鳴数ランキング" navigation={navigation} />
 
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>集計範囲</Text>
@@ -307,22 +249,19 @@ export default function LoginStreakRankingScreen({ navigation }) {
             rows.map((r, idx) => {
               const userId = r?.user_id || r?.userId || r?.id;
 
-              const streak =
-                Number(r?.streak_days ?? r?.streak ?? r?.value ?? r?.count ?? 0) ||
-                0;
-
               return (
                 <RankingRow
-                  key={`${userId || "user"}-${idx}`}
+                  key={`${r?.user_id || "user"}-${idx}`}
                   styles={styles}
                   isPrivateAccount={!!(r?.is_private_account ?? r?.isPrivateAccount)}
                   onPressLeft={
                     userId ? () => navigateToAccount(navigation, userId) : undefined
                   }
                   left={`${r?.rank ?? idx + 1}位  ${r?.display_name || r?.name || "—"}`}
-                  right={`${streak}`}
+                  sub={null}
+                  right={`${r?.resonance_count ?? r?.resonances ?? r?.count ?? 0}`}
                 />
-              );
+              );;
             })
           )}
         </View>
@@ -456,12 +395,16 @@ function createStyles(COLORS, ui) {
       marginTop: 8,
       flexDirection: "row",
       alignItems: "center",
-    },
-    rowLeft: {
+    },rowLeft: {
       fontSize: 13,
       fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
       flexShrink: 1,
+    },
+    rowSub: {
+      marginTop: 2,
+      fontSize: 11,
+      color: COLORS.TEXT_SUBTLE,
     },
     rowRight: {
       fontSize: 13,

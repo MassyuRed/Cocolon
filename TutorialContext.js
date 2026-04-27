@@ -2,10 +2,15 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
-import { patchAccountProfileMe } from "./lib/api/account/profileApi";
+import {
+  getAccountProfileMe,
+  patchAccountProfileMe,
+} from "./lib/api/account/profileApi";
+import { useAuth } from "./AuthContext";
 
 const TutorialContext = createContext(undefined);
 
@@ -16,46 +21,44 @@ const INITIAL_TUTORIAL_STATE = Object.freeze({
   tutorialSkipped: false,
   tutorialStep: 0,
   tutorialEmotions: [],
-  tutorialReflections: [],
-  tutorialFriendFeed: [],
+  tutorialPieces: [],
+  tutorialEmotionLogFeed: [],
 });
 
 
-const TUTORIAL_REFLECTION_QUESTION = "理想の休日の過ごし方は？";
-const DEFAULT_TUTORIAL_SELF_REFLECTION = Object.freeze({
-  id: "tutorial-reflection-self",
+const TUTORIAL_PIECE_QUESTION = "理想の休日の過ごし方は？";
+const DEFAULT_TUTORIAL_SELF_PIECE = Object.freeze({
+  id: "tutorial-piece-self",
   q_instance_id: "tutorial-q-self",
   q_key: "tutorial-holiday",
-  title: TUTORIAL_REFLECTION_QUESTION,
+  title: TUTORIAL_PIECE_QUESTION,
   body:
     "静かな場所でゆっくり休みつつ、好きなことに時間を使える休日が理想です。",
   owner_user_id: "tutorial-self",
   display_name: "自分",
-  friend_code: "YOU",
+  share_code: "YOU",
   is_tutorial: true,
   tutorial_kind: "self",
   created_at: "2026-01-01T09:10:00.000Z",
   resonances: 0,
-  discoveries: 0,
   views: 0,
   is_new: true,
 });
-const DEFAULT_TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
+const DEFAULT_TUTORIAL_MOCK_PIECES = Object.freeze([
   {
-    id: "tutorial-reflection-mock-1",
+    id: "tutorial-piece-mock-1",
     q_instance_id: "tutorial-q-mock-1",
     q_key: "tutorial-holiday",
-    title: TUTORIAL_REFLECTION_QUESTION,
+    title: TUTORIAL_PIECE_QUESTION,
     body:
       "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
     owner_user_id: "tutorial-follow-1",
     display_name: "User",
-    friend_code: "HANAKO123",
+    share_code: "HANAKO123",
     is_tutorial: true,
     tutorial_kind: "mock",
     created_at: "2026-01-01T09:00:00.000Z",
     resonances: 4,
-    discoveries: 2,
     views: 12,
     is_new: true,
   },
@@ -64,25 +67,26 @@ const DEFAULT_TUTORIAL_MOCK_REFLECTIONS = Object.freeze([
 function cloneInitialArrays() {
   return {
     tutorialEmotions: [],
-    tutorialReflections: [],
-    tutorialFriendFeed: [],
+    tutorialPieces: [],
+    tutorialEmotionLogFeed: [],
   };
 }
 
 
-function cloneTutorialReflectionItem(payload) {
+function cloneTutorialPieceItem(payload) {
   return payload ? JSON.parse(JSON.stringify(payload)) : payload;
 }
 
-function buildDefaultTutorialSelfReflection(body) {
+function buildDefaultTutorialSelfPiece(body) {
   const nextBody = String(body || "").trim();
   return {
-    ...cloneTutorialReflectionItem(DEFAULT_TUTORIAL_SELF_REFLECTION),
-    body: nextBody || DEFAULT_TUTORIAL_SELF_REFLECTION.body,
+    ...cloneTutorialPieceItem(DEFAULT_TUTORIAL_SELF_PIECE),
+    body: nextBody || DEFAULT_TUTORIAL_SELF_PIECE.body,
   };
 }
 
 export function TutorialProvider({ children }) {
+  const { session, recoveryMode } = useAuth();
   const [isTutorialMode, setIsTutorialMode] = useState(
     INITIAL_TUTORIAL_STATE.isTutorialMode
   );
@@ -102,11 +106,11 @@ export function TutorialProvider({ children }) {
   const [tutorialEmotions, setTutorialEmotions] = useState(
     cloneInitialArrays().tutorialEmotions
   );
-  const [tutorialReflections, setTutorialReflections] = useState(
-    cloneInitialArrays().tutorialReflections
+  const [tutorialPieces, setTutorialPieces] = useState(
+    cloneInitialArrays().tutorialPieces
   );
-  const [tutorialFriendFeed, setTutorialFriendFeed] = useState(
-    cloneInitialArrays().tutorialFriendFeed
+  const [tutorialEmotionLogFeed, setTutorialEmotionLogFeed] = useState(
+    cloneInitialArrays().tutorialEmotionLogFeed
   );
 
   const syncTutorialFlagsToProfile = useCallback(async (patch) => {
@@ -119,10 +123,57 @@ export function TutorialProvider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    if (!session || recoveryMode) {
+      setTutorialCompleted(false);
+      setTutorialSkipped(false);
+      setTutorialFlagsLoaded(false);
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    setTutorialFlagsLoaded(false);
+
+    (async () => {
+      try {
+        const userId = session?.user?.id ?? null;
+        if (!userId) {
+          if (!cancelled) {
+            setTutorialCompleted(false);
+            setTutorialSkipped(false);
+            setTutorialFlagsLoaded(true);
+          }
+          return;
+        }
+
+        const json = await getAccountProfileMe();
+        if (!cancelled) {
+          setTutorialCompleted(json?.tutorial_completed === true);
+          setTutorialSkipped(json?.tutorial_skipped === true);
+          setTutorialFlagsLoaded(true);
+        }
+      } catch (e) {
+        console.warn("TutorialContext: failed to load tutorial flags", e);
+        if (!cancelled) {
+          setTutorialCompleted(false);
+          setTutorialSkipped(false);
+          setTutorialFlagsLoaded(true);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [session?.user?.id, recoveryMode]);
+
   const clearTutorialData = useCallback(() => {
     setTutorialEmotions([]);
-    setTutorialReflections([]);
-    setTutorialFriendFeed([]);
+    setTutorialPieces([]);
+    setTutorialEmotionLogFeed([]);
     setTutorialStep(0);
   }, []);
 
@@ -164,20 +215,20 @@ export function TutorialProvider({ children }) {
     setTutorialEmotions((prev) => [...prev, payload]);
   }, []);
 
-  const addTutorialReflection = useCallback((payload) => {
-    setTutorialReflections((prev) => [...prev, payload]);
+  const addTutorialPiece = useCallback((payload) => {
+    setTutorialPieces((prev) => [...prev, payload]);
   }, []);
 
-  const addTutorialFriendFeedItem = useCallback((payload) => {
-    setTutorialFriendFeed((prev) => [payload, ...prev]);
+  const addTutorialEmotionLogFeedItem = useCallback((payload) => {
+    setTutorialEmotionLogFeed((prev) => [payload, ...prev]);
   }, []);
 
-  const ensureTutorialReflectionsSeed = useCallback((options = {}) => {
+  const ensureTutorialPiecesSeed = useCallback((options = {}) => {
     const nextSelfBody = String(options?.selfBody || "").trim();
 
-    setTutorialReflections((prev) => {
+    setTutorialPieces((prev) => {
       const safePrev = Array.isArray(prev)
-        ? prev.filter(Boolean).map((item) => cloneTutorialReflectionItem(item))
+        ? prev.filter(Boolean).map((item) => cloneTutorialPieceItem(item))
         : [];
 
       let changed = false;
@@ -190,7 +241,7 @@ export function TutorialProvider({ children }) {
       );
 
       if (selfIndex < 0) {
-        nextItems = [buildDefaultTutorialSelfReflection(nextSelfBody), ...nextItems];
+        nextItems = [buildDefaultTutorialSelfPiece(nextSelfBody), ...nextItems];
         changed = true;
       } else if (
         nextSelfBody &&
@@ -200,7 +251,7 @@ export function TutorialProvider({ children }) {
           ...nextItems[selfIndex],
           title:
             String(nextItems[selfIndex]?.title || "").trim() ||
-            TUTORIAL_REFLECTION_QUESTION,
+            TUTORIAL_PIECE_QUESTION,
           body: nextSelfBody,
         };
         changed = true;
@@ -209,8 +260,8 @@ export function TutorialProvider({ children }) {
       if (!hasMock) {
         nextItems = [
           ...nextItems,
-          ...DEFAULT_TUTORIAL_MOCK_REFLECTIONS.map((item) =>
-            cloneTutorialReflectionItem(item)
+          ...DEFAULT_TUTORIAL_MOCK_PIECES.map((item) =>
+            cloneTutorialPieceItem(item)
           ),
         ];
         changed = true;
@@ -228,26 +279,26 @@ export function TutorialProvider({ children }) {
       tutorialSkipped,
       tutorialStep,
       tutorialEmotions,
-      tutorialReflections,
-      tutorialFriendFeed,
-      hasTutorialFriendLog: tutorialFriendFeed.length > 0,
+      tutorialPieces,
+      tutorialEmotionLogFeed,
+      hasTutorialEmotionLog: tutorialEmotionLogFeed.length > 0,
       setIsTutorialMode,
       setTutorialFlagsLoaded,
       setTutorialCompleted,
       setTutorialSkipped,
       setTutorialStep,
       setTutorialEmotions,
-      setTutorialReflections,
-      setTutorialFriendFeed,
+      setTutorialPieces,
+      setTutorialEmotionLogFeed,
       startTutorial,
       endTutorial,
       skipTutorial,
       resetTutorial,
       clearTutorialData,
       addTutorialEmotion,
-      addTutorialReflection,
-      addTutorialFriendFeedItem,
-      ensureTutorialReflectionsSeed,
+      addTutorialPiece,
+      addTutorialEmotionLogFeedItem,
+      ensureTutorialPiecesSeed,
     }),
     [
       isTutorialMode,
@@ -256,17 +307,17 @@ export function TutorialProvider({ children }) {
       tutorialSkipped,
       tutorialStep,
       tutorialEmotions,
-      tutorialReflections,
-      tutorialFriendFeed,
+      tutorialPieces,
+      tutorialEmotionLogFeed,
       startTutorial,
       endTutorial,
       skipTutorial,
       resetTutorial,
       clearTutorialData,
       addTutorialEmotion,
-      addTutorialReflection,
-      addTutorialFriendFeedItem,
-      ensureTutorialReflectionsSeed,
+      addTutorialPiece,
+      addTutorialEmotionLogFeedItem,
+      ensureTutorialPiecesSeed,
     ]
   );
 

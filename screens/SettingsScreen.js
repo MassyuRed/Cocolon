@@ -2,22 +2,22 @@ import React from "react";
 import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { MyModelLargeCard } from "./MyModelMenuCommon";
-import { MyWebMenuScroll, useMyWebMenuStyles } from "./MyWebMenuCommon";
+import { PieceLargeCard } from "./PieceMenuCommon";
+import { AnalysisMenuScroll, useAnalysisMenuStyles } from "./AnalysisMenuCommon";
 
 export default function SettingsScreen() {
   const navigation = useNavigation();
-  const { styles } = useMyWebMenuStyles();
+  const { styles } = useAnalysisMenuStyles();
 
   return (
-    <MyWebMenuScroll>
+    <AnalysisMenuScroll>
       <View style={styles.homeHeaderRow}>
         <View style={styles.homeTitleRow}>
           <Text style={styles.homeTitle}>Settings</Text>
         </View>
       </View>
 
-      <MyModelLargeCard
+      <PieceLargeCard
         title="アプリ設定"
         description="アプリの見た目や通知に関する設定です"
         onPress={() => navigation.navigate("SettingsAppSettings")}
@@ -25,7 +25,7 @@ export default function SettingsScreen() {
       />
 
       <View style={{ marginTop: 16 }}>
-        <MyModelLargeCard
+        <PieceLargeCard
           title="サブスク加入状況"
           description="サブスクの加入状況に関する画面です"
           onPress={() => navigation.navigate("SubscriptionSelect")}
@@ -34,13 +34,13 @@ export default function SettingsScreen() {
       </View>
 
       <View style={{ marginTop: 16 }}>
-        <MyModelLargeCard
+        <PieceLargeCard
           title="その他"
           description="チュートリアルやアカウント操作に関する設定です"
           onPress={() => navigation.navigate("SettingsOther")}
           accessibilityLabel="その他の設定を開く"
         />
       </View>
-    </MyWebMenuScroll>
+    </AnalysisMenuScroll>
   );
 }

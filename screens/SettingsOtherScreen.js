@@ -7,11 +7,11 @@ import { useUnread } from "../UnreadContext";
 import { apiPost } from "../lib/apiClient";
 import { clearDeletedAccountLocalState } from "../lib/accountLocalCleanup";
 import {
-  MyWebDescription,
-  MyWebMediumCard,
-  MyWebMenuScroll,
-  MyWebSubHeader,
-} from "./MyWebMenuCommon";
+  AnalysisDescription,
+  AnalysisMediumCard,
+  AnalysisMenuScroll,
+  AnalysisSubHeader,
+} from "./AnalysisMenuCommon";
 
 export default function SettingsOtherScreen({ navigation }) {
   const { signOut, authLoading, user } = useAuth();
@@ -38,7 +38,7 @@ export default function SettingsOtherScreen({ navigation }) {
             }
 
             try {
-              setUnread("Friends", "tutorial", false);
+              setUnread("EmotionLog", "tutorial", false);
             } catch {
               // noop
             }
@@ -133,13 +133,13 @@ export default function SettingsOtherScreen({ navigation }) {
   };
 
   return (
-    <MyWebMenuScroll>
-      <MyWebSubHeader title="その他" onBack={() => navigation.goBack()} />
-      <MyWebDescription>
+    <AnalysisMenuScroll>
+      <AnalysisSubHeader title="その他" onBack={() => navigation.goBack()} />
+      <AnalysisDescription>
         実行したい内容を選んでください。
-      </MyWebDescription>
+      </AnalysisDescription>
 
-      <MyWebMediumCard
+      <AnalysisMediumCard
         title="チュートリアルを再体験する"
         description="本番データを変えずに最初から体験します"
         onPress={openTutorialRestart}
@@ -147,7 +147,7 @@ export default function SettingsOtherScreen({ navigation }) {
       />
 
       <View style={{ marginTop: 12 }}>
-        <MyWebMediumCard
+        <AnalysisMediumCard
           title="ログアウト"
           description="現在のアカウントからログアウトします"
           onPress={handleLogout}
@@ -156,13 +156,13 @@ export default function SettingsOtherScreen({ navigation }) {
       </View>
 
       <View style={{ marginTop: 12 }}>
-        <MyWebMediumCard
+        <AnalysisMediumCard
           title="アカウント削除"
           description="アカウント情報と全入力を削除します"
           onPress={handleDeleteAccount}
           accessibilityLabel="アカウント削除"
         />
       </View>
-    </MyWebMenuScroll>
+    </AnalysisMenuScroll>
   );
 }

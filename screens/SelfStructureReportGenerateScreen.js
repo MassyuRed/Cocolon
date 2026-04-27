@@ -16,21 +16,19 @@ import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../lib/supabase";
 import { getCurrentUserId } from "../lib/user";
 import { useTheme } from "../theme/ThemeContext";
+import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
-import { apiFetch, apiGet } from "../lib/apiClient";
+import { apiFetch, apiGet, API_BASE_URL } from "../lib/apiClient";
+import { SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
 import SelfStructureDeepRenderer from "../components/selfStructure/SelfStructureDeepRenderer";
 import CocolonBackButton from "../components/CocolonBackButton";
 
-// MyProfile（現在の自己構造）: latest viewer
-const API_BASE =
-  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
-const MYPROFILE_LATEST_ENDPOINT = `${API_BASE}/myprofile/latest`;
+// Self Structure（現在の自己構造）: latest viewer
+const API_BASE = API_BASE_URL;
+const SELF_STRUCTURE_LATEST_ENDPOINT = `${API_BASE}${SELF_STRUCTURE_WIRE.routes.latest}`;
 
-// Subscription (plan/tier)
-const SUBSCRIPTION_ME_ENDPOINT = `${API_BASE}/subscription/me`;
-
-// ---- MyProfile: 3 modes (Light/Standard/Deep) ----
+// ---- Self Structure: 3 modes (Light/Standard/Deep) ----
 const TIER_PERMISSION_MAP = Object.freeze({
   free: [],
   plus: ["standard"],
@@ -48,7 +46,7 @@ function normalizeSubscriptionTier(tier) {
   return "free";
 }
 
-function normalizeMyProfileMode(mode) {
+function normalizeSelfStructureMode(mode) {
   const m = String(mode || "").toLowerCase().trim();
   if (m === "light" || m === "standard" || m === "deep") return m;
   return "standard";
@@ -65,7 +63,7 @@ function subscriptionTierLabel(tier) {
 function coerceAllowedModes(maybeAllowedModes, tier) {
   if (Array.isArray(maybeAllowedModes) && maybeAllowedModes.length > 0) {
     const cleaned = maybeAllowedModes
-      .map((x) => normalizeMyProfileMode(x))
+      .map((x) => normalizeSelfStructureMode(x))
       .filter((x) => x === "standard" || x === "deep");
     const uniq = [];
     cleaned.forEach((m) => {
@@ -80,34 +78,6 @@ function defaultModeForTier(tier, allowedModes) {
   const allowed = Array.isArray(allowedModes) && allowedModes.length > 0 ? allowedModes : ["standard"];
   if (allowed.includes("standard")) return "standard";
   return allowed[0] || "standard";
-}
-
-async function fetchSubscriptionMe(accessToken, signal) {
-  if (!accessToken) {
-    return { tier: "free", allowedModes: TIER_PERMISSION_MAP.free, raw: null };
-  }
-
-  const res = await apiFetch(SUBSCRIPTION_ME_ENDPOINT, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-    signal,
-  });
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
-  }
-
-  const json = await res.json();
-  const tier = normalizeSubscriptionTier(json?.subscription_tier || json?.tier || json?.plan);
-  const allowedModes = coerceAllowedModes(
-    json?.allowed_myprofile_modes || json?.allowed_modes || json?.allowed_report_modes,
-    tier
-  );
-
-  return { tier, allowedModes, raw: json };
 }
 
 function safeParseJson(raw) {
@@ -151,7 +121,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / MyProfile</div>
+      <div class="meta">Exported from Cocolon / Self Structure</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;
@@ -242,6 +212,11 @@ async function getAccessToken() {
 
 export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "現在の自己分析" }) {
   const { themeName, colors } = useTheme();
+  const {
+    tier: ctxSubscriptionTier,
+    loading: subscriptionContextLoading,
+    allowedSelfStructureModes: ctxAllowedModes,
+  } = useSubscription();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
@@ -291,10 +266,27 @@ export default function SelfStructureReportGenerateScreen({ onBack, initialRepor
 
     // ---- Subscription / report mode (Step7: UI) ----
   const [subscriptionTier, setSubscriptionTier] = useState("free");
-  const [allowedModes, setAllowedModes] = useState(TIER_PERMISSION_MAP.plus);
-  const [reportMode, setReportMode] = useState(() => normalizeMyProfileMode(initialReportMode));
+  const [allowedModes, setAllowedModes] = useState(TIER_PERMISSION_MAP.free);
+  const [reportMode, setReportMode] = useState(() => normalizeSelfStructureMode(initialReportMode));
   const [tierLoading, setTierLoading] = useState(false);
   const [tierError, setTierError] = useState("");
+
+  useEffect(() => {
+    if (subscriptionContextLoading) {
+      setTierLoading(true);
+      return;
+    }
+    const nextTier = normalizeSubscriptionTier(ctxSubscriptionTier);
+    const nextAllowed = coerceAllowedModes(ctxAllowedModes, nextTier);
+    setSubscriptionTier(nextTier);
+    setAllowedModes(nextAllowed);
+    setTierError("");
+    setTierLoading(false);
+    setReportMode((prev) => {
+      const desired = normalizeSelfStructureMode(prev);
+      return nextAllowed.includes(desired) ? desired : defaultModeForTier(nextTier, nextAllowed);
+    });
+  }, [ctxAllowedModes, ctxSubscriptionTier, subscriptionContextLoading]);
 
 const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -334,7 +326,7 @@ const [loading, setLoading] = useState(true);
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
   const fetchedReportMode = useMemo(() => {
-    return normalizeMyProfileMode(meta?.report_mode || contentJson?.report_mode || reportMode);
+    return normalizeSelfStructureMode(meta?.report_mode || contentJson?.report_mode || reportMode);
   }, [meta?.report_mode, contentJson?.report_mode, reportMode]);
   const hasDeepVisual = useMemo(() => {
     return fetchedReportMode === "deep" && !!contentJson?.selfStructureDeepVisual;
@@ -383,39 +375,20 @@ const run = useCallback(async ({ force = false } = {}) => {
     }
 
     // ---- Subscription (tier) ----
-    let tier = subscriptionTier;
-    let allowed = allowedModes;
+    const tier = normalizeSubscriptionTier(ctxSubscriptionTier || subscriptionTier);
+    const allowed = coerceAllowedModes(
+      Array.isArray(ctxAllowedModes) && ctxAllowedModes.length > 0 ? ctxAllowedModes : allowedModes,
+      tier
+    );
 
     safeSet(() => {
-      setTierLoading(true);
+      setSubscriptionTier(tier);
+      setAllowedModes(allowed);
       setTierError("");
+      setTierLoading(subscriptionContextLoading);
     });
 
-    try {
-      const sub = await fetchSubscriptionMe(accessToken, controller?.signal);
-      tier = sub?.tier || "free";
-      allowed =
-        Array.isArray(sub?.allowedModes) && sub.allowedModes.length > 0
-          ? sub.allowedModes
-          : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["standard"];
-
-      safeSet(() => {
-        setSubscriptionTier(tier);
-        setAllowedModes(allowed);
-      });
-    } catch (e) {
-      tier = "free";
-      allowed = TIER_PERMISSION_MAP.free;
-      safeSet(() => {
-        setSubscriptionTier(tier);
-        setAllowedModes(allowed);
-        setTierError(String(e?.message || e));
-      });
-    } finally {
-      safeSet(() => setTierLoading(false));
-    }
-
-    const desiredMode = normalizeMyProfileMode(reportMode);
+    const desiredMode = normalizeSelfStructureMode(reportMode);
     const effectiveMode = allowed.includes(desiredMode)
       ? desiredMode
       : defaultModeForTier(tier, allowed);
@@ -442,7 +415,7 @@ const run = useCallback(async ({ force = false } = {}) => {
     };
     if (controller) fetchOpts.signal = controller.signal;
 
-    const res = await apiFetch(`${MYPROFILE_LATEST_ENDPOINT}?${qs.toString()}`, fetchOpts);
+    const res = await apiFetch(`${SELF_STRUCTURE_LATEST_ENDPOINT}?${qs.toString()}`, fetchOpts);
 
     if (!res.ok) {
       let detail = `HTTP ${res.status}`;
@@ -471,7 +444,7 @@ const run = useCallback(async ({ force = false } = {}) => {
     safeSet(() => {
       setReportText(text);
       setMeta({
-        source: "myprofile/latest",
+        source: "self-structure/latest",
         report_mode: json?.report_mode || effectiveMode,
         subscription_tier_client: tier,
         ensure: {
@@ -485,7 +458,7 @@ const run = useCallback(async ({ force = false } = {}) => {
 
     if (typeof onLatestSeenVersion === "function") {
       try {
-        const latestStatusJson = await apiGet("/myprofile/latest/status");
+        const latestStatusJson = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
         const latestVersionKey = String(latestStatusJson?.version_key || "").trim();
         if (latestVersionKey) {
           await onLatestSeenVersion(latestVersionKey);
@@ -538,10 +511,15 @@ const run = useCallback(async ({ force = false } = {}) => {
     useServerDefaultMode,
   ]);
 
+  const initialRunStartedRef = useRef(false);
+
   useEffect(() => {
+    if (subscriptionContextLoading) return;
+    if (initialRunStartedRef.current) return;
+    initialRunStartedRef.current = true;
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [subscriptionContextLoading]);
 
 
 

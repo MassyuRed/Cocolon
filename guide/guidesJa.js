@@ -9,11 +9,16 @@ export function normalizeGuideScreenId(raw) {
   if (lower === "home" || lower === "input" || lower.includes("input")) {
     return "home";
   }
-  if (lower === "myweb" || lower.includes("myweb")) {
-    return "myweb";
+  if (lower === "analysis" || lower.includes("analysis")) {
+    return "analysis";
   }
-  if (lower === "mymodel" || lower.includes("mymodel")) {
-    return "mymodel";
+  if (
+    lower === "piece" ||
+    lower.includes("piece") ||
+    lower === "nexus" ||
+    lower.includes("nexus")
+  ) {
+    return "piece";
   }
   if (
     lower === "emotionlog" ||
@@ -78,12 +83,12 @@ export const guidesJa = Object.freeze({
       },
     ],
   },
-  myweb: {
+  analysis: {
     title: "Analysis",
     summary:
       "入力した内容やレポートを振り返る場所です。過去の記録を見直し、自分の傾向を確認できます。",
     relatedTerms: [
-      "myweb",
+      "analysis",
       "emotion_input_history",
       "today_question_history",
       "analysis_report",
@@ -92,7 +97,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "[[term:myweb|Analysis]] は、入力した自己情報や分析レポートを見返すための場所です。日々の積み重ねを後から整理したいときに使います。",
+          "[[term:analysis|Analysis]] は、入力した自己情報や分析レポートを見返すための場所です。日々の積み重ねを後から整理したいときに使います。",
       },
       {
         type: "h2",
@@ -122,22 +127,21 @@ export const guidesJa = Object.freeze({
       },
     ],
   },
-  mymodel: {
+  piece: {
     title: "Piece",
     summary:
       "Pieceを読んだり反応を見たりする場所です。公開された断片を通じて、自分や他者への理解を深めます。",
     relatedTerms: [
-      "mymodel",
-      "reflection",
+      "piece_screen",
+      "piece",
       "kyomei",
-      "hakken",
       "reaction_history",
     ],
     blocks: [
       {
         type: "p",
         text:
-          "[[term:mymodel|Piece画面]] は、公開された [[term:reflection|Piece]] や関連する反応を通じて、自分や他者を立体的に見る場所です。読む・反応する流れを通して理解を深めていきます。",
+          "[[term:piece_screen|Piece画面]] は、公開された [[term:piece|Piece]] や関連する反応を通じて、自分や他者を立体的に見る場所です。読む・共鳴する流れを通して理解を深めていきます。",
       },
       {
         type: "h2",
@@ -146,8 +150,8 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "自分やフォロー中ユーザーの [[term:reflection|Piece]] を読む",
-          "内容に対して [[term:kyomei|共鳴]] や [[term:hakken|発見]] を送り、反応を残す",
+          "自分やフォロー中ユーザーの [[term:piece|Piece]] を読む",
+          "内容に対して [[term:kyomei|共鳴]] に共鳴し、反応を残す",
           "受け取った反応や自分の反応を [[term:reaction_history|履歴]] で確認する",
         ],
       },
@@ -158,7 +162,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "Home や [[term:myweb|Analysis]] に蓄積された情報が土台になり、Piece画面ではそれを Piece や反応の流れとして立体的に扱います。読むほど、自分と他者の見え方がはっきりしていきます。",
+          "Home や [[term:analysis|Analysis]] に蓄積された情報が土台になり、Piece画面ではそれを Piece や反応の流れとして立体的に扱います。読むほど、自分と他者の見え方がはっきりしていきます。",
       },
       {
         type: "note",

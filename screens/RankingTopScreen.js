@@ -11,7 +11,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { supabase } from "../lib/supabase";
-import { apiFetch } from "../lib/apiClient";
+import { apiFetch, API_BASE_URL } from "../lib/apiClient";
+import { PIECE_WIRE } from "../lib/compat/legacyWireContracts";
 import { useTheme } from "../theme/ThemeContext";
 
 // UI (Design System)
@@ -19,8 +20,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
-const API_BASE =
-  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
+const API_BASE = API_BASE_URL;
 
 const PREVIEW_LIMIT = 5;
 
@@ -56,9 +56,9 @@ const RANKING_PREVIEWS = [
     key: "resonances",
     icon: "heart-outline",
     title: "共鳴数ランキング",
-    endpoint: "/ranking/mymodel_resonances",
+    endpoint: PIECE_WIRE.routes.rankingResonances,
     range: "day",
-    routeName: "RankingMyModelResonances",
+    routeName: "RankingPieceResonances",
     valueKeys: ["resonance_count", "resonances", "count", "value"],
   },
 ];

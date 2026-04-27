@@ -16,6 +16,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { apiGet, apiPost } from "../lib/apiClient";
+import { ANALYSIS_WIRE, SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath, buildSelfStructureReportHistoryPath } from "../lib/compat/legacyWireContracts";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -109,7 +110,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / MyProfile</div>
+      <div class="meta">Exported from Cocolon / Self Structure</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;
@@ -173,8 +174,8 @@ async function exportTextToPdf(title, text) {
 
 
 // === Read/Unread (report_reads) ===
-// MyWeb と同じ既読管理テーブルを利用する。
-// 既読の判定は report_id で行う（myweb_reports / myprofile_reports をまたいでも uuid は衝突しない想定）。
+// Analysis と同じ既読管理テーブルを利用する。
+// 既読の判定は report_id で行う（Analysis / Self Structure の report family をまたいでも uuid は衝突しない想定）。
 async function fetchReadReportIdSet(reportIds) {
   try {
     const ids = Array.isArray(reportIds) ? reportIds.filter(Boolean) : [];
@@ -193,8 +194,8 @@ async function markReportAsRead(reportId) {
   try {
     await apiPost("/report-reads/mark", {
       report_id: String(reportId),
-      report_table: "myprofile_reports",
-      report_scope: "myprofile",
+      report_table: SELF_STRUCTURE_WIRE.reportFamily.table,
+      report_scope: SELF_STRUCTURE_WIRE.reportFamily.scope,
     });
     return true;
   } catch {
@@ -270,7 +271,7 @@ export default function SelfStructureReportHistoryScreen({
     else setLoading(true);
     try {
       const json = await apiGet(
-        `/myprofile/reports/history?report_type=${encodeURIComponent(reportType)}&limit=${HISTORY_PAGE_LIMIT}&offset=${encodeURIComponent(offset)}`
+        buildSelfStructureReportHistoryPath({ reportType, limit: HISTORY_PAGE_LIMIT, offset })
       );
       const baseRows = Array.isArray(json?.items) ? json.items : [];
       const readSet = await fetchReadReportIdSet(baseRows.map((r) => r.id));
@@ -328,7 +329,7 @@ export default function SelfStructureReportHistoryScreen({
   const handleOpen = useCallback(
     async (id) => {
       try {
-        const json = await apiGet(`/myprofile/reports/${encodeURIComponent(String(id))}`);
+        const json = await apiGet(buildSelfStructureReportDetailPath(id));
         const data = json?.item;
         if (!data) {
           Alert.alert("取得エラー", "レポートの取得に失敗しました");
@@ -365,7 +366,7 @@ export default function SelfStructureReportHistoryScreen({
   const handleExport = useCallback(
     async (id) => {
       try {
-        const json = await apiGet(`/myprofile/reports/${encodeURIComponent(String(id))}`);
+        const json = await apiGet(buildSelfStructureReportDetailPath(id));
         const data = json?.item;
         if (!data) {
           Alert.alert("取得エラー", "レポートの取得に失敗しました");

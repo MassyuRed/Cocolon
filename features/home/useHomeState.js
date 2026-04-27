@@ -2,6 +2,7 @@ import { AppState } from "react-native";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getHomeState } from "../../lib/api/home/homeStateApi";
+import { PIECE_WIRE, readWireSectionObject } from "../../lib/compat/legacyWireContracts";
 import { resolveLocalTimezoneName } from "../../lib/api/home/todayQuestionApi";
 
 export const STARTUP_POPUP_KIND = Object.freeze({
@@ -53,11 +54,12 @@ function normalizeHomeSections(json) {
       sections?.today_question_current && typeof sections.today_question_current === "object"
         ? sections.today_question_current
         : null,
-    reflectionQuota:
-      sections?.emotion_reflection_quota &&
-      typeof sections.emotion_reflection_quota === "object"
-        ? sections.emotion_reflection_quota
-        : null,
+    pieceQuota: (() => {
+      const section = readWireSectionObject(sections, PIECE_WIRE.startupSections.quota);
+      return section.found && typeof section.value === "object" && !Array.isArray(section.value)
+        ? section.value
+        : null;
+    })(),
   };
 }
 
@@ -90,7 +92,7 @@ export function useHomeState({
   const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
   const [noticePopup, setNoticePopup] = useState(null);
   const [noticeLoading, setNoticeLoading] = useState(false);
-  const [reflectionQuota, setReflectionQuota] = useState(null);
+  const [pieceQuota, setPieceQuota] = useState(null);
 
   const [startupQueuePreparing, setStartupQueuePreparing] = useState(false);
   const [startupPopupQueue, setStartupPopupQueue] = useState([]);
@@ -132,7 +134,7 @@ export function useHomeState({
         globalSummary,
         noticesCurrent,
         todayQuestionCurrent,
-        reflectionQuota: nextQuota,
+        pieceQuota: nextQuota,
       } = normalizeHomeSections(json);
 
       if (inputSummary) {
@@ -157,7 +159,7 @@ export function useHomeState({
       if (isTutorialMode) {
         clearNoticeUi();
         clearTodayQuestionUi();
-        setReflectionQuota(null);
+        setPieceQuota(null);
       } else {
         setNoticeFeatureEnabled(noticesCurrent?.feature_enabled !== false);
         setNoticeUnreadCount(Math.max(0, Number(noticesCurrent?.unread_count) || 0));
@@ -167,7 +169,7 @@ export function useHomeState({
             : null
         );
         setTodayQuestionBundle(todayQuestionCurrent || null);
-        setReflectionQuota(nextQuota);
+        setPieceQuota(nextQuota);
       }
 
       return {
@@ -175,7 +177,7 @@ export function useHomeState({
         globalSummary,
         noticesCurrent,
         todayQuestionCurrent,
-        reflectionQuota: nextQuota,
+        pieceQuota: nextQuota,
       };
     },
     [clearNoticeUi, clearTodayQuestionUi, isTutorialMode]
@@ -189,7 +191,7 @@ export function useHomeState({
       if (!currentUserId) {
         clearNoticeUi();
         clearTodayQuestionUi();
-        setReflectionQuota(null);
+        setPieceQuota(null);
         return { noticeCandidate: null, todayQuestionCandidate: null, aborted: false };
       }
 
@@ -366,7 +368,7 @@ export function useHomeState({
       closeStartupPopupWindow();
       clearNoticeUi();
       clearTodayQuestionUi();
-      setReflectionQuota(null);
+      setPieceQuota(null);
       return;
     }
     void loadHomeState({ includeStartupCandidate: false });
@@ -450,7 +452,7 @@ export function useHomeState({
     homeStateRequestIdRef.current += 1;
     clearTodayQuestionUi();
     clearNoticeUi();
-    setReflectionQuota(null);
+    setPieceQuota(null);
   }, [clearNoticeUi, clearTodayQuestionUi, closeStartupPopupWindow, isTutorialMode]);
 
   return useMemo(
@@ -468,8 +470,8 @@ export function useHomeState({
       noticeLoading,
       todayQuestionBundle,
       todayQuestionLoading,
-      reflectionQuota,
-      setReflectionQuota,
+      pieceQuota,
+      setPieceQuota,
       loadHomeState,
       rememberDismissedNotice,
       rememberDismissedTodayQuestionDay,
@@ -500,13 +502,13 @@ export function useHomeState({
       noticeLoading,
       noticePopup,
       noticeUnreadCount,
-      reflectionQuota,
+      pieceQuota,
       registerInputInteraction,
       rememberDismissedNotice,
       rememberDismissedTodayQuestionDay,
       setNoticePopup,
       setNoticeUnreadCount,
-      setReflectionQuota,
+      setPieceQuota,
       startupModalVisible,
       startupQueuePreparing,
       todayQuestionBundle,

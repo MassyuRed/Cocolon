@@ -1,0 +1,3 @@
+Delete these retired compat wrappers after applying this patch:
+- screens/EchoesHistoryListScreen.js
+- screens/EchoesHistoryDetailScreen.js

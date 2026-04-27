@@ -18,6 +18,7 @@ import {
   getSubscriptionBootstrap,
   getSubscriptionMe,
 } from "./lib/subscriptionApi";
+import { readAllowedSelfStructureModes } from "./lib/compat/legacyWireContracts";
 
 const VALID_TIERS = new Set(["free", "plus", "premium"]);
 const DEFAULT_TIER = "free";
@@ -42,7 +43,7 @@ const SubscriptionContext = createContext(null);
 
 export function SubscriptionProvider({ children }) {
   const [tier, _setTier] = useState("unknown");
-  const [allowedMyProfileModes, setAllowedMyProfileModes] = useState([]);
+  const [allowedSelfStructureModes, setAllowedSelfStructureModes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [planCode, setPlanCode] = useState(null);
   const [entitlementStatus, setEntitlementStatus] = useState("none");
@@ -192,7 +193,7 @@ export function SubscriptionProvider({ children }) {
 
           if (!accessToken) {
             setTier(DEFAULT_TIER);
-            if (mountedRef.current) setAllowedMyProfileModes([]);
+            if (mountedRef.current) setAllowedSelfStructureModes([]);
             resetSubscriptionState();
             lastFetchedAtRef.current = Date.now();
             return DEFAULT_TIER;
@@ -203,9 +204,7 @@ export function SubscriptionProvider({ children }) {
           setTier(nextTier);
 
           if (mountedRef.current) {
-            setAllowedMyProfileModes(
-              Array.isArray(json?.allowed_myprofile_modes) ? json.allowed_myprofile_modes : []
-            );
+            setAllowedSelfStructureModes(readAllowedSelfStructureModes(json));
           }
 
           applySubscriptionState(json);
@@ -216,7 +215,7 @@ export function SubscriptionProvider({ children }) {
           const prev = tierRef.current;
           if (!prev || prev === "unknown") {
             setTier(DEFAULT_TIER);
-            if (mountedRef.current) setAllowedMyProfileModes([]);
+            if (mountedRef.current) setAllowedSelfStructureModes([]);
             lastFetchedAtRef.current = Date.now();
             return DEFAULT_TIER;
           }
@@ -285,7 +284,7 @@ export function SubscriptionProvider({ children }) {
           refreshTier({ force: true }).catch(() => null);
         } else {
           setTier(DEFAULT_TIER);
-          setAllowedMyProfileModes([]);
+          setAllowedSelfStructureModes([]);
           resetSubscriptionState();
         }
       });
@@ -308,18 +307,18 @@ export function SubscriptionProvider({ children }) {
     const isPlus = norm === "plus";
     const isPremium = norm === "premium";
     const isPaid = norm === "plus" || norm === "premium";
-    const myModelEffectiveTier = isPaid ? "standard" : norm === "free" ? "light" : "";
-    const myModelRangeLabel =
-      myModelEffectiveTier === "standard"
+    const pieceEffectiveTier = isPaid ? "standard" : norm === "free" ? "light" : "";
+    const pieceRangeLabel =
+      pieceEffectiveTier === "standard"
         ? "Standard"
-        : myModelEffectiveTier === "light"
+        : pieceEffectiveTier === "light"
         ? "Light"
         : "";
 
     return {
       tier: norm,
       loading,
-      allowedMyProfileModes,
+      allowedSelfStructureModes,
       planCode,
       entitlementStatus,
       expiresAt,
@@ -333,8 +332,8 @@ export function SubscriptionProvider({ children }) {
       isPlus,
       isPremium,
       isPaid,
-      myModelEffectiveTier,
-      myModelRangeLabel,
+      pieceEffectiveTier,
+      pieceRangeLabel,
       ensurePaid,
       ensurePremium,
       refreshTier,
@@ -342,7 +341,7 @@ export function SubscriptionProvider({ children }) {
       ensureTier,
     };
   }, [
-    allowedMyProfileModes,
+    allowedSelfStructureModes,
     autoRenew,
     ensurePaid,
     ensurePremium,
@@ -373,7 +372,7 @@ export function useSubscription() {
     return {
       tier: "unknown",
       loading: false,
-      allowedMyProfileModes: [],
+      allowedSelfStructureModes: [],
       planCode: null,
       entitlementStatus: "none",
       expiresAt: null,
@@ -392,8 +391,8 @@ export function useSubscription() {
       ensureTier: async () => "unknown",
       ensurePaid: async () => false,
       ensurePremium: async () => false,
-      myModelEffectiveTier: "",
-      myModelRangeLabel: "",
+      pieceEffectiveTier: "",
+      pieceRangeLabel: "",
     };
   }
 

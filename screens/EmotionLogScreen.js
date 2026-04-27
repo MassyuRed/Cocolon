@@ -42,13 +42,10 @@ const STEP_EMOTION_LOG_FEED = 20;
 const STEP_EMOTION_LOG_COMPLETE = 21;
 const DEFAULT_TUTORIAL_USER_NAME = "User";
 
-// ---- API base ----
-// 現在は MashOS(MyModel API) を Render 上で稼働させているため、
-// 開発ビルド / 本番ビルドを問わず同じクラウド URL を利用する。
-// （ローカル API に戻したい場合はここを書き換える）
-const API_BASE = "https://mashos-api.onrender.com";
-
-const EMOTION_LOG_FEED_ENDPOINT = `${API_BASE}/emotion-log/feed`;
+// EmotionLog feed is served from the canonical frontend API boundary.
+// Keep the screen on a relative route so env/base-url changes remain centralized
+// in lib/apiClient.js instead of being hard-coded at the surface layer.
+const EMOTION_LOG_FEED_ENDPOINT = "/emotion-log/feed";
 
 // ===== 表示用定数 =====
 const STRENGTH_LABEL = {
@@ -153,13 +150,13 @@ export default function EmotionLogScreen(props) {
   const {
     isTutorialMode,
     tutorialEmotions,
-    tutorialFriendFeed: tutorialEmotionLogFeedItems,
-    tutorialReflections,
+    tutorialEmotionLogFeed: tutorialEmotionLogFeedItems,
+    tutorialPieces,
     tutorialStep,
     setTutorialStep,
-    addTutorialFriendFeedItem: addTutorialEmotionLogFeedItem,
+    addTutorialEmotionLogFeedItem,
     endTutorial,
-    hasTutorialFriendLog: hasTutorialEmotionLog,
+    hasTutorialEmotionLog,
   } = useTutorial();
 
   const { getPrefetchEntry, getPrefetchEntryFresh, setPrefetch, setUnread } = useUnread();
@@ -201,7 +198,7 @@ export default function EmotionLogScreen(props) {
     tutorialStep <= STEP_EMOTION_LOG_COMPLETE;
 
   const tutorialMockUserName = useMemo(() => {
-    const safe = Array.isArray(tutorialReflections) ? tutorialReflections : [];
+    const safe = Array.isArray(tutorialPieces) ? tutorialPieces : [];
     const mock = safe.find(
       (item) =>
         String(item?.tutorial_kind || "") === "mock" &&
@@ -219,7 +216,7 @@ export default function EmotionLogScreen(props) {
         other?.owner_name ||
         DEFAULT_TUTORIAL_USER_NAME
     ).trim();
-  }, [tutorialReflections]);
+  }, [tutorialPieces]);
 
   const tutorialDisplayFeed = useMemo(() => {
     const safeFeed = Array.isArray(tutorialEmotionLogFeedItems) ? tutorialEmotionLogFeedItems : [];
@@ -422,7 +419,7 @@ export default function EmotionLogScreen(props) {
     syncTutorialTargetRect,
   ]);
 
-  // Tutorial: MyModelで見た模擬ユーザー名で通知を出し、感情ログへ反映する。
+  // Tutorial: Pieceで見た模擬ユーザー名で通知を出し、感情ログへ反映する。
   useEffect(() => {
     if (!isTutorialMode) {
       tutorialNotificationFlowRef.current = false;
@@ -1186,7 +1183,7 @@ function createStyles(COLORS, ui) {
       fontWeight: "800",
     },
 
-    // ---- Modal（MyProfile 方式） ----
+    // ---- Modal（Profile card 方式） ----
     modalBackdrop: {
       position: "absolute",
       top: 0,

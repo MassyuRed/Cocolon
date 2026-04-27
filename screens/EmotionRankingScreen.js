@@ -19,10 +19,9 @@ import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
-import { apiFetch } from "../lib/apiClient";
+import { apiFetch, API_BASE_URL } from "../lib/apiClient";
 
-const API_BASE =
-  process.env.EXPO_PUBLIC_MYMODEL_API_URL || "https://mashos-api.onrender.com";
+const API_BASE = API_BASE_URL;
 
 const RANGE_OPTIONS = [
   { key: "day", label: "今日" },

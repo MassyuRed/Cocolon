@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Linking, Platform } from "react-native";
-import messaging from "@react-native-firebase/messaging";
 import { supabase } from "./lib/supabase"; // ← 既存のクライアントを使う
 import {
   clearAccountProfilePushToken,
   ensureAccountProfile,
-  syncAccountProfilePushToken,
 } from "./lib/api/account/profileApi";
 
 const AuthContext = createContext(null);
@@ -47,8 +45,6 @@ export function AuthProvider({ children }) {
   // profiles の ensure（メール確認フローでも必ず1行作る）
   const ensuredProfileUserIdRef = useRef(null);
 
-  // push_token の同期（同一トークンの連続更新を避ける）
-  const lastSyncedPushRef = useRef({ userId: null, token: null });
 
   const clearAuthError = () => setAuthError("");
 
@@ -86,7 +82,6 @@ export function AuthProvider({ children }) {
     const userId = session?.user?.id;
     if (!userId) {
       ensuredProfileUserIdRef.current = null;
-      lastSyncedPushRef.current = { userId: null, token: null };
       return;
     }
     if (ensuredProfileUserIdRef.current === userId) return;
@@ -97,102 +92,18 @@ export function AuthProvider({ children }) {
       session?.user?.user_metadata?.displayName ||
       "ユーザー";
 
-    let unsubscribeTokenRefresh = null;
-
-    const syncPushToken = async (token) => {
-      try {
-        const t = String(token || "").trim();
-        if (!t) return;
-
-        // 同一ユーザー & 同一トークンの連続更新を避ける
-        if (
-          lastSyncedPushRef.current?.userId === userId &&
-          lastSyncedPushRef.current?.token === t
-        ) {
-          return;
-        }
-
-        await syncAccountProfilePushToken({
-          token: t,
-          pushPlatform: Platform?.OS || null,
-          updatedAt: new Date().toISOString(),
-        });
-
-        // 更新が成功した場合のみ「同期済み」として記録する
-        lastSyncedPushRef.current = { userId, token: t };
-      } catch (e) {
-        console.warn("profiles push_token sync exception:", e);
-      }
-    };
-
     (async () => {
       try {
         await ensureAccountProfile({
           displayName,
           pushPlatform: Platform?.OS || null,
         });
-
-        // push_token を取得できる環境なら同期する（Android/iOS: FCM）
-        if (Platform?.OS !== "web") {
-          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-          const tryFetchAndSyncTokenOnce = async () => {
-            // ※ registerDeviceForRemoteMessages は iOS で必要になることがある（best-effort）
-            try {
-              await messaging().registerDeviceForRemoteMessages?.();
-            } catch {
-              // best-effort
-            }
-
-            // ※ 端末によっては permission 未付与だと token が取得できないことがあるので、可能なら許可を要求（best-effort）
-            try {
-              await messaging().requestPermission?.();
-            } catch {
-              // best-effort（拒否/未対応でも続行）
-            }
-
-            try {
-              const token = await messaging().getToken();
-              await syncPushToken(token);
-              return true;
-            } catch (e) {
-              console.warn("messaging getToken error:", e);
-              return false;
-            }
-          };
-
-          // 初回で token が取れない/更新に失敗するケースがあるので、軽くリトライする
-          await tryFetchAndSyncTokenOnce();
-          await sleep(1500);
-          await tryFetchAndSyncTokenOnce();
-          await sleep(5000);
-          await tryFetchAndSyncTokenOnce();
-        }
       } catch (e) {
         console.warn("profiles ensure exception:", e);
       }
     })();
 
-    // トークンが更新されたときも追従（best-effort）
-    if (Platform?.OS !== "web") {
-      try {
-        unsubscribeTokenRefresh = messaging().onTokenRefresh((newToken) => {
-          syncPushToken(newToken);
-        });
-      } catch (e) {
-        console.warn("messaging onTokenRefresh setup error:", e);
-      }
-    }
-
-    return () => {
-      if (typeof unsubscribeTokenRefresh === "function") {
-        try {
-          unsubscribeTokenRefresh();
-        } catch {
-          // ignore
-        }
-      }
-    };
+    return undefined;
   }, [session?.user?.id]);
 
 
@@ -385,7 +296,6 @@ export function AuthProvider({ children }) {
 
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      lastSyncedPushRef.current = { userId: null, token: null };
       setRecoveryMode(false);
     } catch (e) {
       setAuthError(e.message ?? String(e));
