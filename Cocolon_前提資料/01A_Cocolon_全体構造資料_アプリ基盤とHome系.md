@@ -2080,3 +2080,44 @@ revision_date: "2026-04-26"
 - `Cocolon(108).zip` では RN 側の Home / Input 境界は `Cocolon/features/home/useHomeActions.js`、`Cocolon/features/home/useHomeState.js`、`Cocolon/lib/api/home/*`、`Cocolon/lib/api/client.js`、`Cocolon/lib/apiClient.js` を中心に維持されています。
 - Emotion preview 名は `EmotionReflection` から current `EmotionPiece` へ寄っています。current files は `Cocolon/components/EmotionPiecePreviewModal.js`、`Cocolon/lib/api/home/emotionPieceApi.js`、`Cocolon/lib/emotionPieceApi.js` です。
 - legacy wire key の吸収は `Cocolon/lib/compat/legacyWireContracts.js` に集約されています。これは旧構造の実体ではなく、DB/legacy route 退役前の互換境界です。
+
+# 2026-04-28 差分追記: Home / Input / EmlisAI hot path補正
+
+この追記は、旧本文を壊さず、最新zipで増えた Home / Input / EmlisAI hot path 関係の新規・変更ファイルを補足する。
+
+## 新規 file block
+
+### `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+- repo: `mashos-api`
+- system: `EmlisAI構造 / immediate reply quality gate`
+- 現行状態: `active`
+- 役割: EmlisAI即時応答が current input central、履歴利用許可、証拠充足、診断/断定抑制、長文化抑制を満たすか判定し、`input_feedback.emlis_ai.quality_gate` に additive meta を返す。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_capability.py`
+  - `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py`
+
+### `mashos-api/ai/services/ai_inference/core_contract_registry.py`
+- repo: `mashos-api`
+- system: `新国家システム / 三大中核構造 registry`
+- 現行状態: `active`
+- 役割: `EmlisAI構造`、`分析構造`、`Piece構造` の input / output / storage / gate / read surface を固定する内部registry。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/api_contract_registry.py`
+  - `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md`
+  - `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+  - `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+  - `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+
+## 既存 file の差分
+
+- `Cocolon/components/EmotionPiecePreviewModal.js` は、Piece preview表示で `piece_text || reflection_text` を読む互換表示に更新された。編集UIは追加しない。
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py` は、共有Supabase client、background制限、ASTOR thread退避、FCM queue enqueueを含む hot path 補強済み。
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py` は、EmlisAI即時応答に timeout budget を持つ。
+- `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` は、独立context取得を並列化する。
+- `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` / `emlis_ai_types.py` / `emlis_ai_capability.py` は、EmlisAI quality gate meta と capability拡張を保持する。

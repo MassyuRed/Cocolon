@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -11,17 +11,17 @@ purpose: "今回の前提資料リベースと current snapshot の要点を固�
 
 # 1. 今回の基準面
 
-今回の前提資料は、**Cocolon_前提資料(8).zip** を基底に、**Cocolon(108).zip** / **mashos-api(30).zip** / **DB境界v2 SQL結果一式** の実ファイル差分を反映した版です。
+今回の前提資料は、**Cocolon_前提資料(13).zip** を基底に、**Cocolon_2(27).zip** / **mashos-api_5(7).zip** の実ファイル差分を反映した版です。旧基準面の記述は後続の差分追記として履歴保持します。
 
 # 2. coverage 数
 
-- total files: `408`
-- `01` に記載した current coverage files: `408`
+- total files: `422`
+- `01` に記載した current coverage files: `422`
   - Cocolon: `116`
-  - mashos-api: `292`
-- `02` に記載した current coverage files: `408`
+  - mashos-api: `306`
+- `02` に記載した current coverage files: `422`
   - Cocolon: `116`
-  - mashos-api: `292`
+  - mashos-api: `306`
 - main body から完全除外した latest files: `0`（support/sampleも本文内に分類付きで記載）
 
 # 3. 今回の structural change 要点
@@ -515,3 +515,83 @@ latest row count status:
 - Piece write smoke
 
 現時点で削除してよい DB object / API file / RN file は **0件** です。
+
+# 2026-04-28 差分追記: 新国家システム / 高負荷運用 / FCM queue / load test snapshot
+
+## 基準面
+
+今回の前提資料は、**Cocolon_前提資料(13).zip** を基底に、**Cocolon_2(27).zip** / **mashos-api_5(7).zip** の実ファイル差分を反映した版です。
+
+## coverage 数
+
+- total files: `422`
+- `01` に記載した current coverage files: `422`
+  - Cocolon: `116`
+  - mashos-api: `306`
+- `02` に記載した current coverage files: `422`
+  - Cocolon: `116`
+  - mashos-api: `306`
+- main body から完全除外した latest files: `0`
+- latest zip には存在しない旧本文 paths: `0`
+
+## 追加 files
+
+- `mashos-api/ai/docs/LOAD_TESTING.md`
+- `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+- `mashos-api/ai/services/ai_inference/.env.worker.example`
+- `mashos-api/ai/services/ai_inference/analysis_capability.py`
+- `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+- `mashos-api/ai/services/ai_inference/core_contract_registry.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+- `mashos-api/ai/services/ai_inference/fcm_push_queue.py`
+- `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- `mashos-api/scripts/astor_worker_status.py`
+- `mashos-api/scripts/cocolon_load_test.py`
+
+## 既存変更 files
+
+- `Cocolon/components/EmotionPiecePreviewModal.js`
+- `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md`
+- `mashos-api/ai/services/ai_inference/api_analysis_reports.py`
+- `mashos-api/ai/services/ai_inference/api_contract_registry.py`
+- `mashos-api/ai/services/ai_inference/api_cron_distribution.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_piece.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py`
+- `mashos-api/ai/services/ai_inference/api_follow.py`
+- `mashos-api/ai/services/ai_inference/api_self_structure.py`
+- `mashos-api/ai/services/ai_inference/api_today_question.py`
+- `mashos-api/ai/services/ai_inference/astor_job_queue.py`
+- `mashos-api/ai/services/ai_inference/astor_self_structure_report.py`
+- `mashos-api/ai/services/ai_inference/astor_worker.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_capability.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_types.py`
+- `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py`
+- `mashos-api/ai/services/ai_inference/emotion_piece_store.py`
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+- `mashos-api/ai/services/ai_inference/home_gateway/emotion_reflection_publish_service.py`
+- `mashos-api/ai/services/ai_inference/piece_generation_store.py`
+
+## structural change 要点
+
+- 三大中核構造を `EmlisAI構造` / `分析構造` / `Piece構造` として前提資料内に明記した
+- `core_contract_registry.py` により三大中核構造の内部contractを固定した
+- `emlis_ai_quality_gate.py` / `analysis_report_validity_gate.py` / `piece_generation_policy.py` により、成果物品質・安全・保存可否のGateを中核構造ごとに固定した
+- `EmotionPiecePreviewModal.js` と `api_emotion_piece.py` は `piece_text` を正式field、`reflection_text` を互換fieldとして扱う
+- `astor_job_queue.py` / `astor_worker.py` / `WORKER_OPERATIONS.md` により、worker profile、queue stats、stale running復旧、増設判断を固定した
+- `fcm_push_queue.py` と `notification` worker profile により、FCM外部通信をAPI hot pathから分離した
+- `LOAD_TESTING.md` / `cocolon_load_test.py` により、100人/1000人規模の可否を実測する負荷試験入口を追加した
+
+## まだ完了扱いにしないもの
+
+- DB physical rename / drop
+- current bridge view への write 切替
+- legacy route handler削除
+- 旧名称APIファイル削除
+- `mymodel/qna/*` active legacy named public contract retire
+- 本番/staging環境での実負荷試験完走
+- worker台数の最終確定

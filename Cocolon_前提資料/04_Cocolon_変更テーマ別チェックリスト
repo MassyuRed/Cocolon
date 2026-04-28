@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-04-25"
+revision_date: "2026-04-28"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -82,3 +82,35 @@ purpose: "変更テーマから 01/02 の読む順を逆引きできるように
 補足:
 - 三大要素は完了判定へ入ったため、次段では Home / Input / startup / social / subscription / App 全体接続を主戦場とする
 - ただし triad 由来の canonical owner 契約 (`api_nexus.py`, `piece_public_read_service.py`, `report_artifact_read_service.py`, `emlis_ai_readers.py`) を前提に読む
+
+# 2026-04-28 差分追記: 新国家システム / 高負荷運用テーマ
+
+## 2-8. 三大中核構造 / 新国家システム
+
+1. `03_Cocolon_命名体系.md`
+2. `01_Cocolon_全体構造資料.md`
+3. `02_Cocolon_国家システム資料.md`
+4. `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md`
+5. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
+6. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+7. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+8. `05_Cocolon_ルールファイル索引.md`
+
+補足:
+- 三大中核構造は `EmlisAI構造` / `分析構造` / `Piece構造`
+- `core_contract_registry.py` を起点に、各Gateファイルを同時確認する
+
+## 2-9. worker / FCM queue / load test
+
+1. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+2. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+3. `05_Cocolon_ルールファイル索引.md`
+4. `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+5. `mashos-api/ai/docs/LOAD_TESTING.md`
+6. `mashos-api/scripts/astor_worker_status.py`
+7. `mashos-api/scripts/cocolon_load_test.py`
+
+補足:
+- API hot pathへ重い外部通信を戻さない
+- FCM push は `fcm_push_queue.py` と `ASTOR_WORKER_PROFILE=notification` を確認する
+- worker増設判断は queue stats と p95/p99 を見て行う

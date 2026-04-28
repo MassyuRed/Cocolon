@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-04-25"
+revision_date: "2026-04-28"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1473,3 +1473,63 @@ revision_date: "2026-04-25"
 
 - Home / emotion input の current preview は EmotionPiece です。RN側は `EmotionPiecePreviewModal.js` / `emotionPieceApi.js`、backend側は `api_emotion_piece.py` / `emotion_piece_generation_service.py` / `emotion_piece_store.py` を見ること。
 - 旧 `emotion_reflection_*` / `api_emotion_reflection.py` は compat façade / legacy path として残っており、DB/contract retirement 前に削除しません。
+
+# 2026-04-28 差分追記: Input / Save / Dispatch / Gate補正
+
+## 三大中核構造のDispatch定義
+
+国家システム上、三大中核構造は `core_contract_registry.py` で固定された `EmlisAI構造`、`分析構造`、`Piece構造` である。
+
+- `EmlisAI構造`: `POST /emotion/submit` 保存直後の即時応答とquality gate
+- `分析構造`: analysis / self-structure report生成とvalidity gate
+- `Piece構造`: emotion piece preview / publish とsafety policy
+
+## 新規国家システム file block
+
+### `mashos-api/ai/services/ai_inference/core_contract_registry.py`
+- repo: `mashos-api`
+- 国家システム区分: `Dispatch / Contract`
+- 現行状態: `active`
+- 国家システム上の役割: 三大中核構造のinput_owner、output_owner、primary_route、storage_owner、quality_gate、safety_gate、publish_policyを固定する。
+- 上流:
+  - なし
+- 下流:
+  - `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+  - `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+  - `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+
+### `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+- repo: `mashos-api`
+- 国家システム区分: `Gate`
+- 現行状態: `active`
+- 国家システム上の役割: EmlisAI immediate reply の履歴利用、証拠充足、診断/断定抑制、長文化抑制を判定する。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_capability.py`
+  - `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+  - `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+
+### `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+- repo: `mashos-api`
+- 国家システム区分: `Gate / Publish`
+- 現行状態: `active`
+- 国家システム上の役割: Piece preview前に公開安全性・変換モード・status・hashを固定し、publish時に本文を再生成しない契約を支える。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py`
+  - `mashos-api/ai/services/ai_inference/emotion_piece_store.py`
+- 下流:
+  - `mashos-api/ai/services/ai_inference/api_emotion_piece.py`
+- 落とすと漏れる関連ファイル:
+  - `Cocolon/components/EmotionPiecePreviewModal.js`
+  - `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+
+## 既存 file の差分
+
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py` は Input hot pathでの直接FCM送信を避け、`fcm_push_queue.py` へenqueueする。
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py` は EmlisAI応答にtimeout budgetを持ち、遅延時はfallback commentへ逃がす。
+- `mashos-api/ai/services/ai_inference/api_emotion_piece.py` は `piece_text` を正式出力にし、`reflection_text` を互換として残す。

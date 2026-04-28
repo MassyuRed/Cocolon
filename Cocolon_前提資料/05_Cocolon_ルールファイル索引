@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -65,3 +65,27 @@ public route 追加・置換・deprecated整理を行う場合、次の5件を�
 5. 対象 route handler（今回の差分では `api_emotion_log.py` / `api_nexus.py`）
 
 今回の差分では、route handler 削除ではなく registry / response_model metadata / registry guard の整合だけを行った。legacy route retirement を実施する場合は、RN release boundary と endpoint smoke を別途確認してから行う。
+
+# 2026-04-28 差分追記: 新国家システム / worker / load test rule索引
+
+## 新しく先に読むべき rule / operation / verification files
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/core_contract_registry.py` | 三大中核構造のinput/output/storage/gate/read surface | EmlisAI構造 / 分析構造 / Piece構造を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py` | EmlisAI即時応答の品質Gate meta | `/emotion/submit` / immediate reply / capabilityを触る時 |
+| `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py` | 分析成果物の保存可否・診断/断定抑制・domain分離 | Analysis / Self Structure reportを触る時 |
+| `mashos-api/ai/services/ai_inference/piece_generation_policy.py` | Piece preview/publishのvisibility/generation/transform/safety/hash | EmotionPiece / Piece公開安全性を触る時 |
+| `mashos-api/ai/docs/WORKER_OPERATIONS.md` | worker profile / queue滞留 / stale復旧 / notification worker | 高負荷運用・worker増設を触る時 |
+| `mashos-api/ai/docs/LOAD_TESTING.md` | endpoint別負荷試験手順とp95/p99/queue確認 | release前の負荷確認を行う時 |
+| `mashos-api/scripts/astor_worker_status.py` | queue stats / stale running recovery / pressure判定 | worker処理能力を確認する時 |
+| `mashos-api/scripts/cocolon_load_test.py` | app-bootstrap/startup/home/emotion-submit/piece-preview/mixの負荷試験 | 100人/1000人相当の事前測定を行う時 |
+| `mashos-api/ai/services/ai_inference/fcm_push_queue.py` | FCM送信の専用queue化 | 通知・cron・follow・emotion submitのpushを触る時 |
+
+## 新しく守る contract test
+
+- `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+
+この3件は、三大中核構造を「機能」ではなく「中核構造」として扱うための最低限のguardである。

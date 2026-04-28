@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 116
-  mashos-api: 292
+  mashos-api: 306
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 408
+  included_files_total: 422
   included_files_cocolon: 116
-  included_files_mashos_api: 292
+  included_files_mashos_api: 306
 ---
 
 # 1. 1行定義
@@ -545,3 +545,84 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 ## 削除しないもの
 
 この差分は public contract registry / header境界の整理であり、route handler / DB object / RN file の削除ではありません。旧名称APIファイル削除、legacy route retirement、DB physical rename/drop はまだ別工程です。
+
+# 2026-04-28 差分追記: 新国家システム / 高負荷基盤 coverage override
+
+## coverage 再確認
+
+今回の基準面は `Cocolon_2(27).zip` / `mashos-api_5(7).zip` です。
+
+- latest full coverage listed in body: `422 files`
+  - Cocolon: `116`
+  - mashos-api: `306`
+- 旧本文の 408 files coverage は履歴として保持する
+- この追記により、Cocolon 構造に関係する latest 422 files は `01` 本文内で全件追跡できる
+- latest zip に存在しない旧本文 path: `0件`
+- latest zip に対する 01 本文欠落は、下記14件を追記することで `0件`
+
+## 三大中核構造の現行定義
+
+この資料でいう **三大中核構造** は、以下の3つです。
+
+1. `EmlisAI構造`
+2. `分析構造`
+3. `Piece構造`
+
+旧表現の `EmlisAI` / `分析構造` / `Piece生成機構` は、構造名としては上記に読み替えます。`Piece生成機構` は `Piece構造` の生成・preview・publish部分を指す下位工程として扱います。
+
+## 追加された Cocolon 構造対象 files
+
+| file | 01上の区分 | 役割 | 同時確認 |
+|---|---|---|---|
+| `mashos-api/ai/services/ai_inference/core_contract_registry.py` | 新国家システム / core registry | 三大中核構造を internal contract として固定する | `api_contract_registry.py`, `test_new_national_core_piece_contracts.py` |
+| `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py` | EmlisAI構造 | `input_feedback.comment_text` を壊さず、即時応答の品質Gate metaを付ける | `emlis_ai_reply_service.py`, `emotion_submit_service.py`, `emlis_ai_capability.py` |
+| `mashos-api/ai/services/ai_inference/analysis_capability.py` | 分析構造 | plan名ではなくcapabilityで分析能力を判断する | `api_analysis_reports.py`, `api_self_structure.py`, `analysis_report_validity_gate.py` |
+| `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py` | 分析構造 | material / domain / diagnosis / overclaim / display validityを判定する | `api_analysis_reports.py`, `astor_self_structure_report.py`, `api_self_structure.py` |
+| `mashos-api/ai/services/ai_inference/piece_generation_policy.py` | Piece構造 | `piece_text` / visibility / generation / transform / safety / hashを固定する | `api_emotion_piece.py`, `emotion_piece_generation_service.py`, `emotion_piece_store.py` |
+| `mashos-api/ai/services/ai_inference/fcm_push_queue.py` | 高負荷通知基盤 | FCM外部送信を `send_fcm_push_v1` jobとしてenqueueする | `api_emotion_submit.py`, `api_follow.py`, `api_today_question.py`, `api_cron_distribution.py`, `astor_worker.py` |
+| `mashos-api/ai/services/ai_inference/.env.worker.example` | Worker運用基盤 | API/worker分離、profile、FCM queue、stale復旧のenv例 | `astor_worker.py`, `WORKER_OPERATIONS.md` |
+| `mashos-api/ai/docs/WORKER_OPERATIONS.md` | Worker運用基盤 | worker profile / queue監視 / 増設判断を固定する運用資料 | `astor_worker.py`, `astor_worker_status.py` |
+| `mashos-api/ai/docs/LOAD_TESTING.md` | 高負荷検証基盤 | p95/p99、queue滞留、scenario別負荷試験手順 | `scripts/cocolon_load_test.py`, `scripts/astor_worker_status.py` |
+| `mashos-api/scripts/astor_worker_status.py` | Worker運用支援 | queue stats / stale running job復旧 / pressure判定 | `astor_job_queue.py`, `astor_worker.py` |
+| `mashos-api/scripts/cocolon_load_test.py` | 高負荷検証支援 | startup/home/emotion-submit/piece-preview/mixの負荷試験 | `LOAD_TESTING.md` |
+| `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py` | contract test | 分析構造のcapability / validity gateを固定する | `analysis_capability.py`, `analysis_report_validity_gate.py` |
+| `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py` | contract test | EmlisAI構造のcapability / quality gateを固定する | `emlis_ai_capability.py`, `emlis_ai_quality_gate.py` |
+| `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py` | contract test | 三大中核registryとPiece構造のpreview/publish契約を固定する | `core_contract_registry.py`, `piece_generation_policy.py`, `api_emotion_piece.py` |
+
+
+## 既存 file の今回差分
+
+| file | 変更要点 |
+|---|---|
+| `Cocolon/components/EmotionPiecePreviewModal.js` | Piece preview表示を `piece_text || reflection_text` 互換へ寄せる |
+| `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | 新国家システムのadditive contract / Piece field追加を反映 |
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | `reportValidity` metaを分析成果物へadditive付与 |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | 新field / current route contractをregistryへ反映 |
+| `mashos-api/ai/services/ai_inference/api_cron_distribution.py` | report distribution pushをFCM専用queueへ移行 |
+| `mashos-api/ai/services/ai_inference/api_emotion_piece.py` | `piece_text`, visibility/generation/transform/safety契約をadditive追加 |
+| `mashos-api/ai/services/ai_inference/api_emotion_submit.py` | connection pool化、background制限、ASTOR thread退避、FCM queue enqueueを反映 |
+| `mashos-api/ai/services/ai_inference/api_follow.py` | フォロー/フレンド申請通知をFCM専用queueへ移行 |
+| `mashos-api/ai/services/ai_inference/api_self_structure.py` | 分析構造capability / validity gate接続を反映 |
+| `mashos-api/ai/services/ai_inference/api_today_question.py` | 今日の問い通知をFCM専用queueへ移行 |
+| `mashos-api/ai/services/ai_inference/astor_job_queue.py` | queue stats / stale running job復旧を追加 |
+| `mashos-api/ai/services/ai_inference/astor_self_structure_report.py` | 自己構造reportにvalidity gate metaを接続 |
+| `mashos-api/ai/services/ai_inference/astor_worker.py` | worker profile / notification profile / queue stats / FCM job handlerを追加 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_capability.py` | source_scope / cross_core_enabled / structure_model_enabled / max_reply_linesを予約 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` | context取得の並列化を反映 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | EmlisAI quality gate metaをadditive接続 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_types.py` | EmlisAI meta field拡張を反映 |
+| `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py` | Piece公開安全化とpolicy生成をpreview前に接続 |
+| `mashos-api/ai/services/ai_inference/emotion_piece_store.py` | preview/publish本文hashとstatus-only publish契約を反映 |
+| `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | EmlisAI即時応答timeout budgetを追加 |
+| `mashos-api/ai/services/ai_inference/home_gateway/emotion_reflection_publish_service.py` | Piece publish時の互換field / meta反映 |
+| `mashos-api/ai/services/ai_inference/piece_generation_store.py` | Supabase通信の共有client化とPiece storage契約を反映 |
+
+
+## 削除しないもの
+
+- DB physical rename / drop
+- legacy route handler
+- old named API file
+- RN source file
+- current bridge view への write 切替
+- `mymodel/qna/*` active legacy named public contract

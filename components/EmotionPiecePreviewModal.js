@@ -34,7 +34,7 @@ export default function EmotionPiecePreviewModal({
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
-  const pieceText = String(preview?.piece_text || "").trim();
+  const pieceText = String(preview?.piece_text || preview?.reflection_text || "").trim();
   const questionText = String(preview?.question || "").trim();
   const remainingText = formatRemainingText(preview?.quota || {});
 

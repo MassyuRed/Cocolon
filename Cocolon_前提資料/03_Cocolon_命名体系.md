@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 116
-  mashos-api: 292
+  mashos-api: 306
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -157,3 +157,17 @@ current route として registry に明示追加されたもの:
 - `/nexus/emotion-ranking`
 
 命名判断では、visible/current route は `Follow` / `EmotionLog` / `EmotionNotification` / `Nexus` 側を正とし、`Friends` は互換aliasとして読む。
+
+# 2026-04-28 差分追記: 三大中核構造の語彙固定
+
+今後、Mash様が **三大中核構造** と呼ぶ場合、前提資料上では次の3つを指す。
+
+| 指示語 | current structure name | 主owner / gate | 備考 |
+|---|---|---|---|
+| 三大中核構造の1つ目 | `EmlisAI構造` | `emlis_ai_reply_service.py`, `emlis_ai_quality_gate.py` | 感情入力直後の即時理解応答。`input_feedback.comment_text` は破壊しない |
+| 三大中核構造の2つ目 | `分析構造` | `api_analysis_reports.py`, `api_self_structure.py`, `analysis_report_validity_gate.py` | 感情分析・自己構造分析の本人向け観測成果物 |
+| 三大中核構造の3つ目 | `Piece構造` | `api_emotion_piece.py`, `piece_generation_policy.py`, `emotion_piece_store.py` | 感情入力から公開可能なPieceをpreview / confirm / publishする構造 |
+
+旧表現の `Piece生成機構` は、`Piece構造` のうち生成・preview・publish工程を指す。  
+旧表現の `EmlisAI` は、構造名として記載する時は `EmlisAI構造` と読む。  
+`分析構造` は名称変更なしだが、今回から `analysis_capability.py` と `analysis_report_validity_gate.py` を中核境界として読む。

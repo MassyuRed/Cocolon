@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2022,3 +2022,56 @@ active legacy named public rows は、主に `mymodel/qna/*` 系です。これ�
 - DB object
 - RN source file
 - `mymodel/qna/*` active legacy named public contract
+
+# 2026-04-28 差分追記: Contract / Boundary / Verification補正
+
+## 新規国家システム file block
+
+### `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+- repo: `mashos-api`
+- 国家システム区分: `Contract test`
+- 現行状態: `active`
+- 国家システム上の役割: 分析構造のcapability profile、Report Validity Gate、`reportValidity` additive metaを検証する。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/analysis_capability.py`
+  - `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/api_analysis_reports.py`
+  - `mashos-api/ai/services/ai_inference/api_self_structure.py`
+
+### `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+- repo: `mashos-api`
+- 国家システム区分: `Contract test`
+- 現行状態: `active`
+- 国家システム上の役割: EmlisAI構造のcapability拡張、quality gate、Free履歴禁止、診断/断定抑制を検証する。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_capability.py`
+  - `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+
+### `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- repo: `mashos-api`
+- 国家システム区分: `Contract test`
+- 現行状態: `active`
+- 国家システム上の役割: 三大中核registry、Piece preview response、Piece safety policy、preview=published hash契約を検証する。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/core_contract_registry.py`
+  - `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+  - `mashos-api/ai/services/ai_inference/api_emotion_piece.py`
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `Cocolon/components/EmotionPiecePreviewModal.js`
+
+## 既存 file の差分
+
+- `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` と `mashos-api/ai/services/ai_inference/api_contract_registry.py` は、新国家システムのadditive contractを反映する。
+- `mashos-api/ai/services/ai_inference/api_emotion_piece.py` は `piece_text` / visibility / generation / transform / safety contractをadditive追加する。
+- `mashos-api/ai/services/ai_inference/api_analysis_reports.py` は `reportValidity` metaをadditive保存する。
+- `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` は `quality_gate` metaをadditive接続する。
+- `mashos-api/scripts/cocolon_load_test.py` と `mashos-api/scripts/astor_worker_status.py` は、release前の高負荷・worker滞留確認に使う検証境界である。

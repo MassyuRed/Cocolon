@@ -1,6 +1,6 @@
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
-revision_date: "2026-04-25"
+revision_date: "2026-04-28"
 ---
 
 # 01B. Analysis / Piece / EmotionLog / Ranking系
@@ -2588,3 +2588,55 @@ revision_date: "2026-04-25"
 - RN surface は current 名へ寄りました。主な current screen は `Cocolon/screens/Analysis*`、`Cocolon/screens/Piece*`、`Cocolon/screens/Resonance*`、`Cocolon/screens/NexusScreen.js`、`Cocolon/screens/nexus/NexusPieceCard.js` です。
 - backend current owner 本体化は DB rename 前段として完了扱いです。正本は `api_analysis_reads.py` / `api_analysis_reports.py` / `api_follow.py` / `api_emotion_log.py` / `api_emotion_notification_settings.py` / `api_self_structure.py` / `api_self_structure_reports.py` / `api_piece_runtime.py` / `api_emotion_piece.py` / `api_nexus.py` / `api_ranking_piece_*` です。
 - `api_myweb_*`、`api_friends.py`、`api_myprofile.py`、`api_mymodel_qna.py`、`api_emotion_reflection.py` は runtime 本体ではなく legacy compat façade として残します。
+
+# 2026-04-28 差分追記: 三大中核構造 / Analysis / Piece補正
+
+この資料でいう **三大中核構造** は、`EmlisAI構造`、`分析構造`、`Piece構造` の3つである。旧表現の `Piece生成機構` は、`Piece構造` の生成・preview・publish工程を指す。
+
+## 新規 file block
+
+### `mashos-api/ai/services/ai_inference/analysis_capability.py`
+- repo: `mashos-api`
+- system: `分析構造 / capability profile`
+- 現行状態: `active`
+- 役割: Free / Plus / Premium の分析能力差分を plan名直接判定ではなく capability profile として固定する。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/api_analysis_reports.py`
+  - `mashos-api/ai/services/ai_inference/api_self_structure.py`
+  - `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+
+### `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+- repo: `mashos-api`
+- system: `分析構造 / report validity gate`
+- 現行状態: `active`
+- 役割: 分析成果物の材料充分性、domain分離、診断風表現、overclaim、表示妥当性、保存可否を判定する。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/api_analysis_reports.py`
+  - `mashos-api/ai/services/ai_inference/api_self_structure.py`
+  - `mashos-api/ai/services/ai_inference/astor_self_structure_report.py`
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+
+### `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+- repo: `mashos-api`
+- system: `Piece構造 / preview-publish safety policy`
+- 現行状態: `active`
+- 役割: `piece_text`、`visibility_status`、`generation_status`、`transform_mode`、`safety_level`、`safety_flags`、`piece_text_hash` をpreview前に固定し、publish時の本文再生成を防ぐ。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/api_emotion_piece.py`
+  - `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py`
+  - `mashos-api/ai/services/ai_inference/emotion_piece_store.py`
+  - `mashos-api/ai/services/ai_inference/home_gateway/emotion_reflection_publish_service.py`
+- 修正時に必ず同時確認するファイル:
+  - `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+  - `Cocolon/components/EmotionPiecePreviewModal.js`
+
+## 既存 file の差分
+
+- `mashos-api/ai/services/ai_inference/api_emotion_piece.py` は `piece_text` を正式fieldとしてadditive追加し、`reflection_text` を互換fieldとして残す。
+- `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py` は URL / PII / 攻撃表現などをpreview前に安全化し、policy metaを返す。
+- `mashos-api/ai/services/ai_inference/emotion_piece_store.py` は preview本文hashとpublish本文hashの一致を守る。
+- `mashos-api/ai/services/ai_inference/piece_generation_store.py` は共有Supabase client寄せとPiece storage契約を反映する。
+- `mashos-api/ai/services/ai_inference/api_analysis_reports.py` / `api_self_structure.py` / `astor_self_structure_report.py` は `reportValidity` metaをadditive接続する。

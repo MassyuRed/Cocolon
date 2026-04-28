@@ -1,26 +1,26 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 116
-  mashos-api: 292
+  mashos-api: 306
 purpose: "華恋がこの資料だけで Cocolon の全体構造と国家システムを復元し、修正時に関連ファイル漏れを防ぐための運用資料"
 coverage:
-  total_files: 408
-  included_in_overall_structure: 408
-  included_in_national_system: 408
+  total_files: 422
+  included_in_overall_structure: 422
+  included_in_national_system: 422
   excluded_from_main_body: 0
 ---
 
 # これは何か
 
 この一式は **Mash 向けの説明資料ではなく、華恋が作業前提を引き継ぐための運用資料** です。  
-対象スナップショットは **Cocolon_5(12).zip (116 files)** / **mashos-api_5(6).zip (292 files)** の現行ローカル版です。
+対象スナップショットは **Cocolon_2(27).zip (116 files)** / **mashos-api_5(7).zip (306 files)** の現行ローカル版です。
 
 今回の基準面は次の通りです。
 
@@ -38,6 +38,7 @@ coverage:
 3. **public route / request / response / startup / unread / access policy** を触る時は、必ず `05` と `02C` を先に見る  
 4. **RN から直接 Supabase / raw fetch を増やさない**。境界は `frontend API boundary` と backend route に置く  
 5. **修正開始時は system 単位で見る**。単体ファイルだけで判断しない
+6. **三大中核構造** は、現行資料では **EmlisAI構造 / 分析構造 / Piece構造** を指す
 
 # 読み順
 
@@ -131,3 +132,61 @@ coverage:
 - 旧名称APIファイル削除
 - `mymodel/qna/*` active legacy named public contract の retire
 - Piece write smoke（対象Piece作成後に実施）
+
+# 2026-04-28 差分追記: 新国家システム / 高負荷基盤 / worker・FCM・負荷試験反映
+
+今回の基準面は **Cocolon_前提資料(13).zip** を基底に、**Cocolon_2(27).zip** / **mashos-api_5(7).zip** を照合した版です。
+
+確認済み fact:
+
+- latest file count: `Cocolon=116` / `mashos-api=306` / `total=422`
+- `01` 系本文には Cocolon 構造に関係する latest 422 files が全件記載されている
+- `02` 系本文には 国家システムに関係する latest 422 files が全件記載されている
+- Cocolon source file の内容差分: `1件`
+  - `Cocolon/components/EmotionPiecePreviewModal.js`
+- mashos-api source file の新規追加: `14件`
+- `mashos-api/ai/docs/LOAD_TESTING.md`
+- `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+- `mashos-api/ai/services/ai_inference/.env.worker.example`
+- `mashos-api/ai/services/ai_inference/analysis_capability.py`
+- `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py`
+- `mashos-api/ai/services/ai_inference/core_contract_registry.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+- `mashos-api/ai/services/ai_inference/fcm_push_queue.py`
+- `mashos-api/ai/services/ai_inference/piece_generation_policy.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- `mashos-api/scripts/astor_worker_status.py`
+- `mashos-api/scripts/cocolon_load_test.py`
+- mashos-api source file の内容差分: `21件`
+- `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md`
+- `mashos-api/ai/services/ai_inference/api_analysis_reports.py`
+- `mashos-api/ai/services/ai_inference/api_contract_registry.py`
+- `mashos-api/ai/services/ai_inference/api_cron_distribution.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_piece.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py`
+- `mashos-api/ai/services/ai_inference/api_follow.py`
+- `mashos-api/ai/services/ai_inference/api_self_structure.py`
+- `mashos-api/ai/services/ai_inference/api_today_question.py`
+- `mashos-api/ai/services/ai_inference/astor_job_queue.py`
+- `mashos-api/ai/services/ai_inference/astor_self_structure_report.py`
+- `mashos-api/ai/services/ai_inference/astor_worker.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_capability.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_types.py`
+- `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py`
+- `mashos-api/ai/services/ai_inference/emotion_piece_store.py`
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+- `mashos-api/ai/services/ai_inference/home_gateway/emotion_reflection_publish_service.py`
+- `mashos-api/ai/services/ai_inference/piece_generation_store.py`
+
+この差分で進んだこと:
+
+- 三大中核構造を `EmlisAI構造` / `分析構造` / `Piece構造` として明記した
+- `core_contract_registry.py` により三大中核の internal contract を固定した
+- Piece preview/publish は `piece_text` を正式出力、`reflection_text` を互換出力として扱う
+- EmlisAI / 分析 / Piece の品質・安全・validity Gate を追加した
+- 高負荷時のAPI hot pathを守るため、worker profile / queue stats / stale running復旧 / FCM専用queue / load test手順を追加した
+- DB physical rename / drop、legacy route handler削除、旧名称APIファイル削除は引き続き未実行

@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-04-27",
+  "revision_date": "2026-04-28",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,20 +7,21 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 116,
-    "mashos-api": 292
+    "mashos-api": 306
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 408,
-    "national_system_body_includes": 408,
+    "overall_structure_body_includes": 422,
+    "national_system_body_includes": 422,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル408件、02には国家システム判断対象のcurrent全ファイル408件を本文で記載する。国家システム直接対象外のsupport/sample/training系も、除外判断が見えるよう02本文内に分類付きで記載する。DB情報は08に新規記載する。",
-    "current_snapshot_total_files": 408,
-    "overall_structure_body_includes_current_snapshot_files": 408,
-    "national_system_body_lists_current_snapshot_files_with_relation": 408,
+    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル422件、02には国家システム判断対象のcurrent全ファイル422件を本文で記載する。国家システム直接対象外のsupport/sample/training系も、除外判断が見えるよう02本文内に分類付きで記載する。DB情報は08を正本として維持する。",
+    "current_snapshot_total_files": 422,
+    "overall_structure_body_includes_current_snapshot_files": 422,
+    "national_system_body_lists_current_snapshot_files_with_relation": 422,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
-    "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。"
+    "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
+    "coverage_principle_2026_04_28": "Cocolon_2(27).zip / mashos-api_5(7).zip のlatest 422 filesを01/02本文へ差分追記。旧408件本文は履歴として保持し、新規14件を本文内に追加した。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -717,5 +718,87 @@
     "all_latest_files_present_in_02_body": true,
     "missing_in_01_body": [],
     "missing_in_02_body": []
+  },
+  "source_snapshot_2026_04_28": {
+    "source_basis": {
+      "premise_base": "Cocolon_前提資料(13).zip",
+      "cocolon_zip": "Cocolon_2(27).zip",
+      "mashos_api_zip": "mashos-api_5(7).zip"
+    },
+    "file_counts": {
+      "Cocolon": 116,
+      "mashos-api": 306,
+      "total": 422
+    },
+    "coverage": {
+      "overall_structure_body_includes": 422,
+      "national_system_body_includes": 422,
+      "excluded_from_main_body": 0,
+      "latest_zip_missing_from_01_after_update": 0,
+      "latest_zip_missing_from_02_after_update": 0
+    },
+    "added_files": [
+      "mashos-api/ai/docs/LOAD_TESTING.md",
+      "mashos-api/ai/docs/WORKER_OPERATIONS.md",
+      "mashos-api/ai/services/ai_inference/.env.worker.example",
+      "mashos-api/ai/services/ai_inference/analysis_capability.py",
+      "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py",
+      "mashos-api/ai/services/ai_inference/core_contract_registry.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py",
+      "mashos-api/ai/services/ai_inference/fcm_push_queue.py",
+      "mashos-api/ai/services/ai_inference/piece_generation_policy.py",
+      "mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py",
+      "mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py",
+      "mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py",
+      "mashos-api/scripts/astor_worker_status.py",
+      "mashos-api/scripts/cocolon_load_test.py"
+    ],
+    "changed_files": [
+      "Cocolon/components/EmotionPiecePreviewModal.js",
+      "mashos-api/ai/docs/PUBLIC_API_REGISTRY.md",
+      "mashos-api/ai/services/ai_inference/api_analysis_reports.py",
+      "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+      "mashos-api/ai/services/ai_inference/api_cron_distribution.py",
+      "mashos-api/ai/services/ai_inference/api_emotion_piece.py",
+      "mashos-api/ai/services/ai_inference/api_emotion_submit.py",
+      "mashos-api/ai/services/ai_inference/api_follow.py",
+      "mashos-api/ai/services/ai_inference/api_self_structure.py",
+      "mashos-api/ai/services/ai_inference/api_today_question.py",
+      "mashos-api/ai/services/ai_inference/astor_job_queue.py",
+      "mashos-api/ai/services/ai_inference/astor_self_structure_report.py",
+      "mashos-api/ai/services/ai_inference/astor_worker.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_capability.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_context_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+      "mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py",
+      "mashos-api/ai/services/ai_inference/emotion_piece_store.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/services/ai_inference/home_gateway/emotion_reflection_publish_service.py",
+      "mashos-api/ai/services/ai_inference/piece_generation_store.py"
+    ],
+    "removed_files": [],
+    "triad_definition": {
+      "三大中核構造": [
+        "EmlisAI構造",
+        "分析構造",
+        "Piece構造"
+      ],
+      "note": "Piece生成機構はPiece構造の生成・preview・publish工程として扱う。"
+    },
+    "high_load_additions": [
+      "worker profile / queue stats / stale running recovery",
+      "FCM dedicated queue send_fcm_push_v1",
+      "notification worker profile",
+      "load test script and guide"
+    ],
+    "not_completed": [
+      "DB physical rename / drop",
+      "current bridge view write switch",
+      "legacy route handler deletion",
+      "old named API file deletion",
+      "mymodel/qna active legacy named public contract retire",
+      "staging / production load test execution"
+    ]
   }
 }

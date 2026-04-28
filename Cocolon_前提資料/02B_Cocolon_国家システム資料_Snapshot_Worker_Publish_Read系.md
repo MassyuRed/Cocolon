@@ -1,6 +1,6 @@
 ---
 title: "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系"
-revision_date: "2026-04-25"
+revision_date: "2026-04-28"
 ---
 
 # 02B. Snapshot / Worker / Publish / Read系
@@ -3238,3 +3238,90 @@ revision_date: "2026-04-25"
 - Self Structure worker/read 正本は `astor_self_structure_report.py` / `astor_self_structure_persona.py` / `api_self_structure.py` / `api_self_structure_reports.py` です。
 - Piece generation/read 正本は `piece_generation_engine.py` / `piece_generation_store.py` / `piece_generated_*` / `piece_public_read_service.py` / `api_piece_runtime.py` です。
 - EmotionLog feed 正本は `astor_emotion_log_feed_*` / `api_emotion_log.py` です。旧 `astor_friend_feed_*` は compat façade です。
+
+# 2026-04-28 差分追記: Worker / Queue / FCM / Load Test補正
+
+## 新規国家システム file block
+
+### `mashos-api/ai/services/ai_inference/fcm_push_queue.py`
+- repo: `mashos-api`
+- 国家システム区分: `Queue / Worker`
+- 現行状態: `active`
+- 国家システム上の役割: FCM push送信をAPI/cron/worker内の直接外部通信から切り離し、`send_fcm_push_v1` jobとして `astor_jobs` にenqueueする。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/api_emotion_submit.py`
+  - `mashos-api/ai/services/ai_inference/api_follow.py`
+  - `mashos-api/ai/services/ai_inference/api_today_question.py`
+  - `mashos-api/ai/services/ai_inference/api_cron_distribution.py`
+- 下流:
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/astor_job_queue.py`
+  - `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+
+### `mashos-api/ai/services/ai_inference/.env.worker.example`
+- repo: `mashos-api`
+- 国家システム区分: `Worker / Config`
+- 現行状態: `active`
+- 国家システム上の役割: 高負荷時にAPI serviceとworker serviceを分けるためのenv例。`ASTOR_WORKER_PROFILE`、FCM queue、stale running復旧を含む。
+- 上流:
+  - なし
+- 下流:
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+
+### `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+- repo: `mashos-api`
+- 国家システム区分: `Operation`
+- 現行状態: `active`
+- 国家システム上の役割: worker profile、増設順、queue滞留確認、stale running復旧、notification workerを運用面で固定する。
+- 上流:
+  - なし
+- 下流:
+  - `mashos-api/scripts/astor_worker_status.py`
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/services/ai_inference/.env.worker.example`
+
+### `mashos-api/scripts/astor_worker_status.py`
+- repo: `mashos-api`
+- 国家システム区分: `Operation / Verification`
+- 現行状態: `active`
+- 国家システム上の役割: queue stats、profile別滞留、stale running job復旧、pressure判定を行う。
+- 上流:
+  - `mashos-api/ai/services/ai_inference/astor_job_queue.py`
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+
+### `mashos-api/ai/docs/LOAD_TESTING.md`
+- repo: `mashos-api`
+- 国家システム区分: `Verification`
+- 現行状態: `active`
+- 国家システム上の役割: read/write/mixの負荷試験手順とp50/p95/p99、queue滞留確認を固定する。
+- 上流:
+  - なし
+- 下流:
+  - `mashos-api/scripts/cocolon_load_test.py`
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/scripts/astor_worker_status.py`
+
+### `mashos-api/scripts/cocolon_load_test.py`
+- repo: `mashos-api`
+- 国家システム区分: `Verification`
+- 現行状態: `active`
+- 国家システム上の役割: `app-bootstrap`、`startup`、`home-state`、`emotion-submit`、`piece-preview`、`mix` の負荷試験を行う。
+- 上流:
+  - なし
+- 下流:
+  - なし
+- 落とすと漏れる関連ファイル:
+  - `mashos-api/ai/docs/LOAD_TESTING.md`
+
+## 既存 file の差分
+
+- `mashos-api/ai/services/ai_inference/astor_job_queue.py` は `ready_queued`、`delayed_queued`、`running`、`failed`、`oldest_ready_age_seconds`、`stale_running_count` 等のqueue statsとstale復旧を持つ。
+- `mashos-api/ai/services/ai_inference/astor_worker.py` は `all/core/analysis/inspect/ranking/summary/notification` profileを持ち、`send_fcm_push_v1` をnotification profileで処理する。
+- `mashos-api/ai/services/ai_inference/api_cron_distribution.py` / `api_today_question.py` / `api_follow.py` は通知を直接FCM送信せず、queueへ逃がす。

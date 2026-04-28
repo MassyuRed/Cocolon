@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-04-27"
+revision_date: "2026-04-28"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -3844,3 +3844,90 @@ revision_date: "2026-04-27"
 | `POST /friends/notification-settings/{friend_user_id}` | `/emotion-notifications/settings/{friend_user_id}` |
 
 この差分では handler 削除は行っていません。registry上で互換aliasの退役境界を明示しただけです。
+
+# 2026-04-28 差分追記: Worker / FCM / Load Test / Contract支援補正
+
+この追記は、最新zipで増えた高負荷運用・検証・contract支援ファイルを `01C` に差分追加する。
+
+## 新規 file block
+
+### `mashos-api/ai/services/ai_inference/fcm_push_queue.py`
+- repo: `mashos-api`
+- system: `Backend support / FCM dedicated queue`
+- 現行状態: `active`
+- 役割: FCM外部通信をAPI hot pathから切り離し、`send_fcm_push_v1` jobとして `astor_jobs` にenqueueする。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/api_emotion_submit.py`
+  - `mashos-api/ai/services/ai_inference/api_follow.py`
+  - `mashos-api/ai/services/ai_inference/api_today_question.py`
+  - `mashos-api/ai/services/ai_inference/api_cron_distribution.py`
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+
+### `mashos-api/ai/services/ai_inference/.env.worker.example`
+- repo: `mashos-api`
+- system: `Backend support / worker env example`
+- 現行状態: `active`
+- 役割: API/worker分離、worker profile、FCM queue、stale running recovery、queue stats logのenv例。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+  - `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+
+### `mashos-api/ai/docs/WORKER_OPERATIONS.md`
+- repo: `mashos-api`
+- system: `Backend support / worker operations`
+- 現行状態: `active`
+- 役割: worker profile、推奨増設順、queue stats、stale running復旧、notification workerを運用資料として固定する。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+  - `mashos-api/scripts/astor_worker_status.py`
+  - `mashos-api/ai/services/ai_inference/.env.worker.example`
+
+### `mashos-api/ai/docs/LOAD_TESTING.md`
+- repo: `mashos-api`
+- system: `Backend support / load testing`
+- 現行状態: `active`
+- 役割: app-bootstrap / startup / home-state / emotion-submit / piece-preview / mix の負荷試験手順と見るべき指標を固定する。
+- 直接関係ファイル:
+  - `mashos-api/scripts/cocolon_load_test.py`
+  - `mashos-api/scripts/astor_worker_status.py`
+
+### `mashos-api/scripts/astor_worker_status.py`
+- repo: `mashos-api`
+- system: `Backend support / worker status script`
+- 現行状態: `active`
+- 役割: queue stats表示、profile別確認、stale running job復旧、pressure判定を行う。
+- 直接関係ファイル:
+  - `mashos-api/ai/services/ai_inference/astor_job_queue.py`
+  - `mashos-api/ai/services/ai_inference/astor_worker.py`
+
+### `mashos-api/scripts/cocolon_load_test.py`
+- repo: `mashos-api`
+- system: `Backend support / load test script`
+- 現行状態: `active`
+- 役割: Cocolon API の read/write/mix scenario を使い、p50/p95/p99、success rate、status distributionを測定する。
+- 直接関係ファイル:
+  - `mashos-api/ai/docs/LOAD_TESTING.md`
+
+### `mashos-api/ai/tests/contract/test_new_national_core_analysis_contracts.py`
+- repo: `mashos-api`
+- system: `Contract test / 分析構造`
+- 現行状態: `active`
+- 役割: 分析構造capabilityとReport Validity Gateの不変条件を固定する。
+
+### `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+- repo: `mashos-api`
+- system: `Contract test / EmlisAI構造`
+- 現行状態: `active`
+- 役割: EmlisAI capabilityとQuality Gateの不変条件を固定する。
+
+### `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- repo: `mashos-api`
+- system: `Contract test / Piece構造`
+- 現行状態: `active`
+- 役割: core contract registry、Piece preview/publish field、Piece安全化、preview=published hash契約を固定する。
+
+## 既存 file の差分
+
+- `mashos-api/ai/services/ai_inference/astor_job_queue.py` は queue stats / stale running job復旧を持つ。
+- `mashos-api/ai/services/ai_inference/astor_worker.py` は `all/core/analysis/inspect/ranking/summary/notification` profile と FCM job handlerを持つ。
+- `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` / `api_contract_registry.py` は新国家システムのadditive contractを反映する。
