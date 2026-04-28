@@ -33,6 +33,12 @@ target 'tempCocolon' do
       :mac_catalyst_enabled => false
     )
 
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
+      end
+    end
+
     # Archive on CI can fail with exit code 65 when CocoaPods-created resource bundles
     # inherit signing settings during a manual-signing archive. These bundle targets
     # do not need code signing.

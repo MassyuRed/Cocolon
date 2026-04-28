@@ -9,6 +9,7 @@ jobs:
 
     env:
       RCT_NEW_ARCH_ENABLED: "0"
+      TOOLCHAINS: com.apple.dt.toolchain.XcodeDefault
 
     steps:
       - name: Checkout
@@ -237,6 +238,8 @@ jobs:
             APP_CODE_SIGN_IDENTITY="Apple Distribution" \
             CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
             INFOPLIST_KEY_CFBundleVersion="$BUILD_NUMBER" \
+            IPHONEOS_DEPLOYMENT_TARGET=15.1 \
+            TOOLCHAINS=com.apple.dt.toolchain.XcodeDefault \
             2>&1 | tee "$LOG_PATH" || status=$?
 
           if [ "$status" -ne 0 ]; then
