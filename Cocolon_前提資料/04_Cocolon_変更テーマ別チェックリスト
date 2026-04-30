@@ -1,116 +1,138 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
-purpose: "変更テーマから 01/02 の読む順を逆引きできるようにする"
+purpose: "変更テーマから、華恋が読むべき構造資料を逆引きする"
 ---
 
 # 1. 使い方
 
-変更指示を受けたら、まずテーマを 1 つ決める。  
-その後、**01 の system 把握 → 02 の国家システム把握 → rule / contract / test 確認** の順で辿る。
+この資料はタスク表ではありません。  
+Mash様から変更指示を受けた時に、華恋がどの構造資料を読むべきかを決めるための索引です。
+
+読む順は固定です。
+
+1. `00_華恋用_READ_FIRST.md`
+2. `03_Cocolon_命名体系.md`
+3. `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`
+4. 作業テーマに応じた `01` 系
+5. 国家システムに関係する場合は `02` 系
+6. contract / policy / guard に関係する場合は `05`
+7. DB / rename / bridge view に関係する場合は `08`
 
 # 2. テーマ別の最短読む順
 
 ## 2-1. Home / Input / notice / today-question / emotion reflection
-1. `03_Cocolon_命名体系.md`
-2. `01_Cocolon_全体構造資料.md`
-3. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md`
-4. `02_Cocolon_国家システム資料.md`
-5. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
-6. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
-7. `05_Cocolon_ルールファイル索引.md`
 
-## 2-2. Analysis / MyWeb / Self Structure / report
-1. `03`
-2. `01`
-3. `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md`
-4. `02`
-5. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
-6. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
-7. `05`
-
-## 2-3. Piece / Nexus / generated reflection / qna
-1. `03`
-2. `01`
-3. `01B`
-4. `02`
-5. `02A`
-6. `02B`
-7. `02C`
-8. `05`
-
-## 2-4. EmotionLog / social / ranking
-1. `03`
-2. `01B`
-3. `02B`
-4. `02C`
-5. `05`
-
-## 2-5. Account / ProfileCreate / subscription / settings
-1. `03`
-2. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md`
-3. 国家システムに絡むなら `02B` と `02C`
-4. `05`
-
-## 2-6. contract / boundary / startup / guard
-1. `01A` と `01C`
-2. `02C`
-3. `05`
-4. 必要なら `07`
-
-# 3. 実作業時の原則
-
-- 単体ファイルだけで決めない
-- file block の **直接関係ファイル / 直接参照ファイル / 同時確認ファイル** を全部開く
-- national system に関係する変更は必ず `02` 系へ入る
-- route / request / response / startup / unread / entitlement を触る時は rule file と test を先に見る
-
-
-## 2-7. 三大要素完了反映後の next phase
-1. `07_Cocolon_最新スナップショット差分.md`
-2. `01A` の 2026-04-22 差分更新
-3. `01B` の 2026-04-22 差分更新
-4. `01C` の 2026-04-22 差分更新
-5. `02A` / `02B` / `02C` の 2026-04-22 差分更新
-6. `05_Cocolon_ルールファイル索引.md`
-
-補足:
-- 三大要素は完了判定へ入ったため、次段では Home / Input / startup / social / subscription / App 全体接続を主戦場とする
-- ただし triad 由来の canonical owner 契約 (`api_nexus.py`, `piece_public_read_service.py`, `report_artifact_read_service.py`, `emlis_ai_readers.py`) を前提に読む
-
-# 2026-04-28 差分追記: 新国家システム / 高負荷運用テーマ
-
-## 2-8. 三大中核構造 / 新国家システム
-
-1. `03_Cocolon_命名体系.md`
-2. `01_Cocolon_全体構造資料.md`
+1. `01_Cocolon_全体構造資料.md`
+2. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md`
 3. `02_Cocolon_国家システム資料.md`
-4. `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md`
-5. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
-6. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
-7. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
-8. `05_Cocolon_ルールファイル索引.md`
+4. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
+5. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+6. `05_Cocolon_ルールファイル索引`
 
-補足:
-- 三大中核構造は `EmlisAI構造` / `分析構造` / `Piece構造`
-- `core_contract_registry.py` を起点に、各Gateファイルを同時確認する
+## 2-2. App runtime / `/app/bootstrap` / feature flag / version gate
 
-## 2-9. worker / FCM queue / load test
+1. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md`
+2. `02_Cocolon_国家システム資料.md`
+3. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+4. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+5. `05_Cocolon_ルールファイル索引`
+6. `mashos-api/ai/services/ai_inference/api_app_bootstrap.py`
+
+同時確認するRN側の主な消費先:
+
+- `Cocolon/AppRuntimeContext.js`
+- `Cocolon/App.js`
+- `Cocolon/features/home/useHomeState.js`
+- `Cocolon/screens/SettingsOtherScreen.js`
+- `Cocolon/screens/TodayQuestionHistoryScreen.js`
+- `Cocolon/screens/SubscriptionSelectScreen.js`
+
+## 2-3. Analysis / MyWeb / Self Structure / report
+
+1. `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md`
+2. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+4. `05_Cocolon_ルールファイル索引`
+5. `08_Cocolon_DB_rename_boundary.md`（DB名が関わる場合）
+
+## 2-4. Piece / Nexus / generated reflection / qna
+
+1. `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md`
+2. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
+3. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+4. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+5. `05_Cocolon_ルールファイル索引`
+6. `08_Cocolon_DB_rename_boundary.md`
+
+Piece関係は、Mash様が明示した時だけPiece専用工程として扱います。
+
+## 2-5. EmotionLog / social / ranking
+
+1. `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md`
+2. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+4. `05_Cocolon_ルールファイル索引`
+
+## 2-6. Account / ProfileCreate / settings / account delete
+
+1. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md`
+2. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+4. `05_Cocolon_ルールファイル索引`
+5. `08_Cocolon_DB_rename_boundary.md`（DB削除範囲が関わる場合）
+
+主な同時確認ファイル:
+
+- `Cocolon/screens/SettingsOtherScreen.js`
+- `Cocolon/lib/accountLocalCleanup.js`
+- `mashos-api/ai/services/ai_inference/api_account_lifecycle.py`
+
+## 2-7. Subscription / IAP / 新規販売停止
+
+1. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md`
+2. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
+3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+4. `05_Cocolon_ルールファイル索引`
+5. `Cocolon/SUBSCRIPTION_RELEASE_PHASE3.md`
+6. `Cocolon/SUBSCRIPTION_RELEASE_PHASE4.md`
+
+主な同時確認ファイル:
+
+- `Cocolon/screens/SubscriptionSelectScreen.js`
+- `Cocolon/SubscriptionContext.js`
+- `Cocolon/lib/iap/*`
+- `mashos-api/ai/services/ai_inference/api_subscription.py`
+
+## 2-8. worker / FCM queue / load test
 
 1. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
 2. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
-3. `05_Cocolon_ルールファイル索引.md`
+3. `05_Cocolon_ルールファイル索引`
 4. `mashos-api/ai/docs/WORKER_OPERATIONS.md`
 5. `mashos-api/ai/docs/LOAD_TESTING.md`
 6. `mashos-api/scripts/astor_worker_status.py`
 7. `mashos-api/scripts/cocolon_load_test.py`
 
-補足:
-- API hot pathへ重い外部通信を戻さない
-- FCM push は `fcm_push_queue.py` と `ASTOR_WORKER_PROFILE=notification` を確認する
-- worker増設判断は queue stats と p95/p99 を見て行う
+## 2-9. DB / bridge view / rename boundary
+
+1. `08_Cocolon_DB_rename_boundary.md`
+2. `03_Cocolon_命名体系.md`
+3. `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`
+4. `01` 系の該当feature
+5. `02` 系の該当国家システム
+6. `05_Cocolon_ルールファイル索引`
+
+# 3. 実作業時の原則
+
+- 単体ファイルだけで決めない。
+- file block の **直接関係ファイル / 直接参照ファイル / 同時確認ファイル** を開く。
+- national system に関係する変更は必ず `02` 系へ入る。
+- route / request / response / startup / unread / entitlement / account delete / subscription を触る時は `05` を先に見る。
+- 旧名称は、`09` に保管された構造境界ならrenameしない。
+- DB物理名に関わる場合は、`08` を正本にする。

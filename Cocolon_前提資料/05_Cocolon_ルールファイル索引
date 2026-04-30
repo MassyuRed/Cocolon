@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -22,6 +22,7 @@ purpose: "見落とすと構造誤読や contract 破壊を起こしやすい ru
 | `mashos-api/ai/docs/NATIONAL_ALIGNMENT_AUDIT_PHASE5.md` | RN/API 境界・display-only 原則 | national system と boundary を触る時 |
 | `mashos-api/ai/docs/TUTORIAL_STABILITY_REDESIGN.md` | tutorial 測定 / overlay / proxy press | tutorial を触る時 |
 | `mashos-api/scripts/check_no_direct_supabase.py` | RN からの direct Supabase / raw fetch 禁止 | frontend data access を触る時 |
+| `Cocolon/AppRuntimeContext.js` | `/app/bootstrap` runtime state / feature flag / version gate | 起動制御・機能停止flag・maintenance表示を触る時 |
 | `mashos-api/ai/docs/COCOLON_STRUCTURE_UNIFICATION_ADDENDUM_2026_04_21.md` | 三大要素の canonical owner / compat 隔離 / artifact-only 契約 | Piece / Analysis / EmlisAI の本流固定を触る時 |
 
 # 3. contract / regression を守る test 群
@@ -39,6 +40,8 @@ purpose: "見落とすと構造誤読や contract 破壊を起こしやすい ru
 
 # 4. current national system で特に重要な code rule
 
+- `AppRuntimeContext.js` は `/app/bootstrap` のRN側runtime boundary。feature flag / version gate / maintenance message を触る時は `api_app_bootstrap.py` と消費screenを同時確認する
+- `App.js` は API接続先を `lib/apiClient.js` の `API_BASE_URL` から読む。旧env名をApp.jsへ戻さない
 - `home_gateway/*` を通る Home write は route adapter から分岐しない
 - `access_policy/*` を使う read-side は route file で tier / visibility を再実装しない
 - `startup_snapshot_store.py` と `api_app_bootstrap.py` は startup 断面の中心としてペアで見る

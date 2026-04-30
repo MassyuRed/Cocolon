@@ -1,13 +1,13 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 116
+  Cocolon: 117
   mashos-api: 306
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
@@ -16,6 +16,17 @@ purpose: "華恋が Mash の指示語と current code の語彙を安全に写�
 
 現状のコードは、**表示名** と **internal canonical 名** がズレる箇所をまだ持っています。  
 そのため華恋は、指示語をそのまま文字列置換せず、**表示名 / route 名 / canonical table 名 / legacy 名** の層を分けて読む必要があります。
+
+# 1-2. 前提資料での名称混在保管方針
+
+この資料は、名称混在を「直すべきタスク」として記録するものではありません。  
+華恋が作業時に、visible名・route名・runtime owner・DB physical nameを取り違えないための辞書です。
+
+- 資料で保管できる旧名称は、無理にrenameしない。
+- 稼働、public API、DB write path、account delete、access policyに影響する場合だけ修正対象にする。
+- API接続先の正本は `Cocolon/lib/apiClient.js` の `API_BASE_URL`。
+- `App.js` は旧 `EXPO_PUBLIC_MYMODEL_API_URL` を直接読まない。
+- `/app/bootstrap` の runtime state は `Cocolon/AppRuntimeContext.js` が正本。
 
 # 2. 現在の tab / visible 名
 
@@ -33,6 +44,7 @@ App.js 上の current fact:
 | Mash の言い方 | current visible / route | current runtime owner | legacy / DB 側の残り方 | 使い分け |
 |---|---|---|---|---|
 | Home | `Input` route, `screens/InputScreen.js` | `api_emotion_submit.py`, `api_home_state.py`, `home_gateway/*`, `api_app_bootstrap.py` | visible は Home、route/screen は Input が残る | 感情入力・notice・today-question・EmotionPiece preview/publish の正面入口 |
+| App runtime | `/app/bootstrap` runtime | `AppRuntimeContext.js`, `App.js`, `api_app_bootstrap.py` | feature flag名はbackend env / API payload由来で混在する | 起動時のversion gate / maintenance / feature flag制御 |
 | Analysis | `Analysis` route, `screens/Analysis*` | `api_analysis_reads.py`, `api_analysis_reports.py`, `astor_analysis_insight.py` | `api_myweb_*`, `astor_myweb_insight.py` は compat façade。DB は `myweb_reports` が実体 | レポート / analysis 読み取り面 |
 | Self Structure | `screens/SelfStructure*`, `screens/AnalysisSelfStructureScreen.js` | `api_self_structure.py`, `api_self_structure_reports.py`, `astor_self_structure_*` | `api_myprofile.py`, `api_myprofile_reports_read.py`, `astor_myprofile_*` は compat façade。DB は `myprofile_*` が実体 | 自己構造 latest/history/viewer |
 | Piece | `Piece` route, `screens/Piece*`, `screens/NexusScreen.js`, `screens/Resonance*` | `api_piece_runtime.py`, `api_nexus.py`, `api_emotion_piece.py`, `piece_generation_*`, `piece_generated_*` | `api_mymodel_qna.py`, `api_emotion_reflection.py`, `generated_reflection_*`, `astor_reflection_*` は compat façade。DB は `mymodel_*` が実体 | Piece library / Nexus / Resonance / generated piece |
@@ -171,3 +183,32 @@ current route として registry に明示追加されたもの:
 旧表現の `Piece生成機構` は、`Piece構造` のうち生成・preview・publish工程を指す。  
 旧表現の `EmlisAI` は、構造名として記載する時は `EmlisAI構造` と読む。  
 `分析構造` は名称変更なしだが、今回から `analysis_capability.py` と `analysis_report_validity_gate.py` を中核境界として読む。
+
+
+# 2026-04-29 差分追記: 名称混在は「稼働影響」で分類する
+
+今回から、名称混在は次の3分類で扱う。
+
+| 分類 | 具体例 | 対応 |
+|---|---|---|
+| 稼働に必要な互換 | legacy route handler、deprecated public contract、旧DB physical write path、compat import alias | 消さない。資料に保管する。削除条件を満たすまで保持する |
+| 表示名と内部名のズレ | `Home` visible と `Input` route、`Analysis` visible と `myweb_reports` physical、`Self Structure` visible と `myprofile_reports` physical | 無理にrenameしない。華恋は visible / route / runtime owner / DB physical name を分けて読む |
+| 稼働・契約・安全に影響するズレ | RN caller が legacy endpoint を直接叩く、public registry が実routeとずれる、write path が current bridge view に誤って向く、account delete 対象から漏れる | 修正対象にする |
+
+2026-04-29 のローカル確認では、非Piece領域について、即時コード修正が必要な legacy endpoint caller は検出されていない。  
+そのため、非Pieceの名称混在はまず資料保管で扱う。
+
+## 2026-04-29 時点の非Piece名称混在の扱い
+
+| 領域 | current visible / public | 残る旧語彙 | 2026-04-29 対応 |
+|---|---|---|---|
+| Home | `Home` | RN route / screen は `Input` | 保管。変更しない |
+| Analysis | `/analysis/*`, `Analysis*` screens | DB physical `myweb_reports`、compat route `/myweb/*` | 保管。`/myweb/*` は deprecated contract として保持 |
+| Self Structure | `/self-structure/*` | DB physical `myprofile_reports`、compat route `/myprofile/*` | 保管。`/myprofile/*` は deprecated contract として保持 |
+| EmotionLog / Follow | `/emotion-log/*`, `/follow/*` | DB physical `friend_*`、compat route `/friends/*` | 保管。`/friends/*` は deprecated contract として保持 |
+| ProfileCreate | `/profile-create/*`, `/account/profile-create` | DB physical `mymodel_create_*` | 保管。ProfileCreate visible名を正とする |
+| Subscription | `/subscription/*` | 名称混在は主要論点ではない | release gate / store確認へ回す |
+| Account delete | `/account/delete` | 削除対象DBの旧物理名 | 名称変更ではなく削除対象確認として扱う |
+
+Pieceに属する `mymodel_reflections` / `mymodel_qna_*` / `reflection_text` / `/mymodel/qna/*` / `/emotion/reflection/*` は、今回の作業では後回しにする。  
+ただし `/mymodel/qna/*` と `/emotion/reflection/*` の public contract は、今回の zip 上では deprecated として保管されている。

@@ -26,7 +26,6 @@ import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 // Subscription (Analysis paywall)
 // - free: weekly/monthly are chart-only (no text / no PDF)
 // - plus/premium: can view full text + PDF
-const ANALYSIS_REPORTS_ENSURE_PATH = ANALYSIS_WIRE.routes.reportsEnsure;
 const READY_PAGE_LIMIT = 50;
 
 async function getAccessToken() {
@@ -36,10 +35,6 @@ async function getAccessToken() {
   } catch {
     return null;
   }
-}
-
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function extractReadyItems(payload) {
@@ -328,9 +323,6 @@ export default function AnalysisReportHistoryScreen({
     return false;
   }, [normalizedReportType]);
 
-  const shouldEnsureOnOpen =
-    normalizedReportType === "weekly" || normalizedReportType === "monthly";
-
   const themed = useMemo(() => {
     if (!isDark) return {};
     return {
@@ -396,34 +388,6 @@ export default function AnalysisReportHistoryScreen({
     try {
       const accessToken = await getAccessToken();
 
-      // ✅ weekly / monthly は不足時のみ ensure、daily は配布済み READY を読むだけにする
-      try {
-        if (accessToken && shouldEnsureOnOpen) {
-          const res = await apiFetch(ANALYSIS_REPORTS_ENSURE_PATH, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify({
-              types: [normalizedReportType],
-              force: false,
-            }),
-          });
-
-          if (!res.ok) {
-            const t = await res.text();
-            console.warn(
-              "AnalysisReportHistoryScreen: analysis/reports/ensure failed",
-              res.status,
-              t
-            );
-          }
-        }
-      } catch (e) {
-        console.warn("AnalysisReportHistoryScreen: analysis/reports/ensure failed", e);
-      }
-
       if (!accessToken) {
         if (isStale()) return;
         setRows([]);
@@ -463,33 +427,8 @@ export default function AnalysisReportHistoryScreen({
         setSubscriptionTier(normalizeSubscriptionTier(ready.viewerTier));
       }
 
-      let activeReady = ready;
-      let list = Array.isArray(activeReady?.items) ? activeReady.items : [];
-
-      // ensure 直後は inspect 完了前で READY がまだ見えないことがあるため、
-      // 空配列のときだけ短時間だけ再取得する。
-      if (list.length === 0) {
-        for (const waitMs of [1200, 2500]) {
-          await delay(waitMs);
-          try {
-            const retryReady = await fetchReadyReports(accessToken, normalizedReportType, { limit: READY_PAGE_LIMIT, offset: 0 });
-            activeReady = retryReady;
-            if (typeof retryReady?.viewerTier === "string") {
-              setSubscriptionTier(normalizeSubscriptionTier(retryReady.viewerTier));
-            }
-            list = Array.isArray(retryReady?.items) ? retryReady.items : [];
-            console.log(
-              "READY retry items length =",
-              Array.isArray(retryReady?.items) ? retryReady.items.length : "no-items",
-              "waitMs =",
-              waitMs
-            );
-            if (list.length > 0) break;
-          } catch {
-            // ignore retry failure and keep the best-effort result
-          }
-        }
-      }
+      const activeReady = ready;
+      const list = Array.isArray(activeReady?.items) ? activeReady.items : [];
 
       if (isStale()) {
         console.log("HISTORY stale load ignored =", {
@@ -530,7 +469,7 @@ export default function AnalysisReportHistoryScreen({
         setLoading(false);
       }
     }
-  }, [normalizedReportType, reportType, shouldEnsureOnOpen]);
+  }, [normalizedReportType, reportType]);
 
   useEffect(() => {
     load();

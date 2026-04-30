@@ -61,7 +61,7 @@ jobs:
           fi
 
       - name: Cache CocoaPods downloads
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/Library/Caches/CocoaPods
           key: ${{ runner.os }}-cocoapods-downloads-${{ hashFiles('ios/Podfile', 'ios/Podfile.lock') }}

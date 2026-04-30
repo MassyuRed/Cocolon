@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-04-26"
+revision_date: "2026-04-30"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -29,6 +29,7 @@ revision_date: "2026-04-26"
 - 現行状態: `active`
 - 役割: App support file. Current system: app root / navigation.
 - 直接関係ファイル:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/AuthContext.js` — import
   - `Cocolon/AuthScreen.js` — import
   - `Cocolon/SubscriptionContext.js` — import
@@ -80,6 +81,7 @@ revision_date: "2026-04-26"
 - このファイルを直接参照するファイル:
   - `Cocolon/index.js` — import
 - 修正時に必ず同時確認するファイル:
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/AuthContext.js`
   - `Cocolon/AuthScreen.js`
   - `Cocolon/SubscriptionContext.js`
@@ -128,6 +130,31 @@ revision_date: "2026-04-26"
   - `mashos-api/ai/services/ai_inference/api_myweb_reports.py`
 - 修正対象になりうる変更:
   - route, provider, startup, tab label, screen mount order
+
+### `Cocolon/AppRuntimeContext.js`
+- repo: `Cocolon`
+- system: `app runtime / feature flag boundary`
+- 現行状態: `active`
+- 役割: `/app/bootstrap` の結果をRN全体で共有するruntime context。`minimum_supported_version` / `recommended_version` / `maintenance_message` / `feature_flags` を保持する。
+- 直接関係ファイル:
+  - `Cocolon/lib/apiClient.js` — import / `/app/bootstrap` fetch
+  - `mashos-api/ai/services/ai_inference/api_app_bootstrap.py` — endpoint /app/bootstrap
+- このファイルを直接参照するファイル:
+  - `Cocolon/App.js` — provider / version gate
+  - `Cocolon/features/home/useHomeState.js` — `today_question_enabled`
+  - `Cocolon/screens/SettingsOtherScreen.js` — `account_delete_enabled`
+  - `Cocolon/screens/SubscriptionSelectScreen.js` — `subscription_sales_enabled`
+  - `Cocolon/screens/TodayQuestionHistoryScreen.js` — `today_question_history_enabled`
+- 修正時に必ず同時確認するファイル:
+  - `Cocolon/App.js`
+  - `Cocolon/features/home/useHomeState.js`
+  - `Cocolon/lib/apiClient.js`
+  - `Cocolon/screens/SettingsOtherScreen.js`
+  - `Cocolon/screens/SubscriptionSelectScreen.js`
+  - `Cocolon/screens/TodayQuestionHistoryScreen.js`
+  - `mashos-api/ai/services/ai_inference/api_app_bootstrap.py`
+- 修正対象になりうる変更:
+  - app bootstrap, version guard, maintenance message, feature flag, runtime kill switch
 
 ### `Cocolon/AuthContext.js`
 - repo: `Cocolon`
@@ -537,7 +564,7 @@ revision_date: "2026-04-26"
   - `Cocolon/lib/api/home/todayQuestionApi.js`
   - `Cocolon/screens/InputScreen.js`
 - 修正対象になりうる変更:
-  - Home hydration, save action flow, startup popup, input action orchestration
+  - Home hydration, save action flow, startup popup, today_question_enabled flag, input action orchestration
 
 ### `Cocolon/features/home/useHomeState.js`
 - repo: `Cocolon`
@@ -545,18 +572,20 @@ revision_date: "2026-04-26"
 - 現行状態: `shared`
 - 役割: RN feature hook module. Current system: Home orchestration hook.
 - 直接関係ファイル:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/lib/api/home/homeStateApi.js` — import
   - `Cocolon/lib/api/home/todayQuestionApi.js` — import
 - このファイルを直接参照するファイル:
   - `Cocolon/features/home/useHomeActions.js` — import
   - `Cocolon/screens/InputScreen.js` — import
 - 修正時に必ず同時確認するファイル:
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/features/home/useHomeActions.js`
   - `Cocolon/lib/api/home/homeStateApi.js`
   - `Cocolon/lib/api/home/todayQuestionApi.js`
   - `Cocolon/screens/InputScreen.js`
 - 修正対象になりうる変更:
-  - Home hydration, save action flow, startup popup, input action orchestration
+  - Home hydration, save action flow, startup popup, today_question_enabled flag, input action orchestration
 
 ### `Cocolon/screens/InputCountRankingScreen.js`
 - repo: `Cocolon`

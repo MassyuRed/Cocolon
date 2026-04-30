@@ -110,7 +110,7 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
         <View style={styles.messageCard}>
           {failed ? (
             <>
-              <Text style={styles.messageTitle}>Piece詳細を開けませんでした</Text>
+              <Text style={styles.messageTitle}>ピース詳細を開けませんでした</Text>
               <Text style={styles.messageText}>
                 共通Piece詳細画面の登録状況を確認してください。
               </Text>

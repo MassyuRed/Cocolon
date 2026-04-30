@@ -24,7 +24,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Supabase
 import { supabase } from "../lib/supabase";
-import { apiGet, apiPost, apiFetch, API_BASE_URL } from "../lib/apiClient";
+import { apiGet, apiPost } from "../lib/apiClient";
 import { getTodayQuestionHistory } from "../lib/todayQuestionApi";
 import { ANALYSIS_WIRE, SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
 
@@ -68,8 +68,6 @@ const ANALYSIS_TUTORIAL_STEP_START = 7;
 const ANALYSIS_TUTORIAL_STEP_END = 11;
 const TUTORIAL_TOTAL_STEPS = 21;
 
-// Phase2: Analysis（配布/生成）はMashOS側でensure（オンデマンド）
-const ANALYSIS_REPORTS_ENSURE_ENDPOINT = `${API_BASE_URL}${ANALYSIS_WIRE.routes.reportsEnsure}`;
 const SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
 const SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
 const REPORT_READ_STATUS_CHUNK_SIZE = 60;
@@ -78,11 +76,82 @@ const ROUTE_EMOTION_ANALYSIS = "emotionAnalysis";
 const ROUTE_SELF_STRUCTURE = "selfStructure";
 const ROUTE_INPUT_HISTORY = "inputHistory";
 const ANALYSIS_READY_LIMIT = 1;
+const INITIAL_VISIBLE_REPORT_TYPE = "daily";
 const REPORT_TYPE_LABEL = Object.freeze({
   daily: "日報",
   weekly: "週報",
   monthly: "月報",
 });
+
+const ANALYSIS_LATEST_REPORT_CACHE_PREFIX = "cocolon:analysisLatestReport";
+const ANALYSIS_LATEST_REPORT_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const ANALYSIS_READY_REPORT_TYPES = Object.freeze(["daily", "weekly", "monthly"]);
+
+function normalizeAnalysisReportType(type) {
+  const normalized = String(type || "").trim().toLowerCase();
+  return ANALYSIS_READY_REPORT_TYPES.includes(normalized) ? normalized : null;
+}
+
+async function getAnalysisLatestReportCacheKey(reportType) {
+  const normalizedType = normalizeAnalysisReportType(reportType);
+  if (!normalizedType) return null;
+
+  let userId = "";
+  try {
+    const { data } = await supabase.auth.getSession();
+    userId = String(data?.session?.user?.id || "").trim();
+  } catch {
+    userId = "";
+  }
+
+  return `${ANALYSIS_LATEST_REPORT_CACHE_PREFIX}:${userId || "anonymous"}:${normalizedType}`;
+}
+
+function isUsableCachedAnalysisReport(report, reportType) {
+  const normalizedType = normalizeAnalysisReportType(reportType);
+  if (!normalizedType || !report || typeof report !== "object") return false;
+  const type = String(report?.report_type || normalizedType).trim().toLowerCase();
+  return !!report?.id && type === normalizedType;
+}
+
+async function readCachedAnalysisLatestReport(reportType) {
+  try {
+    const key = await getAnalysisLatestReportCacheKey(reportType);
+    if (!key) return null;
+
+    const raw = await AsyncStorage.getItem(key);
+    if (!raw) return null;
+
+    const payload = JSON.parse(raw);
+    const savedAt = Number(payload?.saved_at || 0);
+    if (!Number.isFinite(savedAt) || Date.now() - savedAt > ANALYSIS_LATEST_REPORT_CACHE_TTL_MS) {
+      return null;
+    }
+
+    const report = payload?.report || null;
+    return isUsableCachedAnalysisReport(report, reportType) ? report : null;
+  } catch {
+    return null;
+  }
+}
+
+async function writeCachedAnalysisLatestReport(reportType, report) {
+  try {
+    if (!isUsableCachedAnalysisReport(report, reportType)) return;
+    const key = await getAnalysisLatestReportCacheKey(reportType);
+    if (!key) return;
+
+    await AsyncStorage.setItem(
+      key,
+      JSON.stringify({
+        saved_at: Date.now(),
+        report,
+      })
+    );
+  } catch {
+    // cache write is best-effort only
+  }
+}
 
 function extractReadyItems(payload) {
   if (Array.isArray(payload?.items)) return payload.items;
@@ -318,7 +387,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         return {
           step: 7,
           mode: "info",
-          title: "Analysis",
+          title: "分析",
           message: "ここでは日々の入力から作成される\n分析レポートや自己分析を確認できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(8),
@@ -345,7 +414,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         return {
           step: 10,
           mode: "info",
-          title: "履歴はHomeから開きます",
+          title: "履歴はホームから開きます",
           message: "入力履歴と今日の問い履歴は\nHomeから確認します。\n\nAnalysisは分析を見る場所です。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(11),
@@ -355,7 +424,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         return {
           step: 11,
           mode: "info",
-          title: "次はPiece",
+          title: "次はピース",
           message: "次はPieceを見てみましょう",
           nextLabel: "Pieceへ",
           onNext: () => {
@@ -684,150 +753,167 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     await requestParentTabUnreadRefresh();
   }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread, requestParentTabUnreadRefresh]);
 
-  const fetchLatestReadyReport = useCallback(async (type, { ensure = false } = {}) => {
-    const normalizedType = String(type || "").trim().toLowerCase();
-    if (!["daily", "weekly", "monthly"].includes(normalizedType)) return null;
+  const fetchLatestReadyReport = useCallback(async (type) => {
+    const normalizedType = normalizeAnalysisReportType(type);
+    if (!normalizedType) return null;
 
-    const shouldEnsure = ensure && (normalizedType === "daily" || normalizedType === "weekly" || normalizedType === "monthly");
-    if (shouldEnsure) {
-      try {
-        await apiPost(ANALYSIS_WIRE.routes.reportsEnsure, {
-          types: [normalizedType],
-          force: false,
-        });
-      } catch (e) {
-        console.warn("AnalysisScreen: failed to ensure latest ready report", normalizedType, e);
-      }
-    }
-
-    const fetchOnce = async () => {
+    try {
       const json = await apiGet(
         `${ANALYSIS_WIRE.routes.reportsReady}?report_type=${encodeURIComponent(
           normalizedType
-        )}&limit=${ANALYSIS_READY_LIMIT}&offset=0`
+        )}&limit=${ANALYSIS_READY_LIMIT}&offset=0&include_body=true`
       );
       const items = extractReadyItems(json);
-      return items[0] || null;
-    };
-
-    let latest = null;
-    try {
-      latest = await fetchOnce();
+      const latest = items[0] || null;
+      if (latest) {
+        void writeCachedAnalysisLatestReport(normalizedType, latest);
+      }
+      return latest || null;
     } catch (e) {
       console.warn("AnalysisScreen: failed to fetch latest ready report", normalizedType, e);
-      if (!shouldEnsure) return null;
+      return null;
     }
-
-    if (!latest && shouldEnsure) {
-      for (const waitMs of [1200, 2500]) {
-        await new Promise((resolve) => setTimeout(resolve, waitMs));
-        try {
-          latest = await fetchOnce();
-        } catch {
-          latest = null;
-        }
-        if (latest) break;
-      }
-    }
-
-    return latest || null;
   }, []);
 
-  const refreshHomeSummaries = useCallback(async () => {
-    const refreshSeq = ++menuMetaRefreshSeqRef.current;
-    const isStale = () => refreshSeq !== menuMetaRefreshSeqRef.current;
+  const refreshHomeSummaries = useCallback(
+    async ({ showLoading = true, prioritizeVisibleReport = true } = {}) => {
+      const refreshSeq = showLoading
+        ? ++menuMetaRefreshSeqRef.current
+        : menuMetaRefreshSeqRef.current;
+      const isStale = () => refreshSeq !== menuMetaRefreshSeqRef.current;
 
-    if (!isStale()) {
-      setHomeSummariesLoading(true);
-    }
+      if (showLoading) {
+        setHomeSummariesLoading(true);
+      }
 
-    try {
-      const [dailyRes, weeklyRes, monthlyRes, selfLatestStatusRes, homeSummaryRes, todayQuestionRes] =
-        await Promise.allSettled([
-          fetchLatestReadyReport("daily", { ensure: true }),
-          fetchLatestReadyReport("weekly"),
-          fetchLatestReadyReport("monthly"),
-          apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus),
+      const applyLatestReport = (type, report) => {
+        if (isStale()) return;
+
+        setEntryMeta((prev) => {
+          const latestReports = {
+            ...(prev?.latestReports || {}),
+            [type]: report || null,
+          };
+
+          return {
+            ...prev,
+            emotionLatestDate: pickLatestIso([
+              resolveAnalysisReportUpdatedAt(latestReports.daily),
+              resolveAnalysisReportUpdatedAt(latestReports.weekly),
+              resolveAnalysisReportUpdatedAt(latestReports.monthly),
+            ]),
+            latestReports,
+          };
+        });
+      };
+
+      const primeLatestReportFromCache = async (type) => {
+        const cachedReport = await readCachedAnalysisLatestReport(type);
+        if (!cachedReport || isStale()) return;
+        applyLatestReport(type, cachedReport);
+      };
+
+      const refreshReportType = async (type) => {
+        try {
+          const latestReport = await fetchLatestReadyReport(type);
+          applyLatestReport(type, latestReport);
+        } catch (e) {
+          if (!isStale()) {
+            console.warn(`AnalysisScreen: failed to refresh ${type} latest report`, e);
+          }
+        }
+      };
+
+      const refreshSelfLatestStatus = async () => {
+        try {
+          const selfLatestStatus = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
+          if (isStale()) return;
+
+          setEntryMeta((prev) => ({
+            ...prev,
+            selfStructureLatestDate: pickLatestIso([
+              selfLatestStatus?.has_visible_content
+                ? resolveSelfStructureUpdatedAt(selfLatestStatus)
+                : null,
+            ]),
+          }));
+        } catch (e) {
+          if (!isStale()) {
+            console.warn("AnalysisScreen: failed to refresh self-structure latest status", e);
+          }
+        }
+      };
+
+      const refreshInputSummary = async () => {
+        const [homeSummaryRes, todayQuestionRes] = await Promise.allSettled([
           apiGet(ANALYSIS_WIRE.routes.homeSummary),
           getTodayQuestionHistory({ limit: 1, offset: 0 }),
         ]);
 
-      if (isStale()) return;
+        if (isStale()) return;
 
-      const dailyLatestReport = dailyRes.status === "fulfilled" ? dailyRes.value : null;
-      const weeklyLatestReport = weeklyRes.status === "fulfilled" ? weeklyRes.value : null;
-      const monthlyLatestReport = monthlyRes.status === "fulfilled" ? monthlyRes.value : null;
+        const homeSummary = homeSummaryRes.status === "fulfilled" ? homeSummaryRes.value || {} : {};
+        if (homeSummaryRes.status === "rejected") {
+          console.warn("AnalysisScreen: failed to refresh home summary", homeSummaryRes.reason);
+        }
+        const inputStatus = homeSummary?.input_status || {};
 
-      if (dailyRes.status === "rejected") {
-        console.warn("AnalysisScreen: failed to refresh daily latest report", dailyRes.reason);
+        const todayQuestionItems =
+          todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
+            ? todayQuestionRes.value.items
+            : [];
+        if (todayQuestionRes.status === "rejected") {
+          console.warn("AnalysisScreen: failed to refresh today question history", todayQuestionRes.reason);
+        }
+
+        const todayCount = Number(inputStatus?.today_count ?? 0);
+        const weekCount = Number(inputStatus?.week_count ?? 0);
+        const monthCount = Number(inputStatus?.month_count ?? 0);
+
+        setEntryMeta((prev) => ({
+          ...prev,
+          inputHistoryLatestDate: pickLatestIso([
+            inputStatus?.last_input_at,
+            resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
+          ]),
+          todayCount: Number.isFinite(todayCount) ? todayCount : 0,
+          weekCount: Number.isFinite(weekCount) ? weekCount : 0,
+          monthCount: Number.isFinite(monthCount) ? monthCount : 0,
+        }));
+      };
+
+      const reportTypes = ["daily", "weekly", "monthly"];
+
+      try {
+        if (showLoading && prioritizeVisibleReport) {
+          await primeLatestReportFromCache(INITIAL_VISIBLE_REPORT_TYPE);
+          if (isStale()) return;
+
+          await refreshReportType(INITIAL_VISIBLE_REPORT_TYPE);
+          if (isStale()) return;
+
+          await Promise.allSettled([
+            ...reportTypes
+              .filter((type) => type !== INITIAL_VISIBLE_REPORT_TYPE)
+              .map((type) => refreshReportType(type)),
+            refreshSelfLatestStatus(),
+            refreshInputSummary(),
+          ]);
+        } else {
+          await Promise.allSettled([
+            ...reportTypes.map((type) => refreshReportType(type)),
+            refreshSelfLatestStatus(),
+            refreshInputSummary(),
+          ]);
+        }
+      } finally {
+        if (!isStale() && showLoading) {
+          setHomeSummariesLoading(false);
+        }
       }
-      if (weeklyRes.status === "rejected") {
-        console.warn("AnalysisScreen: failed to refresh weekly latest report", weeklyRes.reason);
-      }
-      if (monthlyRes.status === "rejected") {
-        console.warn("AnalysisScreen: failed to refresh monthly latest report", monthlyRes.reason);
-      }
-
-      const selfLatestStatus =
-        selfLatestStatusRes.status === "fulfilled" && selfLatestStatusRes.value
-          ? selfLatestStatusRes.value
-          : null;
-      if (selfLatestStatusRes.status === "rejected") {
-        console.warn(
-          "AnalysisScreen: failed to refresh self-structure latest status",
-          selfLatestStatusRes.reason
-        );
-      }
-
-      const homeSummary = homeSummaryRes.status === "fulfilled" ? homeSummaryRes.value || {} : {};
-      if (homeSummaryRes.status === "rejected") {
-        console.warn("AnalysisScreen: failed to refresh home summary", homeSummaryRes.reason);
-      }
-      const inputStatus = homeSummary?.input_status || {};
-
-      const todayQuestionItems =
-        todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
-          ? todayQuestionRes.value.items
-          : [];
-      if (todayQuestionRes.status === "rejected") {
-        console.warn("AnalysisScreen: failed to refresh today question history", todayQuestionRes.reason);
-      }
-
-      const todayCount = Number(inputStatus?.today_count ?? 0);
-      const weekCount = Number(inputStatus?.week_count ?? 0);
-      const monthCount = Number(inputStatus?.month_count ?? 0);
-
-      setEntryMeta({
-        emotionLatestDate: pickLatestIso([
-          resolveAnalysisReportUpdatedAt(dailyLatestReport),
-          resolveAnalysisReportUpdatedAt(weeklyLatestReport),
-          resolveAnalysisReportUpdatedAt(monthlyLatestReport),
-        ]),
-        selfStructureLatestDate: pickLatestIso([
-          selfLatestStatus?.has_visible_content
-            ? resolveSelfStructureUpdatedAt(selfLatestStatus)
-            : null,
-        ]),
-        inputHistoryLatestDate: pickLatestIso([
-          inputStatus?.last_input_at,
-          resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
-        ]),
-        todayCount: Number.isFinite(todayCount) ? todayCount : 0,
-        weekCount: Number.isFinite(weekCount) ? weekCount : 0,
-        monthCount: Number.isFinite(monthCount) ? monthCount : 0,
-        latestReports: {
-          daily: dailyLatestReport,
-          weekly: weeklyLatestReport,
-          monthly: monthlyLatestReport,
-        },
-      });
-    } finally {
-      if (!isStale()) {
-        setHomeSummariesLoading(false);
-      }
-    }
-  }, [fetchLatestReadyReport]);
-
+    },
+    [fetchLatestReadyReport]
+  );
 
   const openReportHistory = (type, backRoute = ROUTE_EMOTION_ANALYSIS) => {
     setReportHistoryBackRoute(backRoute);
@@ -1017,8 +1103,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
 
       try {
         const cachedReport = entryMeta?.latestReports?.[normalizedType] || null;
-        const latestReport =
-          cachedReport || (await fetchLatestReadyReport(normalizedType, { ensure: true }));
+        const latestReport = cachedReport || (await fetchLatestReadyReport(normalizedType));
 
         if (!latestReport) {
           Alert.alert("最新レポート", `最新の${label}はまだありません。`);
@@ -1095,46 +1180,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     }
   }, [navigation]);
 
-  // Phase2: Analysisを開いたタイミングで、サーバ側の配布状態をオンデマンドで追いつかせる
-  // （端末タイマーによる自動生成は停止し、MashOS主導へ移行）
-  // 下位タブの未読バッジ初回確定は App.js 側で行い、
-  // ここでは Analysis 画面内のサマリー更新だけを担当する。
-  const ensuredRef = useRef(false);
-  useEffect(() => {
-    if (ensuredRef.current) return;
-    ensuredRef.current = true;
-
-    (async () => {
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        const accessToken = sessionData?.session?.access_token ?? null;
-        if (!accessToken) return;
-
-        const res = await apiFetch(ANALYSIS_REPORTS_ENSURE_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            types: ["daily", "weekly", "monthly"],
-            force: false,
-          }),
-        });
-
-        if (!res.ok) {
-          const t = await res.text();
-          console.warn("AnalysisScreen: analysis reports ensure failed", res.status, t);
-        }
-      } catch (e) {
-        console.warn("AnalysisScreen: analysis reports ensure failed", e);
-      } finally {
-        // 生成/配布の追いつかせ後に、Analysis 画面内サマリーのみ更新
-        refreshHomeSummaries();
-      }
-    })();
-  }, [refreshHomeSummaries]);
-
   // Analysis 内の入口画面に戻ったタイミングでも更新
   useEffect(() => {
     const shouldRefreshMenuState =
@@ -1143,10 +1188,23 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       route === ROUTE_SELF_STRUCTURE ||
       route === ROUTE_INPUT_HISTORY;
 
-    if (shouldRefreshMenuState) {
-      refreshUnreadBadges();
-      refreshHomeSummaries();
-    }
+    if (!shouldRefreshMenuState) return undefined;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        await refreshHomeSummaries({ prioritizeVisibleReport: route === ROUTE_HOME });
+        if (!cancelled) {
+          await refreshUnreadBadges();
+        }
+      } catch (e) {
+        console.warn("AnalysisScreen: failed to refresh menu state", e);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
   const emotionAnalysisUnread = unreadResolved
@@ -1396,7 +1454,7 @@ function AnalysisHome({
         {/* パネルヘッダー：Analysis */}
         <View style={styles.panelHeader}>
           <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>Analysis</Text>
+            <Text style={styles.panelTitle}>分析</Text>
             <CocolonPressable
               style={styles.guideButton}
               onPress={onOpenGuide}

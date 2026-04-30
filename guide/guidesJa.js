@@ -39,7 +39,7 @@ export function normalizeGuideScreenId(raw) {
 
 export const guidesJa = Object.freeze({
   home: {
-    title: "Home",
+    title: "ホーム",
     summary:
       "今の感情や気づきを記録する入り口です。感情の流れを残し、自分をあとから振り返りやすくします。",
     relatedTerms: [
@@ -84,7 +84,7 @@ export const guidesJa = Object.freeze({
     ],
   },
   analysis: {
-    title: "Analysis",
+    title: "分析",
     summary:
       "入力した内容やレポートを振り返る場所です。過去の記録を見直し、自分の傾向を確認できます。",
     relatedTerms: [
@@ -128,7 +128,7 @@ export const guidesJa = Object.freeze({
     ],
   },
   piece: {
-    title: "Piece",
+    title: "ピース",
     summary:
       "Pieceを読んだり反応を見たりする場所です。公開された断片を通じて、自分や他者への理解を深めます。",
     relatedTerms: [
@@ -216,7 +216,7 @@ export const guidesJa = Object.freeze({
     ],
   },
   ranking: {
-    title: "Ranking",
+    title: "ランキング",
     summary:
       "ランキングを閲覧する画面です。上位ユーザーやアクティブなユーザーを見つけることができます。",
     relatedTerms: [],

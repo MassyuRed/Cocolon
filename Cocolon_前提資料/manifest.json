@@ -1,27 +1,46 @@
 {
-  "revision_date": "2026-04-28",
+  "revision_date": "2026-04-30",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
   "source_mode": "local_snapshot",
   "file_counts": {
-    "Cocolon": 116,
+    "Cocolon": 117,
     "mashos-api": 306
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 422,
-    "national_system_body_includes": 422,
+    "overall_structure_body_includes": 423,
+    "national_system_body_includes": 423,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル422件、02には国家システム判断対象のcurrent全ファイル422件を本文で記載する。国家システム直接対象外のsupport/sample/training系も、除外判断が見えるよう02本文内に分類付きで記載する。DB情報は08を正本として維持する。",
-    "current_snapshot_total_files": 422,
-    "overall_structure_body_includes_current_snapshot_files": 422,
-    "national_system_body_lists_current_snapshot_files_with_relation": 422,
+    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル423件、02には国家システム判断対象のcurrent全ファイル423件を本文で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。DB情報は08、名称混在保管は03/09を正本として維持する。",
+    "current_snapshot_total_files": 423,
+    "overall_structure_body_includes_current_snapshot_files": 423,
+    "national_system_body_lists_current_snapshot_files_with_relation": 423,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
-    "coverage_principle_2026_04_28": "Cocolon_2(27).zip / mashos-api_5(7).zip のlatest 422 filesを01/02本文へ差分追記。旧408件本文は履歴として保持し、新規14件を本文内に追加した。"
+    "coverage_principle_2026_04_28": "Cocolon_2(27).zip / mashos-api_5(7).zip のlatest 422 filesを01/02本文へ差分追記。旧408件本文は履歴として保持し、新規14件を本文内に追加した。",
+    "latest_source_basis_2026_04_29": {
+      "premise": "Cocolon_前提資料(22).zip",
+      "Cocolon": "Cocolon(114).zip",
+      "mashos-api": "mashos-api(37).zip",
+      "Cocolon_files": 116,
+      "mashos_api_files": 306,
+      "total_files": 422
+    },
+    "naming_mixing_policy_2026_04_29": "名称混在は無理に一括renameせず、アプリ稼働・public API・write path・account delete・access policyへ影響する場合だけ修正対象にする。稼働上問題ない旧名称は前提資料で保管する。Piece関係は今回後回し。",
+    "latest_source_basis_2026_04_30": {
+      "premise": "Cocolon_前提資料(24).zip",
+      "Cocolon": "Cocolon(115).zip",
+      "mashos-api": "mashos-api(38).zip",
+      "Cocolon_files": 117,
+      "mashos_api_files": 306,
+      "total_files": 423
+    },
+    "premise_role_2026_04_30": "前提資料は、華恋の作業精度を上げるための作業用地図。タスク記録ではなく、Cocolonの全体構造、国家システム、DB等その他構造、名称混在境界を保管する。",
+    "naming_mixing_policy_2026_04_30": "名称混在は無理に一括renameせず、visible名・route名・runtime owner・DB physical nameを分けて読む。資料で保管できるものは保管し、稼働・contract・write path・account delete・access policyに影響する場合だけ修正対象にする。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -38,15 +57,15 @@
   "docs": [
     {
       "path": "00_華恋用_READ_FIRST.md",
-      "purpose": "最初に読む運用前提"
+      "purpose": "最初に読む作業用地図。前提資料の在り方と最新基準面を固定する"
     },
     {
       "path": "01_Cocolon_全体構造資料.md",
-      "purpose": "全体構造総論と読み順"
+      "purpose": "全体構造総論とsystem単位の読み方"
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "purpose": "App root / Home / startup / immediate reply"
+      "purpose": "App root / AppRuntimeContext / Home / startup / immediate reply"
     },
     {
       "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
@@ -54,47 +73,51 @@
     },
     {
       "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "purpose": "Account / Subscription / ProfileCreate / support / rule / test"
+      "purpose": "Account / Subscription / ProfileCreate / settings / support / rule / test"
     },
     {
       "path": "02_Cocolon_国家システム資料.md",
-      "purpose": "国家システム総論"
+      "purpose": "国家システム総論と/app/bootstrap runtime flow"
     },
     {
       "path": "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "purpose": "Input / Save / Dispatch"
+      "purpose": "Input / Save / Dispatch / Home runtime flag"
     },
     {
       "path": "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
-      "purpose": "Snapshot / Worker / Publish / Read"
+      "purpose": "Snapshot / Worker / Publish / Read / App runtime boundary"
     },
     {
       "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "purpose": "Contract / Boundary / Test"
+      "purpose": "Contract / Boundary / Test / AppRuntimeContext"
     },
     {
       "path": "03_Cocolon_命名体系.md",
-      "purpose": "visible 名と canonical 名の写像"
+      "purpose": "visible名・route名・runtime owner・DB物理名の写像"
     },
     {
-      "path": "04_Cocolon_変更テーマ別チェックリスト.md",
-      "purpose": "変更テーマからの読む順逆引き"
+      "path": "04_Cocolon_変更テーマ別チェックリスト",
+      "purpose": "変更テーマから読むべき構造資料を逆引きする"
     },
     {
-      "path": "05_Cocolon_ルールファイル索引.md",
-      "purpose": "policy / guard / contract file 索引"
+      "path": "05_Cocolon_ルールファイル索引",
+      "purpose": "policy / guard / contract file索引"
     },
     {
       "path": "06_Cocolon_ファイル名変更保留台帳.md",
-      "purpose": "rename backlog"
+      "purpose": "ファイル名・旧名称・legacy façadeを誤renameしないための保管台帳"
     },
     {
-      "path": "07_Cocolon_最新スナップショット差分.md",
-      "purpose": "current snapshot の要点と除外理由"
+      "path": "07_Cocolon_最新スナップショット差分",
+      "purpose": "current snapshotの構造差分"
     },
     {
       "path": "08_Cocolon_DB_rename_boundary.md",
-      "purpose": "DB physical rename / bridge view / retire判断の境界資料"
+      "purpose": "DB physical name / bridge view / write path / rename境界のDB情報"
+    },
+    {
+      "path": "09_Cocolon_名称混在保管と構造境界_2026-04-30.md",
+      "purpose": "名称混在を作業用地図として保管する構造境界資料"
     }
   ],
   "excluded_files": [
@@ -800,5 +823,27 @@
       "mymodel/qna active legacy named public contract retire",
       "staging / production load test execution"
     ]
+  },
+  "source_snapshot_2026_04_30": {
+    "premise": "Cocolon_前提資料(24).zip",
+    "Cocolon": "Cocolon(115).zip",
+    "mashos-api": "mashos-api(38).zip",
+    "Cocolon_files": 117,
+    "mashos_api_files": 306,
+    "total_files": 423,
+    "Cocolon_added_files": [
+      "Cocolon/AppRuntimeContext.js"
+    ],
+    "Cocolon_changed_files": [
+      "Cocolon/App.js",
+      "Cocolon/features/home/useHomeState.js",
+      "Cocolon/lib/accountLocalCleanup.js",
+      "Cocolon/lib/pushToken.js",
+      "Cocolon/screens/SettingsOtherScreen.js",
+      "Cocolon/screens/SubscriptionSelectScreen.js",
+      "Cocolon/screens/TodayQuestionHistoryScreen.js"
+    ],
+    "mashos_api_changed_files": [],
+    "doc_role": "作業用地図。タスク記録ではない。"
   }
 }

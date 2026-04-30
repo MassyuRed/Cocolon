@@ -203,7 +203,7 @@ export default function RankingTopScreen({ navigation }) {
         {/* Header */}
         <View style={styles.panelHeader}>
           <View style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>Ranking</Text>
+            <Text style={styles.panelTitle}>ランキング</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
               onPress={handlePressGuide}

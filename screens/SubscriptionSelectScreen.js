@@ -16,6 +16,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { useTheme } from "../theme/ThemeContext";
 import { useSubscription } from "../SubscriptionContext";
+import { useAppRuntime } from "../AppRuntimeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import {
@@ -362,6 +363,8 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
+  const { isFeatureEnabled } = useAppRuntime();
+  const runtimeSubscriptionSalesEnabled = isFeatureEnabled("subscription_sales_enabled", true);
 
   const {
     tier: ctxTier,
@@ -485,6 +488,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const salesEnabled = bootstrap?.sales_enabled !== false;
   const clientSalesEnabled = bootstrap?.client_sales_enabled !== false;
   const clientSalesDisabledReason = asStringOrNull(bootstrap?.client_sales_disabled_reason);
+  const effectiveSalesEnabled = runtimeSubscriptionSalesEnabled && salesEnabled && clientSalesEnabled;
+  const salesDisabledReason = !runtimeSubscriptionSalesEnabled
+    ? "現在はサブスクリプションのお申し込み受付を一時的に停止しています。"
+    : clientSalesDisabledReason || "現在はサブスクリプション販売を停止しています。";
   const reviewNotice = asStringOrNull(policy?.review_notice);
 
   const actionBusy = !!purchaseBusyPlan || restoreLoading;
@@ -617,11 +624,12 @@ export default function SubscriptionSelectScreen({ navigation }) {
       return;
     }
 
-    if (!salesEnabled || !clientSalesEnabled || plusPlan?.purchasable === false) {
+    if (!effectiveSalesEnabled || plusPlan?.purchasable === false) {
       Alert.alert(
         "現在受付を停止しています",
-        clientSalesDisabledReason ||
-          "ただいまPlusプランのお申し込み受付を停止しています。時間をおいてご確認ください。"
+        plusPlan?.purchasable === false
+          ? "ただいまPlusプランのお申し込み受付を停止しています。時間をおいてご確認ください。"
+          : salesDisabledReason
       );
       return;
     }
@@ -704,15 +712,14 @@ export default function SubscriptionSelectScreen({ navigation }) {
       setPurchaseBusyPlan("");
     }
   }, [
-    clientSalesDisabledReason,
-    clientSalesEnabled,
+    effectiveSalesEnabled,
     iapReady,
     loading,
     plusPlan,
     plusPurchaseSku,
     purchaseBusyPlan,
     refreshScreenState,
-    salesEnabled,
+    salesDisabledReason,
     tier,
   ]);
 
@@ -735,11 +742,12 @@ export default function SubscriptionSelectScreen({ navigation }) {
       return;
     }
 
-    if (!salesEnabled || !clientSalesEnabled || premiumPlan?.purchasable === false) {
+    if (!effectiveSalesEnabled || premiumPlan?.purchasable === false) {
       Alert.alert(
         "現在受付を停止しています",
-        clientSalesDisabledReason ||
-          "ただいまPremiumプランのお申し込み受付を停止しています。時間をおいてご確認ください。"
+        premiumPlan?.purchasable === false
+          ? "ただいまPremiumプランのお申し込み受付を停止しています。時間をおいてご確認ください。"
+          : salesDisabledReason
       );
       return;
     }
@@ -807,15 +815,14 @@ export default function SubscriptionSelectScreen({ navigation }) {
       setPurchaseBusyPlan("");
     }
   }, [
-    clientSalesDisabledReason,
-    clientSalesEnabled,
+    effectiveSalesEnabled,
     iapReady,
     loading,
     premiumPlan,
     premiumPurchaseSku,
     purchaseBusyPlan,
     refreshScreenState,
-    salesEnabled,
+    salesDisabledReason,
     tier,
   ]);
 
@@ -872,9 +879,9 @@ export default function SubscriptionSelectScreen({ navigation }) {
               </View>
             ) : null}
             {reviewNotice ? <Text style={styles.planNote}>{reviewNotice}</Text> : null}
-            {!salesEnabled || !clientSalesEnabled ? (
+            {!effectiveSalesEnabled ? (
               <Text style={styles.planNoteError}>
-                {clientSalesDisabledReason || "現在はサブスクリプション販売を停止しています。"}
+                {salesDisabledReason}
               </Text>
             ) : null}
 
@@ -896,11 +903,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
                   restoreLoading ||
                   purchaseBusyPlan === "premium" ||
                   plusPlan?.purchasable === false ||
-                  !salesEnabled ||
-                  !clientSalesEnabled
+                  !effectiveSalesEnabled
                 }
                 ctaLoading={purchaseBusyPlan === "plus"}
-                ctaTextOverride={asStringOrNull(plusPlan?.cta_label)}
+                ctaTextOverride={!effectiveSalesEnabled ? "受付停止中" : asStringOrNull(plusPlan?.cta_label)}
                 styles={styles}
                 colors={colors}
               />
@@ -920,11 +926,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
                   restoreLoading ||
                   purchaseBusyPlan === "plus" ||
                   premiumPlan?.purchasable === false ||
-                  !salesEnabled ||
-                  !clientSalesEnabled
+                  !effectiveSalesEnabled
                 }
                 ctaLoading={purchaseBusyPlan === "premium"}
-                ctaTextOverride={asStringOrNull(premiumPlan?.cta_label) || "このプランを選ぶ"}
+                ctaTextOverride={!effectiveSalesEnabled ? "受付停止中" : asStringOrNull(premiumPlan?.cta_label) || "このプランを選ぶ"}
                 styles={styles}
                 colors={colors}
               />

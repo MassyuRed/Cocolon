@@ -18,6 +18,7 @@ import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
+import { useAppRuntime } from "../AppRuntimeContext";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 import CocolonButton from "../components/CocolonButton";
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -32,6 +33,8 @@ const HISTORY_PAGE_LIMIT = 60;
 export default function TodayQuestionHistoryScreen({ onBack }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const { isFeatureEnabled } = useAppRuntime();
+  const todayQuestionHistoryEnabled = isFeatureEnabled("today_question_history_enabled", true);
   const {
     isPaid,
     tier: subscriptionTier,
@@ -63,6 +66,15 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+    if (!todayQuestionHistoryEnabled) {
+      setItems([]);
+      setHasMore(false);
+      setNextOffset(null);
+      setLoading(false);
+      setLoadingMore(false);
+      return;
+    }
+
     if (append) setLoadingMore(true);
     else setLoading(true);
     try {
@@ -105,7 +117,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
       if (append) setLoadingMore(false);
       else setLoading(false);
     }
-  }, []);
+  }, [todayQuestionHistoryEnabled]);
 
   useEffect(() => {
     load({ append: false, offset: 0 });
@@ -212,6 +224,31 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
     if (loading || loadingMore || !hasMore || nextOffset == null) return;
     await load({ append: true, offset: nextOffset });
   }, [loading, loadingMore, hasMore, nextOffset, load]);
+
+  if (!todayQuestionHistoryEnabled) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar
+          barStyle={isDark ? "light-content" : "dark-content"}
+          backgroundColor={colors.BG_SILVER}
+        />
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <CocolonBackButton
+              onPress={onBack}
+              style={styles.backButton}
+              accessibilityLabel="Analysisに戻る"
+            />
+            <Text style={styles.headerTitle}>今日の問い履歴</Text>
+            <View style={styles.headerSpacer} />
+          </View>
+          <Text style={styles.helpText}>
+            現在、今日の問い履歴は一時的に利用できません。
+          </Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>

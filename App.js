@@ -45,13 +45,14 @@ import { ThemeProvider, useTheme } from "./theme/ThemeContext";
 import { UnreadProvider, useUnread } from "./UnreadContext";
 import { SubscriptionProvider, useSubscription } from "./SubscriptionContext";
 import { TutorialProvider, useTutorial } from "./TutorialContext";
+import { AppRuntimeProvider, useAppRuntime } from "./AppRuntimeContext";
 
 import { startIapPurchaseObserver, stopIapPurchaseObserver } from "./lib/iap/iapService";
 import { startPushTokenSync, syncPushTokenOnce } from "./lib/pushToken";
 import { supabase } from "./lib/supabase";
 import { ANALYSIS_WIRE, PIECE_WIRE, SELF_STRUCTURE_WIRE, buildPublicProfileByShareCodePath, buildSelfStructureReportHistoryPath, deleteWireSectionKeys, readWireSectionObject } from "./lib/compat/legacyWireContracts";
 import { getCurrentUserId } from "./lib/user";
-import { apiGet, apiPost, apiFetch } from "./lib/apiClient";
+import { API_BASE_URL, apiGet, apiPost, apiFetch } from "./lib/apiClient";
 import { getNexusPiecesAsQnaList } from "./lib/nexusApi";
 import { BottomTabUnreadBadge } from "./components/UnreadBadge";
 
@@ -94,8 +95,7 @@ const ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLa
 const ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
 const ANALYSIS_REPORT_READ_STATUS_CHUNK_SIZE = 60;
 
-const SHARE_PROFILE_API_BASE_URL =
-  (process.env[["EXPO_PUBLIC_", ["MY", "MODEL_API_URL"].join("")].join("")] || "https://mashos-api.onrender.com").replace(/\/+$/, "");
+const SHARE_PROFILE_API_BASE_URL = API_BASE_URL;
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 const LEGACY_ANALYSIS_ROUTE_NAME = ["My", "Web"].join("");
 
@@ -819,7 +819,6 @@ function MainTabs() {
     }
   }, []);
 
-  const COCOLON_API_BASE_URL = (process.env[["EXPO_PUBLIC_", ["MY", "MODEL_API_URL"].join("")].join("")] || "https://mashos-api.onrender.com").replace(/\/+$/, "");
   const __lastActivityLoginPingAtRef = React.useRef(0);
   const __lastUnreadPrefetchAtRef = React.useRef(0);
   const screenPrefetchTimerRef = React.useRef(null);
@@ -833,7 +832,7 @@ function MainTabs() {
       const { data: sessionData } = await supabase.auth.getSession();
       const accessToken = sessionData?.session?.access_token ?? null;
       if (!accessToken) return;
-      const url = `${COCOLON_API_BASE_URL}/activity/login`;
+      const url = `${API_BASE_URL}/activity/login`;
       const res = await apiFetch(url, {
         method: "POST",
         auth: false,
@@ -1105,8 +1104,6 @@ function MainTabs() {
       const warmupSeq = ++analysisStartupWarmupSeqRef.current;
       const isWarmupStale = () => warmupSeq !== analysisStartupWarmupSeqRef.current;
       const applyIfCurrent = () => !isWarmupStale();
-      const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
       if (!force) {
         try {
           await fetchAndApplyStartupSnapshot({
@@ -1122,27 +1119,10 @@ function MainTabs() {
 
       if (isWarmupStale()) return;
 
-      try {
-        await apiPost(ANALYSIS_WIRE.routes.reportsEnsure, {
-          types: ["weekly", "monthly"],
-          force: false,
-        });
-      } catch (e) {
-        console.warn("MainTabs: failed to warm Analysis ensure on startup", e);
-      }
-
-      const retryDelays = [0, 1200, 2500];
-      for (let index = 0; index < retryDelays.length; index += 1) {
-        const delayMs = retryDelays[index];
-        if (delayMs > 0) {
-          await wait(delayMs);
-        }
-        if (isWarmupStale()) return;
-        await revalidateAnalysisUnreadFromStartup({
-          source: `${sourcePrefix}_after_ensure_${index + 1}`,
-          applyIf: applyIfCurrent,
-        });
-      }
+      await revalidateAnalysisUnreadFromStartup({
+        source: `${sourcePrefix}_read_only`,
+        applyIf: applyIfCurrent,
+      });
 
       if (isWarmupStale()) return;
 
@@ -1238,7 +1218,7 @@ function MainTabs() {
         const fresh = getPrefetchEntryFresh?.("Piece", "recoUsers", PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
         if (!isFresh) {
-          const url = `${COCOLON_API_BASE_URL}${PIECE_WIRE.routes.recommendUsers}?limit=20`;
+          const url = `${API_BASE_URL}${PIECE_WIRE.routes.recommendUsers}?limit=20`;
           const res = await apiFetch(url, { method: "GET", auth: false, headers });
           const json = await res.json().catch(() => null);
           if (res.ok) {
@@ -1272,7 +1252,7 @@ function MainTabs() {
         }
       } catch {}
     } catch {}
-  }, [COCOLON_API_BASE_URL, getPrefetchEntryFresh, setPrefetch]);
+  }, [getPrefetchEntryFresh, setPrefetch]);
 
   const runAllScreenPrefetch = React.useCallback(async () => {
     try {
@@ -1574,11 +1554,11 @@ function MainTabs() {
           tabBarLabel: ({ focused, color }) => {
             let label;
             switch (route.name) {
-              case "Input": label = "Home"; break;
-              case "Analysis": label = "Analysis"; break;
-              case "Piece": label = "Piece"; break;
-              case "RankingTop": label = "Ranking"; break;
-              case "Settings": label = "Settings"; break;
+              case "Input": label = "ホーム"; break;
+              case "Analysis": label = "分析"; break;
+              case "Piece": label = "ピース"; break;
+              case "RankingTop": label = "ランキング"; break;
+              case "Settings": label = "設定"; break;
               default: label = route.name;
             }
             const showUnreadBadge = showTabUnreadBadge(route.name);
@@ -1735,14 +1715,6 @@ function RootNavigator() {
   const { subscriptionBootstrapLoaded } = useSubscription();
 
   useEffect(() => {
-    try {
-      if (typeof __DEV__ !== "undefined" && __DEV__ && session?.access_token) {
-        console.log("[DEV] Supabase access_token:", session.access_token);
-      }
-    } catch {}
-  }, [session?.access_token]);
-
-  useEffect(() => {
     if (!session || recoveryMode || !subscriptionBootstrapLoaded) {
       stopIapPurchaseObserver();
       return;
@@ -1796,26 +1768,137 @@ function RootNavigator() {
   return <MainTabs />;
 }
 
-export default function App() {
-  const bootstrapAlertShownRef = useRef(false);
+function AppRuntimeBlockingScreen({ runtime, onRetry, retrying }) {
+  const { colors } = useTheme();
+  const minimumSupportedVersion = String(runtime?.minimumSupportedVersion || "").trim();
+
+  return (
+    <SafeAreaView
+      edges={["top", "left", "right", "bottom"]}
+      style={{ flex: 1, backgroundColor: colors.BG_SILVER }}
+    >
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingHorizontal: 28,
+        }}
+      >
+        <Text
+          style={{
+            color: colors.TITLE_GOLD,
+            fontSize: 22,
+            fontWeight: "800",
+            textAlign: "center",
+            marginBottom: 12,
+          }}
+        >
+          アプリの更新が必要です
+        </Text>
+        <Text
+          style={{
+            color: colors.TEXT_ON_LIGHT,
+            fontSize: 14,
+            lineHeight: 22,
+            textAlign: "center",
+            marginBottom: 20,
+          }}
+        >
+          {minimumSupportedVersion
+            ? `現在のバージョンでは利用できません。最新バージョンへ更新してから、もう一度お試しください。\n必要バージョン: ${minimumSupportedVersion} 以上`
+            : "現在のバージョンでは利用できません。最新バージョンへ更新してから、もう一度お試しください。"}
+        </Text>
+        <TouchableOpacity
+          onPress={onRetry}
+          disabled={retrying}
+          style={{
+            minWidth: 160,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 14,
+            paddingVertical: 12,
+            paddingHorizontal: 18,
+            backgroundColor: colors.TITLE_GOLD,
+            opacity: retrying ? 0.65 : 1,
+          }}
+          accessibilityLabel="アプリの利用可否を再確認する"
+        >
+          {retrying ? (
+            <ActivityIndicator size="small" color={colors.PANEL_BG} />
+          ) : (
+            <Text style={{ color: colors.PANEL_BG, fontSize: 14, fontWeight: "800" }}>
+              もう一度確認する
+            </Text>
+          )}
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+function AppRuntimeBootstrapGate({ children }) {
+  const { runtime, refreshAppRuntime } = useAppRuntime();
+  const maintenanceAlertShownRef = useRef(null);
+  const recommendedAlertShownRef = useRef(null);
+
+  const runBootstrapCheck = React.useCallback(async () => {
+    try {
+      const nextRuntime = await refreshAppRuntime();
+      const maintenanceMessage = String(nextRuntime?.maintenanceMessage || "").trim();
+      if (maintenanceMessage && maintenanceAlertShownRef.current !== maintenanceMessage) {
+        maintenanceAlertShownRef.current = maintenanceMessage;
+        Alert.alert("お知らせ", maintenanceMessage);
+      }
+
+      const recommendedVersion = String(nextRuntime?.recommendedVersion || "").trim();
+      if (
+        recommendedVersion &&
+        nextRuntime?.versionStatus?.recommendedOutdated &&
+        recommendedAlertShownRef.current !== recommendedVersion
+      ) {
+        recommendedAlertShownRef.current = recommendedVersion;
+        Alert.alert(
+          "アプリ更新のお知らせ",
+          `新しいバージョンがあります。可能であれば更新してからご利用ください。\n推奨バージョン: ${recommendedVersion} 以上`
+        );
+      }
+    } catch (e) {
+      console.log("[bootstrap] fetch failed:", e?.message || e);
+    }
+  }, [refreshAppRuntime]);
 
   useEffect(() => {
     let alive = true;
     (async () => {
-      try {
-        const json = await apiGet("/app/bootstrap", { auth: false });
-        const message = String(json?.maintenance_message || "").trim();
-        if (alive && message && !bootstrapAlertShownRef.current) {
-          bootstrapAlertShownRef.current = true;
-          Alert.alert("お知らせ", message);
-        }
-      } catch (e) {
-        console.log("[bootstrap] fetch failed:", e?.message || e);
-      }
+      if (!alive) return;
+      await runBootstrapCheck();
     })();
     return () => { alive = false; };
-  }, []);
+  }, [runBootstrapCheck]);
 
+  if (!runtime?.loaded && runtime?.loading) {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (runtime?.versionStatus?.minimumBlocked) {
+    return (
+      <AppRuntimeBlockingScreen
+        runtime={runtime}
+        onRetry={runBootstrapCheck}
+        retrying={runtime?.loading}
+      />
+    );
+  }
+
+  return children;
+}
+
+export default function App() {
   useEffect(() => {
     const unsubscribeOpened = messaging().onNotificationOpenedApp((remoteMessage) => {
       requestOpenRouteFromNotification(remoteMessage);
@@ -1837,23 +1920,27 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <AuthProvider>
-          <SubscriptionProvider>
-            <TutorialProvider>
-              <UnreadProvider>
-                <NavigationContainer
-                  ref={navigationRef}
-                  linking={appLinking}
-                  onReady={() => {
-                    tryOpenRouteIfPending();
-                  }}
-                >
-                  <RootNavigator />
-                </NavigationContainer>
-              </UnreadProvider>
-            </TutorialProvider>
-          </SubscriptionProvider>
-        </AuthProvider>
+        <AppRuntimeProvider>
+          <AuthProvider>
+            <SubscriptionProvider>
+              <TutorialProvider>
+                <UnreadProvider>
+                  <AppRuntimeBootstrapGate>
+                    <NavigationContainer
+                      ref={navigationRef}
+                      linking={appLinking}
+                      onReady={() => {
+                        tryOpenRouteIfPending();
+                      }}
+                    >
+                      <RootNavigator />
+                    </NavigationContainer>
+                  </AppRuntimeBootstrapGate>
+                </UnreadProvider>
+              </TutorialProvider>
+            </SubscriptionProvider>
+          </AuthProvider>
+        </AppRuntimeProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

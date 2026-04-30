@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -35,9 +35,11 @@ revision_date: "2026-04-28"
   - `Cocolon/features/home/useHomeActions.js` — import
   - `Cocolon/screens/InputScreen.js` — import
 - 下流:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/lib/api/home/homeStateApi.js` — import
   - `Cocolon/lib/api/home/todayQuestionApi.js` — import
 - 落とすと漏れる関連ファイル:
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/features/home/useHomeActions.js`
   - `Cocolon/lib/api/home/homeStateApi.js`
   - `Cocolon/lib/api/home/todayQuestionApi.js`

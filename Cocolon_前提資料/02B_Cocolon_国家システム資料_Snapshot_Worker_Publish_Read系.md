@@ -1,6 +1,6 @@
 ---
 title: "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 ---
 
 # 02B. Snapshot / Worker / Publish / Read系
@@ -17,6 +17,7 @@ revision_date: "2026-04-28"
 - 上流:
   - `Cocolon/index.js` — import
 - 下流:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/AuthContext.js` — import
   - `Cocolon/AuthScreen.js` — import
   - `Cocolon/SubscriptionContext.js` — import
@@ -66,6 +67,7 @@ revision_date: "2026-04-28"
   - `mashos-api/ai/services/ai_inference/api_myprofile.py` — endpoint /myprofile/latest/status
   - `mashos-api/ai/services/ai_inference/api_myweb_reports.py` — endpoint /myweb/reports/ensure
 - 落とすと漏れる関連ファイル:
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/AuthContext.js`
   - `Cocolon/AuthScreen.js`
   - `Cocolon/SubscriptionContext.js`
@@ -112,6 +114,29 @@ revision_date: "2026-04-28"
   - `mashos-api/ai/services/ai_inference/api_mymodel_qna.py`
   - `mashos-api/ai/services/ai_inference/api_myprofile.py`
   - `mashos-api/ai/services/ai_inference/api_myweb_reports.py`
+
+### `Cocolon/AppRuntimeContext.js`
+- repo: `Cocolon`
+- 国家システム区分: `Read`
+- 現行状態: `active`
+- 国家システム上の役割: `/app/bootstrap` の runtime state をRN全体へ渡す Read/Startup boundary。version gate、maintenance message、feature flagsを保持する。
+- 上流:
+  - `Cocolon/App.js` — import / provider
+  - `Cocolon/features/home/useHomeState.js` — import
+  - `Cocolon/screens/SettingsOtherScreen.js` — import
+  - `Cocolon/screens/SubscriptionSelectScreen.js` — import
+  - `Cocolon/screens/TodayQuestionHistoryScreen.js` — import
+- 下流:
+  - `Cocolon/lib/apiClient.js` — import
+  - `mashos-api/ai/services/ai_inference/api_app_bootstrap.py` — endpoint /app/bootstrap
+- 落とすと漏れる関連ファイル:
+  - `Cocolon/App.js`
+  - `Cocolon/features/home/useHomeState.js`
+  - `Cocolon/lib/apiClient.js`
+  - `Cocolon/screens/SettingsOtherScreen.js`
+  - `Cocolon/screens/SubscriptionSelectScreen.js`
+  - `Cocolon/screens/TodayQuestionHistoryScreen.js`
+  - `mashos-api/ai/services/ai_inference/api_app_bootstrap.py`
 
 ### `Cocolon/AuthContext.js`
 - repo: `Cocolon`
@@ -788,6 +813,7 @@ revision_date: "2026-04-28"
   - `Cocolon/App.js` — import
   - `Cocolon/screens/MyWebScreen.js` — import
 - 下流:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/SubscriptionContext.js` — import
   - `Cocolon/components/CocolonBackButton.js` — import
   - `Cocolon/lib/apiClient.js` — import
@@ -798,6 +824,7 @@ revision_date: "2026-04-28"
   - `Cocolon/ui/uiTokens.js` — import
 - 落とすと漏れる関連ファイル:
   - `Cocolon/App.js`
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/SubscriptionContext.js`
   - `Cocolon/components/CocolonBackButton.js`
   - `Cocolon/lib/apiClient.js`
@@ -1584,7 +1611,7 @@ revision_date: "2026-04-28"
 - repo: `Cocolon`
 - 国家システム区分: `Read`
 - 現行状態: `shared`
-- 国家システム上の役割: lib/pushToken.js
+- 国家システム上の役割: Push token取得・account/profile同期 boundary。release buildではtoken prefix logを出さない。
 - 上流:
   - `Cocolon/App.js` — import
 - 下流:
@@ -1699,7 +1726,9 @@ revision_date: "2026-04-28"
 - 国家システム上の役割: RN screen module. Current system: account / subscription surface.
 - 上流:
   - `Cocolon/App.js` — import
+  - `Cocolon/AppRuntimeContext.js` — import
 - 下流:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/SubscriptionContext.js` — import
   - `Cocolon/components/CocolonBackButton.js` — import
   - `Cocolon/lib/iap/iapConfig.js` — import
@@ -1711,6 +1740,7 @@ revision_date: "2026-04-28"
   - `Cocolon/ui/uiTokens.js` — import
 - 落とすと漏れる関連ファイル:
   - `Cocolon/App.js`
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/SubscriptionContext.js`
   - `Cocolon/components/CocolonBackButton.js`
   - `Cocolon/lib/iap/iapConfig.js`

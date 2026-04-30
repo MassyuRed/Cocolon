@@ -4,6 +4,7 @@ import { Alert, View } from "react-native";
 import { useAuth } from "../AuthContext";
 import { useTutorial } from "../TutorialContext";
 import { useUnread } from "../UnreadContext";
+import { useAppRuntime } from "../AppRuntimeContext";
 import { apiPost } from "../lib/apiClient";
 import { clearDeletedAccountLocalState } from "../lib/accountLocalCleanup";
 import {
@@ -17,8 +18,10 @@ export default function SettingsOtherScreen({ navigation }) {
   const { signOut, authLoading, user } = useAuth();
   const { startTutorial } = useTutorial();
   const { setUnread } = useUnread();
+  const { isFeatureEnabled } = useAppRuntime();
   const [localProcessing, setLocalProcessing] = useState(false);
   const isBusy = authLoading || localProcessing;
+  const accountDeleteEnabled = isFeatureEnabled("account_delete_enabled", true);
 
   const openTutorialRestart = () => {
     if (isBusy) return;
@@ -95,8 +98,62 @@ export default function SettingsOtherScreen({ navigation }) {
     ]);
   };
 
+  const executeDeleteAccount = async () => {
+    if (!accountDeleteEnabled) {
+      Alert.alert(
+        "アカウント削除",
+        "現在、アカウント削除機能は一時的に利用できません。時間をおいて、もう一度お試しください。"
+      );
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) {
+      Alert.alert("アカウント削除", "ログイン情報が取得できませんでした。");
+      return;
+    }
+
+    setLocalProcessing(true);
+    try {
+      await apiPost("/account/delete", {});
+      await clearDeletedAccountLocalState(userId);
+      await signOut({ skipPushTokenClear: true, rethrow: true });
+    } catch (error) {
+      console.error("SettingsOtherScreen: delete account failed", error);
+      Alert.alert(
+        "アカウント削除に失敗しました",
+        "時間をおいて、もう一度お試しください。解決しない場合はサポートへお問い合わせください。"
+      );
+    } finally {
+      setLocalProcessing(false);
+    }
+  };
+
+  const openFinalDeleteAccountConfirm = () => {
+    Alert.alert(
+      "最終確認",
+      "本当にアカウントを削除しますか？この操作は取り消せません。",
+      [
+        { text: "キャンセル", style: "cancel" },
+        {
+          text: "削除する",
+          style: "destructive",
+          onPress: executeDeleteAccount,
+        },
+      ]
+    );
+  };
+
   const handleDeleteAccount = () => {
     if (isBusy) return;
+
+    if (!accountDeleteEnabled) {
+      Alert.alert(
+        "アカウント削除",
+        "現在、アカウント削除機能は一時的に利用できません。時間をおいて、もう一度お試しください。"
+      );
+      return;
+    }
 
     if (!user?.id) {
       Alert.alert("アカウント削除", "ログイン情報が取得できませんでした。");
@@ -109,24 +166,9 @@ export default function SettingsOtherScreen({ navigation }) {
       [
         { text: "キャンセル", style: "cancel" },
         {
-          text: "OK",
+          text: "次へ",
           style: "destructive",
-          onPress: async () => {
-            setLocalProcessing(true);
-            try {
-              await apiPost("/account/delete", {});
-              await clearDeletedAccountLocalState(user.id);
-              await signOut({ skipPushTokenClear: true, rethrow: true });
-            } catch (error) {
-              console.error("SettingsOtherScreen: delete account failed", error);
-              Alert.alert(
-                "アカウント削除に失敗しました",
-                String(error?.message || error)
-              );
-            } finally {
-              setLocalProcessing(false);
-            }
-          },
+          onPress: openFinalDeleteAccountConfirm,
         },
       ]
     );
@@ -158,7 +200,11 @@ export default function SettingsOtherScreen({ navigation }) {
       <View style={{ marginTop: 12 }}>
         <AnalysisMediumCard
           title="アカウント削除"
-          description="アカウント情報と全入力を削除します"
+          description={
+            accountDeleteEnabled
+              ? "アカウント情報と全入力を削除します"
+              : "現在、この機能は一時的に利用できません"
+          }
           onPress={handleDeleteAccount}
           accessibilityLabel="アカウント削除"
         />

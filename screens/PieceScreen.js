@@ -357,7 +357,7 @@ export default function PieceScreen({ route } = {}) {
         return {
           step: 12,
           mode: "info",
-          title: "Piece",
+          title: "ピース",
           message: "ここでは\nPieceを作り、閲覧できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(13),
@@ -953,7 +953,7 @@ export default function PieceScreen({ route } = {}) {
       >
         <View style={styles.panelHeader}>
           <View ref={pieceTitleRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>Piece</Text>
+            <Text style={styles.panelTitle}>ピース</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
               onPress={handlePressGuide}
@@ -1126,7 +1126,7 @@ export default function PieceScreen({ route } = {}) {
         <View ref={modalOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
           <View style={styles.modalCard}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>チュートリアル Piece</Text>
+              <Text style={styles.modalTitle}>チュートリアル ピース</Text>
               <Pressable
                 onPress={closeTutorialCreate}
                 style={styles.modalCloseBtn}

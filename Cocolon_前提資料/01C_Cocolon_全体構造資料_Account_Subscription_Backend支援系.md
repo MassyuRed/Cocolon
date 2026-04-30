@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -32,6 +32,7 @@ revision_date: "2026-04-28"
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/AuthContext.js`
   - `Cocolon/components/CocolonBackButton.js`
   - `Cocolon/components/CocolonPressable.js`
@@ -45,7 +46,7 @@ revision_date: "2026-04-28"
   - `mashos-api/ai/services/ai_inference/api_account_lifecycle.py`
   - `mashos-api/ai/services/ai_inference/api_myprofile.py`
 - 修正対象になりうる変更:
-  - account screen, ProfileCreate, settings, subscription UI
+  - account screen, ProfileCreate, settings, subscription UI, subscription_sales_enabled flag, account_delete_enabled flag
 
 ### `Cocolon/screens/ProfileCreateScreen.js`
 - repo: `Cocolon`
@@ -117,6 +118,7 @@ revision_date: "2026-04-28"
 - 現行状態: `active`
 - 役割: RN screen module. Current system: account / subscription surface.
 - 直接関係ファイル:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/AuthContext.js` — import
   - `Cocolon/TutorialContext.js` — import
   - `Cocolon/UnreadContext.js` — import
@@ -128,6 +130,7 @@ revision_date: "2026-04-28"
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/AuthContext.js`
   - `Cocolon/TutorialContext.js`
   - `Cocolon/UnreadContext.js`
@@ -136,7 +139,7 @@ revision_date: "2026-04-28"
   - `Cocolon/screens/MyWebMenuCommon.js`
   - `mashos-api/ai/services/ai_inference/api_account_lifecycle.py`
 - 修正対象になりうる変更:
-  - account screen, ProfileCreate, settings, subscription UI
+  - account screen, ProfileCreate, settings, subscription UI, account_delete_enabled flag
 
 ### `Cocolon/screens/SettingsScreen.js`
 - repo: `Cocolon`
@@ -161,6 +164,7 @@ revision_date: "2026-04-28"
 - 現行状態: `active`
 - 役割: RN screen module. Current system: account / subscription surface.
 - 直接関係ファイル:
+  - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/SubscriptionContext.js` — import
   - `Cocolon/components/CocolonBackButton.js` — import
   - `Cocolon/lib/iap/iapConfig.js` — import
@@ -174,6 +178,7 @@ revision_date: "2026-04-28"
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
+  - `Cocolon/AppRuntimeContext.js`
   - `Cocolon/SubscriptionContext.js`
   - `Cocolon/components/CocolonBackButton.js`
   - `Cocolon/lib/iap/iapConfig.js`
@@ -184,7 +189,7 @@ revision_date: "2026-04-28"
   - `Cocolon/ui/applyTypographyTokens.js`
   - `Cocolon/ui/uiTokens.js`
 - 修正対象になりうる変更:
-  - account screen, ProfileCreate, settings, subscription UI
+  - account screen, ProfileCreate, settings, subscription UI, subscription_sales_enabled flag
 
 
 ## C2. Account / subscription frontend boundary
@@ -193,7 +198,7 @@ revision_date: "2026-04-28"
 - repo: `Cocolon`
 - system: `account / subscription boundary helper`
 - 現行状態: `shared`
-- 役割: Frontend helper / boundary module. Current system: account / subscription boundary helper.
+- 役割: 退会後の端末内ユーザー別stateを削除するfrontend cleanup boundary。input draft / self-structure seen / analysis latest report cacheを扱う。
 - 直接関係ファイル:
   - `Cocolon/lib/inputDraftStorage.js` — import
 - このファイルを直接参照するファイル:
@@ -309,7 +314,7 @@ revision_date: "2026-04-28"
 - repo: `Cocolon`
 - system: `account / subscription boundary helper`
 - 現行状態: `shared`
-- 役割: lib/pushToken.js
+- 役割: 通知許可、APNs/FCM token取得、account/profile同期を扱うpush token boundary。token prefix logはdebug build限定。
 - 直接関係ファイル:
   - `Cocolon/lib/api/account/profileApi.js` — import
 - このファイルを直接参照するファイル:

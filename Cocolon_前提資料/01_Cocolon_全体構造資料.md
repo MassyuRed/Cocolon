@@ -1,18 +1,18 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 116
+  Cocolon: 117
   mashos-api: 306
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 422
-  included_files_cocolon: 116
+  included_files_total: 423
+  included_files_cocolon: 117
   included_files_mashos_api: 306
 ---
 
@@ -44,13 +44,31 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - 三大要素の構造混在は 2026-04-22 時点で完了判定へ入り、次段の主戦場は中核外の構造混在になった
 - Piece public read は `api_nexus.py` / `piece_public_read_service.py`、Analysis read は `report_artifact_read_service.py`、EmlisAI read adapter は `emlis_ai_readers.py` + summary readers へ固定した
 
+# 4-2. 2026-04-30 current app runtime map
+
+最新基準面は `Cocolon(115).zip` / `mashos-api(38).zip` です。  
+現在のcoverageは `Cocolon=117` / `mashos-api=306` / `total=423` です。
+
+この更新は残タスク表ではなく、アプリのファイル構成として読む。
+
+| file | system | 構造上の意味 |
+|---|---|---|
+| `Cocolon/AppRuntimeContext.js` | App runtime / feature flag boundary | `/app/bootstrap` を取得し、feature flag / version状態をアプリ全体へ渡す |
+| `Cocolon/App.js` | App root / navigation / bootstrap gate | `AppRuntimeProvider` と `AppRuntimeBootstrapGate` を持ち、`API_BASE_URL` を `lib/apiClient.js` から読む |
+| `Cocolon/screens/SettingsOtherScreen.js` | Account / Settings surface | `account_delete_enabled` を読み、退会導線を二段階確認にする |
+| `Cocolon/lib/accountLocalCleanup.js` | Account local cleanup boundary | 退会後にユーザー別analysis cacheも削除対象にする |
+| `Cocolon/features/home/useHomeState.js` | Home runtime hook | `today_question_enabled` を読み、Today Question表示・起動popup候補を制御する |
+| `Cocolon/screens/TodayQuestionHistoryScreen.js` | Today Question history surface | `today_question_history_enabled` を読み、履歴API呼び出しを制御する |
+| `Cocolon/screens/SubscriptionSelectScreen.js` | Subscription surface | `subscription_sales_enabled` を読み、新規購入導線だけを止められるようにする |
+| `Cocolon/lib/pushToken.js` | Push token sync boundary | token prefix logをdebug build限定にする |
+
 # 5. 章と対象件数
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の latest full coverage は後続の `2026-04-25 差分追記: current full coverage` を正本とする。
 
-- latest full coverage: `408 files`
-  - Cocolon: `116`
-  - mashos-api: `292`
+- latest full coverage: `423 files`
+  - Cocolon: `117`
+  - mashos-api: `306`
 
 # 6. 任意の 1 ファイルから辿る時の原則
 

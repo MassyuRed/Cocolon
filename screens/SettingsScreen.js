@@ -13,7 +13,7 @@ export default function SettingsScreen() {
     <AnalysisMenuScroll>
       <View style={styles.homeHeaderRow}>
         <View style={styles.homeTitleRow}>
-          <Text style={styles.homeTitle}>Settings</Text>
+          <Text style={styles.homeTitle}>設定</Text>
         </View>
       </View>
 

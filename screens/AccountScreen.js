@@ -998,7 +998,7 @@ const onRestorePurchases = async () => {
               fallbackRouteName="Home"
               style={styles.backButton}
             />
-            <Text style={styles.headerTitle}>Account</Text>
+            <Text style={styles.headerTitle}>アカウント</Text>
             <View style={{ width: 22 }} />
           </View>
 

@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -20,6 +20,29 @@ revision_date: "2026-04-28"
   - なし
 - 落とすと漏れる関連ファイル:
   - なし
+
+### `Cocolon/AppRuntimeContext.js`
+- repo: `Cocolon`
+- 国家システム区分: `Boundary`
+- 現行状態: `active`
+- 国家システム上の役割: `/app/bootstrap` の contractをRN側で受けるruntime boundary。feature flag / version guard / maintenance message の消費境界。
+- 上流:
+  - `Cocolon/App.js` — provider
+  - `Cocolon/features/home/useHomeState.js` — import
+  - `Cocolon/screens/SettingsOtherScreen.js` — import
+  - `Cocolon/screens/SubscriptionSelectScreen.js` — import
+  - `Cocolon/screens/TodayQuestionHistoryScreen.js` — import
+- 下流:
+  - `Cocolon/lib/apiClient.js` — import
+  - `mashos-api/ai/services/ai_inference/api_app_bootstrap.py` — endpoint /app/bootstrap
+- 落とすと漏れる関連ファイル:
+  - `Cocolon/App.js`
+  - `Cocolon/features/home/useHomeState.js`
+  - `Cocolon/lib/apiClient.js`
+  - `Cocolon/screens/SettingsOtherScreen.js`
+  - `Cocolon/screens/SubscriptionSelectScreen.js`
+  - `Cocolon/screens/TodayQuestionHistoryScreen.js`
+  - `mashos-api/ai/services/ai_inference/api_app_bootstrap.py`
 
 ### `Cocolon/AuthScreen.js`
 - repo: `Cocolon`
@@ -180,7 +203,7 @@ revision_date: "2026-04-28"
 - repo: `Cocolon`
 - 国家システム区分: `Boundary`
 - 現行状態: `shared`
-- 国家システム上の役割: Frontend helper / boundary module. Current system: account / subscription boundary helper.
+- 国家システム上の役割: 退会後local cleanup boundary。input draft / self-structure seen / analysis latest report cache を対象userId単位で削除する。
 - 上流:
   - `Cocolon/screens/SettingsOtherScreen.js` — import
 - 下流:

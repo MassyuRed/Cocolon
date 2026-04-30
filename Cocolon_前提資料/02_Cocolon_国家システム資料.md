@@ -1,18 +1,18 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-04-28"
+revision_date: "2026-04-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 116
+  Cocolon: 117
   mashos-api: 306
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 422
-  included_files_cocolon: 116
+  included_files_total: 423
+  included_files_cocolon: 117
   included_files_mashos_api: 306
 ---
 
@@ -32,13 +32,30 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 - `EmlisAI` は保存直後 immediate reply path を持つ
 - 2026-04-22 反映で、三大要素の中核 owner は comment / analysis / piece ごとに 1 本流へ固定した
 
+# 2-2. 2026-04-30 `/app/bootstrap` runtime flow
+
+最新アプリでは、`/app/bootstrap` は `AppRuntimeContext.js` が取得し、`App.js` がruntime gateとして使います。  
+これは国家システム上、`Read API / Startup -> RN display` の入口に置く構造です。
+
+`api_app_bootstrap.py` → `Cocolon/lib/apiClient.js` → `Cocolon/AppRuntimeContext.js` → `Cocolon/App.js` → 各screen / hook
+
+| flag / version | RN側の消費先 | 国家システム上の意味 |
+|---|---|---|
+| `minimum_supported_version` | `App.js` | 古いbuildを通常画面へ進ませない |
+| `recommended_version` | `App.js` | 非強制の更新案内を出す |
+| `maintenance_message` | `App.js` | 起動時のお知らせを出す |
+| `account_delete_enabled` | `SettingsOtherScreen.js` | 退会API実行を機能単位で止める |
+| `today_question_enabled` | `features/home/useHomeState.js` | Home上のToday Question表示を止める |
+| `today_question_history_enabled` | `TodayQuestionHistoryScreen.js` | 履歴API呼び出しを止める |
+| `subscription_sales_enabled` | `SubscriptionSelectScreen.js` | 新規購入導線だけを止める |
+
 # 3. 章と対象件数
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `408 files`
-  - Cocolon: `116`
-  - mashos-api: `292`
+- latest full coverage listed in body: `423 files`
+  - Cocolon: `117`
+  - mashos-api: `306`
 
 # 4. 読み方
 

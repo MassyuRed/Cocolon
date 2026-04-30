@@ -35,7 +35,7 @@ export default function AnalysisTopScreen({
     <AnalysisMenuScroll scrollRef={tutorialScrollRef} onScroll={onTutorialScroll}>
       <View style={styles.homeHeaderRow}>
         <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.homeTitleRow}>
-          <Text style={styles.homeTitle}>Analysis</Text>
+          <Text style={styles.homeTitle}>分析</Text>
           <View ref={tutorialRefs?.guideRef} collapsable={false}>
             <CocolonPressable
               style={styles.guideButton}

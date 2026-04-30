@@ -780,7 +780,7 @@ export default function NexusScreen({ navigation }) {
         return {
           step: 12,
           mode: "info",
-          title: "Piece",
+          title: "ピース",
           message:
             "ここでは、公開されたPieceや感情の動きをまとめて見られます。",
           nextLabel: "次へ",
@@ -790,7 +790,7 @@ export default function NexusScreen({ navigation }) {
         return {
           step: 13,
           mode: "info",
-          title: "Piece",
+          title: "ピース",
           message:
             "公開されたPieceはこの流れで確認します。まずは Piece タブを見る場所だと覚えてください。",
           nextLabel: "次へ",
@@ -1091,7 +1091,7 @@ export default function NexusScreen({ navigation }) {
       >
         <View style={styles.panelHeader}>
           <View ref={titleRef} collapsable={false}>
-            <Text style={styles.panelTitle}>Piece</Text>
+            <Text style={styles.panelTitle}>ピース</Text>
           </View>
           <CocolonPressable
             style={styles.refreshButton}

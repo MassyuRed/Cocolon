@@ -1,13 +1,21 @@
 ---
 doc_id: cocolon_db_rename_boundary
 title: "Cocolon DB情報 / DB rename境界資料"
-revision_date: "2026-04-27"
+revision_date: "2026-04-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot + SQL結果.zip"
-purpose: "DB physical rename / bridge view / retire判断のために、SQL結果から見えた実DB状態を固定する"
+purpose: "DB physical name / bridge view / write path / rename境界を、華恋が作業時に取り違えないためのDB情報として固定する"
 ---
+
+# 0. この資料の位置づけ
+
+この資料は、DB作業の残タスク表ではありません。  
+CocolonのDB physical name、current bridge view、write path、rename境界を華恋が読み間違えないためのDB情報資料です。
+
+DBに旧名称が残っていても、それだけでrename対象とは扱いません。  
+rename / drop / write switch を判断する時は、実DB状態、API write path、RLS、trigger、RPC、JSON payload、public contractを同時に見ます。
 
 # 1. 結論
 
@@ -850,3 +858,55 @@ Piece write は `q_instance_id not found` のため今回対象外です。`/nex
 - trigger / function / RLS / index の rename
 
 現時点で即dropしてよいDB object: **0件**。
+
+
+# 2026-04-29 差分追記: 名称混在保管方針下のDB境界
+
+今回の方針では、DB physical name の旧名称は無理に解消しない。  
+アプリ稼働・public API・write path・account delete・access policy に問題が出る箇所だけを修正対象にする。
+
+## 23-1. 現時点で進めないもの
+
+次は、名称整理目的だけでは実行しない。
+
+- DB physical rename
+- DB table drop
+- current bridge view への write切替
+- write / update / delete / upsert / insert path の current名切替
+- trigger / function / RLS / index の rename
+- JSON key / value の一括置換
+- scalar vocabulary rewrite
+- 旧名称APIファイル削除
+
+## 23-2. 非Pieceで次に確認するもの
+
+Pieceを後回しにするため、次回のDB確認は non-Piece JSON / semantic vocabulary の **SELECT確認** から始める。
+
+対象候補:
+
+- `analysis_results.payload`
+- `myweb_reports.content_json`
+- `myprofile_reports.content_json`
+- `friend_feed_summaries.meta`
+- `friend_feed_summaries.payload`
+- `account_status_summaries.meta`
+- `account_status_summaries.payload`
+- `global_activity_summaries.payload`
+- `material_snapshots.payload`
+- `report_distribution_push_candidates.open_target_json`
+- `report_distribution_push_deliveries.payload_json`
+- `subscription_plan_catalog.features_json`
+- `astor_jobs.payload`
+- `generation_locks.context`
+- `ranking_boards.meta`
+- `ranking_boards.payload`
+- `mymodel_create_answers.reflection_format_meta`
+
+Piece後回しのため、`mymodel_reflections.content_json` と `mymodel_qna_*` 系は今回の非Piece工程から外す。
+
+## 23-3. 更新SQLをまだ作らない理由
+
+旧語彙が残っていること自体は、rename実行の根拠にならない。  
+どの key / value が、表示・API契約・保存データ・通知・削除処理に影響するかを確認してから更新可否を決める。
+
+したがって、次に作るSQLは UPDATE / DELETE / ALTER ではなく、SELECT の対象一覧化SQLに限定する。

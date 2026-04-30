@@ -1863,12 +1863,12 @@ useEffect(() => {
       >
         <View style={styles.panelHeader}>
           <CocolonBackButton fallbackRouteName="Piece" />
-          <Text style={styles.panelTitle}>Piece</Text>
+          <Text style={styles.panelTitle}>ピース</Text>
           <View style={styles.panelHeaderRightPlaceholder} />
         </View>
 
         <View style={styles.qnaIntroCard}>
-          <Text style={styles.qnaIntroTitle}>Piece</Text>
+          <Text style={styles.qnaIntroTitle}>ピース</Text>
           <Text style={styles.qnaIntroText}>
             見たいユーザーを選び、Pieceを表示してください。
           </Text>

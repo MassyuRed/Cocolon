@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getHomeState } from "../../lib/api/home/homeStateApi";
 import { PIECE_WIRE, readWireSectionObject } from "../../lib/compat/legacyWireContracts";
 import { resolveLocalTimezoneName } from "../../lib/api/home/todayQuestionApi";
+import { useAppRuntime } from "../../AppRuntimeContext";
 
 export const STARTUP_POPUP_KIND = Object.freeze({
   NOTICE: "notice",
@@ -80,6 +81,8 @@ export function useHomeState({
   navigation,
   buildTutorialStartupCandidate,
 }) {
+  const { isFeatureEnabled } = useAppRuntime();
+  const todayQuestionFeatureEnabled = isFeatureEnabled("today_question_enabled", true);
   const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
   const [homeTodayCount, setHomeTodayCount] = useState(null);
   const [homeMonthCount, setHomeMonthCount] = useState(null);
@@ -168,7 +171,11 @@ export function useHomeState({
             ? noticesCurrent.popup_notice
             : null
         );
-        setTodayQuestionBundle(todayQuestionCurrent || null);
+        if (todayQuestionFeatureEnabled) {
+          setTodayQuestionBundle(todayQuestionCurrent || null);
+        } else {
+          clearTodayQuestionUi();
+        }
         setPieceQuota(nextQuota);
       }
 
@@ -180,7 +187,7 @@ export function useHomeState({
         pieceQuota: nextQuota,
       };
     },
-    [clearNoticeUi, clearTodayQuestionUi, isTutorialMode]
+    [clearNoticeUi, clearTodayQuestionUi, isTutorialMode, todayQuestionFeatureEnabled]
   );
 
   const loadHomeState = useCallback(
@@ -196,7 +203,11 @@ export function useHomeState({
       }
 
       setNoticeLoading(true);
-      setTodayQuestionLoading(true);
+      if (todayQuestionFeatureEnabled) {
+        setTodayQuestionLoading(true);
+      } else {
+        clearTodayQuestionUi();
+      }
       try {
         const json = await getHomeState({
           forceRefresh: force,
@@ -208,7 +219,9 @@ export function useHomeState({
 
         const normalized = applyHomeStatePayload(json);
         const noticesCurrent = normalized?.noticesCurrent || null;
-        const todayQuestionCurrent = normalized?.todayQuestionCurrent || null;
+        const todayQuestionCurrent = todayQuestionFeatureEnabled
+          ? normalized?.todayQuestionCurrent || null
+          : null;
 
         if (isTutorialMode) {
           return {
@@ -250,6 +263,7 @@ export function useHomeState({
           dismissedNoticeIdRef.current !== popupNoticeId &&
           (!hasExplicitPopupCandidates || candidateKinds.has(STARTUP_POPUP_KIND.NOTICE));
         const canShowTodayQuestionCandidate =
+          todayQuestionFeatureEnabled &&
           includeStartupCandidate &&
           unanswered &&
           serviceDayKey &&
@@ -279,7 +293,14 @@ export function useHomeState({
         }
       }
     },
-    [applyHomeStatePayload, clearNoticeUi, clearTodayQuestionUi, currentUserId, isTutorialMode]
+    [
+      applyHomeStatePayload,
+      clearNoticeUi,
+      clearTodayQuestionUi,
+      currentUserId,
+      isTutorialMode,
+      todayQuestionFeatureEnabled,
+    ]
   );
 
   const closeStartupPopupWindow = useCallback(() => {
@@ -373,6 +394,11 @@ export function useHomeState({
     }
     void loadHomeState({ includeStartupCandidate: false });
   }, [clearNoticeUi, clearTodayQuestionUi, closeStartupPopupWindow, currentUserId, isTutorialMode, loadHomeState]);
+
+  useEffect(() => {
+    if (todayQuestionFeatureEnabled) return;
+    clearTodayQuestionUi();
+  }, [clearTodayQuestionUi, todayQuestionFeatureEnabled]);
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {

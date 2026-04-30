@@ -55,7 +55,7 @@ export default function EmotionPiecePreviewModal({
                 color={colors.TITLE_GOLD}
                 style={styles.titleIcon}
               />
-              <Text style={styles.title}>Pieceの確認</Text>
+              <Text style={styles.title}>ピースの確認</Text>
             </View>
             <Text style={styles.lead}>
               この入力だけから生成されたPieceです。作成する前に内容を確認できます。
