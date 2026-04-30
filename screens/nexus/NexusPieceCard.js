@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonPressable from "../../components/CocolonPressable";
@@ -26,7 +26,21 @@ function formatDateLabel(value) {
   }
 }
 
-export default function NexusPieceCard({ item, onPress, onPressOwner }) {
+function readViewerState(item) {
+  return (
+    (item?.viewer_state && typeof item.viewer_state === "object" ? item.viewer_state : null) ||
+    (item?.viewerState && typeof item.viewerState === "object" ? item.viewerState : null) ||
+    {}
+  );
+}
+
+export default function NexusPieceCard({
+  item,
+  onPressOwner,
+  onPressResonance,
+  canResonate = false,
+  resonanceSubmitting = false,
+}) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -35,10 +49,20 @@ export default function NexusPieceCard({ item, onPress, onPressOwner }) {
   const createdAt = formatDateLabel(item?.created_at);
   const body = String(item?.body || "").trim();
   const title = String(item?.question?.title || "").trim();
-  const isNew = item?.viewer_state?.is_new === true;
+  const viewerState = readViewerState(item);
+  const isNew = viewerState?.is_new === true || viewerState?.isNew === true;
+  const isResonated =
+    viewerState?.is_resonated === true ||
+    viewerState?.isResonated === true ||
+    item?.is_resonated === true ||
+    item?.isResonated === true;
+  const resonances = Number(item?.metrics?.resonances ?? item?.resonances ?? 0) || 0;
+  const showResonanceButton = !!canResonate;
+  const buttonDisabled = !!isResonated || !!resonanceSubmitting;
+  const buttonLabel = isResonated ? "共鳴済み" : "共鳴";
 
   return (
-    <CocolonPressable style={styles.card} onPress={onPress}>
+    <View style={styles.card}>
       <View style={styles.headerRow}>
         <CocolonPressable
           style={styles.ownerChip}
@@ -65,20 +89,48 @@ export default function NexusPieceCard({ item, onPress, onPressOwner }) {
       <Text style={styles.questionLabel}>問い</Text>
       <Text style={styles.questionText}>{title || "—"}</Text>
 
-      <Text style={styles.bodyLabel}>Piece</Text>
+      <Text style={styles.bodyLabel}>答え</Text>
       <Text style={styles.bodyText}>{body || "—"}</Text>
 
       <View style={styles.metricsRow}>
         <View style={styles.metricChip}>
-          <Ionicons name="eye-outline" size={14} color={colors.TEXT_SUBTLE} style={styles.metricIcon} />
-          <Text style={styles.metricText}>{Number(item?.metrics?.views || 0)}</Text>
+          <Ionicons
+            name={isResonated ? "heart" : "heart-outline"}
+            size={14}
+            color={colors.TEXT_SUBTLE}
+            style={styles.metricIcon}
+          />
+          <Text style={styles.metricText}>{resonances}</Text>
         </View>
-        <View style={styles.metricChip}>
-          <Ionicons name="heart-outline" size={14} color={colors.TEXT_SUBTLE} style={styles.metricIcon} />
-          <Text style={styles.metricText}>{Number(item?.metrics?.resonances || 0)}</Text>
-        </View>
+
+        {showResonanceButton ? (
+          <CocolonPressable
+            style={[
+              styles.resonanceButton,
+              isResonated && styles.resonanceButtonDone,
+              buttonDisabled && styles.resonanceButtonDisabled,
+            ]}
+            onPress={onPressResonance}
+            disabled={buttonDisabled}
+            accessibilityLabel={buttonLabel}
+            hitSlop={8}
+          >
+            {resonanceSubmitting ? (
+              <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+            ) : (
+              <Text
+                style={[
+                  styles.resonanceButtonText,
+                  isResonated && styles.resonanceButtonTextDone,
+                ]}
+              >
+                {buttonLabel}
+              </Text>
+            )}
+          </CocolonPressable>
+        ) : null}
       </View>
-    </CocolonPressable>
+    </View>
   );
 }
 
@@ -160,8 +212,8 @@ function createStyles(COLORS, ui) {
     metricsRow: {
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: "space-between",
       marginTop: 12,
-      flexWrap: "wrap",
     },
     metricChip: {
       flexDirection: "row",
@@ -173,7 +225,6 @@ function createStyles(COLORS, ui) {
       paddingVertical: 6,
       backgroundColor: COLORS.PANEL_BG,
       marginRight: 8,
-      marginBottom: 6,
     },
     metricIcon: {
       marginRight: 4,
@@ -182,6 +233,34 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       color: text.description ?? COLORS.TEXT_ON_LIGHT,
       fontWeight: "700",
+    },
+    resonanceButton: {
+      minWidth: 74,
+      minHeight: 34,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      paddingHorizontal: 14,
+      paddingVertical: 8,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    resonanceButtonDone: {
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+    },
+    resonanceButtonDisabled: {
+      opacity: 0.72,
+    },
+    resonanceButtonText: {
+      fontSize: 12,
+      lineHeight: 16,
+      fontWeight: "900",
+      color: COLORS.ACCENT_TEXT,
+    },
+    resonanceButtonTextDone: {
+      color: COLORS.TEXT_SUBTLE,
     },
   }, ui));
 }

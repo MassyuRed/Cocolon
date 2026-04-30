@@ -1928,9 +1928,9 @@ ${String(error?.message || error)}`
               <View style={styles.heroMemoCard} onLayout={handleHeroCardLayout}>
                 <View style={styles.heroCardHeader}>
                   <Text style={styles.heroEyebrow}>感情入力カード</Text>
-                  <Text style={styles.heroTitle}>今のことを、まず言葉にする</Text>
+                  <Text style={styles.heroTitle}>今の気持ちを入力</Text>
                   <Text style={styles.heroLead}>
-                    思考と行動を残してから、感情とカテゴリを整えてください。
+                    思考と行動を残してから、感情とカテゴリを選択してください。
                   </Text>
                 </View>
 
@@ -2137,7 +2137,7 @@ ${String(error?.message || error)}`
                 >
                   <Text style={styles.heroFieldLabel}>感情</Text>
                   <Text style={styles.heroFieldHint}>
-                    今の記録に近い感情を選んでください。自己理解は平穏の隣にあります。
+                    今の記録に近い感情を選んでください。複数選択可能です。自己理解は単体選択のみです。
                   </Text>
 
                   <View style={styles.buttons}>
@@ -2313,7 +2313,7 @@ ${String(error?.message || error)}`
                             感情通知を送らない
                           </Text>
                           <Text style={styles.preferenceDesc}>
-                            オンにすると感情入力がフォロー中ユーザーに通知されません。
+                            オンにするとフォロー中ユーザーに通知されません。
                           </Text>
                         </View>
                       </View>
