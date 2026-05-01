@@ -656,11 +656,12 @@ export default function EmotionLogScreen(props) {
     const items = item.items || [];
     return (
       <View style={styles.row}>
-        <View style={styles.left}>
+        <View style={styles.feedItemHeaderRow}>
           <Text style={styles.name}>{item.ownerName}</Text>
+          <Text style={styles.time}>{item.timeLabel}</Text>
         </View>
 
-        <View style={styles.center}>
+        <View style={styles.emotionArea}>
           {items.length === 0 ? (
             <Text style={styles.noEmotion}>まだ感情が選択されていません</Text>
           ) : (
@@ -683,8 +684,6 @@ export default function EmotionLogScreen(props) {
             </View>
           )}
         </View>
-
-        <Text style={styles.time}>{item.timeLabel}</Text>
       </View>
     );
   };
@@ -1036,25 +1035,26 @@ function createStyles(COLORS, ui) {
     },
 
     row: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
       paddingVertical: 10,
       paddingHorizontal: 12,
     },
-    left: {
+    feedItemHeaderRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
     },
     name: {
+      flex: 1,
+      minWidth: 0,
+      paddingRight: 8,
       fontWeight: "700",
       color: TEXT_MAIN,
       fontSize: 15,
     },
 
-    center: {
-      flex: 1,
-      alignItems: "center",
+    emotionArea: {
+      marginTop: 8,
+      alignItems: "flex-start",
     },
     noEmotion: {
       fontSize: 12,
@@ -1064,7 +1064,7 @@ function createStyles(COLORS, ui) {
     emotionRow: {
       flexDirection: "row",
       flexWrap: "wrap",
-      justifyContent: "center",
+      justifyContent: "flex-start",
     },
     badge: {
       paddingHorizontal: 10,

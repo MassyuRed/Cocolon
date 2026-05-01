@@ -299,14 +299,16 @@ function RankingPreviewRow({ styles, row, index, valueKeys }) {
 
   return (
     <View style={styles.previewRow}>
-      <Text style={styles.previewRankText}>{rank}位</Text>
-      <View style={styles.previewNameWrap}>
-        <Text style={styles.previewNameText} numberOfLines={1}>
-          {name}
-        </Text>
-        {isPrivateAccount ? (
-          <Ionicons name="shield-outline" size={13} style={styles.privateShield} />
-        ) : null}
+      <View style={styles.previewPrimaryRow}>
+        <Text style={styles.previewRankText}>{rank}位</Text>
+        <View style={styles.previewNameWrap}>
+          <Text style={styles.previewNameText}>
+            {name}
+          </Text>
+          {isPrivateAccount ? (
+            <Ionicons name="shield-outline" size={13} style={styles.privateShield} />
+          ) : null}
+        </View>
       </View>
       <Text style={styles.previewValueText}>{value}</Text>
     </View>
@@ -420,12 +422,14 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_SUBTLE,
     },
     previewRow: {
-      minHeight: 34,
-      flexDirection: "row",
-      alignItems: "center",
+      minHeight: 44,
       paddingVertical: 7,
       borderBottomWidth: 1,
       borderBottomColor: COLORS.CARD_BORDER,
+    },
+    previewPrimaryRow: {
+      flexDirection: "row",
+      alignItems: "center",
     },
     previewRankText: {
       width: 42,
@@ -453,8 +457,8 @@ function createStyles(COLORS, ui) {
       opacity: 0.7,
     },
     previewValueText: {
-      minWidth: 44,
-      textAlign: "right",
+      marginLeft: 42,
+      marginTop: 3,
       fontSize: 13,
       fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,

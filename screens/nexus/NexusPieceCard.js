@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -38,12 +38,16 @@ export default function NexusPieceCard({
   item,
   onPressOwner,
   onPressResonance,
+  onPressDelete,
   canResonate = false,
   resonanceSubmitting = false,
+  canDelete = false,
+  deleteSubmitting = false,
 }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const ownerName = String(item?.owner?.display_name || readShareCode(item?.owner, "") || "ユーザー").trim();
   const createdAt = formatDateLabel(item?.created_at);
@@ -58,6 +62,7 @@ export default function NexusPieceCard({
     item?.isResonated === true;
   const resonances = Number(item?.metrics?.resonances ?? item?.resonances ?? 0) || 0;
   const showResonanceButton = !!canResonate;
+  const showDeleteMenu = !!canDelete;
   const buttonDisabled = !!isResonated || !!resonanceSubmitting;
   const buttonLabel = isResonated ? "共鳴済み" : "共鳴";
 
@@ -81,13 +86,42 @@ export default function NexusPieceCard({
         </CocolonPressable>
 
         <View style={styles.headerRight}>
-          {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
-          <ScreenUnreadBadge visible={isNew} style={styles.newBadge} />
+          {showDeleteMenu ? (
+            <CocolonPressable
+              style={[styles.moreButton, deleteSubmitting && styles.moreButtonDisabled]}
+              onPress={() => setMenuVisible((current) => !current)}
+              disabled={deleteSubmitting}
+              accessibilityLabel="Pieceのメニューを開く"
+              hitSlop={8}
+            >
+              {deleteSubmitting ? (
+                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
+              ) : (
+                <Ionicons
+                  name="ellipsis-horizontal"
+                  size={18}
+                  color={colors.TEXT_SUBTLE}
+                />
+              )}
+            </CocolonPressable>
+          ) : (
+            <View style={styles.moreButtonSpacer} accessibilityElementsHidden importantForAccessibility="no" />
+          )}
+          <View style={styles.timeRow}>
+            {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
+            <ScreenUnreadBadge visible={isNew} style={styles.newBadge} />
+          </View>
         </View>
       </View>
 
-      <Text style={styles.questionLabel}>問い</Text>
-      <Text style={styles.questionText}>{title || "—"}</Text>
+      <View
+        key={menuVisible ? "question-menu-open" : "question-menu-closed"}
+        style={styles.questionBlock}
+        collapsable={false}
+      >
+        <Text style={styles.questionLabel}>問い</Text>
+        <Text style={styles.questionText}>{title || "—"}</Text>
+      </View>
 
       <Text style={styles.bodyLabel}>答え</Text>
       <Text style={styles.bodyText}>{body || "—"}</Text>
@@ -130,6 +164,28 @@ export default function NexusPieceCard({
           </CocolonPressable>
         ) : null}
       </View>
+
+      {menuVisible && showDeleteMenu ? (
+        <View style={styles.actionMenu} collapsable={false}>
+          <CocolonPressable
+            style={styles.actionMenuItem}
+            onPress={() => {
+              setMenuVisible(false);
+              onPressDelete?.();
+            }}
+            disabled={deleteSubmitting}
+            accessibilityLabel="Pieceを削除する"
+          >
+            <Ionicons
+              name="trash-outline"
+              size={16}
+              color="#DC2626"
+              style={styles.actionMenuIcon}
+            />
+            <Text style={styles.actionMenuDeleteText}>削除</Text>
+          </CocolonPressable>
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -139,6 +195,7 @@ function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
     card: {
+      position: "relative",
       borderRadius: 18,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
@@ -154,7 +211,7 @@ function createStyles(COLORS, ui) {
     },
     headerRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       justifyContent: "space-between",
       marginBottom: 10,
     },
@@ -174,16 +231,73 @@ function createStyles(COLORS, ui) {
       maxWidth: 180,
     },
     headerRight: {
+      alignItems: "flex-end",
+      justifyContent: "flex-start",
+      minWidth: 82,
+    },
+    moreButton: {
+      width: 30,
+      height: 28,
+      borderRadius: 14,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 2,
+    },
+    moreButtonDisabled: {
+      opacity: 0.58,
+    },
+    moreButtonSpacer: {
+      width: 30,
+      height: 28,
+      marginBottom: 2,
+    },
+    timeRow: {
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: "flex-end",
     },
     timeText: {
       fontSize: 11,
       color: COLORS.TEXT_SUBTLE,
-      marginRight: 8,
     },
     newBadge: {
       marginLeft: 8,
+    },
+    actionMenu: {
+      position: "absolute",
+      top: 42,
+      right: 10,
+      zIndex: 20,
+      elevation: 10,
+      minWidth: 142,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      shadowColor: "#000",
+      shadowOpacity: 0.14,
+      shadowRadius: 12,
+      shadowOffset: { width: 0, height: 6 },
+      paddingVertical: 4,
+    },
+    actionMenuItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 14,
+      paddingVertical: 12,
+    },
+    actionMenuIcon: {
+      marginRight: 8,
+    },
+    actionMenuDeleteText: {
+      fontSize: 13,
+      lineHeight: 18,
+      fontWeight: "900",
+      color: "#DC2626",
+    },
+    questionBlock: {
+      position: "relative",
+      zIndex: 1,
     },
     questionLabel: {
       fontSize: 11,

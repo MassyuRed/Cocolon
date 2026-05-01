@@ -236,6 +236,58 @@ const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
 
 const SELF_INSIGHT = "自己理解";
 
+const STRENGTH_LABEL_JA = Object.freeze({ weak: "弱", medium: "中", strong: "強" });
+
+function strengthScoreForFeedback(strength) {
+  return STRENGTH_SCORE[strength] || 0;
+}
+
+function formatEmotionForFeedback(entry) {
+  const type = String(entry?.type || "").trim();
+  if (!type) return "";
+  if (type === SELF_INSIGHT) return type;
+  const strength = String(entry?.strength || "").trim();
+  const strengthLabel = STRENGTH_LABEL_JA[strength] || "";
+  return strengthLabel ? `${type}（${strengthLabel}）` : type;
+}
+
+function buildInputFeedbackEmotionMeta(values) {
+  const items = Array.isArray(values)
+    ? values
+        .map((entry) => ({
+          type: String(entry?.type || "").trim(),
+          strength: String(entry?.strength || "medium").trim() || "medium",
+        }))
+        .filter((entry) => entry.type)
+    : [];
+
+  if (items.length === 0) {
+    return {
+      emotionSummary: "",
+      dominantSummary: "",
+      dominantLabel: "",
+    };
+  }
+
+  let dominant = items[0];
+  for (const item of items) {
+    if (strengthScoreForFeedback(item.strength) > strengthScoreForFeedback(dominant.strength)) {
+      dominant = item;
+    }
+  }
+
+  const emotionSummary = items
+    .map((entry) => formatEmotionForFeedback(entry))
+    .filter(Boolean)
+    .join("／");
+  const dominantLabel = formatEmotionForFeedback(dominant);
+
+  return {
+    emotionSummary: emotionSummary ? `選択した感情：${emotionSummary}` : "",
+    dominantSummary: dominantLabel ? `中心として見ている感情：${dominantLabel}` : "",
+    dominantLabel: dominantLabel ? `中心として見ている感情：${dominantLabel}` : "",
+  };
+}
 
 function formatDraftSavedAt(savedAt) {
   const savedAtMs = new Date(savedAt).getTime();
@@ -328,7 +380,11 @@ const tutorialEmotionLogNotifyTimerRef = useRef(null);
 const [toastMessage, setToastMessage] = useState(null);
 const [inputFeedbackModalVisible, setInputFeedbackModalVisible] = useState(false);
 const [inputFeedbackModalText, setInputFeedbackModalText] = useState("");
-const [inputFeedbackModalDominantLabel, setInputFeedbackModalDominantLabel] = useState("");
+const [inputFeedbackModalMeta, setInputFeedbackModalMeta] = useState({
+  emotionSummary: "",
+  dominantSummary: "",
+  contextLabel: "",
+});
 const draftSaveTimerRef = useRef(null);
 const draftLoadRequestIdRef = useRef(0);
 const latestInputDraftDataRef = useRef(null);
@@ -336,11 +392,15 @@ const [pendingInputDraft, setPendingInputDraft] = useState(null);
 const [draftRestoreModalVisible, setDraftRestoreModalVisible] = useState(false);
 const [draftBootstrapComplete, setDraftBootstrapComplete] = useState(false);
 
-const openInputFeedbackModal = useCallback(({ commentText, dominantLabel = "" }) => {
-  const nextCommentText = String(commentText || "").trim();
+const openInputFeedbackModal = useCallback((input = {}) => {
+  const nextCommentText = String(input?.commentText || "").trim();
   if (!nextCommentText) return;
   setInputFeedbackModalText(nextCommentText);
-  setInputFeedbackModalDominantLabel(String(dominantLabel || "").trim());
+  setInputFeedbackModalMeta({
+    emotionSummary: String(input?.emotionSummary || "").trim(),
+    dominantSummary: String(input?.dominantSummary || input?.dominantLabel || "").trim(),
+    contextLabel: String(input?.contextLabel || "").trim(),
+  });
   setInputFeedbackModalVisible(true);
 }, []);
 
@@ -1370,6 +1430,7 @@ const { height: windowHeight } = useWindowDimensions();
       const inputFeedbackText = String(
         publishResult?.input_feedback?.comment_text || ""
       ).trim();
+      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
 
       await clearPersistedInputDraft();
       setPendingInputDraft(null);
@@ -1401,7 +1462,8 @@ const { height: windowHeight } = useWindowDimensions();
       if (inputFeedbackText) {
         openInputFeedbackModal({
           commentText: inputFeedbackText,
-          dominantLabel: "Pieceを作成しました",
+          ...inputFeedbackEmotionMeta,
+          contextLabel: "Pieceを作成しました",
         });
       } else {
         showToast("Pieceを作成しました");
@@ -1421,6 +1483,7 @@ const { height: windowHeight } = useWindowDimensions();
     openInputFeedbackModal,
     piecePreviewPayload?.preview_id,
     piecePublishLoading,
+    selectedEmotions,
     showToast,
   ]);
 
@@ -1431,25 +1494,7 @@ const { height: windowHeight } = useWindowDimensions();
       // 1) 入力内容を MashOS Emotion Submit API 用のペイロードに変換
       const payload = buildEmotionSubmitPayload();
       const emotionDetails = Array.isArray(payload?.emotions) ? payload.emotions : [];
-
-      const strengthScore = (s) =>
-        s === "strong" ? 3 : s === "medium" ? 2 : s === "weak" ? 1 : 0;
-      let dominant = null;
-      for (const e of emotionDetails || []) {
-        if (
-          !dominant ||
-          strengthScore(e.strength) > strengthScore(dominant.strength)
-        ) {
-          dominant = e;
-        }
-      }
-      const strengthLabelJa = { weak: "弱", medium: "中", strong: "強" };
-      const dominantType = dominant?.type || "—";
-      const dominantStrength =
-        dominant && dominantType !== SELF_INSIGHT
-          ? strengthLabelJa[dominant.strength] || ""
-          : "";
-      const dominantSuffix = dominantStrength ? `（${dominantStrength}）` : "";
+      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(emotionDetails);
 
       if (isTutorialMode) {
         addTutorialEmotion({
@@ -1475,8 +1520,8 @@ const { height: windowHeight } = useWindowDimensions();
         setIsSecret(false);
         Keyboard.dismiss();
 
-        showToast(`チュートリアルに記録しました
-主感情：${dominantType}${dominantSuffix}`);
+        showToast(`チュートリアルに記録しました${inputFeedbackEmotionMeta.emotionSummary ? `
+${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
 
         if (sendEmotionNotification) {
           try {
@@ -1577,11 +1622,11 @@ const { height: windowHeight } = useWindowDimensions();
       if (inputFeedbackText) {
         openInputFeedbackModal({
           commentText: inputFeedbackText,
-          dominantLabel: `主感情：${dominantType}${dominantSuffix}`,
+          ...inputFeedbackEmotionMeta,
         });
       } else {
-        showToast(`記録しました
-主感情：${dominantType}${dominantSuffix}`);
+        showToast(`記録しました${inputFeedbackEmotionMeta.emotionSummary ? `
+${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }
     } catch (error) {
       console.error("入力処理エラー:", error);
@@ -2507,11 +2552,21 @@ ${String(error?.message || error)}`
             color={colors.TITLE_GOLD}
             style={styles.inputFeedbackTitleIcon}
           />
-          <Text style={styles.inputFeedbackTitle}>入力へのコメント</Text>
+          <Text style={styles.inputFeedbackTitle}>Emlisからの返答</Text>
         </View>
-        {inputFeedbackModalDominantLabel ? (
+        {inputFeedbackModalMeta.contextLabel ? (
           <Text style={styles.inputFeedbackMetaText}>
-            {inputFeedbackModalDominantLabel}
+            {inputFeedbackModalMeta.contextLabel}
+          </Text>
+        ) : null}
+        {inputFeedbackModalMeta.emotionSummary ? (
+          <Text style={styles.inputFeedbackMetaText}>
+            {inputFeedbackModalMeta.emotionSummary}
+          </Text>
+        ) : null}
+        {inputFeedbackModalMeta.dominantSummary ? (
+          <Text style={styles.inputFeedbackMetaText}>
+            {inputFeedbackModalMeta.dominantSummary}
           </Text>
         ) : null}
       </View>
@@ -2519,7 +2574,7 @@ ${String(error?.message || error)}`
       <ScrollView
         style={[
           styles.inputFeedbackBodyScroll,
-          { maxHeight: Math.max(220, Math.min(420, Math.floor((windowHeight || 0) * 0.52) || 360)) },
+          { maxHeight: Math.max(220, Math.min(470, Math.floor((windowHeight || 0) * 0.56) || 390)) },
         ]}
         contentContainerStyle={styles.inputFeedbackBodyContent}
         showsVerticalScrollIndicator
@@ -2533,7 +2588,7 @@ ${String(error?.message || error)}`
         <CocolonButton
           variant="secondary"
           onPress={closeInputFeedbackModal}
-          accessibilityLabel="感情入力へのコメントを閉じる"
+          accessibilityLabel="Emlisからの返答を閉じる"
         >
           閉じる
         </CocolonButton>

@@ -24,11 +24,11 @@ import { useSubscription } from "../SubscriptionContext";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 
 const TYPE_LABEL = Object.freeze({
-  monthly: "自己構造",
+  monthly: "自己分析",
 });
 
 const TYPE_JP = Object.freeze({
-  monthly: "自己構造",
+  monthly: "自己分析",
 });
 
 const HISTORY_PAGE_LIMIT = 60;
@@ -70,7 +70,7 @@ function sanitizeSelfStructureHistoryTitle(title) {
   const raw = String(title || "").trim();
   if (!raw) return "";
   if (/^自己構造レポート[：:]/.test(raw)) {
-    return "自己構造レポート";
+    return "自己分析レポート";
   }
   return raw;
 }
@@ -207,7 +207,6 @@ export default function SelfStructureReportHistoryScreen({
   reportType = "monthly",
   onBack,
   onOpenReport,
-  onGenerateLatest,
 }) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -238,12 +237,6 @@ export default function SelfStructureReportHistoryScreen({
       },
       backText: { color: colors.TEXT_ON_LIGHT },
       headerTitle: { color: colors.TEXT_ON_LIGHT },
-
-      generateBtn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      generateText: { color: colors.ACCENT_TEXT },
 
       row: {
         backgroundColor: colors.PANEL_BG,
@@ -396,7 +389,7 @@ export default function SelfStructureReportHistoryScreen({
         <CocolonBackButton
           onPress={onBack}
           style={styles.backBtn}
-          accessibilityLabel="自己構造レポート履歴から戻る"
+          accessibilityLabel="自己分析レポート履歴から戻る"
         />
 
         <Text
@@ -409,25 +402,9 @@ export default function SelfStructureReportHistoryScreen({
         <View style={styles.headerSide} />
       </View>
 
-      {/* 操作 */}
-      <View style={styles.topActions}>
-        <TouchableOpacity
-          style={[styles.generateBtn, themed.generateBtn]}
-          onPress={onGenerateLatest}
-          activeOpacity={0.85}
-        >
-          <Ionicons
-            name="sparkles-outline"
-            size={16}
-            color={isDark ? colors.ACCENT_TEXT : "#111827"}
-            style={{ marginRight: 6 }}
-          />
-          <Text style={[styles.generateText, themed.generateText]}>
-            現在の自己構造を見る
-          </Text>
-        </TouchableOpacity>
-
-        {showHistoryRetentionLabel ? (
+      {/* 履歴保持範囲 */}
+      {showHistoryRetentionLabel ? (
+        <View style={styles.topActions}>
           <Text
             style={[
               styles.historyRetentionText,
@@ -436,8 +413,8 @@ export default function SelfStructureReportHistoryScreen({
           >
             {historyRetentionLabel}
           </Text>
-        ) : null}
-      </View>
+        </View>
+      ) : null}
 
       {/* エラー */}
       {errorMsg ? <Text style={styles.error}>取得エラー: {errorMsg}</Text> : null}
@@ -552,23 +529,11 @@ function createStyles(COLORS, ui) {
 
   topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
   historyRetentionText: {
-    marginTop: 8,
+    marginTop: 0,
     fontSize: 12,
     fontWeight: "600",
     color: "#111827",
   },
-  generateBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
-  generateText: { fontSize: 13, color: "#111827", fontWeight: "700" },
-
   error: {
     paddingHorizontal: 12,
     paddingTop: 6,

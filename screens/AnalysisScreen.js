@@ -268,6 +268,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   const [historyBackRoute, setHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
   const [todayQuestionHistoryBackRoute, setTodayQuestionHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
   const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState(ROUTE_SELF_STRUCTURE);
+  const [selfReportHistoryBackRoute, setSelfReportHistoryBackRoute] = useState(ROUTE_SELF_STRUCTURE);
   const [selfReportGenerateMode, setSelfReportGenerateMode] = useState("standard");
 
   const clearExternalOpenParams = useCallback(
@@ -978,9 +979,11 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
 
   const openSelfReportHistory = useCallback(
     (backRoute = ROUTE_SELF_STRUCTURE) => {
+      const nextBackRoute = backRoute || ROUTE_SELF_STRUCTURE;
+      setSelfReportHistoryBackRoute(nextBackRoute);
       openSelfStructureRoute({
         targetRoute: "selfReportHistory",
-        backRoute,
+        backRoute: nextBackRoute,
       });
     },
     [openSelfStructureRoute]
@@ -1031,10 +1034,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       tabRoute?.params?.openSelfReportHistory || screenRoute?.params?.openSelfReportHistory
     );
     if (shouldOpenSelfReportHistory) {
-      openSelfStructureRoute({
-        targetRoute: "selfReportHistory",
-        backRoute: ROUTE_SELF_STRUCTURE,
-      });
+      openSelfReportHistory(ROUTE_SELF_STRUCTURE);
       clearExternalOpenParams({
         openSelfReportHistory: false,
         openSelfReportHistoryAt: null,
@@ -1054,6 +1054,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     }
   }, [
     clearExternalOpenParams,
+    openSelfReportHistory,
     openSelfStructureRoute,
     screenRoute?.params?.openDistributionHome,
     screenRoute?.params?.openDistributionHomeAt,
@@ -1310,18 +1311,11 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         <SelfStructureReportHistoryScreen
           reportType="monthly"
           onBack={() => {
-            setRoute(ROUTE_SELF_STRUCTURE);
+            setRoute(selfReportHistoryBackRoute || ROUTE_SELF_STRUCTURE);
             refreshUnreadBadges();
             refreshHomeSummaries();
           }}
           onOpenReport={openSelfReportView}
-          onGenerateLatest={() => {
-            setSelfReportGenerateMode("standard");
-            openSelfStructureRoute({
-              targetRoute: "selfReportGenerate",
-              backRoute: "selfReportHistory",
-            });
-          }}
         />
       ) : route === "selfReportView" ? (
         <SelfStructureReportViewerScreen

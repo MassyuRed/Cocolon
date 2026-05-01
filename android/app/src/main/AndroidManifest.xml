@@ -18,13 +18,13 @@
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
 
-    <!-- MainActivity を直接 AppCompat にする -->
+    <!-- 起動直後はSplashScreenテーマを使い、起動後はstyles.xmlのpostSplashScreenThemeへ移行 -->
     <activity
         android:name=".MainActivity"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:theme="@style/Theme.App.SplashScreen"
         android:exported="true"
         android:screenOrientation="portrait">
       <intent-filter>

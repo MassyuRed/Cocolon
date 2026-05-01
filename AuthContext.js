@@ -8,6 +8,18 @@ import {
 
 const AuthContext = createContext(null);
 
+const DISPLAY_NAME_MAX_LENGTH = 15;
+
+function normalizeDisplayName(value) {
+  return String(value || "").trim();
+}
+
+function coerceStoredDisplayName(value) {
+  const normalized = normalizeDisplayName(value);
+  if (!normalized) return "ユーザー";
+  return normalized.slice(0, DISPLAY_NAME_MAX_LENGTH);
+}
+
 // URL の ?query と #hash の両方から params を拾う
 function parseUrlParams(url) {
   const params = new URLSearchParams();
@@ -87,10 +99,11 @@ export function AuthProvider({ children }) {
     if (ensuredProfileUserIdRef.current === userId) return;
     ensuredProfileUserIdRef.current = userId;
 
-    const displayName =
+    const displayName = coerceStoredDisplayName(
       session?.user?.user_metadata?.display_name ||
-      session?.user?.user_metadata?.displayName ||
-      "ユーザー";
+        session?.user?.user_metadata?.displayName ||
+        "ユーザー"
+    );
 
     (async () => {
       try {
@@ -192,6 +205,11 @@ export function AuthProvider({ children }) {
     setAuthError("");
     setAuthLoading(true);
     try {
+      const nextDisplayName = normalizeDisplayName(displayName) || "ユーザー";
+      if (nextDisplayName.length > DISPLAY_NAME_MAX_LENGTH) {
+        throw new Error(`ユーザー名は${DISPLAY_NAME_MAX_LENGTH}文字以内で入力してください。`);
+      }
+
       const emailRedirectTo =
         process.env.EXPO_PUBLIC_SIGNUP_REDIRECT_URL ||
         process.env.SIGNUP_REDIRECT_URL ||
@@ -201,7 +219,7 @@ export function AuthProvider({ children }) {
         email,
         password,
         options: {
-          data: { display_name: displayName || "ユーザー" },
+          data: { display_name: nextDisplayName },
           emailRedirectTo,
           // 旧バージョン互換（supabase-js v1 系）
           redirectTo: emailRedirectTo,
@@ -228,7 +246,7 @@ export function AuthProvider({ children }) {
       // profile 行の ensure と初期表示名/端末情報の保存は backend API 経由に統一する
       try {
         await ensureAccountProfile({
-          displayName: displayName || "ユーザー",
+          displayName: nextDisplayName,
           pushPlatform: Platform?.OS || null,
           accessToken: signupSession?.access_token || null,
         });

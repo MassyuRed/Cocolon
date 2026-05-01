@@ -41,6 +41,7 @@ import {
   getNexusEmotionRanking,
   getNexusFollowingUsers,
   getNexusRecommendUsers,
+  deleteNexusPiece,
   getNexusPieces,
   getNexusPiecesUnreadStatus,
   markNexusEmotionLogFeedRead,
@@ -66,6 +67,8 @@ const OWNER_FILTER_USER = "user";
 
 const PIECE_ORDER_LATEST = "latest";
 const PIECE_ORDER_OLDEST = "oldest";
+const HISTORY_ORDER_LATEST = "newest";
+const HISTORY_ORDER_OLDEST = "oldest";
 
 const STRENGTH_LABEL = {
   weak: "弱",
@@ -213,14 +216,111 @@ function normalizeSavedPieces(json) {
     : Array.isArray(json)
     ? json
     : [];
-  return items.map((item, index) => ({
-    qInstanceId: String(item?.q_instance_id || `saved-${index}`),
-    title: String(item?.title || "—").trim() || "—",
-    ownerDisplayName:
-      String(item?.owner_display_name || "ユーザー").trim() || "ユーザー",
-    ownerUserId: String(item?.owner_user_id || "").trim() || null,
-    savedAt: String(item?.saved_at || "").trim(),
-  }));
+  return items.map((item, index) => {
+    const owner = item?.owner && typeof item.owner === "object" ? item.owner : {};
+    const question =
+      item?.question && typeof item.question === "object" ? item.question : {};
+    const metrics = item?.metrics && typeof item.metrics === "object" ? item.metrics : {};
+    const viewerState =
+      item?.viewer_state && typeof item.viewer_state === "object"
+        ? item.viewer_state
+        : item?.viewerState && typeof item.viewerState === "object"
+        ? item.viewerState
+        : {};
+
+    const qInstanceId =
+      String(item?.q_instance_id || item?.qInstanceId || "").trim() ||
+      `saved-${index}`;
+    const qKey =
+      String(question?.q_key || question?.qKey || item?.q_key || item?.qKey || "").trim() ||
+      `saved-q-${index}`;
+    const title =
+      String(question?.title || item?.title || item?.question_title || "—").trim() ||
+      "—";
+    const ownerUserId =
+      String(
+        owner?.user_id ||
+          owner?.userId ||
+          item?.owner_user_id ||
+          item?.ownerUserId ||
+          ""
+      ).trim() || null;
+    const ownerDisplayName =
+      String(
+        owner?.display_name ||
+          owner?.displayName ||
+          item?.owner_display_name ||
+          item?.ownerDisplayName ||
+          item?.display_name ||
+          readShareCode(owner, readShareCode(item, "")) ||
+          "ユーザー"
+      ).trim() || "ユーザー";
+    const savedAt = String(item?.saved_at || item?.savedAt || "").trim();
+    const createdAt =
+      String(
+        item?.created_at ||
+          item?.createdAt ||
+          item?.piece_created_at ||
+          item?.pieceCreatedAt ||
+          item?.generated_at ||
+          item?.generatedAt ||
+          savedAt ||
+          ""
+      ).trim() || null;
+    const body =
+      String(
+        item?.body ||
+          item?.piece_body ||
+          item?.pieceBody ||
+          item?.answer ||
+          item?.answer_body ||
+          ""
+      ).trim() || "";
+    const views = Number(metrics?.views ?? item?.views ?? 0) || 0;
+    const resonances = Number(metrics?.resonances ?? item?.resonances ?? 0) || 0;
+    const canResonate =
+      viewerState?.can_resonate === false || viewerState?.canResonate === false
+        ? false
+        : true;
+
+    return {
+      ...item,
+      qInstanceId,
+      q_instance_id: qInstanceId,
+      q_key: qKey,
+      title,
+      ownerDisplayName,
+      ownerUserId,
+      owner_user_id: ownerUserId,
+      savedAt,
+      saved_at: savedAt,
+      source_type:
+        String(item?.source_type || item?.sourceType || "emotion_generated").trim() ||
+        "emotion_generated",
+      owner: {
+        ...owner,
+        user_id: ownerUserId,
+        display_name: ownerDisplayName,
+      },
+      question: {
+        ...question,
+        q_key: qKey,
+        title,
+      },
+      body,
+      created_at: createdAt,
+      metrics: {
+        ...metrics,
+        views,
+        resonances,
+      },
+      viewer_state: {
+        ...viewerState,
+        is_resonated: true,
+        can_resonate: canResonate,
+      },
+    };
+  });
 }
 
 function normalizeTutorialPieceItems(items) {
@@ -284,6 +384,108 @@ function resolvePieceOwnerUserId(item) {
         ""
     ).trim() || null
   );
+}
+
+function buildResonanceHistoryItemFromPiece(item, savedAtValue = null) {
+  const qInstanceId = resolvePieceQInstanceId(item);
+  if (!qInstanceId) return null;
+
+  const owner = item?.owner && typeof item.owner === "object" ? item.owner : {};
+  const question =
+    item?.question && typeof item.question === "object" ? item.question : {};
+  const metrics = item?.metrics && typeof item.metrics === "object" ? item.metrics : {};
+  const viewerState =
+    item?.viewer_state && typeof item.viewer_state === "object"
+      ? item.viewer_state
+      : item?.viewerState && typeof item.viewerState === "object"
+      ? item.viewerState
+      : {};
+  const title = String(question?.title || item?.title || "—").trim() || "—";
+  const qKey = resolvePieceQKey(item) || String(item?.q_key || "").trim() || "";
+  const ownerUserId = resolvePieceOwnerUserId(item);
+  const ownerDisplayName =
+    String(
+      owner?.display_name ||
+        owner?.displayName ||
+        item?.owner_display_name ||
+        item?.ownerDisplayName ||
+        item?.display_name ||
+        readShareCode(owner, readShareCode(item, "")) ||
+        "ユーザー"
+    ).trim() || "ユーザー";
+  const savedAt = String(savedAtValue || new Date().toISOString()).trim();
+  const createdAt =
+    String(item?.created_at || item?.createdAt || item?.generated_at || savedAt || "").trim() ||
+    null;
+  const body = String(item?.body || item?.piece_body || item?.answer || "").trim();
+  const views = Number(metrics?.views ?? item?.views ?? 0) || 0;
+  const resonances = Number(metrics?.resonances ?? item?.resonances ?? 0) || 0;
+
+  return {
+    ...item,
+    qInstanceId,
+    q_instance_id: qInstanceId,
+    q_key: qKey,
+    title,
+    ownerDisplayName,
+    ownerUserId,
+    owner_user_id: ownerUserId,
+    savedAt,
+    saved_at: savedAt,
+    source_type:
+      String(item?.source_type || item?.sourceType || "emotion_generated").trim() ||
+      "emotion_generated",
+    owner: {
+      ...owner,
+      user_id: ownerUserId,
+      display_name: ownerDisplayName,
+    },
+    question: {
+      ...question,
+      q_key: qKey,
+      title,
+    },
+    body,
+    created_at: createdAt,
+    metrics: {
+      ...metrics,
+      views,
+      resonances,
+    },
+    viewer_state: {
+      ...viewerState,
+      is_resonated: true,
+      can_resonate:
+        viewerState?.can_resonate === false || viewerState?.canResonate === false
+          ? false
+          : true,
+    },
+  };
+}
+
+function resolveHistorySavedAt(item) {
+  return String(
+    item?.saved_at ||
+      item?.savedAt ||
+      item?.resonated_at ||
+      item?.resonatedAt ||
+      item?.created_at ||
+      item?.createdAt ||
+      ""
+  ).trim();
+}
+
+function sortHistoryItems(items, order) {
+  const rows = Array.isArray(items) ? [...items] : [];
+  const oldestFirst = order === HISTORY_ORDER_OLDEST;
+  rows.sort((a, b) => {
+    const aKey = `${resolveHistorySavedAt(a)}:${resolvePieceQInstanceId(a)}`;
+    const bKey = `${resolveHistorySavedAt(b)}:${resolvePieceQInstanceId(b)}`;
+    if (aKey === bKey) return 0;
+    if (oldestFirst) return aKey < bKey ? -1 : 1;
+    return aKey > bKey ? -1 : 1;
+  });
+  return rows;
 }
 
 function normalizeDetailResonanceCount(value) {
@@ -383,6 +585,7 @@ export default function NexusScreen({ navigation }) {
   const [ownerOptionsLoading, setOwnerOptionsLoading] = useState(false);
   const [ownerOptions, setOwnerOptions] = useState([]);
   const [pieceOrder, setPieceOrder] = useState(PIECE_ORDER_LATEST);
+  const [historyOrder, setHistoryOrder] = useState(HISTORY_ORDER_LATEST);
 
   const tutorialPieceItems = useMemo(
     () => normalizeTutorialPieceItems(tutorialPieces),
@@ -414,11 +617,13 @@ export default function NexusScreen({ navigation }) {
   const [historyState, setHistoryState] = useState({
     loading: false,
     loadedModes: {},
+    order: null,
     resonances: [],
     error: "",
   });
 
   const [resonanceSubmittingIds, setResonanceSubmittingIds] = useState({});
+  const [pieceDeleteSubmittingIds, setPieceDeleteSubmittingIds] = useState({});
 
   const baseOwnerOptions = useMemo(() => {
     if (!viewerUserId) return [];
@@ -485,6 +690,10 @@ export default function NexusScreen({ navigation }) {
 
   const showPieceControls =
     !isTutorialMode && activeTab === "piece" && !!viewerUserId;
+  const historyLoadedModeKey = useMemo(
+    () => `resonances:${historyOrder}`,
+    [historyOrder]
+  );
 
   const prefetchedPieceUnread = !!getFeatureUnread("Piece", "piecesNew");
   const prefetchedEmotionLogUnread = !!getFeatureUnread("EmotionLog", "feed");
@@ -743,13 +952,14 @@ export default function NexusScreen({ navigation }) {
 
   const loadHistory = useCallback(
     async () => {
-      const safeMode = "resonances";
+      const safeMode = `resonances:${historyOrder}`;
       if (isTutorialMode) {
         setHistoryState((prev) => ({
           ...prev,
           loading: false,
           loadedModes: { ...(prev.loadedModes || {}), [safeMode]: true },
-          [safeMode]: [],
+          order: historyOrder,
+          resonances: [],
           error: "",
         }));
         return;
@@ -757,13 +967,14 @@ export default function NexusScreen({ navigation }) {
 
       setHistoryState((prev) => ({ ...prev, loading: true, error: "" }));
       try {
-        const json = await getNexusResonancePieces(20);
-        const normalized = normalizeSavedPieces(json);
+        const json = await getNexusResonancePieces(20, historyOrder);
+        const normalized = sortHistoryItems(normalizeSavedPieces(json), historyOrder);
         setHistoryState((prev) => ({
           ...prev,
           loading: false,
           loadedModes: { ...(prev.loadedModes || {}), [safeMode]: true },
-          [safeMode]: normalized,
+          order: historyOrder,
+          resonances: normalized,
           error: "",
         }));
       } catch (e) {
@@ -772,12 +983,13 @@ export default function NexusScreen({ navigation }) {
           ...prev,
           loading: false,
           loadedModes: { ...(prev.loadedModes || {}), [safeMode]: true },
-          [safeMode]: [],
+          order: historyOrder,
+          resonances: [],
           error: String(e?.message || "履歴を読み込めませんでした。"),
         }));
       }
     },
-    [isTutorialMode]
+    [historyOrder, isTutorialMode]
   );
 
   useEffect(() => {
@@ -917,22 +1129,62 @@ export default function NexusScreen({ navigation }) {
     if (activeTab === "recommend" && !recommendState.loaded && !recommendState.loading) {
       void loadRecommend();
     }
-    if (
-      activeTab === "history" &&
-      !historyState.loadedModes?.resonances &&
-      !historyState.loading
-    ) {
+    const historyOrderLoaded =
+      historyState.order === historyOrder &&
+      !!historyState.loadedModes?.[historyLoadedModeKey];
+    if (activeTab === "history" && !historyOrderLoaded && !historyState.loading) {
       void loadHistory();
     }
   }, [
     activeTab,
+    historyLoadedModeKey,
+    historyOrder,
     historyState.loadedModes,
     historyState.loading,
+    historyState.order,
     loadHistory,
     loadRecommend,
     recommendState.loaded,
     recommendState.loading,
   ]);
+
+  const handleOpenFollowList = useCallback(() => {
+    if (isTutorialMode) return;
+
+    const selfUserId = String(viewerUserId || "").trim();
+    if (!selfUserId) {
+      Alert.alert("フォローリストを開けません", "ログイン情報を取得できませんでした。");
+      return;
+    }
+
+    const params = {
+      viewedUserId: selfUserId,
+      targetUserId: selfUserId,
+      initialTab: "following",
+    };
+
+    try {
+      if (navigation?.navigate) {
+        navigation.navigate("FollowListScreen", params);
+        return;
+      }
+    } catch (e) {
+      console.warn("NexusScreen: navigate FollowListScreen failed", e);
+    }
+
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      if (parent && typeof parent.navigate === "function") {
+        parent.navigate("FollowListScreen", params);
+        return;
+      }
+    } catch (e) {
+      console.warn("NexusScreen: parent navigate FollowListScreen failed", e);
+    }
+
+    Alert.alert("フォローリストを開けません", "フォローリスト画面を開けませんでした。");
+  }, [isTutorialMode, navigation, viewerUserId]);
 
   const handleOpenOwner = useCallback(
     (userId) => {
@@ -1040,6 +1292,12 @@ export default function NexusScreen({ navigation }) {
     setPieceOrder((current) => (current === normalized ? current : normalized));
   }, []);
 
+  const handleSetHistoryOrder = useCallback((nextOrder) => {
+    const normalized =
+      nextOrder === HISTORY_ORDER_OLDEST ? HISTORY_ORDER_OLDEST : HISTORY_ORDER_LATEST;
+    setHistoryOrder((current) => (current === normalized ? current : normalized));
+  }, []);
+
   const handleOpenTutorialPieces = useCallback(() => {
     void ensureTutorialPiecesSeed();
     setTutorialStep((prev) => (prev < 16 ? 16 : prev));
@@ -1108,16 +1366,38 @@ export default function NexusScreen({ navigation }) {
               })
             : prev.items,
         }));
-        setHistoryState((prev) => ({
-          ...prev,
-          resonances: Array.isArray(prev.resonances)
-            ? prev.resonances.map((row) =>
-                String(row?.qInstanceId || "") === qInstanceId
-                  ? { ...row, resonances: nextResonances }
-                  : row
-              )
-            : prev.resonances,
-        }));
+        const nextHistoryItem = buildResonanceHistoryItemFromPiece({
+          ...item,
+          metrics: {
+            ...(item?.metrics || {}),
+            views: nextViews,
+            resonances: nextResonances,
+          },
+          viewer_state: {
+            ...(item?.viewer_state || {}),
+            is_resonated: nextIsResonated,
+            can_resonate: true,
+          },
+        });
+        setHistoryState((prev) => {
+          const currentRows = Array.isArray(prev.resonances) ? prev.resonances : [];
+          const rowsWithoutCurrent = currentRows.filter(
+            (row) => String(row?.qInstanceId || "") !== qInstanceId
+          );
+          const nextRows = nextHistoryItem
+            ? [nextHistoryItem, ...rowsWithoutCurrent]
+            : rowsWithoutCurrent;
+          return {
+            ...prev,
+            resonances: sortHistoryItems(nextRows, historyOrder),
+            loadedModes: {
+              ...(prev.loadedModes || {}),
+              [historyLoadedModeKey]: true,
+            },
+            order: historyOrder,
+            error: "",
+          };
+        });
       } catch (e) {
         console.warn("NexusScreen: piece resonance failed", e);
         const statusCode = Number(e?.status || e?.statusCode || 0);
@@ -1139,9 +1419,78 @@ export default function NexusScreen({ navigation }) {
     },
     [
       canResonatePiece,
+      historyLoadedModeKey,
+      historyOrder,
       isPieceResonated,
       resonanceSubmittingIds,
     ]
+  );
+
+  const handlePressPieceDelete = useCallback(
+    (item) => {
+      if (isTutorialMode) return;
+
+      const qInstanceId = resolvePieceQInstanceId(item);
+      const ownerUserId = resolvePieceOwnerUserId(item);
+      if (!qInstanceId || !viewerUserId || ownerUserId !== viewerUserId) {
+        return;
+      }
+      if (pieceDeleteSubmittingIds[qInstanceId]) return;
+
+      Alert.alert(
+        "Pieceを削除しますか？",
+        "本当に削除しますか？元に戻せません。",
+        [
+          { text: "キャンセル", style: "cancel" },
+          {
+            text: "削除",
+            style: "destructive",
+            onPress: async () => {
+              setPieceDeleteSubmittingIds((prev) => ({
+                ...(prev || {}),
+                [qInstanceId]: true,
+              }));
+
+              try {
+                await deleteNexusPiece({ qInstanceId });
+                setPieceState((prev) => ({
+                  ...prev,
+                  items: Array.isArray(prev.items)
+                    ? prev.items.filter(
+                        (row) => resolvePieceQInstanceId(row) !== qInstanceId
+                      )
+                    : prev.items,
+                }));
+                setHistoryState((prev) => ({
+                  ...prev,
+                  resonances: Array.isArray(prev.resonances)
+                    ? prev.resonances.filter(
+                        (row) => String(row?.qInstanceId || "") !== qInstanceId
+                      )
+                    : prev.resonances,
+                }));
+              } catch (e) {
+                console.warn("NexusScreen: piece delete failed", e);
+                const statusCode = Number(e?.status || e?.statusCode || 0);
+                const rawMessage = String(e?.message || "").trim();
+                const message =
+                  statusCode === 403
+                    ? "自分のPieceだけ削除できます。"
+                    : rawMessage || "Pieceを削除できませんでした。";
+                Alert.alert("削除できません", message);
+              } finally {
+                setPieceDeleteSubmittingIds((prev) => {
+                  const next = { ...(prev || {}) };
+                  delete next[qInstanceId];
+                  return next;
+                });
+              }
+            },
+          },
+        ]
+      );
+    },
+    [isTutorialMode, pieceDeleteSubmittingIds, viewerUserId]
   );
 
   const getTutorialTargetRef = useCallback(() => {
@@ -1382,6 +1731,9 @@ export default function NexusScreen({ navigation }) {
     } else {
       content = pieceState.items.map((item) => {
         const qInstanceId = resolvePieceQInstanceId(item);
+        const ownerUserId = resolvePieceOwnerUserId(item);
+        const canDeletePiece =
+          !!qInstanceId && !!viewerUserId && ownerUserId === viewerUserId;
         return (
           <NexusPieceCard
             key={String(qInstanceId || Math.random())}
@@ -1390,6 +1742,9 @@ export default function NexusScreen({ navigation }) {
             canResonate={canResonatePiece(item)}
             resonanceSubmitting={!!resonanceSubmittingIds[qInstanceId]}
             onPressResonance={() => handlePressPieceResonance(item)}
+            canDelete={canDeletePiece}
+            deleteSubmitting={!!pieceDeleteSubmittingIds[qInstanceId]}
+            onPressDelete={() => handlePressPieceDelete(item)}
           />
         );
       });
@@ -1418,11 +1773,12 @@ export default function NexusScreen({ navigation }) {
         {emotionLogState.items.map((row, rowIndex) => (
           <React.Fragment key={row.id}>
             <View style={styles.emotionLogRow}>
-              <View style={styles.emotionLogLeft}>
+              <View style={styles.emotionLogHeaderRow}>
                 <Text style={styles.emotionLogName}>{row.ownerName}</Text>
+                <Text style={styles.emotionLogTime}>{row.timeLabel}</Text>
               </View>
 
-              <View style={styles.emotionLogCenter}>
+              <View style={styles.emotionLogBadgeArea}>
                 {(row.items || []).length === 0 ? (
                   <Text style={styles.emotionLogNoEmotion}>
                     まだ感情が選択されていません
@@ -1457,8 +1813,6 @@ export default function NexusScreen({ navigation }) {
                   </View>
                 )}
               </View>
-
-              <Text style={styles.emotionLogTime}>{row.timeLabel}</Text>
             </View>
 
             {rowIndex < emotionLogState.items.length - 1 ? (
@@ -1502,29 +1856,87 @@ export default function NexusScreen({ navigation }) {
     );
   };
 
+  const renderHistoryControls = () => {
+    if (isTutorialMode) return null;
+
+    return (
+      <View style={styles.historyControls}>
+        <Text style={styles.historyControlLabel}>表示順</Text>
+        <View style={styles.historySortRow}>
+          <CocolonPressable
+            style={[
+              styles.historySortButton,
+              historyOrder === HISTORY_ORDER_LATEST && styles.historySortButtonActive,
+            ]}
+            onPress={() => handleSetHistoryOrder(HISTORY_ORDER_LATEST)}
+            accessibilityLabel="履歴を新しい順で表示する"
+          >
+            <Text
+              style={[
+                styles.historySortButtonText,
+                historyOrder === HISTORY_ORDER_LATEST &&
+                  styles.historySortButtonTextActive,
+              ]}
+            >
+              新しい順
+            </Text>
+          </CocolonPressable>
+          <CocolonPressable
+            style={[
+              styles.historySortButton,
+              styles.historySortButtonSpacer,
+              historyOrder === HISTORY_ORDER_OLDEST && styles.historySortButtonActive,
+            ]}
+            onPress={() => handleSetHistoryOrder(HISTORY_ORDER_OLDEST)}
+            accessibilityLabel="履歴を古い順で表示する"
+          >
+            <Text
+              style={[
+                styles.historySortButtonText,
+                historyOrder === HISTORY_ORDER_OLDEST &&
+                  styles.historySortButtonTextActive,
+              ]}
+            >
+              古い順
+            </Text>
+          </CocolonPressable>
+        </View>
+      </View>
+    );
+  };
+
   const renderHistoryTab = () => {
-    if (historyState.loading && !historyState.loadedModes?.resonances) {
-      return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
+    const historyOrderLoaded =
+      historyState.order === historyOrder &&
+      !!historyState.loadedModes?.[historyLoadedModeKey];
+    let content = null;
+    if (!historyOrderLoaded) {
+      content = <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
+    } else if (historyState.error && !historyState.resonances.length) {
+      content = <Text style={styles.errorText}>{historyState.error}</Text>;
+    } else if (!historyState.resonances.length) {
+      content = <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>;
+    } else {
+      content = historyState.resonances.map((item, index) => {
+        const qInstanceId = resolvePieceQInstanceId(item) || `history-${index}`;
+        const ownerUserId = resolvePieceOwnerUserId(item);
+        return (
+          <NexusPieceCard
+            key={String(qInstanceId)}
+            item={item}
+            onPressOwner={() => handleOpenOwner(ownerUserId)}
+            canResonate={canResonatePiece(item)}
+            resonanceSubmitting={!!resonanceSubmittingIds[qInstanceId]}
+            onPressResonance={() => handlePressPieceResonance(item)}
+          />
+        );
+      });
     }
-    if (historyState.error && !historyState.resonances.length) {
-      return <Text style={styles.errorText}>{historyState.error}</Text>;
-    }
-    if (!historyState.resonances.length) {
-      return <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>;
-    }
+
     return (
       <View>
-        {historyState.resonances.map((item) => (
-          <View key={item.qInstanceId} style={styles.simpleCard}>
-            <View style={styles.simpleCardHeader}>
-              <Text style={styles.simpleCardTitle}>{item.title}</Text>
-              <Text style={styles.simpleCardMeta}>
-                {formatDateLabel(item.savedAt)}
-              </Text>
-            </View>
-            <Text style={styles.simpleCardBody}>{item.ownerDisplayName}</Text>
-          </View>
-        ))}
+        {renderHistoryControls()}
+        {content}
       </View>
     );
   };
@@ -1563,25 +1975,45 @@ export default function NexusScreen({ navigation }) {
           <View ref={titleRef} collapsable={false}>
             <Text style={styles.panelTitle}>ピース</Text>
           </View>
-          <CocolonPressable
-            style={styles.refreshButton}
-            onPress={() => {
-              void refreshNexusUnreadState();
-              void loadRanking();
-              void loadOwnerOptions();
-              if (activeTab === "piece") void loadPieces();
-              if (activeTab === "emotion_log") void loadEmotionLog();
-              if (activeTab === "recommend") void loadRecommend();
-              if (activeTab === "history") void loadHistory();
-            }}
-            accessibilityLabel="Pieceを再読み込みする"
-          >
-            <Ionicons
-              name="refresh-outline"
-              size={18}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
+          <View style={styles.panelHeaderActions}>
+            {!isTutorialMode ? (
+              <CocolonPressable
+                style={[
+                  styles.refreshButton,
+                  styles.followListButton,
+                  !viewerUserId && styles.headerButtonDisabled,
+                ]}
+                onPress={handleOpenFollowList}
+                disabled={!viewerUserId}
+                accessibilityLabel="自分のフォローリストを開く"
+              >
+                <Ionicons
+                  name="people-outline"
+                  size={18}
+                  color={colors.TEXT_ON_LIGHT}
+                />
+              </CocolonPressable>
+            ) : null}
+            <CocolonPressable
+              style={styles.refreshButton}
+              onPress={() => {
+                void refreshNexusUnreadState();
+                void loadRanking();
+                void loadOwnerOptions();
+                if (activeTab === "piece") void loadPieces();
+                if (activeTab === "emotion_log") void loadEmotionLog();
+                if (activeTab === "recommend") void loadRecommend();
+                if (activeTab === "history") void loadHistory();
+              }}
+              accessibilityLabel="Pieceを再読み込みする"
+            >
+              <Ionicons
+                name="refresh-outline"
+                size={18}
+                color={colors.TEXT_ON_LIGHT}
+              />
+            </CocolonPressable>
+          </View>
         </View>
 
         {isTutorialMode ? (
@@ -1820,6 +2252,11 @@ function createStyles(COLORS, ui) {
           color: COLORS.TITLE_GOLD,
           letterSpacing: 0.8,
         },
+        panelHeaderActions: {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        },
         refreshButton: {
           width: 40,
           height: 36,
@@ -1829,6 +2266,12 @@ function createStyles(COLORS, ui) {
           backgroundColor: COLORS.FIELD_BG,
           borderWidth: 1,
           borderColor: COLORS.CARD_BORDER,
+        },
+        followListButton: {
+          marginRight: 8,
+        },
+        headerButtonDisabled: {
+          opacity: 0.52,
         },
         todayOverallEmotionSummary: {
           paddingVertical: 8,
@@ -2053,24 +2496,25 @@ function createStyles(COLORS, ui) {
           elevation: 3,
         },
         emotionLogRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
           paddingVertical: 10,
           paddingHorizontal: 12,
         },
-        emotionLogLeft: {
+        emotionLogHeaderRow: {
           flexDirection: "row",
-          alignItems: "center",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
         },
         emotionLogName: {
+          flex: 1,
+          minWidth: 0,
+          paddingRight: 8,
           fontWeight: "700",
           color: COLORS.TEXT_ON_LIGHT,
           fontSize: 15,
         },
-        emotionLogCenter: {
-          flex: 1,
-          alignItems: "center",
+        emotionLogBadgeArea: {
+          marginTop: 8,
+          alignItems: "flex-start",
         },
         emotionLogNoEmotion: {
           fontSize: 12,
@@ -2079,7 +2523,7 @@ function createStyles(COLORS, ui) {
         emotionLogBadgeRow: {
           flexDirection: "row",
           flexWrap: "wrap",
-          justifyContent: "center",
+          justifyContent: "flex-start",
         },
         emotionLogBadge: {
           paddingHorizontal: 10,
@@ -2140,13 +2584,25 @@ function createStyles(COLORS, ui) {
           lineHeight: 20,
           color: COLORS.TEXT_ON_LIGHT,
         },
-        historySwitchRow: {
+        historyControls: {
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "flex-end",
           marginBottom: 12,
         },
-        historySwitchChip: {
+        historyControlLabel: {
+          fontSize: 11,
+          lineHeight: 16,
+          fontWeight: "900",
+          color: COLORS.TEXT_SUBTLE,
+          letterSpacing: 0.3,
           marginRight: 8,
+        },
+        historySortRow: {
+          flexDirection: "row",
+          alignItems: "center",
+        },
+        historySortButton: {
           paddingHorizontal: 12,
           paddingVertical: 8,
           borderRadius: 999,
@@ -2154,16 +2610,20 @@ function createStyles(COLORS, ui) {
           borderColor: COLORS.CARD_BORDER,
           backgroundColor: COLORS.FIELD_BG,
         },
-        historySwitchChipActive: {
+        historySortButtonSpacer: {
+          marginLeft: 8,
+        },
+        historySortButtonActive: {
           backgroundColor: COLORS.GOLD_BUTTON,
           borderColor: COLORS.GOLD_BUTTON_BORDER,
         },
-        historySwitchText: {
+        historySortButtonText: {
           fontSize: 12,
-          fontWeight: "800",
+          lineHeight: 16,
+          fontWeight: "900",
           color: COLORS.TEXT_ON_LIGHT,
         },
-        historySwitchTextActive: {
+        historySortButtonTextActive: {
           color: COLORS.ACCENT_TEXT,
         },
         pickerBackdrop: {

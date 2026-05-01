@@ -34,7 +34,7 @@ import { ACCOUNT_WIRE, FOLLOW_WIRE, PIECE_WIRE, buildFollowStatsPath, readConnec
 
 // 🔧 ここを変えると Account 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
-const DISPLAY_NAME_MAX_LENGTH = 20;
+const DISPLAY_NAME_MAX_LENGTH = 15;
 const DISPLAY_NAME_TAKEN_MESSAGE = "このユーザー名はすでに使われています。";
 
 function normalizeDisplayName(value) {

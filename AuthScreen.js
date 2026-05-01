@@ -12,6 +12,12 @@ import {
 } from "react-native";
 import { useAuth } from "./AuthContext"; // 置いた場所によってパス調整してね
 
+const DISPLAY_NAME_MAX_LENGTH = 15;
+
+function normalizeDisplayName(value) {
+  return String(value || "").trim();
+}
+
 export default function AuthScreen() {
   const {
     signIn,
@@ -115,7 +121,9 @@ export default function AuthScreen() {
       return !email || !password;
     }
     if (mode === "signup") {
-      if (!email || !password || !password2 || !displayName) return true;
+      const nextDisplayName = normalizeDisplayName(displayName);
+      if (!email || !password || !password2 || !nextDisplayName) return true;
+      if (nextDisplayName.length > DISPLAY_NAME_MAX_LENGTH) return true;
       if (password !== password2) return true;
       return false;
     }
@@ -174,7 +182,16 @@ export default function AuthScreen() {
       }
 
       if (mode === "signup") {
-        const result = await signUp({ email, password, displayName });
+        const nextDisplayName = normalizeDisplayName(displayName);
+        if (!nextDisplayName) {
+          setInfo("ユーザー名を入力してください。");
+          return;
+        }
+        if (nextDisplayName.length > DISPLAY_NAME_MAX_LENGTH) {
+          setInfo(`ユーザー名は${DISPLAY_NAME_MAX_LENGTH}文字以内で入力してください。`);
+          return;
+        }
+        const result = await signUp({ email, password, displayName: nextDisplayName });
         if (result?.needsConfirmation) {
           setInfo(`${result.message}\n（メール認証が完了したらログインできます）`);
           setMode("signin");
@@ -319,12 +336,13 @@ export default function AuthScreen() {
                   placeholderTextColor="#374151"
                   value={displayName}
                   onChangeText={setDisplayName}
+                  maxLength={DISPLAY_NAME_MAX_LENGTH}
                 />
               )}
 
               {mode === "signup" ? (
                 <Text style={styles.noteText}>
-                  ※ユーザー名は、他ユーザーに公開されます。
+                  ※ユーザー名は、他ユーザーに公開されます。（{DISPLAY_NAME_MAX_LENGTH}文字まで）
                 </Text>
               ) : null}
 
