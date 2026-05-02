@@ -611,7 +611,14 @@ function MainTabs() {
   } = useUnread();
 
   const { isPaid, loading: subscriptionLoading } = useSubscription();
-  const { isTutorialMode } = useTutorial();
+  const { session, recoveryMode } = useAuth();
+  const {
+    isTutorialMode,
+    tutorialFlagsLoaded,
+    tutorialCompleted,
+    startTutorial,
+    setTutorialStep,
+  } = useTutorial();
   const [isAppActive, setIsAppActive] = useState(() => (AppState?.currentState || "active") === "active");
   const [selfStructureBanner, setSelfStructureBanner] = useState({ visible: false, reportMode: "standard" });
   const selfStructureBannerHideTimerRef = useRef(null);
@@ -632,6 +639,32 @@ function MainTabs() {
   const [activeRouteName, setActiveRouteName] = useState("Input");
   const frameEnabled = !HIDDEN_SCREENS.has(activeRouteName);
   const [pieceLinkPayload, setPieceLinkPayload] = useState(null);
+
+
+  useEffect(() => {
+    if (!session || recoveryMode) return;
+    if (!tutorialFlagsLoaded || tutorialCompleted || isTutorialMode) return;
+
+    const started = startTutorial();
+    if (started === false) return;
+
+    setTutorialStep(1);
+    requestAnimationFrame(() => {
+      try {
+        if (navigationRef.isReady()) {
+          navigationRef.navigate("Input", { screen: "Input" });
+        }
+      } catch {}
+    });
+  }, [
+    isTutorialMode,
+    recoveryMode,
+    session,
+    setTutorialStep,
+    startTutorial,
+    tutorialCompleted,
+    tutorialFlagsLoaded,
+  ]);
 
   const getTabBarActiveName = React.useCallback((name) => {
     const n = typeof name === "string" ? name : "";

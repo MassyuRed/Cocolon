@@ -216,7 +216,6 @@ export default function AnalysisContentFirstScreen({
   tutorialStep = 0,
   tutorialReports = null,
   tutorialCounts = null,
-  tutorialConnectionRows = [],
   tutorialSelfAnalysisGuide = null,
 }) {
   const { styles, colors, ui } = useAnalysisMenuStyles();
@@ -260,10 +259,6 @@ export default function AnalysisContentFirstScreen({
       ? effectiveLatestReports[activeEmotionReportType] || null
       : null;
   const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
-  const safeConnectionRows = Array.isArray(tutorialConnectionRows)
-    ? tutorialConnectionRows
-    : [];
-
   const currentEmotionHistoryLabel =
     EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "日報";
 
@@ -356,31 +351,6 @@ export default function AnalysisContentFirstScreen({
           <Text style={styles.summaryText}>{`今月の入力回数は${safeMonthCount}回です`}</Text>
         </View>
       </View>
-
-      {isTutorialMode && safeConnectionRows.length > 0 ? (
-        <View style={localStyles.connectionCard}>
-          <Text style={localStyles.connectionTitle}>感情入力からつながる三大要素</Text>
-          {safeConnectionRows.map((row, index) => (
-            <View
-              key={`${row?.title || "row"}-${index}`}
-              style={[
-                localStyles.connectionRow,
-                index === 0 && localStyles.connectionRowFirst,
-              ]}
-            >
-              <Text style={localStyles.connectionRowTitle}>
-                {String(row?.title || "")}
-              </Text>
-              <Text style={localStyles.connectionRowText}>
-                {String(row?.description || "")}
-              </Text>
-              <Text style={localStyles.connectionRowText}>
-                {String(row?.example || "")}
-              </Text>
-            </View>
-          ))}
-        </View>
-      ) : null}
 
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>

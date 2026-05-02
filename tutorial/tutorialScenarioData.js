@@ -1,182 +1,180 @@
-const GENERATED_AT = "2026-05-02T09:30:00.000Z";
+import tutorialFixtures from "./generated/tutorialFixtures.generated.json";
 
 export const TUTORIAL_TOTAL_STEPS = 17;
 
+const FIXTURES = tutorialFixtures && typeof tutorialFixtures === "object" ? tutorialFixtures : {};
+const FIXTURE_INPUT = FIXTURES.input && typeof FIXTURES.input === "object" ? FIXTURES.input : {};
+const FIXTURE_PIECE = FIXTURES.piece && typeof FIXTURES.piece === "object" ? FIXTURES.piece : {};
+const FIXTURE_ANALYSIS = FIXTURES.analysis && typeof FIXTURES.analysis === "object" ? FIXTURES.analysis : {};
+
+const FALLBACK_MEMO =
+  "なんか少しだけ気分が軽い。\nやること全部はできてないけど、ひとつ片づいたからまあいいかって感じ。\nこういう小さいことで落ち着く日もあるんだな。";
+const FALLBACK_MEMO_ACTION =
+  "机の上を少し片づけた。\n好きな飲み物を用意して、少しゆっくりした。";
+const DISPLAY_NAME_PLACEHOLDER = "__DISPLAY_NAME__";
+
+function freezeClone(value) {
+  try {
+    return Object.freeze(JSON.parse(JSON.stringify(value)));
+  } catch {
+    return Object.freeze(value);
+  }
+}
+
+function compact(value) {
+  return String(value || "").trim();
+}
+
+function readFirstObject(...values) {
+  for (const value of values) {
+    if (value && typeof value === "object" && !Array.isArray(value)) return value;
+  }
+  return {};
+}
+
+function normalizeReport(report, reportType) {
+  const safe = readFirstObject(report);
+  return Object.freeze({
+    ...safe,
+    report_type: compact(safe.report_type) || reportType,
+    title: compact(safe.title),
+    content_text: compact(safe.content_text),
+  });
+}
+
+const fixturePreview = readFirstObject(FIXTURE_PIECE.preview);
+const fixturePublish = readFirstObject(FIXTURE_PIECE.publish);
+const fixtureEmlisReply = readFirstObject(FIXTURES.emlis_reply, fixturePublish.input_feedback);
+const fixtureFeedItems = Array.isArray(FIXTURE_PIECE.feed_items)
+  ? FIXTURE_PIECE.feed_items.filter(Boolean)
+  : [];
+
+export const TUTORIAL_HAS_VALID_FIXTURES =
+  FIXTURES?.validation?.passed === true &&
+  compact(fixturePreview.piece_text) &&
+  compact(fixtureEmlisReply.comment_text) &&
+  fixtureFeedItems.length >= 2;
+
 export const TUTORIAL_INPUT_SAMPLE = Object.freeze({
-  memo:
-    "なんか少しだけ気分が軽い。\nやること全部はできてないけど、ひとつ片づいたからまあいいかって感じ。\nこういう小さいことで落ち着く日もあるんだな。",
-  memoAction:
-    "机の上を少し片づけた。\n好きな飲み物を用意して、少しゆっくりした。",
-  emotions: Object.freeze([
-    Object.freeze({ type: "平穏", strength: "medium" }),
-    Object.freeze({ type: "喜び", strength: "weak" }),
-    Object.freeze({ type: "不安", strength: "weak" }),
-  ]),
-  categories: Object.freeze(["生活", "健康", "価値観"]),
-  sendEmotionNotification: true,
+  memo: compact(FIXTURE_INPUT.memo) || FALLBACK_MEMO,
+  memoAction: compact(FIXTURE_INPUT.memo_action) || FALLBACK_MEMO_ACTION,
+  emotions: freezeClone(
+    Array.isArray(FIXTURE_INPUT.emotions) && FIXTURE_INPUT.emotions.length
+      ? FIXTURE_INPUT.emotions
+      : [
+          { type: "平穏", strength: "medium" },
+          { type: "喜び", strength: "weak" },
+          { type: "不安", strength: "weak" },
+        ]
+  ),
+  categories: freezeClone(
+    Array.isArray(FIXTURE_INPUT.category) && FIXTURE_INPUT.category.length
+      ? FIXTURE_INPUT.category
+      : ["生活", "健康", "価値観"]
+  ),
+  sendEmotionNotification: FIXTURE_INPUT.send_emotion_notification !== false,
+});
+
+export const TUTORIAL_PIECE_PREVIEW = freezeClone({
+  ...fixturePreview,
+  preview_id: compact(fixturePreview.preview_id) || "tutorial-preview-self",
+  question: compact(fixturePreview.question || fixturePreview.title),
+  title: compact(fixturePreview.title || fixturePreview.question),
+  piece_text: compact(fixturePreview.piece_text || fixturePreview.answer_display_text),
+  answer_display_text: compact(
+    fixturePreview.answer_display_text || fixturePreview.piece_text
+  ),
+  quota: readFirstObject(fixturePreview.quota),
 });
 
 export const TUTORIAL_EMLIS_REPLY = Object.freeze({
-  contextLabel: "感情入力から生成された応答",
-  generatedBy: "emlis_ai_v2",
-  commentText: `{displayName}さん、こんにちは。Emlisです。
-今回は、平穏（中）を中心に、書いてくれた言葉そのものを見ながら受け取ります。
-なんか少しだけ気分が軽いという出来事を、まずそのまま受け取りました。
-中心としては平穏（中）を見ていますが、喜び（弱）、不安（弱）もなかったことにせず一緒に受け取ります。
-その喜びは、小さく流さずに、一緒に大事なものとして受け取りたいです。
-いつでも、あなたの言葉をEmlisは受け取ります。`,
+  contextLabel: "",
+  commentText: compact(fixtureEmlisReply.comment_text),
+  meta: freezeClone(fixtureEmlisReply.emlis_ai || {}),
 });
 
-const SELF_PIECE_BODY =
-  "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。";
+export function getTutorialEmlisReplyText(displayName) {
+  const name = compact(displayName) || "あなた";
+  const raw = compact(TUTORIAL_EMLIS_REPLY.commentText);
+  if (!raw) return "";
+  return raw
+    .replaceAll(DISPLAY_NAME_PLACEHOLDER, name)
+    .replaceAll("{displayName}", name);
+}
 
-export const TUTORIAL_SELF_PIECE = Object.freeze({
-  id: "tutorial-piece-self-20260502",
-  q_instance_id: "tutorial-q-self-20260502",
-  q_key: "generated:q:1046d3b900e70b3bab162096ecb96d44",
-  title: "大切にしていることは？",
-  question: "大切にしていることは？",
-  body: SELF_PIECE_BODY,
-  piece_text: SELF_PIECE_BODY,
-  answer_display_text: SELF_PIECE_BODY,
-  answer_display_state: "ready",
-  answer_norm_hash:
-    "515d1d48a4af852499056ebe1d82320870b478b41864a4f9fbfdeff2db6ed287",
-  owner_user_id: "tutorial-self",
-  display_name: "自分",
-  share_code: "YOU",
-  is_tutorial: true,
-  tutorial_kind: "self",
-  created_at: GENERATED_AT,
-  resonances: 0,
-  views: 0,
-  is_new: true,
-});
+function normalizeTutorialPiece(item, fallbackKind) {
+  const safe = readFirstObject(item);
+  const owner = readFirstObject(safe.owner);
+  const question = readFirstObject(safe.question);
+  const metrics = readFirstObject(safe.metrics);
+  const viewerState = readFirstObject(safe.viewer_state);
+  const title = compact(safe.title || question.title || safe.question);
+  const body = compact(safe.body || safe.piece_text || safe.answer_display_text);
+  return Object.freeze({
+    ...safe,
+    id: compact(safe.id || safe.q_instance_id),
+    q_instance_id: compact(safe.q_instance_id || safe.id),
+    q_key: compact(safe.q_key || question.q_key),
+    title,
+    question: title,
+    body,
+    piece_text: body,
+    answer_display_text: body,
+    owner_user_id: compact(safe.owner_user_id || owner.user_id),
+    display_name: compact(safe.display_name || owner.display_name) || "ユーザー",
+    share_code: compact(safe.share_code || owner.share_code),
+    created_at: compact(safe.created_at),
+    resonances: Number(safe.resonances ?? metrics.resonances ?? 0) || 0,
+    views: Number(safe.views ?? metrics.views ?? 0) || 0,
+    is_new: safe.is_new === true || viewerState.is_new === true,
+    is_tutorial: true,
+    tutorial_kind: fallbackKind,
+  });
+}
 
-export const TUTORIAL_PIECE_PREVIEW = Object.freeze({
-  preview_id: "tutorial-preview-self-20260502",
-  question: TUTORIAL_SELF_PIECE.title,
-  title: TUTORIAL_SELF_PIECE.title,
-  q_key: TUTORIAL_SELF_PIECE.q_key,
-  reflection_text: SELF_PIECE_BODY,
-  piece_text: SELF_PIECE_BODY,
-  answer_display_text: SELF_PIECE_BODY,
-  answer_display_state: "ready",
-  quota: Object.freeze({
-    tier: "free",
-    publish_limit: 5,
-    remaining_count: 5,
-    is_unlimited: false,
-    display_text: "今月のPiece生成回数: Freeの５回",
-  }),
-  meta: Object.freeze({
-    source_input_scope: "current_emotion_input",
-    generated_from: "tutorial-fixed-sample",
-  }),
-});
-
-const FOLLOWED_USER_PIECE_BODY =
-  "全部が進んだわけではなくても、ひとつ整えられた感覚を大事にする。小さな落ち着きが、次の自分を支えてくれると思っています。";
-
-export const TUTORIAL_FOLLOWED_USER_PIECE = Object.freeze({
-  id: "tutorial-piece-user-20260502",
-  q_instance_id: "tutorial-q-user-20260502",
-  q_key: "generated:q:1046d3b900e70b3bab162096ecb96d44",
-  title: "大切にしていることは？",
-  question: "大切にしていることは？",
-  body: FOLLOWED_USER_PIECE_BODY,
-  piece_text: FOLLOWED_USER_PIECE_BODY,
-  answer_display_text: FOLLOWED_USER_PIECE_BODY,
-  answer_display_state: "ready",
-  answer_norm_hash:
-    "b7b251a6ed0331d6f23e329e491e8a1bac1a912927774eb86489b593025c0c9b",
-  owner_user_id: "tutorial-follow-1",
-  display_name: "User",
-  share_code: "USER",
-  is_tutorial: true,
-  tutorial_kind: "mock",
-  created_at: "2026-05-02T09:20:00.000Z",
-  resonances: 4,
-  views: 12,
-  is_new: true,
-});
-
+export const TUTORIAL_SELF_PIECE = normalizeTutorialPiece(
+  fixtureFeedItems[0],
+  "self"
+);
+export const TUTORIAL_FOLLOWED_USER_PIECE = normalizeTutorialPiece(
+  fixtureFeedItems[1],
+  "followed"
+);
 export const TUTORIAL_PIECES = Object.freeze([
   TUTORIAL_SELF_PIECE,
   TUTORIAL_FOLLOWED_USER_PIECE,
 ]);
 
-function buildTutorialReport({ type, title, periodStart, periodEnd, contentText }) {
-  const reportContent = String(contentText || "").trim();
-  return Object.freeze({
-    report_type: type,
-    title,
-    period_start: periodStart,
-    period_end: periodEnd,
-    generated_at: GENERATED_AT,
-    updated_at: GENERATED_AT,
-    viewer_tier: "plus",
-    content_text: reportContent,
-    content_json: JSON.stringify({
-      standardReport: {
-        title,
-        contentText: reportContent,
-      },
-    }),
-  });
-}
-
 export const TUTORIAL_ANALYSIS_COUNTS = Object.freeze({
-  today: 4,
-  week: 21,
-  month: 72,
+  today: Number(FIXTURE_ANALYSIS?.counts?.today || 0) || 4,
+  week: Number(FIXTURE_ANALYSIS?.counts?.week || 0) || 21,
+  month: Number(FIXTURE_ANALYSIS?.counts?.month || 0) || 72,
 });
 
 export const TUTORIAL_ANALYSIS_REPORTS = Object.freeze({
-  daily: buildTutorialReport({
-    type: "daily",
-    title: "日報：小さく整えた一日",
-    periodStart: "2026-05-02",
-    periodEnd: "2026-05-02",
-    contentText:
-      "この日は「平穏」と「喜び」が中心に現れていました。\n時間帯の雰囲気として、朝は「平穏」が多く見られました／昼は「喜び」が多く見られました／夜は「平穏」が多く見られました。\nメモから少しだけ：\n「窓を開けたら、少し気分が軽くなった。」\n「好きな飲み物を用意できて、少しうれしかった。」\n「やることが残っていて少し気になった。」\n1日おつかれさまでした。あなたの感じたことは、ここにちゃんと残っています。\n明日も、無理なく一言だけでも記録してみてください。",
-  }),
-  weekly: buildTutorialReport({
-    type: "weekly",
-    title: "週報：小さな切り替えが増えた週",
-    periodStart: "2026-04-27",
-    periodEnd: "2026-05-03",
-    contentText:
-      "この週は 平穏/喜び が中心に観測された。\n1週間、おつかれさまでした。小さな観測が積み上がっています。\n最近の週と比べて、切り替わりに大きな差は見られませんでした。\n最近の週と比べて、感情の強弱に大きな変化は見られませんでした。\n過去と比べて、分布の偏りに大きな変化は見られませんでした。\n補正ループ（不安→平穏→喜び）が2回観測されました。これまでと同様の構造が見られます。\n来週も同じ観測リズムを続けると、傾向がクリアになります。",
-  }),
-  monthly: buildTutorialReport({
-    type: "monthly",
-    title: "月報：整える行動が感情を支えた月",
-    periodStart: "2026-05-01",
-    periodEnd: "2026-05-31",
-    contentText:
-      "今月は不安と平穏が中心に現れ、全体を通して緩やかなリズムが続いた。 第2週を境に、重心が不安から平穏方向へと移行した兆しがある。 モチーフ（peace→joy→peace）が月内で18回観測され、整え直す動きが印象的だった。\n今月も観測を続けられたこと自体が大切です。無理のないリズムで大丈夫です。\n主要なモチーフの出現回数を上に反映しました。\n重心の移動は段階的に進みました。\n来月は、今月の落ち着きがどの週で再現されるかを軽く観測してみましょう。",
-  }),
+  daily: normalizeReport(FIXTURE_ANALYSIS?.reports?.daily, "daily"),
+  weekly: normalizeReport(FIXTURE_ANALYSIS?.reports?.weekly, "weekly"),
+  monthly: normalizeReport(FIXTURE_ANALYSIS?.reports?.monthly, "monthly"),
 });
 
 export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
     title: "Emlisからの応答",
     description:
-      "入力した独り言をEmlisが受け取り、その場で短く返答します。",
-    example: "今回の入力から実生成した応答を表示します。",
+      "入力した気持ちを、その場でEmlisが受け取って返答します。",
+    example: "今の言葉を、ひとつの返答として受け取れます。",
   }),
   Object.freeze({
     title: "分析レポート",
     description:
-      "入力が積み重なると、日報・週報・月報として振り返れます。",
-    example: "日々入力したユーザーを想定した実生成レポートを表示します。",
+      "入力が続くと、日報・週報・月報として振り返れます。",
+    example: "自分の気持ちの流れを、あとから見返せます。",
   }),
   Object.freeze({
     title: "Piece",
     description:
-      "ラフな独り言が、問いと答えとして読みやすい形に整えられます。",
-    example: "今回の入力から実生成した問いと答えを表示します。",
+      "独り言のようなメモが、読みやすい問いと答えに整えられます。",
+    example: "自分のPieceや、フォロー中ユーザーのPieceを投稿タブで見られます。",
   }),
 ]);
 
@@ -186,9 +184,8 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
     "自己分析レポートでは、日々の感情入力をもとに、自分の考え方や感情の傾向をより深く振り返ることができます。\nこのレポートは、サブスク加入後に閲覧できます。",
 });
 
-
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
-  body: `Emlisには、感情通知やランキングなど、入力後に広がる機能もあります。
-ここではすべてを細かく説明しません。チュートリアル後に、ご自身のペースで確認してみてください。`,
+  body:
+    "Emlisには、感情通知やランキングなど、あとから楽しめる機能もあります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

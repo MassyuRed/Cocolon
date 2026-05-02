@@ -11,7 +11,10 @@ import {
   patchAccountProfileMe,
 } from "./lib/api/account/profileApi";
 import { useAuth } from "./AuthContext";
-import { TUTORIAL_PIECES } from "./tutorial/tutorialScenarioData";
+import {
+  TUTORIAL_HAS_VALID_FIXTURES,
+  TUTORIAL_PIECES,
+} from "./tutorial/tutorialScenarioData";
 
 const TutorialContext = createContext(undefined);
 
@@ -24,6 +27,7 @@ const INITIAL_TUTORIAL_STATE = Object.freeze({
   tutorialEmotions: [],
   tutorialPieces: [],
   tutorialEmotionLogFeed: [],
+  tutorialResetToken: 0,
 });
 
 function cloneInitialArrays() {
@@ -72,6 +76,9 @@ export function TutorialProvider({ children }) {
   );
   const [tutorialEmotionLogFeed, setTutorialEmotionLogFeed] = useState(
     cloneInitialArrays().tutorialEmotionLogFeed
+  );
+  const [tutorialResetToken, setTutorialResetToken] = useState(
+    INITIAL_TUTORIAL_STATE.tutorialResetToken
   );
 
   const syncTutorialFlagsToProfile = useCallback(async (patch) => {
@@ -139,11 +146,16 @@ export function TutorialProvider({ children }) {
   }, []);
 
   const startTutorial = useCallback(() => {
+    if (!TUTORIAL_HAS_VALID_FIXTURES) {
+      console.warn("TutorialContext: tutorial fixtures are not valid; tutorial start aborted");
+      return false;
+    }
     setIsTutorialMode(true);
     setTutorialCompleted(false);
     setTutorialSkipped(false);
     clearTutorialData();
     setTutorialPieces(cloneTutorialPieceItems(TUTORIAL_PIECES));
+    return true;
   }, [clearTutorialData]);
 
   const endTutorial = useCallback(async () => {
@@ -151,6 +163,7 @@ export function TutorialProvider({ children }) {
     setTutorialCompleted(true);
     setTutorialSkipped(false);
     clearTutorialData();
+    setTutorialResetToken((prev) => prev + 1);
     await syncTutorialFlagsToProfile({
       tutorial_completed: true,
       tutorial_skipped: false,
@@ -218,6 +231,7 @@ export function TutorialProvider({ children }) {
       tutorialEmotions,
       tutorialPieces,
       tutorialEmotionLogFeed,
+      tutorialResetToken,
       hasTutorialEmotionLog: tutorialEmotionLogFeed.length > 0,
       setIsTutorialMode,
       setTutorialFlagsLoaded,
@@ -246,6 +260,7 @@ export function TutorialProvider({ children }) {
       tutorialEmotions,
       tutorialPieces,
       tutorialEmotionLogFeed,
+      tutorialResetToken,
       startTutorial,
       endTutorial,
       skipTutorial,

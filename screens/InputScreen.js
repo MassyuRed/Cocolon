@@ -56,6 +56,7 @@ import NoticeModal from "../components/NoticeModal";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import EmotionPiecePreviewModal from "../components/EmotionPiecePreviewModal";
 import {
+  getTutorialEmlisReplyText,
   TUTORIAL_EMLIS_REPLY,
   TUTORIAL_INPUT_SAMPLE,
   TUTORIAL_PIECE_PREVIEW,
@@ -331,7 +332,7 @@ const CATEGORY_OPTIONS = Object.freeze([
 ]);
 
 const INPUT_TUTORIAL_STEP_START = 1;
-const INPUT_TUTORIAL_STEP_END = 6;
+const INPUT_TUTORIAL_STEP_END = 4;
 
 /**
  * Home（InputScreen）
@@ -344,12 +345,11 @@ export default function InputScreen({ navigation, route }) {
   const {
     isTutorialMode,
     tutorialFlagsLoaded,
-    tutorialCompleted,
     tutorialStep,
+    tutorialResetToken,
     addTutorialEmotion,
     ensureTutorialPiecesSeed,
     setTutorialStep,
-    startTutorial,
   } = useTutorial();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -366,11 +366,10 @@ export default function InputScreen({ navigation, route }) {
       ).trim() || "ユーザー"
     );
   }, [session?.user?.user_metadata]);
-  const tutorialEmlisReplyText = useMemo(() => {
-    const raw = String(TUTORIAL_EMLIS_REPLY.commentText || "").trim();
-    if (!raw) return "";
-    return raw.replace(/\{displayName\}/g, tutorialDisplayName);
-  }, [tutorialDisplayName]);
+  const tutorialEmlisReplyText = useMemo(
+    () => getTutorialEmlisReplyText(tutorialDisplayName),
+    [tutorialDisplayName]
+  );
 
   const isIOS = Platform.OS === "ios";
 
@@ -711,30 +710,6 @@ const { height: windowHeight } = useWindowDimensions();
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
 
   useEffect(() => {
-    if (!currentUserId) return;
-    if (!tutorialFlagsLoaded) return;
-    if (tutorialCompleted) return;
-    if (isTutorialMode) return;
-
-    try {
-      closeStartupPopupWindow?.();
-    } catch {
-      // noop
-    }
-
-    startTutorial();
-    setTutorialStep(INPUT_TUTORIAL_STEP_START);
-  }, [
-    closeStartupPopupWindow,
-    currentUserId,
-    isTutorialMode,
-    setTutorialStep,
-    startTutorial,
-    tutorialCompleted,
-    tutorialFlagsLoaded,
-  ]);
-
-  useEffect(() => {
     if (!isInputTutorialStep) return;
 
     setShowMemoSection(true);
@@ -825,6 +800,14 @@ const { height: windowHeight } = useWindowDimensions();
       console.warn("InputScreen: clearInputDraft failed", e);
     }
   }, [currentUserId]);
+
+  useEffect(() => {
+    if (!tutorialResetToken) return;
+    resetLocalInputState();
+    setPendingInputDraft(null);
+    setDraftRestoreModalVisible(false);
+    void clearPersistedInputDraft();
+  }, [clearPersistedInputDraft, resetLocalInputState, tutorialResetToken]);
 
   const persistCurrentInputDraft = useCallback(async () => {
     if (!currentUserId || isTutorialMode) return;
@@ -1110,9 +1093,6 @@ const { height: windowHeight } = useWindowDimensions();
         return notificationRef;
       case 4:
         return pieceButtonRef;
-      case 5:
-      case 6:
-        return okButtonRef;
       default:
         return null;
     }
@@ -1128,7 +1108,7 @@ const { height: windowHeight } = useWindowDimensions();
           mode: "info",
           title: "軽い独り言で大丈夫です",
           message:
-            "Emlisは1日1回の日記ではなく、書きたいときに書ける場所です。\n\n今回は入力済みの状態を見せます。",
+            "Emlisは1日1回の日記ではなく、書きたいときに書ける場所です。\n\n画面に入っている内容くらいの短い言葉でも大丈夫です。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(2),
         };
@@ -1158,28 +1138,8 @@ const { height: windowHeight } = useWindowDimensions();
           mode: "action",
           title: "Pieceを作成します",
           message:
-            "ラフな独り言を、他の人にも読みやすいPieceとして整えます。",
+            "ラフな独り言を、問いと答えとして読みやすく整えます。",
           actionHint: "Pieceを作成する を押してください",
-          cardPlacement: "top",
-        };
-      case 5:
-        return {
-          step: 5,
-          mode: "info",
-          title: "Pieceが整いました",
-          message:
-            "入力した文章は、実際のPiece生成結果として保存されています。\n\n次はこの入力を送信して、Emlisからの応答を見ます。",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(6),
-          cardPlacement: "top",
-        };
-      case 6:
-        return {
-          step: 6,
-          mode: "action",
-          title: "送信して応答を見ます",
-          message: "この入力から生成された、Emlisからの応答を表示します。",
-          actionHint: "この内容でOK を押してください",
           cardPlacement: "top",
         };
       default:
@@ -1450,11 +1410,21 @@ const { height: windowHeight } = useWindowDimensions();
     if (!previewId || piecePublishLoading) return;
 
     if (isTutorialMode) {
+      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
       setPiecePreviewVisible(false);
       setPiecePreviewPayload(null);
       void ensureTutorialPiecesSeed();
+      await clearPersistedInputDraft();
+      setPendingInputDraft(null);
+      setDraftRestoreModalVisible(false);
+      Keyboard.dismiss();
+      setTutorialNavigateAfterReply(true);
       setTutorialStep(5);
-      showToast("Pieceを作成しました");
+      openInputFeedbackModal({
+        commentText: tutorialEmlisReplyText,
+        ...inputFeedbackEmotionMeta,
+        contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
+      });
       return;
     }
 
@@ -1522,6 +1492,7 @@ const { height: windowHeight } = useWindowDimensions();
     selectedEmotions,
     setTutorialStep,
     showToast,
+    tutorialEmlisReplyText,
   ]);
 
   const handleOk = async () => {
@@ -2524,15 +2495,10 @@ ${String(error?.message || error)}`
     mode={tutorialOverlayConfig.mode}
     nextLabel={tutorialOverlayConfig.nextLabel}
     onNext={tutorialOverlayConfig.onNext}
-    onTargetPress={
-      tutorialStep === 4
-        ? handlePreviewPiece
-        : tutorialStep === 6
-        ? handleOk
-        : undefined
-    }
+    onTargetPress={tutorialStep === 4 ? handlePreviewPiece : undefined}
     onMetricsChange={setTutorialOverlayMetrics}
     actionHint={tutorialOverlayConfig.actionHint}
+    showStepPill={false}
     cardPlacement={tutorialOverlayConfig.cardPlacement}
   />
 ) : null}

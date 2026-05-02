@@ -394,9 +394,9 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
           mode: "info",
           title: "日報",
           message:
-            `分析画面では、日々の入力がたまったユーザーを想定した実生成レポートを表示します。
+            `入力が続くと、日報・週報・月報として振り返れます。
 
-まずは日報の例です。`,
+まずは日報です。`,
           nextLabel: "週報を見る",
           onNext: () => setTutorialStep(8),
         };
@@ -1405,6 +1405,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
           onMetricsChange={setTutorialOverlayMetrics}
+          showStepPill={false}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement || "bottom"}
         />

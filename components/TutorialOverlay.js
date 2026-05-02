@@ -646,6 +646,7 @@ export default function TutorialOverlay({
   message,
   step,
   totalSteps,
+  showStepPill = true,
   mode = "info", // "info" | "action"
   nextLabel = DEFAULT_NEXT_LABEL,
   onNext,
@@ -1056,7 +1057,7 @@ export default function TutorialOverlay({
           nestedScrollEnabled
           showsVerticalScrollIndicator={cardHeight >= resolvedCardMaxHeight - 1}
         >
-          {typeof step === "number" && typeof totalSteps === "number" ? (
+          {showStepPill && typeof step === "number" && typeof totalSteps === "number" ? (
             <View
               style={[
                 styles.stepPill,

@@ -13,17 +13,22 @@ import CocolonButton from "./CocolonButton";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
+function toJapaneseDigit(value) {
+  const digits = { 0: "０", 1: "１", 2: "２", 3: "３", 4: "４", 5: "５", 6: "６", 7: "７", 8: "８", 9: "９" };
+  return String(value).replace(/[0-9]/g, (ch) => digits[ch] || ch);
+}
+
 function formatRemainingText(quota) {
-  const displayText = String(quota?.display_text || quota?.displayText || "").trim();
+  const displayText = String(quota?.display_text || "").trim();
   if (displayText) return displayText;
 
   const limit = quota?.publish_limit;
-  const remaining = quota?.remaining_count;
-  if (limit == null) return "今月のPiece作成回数: 無制限";
-  if (typeof remaining === "number") {
-    return `今月の残りPiece作成回数: ${remaining} / ${limit}`;
+  const tier = String(quota?.tier || quota?.subscription_tier || "").trim().toLowerCase();
+  if (limit == null) return "今月のPiece作成回数：無制限";
+  if (tier === "free") {
+    return `今月のPiece作成回数：Freeの${toJapaneseDigit(limit)}回`;
   }
-  return `今月のPiece作成上限: ${limit}`;
+  return `今月のPiece作成回数：${toJapaneseDigit(limit)}回`;
 }
 
 export default function EmotionPiecePreviewModal({
@@ -47,7 +52,7 @@ export default function EmotionPiecePreviewModal({
       visible={!!visible}
       transparent
       animationType="fade"
-      onRequestClose={onClose}
+      onRequestClose={hideCancelButton ? () => {} : onClose}
     >
       <View style={styles.backdrop}>
         <View style={styles.card}>
@@ -62,7 +67,7 @@ export default function EmotionPiecePreviewModal({
               <Text style={styles.title}>ピースの確認</Text>
             </View>
             <Text style={styles.lead}>
-              この入力だけから生成された問いと答えです。作成する前に内容を確認できます。
+              入力内容から整えた問いと答えです。作成する前に内容を確認できます。
             </Text>
           </View>
 

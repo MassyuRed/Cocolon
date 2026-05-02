@@ -134,7 +134,7 @@ export default function TutorialFlowScreen({ navigation }) {
           mode: "action",
           title: "チュートリアル終了",
           message:
-            "チュートリアル用の入力内容をクリアして、ホーム画面へ戻ります。",
+            "これでチュートリアルは完了です。ホームに戻って、Emlisを始めましょう。",
           actionHint: "ホームへ戻る を押してください",
         };
       default:
@@ -250,7 +250,7 @@ export default function TutorialFlowScreen({ navigation }) {
         <View ref={finishRef} collapsable={false} style={styles.finishCard}>
           <Text style={styles.finishTitle}>これでチュートリアルは完了です</Text>
           <Text style={styles.finishBody}>
-            チュートリアル用の入力内容をクリアして、ホーム画面へ戻ります。
+            ホームに戻って、Emlisを始めましょう。
           </Text>
           <CocolonButton
             variant="primary"
@@ -277,6 +277,7 @@ export default function TutorialFlowScreen({ navigation }) {
           onNext={tutorialOverlayConfig.onNext}
           onTargetPress={tutorialStep === STEP_FINISH ? handleCompleteTutorial : undefined}
           onMetricsChange={setTutorialOverlayMetrics}
+          showStepPill={false}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialStep === STEP_FINISH ? "top" : "bottom"}
           primaryDisabled={finishing}

@@ -1309,7 +1309,7 @@ export default function NexusScreen({ navigation }) {
     } catch {
       Alert.alert(
         "チュートリアルを進められません",
-        "つながり表の画面が navigation に未登録の可能性があります。"
+        "もう一度お試しください。"
       );
     }
   }, [ensureTutorialPiecesSeed, navigation, setTutorialStep]);
@@ -1519,9 +1519,9 @@ export default function NexusScreen({ navigation }) {
           mode: "info",
           title: "Piece閲覧画面",
           message:
-            `今のPiece画面は、投稿タブでPieceを一覧表示します。
+            `投稿タブでは、自分のPieceとフォロー中ユーザーのPieceを一覧で確認できます。
 
-ここで先ほど作成した自分のPieceと、UserのPieceを確認します。`,
+ここでは、自分のPieceとUserのPieceを見ていきます。`,
           nextLabel: "投稿タブを見る",
           onNext: () => setTutorialStep(12),
         };
@@ -1541,7 +1541,7 @@ export default function NexusScreen({ navigation }) {
           mode: "info",
           title: "自分のPiece",
           message:
-            `これは、チュートリアルの感情入力から実生成して保存した自分のPieceです。
+            `先ほどの入力から作成した自分のPieceです。
 
 問いと答えとして、ラフな独り言が読みやすく整っています。`,
           nextLabel: "UserのPieceへ",
@@ -1715,7 +1715,7 @@ export default function NexusScreen({ navigation }) {
       if (!tutorialPieceItems.length) {
         return (
           <Text style={styles.emptyText}>
-            チュートリアル用のPieceを準備しています。
+            表示できるPieceがまだありません。
           </Text>
         );
       }
@@ -2225,6 +2225,7 @@ export default function NexusScreen({ navigation }) {
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
           onMetricsChange={setTutorialOverlayMetrics}
+          showStepPill={false}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement}
         />

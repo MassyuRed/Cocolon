@@ -1,0 +1,810 @@
+{
+  "schema_version": "tutorial.fixture.v1",
+  "generated_at": "2026-05-02T12:05:09.096393+00:00",
+  "source": {
+    "api_routes": [
+      "POST /emotion/piece/preview",
+      "POST /emotion/piece/publish",
+      "GET /nexus/pieces",
+      "POST /analysis/reports/ensure",
+      "GET /analysis/reports/ready"
+    ],
+    "services": [
+      "emotion_piece_generation_service.generate_emotion_reflection_preview",
+      "emlis_ai_reply_service.render_emlis_ai_reply",
+      "api_analysis_reports._render_daily_standard_v3_text",
+      "api_analysis_reports._render_weekly_standard_v3_text",
+      "api_analysis_reports._render_monthly_standard_v3_text"
+    ],
+    "display_name_placeholder": "__DISPLAY_NAME__"
+  },
+  "input": {
+    "memo": "なんか少しだけ気分が軽い。\nやること全部はできてないけど、ひとつ片づいたからまあいいかって感じ。\nこういう小さいことで落ち着く日もあるんだな。",
+    "memo_action": "机の上を少し片づけた。\n好きな飲み物を用意して、少しゆっくりした。",
+    "emotions": [
+      {
+        "type": "平穏",
+        "strength": "medium"
+      },
+      {
+        "type": "喜び",
+        "strength": "weak"
+      },
+      {
+        "type": "不安",
+        "strength": "weak"
+      }
+    ],
+    "category": [
+      "生活",
+      "健康",
+      "価値観"
+    ],
+    "send_emotion_notification": true
+  },
+  "piece": {
+    "preview": {
+      "preview_id": "tutorial-preview-self-20260502",
+      "question": "大切にしていることは？",
+      "title": "大切にしていることは？",
+      "q_key": "generated:q:1046d3b900e70b3bab162096ecb96d44",
+      "reflection_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+      "piece_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+      "answer_display_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+      "answer_display_state": "ready",
+      "answer_norm_hash": "515d1d48a4af852499056ebe1d82320870b478b41864a4f9fbfdeff2db6ed287",
+      "quota": {
+        "status": "ok",
+        "tier": "free",
+        "subscription_tier": "free",
+        "month_key": "2026-05",
+        "publish_limit": 5,
+        "published_count": 0,
+        "remaining_count": 5,
+        "is_unlimited": false,
+        "can_publish": true,
+        "display_text": "今月のPiece作成回数：Freeの５回"
+      },
+      "meta": {
+        "source": "emotion_piece_generation_service.generate_emotion_reflection_preview",
+        "answer_display_source": ""
+      },
+      "piece_policy": {
+        "visibility_status": "preview_ready",
+        "reason_code": "visible",
+        "user_message": "",
+        "allow_publish": true
+      }
+    },
+    "publish": {
+      "reflection_id": "tutorial-piece-self-20260502",
+      "question": "大切にしていることは？",
+      "title": "大切にしていることは？",
+      "q_key": "generated:q:1046d3b900e70b3bab162096ecb96d44",
+      "reflection_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+      "piece_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+      "answer_display_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+      "answer_display_state": "ready",
+      "answer_norm_hash": "515d1d48a4af852499056ebe1d82320870b478b41864a4f9fbfdeff2db6ed287",
+      "quota": {
+        "status": "ok",
+        "tier": "free",
+        "subscription_tier": "free",
+        "month_key": "2026-05",
+        "publish_limit": 5,
+        "published_count": 0,
+        "remaining_count": 5,
+        "is_unlimited": false,
+        "can_publish": true,
+        "display_text": "今月のPiece作成回数：Freeの５回"
+      },
+      "meta": {
+        "source": "home_gateway.emotion_reflection_publish_service.publish_preview",
+        "preview_id": "tutorial-preview-self-20260502"
+      },
+      "input_feedback": {
+        "source": "emlis_ai_reply_service.render_emlis_ai_reply",
+        "comment_text": "__DISPLAY_NAME__さん、こんばんは。Emlisです。\n今回は、平穏（中）を中心に、書いてくれた言葉そのものを見ながら受け取ります。\nなんか少しだけ気分が軽いという出来事を、まずそのまま受け取りました。\n中心としては平穏（中）を見ていますが、喜び（弱）、不安（弱）もなかったことにせず一緒に受け取ります。\nその喜びは、小さく流さずに、一緒に大事なものとして受け取りたいです。\nいつでも、あなたの言葉をEmlisは受け取ります。",
+        "emlis_ai": {
+          "version": "emlis_ai_v2",
+          "kernel_version": "observation_kernel.v2",
+          "tier": "free",
+          "capability": {
+            "history_mode": "none",
+            "continuity_mode": "off",
+            "style_mode": "base",
+            "partner_mode": "off",
+            "model_mode": "off",
+            "interpretation_mode": "current_only",
+            "tier": "free",
+            "source_scope": "current_input_only",
+            "cross_core_enabled": false,
+            "structure_model_enabled": false,
+            "max_reply_lines": 8,
+            "effective_max_reply_lines": 9
+          },
+          "display": {
+            "selected_emotions": [
+              {
+                "type": "平穏",
+                "strength": "medium",
+                "strength_label": "中",
+                "role": "dominant"
+              },
+              {
+                "type": "喜び",
+                "strength": "weak",
+                "strength_label": "弱",
+                "role": "secondary"
+              },
+              {
+                "type": "不安",
+                "strength": "weak",
+                "strength_label": "弱",
+                "role": "secondary"
+              }
+            ],
+            "dominant_emotion": {
+              "type": "平穏",
+              "strength": "medium",
+              "strength_label": "中",
+              "role": "dominant"
+            },
+            "secondary_emotions": [
+              {
+                "type": "喜び",
+                "strength": "weak",
+                "strength_label": "弱",
+                "role": "secondary"
+              },
+              {
+                "type": "不安",
+                "strength": "weak",
+                "strength_label": "弱",
+                "role": "secondary"
+              }
+            ]
+          },
+          "reply_depth": {
+            "target_lines": 7,
+            "max_lines": 7,
+            "tier_ceiling": 8,
+            "evidence_ceiling": 7,
+            "input_effort_score": 0.51,
+            "memory_richness_score": 0.0,
+            "user_word_anchor_count": 5,
+            "history_usable": false,
+            "interpretive_frame_usable": false,
+            "reason": "input_amount_user_words_and_available_memory"
+          },
+          "anchor_summary": {
+            "user_word_anchor_count": 5,
+            "used_user_word_anchor_count": 1,
+            "sample_user_word_anchors": [
+              {
+                "anchor_key": "current_word:memo:0",
+                "text": "なんか少しだけ気分が軽い",
+                "source_field": "memo",
+                "role": "event",
+                "confidence": 0.45,
+                "evidence": [
+                  {
+                    "kind": "emotion",
+                    "ref_id": "current",
+                    "weight": 1.0,
+                    "note": "user_word_anchor:memo"
+                  }
+                ]
+              },
+              {
+                "anchor_key": "current_word:memo:1",
+                "text": "やること全部はできてないけど、ひとつ片づいたからまあいいかって感じ",
+                "source_field": "memo",
+                "role": "event",
+                "confidence": 0.45,
+                "evidence": [
+                  {
+                    "kind": "emotion",
+                    "ref_id": "current",
+                    "weight": 1.0,
+                    "note": "user_word_anchor:memo"
+                  }
+                ]
+              },
+              {
+                "anchor_key": "current_word:memo:2",
+                "text": "こういう小さいことで落ち着く日もあるんだな",
+                "source_field": "memo",
+                "role": "event",
+                "confidence": 0.45,
+                "evidence": [
+                  {
+                    "kind": "emotion",
+                    "ref_id": "current",
+                    "weight": 1.0,
+                    "note": "user_word_anchor:memo"
+                  }
+                ]
+              },
+              {
+                "anchor_key": "current_word:memo_action:3",
+                "text": "机の上を少し片づけた",
+                "source_field": "memo_action",
+                "role": "event",
+                "confidence": 0.45,
+                "evidence": [
+                  {
+                    "kind": "emotion",
+                    "ref_id": "current",
+                    "weight": 1.0,
+                    "note": "user_word_anchor:memo_action"
+                  }
+                ]
+              },
+              {
+                "anchor_key": "current_word:memo_action:4",
+                "text": "好きな飲み物を用意して、少しゆっくりした",
+                "source_field": "memo_action",
+                "role": "event",
+                "confidence": 0.45,
+                "evidence": [
+                  {
+                    "kind": "emotion",
+                    "ref_id": "current",
+                    "weight": 1.0,
+                    "note": "user_word_anchor:memo_action"
+                  }
+                ]
+              }
+            ],
+            "used_anchor_keys": [
+              "overview"
+            ]
+          },
+          "used_sources": [
+            "current_input",
+            "greeting_state"
+          ],
+          "used_memory_layers": [
+            "canonical_history",
+            "side_state"
+          ],
+          "reply_length_mode": "short_present_only",
+          "evidence_count": 2,
+          "evidence_by_line": {
+            "receive": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": null
+              }
+            ],
+            "word_reflection": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo"
+              }
+            ],
+            "selected_emotions": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": null
+              }
+            ],
+            "emotion_response": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo"
+              },
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo"
+              }
+            ],
+            "receiving_close": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": null
+              }
+            ]
+          },
+          "rejected_candidate_count": 0,
+          "fallback_used": false,
+          "model_revision": null,
+          "world_model_debug": {
+            "history_mode": "none",
+            "same_day_recent_inputs": 0,
+            "similar_inputs": 0,
+            "derived_model_loaded": false,
+            "user_word_anchor_count": 5,
+            "response_mode": "celebrate",
+            "memo_richness": "medium",
+            "unknown_count": 1,
+            "conflict_count": 0
+          },
+          "quality_gate": {
+            "schema_version": "emlis.quality.v1",
+            "passed": true,
+            "current_input_central": true,
+            "history_allowed": true,
+            "evidence_required_satisfied": true,
+            "overclaim_suppressed": true,
+            "diagnosis_blocked": true,
+            "reply_length_within_limit": true,
+            "capability_profile": {
+              "tier": "free",
+              "history_mode": "none",
+              "model_mode": "off",
+              "interpretation_mode": "current_only",
+              "source_scope": "current_input_only",
+              "cross_core_enabled": false,
+              "structure_model_enabled": false,
+              "max_reply_lines": 8,
+              "effective_max_reply_lines": 9
+            }
+          }
+        },
+        "fallback_used": false
+      }
+    },
+    "feed_items": [
+      {
+        "id": "tutorial-piece-self-20260502",
+        "q_instance_id": "tutorial-piece-self-20260502",
+        "q_key": "generated:q:1046d3b900e70b3bab162096ecb96d44",
+        "title": "大切にしていることは？",
+        "question": {
+          "title": "大切にしていることは？"
+        },
+        "body": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+        "piece_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+        "answer_display_text": "全部を終わらせられない日でも、ひとつ整えられたことを受け止める。小さな行動で気持ちを落ち着かせる時間を大切にしています。",
+        "answer_display_state": "ready",
+        "answer_norm_hash": "515d1d48a4af852499056ebe1d82320870b478b41864a4f9fbfdeff2db6ed287",
+        "owner_user_id": "tutorial-self",
+        "display_name": "自分",
+        "share_code": "YOU",
+        "owner": {
+          "user_id": "tutorial-self",
+          "display_name": "自分",
+          "share_code": "YOU"
+        },
+        "metrics": {
+          "resonances": 0,
+          "views": 0
+        },
+        "viewer_state": {
+          "resonated": false
+        },
+        "created_at": "2026-05-02T09:30:00.000Z",
+        "resonances": 0,
+        "views": 0,
+        "is_new": true
+      },
+      {
+        "id": "tutorial-piece-user-20260502",
+        "q_instance_id": "tutorial-piece-user-20260502",
+        "q_key": "generated:q:1046d3b900e70b3bab162096ecb96d44",
+        "title": "大切にしていることは？",
+        "question": {
+          "title": "大切にしていることは？"
+        },
+        "body": "全部が進んだわけではなくても、ひとつ整えられた感覚を大事にする。小さな落ち着きが、次の自分を支えてくれると思っています。",
+        "piece_text": "全部が進んだわけではなくても、ひとつ整えられた感覚を大事にする。小さな落ち着きが、次の自分を支えてくれると思っています。",
+        "answer_display_text": "全部が進んだわけではなくても、ひとつ整えられた感覚を大事にする。小さな落ち着きが、次の自分を支えてくれると思っています。",
+        "answer_display_state": "ready",
+        "answer_norm_hash": "b7b251a6ed0331d6f23e329e491e8a1bac1a912927774eb86489b593025c0c9b",
+        "owner_user_id": "tutorial-follow-1",
+        "display_name": "User",
+        "share_code": "USER",
+        "owner": {
+          "user_id": "tutorial-follow-1",
+          "display_name": "User",
+          "share_code": "USER"
+        },
+        "metrics": {
+          "resonances": 4,
+          "views": 12
+        },
+        "viewer_state": {
+          "resonated": false
+        },
+        "created_at": "2026-05-02T09:20:00.000Z",
+        "resonances": 4,
+        "views": 12,
+        "is_new": true
+      }
+    ]
+  },
+  "emlis_reply": {
+    "source": "emlis_ai_reply_service.render_emlis_ai_reply",
+    "comment_text": "__DISPLAY_NAME__さん、こんばんは。Emlisです。\n今回は、平穏（中）を中心に、書いてくれた言葉そのものを見ながら受け取ります。\nなんか少しだけ気分が軽いという出来事を、まずそのまま受け取りました。\n中心としては平穏（中）を見ていますが、喜び（弱）、不安（弱）もなかったことにせず一緒に受け取ります。\nその喜びは、小さく流さずに、一緒に大事なものとして受け取りたいです。\nいつでも、あなたの言葉をEmlisは受け取ります。",
+    "emlis_ai": {
+      "version": "emlis_ai_v2",
+      "kernel_version": "observation_kernel.v2",
+      "tier": "free",
+      "capability": {
+        "history_mode": "none",
+        "continuity_mode": "off",
+        "style_mode": "base",
+        "partner_mode": "off",
+        "model_mode": "off",
+        "interpretation_mode": "current_only",
+        "tier": "free",
+        "source_scope": "current_input_only",
+        "cross_core_enabled": false,
+        "structure_model_enabled": false,
+        "max_reply_lines": 8,
+        "effective_max_reply_lines": 9
+      },
+      "display": {
+        "selected_emotions": [
+          {
+            "type": "平穏",
+            "strength": "medium",
+            "strength_label": "中",
+            "role": "dominant"
+          },
+          {
+            "type": "喜び",
+            "strength": "weak",
+            "strength_label": "弱",
+            "role": "secondary"
+          },
+          {
+            "type": "不安",
+            "strength": "weak",
+            "strength_label": "弱",
+            "role": "secondary"
+          }
+        ],
+        "dominant_emotion": {
+          "type": "平穏",
+          "strength": "medium",
+          "strength_label": "中",
+          "role": "dominant"
+        },
+        "secondary_emotions": [
+          {
+            "type": "喜び",
+            "strength": "weak",
+            "strength_label": "弱",
+            "role": "secondary"
+          },
+          {
+            "type": "不安",
+            "strength": "weak",
+            "strength_label": "弱",
+            "role": "secondary"
+          }
+        ]
+      },
+      "reply_depth": {
+        "target_lines": 7,
+        "max_lines": 7,
+        "tier_ceiling": 8,
+        "evidence_ceiling": 7,
+        "input_effort_score": 0.51,
+        "memory_richness_score": 0.0,
+        "user_word_anchor_count": 5,
+        "history_usable": false,
+        "interpretive_frame_usable": false,
+        "reason": "input_amount_user_words_and_available_memory"
+      },
+      "anchor_summary": {
+        "user_word_anchor_count": 5,
+        "used_user_word_anchor_count": 1,
+        "sample_user_word_anchors": [
+          {
+            "anchor_key": "current_word:memo:0",
+            "text": "なんか少しだけ気分が軽い",
+            "source_field": "memo",
+            "role": "event",
+            "confidence": 0.45,
+            "evidence": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo"
+              }
+            ]
+          },
+          {
+            "anchor_key": "current_word:memo:1",
+            "text": "やること全部はできてないけど、ひとつ片づいたからまあいいかって感じ",
+            "source_field": "memo",
+            "role": "event",
+            "confidence": 0.45,
+            "evidence": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo"
+              }
+            ]
+          },
+          {
+            "anchor_key": "current_word:memo:2",
+            "text": "こういう小さいことで落ち着く日もあるんだな",
+            "source_field": "memo",
+            "role": "event",
+            "confidence": 0.45,
+            "evidence": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo"
+              }
+            ]
+          },
+          {
+            "anchor_key": "current_word:memo_action:3",
+            "text": "机の上を少し片づけた",
+            "source_field": "memo_action",
+            "role": "event",
+            "confidence": 0.45,
+            "evidence": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo_action"
+              }
+            ]
+          },
+          {
+            "anchor_key": "current_word:memo_action:4",
+            "text": "好きな飲み物を用意して、少しゆっくりした",
+            "source_field": "memo_action",
+            "role": "event",
+            "confidence": 0.45,
+            "evidence": [
+              {
+                "kind": "emotion",
+                "ref_id": "current",
+                "weight": 1.0,
+                "note": "user_word_anchor:memo_action"
+              }
+            ]
+          }
+        ],
+        "used_anchor_keys": [
+          "overview"
+        ]
+      },
+      "used_sources": [
+        "current_input",
+        "greeting_state"
+      ],
+      "used_memory_layers": [
+        "canonical_history",
+        "side_state"
+      ],
+      "reply_length_mode": "short_present_only",
+      "evidence_count": 2,
+      "evidence_by_line": {
+        "receive": [
+          {
+            "kind": "emotion",
+            "ref_id": "current",
+            "weight": 1.0,
+            "note": null
+          }
+        ],
+        "word_reflection": [
+          {
+            "kind": "emotion",
+            "ref_id": "current",
+            "weight": 1.0,
+            "note": "user_word_anchor:memo"
+          }
+        ],
+        "selected_emotions": [
+          {
+            "kind": "emotion",
+            "ref_id": "current",
+            "weight": 1.0,
+            "note": null
+          }
+        ],
+        "emotion_response": [
+          {
+            "kind": "emotion",
+            "ref_id": "current",
+            "weight": 1.0,
+            "note": "user_word_anchor:memo"
+          },
+          {
+            "kind": "emotion",
+            "ref_id": "current",
+            "weight": 1.0,
+            "note": "user_word_anchor:memo"
+          }
+        ],
+        "receiving_close": [
+          {
+            "kind": "emotion",
+            "ref_id": "current",
+            "weight": 1.0,
+            "note": null
+          }
+        ]
+      },
+      "rejected_candidate_count": 0,
+      "fallback_used": false,
+      "model_revision": null,
+      "world_model_debug": {
+        "history_mode": "none",
+        "same_day_recent_inputs": 0,
+        "similar_inputs": 0,
+        "derived_model_loaded": false,
+        "user_word_anchor_count": 5,
+        "response_mode": "celebrate",
+        "memo_richness": "medium",
+        "unknown_count": 1,
+        "conflict_count": 0
+      },
+      "quality_gate": {
+        "schema_version": "emlis.quality.v1",
+        "passed": true,
+        "current_input_central": true,
+        "history_allowed": true,
+        "evidence_required_satisfied": true,
+        "overclaim_suppressed": true,
+        "diagnosis_blocked": true,
+        "reply_length_within_limit": true,
+        "capability_profile": {
+          "tier": "free",
+          "history_mode": "none",
+          "model_mode": "off",
+          "interpretation_mode": "current_only",
+          "source_scope": "current_input_only",
+          "cross_core_enabled": false,
+          "structure_model_enabled": false,
+          "max_reply_lines": 8,
+          "effective_max_reply_lines": 9
+        }
+      }
+    },
+    "fallback_used": false
+  },
+  "analysis": {
+    "counts": {
+      "today": 4,
+      "week": 21,
+      "month": 72
+    },
+    "reports": {
+      "daily": {
+        "id": "tutorial-analysis-daily-20260502",
+        "report_type": "daily",
+        "title": "日報：小さく整えた一日",
+        "period_start": "2026-05-02",
+        "period_end": "2026-05-02",
+        "generated_at": "2026-05-02T09:30:00.000Z",
+        "updated_at": "2026-05-02T09:30:00.000Z",
+        "viewer_tier": "plus",
+        "content_text": "日報：小さく整えた一日\n対象期間（JST）: 2026/5/2 00:00 〜 2026/5/2 23:59\n\n【昨日、見えていたこと】\n昨日は「平穏」が比較的出やすい一日でした。全体としては「平穏」の比重が高く、前日と近い空気感のまま推移していました。\n\n【気持ちの変化】\n・最も強く出ていたのは「平穏」でした。\n・前日と近い空気感のまま推移していました。\n\n【このレポートについて】\nこのレポートは、入力から見える変化をまとめた『観測』です。\n診断や断定を目的としたものではありません。",
+        "content_json": "{\"standardReport\":{\"title\":\"日報：小さく整えた一日\",\"contentText\":\"日報：小さく整えた一日\\n対象期間（JST）: 2026/5/2 00:00 〜 2026/5/2 23:59\\n\\n【昨日、見えていたこと】\\n昨日は「平穏」が比較的出やすい一日でした。全体としては「平穏」の比重が高く、前日と近い空気感のまま推移していました。\\n\\n【気持ちの変化】\\n・最も強く出ていたのは「平穏」でした。\\n・前日と近い空気感のまま推移していました。\\n\\n【このレポートについて】\\nこのレポートは、入力から見える変化をまとめた『観測』です。\\n診断や断定を目的としたものではありません。\"},\"metrics\":{\"totalAll\":4,\"dominantKey\":\"calm\",\"totals\":{\"joy\":1,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":2},\"sharePct\":{\"joy\":25,\"sadness\":0,\"anxiety\":25,\"anger\":0,\"calm\":50}},\"summary\":{\"emotions_public\":4,\"emotions_total\":4},\"movement\":{\"peak_bucket\":\"夜\",\"bucket_dominants\":[{\"bucket\":\"朝\",\"label\":\"朝\",\"dominantKey\":\"calm\"},{\"bucket\":\"昼\",\"label\":\"昼\",\"dominantKey\":\"joy\"},{\"bucket\":\"夜\",\"label\":\"夜\",\"dominantKey\":\"calm\"}]}}"
+      },
+      "weekly": {
+        "id": "tutorial-analysis-weekly-20260502",
+        "report_type": "weekly",
+        "title": "週報：小さな切り替えが増えた週",
+        "period_start": "2026-04-27",
+        "period_end": "2026-05-03",
+        "generated_at": "2026-05-02T09:30:00.000Z",
+        "updated_at": "2026-05-02T09:30:00.000Z",
+        "viewer_tier": "plus",
+        "content_text": "週報：小さな切り替えが増えた週\n対象期間（JST）: 2026/4/27 00:00 〜 2026/5/3 23:59\n\n【今週、見えていたこと】\n今週は「平穏」が中心に現れていました。その一方で、「喜び」も重なる場面がありました。\n\n【気持ちの変化】\n・感情の動きが強めに出たのは 火 でした。\n・今週は「平穏」の比重が高く出ていました。\n・次に目立ったのは「喜び」でした。\n\n【このレポートについて】\nこのレポートは、入力から見える変化をまとめた『観測』です。\n診断や断定を目的としたものではありません。",
+        "content_json": "{\"standardReport\":{\"title\":\"週報：小さな切り替えが増えた週\",\"contentText\":\"週報：小さな切り替えが増えた週\\n対象期間（JST）: 2026/4/27 00:00 〜 2026/5/3 23:59\\n\\n【今週、見えていたこと】\\n今週は「平穏」が中心に現れていました。その一方で、「喜び」も重なる場面がありました。\\n\\n【気持ちの変化】\\n・感情の動きが強めに出たのは 火 でした。\\n・今週は「平穏」の比重が高く出ていました。\\n・次に目立ったのは「喜び」でした。\\n\\n【このレポートについて】\\nこのレポートは、入力から見える変化をまとめた『観測』です。\\n診断や断定を目的としたものではありません。\",\"days\":[{\"label\":\"月\",\"joy\":2,\"sadness\":0,\"anxiety\":2,\"anger\":0,\"calm\":3,\"dominantKey\":\"calm\"},{\"label\":\"火\",\"joy\":2,\"sadness\":1,\"anxiety\":2,\"anger\":0,\"calm\":4,\"dominantKey\":\"calm\"},{\"label\":\"水\",\"joy\":3,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":3,\"dominantKey\":\"joy\"},{\"label\":\"木\",\"joy\":2,\"sadness\":0,\"anxiety\":2,\"anger\":0,\"calm\":4,\"dominantKey\":\"calm\"},{\"label\":\"金\",\"joy\":3,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":4,\"dominantKey\":\"calm\"},{\"label\":\"土\",\"joy\":3,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":5,\"dominantKey\":\"calm\"},{\"label\":\"日\",\"joy\":2,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":3,\"dominantKey\":\"calm\"}]},\"metrics\":{\"totalAll\":45,\"totals\":{\"joy\":17,\"sadness\":1,\"anxiety\":10,\"anger\":0,\"calm\":27}},\"days\":[{\"label\":\"月\",\"joy\":2,\"sadness\":0,\"anxiety\":2,\"anger\":0,\"calm\":3,\"dominantKey\":\"calm\"},{\"label\":\"火\",\"joy\":2,\"sadness\":1,\"anxiety\":2,\"anger\":0,\"calm\":4,\"dominantKey\":\"calm\"},{\"label\":\"水\",\"joy\":3,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":3,\"dominantKey\":\"joy\"},{\"label\":\"木\",\"joy\":2,\"sadness\":0,\"anxiety\":2,\"anger\":0,\"calm\":4,\"dominantKey\":\"calm\"},{\"label\":\"金\",\"joy\":3,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":4,\"dominantKey\":\"calm\"},{\"label\":\"土\",\"joy\":3,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":5,\"dominantKey\":\"calm\"},{\"label\":\"日\",\"joy\":2,\"sadness\":0,\"anxiety\":1,\"anger\":0,\"calm\":3,\"dominantKey\":\"calm\"}]}"
+      },
+      "monthly": {
+        "id": "tutorial-analysis-monthly-20260502",
+        "report_type": "monthly",
+        "title": "月報：整える行動が感情を支えた月",
+        "period_start": "2026-05-01",
+        "period_end": "2026-05-31",
+        "generated_at": "2026-05-02T09:30:00.000Z",
+        "updated_at": "2026-05-02T09:30:00.000Z",
+        "viewer_tier": "plus",
+        "content_text": "月報：整える行動が感情を支えた月\n対象期間（JST）: 2026/5/1 00:00 〜 2026/5/31 23:59\n\n【今月、見えていたこと】\n今月は「平穏」が中心に現れていました。週をまたいで「平穏」が繰り返し中心になっていました。\n\n【気持ちの変化】\n・第1週は「平穏」が中心でした。\n・第2週は「平穏」が中心でした。\n・後半にかけて、少し整え直すような動きも見えていました。\n\n【このレポートについて】\nこのレポートは、入力から見える変化をまとめた『観測』です。\n診断や断定を目的としたものではありません。",
+        "content_json": "{\"standardReport\":{\"title\":\"月報：整える行動が感情を支えた月\",\"contentText\":\"月報：整える行動が感情を支えた月\\n対象期間（JST）: 2026/5/1 00:00 〜 2026/5/31 23:59\\n\\n【今月、見えていたこと】\\n今月は「平穏」が中心に現れていました。週をまたいで「平穏」が繰り返し中心になっていました。\\n\\n【気持ちの変化】\\n・第1週は「平穏」が中心でした。\\n・第2週は「平穏」が中心でした。\\n・後半にかけて、少し整え直すような動きも見えていました。\\n\\n【このレポートについて】\\nこのレポートは、入力から見える変化をまとめた『観測』です。\\n診断や断定を目的としたものではありません。\",\"weeks\":[{\"label\":\"第1週\",\"joy\":10,\"sadness\":2,\"anxiety\":11,\"anger\":0,\"calm\":16},{\"label\":\"第2週\",\"joy\":12,\"sadness\":2,\"anxiety\":9,\"anger\":1,\"calm\":20},{\"label\":\"第3週\",\"joy\":14,\"sadness\":1,\"anxiety\":7,\"anger\":0,\"calm\":24},{\"label\":\"第4週\",\"joy\":13,\"sadness\":1,\"anxiety\":8,\"anger\":0,\"calm\":22}]},\"metrics\":{\"totalAll\":154,\"totals\":{\"joy\":49,\"sadness\":6,\"anxiety\":35,\"anger\":1,\"calm\":63},\"topMotifs\":[{\"label\":\"不安→平穏\",\"count\":8},{\"label\":\"平穏→喜び\",\"count\":6},{\"label\":\"喜び→平穏\",\"count\":4}]},\"weeks\":[{\"label\":\"第1週\",\"joy\":10,\"sadness\":2,\"anxiety\":11,\"anger\":0,\"calm\":16},{\"label\":\"第2週\",\"joy\":12,\"sadness\":2,\"anxiety\":9,\"anger\":1,\"calm\":20},{\"label\":\"第3週\",\"joy\":14,\"sadness\":1,\"anxiety\":7,\"anger\":0,\"calm\":24},{\"label\":\"第4週\",\"joy\":13,\"sadness\":1,\"anxiety\":8,\"anger\":0,\"calm\":22}]}"
+      }
+    }
+  },
+  "validation": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "emlis.comment_non_empty",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "emlis.meta_present",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "emlis.fallback_false",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "emlis.name_placeholder",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "emlis.identity",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.preview_question",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.preview_text",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.publish_question",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.publish_text",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.preview_publish_same",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.free_quota",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "piece.feed_items",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "analysis.daily",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "analysis.weekly",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "analysis.monthly",
+        "passed": true,
+        "detail": ""
+      }
+    ]
+  }
+}
