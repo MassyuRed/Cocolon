@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -106,6 +106,43 @@ function createLocalStyles(colors, ui) {
           lineHeight: 20,
           color: colors.TEXT_SUBTLE,
         },
+        connectionCard: {
+          borderWidth: 1,
+          borderColor: colors.CARD_BORDER,
+          borderRadius: 16,
+          backgroundColor: colors.FIELD_BG,
+          paddingHorizontal: 14,
+          paddingVertical: 14,
+          marginBottom: 14,
+        },
+        connectionTitle: {
+          fontSize: 14,
+          fontWeight: "900",
+          color: colors.TEXT_ON_LIGHT,
+          marginBottom: 10,
+        },
+        connectionRow: {
+          borderTopWidth: 1,
+          borderTopColor: colors.CARD_BORDER,
+          paddingTop: 10,
+          marginTop: 10,
+        },
+        connectionRowFirst: {
+          borderTopWidth: 0,
+          paddingTop: 0,
+          marginTop: 0,
+        },
+        connectionRowTitle: {
+          fontSize: 13,
+          fontWeight: "900",
+          color: colors.TITLE_GOLD,
+        },
+        connectionRowText: {
+          marginTop: 4,
+          fontSize: 12,
+          lineHeight: 18,
+          color: colors.TEXT_SUBTLE,
+        },
         loadingWrap: {
           paddingVertical: 24,
           alignItems: "center",
@@ -175,6 +212,12 @@ export default function AnalysisContentFirstScreen({
   onRefreshEmotionUnread,
   onLatestSeenVersion,
   isPaid = false,
+  isTutorialMode = false,
+  tutorialStep = 0,
+  tutorialReports = null,
+  tutorialCounts = null,
+  tutorialConnectionRows = [],
+  tutorialSelfAnalysisGuide = null,
 }) {
   const { styles, colors, ui } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
@@ -182,14 +225,44 @@ export default function AnalysisContentFirstScreen({
   const [activeAnalysisTab, setActiveAnalysisTab] = useState("emotion");
   const [activeEmotionReportType, setActiveEmotionReportType] = useState("daily");
 
-  const safeTodayCount = Math.max(0, Number(todayCount) || 0);
-  const safeWeekCount = Math.max(0, Number(weekCount) || 0);
-  const safeMonthCount = Math.max(0, Number(monthCount) || 0);
+  useEffect(() => {
+    if (!isTutorialMode) return;
 
-  const currentEmotionReport =
-    latestReports && typeof latestReports === "object"
-      ? latestReports[activeEmotionReportType] || null
+    if (tutorialStep === 10) {
+      setActiveAnalysisTab("self");
+      return;
+    }
+
+    setActiveAnalysisTab("emotion");
+    if (tutorialStep === 9) {
+      setActiveEmotionReportType("monthly");
+    } else if (tutorialStep === 8) {
+      setActiveEmotionReportType("weekly");
+    } else {
+      setActiveEmotionReportType("daily");
+    }
+  }, [isTutorialMode, tutorialStep]);
+
+  const effectiveCounts =
+    isTutorialMode && tutorialCounts && typeof tutorialCounts === "object"
+      ? tutorialCounts
       : null;
+  const safeTodayCount = Math.max(0, Number(effectiveCounts?.today ?? todayCount) || 0);
+  const safeWeekCount = Math.max(0, Number(effectiveCounts?.week ?? weekCount) || 0);
+  const safeMonthCount = Math.max(0, Number(effectiveCounts?.month ?? monthCount) || 0);
+
+  const effectiveLatestReports =
+    isTutorialMode && tutorialReports && typeof tutorialReports === "object"
+      ? tutorialReports
+      : latestReports;
+  const currentEmotionReport =
+    effectiveLatestReports && typeof effectiveLatestReports === "object"
+      ? effectiveLatestReports[activeEmotionReportType] || null
+      : null;
+  const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
+  const safeConnectionRows = Array.isArray(tutorialConnectionRows)
+    ? tutorialConnectionRows
+    : [];
 
   const currentEmotionHistoryLabel =
     EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "日報";
@@ -284,6 +357,31 @@ export default function AnalysisContentFirstScreen({
         </View>
       </View>
 
+      {isTutorialMode && safeConnectionRows.length > 0 ? (
+        <View style={localStyles.connectionCard}>
+          <Text style={localStyles.connectionTitle}>感情入力からつながる三大要素</Text>
+          {safeConnectionRows.map((row, index) => (
+            <View
+              key={`${row?.title || "row"}-${index}`}
+              style={[
+                localStyles.connectionRow,
+                index === 0 && localStyles.connectionRowFirst,
+              ]}
+            >
+              <Text style={localStyles.connectionRowTitle}>
+                {String(row?.title || "")}
+              </Text>
+              <Text style={localStyles.connectionRowText}>
+                {String(row?.description || "")}
+              </Text>
+              <Text style={localStyles.connectionRowText}>
+                {String(row?.example || "")}
+              </Text>
+            </View>
+          ))}
+        </View>
+      ) : null}
+
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>
           renderTab({
@@ -316,7 +414,7 @@ export default function AnalysisContentFirstScreen({
 
           <Text style={localStyles.updateLabel}>{emotionUpdateLabel}</Text>
 
-          {homeSummariesLoading && !currentEmotionReport ? (
+          {effectiveHomeSummariesLoading && !currentEmotionReport ? (
             <View style={localStyles.loadingWrap}>
               <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
             </View>
@@ -337,6 +435,7 @@ export default function AnalysisContentFirstScreen({
             </View>
           )}
 
+          {!isTutorialMode ? (
           <CocolonPressable
             style={localStyles.historyInlineLink}
             onPress={handleOpenCurrentEmotionHistory}
@@ -355,12 +454,22 @@ export default function AnalysisContentFirstScreen({
               color={colors.TEXT_SUBTLE}
             />
           </CocolonPressable>
+          ) : null}
         </>
       ) : (
         <>
           <Text style={localStyles.updateLabel}>{selfStructureUpdateLabel}</Text>
 
-          {isPaid ? (
+          {isTutorialMode ? (
+            <View style={localStyles.emptyCard}>
+              <Text style={localStyles.emptyTitle}>
+                {String(tutorialSelfAnalysisGuide?.title || "自己分析レポート")}
+              </Text>
+              <Text style={localStyles.emptyText}>
+                {String(tutorialSelfAnalysisGuide?.body || "自己分析レポートはサブスク加入後に閲覧できます。")}
+              </Text>
+            </View>
+          ) : isPaid ? (
             <SelfStructureReportGenerateScreen
               embedded
               hideHeader
@@ -390,6 +499,7 @@ export default function AnalysisContentFirstScreen({
             </View>
           )}
 
+          {!isTutorialMode ? (
           <CocolonPressable
             style={localStyles.historyInlineLink}
             onPress={onOpenSelfHistory}
@@ -406,6 +516,7 @@ export default function AnalysisContentFirstScreen({
               color={colors.TEXT_SUBTLE}
             />
           </CocolonPressable>
+          ) : null}
         </>
       )}
     </AnalysisMenuScroll>

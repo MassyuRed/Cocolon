@@ -24,6 +24,7 @@ import PieceScreen from "./screens/PieceScreen";
 import PieceEntryScreen from "./screens/PieceEntryScreen";
 import ProfileCreateScreen from "./screens/ProfileCreateScreen";
 import PieceLibraryScreen from "./screens/PieceLibraryScreen";
+import TutorialFlowScreen from "./screens/TutorialFlowScreen";
 import PieceHistoryMenuScreen from "./screens/PieceHistoryMenuScreen";
 import EmotionLogScreen from "./screens/EmotionLogScreen";
 import SettingsScreen from "./screens/SettingsScreen";
@@ -99,7 +100,7 @@ const SHARE_PROFILE_API_BASE_URL = API_BASE_URL;
 const APP_LINK_PREFIXES = ["cocolon://", "https://emlis.app", "http://emlis.app"];
 const LEGACY_ANALYSIS_ROUTE_NAME = ["My", "Web"].join("");
 
-const PIECE_SUB_ROUTES = new Set(["ResonanceHistoryList", "ResonanceHistoryDetail", "PieceLibrary", "PieceLibraryScreen", "PieceHistory", "EmotionLog"]);
+const PIECE_SUB_ROUTES = new Set(["ResonanceHistoryList", "ResonanceHistoryDetail", "PieceLibrary", "PieceLibraryScreen", "PieceHistory", "EmotionLog", "TutorialFlow"]);
 const FRAME_BORDER_WIDTH = 2;
 
 function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
@@ -535,6 +536,7 @@ function PieceStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDi
       </PieceStack.Screen>
 
       <PieceStack.Screen name="PieceLibrary" component={PieceLibraryScreen} />
+      <PieceStack.Screen name="TutorialFlow" component={TutorialFlowScreen} />
       <PieceStack.Screen name="PieceHistory" component={PieceHistoryMenuScreen} />
       <PieceStack.Screen name="ResonanceHistoryList" component={ResonanceHistoryListScreen} />
       <PieceStack.Screen name="ResonanceHistoryDetail" component={ResonanceHistoryDetailScreen} />
@@ -657,6 +659,11 @@ function MainTabs() {
 
   const handleMainTabPress = React.useCallback(
     (pressedTabName, navigation, route, e) => {
+      if (isTutorialMode) {
+        try { e?.preventDefault?.(); } catch {}
+        return;
+      }
+
       const currentRoute = typeof activeRouteName === "string" ? activeRouteName : "";
       const currentActiveTab = getTabBarActiveName(currentRoute);
       if (currentActiveTab === pressedTabName && currentRoute !== pressedTabName) {
@@ -702,7 +709,7 @@ function MainTabs() {
         }
       } catch {}
     },
-    [activeRouteName, getTabBarActiveName]
+    [activeRouteName, getTabBarActiveName, isTutorialMode]
   );
 
 

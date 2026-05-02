@@ -41,6 +41,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
+import { TUTORIAL_PIECES, TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
 /**
  * PieceLibraryScreen (2026-02 Piece Architecture)
@@ -66,33 +67,16 @@ const ECHO_STRENGTH_OPTIONS = Object.freeze([
   { key: "large", label: "深く響いた", subLabel: "響き（大）" },
 ]);
 
-const TUTORIAL_PIECE_QUESTION = "理想の休日の過ごし方は？";
 const TUTORIAL_SELF_USER_ID = "tutorial-self";
 const TUTORIAL_MOCK_USER_NAME = "User";
-const TUTORIAL_MOCK_PIECES = Object.freeze([
-  {
-    id: "tutorial-piece-mock-1",
-    q_instance_id: "tutorial-q-mock-1",
-    q_key: "tutorial-holiday",
-    title: TUTORIAL_PIECE_QUESTION,
-    body:
-      "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
-    owner_user_id: "tutorial-follow-1",
-    display_name: TUTORIAL_MOCK_USER_NAME,
-    share_code: "MIO123",
-    is_tutorial: true,
-    tutorial_kind: "mock",
-    created_at: "2026-01-01T09:00:00.000Z",
-    resonances: 4,
-    views: 12,
-    is_new: true,
-  },
-]);
+const TUTORIAL_MOCK_PIECES = Object.freeze(
+  TUTORIAL_PIECES.filter(
+    (item) => String(item?.tutorial_kind || "") === "mock"
+  ).map((item) => ({ ...item }))
+);
 
-const TUTORIAL_TOTAL_STEPS = 21;
 const STEP_PIECES_SELF_VIEW = 16;
 const STEP_PIECES_SWITCH_AND_REACT = 17;
-const STEP_FOLLOW_START = 18;
 
 function buildErrorMessage(err) {
   if (!err) return "エラーが発生しました。";
@@ -186,6 +170,7 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
     tutorialPieces,
     setTutorialPieces,
     setTutorialStep,
+    endTutorial,
   } = useTutorial();
 
   const screenRootRef = useRef(null);
@@ -369,11 +354,22 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
     if (!isTutorialMode) return;
     setTutorialPieces((prev) => {
       const safePrev = Array.isArray(prev) ? prev : [];
-      const hasMock = safePrev.some(
-        (item) => String(item?.tutorial_kind || "") === "mock"
-      );
-      if (hasMock) return safePrev;
-      return [...safePrev, ...TUTORIAL_MOCK_PIECES.map((item) => ({ ...item }))];
+      const nextItems = [...safePrev];
+      let changed = false;
+
+      TUTORIAL_PIECES.forEach((seedItem) => {
+        const seedId = String(seedItem?.q_instance_id || seedItem?.id || "").trim();
+        const exists = nextItems.some((item) => {
+          const itemId = String(item?.q_instance_id || item?.id || "").trim();
+          return seedId && itemId === seedId;
+        });
+        if (!exists) {
+          nextItems.push({ ...seedItem });
+          changed = true;
+        }
+      });
+
+      return changed ? nextItems : safePrev;
     });
   }, [isTutorialMode, setTutorialPieces]);
 
@@ -392,6 +388,43 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
     },
     [isTutorialMode, getTutorialSortedItems]
   );
+
+  const completeTutorialAndReturnHome = useCallback(async () => {
+    try {
+      await endTutorial?.();
+    } catch (e) {
+      console.warn("PieceLibraryScreen: endTutorial failed", e);
+    }
+
+    try {
+      setTutorialStep(0);
+      setActiveViewedUserId(null);
+      setUserPickerVisible(false);
+      setPickerVisible(false);
+      setTutorialOtherPiecePhase("select");
+    } catch {
+      // noop
+    }
+
+    requestAnimationFrame(() => {
+      try {
+        const parent =
+          typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+        if (parent && typeof parent.navigate === "function") {
+          parent.navigate("Input");
+          return;
+        }
+      } catch {
+        // noop
+      }
+
+      try {
+        navigation?.navigate?.("Input");
+      } catch {
+        // noop
+      }
+    });
+  }, [endTutorial, navigation, setTutorialStep]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
@@ -448,24 +481,11 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
     }
 
     if (tutorialStep === STEP_PIECES_SWITCH_AND_REACT) {
-      if (!activeViewedUserId) {
-        return pieceSelectorRef;
-      }
-
-      if (tutorialOtherPiecePhase === "view") {
-        return qaBlockRef;
-      }
-
-      return metricsActionsWrapRef;
+      return activeViewedUserId ? qaBlockRef : pieceSelectorRef;
     }
 
     return null;
-  }, [
-    isTutorialMode,
-    tutorialStep,
-    activeViewedUserId,
-    tutorialOtherPiecePhase,
-  ]);
+  }, [isTutorialMode, tutorialStep, activeViewedUserId]);
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isTutorialMode || !screenRootRef.current) {
@@ -2528,16 +2548,14 @@ useEffect(() => {
             ? "自分のPiece"
             : !activeViewedUserId
             ? "Userへ切り替え"
-            : "他ユーザーのPiece"
+            : "UserのPiece"
         }
         message={
           tutorialStep === STEP_PIECES_SELF_VIEW
-            ? "フォロワーにはこのように表示されます。自分の作成したPieceを確認できます。"
+            ? "先ほどの入力から整えられた、自分のPieceです。ラフな独り言が読みやすい文章になっています。"
             : !activeViewedUserId
             ? "『対象：自分』を押して、Userを選んでください。"
-            : tutorialOtherPiecePhase === "view"
-            ? "このように他ユーザーのPieceが表示されます。"
-            : "このようにフォローしたユーザーのPieceを閲覧できます。\n\n共感したら『共鳴』でリアクションできます。共鳴済みを押すと解除できます。"
+            : "フォロー中ユーザーのPieceはこのように閲覧できます。\n\n感情通知やランキングなどもありますが、チュートリアル後にご自身で確認してみてください。"
         }
         step={tutorialStep}
         totalSteps={TUTORIAL_TOTAL_STEPS}
@@ -2552,9 +2570,7 @@ useEffect(() => {
         }
         nextLabel={
           tutorialStep === STEP_PIECES_SWITCH_AND_REACT && !!activeViewedUserId
-            ? tutorialOtherPiecePhase === "view"
-              ? "次へ"
-              : "EmotionLogへ"
+            ? "完了してホームへ"
             : "次へ"
         }
         cardPlacement={
@@ -2570,31 +2586,7 @@ useEffect(() => {
           }
 
           if (tutorialStep === STEP_PIECES_SWITCH_AND_REACT && activeViewedUserId) {
-            if (tutorialOtherPiecePhase === "view") {
-              setTutorialOtherPiecePhase("react");
-              return;
-            }
-
-            setTutorialStep(STEP_FOLLOW_START);
-
-            try {
-              if (navigation?.navigate) {
-                navigation.navigate("EmotionLog");
-                return;
-              }
-            } catch {
-              // noop
-            }
-
-            try {
-              const parent =
-                typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-              if (parent && typeof parent.navigate === "function") {
-                parent.navigate("EmotionLog");
-              }
-            } catch {
-              // noop
-            }
+            void completeTutorialAndReturnHome();
           }
         }}
       />

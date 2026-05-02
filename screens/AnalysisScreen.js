@@ -60,13 +60,18 @@ import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
+import {
+  TUTORIAL_ANALYSIS_COUNTS,
+  TUTORIAL_ANALYSIS_REPORTS,
+  TUTORIAL_SELF_ANALYSIS_GUIDE,
+  TUTORIAL_TOTAL_STEPS,
+} from "../tutorial/tutorialScenarioData";
 
 // Home / Piece の見た目に合わせたパネル高さ（だいたいの値）
 const PANEL_MIN_HEIGHT = 690;
 
 const ANALYSIS_TUTORIAL_STEP_START = 7;
-const ANALYSIS_TUTORIAL_STEP_END = 11;
-const TUTORIAL_TOTAL_STEPS = 21;
+const ANALYSIS_TUTORIAL_STEP_END = 10;
 
 const SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
 const SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
@@ -369,12 +374,11 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       case 7:
         return analysisTitleRef;
       case 8:
-        return analysisEmotionRef;
       case 9:
-        return analysisSelfStructureRef;
+        return analysisEmotionRef;
       case 10:
-        return analysisTitleRef;
-      case 11:
+        return analysisSelfStructureRef;
+
       default:
         return null;
     }
@@ -388,58 +392,47 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         return {
           step: 7,
           mode: "info",
-          title: "分析",
-          message: "ここでは日々の入力から作成される\n分析レポートや自己分析を確認できます",
-          nextLabel: "次へ",
+          title: "日報",
+          message:
+            `分析画面では、日々の入力がたまったユーザーを想定した実生成レポートを表示します。
+
+まずは日報の例です。`,
+          nextLabel: "週報を見る",
           onNext: () => setTutorialStep(8),
         };
       case 8:
         return {
           step: 8,
           mode: "info",
-          title: "感情分析",
-          message: "ここで日々の入力から作成される\n感情分析のレポートを確認できます",
-          nextLabel: "次へ",
+          title: "週報",
+          message:
+            "週報では、1週間分の感情入力をもとにした振り返りを見られます。",
+          nextLabel: "月報を見る",
           onNext: () => setTutorialStep(9),
         };
       case 9:
         return {
           step: 9,
           mode: "info",
-          title: "自己分析",
-          message: "ここで日々の入力から作成される\n自己分析のレポートを確認できます",
-          nextLabel: "次へ",
+          title: "月報",
+          message:
+            "月報では、感情やカテゴリの流れをもう少し長い期間で振り返れます。",
+          nextLabel: "自己分析へ",
           onNext: () => setTutorialStep(10),
         };
       case 10:
         return {
           step: 10,
           mode: "info",
-          title: "履歴はホームから開きます",
-          message: "入力履歴と今日の問い履歴は\nHomeから確認します。\n\nAnalysisは分析を見る場所です。",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(11),
-          cardPlacement: "bottom",
-        };
-      case 11:
-        return {
-          step: 11,
-          mode: "info",
-          title: "次はピース",
-          message: "次はPieceを見てみましょう",
+          title: "自己分析レポート",
+          message:
+            `自己分析レポートは説明だけを表示します。
+
+内容はサブスク加入後に閲覧できます。次はPiece閲覧画面へ進みます。`,
           nextLabel: "Pieceへ",
           onNext: () => {
-            setTutorialStep(12);
+            setTutorialStep(11);
             requestAnimationFrame(() => {
-              try {
-                if (navigation?.navigate) {
-                  navigation.navigate("Piece");
-                  return;
-                }
-              } catch {
-                // no-op
-              }
-
               try {
                 const parent =
                   typeof navigation?.getParent === "function"
@@ -447,7 +440,14 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
                     : null;
                 if (parent && typeof parent.navigate === "function") {
                   parent.navigate("Piece");
+                  return;
                 }
+              } catch {
+                // no-op
+              }
+
+              try {
+                navigation?.navigate?.("Piece");
               } catch {
                 // no-op
               }
@@ -1384,6 +1384,11 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             onRefreshEmotionUnread={refreshUnreadBadges}
             onLatestSeenVersion={markSelfStructureLatestSeen}
             isPaid={!subscriptionLoading && isPaid}
+            isTutorialMode={isAnalysisTutorialStep}
+            tutorialStep={tutorialStep}
+            tutorialReports={TUTORIAL_ANALYSIS_REPORTS}
+            tutorialCounts={TUTORIAL_ANALYSIS_COUNTS}
+            tutorialSelfAnalysisGuide={TUTORIAL_SELF_ANALYSIS_GUIDE}
           />
         </View>
       )}

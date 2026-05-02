@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Modal,
   Platform,
+  Pressable,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -52,9 +53,15 @@ import TutorialOverlay, {
 import TodayQuestionCard from "../components/TodayQuestionCard";
 import TodayQuestionModal from "../components/TodayQuestionModal";
 import NoticeModal from "../components/NoticeModal";
-import TutorialStartModal from "../components/TutorialStartModal";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import EmotionPiecePreviewModal from "../components/EmotionPiecePreviewModal";
+import {
+  TUTORIAL_EMLIS_REPLY,
+  TUTORIAL_INPUT_SAMPLE,
+  TUTORIAL_PIECE_PREVIEW,
+  TUTORIAL_SELF_PIECE,
+  TUTORIAL_TOTAL_STEPS,
+} from "../tutorial/tutorialScenarioData";
 
 // 未送信下書きは InputScreen 内で自己完結させ、
 // Metro の外部 helper 解決に依存しないようにする。
@@ -325,13 +332,12 @@ const CATEGORY_OPTIONS = Object.freeze([
 
 const INPUT_TUTORIAL_STEP_START = 1;
 const INPUT_TUTORIAL_STEP_END = 6;
-const TUTORIAL_TOTAL_STEPS = 21;
 
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
  */
-export default function InputScreen({ navigation }) {
+export default function InputScreen({ navigation, route }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
   const { session } = useAuth();
@@ -339,17 +345,32 @@ export default function InputScreen({ navigation }) {
     isTutorialMode,
     tutorialFlagsLoaded,
     tutorialCompleted,
-    tutorialSkipped,
     tutorialStep,
     addTutorialEmotion,
-    addTutorialEmotionLogFeedItem,
+    ensureTutorialPiecesSeed,
     setTutorialStep,
     startTutorial,
-    skipTutorial,
   } = useTutorial();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const currentUserId = String(session?.user?.id || "").trim();
+  const tutorialDisplayName = useMemo(() => {
+    const metadata = session?.user?.user_metadata || {};
+    return (
+      String(
+        metadata?.display_name ||
+          metadata?.displayName ||
+          metadata?.name ||
+          metadata?.full_name ||
+          "ユーザー"
+      ).trim() || "ユーザー"
+    );
+  }, [session?.user?.user_metadata]);
+  const tutorialEmlisReplyText = useMemo(() => {
+    const raw = String(TUTORIAL_EMLIS_REPLY.commentText || "").trim();
+    if (!raw) return "";
+    return raw.replace(/\{displayName\}/g, tutorialDisplayName);
+  }, [tutorialDisplayName]);
 
   const isIOS = Platform.OS === "ios";
 
@@ -373,6 +394,33 @@ export default function InputScreen({ navigation }) {
   const [piecePublishLoading, setPiecePublishLoading] = useState(false);
   const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
   const [keyboardInset, setKeyboardInset] = useState(0);
+  const wasTutorialModeRef = useRef(false);
+
+  const resetLocalInputState = useCallback(() => {
+    setSelectedEmotions([]);
+    setMemo("");
+    setMemoAction("");
+    setSelectedCategories([]);
+    setShowMemoSection(true);
+    setActiveField(null);
+    setMemoContentHeight(44);
+    setMemoActionContentHeight(44);
+    setIsSecret(false);
+    setSendEmotionNotification(true);
+    setPiecePreviewVisible(false);
+    setPiecePreviewLoading(false);
+    setPiecePublishLoading(false);
+    setPiecePreviewPayload(null);
+    setInputFeedbackModalVisible(false);
+    setInputFeedbackModalText("");
+    setInputFeedbackModalMeta({
+      emotionSummary: "",
+      dominantSummary: "",
+      contextLabel: "",
+    });
+    setTutorialNavigateAfterReply(false);
+    Keyboard.dismiss();
+  }, []);
 
 // --- Lightweight toast / input feedback modal ---
 const toastTimerRef = useRef(null);
@@ -385,6 +433,7 @@ const [inputFeedbackModalMeta, setInputFeedbackModalMeta] = useState({
   dominantSummary: "",
   contextLabel: "",
 });
+const [tutorialNavigateAfterReply, setTutorialNavigateAfterReply] = useState(false);
 const draftSaveTimerRef = useRef(null);
 const draftLoadRequestIdRef = useRef(0);
 const latestInputDraftDataRef = useRef(null);
@@ -406,7 +455,31 @@ const openInputFeedbackModal = useCallback((input = {}) => {
 
 const closeInputFeedbackModal = useCallback(() => {
   setInputFeedbackModalVisible(false);
-}, []);
+
+  if (!tutorialNavigateAfterReply || !isTutorialMode) return;
+
+  setTutorialNavigateAfterReply(false);
+  setTutorialStep(7);
+
+  requestAnimationFrame(() => {
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      if (parent && typeof parent.navigate === "function") {
+        parent.navigate("Analysis");
+        return;
+      }
+    } catch {
+      // noop
+    }
+
+    try {
+      navigation?.navigate?.("Analysis");
+    } catch {
+      // noop
+    }
+  });
+}, [isTutorialMode, navigation, setTutorialStep, tutorialNavigateAfterReply]);
 
 const showToast = useCallback((msg) => {
   try {
@@ -445,6 +518,23 @@ useEffect(() => {
   };
 }, []);
 
+useEffect(() => {
+  if (wasTutorialModeRef.current && !isTutorialMode) {
+    resetLocalInputState();
+  }
+  wasTutorialModeRef.current = !!isTutorialMode;
+}, [isTutorialMode, resetLocalInputState]);
+
+useEffect(() => {
+  if (!route?.params?.tutorialFinishedAt) return;
+  resetLocalInputState();
+  try {
+    navigation?.setParams?.({ tutorialFinishedAt: null });
+  } catch {
+    // noop
+  }
+}, [navigation, resetLocalInputState, route?.params?.tutorialFinishedAt]);
+
 const [isTodayQuestionExpanded, setIsTodayQuestionExpanded] = useState(false);
 const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
   useState(false);
@@ -453,21 +543,7 @@ useEffect(() => {
   setTutorialPromptDismissedThisSession(false);
 }, [currentUserId]);
 
-const buildTutorialStartupCandidate = useCallback(() => {
-  if (!currentUserId) return null;
-  if (!tutorialFlagsLoaded) return null;
-  if (isTutorialMode) return null;
-  if (tutorialCompleted || tutorialSkipped) return null;
-  if (tutorialPromptDismissedThisSession) return null;
-  return { kind: STARTUP_POPUP_KIND.TUTORIAL };
-}, [
-  currentUserId,
-  isTutorialMode,
-  tutorialCompleted,
-  tutorialFlagsLoaded,
-  tutorialPromptDismissedThisSession,
-  tutorialSkipped,
-]);
+const buildTutorialStartupCandidate = useCallback(() => null, []);
 
 const homeState = useHomeState({
   currentUserId,
@@ -612,41 +688,19 @@ const handleOpenTodayQuestionHistory = useCallback(() => {
   }
 }, [activeStartupPopup?.kind, closeStartupPopupWindow, navigation]);
 
-const handleDismissTutorialStartModal = useCallback(() => {
-  setTutorialPromptDismissedThisSession(true);
-  advanceStartupPopupQueue();
-}, [advanceStartupPopupQueue]);
 
-const handleSkipTutorialPermanently = useCallback(async () => {
-  setTutorialPromptDismissedThisSession(true);
-  advanceStartupPopupQueue();
-  try {
-    await skipTutorial();
-  } catch (e) {
-    console.warn("InputScreen: skipTutorial failed", e);
-  }
-}, [advanceStartupPopupQueue, skipTutorial]);
-
-const handleStartTutorialFromModal = useCallback(() => {
-  setTutorialPromptDismissedThisSession(true);
-  closeStartupPopupWindow();
-  startTutorial();
-  setTutorialStep(INPUT_TUTORIAL_STEP_START);
-}, [closeStartupPopupWindow, setTutorialStep, startTutorial]);
 
 const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
-  const compactRailTop = Math.max(8, safeInsets.top + 6);
 
   const screenRootRef = useRef(null);
   const emotionAreaRef = useRef(null);
   const memoSectionRef = useRef(null);
+  const notificationRef = useRef(null);
+  const pieceButtonRef = useRef(null);
   const okButtonRef = useRef(null);
   const strengthRowRefs = useRef({});
   const currentScrollYRef = useRef(0);
-  const heroCardYRef = useRef(null);
-  const heroRailInlineOffsetYRef = useRef(null);
-  const [compactRailVisible, setCompactRailVisible] = useState(false);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
 
@@ -655,6 +709,45 @@ const { height: windowHeight } = useWindowDimensions();
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
+
+  useEffect(() => {
+    if (!currentUserId) return;
+    if (!tutorialFlagsLoaded) return;
+    if (tutorialCompleted) return;
+    if (isTutorialMode) return;
+
+    try {
+      closeStartupPopupWindow?.();
+    } catch {
+      // noop
+    }
+
+    startTutorial();
+    setTutorialStep(INPUT_TUTORIAL_STEP_START);
+  }, [
+    closeStartupPopupWindow,
+    currentUserId,
+    isTutorialMode,
+    setTutorialStep,
+    startTutorial,
+    tutorialCompleted,
+    tutorialFlagsLoaded,
+  ]);
+
+  useEffect(() => {
+    if (!isInputTutorialStep) return;
+
+    setShowMemoSection(true);
+    setMemo(TUTORIAL_INPUT_SAMPLE.memo);
+    setMemoAction(TUTORIAL_INPUT_SAMPLE.memoAction);
+    setSelectedEmotions(TUTORIAL_INPUT_SAMPLE.emotions.map((item) => ({ ...item })));
+    setSelectedCategories([...TUTORIAL_INPUT_SAMPLE.categories]);
+    setSendEmotionNotification(TUTORIAL_INPUT_SAMPLE.sendEmotionNotification !== false);
+    setMemoContentHeight(110);
+    setMemoActionContentHeight(72);
+    setIsSecret(false);
+    setActiveField(null);
+  }, [isInputTutorialStep]);
 
   // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える
   const inputMaxHeight = useMemo(() => {
@@ -989,81 +1082,9 @@ const { height: windowHeight } = useWindowDimensions();
     selectedEmotions.length > 0 &&
     hasSelectedCategories;
   const canPreviewPiece =
-    !isTutorialMode &&
     !piecePreviewLoading &&
     !piecePublishLoading &&
     canSubmit;
-
-  const hasThoughtInput = memo.trim().length > 0;
-  const hasActionInput = memoAction.trim().length > 0;
-  const hasEmotionInput = selectedEmotions.length > 0;
-
-  const readyStatusLabel = useMemo(() => {
-    if (canSubmit) return "入力を送信できます";
-    if (!hasMemoInput) return "思考内容または行動内容を入力してください";
-    if (!hasEmotionInput) return "感情を1つ以上選んでください";
-    if (!hasSelectedCategories) return "カテゴリを1つ以上選んでください";
-    return "入力内容を整えると送信できます";
-  }, [canSubmit, hasEmotionInput, hasMemoInput, hasSelectedCategories]);
-
-  const inputProgressSteps = useMemo(() => {
-    const baseSteps = [
-      { key: "thought", label: "思考", complete: hasThoughtInput },
-      { key: "action", label: "行動", complete: hasActionInput },
-      { key: "emotion", label: "感情", complete: hasEmotionInput },
-      { key: "category", label: "カテゴリ", complete: hasSelectedCategories },
-      { key: "ready", label: "Ready?", complete: canSubmit },
-    ];
-    const firstIncompleteIndex = baseSteps.findIndex((step) => !step.complete);
-    return baseSteps.map((step, index) => ({
-      ...step,
-      active: step.complete || index === firstIncompleteIndex,
-    }));
-  }, [
-    canSubmit,
-    hasActionInput,
-    hasEmotionInput,
-    hasSelectedCategories,
-    hasThoughtInput,
-  ]);
-
-  const updateCompactRailVisibility = useCallback((scrollY) => {
-    const cardY = heroCardYRef.current;
-    const railOffsetY = heroRailInlineOffsetYRef.current;
-    const normalizedScrollY = Number.isFinite(scrollY) ? scrollY : 0;
-
-    if (!Number.isFinite(cardY) || !Number.isFinite(railOffsetY)) {
-      setCompactRailVisible(false);
-      return;
-    }
-
-    const nextVisible =
-      normalizedScrollY + compactRailTop >= cardY + railOffsetY + 6;
-    setCompactRailVisible((prev) =>
-      prev === nextVisible ? prev : nextVisible
-    );
-  }, [compactRailTop]);
-
-  const handleHeroCardLayout = useCallback((event) => {
-    const y = event?.nativeEvent?.layout?.y;
-    if (Number.isFinite(y)) {
-      heroCardYRef.current = y;
-      updateCompactRailVisibility(currentScrollYRef.current);
-    }
-  }, [updateCompactRailVisibility]);
-
-  const handleHeroRailLayout = useCallback((event) => {
-    const y = event?.nativeEvent?.layout?.y;
-    if (Number.isFinite(y)) {
-      heroRailInlineOffsetYRef.current = y;
-      updateCompactRailVisibility(currentScrollYRef.current);
-    }
-  }, [updateCompactRailVisibility]);
-
-  useEffect(() => {
-    updateCompactRailVisibility(currentScrollYRef.current);
-  }, [inputProgressSteps, updateCompactRailVisibility]);
-
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
     memo.trim().length > 0 ||
@@ -1082,22 +1103,20 @@ const { height: windowHeight } = useWindowDimensions();
 
     switch (tutorialStep) {
       case 1:
+        return memoSectionRef;
       case 2:
         return emotionAreaRef;
-      case 3: {
-        const selectedType = selectedEmotions?.[0]?.type || null;
-        if (!selectedType) return emotionAreaRef;
-        return strengthRowRefs.current?.[selectedType] || emotionAreaRef;
-      }
+      case 3:
+        return notificationRef;
       case 4:
-        return memoSectionRef;
+        return pieceButtonRef;
       case 5:
       case 6:
         return okButtonRef;
       default:
         return null;
     }
-  }, [isInputTutorialStep, tutorialStep, selectedEmotions, showMemoSection]);
+  }, [isInputTutorialStep, tutorialStep]);
 
   const tutorialOverlayConfig = useMemo(() => {
     if (!isInputTutorialStep) return null;
@@ -1107,46 +1126,49 @@ const { height: windowHeight } = useWindowDimensions();
         return {
           step: 1,
           mode: "info",
-          title: "感情を選びます",
+          title: "軽い独り言で大丈夫です",
           message:
-            "ここで今日の感情を選びます\n\n複数の感情を選ぶこともできます",
+            "Emlisは1日1回の日記ではなく、書きたいときに書ける場所です。\n\n今回は入力済みの状態を見せます。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(2),
         };
       case 2:
         return {
           step: 2,
-          mode: "action",
-          title: "感情を選んでみましょう",
-          message: "まずは感情を1つ以上選んでみましょう",
-          actionHint: "感情ボタンを押してください",
+          mode: "info",
+          title: "感情とカテゴリを選びます",
+          message:
+            "感情もカテゴリも複数選べます。\n\n今回は、平穏・喜び・不安と、生活・健康・価値観を選んだ状態です。",
+          nextLabel: "次へ",
+          onNext: () => setTutorialStep(3),
         };
       case 3:
         return {
           step: 3,
           mode: "info",
-          title: "感情の強さを選びます",
+          title: "感情通知",
           message:
-            "感情を選ぶと、弱 / 中 / 強 を選べます\n\n感情の強さも記録されます",
+            "感情通知は、入力した感情をフォロー中ユーザーへ通知する設定です。\n\n今回は通知する状態で見せます。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(4),
         };
       case 4:
         return {
           step: 4,
-          mode: "info",
-          title: "メモが入力の中心です",
+          mode: "action",
+          title: "Pieceを作成します",
           message:
-            "思考内容と行動内容を残すと\n感情やカテゴリを整理しやすくなります",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(5),
+            "ラフな独り言を、他の人にも読みやすいPieceとして整えます。",
+          actionHint: "Pieceを作成する を押してください",
+          cardPlacement: "top",
         };
       case 5:
         return {
           step: 5,
           mode: "info",
-          title: "送信します",
-          message: "入力が終わったら\nこのボタンで送信します",
+          title: "Pieceが整いました",
+          message:
+            "入力した文章は、実際のPiece生成結果として保存されています。\n\n次はこの入力を送信して、Emlisからの応答を見ます。",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(6),
           cardPlacement: "top",
@@ -1155,9 +1177,9 @@ const { height: windowHeight } = useWindowDimensions();
         return {
           step: 6,
           mode: "action",
-          title: "送信してみましょう",
-          message: "感情を送信してみましょう",
-          actionHint: "「この内容でOK」を押してください",
+          title: "送信して応答を見ます",
+          message: "この入力から生成された、Emlisからの応答を表示します。",
+          actionHint: "この内容でOK を押してください",
           cardPlacement: "top",
         };
       default:
@@ -1202,18 +1224,9 @@ const { height: windowHeight } = useWindowDimensions();
   useEffect(() => {
     if (!isTutorialMode) return;
     if (tutorialStep > 0) return;
-    if (
-      startupQueuePreparing ||
-      startupModalVisible ||
-      !!todayQuestionBundle?.question ||
-      todayQuestionLoading ||
-      noticeLoading
-    ) {
-      return;
-    }
 
     const frame = requestAnimationFrame(() => {
-      setTutorialStep(1);
+      setTutorialStep(INPUT_TUTORIAL_STEP_START);
     });
 
     return () => {
@@ -1223,16 +1236,7 @@ const { height: windowHeight } = useWindowDimensions();
         // noop
       }
     };
-  }, [
-    isTutorialMode,
-    tutorialStep,
-    startupModalVisible,
-    startupQueuePreparing,
-    !!todayQuestionBundle?.question,
-    todayQuestionLoading,
-    noticeLoading,
-    setTutorialStep,
-  ]);
+  }, [isTutorialMode, tutorialStep, setTutorialStep]);
 
 
   useLayoutEffect(() => {
@@ -1290,6 +1294,7 @@ const { height: windowHeight } = useWindowDimensions();
   }, [hasMemoInput, selectedCategories.length]);
 
   const toggleEmotion = (cat) => {
+    if (isTutorialMode) return;
     registerInputInteraction();
     setSelectedEmotions((prev) => {
       let next = prev;
@@ -1325,6 +1330,7 @@ const { height: windowHeight } = useWindowDimensions();
   };
 
   const changeStrength = (cat, s) => {
+    if (isTutorialMode) return;
     registerInputInteraction();
     setSelectedEmotions((prev) =>
       prev.map((e) => (e.type === cat ? { ...e, strength: s } : e))
@@ -1332,6 +1338,7 @@ const { height: windowHeight } = useWindowDimensions();
   };
 
   const toggleCategory = (category) => {
+    if (isTutorialMode) return;
     registerInputInteraction();
     if (!hasMemoInput) return;
     const nextCategory = String(category || "").trim();
@@ -1381,6 +1388,13 @@ const { height: windowHeight } = useWindowDimensions();
     if (!canPreviewPiece) return;
 
     registerInputInteraction();
+
+    if (isTutorialMode) {
+      setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
+      setPiecePreviewVisible(true);
+      return;
+    }
+
     setPiecePreviewLoading(true);
     try {
       const payload = buildEmotionSubmitPayload();
@@ -1402,11 +1416,22 @@ const { height: windowHeight } = useWindowDimensions();
     } finally {
       setPiecePreviewLoading(false);
     }
-  }, [buildEmotionSubmitPayload, canPreviewPiece, registerInputInteraction]);
+  }, [
+    buildEmotionSubmitPayload,
+    canPreviewPiece,
+    isTutorialMode,
+    registerInputInteraction,
+  ]);
 
   const handleCancelPiecePreview = useCallback(async () => {
     const previewId = String(piecePreviewPayload?.preview_id || "").trim();
     setPiecePreviewVisible(false);
+
+    if (isTutorialMode) {
+      setPiecePreviewPayload(null);
+      return;
+    }
+
     if (!previewId) {
       setPiecePreviewPayload(null);
       return;
@@ -1418,11 +1443,20 @@ const { height: windowHeight } = useWindowDimensions();
     } finally {
       setPiecePreviewPayload(null);
     }
-  }, [piecePreviewPayload?.preview_id]);
+  }, [isTutorialMode, piecePreviewPayload?.preview_id]);
 
   const handlePublishPiece = useCallback(async () => {
     const previewId = String(piecePreviewPayload?.preview_id || "").trim();
     if (!previewId || piecePublishLoading) return;
+
+    if (isTutorialMode) {
+      setPiecePreviewVisible(false);
+      setPiecePreviewPayload(null);
+      void ensureTutorialPiecesSeed();
+      setTutorialStep(5);
+      showToast("Pieceを作成しました");
+      return;
+    }
 
     setPiecePublishLoading(true);
     try {
@@ -1479,11 +1513,14 @@ const { height: windowHeight } = useWindowDimensions();
     }
   }, [
     clearPersistedInputDraft,
+    ensureTutorialPiecesSeed,
+    isTutorialMode,
     loadHomeState,
     openInputFeedbackModal,
     piecePreviewPayload?.preview_id,
     piecePublishLoading,
     selectedEmotions,
+    setTutorialStep,
     showToast,
   ]);
 
@@ -1500,96 +1537,22 @@ const { height: windowHeight } = useWindowDimensions();
         addTutorialEmotion({
           id: `tutorial-emotion-${Date.now()}`,
           ...payload,
+          piece: { ...TUTORIAL_SELF_PIECE },
           is_tutorial: true,
         });
 
-        try {
-          setTutorialStep(7);
-        } catch {
-          // noop
-        }
+        void ensureTutorialPiecesSeed();
 
-        setSelectedEmotions([]);
-        setMemo("");
-        setMemoAction("");
-        setSelectedCategories([]);
-        setShowMemoSection(true);
-        setActiveField(null);
-        setMemoContentHeight(44);
-        setMemoActionContentHeight(44);
-        setIsSecret(false);
+        await clearPersistedInputDraft();
+        setPendingInputDraft(null);
+        setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
 
-        showToast(`チュートリアルに記録しました${inputFeedbackEmotionMeta.emotionSummary ? `
-${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
-
-        if (sendEmotionNotification) {
-          try {
-            if (tutorialEmotionLogNotifyTimerRef.current) {
-              clearTimeout(tutorialEmotionLogNotifyTimerRef.current);
-            }
-          } catch {
-            // noop
-          }
-
-          tutorialEmotionLogNotifyTimerRef.current = setTimeout(() => {
-            const tutorialUserName = "（仮のユーザー名）";
-            const feedCreatedAt = new Date().toISOString();
-            const feedTimeLabel = new Date(feedCreatedAt).toLocaleString("ja-JP", {
-              month: "numeric",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-
-            try {
-              addTutorialEmotionLogFeedItem({
-                id: `tutorial-emotion-log-feed-${Date.now()}`,
-                ownerName: tutorialUserName,
-                owner_name: tutorialUserName,
-                items: emotionDetails.map((e) => ({
-                  type: e.type,
-                  strength: e.strength,
-                })),
-                emotions: emotionDetails.map((e) => ({
-                  type: e.type,
-                  strength: e.strength,
-                })),
-                created_at: feedCreatedAt,
-                timeLabel: feedTimeLabel,
-                is_tutorial: true,
-              });
-            } catch {
-              // noop
-            }
-
-            try {
-              setUnread("EmotionLog", "feed", true);
-            } catch {
-              // noop
-            }
-
-            tutorialEmotionLogNotifyTimerRef.current = null;
-          }, 3000);
-        }
-
-        requestAnimationFrame(() => {
-          try {
-            navigation?.navigate?.("Analysis");
-            return;
-          } catch {
-            // noop
-          }
-
-          try {
-            const parent =
-              typeof navigation?.getParent === "function"
-                ? navigation.getParent()
-                : null;
-            parent?.navigate?.("Analysis");
-          } catch {
-            // noop
-          }
+        setTutorialNavigateAfterReply(true);
+        openInputFeedbackModal({
+          commentText: tutorialEmlisReplyText,
+          ...inputFeedbackEmotionMeta,
+          contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
         });
         return;
       }
@@ -1747,42 +1710,6 @@ ${String(error?.message || error)}`
       );
     }
   };
-
-  const renderInputProgressRail = (variant = "inline") => (
-    <View
-      style={[
-        styles.inputProgressRail,
-        variant === "compact" && styles.inputProgressRailCompact,
-      ]}
-    >
-      {inputProgressSteps.map((step) => {
-        const isDone = step.complete;
-        return (
-          <View
-            key={step.key}
-            style={[
-              styles.inputProgressChip,
-              variant === "compact" && styles.inputProgressChipCompact,
-              isDone && styles.inputProgressChipDone,
-              !isDone && step.active && styles.inputProgressChipCurrent,
-            ]}
-          >
-            <Text
-              style={[
-                styles.inputProgressChipText,
-                variant === "compact" && styles.inputProgressChipTextCompact,
-                isDone && styles.inputProgressChipTextDone,
-                !isDone && step.active && styles.inputProgressChipTextCurrent,
-              ]}
-            >
-              {step.label}
-            </Text>
-          </View>
-        );
-      })}
-    </View>
-  );
-
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
       <StatusBar
@@ -1806,10 +1733,8 @@ ${String(error?.message || error)}`
             scrollEventThrottle={16}
             onScrollBeginDrag={registerInputInteraction}
             onScroll={(e) => {
-              const nextScrollY =
+              currentScrollYRef.current =
                 e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
-              currentScrollYRef.current = nextScrollY;
-              updateCompactRailVisibility(nextScrollY);
             }}
           >
 {/* パネルヘッダー */}
@@ -1861,17 +1786,7 @@ ${String(error?.message || error)}`
                 </View>
               </View>
 
-              <View style={styles.todayStatusTray}>
-                <View style={styles.todayStatusHeaderRow}>
-                  <Ionicons
-                    name="sparkles-outline"
-                    size={15}
-                    color={colors.TITLE_GOLD}
-                    style={styles.todayStatusIcon}
-                  />
-                  <Text style={styles.todayStatusTitle}>今日の状況</Text>
-                </View>
-
+              <View style={styles.homeOverviewBlock}>
                 <View style={styles.globalSummaryBlock}>
                   <View style={styles.globalSummaryInner}>
                     <View style={styles.globalSummaryHeaderRow}>
@@ -1881,7 +1796,7 @@ ${String(error?.message || error)}`
                         color={colors.TITLE_GOLD}
                         style={styles.globalSummaryIcon}
                       />
-                      <Text style={styles.globalSummaryLabel}>今日の全体活動</Text>
+                      <Text style={styles.globalSummaryLabel}>今日の全体行動</Text>
                     </View>
                     <Text style={styles.globalSummaryText}>
                       {`今日、全体で ${
@@ -1891,96 +1806,99 @@ ${String(error?.message || error)}`
                   </View>
                 </View>
 
-                {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
-                  <View style={styles.todayQuestionAccordionCard}>
-                    <CocolonPressable
-                      style={styles.todayQuestionAccordionHeader}
+                <View style={styles.homeQuickActionsRow}>
+                  {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
+                    <Pressable
+                      style={styles.homeQuickActionButton}
                       onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
                       accessibilityRole="button"
                       accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
                       accessibilityState={{ expanded: isTodayQuestionExpanded }}
                     >
-                      <Text style={styles.todayQuestionAccordionTitle}>今日の問い</Text>
-                      <View style={styles.todayQuestionAccordionHeaderRight}>
-                        <Text
-                          style={[
-                            styles.todayQuestionAccordionStatus,
-                            isTodayQuestionAnswered && styles.todayQuestionAccordionStatusAnswered,
-                          ]}
-                        >
-                          {todayQuestionStatusLabel}
-                        </Text>
-                        {todayQuestionLoading ? (
-                          <ActivityIndicator
-                            size="small"
-                            color={colors.TEXT_SUBTLE}
-                            style={styles.todayQuestionAccordionSpinner}
-                          />
-                        ) : null}
+                      <View style={styles.homeQuickActionLeft}>
                         <Ionicons
-                          name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
-                          size={18}
-                          color={colors.TEXT_ON_LIGHT}
+                          name="help-circle-outline"
+                          size={17}
+                          color={colors.TEXT_SUBTLE}
+                          style={styles.homeQuickActionIcon}
                         />
+                        <Text
+                          style={styles.homeQuickActionTitle}
+                          numberOfLines={1}
+                          ellipsizeMode="tail"
+                        >
+                          今日の問い
+                        </Text>
                       </View>
-                    </CocolonPressable>
-
-                    {isTodayQuestionExpanded ? (
-                      <View style={styles.todayQuestionAccordionContent}>
-                        <TodayQuestionCard
-                          question={todayQuestionBundle?.question}
-                          answerSummary={todayQuestionBundle?.answer_summary || null}
-                          loading={todayQuestionLoading}
-                          submitting={todayQuestionSubmitting}
-                          compact
-                          hideHeader
-                          embedded
-                          showHistoryButton
-                          onSubmit={handleSubmitTodayQuestion}
-                          onOpenHistory={handleOpenTodayQuestionHistory}
+                      {todayQuestionLoading ? (
+                        <ActivityIndicator
+                          size="small"
+                          color={colors.TEXT_SUBTLE}
+                          style={styles.homeQuickActionSpinner}
                         />
-                      </View>
-                    ) : null}
-                  </View>
-                ) : null}
+                      ) : null}
+                      <Ionicons
+                        name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
+                        size={17}
+                        color={colors.TEXT_SUBTLE}
+                      />
+                    </Pressable>
+                  ) : null}
 
-                <View style={styles.inputHistoryQuickCard}>
-                  <CocolonPressable
-                    style={styles.inputHistoryQuickButton}
+                  <Pressable
+                    style={styles.homeQuickActionButton}
                     onPress={handleOpenEmotionHistory}
+                    accessibilityRole="button"
                     accessibilityLabel="入力履歴を開く"
                   >
-                    <View style={styles.inputHistoryQuickLeft}>
+                    <View style={styles.homeQuickActionLeft}>
                       <Ionicons
                         name="time-outline"
-                        size={18}
+                        size={17}
                         color={colors.TEXT_SUBTLE}
-                        style={styles.inputHistoryQuickIcon}
+                        style={styles.homeQuickActionIcon}
                       />
-                      <View style={styles.inputHistoryQuickTextWrap}>
-                        <Text style={styles.inputHistoryQuickTitle}>入力履歴</Text>
-                      </View>
+                      <Text
+                        style={styles.homeQuickActionTitle}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                      >
+                        入力履歴
+                      </Text>
                     </View>
                     <Ionicons
                       name="chevron-forward"
-                      size={18}
+                      size={17}
                       color={colors.TEXT_SUBTLE}
                     />
-                  </CocolonPressable>
+                  </Pressable>
                 </View>
+
+                {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question && isTodayQuestionExpanded ? (
+                  <View style={styles.todayQuestionInlineContent}>
+                    <TodayQuestionCard
+                      question={todayQuestionBundle?.question}
+                      answerSummary={todayQuestionBundle?.answer_summary || null}
+                      loading={todayQuestionLoading}
+                      submitting={todayQuestionSubmitting}
+                      compact
+                      hideHeader
+                      embedded
+                      showHistoryButton
+                      onSubmit={handleSubmitTodayQuestion}
+                      onOpenHistory={handleOpenTodayQuestionHistory}
+                    />
+                  </View>
+                ) : null}
               </View>
 
-              <View style={styles.heroMemoCard} onLayout={handleHeroCardLayout}>
+              <View style={styles.heroMemoCard}>
                 <View style={styles.heroCardHeader}>
-                  <Text style={styles.heroEyebrow}>感情入力カード</Text>
-                  <Text style={styles.heroTitle}>今の気持ちを入力</Text>
+                  <Text style={styles.heroEyebrow}>感情入力</Text>
+                  <Text style={styles.heroTitle}>今の気持ちを残す</Text>
                   <Text style={styles.heroLead}>
-                    思考と行動を残してから、感情とカテゴリを選択してください。
+                    思ったことや起きたことを入力して、今の感情を選んでください。
                   </Text>
-                </View>
-
-                <View style={styles.inputProgressInlineWrap} onLayout={handleHeroRailLayout}>
-                  {renderInputProgressRail("inline")}
                 </View>
 
                 <View
@@ -1989,11 +1907,11 @@ ${String(error?.message || error)}`
                   style={styles.heroMemoInputGroup}
                 >
                   <View style={styles.heroFieldBlock}>
-                    <Text style={styles.heroFieldLabel}>思考内容（自己世界の出来事）</Text>
+                    <Text style={styles.heroFieldLabel}>思考内容（考えていること）</Text>
                     <Text style={styles.heroFieldHint}>
                       何を思った／どう感じた／どう解釈した？
                     </Text>
-                    {activeField === "memo" ? (
+                    {(isTutorialMode || activeField === "memo") ? (
                       <View style={[styles.memoCard, styles.memoCardExpanded]}>
                         <TextInput
                           ref={memoInputRef}
@@ -2009,19 +1927,21 @@ ${String(error?.message || error)}`
                             },
                           ]}
                           placeholder="ここに書いてください。"
-                          {...(isIOS ? { defaultValue: memo } : { value: memo })}
-                          onChangeText={setMemo}
-                          {...(isIOS
+                          {...(isIOS && !isTutorialMode ? { defaultValue: memo } : { value: memo })}
+                          onChangeText={isTutorialMode ? undefined : setMemo}
+                          {...(isIOS && !isTutorialMode
                             ? {
                                 onChange: (e) =>
                                   setMemo(e?.nativeEvent?.text ?? ""),
                               }
                             : {})}
+                          editable={!isTutorialMode}
                           multiline
                           scrollEnabled
                           textAlignVertical="top"
                           placeholderTextColor={colors.TEXT_ON_LIGHT}
                           onFocus={(e) => {
+                            if (isTutorialMode) return;
                             registerInputInteraction();
                             lastFocusTargetRef.current =
                               e?.target ?? e?.nativeEvent?.target ?? null;
@@ -2033,7 +1953,7 @@ ${String(error?.message || error)}`
                             memoFocusedRef.current = false;
                             focusedFieldRef.current = null;
                             lastFocusTargetRef.current = null;
-                            setActiveField(null);
+                            if (!isTutorialMode) setActiveField(null);
                           }}
                           onContentSizeChange={(e) => {
                             const h = e?.nativeEvent?.contentSize?.height ?? 0;
@@ -2046,7 +1966,7 @@ ${String(error?.message || error)}`
                     ) : (
                       <CocolonPressable
                         style={[styles.memoCard, styles.memoCardCollapsed]}
-                        onPress={() => openField("memo")}
+                        onPress={() => { if (!isTutorialMode) openField("memo"); }}
                         accessibilityLabel="思考内容を入力する"
                       >
                         <View style={styles.collapsedRow}>
@@ -2081,11 +2001,11 @@ ${String(error?.message || error)}`
                   </View>
 
                   <View style={styles.heroFieldBlock}>
-                    <Text style={styles.heroFieldLabel}>行動内容（実世界の出来事）</Text>
+                    <Text style={styles.heroFieldLabel}>行動内容（実際に起こった出来事）</Text>
                     <Text style={styles.heroFieldHint}>
-                      何が起きた／何をした（できなかった）／結果どうなった？
+                      何が起きた／何をした／結果どうなった？
                     </Text>
-                    {activeField === "memoAction" ? (
+                    {(isTutorialMode || activeField === "memoAction") ? (
                       <View style={[styles.memoCard, styles.memoCardExpanded]}>
                         <TextInput
                           ref={memoActionInputRef}
@@ -2101,21 +2021,23 @@ ${String(error?.message || error)}`
                             },
                           ]}
                           placeholder="ここに書いてください。"
-                          {...(isIOS
+                          {...(isIOS && !isTutorialMode
                             ? { defaultValue: memoAction }
                             : { value: memoAction })}
-                          onChangeText={setMemoAction}
-                          {...(isIOS
+                          onChangeText={isTutorialMode ? undefined : setMemoAction}
+                          {...(isIOS && !isTutorialMode
                             ? {
                                 onChange: (e) =>
                                   setMemoAction(e?.nativeEvent?.text ?? ""),
                               }
                             : {})}
+                          editable={!isTutorialMode}
                           multiline
                           scrollEnabled
                           textAlignVertical="top"
                           placeholderTextColor={colors.TEXT_ON_LIGHT}
                           onFocus={(e) => {
+                            if (isTutorialMode) return;
                             registerInputInteraction();
                             lastFocusTargetRef.current =
                               e?.target ?? e?.nativeEvent?.target ?? null;
@@ -2127,7 +2049,7 @@ ${String(error?.message || error)}`
                             memoFocusedRef.current = false;
                             focusedFieldRef.current = null;
                             lastFocusTargetRef.current = null;
-                            setActiveField(null);
+                            if (!isTutorialMode) setActiveField(null);
                           }}
                           onContentSizeChange={(e) => {
                             const h = e?.nativeEvent?.contentSize?.height ?? 0;
@@ -2140,7 +2062,7 @@ ${String(error?.message || error)}`
                     ) : (
                       <CocolonPressable
                         style={[styles.memoCard, styles.memoCardCollapsed]}
-                        onPress={() => openField("memoAction")}
+                        onPress={() => { if (!isTutorialMode) openField("memoAction"); }}
                         accessibilityLabel="行動内容を入力する"
                       >
                         <View style={styles.collapsedRow}>
@@ -2182,7 +2104,7 @@ ${String(error?.message || error)}`
                 >
                   <Text style={styles.heroFieldLabel}>感情</Text>
                   <Text style={styles.heroFieldHint}>
-                    今の記録に近い感情を選んでください。複数選択可能です。自己理解は単体選択のみです。
+                    今の感情を選んでください。複数選択可能です。自己理解は単体選択のみです。
                   </Text>
 
                   <View style={styles.buttons}>
@@ -2331,20 +2253,12 @@ ${String(error?.message || error)}`
                   ) : null}
                 </View>
 
-                <View style={styles.heroReadyBox}>
-                  <View style={styles.readyHeaderRow}>
-                    <Text style={styles.readyTitle}>Ready?</Text>
-                    <Text
-                      style={[
-                        styles.readyStatusText,
-                        canSubmit && styles.readyStatusTextDone,
-                      ]}
-                    >
-                      {readyStatusLabel}
-                    </Text>
-                  </View>
-
-                  <View style={[styles.preferenceCard, styles.preferenceCardInReady]}>
+                <View style={styles.heroActionArea}>
+                  <View
+                    ref={notificationRef}
+                    collapsable={false}
+                    style={[styles.preferenceCard, styles.preferenceCardInActionArea]}
+                  >
                     <View style={styles.preferenceRow}>
                       <View style={styles.preferenceLeft}>
                         <Ionicons
@@ -2365,6 +2279,7 @@ ${String(error?.message || error)}`
                       <CocolonSwitch
                         value={doNotSendEmotionNotification}
                         onValueChange={(v) => {
+                          if (isTutorialMode) return;
                           registerInputInteraction();
                           setSendEmotionNotification(!v);
                         }}
@@ -2380,24 +2295,27 @@ ${String(error?.message || error)}`
                             : undefined
                         }
                         ios_backgroundColor="#D1D5DB"
+                        disabled={isTutorialMode}
                         accessibilityLabel="感情通知を送らない設定を切り替える"
                       />
                     </View>
                   </View>
 
-                  {!isTutorialMode ? (
-                    <View style={styles.buttonWrapper}>
-                      <CocolonButton
-                        variant="secondary"
-                        onPress={handlePreviewPiece}
-                        disabled={!canPreviewPiece}
-                        loading={piecePreviewLoading}
-                        accessibilityLabel="Pieceを作成する"
-                      >
-                        Pieceを作成する
-                      </CocolonButton>
-                    </View>
-                  ) : null}
+                  <View
+                    ref={pieceButtonRef}
+                    collapsable={false}
+                    style={styles.buttonWrapper}
+                  >
+                    <CocolonButton
+                      variant="secondary"
+                      onPress={handlePreviewPiece}
+                      disabled={!canPreviewPiece}
+                      loading={piecePreviewLoading}
+                      accessibilityLabel="Pieceを作成する"
+                    >
+                      Pieceを作成する
+                    </CocolonButton>
+                  </View>
 
                   <View
                     ref={okButtonRef}
@@ -2420,16 +2338,6 @@ ${String(error?.message || error)}`
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-      {compactRailVisible ? (
-        <View
-          pointerEvents="none"
-          style={[styles.compactRailOverlay, { top: compactRailTop }]}
-        >
-          <View style={styles.compactRailSurface}>
-            {renderInputProgressRail("compact")}
-          </View>
-        </View>
-      ) : null}
 <NoticeModal
   visible={!isTutorialMode && noticeFeatureEnabled && isNoticeStartupPopupVisible && !!noticePopup}
   notice={noticePopup}
@@ -2445,12 +2353,7 @@ ${String(error?.message || error)}`
     isWelcomeNoticeStartupPopup ? handlePrimaryNoticeModalAction : undefined
   }
 />
-<TutorialStartModal
-  visible={!isTutorialMode && isTutorialStartupPopupVisible}
-  onDismiss={handleDismissTutorialStartModal}
-  onSkipPermanently={handleSkipTutorialPermanently}
-  onStart={handleStartTutorialFromModal}
-/>
+
 <TodayQuestionModal
   visible={!shouldHideTodayQuestionForTutorial && isTodayQuestionStartupPopupVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
   question={todayQuestionBundle?.question}
@@ -2606,6 +2509,7 @@ ${String(error?.message || error)}`
   publishLoading={piecePublishLoading}
   onClose={handleCancelPiecePreview}
   onPublish={handlePublishPiece}
+  hideCancelButton={isTutorialMode}
 />
       </View>
 
@@ -2620,7 +2524,13 @@ ${String(error?.message || error)}`
     mode={tutorialOverlayConfig.mode}
     nextLabel={tutorialOverlayConfig.nextLabel}
     onNext={tutorialOverlayConfig.onNext}
-    onTargetPress={tutorialStep === 6 ? handleOk : undefined}
+    onTargetPress={
+      tutorialStep === 4
+        ? handlePreviewPiece
+        : tutorialStep === 6
+        ? handleOk
+        : undefined
+    }
     onMetricsChange={setTutorialOverlayMetrics}
     actionHint={tutorialOverlayConfig.actionHint}
     cardPlacement={tutorialOverlayConfig.cardPlacement}
@@ -2664,58 +2574,10 @@ function createStyles(COLORS, ui) {
       paddingHorizontal: 18,
       alignItems: "stretch",
     },
-    todayStatusTray: {
-      marginBottom: 18,
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 14,
-      paddingTop: 12,
-      paddingBottom: 10,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 5 },
-      elevation: 4,
-    },
-    todayStatusHeaderRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 10,
-    },
-    todayStatusIcon: {
-      marginRight: 6,
-    },
-    todayStatusTitle: {
-      fontSize: 14,
-      lineHeight: 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.4,
-    },
-    compactRailOverlay: {
-      position: "absolute",
-      left: 14,
-      right: 14,
-      zIndex: 50,
-      elevation: 30,
-      alignItems: "center",
-    },
-    compactRailSurface: {
-      maxWidth: 390,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 8,
-      paddingTop: 7,
-      paddingBottom: 1,
-      shadowColor: "#000",
-      shadowOpacity: 0.14,
-      shadowRadius: 12,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 12,
+    homeOverviewBlock: {
+      width: "100%",
+      alignSelf: "stretch",
+      marginBottom: 8,
     },
 
     /** ブランドヘッダー */
@@ -2827,12 +2689,17 @@ function createStyles(COLORS, ui) {
       color: "#FFFFFF",
     },
     globalSummaryBlock: {
-      marginBottom: 10,
+      width: "100%",
+      alignSelf: "stretch",
+      marginBottom: 8,
     },
     globalSummaryInner: {
+      width: "100%",
+      alignSelf: "stretch",
       borderTopWidth: 1,
       borderBottomWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderTopColor: COLORS.CARD_BORDER,
+      borderBottomColor: COLORS.CARD_BORDER,
       paddingVertical: 8,
     },
     globalSummaryHeaderRow: {
@@ -2853,6 +2720,8 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
+      fontWeight: "700",
+      marginBottom: 2,
     },
     accountIconButton: {
       width: 42,
@@ -2921,6 +2790,79 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
+    },
+    homeQuickActionsRow: {
+      width: "100%",
+      alignSelf: "stretch",
+      flexDirection: "row",
+      alignItems: "stretch",
+      marginHorizontal: -4,
+      marginBottom: 0,
+    },
+    homeQuickActionButton: {
+      flex: 1,
+      height: 40,
+      minHeight: 40,
+      maxHeight: 40,
+      minWidth: 0,
+      marginHorizontal: 4,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 10,
+      paddingVertical: 0,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      overflow: "hidden",
+    },
+    homeQuickActionLeft: {
+      flex: 1,
+      minWidth: 0,
+      flexDirection: "row",
+      alignItems: "center",
+      paddingRight: 4,
+    },
+    homeQuickActionIcon: {
+      flexShrink: 0,
+      marginRight: 5,
+    },
+    homeQuickActionTextWrap: {
+      flex: 1,
+      minWidth: 0,
+    },
+    homeQuickActionTitle: {
+      flex: 1,
+      minWidth: 0,
+      fontSize: 12,
+      lineHeight: 16,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    homeQuickActionMeta: {
+      marginTop: 1,
+      fontSize: 10,
+      lineHeight: 14,
+      fontWeight: "800",
+      color: COLORS.TEXT_SUBTLE,
+    },
+    homeQuickActionMetaAnswered: {
+      color: COLORS.TITLE_GOLD,
+    },
+    homeQuickActionSpinner: {
+      marginRight: 4,
+    },
+    todayQuestionInlineContent: {
+      marginTop: 8,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      overflow: "hidden",
+      paddingHorizontal: 12,
+      paddingTop: 12,
+      paddingBottom: 12,
     },
     todayQuestionAccordionCard: {
       marginBottom: 10,
@@ -3047,56 +2989,6 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
       fontWeight: "600",
     },
-    inputProgressInlineWrap: {
-      marginBottom: 14,
-    },
-    inputProgressRail: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      marginHorizontal: -3,
-      alignItems: "center",
-    },
-    inputProgressRailCompact: {
-      justifyContent: "center",
-    },
-    inputProgressChip: {
-      marginHorizontal: 3,
-      marginBottom: 6,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-    },
-    inputProgressChipCompact: {
-      paddingHorizontal: 8,
-      paddingVertical: 5,
-    },
-    inputProgressChipDone: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-    },
-    inputProgressChipCurrent: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-    },
-    inputProgressChipText: {
-      fontSize: 11,
-      lineHeight: 14,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    inputProgressChipTextCompact: {
-      fontSize: 10,
-      lineHeight: 13,
-    },
-    inputProgressChipTextDone: {
-      color: COLORS.ACCENT_TEXT,
-    },
-    inputProgressChipTextCurrent: {
-      color: COLORS.TEXT_ON_LIGHT,
-    },
     heroMemoInputGroup: {
       marginTop: 2,
     },
@@ -3121,45 +3013,12 @@ function createStyles(COLORS, ui) {
       marginTop: 2,
       marginBottom: 4,
     },
-    heroReadyBox: {
+    heroActionArea: {
       marginTop: 10,
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingTop: 12,
-      paddingBottom: 12,
     },
-    readyHeaderRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 8,
-    },
-    readyTitle: {
-      fontSize: 16,
-      lineHeight: 22,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.4,
-    },
-    readyStatusText: {
-      flexShrink: 1,
-      marginLeft: 10,
-      fontSize: 11,
-      lineHeight: 16,
-      fontWeight: "800",
-      color: COLORS.TEXT_SUBTLE,
-      textAlign: "right",
-    },
-    readyStatusTextDone: {
-      color: COLORS.TITLE_GOLD,
-    },
-    preferenceCardInReady: {
+    preferenceCardInActionArea: {
       marginTop: 0,
       marginBottom: 8,
-      backgroundColor: COLORS.PANEL_BG,
     },
 
     /** セクション共通 */

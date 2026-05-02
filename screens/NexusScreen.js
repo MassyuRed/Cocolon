@@ -49,6 +49,7 @@ import {
 } from "../lib/nexusApi";
 import { readShareCode } from "../lib/compat/legacyWireContracts";
 import NexusPieceCard from "./nexus/NexusPieceCard";
+import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
 const TABS = [
   { key: "piece", label: "投稿" },
@@ -57,9 +58,8 @@ const TABS = [
   { key: "history", label: "履歴" },
 ];
 
-const PIECE_TUTORIAL_STEP_START = 12;
-const PIECE_TUTORIAL_STEP_END = 15;
-const TUTORIAL_TOTAL_STEPS = 21;
+const PIECE_TUTORIAL_STEP_START = 11;
+const PIECE_TUTORIAL_STEP_END = 14;
 
 const OWNER_FILTER_ALL = "all";
 const OWNER_FILTER_SELF = "self";
@@ -573,8 +573,8 @@ export default function NexusScreen({ navigation }) {
   const currentScrollYRef = useRef(0);
   const titleRef = useRef(null);
   const pieceTabRef = useRef(null);
-  const tutorialCardRef = useRef(null);
-  const tutorialButtonRef = useRef(null);
+  const selfPieceCardRef = useRef(null);
+  const followedPieceCardRef = useRef(null);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
 
@@ -1298,19 +1298,18 @@ export default function NexusScreen({ navigation }) {
     setHistoryOrder((current) => (current === normalized ? current : normalized));
   }, []);
 
-  const handleOpenTutorialPieces = useCallback(() => {
+  const handleOpenTutorialFlow = useCallback(() => {
     void ensureTutorialPiecesSeed();
-    setTutorialStep((prev) => (prev < 16 ? 16 : prev));
+    setTutorialStep(15);
 
-    const routeName = resolvePieceLibraryRouteName(navigation);
     try {
-      navigation?.navigate?.(routeName, {
+      navigation?.navigate?.("TutorialFlow", {
         tutorialOpenAt: Date.now(),
       });
     } catch {
       Alert.alert(
-        "Piece一覧を開けません",
-        "Piece一覧画面が navigation に未登録の可能性があります。"
+        "チュートリアルを進められません",
+        "つながり表の画面が navigation に未登録の可能性があります。"
       );
     }
   }, [ensureTutorialPiecesSeed, navigation, setTutorialStep]);
@@ -1497,14 +1496,14 @@ export default function NexusScreen({ navigation }) {
     if (!isNexusTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 12:
+      case 11:
         return titleRef;
-      case 13:
+      case 12:
         return pieceTabRef;
+      case 13:
+        return selfPieceCardRef;
       case 14:
-        return tutorialCardRef;
-      case 15:
-        return tutorialButtonRef;
+        return followedPieceCardRef;
       default:
         return null;
     }
@@ -1514,49 +1513,57 @@ export default function NexusScreen({ navigation }) {
     if (!isNexusTutorialStep) return null;
 
     switch (tutorialStep) {
+      case 11:
+        return {
+          step: 11,
+          mode: "info",
+          title: "Piece閲覧画面",
+          message:
+            `今のPiece画面は、投稿タブでPieceを一覧表示します。
+
+ここで先ほど作成した自分のPieceと、UserのPieceを確認します。`,
+          nextLabel: "投稿タブを見る",
+          onNext: () => setTutorialStep(12),
+        };
       case 12:
         return {
           step: 12,
           mode: "info",
-          title: "ピース",
+          title: "投稿タブ",
           message:
-            "ここでは、公開されたPieceや感情の動きをまとめて見られます。",
-          nextLabel: "次へ",
+            "投稿タブでは、自分とフォロー中ユーザーのPieceを同じ一覧で閲覧できます。",
+          nextLabel: "自分のPieceへ",
           onNext: () => setTutorialStep(13),
         };
       case 13:
         return {
           step: 13,
           mode: "info",
-          title: "ピース",
+          title: "自分のPiece",
           message:
-            "公開されたPieceはこの流れで確認します。まずは Piece タブを見る場所だと覚えてください。",
-          nextLabel: "次へ",
+            `これは、チュートリアルの感情入力から実生成して保存した自分のPieceです。
+
+問いと答えとして、ラフな独り言が読みやすく整っています。`,
+          nextLabel: "UserのPieceへ",
           onNext: () => setTutorialStep(14),
         };
       case 14:
         return {
           step: 14,
           mode: "info",
-          title: "チュートリアル導線",
+          title: "フォロー中ユーザーのPiece",
           message:
-            "チュートリアルでは、ここからサンプルPiece一覧に進みます。",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(15),
-        };
-      case 15:
-        return {
-          step: 15,
-          mode: "action",
-          title: "開いてみましょう",
-          message:
-            "Piece一覧を開いて、チュートリアル用のPieceを確認してみましょう。",
-          actionHint: "Piece一覧を開く を押してください",
+            `UserのPieceも同じ投稿タブで確認できます。
+
+次は、感情入力から三大要素へつながる流れを表で見ます。`,
+          nextLabel: "つながり表を見る",
+          onNext: handleOpenTutorialFlow,
+          cardPlacement: "top",
         };
       default:
         return null;
     }
-  }, [isNexusTutorialStep, tutorialStep, setTutorialStep]);
+  }, [handleOpenTutorialFlow, isNexusTutorialStep, tutorialStep, setTutorialStep]);
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isNexusTutorialStep) {
@@ -1712,13 +1719,35 @@ export default function NexusScreen({ navigation }) {
           </Text>
         );
       }
-      return tutorialPieceItems.map((item) => (
-        <NexusPieceCard
-          key={String(item?.q_instance_id || Math.random())}
-          item={item}
-          onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
-        />
-      ));
+      return tutorialPieceItems.map((item, index) => {
+        const tutorialKind = String(item?.tutorial_kind || item?.tutorialKind || "");
+        const ownerName = String(
+          item?.owner?.display_name || item?.display_name || ""
+        ).trim();
+        const targetRef =
+          tutorialKind === "self" || ownerName === "自分"
+            ? selfPieceCardRef
+            : tutorialKind === "mock" || ownerName === "User"
+            ? followedPieceCardRef
+            : index === 0
+            ? selfPieceCardRef
+            : index === 1
+            ? followedPieceCardRef
+            : null;
+
+        return (
+          <View
+            key={String(item?.q_instance_id || `tutorial-piece-${index}`)}
+            ref={targetRef}
+            collapsable={false}
+          >
+            <NexusPieceCard
+              item={item}
+              onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
+            />
+          </View>
+        );
+      });
     }
 
     let content = null;
@@ -2016,24 +2045,6 @@ export default function NexusScreen({ navigation }) {
           </View>
         </View>
 
-        {isTutorialMode ? (
-          <View ref={tutorialCardRef} collapsable={false} style={styles.tutorialEntryCard}>
-            <Text style={styles.tutorialEntryTitle}>チュートリアル</Text>
-            <Text style={styles.tutorialEntryBody}>
-              チュートリアルでは、このまま
-              Piece一覧へ進んで流れを確認します。
-            </Text>
-            <View ref={tutorialButtonRef} collapsable={false} style={styles.tutorialEntryButtonWrap}>
-              <CocolonButton
-                variant="primary"
-                onPress={handleOpenTutorialPieces}
-                accessibilityLabel="Piece一覧を開く"
-              >
-                Piece一覧を開く
-              </CocolonButton>
-            </View>
-          </View>
-        ) : null}
 
         {!isTutorialMode ? (
           <View style={styles.todayOverallEmotionSummary}>
@@ -2213,7 +2224,6 @@ export default function NexusScreen({ navigation }) {
           mode={tutorialOverlayConfig.mode}
           nextLabel={tutorialOverlayConfig.nextLabel}
           onNext={tutorialOverlayConfig.onNext}
-          onTargetPress={tutorialStep === 15 ? handleOpenTutorialPieces : undefined}
           onMetricsChange={setTutorialOverlayMetrics}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement}

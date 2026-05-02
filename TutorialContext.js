@@ -11,6 +11,7 @@ import {
   patchAccountProfileMe,
 } from "./lib/api/account/profileApi";
 import { useAuth } from "./AuthContext";
+import { TUTORIAL_PIECES } from "./tutorial/tutorialScenarioData";
 
 const TutorialContext = createContext(undefined);
 
@@ -25,45 +26,6 @@ const INITIAL_TUTORIAL_STATE = Object.freeze({
   tutorialEmotionLogFeed: [],
 });
 
-
-const TUTORIAL_PIECE_QUESTION = "理想の休日の過ごし方は？";
-const DEFAULT_TUTORIAL_SELF_PIECE = Object.freeze({
-  id: "tutorial-piece-self",
-  q_instance_id: "tutorial-q-self",
-  q_key: "tutorial-holiday",
-  title: TUTORIAL_PIECE_QUESTION,
-  body:
-    "静かな場所でゆっくり休みつつ、好きなことに時間を使える休日が理想です。",
-  owner_user_id: "tutorial-self",
-  display_name: "自分",
-  share_code: "YOU",
-  is_tutorial: true,
-  tutorial_kind: "self",
-  created_at: "2026-01-01T09:10:00.000Z",
-  resonances: 0,
-  views: 0,
-  is_new: true,
-});
-const DEFAULT_TUTORIAL_MOCK_PIECES = Object.freeze([
-  {
-    id: "tutorial-piece-mock-1",
-    q_instance_id: "tutorial-q-mock-1",
-    q_key: "tutorial-holiday",
-    title: TUTORIAL_PIECE_QUESTION,
-    body:
-      "朝は少しゆっくり起きて、好きな音楽を流しながらコーヒーを飲みます。午後は本屋か静かなカフェで過ごして、夜は早めに眠れる休日が理想です。",
-    owner_user_id: "tutorial-follow-1",
-    display_name: "User",
-    share_code: "HANAKO123",
-    is_tutorial: true,
-    tutorial_kind: "mock",
-    created_at: "2026-01-01T09:00:00.000Z",
-    resonances: 4,
-    views: 12,
-    is_new: true,
-  },
-]);
-
 function cloneInitialArrays() {
   return {
     tutorialEmotions: [],
@@ -77,13 +39,12 @@ function cloneTutorialPieceItem(payload) {
   return payload ? JSON.parse(JSON.stringify(payload)) : payload;
 }
 
-function buildDefaultTutorialSelfPiece(body) {
-  const nextBody = String(body || "").trim();
-  return {
-    ...cloneTutorialPieceItem(DEFAULT_TUTORIAL_SELF_PIECE),
-    body: nextBody || DEFAULT_TUTORIAL_SELF_PIECE.body,
-  };
+function cloneTutorialPieceItems(items = []) {
+  return Array.isArray(items)
+    ? items.filter(Boolean).map((item) => cloneTutorialPieceItem(item))
+    : [];
 }
+
 
 export function TutorialProvider({ children }) {
   const { session, recoveryMode } = useAuth();
@@ -182,18 +143,20 @@ export function TutorialProvider({ children }) {
     setTutorialCompleted(false);
     setTutorialSkipped(false);
     clearTutorialData();
+    setTutorialPieces(cloneTutorialPieceItems(TUTORIAL_PIECES));
   }, [clearTutorialData]);
 
   const endTutorial = useCallback(async () => {
     setIsTutorialMode(false);
     setTutorialCompleted(true);
     setTutorialSkipped(false);
+    clearTutorialData();
     await syncTutorialFlagsToProfile({
       tutorial_completed: true,
       tutorial_skipped: false,
       tutorial_completed_at: new Date().toISOString(),
     });
-  }, [syncTutorialFlagsToProfile]);
+  }, [clearTutorialData, syncTutorialFlagsToProfile]);
 
   const skipTutorial = useCallback(async () => {
     setIsTutorialMode(false);
@@ -223,49 +186,23 @@ export function TutorialProvider({ children }) {
     setTutorialEmotionLogFeed((prev) => [payload, ...prev]);
   }, []);
 
-  const ensureTutorialPiecesSeed = useCallback((options = {}) => {
-    const nextSelfBody = String(options?.selfBody || "").trim();
-
+  const ensureTutorialPiecesSeed = useCallback(() => {
     setTutorialPieces((prev) => {
-      const safePrev = Array.isArray(prev)
-        ? prev.filter(Boolean).map((item) => cloneTutorialPieceItem(item))
-        : [];
-
+      const safePrev = cloneTutorialPieceItems(prev);
+      const nextItems = [...safePrev];
       let changed = false;
-      let nextItems = [...safePrev];
-      const selfIndex = nextItems.findIndex(
-        (item) => String(item?.tutorial_kind || "") === "self"
-      );
-      const hasMock = nextItems.some(
-        (item) => String(item?.tutorial_kind || "") === "mock"
-      );
 
-      if (selfIndex < 0) {
-        nextItems = [buildDefaultTutorialSelfPiece(nextSelfBody), ...nextItems];
-        changed = true;
-      } else if (
-        nextSelfBody &&
-        String(nextItems[selfIndex]?.body || "").trim() !== nextSelfBody
-      ) {
-        nextItems[selfIndex] = {
-          ...nextItems[selfIndex],
-          title:
-            String(nextItems[selfIndex]?.title || "").trim() ||
-            TUTORIAL_PIECE_QUESTION,
-          body: nextSelfBody,
-        };
-        changed = true;
-      }
-
-      if (!hasMock) {
-        nextItems = [
-          ...nextItems,
-          ...DEFAULT_TUTORIAL_MOCK_PIECES.map((item) =>
-            cloneTutorialPieceItem(item)
-          ),
-        ];
-        changed = true;
-      }
+      cloneTutorialPieceItems(TUTORIAL_PIECES).forEach((seedItem) => {
+        const seedId = String(seedItem?.q_instance_id || seedItem?.id || "").trim();
+        const exists = nextItems.some((item) => {
+          const itemId = String(item?.q_instance_id || item?.id || "").trim();
+          return seedId && itemId === seedId;
+        });
+        if (!exists) {
+          nextItems.push(seedItem);
+          changed = true;
+        }
+      });
 
       return changed ? nextItems : prev;
     });

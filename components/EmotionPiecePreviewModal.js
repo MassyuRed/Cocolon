@@ -14,6 +14,9 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 function formatRemainingText(quota) {
+  const displayText = String(quota?.display_text || quota?.displayText || "").trim();
+  if (displayText) return displayText;
+
   const limit = quota?.publish_limit;
   const remaining = quota?.remaining_count;
   if (limit == null) return "今月のPiece作成回数: 無制限";
@@ -29,6 +32,7 @@ export default function EmotionPiecePreviewModal({
   publishLoading,
   onClose,
   onPublish,
+  hideCancelButton = false,
 }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -58,7 +62,7 @@ export default function EmotionPiecePreviewModal({
               <Text style={styles.title}>ピースの確認</Text>
             </View>
             <Text style={styles.lead}>
-              この入力だけから生成されたPieceです。作成する前に内容を確認できます。
+              この入力だけから生成された問いと答えです。作成する前に内容を確認できます。
             </Text>
           </View>
 
@@ -73,7 +77,7 @@ export default function EmotionPiecePreviewModal({
             </View>
 
             <View style={styles.block}>
-              <Text style={styles.blockLabel}>Piece</Text>
+              <Text style={styles.blockLabel}>答え</Text>
               <Text style={styles.blockText}>{pieceText || "—"}</Text>
             </View>
 
@@ -89,16 +93,18 @@ export default function EmotionPiecePreviewModal({
           </ScrollView>
 
           <View style={styles.actions}>
-            <View style={styles.secondaryButtonWrap}>
-              <CocolonButton
-                variant="secondary"
-                onPress={onClose}
-                disabled={publishLoading}
-                accessibilityLabel="Pieceの確認を閉じる"
-              >
-                やめる
-              </CocolonButton>
-            </View>
+            {!hideCancelButton ? (
+              <View style={styles.secondaryButtonWrap}>
+                <CocolonButton
+                  variant="secondary"
+                  onPress={onClose}
+                  disabled={publishLoading}
+                  accessibilityLabel="Pieceの確認を閉じる"
+                >
+                  やめる
+                </CocolonButton>
+              </View>
+            ) : null}
             <CocolonButton
               variant="primary"
               onPress={onPublish}
