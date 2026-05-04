@@ -358,7 +358,7 @@ export default function PieceScreen({ route } = {}) {
           step: 12,
           mode: "info",
           title: "ピース",
-          message: "ここでは\nPieceを作り、閲覧できます",
+          message: "ここでは\nピースを生成し、閲覧できます",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(13),
         };
@@ -367,7 +367,7 @@ export default function PieceScreen({ route } = {}) {
           step: 13,
           mode: "info",
           title: "作成",
-          message: "まずはここで\nPieceを作成します",
+          message: "まずはここで\nピースを生成します",
           nextLabel: "次へ",
           onNext: () => setTutorialStep(14),
         };
@@ -376,7 +376,7 @@ export default function PieceScreen({ route } = {}) {
           step: 14,
           mode: "action",
           title: "作成してみましょう",
-          message: "作成を開いて\nPieceを作ってみましょう",
+          message: "作成を開いて\nピースを生成してみましょう",
           actionHint: "作成 を押してください",
         };
       case 15:
@@ -384,7 +384,7 @@ export default function PieceScreen({ route } = {}) {
           step: 15,
           mode: "action",
           title: "閲覧で確認できます",
-          message: "作成したPieceは\n閲覧から確認できます\n\n開いてみましょう",
+          message: "生成したピースは\n閲覧から確認できます\n\n開いてみましょう",
           actionHint: "閲覧 を押してください",
         };
       default:
@@ -404,7 +404,7 @@ export default function PieceScreen({ route } = {}) {
       message: "回答を入力したら、保存ボタンを押してください",
       actionHint: "入力して保存してください",
       footerText:
-        "この問い1つで、Pieceの作成から閲覧までの流れを体験できます。",
+        "この問い1つで、ピースの生成から閲覧までの流れを体験できます。",
     };
   }, [isTutorialMode, tutorialCreateVisible, tutorialStep]);
 
@@ -704,8 +704,8 @@ export default function PieceScreen({ route } = {}) {
       navigation.navigate(routeName, params);
     } catch {
       Alert.alert(
-        "Piece一覧を開けません",
-        "Piece一覧画面が navigation に未登録の可能性があります。\nApp.js の登録を確認してください。"
+        "ピース一覧を開けません",
+        "ピース一覧画面が navigation に未登録の可能性があります。\nApp.js の登録を確認してください。"
       );
     }
   }, [navigation, targetUserId]);
@@ -767,7 +767,7 @@ export default function PieceScreen({ route } = {}) {
   const showTutorialRecommendInfo = useCallback(() => {
     Alert.alert(
       "おすすめ（チュートリアル）",
-      "本番ではここから新しいユーザーや問いを探せます。\n\nチュートリアルでは、Piece画面で模擬ユーザーのPieceを閲覧できます。"
+      "新しいユーザーや問いを探せます。\n\nこの後は、フォロー中ユーザーのピースも確認できます。"
     );
   }, []);
 
@@ -854,14 +854,14 @@ export default function PieceScreen({ route } = {}) {
       return;
     }
 
-    Alert.alert("Homeから作成してください", "Piece の作成は Home 画面から行います。");
+    Alert.alert("Homeから生成してください", "ピースの生成は Home 画面から行います。");
   }, [isTutorialMode, openTutorialCreate, tutorialSurfaceEnabled]);
 
   const openPieceLibrary = useCallback(() => {
     if (tutorialSurfaceEnabled && isTutorialMode && !tutorialHasSelfPiece) {
       Alert.alert(
-        "先にPieceを作成しましょう",
-        `チュートリアルでは、まず「${TUTORIAL_PIECE_QUESTION}」に答えると、作成から閲覧までの流れが分かります。`,
+        "先にピースを生成しましょう",
+        `チュートリアルでは、まず「${TUTORIAL_PIECE_QUESTION}」に答えると、生成から閲覧までの流れが分かります。`,
         [
           { text: "閉じる", style: "cancel" },
           { text: "作成する", onPress: openTutorialCreate },
@@ -973,15 +973,15 @@ export default function PieceScreen({ route } = {}) {
           <View style={styles.recoCard}>
             <Text style={styles.recoTitle}>チュートリアル</Text>
             <Text style={styles.recoSummaryText}>
-              この画面では、1つの問いに答えてPieceが作られ、Piece一覧で閲覧できる流れを体験します。
+              この画面では、1つの問いに答えてピースが生成され、ピース一覧で閲覧できる流れを体験します。
             </Text>
             <Text style={styles.recoSummaryText}>
               {tutorialHasSelfPiece
-                ? "作成済みのPieceがあります。次はPiece一覧で、自分の回答や模擬ユーザーのPieceを見てみましょう。"
+                ? "生成済みのピースがあります。次はピース一覧で、自分の回答やフォロー中ユーザーのピースを見てみましょう。"
                 : `まずは「${TUTORIAL_PIECE_QUESTION}」に答えてみましょう。`}
             </Text>
             <Text style={styles.recoSummaryText}>
-              チュートリアル中の記録は本番データには保存されません。
+              生成したピースは、あとで一覧から確認できます。
             </Text>
           </View>
         ) : (
@@ -999,7 +999,7 @@ export default function PieceScreen({ route } = {}) {
               <Text style={styles.globalSummaryText}>
                 {`今日、全体で ${
                   typeof globalPieceCount === "number" ? globalPieceCount : "—"
-                } 回のPiece閲覧がありました`}
+                } 回のピース閲覧がありました`}
               </Text>
               <Text style={styles.globalSummaryText}>
                 {`今日、全体で ${
@@ -1016,14 +1016,14 @@ export default function PieceScreen({ route } = {}) {
             title="閲覧"
             description={
               tutorialSurfaceEnabled && isTutorialMode
-                ? "作成したPieceや、模擬ユーザーのPieceを見ながら、Pieceの流れを確認できます。"
-                : "自分、またはフォロー中のユーザーが作成したPieceを閲覧できます。"
+                ? "生成したピースや、フォロー中ユーザーのピースを見ながら、ピースの流れを確認できます。"
+                : "自分、またはフォロー中のユーザーが生成したピースを閲覧できます。"
             }
-            buttonLabel="Piece一覧を開く"
+            buttonLabel="ピース一覧を開く"
             buttonIconName="open-outline"
             onPress={openPieceLibrary}
             badgeVisible={unreadPieces}
-            accessibilityLabel="Piece一覧を開く"
+            accessibilityLabel="ピース一覧を開く"
           />
         </View>
 
@@ -1045,12 +1045,12 @@ export default function PieceScreen({ route } = {}) {
             <PieceHomeActionCard
               styles={styles}
               title="作成"
-              description={`チュートリアルでは「${TUTORIAL_PIECE_QUESTION}」に答えて、Pieceを作成する流れを体験できます。`}
-              buttonLabel="Pieceを作成する"
+              description={`チュートリアルでは「${TUTORIAL_PIECE_QUESTION}」に答えて、ピースを生成する流れを体験できます。`}
+              buttonLabel="ピースを生成する"
               buttonIconName="create-outline"
               onPress={openPieceCreateFromHome}
               badgeVisible={false}
-              accessibilityLabel="Pieceを作成する"
+              accessibilityLabel="ピースを生成する"
             />
           </View>
         ) : null}
@@ -1061,7 +1061,7 @@ export default function PieceScreen({ route } = {}) {
             title="探す"
             description={
               tutorialSurfaceEnabled && isTutorialMode
-                ? "本番ではここから新しいユーザーを探せます。チュートリアルではPiece画面に模擬ユーザーを用意しています。"
+                ? "ここから新しいユーザーを探せます。"
                 : "新しいユーザーを探すことができます。"
             }
             buttonLabel="新しいユーザーを探す"
@@ -1159,7 +1159,7 @@ export default function PieceScreen({ route } = {}) {
                   <TextInput
                   style={styles.tutorialTextArea}
                   placeholder="ここに回答を書いてください。"
-                  placeholderTextColor={colors.TEXT_SUBTLE}
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                   value={tutorialCreateAnswer}
                   onChangeText={(v) => {
                     setTutorialCreateAnswer(v);
@@ -1174,8 +1174,8 @@ export default function PieceScreen({ route } = {}) {
 
               <Text style={styles.tutorialHelperText}>
                 {isTutorialMode && tutorialStep === 14
-                  ? "この問いに答えて保存すると、チュートリアル用のPieceが作成されます。本番データには保存されません。"
-                  : "チュートリアルでは、この1つの回答だけでPieceの作成から閲覧までの流れを体験します。本番データには保存されません。"}
+                  ? "この問いに答えて保存すると、ピースを生成できます。"
+                  : "この回答から、ピースの生成から閲覧までの流れを体験します。"}
               </Text>
 
               {tutorialCreateError ? (
@@ -1432,7 +1432,7 @@ function createStyles(COLORS, ui) {
       marginTop: 10,
       fontSize: 14,
       lineHeight: 21,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     homeActionButton: {
       marginTop: 18,
@@ -1763,7 +1763,7 @@ function createStyles(COLORS, ui) {
     recoUserSub: {
       marginTop: 2,
       fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
 
     // Follow picker list rows
@@ -1844,7 +1844,7 @@ function createStyles(COLORS, ui) {
       marginTop: 8,
       fontSize: 11,
       lineHeight: 16,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       opacity: 0.9,
     },
     modeErrorText: {

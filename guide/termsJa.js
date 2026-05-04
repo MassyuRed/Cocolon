@@ -3,38 +3,70 @@ export const guideTermsJa = Object.freeze({
     termId: "emotion_input",
     display: "感情入力",
     reading: "かんじょうにゅうりょく",
-    shortDef: "その瞬間の感情を記録する入力です。",
+    shortDef: "今の思考・行動・感情をまとめて記録する入力です。",
     longDef:
-      "Cocolon の基本的な記録方法です。今感じている感情と強さを選び、必要に応じてメモも添えて残します。日記のように長く書くためのものというより、感情に気づいた瞬間を捕まえるための入力です。",
+      "Cocolon の基本的な記録方法です。思考内容、行動内容、感情、内容カテゴリを組み合わせて、今の状態を残します。保存した入力は、Emlisからの返答、分析レポート、ピース生成などにつながります。",
     examples: [
-      "うれしい出来事があった直後に「喜び」を入力する",
-      "少し不安を感じた時点で「不安」を弱めで入力して残す",
+      "感じたことを書き、感情と強さを選んで保存する",
+      "実際に起きた出来事を書き、近い内容カテゴリを選ぶ",
     ],
-    relatedTerms: ["self_insight_mode", "secret_memo", "emotion_notifications"],
+    relatedTerms: [
+      "thought_content",
+      "action_content",
+      "content_category",
+      "self_insight_mode",
+      "emotion_notifications",
+    ],
+  },
+  thought_content: {
+    termId: "thought_content",
+    display: "思考内容",
+    reading: "しこうないよう",
+    shortDef: "考えていることや感じたことを書く欄です。",
+    longDef:
+      "思考内容は、頭の中で考えていること、感じたこと、出来事への解釈などを残す欄です。実際に起きたこととは別に、自分の内側で起きている反応を記録できます。",
+    examples: [
+      "なぜ不安になったのかを書いておく",
+      "相手の言葉をどう受け取ったかを残す",
+    ],
+    relatedTerms: ["emotion_input", "action_content", "content_category"],
+  },
+  action_content: {
+    termId: "action_content",
+    display: "行動内容",
+    reading: "こうどうないよう",
+    shortDef: "実際に起きた出来事や自分がしたことを書く欄です。",
+    longDef:
+      "行動内容は、何が起きたか、何をしたか、結果どうなったかを残す欄です。思考内容と分けて書くことで、出来事と感じ方を後から見比べやすくなります。",
+    examples: [
+      "仕事で予定より遅れてしまったことを書く",
+      "人と話した、移動した、休んだなどの行動を残す",
+    ],
+    relatedTerms: ["emotion_input", "thought_content", "content_category"],
+  },
+  content_category: {
+    termId: "content_category",
+    display: "内容カテゴリ",
+    reading: "ないようカテゴリ",
+    shortDef: "入力内容がどのテーマに近いかを選ぶ分類です。",
+    longDef:
+      "内容カテゴリは、入力した思考内容や行動内容がどのテーマに近いかを示す分類です。生活、仕事、人間関係、健康などを選ぶことで、後から分析するときに流れを整理しやすくなります。",
+    examples: [
+      "仕事の出来事なら「仕事」を選ぶ",
+      "体調や睡眠の話なら「健康」を選ぶ",
+    ],
+    relatedTerms: ["emotion_input", "analysis_report"],
   },
   self_insight_mode: {
     termId: "self_insight_mode",
-    display: "自己理解モード",
-    reading: "じこりかいモード",
-    shortDef: "自分に関する気づきや発見を、言葉で整理して残すための入力モードです。",
+    display: "自己理解",
+    reading: "じこりかい",
+    shortDef: "自分についての気づきを残したいときに使う感情項目です。",
     longDef:
-      "通常の感情入力が「今の気持ち」を素早く記録するためのものなのに対し、自己理解モードは「自分について分かったこと」を整理するためのモードです。感情選択よりも、メモを通じて気づきを残すことが中心になります。",
+      "自己理解は、喜び・悲しみなどの感情とは別に、自分について分かったことや気づきを残したいときに使います。Home では他の感情と同時に選ばず、単体で選択します。",
     examples: [
-      "最近の自分の思考パターンに気づいたときに残す",
-      "同じ失敗を繰り返す理由が見えたときに言葉にする",
-    ],
-    relatedTerms: ["emotion_input", "secret_memo"],
-  },
-  secret_memo: {
-    termId: "secret_memo",
-    display: "シークレットメモ",
-    reading: "シークレットメモ",
-    shortDef: "Piece には出さず、分析には使うメモ設定です。",
-    longDef:
-      "メモ内容をそのまま公開したくないときに使う設定です。Piece 側には表示されませんが、入力内容としては保持されるため、分析レポートなどには反映されます。公開範囲と分析利用を分けたいときに向いています。",
-    examples: [
-      "個人的すぎる内容を公開せずに残したいとき",
-      "自分だけの振り返りとしてメモを書いておきたいとき",
+      "自分の考え方の癖に気づいたときに選ぶ",
+      "同じ反応を繰り返す理由が見えたときに残す",
     ],
     relatedTerms: ["emotion_input", "analysis_report"],
   },
@@ -42,14 +74,27 @@ export const guideTermsJa = Object.freeze({
     termId: "emotion_notifications",
     display: "感情通知を送らない",
     reading: "かんじょうつうちをおくらない",
-    shortDef: "感情入力をフォロー中ユーザーへ通知しないための設定です。",
+    shortDef: "その入力をフォロー中ユーザーへ通知しないための設定です。",
     longDef:
-      "この設定をオンにすると、その入力はフォロー中ユーザー側へ通知されません。感情通知を使いつつ、入力ごとに共有の濃さを自分で調整したいときに便利です。",
+      "この設定をオンにすると、その入力はフォロー中ユーザー側へ感情通知として送られません。普段は共有しつつ、一部の入力だけ静かに保存したいときに使えます。",
     examples: [
       "今回は自分の中だけで整理したいときにオンにする",
-      "普段は共有するが、一部の入力だけ非共有にしたいときに使う",
+      "感情は記録したいが、フォロー中ユーザーへ知らせたくないときに使う",
     ],
     relatedTerms: ["follow", "emotion_log", "emotion_input"],
+  },
+  emlis_reply: {
+    termId: "emlis_reply",
+    display: "Emlisからの返答",
+    reading: "エムリスからのへんとう",
+    shortDef: "保存した入力に対してEmlisが返すコメントです。",
+    longDef:
+      "Home で入力を保存したあと、Emlisからの返答を確認できます。入力した内容や選んだ感情をもとに、その時点の状態を受け止めるためのコメントとして表示されます。",
+    examples: [
+      "この内容でOKを押したあとに返答を読む",
+      "入力直後の自分の状態を言葉で受け取る",
+    ],
+    relatedTerms: ["emotion_input", "analysis_report"],
   },
   today_question: {
     termId: "today_question",
@@ -57,7 +102,7 @@ export const guideTermsJa = Object.freeze({
     reading: "きょうのとい",
     shortDef: "その日ごとに表示される問いです。",
     longDef:
-      "Home や Analysis から扱える、その日限定または日単位で積み重なる問いです。感情入力とは別に、問いに答えることでその時の考え方や状態を残していけます。",
+      "Home や Analysis から扱える、その日ごとの問いです。感情入力とは別に、問いに答えることで、その時の考え方や状態を残していけます。",
     examples: [
       "その日のテーマに沿って短く答えを残す",
       "あとから履歴で見返して、その時期の思考を追う",
@@ -66,14 +111,14 @@ export const guideTermsJa = Object.freeze({
   },
   emotion_input_history: {
     termId: "emotion_input_history",
-    display: "感情入力履歴",
-    reading: "かんじょうにゅうりょくりれき",
+    display: "入力履歴",
+    reading: "にゅうりょくりれき",
     shortDef: "過去の感情入力を一覧で振り返る履歴です。",
     longDef:
-      "これまでに行った感情入力を見返せる履歴です。検索やフィルタを使いながら、どんな感情がいつ多かったか、どんな流れだったかを追うために使います。",
+      "これまでに行った感情入力を見返せる履歴です。いつ、どのような内容を残したかを確認し、過去の感情や出来事の流れを追うために使います。",
     examples: [
-      "最近「不安」が増えていたかを見返す",
-      "特定の時期に書いたメモを探す",
+      "最近どんな入力をしていたかを見返す",
+      "特定の時期に書いた内容を探す",
     ],
     relatedTerms: ["emotion_input", "analysis", "analysis_report"],
   },
@@ -86,7 +131,7 @@ export const guideTermsJa = Object.freeze({
       "日ごとに答えた問いと答えを振り返るための履歴です。感情入力の履歴とは違い、その日の考え方やテーマに対する答えの変化を追うのに向いています。",
     examples: [
       "以前の自分が同じテーマにどう答えていたかを見る",
-      "数週間前の考え方の差を比較する",
+      "数週間前の考え方との差を比較する",
     ],
     relatedTerms: ["today_question", "analysis"],
   },
@@ -96,49 +141,75 @@ export const guideTermsJa = Object.freeze({
     reading: "ぶんせきレポート",
     shortDef: "入力の積み重ねから見える傾向を整理したレポートです。",
     longDef:
-      "感情入力やメモの蓄積をもとに、自分の傾向や流れを読み解くためのレポートです。入力が増えるほど、またメモの内容があるほど、より立体的な振り返りにつながります。",
+      "感情入力や内容カテゴリの蓄積をもとに、自分の傾向や流れを読み解くためのレポートです。分析画面では、日報・週報・月報や自己分析として確認できます。",
     examples: [
       "最近の感情の偏りをつかむ",
       "繰り返し現れるテーマやパターンを見つける",
     ],
-    relatedTerms: ["emotion_input", "analysis", "secret_memo"],
+    relatedTerms: ["emotion_input", "analysis", "emotion_analysis", "self_analysis"],
   },
   analysis: {
     termId: "analysis",
-    display: "Analysis",
-    reading: "アナリシス",
-    shortDef: "入力履歴やレポートを振り返るための画面群です。",
+    display: "分析",
+    reading: "ぶんせき",
+    shortDef: "入力状況、感情分析、自己分析を振り返る画面です。",
     longDef:
-      "Home で行った入力をあとから整理し、分析として確認するための場所です。履歴・検索・レポートなど、蓄積された自己情報を読み解く役割を持っています。",
+      "Home で行った入力をあとから整理し、日報・週報・月報・自己分析として確認する場所です。最新レポートを画面内で読み、必要に応じて履歴へ進めます。",
     examples: [
-      "先週の感情入力を見返す",
-      "分析レポートから自分の傾向を確認する",
+      "今週の感情分析を読む",
+      "自己分析の履歴を確認する",
     ],
-    relatedTerms: ["emotion_input_history", "today_question_history", "analysis_report"],
+    relatedTerms: ["emotion_analysis", "self_analysis", "analysis_report"],
+  },
+  emotion_analysis: {
+    termId: "emotion_analysis",
+    display: "感情分析",
+    reading: "かんじょうぶんせき",
+    shortDef: "感情入力をもとに、日報・週報・月報を見る分析です。",
+    longDef:
+      "感情分析では、Home の入力をもとに日報・週報・月報を切り替えて確認できます。最新レポートがある場合は、分析画面内に直接表示されます。",
+    examples: [
+      "今日の日報を読む",
+      "週報で1週間の感情の流れを見る",
+    ],
+    relatedTerms: ["analysis", "analysis_report", "emotion_input"],
+  },
+  self_analysis: {
+    termId: "self_analysis",
+    display: "自己分析",
+    reading: "じこぶんせき",
+    shortDef: "入力の積み重ねから自分の構造を見る分析です。",
+    longDef:
+      "自己分析では、日々の入力から見える自分の傾向や構造を確認できます。本文の閲覧はPlusプラン以上で利用できます。",
+    examples: [
+      "現在の自己分析レポートを見る",
+      "自己分析の履歴を見返す",
+    ],
+    relatedTerms: ["analysis", "analysis_report"],
   },
   piece_screen: {
     termId: "piece_screen",
-    display: "Piece画面",
+    display: "ピース画面",
     reading: "ピースがめん",
-    shortDef: "Pieceや関連する反応を扱う場所です。",
+    shortDef: "投稿・感情通知・おすすめ・履歴を扱う場所です。",
     longDef:
-      "Piece画面では、公開された断片や他ユーザーとの反応を通じて自分や他者を立体的に扱います。読む・反応する流れを通じて理解を深めていくのが特徴です。",
+      "ピース画面では、公開されたピースを読む、共鳴する、感情通知を確認する、おすすめユーザーを見る、共鳴履歴を振り返る、という流れをまとめて扱います。",
     examples: [
-      "公開されたPieceを読み、自分との重なりを確かめる",
-      "他ユーザーの Piece を読んで理解を広げる",
+      "投稿タブで自分やフォロー中ユーザーのピースを読む",
+      "感情通知タブでフォロー中ユーザーの感情の流れを見る",
     ],
-    relatedTerms: ["piece", "kyomei", "reaction_history"],
+    relatedTerms: ["piece", "kyomei", "follow", "emotion_log"],
   },
   piece: {
     termId: "piece",
-    display: "Piece",
+    display: "ピース",
     reading: "ピース",
-    shortDef: "Home の感情入力から作られる、オリジナルの断片です。",
+    shortDef: "Home の感情入力から作られる、公開用の断片です。",
     longDef:
-      "Home で行ったその時の感情入力から生成される、オリジナルの Piece です。ProfileCreate とは別枠で扱われ、公開後は自分や他者の考え方や感じ方を読むための土台になります。",
+      "Home で行ったその時の感情入力から生成される、公開用のピースです。公開後は、自分やフォロー中ユーザーが読み、共鳴できる対象になります。",
     examples: [
-      "Home の感情入力から作成した Piece",
-      "公開された自分や他ユーザーの Piece を読む",
+      "Home の感情入力からピースを生成する",
+      "公開された自分やフォロー中ユーザーのピースを読む",
     ],
     relatedTerms: ["piece_screen", "kyomei", "reaction_history"],
   },
@@ -148,7 +219,7 @@ export const guideTermsJa = Object.freeze({
     reading: "プロフィールクリエイト",
     shortDef: "固定的な自己紹介 / プロフィール資産を整える機能です。",
     longDef:
-      "提示された固定質問に答えることで、固定的な自己紹介 / プロフィール資産を整える機能です。Pieceとは別枠で、アカウント上に表示される自己紹介として使われます。",
+      "提示された固定質問に答えることで、固定的な自己紹介 / プロフィール資産を整える機能です。ピースとは別枠で、アカウント上に表示される自己紹介として使われます。",
     examples: [
       "固定質問に答えてプロフィールを整える",
       "アカウント上に表示される自己紹介を更新する",
@@ -159,7 +230,7 @@ export const guideTermsJa = Object.freeze({
     termId: "kyomei",
     display: "共鳴",
     reading: "きょうめい",
-    shortDef: "他ユーザーの Piece に強く響いたときのリアクションです。",
+    shortDef: "他ユーザーのピースに強く響いたときのリアクションです。",
     longDef:
       "内容に深く重なった、似た感覚を持った、強く理解できたと感じたときに使うリアクションです。単なる「いいね」よりも、感覚の重なりや理解の深さを示すニュアンスがあります。",
     examples: [
@@ -172,40 +243,66 @@ export const guideTermsJa = Object.freeze({
     termId: "reaction_history",
     display: "履歴",
     reading: "りれき",
-    shortDef: "共鳴などの反応の履歴です。",
+    shortDef: "共鳴したピースを見返すための履歴です。",
     longDef:
-      "自分が送った反応や受け取った反応を見返すための履歴です。どんな内容に共鳴しやすいかを追うことで、自分の関心や理解の方向も見えてきます。",
+      "自分が共鳴したピースを見返すための履歴です。どんな内容に共鳴しやすいかを追うことで、自分の関心や理解の方向も見えてきます。",
     examples: [
-      "最近どの Piece に反応したかを見る",
-      "自分が受け取った共鳴の傾向を確認する",
+      "最近どのピースに共鳴したかを見る",
+      "自分が響いた内容の傾向を確認する",
     ],
     relatedTerms: ["kyomei", "piece_screen", "piece"],
   },
   follow: {
     termId: "follow",
-    display: "フォロー",
-    reading: "フォロー",
-    shortDef: "他ユーザーを追い、Piece や感情通知の対象にする関係です。",
+    display: "フォロー機能",
+    reading: "フォローきのう",
+    shortDef: "他ユーザーのピースや感情通知を見やすくするつながりです。",
     longDef:
-      "Cocolon では、人とのつながりをフォローで扱います。フォローすると相手の Piece を閲覧でき、必要に応じて感情通知の受信対象にもできます。",
+      "Cocolon では、人とのつながりをフォロー機能で扱います。フォローすると相手のピースを見やすくなり、必要に応じて感情通知も受け取れます。自分のアカウントは非公開にすることもでき、その場合はフォロー時に承認が必要になります。",
     examples: [
-      "気になるユーザーをフォローして Piece を読む",
+      "気になるユーザーをフォローしてピースを読む",
       "感情の流れも受け取りたい相手だけ通知をオンにする",
     ],
-    relatedTerms: ["emotion_log", "emotion_notifications", "emotion_input"],
+    relatedTerms: ["emotion_log", "emotion_notifications", "private_account", "piece"],
   },
   emotion_log: {
     termId: "emotion_log",
-    display: "感情ログ",
-    reading: "かんじょうログ",
-    shortDef: "フォロー中ユーザーの感情入力の流れを確認するための一覧です。",
+    display: "感情通知",
+    reading: "かんじょうつうち",
+    shortDef: "フォロー中ユーザーの感情入力の流れを確認するための通知です。",
     longDef:
-      "フォロー中ユーザーがどんな感情を入力していたかを時系列で見ていくための場所です。メモ本文を読むというより、感情の波を受け取ることに重心があります。",
+      "感情通知では、フォロー中ユーザーがどんな感情を入力していたかを時系列で確認できます。メモ本文を読むというより、感情と強さの流れを受け取ることに重心があります。",
     examples: [
       "最近の相手の気持ちの流れを見る",
-      "しばらく会っていない相手の状態変化を感情から知る",
+      "フォロー中ユーザーごとに通知のON/OFFを切り替える",
     ],
     relatedTerms: ["follow", "emotion_input", "emotion_notifications"],
+  },
+  private_account: {
+    termId: "private_account",
+    display: "非公開",
+    reading: "ひこうかい",
+    shortDef: "フォロー時に承認が必要になり、おすすめに表示されなくなる公開設定です。",
+    longDef:
+      "ピースの公開設定を非公開にすると、新しくフォローされるときに承認が必要になります。また、おすすめユーザーにも表示されなくなります。ランキングなどでは、非公開アカウントであることを示す盾アイコンが表示されることがあります。",
+    examples: [
+      "フォローされる相手を自分で承認したいときに非公開にする",
+      "おすすめユーザーに表示されたくないときに非公開にする",
+    ],
+    relatedTerms: ["follow", "piece_screen", "ranking_preview"],
+  },
+  ranking_preview: {
+    termId: "ranking_preview",
+    display: "ランキングプレビュー",
+    reading: "ランキングプレビュー",
+    shortDef: "ランキングカード内に表示される上位ユーザーの簡易一覧です。",
+    longDef:
+      "ランキング画面では、各ランキングカードに上位ユーザーのプレビューが表示されます。詳しく見たい場合は、そのカードの「全表示」から詳細画面へ進みます。",
+    examples: [
+      "入力数ランキングの上位だけをカードで確認する",
+      "共鳴数ランキングの全表示へ進む",
+    ],
+    relatedTerms: ["kyomei", "private_account"],
   },
 });
 

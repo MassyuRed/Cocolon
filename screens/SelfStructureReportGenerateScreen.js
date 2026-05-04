@@ -210,7 +210,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "現在の自己分析" }) {
+export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "現在の自己分析", showTitle = true }) {
   const { themeName, colors } = useTheme();
   const {
     tier: ctxSubscriptionTier,
@@ -318,9 +318,9 @@ const [loading, setLoading] = useState(true);
       },
       sectionLabel: { color: colors.TEXT_ON_LIGHT },
       p: { color: colors.TEXT_ON_LIGHT },
-      empty: { color: colors.TEXT_SUBTLE },
+      empty: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
     };
-  }, [isDark, colors]);
+  }, [isDark, colors, ui]);
 
   const reportTitle = titleOverride || "現在の自己分析";
 
@@ -526,8 +526,9 @@ const run = useCallback(async ({ force = false } = {}) => {
   const bodyContent = (
     <>
       {/* タイトル */}
-      <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{reportTitle}</Text>
-
+      {showTitle ? (
+        <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{reportTitle}</Text>
+      ) : null}
 
       {!useServerDefaultMode ? (
       <View style={[styles.modeCard, themed.bodyCard]}>
@@ -557,12 +558,12 @@ const run = useCallback(async ({ force = false } = {}) => {
             const iconColor = !allowed
               ? isDark
                 ? colors.TEXT_SUBTLE
-                : "#9CA3AF"
+                : ui?.text?.description ?? colors.TEXT_SUBTLE
               : active
               ? "#FFFFFF"
               : isDark
               ? colors.TEXT_ON_LIGHT
-              : "#111827";
+              : ui?.text?.primary ?? colors.TEXT_ON_LIGHT;
 
             return (
               <TouchableOpacity
@@ -701,7 +702,7 @@ const run = useCallback(async ({ force = false } = {}) => {
               <Ionicons
                 name="refresh-outline"
                 size={16}
-                color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
+                color={ui?.text?.primary ?? colors.TEXT_ON_LIGHT}
               />
               <Text style={[styles.smallBtnText, themed.smallBtnText]}>
                 更新
@@ -717,6 +718,7 @@ const run = useCallback(async ({ force = false } = {}) => {
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
 
@@ -749,7 +751,7 @@ function createStyles(COLORS, ui) {
     marginLeft: 6,
     fontSize: 12,
     fontWeight: "700",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
 
   headerTitle: {
@@ -757,7 +759,7 @@ function createStyles(COLORS, ui) {
     lineHeight: 32,
     fontWeight: "800",
     letterSpacing: 0.6,
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     textAlign: "center",
     marginBottom: 10,
     paddingHorizontal: 16,
@@ -783,9 +785,9 @@ function createStyles(COLORS, ui) {
   modeTitle: {
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
-  modeTierText: { fontSize: 11, color: "#6B7280", fontWeight: "700" },
+  modeTierText: { fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, fontWeight: "700" },
   modeButtonsRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -809,10 +811,10 @@ function createStyles(COLORS, ui) {
     borderColor: "#C9A227",
   },
   modeBtnDisabled: { opacity: 0.45 },
-  modeBtnText: { fontSize: 12, fontWeight: "900", color: "#111827" },
+  modeBtnText: { fontSize: 12, fontWeight: "900", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
   modeBtnTextActive: { color: "#FFFFFF" },
-  modeBtnTextDisabled: { color: "#9CA3AF" },
-  modeHint: { marginTop: 8, fontSize: 11, lineHeight: 16, color: "#6B7280" },
+  modeBtnTextDisabled: { color: text.subtle ?? COLORS.TEXT_SUBTLE },
+  modeHint: { marginTop: 8, fontSize: 11, lineHeight: 16, color: text.description ?? COLORS.TEXT_SUBTLE },
   modeErrorText: { marginTop: 6, fontSize: 11, lineHeight: 16, color: "#B91C1C" },
 
   errorText: { paddingHorizontal: 16, paddingBottom: 8, color: "#B91C1C" },
@@ -827,12 +829,12 @@ function createStyles(COLORS, ui) {
     padding: 12,
   },
   sectionLabel: {
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     fontSize: 12,
     fontWeight: "800",
     marginBottom: 8,
   },
-  p: { color: "#374151", fontSize: 14, lineHeight: 20, marginBottom: 4 },
-  empty: { padding: 12, color: "#6B7280" },
+  p: { color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 14, lineHeight: 20, marginBottom: 4 },
+  empty: { padding: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
   }, ui));
 }

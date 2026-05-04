@@ -246,7 +246,7 @@ export function formatCrossTopicsText(topics, reportType) {
   const arr = Array.isArray(topics) ? topics : [];
 
   const lines = [];
-  lines.push("【自己構造トピック候補（Pieceで深掘り）】");
+  lines.push("【自己構造トピック候補（ピースで深掘り）】");
 
   if (arr.length === 0) {
     lines.push(`・${label}はまだ十分なログがないため、自己構造トピックはこれから見えてきます。`);
@@ -297,8 +297,8 @@ export default function AnalysisCrossLinkSection({
       ? `\n\nおすすめ質問:\n${topic.suggestedQuestion}`
       : "";
     Alert.alert(
-      "Pieceで深掘り",
-      `Pieceを開いて「自己構造レポート」または「Pieceライブラリ」で深掘りしてみてください。${q}`
+      "ピースで深掘り",
+      `ピースを開いて「自己構造レポート」または「ピースライブラリ」で深掘りしてみてください。${q}`
     );
   };
 
@@ -307,7 +307,7 @@ export default function AnalysisCrossLinkSection({
       <View style={styles.header}>
         <Text style={styles.title}>【自己構造トピック候補】</Text>
         <Text style={styles.sub}>
-          {label}の感情構造から、自己構造（Piece）で触れると良さそうな論点
+          {label}の感情構造から、自己構造（ピース）で触れると良さそうな論点
         </Text>
       </View>
 
@@ -339,7 +339,7 @@ export default function AnalysisCrossLinkSection({
                   </Text>
                 ) : null}
               </View>
-              <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+              <Ionicons name="chevron-forward" size={18} color={ui?.text?.description ?? colors.TEXT_SUBTLE} />
             </TouchableOpacity>
           ))}
         </>
@@ -353,16 +353,17 @@ export default function AnalysisCrossLinkSection({
         <Ionicons
           name="person-circle-outline"
           size={18}
-          color="#111827"
+          color={ui?.text?.primary ?? colors.TEXT_ON_LIGHT}
           style={{ marginRight: 6 }}
         />
-        <Text style={styles.openText}>Pieceで深掘りする</Text>
+        <Text style={styles.openText}>ピースで深掘りする</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   card: {
     marginHorizontal: 12,
@@ -376,13 +377,13 @@ function createStyles(COLORS, ui) {
   header: { marginBottom: 8 },
   title: {
     fontWeight: "700",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     marginBottom: 4,
     fontSize: 16,
   },
-  sub: { fontSize: 12, color: "#6B7280", lineHeight: 18 },
+  sub: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE, lineHeight: 18 },
 
-  empty: { color: "#374151", lineHeight: 20 },
+  empty: { color: text.description ?? COLORS.TEXT_SUBTLE, lineHeight: 20 },
 
   row: {
     flexDirection: "row",
@@ -391,9 +392,9 @@ function createStyles(COLORS, ui) {
     borderTopWidth: 1,
     borderTopColor: "#F3F4F6",
   },
-  rowTitle: { fontSize: 13, fontWeight: "800", color: "#111827" },
-  rowSub: { marginTop: 2, fontSize: 12, color: "#374151", lineHeight: 18 },
-  rowHint: { marginTop: 4, fontSize: 11, color: "#6B7280", lineHeight: 16 },
+  rowTitle: { fontSize: 13, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE, lineHeight: 18 },
+  rowHint: { marginTop: 4, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, lineHeight: 16 },
 
   openBtn: {
     marginTop: 10,
@@ -406,6 +407,6 @@ function createStyles(COLORS, ui) {
     borderColor: "#E5E7EB",
     backgroundColor: "#F3F4F6",
   },
-  openText: { fontSize: 13, color: "#111827", fontWeight: "800" },
+  openText: { fontSize: 13, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "800" },
   }, ui));
 }

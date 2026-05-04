@@ -172,7 +172,7 @@ export default function SelfStructureReportViewerScreen({
       },
       pdfText: { color: colors.TEXT_ON_LIGHT },
 
-      range: { color: colors.TEXT_SUBTLE },
+      range: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
       bodyCard: {
         borderColor: colors.CARD_BORDER,
         backgroundColor: colors.PANEL_BG,
@@ -180,12 +180,12 @@ export default function SelfStructureReportViewerScreen({
       sectionLabel: { color: colors.TEXT_ON_LIGHT },
 
       p: { color: colors.TEXT_ON_LIGHT },
-      empty: { color: colors.TEXT_SUBTLE },
+      empty: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
 
       // アンカー行は「見失わない」ために強調（色は本文と同じ）
       anchorLine: { color: colors.TEXT_ON_LIGHT },
     };
-  }, [isDark, colors]);
+  }, [isDark, colors, ui]);
 
   const title = report?.title || "Report";
   const range = useMemo(() => {
@@ -269,7 +269,7 @@ export default function SelfStructureReportViewerScreen({
           <Ionicons
             name="chevron-back-outline"
             size={20}
-            color={isDark ? colors.TEXT_ON_LIGHT : "#374151"}
+            color={ui?.text?.description ?? colors.TEXT_SUBTLE}
           />
           <Text style={[styles.backText, themed.backText]}>履歴</Text>
         </TouchableOpacity>
@@ -344,6 +344,7 @@ export default function SelfStructureReportViewerScreen({
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
@@ -357,13 +358,13 @@ function createStyles(COLORS, ui) {
     justifyContent: "space-between",
   },
   backBtn: { flexDirection: "row", alignItems: "center", width: 70 },
-  backText: { marginLeft: 2, color: "#374151", fontSize: 13, fontWeight: "600" },
+  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
   headerTitle: {
     flex: 1,
     marginHorizontal: 10,
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     textAlign: "center",
   },
 
@@ -373,9 +374,9 @@ function createStyles(COLORS, ui) {
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  pdfText: { marginLeft: 4, fontSize: 12, color: "#111827", fontWeight: "700" },
+  pdfText: { marginLeft: 4, fontSize: 12, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
 
-  range: { paddingHorizontal: 12, paddingTop: 8, paddingBottom: 2, color: "#6B7280", fontSize: 12 },
+  range: { paddingHorizontal: 12, paddingTop: 8, paddingBottom: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 12 },
 
   body: { paddingHorizontal: 14, paddingVertical: 12, paddingBottom: 24 },
   bodyCard: {
@@ -386,13 +387,13 @@ function createStyles(COLORS, ui) {
     padding: 12,
   },
   sectionLabel: {
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     fontSize: 12,
     fontWeight: "800",
     marginBottom: 8,
   },
-  p: { fontSize: 14, lineHeight: 20, color: "#111827" },
+  p: { fontSize: 14, lineHeight: 20, color: text.primary ?? COLORS.TEXT_ON_LIGHT },
   anchorLine: { fontWeight: "900" },
-  empty: { padding: 16, color: "#6B7280" },
+  empty: { padding: 16, color: text.description ?? COLORS.TEXT_SUBTLE },
   }, ui));
 }

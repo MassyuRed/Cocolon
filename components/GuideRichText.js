@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
 
 const TERM_PATTERN = /\[\[term:([a-zA-Z0-9_-]+)\|([^[\]]+)\]\]/g;
 
@@ -58,8 +59,9 @@ function renderListItem({ item, index, kind, styles, onPressTerm }) {
 }
 
 export default function GuideRichText({ blocks = [], onPressTerm }) {
-  const { colors } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   return (
     <View>
@@ -111,8 +113,8 @@ export default function GuideRichText({ blocks = [], onPressTerm }) {
   );
 }
 
-function createStyles(colors) {
-  const guideDarkSubtext = "#374151";
+function createStyles(colors, ui) {
+  const text = ui?.text || {};
 
   return StyleSheet.create({
     paragraph: {
@@ -162,7 +164,7 @@ function createStyles(colors) {
     noteText: {
       fontSize: 13,
       lineHeight: 22,
-      color: guideDarkSubtext,
+      color: text.description ?? colors.TEXT_SUBTLE,
     },
     termLink: {
       color: colors.TITLE_GOLD,

@@ -30,7 +30,7 @@ import {
 } from "../lib/iap/iapService";
 import { getPlanSku } from "../lib/iap/iapConfig";
 import { apiGet, apiPost, apiPatch, apiFetch } from "../lib/apiClient";
-import { ACCOUNT_WIRE, FOLLOW_WIRE, PIECE_WIRE, buildFollowStatsPath, readConnectCode, readPieceGeneratedTotal, readPieceResonancesTotal, readShareCode, readShareCodePublic } from "../lib/compat/legacyWireContracts";
+import { ACCOUNT_WIRE, FOLLOW_WIRE, PIECE_WIRE, buildFollowStatsPath, buildPublicProfileByShareCodePath, readConnectCode, readPieceGeneratedTotal, readPieceResonancesTotal, readShareCode, readShareCodePublic } from "../lib/compat/legacyWireContracts";
 
 // 🔧 ここを変えると Account 画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
@@ -100,33 +100,6 @@ function formatAllowedModes(modes) {
   return order.filter((m) => arr.includes(m)).join(" / ");
 }
 
-function getNavigatorRouteNames(navigationLike) {
-  try {
-    const state = navigationLike?.getState?.();
-    return Array.isArray(state?.routeNames) ? state.routeNames : [];
-  } catch {
-    return [];
-  }
-}
-
-
-function findNavigationForRoute(navigationLike, routeName) {
-  let current = navigationLike;
-  while (current) {
-    const routeNames = getNavigatorRouteNames(current);
-    if (routeNames.includes(routeName)) {
-      return current;
-    }
-    try {
-      current = current?.getParent?.() || null;
-    } catch {
-      current = null;
-    }
-  }
-  return null;
-}
-
-
 export default function AccountScreen({ navigation, route, viewedUserId }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -158,10 +131,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const [statusLoading, setStatusLoading] = useState(false);
   const [statusError, setStatusError] = useState("");
 
-  const [profileCreateLoading, setProfileCreateLoading] = useState(false);
-  const [profileCreateError, setProfileCreateError] = useState("");
-  const [profileCreateItems, setProfileCreateItems] = useState([]);
-  const [profileCreateMeta, setProfileCreateMeta] = useState(null);
 
   // ユーザー名の再設定（編集）
   const [nameDraft, setNameDraft] = useState("");
@@ -187,6 +156,12 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const [subLoading, setSubLoading] = useState(true);
   const [subError, setSubError] = useState("");
   const [restoreLoading, setRestoreLoading] = useState(false);
+
+  // ユーザーID検索
+  const [idSearchQuery, setIdSearchQuery] = useState("");
+  const [idSearchLoading, setIdSearchLoading] = useState(false);
+  const [idSearchResult, setIdSearchResult] = useState(null);
+  const [idSearchError, setIdSearchError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -377,92 +352,11 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   };
 
 
-  const refreshProfileCreate = async () => {
-    if (!targetUserId || !user) {
-      setProfileCreateItems([]);
-      setProfileCreateMeta(null);
-      setProfileCreateError("");
-      return;
-    }
-
-    setProfileCreateLoading(true);
-    setProfileCreateError("");
-    try {
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error("アクセストークンが取得できませんでした");
-      }
-
-      const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await apiFetch(`${ACCOUNT_WIRE.routes.profileCreate}?${qs}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!res.ok) {
-        let detail = `HTTP ${res.status}`;
-        try {
-          const j = await res.json();
-          if (j && typeof j.detail === "string") detail = j.detail;
-        } catch {}
-        throw new Error(detail);
-      }
-
-      const json = await res.json().catch(() => ({}));
-      setProfileCreateItems(Array.isArray(json?.items) ? json.items : []);
-      setProfileCreateMeta(json?.meta && typeof json.meta === "object" ? json.meta : null);
-    } catch (e) {
-      console.warn("refreshProfileCreate error:", e);
-      setProfileCreateItems([]);
-      setProfileCreateMeta(null);
-      setProfileCreateError(String(e?.message || e));
-    } finally {
-      setProfileCreateLoading(false);
-    }
-  };
-
-  const openProfileCreate = () => {
-    if (!user || !isSelf) return;
-
-    const screenParams = {
-      returnToAccount: true,
-      viewedUserId: String(user?.id || targetUserId || ""),
-    };
-
-    const directNav = findNavigationForRoute(navigation, "ProfileCreate");
-    if (directNav) {
-      try {
-        directNav.navigate("ProfileCreate", screenParams);
-        return;
-      } catch {
-        // noop
-      }
-    }
-
-    try {
-      navigation?.navigate?.("ProfileCreate", screenParams);
-      return;
-    } catch {
-      // noop
-    }
-
-    Alert.alert("開けません", "ProfileCreate を開けませんでした。もう一度お試しください。");
-  };
 
   useEffect(() => {
     refreshFollowState();
     refreshAccountStatus();
     loadAccountVisibilityMe();
-    refreshProfileCreate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, targetUserId]);
 
@@ -475,7 +369,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
       refreshFollowState();
       refreshAccountStatus();
       loadAccountVisibilityMe();
-      refreshProfileCreate();
     });
 
     return unsubscribe;
@@ -495,7 +388,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
 
     const code = String(connectCode || "").trim();
     if (!code && !targetUserId) {
-      Alert.alert("準備中", "相手の共有IDがまだ取得できていません。");
+      Alert.alert("準備中", "相手のユーザーIDがまだ取得できていません。");
       return;
     }
 
@@ -567,10 +460,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   };
 
   const tierLabel = SUB_TIER_LABEL[subTier] || "Freeプラン";
-  const profileCreateTotal = Number(profileCreateMeta?.total_questions ?? 5) || 5;
-  const profileCreateAnsweredCount = Number(profileCreateMeta?.answered_count ?? profileCreateItems.length ?? 0) || 0;
-  const profileCreateVisibleItems = Array.isArray(profileCreateItems) ? profileCreateItems : [];
-
   const tierPrice =
     subTier === "plus"
       ? "月額480円"
@@ -593,7 +482,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const onCopyShareCode = async () => {
     const code = String(shareCode || "").trim();
     if (!code) {
-      Alert.alert("準備中", "共有コードがまだ取得できていません。");
+      Alert.alert("準備中", "ユーザーIDがまだ取得できていません。");
       return;
     }
     try {
@@ -607,7 +496,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const onShareProfile = async () => {
     const code = String(shareCode || "").trim();
     if (!code) {
-      Alert.alert("準備中", "共有コードがまだ取得できていません。");
+      Alert.alert("準備中", "ユーザーIDがまだ取得できていません。");
       return;
     }
     const url = `https://emlis.app/u/${code}`;
@@ -636,6 +525,69 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
     if (nameSaving || nameChecking) return;
     setNameEditOpen(false);
     setNameError("");
+  };
+
+  const navigateToAccount = (nextUserId) => {
+    const normalizedUserId = String(nextUserId || "").trim();
+    if (!normalizedUserId || !navigation?.navigate) return;
+
+    navigation.navigate("Account", {
+      viewedUserId: normalizedUserId,
+      userId: normalizedUserId,
+      user_id: normalizedUserId,
+    });
+  };
+
+  const searchUserById = async () => {
+    if (idSearchLoading) return;
+
+    const code = String(idSearchQuery || "").trim();
+    if (!code) {
+      setIdSearchResult(null);
+      setIdSearchError("ユーザーIDを入力してください。");
+      return;
+    }
+
+    setIdSearchLoading(true);
+    setIdSearchResult(null);
+    setIdSearchError("");
+
+    try {
+      const json = await apiGet(buildPublicProfileByShareCodePath(code), { auth: false });
+      const resolvedUserId = String(
+        json?.user_id || json?.target_user_id || json?.id || ""
+      ).trim();
+
+      if (!resolvedUserId) {
+        throw new Error("user_id not found");
+      }
+
+      let resolvedDisplayName = normalizeDisplayName(json?.display_name || "");
+
+      if (user) {
+        try {
+          const profileJson = await apiGet(
+            `/account/profile?target_user_id=${encodeURIComponent(resolvedUserId)}`
+          );
+          resolvedDisplayName =
+            normalizeDisplayName(profileJson?.display_name || resolvedDisplayName) ||
+            resolvedDisplayName;
+        } catch (profileError) {
+          console.warn("AccountScreen: ID search profile fetch failed", profileError);
+        }
+      }
+
+      setIdSearchResult({
+        userId: resolvedUserId,
+        displayName: resolvedDisplayName || "（ユーザー名未設定）",
+      });
+    } catch (e) {
+      console.warn("AccountScreen: ID search failed", e);
+      setIdSearchResult(null);
+      setIdSearchError("該当するユーザーが見つかりませんでした。");
+    } finally {
+      setIdSearchLoading(false);
+    }
   };
 
   const loadAccountVisibilityMe = async () => {
@@ -1169,7 +1121,7 @@ const onRestorePurchases = async () => {
               {canShowShareCode ? (
                 <ProfileRow
                   styles={styles}
-                  label="共有コード"
+                  label="ユーザーID"
                   labelAction={
                     user ? (
                       <Pressable
@@ -1180,7 +1132,7 @@ const onRestorePurchases = async () => {
                         ]}
                         onPress={onCopyShareCode}
                         disabled={loading || !String(shareCode || "").trim()}
-                        accessibilityLabel="共有コードをコピー"
+                        accessibilityLabel="ユーザーIDを共有"
                         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                       >
                         <Ionicons
@@ -1209,66 +1161,63 @@ const onRestorePurchases = async () => {
             </Text>
           </View>
 
-          <View style={styles.statusSection}>
-            <Text style={styles.statusTitle}>ProfileCreate</Text>
 
-            {profileCreateLoading ? (
-              <ActivityIndicator style={{ marginTop: 6 }} />
-            ) : (
-              <View style={styles.statusCard}>
-                {isSelf ? (
-                  <View style={styles.profileCreateHeaderRow}>
-                    <View style={{ flex: 1, paddingRight: 12 }}>
-                      <Text style={styles.profileCreateSummaryText}>
-                        回答済み：{profileCreateAnsweredCount}/{profileCreateTotal}
-                      </Text>
-                      <Text style={styles.profileCreateHintText}>
-                        固定的な自己紹介 / プロフィール資産として使われます。
-                      </Text>
-                    </View>
-
-                    <TouchableOpacity
-                      style={styles.profileCreateEditBtn}
-                      onPress={openProfileCreate}
-                      activeOpacity={0.85}
-                      disabled={loading}
-                    >
-                      <Ionicons
-                        name="create-outline"
-                        size={16}
-                        color="#FFFFFF"
-                        style={{ marginRight: 6 }}
-                      />
-                      <Text style={styles.profileCreateEditBtnText}>編集する</Text>
-                    </TouchableOpacity>
-                  </View>
-                ) : null}
-
-                {profileCreateVisibleItems.length > 0 ? (
-                  profileCreateVisibleItems.map((item, index) => (
-                    <View
-                      key={String(item?.question_id || index)}
-                      style={[
-                        styles.profileCreateItem,
-                        index === profileCreateVisibleItems.length - 1 && styles.profileCreateItemLast,
-                      ]}
-                    >
-                      <Text style={styles.profileCreateQuestion}>{item?.question_text || ""}</Text>
-                      <Text style={styles.profileCreateAnswer}>{item?.answer_text || ""}</Text>
-                    </View>
-                  ))
+          <View style={styles.idSearchSection}>
+            <Text style={styles.statusTitle}>ID検索</Text>
+            <View style={styles.idSearchRow}>
+              <TextInput
+                style={styles.idSearchInput}
+                placeholder="ユーザーID"
+                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                value={idSearchQuery}
+                onChangeText={(value) => {
+                  setIdSearchQuery(value);
+                  if (idSearchResult) setIdSearchResult(null);
+                  if (idSearchError) setIdSearchError("");
+                }}
+                autoCapitalize="none"
+                autoCorrect={false}
+                returnKeyType="search"
+                onSubmitEditing={searchUserById}
+                editable={!idSearchLoading}
+              />
+              <TouchableOpacity
+                style={[
+                  styles.idSearchButton,
+                  idSearchLoading && styles.idSearchButtonDisabled,
+                ]}
+                onPress={searchUserById}
+                activeOpacity={0.85}
+                disabled={idSearchLoading}
+                accessibilityLabel="ユーザーIDを検索"
+              >
+                {idSearchLoading ? (
+                  <ActivityIndicator size="small" color={colors.ACCENT_TEXT} />
                 ) : (
-                  <Text style={styles.profileCreateEmptyText}>
-                    {isSelf
-                      ? "まだ回答はありません。『編集する』から入力できます。"
-                      : "まだ公開されている回答はありません。"}
-                  </Text>
+                  <Text style={styles.idSearchButtonText}>検索</Text>
                 )}
-              </View>
-            )}
+              </TouchableOpacity>
+            </View>
 
-            {profileCreateError ? (
-              <Text style={styles.statusErrorText}>取得エラー: {profileCreateError}</Text>
+            {idSearchResult ? (
+              <TouchableOpacity
+                style={styles.idSearchResultButton}
+                onPress={() => navigateToAccount(idSearchResult.userId)}
+                activeOpacity={0.85}
+                accessibilityLabel="検索したアカウントを開く"
+              >
+                <Text style={styles.idSearchResultName} numberOfLines={1}>
+                  {idSearchResult.displayName}
+                </Text>
+                <Ionicons
+                  name="chevron-forward"
+                  size={16}
+                  color={colors.TEXT_ON_LIGHT}
+                  style={{ marginLeft: 8, opacity: 0.65 }}
+                />
+              </TouchableOpacity>
+            ) : idSearchError ? (
+              <Text style={styles.idSearchErrorText}>{idSearchError}</Text>
             ) : null}
           </View>
 
@@ -1302,12 +1251,12 @@ const onRestorePurchases = async () => {
                 />
                 <StatusRow
                   styles={styles}
-                  label="Pieceの所持数"
+                  label="ピース生成数"
                   value={statusValue("piece_generated_total", PIECE_WIRE.metrics.pieceGeneratedTotalKeys)}
                 />
                 <StatusRow
                   styles={styles}
-                  label="Pieceが共鳴された数"
+                  label="ピースが共鳴された数"
                   value={statusValue("piece_resonances_total", PIECE_WIRE.metrics.pieceResonancesTotalKeys)}
                 />
               </View>
@@ -1351,7 +1300,7 @@ const onRestorePurchases = async () => {
             <TextInput
               style={styles.nameInput}
               placeholder="ユーザー名"
-              placeholderTextColor={colors.TEXT_SUBTLE}
+              placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
               value={nameDraft}
               onChangeText={(value) => {
                 setNameDraft(value);
@@ -1450,7 +1399,7 @@ const onRestorePurchases = async () => {
             ) : (
               <View style={{ marginTop: 10 }}>
                 <VisibilitySettingRow
-                  title="Pieceの公開設定"
+                  title="ピースの公開設定"
                   description="非公開にすると、フォロー時に承認が必要になります。おすすめにも表示されなくなります"
                   isPublic={!accountVisibility.is_private_account}
                   onPressPublic={() =>
@@ -1480,7 +1429,7 @@ const onRestorePurchases = async () => {
                 />
 
                 <VisibilitySettingRow
-                  title="共有コード表示設定"
+                  title="ユーザーID表示設定"
                   isPublic={!!accountVisibility.is_share_code_public}
                   onPressPublic={() =>
                     patchAccountVisibilityMe({ [ACCOUNT_WIRE.fields.shareCodePublic]: true })
@@ -1556,6 +1505,7 @@ function StatusRow({ styles, label, value }) {
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
@@ -1609,6 +1559,72 @@ function createStyles(COLORS, ui) {
       paddingTop: 14,
       borderTopWidth: 1,
       borderTopColor: COLORS.CARD_BORDER,
+    },
+    idSearchSection: {
+      marginTop: 18,
+      paddingTop: 14,
+      borderTopWidth: 1,
+      borderTopColor: COLORS.CARD_BORDER,
+    },
+    idSearchRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    idSearchInput: {
+      flex: 1,
+      height: 42,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      fontSize: 14,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    idSearchButton: {
+      marginLeft: 8,
+      minWidth: 72,
+      height: 42,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 12,
+    },
+    idSearchButtonDisabled: {
+      opacity: 0.6,
+    },
+    idSearchButtonText: {
+      fontSize: 13,
+      fontWeight: "800",
+      color: COLORS.ACCENT_TEXT,
+    },
+    idSearchResultButton: {
+      marginTop: 10,
+      minHeight: 44,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    idSearchResultName: {
+      flex: 1,
+      fontSize: 13,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+    idSearchErrorText: {
+      marginTop: 8,
+      fontSize: 11,
+      lineHeight: 16,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     statusTitle: {
       fontSize: 12,
@@ -1676,68 +1692,6 @@ function createStyles(COLORS, ui) {
       fontSize: 10,
       color: COLORS.TEXT_ON_LIGHT,
       opacity: 0.8,
-    },
-    profileCreateHeaderRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      paddingBottom: 10,
-      marginBottom: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
-    },
-    profileCreateSummaryText: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-    },
-    profileCreateHintText: {
-      marginTop: 4,
-      fontSize: 11,
-      lineHeight: 16,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
-    },
-    profileCreateEditBtn: {
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
-    },
-    profileCreateEditBtnText: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: "#FFFFFF",
-    },
-    profileCreateItem: {
-      paddingVertical: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
-    },
-    profileCreateItemLast: {
-      borderBottomWidth: 0,
-      paddingBottom: 0,
-    },
-    profileCreateQuestion: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
-    },
-    profileCreateAnswer: {
-      fontSize: 13,
-      lineHeight: 20,
-      color: COLORS.TITLE_GOLD,
-    },
-    profileCreateEmptyText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
     },
     label: {
       fontSize: 12,
@@ -2112,7 +2066,7 @@ function createStyles(COLORS, ui) {
       marginTop: 8,
       fontSize: 11,
       lineHeight: 16,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     nameErrorText: {
       marginTop: 8,

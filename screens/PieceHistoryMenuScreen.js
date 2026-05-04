@@ -32,7 +32,7 @@ export default function PieceHistoryMenuScreen({ navigation }) {
   const showTutorialHistoryInfo = useCallback(() => {
     Alert.alert(
       "履歴（チュートリアル）",
-      "本番では、共鳴したPieceの履歴がここに蓄積されます。\n\nチュートリアルでは、まずPieceの作成と閲覧の流れを確認してください。"
+      "本番では、共鳴したピースの履歴がここに蓄積されます。\n\nチュートリアルでは、まずピースの生成と閲覧の流れを確認してください。"
     );
   }, []);
 
@@ -49,13 +49,13 @@ export default function PieceHistoryMenuScreen({ navigation }) {
       <PieceSubHeader title="履歴" onBack={handleBack} />
 
       <PieceDescription>
-        共鳴したPieceの履歴を確認できます。{"\n"}
-        一覧から選ぶと、そのPiece詳細を開きます。
+        共鳴したピースの履歴を確認できます。{"\n"}
+        一覧から選ぶと、そのピース詳細を開きます。
       </PieceDescription>
 
       <PieceMediumCard
         title="共鳴履歴"
-        description="共鳴したPieceの履歴を確認します"
+        description="共鳴したピースの履歴を確認します"
         onPress={openResonanceHistory}
         chevron="forward"
         accessibilityLabel="共鳴履歴を開く"

@@ -16,7 +16,7 @@ import {
 
 export default function SettingsOtherScreen({ navigation }) {
   const { signOut, authLoading, user } = useAuth();
-  const { startTutorial } = useTutorial();
+  const { startTutorial, setTutorialStep } = useTutorial();
   const { setUnread } = useUnread();
   const { isFeatureEnabled } = useAppRuntime();
   const [localProcessing, setLocalProcessing] = useState(false);
@@ -28,14 +28,16 @@ export default function SettingsOtherScreen({ navigation }) {
 
     Alert.alert(
       "チュートリアル",
-      "チュートリアルを最初から再体験しますか？\n\n本番データは変更されません。",
+      "チュートリアルを最初から再体験しますか？\n\n現在の入力や記録はそのままです。",
       [
         { text: "キャンセル", style: "cancel" },
         {
           text: "開始する",
           onPress: () => {
             try {
-              startTutorial();
+              const started = startTutorial();
+              if (started === false) return;
+              setTutorialStep(1);
             } catch {
               // noop
             }
@@ -52,7 +54,7 @@ export default function SettingsOtherScreen({ navigation }) {
                   ? navigation.getParent()
                   : null;
               if (parent && typeof parent.navigate === "function") {
-                parent.navigate("Input");
+                parent.navigate("Input", { screen: "TutorialIntro" });
                 return;
               }
             } catch {
@@ -61,7 +63,7 @@ export default function SettingsOtherScreen({ navigation }) {
 
             try {
               if (navigation?.navigate) {
-                navigation.navigate("Input");
+                navigation.navigate("Input", { screen: "TutorialIntro" });
                 return;
               }
             } catch {
@@ -70,7 +72,7 @@ export default function SettingsOtherScreen({ navigation }) {
 
             Alert.alert(
               "チュートリアル",
-              "チュートリアルを開始状態にしました。Homeから体験を始めてください。"
+              "チュートリアルを開始状態にしました。"
             );
           },
         },
@@ -183,7 +185,7 @@ export default function SettingsOtherScreen({ navigation }) {
 
       <AnalysisMediumCard
         title="チュートリアルを再体験する"
-        description="本番データを変えずに最初から体験します"
+        description="現在の入力や記録を変えずに最初から体験します"
         onPress={openTutorialRestart}
         accessibilityLabel="チュートリアルを再体験する"
       />

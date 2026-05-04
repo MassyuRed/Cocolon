@@ -10,6 +10,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
 
 export default function GuideTermModal({
   visible,
@@ -18,8 +19,9 @@ export default function GuideTermModal({
   onClose,
   onSelectRelatedTerm,
 }) {
-  const { colors } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const examples = Array.isArray(term?.examples) ? term.examples : [];
   const relatedTerms = useMemo(() => {
@@ -134,8 +136,8 @@ export default function GuideTermModal({
   );
 }
 
-function createStyles(colors) {
-  const guideDarkSubtext = "#374151";
+function createStyles(colors, ui) {
+  const text = ui?.text || {};
 
   return StyleSheet.create({
     backdrop: {
@@ -210,7 +212,7 @@ function createStyles(colors) {
     readingText: {
       fontSize: 12,
       lineHeight: 18,
-      color: guideDarkSubtext,
+      color: text.description ?? colors.TEXT_SUBTLE,
       marginBottom: 12,
     },
     shortDefText: {

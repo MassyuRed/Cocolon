@@ -11,6 +11,8 @@ import {
   View,
 } from "react-native";
 import { useAuth } from "./AuthContext"; // 置いた場所によってパス調整してね
+import { useTheme } from "./theme/ThemeContext";
+import { makeUiTokens } from "./ui/uiTokens";
 
 const DISPLAY_NAME_MAX_LENGTH = 15;
 
@@ -19,6 +21,9 @@ function normalizeDisplayName(value) {
 }
 
 export default function AuthScreen() {
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const {
     signIn,
     signUp,
@@ -241,7 +246,7 @@ export default function AuthScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="新しいパスワード（6文字以上）"
-                placeholderTextColor="#374151"
+                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                 secureTextEntry
                 value={newPassword}
                 onChangeText={setNewPassword}
@@ -250,7 +255,7 @@ export default function AuthScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="新しいパスワード（確認）"
-                placeholderTextColor="#374151"
+                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                 secureTextEntry
                 value={newPassword2}
                 onChangeText={setNewPassword2}
@@ -292,7 +297,7 @@ export default function AuthScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="メールアドレス"
-                placeholderTextColor="#374151"
+                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -305,7 +310,7 @@ export default function AuthScreen() {
                 <TextInput
                   style={styles.input}
                   placeholder="パスワード"
-                  placeholderTextColor="#374151"
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                   secureTextEntry
                   value={password}
                   onChangeText={setPassword}
@@ -317,7 +322,7 @@ export default function AuthScreen() {
                 <TextInput
                   style={styles.input}
                   placeholder="パスワード（確認）"
-                  placeholderTextColor="#374151"
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                   secureTextEntry
                   value={password2}
                   onChangeText={setPassword2}
@@ -333,7 +338,7 @@ export default function AuthScreen() {
                 <TextInput
                   style={styles.input}
                   placeholder="ユーザー名"
-                  placeholderTextColor="#374151"
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
                   value={displayName}
                   onChangeText={setDisplayName}
                   maxLength={DISPLAY_NAME_MAX_LENGTH}
@@ -402,7 +407,9 @@ export default function AuthScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
+  return StyleSheet.create({
   safe: { flex: 1, backgroundColor: "#EEF2FF" },
   container: {
     flex: 1,
@@ -425,16 +432,16 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     textAlign: "center",
     marginBottom: 4,
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   subtitle: {
     fontSize: 14,
     textAlign: "center",
     marginBottom: 16,
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   helpText: {
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     fontSize: 12,
     marginBottom: 10,
     lineHeight: 18,
@@ -456,7 +463,7 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     fontSize: 12,
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     textDecorationLine: "underline",
   },
   button: {
@@ -470,7 +477,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   buttonText: {
-    color: "#fff",
+    color: COLORS.ACCENT_TEXT ?? "#FFFFFF",
     fontWeight: "700",
     fontSize: 16,
   },
@@ -481,12 +488,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   info: {
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     marginBottom: 4,
     fontSize: 12,
   },
   noteText: {
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     marginTop: -2,
     marginBottom: 8,
     fontSize: 12,
@@ -500,7 +507,8 @@ const styles = StyleSheet.create({
   },
   switchText: {
     fontSize: 12,
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     textDecorationLine: "underline",
   },
-});
+  });
+}

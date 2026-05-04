@@ -245,7 +245,7 @@ export default function ResonanceHistoryListScreen({ navigation }) {
       <CocolonPressable
         style={styles.card}
         onPress={() => openPieceDetail(item)}
-        accessibilityLabel="共鳴したPieceを開く"
+        accessibilityLabel="共鳴したピースを開く"
       >
         <Text style={styles.itemTitle} numberOfLines={2}>
           {title}
@@ -281,7 +281,7 @@ export default function ResonanceHistoryListScreen({ navigation }) {
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="Piece"
-              accessibilityLabel="Pieceに戻る"
+              accessibilityLabel="ピースに戻る"
             />
           </View>
 
@@ -361,7 +361,7 @@ export default function ResonanceHistoryListScreen({ navigation }) {
             onEndReachedThreshold={0.4}
             onEndReached={loadMore}
             ListEmptyComponent={
-              <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>
+              <Text style={styles.emptyText}>共鳴したピースはまだありません。</Text>
             }
             ListFooterComponent={
               loadingMore ? (

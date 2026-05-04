@@ -47,6 +47,7 @@ export default function NexusEmotionRankingCard({ items = [], loading = false })
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
     card: {
       borderRadius: 18,
@@ -78,7 +79,7 @@ function createStyles(COLORS, ui) {
     placeholderText: {
       fontSize: 12,
       lineHeight: 18,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     row: {
       flexDirection: "row",
@@ -106,7 +107,7 @@ function createStyles(COLORS, ui) {
     },
     valueText: {
       fontSize: 12,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       fontWeight: "700",
       marginLeft: 8,
     },

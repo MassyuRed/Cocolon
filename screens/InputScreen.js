@@ -239,6 +239,29 @@ async function loadInputDraft(userId) {
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
 
+const MEMO_INPUT_INITIAL_HEIGHT = 44;
+const FOCUSED_INPUT_SCROLL_OFFSET = 110;
+
+function normalizeMemoInputContentHeight(height) {
+  const nextHeight = Number(height);
+  if (!Number.isFinite(nextHeight) || nextHeight <= 0) {
+    return MEMO_INPUT_INITIAL_HEIGHT;
+  }
+  return Math.max(MEMO_INPUT_INITIAL_HEIGHT, Math.ceil(nextHeight));
+}
+
+function clampMemoInputVisibleHeight(height, maxHeight) {
+  const maxHeightNumber = Number(maxHeight);
+  const safeMaxHeight = Number.isFinite(maxHeightNumber) && maxHeightNumber > 0
+    ? maxHeightNumber
+    : 520;
+
+  return Math.min(
+    normalizeMemoInputContentHeight(height),
+    Math.max(MEMO_INPUT_INITIAL_HEIGHT, safeMaxHeight)
+  );
+}
+
 // 強度→数値（分析用）。UIには使わない
 const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
 
@@ -331,8 +354,8 @@ const CATEGORY_OPTIONS = Object.freeze([
   "人生",
 ]);
 
-const INPUT_TUTORIAL_STEP_START = 1;
-const INPUT_TUTORIAL_STEP_END = 4;
+const INPUT_TUTORIAL_STEP_START = 2;
+const INPUT_TUTORIAL_STEP_END = 6;
 
 /**
  * Home（InputScreen）
@@ -371,8 +394,6 @@ export default function InputScreen({ navigation, route }) {
     [tutorialDisplayName]
   );
 
-  const isIOS = Platform.OS === "ios";
-
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [memo, setMemo] = useState("");
   const [memoAction, setMemoAction] = useState("");
@@ -382,8 +403,24 @@ export default function InputScreen({ navigation, route }) {
   const [activeField, setActiveField] = useState(null); // "memo" | "memoAction" | null
   const memoInputRef = useRef(null);
   const memoActionInputRef = useRef(null);
-  const [memoContentHeight, setMemoContentHeight] = useState(44);
-  const [memoActionContentHeight, setMemoActionContentHeight] = useState(44);
+  const [memoContentHeight, setMemoContentHeight] = useState(MEMO_INPUT_INITIAL_HEIGHT);
+  const [memoActionContentHeight, setMemoActionContentHeight] = useState(MEMO_INPUT_INITIAL_HEIGHT);
+  const memoRawContentHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
+  const memoActionRawContentHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
+  const memoVisibleHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
+  const memoActionVisibleHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
+
+  const resetMemoInputHeights = useCallback((memoHeight = MEMO_INPUT_INITIAL_HEIGHT, memoActionHeight = MEMO_INPUT_INITIAL_HEIGHT) => {
+    const nextMemoHeight = normalizeMemoInputContentHeight(memoHeight);
+    const nextMemoActionHeight = normalizeMemoInputContentHeight(memoActionHeight);
+
+    memoRawContentHeightRef.current = nextMemoHeight;
+    memoActionRawContentHeightRef.current = nextMemoActionHeight;
+    memoVisibleHeightRef.current = nextMemoHeight;
+    memoActionVisibleHeightRef.current = nextMemoActionHeight;
+    setMemoContentHeight(nextMemoHeight);
+    setMemoActionContentHeight(nextMemoActionHeight);
+  }, []);
 
   const [isSecret, setIsSecret] = useState(false);
   const [sendEmotionNotification, setSendEmotionNotification] = useState(true);
@@ -402,8 +439,7 @@ export default function InputScreen({ navigation, route }) {
     setSelectedCategories([]);
     setShowMemoSection(true);
     setActiveField(null);
-    setMemoContentHeight(44);
-    setMemoActionContentHeight(44);
+    resetMemoInputHeights();
     setIsSecret(false);
     setSendEmotionNotification(true);
     setPiecePreviewVisible(false);
@@ -419,7 +455,7 @@ export default function InputScreen({ navigation, route }) {
     });
     setTutorialNavigateAfterReply(false);
     Keyboard.dismiss();
-  }, []);
+  }, [resetMemoInputHeights]);
 
 // --- Lightweight toast / input feedback modal ---
 const toastTimerRef = useRef(null);
@@ -709,8 +745,11 @@ const { height: windowHeight } = useWindowDimensions();
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
 
+  const shouldApplyTutorialInputSample =
+    isInputTutorialStep && tutorialStep >= 3;
+
   useEffect(() => {
-    if (!isInputTutorialStep) return;
+    if (!shouldApplyTutorialInputSample) return;
 
     setShowMemoSection(true);
     setMemo(TUTORIAL_INPUT_SAMPLE.memo);
@@ -718,11 +757,10 @@ const { height: windowHeight } = useWindowDimensions();
     setSelectedEmotions(TUTORIAL_INPUT_SAMPLE.emotions.map((item) => ({ ...item })));
     setSelectedCategories([...TUTORIAL_INPUT_SAMPLE.categories]);
     setSendEmotionNotification(TUTORIAL_INPUT_SAMPLE.sendEmotionNotification !== false);
-    setMemoContentHeight(110);
-    setMemoActionContentHeight(72);
+    resetMemoInputHeights(110, 72);
     setIsSecret(false);
     setActiveField(null);
-  }, [isInputTutorialStep]);
+  }, [shouldApplyTutorialInputSample, resetMemoInputHeights]);
 
   // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える
   const inputMaxHeight = useMemo(() => {
@@ -738,6 +776,39 @@ const { height: windowHeight } = useWindowDimensions();
     // キーボード未表示時は、画面の大半まで伸ばせるようにする
     return Math.max(260, Math.floor(h * 0.75));
   }, [windowHeight, keyboardInset]);
+
+  const updateMemoInputVisibleHeight = useCallback((field, rawHeight) => {
+    const rawHeightNumber = Number(rawHeight);
+    if (!Number.isFinite(rawHeightNumber) || rawHeightNumber <= 0) {
+      return false;
+    }
+
+    const normalizedRawHeight = normalizeMemoInputContentHeight(rawHeightNumber);
+    const nextVisibleHeight = clampMemoInputVisibleHeight(normalizedRawHeight, inputMaxHeight);
+
+    if (field === "memo") {
+      memoRawContentHeightRef.current = normalizedRawHeight;
+      if (Math.abs(memoVisibleHeightRef.current - nextVisibleHeight) < 1) {
+        return false;
+      }
+      memoVisibleHeightRef.current = nextVisibleHeight;
+      setMemoContentHeight(nextVisibleHeight);
+      return true;
+    }
+
+    memoActionRawContentHeightRef.current = normalizedRawHeight;
+    if (Math.abs(memoActionVisibleHeightRef.current - nextVisibleHeight) < 1) {
+      return false;
+    }
+    memoActionVisibleHeightRef.current = nextVisibleHeight;
+    setMemoActionContentHeight(nextVisibleHeight);
+    return true;
+  }, [inputMaxHeight]);
+
+  useEffect(() => {
+    updateMemoInputVisibleHeight("memo", memoRawContentHeightRef.current);
+    updateMemoInputVisibleHeight("memoAction", memoActionRawContentHeightRef.current);
+  }, [inputMaxHeight, updateMemoInputVisibleHeight]);
 
   const inputDraftData = useMemo(
     () =>
@@ -842,13 +913,12 @@ const { height: windowHeight } = useWindowDimensions();
         restored.selectedCategories.length > 0
     );
     setActiveField(null);
-    setMemoContentHeight(44);
-    setMemoActionContentHeight(44);
+    resetMemoInputHeights();
     Keyboard.dismiss();
     setDraftRestoreModalVisible(false);
     setPendingInputDraft(null);
     showToast("前回の内容を復元しました");
-  }, [pendingInputDraft, showToast]);
+  }, [pendingInputDraft, resetMemoInputHeights, showToast]);
 
   const discardPendingInputDraft = useCallback(async () => {
     setDraftRestoreModalVisible(false);
@@ -866,8 +936,9 @@ const { height: windowHeight } = useWindowDimensions();
   const memoFocusedRef = useRef(false);
   const focusedFieldRef = useRef(null); // "memo" | "memoAction" | null
   const lastFocusTargetRef = useRef(null);
+  const scrollToFocusedInputFrameRef = useRef(null);
 
-  const scrollToFocusedInput = useCallback((extraOffset = 110) => {
+  const scrollToFocusedInput = useCallback((extraOffset = FOCUSED_INPUT_SCROLL_OFFSET) => {
     const sv = scrollRef.current;
     const target = lastFocusTargetRef.current;
     if (!sv || !target) return;
@@ -877,6 +948,17 @@ const { height: windowHeight } = useWindowDimensions();
       // noop
     }
   }, []);
+
+  const scheduleScrollToFocusedInput = useCallback((extraOffset = FOCUSED_INPUT_SCROLL_OFFSET) => {
+    if (scrollToFocusedInputFrameRef.current) {
+      cancelAnimationFrame(scrollToFocusedInputFrameRef.current);
+    }
+
+    scrollToFocusedInputFrameRef.current = requestAnimationFrame(() => {
+      scrollToFocusedInputFrameRef.current = null;
+      scrollToFocusedInput(extraOffset);
+    });
+  }, [scrollToFocusedInput]);
 
   const openField = (field) => {
     registerInputInteraction();
@@ -902,9 +984,7 @@ const { height: windowHeight } = useWindowDimensions();
     const onShow = (e) => {
       const h = e?.endCoordinates?.height ?? 0;
       setKeyboardInset(h);
-      requestAnimationFrame(() => {
-        scrollToFocusedInput();
-      });
+      scheduleScrollToFocusedInput();
     };
 
     const onHide = () => {
@@ -918,7 +998,16 @@ const { height: windowHeight } = useWindowDimensions();
       subShow.remove();
       subHide.remove();
     };
-  }, [scrollToFocusedInput]);
+  }, [scheduleScrollToFocusedInput]);
+
+  useEffect(() => {
+    return () => {
+      if (scrollToFocusedInputFrameRef.current) {
+        cancelAnimationFrame(scrollToFocusedInputFrameRef.current);
+        scrollToFocusedInputFrameRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -1085,13 +1174,13 @@ const { height: windowHeight } = useWindowDimensions();
     if (!isInputTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 1:
-        return memoSectionRef;
-      case 2:
-        return emotionAreaRef;
       case 3:
-        return notificationRef;
+        return memoSectionRef;
       case 4:
+        return emotionAreaRef;
+      case 5:
+        return notificationRef;
+      case 6:
         return pieceButtonRef;
       default:
         return null;
@@ -1102,44 +1191,56 @@ const { height: windowHeight } = useWindowDimensions();
     if (!isInputTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 1:
-        return {
-          step: 1,
-          mode: "info",
-          title: "軽い独り言で大丈夫です",
-          message:
-            "Emlisは1日1回の日記ではなく、書きたいときに書ける場所です。\n\n画面に入っている内容くらいの短い言葉でも大丈夫です。",
-          nextLabel: "次へ",
-          onNext: () => setTutorialStep(2),
-        };
       case 2:
         return {
           step: 2,
           mode: "info",
-          title: "感情とカテゴリを選びます",
+          title: "ホーム画面",
           message:
-            "感情もカテゴリも複数選べます。\n\n今回は、平穏・喜び・不安と、生活・健康・価値観を選んだ状態です。",
-          nextLabel: "次へ",
+            "ホーム画面の説明をします。\n\nここで感情入力をすることができます。\n\n今回はチュートリアルなのでこちらが内容を入力します。",
+          nextLabel: "感情入力へ",
           onNext: () => setTutorialStep(3),
+          disableSpotlight: true,
+          dimOpacity: 0,
         };
       case 3:
         return {
           step: 3,
           mode: "info",
-          title: "感情通知",
+          title: "感情入力",
           message:
-            "感情通知は、入力した感情をフォロー中ユーザーへ通知する設定です。\n\n今回は通知する状態で見せます。",
-          nextLabel: "次へ",
+            "今の気持ちや実際に起こった出来事を言葉で残せます。\n\nここでは入力内容が入った状態を見せます。",
+          nextLabel: "感情とカテゴリへ",
           onNext: () => setTutorialStep(4),
         };
       case 4:
         return {
           step: 4,
-          mode: "action",
-          title: "Pieceを作成します",
+          mode: "info",
+          title: "感情とカテゴリ",
           message:
-            "ラフな独り言を、問いと答えとして読みやすく整えます。",
-          actionHint: "Pieceを作成する を押してください",
+            "感情もカテゴリも複数選べます。\n\n今回は、平穏・喜び・不安と、生活・健康・価値観を選んだ状態です。",
+          nextLabel: "感情通知へ",
+          onNext: () => setTutorialStep(5),
+        };
+      case 5:
+        return {
+          step: 5,
+          mode: "info",
+          title: "感情通知",
+          message:
+            "感情通知は、入力した感情をフォロー中ユーザーへ通知する設定です。\n\n今回は通知する状態で見せます。",
+          nextLabel: "ピース生成へ",
+          onNext: () => setTutorialStep(6),
+        };
+      case 6:
+        return {
+          step: 6,
+          mode: "action",
+          title: "ピースを生成します",
+          message:
+            "あなたの入力を、問いと答えとして読みやすく整えます。",
+          actionHint: "ピースを生成する を押してください",
           cardPlacement: "top",
         };
       default:
@@ -1370,8 +1471,8 @@ const { height: windowHeight } = useWindowDimensions();
     } catch (e) {
       console.warn("InputScreen: previewEmotionPiece failed", e);
       Alert.alert(
-        "Pieceの生成",
-        String(e?.message || "Pieceの生成に失敗しました。")
+        "ピースの生成",
+        String(e?.message || "ピースの生成に失敗しました。")
       );
     } finally {
       setPiecePreviewLoading(false);
@@ -1419,7 +1520,7 @@ const { height: windowHeight } = useWindowDimensions();
       setDraftRestoreModalVisible(false);
       Keyboard.dismiss();
       setTutorialNavigateAfterReply(true);
-      setTutorialStep(5);
+      setTutorialStep(7);
       openInputFeedbackModal({
         commentText: tutorialEmlisReplyText,
         ...inputFeedbackEmotionMeta,
@@ -1446,8 +1547,7 @@ const { height: windowHeight } = useWindowDimensions();
       setSelectedCategories([]);
       setShowMemoSection(true);
       setActiveField(null);
-      setMemoContentHeight(44);
-      setMemoActionContentHeight(44);
+      resetMemoInputHeights();
       setIsSecret(false);
       Keyboard.dismiss();
 
@@ -1467,16 +1567,16 @@ const { height: windowHeight } = useWindowDimensions();
         openInputFeedbackModal({
           commentText: inputFeedbackText,
           ...inputFeedbackEmotionMeta,
-          contextLabel: "Pieceを作成しました",
+          contextLabel: "ピースを生成しました",
         });
       } else {
-        showToast("Pieceを作成しました");
+        showToast("ピースを生成しました");
       }
     } catch (e) {
       console.warn("InputScreen: publishEmotionPiece failed", e);
       Alert.alert(
-        "Pieceの作成",
-        String(e?.message || "Pieceの作成に失敗しました。")
+        "ピースの生成",
+        String(e?.message || "ピースの生成に失敗しました。")
       );
     } finally {
       setPiecePublishLoading(false);
@@ -1489,6 +1589,7 @@ const { height: windowHeight } = useWindowDimensions();
     openInputFeedbackModal,
     piecePreviewPayload?.preview_id,
     piecePublishLoading,
+    resetMemoInputHeights,
     selectedEmotions,
     setTutorialStep,
     showToast,
@@ -1546,8 +1647,7 @@ const { height: windowHeight } = useWindowDimensions();
       setSelectedCategories([]);
       setShowMemoSection(true);
       setActiveField(null);
-      setMemoContentHeight(44);
-      setMemoActionContentHeight(44);
+      resetMemoInputHeights();
       setIsSecret(false);
       Keyboard.dismiss();
 
@@ -1892,23 +1992,18 @@ ${String(error?.message || error)}`
                               flex: 0,
                               width: "100%",
                               height: Math.min(
-                                Math.max(memoContentHeight || 44, 44),
+                                Math.max(memoContentHeight || MEMO_INPUT_INITIAL_HEIGHT, MEMO_INPUT_INITIAL_HEIGHT),
                                 inputMaxHeight
                               ),
                             },
                           ]}
                           placeholder="ここに書いてください。"
-                          {...(isIOS && !isTutorialMode ? { defaultValue: memo } : { value: memo })}
+                          {...(isTutorialMode ? { value: memo } : { defaultValue: memo })}
                           onChangeText={isTutorialMode ? undefined : setMemo}
-                          {...(isIOS && !isTutorialMode
-                            ? {
-                                onChange: (e) =>
-                                  setMemo(e?.nativeEvent?.text ?? ""),
-                              }
-                            : {})}
                           editable={!isTutorialMode}
                           multiline
-                          scrollEnabled
+                          scrollEnabled={memoContentHeight >= inputMaxHeight}
+                          disableFullscreenUI
                           textAlignVertical="top"
                           placeholderTextColor={colors.TEXT_ON_LIGHT}
                           onFocus={(e) => {
@@ -1918,7 +2013,7 @@ ${String(error?.message || error)}`
                               e?.target ?? e?.nativeEvent?.target ?? null;
                             memoFocusedRef.current = true;
                             focusedFieldRef.current = "memo";
-                            requestAnimationFrame(() => scrollToFocusedInput());
+                            scheduleScrollToFocusedInput();
                           }}
                           onBlur={() => {
                             memoFocusedRef.current = false;
@@ -1928,9 +2023,9 @@ ${String(error?.message || error)}`
                           }}
                           onContentSizeChange={(e) => {
                             const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                            if (h) setMemoContentHeight(h);
-                            if (focusedFieldRef.current !== "memo") return;
-                            requestAnimationFrame(() => scrollToFocusedInput());
+                            const didHeightChange = updateMemoInputVisibleHeight("memo", h);
+                            if (!didHeightChange || focusedFieldRef.current !== "memo") return;
+                            scheduleScrollToFocusedInput();
                           }}
                         />
                       </View>
@@ -1986,25 +2081,18 @@ ${String(error?.message || error)}`
                               flex: 0,
                               width: "100%",
                               height: Math.min(
-                                Math.max(memoActionContentHeight || 44, 44),
+                                Math.max(memoActionContentHeight || MEMO_INPUT_INITIAL_HEIGHT, MEMO_INPUT_INITIAL_HEIGHT),
                                 inputMaxHeight
                               ),
                             },
                           ]}
                           placeholder="ここに書いてください。"
-                          {...(isIOS && !isTutorialMode
-                            ? { defaultValue: memoAction }
-                            : { value: memoAction })}
+                          {...(isTutorialMode ? { value: memoAction } : { defaultValue: memoAction })}
                           onChangeText={isTutorialMode ? undefined : setMemoAction}
-                          {...(isIOS && !isTutorialMode
-                            ? {
-                                onChange: (e) =>
-                                  setMemoAction(e?.nativeEvent?.text ?? ""),
-                              }
-                            : {})}
                           editable={!isTutorialMode}
                           multiline
-                          scrollEnabled
+                          scrollEnabled={memoActionContentHeight >= inputMaxHeight}
+                          disableFullscreenUI
                           textAlignVertical="top"
                           placeholderTextColor={colors.TEXT_ON_LIGHT}
                           onFocus={(e) => {
@@ -2014,7 +2102,7 @@ ${String(error?.message || error)}`
                               e?.target ?? e?.nativeEvent?.target ?? null;
                             memoFocusedRef.current = true;
                             focusedFieldRef.current = "memoAction";
-                            requestAnimationFrame(() => scrollToFocusedInput());
+                            scheduleScrollToFocusedInput();
                           }}
                           onBlur={() => {
                             memoFocusedRef.current = false;
@@ -2024,9 +2112,9 @@ ${String(error?.message || error)}`
                           }}
                           onContentSizeChange={(e) => {
                             const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                            if (h) setMemoActionContentHeight(h);
-                            if (focusedFieldRef.current !== "memoAction") return;
-                            requestAnimationFrame(() => scrollToFocusedInput());
+                            const didHeightChange = updateMemoInputVisibleHeight("memoAction", h);
+                            if (!didHeightChange || focusedFieldRef.current !== "memoAction") return;
+                            scheduleScrollToFocusedInput();
                           }}
                         />
                       </View>
@@ -2073,7 +2161,7 @@ ${String(error?.message || error)}`
                   collapsable={false}
                   style={styles.heroEmotionSection}
                 >
-                  <Text style={styles.heroFieldLabel}>感情</Text>
+                  <Text style={styles.heroFieldLabel}>感情選択</Text>
                   <Text style={styles.heroFieldHint}>
                     今の感情を選んでください。複数選択可能です。自己理解は単体選択のみです。
                   </Text>
@@ -2282,9 +2370,9 @@ ${String(error?.message || error)}`
                       onPress={handlePreviewPiece}
                       disabled={!canPreviewPiece}
                       loading={piecePreviewLoading}
-                      accessibilityLabel="Pieceを作成する"
+                      accessibilityLabel="ピースを生成する"
                     >
-                      Pieceを作成する
+                      ピースを生成する
                     </CocolonButton>
                   </View>
 
@@ -2487,7 +2575,7 @@ ${String(error?.message || error)}`
 {tutorialOverlayConfig ? (
   <TutorialOverlay
     visible={!!tutorialOverlayConfig}
-    targetRect={tutorialTargetRect}
+    targetRect={tutorialOverlayConfig.disableSpotlight ? null : tutorialTargetRect}
     title={tutorialOverlayConfig.title}
     message={tutorialOverlayConfig.message}
     step={tutorialOverlayConfig.step}
@@ -2495,11 +2583,13 @@ ${String(error?.message || error)}`
     mode={tutorialOverlayConfig.mode}
     nextLabel={tutorialOverlayConfig.nextLabel}
     onNext={tutorialOverlayConfig.onNext}
-    onTargetPress={tutorialStep === 4 ? handlePreviewPiece : undefined}
+    onTargetPress={tutorialStep === 6 ? handlePreviewPiece : undefined}
     onMetricsChange={setTutorialOverlayMetrics}
     actionHint={tutorialOverlayConfig.actionHint}
     showStepPill={false}
     cardPlacement={tutorialOverlayConfig.cardPlacement}
+    dimOpacity={tutorialOverlayConfig.dimOpacity}
+    blockBackgroundTouches={tutorialOverlayConfig.blockBackgroundTouches !== false}
   />
 ) : null}
 
@@ -2636,7 +2726,7 @@ function createStyles(COLORS, ui) {
       fontSize: 14,
       lineHeight: 20,
       fontWeight: "800",
-      color: "#000000",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     inputTrialPromoButton: {
       flexShrink: 0,
@@ -2686,7 +2776,7 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
-      fontWeight: "700",
+      fontWeight: "400",
       marginBottom: 2,
     },
     accountIconButton: {
@@ -2811,7 +2901,7 @@ function createStyles(COLORS, ui) {
       fontSize: 10,
       lineHeight: 14,
       fontWeight: "800",
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     homeQuickActionMetaAnswered: {
       color: COLORS.TITLE_GOLD,
@@ -2913,7 +3003,7 @@ function createStyles(COLORS, ui) {
       marginTop: 2,
       fontSize: 11,
       lineHeight: 16,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
 
     heroMemoCard: {
@@ -3114,7 +3204,7 @@ function createStyles(COLORS, ui) {
       marginBottom: 10,
       fontSize: 11,
       lineHeight: 16,
-      color: "#000000",
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     categoryGrid: {
       flexDirection: "row",
@@ -3156,7 +3246,7 @@ function createStyles(COLORS, ui) {
       color: COLORS.ACCENT_TEXT,
     },
     categoryChipTextDisabled: {
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     categoryRequiredText: {
       marginTop: 2,
@@ -3203,7 +3293,7 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     collapsedTextPlaceholder: {
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     memoInput: {
       flex: 1,
@@ -3294,7 +3384,7 @@ function createStyles(COLORS, ui) {
     },
     secretToggleText: {
       fontSize: 12,
-      color: "#374151",
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       fontWeight: "600",
     },
     secretToggleTextOn: {
@@ -3304,7 +3394,7 @@ function createStyles(COLORS, ui) {
       marginTop: 6,
       fontSize: 11,
       lineHeight: 16,
-      color: "#374151",
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     /** goldButton（共通） */
     buttonWrapper: {
@@ -3326,7 +3416,7 @@ function createStyles(COLORS, ui) {
     memoToggleText: {
       fontSize: 13,
       fontWeight: "800",
-      color: "#000000",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     goldButton: {
       paddingVertical: 13,
@@ -3416,7 +3506,7 @@ function createStyles(COLORS, ui) {
       fontSize: 14,
       lineHeight: 22,
       fontWeight: "600",
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       textAlign: "center",
     },
     draftRestoreInfoCard: {

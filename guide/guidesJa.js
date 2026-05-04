@@ -41,140 +41,175 @@ export const guidesJa = Object.freeze({
   home: {
     title: "ホーム",
     summary:
-      "今の感情や気づきを記録する入り口です。感情の流れを残し、自分をあとから振り返りやすくします。",
+      "思考・行動・感情を記録し、Emlisの返答やピース生成につなげる入り口です。",
     relatedTerms: [
       "emotion_input",
+      "thought_content",
+      "action_content",
+      "content_category",
       "self_insight_mode",
-      "secret_memo",
       "emotion_notifications",
+      "piece",
       "today_question",
+      "emlis_reply",
     ],
     blocks: [
       {
         type: "p",
         text:
-          "Home は、[[term:emotion_input|感情入力]]を行う場所です。今この瞬間の気持ちを残すことで、あとから自分の流れを振り返りやすくなります。",
+          "Home は、今の状態を [[term:emotion_input|感情入力]] として残す場所です。[[term:thought_content|思考内容]] と [[term:action_content|行動内容]] を分けて書けるので、頭の中で考えていることと、実際に起きたことを整理しながら記録できます。",
       },
       {
         type: "h2",
-        text: "できること",
+        text: "入力する内容",
       },
       {
         type: "ul",
         items: [
-          "感情とその強さを選び、その時点の状態を記録する",
-          "必要に応じてメモを書き、内容を [[term:secret_memo|シークレットメモ]] として扱う",
-          "[[term:today_question|今日の問い]] を確認し、その日の問いに答える",
+          "思考内容には、考えていること・感じたこと・解釈したことを書きます。",
+          "行動内容には、実際に起きた出来事・自分がしたこと・その結果を書きます。",
+          "感情は複数選択できます。[[term:self_insight_mode|自己理解]] は他の感情と同時に選ばず、単体で使います。",
+          "思考内容または行動内容を書いた場合は、近い [[term:content_category|内容カテゴリ]] を1つ以上選びます。",
         ],
       },
       {
         type: "h2",
-        text: "使い分け",
+        text: "保存とピース生成",
       },
       {
-        type: "p",
-        text:
-          "気づきや発見を言葉で整理したいときは [[term:self_insight_mode|自己理解モード]] が向いています。通常の感情入力は「今の気持ち」を素早く残すためのもの、自己理解モードは「自分について分かったこと」を丁寧に残すためのものです。",
+        type: "ul",
+        items: [
+          "「この内容でOK」を押すと入力が保存され、[[term:emlis_reply|Emlisからの返答]] を確認できます。",
+          "「ピースを生成する」を押すと、入力内容から公開用の [[term:piece|ピース]] を作る流れに進みます。",
+          "「[[term:emotion_notifications|感情通知を送らない]]」をオンにすると、その入力はフォロー中ユーザーへ通知されません。",
+          "[[term:today_question|今日の問い]] と入力履歴も、Home から確認できます。",
+        ],
       },
       {
         type: "note",
         text:
-          "感情通知の共有を抑えたいときは「[[term:emotion_notifications|感情通知を送らない]]」を切り替えて使います。",
+          "長文でなくても大丈夫です。短い言葉でも、思考・行動・感情・カテゴリがそろうほど、後から分析やピースに活かしやすくなります。",
       },
     ],
   },
   analysis: {
     title: "分析",
     summary:
-      "入力した内容やレポートを振り返る場所です。過去の記録を見直し、自分の傾向を確認できます。",
+      "感情分析と自己分析を切り替えながら、最新レポートと履歴を確認する場所です。",
     relatedTerms: [
       "analysis",
+      "emotion_analysis",
+      "analysis_report",
+      "self_analysis",
       "emotion_input_history",
       "today_question_history",
-      "analysis_report",
     ],
     blocks: [
       {
         type: "p",
         text:
-          "[[term:analysis|Analysis]] は、入力した自己情報や分析レポートを見返すための場所です。日々の積み重ねを後から整理したいときに使います。",
+          "分析画面では、Home に積み重なった入力を [[term:emotion_analysis|感情分析]] と [[term:self_analysis|自己分析]] に分けて確認できます。最新の内容がある場合は、画面の中に直接レポートが表示されます。",
       },
       {
         type: "h2",
-        text: "できること",
+        text: "感情分析",
       },
       {
         type: "ul",
         items: [
-          "[[term:emotion_input_history|感情入力履歴]] を確認し、過去の入力を検索する",
-          "[[term:today_question_history|今日の問い履歴]] を開き、その日に答えた内容を見返す",
-          "[[term:analysis_report|分析レポート]] を読み、入力傾向から見える特徴を確認する",
+          "日報・週報・月報を切り替えて、期間ごとの [[term:analysis_report|分析レポート]] を確認できます。",
+          "最新レポートがまだない場合は、入力後にレポートが作成されるとこの画面に表示されます。",
+          "各タブの「履歴を見る」から、過去の日報・週報・月報を見返せます。",
         ],
       },
       {
         type: "h2",
-        text: "見方のコツ",
+        text: "自己分析",
       },
       {
-        type: "p",
-        text:
-          "履歴だけでも流れは追えますが、メモも一緒に残していくと [[term:analysis_report|分析レポート]] の密度が上がり、振り返りの解像度も高くなります。",
+        type: "ul",
+        items: [
+          "自己分析では、入力の積み重ねから見える自分の構造を確認できます。",
+          "自己分析レポートの本文閲覧は、Plusプラン以上で利用できます。",
+          "自己分析の履歴から、過去の自己分析レポートも見返せます。",
+        ],
       },
       {
         type: "note",
         text:
-          "「あとで見返す場所」という感覚で使うと、Home で行った入力と役割の違いが分かりやすくなります。",
+          "画面上部の入力状況では、今日・今週・今月の入力回数を確認できます。[[term:today_question_history|今日の問い履歴]] や [[term:emotion_input_history|入力履歴]] も、振り返りに使えます。",
       },
     ],
   },
   piece: {
     title: "ピース",
     summary:
-      "Pieceを読んだり反応を見たりする場所です。公開された断片を通じて、自分や他者への理解を深めます。",
+      "投稿・感情通知・おすすめ・履歴を切り替えて、ピースとフォロー中ユーザーの流れを見る場所です。",
     relatedTerms: [
       "piece_screen",
       "piece",
       "kyomei",
+      "follow",
+      "emotion_log",
+      "emotion_notifications",
       "reaction_history",
+      "private_account",
     ],
     blocks: [
       {
         type: "p",
         text:
-          "[[term:piece_screen|Piece画面]] は、公開された [[term:piece|Piece]] や関連する反応を通じて、自分や他者を立体的に見る場所です。読む・共鳴する流れを通して理解を深めていきます。",
+          "ピース画面は、公開された [[term:piece|ピース]] と [[term:follow|フォロー機能]] を中心に使う場所です。自分やフォロー中ユーザーの投稿を読み、必要に応じて [[term:kyomei|共鳴]] できます。",
       },
       {
         type: "h2",
-        text: "できること",
+        text: "4つのタブ",
       },
       {
         type: "ul",
         items: [
-          "自分やフォロー中ユーザーの [[term:piece|Piece]] を読む",
-          "内容に対して [[term:kyomei|共鳴]] に共鳴し、反応を残す",
-          "受け取った反応や自分の反応を [[term:reaction_history|履歴]] で確認する",
+          "投稿では、自分とフォロー中ユーザーのピースを一覧で確認できます。",
+          "[[term:emotion_log|感情通知]] では、フォロー中ユーザーが入力した感情の流れを確認できます。",
+          "おすすめでは、フォロー候補のユーザーを確認できます。",
+          "[[term:reaction_history|履歴]] では、自分が共鳴したピースを新しい順・古い順で見返せます。",
         ],
       },
       {
         type: "h2",
-        text: "使い方のイメージ",
+        text: "フォロー機能",
       },
       {
-        type: "p",
-        text:
-          "Home や [[term:analysis|Analysis]] に蓄積された情報が土台になり、Piece画面ではそれを Piece や反応の流れとして立体的に扱います。読むほど、自分と他者の見え方がはっきりしていきます。",
+        type: "ul",
+        items: [
+          "ユーザーをフォローすると、そのユーザーのピースや感情通知を見やすくなります。",
+          "右上の人アイコンから、自分のフォローリストを開けます。",
+          "フォロー中ユーザーごとに、感情通知のON/OFFを切り替えられます。",
+          "アカウントを [[term:private_account|非公開]] にすると、フォロー時に承認が必要になり、おすすめにも表示されなくなります。",
+        ],
+      },
+      {
+        type: "h2",
+        text: "表示の切り替え",
+      },
+      {
+        type: "ul",
+        items: [
+          "投稿タブでは、表示ユーザーを「自分 + フォロー中」「自分のみ」「特定のフォロー中ユーザー」から選べます。",
+          "投稿は新しい順・古い順、履歴も新しい順・古い順で表示を切り替えられます。",
+          "右上の更新ボタンで、ピース・感情通知・おすすめ・履歴を再読み込みできます。",
+        ],
       },
       {
         type: "note",
         text:
-          "Piece画面は、Home で作成された Piece を読み、反応しながら理解を深める場所です。",
+          "感情通知に表示されるのは主に感情と強さです。メモ本文がそのまま表示されるわけではありません。共有したくない入力は、Home の「[[term:emotion_notifications|感情通知を送らない]]」で調整できます。",
       },
     ],
   },
   emotionlog: {
-    title: "感情ログ",
+    title: "感情通知",
     summary:
-      "フォロー中ユーザーの感情入力を通知とログで確認する場所です。言葉を介しすぎずに、感情の流れを受け取れます。",
+      "感情通知は、ピース画面のタブとしてフォロー中ユーザーの感情の流れを確認する機能です。",
     relatedTerms: [
       "follow",
       "emotion_log",
@@ -185,7 +220,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "この画面では、[[term:follow|フォロー]]しているユーザーが行った [[term:emotion_input|感情入力]] の情報を、[[term:emotion_log|感情ログ]] として確認できます。",
+          "[[term:emotion_log|感情通知]] では、[[term:follow|フォロー機能]] でつながっているユーザーの [[term:emotion_input|感情入力]] の流れを確認できます。現在は、ピース画面の「感情通知」タブにまとまっています。",
       },
       {
         type: "h2",
@@ -194,9 +229,9 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "フォロー中ユーザーの感情入力を通知で受け取る",
-          "[[term:emotion_log|感情ログ]] で、感情入力の流れを確認する",
-          "フォロー一覧で、ユーザーごとに感情通知の受信を切り替える",
+          "フォロー中ユーザーの感情入力を通知として受け取る",
+          "ピース画面の感情通知タブで、感情の流れを確認する",
+          "フォローリストで、ユーザーごとに感情通知の受信を切り替える",
         ],
       },
       {
@@ -206,7 +241,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "通知やログに共有されるのは主に感情選択の情報で、メモの本文までそのまま渡るわけではありません。必要以上に言語化せず、感情だけを受け取れるのが特徴です。",
+          "通知に共有されるのは主に感情選択の情報で、メモの本文までそのまま渡るわけではありません。必要以上に言語化せず、感情だけを受け取れるのが特徴です。",
       },
       {
         type: "note",
@@ -218,19 +253,37 @@ export const guidesJa = Object.freeze({
   ranking: {
     title: "ランキング",
     summary:
-      "ランキングを閲覧する画面です。上位ユーザーやアクティブなユーザーを見つけることができます。",
-    relatedTerms: [],
+      "複数のランキングをカードで確認し、上位プレビューから全表示へ進める画面です。",
+    relatedTerms: ["ranking_preview", "kyomei", "private_account"],
     blocks: [
       {
         type: "p",
         text:
-          "Ranking は、アプリ内での活動状況を一覧で見る場所です。上位ユーザーを見つけたいときに使います。",
+          "Ranking は、アプリ内の活動状況をランキングカードで確認する場所です。各カードには上位の [[term:ranking_preview|プレビュー]] が表示され、「全表示」から詳細画面へ進めます。",
+      },
+      {
+        type: "h2",
+        text: "見られるランキング",
       },
       {
         type: "ul",
         items: [
-          "複数のランキング項目を切り替えて閲覧する",
-          "気になるユーザーを見つけてアカウントページへ進む",
+          "連続ログイン日数ランキング",
+          "入力数ランキング",
+          "入力文字数ランキング",
+          "[[term:kyomei|共鳴]] 数ランキング",
+        ],
+      },
+      {
+        type: "h2",
+        text: "表示の見方",
+      },
+      {
+        type: "ul",
+        items: [
+          "各カードでは、上位ユーザー・順位・数値をまとめて確認できます。",
+          "ユーザーが [[term:private_account|非公開]] の場合は、名前の横に盾アイコンが表示されます。",
+          "集計の区切りは日本時間（JST）0:00です。",
         ],
       },
     ],

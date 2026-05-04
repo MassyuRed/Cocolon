@@ -234,6 +234,7 @@ export default function EmotionRankingScreen({ navigation }) {
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
     container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
     scrollContainer: {
@@ -264,7 +265,7 @@ function createStyles(COLORS, ui) {
     backText: {
       marginLeft: 2,
       fontSize: 12,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       fontWeight: "600",
     },
 
@@ -355,7 +356,7 @@ function createStyles(COLORS, ui) {
     rowSub: {
       marginTop: 2,
       fontSize: 11,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     rowRight: {
       fontSize: 13,
@@ -365,7 +366,7 @@ function createStyles(COLORS, ui) {
     },
 
     errorText: { color: "#B91C1C" },
-    emptyText: { color: COLORS.TEXT_SUBTLE },
+    emptyText: { color: text.description ?? COLORS.TEXT_SUBTLE },
 
     reloadBtn: {
       marginTop: 6,

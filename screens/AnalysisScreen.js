@@ -71,7 +71,7 @@ import {
 const PANEL_MIN_HEIGHT = 690;
 
 const ANALYSIS_TUTORIAL_STEP_START = 7;
-const ANALYSIS_TUTORIAL_STEP_END = 10;
+const ANALYSIS_TUTORIAL_STEP_END = 11;
 
 const SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
 const SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
@@ -260,6 +260,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   const analysisTitleRef = useRef(null);
   const analysisEmotionRef = useRef(null);
   const analysisSelfStructureRef = useRef(null);
+  const analysisReportRef = useRef(null);
+  const analysisSelfReportRef = useRef(null);
   const analysisGuideRef = useRef(null);
 
 
@@ -371,14 +373,12 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     if (!isAnalysisTutorialVisible) return null;
 
     switch (tutorialStep) {
-      case 7:
-        return analysisTitleRef;
       case 8:
       case 9:
-        return analysisEmotionRef;
       case 10:
-        return analysisSelfStructureRef;
-
+        return analysisReportRef;
+      case 11:
+        return analysisSelfReportRef;
       default:
         return null;
     }
@@ -392,46 +392,63 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         return {
           step: 7,
           mode: "info",
-          title: "日報",
+          title: "分析画面",
           message:
-            `入力が続くと、日報・週報・月報として振り返れます。
-
-まずは日報です。`,
-          nextLabel: "週報を見る",
+            "分析画面の説明をします。\n\nここでは分析レポートを閲覧することができます。",
+          nextLabel: "日報へ",
           onNext: () => setTutorialStep(8),
+          disableSpotlight: true,
+          dimOpacity: 0,
         };
       case 8:
         return {
           step: 8,
           mode: "info",
-          title: "週報",
+          title: "日報",
           message:
-            "週報では、1週間分の感情入力をもとにした振り返りを見られます。",
-          nextLabel: "月報を見る",
+            "日報では、その日の感情入力をもとにした振り返りを見られます。",
+          nextLabel: "週報を見る",
           onNext: () => setTutorialStep(9),
+          disableSpotlight: true,
+          dimOpacity: 0,
+          blockBackgroundTouches: false,
         };
       case 9:
         return {
           step: 9,
           mode: "info",
-          title: "月報",
+          title: "週報",
           message:
-            "月報では、感情やカテゴリの流れをもう少し長い期間で振り返れます。",
-          nextLabel: "自己分析へ",
+            "週報では、1週間分の感情入力をもとにした振り返りを見られます。",
+          nextLabel: "月報を見る",
           onNext: () => setTutorialStep(10),
+          disableSpotlight: true,
+          dimOpacity: 0,
+          blockBackgroundTouches: false,
         };
       case 10:
         return {
           step: 10,
           mode: "info",
+          title: "月報",
+          message:
+            "月報では、感情やカテゴリの流れをもう少し長い期間で振り返れます。",
+          nextLabel: "自己分析へ",
+          onNext: () => setTutorialStep(11),
+          disableSpotlight: true,
+          dimOpacity: 0,
+          blockBackgroundTouches: false,
+        };
+      case 11:
+        return {
+          step: 11,
+          mode: "info",
           title: "自己分析レポート",
           message:
-            `自己分析レポートは説明だけを表示します。
-
-内容はサブスク加入後に閲覧できます。次はPiece閲覧画面へ進みます。`,
-          nextLabel: "Pieceへ",
+            "自己分析レポートでは、日々の感情入力をもとに、自分の考え方や感情の傾向をより深く振り返ることができます。",
+          nextLabel: "ピース画面へ",
           onNext: () => {
-            setTutorialStep(11);
+            setTutorialStep(12);
             requestAnimationFrame(() => {
               try {
                 const parent =
@@ -453,6 +470,9 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
               }
             });
           },
+          cardPlacement: "bottom",
+          disableSpotlight: true,
+          dimOpacity: 0,
         };
       default:
         return null;
@@ -460,7 +480,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   }, [isAnalysisTutorialVisible, tutorialStep, setTutorialStep, navigation]);
 
   const syncTutorialTargetRect = useCallback(async () => {
-    if (!isAnalysisTutorialVisible) {
+    if (!isAnalysisTutorialVisible || tutorialOverlayConfig?.disableSpotlight) {
       return null;
     }
 
@@ -490,6 +510,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     safeInsets,
     tutorialStep,
     tutorialOverlayConfig?.cardPlacement,
+    tutorialOverlayConfig?.disableSpotlight,
     tutorialOverlayMetrics,
     windowHeight,
   ]);
@@ -1155,7 +1176,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       // no-op
     }
 
-    Alert.alert("移動できませんでした", "Pieceを開けませんでした。もう一度お試しください。");
+    Alert.alert("移動できませんでした", "ピースを開けませんでした。もう一度お試しください。");
   }, [navigation]);
 
   // Cocolonガイド（Analysis）
@@ -1351,6 +1372,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
               titleRef: analysisTitleRef,
               emotionRef: analysisEmotionRef,
               selfStructureRef: analysisSelfStructureRef,
+              reportRef: analysisReportRef,
+              selfReportRef: analysisSelfReportRef,
               guideRef: analysisGuideRef,
             }}
             onOpenGuide={openGuide}
@@ -1396,7 +1419,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       {tutorialOverlayConfig ? (
         <TutorialOverlay
           visible={!!tutorialOverlayConfig}
-          targetRect={tutorialTargetRect}
+          targetRect={tutorialOverlayConfig.disableSpotlight ? null : tutorialTargetRect}
           title={tutorialOverlayConfig.title}
           message={tutorialOverlayConfig.message}
           step={tutorialOverlayConfig.step}
@@ -1408,6 +1431,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
           showStepPill={false}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement || "bottom"}
+          dimOpacity={tutorialOverlayConfig.dimOpacity}
+          blockBackgroundTouches={tutorialOverlayConfig.blockBackgroundTouches !== false}
         />
       ) : null}
     </View>
@@ -1964,7 +1989,7 @@ function createStyles(COLORS, ui) {
     monthlySummaryText: {
       marginTop: 8,
       fontSize: font.body ?? 13,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       opacity: 0.9,
     },
     dashboardDivider: {
@@ -2031,11 +2056,11 @@ function createStyles(COLORS, ui) {
     },
     backText: {
       marginLeft: 2,
-      color: "#374151",
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       fontSize: 13,
       fontWeight: "600",
     },
-    reportTitle: { fontSize: 16, fontWeight: "700", color: "#111827" },
+    reportTitle: { fontSize: 16, fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
     error: { padding: 12, color: "#B91C1C" },
 
     summaryCard: {
@@ -2049,10 +2074,10 @@ function createStyles(COLORS, ui) {
     },
     summaryTitle: {
       fontWeight: "700",
-      color: "#111827",
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
-    summaryItem: { color: "#374151", marginBottom: 2 },
+    summaryItem: { color: text.description ?? COLORS.TEXT_SUBTLE, marginBottom: 2 },
 
     row: {
       paddingHorizontal: 12,
@@ -2060,9 +2085,9 @@ function createStyles(COLORS, ui) {
       borderBottomWidth: 1,
       borderColor: "#EEE",
     },
-    dateText: { fontWeight: "700", color: "#111827", marginBottom: 4 },
-    emotionsText: { color: "#374151" },
-    memoText: { color: "#374151", marginTop: 4, fontStyle: "italic" },
+    dateText: { fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 4 },
+    emotionsText: { color: text.description ?? COLORS.TEXT_SUBTLE },
+    memoText: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4, fontStyle: "italic" },
   }, ui));
 }
 

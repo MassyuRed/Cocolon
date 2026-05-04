@@ -287,7 +287,7 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
       .filter((item) => String(item?.owner_user_id || "") !== TUTORIAL_SELF_USER_ID)
       .map((item) => ({
         user_id: String(item?.owner_user_id || ""),
-        display_name: String(item?.display_name || "模擬ユーザー"),
+        display_name: String(item?.display_name || "User"),
       }))
       .filter((item) => {
         if (!item.user_id || seen.has(item.user_id)) return false;
@@ -1612,7 +1612,7 @@ useEffect(() => {
           tutorial_my_resonance: nextResonance,
         }));
         closeResonanceModal();
-        Alert.alert("チュートリアルに記録しました", "この共鳴はチュートリアル用の記録です。");
+        Alert.alert("共鳴しました", "この共鳴を記録しました。");
         return;
       }
 
@@ -1890,11 +1890,11 @@ useEffect(() => {
         <View style={styles.qnaIntroCard}>
           <Text style={styles.qnaIntroTitle}>ピース</Text>
           <Text style={styles.qnaIntroText}>
-            見たいユーザーを選び、Pieceを表示してください。
+            見たいユーザーを選び、ピースを表示してください。
           </Text>
           {isTutorialMode ? (
             <Text style={styles.tierHintText}>
-              まずは自分のPieceを確認し、その後にUserへ切り替えると「他ユーザーのPieceも閲覧できる」流れが分かります。
+              まずは自分のピースを確認し、その後にUserへ切り替えると「他ユーザーのピースも閲覧できる」流れが分かります。
             </Text>
           ) : null}
 
@@ -1932,7 +1932,7 @@ useEffect(() => {
                   color="#FFFFFF"
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.goldButtonText}>Pieceを表示</Text>
+                <Text style={styles.goldButtonText}>ピースを表示</Text>
               </View>
             </CocolonButton>
           </View>
@@ -2177,7 +2177,7 @@ useEffect(() => {
             }
             targetRect={tutorialPickUserRect}
             title="Userを選択"
-            message="Userを選択して、Pieceを見てみましょう。"
+            message="Userを選択して、ピースを見てみましょう。"
             step={tutorialStep}
             totalSteps={TUTORIAL_TOTAL_STEPS}
             mode="action"
@@ -2300,8 +2300,8 @@ useEffect(() => {
               <View style={styles.modalEmpty}>
                 <Text style={styles.modalEmptyText}>
                   {isTutorialMode
-                    ? "まだチュートリアルPieceがありません。\n先にPiece画面で回答を作成してください。"
-                    : 'まだ表示できるPieceがありません。\n入力内容が蓄積されるとここに表示されます。'}
+                    ? "まだチュートリアルピースがありません。\n先にピース画面で回答を作成してください。"
+                    : 'まだ表示できるピースがありません。\n入力内容が蓄積されるとここに表示されます。'}
                 </Text>
               </View>
             )}
@@ -2337,7 +2337,7 @@ useEffect(() => {
                   <Text style={styles.inlineLoadingText}>共鳴を解除中…</Text>
                 </View>
               ) : null}
-              <Text style={styles.modalDescText}>このPieceのどこに、どんなふうに響きましたか？</Text>
+              <Text style={styles.modalDescText}>このピースのどこに、どんなふうに響きましたか？</Text>
 
               <View style={{ marginTop: 6 }}>
                 {(ECHO_STRENGTH_OPTIONS || []).map((opt) => {
@@ -2545,17 +2545,17 @@ useEffect(() => {
         targetRect={tutorialTargetRect}
         title={
           tutorialStep === STEP_PIECES_SELF_VIEW
-            ? "自分のPiece"
+            ? "自分のピース"
             : !activeViewedUserId
             ? "Userへ切り替え"
-            : "UserのPiece"
+            : "Userのピース"
         }
         message={
           tutorialStep === STEP_PIECES_SELF_VIEW
-            ? "先ほどの入力から整えられた、自分のPieceです。ラフな独り言が読みやすい文章になっています。"
+            ? "先ほどの入力から整えられた、自分のピースです。問いと答えとして、読みやすく整えています。"
             : !activeViewedUserId
             ? "『対象：自分』を押して、Userを選んでください。"
-            : "フォロー中ユーザーのPieceはこのように閲覧できます。\n\n感情通知やランキングなどもありますが、チュートリアル後にご自身で確認してみてください。"
+            : "フォロー中ユーザーのピースはこのように閲覧できます。\n\n感情通知やランキングなどもありますが、チュートリアル後にご自身で確認してみてください。"
         }
         step={tutorialStep}
         totalSteps={TUTORIAL_TOTAL_STEPS}
@@ -2798,7 +2798,7 @@ function createStyles(COLORS, ui) {
     recoUserSub: {
       marginTop: 2,
       fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     recoEmptyText: {
       marginTop: 8,
@@ -2877,7 +2877,7 @@ function createStyles(COLORS, ui) {
     tierHintText: {
       marginTop: 8,
       fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       textAlign: "center",
     },
 
@@ -3032,7 +3032,7 @@ function createStyles(COLORS, ui) {
     choiceSub: {
       fontSize: 11,
       fontWeight: "900",
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     choiceSubActive: {
       color: COLORS.TITLE_GOLD,
@@ -3082,7 +3082,7 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     collapsedTextPlaceholder: {
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     memoInput: {
       flex: 1,

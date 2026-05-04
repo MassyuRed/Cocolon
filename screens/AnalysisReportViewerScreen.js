@@ -749,6 +749,7 @@ export default function AnalysisReportViewerScreen({
   onOpenSubscription, // ✅ Analysis paywall CTA（SubscriptionSelectへ）
   embedded = false,
   hideHeader = false,
+  disableActions = false,
   onMarkedRead,
 }) {
   // 🎨 theme
@@ -820,13 +821,13 @@ export default function AnalysisReportViewerScreen({
       headerTitle: { color: colors.TEXT_ON_LIGHT },
 
       pdfText: { color: colors.TEXT_ON_LIGHT },
-      range: { color: colors.TEXT_SUBTLE },
+      range: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
 
       // ScrollView の余白部分まで黒くする（内容が短いと白が見えるのを防止）
       body: { backgroundColor: colors.BG_SILVER, flexGrow: 1 },
 
       p: { color: colors.TEXT_ON_LIGHT },
-      empty: { color: colors.TEXT_SUBTLE },
+      empty: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
 
       // chart
       chartCard: {
@@ -847,20 +848,20 @@ export default function AnalysisReportViewerScreen({
       paywallBtnText: { color: colors.ACCENT_TEXT },
       paywallLead: { color: colors.TEXT_ON_LIGHT },
       paywallBodyStrong: { color: colors.TEXT_ON_LIGHT },
-      paywallNote: { color: colors.TEXT_SUBTLE },
+      paywallNote: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
       paywallTrialBadge: {
         backgroundColor: colors.FIELD_BG || colors.PANEL_BG || colors.BG_SILVER,
         borderColor: colors.BORDER_GOLD,
       },
       paywallTrialBadgeText: { color: colors.TITLE_GOLD || colors.TEXT_ON_LIGHT },
       paywallTrialHeadline: { color: colors.TITLE_GOLD || colors.TEXT_ON_LIGHT },
-      gridLabel: { color: colors.TEXT_SUBTLE },
+      gridLabel: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
       gridDivider: { backgroundColor: colors.CARD_BORDER },
-      colLabel: { color: colors.TEXT_SUBTLE },
+      colLabel: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
       errorText: { color: "#FCA5A5" },
-      emptyText: { color: colors.TEXT_SUBTLE },
+      emptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
     };
-  }, [isDark, colors]);
+  }, [isDark, colors, ui]);
 
   const title = report?.title || "Report";
   const reportType = report?.report_type || "";
@@ -1333,7 +1334,7 @@ const deepPatternSectionTitle = useMemo(() => {
                   <View style={{ padding: 16 }}>
                     <Text
                       style={[
-                        { fontSize: ui?.font?.sectionLabel ?? 14, color: "#6B7280" },
+                        { fontSize: ui?.font?.sectionLabel ?? 14, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
                         isDark && themed.emptyText,
                       ]}
                     >
@@ -1824,7 +1825,9 @@ const deepPatternSectionTitle = useMemo(() => {
             {!tierLoading ? (
               <TouchableOpacity
                 style={[styles.paywallBtn, themed.paywallBtn]}
+                disabled={disableActions}
                 onPress={() => {
+                  if (disableActions) return;
                   if (typeof onOpenSubscription === "function") {
                     try {
                       onOpenSubscription?.();
@@ -1838,7 +1841,7 @@ const deepPatternSectionTitle = useMemo(() => {
                     "加入画面を開けませんでした。もう一度お試しください。"
                   );
                 }}
-                activeOpacity={0.85}
+                activeOpacity={disableActions ? 1 : 0.85}
               >
                 <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
                   {standardUpgradeCardCopy.ctaLabel}
@@ -1849,7 +1852,7 @@ const deepPatternSectionTitle = useMemo(() => {
                   color={
                     isDark
                       ? colors.ACCENT_TEXT || colors.TEXT_ON_LIGHT
-                      : "#111827"
+                      : ui?.text?.accentOnButton ?? colors.ACCENT_TEXT
                   }
                 />
               </TouchableOpacity>
@@ -1912,7 +1915,7 @@ const deepPatternSectionTitle = useMemo(() => {
               <Ionicons
                 name="download-outline"
                 size={18}
-                color={isDark ? colors.TEXT_ON_LIGHT : "#111827"}
+                color={ui?.text?.primary ?? colors.TEXT_ON_LIGHT}
               />
               <Text style={[styles.pdfText, themed.pdfText]}>PDF</Text>
             </TouchableOpacity>
@@ -1937,6 +1940,7 @@ const deepPatternSectionTitle = useMemo(() => {
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
 
@@ -1951,13 +1955,13 @@ function createStyles(COLORS, ui) {
     justifyContent: "space-between",
   },
   backBtn: { flexDirection: "row", alignItems: "center", width: 70 },
-  backText: { marginLeft: 2, color: "#374151", fontSize: 13, fontWeight: "600" },
+  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
   headerTitle: {
     flex: 1,
     marginHorizontal: 10,
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     textAlign: "center",
   },
   embeddedHeader: {
@@ -1968,7 +1972,7 @@ function createStyles(COLORS, ui) {
   embeddedTitle: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
 
   pdfBtn: {
@@ -1977,21 +1981,21 @@ function createStyles(COLORS, ui) {
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  pdfText: { marginLeft: 4, fontSize: 12, color: "#111827", fontWeight: "700" },
+  pdfText: { marginLeft: 4, fontSize: 12, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
 
   range: {
     paddingHorizontal: 12,
     paddingTop: 8,
     paddingBottom: 2,
-    color: "#6B7280",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     fontSize: 12,
   },
 
   body: { paddingHorizontal: 14, paddingVertical: 12, paddingBottom: 24 },
 
   // text
-  p: { fontSize: 14, lineHeight: 20, color: "#111827" },
-  empty: { padding: 16, color: "#6B7280" },
+  p: { fontSize: 14, lineHeight: 20, color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  empty: { padding: 16, color: text.description ?? COLORS.TEXT_SUBTLE },
 
   // paywall CTA
   paywallBtn: {
@@ -2008,27 +2012,27 @@ function createStyles(COLORS, ui) {
   paywallBtnText: {
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     marginRight: 2,
   },
   paywallLead: {
     fontSize: 18,
     lineHeight: 25,
     fontWeight: "900",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   paywallBodyStrong: {
     marginTop: 10,
     fontSize: 14,
     lineHeight: 21,
     fontWeight: "700",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   paywallNote: {
     marginTop: 8,
     fontSize: 13,
     lineHeight: 19,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   paywallTrialBadge: {
     alignSelf: "flex-start",
@@ -2061,7 +2065,7 @@ function createStyles(COLORS, ui) {
     padding: 12,
     marginBottom: 14,
   },
-  chartTitle: { fontWeight: "700", color: "#111827", marginBottom: 8 },
+  chartTitle: { fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 8 },
 
   legendRow: { flexDirection: "row", flexWrap: "wrap", marginBottom: 6 },
   legendItem: {
@@ -2071,7 +2075,7 @@ function createStyles(COLORS, ui) {
     marginBottom: 6,
   },
   legendDot: { width: 10, height: 10, borderRadius: 5, marginRight: 6 },
-  legendText: { color: "#4B5563", fontSize: 12 },
+  legendText: { color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 12 },
 
   chartArea: {
     borderWidth: 1,
@@ -2091,7 +2095,7 @@ function createStyles(COLORS, ui) {
     justifyContent: "space-between",
   },
   gridLine: { flexDirection: "row", alignItems: "center" },
-  gridLabel: { width: 26, fontSize: 10, color: "#9CA3AF" },
+  gridLabel: { width: 26, fontSize: 10, color: text.subtle ?? COLORS.TEXT_SUBTLE },
   gridDivider: { flex: 1, height: 1, backgroundColor: "#F3F4F6" },
 
   chartError: { marginTop: 4, marginBottom: 6, fontSize: 12, color: "#B91C1C" },
@@ -2106,7 +2110,7 @@ function createStyles(COLORS, ui) {
   },
   colWrapWeekly: { width: 38, alignItems: "center", marginHorizontal: 2 },
   colStackWeekly: { width: 22, justifyContent: "flex-end", alignItems: "stretch" },
-  colLabelWeekly: { marginTop: 4, fontSize: 10, color: "#6B7280" },
+  colLabelWeekly: { marginTop: 4, fontSize: 10, color: text.description ?? COLORS.TEXT_SUBTLE },
 
   // monthly columns
   columnsMonthly: {
@@ -2118,7 +2122,7 @@ function createStyles(COLORS, ui) {
   },
   colWrapMonthly: { width: 56, alignItems: "center", marginHorizontal: 4 },
   colStackMonthly: { width: 28, justifyContent: "flex-end", alignItems: "stretch" },
-  colLabelMonthly: { marginTop: 6, fontSize: 11, color: "#6B7280" },
+  colLabelMonthly: { marginTop: 6, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
 
   colSeg: {
     width: "100%",
@@ -2147,12 +2151,12 @@ function createStyles(COLORS, ui) {
   timeBucketTitle: {
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   timeBucketMeta: {
     marginTop: 2,
     fontSize: 11,
-    color: "#6B7280",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   timeBucketChartWrap: {
     alignItems: "center",
@@ -2167,12 +2171,12 @@ function createStyles(COLORS, ui) {
   timeBucketCenterMain: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   timeBucketCenterSub: {
     marginTop: 1,
     fontSize: 10,
-    color: "#6B7280",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   timeBucketSummary: {
     marginTop: 8,
@@ -2182,7 +2186,7 @@ function createStyles(COLORS, ui) {
   timeBucketSummaryText: {
     fontSize: 11,
     lineHeight: 16,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
 
   deepList: {
@@ -2201,12 +2205,12 @@ function createStyles(COLORS, ui) {
     flex: 1,
     fontSize: 13,
     fontWeight: "700",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     marginRight: 8,
   },
   deepRowMeta: {
     fontSize: 11,
-    color: "#6B7280",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   deepBarTrack: {
     width: "100%",
@@ -2222,7 +2226,7 @@ function createStyles(COLORS, ui) {
     marginTop: 6,
     fontSize: 11,
     lineHeight: 16,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   patternCard: {
     borderWidth: 1,
@@ -2234,19 +2238,19 @@ function createStyles(COLORS, ui) {
   patternTitle: {
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     marginBottom: 4,
   },
   patternDesc: {
     fontSize: 12,
     lineHeight: 18,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   patternMeta: {
     marginTop: 4,
     fontSize: 11,
     lineHeight: 16,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   memoThemeCard: {
     borderWidth: 1,
@@ -2258,7 +2262,7 @@ function createStyles(COLORS, ui) {
   memoThemeTitle: {
     fontSize: 13,
     fontWeight: "800",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   memoThemeChipRow: {
     flexDirection: "row",
@@ -2276,19 +2280,19 @@ function createStyles(COLORS, ui) {
   },
   memoThemeChipText: {
     fontSize: 11,
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     fontWeight: "600",
   },
   memoThemeMeaning: {
     fontSize: 12,
     lineHeight: 18,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   memoThemeMeta: {
     marginTop: 4,
     fontSize: 11,
     lineHeight: 16,
-    color: "#4B5563",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
   },
   }, ui));
 }

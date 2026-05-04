@@ -342,7 +342,7 @@ function PlanCard({
             <Text
               style={[
                 styles.planCtaText,
-                disabled && { color: colors.TEXT_SUBTLE },
+                disabled && styles.planCtaTextDisabled,
               ]}
             >
               {isCurrent

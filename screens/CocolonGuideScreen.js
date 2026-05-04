@@ -150,7 +150,6 @@ export default function CocolonGuideScreen({ route } = {}) {
 function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
-  const guideDarkSubtext = "#374151";
 
   return StyleSheet.create(
     applyTypographyTokens(
@@ -211,7 +210,7 @@ function createStyles(COLORS, ui) {
           marginTop: 8,
           fontSize: font.description ?? 11,
           lineHeight: 18,
-          color: guideDarkSubtext,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
           opacity: 0.9,
         },
 

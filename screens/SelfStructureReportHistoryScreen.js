@@ -244,7 +244,7 @@ export default function SelfStructureReportHistoryScreen({
       },
       rowTitle: { color: colors.TEXT_ON_LIGHT },
       rowSub: { color: colors.TEXT_ON_LIGHT },
-      rowMeta: { color: colors.TEXT_SUBTLE },
+      rowMeta: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
 
       iconBtn: {
         backgroundColor: colors.PANEL_BG,
@@ -252,9 +252,9 @@ export default function SelfStructureReportHistoryScreen({
       },
       iconBtnText: { color: colors.TEXT_ON_LIGHT },
 
-      listEmptyText: { color: colors.TEXT_SUBTLE },
+      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
     };
-  }, [isDark, colors]);
+  }, [isDark, colors, ui]);
 
   const title = `${TYPE_LABEL[reportType] || "Report"}の履歴`;
 
@@ -408,7 +408,7 @@ export default function SelfStructureReportHistoryScreen({
           <Text
             style={[
               styles.historyRetentionText,
-              { color: isDark ? colors.TEXT_ON_LIGHT : "#111827" },
+              { color: ui?.text?.primary ?? colors.TEXT_ON_LIGHT },
             ]}
           >
             {historyRetentionLabel}
@@ -444,7 +444,7 @@ export default function SelfStructureReportHistoryScreen({
             !errorMsg ? (
               <Text
                 style={[
-                  { padding: 16, color: "#6B7280" },
+                  { padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
                   themed.listEmptyText,
                 ]}
               >
@@ -475,7 +475,7 @@ export default function SelfStructureReportHistoryScreen({
               <Ionicons
                 name="chevron-forward"
                 size={18}
-                color={isDark ? colors.TEXT_SUBTLE : "#9CA3AF"}
+                color={ui?.text?.description ?? colors.TEXT_SUBTLE}
               />
             </TouchableOpacity>
           )}
@@ -501,6 +501,7 @@ export default function SelfStructureReportHistoryScreen({
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
@@ -514,7 +515,7 @@ function createStyles(COLORS, ui) {
     justifyContent: "space-between",
   },
   backBtn: { width: 70, alignItems: "flex-start", justifyContent: "center" },
-  backText: { marginLeft: 2, color: "#374151", fontSize: 13, fontWeight: "600" },
+  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
   headerSide: { width: 70 },
   headerTitle: {
     flex: 1,
@@ -523,7 +524,7 @@ function createStyles(COLORS, ui) {
     lineHeight: 32,
     fontWeight: "800",
     letterSpacing: 0.6,
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     textAlign: "center",
   },
 
@@ -532,7 +533,7 @@ function createStyles(COLORS, ui) {
     marginTop: 0,
     fontSize: 12,
     fontWeight: "600",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   error: {
     paddingHorizontal: 12,
@@ -553,13 +554,13 @@ function createStyles(COLORS, ui) {
   rowRead: {
     opacity: 0.6,
   },
-  rowTitle: { fontSize: 14, fontWeight: "800", color: "#111827" },
-  rowSub: { marginTop: 2, fontSize: 12, color: "#374151" },
-  rowMeta: { marginTop: 2, fontSize: 11, color: "#6B7280" },
+  rowTitle: { fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
+  rowMeta: { marginTop: 2, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
   listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
   listFooterSpacer: { height: 12 },
   loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
-  loadMoreText: { fontSize: 13, fontWeight: "700", color: "#374151" },
+  loadMoreText: { fontSize: 13, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
 
   iconBtn: {
     marginLeft: 10,
@@ -576,7 +577,7 @@ function createStyles(COLORS, ui) {
   iconBtnText: {
     marginTop: 2,
     fontSize: 10,
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     fontWeight: "700",
   },
   }, ui));

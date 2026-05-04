@@ -63,7 +63,7 @@
         "remaining_count": 5,
         "is_unlimited": false,
         "can_publish": true,
-        "display_text": "今月のPiece作成回数：Freeの５回"
+        "display_text": "今月のピース生成回数：Freeの５回"
       },
       "meta": {
         "source": "emotion_piece_generation_service.generate_emotion_reflection_preview",
@@ -96,7 +96,7 @@
         "remaining_count": 5,
         "is_unlimited": false,
         "can_publish": true,
-        "display_text": "今月のPiece作成回数：Freeの５回"
+        "display_text": "今月のピース生成回数：Freeの５回"
       },
       "meta": {
         "source": "home_gateway.emotion_reflection_publish_service.publish_preview",

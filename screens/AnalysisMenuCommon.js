@@ -240,7 +240,7 @@ function createStyles(colors, ui) {
         descriptionText: {
           fontSize: 13,
           lineHeight: 20,
-          color: text.description ?? colors.TEXT_ON_LIGHT,
+          color: text.description ?? colors.TEXT_SUBTLE,
           marginBottom: 20,
         },
 
@@ -315,13 +315,13 @@ function createStyles(colors, ui) {
           marginTop: 10,
           fontSize: 13,
           lineHeight: 19,
-          color: text.description ?? colors.TEXT_ON_LIGHT,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
         largeCardUpdate: {
           marginTop: 12,
           fontSize: 11,
           lineHeight: 16,
-          color: text.description ?? colors.TEXT_ON_LIGHT,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
 
         mediumCard: {
@@ -356,10 +356,10 @@ function createStyles(colors, ui) {
           marginTop: 6,
           fontSize: 13,
           lineHeight: 18,
-          color: text.description ?? colors.TEXT_ON_LIGHT,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
         chevronIcon: {
-          color: colors.TEXT_SUBTLE,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
 
         optionRow: {
@@ -398,7 +398,7 @@ function createStyles(colors, ui) {
         optionMeta: {
           fontSize: 12,
           lineHeight: 16,
-          color: text.description ?? colors.TEXT_ON_LIGHT,
+          color: text.description ?? colors.TEXT_SUBTLE,
           marginRight: 8,
         },
       },

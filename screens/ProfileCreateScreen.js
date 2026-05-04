@@ -583,7 +583,7 @@ export default function ProfileCreateScreen({ onBack }) {
                           <View style={styles.preferenceTextWrap}>
                             <Text style={styles.preferenceTitle}>シークレットメモ</Text>
                             <Text style={styles.preferenceDesc}>
-                              オンにするとPieceに表示されません。{"\n"}分析レポートには反映されます。
+                              オンにするとピースに表示されません。{"\n"}分析レポートには反映されます。
                             </Text>
                           </View>
                         </View>

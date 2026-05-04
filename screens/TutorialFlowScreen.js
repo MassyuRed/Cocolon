@@ -26,9 +26,10 @@ import {
   TUTORIAL_TOTAL_STEPS,
 } from "../tutorial/tutorialScenarioData";
 
-const STEP_CONNECTION = 15;
-const STEP_OTHER = 16;
-const STEP_FINISH = 17;
+const STEP_INTRO = 1;
+const STEP_CONNECTION = 16;
+const STEP_OTHER = 17;
+const STEP_FINISH = 18;
 
 export default function TutorialFlowScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -57,18 +58,20 @@ export default function TutorialFlowScreen({ navigation }) {
 
   const isTutorialFlowStep =
     !!isTutorialMode &&
-    tutorialStep >= STEP_CONNECTION &&
-    tutorialStep <= STEP_FINISH;
+    (tutorialStep === STEP_INTRO ||
+      tutorialStep === STEP_CONNECTION ||
+      tutorialStep === STEP_OTHER);
 
-  const navigateHome = useCallback(() => {
-    const stamp = Date.now();
+  const navigateHome = useCallback((options = {}) => {
+    const markFinished = options?.markFinished === true;
+    const params = markFinished ? { tutorialFinishedAt: Date.now() } : undefined;
     try {
       const parent =
         typeof navigation?.getParent === "function" ? navigation.getParent() : null;
       if (parent && typeof parent.navigate === "function") {
         parent.navigate("Input", {
           screen: "Input",
-          params: { tutorialFinishedAt: stamp },
+          params,
         });
         return;
       }
@@ -77,7 +80,7 @@ export default function TutorialFlowScreen({ navigation }) {
     }
 
     try {
-      navigation?.navigate?.("Input", { tutorialFinishedAt: stamp });
+      navigation?.navigate?.("Input", params);
     } catch {
       // noop
     }
@@ -91,14 +94,13 @@ export default function TutorialFlowScreen({ navigation }) {
     } finally {
       setFinishing(false);
       requestAnimationFrame(() => {
-        navigateHome();
+        navigateHome({ markFinished: true });
       });
     }
   }, [endTutorial, finishing, navigateHome]);
 
   const getTutorialTargetRef = useCallback(() => {
     if (!isTutorialFlowStep) return null;
-    if (tutorialStep === STEP_CONNECTION) return connectionRef;
     if (tutorialStep === STEP_OTHER) return otherRef;
     if (tutorialStep === STEP_FINISH) return finishRef;
     return null;
@@ -108,39 +110,58 @@ export default function TutorialFlowScreen({ navigation }) {
     if (!isTutorialFlowStep) return null;
 
     switch (tutorialStep) {
+      case STEP_INTRO:
+        return {
+          step: STEP_INTRO,
+          mode: "info",
+          title: "Emlisについて",
+          message:
+            "Emlisは、感情入力をすることで様々な体験ができるアプリです。\n\n各画面の説明をします。",
+          nextLabel: "ホーム画面へ",
+          onNext: () => {
+            setTutorialStep(2);
+            requestAnimationFrame(() => navigateHome());
+          },
+          disableSpotlight: true,
+          dimOpacity: 0,
+        };
       case STEP_CONNECTION:
         return {
           step: STEP_CONNECTION,
           mode: "info",
-          title: "感情入力からのつながり",
+          title: "Emlisについて",
           message:
-            "感情入力は、Emlisからの応答・分析レポート・Pieceへつながる起点です。\n\nここで全体の流れを表で確認します。",
-          nextLabel: "その他要素へ",
+            "Emlisのことを少しでもお分かりいただけたでしょうか？\n\n気軽に日々の感情や想いを言葉として入力してみてください。",
+          nextLabel: "その他の機能へ",
           onNext: () => setTutorialStep(STEP_OTHER),
+          disableSpotlight: true,
+          dimOpacity: 0,
         };
       case STEP_OTHER:
         return {
           step: STEP_OTHER,
           mode: "info",
-          title: "その他の要素",
+          title: "その他の機能",
           message:
-            "感情通知やランキングなど、入力後に広がる機能もあります。\n\n細かな確認はチュートリアル後にご自身のペースで見られます。",
+            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
           nextLabel: "終了へ",
-          onNext: () => setTutorialStep(STEP_FINISH),
+          onNext: () => {
+            setTutorialStep(STEP_FINISH);
+            requestAnimationFrame(() => {
+              try {
+                scrollRef.current?.scrollToEnd?.({ animated: true });
+              } catch {
+                // noop
+              }
+            });
+          },
         };
       case STEP_FINISH:
-        return {
-          step: STEP_FINISH,
-          mode: "action",
-          title: "チュートリアル終了",
-          message:
-            "これでチュートリアルは完了です。ホームに戻って、Emlisを始めましょう。",
-          actionHint: "ホームへ戻る を押してください",
-        };
+        return null;
       default:
         return null;
     }
-  }, [isTutorialFlowStep, tutorialStep, setTutorialStep]);
+  }, [isTutorialFlowStep, tutorialStep, setTutorialStep, navigateHome]);
 
   const syncTutorialTargetRect = useCallback(async () => {
     if (!isTutorialFlowStep) return null;
@@ -191,6 +212,8 @@ export default function TutorialFlowScreen({ navigation }) {
     };
   }, [isTutorialFlowStep, tutorialStep, tutorialOverlayMetrics, syncTutorialTargetRect]);
 
+  const shouldShowFinalSections = tutorialStep >= STEP_CONNECTION;
+
   return (
     <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
@@ -217,10 +240,10 @@ export default function TutorialFlowScreen({ navigation }) {
               color={colors.TITLE_GOLD}
               style={styles.cardIcon}
             />
-            <Text style={styles.cardTitle}>感情入力からつながる三大要素</Text>
+            <Text style={styles.cardTitle}>感情入力からつながる3つの体験</Text>
           </View>
           <Text style={styles.cardLead}>
-            入力した独り言は、その場の返答だけで終わらず、Emlisの主要な体験へつながります。
+            Emlisは感情入力をすることで様々な機能を楽しむことができます。その中でも主要な3つの要素を説明します。
           </Text>
           {TUTORIAL_CONNECTION_ROWS.map((row, index) => (
             <View
@@ -234,40 +257,44 @@ export default function TutorialFlowScreen({ navigation }) {
           ))}
         </View>
 
-        <View ref={otherRef} collapsable={false} style={styles.card}>
-          <View style={styles.cardHeaderRow}>
-            <Ionicons
-              name="sparkles-outline"
-              size={18}
-              color={colors.TITLE_GOLD}
-              style={styles.cardIcon}
-            />
-            <Text style={styles.cardTitle}>{TUTORIAL_OTHER_ELEMENTS_GUIDE.title}</Text>
-          </View>
-          <Text style={styles.cardLead}>{TUTORIAL_OTHER_ELEMENTS_GUIDE.body}</Text>
-        </View>
+        {shouldShowFinalSections ? (
+          <>
+            <View ref={otherRef} collapsable={false} style={styles.card}>
+              <View style={styles.cardHeaderRow}>
+                <Ionicons
+                  name="sparkles-outline"
+                  size={18}
+                  color={colors.TITLE_GOLD}
+                  style={styles.cardIcon}
+                />
+                <Text style={styles.cardTitle}>{TUTORIAL_OTHER_ELEMENTS_GUIDE.title}</Text>
+              </View>
+              <Text style={styles.cardLead}>{TUTORIAL_OTHER_ELEMENTS_GUIDE.body}</Text>
+            </View>
 
-        <View ref={finishRef} collapsable={false} style={styles.finishCard}>
-          <Text style={styles.finishTitle}>これでチュートリアルは完了です</Text>
-          <Text style={styles.finishBody}>
-            ホームに戻って、Emlisを始めましょう。
-          </Text>
-          <CocolonButton
-            variant="primary"
-            onPress={handleCompleteTutorial}
-            loading={finishing}
-            disabled={finishing}
-            accessibilityLabel="チュートリアルを終了してホームへ戻る"
-          >
-            ホームへ戻る
-          </CocolonButton>
-        </View>
+            <View ref={finishRef} collapsable={false} style={styles.finishCard}>
+              <Text style={styles.finishTitle}>チュートリアルはこれにて終了です</Text>
+              <Text style={styles.finishBody}>
+                Emlisをお楽しみください。
+              </Text>
+              <CocolonButton
+                variant="primary"
+                onPress={handleCompleteTutorial}
+                loading={finishing}
+                disabled={finishing}
+                accessibilityLabel="チュートリアルを終了してホームへ戻る"
+              >
+                ホームへ戻る
+              </CocolonButton>
+            </View>
+          </>
+        ) : null}
       </ScrollView>
 
       {tutorialOverlayConfig ? (
         <TutorialOverlay
           visible={isTutorialFlowStep}
-          targetRect={tutorialTargetRect}
+          targetRect={tutorialOverlayConfig.disableSpotlight ? null : tutorialTargetRect}
           title={tutorialOverlayConfig.title}
           message={tutorialOverlayConfig.message}
           step={tutorialOverlayConfig.step}
@@ -280,6 +307,8 @@ export default function TutorialFlowScreen({ navigation }) {
           showStepPill={false}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialStep === STEP_FINISH ? "top" : "bottom"}
+          dimOpacity={tutorialOverlayConfig.dimOpacity}
+          blockBackgroundTouches={tutorialOverlayConfig.blockBackgroundTouches !== false}
           primaryDisabled={finishing}
         />
       ) : null}
@@ -369,7 +398,7 @@ function createStyles(COLORS, ui) {
     connectionExample: {
       ...text.caption,
       marginTop: 4,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     finishCard: {
       borderRadius: 18,

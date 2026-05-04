@@ -1031,7 +1031,7 @@ export default function FollowListScreen({ navigation, route }) {
           <Ionicons name="chevron-back" size={22} color={colors.TITLE_GOLD} />
         </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>Follow</Text>
+        <Text style={styles.headerTitle}>フォローリスト</Text>
 
         <TouchableOpacity
           onPress={() => {
@@ -1121,6 +1121,7 @@ export default function FollowListScreen({ navigation, route }) {
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
@@ -1186,7 +1187,7 @@ function createStyles(COLORS, ui) {
     tabLabelText: {
       fontSize: 13,
       fontWeight: "800",
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     tabLabelTextActive: {
       color: COLORS.TITLE_GOLD,

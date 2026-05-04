@@ -54,7 +54,7 @@ const STRENGTH_LABEL = {
   strong: "強",
 };
 
-function emotionTint(emotion) {
+function emotionTint(emotion, defaultTextColor) {
   switch (emotion) {
     case "喜び":
       return { bg: "rgba(16,185,129,0.12)", text: "#065F46" }; // green
@@ -67,7 +67,7 @@ function emotionTint(emotion) {
     case "平穏":
       return { bg: "rgba(234,179,8,0.12)", text: "#A16207" }; // calm
     default:
-      return { bg: "rgba(107,114,128,0.12)", text: "#374151" };
+      return { bg: "rgba(107,114,128,0.12)", text: defaultTextColor };
   }
 }
 
@@ -667,7 +667,7 @@ export default function EmotionLogScreen(props) {
           ) : (
             <View style={styles.emotionRow}>
               {items.map((it, idx) => {
-                const tint = emotionTint(it.type);
+                const tint = emotionTint(it.type, ui?.text?.description ?? colors.TEXT_SUBTLE);
                 const labelStrength = STRENGTH_LABEL[it.strength] || "";
                 return (
                   <View
@@ -785,8 +785,6 @@ export default function EmotionLogScreen(props) {
                   チュートリアルでは、{tutorialMockUserName}さんから通知が届く体験をします。
                   {"\n"}
                   まもなく通知が届き、この下の感情ログに反映されます。
-                  {"\n"}
-                  ※ 本番データには保存されません。
                 </Text>
               </View>
             ) : null}

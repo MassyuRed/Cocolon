@@ -1,6 +1,6 @@
 import tutorialFixtures from "./generated/tutorialFixtures.generated.json";
 
-export const TUTORIAL_TOTAL_STEPS = 17;
+export const TUTORIAL_TOTAL_STEPS = 18;
 
 const FIXTURES = tutorialFixtures && typeof tutorialFixtures === "object" ? tutorialFixtures : {};
 const FIXTURE_INPUT = FIXTURES.input && typeof FIXTURES.input === "object" ? FIXTURES.input : {};
@@ -171,10 +171,10 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
     example: "自分の気持ちの流れを、あとから見返せます。",
   }),
   Object.freeze({
-    title: "Piece",
+    title: "ピース",
     description:
-      "独り言のようなメモが、読みやすい問いと答えに整えられます。",
-    example: "自分のPieceや、フォロー中ユーザーのPieceを投稿タブで見られます。",
+      "あなたの入力が、読みやすい問いと答えに整えられます。",
+    example: "自分のピースや、フォロー中ユーザーのピースを投稿タブで見られます。",
   }),
 ]);
 
@@ -187,5 +187,5 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
   body:
-    "Emlisには、感情通知やランキングなど、あとから楽しめる機能もあります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
+    "Emlisには、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

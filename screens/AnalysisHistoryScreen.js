@@ -264,9 +264,9 @@ export default function AnalysisHistoryScreen({ onBack }) {
       },
       date: { color: colors.TEXT_ON_LIGHT },
       emotions: { color: colors.TEXT_ON_LIGHT },
-      memo: { color: colors.TEXT_SUBTLE },
-      memoLabel: { color: colors.TEXT_SUBTLE },
-      categoryValue: { color: colors.TEXT_SUBTLE },
+      memo: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
+      memoLabel: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
+      categoryValue: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
       secretBtn: {
         backgroundColor: colors.PANEL_BG,
         borderColor: colors.CARD_BORDER,
@@ -280,15 +280,15 @@ export default function AnalysisHistoryScreen({ onBack }) {
         backgroundColor: colors.PANEL_BG,
         borderColor: colors.CARD_BORDER,
       },
-      listEmptyText: { color: colors.TEXT_SUBTLE },
-      noticeText: { color: colors.TEXT_SUBTLE },
+      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
+      noticeText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
       conditionBar: {
         backgroundColor: colors.PANEL_BG,
         borderColor: colors.CARD_BORDER,
       },
-      conditionText: { color: colors.TEXT_SUBTLE },
+      conditionText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
     };
-  }, [isDark, colors]);
+  }, [isDark, colors, ui]);
 
 
   // -------------------------
@@ -675,13 +675,13 @@ export default function AnalysisHistoryScreen({ onBack }) {
             <Ionicons
               name="search-outline"
               size={18}
-              color={isDark ? colors.TEXT_SUBTLE : "#6B7280"}
+              color={ui?.text?.description ?? colors.TEXT_SUBTLE}
               style={styles.searchIcon}
             />
             <TextInput
               style={[styles.searchInput, themed.searchInput]}
               placeholder="履歴を検索（メモ/行動メモ・感情・カテゴリ・日付・強/中/弱）"
-              placeholderTextColor={isDark ? colors.TEXT_SUBTLE : "#9CA3AF"}
+              placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
               value={query}
               onChangeText={setQuery}
               returnKeyType="search"
@@ -698,7 +698,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
                 <Ionicons
                   name="close-circle"
                   size={18}
-                  color={isDark ? colors.TEXT_SUBTLE : "#9CA3AF"}
+                  color={ui?.text?.description ?? colors.TEXT_SUBTLE}
                 />
               </TouchableOpacity>
             ) : null}
@@ -711,7 +711,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
               <Ionicons
                 name="arrow-forward-circle-outline"
                 size={22}
-                color={isDark ? colors.TEXT_SUBTLE : "#6B7280"}
+                color={ui?.text?.description ?? colors.TEXT_SUBTLE}
               />
             </TouchableOpacity>
           </View>
@@ -874,7 +874,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
             <Ionicons
               name="search-outline"
               size={14}
-              color={isDark ? colors.TEXT_SUBTLE : "#6B7280"}
+              color={ui?.text?.description ?? colors.TEXT_SUBTLE}
               style={{ marginRight: 6 }}
             />
             <Text
@@ -891,7 +891,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
           <Text
             style={[
               styles.historyRetentionText,
-              { color: isDark ? colors.TEXT_ON_LIGHT : "#111827" },
+              { color: ui?.text?.primary ?? colors.TEXT_ON_LIGHT },
             ]}
           >
             {historyRetentionLabel}
@@ -968,7 +968,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
                               : "#FFFFFF"
                             : isDark
                             ? colors.TEXT_ON_LIGHT
-                            : "#374151"
+                            : ui?.text?.primary ?? colors.TEXT_ON_LIGHT
                         }
                       />
                     ) : (
@@ -987,7 +987,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
                                 : "#FFFFFF"
                               : isDark
                               ? colors.TEXT_ON_LIGHT
-                              : "#374151"
+                              : ui?.text?.primary ?? colors.TEXT_ON_LIGHT
                           }
                           style={{ marginRight: 4 }}
                         />
@@ -1078,7 +1078,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
             !errorMsg ? (
               <Text
                 style={[
-                  { padding: 16, color: "#666" },
+                  { padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
                   isDark && themed.listEmptyText,
                 ]}
               >
@@ -1094,6 +1094,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
@@ -1128,7 +1129,7 @@ function createStyles(COLORS, ui) {
   },
   backText: {
     marginLeft: 2,
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     fontSize: 13,
     fontWeight: "600",
   },
@@ -1149,7 +1150,7 @@ function createStyles(COLORS, ui) {
     flex: 1,
     fontSize: 15,
     paddingHorizontal: 6,
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
   searchIcon: { marginHorizontal: 6 },
 
@@ -1168,7 +1169,7 @@ function createStyles(COLORS, ui) {
     backgroundColor: "#F3F4F6",
   },
   filterBtnOn: { backgroundColor: "#6366F1", borderColor: "#6366F1" },
-  filterText: { fontSize: 12, color: "#374151" },
+  filterText: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
   filterTextOn: { color: "#fff", fontWeight: "700" },
 
   orderRow: { flexDirection: "row", justifyContent: "flex-end", marginTop: 6 },
@@ -1182,10 +1183,10 @@ function createStyles(COLORS, ui) {
     backgroundColor: "#F3F4F6",
   },
   orderBtnOn: { backgroundColor: "#6366F1", borderColor: "#6366F1" },
-  orderText: { fontSize: 12, color: "#374151" },
+  orderText: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
   orderTextOn: { color: "#fff", fontWeight: "700" },
 
-  noticeText: { marginTop: 6, fontSize: 12, color: "#6B7280" },
+  noticeText: { marginTop: 6, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
 
   conditionBar: {
     flexDirection: "row",
@@ -1198,12 +1199,12 @@ function createStyles(COLORS, ui) {
     borderColor: "#E5E7EB",
     backgroundColor: "#F9FAFB",
   },
-  conditionText: { flex: 1, fontSize: 12, color: "#6B7280" },
+  conditionText: { flex: 1, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
   historyRetentionText: {
     marginTop: 8,
     fontSize: 12,
     fontWeight: "600",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
 
   error: { padding: 12, color: "#B91C1C" },
@@ -1250,7 +1251,7 @@ function createStyles(COLORS, ui) {
   },
   secretText: {
     fontSize: 12,
-    color: "#374151",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
     fontWeight: "700",
   },
   secretTextOn: {
@@ -1262,11 +1263,11 @@ function createStyles(COLORS, ui) {
     borderBottomWidth: 1,
     borderColor: "#eee",
   },
-  date: { fontWeight: "700", marginBottom: 4, color: "#111827" },
-  emotions: { color: "#374151" },
+  date: { fontWeight: "700", marginBottom: 4, color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  emotions: { color: text.description ?? COLORS.TEXT_SUBTLE },
   memoBlock: { marginTop: 6 },
-  memoLabel: { fontSize: 11, fontWeight: "700", color: "#6B7280" },
-  memo: { color: "#6B7280", marginTop: 4, fontStyle: "italic" },
-  categoryValue: { color: "#6B7280", marginTop: 4 },
+  memoLabel: { fontSize: 11, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
+  memo: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4, fontStyle: "italic" },
+  categoryValue: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4 },
   }, ui));
 }

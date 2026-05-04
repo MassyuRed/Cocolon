@@ -18,17 +18,20 @@ function toJapaneseDigit(value) {
   return String(value).replace(/[0-9]/g, (ch) => digits[ch] || ch);
 }
 
+function removeFreePrefix(value) {
+  return String(value || "")
+    .replace(/Piece/g, "ピース")
+    .replace(/Freeの([0-9０-９]+回)/g, "$1")
+    .trim();
+}
+
 function formatRemainingText(quota) {
-  const displayText = String(quota?.display_text || "").trim();
+  const displayText = removeFreePrefix(quota?.display_text);
   if (displayText) return displayText;
 
   const limit = quota?.publish_limit;
-  const tier = String(quota?.tier || quota?.subscription_tier || "").trim().toLowerCase();
-  if (limit == null) return "今月のPiece作成回数：無制限";
-  if (tier === "free") {
-    return `今月のPiece作成回数：Freeの${toJapaneseDigit(limit)}回`;
-  }
-  return `今月のPiece作成回数：${toJapaneseDigit(limit)}回`;
+  if (limit == null) return "今月のピース生成回数：無制限";
+  return `今月のピース生成回数：${toJapaneseDigit(limit)}回`;
 }
 
 export default function EmotionPiecePreviewModal({
@@ -67,7 +70,7 @@ export default function EmotionPiecePreviewModal({
               <Text style={styles.title}>ピースの確認</Text>
             </View>
             <Text style={styles.lead}>
-              入力内容から整えた問いと答えです。作成する前に内容を確認できます。
+              入力内容から整えた問いと答えです。生成する前に内容を確認できます。
             </Text>
           </View>
 
@@ -104,7 +107,7 @@ export default function EmotionPiecePreviewModal({
                   variant="secondary"
                   onPress={onClose}
                   disabled={publishLoading}
-                  accessibilityLabel="Pieceの確認を閉じる"
+                  accessibilityLabel="ピースの確認を閉じる"
                 >
                   やめる
                 </CocolonButton>
@@ -115,9 +118,9 @@ export default function EmotionPiecePreviewModal({
               onPress={onPublish}
               loading={publishLoading}
               disabled={!preview || publishLoading}
-              accessibilityLabel="Pieceを作成する"
+              accessibilityLabel="ピースを生成する"
             >
-              Pieceを作成する
+              ピースを生成する
             </CocolonButton>
           </View>
         </View>
@@ -127,6 +130,7 @@ export default function EmotionPiecePreviewModal({
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
     backdrop: {
       flex: 1,
@@ -168,7 +172,7 @@ function createStyles(COLORS, ui) {
       fontSize: 20,
       lineHeight: 28,
       fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       textAlign: "center",
     },
     lead: {
@@ -176,7 +180,7 @@ function createStyles(COLORS, ui) {
       fontSize: 13,
       lineHeight: 20,
       fontWeight: "600",
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       textAlign: "center",
     },
     bodyScroll: {
@@ -205,7 +209,7 @@ function createStyles(COLORS, ui) {
       fontSize: 15,
       lineHeight: 24,
       fontWeight: "600",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     quotaCard: {
       flexDirection: "row",
@@ -226,7 +230,7 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       lineHeight: 18,
       fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     actions: {
       marginTop: 16,

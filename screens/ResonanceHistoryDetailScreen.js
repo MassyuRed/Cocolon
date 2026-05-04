@@ -98,7 +98,7 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
             <CocolonBackButton
               navigation={navigation}
               fallbackRouteName="Piece"
-              accessibilityLabel="Pieceに戻る"
+              accessibilityLabel="ピースに戻る"
             />
           </View>
           <View style={styles.headerCenter}>
@@ -112,13 +112,13 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
             <>
               <Text style={styles.messageTitle}>ピース詳細を開けませんでした</Text>
               <Text style={styles.messageText}>
-                共通Piece詳細画面の登録状況を確認してください。
+                共通ピース詳細画面の登録状況を確認してください。
               </Text>
             </>
           ) : (
             <>
               <ActivityIndicator />
-              <Text style={styles.messageText}>Piece詳細へ移動しています…</Text>
+              <Text style={styles.messageText}>ピース詳細へ移動しています…</Text>
             </>
           )}
         </View>

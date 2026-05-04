@@ -13,13 +13,13 @@ import { useTheme } from "../theme/ThemeContext";
 const DEFAULT_DIM_OPACITY = 0.62;
 const DEFAULT_TARGET_PADDING = 8;
 const DEFAULT_TARGET_RADIUS = 16;
-const DEFAULT_CARD_SIDE_MARGIN = 16;
-const DEFAULT_CARD_BOTTOM_MARGIN = 8;
-const DEFAULT_CARD_EDGE_OFFSET = 8;
-const DEFAULT_CARD_FALLBACK_HEIGHT = 168;
+const DEFAULT_CARD_SIDE_MARGIN = 12;
+const DEFAULT_CARD_BOTTOM_MARGIN = -16;
+const DEFAULT_CARD_EDGE_OFFSET = 4;
+const DEFAULT_CARD_FALLBACK_HEIGHT = 220;
 const DEFAULT_CARD_MIN_HEIGHT = 72;
-const DEFAULT_CARD_MAX_HEIGHT = 220;
-const DEFAULT_CARD_MAX_HEIGHT_RATIO = 0.34;
+const DEFAULT_CARD_MAX_HEIGHT = 520;
+const DEFAULT_CARD_MAX_HEIGHT_RATIO = 0.74;
 const DEFAULT_CARD_PLACEMENT_SWAP_BUFFER = 16;
 const DEFAULT_ACTION_HINT = "スポットライトの場所を押してください";
 const DEFAULT_NEXT_LABEL = "次へ";
@@ -35,11 +35,16 @@ function getCardAnchors({
   safeBottom,
   cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
 }) {
+  const resolvedCardBottomMargin = Number.isFinite(Number(cardBottomMargin))
+    ? Number(cardBottomMargin)
+    : DEFAULT_CARD_BOTTOM_MARGIN;
+
   return {
     topBase: Math.max(0, Number(safeTop) || 0) + DEFAULT_CARD_EDGE_OFFSET,
-    bottomOffset:
-      Math.max(0, Number(safeBottom) || 0) +
-      Math.max(0, Number(cardBottomMargin) || DEFAULT_CARD_BOTTOM_MARGIN),
+    bottomOffset: Math.max(
+      0,
+      Math.max(0, Number(safeBottom) || 0) + resolvedCardBottomMargin
+    ),
   };
 }
 
@@ -664,6 +669,7 @@ export default function TutorialOverlay({
   cardSideMargin = DEFAULT_CARD_SIDE_MARGIN,
   cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
   cardPlacement = "bottom", // "bottom" | "top" | "auto"
+  blockBackgroundTouches = true,
   testID,
 }) {
   const { colors } = useTheme();
@@ -673,6 +679,7 @@ export default function TutorialOverlay({
   const [cardHeight, setCardHeight] = useState(DEFAULT_CARD_FALLBACK_HEIGHT);
   const [overlayLayout, setOverlayLayout] = useState({ width: 0, height: 0 });
   const [overlayWindowRect, setOverlayWindowRect] = useState(null);
+  const handleBlockedPress = useCallback(() => {}, []);
 
   const screenWidth = Math.max(1, overlayLayout.width || windowWidth);
   const screenHeight = Math.max(1, overlayLayout.height || windowHeight);
@@ -693,21 +700,26 @@ export default function TutorialOverlay({
       ? showPrimaryButton
       : mode !== "action";
 
-  const overlayColor = `rgba(0, 0, 0, ${Math.min(
-    0.9,
-    Math.max(0.1, Number(dimOpacity) || DEFAULT_DIM_OPACITY)
-  )})`;
+  const rawDimOpacity = Number(dimOpacity);
+  const resolvedDimOpacity = Number.isFinite(rawDimOpacity)
+    ? rawDimOpacity
+    : DEFAULT_DIM_OPACITY;
+  const overlayOpacity = Math.min(0.9, Math.max(0, resolvedDimOpacity));
+  const overlayColor =
+    overlayOpacity <= 0
+      ? "rgba(0, 0, 0, 0)"
+      : `rgba(0, 0, 0, ${overlayOpacity})`;
 
   const highlightBorderColor =
     colors?.GOLD_BUTTON_BORDER || colors?.TITLE_GOLD || "#D4AF37";
-  const cardBackgroundColor = colors?.FIELD_BG || colors?.PANEL_BG || "#FFFFFF";
-  const cardBorderColor = colors?.CARD_BORDER || "rgba(255,255,255,0.14)";
-  const titleColor = colors?.TITLE_GOLD || colors?.TEXT_ON_LIGHT || "#111827";
-  const bodyColor = colors?.TEXT_ON_LIGHT || "#111827";
-  const subtleColor = colors?.TEXT_SUBTLE || colors?.TEXT_ON_LIGHT || "#6B7280";
+  const cardBackgroundColor = "#FFF3DD";
+  const cardBorderColor = "#E2CBAE";
+  const titleColor = colors?.TITLE_GOLD || "#800020";
+  const bodyColor = "#111827";
+  const subtleColor = "#4B5563";
   const buttonBackgroundColor = colors?.GOLD_BUTTON || colors?.TITLE_GOLD || "#A16207";
   const buttonTextColor = colors?.ACCENT_TEXT || "#FFFFFF";
-  const stepPillBackground = colors?.PANEL_BG || "rgba(255,255,255,0.08)";
+  const stepPillBackground = "#F5E6D0";
 
   const { topBase: cardTopBase, bottomOffset: cardBottom } = useMemo(
     () =>
@@ -925,6 +937,7 @@ export default function TutorialOverlay({
       {holeRect ? (
         <>
           <Pressable
+            onPress={handleBlockedPress}
             style={[
               styles.scrim,
               {
@@ -938,6 +951,7 @@ export default function TutorialOverlay({
           />
 
           <Pressable
+            onPress={handleBlockedPress}
             style={[
               styles.scrim,
               {
@@ -951,6 +965,7 @@ export default function TutorialOverlay({
           />
 
           <Pressable
+            onPress={handleBlockedPress}
             style={[
               styles.scrim,
               {
@@ -964,6 +979,7 @@ export default function TutorialOverlay({
           />
 
           <Pressable
+            onPress={handleBlockedPress}
             style={[
               styles.scrim,
               {
@@ -978,6 +994,7 @@ export default function TutorialOverlay({
 
           {mode !== "action" ? (
             <Pressable
+              onPress={handleBlockedPress}
               style={[
                 styles.holeBlocker,
                 {
@@ -1026,8 +1043,16 @@ export default function TutorialOverlay({
             ]}
           />
         </>
+      ) : blockBackgroundTouches ? (
+        <Pressable
+          onPress={handleBlockedPress}
+          style={[styles.fullScrim, { backgroundColor: overlayColor }]}
+        />
       ) : (
-        <Pressable style={[styles.fullScrim, { backgroundColor: overlayColor }]} />
+        <View
+          pointerEvents="none"
+          style={[styles.fullScrim, { backgroundColor: overlayColor }]}
+        />
       )}
 
       <View

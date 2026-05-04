@@ -25,6 +25,7 @@ const EMOTION_REPORT_TABS = [
 ];
 
 function createLocalStyles(colors, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(
     applyTypographyTokens(
       {
@@ -71,7 +72,7 @@ function createLocalStyles(colors, ui) {
         tabLabelText: {
           fontSize: 13,
           fontWeight: "800",
-          color: colors.TEXT_SUBTLE,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
         tabLabelTextActive: {
           color: colors.TITLE_GOLD,
@@ -83,7 +84,7 @@ function createLocalStyles(colors, ui) {
         updateLabel: {
           fontSize: 12,
           lineHeight: 18,
-          color: colors.TEXT_SUBTLE,
+          color: text.description ?? colors.TEXT_SUBTLE,
           marginBottom: 10,
         },
         emptyCard: {
@@ -98,13 +99,13 @@ function createLocalStyles(colors, ui) {
         emptyTitle: {
           fontSize: 14,
           fontWeight: "800",
-          color: colors.TEXT_ON_LIGHT,
+          color: text.primary ?? colors.TEXT_ON_LIGHT,
         },
         emptyText: {
           marginTop: 6,
           fontSize: 13,
           lineHeight: 20,
-          color: colors.TEXT_SUBTLE,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
         connectionCard: {
           borderWidth: 1,
@@ -118,7 +119,7 @@ function createLocalStyles(colors, ui) {
         connectionTitle: {
           fontSize: 14,
           fontWeight: "900",
-          color: colors.TEXT_ON_LIGHT,
+          color: text.primary ?? colors.TEXT_ON_LIGHT,
           marginBottom: 10,
         },
         connectionRow: {
@@ -141,7 +142,7 @@ function createLocalStyles(colors, ui) {
           marginTop: 4,
           fontSize: 12,
           lineHeight: 18,
-          color: colors.TEXT_SUBTLE,
+          color: text.description ?? colors.TEXT_SUBTLE,
         },
         loadingWrap: {
           paddingVertical: 24,
@@ -158,7 +159,7 @@ function createLocalStyles(colors, ui) {
         historyInlineText: {
           fontSize: 13,
           fontWeight: "700",
-          color: colors.TEXT_ON_LIGHT,
+          color: text.primary ?? colors.TEXT_ON_LIGHT,
           marginRight: 4,
         },
         historyInlineBadge: {
@@ -227,15 +228,15 @@ export default function AnalysisContentFirstScreen({
   useEffect(() => {
     if (!isTutorialMode) return;
 
-    if (tutorialStep === 10) {
+    if (tutorialStep === 11) {
       setActiveAnalysisTab("self");
       return;
     }
 
     setActiveAnalysisTab("emotion");
-    if (tutorialStep === 9) {
+    if (tutorialStep === 10) {
       setActiveEmotionReportType("monthly");
-    } else if (tutorialStep === 8) {
+    } else if (tutorialStep === 9) {
       setActiveEmotionReportType("weekly");
     } else {
       setActiveEmotionReportType("daily");
@@ -276,7 +277,11 @@ export default function AnalysisContentFirstScreen({
 
   const renderTab = ({ tabKey, label, active, badgeVisible, onPress, targetRef = null }) => {
     const content = (
-      <CocolonPressable style={localStyles.tabItem} onPress={onPress}>
+      <CocolonPressable
+        style={localStyles.tabItem}
+        onPress={isTutorialMode ? undefined : onPress}
+        disabled={isTutorialMode}
+      >
         <View
           style={[
             localStyles.tabLabelWrap,
@@ -322,7 +327,8 @@ export default function AnalysisContentFirstScreen({
           <View ref={tutorialRefs?.guideRef} collapsable={false}>
             <CocolonPressable
               style={styles.guideButton}
-              onPress={onOpenGuide}
+              onPress={isTutorialMode ? undefined : onOpenGuide}
+              disabled={isTutorialMode}
               accessibilityLabel="Analysisのガイドを開く"
             >
               <Ionicons
@@ -335,22 +341,24 @@ export default function AnalysisContentFirstScreen({
         </View>
       </View>
 
-      <View style={styles.summaryBlock}>
-        <View style={styles.summaryInner}>
-          <View style={styles.summaryHeaderRow}>
-            <Ionicons
-              name="radio-outline"
-              size={14}
-              color={colors.TITLE_GOLD}
-              style={styles.summaryIcon}
-            />
-            <Text style={styles.summaryLabel}>あなたの入力状況</Text>
+      {!isTutorialMode ? (
+        <View style={styles.summaryBlock}>
+          <View style={styles.summaryInner}>
+            <View style={styles.summaryHeaderRow}>
+              <Ionicons
+                name="radio-outline"
+                size={14}
+                color={colors.TITLE_GOLD}
+                style={styles.summaryIcon}
+              />
+              <Text style={styles.summaryLabel}>あなたの入力状況</Text>
+            </View>
+            <Text style={styles.summaryText}>{`今日の入力回数は${safeTodayCount}回です`}</Text>
+            <Text style={styles.summaryText}>{`今週の入力回数は${safeWeekCount}回です`}</Text>
+            <Text style={styles.summaryText}>{`今月の入力回数は${safeMonthCount}回です`}</Text>
           </View>
-          <Text style={styles.summaryText}>{`今日の入力回数は${safeTodayCount}回です`}</Text>
-          <Text style={styles.summaryText}>{`今週の入力回数は${safeWeekCount}回です`}</Text>
-          <Text style={styles.summaryText}>{`今月の入力回数は${safeMonthCount}回です`}</Text>
         </View>
-      </View>
+      ) : null}
 
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>
@@ -384,26 +392,29 @@ export default function AnalysisContentFirstScreen({
 
           <Text style={localStyles.updateLabel}>{emotionUpdateLabel}</Text>
 
-          {effectiveHomeSummariesLoading && !currentEmotionReport ? (
-            <View style={localStyles.loadingWrap}>
-              <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
-            </View>
-          ) : currentEmotionReport ? (
-            <AnalysisReportViewerScreen
-              report={currentEmotionReport}
-              embedded
-              hideHeader
-              onOpenSubscription={onOpenSubscription}
-              onMarkedRead={onRefreshEmotionUnread}
-            />
-          ) : (
-            <View style={localStyles.emptyCard}>
-              <Text style={localStyles.emptyTitle}>最新の{currentEmotionHistoryLabel}はまだありません</Text>
-              <Text style={localStyles.emptyText}>
-                入力後にレポートが作成されると、ここに最初から表示されます。
-              </Text>
-            </View>
-          )}
+          <View ref={tutorialRefs?.reportRef} collapsable={false}>
+            {effectiveHomeSummariesLoading && !currentEmotionReport ? (
+              <View style={localStyles.loadingWrap}>
+                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
+              </View>
+            ) : currentEmotionReport ? (
+              <AnalysisReportViewerScreen
+                report={currentEmotionReport}
+                embedded
+                hideHeader
+                disableActions={isTutorialMode}
+                onOpenSubscription={onOpenSubscription}
+                onMarkedRead={onRefreshEmotionUnread}
+              />
+            ) : (
+              <View style={localStyles.emptyCard}>
+                <Text style={localStyles.emptyTitle}>最新の{currentEmotionHistoryLabel}はまだありません</Text>
+                <Text style={localStyles.emptyText}>
+                  入力後にレポートが作成されると、ここに最初から表示されます。
+                </Text>
+              </View>
+            )}
+          </View>
 
           {!isTutorialMode ? (
           <CocolonPressable
@@ -430,44 +441,46 @@ export default function AnalysisContentFirstScreen({
         <>
           <Text style={localStyles.updateLabel}>{selfStructureUpdateLabel}</Text>
 
-          {isTutorialMode ? (
-            <View style={localStyles.emptyCard}>
-              <Text style={localStyles.emptyTitle}>
-                {String(tutorialSelfAnalysisGuide?.title || "自己分析レポート")}
-              </Text>
-              <Text style={localStyles.emptyText}>
-                {String(tutorialSelfAnalysisGuide?.body || "自己分析レポートはサブスク加入後に閲覧できます。")}
-              </Text>
-            </View>
-          ) : isPaid ? (
-            <SelfStructureReportGenerateScreen
-              embedded
-              hideHeader
-              titleOverride="現在の自己分析"
-              useServerDefaultMode
-              onLatestSeenVersion={onLatestSeenVersion}
-            />
-          ) : (
-            <View style={localStyles.emptyCard}>
-              <Text style={localStyles.emptyTitle}>自己分析レポートはPlusプラン以上で利用できます</Text>
-              <Text style={localStyles.emptyText}>
-                加入すると、現在の自己分析レポートがここに最初から表示されます。
-              </Text>
-              <View style={localStyles.paywallButtonWrap}>
-                <CocolonButton variant="secondary" onPress={onOpenSubscription}>
-                  <View style={localStyles.paywallBtnRow}>
-                    <Ionicons
-                      name="sparkles-outline"
-                      size={18}
-                      color={colors.TEXT_ON_LIGHT}
-                      style={{ marginRight: 6 }}
-                    />
-                    <Text style={localStyles.paywallBtnText}>プランを見る</Text>
-                  </View>
-                </CocolonButton>
+          <View ref={tutorialRefs?.selfReportRef} collapsable={false}>
+            {isTutorialMode ? (
+              <View style={localStyles.emptyCard}>
+                <Text style={localStyles.emptyTitle}>
+                  {String(tutorialSelfAnalysisGuide?.title || "自己分析レポート")}
+                </Text>
+                <Text style={localStyles.emptyText}>
+                  {String(tutorialSelfAnalysisGuide?.body || "自己分析レポートはサブスク加入後に閲覧できます。")}
+                </Text>
               </View>
-            </View>
-          )}
+            ) : isPaid ? (
+              <SelfStructureReportGenerateScreen
+                embedded
+                hideHeader
+                showTitle={false}
+                useServerDefaultMode
+                onLatestSeenVersion={onLatestSeenVersion}
+              />
+            ) : (
+              <View style={localStyles.emptyCard}>
+                <Text style={localStyles.emptyTitle}>自己分析レポートはPlusプラン以上で利用できます</Text>
+                <Text style={localStyles.emptyText}>
+                  加入すると、現在の自己分析レポートがここに最初から表示されます。
+                </Text>
+                <View style={localStyles.paywallButtonWrap}>
+                  <CocolonButton variant="secondary" onPress={onOpenSubscription}>
+                    <View style={localStyles.paywallBtnRow}>
+                      <Ionicons
+                        name="sparkles-outline"
+                        size={18}
+                        color={colors.TEXT_ON_LIGHT}
+                        style={{ marginRight: 6 }}
+                      />
+                      <Text style={localStyles.paywallBtnText}>プランを見る</Text>
+                    </View>
+                  </CocolonButton>
+                </View>
+              </View>
+            )}
+          </View>
 
           {!isTutorialMode ? (
           <CocolonPressable

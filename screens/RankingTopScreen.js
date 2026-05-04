@@ -6,6 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -73,6 +74,49 @@ function buildInitialPreviewState() {
 async function getAccessToken() {
   const { data } = await supabase.auth.getSession();
   return data?.session?.access_token || null;
+}
+
+const ACCOUNT_ROUTE_CANDIDATES = [
+  "Account",
+  "AccountPage",
+  "AccountScreen",
+  "UserAccount",
+  "UserPage",
+  "UserProfile",
+  "Profile",
+];
+
+function navigateToAccount(navigation, userId) {
+  if (!userId) return;
+
+  const params = { viewedUserId: userId, userId, user_id: userId };
+
+  let nav = navigation;
+  while (nav) {
+    const state = nav.getState?.();
+    const routeNames = state?.routeNames;
+
+    if (Array.isArray(routeNames)) {
+      const name = ACCOUNT_ROUTE_CANDIDATES.find((c) => routeNames.includes(c));
+      if (name) {
+        try {
+          nav.navigate(name, params);
+        } catch {
+          // noop
+        }
+        return;
+      }
+    }
+
+    nav = nav.getParent?.();
+  }
+
+  // fallback
+  try {
+    navigation?.navigate?.(ACCOUNT_ROUTE_CANDIDATES[0], params);
+  } catch {
+    // noop
+  }
 }
 
 function extractRankingRows(json) {
@@ -226,6 +270,7 @@ export default function RankingTopScreen({ navigation }) {
               colors={colors}
               config={config}
               state={previewState[config.key]}
+              navigation={navigation}
               onOpenAll={() => navigation?.navigate?.(config.routeName)}
             />
           ))}
@@ -242,7 +287,7 @@ export default function RankingTopScreen({ navigation }) {
   );
 }
 
-function RankingPreviewCard({ styles, colors, config, state, onOpenAll }) {
+function RankingPreviewCard({ styles, colors, config, state, navigation, onOpenAll }) {
   const rows = Array.isArray(state?.rows) ? state.rows : [];
 
   return (
@@ -269,11 +314,12 @@ function RankingPreviewCard({ styles, colors, config, state, onOpenAll }) {
         ) : (
           rows.map((row, index) => (
             <RankingPreviewRow
-              key={`${config.key}-${row?.user_id || row?.id || index}`}
+              key={`${config.key}-${row?.user_id || row?.userId || row?.id || index}`}
               styles={styles}
               row={row}
               index={index}
               valueKeys={config.valueKeys}
+              navigation={navigation}
             />
           ))
         )}
@@ -291,27 +337,41 @@ function RankingPreviewCard({ styles, colors, config, state, onOpenAll }) {
   );
 }
 
-function RankingPreviewRow({ styles, row, index, valueKeys }) {
+function RankingPreviewRow({ styles, row, index, valueKeys, navigation }) {
   const rank = row?.rank ?? index + 1;
   const name = String(row?.display_name || row?.name || "—").trim() || "—";
   const value = pickRankingValue(row, valueKeys);
+  const userId = row?.user_id || row?.userId || row?.id;
   const isPrivateAccount = !!(row?.is_private_account ?? row?.isPrivateAccount);
+  const onPressAccount = userId ? () => navigateToAccount(navigation, userId) : undefined;
 
   return (
-    <View style={styles.previewRow}>
+    <TouchableOpacity
+      style={styles.previewRow}
+      onPress={onPressAccount}
+      disabled={!onPressAccount}
+      activeOpacity={0.85}
+    >
       <View style={styles.previewPrimaryRow}>
-        <Text style={styles.previewRankText}>{rank}位</Text>
-        <View style={styles.previewNameWrap}>
-          <Text style={styles.previewNameText}>
-            {name}
-          </Text>
-          {isPrivateAccount ? (
-            <Ionicons name="shield-outline" size={13} style={styles.privateShield} />
-          ) : null}
+        <Text style={[styles.previewRankText, styles.previewRankLabel]}>
+          {rank}位
+        </Text>
+        <View style={[styles.previewNameWrap, onPressAccount && styles.previewNameTap]}>
+          <View style={styles.previewNameLabelRow}>
+            <Text style={styles.previewNameText} numberOfLines={1}>
+              {name}
+            </Text>
+            {isPrivateAccount ? (
+              <Ionicons name="shield-outline" size={13} style={styles.privateShield} />
+            ) : null}
+          </View>
         </View>
       </View>
-      <Text style={styles.previewValueText}>{value}</Text>
-    </View>
+      <View style={styles.previewValueRow}>
+        <View style={{ flex: 1 }} />
+        <Text style={styles.previewValueText}>{value}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -409,7 +469,7 @@ function createStyles(COLORS, ui) {
     previewStatusText: {
       marginLeft: 8,
       fontSize: 12,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     previewErrorText: {
       paddingVertical: 10,
@@ -419,7 +479,7 @@ function createStyles(COLORS, ui) {
     previewEmptyText: {
       paddingVertical: 10,
       fontSize: 12,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     previewRow: {
       minHeight: 44,
@@ -432,17 +492,28 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
     },
     previewRankText: {
-      width: 42,
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
+      fontSize: 13,
+      fontWeight: "700",
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+    },
+    previewRankLabel: {
+      flexShrink: 0,
+      marginRight: 6,
     },
     previewNameWrap: {
-      flex: 1,
-      minWidth: 0,
       flexDirection: "row",
       alignItems: "center",
-      paddingRight: 8,
+      alignSelf: "flex-start",
+      maxWidth: "100%",
+      flex: 1,
+      minWidth: 0,
+    },
+    previewNameLabelRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      flexShrink: 1,
+      minWidth: 0,
     },
     previewNameText: {
       flexShrink: 1,
@@ -452,16 +523,25 @@ function createStyles(COLORS, ui) {
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     privateShield: {
-      marginLeft: 5,
+      marginLeft: 6,
       color: COLORS.TITLE_GOLD,
       opacity: 0.7,
     },
+    previewNameTap: {
+      paddingVertical: 2,
+      paddingHorizontal: 2,
+      borderRadius: 10,
+    },
+    previewValueRow: {
+      marginTop: 8,
+      flexDirection: "row",
+      alignItems: "center",
+    },
     previewValueText: {
-      marginLeft: 42,
-      marginTop: 3,
       fontSize: 13,
-      fontWeight: "900",
-      color: COLORS.TEXT_ON_LIGHT,
+      fontWeight: "800",
+      color: COLORS.TITLE_GOLD,
+      marginLeft: 10,
     },
     showAllButton: {
       marginTop: 10,
@@ -497,7 +577,7 @@ function createStyles(COLORS, ui) {
     noteText: {
       marginLeft: 8,
       fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       flex: 1,
     },
   }, ui));

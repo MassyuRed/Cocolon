@@ -55,11 +55,11 @@ const TABS = [
   { key: "piece", label: "投稿" },
   { key: "emotion_log", label: "感情通知" },
   { key: "recommend", label: "おすすめ" },
-  { key: "history", label: "履歴" },
+  { key: "history", label: "共鳴" },
 ];
 
-const PIECE_TUTORIAL_STEP_START = 11;
-const PIECE_TUTORIAL_STEP_END = 14;
+const PIECE_TUTORIAL_STEP_START = 12;
+const PIECE_TUTORIAL_STEP_END = 15;
 
 const OWNER_FILTER_ALL = "all";
 const OWNER_FILTER_SELF = "self";
@@ -76,7 +76,7 @@ const STRENGTH_LABEL = {
   strong: "強",
 };
 
-function emotionTint(emotion) {
+function emotionTint(emotion, defaultTextColor) {
   switch (emotion) {
     case "喜び":
       return { bg: "rgba(16,185,129,0.12)", text: "#065F46" };
@@ -89,7 +89,7 @@ function emotionTint(emotion) {
     case "平穏":
       return { bg: "rgba(234,179,8,0.12)", text: "#A16207" };
     default:
-      return { bg: "rgba(107,114,128,0.12)", text: "#374151" };
+      return { bg: "rgba(107,114,128,0.12)", text: defaultTextColor };
   }
 }
 
@@ -345,8 +345,8 @@ function normalizeTutorialPieceItems(items) {
         String(item?.q_key || item?.question?.q_key || "").trim() ||
         `tutorial-q-${index}`,
       title:
-        String(item?.title || item?.question?.title || "Piece").trim() ||
-        "Piece",
+        String(item?.title || item?.question?.title || "ピース").trim() ||
+        "ピース",
     },
     body: String(item?.body || "").trim(),
     created_at: String(item?.created_at || "").trim() || null,
@@ -680,12 +680,12 @@ export default function NexusScreen({ navigation }) {
 
   const pieceEmptyText = useMemo(() => {
     if (ownerFilterMode === OWNER_FILTER_SELF) {
-      return "自分のPieceはまだありません。";
+      return "自分のピースはまだありません。";
     }
     if (ownerFilterMode === OWNER_FILTER_USER) {
-      return `${selectedOwnerLabel}のPieceはまだありません。`;
+      return `${selectedOwnerLabel}のピースはまだありません。`;
     }
-    return "Pieceはまだありません。";
+    return "ピースはまだありません。";
   }, [ownerFilterMode, selectedOwnerLabel]);
 
   const showPieceControls =
@@ -875,7 +875,7 @@ export default function NexusScreen({ navigation }) {
       setPieceState({
         loading: false,
         items: [],
-        error: String(e?.message || "Pieceを読み込めませんでした。"),
+        error: String(e?.message || "ピースを読み込めませんでした。"),
       });
     }
   }, [
@@ -1148,6 +1148,30 @@ export default function NexusScreen({ navigation }) {
     recommendState.loading,
   ]);
 
+  const handlePressGuide = useCallback(() => {
+    try {
+      if (navigation?.navigate) {
+        navigation.navigate("CocolonGuide", { screenId: "piece" });
+        return;
+      }
+    } catch (e) {
+      console.warn("NexusScreen: navigate CocolonGuide failed", e);
+    }
+
+    try {
+      const parent =
+        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
+      if (parent && typeof parent.navigate === "function") {
+        parent.navigate("CocolonGuide", { screenId: "piece" });
+        return;
+      }
+    } catch (e) {
+      console.warn("NexusScreen: parent navigate CocolonGuide failed", e);
+    }
+
+    Alert.alert("ガイド", "ガイド画面を開けませんでした。");
+  }, [navigation]);
+
   const handleOpenFollowList = useCallback(() => {
     if (isTutorialMode) return;
 
@@ -1300,7 +1324,7 @@ export default function NexusScreen({ navigation }) {
 
   const handleOpenTutorialFlow = useCallback(() => {
     void ensureTutorialPiecesSeed();
-    setTutorialStep(15);
+    setTutorialStep(16);
 
     try {
       navigation?.navigate?.("TutorialFlow", {
@@ -1403,9 +1427,9 @@ export default function NexusScreen({ navigation }) {
         const rawMessage = String(e?.message || "").trim();
         const message =
           statusCode === 403
-            ? "フォローしているユーザーのPieceにのみ共鳴できます。"
+            ? "フォローしているユーザーのピースにのみ共鳴できます。"
             : statusCode === 400 && rawMessage.toLowerCase().includes("self")
-              ? "自分のPieceには共鳴できません。"
+              ? "自分のピースには共鳴できません。"
               : rawMessage || "共鳴できませんでした。";
         Alert.alert("共鳴できません", message);
       } finally {
@@ -1437,7 +1461,7 @@ export default function NexusScreen({ navigation }) {
       if (pieceDeleteSubmittingIds[qInstanceId]) return;
 
       Alert.alert(
-        "Pieceを削除しますか？",
+        "ピースを削除しますか？",
         "本当に削除しますか？元に戻せません。",
         [
           { text: "キャンセル", style: "cancel" },
@@ -1474,8 +1498,8 @@ export default function NexusScreen({ navigation }) {
                 const rawMessage = String(e?.message || "").trim();
                 const message =
                   statusCode === 403
-                    ? "自分のPieceだけ削除できます。"
-                    : rawMessage || "Pieceを削除できませんでした。";
+                    ? "自分のピースだけ削除できます。"
+                    : rawMessage || "ピースを削除できませんでした。";
                 Alert.alert("削除できません", message);
               } finally {
                 setPieceDeleteSubmittingIds((prev) => {
@@ -1496,13 +1520,11 @@ export default function NexusScreen({ navigation }) {
     if (!isNexusTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 11:
-        return titleRef;
-      case 12:
-        return pieceTabRef;
       case 13:
-        return selfPieceCardRef;
+        return pieceTabRef;
       case 14:
+        return selfPieceCardRef;
+      case 15:
         return followedPieceCardRef;
       default:
         return null;
@@ -1513,49 +1535,45 @@ export default function NexusScreen({ navigation }) {
     if (!isNexusTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 11:
-        return {
-          step: 11,
-          mode: "info",
-          title: "Piece閲覧画面",
-          message:
-            `投稿タブでは、自分のPieceとフォロー中ユーザーのPieceを一覧で確認できます。
-
-ここでは、自分のPieceとUserのPieceを見ていきます。`,
-          nextLabel: "投稿タブを見る",
-          onNext: () => setTutorialStep(12),
-        };
       case 12:
         return {
           step: 12,
           mode: "info",
-          title: "投稿タブ",
+          title: "ピース画面",
           message:
-            "投稿タブでは、自分とフォロー中ユーザーのPieceを同じ一覧で閲覧できます。",
-          nextLabel: "自分のPieceへ",
+            "ピース画面の説明をします。\n\n自分やフォローしているユーザーのピースや感情通知を閲覧することができます。",
+          nextLabel: "投稿タブへ",
           onNext: () => setTutorialStep(13),
+          disableSpotlight: true,
+          dimOpacity: 0,
         };
       case 13:
         return {
           step: 13,
           mode: "info",
-          title: "自分のPiece",
+          title: "投稿タブ",
           message:
-            `先ほどの入力から作成した自分のPieceです。
-
-問いと答えとして、ラフな独り言が読みやすく整っています。`,
-          nextLabel: "UserのPieceへ",
+            "投稿タブでは、自分やフォローしているユーザーのピースを一覧で確認できます。",
+          nextLabel: "自分のピースへ",
           onNext: () => setTutorialStep(14),
         };
       case 14:
         return {
           step: 14,
           mode: "info",
-          title: "フォロー中ユーザーのPiece",
+          title: "自分のピース",
           message:
-            `UserのPieceも同じ投稿タブで確認できます。
-
-次は、感情入力から三大要素へつながる流れを表で見ます。`,
+            "先ほどの入力から生成した自分のピースです。\n\n問いと答えとして、読みやすく整えています。",
+          nextLabel: "Userのピースへ",
+          onNext: () => setTutorialStep(15),
+        };
+      case 15:
+        return {
+          step: 15,
+          mode: "info",
+          title: "フォロー中ユーザーのピース",
+          message:
+            "Userのピースも同じ投稿タブで確認できます。\n\n次は、感情入力からつながる3つの体験を表で見ます。",
           nextLabel: "つながり表を見る",
           onNext: handleOpenTutorialFlow,
           cardPlacement: "top",
@@ -1637,7 +1655,6 @@ export default function NexusScreen({ navigation }) {
 
     return (
       <View style={styles.pieceControls}>
-        <Text style={styles.controlLabel}>表示ユーザー</Text>
         <CocolonPressable
           style={[
             styles.ownerFilterButton,
@@ -1648,27 +1665,24 @@ export default function NexusScreen({ navigation }) {
           accessibilityLabel="表示ユーザーを選択する"
         >
           <View style={styles.ownerFilterButtonContent}>
+            <View style={styles.ownerFilterSideSlot} />
             <Text style={styles.ownerFilterButtonText} numberOfLines={1}>
               {selectedOwnerLabel}
             </Text>
-            {ownerOptionsLoading ? (
-              <ActivityIndicator
-                size="small"
-                color={colors.TEXT_SUBTLE}
-                style={styles.ownerFilterSpinner}
-              />
-            ) : (
-              <Ionicons
-                name="chevron-down-outline"
-                size={16}
-                color={colors.TEXT_SUBTLE}
-                style={styles.ownerFilterChevron}
-              />
-            )}
+            <View style={styles.ownerFilterSideSlot}>
+              {ownerOptionsLoading ? (
+                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
+              ) : (
+                <Ionicons
+                  name="chevron-down-outline"
+                  size={16}
+                  color={colors.TEXT_SUBTLE}
+                />
+              )}
+            </View>
           </View>
         </CocolonPressable>
 
-        <Text style={[styles.controlLabel, styles.pieceOrderLabel]}>表示順</Text>
         <View style={styles.pieceSortRow}>
           <CocolonPressable
             style={[
@@ -1715,7 +1729,7 @@ export default function NexusScreen({ navigation }) {
       if (!tutorialPieceItems.length) {
         return (
           <Text style={styles.emptyText}>
-            表示できるPieceがまだありません。
+            表示できるピースがまだありません。
           </Text>
         );
       }
@@ -1818,7 +1832,7 @@ export default function NexusScreen({ navigation }) {
                       const type = String(item?.type || "").trim() || "感情";
                       const strengthKey = String(item?.strength || "").trim();
                       const labelStrength = STRENGTH_LABEL[strengthKey] || "";
-                      const tint = emotionTint(type);
+                      const tint = emotionTint(type, ui?.text?.description ?? colors.TEXT_SUBTLE);
                       return (
                         <View
                           key={`${type}-${strengthKey}-${itemIndex}`}
@@ -1890,7 +1904,6 @@ export default function NexusScreen({ navigation }) {
 
     return (
       <View style={styles.historyControls}>
-        <Text style={styles.historyControlLabel}>表示順</Text>
         <View style={styles.historySortRow}>
           <CocolonPressable
             style={[
@@ -1944,7 +1957,7 @@ export default function NexusScreen({ navigation }) {
     } else if (historyState.error && !historyState.resonances.length) {
       content = <Text style={styles.errorText}>{historyState.error}</Text>;
     } else if (!historyState.resonances.length) {
-      content = <Text style={styles.emptyText}>共鳴したPieceはまだありません。</Text>;
+      content = <Text style={styles.emptyText}>共鳴したピースはまだありません。</Text>;
     } else {
       content = historyState.resonances.map((item, index) => {
         const qInstanceId = resolvePieceQInstanceId(item) || `history-${index}`;
@@ -2001,8 +2014,19 @@ export default function NexusScreen({ navigation }) {
         }}
       >
         <View style={styles.panelHeader}>
-          <View ref={titleRef} collapsable={false}>
+          <View ref={titleRef} collapsable={false} style={styles.panelTitleRow}>
             <Text style={styles.panelTitle}>ピース</Text>
+            <CocolonPressable
+              style={styles.guideTitleButton}
+              onPress={handlePressGuide}
+              accessibilityLabel="ピースのガイドを開く"
+            >
+              <Ionicons
+                name="help-circle-outline"
+                size={20}
+                color={colors.TEXT_ON_LIGHT}
+              />
+            </CocolonPressable>
           </View>
           <View style={styles.panelHeaderActions}>
             {!isTutorialMode ? (
@@ -2034,7 +2058,7 @@ export default function NexusScreen({ navigation }) {
                 if (activeTab === "recommend") void loadRecommend();
                 if (activeTab === "history") void loadHistory();
               }}
-              accessibilityLabel="Pieceを再読み込みする"
+              accessibilityLabel="ピースを再読み込みする"
             >
               <Ionicons
                 name="refresh-outline"
@@ -2170,7 +2194,7 @@ export default function NexusScreen({ navigation }) {
                     key={option.key}
                     style={[styles.pickerOption, isActive && styles.pickerOptionActive]}
                     onPress={() => handleSelectOwnerOption(option)}
-                    accessibilityLabel={`${option.label}のPieceを表示する`}
+                    accessibilityLabel={`${option.label}のピースを表示する`}
                   >
                     <View style={styles.pickerOptionTextWrap}>
                       <Text
@@ -2216,7 +2240,7 @@ export default function NexusScreen({ navigation }) {
       {tutorialOverlayConfig ? (
         <TutorialOverlay
           visible={isNexusTutorialStep}
-          targetRect={tutorialTargetRect}
+          targetRect={tutorialOverlayConfig.disableSpotlight ? null : tutorialTargetRect}
           title={tutorialOverlayConfig.title}
           message={tutorialOverlayConfig.message}
           step={tutorialOverlayConfig.step}
@@ -2228,6 +2252,8 @@ export default function NexusScreen({ navigation }) {
           showStepPill={false}
           actionHint={tutorialOverlayConfig.actionHint}
           cardPlacement={tutorialOverlayConfig.cardPlacement}
+          dimOpacity={tutorialOverlayConfig.dimOpacity}
+          blockBackgroundTouches={tutorialOverlayConfig.blockBackgroundTouches !== false}
         />
       ) : null}
     </SafeAreaView>
@@ -2262,6 +2288,21 @@ function createStyles(COLORS, ui) {
           fontWeight: "800",
           color: COLORS.TITLE_GOLD,
           letterSpacing: 0.8,
+        },
+        panelTitleRow: {
+          flexDirection: "row",
+          alignItems: "center",
+        },
+        guideTitleButton: {
+          width: 36,
+          height: 32,
+          borderRadius: 12,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: COLORS.FIELD_BG,
+          borderWidth: 1,
+          borderColor: COLORS.CARD_BORDER,
+          marginLeft: 10,
         },
         panelHeaderActions: {
           flexDirection: "row",
@@ -2379,7 +2420,7 @@ function createStyles(COLORS, ui) {
         tabLabelText: {
           fontSize: 13,
           fontWeight: "800",
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
         },
         tabLabelTextActive: {
           color: COLORS.TITLE_GOLD,
@@ -2391,24 +2432,13 @@ function createStyles(COLORS, ui) {
           marginTop: 2,
         },
         pieceControls: {
-          borderRadius: 18,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 12,
           marginBottom: 14,
-          shadowColor: "#000",
-          shadowOpacity: 0.05,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 2,
         },
         controlLabel: {
           fontSize: 11,
           lineHeight: 16,
           fontWeight: "900",
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
           letterSpacing: 0.3,
           marginBottom: 6,
         },
@@ -2426,7 +2456,12 @@ function createStyles(COLORS, ui) {
         ownerFilterButtonContent: {
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
+        },
+        ownerFilterSideSlot: {
+          width: 24,
+          alignItems: "flex-end",
+          justifyContent: "center",
         },
         ownerFilterButtonText: {
           flex: 1,
@@ -2434,20 +2469,13 @@ function createStyles(COLORS, ui) {
           lineHeight: 18,
           fontWeight: "800",
           color: COLORS.TEXT_ON_LIGHT,
-          paddingRight: 8,
-        },
-        ownerFilterChevron: {
-          marginLeft: 6,
-        },
-        ownerFilterSpinner: {
-          marginLeft: 6,
-        },
-        pieceOrderLabel: {
-          marginTop: 12,
+          textAlign: "center",
         },
         pieceSortRow: {
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "flex-end",
+          marginTop: 10,
         },
         pieceSortButton: {
           paddingHorizontal: 12,
@@ -2455,7 +2483,7 @@ function createStyles(COLORS, ui) {
           borderRadius: 999,
           borderWidth: 1,
           borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.PANEL_BG,
+          backgroundColor: COLORS.FIELD_BG,
         },
         pieceSortButtonSpacer: {
           marginLeft: 8,
@@ -2480,7 +2508,7 @@ function createStyles(COLORS, ui) {
         emptyText: {
           fontSize: 13,
           lineHeight: 20,
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
         },
         errorText: {
           fontSize: 13,
@@ -2525,16 +2553,19 @@ function createStyles(COLORS, ui) {
         },
         emotionLogBadgeArea: {
           marginTop: 8,
-          alignItems: "flex-start",
+          alignItems: "center",
         },
         emotionLogNoEmotion: {
+          width: "100%",
           fontSize: 12,
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
+          textAlign: "center",
         },
         emotionLogBadgeRow: {
+          width: "100%",
           flexDirection: "row",
           flexWrap: "wrap",
-          justifyContent: "flex-start",
+          justifyContent: "center",
         },
         emotionLogBadge: {
           paddingHorizontal: 10,
@@ -2548,7 +2579,7 @@ function createStyles(COLORS, ui) {
           fontWeight: "700",
         },
         emotionLogTime: {
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
           fontSize: 12,
           width: 80,
           textAlign: "right",
@@ -2588,7 +2619,7 @@ function createStyles(COLORS, ui) {
         },
         simpleCardMeta: {
           fontSize: 11,
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
         },
         simpleCardBody: {
           fontSize: 13,
@@ -2605,7 +2636,7 @@ function createStyles(COLORS, ui) {
           fontSize: 11,
           lineHeight: 16,
           fontWeight: "900",
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
           letterSpacing: 0.3,
           marginRight: 8,
         },
@@ -2712,7 +2743,7 @@ function createStyles(COLORS, ui) {
           fontSize: 11,
           lineHeight: 16,
           fontWeight: "700",
-          color: COLORS.TEXT_SUBTLE,
+          color: text.description ?? COLORS.TEXT_SUBTLE,
         },
         pickerOptionMetaActive: {
           color: COLORS.TEXT_ON_LIGHT,

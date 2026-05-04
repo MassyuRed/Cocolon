@@ -22,7 +22,6 @@ import AnalysisHistoryScreen from "./screens/AnalysisHistoryScreen";
 import TodayQuestionHistoryScreen from "./screens/TodayQuestionHistoryScreen";
 import PieceScreen from "./screens/PieceScreen";
 import PieceEntryScreen from "./screens/PieceEntryScreen";
-import ProfileCreateScreen from "./screens/ProfileCreateScreen";
 import PieceLibraryScreen from "./screens/PieceLibraryScreen";
 import TutorialFlowScreen from "./screens/TutorialFlowScreen";
 import PieceHistoryMenuScreen from "./screens/PieceHistoryMenuScreen";
@@ -429,6 +428,7 @@ function InputStackNavigator() {
   return (
     <InputStack.Navigator initialRouteName="Input" screenOptions={{ headerShown: false }}>
       <InputStack.Screen name="Input" component={InputScreen} />
+      <InputStack.Screen name="TutorialIntro" component={TutorialFlowScreen} />
       <InputStack.Screen
         name="InputHistory"
         options={{ headerShown: false }}
@@ -476,7 +476,6 @@ function InputStackNavigator() {
       <InputStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <InputStack.Screen name="NoticeHistory" component={NoticeHistoryScreen} />
       <InputStack.Screen name="Account" component={AccountScreen} />
-      <InputStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <InputStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <InputStack.Screen name="FollowListScreen" component={FollowListScreen} />
     </InputStack.Navigator>
@@ -509,7 +508,6 @@ function AnalysisStackNavigator({ onSetPieceLinkPayload, onRefreshTabUnread, rou
         )}
       </AnalysisStack.Screen>
       <AnalysisStack.Screen name="Account" component={AccountScreen} />
-      <AnalysisStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <AnalysisStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <AnalysisStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <AnalysisStack.Screen name="FollowListScreen" component={FollowListScreen} />
@@ -550,7 +548,6 @@ function PieceStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDi
         )}
       </PieceStack.Screen>
       <PieceStack.Screen name="Account" component={AccountScreen} />
-      <PieceStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <PieceStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <PieceStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <PieceStack.Screen name="FollowListScreen" component={FollowListScreen} />
@@ -568,7 +565,6 @@ function RankingStackNavigator() {
       <RankingStack.Screen name="RankingPieceResonances" component={PieceResonanceRankingScreen} />
       <RankingStack.Screen name="RankingLoginStreak" component={LoginStreakRankingScreen} />
       <RankingStack.Screen name="Account" component={AccountScreen} />
-      <RankingStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <RankingStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <RankingStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <RankingStack.Screen name="FollowListScreen" component={FollowListScreen} />
@@ -590,7 +586,6 @@ function SettingsStackNavigator() {
       <SettingsStack.Screen name="SettingsAppSettings" component={SettingsAppSettingsScreen} />
       <SettingsStack.Screen name="SettingsOther" component={SettingsOtherScreen} />
       <SettingsStack.Screen name="Account" component={AccountScreen} />
-      <SettingsStack.Screen name="ProfileCreate" component={ProfileCreateScreen} />
       <SettingsStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <SettingsStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <SettingsStack.Screen name="FollowListScreen" component={FollowListScreen} />
@@ -652,7 +647,7 @@ function MainTabs() {
     requestAnimationFrame(() => {
       try {
         if (navigationRef.isReady()) {
-          navigationRef.navigate("Input", { screen: "Input" });
+          navigationRef.navigate("Input", { screen: "TutorialIntro" });
         }
       } catch {}
     });
@@ -1539,7 +1534,7 @@ function MainTabs() {
       <Tab.Navigator
         backBehavior="history"
         initialRouteName="Input"
-        tabBar={(props) => <CocolonTabBar {...props} />}
+        tabBar={(props) => (isTutorialMode ? null : <CocolonTabBar {...props} />)}
         screenListeners={{
           state: (e) => {
             const st = e?.data?.state;
@@ -1678,51 +1673,6 @@ function withGlobalFrame(ScreenComponent) {
 }
 
 
-function ProfileCreateScreenWithFrame(props) {
-  const { colors } = useTheme();
-  return (
-    <GlobalFrameLayout frameEnabled={true}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: colors.BG_SILVER,
-          borderLeftColor: colors.BORDER_GOLD,
-          borderRightColor: colors.BORDER_GOLD,
-          borderLeftWidth: FRAME_BORDER_WIDTH,
-          borderRightWidth: FRAME_BORDER_WIDTH,
-        }}
-      >
-        <ProfileCreateScreen
-          {...props}
-          onBack={() => {
-            try {
-              if (props?.navigation?.canGoBack?.()) {
-                props.navigation.goBack();
-                return;
-              }
-            } catch {}
-
-            const viewedUserId = props?.route?.params?.viewedUserId || null;
-
-            try {
-              props?.navigation?.navigate("Account", viewedUserId ? { viewedUserId } : undefined);
-              return;
-            } catch {}
-
-            try {
-              props?.navigation?.navigate("MainTabs");
-            } catch {}
-          }}
-          onOpenSubscription={() => {
-            try {
-              props?.navigation?.navigate("SubscriptionSelect");
-            } catch {}
-          }}
-        />
-      </View>
-    </GlobalFrameLayout>
-  );
-}
 
 const AccountScreenWithFrame = withGlobalFrame(AccountScreen);
 const SubscriptionSelectScreenWithFrame = withGlobalFrame(SubscriptionSelectScreen);
@@ -1738,7 +1688,6 @@ function RootStackNavigator() {
     <RootStack.Navigator initialRouteName="MainTabs" screenOptions={{ headerShown: false }}>
       <RootStack.Screen name="MainTabs" component={MainTabs} />
       <RootStack.Screen name="Account" component={AccountScreenWithFrame} />
-      <RootStack.Screen name="ProfileCreate" component={ProfileCreateScreenWithFrame} />
       <RootStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreenWithFrame} />
       <RootStack.Screen name="FollowListScreen" component={FollowListScreenWithFrame} />
       <RootStack.Screen name="RankingEmotion" component={EmotionRankingScreenWithFrame} />

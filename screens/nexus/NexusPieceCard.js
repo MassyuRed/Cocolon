@@ -91,7 +91,7 @@ export default function NexusPieceCard({
               style={[styles.moreButton, deleteSubmitting && styles.moreButtonDisabled]}
               onPress={() => setMenuVisible((current) => !current)}
               disabled={deleteSubmitting}
-              accessibilityLabel="Pieceのメニューを開く"
+              accessibilityLabel="ピースのメニューを開く"
               hitSlop={8}
             >
               {deleteSubmitting ? (
@@ -174,7 +174,7 @@ export default function NexusPieceCard({
               onPressDelete?.();
             }}
             disabled={deleteSubmitting}
-            accessibilityLabel="Pieceを削除する"
+            accessibilityLabel="ピースを削除する"
           >
             <Ionicons
               name="trash-outline"
@@ -258,7 +258,7 @@ function createStyles(COLORS, ui) {
     },
     timeText: {
       fontSize: 11,
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     newBadge: {
       marginLeft: 8,
@@ -345,7 +345,7 @@ function createStyles(COLORS, ui) {
     },
     metricText: {
       fontSize: 12,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
       fontWeight: "700",
     },
     resonanceButton: {
@@ -374,7 +374,7 @@ function createStyles(COLORS, ui) {
       color: COLORS.ACCENT_TEXT,
     },
     resonanceButtonTextDone: {
-      color: COLORS.TEXT_SUBTLE,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
     },
   }, ui));
 }

@@ -340,7 +340,7 @@ export default function AnalysisReportHistoryScreen({
       },
       scheduleTitle: { color: colors.TEXT_ON_LIGHT },
       scheduleLine: { color: colors.TEXT_ON_LIGHT },
-      scheduleHint: { color: colors.TEXT_SUBTLE },
+      scheduleHint: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
 
       generateBtn: {
         backgroundColor: colors.BORDER_GOLD,
@@ -361,16 +361,16 @@ export default function AnalysisReportHistoryScreen({
       },
       rowTitle: { color: colors.TEXT_ON_LIGHT },
       rowSub: { color: colors.TEXT_ON_LIGHT },
-      rowMeta: { color: colors.TEXT_SUBTLE },
+      rowMeta: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
 
       iconBtn: {
         backgroundColor: colors.PANEL_BG,
         borderColor: colors.CARD_BORDER,
       },
       iconBtnText: { color: colors.TEXT_ON_LIGHT },
-      listEmptyText: { color: colors.TEXT_SUBTLE },
+      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
     };
-  }, [isDark, colors]);
+  }, [isDark, colors, ui]);
 
   const title = `${TYPE_LABEL[normalizedReportType] || "Report"}の履歴`;
   const load = useCallback(async () => {
@@ -730,7 +730,7 @@ export default function AnalysisReportHistoryScreen({
                   color={
                     isDark
                       ? colors.ACCENT_TEXT || colors.TEXT_ON_LIGHT
-                      : "#111827"
+                      : ui?.text?.accentOnButton ?? colors.ACCENT_TEXT
                   }
                 />
               </TouchableOpacity>
@@ -742,7 +742,7 @@ export default function AnalysisReportHistoryScreen({
           <Text
             style={[
               styles.historyRetentionText,
-              { color: isDark ? colors.TEXT_ON_LIGHT : "#111827" },
+              { color: ui?.text?.primary ?? colors.TEXT_ON_LIGHT },
             ]}
           >
             {historyRetentionLabel}
@@ -773,7 +773,7 @@ export default function AnalysisReportHistoryScreen({
           contentContainerStyle={{ paddingVertical: 8 }}
           ListEmptyComponent={
             !errorMsg ? (
-              <Text style={[{ padding: 16, color: "#6B7280" }, themed.listEmptyText]}>
+              <Text style={[{ padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE }, themed.listEmptyText]}>
                 まだ履歴がありません（配布タイミングになると自動で追加されます）\n次回配布: {nextJstLabel}
               </Text>
             ) : null
@@ -800,7 +800,7 @@ export default function AnalysisReportHistoryScreen({
                 </Text>
               </View>
 
-              <Ionicons name="chevron-forward" size={18} color={isDark ? colors.TEXT_SUBTLE : "#9CA3AF"} />
+              <Ionicons name="chevron-forward" size={18} color={ui?.text?.description ?? colors.TEXT_SUBTLE} />
             </TouchableOpacity>
           )}
           ListFooterComponent={
@@ -825,6 +825,7 @@ export default function AnalysisReportHistoryScreen({
 }
 
 function createStyles(COLORS, ui) {
+  const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   container: { flex: 1, backgroundColor: "#fff" },
   header: {
@@ -838,15 +839,15 @@ function createStyles(COLORS, ui) {
     justifyContent: "space-between",
   },
   backBtn: { flexDirection: "row", alignItems: "center", width: 70 },
-  backText: { marginLeft: 2, color: "#374151", fontSize: 13, fontWeight: "600" },
-  headerTitle: { fontSize: 20, fontWeight: "800", color: "#111827" },
+  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
+  headerTitle: { fontSize: 20, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
 
   topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
   historyRetentionText: {
     marginTop: 8,
     fontSize: 12,
     fontWeight: "600",
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
   },
 
   scheduleCard: {
@@ -856,9 +857,9 @@ function createStyles(COLORS, ui) {
     backgroundColor: "#F9FAFB",
     padding: 12,
   },
-  scheduleTitle: { fontSize: 12, fontWeight: "800", color: "#111827", marginBottom: 6 },
-  scheduleLine: { fontSize: 12, color: "#374151", marginBottom: 2 },
-  scheduleHint: { fontSize: 11, color: "#6B7280", marginTop: 6 },
+  scheduleTitle: { fontSize: 12, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 6 },
+  scheduleLine: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE, marginBottom: 2 },
+  scheduleHint: { fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 6 },
 
   generateBtn: {
     flexDirection: "row",
@@ -870,7 +871,7 @@ function createStyles(COLORS, ui) {
     borderColor: "#E5E7EB",
     backgroundColor: "#F3F4F6",
   },
-  generateText: { fontSize: 13, color: "#111827", fontWeight: "700" },
+  generateText: { fontSize: 13, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
 
   // paywall CTA
   paywallBtn: {
@@ -886,7 +887,7 @@ function createStyles(COLORS, ui) {
   },
   paywallBtnText: {
     fontSize: 13,
-    color: "#111827",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     fontWeight: "800",
     marginRight: 2,
   },
@@ -906,13 +907,13 @@ function createStyles(COLORS, ui) {
   rowRead: {
     opacity: 0.55,
   },
-  rowTitle: { fontSize: 14, fontWeight: "800", color: "#111827" },
-  rowSub: { marginTop: 2, fontSize: 12, color: "#374151" },
-  rowMeta: { marginTop: 2, fontSize: 11, color: "#6B7280" },
+  rowTitle: { fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
+  rowMeta: { marginTop: 2, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
   listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
   listFooterSpacer: { height: 12 },
   loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
-  loadMoreText: { fontSize: 13, fontWeight: "700", color: "#374151" },
+  loadMoreText: { fontSize: 13, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
 
   iconBtn: {
     marginLeft: 10,
@@ -926,6 +927,6 @@ function createStyles(COLORS, ui) {
     alignItems: "center",
     justifyContent: "center",
   },
-  iconBtnText: { marginTop: 2, fontSize: 10, color: "#111827", fontWeight: "700" },
+  iconBtnText: { marginTop: 2, fontSize: 10, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
   }, ui));
 }
