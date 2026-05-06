@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout RN repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Detect bundled mashos-api sources
         id: detect-api
@@ -28,7 +28,7 @@ jobs:
 
       - name: Checkout mashos-api repository
         if: ${{ steps.detect-api.outputs.path == '' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: MassyuRed/mashos-api
           path: mashos-api
@@ -47,7 +47,7 @@ jobs:
           fi
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: "pip"
