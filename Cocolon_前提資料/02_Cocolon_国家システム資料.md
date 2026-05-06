@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 117
-  mashos-api: 306
+  Cocolon: 123
+  mashos-api: 329
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 423
-  included_files_cocolon: 117
-  included_files_mashos_api: 306
+  included_files_total: 452
+  included_files_cocolon: 123
+  included_files_mashos_api: 329
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `423 files`
-  - Cocolon: `117`
-  - mashos-api: `306`
+- latest full coverage listed in body: `452 files`
+  - Cocolon: `123`
+  - mashos-api: `329`
 
 # 4. 読み方
 
@@ -543,7 +543,7 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 - latest national-system coverage listed in body: `422 files`
   - Cocolon: `116`
-  - mashos-api: `306`
+  - mashos-api: `329`
 - 旧本文の 408 files coverage は履歴として保持する
 - この追記により、国家システムに関係する latest 422 files は `02` 本文内で全件追跡できる
 - latest zip に存在しない旧本文 path: `0件`
@@ -611,3 +611,36 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 `Input Gate` → `Save API` → `Immediate Reply timeout budget` → `Dispatch` → `Queue / Worker profile` → `FCM notification queue` → `Snapshot / Analysis / Publish` → `Read API / Startup` → `RN display`
 
 この差分では、API hot pathに重い外部通信を抱え込ませないため、FCM送信は `send_fcm_push_v1` としてqueue化し、`ASTOR_WORKER_PROFILE=notification` のworkerで処理する。
+
+# 2026-05-05 差分追記: EmlisAI / Piece current national flow
+
+現行基準は `Cocolon_10(3).zip` / `mashos-api_10(3).zip`、coverage対象は `452 files` です。
+
+## EmlisAI構造
+
+`POST /emotion/submit` の保存直後に `input_feedback.comment_text` を返す。国家システム上は `Save API -> immediate reply -> response contract` の一部であり、ASTOR workerや分析reportとは分ける。
+
+```text
+api_emotion_submit.py / emotion_submit_service.py
+  -> emlis_ai_reply_service.py
+  -> context / capability / world model
+  -> user word anchor / phrase shaping / meaning block / understanding frame
+  -> response composition / observation kernel
+  -> final review / quality gate
+  -> safe fallback if needed
+  -> input_feedback.comment_text + input_feedback.emlis_ai meta
+```
+
+## Piece構造
+
+`emotion_piece_generation_service.py` は preview時点でquestion / answer_display_text / policy / hash材料を作る。publish時に本文を再生成しない構造は維持する。Pieceは「短縮要約」ではなく、入力の核を他者に伝わる一問一答へ整える。
+
+```text
+api_emotion_piece.py
+  -> emotion_piece_generation_service.py
+  -> piece_generated_display.py / piece_generation_policy.py
+  -> emotion_piece_store.py
+  -> home_gateway.emotion_reflection_publish_service.py
+```
+
+EmlisAI / Piece ともに、例文はruntime条件ではなく回帰テストとして扱う。

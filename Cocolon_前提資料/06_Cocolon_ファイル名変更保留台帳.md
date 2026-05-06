@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_file_name_mixing_storage
 title: "Cocolon ファイル名変更保留台帳"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 117
-  mashos-api: 306
+  Cocolon: 123
+  mashos-api: 329
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 

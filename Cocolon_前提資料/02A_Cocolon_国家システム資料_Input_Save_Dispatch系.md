@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1535,3 +1535,21 @@ revision_date: "2026-04-30"
 - `mashos-api/ai/services/ai_inference/api_emotion_submit.py` は Input hot pathでの直接FCM送信を避け、`fcm_push_queue.py` へenqueueする。
 - `mashos-api/ai/services/ai_inference/emotion_submit_service.py` は EmlisAI応答にtimeout budgetを持ち、遅延時はfallback commentへ逃がす。
 - `mashos-api/ai/services/ai_inference/api_emotion_piece.py` は `piece_text` を正式出力にし、`reflection_text` を互換として残す。
+
+# 2026-05-05 差分追記: Input Save直後のEmlisAI current path
+
+`InputScreen.js -> /emotion/submit -> emotion_submit_service.py` の後、EmlisAI immediate reply は `input_feedback.comment_text` として返る。
+
+現行EmlisAIは、保存完了通知ではなく、現在入力を材料にした即時理解応答である。処理は次の境界で分ける。
+
+| 工程 | owner | 役割 |
+|---|---|---|
+| 入力材料 | `emotion_submit_service.py` | `memo` / `memo_action` / `emotion_details` / category を current input として渡す |
+| context | `emlis_ai_context_service.py` | tierに応じたhistory / summary / user model material を束ねる |
+| 読解 | `emlis_ai_user_word_anchor_service.py` / `emlis_ai_phrase_shaping_service.py` | raw入力からanchorを取り、会話文に使えるphraseへ整形する |
+| 意味分解 | `emlis_ai_input_meaning_block_service.py` / `emlis_ai_understanding_frame_service.py` | 汎用意味カテゴリ、意味ブロック、理解frameへ変換する |
+| 構成 | `emlis_ai_response_composition_service.py` | 長文入力では、入口 / 背景 / 緊張・限界 / 気づき / 新しい向き / 安心文を組む |
+| 生成 | `emlis_ai_observation_kernel.py` | composition orderとmeaning blockからreply line候補を作る |
+| 確定 | `emlis_ai_reply_service.py` | render / final review / quality gate / safe fallback / meta付与を行う |
+
+`api_emotion_submit.py` のpublic response contractは、`input_feedback.comment_text` を維持し、`input_feedback.emlis_ai` はadditive metaとして拡張する。

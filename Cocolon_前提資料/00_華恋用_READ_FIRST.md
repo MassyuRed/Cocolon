@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(24).zip"
-  Cocolon: "Cocolon(115).zip"
-  mashos-api: "mashos-api(38).zip"
+  premise: "Cocolon_前提資料(37).zip"
+  Cocolon: "Cocolon_10(3).zip"
+  mashos-api: "mashos-api_10(3).zip"
 file_counts:
-  Cocolon: 117
-  mashos-api: 306
-  total: 423
+  Cocolon: 123
+  mashos-api: 329
+  total: 452
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 423
-  included_in_overall_structure: 423
-  included_in_national_system: 423
+  total_files: 452
+  included_in_overall_structure: 452
+  included_in_national_system: 452
   excluded_from_main_body: 0
 ---
 
@@ -53,12 +53,12 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon(115).zip` | 117 | RNアプリ本体 |
-| `mashos-api(38).zip` | 306 | backend / API / worker / docs / tests |
-| total | 423 | 前提資料の構造coverage対象 |
+| `Cocolon_10(3).zip` | 123 | RNアプリ本体 |
+| `mashos-api_10(3).zip` | 329 | backend / API / worker / docs / tests |
+| total | 452 | 前提資料の構造coverage対象 |
 
-`mashos-api(38).zip` は `mashos-api(37).zip` から実ファイル差分なしです。  
-`Cocolon(115).zip` では、`AppRuntimeContext.js` が追加され、`/app/bootstrap` の runtime 情報をRN側で扱う構造が増えています。
+`Cocolon_10(3).zip` / `mashos-api_10(3).zip` では、EmlisAI immediate reply、Piece生成、Tutorial fixture、Subscription表示文言の構造が現行基準へ更新されています。  
+EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章構成・最終品質Gateで読む構造として扱います。
 
 # 読む順
 
@@ -131,3 +131,20 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 - `accountLocalCleanup.js` のユーザー別analysis cache cleanupを資料化。
 - `pushToken.js` のtoken prefix logはdebug build限定として資料化。
 - `09` を残タスク資料ではなく、名称混在を保管する構造境界資料へ変更。
+
+
+# 2026-05-05 差分追記: EmlisAI / Piece / Tutorial / Subscription current boundary
+
+この版の基準面は `Cocolon_10(3).zip` / `mashos-api_10(3).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として更新します。
+
+| 構造 | current owner | 現状の読み方 |
+|---|---|---|
+| EmlisAI immediate reply | `emlis_ai_reply_service.py` + `emlis_ai_world_model_service.py` + `emlis_ai_observation_kernel.py` | `読解 -> 意味分解 -> 文章構成 -> 自然文生成 -> final review / quality gate -> safe fallback` の汎用pipeline |
+| EmlisAI meaning layer | `emlis_ai_user_word_anchor_service.py` / `emlis_ai_phrase_shaping_service.py` / `emlis_ai_input_meaning_block_service.py` / `emlis_ai_understanding_frame_service.py` | 例文固有語句ではなく、現在入力から抽出した汎用意味カテゴリで扱う |
+| EmlisAI composition layer | `emlis_ai_response_composition_service.py` | 長文入力では、入口 / 背景 / 緊張・限界 / 気づき / 新しい向き / 安心文 の順で返答構成を作る |
+| EmlisAI guard layer | `emlis_ai_reply_final_review_service.py` / `emlis_ai_quality_gate.py` / `emlis_ai_safe_reply_fallback_service.py` | 破綻文、例文特化、情報不足、構成不足を返答前に検出し、現在入力に基づくfallbackへ切り替える |
+| Piece生成 | `emotion_piece_generation_service.py` + `piece_generated_display.py` + `piece_generation_policy.py` | 簡潔化優先ではなく、入力全体の核を他者に伝わる一問一答へ整える。core answer をdisplay layerで汎用文へ潰さない |
+| Tutorial fixture | `TutorialFlowScreen.js` / `tutorialScenarioData.js` / `tutorialFixtures.generated.json` / `generate_tutorial_fixtures.py` | runtime UIとは分けた固定fixture。実生成サービスから作るが、アプリ内ではtutorial表示用の静的データとして読む |
+| Subscription plan copy | `iapRuntimeCatalog.js` / `SubscriptionSelectScreen.js` / `subscription_bootstrap_store.py` | Plus / Premium の表示文言は frontend runtime catalog と backend bootstrap catalog の両方で同期する |
+
+作業時は、例文入力を runtime 条件として実装しません。例文はテストケースであり、runtime は汎用構造で処理します。

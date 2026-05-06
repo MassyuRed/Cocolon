@@ -1702,6 +1702,7 @@ function RootStackNavigator() {
 function RootNavigator() {
   const { session, initializing, recoveryMode } = useAuth();
   const { subscriptionBootstrapLoaded } = useSubscription();
+  const { tutorialResetToken } = useTutorial();
 
   useEffect(() => {
     if (!session || recoveryMode || !subscriptionBootstrapLoaded) {
@@ -1754,7 +1755,7 @@ function RootNavigator() {
 
   if (recoveryMode) return <AuthScreen />;
   if (!session) return <AuthScreen />;
-  return <MainTabs />;
+  return <MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />;
 }
 
 function AppRuntimeBlockingScreen({ runtime, onRetry, retrying }) {

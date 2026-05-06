@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -3936,3 +3936,16 @@ revision_date: "2026-04-30"
 - `mashos-api/ai/services/ai_inference/astor_job_queue.py` は queue stats / stale running job復旧を持つ。
 - `mashos-api/ai/services/ai_inference/astor_worker.py` は `all/core/analysis/inspect/ranking/summary/notification` profile と FCM job handlerを持つ。
 - `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` / `api_contract_registry.py` は新国家システムのadditive contractを反映する。
+
+# 2026-05-05 差分追記: Subscription plan copy source boundary
+
+SubscriptionのPlus / Premium表示文言は、RN表示とbackend bootstrapの両方にsourceがある。どちらか片方だけを変更すると、起動時catalogやfallback表示でズレる。
+
+| file | 現状の役割 |
+|---|---|
+| `Cocolon/lib/iap/iapRuntimeCatalog.js` | RN側のplan catalog normalization / fallback display文言。Plus / Premium の説明文を保持する |
+| `Cocolon/screens/SubscriptionSelectScreen.js` | 「プランを選ぶ」の表示surface。title / price / benefitsをcatalogから描画する |
+| `mashos-api/ai/services/ai_inference/subscription_bootstrap_store.py` | `/subscription/bootstrap` 側のplan catalog / marketing lines / legacy text replacement |
+| `mashos-api/ai/tests/contract/test_subscription_bootstrap_contracts.py` | bootstrap catalog contract |
+
+現行のPlus/Premium表示では、`履歴全般`、`ホーム: Emlis/Emilisからのコメント`、`分析`、`ピース生成回数` をbenefit行として扱う。スタイル変更ではなく文言変更の場合も、上記3ファイルを同時確認する。

@@ -23,6 +23,10 @@ export default function TodayQuestionCard({
   hideHeader = false,
   embedded = false,
   showHistoryButton = false,
+  releaseStatus = null,
+  releaseTimeLocal = null,
+  releaseMessage = null,
+  delivery = null,
   onSubmit,
   onOpenHistory,
 }) {
@@ -52,6 +56,18 @@ export default function TodayQuestionCard({
 
   const choices = Array.isArray(question?.choices) ? question.choices : [];
   const isAnswered = !!answerSummary;
+  const normalizedReleaseStatus = String(releaseStatus || "");
+  const isLockedUntilDelivery =
+    normalizedReleaseStatus === "locked_until_delivery" && !question?.question_id;
+  const releaseTimeLabel = String(
+    releaseTimeLocal || delivery?.delivery_time_local || ""
+  ).trim();
+  const lockedMessage = String(
+    releaseMessage ||
+      (releaseTimeLabel
+        ? `今日の問いは${releaseTimeLabel}に届きます。`
+        : "今日の問いは通知時刻に届きます。")
+  ).trim();
 
   const canSubmitChoice = mode === "choice" && !!selectedChoiceId;
   const canSubmitFreeText =
@@ -93,9 +109,32 @@ export default function TodayQuestionCard({
         </View>
       ) : null}
 
-      {question?.text ? <Text style={styles.questionText}>{question.text}</Text> : null}
+      {isLockedUntilDelivery ? (
+        <View style={styles.lockedWrap}>
+          <View style={styles.lockedIconWrap}>
+            <Ionicons name="lock-closed-outline" size={18} color={colors.TEXT_SUBTLE} />
+          </View>
+          <Text style={styles.lockedTitle}>今日の問いは準備中です</Text>
+          <Text style={styles.lockedBody}>{lockedMessage}</Text>
+          <Text style={styles.lockedBody}>通知時刻になると、質問と回答欄が表示されます。</Text>
+          {showHistoryButton ? (
+            <CocolonPressable
+              style={styles.linkButton}
+              onPress={onOpenHistory}
+              accessibilityLabel="今日の問い履歴を見る"
+            >
+              <Text style={styles.linkText}>履歴を見る</Text>
+              <Ionicons name="chevron-forward" size={16} color={colors.TEXT_SUBTLE} />
+            </CocolonPressable>
+          ) : null}
+        </View>
+      ) : null}
 
-      {isAnswered ? (
+      {!isLockedUntilDelivery && question?.text ? (
+        <Text style={styles.questionText}>{question.text}</Text>
+      ) : null}
+
+      {!isLockedUntilDelivery && isAnswered ? (
         <View style={styles.answeredWrap}>
           <Text style={styles.answeredTitle}>今日は回答済みです</Text>
           {answerSummary?.answer_mode === "choice" && answerSummary?.label ? (
@@ -115,7 +154,7 @@ export default function TodayQuestionCard({
             </CocolonPressable>
           ) : null}
         </View>
-      ) : (
+      ) : !isLockedUntilDelivery ? (
         <>
           <View style={styles.modeRow}>
             <CocolonPressable
@@ -213,7 +252,7 @@ export default function TodayQuestionCard({
             </CocolonButton>
           </View>
         </>
-      )}
+      ) : null}
     </View>
   );
 }
@@ -343,6 +382,41 @@ function createStyles(COLORS) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     actionRow: {
+      marginTop: 2,
+    },
+    lockedWrap: {
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      marginBottom: 4,
+      alignItems: "center",
+    },
+    lockedIconWrap: {
+      width: 34,
+      height: 34,
+      borderRadius: 17,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 8,
+    },
+    lockedTitle: {
+      fontSize: 15,
+      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 6,
+      textAlign: "center",
+    },
+    lockedBody: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
       marginTop: 2,
     },
     answeredWrap: {

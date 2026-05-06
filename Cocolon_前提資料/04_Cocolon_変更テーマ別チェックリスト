@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -136,3 +136,16 @@ Piece関係は、Mash様が明示した時だけPiece専用工程として扱い
 - route / request / response / startup / unread / entitlement / account delete / subscription を触る時は `05` を先に見る。
 - 旧名称は、`09` に保管された構造境界ならrenameしない。
 - DB物理名に関わる場合は、`08` を正本にする。
+
+## 2-4A. EmlisAI immediate reply / input feedback
+
+1. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md`
+2. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
+3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+4. `05_Cocolon_ルールファイル索引`
+5. `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+6. `mashos-api/ai/services/ai_inference/emlis_ai_world_model_service.py`
+7. `mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py`
+8. `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py`
+
+EmlisAIは例文特化ではなく、読解・意味分解・文章構成・自然文生成・最終品質確認の汎用pipelineとして扱う。

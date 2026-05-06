@@ -497,21 +497,10 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const actionBusy = !!purchaseBusyPlan || restoreLoading;
 
   const plusNoteLines = asStringArray(plusPlan?.note_lines, []).filter(Boolean);
-  const defaultPlusNoteLines = [
-    `${plusPriceLabel}で自動更新されます。`,
-    "解約はいつでもストアのサブスクリプション管理から行えます。",
-  ];
-
-  const resolvedPlusNoteLines =
-    plusNoteLines.length > 0 ? plusNoteLines : defaultPlusNoteLines;
+  const resolvedPlusNoteLines = plusNoteLines;
 
   const premiumNoteLines = asStringArray(premiumPlan?.note_lines, []).filter(Boolean);
-  const defaultPremiumNoteLines = [
-    `${premiumPriceLabel}で自動更新されます。`,
-    "解約はいつでもストアのサブスクリプション管理から行えます。",
-  ];
-  const resolvedPremiumNoteLines =
-    premiumNoteLines.length > 0 ? premiumNoteLines : defaultPremiumNoteLines;
+  const resolvedPremiumNoteLines = premiumNoteLines;
 
   const openExternalPage = useCallback(async (url, label = "ページ") => {
     if (!url) {

@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 117
-  mashos-api: 306
+  Cocolon: 123
+  mashos-api: 329
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 423
-  included_files_cocolon: 117
-  included_files_mashos_api: 306
+  included_files_total: 452
+  included_files_cocolon: 123
+  included_files_mashos_api: 329
 ---
 
 # 1. 1行定義
@@ -46,8 +46,8 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 # 4-2. 2026-04-30 current app runtime map
 
-最新基準面は `Cocolon(115).zip` / `mashos-api(38).zip` です。  
-現在のcoverageは `Cocolon=117` / `mashos-api=306` / `total=423` です。
+最新基準面は `Cocolon_10(3).zip` / `mashos-api_10(3).zip` です。  
+現在のcoverageは `Cocolon=123` / `mashos-api=329` / `total=452` です。
 
 この更新は残タスク表ではなく、アプリのファイル構成として読む。
 
@@ -66,9 +66,9 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の latest full coverage は後続の `2026-04-25 差分追記: current full coverage` を正本とする。
 
-- latest full coverage: `423 files`
-  - Cocolon: `117`
-  - mashos-api: `306`
+- latest full coverage: `452 files`
+  - Cocolon: `123`
+  - mashos-api: `329`
 
 # 6. 任意の 1 ファイルから辿る時の原則
 
@@ -572,7 +572,7 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 - latest full coverage listed in body: `422 files`
   - Cocolon: `116`
-  - mashos-api: `306`
+  - mashos-api: `329`
 - 旧本文の 408 files coverage は履歴として保持する
 - この追記により、Cocolon 構造に関係する latest 422 files は `01` 本文内で全件追跡できる
 - latest zip に存在しない旧本文 path: `0件`
@@ -644,3 +644,38 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - RN source file
 - current bridge view への write 切替
 - `mymodel/qna/*` active legacy named public contract
+
+# 2026-05-05 差分追記: current 452 files coverage補正
+
+`Cocolon_10(3).zip` / `mashos-api_10(3).zip` の現行基準では、coverage対象は `452 files` です。
+
+| source | count | 主な差分 |
+|---|---:|---|
+| Cocolon | 123 | Tutorial flow / generated tutorial fixture / package metadata / subscription runtime catalog 表示文言 |
+| mashos-api | 329 | EmlisAI 汎用意味分解・文章構成・Gate層、Piece communicative core、tutorial fixture generator、関連test |
+| total | 452 | 01/02 系の差分追記対象 |
+
+この差分で新しく構造資料上に明示する current files は次です。
+
+### Cocolon側
+
+- `Cocolon/app.json` — React Native app display metadata。表示名は `Emlis`。
+- `Cocolon/package.json` / `Cocolon/package-lock.json` — RN dependency / script boundary。
+- `Cocolon/screens/TutorialFlowScreen.js` — tutorial後半の独立flow screen。`App.js` の `TutorialIntro` / Piece stack `TutorialFlow` から到達する。
+- `Cocolon/tutorial/tutorialScenarioData.js` — tutorial表示用fixture読込・fallback sample定義。
+- `Cocolon/tutorial/generated/tutorialFixtures.generated.json` — tutorial表示用の生成済みfixture。runtime生成ではなく静的fixtureとして読む。
+
+### mashos-api側
+
+- `mashos-api/scripts/generate_tutorial_fixtures.py` — 実generation serviceからtutorial fixtureを生成する保守用script。runtime UI pathではない。
+- `mashos-api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py` — current inputを汎用意味ブロックへ分解する。
+- `mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py` — raw phraseを会話文に入る安全なphraseへ整形する。
+- `mashos-api/ai/services/ai_inference/emlis_ai_response_composition_service.py` — 意味ブロックを返答構成順へ並べる。
+- `mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py` — 返答前の文法・構成・自然さ review。
+- `mashos-api/ai/services/ai_inference/emlis_ai_safe_reply_fallback_service.py` — Gate fail時の現在入力ベースsafe fallback。
+- `mashos-api/ai/services/ai_inference/emlis_ai_understanding_frame_service.py` — anchor/phrase/meaning block を理解frameへ接続する。
+- `mashos-api/ai/services/ai_inference/emlis_ai_user_word_anchor_service.py` — current input から user word anchor を抽出する。
+- `mashos-api/ai/tests/test_emlis_ai_*` の追加群 — phrase shaping / meaning block / composition / final review / quality gate / grounding の回帰確認。
+- `mashos-api/ai/tests/test_emotion_piece_generation_*` の追加群 — Piece core Q&A / communicative core の回帰確認。
+
+旧版の `423 files` 記述は履歴として残っている箇所がありますが、現行作業基準は `452 files` です。

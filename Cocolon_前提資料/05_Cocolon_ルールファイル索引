@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -92,3 +92,30 @@ public route 追加・置換・deprecated整理を行う場合、次の5件を�
 - `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
 
 この3件は、三大中核構造を「機能」ではなく「中核構造」として扱うための最低限のguardである。
+
+# 2026-05-05 差分追記: EmlisAI / Piece 汎用化後のrule索引
+
+## EmlisAI immediate reply で必ず同時確認する rule / guard
+
+| path | 何を拘束するか |
+|---|---|
+| `emlis_ai_phrase_shaping_service.py` | raw anchorをそのまま出力しない。会話文に入るphraseへ整形する |
+| `emlis_ai_input_meaning_block_service.py` | current inputを汎用意味カテゴリへ分解する。例文固有語句をruntime条件にしない |
+| `emlis_ai_response_composition_service.py` | 意味ブロックをユーザーが読める順番へ構成する |
+| `emlis_ai_reply_final_review_service.py` | 返答前に文法・自然さ・構成・groundingを確認する |
+| `emlis_ai_quality_gate.py` | pre-return gate / additive meta / example-specific guardを扱う |
+| `emlis_ai_safe_reply_fallback_service.py` | Gate fail時も例文固定文ではなくcurrent inputから返す |
+
+## Piece生成で必ず同時確認する rule / guard
+
+| path | 何を拘束するか |
+|---|---|
+| `emotion_piece_generation_service.py` | core question / core answer / focus_key / communicative coreを扱う |
+| `piece_generated_display.py` | generated answer display / hash / quality flags を扱う |
+| `piece_generation_policy.py` | preview/publish safety / visibility / hash契約を扱う |
+
+## 例文特化禁止の扱い
+
+- 入力例はテストケースであり、runtime `if` 条件・固定返答・専用fallbackに使わない。
+- 品質Gateは、例文語句が含まれるかではなく、意味カテゴリ・構成・grounding・自然文品質を判定する。
+- regression testは、固定正解文ではなく、汎用経路を通っているかを確認する。

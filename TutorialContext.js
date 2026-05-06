@@ -159,16 +159,17 @@ export function TutorialProvider({ children }) {
   }, [clearTutorialData]);
 
   const endTutorial = useCallback(async () => {
-    setIsTutorialMode(false);
-    setTutorialCompleted(true);
-    setTutorialSkipped(false);
-    clearTutorialData();
-    setTutorialResetToken((prev) => prev + 1);
     await syncTutorialFlagsToProfile({
       tutorial_completed: true,
       tutorial_skipped: false,
       tutorial_completed_at: new Date().toISOString(),
     });
+
+    setIsTutorialMode(false);
+    setTutorialCompleted(true);
+    setTutorialSkipped(false);
+    clearTutorialData();
+    setTutorialResetToken((prev) => prev + 1);
   }, [clearTutorialData, syncTutorialFlagsToProfile]);
 
   const skipTutorial = useCallback(async () => {

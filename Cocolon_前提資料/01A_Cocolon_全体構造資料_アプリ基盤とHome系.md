@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2150,3 +2150,44 @@ revision_date: "2026-04-30"
 - `mashos-api/ai/services/ai_inference/emotion_submit_service.py` は、EmlisAI即時応答に timeout budget を持つ。
 - `mashos-api/ai/services/ai_inference/emlis_ai_context_service.py` は、独立context取得を並列化する。
 - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` / `emlis_ai_types.py` / `emlis_ai_capability.py` は、EmlisAI quality gate meta と capability拡張を保持する。
+
+# 2026-05-05 差分追記: EmlisAI immediate reply current pipeline / Tutorial flow
+
+## EmlisAI immediate reply の current pipeline
+
+`input_feedback.comment_text` は `POST /emotion/submit` 保存直後に返す immediate reply です。現行構造では、例文専用の固定返答ではなく、次の汎用pipelineとして読む。
+
+```text
+current_input
+  -> emlis_ai_user_word_anchor_service
+  -> emlis_ai_phrase_shaping_service
+  -> emlis_ai_input_meaning_block_service
+  -> emlis_ai_understanding_frame_service
+  -> emlis_ai_world_model_service
+  -> emlis_ai_response_composition_service
+  -> emlis_ai_observation_kernel
+  -> emlis_ai_reply_service
+  -> emlis_ai_reply_final_review_service
+  -> emlis_ai_quality_gate
+  -> emlis_ai_safe_reply_fallback_service, if needed
+```
+
+| file | 現状の役割 | 同時確認 |
+|---|---|---|
+| `emlis_ai_user_word_anchor_service.py` | current inputから、返答材料になるuser word anchorを抽出する | phrase shaping / meaning block |
+| `emlis_ai_phrase_shaping_service.py` | raw anchorをそのまま差し込まず、会話文に入るphraseへ整形する | final review / quality gate |
+| `emlis_ai_input_meaning_block_service.py` | phraseと段落・接続語から汎用意味ブロックを作る | composition / observation kernel |
+| `emlis_ai_understanding_frame_service.py` | anchor/meaning blockの関係を理解frameへ整理する | world model |
+| `emlis_ai_response_composition_service.py` | 意味ブロックを、入口・背景・緊張/限界・気づき・新しい向き・安心文へ並べる | observation kernel / final review |
+| `emlis_ai_reply_final_review_service.py` | 破綻文、文末反復、構成不足、未grounded行を返答前に検出する | quality gate |
+| `emlis_ai_quality_gate.py` | additive metaに加え、pre-return gateとして使われる | reply service / safe fallback |
+| `emlis_ai_safe_reply_fallback_service.py` | Gate fail時に、例文固定文ではなく現在入力のsafe phrase / meaning blockから返答を作る | reply service |
+
+EmlisAIの品質改善で触る場合は、`emlis_ai_reply_service.py` だけで判断せず、上記pipelineをまとめて見る。例文はruntime条件ではなくテストケースとして扱う。
+
+## Tutorial flow / fixture boundary
+
+- `Cocolon/screens/TutorialFlowScreen.js` は tutorial のintro/connection/other/finishを扱うRN screen。
+- `Cocolon/tutorial/tutorialScenarioData.js` は `tutorial/generated/tutorialFixtures.generated.json` を読み、fixture不備時のfallback sampleも持つ。
+- `mashos-api/scripts/generate_tutorial_fixtures.py` は実generation serviceからfixtureを生成する保守script。アプリ実行時のAPI pathではない。
+- Tutorial fixture 内のEmlisAI / Piece文言は表示用静的データであり、EmlisAI runtimeの品質判定として扱わない。

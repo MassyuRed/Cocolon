@@ -262,24 +262,18 @@ function clampMemoInputVisibleHeight(height, maxHeight) {
   );
 }
 
-// 強度→数値（分析用）。UIには使わない
+// 強度→数値（中心感情の算出用）。UI表示には使わない
 const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
 
 const SELF_INSIGHT = "自己理解";
 
-const STRENGTH_LABEL_JA = Object.freeze({ weak: "弱", medium: "中", strong: "強" });
 
 function strengthScoreForFeedback(strength) {
   return STRENGTH_SCORE[strength] || 0;
 }
 
 function formatEmotionForFeedback(entry) {
-  const type = String(entry?.type || "").trim();
-  if (!type) return "";
-  if (type === SELF_INSIGHT) return type;
-  const strength = String(entry?.strength || "").trim();
-  const strengthLabel = STRENGTH_LABEL_JA[strength] || "";
-  return strengthLabel ? `${type}（${strengthLabel}）` : type;
+  return String(entry?.type || "").trim();
 }
 
 function buildInputFeedbackEmotionMeta(values) {
@@ -431,6 +425,7 @@ export default function InputScreen({ navigation, route }) {
   const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
   const [keyboardInset, setKeyboardInset] = useState(0);
   const wasTutorialModeRef = useRef(false);
+  const scrollRef = useRef(null);
 
   const resetLocalInputState = useCallback(() => {
     setSelectedEmotions([]);
@@ -454,6 +449,12 @@ export default function InputScreen({ navigation, route }) {
       contextLabel: "",
     });
     setTutorialNavigateAfterReply(false);
+    currentScrollYRef.current = 0;
+    try {
+      scrollRef.current?.scrollTo?.({ y: 0, animated: false });
+    } catch {
+      // noop
+    }
     Keyboard.dismiss();
   }, [resetMemoInputHeights]);
 
@@ -643,7 +644,18 @@ const isWelcomeNoticeStartupPopup = useMemo(
   [noticePopup],
 );
 const isTodayQuestionAnswered = todayQuestionBundle?.answer_status === "answered";
-const todayQuestionStatusLabel = isTodayQuestionAnswered ? "回答済み" : "未回答";
+const todayQuestionReleaseStatus = String(todayQuestionBundle?.release_status || "");
+const isTodayQuestionLockedUntilDelivery =
+  todayQuestionReleaseStatus === "locked_until_delivery" && !todayQuestionBundle?.question;
+const hasTodayQuestionSlot =
+  !!todayQuestionBundle?.question ||
+  !!todayQuestionBundle?.has_current_question ||
+  isTodayQuestionLockedUntilDelivery;
+const todayQuestionStatusLabel = isTodayQuestionLockedUntilDelivery
+  ? "配信待ち"
+  : isTodayQuestionAnswered
+    ? "回答済み"
+    : "未回答";
 
 const handleDismissTodayQuestionModal = useCallback(() => {
   const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
@@ -875,6 +887,12 @@ const { height: windowHeight } = useWindowDimensions();
   useEffect(() => {
     if (!tutorialResetToken) return;
     resetLocalInputState();
+    currentScrollYRef.current = 0;
+    try {
+      scrollRef.current?.scrollTo?.({ y: 0, animated: false });
+    } catch {
+      // noop
+    }
     setPendingInputDraft(null);
     setDraftRestoreModalVisible(false);
     void clearPersistedInputDraft();
@@ -932,7 +950,6 @@ const { height: windowHeight } = useWindowDimensions();
   );
 
   // メモ入力がキーボードに隠れないようにスクロール追従
-  const scrollRef = useRef(null);
   const memoFocusedRef = useRef(false);
   const focusedFieldRef = useRef(null); // "memo" | "memoAction" | null
   const lastFocusTargetRef = useRef(null);
@@ -1335,7 +1352,7 @@ const { height: windowHeight } = useWindowDimensions();
     memoAction,
     keyboardInset,
     shouldHideTodayQuestionForTutorial,
-    !!todayQuestionBundle?.question,
+    hasTodayQuestionSlot,
     todayQuestionLoading,
     noticeLoading,
     tutorialOverlayMetrics,
@@ -1878,7 +1895,7 @@ ${String(error?.message || error)}`
                 </View>
 
                 <View style={styles.homeQuickActionsRow}>
-                  {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question ? (
+                  {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
                     <Pressable
                       style={styles.homeQuickActionButton}
                       onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
@@ -1945,7 +1962,7 @@ ${String(error?.message || error)}`
                   </Pressable>
                 </View>
 
-                {!shouldHideTodayQuestionForTutorial && todayQuestionBundle?.question && isTodayQuestionExpanded ? (
+                {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot && isTodayQuestionExpanded ? (
                   <View style={styles.todayQuestionInlineContent}>
                     <TodayQuestionCard
                       question={todayQuestionBundle?.question}
@@ -1956,6 +1973,10 @@ ${String(error?.message || error)}`
                       hideHeader
                       embedded
                       showHistoryButton
+                      releaseStatus={todayQuestionBundle?.release_status}
+                      releaseTimeLocal={todayQuestionBundle?.release_time_local}
+                      releaseMessage={todayQuestionBundle?.release_message}
+                      delivery={todayQuestionBundle?.delivery}
                       onSubmit={handleSubmitTodayQuestion}
                       onOpenHistory={handleOpenTodayQuestionHistory}
                     />

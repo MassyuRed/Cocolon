@@ -2640,3 +2640,32 @@ revision_date: "2026-04-28"
 - `mashos-api/ai/services/ai_inference/emotion_piece_store.py` は preview本文hashとpublish本文hashの一致を守る。
 - `mashos-api/ai/services/ai_inference/piece_generation_store.py` は共有Supabase client寄せとPiece storage契約を反映する。
 - `mashos-api/ai/services/ai_inference/api_analysis_reports.py` / `api_self_structure.py` / `astor_self_structure_report.py` は `reportValidity` metaをadditive接続する。
+
+# 2026-05-05 差分追記: Piece communicative core / display guard current
+
+Piece生成は、`短くまとめる` ことではなく、感情入力から生まれた考えを **他者に伝わる一問一答** へ整える構造として読む。
+
+## current owner
+
+| file | 現状の役割 |
+|---|---|
+| `emotion_piece_generation_service.py` | Piece previewのquestion / raw answer / core answer / policy metaを作る中心。カテゴリ一般質問より、入力全体のcommunicative coreを優先する |
+| `piece_generated_display.py` | stored row / preview display の正規化・表示文生成・hash・quality flagsを扱う |
+| `piece_generation_policy.py` | URL / PII / 攻撃表現 / visibility / publish可否 / hash契約を扱う |
+| `piece_text_formatter.py` | 表示可能なPiece本文へ整える formatter |
+| `emotion_piece_store.py` / `home_gateway/emotion_reflection_publish_service.py` | preview -> publish の本文hash一致と保存経路 |
+
+## 現行ルール
+
+- `emotion_piece_generation_service.py` は、例文由来の固定回答ではなく、入力から抽出した汎用semantic flagsでquestion / answerを作る。
+- `focus_key` は表示生成側と一致させる。core answerが作れている場合、display layerで `人間関係です` のような汎用文へ潰さない。
+- `できることをです` のようなbroken phraseは返答前に修復・遮断する。
+- `piece_core.communicative_core_ok` は、壊れた日本語がないことだけでなく、core answerが過圧縮・カテゴリ汎用化されていないことも見る。
+- `piece_generation_policy.py` のpreview/publish safetyとhash契約は維持する。
+
+## 追加・更新された回帰test
+
+- `mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py`
+- `mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py`
+
+これらは例文の固定正解文を要求するためではなく、未知入力でも `入力全体の核 -> 他者伝達可能な問い/答え` の構造を通ることを確認するために使う。

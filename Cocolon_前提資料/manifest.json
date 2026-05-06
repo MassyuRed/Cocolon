@@ -1,23 +1,23 @@
 {
-  "revision_date": "2026-04-30",
+  "revision_date": "2026-05-05",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
   "source_mode": "local_snapshot",
   "file_counts": {
-    "Cocolon": 117,
-    "mashos-api": 306
+    "Cocolon": 123,
+    "mashos-api": 329
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 423,
-    "national_system_body_includes": 423,
+    "overall_structure_body_includes": 452,
+    "national_system_body_includes": 452,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル423件、02には国家システム判断対象のcurrent全ファイル423件を本文で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。DB情報は08、名称混在保管は03/09を正本として維持する。",
-    "current_snapshot_total_files": 423,
-    "overall_structure_body_includes_current_snapshot_files": 423,
-    "national_system_body_lists_current_snapshot_files_with_relation": 423,
+    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル452件、02には国家システム判断対象のcurrent全ファイル452件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。DB情報は08、名称混在保管は03/09を正本として維持する。",
+    "current_snapshot_total_files": 452,
+    "overall_structure_body_includes_current_snapshot_files": 452,
+    "national_system_body_lists_current_snapshot_files_with_relation": 452,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -40,7 +40,18 @@
       "total_files": 423
     },
     "premise_role_2026_04_30": "前提資料は、華恋の作業精度を上げるための作業用地図。タスク記録ではなく、Cocolonの全体構造、国家システム、DB等その他構造、名称混在境界を保管する。",
-    "naming_mixing_policy_2026_04_30": "名称混在は無理に一括renameせず、visible名・route名・runtime owner・DB physical nameを分けて読む。資料で保管できるものは保管し、稼働・contract・write path・account delete・access policyに影響する場合だけ修正対象にする。"
+    "naming_mixing_policy_2026_04_30": "名称混在は無理に一括renameせず、visible名・route名・runtime owner・DB physical nameを分けて読む。資料で保管できるものは保管し、稼働・contract・write path・account delete・access policyに影響する場合だけ修正対象にする。",
+    "latest_source_basis_2026_05_05": {
+      "premise": "Cocolon_前提資料(37).zip",
+      "Cocolon": "Cocolon_10(3).zip",
+      "mashos-api": "mashos-api_10(3).zip",
+      "Cocolon_files": 123,
+      "mashos_api_files": 329,
+      "total_files": 452,
+      "doc_role": "現状構造を読むための作業用地図。EmlisAI/Pieceは例文特化ではなく汎用pipelineとして読む。"
+    },
+    "emlis_ai_policy_2026_05_05": "EmlisAIは例文特化禁止。current inputを読解し、汎用意味カテゴリへ分解し、文章構成を作り、自然文生成後にfinal review / quality gate / safe fallbackで返答前検証する。",
+    "piece_policy_2026_05_05": "Pieceは短縮要約ではなく、入力全体の核を他者に伝わる一問一答へ整える。core answerをdisplay layerでカテゴリ汎用文へ潰さない。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -845,5 +856,44 @@
     ],
     "mashos_api_changed_files": [],
     "doc_role": "作業用地図。タスク記録ではない。"
+  },
+  "source_snapshot_2026_05_05": {
+    "premise": "Cocolon_前提資料(37).zip",
+    "Cocolon": "Cocolon_10(3).zip",
+    "mashos-api": "mashos-api_10(3).zip",
+    "Cocolon_files": 123,
+    "mashos_api_files": 329,
+    "total_files": 452,
+    "added_or_newly_documented_files": [
+      "Cocolon/app.json",
+      "Cocolon/package.json",
+      "Cocolon/package-lock.json",
+      "Cocolon/screens/TutorialFlowScreen.js",
+      "Cocolon/tutorial/tutorialScenarioData.js",
+      "Cocolon/tutorial/generated/tutorialFixtures.generated.json",
+      "mashos-api/scripts/generate_tutorial_fixtures.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_user_word_anchor_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_understanding_frame_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_response_composition_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_safe_reply_fallback_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py",
+      "mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py",
+      "mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py",
+      "mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py",
+      "mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py"
+    ]
   }
 }

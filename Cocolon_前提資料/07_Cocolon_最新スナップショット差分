@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(24).zip"
-  Cocolon: "Cocolon(115).zip"
-  mashos-api: "mashos-api(38).zip"
+  premise: "Cocolon_前提資料(37).zip"
+  Cocolon: "Cocolon_10(3).zip"
+  mashos-api: "mashos-api_10(3).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,9 +19,9 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(115).zip` | 117 | `Cocolon(114).zip` から1 file追加、7 files変更 |
-| `mashos-api(38).zip` | 306 | `mashos-api(37).zip` から実ファイル差分なし |
-| total | 423 | 前提資料coverage対象 |
+| `Cocolon_10(3).zip` | 123 | Tutorial flow / fixture / package metadata / subscription runtime catalog 更新 |
+| `mashos-api_10(3).zip` | 329 | EmlisAI / Piece / tutorial fixture generator / tests 更新 |
+| total | 452 | 前提資料coverage対象 |
 
 この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。
 
@@ -47,8 +47,7 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 # 3. API側の最新構造差分
 
-`mashos-api(38).zip` は `mashos-api(37).zip` から実ファイル差分なしです。  
-そのため、今回の前提資料更新では、API側の新規ファイル追加・削除はありません。
+`mashos-api_10(3).zip` では、EmlisAI immediate replyの汎用読解・意味分解・文章構成・Gate層、Piece生成のcommunicative core、tutorial fixture generator、関連testが追加・更新されています。
 
 ただし、RN側は `/app/bootstrap` の既存応答を消費するようになったため、API側で `/app/bootstrap` を触る時は次を同時確認します。
 
@@ -71,9 +70,9 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | coverage | count |
 |---|---:|
-| Cocolon | 117 |
-| mashos-api | 306 |
-| total | 423 |
+| Cocolon | 123 |
+| mashos-api | 329 |
+| total | 452 |
 
 # 5. 前提資料としての変更
 
@@ -117,3 +116,38 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - DBや名称混在を読み間違えない。
 - 旧名称を見つけても、資料で保管されている互換・DB境界ならrenameしない。
 - 修正対象は、稼働・契約・データ保護に影響する箇所だけに限定する。
+
+
+# 2026-05-05 差分追記: current snapshot差分
+
+## Cocolon側で現行資料に追加するファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `Cocolon/app.json` | RN app display metadata。displayNameは `Emlis` |
+| `Cocolon/package.json` / `Cocolon/package-lock.json` | RN dependency / script / build boundary |
+| `Cocolon/screens/TutorialFlowScreen.js` | Tutorial後半の独立flow screen。Input / Piece stackから到達する |
+| `Cocolon/tutorial/tutorialScenarioData.js` | Tutorial fixture reader / fallback sample owner |
+| `Cocolon/tutorial/generated/tutorialFixtures.generated.json` | Tutorial表示用の生成済みfixture |
+
+## mashos-api側で現行資料に追加するファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/scripts/generate_tutorial_fixtures.py` | 実generation serviceからtutorial fixtureを作る保守script |
+| `emlis_ai_user_word_anchor_service.py` | current inputからuser word anchorを抽出 |
+| `emlis_ai_phrase_shaping_service.py` | raw phraseを会話文に安全な形へ整形 |
+| `emlis_ai_input_meaning_block_service.py` | 汎用意味ブロック抽出 |
+| `emlis_ai_understanding_frame_service.py` | 理解frame構築 |
+| `emlis_ai_response_composition_service.py` | 返答構成計画 |
+| `emlis_ai_reply_final_review_service.py` | 返答前final review |
+| `emlis_ai_safe_reply_fallback_service.py` | Gate fail時のsafe fallback |
+| `test_emlis_ai_*` 追加群 | EmlisAI汎用pipeline / Gate / composition regression |
+| `test_emotion_piece_generation_*` 追加群 | Piece communicative core regression |
+
+## 既存構造の現状補正
+
+- EmlisAIは、例文特化コードではなく、`読解 -> 意味分解 -> 構成 -> 自然文生成 -> 最終品質確認` の汎用pipelineとして扱う。
+- Pieceは、カテゴリ一般質問への過圧縮ではなく、入力全体の核を他者に伝わる一問一答へ整える。
+- Tutorial fixtureはruntime生成ではなく、生成済み表示fixtureとして扱う。
+- Subscription plan copyは `iapRuntimeCatalog.js` / `SubscriptionSelectScreen.js` / `subscription_bootstrap_store.py` の3箇所を同時確認する。

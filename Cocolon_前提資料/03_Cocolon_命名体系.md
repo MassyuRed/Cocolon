@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 117
-  mashos-api: 306
+  Cocolon: 123
+  mashos-api: 329
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -52,9 +52,17 @@ export default function TutorialFlowScreen({ navigation }) {
   const connectionRef = useRef(null);
   const otherRef = useRef(null);
   const finishRef = useRef(null);
+  const mountedRef = useRef(true);
   const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const [finishing, setFinishing] = useState(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const isTutorialFlowStep =
     !!isTutorialMode &&
@@ -64,7 +72,16 @@ export default function TutorialFlowScreen({ navigation }) {
 
   const navigateHome = useCallback((options = {}) => {
     const markFinished = options?.markFinished === true;
-    const params = markFinished ? { tutorialFinishedAt: Date.now() } : undefined;
+    const params = markFinished
+      ? { tutorialFinishedAt: Date.now(), tutorialInitialReset: true }
+      : undefined;
+
+    try {
+      navigation?.popToTop?.();
+    } catch {
+      // noop
+    }
+
     try {
       const parent =
         typeof navigation?.getParent === "function" ? navigation.getParent() : null;
@@ -89,13 +106,20 @@ export default function TutorialFlowScreen({ navigation }) {
   const handleCompleteTutorial = useCallback(async () => {
     if (finishing) return;
     setFinishing(true);
+
+    let completed = false;
     try {
       await endTutorial();
-    } finally {
-      setFinishing(false);
+      completed = true;
       requestAnimationFrame(() => {
         navigateHome({ markFinished: true });
       });
+    } catch (e) {
+      console.warn("TutorialFlowScreen: failed to complete tutorial", e);
+    } finally {
+      if (!completed && mountedRef.current) {
+        setFinishing(false);
+      }
     }
   }, [endTutorial, finishing, navigateHome]);
 

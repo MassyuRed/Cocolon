@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-04-30"
+revision_date: "2026-05-05"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2098,3 +2098,37 @@ active legacy named public rows は、主に `mymodel/qna/*` 系です。これ�
 - `mashos-api/ai/services/ai_inference/api_analysis_reports.py` は `reportValidity` metaをadditive保存する。
 - `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` は `quality_gate` metaをadditive接続する。
 - `mashos-api/scripts/cocolon_load_test.py` と `mashos-api/scripts/astor_worker_status.py` は、release前の高負荷・worker滞留確認に使う検証境界である。
+
+# 2026-05-05 差分追記: EmlisAI / Piece Gate and contract tests
+
+## EmlisAI guard files
+
+| file | guard内容 |
+|---|---|
+| `emlis_ai_reply_final_review_service.py` | raw phrase破綻、文末反復、文章構成不足、current inputにない内容の混入を検出 |
+| `emlis_ai_quality_gate.py` | final review結果、meaning coverage、presence、構成、例文特化禁止、pre-return可否をmeta化する |
+| `emlis_ai_safe_reply_fallback_service.py` | Gate fail時に、現在入力のsafe phrase / meaning blockからfallbackを作る |
+
+## Piece guard files
+
+| file | guard内容 |
+|---|---|
+| `emotion_piece_generation_service.py` | communicative core、focus_key、core answer、broken phrase repairを扱う |
+| `piece_generated_display.py` | display text / answer hash / quality flags / public display正規化を扱う |
+| `piece_generation_policy.py` | publish可能性、visibility、安全化、hash契約を扱う |
+
+## current regression / contract tests
+
+- `mashos-api/ai/tests/contract/test_emlis_ai_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py`
+- `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py`
+- `mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py`
+- `mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py`
+- `mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py`
+- `mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py`
+- `mashos-api/ai/tests/test_emlis_ai_response_composition_service.py`
+- `mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py`
+- `mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py`
+- `mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py`
+
+EmlisAI / Pieceのテストは、例文の固定回答を覚えさせる目的ではなく、汎用処理経路とcontractを守るために使う。
