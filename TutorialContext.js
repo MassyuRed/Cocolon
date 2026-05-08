@@ -28,6 +28,7 @@ const INITIAL_TUTORIAL_STATE = Object.freeze({
   tutorialPieces: [],
   tutorialEmotionLogFeed: [],
   tutorialResetToken: 0,
+  tutorialCompletionInProgress: false,
 });
 
 function cloneInitialArrays() {
@@ -80,6 +81,9 @@ export function TutorialProvider({ children }) {
   const [tutorialResetToken, setTutorialResetToken] = useState(
     INITIAL_TUTORIAL_STATE.tutorialResetToken
   );
+  const [tutorialCompletionInProgress, setTutorialCompletionInProgress] = useState(
+    INITIAL_TUTORIAL_STATE.tutorialCompletionInProgress
+  );
 
   const syncTutorialFlagsToProfile = useCallback(async (patch) => {
     try {
@@ -98,6 +102,7 @@ export function TutorialProvider({ children }) {
       setTutorialCompleted(false);
       setTutorialSkipped(false);
       setTutorialFlagsLoaded(false);
+      setTutorialCompletionInProgress(false);
       return () => {
         cancelled = true;
       };
@@ -151,26 +156,35 @@ export function TutorialProvider({ children }) {
       return false;
     }
     setIsTutorialMode(true);
-    setTutorialCompleted(false);
-    setTutorialSkipped(false);
     clearTutorialData();
     setTutorialPieces(cloneTutorialPieceItems(TUTORIAL_PIECES));
     return true;
   }, [clearTutorialData]);
 
   const endTutorial = useCallback(async () => {
-    await syncTutorialFlagsToProfile({
-      tutorial_completed: true,
-      tutorial_skipped: false,
-      tutorial_completed_at: new Date().toISOString(),
-    });
+    const wasAlreadyCompleted = tutorialCompleted === true;
 
-    setIsTutorialMode(false);
-    setTutorialCompleted(true);
-    setTutorialSkipped(false);
-    clearTutorialData();
-    setTutorialResetToken((prev) => prev + 1);
-  }, [clearTutorialData, syncTutorialFlagsToProfile]);
+    setTutorialCompletionInProgress(true);
+    try {
+      const synced = await syncTutorialFlagsToProfile({
+        tutorial_completed: true,
+        tutorial_skipped: false,
+        tutorial_completed_at: new Date().toISOString(),
+      });
+
+      if (!synced && !wasAlreadyCompleted) {
+        throw new Error("Failed to sync tutorial completion flags");
+      }
+
+      setTutorialCompleted(true);
+      setTutorialSkipped(false);
+      clearTutorialData();
+      setTutorialResetToken((prev) => prev + 1);
+      setIsTutorialMode(false);
+    } finally {
+      setTutorialCompletionInProgress(false);
+    }
+  }, [clearTutorialData, syncTutorialFlagsToProfile, tutorialCompleted]);
 
   const skipTutorial = useCallback(async () => {
     setIsTutorialMode(false);
@@ -185,6 +199,7 @@ export function TutorialProvider({ children }) {
 
   const resetTutorial = useCallback(() => {
     setIsTutorialMode(INITIAL_TUTORIAL_STATE.isTutorialMode);
+    setTutorialCompletionInProgress(INITIAL_TUTORIAL_STATE.tutorialCompletionInProgress);
     clearTutorialData();
   }, [clearTutorialData]);
 
@@ -233,6 +248,7 @@ export function TutorialProvider({ children }) {
       tutorialPieces,
       tutorialEmotionLogFeed,
       tutorialResetToken,
+      tutorialCompletionInProgress,
       hasTutorialEmotionLog: tutorialEmotionLogFeed.length > 0,
       setIsTutorialMode,
       setTutorialFlagsLoaded,
@@ -262,6 +278,7 @@ export function TutorialProvider({ children }) {
       tutorialPieces,
       tutorialEmotionLogFeed,
       tutorialResetToken,
+      tutorialCompletionInProgress,
       startTutorial,
       endTutorial,
       skipTutorial,

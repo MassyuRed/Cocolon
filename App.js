@@ -611,6 +611,7 @@ function MainTabs() {
     isTutorialMode,
     tutorialFlagsLoaded,
     tutorialCompleted,
+    tutorialCompletionInProgress,
     startTutorial,
     setTutorialStep,
   } = useTutorial();
@@ -638,7 +639,12 @@ function MainTabs() {
 
   useEffect(() => {
     if (!session || recoveryMode) return;
-    if (!tutorialFlagsLoaded || tutorialCompleted || isTutorialMode) return;
+    if (
+      !tutorialFlagsLoaded ||
+      tutorialCompleted ||
+      isTutorialMode ||
+      tutorialCompletionInProgress
+    ) return;
 
     const started = startTutorial();
     if (started === false) return;
@@ -658,6 +664,7 @@ function MainTabs() {
     setTutorialStep,
     startTutorial,
     tutorialCompleted,
+    tutorialCompletionInProgress,
     tutorialFlagsLoaded,
   ]);
 
