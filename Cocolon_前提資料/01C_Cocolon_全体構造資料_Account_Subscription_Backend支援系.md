@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -3810,7 +3810,7 @@ revision_date: "2026-05-05"
 
 - API contract registry は current route owner と整合済みです。`/nexus/recommend/users`、`/mymodel/recommend/users` compat、`/ranking/mymodel_resonances` compat の route/register drift は前セッションで解消済みです。
 - `mashos-api/ai/docs/API_CONTRACT_POLICY.md` は `API_CONTRACT_POLICY_VERSION=2026-04-20.myprofile-lookup.v1` 前提に更新済みです。
-- DB physical name はまだ旧名が実体のため、API current owner 内でも table constant / query は旧物理名を許容します。DB境界は `08_Cocolon_DB_rename_boundary.md` を正本として見ます。
+- DB physical name はまだ旧名が実体のため、API current owner 内でも table constant / query は旧物理名を許容します。今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB境界のdestructive変更は扱わず、名称読み分けは `03` / `06` / `09` で確認します。
 
 
 # 2026-04-27 差分追記: contract registry / header metadata cleanup
@@ -3949,3 +3949,19 @@ SubscriptionのPlus / Premium表示文言は、RN表示とbackend bootstrapの�
 | `mashos-api/ai/tests/contract/test_subscription_bootstrap_contracts.py` | bootstrap catalog contract |
 
 現行のPlus/Premium表示では、`履歴全般`、`ホーム: Emlis/Emilisからのコメント`、`分析`、`ピース生成回数` をbenefit行として扱う。スタイル変更ではなく文言変更の場合も、上記3ファイルを同時確認する。
+
+
+# 2026-05-07 差分追記: CI / regression test support境界
+
+今回の現行zipでは、前提資料本文に未記載だったGitHub Actions workflowとvalue observation regression testをcoverageへ追加する。
+
+| file | system | 構造上の意味 |
+|---|---|---|
+| `Cocolon/.github/workflows/ios-build.yml` | CI / iOS build support | iOS build確認用workflow。runtime ownerではなくrepo supportとして読む |
+| `Cocolon/.github/workflows/phase6_contract_guards.yml` | CI / contract guard support | Phase6 contract guard系workflow。public contract / 三大中核構造の破壊検出に関係するsupport境界 |
+| `mashos-api/ai/tests/test_cocolon_value_observation_service.py` | regression test | shared value observation serviceの5 signal抽出を検証する |
+| `mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py` | regression test | EmlisAIのvalue observation接続を検証する |
+| `mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py` | regression test | Piece生成のvalue observation / overcompression防止を検証する |
+| `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | regression test | Analysis validity gateのvalue observation domain境界を検証する |
+
+これらはruntime機能追加ではなく、既存三大中核構造の品質・契約を守るsupport層として扱う。

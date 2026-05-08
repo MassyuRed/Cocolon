@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 123
-  mashos-api: 329
+  Cocolon: 125
+  mashos-api: 336
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -212,3 +212,17 @@ current route として registry に明示追加されたもの:
 
 Pieceに属する `mymodel_reflections` / `mymodel_qna_*` / `reflection_text` / `/mymodel/qna/*` / `/emotion/reflection/*` は、今回の作業では後回しにする。  
 ただし `/mymodel/qna/*` と `/emotion/reflection/*` の public contract は、今回の zip 上では deprecated として保管されている。
+
+
+# 2026-05-07 差分追記: value observation語彙の扱い
+
+`value observation` は、三大中核構造に並ぶ4つ目の中核ではありません。EmlisAI構造・分析構造・Piece構造が共有する **観測信号 layer** として読む。
+
+| 語彙 | 読み方 | 主owner |
+|---|---|---|
+| `ValueObservationSignal` | 現在入力から抽出した、source-groundedな価値観測信号 | `value_observation_types.py` |
+| `ValueObservationPlan` | signalをどの程度保持するか、過圧縮リスクがあるかを示すplan | `value_observation_types.py` |
+| `cocolon_value_observation_service` | 5 signalを汎用ruleで抽出するservice。例文固定返答ではない | `cocolon_value_observation_service.py` |
+| `overcompression_risk` | Pieceや長文入力で、言いたい核を短く潰すリスク | `piece_generation_policy.py`, `emotion_piece_generation_service.py` |
+
+命名変更・DB renameではないため、DB physical tableやroute名は変更しない。

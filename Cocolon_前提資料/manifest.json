@@ -1,23 +1,23 @@
 {
-  "revision_date": "2026-05-05",
+  "revision_date": "2026-05-07",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
   "source_mode": "local_snapshot",
   "file_counts": {
-    "Cocolon": 123,
-    "mashos-api": 329
+    "Cocolon": 125,
+    "mashos-api": 336
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 452,
-    "national_system_body_includes": 452,
+    "overall_structure_body_includes": 461,
+    "national_system_body_includes": 461,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル452件、02には国家システム判断対象のcurrent全ファイル452件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。DB情報は08、名称混在保管は03/09を正本として維持する。",
-    "current_snapshot_total_files": 452,
-    "overall_structure_body_includes_current_snapshot_files": 452,
-    "national_system_body_lists_current_snapshot_files_with_relation": 452,
+    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル461件、02には国家システム判断対象のcurrent全ファイル461件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回zipに存在する資料を正本とし、DB physical rename/drop/write path変更は今回対象外とする。",
+    "current_snapshot_total_files": 461,
+    "overall_structure_body_includes_current_snapshot_files": 461,
+    "national_system_body_lists_current_snapshot_files_with_relation": 461,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -51,7 +51,43 @@
       "doc_role": "現状構造を読むための作業用地図。EmlisAI/Pieceは例文特化ではなく汎用pipelineとして読む。"
     },
     "emlis_ai_policy_2026_05_05": "EmlisAIは例文特化禁止。current inputを読解し、汎用意味カテゴリへ分解し、文章構成を作り、自然文生成後にfinal review / quality gate / safe fallbackで返答前検証する。",
-    "piece_policy_2026_05_05": "Pieceは短縮要約ではなく、入力全体の核を他者に伝わる一問一答へ整える。core answerをdisplay layerでカテゴリ汎用文へ潰さない。"
+    "piece_policy_2026_05_05": "Pieceは短縮要約ではなく、入力全体の核を他者に伝わる一問一答へ整える。core answerをdisplay layerでカテゴリ汎用文へ潰さない。",
+    "latest_source_basis_2026_05_07": {
+      "premise": "Cocolon_前提資料(40).zip",
+      "Cocolon": "Cocolon(132).zip",
+      "mashos-api": "mashos-api_2(23).zip",
+      "Cocolon_files": 125,
+      "mashos_api_files": 336,
+      "total_files": 461,
+      "doc_role": "現状構造を読むための作業用地図。三大中核構造はvalue observation signalを共有するが、例文特化・固定返答にはしない。"
+    },
+    "value_observation_policy_2026_05_07": "value observationは三大中核構造の共有観測signal layer。Mash観測を固定文として保存せず、現在入力からsource-groundedなsignalとして抽出し、EmlisAI/Piece/Analysisが各役割に応じて利用する。",
+    "piece_overcompression_policy_2026_05_07": "Pieceは短縮要約ではない。must_keep_signal_keys/source_claims/overcompression_riskを使い、ユーザーが言いたい核を無駄に削らず他者へ伝わる一問一答へ整える。",
+    "analysis_value_observation_boundary_2026_05_07": "Analysisではvalue_observation_signalsをself_structure系素材として扱えるが、emotion domainへmemo_action/self_structure素材を混ぜず、単発入力から人格断定しない。",
+    "current_snapshot_unlisted_paths_added_2026_05_07": [
+      "Cocolon/.github/workflows/ios-build.yml",
+      "Cocolon/.github/workflows/phase6_contract_guards.yml",
+      "mashos-api/ai/services/ai_inference/value_observation_types.py",
+      "mashos-api/ai/services/ai_inference/cocolon_value_observation_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_context_anchor_service.py",
+      "mashos-api/ai/tests/test_cocolon_value_observation_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py",
+      "mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py",
+      "mashos-api/ai/tests/test_analysis_value_observation_boundary.py"
+    ],
+    "current_snapshot_changed_paths_2026_05_07": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_world_model_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_safe_reply_fallback_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_understanding_frame_service.py",
+      "mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py",
+      "mashos-api/ai/services/ai_inference/piece_generation_policy.py",
+      "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py"
+    ]
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -71,40 +107,36 @@
       "purpose": "最初に読む作業用地図。前提資料の在り方と最新基準面を固定する"
     },
     {
-      "path": "01_Cocolon_全体構造資料.md",
-      "purpose": "全体構造総論とsystem単位の読み方"
-    },
-    {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "purpose": "App root / AppRuntimeContext / Home / startup / immediate reply"
+      "purpose": "App root / AppRuntimeContext / Home / startup / immediate reply / EmlisAI value observation"
     },
     {
       "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
-      "purpose": "Analysis / Piece / EmotionLog / Ranking / Self Structure"
+      "purpose": "Analysis / Piece / EmotionLog / Ranking / Self Structure / value observation boundary"
     },
     {
       "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "purpose": "Account / Subscription / ProfileCreate / settings / support / rule / test"
+      "purpose": "Account / Subscription / ProfileCreate / settings / support / rule / test / CI"
     },
     {
-      "path": "02_Cocolon_国家システム資料.md",
-      "purpose": "国家システム総論と/app/bootstrap runtime flow"
+      "path": "01_Cocolon_全体構造資料.md",
+      "purpose": "全体構造総論とsystem単位の読み方。value observation current差分を含む"
     },
     {
       "path": "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "purpose": "Input / Save / Dispatch / Home runtime flag"
-    },
-    {
-      "path": "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
-      "purpose": "Snapshot / Worker / Publish / Read / App runtime boundary"
+      "purpose": "Input / Save / Dispatch / Home runtime flag / immediate reply value observation"
     },
     {
       "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "purpose": "Contract / Boundary / Test / AppRuntimeContext"
+      "purpose": "Contract / Boundary / Test / AppRuntimeContext / value observation guard"
+    },
+    {
+      "path": "02_Cocolon_国家システム資料.md",
+      "purpose": "国家システム総論と/app/bootstrap runtime flow。value observation current差分を含む"
     },
     {
       "path": "03_Cocolon_命名体系.md",
-      "purpose": "visible名・route名・runtime owner・DB物理名の写像"
+      "purpose": "visible名・route名・runtime owner・DB物理名・value observation語彙の写像"
     },
     {
       "path": "04_Cocolon_変更テーマ別チェックリスト",
@@ -112,7 +144,7 @@
     },
     {
       "path": "05_Cocolon_ルールファイル索引",
-      "purpose": "policy / guard / contract file索引"
+      "purpose": "policy / guard / contract / value observation rule file索引"
     },
     {
       "path": "06_Cocolon_ファイル名変更保留台帳.md",
@@ -120,11 +152,7 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "current snapshotの構造差分"
-    },
-    {
-      "path": "08_Cocolon_DB_rename_boundary.md",
-      "purpose": "DB physical name / bridge view / write path / rename境界のDB情報"
+      "purpose": "current snapshotの構造差分。value observation差分を含む"
     },
     {
       "path": "09_Cocolon_名称混在保管と構造境界_2026-04-30.md",

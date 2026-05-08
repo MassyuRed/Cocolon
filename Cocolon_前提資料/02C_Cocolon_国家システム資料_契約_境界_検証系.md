@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2132,3 +2132,18 @@ active legacy named public rows は、主に `mymodel/qna/*` 系です。これ�
 - `mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py`
 
 EmlisAI / Pieceのテストは、例文の固定回答を覚えさせる目的ではなく、汎用処理経路とcontractを守るために使う。
+
+
+# 2026-05-07 差分追記: value observation contract / guard境界
+
+value observationは三大中核構造に共通する観測信号だが、public API contract上はadditive metaとして扱う。既存fieldを削除・renameしない。
+
+| path | 国家システム区分 | 拘束する内容 |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/value_observation_types.py` | Contract / shared type | `cocolon.value_observation.v1` schema、signal / plan metaの形 |
+| `mashos-api/ai/services/ai_inference/cocolon_value_observation_service.py` | Boundary / observation service | 例文固定ではなく、現在入力から汎用signalを抽出すること |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py` | Guard | 内部観測語・責め語・診断風表現を返答本文へ出さないこと |
+| `mashos-api/ai/services/ai_inference/piece_generation_policy.py` | Policy | `overcompression_risk` / `overcompression_blocked` / `value_observation_signal_keys` をpolicy metaで保持すること |
+| `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py` | Guard | value observation素材をemotion/self_structure domain境界内で扱うこと |
+
+`ValueObservationSignal.no_diagnosis` / `no_personality_claim` は、出力を診断や人格断定にしないための境界です。Analysisでは単発入力だけで人格断定せず、複数入力・期間・material_countと一緒に扱う。

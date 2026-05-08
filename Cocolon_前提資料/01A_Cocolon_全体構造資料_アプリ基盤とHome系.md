@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2191,3 +2191,20 @@ EmlisAIの品質改善で触る場合は、`emlis_ai_reply_service.py` だけで
 - `Cocolon/tutorial/tutorialScenarioData.js` は `tutorial/generated/tutorialFixtures.generated.json` を読み、fixture不備時のfallback sampleも持つ。
 - `mashos-api/scripts/generate_tutorial_fixtures.py` は実generation serviceからfixtureを生成する保守script。アプリ実行時のAPI pathではない。
 - Tutorial fixture 内のEmlisAI / Piece文言は表示用静的データであり、EmlisAI runtimeの品質判定として扱わない。
+
+
+# 2026-05-07 差分追記: EmlisAI value observation 接続
+
+EmlisAI immediate reply は、既存の `user word anchor -> phrase shaping -> meaning block -> understanding frame -> world model -> observation kernel -> reply service -> final review / quality gate -> safe fallback` に、共通value observation layerをadditive接続する。
+
+| file | 現状の役割 | 同時確認 |
+|---|---|---|
+| `value_observation_types.py` | 三大中核構造で共有する `ValueObservationSignal` / `ValueObservationPlan` の型定義 | `cocolon_value_observation_service.py` |
+| `cocolon_value_observation_service.py` | 現在入力から5種類のvalue observation signalを抽出する。例文固定文ではなく汎用rule | `test_cocolon_value_observation_service.py` |
+| `emlis_ai_world_model_service.py` | `value_observation_signals` / `value_observation_plan` をworld model factsへ保持 | `emlis_ai_types.py` |
+| `emlis_ai_observation_kernel.py` | signalの `emlis_text` を `value_observation.*` candidateとして扱う | `emlis_ai_reply_service.py` |
+| `emlis_ai_reply_service.py` | EmlisAI metaへvalue observationをadditiveにserializeする | `emlis_ai_quality_gate.py` |
+| `emlis_ai_reply_final_review_service.py` | 内部観測語・責め語・断定語を返答前に遮断する | `emlis_ai_safe_reply_fallback_service.py` |
+| `emlis_ai_safe_reply_fallback_service.py` | fallbackでもvalue observation lineを使い、単なる受領文へ戻さない | `emlis_ai_quality_gate.py` |
+
+EmlisAIで出すのは内部観測語ではなく、ユーザー向けにsoftenした表現です。`コンフォートゾーン`、`スペック`、`精神の問題`、`皮算用` は内部観測語として扱い、返答本文には直接出さない。

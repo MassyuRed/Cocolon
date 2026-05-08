@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1553,3 +1553,23 @@ revision_date: "2026-05-05"
 | 確定 | `emlis_ai_reply_service.py` | render / final review / quality gate / safe fallback / meta付与を行う |
 
 `api_emotion_submit.py` のpublic response contractは、`input_feedback.comment_text` を維持し、`input_feedback.emlis_ai` はadditive metaとして拡張する。
+
+
+# 2026-05-07 差分追記: Input -> immediate reply value observation flow
+
+国家システム上、value observationは `Input Gate -> Save API -> immediate reply` の中で、保存直後のEmlisAI返答とPiece previewの品質を補助するadditive layerとして読む。
+
+```text
+current_input
+  -> emlis_ai_user_word_anchor_service / emlis_ai_input_meaning_block_service
+  -> cocolon_value_observation_service
+  -> emlis_ai_world_model_service / emlis_ai_observation_kernel
+  -> emlis_ai_reply_service -> input_feedback.emlis_ai.meta.value_observation
+
+emotion_piece preview
+  -> cocolon_value_observation_service
+  -> emotion_piece_generation_service
+  -> piece_generation_policy -> piece_core / policy meta
+```
+
+value observation signalは、保存APIやDB write pathを変更しない。返答・preview・分析validityのmetaをadditiveに補強するだけであり、public response shapeを破壊しない。

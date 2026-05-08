@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(37).zip"
-  Cocolon: "Cocolon_10(3).zip"
-  mashos-api: "mashos-api_10(3).zip"
+  premise: "Cocolon_前提資料(40).zip"
+  Cocolon: "Cocolon(132).zip"
+  mashos-api: "mashos-api_2(23).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,9 +19,9 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_10(3).zip` | 123 | Tutorial flow / fixture / package metadata / subscription runtime catalog 更新 |
-| `mashos-api_10(3).zip` | 329 | EmlisAI / Piece / tutorial fixture generator / tests 更新 |
-| total | 452 | 前提資料coverage対象 |
+| `Cocolon(132).zip` | 125 | GitHub Actions workflow 2件をcoverageへ追加 |
+| `mashos-api_2(23).zip` | 336 | value observation layer / EmlisAI接続 / Piece過圧縮防止 / Analysis boundary / tests 更新 |
+| total | 461 | 前提資料coverage対象 |
 
 この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。
 
@@ -47,7 +47,7 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 # 3. API側の最新構造差分
 
-`mashos-api_10(3).zip` では、EmlisAI immediate replyの汎用読解・意味分解・文章構成・Gate層、Piece生成のcommunicative core、tutorial fixture generator、関連testが追加・更新されています。
+`mashos-api_2(23).zip` では、EmlisAI immediate replyのvalue observation接続、Piece生成の過圧縮防止、Analysis validity gate境界、関連testが追加・更新されています。
 
 ただし、RN側は `/app/bootstrap` の既存応答を消費するようになったため、API側で `/app/bootstrap` を触る時は次を同時確認します。
 
@@ -70,9 +70,9 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | coverage | count |
 |---|---:|
-| Cocolon | 123 |
-| mashos-api | 329 |
-| total | 452 |
+| Cocolon | 125 |
+| mashos-api | 336 |
+| total | 461 |
 
 # 5. 前提資料としての変更
 
@@ -84,13 +84,13 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 | `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` | account delete / subscription sales / local cleanup / push token境界を反映 |
 | `02_Cocolon_国家システム資料.md` | `/app/bootstrap` runtime flowを反映 |
 | `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` | Today Question flag境界を反映 |
-| `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` | App runtime / subscription / push token境界を反映 |
+| `02_Cocolon_国家システム資料.md` / `02C_Cocolon_国家システム資料_契約_境界_検証系.md` | 今回zipに存在する国家システム資料で Snapshot / Worker / Publish / Read 境界を読むよう補正 |
 | `02C_Cocolon_国家システム資料_契約_境界_検証系.md` | App runtime boundaryを反映 |
 | `03_Cocolon_命名体系.md` | API base URLとruntime contextの名称境界を反映 |
 | `04_Cocolon_変更テーマ別チェックリスト` | 変更テーマから読む順を構造資料として整理 |
 | `05_Cocolon_ルールファイル索引` | `/app/bootstrap` runtime boundaryをrule索引に追加 |
 | `06_Cocolon_ファイル名変更保留台帳.md` | renameタスクではなく名称保管台帳として整理 |
-| `08_Cocolon_DB_rename_boundary.md` | DB情報資料としての位置づけを明示 |
+| `03_Cocolon_命名体系.md` / `06_Cocolon_ファイル名変更保留台帳.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md` | 今回zipに08が存在しないため、DB destructive変更は扱わず名称読み分けだけを保管 |
 | `09_Cocolon_名称混在保管と構造境界_2026-04-30.md` | 残タスク資料ではなく、名称混在の構造境界資料として作成 |
 | `manifest.json` | 最新snapshot、coverage、doc listを反映 |
 
@@ -151,3 +151,32 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - Pieceは、カテゴリ一般質問への過圧縮ではなく、入力全体の核を他者に伝わる一問一答へ整える。
 - Tutorial fixtureはruntime生成ではなく、生成済み表示fixtureとして扱う。
 - Subscription plan copyは `iapRuntimeCatalog.js` / `SubscriptionSelectScreen.js` / `subscription_bootstrap_store.py` の3箇所を同時確認する。
+
+
+# 2026-05-07 差分追記: value observation current snapshot差分
+
+## Cocolon側で現行資料に追加するファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `Cocolon/.github/workflows/ios-build.yml` | iOS build確認用GitHub Actions workflow。runtimeではなくrepo supportとして扱う |
+| `Cocolon/.github/workflows/phase6_contract_guards.yml` | Phase6 contract guard用GitHub Actions workflow。public contract / 三大中核構造の破壊検出に関係する |
+
+## mashos-api側で現行資料に追加するファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/value_observation_types.py` | `ValueObservationSignal` / `ValueObservationPlan` / schema version を定義する共通型 |
+| `mashos-api/ai/services/ai_inference/cocolon_value_observation_service.py` | 5つのvalue observation signalを固定文ではなく汎用ruleとして抽出するservice |
+| `mashos-api/ai/services/ai_inference/emlis_context_anchor_service.py` | EmlisAIへcross-core contextを渡すanchor境界。value observationを人格断定として扱わない |
+| `mashos-api/ai/tests/test_cocolon_value_observation_service.py` | shared value observation serviceのsignal抽出test |
+| `mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py` | EmlisAIのvalue observation接続test |
+| `mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py` | Piece生成のvalue observation / overcompression防止test |
+| `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | Analysis validity gateのvalue observation domain boundary test |
+
+## 既存構造の現状補正
+
+- EmlisAIは、value observation signalをworld model / observation candidate / meta / fallback / quality gateへadditive接続する。
+- Pieceは、短縮要約ではなく、`must_keep_signal_keys` と `source_claims` を保持してユーザーの言いたい核を他者へ伝わる形に整える。
+- Analysisは、value observationを単発の人格断定にせず、self_structure domain素材としてmaterial boundary内で扱う。
+- `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は今回の前提資料zip内に存在しないため、manifestのdocs listから外し、現存資料への参照を正本とする。

@@ -1,6 +1,6 @@
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
-revision_date: "2026-04-28"
+revision_date: "2026-05-07"
 ---
 
 # 01B. Analysis / Piece / EmotionLog / Ranking系
@@ -2669,3 +2669,19 @@ Piece生成は、`短くまとめる` ことではなく、感情入力から生
 - `mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py`
 
 これらは例文の固定正解文を要求するためではなく、未知入力でも `入力全体の核 -> 他者伝達可能な問い/答え` の構造を通ることを確認するために使う。
+
+
+# 2026-05-07 差分追記: Piece / Analysis value observation境界
+
+Pieceは短縮要約ではなく、ユーザーが言いたいことを他者に伝わる形へ昇華する構造です。今回の差分では、`cocolon_value_observation_service.py` のsignalをPieceCoreQuestionAnswerPlanへ接続し、答えを不必要に短く潰さないためのmetaを追加した。
+
+| file | 現状の役割 | 同時確認 |
+|---|---|---|
+| `emotion_piece_generation_service.py` | value observation signalからquestion / answerを作り、`must_keep_signal_keys` / `source_claims` / `answer_preservation_policy` / `overcompression_risk` をpiece_core metaへ保持 | `piece_generation_policy.py`, `piece_generated_display.py` |
+| `piece_generation_policy.py` | `overcompression_risk` / `overcompression_blocked` / `value_observation_signal_keys` をpolicy metaへ追加し、短縮しすぎによる核消失を検出する | `api_emotion_piece.py`, `emotion_piece_store.py` |
+| `analysis_report_validity_gate.py` | `value_observation_signal_keys` を抽出し、self_structure素材として扱えるようにする。emotion domainへmemo_action/self_structure素材を混ぜない | `api_analysis_reports.py`, `api_self_structure.py` |
+| `emlis_context_anchor_service.py` | cross-core context anchor境界。value observationを人格断定として渡さない | `emlis_ai_world_model_service.py` |
+| `test_emotion_piece_generation_value_observation.py` | Pieceのvalue observation生成と過圧縮防止を検証する | `emotion_piece_generation_service.py` |
+| `test_analysis_value_observation_boundary.py` | Analysis validity gateのdomain境界を検証する | `analysis_report_validity_gate.py` |
+
+Piece本文の長さは固定しない。禁止するのは長さではなく、`ユーザーが言いたい核が消えること` と `公開安全性を壊すこと` です。長文自己理解入力では、複数文の答えを許容し、source-scaled detailとして扱う。

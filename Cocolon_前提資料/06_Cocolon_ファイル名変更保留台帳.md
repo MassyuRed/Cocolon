@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_file_name_mixing_storage
 title: "Cocolon ファイル名変更保留台帳"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 123
-  mashos-api: 329
+  Cocolon: 125
+  mashos-api: 336
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 
@@ -47,7 +47,7 @@ Cocolonに残っている旧名称ファイル・旧route・旧DB物理名を、
 - 旧名称ファイルを見つけた時に、current visible名へ写像する。
 - 旧名称が互換維持なのか、DB物理名なのか、runtime ownerなのかを分ける。
 - renameしてよいかを即判断しない。
-- DB physical rename / drop は `08_Cocolon_DB_rename_boundary.md` を正本にする。
+- 今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB physical rename / drop は扱わない。
 - public APIの削除判断は `05_Cocolon_ルールファイル索引` と `PUBLIC_API_REGISTRY.md` を正本にする。
 
 # 4. renameしない原則
@@ -80,7 +80,7 @@ Cocolonに残っている旧名称ファイル・旧route・旧DB物理名を、
 # 6. DB名について
 
 DB physical rename / drop / bridge view write switch は、この台帳では扱いません。  
-DBの実体、bridge view、write path、drop可否は `08_Cocolon_DB_rename_boundary.md` を読む。
+今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DBの実体、bridge view、write path、drop可否をこの資料だけで判断しない。
 
 この台帳では、DB旧名を見た時の読み方だけを保管します。
 

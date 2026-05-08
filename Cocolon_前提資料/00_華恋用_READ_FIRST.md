@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(37).zip"
-  Cocolon: "Cocolon_10(3).zip"
-  mashos-api: "mashos-api_10(3).zip"
+  premise: "Cocolon_前提資料(40).zip"
+  Cocolon: "Cocolon(132).zip"
+  mashos-api: "mashos-api_2(23).zip"
 file_counts:
-  Cocolon: 123
-  mashos-api: 329
-  total: 452
+  Cocolon: 125
+  mashos-api: 336
+  total: 461
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 452
-  included_in_overall_structure: 452
-  included_in_national_system: 452
+  total_files: 461
+  included_in_overall_structure: 461
+  included_in_national_system: 461
   excluded_from_main_body: 0
 ---
 
@@ -53,12 +53,12 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_10(3).zip` | 123 | RNアプリ本体 |
-| `mashos-api_10(3).zip` | 329 | backend / API / worker / docs / tests |
-| total | 452 | 前提資料の構造coverage対象 |
+| `Cocolon(132).zip` | 125 | RNアプリ本体 |
+| `mashos-api_2(23).zip` | 336 | backend / API / worker / docs / tests |
+| total | 461 | 前提資料の構造coverage対象 |
 
-`Cocolon_10(3).zip` / `mashos-api_10(3).zip` では、EmlisAI immediate reply、Piece生成、Tutorial fixture、Subscription表示文言の構造が現行基準へ更新されています。  
-EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章構成・最終品質Gateで読む構造として扱います。
+`Cocolon(132).zip` / `mashos-api_2(23).zip` では、EmlisAI / Piece / Analysis に共通する value observation layer が追加され、三大中核構造の観測信号を共有する構造が現行基準へ更新されています。  
+EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章構成・最終品質Gateで読む構造として扱います。Pieceは短縮要約ではなく、ユーザーが言いたいことを他者へ伝わる形へ昇華する構造として読む。
 
 # 読む順
 
@@ -83,19 +83,18 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 
 1. `02_Cocolon_国家システム資料.md`
 2. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
-3. `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md`
-4. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
 
-`02` 系は、入力が保存され、queue / worker / snapshot / read-side / RN display に流れる全体を確認する資料です。
+`02` 系は、入力が保存され、queue / worker / snapshot / read-side / RN display に流れる全体を確認する資料です。今回入力された前提資料zipには `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` が存在しないため、Snapshot / Worker / Publish / Read は `02` 本体、`02C`、`07` の差分追記から読む。
 
 ## 4. 境界・rule・DB
 
 1. `05_Cocolon_ルールファイル索引`
 2. `06_Cocolon_ファイル名変更保留台帳.md`
-3. `08_Cocolon_DB_rename_boundary.md`
-4. `07_Cocolon_最新スナップショット差分`
+3. `07_Cocolon_最新スナップショット差分`
+4. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`
 
-`05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`08` はDB情報、`07` は最新zipとの差分確認です。
+`05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`07` は最新zipとの差分確認、`03` / `09` は名称混在・DB物理名の読み分けを補助する資料です。今回入力された前提資料zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB physical rename / drop / write path変更は扱わない。
 
 # 最新アプリ構造で特に見る場所
 
@@ -114,7 +113,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 
 1. まず `03` と `09` で名称混在を確認する。
 2. 次に `01` でファイル構成を確認する。
-3. 国家システムやDB・worker・access policyに関係する場合は `02` と `08` を確認する。
+3. 国家システムやworker・access policyに関係する場合は `02` 系を確認する。DB physical rename / drop / write path変更は今回扱わない。
 4. public API / request / response / entitlement / startup / auth / account delete / subscription を触る場合は `05` を確認する。
 5. 旧名称を見つけても、資料で保管されている互換・DB境界なら rename しない。
 6. 修正する場合は、関係ファイルだけを触る。
@@ -135,7 +134,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 
 # 2026-05-05 差分追記: EmlisAI / Piece / Tutorial / Subscription current boundary
 
-この版の基準面は `Cocolon_10(3).zip` / `mashos-api_10(3).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として更新します。
+この版の基準面は `Cocolon(132).zip` / `mashos-api_2(23).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として更新します。
 
 | 構造 | current owner | 現状の読み方 |
 |---|---|---|
@@ -148,3 +147,18 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 | Subscription plan copy | `iapRuntimeCatalog.js` / `SubscriptionSelectScreen.js` / `subscription_bootstrap_store.py` | Plus / Premium の表示文言は frontend runtime catalog と backend bootstrap catalog の両方で同期する |
 
 作業時は、例文入力を runtime 条件として実装しません。例文はテストケースであり、runtime は汎用構造で処理します。
+
+
+# 2026-05-07 差分追記: 三大中核構造 value observation current boundary
+
+この版の基準面は `Cocolon_前提資料(40).zip` / `Cocolon(132).zip` / `mashos-api_2(23).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として差分更新します。
+
+| 構造 | current owner | 現状の読み方 |
+|---|---|---|
+| 共通価値観測 layer | `value_observation_types.py` + `cocolon_value_observation_service.py` | 三大中核構造が共有する source-grounded な観測信号。例文固定返答ではなく、現在入力から汎用 signal を抽出する |
+| EmlisAI value observation接続 | `emlis_ai_world_model_service.py` + `emlis_ai_observation_kernel.py` + `emlis_ai_reply_service.py` + `emlis_ai_quality_gate.py` + `emlis_ai_safe_reply_fallback_service.py` | value observation signal を world model / candidate / meta / fallback / gate にadditive接続する |
+| Piece value observation接続 | `emotion_piece_generation_service.py` + `piece_generation_policy.py` | signal から問い・答えを作り、`must_keep_signal_keys` / `source_claims` / `overcompression_risk` を meta として保持する |
+| Analysis value observation境界 | `analysis_report_validity_gate.py` | `value_observation_signals` をself_structure系素材として扱えるようにし、emotion domainへ混ぜない |
+| 回帰test | `test_cocolon_value_observation_service.py` / `test_emlis_ai_value_observation_cases.py` / `test_emotion_piece_generation_value_observation.py` / `test_analysis_value_observation_boundary.py` | 5つの観測signalを固定文一致ではなく構造signalとして検証する |
+
+この版で本文未記載だった現行ファイルは、`01` / `02` / `07` に差分追記してcoverageへ含める。`02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は、今回入力された前提資料zip内に存在しないため、参照先として新規追記しない。DB physical rename / drop / write path変更は今回も対象外とする。

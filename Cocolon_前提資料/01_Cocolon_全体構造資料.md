@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 123
-  mashos-api: 329
+  Cocolon: 125
+  mashos-api: 336
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 452
-  included_files_cocolon: 123
-  included_files_mashos_api: 329
+  included_files_total: 461
+  included_files_cocolon: 125
+  included_files_mashos_api: 336
 ---
 
 # 1. 1行定義
@@ -46,8 +46,8 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 # 4-2. 2026-04-30 current app runtime map
 
-最新基準面は `Cocolon_10(3).zip` / `mashos-api_10(3).zip` です。  
-現在のcoverageは `Cocolon=123` / `mashos-api=329` / `total=452` です。
+最新基準面は `Cocolon(132).zip` / `mashos-api_2(23).zip` です。  
+現在のcoverageは `Cocolon=125` / `mashos-api=336` / `total=461` です。
 
 この更新は残タスク表ではなく、アプリのファイル構成として読む。
 
@@ -66,9 +66,9 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の latest full coverage は後続の `2026-04-25 差分追記: current full coverage` を正本とする。
 
-- latest full coverage: `452 files`
-  - Cocolon: `123`
-  - mashos-api: `329`
+- latest full coverage: `461 files`
+  - Cocolon: `125`
+  - mashos-api: `336`
 
 # 6. 任意の 1 ファイルから辿る時の原則
 
@@ -647,13 +647,13 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 # 2026-05-05 差分追記: current 452 files coverage補正
 
-`Cocolon_10(3).zip` / `mashos-api_10(3).zip` の現行基準では、coverage対象は `452 files` です。
+`Cocolon(132).zip` / `mashos-api_2(23).zip` の現行基準では、coverage対象は `461 files` です。
 
 | source | count | 主な差分 |
 |---|---:|---|
-| Cocolon | 123 | Tutorial flow / generated tutorial fixture / package metadata / subscription runtime catalog 表示文言 |
-| mashos-api | 329 | EmlisAI 汎用意味分解・文章構成・Gate層、Piece communicative core、tutorial fixture generator、関連test |
-| total | 452 | 01/02 系の差分追記対象 |
+| Cocolon | 125 | Tutorial flow / generated tutorial fixture / package metadata / subscription runtime catalog 表示文言 |
+| mashos-api | 336 | EmlisAI 汎用意味分解・文章構成・Gate層、Piece communicative core、tutorial fixture generator、関連test |
+| total | 461 | 01/02 系の差分追記対象 |
 
 この差分で新しく構造資料上に明示する current files は次です。
 
@@ -678,4 +678,51 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - `mashos-api/ai/tests/test_emlis_ai_*` の追加群 — phrase shaping / meaning block / composition / final review / quality gate / grounding の回帰確認。
 - `mashos-api/ai/tests/test_emotion_piece_generation_*` の追加群 — Piece core Q&A / communicative core の回帰確認。
 
-旧版の `423 files` 記述は履歴として残っている箇所がありますが、現行作業基準は `452 files` です。
+旧版の `423 files` / `452 files` 記述は履歴として残っている箇所がありますが、現行作業基準は `461 files` です。
+
+
+# 2026-05-07 差分追記: value observation / current full coverage補正
+
+基準zipは `Cocolon(132).zip` / `mashos-api_2(23).zip` です。現行coverageは `Cocolon=125` / `mashos-api=336` / `total=461` です。旧本文は履歴として保持し、この差分追記を現行基準の補正として読む。
+
+## 現行資料へ追加するファイル
+
+| file | system | 構造上の意味 |
+|---|---|---|
+| `Cocolon/.github/workflows/ios-build.yml` | repo support / CI | iOS build系GitHub Actions workflow。app runtimeやpublic APIではなく、build確認用のsupport境界 |
+| `Cocolon/.github/workflows/phase6_contract_guards.yml` | repo support / contract guard CI | Phase6 / contract guard系GitHub Actions workflow。三大中核構造のcontract破壊をCIで検出するsupport境界 |
+| `mashos-api/ai/services/ai_inference/value_observation_types.py` | 三大中核構造 / shared value observation types | `ValueObservationSignal` / `ValueObservationPlan` / schema version を定義する共通型。EmlisAI/Piece/Analysisを直接結合しない |
+| `mashos-api/ai/services/ai_inference/cocolon_value_observation_service.py` | 三大中核構造 / shared value observation service | Mash観測由来の5 signalを、固定返答ではなく汎用 lexical / structural rules として抽出する |
+| `mashos-api/ai/services/ai_inference/emlis_context_anchor_service.py` | EmlisAI context anchor / cross-core context | report / piece / self structure系contextをEmlisAIへ渡すanchor境界。value observationはhidden personality claimにしない |
+| `mashos-api/ai/tests/test_cocolon_value_observation_service.py` | regression test | 5 signal抽出を固定文一致ではなく `signal_key` / evidence / target core で検証する |
+| `mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py` | regression test | EmlisAIがvalue observation signalをmetaと返答候補へ接続できることを検証する |
+| `mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py` | regression test | Pieceがsignalから問い・答えを作り、過圧縮せずmetaへ保持することを検証する |
+| `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | regression test | Analysis validity gateでvalue observation素材のdomain境界を検証する |
+
+## 既存ファイルの今回差分
+
+| file | 変更要点 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_types.py` | `WorldModelFacts` に `value_observation_signals` / `value_observation_plan` をadditive追加 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_world_model_service.py` | meaning block / shaped phrase 後にvalue observation signal / planを生成しworld modelへ保持 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py` | value observation signalを `value_observation.*` candidate として返答候補へ追加 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | `input_feedback.emlis_ai.meta.value_observation` をadditiveに返す |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py` | `コンフォートゾーン` / `スペック` / `精神の問題` / `皮算用` などの内部観測語を返答前reviewで遮断する |
+| `mashos-api/ai/services/ai_inference/emlis_ai_quality_gate.py` | single-focus overcompression / long input underanswering などのGate要素を補強 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_safe_reply_fallback_service.py` | Gate fail時もvalue observation lineを使い、単なる受領文へ戻さない |
+| `mashos-api/ai/services/ai_inference/emlis_ai_understanding_frame_service.py` | value observation接続に合わせ、understanding frame側の構造整合を維持 |
+| `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py` | value observation signalからPieceCoreQuestionAnswerPlanを生成し、`must_keep_signal_keys` / `source_claims` / `overcompression_risk` をpiece_core metaへ追加 |
+| `mashos-api/ai/services/ai_inference/piece_generation_policy.py` | `overcompression_risk` / `overcompression_blocked` / `value_observation_signal_keys` をpolicy metaへ追加 |
+| `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py` | `value_observation_signal_keys` と `value_observation_domain_ok` をvalidity metaへ追加し、emotion/self_structure domain境界を維持 |
+
+## 5つのvalue observation signal
+
+| signal_key | 観測軸 | 三大中核構造での用途 |
+|---|---|---|
+| `stagnation_position_gap` | 作業量と前進感の不一致 | EmlisAIは停滞感を受け取り、Pieceは変化欲求を一問一答化し、Analysisは期間内の停滞/変化欲求として扱う |
+| `outer_inner_role_gap` | 他者評価と自己実感の不一致 | EmlisAIは外側評価と内側実感のズレを返答し、Pieceは無理して保つ自分を伝達可能にする |
+| `relationship_cost_asymmetry` | 関係維持コストの非対称性 | 怒りの下にある配慮負担を拾い、Pieceでは人間関係で疲れる場面として表現する |
+| `inner_activity_fatigue_gap` | 外側の行動量と内側の消耗量の不一致 | 短文入力でも、行動量では測れない思考・緊張の負荷を扱う |
+| `ideal_capacity_switch_gap` | 理想手順と処理容量のズレ | 計画不能ではなく、全体整理から即時処理への切替として自己構造分析へ渡す |
+
+作業時は、これらのsignalを例文専用条件にしない。Mash様の文を固定返答として保存せず、現在入力から抽出したsource-groundedな観測信号として扱う。

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-05"
+revision_date: "2026-05-07"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -119,3 +119,18 @@ public route 追加・置換・deprecated整理を行う場合、次の5件を�
 - 入力例はテストケースであり、runtime `if` 条件・固定返答・専用fallbackに使わない。
 - 品質Gateは、例文語句が含まれるかではなく、意味カテゴリ・構成・grounding・自然文品質を判定する。
 - regression testは、固定正解文ではなく、汎用経路を通っているかを確認する。
+
+
+# 2026-05-07 差分追記: value observation / overcompression guard索引
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/value_observation_types.py` | value observation schema / signal / plan meta | 三大中核構造の観測信号を触る時 |
+| `mashos-api/ai/services/ai_inference/cocolon_value_observation_service.py` | 5 signalの汎用抽出。例文固定返答禁止 | EmlisAI / Piece / Analysisへ観測軸を追加する時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py` | 内部観測語・責め語・断定語の返答本文流出防止 | EmlisAI本文を変える時 |
+| `mashos-api/ai/services/ai_inference/piece_generation_policy.py` | Pieceの過圧縮防止、value observation signal key保持、preview/publish safety | Piece生成・publish契約を触る時 |
+| `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py` | value observation素材のdomain境界と保存可否 | Analysis / Self Structure reportを触る時 |
+| `mashos-api/ai/tests/test_cocolon_value_observation_service.py` | signal抽出regression | value observation serviceを変える時 |
+| `mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py` | EmlisAI接続regression | EmlisAI pipelineを変える時 |
+| `mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py` | Piece value observation / overcompression regression | Piece生成を変える時 |
+| `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | Analysis domain boundary regression | Analysis validity gateを変える時 |
