@@ -22,14 +22,15 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import {
   TUTORIAL_CONNECTION_ROWS,
+  TUTORIAL_INTRO_FLOWCHART,
   TUTORIAL_OTHER_ELEMENTS_GUIDE,
   TUTORIAL_TOTAL_STEPS,
 } from "../tutorial/tutorialScenarioData";
 
 const STEP_INTRO = 1;
-const STEP_CONNECTION = 16;
-const STEP_OTHER = 17;
-const STEP_FINISH = 18;
+const STEP_CONNECTION = 17;
+const STEP_OTHER = 18;
+const STEP_FINISH = 19;
 
 export default function TutorialFlowScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -138,9 +139,9 @@ export default function TutorialFlowScreen({ navigation }) {
         return {
           step: STEP_INTRO,
           mode: "info",
-          title: "Emlisについて",
+          title: "Emlis（エムリス）について",
           message:
-            "Emlisは、感情入力をすることで様々な体験ができるアプリです。\n\n各画面の説明をします。",
+            "まずは、感情入力からつながる3つの体験を確認します。",
           nextLabel: "ホーム画面へ",
           onNext: () => {
             setTutorialStep(2);
@@ -153,9 +154,9 @@ export default function TutorialFlowScreen({ navigation }) {
         return {
           step: STEP_CONNECTION,
           mode: "info",
-          title: "Emlisについて",
+          title: "Emlis（エムリス）について",
           message:
-            "Emlisのことを少しでもお分かりいただけたでしょうか？\n\n気軽に日々の感情や想いを言葉として入力してみてください。",
+            "Emlis（エムリス）のことを少しでもお分かりいただけたでしょうか？\n\n気軽に日々の感情や想いを言葉として入力してみてください。",
           nextLabel: "その他の機能へ",
           onNext: () => setTutorialStep(STEP_OTHER),
           disableSpotlight: true,
@@ -167,7 +168,7 @@ export default function TutorialFlowScreen({ navigation }) {
           mode: "info",
           title: "その他の機能",
           message:
-            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
+            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlis（エムリス）の機能を広げていけます。",
           nextLabel: "終了へ",
           onNext: () => {
             setTutorialStep(STEP_FINISH);
@@ -266,19 +267,11 @@ export default function TutorialFlowScreen({ navigation }) {
             />
             <Text style={styles.cardTitle}>感情入力からつながる3つの体験</Text>
           </View>
-          <Text style={styles.cardLead}>
-            Emlisは感情入力をすることで様々な機能を楽しむことができます。その中でも主要な3つの要素を説明します。
-          </Text>
-          {TUTORIAL_CONNECTION_ROWS.map((row, index) => (
-            <View
-              key={`${row?.title || "connection"}-${index}`}
-              style={[styles.connectionRow, index === 0 && styles.connectionRowFirst]}
-            >
-              <Text style={styles.connectionTitle}>{String(row?.title || "")}</Text>
-              <Text style={styles.connectionText}>{String(row?.description || "")}</Text>
-              <Text style={styles.connectionExample}>{String(row?.example || "")}</Text>
-            </View>
-          ))}
+          {shouldShowFinalSections ? (
+            <ConnectionSummaryTable rows={TUTORIAL_CONNECTION_ROWS} styles={styles} />
+          ) : (
+            <ConnectionIntroFlowchart data={TUTORIAL_INTRO_FLOWCHART} styles={styles} />
+          )}
         </View>
 
         {shouldShowFinalSections ? (
@@ -299,7 +292,7 @@ export default function TutorialFlowScreen({ navigation }) {
             <View ref={finishRef} collapsable={false} style={styles.finishCard}>
               <Text style={styles.finishTitle}>チュートリアルはこれにて終了です</Text>
               <Text style={styles.finishBody}>
-                Emlisをお楽しみください。
+                Emlis（エムリス）をお楽しみください。
               </Text>
               <CocolonButton
                 variant="primary"
@@ -337,6 +330,82 @@ export default function TutorialFlowScreen({ navigation }) {
         />
       ) : null}
     </SafeAreaView>
+  );
+}
+
+
+function ConnectionIntroFlowchart({ data, styles }) {
+  const source = data?.source || {};
+  const nodes = Array.isArray(data?.nodes) ? data.nodes : [];
+
+  return (
+    <>
+      <Text style={styles.cardLead}>{String(data?.lead || "")}</Text>
+      <View style={styles.flowchartRoot}>
+        <View style={styles.flowSourceCard}>
+          <Text style={styles.flowSourceTitle}>{String(source?.title || "")}</Text>
+          <Text style={styles.flowSourceCaption}>{String(source?.caption || "")}</Text>
+        </View>
+
+        <View style={styles.flowConnectorWrap}>
+          <View style={styles.flowConnectorLine} />
+          <Text style={styles.flowConnectorArrow}>▼</Text>
+          <View style={styles.flowConnectorPill}>
+            <Text style={styles.flowConnectorLabel}>{String(data?.connector || "")}</Text>
+          </View>
+        </View>
+
+        <View style={styles.flowNodeRows}>
+          {nodes.map((node, index) => (
+            <View
+              key={`${node?.title || "flow-node"}-${index}`}
+              style={[
+                styles.flowNodeRow,
+                index === nodes.length - 1 && styles.flowNodeRowLast,
+              ]}
+            >
+              <View style={styles.flowBranchColumn}>
+                <View
+                  style={[
+                    styles.flowBranchVerticalLine,
+                    index === 0 && styles.flowBranchVerticalLineFirst,
+                    index === nodes.length - 1 && styles.flowBranchVerticalLineLast,
+                  ]}
+                />
+                <View style={styles.flowBranchDot} />
+              </View>
+              <View style={styles.flowBranchArm} />
+              <View style={styles.flowNodeCard}>
+                <Text style={styles.flowNodeLabel}>{String(node?.label || "")}</Text>
+                <Text style={styles.flowNodeTitle}>{String(node?.title || "")}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+    </>
+  );
+}
+
+function ConnectionSummaryTable({ rows, styles }) {
+  const safeRows = Array.isArray(rows) ? rows : [];
+
+  return (
+    <>
+      <Text style={styles.cardLead}>
+        Emlis（エムリス）は感情入力をすることで様々な機能を楽しむことができます。その中でも主要な3つの要素を説明します。
+      </Text>
+      {safeRows.map((row, index) => (
+        <View
+          key={`${row?.title || "connection"}-${index}`}
+          style={[styles.connectionRow, index === 0 && styles.connectionRowFirst]}
+        >
+          <Text style={styles.connectionTitle}>{String(row?.title || "")}</Text>
+          <Text style={styles.connectionText}>{String(row?.description || "")}</Text>
+          <Text style={styles.connectionExample}>{String(row?.example || "")}</Text>
+        </View>
+      ))}
+    </>
   );
 }
 
@@ -423,6 +492,137 @@ function createStyles(COLORS, ui) {
       ...text.caption,
       marginTop: 4,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+    flowchartRoot: {
+      marginTop: 12,
+    },
+    flowSourceCard: {
+      borderRadius: 14,
+      borderWidth: 1.5,
+      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 14,
+      paddingVertical: 12,
+      alignItems: "center",
+    },
+    flowSourceTitle: {
+      fontSize: 16,
+      lineHeight: 23,
+      fontWeight: "900",
+      color: COLORS.TITLE_GOLD,
+      textAlign: "center",
+    },
+    flowSourceCaption: {
+      ...text.caption,
+      marginTop: 2,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      textAlign: "center",
+    },
+    flowConnectorWrap: {
+      alignItems: "center",
+      marginVertical: 10,
+    },
+    flowConnectorLine: {
+      width: 2,
+      height: 18,
+      borderRadius: 1,
+      backgroundColor: COLORS.BORDER_GOLD,
+      opacity: 0.85,
+    },
+    flowConnectorArrow: {
+      fontSize: 13,
+      lineHeight: 16,
+      fontWeight: "900",
+      color: COLORS.TITLE_GOLD,
+      marginTop: -1,
+      marginBottom: 4,
+    },
+    flowConnectorPill: {
+      borderRadius: 13,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 5,
+      alignSelf: "center",
+    },
+    flowConnectorLabel: {
+      fontSize: 12,
+      lineHeight: 17,
+      fontWeight: "900",
+      color: COLORS.TITLE_GOLD,
+      textAlign: "center",
+    },
+    flowNodeRows: {
+      marginTop: 2,
+    },
+    flowNodeRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      minHeight: 62,
+      marginBottom: 10,
+    },
+    flowNodeRowLast: {
+      marginBottom: 0,
+    },
+    flowBranchColumn: {
+      width: 18,
+      alignSelf: "stretch",
+      alignItems: "center",
+      justifyContent: "center",
+      position: "relative",
+    },
+    flowBranchVerticalLine: {
+      position: "absolute",
+      top: -10,
+      bottom: -10,
+      width: 2,
+      borderRadius: 1,
+      backgroundColor: COLORS.BORDER_GOLD,
+      opacity: 0.85,
+    },
+    flowBranchVerticalLineFirst: {
+      top: 22,
+    },
+    flowBranchVerticalLineLast: {
+      bottom: 22,
+    },
+    flowBranchDot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      backgroundColor: COLORS.TITLE_GOLD,
+      zIndex: 1,
+    },
+    flowBranchArm: {
+      width: 14,
+      height: 2,
+      borderRadius: 1,
+      backgroundColor: COLORS.BORDER_GOLD,
+      opacity: 0.85,
+      marginRight: 6,
+    },
+    flowNodeCard: {
+      flex: 1,
+      borderRadius: 13,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+    },
+    flowNodeLabel: {
+      fontSize: 12,
+      lineHeight: 17,
+      fontWeight: "800",
+      color: COLORS.TITLE_GOLD,
+      marginBottom: 2,
+    },
+    flowNodeTitle: {
+      fontSize: 15,
+      lineHeight: 21,
+      fontWeight: "900",
+      color: COLORS.TEXT_ON_LIGHT,
     },
     finishCard: {
       borderRadius: 18,

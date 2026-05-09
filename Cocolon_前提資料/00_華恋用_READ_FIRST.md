@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(40).zip"
-  Cocolon: "Cocolon(132).zip"
-  mashos-api: "mashos-api_2(23).zip"
+  premise: "Cocolon_前提資料(51).zip"
+  Cocolon: "Cocolon_12(3).zip"
+  mashos-api: "mashos-api_4(10).zip"
 file_counts:
-  Cocolon: 125
-  mashos-api: 336
-  total: 461
+  Cocolon: 200
+  mashos-api: 342
+  total: 542
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 461
-  included_in_overall_structure: 461
-  included_in_national_system: 461
+  total_files: 542
+  included_in_overall_structure: 542
+  included_in_national_system: 542
   excluded_from_main_body: 0
 ---
 
@@ -53,12 +53,12 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon(132).zip` | 125 | RNアプリ本体 |
-| `mashos-api_2(23).zip` | 336 | backend / API / worker / docs / tests |
-| total | 461 | 前提資料の構造coverage対象 |
+| `Cocolon_12(3).zip` | 200 | RNアプリ本体 |
+| `mashos-api_4(10).zip` | 342 | backend / API / worker / docs / tests |
+| total | 542 | 前提資料の構造coverage対象 |
 
-`Cocolon(132).zip` / `mashos-api_2(23).zip` では、EmlisAI / Piece / Analysis に共通する value observation layer が追加され、三大中核構造の観測信号を共有する構造が現行基準へ更新されています。  
-EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章構成・最終品質Gateで読む構造として扱います。Pieceは短縮要約ではなく、ユーザーが言いたいことを他者へ伝わる形へ昇華する構造として読む。
+`Cocolon_12(3).zip` / `mashos-api_4(10).zip` では、EmlisAI / Piece / Analysis のvalue observation基準を維持したうえで、RN巨大画面分割Phase 0〜2 / 4〜9 と、本番運用監視 `/ops/client-events` が現行基準へ追加されています。  
+EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章構成・最終品質Gateで読む構造として扱います。Pieceは短縮要約ではなく、ユーザーが言いたいことを他者へ伝わる形へ昇華する構造として読む。画面分割は機能追加ではなく、entry shellを維持した保守性改善として読む。
 
 # 読む順
 
@@ -85,7 +85,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 2. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
 3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
 
-`02` 系は、入力が保存され、queue / worker / snapshot / read-side / RN display に流れる全体を確認する資料です。今回入力された前提資料zipには `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` が存在しないため、Snapshot / Worker / Publish / Read は `02` 本体、`02C`、`07` の差分追記から読む。
+`02` 系は、入力が保存され、queue / worker / snapshot / read-side / RN display に流れる全体を確認する資料です。`02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` はこの前提資料zip内に存在するため、Snapshot / Worker / Publish / Read は `02B` を正本として読み、`02` 本体、`02C`、`07` の差分追記で補助します。
 
 ## 4. 境界・rule・DB
 
@@ -94,7 +94,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 3. `07_Cocolon_最新スナップショット差分`
 4. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`
 
-`05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`07` は最新zipとの差分確認、`03` / `09` は名称混在・DB物理名の読み分けを補助する資料です。今回入力された前提資料zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB physical rename / drop / write path変更は扱わない。
+`05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`07` は最新zipとの差分確認、`08` はDB physical name / bridge / rename境界、`03` / `09` は名称混在・DB物理名の読み分けを補助する資料です。`08_Cocolon_DB_rename_boundary.md` は存在しますが、DB physical rename / drop / write path変更はMash様が明示した場合だけ扱います。
 
 # 最新アプリ構造で特に見る場所
 
@@ -134,7 +134,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 
 # 2026-05-05 差分追記: EmlisAI / Piece / Tutorial / Subscription current boundary
 
-この版の基準面は `Cocolon(132).zip` / `mashos-api_2(23).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として更新します。
+この版の基準面は `Cocolon(138).zip` / `mashos-api_2(26).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として更新します。
 
 | 構造 | current owner | 現状の読み方 |
 |---|---|---|
@@ -151,7 +151,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 
 # 2026-05-07 差分追記: 三大中核構造 value observation current boundary
 
-この版の基準面は `Cocolon_前提資料(40).zip` / `Cocolon(132).zip` / `mashos-api_2(23).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として差分更新します。
+この版の基準面は `Cocolon_前提資料(48).zip` / `Cocolon(138).zip` / `mashos-api_2(26).zip` です。前提資料は、旧版の作業記録ではなく **現状構造を読むための地図** として差分更新します。
 
 | 構造 | current owner | 現状の読み方 |
 |---|---|---|
@@ -161,4 +161,85 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 | Analysis value observation境界 | `analysis_report_validity_gate.py` | `value_observation_signals` をself_structure系素材として扱えるようにし、emotion domainへ混ぜない |
 | 回帰test | `test_cocolon_value_observation_service.py` / `test_emlis_ai_value_observation_cases.py` / `test_emotion_piece_generation_value_observation.py` / `test_analysis_value_observation_boundary.py` | 5つの観測signalを固定文一致ではなく構造signalとして検証する |
 
-この版で本文未記載だった現行ファイルは、`01` / `02` / `07` に差分追記してcoverageへ含める。`02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は、今回入力された前提資料zip内に存在しないため、参照先として新規追記しない。DB physical rename / drop / write path変更は今回も対象外とする。
+この版で本文未記載だった現行ファイルは、`01` / `02` / `07` に差分追記してcoverageへ含める。`02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は、今回入力された前提資料zip内に存在するため、それぞれ Snapshot / Worker / Publish / Read と DB physical name / bridge / rename 境界の正本として読む。DB physical rename / drop / write path変更はMash様が明示した場合だけ扱う。
+
+
+# 2026-05-09 差分追記: latest実ファイル基準 / 今日の問い personal followup / 通知・Tutorial補正
+
+この版の最新基準面は `Cocolon_前提資料(48).zip` / `Cocolon(138).zip` / `mashos-api_2(26).zip` です。最新実ファイルのcoverage対象は `Cocolon` 125件、`mashos-api` 340件、合計465件です。`02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は前提資料内に存在するため、作業時の参照先として扱います。
+
+| 構造 | current owner | 読み方 |
+|---|---|---|
+| 今日の問い static層 | `mashos-api/ai/services/ai_inference/today_question_store.py` / `today_question_bank` / `today_question_sequence` / `today_question_user_progress` | 既存100問テンプレを `static_role_probe` として維持する。personal回答ではstatic sequenceを進めない |
+| 今日の問い personal_followup層 | `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` / `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` / `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | Premiumのみ、emotion入力の原文アンカーから固定選択肢つき深掘り問いを作る。AI生成文をユーザー発言として表示しない |
+| 今日の問いAPI拡張 | `mashos-api/ai/services/ai_inference/api_today_question.py` / `mashos-api/ai/services/ai_inference/home_gateway/today_question_command_service.py` / `mashos-api/ai/services/ai_inference/home_gateway/command_gateway.py` | `question_origin` / `personal_question_id` / `source_anchor` / `source_anchor_hash` をadditive fieldとして扱う |
+| 今日の問いRN送信 | `Cocolon/features/home/useHomeActions.js` / `Cocolon/components/TodayQuestionCard.js` / `Cocolon/screens/TodayQuestionHistoryScreen.js` | question本文とchoicesは既存UIで表示し、submit時にpersonal guard fieldを送る。履歴では `入力: 「...」` の短いアンカーだけ表示する |
+| self_structure接続 | `mashos-api/ai/services/ai_inference/astor_material_snapshots.py` / `mashos-api/ai/services/ai_inference/analysis_engine_adapter.py` | 今日の問い回答をself-only素材として `question_origin` / `question_type` / `source_anchor` / hidden_meta込みで渡す。public面へは出さない |
+| account delete | `mashos-api/ai/services/ai_inference/account_delete_service.py` | personal candidate / personal question も削除対象に含める |
+| DB migration | `today_question_personal_followup_v1.sql` | `today_question_personal_candidates` / `today_question_personal_questions` 追加、`today_question_answers` にadditive field追加。SQLは別ファイルとして受領・実行済み |
+| 感情通知Push | `mashos-api/ai/services/ai_inference/api_emotion_submit.py` / `.env.worker.example` | local/API-onlyではqueueを高負荷mode依存にし、queue modeではAPI側Firebase credential gateでenqueueを止めない。worker profile例は `all` |
+| Tutorial | `Cocolon/tutorial/tutorialScenarioData.js` / `Cocolon/screens/InputScreen.js` / `Cocolon/screens/NexusScreen.js` / `Cocolon/screens/TutorialFlowScreen.js` | `Emlis（エムリス）` 表記、感情選択/カテゴリ選択の別フェーズ、Home説明時のsummary/history非表示、ピース説明文修正を反映 |
+
+作業時は、今日の問いを触る場合、既存100問を消さず、`personal_followup` はPremium向けの追加層として扱います。通知文には原文アンカーを出さず、画面内だけで短い引用を表示します。
+
+# 2026-05-09 差分追記: GitHub正本の再現性確認
+
+この確認は、ローカルで受領した軽量zipだけではなく、GitHub上の `MassyuRed/Cocolon` 正本を基準にして行う。  
+ローカルzipにnative project / config / support scriptが含まれていない場合でも、GitHub正本に存在するものは「実体欠落」ではなく、容量都合でローカル受領物から外れているものとして扱う。
+
+| 確認項目 | GitHub上の状態 |
+|---|---|
+| `Cocolon/scripts/postinstall.js` | 存在。stale patchを `.skipped-by-postinstall` へ一時退避し、`patch-package` を実行後に元へ戻す処理を持つ |
+| `Cocolon/scripts/reset-project.js` | 存在。`package.json` の `reset-project` script に対応するfile |
+| `Cocolon/android/app/build.gradle` | 存在。release signing、Hermes、minify、`ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON`、ABI filter等を持つAndroid release構成 |
+| `Cocolon/ios/Podfile` | 存在。iOS 15.1、static frameworks、Firebase static framework、CI archive時のbundle code signing抑制を持つ |
+| `Cocolon/babel.config.js` | 存在。React Native babel preset と Reanimated plugin を設定 |
+| `Cocolon/metro.config.js` | 存在。`react-native-svg-transformer` と svg resolver を設定 |
+| `Cocolon/eslint.config.js` | 存在。Expo ESLint flat config を設定 |
+| `Cocolon/tsconfig.json` | 存在。`strict: true` と `@/*` path alias を設定 |
+| `Cocolon/.github/workflows/ios-build.yml` | 存在。checkout、Node setup、Pod install、署名、archive、export、TestFlight uploadまでを扱う |
+
+このため、`Cocolon(136).zip` 等のローカルzipに上記pathが含まれていない場合でも、GitHub正本では「再現できるソース」の主要構成は存在するものとして読む。  
+`android/key.properties`、iOS証明書、provisioning profile、GitHub Secrets はsource fileではなくsecret管理対象であり、前提資料上の欠落扱いにしない。
+
+
+
+# 2026-05-09 差分追記: current参照の実ファイル再照合
+
+この版では、前提資料 `Cocolon_前提資料(48).zip` を、実ファイル `Cocolon(138).zip` / `mashos-api_2(26).zip` と再照合した。
+GitHub正本で存在確認済みの native project / config / support script は、ローカル軽量zip未収録でも欠落扱いにしない。
+一方で、旧MyWeb / MyModel / Echoes / Discoveries / EmotionReflection系の個別file名が旧本文内で `active` / `shared` / `legacy-live` として残っている箇所は、current実ファイルownerではなく、名称混在・legacy境界の保管情報として読む。
+
+current作業では、次の読み替えを優先する。
+
+| 旧系統 | current実ファイルowner |
+|---|---|
+| MyWeb系screen | `Analysis*` screen群 |
+| MyModel系screen | `Piece*` / `Nexus*` / `Resonance*` screen群 |
+| Echoes history | `ResonanceHistoryListScreen.js` / `ResonanceHistoryDetailScreen.js` |
+| EmotionReflection frontend | `EmotionPiecePreviewModal.js` / `lib/api/home/emotionPieceApi.js` |
+| Discoveries/Questions ranking旧screen | `RankingTopScreen.js` と current ranking screen群。単独旧screenはcurrent実ファイルではない |
+| `api_ranking_mymodel_discoveries.py` | currentでは存在しない。`api_ranking.py` / `api_ranking_piece_views.py` / `api_ranking_piece_resonances.py` / `api_ranking_mymodel_views.py` / `api_ranking_mymodel_resonances.py` を確認する |
+
+この補正により、旧本文に残る旧pathを見つけても即renameしない。current修正対象は実ファイル一覧に存在するownerへ寄せる。
+
+# 2026-05-09 差分追記: RN巨大画面分割 / 本番運用監視 current boundary
+
+この版の最新基準面は `Cocolon_前提資料(51).zip` / `Cocolon_12(3).zip` / `mashos-api_4(10).zip` です。実ファイルのcoverage対象は `Cocolon` 200件、`mashos-api` 342件、合計542件です。
+
+今回の実ファイルでは、RN巨大画面分割の Phase 0〜2 / 4〜9 と、本番運用監視の最小構成がcurrentへ入っています。分割は機能追加ではなく、既存route / API契約 / DB境界を維持したまま entry shell と submodule に責務を分ける保守性改善として読む。
+
+| 構造 | entry shell / current owner | 読み方 |
+|---|---|---|
+| App root | `Cocolon/App.js` + `Cocolon/navigation/*` + `Cocolon/runtime/*` | `App.js` はprovider / NavigationContainer / 初期push接続を持つ薄い入口。root stack / tab / linking / notification routing は navigation配下を読む |
+| Home / Input | `Cocolon/screens/InputScreen.js` + `Cocolon/screens/input/*` | InputScreenはentry shell。下書き、入力高さ、感情/カテゴリ/memo UI、Piece preview modal、startup modalをinput配下で読む |
+| Nexus | `Cocolon/screens/NexusScreen.js` + `Cocolon/screens/nexus/*` | feed / emotion log / recommend / history / owner picker のUIとnormalizeをnexus配下で読む。API呼び出し境界は既存のまま |
+| Analysis report viewer | `Cocolon/screens/AnalysisReportViewerScreen.js` + `Cocolon/screens/analysisReport/*` | report normalize、format、HTML/PDF export、chart、subscription gateをanalysisReport配下で読む |
+| Analysis home | `Cocolon/screens/AnalysisScreen.js` + `Cocolon/screens/analysis/*` | route state、unread、report action、self-structure action、tutorial overlayをanalysis配下で読む |
+| Account | `Cocolon/screens/AccountScreen.js` + `Cocolon/screens/account/*` | profile、follow、visibility、subscription、ID検索をaccount配下で読む。account delete ownerは引き続き `SettingsOtherScreen.js` |
+| Piece home | `Cocolon/screens/PieceScreen.js` + `Cocolon/screens/piece/*` | Piece home action、tutorial create、recommend users、global summaryをpiece配下で読む |
+| Piece library | `Cocolon/screens/PieceLibraryScreen.js` | Phase 3は今回未実装。PieceLibraryはまだentry shell単独の大きなownerとして読む |
+| RN screen test | `Cocolon/tests/rn-screen-contracts.test.js` | 分割後moduleの存在とentry shell接続を検査する軽量screen contract test |
+| 本番運用監視 | `Cocolon/lib/monitoring.js` + `mashos-api/ai/services/ai_inference/api_client_events.py` | 外部SDK追加なしで、RN側client event / API error / bootstrap/push/IAP errorを `/ops/client-events` へbest-effort送信し、backendでredact済みstructured logへ出す |
+
+作業時は、旧画面pathが薄くなっていても削除対象とは見なさず、`App.js` / 各screenは navigation から参照されるentry shellとして扱う。DB physical name / public API route / navigation route名は今回の分割では変更しない。

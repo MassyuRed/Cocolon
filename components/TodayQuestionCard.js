@@ -55,6 +55,7 @@ export default function TodayQuestionCard({
   }, [question?.question_id, question?.version]);
 
   const choices = Array.isArray(question?.choices) ? question.choices : [];
+  const optionalFreeTextEnabled = question?.optional_free_text_enabled === true;
   const isAnswered = !!answerSummary;
   const normalizedReleaseStatus = String(releaseStatus || "");
   const isLockedUntilDelivery =
@@ -89,6 +90,7 @@ export default function TodayQuestionCard({
       answer_mode: "choice",
       selected_choice_id: selectedChoiceId,
       selected_choice_key: selectedChoiceKey || undefined,
+      free_text: optionalFreeTextEnabled ? freeText.trim() || undefined : undefined,
     });
   };
 
@@ -140,6 +142,9 @@ export default function TodayQuestionCard({
           {answerSummary?.answer_mode === "choice" && answerSummary?.label ? (
             <Text style={styles.answeredBody}>回答: {answerSummary.label}</Text>
           ) : null}
+          {answerSummary?.answer_mode === "choice" && answerSummary?.text ? (
+            <Text style={styles.answeredBody}>{answerSummary.text}</Text>
+          ) : null}
           {answerSummary?.answer_mode === "free_text" && answerSummary?.text ? (
             <Text style={styles.answeredBody}>{answerSummary.text}</Text>
           ) : null}
@@ -185,27 +190,48 @@ export default function TodayQuestionCard({
           </View>
 
           {mode === "choice" ? (
-            <View style={styles.choiceList}>
-              {choices.map((choice) => {
-                const cid = String(choice?.choice_id || "");
-                const active = cid && cid === selectedChoiceId;
-                return (
-                  <CocolonPressable
-                    key={cid || String(choice?.choice_key || Math.random())}
-                    style={[styles.choiceItem, active && styles.choiceItemOn]}
-                    onPress={() => {
-                      setSelectedChoiceId(cid);
-                      setSelectedChoiceKey(String(choice?.choice_key || "") || null);
-                    }}
-                    accessibilityLabel={String(choice?.label || "選択肢")}
-                  >
-                    <Text style={[styles.choiceText, active && styles.choiceTextOn]}>
-                      {String(choice?.label || "")}
-                    </Text>
-                  </CocolonPressable>
-                );
-              })}
-            </View>
+            <>
+              <View style={styles.choiceList}>
+                {choices.map((choice) => {
+                  const cid = String(choice?.choice_id || "");
+                  const active = cid && cid === selectedChoiceId;
+                  return (
+                    <CocolonPressable
+                      key={cid || String(choice?.choice_key || Math.random())}
+                      style={[styles.choiceItem, active && styles.choiceItemOn]}
+                      onPress={() => {
+                        setSelectedChoiceId(cid);
+                        setSelectedChoiceKey(String(choice?.choice_key || "") || null);
+                      }}
+                      accessibilityLabel={String(choice?.label || "選択肢")}
+                    >
+                      <Text style={[styles.choiceText, active && styles.choiceTextOn]}>
+                        {String(choice?.label || "")}
+                      </Text>
+                    </CocolonPressable>
+                  );
+                })}
+              </View>
+              {optionalFreeTextEnabled ? (
+                <View style={styles.optionalFreeTextCard}>
+                  <Text style={styles.optionalFreeTextLabel}>任意でひと言だけ書けます。</Text>
+                  <TextInput
+                    style={styles.optionalFreeTextInput}
+                    placeholder="ここに書いてください。"
+                    {...(isIOS ? { defaultValue: freeText } : { value: freeText })}
+                    onChangeText={setFreeText}
+                    {...(isIOS
+                      ? {
+                          onChange: (e) => setFreeText(e?.nativeEvent?.text ?? ""),
+                        }
+                      : {})}
+                    multiline
+                    textAlignVertical="top"
+                    placeholderTextColor={colors.TEXT_ON_LIGHT}
+                  />
+                </View>
+              ) : null}
+            </>
           ) : (
             <View style={styles.freeTextCard}>
               <TextInput
@@ -359,6 +385,29 @@ function createStyles(COLORS) {
     },
     choiceTextOn: {
       color: COLORS.ACCENT_TEXT,
+    },
+    optionalFreeTextCard: {
+      backgroundColor: COLORS.PANEL_BG,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      marginBottom: 12,
+    },
+    optionalFreeTextLabel: {
+      fontSize: 12,
+      lineHeight: 17,
+      color: COLORS.TEXT_ON_LIGHT,
+      fontWeight: "700",
+      marginBottom: 6,
+    },
+    optionalFreeTextInput: {
+      minHeight: 54,
+      fontSize: 14,
+      lineHeight: 20,
+      color: COLORS.TEXT_ON_LIGHT,
+      padding: 0,
     },
     freeTextCard: {
       backgroundColor: COLORS.FIELD_BG,

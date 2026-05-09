@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -48,7 +48,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/screens/DeepInsightScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Gate`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis input surface.
 - 上流:
   - なし
@@ -240,7 +242,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/components/EmotionReflectionPreviewModal.js`
 - repo: `Cocolon`
 - 国家システム区分: `Gate`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN shared component module. Current system: Home shared UI.
 - 上流:
   - `Cocolon/screens/InputScreen.js` — import
@@ -352,7 +356,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/lib/api/home/emotionReflectionApi.js`
 - repo: `Cocolon`
 - 国家システム区分: `Boundary`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: Frontend API wrapper for /emotion/reflection/cancel, /emotion/reflection/preview, /emotion/reflection/publish, /emotion/reflection/quota.
 - 上流:
   - `Cocolon/screens/InputScreen.js` — import
@@ -503,7 +509,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/lib/emotionReflectionApi.js`
 - repo: `Cocolon`
 - 国家システム区分: `Boundary`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: Frontend helper / boundary module. Current system: frontend compat API wrapper.
 - 上流:
   - なし
@@ -1573,3 +1581,54 @@ emotion_piece preview
 ```
 
 value observation signalは、保存APIやDB write pathを変更しない。返答・preview・分析validityのmetaをadditiveに補強するだけであり、public response shapeを破壊しない。
+
+
+# 2026-05-09 差分追記: Today Question input/save/dispatch flow
+
+| file | input/save/dispatch上の役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | emotion入力の `memo` / `memo_action` を読み、短いliteral anchorを候補化する。重い内容や危険な内容はpersonal候補から除外する |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | candidateをquestion insert payloadへ変換し、choices snapshot と source_anchor_json を保存可能にする |
+| `mashos-api/ai/services/ai_inference/home_gateway/today_question_command_service.py` | Home gateway経由の回答保存で personal guard fields を受け渡す |
+| `mashos-api/ai/services/ai_inference/home_gateway/command_gateway.py` | `today_question.answer.create` payloadから `question_origin` / `personal_question_id` / `source_anchor_hash` をstoreへ渡す |
+| `Cocolon/features/home/useHomeActions.js` | RN側回答payloadに personal guard fields を入れる |
+
+personal回答は既存answer保存の拡張です。`today_question_answers.question_id` はpersonal回答ではnullを許容し、`personal_question_id` と `source_anchor_snapshot_json` で根拠を固定します。
+
+
+# 2026-05-09 実ファイル再照合: current owner補正
+
+この表は `Cocolon(138).zip` / `mashos-api_2(26).zip` の実ファイル一覧と、この資料内の current 参照を照合した補正です。
+旧本文内の `active` / `shared` / `legacy-live` 表記よりも、この表を優先します。旧名称はDB physical name / compat / 旧route説明として保管できるが、current実ファイルownerとしては扱いません。
+
+| 旧参照path | 実ファイル照合 | current owner / 読み方 |
+|---|---|---|
+| `Cocolon/components/EmotionReflectionPreviewModal.js` | local snapshot未収録 | Cocolon/components/EmotionPiecePreviewModal.js |
+| `Cocolon/lib/api/home/emotionReflectionApi.js` | local snapshot未収録 | Cocolon/lib/api/home/emotionPieceApi.js |
+| `Cocolon/lib/emotionReflectionApi.js` | local snapshot未収録 | Cocolon/lib/api/home/emotionPieceApi.js。root legacy façadeは今回local snapshotには存在しない。 |
+| `Cocolon/screens/DeepInsightScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js / Cocolon/screens/AnalysisContentFirstScreen.js。DeepInsight単独screenは今回local snapshotには存在しない。 |
+| `Cocolon/screens/EchoesHistoryListScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryListScreen.js |
+| `Cocolon/screens/MyModelDiscoveriesRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Discoveries screenは存在しない。RankingTop / PieceResonanceRanking / backend ranking viewsを優先する。 |
+| `Cocolon/screens/MyModelEchoesRankingScreen.js` | local snapshot未収録 | Cocolon/screens/PieceResonanceRankingScreen.js |
+| `Cocolon/screens/MyModelQuestionsRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Questions screenは存在しない。RankingTop / InputCountRanking / InputLengthRanking / PieceResonanceRankingを優先する。 |
+| `Cocolon/screens/MyModelReflectionsScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyModelScreen.js` | local snapshot未収録 | Cocolon/screens/PieceScreen.js / Cocolon/screens/PieceEntryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyWebEnsureClient.js` | local snapshot未収録 | Cocolon/screens/AnalysisEnsureClient.js |
+| `Cocolon/screens/MyWebHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisHistoryScreen.js |
+| `Cocolon/screens/MyWebReportHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportHistoryScreen.js |
+| `Cocolon/screens/MyWebReportViewerScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportViewerScreen.js |
+| `Cocolon/screens/MyWebScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js |
+
+# 2026-05-09 差分追記: Input entry shell分割後のInput / Save境界
+
+`InputScreen.js` はentry shellとして残り、Input UI / helper / hook は `screens/input/*` に分割されています。これはRN display / local state / modal制御の分離であり、Input Save APIやdispatch契約は変更しません。
+
+| split file | 国家システム上の読み方 |
+|---|---|
+| `screens/input/useInputDraftPersistence.js` | 未送信下書きの端末内local state。Save APIとは別境界 |
+| `screens/input/InputActionArea.js` | emotion submit / Piece preview / notification action UI。API payload shapeは変更しない |
+| `screens/input/InputPiecePreviewController.js` | EmotionPiecePreviewModal接続。preview / publish API契約は変更しない |
+| `screens/input/InputStartupModals.js` | Notice / Today Question / draft restore modal表示。startup/read-side契約は変更しない |
+| `screens/input/InputFeedbackReplyModal.js` | EmlisAI immediate replyの表示。`input_feedback.comment_text` の意味は変更しない |
+
+Input関連を触る場合は、`features/home/useHomeState.js` / `features/home/useHomeActions.js` と `lib/api/home/*` を引き続き同時確認します。

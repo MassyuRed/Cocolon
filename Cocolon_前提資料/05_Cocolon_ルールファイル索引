@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -134,3 +134,41 @@ public route 追加・置換・deprecated整理を行う場合、次の5件を�
 | `mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py` | EmlisAI接続regression | EmlisAI pipelineを変える時 |
 | `mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py` | Piece value observation / overcompression regression | Piece生成を変える時 |
 | `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | Analysis domain boundary regression | Analysis validity gateを変える時 |
+
+
+# 2026-05-09 差分追記: rule / contract index補正
+
+| rule領域 | 参照file | 確認内容 |
+|---|---|---|
+| 今日の問いcontract | `mashos-api/ai/services/ai_inference/api_contract_registry.py` | personal_followup用additive fieldがpublic contractに記録されているか |
+| 今日の問いstore | `mashos-api/ai/services/ai_inference/today_question_store.py` | static/personalのslot解決、Premium gate、static fallback、answer保存境界 |
+| 原文アンカー安全 | `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` / `today_question_personal_templates.py` | literal anchorだけを表示し、AI解釈をユーザー発言にしない |
+| self-only素材 | `mashos-api/ai/services/ai_inference/astor_material_snapshots.py` / `analysis_engine_adapter.py` | personal回答がself_structureへ行き、公開面へ出ないこと |
+| 通知worker | `mashos-api/ai/services/ai_inference/api_emotion_submit.py` / `.env.worker.example` | FCM queue/direct/worker profileの境界 |
+| DB/rename | `08_Cocolon_DB_rename_boundary.md` | DB physical name、bridge、write path、rename保留境界 |
+
+# 2026-05-09 差分追記: RN screen split / client observability rule索引
+
+| rule領域 | 参照file | 確認内容 |
+|---|---|---|
+| RN screen split guard | `Cocolon/tests/rn-screen-contracts.test.js` | entry shellと分割moduleの接続が壊れていないか |
+| App root singleton | `Cocolon/navigation/navigationRef.js` | navigationRef singleton / pending notification routeを壊していないか |
+| Push route resolver | `Cocolon/navigation/notificationRouting.js` | push通知からInput / Analysis / Piece(EmotionLog)へのroute解決が維持されているか |
+| Linking runtime | `Cocolon/navigation/linkingRuntime.js` | share code / public profile linkのAccount遷移が維持されているか |
+| Runtime gate | `Cocolon/runtime/AppRuntimeBootstrapGate.js` | `/app/bootstrap`失敗時の監視とruntime gateが維持されているか |
+| RN monitoring | `Cocolon/lib/monitoring.js` | token / email / UUID redaction、dedupe、sample rate、best-effort送信が維持されているか |
+| API error capture | `Cocolon/lib/apiClient.js` | API失敗captureがrequest / response shapeを変えていないか |
+| Client event endpoint | `mashos-api/ai/services/ai_inference/api_client_events.py` | `/ops/client-events` がproduct stateを変更せず、privacy-safe logだけを出すか |
+| Client event contract | `mashos-api/ai/tests/contract/test_client_events_contract.py` | endpoint / redaction / registryのcontract regression |
+| Public registry | `mashos-api/ai/services/ai_inference/api_contract_registry.py` / `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | `ops.client_events.write.v1` がregistry/docsに同期しているか |
+
+# 2026-05-09 差分追記: RN split / production monitoring rule索引
+
+| rule領域 | 参照file | 確認内容 |
+|---|---|---|
+| RN screen split guard | `Cocolon/tests/rn-screen-contracts.test.js` | entry shellと分割moduleの接続確認。route名変更を防ぐ |
+| App root split | `Cocolon/navigation/navigationRef.js` / `notificationRouting.js` / `linkingRuntime.js` / `RootNavigator.js` | navigationRef singleton、push routing、linking、provider順序を守る |
+| Runtime gate | `Cocolon/runtime/AppRuntimeBootstrapGate.js` / `AppRuntimeBlockingScreen.js` | `/app/bootstrap`、minimum version block、maintenance表示境界 |
+| RN monitoring | `Cocolon/lib/monitoring.js` / `Cocolon/lib/apiClient.js` | client event送信、API failure捕捉、privacy-safe payload整形 |
+| Client event endpoint | `mashos-api/ai/services/ai_inference/api_client_events.py` | redaction、user_hash、structured log / alert log、DB保存なし |
+| Ops public contract | `api_contract_registry.py` / `PUBLIC_API_REGISTRY.md` / `test_client_events_contract.py` | `/ops/client-events` contractと回帰test |

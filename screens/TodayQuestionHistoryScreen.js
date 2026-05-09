@@ -132,7 +132,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
         ...prev,
         [answerId]: {
           mode: item?.answer_mode === "free_text" ? "free_text" : "choice",
-          selectedChoiceId: item?.selected_choice_id || null,
+          selectedChoiceId: item?.selected_choice_id || item?.selected_choice_key || null,
           selectedChoiceKey: item?.selected_choice_key || null,
           freeText: item?.free_text || "",
         },
@@ -199,6 +199,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
           answer_mode: "choice",
           selected_choice_id: cur.selectedChoiceId,
           selected_choice_key: cur.selectedChoiceKey || undefined,
+          free_text: String(cur.freeText || "").trim() || undefined,
         };
       }
 
@@ -305,6 +306,15 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
               const expanded = expandedId === answerId;
               const edit = editState[answerId] || {};
               const choices = Array.isArray(item?.choices) ? item.choices : [];
+              const sourceAnchorSummary = item?.source_anchor_summary || null;
+              const optionalFreeTextEnabled =
+                String(item?.question_origin || "") === "personal_followup";
+              const itemAnswerText =
+                item?.answer_mode === "free_text"
+                  ? item?.free_text || "自由回答"
+                  : [item?.selected_choice_label || "選択回答", item?.free_text]
+                      .filter((part) => String(part || "").trim())
+                      .join(" / ");
               return (
                 <View key={answerId} style={styles.itemCard}>
                   <CocolonPressable
@@ -319,11 +329,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                       <Text style={styles.itemQuestion}>
                         {item?.question_text || "今日の問い"}
                       </Text>
-                      <Text style={styles.itemAnswer}>
-                        {item?.answer_mode === "free_text"
-                          ? item?.free_text || "自由回答"
-                          : item?.selected_choice_label || "選択回答"}
-                      </Text>
+                      <Text style={styles.itemAnswer}>{itemAnswerText}</Text>
                     </View>
                     <Ionicons
                       name={expanded ? "chevron-up" : "chevron-down"}
@@ -340,6 +346,11 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                       {item?.edited_at ? (
                         <Text style={styles.metaText}>
                           編集日時: {item.edited_at}
+                        </Text>
+                      ) : null}
+                      {sourceAnchorSummary?.anchor_text ? (
+                        <Text style={styles.metaText}>
+                          入力: 「{sourceAnchorSummary.anchor_text}」
                         </Text>
                       ) : null}
 
@@ -429,41 +440,71 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                               />
                             </View>
                           ) : (
-                            <View style={styles.choiceList}>
-                              {choices.map((choice) => {
-                                const cid = String(choice?.choice_id || "");
-                                const active =
-                                  cid && cid === edit.selectedChoiceId;
-                                return (
-                                  <CocolonPressable
-                                    key={
-                                      cid || String(choice?.choice_key || "")
-                                    }
-                                    style={[
-                                      styles.choiceItem,
-                                      active && styles.choiceItemOn,
-                                    ]}
-                                    onPress={() =>
-                                      updateLocalEdit(answerId, {
-                                        selectedChoiceId: cid,
-                                        selectedChoiceKey:
-                                          String(choice?.choice_key || "") ||
-                                          null,
-                                      })
-                                    }
-                                  >
-                                    <Text
+                            <>
+                              <View style={styles.choiceList}>
+                                {choices.map((choice) => {
+                                  const cid = String(choice?.choice_id || "");
+                                  const active =
+                                    cid && cid === edit.selectedChoiceId;
+                                  return (
+                                    <CocolonPressable
+                                      key={
+                                        cid || String(choice?.choice_key || "")
+                                      }
                                       style={[
-                                        styles.choiceText,
-                                        active && styles.choiceTextOn,
+                                        styles.choiceItem,
+                                        active && styles.choiceItemOn,
                                       ]}
+                                      onPress={() =>
+                                        updateLocalEdit(answerId, {
+                                          selectedChoiceId: cid,
+                                          selectedChoiceKey:
+                                            String(choice?.choice_key || "") ||
+                                            null,
+                                        })
+                                      }
                                     >
-                                      {String(choice?.label || "")}
-                                    </Text>
-                                  </CocolonPressable>
-                                );
-                              })}
-                            </View>
+                                      <Text
+                                        style={[
+                                          styles.choiceText,
+                                          active && styles.choiceTextOn,
+                                        ]}
+                                      >
+                                        {String(choice?.label || "")}
+                                      </Text>
+                                    </CocolonPressable>
+                                  );
+                                })}
+                              </View>
+                              {optionalFreeTextEnabled ? (
+                                <View style={styles.optionalFreeTextCard}>
+                                  <Text style={styles.optionalFreeTextLabel}>
+                                    任意でひと言だけ書けます。
+                                  </Text>
+                                  <TextInput
+                                    style={styles.optionalFreeTextInput}
+                                    placeholder="ここに書いてください。"
+                                    {...(isIOS
+                                      ? { defaultValue: edit.freeText || "" }
+                                      : { value: edit.freeText || "" })}
+                                    onChangeText={(next) =>
+                                      updateLocalEdit(answerId, { freeText: next })
+                                    }
+                                    {...(isIOS
+                                      ? {
+                                          onChange: (e) =>
+                                            updateLocalEdit(answerId, {
+                                              freeText: e?.nativeEvent?.text ?? "",
+                                            }),
+                                        }
+                                      : {})}
+                                    multiline
+                                    textAlignVertical="top"
+                                    placeholderTextColor={colors.TEXT_ON_LIGHT}
+                                  />
+                                </View>
+                              ) : null}
+                            </>
                           )}
 
                           <CocolonButton
@@ -677,6 +718,29 @@ function createStyles(COLORS, ui) {
       fontSize: 13,
       fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
+    },
+    optionalFreeTextCard: {
+      backgroundColor: COLORS.PANEL_BG,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      marginBottom: 12,
+    },
+    optionalFreeTextLabel: {
+      fontSize: 12,
+      lineHeight: 17,
+      color: COLORS.TEXT_ON_LIGHT,
+      fontWeight: "700",
+      marginBottom: 6,
+    },
+    optionalFreeTextInput: {
+      minHeight: 54,
+      fontSize: 14,
+      lineHeight: 20,
+      color: COLORS.TEXT_ON_LIGHT,
+      padding: 0,
     },
     freeTextCard: {
       backgroundColor: COLORS.FIELD_BG,

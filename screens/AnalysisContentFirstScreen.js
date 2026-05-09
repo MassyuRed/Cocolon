@@ -228,15 +228,15 @@ export default function AnalysisContentFirstScreen({
   useEffect(() => {
     if (!isTutorialMode) return;
 
-    if (tutorialStep === 11) {
+    if (tutorialStep === 12) {
       setActiveAnalysisTab("self");
       return;
     }
 
     setActiveAnalysisTab("emotion");
-    if (tutorialStep === 10) {
+    if (tutorialStep === 11) {
       setActiveEmotionReportType("monthly");
-    } else if (tutorialStep === 9) {
+    } else if (tutorialStep === 10) {
       setActiveEmotionReportType("weekly");
     } else {
       setActiveEmotionReportType("daily");

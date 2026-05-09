@@ -1,27 +1,27 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(40).zip"
-  Cocolon: "Cocolon(132).zip"
-  mashos-api: "mashos-api_2(23).zip"
+  premise: "Cocolon_前提資料(51).zip"
+  Cocolon: "Cocolon_12(3).zip"
+  mashos-api: "mashos-api_4(10).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
 # 1. 今回の基準面
 
-この版は、次のzipを基準にします。
+この版は、次のzipを最新基準にします。
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(132).zip` | 125 | GitHub Actions workflow 2件をcoverageへ追加 |
-| `mashos-api_2(23).zip` | 336 | value observation layer / EmlisAI接続 / Piece過圧縮防止 / Analysis boundary / tests 更新 |
-| total | 461 | 前提資料coverage対象 |
+| `Cocolon_12(3).zip` | 200 | RN巨大画面分割、App root分割、本番運用監視client、RN screen contract更新 |
+| `mashos-api_4(10).zip` | 342 | `/ops/client-events`、public contract registry、client event contract test更新 |
+| total | 542 | 前提資料coverage対象 |
 
 この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。
 
@@ -47,7 +47,7 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 # 3. API側の最新構造差分
 
-`mashos-api_2(23).zip` では、EmlisAI immediate replyのvalue observation接続、Piece生成の過圧縮防止、Analysis validity gate境界、関連testが追加・更新されています。
+`mashos-api_2(26).zip` では、EmlisAI immediate replyのvalue observation接続、Piece生成の過圧縮防止、Analysis validity gate境界、関連testが追加・更新されています。
 
 ただし、RN側は `/app/bootstrap` の既存応答を消費するようになったため、API側で `/app/bootstrap` を触る時は次を同時確認します。
 
@@ -71,8 +71,8 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 | coverage | count |
 |---|---:|
 | Cocolon | 125 |
-| mashos-api | 336 |
-| total | 461 |
+| mashos-api | 340 |
+| total | 465 |
 
 # 5. 前提資料としての変更
 
@@ -90,7 +90,7 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 | `04_Cocolon_変更テーマ別チェックリスト` | 変更テーマから読む順を構造資料として整理 |
 | `05_Cocolon_ルールファイル索引` | `/app/bootstrap` runtime boundaryをrule索引に追加 |
 | `06_Cocolon_ファイル名変更保留台帳.md` | renameタスクではなく名称保管台帳として整理 |
-| `03_Cocolon_命名体系.md` / `06_Cocolon_ファイル名変更保留台帳.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md` | 今回zipに08が存在しないため、DB destructive変更は扱わず名称読み分けだけを保管 |
+| `03_Cocolon_命名体系.md` / `06_Cocolon_ファイル名変更保留台帳.md` / `08_Cocolon_DB_rename_boundary.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md` | `08` が存在するためDB physical name / bridge / rename境界の正本として読み、destructive変更はMash様が明示した場合だけ扱う |
 | `09_Cocolon_名称混在保管と構造境界_2026-04-30.md` | 残タスク資料ではなく、名称混在の構造境界資料として作成 |
 | `manifest.json` | 最新snapshot、coverage、doc listを反映 |
 
@@ -179,4 +179,389 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - EmlisAIは、value observation signalをworld model / observation candidate / meta / fallback / quality gateへadditive接続する。
 - Pieceは、短縮要約ではなく、`must_keep_signal_keys` と `source_claims` を保持してユーザーの言いたい核を他者へ伝わる形に整える。
 - Analysisは、value observationを単発の人格断定にせず、self_structure domain素材としてmaterial boundary内で扱う。
-- `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は今回の前提資料zip内に存在しないため、manifestのdocs listから外し、現存資料への参照を正本とする。
+- `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` と `08_Cocolon_DB_rename_boundary.md` は今回の前提資料zip内に存在するため、manifestのdocs listにも残し、それぞれの構造境界の正本として扱う。
+
+
+# 2026-05-09 差分追記: latest actual diff from previous received files
+
+比較元は直前実ファイル `Cocolon(138).zip` の前段として受領済みの `Cocolon_2(43).zip` と、`mashos-api_2(26).zip` の前段として受領済みの `mashos-api_2(25).zip` です。比較先は `Cocolon(138).zip` / `mashos-api_2(26).zip` です。
+
+## 追加ファイル
+
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | latest実ファイルで新規追加。前提資料coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | latest実ファイルで新規追加。前提資料coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | latest実ファイルで新規追加。前提資料coverageへ追記 |
+
+## 変更ファイル
+
+| file | 補正内容 |
+|---|---|
+| `Cocolon/components/TodayQuestionCard.js` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `Cocolon/features/home/useHomeActions.js` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `Cocolon/screens/TodayQuestionHistoryScreen.js` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/account_delete_service.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/analysis_engine_adapter.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/api_today_question.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/astor_material_snapshots.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/home_gateway/command_gateway.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/home_gateway/today_question_command_service.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/today_question_store.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+
+## 削除ファイル
+
+| file | 補正内容 |
+|---|---|
+| `0件` | 差分なし |
+
+
+## 前提資料coverage差分
+
+### 前提資料全体で未記載だった最新path
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+| `mashos-api/ai/tests/test_subscription_projection.py` | 前提資料全体coverage補正。最新実ファイルとして明示 |
+
+### 01系で未記載だった最新path
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_subscription_projection.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+
+### 02系で未記載だった最新path
+| file | 補正内容 |
+|---|---|
+| `Cocolon/app.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/package-lock.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/package.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/screens/TutorialFlowScreen.js` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/tutorial/generated/tutorialFixtures.generated.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/tutorial/tutorialScenarioData.js` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_response_composition_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_user_word_anchor_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_subscription_projection.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/scripts/generate_tutorial_fixtures.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+
+
+## SQL差分
+
+`today_question_personal_followup_v1.sql` は別ファイルとして受領され、ユーザー確認でSQL実行済みです。内容は `today_question_personal_candidates` / `today_question_personal_questions` の追加、`today_question_answers` への `question_origin` / `personal_question_id` / `source_type` / `source_id` / `source_field` / `anchor_text` / `question_type` / `source_anchor_snapshot_json` 追加、personal回答用の `question_id` nullable化、index/FK追加です。
+
+# 2026-05-09 差分追記: GitHub正本の再現性確認
+
+ローカル受領zipでは容量都合によりnative project / config / support scriptが省かれる場合があるため、再現性判断はGitHub上の `MassyuRed/Cocolon` 正本を併せて確認する。
+
+| 確認項目 | GitHub上の状態 | 前提資料での扱い |
+|---|---|---|
+| `Cocolon/scripts/postinstall.js` | 存在。stale patchを退避して `patch-package` を実行する処理あり | `package.json` の `postinstall` scriptはGitHub正本で対応fileあり。ローカルzip欠落のみで再現性欠落扱いにしない |
+| `Cocolon/scripts/reset-project.js` | 存在。`package.json` の `reset-project` script に対応するfileあり | support scriptとしてGitHub正本を確認先にする |
+| `Cocolon/android/app/build.gradle` | 存在。release signing、Hermes、minify、16KB/flexible page size対応の設定あり | Android native release構成はGitHub正本に存在する |
+| `Cocolon/ios/Podfile` | 存在。iOS 15.1、static frameworks、Firebase static framework、CI archive向け署名抑制処理あり | iOS native dependency構成はGitHub正本に存在する |
+| `Cocolon/babel.config.js` | 存在。React Native babel preset と Reanimated plugin 設定あり | Metro/Babel構成はGitHub正本に存在する |
+| `Cocolon/metro.config.js` | 存在。SVG transformer設定あり | SVG asset build構成はGitHub正本に存在する |
+| `Cocolon/eslint.config.js` | 存在。Expo ESLint flat configあり | lint構成はGitHub正本に存在する |
+| `Cocolon/tsconfig.json` | 存在。`strict: true` 設定あり | TypeScript設定はGitHub正本に存在する |
+| `Cocolon/.github/workflows/ios-build.yml` | 存在。checkout、Pod install、署名、archive、export、TestFlight uploadまであり | TestFlight build workflowはGitHub正本に存在する |
+
+結論: 2026-05-09時点の「再現できるソース」評価では、ローカルzipだけを根拠にnative/config/support script欠落と判断しない。GitHub正本に上記構成が存在するため、前提資料上はrelease reproducibility boundary確認済みとして扱う。
+
+
+
+# 2026-05-09 差分追記: current参照の実ファイル再照合結果
+
+照合対象: `Cocolon_前提資料(48).zip` / `Cocolon(138).zip` / `mashos-api_2(26).zip`。
+
+- Cocolon実ファイル: `125`件。GitHub正本で確認済みのnative/config/support scriptは、ローカル軽量zip未収録でも欠落扱いにしない。
+- mashos-api実ファイル: `340`件。
+- `01` coverageでは Piece long input / self-and-others happiness test 2件を補正追記。
+- `02` coverageでは EmlisAI current-input grounding / meaning block / phrase shaping / pre-return quality gate / final review / response composition と Piece long input 系test 8件を補正追記。
+- 旧MyWeb / MyModel / Echoes / Discoveries / EmotionReflection系の旧file sectionは、実ファイルに存在しない場合 `retired-current-reference` として読む。current ownerは `01A` / `01B` / `01C` / `02A` / `02B` / `02C` の末尾補正表を優先する。
+
+# 2026-05-09 差分追記: `Cocolon_12(3).zip` / `mashos-api_4(10).zip` current snapshot差分
+
+この差分は、`Cocolon(138).zip` / `mashos-api_2(26).zip` から `Cocolon_12(3).zip` / `mashos-api_4(10).zip` への実ファイル差分です。前提資料 `Cocolon_前提資料(51).zip` はこのcurrent snapshotを現行基準として読む。
+
+| source | previous | current | added | changed | removed |
+|---|---|---|---:|---:|---:|
+| Cocolon | `Cocolon(138).zip` | `Cocolon_12(3).zip` | 75 | 9 | 0 |
+| mashos-api | `mashos-api_2(26).zip` | `mashos-api_4(10).zip` | 2 | 3 | 0 |
+
+## Cocolon added files
+
+| path | 補正内容 |
+|---|---|
+| Cocolon/components/GlobalFrameLayout.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/lib/monitoring.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/AnalysisStackNavigator.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/InputStackNavigator.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/MainTabs.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/PieceStackNavigator.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/RankingStackNavigator.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/RootNavigator.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/SettingsStackNavigator.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/linkingRuntime.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/navigationConstants.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/navigationRef.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/navigation/notificationRouting.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/runtime/AppRuntimeBlockingScreen.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/runtime/AppRuntimeBootstrapGate.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/AccountIdSearchSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/AccountNameEditModal.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/AccountProfileSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/AccountStatusSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/AccountVisibilitySection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/accountModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/useAccountFollowState.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/useAccountIdSearch.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/useAccountProfile.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/useAccountSubscription.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/account/useAccountVisibility.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysis/analysisRouteModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysis/useAnalysisReportActions.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysis/useAnalysisRouteState.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysis/useAnalysisSelfStructureActions.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysis/useAnalysisTutorialOverlay.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysis/useAnalysisUnreadBadges.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/AnalysisReportCharts.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/analysisReportAccessPolicy.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/analysisReportConstants.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/analysisReportFormatters.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/analysisReportHtmlExport.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/analysisReport/analysisReportNormalize.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputActionArea.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputCategorySection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputEmotionSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputFeedbackReplyModal.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputMemoSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputPiecePreviewController.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputStartupModals.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/InputToastOverlay.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/inputDraftModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/inputFeedbackModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/inputLayoutModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/inputNoticeModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/inputOptions.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/useInputDraftPersistence.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/useInputFeedbackModal.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/input/useInputKeyboardAwareMemo.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusEmotionLogSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusHeader.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusHistorySection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusOwnerPickerModal.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusPieceFeedSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusRecommendSection.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusTabBar.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/NexusTodayEmotionSummary.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/nexusConstants.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/nexusHistoryModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/nexusNormalize.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/nexus/nexusRouteModel.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/PieceHomeActionCard.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/PieceHomeMainActions.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/PieceRecommendModal.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/PieceTutorialCreateModal.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/usePieceHomeGlobalSummary.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/usePieceHomeTutorial.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/screens/piece/usePieceRecommendUsers.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+| Cocolon/tests/rn-screen-contracts.test.js | RN巨大画面分割 / App.js分割 / 本番運用監視による追加 |
+
+## Cocolon changed files
+
+| path | 補正内容 |
+|---|---|
+| Cocolon/App.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/lib/apiClient.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/package.json | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/screens/AccountScreen.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/screens/AnalysisReportViewerScreen.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/screens/AnalysisScreen.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/screens/InputScreen.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/screens/NexusScreen.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+| Cocolon/screens/PieceScreen.js | entry shell化、screen split接続、監視接続、またはnpm test script追加による変更 |
+
+## mashos-api added files
+
+| path | 補正内容 |
+|---|---|
+| mashos-api/ai/services/ai_inference/api_client_events.py | 本番運用監視 `/ops/client-events` 追加 |
+| mashos-api/ai/tests/contract/test_client_events_contract.py | 本番運用監視 `/ops/client-events` 追加 |
+
+## mashos-api changed files
+
+| path | 補正内容 |
+|---|---|
+| mashos-api/ai/docs/PUBLIC_API_REGISTRY.md | 監視endpoint登録 / public contract registry / docs更新 |
+| mashos-api/ai/services/ai_inference/api_contract_registry.py | 監視endpoint登録 / public contract registry / docs更新 |
+| mashos-api/ai/services/ai_inference/app.py | 監視endpoint登録 / public contract registry / docs更新 |
+
+## current boundary notes
+
+- `Cocolon/screens/PieceLibraryScreen.js` は今回のcurrent snapshotでも未分割です。Phase 3は別工程として扱う。
+- `Cocolon/App.js` は薄いentry shellになり、navigation/runtime配下がroot navigationとruntime gateのcurrent ownerです。
+- `mashos-api/ai/services/ai_inference/api_client_events.py` はDB保存を行わない監視endpointです。privacy-safe structured log / alert logのみを扱う。
+
+# 2026-05-09 差分追記: `Cocolon_12(3).zip` / `mashos-api_4(10).zip` current差分
+
+照合基準: 前回資料基準 `Cocolon(138).zip` / `mashos-api_2(26).zip` から、現状実ファイル `Cocolon_12(3).zip` / `mashos-api_4(10).zip` への差分です。
+
+| source | previous count | current count | added | changed | removed |
+|---|---:|---:|---:|---:|---:|
+| Cocolon | 125 | 200 | 75 | 9 | 0 |
+| mashos-api | 340 | 342 | 2 | 3 | 0 |
+| total | 465 | 542 | 77 | 12 | 0 |
+
+## Cocolon 追加path
+
+| file | 読み方 |
+|---|---|
+| `Cocolon/components/GlobalFrameLayout.js` | App.js分割component。global frame layout owner |
+| `Cocolon/lib/monitoring.js` | RN本番運用監視client |
+| `Cocolon/navigation/AnalysisStackNavigator.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/InputStackNavigator.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/MainTabs.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/PieceStackNavigator.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/RankingStackNavigator.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/RootNavigator.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/SettingsStackNavigator.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/linkingRuntime.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/navigationConstants.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/navigationRef.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/navigation/notificationRouting.js` | App.js分割module。root navigation / stack / push / linking owner |
+| `Cocolon/runtime/AppRuntimeBlockingScreen.js` | App.js分割module。runtime bootstrap / version gate owner |
+| `Cocolon/runtime/AppRuntimeBootstrapGate.js` | App.js分割module。runtime bootstrap / version gate owner |
+| `Cocolon/screens/account/AccountIdSearchSection.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/AccountNameEditModal.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/AccountProfileSection.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/AccountStatusSection.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/AccountVisibilitySection.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/accountModel.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/useAccountFollowState.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/useAccountIdSearch.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/useAccountProfile.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/useAccountSubscription.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/account/useAccountVisibility.js` | AccountScreen分割module。profile/follow/visibility/subscription/search内部owner |
+| `Cocolon/screens/analysis/analysisRouteModel.js` | AnalysisScreen分割module。route/unread/report/self-structure/tutorial内部owner |
+| `Cocolon/screens/analysis/useAnalysisReportActions.js` | AnalysisScreen分割module。route/unread/report/self-structure/tutorial内部owner |
+| `Cocolon/screens/analysis/useAnalysisRouteState.js` | AnalysisScreen分割module。route/unread/report/self-structure/tutorial内部owner |
+| `Cocolon/screens/analysis/useAnalysisSelfStructureActions.js` | AnalysisScreen分割module。route/unread/report/self-structure/tutorial内部owner |
+| `Cocolon/screens/analysis/useAnalysisTutorialOverlay.js` | AnalysisScreen分割module。route/unread/report/self-structure/tutorial内部owner |
+| `Cocolon/screens/analysis/useAnalysisUnreadBadges.js` | AnalysisScreen分割module。route/unread/report/self-structure/tutorial内部owner |
+| `Cocolon/screens/analysisReport/AnalysisReportCharts.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/analysisReport/analysisReportAccessPolicy.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/analysisReport/analysisReportConstants.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/analysisReport/analysisReportFormatters.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/analysisReport/analysisReportHtmlExport.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/analysisReport/analysisReportNormalize.js` | AnalysisReportViewerScreen分割module。report表示/正規化/export内部owner |
+| `Cocolon/screens/input/InputActionArea.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputCategorySection.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputEmotionSection.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputFeedbackReplyModal.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputMemoSection.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputPiecePreviewController.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputStartupModals.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/InputToastOverlay.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/inputDraftModel.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/inputFeedbackModel.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/inputLayoutModel.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/inputNoticeModel.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/inputOptions.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/useInputDraftPersistence.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/useInputFeedbackModal.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | InputScreen分割module。Home/Input entry shellの内部owner |
+| `Cocolon/screens/nexus/NexusEmotionLogSection.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusHeader.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusHistorySection.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusOwnerPickerModal.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusPieceFeedSection.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusRecommendSection.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusTabBar.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/NexusTodayEmotionSummary.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/nexusConstants.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/nexusHistoryModel.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/nexusNormalize.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/nexus/nexusRouteModel.js` | NexusScreen分割module。Piece/Nexus surfaceの内部owner |
+| `Cocolon/screens/piece/PieceHomeActionCard.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/screens/piece/PieceHomeMainActions.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/screens/piece/PieceRecommendModal.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/screens/piece/PieceTutorialCreateModal.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/screens/piece/usePieceHomeGlobalSummary.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/screens/piece/usePieceHomeTutorial.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/screens/piece/usePieceRecommendUsers.js` | PieceScreen分割module。home/tutorial/recommend内部owner |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RN screen split contract guard |
+
+## Cocolon 変更path
+
+| file | 読み方 |
+|---|---|
+| `Cocolon/App.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/lib/apiClient.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/package.json` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/screens/AccountScreen.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/screens/AnalysisReportViewerScreen.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/screens/AnalysisScreen.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/screens/InputScreen.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/screens/NexusScreen.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+| `Cocolon/screens/PieceScreen.js` | entry shell / API client / package script更新。route名・API契約は維持 |
+
+## mashos-api 追加path
+
+| file | 読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_client_events.py` | 本番運用監視endpoint `/ops/client-events` owner |
+| `mashos-api/ai/tests/contract/test_client_events_contract.py` | client event contract / redaction regression |
+
+## mashos-api 変更path
+
+| file | 読み方 |
+|---|---|
+| `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | client events route / public contract / registry更新 |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | client events route / public contract / registry更新 |
+| `mashos-api/ai/services/ai_inference/app.py` | client events route / public contract / registry更新 |
+
+## 読み方
+
+- RN巨大画面分割で追加されたsubdirectory fileは、新機能ではなく旧entry shellの内部ownerとして読む。
+- `PieceLibraryScreen.js` はこのcurrent基準では未分割のcurrent ownerとして残る。
+- `POST /ops/client-events` は本番運用監視のops endpoint。DB write pathや公開content flowとは別境界。
+- removed fileは0件のため、今回の前提資料更新では既存entry shellの削除は扱わない。

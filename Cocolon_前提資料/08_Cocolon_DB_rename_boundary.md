@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_db_rename_boundary
 title: "Cocolon DB情報 / DB rename境界資料"
-revision_date: "2026-04-30"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -910,3 +910,19 @@ Piece後回しのため、`mymodel_reflections.content_json` と `mymodel_qna_*`
 どの key / value が、表示・API契約・保存データ・通知・削除処理に影響するかを確認してから更新可否を決める。
 
 したがって、次に作るSQLは UPDATE / DELETE / ALTER ではなく、SELECT の対象一覧化SQLに限定する。
+
+
+# 2026-05-09 差分追記: 今日の問い personal followup DB boundary
+
+`today_question_personal_followup_v1.sql` は別ファイルとして受領され、ユーザー確認でSQL実行済みです。この変更はDB physical rename/dropではなく、今日の問いpersonal_followup用のadditive schemaです。
+
+| DB object | 役割 |
+|---|---|
+| `public.today_question_personal_candidates` | emotion入力から抽出したpersonal候補を保存する。`user_id` / `source_type` / `source_id` / `source_field` / `anchor_text` / `question_type` / `score` / `status` / `source_hash` を持つ |
+| `public.today_question_personal_questions` | その日に表示可能なpersonal問いを保存する。`question_text` / `choices_snapshot_json` / `source_anchor_json` / `presented_local_date` / `question_origin` を持つ |
+| `public.today_question_answers.question_origin` | `static_role_probe` / `personal_followup` を区別する |
+| `public.today_question_answers.personal_question_id` | personal回答時にpersonal questionへ紐づける |
+| `public.today_question_answers.source_anchor_snapshot_json` | 回答時点の原文アンカーをsnapshot保存する |
+| `public.today_question_answers.question_id` | personal回答ではnullを許容する。static回答では既存100問のquestion_idを使う |
+
+この境界では、既存 `today_question_bank` にユーザー固有のpersonal questionを混ぜません。共通マスターとユーザー固有質問の責務を分けます。

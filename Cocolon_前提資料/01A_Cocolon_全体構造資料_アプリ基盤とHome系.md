@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -323,7 +323,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/expo-env.d.ts`
 - repo: `Cocolon`
 - system: `app support / build config`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: / <reference types="expo/types" />
 - 直接関係ファイル:
   - なし
@@ -365,7 +367,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/react-native.config.js`
 - repo: `Cocolon`
 - system: `app support / misc`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: App support file. Current system: app support / misc.
 - 直接関係ファイル:
   - なし
@@ -382,7 +386,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/components/EmotionReflectionPreviewModal.js`
 - repo: `Cocolon`
 - system: `Home shared UI`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: RN shared component module. Current system: Home shared UI.
 - 直接関係ファイル:
   - `Cocolon/components/CocolonButton.js` — import
@@ -796,7 +802,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/lib/api/home/emotionReflectionApi.js`
 - repo: `Cocolon`
 - system: `Home API client wrapper`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Frontend API wrapper for /emotion/reflection/cancel, /emotion/reflection/preview, /emotion/reflection/publish, /emotion/reflection/quota.
 - 直接関係ファイル:
   - `Cocolon/lib/api/client.js` — import
@@ -959,7 +967,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/lib/emotionReflectionApi.js`
 - repo: `Cocolon`
 - system: `frontend compat API wrapper`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Frontend helper / boundary module. Current system: frontend compat API wrapper.
 - 直接関係ファイル:
   - なし
@@ -2208,3 +2218,141 @@ EmlisAI immediate reply は、既存の `user word anchor -> phrase shaping -> m
 | `emlis_ai_safe_reply_fallback_service.py` | fallbackでもvalue observation lineを使い、単なる受領文へ戻さない | `emlis_ai_quality_gate.py` |
 
 EmlisAIで出すのは内部観測語ではなく、ユーザー向けにsoftenした表現です。`コンフォートゾーン`、`スペック`、`精神の問題`、`皮算用` は内部観測語として扱い、返答本文には直接出さない。
+
+
+# 2026-05-09 差分追記: Home / Today Question / Tutorial current boundary
+
+| file | 追加・更新された読み方 |
+|---|---|
+| `Cocolon/features/home/useHomeActions.js` | 今日の問い回答時に `question_origin` / `personal_question_id` / `source_anchor_hash` をpayloadへ入れる。既存static回答との互換は維持する |
+| `Cocolon/components/TodayQuestionCard.js` | `personal_followup` でも既存のquestion.text / choices表示を使う。個別生成感を強く出すラベルは不要 |
+| `Cocolon/screens/TodayQuestionHistoryScreen.js` | personal回答の履歴では `source_anchor_summary.anchor_text` を `入力: 「...」` として短く表示する |
+| `Cocolon/screens/InputScreen.js` | Tutorial Home説明時に `今日の全体行動` と `入力履歴` を非表示化し、感情選択とカテゴリ選択を別フェーズ化する |
+| `Cocolon/tutorial/tutorialScenarioData.js` | `Emlis（エムリス）` 表記、ピース説明文、つながる3体験表の文言を最新UIに合わせる |
+| `Cocolon/screens/NexusScreen.js` | フォロー中ユーザーのピース説明を「フォロー中ユーザーのピースも同じように閲覧できます。」へ更新済み |
+| `Cocolon/screens/TutorialFlowScreen.js` | `Emlis（エムリス）` 読み仮名をチュートリアル案内へ反映する |
+
+
+# 2026-05-09 実ファイル再照合: current owner補正
+
+この表は `Cocolon(138).zip` / `mashos-api_2(26).zip` の実ファイル一覧と、この資料内の current 参照を照合した補正です。
+旧本文内の `active` / `shared` / `legacy-live` 表記よりも、この表を優先します。旧名称はDB physical name / compat / 旧route説明として保管できるが、current実ファイルownerとしては扱いません。
+
+| 旧参照path | 実ファイル照合 | current owner / 読み方 |
+|---|---|---|
+| `Cocolon/components/EmotionReflectionPreviewModal.js` | local snapshot未収録 | Cocolon/components/EmotionPiecePreviewModal.js |
+| `Cocolon/expo-env.d.ts` | local snapshot未収録 | 今回local snapshotには存在しない。Expo generated type helper扱い。current runtime sourceとして扱わない。 |
+| `Cocolon/lib/api/home/emotionReflectionApi.js` | local snapshot未収録 | Cocolon/lib/api/home/emotionPieceApi.js |
+| `Cocolon/lib/emotionReflectionApi.js` | local snapshot未収録 | Cocolon/lib/api/home/emotionPieceApi.js。root legacy façadeは今回local snapshotには存在しない。 |
+| `Cocolon/react-native.config.js` | local snapshot未収録 | 今回local snapshotには存在しない。native/config補助はGitHub正本確認済みconfig群を優先し、このpathをcurrent sourceとして扱わない。 |
+| `Cocolon/screens/DeepInsightScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js / Cocolon/screens/AnalysisContentFirstScreen.js。DeepInsight単独screenは今回local snapshotには存在しない。 |
+| `Cocolon/screens/EchoesHistoryDetailScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryDetailScreen.js |
+| `Cocolon/screens/EchoesHistoryListScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryListScreen.js |
+| `Cocolon/screens/MyModelDiscoveriesRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Discoveries screenは存在しない。RankingTop / PieceResonanceRanking / backend ranking viewsを優先する。 |
+| `Cocolon/screens/MyModelEchoesRankingScreen.js` | local snapshot未収録 | Cocolon/screens/PieceResonanceRankingScreen.js |
+| `Cocolon/screens/MyModelEntryScreen.js` | local snapshot未収録 | Cocolon/screens/PieceEntryScreen.js |
+| `Cocolon/screens/MyModelMenuCommon.js` | local snapshot未収録 | Cocolon/screens/PieceMenuCommon.js |
+| `Cocolon/screens/MyModelQuestionsRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Questions screenは存在しない。RankingTop / InputCountRanking / InputLengthRanking / PieceResonanceRankingを優先する。 |
+| `Cocolon/screens/MyModelReactionHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryListScreen.js / Cocolon/screens/ResonanceHistoryDetailScreen.js |
+| `Cocolon/screens/MyModelReflectionsScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyModelScreen.js` | local snapshot未収録 | Cocolon/screens/PieceScreen.js / Cocolon/screens/PieceEntryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyWebEnsureClient.js` | local snapshot未収録 | Cocolon/screens/AnalysisEnsureClient.js |
+| `Cocolon/screens/MyWebHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisHistoryScreen.js |
+| `Cocolon/screens/MyWebMenuCommon.js` | local snapshot未収録 | Cocolon/screens/AnalysisMenuCommon.js |
+| `Cocolon/screens/MyWebReportHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportHistoryScreen.js |
+| `Cocolon/screens/MyWebReportViewerScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportViewerScreen.js |
+| `Cocolon/screens/MyWebScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js |
+
+# 2026-05-09 差分追記: App root / Home split / monitoring boundary
+
+RN巨大画面分割により、App root と Home(Input) は entry shell + submodule 構造として読む。
+
+## App root / navigation / runtime
+
+| path | current role |
+|---|---|
+| `Cocolon/App.js` | provider順、NavigationContainer、初期push通知接続、monitoring初期化を持つentry shell |
+| `Cocolon/components/GlobalFrameLayout.js` | global frame表示component。App.jsから分離された表示境界 |
+| `Cocolon/navigation/navigationRef.js` | navigationRef singleton とpending notification route queueのowner |
+| `Cocolon/navigation/notificationRouting.js` | push通知dataからInput / Analysis / Piece(EmotionLog)へのroute解決を行う |
+| `Cocolon/navigation/linkingRuntime.js` | app link / share code / public profile解決とAccount遷移を扱う |
+| `Cocolon/navigation/InputStackNavigator.js` | Input stack route定義。route名は変更しない |
+| `Cocolon/navigation/AnalysisStackNavigator.js` | Analysis stack route定義。AnalysisからPiece deep dive導線を維持する |
+| `Cocolon/navigation/PieceStackNavigator.js` | Piece stack route定義。PieceLibrary / EmotionLog / TutorialFlow route名を維持する |
+| `Cocolon/navigation/RankingStackNavigator.js` | Ranking stack route定義 |
+| `Cocolon/navigation/SettingsStackNavigator.js` | Settings stack route定義 |
+| `Cocolon/navigation/MainTabs.js` | tab bar / unread badge / startup warmup / self-structure bannerを扱う |
+| `Cocolon/navigation/RootNavigator.js` | auth gate、IAP observer、push token sync、root runtimeを扱う |
+| `Cocolon/runtime/AppRuntimeBootstrapGate.js` | `/app/bootstrap` refreshとbootstrap失敗監視を扱う |
+| `Cocolon/runtime/AppRuntimeBlockingScreen.js` | minimum version block / maintenance表示境界 |
+
+## Home / Input split
+
+| path | current role |
+|---|---|
+| `Cocolon/screens/InputScreen.js` | Home/Input entry shell。API導線とrender全体のownerとして残る |
+| `Cocolon/screens/input/inputOptions.js` | emotion/category/tutorial step等の入力定数 |
+| `Cocolon/screens/input/inputDraftModel.js` | input draft normalize / TTL / storage key model |
+| `Cocolon/screens/input/inputFeedbackModel.js` | Emlis返答modalへ渡す感情meta整形 |
+| `Cocolon/screens/input/inputLayoutModel.js` | memo input height / keyboard-aware layout helper |
+| `Cocolon/screens/input/inputNoticeModel.js` | welcome notice popup判定 |
+| `Cocolon/screens/input/useInputDraftPersistence.js` | 下書き保存・復元・破棄・blur/background保存 |
+| `Cocolon/screens/input/useInputFeedbackModal.js` | Emlis返答modal開閉とtutorial後Analysis遷移 |
+| `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | memo/memoActionの高さ・keyboard inset・focus scroll |
+| `Cocolon/screens/input/InputEmotionSection.js` | 感情選択UI section |
+| `Cocolon/screens/input/InputCategorySection.js` | カテゴリ選択UI section |
+| `Cocolon/screens/input/InputMemoSection.js` | memo / memoAction UI section |
+| `Cocolon/screens/input/InputActionArea.js` | 送信 / Piece preview等のaction area |
+| `Cocolon/screens/input/InputStartupModals.js` | Notice / Today Question / draft restoreなどstartup modal接続 |
+| `Cocolon/screens/input/InputFeedbackReplyModal.js` | Emlis返答modal表示component |
+| `Cocolon/screens/input/InputPiecePreviewController.js` | EmotionPiecePreviewModal接続 |
+| `Cocolon/screens/input/InputToastOverlay.js` | toast表示境界 |
+
+## RN monitoring
+
+| path | current role |
+|---|---|
+| `Cocolon/lib/monitoring.js` | RN client event / global JS error / API errorのprivacy-safe送信helper |
+| `Cocolon/lib/apiClient.js` | API失敗時に `captureApiError` を呼ぶ。request / response shapeは変更しない |
+
+監視はbest-effortであり、送信失敗してもアプリ動作を止めない。
+
+# 2026-05-09 差分追記: App root / Home分割 / 監視 current boundary
+
+| file | 役割 | 同時確認 |
+|---|---|---|
+| `Cocolon/App.js` | provider順とNavigationContainerを保持するentry shell | `navigation/RootNavigator.js`, `runtime/AppRuntimeBootstrapGate.js`, `lib/monitoring.js` |
+| `Cocolon/navigation/navigationRef.js` | navigationRef singletonと通知route queue | `notificationRouting.js`, `RootNavigator.js` |
+| `Cocolon/navigation/notificationRouting.js` | push通知からInput / Analysis / EmotionLogへ開くroute resolver | `RootNavigator.js`, `App.js` |
+| `Cocolon/navigation/linkingRuntime.js` | app link / share code / public profile解決 | `apiClient.js`, `legacyWireContracts.js` |
+| `Cocolon/navigation/InputStackNavigator.js` | Input stack entry | `InputScreen.js`, `TutorialFlowScreen.js`, `TodayQuestionHistoryScreen.js` |
+| `Cocolon/navigation/MainTabs.js` | tab、unread、startup warmup、self-structure banner | `UnreadContext.js`, `SubscriptionContext.js` |
+| `Cocolon/navigation/RootNavigator.js` | auth gate、IAP observer、push token sync、root navigator | `monitoring.js`, `pushToken.js`, `iapService.js` |
+| `Cocolon/runtime/AppRuntimeBootstrapGate.js` | `/app/bootstrap` 初期化とruntime gate | `AppRuntimeContext.js`, `monitoring.js` |
+| `Cocolon/runtime/AppRuntimeBlockingScreen.js` | minimum version blocking display | `AppRuntimeContext.js` |
+| `Cocolon/components/GlobalFrameLayout.js` | App共通frame layout | `MainTabs.js` |
+| `Cocolon/lib/monitoring.js` | RN側本番運用監視。global error / API failure / runtime failureを送信 | `apiClient.js`, `api_client_events.py` |
+| `Cocolon/lib/apiClient.js` | API共通client。失敗時にmonitoringへprivacy-safe eventを渡す | `monitoring.js` |
+
+## Home/Input split files
+
+| file | 役割 |
+|---|---|
+| `Cocolon/screens/input/inputOptions.js` | emotion / category / tutorial step定数 |
+| `Cocolon/screens/input/inputDraftModel.js` | Input draft normalize / TTL / storage key model |
+| `Cocolon/screens/input/inputFeedbackModel.js` | Emlis返答modal用の感情meta作成 |
+| `Cocolon/screens/input/inputLayoutModel.js` | memo input height / keyboard layout helper |
+| `Cocolon/screens/input/inputNoticeModel.js` | welcome notice判定 |
+| `Cocolon/screens/input/useInputDraftPersistence.js` | 下書き保存・復元・破棄・blur/background保存 |
+| `Cocolon/screens/input/useInputFeedbackModal.js` | Emlis返答modalとtutorial後Analysis遷移 |
+| `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | keyboard inset / memo height / focus scroll |
+| `Cocolon/screens/input/InputEmotionSection.js` | 感情選択UI |
+| `Cocolon/screens/input/InputCategorySection.js` | カテゴリ選択UI |
+| `Cocolon/screens/input/InputMemoSection.js` | memo / memoAction UI |
+| `Cocolon/screens/input/InputActionArea.js` | 送信 / Piece preview / notification action area |
+| `Cocolon/screens/input/InputStartupModals.js` | notice / today question / draft restore modal接続 |
+| `Cocolon/screens/input/InputFeedbackReplyModal.js` | Emlis返答modal表示 |
+| `Cocolon/screens/input/InputPiecePreviewController.js` | EmotionPiecePreviewModal接続 |
+| `Cocolon/screens/input/InputToastOverlay.js` | lightweight toast表示 |
+
+`InputScreen.js` はentry shellです。`submitEmotionInput`、`previewEmotionPiece`、`publishEmotionPiece`、`useHomeState`、`useHomeActions` の契約・route・payloadは変更しません。

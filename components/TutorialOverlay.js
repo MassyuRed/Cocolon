@@ -1102,7 +1102,7 @@ export default function TutorialOverlay({
             <Text style={[styles.message, { color: bodyColor }]}>{message}</Text>
           ) : null}
 
-          {mode === "action" ? (
+          {mode === "action" && actionHint !== null ? (
             <View
               style={[
                 styles.actionHintWrap,

@@ -1,104 +1,33 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
-  ActivityIndicator,
-  Alert,
-  Modal,
-  Pressable,
   SafeAreaView,
   ScrollView,
-  Share,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
-  View,} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../AuthContext"; // パスはプロジェクト構成に合わせて調整してね
+  View,
+} from "react-native";
+
+import { useAuth } from "../AuthContext";
 import { useTheme } from "../theme/ThemeContext";
-import { useSubscription } from "../SubscriptionContext";
 import CocolonBackButton from "../components/CocolonBackButton";
-import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
+import { readShareCodePublic } from "../lib/compat/legacyWireContracts";
 
-// IAP（購入復元）
 import {
-  restoreAvailablePurchases,
-  syncPurchaseToSubscriptionTier,
-} from "../lib/iap/iapService";
-import { getPlanSku } from "../lib/iap/iapConfig";
-import { apiGet, apiPost, apiPatch, apiFetch } from "../lib/apiClient";
-import { ACCOUNT_WIRE, FOLLOW_WIRE, PIECE_WIRE, buildFollowStatsPath, buildPublicProfileByShareCodePath, readConnectCode, readPieceGeneratedTotal, readPieceResonancesTotal, readShareCode, readShareCodePublic } from "../lib/compat/legacyWireContracts";
-
-// 🔧 ここを変えると Account 画面のパネル高さが変わる
-const PANEL_MIN_HEIGHT = 695;
-const DISPLAY_NAME_MAX_LENGTH = 15;
-const DISPLAY_NAME_TAKEN_MESSAGE = "このユーザー名はすでに使われています。";
-
-function normalizeDisplayName(value) {
-  return String(value || "").trim();
-}
-
-function mapDisplayNameConflictMessage(errorLike) {
-  const raw = String(errorLike?.message || errorLike || "");
-  const lower = raw.toLowerCase();
-  if (lower.includes("profiles_display_name_unique")) {
-    return DISPLAY_NAME_TAKEN_MESSAGE;
-  }
-  if (
-    lower.includes("display_name") &&
-    (lower.includes("unique") || lower.includes("duplicate") || lower.includes("already"))
-  ) {
-    return DISPLAY_NAME_TAKEN_MESSAGE;
-  }
-  return "";
-}
-
-async function checkDisplayNameAvailability(candidate) {
-  const normalized = normalizeDisplayName(candidate);
-  if (!normalized) return false;
-
-  try {
-    const json = await apiGet(
-      `/account/display-name/availability?candidate=${encodeURIComponent(normalized)}`
-    );
-    return typeof json?.available === "boolean" ? json.available : !!json?.available;
-  } catch (e) {
-    console.warn("AccountScreen: display name availability check failed", e);
-    return null;
-  }
-}
-
-
-// Tier → ラベル
-const SUB_TIER_LABEL = {
-  free: "Freeプラン",
-  plus: "Plusプラン",
-  premium: "Premiumプラン",
-};
-
-// Tier → Self Structure許可モード（フロント仮定義：types.ts が無い前提）
-const TIER_ALLOWED_SELF_STRUCTURE_MODES = {
-  free: ["light"],
-  plus: ["light", "standard"],
-  premium: ["light", "standard", "deep"],
-};
-
-function normalizeSubscriptionTier(raw) {
-  const t = String(raw || "").trim().toLowerCase();
-  if (t === "plus" || t === "premium" || t === "free") return t;
-  return "free";
-}
-
-function formatAllowedModes(modes) {
-  const arr = Array.isArray(modes) ? modes : [];
-  if (arr.length === 0) return "light";
-  // 表示順を固定
-  const order = ["light", "standard", "deep"];
-  return order.filter((m) => arr.includes(m)).join(" / ");
-}
+  PANEL_MIN_HEIGHT,
+} from "./account/accountModel";
+import { useAccountProfile } from "./account/useAccountProfile";
+import { useAccountFollowState } from "./account/useAccountFollowState";
+import { useAccountVisibility } from "./account/useAccountVisibility";
+import { useAccountSubscription } from "./account/useAccountSubscription";
+import { useAccountIdSearch } from "./account/useAccountIdSearch";
+import AccountProfileSection from "./account/AccountProfileSection";
+import AccountIdSearchSection from "./account/AccountIdSearchSection";
+import AccountStatusSection from "./account/AccountStatusSection";
+import AccountNameEditModal from "./account/AccountNameEditModal";
+import AccountVisibilitySection from "./account/AccountVisibilitySection";
 
 export default function AccountScreen({ navigation, route, viewedUserId }) {
   const { colors, themeName } = useTheme();
@@ -106,830 +35,37 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
   const { user } = useAuth();
-  const {
-    tier: ctxSubscriptionTier,
-    loading: subscriptionContextLoading,
-    allowedSelfStructureModes: ctxAllowedSelfStructureModes,
-    refreshTier,
-  } = useSubscription();
   const routeViewedUserId = route?.params?.viewedUserId;
   const targetUserId = viewedUserId || routeViewedUserId || user?.id || null;
-  const [displayName, setDisplayName] = useState("");
-  const [shareCode, setShareCode] = useState("");
-  const [connectCode, setConnectCode] = useState("");
-  const [loading, setLoading] = useState(true);
-  // Follow / Follower（Pieceフォロー）
-  const [followingCount, setFollowingCount] = useState(0);
-  const [followerCount, setFollowerCount] = useState(0);
-  const [followCountLoading, setFollowCountLoading] = useState(false);
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [isFollowRequested, setIsFollowRequested] = useState(false);
-  const [followActionLoading, setFollowActionLoading] = useState(false);
-
-  // ステータス（アカウント公開情報）
-  const [accountStatus, setAccountStatus] = useState(null);
-  const [statusLoading, setStatusLoading] = useState(false);
-  const [statusError, setStatusError] = useState("");
-
-
-  // ユーザー名の再設定（編集）
-  const [nameDraft, setNameDraft] = useState("");
-  const [nameSaving, setNameSaving] = useState(false);
-  const [nameChecking, setNameChecking] = useState(false);
-  const [nameError, setNameError] = useState("");
-  const [nameEditOpen, setNameEditOpen] = useState(false);
-
-  // アカウント設定（公開 / 非公開）
-  const [accountSettingsOpen, setAccountSettingsOpen] = useState(false);
-  const [visibilityLoading, setVisibilityLoading] = useState(false);
-  const [visibilitySaving, setVisibilitySaving] = useState(false);
-  const [accountVisibility, setAccountVisibility] = useState({
-    is_share_code_public: true,
-    is_recommendation_enabled: true,
-    is_ranking_visible: true,
-    is_private_account: false,
-  });
-
-  // サブスク表示
-  const [subTier, setSubTier] = useState("free");
-  const [subAllowedModes, setSubAllowedModes] = useState(["light"]);
-  const [subLoading, setSubLoading] = useState(true);
-  const [subError, setSubError] = useState("");
-  const [restoreLoading, setRestoreLoading] = useState(false);
-
-  // ユーザーID検索
-  const [idSearchQuery, setIdSearchQuery] = useState("");
-  const [idSearchLoading, setIdSearchLoading] = useState(false);
-  const [idSearchResult, setIdSearchResult] = useState(null);
-  const [idSearchError, setIdSearchError] = useState("");
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadProfile = async () => {
-      try {
-        if (!user) {
-          setLoading(false);
-          return;
-        }
-
-        const isSelfNow = String(targetUserId || "") === String(user.id);
-        const json = isSelfNow
-          ? await apiGet("/account/profile/me")
-          : await apiGet(
-              `/account/profile?target_user_id=${encodeURIComponent(
-                String(targetUserId || user.id)
-              )}`
-            );
-
-        if (!cancelled) {
-          setDisplayName(String(json?.display_name || ""));
-          setShareCode(String(readShareCode(json, "") || ""));
-          setConnectCode(String(readConnectCode(json, "") || ""));
-        }
-      } catch (e) {
-        console.warn("loadProfile error:", e);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
-
-    loadProfile();
-    return () => {
-      cancelled = true;
-    };
-  }, [user, targetUserId]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    if (!user) {
-      if (!cancelled) {
-        setSubTier("free");
-        setSubAllowedModes(["light"]);
-        setSubLoading(false);
-        setSubError("");
-      }
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    if (subscriptionContextLoading) {
-      if (!cancelled) setSubLoading(true);
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    if (!cancelled) {
-      const tier = normalizeSubscriptionTier(ctxSubscriptionTier);
-      setSubTier(tier);
-      setSubAllowedModes(
-        Array.isArray(ctxAllowedSelfStructureModes) && ctxAllowedSelfStructureModes.length > 0
-          ? ctxAllowedSelfStructureModes
-          : TIER_ALLOWED_SELF_STRUCTURE_MODES[tier] || ["light"]
-      );
-      setSubError("");
-      setSubLoading(false);
-    }
-
-    return () => {
-      cancelled = true;
-    };
-  }, [ctxAllowedSelfStructureModes, ctxSubscriptionTier, subscriptionContextLoading, user]);
-
-
-  // ------------------------------
-  // Follow / Follower（Pieceフォロー）
-  // - DB: follow_links (legacy physical storage may still use historical naming)
-  // - 指定: connectCode（connect code）を起点に owner_user_id を解決してから follow/unfollow
-  // ------------------------------
-
-  const refreshFollowState = async () => {
-    if (!targetUserId) return;
-
-    setFollowCountLoading(true);
-    try {
-      // Supabase RLS の影響を避けるため、follow/follower の取得も MashOS API 経由で行う
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await apiFetch(buildFollowStatsPath(targetUserId), {
-        method: "GET",
-        headers: accessToken
-          ? {
-              Authorization: `Bearer ${accessToken}`,
-            }
-          : {},
-      });
-
-      if (!res.ok) {
-        let detail = `HTTP ${res.status}`;
-        try {
-          const j = await res.json();
-          if (j && typeof j.detail === "string") detail = j.detail;
-        } catch {}
-        throw new Error(detail);
-      }
-
-      const json = await res.json().catch(() => ({}));
-
-      const followingCnt = Number(json?.following_count ?? 0) || 0;
-      const followerCnt = Number(json?.follower_count ?? 0) || 0;
-      const isFollowingServer = !!json?.is_following;
-      const isFollowRequestedServer = !!json?.is_follow_requested;
-
-      setFollowingCount(followingCnt);
-      setFollowerCount(followerCnt);
-
-      // 自分が表示中アカウントをフォローしているか
-      const isSelfNow = !!user && String(targetUserId || "") === String(user.id);
-      if (user && !isSelfNow) {
-        setIsFollowing(isFollowingServer);
-        setIsFollowRequested(!isFollowingServer && isFollowRequestedServer);
-      } else {
-        setIsFollowing(false);
-        setIsFollowRequested(false);
-      }
-    } catch (e) {
-      console.warn("refreshFollowState error:", e);
-    } finally {
-      setFollowCountLoading(false);
-    }
-  };
-
-  const refreshAccountStatus = async () => {
-    if (!targetUserId) return;
-
-    setStatusLoading(true);
-    setStatusError("");
-    try {
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error("アクセストークンが取得できませんでした");
-      }
-
-      const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
-      const res = await apiFetch(`${ACCOUNT_WIRE.routes.status}?${qs}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!res.ok) {
-        let detail = `HTTP ${res.status}`;
-        try {
-          const j = await res.json();
-          if (j && typeof j.detail === "string") detail = j.detail;
-        } catch {}
-        throw new Error(detail);
-      }
-
-      const json = await res.json().catch(() => ({}));
-      setAccountStatus(json && typeof json === "object" ? json : {});
-    } catch (e) {
-      console.warn("refreshAccountStatus error:", e);
-      setAccountStatus(null);
-      setStatusError(String(e?.message || e));
-    } finally {
-      setStatusLoading(false);
-    }
-  };
-
-
-
-  useEffect(() => {
-    refreshFollowState();
-    refreshAccountStatus();
-    loadAccountVisibilityMe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, targetUserId]);
-
-
-  // 画面に戻ってきたタイミングでもフォロー数を最新化（navigation focus）
-  useEffect(() => {
-    if (!navigation?.addListener) return;
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      refreshFollowState();
-      refreshAccountStatus();
-      loadAccountVisibilityMe();
-    });
-
-    return unsubscribe;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigation, user, targetUserId]);
-
-  const onToggleFollow = async () => {
-    if (followActionLoading) return;
-
-    if (!user) {
-      Alert.alert("ログインが必要です", "フォローするにはログインが必要です。");
-      return;
-    }
-
-    const isSelfNow = !!user && String(targetUserId || "") === String(user.id);
-    if (isSelfNow) return;
-
-    const code = String(connectCode || "").trim();
-    if (!code && !targetUserId) {
-      Alert.alert("準備中", "相手のユーザーIDがまだ取得できていません。");
-      return;
-    }
-
-    setFollowActionLoading(true);
-    try {
-      const endpoint = isFollowing ? FOLLOW_WIRE.routes.delete : FOLLOW_WIRE.routes.create;
-      const body = code
-        ? { connect_code: code }
-        : { owner_user_id: targetUserId };
-      const json = await apiPost(endpoint, body);
-      const nextFollowing = !!json?.is_following;
-      const nextRequested = !!json?.is_follow_requested && !nextFollowing;
-
-      setIsFollowing(nextFollowing);
-      setIsFollowRequested(nextRequested);
-
-      await refreshFollowState();
-    } catch (e) {
-      console.warn("toggle follow error:", e);
-      Alert.alert("操作に失敗しました", String(e?.message || e));
-    } finally {
-      setFollowActionLoading(false);
-    }
-  };
-
-  const openFollowList = (initialTab) => {
-    if (!targetUserId) return;
-    if (!navigation?.navigate) return;
-
-    navigation.navigate("FollowListScreen", {
-      viewedUserId: targetUserId,
-      connectCode: connectCode || null,
-      initialTab: initialTab || "following",
-    });
-  };
-
-  // 画面に表示するのは「短い公開ID（share code）」をユーザーIDとして扱う
-  const userIdForDisplay = user ? shareCode || "（生成中）" : "未ログイン";
-  const connectIdForDisplay = user
-    ? connectCode || "（生成中）"
-    : "未ログイン";
+  const isSelf = !!user && String(targetUserId || "") === String(user.id);
   const isDark = themeName === "dark";
 
-  const isSelf = !!user && String(targetUserId || "") === String(user.id);
+  const profile = useAccountProfile({ user, targetUserId, isSelf });
+  const visibility = useAccountVisibility({ navigation, user, isSelf });
+  const followState = useAccountFollowState({
+    navigation,
+    user,
+    targetUserId,
+    connectCode: profile.connectCode,
+  });
+  const accountSubscription = useAccountSubscription({ user });
+  void accountSubscription;
+  const idSearch = useAccountIdSearch({ navigation, user });
+
+  const userIdForDisplay = user ? profile.shareCode || "（生成中）" : "未ログイン";
 
   const isPrivateAccount = !!(
-    (isSelf && accountVisibility?.is_private_account) ||
-      (!isSelf && (accountStatus?.is_private_account || accountStatus?.isPrivateAccount))
+    (isSelf && visibility.accountVisibility?.is_private_account) ||
+      (!isSelf && (followState.accountStatus?.is_private_account || followState.accountStatus?.isPrivateAccount))
   );
 
   const isShareCodePublic = !!(
-    readShareCodePublic(accountStatus, false) ??
-      accountStatus?.isShareCodePublic ??
-      accountStatus?.shareCodePublic
+    readShareCodePublic(followState.accountStatus, false) ??
+      followState.accountStatus?.isShareCodePublic ??
+      followState.accountStatus?.shareCodePublic
   );
 
   const canShowShareCode = !user || isSelf || isShareCodePublic;
-
-  const statusValue = (key, fallbackKeys = []) => {
-    const obj = accountStatus && typeof accountStatus === "object" ? accountStatus : null;
-    const keys = [key, ...(Array.isArray(fallbackKeys) ? fallbackKeys : [])];
-    for (const k of keys) {
-      const v = obj ? obj[k] : undefined;
-      if (v === null || v === undefined) continue;
-      const n = Number(v);
-      if (Number.isFinite(n)) return String(Math.trunc(n));
-    }
-    return "—";
-  };
-
-  const tierLabel = SUB_TIER_LABEL[subTier] || "Freeプラン";
-  const tierPrice =
-    subTier === "plus"
-      ? "月額480円"
-      : subTier === "premium"
-      ? "月額980円"
-      : "無料";
-
-  const openNameEdit = () => {
-    if (!user) {
-      Alert.alert("ログインが必要です", "ユーザー名の編集にはログインが必要です。");
-      return;
-    }
-    if (!isSelf) return;
-    setNameDraft(displayName || "");
-    setNameError("");
-    setNameChecking(false);
-    setNameEditOpen(true);
-  };
-
-  const onCopyShareCode = async () => {
-    const code = String(shareCode || "").trim();
-    if (!code) {
-      Alert.alert("準備中", "ユーザーIDがまだ取得できていません。");
-      return;
-    }
-    try {
-      // Connect画面の共有ポップアップ内と同じ導線（Share）
-      await Share.share({ message: code });
-    } catch (e) {
-      console.warn("copy share code failed:", e);
-    }
-  };
-
-  const onShareProfile = async () => {
-    const code = String(shareCode || "").trim();
-    if (!code) {
-      Alert.alert("準備中", "ユーザーIDがまだ取得できていません。");
-      return;
-    }
-    const url = `https://emlis.app/u/${code}`;
-    try {
-      await Share.share({ message: url });
-    } catch (e) {
-      console.warn("share failed:", e);
-    }
-  };
-
-  const openAccountSettings = () => {
-    if (!user) {
-      Alert.alert("ログインが必要です", "アカウント設定を開くにはログインが必要です。");
-      return;
-    }
-    if (!isSelf) return;
-    setAccountSettingsOpen(true);
-  };
-
-  const closeAccountSettings = () => {
-    if (visibilitySaving) return;
-    setAccountSettingsOpen(false);
-  };
-
-  const closeNameEdit = () => {
-    if (nameSaving || nameChecking) return;
-    setNameEditOpen(false);
-    setNameError("");
-  };
-
-  const navigateToAccount = (nextUserId) => {
-    const normalizedUserId = String(nextUserId || "").trim();
-    if (!normalizedUserId || !navigation?.navigate) return;
-
-    navigation.navigate("Account", {
-      viewedUserId: normalizedUserId,
-      userId: normalizedUserId,
-      user_id: normalizedUserId,
-    });
-  };
-
-  const searchUserById = async () => {
-    if (idSearchLoading) return;
-
-    const code = String(idSearchQuery || "").trim();
-    if (!code) {
-      setIdSearchResult(null);
-      setIdSearchError("ユーザーIDを入力してください。");
-      return;
-    }
-
-    setIdSearchLoading(true);
-    setIdSearchResult(null);
-    setIdSearchError("");
-
-    try {
-      const json = await apiGet(buildPublicProfileByShareCodePath(code), { auth: false });
-      const resolvedUserId = String(
-        json?.user_id || json?.target_user_id || json?.id || ""
-      ).trim();
-
-      if (!resolvedUserId) {
-        throw new Error("user_id not found");
-      }
-
-      let resolvedDisplayName = normalizeDisplayName(json?.display_name || "");
-
-      if (user) {
-        try {
-          const profileJson = await apiGet(
-            `/account/profile?target_user_id=${encodeURIComponent(resolvedUserId)}`
-          );
-          resolvedDisplayName =
-            normalizeDisplayName(profileJson?.display_name || resolvedDisplayName) ||
-            resolvedDisplayName;
-        } catch (profileError) {
-          console.warn("AccountScreen: ID search profile fetch failed", profileError);
-        }
-      }
-
-      setIdSearchResult({
-        userId: resolvedUserId,
-        displayName: resolvedDisplayName || "（ユーザー名未設定）",
-      });
-    } catch (e) {
-      console.warn("AccountScreen: ID search failed", e);
-      setIdSearchResult(null);
-      setIdSearchError("該当するユーザーが見つかりませんでした。");
-    } finally {
-      setIdSearchLoading(false);
-    }
-  };
-
-  const loadAccountVisibilityMe = async () => {
-    if (!user || !isSelf) return;
-
-    setVisibilityLoading(true);
-    try {
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error("アクセストークンが取得できませんでした");
-      }
-
-      const res = await apiFetch(ACCOUNT_WIRE.routes.visibilityMe, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!res.ok) {
-        let detail = `HTTP ${res.status}`;
-        try {
-          const j = await res.json();
-          if (j && typeof j.detail === "string") detail = j.detail;
-        } catch {}
-        throw new Error(detail);
-      }
-
-      const json = await res.json().catch(() => ({}));
-      if (json && typeof json === "object") {
-        setAccountVisibility((prev) => ({
-          ...prev,
-          is_share_code_public: readShareCodePublic(json, false),
-          is_recommendation_enabled: !!json.is_recommendation_enabled,
-          is_ranking_visible: !!json.is_ranking_visible,
-          is_private_account: !!json.is_private_account,
-        }));
-      }
-    } catch (e) {
-      console.warn("loadAccountVisibilityMe error:", e);
-      Alert.alert("取得に失敗しました", String(e?.message || e));
-    } finally {
-      setVisibilityLoading(false);
-    }
-  };
-
-  const patchAccountVisibilityMe = async (patch) => {
-    if (!user || !isSelf) return;
-    if (visibilitySaving) return;
-
-    const body = patch && typeof patch === "object" ? patch : null;
-    if (!body || Object.keys(body).length === 0) return;
-
-    setVisibilitySaving(true);
-    try {
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error("アクセストークンが取得できませんでした");
-      }
-
-      const res = await apiFetch(ACCOUNT_WIRE.routes.visibilityMe, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (!res.ok) {
-        let detail = `HTTP ${res.status}`;
-        try {
-          const j = await res.json();
-          if (j && typeof j.detail === "string") detail = j.detail;
-        } catch {}
-        throw new Error(detail);
-      }
-
-      const json = await res.json().catch(() => ({}));
-      if (json && typeof json === "object") {
-        setAccountVisibility((prev) => ({
-          ...prev,
-          is_share_code_public:
-            typeof readShareCodePublic(json, undefined) === "boolean"
-              ? readShareCodePublic(json, prev.is_share_code_public)
-              : prev.is_share_code_public,
-          is_recommendation_enabled:
-            typeof json.is_recommendation_enabled === "boolean"
-              ? json.is_recommendation_enabled
-              : prev.is_recommendation_enabled,
-          is_ranking_visible:
-            typeof json.is_ranking_visible === "boolean"
-              ? json.is_ranking_visible
-              : prev.is_ranking_visible,
-          is_private_account:
-            typeof json.is_private_account === "boolean"
-              ? json.is_private_account
-              : prev.is_private_account,
-        }));
-      }
-    } catch (e) {
-      console.warn("patchAccountVisibilityMe error:", e);
-      Alert.alert("更新に失敗しました", String(e?.message || e));
-    } finally {
-      setVisibilitySaving(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!accountSettingsOpen) return;
-    loadAccountVisibilityMe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accountSettingsOpen]);
-
-  const saveDisplayName = async () => {
-    if (nameSaving || nameChecking) return;
-
-    if (!user) {
-      Alert.alert("ログインが必要です", "ユーザー名の編集にはログインが必要です。");
-      return;
-    }
-    if (!isSelf) return;
-
-    const nextName = normalizeDisplayName(nameDraft);
-
-    if (!nextName) {
-      setNameError("ユーザー名を入力してください。");
-      Alert.alert("入力してください", "ユーザー名を入力してください。");
-      return;
-    }
-
-    if (nextName.length > DISPLAY_NAME_MAX_LENGTH) {
-      const message = `ユーザー名は${DISPLAY_NAME_MAX_LENGTH}文字以内で入力してください。`;
-      setNameError(message);
-      Alert.alert("文字数オーバー", message);
-      return;
-    }
-
-    setNameError("");
-    setNameChecking(true);
-    try {
-      const available = await checkDisplayNameAvailability(nextName);
-      if (available === false) {
-        setNameError(DISPLAY_NAME_TAKEN_MESSAGE);
-        return;
-      }
-    } finally {
-      setNameChecking(false);
-    }
-
-    setNameSaving(true);
-    try {
-      const json = await apiPatch("/account/profile/me", {
-        display_name: nextName,
-      });
-
-      // Auth の user_metadata も同期（失敗しても server-owned profile 側が更新できていればOK）
-      try {
-        await supabase.auth.updateUser({
-          data: { display_name: nextName },
-        });
-      } catch (e) {
-        console.warn("updateUser metadata failed:", e);
-      }
-
-      const resolvedDisplayName = normalizeDisplayName(json?.display_name || nextName);
-      setDisplayName(resolvedDisplayName || nextName);
-      setNameDraft(resolvedDisplayName || nextName);
-      setNameEditOpen(false);
-      setNameError("");
-      Alert.alert("更新完了", "ユーザー名を更新しました。");
-    } catch (e) {
-      const displayNameMessage = mapDisplayNameConflictMessage(e) || String(e?.message || e);
-      if (displayNameMessage === DISPLAY_NAME_TAKEN_MESSAGE) {
-        setNameError(displayNameMessage);
-      }
-      console.warn("profile update error:", e);
-      Alert.alert("更新に失敗しました", displayNameMessage);
-    } finally {
-      setNameSaving(false);
-    }
-  };
-
-const refreshSubscriptionState = async () => {
-  if (!user) {
-    setSubTier("free");
-    setSubAllowedModes(["light"]);
-    setSubError("");
-    setSubLoading(false);
-    return;
-  }
-
-  setSubLoading(true);
-  setSubError("");
-  try {
-    await refreshTier({ force: true });
-  } catch (e) {
-    setSubError(String(e?.message || e));
-  } finally {
-    setSubLoading(false);
-  }
-};
-
-const onRestorePurchases = async () => {
-  if (restoreLoading) return;
-
-  if (!user) {
-    Alert.alert("ログインが必要です", "購入の復元にはログインが必要です。");
-    return;
-  }
-
-  setRestoreLoading(true);
-
-  try {
-    // 1) ストア側の「利用可能な購入」を取得
-    const purchases = await restoreAvailablePurchases();
-
-    if (!Array.isArray(purchases) || purchases.length === 0) {
-      Alert.alert("購入履歴がありません", "復元できる購入が見つかりませんでした。");
-      return;
-    }
-
-    // 2) Cocolonの SKU に合うものだけを選別（Premium優先）
-    const plusSku = getPlanSku("plus");
-    const premiumSku = getPlanSku("premium");
-
-    const normalized = purchases.map((p) => ({
-      purchase: p,
-      productId: String(p?.productId || p?.product_id || "").trim(),
-    }));
-
-    const premiumPurchase =
-      premiumSku &&
-      normalized.find((x) => x.productId === premiumSku)?.purchase;
-
-    const plusPurchase =
-      plusSku && normalized.find((x) => x.productId === plusSku)?.purchase;
-
-    const targetPurchase = premiumPurchase || plusPurchase || null;
-
-    if (!targetPurchase) {
-      Alert.alert(
-        "購入履歴が見つかりません",
-        "Cocolonのサブスクリプション購入が見つかりませんでした。"
-      );
-      return;
-    }
-
-    // 3) MashOSへ反映（/subscription/update）→ 成功したら finishTransaction も内部で実行
-    await syncPurchaseToSubscriptionTier(targetPurchase);
-
-    // 4) 反映確認（/subscription/me を再取得）
-    await refreshSubscriptionState();
-
-    Alert.alert("復元が完了しました", "プラン情報を更新しました。");
-  } catch (e) {
-    Alert.alert(
-      "復元に失敗しました",
-      String(e?.message || e || "復元に失敗しました。")
-    );
-  } finally {
-    setRestoreLoading(false);
-  }
-};
-
-  const VisibilitySettingRow = ({
-    title,
-    description,
-    isPublic,
-    onPressPublic,
-    onPressPrivate,
-    disabled,
-  }) => {
-    const publicActive = !!isPublic;
-    const privateActive = !isPublic;
-
-    return (
-      <View style={styles.visibilityRow}>
-        <View style={styles.visibilityLeft}>
-          <Text style={styles.visibilityTitle}>{title}</Text>
-          {description ? (
-            <Text style={styles.visibilityDesc}>{description}</Text>
-          ) : null}
-        </View>
-
-        <View style={styles.visibilityRight}>
-          <TouchableOpacity
-            style={[
-              styles.visibilityChoiceBtn,
-              publicActive && styles.visibilityChoiceBtnActive,
-            ]}
-            onPress={onPressPublic}
-            activeOpacity={0.85}
-            disabled={disabled || publicActive}
-          >
-            <Text
-              style={[
-                styles.visibilityChoiceText,
-                publicActive && styles.visibilityChoiceTextActive,
-              ]}
-            >
-              公開
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.visibilityChoiceBtn,
-              privateActive && styles.visibilityChoiceBtnActive,
-              { marginLeft: 8 },
-            ]}
-            onPress={onPressPrivate}
-            activeOpacity={0.85}
-            disabled={disabled || privateActive}
-          >
-            <Text
-              style={[
-                styles.visibilityChoiceText,
-                privateActive && styles.visibilityChoiceTextActive,
-              ]}
-            >
-              非公開
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -943,7 +79,6 @@ const onRestorePurchases = async () => {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* ヘッダー */}
           <View style={styles.header}>
             <CocolonBackButton
               navigation={navigation}
@@ -954,553 +89,86 @@ const onRestorePurchases = async () => {
             <View style={{ width: 22 }} />
           </View>
 
-          {/* 本体 */}
+          <AccountProfileSection
+            styles={styles}
+            colors={colors}
+            ui={ui}
+            user={user}
+            isSelf={isSelf}
+            loading={profile.loading}
+            nameSaving={profile.nameSaving}
+            displayName={profile.displayName}
+            shareCode={profile.shareCode}
+            userIdForDisplay={userIdForDisplay}
+            isPrivateAccount={isPrivateAccount}
+            canShowShareCode={canShowShareCode}
+            followingCount={followState.followingCount}
+            followerCount={followState.followerCount}
+            followCountLoading={followState.followCountLoading}
+            isFollowing={followState.isFollowing}
+            isFollowRequested={followState.isFollowRequested}
+            followActionLoading={followState.followActionLoading}
+            targetUserId={targetUserId}
+            openNameEdit={profile.openNameEdit}
+            onCopyShareCode={profile.onCopyShareCode}
+            onShareProfile={profile.onShareProfile}
+            openAccountSettings={visibility.openAccountSettings}
+            onToggleFollow={followState.onToggleFollow}
+            openFollowList={followState.openFollowList}
+          />
 
-          {isSelf ? (
-            <View
-              style={[styles.profileActionRow, { justifyContent: "flex-end" }]}
-            >
-                            <CocolonPressable
-                style={[
-                  styles.accountSettingsBtn,
-                  { marginRight: 10 },
-                  (loading || !user) && styles.accountSettingsBtnDisabled,
-                ]}
-                onPress={onShareProfile}
-                disabled={loading || !user}
-                accessibilityLabel="共有"
-              >
-                <Ionicons
-                  name="share-outline"
-                  size={20}
-                  color={colors.TEXT_ON_LIGHT}
-                />
-              </CocolonPressable>
+          <AccountIdSearchSection
+            styles={styles}
+            colors={colors}
+            ui={ui}
+            idSearchQuery={idSearch.idSearchQuery}
+            idSearchLoading={idSearch.idSearchLoading}
+            idSearchResult={idSearch.idSearchResult}
+            idSearchError={idSearch.idSearchError}
+            onChangeIdSearchQuery={idSearch.onChangeIdSearchQuery}
+            searchUserById={idSearch.searchUserById}
+            navigateToAccount={idSearch.navigateToAccount}
+          />
 
-<CocolonPressable
-                style={[
-                  styles.accountSettingsBtn,
-                  (loading || !user) && styles.accountSettingsBtnDisabled,
-                ]}
-                onPress={openAccountSettings}
-                disabled={loading || !user}
-                accessibilityLabel="アカウント設定"
-              >
-                <Ionicons
-                  name="settings-outline"
-                  size={20}
-                  color={colors.TEXT_ON_LIGHT}
-                />
-              </CocolonPressable>
-            </View>
-          ) : user ? (
-            <TouchableOpacity
-              style={[
-                styles.followBtn,
-                (isFollowing || isFollowRequested) && styles.followBtnFollowing,
-                { marginTop: 0, marginBottom: 16 },
-                (loading || followActionLoading) && styles.editNameBtnDisabled,
-              ]}
-              onPress={onToggleFollow}
-              activeOpacity={0.85}
-              disabled={loading || followActionLoading || isFollowRequested}
-              accessibilityLabel={
-                isFollowing ? "フォロー解除" : isFollowRequested ? "申請中" : "フォローする"
-              }
-            >
-              {followActionLoading ? (
-                <ActivityIndicator
-                  size="small"
-                  color={
-                    isFollowing || isFollowRequested
-                      ? colors.TEXT_ON_LIGHT
-                      : "#FFFFFF"
-                  }
-                  style={{ marginRight: 6 }}
-                />
-              ) : (
-                <Ionicons
-                  name={
-                    isFollowing
-                      ? "checkmark"
-                      : isFollowRequested
-                      ? "time-outline"
-                      : "person-add-outline"
-                  }
-                  size={18}
-                  color={
-                    isFollowing || isFollowRequested
-                      ? colors.TEXT_ON_LIGHT
-                      : "#FFFFFF"
-                  }
-                  style={{ marginRight: 6 }}
-                />
-              )}
-              <Text
-                style={[
-                  styles.followBtnText,
-                  !isFollowing && !isFollowRequested && styles.followBtnTextOnGold,
-                ]}
-              >
-                {isFollowing ? "フォロー中" : isFollowRequested ? "申請中" : "フォローする"}
-              </Text>
-            </TouchableOpacity>
-          ) : null}
-
-          <View style={styles.infoSection}>
-            <Text style={styles.statusTitle}>プロフィール</Text>
-
-            <View style={styles.statusCard}>
-              <ProfileRow
-                styles={styles}
-                label="ユーザー名"
-                labelAction={
-                  isSelf && user ? (
-                    <Pressable
-                      style={[
-                        styles.labelIconBtn,
-                        (loading || nameSaving) && styles.labelIconBtnDisabled,
-                      ]}
-                      onPress={openNameEdit}
-                      disabled={loading || nameSaving}
-                      accessibilityLabel="ユーザー名を編集"
-                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                    >
-                      <Ionicons
-                        name="create-outline"
-                        size={12}
-                        color={colors.TEXT_ON_LIGHT}
-                      />
-                    </Pressable>
-                  ) : null
-                }
-                value={
-                  loading ? (
-                    "…"
-                  ) : (
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "flex-end",
-                        maxWidth: "100%",
-                      }}
-                    >
-                      <Text
-                        style={[styles.profileRowValue, { flexShrink: 1 }]}
-                        numberOfLines={1}
-                      >
-                        {displayName || "（未設定）"}
-                      </Text>
-                      {isPrivateAccount ? (
-                        <Ionicons
-                          name="shield-outline"
-                          size={14}
-                          color={colors.TITLE_GOLD}
-                          style={{ marginLeft: 6, opacity: 0.7 }}
-                        />
-                      ) : null}
-                    </View>
-                  )
-                }
-              />
-              <ProfileRow
-                styles={styles}
-                label="フォロー数"
-                value={followCountLoading ? "…" : String(followingCount)}
-                onPress={() => openFollowList("following")}
-                disabled={!targetUserId}
-              />
-              <ProfileRow
-                styles={styles}
-                label="フォロワー数"
-                value={followCountLoading ? "…" : String(followerCount)}
-                onPress={() => openFollowList("followers")}
-                disabled={!targetUserId}
-              />
-              {canShowShareCode ? (
-                <ProfileRow
-                  styles={styles}
-                  label="ユーザーID"
-                  labelAction={
-                    user ? (
-                      <Pressable
-                        style={[
-                          styles.labelIconBtn,
-                          (loading || !String(shareCode || "").trim()) &&
-                            styles.labelIconBtnDisabled,
-                        ]}
-                        onPress={onCopyShareCode}
-                        disabled={loading || !String(shareCode || "").trim()}
-                        accessibilityLabel="ユーザーIDを共有"
-                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                      >
-                        <Ionicons
-                          name="copy-outline"
-                          size={12}
-                          color={colors.TEXT_ON_LIGHT}
-                        />
-                      </Pressable>
-                    ) : null
-                  }
-                  value={userIdForDisplay}
-                />
-              ) : null}
-
-            </View>
-
-            <Text
-              style={{
-                marginTop: 6,
-                fontSize: ui?.font?.sectionLabel ?? 14,
-                lineHeight: 19,
-                color: ui?.text?.description ?? colors.TEXT_SUBTLE,
-              }}
-            >
-              ※フォロー数とフォロワー数をタップすれば、一覧で表示されます。
-            </Text>
-          </View>
-
-
-          <View style={styles.idSearchSection}>
-            <Text style={styles.statusTitle}>ID検索</Text>
-            <View style={styles.idSearchRow}>
-              <TextInput
-                style={styles.idSearchInput}
-                placeholder="ユーザーID"
-                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                value={idSearchQuery}
-                onChangeText={(value) => {
-                  setIdSearchQuery(value);
-                  if (idSearchResult) setIdSearchResult(null);
-                  if (idSearchError) setIdSearchError("");
-                }}
-                autoCapitalize="none"
-                autoCorrect={false}
-                returnKeyType="search"
-                onSubmitEditing={searchUserById}
-                editable={!idSearchLoading}
-              />
-              <TouchableOpacity
-                style={[
-                  styles.idSearchButton,
-                  idSearchLoading && styles.idSearchButtonDisabled,
-                ]}
-                onPress={searchUserById}
-                activeOpacity={0.85}
-                disabled={idSearchLoading}
-                accessibilityLabel="ユーザーIDを検索"
-              >
-                {idSearchLoading ? (
-                  <ActivityIndicator size="small" color={colors.ACCENT_TEXT} />
-                ) : (
-                  <Text style={styles.idSearchButtonText}>検索</Text>
-                )}
-              </TouchableOpacity>
-            </View>
-
-            {idSearchResult ? (
-              <TouchableOpacity
-                style={styles.idSearchResultButton}
-                onPress={() => navigateToAccount(idSearchResult.userId)}
-                activeOpacity={0.85}
-                accessibilityLabel="検索したアカウントを開く"
-              >
-                <Text style={styles.idSearchResultName} numberOfLines={1}>
-                  {idSearchResult.displayName}
-                </Text>
-                <Ionicons
-                  name="chevron-forward"
-                  size={16}
-                  color={colors.TEXT_ON_LIGHT}
-                  style={{ marginLeft: 8, opacity: 0.65 }}
-                />
-              </TouchableOpacity>
-            ) : idSearchError ? (
-              <Text style={styles.idSearchErrorText}>{idSearchError}</Text>
-            ) : null}
-          </View>
-
-          {/* ステータス */}
-          <View style={styles.statusSection}>
-            <Text style={styles.statusTitle}>ステータス</Text>
-
-            {statusLoading ? (
-              <ActivityIndicator style={{ marginTop: 6 }} />
-            ) : (
-              <View style={styles.statusCard}>
-                <StatusRow
-                  styles={styles}
-                  label="ログイン日数"
-                  value={statusValue("login_days_total", ["loginDaysTotal"])}
-                />
-                <StatusRow
-                  styles={styles}
-                  label="連続ログイン日数"
-                  value={statusValue("login_streak_max", ["loginStreakMax", "streak_max"])}
-                />
-                <StatusRow
-                  styles={styles}
-                  label="入力数"
-                  value={statusValue("input_count_total", ["inputCountTotal"])}
-                />
-                <StatusRow
-                  styles={styles}
-                  label="入力文字数"
-                  value={statusValue("input_chars_total", ["inputCharsTotal", "input_length_total", "inputLengthTotal"])}
-                />
-                <StatusRow
-                  styles={styles}
-                  label="ピース生成数"
-                  value={statusValue("piece_generated_total", PIECE_WIRE.metrics.pieceGeneratedTotalKeys)}
-                />
-                <StatusRow
-                  styles={styles}
-                  label="ピースが共鳴された数"
-                  value={statusValue("piece_resonances_total", PIECE_WIRE.metrics.pieceResonancesTotalKeys)}
-                />
-              </View>
-            )}
-
-            {statusError ? (
-              <Text style={styles.statusErrorText}>取得エラー: {statusError}</Text>
-            ) : null}
-          </View>
-
-
+          <AccountStatusSection
+            styles={styles}
+            statusLoading={followState.statusLoading}
+            statusError={followState.statusError}
+            statusValue={followState.statusValue}
+          />
         </ScrollView>
       </View>
 
-
-      {/* ユーザー名編集モーダル（ユーザー名行のペンマーク） */}
       {isSelf ? (
-        <Modal
-          visible={nameEditOpen}
-          transparent
-          animationType="fade"
-          onRequestClose={closeNameEdit}
-        >
-          <Pressable style={styles.modalBackdrop} onPress={closeNameEdit} />
-
-          <View style={styles.nameModalCard}>
-            <View style={styles.nameModalHeader}>
-              <Text style={styles.nameModalTitle}>ユーザー名の編集</Text>
-              <TouchableOpacity
-                style={styles.nameModalCloseBtn}
-                onPress={closeNameEdit}
-                disabled={nameSaving || nameChecking}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
-              </TouchableOpacity>
-            </View>
-
-            <Text style={styles.nameModalHint}>新しいユーザー名を入力してください。</Text>
-
-            <TextInput
-              style={styles.nameInput}
-              placeholder="ユーザー名"
-              placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-              value={nameDraft}
-              onChangeText={(value) => {
-                setNameDraft(value);
-                if (nameError) setNameError("");
-              }}
-              editable={!nameSaving && !nameChecking}
-              autoCapitalize="none"
-              autoCorrect={false}
-              maxLength={DISPLAY_NAME_MAX_LENGTH}
-              returnKeyType="done"
-              onSubmitEditing={saveDisplayName}
-            />
-
-            {nameError ? (
-              <Text style={styles.nameErrorText}>{nameError}</Text>
-            ) : nameChecking ? (
-              <Text style={styles.nameHelperText}>ユーザー名の重複を確認しています…</Text>
-            ) : (
-              <Text style={styles.nameHelperText}>※ユーザー名は他ユーザーに公開されます。（{DISPLAY_NAME_MAX_LENGTH}文字まで）</Text>
-            )}
-
-            <View style={styles.nameModalActions}>
-              <TouchableOpacity
-                style={[styles.nameModalBtn, styles.nameModalBtnGhost]}
-                onPress={closeNameEdit}
-                disabled={nameSaving || nameChecking}
-                activeOpacity={0.85}
-              >
-                <Text style={[styles.nameModalBtnText, styles.nameModalBtnGhostText]}>
-                  キャンセル
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[
-                  styles.nameModalBtn,
-                  styles.nameModalBtnPrimary,
-                  (nameSaving || nameChecking) && styles.nameModalBtnDisabled,
-                ]}
-                onPress={saveDisplayName}
-                disabled={nameSaving || nameChecking}
-                activeOpacity={0.85}
-              >
-                {nameSaving || nameChecking ? (
-                  <ActivityIndicator size="small" color="#FFFFFF" />
-                ) : (
-                  <Text style={[styles.nameModalBtnText, styles.nameModalBtnPrimaryText]}>
-                    保存
-                  </Text>
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+        <AccountNameEditModal
+          visible={profile.nameEditOpen}
+          styles={styles}
+          colors={colors}
+          ui={ui}
+          nameDraft={profile.nameDraft}
+          setNameDraft={profile.setNameDraft}
+          nameSaving={profile.nameSaving}
+          nameChecking={profile.nameChecking}
+          nameError={profile.nameError}
+          setNameError={profile.setNameError}
+          closeNameEdit={profile.closeNameEdit}
+          saveDisplayName={profile.saveDisplayName}
+        />
       ) : null}
 
-      {/* アカウント設定モーダル（歯車ボタン） */}
       {isSelf ? (
-        <Modal
-          visible={accountSettingsOpen}
-          transparent
-          animationType="fade"
-          onRequestClose={closeAccountSettings}
-        >
-          <Pressable
-            style={styles.modalBackdrop}
-            onPress={closeAccountSettings}
-          />
-
-          <View style={styles.settingsModalCard}>
-            <View style={styles.settingsModalHeader}>
-              <TouchableOpacity
-                style={styles.nameModalCloseBtn}
-                onPress={closeAccountSettings}
-                disabled={visibilitySaving}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
-              </TouchableOpacity>
-
-              <View style={{ flex: 1, marginLeft: 10, alignItems: "center" }}>
-                <Text style={styles.settingsModalTitle}>アカウントの設定</Text>
-              </View>
-
-              {visibilitySaving ? (
-                <ActivityIndicator
-                  size="small"
-                  color={colors.TITLE_GOLD}
-                  style={styles.modalHeaderSpinner}
-                />
-              ) : null}
-            </View>
-
-            {visibilityLoading ? (
-              <ActivityIndicator style={{ marginTop: 14 }} />
-            ) : (
-              <View style={{ marginTop: 10 }}>
-                <VisibilitySettingRow
-                  title="ピースの公開設定"
-                  description="非公開にすると、フォロー時に承認が必要になります。おすすめにも表示されなくなります"
-                  isPublic={!accountVisibility.is_private_account}
-                  onPressPublic={() =>
-                    patchAccountVisibilityMe({
-                      is_private_account: false,
-                      is_recommendation_enabled: true,
-                    })
-                  }
-                  onPressPrivate={() =>
-                    patchAccountVisibilityMe({
-                      is_private_account: true,
-                      is_recommendation_enabled: false,
-                    })
-                  }
-                  disabled={visibilitySaving}
-                />
-                <VisibilitySettingRow
-                  title="ランキング表示設定"
-                  isPublic={!!accountVisibility.is_ranking_visible}
-                  onPressPublic={() =>
-                    patchAccountVisibilityMe({ is_ranking_visible: true })
-                  }
-                  onPressPrivate={() =>
-                    patchAccountVisibilityMe({ is_ranking_visible: false })
-                  }
-                  disabled={visibilitySaving}
-                />
-
-                <VisibilitySettingRow
-                  title="ユーザーID表示設定"
-                  isPublic={!!accountVisibility.is_share_code_public}
-                  onPressPublic={() =>
-                    patchAccountVisibilityMe({ [ACCOUNT_WIRE.fields.shareCodePublic]: true })
-                  }
-                  onPressPrivate={() =>
-                    patchAccountVisibilityMe({ [ACCOUNT_WIRE.fields.shareCodePublic]: false })
-                  }
-                  disabled={visibilitySaving}
-                />
-              </View>
-            )}
-          </View>
-        </Modal>
+        <AccountVisibilitySection
+          visible={visibility.accountSettingsOpen}
+          styles={styles}
+          colors={colors}
+          accountVisibility={visibility.accountVisibility}
+          visibilityLoading={visibility.visibilityLoading}
+          visibilitySaving={visibility.visibilitySaving}
+          closeAccountSettings={visibility.closeAccountSettings}
+          patchAccountVisibilityMe={visibility.patchAccountVisibilityMe}
+        />
       ) : null}
     </SafeAreaView>
-  );
-}
-
-
-function ProfileRow({ styles, label, labelAction, value, onPress, disabled }) {
-  const valueNode =
-    typeof value === "string" || typeof value === "number" ? (
-      <Text style={styles.profileRowValue}>{String(value)}</Text>
-    ) : (
-      value
-    );
-
-  const inner = (
-    <>
-      <View style={styles.kvRowTop}>
-        <Text style={styles.statusRowLabel}>{label}</Text>
-        {labelAction ? labelAction : null}
-      </View>
-      <View style={styles.kvRowBottom}>
-        <View style={{ flex: 1 }} />
-        {valueNode}
-      </View>
-    </>
-  );
-
-  if (typeof onPress === "function") {
-    return (
-      <TouchableOpacity
-        style={styles.statusRow}
-        activeOpacity={0.7}
-        onPress={onPress}
-        disabled={!!disabled}
-      >
-        {inner}
-      </TouchableOpacity>
-    );
-  }
-
-  return (
-    <View style={styles.statusRow}>
-      {inner}
-    </View>
-  );
-}
-
-function StatusRow({ styles, label, value }) {
-  return (
-    <View style={styles.statusRow}>
-      <View style={styles.kvRowTop}>
-        <Text style={styles.statusRowLabel}>{label}</Text>
-      </View>
-      <View style={styles.kvRowBottom}>
-        <View style={{ flex: 1 }} />
-        <Text style={styles.statusRowValue}>{value}</Text>
-      </View>
-    </View>
   );
 }
 

@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -1113,7 +1113,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/README.md`
 - repo: `Cocolon`
 - system: `app support / build config`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Welcome to your Expo app 👋
 - 直接関係ファイル:
   - なし
@@ -1199,7 +1201,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/patches/@react-native-community+blur+4.4.1.patch`
 - repo: `Cocolon`
 - system: `runtime patch`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Runtime patch for third-party dependency behavior.
 - 直接関係ファイル:
   - なし
@@ -1213,7 +1217,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/patches/@react-native-community+slider+5.0.1.patch`
 - repo: `Cocolon`
 - system: `runtime patch`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Runtime patch for third-party dependency behavior.
 - 直接関係ファイル:
   - なし
@@ -1227,7 +1233,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/patches/react-native-svg+13.14.0.patch`
 - repo: `Cocolon`
 - system: `runtime patch`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Runtime patch for third-party dependency behavior.
 - 直接関係ファイル:
   - なし
@@ -1241,7 +1249,9 @@ revision_date: "2026-05-07"
 ### `Cocolon/patches/react-native-vector-icons+10.3.0.patch`
 - repo: `Cocolon`
 - system: `runtime patch`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 役割: Runtime patch for third-party dependency behavior.
 - 直接関係ファイル:
   - なし
@@ -3810,7 +3820,7 @@ revision_date: "2026-05-07"
 
 - API contract registry は current route owner と整合済みです。`/nexus/recommend/users`、`/mymodel/recommend/users` compat、`/ranking/mymodel_resonances` compat の route/register drift は前セッションで解消済みです。
 - `mashos-api/ai/docs/API_CONTRACT_POLICY.md` は `API_CONTRACT_POLICY_VERSION=2026-04-20.myprofile-lookup.v1` 前提に更新済みです。
-- DB physical name はまだ旧名が実体のため、API current owner 内でも table constant / query は旧物理名を許容します。今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB境界のdestructive変更は扱わず、名称読み分けは `03` / `06` / `09` で確認します。
+- DB physical name はまだ旧名が実体のため、API current owner 内でも table constant / query は旧物理名を許容します。`08_Cocolon_DB_rename_boundary.md` が存在するため、DB境界は `08` を正本として読み、destructive変更はMash様が明示した場合だけ扱い、名称読み分けは `03` / `06` / `09` でも確認します。
 
 
 # 2026-04-27 差分追記: contract registry / header metadata cleanup
@@ -3965,3 +3975,117 @@ SubscriptionのPlus / Premium表示文言は、RN表示とbackend bootstrapの�
 | `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | regression test | Analysis validity gateのvalue observation domain境界を検証する |
 
 これらはruntime機能追加ではなく、既存三大中核構造の品質・契約を守るsupport層として扱う。
+
+
+# 2026-05-09 差分追記: Premium権限 / account delete / backend支援 boundary
+
+| file | 追加・更新された読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_store.py` | `SubscriptionTier.PREMIUM` の場合だけpersonal_followup候補を返す。Free/Plusは既存static中心として読む |
+| `mashos-api/ai/services/ai_inference/account_delete_service.py` | アカウント削除時に `today_question_personal_questions` と `today_question_personal_candidates` を削除対象に含める |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | `/today-question/current` / `/today-question/status` / `/today-question/answers` / `/today-question/history` のadditive fieldをcontract上に記録する |
+| `mashos-api/ai/tests/test_subscription_projection.py` | subscription projectionの回帰確認。本文coverage未記載だったため、この版で01/02 coverageへ含める |
+
+今日の問いpersonalは、Premium向けの追加層です。既存100問、既存履歴、既存answer contractを壊さず、additive fieldとして扱います。
+
+
+# 2026-05-09 実ファイル再照合: current owner補正
+
+この表は `Cocolon(138).zip` / `mashos-api_2(26).zip` の実ファイル一覧と、この資料内の current 参照を照合した補正です。
+旧本文内の `active` / `shared` / `legacy-live` 表記よりも、この表を優先します。旧名称はDB physical name / compat / 旧route説明として保管できるが、current実ファイルownerとしては扱いません。
+
+| 旧参照path | 実ファイル照合 | current owner / 読み方 |
+|---|---|---|
+| `Cocolon/README.md` | local snapshot未収録 | 今回local snapshotには存在しない。READMEはapp runtime sourceではなくsupport/doc扱い。current app構造判断では使わない。 |
+| `Cocolon/components/EmotionReflectionPreviewModal.js` | local snapshot未収録 | Cocolon/components/EmotionPiecePreviewModal.js |
+| `Cocolon/patches/@react-native-community+blur+4.4.1.patch` | local snapshot未収録 | 今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。 |
+| `Cocolon/patches/@react-native-community+slider+5.0.1.patch` | local snapshot未収録 | 今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。 |
+| `Cocolon/patches/react-native-svg+13.14.0.patch` | local snapshot未収録 | 今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。 |
+| `Cocolon/patches/react-native-vector-icons+10.3.0.patch` | local snapshot未収録 | 今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。 |
+| `Cocolon/screens/DeepInsightScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js / Cocolon/screens/AnalysisContentFirstScreen.js。DeepInsight単独screenは今回local snapshotには存在しない。 |
+| `Cocolon/screens/DiscoveriesHistoryDetailScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js。Discoveries専用history detailはcurrent fileとして存在しない。 |
+| `Cocolon/screens/DiscoveriesHistoryListScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js。Discoveries専用history listはcurrent fileとして存在しない。 |
+| `Cocolon/screens/EchoesHistoryDetailScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryDetailScreen.js |
+| `Cocolon/screens/EchoesHistoryListScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryListScreen.js |
+| `Cocolon/screens/MyModelDiscoveriesRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Discoveries screenは存在しない。RankingTop / PieceResonanceRanking / backend ranking viewsを優先する。 |
+| `Cocolon/screens/MyModelEchoesRankingScreen.js` | local snapshot未収録 | Cocolon/screens/PieceResonanceRankingScreen.js |
+| `Cocolon/screens/MyModelMenuCommon.js` | local snapshot未収録 | Cocolon/screens/PieceMenuCommon.js |
+| `Cocolon/screens/MyModelQuestionsRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Questions screenは存在しない。RankingTop / InputCountRanking / InputLengthRanking / PieceResonanceRankingを優先する。 |
+| `Cocolon/screens/MyModelReflectionsScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyModelScreen.js` | local snapshot未収録 | Cocolon/screens/PieceScreen.js / Cocolon/screens/PieceEntryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyWebContentFirstScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisContentFirstScreen.js |
+| `Cocolon/screens/MyWebCrossLinkSection.js` | local snapshot未収録 | Cocolon/screens/AnalysisCrossLinkSection.js |
+| `Cocolon/screens/MyWebEnsureClient.js` | local snapshot未収録 | Cocolon/screens/AnalysisEnsureClient.js |
+| `Cocolon/screens/MyWebHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisHistoryScreen.js |
+| `Cocolon/screens/MyWebMenuCommon.js` | local snapshot未収録 | Cocolon/screens/AnalysisMenuCommon.js |
+| `Cocolon/screens/MyWebReportHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportHistoryScreen.js |
+| `Cocolon/screens/MyWebReportViewerScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportViewerScreen.js |
+| `Cocolon/screens/MyWebScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js |
+| `Cocolon/screens/MyWebTopScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisTopScreen.js |
+| `Cocolon/screens/nexus/NexusReflectionCard.js` | local snapshot未収録 | Cocolon/screens/nexus/NexusPieceCard.js |
+| `mashos-api/ai/services/ai_inference/api_ranking_mymodel_discoveries.py` | local snapshot未収録 | 今回local snapshotには存在しない。current ranking ownerは api_ranking.py / api_ranking_piece_views.py / api_ranking_piece_resonances.py / api_ranking_mymodel_views.py / api_ranking_mymodel_resonances.py。 |
+
+# 2026-05-09 差分追記: Account split / backend monitoring support boundary
+
+## Account screen split
+
+| path | current role |
+|---|---|
+| `Cocolon/screens/AccountScreen.js` | Account entry shell。account delete ownerではない |
+| `Cocolon/screens/account/accountModel.js` | profile / follow / visibility等のmodel helper |
+| `Cocolon/screens/account/useAccountProfile.js` | profile取得、表示名編集、share code / connect code取得 |
+| `Cocolon/screens/account/useAccountFollowState.js` | follow / follower count、follow/unfollow、status取得 |
+| `Cocolon/screens/account/useAccountVisibility.js` | account visibility取得・更新 |
+| `Cocolon/screens/account/useAccountSubscription.js` | subscription tier / allowed mode / restore処理 |
+| `Cocolon/screens/account/useAccountIdSearch.js` | ID検索とAccount遷移 |
+| `Cocolon/screens/account/AccountProfileSection.js` | profile / follow表示section |
+| `Cocolon/screens/account/AccountIdSearchSection.js` | ID検索UI section |
+| `Cocolon/screens/account/AccountStatusSection.js` | account status表示section |
+| `Cocolon/screens/account/AccountNameEditModal.js` | 表示名編集modal |
+| `Cocolon/screens/account/AccountVisibilitySection.js` | visibility設定section / modal |
+
+account deleteは引き続き `Cocolon/screens/SettingsOtherScreen.js` と backend lifecycle ownerを確認する。AccountScreen分割のついでに削除対象DBやlocal cleanupを変えない。
+
+## 本番運用監視 backend support
+
+| path | current role |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_client_events.py` | `POST /ops/client-events`。RN client eventをredactしてstructured log / alert logへ出す。DB保存はしない |
+| `mashos-api/ai/services/ai_inference/app.py` | client events route registration |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | `/ops/client-events` をpublic contract registryへ追加 |
+| `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | public API docsへ `/ops/client-events` を追加 |
+| `mashos-api/ai/tests/contract/test_client_events_contract.py` | client event endpoint / redaction / contract regression |
+
+監視payloadは token / Authorization / email / UUID / 長いtoken風文字列をredactし、raw `user_id` は出さず `user_hash` のみ扱う。
+
+# 2026-05-09 差分追記: Account分割 / Ops client event backend current boundary
+
+## AccountScreen split
+
+| file | 役割 |
+|---|---|
+| `Cocolon/screens/account/accountModel.js` | account表示 / code / profile helper |
+| `Cocolon/screens/account/useAccountProfile.js` | profile取得、表示名編集、share/connect code取得、ユーザーID共有 |
+| `Cocolon/screens/account/useAccountFollowState.js` | follow数 / follower数、follow / unfollow、account status、FollowList遷移 |
+| `Cocolon/screens/account/useAccountVisibility.js` | account visibility取得・更新・modal制御 |
+| `Cocolon/screens/account/useAccountSubscription.js` | subscription tier / allowed self-structure mode / 購入復元 |
+| `Cocolon/screens/account/useAccountIdSearch.js` | ID検索とAccount遷移 |
+| `Cocolon/screens/account/AccountProfileSection.js` | profile / follow表示section |
+| `Cocolon/screens/account/AccountIdSearchSection.js` | ID検索section |
+| `Cocolon/screens/account/AccountStatusSection.js` | account status表示section |
+| `Cocolon/screens/account/AccountNameEditModal.js` | 表示名編集modal |
+| `Cocolon/screens/account/AccountVisibilitySection.js` | visibility設定modal |
+
+AccountScreen分割では、account deleteは触りません。退会処理ownerは引き続き `Cocolon/screens/SettingsOtherScreen.js` と `mashos-api/ai/services/ai_inference/account_delete_service.py` です。
+
+## Ops client events backend
+
+| file | 役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_client_events.py` | `POST /ops/client-events` 受信、payload正規化、privacy-safe redaction、structured log / alert log |
+| `mashos-api/ai/services/ai_inference/app.py` | client events route登録 |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | `/ops/client-events` public contract登録 |
+| `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md` | ops endpointのpublic registry記載 |
+| `mashos-api/ai/tests/contract/test_client_events_contract.py` | client event contract / redaction regression |
+
+本番運用監視はDB保存ではなく、ログ境界として読む。raw `user_id` は出さず、`user_hash` とredacted payloadを扱う。

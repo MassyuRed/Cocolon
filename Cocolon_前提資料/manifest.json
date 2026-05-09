@@ -1,23 +1,23 @@
 {
-  "revision_date": "2026-05-07",
+  "revision_date": "2026-05-09",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
   "source_mode": "local_snapshot",
   "file_counts": {
-    "Cocolon": 125,
-    "mashos-api": 336
+    "Cocolon": 200,
+    "mashos-api": 342
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 461,
-    "national_system_body_includes": 461,
+    "overall_structure_body_includes": 542,
+    "national_system_body_includes": 542,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル461件、02には国家システム判断対象のcurrent全ファイル461件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回zipに存在する資料を正本とし、DB physical rename/drop/write path変更は今回対象外とする。",
-    "current_snapshot_total_files": 461,
-    "overall_structure_body_includes_current_snapshot_files": 461,
-    "national_system_body_lists_current_snapshot_files_with_relation": 461,
+    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル542件、02には国家システム判断対象のcurrent全ファイル542件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。02Bと08はこの前提資料zip内に存在し、Snapshot/Worker/Publish/ReadおよびDB physical name/bridge/rename境界の正本として扱う。DB destructive変更はMash様が明示した場合だけ扱う。",
+    "current_snapshot_total_files": 542,
+    "overall_structure_body_includes_current_snapshot_files": 542,
+    "national_system_body_lists_current_snapshot_files_with_relation": 542,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -87,7 +87,373 @@
       "mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py",
       "mashos-api/ai/services/ai_inference/piece_generation_policy.py",
       "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py"
-    ]
+    ],
+    "github_source_reproducibility_policy_2026_05_09": "ローカル受領zipにnative project / config / support scriptが含まれていない場合でも、GitHub正本 MassyuRed/Cocolon main に存在する path は実体欠落扱いにしない。android/key.properties、iOS証明書、provisioning profile、GitHub Secretsはsource fileではなくsecret管理対象として扱う。",
+    "latest_source_basis_2026_05_09": {
+      "premise": "Cocolon_前提資料(48).zip",
+      "Cocolon": "Cocolon(138).zip",
+      "mashos-api": "mashos-api_2(26).zip",
+      "Cocolon_files": 125,
+      "mashos_api_files": 340,
+      "total_files": 465,
+      "doc_role": "現状構造を読むための作業用地図。current参照を実ファイル Cocolon(138).zip / mashos-api_2(26).zip と再照合し、旧MyWeb/MyModel/Echoes/Discoveries/EmotionReflection系の旧file参照を retired-current-reference として補正する。"
+    },
+    "current_reference_reconciliation_2026_05_09": {
+      "basis": {
+        "premise": "Cocolon_前提資料(48).zip",
+        "Cocolon": "Cocolon(138).zip",
+        "mashos-api": "mashos-api_2(26).zip"
+      },
+      "local_file_counts": {
+        "Cocolon": 125,
+        "mashos-api": 340,
+        "total": 465
+      },
+      "github_source_supplement_paths_not_missing": [
+        "Cocolon/.github/workflows/ios-build.yml",
+        "Cocolon/android/app/build.gradle",
+        "Cocolon/babel.config.js",
+        "Cocolon/eslint.config.js",
+        "Cocolon/ios/Podfile",
+        "Cocolon/metro.config.js",
+        "Cocolon/scripts/postinstall.js",
+        "Cocolon/scripts/reset-project.js",
+        "Cocolon/tsconfig.json"
+      ],
+      "coverage_added_to_01": [
+        "mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py",
+        "mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py"
+      ],
+      "coverage_added_to_02": [
+        "mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py",
+        "mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py",
+        "mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_response_composition_service.py",
+        "mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py",
+        "mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py"
+      ],
+      "legacy_retired_reference_policy": "旧本文内でactive/shared/legacy-liveとして残る旧MyWeb/MyModel/Echoes/Discoveries/EmotionReflection系fileは、current実ファイルownerではなく名称混在・legacy境界の保管情報として読む。current作業は実ファイル一覧に存在するAnalysis/Piece/Nexus/Resonance/EmotionPiece ownerへ寄せる。",
+      "representative_current_owner_map": {
+        "Cocolon/expo-env.d.ts": "今回local snapshotには存在しない。Expo generated type helper扱い。current runtime sourceとして扱わない。",
+        "Cocolon/react-native.config.js": "今回local snapshotには存在しない。native/config補助はGitHub正本確認済みconfig群を優先し、このpathをcurrent sourceとして扱わない。",
+        "Cocolon/README.md": "今回local snapshotには存在しない。READMEはapp runtime sourceではなくsupport/doc扱い。current app構造判断では使わない。",
+        "Cocolon/components/EmotionReflectionPreviewModal.js": "Cocolon/components/EmotionPiecePreviewModal.js",
+        "Cocolon/lib/api/home/emotionReflectionApi.js": "Cocolon/lib/api/home/emotionPieceApi.js",
+        "Cocolon/lib/emotionReflectionApi.js": "Cocolon/lib/api/home/emotionPieceApi.js。root legacy façadeは今回local snapshotには存在しない。",
+        "Cocolon/screens/DeepInsightScreen.js": "Cocolon/screens/AnalysisScreen.js / Cocolon/screens/AnalysisContentFirstScreen.js。DeepInsight単独screenは今回local snapshotには存在しない。",
+        "Cocolon/screens/MyWebContentFirstScreen.js": "Cocolon/screens/AnalysisContentFirstScreen.js",
+        "Cocolon/screens/MyWebCrossLinkSection.js": "Cocolon/screens/AnalysisCrossLinkSection.js",
+        "Cocolon/screens/MyWebEmotionAnalysisScreen.js": "Cocolon/screens/AnalysisEmotionScreen.js",
+        "Cocolon/screens/MyWebEnsureClient.js": "Cocolon/screens/AnalysisEnsureClient.js",
+        "Cocolon/screens/MyWebHistoryScreen.js": "Cocolon/screens/AnalysisHistoryScreen.js",
+        "Cocolon/screens/MyWebInputHistoryMenuScreen.js": "Cocolon/screens/AnalysisInputHistoryMenuScreen.js",
+        "Cocolon/screens/MyWebMenuCommon.js": "Cocolon/screens/AnalysisMenuCommon.js",
+        "Cocolon/screens/MyWebReportHistoryScreen.js": "Cocolon/screens/AnalysisReportHistoryScreen.js",
+        "Cocolon/screens/MyWebReportScheduleUtils.js": "Cocolon/screens/AnalysisReportScheduleUtils.js",
+        "Cocolon/screens/MyWebReportViewerScreen.js": "Cocolon/screens/AnalysisReportViewerScreen.js",
+        "Cocolon/screens/MyWebScreen.js": "Cocolon/screens/AnalysisScreen.js",
+        "Cocolon/screens/MyWebSelfStructureScreen.js": "Cocolon/screens/AnalysisSelfStructureScreen.js",
+        "Cocolon/screens/MyWebTopScreen.js": "Cocolon/screens/AnalysisTopScreen.js",
+        "Cocolon/screens/MyModelEntryScreen.js": "Cocolon/screens/PieceEntryScreen.js",
+        "Cocolon/screens/MyModelMenuCommon.js": "Cocolon/screens/PieceMenuCommon.js",
+        "Cocolon/screens/MyModelPromptTemplates.js": "今回local snapshotには存在しない。PromptTemplate専用screenはcurrent surfaceから外れている。",
+        "Cocolon/screens/MyModelReflectionsScreen.js": "Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js",
+        "Cocolon/screens/MyModelScreen.js": "Cocolon/screens/PieceScreen.js / Cocolon/screens/PieceEntryScreen.js / Cocolon/screens/NexusScreen.js",
+        "Cocolon/screens/MyModelReactionHistoryScreen.js": "Cocolon/screens/ResonanceHistoryListScreen.js / Cocolon/screens/ResonanceHistoryDetailScreen.js",
+        "Cocolon/screens/MyModelEchoesRankingScreen.js": "Cocolon/screens/PieceResonanceRankingScreen.js",
+        "Cocolon/screens/MyModelDiscoveriesRankingScreen.js": "current ranking surfaceでは単独Discoveries screenは存在しない。RankingTop / PieceResonanceRanking / backend ranking viewsを優先する。",
+        "Cocolon/screens/MyModelQuestionsRankingScreen.js": "current ranking surfaceでは単独Questions screenは存在しない。RankingTop / InputCountRanking / InputLengthRanking / PieceResonanceRankingを優先する。",
+        "Cocolon/screens/DiscoveriesHistoryDetailScreen.js": "Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js。Discoveries専用history detailはcurrent fileとして存在しない。",
+        "Cocolon/screens/DiscoveriesHistoryListScreen.js": "Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js。Discoveries専用history listはcurrent fileとして存在しない。",
+        "Cocolon/screens/EchoesHistoryDetailScreen.js": "Cocolon/screens/ResonanceHistoryDetailScreen.js",
+        "Cocolon/screens/EchoesHistoryListScreen.js": "Cocolon/screens/ResonanceHistoryListScreen.js",
+        "Cocolon/screens/RankingAllUsersScreen.js": "Cocolon/screens/RankingTopScreen.js と各ranking screen。AllUsers専用screenはcurrent fileとして存在しない。",
+        "Cocolon/screens/RankingMyModelMenuScreen.js": "Cocolon/screens/RankingTopScreen.js",
+        "Cocolon/screens/RankingPersonalUsersScreen.js": "Cocolon/screens/RankingTopScreen.js と current ranking screen群。PersonalUsers専用screenはcurrent fileとして存在しない。",
+        "Cocolon/screens/nexus/NexusReflectionCard.js": "Cocolon/screens/nexus/NexusPieceCard.js",
+        "mashos-api/ai/services/ai_inference/api_ranking_mymodel_discoveries.py": "今回local snapshotには存在しない。current ranking ownerは api_ranking.py / api_ranking_piece_views.py / api_ranking_piece_resonances.py / api_ranking_mymodel_views.py / api_ranking_mymodel_resonances.py。",
+        "Cocolon/patches/@react-native-community+blur+4.4.1.patch": "今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。",
+        "Cocolon/patches/@react-native-community+slider+5.0.1.patch": "今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。",
+        "Cocolon/patches/react-native-svg+13.14.0.patch": "今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。",
+        "Cocolon/patches/react-native-vector-icons+10.3.0.patch": "今回local snapshotには存在しない。patch-package対象としてcurrent active file扱いしない。"
+      }
+    },
+    "latest_source_basis_2026_05_09_current_rn_split_monitoring": {
+      "premise": "Cocolon_前提資料(51).zip",
+      "Cocolon": "Cocolon_12(3).zip",
+      "mashos-api": "mashos-api_4(10).zip",
+      "Cocolon_files": 200,
+      "mashos_api_files": 342,
+      "total_files": 542,
+      "doc_role": "RN巨大画面分割Phase0-2/4-9と本番運用監視を含む現状構造を読むための作業用地図。PieceLibraryScreenはPhase3未実装としてentry shell単独ownerを維持する。"
+    },
+    "rn_screen_split_boundary_2026_05_09": {
+      "entry_shell_policy": "既存画面fileをroute/import境界として残し、subdirectoryは内部ownerとして読む。navigation route name、public API、DB write pathは変更しない。",
+      "entry_shells": [
+        "Cocolon/App.js",
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/screens/NexusScreen.js",
+        "Cocolon/screens/AnalysisReportViewerScreen.js",
+        "Cocolon/screens/AnalysisScreen.js",
+        "Cocolon/screens/AccountScreen.js",
+        "Cocolon/screens/PieceScreen.js",
+        "Cocolon/screens/PieceLibraryScreen.js"
+      ],
+      "split_groups": {
+        "input": "Cocolon/screens/input/*",
+        "nexus": "Cocolon/screens/nexus/*",
+        "analysis": "Cocolon/screens/analysis/*",
+        "analysisReport": "Cocolon/screens/analysisReport/*",
+        "account": "Cocolon/screens/account/*",
+        "piece": "Cocolon/screens/piece/*",
+        "navigation": "Cocolon/navigation/*",
+        "runtime": "Cocolon/runtime/*"
+      },
+      "unsplit_current_owner": [
+        "Cocolon/screens/PieceLibraryScreen.js"
+      ]
+    },
+    "production_monitoring_boundary_2026_05_09": {
+      "rn_owner": [
+        "Cocolon/lib/monitoring.js",
+        "Cocolon/lib/apiClient.js",
+        "Cocolon/App.js",
+        "Cocolon/navigation/RootNavigator.js",
+        "Cocolon/runtime/AppRuntimeBootstrapGate.js"
+      ],
+      "backend_owner": [
+        "mashos-api/ai/services/ai_inference/api_client_events.py",
+        "mashos-api/ai/services/ai_inference/app.py",
+        "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+        "mashos-api/ai/docs/PUBLIC_API_REGISTRY.md",
+        "mashos-api/ai/tests/contract/test_client_events_contract.py"
+      ],
+      "route": "POST /ops/client-events",
+      "privacy_policy": "token / Authorization / email / UUID / long token-like strings are redacted; raw user_id is not logged; user_hash is used.",
+      "storage_policy": "DB保存ではなくstructured log / alert logとして扱う。"
+    },
+    "current_snapshot_diff_from_2026_05_09_realigned": {
+      "basis_previous": {
+        "Cocolon": "Cocolon(138).zip",
+        "mashos-api": "mashos-api_2(26).zip"
+      },
+      "basis_current": {
+        "Cocolon": "Cocolon_12(3).zip",
+        "mashos-api": "mashos-api_4(10).zip",
+        "premise": "Cocolon_前提資料(51).zip"
+      },
+      "Cocolon_added": [
+        "Cocolon/components/GlobalFrameLayout.js",
+        "Cocolon/lib/monitoring.js",
+        "Cocolon/navigation/AnalysisStackNavigator.js",
+        "Cocolon/navigation/InputStackNavigator.js",
+        "Cocolon/navigation/MainTabs.js",
+        "Cocolon/navigation/PieceStackNavigator.js",
+        "Cocolon/navigation/RankingStackNavigator.js",
+        "Cocolon/navigation/RootNavigator.js",
+        "Cocolon/navigation/SettingsStackNavigator.js",
+        "Cocolon/navigation/linkingRuntime.js",
+        "Cocolon/navigation/navigationConstants.js",
+        "Cocolon/navigation/navigationRef.js",
+        "Cocolon/navigation/notificationRouting.js",
+        "Cocolon/runtime/AppRuntimeBlockingScreen.js",
+        "Cocolon/runtime/AppRuntimeBootstrapGate.js",
+        "Cocolon/screens/account/AccountIdSearchSection.js",
+        "Cocolon/screens/account/AccountNameEditModal.js",
+        "Cocolon/screens/account/AccountProfileSection.js",
+        "Cocolon/screens/account/AccountStatusSection.js",
+        "Cocolon/screens/account/AccountVisibilitySection.js",
+        "Cocolon/screens/account/accountModel.js",
+        "Cocolon/screens/account/useAccountFollowState.js",
+        "Cocolon/screens/account/useAccountIdSearch.js",
+        "Cocolon/screens/account/useAccountProfile.js",
+        "Cocolon/screens/account/useAccountSubscription.js",
+        "Cocolon/screens/account/useAccountVisibility.js",
+        "Cocolon/screens/analysis/analysisRouteModel.js",
+        "Cocolon/screens/analysis/useAnalysisReportActions.js",
+        "Cocolon/screens/analysis/useAnalysisRouteState.js",
+        "Cocolon/screens/analysis/useAnalysisSelfStructureActions.js",
+        "Cocolon/screens/analysis/useAnalysisTutorialOverlay.js",
+        "Cocolon/screens/analysis/useAnalysisUnreadBadges.js",
+        "Cocolon/screens/analysisReport/AnalysisReportCharts.js",
+        "Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js",
+        "Cocolon/screens/analysisReport/analysisReportAccessPolicy.js",
+        "Cocolon/screens/analysisReport/analysisReportConstants.js",
+        "Cocolon/screens/analysisReport/analysisReportFormatters.js",
+        "Cocolon/screens/analysisReport/analysisReportHtmlExport.js",
+        "Cocolon/screens/analysisReport/analysisReportNormalize.js",
+        "Cocolon/screens/input/InputActionArea.js",
+        "Cocolon/screens/input/InputCategorySection.js",
+        "Cocolon/screens/input/InputEmotionSection.js",
+        "Cocolon/screens/input/InputFeedbackReplyModal.js",
+        "Cocolon/screens/input/InputMemoSection.js",
+        "Cocolon/screens/input/InputPiecePreviewController.js",
+        "Cocolon/screens/input/InputStartupModals.js",
+        "Cocolon/screens/input/InputToastOverlay.js",
+        "Cocolon/screens/input/inputDraftModel.js",
+        "Cocolon/screens/input/inputFeedbackModel.js",
+        "Cocolon/screens/input/inputLayoutModel.js",
+        "Cocolon/screens/input/inputNoticeModel.js",
+        "Cocolon/screens/input/inputOptions.js",
+        "Cocolon/screens/input/useInputDraftPersistence.js",
+        "Cocolon/screens/input/useInputFeedbackModal.js",
+        "Cocolon/screens/input/useInputKeyboardAwareMemo.js",
+        "Cocolon/screens/nexus/NexusEmotionLogSection.js",
+        "Cocolon/screens/nexus/NexusHeader.js",
+        "Cocolon/screens/nexus/NexusHistorySection.js",
+        "Cocolon/screens/nexus/NexusOwnerPickerModal.js",
+        "Cocolon/screens/nexus/NexusPieceFeedSection.js",
+        "Cocolon/screens/nexus/NexusRecommendSection.js",
+        "Cocolon/screens/nexus/NexusTabBar.js",
+        "Cocolon/screens/nexus/NexusTodayEmotionSummary.js",
+        "Cocolon/screens/nexus/nexusConstants.js",
+        "Cocolon/screens/nexus/nexusHistoryModel.js",
+        "Cocolon/screens/nexus/nexusNormalize.js",
+        "Cocolon/screens/nexus/nexusRouteModel.js",
+        "Cocolon/screens/piece/PieceHomeActionCard.js",
+        "Cocolon/screens/piece/PieceHomeMainActions.js",
+        "Cocolon/screens/piece/PieceRecommendModal.js",
+        "Cocolon/screens/piece/PieceTutorialCreateModal.js",
+        "Cocolon/screens/piece/usePieceHomeGlobalSummary.js",
+        "Cocolon/screens/piece/usePieceHomeTutorial.js",
+        "Cocolon/screens/piece/usePieceRecommendUsers.js",
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "Cocolon_changed": [
+        "Cocolon/App.js",
+        "Cocolon/lib/apiClient.js",
+        "Cocolon/package.json",
+        "Cocolon/screens/AccountScreen.js",
+        "Cocolon/screens/AnalysisReportViewerScreen.js",
+        "Cocolon/screens/AnalysisScreen.js",
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/screens/NexusScreen.js",
+        "Cocolon/screens/PieceScreen.js"
+      ],
+      "Cocolon_removed": [],
+      "mashos_api_added": [
+        "mashos-api/ai/services/ai_inference/api_client_events.py",
+        "mashos-api/ai/tests/contract/test_client_events_contract.py"
+      ],
+      "mashos_api_changed": [
+        "mashos-api/ai/docs/PUBLIC_API_REGISTRY.md",
+        "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+        "mashos-api/ai/services/ai_inference/app.py"
+      ],
+      "mashos_api_removed": []
+    },
+    "latest_source_basis_2026_05_09_after_rn_split_monitoring": {
+      "premise": "Cocolon_前提資料(51).zip",
+      "Cocolon": "Cocolon_12(3).zip",
+      "mashos-api": "mashos-api_4(10).zip",
+      "Cocolon_files": 200,
+      "mashos_api_files": 342,
+      "total_files": 542,
+      "doc_role": "RN巨大画面分割と本番運用監視を含むcurrent構造を読むための作業用地図。entry shellは旧画面pathを維持する。"
+    },
+    "current_snapshot_added_paths_2026_05_09_after_rn_split_monitoring": {
+      "Cocolon": [
+        "Cocolon/components/GlobalFrameLayout.js",
+        "Cocolon/lib/monitoring.js",
+        "Cocolon/navigation/AnalysisStackNavigator.js",
+        "Cocolon/navigation/InputStackNavigator.js",
+        "Cocolon/navigation/MainTabs.js",
+        "Cocolon/navigation/PieceStackNavigator.js",
+        "Cocolon/navigation/RankingStackNavigator.js",
+        "Cocolon/navigation/RootNavigator.js",
+        "Cocolon/navigation/SettingsStackNavigator.js",
+        "Cocolon/navigation/linkingRuntime.js",
+        "Cocolon/navigation/navigationConstants.js",
+        "Cocolon/navigation/navigationRef.js",
+        "Cocolon/navigation/notificationRouting.js",
+        "Cocolon/runtime/AppRuntimeBlockingScreen.js",
+        "Cocolon/runtime/AppRuntimeBootstrapGate.js",
+        "Cocolon/screens/account/AccountIdSearchSection.js",
+        "Cocolon/screens/account/AccountNameEditModal.js",
+        "Cocolon/screens/account/AccountProfileSection.js",
+        "Cocolon/screens/account/AccountStatusSection.js",
+        "Cocolon/screens/account/AccountVisibilitySection.js",
+        "Cocolon/screens/account/accountModel.js",
+        "Cocolon/screens/account/useAccountFollowState.js",
+        "Cocolon/screens/account/useAccountIdSearch.js",
+        "Cocolon/screens/account/useAccountProfile.js",
+        "Cocolon/screens/account/useAccountSubscription.js",
+        "Cocolon/screens/account/useAccountVisibility.js",
+        "Cocolon/screens/analysis/analysisRouteModel.js",
+        "Cocolon/screens/analysis/useAnalysisReportActions.js",
+        "Cocolon/screens/analysis/useAnalysisRouteState.js",
+        "Cocolon/screens/analysis/useAnalysisSelfStructureActions.js",
+        "Cocolon/screens/analysis/useAnalysisTutorialOverlay.js",
+        "Cocolon/screens/analysis/useAnalysisUnreadBadges.js",
+        "Cocolon/screens/analysisReport/AnalysisReportCharts.js",
+        "Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js",
+        "Cocolon/screens/analysisReport/analysisReportAccessPolicy.js",
+        "Cocolon/screens/analysisReport/analysisReportConstants.js",
+        "Cocolon/screens/analysisReport/analysisReportFormatters.js",
+        "Cocolon/screens/analysisReport/analysisReportHtmlExport.js",
+        "Cocolon/screens/analysisReport/analysisReportNormalize.js",
+        "Cocolon/screens/input/InputActionArea.js",
+        "Cocolon/screens/input/InputCategorySection.js",
+        "Cocolon/screens/input/InputEmotionSection.js",
+        "Cocolon/screens/input/InputFeedbackReplyModal.js",
+        "Cocolon/screens/input/InputMemoSection.js",
+        "Cocolon/screens/input/InputPiecePreviewController.js",
+        "Cocolon/screens/input/InputStartupModals.js",
+        "Cocolon/screens/input/InputToastOverlay.js",
+        "Cocolon/screens/input/inputDraftModel.js",
+        "Cocolon/screens/input/inputFeedbackModel.js",
+        "Cocolon/screens/input/inputLayoutModel.js",
+        "Cocolon/screens/input/inputNoticeModel.js",
+        "Cocolon/screens/input/inputOptions.js",
+        "Cocolon/screens/input/useInputDraftPersistence.js",
+        "Cocolon/screens/input/useInputFeedbackModal.js",
+        "Cocolon/screens/input/useInputKeyboardAwareMemo.js",
+        "Cocolon/screens/nexus/NexusEmotionLogSection.js",
+        "Cocolon/screens/nexus/NexusHeader.js",
+        "Cocolon/screens/nexus/NexusHistorySection.js",
+        "Cocolon/screens/nexus/NexusOwnerPickerModal.js",
+        "Cocolon/screens/nexus/NexusPieceFeedSection.js",
+        "Cocolon/screens/nexus/NexusRecommendSection.js",
+        "Cocolon/screens/nexus/NexusTabBar.js",
+        "Cocolon/screens/nexus/NexusTodayEmotionSummary.js",
+        "Cocolon/screens/nexus/nexusConstants.js",
+        "Cocolon/screens/nexus/nexusHistoryModel.js",
+        "Cocolon/screens/nexus/nexusNormalize.js",
+        "Cocolon/screens/nexus/nexusRouteModel.js",
+        "Cocolon/screens/piece/PieceHomeActionCard.js",
+        "Cocolon/screens/piece/PieceHomeMainActions.js",
+        "Cocolon/screens/piece/PieceRecommendModal.js",
+        "Cocolon/screens/piece/PieceTutorialCreateModal.js",
+        "Cocolon/screens/piece/usePieceHomeGlobalSummary.js",
+        "Cocolon/screens/piece/usePieceHomeTutorial.js",
+        "Cocolon/screens/piece/usePieceRecommendUsers.js",
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/api_client_events.py",
+        "mashos-api/ai/tests/contract/test_client_events_contract.py"
+      ]
+    },
+    "current_snapshot_changed_paths_2026_05_09_after_rn_split_monitoring": {
+      "Cocolon": [
+        "Cocolon/App.js",
+        "Cocolon/lib/apiClient.js",
+        "Cocolon/package.json",
+        "Cocolon/screens/AccountScreen.js",
+        "Cocolon/screens/AnalysisReportViewerScreen.js",
+        "Cocolon/screens/AnalysisScreen.js",
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/screens/NexusScreen.js",
+        "Cocolon/screens/PieceScreen.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/docs/PUBLIC_API_REGISTRY.md",
+        "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+        "mashos-api/ai/services/ai_inference/app.py"
+      ]
+    }
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -108,15 +474,15 @@
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "purpose": "App root / AppRuntimeContext / Home / startup / immediate reply / EmlisAI value observation"
+      "purpose": "App root / AppRuntimeContext / navigation / runtime / Home / startup / immediate reply / Input split / monitoring RN boundary"
     },
     {
       "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
-      "purpose": "Analysis / Piece / EmotionLog / Ranking / Self Structure / value observation boundary"
+      "purpose": "Analysis / Piece / Nexus / EmotionLog / Ranking / screen split / value observation boundary"
     },
     {
       "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "purpose": "Account / Subscription / ProfileCreate / settings / support / rule / test / CI"
+      "purpose": "Account split / Subscription / ProfileCreate / settings / backend support / ops client events / rule / test / CI"
     },
     {
       "path": "01_Cocolon_全体構造資料.md",
@@ -128,7 +494,7 @@
     },
     {
       "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "purpose": "Contract / Boundary / Test / AppRuntimeContext / value observation guard"
+      "purpose": "Contract / Boundary / Test / AppRuntimeContext / value observation guard / ops client events contract"
     },
     {
       "path": "02_Cocolon_国家システム資料.md",
@@ -157,7 +523,9 @@
     {
       "path": "09_Cocolon_名称混在保管と構造境界_2026-04-30.md",
       "purpose": "名称混在を作業用地図として保管する構造境界資料"
-    }
+    },
+    "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
+    "08_Cocolon_DB_rename_boundary.md"
   ],
   "excluded_files": [
     {
@@ -922,6 +1290,402 @@
       "mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py",
       "mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py",
       "mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py"
+    ]
+  },
+  "source_snapshot_2026_05_09": {
+    "premise": "Cocolon_前提資料(48).zip",
+    "Cocolon": "Cocolon(138).zip",
+    "mashos-api": "mashos-api_2(26).zip",
+    "file_counts": {
+      "Cocolon": 125,
+      "mashos-api": 340,
+      "total": 465
+    },
+    "actual_diff_from_previous_received_files": {
+      "previous_Cocolon": "Cocolon_2(43).zip",
+      "previous_mashos-api": "mashos-api_2(25).zip",
+      "added_files": [
+        "mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py",
+        "mashos-api/ai/services/ai_inference/today_question_personal_question_service.py",
+        "mashos-api/ai/services/ai_inference/today_question_personal_templates.py"
+      ],
+      "changed_files": [
+        "Cocolon/components/TodayQuestionCard.js",
+        "Cocolon/features/home/useHomeActions.js",
+        "Cocolon/screens/TodayQuestionHistoryScreen.js",
+        "mashos-api/ai/services/ai_inference/account_delete_service.py",
+        "mashos-api/ai/services/ai_inference/analysis_engine_adapter.py",
+        "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+        "mashos-api/ai/services/ai_inference/api_today_question.py",
+        "mashos-api/ai/services/ai_inference/astor_material_snapshots.py",
+        "mashos-api/ai/services/ai_inference/home_gateway/command_gateway.py",
+        "mashos-api/ai/services/ai_inference/home_gateway/today_question_command_service.py",
+        "mashos-api/ai/services/ai_inference/today_question_store.py"
+      ],
+      "removed_files": []
+    },
+    "applied_sql_received_separately": "today_question_personal_followup_v1.sql",
+    "major_updates": [
+      "今日の問いにPremium向けpersonal_followup層を追加。既存100問static_role_probeは維持。",
+      "source_anchor / source_anchor_snapshot_json により、元入力に実在する短い原文だけを画面内に表示する。",
+      "today_question_answersへadditive fieldsを追加し、personal回答ではstatic sequenceを進めない。",
+      "self_structure / analysis adapterへ今日の問いpersonal回答をself-only素材として接続。公開面へは出さない。",
+      "感情通知Pushのqueue/direct境界を更新。local/API-onlyではqueue defaultを高負荷mode依存にし、worker例をallにする。",
+      "TutorialのEmlis（エムリス）表記、感情/カテゴリ分離、Home説明非表示要素、ピース文言を更新。",
+      "02Bと08の存在を前提資料内の正本として補正。"
+    ]
+  },
+  "coverage_check_2026_05_09": {
+    "all_latest_actual_files_total": 465,
+    "all_latest_files_present_in_premise_body_before_append": false,
+    "missing_in_premise_body_before_append": [
+      "mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_question_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_templates.py",
+      "mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py",
+      "mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
+      "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py",
+      "mashos-api/ai/tests/test_subscription_projection.py"
+    ],
+    "all_latest_files_present_in_01_body_before_append": false,
+    "missing_in_01_body_before_append": [
+      "mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_question_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_templates.py",
+      "mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py",
+      "mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py",
+      "mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py",
+      "mashos-api/ai/tests/test_subscription_projection.py"
+    ],
+    "all_latest_files_present_in_02_body_before_append": false,
+    "missing_in_02_body_before_append": [
+      "Cocolon/app.json",
+      "Cocolon/package-lock.json",
+      "Cocolon/package.json",
+      "Cocolon/screens/TutorialFlowScreen.js",
+      "Cocolon/tutorial/generated/tutorialFixtures.generated.json",
+      "Cocolon/tutorial/tutorialScenarioData.js",
+      "mashos-api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_response_composition_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_user_word_anchor_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_question_service.py",
+      "mashos-api/ai/services/ai_inference/today_question_personal_templates.py",
+      "mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py",
+      "mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
+      "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py",
+      "mashos-api/ai/tests/test_subscription_projection.py",
+      "mashos-api/scripts/generate_tutorial_fixtures.py"
+    ],
+    "post_update_expectation": "01/02の差分追記により、最新実ファイルpathは本文coverageへ含まれる。"
+  },
+  "coverage_check_2026_05_09_final": {
+    "all_latest_files_present_in_premise_body": true,
+    "missing_in_premise_body": [],
+    "all_latest_files_present_in_01_body": true,
+    "missing_in_01_body": [],
+    "all_latest_files_present_in_02_body": true,
+    "missing_in_02_body": []
+  },
+  "github_source_reproducibility_check_2026_05_09": {
+    "source_basis": "GitHub MassyuRed/Cocolon main",
+    "local_zip_boundary": "容量都合でローカルzipからnative project / config / support scriptが省かれる場合がある。再現性判断はGitHub正本と併せて行う。",
+    "confirmed_paths": [
+      {
+        "path": "Cocolon/scripts/postinstall.js",
+        "status": "exists",
+        "note": "stale patchを退避してpatch-packageを実行する処理あり"
+      },
+      {
+        "path": "Cocolon/scripts/reset-project.js",
+        "status": "exists",
+        "note": "package.jsonのreset-project scriptに対応"
+      },
+      {
+        "path": "Cocolon/android/app/build.gradle",
+        "status": "exists",
+        "note": "release signing、Hermes、minify、16KB/flexible page size対応あり"
+      },
+      {
+        "path": "Cocolon/ios/Podfile",
+        "status": "exists",
+        "note": "iOS 15.1、static frameworks、Firebase static framework、CI archive向け署名抑制処理あり"
+      },
+      {
+        "path": "Cocolon/babel.config.js",
+        "status": "exists",
+        "note": "React Native babel presetとReanimated plugin設定あり"
+      },
+      {
+        "path": "Cocolon/metro.config.js",
+        "status": "exists",
+        "note": "SVG transformer設定あり"
+      },
+      {
+        "path": "Cocolon/eslint.config.js",
+        "status": "exists",
+        "note": "Expo ESLint flat configあり"
+      },
+      {
+        "path": "Cocolon/tsconfig.json",
+        "status": "exists",
+        "note": "strict: true設定あり"
+      },
+      {
+        "path": "Cocolon/.github/workflows/ios-build.yml",
+        "status": "exists",
+        "note": "checkout、Pod install、署名、archive、export、TestFlight uploadまであり"
+      }
+    ],
+    "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
+  },
+  "source_snapshot": {
+    "premise": "Cocolon_前提資料(51).zip",
+    "Cocolon": "Cocolon_12(3).zip",
+    "mashos-api": "mashos-api_4(10).zip"
+  },
+  "source_snapshot_2026_05_09_rn_split_monitoring": {
+    "premise": "Cocolon_前提資料(51).zip",
+    "Cocolon": "Cocolon_12(3).zip",
+    "mashos-api": "mashos-api_4(10).zip",
+    "file_counts": {
+      "Cocolon": 200,
+      "mashos-api": 342,
+      "total": 542
+    },
+    "added_files": [
+      "Cocolon/components/GlobalFrameLayout.js",
+      "Cocolon/lib/monitoring.js",
+      "Cocolon/navigation/AnalysisStackNavigator.js",
+      "Cocolon/navigation/InputStackNavigator.js",
+      "Cocolon/navigation/MainTabs.js",
+      "Cocolon/navigation/PieceStackNavigator.js",
+      "Cocolon/navigation/RankingStackNavigator.js",
+      "Cocolon/navigation/RootNavigator.js",
+      "Cocolon/navigation/SettingsStackNavigator.js",
+      "Cocolon/navigation/linkingRuntime.js",
+      "Cocolon/navigation/navigationConstants.js",
+      "Cocolon/navigation/navigationRef.js",
+      "Cocolon/navigation/notificationRouting.js",
+      "Cocolon/runtime/AppRuntimeBlockingScreen.js",
+      "Cocolon/runtime/AppRuntimeBootstrapGate.js",
+      "Cocolon/screens/account/AccountIdSearchSection.js",
+      "Cocolon/screens/account/AccountNameEditModal.js",
+      "Cocolon/screens/account/AccountProfileSection.js",
+      "Cocolon/screens/account/AccountStatusSection.js",
+      "Cocolon/screens/account/AccountVisibilitySection.js",
+      "Cocolon/screens/account/accountModel.js",
+      "Cocolon/screens/account/useAccountFollowState.js",
+      "Cocolon/screens/account/useAccountIdSearch.js",
+      "Cocolon/screens/account/useAccountProfile.js",
+      "Cocolon/screens/account/useAccountSubscription.js",
+      "Cocolon/screens/account/useAccountVisibility.js",
+      "Cocolon/screens/analysis/analysisRouteModel.js",
+      "Cocolon/screens/analysis/useAnalysisReportActions.js",
+      "Cocolon/screens/analysis/useAnalysisRouteState.js",
+      "Cocolon/screens/analysis/useAnalysisSelfStructureActions.js",
+      "Cocolon/screens/analysis/useAnalysisTutorialOverlay.js",
+      "Cocolon/screens/analysis/useAnalysisUnreadBadges.js",
+      "Cocolon/screens/analysisReport/AnalysisReportCharts.js",
+      "Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js",
+      "Cocolon/screens/analysisReport/analysisReportAccessPolicy.js",
+      "Cocolon/screens/analysisReport/analysisReportConstants.js",
+      "Cocolon/screens/analysisReport/analysisReportFormatters.js",
+      "Cocolon/screens/analysisReport/analysisReportHtmlExport.js",
+      "Cocolon/screens/analysisReport/analysisReportNormalize.js",
+      "Cocolon/screens/input/InputActionArea.js",
+      "Cocolon/screens/input/InputCategorySection.js",
+      "Cocolon/screens/input/InputEmotionSection.js",
+      "Cocolon/screens/input/InputFeedbackReplyModal.js",
+      "Cocolon/screens/input/InputMemoSection.js",
+      "Cocolon/screens/input/InputPiecePreviewController.js",
+      "Cocolon/screens/input/InputStartupModals.js",
+      "Cocolon/screens/input/InputToastOverlay.js",
+      "Cocolon/screens/input/inputDraftModel.js",
+      "Cocolon/screens/input/inputFeedbackModel.js",
+      "Cocolon/screens/input/inputLayoutModel.js",
+      "Cocolon/screens/input/inputNoticeModel.js",
+      "Cocolon/screens/input/inputOptions.js",
+      "Cocolon/screens/input/useInputDraftPersistence.js",
+      "Cocolon/screens/input/useInputFeedbackModal.js",
+      "Cocolon/screens/input/useInputKeyboardAwareMemo.js",
+      "Cocolon/screens/nexus/NexusEmotionLogSection.js",
+      "Cocolon/screens/nexus/NexusHeader.js",
+      "Cocolon/screens/nexus/NexusHistorySection.js",
+      "Cocolon/screens/nexus/NexusOwnerPickerModal.js",
+      "Cocolon/screens/nexus/NexusPieceFeedSection.js",
+      "Cocolon/screens/nexus/NexusRecommendSection.js",
+      "Cocolon/screens/nexus/NexusTabBar.js",
+      "Cocolon/screens/nexus/NexusTodayEmotionSummary.js",
+      "Cocolon/screens/nexus/nexusConstants.js",
+      "Cocolon/screens/nexus/nexusHistoryModel.js",
+      "Cocolon/screens/nexus/nexusNormalize.js",
+      "Cocolon/screens/nexus/nexusRouteModel.js",
+      "Cocolon/screens/piece/PieceHomeActionCard.js",
+      "Cocolon/screens/piece/PieceHomeMainActions.js",
+      "Cocolon/screens/piece/PieceRecommendModal.js",
+      "Cocolon/screens/piece/PieceTutorialCreateModal.js",
+      "Cocolon/screens/piece/usePieceHomeGlobalSummary.js",
+      "Cocolon/screens/piece/usePieceHomeTutorial.js",
+      "Cocolon/screens/piece/usePieceRecommendUsers.js",
+      "Cocolon/tests/rn-screen-contracts.test.js",
+      "mashos-api/ai/services/ai_inference/api_client_events.py",
+      "mashos-api/ai/tests/contract/test_client_events_contract.py"
+    ],
+    "changed_files": [
+      "Cocolon/App.js",
+      "Cocolon/lib/apiClient.js",
+      "Cocolon/package.json",
+      "Cocolon/screens/AccountScreen.js",
+      "Cocolon/screens/AnalysisReportViewerScreen.js",
+      "Cocolon/screens/AnalysisScreen.js",
+      "Cocolon/screens/InputScreen.js",
+      "Cocolon/screens/NexusScreen.js",
+      "Cocolon/screens/PieceScreen.js",
+      "mashos-api/ai/docs/PUBLIC_API_REGISTRY.md",
+      "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+      "mashos-api/ai/services/ai_inference/app.py"
+    ],
+    "removed_files": [],
+    "major_updates": [
+      "RN巨大画面分割Phase0-2/4-9をcurrentへ反映。entry shellは維持し、subdirectoryへhelper/hook/section/navigation/runtimeを分離。",
+      "PieceLibraryScreenはPhase3未実装としてcurrent entry shell単独ownerを維持。",
+      "本番運用監視としてRN lib/monitoring.jsとbackend POST /ops/client-eventsを追加。privacy-safe structured log / alert logのみでDB保存しない。",
+      "rn-screen-contracts.test.jsを更新し、分割moduleの接続をguard。"
+    ]
+  },
+  "source_snapshot_2026_05_09_after_rn_split_monitoring": {
+    "premise": "Cocolon_前提資料(51).zip",
+    "Cocolon": "Cocolon_12(3).zip",
+    "mashos-api": "mashos-api_4(10).zip",
+    "file_counts": {
+      "Cocolon": 200,
+      "mashos-api": 342,
+      "total": 542
+    },
+    "diff_from_Cocolon_138_mashos_api_2_26": {
+      "Cocolon_added": [
+        "Cocolon/components/GlobalFrameLayout.js",
+        "Cocolon/lib/monitoring.js",
+        "Cocolon/navigation/AnalysisStackNavigator.js",
+        "Cocolon/navigation/InputStackNavigator.js",
+        "Cocolon/navigation/MainTabs.js",
+        "Cocolon/navigation/PieceStackNavigator.js",
+        "Cocolon/navigation/RankingStackNavigator.js",
+        "Cocolon/navigation/RootNavigator.js",
+        "Cocolon/navigation/SettingsStackNavigator.js",
+        "Cocolon/navigation/linkingRuntime.js",
+        "Cocolon/navigation/navigationConstants.js",
+        "Cocolon/navigation/navigationRef.js",
+        "Cocolon/navigation/notificationRouting.js",
+        "Cocolon/runtime/AppRuntimeBlockingScreen.js",
+        "Cocolon/runtime/AppRuntimeBootstrapGate.js",
+        "Cocolon/screens/account/AccountIdSearchSection.js",
+        "Cocolon/screens/account/AccountNameEditModal.js",
+        "Cocolon/screens/account/AccountProfileSection.js",
+        "Cocolon/screens/account/AccountStatusSection.js",
+        "Cocolon/screens/account/AccountVisibilitySection.js",
+        "Cocolon/screens/account/accountModel.js",
+        "Cocolon/screens/account/useAccountFollowState.js",
+        "Cocolon/screens/account/useAccountIdSearch.js",
+        "Cocolon/screens/account/useAccountProfile.js",
+        "Cocolon/screens/account/useAccountSubscription.js",
+        "Cocolon/screens/account/useAccountVisibility.js",
+        "Cocolon/screens/analysis/analysisRouteModel.js",
+        "Cocolon/screens/analysis/useAnalysisReportActions.js",
+        "Cocolon/screens/analysis/useAnalysisRouteState.js",
+        "Cocolon/screens/analysis/useAnalysisSelfStructureActions.js",
+        "Cocolon/screens/analysis/useAnalysisTutorialOverlay.js",
+        "Cocolon/screens/analysis/useAnalysisUnreadBadges.js",
+        "Cocolon/screens/analysisReport/AnalysisReportCharts.js",
+        "Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js",
+        "Cocolon/screens/analysisReport/analysisReportAccessPolicy.js",
+        "Cocolon/screens/analysisReport/analysisReportConstants.js",
+        "Cocolon/screens/analysisReport/analysisReportFormatters.js",
+        "Cocolon/screens/analysisReport/analysisReportHtmlExport.js",
+        "Cocolon/screens/analysisReport/analysisReportNormalize.js",
+        "Cocolon/screens/input/InputActionArea.js",
+        "Cocolon/screens/input/InputCategorySection.js",
+        "Cocolon/screens/input/InputEmotionSection.js",
+        "Cocolon/screens/input/InputFeedbackReplyModal.js",
+        "Cocolon/screens/input/InputMemoSection.js",
+        "Cocolon/screens/input/InputPiecePreviewController.js",
+        "Cocolon/screens/input/InputStartupModals.js",
+        "Cocolon/screens/input/InputToastOverlay.js",
+        "Cocolon/screens/input/inputDraftModel.js",
+        "Cocolon/screens/input/inputFeedbackModel.js",
+        "Cocolon/screens/input/inputLayoutModel.js",
+        "Cocolon/screens/input/inputNoticeModel.js",
+        "Cocolon/screens/input/inputOptions.js",
+        "Cocolon/screens/input/useInputDraftPersistence.js",
+        "Cocolon/screens/input/useInputFeedbackModal.js",
+        "Cocolon/screens/input/useInputKeyboardAwareMemo.js",
+        "Cocolon/screens/nexus/NexusEmotionLogSection.js",
+        "Cocolon/screens/nexus/NexusHeader.js",
+        "Cocolon/screens/nexus/NexusHistorySection.js",
+        "Cocolon/screens/nexus/NexusOwnerPickerModal.js",
+        "Cocolon/screens/nexus/NexusPieceFeedSection.js",
+        "Cocolon/screens/nexus/NexusRecommendSection.js",
+        "Cocolon/screens/nexus/NexusTabBar.js",
+        "Cocolon/screens/nexus/NexusTodayEmotionSummary.js",
+        "Cocolon/screens/nexus/nexusConstants.js",
+        "Cocolon/screens/nexus/nexusHistoryModel.js",
+        "Cocolon/screens/nexus/nexusNormalize.js",
+        "Cocolon/screens/nexus/nexusRouteModel.js",
+        "Cocolon/screens/piece/PieceHomeActionCard.js",
+        "Cocolon/screens/piece/PieceHomeMainActions.js",
+        "Cocolon/screens/piece/PieceRecommendModal.js",
+        "Cocolon/screens/piece/PieceTutorialCreateModal.js",
+        "Cocolon/screens/piece/usePieceHomeGlobalSummary.js",
+        "Cocolon/screens/piece/usePieceHomeTutorial.js",
+        "Cocolon/screens/piece/usePieceRecommendUsers.js",
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "Cocolon_changed": [
+        "Cocolon/App.js",
+        "Cocolon/lib/apiClient.js",
+        "Cocolon/package.json",
+        "Cocolon/screens/AccountScreen.js",
+        "Cocolon/screens/AnalysisReportViewerScreen.js",
+        "Cocolon/screens/AnalysisScreen.js",
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/screens/NexusScreen.js",
+        "Cocolon/screens/PieceScreen.js"
+      ],
+      "Cocolon_removed": [],
+      "mashos_api_added": [
+        "mashos-api/ai/services/ai_inference/api_client_events.py",
+        "mashos-api/ai/tests/contract/test_client_events_contract.py"
+      ],
+      "mashos_api_changed": [
+        "mashos-api/ai/docs/PUBLIC_API_REGISTRY.md",
+        "mashos-api/ai/services/ai_inference/api_contract_registry.py",
+        "mashos-api/ai/services/ai_inference/app.py"
+      ],
+      "mashos_api_removed": []
+    },
+    "major_updates": [
+      "RN巨大画面分割: Input / Nexus / AnalysisReportViewer / Analysis / Account / Piece / App root をentry shell + submoduleへ分割。",
+      "本番運用監視: RN client event -> /ops/client-events -> privacy-safe structured log / alert logを追加。"
     ]
   }
 }

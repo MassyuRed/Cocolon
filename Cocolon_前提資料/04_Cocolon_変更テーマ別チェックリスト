@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -22,7 +22,7 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 4. 作業テーマに応じた `01` 系
 5. 国家システムに関係する場合は `02` 系
 6. contract / policy / guard に関係する場合は `05`
-7. DB / rename / bridge view に関係する場合は `03` / `06` / `09`（今回zipに08は未同梱。destructive DB変更は扱わない）
+7. DB / rename / bridge view に関係する場合は `03` / `06` / `09`（DB名が関わる場合は `08` も読む。destructive DB変更はMash様が明示した場合だけ扱う）
 
 # 2. テーマ別の最短読む順
 
@@ -59,7 +59,7 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 2. `02_Cocolon_国家システム資料.md`
 3. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
 4. `05_Cocolon_ルールファイル索引`
-5. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`（DB名が関わる場合。08は今回zip未同梱）
+5. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`（DB名が関わる場合は `08` も読む）
 
 ## 2-4. Piece / Nexus / generated reflection / qna
 
@@ -68,7 +68,7 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 3. `02_Cocolon_国家システム資料.md`
 4. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
 5. `05_Cocolon_ルールファイル索引`
-6. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`（DB名が関わる場合。08は今回zip未同梱）
+6. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`（DB名が関わる場合は `08` も読む）
 
 Piece関係は、Mash様が明示した時だけPiece専用工程として扱います。
 
@@ -135,7 +135,7 @@ Piece関係は、Mash様が明示した時だけPiece専用工程として扱い
 - national system に関係する変更は必ず `02` 系へ入る。
 - route / request / response / startup / unread / entitlement / account delete / subscription を触る時は `05` を先に見る。
 - 旧名称は、`09` に保管された構造境界ならrenameしない。
-- 今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB物理名に関わるdestructive変更は行わない。名称読み分けは `03` / `06` / `09` で確認する。
+- `08_Cocolon_DB_rename_boundary.md` は存在するため、DB物理名・bridge・rename境界は `08` を正本として確認する。destructive変更はMash様が明示した場合だけ行う。名称読み分けは `03` / `06` / `09` でも確認する。
 
 ## 2-4A. EmlisAI immediate reply / input feedback
 
@@ -164,3 +164,79 @@ Mash様から「三大中核構造」「EmlisAI強化」「Pieceが短く潰れ�
 7. `05_Cocolon_ルールファイル索引`
 
 必ず確認する実ファイルは、`value_observation_types.py`、`cocolon_value_observation_service.py`、`emlis_ai_world_model_service.py`、`emlis_ai_observation_kernel.py`、`emotion_piece_generation_service.py`、`piece_generation_policy.py`、`analysis_report_validity_gate.py` です。
+
+
+# 2026-05-09 差分追記: 今日の問いpersonal / 感情通知 / Tutorialチェック
+
+## 今日の問いを触る場合
+
+1. `00` → `03` → `09` → `01A` → `01C` → `02A` → `02C` → `08` の順で確認します。
+2. `static_role_probe` を削除しません。
+3. `personal_followup` はPremium追加層として扱います。
+4. `anchor_text` は元入力に実在する短い文字列だけを表示します。
+5. 通知文には個人の引用を出しません。
+6. personal回答でstatic sequenceを進めません。
+7. 回答保存後のself_structure refresh enqueueを維持します。
+
+## 感情通知を触る場合
+
+- local/API-only、queue worker、notification workerのどこでFCM送信するかを確認します。
+- queue modeでは `send_fcm_push_v1` をconsumeできるworker profileが必要です。
+- API側Firebase credential gateでqueue enqueueを止めない設計を維持します。
+
+## Tutorialを触る場合
+
+- `Emlis（エムリス）` 表記を維持します。
+- Home説明時は `今日の全体行動` / `入力履歴` をチュートリアルでは隠す境界を確認します。
+- 感情選択とカテゴリ選択は別フェーズとして扱います。
+
+# 2026-05-09 差分追記: RN巨大画面分割 / 本番運用監視チェック
+
+## RN巨大画面分割を触る時
+
+| 変更テーマ | 必ず確認するfile |
+|---|---|
+| App root / navigation | `App.js`, `navigation/navigationRef.js`, `navigation/RootNavigator.js`, `navigation/MainTabs.js`, `runtime/AppRuntimeBootstrapGate.js` |
+| Home / Input | `screens/InputScreen.js`, `screens/input/*`, `features/home/useHomeState.js`, `features/home/useHomeActions.js` |
+| Nexus | `screens/NexusScreen.js`, `screens/nexus/*`, `lib/nexusApi.js` |
+| Analysis report viewer | `screens/AnalysisReportViewerScreen.js`, `screens/analysisReport/*`, `SubscriptionContext.js` |
+| Analysis home | `screens/AnalysisScreen.js`, `screens/analysis/*`, `UnreadContext.js` |
+| Account | `screens/AccountScreen.js`, `screens/account/*`, `SubscriptionContext.js`, `SettingsOtherScreen.js` |
+| Piece home | `screens/PieceScreen.js`, `screens/piece/*`, `screens/PieceEntryScreen.js` |
+| PieceLibrary | `screens/PieceLibraryScreen.js`。Phase 3未実装のため、まだ単独巨大画面ownerとして読む |
+| RN screen guard | `tests/rn-screen-contracts.test.js` |
+
+禁止: screen split作業のついでにroute名、public API、DB write path、legacyWireContracts、visible/legacy名称を変更しない。
+
+## 本番運用監視を触る時
+
+| 変更テーマ | 必ず確認するfile |
+|---|---|
+| RN monitoring | `Cocolon/lib/monitoring.js`, `Cocolon/App.js`, `Cocolon/lib/apiClient.js`, `Cocolon/navigation/RootNavigator.js`, `Cocolon/runtime/AppRuntimeBootstrapGate.js` |
+| backend monitoring endpoint | `mashos-api/ai/services/ai_inference/api_client_events.py`, `app.py`, `api_contract_registry.py` |
+| public registry | `mashos-api/ai/docs/PUBLIC_API_REGISTRY.md`, `mashos-api/ai/tests/contract/test_client_events_contract.py` |
+| privacy / redaction | token / Authorization / email / UUID / user_id がraw logへ出ないこと |
+
+監視はbest-effortであり、Cocolonのproduct stateやDB write pathを変更しない。
+
+# 2026-05-09 差分追記: RN巨大画面分割後の変更チェックリスト
+
+## 画面分割moduleを触る場合
+
+1. entry shellを確認する。`App.js` / `InputScreen.js` / `AnalysisScreen.js` / `AnalysisReportViewerScreen.js` / `NexusScreen.js` / `PieceScreen.js` / `AccountScreen.js` はroute/import境界として残る。
+2. 対象subdirectoryを確認する。
+   - Home/Input: `screens/input/*`
+   - Analysis: `screens/analysis/*`, `screens/analysisReport/*`
+   - Nexus/Piece: `screens/nexus/*`, `screens/piece/*`
+   - Account: `screens/account/*`
+   - App root: `navigation/*`, `runtime/*`, `components/GlobalFrameLayout.js`
+3. `tests/rn-screen-contracts.test.js` を確認し、分割後moduleの接続guardを壊さない。
+4. 画面分割のついでにAPI route / DB write path / visible名 / legacy名を変更しない。
+
+## 本番運用監視を触る場合
+
+1. RN側は `lib/monitoring.js` と `lib/apiClient.js`、`App.js`、`navigation/RootNavigator.js`、`runtime/AppRuntimeBootstrapGate.js` を確認する。
+2. backend側は `api_client_events.py`、`app.py`、`api_contract_registry.py`、`PUBLIC_API_REGISTRY.md`、`test_client_events_contract.py` を確認する。
+3. token / Authorization / email / UUID / 長いtoken風文字列のredactionを維持する。
+4. raw user_idをログに出さず、`user_hash` 境界を維持する。
+5. 監視eventはDB保存ではなくstructured log / alert logとして扱う。

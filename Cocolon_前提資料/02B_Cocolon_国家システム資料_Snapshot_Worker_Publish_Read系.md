@@ -1,6 +1,6 @@
 ---
 title: "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系"
-revision_date: "2026-04-30"
+revision_date: "2026-05-09"
 ---
 
 # 02B. Snapshot / Worker / Publish / Read系
@@ -757,7 +757,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebContentFirstScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/screens/MyWebScreen.js` — import
@@ -780,7 +782,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebEmotionAnalysisScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/screens/MyWebScreen.js` — import
@@ -793,7 +797,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebEnsureClient.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: MyWebEnsureClient.js
 - 上流:
   - なし
@@ -807,7 +813,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebHistoryScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -838,7 +846,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebInputHistoryMenuScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/screens/MyWebScreen.js` — import
@@ -851,7 +861,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebReportHistoryScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/screens/MyWebScreen.js` — import
@@ -880,7 +892,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebReportViewerScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `legacy-live`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `legacy-live`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/screens/MyWebContentFirstScreen.js` — import
@@ -907,7 +921,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -974,7 +990,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebSelfStructureScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - `Cocolon/screens/MyWebScreen.js` — import
@@ -987,7 +1005,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyWebTopScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Analysis / Self Structure surface.
 - 上流:
   - なし
@@ -1098,7 +1118,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelDiscoveriesRankingScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - なし
@@ -1122,7 +1144,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelEchoesRankingScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1147,7 +1171,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelEntryScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1162,7 +1188,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelQuestionsRankingScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1187,7 +1215,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelReactionHistoryScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1202,7 +1232,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelReflectionsScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1237,7 +1269,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/MyModelScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1321,7 +1355,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/nexus/NexusReflectionCard.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: Piece / Nexus surface.
 - 上流:
   - `Cocolon/screens/NexusScreen.js` — import
@@ -1343,7 +1379,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/DiscoveriesHistoryDetailScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - なし
@@ -1359,7 +1397,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/DiscoveriesHistoryListScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - なし
@@ -1375,7 +1415,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/EchoesHistoryDetailScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1392,7 +1434,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/EchoesHistoryListScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - `Cocolon/App.js` — import
@@ -1499,7 +1543,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/RankingAllUsersScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - なし
@@ -1511,7 +1557,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/RankingMyModelMenuScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - なし
@@ -1523,7 +1571,9 @@ revision_date: "2026-04-30"
 ### `Cocolon/screens/RankingPersonalUsersScreen.js`
 - repo: `Cocolon`
 - 国家システム区分: `Read`
-- 現行状態: `active`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `active`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: RN screen module. Current system: ranking / history surface.
 - 上流:
   - なし
@@ -3013,7 +3063,9 @@ revision_date: "2026-04-30"
 ### `mashos-api/ai/services/ai_inference/api_ranking_mymodel_discoveries.py`
 - repo: `mashos-api`
 - 国家システム区分: `Read`
-- 現行状態: `shared`
+- 現行状態: `retired-current-reference`
+- 旧記載状態: `shared`
+- 2026-05-09 実ファイル再照合: `Cocolon(138).zip` / `mashos-api_2(26).zip` にはこのpathは存在しない。current作業では、この旧sectionを直接の実ファイルownerとして扱わず、同doc末尾の current owner補正表を優先する。
 - 国家システム上の役割: MyModel QnA Discoveries Ranking API (Cocolon / MashOS / FastAPI)
 - 上流:
   - `Cocolon/screens/MyModelDiscoveriesRankingScreen.js` — endpoint /ranking/mymodel_discoveries
@@ -3355,3 +3407,70 @@ revision_date: "2026-04-30"
 - `mashos-api/ai/services/ai_inference/astor_job_queue.py` は `ready_queued`、`delayed_queued`、`running`、`failed`、`oldest_ready_age_seconds`、`stale_running_count` 等のqueue statsとstale復旧を持つ。
 - `mashos-api/ai/services/ai_inference/astor_worker.py` は `all/core/analysis/inspect/ranking/summary/notification` profileを持ち、`send_fcm_push_v1` をnotification profileで処理する。
 - `mashos-api/ai/services/ai_inference/api_cron_distribution.py` / `api_today_question.py` / `api_follow.py` は通知を直接FCM送信せず、queueへ逃がす。
+
+
+# 2026-05-09 差分追記: Snapshot / Worker / Publish / Read current boundary
+
+| file | Snapshot / Worker / Read上の役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/astor_material_snapshots.py` | `today_question_answers` からstatic/personal両方の回答をself_structure素材へ変換する。public面には出さない |
+| `mashos-api/ai/services/ai_inference/analysis_engine_adapter.py` | personal回答の `question_type` / `source_anchor` / hidden_meta を分析入力へ渡す |
+| `mashos-api/ai/services/ai_inference/api_today_question.py` | `GET /today-question/history` で `question_origin` と `source_anchor_summary` を返す |
+| `mashos-api/ai/services/ai_inference/api_emotion_submit.py` | 感情通知Pushは `send_fcm_push_v1` queueまたはdirectで処理する。queue modeではAPI側credential不足でenqueueを止めない |
+| `mashos-api/ai/services/ai_inference/.env.worker.example` | `ASTOR_WORKER_PROFILE=all` をsingle/local worker例にし、notification worker分離時のみ `core` を使う |
+
+personal_followupのsource_anchorは、通知や公開feedでは使わず、アプリ内表示・履歴・self_structure用途に限定します。
+
+
+# 2026-05-09 実ファイル再照合: current owner補正
+
+この表は `Cocolon(138).zip` / `mashos-api_2(26).zip` の実ファイル一覧と、この資料内の current 参照を照合した補正です。
+旧本文内の `active` / `shared` / `legacy-live` 表記よりも、この表を優先します。旧名称はDB physical name / compat / 旧route説明として保管できるが、current実ファイルownerとしては扱いません。
+
+| 旧参照path | 実ファイル照合 | current owner / 読み方 |
+|---|---|---|
+| `Cocolon/screens/DiscoveriesHistoryDetailScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js。Discoveries専用history detailはcurrent fileとして存在しない。 |
+| `Cocolon/screens/DiscoveriesHistoryListScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js。Discoveries専用history listはcurrent fileとして存在しない。 |
+| `Cocolon/screens/EchoesHistoryDetailScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryDetailScreen.js |
+| `Cocolon/screens/EchoesHistoryListScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryListScreen.js |
+| `Cocolon/screens/MyModelDiscoveriesRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Discoveries screenは存在しない。RankingTop / PieceResonanceRanking / backend ranking viewsを優先する。 |
+| `Cocolon/screens/MyModelEchoesRankingScreen.js` | local snapshot未収録 | Cocolon/screens/PieceResonanceRankingScreen.js |
+| `Cocolon/screens/MyModelEntryScreen.js` | local snapshot未収録 | Cocolon/screens/PieceEntryScreen.js |
+| `Cocolon/screens/MyModelMenuCommon.js` | local snapshot未収録 | Cocolon/screens/PieceMenuCommon.js |
+| `Cocolon/screens/MyModelQuestionsRankingScreen.js` | local snapshot未収録 | current ranking surfaceでは単独Questions screenは存在しない。RankingTop / InputCountRanking / InputLengthRanking / PieceResonanceRankingを優先する。 |
+| `Cocolon/screens/MyModelReactionHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/ResonanceHistoryListScreen.js / Cocolon/screens/ResonanceHistoryDetailScreen.js |
+| `Cocolon/screens/MyModelReflectionsScreen.js` | local snapshot未収録 | Cocolon/screens/PieceLibraryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyModelScreen.js` | local snapshot未収録 | Cocolon/screens/PieceScreen.js / Cocolon/screens/PieceEntryScreen.js / Cocolon/screens/NexusScreen.js |
+| `Cocolon/screens/MyWebContentFirstScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisContentFirstScreen.js |
+| `Cocolon/screens/MyWebEmotionAnalysisScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisEmotionScreen.js |
+| `Cocolon/screens/MyWebEnsureClient.js` | local snapshot未収録 | Cocolon/screens/AnalysisEnsureClient.js |
+| `Cocolon/screens/MyWebHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisHistoryScreen.js |
+| `Cocolon/screens/MyWebInputHistoryMenuScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisInputHistoryMenuScreen.js |
+| `Cocolon/screens/MyWebMenuCommon.js` | local snapshot未収録 | Cocolon/screens/AnalysisMenuCommon.js |
+| `Cocolon/screens/MyWebReportHistoryScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportHistoryScreen.js |
+| `Cocolon/screens/MyWebReportScheduleUtils.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportScheduleUtils.js |
+| `Cocolon/screens/MyWebReportViewerScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisReportViewerScreen.js |
+| `Cocolon/screens/MyWebScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisScreen.js |
+| `Cocolon/screens/MyWebSelfStructureScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisSelfStructureScreen.js |
+| `Cocolon/screens/MyWebTopScreen.js` | local snapshot未収録 | Cocolon/screens/AnalysisTopScreen.js |
+| `Cocolon/screens/RankingAllUsersScreen.js` | local snapshot未収録 | Cocolon/screens/RankingTopScreen.js と各ranking screen。AllUsers専用screenはcurrent fileとして存在しない。 |
+| `Cocolon/screens/RankingMyModelMenuScreen.js` | local snapshot未収録 | Cocolon/screens/RankingTopScreen.js |
+| `Cocolon/screens/RankingPersonalUsersScreen.js` | local snapshot未収録 | Cocolon/screens/RankingTopScreen.js と current ranking screen群。PersonalUsers専用screenはcurrent fileとして存在しない。 |
+| `Cocolon/screens/nexus/NexusReflectionCard.js` | local snapshot未収録 | Cocolon/screens/nexus/NexusPieceCard.js |
+| `mashos-api/ai/services/ai_inference/api_ranking_mymodel_discoveries.py` | local snapshot未収録 | 今回local snapshotには存在しない。current ranking ownerは api_ranking.py / api_ranking_piece_views.py / api_ranking_piece_resonances.py / api_ranking_mymodel_views.py / api_ranking_mymodel_resonances.py。 |
+
+# 2026-05-09 差分追記: App root split / startup / read-side display boundary
+
+App rootは `App.js` entry shellから、`navigation/*`、`runtime/*`、`components/GlobalFrameLayout.js` へ分割されています。startup / push / linking / read-side display のroute名は変更しません。
+
+| file | 国家システム上の読み方 |
+|---|---|
+| `navigation/RootNavigator.js` | auth gate、IAP observer、push token sync、root stack制御。provider順序を変えない |
+| `navigation/MainTabs.js` | startup warmup、unread prefetch、self-structure banner、tab表示 |
+| `navigation/notificationRouting.js` | push通知payloadからInput / Analysis / EmotionLogへ開くroute解決 |
+| `navigation/linkingRuntime.js` | share code linkからAccount表示へつなぐread-side route解決 |
+| `runtime/AppRuntimeBootstrapGate.js` | `/app/bootstrap` の取得とruntime gate |
+| `runtime/AppRuntimeBlockingScreen.js` | minimum supported version block表示 |
+| `components/GlobalFrameLayout.js` | display frame。data contractとは別境界 |
+
+本番監視では、RootNavigator / AppRuntimeBootstrapGate で発生したpush / IAP / bootstrap系エラーを `lib/monitoring.js` へ渡す。これはstartup snapshotやread-side payloadの形を変えない。

@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 125
-  mashos-api: 336
+  Cocolon: 200
+  mashos-api: 342
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 461
-  included_files_cocolon: 125
-  included_files_mashos_api: 336
+  included_files_total: 542
+  included_files_cocolon: 200
+  included_files_mashos_api: 342
 ---
 
 # 1. 1行定義
@@ -46,8 +46,8 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 # 4-2. 2026-04-30 current app runtime map
 
-最新基準面は `Cocolon(132).zip` / `mashos-api_2(23).zip` です。  
-現在のcoverageは `Cocolon=125` / `mashos-api=336` / `total=461` です。
+最新基準面は `Cocolon(138).zip` / `mashos-api_2(26).zip` です。  
+現在のcoverageは `Cocolon=125` / `mashos-api=340` / `total=465` です。
 
 この更新は残タスク表ではなく、アプリのファイル構成として読む。
 
@@ -66,9 +66,9 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の latest full coverage は後続の `2026-04-25 差分追記: current full coverage` を正本とする。
 
-- latest full coverage: `461 files`
+- latest full coverage: `465 files`
   - Cocolon: `125`
-  - mashos-api: `336`
+  - mashos-api: `340`
 
 # 6. 任意の 1 ファイルから辿る時の原則
 
@@ -647,13 +647,13 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 # 2026-05-05 差分追記: current 452 files coverage補正
 
-`Cocolon(132).zip` / `mashos-api_2(23).zip` の現行基準では、coverage対象は `461 files` です。
+`Cocolon(138).zip` / `mashos-api_2(26).zip` の現行基準では、coverage対象は `465 files` です。
 
 | source | count | 主な差分 |
 |---|---:|---|
 | Cocolon | 125 | Tutorial flow / generated tutorial fixture / package metadata / subscription runtime catalog 表示文言 |
-| mashos-api | 336 | EmlisAI 汎用意味分解・文章構成・Gate層、Piece communicative core、tutorial fixture generator、関連test |
-| total | 461 | 01/02 系の差分追記対象 |
+| mashos-api | 340 | EmlisAI 汎用意味分解・文章構成・Gate層、Piece communicative core、tutorial fixture generator、関連test |
+| total | 465 | 01/02 系の差分追記対象 |
 
 この差分で新しく構造資料上に明示する current files は次です。
 
@@ -678,12 +678,12 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - `mashos-api/ai/tests/test_emlis_ai_*` の追加群 — phrase shaping / meaning block / composition / final review / quality gate / grounding の回帰確認。
 - `mashos-api/ai/tests/test_emotion_piece_generation_*` の追加群 — Piece core Q&A / communicative core の回帰確認。
 
-旧版の `423 files` / `452 files` 記述は履歴として残っている箇所がありますが、現行作業基準は `461 files` です。
+旧版の `423 files` / `452 files` 記述は履歴として残っている箇所がありますが、現行作業基準は `465 files` です。
 
 
 # 2026-05-07 差分追記: value observation / current full coverage補正
 
-基準zipは `Cocolon(132).zip` / `mashos-api_2(23).zip` です。現行coverageは `Cocolon=125` / `mashos-api=336` / `total=461` です。旧本文は履歴として保持し、この差分追記を現行基準の補正として読む。
+基準zipは `Cocolon(138).zip` / `mashos-api_2(26).zip` です。現行coverageは `Cocolon=125` / `mashos-api=340` / `total=465` です。旧本文は履歴として保持し、この差分追記を現行基準の補正として読む。
 
 ## 現行資料へ追加するファイル
 
@@ -726,3 +726,235 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 | `ideal_capacity_switch_gap` | 理想手順と処理容量のズレ | 計画不能ではなく、全体整理から即時処理への切替として自己構造分析へ渡す |
 
 作業時は、これらのsignalを例文専用条件にしない。Mash様の文を固定返答として保存せず、現在入力から抽出したsource-groundedな観測信号として扱う。
+
+
+# 2026-05-09 差分追記: latest実ファイルcoverage補正と今日の問いpersonal_followup
+
+最新基準面は `Cocolon_前提資料(48).zip` / `Cocolon(138).zip` / `mashos-api_2(26).zip` です。最新実ファイルは `Cocolon` 125件、`mashos-api` 340件、合計465件です。今回の更新では、今回実装分だけでなく、最新実ファイルと前提資料本文coverageの差分も確認し、01系coverageに未記載だったpathを下へ補正追記します。
+
+## latest実ファイル差分
+
+### 追加
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | latest実ファイルで新規追加。前提資料coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | latest実ファイルで新規追加。前提資料coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | latest実ファイルで新規追加。前提資料coverageへ追記 |
+
+### 変更
+| file | 補正内容 |
+|---|---|
+| `Cocolon/components/TodayQuestionCard.js` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `Cocolon/features/home/useHomeActions.js` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `Cocolon/screens/TodayQuestionHistoryScreen.js` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/account_delete_service.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/analysis_engine_adapter.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/api_today_question.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/astor_material_snapshots.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/home_gateway/command_gateway.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/home_gateway/today_question_command_service.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+| `mashos-api/ai/services/ai_inference/today_question_store.py` | latest実ファイルで変更。前提資料の構造説明を差分更新 |
+
+### 削除
+| file | 補正内容 |
+|---|---|
+| `0件` | 差分なし |
+
+
+## 01系coverage補正path
+
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_subscription_projection.py` | 01系coverage補正。全体構造資料の本文coverageへ追記 |
+
+
+## 今日の問い vNext 構造
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | `static_role_probe` / `personal_followup` のorigin定義、6種類のquestion_type、固定選択肢、hidden_meta、原文アンカー質問文を定義する |
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | `emotions` の `memo` / `memo_action` から、literal substring の `anchor_text` を抽出し、重い内容を除外して候補化する。生成AIでユーザー発言を作らない |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | candidate から `today_question_personal_questions` へinsertできるpayloadを作る。質問文・choices・source_anchorをsnapshot-safeに固定する |
+| `mashos-api/ai/services/ai_inference/today_question_store.py` | Premiumのみpersonalを差し込み、候補なし/低信頼/定期static fallback時は既存100問へ戻す。personal回答ではstatic sequenceを進めない |
+| `mashos-api/ai/services/ai_inference/api_today_question.py` | `current` / `status` / `answers` / `history` に `question_origin` / `personal_question_id` / `source_anchor` をadditive返却・受信する |
+| `Cocolon/features/home/useHomeActions.js` | current questionの `question_origin` / `personal_question_id` / `source_anchor_hash` を回答payloadに含める |
+| `Cocolon/components/TodayQuestionCard.js` | personalでも既存UIで `question.text` とchoicesを表示する。監視感を避けるため強いpersonalラベルは出さない |
+| `Cocolon/screens/TodayQuestionHistoryScreen.js` | 履歴に `source_anchor_summary.anchor_text` を短く表示する。公開面ではなくself-onlyの履歴として扱う |
+
+## 感情通知 / Tutorial 反映
+
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py` は、FCM queue modeでAPI側Firebase credentialを要求してenqueueを止めない構造へ更新済みです。
+- `mashos-api/ai/services/ai_inference/.env.worker.example` は、単独worker/local worker例を `ASTOR_WORKER_PROFILE=all` にし、`send_fcm_push_v1` をconsumeできる前提へ更新済みです。
+- Tutorialは `Emlis（エムリス）` 表記、感情選択/カテゴリ選択の分離、Home説明時のsummary/history非表示、ピース説明文の自然文化を反映済みです。
+
+
+# 2026-05-09 実ファイル再照合: current full coverage補正
+
+`Cocolon(138).zip` / `mashos-api_2(26).zip` の実ファイル一覧と本文coverageを再照合した結果、下記pathをcurrent coverageへ補正追記する。
+既存本文は履歴として保持し、この差分追記を現行基準の補正として読む。
+
+| path | 補正理由 |
+|---|---|
+| `mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py` | 01系coverage補正。Piece長文/自己他者幸福系testをcurrent full coverageへ追加 |
+| `mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py` | 01系coverage補正。Piece長文/自己他者幸福系testをcurrent full coverageへ追加 |
+
+# 2026-05-09 差分追記: RN巨大画面分割 / 本番運用監視 full coverage補正
+
+最新基準面は `Cocolon_前提資料(51).zip` / `Cocolon_12(3).zip` / `mashos-api_4(10).zip` です。実ファイルは `Cocolon` 200件、`mashos-api` 342件、合計542件です。`Cocolon(138).zip` / `mashos-api_2(26).zip` からの差分として、RN画面分割moduleと本番運用監視moduleをcurrent full coverageへ追記します。
+
+## Cocolon追加path
+
+| path | 補正内容 |
+|---|---|
+| Cocolon/components/GlobalFrameLayout.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/lib/monitoring.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/AnalysisStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/InputStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/MainTabs.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/PieceStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/RankingStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/RootNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/SettingsStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/linkingRuntime.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/navigationConstants.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/navigationRef.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/notificationRouting.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/runtime/AppRuntimeBlockingScreen.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/runtime/AppRuntimeBootstrapGate.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/AccountIdSearchSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/AccountNameEditModal.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/AccountProfileSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/AccountStatusSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/AccountVisibilitySection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/accountModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/useAccountFollowState.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/useAccountIdSearch.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/useAccountProfile.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/useAccountSubscription.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/account/useAccountVisibility.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysis/analysisRouteModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysis/useAnalysisReportActions.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysis/useAnalysisRouteState.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysis/useAnalysisSelfStructureActions.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysis/useAnalysisTutorialOverlay.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysis/useAnalysisUnreadBadges.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/AnalysisReportCharts.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/analysisReportAccessPolicy.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/analysisReportConstants.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/analysisReportFormatters.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/analysisReportHtmlExport.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/analysisReport/analysisReportNormalize.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputActionArea.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputCategorySection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputEmotionSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputFeedbackReplyModal.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputMemoSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputPiecePreviewController.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputStartupModals.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/InputToastOverlay.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/inputDraftModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/inputFeedbackModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/inputLayoutModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/inputNoticeModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/inputOptions.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/useInputDraftPersistence.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/useInputFeedbackModal.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/input/useInputKeyboardAwareMemo.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusEmotionLogSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusHeader.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusHistorySection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusOwnerPickerModal.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusPieceFeedSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusRecommendSection.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusTabBar.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/NexusTodayEmotionSummary.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/nexusConstants.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/nexusHistoryModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/nexusNormalize.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/nexus/nexusRouteModel.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/PieceHomeActionCard.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/PieceHomeMainActions.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/PieceRecommendModal.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/PieceTutorialCreateModal.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/usePieceHomeGlobalSummary.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/usePieceHomeTutorial.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/screens/piece/usePieceRecommendUsers.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/tests/rn-screen-contracts.test.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+
+## Cocolon変更path
+
+| path | 補正内容 |
+|---|---|
+| Cocolon/App.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/lib/apiClient.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/package.json | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/screens/AccountScreen.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/screens/AnalysisReportViewerScreen.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/screens/AnalysisScreen.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/screens/InputScreen.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/screens/NexusScreen.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+| Cocolon/screens/PieceScreen.js | entry shell化、screen split接続、監視接続、またはscreen contract test script追加によるcurrent変更path |
+
+## mashos-api追加path
+
+| path | 補正内容 |
+|---|---|
+| mashos-api/ai/services/ai_inference/api_client_events.py | 本番運用監視 `/ops/client-events` の受信・contract testをcurrent coverageへ追加 |
+| mashos-api/ai/tests/contract/test_client_events_contract.py | 本番運用監視 `/ops/client-events` の受信・contract testをcurrent coverageへ追加 |
+
+## mashos-api変更path
+
+| path | 補正内容 |
+|---|---|
+| mashos-api/ai/docs/PUBLIC_API_REGISTRY.md | `/ops/client-events` route登録、public contract registry、docs反映によるcurrent変更path |
+| mashos-api/ai/services/ai_inference/api_contract_registry.py | `/ops/client-events` route登録、public contract registry、docs反映によるcurrent変更path |
+| mashos-api/ai/services/ai_inference/app.py | `/ops/client-events` route登録、public contract registry、docs反映によるcurrent変更path |
+
+## 削除path
+
+| path | 補正内容 |
+|---|---|
+| `0件` | 今回のcurrent差分では実ファイル削除なし |
+
+# 2026-05-09 差分追記: RN巨大画面分割と本番運用監視の全体構造
+
+照合対象は `Cocolon_12(3).zip` / `mashos-api_4(10).zip` です。今回のcurrent実ファイルでは、Cocolon側が 200件、mashos-api側が 342件、合計542件になっています。
+
+## Entry shell policy
+
+既存の巨大画面fileは削除せず、route/importの入口として残します。新しく追加された `screens/input/*`、`screens/nexus/*`、`screens/analysis/*`、`screens/analysisReport/*`、`screens/account/*`、`screens/piece/*`、`navigation/*`、`runtime/*` は、旧entry shellの内部ownerとして読む。
+
+## Current grouped owners
+
+| group | current files | 読み方 |
+|---|---|---|
+| App root / navigation | `App.js`, `navigation/*`, `runtime/*`, `components/GlobalFrameLayout.js` | provider / route / push / linking / runtime gate を分離したApp root構造 |
+| Home/Input | `screens/InputScreen.js`, `screens/input/*`, `features/home/*` | Home entry shell + input-specific hook/section/model。Home gatewayは従来ownerのまま |
+| Analysis / report | `screens/AnalysisScreen.js`, `screens/analysis/*`, `screens/AnalysisReportViewerScreen.js`, `screens/analysisReport/*` | Analysis entry shell + report / unread / self-structure / tutorial / export / chart 分割 |
+| Piece / Nexus | `screens/PieceScreen.js`, `screens/piece/*`, `screens/NexusScreen.js`, `screens/nexus/*`, `screens/PieceLibraryScreen.js` | Piece home / Nexus surfaceは分割済み。PieceLibraryScreenは今回時点で未分割entry ownerとして残る |
+| Account | `screens/AccountScreen.js`, `screens/account/*` | profile/follow/visibility/subscription/searchの分割owner。account deleteはSettingsOtherScreenがowner |
+| Monitoring | `lib/monitoring.js`, `mashos-api/ai/services/ai_inference/api_client_events.py` | RN client event -> backend ops log の本番運用監視境界 |
+
+## 変更時の原則
+
+- 画面分割moduleを触る時も、public API / DB write path / route名は変更しない。
+- 旧entry shellに残るroute名を、subdirectory名へ置換しない。
+- 本番運用監視はDB保存ではなくprivacy-safe structured log / alert logとして読む。

@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 125
-  mashos-api: 336
+  Cocolon: 200
+  mashos-api: 342
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -226,3 +226,30 @@ Pieceに属する `mymodel_reflections` / `mymodel_qna_*` / `reflection_text` / 
 | `overcompression_risk` | Pieceや長文入力で、言いたい核を短く潰すリスク | `piece_generation_policy.py`, `emotion_piece_generation_service.py` |
 
 命名変更・DB renameではないため、DB physical tableやroute名は変更しない。
+
+
+# 2026-05-09 差分追記: 今日の問いpersonal naming boundary
+
+| 表示・概念名 | runtime / DB / contract名 | 読み分け |
+|---|---|---|
+| 既存100問テンプレ | `static_role_probe` | 全ユーザー向けの基礎問い。`today_question_bank` / `today_question_sequence` / `today_question_user_progress` と接続 |
+| パーソナル深掘り問い | `personal_followup` | Premium向け追加層。元入力の短い原文アンカーに対して選択式で答える |
+| 原文アンカー | `source_anchor` / `source_anchor_snapshot_json` | ユーザー入力に実在する短いliteral text。AI要約をユーザー発言として扱わない |
+| personal候補 | `today_question_personal_candidates` | 元入力から抽出された候補。score/status/source_hashを持つ |
+| personal問い | `today_question_personal_questions` | 表示可能な質問実体。question_text/choices/source_anchorをsnapshot保存する |
+| personal回答 | `today_question_answers.personal_question_id` | 既存answer tableのadditive fieldで保存する |
+| DB境界資料 | `08_Cocolon_DB_rename_boundary.md` | この版では存在する。DB physical name/bridge/rename境界の正本として読む |
+
+# 2026-05-09 差分追記: entry shell / subdirectory 命名境界
+
+RN巨大画面分割後も、Mash様が画面名を指示する時の正本は既存のentry shellです。subdirectory名は内部ownerであり、visible名・route名を置き換えるものではありません。
+
+| 指示語 / visible | entry shell | 分割後internal owner | 読み方 |
+|---|---|---|---|
+| Home / Input | `screens/InputScreen.js` | `screens/input/*` | routeはInput、visibleはHome。subdirは入力画面内部の責務分割 |
+| Analysis | `screens/AnalysisScreen.js` / `screens/AnalysisReportViewerScreen.js` | `screens/analysis/*`, `screens/analysisReport/*` | Analysis routeとreport viewer entryを維持 |
+| Piece / Nexus | `screens/PieceScreen.js` / `screens/NexusScreen.js` | `screens/piece/*`, `screens/nexus/*` | Piece route / Nexus surfaceを維持。Nexus語彙はPiece内部surfaceとして読む |
+| Account | `screens/AccountScreen.js` | `screens/account/*` | Account routeを維持。account delete ownerはSettingsOtherScreen |
+| App root | `App.js` | `navigation/*`, `runtime/*`, `components/GlobalFrameLayout.js` | App.jsはprovider / NavigationContainer entry shell。route名は変更しない |
+
+この分割は名称変更ではないため、`MyWeb` / `MyModel` / DB physical name / legacy façadeの扱いは既存の命名混在方針を優先する。

@@ -7,23 +7,16 @@ import React, {
   useState,
 } from "react";
 import {
-  ActivityIndicator,
   Alert,
-  Modal,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   View,
   useWindowDimensions,
 } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import CocolonButton from "../components/CocolonButton";
-import CocolonPressable from "../components/CocolonPressable";
-import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
@@ -47,496 +40,43 @@ import {
   markNexusEmotionLogFeedRead,
   postNexusPieceResonance,
 } from "../lib/nexusApi";
-import { readShareCode } from "../lib/compat/legacyWireContracts";
-import NexusPieceCard from "./nexus/NexusPieceCard";
+import NexusHeader from "./nexus/NexusHeader";
+import NexusTodayEmotionSummary from "./nexus/NexusTodayEmotionSummary";
+import NexusTabBar from "./nexus/NexusTabBar";
+import NexusPieceFeedSection from "./nexus/NexusPieceFeedSection";
+import NexusEmotionLogSection from "./nexus/NexusEmotionLogSection";
+import NexusRecommendSection from "./nexus/NexusRecommendSection";
+import NexusHistorySection from "./nexus/NexusHistorySection";
+import NexusOwnerPickerModal from "./nexus/NexusOwnerPickerModal";
+import {
+  PIECE_TUTORIAL_STEP_START,
+  PIECE_TUTORIAL_STEP_END,
+  OWNER_FILTER_ALL,
+  OWNER_FILTER_SELF,
+  OWNER_FILTER_USER,
+  PIECE_ORDER_LATEST,
+  PIECE_ORDER_OLDEST,
+  HISTORY_ORDER_LATEST,
+  HISTORY_ORDER_OLDEST,
+} from "./nexus/nexusRouteModel";
+import {
+  normalizeEmotionRankingItems,
+  normalizeEmotionLogItems,
+  normalizeRecommendUsers,
+  normalizeFollowListUsers,
+  normalizeSavedPieces,
+  normalizeTutorialPieceItems,
+  normalizeDetailResonanceCount,
+} from "./nexus/nexusNormalize";
+import {
+  resolvePieceQInstanceId,
+  resolvePieceQKey,
+  resolvePieceOwnerUserId,
+  buildResonanceHistoryItemFromPiece,
+  sortHistoryItems,
+} from "./nexus/nexusHistoryModel";
 import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
-const TABS = [
-  { key: "piece", label: "投稿" },
-  { key: "emotion_log", label: "感情通知" },
-  { key: "recommend", label: "おすすめ" },
-  { key: "history", label: "共鳴" },
-];
-
-const PIECE_TUTORIAL_STEP_START = 12;
-const PIECE_TUTORIAL_STEP_END = 15;
-
-const OWNER_FILTER_ALL = "all";
-const OWNER_FILTER_SELF = "self";
-const OWNER_FILTER_USER = "user";
-
-const PIECE_ORDER_LATEST = "latest";
-const PIECE_ORDER_OLDEST = "oldest";
-const HISTORY_ORDER_LATEST = "newest";
-const HISTORY_ORDER_OLDEST = "oldest";
-
-const STRENGTH_LABEL = {
-  weak: "弱",
-  medium: "中",
-  strong: "強",
-};
-
-function emotionTint(emotion, defaultTextColor) {
-  switch (emotion) {
-    case "喜び":
-      return { bg: "rgba(16,185,129,0.12)", text: "#065F46" };
-    case "悲しみ":
-      return { bg: "rgba(99,102,241,0.12)", text: "#3730A3" };
-    case "怒り":
-      return { bg: "rgba(239,68,68,0.12)", text: "#7F1D1D" };
-    case "不安":
-      return { bg: "rgba(56,189,248,0.12)", text: "#0369A1" };
-    case "平穏":
-      return { bg: "rgba(234,179,8,0.12)", text: "#A16207" };
-    default:
-      return { bg: "rgba(107,114,128,0.12)", text: defaultTextColor };
-  }
-}
-
-function normalizeEmotionRankingItems(json) {
-  const items = Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json?.rows)
-    ? json.rows
-    : Array.isArray(json)
-    ? json
-    : [];
-  return items.slice(0, 5).map((item, index) => ({
-    label:
-      String(
-        item?.emotion_label ||
-          item?.emotion ||
-          item?.emotion_type ||
-          item?.label ||
-          item?.name ||
-          `感情 ${index + 1}`
-      ).trim() || `感情 ${index + 1}`,
-    value: Number(item?.count ?? item?.total ?? item?.value ?? item?.score ?? 0) || 0,
-  }));
-}
-
-function normalizeEmotionLogItems(json) {
-  const rows = Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json?.data)
-    ? json.data
-    : Array.isArray(json)
-    ? json
-    : [];
-  return rows.map((row, index) => {
-    const items = Array.isArray(row?.items)
-      ? row.items
-      : Array.isArray(row?.emotions)
-      ? row.emotions
-      : [];
-    const ownerName =
-      String(
-        row?.ownerName || row?.owner_name || row?.ownerNameLabel || ""
-      ).trim() || "ユーザー";
-    const timeLabel =
-      String(row?.timeLabel || "").trim() ||
-      formatDateLabel(row?.created_at || row?.createdAt || null);
-    return {
-      id: String(row?.id || `emotion-log-${index}`),
-      ownerName,
-      timeLabel,
-      createdAt: String(row?.createdAt || row?.created_at || "").trim() || null,
-      items: items.map((item) => ({
-        type: String(item?.type || item?.emotion || "").trim() || "感情",
-        strength: String(item?.strength || "").trim(),
-      })),
-    };
-  });
-}
-
-function normalizeRecommendUsers(json) {
-  const users = Array.isArray(json?.users)
-    ? json.users
-    : Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json)
-    ? json
-    : [];
-  return users.map((user, index) => ({
-    id: String(user?.id || user?.user_id || `user-${index}`),
-    displayName:
-      String(
-        user?.display_name || user?.name || readShareCode(user, "") || "ユーザー"
-      ).trim() || "ユーザー",
-    shareCode: readShareCode(user, null),
-  }));
-}
-
-function normalizeFollowListUsers(json) {
-  const rows = Array.isArray(json?.rows)
-    ? json.rows
-    : Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json?.users)
-    ? json.users
-    : Array.isArray(json?.data)
-    ? json.data
-    : Array.isArray(json)
-    ? json
-    : [];
-
-  const seen = new Set();
-  const users = [];
-  rows.forEach((user, index) => {
-    const id = String(user?.id || user?.user_id || user?.userId || "").trim();
-    if (!id || seen.has(id)) return;
-    seen.add(id);
-
-    const displayName =
-      String(
-        user?.display_name ||
-          user?.displayName ||
-          user?.name ||
-          readShareCode(user, "") ||
-          `ユーザー ${index + 1}`
-      ).trim() || `ユーザー ${index + 1}`;
-    const friendCode =
-      String(
-        user?.friend_code ||
-          user?.share_code ||
-          user?.connect_code ||
-          user?.myprofile_code ||
-          ""
-      ).trim() || null;
-
-    users.push({ id, displayName, friendCode });
-  });
-
-  return users;
-}
-
-function normalizeSavedPieces(json) {
-  const items = Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json)
-    ? json
-    : [];
-  return items.map((item, index) => {
-    const owner = item?.owner && typeof item.owner === "object" ? item.owner : {};
-    const question =
-      item?.question && typeof item.question === "object" ? item.question : {};
-    const metrics = item?.metrics && typeof item.metrics === "object" ? item.metrics : {};
-    const viewerState =
-      item?.viewer_state && typeof item.viewer_state === "object"
-        ? item.viewer_state
-        : item?.viewerState && typeof item.viewerState === "object"
-        ? item.viewerState
-        : {};
-
-    const qInstanceId =
-      String(item?.q_instance_id || item?.qInstanceId || "").trim() ||
-      `saved-${index}`;
-    const qKey =
-      String(question?.q_key || question?.qKey || item?.q_key || item?.qKey || "").trim() ||
-      `saved-q-${index}`;
-    const title =
-      String(question?.title || item?.title || item?.question_title || "—").trim() ||
-      "—";
-    const ownerUserId =
-      String(
-        owner?.user_id ||
-          owner?.userId ||
-          item?.owner_user_id ||
-          item?.ownerUserId ||
-          ""
-      ).trim() || null;
-    const ownerDisplayName =
-      String(
-        owner?.display_name ||
-          owner?.displayName ||
-          item?.owner_display_name ||
-          item?.ownerDisplayName ||
-          item?.display_name ||
-          readShareCode(owner, readShareCode(item, "")) ||
-          "ユーザー"
-      ).trim() || "ユーザー";
-    const savedAt = String(item?.saved_at || item?.savedAt || "").trim();
-    const createdAt =
-      String(
-        item?.created_at ||
-          item?.createdAt ||
-          item?.piece_created_at ||
-          item?.pieceCreatedAt ||
-          item?.generated_at ||
-          item?.generatedAt ||
-          savedAt ||
-          ""
-      ).trim() || null;
-    const body =
-      String(
-        item?.body ||
-          item?.piece_body ||
-          item?.pieceBody ||
-          item?.answer ||
-          item?.answer_body ||
-          ""
-      ).trim() || "";
-    const views = Number(metrics?.views ?? item?.views ?? 0) || 0;
-    const resonances = Number(metrics?.resonances ?? item?.resonances ?? 0) || 0;
-    const canResonate =
-      viewerState?.can_resonate === false || viewerState?.canResonate === false
-        ? false
-        : true;
-
-    return {
-      ...item,
-      qInstanceId,
-      q_instance_id: qInstanceId,
-      q_key: qKey,
-      title,
-      ownerDisplayName,
-      ownerUserId,
-      owner_user_id: ownerUserId,
-      savedAt,
-      saved_at: savedAt,
-      source_type:
-        String(item?.source_type || item?.sourceType || "emotion_generated").trim() ||
-        "emotion_generated",
-      owner: {
-        ...owner,
-        user_id: ownerUserId,
-        display_name: ownerDisplayName,
-      },
-      question: {
-        ...question,
-        q_key: qKey,
-        title,
-      },
-      body,
-      created_at: createdAt,
-      metrics: {
-        ...metrics,
-        views,
-        resonances,
-      },
-      viewer_state: {
-        ...viewerState,
-        is_resonated: true,
-        can_resonate: canResonate,
-      },
-    };
-  });
-}
-
-function normalizeTutorialPieceItems(items) {
-  const rows = Array.isArray(items) ? items : [];
-  return rows.map((item, index) => ({
-    q_instance_id:
-      String(item?.q_instance_id || "").trim() ||
-      `piece:tutorial-${index}`,
-    source_type: "emotion_generated",
-    owner: {
-      user_id:
-        String(item?.owner_user_id || item?.owner?.user_id || "").trim() ||
-        `tutorial-user-${index}`,
-      display_name:
-        String(
-          item?.display_name || item?.owner?.display_name || "ユーザー"
-        ).trim() || "ユーザー",
-      share_code: readShareCode(item, null) || readShareCode(item?.owner, null),
-    },
-    question: {
-      q_key:
-        String(item?.q_key || item?.question?.q_key || "").trim() ||
-        `tutorial-q-${index}`,
-      title:
-        String(item?.title || item?.question?.title || "ピース").trim() ||
-        "ピース",
-    },
-    body: String(item?.body || "").trim(),
-    created_at: String(item?.created_at || "").trim() || null,
-    metrics: {
-      views: Number(item?.views || item?.metrics?.views || 0) || 0,
-      resonances:
-        Number(item?.resonances || item?.metrics?.resonances || 0) || 0,
-    },
-    viewer_state: {
-      is_new:
-        item?.viewer_state?.is_new === true || item?.is_new === true,
-    },
-    is_tutorial: true,
-  }));
-}
-
-
-function resolvePieceQInstanceId(item) {
-  return String(item?.q_instance_id || item?.qInstanceId || "").trim();
-}
-
-function resolvePieceQKey(item) {
-  return String(
-    item?.question?.q_key || item?.question?.qKey || item?.q_key || item?.qKey || ""
-  ).trim() || null;
-}
-
-function resolvePieceOwnerUserId(item) {
-  return (
-    String(
-      item?.owner?.user_id ||
-        item?.owner?.userId ||
-        item?.owner_user_id ||
-        item?.ownerUserId ||
-        ""
-    ).trim() || null
-  );
-}
-
-function buildResonanceHistoryItemFromPiece(item, savedAtValue = null) {
-  const qInstanceId = resolvePieceQInstanceId(item);
-  if (!qInstanceId) return null;
-
-  const owner = item?.owner && typeof item.owner === "object" ? item.owner : {};
-  const question =
-    item?.question && typeof item.question === "object" ? item.question : {};
-  const metrics = item?.metrics && typeof item.metrics === "object" ? item.metrics : {};
-  const viewerState =
-    item?.viewer_state && typeof item.viewer_state === "object"
-      ? item.viewer_state
-      : item?.viewerState && typeof item.viewerState === "object"
-      ? item.viewerState
-      : {};
-  const title = String(question?.title || item?.title || "—").trim() || "—";
-  const qKey = resolvePieceQKey(item) || String(item?.q_key || "").trim() || "";
-  const ownerUserId = resolvePieceOwnerUserId(item);
-  const ownerDisplayName =
-    String(
-      owner?.display_name ||
-        owner?.displayName ||
-        item?.owner_display_name ||
-        item?.ownerDisplayName ||
-        item?.display_name ||
-        readShareCode(owner, readShareCode(item, "")) ||
-        "ユーザー"
-    ).trim() || "ユーザー";
-  const savedAt = String(savedAtValue || new Date().toISOString()).trim();
-  const createdAt =
-    String(item?.created_at || item?.createdAt || item?.generated_at || savedAt || "").trim() ||
-    null;
-  const body = String(item?.body || item?.piece_body || item?.answer || "").trim();
-  const views = Number(metrics?.views ?? item?.views ?? 0) || 0;
-  const resonances = Number(metrics?.resonances ?? item?.resonances ?? 0) || 0;
-
-  return {
-    ...item,
-    qInstanceId,
-    q_instance_id: qInstanceId,
-    q_key: qKey,
-    title,
-    ownerDisplayName,
-    ownerUserId,
-    owner_user_id: ownerUserId,
-    savedAt,
-    saved_at: savedAt,
-    source_type:
-      String(item?.source_type || item?.sourceType || "emotion_generated").trim() ||
-      "emotion_generated",
-    owner: {
-      ...owner,
-      user_id: ownerUserId,
-      display_name: ownerDisplayName,
-    },
-    question: {
-      ...question,
-      q_key: qKey,
-      title,
-    },
-    body,
-    created_at: createdAt,
-    metrics: {
-      ...metrics,
-      views,
-      resonances,
-    },
-    viewer_state: {
-      ...viewerState,
-      is_resonated: true,
-      can_resonate:
-        viewerState?.can_resonate === false || viewerState?.canResonate === false
-          ? false
-          : true,
-    },
-  };
-}
-
-function resolveHistorySavedAt(item) {
-  return String(
-    item?.saved_at ||
-      item?.savedAt ||
-      item?.resonated_at ||
-      item?.resonatedAt ||
-      item?.created_at ||
-      item?.createdAt ||
-      ""
-  ).trim();
-}
-
-function sortHistoryItems(items, order) {
-  const rows = Array.isArray(items) ? [...items] : [];
-  const oldestFirst = order === HISTORY_ORDER_OLDEST;
-  rows.sort((a, b) => {
-    const aKey = `${resolveHistorySavedAt(a)}:${resolvePieceQInstanceId(a)}`;
-    const bKey = `${resolveHistorySavedAt(b)}:${resolvePieceQInstanceId(b)}`;
-    if (aKey === bKey) return 0;
-    if (oldestFirst) return aKey < bKey ? -1 : 1;
-    return aKey > bKey ? -1 : 1;
-  });
-  return rows;
-}
-
-function normalizeDetailResonanceCount(value) {
-  return Number(value || 0) || 0;
-}
-
-function formatDateLabel(value) {
-  const raw = String(value || "").trim();
-  if (!raw) return "";
-  const d = new Date(raw);
-  if (Number.isNaN(d.getTime())) return "";
-  try {
-    return d.toLocaleString("ja-JP", {
-      month: "numeric",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } catch {
-    return "";
-  }
-}
-
-function hasRouteNameInState(state, routeName) {
-  if (!state) return false;
-
-  const routeNames = state?.routeNames;
-  if (Array.isArray(routeNames) && routeNames.includes(routeName)) return true;
-
-  const routes = state?.routes;
-  if (Array.isArray(routes)) {
-    for (const r of routes) {
-      if (r?.state && hasRouteNameInState(r.state, routeName)) return true;
-    }
-  }
-  return false;
-}
-
-function resolvePieceLibraryRouteName(navigation) {
-  const candidates = ["PieceLibrary", "PieceLibraryScreen"];
-
-  const root = navigation?.getRootState?.();
-  const local = navigation?.getState?.();
-
-  for (const name of candidates) {
-    if (hasRouteNameInState(root, name) || hasRouteNameInState(local, name)) {
-      return name;
-    }
-  }
-  return "PieceLibrary";
-}
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -1324,7 +864,7 @@ export default function NexusScreen({ navigation }) {
 
   const handleOpenTutorialFlow = useCallback(() => {
     void ensureTutorialPiecesSeed();
-    setTutorialStep(16);
+    setTutorialStep(17);
 
     try {
       navigation?.navigate?.("TutorialFlow", {
@@ -1520,11 +1060,11 @@ export default function NexusScreen({ navigation }) {
     if (!isNexusTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 13:
-        return pieceTabRef;
       case 14:
-        return selfPieceCardRef;
+        return pieceTabRef;
       case 15:
+        return selfPieceCardRef;
+      case 16:
         return followedPieceCardRef;
       default:
         return null;
@@ -1535,45 +1075,45 @@ export default function NexusScreen({ navigation }) {
     if (!isNexusTutorialStep) return null;
 
     switch (tutorialStep) {
-      case 12:
+      case 13:
         return {
-          step: 12,
+          step: 13,
           mode: "info",
           title: "ピース画面",
           message:
             "ピース画面の説明をします。\n\n自分やフォローしているユーザーのピースや感情通知を閲覧することができます。",
           nextLabel: "投稿タブへ",
-          onNext: () => setTutorialStep(13),
+          onNext: () => setTutorialStep(14),
           disableSpotlight: true,
           dimOpacity: 0,
-        };
-      case 13:
-        return {
-          step: 13,
-          mode: "info",
-          title: "投稿タブ",
-          message:
-            "投稿タブでは、自分やフォローしているユーザーのピースを一覧で確認できます。",
-          nextLabel: "自分のピースへ",
-          onNext: () => setTutorialStep(14),
         };
       case 14:
         return {
           step: 14,
           mode: "info",
-          title: "自分のピース",
+          title: "投稿タブ",
           message:
-            "先ほどの入力から生成した自分のピースです。\n\n問いと答えとして、読みやすく整えています。",
-          nextLabel: "Userのピースへ",
+            "投稿タブでは、自分やフォローしているユーザーのピースを一覧で確認できます。",
+          nextLabel: "自分のピースへ",
           onNext: () => setTutorialStep(15),
         };
       case 15:
         return {
           step: 15,
           mode: "info",
+          title: "自分のピース",
+          message:
+            "先ほどの入力から生成した自分のピースです。\n\n問いと答えとして、読みやすく整えています。",
+          nextLabel: "Userのピースへ",
+          onNext: () => setTutorialStep(16),
+        };
+      case 16:
+        return {
+          step: 16,
+          mode: "info",
           title: "フォロー中ユーザーのピース",
           message:
-            "Userのピースも同じ投稿タブで確認できます。\n\n次は、感情入力からつながる3つの体験を表で見ます。",
+            "フォロー中ユーザーのピースも同じように閲覧できます。\n\n次は、感情入力からつながる3つの体験を表で見ます。",
           nextLabel: "つながり表を見る",
           onNext: handleOpenTutorialFlow,
           cardPlacement: "top",
@@ -1650,350 +1190,69 @@ export default function NexusScreen({ navigation }) {
     syncTutorialTargetRect,
   ]);
 
-  const renderPieceControls = () => {
-    if (!showPieceControls) return null;
-
-    return (
-      <View style={styles.pieceControls}>
-        <CocolonPressable
-          style={[
-            styles.ownerFilterButton,
-            ownerOptionsLoading && styles.ownerFilterButtonDisabled,
-          ]}
-          onPress={() => setOwnerPickerVisible(true)}
-          disabled={ownerOptionsLoading}
-          accessibilityLabel="表示ユーザーを選択する"
-        >
-          <View style={styles.ownerFilterButtonContent}>
-            <View style={styles.ownerFilterSideSlot} />
-            <Text style={styles.ownerFilterButtonText} numberOfLines={1}>
-              {selectedOwnerLabel}
-            </Text>
-            <View style={styles.ownerFilterSideSlot}>
-              {ownerOptionsLoading ? (
-                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
-              ) : (
-                <Ionicons
-                  name="chevron-down-outline"
-                  size={16}
-                  color={colors.TEXT_SUBTLE}
-                />
-              )}
-            </View>
-          </View>
-        </CocolonPressable>
-
-        <View style={styles.pieceSortRow}>
-          <CocolonPressable
-            style={[
-              styles.pieceSortButton,
-              pieceOrder === PIECE_ORDER_LATEST && styles.pieceSortButtonActive,
-            ]}
-            onPress={() => handleSetPieceOrder(PIECE_ORDER_LATEST)}
-            accessibilityLabel="新しい順で表示する"
-          >
-            <Text
-              style={[
-                styles.pieceSortButtonText,
-                pieceOrder === PIECE_ORDER_LATEST && styles.pieceSortButtonTextActive,
-              ]}
-            >
-              新しい順
-            </Text>
-          </CocolonPressable>
-          <CocolonPressable
-            style={[
-              styles.pieceSortButton,
-              styles.pieceSortButtonSpacer,
-              pieceOrder === PIECE_ORDER_OLDEST && styles.pieceSortButtonActive,
-            ]}
-            onPress={() => handleSetPieceOrder(PIECE_ORDER_OLDEST)}
-            accessibilityLabel="古い順で表示する"
-          >
-            <Text
-              style={[
-                styles.pieceSortButtonText,
-                pieceOrder === PIECE_ORDER_OLDEST && styles.pieceSortButtonTextActive,
-              ]}
-            >
-              古い順
-            </Text>
-          </CocolonPressable>
-        </View>
-      </View>
-    );
-  };
-
-  const renderPieceTab = () => {
-    if (isTutorialMode) {
-      if (!tutorialPieceItems.length) {
-        return (
-          <Text style={styles.emptyText}>
-            表示できるピースがまだありません。
-          </Text>
-        );
-      }
-      return tutorialPieceItems.map((item, index) => {
-        const tutorialKind = String(item?.tutorial_kind || item?.tutorialKind || "");
-        const ownerName = String(
-          item?.owner?.display_name || item?.display_name || ""
-        ).trim();
-        const targetRef =
-          tutorialKind === "self" || ownerName === "自分"
-            ? selfPieceCardRef
-            : tutorialKind === "mock" || ownerName === "User"
-            ? followedPieceCardRef
-            : index === 0
-            ? selfPieceCardRef
-            : index === 1
-            ? followedPieceCardRef
-            : null;
-
-        return (
-          <View
-            key={String(item?.q_instance_id || `tutorial-piece-${index}`)}
-            ref={targetRef}
-            collapsable={false}
-          >
-            <NexusPieceCard
-              item={item}
-              onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
-            />
-          </View>
-        );
-      });
-    }
-
-    let content = null;
-    if (pieceState.loading) {
-      content = <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
-    } else if (pieceState.error) {
-      content = <Text style={styles.errorText}>{pieceState.error}</Text>;
-    } else if (!Array.isArray(pieceState.items) || pieceState.items.length <= 0) {
-      content = <Text style={styles.emptyText}>{pieceEmptyText}</Text>;
-    } else {
-      content = pieceState.items.map((item) => {
-        const qInstanceId = resolvePieceQInstanceId(item);
-        const ownerUserId = resolvePieceOwnerUserId(item);
-        const canDeletePiece =
-          !!qInstanceId && !!viewerUserId && ownerUserId === viewerUserId;
-        return (
-          <NexusPieceCard
-            key={String(qInstanceId || Math.random())}
-            item={item}
-            onPressOwner={() => handleOpenOwner(item?.owner?.user_id)}
-            canResonate={canResonatePiece(item)}
-            resonanceSubmitting={!!resonanceSubmittingIds[qInstanceId]}
-            onPressResonance={() => handlePressPieceResonance(item)}
-            canDelete={canDeletePiece}
-            deleteSubmitting={!!pieceDeleteSubmittingIds[qInstanceId]}
-            onPressDelete={() => handlePressPieceDelete(item)}
-          />
-        );
-      });
-    }
-
-    return (
-      <View>
-        {renderPieceControls()}
-        {content}
-      </View>
-    );
-  };
-
-  const renderEmotionLogTab = () => {
-    if (emotionLogState.loading) {
-      return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
-    }
-    if (emotionLogState.error) {
-      return <Text style={styles.errorText}>{emotionLogState.error}</Text>;
-    }
-    if (!emotionLogState.items.length) {
-      return <Text style={styles.emptyText}>感情通知はまだありません。</Text>;
-    }
-    return (
-      <View style={styles.emotionLogCard}>
-        {emotionLogState.items.map((row, rowIndex) => (
-          <React.Fragment key={row.id}>
-            <View style={styles.emotionLogRow}>
-              <View style={styles.emotionLogHeaderRow}>
-                <Text style={styles.emotionLogName}>{row.ownerName}</Text>
-                <Text style={styles.emotionLogTime}>{row.timeLabel}</Text>
-              </View>
-
-              <View style={styles.emotionLogBadgeArea}>
-                {(row.items || []).length === 0 ? (
-                  <Text style={styles.emotionLogNoEmotion}>
-                    まだ感情が選択されていません
-                  </Text>
-                ) : (
-                  <View style={styles.emotionLogBadgeRow}>
-                    {(row.items || []).map((item, itemIndex) => {
-                      const type = String(item?.type || "").trim() || "感情";
-                      const strengthKey = String(item?.strength || "").trim();
-                      const labelStrength = STRENGTH_LABEL[strengthKey] || "";
-                      const tint = emotionTint(type, ui?.text?.description ?? colors.TEXT_SUBTLE);
-                      return (
-                        <View
-                          key={`${type}-${strengthKey}-${itemIndex}`}
-                          style={[
-                            styles.emotionLogBadge,
-                            { backgroundColor: tint.bg },
-                          ]}
-                        >
-                          <Text
-                            style={[
-                              styles.emotionLogBadgeText,
-                              { color: tint.text },
-                            ]}
-                          >
-                            {type}
-                            {labelStrength ? `（${labelStrength}）` : ""}
-                          </Text>
-                        </View>
-                      );
-                    })}
-                  </View>
-                )}
-              </View>
-            </View>
-
-            {rowIndex < emotionLogState.items.length - 1 ? (
-              <View style={styles.emotionLogSeparator} />
-            ) : null}
-          </React.Fragment>
-        ))}
-      </View>
-    );
-  };
-
-  const renderRecommendTab = () => {
-    if (recommendState.loading) {
-      return <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
-    }
-    if (recommendState.error) {
-      return <Text style={styles.errorText}>{recommendState.error}</Text>;
-    }
-    return (
-      <View>
-        <Text style={styles.subsectionTitle}>おすすめユーザー</Text>
-        {recommendState.users.length <= 0 ? (
-          <Text style={styles.emptyText}>おすすめユーザーはまだありません。</Text>
-        ) : (
-          recommendState.users.map((user) => (
-            <CocolonPressable
-              key={user.id}
-              style={styles.simpleCard}
-              onPress={() => handleOpenOwner(user.id)}
-            >
-              <View style={styles.simpleCardHeader}>
-                <Text style={styles.simpleCardTitle}>{user.displayName}</Text>
-                {user.shareCode ? (
-                  <Text style={styles.simpleCardMeta}>{user.shareCode}</Text>
-                ) : null}
-              </View>
-            </CocolonPressable>
-          ))
-        )}
-      </View>
-    );
-  };
-
-  const renderHistoryControls = () => {
-    if (isTutorialMode) return null;
-
-    return (
-      <View style={styles.historyControls}>
-        <View style={styles.historySortRow}>
-          <CocolonPressable
-            style={[
-              styles.historySortButton,
-              historyOrder === HISTORY_ORDER_LATEST && styles.historySortButtonActive,
-            ]}
-            onPress={() => handleSetHistoryOrder(HISTORY_ORDER_LATEST)}
-            accessibilityLabel="履歴を新しい順で表示する"
-          >
-            <Text
-              style={[
-                styles.historySortButtonText,
-                historyOrder === HISTORY_ORDER_LATEST &&
-                  styles.historySortButtonTextActive,
-              ]}
-            >
-              新しい順
-            </Text>
-          </CocolonPressable>
-          <CocolonPressable
-            style={[
-              styles.historySortButton,
-              styles.historySortButtonSpacer,
-              historyOrder === HISTORY_ORDER_OLDEST && styles.historySortButtonActive,
-            ]}
-            onPress={() => handleSetHistoryOrder(HISTORY_ORDER_OLDEST)}
-            accessibilityLabel="履歴を古い順で表示する"
-          >
-            <Text
-              style={[
-                styles.historySortButtonText,
-                historyOrder === HISTORY_ORDER_OLDEST &&
-                  styles.historySortButtonTextActive,
-              ]}
-            >
-              古い順
-            </Text>
-          </CocolonPressable>
-        </View>
-      </View>
-    );
-  };
-
-  const renderHistoryTab = () => {
-    const historyOrderLoaded =
-      historyState.order === historyOrder &&
-      !!historyState.loadedModes?.[historyLoadedModeKey];
-    let content = null;
-    if (!historyOrderLoaded) {
-      content = <ActivityIndicator style={styles.loader} color={colors.TITLE_GOLD} />;
-    } else if (historyState.error && !historyState.resonances.length) {
-      content = <Text style={styles.errorText}>{historyState.error}</Text>;
-    } else if (!historyState.resonances.length) {
-      content = <Text style={styles.emptyText}>共鳴したピースはまだありません。</Text>;
-    } else {
-      content = historyState.resonances.map((item, index) => {
-        const qInstanceId = resolvePieceQInstanceId(item) || `history-${index}`;
-        const ownerUserId = resolvePieceOwnerUserId(item);
-        return (
-          <NexusPieceCard
-            key={String(qInstanceId)}
-            item={item}
-            onPressOwner={() => handleOpenOwner(ownerUserId)}
-            canResonate={canResonatePiece(item)}
-            resonanceSubmitting={!!resonanceSubmittingIds[qInstanceId]}
-            onPressResonance={() => handlePressPieceResonance(item)}
-          />
-        );
-      });
-    }
-
-    return (
-      <View>
-        {renderHistoryControls()}
-        {content}
-      </View>
-    );
-  };
-
   const renderActiveTab = () => {
     switch (activeTab) {
       case "emotion_log":
-        return renderEmotionLogTab();
+        return (
+          <NexusEmotionLogSection
+            emotionLogState={emotionLogState}
+            styles={styles}
+            colors={colors}
+            ui={ui}
+          />
+        );
       case "recommend":
-        return renderRecommendTab();
+        return (
+          <NexusRecommendSection
+            recommendState={recommendState}
+            styles={styles}
+            colors={colors}
+            handleOpenOwner={handleOpenOwner}
+          />
+        );
       case "history":
-        return renderHistoryTab();
+        return (
+          <NexusHistorySection
+            isTutorialMode={isTutorialMode}
+            historyState={historyState}
+            historyOrder={historyOrder}
+            historyLoadedModeKey={historyLoadedModeKey}
+            styles={styles}
+            colors={colors}
+            handleSetHistoryOrder={handleSetHistoryOrder}
+            handleOpenOwner={handleOpenOwner}
+            canResonatePiece={canResonatePiece}
+            resonanceSubmittingIds={resonanceSubmittingIds}
+            handlePressPieceResonance={handlePressPieceResonance}
+          />
+        );
       case "piece":
       default:
-        return renderPieceTab();
+        return (
+          <NexusPieceFeedSection
+            isTutorialMode={isTutorialMode}
+            tutorialPieceItems={tutorialPieceItems}
+            selfPieceCardRef={selfPieceCardRef}
+            followedPieceCardRef={followedPieceCardRef}
+            handleOpenOwner={handleOpenOwner}
+            showPieceControls={showPieceControls}
+            styles={styles}
+            colors={colors}
+            ownerOptionsLoading={ownerOptionsLoading}
+            selectedOwnerLabel={selectedOwnerLabel}
+            setOwnerPickerVisible={setOwnerPickerVisible}
+            pieceOrder={pieceOrder}
+            handleSetPieceOrder={handleSetPieceOrder}
+            pieceState={pieceState}
+            pieceEmptyText={pieceEmptyText}
+            viewerUserId={viewerUserId}
+            canResonatePiece={canResonatePiece}
+            resonanceSubmittingIds={resonanceSubmittingIds}
+            handlePressPieceResonance={handlePressPieceResonance}
+            pieceDeleteSubmittingIds={pieceDeleteSubmittingIds}
+            handlePressPieceDelete={handlePressPieceDelete}
+          />
+        );
     }
   };
 
@@ -2013,229 +1272,55 @@ export default function NexusScreen({ navigation }) {
             e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
         }}
       >
-        <View style={styles.panelHeader}>
-          <View ref={titleRef} collapsable={false} style={styles.panelTitleRow}>
-            <Text style={styles.panelTitle}>ピース</Text>
-            <CocolonPressable
-              style={styles.guideTitleButton}
-              onPress={handlePressGuide}
-              accessibilityLabel="ピースのガイドを開く"
-            >
-              <Ionicons
-                name="help-circle-outline"
-                size={20}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
-          </View>
-          <View style={styles.panelHeaderActions}>
-            {!isTutorialMode ? (
-              <CocolonPressable
-                style={[
-                  styles.refreshButton,
-                  styles.followListButton,
-                  !viewerUserId && styles.headerButtonDisabled,
-                ]}
-                onPress={handleOpenFollowList}
-                disabled={!viewerUserId}
-                accessibilityLabel="自分のフォローリストを開く"
-              >
-                <Ionicons
-                  name="people-outline"
-                  size={18}
-                  color={colors.TEXT_ON_LIGHT}
-                />
-              </CocolonPressable>
-            ) : null}
-            <CocolonPressable
-              style={styles.refreshButton}
-              onPress={() => {
-                void refreshNexusUnreadState();
-                void loadRanking();
-                void loadOwnerOptions();
-                if (activeTab === "piece") void loadPieces();
-                if (activeTab === "emotion_log") void loadEmotionLog();
-                if (activeTab === "recommend") void loadRecommend();
-                if (activeTab === "history") void loadHistory();
-              }}
-              accessibilityLabel="ピースを再読み込みする"
-            >
-              <Ionicons
-                name="refresh-outline"
-                size={18}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
-          </View>
-        </View>
+        <NexusHeader
+          titleRef={titleRef}
+          styles={styles}
+          colors={colors}
+          isTutorialMode={isTutorialMode}
+          viewerUserId={viewerUserId}
+          handleOpenFollowList={handleOpenFollowList}
+          handlePressGuide={handlePressGuide}
+          onRefresh={() => {
+            void refreshNexusUnreadState();
+            void loadRanking();
+            void loadOwnerOptions();
+            if (activeTab === "piece") void loadPieces();
+            if (activeTab === "emotion_log") void loadEmotionLog();
+            if (activeTab === "recommend") void loadRecommend();
+            if (activeTab === "history") void loadHistory();
+          }}
+        />
 
 
-        {!isTutorialMode ? (
-          <View style={styles.todayOverallEmotionSummary}>
-            <View style={styles.todayOverallEmotionHeader}>
-              <Ionicons
-                name="stats-chart-outline"
-                size={14}
-                color={colors.TITLE_GOLD}
-                style={styles.todayOverallEmotionIcon}
-              />
-              <Text style={styles.todayOverallEmotionTitle}>今日の全体感情</Text>
-            </View>
+        <NexusTodayEmotionSummary
+          visible={!isTutorialMode}
+          rankingState={rankingState}
+          styles={styles}
+          colors={colors}
+        />
 
-            {rankingState.loading ? (
-              <Text style={styles.todayOverallEmotionPlaceholder}>読み込み中…</Text>
-            ) : rankingState.items.length <= 0 ? (
-              <Text style={styles.todayOverallEmotionPlaceholder}>
-                今日はまだ表示できる感情がありません。
-              </Text>
-            ) : (
-              <Text style={styles.todayOverallEmotionText}>
-                {rankingState.items
-                  .slice(0, 3)
-                  .map((item) => {
-                    const label =
-                      String(item?.label || "—").trim() || "—";
-                    const value = Number(item?.value);
-                    return `${label} ${Number.isFinite(value) ? value : "—"}`;
-                  })
-                  .join("　")}
-              </Text>
-            )}
-          </View>
-        ) : null}
-
-        <View style={styles.tabBar}>
-          {TABS.map((tab) => {
-            const isActive = activeTab === tab.key;
-            const content = (
-              <CocolonPressable
-                style={styles.tabItem}
-                onPress={() => setActiveTab(tab.key)}
-              >
-                <View
-                  style={[
-                    styles.tabLabelWrap,
-                    isActive && styles.tabLabelWrapActive,
-                  ]}
-                >
-                  <View style={styles.tabLabelRow}>
-                    <Text
-                      style={[
-                        styles.tabLabelText,
-                        isActive && styles.tabLabelTextActive,
-                      ]}
-                    >
-                      {tab.label}
-                    </Text>
-                    <ScreenUnreadBadge
-                      visible={
-                        (tab.key === "piece" && pieceTabUnread) ||
-                        (tab.key === "emotion_log" && emotionLogTabUnread)
-                      }
-                      style={styles.tabUnreadBadge}
-                    />
-                  </View>
-                </View>
-              </CocolonPressable>
-            );
-
-            if (tab.key === "piece") {
-              return (
-                <View
-                  key={tab.key}
-                  ref={pieceTabRef}
-                  collapsable={false}
-                  style={styles.tabItemWrap}
-                >
-                  {content}
-                </View>
-              );
-            }
-
-            return (
-              <View key={tab.key} style={styles.tabItemWrap}>
-                {content}
-              </View>
-            );
-          })}
-        </View>
+        <NexusTabBar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          pieceTabRef={pieceTabRef}
+          pieceTabUnread={pieceTabUnread}
+          emotionLogTabUnread={emotionLogTabUnread}
+          styles={styles}
+        />
 
         <View style={styles.tabContent}>{renderActiveTab()}</View>
       </ScrollView>
 
-      <Modal
+      <NexusOwnerPickerModal
         visible={ownerPickerVisible && showPieceControls}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setOwnerPickerVisible(false)}
-      >
-        <View style={styles.pickerBackdrop}>
-          <View style={styles.pickerCard}>
-            <View style={styles.pickerHeader}>
-              <Text style={styles.pickerTitle}>表示ユーザー</Text>
-            </View>
-
-            <ScrollView
-              style={styles.pickerScroll}
-              contentContainerStyle={styles.pickerScrollContent}
-            >
-              {ownerPickerOptions.map((option) => {
-                const isActive =
-                  (option.mode === OWNER_FILTER_ALL &&
-                    ownerFilterMode === OWNER_FILTER_ALL) ||
-                  (option.mode === OWNER_FILTER_SELF &&
-                    ownerFilterMode === OWNER_FILTER_SELF) ||
-                  (option.mode === OWNER_FILTER_USER &&
-                    ownerFilterMode === OWNER_FILTER_USER &&
-                    String(option.userId || "").trim() ===
-                      String(ownerFilterUserId || "").trim());
-                return (
-                  <CocolonPressable
-                    key={option.key}
-                    style={[styles.pickerOption, isActive && styles.pickerOptionActive]}
-                    onPress={() => handleSelectOwnerOption(option)}
-                    accessibilityLabel={`${option.label}のピースを表示する`}
-                  >
-                    <View style={styles.pickerOptionTextWrap}>
-                      <Text
-                        style={[
-                          styles.pickerOptionText,
-                          isActive && styles.pickerOptionTextActive,
-                        ]}
-                      >
-                        {option.label}
-                      </Text>
-                      {option.meta ? (
-                        <Text
-                          style={[
-                            styles.pickerOptionMeta,
-                            isActive && styles.pickerOptionMetaActive,
-                          ]}
-                        >
-                          {option.meta}
-                        </Text>
-                      ) : null}
-                    </View>
-                    {isActive ? (
-                      <Ionicons name="checkmark" size={18} color={colors.TITLE_GOLD} />
-                    ) : null}
-                  </CocolonPressable>
-                );
-              })}
-            </ScrollView>
-
-            <View style={styles.pickerActionRow}>
-              <CocolonButton
-                variant="secondary"
-                onPress={() => setOwnerPickerVisible(false)}
-                accessibilityLabel="表示ユーザー選択を閉じる"
-              >
-                閉じる
-              </CocolonButton>
-            </View>
-          </View>
-        </View>
-      </Modal>
+        onClose={() => setOwnerPickerVisible(false)}
+        styles={styles}
+        colors={colors}
+        ownerPickerOptions={ownerPickerOptions}
+        ownerFilterMode={ownerFilterMode}
+        ownerFilterUserId={ownerFilterUserId}
+        handleSelectOwnerOption={handleSelectOwnerOption}
+      />
 
       {tutorialOverlayConfig ? (
         <TutorialOverlay
@@ -2357,34 +1442,6 @@ function createStyles(COLORS, ui) {
           lineHeight: 18,
           color: COLORS.TEXT_ON_LIGHT,
         },
-        tutorialEntryCard: {
-          borderRadius: 18,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 14,
-          marginBottom: 14,
-          shadowColor: "#000",
-          shadowOpacity: 0.08,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 3,
-        },
-        tutorialEntryTitle: {
-          fontSize: 13,
-          fontWeight: "900",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
-        tutorialEntryBody: {
-          marginTop: 8,
-          fontSize: 12,
-          lineHeight: 18,
-          color: COLORS.TEXT_ON_LIGHT,
-        },
-        tutorialEntryButtonWrap: {
-          marginTop: 12,
-        },
         tabBar: {
           flexDirection: "row",
           alignItems: "center",
@@ -2433,14 +1490,6 @@ function createStyles(COLORS, ui) {
         },
         pieceControls: {
           marginBottom: 14,
-        },
-        controlLabel: {
-          fontSize: 11,
-          lineHeight: 16,
-          fontWeight: "900",
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-          letterSpacing: 0.3,
-          marginBottom: 6,
         },
         ownerFilterButton: {
           borderRadius: 14,
@@ -2621,24 +1670,11 @@ function createStyles(COLORS, ui) {
           fontSize: 11,
           color: text.description ?? COLORS.TEXT_SUBTLE,
         },
-        simpleCardBody: {
-          fontSize: 13,
-          lineHeight: 20,
-          color: COLORS.TEXT_ON_LIGHT,
-        },
         historyControls: {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "flex-end",
           marginBottom: 12,
-        },
-        historyControlLabel: {
-          fontSize: 11,
-          lineHeight: 16,
-          fontWeight: "900",
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-          letterSpacing: 0.3,
-          marginRight: 8,
         },
         historySortRow: {
           flexDirection: "row",

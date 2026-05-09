@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 125
-  mashos-api: 336
+  Cocolon: 200
+  mashos-api: 342
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 461
-  included_files_cocolon: 125
-  included_files_mashos_api: 336
+  included_files_total: 542
+  included_files_cocolon: 200
+  included_files_mashos_api: 342
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `461 files`
+- latest full coverage listed in body: `465 files`
   - Cocolon: `125`
-  - mashos-api: `336`
+  - mashos-api: `340`
 
 # 4. 読み方
 
@@ -614,7 +614,7 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 # 2026-05-05 差分追記: EmlisAI / Piece current national flow
 
-現行基準は `Cocolon(132).zip` / `mashos-api_2(23).zip`、coverage対象は `461 files` です。
+現行基準は `Cocolon(138).zip` / `mashos-api_2(26).zip`、coverage対象は `465 files` です。
 
 ## EmlisAI構造
 
@@ -648,7 +648,7 @@ EmlisAI / Piece ともに、例文はruntime条件ではなく回帰テストと
 
 # 2026-05-07 差分追記: value observation / current full coverage補正
 
-基準zipは `Cocolon(132).zip` / `mashos-api_2(23).zip` です。現行coverageは `Cocolon=125` / `mashos-api=336` / `total=461` です。旧本文は履歴として保持し、この差分追記を現行基準の補正として読む。
+基準zipは `Cocolon(138).zip` / `mashos-api_2(26).zip` です。現行coverageは `Cocolon=125` / `mashos-api=340` / `total=465` です。旧本文は履歴として保持し、この差分追記を現行基準の補正として読む。
 
 ## 現行資料へ追加するファイル
 
@@ -691,3 +691,194 @@ EmlisAI / Piece ともに、例文はruntime条件ではなく回帰テストと
 | `ideal_capacity_switch_gap` | 理想手順と処理容量のズレ | 計画不能ではなく、全体整理から即時処理への切替として自己構造分析へ渡す |
 
 作業時は、これらのsignalを例文専用条件にしない。Mash様の文を固定返答として保存せず、現在入力から抽出したsource-groundedな観測信号として扱う。
+
+
+# 2026-05-09 差分追記: latest国家システムcoverage補正とpersonal_followup flow
+
+最新基準面は `Cocolon_前提資料(48).zip` / `Cocolon(138).zip` / `mashos-api_2(26).zip` です。最新実ファイルは `Cocolon` 125件、`mashos-api` 340件、合計465件です。02系では、入力保存、snapshot、worker、publish/read、contract、安全境界の観点から、本文coverageに未記載だったpathを下へ補正追記します。
+
+## 02系coverage補正path
+
+| file | 補正内容 |
+|---|---|
+| `Cocolon/app.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/package-lock.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/package.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/screens/TutorialFlowScreen.js` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/tutorial/generated/tutorialFixtures.generated.json` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `Cocolon/tutorial/tutorialScenarioData.js` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_response_composition_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_user_word_anchor_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_candidate_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_question_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/services/ai_inference/today_question_personal_templates.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_composition_transition_guard.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_grammar_guard.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_emlis_ai_whole_input_meaning_arc_service.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/ai/tests/test_subscription_projection.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+| `mashos-api/scripts/generate_tutorial_fixtures.py` | 02系coverage補正。国家システム資料の本文coverageへ追記 |
+
+
+## 今日の問い personal_followup 国家システムflow
+
+```text
+Home current取得
+  -> today_question_store が回答済みslotを確認
+  -> Premium かつ personal_followup enabled かつ static fallback日でないか確認
+  -> emotion入力からcandidate抽出
+  -> source_anchorが元入力に実在する場合だけ personal question を作成/取得
+  -> GET /today-question/current が question_origin=personal_followup を返す
+  -> RNが既存Cardで表示し、submit時に personal_question_id / source_anchor_hash を送る
+  -> today_question_answersへorigin/source_anchor snapshot込みで保存
+  -> personal question status=answered
+  -> self_structure snapshot refresh enqueue
+  -> astor_material_snapshots / analysis_engine_adapter がself-only素材として分析へ渡す
+```
+
+## static fallback / sequence境界
+
+- `static_role_probe` は既存100問テンプレです。
+- `personal_followup` は追加層です。personal回答では `today_question_user_progress` のstatic sequenceを進めません。
+- `TODAY_QUESTION_PERSONAL_STATIC_FALLBACK_EVERY_N_DAYS` により、Premiumでも定期的にstaticへ戻り、role evidenceの偏りを防ぎます。
+- 候補なし、低信頼、anchor検証NG、安全除外時はstaticへfallbackします。
+
+## 通知 / public面境界
+
+- 今日の問いpersonal通知は、push本文に原文アンカーを出しません。
+- `source_anchor` と今日の問い回答はself-onlyです。Piece公開、フォロー中ユーザー表示、公開feedへ自動転用しません。
+- `account_delete_service.py` は `today_question_personal_candidates` / `today_question_personal_questions` も削除対象に含めます。
+
+
+# 2026-05-09 実ファイル再照合: current full coverage補正
+
+`Cocolon(138).zip` / `mashos-api_2(26).zip` の実ファイル一覧と本文coverageを再照合した結果、下記pathをcurrent coverageへ補正追記する。
+既存本文は履歴として保持し、この差分追記を現行基準の補正として読む。
+
+| path | 補正理由 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_current_input_grounding_guard.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emlis_ai_input_meaning_block_service.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emlis_ai_quality_gate_pre_return.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_final_review_service.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emlis_ai_response_composition_service.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emotion_piece_generation_long_input_core.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+| `mashos-api/ai/tests/test_emotion_piece_generation_self_and_others_happiness.py` | 02系coverage補正。EmlisAI品質Gate/意味保持/構成/groundingとPiece長文testを国家システム判断対象へ追加 |
+
+# 2026-05-09 差分追記: RN screen split / client event monitoring 国家システム補正
+
+最新基準面は `Cocolon_前提資料(51).zip` / `Cocolon_12(3).zip` / `mashos-api_4(10).zip` です。実ファイルは `Cocolon` 200件、`mashos-api` 342件、合計542件です。
+
+RN巨大画面分割は、国家システムの public API / DB write path / queue / worker / read-side を変更しない。entry shellからsubmoduleへ責務を分けたため、国家システム判断では次を読む。
+
+| flow | current owner | 国家システム上の読み方 |
+|---|---|---|
+| App startup | `Cocolon/App.js` / `Cocolon/navigation/RootNavigator.js` / `Cocolon/runtime/AppRuntimeBootstrapGate.js` | provider、auth gate、IAP observer、push token sync、bootstrap refreshのownerを分けて読む |
+| Home input | `Cocolon/screens/InputScreen.js` / `Cocolon/screens/input/*` / `Cocolon/features/home/*` | 入力保存APIやToday Question送信APIは変えない。画面内state / modal / UI sectionのみ分離 |
+| Analysis read | `Cocolon/screens/AnalysisScreen.js` / `Cocolon/screens/analysis/*` | report取得・既読・self-structure遷移のRN側ownerを分けて読む。backend read routeは変えない |
+| Piece read / publish surface | `Cocolon/screens/PieceScreen.js` / `Cocolon/screens/NexusScreen.js` / `Cocolon/screens/piece/*` / `Cocolon/screens/nexus/*` | Piece home / Nexus surfaceを分割。EmotionPiece preview/publish API、Nexus API routeは変えない |
+| Account surface | `Cocolon/screens/AccountScreen.js` / `Cocolon/screens/account/*` | Account profile / follow / visibility / subscriptionのRN側ownerを分けて読む。account deleteは別owner |
+| Client observability | `Cocolon/lib/monitoring.js` -> `mashos-api/ai/services/ai_inference/api_client_events.py` | runtime failureをbest-effortで送る追加flow。product state / DB write path / user data mutationを行わない |
+
+## 02系coverage補正path
+
+| path | 補正内容 |
+|---|---|
+| Cocolon/components/GlobalFrameLayout.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/lib/monitoring.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/AnalysisStackNavigator.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/InputStackNavigator.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/MainTabs.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/PieceStackNavigator.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/RankingStackNavigator.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/RootNavigator.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/SettingsStackNavigator.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/linkingRuntime.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/navigationConstants.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/navigationRef.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/navigation/notificationRouting.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/runtime/AppRuntimeBlockingScreen.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/runtime/AppRuntimeBootstrapGate.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/AccountIdSearchSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/AccountNameEditModal.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/AccountProfileSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/AccountStatusSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/AccountVisibilitySection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/accountModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/useAccountFollowState.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/useAccountIdSearch.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/useAccountProfile.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/useAccountSubscription.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/account/useAccountVisibility.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysis/analysisRouteModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysis/useAnalysisReportActions.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysis/useAnalysisRouteState.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysis/useAnalysisSelfStructureActions.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysis/useAnalysisTutorialOverlay.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysis/useAnalysisUnreadBadges.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/AnalysisReportCharts.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/AnalysisReportUpgradeCard.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/analysisReportAccessPolicy.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/analysisReportConstants.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/analysisReportFormatters.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/analysisReportHtmlExport.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/analysisReport/analysisReportNormalize.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputActionArea.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputCategorySection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputEmotionSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputFeedbackReplyModal.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputMemoSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputPiecePreviewController.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputStartupModals.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/InputToastOverlay.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/inputDraftModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/inputFeedbackModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/inputLayoutModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/inputNoticeModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/inputOptions.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/useInputDraftPersistence.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/useInputFeedbackModal.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/input/useInputKeyboardAwareMemo.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusEmotionLogSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusHeader.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusHistorySection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusOwnerPickerModal.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusPieceFeedSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusRecommendSection.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusTabBar.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/NexusTodayEmotionSummary.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/nexusConstants.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/nexusHistoryModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/nexusNormalize.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/nexus/nexusRouteModel.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/PieceHomeActionCard.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/PieceHomeMainActions.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/PieceRecommendModal.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/PieceTutorialCreateModal.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/usePieceHomeGlobalSummary.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/usePieceHomeTutorial.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/screens/piece/usePieceRecommendUsers.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| Cocolon/tests/rn-screen-contracts.test.js | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| mashos-api/ai/services/ai_inference/api_client_events.py | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| mashos-api/ai/tests/contract/test_client_events_contract.py | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| mashos-api/ai/docs/PUBLIC_API_REGISTRY.md | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| mashos-api/ai/services/ai_inference/api_contract_registry.py | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+| mashos-api/ai/services/ai_inference/app.py | 02系coverage補正。RN巨大画面分割または本番運用監視により国家システム判断対象へ追加 |
+
+# 2026-05-09 差分追記: RN分割後の国家システム境界 / 本番運用監視
+
+照合対象は `Cocolon_12(3).zip` / `mashos-api_4(10).zip` です。Cocolon側は 200件、mashos-api側は 342件、合計542件をcurrent coverageとして扱います。
+
+RN巨大画面分割は、`Input -> Save -> Dispatch -> Snapshot / Queue / Worker -> Publish / Access Policy -> Read API / Startup -> RN display` の契約を変更しません。entry shellとsubdirectoryの関係は、RN display側の責務分割として読む。
+
+本番運用監視は、通常の国家システムflowに追加されたops side-channelです。
+
+`RN client error/API failure -> Cocolon/lib/monitoring.js -> POST /ops/client-events -> api_client_events.py -> privacy-safe structured log / alert log`
+
+このflowはユーザーデータ保存・DB write path・public content publishとは別境界であり、monitoring payloadはtoken / Authorization / email / UUID / 長いtoken風文字列をredactする。

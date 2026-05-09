@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_file_name_mixing_storage
 title: "Cocolon ファイル名変更保留台帳"
-revision_date: "2026-05-07"
+revision_date: "2026-05-09"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 125
-  mashos-api: 336
+  Cocolon: 200
+  mashos-api: 342
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 
@@ -47,7 +47,7 @@ Cocolonに残っている旧名称ファイル・旧route・旧DB物理名を、
 - 旧名称ファイルを見つけた時に、current visible名へ写像する。
 - 旧名称が互換維持なのか、DB物理名なのか、runtime ownerなのかを分ける。
 - renameしてよいかを即判断しない。
-- 今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DB physical rename / drop は扱わない。
+- `08_Cocolon_DB_rename_boundary.md` は存在するため、DB physical rename / drop は `08` を確認した上で、Mash様が明示した場合だけ扱う。
 - public APIの削除判断は `05_Cocolon_ルールファイル索引` と `PUBLIC_API_REGISTRY.md` を正本にする。
 
 # 4. renameしない原則
@@ -80,7 +80,7 @@ Cocolonに残っている旧名称ファイル・旧route・旧DB物理名を、
 # 6. DB名について
 
 DB physical rename / drop / bridge view write switch は、この台帳では扱いません。  
-今回zipには `08_Cocolon_DB_rename_boundary.md` が存在しないため、DBの実体、bridge view、write path、drop可否をこの資料だけで判断しない。
+`08_Cocolon_DB_rename_boundary.md` は存在するため、DBの実体、bridge view、write path、drop可否は `08` とこの資料を合わせて判断する。destructive変更はMash様が明示した場合だけ扱う。
 
 この台帳では、DB旧名を見た時の読み方だけを保管します。
 
@@ -90,3 +90,15 @@ DB physical rename / drop / bridge view write switch は、この台帳では扱
 - 旧名称は、まず構造上の役割を読む。
 - 資料で保管できる旧名称は、資料で保管する。
 - 稼働や契約に影響する場合だけ、関係ファイルを確認して修正する。
+
+
+# 2026-05-09 差分追記: rename保留 / 追加ファイル境界
+
+| file / name | 保留理由 |
+|---|---|
+| `today_question_personal_candidate_service.py` | 今日の問いpersonal候補の専用service。既存today_question_storeへ直書きせず、役割を分けるためこの名称で維持 |
+| `today_question_personal_question_service.py` | candidateから表示可能question payloadを作る専用service。DB table名との対応を明確にするため維持 |
+| `today_question_personal_templates.py` | question_type / fixed choices / hidden_meta の正本。生成AIではなくdeterministic templateであることを名称で明示 |
+| `static_role_probe` | 既存100問のorigin名。ユーザー表示名ではないためrenameしない |
+| `personal_followup` | Premium向け追加層のorigin名。DB/API/RNで同じ値を使うためrenameしない |
+| `source_anchor` | 原文根拠を表すcontract名。AI要約ではない境界を示すためrenameしない |

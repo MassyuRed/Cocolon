@@ -59,6 +59,18 @@ export function useHomeActions({
         service_day_key: todayQuestionBundle?.service_day_key,
         question_id: todayQuestionBundle?.question?.question_id,
         sequence_no: todayQuestionBundle?.progress?.sequence_no,
+        question_origin:
+          todayQuestionBundle?.question_origin ||
+          todayQuestionBundle?.question?.question_origin ||
+          undefined,
+        personal_question_id:
+          todayQuestionBundle?.personal_question_id ||
+          todayQuestionBundle?.question?.personal_question_id ||
+          undefined,
+        source_anchor_hash:
+          todayQuestionBundle?.source_anchor?.source_hash ||
+          todayQuestionBundle?.question?.source_anchor?.source_hash ||
+          undefined,
         ...payload,
       });
       showToast("今日の問いを保存しました");

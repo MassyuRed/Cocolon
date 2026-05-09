@@ -1,6 +1,6 @@
 import tutorialFixtures from "./generated/tutorialFixtures.generated.json";
 
-export const TUTORIAL_TOTAL_STEPS = 18;
+export const TUTORIAL_TOTAL_STEPS = 19;
 
 const FIXTURES = tutorialFixtures && typeof tutorialFixtures === "object" ? tutorialFixtures : {};
 const FIXTURE_INPUT = FIXTURES.input && typeof FIXTURES.input === "object" ? FIXTURES.input : {};
@@ -23,6 +23,14 @@ function freezeClone(value) {
 
 function compact(value) {
   return String(value || "").trim();
+}
+
+function withEmlisReading(value) {
+  const raw = compact(value);
+  if (!raw) return "";
+  return raw
+    .replaceAll("Emlis（エムリス）", "Emlis")
+    .replaceAll("Emlis", "Emlis（エムリス）");
 }
 
 function readFirstObject(...values) {
@@ -89,7 +97,7 @@ export const TUTORIAL_PIECE_PREVIEW = freezeClone({
 
 export const TUTORIAL_EMLIS_REPLY = Object.freeze({
   contextLabel: "",
-  commentText: compact(fixtureEmlisReply.comment_text),
+  commentText: withEmlisReading(fixtureEmlisReply.comment_text),
   meta: freezeClone(fixtureEmlisReply.emlis_ai || {}),
 });
 
@@ -157,11 +165,35 @@ export const TUTORIAL_ANALYSIS_REPORTS = Object.freeze({
   monthly: normalizeReport(FIXTURE_ANALYSIS?.reports?.monthly, "monthly"),
 });
 
+export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
+  lead:
+    "Emlis（エムリス）は、感情入力をすることで様々な体験ができるアプリです。\nここでは、感情入力からつながる主要な3つの要素を見ていきます。",
+  source: Object.freeze({
+    title: "感情入力",
+    caption: "今の気持ちを言葉にする",
+  }),
+  connector: "3つの形で受け取れます",
+  nodes: Object.freeze([
+    Object.freeze({
+      label: "その場で受け取る",
+      title: "Emlis（エムリス）からの応答",
+    }),
+    Object.freeze({
+      label: "あとで振り返る",
+      title: "分析レポート",
+    }),
+    Object.freeze({
+      label: "考えを届ける・見る",
+      title: "ピース",
+    }),
+  ]),
+});
+
 export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
-    title: "Emlisからの応答",
+    title: "Emlis（エムリス）からの応答",
     description:
-      "入力した気持ちを、その場でEmlisが受け取って返答します。",
+      "入力した気持ちを、その場でEmlis（エムリス）が受け取って返答します。",
     example: "今の言葉を、ひとつの返答として受け取れます。",
   }),
   Object.freeze({
@@ -173,8 +205,8 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
     title: "ピース",
     description:
-      "あなたの入力が、読みやすい問いと答えに整えられます。",
-    example: "自分のピースや、フォロー中ユーザーのピースを投稿タブで見られます。",
+      "あなたの入力内容を、問いと答えに整えて投稿します。",
+    example: "自分の価値観や考え方を投稿でき、他者の価値観や考え方を閲覧できます。",
   }),
 ]);
 
@@ -187,5 +219,5 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
   body:
-    "Emlisには、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
+    "Emlis（エムリス）には、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

@@ -3,23 +3,18 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState, useMe
 import {
   ActivityIndicator,
   Alert,
-  AppState,
   Keyboard,
   KeyboardAvoidingView,
-  Modal,
   Platform,
   Pressable,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   TouchableWithoutFeedback,
   View,
   useWindowDimensions,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 // Supabase Auth
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
@@ -28,7 +23,7 @@ import {
   previewEmotionPiece,
   publishEmotionPiece,
 } from "../lib/api/home/emotionPieceApi";
-import { getNoticeButtonActions, openNoticeAction } from "../lib/noticeActionRuntime";
+import { openNoticeAction } from "../lib/noticeActionRuntime";
 import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
 import { useHomeActions } from "../features/home/useHomeActions";
 
@@ -39,9 +34,7 @@ import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 
 // UI (Design System)
-import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
-import CocolonSwitch from "../components/CocolonSwitch";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -51,10 +44,7 @@ import TutorialOverlay, {
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
 import TodayQuestionCard from "../components/TodayQuestionCard";
-import TodayQuestionModal from "../components/TodayQuestionModal";
-import NoticeModal from "../components/NoticeModal";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
-import EmotionPiecePreviewModal from "../components/EmotionPiecePreviewModal";
 import {
   getTutorialEmlisReplyText,
   TUTORIAL_EMLIS_REPLY,
@@ -64,171 +54,28 @@ import {
   TUTORIAL_TOTAL_STEPS,
 } from "../tutorial/tutorialScenarioData";
 
-// 未送信下書きは InputScreen 内で自己完結させ、
-// Metro の外部 helper 解決に依存しないようにする。
+import {
+  INPUT_TUTORIAL_STEP_END,
+  INPUT_TUTORIAL_STEP_START,
+  SELF_INSIGHT,
+} from "./input/inputOptions";
+import { normalizeInputDraftData } from "./input/inputDraftModel";
+import { buildInputFeedbackEmotionMeta } from "./input/inputFeedbackModel";
+import { isWelcomeNoticePopupCandidate } from "./input/inputNoticeModel";
+import { useInputDraftPersistence } from "./input/useInputDraftPersistence";
+import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
+import { useInputKeyboardAwareMemo } from "./input/useInputKeyboardAwareMemo";
+import InputActionArea from "./input/InputActionArea";
+import InputCategorySection from "./input/InputCategorySection";
+import InputEmotionSection from "./input/InputEmotionSection";
+import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
+import InputMemoSection from "./input/InputMemoSection";
+import InputPiecePreviewController from "./input/InputPiecePreviewController";
+import InputStartupModals from "./input/InputStartupModals";
+import InputToastOverlay from "./input/InputToastOverlay";
 
-const INPUT_DRAFT_TTL_HOURS = 48;
-const INPUT_DRAFT_TTL_MS = INPUT_DRAFT_TTL_HOURS * 60 * 60 * 1000;
-const INPUT_DRAFT_STORAGE_VERSION = 1;
-const INPUT_DRAFT_KEY_PREFIX = "cocolon.inputDraft.v1";
-const VALID_STRENGTHS = new Set(["weak", "medium", "strong"]);
-
-function isWelcomeNoticePopupCandidate(notice) {
-  const explicitVariant = String(
-    notice?.popup_variant ||
-      notice?.notice_variant ||
-      notice?.modal_variant ||
-      notice?.variant ||
-      "",
-  )
-    .trim()
-    .toLowerCase();
-  if (explicitVariant === "welcome" || explicitVariant === "intro") {
-    return true;
-  }
-
-  const title = String(notice?.title || "").trim();
-  if (title !== "はじめに") return false;
-
-  const buttonActions = getNoticeButtonActions(notice?.actions, notice?.cta);
-  return buttonActions.length === 0;
-}
-
-function normalizeDraftUserId(userId) {
-  return String(userId || "").trim();
-}
-
-function buildInputDraftStorageKey(userId) {
-  const normalizedUserId = normalizeDraftUserId(userId);
-  if (!normalizedUserId) return null;
-  return `${INPUT_DRAFT_KEY_PREFIX}:${normalizedUserId}`;
-}
-
-function normalizeDraftEmotionEntry(entry) {
-  const type = String(entry?.type || "").trim();
-  const strength = VALID_STRENGTHS.has(entry?.strength)
-    ? entry.strength
-    : "medium";
-  if (!type) return null;
-  return { type, strength };
-}
-
-function normalizeDraftStringArray(values) {
-  if (!Array.isArray(values)) return [];
-
-  const seen = new Set();
-  const nextValues = [];
-
-  for (const value of values) {
-    const normalized = String(value || "").trim();
-    if (!normalized || seen.has(normalized)) continue;
-    seen.add(normalized);
-    nextValues.push(normalized);
-  }
-
-  return nextValues;
-}
-
-function normalizeInputDraftData(data = {}) {
-  const selectedEmotions = Array.isArray(data?.selectedEmotions)
-    ? data.selectedEmotions
-        .map((entry) => normalizeDraftEmotionEntry(entry))
-        .filter(Boolean)
-    : [];
-
-  return {
-    selectedEmotions,
-    memo: String(data?.memo || ""),
-    memoAction: String(data?.memoAction || ""),
-    selectedCategories: normalizeDraftStringArray(data?.selectedCategories),
-    // 新Piece仕様ではシークレットメモUIを表導線から外す。
-    // 旧下書きに isSecret が残っていても、新UIでは常に false として扱う。
-    isSecret: false,
-    sendEmotionNotification: data?.sendEmotionNotification !== false,
-  };
-}
-
-function hasInputDraftContent(data = {}) {
-  const normalized = normalizeInputDraftData(data);
-  return (
-    normalized.selectedEmotions.length > 0 ||
-    normalized.memo.trim().length > 0 ||
-    normalized.memoAction.trim().length > 0 ||
-    normalized.selectedCategories.length > 0
-  );
-}
-
-function isInputDraftExpired(savedAt, nowMs = Date.now()) {
-  const savedAtMs = new Date(savedAt).getTime();
-  if (!Number.isFinite(savedAtMs)) return true;
-  return nowMs - savedAtMs > INPUT_DRAFT_TTL_MS;
-}
-
-async function clearInputDraft(userId) {
-  const storageKey = buildInputDraftStorageKey(userId);
-  if (!storageKey) return;
-  await AsyncStorage.removeItem(storageKey);
-}
-
-async function saveInputDraft(userId, data = {}) {
-  const storageKey = buildInputDraftStorageKey(userId);
-  const normalizedUserId = normalizeDraftUserId(userId);
-  if (!storageKey || !normalizedUserId) return null;
-
-  const normalizedData = normalizeInputDraftData(data);
-  if (!hasInputDraftContent(normalizedData)) {
-    await clearInputDraft(normalizedUserId);
-    return null;
-  }
-
-  const payload = {
-    version: INPUT_DRAFT_STORAGE_VERSION,
-    userId: normalizedUserId,
-    savedAt: new Date().toISOString(),
-    data: normalizedData,
-  };
-
-  await AsyncStorage.setItem(storageKey, JSON.stringify(payload));
-  return payload;
-}
-
-async function loadInputDraft(userId) {
-  const storageKey = buildInputDraftStorageKey(userId);
-  const normalizedUserId = normalizeDraftUserId(userId);
-  if (!storageKey || !normalizedUserId) return null;
-
-  const raw = await AsyncStorage.getItem(storageKey);
-  if (!raw) return null;
-
-  let parsed = null;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    await clearInputDraft(normalizedUserId);
-    return null;
-  }
-
-  const normalizedData = normalizeInputDraftData(parsed?.data || {});
-  const savedAt = parsed?.savedAt || null;
-
-  if (
-    parsed?.version !== INPUT_DRAFT_STORAGE_VERSION ||
-    String(parsed?.userId || "").trim() !== normalizedUserId ||
-    !savedAt ||
-    isInputDraftExpired(savedAt) ||
-    !hasInputDraftContent(normalizedData)
-  ) {
-    await clearInputDraft(normalizedUserId);
-    return null;
-  }
-
-  return {
-    version: INPUT_DRAFT_STORAGE_VERSION,
-    userId: normalizedUserId,
-    savedAt,
-    data: normalizedData,
-  };
-}
+// InputScreen の pure helper / model は screens/input/* に分離する。
+// このファイルは既存routeを維持する entry shell として残す。
 
 // MashOS Emotion Submit API
 // ※ 現在は MashOS を Render 上で稼働させているため、
@@ -238,118 +85,6 @@ async function loadInputDraft(userId) {
 
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
-
-const MEMO_INPUT_INITIAL_HEIGHT = 44;
-const FOCUSED_INPUT_SCROLL_OFFSET = 110;
-
-function normalizeMemoInputContentHeight(height) {
-  const nextHeight = Number(height);
-  if (!Number.isFinite(nextHeight) || nextHeight <= 0) {
-    return MEMO_INPUT_INITIAL_HEIGHT;
-  }
-  return Math.max(MEMO_INPUT_INITIAL_HEIGHT, Math.ceil(nextHeight));
-}
-
-function clampMemoInputVisibleHeight(height, maxHeight) {
-  const maxHeightNumber = Number(maxHeight);
-  const safeMaxHeight = Number.isFinite(maxHeightNumber) && maxHeightNumber > 0
-    ? maxHeightNumber
-    : 520;
-
-  return Math.min(
-    normalizeMemoInputContentHeight(height),
-    Math.max(MEMO_INPUT_INITIAL_HEIGHT, safeMaxHeight)
-  );
-}
-
-// 強度→数値（中心感情の算出用）。UI表示には使わない
-const STRENGTH_SCORE = Object.freeze({ weak: 1, medium: 2, strong: 3 });
-
-const SELF_INSIGHT = "自己理解";
-
-
-function strengthScoreForFeedback(strength) {
-  return STRENGTH_SCORE[strength] || 0;
-}
-
-function formatEmotionForFeedback(entry) {
-  return String(entry?.type || "").trim();
-}
-
-function buildInputFeedbackEmotionMeta(values) {
-  const items = Array.isArray(values)
-    ? values
-        .map((entry) => ({
-          type: String(entry?.type || "").trim(),
-          strength: String(entry?.strength || "medium").trim() || "medium",
-        }))
-        .filter((entry) => entry.type)
-    : [];
-
-  if (items.length === 0) {
-    return {
-      emotionSummary: "",
-      dominantSummary: "",
-      dominantLabel: "",
-    };
-  }
-
-  let dominant = items[0];
-  for (const item of items) {
-    if (strengthScoreForFeedback(item.strength) > strengthScoreForFeedback(dominant.strength)) {
-      dominant = item;
-    }
-  }
-
-  const emotionSummary = items
-    .map((entry) => formatEmotionForFeedback(entry))
-    .filter(Boolean)
-    .join("／");
-  const dominantLabel = formatEmotionForFeedback(dominant);
-
-  return {
-    emotionSummary: emotionSummary ? `選択した感情：${emotionSummary}` : "",
-    dominantSummary: dominantLabel ? `中心として見ている感情：${dominantLabel}` : "",
-    dominantLabel: dominantLabel ? `中心として見ている感情：${dominantLabel}` : "",
-  };
-}
-
-function formatDraftSavedAt(savedAt) {
-  const savedAtMs = new Date(savedAt).getTime();
-  if (!Number.isFinite(savedAtMs)) return "";
-
-  try {
-    return new Date(savedAtMs).toLocaleString("ja-JP", {
-      month: "numeric",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } catch {
-    return "";
-  }
-}
-
-// 感情ボタンの配置（2段構成：自己理解は平穏の隣）
-const EMOTION_ROWS = [
-  ["喜び", "悲しみ", "怒り"],
-  ["不安", "平穏", SELF_INSIGHT],
-];
-
-const CATEGORY_OPTIONS = Object.freeze([
-  "生活",
-  "仕事",
-  "趣味",
-  "人間関係",
-  "恋愛",
-  "健康",
-  "学習",
-  "価値観",
-  "人生",
-]);
-
-const INPUT_TUTORIAL_STEP_START = 2;
-const INPUT_TUTORIAL_STEP_END = 6;
 
 /**
  * Home（InputScreen）
@@ -388,6 +123,41 @@ export default function InputScreen({ navigation, route }) {
     [tutorialDisplayName]
   );
 
+  const { height: windowHeight } = useWindowDimensions();
+  const scrollRef = useRef(null);
+
+  const {
+    inputFeedbackModalVisible,
+    inputFeedbackModalText,
+    inputFeedbackModalMeta,
+    setTutorialNavigateAfterReply,
+    openInputFeedbackModal,
+    closeInputFeedbackModal,
+    resetInputFeedbackModal,
+  } = useInputFeedbackModal({
+    isTutorialMode,
+    navigation,
+    setTutorialStep,
+  });
+
+  const {
+    keyboardInset,
+    inputMaxHeight,
+    memoInputRef,
+    memoActionInputRef,
+    memoContentHeight,
+    memoActionContentHeight,
+    memoFocusedRef,
+    focusedFieldRef,
+    lastFocusTargetRef,
+    resetMemoInputHeights,
+    updateMemoInputVisibleHeight,
+    scheduleScrollToFocusedInput,
+  } = useInputKeyboardAwareMemo({
+    windowHeight,
+    scrollRef,
+  });
+
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [memo, setMemo] = useState("");
   const [memoAction, setMemoAction] = useState("");
@@ -395,27 +165,6 @@ export default function InputScreen({ navigation, route }) {
   const [showMemoSection, setShowMemoSection] = useState(true);
   // 展開式入力（タップで開く）
   const [activeField, setActiveField] = useState(null); // "memo" | "memoAction" | null
-  const memoInputRef = useRef(null);
-  const memoActionInputRef = useRef(null);
-  const [memoContentHeight, setMemoContentHeight] = useState(MEMO_INPUT_INITIAL_HEIGHT);
-  const [memoActionContentHeight, setMemoActionContentHeight] = useState(MEMO_INPUT_INITIAL_HEIGHT);
-  const memoRawContentHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
-  const memoActionRawContentHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
-  const memoVisibleHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
-  const memoActionVisibleHeightRef = useRef(MEMO_INPUT_INITIAL_HEIGHT);
-
-  const resetMemoInputHeights = useCallback((memoHeight = MEMO_INPUT_INITIAL_HEIGHT, memoActionHeight = MEMO_INPUT_INITIAL_HEIGHT) => {
-    const nextMemoHeight = normalizeMemoInputContentHeight(memoHeight);
-    const nextMemoActionHeight = normalizeMemoInputContentHeight(memoActionHeight);
-
-    memoRawContentHeightRef.current = nextMemoHeight;
-    memoActionRawContentHeightRef.current = nextMemoActionHeight;
-    memoVisibleHeightRef.current = nextMemoHeight;
-    memoActionVisibleHeightRef.current = nextMemoActionHeight;
-    setMemoContentHeight(nextMemoHeight);
-    setMemoActionContentHeight(nextMemoActionHeight);
-  }, []);
-
   const [isSecret, setIsSecret] = useState(false);
   const [sendEmotionNotification, setSendEmotionNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -423,9 +172,7 @@ export default function InputScreen({ navigation, route }) {
   const [piecePreviewLoading, setPiecePreviewLoading] = useState(false);
   const [piecePublishLoading, setPiecePublishLoading] = useState(false);
   const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
-  const [keyboardInset, setKeyboardInset] = useState(0);
   const wasTutorialModeRef = useRef(false);
-  const scrollRef = useRef(null);
 
   const resetLocalInputState = useCallback(() => {
     setSelectedEmotions([]);
@@ -441,14 +188,7 @@ export default function InputScreen({ navigation, route }) {
     setPiecePreviewLoading(false);
     setPiecePublishLoading(false);
     setPiecePreviewPayload(null);
-    setInputFeedbackModalVisible(false);
-    setInputFeedbackModalText("");
-    setInputFeedbackModalMeta({
-      emotionSummary: "",
-      dominantSummary: "",
-      contextLabel: "",
-    });
-    setTutorialNavigateAfterReply(false);
+    resetInputFeedbackModal();
     currentScrollYRef.current = 0;
     try {
       scrollRef.current?.scrollTo?.({ y: 0, animated: false });
@@ -456,67 +196,12 @@ export default function InputScreen({ navigation, route }) {
       // noop
     }
     Keyboard.dismiss();
-  }, [resetMemoInputHeights]);
+  }, [resetInputFeedbackModal, resetMemoInputHeights]);
 
 // --- Lightweight toast / input feedback modal ---
 const toastTimerRef = useRef(null);
 const tutorialEmotionLogNotifyTimerRef = useRef(null);
 const [toastMessage, setToastMessage] = useState(null);
-const [inputFeedbackModalVisible, setInputFeedbackModalVisible] = useState(false);
-const [inputFeedbackModalText, setInputFeedbackModalText] = useState("");
-const [inputFeedbackModalMeta, setInputFeedbackModalMeta] = useState({
-  emotionSummary: "",
-  dominantSummary: "",
-  contextLabel: "",
-});
-const [tutorialNavigateAfterReply, setTutorialNavigateAfterReply] = useState(false);
-const draftSaveTimerRef = useRef(null);
-const draftLoadRequestIdRef = useRef(0);
-const latestInputDraftDataRef = useRef(null);
-const [pendingInputDraft, setPendingInputDraft] = useState(null);
-const [draftRestoreModalVisible, setDraftRestoreModalVisible] = useState(false);
-const [draftBootstrapComplete, setDraftBootstrapComplete] = useState(false);
-
-const openInputFeedbackModal = useCallback((input = {}) => {
-  const nextCommentText = String(input?.commentText || "").trim();
-  if (!nextCommentText) return;
-  setInputFeedbackModalText(nextCommentText);
-  setInputFeedbackModalMeta({
-    emotionSummary: String(input?.emotionSummary || "").trim(),
-    dominantSummary: String(input?.dominantSummary || input?.dominantLabel || "").trim(),
-    contextLabel: String(input?.contextLabel || "").trim(),
-  });
-  setInputFeedbackModalVisible(true);
-}, []);
-
-const closeInputFeedbackModal = useCallback(() => {
-  setInputFeedbackModalVisible(false);
-
-  if (!tutorialNavigateAfterReply || !isTutorialMode) return;
-
-  setTutorialNavigateAfterReply(false);
-  setTutorialStep(7);
-
-  requestAnimationFrame(() => {
-    try {
-      const parent =
-        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-      if (parent && typeof parent.navigate === "function") {
-        parent.navigate("Analysis");
-        return;
-      }
-    } catch {
-      // noop
-    }
-
-    try {
-      navigation?.navigate?.("Analysis");
-    } catch {
-      // noop
-    }
-  });
-}, [isTutorialMode, navigation, setTutorialStep, tutorialNavigateAfterReply]);
-
 const showToast = useCallback((msg) => {
   try {
     if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
@@ -540,13 +225,6 @@ useEffect(() => {
     try {
       if (tutorialEmotionLogNotifyTimerRef.current) {
         clearTimeout(tutorialEmotionLogNotifyTimerRef.current);
-      }
-    } catch {
-      // noop
-    }
-    try {
-      if (draftSaveTimerRef.current) {
-        clearTimeout(draftSaveTimerRef.current);
       }
     } catch {
       // noop
@@ -737,11 +415,11 @@ const handleOpenTodayQuestionHistory = useCallback(() => {
 
 
 
-const { height: windowHeight } = useWindowDimensions();
-  const safeInsets = useSafeAreaInsets();
+const safeInsets = useSafeAreaInsets();
 
   const screenRootRef = useRef(null);
   const emotionAreaRef = useRef(null);
+  const categorySectionRef = useRef(null);
   const memoSectionRef = useRef(null);
   const notificationRef = useRef(null);
   const pieceButtonRef = useRef(null);
@@ -756,9 +434,18 @@ const { height: windowHeight } = useWindowDimensions();
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
+  const shouldHideHomeSummaryForTutorial =
+    isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
+  const shouldHideInputHistoryForTutorial =
+    isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
+  const shouldShowHomeQuickActionsRow =
+    (!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot) ||
+    !shouldHideInputHistoryForTutorial;
 
   const shouldApplyTutorialInputSample =
     isInputTutorialStep && tutorialStep >= 3;
+  const shouldApplyTutorialCategoriesSample =
+    isInputTutorialStep && tutorialStep >= 5;
 
   useEffect(() => {
     if (!shouldApplyTutorialInputSample) return;
@@ -767,60 +454,18 @@ const { height: windowHeight } = useWindowDimensions();
     setMemo(TUTORIAL_INPUT_SAMPLE.memo);
     setMemoAction(TUTORIAL_INPUT_SAMPLE.memoAction);
     setSelectedEmotions(TUTORIAL_INPUT_SAMPLE.emotions.map((item) => ({ ...item })));
-    setSelectedCategories([...TUTORIAL_INPUT_SAMPLE.categories]);
+    setSelectedCategories(
+      shouldApplyTutorialCategoriesSample ? [...TUTORIAL_INPUT_SAMPLE.categories] : []
+    );
     setSendEmotionNotification(TUTORIAL_INPUT_SAMPLE.sendEmotionNotification !== false);
     resetMemoInputHeights(110, 72);
     setIsSecret(false);
     setActiveField(null);
-  }, [shouldApplyTutorialInputSample, resetMemoInputHeights]);
-
-  // 入力欄はできるだけ伸ばしつつ、一定以上は TextInput 内スクロールに切り替える
-  const inputMaxHeight = useMemo(() => {
-    const h = windowHeight || 0;
-    if (!h) return 520;
-
-    // キーボード表示中は、画面に収まる範囲を優先して上限を決める（それ以上は TextInput 内でスクロール）
-    if (keyboardInset > 0) {
-      const remaining = h - keyboardInset;
-      return Math.max(160, Math.floor(remaining - 60));
-    }
-
-    // キーボード未表示時は、画面の大半まで伸ばせるようにする
-    return Math.max(260, Math.floor(h * 0.75));
-  }, [windowHeight, keyboardInset]);
-
-  const updateMemoInputVisibleHeight = useCallback((field, rawHeight) => {
-    const rawHeightNumber = Number(rawHeight);
-    if (!Number.isFinite(rawHeightNumber) || rawHeightNumber <= 0) {
-      return false;
-    }
-
-    const normalizedRawHeight = normalizeMemoInputContentHeight(rawHeightNumber);
-    const nextVisibleHeight = clampMemoInputVisibleHeight(normalizedRawHeight, inputMaxHeight);
-
-    if (field === "memo") {
-      memoRawContentHeightRef.current = normalizedRawHeight;
-      if (Math.abs(memoVisibleHeightRef.current - nextVisibleHeight) < 1) {
-        return false;
-      }
-      memoVisibleHeightRef.current = nextVisibleHeight;
-      setMemoContentHeight(nextVisibleHeight);
-      return true;
-    }
-
-    memoActionRawContentHeightRef.current = normalizedRawHeight;
-    if (Math.abs(memoActionVisibleHeightRef.current - nextVisibleHeight) < 1) {
-      return false;
-    }
-    memoActionVisibleHeightRef.current = nextVisibleHeight;
-    setMemoActionContentHeight(nextVisibleHeight);
-    return true;
-  }, [inputMaxHeight]);
-
-  useEffect(() => {
-    updateMemoInputVisibleHeight("memo", memoRawContentHeightRef.current);
-    updateMemoInputVisibleHeight("memoAction", memoActionRawContentHeightRef.current);
-  }, [inputMaxHeight, updateMemoInputVisibleHeight]);
+  }, [
+    shouldApplyTutorialCategoriesSample,
+    shouldApplyTutorialInputSample,
+    resetMemoInputHeights,
+  ]);
 
   const inputDraftData = useMemo(
     () =>
@@ -842,47 +487,46 @@ const { height: windowHeight } = useWindowDimensions();
     ]
   );
 
-  latestInputDraftDataRef.current = inputDraftData;
 
-  const hasCurrentDraftContent = useMemo(
-    () => hasInputDraftContent(inputDraftData),
-    [inputDraftData]
-  );
+  const applyInputDraft = useCallback((restored) => {
+    const normalized = normalizeInputDraftData(restored || {});
+    setSelectedEmotions(normalized.selectedEmotions);
+    setMemo(normalized.memo);
+    setMemoAction(normalized.memoAction);
+    setSelectedCategories(normalized.selectedCategories);
+    setIsSecret(false);
+    setSendEmotionNotification(normalized.sendEmotionNotification);
+    setShowMemoSection(
+      normalized.selectedEmotions.some((item) => item?.type === SELF_INSIGHT) ||
+        normalized.memo.trim().length > 0 ||
+        normalized.memoAction.trim().length > 0 ||
+        normalized.selectedCategories.length > 0
+    );
+    setActiveField(null);
+    resetMemoInputHeights();
+  }, [resetMemoInputHeights]);
 
-  const shouldShowDraftRestorePrompt = useMemo(() => {
-    if (!pendingInputDraft) return false;
-    if (isTutorialMode) return false;
-    if (startupQueuePreparing || startupModalVisible) return false;
-    if (noticeLoading || todayQuestionLoading) return false;
-    if (inputFeedbackModalVisible) return false;
-    if (hasCurrentDraftContent) return false;
-    return true;
-  }, [
-    hasCurrentDraftContent,
-    inputFeedbackModalVisible,
+  const {
+    setPendingInputDraft,
+    draftRestoreModalVisible,
+    setDraftRestoreModalVisible,
+    clearPersistedInputDraft,
+    restorePendingInputDraft,
+    discardPendingInputDraft,
+    draftRestoreSavedAtLabel,
+  } = useInputDraftPersistence({
+    currentUserId,
     isTutorialMode,
-    noticeLoading,
-    pendingInputDraft,
-    startupModalVisible,
+    navigation,
+    inputDraftData,
     startupQueuePreparing,
+    startupModalVisible,
+    noticeLoading,
     todayQuestionLoading,
-  ]);
-
-  const draftPersistenceBlocked =
-    !draftBootstrapComplete ||
-    !currentUserId ||
-    isTutorialMode ||
-    !!pendingInputDraft ||
-    draftRestoreModalVisible;
-
-  const clearPersistedInputDraft = useCallback(async () => {
-    if (!currentUserId) return;
-    try {
-      await clearInputDraft(currentUserId);
-    } catch (e) {
-      console.warn("InputScreen: clearInputDraft failed", e);
-    }
-  }, [currentUserId]);
+    inputFeedbackModalVisible,
+    applyInputDraft,
+    showToast,
+  });
 
   useEffect(() => {
     if (!tutorialResetToken) return;
@@ -896,265 +540,7 @@ const { height: windowHeight } = useWindowDimensions();
     setPendingInputDraft(null);
     setDraftRestoreModalVisible(false);
     void clearPersistedInputDraft();
-  }, [clearPersistedInputDraft, resetLocalInputState, tutorialResetToken]);
-
-  const persistCurrentInputDraft = useCallback(async () => {
-    if (!currentUserId || isTutorialMode) return;
-
-    const nextDraftData = normalizeInputDraftData(
-      latestInputDraftDataRef.current || {}
-    );
-
-    try {
-      if (hasInputDraftContent(nextDraftData)) {
-        await saveInputDraft(currentUserId, nextDraftData);
-      } else {
-        await clearInputDraft(currentUserId);
-      }
-    } catch (e) {
-      console.warn("InputScreen: persistCurrentInputDraft failed", e);
-    }
-  }, [currentUserId, isTutorialMode]);
-
-  const restorePendingInputDraft = useCallback(() => {
-    const restored = normalizeInputDraftData(pendingInputDraft?.data || {});
-    setSelectedEmotions(restored.selectedEmotions);
-    setMemo(restored.memo);
-    setMemoAction(restored.memoAction);
-    setSelectedCategories(restored.selectedCategories);
-    setIsSecret(false);
-    setSendEmotionNotification(restored.sendEmotionNotification);
-    setShowMemoSection(
-      restored.selectedEmotions.some((item) => item?.type === SELF_INSIGHT) ||
-        restored.memo.trim().length > 0 ||
-        restored.memoAction.trim().length > 0 ||
-        restored.selectedCategories.length > 0
-    );
-    setActiveField(null);
-    resetMemoInputHeights();
-    Keyboard.dismiss();
-    setDraftRestoreModalVisible(false);
-    setPendingInputDraft(null);
-    showToast("前回の内容を復元しました");
-  }, [pendingInputDraft, resetMemoInputHeights, showToast]);
-
-  const discardPendingInputDraft = useCallback(async () => {
-    setDraftRestoreModalVisible(false);
-    setPendingInputDraft(null);
-    await clearPersistedInputDraft();
-  }, [clearPersistedInputDraft]);
-
-  const draftRestoreSavedAtLabel = useMemo(
-    () => formatDraftSavedAt(pendingInputDraft?.savedAt),
-    [pendingInputDraft?.savedAt]
-  );
-
-  // メモ入力がキーボードに隠れないようにスクロール追従
-  const memoFocusedRef = useRef(false);
-  const focusedFieldRef = useRef(null); // "memo" | "memoAction" | null
-  const lastFocusTargetRef = useRef(null);
-  const scrollToFocusedInputFrameRef = useRef(null);
-
-  const scrollToFocusedInput = useCallback((extraOffset = FOCUSED_INPUT_SCROLL_OFFSET) => {
-    const sv = scrollRef.current;
-    const target = lastFocusTargetRef.current;
-    if (!sv || !target) return;
-    try {
-      sv.scrollResponderScrollNativeHandleToKeyboard(target, extraOffset, true);
-    } catch {
-      // noop
-    }
-  }, []);
-
-  const scheduleScrollToFocusedInput = useCallback((extraOffset = FOCUSED_INPUT_SCROLL_OFFSET) => {
-    if (scrollToFocusedInputFrameRef.current) {
-      cancelAnimationFrame(scrollToFocusedInputFrameRef.current);
-    }
-
-    scrollToFocusedInputFrameRef.current = requestAnimationFrame(() => {
-      scrollToFocusedInputFrameRef.current = null;
-      scrollToFocusedInput(extraOffset);
-    });
-  }, [scrollToFocusedInput]);
-
-  const openField = (field) => {
-    registerInputInteraction();
-    setActiveField(field);
-    // state反映後に focus する（render完了を待つ）
-    setTimeout(() => {
-      try {
-        if (field === "memo") memoInputRef.current?.focus?.();
-        if (field === "memoAction") memoActionInputRef.current?.focus?.();
-      } catch {
-        // noop
-      }
-    }, 50);
-  };
-
-
-  useEffect(() => {
-    const showEvt =
-      Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
-    const hideEvt =
-      Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
-
-    const onShow = (e) => {
-      const h = e?.endCoordinates?.height ?? 0;
-      setKeyboardInset(h);
-      scheduleScrollToFocusedInput();
-    };
-
-    const onHide = () => {
-      setKeyboardInset(0);
-    };
-
-    const subShow = Keyboard.addListener(showEvt, onShow);
-    const subHide = Keyboard.addListener(hideEvt, onHide);
-
-    return () => {
-      subShow.remove();
-      subHide.remove();
-    };
-  }, [scheduleScrollToFocusedInput]);
-
-  useEffect(() => {
-    return () => {
-      if (scrollToFocusedInputFrameRef.current) {
-        cancelAnimationFrame(scrollToFocusedInputFrameRef.current);
-        scrollToFocusedInputFrameRef.current = null;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-    const requestId = draftLoadRequestIdRef.current + 1;
-    draftLoadRequestIdRef.current = requestId;
-
-    if (!currentUserId || isTutorialMode) {
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-      setDraftBootstrapComplete(true);
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    setDraftBootstrapComplete(false);
-
-    const run = async () => {
-      try {
-        const restored = await loadInputDraft(currentUserId);
-        if (cancelled || draftLoadRequestIdRef.current !== requestId) return;
-
-        if (restored && !hasInputDraftContent(latestInputDraftDataRef.current)) {
-          setPendingInputDraft(restored);
-        } else {
-          setPendingInputDraft(null);
-          setDraftRestoreModalVisible(false);
-        }
-      } catch (e) {
-        if (!cancelled) {
-          console.warn("InputScreen: loadInputDraft failed", e);
-          setPendingInputDraft(null);
-          setDraftRestoreModalVisible(false);
-        }
-      } finally {
-        if (!cancelled && draftLoadRequestIdRef.current === requestId) {
-          setDraftBootstrapComplete(true);
-        }
-      }
-    };
-
-    void run();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [currentUserId, isTutorialMode]);
-
-  useEffect(() => {
-    setDraftRestoreModalVisible(shouldShowDraftRestorePrompt);
-  }, [shouldShowDraftRestorePrompt]);
-
-  useEffect(() => {
-    if (!pendingInputDraft) return;
-    if (!hasCurrentDraftContent) return;
-    setPendingInputDraft(null);
-    setDraftRestoreModalVisible(false);
-  }, [hasCurrentDraftContent, pendingInputDraft]);
-
-  useEffect(() => {
-    try {
-      if (draftSaveTimerRef.current) {
-        clearTimeout(draftSaveTimerRef.current);
-        draftSaveTimerRef.current = null;
-      }
-    } catch {
-      // noop
-    }
-
-    if (draftPersistenceBlocked) return;
-
-    draftSaveTimerRef.current = setTimeout(() => {
-      draftSaveTimerRef.current = null;
-      void persistCurrentInputDraft();
-    }, 1000);
-
-    return () => {
-      try {
-        if (draftSaveTimerRef.current) {
-          clearTimeout(draftSaveTimerRef.current);
-          draftSaveTimerRef.current = null;
-        }
-      } catch {
-        // noop
-      }
-    };
-  }, [
-    draftPersistenceBlocked,
-    persistCurrentInputDraft,
-    inputDraftData,
-  ]);
-
-  useEffect(() => {
-    if (draftPersistenceBlocked) return;
-
-    const subscription = AppState.addEventListener("change", (nextAppState) => {
-      if (/inactive|background/.test(String(nextAppState || ""))) {
-        void persistCurrentInputDraft();
-      }
-    });
-
-    return () => {
-      try {
-        subscription?.remove?.();
-      } catch {
-        // noop
-      }
-    };
-  }, [draftPersistenceBlocked, persistCurrentInputDraft]);
-
-  useEffect(() => {
-    if (draftPersistenceBlocked) return;
-
-    let unsubscribe = null;
-    try {
-      unsubscribe = navigation?.addListener?.("blur", () => {
-        void persistCurrentInputDraft();
-      });
-    } catch {
-      // noop
-    }
-
-    return () => {
-      try {
-        if (typeof unsubscribe === "function") unsubscribe();
-      } catch {
-        // noop
-      }
-    };
-  }, [draftPersistenceBlocked, navigation, persistCurrentInputDraft]);
+  }, [clearPersistedInputDraft, resetLocalInputState, setDraftRestoreModalVisible, setPendingInputDraft, tutorialResetToken]);
 
   const doNotSendEmotionNotification = !sendEmotionNotification;
   const isDark = themeName === "dark";
@@ -1196,8 +582,10 @@ const { height: windowHeight } = useWindowDimensions();
       case 4:
         return emotionAreaRef;
       case 5:
-        return notificationRef;
+        return categorySectionRef;
       case 6:
+        return notificationRef;
+      case 7:
         return pieceButtonRef;
       default:
         return null;
@@ -1227,37 +615,47 @@ const { height: windowHeight } = useWindowDimensions();
           title: "感情入力",
           message:
             "今の気持ちや実際に起こった出来事を言葉で残せます。\n\nここでは入力内容が入った状態を見せます。",
-          nextLabel: "感情とカテゴリへ",
+          nextLabel: "感情選択へ",
           onNext: () => setTutorialStep(4),
         };
       case 4:
         return {
           step: 4,
           mode: "info",
-          title: "感情とカテゴリ",
+          title: "感情選択",
           message:
-            "感情もカテゴリも複数選べます。\n\n今回は、平穏・喜び・不安と、生活・健康・価値観を選んだ状態です。",
-          nextLabel: "感情通知へ",
+            "感情は複数選べます。\n\n今回は、平穏・喜び・不安を選んだ状態です。",
+          nextLabel: "カテゴリ選択へ",
           onNext: () => setTutorialStep(5),
         };
       case 5:
         return {
           step: 5,
           mode: "info",
-          title: "感情通知",
+          title: "カテゴリ選択",
           message:
-            "感情通知は、入力した感情をフォロー中ユーザーへ通知する設定です。\n\n今回は通知する状態で見せます。",
-          nextLabel: "ピース生成へ",
+            "カテゴリも複数選べます。\n\n今回は、生活・健康・価値観を選んだ状態です。",
+          nextLabel: "感情通知へ",
           onNext: () => setTutorialStep(6),
         };
       case 6:
         return {
           step: 6,
+          mode: "info",
+          title: "感情通知",
+          message:
+            "感情通知は、入力した感情をフォロー中ユーザーへ通知する設定です。\n\n今回は通知する状態で見せます。",
+          nextLabel: "ピース生成へ",
+          onNext: () => setTutorialStep(7),
+        };
+      case 7:
+        return {
+          step: 7,
           mode: "action",
           title: "ピースを生成します",
           message:
-            "あなたの入力を、問いと答えとして読みやすく整えます。",
-          actionHint: "ピースを生成する を押してください",
+            "あなたの入力を、問いと答えとして読みやすく整えます。\n\n「ピースを生成する」を押してください。",
+          actionHint: null,
           cardPlacement: "top",
         };
       default:
@@ -1537,7 +935,7 @@ const { height: windowHeight } = useWindowDimensions();
       setDraftRestoreModalVisible(false);
       Keyboard.dismiss();
       setTutorialNavigateAfterReply(true);
-      setTutorialStep(7);
+      setTutorialStep(8);
       openInputFeedbackModal({
         commentText: tutorialEmlisReplyText,
         ...inputFeedbackEmotionMeta,
@@ -1875,7 +1273,8 @@ ${String(error?.message || error)}`
               </View>
 
               <View style={styles.homeOverviewBlock}>
-                <View style={styles.globalSummaryBlock}>
+                {!shouldHideHomeSummaryForTutorial ? (
+                  <View style={styles.globalSummaryBlock}>
                   <View style={styles.globalSummaryInner}>
                     <View style={styles.globalSummaryHeaderRow}>
                       <Ionicons
@@ -1892,9 +1291,11 @@ ${String(error?.message || error)}`
                       } 人が感情入力しました`}
                     </Text>
                   </View>
-                </View>
+                  </View>
+                ) : null}
 
-                <View style={styles.homeQuickActionsRow}>
+                {shouldShowHomeQuickActionsRow ? (
+                  <View style={styles.homeQuickActionsRow}>
                   {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
                     <Pressable
                       style={styles.homeQuickActionButton}
@@ -1933,12 +1334,13 @@ ${String(error?.message || error)}`
                     </Pressable>
                   ) : null}
 
-                  <Pressable
-                    style={styles.homeQuickActionButton}
-                    onPress={handleOpenEmotionHistory}
-                    accessibilityRole="button"
-                    accessibilityLabel="入力履歴を開く"
-                  >
+                  {!shouldHideInputHistoryForTutorial ? (
+                    <Pressable
+                      style={styles.homeQuickActionButton}
+                      onPress={handleOpenEmotionHistory}
+                      accessibilityRole="button"
+                      accessibilityLabel="入力履歴を開く"
+                    >
                     <View style={styles.homeQuickActionLeft}>
                       <Ionicons
                         name="time-outline"
@@ -1959,8 +1361,10 @@ ${String(error?.message || error)}`
                       size={17}
                       color={colors.TEXT_SUBTLE}
                     />
-                  </Pressable>
+                    </Pressable>
+                  ) : null}
                 </View>
+                ) : null}
 
                 {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot && isTodayQuestionExpanded ? (
                   <View style={styles.todayQuestionInlineContent}>
@@ -1993,599 +1397,114 @@ ${String(error?.message || error)}`
                   </Text>
                 </View>
 
-                <View
-                  ref={memoSectionRef}
-                  collapsable={false}
-                  style={styles.heroMemoInputGroup}
-                >
-                  <View style={styles.heroFieldBlock}>
-                    <Text style={styles.heroFieldLabel}>思考内容（考えていること）</Text>
-                    <Text style={styles.heroFieldHint}>
-                      何を思った／どう感じた／どう解釈した？
-                    </Text>
-                    {(isTutorialMode || activeField === "memo") ? (
-                      <View style={[styles.memoCard, styles.memoCardExpanded]}>
-                        <TextInput
-                          ref={memoInputRef}
-                          style={[
-                            styles.memoInput,
-                            {
-                              flex: 0,
-                              width: "100%",
-                              height: Math.min(
-                                Math.max(memoContentHeight || MEMO_INPUT_INITIAL_HEIGHT, MEMO_INPUT_INITIAL_HEIGHT),
-                                inputMaxHeight
-                              ),
-                            },
-                          ]}
-                          placeholder="ここに書いてください。"
-                          {...(isTutorialMode ? { value: memo } : { defaultValue: memo })}
-                          onChangeText={isTutorialMode ? undefined : setMemo}
-                          editable={!isTutorialMode}
-                          multiline
-                          scrollEnabled={memoContentHeight >= inputMaxHeight}
-                          disableFullscreenUI
-                          textAlignVertical="top"
-                          placeholderTextColor={colors.TEXT_ON_LIGHT}
-                          onFocus={(e) => {
-                            if (isTutorialMode) return;
-                            registerInputInteraction();
-                            lastFocusTargetRef.current =
-                              e?.target ?? e?.nativeEvent?.target ?? null;
-                            memoFocusedRef.current = true;
-                            focusedFieldRef.current = "memo";
-                            scheduleScrollToFocusedInput();
-                          }}
-                          onBlur={() => {
-                            memoFocusedRef.current = false;
-                            focusedFieldRef.current = null;
-                            lastFocusTargetRef.current = null;
-                            if (!isTutorialMode) setActiveField(null);
-                          }}
-                          onContentSizeChange={(e) => {
-                            const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                            const didHeightChange = updateMemoInputVisibleHeight("memo", h);
-                            if (!didHeightChange || focusedFieldRef.current !== "memo") return;
-                            scheduleScrollToFocusedInput();
-                          }}
-                        />
-                      </View>
-                    ) : (
-                      <CocolonPressable
-                        style={[styles.memoCard, styles.memoCardCollapsed]}
-                        onPress={() => { if (!isTutorialMode) openField("memo"); }}
-                        accessibilityLabel="思考内容を入力する"
-                      >
-                        <View style={styles.collapsedRow}>
-                          <View style={styles.collapsedLeft}>
-                            <Ionicons
-                              name="create-outline"
-                              size={18}
-                              color={colors.TEXT_SUBTLE}
-                              style={{ marginRight: 8 }}
-                            />
-                            <Text
-                              style={[
-                                styles.collapsedText,
-                                !(memo && memo.trim().length > 0) &&
-                                  styles.collapsedTextPlaceholder,
-                              ]}
-                              numberOfLines={1}
-                            >
-                              {memo && memo.trim().length > 0
-                                ? memo.replace(/\s+/g, " ").trim()
-                                : "ここに書いてください。"}
-                            </Text>
-                          </View>
-                          <Ionicons
-                            name="chevron-down"
-                            size={18}
-                            color={colors.TEXT_SUBTLE}
-                          />
-                        </View>
-                      </CocolonPressable>
-                    )}
-                  </View>
+                <InputMemoSection
+                  sectionRef={memoSectionRef}
+                  activeField={activeField}
+                  setActiveField={setActiveField}
+                  memo={memo}
+                  setMemo={setMemo}
+                  memoAction={memoAction}
+                  setMemoAction={setMemoAction}
+                  memoInputRef={memoInputRef}
+                  memoActionInputRef={memoActionInputRef}
+                  memoContentHeight={memoContentHeight}
+                  memoActionContentHeight={memoActionContentHeight}
+                  inputMaxHeight={inputMaxHeight}
+                  isTutorialMode={isTutorialMode}
+                  registerInputInteraction={registerInputInteraction}
+                  lastFocusTargetRef={lastFocusTargetRef}
+                  memoFocusedRef={memoFocusedRef}
+                  focusedFieldRef={focusedFieldRef}
+                  scheduleScrollToFocusedInput={scheduleScrollToFocusedInput}
+                  updateMemoInputVisibleHeight={updateMemoInputVisibleHeight}
+                  styles={styles}
+                  colors={colors}
+                />
 
-                  <View style={styles.heroFieldBlock}>
-                    <Text style={styles.heroFieldLabel}>行動内容（実際に起こった出来事）</Text>
-                    <Text style={styles.heroFieldHint}>
-                      何が起きた／何をした／結果どうなった？
-                    </Text>
-                    {(isTutorialMode || activeField === "memoAction") ? (
-                      <View style={[styles.memoCard, styles.memoCardExpanded]}>
-                        <TextInput
-                          ref={memoActionInputRef}
-                          style={[
-                            styles.memoInput,
-                            {
-                              flex: 0,
-                              width: "100%",
-                              height: Math.min(
-                                Math.max(memoActionContentHeight || MEMO_INPUT_INITIAL_HEIGHT, MEMO_INPUT_INITIAL_HEIGHT),
-                                inputMaxHeight
-                              ),
-                            },
-                          ]}
-                          placeholder="ここに書いてください。"
-                          {...(isTutorialMode ? { value: memoAction } : { defaultValue: memoAction })}
-                          onChangeText={isTutorialMode ? undefined : setMemoAction}
-                          editable={!isTutorialMode}
-                          multiline
-                          scrollEnabled={memoActionContentHeight >= inputMaxHeight}
-                          disableFullscreenUI
-                          textAlignVertical="top"
-                          placeholderTextColor={colors.TEXT_ON_LIGHT}
-                          onFocus={(e) => {
-                            if (isTutorialMode) return;
-                            registerInputInteraction();
-                            lastFocusTargetRef.current =
-                              e?.target ?? e?.nativeEvent?.target ?? null;
-                            memoFocusedRef.current = true;
-                            focusedFieldRef.current = "memoAction";
-                            scheduleScrollToFocusedInput();
-                          }}
-                          onBlur={() => {
-                            memoFocusedRef.current = false;
-                            focusedFieldRef.current = null;
-                            lastFocusTargetRef.current = null;
-                            if (!isTutorialMode) setActiveField(null);
-                          }}
-                          onContentSizeChange={(e) => {
-                            const h = e?.nativeEvent?.contentSize?.height ?? 0;
-                            const didHeightChange = updateMemoInputVisibleHeight("memoAction", h);
-                            if (!didHeightChange || focusedFieldRef.current !== "memoAction") return;
-                            scheduleScrollToFocusedInput();
-                          }}
-                        />
-                      </View>
-                    ) : (
-                      <CocolonPressable
-                        style={[styles.memoCard, styles.memoCardCollapsed]}
-                        onPress={() => { if (!isTutorialMode) openField("memoAction"); }}
-                        accessibilityLabel="行動内容を入力する"
-                      >
-                        <View style={styles.collapsedRow}>
-                          <View style={styles.collapsedLeft}>
-                            <Ionicons
-                              name="walk-outline"
-                              size={18}
-                              color={colors.TEXT_SUBTLE}
-                              style={{ marginRight: 8 }}
-                            />
-                            <Text
-                              style={[
-                                styles.collapsedText,
-                                !(memoAction && memoAction.trim().length > 0) &&
-                                  styles.collapsedTextPlaceholder,
-                              ]}
-                              numberOfLines={1}
-                            >
-                              {memoAction && memoAction.trim().length > 0
-                                ? memoAction.replace(/\s+/g, " ").trim()
-                                : "ここに書いてください。"}
-                            </Text>
-                          </View>
-                          <Ionicons
-                            name="chevron-down"
-                            size={18}
-                            color={colors.TEXT_SUBTLE}
-                          />
-                        </View>
-                      </CocolonPressable>
-                    )}
-                  </View>
-                </View>
+                <InputEmotionSection
+                  sectionRef={emotionAreaRef}
+                  selectedEmotions={selectedEmotions}
+                  isSelfInsightSelected={isSelfInsightSelected}
+                  toggleEmotion={toggleEmotion}
+                  changeStrength={changeStrength}
+                  strengthRowRefs={strengthRowRefs}
+                  styles={styles}
+                  colors={colors}
+                />
 
-                <View
-                  ref={emotionAreaRef}
-                  collapsable={false}
-                  style={styles.heroEmotionSection}
-                >
-                  <Text style={styles.heroFieldLabel}>感情選択</Text>
-                  <Text style={styles.heroFieldHint}>
-                    今の感情を選んでください。複数選択可能です。自己理解は単体選択のみです。
-                  </Text>
+                <InputCategorySection
+                  sectionRef={categorySectionRef}
+                  hasMemoInput={hasMemoInput}
+                  hasSelectedCategories={hasSelectedCategories}
+                  selectedCategories={selectedCategories}
+                  toggleCategory={toggleCategory}
+                  styles={styles}
+                />
 
-                  <View style={styles.buttons}>
-                    {EMOTION_ROWS.map((row, rowIndex) => (
-                      <View key={`row-${rowIndex}`} style={styles.emotionRow}>
-                        {row.map((cat, colIndex) => {
-                          if (!cat) {
-                            return (
-                              <View
-                                key={`empty-${rowIndex}-${colIndex}`}
-                                style={styles.emotionBlock}
-                              />
-                            );
-                          }
-
-                          const emotion = selectedEmotions.find(
-                            (e) => e.type === cat
-                          );
-                          const on = !!emotion;
-                          const isSelfInsightButton = cat === SELF_INSIGHT;
-                          const isDisabled = isSelfInsightSelected && !isSelfInsightButton;
-
-                          return (
-                            <View key={cat} style={styles.emotionBlock}>
-                              <CocolonPressable
-                                onPress={() => toggleEmotion(cat)}
-                                disabled={isDisabled}
-                                style={[
-                                  styles.chip,
-                                  on && styles.chipOn,
-                                  isDisabled && { opacity: 0.45 },
-                                ]}
-                              >
-                                <Ionicons
-                                  name={
-                                    cat === "喜び"
-                                      ? "happy-outline"
-                                      : cat === "悲しみ"
-                                      ? "sad-outline"
-                                      : cat === "怒り"
-                                      ? "flash-outline"
-                                      : cat === "不安"
-                                      ? "alert-circle-outline"
-                                      : cat === SELF_INSIGHT
-                                      ? "bulb-outline"
-                                      : "leaf-outline"
-                                  }
-                                  size={16}
-                                  color={
-                                    on ? colors.ACCENT_TEXT : colors.TEXT_SUBTLE
-                                  }
-                                  style={{ marginRight: 4 }}
-                                />
-                                <Text
-                                  style={[
-                                    styles.chipText,
-                                    on && styles.chipTextOn,
-                                  ]}
-                                >
-                                  {cat}
-                                </Text>
-                              </CocolonPressable>
-
-                              <View
-                                ref={(node) => {
-                                  strengthRowRefs.current[cat] = node;
-                                }}
-                                collapsable={false}
-                                style={styles.strengthRow}
-                              >
-                                {on && !isSelfInsightButton &&
-                                  ["weak", "medium", "strong"].map((s) => (
-                                    <CocolonPressable
-                                      key={s}
-                                      onPress={() => changeStrength(cat, s)}
-                                      style={[
-                                        styles.strengthChip,
-                                        emotion?.strength === s &&
-                                          styles.strengthChipOn,
-                                      ]}
-                                    >
-                                      <Text
-                                        style={[
-                                          styles.strengthText,
-                                          emotion?.strength === s &&
-                                            styles.strengthTextOn,
-                                        ]}
-                                      >
-                                        {{
-                                          weak: "弱",
-                                          medium: "中",
-                                          strong: "強",
-                                        }[s]}
-                                      </Text>
-                                    </CocolonPressable>
-                                  ))}
-                              </View>
-                            </View>
-                          );
-                        })}
-                      </View>
-                    ))}
-                  </View>
-                </View>
-
-                <View style={styles.categorySection}>
-                  <Text style={styles.heroFieldLabel}>このメモの内容カテゴリ</Text>
-                  <Text style={styles.categoryHintText}>
-                    {hasMemoInput
-                      ? "この出来事や思考に近いカテゴリを、1つ以上選んでください。"
-                      : "思考内容または行動内容を入力すると選択できます。"}
-                  </Text>
-                  <View style={styles.categoryGrid}>
-                    {CATEGORY_OPTIONS.map((category) => {
-                      const isActive = selectedCategories.includes(category);
-                      const isDisabled = !hasMemoInput;
-                      return (
-                        <CocolonPressable
-                          key={category}
-                          onPress={() => toggleCategory(category)}
-                          disabled={isDisabled}
-                          style={[
-                            styles.categoryChip,
-                            isActive && styles.categoryChipOn,
-                            isDisabled && styles.categoryChipDisabled,
-                          ]}
-                          accessibilityLabel={`${category}カテゴリを選択する`}
-                        >
-                          <Text
-                            style={[
-                              styles.categoryChipText,
-                              isActive && styles.categoryChipTextOn,
-                              isDisabled && styles.categoryChipTextDisabled,
-                            ]}
-                          >
-                            {category}
-                          </Text>
-                        </CocolonPressable>
-                      );
-                    })}
-                  </View>
-                  {hasMemoInput && !hasSelectedCategories ? (
-                    <Text style={styles.categoryRequiredText}>
-                      メモを入力した場合は、カテゴリを1つ以上選択してください。
-                    </Text>
-                  ) : null}
-                </View>
-
-                <View style={styles.heroActionArea}>
-                  <View
-                    ref={notificationRef}
-                    collapsable={false}
-                    style={[styles.preferenceCard, styles.preferenceCardInActionArea]}
-                  >
-                    <View style={styles.preferenceRow}>
-                      <View style={styles.preferenceLeft}>
-                        <Ionicons
-                          name="notifications-outline"
-                          size={18}
-                          color={colors.TEXT_SUBTLE}
-                          style={styles.preferenceIcon}
-                        />
-                        <View style={styles.preferenceTextWrap}>
-                          <Text style={styles.preferenceTitle}>
-                            感情通知を送らない
-                          </Text>
-                          <Text style={styles.preferenceDesc}>
-                            オンにするとフォロー中ユーザーに通知されません。
-                          </Text>
-                        </View>
-                      </View>
-                      <CocolonSwitch
-                        value={doNotSendEmotionNotification}
-                        onValueChange={(v) => {
-                          if (isTutorialMode) return;
-                          registerInputInteraction();
-                          setSendEmotionNotification(!v);
-                        }}
-                        trackColor={{
-                          false: "#D1D5DB",
-                          true: colors.GOLD_BUTTON,
-                        }}
-                        thumbColor={
-                          Platform.OS === "android"
-                            ? doNotSendEmotionNotification
-                              ? "#FFFFFF"
-                              : "#F9FAFB"
-                            : undefined
-                        }
-                        ios_backgroundColor="#D1D5DB"
-                        disabled={isTutorialMode}
-                        accessibilityLabel="感情通知を送らない設定を切り替える"
-                      />
-                    </View>
-                  </View>
-
-                  <View
-                    ref={pieceButtonRef}
-                    collapsable={false}
-                    style={styles.buttonWrapper}
-                  >
-                    <CocolonButton
-                      variant="secondary"
-                      onPress={handlePreviewPiece}
-                      disabled={!canPreviewPiece}
-                      loading={piecePreviewLoading}
-                      accessibilityLabel="ピースを生成する"
-                    >
-                      ピースを生成する
-                    </CocolonButton>
-                  </View>
-
-                  <View
-                    ref={okButtonRef}
-                    collapsable={false}
-                    style={styles.buttonWrapper}
-                  >
-                    <CocolonButton
-                      variant="primary"
-                      onPress={handleOk}
-                      disabled={!canSubmit}
-                      loading={submitting}
-                      accessibilityLabel="この内容でOK"
-                    >
-                      この内容でOK
-                    </CocolonButton>
-                  </View>
-                </View>
+                <InputActionArea
+                  notificationRef={notificationRef}
+                  pieceButtonRef={pieceButtonRef}
+                  okButtonRef={okButtonRef}
+                  doNotSendEmotionNotification={doNotSendEmotionNotification}
+                  isTutorialMode={isTutorialMode}
+                  registerInputInteraction={registerInputInteraction}
+                  setSendEmotionNotification={setSendEmotionNotification}
+                  handlePreviewPiece={handlePreviewPiece}
+                  canPreviewPiece={canPreviewPiece}
+                  piecePreviewLoading={piecePreviewLoading}
+                  handleOk={handleOk}
+                  canSubmit={canSubmit}
+                  submitting={submitting}
+                  styles={styles}
+                  colors={colors}
+                />
               </View>
 
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-<NoticeModal
-  visible={!isTutorialMode && noticeFeatureEnabled && isNoticeStartupPopupVisible && !!noticePopup}
-  notice={noticePopup}
-  loading={noticeLoading}
-  onClose={handleDismissNoticeModal}
-  onOpenHistory={handleOpenNoticeHistory}
-  onPressAction={handlePressNoticeAction}
-  variant={isWelcomeNoticeStartupPopup ? "welcome" : "default"}
-  showPublishedDate={!isWelcomeNoticeStartupPopup}
-  showHistoryButton={!isWelcomeNoticeStartupPopup}
-  primaryCloseLabel={isWelcomeNoticeStartupPopup ? "はじめる" : null}
-  onPrimaryClose={
-    isWelcomeNoticeStartupPopup ? handlePrimaryNoticeModalAction : undefined
-  }
+<InputStartupModals
+  styles={styles}
+  colors={colors}
+  isTutorialMode={isTutorialMode}
+  noticeFeatureEnabled={noticeFeatureEnabled}
+  isNoticeStartupPopupVisible={isNoticeStartupPopupVisible}
+  noticePopup={noticePopup}
+  noticeLoading={noticeLoading}
+  handleDismissNoticeModal={handleDismissNoticeModal}
+  handleOpenNoticeHistory={handleOpenNoticeHistory}
+  handlePressNoticeAction={handlePressNoticeAction}
+  isWelcomeNoticeStartupPopup={isWelcomeNoticeStartupPopup}
+  handlePrimaryNoticeModalAction={handlePrimaryNoticeModalAction}
+  shouldHideTodayQuestionForTutorial={shouldHideTodayQuestionForTutorial}
+  isTodayQuestionStartupPopupVisible={isTodayQuestionStartupPopupVisible}
+  todayQuestionBundle={todayQuestionBundle}
+  todayQuestionLoading={todayQuestionLoading}
+  todayQuestionSubmitting={todayQuestionSubmitting}
+  handleDismissTodayQuestionModal={handleDismissTodayQuestionModal}
+  handleSubmitTodayQuestion={handleSubmitTodayQuestion}
+  handleOpenTodayQuestionHistory={handleOpenTodayQuestionHistory}
+  draftRestoreModalVisible={draftRestoreModalVisible}
+  draftRestoreSavedAtLabel={draftRestoreSavedAtLabel}
+  restorePendingInputDraft={restorePendingInputDraft}
+  discardPendingInputDraft={discardPendingInputDraft}
 />
 
-<TodayQuestionModal
-  visible={!shouldHideTodayQuestionForTutorial && isTodayQuestionStartupPopupVisible && !!todayQuestionBundle?.question && todayQuestionBundle?.answer_status !== "answered"}
-  question={todayQuestionBundle?.question}
-  answerSummary={todayQuestionBundle?.answer_summary || null}
-  loading={todayQuestionLoading}
-  submitting={todayQuestionSubmitting}
-  onClose={handleDismissTodayQuestionModal}
-  onSubmit={handleSubmitTodayQuestion}
-  onOpenHistory={handleOpenTodayQuestionHistory}
-/>
-
-<Modal
-  visible={draftRestoreModalVisible}
-  transparent
-  animationType="fade"
-  onRequestClose={() => {}}
->
-  <View style={styles.draftRestoreBackdrop}>
-    <View style={styles.draftRestoreCard}>
-      <View style={styles.draftRestoreBadgeRow}>
-        <View style={styles.draftRestoreBadge}>
-          <Ionicons
-            name="save-outline"
-            size={15}
-            color={colors.TITLE_GOLD}
-            style={styles.draftRestoreBadgeIcon}
-          />
-          <Text style={styles.draftRestoreBadgeText}>一時保存した入力</Text>
-        </View>
-      </View>
-
-      <View style={styles.draftRestoreHeader}>
-        <Text style={styles.draftRestoreTitle}>前回の続きから入力できます</Text>
-        <Text style={styles.draftRestoreLeadText}>
-          送信前の内容を、この端末に自動で一時保存しています。
-        </Text>
-      </View>
-
-      <View style={styles.draftRestoreInfoCard}>
-        <View style={styles.draftRestoreInfoRow}>
-          <Ionicons
-            name="time-outline"
-            size={16}
-            color={colors.TITLE_GOLD}
-            style={styles.draftRestoreInfoIcon}
-          />
-          <Text style={styles.draftRestoreInfoText}>
-            {draftRestoreSavedAtLabel
-              ? `${draftRestoreSavedAtLabel} に保存 / 保存期間 ${INPUT_DRAFT_TTL_HOURS}時間`
-              : `保存期間は ${INPUT_DRAFT_TTL_HOURS}時間です`}
-          </Text>
-        </View>
-
-        <Text style={styles.draftRestoreBodyText}>
-          続きから入力する場合は前回の内容を復元し、新しく入力する場合は保存内容を削除して空の状態で開きます。
-        </Text>
-      </View>
-
-      <View style={styles.draftRestoreActionColumn}>
-        <CocolonButton
-          variant="primary"
-          onPress={restorePendingInputDraft}
-          accessibilityLabel="前回の内容を復元して続きから入力する"
-        >
-          続きから入力する
-        </CocolonButton>
-        <View style={styles.draftRestoreSecondaryAction}>
-          <CocolonButton
-            variant="secondary"
-            onPress={discardPendingInputDraft}
-            accessibilityLabel="保存内容を削除して新しく入力する"
-          >
-            新しく入力する
-          </CocolonButton>
-        </View>
-      </View>
-    </View>
-  </View>
-</Modal>
-
-<Modal
+<InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
-  transparent
-  animationType="fade"
-  onRequestClose={closeInputFeedbackModal}
->
-  <View style={styles.inputFeedbackBackdrop}>
-    <View
-      style={[
-        styles.inputFeedbackCard,
-        { maxHeight: Math.max(380, Math.min(620, Math.floor((windowHeight || 0) * 0.84) || 560)) },
-      ]}
-    >
-      <View style={styles.inputFeedbackHeader}>
-        <View style={styles.inputFeedbackTitleRow}>
-          <Ionicons
-            name="chatbubble-ellipses-outline"
-            size={18}
-            color={colors.TITLE_GOLD}
-            style={styles.inputFeedbackTitleIcon}
-          />
-          <Text style={styles.inputFeedbackTitle}>Emlisからの返答</Text>
-        </View>
-        {inputFeedbackModalMeta.contextLabel ? (
-          <Text style={styles.inputFeedbackMetaText}>
-            {inputFeedbackModalMeta.contextLabel}
-          </Text>
-        ) : null}
-        {inputFeedbackModalMeta.emotionSummary ? (
-          <Text style={styles.inputFeedbackMetaText}>
-            {inputFeedbackModalMeta.emotionSummary}
-          </Text>
-        ) : null}
-        {inputFeedbackModalMeta.dominantSummary ? (
-          <Text style={styles.inputFeedbackMetaText}>
-            {inputFeedbackModalMeta.dominantSummary}
-          </Text>
-        ) : null}
-      </View>
+  text={inputFeedbackModalText}
+  meta={inputFeedbackModalMeta}
+  isTutorialMode={isTutorialMode}
+  windowHeight={windowHeight}
+  onClose={closeInputFeedbackModal}
+  styles={styles}
+  colors={colors}
+/>
 
-      <ScrollView
-        style={[
-          styles.inputFeedbackBodyScroll,
-          { maxHeight: Math.max(220, Math.min(470, Math.floor((windowHeight || 0) * 0.56) || 390)) },
-        ]}
-        contentContainerStyle={styles.inputFeedbackBodyContent}
-        showsVerticalScrollIndicator
-      >
-        <Text style={styles.inputFeedbackBodyText}>
-          {inputFeedbackModalText}
-        </Text>
-      </ScrollView>
-
-      <View style={styles.inputFeedbackActionRow}>
-        <CocolonButton
-          variant="secondary"
-          onPress={closeInputFeedbackModal}
-          accessibilityLabel="Emlisからの返答を閉じる"
-        >
-          閉じる
-        </CocolonButton>
-      </View>
-    </View>
-  </View>
-</Modal>
-
-<EmotionPiecePreviewModal
+<InputPiecePreviewController
   visible={piecePreviewVisible}
-  preview={{
-    ...(piecePreviewPayload || {}),
-    quota: piecePreviewPayload?.quota || pieceQuota || null,
-  }}
+  previewPayload={piecePreviewPayload}
+  pieceQuota={pieceQuota}
   publishLoading={piecePublishLoading}
   onClose={handleCancelPiecePreview}
   onPublish={handlePublishPiece}
@@ -2604,7 +1523,7 @@ ${String(error?.message || error)}`
     mode={tutorialOverlayConfig.mode}
     nextLabel={tutorialOverlayConfig.nextLabel}
     onNext={tutorialOverlayConfig.onNext}
-    onTargetPress={tutorialStep === 6 ? handlePreviewPiece : undefined}
+    onTargetPress={tutorialStep === 7 ? handlePreviewPiece : undefined}
     onMetricsChange={setTutorialOverlayMetrics}
     actionHint={tutorialOverlayConfig.actionHint}
     showStepPill={false}
@@ -2614,21 +1533,11 @@ ${String(error?.message || error)}`
   />
 ) : null}
 
-{toastMessage ? (
-  <View pointerEvents="none" style={styles.toastOverlay}>
-    <View style={styles.toastCard}>
-      <Ionicons
-        name="checkmark-circle-outline"
-        size={20}
-        color={colors.TITLE_GOLD}
-        style={{ marginRight: 8 }}
-      />
-      <Text style={styles.toastText} numberOfLines={3}>
-        {toastMessage}
-      </Text>
-    </View>
-  </View>
-) : null}
+<InputToastOverlay
+  message={toastMessage}
+  styles={styles}
+  colors={colors}
+/>
 
     </View>
   );

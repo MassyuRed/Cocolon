@@ -1,8 +1,6 @@
 import React, {
   useEffect,
-  useLayoutEffect,
   useMemo,
-  useState,
   useCallback,
   useRef,
 } from "react";
@@ -20,13 +18,6 @@ import {
   useWindowDimensions,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// Supabase
-import { supabase } from "../lib/supabase";
-import { apiGet, apiPost } from "../lib/apiClient";
-import { getTodayQuestionHistory } from "../lib/todayQuestionApi";
-import { ANALYSIS_WIRE, SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
 
 // 既存
 import AnalysisHistoryScreen from "./AnalysisHistoryScreen";
@@ -44,8 +35,6 @@ import AnalysisInputHistoryMenuScreen from "./AnalysisInputHistoryMenuScreen";
 // 🎨 テーマコンテキスト
 import { useTheme } from "../theme/ThemeContext";
 
-// 🔴 Unread badge state (screen ⇄ bottom tab)
-import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
 import { useTutorial } from "../TutorialContext";
 
@@ -56,187 +45,30 @@ import UnreadBadge from "../components/UnreadBadge";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import TutorialOverlay, {
-  syncTutorialSpotlightTarget,
-  waitForTutorialFrames,
-} from "../components/TutorialOverlay";
+import TutorialOverlay from "../components/TutorialOverlay";
 import {
   TUTORIAL_ANALYSIS_COUNTS,
   TUTORIAL_ANALYSIS_REPORTS,
   TUTORIAL_SELF_ANALYSIS_GUIDE,
   TUTORIAL_TOTAL_STEPS,
 } from "../tutorial/tutorialScenarioData";
-
-// Home / Piece の見た目に合わせたパネル高さ（だいたいの値）
-const PANEL_MIN_HEIGHT = 690;
-
-const ANALYSIS_TUTORIAL_STEP_START = 7;
-const ANALYSIS_TUTORIAL_STEP_END = 11;
-
-const SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY = "cocolon:selfStructureLatestSeenVersion";
-const SELF_STRUCTURE_HISTORY_FETCH_LIMIT = 200;
-const REPORT_READ_STATUS_CHUNK_SIZE = 60;
-const ROUTE_HOME = "home";
-const ROUTE_EMOTION_ANALYSIS = "emotionAnalysis";
-const ROUTE_SELF_STRUCTURE = "selfStructure";
-const ROUTE_INPUT_HISTORY = "inputHistory";
-const ANALYSIS_READY_LIMIT = 1;
-const INITIAL_VISIBLE_REPORT_TYPE = "daily";
-const REPORT_TYPE_LABEL = Object.freeze({
-  daily: "日報",
-  weekly: "週報",
-  monthly: "月報",
-});
-
-const ANALYSIS_LATEST_REPORT_CACHE_PREFIX = "cocolon:analysisLatestReport";
-const ANALYSIS_LATEST_REPORT_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
-const ANALYSIS_READY_REPORT_TYPES = Object.freeze(["daily", "weekly", "monthly"]);
-
-function normalizeAnalysisReportType(type) {
-  const normalized = String(type || "").trim().toLowerCase();
-  return ANALYSIS_READY_REPORT_TYPES.includes(normalized) ? normalized : null;
-}
-
-async function getAnalysisLatestReportCacheKey(reportType) {
-  const normalizedType = normalizeAnalysisReportType(reportType);
-  if (!normalizedType) return null;
-
-  let userId = "";
-  try {
-    const { data } = await supabase.auth.getSession();
-    userId = String(data?.session?.user?.id || "").trim();
-  } catch {
-    userId = "";
-  }
-
-  return `${ANALYSIS_LATEST_REPORT_CACHE_PREFIX}:${userId || "anonymous"}:${normalizedType}`;
-}
-
-function isUsableCachedAnalysisReport(report, reportType) {
-  const normalizedType = normalizeAnalysisReportType(reportType);
-  if (!normalizedType || !report || typeof report !== "object") return false;
-  const type = String(report?.report_type || normalizedType).trim().toLowerCase();
-  return !!report?.id && type === normalizedType;
-}
-
-async function readCachedAnalysisLatestReport(reportType) {
-  try {
-    const key = await getAnalysisLatestReportCacheKey(reportType);
-    if (!key) return null;
-
-    const raw = await AsyncStorage.getItem(key);
-    if (!raw) return null;
-
-    const payload = JSON.parse(raw);
-    const savedAt = Number(payload?.saved_at || 0);
-    if (!Number.isFinite(savedAt) || Date.now() - savedAt > ANALYSIS_LATEST_REPORT_CACHE_TTL_MS) {
-      return null;
-    }
-
-    const report = payload?.report || null;
-    return isUsableCachedAnalysisReport(report, reportType) ? report : null;
-  } catch {
-    return null;
-  }
-}
-
-async function writeCachedAnalysisLatestReport(reportType, report) {
-  try {
-    if (!isUsableCachedAnalysisReport(report, reportType)) return;
-    const key = await getAnalysisLatestReportCacheKey(reportType);
-    if (!key) return;
-
-    await AsyncStorage.setItem(
-      key,
-      JSON.stringify({
-        saved_at: Date.now(),
-        report,
-      })
-    );
-  } catch {
-    // cache write is best-effort only
-  }
-}
-
-function extractReadyItems(payload) {
-  if (Array.isArray(payload?.items)) return payload.items;
-  if (Array.isArray(payload?.reports)) return payload.reports;
-  if (Array.isArray(payload?.data?.items)) return payload.data.items;
-  if (Array.isArray(payload?.data?.reports)) return payload.data.reports;
-  if (Array.isArray(payload)) return payload;
-  return [];
-}
-
-function parseLooseIsoDate(value) {
-  const raw = String(value || "").trim();
-  if (!raw) return null;
-
-  let normalized = raw;
-  if (/^\d{4}-\d{2}-\d{2} \d/.test(normalized)) {
-    normalized = normalized.replace(" ", "T");
-  }
-  if (!(/[zZ]$/.test(normalized) || /[+-]\d{2}:\d{2}$/.test(normalized))) {
-    normalized = `${normalized}Z`;
-  }
-
-  const date = new Date(normalized);
-  if (Number.isNaN(date.getTime())) return null;
-  return date;
-}
-
-function pickLatestIso(values) {
-  let latestValue = null;
-  let latestTime = -Infinity;
-
-  for (const value of Array.isArray(values) ? values : []) {
-    const date = parseLooseIsoDate(value);
-    if (!date) continue;
-    const time = date.getTime();
-    if (time > latestTime) {
-      latestTime = time;
-      latestValue = value;
-    }
-  }
-
-  return latestValue;
-}
-
-function resolveAnalysisReportUpdatedAt(item) {
-  if (!item || typeof item !== "object") return null;
-  return (
-    item.generated_at ||
-    item.updated_at ||
-    item.published_at ||
-    item.period_end ||
-    item.created_at ||
-    null
-  );
-}
-
-function resolveSelfStructureUpdatedAt(item) {
-  if (!item || typeof item !== "object") return null;
-  return item.generated_at || item.updated_at || item.period_end || item.created_at || null;
-}
-
-function resolveTodayQuestionUpdatedAt(item) {
-  if (!item || typeof item !== "object") return null;
-  return item.edited_at || item.answered_at || item.updated_at || item.created_at || null;
-}
-
-function formatLatestUpdateLabel(value) {
-  const date = parseLooseIsoDate(value);
-  if (!date) return "最新更新日：--";
-
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `最新更新日：${year}/${month}/${day}`;
-}
-
-function normalizeSelfStructureMode(mode) {
-  const value = String(mode || "").trim().toLowerCase();
-  return value === "deep" ? "deep" : "standard";
-}
+import {
+  formatLatestUpdateLabel,
+  isAnalysisMenuRoute,
+  isAnalysisReportType,
+  normalizeSelfStructureMode,
+  PANEL_MIN_HEIGHT,
+  REPORT_TYPE_LABEL,
+  ROUTE_EMOTION_ANALYSIS,
+  ROUTE_HOME,
+  ROUTE_INPUT_HISTORY,
+  ROUTE_SELF_STRUCTURE,
+} from "./analysis/analysisRouteModel";
+import { useAnalysisRouteState } from "./analysis/useAnalysisRouteState";
+import { useAnalysisUnreadBadges } from "./analysis/useAnalysisUnreadBadges";
+import { useAnalysisReportActions } from "./analysis/useAnalysisReportActions";
+import { useAnalysisSelfStructureActions } from "./analysis/useAnalysisSelfStructureActions";
+import { useAnalysisTutorialOverlay } from "./analysis/useAnalysisTutorialOverlay";
 
 function useThemedStyles() {
   const { colors, themeName } = useTheme();
@@ -247,54 +79,105 @@ function useThemedStyles() {
 }
 
 export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
-  const { getFeatureUnread } = useUnread();
   const { ensurePaid, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
-  const tutorialScrollRef = useRef(null);
-  const tutorialScrollYRef = useRef(0);
-  const [tutorialTargetRect, setTutorialTargetRect] = useState(null);
-  const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
-  const analysisTitleRef = useRef(null);
-  const analysisEmotionRef = useRef(null);
-  const analysisSelfStructureRef = useRef(null);
-  const analysisReportRef = useRef(null);
-  const analysisSelfReportRef = useRef(null);
-  const analysisGuideRef = useRef(null);
+  const { styles, colors, isDark } = useThemedStyles();
 
+  const {
+    route,
+    setRoute,
+    reportType,
+    setReportType,
+    selectedReport,
+    setSelectedReport,
+    selectedSelfReport,
+    setSelectedSelfReport,
+    reportHistoryBackRoute,
+    setReportHistoryBackRoute,
+    reportViewBackRoute,
+    setReportViewBackRoute,
+    historyBackRoute,
+    setHistoryBackRoute,
+    todayQuestionHistoryBackRoute,
+    setTodayQuestionHistoryBackRoute,
+    selfReportGenerateBackRoute,
+    setSelfReportGenerateBackRoute,
+    selfReportHistoryBackRoute,
+    setSelfReportHistoryBackRoute,
+    selfReportGenerateMode,
+    setSelfReportGenerateMode,
+    clearExternalOpenParams,
+  } = useAnalysisRouteState({ navigation });
 
-  // 'home' | 'emotionAnalysis' | 'selfStructure' | 'inputHistory' | 'history' | 'reportHistory' | 'reportView' | 'selfReportHistory' | 'selfReportView' | 'selfReportGenerate' | 'todayQuestionHistory'
-  const [route, setRoute] = useState(ROUTE_HOME);
-  const [reportType, setReportType] = useState("weekly"); // 'daily' | 'weekly' | 'monthly'
-  const [selectedReport, setSelectedReport] = useState(null);
-  const [selectedSelfReport, setSelectedSelfReport] = useState(null);
-  const [reportHistoryBackRoute, setReportHistoryBackRoute] = useState(ROUTE_EMOTION_ANALYSIS);
-  const [reportViewBackRoute, setReportViewBackRoute] = useState(ROUTE_EMOTION_ANALYSIS);
-  const [historyBackRoute, setHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
-  const [todayQuestionHistoryBackRoute, setTodayQuestionHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
-  const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState(ROUTE_SELF_STRUCTURE);
-  const [selfReportHistoryBackRoute, setSelfReportHistoryBackRoute] = useState(ROUTE_SELF_STRUCTURE);
-  const [selfReportGenerateMode, setSelfReportGenerateMode] = useState("standard");
+  const {
+    entryMeta,
+    homeSummariesLoading,
+    fetchLatestReadyReport,
+    refreshHomeSummaries,
+  } = useAnalysisReportActions();
 
-  const clearExternalOpenParams = useCallback(
-    (patch) => {
-      try {
-        navigation?.setParams?.(patch);
-      } catch {
-        // noop
-      }
-      try {
-        const parentNav =
-          typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-        parentNav?.setParams?.(patch);
-      } catch {
-        // noop
-      }
-    },
-    [navigation]
-  );
+  const {
+    unreadByType,
+    unreadResolved,
+    selfStructureUnreadResolved,
+    selfStructureLatestUnread,
+    selfStructureHistoryUnread,
+    prefetchedUnreadByType,
+    emotionAnalysisUnread,
+    selfStructureUnread,
+    refreshUnreadBadges,
+    markSelfStructureLatestSeen,
+    markReportRead,
+  } = useAnalysisUnreadBadges({
+    isPaid,
+    subscriptionLoading,
+    onRefreshTabUnread,
+  });
+
+  const {
+    openSelfStructureRoute,
+    openSelfReportLatest,
+    openSelfReportHistory,
+    openSelfReportView,
+  } = useAnalysisSelfStructureActions({
+    ensurePaid,
+    navigation,
+    setRoute,
+    setSelectedSelfReport,
+    setSelfReportGenerateMode,
+    setSelfReportGenerateBackRoute,
+    setSelfReportHistoryBackRoute,
+  });
+
+  const resetAnalysisTutorialRoute = useCallback(() => {
+    setSelectedReport(null);
+    setSelectedSelfReport(null);
+    setRoute(ROUTE_HOME);
+  }, [setRoute, setSelectedReport, setSelectedSelfReport]);
+
+  const {
+    isAnalysisTutorialStep,
+    tutorialScrollRef,
+    handleTutorialScroll,
+    tutorialRefs,
+    tutorialOverlayConfig,
+    tutorialTargetRect,
+    setTutorialOverlayMetrics,
+  } = useAnalysisTutorialOverlay({
+    route,
+    navigation,
+    screenRootRef,
+    windowHeight,
+    safeInsets,
+    isTutorialMode,
+    tutorialStep,
+    setTutorialStep,
+    entryMeta,
+    onResetToHome: resetAnalysisTutorialRoute,
+  });
 
   useEffect(() => {
     const shouldOpen = !!(tabRoute?.params?.openTodayQuestionHistory || screenRoute?.params?.openTodayQuestionHistory);
@@ -309,254 +192,10 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     clearExternalOpenParams,
     screenRoute?.params?.openTodayQuestionHistory,
     screenRoute?.params?.openTodayQuestionHistoryAt,
+    setRoute,
+    setTodayQuestionHistoryBackRoute,
     tabRoute?.params?.openTodayQuestionHistory,
     tabRoute?.params?.openTodayQuestionHistoryAt,
-  ]);
-
-  // 未読バッジ（●）用：Analysis（日/週/月）ごとの未読状態
-  // 画面内では AnalysisScreen 自身の refreshUnreadBadges() を主判定にする。
-  // ただし初期表示は App 側の prefetch / UnreadContext を fallback として使い、
-  // 画面を開いた瞬間の NEW 表示遅延を避ける。
-  const [unreadByType, setUnreadByType] = useState({
-    daily: false,
-    weekly: false,
-    monthly: false,
-    selfStructure: false,
-  });
-  const [unreadResolved, setUnreadResolved] = useState(false);
-  const [selfStructureUnreadResolved, setSelfStructureUnreadResolved] = useState(false);
-  const [selfStructureLatestUnread, setSelfStructureLatestUnread] = useState(false);
-  const [selfStructureHistoryUnread, setSelfStructureHistoryUnread] = useState(false);
-
-  const prefetchedUnreadByType = useMemo(
-    () => ({
-      daily: !!getFeatureUnread("Analysis", "daily"),
-      weekly: !!getFeatureUnread("Analysis", "weekly"),
-      monthly: !!getFeatureUnread("Analysis", "monthly"),
-      selfStructure: !!getFeatureUnread("Analysis", "selfStructure"),
-    }),
-    [getFeatureUnread]
-  );
-
-  const [entryMeta, setEntryMeta] = useState({
-    emotionLatestDate: null,
-    selfStructureLatestDate: null,
-    inputHistoryLatestDate: null,
-    todayCount: 0,
-    weekCount: 0,
-    monthCount: 0,
-    latestReports: {
-      daily: null,
-      weekly: null,
-      monthly: null,
-    },
-  });
-
-  const [homeSummariesLoading, setHomeSummariesLoading] = useState(false);
-
-  // (hooks moved to the top of the component)
-
-  const { styles, colors, isDark } = useThemedStyles();
-
-  const isAnalysisTutorialStep =
-    !!isTutorialMode &&
-    tutorialStep >= ANALYSIS_TUTORIAL_STEP_START &&
-    tutorialStep <= ANALYSIS_TUTORIAL_STEP_END;
-  const isAnalysisTutorialVisible = isAnalysisTutorialStep && route === "home";
-
-  const handleTutorialScroll = useCallback((e) => {
-    tutorialScrollYRef.current =
-      e?.nativeEvent?.contentOffset?.y ?? tutorialScrollYRef.current;
-  }, []);
-
-  const getTutorialTargetRef = useCallback(() => {
-    if (!isAnalysisTutorialVisible) return null;
-
-    switch (tutorialStep) {
-      case 8:
-      case 9:
-      case 10:
-        return analysisReportRef;
-      case 11:
-        return analysisSelfReportRef;
-      default:
-        return null;
-    }
-  }, [isAnalysisTutorialVisible, tutorialStep]);
-
-  const tutorialOverlayConfig = useMemo(() => {
-    if (!isAnalysisTutorialVisible) return null;
-
-    switch (tutorialStep) {
-      case 7:
-        return {
-          step: 7,
-          mode: "info",
-          title: "分析画面",
-          message:
-            "分析画面の説明をします。\n\nここでは分析レポートを閲覧することができます。",
-          nextLabel: "日報へ",
-          onNext: () => setTutorialStep(8),
-          disableSpotlight: true,
-          dimOpacity: 0,
-        };
-      case 8:
-        return {
-          step: 8,
-          mode: "info",
-          title: "日報",
-          message:
-            "日報では、その日の感情入力をもとにした振り返りを見られます。",
-          nextLabel: "週報を見る",
-          onNext: () => setTutorialStep(9),
-          disableSpotlight: true,
-          dimOpacity: 0,
-          blockBackgroundTouches: false,
-        };
-      case 9:
-        return {
-          step: 9,
-          mode: "info",
-          title: "週報",
-          message:
-            "週報では、1週間分の感情入力をもとにした振り返りを見られます。",
-          nextLabel: "月報を見る",
-          onNext: () => setTutorialStep(10),
-          disableSpotlight: true,
-          dimOpacity: 0,
-          blockBackgroundTouches: false,
-        };
-      case 10:
-        return {
-          step: 10,
-          mode: "info",
-          title: "月報",
-          message:
-            "月報では、感情やカテゴリの流れをもう少し長い期間で振り返れます。",
-          nextLabel: "自己分析へ",
-          onNext: () => setTutorialStep(11),
-          disableSpotlight: true,
-          dimOpacity: 0,
-          blockBackgroundTouches: false,
-        };
-      case 11:
-        return {
-          step: 11,
-          mode: "info",
-          title: "自己分析レポート",
-          message:
-            "自己分析レポートでは、日々の感情入力をもとに、自分の考え方や感情の傾向をより深く振り返ることができます。",
-          nextLabel: "ピース画面へ",
-          onNext: () => {
-            setTutorialStep(12);
-            requestAnimationFrame(() => {
-              try {
-                const parent =
-                  typeof navigation?.getParent === "function"
-                    ? navigation.getParent()
-                    : null;
-                if (parent && typeof parent.navigate === "function") {
-                  parent.navigate("Piece");
-                  return;
-                }
-              } catch {
-                // no-op
-              }
-
-              try {
-                navigation?.navigate?.("Piece");
-              } catch {
-                // no-op
-              }
-            });
-          },
-          cardPlacement: "bottom",
-          disableSpotlight: true,
-          dimOpacity: 0,
-        };
-      default:
-        return null;
-    }
-  }, [isAnalysisTutorialVisible, tutorialStep, setTutorialStep, navigation]);
-
-  const syncTutorialTargetRect = useCallback(async () => {
-    if (!isAnalysisTutorialVisible || tutorialOverlayConfig?.disableSpotlight) {
-      return null;
-    }
-
-    const targetRef = getTutorialTargetRef();
-    if (!targetRef || !screenRootRef.current) {
-      return null;
-    }
-
-    return syncTutorialSpotlightTarget({
-      enabled: isAnalysisTutorialVisible,
-      targetRef,
-      rootRef: screenRootRef,
-      scrollRef: tutorialScrollRef,
-      currentScrollYRef: tutorialScrollYRef,
-      overlayMetrics: tutorialOverlayMetrics,
-      windowHeight,
-      safeInsets,
-      cardPlacement: tutorialOverlayConfig?.cardPlacement || "bottom",
-      measureOptions: {
-        maxAttempts: 3,
-        settleFrames: 1,
-      },
-    });
-  }, [
-    getTutorialTargetRef,
-    isAnalysisTutorialVisible,
-    safeInsets,
-    tutorialStep,
-    tutorialOverlayConfig?.cardPlacement,
-    tutorialOverlayConfig?.disableSpotlight,
-    tutorialOverlayMetrics,
-    windowHeight,
-  ]);
-
-  // In tutorial mode, keep Analysis on "home" during the Analysis steps.
-  useEffect(() => {
-    if (!isAnalysisTutorialStep) return;
-    if (route === "home") return;
-
-    setSelectedReport(null);
-    setSelectedSelfReport(null);
-    setRoute("home");
-  }, [isAnalysisTutorialStep, route]);
-
-  useLayoutEffect(() => {
-    if (!isAnalysisTutorialVisible) {
-      setTutorialTargetRect(null);
-      setTutorialOverlayMetrics(null);
-      return;
-    }
-
-    let cancelled = false;
-
-    const run = async () => {
-      await waitForTutorialFrames(2);
-      if (cancelled) return;
-
-      const nextRect = await syncTutorialTargetRect();
-      if (!cancelled) {
-        setTutorialTargetRect(nextRect);
-      }
-    };
-
-    run();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [
-    entryMeta.emotionLatestDate,
-    entryMeta.inputHistoryLatestDate,
-    entryMeta.selfStructureLatestDate,
-    isAnalysisTutorialVisible,
-    tutorialStep,
-    tutorialOverlayMetrics,
-    syncTutorialTargetRect,
   ]);
 
   // ------------------------------------------------------------
@@ -565,8 +204,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   //   同じタブを再タップしたときにメイン（home）へ戻す。
   // ------------------------------------------------------------
   const routeRef = useRef(route);
-  const unreadRefreshSeqRef = useRef(0);
-  const menuMetaRefreshSeqRef = useRef(0);
   useEffect(() => {
     routeRef.current = route;
   }, [route]);
@@ -596,419 +233,12 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     return unsubscribe;
   }, [navigation]);
 
-  // レポートを開いた時に既読登録（report_reads に upsert）
-  const markReportRead = useCallback(async (report) => {
-    const reportId = report?.id ? String(report.id) : null;
-    if (!reportId) return;
-
-    try {
-      await apiPost("/report-reads/mark", {
-        report_id: reportId,
-        report_table: ANALYSIS_WIRE.reportFamily.table,
-        report_scope: ANALYSIS_WIRE.reportFamily.scope,
-      });
-    } catch (e) {
-      console.warn("AnalysisScreen: failed to mark report read", e);
-    }
-  }, []);
-
-  const fetchReportReadIdSet = useCallback(async (reportIds) => {
-    const ids = Array.from(
-      new Set(
-        (Array.isArray(reportIds) ? reportIds : [])
-          .map((id) => String(id || "").trim())
-          .filter(Boolean)
-      )
-    );
-    if (ids.length === 0) return new Set();
-
-    const readSet = new Set();
-    for (let i = 0; i < ids.length; i += REPORT_READ_STATUS_CHUNK_SIZE) {
-      const chunk = ids.slice(i, i + REPORT_READ_STATUS_CHUNK_SIZE);
-      if (chunk.length === 0) continue;
-      const query = chunk
-        .map((id) => `report_ids=${encodeURIComponent(id)}`)
-        .join("&");
-      const json = await apiGet(`/report-reads/status?${query}`);
-      const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
-      readIds.forEach((id) => {
-        const normalized = String(id || "").trim();
-        if (normalized) readSet.add(normalized);
-      });
-    }
-    return readSet;
-  }, []);
-
-  const getSelfStructureLatestSeenStorageKey = useCallback(async () => {
-    try {
-      const { data } = await supabase.auth.getSession();
-      const userId = String(data?.session?.user?.id || "").trim();
-      return userId
-        ? `${SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
-        : SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
-    } catch {
-      return SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
-    }
-  }, []);
-
-  const fetchSelfStructureLatestUnread = useCallback(async () => {
-    if (subscriptionLoading || !isPaid) return false;
-
-    const storageKey = await getSelfStructureLatestSeenStorageKey();
-    const [statusJson, seenVersionKey] = await Promise.all([
-      apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus),
-      AsyncStorage.getItem(storageKey),
-    ]);
-
-    const versionKey = String(statusJson?.version_key || "").trim();
-    const hasVisibleContent = !!statusJson?.has_visible_content;
-    const seenKey = String(seenVersionKey || "").trim();
-
-    if (!versionKey || !hasVisibleContent) return false;
-    return versionKey !== seenKey;
-  }, [getSelfStructureLatestSeenStorageKey, isPaid, subscriptionLoading]);
-
-  const fetchSelfStructureHistoryUnread = useCallback(async () => {
-    if (subscriptionLoading || !isPaid) return false;
-
-    const historyJson = await apiGet(
-      `${SELF_STRUCTURE_WIRE.routes.reportsHistoryBase}?report_type=monthly&limit=${SELF_STRUCTURE_HISTORY_FETCH_LIMIT}&offset=0`
-    );
-    const items = Array.isArray(historyJson?.items) ? historyJson.items : [];
-    const ids = items
-      .map((item) => String(item?.id || "").trim())
-      .filter(Boolean);
-
-    if (ids.length === 0) return false;
-
-    const readSet = await fetchReportReadIdSet(ids);
-    return ids.some((id) => !readSet.has(id));
-  }, [fetchReportReadIdSet, isPaid, subscriptionLoading]);
-
-  const requestParentTabUnreadRefresh = useCallback(async () => {
-    try {
-      await onRefreshTabUnread?.();
-    } catch (e) {
-      console.warn("AnalysisScreen: failed to request parent Analysis unread refresh", e);
-    }
-  }, [onRefreshTabUnread]);
-
-  const markSelfStructureLatestSeen = useCallback(
-    async (versionKey) => {
-      const normalized = String(versionKey || "").trim();
-      if (!normalized) return;
-
-      try {
-        const storageKey = await getSelfStructureLatestSeenStorageKey();
-        await AsyncStorage.setItem(storageKey, normalized);
-      } catch {
-        // noop
-      }
-
-      setSelfStructureLatestUnread(false);
-      setUnreadByType((prev) => ({
-        ...prev,
-        selfStructure: !!selfStructureHistoryUnread,
-      }));
-      await requestParentTabUnreadRefresh();
-    },
-    [getSelfStructureLatestSeenStorageKey, selfStructureHistoryUnread, requestParentTabUnreadRefresh]
-  );
-
-  // Analysis（日/週/月）の未読状態を更新
-  const refreshUnreadBadges = useCallback(async () => {
-    const refreshSeq = ++unreadRefreshSeqRef.current;
-    const isStale = () => refreshSeq !== unreadRefreshSeqRef.current;
-
-    const selfStructureTask = Promise.all([
-      fetchSelfStructureLatestUnread().catch((e) => {
-        console.warn("AnalysisScreen: failed to refresh latest self-structure unread badge", e);
-        return false;
-      }),
-      fetchSelfStructureHistoryUnread().catch((e) => {
-        console.warn("AnalysisScreen: failed to refresh self-structure history unread badge", e);
-        return false;
-      }),
-    ])
-      .then(([nextSelfStructureLatestUnread, nextSelfStructureHistoryUnread]) => {
-        if (isStale()) return;
-
-        const effectiveSelfStructureUnread =
-          !!nextSelfStructureLatestUnread || !!nextSelfStructureHistoryUnread;
-
-        setSelfStructureLatestUnread(!!nextSelfStructureLatestUnread);
-        setSelfStructureHistoryUnread(!!nextSelfStructureHistoryUnread);
-        setUnreadByType((prev) => ({
-          ...prev,
-          selfStructure: effectiveSelfStructureUnread,
-        }));
-        setSelfStructureUnreadResolved(true);
-      })
-      .catch(() => {
-        // noop
-      });
-
-    try {
-      const query = new URLSearchParams({
-        limit: "1",
-        include_self_structure: "false",
-      }).toString();
-
-      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${query}`);
-      const unread = json?.unread_by_type || {};
-
-      if (isStale()) return;
-
-      setUnreadByType((prev) => ({
-        ...prev,
-        daily: !!unread?.daily,
-        weekly: !!unread?.weekly,
-        monthly: !!unread?.monthly,
-      }));
-      setUnreadResolved(true);
-    } catch (e) {
-      if (isStale()) return;
-      console.warn("AnalysisScreen: failed to refresh unread badges", e);
-    }
-
-    void selfStructureTask;
-    await requestParentTabUnreadRefresh();
-  }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread, requestParentTabUnreadRefresh]);
-
-  const fetchLatestReadyReport = useCallback(async (type) => {
-    const normalizedType = normalizeAnalysisReportType(type);
-    if (!normalizedType) return null;
-
-    try {
-      const json = await apiGet(
-        `${ANALYSIS_WIRE.routes.reportsReady}?report_type=${encodeURIComponent(
-          normalizedType
-        )}&limit=${ANALYSIS_READY_LIMIT}&offset=0&include_body=true`
-      );
-      const items = extractReadyItems(json);
-      const latest = items[0] || null;
-      if (latest) {
-        void writeCachedAnalysisLatestReport(normalizedType, latest);
-      }
-      return latest || null;
-    } catch (e) {
-      console.warn("AnalysisScreen: failed to fetch latest ready report", normalizedType, e);
-      return null;
-    }
-  }, []);
-
-  const refreshHomeSummaries = useCallback(
-    async ({ showLoading = true, prioritizeVisibleReport = true } = {}) => {
-      const refreshSeq = showLoading
-        ? ++menuMetaRefreshSeqRef.current
-        : menuMetaRefreshSeqRef.current;
-      const isStale = () => refreshSeq !== menuMetaRefreshSeqRef.current;
-
-      if (showLoading) {
-        setHomeSummariesLoading(true);
-      }
-
-      const applyLatestReport = (type, report) => {
-        if (isStale()) return;
-
-        setEntryMeta((prev) => {
-          const latestReports = {
-            ...(prev?.latestReports || {}),
-            [type]: report || null,
-          };
-
-          return {
-            ...prev,
-            emotionLatestDate: pickLatestIso([
-              resolveAnalysisReportUpdatedAt(latestReports.daily),
-              resolveAnalysisReportUpdatedAt(latestReports.weekly),
-              resolveAnalysisReportUpdatedAt(latestReports.monthly),
-            ]),
-            latestReports,
-          };
-        });
-      };
-
-      const primeLatestReportFromCache = async (type) => {
-        const cachedReport = await readCachedAnalysisLatestReport(type);
-        if (!cachedReport || isStale()) return;
-        applyLatestReport(type, cachedReport);
-      };
-
-      const refreshReportType = async (type) => {
-        try {
-          const latestReport = await fetchLatestReadyReport(type);
-          applyLatestReport(type, latestReport);
-        } catch (e) {
-          if (!isStale()) {
-            console.warn(`AnalysisScreen: failed to refresh ${type} latest report`, e);
-          }
-        }
-      };
-
-      const refreshSelfLatestStatus = async () => {
-        try {
-          const selfLatestStatus = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
-          if (isStale()) return;
-
-          setEntryMeta((prev) => ({
-            ...prev,
-            selfStructureLatestDate: pickLatestIso([
-              selfLatestStatus?.has_visible_content
-                ? resolveSelfStructureUpdatedAt(selfLatestStatus)
-                : null,
-            ]),
-          }));
-        } catch (e) {
-          if (!isStale()) {
-            console.warn("AnalysisScreen: failed to refresh self-structure latest status", e);
-          }
-        }
-      };
-
-      const refreshInputSummary = async () => {
-        const [homeSummaryRes, todayQuestionRes] = await Promise.allSettled([
-          apiGet(ANALYSIS_WIRE.routes.homeSummary),
-          getTodayQuestionHistory({ limit: 1, offset: 0 }),
-        ]);
-
-        if (isStale()) return;
-
-        const homeSummary = homeSummaryRes.status === "fulfilled" ? homeSummaryRes.value || {} : {};
-        if (homeSummaryRes.status === "rejected") {
-          console.warn("AnalysisScreen: failed to refresh home summary", homeSummaryRes.reason);
-        }
-        const inputStatus = homeSummary?.input_status || {};
-
-        const todayQuestionItems =
-          todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
-            ? todayQuestionRes.value.items
-            : [];
-        if (todayQuestionRes.status === "rejected") {
-          console.warn("AnalysisScreen: failed to refresh today question history", todayQuestionRes.reason);
-        }
-
-        const todayCount = Number(inputStatus?.today_count ?? 0);
-        const weekCount = Number(inputStatus?.week_count ?? 0);
-        const monthCount = Number(inputStatus?.month_count ?? 0);
-
-        setEntryMeta((prev) => ({
-          ...prev,
-          inputHistoryLatestDate: pickLatestIso([
-            inputStatus?.last_input_at,
-            resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
-          ]),
-          todayCount: Number.isFinite(todayCount) ? todayCount : 0,
-          weekCount: Number.isFinite(weekCount) ? weekCount : 0,
-          monthCount: Number.isFinite(monthCount) ? monthCount : 0,
-        }));
-      };
-
-      const reportTypes = ["daily", "weekly", "monthly"];
-
-      try {
-        if (showLoading && prioritizeVisibleReport) {
-          await primeLatestReportFromCache(INITIAL_VISIBLE_REPORT_TYPE);
-          if (isStale()) return;
-
-          await refreshReportType(INITIAL_VISIBLE_REPORT_TYPE);
-          if (isStale()) return;
-
-          await Promise.allSettled([
-            ...reportTypes
-              .filter((type) => type !== INITIAL_VISIBLE_REPORT_TYPE)
-              .map((type) => refreshReportType(type)),
-            refreshSelfLatestStatus(),
-            refreshInputSummary(),
-          ]);
-        } else {
-          await Promise.allSettled([
-            ...reportTypes.map((type) => refreshReportType(type)),
-            refreshSelfLatestStatus(),
-            refreshInputSummary(),
-          ]);
-        }
-      } finally {
-        if (!isStale() && showLoading) {
-          setHomeSummariesLoading(false);
-        }
-      }
-    },
-    [fetchLatestReadyReport]
-  );
-
   const openReportHistory = (type, backRoute = ROUTE_EMOTION_ANALYSIS) => {
     setReportHistoryBackRoute(backRoute);
     setReportType(type);
     setSelectedReport(null);
     setRoute("reportHistory");
   };
-
-  const openSelfStructureRoute = useCallback(
-    async ({ targetRoute, backRoute = "home" }) => {
-      try {
-        const ok = await (typeof ensurePaid === "function" ? ensurePaid() : false);
-
-        if (ok) {
-          setSelectedSelfReport(null);
-          setSelfReportGenerateBackRoute(backRoute);
-          setRoute(targetRoute);
-          return;
-        }
-
-        const goSubscription = () => {
-          try {
-            if (navigation?.navigate) {
-              navigation.navigate("SubscriptionSelect");
-              return;
-            }
-          } catch {
-            // no-op
-          }
-
-          Alert.alert("プラン確認", "加入画面を開けませんでした。もう一度お試しください。");
-        };
-
-        Alert.alert(
-          "自己分析レポート",
-          "自己分析レポートはPlusプラン以上で利用できます。\n\nPlusプラン以上で本文の閲覧が可能になります。",
-          [
-            { text: "閉じる", style: "cancel" },
-            { text: "プランを見る", onPress: goSubscription },
-          ]
-        );
-      } catch {
-        Alert.alert(
-          "プラン確認",
-          "プラン情報を取得できませんでした。通信状況を確認してもう一度お試しください。"
-        );
-      }
-    },
-    [ensurePaid, navigation]
-  );
-
-  const openSelfReportLatest = useCallback(
-    (nextMode = "standard", backRoute = ROUTE_SELF_STRUCTURE) => {
-      setSelfReportGenerateMode(normalizeSelfStructureMode(nextMode));
-      openSelfStructureRoute({
-        targetRoute: "selfReportGenerate",
-        backRoute,
-      });
-    },
-    [openSelfStructureRoute]
-  );
-
-  const openSelfReportHistory = useCallback(
-    (backRoute = ROUTE_SELF_STRUCTURE) => {
-      const nextBackRoute = backRoute || ROUTE_SELF_STRUCTURE;
-      setSelfReportHistoryBackRoute(nextBackRoute);
-      openSelfStructureRoute({
-        targetRoute: "selfReportHistory",
-        backRoute: nextBackRoute,
-      });
-    },
-    [openSelfStructureRoute]
-  );
 
   useEffect(() => {
     const shouldOpenReportHistory = !!(
@@ -1018,7 +248,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       tabRoute?.params?.openReportHistoryType || screenRoute?.params?.openReportHistoryType || ""
     ).trim().toLowerCase();
 
-    if (shouldOpenReportHistory && ["daily", "weekly", "monthly"].includes(nextReportType)) {
+    if (shouldOpenReportHistory && isAnalysisReportType(nextReportType)) {
       setSelectedReport(null);
       setReportHistoryBackRoute(ROUTE_EMOTION_ANALYSIS);
       setReportType(nextReportType);
@@ -1098,11 +328,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     tabRoute?.params?.openSelfReportHistory,
     tabRoute?.params?.openSelfReportHistoryAt,
   ]);
-
-  const openSelfReportView = useCallback((report) => {
-    setSelectedSelfReport(report || null);
-    setRoute("selfReportView");
-  }, []);
 
   const openReportView = useCallback(
     async (report, backRoute = "reportHistory") => {
@@ -1204,11 +429,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
 
   // Analysis 内の入口画面に戻ったタイミングでも更新
   useEffect(() => {
-    const shouldRefreshMenuState =
-      route === ROUTE_HOME ||
-      route === ROUTE_EMOTION_ANALYSIS ||
-      route === ROUTE_SELF_STRUCTURE ||
-      route === ROUTE_INPUT_HISTORY;
+    const shouldRefreshMenuState = isAnalysisMenuRoute(route);
 
     if (!shouldRefreshMenuState) return undefined;
 
@@ -1229,19 +450,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     };
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
-  const emotionAnalysisUnread = unreadResolved
-    ? !!(unreadByType.daily || unreadByType.weekly || unreadByType.monthly)
-    : !!(
-        prefetchedUnreadByType.daily ||
-        prefetchedUnreadByType.weekly ||
-        prefetchedUnreadByType.monthly
-      );
-  const selfStructureUnread =
-    !subscriptionLoading && isPaid
-      ? selfStructureUnreadResolved
-        ? !!(selfStructureLatestUnread || selfStructureHistoryUnread)
-        : !!prefetchedUnreadByType.selfStructure
-      : false;
   const emotionUpdateLabel = formatLatestUpdateLabel(entryMeta.emotionLatestDate);
   const selfStructureUpdateLabel = formatLatestUpdateLabel(entryMeta.selfStructureLatestDate);
 
@@ -1368,14 +576,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
           <AnalysisContentFirstScreen
             tutorialScrollRef={tutorialScrollRef}
             onTutorialScroll={handleTutorialScroll}
-            tutorialRefs={{
-              titleRef: analysisTitleRef,
-              emotionRef: analysisEmotionRef,
-              selfStructureRef: analysisSelfStructureRef,
-              reportRef: analysisReportRef,
-              selfReportRef: analysisSelfReportRef,
-              guideRef: analysisGuideRef,
-            }}
+            tutorialRefs={tutorialRefs}
             onOpenGuide={openGuide}
             emotionUpdateLabel={emotionUpdateLabel}
             selfStructureUpdateLabel={selfStructureUpdateLabel}
