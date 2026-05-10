@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(51).zip"
-  Cocolon: "Cocolon_12(3).zip"
-  mashos-api: "mashos-api_4(10).zip"
+  premise: "Cocolon_前提資料(60).zip"
+  Cocolon: "Cocolon_8(6).zip"
+  mashos-api: "mashos-api_9(2).zip"
 file_counts:
   Cocolon: 200
-  mashos-api: 342
-  total: 542
+  mashos-api: 374
+  total: 574
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 542
-  included_in_overall_structure: 542
-  included_in_national_system: 542
+  total_files: 574
+  included_in_overall_structure: 574
+  included_in_national_system: 574
   excluded_from_main_body: 0
 ---
 
@@ -53,12 +53,12 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_12(3).zip` | 200 | RNアプリ本体 |
-| `mashos-api_4(10).zip` | 342 | backend / API / worker / docs / tests |
-| total | 542 | 前提資料の構造coverage対象 |
+| `Cocolon_8(6).zip` | 200 | RNアプリ本体 |
+| `mashos-api_9(2).zip` | 374 | backend / API / worker / docs / tests |
+| total | 574 | 前提資料の構造coverage対象 |
 
-`Cocolon_12(3).zip` / `mashos-api_4(10).zip` では、EmlisAI / Piece / Analysis のvalue observation基準を維持したうえで、RN巨大画面分割Phase 0〜2 / 4〜9 と、本番運用監視 `/ops/client-events` が現行基準へ追加されています。  
-EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章構成・最終品質Gateで読む構造として扱います。Pieceは短縮要約ではなく、ユーザーが言いたいことを他者へ伝わる形へ昇華する構造として読む。画面分割は機能追加ではなく、entry shellを維持した保守性改善として読む。
+`Cocolon_8(6).zip` / `mashos-api_9(2).zip` では、RN巨大画面分割と本番運用監視の構造を維持したうえで、入力直後の `Emlisの観測` は B案 LimitedComposer のPhase8文章品質改善まで進んでいます。  
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / Conversation Composer / Reader・Grounding・Template Guard / Display Gate のfail-closed構造として読む。Pieceは短縮要約ではなく、ユーザーが言いたいことを他者へ伝わる形へ昇華する構造として読む。画面分割は機能追加ではなく、entry shellを維持した保守性改善として読む。
 
 # 読む順
 
@@ -66,7 +66,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 
 1. `00_華恋用_READ_FIRST.md`
 2. `03_Cocolon_命名体系.md`
-3. `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`
+3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
 
 この3つで、華恋は「見えている名前」と「実際に動いているファイル名・API名・DB名」が違う可能性を先に固定します。
 
@@ -92,7 +92,7 @@ EmlisAI / Piece は例文特化ではなく、汎用意味カテゴリ・文章�
 1. `05_Cocolon_ルールファイル索引`
 2. `06_Cocolon_ファイル名変更保留台帳.md`
 3. `07_Cocolon_最新スナップショット差分`
-4. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-04-30.md`
+4. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
 
 `05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`07` は最新zipとの差分確認、`08` はDB physical name / bridge / rename境界、`03` / `09` は名称混在・DB物理名の読み分けを補助する資料です。`08_Cocolon_DB_rename_boundary.md` は存在しますが、DB physical rename / drop / write path変更はMash様が明示した場合だけ扱います。
 
@@ -243,3 +243,39 @@ current作業では、次の読み替えを優先する。
 | 本番運用監視 | `Cocolon/lib/monitoring.js` + `mashos-api/ai/services/ai_inference/api_client_events.py` | 外部SDK追加なしで、RN側client event / API error / bootstrap/push/IAP errorを `/ops/client-events` へbest-effort送信し、backendでredact済みstructured logへ出す |
 
 作業時は、旧画面pathが薄くなっていても削除対象とは見なさず、`App.js` / 各screenは navigation から参照されるentry shellとして扱う。DB physical name / public API route / navigation route名は今回の分割では変更しない。
+
+# 2026-05-09 差分追記: EmlisAI multi-perspective observation current boundary
+
+この版の最新基準面は `Cocolon_前提資料(54).zip` / `Cocolon_6(28).zip` / `mashos-api_6(8).zip` です。最新実ファイルのcoverage対象は `Cocolon` 200件、`mashos-api` 356件、合計556件です。
+
+| 構造 | current owner | 読み方 |
+|---|---|---|
+| Emlisの観測 runtime | `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | `render_emlis_ai_reply()` は `multi_perspective_observation.v1` のorchestrator。旧ObservationKernelの固定文経路、旧safe fallback、`input_feedback_text_templates` をEmlis観測本文として使わない |
+| Evidence Ledger | `emlis_ai_evidence_ledger_service.py` | `current_input` から `EvidenceSpan` を作る。ここでは解釈文・表示文を作らない |
+| 複数視点Observer | `emlis_ai_perspective_observers.py` / `emlis_ai_perspective_board.py` | 明示内容、感情、葛藤、圧迫、限界、自己認識、価値/強さ、相手モデル、安全境界を `PerspectiveReport` として分ける |
+| 統合構造 | `emlis_ai_observation_integrator_service.py` | `PerspectiveBoard` を `ObservationGraph` へまとめる。本文生成はここでは行わない |
+| 会話文生成 | `emlis_ai_conversation_composer_service.py` | `ObservationGraph` と `EvidenceSpan` から、ユーザーに向けた観測文を作る。設計上は固定文fallbackを置かない |
+| 読解・根拠・テンプレGuard | `emlis_ai_listener_reader_judge.py` / `emlis_ai_grounding_judge.py` / `emlis_ai_template_echo_guard.py` | 出力文の理解可能性、原文根拠、旧文型・復唱類似を判定する |
+| 表示停止Gate | `emlis_ai_display_gate.py` | `passed` 以外は `comment_text` を空にし、`observation_status` を `rejected` / `unavailable` / `safety_blocked` として扱う |
+| RN表示制御 | `screens/input/useInputFeedbackModal.js` / `InputFeedbackReplyModal.js` / `InputScreen.js` | `observation_status` が存在し、`passed` でない場合はモーダルを開かない。空本文も表示しない |
+| API互換 | `api_emotion_submit.py` / `emotion_submit_service.py` | `input_feedback.comment_text` は互換維持。ただしfail-closed時は空になり、API responseでは `input_feedback` 自体が省略されうる。詳細metaは `input_feedback.emlis_ai.observation_status` に置く |
+
+作業時は、`Emlisからの返答` / `Emlisからの応答` というvisible旧名を見つけたら `Emlisの観測` に寄せる。ただし `input_feedback.comment_text`、`emlis_ai` meta、DB/API物理名は互換維持のため一括renameしない。
+
+# 2026-05-10 差分追記: EmlisAI Phase8 LimitedComposer quality current boundary
+
+この版の最新基準面は `Cocolon_前提資料(60).zip` / `Cocolon_8(6).zip` / `mashos-api_9(2).zip` です。最新実ファイルのcoverage対象は `Cocolon` 200件、`mashos-api` 374件、合計574件です。
+
+Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続された B案 LimitedComposer の本文品質改善として読む。固定文テンプレや外部LLMを追加せず、EvidenceSpanから本文化可能な短い根拠句を作り、観測profileとsentence planを通して自然な短文へ寄せる。
+
+| 構造 | current owner | 読み方 |
+|---|---|---|
+| LimitedComposer本文生成 | `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | `EmlisPhraseUnit` / `ObservationProfile` / `SentencePlan` を使い、scoped graph内の根拠だけを2〜4文へ組み立てる。外部AIは呼ばない |
+| Phase8文品質Guard | `emlis_ai_limited_sentence_quality_guard.py` | 感情ラベル単独行、未完了断片、`がつながっています` / `同じ中にあります` 系の破綻表面を機械的に落とす |
+| Scope Gate補正 | `emlis_ai_limited_observation_scope_service.py` | 関係性葛藤や実ユーザー型のように、根拠ある関係構造を `eligible` にできるよう補正する |
+| Evidence / Observer補正 | `emlis_ai_evidence_ledger_service.py` / `emlis_ai_perspective_observers.py` | Phase8 profile判定に必要な原文根拠と観測claimを取り落とさないよう補正する |
+| Template / Display Gate補正 | `emlis_ai_template_echo_guard.py` / `emlis_ai_display_gate.py` | Phase8 quality reportをDisplay traceへ残し、破綻文を `passed` にしない |
+| Phase8回帰fixture | `ai/tests/fixtures/emlis_ai_phase8_cases.py` | 華恋提示6ケース＋実ユーザー入力1ケースの計7ケースを品質回帰fixtureとして保持する |
+| Phase8回帰test | `ai/tests/test_emlis_ai_phase8_real_input_quality.py` | 正解文一致ではなく、must_keep構造・禁止表面・passed/rejected制御で検証する |
+
+作業時は、Phase8を「EmlisAIが全入力を理解できるようになった」とは読まない。B案のまま、根拠がある範囲だけを自然な観測文へ整える段階として扱う。短く曖昧な入力は、引き続き非表示または浅い受け取りだけが許容範囲です。

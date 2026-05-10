@@ -22,6 +22,15 @@ function assertRegex(source, regex, context) {
   assert.ok(regex.test(source), `${context} must match ${regex}`);
 }
 
+function assertNotIncludes(source, tokens, context) {
+  for (const token of tokens) {
+    assert.ok(
+      !source.includes(token),
+      `${context} must not contain ${JSON.stringify(token)}`
+    );
+  }
+}
+
 test('App root wires providers through Phase 9 navigation/runtime split modules', () => {
   const app = read('App.js');
   const navRef = read('navigation/navigationRef.js');
@@ -228,6 +237,9 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
     'export function buildInputFeedbackEmotionMeta',
     'strengthScoreForFeedback',
     'formatEmotionForFeedback',
+    'export function normalizeEmlisObservationStatus',
+    'export function isPassedEmlisObservationReply',
+    'export function buildPassedEmlisObservationModalPayload',
     '選択した感情：',
     '中心として見ている感情：',
   ], 'inputFeedbackModel.js');
@@ -260,7 +272,12 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(inputFeedbackModal, [
     'export function useInputFeedbackModal',
+    'buildPassedEmlisObservationModalPayload',
+    'getEmlisObservationStatus',
     'openInputFeedbackModal',
+    'return false;',
+    'return true;',
+    'completeTutorialAfterReply',
     'closeInputFeedbackModal',
     'setTutorialNavigateAfterReply',
     'navigation?.navigate?.("Analysis")',
@@ -310,8 +327,10 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(inputFeedbackReplyModal, [
     'export default function InputFeedbackReplyModal',
+    'isPassedEmlisObservationReply',
+    'const shouldShow = Boolean',
     'inputFeedbackBackdrop',
-    'Emlis（エムリス）からの返答',
+    'Emlisの観測',
     'inputFeedbackMetaText',
   ], 'InputFeedbackReplyModal.js');
 
@@ -340,6 +359,16 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   assertRegex(input, /await\s+submitEmotionInput\(/, 'emotion submit call');
   assertRegex(input, /await\s+previewEmotionPiece\(/, 'Piece preview call');
   assertRegex(input, /await\s+publishEmotionPiece\(/, 'Piece publish call');
+  assertIncludes(input, [
+    'const openedObservation = openInputFeedbackModal',
+    'if (!openedObservation)',
+    'completeTutorialAfterReply();',
+    'observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status',
+    'observationStatus: inputFeedbackAI?.observation_status',
+  ], 'InputScreen.js Emlis observation display gate');
+  assertNotIncludes(input, [
+    'observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status || "passed"',
+  ], 'InputScreen.js must not force tutorial Emlis observation passed');
 });
 
 test('Home hooks preserve startup popup priority, today question, and Piece quota screen state', () => {
@@ -716,7 +745,7 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
     'TUTORIAL_CONNECTION_ROWS',
     'TUTORIAL_SELF_PIECE',
     'TUTORIAL_FOLLOWED_USER_PIECE',
-    'Emlis（エムリス）からの応答',
+    'Emlisの観測',
     '分析レポート',
     'ピース',
   ], 'tutorialScenarioData.js');
@@ -939,5 +968,95 @@ test('Production monitoring captures RN runtime and API failures without changin
     'captureClientError',
     'app_runtime_bootstrap_failed',
   ], 'AppRuntimeBootstrapGate monitoring instrumentation');
+});
+
+test('Phase 10 Emlis observation release gate keeps regression and release-ready contracts explicit', () => {
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+  const input = read('screens/InputScreen.js');
+  const tutorialData = read('tutorial/tutorialScenarioData.js');
+  const thisTest = read('tests/rn-screen-contracts.test.js');
+
+  assertIncludes(inputFeedback, [
+    'export const EMLIS_OBSERVATION_RELEASE_PHASE = 10;',
+    'export const EMLIS_OBSERVATION_REQUIRED_PHASES = Object.freeze([',
+    '0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10',
+    'export const EMLIS_OBSERVATION_RELEASE_REQUIRED_CHECKS = Object.freeze([',
+    '"phase9_frontend_passed_only"',
+    '"phase10_fixed_string_regression"',
+    '"phase10_structure_reading_grounding_guard"',
+    '"phase10_template_echo_guard"',
+    '"phase10_screenshot_regression"',
+    '"phase10_unverified_phase_not_passed"',
+    'export function getEmlisObservationPhaseGate',
+    'export function getEmlisObservationCompletedPhases',
+    'export function buildEmlisObservationReleaseDecision',
+    'export function isEmlisObservationReleaseReady',
+    'backendReleaseReady',
+    'passedOnlyModalVerified',
+    'backendDisplayGateVerified',
+    'failedChecks',
+    'releaseReady',
+  ], 'inputFeedbackModel.js phase 10 release decision');
+
+  assertIncludes(inputFeedback, [
+    'getEmlisObservationStatus(input) === EMLIS_OBSERVATION_STATUS.PASSED',
+    'Boolean(getEmlisObservationCommentText(input))',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+  ], 'inputFeedbackModel.js passed-only modal payload');
+
+  assertIncludes(inputFeedbackModal, [
+    'buildPassedEmlisObservationModalPayload(input)',
+    'setInputFeedbackModalVisible(false)',
+    'setInputFeedbackModalText("")',
+    'return false;',
+    'return true;',
+  ], 'useInputFeedbackModal.js passed-only open contract');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'const shouldShow = Boolean',
+    'visible &&',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    '<Modal visible={shouldShow}',
+  ], 'InputFeedbackReplyModal.js backend status display gate');
+
+  assertIncludes(input, [
+    'const openedObservation = inputFeedbackText',
+    'observationStatus: inputFeedbackAI?.observation_status',
+    'if (!openedObservation)',
+    'showToast(`記録しました',
+    'showToast("ピースを生成しました")',
+    'completeTutorialAfterReply();',
+  ], 'InputScreen.js non-passed observation fallback behavior');
+
+  assertNotIncludes(input, [
+    'observation_status: "passed"',
+    'observationStatus: "passed"',
+    '|| "passed"',
+    "|| 'passed'",
+  ], 'InputScreen.js must not synthesize passed status');
+
+  assertIncludes(tutorialData, [
+    'TUTORIAL_HAS_DISPLAYABLE_EMLIS_REPLY',
+    'fixtureEmlisObservationStatus === "passed"',
+    'TUTORIAL_HAS_VALID_FIXTURES',
+    'TUTORIAL_EMLIS_REPLY',
+    'commentText: TUTORIAL_HAS_DISPLAYABLE_EMLIS_REPLY',
+    'meta: freezeClone(fixtureEmlisMeta)',
+  ], 'tutorialScenarioData.js keeps tutorial Emlis reply backend-owned and passed-only');
+
+  assertIncludes(thisTest, [
+    'test(\'Phase 10 Emlis observation release gate keeps regression and release-ready contracts explicit\'',
+    '"phase10_screenshot_regression"',
+    '"phase10_unverified_phase_not_passed"',
+    'backendReleaseReady',
+    'fixtureEmlisObservationStatus === "passed"',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    'InputScreen.js must not synthesize passed status',
+  ], 'phase 10 regression test self-check');
 });
 

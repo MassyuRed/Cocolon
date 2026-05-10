@@ -1,4 +1,15 @@
 import { useCallback, useState } from "react";
+import {
+  buildPassedEmlisObservationModalPayload,
+  getEmlisObservationStatus,
+} from "./inputFeedbackModel";
+
+const EMPTY_INPUT_FEEDBACK_META = Object.freeze({
+  emotionSummary: "",
+  dominantSummary: "",
+  contextLabel: "",
+  observationStatus: "",
+});
 
 export function useInputFeedbackModal({
   isTutorialMode,
@@ -8,40 +19,40 @@ export function useInputFeedbackModal({
 }) {
   const [inputFeedbackModalVisible, setInputFeedbackModalVisible] = useState(false);
   const [inputFeedbackModalText, setInputFeedbackModalText] = useState("");
-  const [inputFeedbackModalMeta, setInputFeedbackModalMeta] = useState({
-    emotionSummary: "",
-    dominantSummary: "",
-    contextLabel: "",
-  });
+  const [inputFeedbackModalMeta, setInputFeedbackModalMeta] = useState(EMPTY_INPUT_FEEDBACK_META);
   const [tutorialNavigateAfterReply, setTutorialNavigateAfterReply] = useState(false);
 
   const openInputFeedbackModal = useCallback((input = {}) => {
-    const nextCommentText = String(input?.commentText || "").trim();
-    if (!nextCommentText) return;
-    setInputFeedbackModalText(nextCommentText);
+    const payload = buildPassedEmlisObservationModalPayload(input);
+    if (!payload) {
+      setInputFeedbackModalVisible(false);
+      setInputFeedbackModalText("");
+      setInputFeedbackModalMeta({
+        ...EMPTY_INPUT_FEEDBACK_META,
+        observationStatus: getEmlisObservationStatus(input),
+      });
+      return false;
+    }
+    setInputFeedbackModalText(payload.commentText);
     setInputFeedbackModalMeta({
-      emotionSummary: String(input?.emotionSummary || "").trim(),
-      dominantSummary: String(input?.dominantSummary || input?.dominantLabel || "").trim(),
-      contextLabel: String(input?.contextLabel || "").trim(),
+      emotionSummary: payload.emotionSummary,
+      dominantSummary: payload.dominantSummary,
+      contextLabel: payload.contextLabel,
+      observationStatus: payload.observationStatus,
     });
     setInputFeedbackModalVisible(true);
+    return true;
   }, []);
 
   const resetInputFeedbackModal = useCallback(() => {
     setInputFeedbackModalVisible(false);
     setInputFeedbackModalText("");
-    setInputFeedbackModalMeta({
-      emotionSummary: "",
-      dominantSummary: "",
-      contextLabel: "",
-    });
+    setInputFeedbackModalMeta(EMPTY_INPUT_FEEDBACK_META);
     setTutorialNavigateAfterReply(false);
   }, []);
 
-  const closeInputFeedbackModal = useCallback(() => {
-    setInputFeedbackModalVisible(false);
-
-    if (!tutorialNavigateAfterReply || !isTutorialMode) return;
+  const completeTutorialAfterReply = useCallback(() => {
+    if (!isTutorialMode) return false;
 
     setTutorialNavigateAfterReply(false);
     setTutorialStep(analysisStep);
@@ -64,7 +75,16 @@ export function useInputFeedbackModal({
         // noop
       }
     });
-  }, [analysisStep, isTutorialMode, navigation, setTutorialStep, tutorialNavigateAfterReply]);
+    return true;
+  }, [analysisStep, isTutorialMode, navigation, setTutorialStep]);
+
+  const closeInputFeedbackModal = useCallback(() => {
+    setInputFeedbackModalVisible(false);
+
+    if (!tutorialNavigateAfterReply || !isTutorialMode) return;
+
+    completeTutorialAfterReply();
+  }, [completeTutorialAfterReply, isTutorialMode, tutorialNavigateAfterReply]);
 
   return {
     inputFeedbackModalVisible,
@@ -74,6 +94,7 @@ export function useInputFeedbackModal({
     setTutorialNavigateAfterReply,
     openInputFeedbackModal,
     closeInputFeedbackModal,
+    completeTutorialAfterReply,
     resetInputFeedbackModal,
   };
 }

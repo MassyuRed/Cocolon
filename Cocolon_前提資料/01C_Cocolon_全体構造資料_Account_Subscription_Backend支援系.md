@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4089,3 +4089,16 @@ AccountScreen分割では、account deleteは触りません。退会処理owner
 | `mashos-api/ai/tests/contract/test_client_events_contract.py` | client event contract / redaction regression |
 
 本番運用監視はDB保存ではなく、ログ境界として読む。raw `user_id` は出さず、`user_hash` とredacted payloadを扱う。
+
+# 2026-05-10 差分追記: EmlisAI Phase8 backend support / regression boundary
+
+Phase8で追加された backend support は、EmlisAI本文品質を守るための guard / fixture / regression test です。Account / Subscription / ProfileCreate の契約は変更しません。
+
+| file | support role |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py` | Phase8本文品質Guard。感情ラベル単独行、未完了断片、汎用接続語尾を検出する |
+| `mashos-api/ai/tests/fixtures/__init__.py` | Phase8 fixture package marker |
+| `mashos-api/ai/tests/fixtures/emlis_ai_phase8_cases.py` | 7つの実入力回帰ケースと禁止表面を保持する |
+| `mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py` | Phase8回帰test。正解文一致ではなくprofile / must_keep / forbidden surface / guard結果で検証する |
+
+このsupport層はEmlisAI専用です。DB physical name、public API route、subscription entitlement、account delete対象は変更しません。

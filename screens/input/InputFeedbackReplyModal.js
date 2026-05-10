@@ -3,6 +3,7 @@ import { Modal, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../../components/CocolonButton";
+import { isPassedEmlisObservationReply } from "./inputFeedbackModel";
 
 export default function InputFeedbackReplyModal({
   visible,
@@ -14,8 +15,16 @@ export default function InputFeedbackReplyModal({
   styles,
   colors,
 }) {
+  const shouldShow = Boolean(
+    visible &&
+      isPassedEmlisObservationReply({
+        commentText: text,
+        observationStatus: meta?.observationStatus || meta?.observation_status,
+      })
+  );
+
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={shouldShow} transparent animationType="fade" onRequestClose={onClose}>
       <View style={styles.inputFeedbackBackdrop}>
         <View
           style={[
@@ -32,7 +41,7 @@ export default function InputFeedbackReplyModal({
                 style={styles.inputFeedbackTitleIcon}
               />
               <Text style={styles.inputFeedbackTitle}>
-                {isTutorialMode ? "Emlis（エムリス）からの返答" : "Emlisからの返答"}
+                Emlisの観測
               </Text>
             </View>
             {meta?.contextLabel ? (
@@ -61,7 +70,7 @@ export default function InputFeedbackReplyModal({
             <CocolonButton
               variant="secondary"
               onPress={onClose}
-              accessibilityLabel={isTutorialMode ? "Emlis（エムリス）からの返答を閉じる" : "Emlisからの返答を閉じる"}
+              accessibilityLabel="Emlisの観測を閉じる"
             >
               閉じる
             </CocolonButton>

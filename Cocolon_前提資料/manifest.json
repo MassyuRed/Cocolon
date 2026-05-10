@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-09",
+  "revision_date": "2026-05-10",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,17 +7,17 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 200,
-    "mashos-api": 342
+    "mashos-api": 374
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 542,
-    "national_system_body_includes": 542,
+    "overall_structure_body_includes": 574,
+    "national_system_body_includes": 574,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル542件、02には国家システム判断対象のcurrent全ファイル542件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。02Bと08はこの前提資料zip内に存在し、Snapshot/Worker/Publish/ReadおよびDB physical name/bridge/rename境界の正本として扱う。DB destructive変更はMash様が明示した場合だけ扱う。",
-    "current_snapshot_total_files": 542,
-    "overall_structure_body_includes_current_snapshot_files": 542,
-    "national_system_body_lists_current_snapshot_files_with_relation": 542,
+    "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル574件、02には国家システム判断対象のcurrent全ファイル574件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。02Bと08はこの前提資料zip内に存在し、Snapshot/Worker/Publish/ReadおよびDB physical name/bridge/rename境界の正本として扱う。DB destructive変更はMash様が明示した場合だけ扱う。",
+    "current_snapshot_total_files": 574,
+    "overall_structure_body_includes_current_snapshot_files": 574,
+    "national_system_body_lists_current_snapshot_files_with_relation": 574,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -453,7 +453,75 @@
         "mashos-api/ai/services/ai_inference/api_contract_registry.py",
         "mashos-api/ai/services/ai_inference/app.py"
       ]
-    }
+    },
+    "latest_source_basis_2026_05_09_multi_perspective": {
+      "premise": "Cocolon_前提資料(54).zip",
+      "Cocolon": "Cocolon_6(28).zip",
+      "mashos-api": "mashos-api_6(8).zip",
+      "Cocolon_files": 200,
+      "mashos_api_files": 356,
+      "total_files": 556,
+      "doc_role": "EmlisAI multi-perspective observation / fail-closed display gateを含む現状構造を読むための作業用地図。"
+    },
+    "emlis_multi_perspective_boundary_2026_05_09": {
+      "kernel_version": "multi_perspective_observation.v1",
+      "visible_name": "Emlisの観測",
+      "orchestrator": "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "pipeline": [
+        "Evidence Ledger",
+        "Perspective Observers",
+        "Perspective Board",
+        "Observation Integrator",
+        "Conversation Composer",
+        "Listener Reader Judge",
+        "Grounding Judge",
+        "Template Echo Guard",
+        "Display Gate"
+      ],
+      "fail_closed": true,
+      "legacy_observation_kernel_used_for_current_reply": false,
+      "legacy_safe_fallback_used_for_current_reply": false,
+      "legacy_input_feedback_template_used_for_current_reply": false,
+      "frontend_display_gate": [
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/screens/input/useInputFeedbackModal.js",
+        "Cocolon/screens/input/InputFeedbackReplyModal.js"
+      ],
+      "api_contract": "input_feedback.comment_text remains compatible; input_feedback.emlis_ai.observation_status controls display; comment_text is empty when not passed."
+    },
+    "current_snapshot_added_paths_2026_05_09_multi_perspective": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_perspective_board.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_perspective_observers.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+      "mashos-api/ai/tests/emlis_multi_perspective_test_helpers.py",
+      "mashos-api/ai/tests/test_emlis_ai_multi_perspective_pipeline.py"
+    ],
+    "current_snapshot_changed_paths_2026_05_09_multi_perspective": [
+      "Cocolon/screens/InputScreen.js",
+      "Cocolon/screens/input/InputFeedbackReplyModal.js",
+      "Cocolon/screens/input/useInputFeedbackModal.js",
+      "mashos-api/ai/services/ai_inference/api_emotion_submit.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_frame_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_safe_reply_fallback_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/services/ai_inference/input_feedback_text_templates.py",
+      "mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_frame_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_kernel.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py",
+      "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
+      "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
+      "mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py"
+    ]
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -521,7 +589,7 @@
       "purpose": "current snapshotの構造差分。value observation差分を含む"
     },
     {
-      "path": "09_Cocolon_名称混在保管と構造境界_2026-04-30.md",
+      "path": "09_Cocolon_名称混在保管と構造境界_2026-05-10.md",
       "purpose": "名称混在を作業用地図として保管する構造境界資料"
     },
     "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
@@ -1459,9 +1527,14 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(51).zip",
-    "Cocolon": "Cocolon_12(3).zip",
-    "mashos-api": "mashos-api_4(10).zip"
+    "premise": "Cocolon_前提資料(60).zip",
+    "Cocolon": "Cocolon_8(6).zip",
+    "mashos-api": "mashos-api_9(2).zip",
+    "file_counts": {
+      "Cocolon": 200,
+      "mashos-api": 374,
+      "total": 574
+    }
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -1686,6 +1759,98 @@
     "major_updates": [
       "RN巨大画面分割: Input / Nexus / AnalysisReportViewer / Analysis / Account / Piece / App root をentry shell + submoduleへ分割。",
       "本番運用監視: RN client event -> /ops/client-events -> privacy-safe structured log / alert logを追加。"
+    ]
+  },
+  "source_snapshot_2026_05_09_multi_perspective": {
+    "premise": "Cocolon_前提資料(54).zip",
+    "Cocolon": "Cocolon_6(28).zip",
+    "mashos-api": "mashos-api_6(8).zip",
+    "file_counts": {
+      "Cocolon": 200,
+      "mashos-api": 356,
+      "total": 556
+    },
+    "diff_from_Cocolon_5_18_mashos_api_5_12": {
+      "Cocolon_added": [],
+      "Cocolon_removed": [],
+      "Cocolon_changed": [
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/screens/input/InputFeedbackReplyModal.js",
+        "Cocolon/screens/input/useInputFeedbackModal.js"
+      ],
+      "mashos_api_added": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_perspective_board.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_perspective_observers.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+        "mashos-api/ai/tests/emlis_multi_perspective_test_helpers.py",
+        "mashos-api/ai/tests/test_emlis_ai_multi_perspective_pipeline.py"
+      ],
+      "mashos_api_removed": [],
+      "mashos_api_changed": [
+        "mashos-api/ai/services/ai_inference/api_emotion_submit.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_frame_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_safe_reply_fallback_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+        "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+        "mashos-api/ai/services/ai_inference/input_feedback_text_templates.py",
+        "mashos-api/ai/tests/test_emlis_ai_long_input_depth_reply.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_frame_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_kernel.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_kernel_companion_language.py",
+        "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
+        "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
+        "mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py"
+      ]
+    }
+  },
+  "source_snapshot_2026_05_10_phase8_quality": {
+    "premise": "Cocolon_前提資料(60).zip",
+    "Cocolon": "Cocolon_8(6).zip",
+    "mashos-api": "mashos-api_9(2).zip",
+    "file_counts": {
+      "Cocolon": 200,
+      "mashos-api": 374,
+      "total": 574
+    },
+    "diff_from_Cocolon_8_5_mashos_api_8_8": {
+      "Cocolon_added": [],
+      "Cocolon_changed": [],
+      "Cocolon_removed": [],
+      "mashos_api_added": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py",
+        "mashos-api/ai/tests/fixtures/__init__.py",
+        "mashos-api/ai/tests/fixtures/emlis_ai_phase8_cases.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py"
+      ],
+      "mashos_api_changed": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_observation_scope_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_perspective_observers.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_types.py"
+      ],
+      "mashos_api_removed": []
+    },
+    "major_updates": [
+      "EmlisAI B案 LimitedComposerのPhase8文章品質改善。",
+      "PhraseUnit / ObservationProfile / SentencePlan による本文化前の中間構造を追加。",
+      "LimitedSentenceQualityGuardで感情ラベル単独行、未完了断片、汎用接続語尾をreject。",
+      "7つの実入力回帰fixtureとPhase8 quality regression testを追加。"
+    ],
+    "unchanged_boundaries": [
+      "Cocolon側実ファイルは変更なし。",
+      "DB physical name / public API route /既存 response key は変更なし。",
+      "InputFeedbackReplyModalの表示名とpassed-only表示制御は維持。"
     ]
   }
 }

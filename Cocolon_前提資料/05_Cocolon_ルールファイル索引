@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -172,3 +172,36 @@ public route 追加・置換・deprecated整理を行う場合、次の5件を�
 | RN monitoring | `Cocolon/lib/monitoring.js` / `Cocolon/lib/apiClient.js` | client event送信、API failure捕捉、privacy-safe payload整形 |
 | Client event endpoint | `mashos-api/ai/services/ai_inference/api_client_events.py` | redaction、user_hash、structured log / alert log、DB保存なし |
 | Ops public contract | `api_contract_registry.py` / `PUBLIC_API_REGISTRY.md` / `test_client_events_contract.py` | `/ops/client-events` contractと回帰test |
+
+# 2026-05-09 差分追記: EmlisAI multi-perspective rule / guard索引
+
+EmlisAI本文を触る場合、旧 `quality_gate` だけでなく、multi-perspectiveの各Gateを同時確認する。
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py` | 原文根拠を表示文へ直結させず `EvidenceSpan` として保持する | 入力読解・根拠抽出を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_perspective_observers.py` | 複数視点ごとの `PerspectiveReport` を作る | 観測視点・claim/relationを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_integrator_service.py` | `ObservationGraph` 統合。本文生成禁止層 | 中心状態・葛藤・圧迫・限界・強さの構造を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py` | 観測構造を会話文にする | Emlis観測本文の文面生成を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | 読解可能性、話者整合、会話性を判定する | 出力品質判定を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py` | 各文の根拠対応を判定する | 原文根拠・関係保持を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py` | 旧テンプレ・復唱・過去出力類似を落とす | 固定文・テンプレ臭対策を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | fail-closed表示判定 | `input_feedback.comment_text` の表示可否を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_multi_perspective_pipeline.py` | multi-perspective pipeline regression | EmlisAI pipeline変更時 |
+
+固定観測文、旧safe fallback、`input_feedback_text_templates` へのEmlis観測本文fallbackを戻さない。
+
+# 2026-05-10 差分追記: EmlisAI Phase8 LimitedComposer品質 rule / guard索引
+
+EmlisAI本文品質を触る場合、Phase8の品質Guardとfixtureを必ず確認する。固定正解文を増やすのではなく、構造保持と禁止表面で品質を守る。
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | PhraseUnit / ObservationProfile / SentencePlan による B案本文生成。外部AI・固定文テンプレ禁止 | LimitedComposer本文を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py` | 感情ラベル単独行、未完了断片、汎用接続語尾を落とす | 文章品質・Gate条件を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_observation_scope_service.py` | 本文化してよいscoped graphを切る | eligible / out_of_scope / safety_blocked 条件を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py` | Phase8 quality reportをTemplate/Echo Gateへ接続する | 破綻表面・復唱・テンプレ臭対策を触る時 |
+| `mashos-api/ai/tests/fixtures/emlis_ai_phase8_cases.py` | 7つの実入力回帰fixture | Phase8品質変更時 |
+| `mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py` | Phase8本文品質回帰 | Phase8関連変更時 |
+
+禁止: `不安。` / `怒り。` / `喜び。` / `自己理解。` のような本文ラベル行を復活させない。`がつながっています` / `同じ中にあります` をEmlis観測本文の汎用接続として使わない。

@@ -25,12 +25,12 @@ function compact(value) {
   return String(value || "").trim();
 }
 
-function withEmlisReading(value) {
+const EMLIS_WITH_READING_PATTERN = /Emlis\uFF08\u30A8\u30E0\u30EA\u30B9\uFF09/g;
+
+function withoutEmlisReading(value) {
   const raw = compact(value);
   if (!raw) return "";
-  return raw
-    .replaceAll("Emlis（エムリス）", "Emlis")
-    .replaceAll("Emlis", "Emlis（エムリス）");
+  return raw.replace(EMLIS_WITH_READING_PATTERN, "Emlis");
 }
 
 function readFirstObject(...values) {
@@ -53,6 +53,11 @@ function normalizeReport(report, reportType) {
 const fixturePreview = readFirstObject(FIXTURE_PIECE.preview);
 const fixturePublish = readFirstObject(FIXTURE_PIECE.publish);
 const fixtureEmlisReply = readFirstObject(FIXTURES.emlis_reply, fixturePublish.input_feedback);
+const fixtureEmlisMeta = readFirstObject(fixtureEmlisReply.emlis_ai);
+const fixtureEmlisObservationStatus = compact(fixtureEmlisMeta.observation_status).toLowerCase();
+export const TUTORIAL_HAS_DISPLAYABLE_EMLIS_REPLY = Boolean(
+  fixtureEmlisObservationStatus === "passed" && compact(fixtureEmlisReply.comment_text)
+);
 const fixtureFeedItems = Array.isArray(FIXTURE_PIECE.feed_items)
   ? FIXTURE_PIECE.feed_items.filter(Boolean)
   : [];
@@ -60,7 +65,6 @@ const fixtureFeedItems = Array.isArray(FIXTURE_PIECE.feed_items)
 export const TUTORIAL_HAS_VALID_FIXTURES =
   FIXTURES?.validation?.passed === true &&
   compact(fixturePreview.piece_text) &&
-  compact(fixtureEmlisReply.comment_text) &&
   fixtureFeedItems.length >= 2;
 
 export const TUTORIAL_INPUT_SAMPLE = Object.freeze({
@@ -97,8 +101,10 @@ export const TUTORIAL_PIECE_PREVIEW = freezeClone({
 
 export const TUTORIAL_EMLIS_REPLY = Object.freeze({
   contextLabel: "",
-  commentText: withEmlisReading(fixtureEmlisReply.comment_text),
-  meta: freezeClone(fixtureEmlisReply.emlis_ai || {}),
+  commentText: TUTORIAL_HAS_DISPLAYABLE_EMLIS_REPLY
+    ? withoutEmlisReading(fixtureEmlisReply.comment_text)
+    : "",
+  meta: freezeClone(fixtureEmlisMeta),
 });
 
 export function getTutorialEmlisReplyText(displayName) {
@@ -176,7 +182,7 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
   nodes: Object.freeze([
     Object.freeze({
       label: "その場で受け取る",
-      title: "Emlis（エムリス）からの応答",
+      title: "Emlisの観測",
     }),
     Object.freeze({
       label: "あとで振り返る",
@@ -191,10 +197,10 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
 
 export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
-    title: "Emlis（エムリス）からの応答",
+    title: "Emlisの観測",
     description:
-      "入力した気持ちを、その場でEmlis（エムリス）が受け取って返答します。",
-    example: "今の言葉を、ひとつの返答として受け取れます。",
+      "入力した気持ちを、その場でEmlisが観測して言葉にします。",
+    example: "今の言葉を、ひとつの観測として受け取れます。",
   }),
   Object.freeze({
     title: "分析レポート",
@@ -219,5 +225,5 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
   body:
-    "Emlis（エムリス）には、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
+    "Emlisには、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

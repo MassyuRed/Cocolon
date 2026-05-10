@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 200
-  mashos-api: 342
+  mashos-api: 374
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 542
+  included_files_total: 574
   included_files_cocolon: 200
-  included_files_mashos_api: 342
+  included_files_mashos_api: 374
 ---
 
 # 1. 1行定義
@@ -66,9 +66,9 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の latest full coverage は後続の `2026-04-25 差分追記: current full coverage` を正本とする。
 
-- latest full coverage: `465 files`
-  - Cocolon: `125`
-  - mashos-api: `340`
+- latest full coverage: `556 files`
+  - Cocolon: `200`
+  - mashos-api: `356`
 
 # 6. 任意の 1 ファイルから辿る時の原則
 
@@ -958,3 +958,38 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - 画面分割moduleを触る時も、public API / DB write path / route名は変更しない。
 - 旧entry shellに残るroute名を、subdirectory名へ置換しない。
 - 本番運用監視はDB保存ではなくprivacy-safe structured log / alert logとして読む。
+
+# 2026-05-09 差分追記: EmlisAI multi-perspective current owner
+
+`Cocolon_6(28).zip` / `mashos-api_6(8).zip` では、入力直後のEmlisAIが `Emlisの観測` として複数視点観測pipelineへ切り替わっています。全体構造上は、Home/Inputの保存直後に発生する即時観測ですが、本文品質が通らない場合は表示しないfail-closed境界として読む。
+
+| layer | current file | 全体構造上の意味 |
+|---|---|---|
+| Orchestrator | `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | `Evidence Ledger -> Observer -> Board -> Graph -> Composer -> Reader/Grounding/Template Guard -> Display Gate` を統括する |
+| Evidence | `emlis_ai_evidence_ledger_service.py` | 原文根拠台帳。表示文は作らない |
+| Observer | `emlis_ai_perspective_observers.py` | 明示内容、感情、葛藤、圧迫、限界、自己認識、価値/強さ、相手モデル、安全境界を分ける |
+| Board | `emlis_ai_perspective_board.py` | 複数observerの `PerspectiveReport` を集約する |
+| Integrator | `emlis_ai_observation_integrator_service.py` | `ObservationGraph` を作る。本文生成はしない |
+| Composer | `emlis_ai_conversation_composer_service.py` | 観測構造から会話文を生成する |
+| Reader | `emlis_ai_listener_reader_judge.py` | 出力だけを読んで、意味・話者・会話性を判定する |
+| Grounding | `emlis_ai_grounding_judge.py` | 各文がEvidenceSpanまたはRelationに支えられるか判定する |
+| Template/Echo | `emlis_ai_template_echo_guard.py` | 旧文型、復唱、過去出力類似を検出する |
+| Display | `emlis_ai_display_gate.py` | `passed` 以外では本文を空にする |
+
+RN側は `screens/InputScreen.js` が `input_feedback.emlis_ai.observation_status` を `useInputFeedbackModal.js` へ渡し、`InputFeedbackReplyModal.js` は `passed` またはstatusなしの互換ケースだけを表示します。
+
+# 2026-05-10 差分追記: EmlisAI Phase8 LimitedComposer quality current owner
+
+`Cocolon_8(6).zip` / `mashos-api_9(2).zip` では、Cocolon側ファイルの追加・削除・変更はありません。mashos-api側では、`Emlisの観測` の B案 LimitedComposer が Phase8 の実入力品質改善へ進んでいます。全体構造上は、Home/Input保存直後の immediate observation pipeline のうち、`Composer -> Guard -> Display` の品質層が補強されたものとして読む。
+
+| layer | current file | 全体構造上の意味 |
+|---|---|---|
+| Phase8 Composer | `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | EvidenceSpanを直接貼らず、PhraseUnit / ObservationProfile / SentencePlan経由で本文候補を作る |
+| Sentence quality guard | `emlis_ai_limited_sentence_quality_guard.py` | 日本語破綻・感情ラベル単独行・汎用接続語尾を検出する新規Guard |
+| Scope補正 | `emlis_ai_limited_observation_scope_service.py` | `relationship_approach_avoidance` / `reality_escape_tension` など、実入力に近い関係構造をB案scopeとして扱う |
+| Evidence補正 | `emlis_ai_evidence_ledger_service.py` | Phase8 profileに必要な根拠spanを保持する |
+| Observer補正 | `emlis_ai_perspective_observers.py` | Phase8 profileに必要な観測claim / relationを補助する |
+| Template / Display | `emlis_ai_template_echo_guard.py` / `emlis_ai_display_gate.py` | Phase8 quality reportを既存Gateに接続し、破綻候補を `passed` にしない |
+| Phase8 tests | `ai/tests/fixtures/emlis_ai_phase8_cases.py` / `ai/tests/test_emlis_ai_phase8_real_input_quality.py` | 7つの実入力回帰ケースを固定し、正解文一致ではなく構造保持と禁止表面で検証する |
+
+RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModal.js` は今回変更なし。`observation_status=passed` かつ本文ありの場合だけ表示する既存制御を維持する。

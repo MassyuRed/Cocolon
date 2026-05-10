@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   getAccountProfileMe,
   patchAccountProfileMe,
@@ -17,6 +18,54 @@ import {
 } from "./tutorial/tutorialScenarioData";
 
 const TutorialContext = createContext(undefined);
+
+const TUTORIAL_COMPLETED_STORAGE_PREFIX = "cocolon:tutorialCompleted";
+const TUTORIAL_SKIPPED_STORAGE_PREFIX = "cocolon:tutorialSkipped";
+
+function buildTutorialLocalFlagKey(prefix, userId) {
+  const normalizedUserId = String(userId || "").trim();
+  return normalizedUserId ? `${prefix}:${normalizedUserId}` : null;
+}
+
+async function readTutorialLocalFlag(prefix, userId) {
+  const key = buildTutorialLocalFlagKey(prefix, userId);
+  if (!key) return false;
+
+  try {
+    const raw = await AsyncStorage.getItem(key);
+    return raw === "true";
+  } catch (e) {
+    console.warn("TutorialContext: failed to read local tutorial flag", e);
+    return false;
+  }
+}
+
+async function writeTutorialLocalFlags(userId, values = {}) {
+  const completedKey = buildTutorialLocalFlagKey(
+    TUTORIAL_COMPLETED_STORAGE_PREFIX,
+    userId
+  );
+  const skippedKey = buildTutorialLocalFlagKey(
+    TUTORIAL_SKIPPED_STORAGE_PREFIX,
+    userId
+  );
+  const writes = [];
+
+  if (completedKey && typeof values.completed === "boolean") {
+    writes.push(AsyncStorage.setItem(completedKey, values.completed ? "true" : "false"));
+  }
+  if (skippedKey && typeof values.skipped === "boolean") {
+    writes.push(AsyncStorage.setItem(skippedKey, values.skipped ? "true" : "false"));
+  }
+
+  if (!writes.length) return;
+
+  try {
+    await Promise.all(writes);
+  } catch (e) {
+    console.warn("TutorialContext: failed to write local tutorial flags", e);
+  }
+}
 
 const INITIAL_TUTORIAL_STATE = Object.freeze({
   isTutorialMode: false,
@@ -111,29 +160,60 @@ export function TutorialProvider({ children }) {
     setTutorialFlagsLoaded(false);
 
     (async () => {
-      try {
-        const userId = session?.user?.id ?? null;
-        if (!userId) {
-          if (!cancelled) {
-            setTutorialCompleted(false);
-            setTutorialSkipped(false);
-            setTutorialFlagsLoaded(true);
-          }
-          return;
-        }
-
-        const json = await getAccountProfileMe();
-        if (!cancelled) {
-          setTutorialCompleted(json?.tutorial_completed === true);
-          setTutorialSkipped(json?.tutorial_skipped === true);
-          setTutorialFlagsLoaded(true);
-        }
-      } catch (e) {
-        console.warn("TutorialContext: failed to load tutorial flags", e);
+      const userId = session?.user?.id ?? null;
+      if (!userId) {
         if (!cancelled) {
           setTutorialCompleted(false);
           setTutorialSkipped(false);
           setTutorialFlagsLoaded(true);
+        }
+        return;
+      }
+
+      const [localCompleted, localSkipped] = await Promise.all([
+        readTutorialLocalFlag(TUTORIAL_COMPLETED_STORAGE_PREFIX, userId),
+        readTutorialLocalFlag(TUTORIAL_SKIPPED_STORAGE_PREFIX, userId),
+      ]);
+
+      let remoteCompleted = false;
+      let remoteSkipped = false;
+      let remoteLoaded = false;
+
+      try {
+        const json = await getAccountProfileMe();
+        remoteCompleted = json?.tutorial_completed === true;
+        remoteSkipped = json?.tutorial_skipped === true;
+        remoteLoaded = true;
+      } catch (e) {
+        console.warn("TutorialContext: failed to load tutorial flags", e);
+      }
+
+      const nextCompleted = localCompleted || remoteCompleted;
+      const nextSkipped = !nextCompleted && (localSkipped || remoteSkipped);
+
+      if (!cancelled) {
+        setTutorialCompleted(nextCompleted);
+        setTutorialSkipped(nextSkipped);
+        setTutorialFlagsLoaded(true);
+      }
+
+      if (remoteLoaded) {
+        if (remoteCompleted && !localCompleted) {
+          await writeTutorialLocalFlags(userId, { completed: true, skipped: false });
+        } else if (remoteSkipped && !localSkipped && !nextCompleted) {
+          await writeTutorialLocalFlags(userId, { skipped: true });
+        } else if (localCompleted && !remoteCompleted) {
+          void syncTutorialFlagsToProfile({
+            tutorial_completed: true,
+            tutorial_skipped: false,
+            tutorial_completed_at: new Date().toISOString(),
+          });
+        } else if (localSkipped && !remoteSkipped && !nextCompleted) {
+          void syncTutorialFlagsToProfile({
+            tutorial_completed: false,
+            tutorial_skipped: true,
+            tutorial_completed_at: null,
+          });
         }
       }
     })();
@@ -141,7 +221,7 @@ export function TutorialProvider({ children }) {
     return () => {
       cancelled = true;
     };
-  }, [session?.user?.id, recoveryMode]);
+  }, [session?.user?.id, recoveryMode, syncTutorialFlagsToProfile]);
 
   const clearTutorialData = useCallback(() => {
     setTutorialEmotions([]);
@@ -156,26 +236,24 @@ export function TutorialProvider({ children }) {
       return false;
     }
     setIsTutorialMode(true);
+    setTutorialSkipped(false);
     clearTutorialData();
     setTutorialPieces(cloneTutorialPieceItems(TUTORIAL_PIECES));
     return true;
   }, [clearTutorialData]);
 
   const endTutorial = useCallback(async () => {
-    const wasAlreadyCompleted = tutorialCompleted === true;
+    const userId = session?.user?.id ?? null;
+    const completedAt = new Date().toISOString();
+    const payload = {
+      tutorial_completed: true,
+      tutorial_skipped: false,
+      tutorial_completed_at: completedAt,
+    };
 
     setTutorialCompletionInProgress(true);
     try {
-      const synced = await syncTutorialFlagsToProfile({
-        tutorial_completed: true,
-        tutorial_skipped: false,
-        tutorial_completed_at: new Date().toISOString(),
-      });
-
-      if (!synced && !wasAlreadyCompleted) {
-        throw new Error("Failed to sync tutorial completion flags");
-      }
-
+      await writeTutorialLocalFlags(userId, { completed: true, skipped: false });
       setTutorialCompleted(true);
       setTutorialSkipped(false);
       clearTutorialData();
@@ -184,18 +262,30 @@ export function TutorialProvider({ children }) {
     } finally {
       setTutorialCompletionInProgress(false);
     }
-  }, [clearTutorialData, syncTutorialFlagsToProfile, tutorialCompleted]);
+
+    void syncTutorialFlagsToProfile(payload).then((synced) => {
+      if (!synced) {
+        console.warn("TutorialContext: failed to sync tutorial completion flags");
+      }
+    });
+  }, [clearTutorialData, session?.user?.id, syncTutorialFlagsToProfile]);
 
   const skipTutorial = useCallback(async () => {
-    setIsTutorialMode(false);
-    setTutorialCompleted(false);
-    setTutorialSkipped(true);
-    await syncTutorialFlagsToProfile({
+    const userId = session?.user?.id ?? null;
+    const payload = {
       tutorial_completed: false,
       tutorial_skipped: true,
       tutorial_completed_at: null,
-    });
-  }, [syncTutorialFlagsToProfile]);
+    };
+
+    setIsTutorialMode(false);
+    setTutorialCompleted(false);
+    setTutorialSkipped(true);
+    clearTutorialData();
+    setTutorialResetToken((prev) => prev + 1);
+    await writeTutorialLocalFlags(userId, { completed: false, skipped: true });
+    void syncTutorialFlagsToProfile(payload);
+  }, [clearTutorialData, session?.user?.id, syncTutorialFlagsToProfile]);
 
   const resetTutorial = useCallback(() => {
     setIsTutorialMode(INITIAL_TUTORIAL_STATE.isTutorialMode);

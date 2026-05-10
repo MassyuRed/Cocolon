@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 200
-  mashos-api: 342
+  mashos-api: 374
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -253,3 +253,27 @@ RN巨大画面分割後も、Mash様が画面名を指示する時の正本は�
 | App root | `App.js` | `navigation/*`, `runtime/*`, `components/GlobalFrameLayout.js` | App.jsはprovider / NavigationContainer entry shell。route名は変更しない |
 
 この分割は名称変更ではないため、`MyWeb` / `MyModel` / DB physical name / legacy façadeの扱いは既存の命名混在方針を優先する。
+
+# 2026-05-09 差分追記: 「Emlisの観測」visible名と内部契約名
+
+入力直後に出るEmlisAI本文のユーザー表示名は `Emlisの観測` として読む。旧visible名の `Emlisからの返答` / `Emlisからの応答` / `Emlisの返答` は、画面表示上は使わない。
+
+| Mash様の言い方 | current visible / route | current runtime owner | legacy / DB側の残り方 | 使い分け |
+|---|---|---|---|---|
+| Emlisの観測 | `InputFeedbackReplyModal.js` のタイトル / 入力直後モーダル | `emlis_ai_reply_service.py` + multi-perspective service群 + `useInputFeedbackModal.js` | API契約は `input_feedback.comment_text` / `input_feedback.emlis_ai` を維持。`comment_text` はvisible名ではなく互換payload名 | visible名だけ変更する。API/DB keyを一括renameしない。`observation_status=passed` の時だけ表示する |
+
+呼称は `display_name` から作る。観測本文で `あなたは` / `あなたの` / `あなたが` / `あなたに` を通常経路で出さない方針を維持する。
+
+# 2026-05-10 差分追記: Phase8 LimitedComposer語彙は表示名変更ではない
+
+`LimitedComposer`、`EmlisPhraseUnit`、`ObservationProfile`、`SentencePlan`、`LimitedSentenceQualityGuard` は、`Emlisの観測` の内部品質層です。ユーザー表示名や public API 名ではありません。
+
+| 内部語彙 | current owner | 読み方 |
+|---|---|---|
+| `LimitedComposer` | `emlis_ai_limited_composer_client.py` | B案の自作限定Composer。外部AIではなく、scoped graph内の根拠から本文候補を作る |
+| `EmlisPhraseUnit` | `emlis_ai_limited_composer_client.py` | EvidenceSpanから本文化できる短い根拠句を作る内部単位 |
+| `ObservationProfile` | `emlis_ai_limited_composer_client.py` / `emlis_ai_limited_sentence_quality_guard.py` | 入力構造型。例: `mixed_positive_anxiety`, `relationship_approach_avoidance`, `reality_escape_tension` |
+| `SentencePlan` | `emlis_ai_limited_composer_client.py` | 完成文ではなく、どの根拠句をどの関係で1文にするかの内部計画 |
+| `LimitedSentenceQualityGuard` | `emlis_ai_limited_sentence_quality_guard.py` | 日本語破綻・感情ラベル単独行・汎用接続語尾を落とすGuard |
+
+これらは内部構造名であり、`input_feedback.comment_text` / `input_feedback.emlis_ai` / `observation_status` の互換payload名は変更しない。表示名は引き続き `Emlisの観測` と読む。

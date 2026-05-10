@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2356,3 +2356,42 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/screens/input/InputToastOverlay.js` | lightweight toast表示 |
 
 `InputScreen.js` はentry shellです。`submitEmotionInput`、`previewEmotionPiece`、`publishEmotionPiece`、`useHomeState`、`useHomeActions` の契約・route・payloadは変更しません。
+
+# 2026-05-09 差分追記: EmlisAI multi-perspective observation path
+
+この差分では、Home/Input直後の `Emlisの観測` 表示経路が変更されています。`InputScreen.js` は保存結果の `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` を読み、`useInputFeedbackModal.js` は `observation_status` が `passed` 以外ならモーダルを開きません。`InputFeedbackReplyModal.js` 自体も同じ条件で二重に表示制御します。
+
+## frontend current owner
+
+| file | 役割 |
+|---|---|
+| `Cocolon/screens/InputScreen.js` | `/emotion/submit` / Piece publish後の `input_feedback` を読み、`observationStatus` をmodal hookへ渡す |
+| `Cocolon/screens/input/useInputFeedbackModal.js` | `observation_status` が `passed` 以外、または本文空の場合は表示しない |
+| `Cocolon/screens/input/InputFeedbackReplyModal.js` | タイトルは `Emlisの観測`。`observationStatus` による表示制御を保持する |
+
+## backend current owner
+
+| file | 役割 |
+|---|---|
+| `emlis_ai_reply_service.py` | `multi_perspective_observation.v1` のorchestrator |
+| `emlis_ai_evidence_ledger_service.py` | EvidenceSpanを作る |
+| `emlis_ai_perspective_observers.py` / `emlis_ai_perspective_board.py` | 複数視点の観測結果を作り集約する |
+| `emlis_ai_observation_integrator_service.py` | ObservationGraphへ統合する |
+| `emlis_ai_conversation_composer_service.py` | 観測構造を会話文へ変換する |
+| `emlis_ai_listener_reader_judge.py` / `emlis_ai_grounding_judge.py` / `emlis_ai_template_echo_guard.py` | 読解可能性、根拠、テンプレ・復唱を判定する |
+| `emlis_ai_display_gate.py` | fail-closed表示判定を行う |
+
+旧 `emlis_ai_observation_kernel.py`、`emlis_ai_safe_reply_fallback_service.py`、`input_feedback_text_templates.py` はファイルとして残る場合でも、今回の `render_emlis_ai_reply()` のEmlis観測本文経路では固定fallbackとして使わない。
+
+# 2026-05-10 差分追記: Home/Input直後 Emlisの観測 Phase8 quality path
+
+Phase8では、Home/Input側の画面・API呼び出しは変更しません。変更は backend の `Emlisの観測` 本文品質層に限定されます。
+
+| flow | owner | 読み方 |
+|---|---|---|
+| RN input submit | `Cocolon/screens/InputScreen.js` / `features/home/useHomeActions.js` | 従来どおり `/emotion/submit` を呼ぶ。Phase8用の新payloadは追加しない |
+| modal表示 | `screens/input/useInputFeedbackModal.js` / `InputFeedbackReplyModal.js` | `observation_status=passed` かつ本文ありの場合だけ表示する。Phase8で表示条件は変更しない |
+| backend quality composer | `emlis_ai_limited_composer_client.py` | scoped graphをPhraseUnit / ObservationProfile / SentencePlanへ変換して本文候補を作る |
+| quality guard | `emlis_ai_limited_sentence_quality_guard.py` | `不安。` / `怒り。` / `がつながっています` / `同じ中にあります` など、今回の実入力で出た破綻表面を落とす |
+
+Home/Inputを触る時は、Phase8をフロント導線追加として扱わない。表示可否は引き続き backend Display Gate の `observation_status` に従います。

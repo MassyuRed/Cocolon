@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 200
-  mashos-api: 342
+  mashos-api: 374
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 542
+  included_files_total: 574
   included_files_cocolon: 200
-  included_files_mashos_api: 342
+  included_files_mashos_api: 374
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `465 files`
-  - Cocolon: `125`
-  - mashos-api: `340`
+- latest full coverage listed in body: `574 files`
+  - Cocolon: `200`
+  - mashos-api: `374`
 
 # 4. 読み方
 
@@ -882,3 +882,46 @@ RN巨大画面分割は、`Input -> Save -> Dispatch -> Snapshot / Queue / Worke
 `RN client error/API failure -> Cocolon/lib/monitoring.js -> POST /ops/client-events -> api_client_events.py -> privacy-safe structured log / alert log`
 
 このflowはユーザーデータ保存・DB write path・public content publishとは別境界であり、monitoring payloadはtoken / Authorization / email / UUID / 長いtoken風文字列をredactする。
+
+# 2026-05-09 差分追記: Input Save直後のEmlis観測fail-closed境界
+
+国家システム上、`POST /emotion/submit` の保存成功と `Emlisの観測` の表示成功は分離して読む。保存自体は成功しても、Emlis観測本文がReader / Grounding / Template Guard / Safety / Display Gateを通らない場合、`input_feedback.comment_text` は空になり、RNはモーダルを表示しない。
+
+```
+Input Gate / Save API
+  -> emotion_submit_service.py
+  -> emlis_ai_reply_service.render_emlis_ai_reply()
+  -> Evidence Ledger / Perspective Observers / ObservationGraph
+  -> Conversation Composer
+  -> Listener Reader / Grounding / Template Echo / Display Gate
+  -> observation_status=passed の時だけ input_feedback.comment_text
+  -> RN InputFeedback modal
+```
+
+`api_emotion_submit.py` は既存互換のため `input_feedback.comment_text` と `input_feedback.emlis_ai` を残すが、`comment_text` が空の場合は `input_feedback` をresponseから省略する。これにより、読めない観測文・旧テンプレfallbackを表示しない。
+
+# 2026-05-10 差分追記: Emlisの観測 Phase8 quality gate / national flow
+
+国家システム上、Phase8は `Input Gate -> Save API` の保存可否を変更しません。保存後の `Emlisの観測` が `passed` になるかどうかを、より厳密に品質判定する補強として読む。
+
+```
+Input Gate / Save API
+  -> emotion_submit_service.py
+  -> emlis_ai_reply_service.render_emlis_ai_reply()
+  -> Evidence Ledger / Perspective Observers / ObservationGraph
+  -> LimitedObservationScope
+  -> CocolonLimitedComposerClient
+  -> PhraseUnit / ObservationProfile / SentencePlan
+  -> LimitedSentenceQualityGuard / Template Echo / Grounding / Reader / Display Gate
+  -> observation_status=passed の時だけ input_feedback.comment_text
+  -> RN InputFeedback modal
+```
+
+| national boundary | owner | 読み方 |
+|---|---|---|
+| 保存成功 | `emotion_submit_service.py` | Phase8で変更なし。Emlis観測失敗でも感情入力保存は成功し得る |
+| 本文化範囲 | `emlis_ai_limited_observation_scope_service.py` | full graphから本文化してよいscoped graphを切る |
+| 本文品質 | `emlis_ai_limited_composer_client.py` / `emlis_ai_limited_sentence_quality_guard.py` | 実入力レベルで意味が通る短文へ寄せ、破綻文を表示させない |
+| 表示可否 | `emlis_ai_display_gate.py` | `passed` 以外は本文を空にするfail-closed方針を維持する |
+
+Phase8は、読めない観測文を表示しないための品質層です。API互換の `input_feedback.comment_text` は維持しますが、`comment_text` に本文が入るのは `observation_status=passed` の場合だけです。

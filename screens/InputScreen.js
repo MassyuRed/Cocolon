@@ -133,6 +133,7 @@ export default function InputScreen({ navigation, route }) {
     setTutorialNavigateAfterReply,
     openInputFeedbackModal,
     closeInputFeedbackModal,
+    completeTutorialAfterReply,
     resetInputFeedbackModal,
   } = useInputFeedbackModal({
     isTutorialMode,
@@ -934,22 +935,29 @@ const safeInsets = useSafeAreaInsets();
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
       Keyboard.dismiss();
-      setTutorialNavigateAfterReply(true);
-      setTutorialStep(8);
-      openInputFeedbackModal({
+      const openedObservation = openInputFeedbackModal({
         commentText: tutorialEmlisReplyText,
         ...inputFeedbackEmotionMeta,
         contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
+        emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
+        observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
       });
+      if (openedObservation) {
+        setTutorialNavigateAfterReply(true);
+      } else {
+        completeTutorialAfterReply();
+      }
       return;
     }
 
     setPiecePublishLoading(true);
     try {
       const publishResult = await publishEmotionPiece(previewId);
+      const inputFeedback = publishResult?.input_feedback || null;
       const inputFeedbackText = String(
-        publishResult?.input_feedback?.comment_text || ""
+        inputFeedback?.comment_text || ""
       ).trim();
+      const inputFeedbackAI = inputFeedback?.emlis_ai || null;
       const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
 
       await clearPersistedInputDraft();
@@ -978,13 +986,16 @@ const safeInsets = useSafeAreaInsets();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
 
-      if (inputFeedbackText) {
-        openInputFeedbackModal({
-          commentText: inputFeedbackText,
-          ...inputFeedbackEmotionMeta,
-          contextLabel: "ピースを生成しました",
-        });
-      } else {
+      const openedObservation = inputFeedbackText
+        ? openInputFeedbackModal({
+            commentText: inputFeedbackText,
+            ...inputFeedbackEmotionMeta,
+            contextLabel: "ピースを生成しました",
+            emlisAiMeta: inputFeedbackAI,
+            observationStatus: inputFeedbackAI?.observation_status,
+          })
+        : false;
+      if (!openedObservation) {
         showToast("ピースを生成しました");
       }
     } catch (e) {
@@ -998,6 +1009,7 @@ const safeInsets = useSafeAreaInsets();
     }
   }, [
     clearPersistedInputDraft,
+    completeTutorialAfterReply,
     ensureTutorialPiecesSeed,
     isTutorialMode,
     loadHomeState,
@@ -1035,18 +1047,26 @@ const safeInsets = useSafeAreaInsets();
         setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
 
-        setTutorialNavigateAfterReply(true);
-        openInputFeedbackModal({
+        const openedObservation = openInputFeedbackModal({
           commentText: tutorialEmlisReplyText,
           ...inputFeedbackEmotionMeta,
           contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
+          emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
+          observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
         });
+        if (openedObservation) {
+          setTutorialNavigateAfterReply(true);
+        } else {
+          completeTutorialAfterReply();
+        }
         return;
       }
 
       const submitResult = await submitEmotionInput(payload);
+      const inputFeedback = submitResult?.input_feedback || null;
+      const inputFeedbackAI = inputFeedback?.emlis_ai || null;
       const inputFeedbackText = String(
-        submitResult?.input_feedback?.comment_text ||
+        inputFeedback?.comment_text ||
           submitResult?.inputFeedback?.commentText ||
           ""
       ).trim();
@@ -1068,12 +1088,15 @@ const safeInsets = useSafeAreaInsets();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
 
-      if (inputFeedbackText) {
-        openInputFeedbackModal({
-          commentText: inputFeedbackText,
-          ...inputFeedbackEmotionMeta,
-        });
-      } else {
+      const openedObservation = inputFeedbackText
+        ? openInputFeedbackModal({
+            commentText: inputFeedbackText,
+            ...inputFeedbackEmotionMeta,
+            emlisAiMeta: inputFeedbackAI,
+            observationStatus: inputFeedbackAI?.observation_status,
+          })
+        : false;
+      if (!openedObservation) {
         showToast(`記録しました${inputFeedbackEmotionMeta.emotionSummary ? `
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }

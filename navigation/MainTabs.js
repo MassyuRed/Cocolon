@@ -113,6 +113,7 @@ export default function MainTabs() {
     isTutorialMode,
     tutorialFlagsLoaded,
     tutorialCompleted,
+    tutorialSkipped,
     tutorialCompletionInProgress,
     startTutorial,
     setTutorialStep,
@@ -144,6 +145,7 @@ export default function MainTabs() {
     if (
       !tutorialFlagsLoaded ||
       tutorialCompleted ||
+      tutorialSkipped ||
       isTutorialMode ||
       tutorialCompletionInProgress
     ) return;
@@ -166,6 +168,7 @@ export default function MainTabs() {
     setTutorialStep,
     startTutorial,
     tutorialCompleted,
+    tutorialSkipped,
     tutorialCompletionInProgress,
     tutorialFlagsLoaded,
   ]);

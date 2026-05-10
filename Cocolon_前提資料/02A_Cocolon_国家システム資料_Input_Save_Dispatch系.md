@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1632,3 +1632,35 @@ personal回答は既存answer保存の拡張です。`today_question_answers.que
 | `screens/input/InputFeedbackReplyModal.js` | EmlisAI immediate replyの表示。`input_feedback.comment_text` の意味は変更しない |
 
 Input関連を触る場合は、`features/home/useHomeState.js` / `features/home/useHomeActions.js` と `lib/api/home/*` を引き続き同時確認します。
+
+# 2026-05-09 差分追記: Emlisの観測 multi-perspective current path
+
+`InputScreen.js -> /emotion/submit -> emotion_submit_service.py` の後、EmlisAI immediate replyは `Emlisの観測` として扱う。最新実ファイルでは、保存直後に `emlis_ai_reply_service.render_emlis_ai_reply()` が次の順序で動く。
+
+| 段階 | owner | 国家システム上の役割 |
+|---|---|---|
+| source bundle | `emlis_ai_context_service.py` | current input / display_name / capability / historyを束ねる |
+| evidence | `emlis_ai_evidence_ledger_service.py` | 原文根拠を `EvidenceSpan` として台帳化する |
+| observers | `emlis_ai_perspective_observers.py` | 明示内容、感情、葛藤、圧迫、限界、自己認識、価値、相手モデル、安全境界を分離観測する |
+| board | `emlis_ai_perspective_board.py` | `PerspectiveReport` を集約する |
+| graph | `emlis_ai_observation_integrator_service.py` | `ObservationGraph` へ統合する |
+| composer | `emlis_ai_conversation_composer_service.py` | 観測構造から会話文を作る |
+| judges | `emlis_ai_listener_reader_judge.py` / `emlis_ai_grounding_judge.py` / `emlis_ai_template_echo_guard.py` | 読解可能性・根拠・テンプレ/復唱を判定する |
+| display | `emlis_ai_display_gate.py` | `passed` 以外は `comment_text` を空にする |
+
+`emotion_submit_service.py` はEmlis観測生成がtimeout/errorになった場合も固定文fallbackを出さず、`observation_status=unavailable` と `rejection_reasons=["emlis_ai_timeout_or_error"]` をmetaに入れて `comment_text` を空にする。保存処理と観測表示可否は分離する。
+
+RN側では `InputScreen.js` が `input_feedback.emlis_ai.observation_status` を `useInputFeedbackModal.js` へ渡す。`useInputFeedbackModal.js` と `InputFeedbackReplyModal.js` は、`passed` 以外のstatusや空本文を表示しない。
+
+# 2026-05-10 差分追記: Input Save後 Emlis観測 Phase8品質境界
+
+`/emotion/submit` のsave / dispatch境界は変更しません。Phase8は、保存後に返る `input_feedback` の本文品質を backend 側で改善・判定する範囲です。
+
+| 段階 | current owner | 役割 |
+|---|---|---|
+| current input保存 | `emotion_submit_service.py` | 感情入力を保存し、Emlis観測生成を試す。失敗しても保存成功を優先する |
+| evidence作成 | `emlis_ai_evidence_ledger_service.py` | 実入力の根拠を保持し、Phase8 profile判定の材料にする |
+| limited composer | `emlis_ai_limited_composer_client.py` | 根拠spanをPhraseUnitへ圧縮し、ObservationProfile / SentencePlanに変換する |
+| Japanese coherence | `emlis_ai_limited_sentence_quality_guard.py` | 感情ラベルだけの行や未完了断片を落とす |
+
+RN側は `InputFeedbackReplyModal.js` の表示条件を維持します。Phase8のためにユーザーへ追加操作や開発者操作を求めない。

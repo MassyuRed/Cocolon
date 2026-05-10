@@ -9,6 +9,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { CommonActions } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import CocolonButton from "../components/CocolonButton";
@@ -20,6 +21,7 @@ import { useTutorial } from "../TutorialContext";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
+import { navigationRef } from "../navigation/navigationRef";
 import {
   TUTORIAL_CONNECTION_ROWS,
   TUTORIAL_INTRO_FLOWCHART,
@@ -31,6 +33,42 @@ const STEP_INTRO = 1;
 const STEP_CONNECTION = 17;
 const STEP_OTHER = 18;
 const STEP_FINISH = 19;
+
+const HOME_TAB_RESET_ROUTES = [
+  "Input",
+  "Analysis",
+  "Piece",
+  "RankingTop",
+  "Settings",
+];
+
+function resetRootToHome(params) {
+  try {
+    if (!navigationRef.isReady()) return false;
+    navigationRef.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: HOME_TAB_RESET_ROUTES.map((name, index) => {
+          if (index !== 0) return { name };
+          return {
+            name: "Input",
+            params: {
+              screen: "Input",
+              params,
+            },
+            state: {
+              index: 0,
+              routes: [{ name: "Input", params }],
+            },
+          };
+        }),
+      })
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export default function TutorialFlowScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -77,6 +115,10 @@ export default function TutorialFlowScreen({ navigation }) {
       ? { tutorialFinishedAt: Date.now(), tutorialInitialReset: true }
       : undefined;
 
+    if (markFinished && resetRootToHome(params)) {
+      return;
+    }
+
     try {
       navigation?.popToTop?.();
     } catch {
@@ -88,6 +130,18 @@ export default function TutorialFlowScreen({ navigation }) {
         typeof navigation?.getParent === "function" ? navigation.getParent() : null;
       if (parent && typeof parent.navigate === "function") {
         parent.navigate("Input", {
+          screen: "Input",
+          params,
+        });
+        return;
+      }
+    } catch {
+      // noop
+    }
+
+    try {
+      if (navigationRef.isReady()) {
+        navigationRef.navigate("Input", {
           screen: "Input",
           params,
         });
@@ -139,7 +193,7 @@ export default function TutorialFlowScreen({ navigation }) {
         return {
           step: STEP_INTRO,
           mode: "info",
-          title: "Emlis（エムリス）について",
+          title: "Emlisについて",
           message:
             "まずは、感情入力からつながる3つの体験を確認します。",
           nextLabel: "ホーム画面へ",
@@ -154,9 +208,9 @@ export default function TutorialFlowScreen({ navigation }) {
         return {
           step: STEP_CONNECTION,
           mode: "info",
-          title: "Emlis（エムリス）について",
+          title: "Emlisについて",
           message:
-            "Emlis（エムリス）のことを少しでもお分かりいただけたでしょうか？\n\n気軽に日々の感情や想いを言葉として入力してみてください。",
+            "Emlisのことを少しでもお分かりいただけたでしょうか？\n\n気軽に日々の感情や想いを言葉として入力してみてください。",
           nextLabel: "その他の機能へ",
           onNext: () => setTutorialStep(STEP_OTHER),
           disableSpotlight: true,
@@ -168,7 +222,7 @@ export default function TutorialFlowScreen({ navigation }) {
           mode: "info",
           title: "その他の機能",
           message:
-            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlis（エムリス）の機能を広げていけます。",
+            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
           nextLabel: "終了へ",
           onNext: () => {
             setTutorialStep(STEP_FINISH);
@@ -292,7 +346,7 @@ export default function TutorialFlowScreen({ navigation }) {
             <View ref={finishRef} collapsable={false} style={styles.finishCard}>
               <Text style={styles.finishTitle}>チュートリアルはこれにて終了です</Text>
               <Text style={styles.finishBody}>
-                Emlis（エムリス）をお楽しみください。
+                Emlisをお楽しみください。
               </Text>
               <CocolonButton
                 variant="primary"
@@ -393,7 +447,7 @@ function ConnectionSummaryTable({ rows, styles }) {
   return (
     <>
       <Text style={styles.cardLead}>
-        Emlis（エムリス）は感情入力をすることで様々な機能を楽しむことができます。その中でも主要な3つの要素を説明します。
+        Emlisは感情入力をすることで様々な機能を楽しむことができます。その中でも主要な3つの要素を説明します。
       </Text>
       {safeRows.map((row, index) => (
         <View

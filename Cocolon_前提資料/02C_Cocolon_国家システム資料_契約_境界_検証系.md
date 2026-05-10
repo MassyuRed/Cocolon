@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-10"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2247,3 +2247,32 @@ SQL境界は `today_question_personal_followup_v1.sql` で追加され、ユー�
 | `Cocolon/tests/rn-screen-contracts.test.js` | 分割後のentry shellとsubmodule接続を確認するRN screen contract test |
 
 RN screen split testは表示導線のguardであり、backend public APIやDB write pathを変更しない。
+
+# 2026-05-09 差分追記: EmlisAI multi-perspective Gate / contract tests
+
+EmlisAI観測本文の契約は、固定文が出ることではなく、複数視点構造とfail-closedが守られることとして読む。
+
+| guard / test | current owner | 役割 |
+|---|---|---|
+| Reader Gate | `emlis_ai_listener_reader_judge.py` | 出力だけを読んで、意味・話者・会話性・report臭を判定する |
+| Grounding Gate | `emlis_ai_grounding_judge.py` | 各文がEvidenceSpanまたはRelationに支えられるかを判定する |
+| Template / Echo Gate | `emlis_ai_template_echo_guard.py` | 旧文型、復唱、過去出力類似を検出する |
+| Display Gate | `emlis_ai_display_gate.py` | いずれかのGateで落ちた出力は `observation_status=rejected` とし、本文を空にする |
+| Pipeline regression | `ai/tests/test_emlis_ai_multi_perspective_pipeline.py` | `passed` / `rejected` / `safety_blocked` / legacy fallback未使用を検証する |
+| Test helper | `ai/tests/emlis_multi_perspective_test_helpers.py` | 複数視点pipeline test用の補助 |
+
+contract上、`input_feedback.comment_text` は残るが、`observation_status=passed` の時だけ本文が入る。`input_feedback.emlis_ai.multi_perspective.legacy_input_feedback_template_used` と `legacy_safe_fallback_used` はfalseとして扱う。
+
+# 2026-05-10 差分追記: EmlisAI Phase8 contract / guard / regression boundary
+
+Phase8の契約は、固定文が出ることではなく、実入力に対して `passed` にしてよい本文だけを通すことです。正解文一致ではなく、構造保持・禁止表面・Gate結果で検証する。
+
+| guard / test | current owner | 検証すること |
+|---|---|---|
+| Limited sentence quality | `emlis_ai_limited_sentence_quality_guard.py` | `不安。` / `怒り。` など感情ラベル単独行、未完了断片、汎用接続語尾を落とす |
+| Template/Echo連携 | `emlis_ai_template_echo_guard.py` | Phase8 quality rejection reasons を既存Template/Echo Gateへ接続する |
+| Display trace | `emlis_ai_display_gate.py` | Phase8 quality reportをtraceへ残す |
+| Phase8 fixture | `ai/tests/fixtures/emlis_ai_phase8_cases.py` | 7ケースの入力・期待profile・must_keep・禁止表面を保持する |
+| Phase8 regression | `ai/tests/test_emlis_ai_phase8_real_input_quality.py` | profile判定、本文品質、禁止表面、guard通過を検証する |
+
+public API route、request shape、DB write pathは変更しません。`input_feedback.comment_text` は互換payload名として保持し、表示可否は `input_feedback.emlis_ai.observation_status` を正とします。
