@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(60).zip"
-  Cocolon: "Cocolon_8(6).zip"
-  mashos-api: "mashos-api_9(2).zip"
+  premise: "Cocolon_前提資料(65).zip"
+  Cocolon: "Cocolon_15(1).zip"
+  mashos-api: "mashos-api_15(2).zip"
 file_counts:
   Cocolon: 200
-  mashos-api: 374
-  total: 574
+  mashos-api: 414
+  total: 614
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 574
-  included_in_overall_structure: 574
-  included_in_national_system: 574
+  total_files: 614
+  included_in_overall_structure: 614
+  included_in_national_system: 614
   excluded_from_main_body: 0
 ---
 
@@ -53,12 +53,12 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_8(6).zip` | 200 | RNアプリ本体 |
-| `mashos-api_9(2).zip` | 374 | backend / API / worker / docs / tests |
-| total | 574 | 前提資料の構造coverage対象 |
+| `Cocolon_15(1).zip` | 200 | RNアプリ本体。今回差分なし |
+| `mashos-api_15(2).zip` | 414 | backend / API / worker / docs / tests。共通文章生成基盤と三大中核接続を含む |
+| total | 614 | 前提資料の構造coverage対象 |
 
-`Cocolon_8(6).zip` / `mashos-api_9(2).zip` では、RN巨大画面分割と本番運用監視の構造を維持したうえで、入力直後の `Emlisの観測` は B案 LimitedComposer のPhase8文章品質改善まで進んでいます。  
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / Conversation Composer / Reader・Grounding・Template Guard / Display Gate のfail-closed構造として読む。Pieceは短縮要約ではなく、ユーザーが言いたいことを他者へ伝わる形へ昇華する構造として読む。画面分割は機能追加ではなく、entry shellを維持した保守性改善として読む。
+`Cocolon_15(1).zip` / `mashos-api_15(2).zip` では、RN巨大画面分割と本番運用監視の構造を維持したうえで、`cocolon_text_generation_core` が三大中核の共通文章生成基盤として追加されています。  
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / LimitedComposer / 共通Core / Reader・Grounding・Template Guard / Display Gate のfail-closed構造として読む。Pieceは短縮要約ではなく、ユーザーが言いたい核を `source_claims` / `must_keep_signal_keys` とともに共通Coreへ通す構造として読む。Analysisは診断・断定ではなく、素材domainを分けた観測レポートを共通Coreで安全確認する構造として読む。画面分割は機能追加ではなく、entry shellを維持した保守性改善として読む。
 
 # 読む順
 
@@ -279,3 +279,16 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 | Phase8回帰test | `ai/tests/test_emlis_ai_phase8_real_input_quality.py` | 正解文一致ではなく、must_keep構造・禁止表面・passed/rejected制御で検証する |
 
 作業時は、Phase8を「EmlisAIが全入力を理解できるようになった」とは読まない。B案のまま、根拠がある範囲だけを自然な観測文へ整える段階として扱う。短く曖昧な入力は、引き続き非表示または浅い受け取りだけが許容範囲です。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤の読み方
+
+`mashos-api_15(2).zip` では、三大中核の文章出力を共通品質基盤で支える `cocolon_text_generation_core` が追加されています。これは中核の出力目的を統一する層ではなく、品質・根拠・安全だけを横断で見る層です。
+
+| 中核 | 既存公開契約 | 共通基盤との関係 | 変更禁止境界 |
+|---|---|---|---|
+| EmlisAI | `input_feedback.comment_text` / `observation_status=passed` のみ表示 / 表示名 `Emlisの観測` | `EmlisObservationComposer` adapterで候補文を共通Coreへ通す | 表示名、route、DB、passed-only制御を変えない |
+| Piece | `piece_text` / preview-publish同一性 / legacy名 `reflection`・`mymodel_qna` | `PieceComposer` adapterで問い・答えを分離し、過圧縮と根拠欠落を検査する | preview時本文をpublish時に再生成しない |
+| Analysis | `content_json` / `standardReport` / `contentText` | `AnalysisComposer` adapterとvalidity gateで非診断・非断定を検査する | payload shape、DB物理名、routeを変えない |
+
+共通Core作業では、`03_Cocolon_命名体系.md`、`05_Cocolon_ルールファイル索引`、`09_Cocolon_名称混在保管と構造境界_2026-05-10.md` を先に読む。DB physical name / public API route / response key / visible名は、この差分では変更されていません。

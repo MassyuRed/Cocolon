@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2276,3 +2276,19 @@ Phase8の契約は、固定文が出ることではなく、実入力に対し�
 | Phase8 regression | `ai/tests/test_emlis_ai_phase8_real_input_quality.py` | profile判定、本文品質、禁止表面、guard通過を検証する |
 
 public API route、request shape、DB write pathは変更しません。`input_feedback.comment_text` は互換payload名として保持し、表示可否は `input_feedback.emlis_ai.observation_status` を正とします。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤 contract / boundary / test
+
+共通文章生成基盤では、route名やDB名ではなく、文章出力の品質・根拠・安全境界をtestで固定します。
+
+| test群 | 固定する境界 |
+|---|---|
+| `test_cocolon_text_generation_core_types.py` / `evidence.py` / `composer.py` | 共通型、根拠、fail-closed結果型 |
+| `test_cocolon_text_generation_core_guards.py` | 日本語破綻、根拠不足、テンプレ臭、過剰断定、must_keep欠落 |
+| `test_cocolon_text_generation_core_emlis_observation_adapter.py` | Emlisのpassed-only / 空本文fail-closed / meta接続 |
+| `test_cocolon_text_generation_core_piece_*` | Pieceの問い・答え分離、過圧縮防止、preview/publish境界 |
+| `test_cocolon_text_generation_core_analysis_*` | Analysisのdomain分離、非診断Gate、payload shape維持 |
+| `test_cocolon_text_generation_core_boundary.py` / `phase14_final_boundary.py` | 三大中核の出力目的・名称・契約が混ざらないこと |
+
+既存 `test_new_national_core_*_contracts.py` には、共通文章生成基盤がadditive metaとして残り、既存公開契約を破壊しないことの確認が追加されています。

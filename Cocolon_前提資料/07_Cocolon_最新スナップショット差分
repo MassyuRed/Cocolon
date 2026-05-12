@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(60).zip"
-  Cocolon: "Cocolon_8(6).zip"
-  mashos-api: "mashos-api_9(2).zip"
+  premise: "Cocolon_前提資料(65).zip"
+  Cocolon: "Cocolon_15(1).zip"
+  mashos-api: "mashos-api_15(2).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,9 +19,9 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_8(6).zip` | 200 | Cocolon側の追加・削除・変更なし。RN表示Gate維持 |
-| `mashos-api_9(2).zip` | 374 | EmlisAI B案 LimitedComposer Phase8文章品質改善、quality guard、実入力fixture/test追加 |
-| total | 574 | 前提資料coverage対象 |
+| `Cocolon_15(1).zip` | 200 | Cocolon側の追加・削除・変更なし。RN表示Gate維持 |
+| `mashos-api_15(2).zip` | 414 | 共通文章生成基盤、Emlis / Piece / Analysis adapter接続、横断contract / boundary test追加 |
+| total | 614 | 前提資料coverage対象 |
 
 この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。
 
@@ -43,28 +43,26 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 # 3. API側の最新構造差分
 
-`mashos-api_9(2).zip` では、EmlisAI immediate reply の B案 LimitedComposer が Phase8 の文章品質改善へ進んでいます。旧固定文fallbackや外部AI導入ではなく、scoped graph内の根拠を PhraseUnit / ObservationProfile / SentencePlan へ通して本文候補を作り、破綻表面をGuardで落とす構造として読む。
+`mashos-api_15(2).zip` では、EmlisAI Phase8 を実装母体として抽出した `cocolon_text_generation_core` が、三大中核の共通文章生成基盤として追加されています。これはEmlisAIを共通出力担当にする変更ではなく、品質・根拠・安全だけを横断で扱う基盤です。
 
 ## 3-1. 追加ファイル
 
-| file | 最新構造 |
-|---|---|
-| `emlis_ai_limited_sentence_quality_guard.py` | 感情ラベル単独行、未完了断片、汎用接続語尾を検出するPhase8品質Guard |
-| `ai/tests/fixtures/__init__.py` | Phase8 fixture package marker |
-| `ai/tests/fixtures/emlis_ai_phase8_cases.py` | 華恋提示6ケース＋実ユーザー入力1ケースの計7ケースを回帰fixtureとして保持する |
-| `ai/tests/test_emlis_ai_phase8_real_input_quality.py` | Phase8本文品質をprofile / must_keep / forbidden surface / guard通過で検証する |
+| 区分 | 件数 | 最新構造 |
+|---|---:|---|
+| docs | 2 | Phase0-2作業境界メモ、Phase14最終確認メモ |
+| common core | 24 | `types` / `policies` / `evidence` / `phrase_units` / `sentence_plan` / `composer` / `result` / `guards` / `adapters` |
+| tests | 14 | 共通Core単体、Emlis/Piece/Analysis adapter、横断boundary、Phase14 final boundary |
+
+詳細pathは末尾の `2026-05-11 差分追記: 共通文章生成基盤 current snapshot差分` を正本として読む。
 
 ## 3-2. 変更ファイル
 
-| file | 最新構造 |
-|---|---|
-| `emlis_ai_limited_composer_client.py` | `EmlisPhraseUnit` / `ObservationProfile` / `SentencePlan` を追加し、原文断片の直接貼り付けを減らす |
-| `emlis_ai_limited_observation_scope_service.py` | 関係性葛藤や実ユーザー型のような明確な関係構造をB案scopeで扱えるよう補正する |
-| `emlis_ai_template_echo_guard.py` | Phase8 quality rejectionをTemplate/Echo Gateへ統合する |
-| `emlis_ai_display_gate.py` | Phase8 quality reportをDisplay traceへ残す |
-| `emlis_ai_types.py` | Phase8 quality metaを保持できるよう型を拡張する |
-| `emlis_ai_evidence_ledger_service.py` | Phase8 profile判定に必要な根拠span保持を補正する |
-| `emlis_ai_perspective_observers.py` | Phase8 profileに必要な観測claim / relation補助を追加する |
+| 区分 | 件数 | 最新構造 |
+|---|---:|---|
+| EmlisAI | 2 | `emlis_ai_limited_composer_client.py` / `emlis_ai_reply_service.py` に共通Core metaとfail-closed接続を追加 |
+| Piece | 2 | `emotion_piece_generation_service.py` / `piece_generation_policy.py` にPieceComposer評価とmeta保持を追加 |
+| Analysis | 2 | `analysis_report_validity_gate.py` / `api_analysis_reports.py` に非診断・非断定Gateとmeta保持を追加 |
+| tests / contract | 5 | 三大中核contractと既存回帰へ共通Core境界確認を追加 |
 
 # 4. coverage
 
@@ -78,35 +76,39 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 | coverage | count |
 |---|---:|
 | Cocolon | 200 |
-| mashos-api | 374 |
-| total | 574 |
+| mashos-api | 414 |
+| total | 614 |
 
 # 5. 前提資料としての変更
 
 | file | 変更理由 |
 |---|---|
-| `00_華恋用_READ_FIRST.md` | 最新基準面を `Cocolon_8(6).zip` / `mashos-api_9(2).zip` へ更新し、Phase8 LimitedComposer品質境界を追記 |
-| `01_Cocolon_全体構造資料.md` | EmlisAI Phase8 current ownerを全体構造へ追記 |
-| `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` | Home/Input直後のEmlis観測Phase8 quality pathを追記 |
-| `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` | Phase8 backend support / regression boundaryを追記 |
-| `02_Cocolon_国家システム資料.md` | Input Save後のEmlis観測Phase8 quality gateを国家システムflowへ追記 |
-| `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` | `/emotion/submit` 保存後のPhase8品質境界を追記 |
-| `02C_Cocolon_国家システム資料_契約_境界_検証系.md` | Phase8 contract / guard / regression boundaryを追記 |
-| `03_Cocolon_命名体系.md` | Phase8内部語彙が表示名/API名変更ではないことを追記 |
-| `05_Cocolon_ルールファイル索引` | Phase8 LimitedComposer品質rule / guard索引を追記 |
-| `07_Cocolon_最新スナップショット差分` | 最新実ファイル差分と追加/変更ファイルを反映 |
-| `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` | Phase8品質語彙の名称混在境界を追記 |
-| `manifest.json` | 最新snapshot、coverage、Phase8 diff entryを反映 |
+| `00_華恋用_READ_FIRST.md` | 最新基準面を `Cocolon_15(1).zip` / `mashos-api_15(2).zip` へ更新し、共通文章生成基盤の読み方を追記 |
+| `01_Cocolon_全体構造資料.md` | 共通Core、Emlis/Piece/Analysis adapter、追加/変更path coverageを追記 |
+| `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` | Emlis immediate reply と共通Core接続を追記 |
+| `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md` | PieceComposer / AnalysisComposer 接続を追記 |
+| `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` | 共通Core docs / tests / support boundaryを追記 |
+| `02_Cocolon_国家システム資料.md` | 共通文章生成基盤の国家システム上の位置を追記 |
+| `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` | Input後文章生成の共通Core接続を追記 |
+| `02C_Cocolon_国家システム資料_契約_境界_検証系.md` | 共通Core contract / boundary / testを追記 |
+| `03_Cocolon_命名体系.md` | 共通Core名、Composer名、既存visible/route/DB名の分離を追記 |
+| `04_Cocolon_変更テーマ別チェックリスト` | 共通文章生成基盤を触る時の確認順を追記 |
+| `05_Cocolon_ルールファイル索引` | 共通Core rule / guard / adapter / test索引を追記 |
+| `07_Cocolon_最新スナップショット差分` | 最新実ファイル差分と追加/変更pathを反映 |
+| `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` | `text_generation_core` / Composer / adapterの名称混在境界を追記 |
+| `manifest.json` | 最新snapshot、coverage、追加/変更path、境界維持、検証結果を反映 |
 
 # 6. この差分で扱わないもの
 
 この資料はタスク表ではないため、次の項目を「残タスク」として管理しません。  
 必要になった時は、該当する構造資料を読んで判断します。
 
-- Piece専用工程
 - DB physical rename / drop
-- current bridge view write switch
-- legacy route handler削除
+- DB write path switch
+- public API route rename
+- existing response key rename
+- RN画面導線追加
+- 外部AI導入
 - 旧名称APIファイル削除
 - JSON一括置換
 - product analytics実装
@@ -117,6 +119,7 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 - Cocolonの全体構造を読む。
 - 国家システムを読む。
+- 共通文章生成基盤は品質・根拠・安全基盤として読み、中核別の出力目的はEmlis / Piece / AnalysisのComposerで分けて読む。
 - DBや名称混在を読み間違えない。
 - 旧名称を見つけても、資料で保管されている互換・DB境界ならrenameしない。
 - 修正対象は、稼働・契約・データ保護に影響する箇所だけに限定する。
@@ -670,3 +673,91 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - 実ユーザー入力レベルで出た破綻文を回帰ケース化し、意味が通る観測文へ引き上げる品質改善です。
 - `InputFeedbackReplyModal.js` などRN側表示制御は変更していません。
 - DB physical name、public API route、既存response keyは変更していません。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤 current snapshot差分
+
+比較元は前提資料内の旧基準面 `Cocolon(149).zip` / `mashos-api(65).zip`、比較先は `Cocolon_15(1).zip` / `mashos-api_15(2).zip`。Cocolon側は差分なし。mashos-api側のみ、共通文章生成基盤の実装完了差分が入っています。
+
+| source | previous count | current count | added | changed | removed |
+|---|---:|---:|---:|---:|---:|
+| Cocolon | 200 | 200 | 0 | 0 | 0 |
+| mashos-api | 374 | 414 | 40 | 11 | 0 |
+| total | 574 | 614 | 40 | 11 | 0 |
+
+## mashos-api 追加path
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/docs/Cocolon_TextGenerationCore_Phase0_2_Work_Memo_2026_05_11.md` | 共通文章生成基盤の作業境界・最終確認メモ。runtimeではなく作業用地図 / 検証メモとして扱う |
+| `mashos-api/ai/docs/Cocolon_TextGenerationCore_Phase14_FinalVerification_2026_05_11.md` | 共通文章生成基盤の作業境界・最終確認メモ。runtimeではなく作業用地図 / 検証メモとして扱う |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py` | Analysisの素材domain・観測レポート本文を共通基盤へ渡すadapter。非診断Gateを固定 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py` | Analysisの素材domain・観測レポート本文を共通基盤へ渡すadapter。非診断Gateを固定 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py` | Analysisの素材domain・観測レポート本文を共通基盤へ渡すadapter。非診断Gateを固定 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py` | Emlisの根拠・観測Composerを共通基盤へ接続するadapter。`comment_text`契約は維持 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py` | Emlisの根拠・観測Composerを共通基盤へ接続するadapter。`comment_text`契約は維持 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py` | Pieceの問い/答え・根拠を共通基盤へ渡すadapter。`piece_text` / preview-publish契約は維持 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py` | Pieceの問い/答え・根拠を共通基盤へ渡すadapter。`piece_text` / preview-publish契約は維持 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py` | Pieceの問い/答え・根拠を共通基盤へ渡すadapter。`piece_text` / preview-publish契約は維持 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/composer.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/evidence.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/base.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py` | 共通Guard。日本語破綻・根拠不足・テンプレ臭・過剰断定・must_keep欠落を中核横断で検査 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/policies.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/result.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py` | CocolonTextGenerationCore本体。型、根拠、PhraseUnit、SentencePlan、CoreTextComposer、fail-closed結果型 |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_analysis_composer.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_analysis_input_contract.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_boundary.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_composer.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_emlis_evidence_adapter.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_emlis_observation_adapter.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_evidence.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_guard_emlis_comparison.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_guards.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_phase14_final_boundary.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_piece_composer.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_piece_input_contract.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_types.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+| `mashos-api/ai/tests/test_cocolon_text_generation_phrase_units.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+
+## mashos-api 変更path
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py` | Analysis保存可否Gateへ共通非診断・非断定text safety metaをadditive接続 |
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | Analysis report payloadへ`textGenerationCore` / `analysis_composer` metaをadditive付与。既存shape維持 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | Emlis候補を共通Coreへ通し、Guard reject時は空本文でfail-closed。scoped graph境界維持 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Emlis reply metaへ`text_generation_core` / stop point / Piece・Analysis接続状態をadditive付与 |
+| `mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py` | Piece preview本文を共通Coreで検査。reject時は本文空・blocked、preview/publish再生成なし |
+| `mashos-api/ai/services/ai_inference/piece_generation_policy.py` | Piece policy storage/public metaへ`text_generation_core` / `core_text_generation`を保持 |
+| `mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py` | 三大中核contractへ共通文章生成基盤の接続・未破壊境界を追加確認 |
+| `mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py` | 三大中核contractへ共通文章生成基盤の接続・未破壊境界を追加確認 |
+| `mashos-api/ai/tests/test_analysis_value_observation_boundary.py` | 既存回帰に共通文章生成基盤のmeta / fail-closed / 境界確認を追加 |
+| `mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py` | 既存回帰に共通文章生成基盤のmeta / fail-closed / 境界確認を追加 |
+| `mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py` | 既存回帰に共通文章生成基盤のmeta / fail-closed / 境界確認を追加 |
+
+## 構造補正
+
+- `cocolon_text_generation_core` はDB/route/visible名ではなく、三大中核に共通する文章品質・根拠・安全の基盤である。
+- EmlisAIは `input_feedback.comment_text` と passed-only表示を維持したまま、候補文を共通Coreで検査する。
+- Pieceは `piece_text` と preview/publish同一性を維持したまま、問い/答えを共通Coreで検査する。
+- Analysisは `content_json` / `standardReport` / `contentText` を維持したまま、非診断・非断定Gateを共通Coreで補強する。
+- DB physical name、DB write path、public API route、既存response key、RN画面導線の変更はない。
+
+## 確認結果
+
+- `pytest --collect-only`: 332 tests collected
+- 共通文章生成基盤 Phase2〜Phase14 周辺: 70 passed
+- Emlis / Piece / Analysis 周辺回帰 + 三大中核contract: 96 passed
+- Pydantic非推奨警告2件は既存警告であり、今回差分による失敗ではない。
+- 全体pytestはこの差分更新作業では実行していない。

@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4102,3 +4102,10 @@ Phase8で追加された backend support は、EmlisAI本文品質を守るた�
 | `mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py` | Phase8回帰test。正解文一致ではなくprofile / must_keep / forbidden surface / guard結果で検証する |
 
 このsupport層はEmlisAI専用です。DB physical name、public API route、subscription entitlement、account delete対象は変更しません。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤 docs / tests / support boundary
+
+`mashos-api_15(2).zip` では、backend supportとして `ai/docs/Cocolon_TextGenerationCore_Phase0_2_Work_Memo_2026_05_11.md` と `ai/docs/Cocolon_TextGenerationCore_Phase14_FinalVerification_2026_05_11.md` が追加されています。これはruntimeではなく、作業境界・停止点・検証結果を残すdocsです。
+
+追加された `tests/test_cocolon_text_generation_core_*` は、共通Core単体、Emlis接続、Piece接続、Analysis接続、三大中核boundary、Phase14最終boundaryを固定します。既存のDB physical name、public API route、response key、RN visible nameを変更するtestではありません。

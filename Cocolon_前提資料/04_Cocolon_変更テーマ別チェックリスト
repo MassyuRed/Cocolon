@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -240,3 +240,14 @@ Mash様から「三大中核構造」「EmlisAI強化」「Pieceが短く潰れ�
 3. token / Authorization / email / UUID / 長いtoken風文字列のredactionを維持する。
 4. raw user_idをログに出さず、`user_hash` 境界を維持する。
 5. 監視eventはDB保存ではなくstructured log / alert logとして扱う。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤を触る時
+
+共通文章生成基盤、EmlisObservationComposer、PieceComposer、AnalysisComposer、共通Guardを触る場合は次を確認する。
+
+1. `00_華恋用_READ_FIRST.md` の共通基盤境界。
+2. `03_Cocolon_命名体系.md` の visible名 / route名 / DB名 / adapter名の分離。
+3. `05_Cocolon_ルールファイル索引` の共通Core rule / guard / test。
+4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の名称混在境界。
+5. 変更対象中核ごとに、Emlisはpassed-only、Pieceはpreview/publish同一性、Analysisは非診断・素材domain分離を確認する。

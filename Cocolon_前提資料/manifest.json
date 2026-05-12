@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-10",
+  "revision_date": "2026-05-11",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,17 +7,17 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 200,
-    "mashos-api": 374
+    "mashos-api": 414
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 574,
-    "national_system_body_includes": 574,
+    "overall_structure_body_includes": 614,
+    "national_system_body_includes": 614,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
     "coverage_principle": "01にはCocolon構造に関係するcurrent全ファイル574件、02には国家システム判断対象のcurrent全ファイル574件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。02Bと08はこの前提資料zip内に存在し、Snapshot/Worker/Publish/ReadおよびDB physical name/bridge/rename境界の正本として扱う。DB destructive変更はMash様が明示した場合だけ扱う。",
-    "current_snapshot_total_files": 574,
-    "overall_structure_body_includes_current_snapshot_files": 574,
-    "national_system_body_lists_current_snapshot_files_with_relation": 574,
+    "current_snapshot_total_files": 614,
+    "overall_structure_body_includes_current_snapshot_files": 614,
+    "national_system_body_lists_current_snapshot_files_with_relation": 614,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -521,6 +521,78 @@
       "mashos-api/ai/tests/test_emlis_ai_response_composition_self_sacrifice.py",
       "mashos-api/ai/tests/test_emlis_ai_self_and_others_happiness_reply.py",
       "mashos-api/ai/tests/test_emlis_ai_value_observation_cases.py"
+    ],
+    "latest_source_basis_2026_05_11_text_generation_core": {
+      "premise": "Cocolon_前提資料(65).zip",
+      "Cocolon": "Cocolon_15(1).zip",
+      "mashos-api": "mashos-api_15(2).zip",
+      "Cocolon_files": 200,
+      "mashos_api_files": 414,
+      "total_files": 614,
+      "diff_from_previous_baseline": {
+        "Cocolon_added": 0,
+        "Cocolon_changed": 0,
+        "Cocolon_removed": 0,
+        "mashos_api_added": 40,
+        "mashos_api_changed": 11,
+        "mashos_api_removed": 0
+      }
+    },
+    "text_generation_core_policy_2026_05_11": "CocolonTextGenerationCoreは三大中核の共通文章品質・根拠・安全基盤。EmlisAI/Piece/Analysisの出力目的、visible名、public route、DB physical name、既存response keyは中核別Composerと既存契約で維持する。",
+    "text_generation_core_added_paths_2026_05_11": [
+      "mashos-api/ai/docs/Cocolon_TextGenerationCore_Phase0_2_Work_Memo_2026_05_11.md",
+      "mashos-api/ai/docs/Cocolon_TextGenerationCore_Phase14_FinalVerification_2026_05_11.md",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/result.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_analysis_composer.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_analysis_input_contract.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_boundary.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_composer.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_emlis_evidence_adapter.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_emlis_observation_adapter.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_evidence.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_guard_emlis_comparison.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_guards.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_phase14_final_boundary.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_piece_composer.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_piece_input_contract.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_core_types.py",
+      "mashos-api/ai/tests/test_cocolon_text_generation_phrase_units.py"
+    ],
+    "text_generation_core_changed_paths_2026_05_11": [
+      "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py",
+      "mashos-api/ai/services/ai_inference/api_analysis_reports.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py",
+      "mashos-api/ai/services/ai_inference/piece_generation_policy.py",
+      "mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py",
+      "mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py",
+      "mashos-api/ai/tests/test_analysis_value_observation_boundary.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py",
+      "mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py"
     ]
   },
   "inclusion_rules": [
@@ -578,7 +650,7 @@
     },
     {
       "path": "05_Cocolon_ルールファイル索引",
-      "purpose": "policy / guard / contract / value observation rule file索引"
+      "purpose": "policy / guard / contract / value observation / common text generation core rule file索引"
     },
     {
       "path": "06_Cocolon_ファイル名変更保留台帳.md",
@@ -586,7 +658,7 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "current snapshotの構造差分。value observation差分を含む"
+      "purpose": "current snapshotの構造差分。value observation / common text generation core差分を含む"
     },
     {
       "path": "09_Cocolon_名称混在保管と構造境界_2026-05-10.md",
@@ -1527,13 +1599,13 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(60).zip",
-    "Cocolon": "Cocolon_8(6).zip",
-    "mashos-api": "mashos-api_9(2).zip",
+    "premise": "Cocolon_前提資料(65).zip",
+    "Cocolon": "Cocolon_15(1).zip",
+    "mashos-api": "mashos-api_15(2).zip",
     "file_counts": {
       "Cocolon": 200,
-      "mashos-api": 374,
-      "total": 574
+      "mashos-api": 414,
+      "total": 614
     }
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
@@ -1852,5 +1924,90 @@
       "DB physical name / public API route /既存 response key は変更なし。",
       "InputFeedbackReplyModalの表示名とpassed-only表示制御は維持。"
     ]
+  },
+  "source_snapshot_2026_05_11_text_generation_core": {
+    "premise": "Cocolon_前提資料(65).zip",
+    "Cocolon": "Cocolon_15(1).zip",
+    "mashos-api": "mashos-api_15(2).zip",
+    "file_counts": {
+      "Cocolon": 200,
+      "mashos-api": 414,
+      "total": 614
+    },
+    "diff": {
+      "Cocolon_added": [],
+      "Cocolon_changed": [],
+      "Cocolon_removed": [],
+      "mashos_api_added": [
+        "mashos-api/ai/docs/Cocolon_TextGenerationCore_Phase0_2_Work_Memo_2026_05_11.md",
+        "mashos-api/ai/docs/Cocolon_TextGenerationCore_Phase14_FinalVerification_2026_05_11.md",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/result.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_analysis_composer.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_analysis_input_contract.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_boundary.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_composer.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_emlis_evidence_adapter.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_emlis_observation_adapter.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_evidence.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_guard_emlis_comparison.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_guards.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_phase14_final_boundary.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_piece_composer.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_piece_input_contract.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_core_types.py",
+        "mashos-api/ai/tests/test_cocolon_text_generation_phrase_units.py"
+      ],
+      "mashos_api_changed": [
+        "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py",
+        "mashos-api/ai/services/ai_inference/api_analysis_reports.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py",
+        "mashos-api/ai/services/ai_inference/piece_generation_policy.py",
+        "mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py",
+        "mashos-api/ai/tests/contract/test_new_national_core_piece_contracts.py",
+        "mashos-api/ai/tests/test_analysis_value_observation_boundary.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py",
+        "mashos-api/ai/tests/test_emotion_piece_generation_value_observation.py"
+      ],
+      "mashos_api_removed": []
+    },
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_api_route_changed": false,
+      "response_key_renamed": false,
+      "rn_visible_name_changed": false,
+      "external_ai_added": false
+    },
+    "verification": {
+      "pytest_collect_only": "332 tests collected",
+      "text_generation_core_phase2_to_phase14": "70 passed",
+      "emlis_piece_analysis_regression_and_contract": "96 passed",
+      "full_pytest": "not_run_for_premise_diff_update"
+    }
   }
 }

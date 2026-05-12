@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -205,3 +205,21 @@ EmlisAI本文品質を触る場合、Phase8の品質Guardとfixtureを必ず確�
 | `mashos-api/ai/tests/test_emlis_ai_phase8_real_input_quality.py` | Phase8本文品質回帰 | Phase8関連変更時 |
 
 禁止: `不安。` / `怒り。` / `喜び。` / `自己理解。` のような本文ラベル行を復活させない。`がつながっています` / `同じ中にあります` をEmlis観測本文の汎用接続として使わない。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤 rule / guard索引
+
+三大中核の文章出力品質を触る場合、次を必ず同時確認する。
+
+| rule領域 | 参照file | 確認内容 |
+|---|---|---|
+| 共通型 / fail-closed | `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py` / `composer.py` / `result.py` | payload不足・候補不足・Guard reject時に空本文へ落ちるか |
+| 根拠adapter | `cocolon_text_generation_core/evidence.py` / `adapters/*_evidence_adapter.py` | `span_id` / `source_id` / `field` / `raw_text` / hashが消えないか |
+| PhraseUnit / SentencePlan | `phrase_units.py` / `sentence_plan.py` | 中核固有の意味判定を共通側へ持ち込みすぎていないか |
+| 共通Guard | `guards/grounding.py` / `japanese_coherence.py` / `template_echo.py` / `overclaim_diagnosis.py` / `must_keep_coverage.py` | 根拠不足、破綻日本語、テンプレ臭、診断・断定、核欠落を落とせるか |
+| Emlis接続 | `adapters/emlis_observation_composer.py` / `emlis_ai_limited_composer_client.py` / `emlis_ai_reply_service.py` | `input_feedback.comment_text` と passed-only表示が壊れていないか |
+| Piece接続 | `adapters/piece_composer.py` / `piece_composer_input_contract.py` / `emotion_piece_generation_service.py` / `piece_generation_policy.py` | `piece_text`、過圧縮防止、preview/publish同一性が維持されているか |
+| Analysis接続 | `adapters/analysis_composer.py` / `analysis_composer_input_contract.py` / `analysis_report_validity_gate.py` / `api_analysis_reports.py` | `content_json` / `standardReport` / `contentText` を維持し、診断・断定をrejectするか |
+| 横断境界 | `tests/test_cocolon_text_generation_core_boundary.py` / `tests/test_cocolon_text_generation_core_phase14_final_boundary.py` | 三大中核の目的・名称・表示契約が混ざっていないか |
+
+禁止: 共通基盤を理由に、DB physical name、public API route、既存response key、visible名、RN画面導線を変更しない。Emlisの温度をPiece/Analysisへ流用しない。

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -277,3 +277,17 @@ RN巨大画面分割後も、Mash様が画面名を指示する時の正本は�
 | `LimitedSentenceQualityGuard` | `emlis_ai_limited_sentence_quality_guard.py` | 日本語破綻・感情ラベル単独行・汎用接続語尾を落とすGuard |
 
 これらは内部構造名であり、`input_feedback.comment_text` / `input_feedback.emlis_ai` / `observation_status` の互換payload名は変更しない。表示名は引き続き `Emlisの観測` と読む。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤の名称境界
+
+`cocolon_text_generation_core` / `CocolonTextGenerationCore` は、三大中核の共通品質基盤名です。visible名・public route名・DB physical nameではありません。
+
+| 名称 | 分類 | 変更していないもの |
+|---|---|---|
+| `CocolonTextGenerationCore` | 共通品質基盤 / package概念名 | Emlis / Piece / Analysis のvisible名ではない |
+| `EmlisObservationComposer` | Emlis専用adapter | `Emlisの観測`, `input_feedback.comment_text`, `observation_status` |
+| `PieceComposer` | Piece専用adapter | `piece_text`, `reflection`, `mymodel_qna`, preview/publish route |
+| `AnalysisComposer` | Analysis専用adapter | `content_json`, `standardReport`, `contentText`, Analysis report route |
+
+旧名称が残る `reflection` / `mymodel_qna` / `mymodel_reflections` は互換・DB境界として扱い、共通Core接続を理由にrenameしない。

@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1664,3 +1664,12 @@ RN側では `InputScreen.js` が `input_feedback.emlis_ai.observation_status` �
 | Japanese coherence | `emlis_ai_limited_sentence_quality_guard.py` | 感情ラベルだけの行や未完了断片を落とす |
 
 RN側は `InputFeedbackReplyModal.js` の表示条件を維持します。Phase8のためにユーザーへ追加操作や開発者操作を求めない。
+
+
+# 2026-05-11 差分追記: Input後文章生成の共通Core接続
+
+Input / Save / Dispatch系では、EmlisAI immediate reply と Piece preview が共通文章生成基盤へ接続されています。
+
+- EmlisAI: `emlis_ai_limited_composer_client.py` が候補文を `EmlisObservationComposer` adapter経由で共通Coreへ通す。`emlis_ai_reply_service.py` はmetaをadditiveに残す。
+- Piece: `emotion_piece_generation_service.py` が `evaluate_piece_composer` を呼び、共通Coreでrejectされた回答は空本文・blockedへfail-closedする。publish時再生成は行わない。
+- RN側のInput screen / modal / routeは今回変更なし。

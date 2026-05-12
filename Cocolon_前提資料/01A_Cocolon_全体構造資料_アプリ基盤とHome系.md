@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2395,3 +2395,10 @@ Phase8では、Home/Input側の画面・API呼び出しは変更しません。�
 | quality guard | `emlis_ai_limited_sentence_quality_guard.py` | `不安。` / `怒り。` / `がつながっています` / `同じ中にあります` など、今回の実入力で出た破綻表面を落とす |
 
 Home/Inputを触る時は、Phase8をフロント導線追加として扱わない。表示可否は引き続き backend Display Gate の `observation_status` に従います。
+
+
+# 2026-05-11 差分追記: Emlis immediate reply と共通文章生成基盤
+
+`mashos-api_15(2).zip` では、RN側の `InputFeedbackReplyModal.js` / `useInputFeedbackModal.js` / `InputScreen.js` に変更はありません。表示名 `Emlisの観測`、`observation_status=passed` かつ本文ありの表示条件、`input_feedback.comment_text` 契約は維持されています。
+
+backend側では `emlis_ai_limited_composer_client.py` と `emlis_ai_reply_service.py` が共通文章生成基盤へadditive接続されました。Emlisの本文候補は `EmlisObservationComposer` adapterを通って `CoreTextComposer` / 共通Guardで検査され、reject時は空本文でfail-closedします。scoped graph、used evidence、coverage scope、fixed_string_renderer_used=false の境界は維持して読む。

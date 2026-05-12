@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-10"
+revision_date: "2026-05-11"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 200
-  mashos-api: 374
+  mashos-api: 414
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 574
+  included_files_total: 614
   included_files_cocolon: 200
-  included_files_mashos_api: 374
+  included_files_mashos_api: 414
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `574 files`
+- latest full coverage listed in body: `614 files`
   - Cocolon: `200`
-  - mashos-api: `374`
+  - mashos-api: `414`
 
 # 4. 読み方
 
@@ -925,3 +925,22 @@ Input Gate / Save API
 | 表示可否 | `emlis_ai_display_gate.py` | `passed` 以外は本文を空にするfail-closed方針を維持する |
 
 Phase8は、読めない観測文を表示しないための品質層です。API互換の `input_feedback.comment_text` は維持しますが、`comment_text` に本文が入るのは `observation_status=passed` の場合だけです。
+
+
+# 2026-05-11 差分追記: 共通文章生成基盤の国家システム上の位置
+
+共通文章生成基盤は、国家システムflowのうち **Save / Dispatch 後の文章出力品質Gate** と **Contract / Boundary / Test** に属します。DB write path、queue、worker、read-side API、RN display routeを置換するものではありません。
+
+```text
+Input Gate -> Save API -> Emlis / Piece / Analysis runtime
+          -> Core-specific Composer Adapter
+          -> CocolonTextGenerationCore
+          -> 中核別既存payloadへadditive meta
+          -> RN display / read-side existing contract
+```
+
+| 中核 | 国家システム上の扱い | 維持する契約 |
+|---|---|---|
+| EmlisAI | `/emotion/submit` 保存後 immediate reply の候補文を共通Coreで検査 | `input_feedback.comment_text`, `observation_status`, passed-only表示 |
+| Piece | `/emotion/piece/preview` 生成本文を共通Coreで検査し、publishでは再生成しない | `piece_text`, preview/publish hash, legacy互換名 |
+| Analysis | Analysis report validity gateへ非診断・非断定text safetyをadditive接続 | `content_json`, `standardReport`, `contentText` |

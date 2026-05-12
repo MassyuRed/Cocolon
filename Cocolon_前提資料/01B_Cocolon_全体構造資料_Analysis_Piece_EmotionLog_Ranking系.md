@@ -1,6 +1,6 @@
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-11"
 ---
 
 # 01B. Analysis / Piece / EmotionLog / Ranking系
@@ -2923,3 +2923,15 @@ RN巨大画面分割により、Analysis / Nexus / AnalysisReportViewer / PieceS
 | `Cocolon/screens/piece/PieceRecommendModal.js` | recommend modal |
 
 `AnalysisScreen.js`、`AnalysisReportViewerScreen.js`、`NexusScreen.js`、`PieceScreen.js` はentry shellとして残ります。API route、request / response shape、navigation route名、UnreadContext key、tutorial fixture境界は変更しません。`PieceLibraryScreen.js` はこのcurrent基準では未分割の主要ownerとして残る。
+
+
+# 2026-05-11 差分追記: PieceComposer / AnalysisComposer 接続
+
+`mashos-api_15(2).zip` では、PieceとAnalysisの文章出力に共通文章生成基盤が接続されています。これはEmlisの話しかけ文体を流用する変更ではありません。
+
+| 中核 | 接続file | 読み方 |
+|---|---|---|
+| Piece | `cocolon_text_generation_core/adapters/piece_composer.py` / `piece_composer_input_contract.py` / `emotion_piece_generation_service.py` / `piece_generation_policy.py` | `question` と `answer` を分け、`source_claims` / `must_keep_signal_keys` / `overcompression_risk` を保持して共通Guardへ通す。`piece_text` と preview/publish同一性は維持 |
+| Analysis | `cocolon_text_generation_core/adapters/analysis_composer.py` / `analysis_composer_input_contract.py` / `analysis_report_validity_gate.py` / `api_analysis_reports.py` | `emotion_structure` と `self_structure` の素材domainを分け、診断・断定・人格決めつけ表面をGateで落とす。`content_json` / `standardReport` / `contentText` は維持 |
+
+Piece作業時は過圧縮防止、Analysis作業時は非診断・非断定を最初に確認する。
