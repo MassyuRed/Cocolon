@@ -402,6 +402,12 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
   const analysisRouteState = read('screens/analysis/useAnalysisRouteState.js');
   const analysisUnreadBadges = read('screens/analysis/useAnalysisUnreadBadges.js');
   const analysisReportActions = read('screens/analysis/useAnalysisReportActions.js');
+  const analysisContentFirst = read('screens/AnalysisContentFirstScreen.js');
+  const analysisEmotion = read('screens/AnalysisEmotionScreen.js');
+  const kokoroWeatherCurrentCard = read('screens/analysisReport/KokoroWeatherCurrentCard.js');
+  const kokoroWeatherForecastStrip = read('screens/analysisReport/KokoroWeatherForecastStrip.js');
+  const kokoroWeatherDetailModal = read('screens/analysisReport/KokoroWeatherDetailModal.js');
+  const kokoroWeatherFormatters = read('screens/analysisReport/kokoroWeatherFormatters.js');
   const analysisSelfStructureActions = read('screens/analysis/useAnalysisSelfStructureActions.js');
   const analysisTutorialOverlay = read('screens/analysis/useAnalysisTutorialOverlay.js');
 
@@ -433,6 +439,9 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'export function isAnalysisReportType',
     'export function formatLatestUpdateLabel',
     'export function isAnalysisMenuRoute',
+    'daily: "こころ天気（日）"',
+    'weekly: "こころ天気（週）"',
+    'monthly: "こころ天気（月）"',
   ], 'analysisRouteModel.js');
 
   assertIncludes(analysisRouteState, [
@@ -461,7 +470,67 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'writeCachedAnalysisLatestReport',
     'ANALYSIS_WIRE.routes.reportsReady',
     'getTodayQuestionHistory',
+    'currentWeather',
+    'homeSummary.current_weather',
   ], 'useAnalysisReportActions.js');
+
+  assertIncludes(analysis, [
+    'currentWeather={entryMeta.currentWeather}',
+  ], 'AnalysisScreen.js current weather prop');
+
+  assertIncludes(analysisContentFirst, [
+    'KokoroWeatherCurrentCard',
+    'currentWeather',
+    'handleOpenPreviousKokoroWeather',
+    'こころ天気（日）',
+    'こころ天気（週）',
+    'こころ天気（月）',
+  ], 'AnalysisContentFirstScreen.js current weather card guard');
+
+  assertIncludes(kokoroWeatherCurrentCard, [
+    'export default function KokoroWeatherCurrentCard',
+    '今日はまだ観測がありません',
+    '前回のこころ天気を見る',
+    '観測メモあり',
+    'こころ温度',
+  ], 'KokoroWeatherCurrentCard.js split guard');
+
+  assertIncludes(analysisEmotion, [
+    '感情分析のこころ天気を選んでください。',
+    'こころ天気（日）',
+    'こころ天気（週）',
+    'こころ天気（月）',
+    '過去のこころ天気を振り返ります',
+  ], 'AnalysisEmotionScreen.js Phase 5 copy guard');
+
+  assertIncludes(kokoroWeatherForecastStrip, [
+    'export default function KokoroWeatherForecastStrip',
+    'normalizeKokoroWeather',
+    'getKokoroWeatherItems',
+    'getKokoroWeatherReportLabel',
+    'onSelectItem',
+    'helperText',
+    '最高',
+    '最低',
+  ], 'KokoroWeatherForecastStrip.js split guard');
+
+  assertIncludes(kokoroWeatherDetailModal, [
+    'export default function KokoroWeatherDetailModal',
+    'Modal',
+    'showsHorizontalScrollIndicator={false}',
+    '時間帯別こころ天気',
+    'こころ天気詳細を閉じる',
+  ], 'KokoroWeatherDetailModal.js split guard');
+
+  assertIncludes(kokoroWeatherFormatters, [
+    'export const KOKORO_WEATHER_VERSION = "kokoro.weather.v1";',
+    'export function normalizeKokoroWeather',
+    'export function normalizeKokoroWeatherItem',
+    'export function normalizeKokoroWeatherTimeBucket',
+    'export function formatKokoroTemperature',
+    'export function getKokoroWeatherReportLabel',
+    'export function buildKokoroWeatherDetailTitle',
+  ], 'kokoroWeatherFormatters.js split guard');
 
   assertIncludes(analysisSelfStructureActions, [
     'export function useAnalysisSelfStructureActions',
@@ -483,6 +552,7 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
 
   assertRegex(analysis, /parent\.navigate\("Piece"\)|navigation\.navigate\("Piece"\)|useAnalysisTutorialOverlay/, 'Analysis to Piece cross link');
 });
+
 
 test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisReportViewer responsibilities', () => {
   const library = read('screens/PieceLibraryScreen.js');
@@ -541,11 +611,17 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
     'from "./analysisReport/analysisReportHtmlExport";',
     'from "./analysisReport/AnalysisReportCharts";',
     'from "./analysisReport/AnalysisReportUpgradeCard";',
+    'from "./analysisReport/KokoroWeatherForecastStrip";',
+    'from "./analysisReport/KokoroWeatherDetailModal";',
     'subscriptionTier',
     'showDeepTransitionChart',
     'showDeepRecoveryChart',
     'showDeepMemoThemes',
     'AnalysisReportUpgradeCard',
+    'KokoroWeatherForecastStrip',
+    'KokoroWeatherDetailModal',
+    'selectedKokoroWeatherItem',
+    'kokoroWeatherPayload',
   ], 'AnalysisReportViewerScreen.js split guard');
 
   assertIncludes(analysisReportAccessPolicy, [
@@ -1060,3 +1136,152 @@ test('Phase 10 Emlis observation release gate keeps regression and release-ready
   ], 'phase 10 regression test self-check');
 });
 
+
+test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and formatter fail-closed', () => {
+  const currentCard = read('screens/analysisReport/KokoroWeatherCurrentCard.js');
+  const forecastStrip = read('screens/analysisReport/KokoroWeatherForecastStrip.js');
+  const detailModal = read('screens/analysisReport/KokoroWeatherDetailModal.js');
+  const formatters = read('screens/analysisReport/kokoroWeatherFormatters.js');
+  const viewer = read('screens/AnalysisReportViewerScreen.js');
+
+  assertIncludes(currentCard, [
+    'status === "no_observation"',
+    '今日はまだ観測がありません',
+    '前回のこころ天気を見る',
+    'replace(/℃/g, "°")',
+    '今日0:00から現在までの入力をもとに、こころの状態を観測します。',
+  ], 'KokoroWeatherCurrentCard.js no-observation and degree display contract');
+
+  assertIncludes(forecastStrip, [
+    'export default function KokoroWeatherForecastStrip',
+    'こころ天気図',
+    '最高',
+    '最低',
+    '対象をタップすると、時間帯別のこころ天気を横にスクロールして確認できます。',
+    '<ScrollView horizontal showsHorizontalScrollIndicator={false}>',
+    'disabled={isDisabled}',
+    '観測少なめ',
+  ], 'KokoroWeatherForecastStrip.js horizontal forecast contract');
+
+  assertIncludes(detailModal, [
+    'export default function KokoroWeatherDetailModal',
+    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose}>',
+    'onPress={onClose}',
+    'accessibilityLabel="こころ天気の詳細を閉じる"',
+    '時間帯別こころ天気',
+    '<ScrollView horizontal showsHorizontalScrollIndicator={false}>',
+    '時間帯別のこころ天気はまだありません。',
+  ], 'KokoroWeatherDetailModal.js modal and horizontal bucket contract');
+
+  assertIncludes(formatters, [
+    'export const KOKORO_WEATHER_VERSION = "kokoro.weather.v1";',
+    'daily: "こころ天気（日）"',
+    'weekly: "こころ天気（週）"',
+    'monthly: "こころ天気（月）"',
+    'text.endsWith("°")',
+    'replace(/℃/g, "°")',
+    'weather.status === "no_observation"',
+    'return false;',
+    'resolveWeatherVisual',
+    'normalizeKokoroWeatherPayload',
+  ], 'kokoroWeatherFormatters.js normalization and old-data fail-closed contract');
+
+  assertIncludes(viewer, [
+    'import KokoroWeatherForecastStrip from "./analysisReport/KokoroWeatherForecastStrip";',
+    'import KokoroWeatherDetailModal from "./analysisReport/KokoroWeatherDetailModal";',
+    'contentJson?.kokoroWeather',
+    'setSelectedKokoroWeatherItem',
+    'KokoroWeatherForecastStrip',
+    'KokoroWeatherDetailModal',
+  ], 'AnalysisReportViewerScreen.js kokoroWeather report UI contract');
+
+  assertNotIncludes(currentCard + forecastStrip + detailModal + formatters, [
+    '注意報',
+    '警報',
+    '良い感情',
+    '悪い感情',
+  ], 'kokoro weather frontend must keep observation wording non-warning and non-judgmental');
+});
+
+test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves plan/paywall boundaries', () => {
+  const contentFirst = read('screens/AnalysisContentFirstScreen.js');
+  const emotionMenu = read('screens/AnalysisEmotionScreen.js');
+  const history = read('screens/AnalysisReportHistoryScreen.js');
+  const accessPolicy = read('screens/analysisReport/analysisReportAccessPolicy.js');
+  const guide = read('guide/guidesJa.js');
+  const terms = read('guide/termsJa.js');
+  const tutorialData = read('tutorial/tutorialScenarioData.js');
+  const tutorialFixtures = read('tutorial/generated/tutorialFixtures.generated.json');
+
+  assertIncludes(contentFirst, [
+    'KokoroWeatherCurrentCard',
+    'currentWeather',
+    'handleOpenPreviousKokoroWeather',
+    '{ key: "daily", label: "こころ天気（日）" }',
+    '{ key: "weekly", label: "こころ天気（週）" }',
+    '{ key: "monthly", label: "こころ天気（月）" }',
+  ], 'AnalysisContentFirstScreen.js top UI and tab label contract');
+
+  assertIncludes(emotionMenu, [
+    'こころ天気（日）',
+    'こころ天気（週）',
+    'こころ天気（月）',
+    '最新のこころ天気（日/週/月）を確認します',
+    '過去のこころ天気を振り返ります',
+  ], 'AnalysisEmotionScreen.js kokoro weather copy contract');
+
+  assertIncludes(history, [
+    'こころ天気（日）',
+    'こころ天気（週）',
+    'こころ天気（月）',
+    'Freeプランの',
+    'canViewAnalysisFullText',
+  ], 'AnalysisReportHistoryScreen.js history and plan boundary contract');
+
+  assertIncludes(accessPolicy, [
+    'canViewAnalysisFullText',
+    'tier === "plus" || tier === "premium"',
+    'canViewAnalysisDeep',
+    'tier === "premium"',
+    'isEmotionReportType',
+    'reportType === "daily" || reportType === "weekly" || reportType === "monthly"',
+  ], 'analysisReportAccessPolicy.js keeps existing Free/Plus/Premium boundaries');
+
+  assertIncludes(guide, [
+    'こころ天気（日）・こころ天気（週）・こころ天気（月）',
+    '感情分析のこころ天気',
+    '自己分析では、入力の積み重ねから見える自分の構造を確認できます。',
+  ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
+
+  assertIncludes(terms, [
+    'こころ天気',
+    '感情入力をもとに、こころ天気（日/週/月）を見る分析です。',
+    '感情入力をもとに、こころ天気（日/週/月）を見る分析です。',
+  ], 'guide/termsJa.js kokoro weather terms contract');
+
+  assertIncludes(tutorialData, [
+    'こころ天気',
+    'こころ天気（日/週/月）',
+  ], 'tutorialScenarioData.js kokoro weather tutorial labels');
+
+  assertIncludes(tutorialFixtures, [
+    'kokoroWeather',
+    '"report_type": "daily"',
+    '"report_type": "weekly"',
+    '"report_type": "monthly"',
+  ], 'tutorialFixtures.generated.json contains kokoroWeather examples');
+
+  const selfStructureFiles = [
+    read('screens/AnalysisSelfStructureScreen.js'),
+    read('screens/SelfStructureReportGenerateScreen.js'),
+    read('screens/SelfStructureReportHistoryScreen.js'),
+    read('screens/SelfStructureReportViewerScreen.js'),
+  ].join('\n');
+
+  assertNotIncludes(selfStructureFiles, [
+    'こころ天気（日）',
+    'こころ天気（週）',
+    'こころ天気（月）',
+    '今のこころ天気',
+  ], 'Self Structure surfaces must not be kokoro-weatherized');
+});

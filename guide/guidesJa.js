@@ -95,7 +95,7 @@ export const guidesJa = Object.freeze({
   analysis: {
     title: "分析",
     summary:
-      "感情分析と自己分析を切り替えながら、最新レポートと履歴を確認する場所です。",
+      "感情分析のこころ天気と自己分析を切り替えながら、最新レポートと履歴を確認する場所です。",
     relatedTerms: [
       "analysis",
       "emotion_analysis",
@@ -108,7 +108,7 @@ export const guidesJa = Object.freeze({
       {
         type: "p",
         text:
-          "分析画面では、Home に積み重なった入力を [[term:emotion_analysis|感情分析]] と [[term:self_analysis|自己分析]] に分けて確認できます。最新の内容がある場合は、画面の中に直接レポートが表示されます。",
+          "分析画面では、Home に積み重なった入力を [[term:emotion_analysis|感情分析]] のこころ天気と [[term:self_analysis|自己分析]] に分けて確認できます。最新の内容がある場合は、画面の中に直接レポートが表示されます。",
       },
       {
         type: "h2",
@@ -117,9 +117,9 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "日報・週報・月報を切り替えて、期間ごとの [[term:analysis_report|分析レポート]] を確認できます。",
+          "こころ天気（日）・こころ天気（週）・こころ天気（月）を切り替えて、期間ごとの [[term:analysis_report|分析レポート]] を確認できます。",
           "最新レポートがまだない場合は、入力後にレポートが作成されるとこの画面に表示されます。",
-          "各タブの「履歴を見る」から、過去の日報・週報・月報を見返せます。",
+          "各タブの「履歴を見る」から、過去のこころ天気（日/週/月）を見返せます。",
         ],
       },
       {

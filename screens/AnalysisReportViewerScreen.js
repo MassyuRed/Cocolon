@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -48,6 +48,8 @@ import {
 import { exportTextToPdf } from "./analysisReport/analysisReportHtmlExport";
 import { PieRingChart } from "./analysisReport/AnalysisReportCharts";
 import AnalysisReportUpgradeCard from "./analysisReport/AnalysisReportUpgradeCard";
+import KokoroWeatherForecastStrip from "./analysisReport/KokoroWeatherForecastStrip";
+import KokoroWeatherDetailModal from "./analysisReport/KokoroWeatherDetailModal";
 
 /**
  * AnalysisReportViewerScreen
@@ -79,6 +81,7 @@ export default function AnalysisReportViewerScreen({
   // Subscription tier (fail-closed: unknown => free)
   const [subscriptionTier, setSubscriptionTier] = useState("free");
   const [tierLoading, setTierLoading] = useState(true);
+  const [selectedKokoroWeatherItem, setSelectedKokoroWeatherItem] = useState(null);
 
   useEffect(() => {
     const tierFromReport = report?.viewer_tier;
@@ -195,6 +198,26 @@ export default function AnalysisReportViewerScreen({
   }, [contentJson]);
 
   const deepReport = useMemo(() => extractStructuralReport(contentJson), [contentJson]);
+
+  const kokoroWeatherPayload = useMemo(() => {
+    const direct = contentJson?.kokoroWeather || contentJson?.kokoro_weather;
+    if (direct && typeof direct === "object") return direct;
+    const standard = standardReport?.kokoroWeather || standardReport?.kokoro_weather;
+    return standard && typeof standard === "object" ? standard : null;
+  }, [contentJson, standardReport]);
+
+  useEffect(() => {
+    setSelectedKokoroWeatherItem(null);
+  }, [report?.id, reportType]);
+
+  const openKokoroWeatherDetail = useCallback((item) => {
+    if (!item || disableActions) return;
+    setSelectedKokoroWeatherItem(item);
+  }, [disableActions]);
+
+  const closeKokoroWeatherDetail = useCallback(() => {
+    setSelectedKokoroWeatherItem(null);
+  }, []);
 
   const canViewStandardText = useMemo(
     () => canViewAnalysisFullText(subscriptionTier),
@@ -570,6 +593,13 @@ const deepPatternSectionTitle = useMemo(() => {
 
   const bodyContent = (
     <>
+        <KokoroWeatherForecastStrip
+          kokoroWeather={kokoroWeatherPayload}
+          reportType={reportType}
+          disableActions={disableActions}
+          onSelectItem={openKokoroWeatherDetail}
+        />
+
         {/* ===== Charts (history) ===== */}
         {reportType === "weekly" ? (
           <View style={[styles.chartCard, themed.chartCard]}>
@@ -1140,6 +1170,12 @@ const deepPatternSectionTitle = useMemo(() => {
           {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
         </View>
         <View style={[styles.body, themed.body]}>{bodyContent}</View>
+        <KokoroWeatherDetailModal
+          visible={!!selectedKokoroWeatherItem}
+          item={selectedKokoroWeatherItem}
+          reportType={reportType}
+          onClose={closeKokoroWeatherDetail}
+        />
       </View>
     );
   }
@@ -1188,6 +1224,12 @@ const deepPatternSectionTitle = useMemo(() => {
       >
         {bodyContent}
       </ScrollView>
+      <KokoroWeatherDetailModal
+        visible={!!selectedKokoroWeatherItem}
+        item={selectedKokoroWeatherItem}
+        reportType={reportType}
+        onClose={closeKokoroWeatherDetail}
+      />
     </SafeAreaView>
   );
 }

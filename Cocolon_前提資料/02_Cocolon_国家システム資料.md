@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 200
-  mashos-api: 414
+  Cocolon: 204
+  mashos-api: 419
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 614
-  included_files_cocolon: 200
-  included_files_mashos_api: 414
+  included_files_total: 623
+  included_files_cocolon: 204
+  included_files_mashos_api: 419
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `614 files`
-  - Cocolon: `200`
-  - mashos-api: `414`
+- latest full coverage listed in body: `623 files`
+  - Cocolon: `204`
+  - mashos-api: `419`
 
 # 4. 読み方
 
@@ -944,3 +944,16 @@ Input Gate -> Save API -> Emlis / Piece / Analysis runtime
 | EmlisAI | `/emotion/submit` 保存後 immediate reply の候補文を共通Coreで検査 | `input_feedback.comment_text`, `observation_status`, passed-only表示 |
 | Piece | `/emotion/piece/preview` 生成本文を共通Coreで検査し、publishでは再生成しない | `piece_text`, preview/publish hash, legacy互換名 |
 | Analysis | Analysis report validity gateへ非診断・非断定text safetyをadditive接続 | `content_json`, `standardReport`, `contentText` |
+
+# 2026-05-12 差分追記: こころ天気 national-system flow
+
+最新基準面 `Cocolon_6(29).zip` / `mashos-api_6(13).zip` では、国家システムの `Read API / Startup -> RN display` と `Worker / Publish -> Read API` のAnalysis側に、こころ天気がadditive接続されています。入力保存・dispatch・DB write pathは変更していません。
+
+| flow | owner | 変更内容 |
+|---|---|---|
+| Read API -> RN display | `api_analysis_reads.py` -> `useAnalysisReportActions.js` -> `AnalysisContentFirstScreen.js` -> `KokoroWeatherCurrentCard.js` | `/analysis/home-summary` の既存payloadへ `current_weather` を追加し、Analysisトップへ「今のこころ天気」を表示する |
+| Worker / Publish -> Report payload | `api_analysis_reports.py` -> `AnalysisReportViewerScreen.js` -> `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` | 新規生成レポートの `content_json.kokoroWeather` をレポートViewerで表示する。古いレポートは従来表示へfallbackする |
+| Distribution copy | `api_cron_distribution.py` | 配布通知文言だけを `こころ天気（日/週/月）` に寄せる。cron enqueue / worker profile / publish governance は維持 |
+| Guide / Tutorial / Subscription | `guide/*` / `tutorial/*` / `iapRuntimeCatalog.js` / `subscription_bootstrap_store.py` | ユーザー向け説明とプランコピーを更新する。tier判定・履歴保持・自己分析の扱いは維持 |
+
+この差分でcoverage対象は `Cocolon=204` / `mashos-api=419` / `total=623` です。DB physical name、public API route、`daily` / `weekly` / `monthly` 内部キーは変更していません。

@@ -7,6 +7,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import AnalysisReportViewerScreen from "./AnalysisReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
+import KokoroWeatherCurrentCard from "./analysisReport/KokoroWeatherCurrentCard";
 import {
   AnalysisMenuScroll,
   useAnalysisMenuStyles,
@@ -19,9 +20,9 @@ const ANALYSIS_TABS = [
 ];
 
 const EMOTION_REPORT_TABS = [
-  { key: "daily", label: "日報" },
-  { key: "weekly", label: "週報" },
-  { key: "monthly", label: "月報" },
+  { key: "daily", label: "こころ天気（日）" },
+  { key: "weekly", label: "こころ天気（週）" },
+  { key: "monthly", label: "こころ天気（月）" },
 ];
 
 function createLocalStyles(colors, ui) {
@@ -196,6 +197,7 @@ export default function AnalysisContentFirstScreen({
   todayCount = 0,
   weekCount = 0,
   monthCount = 0,
+  currentWeather = null,
   unreadEmotion = false,
   unreadSelfStructure = false,
   unreadDaily = false,
@@ -261,7 +263,19 @@ export default function AnalysisContentFirstScreen({
       : null;
   const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
   const currentEmotionHistoryLabel =
-    EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "日報";
+    EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころ天気（日）";
+
+  const handleOpenPreviousKokoroWeather = () => {
+    if (typeof onOpenCurrentWeatherPrevious === "function") {
+      onOpenCurrentWeatherPrevious();
+      return;
+    }
+    setActiveAnalysisTab("emotion");
+    setActiveEmotionReportType("daily");
+    if (!effectiveLatestReports?.daily) {
+      onOpenDailyHistory?.();
+    }
+  };
 
   const handleOpenCurrentEmotionHistory = () => {
     if (activeEmotionReportType === "weekly") {
@@ -340,6 +354,15 @@ export default function AnalysisContentFirstScreen({
           </View>
         </View>
       </View>
+
+      {!isTutorialMode && currentWeather ? (
+        <KokoroWeatherCurrentCard
+          currentWeather={currentWeather}
+          colors={colors}
+          ui={ui}
+          onOpenPrevious={handleOpenPreviousKokoroWeather}
+        />
+      ) : null}
 
       {!isTutorialMode ? (
         <View style={styles.summaryBlock}>

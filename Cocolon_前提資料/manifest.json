@@ -1,13 +1,14 @@
 {
-  "revision_date": "2026-05-11",
+  "revision_date": "2026-05-12",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
   "source_mode": "local_snapshot",
   "file_counts": {
-    "Cocolon": 200,
-    "mashos-api": 414
+    "Cocolon": 204,
+    "mashos-api": 419,
+    "total": 623
   },
   "coverage_policy": {
     "overall_structure_body_includes": 614,
@@ -1599,13 +1600,13 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(65).zip",
-    "Cocolon": "Cocolon_15(1).zip",
-    "mashos-api": "mashos-api_15(2).zip",
+    "premise": "Cocolon_前提資料(68).zip",
+    "Cocolon": "Cocolon_6(29).zip",
+    "mashos-api": "mashos-api_6(13).zip",
     "file_counts": {
-      "Cocolon": 200,
-      "mashos-api": 414,
-      "total": 614
+      "Cocolon": 204,
+      "mashos-api": 419,
+      "total": 623
     }
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
@@ -2008,6 +2009,44 @@
       "text_generation_core_phase2_to_phase14": "70 passed",
       "emlis_piece_analysis_regression_and_contract": "96 passed",
       "full_pytest": "not_run_for_premise_diff_update"
+    }
+  },
+  "source_snapshot_2026_05_12_kokoro_weather": {
+    "premise": "Cocolon_前提資料(68).zip",
+    "Cocolon": "Cocolon_6(29).zip",
+    "mashos-api": "mashos-api_6(13).zip",
+    "file_counts": {
+      "Cocolon": 204,
+      "mashos-api": 419,
+      "total": 623
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon(151).zip",
+      "mashos-api": "mashos-api(67).zip",
+      "file_counts": {
+        "Cocolon": 200,
+        "mashos-api": 414,
+        "total": 614
+      }
+    },
+    "summary": [
+      "Analysis感情分析に、こころ天気のcurrent_weather / report kokoroWeather / RN表示 / QAを追加。",
+      "自己分析はこころ天気化しない。daily/weekly/monthly内部キー、DB physical name、public routeは維持。"
+    ],
+    "added_files": {
+      "Cocolon": [
+        "Cocolon/screens/analysisReport/KokoroWeatherCurrentCard.js",
+        "Cocolon/screens/analysisReport/KokoroWeatherForecastStrip.js",
+        "Cocolon/screens/analysisReport/KokoroWeatherDetailModal.js",
+        "Cocolon/screens/analysisReport/kokoroWeatherFormatters.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/kokoro_weather_service.py",
+        "mashos-api/ai/tests/test_kokoro_weather_service.py",
+        "mashos-api/ai/tests/test_analysis_home_summary_current_weather.py",
+        "mashos-api/ai/tests/test_analysis_report_kokoro_weather.py",
+        "mashos-api/ai/tests/test_kokoro_weather_phase6_qa.py"
+      ]
     }
   }
 }

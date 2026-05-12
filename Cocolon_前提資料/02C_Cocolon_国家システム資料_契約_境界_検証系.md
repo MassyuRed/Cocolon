@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2292,3 +2292,22 @@ public API route、request shape、DB write pathは変更しません。`input_f
 | `test_cocolon_text_generation_core_boundary.py` / `phase14_final_boundary.py` | 三大中核の出力目的・名称・契約が混ざらないこと |
 
 既存 `test_new_national_core_*_contracts.py` には、共通文章生成基盤がadditive metaとして残り、既存公開契約を破壊しないことの確認が追加されています。
+
+# 2026-05-12 差分追記: こころ天気 contract / QA boundary
+
+こころ天気導入は、既存routeへのadditive field追加とRN表示層追加として扱います。public routeのrenameやDB physical renameではありません。
+
+| test / guard | 固定すること |
+|---|---|
+| `mashos-api/ai/tests/test_kokoro_weather_service.py` | こころ温度、weather_key、観測メモ、`no_observation` のservice単体挙動 |
+| `mashos-api/ai/tests/test_analysis_home_summary_current_weather.py` | `/analysis/home-summary` が `current_weather` を返しても既存 `weekly` / `monthly` / `input_status` が消えないこと |
+| `mashos-api/ai/tests/test_analysis_report_kokoro_weather.py` | daily / weekly / monthly レポートの `content_json.kokoroWeather` 生成 |
+| `mashos-api/ai/tests/test_kokoro_weather_phase6_qa.py` | 未来予測・注意報・良悪判定にならないこと、Free/Plus/Premium境界、自己分析非対象、古いレポート互換 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | `KokoroWeatherCurrentCard` / `ForecastStrip` / `DetailModal` / formatter の存在とAnalysis screen接続 |
+
+契約上の読み方:
+
+- `current_weather` は `/analysis/home-summary` のadditive fieldです。
+- `content_json.kokoroWeather` はreport content_jsonのadditive fieldです。
+- `daily` / `weekly` / `monthly` は契約上の内部値として維持します。
+- 表示名 `こころ天気（日/週/月）` はvisible copyであり、DB/API名の一括renameではありません。

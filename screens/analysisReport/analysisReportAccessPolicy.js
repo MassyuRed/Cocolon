@@ -33,9 +33,9 @@ export function buildStandardUpgradeCardCopy() {
   return {
     badge: null,
     headline: null,
-    lead: "今の気持ちを、もっと深く読めます",
-    bodyStrong: "加入すると、気持ちの流れや背景が、今よりていねいにわかるレポートになります。",
-    note: "今は短めのレポートを表示しています。",
+    lead: "こころ天気を、もっと深く読めます",
+    bodyStrong: "加入すると、こころ天気（日/週/月）の本文や観測理由まで、今よりていねいに振り返れます。",
+    note: "今は基本図と短め表示を表示しています。",
     ctaLabel: "プランを見る",
   };
 }

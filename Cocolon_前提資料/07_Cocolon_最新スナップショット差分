@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(65).zip"
-  Cocolon: "Cocolon_15(1).zip"
-  mashos-api: "mashos-api_15(2).zip"
+  premise: "Cocolon_前提資料(68).zip"
+  Cocolon: "Cocolon_6(29).zip"
+  mashos-api: "mashos-api_6(13).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,84 +19,83 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_15(1).zip` | 200 | Cocolon側の追加・削除・変更なし。RN表示Gate維持 |
-| `mashos-api_15(2).zip` | 414 | 共通文章生成基盤、Emlis / Piece / Analysis adapter接続、横断contract / boundary test追加 |
-| total | 614 | 前提資料coverage対象 |
+| `Cocolon_6(29).zip` | 204 | Analysis感情分析のこころ天気Top UI / Report UI / Guide・Tutorial・Plan copy / QAを含む |
+| `mashos-api_6(13).zip` | 419 | `kokoro_weather_service.py`、`current_weather`、`content_json.kokoroWeather`、こころ天気QA testを含む |
+| total | 623 | 前提資料coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-11以前の差分追記は履歴として残し、2026-05-12時点の最新正本は末尾の `2026-05-12 差分追記: こころ天気 current snapshot差分` とこの冒頭summaryです。
 
 # 2. Cocolon側の最新構造差分
 
-今回の最新実ファイルでは、RN側の追加・削除・変更はありません。`Emlisの観測` の表示可否制御は既存のまま維持されます。
+`Cocolon_6(29).zip` では、RN側にこころ天気の表示componentが4件追加され、Analysis表示・ガイド・チュートリアル・サブスク文言・screen contractが更新されています。
 
 ## 2-1. 追加ファイル
 
 | file | 構造上の意味 |
 |---|---|
-| `0件` | 差分なし |
+| `Cocolon/screens/analysisReport/KokoroWeatherCurrentCard.js` | Analysisトップの「今のこころ天気」カード |
+| `Cocolon/screens/analysisReport/KokoroWeatherForecastStrip.js` | レポート内の天気図風横並びUI |
+| `Cocolon/screens/analysisReport/KokoroWeatherDetailModal.js` | 対象日/週の時間帯別詳細Modal |
+| `Cocolon/screens/analysisReport/kokoroWeatherFormatters.js` | こころ天気payloadと表示文言のnormalize |
 
 ## 2-2. 変更ファイル
 
-| file | 構造上の意味 |
-|---|---|
-| `0件` | 差分なし。`InputFeedbackReplyModal.js` / `useInputFeedbackModal.js` / `InputScreen.js` の `passed` かつ本文あり表示制御は維持 |
+| 区分 | 件数 | 最新構造 |
+|---|---:|---|
+| Analysis Top / route state | 3 | `AnalysisContentFirstScreen.js`、`AnalysisScreen.js`、`useAnalysisReportActions.js` が `current_weather` を受け取り表示する |
+| Report UI / access copy | 3 | `AnalysisReportViewerScreen.js`、`analysisReportAccessPolicy.js`、`AnalysisReportHistoryScreen.js` が `kokoroWeather` とこころ天気表示名に対応する |
+| Menu / labels / tutorial | 4 | `AnalysisEmotionScreen.js`、`analysisRouteModel.js`、`useAnalysisTutorialOverlay.js`、`tutorialScenarioData.js` をこころ天気表示へ更新する |
+| Guide / plan / fixture / test | 5 | `guide/*`、`iapRuntimeCatalog.js`、`tutorialFixtures.generated.json`、`rn-screen-contracts.test.js` を更新する |
 
 # 3. API側の最新構造差分
 
-`mashos-api_15(2).zip` では、EmlisAI Phase8 を実装母体として抽出した `cocolon_text_generation_core` が、三大中核の共通文章生成基盤として追加されています。これはEmlisAIを共通出力担当にする変更ではなく、品質・根拠・安全だけを横断で扱う基盤です。
+`mashos-api_6(13).zip` では、こころ天気生成serviceとQA testが追加され、Analysis read/report/push/subscription copyが更新されています。
 
 ## 3-1. 追加ファイル
 
-| 区分 | 件数 | 最新構造 |
-|---|---:|---|
-| docs | 2 | Phase0-2作業境界メモ、Phase14最終確認メモ |
-| common core | 24 | `types` / `policies` / `evidence` / `phrase_units` / `sentence_plan` / `composer` / `result` / `guards` / `adapters` |
-| tests | 14 | 共通Core単体、Emlis/Piece/Analysis adapter、横断boundary、Phase14 final boundary |
-
-詳細pathは末尾の `2026-05-11 差分追記: 共通文章生成基盤 current snapshot差分` を正本として読む。
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/kokoro_weather_service.py` | current_weather / report kokoroWeather / time_buckets / observation_memo / こころ温度の生成service |
+| `mashos-api/ai/tests/test_kokoro_weather_service.py` | service単体test |
+| `mashos-api/ai/tests/test_analysis_home_summary_current_weather.py` | `/analysis/home-summary.current_weather` additive field test |
+| `mashos-api/ai/tests/test_analysis_report_kokoro_weather.py` | `content_json.kokoroWeather` report generation test |
+| `mashos-api/ai/tests/test_kokoro_weather_phase6_qa.py` | 非未来予測・非注意報・非良悪判定・自己分析非対象・tier/old report互換QA test |
 
 ## 3-2. 変更ファイル
 
-| 区分 | 件数 | 最新構造 |
-|---|---:|---|
-| EmlisAI | 2 | `emlis_ai_limited_composer_client.py` / `emlis_ai_reply_service.py` に共通Core metaとfail-closed接続を追加 |
-| Piece | 2 | `emotion_piece_generation_service.py` / `piece_generation_policy.py` にPieceComposer評価とmeta保持を追加 |
-| Analysis | 2 | `analysis_report_validity_gate.py` / `api_analysis_reports.py` に非診断・非断定Gateとmeta保持を追加 |
-| tests / contract | 5 | 三大中核contractと既存回帰へ共通Core境界確認を追加 |
+| file | 最新構造 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_analysis_reads.py` | `current_weather` を `/analysis/home-summary` にadditive追加 |
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | `content_json.kokoroWeather` を日/週/月レポートへadditive追加し、タイトルをこころ天気表示へ更新 |
+| `mashos-api/ai/services/ai_inference/api_cron_distribution.py` | 感情分析レポート配布Push copyをこころ天気表示へ更新 |
+| `mashos-api/ai/services/ai_inference/subscription_bootstrap_store.py` | backend subscription plan copyをこころ天気基準へ同期 |
 
 # 4. coverage
-
-- `01` 系は、Cocolon全体構造を読むための資料。
-- `02` 系は、国家システムを読むための資料。
-- `03` と `09` は、名称混在を読むための資料。
-- `08` は、DB情報とDB rename境界を読むための資料。
 
 最新coverageは次です。
 
 | coverage | count |
 |---|---:|
-| Cocolon | 200 |
-| mashos-api | 414 |
-| total | 614 |
+| Cocolon | 204 |
+| mashos-api | 419 |
+| total | 623 |
 
 # 5. 前提資料としての変更
 
 | file | 変更理由 |
 |---|---|
-| `00_華恋用_READ_FIRST.md` | 最新基準面を `Cocolon_15(1).zip` / `mashos-api_15(2).zip` へ更新し、共通文章生成基盤の読み方を追記 |
-| `01_Cocolon_全体構造資料.md` | 共通Core、Emlis/Piece/Analysis adapter、追加/変更path coverageを追記 |
-| `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` | Emlis immediate reply と共通Core接続を追記 |
-| `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md` | PieceComposer / AnalysisComposer 接続を追記 |
-| `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` | 共通Core docs / tests / support boundaryを追記 |
-| `02_Cocolon_国家システム資料.md` | 共通文章生成基盤の国家システム上の位置を追記 |
-| `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` | Input後文章生成の共通Core接続を追記 |
-| `02C_Cocolon_国家システム資料_契約_境界_検証系.md` | 共通Core contract / boundary / testを追記 |
-| `03_Cocolon_命名体系.md` | 共通Core名、Composer名、既存visible/route/DB名の分離を追記 |
-| `04_Cocolon_変更テーマ別チェックリスト` | 共通文章生成基盤を触る時の確認順を追記 |
-| `05_Cocolon_ルールファイル索引` | 共通Core rule / guard / adapter / test索引を追記 |
+| `00_華恋用_READ_FIRST.md` | 最新基準面を `Cocolon_6(29).zip` / `mashos-api_6(13).zip` へ更新し、こころ天気current boundaryを追記 |
+| `01_Cocolon_全体構造資料.md` | こころ天気導入後の全体構造とcoverageを追記 |
+| `01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md` | Analysis感情分析のこころ天気 RN / Backend ownerを追記 |
+| `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` | こころ天気copy / subscription boundaryを追記 |
+| `02_Cocolon_国家システム資料.md` | こころ天気のRead API / Report payload / RN display flowを追記 |
+| `02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` | current_weather / kokoroWeather のpublish/read boundaryを追記 |
+| `02C_Cocolon_国家システム資料_契約_境界_検証系.md` | こころ天気contract / QA boundaryを追記 |
+| `03_Cocolon_命名体系.md` | こころ天気 visible名と internal key / payload名の読み分けを追記 |
+| `05_Cocolon_ルールファイル索引` | こころ天気 rule / guard / test索引を追記 |
 | `07_Cocolon_最新スナップショット差分` | 最新実ファイル差分と追加/変更pathを反映 |
-| `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` | `text_generation_core` / Composer / adapterの名称混在境界を追記 |
-| `manifest.json` | 最新snapshot、coverage、追加/変更path、境界維持、検証結果を反映 |
+| `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` | こころ天気名称混在境界を追記 |
+| `manifest.json` | 最新snapshot、coverage、追加path、境界維持を反映 |
 
 # 6. この差分で扱わないもの
 
@@ -119,7 +118,7 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 - Cocolonの全体構造を読む。
 - 国家システムを読む。
-- 共通文章生成基盤は品質・根拠・安全基盤として読み、中核別の出力目的はEmlis / Piece / AnalysisのComposerで分けて読む。
+- こころ天気はAnalysisの感情分析側の表示・要約拡張として読み、自己分析・Piece・EmlisAIへ広げない。
 - DBや名称混在を読み間違えない。
 - 旧名称を見つけても、資料で保管されている互換・DB境界ならrenameしない。
 - 修正対象は、稼働・契約・データ保護に影響する箇所だけに限定する。
@@ -761,3 +760,66 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - Emlis / Piece / Analysis 周辺回帰 + 三大中核contract: 96 passed
 - Pydantic非推奨警告2件は既存警告であり、今回差分による失敗ではない。
 - 全体pytestはこの差分更新作業では実行していない。
+
+# 2026-05-12 差分追記: こころ天気 current snapshot差分
+
+比較元は前提資料内の旧基準面 `Cocolon(151).zip` / `mashos-api(67).zip`、比較先は `Cocolon_6(29).zip` / `mashos-api_6(13).zip`。こころ天気導入Phase 0〜6の実装差分が入っています。
+
+| source | previous count | current count | added | changed | removed |
+|---|---:|---:|---:|---:|---:|
+| Cocolon | 200 | 204 | 4 | 15 | 0 |
+| mashos-api | 414 | 419 | 5 | 4 | 0 |
+| total | 614 | 623 | 9 | 19 | 0 |
+
+## Cocolon 追加path
+
+| file | 構造上の意味 |
+|---|---|
+| `Cocolon/screens/analysisReport/KokoroWeatherCurrentCard.js` | Analysisトップの「今のこころ天気」カード。`current_weather` を表示し、無入力時は「今日はまだ観測がありません」と「前回のこころ天気を見る」を出す |
+| `Cocolon/screens/analysisReport/KokoroWeatherForecastStrip.js` | レポート内の天気図風横並びUI。`content_json.kokoroWeather.items` を表示する |
+| `Cocolon/screens/analysisReport/KokoroWeatherDetailModal.js` | 対象日/週の時間帯別こころ天気を横スクロールで表示するModal |
+| `Cocolon/screens/analysisReport/kokoroWeatherFormatters.js` | `weather_key` / こころ温度 / 感情比率 / 観測メモ / fallback文言のnormalize |
+
+## Cocolon 変更path
+
+| file | 最新構造 |
+|---|---|
+| `Cocolon/screens/AnalysisContentFirstScreen.js` | Analysisトップに `KokoroWeatherCurrentCard` を追加し、感情分析タブを `こころ天気（日/週/月）` 表示へ更新 |
+| `Cocolon/screens/analysis/useAnalysisReportActions.js` | `/analysis/home-summary` の `current_weather` を `entryMeta.currentWeather` へ保持 |
+| `Cocolon/screens/AnalysisScreen.js` | CurrentCardの前回導線、latest report連携、Analysisトップへのprop受け渡しを追加 |
+| `Cocolon/screens/AnalysisReportViewerScreen.js` | `content_json.kokoroWeather` がある場合のみForecastStripとDetailModalを表示。古いレポート互換を維持 |
+| `Cocolon/screens/AnalysisEmotionScreen.js` | 感情分析メニューの表示を `こころ天気（日/週/月）` に更新 |
+| `Cocolon/screens/AnalysisReportHistoryScreen.js` | 履歴見出し・空表示・PDF/共有文言をこころ天気表示へ更新 |
+| `Cocolon/screens/analysis/analysisRouteModel.js` | report type labelをこころ天気表示へ更新。内部typeは維持 |
+| `Cocolon/screens/analysis/useAnalysisTutorialOverlay.js` | Tutorial overlayのAnalysis説明をこころ天気（日/週/月）へ更新 |
+| `Cocolon/screens/analysisReport/analysisReportAccessPolicy.js` | Free/Plus/Premium向けのupgrade copyをこころ天気基準へ更新 |
+| `Cocolon/guide/guidesJa.js` / `Cocolon/guide/termsJa.js` | 感情分析ガイド・用語をこころ天気の観測表現へ更新。自己分析説明は維持 |
+| `Cocolon/lib/iap/iapRuntimeCatalog.js` | Plus/Premiumのplan copyをこころ天気の詳しい本文・深い観測へ更新。SKU等は維持 |
+| `Cocolon/tutorial/tutorialScenarioData.js` / `tutorial/generated/tutorialFixtures.generated.json` | Tutorial表示名とfixtureに `kokoroWeather` 例を追加 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | こころ天気componentとAnalysis接続の回帰確認を追加 |
+
+## mashos-api 追加path
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/kokoro_weather_service.py` | こころ天気生成service。current_weather、report kokoroWeather、時間帯bucket、観測メモ、温度表示を集約 |
+| `mashos-api/ai/tests/test_kokoro_weather_service.py` | service単体のこころ温度、weather_key、観測メモ、no_observation回帰 |
+| `mashos-api/ai/tests/test_analysis_home_summary_current_weather.py` | `/analysis/home-summary.current_weather` のadditive field回帰 |
+| `mashos-api/ai/tests/test_analysis_report_kokoro_weather.py` | daily / weekly / monthly の `content_json.kokoroWeather` 生成回帰 |
+| `mashos-api/ai/tests/test_kokoro_weather_phase6_qa.py` | 未来予測・注意報・良悪判定・自己分析非対象・履歴/tier境界・古いレポート互換を固定するQA test |
+
+## mashos-api 変更path
+
+| file | 最新構造 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_analysis_reads.py` | `MyWebHomeSummaryResponse` に `current_weather` をadditive追加。失敗時も既存summaryは維持 |
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | レポート生成時に `content_json.kokoroWeather` をadditive追加し、日/週/月タイトルを `こころ天気（日/週/月）` へ更新 |
+| `mashos-api/ai/services/ai_inference/api_cron_distribution.py` | 感情分析レポート配布Pushの文言をこころ天気表示へ更新。cron構造は維持 |
+| `mashos-api/ai/services/ai_inference/subscription_bootstrap_store.py` | backend subscription bootstrapのplan copyをこころ天気基準へ同期。tier / entitlementは維持 |
+
+## 構造補正
+
+- こころ天気はAnalysisの感情分析側だけに適用する。Self Structure / 自己分析は既存構造を維持する。
+- `current_weather` と `kokoroWeather` はadditive fieldであり、DB physical name、public route、既存response keyの破壊的変更ではない。
+- `daily` / `weekly` / `monthly` は内部キーとして維持し、表示名だけ `こころ天気（日）` / `こころ天気（週）` / `こころ天気（月）` に寄せる。
+- `観測メモあり` は注意報ではなく、過去〜現在の変化構造を示す観測ラベルとして読む。

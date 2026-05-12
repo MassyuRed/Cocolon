@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 200
-  mashos-api: 374
+  Cocolon: 204
+  mashos-api: 419
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -291,3 +291,17 @@ RN巨大画面分割後も、Mash様が画面名を指示する時の正本は�
 | `AnalysisComposer` | Analysis専用adapter | `content_json`, `standardReport`, `contentText`, Analysis report route |
 
 旧名称が残る `reflection` / `mymodel_qna` / `mymodel_reflections` は互換・DB境界として扱い、共通Core接続を理由にrenameしない。
+
+# 2026-05-12 差分追記: こころ天気 naming boundary
+
+| 表示・概念名 | runtime / payload名 | 読み分け |
+|---|---|---|
+| 今のこころ天気 | `current_weather` | `/analysis/home-summary` に追加された本人向けの今日0:00〜現在の観測summary。未来予報ではない |
+| こころ天気（日） | `report_type="daily"` | 日単位レポートのvisible名。内部キー `daily` は維持する |
+| こころ天気（週） | `report_type="weekly"` | 週単位レポートのvisible名。内部キー `weekly` は維持する |
+| こころ天気（月） | `report_type="monthly"` | 月単位レポートのvisible名。内部キー `monthly` は維持する |
+| レポートこころ天気 | `content_json.kokoroWeather` | 日/週/月レポートの天気図風UI用payload。古いレポートでは存在しないことがある |
+| こころ温度 | `temperature.display`, `temperature_high`, `temperature_low` | 感情の良し悪しではなく、熱量・動きの強さを表示する値。表示は `20.3°` で、`℃` は使わない |
+| 観測メモあり | `observation_memo` | 注意報ではなく、過去〜現在の揺れ幅・切り替わり・混在が大きかったことを示す観測ラベル |
+
+こころ天気はAnalysisの感情分析側のvisible / presentation layerです。Self Structure / 自己分析のvisible名、DB physical name、public API route、`daily` / `weekly` / `monthly` 内部値はrenameしません。

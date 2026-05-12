@@ -1,6 +1,6 @@
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 ---
 
 # 01B. Analysis / Piece / EmotionLog / Ranking系
@@ -2935,3 +2935,36 @@ RN巨大画面分割により、Analysis / Nexus / AnalysisReportViewer / PieceS
 | Analysis | `cocolon_text_generation_core/adapters/analysis_composer.py` / `analysis_composer_input_contract.py` / `analysis_report_validity_gate.py` / `api_analysis_reports.py` | `emotion_structure` と `self_structure` の素材domainを分け、診断・断定・人格決めつけ表面をGateで落とす。`content_json` / `standardReport` / `contentText` は維持 |
 
 Piece作業時は過圧縮防止、Analysis作業時は非診断・非断定を最初に確認する。
+
+# 2026-05-12 差分追記: Analysis こころ天気 current boundary
+
+`Cocolon_6(29).zip` / `mashos-api_6(13).zip` では、Analysisの感情分析側に「こころ天気」UIとpayloadが追加されています。これはAnalysis visible名やroute名の変更ではなく、感情分析レポートの **表示名・要約・視覚化** の拡張です。
+
+## RN追加 / 変更owner
+
+| file | current role |
+|---|---|
+| `Cocolon/screens/analysisReport/KokoroWeatherCurrentCard.js` | Analysisトップに表示する「今のこころ天気」カード。`ok` / `no_observation` / `error` をfail-closed表示する |
+| `Cocolon/screens/analysisReport/KokoroWeatherForecastStrip.js` | レポート内の横並びこころ天気図。`content_json.kokoroWeather.items` を日/週/月の粒度で表示する |
+| `Cocolon/screens/analysisReport/KokoroWeatherDetailModal.js` | 対象日/週をタップした時の時間帯別こころ天気Modal。深夜/朝/昼/夜を横スクロールで表示する |
+| `Cocolon/screens/analysisReport/kokoroWeatherFormatters.js` | `weather_key`、温度表示、感情比率、観測メモ、fallback文言のnormalize境界 |
+| `Cocolon/screens/AnalysisContentFirstScreen.js` | `entryMeta.currentWeather` を受け取り、トップ上部にCurrentCardを表示。日/週/月タブの表示名をこころ天気へ更新 |
+| `Cocolon/screens/AnalysisReportViewerScreen.js` | `content_json.kokoroWeather` がある時だけForecastStripとDetailModalを表示。古いレポート互換を維持 |
+| `Cocolon/screens/AnalysisEmotionScreen.js` / `AnalysisReportHistoryScreen.js` | 感情分析メニュー・履歴の表示名を `こころ天気（日/週/月）` へ更新 |
+| `Cocolon/screens/analysis/useAnalysisReportActions.js` | `/analysis/home-summary` から `current_weather` を取得し、`entryMeta.currentWeather` へ保持 |
+
+## Backend追加 / 変更owner
+
+| file | current role |
+|---|---|
+| `mashos-api/ai/services/ai_inference/kokoro_weather_service.py` | こころ天気生成の集約service。current_weather、report kokoroWeather、time buckets、観測メモ判定、温度表示を提供する |
+| `mashos-api/ai/services/ai_inference/api_analysis_reads.py` | `/analysis/home-summary` に `current_weather` をadditive追加。既存 `weekly` / `monthly` / `input_status` は維持 |
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | 日/週/月レポート生成時に `content_json.kokoroWeather` をadditive追加し、タイトルを `こころ天気（日/週/月）` 表示へ寄せる |
+| `mashos-api/ai/services/ai_inference/api_cron_distribution.py` | レポート配布Push文言をこころ天気表示へ寄せる。cronの生成・queue境界は維持 |
+
+## 読み方
+
+- こころ天気化する対象は感情分析のみです。`SelfStructure*` / 自己分析は既存の自己分析・自己構造として読む。
+- `daily` / `weekly` / `monthly` は内部キーとして維持します。表示名だけ `こころ天気（日）` / `こころ天気（週）` / `こころ天気（月）` へ寄せます。
+- `current_weather` と `kokoroWeather` は additive field です。既存レポートや旧フロントが無視しても壊れない構造として読む。
+- `観測メモあり` は注意報ではありません。未来予測ではなく、過去〜現在の揺れ幅・切り替わり・混在を示す観測ラベルです。

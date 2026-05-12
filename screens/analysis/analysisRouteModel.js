@@ -22,9 +22,9 @@ export const ROUTE_TODAY_QUESTION_HISTORY = "todayQuestionHistory";
 export const ANALYSIS_READY_LIMIT = 1;
 export const INITIAL_VISIBLE_REPORT_TYPE = "daily";
 export const REPORT_TYPE_LABEL = Object.freeze({
-  daily: "日報",
-  weekly: "週報",
-  monthly: "月報",
+  daily: "こころ天気（日）",
+  weekly: "こころ天気（週）",
+  monthly: "こころ天気（月）",
 });
 export const ANALYSIS_READY_REPORT_TYPES = Object.freeze(["daily", "weekly", "monthly"]);
 

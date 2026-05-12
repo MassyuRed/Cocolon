@@ -110,9 +110,9 @@ const TYPE_LABEL = Object.freeze({
 });
 
 const TYPE_JP = Object.freeze({
-  daily: "日報",
-  weekly: "週報",
-  monthly: "月報",
+  daily: "こころ天気（日）",
+  weekly: "こころ天気（週）",
+  monthly: "こころ天気（月）",
 });
 
 function normalizeReportType(raw) {
@@ -372,7 +372,7 @@ export default function AnalysisReportHistoryScreen({
     };
   }, [isDark, colors, ui]);
 
-  const title = `${TYPE_LABEL[normalizedReportType] || "Report"}の履歴`;
+  const title = `${TYPE_JP[normalizedReportType] || "こころ天気"}の履歴`;
   const load = useCallback(async () => {
     const loadSeq = ++loadSeqRef.current;
     const isStale = () => loadSeq !== loadSeqRef.current;
@@ -594,7 +594,7 @@ export default function AnalysisReportHistoryScreen({
         return;
       }
       const jp = TYPE_JP[normalizedReportType] || "レポート";
-      const msg = `Freeプランの${jp}はグラフのみ表示です。\n\nPlusプラン以上で本文の閲覧とPDF出力が利用できます。`;
+      const msg = `Freeプランの${jp}は基本図と短め表示です。\n\nPlusプラン以上で本文の閲覧、観測理由、PDF出力が利用できます。`;
       const buttons = [];
       if (typeof onOpenSubscription === "function") {
         buttons.push({
@@ -668,7 +668,7 @@ export default function AnalysisReportHistoryScreen({
 
   const headerLabel = useMemo(() => {
     const jp = TYPE_JP[normalizedReportType] || "レポート";
-    return `${jp}履歴`;
+    return `${jp}の履歴`;
   }, [normalizedReportType]);
   const historyRetentionLabel = useMemo(
     () => getHistoryRetentionLabel(subscriptionTier),

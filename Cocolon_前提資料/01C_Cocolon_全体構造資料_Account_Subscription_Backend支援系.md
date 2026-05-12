@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4109,3 +4109,15 @@ Phase8で追加された backend support は、EmlisAI本文品質を守るた�
 `mashos-api_15(2).zip` では、backend supportとして `ai/docs/Cocolon_TextGenerationCore_Phase0_2_Work_Memo_2026_05_11.md` と `ai/docs/Cocolon_TextGenerationCore_Phase14_FinalVerification_2026_05_11.md` が追加されています。これはruntimeではなく、作業境界・停止点・検証結果を残すdocsです。
 
 追加された `tests/test_cocolon_text_generation_core_*` は、共通Core単体、Emlis接続、Piece接続、Analysis接続、三大中核boundary、Phase14最終boundaryを固定します。既存のDB physical name、public API route、response key、RN visible nameを変更するtestではありません。
+
+# 2026-05-12 差分追記: こころ天気 copy / subscription boundary
+
+こころ天気導入に伴い、サブスク表示文言とbackend bootstrap文言は感情分析の表現だけを更新しています。プランの実体・価格・履歴保持・IAP SKU / base plan は変更していません。
+
+| file | current role |
+|---|---|
+| `Cocolon/lib/iap/iapRuntimeCatalog.js` | Plus/Premiumの表示featureを `こころ天気（日/週/月）` の詳しい本文・深い観測に寄せる。IAP product id / recognized sku は維持 |
+| `mashos-api/ai/services/ai_inference/subscription_bootstrap_store.py` | backend subscription bootstrapのplan copyをRN runtime catalogと同期する。契約tierや販売制御は維持 |
+| `Cocolon/screens/analysisReport/analysisReportAccessPolicy.js` | Freeでは短め表示と基本図、Plusでは標準本文、Premiumでは深い観測を見せるための表示文言を更新。tier判定ロジックは維持 |
+
+こころ天気化は感情分析だけに適用します。自己分析の `Plus以上で閲覧可` / `PremiumでDeep` の既存構造は変更しません。

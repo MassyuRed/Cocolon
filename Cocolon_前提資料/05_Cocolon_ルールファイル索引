@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -223,3 +223,18 @@ EmlisAI本文品質を触る場合、Phase8の品質Guardとfixtureを必ず確�
 | 横断境界 | `tests/test_cocolon_text_generation_core_boundary.py` / `tests/test_cocolon_text_generation_core_phase14_final_boundary.py` | 三大中核の目的・名称・表示契約が混ざっていないか |
 
 禁止: 共通基盤を理由に、DB physical name、public API route、既存response key、visible名、RN画面導線を変更しない。Emlisの温度をPiece/Analysisへ流用しない。
+
+# 2026-05-12 差分追記: こころ天気 rule / guard索引
+
+こころ天気を触る時は、Analysisの表示追加として扱い、診断・未来予測・注意報・良悪判定へ寄せない。
+
+| rule領域 | 参照file | 確認内容 |
+|---|---|---|
+| current_weather生成 | `mashos-api/ai/services/ai_inference/kokoro_weather_service.py` | 今日0:00〜現在の観測、`no_observation`、`20.3°` 表示、観測メモ判定が非診断・非未来予測になっているか |
+| home-summary contract | `api_analysis_reads.py` / `test_analysis_home_summary_current_weather.py` | `current_weather` がadditive fieldで、既存 `weekly` / `monthly` / `input_status` を消していないか |
+| report kokoroWeather | `api_analysis_reports.py` / `test_analysis_report_kokoro_weather.py` | `content_json.kokoroWeather` がadditiveで、標準本文・deepReport・publish policyを壊していないか |
+| RN top/report UI | `KokoroWeatherCurrentCard.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` / `kokoroWeatherFormatters.js` / `rn-screen-contracts.test.js` | `current_weather` / `kokoroWeather` がない場合も既存画面が壊れないか |
+| Phase6 QA | `test_kokoro_weather_phase6_qa.py` | 注意報・警報・未来予測・良悪判定・自己分析こころ天気化が混入していないか |
+| Copy / plan | `iapRuntimeCatalog.js` / `subscription_bootstrap_store.py` / `guide/*` / `tutorial/*` | サブスク差分は既存構造を維持し、こころ天気化は感情分析だけに適用されているか |
+
+禁止: `注意報` / `警報` / 未来の危険予測 / 感情の良悪判定 / 自己分析のこころ天気化 / `℃` 表記の復活 / `daily`・`weekly`・`monthly` 内部キーのrename。

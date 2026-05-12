@@ -1,6 +1,6 @@
 ---
 title: "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系"
-revision_date: "2026-05-09"
+revision_date: "2026-05-12"
 ---
 
 # 02B. Snapshot / Worker / Publish / Read系
@@ -3474,3 +3474,16 @@ App rootは `App.js` entry shellから、`navigation/*`、`runtime/*`、`compone
 | `components/GlobalFrameLayout.js` | display frame。data contractとは別境界 |
 
 本番監視では、RootNavigator / AppRuntimeBootstrapGate で発生したpush / IAP / bootstrap系エラーを `lib/monitoring.js` へ渡す。これはstartup snapshotやread-side payloadの形を変えない。
+
+# 2026-05-12 差分追記: こころ天気 Snapshot / Publish / Read boundary
+
+こころ天気は、Analysisのread-sideとreport artifact payloadに追加された表現層です。snapshot / publish / access policyの既存判断を置き換えません。
+
+| 境界 | owner | 読み方 |
+|---|---|---|
+| current weather read | `api_analysis_reads.py` / `kokoro_weather_service.py` | 今日0:00〜現在の本人向け観測を作り、`/analysis/home-summary.current_weather` として返す。今日入力がない場合は `status=no_observation` |
+| report artifact payload | `api_analysis_reports.py` / `kokoro_weather_service.py` | `content_json.kokoroWeather` を `standardReport` / `metrics` / `days` / `weeks` の既存payloadへadditive追加する |
+| RN report display | `AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` | `kokoroWeather` がある時だけ天気図風UIを表示し、ない時は従来のグラフ/本文のみ表示する |
+| publish governance | `publish_governance.py` / `access_policy/report_access_policy.py` | 変更なし。表示対象・履歴保持・tier判定は既存結果を使う |
+
+`current_weather` は他者公開用surfaceではありません。`kokoroWeather` も既存レポートの補助表示であり、レポートの公開可否や履歴保持の判定を上書きしません。

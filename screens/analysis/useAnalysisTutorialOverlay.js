@@ -70,7 +70,7 @@ export function useAnalysisTutorialOverlay({
           title: "分析画面",
           message:
             "分析画面の説明をします。\n\nここでは分析レポートを閲覧することができます。",
-          nextLabel: "日報へ",
+          nextLabel: "こころ天気（日）へ",
           onNext: () => setTutorialStep(9),
           disableSpotlight: true,
           dimOpacity: 0,
@@ -79,10 +79,10 @@ export function useAnalysisTutorialOverlay({
         return {
           step: 9,
           mode: "info",
-          title: "日報",
+          title: "こころ天気（日）",
           message:
-            "日報では、その日の感情入力をもとにした振り返りを見られます。",
-          nextLabel: "週報を見る",
+            "こころ天気（日）では、その日の感情入力から見えるこころの状態を天気のように振り返れます。",
+          nextLabel: "こころ天気（週）を見る",
           onNext: () => setTutorialStep(10),
           disableSpotlight: true,
           dimOpacity: 0,
@@ -92,10 +92,10 @@ export function useAnalysisTutorialOverlay({
         return {
           step: 10,
           mode: "info",
-          title: "週報",
+          title: "こころ天気（週）",
           message:
-            "週報では、1週間分の感情入力をもとにした振り返りを見られます。",
-          nextLabel: "月報を見る",
+            "こころ天気（週）では、1週間分の感情入力から見える日ごとの流れを天気図のように振り返れます。",
+          nextLabel: "こころ天気（月）を見る",
           onNext: () => setTutorialStep(11),
           disableSpotlight: true,
           dimOpacity: 0,
@@ -105,9 +105,9 @@ export function useAnalysisTutorialOverlay({
         return {
           step: 11,
           mode: "info",
-          title: "月報",
+          title: "こころ天気（月）",
           message:
-            "月報では、感情やカテゴリの流れをもう少し長い期間で振り返れます。",
+            "こころ天気（月）では、月の中で繰り返し見えていたこころの流れを週ごとに振り返れます。",
           nextLabel: "自己分析へ",
           onNext: () => setTutorialStep(12),
           disableSpotlight: true,

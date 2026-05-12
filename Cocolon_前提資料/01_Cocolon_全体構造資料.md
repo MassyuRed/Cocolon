@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-11"
+revision_date: "2026-05-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 200
-  mashos-api: 414
+  Cocolon: 204
+  mashos-api: 419
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 614
-  included_files_cocolon: 200
-  included_files_mashos_api: 414
+  included_files_total: 623
+  included_files_cocolon: 204
+  included_files_mashos_api: 419
 ---
 
 # 1. 1行定義
@@ -1070,3 +1070,17 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 | `mashos-api/ai/tests/test_cocolon_text_generation_core_piece_input_contract.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
 | `mashos-api/ai/tests/test_cocolon_text_generation_core_types.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
 | `mashos-api/ai/tests/test_cocolon_text_generation_phrase_units.py` | 共通文章生成基盤 / 三大中核境界の回帰・contract・boundary test |
+
+# 2026-05-12 差分追記: こころ天気導入後の全体構造
+
+最新実ファイル `Cocolon_6(29).zip` / `mashos-api_6(13).zip` では、Analysisの感情分析側に「こころ天気」表現層が追加されています。これは新しい中核機能名ではなく、既存Analysisの **感情分析レポートを観測として見やすくする表示・要約構造** です。
+
+| 層 | current owner | 構造上の扱い |
+|---|---|---|
+| Backend current weather | `kokoro_weather_service.py` / `api_analysis_reads.py` | `/analysis/home-summary` に `current_weather` をadditive追加する read-side 要約層 |
+| Backend report weather | `api_analysis_reports.py` | `content_json.kokoroWeather` を日/週/月レポートへadditive追加する report payload層 |
+| RN top UI | `AnalysisContentFirstScreen.js` / `KokoroWeatherCurrentCard.js` / `useAnalysisReportActions.js` | Analysisトップで「今のこころ天気」を表示する |
+| RN report UI | `AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` / `kokoroWeatherFormatters.js` | 既存Viewerの上部に天気図風UIと時間帯別Modalを追加する |
+| Copy / guide / subscription | `guide/*` / `tutorial/*` / `iapRuntimeCatalog.js` / `subscription_bootstrap_store.py` | 表示名を `こころ天気（日/週/月）` に更新し、サブスク差分は既存構造を維持する |
+
+この差分によりcoverage対象は `Cocolon=204` / `mashos-api=419` / `total=623` となります。自己分析、Piece、EmlisAIのruntime ownerは変更していません。

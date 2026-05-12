@@ -583,6 +583,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             todayCount={entryMeta.todayCount}
             weekCount={entryMeta.weekCount}
             monthCount={entryMeta.monthCount}
+            currentWeather={entryMeta.currentWeather}
             unreadEmotion={emotionAnalysisUnread}
             unreadSelfStructure={selfStructureUnread}
             unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
@@ -733,7 +734,7 @@ function AnalysisHome({
                   </Text>
                 </View>
                 <Text style={styles.dashboardSummaryHint}>
-                  詳細な分析は週報で確認できます。
+                  詳しい流れはこころ天気（週）で確認できます。
                 </Text>
               </>
             ) : (
@@ -753,7 +754,7 @@ function AnalysisHome({
                     color={colors.TEXT_ON_LIGHT}
                     style={{ marginRight: 6 }}
                   />
-                  <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>週報を見る</Text>
+                  <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころ天気（週）を見る</Text>
                 </View>
               </CocolonButton>
               <UnreadBadge
@@ -768,7 +769,7 @@ function AnalysisHome({
         <View style={styles.section}>
           <View ref={tutorialRefs?.dailyRef} collapsable={false} style={styles.dashboardButtonsCard}>
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>最新の日報</Text>
+              <Text style={styles.dashboardCardTitle}>最新のこころ天気（日）</Text>
               <UnreadBadge
                 visible={unreadDaily}
                 style={styles.dashboardUnreadBadge}
@@ -783,7 +784,7 @@ function AnalysisHome({
                   color={colors.TEXT_ON_LIGHT}
                   style={{ marginRight: 6 }}
                 />
-                <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>日報を開く</Text>
+                <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころ天気（日）を開く</Text>
               </View>
             </CocolonButton>
           </View>
@@ -794,10 +795,10 @@ function AnalysisHome({
             <CocolonPressable
               style={styles.dashboardInfoCard}
               onPress={onOpenMonthly}
-              accessibilityLabel="今月のまとめを開く"
+              accessibilityLabel="こころ天気（月）を開く"
             >
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>今月のまとめ</Text>
+              <Text style={styles.dashboardCardTitle}>こころ天気（月）</Text>
               <View style={styles.dashboardCardRight}>
                 <UnreadBadge
                   visible={unreadMonthly}

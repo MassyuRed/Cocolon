@@ -34,41 +34,41 @@ export default function AnalysisEmotionScreen({
       <AnalysisSubHeader title="感情分析" onBack={onBack} />
 
       <AnalysisDescription>
-        感情分析の見方を選んでください。{"\n"}
-        最新のレポートを見るか、過去の履歴をたどるかを選べます。
+        感情分析のこころ天気を選んでください。{"\n"}
+        こころ天気（日/週/月）の最新表示や、過去の履歴を確認できます。
       </AnalysisDescription>
 
       <AnalysisMediumCard
         title="レポート"
-        description="最新の感情分析レポートを確認します"
+        description="最新のこころ天気（日/週/月）を確認します"
         onPress={() => toggleSection("report")}
         badgeVisible={hasAnyUnread}
         chevron={expandedSection === "report" ? "up" : "down"}
-        accessibilityLabel="最新の感情分析レポートを選ぶ"
+        accessibilityLabel="最新のこころ天気を選ぶ"
       />
 
       {expandedSection === "report" ? (
         <View style={{ marginTop: 8 }}>
           <AnalysisOptionRow
-            label="日"
+            label="こころ天気（日）"
             onPress={onOpenLatestDaily}
             badgeVisible={unreadDaily}
-            accessibilityLabel="最新の日報を開く"
+            accessibilityLabel="最新のこころ天気（日）を開く"
           />
           <View style={{ marginTop: 8 }}>
             <AnalysisOptionRow
-              label="週"
+              label="こころ天気（週）"
               onPress={onOpenLatestWeekly}
               badgeVisible={unreadWeekly}
-              accessibilityLabel="最新の週報を開く"
+              accessibilityLabel="最新のこころ天気（週）を開く"
             />
           </View>
           <View style={{ marginTop: 8 }}>
             <AnalysisOptionRow
-              label="月"
+              label="こころ天気（月）"
               onPress={onOpenLatestMonthly}
               badgeVisible={unreadMonthly}
-              accessibilityLabel="最新の月報を開く"
+              accessibilityLabel="最新のこころ天気（月）を開く"
             />
           </View>
         </View>
@@ -77,36 +77,36 @@ export default function AnalysisEmotionScreen({
       <View style={{ marginTop: 12 }}>
         <AnalysisMediumCard
           title="履歴"
-          description="過去の感情分析レポートを振り返ります"
+          description="過去のこころ天気を振り返ります"
           onPress={() => toggleSection("history")}
           badgeVisible={hasAnyUnread}
           chevron={expandedSection === "history" ? "up" : "down"}
-          accessibilityLabel="感情分析レポート履歴を選ぶ"
+          accessibilityLabel="こころ天気の履歴を選ぶ"
         />
       </View>
 
       {expandedSection === "history" ? (
         <View style={{ marginTop: 8 }}>
           <AnalysisOptionRow
-            label="日"
+            label="こころ天気（日）"
             onPress={onOpenDailyHistory}
             badgeVisible={unreadDaily}
-            accessibilityLabel="日報履歴を開く"
+            accessibilityLabel="こころ天気（日）の履歴を開く"
           />
           <View style={{ marginTop: 8 }}>
             <AnalysisOptionRow
-              label="週"
+              label="こころ天気（週）"
               onPress={onOpenWeeklyHistory}
               badgeVisible={unreadWeekly}
-              accessibilityLabel="週報履歴を開く"
+              accessibilityLabel="こころ天気（週）の履歴を開く"
             />
           </View>
           <View style={{ marginTop: 8 }}>
             <AnalysisOptionRow
-              label="月"
+              label="こころ天気（月）"
               onPress={onOpenMonthlyHistory}
               badgeVisible={unreadMonthly}
-              accessibilityLabel="月報履歴を開く"
+              accessibilityLabel="こころ天気（月）の履歴を開く"
             />
           </View>
         </View>

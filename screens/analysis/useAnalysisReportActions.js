@@ -90,6 +90,7 @@ export function useAnalysisReportActions() {
     todayCount: 0,
     weekCount: 0,
     monthCount: 0,
+    currentWeather: null,
     latestReports: {
       daily: null,
       weekly: null,
@@ -202,6 +203,10 @@ export function useAnalysisReportActions() {
           console.warn("AnalysisScreen: failed to refresh home summary", homeSummaryRes.reason);
         }
         const inputStatus = homeSummary?.input_status || {};
+        const currentWeather =
+          homeSummary?.current_weather && typeof homeSummary.current_weather === "object"
+            ? homeSummary.current_weather
+            : null;
 
         const todayQuestionItems =
           todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
@@ -224,6 +229,7 @@ export function useAnalysisReportActions() {
           todayCount: Number.isFinite(todayCount) ? todayCount : 0,
           weekCount: Number.isFinite(weekCount) ? weekCount : 0,
           monthCount: Number.isFinite(monthCount) ? monthCount : 0,
+          currentWeather,
         }));
       };
 
