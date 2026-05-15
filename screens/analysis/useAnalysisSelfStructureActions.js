@@ -19,14 +19,23 @@ export function useAnalysisSelfStructureActions({
   setSelfReportHistoryBackRoute,
 }) {
   const openSelfStructureRoute = useCallback(
-    async ({ targetRoute, backRoute = "home" }) => {
+    async ({ targetRoute, backRoute = "home", requiresPaid = false }) => {
+      const openRoute = () => {
+        setSelectedSelfReport(null);
+        setSelfReportGenerateBackRoute(backRoute);
+        setRoute(targetRoute);
+      };
+
+      if (!requiresPaid) {
+        openRoute();
+        return;
+      }
+
       try {
         const ok = await (typeof ensurePaid === "function" ? ensurePaid() : false);
 
         if (ok) {
-          setSelectedSelfReport(null);
-          setSelfReportGenerateBackRoute(backRoute);
-          setRoute(targetRoute);
+          openRoute();
           return;
         }
 
@@ -44,8 +53,8 @@ export function useAnalysisSelfStructureActions({
         };
 
         Alert.alert(
-          "自己分析レポート",
-          "自己分析レポートはPlusプラン以上で利用できます。\n\nPlusプラン以上で本文の閲覧が可能になります。",
+          "詳しい自己分析レポート",
+          "わたしマップの入口は無料で見られます。\n\n履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。",
           [
             { text: "閉じる", style: "cancel" },
             { text: "プランを見る", onPress: goSubscription },
@@ -62,14 +71,21 @@ export function useAnalysisSelfStructureActions({
   );
 
   const openSelfReportLatest = useCallback(
-    (nextMode = "standard", backRoute = ROUTE_SELF_STRUCTURE) => {
-      setSelfReportGenerateMode(normalizeSelfStructureMode(nextMode));
-      openSelfStructureRoute({
+    (nextMode = "light", backRoute = ROUTE_SELF_STRUCTURE) => {
+      const requiresPaid = false;
+      const latestRoute = {
         targetRoute: ROUTE_SELF_REPORT_GENERATE,
-        backRoute,
-      });
+        backRoute: backRoute || ROUTE_SELF_STRUCTURE,
+        requiresPaid,
+      };
+      setSelfReportGenerateMode(normalizeSelfStructureMode(nextMode));
+      if (!latestRoute.requiresPaid) {
+        setSelectedSelfReport(null);
+        setSelfReportGenerateBackRoute(latestRoute.backRoute);
+        setRoute(latestRoute.targetRoute);
+      }
     },
-    [openSelfStructureRoute, setSelfReportGenerateMode]
+    [setRoute, setSelectedSelfReport, setSelfReportGenerateBackRoute, setSelfReportGenerateMode]
   );
 
   const openSelfReportHistory = useCallback(
@@ -79,6 +95,7 @@ export function useAnalysisSelfStructureActions({
       openSelfStructureRoute({
         targetRoute: ROUTE_SELF_REPORT_HISTORY,
         backRoute: nextBackRoute,
+        requiresPaid: false,
       });
     },
     [openSelfStructureRoute, setSelfReportHistoryBackRoute]

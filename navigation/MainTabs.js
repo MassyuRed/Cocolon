@@ -1034,7 +1034,7 @@ export default function MainTabs() {
       <Ionicons name="notifications-outline" size={18} color={colors.TITLE_GOLD} style={{ marginRight: 10 }} />
       <View style={{ flex: 1 }}>
         <Text style={{ color: colors.TEXT_ON_LIGHT, fontSize: 13, fontWeight: "700" }}>
-          自己構造分析レポートが更新されました
+          今のわたしマップが更新されました
         </Text>
       </View>
       <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />

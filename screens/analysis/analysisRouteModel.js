@@ -114,7 +114,9 @@ export function formatLatestUpdateLabel(value) {
 
 export function normalizeSelfStructureMode(mode) {
   const value = String(mode || "").trim().toLowerCase();
-  return value === "deep" ? "deep" : "standard";
+  if (value === "light") return "light";
+  if (value === "deep" || value === "structural") return "deep";
+  return "standard";
 }
 
 export function isAnalysisMenuRoute(route) {

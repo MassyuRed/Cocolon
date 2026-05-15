@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 204
-  mashos-api: 419
+  Cocolon: 216
+  mashos-api: 443
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 623
-  included_files_cocolon: 204
-  included_files_mashos_api: 419
+  included_files_total: 659
+  included_files_cocolon: 216
+  included_files_mashos_api: 443
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body: `623 files`
-  - Cocolon: `204`
-  - mashos-api: `419`
+- latest full coverage listed in body / 差分追記: `659 files`
+  - Cocolon: `216`
+  - mashos-api: `443`
 
 # 4. 読み方
 
@@ -947,13 +947,63 @@ Input Gate -> Save API -> Emlis / Piece / Analysis runtime
 
 # 2026-05-12 差分追記: こころ天気 national-system flow
 
-最新基準面 `Cocolon_6(29).zip` / `mashos-api_6(13).zip` では、国家システムの `Read API / Startup -> RN display` と `Worker / Publish -> Read API` のAnalysis側に、こころ天気がadditive接続されています。入力保存・dispatch・DB write pathは変更していません。
+最新基準面 `Cocolon_4(22).zip` / `mashos-api_4(16).zip` では、国家システムの `Read API / Startup -> RN display` と `Worker / Publish -> Read API` のAnalysis側に、こころ天気がadditive接続されています。入力保存・dispatch・DB write pathは変更していません。
 
 | flow | owner | 変更内容 |
 |---|---|---|
 | Read API -> RN display | `api_analysis_reads.py` -> `useAnalysisReportActions.js` -> `AnalysisContentFirstScreen.js` -> `KokoroWeatherCurrentCard.js` | `/analysis/home-summary` の既存payloadへ `current_weather` を追加し、Analysisトップへ「今のこころ天気」を表示する |
-| Worker / Publish -> Report payload | `api_analysis_reports.py` -> `AnalysisReportViewerScreen.js` -> `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` | 新規生成レポートの `content_json.kokoroWeather` をレポートViewerで表示する。古いレポートは従来表示へfallbackする |
+| Worker / Publish -> Report payload | `api_analysis_reports.py` -> `AnalysisReportViewerScreen.js` -> `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` | 新規生成レポートの `content_json.kokoroWeather` をレポートViewerで表示する。旧感情分析レポートはready/detail/Viewerで表示対象外にする |
 | Distribution copy | `api_cron_distribution.py` | 配布通知文言だけを `こころ天気（日/週/月）` に寄せる。cron enqueue / worker profile / publish governance は維持 |
 | Guide / Tutorial / Subscription | `guide/*` / `tutorial/*` / `iapRuntimeCatalog.js` / `subscription_bootstrap_store.py` | ユーザー向け説明とプランコピーを更新する。tier判定・履歴保持・自己分析の扱いは維持 |
 
 この差分でcoverage対象は `Cocolon=204` / `mashos-api=419` / `total=623` です。DB physical name、public API route、`daily` / `weekly` / `monthly` 内部キーは変更していません。
+
+# 2026-05-13 差分追記: こころ天気 Read filter flow
+
+最新基準面 `Cocolon_4(22).zip` / `mashos-api_4(16).zip` では、Analysisのread-side flowで旧感情分析レポートをこころ天気正式体験に混ぜないfilterが入っています。DB write path、worker生成、publish governanceの物理構造は変更していません。
+
+| flow | owner | 変更内容 |
+|---|---|---|
+| Report artifact -> ready API | `api_analysis_reports.py` | `content_json.kokoroWeather.version == "kokoro.weather.v1"` を正式表示対象の条件にし、旧レポートを `/analysis/reports/ready` へ出さない |
+| Direct detail | `api_analysis_reports.py` | `/analysis/reports/{id}` は旧レポートID直指定でも404にする |
+| Weekly auxiliary read | `api_analysis_reads.py` | `/analysis/reports/{id}/weekly-days` は旧週レポートからdays補助表示を復元しない |
+| Unread badge | `api_report_reads.py` | `/report-reads/analysis-unread-status` は旧レポートIDを未読対象に含めない |
+| RN display | `useAnalysisReportActions.js` / `AnalysisReportHistoryScreen.js` / `AnalysisReportViewerScreen.js` | 新cache namespaceと `isKokoroWeatherReportRecord` により、旧cache・旧state・旧本文fallbackを表示しない |
+
+この差分は、旧レポートを削除する国家システム変更ではありません。Read API / RN display / unread判定の表示対象を、こころ天気payload成立レポートへ絞る変更です。
+
+
+# 2026-05-13 差分追記: わたしマップ国家システム境界
+
+2026-05-13時点の実ファイル `Cocolon_8(7).zip` / `mashos-api_8(10).zip` では、自己分析 read-side が `わたしマップ` として表示される。国家システム上は、入力素材・保存・publish・read route を破壊せず、`content_json.watashiMap` と renderer / subscription 境界を追加する。
+
+| flow | current fact |
+|---|---|
+| Worker / generation | `astor_self_structure_report.py` が既存 payload を維持したまま `content_json.watashiMap` を additive 追加する。 |
+| Service | `watashi_map_service.py` が overview / role_switches / routes / crossroads / unknown_areas / detail_report / visibility を生成・投影する。 |
+| Read API | `/self-structure/latest` は Free light 概要を返せる。history / detail は tier 境界で制御する。 |
+| RN display | `WatashiMapRenderer` が `watashiMap` 優先、旧 `selfStructureDeepVisual` / `content_text` fallback で表示する。 |
+| Contract | route / DB physical name / report family は維持し、`watashiMap` は additive field として読む。 |
+| QA | Free/Plus/Premium、旧payload互換、人格断定・タイプ化回避を tests で固定する。 |
+
+最新実ファイルでは、`Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer の import path と一致している。root `components/watashiMapAccessPolicy.js` は同内容の互換copyとして残る。
+
+# 2026-05-15 差分追記: EmlisAI A案到達 Step15-20 national-system flow
+
+最新実ファイル `Cocolon_7(10).zip` / `mashos-api_7(13).zip` のcoverage対象は `total=659`。EmlisAI Step15-20 は国家システム上、`Input Gate -> Save API -> immediate reply -> quality/meta gate -> RN display` のうち、保存後の観測生成品質・段階リリース・移行判定・長期QAを補う層として読む。保存、DB write path、read API、RN display routeを置換しない。
+
+| Step | national-system上の位置 | owner |
+|---|---|---|
+| Step15 共通Core安定化 | Composer後の品質・根拠・Guard結果を共通形式で確認する | `cocolon_text_generation_core/stabilization.py` |
+| Step16 段階リリース計測 | release gate / diagnostic_summaryからA-P0判断用のmetricsを作る | `emlis_ai_rollout_metrics_service.py` |
+| Step17 広い入力fixture | rollout / migration判定に使う広い入力のQA材料 | `tests/fixtures/emlis_ai_step17_broad_input_cases.py` |
+| Step18 A-P0移行判定 | A-1へ進むか、B-S1/B-C1/B-G1へ戻すかをmeta判定する | `emlis_ai_ap0_migration_decision_service.py` |
+| Step19 A案相当導入 | A-P0 green時だけcomposer_modelをA-1相当へpromoteする | `emlis_ai_a_plan_equivalent_composer_service.py` |
+| Step20 長期品質 | 同一ユーザー継続利用での反復・距離感・履歴補完driftをQA metaへ残す | `emlis_ai_long_term_quality_service.py` |
+
+## 国家システム境界
+
+- `emotion_submit_service.py` から見た保存成功・入力保存flowは変更しない。
+- EmlisAIが落ちても、fail-closedにより `observation_status` と空 `comment_text` で止まる境界を維持する。
+- Step16/18/20の判断材料はdeveloper / QA metaであり、ユーザー表示文には混ぜない。
+- Step19はB案Gate、scoped graph、common Core、Display Gateを残した段階promotionであり、外部LLM導入・DB rename・API route変更ではない。

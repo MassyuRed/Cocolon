@@ -2,12 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import AnalysisReportViewerScreen from "./AnalysisReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
+import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
 import KokoroWeatherCurrentCard from "./analysisReport/KokoroWeatherCurrentCard";
+import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 import {
   AnalysisMenuScroll,
   useAnalysisMenuStyles,
@@ -15,8 +16,8 @@ import {
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 const ANALYSIS_TABS = [
-  { key: "emotion", label: "感情分析" },
-  { key: "self", label: "自己分析" },
+  { key: "emotion", label: "こころ天気" },
+  { key: "self", label: "わたしマップ" },
 ];
 
 const EMOTION_REPORT_TABS = [
@@ -24,6 +25,19 @@ const EMOTION_REPORT_TABS = [
   { key: "weekly", label: "こころ天気（週）" },
   { key: "monthly", label: "こころ天気（月）" },
 ];
+
+function safeParseTutorialContentJson(raw) {
+  if (!raw) return null;
+  if (typeof raw === "object") return raw;
+  if (typeof raw === "string") {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
 
 function createLocalStyles(colors, ui) {
   const text = ui?.text || {};
@@ -167,20 +181,6 @@ function createLocalStyles(colors, ui) {
           marginRight: 6,
           alignSelf: "center",
         },
-        paywallButtonWrap: {
-          marginTop: 12,
-        },
-        paywallBtnText: {
-          fontSize: 13,
-          fontWeight: "900",
-          color: "#FFFFFF",
-          letterSpacing: 0.6,
-        },
-        paywallBtnRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        },
       },
       ui
     )
@@ -194,9 +194,6 @@ export default function AnalysisContentFirstScreen({
   tutorialRefs,
   emotionUpdateLabel,
   selfStructureUpdateLabel,
-  todayCount = 0,
-  weekCount = 0,
-  monthCount = 0,
   currentWeather = null,
   unreadEmotion = false,
   unreadSelfStructure = false,
@@ -214,15 +211,15 @@ export default function AnalysisContentFirstScreen({
   onOpenSubscription,
   onRefreshEmotionUnread,
   onLatestSeenVersion,
-  isPaid = false,
   isTutorialMode = false,
   tutorialStep = 0,
   tutorialReports = null,
-  tutorialCounts = null,
   tutorialSelfAnalysisGuide = null,
+  tutorialWatashiMapReport = null,
 }) {
-  const { styles, colors, ui } = useAnalysisMenuStyles();
+  const { styles, colors, ui, themeName } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
+  const isDark = themeName === "dark";
 
   const [activeAnalysisTab, setActiveAnalysisTab] = useState("emotion");
   const [activeEmotionReportType, setActiveEmotionReportType] = useState("daily");
@@ -245,22 +242,21 @@ export default function AnalysisContentFirstScreen({
     }
   }, [isTutorialMode, tutorialStep]);
 
-  const effectiveCounts =
-    isTutorialMode && tutorialCounts && typeof tutorialCounts === "object"
-      ? tutorialCounts
-      : null;
-  const safeTodayCount = Math.max(0, Number(effectiveCounts?.today ?? todayCount) || 0);
-  const safeWeekCount = Math.max(0, Number(effectiveCounts?.week ?? weekCount) || 0);
-  const safeMonthCount = Math.max(0, Number(effectiveCounts?.month ?? monthCount) || 0);
-
   const effectiveLatestReports =
     isTutorialMode && tutorialReports && typeof tutorialReports === "object"
       ? tutorialReports
       : latestReports;
-  const currentEmotionReport =
+  const currentEmotionReportCandidate =
     effectiveLatestReports && typeof effectiveLatestReports === "object"
       ? effectiveLatestReports[activeEmotionReportType] || null
       : null;
+  const currentEmotionReport = isKokoroWeatherReportRecord(currentEmotionReportCandidate)
+    ? currentEmotionReportCandidate
+    : null;
+  const tutorialWatashiMapContentJson = useMemo(
+    () => safeParseTutorialContentJson(tutorialWatashiMapReport?.content_json),
+    [tutorialWatashiMapReport?.content_json]
+  );
   const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
   const currentEmotionHistoryLabel =
     EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころ天気（日）";
@@ -272,7 +268,7 @@ export default function AnalysisContentFirstScreen({
     }
     setActiveAnalysisTab("emotion");
     setActiveEmotionReportType("daily");
-    if (!effectiveLatestReports?.daily) {
+    if (!isKokoroWeatherReportRecord(effectiveLatestReports?.daily)) {
       onOpenDailyHistory?.();
     }
   };
@@ -364,25 +360,6 @@ export default function AnalysisContentFirstScreen({
         />
       ) : null}
 
-      {!isTutorialMode ? (
-        <View style={styles.summaryBlock}>
-          <View style={styles.summaryInner}>
-            <View style={styles.summaryHeaderRow}>
-              <Ionicons
-                name="radio-outline"
-                size={14}
-                color={colors.TITLE_GOLD}
-                style={styles.summaryIcon}
-              />
-              <Text style={styles.summaryLabel}>あなたの入力状況</Text>
-            </View>
-            <Text style={styles.summaryText}>{`今日の入力回数は${safeTodayCount}回です`}</Text>
-            <Text style={styles.summaryText}>{`今週の入力回数は${safeWeekCount}回です`}</Text>
-            <Text style={styles.summaryText}>{`今月の入力回数は${safeMonthCount}回です`}</Text>
-          </View>
-        </View>
-      ) : null}
-
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>
           renderTab({
@@ -466,42 +443,39 @@ export default function AnalysisContentFirstScreen({
 
           <View ref={tutorialRefs?.selfReportRef} collapsable={false}>
             {isTutorialMode ? (
-              <View style={localStyles.emptyCard}>
-                <Text style={localStyles.emptyTitle}>
-                  {String(tutorialSelfAnalysisGuide?.title || "自己分析レポート")}
-                </Text>
-                <Text style={localStyles.emptyText}>
-                  {String(tutorialSelfAnalysisGuide?.body || "自己分析レポートはサブスク加入後に閲覧できます。")}
-                </Text>
-              </View>
-            ) : isPaid ? (
-              <SelfStructureReportGenerateScreen
-                embedded
-                hideHeader
-                showTitle={false}
-                useServerDefaultMode
-                onLatestSeenVersion={onLatestSeenVersion}
-              />
-            ) : (
-              <View style={localStyles.emptyCard}>
-                <Text style={localStyles.emptyTitle}>自己分析レポートはPlusプラン以上で利用できます</Text>
-                <Text style={localStyles.emptyText}>
-                  加入すると、現在の自己分析レポートがここに最初から表示されます。
-                </Text>
-                <View style={localStyles.paywallButtonWrap}>
-                  <CocolonButton variant="secondary" onPress={onOpenSubscription}>
-                    <View style={localStyles.paywallBtnRow}>
-                      <Ionicons
-                        name="sparkles-outline"
-                        size={18}
-                        color={colors.TEXT_ON_LIGHT}
-                        style={{ marginRight: 6 }}
-                      />
-                      <Text style={localStyles.paywallBtnText}>プランを見る</Text>
-                    </View>
-                  </CocolonButton>
+              <>
+                <View style={localStyles.emptyCard}>
+                  <Text style={localStyles.emptyTitle}>
+                    {String(tutorialSelfAnalysisGuide?.title || "わたしマップ")}
+                  </Text>
+                  <Text style={localStyles.emptyText}>
+                    {String(tutorialSelfAnalysisGuide?.body || "わたしマップでは、場面ごとの役割と行動パターンを確認できます。")}
+                  </Text>
                 </View>
-              </View>
+                {tutorialWatashiMapContentJson ? (
+                  <WatashiMapRenderer
+                    contentJson={tutorialWatashiMapContentJson}
+                    contentText={tutorialWatashiMapReport?.content_text || tutorialWatashiMapReport?.contentText || ""}
+                    reportMode={tutorialWatashiMapReport?.report_mode || tutorialWatashiMapReport?.reportMode || "light"}
+                    viewerTier={tutorialWatashiMapReport?.viewer_tier || tutorialWatashiMapReport?.viewerTier || "free"}
+                    periodLabel={tutorialWatashiMapReport?.period_label || tutorialWatashiMapReport?.periodLabel || "直近28日"}
+                    colors={colors}
+                    isDark={isDark}
+                    onUpgradePress={onOpenSubscription}
+                  />
+                ) : null}
+              </>
+            ) : (
+              <>
+                <SelfStructureReportGenerateScreen
+                  embedded
+                  hideHeader
+                  showTitle={false}
+                  titleOverride="今のわたしマップ"
+                  useServerDefaultMode
+                  onLatestSeenVersion={onLatestSeenVersion}
+                />
+              </>
             )}
           </View>
 
@@ -509,9 +483,9 @@ export default function AnalysisContentFirstScreen({
           <CocolonPressable
             style={localStyles.historyInlineLink}
             onPress={onOpenSelfHistory}
-            accessibilityLabel="自己分析の履歴を見る"
+            accessibilityLabel="わたしマップの履歴を見る"
           >
-            <Text style={localStyles.historyInlineText}>自己分析の履歴を見る</Text>
+            <Text style={localStyles.historyInlineText}>わたしマップの履歴を見る</Text>
             <ScreenUnreadBadge
               visible={unreadSelfStructureHistory}
               style={localStyles.historyInlineBadge}

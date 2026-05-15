@@ -6,6 +6,7 @@ const FIXTURES = tutorialFixtures && typeof tutorialFixtures === "object" ? tuto
 const FIXTURE_INPUT = FIXTURES.input && typeof FIXTURES.input === "object" ? FIXTURES.input : {};
 const FIXTURE_PIECE = FIXTURES.piece && typeof FIXTURES.piece === "object" ? FIXTURES.piece : {};
 const FIXTURE_ANALYSIS = FIXTURES.analysis && typeof FIXTURES.analysis === "object" ? FIXTURES.analysis : {};
+const FIXTURE_SELF_STRUCTURE = FIXTURES.self_structure && typeof FIXTURES.self_structure === "object" ? FIXTURES.self_structure : {};
 
 const FALLBACK_MEMO =
   "なんか少しだけ気分が軽い。\nやること全部はできてないけど、ひとつ片づいたからまあいいかって感じ。\nこういう小さいことで落ち着く日もあるんだな。";
@@ -40,6 +41,21 @@ function readFirstObject(...values) {
   return {};
 }
 
+function parseMaybeJsonObject(value) {
+  if (value && typeof value === "object" && !Array.isArray(value)) return value;
+  if (typeof value !== "string") return {};
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function parseJsonObject(value) {
+  return parseMaybeJsonObject(value);
+}
+
 function normalizeReport(report, reportType) {
   const safe = readFirstObject(report);
   return Object.freeze({
@@ -47,6 +63,21 @@ function normalizeReport(report, reportType) {
     report_type: compact(safe.report_type) || reportType,
     title: compact(safe.title),
     content_text: compact(safe.content_text),
+  });
+}
+
+function normalizeWatashiMapReport(report) {
+  const safe = readFirstObject(report);
+  const contentJson = parseJsonObject(safe.content_json || safe.contentJson);
+  return Object.freeze({
+    ...safe,
+    report_type: compact(safe.report_type) || "self_structure",
+    title: compact(safe.title) || "今のわたしマップ",
+    report_mode: compact(safe.report_mode || safe.reportMode) || "light",
+    viewer_tier: compact(safe.viewer_tier || safe.viewerTier) || "free",
+    period_label: compact(safe.period_label || safe.periodLabel) || "直近28日",
+    content_text: compact(safe.content_text || safe.contentText),
+    content_json: freezeClone(contentJson),
   });
 }
 
@@ -171,14 +202,142 @@ export const TUTORIAL_ANALYSIS_REPORTS = Object.freeze({
   monthly: normalizeReport(FIXTURE_ANALYSIS?.reports?.monthly, "monthly"),
 });
 
+const fixtureWatashiMapLatest = normalizeWatashiMapReport(
+  FIXTURE_SELF_STRUCTURE.latest ||
+    FIXTURE_ANALYSIS?.watashi_map ||
+    FIXTURE_ANALYSIS?.watashiMap
+);
+const fixtureWatashiMapContentJson = readFirstObject(fixtureWatashiMapLatest.content_json);
+const fixtureWatashiMap = readFirstObject(
+  fixtureWatashiMapLatest.watashiMap,
+  fixtureWatashiMapContentJson.watashiMap
+);
+
+const FALLBACK_WATASHI_MAP = Object.freeze({
+  version: "watashi.map.v1",
+  status: "ok",
+  label: "わたしマップ",
+  report_mode: "light",
+  visibility: Object.freeze({
+    viewer_tier: "free",
+    summary_visible: true,
+    role_switches_visible: true,
+    routes_visible: false,
+    crossroads_visible: false,
+    unknown_areas_visible: true,
+    detail_report_visible: false,
+    locked_sections: Object.freeze(["routes", "crossroads", "detail_report"]),
+  }),
+  overview: Object.freeze({
+    title: "今のわたしマップ",
+    summary: "生活の場面では、整える役割が立ち上がりやすく見えます。",
+    active_contexts: Object.freeze([
+      Object.freeze({ key: "daily_life", label: "生活", share_label: "少し見えてきました" }),
+    ]),
+    active_roles: Object.freeze([
+      Object.freeze({ key: "organizer", label: "整える役割" }),
+    ]),
+    action_tendencies: Object.freeze([
+      Object.freeze({ key: "prioritize", label: "先に整理する" }),
+    ]),
+    observation_amount: Object.freeze({ level: "medium", label: "少し見えてきました" }),
+  }),
+  role_switches: Object.freeze([
+    Object.freeze({
+      context: Object.freeze({ key: "daily_life", label: "生活", kind: "environment" }),
+      role: Object.freeze({ key: "organizer", label: "整える役割" }),
+      tendency_label: "立ち上がりやすい",
+      score_display: "●●",
+      evidence_count: 4,
+      route_preview: "身の回りを少し整えて、気持ちを落ち着かせる流れが見えます。",
+      safe_note: "これは性格タイプではなく、この場面で見えた動き方です。",
+    }),
+  ]),
+  routes: Object.freeze([
+    Object.freeze({
+      title: "生活でよく通るルート",
+      steps: Object.freeze([
+        Object.freeze({ label: "場面", text: "少し散らかった状態に触れる" }),
+        Object.freeze({ label: "役割スイッチ", text: "整える役割" }),
+        Object.freeze({ label: "選びやすい行動", text: "机の上を少し片づける" }),
+        Object.freeze({ label: "起こりやすい結果", text: "気持ちが少し落ち着きやすい" }),
+      ]),
+    }),
+  ]),
+  unknown_areas: Object.freeze([
+    Object.freeze({
+      label: "友人との場面",
+      reason: "入力がまだ少なく、役割を言い切らない状態です。",
+      next_observation_hint: "次に友人との関わりを入力すると、地図が見えやすくなります。",
+    }),
+  ]),
+  detail_report: Object.freeze({
+    title: "詳しい自己分析レポート",
+    visible: false,
+    lock_label: "詳しい自己分析レポートは Plus プラン以上で読めます。",
+  }),
+});
+
+export const TUTORIAL_WATASHI_MAP = freezeClone(
+  Object.keys(fixtureWatashiMap).length > 0 ? fixtureWatashiMap : FALLBACK_WATASHI_MAP
+);
+
+export const TUTORIAL_WATASHI_MAP_REPORT = freezeClone({
+  ...fixtureWatashiMapLatest,
+  id: compact(fixtureWatashiMapLatest.id) || "tutorial-watashi-map-latest",
+  title: compact(fixtureWatashiMapLatest.title) || "今のわたしマップ",
+  report_type: compact(fixtureWatashiMapLatest.report_type) || "self_structure",
+  report_mode: compact(fixtureWatashiMapLatest.report_mode || fixtureWatashiMapLatest.reportMode) || "light",
+  viewer_tier: compact(fixtureWatashiMapLatest.viewer_tier || fixtureWatashiMapLatest.viewerTier) || "free",
+  period_label: compact(fixtureWatashiMapLatest.period_label || fixtureWatashiMapLatest.periodLabel) || "直近28日",
+  content_text:
+    compact(fixtureWatashiMapLatest.content_text || fixtureWatashiMapLatest.contentText) ||
+    "人は、相手や場所によって少しずつ違う自分で動いています。",
+  content_json: {
+    ...fixtureWatashiMapContentJson,
+    watashiMap: TUTORIAL_WATASHI_MAP,
+  },
+});
+
+const tutorialWatashiMapOverview = readFirstObject(TUTORIAL_WATASHI_MAP.overview);
+const tutorialWatashiMapRoleSwitch = readFirstObject(
+  Array.isArray(TUTORIAL_WATASHI_MAP.role_switches) ? TUTORIAL_WATASHI_MAP.role_switches[0] : null,
+  Array.isArray(TUTORIAL_WATASHI_MAP.roleSwitches) ? TUTORIAL_WATASHI_MAP.roleSwitches[0] : null
+);
+const tutorialWatashiMapContext = readFirstObject(tutorialWatashiMapRoleSwitch.context);
+const tutorialWatashiMapRole = readFirstObject(tutorialWatashiMapRoleSwitch.role);
+const tutorialWatashiMapAction = readFirstObject(
+  Array.isArray(tutorialWatashiMapOverview.action_tendencies)
+    ? tutorialWatashiMapOverview.action_tendencies[0]
+    : null,
+  Array.isArray(tutorialWatashiMapOverview.actionTendencies)
+    ? tutorialWatashiMapOverview.actionTendencies[0]
+    : null
+);
+const tutorialWatashiMapObservation = readFirstObject(
+  tutorialWatashiMapOverview.observation_amount,
+  tutorialWatashiMapOverview.observationAmount
+);
+
+export const TUTORIAL_WATASHI_MAP_PREVIEW = freezeClone({
+  title: compact(tutorialWatashiMapOverview.title) || "今のわたしマップ",
+  summary:
+    compact(tutorialWatashiMapOverview.summary) ||
+    "生活の場面では、整える役割が立ち上がりやすく見えます。",
+  contextLabel: compact(tutorialWatashiMapContext.label) || "生活",
+  roleLabel: compact(tutorialWatashiMapRole.label) || "整える役割",
+  actionLabel: compact(tutorialWatashiMapAction.label) || "先に整理する",
+  observationLabel: compact(tutorialWatashiMapObservation.label) || "少し見えてきました",
+});
+
 export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
   lead:
-    "Emlis（エムリス）は、感情入力をすることで様々な体験ができるアプリです。\nここでは、感情入力からつながる主要な3つの要素を見ていきます。",
+    "Emlis（エムリス）は、感情入力をすることで様々な体験ができるアプリです。\nここでは、感情入力からつながる主要な4つの要素を見ていきます。",
   source: Object.freeze({
     title: "感情入力",
     caption: "今の気持ちを言葉にする",
   }),
-  connector: "3つの形で受け取れます",
+  connector: "4つの形で受け取れます",
   nodes: Object.freeze([
     Object.freeze({
       label: "その場で受け取る",
@@ -187,6 +346,10 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
     Object.freeze({
       label: "あとで振り返る",
       title: "こころ天気",
+    }),
+    Object.freeze({
+      label: "自分の動き方を見る",
+      title: "わたしマップ",
     }),
     Object.freeze({
       label: "考えを届ける・見る",
@@ -209,6 +372,12 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
     example: "自分の気持ちの流れを、天気のようにあとから見返せます。",
   }),
   Object.freeze({
+    title: "わたしマップ",
+    description:
+      "場面ごとの役割スイッチと、選びやすい行動の流れを見られます。",
+    example: `${TUTORIAL_WATASHI_MAP_PREVIEW.contextLabel}の場面では、${TUTORIAL_WATASHI_MAP_PREVIEW.roleLabel}が立ち上がりやすく見えます。`,
+  }),
+  Object.freeze({
     title: "ピース",
     description:
       "あなたの入力内容を、問いと答えに整えて投稿します。",
@@ -217,9 +386,15 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
 ]);
 
 export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
-  title: "自己分析レポート",
-  body:
-    "自己分析レポートでは、日々の感情入力をもとに、自分の考え方や感情の傾向をより深く振り返ることができます。\nこのレポートは、サブスク加入後に閲覧できます。",
+  title: "わたしマップ",
+  body: [
+    "人は、相手や場所によって少しずつ違う自分で動いています。",
+    "わたしマップでは、あなたがどんな場面でどんな役割になりやすいか、そしてそのとき選びやすい行動を見ていきます。",
+    `例：${TUTORIAL_WATASHI_MAP_PREVIEW.summary}`,
+    "これは性格タイプではなく、入力から見えた場面ごとの動き方です。",
+    "入口はFreeプランでも見られ、詳しい自己分析レポートはPlusプラン以上で読めます。",
+  ].join("\n"),
+  watashiMap: TUTORIAL_WATASHI_MAP,
 });
 
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({

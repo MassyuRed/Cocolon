@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -205,7 +205,7 @@ revision_date: "2026-05-12"
 - repo: `Cocolon`
 - 国家システム区分: `Boundary`
 - 現行状態: `shared`
-- 国家システム上の役割: 退会後local cleanup boundary。input draft / self-structure seen / analysis latest report cache を対象userId単位で削除する。
+- 国家システム上の役割: 退会後local cleanup boundary。input draft / self-structure seen / 旧analysis latest report cache / 新こころ天気 latest report cache を対象userId単位で削除する。
 - 上流:
   - `Cocolon/screens/SettingsOtherScreen.js` — import
 - 下流:
@@ -2302,8 +2302,8 @@ public API route、request shape、DB write pathは変更しません。`input_f
 | `mashos-api/ai/tests/test_kokoro_weather_service.py` | こころ温度、weather_key、観測メモ、`no_observation` のservice単体挙動 |
 | `mashos-api/ai/tests/test_analysis_home_summary_current_weather.py` | `/analysis/home-summary` が `current_weather` を返しても既存 `weekly` / `monthly` / `input_status` が消えないこと |
 | `mashos-api/ai/tests/test_analysis_report_kokoro_weather.py` | daily / weekly / monthly レポートの `content_json.kokoroWeather` 生成 |
-| `mashos-api/ai/tests/test_kokoro_weather_phase6_qa.py` | 未来予測・注意報・良悪判定にならないこと、Free/Plus/Premium境界、自己分析非対象、古いレポート互換 |
-| `Cocolon/tests/rn-screen-contracts.test.js` | `KokoroWeatherCurrentCard` / `ForecastStrip` / `DetailModal` / formatter の存在とAnalysis screen接続 |
+| `mashos-api/ai/tests/test_kokoro_weather_phase6_qa.py` | 未来予測・注意報・良悪判定にならないこと、Free/Plus/Premium境界、自己分析非対象、旧感情分析レポート非表示 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | `KokoroWeatherCurrentCard` / `ForecastStrip` / `DetailModal` / formatter / `isKokoroWeatherReportRecord` / cache namespace / fail-closed guard の存在とAnalysis screen接続 |
 
 契約上の読み方:
 
@@ -2311,3 +2311,97 @@ public API route、request shape、DB write pathは変更しません。`input_f
 - `content_json.kokoroWeather` はreport content_jsonのadditive fieldです。
 - `daily` / `weekly` / `monthly` は契約上の内部値として維持します。
 - 表示名 `こころ天気（日/週/月）` はvisible copyであり、DB/API名の一括renameではありません。
+
+# 2026-05-13 差分追記: こころ天気非表示filter contract / QA boundary
+
+旧感情分析レポート非表示移行では、互換表示ではなく fail-closed が契約境界です。`kokoroWeather` が成立しない日/週/月レポートは、API・未読・RN表示で正式対象にしません。
+
+| test / guard | 固定すること |
+|---|---|
+| `mashos-api/ai/tests/test_analysis_report_kokoro_weather.py` | `_is_kokoro_weather_report_row`、ready projection、ready latest body、detail 404、weekly-days 404、analysis unread filter |
+| `mashos-api/ai/tests/contract/test_publish_governance.py` | publish/access policyを通ったready artifactがこころ天気payloadを持つ前提と、旧fallbackを使わない境界 |
+| `mashos-api/ai/tests/contract/test_contract_snapshots_phase6e.py` | unread/status系snapshotとready artifact fixtureがこころ天気payloadを前提にしていること |
+| `Cocolon/tests/rn-screen-contracts.test.js` | 新cache namespace、旧cache cleanup、`isKokoroWeatherReportRecord`、history / viewer fail-closed、detail path helper |
+
+確認観点:
+
+- 旧レポートしかない場合、ready items は空またはこころ天気基準で返る。
+- 旧レポートID直指定では旧本文を返さない。
+- 旧レポートは未読バッジを立てない。
+- stateやlocal cacheから旧レポートが入っても、Viewerは `content_text` / `standardReport.contentText` を表示しない。
+
+## 2026-05-13 差分追記: わたしマップ contract / validation / QA 境界
+
+`わたしマップ` は public route 変更ではなく additive payload と visible copy 変更で導入する。contract 上は `/self-structure/*` を維持する。
+
+| area | current fact |
+|---|---|
+| public API | `/self-structure/latest` / `/self-structure/monthly/ensure` / `/self-structure/reports/{report_id}` は維持。`content_json.watashiMap` は additive field。 |
+| Free light | `/self-structure/latest` は Free でも `report_mode=light` 概要を返せる。既存 paid row を light 表示へ投影し、保存済み standard/deep を上書きしない。 |
+| subscription | `allowed_self_structure_modes_for_tier` が Free=light / Plus=standard / Premium=deep(structural) の境界を読む。 |
+| renderer QA | `WatashiMapRenderer` は `watashiMap` / `selfStructureDeepVisual` / `content_text` fallback を持つ。 |
+| safety QA | `あなたは〇〇タイプ`、人格断定、改善指導、未来予測に寄せない。役割は `この場面では〇〇の役割が立ち上がりやすい` と読む。 |
+| path QA | `components/selfStructure/watashiMapAccessPolicy.js` が存在し、screen import path と一致している。root `components/watashiMapAccessPolicy.js` は同内容の互換copyとして扱う。 |
+
+追加/更新された主な回帰テスト:
+
+| file | 確認内容 |
+|---|---|
+| `mashos-api/ai/tests/contract/test_self_structure_latest_free_light.py` | Free latest の light payload / `watashiMap` / lock 境界。 |
+| `mashos-api/ai/tests/test_self_structure_watashi_map_payload.py` | report generation 時の `content_json.watashiMap` と legacy payload 互換。 |
+| `mashos-api/ai/tests/test_subscription_self_structure_modes.py` | tier 別 Self Structure / わたしマップ mode。 |
+| `mashos-api/ai/tests/test_watashi_map_service.py` | builder / projection / not enough observation / type断定回避。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | renderer / lock / label / tutorial fixture / guide copy。 |
+
+# 2026-05-15 差分追記: EmlisAI Step15-20 contract / boundary / verification
+
+EmlisAI A案到達工程のcontract / boundary / verificationとして、次のcurrent pathを確認する。
+
+## runtime / contract owner
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py` | Step15 共通Core安定化。CoreTextPayload / TextGenerationResult / Guard結果 / used_evidence_span_ids / quality_flags が共通形式かをmeta化し、中核別出力目的・public契約・DB名を共通Coreへ移さないことを確認する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_rollout_metrics_service.py` | Step16 段階リリース計測。attempted / passed / rejected / unavailable / safety_blocked / primary_reason / coverage_group / composer_model をdeveloper/QA metaへ集計する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py` | Step18 A-P0移行判定。coverage matrix / rollout metrics / diagnostic_summary / Guard結果から、Step19へ進むかB案の戻り先Stepへ返すmetaを作る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_a_plan_equivalent_composer_service.py` | Step19 A案相当Composer導入。A-P0 green時だけ `cocolon_emlis_observation_composer.a1.v1` へpromoteし、B案Gate / scoped graph / fail-closed / passed-onlyを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_long_term_quality_service.py` | Step20 長期品質。previous output similarity、surface variation、history/cross core evidence-only、distance boundary、QA metricsをdeveloper/QA metaへ残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_composer_client_registry.py` | Default composer registry。Step19でA案相当composer aliasを受け、Limited / A-1相当を環境値で切り替えられるが、既存route/response keyは変えない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_coverage_matrix_service.py` | Step08 coverage matrix。停止理由をB-S1拡張対象のcoverage groupへ変換するdeveloper meta。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_release_service.py` | Phase7 / Step16 release gate。off/internal/tutorial/limited_cases/all の段階リリース判断とmetrics sourceを持つ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_safety_boundary_service.py` | Step10 safety boundary。Composer前に危険境界をreason code化して止める非生成helper。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_user_address_service.py` | Emlis観測の呼びかけpolicy。display name callを一箇所に閉じ、二人称依存を抑える。 |
+
+## verification owner
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_step15_stabilization.py` | Step15の共通形式・Emlis契約維持・境界drift検出・render metaを固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step16_rollout_metrics.py` | Step16のrollout metric event / aggregate / reply meta接続を固定する回帰。 |
+| `mashos-api/ai/tests/fixtures/emlis_ai_step17_broad_input_cases.py` | Step17 広い入力fixture。生活・体調・人間関係・学習・仕事・長文・履歴・cross coreを正解文一致ではなく構造条件で固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_step17_broad_input_fixtures.py` | Step17 fixtureのcoverage、forbidden_surface、evidence/scope条件を固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step18_ap0_migration_decision.py` | Step18のGreen条件、未達時return_steps、passed-onlyだけで進めない判定を固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step19_a_plan_equivalent_composer.py` | Step19のpromotion条件、未達時hold、B案境界維持、registry / limited composer接続を固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step20_long_term_quality.py` | Step20の反復表面、履歴補完禁止、距離感drift、A-2長期運用品質metaを固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_composer_client_registry.py` | Step02/06/19 registry・default composer・safety precedence回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_coverage_matrix_service.py` | Step08 coverage matrix group / reason mapping回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_diagnostic_summary.py` | Step01-10 diagnostic_summaryとsafety precedence回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_evidence_ledger_service.py` | Evidence Ledgerがsource span / offset / current input境界を保持し、本文生成しないことの回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_client.py` | LimitedComposerのPhraseUnit / role / SentencePlan / fixed surface禁止回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_observation_scope_service.py` | Scoped graph、included/excluded、safety_blocked、Step09 scope拡張回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_perspective_board_integrator.py` | Perspective board -> ObservationGraph integrationの構造回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase6_regression_contracts.py` | B案partial observation / non-passed空本文 / release readiness contract回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase7_staged_release.py` | Phase7 staged releaseのlimited_cases接続回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_safety_boundary_service.py` | Safety boundary reason code / graph・evidence検出回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_scoped_grounding.py` | scoped graphだけをGrounding対象にし、excluded evidenceでoverclaimを支えない回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_specialist_observers.py` | specialist observersが本文を作らずstructured reportだけ返す回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step13_surface_realizer.py` | Step13 surface policy、generic closing、TemplateGuard回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step14_guard_strengthening.py` | Step14 grounding / diagnosis-like / general knowledge / repeated surface回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_template_echo_guard_phase5.py` | Phase5 Template/Echo Gateの反復表面・過剰引用回帰。 |
+
+## contract固定
+
+- `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけユーザー表示する。
+- Common Coreは品質・根拠・Guardを共有する層であり、Emlis / Piece / Analysis の出力目的を統合しない。
+- A案相当composer名はinternal `composer_model` であり、public route / DB physical name / RN visible nameのrenameではない。
+- `test_emlis_ai_contracts.py` が環境依存で `jwt` importに止まる場合でも、JWT/subscription周辺をこの差分の対象にしない。

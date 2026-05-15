@@ -15,8 +15,9 @@ import {
   resolveSelfStructureUpdatedAt,
   resolveTodayQuestionUpdatedAt,
 } from "./analysisRouteModel";
+import { isKokoroWeatherReportRecord } from "../analysisReport/kokoroWeatherFormatters";
 
-const ANALYSIS_LATEST_REPORT_CACHE_PREFIX = "cocolon:analysisLatestReport";
+const ANALYSIS_LATEST_REPORT_CACHE_PREFIX = "cocolon:kokoroWeatherLatestReport:v1";
 const ANALYSIS_LATEST_REPORT_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const REPORT_TYPES = Object.freeze(["daily", "weekly", "monthly"]);
 
@@ -39,7 +40,7 @@ function isUsableCachedAnalysisReport(report, reportType) {
   const normalizedType = normalizeAnalysisReportType(reportType);
   if (!normalizedType || !report || typeof report !== "object") return false;
   const type = String(report?.report_type || normalizedType).trim().toLowerCase();
-  return !!report?.id && type === normalizedType;
+  return !!report?.id && type === normalizedType && isKokoroWeatherReportRecord(report);
 }
 
 async function readCachedAnalysisLatestReport(reportType) {
@@ -99,6 +100,41 @@ export function useAnalysisReportActions() {
   });
   const [homeSummariesLoading, setHomeSummariesLoading] = useState(false);
 
+  const applyHomeSummaryMeta = useCallback((homeSummary = {}) => {
+    const inputStatus = homeSummary?.input_status || {};
+    const currentWeather =
+      homeSummary?.current_weather && typeof homeSummary.current_weather === "object"
+        ? homeSummary.current_weather
+        : null;
+
+    const todayCount = Number(inputStatus?.today_count ?? 0);
+    const weekCount = Number(inputStatus?.week_count ?? 0);
+    const monthCount = Number(inputStatus?.month_count ?? 0);
+
+    setEntryMeta((prev) => ({
+      ...prev,
+      inputHistoryLatestDate: pickLatestIso([
+        inputStatus?.last_input_at,
+        prev?.inputHistoryLatestDate,
+      ]),
+      todayCount: Number.isFinite(todayCount) ? todayCount : 0,
+      weekCount: Number.isFinite(weekCount) ? weekCount : 0,
+      monthCount: Number.isFinite(monthCount) ? monthCount : 0,
+      currentWeather,
+    }));
+  }, []);
+
+  const refreshCurrentWeatherSummary = useCallback(async () => {
+    try {
+      const homeSummary = await apiGet(ANALYSIS_WIRE.routes.homeSummary);
+      applyHomeSummaryMeta(homeSummary && typeof homeSummary === "object" ? homeSummary : {});
+      return true;
+    } catch (e) {
+      console.warn("AnalysisScreen: failed to refresh current weather summary", e);
+      return false;
+    }
+  }, [applyHomeSummaryMeta]);
+
   const fetchLatestReadyReport = useCallback(async (type) => {
     const normalizedType = normalizeAnalysisReportType(type);
     if (!normalizedType) return null;
@@ -110,7 +146,7 @@ export function useAnalysisReportActions() {
         )}&limit=${ANALYSIS_READY_LIMIT}&offset=0&include_body=true`
       );
       const items = extractReadyItems(json);
-      const latest = items[0] || null;
+      const latest = items.find((item) => isUsableCachedAnalysisReport(item, normalizedType)) || null;
       if (latest) {
         void writeCachedAnalysisLatestReport(normalizedType, latest);
       }
@@ -202,11 +238,7 @@ export function useAnalysisReportActions() {
         if (homeSummaryRes.status === "rejected") {
           console.warn("AnalysisScreen: failed to refresh home summary", homeSummaryRes.reason);
         }
-        const inputStatus = homeSummary?.input_status || {};
-        const currentWeather =
-          homeSummary?.current_weather && typeof homeSummary.current_weather === "object"
-            ? homeSummary.current_weather
-            : null;
+        applyHomeSummaryMeta(homeSummary);
 
         const todayQuestionItems =
           todayQuestionRes.status === "fulfilled" && Array.isArray(todayQuestionRes.value?.items)
@@ -216,21 +248,15 @@ export function useAnalysisReportActions() {
           console.warn("AnalysisScreen: failed to refresh today question history", todayQuestionRes.reason);
         }
 
-        const todayCount = Number(inputStatus?.today_count ?? 0);
-        const weekCount = Number(inputStatus?.week_count ?? 0);
-        const monthCount = Number(inputStatus?.month_count ?? 0);
-
-        setEntryMeta((prev) => ({
-          ...prev,
-          inputHistoryLatestDate: pickLatestIso([
-            inputStatus?.last_input_at,
-            resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
-          ]),
-          todayCount: Number.isFinite(todayCount) ? todayCount : 0,
-          weekCount: Number.isFinite(weekCount) ? weekCount : 0,
-          monthCount: Number.isFinite(monthCount) ? monthCount : 0,
-          currentWeather,
-        }));
+        if (todayQuestionItems[0]) {
+          setEntryMeta((prev) => ({
+            ...prev,
+            inputHistoryLatestDate: pickLatestIso([
+              prev?.inputHistoryLatestDate,
+              resolveTodayQuestionUpdatedAt(todayQuestionItems[0]),
+            ]),
+          }));
+        }
       };
 
       try {
@@ -261,7 +287,7 @@ export function useAnalysisReportActions() {
         }
       }
     },
-    [fetchLatestReadyReport]
+    [applyHomeSummaryMeta, fetchLatestReadyReport]
   );
 
   return {
@@ -269,5 +295,6 @@ export function useAnalysisReportActions() {
     homeSummariesLoading,
     fetchLatestReadyReport,
     refreshHomeSummaries,
+    refreshCurrentWeatherSummary,
   };
 }

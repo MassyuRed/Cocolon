@@ -7,14 +7,16 @@
       "POST /emotion/piece/publish",
       "GET /nexus/pieces",
       "POST /analysis/reports/ensure",
-      "GET /analysis/reports/ready"
+      "GET /analysis/reports/ready",
+      "GET /self-structure/latest"
     ],
     "services": [
       "emotion_piece_generation_service.generate_emotion_reflection_preview",
       "emlis_ai_reply_service.render_emlis_ai_reply",
       "api_analysis_reports._render_daily_standard_v3_text",
       "api_analysis_reports._render_weekly_standard_v3_text",
-      "api_analysis_reports._render_monthly_standard_v3_text"
+      "api_analysis_reports._render_monthly_standard_v3_text",
+      "watashi_map_service.build_watashi_map"
     ],
     "display_name_placeholder": "__DISPLAY_NAME__"
   },
@@ -725,6 +727,167 @@
         "content_text": "こころ天気（月）：整える行動が感情を支えた月\n対象期間（JST）: 2026/5/1 00:00 〜 2026/5/31 23:59\n\n【今月、見えていたこと】\n今月は「平穏」が中心に現れていました。週をまたいで「平穏」が繰り返し中心になっていました。\n\n【気持ちの変化】\n・第1週は「平穏」が中心でした。\n・第2週は「平穏」が中心でした。\n・後半にかけて、少し整え直すような動きも見えていました。\n\n【このレポートについて】\nこのレポートは、入力から見える変化をまとめた『観測』です。\n診断や断定を目的としたものではありません。",
         "content_json": "{\"standardReport\":{\"title\":\"こころ天気（月）：整える行動が感情を支えた月\",\"contentText\":\"こころ天気（月）：整える行動が感情を支えた月\\n対象期間（JST）: 2026/5/1 00:00 〜 2026/5/31 23:59\\n\\n【今月、見えていたこと】\\n今月は「平穏」が中心に現れていました。週をまたいで「平穏」が繰り返し中心になっていました。\\n\\n【気持ちの変化】\\n・第1週は「平穏」が中心でした。\\n・第2週は「平穏」が中心でした。\\n・後半にかけて、少し整え直すような動きも見えていました。\\n\\n【このレポートについて】\\nこのレポートは、入力から見える変化をまとめた『観測』です。\\n診断や断定を目的としたものではありません。\",\"weeks\":[{\"label\":\"第1週\",\"joy\":10,\"sadness\":2,\"anxiety\":11,\"anger\":0,\"calm\":16},{\"label\":\"第2週\",\"joy\":12,\"sadness\":2,\"anxiety\":9,\"anger\":1,\"calm\":20},{\"label\":\"第3週\",\"joy\":14,\"sadness\":1,\"anxiety\":7,\"anger\":0,\"calm\":24},{\"label\":\"第4週\",\"joy\":13,\"sadness\":1,\"anxiety\":8,\"anger\":0,\"calm\":22}]},\"metrics\":{\"totalAll\":154,\"totals\":{\"joy\":49,\"sadness\":6,\"anxiety\":35,\"anger\":1,\"calm\":63},\"topMotifs\":[{\"label\":\"不安→平穏\",\"count\":8},{\"label\":\"平穏→喜び\",\"count\":6},{\"label\":\"喜び→平穏\",\"count\":4}]},\"weeks\":[{\"label\":\"第1週\",\"joy\":10,\"sadness\":2,\"anxiety\":11,\"anger\":0,\"calm\":16},{\"label\":\"第2週\",\"joy\":12,\"sadness\":2,\"anxiety\":9,\"anger\":1,\"calm\":20},{\"label\":\"第3週\",\"joy\":14,\"sadness\":1,\"anxiety\":7,\"anger\":0,\"calm\":24},{\"label\":\"第4週\",\"joy\":13,\"sadness\":1,\"anxiety\":8,\"anger\":0,\"calm\":22}],\"kokoroWeather\":{\"version\":\"kokoro.weather.v1\",\"report_type\":\"monthly\",\"period_label\":\"2026/5\",\"summary\":{\"weather_key\":\"clear\",\"weather_label\":\"ひらけ気味\",\"temperature_high\":25,\"temperature_low\":18,\"emotion_share_pct\":{\"joy\":32,\"sadness\":4,\"anxiety\":23,\"anger\":1,\"calm\":41},\"dominant_emotion\":{\"key\":\"calm\",\"label\":\"平穏\",\"share_pct\":41},\"input_count\":154,\"observation_memo\":{\"visible\":true,\"label\":\"観測メモあり\",\"detail\":\"月の後半にかけて整え直す動きが見えていました。\"}},\"items\":[{\"kind\":\"week\",\"week_key\":\"week-1\",\"label\":\"第1週\",\"weather_key\":\"partly_cloudy\",\"weather_label\":\"うすぐもり\",\"temperature_high\":24,\"temperature_low\":18,\"emotion_share_pct\":{\"joy\":26,\"sadness\":5,\"anxiety\":28,\"anger\":0,\"calm\":41},\"dominant_emotion\":{\"key\":\"calm\",\"label\":\"平穏\",\"share_pct\":41},\"input_count\":39},{\"kind\":\"week\",\"week_key\":\"week-2\",\"label\":\"第2週\",\"weather_key\":\"clear\",\"weather_label\":\"ひらけ気味\",\"temperature_high\":25,\"temperature_low\":19,\"emotion_share_pct\":{\"joy\":29,\"sadness\":5,\"anxiety\":21,\"anger\":2,\"calm\":48},\"dominant_emotion\":{\"key\":\"calm\",\"label\":\"平穏\",\"share_pct\":48},\"input_count\":42},{\"kind\":\"week\",\"week_key\":\"week-3\",\"label\":\"第3週\",\"weather_key\":\"clear\",\"weather_label\":\"ひらけ気味\",\"temperature_high\":25,\"temperature_low\":20,\"emotion_share_pct\":{\"joy\":34,\"sadness\":2,\"anxiety\":17,\"anger\":0,\"calm\":58},\"dominant_emotion\":{\"key\":\"calm\",\"label\":\"平穏\",\"share_pct\":58},\"input_count\":41},{\"kind\":\"week\",\"week_key\":\"week-4\",\"label\":\"第4週\",\"weather_key\":\"partly_cloudy\",\"weather_label\":\"うすぐもり\",\"temperature_high\":24,\"temperature_low\":19,\"emotion_share_pct\":{\"joy\":33,\"sadness\":3,\"anxiety\":20,\"anger\":0,\"calm\":55},\"dominant_emotion\":{\"key\":\"calm\",\"label\":\"平穏\",\"share_pct\":55},\"input_count\":40}]}}"
       }
+    },
+    "watashi_map": {
+      "id": "tutorial-watashi-map-light-20260502",
+      "report_type": "self_structure",
+      "title": "今のわたしマップ：整える役割が見えています",
+      "period_label": "直近28日",
+      "period_start": "2026-04-05T00:00:00+09:00",
+      "period_end": "2026-05-02T23:59:59+09:00",
+      "generated_at": "2026-05-02T12:05:09.096393+00:00",
+      "updated_at": "2026-05-02T12:05:09.096393+00:00",
+      "viewer_tier": "free",
+      "report_mode": "light",
+      "content_text": "詳しい自己分析レポート\n仕事や生活の未整理な場面では、整える役割が立ち上がりやすく見えます。まず状況を小さく整え、落ち着ける流れが見えています。",
+      "content_json": {
+        "watashiMap": {
+          "version": "watashi.map.v1",
+          "status": "ok",
+          "label": "わたしマップ",
+          "period_label": "直近28日",
+          "report_mode": "light",
+          "visibility": {
+            "viewer_tier": "free",
+            "summary_visible": true,
+            "role_switches_visible": true,
+            "routes_visible": false,
+            "crossroads_visible": false,
+            "unknown_areas_visible": true,
+            "detail_report_visible": false,
+            "locked_sections": [
+              "routes",
+              "crossroads",
+              "detail_report"
+            ],
+            "lock_label": "詳しい自己分析レポートは Plus プラン以上で読めます。"
+          },
+          "overview": {
+            "title": "今のわたしマップ",
+            "summary": "仕事や生活の未整理な場面では、整える役割が立ち上がりやすく見えます。",
+            "active_contexts": [
+              {
+                "key": "work",
+                "label": "仕事",
+                "share_label": "よく見えています"
+              },
+              {
+                "key": "life",
+                "label": "生活",
+                "share_label": "少し見えてきました"
+              }
+            ],
+            "active_roles": [
+              {
+                "key": "organizer",
+                "label": "整える役割"
+              }
+            ],
+            "action_tendencies": [
+              {
+                "key": "tidy_first",
+                "label": "先に整理する"
+              },
+              {
+                "key": "make_space",
+                "label": "小さく余白を作る"
+              }
+            ],
+            "observation_amount": {
+              "level": "medium",
+              "label": "少し見えてきました"
+            }
+          },
+          "role_switches": [
+            {
+              "context": {
+                "key": "work",
+                "label": "仕事",
+                "kind": "environment"
+              },
+              "role": {
+                "key": "organizer",
+                "label": "整える役割"
+              },
+              "tendency_label": "立ち上がりやすい",
+              "score_display": "●●",
+              "evidence_count": 4,
+              "route_preview": "未整理な場面に触れると、まず状況を小さく整えようとする流れが見えます。",
+              "safe_note": "これは性格タイプではなく、この場面で見えた動き方です。"
+            },
+            {
+              "context": {
+                "key": "self",
+                "label": "自分自身",
+                "kind": "self"
+              },
+              "role": {
+                "key": "protector",
+                "label": "守る役割"
+              },
+              "tendency_label": "立ち上がることがあります",
+              "score_display": "●",
+              "evidence_count": 2,
+              "route_preview": "疲れが見えたとき、一度距離を置いて落ち着ける流れが見えます。",
+              "safe_note": "これは性格タイプではなく、この場面で見えた動き方です。"
+            }
+          ],
+          "routes": [
+            {
+              "title": "仕事でよく通るルート",
+              "steps": [
+                {
+                  "label": "場面",
+                  "text": "未整理な状況に触れる"
+                },
+                {
+                  "label": "役割スイッチ",
+                  "text": "整える役割"
+                },
+                {
+                  "label": "選びやすい行動",
+                  "text": "先に小さく片づける"
+                },
+                {
+                  "label": "起こりやすい結果",
+                  "text": "落ち着きやすい流れが生まれる"
+                }
+              ]
+            }
+          ],
+          "crossroads": [
+            {
+              "context": {
+                "key": "work",
+                "label": "仕事"
+              },
+              "self_role": {
+                "label": "落ち着いていたい"
+              },
+              "observed_role": {
+                "label": "整える役割"
+              },
+              "desired_role": {
+                "label": "余白を持って関わる役割"
+              },
+              "note": "未整理な場面では先に整えようとする流れが見えています。"
+            }
+          ],
+          "unknown_areas": [
+            {
+              "label": "友人との場面",
+              "reason": "入力がまだ少なく、役割を言い切らない状態です。",
+              "next_observation_hint": "次に友人との関わりを入力すると、地図が見えやすくなります。"
+            }
+          ],
+          "detail_report": {
+            "title": "詳しい自己分析レポート",
+            "visible": false,
+            "source": "content_text",
+            "lock_label": "詳しい自己分析レポートは Plus プラン以上で読めます。"
+          }
+        }
+      }
     }
   },
   "validation": {
@@ -802,6 +965,16 @@
       },
       {
         "name": "analysis.monthly",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "watashi_map.light_payload",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "watashi_map.non_type_copy",
         "passed": true,
         "detail": ""
       }

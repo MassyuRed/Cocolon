@@ -18,18 +18,10 @@ export default function AnalysisTopScreen({
   tutorialRefs,
   emotionUpdateLabel,
   selfStructureUpdateLabel,
-  todayCount = 0,
-  weekCount = 0,
-  monthCount = 0,
   unreadEmotion = false,
   unreadSelfStructure = false,
 }) {
   const { styles, colors } = useAnalysisMenuStyles();
-
-
-  const safeTodayCount = Math.max(0, Number(todayCount) || 0);
-  const safeWeekCount = Math.max(0, Number(weekCount) || 0);
-  const safeMonthCount = Math.max(0, Number(monthCount) || 0);
 
   return (
     <AnalysisMenuScroll scrollRef={tutorialScrollRef} onScroll={onTutorialScroll}>
@@ -52,23 +44,6 @@ export default function AnalysisTopScreen({
         </View>
       </View>
 
-      <View style={styles.summaryBlock}>
-        <View style={styles.summaryInner}>
-          <View style={styles.summaryHeaderRow}>
-            <Ionicons
-              name="radio-outline"
-              size={14}
-              color={colors.TITLE_GOLD}
-              style={styles.summaryIcon}
-            />
-            <Text style={styles.summaryLabel}>あなたの入力状況</Text>
-          </View>
-          <Text style={styles.summaryText}>{`今日の入力回数は${safeTodayCount}回です`}</Text>
-          <Text style={styles.summaryText}>{`今週の入力回数は${safeWeekCount}回です`}</Text>
-          <Text style={styles.summaryText}>{`今月の入力回数は${safeMonthCount}回です`}</Text>
-        </View>
-      </View>
-
       <View ref={tutorialRefs?.emotionRef} collapsable={false}>
         <MenuActionCard
           title="感情分析"
@@ -84,14 +59,14 @@ export default function AnalysisTopScreen({
 
       <View ref={tutorialRefs?.selfStructureRef} collapsable={false} style={{ marginTop: 16 }}>
         <MenuActionCard
-          title="自己分析"
-          description="考え方や反応の傾向を確認します"
+          title="わたしマップ"
+          description="場面ごとの役割と行動パターンを確認します"
           metaText={selfStructureUpdateLabel}
-          buttonLabel="自己分析を見る"
+          buttonLabel="わたしマップを見る"
           buttonIconName="git-network-outline"
           onPress={onOpenSelfStructure}
           badgeVisible={unreadSelfStructure}
-          accessibilityLabel="自己分析を見る"
+          accessibilityLabel="わたしマップを見る"
         />
       </View>
 

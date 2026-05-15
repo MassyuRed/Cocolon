@@ -371,6 +371,55 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   ], 'InputScreen.js must not force tutorial Emlis observation passed');
 });
 
+
+test('Step 07 Emlis observation frontend regression keeps passed-only modal display fail-closed', () => {
+  const input = read('screens/InputScreen.js');
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+
+  assertIncludes(inputFeedback, [
+    'const EMLIS_OBSERVATION_STATUS = Object.freeze({',
+    'PASSED: "passed"',
+    'REJECTED: "rejected"',
+    'UNAVAILABLE: "unavailable"',
+    'SAFETY_BLOCKED: "safety_blocked"',
+    'getEmlisObservationStatus(input) === EMLIS_OBSERVATION_STATUS.PASSED',
+    'Boolean(getEmlisObservationCommentText(input))',
+    'observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText',
+    'return null;',
+  ], 'inputFeedbackModel.js Step 07 passed-only payload guard');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'if (!payload) {',
+    'setInputFeedbackModalVisible(false);',
+    'setInputFeedbackModalText("");',
+    'observationStatus: getEmlisObservationStatus(input)',
+    'return false;',
+    'setInputFeedbackModalVisible(true);',
+    'return true;',
+  ], 'useInputFeedbackModal.js Step 07 rejected/unavailable/safety hide guard');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'visible &&',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status,',
+    '<Modal visible={shouldShow}',
+  ], 'InputFeedbackReplyModal.js Step 07 modal visibility guard');
+
+  assertIncludes(input, [
+    'const openedObservation = openInputFeedbackModal',
+    'if (!openedObservation)',
+    'observationStatus: inputFeedbackAI?.observation_status',
+  ], 'InputScreen.js Step 07 opens modal only through passed-only helper');
+  assertNotIncludes(input, [
+    'observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status || "passed"',
+    'observationStatus: inputFeedbackAI?.observation_status || "passed"',
+  ], 'InputScreen.js Step 07 must not force rejected/unavailable/safety observations to passed');
+});
+
 test('Home hooks preserve startup popup priority, today question, and Piece quota screen state', () => {
   const state = read('features/home/useHomeState.js');
   const actions = read('features/home/useHomeActions.js');
@@ -408,6 +457,10 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
   const kokoroWeatherForecastStrip = read('screens/analysisReport/KokoroWeatherForecastStrip.js');
   const kokoroWeatherDetailModal = read('screens/analysisReport/KokoroWeatherDetailModal.js');
   const kokoroWeatherFormatters = read('screens/analysisReport/kokoroWeatherFormatters.js');
+  const analysisReportHistory = read('screens/AnalysisReportHistoryScreen.js');
+  const analysisReportViewer = read('screens/AnalysisReportViewerScreen.js');
+  const accountLocalCleanup = read('lib/accountLocalCleanup.js');
+  const legacyWireContracts = read('lib/compat/legacyWireContracts.js');
   const analysisSelfStructureActions = read('screens/analysis/useAnalysisSelfStructureActions.js');
   const analysisTutorialOverlay = read('screens/analysis/useAnalysisTutorialOverlay.js');
 
@@ -427,6 +480,7 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'from "./analysis/useAnalysisUnreadBadges";',
     'from "./analysis/useAnalysisReportActions";',
     'from "./analysis/useAnalysisSelfStructureActions";',
+    'from "./analysisReport/kokoroWeatherFormatters";',
     'from "./analysis/useAnalysisTutorialOverlay";',
   ], 'AnalysisScreen.js');
 
@@ -466,21 +520,29 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'export function useAnalysisReportActions',
     'fetchLatestReadyReport',
     'refreshHomeSummaries',
+    'refreshCurrentWeatherSummary',
     'readCachedAnalysisLatestReport',
     'writeCachedAnalysisLatestReport',
+    'cocolon:kokoroWeatherLatestReport:v1',
+    'isKokoroWeatherReportRecord',
     'ANALYSIS_WIRE.routes.reportsReady',
     'getTodayQuestionHistory',
     'currentWeather',
     'homeSummary.current_weather',
+    'applyHomeSummaryMeta',
   ], 'useAnalysisReportActions.js');
 
   assertIncludes(analysis, [
     'currentWeather={entryMeta.currentWeather}',
+    'consumeAnalysisHomeSummaryDirty',
+    'refreshCurrentWeatherSummary',
   ], 'AnalysisScreen.js current weather prop');
 
   assertIncludes(analysisContentFirst, [
     'KokoroWeatherCurrentCard',
+    'こころ天気',
     'currentWeather',
+    'isKokoroWeatherReportRecord',
     'handleOpenPreviousKokoroWeather',
     'こころ天気（日）',
     'こころ天気（週）',
@@ -530,7 +592,36 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'export function formatKokoroTemperature',
     'export function getKokoroWeatherReportLabel',
     'export function buildKokoroWeatherDetailTitle',
+    'export function extractKokoroWeatherPayloadFromContentJson',
+    'export function isKokoroWeatherReportRecord',
+    'standard_report_kokoro_weather_version',
   ], 'kokoroWeatherFormatters.js split guard');
+
+  assertIncludes(analysisReportHistory, [
+    'buildAnalysisReportDetailPath',
+    'fetchKokoroWeatherReportDetail',
+    'extractReadyItems(json).filter(isKokoroWeatherReportRecord)',
+    'このこころ天気は現在の表示対象外です。',
+  ], 'AnalysisReportHistoryScreen.js kokoro weather fail-closed guard');
+
+  assertIncludes(analysisReportViewer, [
+    'isKokoroWeatherDisplayTarget',
+    'このこころ天気は現在の表示対象外です',
+    'こころ天気として成立していない旧レポートは表示しません。',
+    '!isKokoroWeatherDisplayTarget || reportType !== "weekly"',
+  ], 'AnalysisReportViewerScreen.js kokoro weather fail-closed guard');
+
+  assertIncludes(accountLocalCleanup, [
+    'cocolon:analysisLatestReport',
+    'cocolon:kokoroWeatherLatestReport:v1',
+    'buildKokoroWeatherLatestReportCachePrefix',
+  ], 'accountLocalCleanup.js kokoro weather cache cleanup guard');
+
+  assertIncludes(legacyWireContracts, [
+    'export function buildAnalysisReportDetailPath',
+    'buildAnalysisReportWeeklyDaysPath',
+    'buildAnalysisReportDetailPath(reportId)',
+  ], 'legacyWireContracts.js analysis report detail path guard');
 
   assertIncludes(analysisSelfStructureActions, [
     'export function useAnalysisSelfStructureActions',
@@ -821,9 +912,13 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
     'TUTORIAL_CONNECTION_ROWS',
     'TUTORIAL_SELF_PIECE',
     'TUTORIAL_FOLLOWED_USER_PIECE',
+    'TUTORIAL_WATASHI_MAP',
+    'TUTORIAL_WATASHI_MAP_PREVIEW',
     'Emlisの観測',
-    '分析レポート',
+    'こころ天気',
+    'わたしマップ',
     'ピース',
+    '4つの形で受け取れます',
   ], 'tutorialScenarioData.js');
 });
 
@@ -1216,6 +1311,7 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   assertIncludes(contentFirst, [
     'KokoroWeatherCurrentCard',
     'currentWeather',
+    'isKokoroWeatherReportRecord',
     'handleOpenPreviousKokoroWeather',
     '{ key: "daily", label: "こころ天気（日）" }',
     '{ key: "weekly", label: "こころ天気（週）" }',
@@ -1250,7 +1346,7 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   assertIncludes(guide, [
     'こころ天気（日）・こころ天気（週）・こころ天気（月）',
     '感情分析のこころ天気',
-    '自己分析では、入力の積み重ねから見える自分の構造を確認できます。',
+    'わたしマップの入口はFreeプランでも見られます。Plusプラン以上では、役割スイッチの一覧、よく通るルート、詳しい自己分析レポートを読めます。',
   ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
 
   assertIncludes(terms, [
@@ -1284,4 +1380,267 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
     'こころ天気（月）',
     '今のこころ天気',
   ], 'Self Structure surfaces must not be kokoro-weatherized');
+});
+
+test('Watashi Map Phase 3 updates top UI labels and keeps Free latest entry open', () => {
+  const contentFirst = read('screens/AnalysisContentFirstScreen.js');
+  const top = read('screens/AnalysisTopScreen.js');
+  const analysis = read('screens/AnalysisScreen.js');
+  const selfMenu = read('screens/AnalysisSelfStructureScreen.js');
+  const selfActions = read('screens/analysis/useAnalysisSelfStructureActions.js');
+  const generate = read('screens/SelfStructureReportGenerateScreen.js');
+  const unread = read('screens/analysis/useAnalysisUnreadBadges.js');
+  const guide = read('guide/guidesJa.js');
+  const terms = read('guide/termsJa.js');
+  const iap = read('lib/iap/iapRuntimeCatalog.js');
+  const tutorial = read('tutorial/tutorialScenarioData.js');
+
+  assertIncludes(contentFirst, [
+    '{ key: "self", label: "わたしマップ" }',
+    'titleOverride="今のわたしマップ"',
+    'わたしマップの履歴を見る',
+  ], 'AnalysisContentFirstScreen.js watashi map top tab');
+
+  assertIncludes(top + analysis + selfMenu, [
+    'わたしマップ',
+    '今のわたしマップ',
+    '場面ごとの役割',
+    'わたしマップの履歴',
+  ], 'Analysis top/self menu watashi map labels');
+
+  assertIncludes(selfActions, [
+    'requiresPaid = false',
+    'targetRoute: ROUTE_SELF_REPORT_GENERATE',
+    'requiresPaid: false',
+    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+  ], 'Self structure actions keep latest and history route open while screens gate detail');
+
+  assertIncludes(generate, [
+    'free: ["light"]',
+    'light: "概要"',
+    'standard: "標準マップ"',
+    'deep: "深いマップ"',
+    'titleOverride = "今のわたしマップ"',
+    '詳しい自己分析レポート',
+    'まだ地図にできる観測が少なめです',
+  ], 'SelfStructureReportGenerateScreen.js watashi map labels and light mode');
+
+  assertIncludes(unread, [
+    'if (subscriptionLoading) return false;',
+    '!!(selfStructureLatestUnread || (isPaid && selfStructureHistoryUnread))',
+  ], 'Self Structure unread latest can surface for Free while history stays paid');
+
+  assertIncludes(guide + terms + iap + tutorial, [
+    'わたしマップでは、あなたがどんな場面でどんな役割になりやすいか、そしてそのとき選びやすい行動を見ていきます。',
+    '詳しい自己分析レポート',
+    'わたしマップで役割スイッチ',
+  ], 'Watashi map copy is propagated to guide, terms, IAP, and tutorial');
+});
+
+test('Watashi Map Phase 4 renderer surfaces watashiMap cards and legacy fallback', () => {
+  const renderer = read('components/selfStructure/WatashiMapRenderer.js');
+  const overview = read('components/selfStructure/WatashiMapOverviewCard.js');
+  const roleSwitch = read('components/selfStructure/RoleSwitchList.js');
+  const route = read('components/selfStructure/RoutePatternCard.js');
+  const crossroad = read('components/selfStructure/CrossroadCard.js');
+  const unknown = read('components/selfStructure/UnknownAreaCard.js');
+  const formatters = read('components/selfStructure/watashiMapFormatters.js');
+  const generate = read('screens/SelfStructureReportGenerateScreen.js');
+  const viewer = read('screens/SelfStructureReportViewerScreen.js');
+
+  assertIncludes(formatters, [
+    'export function normalizeWatashiMapPayload',
+    'export function hasWatashiMapRenderableContent',
+    'export function adaptSelfStructureDeepVisualToWatashiMap',
+    'watashi.map.v1',
+    'selfStructureDeepVisual',
+    '詳しい自己分析レポートは Plus プラン以上で読めます。',
+  ], 'watashiMapFormatters.js normalizes additive payload and legacy visual fallback');
+
+  assertIncludes(renderer, [
+    'export default function WatashiMapRenderer',
+    'WatashiMapOverviewCard',
+    'RoleSwitchList',
+    'RoutePatternCard',
+    'CrossroadCard',
+    'UnknownAreaCard',
+    'normalizeWatashiMapPayload',
+    'LockedSectionCard',
+    '詳しい自己分析レポート',
+    'Plusでは、役割スイッチの一覧と、よく通るルートを詳しく読めます。',
+  ], 'WatashiMapRenderer.js composes watashi map cards and lock card');
+
+  assertIncludes(overview + roleSwitch + route + crossroad + unknown, [
+    '今のわたしマップ',
+    '人は、相手や場所によって少しずつ違う自分で動いています。',
+    '役割スイッチ',
+    'よく通るルート',
+    '迷いやすい分かれ道',
+    'まだ地図にない場所',
+  ], 'Watashi Map card components expose user-facing labels');
+
+  assertIncludes(generate, [
+    'import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";',
+    'hasWatashiMapRenderableContent',
+    'normalizeWatashiMapPayload',
+    'shouldShowDetailText',
+    'viewerTier={subscriptionTier}',
+    'onUpgradePress={openSubscriptionSelect}',
+  ], 'SelfStructureReportGenerateScreen.js uses WatashiMapRenderer and hides locked detail text');
+
+  assertIncludes(viewer, [
+    'import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";',
+    'viewerTier = normalizeSubscriptionTier(tier)',
+    'hasWatashiMapRenderableContent',
+    'normalizeWatashiMapPayload',
+    'detailReportVisible',
+    'getWatashiMapDetailLockLabel',
+  ], 'SelfStructureReportViewerScreen.js renders watashiMap before legacy text fallback');
+});
+
+test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
+  const access = read('components/selfStructure/watashiMapAccessPolicy.js');
+  const actions = read('screens/analysis/useAnalysisSelfStructureActions.js');
+  const analysis = read('screens/AnalysisScreen.js');
+  const history = read('screens/SelfStructureReportHistoryScreen.js');
+  const viewer = read('screens/SelfStructureReportViewerScreen.js');
+  const formatters = read('components/selfStructure/watashiMapFormatters.js');
+
+  assertIncludes(access, [
+    'export function canViewWatashiMapHistory',
+    'export function canViewWatashiMapDetailReport',
+    'export function canExportWatashiMapPdf',
+    '履歴の閲覧範囲：Freeは最新概要のみ',
+    '履歴の閲覧範囲：直近1年分',
+    '履歴の閲覧範囲：無制限',
+    'Freeプランでは今のわたしマップ概要を見られます。過去の詳しい自己分析レポートの履歴はPlusプラン以上で読めます。',
+    '長期の変化と深い分かれ道はPremiumプランで見られます。',
+  ], 'watashiMapAccessPolicy.js defines Phase 5 tier boundaries');
+
+  assertIncludes(actions, [
+    'openSelfReportHistory',
+    'requiresPaid: false',
+    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+  ], 'useAnalysisSelfStructureActions.js lets history screen own Free/Plus/Premium gating');
+
+  assertIncludes(analysis, [
+    'onOpenLatest={() => openSelfReportLatest("light", ROUTE_SELF_STRUCTURE)}',
+    'onOpenSubscription={openSubscriptionSelect}',
+  ], 'AnalysisScreen.js passes latest and subscription actions into self history/detail');
+
+  assertIncludes(history, [
+    'canViewWatashiMapHistory',
+    'getWatashiMapHistoryRetentionLabel',
+    'getWatashiMapHistoryLockBody',
+    '今のわたしマップを見る',
+    'まだわたしマップの履歴がありません',
+    'formatWatashiMapReportModeLabel',
+    'Exported from Cocolon / Watashi Map',
+  ], 'SelfStructureReportHistoryScreen.js renders Phase 5 history lock and labels');
+
+  assertIncludes(viewer, [
+    'canViewWatashiMapDetailReport',
+    'getWatashiMapDetailLockLabel',
+    'onOpenSubscription',
+    'onUpgradePress={onOpenSubscription}',
+    'Exported from Cocolon / Watashi Map',
+  ], 'SelfStructureReportViewerScreen.js gates detail text and upgrade action by tier');
+
+  assertIncludes(formatters, [
+    'formatReportModeLabel',
+    'report_mode_label',
+    'getWatashiMapDetailLockLabel',
+    'canViewWatashiMapDetailReport',
+  ], 'watashiMapFormatters.js projects Phase 5 visibility into renderer payload');
+});
+
+
+
+
+test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned', () => {
+  const tutorialFlow = read('screens/TutorialFlowScreen.js');
+  const nexus = read('screens/NexusScreen.js');
+  const scenario = read('tutorial/tutorialScenarioData.js');
+  const fixtures = read('tutorial/generated/tutorialFixtures.generated.json');
+  const guide = read('guide/guidesJa.js');
+  const terms = read('guide/termsJa.js');
+  const iap = read('lib/iap/iapRuntimeCatalog.js');
+  const tutorialOverlay = read('screens/analysis/useAnalysisTutorialOverlay.js');
+  const mainTabs = read('navigation/MainTabs.js');
+  const todayQuestionHistory = read('screens/TodayQuestionHistoryScreen.js');
+  const crossLink = read('screens/AnalysisCrossLinkSection.js');
+  const access = read('components/selfStructure/watashiMapAccessPolicy.js');
+  const renderer = read('components/selfStructure/WatashiMapRenderer.js');
+  const formatters = read('components/selfStructure/watashiMapFormatters.js');
+
+  assertIncludes(scenario, [
+    'const FIXTURE_SELF_STRUCTURE',
+    'parseMaybeJsonObject',
+    'export const TUTORIAL_WATASHI_MAP',
+    'FALLBACK_WATASHI_MAP',
+    '4つの形で受け取れます',
+    '自分の動き方を見る',
+    'これは性格タイプではなく、この場面で見えた動き方です。',
+  ], 'tutorialScenarioData.js exposes watashi map tutorial payload and 4-connection copy');
+
+  assertIncludes(fixtures, [
+    'GET /self-structure/latest',
+    'watashi_map_service.build_watashi_map',
+    '"watashi_map"',
+    '"watashiMap"',
+    '"version": "watashi.map.v1"',
+    '"report_mode": "light"',
+    '"role_switches"',
+    '"routes"',
+    '"crossroads"',
+    '"unknown_areas"',
+    '"detail_report"',
+    '"watashi_map.light_payload"',
+    '"watashi_map.non_type_copy"',
+    'これは性格タイプではなく、この場面で見えた動き方です。',
+  ], 'tutorialFixtures.generated.json contains watashiMap light fixture and safety checks');
+
+  assertIncludes(tutorialFlow + nexus, [
+    '感情入力からつながる4つの体験',
+    '主要な4つの要素',
+  ], 'Tutorial flow and Nexus handoff explain four tutorial experiences');
+
+  assertIncludes(todayQuestionHistory + mainTabs + crossLink, [
+    '今のわたしマップが更新されました',
+    '回答を更新しました。わたしマップに反映されます。',
+    '過去の回答を編集すると、わたしマップに反映されます。',
+    '【わたしマップの深掘り候補】',
+    'ピースを開いて「わたしマップ」または「ピースライブラリ」',
+    'わたしマップやピースで触れると良さそうな論点',
+  ], 'Late copy surfaces use watashi map naming');
+
+  assertIncludes(guide + terms + iap + tutorialOverlay + access + formatters + renderer, [
+    'わたしマップは性格タイプを決めるものではなく、入力から見えた場面ごとの役割と行動パターンを整理する場所です。',
+    'reading: "わたしマップ"',
+    'これは性格タイプではなく、入力から見えた場面ごとの動き方です。',
+    'わたしマップで役割スイッチ',
+    '履歴の閲覧範囲：Freeは最新概要のみ',
+    '長期の変化と深い分かれ道はPremiumプランで見られます。',
+    'report_mode_label',
+    'buildPalette(colors, isDark)',
+    'lockCard',
+  ], 'Copy, plan lock text, formatter payload, and visual hooks stay aligned');
+
+  assertNotIncludes(todayQuestionHistory + mainTabs + crossLink, [
+    '自己構造分析レポートが更新されました',
+    '自己構造分析に反映されます',
+    '【自己構造トピック候補】',
+    '自己構造トピック候補（ピースで深掘り）',
+    '自己構造レポート」または「ピースライブラリ」',
+  ], 'Old visible self-structure copy is not left in late surfaces');
+
+  assertNotIncludes(guide + terms + scenario + fixtures + tutorialFlow, [
+    'あなたは〇〇タイプです',
+    '本当のあなたは〇〇です',
+    'あなたの性格は〇〇です',
+    '改善しましょう',
+    '悪い役割',
+    '良い役割',
+    'いつもこうなります',
+  ], 'Guide, terms, tutorial, and fixtures avoid diagnostic/type/fix wording');
 });

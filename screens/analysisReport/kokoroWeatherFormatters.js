@@ -1,4 +1,4 @@
-import { EMOTIONS, coerceNum } from "./analysisReportFormatters";
+import { EMOTIONS, coerceNum, safeParseJson } from "./analysisReportFormatters";
 
 export const KOKORO_WEATHER_VERSION = "kokoro.weather.v1";
 
@@ -34,6 +34,61 @@ const REPORT_LABELS = Object.freeze({
   weekly: "こころ天気（週）",
   monthly: "こころ天気（月）",
 });
+
+const KOKORO_WEATHER_VERSION_KEYS = Object.freeze([
+  "kokoro_weather_version",
+  "kokoro_weather_legacy_version",
+  "standard_kokoro_weather_version",
+  "standard_report_kokoro_weather_version",
+]);
+
+const ANALYSIS_REPORT_TYPES = Object.freeze(["daily", "weekly", "monthly"]);
+
+function hasKokoroWeatherVersionAlias(source) {
+  const raw = asObject(source);
+  return KOKORO_WEATHER_VERSION_KEYS.some(
+    (key) => asString(raw[key], "") === KOKORO_WEATHER_VERSION
+  );
+}
+
+function hasDisplayableKokoroWeatherPayload(payload) {
+  const raw = asObject(payload);
+  if (asString(raw.version, "") !== KOKORO_WEATHER_VERSION) return false;
+  const items = asArray(raw.items);
+  const summary = asObject(raw.summary);
+  return items.length > 0 || Object.keys(summary).length > 0;
+}
+
+export function extractKokoroWeatherPayloadFromContentJson(contentJsonLike) {
+  const contentJson = asObject(safeParseJson(contentJsonLike));
+  const direct = contentJson.kokoroWeather || contentJson.kokoro_weather;
+  if (direct && typeof direct === "object" && !Array.isArray(direct)) return direct;
+
+  const standard = contentJson.standardReport || contentJson.standard_report;
+  if (standard && typeof standard === "object" && !Array.isArray(standard)) {
+    const nested = standard.kokoroWeather || standard.kokoro_weather;
+    if (nested && typeof nested === "object" && !Array.isArray(nested)) return nested;
+  }
+
+  return null;
+}
+
+export function isKokoroWeatherReportRecord(report) {
+  if (!report || typeof report !== "object" || Array.isArray(report)) return false;
+
+  const type = asString(report.report_type || report.reportType, "").toLowerCase();
+  if (type && !ANALYSIS_REPORT_TYPES.includes(type)) return false;
+
+  if (hasKokoroWeatherVersionAlias(report)) return true;
+
+  const contentJsonPresent = Object.prototype.hasOwnProperty.call(report, "content_json") ||
+    Object.prototype.hasOwnProperty.call(report, "contentJson");
+  const contentJson = report.content_json ?? report.contentJson;
+  if (!contentJsonPresent) return false;
+
+  const payload = extractKokoroWeatherPayloadFromContentJson(contentJson);
+  return hasDisplayableKokoroWeatherPayload(payload);
+}
 
 function asObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};

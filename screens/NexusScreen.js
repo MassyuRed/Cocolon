@@ -1113,7 +1113,7 @@ export default function NexusScreen({ navigation }) {
           mode: "info",
           title: "フォロー中ユーザーのピース",
           message:
-            "フォロー中ユーザーのピースも同じように閲覧できます。\n\n次は、感情入力からつながる3つの体験を表で見ます。",
+            "フォロー中ユーザーのピースも同じように閲覧できます。\n\n次は、感情入力からつながる4つの体験を表で見ます。",
           nextLabel: "つながり表を見る",
           onNext: handleOpenTutorialFlow,
           cardPlacement: "top",

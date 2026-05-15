@@ -24,6 +24,7 @@ import {
   publishEmotionPiece,
 } from "../lib/api/home/emotionPieceApi";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
+import { markAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
 import { useHomeActions } from "../features/home/useHomeActions";
 
@@ -985,6 +986,7 @@ const safeInsets = useSafeAreaInsets();
       }
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      await markAnalysisHomeSummaryDirty();
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1087,6 +1089,7 @@ const safeInsets = useSafeAreaInsets();
       Keyboard.dismiss();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      await markAnalysisHomeSummaryDirty();
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({

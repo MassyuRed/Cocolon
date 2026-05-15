@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_file_name_mixing_storage
 title: "Cocolon ファイル名変更保留台帳"
-revision_date: "2026-05-09"
+revision_date: "2026-05-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 200
-  mashos-api: 342
+  Cocolon: 216
+  mashos-api: 443
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 
@@ -35,7 +35,7 @@ Cocolonに残っている旧名称ファイル・旧route・旧DB物理名を、
 | `Input` route / `InputScreen.js` | visible名はHome | `keep` | Home作業ではInput routeをHome入口として読む |
 | `MyWeb`系file / route | visible名はAnalysis | `keep` | Analysis構造のlegacy / DB境界として読む |
 | `MyModel` / `Nexus` / `mymodel_qna` | visible名はPiece | `keep` | Piece構造のlegacy façade / DB境界として読む |
-| `MyProfile` / `myprofile_*` | visible名はSelf Structure / Profile系 | `keep` | DB physical / access policy / follow関係で混在する |
+| `MyProfile` / `myprofile_*` | visible名はユーザー向けには `わたしマップ`、内部では Self Structure / Profile系が残る | `keep` | DB physical / access policy / follow関係で混在する |
 | `mymodel_create_*` table canonical | public名はProfileCreate | `keep` | DB / account delete / ranking / qna読み込みまで波及するため資料で保管 |
 | `lib/apiClient.js` | current API boundary | `keep` | compat env読み取りを含むため、ファイル名は変更しない |
 | `AppRuntimeContext.js` | `/app/bootstrap` runtime boundary | `current` | feature flag / version gate / maintenanceを読む正本 |
@@ -102,3 +102,25 @@ DB physical rename / drop / bridge view write switch は、この台帳では扱
 | `static_role_probe` | 既存100問のorigin名。ユーザー表示名ではないためrenameしない |
 | `personal_followup` | Premium向け追加層のorigin名。DB/API/RNで同じ値を使うためrenameしない |
 | `source_anchor` | 原文根拠を表すcontract名。AI要約ではない境界を示すためrenameしない |
+
+## 2026-05-13 差分追記: わたしマップ visible名と旧名保管
+
+`Self Structure` / `MyProfile` は内部名・ファイル名・DB物理名として残るが、ユーザー向け visible 名は `わたしマップ` に寄せる。
+
+| 対象 | current fact | status | 読み方 |
+|---|---|---|---|
+| `SelfStructure*` screen / component | visible は `わたしマップ` | `keep` | file名は互換境界。ユーザー向け文言だけ変更。 |
+| `/self-structure/*` route | visible は `わたしマップ` | `keep` | public route rename 禁止。 |
+| `myprofile_reports` table | `watashiMap` payload を含む self-structure report の物理保存先 | `keep` | DB physical rename 禁止。 |
+| `selfStructureDeepVisual` | 旧 deep visual payload | `fallback` | `watashiMap` がない旧レポート用 adapter として残す。 |
+| `content_json.watashiMap` | 新 additive payload | `additive` | UI はこれを優先表示。 |
+| `components/watashiMapAccessPolicy.js` / `components/selfStructure/watashiMapAccessPolicy.js` | root互換copy + selfStructure正配置 | `resolved-watch` | 最新実ファイルではscreen import pathと一致。root copyは同内容の互換copyとして保管。 |
+
+
+# 2026-05-15 差分追記: A案到達内部名称のrename禁止
+
+| current name | 種別 | 判断 | 理由 |
+|---|---|---|---|
+| `cocolon_emlis_observation_composer.a1.v1` | internal composer model | `rename禁止` | A案相当の内部model名。visible名 `Emlisの観測` や `input_feedback.comment_text` へrenameしない |
+| `step18_ap0_migration_decision` | internal decision meta | `rename禁止` | A-P0判定のQA meta。public API keyではない |
+| `step20_long_term_quality` | internal QA meta | `rename禁止` | 長期品質の内部診断用meta。ユーザー表示文ではない |

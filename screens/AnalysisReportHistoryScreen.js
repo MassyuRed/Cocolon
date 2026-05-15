@@ -17,12 +17,17 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
 import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
-import { ANALYSIS_WIRE, buildAnalysisReportsReadyPath } from "../lib/compat/legacyWireContracts";
+import {
+  ANALYSIS_WIRE,
+  buildAnalysisReportDetailPath,
+  buildAnalysisReportsReadyPath,
+} from "../lib/compat/legacyWireContracts";
 import { useTheme } from "../theme/ThemeContext";
 import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
+import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 // Subscription (Analysis paywall)
 // - free: weekly/monthly are chart-only (no text / no PDF)
 // - plus/premium: can view full text + PDF
@@ -64,7 +69,7 @@ async function fetchReadyReports(accessToken, reportType, { limit = READY_PAGE_L
   const json = await res.json();
   return {
     json,
-    items: extractReadyItems(json),
+    items: extractReadyItems(json).filter(isKokoroWeatherReportRecord),
     viewerTier: typeof json?.viewer_tier === "string" ? json.viewer_tier : null,
     hasMore: Boolean(json?.has_more),
     nextOffset:
@@ -73,6 +78,24 @@ async function fetchReadyReports(accessToken, reportType, { limit = READY_PAGE_L
         : json?.next_offset != null
           ? Number(json.next_offset)
           : null,
+  };
+}
+
+function extractReportDetailItem(payload) {
+  if (payload?.item && typeof payload.item === "object") return payload.item;
+  if (payload?.report && typeof payload.report === "object") return payload.report;
+  if (payload?.data?.item && typeof payload.data.item === "object") return payload.data.item;
+  if (payload && typeof payload === "object" && payload.id) return payload;
+  return null;
+}
+
+async function fetchKokoroWeatherReportDetail(reportId) {
+  const payload = await apiGet(buildAnalysisReportDetailPath(reportId));
+  const item = extractReportDetailItem(payload);
+  if (!isKokoroWeatherReportRecord(item)) return null;
+  return {
+    item,
+    viewerTier: typeof payload?.viewer_tier === "string" ? payload.viewer_tier : null,
   };
 }
 
@@ -555,10 +578,17 @@ export default function AnalysisReportHistoryScreen({
           }
         }
 
-        if (!data) {
-          Alert.alert("取得エラー", "レポートの取得に失敗しました。");
+        if (!data || !isKokoroWeatherReportRecord(data)) {
+          Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
           return;
         }
+
+        const detail = await fetchKokoroWeatherReportDetail(rid);
+        if (!detail?.item) {
+          Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
+          return;
+        }
+        const viewerTier = detail.viewerTier || subscriptionTier;
 
         // 既読を記録（失敗しても閲覧は継続）
         try {
@@ -577,7 +607,7 @@ export default function AnalysisReportHistoryScreen({
         }
 
         // viewer_tier を渡して Viewer 側で追加の subscription/me を省略できるようにする（後方互換）
-        if (onOpenReport) onOpenReport({ ...data, viewer_tier: subscriptionTier });
+        if (onOpenReport) onOpenReport({ ...detail.item, viewer_tier: viewerTier });
       } catch (e) {
         Alert.alert("エラー", String(e?.message || e));
       }
@@ -633,10 +663,17 @@ export default function AnalysisReportHistoryScreen({
         }
       }
 
-      if (!data) {
-        Alert.alert("取得エラー", "レポートの取得に失敗しました。");
+      if (!data || !isKokoroWeatherReportRecord(data)) {
+        Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
         return;
       }
+
+      const detail = await fetchKokoroWeatherReportDetail(rid);
+      if (!detail?.item) {
+        Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
+        return;
+      }
+      data = detail.item;
 
       // v3: prefer content_json.standardReport.contentText; fallback to legacy content_text
       let text = String(data?.content_text || "");

@@ -1,6 +1,6 @@
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 ---
 
 # 01B. Analysis / Piece / EmotionLog / Ranking系
@@ -2947,9 +2947,9 @@ Piece作業時は過圧縮防止、Analysis作業時は非診断・非断定を�
 | `Cocolon/screens/analysisReport/KokoroWeatherCurrentCard.js` | Analysisトップに表示する「今のこころ天気」カード。`ok` / `no_observation` / `error` をfail-closed表示する |
 | `Cocolon/screens/analysisReport/KokoroWeatherForecastStrip.js` | レポート内の横並びこころ天気図。`content_json.kokoroWeather.items` を日/週/月の粒度で表示する |
 | `Cocolon/screens/analysisReport/KokoroWeatherDetailModal.js` | 対象日/週をタップした時の時間帯別こころ天気Modal。深夜/朝/昼/夜を横スクロールで表示する |
-| `Cocolon/screens/analysisReport/kokoroWeatherFormatters.js` | `weather_key`、温度表示、感情比率、観測メモ、fallback文言のnormalize境界 |
+| `Cocolon/screens/analysisReport/kokoroWeatherFormatters.js` | `weather_key`、温度表示、感情比率、観測メモ、fallback文言、`isKokoroWeatherReportRecord` の正式表示対象判定境界 |
 | `Cocolon/screens/AnalysisContentFirstScreen.js` | `entryMeta.currentWeather` を受け取り、トップ上部にCurrentCardを表示。日/週/月タブの表示名をこころ天気へ更新 |
-| `Cocolon/screens/AnalysisReportViewerScreen.js` | `content_json.kokoroWeather` がある時だけForecastStripとDetailModalを表示。古いレポート互換を維持 |
+| `Cocolon/screens/AnalysisReportViewerScreen.js` | `content_json.kokoroWeather` が成立する時だけForecastStripとDetailModalを表示。旧感情分析本文へfallbackしない |
 | `Cocolon/screens/AnalysisEmotionScreen.js` / `AnalysisReportHistoryScreen.js` | 感情分析メニュー・履歴の表示名を `こころ天気（日/週/月）` へ更新 |
 | `Cocolon/screens/analysis/useAnalysisReportActions.js` | `/analysis/home-summary` から `current_weather` を取得し、`entryMeta.currentWeather` へ保持 |
 
@@ -2968,3 +2968,75 @@ Piece作業時は過圧縮防止、Analysis作業時は非診断・非断定を�
 - `daily` / `weekly` / `monthly` は内部キーとして維持します。表示名だけ `こころ天気（日）` / `こころ天気（週）` / `こころ天気（月）` へ寄せます。
 - `current_weather` と `kokoroWeather` は additive field です。既存レポートや旧フロントが無視しても壊れない構造として読む。
 - `観測メモあり` は注意報ではありません。未来予測ではなく、過去〜現在の揺れ幅・切り替わり・混在を示す観測ラベルです。
+
+# 2026-05-13 差分追記: Analysis 旧感情分析レポート非表示 owner
+
+`Cocolon_4(22).zip` / `mashos-api_4(16).zip` では、こころ天気として成立していない旧感情分析レポートを、最新表示・履歴・detail・weekly-days・unread・cacheから外す実装が入っています。新規fileは増えておらず、既存ownerの責務が更新されています。
+
+## Backend変更owner
+
+| file | current role |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | `KOKORO_WEATHER_SCHEMA_VERSION = "kokoro.weather.v1"` と `_is_kokoro_weather_report_row` を持つ。ready projection / include_body latest / detail APIで旧感情分析レポートを除外し、cache keyへ `kokoro_weather_only` とversionを入れる |
+| `mashos-api/ai/services/ai_inference/api_analysis_reads.py` | `/analysis/reports/{report_id}/weekly-days` で `kokoroWeather` 不成立の旧週レポートを404にする。`current_weather` は従来どおり `/analysis/home-summary` で返す |
+| `mashos-api/ai/services/ai_inference/api_report_reads.py` | `analysis-unread-status` の daily / weekly / monthly 抽出でこころ天気レポートだけを未読対象にする。projection aliasでも判定し、cache keyへ `kokoro_weather_only` とversionを入れる |
+| `mashos-api/ai/tests/test_analysis_report_kokoro_weather.py` | helper、ready projection、ready latest body、detail、weekly-days、unreadの旧レポート除外を確認する |
+| `mashos-api/ai/tests/contract/test_publish_governance.py` / `test_contract_snapshots_phase6e.py` | ready artifact / unread / contract fixtureがこころ天気成立payloadを持つ前提へ更新されている |
+
+## Frontend変更owner
+
+| file | current role |
+|---|---|
+| `Cocolon/screens/analysisReport/kokoroWeatherFormatters.js` | `isKokoroWeatherReportRecord(report)` を追加。`content_json.kokoroWeather`、snake_case互換、`standardReport`内payload、projection aliasを読んで表示可否を判定する |
+| `Cocolon/screens/analysis/useAnalysisReportActions.js` | latest cache namespaceを `cocolon:kokoroWeatherLatestReport:v1` に変更。旧 `cocolon:analysisLatestReport` は読まず、cache read/writeもこころ天気成立レポートだけ対象にする |
+| `Cocolon/screens/AnalysisReportHistoryScreen.js` | ready API結果を受けた後もfrontend側で保険filterし、開く/Export時はdetail APIで本体を取り直す。旧レポートは「現在の表示対象外」として開かない |
+| `Cocolon/screens/AnalysisReportViewerScreen.js` | 遷移stateで旧レポートが渡っても `content_text` / `standardReport.contentText` を表示しない。weekly-days fallbackも表示対象外では呼ばない |
+| `Cocolon/screens/AnalysisContentFirstScreen.js` / `AnalysisScreen.js` | latestReportsやcacheから旧レポートへfallbackしない |
+| `Cocolon/lib/accountLocalCleanup.js` | 退会後cleanupで旧 `cocolon:analysisLatestReport` と新 `cocolon:kokoroWeatherLatestReport:v1` の両prefixを削除する |
+| `Cocolon/lib/compat/legacyWireContracts.js` | analysis detail path helperを追加し、weekly-days pathをdetail path helperから組み立てる |
+| `Cocolon/tests/rn-screen-contracts.test.js` | cache namespace、history / viewer fail-closed、formatter guard、cleanup、detail path helperのcontractを確認する |
+
+この差分以後、`content_json.kokoroWeather` がない旧感情分析レポートは、こころ天気画面の「互換表示」ではなく「表示対象外」として扱う。DB rowの物理削除やDB名renameは行わない。
+
+## 2026-05-13 差分追記: Analysis / わたしマップ current owner
+
+最新実ファイルでは、自己分析のユーザー向け surface は `わたしマップ` として読ませる。内部上は引き続き `SelfStructure*` screen、`/self-structure/*` API、`myprofile_reports` physical name を保持する。
+
+### 追加 frontend owner
+
+| file | current owner / relation | 同時確認 |
+|---|---|---|
+| `Cocolon/components/selfStructure/WatashiMapRenderer.js` | `content_json.watashiMap` の表示 owner。overview / role_switches / routes / crossroads / unknown_areas / lock card を構成する。 | `SelfStructureReportGenerateScreen.js`, `SelfStructureReportViewerScreen.js`, `AnalysisContentFirstScreen.js`, `watashiMapFormatters.js` |
+| `Cocolon/components/selfStructure/WatashiMapOverviewCard.js` | `今のわたしマップ` の概要カード。場面・役割・行動傾向・観測量を表示。 | `WatashiMapRenderer.js` |
+| `Cocolon/components/selfStructure/RoleSwitchList.js` | `役割スイッチ` 一覧。場面×役割×観測量を表示。 | `watashiMapFormatters.js` |
+| `Cocolon/components/selfStructure/RoutePatternCard.js` | `よく通るルート` の step 表示。 | `WatashiMapRenderer.js` |
+| `Cocolon/components/selfStructure/CrossroadCard.js` | `迷いやすい分かれ道` の表示。 | `WatashiMapRenderer.js` |
+| `Cocolon/components/selfStructure/UnknownAreaCard.js` | `まだ地図にない場所` の表示。 | `WatashiMapRenderer.js` |
+| `Cocolon/components/selfStructure/watashiMapFormatters.js` | `watashiMap` normalize、旧 `selfStructureDeepVisual` adapter、content_text fallback、lock projection。 | `WatashiMapRenderer.js`, Generate / Viewer screens |
+| `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` | tier / history / detail / mode label の境界。History / Viewer の import path と一致。root `components/watashiMapAccessPolicy.js` は同内容の互換copy。 | `SelfStructureReportHistoryScreen.js`, `SelfStructureReportViewerScreen.js`, `rn-screen-contracts.test.js` |
+
+### 変更 frontend owner
+
+| file | 差分 |
+|---|---|
+| `Cocolon/screens/AnalysisContentFirstScreen.js` | self tab を `わたしマップ` 表示にし、Free でも `light` 概要を表示する。 |
+| `Cocolon/screens/AnalysisSelfStructureScreen.js` | メニュー見出しと導線を `わたしマップ` / `今のわたしマップ` / `わたしマップの履歴` に寄せる。 |
+| `Cocolon/screens/analysis/useAnalysisSelfStructureActions.js` | latest は Free を完全遮断しない。detail/history は tier 別 lock に寄せる。 |
+| `Cocolon/screens/SelfStructureReportGenerateScreen.js` | `WatashiMapRenderer` を使い、`概要 / 標準マップ / 深いマップ` を表示する。 |
+| `Cocolon/screens/SelfStructureReportViewerScreen.js` | `watashiMap` 優先表示、旧 payload fallback、detail report lock を扱う。 |
+| `Cocolon/screens/SelfStructureReportHistoryScreen.js` | Free/Plus/Premium の履歴境界と PDF 表記を `わたしマップ` に寄せる。 |
+| `Cocolon/guide/guidesJa.js`, `guide/termsJa.js`, `tutorial/*` | 旧 `自己分析` 直出しを減らし、`わたしマップ` の説明・fixture を追加する。 |
+
+# 2026-05-15 差分追記: わたしマップaccess policy配置補完 / Analysis Home refresh signal
+
+最新実ファイル `Cocolon_7(10).zip` では、わたしマップとAnalysis Home refreshに関係するRN pathを前提資料へ明示する。
+
+| file | 構造上の意味 |
+|---|---|
+| `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` | わたしマップの tier / report_mode / history / detail lock policy。`SelfStructureReportHistoryScreen.js` と `SelfStructureReportViewerScreen.js` が参照する現行配置。root copyと同内容で、前回のimport path mismatch watchは解消済みとして読む。 |
+| `Cocolon/lib/analysisHomeSummaryRefreshSignal.js` | 入力保存後にAnalysis Home Summaryをbest-effortでdirty化し、`AnalysisScreen.js` 側でconsumeするRN local refresh signal。API route / DB / 保存構造は変更しない。 |
+
+## 読み方
+
+- `components/selfStructure/watashiMapAccessPolicy.js` は、`SelfStructureReportHistoryScreen.js` / `SelfStructureReportViewerScreen.js` が参照する現行owner。前回資料にあった「root配置とimport pathの不一致」watchは、最新zipではselfStructure配下にも同一policyがあるため解消済みとして読む。
+- `lib/analysisHomeSummaryRefreshSignal.js` は保存後のHome/Analysis表示更新を助けるlocal signalであり、Analysis report生成・DB write path・API routeを変更しない。

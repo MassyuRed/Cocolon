@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(68).zip"
-  Cocolon: "Cocolon_6(29).zip"
-  mashos-api: "mashos-api_6(13).zip"
+  premise: "Cocolon_前提資料(78).zip"
+  Cocolon: "Cocolon_7(10).zip"
+  mashos-api: "mashos-api_7(13).zip"
 file_counts:
-  Cocolon: 204
-  mashos-api: 419
-  total: 623
+  Cocolon: 216
+  mashos-api: 443
+  total: 659
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 623
-  included_in_overall_structure: 623
-  included_in_national_system: 623
+  total_files: 659
+  included_in_overall_structure: 659
+  included_in_national_system: 659
   excluded_from_main_body: 0
 ---
 
@@ -53,12 +53,15 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_6(29).zip` | 204 | RNアプリ本体。感情分析のこころ天気Top UI / Report UI / Guide・Tutorial文言を含む |
-| `mashos-api_6(13).zip` | 419 | backend / API / worker / tests。こころ天気 current_weather / report kokoroWeather / QA test を含む |
-| total | 623 | 前提資料の構造coverage対象 |
+| `Cocolon_7(10).zip` | 216 | RNアプリ本体。Input保存後のAnalysis home summary refresh signal、わたしマップ access policy の `components/selfStructure` 配置補正を含む |
+| `mashos-api_7(13).zip` | 443 | backend / API / worker / tests。EmlisAI A案到達 Step15〜20、共通Core安定化、段階リリース計測、A-P0判定、A案相当Composer、長期品質metaを含む |
+| total | 659 | 前提資料の構造coverage対象 |
 
-`Cocolon_6(29).zip` / `mashos-api_6(13).zip` では、RN巨大画面分割、本番運用監視、`cocolon_text_generation_core` の構造を維持したうえで、感情分析に `kokoro_weather_service` とRNのこころ天気表示層が追加されています。  
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / LimitedComposer / 共通Core / Reader・Grounding・Template Guard / Display Gate のfail-closed構造として読む。Pieceは短縮要約ではなく、ユーザーが言いたい核を `source_claims` / `must_keep_signal_keys` とともに共通Coreへ通す構造として読む。Analysisは診断・断定ではなく、素材domainを分けた観測レポートを共通Coreで安全確認する構造として読む。画面分割は機能追加ではなく、entry shellを維持した保守性改善として読む。
+`Cocolon_7(10).zip` / `mashos-api_7(13).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、EmlisAIのA案到達工程 Step15〜20 が developer / QA meta と内部Composer境界として追加されています。`input_feedback.comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示されます。
+
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / LimitedComposer / 共通Core / Reader・Grounding・Template Guard / Display Gate のfail-closed構造として読む。Step15〜20は、この構造を壊さずに、共通Core安定化、rollout計測、広い入力fixture、A-P0移行判定、A案相当Composer rollout、長期品質確認を積む層として読む。
+
+わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
 # 読む順
 
@@ -300,8 +303,47 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 | 構造 | current owner | 読み方 |
 |---|---|---|
 | 今のこころ天気 | `mashos-api/ai/services/ai_inference/kokoro_weather_service.py` / `api_analysis_reads.py` / `Cocolon/screens/analysisReport/KokoroWeatherCurrentCard.js` | `/analysis/home-summary` へ `current_weather` を additive 追加し、Analysisトップで今日0:00〜現在の観測を表示する。今日入力がない場合は「今日はまだ観測がありません」と「前回のこころ天気を見る」を表示する |
-| レポートこころ天気 | `api_analysis_reports.py` / `Cocolon/screens/AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` / `kokoroWeatherFormatters.js` | `content_json.kokoroWeather` を additive 追加し、日/週/月レポートに天気図風の横並びUIと時間帯別Modalを出す。古いレポートは従来表示のままfail-closed |
+| レポートこころ天気 | `api_analysis_reports.py` / `Cocolon/screens/AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` / `kokoroWeatherFormatters.js` | `content_json.kokoroWeather` を additive 追加し、日/週/月レポートに天気図風の横並びUIと時間帯別Modalを出す。旧感情分析レポートは表示・取得・未読対象から外す |
 | 表示名・文言 | `AnalysisContentFirstScreen.js` / `AnalysisEmotionScreen.js` / `AnalysisReportHistoryScreen.js` / `guide/*` / `tutorial/*` / `iapRuntimeCatalog.js` / `subscription_bootstrap_store.py` | ユーザー向け表示を `こころ天気（日）` / `こころ天気（週）` / `こころ天気（月）` に寄せる。内部キー `daily` / `weekly` / `monthly` は維持する |
-| QA | `mashos-api/ai/tests/test_kokoro_weather_*.py` / `Cocolon/tests/rn-screen-contracts.test.js` | 未来予測・注意報・良悪判定になっていないこと、Free/Plus/Premium境界、古いレポート互換、自己分析非対象を回帰testで固定する |
+| QA | `mashos-api/ai/tests/test_kokoro_weather_*.py` / `Cocolon/tests/rn-screen-contracts.test.js` | 未来予測・注意報・良悪判定になっていないこと、Free/Plus/Premium境界、旧感情分析レポート非表示、自己分析非対象を回帰testで固定する |
 
 作業時は、こころ天気を **感情分析の表現層・要約層** として読みます。自己分析 / 自己構造はこころ天気化しません。DB physical name、public route、`daily` / `weekly` / `monthly` 内部キーは変更しません。
+
+# 2026-05-13 差分追記: こころ天気 旧感情分析レポート非表示 boundary
+
+このsectionの基準面は `Cocolon_前提資料(71).zip` / `Cocolon_4(22).zip` / `mashos-api_4(16).zip` です。こころ天気旧レポート非表示差分時点のcoverage対象は `Cocolon` 204件、`mashos-api` 419件、合計623件でした。最新coverageは冒頭summaryと `2026-05-13 差分追記: わたしマップ実装反映` を優先します。
+
+| 構造 | current owner | 読み方 |
+|---|---|---|
+| こころ天気正式表示対象 | `api_analysis_reports.py` / `kokoroWeatherFormatters.js` | `report_type` が `daily` / `weekly` / `monthly` で、`content_json.kokoroWeather.version == "kokoro.weather.v1"` かつ `summary` または `items` があるものだけを表示対象にする |
+| ready / detail filter | `api_analysis_reports.py` | `/analysis/reports/ready` と `/analysis/reports/{id}` は旧感情分析レポートを返さない。detail直指定は404にする |
+| weekly-days / unread filter | `api_analysis_reads.py` / `api_report_reads.py` | 旧週レポートの `days` 補助表示を使わず、旧レポートで未読バッジを立てない |
+| frontend cache / fail-closed | `useAnalysisReportActions.js` / `AnalysisReportHistoryScreen.js` / `AnalysisReportViewerScreen.js` / `accountLocalCleanup.js` | latest cacheは `cocolon:kokoroWeatherLatestReport:v1` を使い、旧cacheは読まない。旧レポートstateが入っても旧本文を表示しない |
+| tests / fixture | `test_analysis_report_kokoro_weather.py` / `test_publish_governance.py` / `test_contract_snapshots_phase6e.py` / `rn-screen-contracts.test.js` | helper、ready、detail、weekly-days、unread、cache namespace、history / viewer guardを固定する |
+
+作業時は、旧感情分析レポートをDBから物理削除したとは読まない。DB physical name、public route、`daily` / `weekly` / `monthly` 内部キーは維持し、ユーザー可視領域・取得対象・未読対象だけをこころ天気正式表示対象へ絞る。
+
+## 2026-05-13 差分追記: わたしマップ実装反映
+
+2026-05-13時点の実ファイル基準面を `Cocolon_8(7).zip` / `mashos-api_8(10).zip` に更新していた。確認した current file count は `Cocolon=214`、`mashos-api=424`、合計 `638`。旧基準面 `Cocolon(155).zip` / `mashos-api(70).zip` からは Cocolon 側で 10 件追加・28 件変更、backend 側で 5 件追加・11 件変更が見えている。
+
+今回の差分は、自己分析を visible / payload / UI 表現として `わたしマップ` に寄せる実装である。内部 route / DB physical name / report family は維持する。`/self-structure/*`、`myprofile_reports`、`report_mode`、`selfStructureDeepVisual` は互換境界として残し、ユーザー向け表示では `今のわたしマップ` / `役割スイッチ` / `よく通るルート` / `迷いやすい分かれ道` / `まだ地図にない場所` / `詳しい自己分析レポート` を使う。
+
+最新実ファイルでは `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、`SelfStructureReportHistoryScreen.js` / `SelfStructureReportViewerScreen.js` の import path と一致している。root `Cocolon/components/watashiMapAccessPolicy.js` も同内容で残るため、互換copyとして扱い、画面側の参照は `components/selfStructure` 側を正とする。
+
+# 2026-05-15 差分追記: EmlisAI A案到達 Step15-20 current boundary
+
+この差分は、`Cocolon_7(10).zip` / `mashos-api_7(13).zip` を最新実ファイルとして確認した結果を、前提資料へ追記するものです。EmlisAIのA案到達工程は、ユーザー表示文を直接増やす工程ではなく、developer / QA meta、判定、rollout、長期品質境界を増やす工程として読む。
+
+| Step | current owner | 読み方 |
+|---|---|---|
+| Step15 共通Core安定化 | `cocolon_text_generation_core/stabilization.py`, `types.py`, `adapters/emlis_observation_composer.py` | `PhraseUnit` / `SentencePlan` / `TextGenerationResult` / Guard結果 / `used_evidence_span_ids` / `quality_flags` の共通形を確認する。Emlisの出力目的はEmlis側に残す |
+| Step16 段階リリース計測 | `emlis_ai_rollout_metrics_service.py`, `emlis_ai_limited_release_service.py`, `emlis_ai_reply_service.py` | `attempted` / `passed` / `rejected` / `unavailable` / `safety_blocked` / `primary_reason` / `coverage_group` / `composer_model` を集計する |
+| Step17 広い入力fixture | `mashos-api/ai/tests/fixtures/emlis_ai_step17_broad_input_cases.py` | 生活・体調・人間関係・学習・仕事・長文・履歴・cross coreを、正解文一致ではなく構造で固定する |
+| Step18 A-P0移行判定 | `emlis_ai_ap0_migration_decision_service.py` | `coverage matrix` / `rollout metrics` / `diagnostic_summary` / Guard結果から、A-1へ進むか該当Stepへ戻すかを判定する |
+| Step19 A案相当導入 | `emlis_ai_a_plan_equivalent_composer_service.py`, `emlis_ai_composer_client_registry.py`, `emlis_ai_limited_composer_client.py` | A-P0がGreenでrolloutが許可された場合だけ `cocolon_emlis_observation_composer.a1.v1` へpromoteする。B案Gate、scoped graph、fail-closed、passed-onlyは維持する |
+| Step20 長期品質 | `emlis_ai_long_term_quality_service.py` | 過去出力類似、文型反復、履歴/cross coreの過剰補完、距離感driftをQA metaとして見る。履歴は根拠であり、本心補完材料ではない |
+
+`Cocolon/lib/analysisHomeSummaryRefreshSignal.js` は最新実ファイルに存在する active signal です。Input保存後にAnalysis home summaryをbest-effortで更新する境界として読み、EmlisAIの表示契約とは混同しません。
+
+禁止: Step15-20を理由に、`input_feedback.comment_text`、`observation_status`、`Emlisの観測` の表示条件、DB physical name、public API route、RN導線、Piece / Analysis の出力目的を変更しない。

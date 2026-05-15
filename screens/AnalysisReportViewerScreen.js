@@ -50,6 +50,7 @@ import { PieRingChart } from "./analysisReport/AnalysisReportCharts";
 import AnalysisReportUpgradeCard from "./analysisReport/AnalysisReportUpgradeCard";
 import KokoroWeatherForecastStrip from "./analysisReport/KokoroWeatherForecastStrip";
 import KokoroWeatherDetailModal from "./analysisReport/KokoroWeatherDetailModal";
+import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 
 /**
  * AnalysisReportViewerScreen
@@ -82,6 +83,7 @@ export default function AnalysisReportViewerScreen({
   const [subscriptionTier, setSubscriptionTier] = useState("free");
   const [tierLoading, setTierLoading] = useState(true);
   const [selectedKokoroWeatherItem, setSelectedKokoroWeatherItem] = useState(null);
+  const isKokoroWeatherDisplayTarget = isKokoroWeatherReportRecord(report);
 
   useEffect(() => {
     const tierFromReport = report?.viewer_tier;
@@ -105,7 +107,7 @@ export default function AnalysisReportViewerScreen({
     (async () => {
       try {
         const reportId = report?.id;
-        if (!reportId || cancelled) return;
+        if (!reportId || cancelled || !isKokoroWeatherDisplayTarget) return;
 
         await apiPost("/report-reads/mark", {
           report_id: String(reportId),
@@ -125,7 +127,7 @@ export default function AnalysisReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, [onMarkedRead, report?.id]);
+  }, [isKokoroWeatherDisplayTarget, onMarkedRead, report?.id]);
 
 
   const themed = useMemo(() => {
@@ -317,7 +319,7 @@ export default function AnalysisReportViewerScreen({
 
   useEffect(() => {
     // report が変わったら初期化
-    if (reportType !== "weekly") {
+    if (!isKokoroWeatherDisplayTarget || reportType !== "weekly") {
       setWeeklyDays([]);
       setWeeklyDaysLoading(false);
       setWeeklyDaysError("");
@@ -378,7 +380,7 @@ export default function AnalysisReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, [reportType, contentJson, standardReport, report?.id, report?.period_start, report?.period_end]);
+  }, [isKokoroWeatherDisplayTarget, reportType, contentJson, standardReport, report?.id, report?.period_start, report?.period_end]);
 
   const weeklyMaxSum = useMemo(() => {
     const sums = weeklyDays.map(
@@ -591,7 +593,27 @@ const deepPatternSectionTitle = useMemo(() => {
   return "観測された制御パターン";
 }, [isWeeklyDeepV2Like, isMonthlyDeepV2, isDeepPatternEpisodeMode]);
 
-  const bodyContent = (
+  const unavailableContent = (
+    <View style={[styles.unavailableCard, themed.chartCard]}>
+      <Text style={[styles.unavailableTitle, themed.chartTitle]}>
+        このこころ天気は現在の表示対象外です
+      </Text>
+      <Text style={[styles.unavailableText, themed.empty]}>
+        こころ天気として成立していない旧レポートは表示しません。
+      </Text>
+      {!disableActions && typeof onBack === "function" ? (
+        <TouchableOpacity
+          style={[styles.unavailableButton, themed.paywallBtn]}
+          onPress={onBack}
+          activeOpacity={0.85}
+        >
+          <Text style={[styles.unavailableButtonText, themed.paywallBtnText]}>一覧へ戻る</Text>
+        </TouchableOpacity>
+      ) : null}
+    </View>
+  );
+
+  const bodyContent = !isKokoroWeatherDisplayTarget ? unavailableContent : (
     <>
         <KokoroWeatherForecastStrip
           kokoroWeather={kokoroWeatherPayload}
@@ -1157,7 +1179,7 @@ const deepPatternSectionTitle = useMemo(() => {
         )}
 
 
-        {/* ✅ 「自己構造トピック候補」パネル（AnalysisCrossLinkSection）は不要なので表示しない */}
+        {/* ✅ 「わたしマップの深掘り候補」パネル（AnalysisCrossLinkSection）は不要なので表示しない */}
 
     </>
   );
@@ -1237,6 +1259,38 @@ const deepPatternSectionTitle = useMemo(() => {
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
+  unavailableCard: {
+    marginTop: 16,
+    padding: 18,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    backgroundColor: "#F9FAFB",
+  },
+  unavailableTitle: {
+    fontSize: 15,
+    fontWeight: "800",
+    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    marginBottom: 8,
+  },
+  unavailableText: {
+    fontSize: 13,
+    lineHeight: 20,
+    color: text.description ?? COLORS.TEXT_SUBTLE,
+  },
+  unavailableButton: {
+    marginTop: 14,
+    alignSelf: "flex-start",
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderRadius: 999,
+    backgroundColor: COLORS.BORDER_GOLD,
+  },
+  unavailableButtonText: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: COLORS.ACCENT_TEXT,
+  },
   container: { flex: 1, backgroundColor: "#fff" },
 
   header: {

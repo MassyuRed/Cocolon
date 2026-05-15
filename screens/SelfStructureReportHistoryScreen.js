@@ -21,14 +21,22 @@ import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
-import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
+import {
+  canExportWatashiMapPdf,
+  canViewWatashiMapHistory,
+  formatWatashiMapReportModeLabel,
+  getWatashiMapHistoryLockBody,
+  getWatashiMapHistoryLockTitle,
+  getWatashiMapHistoryRetentionLabel,
+  normalizeWatashiMapTier,
+} from "../components/selfStructure/watashiMapAccessPolicy";
 
 const TYPE_LABEL = Object.freeze({
-  monthly: "自己分析",
+  monthly: "わたしマップ",
 });
 
 const TYPE_JP = Object.freeze({
-  monthly: "自己分析",
+  monthly: "わたしマップ",
 });
 
 const HISTORY_PAGE_LIMIT = 60;
@@ -66,20 +74,30 @@ function formatRangeJP(startIso, endIso, reportType) {
   }
 }
 
-function sanitizeSelfStructureHistoryTitle(title) {
+function sanitizeSelfStructureHistoryTitle(title, reportMode = "standard") {
   const raw = String(title || "").trim();
-  if (!raw) return "";
-  if (/^自己構造レポート[：:]/.test(raw)) {
-    return "自己分析レポート";
-  }
-  return raw;
+  const fallback = `${formatWatashiMapReportModeLabel(reportMode)}のわたしマップ`;
+  if (!raw) return fallback;
+  return raw
+    .replace(/^自己構造レポート[：:].*$/g, "詳しい自己分析レポート")
+    .replace(/自己構造分析レポート[（(]月次[）)]/g, "詳しい自己分析レポート")
+    .replace(/自己構造レポート/g, "詳しい自己分析レポート")
+    .replace(/自己分析レポート/g, "詳しい自己分析レポート")
+    .replace(/自己構造/g, "わたしマップ")
+    .replace(/自己分析/g, "わたしマップ");
 }
 
 function sanitizeSelfStructureReportText(text) {
-  return String(text || "").replace(
-    /自己構造分析レポート[（(]月次[）)]/g,
-    "自己構造分析レポート"
-  );
+  const detailToken = "__COCOLON_DETAIL_SELF_REPORT__";
+  return String(text || "")
+    .replace(/詳しい自己分析レポート/g, detailToken)
+    .replace(/自己構造分析レポート[（(]月次[）)]/g, "詳しい自己分析レポート")
+    .replace(/自己構造レポート/g, "詳しい自己分析レポート")
+    .replace(/自己分析レポート/g, "詳しい自己分析レポート")
+    .replace(/現在の自己分析/g, "今のわたしマップ")
+    .replace(/現在の自己構造/g, "今のわたしマップ")
+    .replace(/自己構造/g, "わたしマップ")
+    .replace(new RegExp(detailToken, "g"), "詳しい自己分析レポート");
 }
 
 function escapeHtml(s) {
@@ -110,7 +128,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / Self Structure</div>
+      <div class="meta">Exported from Cocolon / Watashi Map</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;
@@ -207,6 +225,8 @@ export default function SelfStructureReportHistoryScreen({
   reportType = "monthly",
   onBack,
   onOpenReport,
+  onOpenLatest,
+  onOpenSubscription,
 }) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -221,9 +241,11 @@ export default function SelfStructureReportHistoryScreen({
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
+  const viewerTier = normalizeWatashiMapTier(subscriptionTier);
+  const historyAccessible = canViewWatashiMapHistory(viewerTier);
   const historyRetentionLabel = useMemo(
-    () => getHistoryRetentionLabel(subscriptionTier),
-    [subscriptionTier]
+    () => getWatashiMapHistoryRetentionLabel(viewerTier),
+    [viewerTier]
   );
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
@@ -256,10 +278,18 @@ export default function SelfStructureReportHistoryScreen({
     };
   }, [isDark, colors, ui]);
 
-  const title = `${TYPE_LABEL[reportType] || "Report"}の履歴`;
+  const title = `${TYPE_LABEL[reportType] || "わたしマップ"}の履歴`;
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
     setErrorMsg("");
+    if (!historyAccessible) {
+      setRows([]);
+      setHasMore(false);
+      setNextOffset(null);
+      setLoading(false);
+      setLoadingMore(false);
+      return;
+    }
     if (append) setLoadingMore(true);
     else setLoading(true);
     try {
@@ -270,7 +300,8 @@ export default function SelfStructureReportHistoryScreen({
       const readSet = await fetchReadReportIdSet(baseRows.map((r) => r.id));
       const mapped = baseRows.map((r) => ({
         ...r,
-        title: sanitizeSelfStructureHistoryTitle(r?.title),
+        title: sanitizeSelfStructureHistoryTitle(r?.title, r?.report_mode),
+        report_mode_label: formatWatashiMapReportModeLabel(r?.report_mode),
         isRead: readSet.has(r.id),
       }));
       setRows((prev) => {
@@ -302,17 +333,19 @@ export default function SelfStructureReportHistoryScreen({
       if (append) setLoadingMore(false);
       else setLoading(false);
     }
-  }, [reportType]);
+  }, [historyAccessible, reportType]);
 
   useEffect(() => {
+    if (subscriptionLoading) return;
     load({ append: false, offset: 0 });
-  }, [load]);
+  }, [load, subscriptionLoading]);
 
   const onRefresh = useCallback(async () => {
+    if (!historyAccessible) return;
     setRefreshing(true);
     await load({ append: false, offset: 0 });
     setRefreshing(false);
-  }, [load]);
+  }, [historyAccessible, load]);
 
   const loadMore = useCallback(async () => {
     if (loading || refreshing || loadingMore || !hasMore || nextOffset == null) return;
@@ -321,6 +354,10 @@ export default function SelfStructureReportHistoryScreen({
 
   const handleOpen = useCallback(
     async (id) => {
+      if (!historyAccessible) {
+        if (typeof onOpenLatest === "function") onOpenLatest();
+        return;
+      }
       try {
         const json = await apiGet(buildSelfStructureReportDetailPath(id));
         const data = json?.item;
@@ -331,7 +368,7 @@ export default function SelfStructureReportHistoryScreen({
 
         const sanitizedData = {
           ...data,
-          title: sanitizeSelfStructureHistoryTitle(data?.title),
+          title: sanitizeSelfStructureHistoryTitle(data?.title, data?.report_mode),
           content_text: sanitizeSelfStructureReportText(data?.content_text),
         };
 
@@ -353,11 +390,22 @@ export default function SelfStructureReportHistoryScreen({
         Alert.alert("エラー", String(e?.message || e));
       }
     },
-    [onOpenReport]
+    [historyAccessible, onOpenLatest, onOpenReport]
   );
 
   const handleExport = useCallback(
     async (id) => {
+      if (!canExportWatashiMapPdf(viewerTier)) {
+        Alert.alert(
+          "PDF保存",
+          "PDF保存はPlusプラン以上で利用できます。わたしマップ概要はFreeプランでも見られます。",
+          [
+            { text: "閉じる", style: "cancel" },
+            typeof onOpenSubscription === "function" ? { text: "プランを見る", onPress: onOpenSubscription } : null,
+          ].filter(Boolean)
+        );
+        return;
+      }
       try {
         const json = await apiGet(buildSelfStructureReportDetailPath(id));
         const data = json?.item;
@@ -367,19 +415,19 @@ export default function SelfStructureReportHistoryScreen({
         }
 
         await exportTextToPdf(
-          sanitizeSelfStructureHistoryTitle(data?.title) || title,
+          sanitizeSelfStructureHistoryTitle(data?.title, data?.report_mode) || title,
           sanitizeSelfStructureReportText(data?.content_text)
         );
       } catch (e) {
         Alert.alert("PDF保存エラー", String(e?.message || e));
       }
     },
-    [title]
+    [onOpenSubscription, title, viewerTier]
   );
 
   const headerLabel = useMemo(() => {
-    const jp = TYPE_JP[reportType] || "レポート";
-    return `${jp}レポート履歴`;
+    const jp = TYPE_JP[reportType] || "わたしマップ";
+    return `${jp}の履歴`;
   }, [reportType]);
 
   return (
@@ -389,7 +437,7 @@ export default function SelfStructureReportHistoryScreen({
         <CocolonBackButton
           onPress={onBack}
           style={styles.backBtn}
-          accessibilityLabel="自己分析レポート履歴から戻る"
+          accessibilityLabel="わたしマップの履歴から戻る"
         />
 
         <Text
@@ -416,11 +464,38 @@ export default function SelfStructureReportHistoryScreen({
         </View>
       ) : null}
 
+      {!subscriptionLoading && !historyAccessible ? (
+        <View style={[styles.accessCard, isDark && themed.row]}>
+          <Text style={[styles.accessTitle, themed.rowTitle]}>
+            {getWatashiMapHistoryLockTitle(viewerTier)}
+          </Text>
+          <Text style={[styles.accessBody, themed.rowMeta]}>
+            {getWatashiMapHistoryLockBody(viewerTier)}
+          </Text>
+          <View style={styles.accessButtonRow}>
+            {typeof onOpenLatest === "function" ? (
+              <TouchableOpacity style={styles.accessPrimaryButton} activeOpacity={0.85} onPress={onOpenLatest}>
+                <Text style={styles.accessPrimaryButtonText}>今のわたしマップを見る</Text>
+              </TouchableOpacity>
+            ) : null}
+            {typeof onOpenSubscription === "function" ? (
+              <TouchableOpacity style={styles.accessSecondaryButton} activeOpacity={0.85} onPress={onOpenSubscription}>
+                <Text style={[styles.accessSecondaryButtonText, themed.rowMeta]}>プランを見る</Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
+        </View>
+      ) : null}
+
       {/* エラー */}
       {errorMsg ? <Text style={styles.error}>取得エラー: {errorMsg}</Text> : null}
 
       {/* リスト */}
-      {loading && rows.length === 0 ? (
+      {subscriptionLoading ? (
+        <View style={styles.center}>
+          <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
+        </View>
+      ) : !historyAccessible ? null : loading && rows.length === 0 ? (
         <View style={styles.center}>
           <ActivityIndicator
             size="small"
@@ -448,7 +523,7 @@ export default function SelfStructureReportHistoryScreen({
                   themed.listEmptyText,
                 ]}
               >
-                まだ履歴がありません（変化があった月だけここに表示されます）
+                まだわたしマップの履歴がありません
               </Text>
             ) : null
           }
@@ -459,9 +534,14 @@ export default function SelfStructureReportHistoryScreen({
               activeOpacity={0.85}
             >
               <View style={{ flex: 1 }}>
-                <Text style={[styles.rowTitle, themed.rowTitle]} numberOfLines={1}>
-                  {item.title || title}
-                </Text>
+                <View style={styles.rowTitleLine}>
+                  <Text style={[styles.rowTitle, themed.rowTitle]} numberOfLines={1}>
+                    {item.title || title}
+                  </Text>
+                  {item.report_mode_label ? (
+                    <Text style={[styles.modeBadge, themed.rowMeta]}>{item.report_mode_label}</Text>
+                  ) : null}
+                </View>
                 {formatRangeJP(item.period_start, item.period_end, reportType) ? (
                   <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
                     {formatRangeJP(item.period_start, item.period_end, reportType)}
@@ -543,6 +623,39 @@ function createStyles(COLORS, ui) {
   },
   center: { flex: 1, alignItems: "center", justifyContent: "center" },
 
+  accessCard: {
+    marginHorizontal: 14,
+    marginTop: 10,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    borderRadius: 16,
+    backgroundColor: "#FFFBEB",
+    padding: 14,
+  },
+  accessTitle: { fontSize: 16, lineHeight: 22, fontWeight: "900", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  accessBody: { marginTop: 6, fontSize: 13, lineHeight: 20, color: text.description ?? COLORS.TEXT_SUBTLE, fontWeight: "600" },
+  accessButtonRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 12 },
+  accessPrimaryButton: {
+    borderRadius: 999,
+    backgroundColor: COLORS.GOLD_BUTTON || "#D4AF37",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  accessPrimaryButtonText: { fontSize: 12, fontWeight: "900", color: COLORS.ACCENT_TEXT || "#111827" },
+  accessSecondaryButton: {
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginBottom: 8,
+  },
+  accessSecondaryButtonText: { fontSize: 12, fontWeight: "900", color: text.description ?? COLORS.TEXT_SUBTLE },
+
   row: {
     flexDirection: "row",
     alignItems: "center",
@@ -554,7 +667,19 @@ function createStyles(COLORS, ui) {
   rowRead: {
     opacity: 0.6,
   },
-  rowTitle: { fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  rowTitleLine: { flexDirection: "row", alignItems: "center", marginRight: 8 },
+  rowTitle: { flex: 1, fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+  modeBadge: {
+    overflow: "hidden",
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    fontSize: 10,
+    fontWeight: "800",
+    color: text.description ?? COLORS.TEXT_SUBTLE,
+  },
   rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
   rowMeta: { marginTop: 2, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
   listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },

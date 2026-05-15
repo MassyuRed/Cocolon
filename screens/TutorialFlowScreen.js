@@ -195,7 +195,7 @@ export default function TutorialFlowScreen({ navigation }) {
           mode: "info",
           title: "Emlisについて",
           message:
-            "まずは、感情入力からつながる3つの体験を確認します。",
+            "まずは、感情入力からつながる4つの体験を確認します。",
           nextLabel: "ホーム画面へ",
           onNext: () => {
             setTutorialStep(2);
@@ -319,7 +319,7 @@ export default function TutorialFlowScreen({ navigation }) {
               color={colors.TITLE_GOLD}
               style={styles.cardIcon}
             />
-            <Text style={styles.cardTitle}>感情入力からつながる3つの体験</Text>
+            <Text style={styles.cardTitle}>感情入力からつながる4つの体験</Text>
           </View>
           {shouldShowFinalSections ? (
             <ConnectionSummaryTable rows={TUTORIAL_CONNECTION_ROWS} styles={styles} />
@@ -447,7 +447,7 @@ function ConnectionSummaryTable({ rows, styles }) {
   return (
     <>
       <Text style={styles.cardLead}>
-        Emlisは感情入力をすることで様々な機能を楽しむことができます。その中でも主要な3つの要素を説明します。
+        Emlisは感情入力をすることで様々な機能を楽しむことができます。その中でも主要な4つの要素を説明します。
       </Text>
       {safeRows.map((row, index) => (
         <View

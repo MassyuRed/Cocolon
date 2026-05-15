@@ -80,7 +80,7 @@ export function useAnalysisUnreadBadges({
   }, []);
 
   const fetchSelfStructureLatestUnread = useCallback(async () => {
-    if (subscriptionLoading || !isPaid) return false;
+    if (subscriptionLoading) return false;
 
     const storageKey = await getSelfStructureLatestSeenStorageKey();
     const [statusJson, seenVersionKey] = await Promise.all([
@@ -94,7 +94,7 @@ export function useAnalysisUnreadBadges({
 
     if (!versionKey || !hasVisibleContent) return false;
     return versionKey !== seenKey;
-  }, [getSelfStructureLatestSeenStorageKey, isPaid, subscriptionLoading]);
+  }, [getSelfStructureLatestSeenStorageKey, subscriptionLoading]);
 
   const fetchSelfStructureHistoryUnread = useCallback(async () => {
     if (subscriptionLoading || !isPaid) return false;
@@ -224,12 +224,13 @@ export function useAnalysisUnreadBadges({
         prefetchedUnreadByType.weekly ||
         prefetchedUnreadByType.monthly
       );
-  const selfStructureUnread =
-    !subscriptionLoading && isPaid
-      ? selfStructureUnreadResolved
-        ? !!(selfStructureLatestUnread || selfStructureHistoryUnread)
-        : !!prefetchedUnreadByType.selfStructure
-      : false;
+  const selfStructureUnread = (() => {
+    if (subscriptionLoading) return false;
+    if (selfStructureUnreadResolved) {
+      return !!(selfStructureLatestUnread || (isPaid && selfStructureHistoryUnread));
+    }
+    return !!prefetchedUnreadByType.selfStructure;
+  })();
 
   return {
     unreadByType,

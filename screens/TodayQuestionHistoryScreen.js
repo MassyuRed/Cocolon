@@ -209,7 +209,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
         await load({ append: false, offset: 0 });
         Alert.alert(
           "今日の問い",
-          "回答を更新しました。自己構造分析に反映されます。",
+          "回答を更新しました。わたしマップに反映されます。",
         );
       } catch (e) {
         console.warn("TodayQuestionHistoryScreen: patch failed", e);
@@ -279,7 +279,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             </Text>
           ) : (
             <Text style={styles.helpText}>
-              過去の回答を編集すると、自己構造分析に即時反映されます。
+              過去の回答を編集すると、わたしマップに反映されます。
             </Text>
           )}
 

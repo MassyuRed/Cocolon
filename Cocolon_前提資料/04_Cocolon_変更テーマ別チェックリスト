@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-11"
+revision_date: "2026-05-15"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -251,3 +251,41 @@ Mash様から「三大中核構造」「EmlisAI強化」「Pieceが短く潰れ�
 3. `05_Cocolon_ルールファイル索引` の共通Core rule / guard / test。
 4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の名称混在境界。
 5. 変更対象中核ごとに、Emlisはpassed-only、Pieceはpreview/publish同一性、Analysisは非診断・素材domain分離を確認する。
+
+# 2026-05-13 差分追記: こころ天気の旧感情分析非表示を触る時
+
+1. backendは `api_analysis_reports.py` の `_is_kokoro_weather_report_row`、ready/detail cache key、paginationを確認する。
+2. weekly-days補助表示は `api_analysis_reads.py` で `kokoroWeather` 不成立を404にしているか確認する。
+3. 未読バッジは `api_report_reads.py` で旧レポートIDを候補にしていないか確認する。
+4. frontendは `kokoroWeatherFormatters.js` の `isKokoroWeatherReportRecord`、`useAnalysisReportActions.js` の `cocolon:kokoroWeatherLatestReport:v1`、History / Viewerのfail-closedを確認する。
+5. 退会後cleanupでは旧 `cocolon:analysisLatestReport` と新 `cocolon:kokoroWeatherLatestReport:v1` の両方を削除対象にする。
+6. 旧レポートをDBからDELETEしない。DB physical name、public route、`daily` / `weekly` / `monthly` 内部値を変更しない。
+
+## 2026-05-13 差分追記: わたしマップ変更時チェックリスト
+
+わたしマップ / 自己分析を触る時は、次を同時確認する。
+
+| チェック | 見る場所 |
+|---|---|
+| Free を完全遮断していないか | `api_self_structure.py`, `useAnalysisSelfStructureActions.js`, `AnalysisContentFirstScreen.js` |
+| `content_json.watashiMap` が additive で、legacy payload を消していないか | `astor_self_structure_report.py`, `watashi_map_service.py`, `test_self_structure_watashi_map_payload.py` |
+| `あなたは〇〇タイプ` 風になっていないか | `watashi_map_service.py`, `WatashiMapRenderer.js`, guide / tutorial / IAP copy |
+| route / DB physical name を rename していないか | `/self-structure/*`, `myprofile_reports`, `PUBLIC_API_REGISTRY`, `api_contract_registry.py` |
+| renderer fallback が残っているか | `watashiMapFormatters.js`, `SelfStructureReportViewerScreen.js` |
+| Free / Plus / Premium の履歴境界が一致しているか | `watashiMapAccessPolicy.js`, `SelfStructureReportHistoryScreen.js`, subscription tests |
+| access policy import path が実ファイル配置と一致しているか | 最新実ファイルでは `components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer import と一致。root copyは互換copyとして扱う |
+
+# 2026-05-15 差分追記: EmlisAI A案到達 Step15-20 を触る時
+
+EmlisAIのA案到達、A-P0判定、A案相当Composer、長期品質を触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md`
+2. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md`
+3. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
+4. `02C_Cocolon_国家システム資料_契約_境界_検証系.md`
+5. `05_Cocolon_ルールファイル索引`
+6. `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`
+7. Step別owner: `cocolon_text_generation_core/stabilization.py`, `emlis_ai_rollout_metrics_service.py`, `emlis_ai_ap0_migration_decision_service.py`, `emlis_ai_a_plan_equivalent_composer_service.py`, `emlis_ai_long_term_quality_service.py`
+8. Step別test: `test_cocolon_text_generation_core_step15_stabilization.py`, `test_emlis_ai_step16_rollout_metrics.py`, `test_emlis_ai_step17_broad_input_fixtures.py`, `test_emlis_ai_step18_ap0_migration_decision.py`, `test_emlis_ai_step19_a_plan_equivalent_composer.py`, `test_emlis_ai_step20_long_term_quality.py`
+
+禁止: A案相当導入を理由に、固定観測文fallback、外部LLM導入、DB rename、public route変更、response key変更、passed-only表示の解除をしない。

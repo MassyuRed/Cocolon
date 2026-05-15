@@ -21,6 +21,7 @@ export function useAnalysisTutorialOverlay({
   safeInsets,
   entryMeta,
   resetSelectedReports,
+  onResetToHome,
 }) {
   const tutorialScrollRef = useRef(null);
   const tutorialScrollYRef = useRef(0);
@@ -108,7 +109,7 @@ export function useAnalysisTutorialOverlay({
           title: "こころ天気（月）",
           message:
             "こころ天気（月）では、月の中で繰り返し見えていたこころの流れを週ごとに振り返れます。",
-          nextLabel: "自己分析へ",
+          nextLabel: "わたしマップへ",
           onNext: () => setTutorialStep(12),
           disableSpotlight: true,
           dimOpacity: 0,
@@ -118,9 +119,9 @@ export function useAnalysisTutorialOverlay({
         return {
           step: 12,
           mode: "info",
-          title: "自己分析レポート",
+          title: "わたしマップ",
           message:
-            "自己分析レポートでは、日々の感情入力をもとに、自分の考え方や感情の傾向をより深く振り返ることができます。",
+            "わたしマップでは、場面ごとに立ち上がりやすい役割と、そのとき選びやすい行動を見ていきます。これは性格タイプではなく、入力から見えた場面ごとの動き方です。",
           nextLabel: "ピース画面へ",
           onNext: () => {
             setTutorialStep(13);
@@ -194,9 +195,18 @@ export function useAnalysisTutorialOverlay({
     if (!isAnalysisTutorialStep) return;
     if (route === ROUTE_HOME) return;
 
-    resetSelectedReports?.();
-    setRoute(ROUTE_HOME);
-  }, [isAnalysisTutorialStep, resetSelectedReports, route, setRoute]);
+    if (typeof resetSelectedReports === "function") {
+      resetSelectedReports();
+      return;
+    }
+    if (typeof onResetToHome === "function") {
+      onResetToHome();
+      return;
+    }
+    if (typeof setRoute === "function") {
+      setRoute(ROUTE_HOME);
+    }
+  }, [isAnalysisTutorialStep, onResetToHome, resetSelectedReports, route, setRoute]);
 
   useLayoutEffect(() => {
     if (!isAnalysisTutorialVisible) {

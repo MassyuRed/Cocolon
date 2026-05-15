@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 204
-  mashos-api: 419
+  Cocolon: 216
+  mashos-api: 443
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -46,7 +46,7 @@ App.js 上の current fact:
 | Home | `Input` route, `screens/InputScreen.js` | `api_emotion_submit.py`, `api_home_state.py`, `home_gateway/*`, `api_app_bootstrap.py` | visible は Home、route/screen は Input が残る | 感情入力・notice・today-question・EmotionPiece preview/publish の正面入口 |
 | App runtime | `/app/bootstrap` runtime | `AppRuntimeContext.js`, `App.js`, `api_app_bootstrap.py` | feature flag名はbackend env / API payload由来で混在する | 起動時のversion gate / maintenance / feature flag制御 |
 | Analysis | `Analysis` route, `screens/Analysis*` | `api_analysis_reads.py`, `api_analysis_reports.py`, `astor_analysis_insight.py` | `api_myweb_*`, `astor_myweb_insight.py` は compat façade。DB は `myweb_reports` が実体 | レポート / analysis 読み取り面 |
-| Self Structure | `screens/SelfStructure*`, `screens/AnalysisSelfStructureScreen.js` | `api_self_structure.py`, `api_self_structure_reports.py`, `astor_self_structure_*` | `api_myprofile.py`, `api_myprofile_reports_read.py`, `astor_myprofile_*` は compat façade。DB は `myprofile_*` が実体 | 自己構造 latest/history/viewer |
+| わたしマップ / Self Structure | visible は `わたしマップ`、file/route は `screens/SelfStructure*`, `screens/AnalysisSelfStructureScreen.js` | `api_self_structure.py`, `api_self_structure_reports.py`, `astor_self_structure_*`, `watashi_map_service.py` | `api_myprofile.py`, `api_myprofile_reports_read.py`, `astor_myprofile_*` は compat façade。DB は `myprofile_*` が実体 | 場面ごとの役割と行動パターン。latest/history/viewer の内部名は維持 |
 | Piece | `Piece` route, `screens/Piece*`, `screens/NexusScreen.js`, `screens/Resonance*` | `api_piece_runtime.py`, `api_nexus.py`, `api_emotion_piece.py`, `piece_generation_*`, `piece_generated_*` | `api_mymodel_qna.py`, `api_emotion_reflection.py`, `generated_reflection_*`, `astor_reflection_*` は compat façade。DB は `mymodel_*` が実体 | Piece library / Nexus / Resonance / generated piece |
 | EmotionLog / Follow | `screens/EmotionLogScreen.js`, `screens/FollowListScreen.js` | `api_follow.py`, `api_emotion_log.py`, `api_emotion_notification_settings.py`, `astor_emotion_log_feed_*` | `api_friends.py`, `astor_friend_feed_*` は compat façade。DB は `friend_*`, `friendships`, `myprofile_links`, `follow_requests` が混在 | social timeline / follow / notification settings |
 | Ranking | `screens/Ranking*`, `screens/PieceResonanceRankingScreen.js` | `api_ranking*.py`, `api_ranking_piece_views.py`, `api_ranking_piece_resonances.py`, `astor_ranking_*` | `api_ranking_mymodel_*` は compat façade。DB/RPC に `mymodel` metrics が残る | 各種ランキング read-side |
@@ -69,7 +69,7 @@ App.js 上の current fact:
 - `MyWeb` は DB physical name / legacy route / compat façade に残る
 
 ## 4-3. Self Structure / MyProfile
-- visible は `Self Structure`
+- visible はユーザー向けには `わたしマップ`。`Self Structure` は internal / file / route 系の保管名として残る
 - current owner は `api_self_structure.py` / `api_self_structure_reports.py`
 - `MyProfile` は DB physical name / legacy route / compat façade に残る
 
@@ -300,8 +300,55 @@ RN巨大画面分割後も、Mash様が画面名を指示する時の正本は�
 | こころ天気（日） | `report_type="daily"` | 日単位レポートのvisible名。内部キー `daily` は維持する |
 | こころ天気（週） | `report_type="weekly"` | 週単位レポートのvisible名。内部キー `weekly` は維持する |
 | こころ天気（月） | `report_type="monthly"` | 月単位レポートのvisible名。内部キー `monthly` は維持する |
-| レポートこころ天気 | `content_json.kokoroWeather` | 日/週/月レポートの天気図風UI用payload。古いレポートでは存在しないことがある |
+| レポートこころ天気 | `content_json.kokoroWeather` | 日/週/月レポートの天気図風UI用payload。正式表示対象の必須payloadとして読む |
 | こころ温度 | `temperature.display`, `temperature_high`, `temperature_low` | 感情の良し悪しではなく、熱量・動きの強さを表示する値。表示は `20.3°` で、`℃` は使わない |
 | 観測メモあり | `observation_memo` | 注意報ではなく、過去〜現在の揺れ幅・切り替わり・混在が大きかったことを示す観測ラベル |
 
 こころ天気はAnalysisの感情分析側のvisible / presentation layerです。Self Structure / 自己分析のvisible名、DB physical name、public API route、`daily` / `weekly` / `monthly` 内部値はrenameしません。
+
+# 2026-05-13 差分追記: こころ天気正式表示対象の命名境界
+
+`こころ天気` への完全移行では、旧感情分析レポートを「別名で表示する」のではなく、payload成立条件で正式表示対象を判定します。
+
+| 名称 / key | 分類 | 読み方 |
+|---|---|---|
+| `KOKORO_WEATHER_SCHEMA_VERSION` | backend定数 | 値は `kokoro.weather.v1`。ready / detail / unread の表示対象判定に使う |
+| `isKokoroWeatherReportRecord` | frontend判定関数 | report recordがこころ天気として表示可能か判定する。旧本文表示のfallback条件ではない |
+| `kokoro_weather_version` / `kokoro_weather_legacy_version` / `standard_kokoro_weather_version` / `standard_report_kokoro_weather_version` | projection alias | content_json全体を持たないready/unread projection rowの表示対象判定用alias |
+| `cocolon:kokoroWeatherLatestReport:v1` | frontend cache namespace | 新しいlatest report cache。旧 `cocolon:analysisLatestReport` は通常readしない |
+| `Kokoro weather report not found` | API error detail | 旧感情分析レポートや不成立payloadをdetail / weekly-daysで表示しない時の404 detail |
+
+禁止: `kokoroWeather` 判定を理由に、DB physical name、`myweb_reports`、`analysis_reports` bridge、`/analysis/*` route、`daily` / `weekly` / `monthly` 内部値をrenameしない。
+
+## 2026-05-13 差分追記: わたしマップ命名境界
+
+Self Structure / MyProfile 系の visible 名は、ユーザー向けには `わたしマップ` へ寄せる。内部名は維持する。
+
+| 層 | current name | 維持する旧名 / 境界 |
+|---|---|---|
+| ユーザー向けタブ / 見出し | `わたしマップ` | 旧 `自己分析` はガイド補助・内部説明だけで使う。 |
+| 最新概要 | `今のわたしマップ` | `SelfStructureReportGenerateScreen.js` は file名維持。 |
+| 中核カード | `役割スイッチ` | type分類ではなく、場面ごとの役割。 |
+| 行動パターン | `よく通るルート` | 役割が入った後の選択傾向。 |
+| ズレ | `迷いやすい分かれ道` | 自己認識 / 実際 / 理想のズレ。 |
+| 詳細本文 | `詳しい自己分析レポート` | content_text / standardReport / deepReport は互換維持。 |
+| API route | `/self-structure/*` | public route rename 禁止。 |
+| DB physical | `myprofile_reports` | physical rename 禁止。 |
+| payload | `content_json.watashiMap` | additive。`selfStructureDeepVisual` は fallback として残す。 |
+| mode | `light / standard / deep(structural)` | Free=light、Plus=standard、Premium=deep/structural。 |
+
+こころ天気は感情分析の visible / presentation layer であり、わたしマップは自己分析の visible / presentation layer である。両者を混ぜない。
+
+# 2026-05-15 差分追記: EmlisAI A案到達 Step15〜20 内部名称境界
+
+最新実ファイルで増えた Step15〜20 の名称は、visible名・public route名・DB physical nameではなく、EmlisAI内部のdeveloper / QA / rollout meta名として読む。
+
+| 名称 | 種別 | 読み方 |
+|---|---|---|
+| `step15_common_core_stabilization` | meta key / Step label | 共通Core安定化結果。Emlisの出力目的を共通Coreへ移す意味ではない |
+| `emlis.step16_rollout_metrics.v1` | metrics version | 段階リリース計測の内部version。ユーザー表示名ではない |
+| `A-P0` / `step18_ap0_migration_decision` | migration decision | A-1へ進むか、未達Stepへ戻すかの内部判定 |
+| `cocolon_emlis_observation_composer.a1.v1` | internal composer model | A案相当Composer model。`Emlisの観測` のvisible名やAPI keyへrenameしない |
+| `a2_long_term_quality` / `step20_long_term_quality` | QA meta | 長期品質確認。履歴からユーザーの本心を補完する意味ではない |
+
+`input_feedback.comment_text`、`input_feedback.emlis_ai`、`observation_status`、表示名 `Emlisの観測` は互換名として維持する。

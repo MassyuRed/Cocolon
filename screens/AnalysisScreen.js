@@ -51,6 +51,7 @@ import {
   TUTORIAL_ANALYSIS_REPORTS,
   TUTORIAL_SELF_ANALYSIS_GUIDE,
   TUTORIAL_TOTAL_STEPS,
+  TUTORIAL_WATASHI_MAP_REPORT,
 } from "../tutorial/tutorialScenarioData";
 import {
   formatLatestUpdateLabel,
@@ -68,7 +69,9 @@ import { useAnalysisRouteState } from "./analysis/useAnalysisRouteState";
 import { useAnalysisUnreadBadges } from "./analysis/useAnalysisUnreadBadges";
 import { useAnalysisReportActions } from "./analysis/useAnalysisReportActions";
 import { useAnalysisSelfStructureActions } from "./analysis/useAnalysisSelfStructureActions";
+import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 import { useAnalysisTutorialOverlay } from "./analysis/useAnalysisTutorialOverlay";
+import { consumeAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 
 function useThemedStyles() {
   const { colors, themeName } = useTheme();
@@ -117,6 +120,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     homeSummariesLoading,
     fetchLatestReadyReport,
     refreshHomeSummaries,
+    refreshCurrentWeatherSummary,
   } = useAnalysisReportActions();
 
   const {
@@ -138,7 +142,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   });
 
   const {
-    openSelfStructureRoute,
     openSelfReportLatest,
     openSelfReportHistory,
     openSelfReportView,
@@ -176,6 +179,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     tutorialStep,
     setTutorialStep,
     entryMeta,
+    setRoute,
+    resetSelectedReports: resetAnalysisTutorialRoute,
     onResetToHome: resetAnalysisTutorialRoute,
   });
 
@@ -233,6 +238,24 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     return unsubscribe;
   }, [navigation]);
 
+  useEffect(() => {
+    if (!navigation?.addListener) return undefined;
+
+    let disposed = false;
+    const unsubscribe = navigation.addListener("focus", () => {
+      (async () => {
+        const shouldRefresh = await consumeAnalysisHomeSummaryDirty();
+        if (!shouldRefresh || disposed) return;
+        await refreshCurrentWeatherSummary();
+      })();
+    });
+
+    return () => {
+      disposed = true;
+      unsubscribe?.();
+    };
+  }, [navigation, refreshCurrentWeatherSummary]);
+
   const openReportHistory = (type, backRoute = ROUTE_EMOTION_ANALYSIS) => {
     setReportHistoryBackRoute(backRoute);
     setReportType(type);
@@ -268,11 +291,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       const nextMode = normalizeSelfStructureMode(
         tabRoute?.params?.openSelfReportLatestMode || screenRoute?.params?.openSelfReportLatestMode
       );
-      setSelfReportGenerateMode(nextMode);
-      openSelfStructureRoute({
-        targetRoute: "selfReportGenerate",
-        backRoute: ROUTE_SELF_STRUCTURE,
-      });
+      openSelfReportLatest(nextMode, ROUTE_SELF_STRUCTURE);
       clearExternalOpenParams({
         openSelfReportLatest: false,
         openSelfReportLatestMode: null,
@@ -306,7 +325,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   }, [
     clearExternalOpenParams,
     openSelfReportHistory,
-    openSelfStructureRoute,
+    openSelfReportLatest,
     screenRoute?.params?.openDistributionHome,
     screenRoute?.params?.openDistributionHomeAt,
     screenRoute?.params?.openReportHistory,
@@ -350,7 +369,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
 
       try {
         const cachedReport = entryMeta?.latestReports?.[normalizedType] || null;
-        const latestReport = cachedReport || (await fetchLatestReadyReport(normalizedType));
+        const usableCachedReport = isKokoroWeatherReportRecord(cachedReport) ? cachedReport : null;
+        const latestReport = usableCachedReport || (await fetchLatestReadyReport(normalizedType));
 
         if (!latestReport) {
           Alert.alert("最新レポート", `最新の${label}はまだありません。`);
@@ -508,10 +528,10 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         <View style={styles.safeContent}>
           <AnalysisSelfStructureScreen
             onBack={() => setRoute(ROUTE_HOME)}
-            onOpenLatestReport={() => openSelfReportLatest("standard", ROUTE_SELF_STRUCTURE)}
+            onOpenLatestReport={() => openSelfReportLatest("light", ROUTE_SELF_STRUCTURE)}
             onOpenHistory={() => openSelfReportHistory(ROUTE_SELF_STRUCTURE)}
             unreadLatest={
-              selfStructureUnreadResolved && !subscriptionLoading && isPaid
+              selfStructureUnreadResolved && !subscriptionLoading
                 ? selfStructureLatestUnread
                 : false
             }
@@ -545,6 +565,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             refreshHomeSummaries();
           }}
           onOpenReport={openSelfReportView}
+          onOpenLatest={() => openSelfReportLatest("light", ROUTE_SELF_STRUCTURE)}
+          onOpenSubscription={openSubscriptionSelect}
         />
       ) : route === "selfReportView" ? (
         <SelfStructureReportViewerScreen
@@ -553,6 +575,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             setRoute("selfReportHistory");
             refreshUnreadBadges();
           }}
+          onOpenSubscription={openSubscriptionSelect}
         />
       ) : route === "selfReportGenerate" ? (
         <SelfStructureReportGenerateScreen
@@ -590,7 +613,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
             unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
             unreadSelfStructureLatest={
-              selfStructureUnreadResolved && !subscriptionLoading && isPaid
+              selfStructureUnreadResolved && !subscriptionLoading
                 ? selfStructureLatestUnread
                 : false
             }
@@ -614,6 +637,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             tutorialReports={TUTORIAL_ANALYSIS_REPORTS}
             tutorialCounts={TUTORIAL_ANALYSIS_COUNTS}
             tutorialSelfAnalysisGuide={TUTORIAL_SELF_ANALYSIS_GUIDE}
+            tutorialWatashiMapReport={TUTORIAL_WATASHI_MAP_REPORT}
           />
         </View>
       )}
@@ -832,10 +856,10 @@ function AnalysisHome({
             <CocolonPressable
               style={styles.dashboardInfoCard}
               onPress={onOpenSelfReportLatest}
-              accessibilityLabel="現在の自己構造を開く"
+              accessibilityLabel="今のわたしマップを開く"
             >
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>自己構造</Text>
+              <Text style={styles.dashboardCardTitle}>わたしマップ</Text>
               <View style={styles.dashboardCardRight}>
                 <UnreadBadge
                   visible={unreadSelfStructureLatest}
@@ -850,15 +874,15 @@ function AnalysisHome({
               </View>
             </View>
 
-            <Text style={styles.monthlySummaryText}>現在の自己構造を確認</Text>
+            <Text style={styles.monthlySummaryText}>今のわたしマップを確認</Text>
             </CocolonPressable>
 
             <CocolonPressable
               style={[styles.historyInlineLink, { marginTop: 6 }]}
               onPress={onOpenSelfReportHistory}
-              accessibilityLabel="自己構造レポート履歴を見る"
+              accessibilityLabel="わたしマップの履歴を見る"
             >
-              <Text style={styles.historyInlineText}>自己構造レポート履歴を見る</Text>
+              <Text style={styles.historyInlineText}>わたしマップの履歴を見る</Text>
               <UnreadBadge
                 visible={unreadSelfStructureHistory}
                 style={styles.historyInlineUnreadBadge}

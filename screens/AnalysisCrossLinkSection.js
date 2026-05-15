@@ -8,14 +8,14 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 /**
  * AnalysisCrossLinkSection
  * --------------------
- * Analysis（感情構造レポート）→ Piece / Self Structure への交差リンク用UI。
+ * Analysis（こころ天気レポート）→ Piece / わたしマップへの交差リンク用UI。
  *
  * v0.1（Step 4）:
- * ・週報 / 月報の末尾に「自己構造トピック候補」を提示
+ * ・週報 / 月報の末尾に「わたしマップの深掘り候補」を提示
  * ・タップで Piece へ遷移（親から onOpenPieceDeepDive が渡っていればそれを呼ぶ）
  * ・未接続の場合は、アラートに「おすすめ質問」を表示して代替
  *
- * ※ 動的リンク（Self Structure の特定アンカーへフォーカスなど）は後回し。
+ * ※ 動的リンク（わたしマップの特定アンカーへフォーカスなど）は後回し。
  */
 
 const EMO_JP = Object.freeze({
@@ -64,7 +64,7 @@ function topic(id, title, blurb, suggestedQuestion) {
 }
 
 /**
- * 感情構造（週/月）→ 自己構造の「深掘り候補トピック」を生成
+ * こころ天気（週/月）→ わたしマップの「深掘り候補トピック」を生成
  * ※ 初期は静的ルールベースでOK（動的/生成AIは後回し）
  */
 export function buildSelfStructureTopics({ reportType = "weekly", metrics }) {
@@ -246,10 +246,10 @@ export function formatCrossTopicsText(topics, reportType) {
   const arr = Array.isArray(topics) ? topics : [];
 
   const lines = [];
-  lines.push("【自己構造トピック候補（ピースで深掘り）】");
+  lines.push("【わたしマップの深掘り候補（ピース）】");
 
   if (arr.length === 0) {
-    lines.push(`・${label}はまだ十分なログがないため、自己構造トピックはこれから見えてきます。`);
+    lines.push(`・${label}はまだ十分なログがないため、わたしマップの深掘り候補はこれから見えてきます。`);
     return lines.join("\n");
   }
 
@@ -298,16 +298,16 @@ export default function AnalysisCrossLinkSection({
       : "";
     Alert.alert(
       "ピースで深掘り",
-      `ピースを開いて「自己構造レポート」または「ピースライブラリ」で深掘りしてみてください。${q}`
+      `ピースを開いて「わたしマップ」または「ピースライブラリ」で深掘りしてみてください。${q}`
     );
   };
 
   return (
     <View style={styles.card}>
       <View style={styles.header}>
-        <Text style={styles.title}>【自己構造トピック候補】</Text>
+        <Text style={styles.title}>【わたしマップの深掘り候補】</Text>
         <Text style={styles.sub}>
-          {label}の感情構造から、自己構造（ピース）で触れると良さそうな論点
+          {label}のこころ天気から、わたしマップやピースで触れると良さそうな論点
         </Text>
       </View>
 

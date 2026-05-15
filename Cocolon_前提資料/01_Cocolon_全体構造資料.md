@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
-  Cocolon: 204
-  mashos-api: 419
+  Cocolon: 216
+  mashos-api: 443
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 623
-  included_files_cocolon: 204
-  included_files_mashos_api: 419
+  included_files_total: 659
+  included_files_cocolon: 216
+  included_files_mashos_api: 443
 ---
 
 # 1. 1行定義
@@ -1080,7 +1080,118 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 | Backend current weather | `kokoro_weather_service.py` / `api_analysis_reads.py` | `/analysis/home-summary` に `current_weather` をadditive追加する read-side 要約層 |
 | Backend report weather | `api_analysis_reports.py` | `content_json.kokoroWeather` を日/週/月レポートへadditive追加する report payload層 |
 | RN top UI | `AnalysisContentFirstScreen.js` / `KokoroWeatherCurrentCard.js` / `useAnalysisReportActions.js` | Analysisトップで「今のこころ天気」を表示する |
-| RN report UI | `AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` / `kokoroWeatherFormatters.js` | 既存Viewerの上部に天気図風UIと時間帯別Modalを追加する |
+| RN report UI | `AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` / `kokoroWeatherFormatters.js` | こころ天気成立レポートだけに天気図風UIと時間帯別Modalを表示し、旧感情分析本文へfallbackしない |
 | Copy / guide / subscription | `guide/*` / `tutorial/*` / `iapRuntimeCatalog.js` / `subscription_bootstrap_store.py` | 表示名を `こころ天気（日/週/月）` に更新し、サブスク差分は既存構造を維持する |
 
 この差分によりcoverage対象は `Cocolon=204` / `mashos-api=419` / `total=623` となります。自己分析、Piece、EmlisAIのruntime ownerは変更していません。
+
+# 2026-05-13 差分追記: こころ天気正式表示対象への移行
+
+2026-05-13 のこころ天気旧レポート非表示差分時点では、`Cocolon_4(22).zip` / `mashos-api_4(16).zip` にて、こころ天気導入後に残っていた旧感情分析レポート互換表示を、ユーザー可視領域から外す構造へ更新していました。この履歴sectionのファイル数は `Cocolon=204` / `mashos-api=419` / `total=623` です。最新coverageは冒頭metadataと末尾のわたしマップ差分追記を優先します。
+
+| 層 | current owner | 最新構造 |
+|---|---|---|
+| Backend display eligibility | `api_analysis_reports.py` | `_is_kokoro_weather_report_row` で `kokoro.weather.v1` のpayloadまたはprojection aliasを判定する |
+| Backend read APIs | `api_analysis_reports.py` / `api_analysis_reads.py` / `api_report_reads.py` | ready、detail、weekly-days、analysis unread から旧感情分析レポートを除外する |
+| Frontend cache / latest | `useAnalysisReportActions.js` / `AnalysisScreen.js` / `AnalysisContentFirstScreen.js` | `cocolon:kokoroWeatherLatestReport:v1` を使い、旧latest cacheや旧レポートへのfallbackを使わない |
+| Frontend history / viewer | `AnalysisReportHistoryScreen.js` / `AnalysisReportViewerScreen.js` | API結果・遷移stateの両方を `isKokoroWeatherReportRecord` で確認し、旧本文は表示しない |
+| Local cleanup / route helper | `accountLocalCleanup.js` / `legacyWireContracts.js` | 旧cache prefixと新cache prefixを退会後cleanup対象にし、detail / weekly-days path helperを整理する |
+
+この差分は、旧レポートをDBから削除する変更ではない。Analysis感情分析の正式体験をこころ天気だけに絞る変更として読む。
+
+# 2026-05-13 差分追記: わたしマップ反映後の全体構造
+
+2026-05-13時点の実ファイルは `Cocolon_8(7).zip` / `mashos-api_8(10).zip` を基準に読んでいた。最新coverageは2026-05-15差分追記を優先する。file count は `Cocolon=214`、`mashos-api=424`、`total=638`。
+
+## current fact
+
+- Analysis の自己分析側 visible 名は `わたしマップ` に寄っている。
+- `content_json.watashiMap` が自己分析レポートの additive payload として追加されている。
+- Free は `/self-structure/latest` の `light` 概要を読める。Plus は `standard`、Premium は `deep/structural` を深く読める。
+- `WatashiMapRenderer` は `watashiMap` を優先表示し、旧 `selfStructureDeepVisual` と `content_text` へ fallback する。
+- public route / DB physical name / report family は維持する。`/self-structure/*`、`myprofile_reports`、`report_mode`、legacy façade は rename しない。
+- 実ファイル上は `components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer の import path と一致している。root `components/watashiMapAccessPolicy.js` は同内容の互換copyとして残る。
+
+## 追加された構造単位
+
+| area | owner | 役割 |
+|---|---|---|
+| Backend payload | `mashos-api/ai/services/ai_inference/watashi_map_service.py` | `watashiMap` 生成、Free light projection、旧 deep visual adapter |
+| Backend latest | `api_self_structure.py` | Free light 許可、既存 standard/deep row の response-time light 投影 |
+| Backend report generation | `astor_self_structure_report.py` | `content_json.watashiMap` additive 追加、legacy payload 維持 |
+| Frontend renderer | `Cocolon/components/selfStructure/WatashiMapRenderer.js` | 役割スイッチ、ルート、分かれ道、未観測、lock card 表示 |
+| Frontend access policy | `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` | tier / report_mode / history / detail lock 境界。root `components/watashiMapAccessPolicy.js` は同内容の互換copy |
+| Frontend screens | `AnalysisContentFirstScreen.js` / `SelfStructureReportGenerateScreen.js` / `SelfStructureReportViewerScreen.js` / `SelfStructureReportHistoryScreen.js` | Top UI / latest / detail / history の visible 名と表示差分 |
+
+# 2026-05-15 差分追記: EmlisAI A案到達 Step15-20 / current path coverage
+
+最新実ファイル `Cocolon_7(10).zip` / `mashos-api_7(13).zip` で確認したcoverage対象は `Cocolon=216` / `mashos-api=443` / `total=659`。この追記は、前提資料本文に未記載だったcurrent pathを補完し、EmlisAI A案到達 Step15-20 の実装位置を読むための差分です。
+
+## Cocolon path coverage補完
+
+| file | 構造上の意味 |
+|---|---|
+| `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` | わたしマップの tier / report_mode / history / detail lock policy。`SelfStructureReportHistoryScreen.js` と `SelfStructureReportViewerScreen.js` が参照する現行配置。root copyと同内容で、前回のimport path mismatch watchは解消済みとして読む。 |
+| `Cocolon/lib/analysisHomeSummaryRefreshSignal.js` | 入力保存後にAnalysis Home Summaryをbest-effortでdirty化し、`AnalysisScreen.js` 側でconsumeするRN local refresh signal。API route / DB / 保存構造は変更しない。 |
+
+## mashos-api Step15-20 新規path
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py` | Step15 共通Core安定化。CoreTextPayload / TextGenerationResult / Guard結果 / used_evidence_span_ids / quality_flags が共通形式かをmeta化し、中核別出力目的・public契約・DB名を共通Coreへ移さないことを確認する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_rollout_metrics_service.py` | Step16 段階リリース計測。attempted / passed / rejected / unavailable / safety_blocked / primary_reason / coverage_group / composer_model をdeveloper/QA metaへ集計する。 |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_step15_stabilization.py` | Step15の共通形式・Emlis契約維持・境界drift検出・render metaを固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step16_rollout_metrics.py` | Step16のrollout metric event / aggregate / reply meta接続を固定する回帰。 |
+| `mashos-api/ai/tests/fixtures/emlis_ai_step17_broad_input_cases.py` | Step17 広い入力fixture。生活・体調・人間関係・学習・仕事・長文・履歴・cross coreを正解文一致ではなく構造条件で固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_step17_broad_input_fixtures.py` | Step17 fixtureのcoverage、forbidden_surface、evidence/scope条件を固定する回帰。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py` | Step18 A-P0移行判定。coverage matrix / rollout metrics / diagnostic_summary / Guard結果から、Step19へ進むかB案の戻り先Stepへ返すmetaを作る。 |
+| `mashos-api/ai/tests/test_emlis_ai_step18_ap0_migration_decision.py` | Step18のGreen条件、未達時return_steps、passed-onlyだけで進めない判定を固定する回帰。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_a_plan_equivalent_composer_service.py` | Step19 A案相当Composer導入。A-P0 green時だけ `cocolon_emlis_observation_composer.a1.v1` へpromoteし、B案Gate / scoped graph / fail-closed / passed-onlyを維持する。 |
+| `mashos-api/ai/tests/test_emlis_ai_step19_a_plan_equivalent_composer.py` | Step19のpromotion条件、未達時hold、B案境界維持、registry / limited composer接続を固定する回帰。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_long_term_quality_service.py` | Step20 長期品質。previous output similarity、surface variation、history/cross core evidence-only、distance boundary、QA metricsをdeveloper/QA metaへ残す。 |
+| `mashos-api/ai/tests/test_emlis_ai_step20_long_term_quality.py` | Step20の反復表面、履歴補完禁止、距離感drift、A-2長期運用品質metaを固定する回帰。 |
+
+## mashos-api Step0-14 / existing current path coverage補完
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_composer_client_registry.py` | Default composer registry。Step19でA案相当composer aliasを受け、Limited / A-1相当を環境値で切り替えられるが、既存route/response keyは変えない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_coverage_matrix_service.py` | Step08 coverage matrix。停止理由をB-S1拡張対象のcoverage groupへ変換するdeveloper meta。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_release_service.py` | Phase7 / Step16 release gate。off/internal/tutorial/limited_cases/all の段階リリース判断とmetrics sourceを持つ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_safety_boundary_service.py` | Step10 safety boundary。Composer前に危険境界をreason code化して止める非生成helper。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_user_address_service.py` | Emlis観測の呼びかけpolicy。display name callを一箇所に閉じ、二人称依存を抑える。 |
+| `mashos-api/ai/tests/test_emlis_ai_composer_client_registry.py` | Step02/06/19 registry・default composer・safety precedence回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_coverage_matrix_service.py` | Step08 coverage matrix group / reason mapping回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_diagnostic_summary.py` | Step01-10 diagnostic_summaryとsafety precedence回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_evidence_ledger_service.py` | Evidence Ledgerがsource span / offset / current input境界を保持し、本文生成しないことの回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_client.py` | LimitedComposerのPhraseUnit / role / SentencePlan / fixed surface禁止回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_observation_scope_service.py` | Scoped graph、included/excluded、safety_blocked、Step09 scope拡張回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_perspective_board_integrator.py` | Perspective board -> ObservationGraph integrationの構造回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase6_regression_contracts.py` | B案partial observation / non-passed空本文 / release readiness contract回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase7_staged_release.py` | Phase7 staged releaseのlimited_cases接続回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_safety_boundary_service.py` | Safety boundary reason code / graph・evidence検出回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_scoped_grounding.py` | scoped graphだけをGrounding対象にし、excluded evidenceでoverclaimを支えない回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_specialist_observers.py` | specialist observersが本文を作らずstructured reportだけ返す回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step13_surface_realizer.py` | Step13 surface policy、generic closing、TemplateGuard回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step14_guard_strengthening.py` | Step14 grounding / diagnosis-like / general knowledge / repeated surface回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_template_echo_guard_phase5.py` | Phase5 Template/Echo Gateの反復表面・過剰引用回帰。 |
+
+## Step15-20で変更された既存pathの読み方
+
+| file | 差分の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py` | Step15 `stabilization.py` の型・定数・report builderを公開し、共通Coreから参照できるようにした。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py` | Emlis adapter metaへ `step15_common_core_stabilization` / `common_core_stabilization` を追加し、Step19 metaを透過する。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py` | metaのJSON-safe変換を再帰対応にし、GuardResult metaが文字列化されず共通形式で残るようにした。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_composer_client_registry.py` | Limited composerに加えてA案相当composer aliasを解決できるようにした。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | Step19 A案相当client / model promotion metaをLimitedComposer境界に接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_release_service.py` | Step16 metricsで使うrelease meta / rollout stageの情報を保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step15 ready、Step16 metrics、Step18 A-P0 decision、Step19 A-1 meta、Step20 A-2 quality metaをdiagnostic_summary / multi_perspectiveへadditive接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py` | Template/Echo GuardがA案相当composer model markerをAI生成側として扱えるようにした。 |
+
+## 全体構造上の固定境界
+
+- EmlisAI Step15-20 は、`/emotion/submit` のpublic routeや `input_feedback.comment_text` のresponse keyを変更しない。
+- Step16/18/20 はdeveloper / QA metaであり、ユーザー向け本文を生成しない。
+- Step19のA案相当model名は内部composer modelの段階promotionであり、DB physical name、visible名、route名のrenameではない。
+- `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が現行Viewer/History import pathに存在するため、前回のpath mismatch watchは解消済みとして読む。root copyは互換/共通参照として残る。

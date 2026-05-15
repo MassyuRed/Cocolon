@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-11"
+revision_date: "2026-05-15"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2402,3 +2402,60 @@ Home/Inputを触る時は、Phase8をフロント導線追加として扱わな�
 `mashos-api_15(2).zip` では、RN側の `InputFeedbackReplyModal.js` / `useInputFeedbackModal.js` / `InputScreen.js` に変更はありません。表示名 `Emlisの観測`、`observation_status=passed` かつ本文ありの表示条件、`input_feedback.comment_text` 契約は維持されています。
 
 backend側では `emlis_ai_limited_composer_client.py` と `emlis_ai_reply_service.py` が共通文章生成基盤へadditive接続されました。Emlisの本文候補は `EmlisObservationComposer` adapterを通って `CoreTextComposer` / 共通Guardで検査され、reject時は空本文でfail-closedします。scoped graph、used evidence、coverage scope、fixed_string_renderer_used=false の境界は維持して読む。
+
+# 2026-05-15 差分追記: EmlisAI A案到達 Step15-20 runtime map
+
+EmlisAI immediate reply は、B案のfail-closed構造を維持したまま、A案相当へ進むためのmeta / QA / rollout層が追加された。読み方は「本文生成を広げるための無条件fallback」ではなく、「通してよい範囲と進める条件を可視化する段階promotion」です。
+
+```text
+emotion submit
+ -> render_emlis_ai_reply
+ -> Evidence Ledger / Perspective Observers / ObservationGraph
+ -> LimitedObservationScope / safety boundary
+ -> composer registry / rollout stage
+ -> LimitedComposer or A-plan-equivalent composer candidate
+ -> Common Core / Step15 stabilization
+ -> Reader / Grounding / Template Echo / Display Gate
+ -> Step16 rollout metrics
+ -> Step18 A-P0 migration decision
+ -> Step19 A-1 equivalent composer meta
+ -> Step20 long-term quality meta
+ -> observation_status=passed かつ comment_textありの場合だけ表示
+```
+
+## Step15-20 owner
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py` | Step15 共通Core安定化。CoreTextPayload / TextGenerationResult / Guard結果 / used_evidence_span_ids / quality_flags が共通形式かをmeta化し、中核別出力目的・public契約・DB名を共通Coreへ移さないことを確認する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_rollout_metrics_service.py` | Step16 段階リリース計測。attempted / passed / rejected / unavailable / safety_blocked / primary_reason / coverage_group / composer_model をdeveloper/QA metaへ集計する。 |
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_step15_stabilization.py` | Step15の共通形式・Emlis契約維持・境界drift検出・render metaを固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step16_rollout_metrics.py` | Step16のrollout metric event / aggregate / reply meta接続を固定する回帰。 |
+| `mashos-api/ai/tests/fixtures/emlis_ai_step17_broad_input_cases.py` | Step17 広い入力fixture。生活・体調・人間関係・学習・仕事・長文・履歴・cross coreを正解文一致ではなく構造条件で固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_step17_broad_input_fixtures.py` | Step17 fixtureのcoverage、forbidden_surface、evidence/scope条件を固定する回帰。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py` | Step18 A-P0移行判定。coverage matrix / rollout metrics / diagnostic_summary / Guard結果から、Step19へ進むかB案の戻り先Stepへ返すmetaを作る。 |
+| `mashos-api/ai/tests/test_emlis_ai_step18_ap0_migration_decision.py` | Step18のGreen条件、未達時return_steps、passed-onlyだけで進めない判定を固定する回帰。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_a_plan_equivalent_composer_service.py` | Step19 A案相当Composer導入。A-P0 green時だけ `cocolon_emlis_observation_composer.a1.v1` へpromoteし、B案Gate / scoped graph / fail-closed / passed-onlyを維持する。 |
+| `mashos-api/ai/tests/test_emlis_ai_step19_a_plan_equivalent_composer.py` | Step19のpromotion条件、未達時hold、B案境界維持、registry / limited composer接続を固定する回帰。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_long_term_quality_service.py` | Step20 長期品質。previous output similarity、surface variation、history/cross core evidence-only、distance boundary、QA metricsをdeveloper/QA metaへ残す。 |
+| `mashos-api/ai/tests/test_emlis_ai_step20_long_term_quality.py` | Step20の反復表面、履歴補完禁止、距離感drift、A-2長期運用品質metaを固定する回帰。 |
+
+## 既存ownerへの接続変更
+
+| file | 差分の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py` | Step15 `stabilization.py` の型・定数・report builderを公開し、共通Coreから参照できるようにした。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py` | Emlis adapter metaへ `step15_common_core_stabilization` / `common_core_stabilization` を追加し、Step19 metaを透過する。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py` | metaのJSON-safe変換を再帰対応にし、GuardResult metaが文字列化されず共通形式で残るようにした。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_composer_client_registry.py` | Limited composerに加えてA案相当composer aliasを解決できるようにした。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | Step19 A案相当client / model promotion metaをLimitedComposer境界に接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_release_service.py` | Step16 metricsで使うrelease meta / rollout stageの情報を保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step15 ready、Step16 metrics、Step18 A-P0 decision、Step19 A-1 meta、Step20 A-2 quality metaをdiagnostic_summary / multi_perspectiveへadditive接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py` | Template/Echo GuardがA案相当composer model markerをAI生成側として扱えるようにした。 |
+
+## 変更時の注意
+
+- `emlis_ai_reply_service.py` は Step15/16/18/19/20 meta を `diagnostic_summary` / `multi_perspective` へadditive接続する。ユーザー表示本文のfallbackではない。
+- `emlis_ai_composer_client_registry.py` はA案相当composer aliasを解決できるが、環境値で無理に `all` 固定して問題を隠さない。
+- `emlis_ai_template_echo_guard.py` はA案相当model markerをAI生成候補として扱う。固定観測文や旧safe fallbackを許可する変更ではない。
+- 履歴・DerivedUserModel・cross core材料は、本文で本心を補完するためではなく、evidence-only / scope-onlyのQA metaとして扱う。

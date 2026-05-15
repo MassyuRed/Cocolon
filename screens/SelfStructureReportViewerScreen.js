@@ -16,7 +16,17 @@ import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
-import SelfStructureDeepRenderer from "../components/selfStructure/SelfStructureDeepRenderer";
+import {
+  canViewWatashiMapDetailReport,
+  formatWatashiMapReportModeLabel,
+  getWatashiMapDetailLockLabel,
+  normalizeWatashiMapTier,
+} from "../components/selfStructure/watashiMapAccessPolicy";
+import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
+import {
+  hasWatashiMapRenderableContent,
+  normalizeWatashiMapPayload,
+} from "../components/selfStructure/watashiMapFormatters";
 
 function escapeHtml(s) {
   return String(s)
@@ -46,7 +56,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / Self Structure</div>
+      <div class="meta">Exported from Cocolon / Watashi Map</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;
@@ -123,8 +133,28 @@ function safeParseJson(raw) {
 
 function normalizeSelfStructureMode(mode) {
   const m = String(mode || "").toLowerCase().trim();
-  if (m === "deep") return "deep";
+  if (m === "structural") return "deep";
+  if (m === "light" || m === "standard" || m === "deep") return m;
   return "standard";
+}
+
+function normalizeSubscriptionTier(tier) {
+  return normalizeWatashiMapTier(tier);
+}
+
+function sanitizeSelfStructureViewerTitle(title, reportMode = "standard") {
+  const raw = String(title || "").trim();
+  const fallback = `${formatWatashiMapReportModeLabel(reportMode)}のわたしマップ`;
+  if (!raw || raw === "Report") return fallback;
+  return raw
+    .replace(/^自己構造レポート[：:].*$/g, "詳しい自己分析レポート")
+    .replace(/自己構造分析レポート[（(]月次[）)]/g, "詳しい自己分析レポート")
+    .replace(/自己構造レポート/g, "詳しい自己分析レポート")
+    .replace(/自己分析レポート/g, "詳しい自己分析レポート")
+    .replace(/現在の自己分析/g, "今のわたしマップ")
+    .replace(/現在の自己構造/g, "今のわたしマップ")
+    .replace(/自己構造/g, "わたしマップ")
+    .replace(/自己分析/g, "わたしマップ");
 }
 
 function formatRange(periodStart, periodEnd) {
@@ -143,14 +173,15 @@ export default function SelfStructureReportViewerScreen({
   report,
   onBack,
   initialAnchorKey = null,
+  onOpenSubscription,
 }) {
   const { themeName, colors } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
-  const { isPaid, loading: subscriptionLoading } = useSubscription();
-  const canViewFullText = !subscriptionLoading && !!isPaid;
+  const { tier, loading: subscriptionLoading } = useSubscription();
+  const viewerTier = normalizeSubscriptionTier(tier);
 
   const themed = useMemo(() => {
     if (!isDark) return {};
@@ -187,7 +218,7 @@ export default function SelfStructureReportViewerScreen({
     };
   }, [isDark, colors, ui]);
 
-  const title = report?.title || "Report";
+  const title = sanitizeSelfStructureViewerTitle(report?.title, report?.report_mode);
   const range = useMemo(() => {
     if (!report?.period_start || !report?.period_end) return "";
     return formatRange(report.period_start, report.period_end);
@@ -198,9 +229,24 @@ export default function SelfStructureReportViewerScreen({
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(contentJson?.report_mode || report?.report_mode);
   }, [contentJson?.report_mode, report?.report_mode]);
-  const hasDeepVisual = useMemo(() => {
-    return fetchedReportMode === "deep" && !!contentJson?.selfStructureDeepVisual;
-  }, [fetchedReportMode, contentJson]);
+  const canViewFullText = useMemo(() => {
+    return !subscriptionLoading && canViewWatashiMapDetailReport(viewerTier, fetchedReportMode);
+  }, [fetchedReportMode, subscriptionLoading, viewerTier]);
+  const hasWatashiMapVisual = useMemo(() => {
+    return hasWatashiMapRenderableContent(contentJson);
+  }, [contentJson]);
+  const watashiMapPayload = useMemo(() => {
+    if (!hasWatashiMapVisual) return null;
+    return normalizeWatashiMapPayload(contentJson, {
+      contentText,
+      reportMode: fetchedReportMode,
+      viewerTier,
+    });
+  }, [contentJson, contentText, fetchedReportMode, hasWatashiMapVisual, viewerTier]);
+  const detailReportVisible = useMemo(() => {
+    if (!hasWatashiMapVisual) return true;
+    return !!(watashiMapPayload?.detail_report?.visible || watashiMapPayload?.visibility?.detail_report_visible);
+  }, [hasWatashiMapVisual, watashiMapPayload]);
 
   // Analysis → Self Structure の動的リンクなどで「該当ブロックへスクロール」したい場合に使用
   const scrollRef = useRef(null);
@@ -284,26 +330,32 @@ export default function SelfStructureReportViewerScreen({
       {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
 
       <ScrollView ref={scrollRef} contentContainerStyle={styles.body}>
-        {!canViewFullText ? (
-          <Text style={[styles.empty, themed.empty]}>
-            {subscriptionLoading
-              ? "プラン情報を確認しています…"
-              : "自己構造分析レポートはPlusプラン以上で閲覧できます。"}
-          </Text>
+        {subscriptionLoading && !hasWatashiMapVisual ? (
+          <Text style={[styles.empty, themed.empty]}>プラン情報を確認しています…</Text>
         ) : (
           <>
-            {hasDeepVisual ? (
-              <SelfStructureDeepRenderer
+            {hasWatashiMapVisual ? (
+              <WatashiMapRenderer
                 contentJson={contentJson}
+                contentText={contentText}
                 colors={colors}
                 isDark={isDark}
+                reportMode={fetchedReportMode}
+                viewerTier={viewerTier}
+                onUpgradePress={onOpenSubscription}
               />
             ) : null}
 
-            {(contentText || !hasDeepVisual) ? (
+            {!canViewFullText && !hasWatashiMapVisual ? (
+              <Text style={[styles.empty, themed.empty]}>
+                {getWatashiMapDetailLockLabel(viewerTier, fetchedReportMode)}
+              </Text>
+            ) : null}
+
+            {((contentText && canViewFullText && (!hasWatashiMapVisual || detailReportVisible)) || (!hasWatashiMapVisual && canViewFullText && !contentText)) ? (
               <View style={[styles.bodyCard, themed.bodyCard]}>
-                {hasDeepVisual && contentText ? (
-                  <Text style={[styles.sectionLabel, themed.sectionLabel]}>文章で読む</Text>
+                {hasWatashiMapVisual && contentText ? (
+                  <Text style={[styles.sectionLabel, themed.sectionLabel]}>詳しい自己分析レポート</Text>
                 ) : null}
                 {contentText ? (
                   lines.map((line, idx) => {
@@ -332,7 +384,7 @@ export default function SelfStructureReportViewerScreen({
                     );
                   })
                 ) : (
-                  <Text style={[styles.empty, themed.empty]}>内容がありません</Text>
+                  <Text style={[styles.empty, themed.empty]}>まだ地図にできる観測が少なめです</Text>
                 )}
               </View>
             ) : null}

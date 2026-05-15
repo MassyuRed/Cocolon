@@ -17,30 +17,30 @@ export default function AnalysisSelfStructureScreen({
 }) {
   return (
     <AnalysisMenuScroll>
-      <AnalysisSubHeader title="自己分析" onBack={onBack} />
+      <AnalysisSubHeader title="わたしマップ" onBack={onBack} />
 
       <AnalysisDescription>
-        自己分析の見方を選んでください。{"\n"}
-        現在のレポートを見るか、過去の履歴をたどるかを選べます。
+        人は、相手や場所によって少しずつ違う自分で動いています。{"\n"}
+        場面ごとの役割と、そのとき選びやすい行動を見ていきます。
       </AnalysisDescription>
 
       <AnalysisMediumCard
-        title="レポート"
-        description="現在の自己分析を確認します"
+        title="今のわたしマップ"
+        description="場面ごとの役割と行動傾向を確認します"
         onPress={onOpenLatestReport}
         badgeVisible={unreadLatest}
         chevron="forward"
-        accessibilityLabel="現在の自己分析を開く"
+        accessibilityLabel="今のわたしマップを開く"
       />
 
       <View style={{ marginTop: 12 }}>
         <AnalysisMediumCard
-          title="履歴"
-          description="過去の自己分析を振り返ります"
+          title="わたしマップの履歴"
+          description="過去の詳しい自己分析レポートを振り返ります"
           onPress={onOpenHistory}
           badgeVisible={unreadHistory}
           chevron="forward"
-          accessibilityLabel="自己分析の履歴を開く"
+          accessibilityLabel="わたしマップの履歴を開く"
         />
       </View>
     </AnalysisMenuScroll>

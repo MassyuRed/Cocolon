@@ -1,6 +1,6 @@
 ---
 title: "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 ---
 
 # 02B. Snapshot / Worker / Publish / Read系
@@ -3483,7 +3483,65 @@ App rootは `App.js` entry shellから、`navigation/*`、`runtime/*`、`compone
 |---|---|---|
 | current weather read | `api_analysis_reads.py` / `kokoro_weather_service.py` | 今日0:00〜現在の本人向け観測を作り、`/analysis/home-summary.current_weather` として返す。今日入力がない場合は `status=no_observation` |
 | report artifact payload | `api_analysis_reports.py` / `kokoro_weather_service.py` | `content_json.kokoroWeather` を `standardReport` / `metrics` / `days` / `weeks` の既存payloadへadditive追加する |
-| RN report display | `AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` | `kokoroWeather` がある時だけ天気図風UIを表示し、ない時は従来のグラフ/本文のみ表示する |
+| RN report display | `AnalysisReportViewerScreen.js` / `KokoroWeatherForecastStrip.js` / `KokoroWeatherDetailModal.js` | `kokoroWeather` が成立するレポートだけ天気図風UIを表示し、ない旧レポートは表示対象外として旧本文へfallbackしない |
 | publish governance | `publish_governance.py` / `access_policy/report_access_policy.py` | 変更なし。表示対象・履歴保持・tier判定は既存結果を使う |
 
-`current_weather` は他者公開用surfaceではありません。`kokoroWeather` も既存レポートの補助表示であり、レポートの公開可否や履歴保持の判定を上書きしません。
+`current_weather` は他者公開用surfaceではありません。`kokoroWeather` はこころ天気正式表示対象の必須payloadです。公開可否や履歴保持の物理ルールは上書きしませんが、ready / detail / unread / RN表示は `kokoroWeather` 成立レポートだけを対象にします。
+
+# 2026-05-13 差分追記: 旧感情分析レポート非表示 Read boundary
+
+`mashos-api_4(16).zip` / `Cocolon_4(22).zip` の最新実ファイルでは、こころ天気read-sideは旧感情分析レポートを互換表示しません。`content_json.kokoroWeather` が成立する日/週/月レポートだけを正式表示対象にします。
+
+| boundary | owner | 最新構造 |
+|---|---|---|
+| ready projection | `api_analysis_reports.py` | projection selectに `kokoro_weather_version` / snake_case / `standardReport` 系aliasを追加し、projection rowでも表示対象を判定する |
+| ready pagination | `api_analysis_reports.py` | 旧レポートを飛ばして必要件数まで読み続け、`has_more` / `next_offset` はこころ天気基準で返す |
+| detail cache | `api_analysis_reports.py` | detail cache keyに `kokoro_weather_only` / `kokoro_weather_version` を含め、旧レポートdetailは404にする |
+| weekly-days | `api_analysis_reads.py` | 旧週レポートは `Kokoro weather report not found` として404にする |
+| analysis unread | `api_report_reads.py` | `_fetch_latest_ready_myweb_ids` がこころ天気成立レポートだけをID候補にする。旧レポートでは未読を立てない |
+| frontend cache/read | `useAnalysisReportActions.js` / `AnalysisScreen.js` | `cocolon:kokoroWeatherLatestReport:v1` だけをread/writeし、旧 `cocolon:analysisLatestReport` は通常readしない |
+
+DB rowのDELETE、DB physical rename、`daily` / `weekly` / `monthly` の内部値変更は行わない。
+
+## 2026-05-13 差分追記: わたしマップ Read / Publish 境界
+
+自己分析の read-side は `わたしマップ` として表示されるが、国家システム上の route / table / report family は維持する。
+
+### backend read / payload
+
+| file | 国家システム上の扱い |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_self_structure.py` | `/self-structure/latest` で Free light を許可する。既存 standard/deep row は上書きせず、response-time に `light` へ投影する。 |
+| `mashos-api/ai/services/ai_inference/astor_self_structure_report.py` | 既存 `content_text` / `standardReport` / `deepReport` / `selfStructureDeepVisual` を残したまま、`content_json.watashiMap` を additive 追加する。 |
+| `mashos-api/ai/services/ai_inference/watashi_map_service.py` | `build_watashi_map` / `build_watashi_map_from_content_json` / `project_watashi_map_for_light` / `adapt_self_structure_deep_visual_to_watashi_map` を持つ生成・投影 owner。 |
+| `mashos-api/ai/services/ai_inference/api_contract_registry.py` | `/self-structure/latest` / `/self-structure/monthly/ensure` / detail に `content_json.watashiMap` additive note を追加。 |
+
+### RN read surface
+
+| file | 国家システム上の扱い |
+|---|---|
+| `Cocolon/screens/AnalysisContentFirstScreen.js` | Analysis top の self tab で `WatashiMapRenderer` を表示。 |
+| `Cocolon/screens/SelfStructureReportGenerateScreen.js` | latest / generated view の `watashiMap` owner。 |
+| `Cocolon/screens/SelfStructureReportViewerScreen.js` | history detail で `watashiMap` 優先、旧 payload fallback。 |
+| `Cocolon/screens/SelfStructureReportHistoryScreen.js` | history read / lock / PDF 表示境界。 |
+
+### fail-closed
+
+- `watashiMap` がない旧レポートは `selfStructureDeepVisual` adapter へ落とす。
+- どちらもなければ `content_text` を `詳しい自己分析レポート` として読む。
+- Free は `summary_visible=true` の入口だけ表示し、routes / crossroads / detail_report は lock する。
+- 最新実ファイルでは `components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer の import path と一致している。root copyは互換copyとして扱う。
+
+# 2026-05-15 差分追記: Analysis / わたしマップ read-side path補完
+
+最新RN実ファイルでは、Analysis / Self Structure read-sideに次のpathを明示する。
+
+| file | 構造上の意味 |
+|---|---|
+| `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` | わたしマップの tier / report_mode / history / detail lock policy。`SelfStructureReportHistoryScreen.js` と `SelfStructureReportViewerScreen.js` が参照する現行配置。root copyと同内容で、前回のimport path mismatch watchは解消済みとして読む。 |
+| `Cocolon/lib/analysisHomeSummaryRefreshSignal.js` | 入力保存後にAnalysis Home Summaryをbest-effortでdirty化し、`AnalysisScreen.js` 側でconsumeするRN local refresh signal。API route / DB / 保存構造は変更しない。 |
+
+## Read-side境界
+
+- `analysisHomeSummaryRefreshSignal.js` は、Input保存後にAnalysis Homeのsummaryを再読込させるbest-effort local signal。Snapshot / Worker / Publish / Report read APIを置換しない。
+- `components/selfStructure/watashiMapAccessPolicy.js` は、Viewer / Historyのread-side表示可否をtier/report_modeで判定する。DB physical nameやSelf Structure routeは変更しない。

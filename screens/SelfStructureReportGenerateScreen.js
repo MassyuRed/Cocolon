@@ -21,20 +21,24 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, apiGet, API_BASE_URL } from "../lib/apiClient";
 import { SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
-import SelfStructureDeepRenderer from "../components/selfStructure/SelfStructureDeepRenderer";
+import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
+import {
+  hasWatashiMapRenderableContent,
+  normalizeWatashiMapPayload,
+} from "../components/selfStructure/watashiMapFormatters";
 import CocolonBackButton from "../components/CocolonBackButton";
 
-// Self Structure（現在の自己構造）: latest viewer
+// わたしマップ（Self Structure latest）: latest viewer
 const API_BASE = API_BASE_URL;
 const SELF_STRUCTURE_LATEST_ENDPOINT = `${API_BASE}${SELF_STRUCTURE_WIRE.routes.latest}`;
 
-// ---- Self Structure: 3 modes (Light/Standard/Deep) ----
+// ---- わたしマップ: 3 modes (Light/Standard/Deep) ----
 const TIER_PERMISSION_MAP = Object.freeze({
-  free: [],
-  plus: ["standard"],
-  premium: ["standard", "deep"],
+  free: ["light"],
+  plus: ["light", "standard"],
+  premium: ["light", "standard", "deep"],
 });
-const MODE_LABEL = Object.freeze({ standard: "Standard", deep: "Deep" });
+const MODE_LABEL = Object.freeze({ light: "概要", standard: "標準マップ", deep: "深いマップ" });
 
 function normalizeSubscriptionTier(tier) {
   const t = String(tier || "").toLowerCase().trim();
@@ -48,6 +52,7 @@ function normalizeSubscriptionTier(tier) {
 
 function normalizeSelfStructureMode(mode) {
   const m = String(mode || "").toLowerCase().trim();
+  if (m === "structural") return "deep";
   if (m === "light" || m === "standard" || m === "deep") return m;
   return "standard";
 }
@@ -64,20 +69,21 @@ function coerceAllowedModes(maybeAllowedModes, tier) {
   if (Array.isArray(maybeAllowedModes) && maybeAllowedModes.length > 0) {
     const cleaned = maybeAllowedModes
       .map((x) => normalizeSelfStructureMode(x))
-      .filter((x) => x === "standard" || x === "deep");
+      .filter((x) => x === "light" || x === "standard" || x === "deep");
     const uniq = [];
     cleaned.forEach((m) => {
       if (!uniq.includes(m)) uniq.push(m);
     });
-    return uniq.length > 0 ? uniq : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["standard"];
+    return uniq.length > 0 ? uniq : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["light"];
   }
-  return TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["standard"];
+  return TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["light"];
 }
 
 function defaultModeForTier(tier, allowedModes) {
-  const allowed = Array.isArray(allowedModes) && allowedModes.length > 0 ? allowedModes : ["standard"];
+  const allowed = Array.isArray(allowedModes) && allowedModes.length > 0 ? allowedModes : TIER_PERMISSION_MAP[normalizeSubscriptionTier(tier)] || ["light"];
   if (allowed.includes("standard")) return "standard";
-  return allowed[0] || "standard";
+  if (allowed.includes("light")) return "light";
+  return allowed[0] || "light";
 }
 
 function safeParseJson(raw) {
@@ -121,7 +127,7 @@ async function exportTextToPdf(title, text) {
     </head>
     <body>
       <h1>${escapeHtml(safeTitle)}</h1>
-      <div class="meta">Exported from Cocolon / Self Structure</div>
+      <div class="meta">Exported from Cocolon / わたしマップ</div>
       <pre>${escapeHtml(safeText)}</pre>
     </body>
   </html>`;
@@ -193,9 +199,16 @@ function buildErrorMessage(err) {
 }
 
 function sanitizeSelfStructureReportText(text) {
+  const detailToken = "__COCOLON_DETAIL_SELF_REPORT__";
   return String(text || "")
-    .replace(/自己構造分析レポート[（(]月次[）)]/g, "自己分析レポート")
-    .replace(/自己構造/g, "自己分析");
+    .replace(/詳しい自己分析レポート/g, detailToken)
+    .replace(/自己構造分析レポート[（(]月次[）)]/g, "詳しい自己分析レポート")
+    .replace(/自己構造レポート/g, "詳しい自己分析レポート")
+    .replace(/自己分析レポート/g, "詳しい自己分析レポート")
+    .replace(/現在の自己分析/g, "今のわたしマップ")
+    .replace(/現在の自己構造/g, "今のわたしマップ")
+    .replace(/自己構造/g, "わたしマップ")
+    .replace(new RegExp(detailToken, "g"), "詳しい自己分析レポート");
 }
 
 // NOTE: Phase3 で「閲覧=生成」を廃止し、月次は MashOS 側で生成/保存する。
@@ -210,7 +223,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "現在の自己分析", showTitle = true }) {
+export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "今のわたしマップ", showTitle = true }) {
   const { themeName, colors } = useTheme();
   const {
     tier: ctxSubscriptionTier,
@@ -322,15 +335,27 @@ const [loading, setLoading] = useState(true);
     };
   }, [isDark, colors, ui]);
 
-  const reportTitle = titleOverride || "現在の自己分析";
+  const reportTitle = titleOverride || "今のわたしマップ";
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(meta?.report_mode || contentJson?.report_mode || reportMode);
   }, [meta?.report_mode, contentJson?.report_mode, reportMode]);
-  const hasDeepVisual = useMemo(() => {
-    return fetchedReportMode === "deep" && !!contentJson?.selfStructureDeepVisual;
-  }, [fetchedReportMode, contentJson]);
+  const hasWatashiMapVisual = useMemo(() => {
+    return hasWatashiMapRenderableContent(contentJson);
+  }, [contentJson]);
+  const watashiMapPayload = useMemo(() => {
+    if (!hasWatashiMapVisual) return null;
+    return normalizeWatashiMapPayload(contentJson, {
+      contentText: reportText,
+      reportMode: fetchedReportMode,
+      viewerTier: subscriptionTier,
+    });
+  }, [contentJson, fetchedReportMode, hasWatashiMapVisual, reportText, subscriptionTier]);
+  const shouldShowDetailText = useMemo(() => {
+    if (!hasWatashiMapVisual) return true;
+    return !!(watashiMapPayload?.detail_report?.visible || watashiMapPayload?.visibility?.detail_report_visible);
+  }, [hasWatashiMapVisual, watashiMapPayload]);
 
   const handleBack = useCallback(() => {
     // 先に cancel しておく（親の activeView 切替より前に止める）
@@ -430,12 +455,12 @@ const run = useCallback(async ({ force = false } = {}) => {
 
     const json = await res.json();
     const serverMeta = safeParseJson(json?.meta);
-    const hasVisualContract = !!serverMeta?.selfStructureDeepVisual;
+    const hasVisualContract = !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
     const text = sanitizeSelfStructureReportText(
       String(json?.content_text || "").trim()
     );
     if (!text && !hasVisualContract) {
-      throw new Error("レポート本文が空でした。");
+      throw new Error("わたしマップにできる観測がまだ少なめでした。");
     }
 
     // ★ ここで画面がもう無い（戻った）なら、以降の setState を行わない
@@ -486,13 +511,13 @@ const run = useCallback(async ({ force = false } = {}) => {
     if (isPaywall) {
       Alert.alert(
         "プランが必要です",
-        "現在のプランではこの機能を利用できません。\n\nプランを確認しますか？",
+        "わたしマップの入口は無料で見られます。詳しい自己分析レポートを読むには、Plusプラン以上が必要です。\n\nプランを確認しますか？",
         [
           { text: "あとで", style: "cancel" },
           { text: "プランを見る", onPress: openSubscriptionSelect },
         ]
       );
-      safeSet(() => setErrorMsg("現在のプランでは利用できません。"));
+      safeSet(() => setErrorMsg("詳しい自己分析レポートはPlusプラン以上で読めます。"));
       return;
     }
 
@@ -548,12 +573,12 @@ const run = useCallback(async ({ force = false } = {}) => {
         </View>
 
         <View style={styles.modeButtonsRow}>
-          {["standard", "deep"].map((m) => {
+          {["light", "standard", "deep"].map((m) => {
             const allowed = (allowedModes || []).includes(m);
             const active = reportMode === m;
 
             const iconName =
-              m === "standard" ? "layers-outline" : "analytics-outline";
+              m === "light" ? "map-outline" : m === "standard" ? "layers-outline" : "analytics-outline";
 
             const iconColor = !allowed
               ? isDark
@@ -585,7 +610,9 @@ const run = useCallback(async ({ force = false } = {}) => {
                     const msg =
                       m === "deep"
                         ? `「${label}」はPremiumプランで利用できます。\n\n続けるには Premiumプランをご確認ください。`
-                        : `「${label}」はPlusプランのみ利用できます。\n\nプランを確認しますか？`;
+                        : m === "standard"
+                        ? `「${label}」はPlusプラン以上で利用できます。\n\nプランを確認しますか？`
+                        : `「${label}」はFreeプランでも利用できます。\n\nプラン情報を更新してからもう一度お試しください。`;
                     Alert.alert("プランが必要です", msg, [
                       { text: "あとで", style: "cancel" },
                       {
@@ -626,7 +653,7 @@ const run = useCallback(async ({ force = false } = {}) => {
         ) : null}
 
         <Text style={[styles.modeHint, themed.empty]}>
-          ※モード変更後は「更新」を押すと反映されます。DeepはPremiumプランで利用できます。
+          ※モード変更後は「更新」を押すと反映されます。概要はFree、標準マップはPlus、深いマップはPremiumプランで利用できます。
         </Text>
       </View>
       ) : null}
@@ -645,18 +672,22 @@ const run = useCallback(async ({ force = false } = {}) => {
 
       {!loading && !errorMsg && (
         <>
-          {hasDeepVisual ? (
-            <SelfStructureDeepRenderer
+          {hasWatashiMapVisual ? (
+            <WatashiMapRenderer
               contentJson={contentJson}
+              contentText={reportText}
               colors={colors}
               isDark={isDark}
+              reportMode={fetchedReportMode}
+              viewerTier={subscriptionTier}
+              onUpgradePress={openSubscriptionSelect}
             />
           ) : null}
 
-          {(reportText || !hasDeepVisual) ? (
+          {((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
             <View style={[styles.bodyCard, themed.bodyCard]}>
-              {hasDeepVisual && reportText ? (
-                <Text style={[styles.sectionLabel, themed.sectionLabel]}>文章で読む</Text>
+              {hasWatashiMapVisual && reportText ? (
+                <Text style={[styles.sectionLabel, themed.sectionLabel]}>詳しい自己分析レポート</Text>
               ) : null}
               {reportText ? (
                 reportText.split("\n").map((line, idx) => (
@@ -665,7 +696,7 @@ const run = useCallback(async ({ force = false } = {}) => {
                   </Text>
                 ))
               ) : (
-                <Text style={[styles.empty, themed.empty]}>内容がありません</Text>
+                <Text style={[styles.empty, themed.empty]}>まだ地図にできる観測が少なめです</Text>
               )}
             </View>
           ) : null}
@@ -689,7 +720,7 @@ const run = useCallback(async ({ force = false } = {}) => {
           <CocolonBackButton
             onPress={handleBack}
             style={styles.backBtn}
-            accessibilityLabel="現在の自己分析から戻る"
+            accessibilityLabel="今のわたしマップから戻る"
           />
 
           <View style={styles.headerRight}>

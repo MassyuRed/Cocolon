@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-12"
+revision_date: "2026-05-15"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -198,7 +198,7 @@ revision_date: "2026-05-12"
 - repo: `Cocolon`
 - system: `account / subscription boundary helper`
 - 現行状態: `shared`
-- 役割: 退会後の端末内ユーザー別stateを削除するfrontend cleanup boundary。input draft / self-structure seen / analysis latest report cacheを扱う。
+- 役割: 退会後の端末内ユーザー別stateを削除するfrontend cleanup boundary。input draft / self-structure seen / 旧analysis latest report cache / 新こころ天気 latest report cacheを扱う。
 - 直接関係ファイル:
   - `Cocolon/lib/inputDraftStorage.js` — import
 - このファイルを直接参照するファイル:
@@ -4121,3 +4121,67 @@ Phase8で追加された backend support は、EmlisAI本文品質を守るた�
 | `Cocolon/screens/analysisReport/analysisReportAccessPolicy.js` | Freeでは短め表示と基本図、Plusでは標準本文、Premiumでは深い観測を見せるための表示文言を更新。tier判定ロジックは維持 |
 
 こころ天気化は感情分析だけに適用します。自己分析の `Plus以上で閲覧可` / `PremiumでDeep` の既存構造は変更しません。
+
+# 2026-05-13 差分追記: こころ天気 latest cache cleanup boundary
+
+`Cocolon/lib/accountLocalCleanup.js` は、こころ天気移行後も退会後local cleanupのownerです。旧cacheを読まない実装へ変わっていますが、削除漏れ防止のためcleanupでは旧cache prefixと新cache prefixの両方を扱います。
+
+| cache prefix | 扱い |
+|---|---|
+| `cocolon:analysisLatestReport:{userId}:*` | 旧感情分析latest cache。通常readでは使わないが、退会後cleanupでは削除対象に残す |
+| `cocolon:kokoroWeatherLatestReport:v1:{userId}:*` | 新こころ天気latest cache。こころ天気成立レポートだけを書き込む |
+
+この変更はaccount / subscription権限の変更ではありません。退会後の端末内データ削除範囲を、こころ天気cache namespace更新に合わせたものです。
+
+## 2026-05-13 差分追記: Subscription / copy / backend支援におけるわたしマップ
+
+`わたしマップ` は Free 完全遮断ではなく、Free light 概要を入口として見せ、Plus / Premium で詳細本文・履歴・深掘りを開く構造へ移動した。
+
+| file | 差分 |
+|---|---|
+| `Cocolon/lib/iap/iapRuntimeCatalog.js` | サブスク訴求文言を `わたしマップ` 基準へ更新。入口無料、深さで Plus/Premium の文脈にする。 |
+| `mashos-api/ai/services/ai_inference/subscription_bootstrap_store.py` | backend 側 bootstrap / plan copy を `わたしマップ` に寄せる。 |
+| `mashos-api/ai/services/ai_inference/subscription.py` | `allowed_self_structure_modes_for_tier` / `is_self_structure_mode_allowed` / `assert_self_structure_mode_allowed` を追加し、Free=light を Self Structure / わたしマップで許可する。 |
+| `mashos-api/ai/services/ai_inference/subscription_projection.py` / `api_subscription.py` | allowed modes の projection 境界を新方針と合わせて確認する対象。 |
+| `mashos-api/ai/tests/test_subscription_self_structure_modes.py` | tier 別 mode 境界の回帰確認。 |
+
+current mode 読み替え:
+
+| tier | mode | visible |
+|---|---|---|
+| Free | `light` | 今のわたしマップ概要 |
+| Plus | `standard` | 標準マップ / 詳しい自己分析レポート |
+| Premium | `deep` / `structural` | 深いマップ / 長期・分かれ道深掘り |
+
+# 2026-05-15 差分追記: EmlisAI Step15-20 backend test coverage
+
+EmlisAI A案到達工程では、正解文一致ではなく、構造・根拠・禁止表面・meta readinessで品質を固定するtestが追加/明示されている。
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/tests/test_cocolon_text_generation_core_step15_stabilization.py` | Step15の共通形式・Emlis契約維持・境界drift検出・render metaを固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step16_rollout_metrics.py` | Step16のrollout metric event / aggregate / reply meta接続を固定する回帰。 |
+| `mashos-api/ai/tests/fixtures/emlis_ai_step17_broad_input_cases.py` | Step17 広い入力fixture。生活・体調・人間関係・学習・仕事・長文・履歴・cross coreを正解文一致ではなく構造条件で固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_step17_broad_input_fixtures.py` | Step17 fixtureのcoverage、forbidden_surface、evidence/scope条件を固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step18_ap0_migration_decision.py` | Step18のGreen条件、未達時return_steps、passed-onlyだけで進めない判定を固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step19_a_plan_equivalent_composer.py` | Step19のpromotion条件、未達時hold、B案境界維持、registry / limited composer接続を固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step20_long_term_quality.py` | Step20の反復表面、履歴補完禁止、距離感drift、A-2長期運用品質metaを固定する回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_composer_client_registry.py` | Step02/06/19 registry・default composer・safety precedence回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_coverage_matrix_service.py` | Step08 coverage matrix group / reason mapping回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_diagnostic_summary.py` | Step01-10 diagnostic_summaryとsafety precedence回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_evidence_ledger_service.py` | Evidence Ledgerがsource span / offset / current input境界を保持し、本文生成しないことの回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_client.py` | LimitedComposerのPhraseUnit / role / SentencePlan / fixed surface禁止回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_observation_scope_service.py` | Scoped graph、included/excluded、safety_blocked、Step09 scope拡張回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_perspective_board_integrator.py` | Perspective board -> ObservationGraph integrationの構造回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase6_regression_contracts.py` | B案partial observation / non-passed空本文 / release readiness contract回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase7_staged_release.py` | Phase7 staged releaseのlimited_cases接続回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_safety_boundary_service.py` | Safety boundary reason code / graph・evidence検出回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_scoped_grounding.py` | scoped graphだけをGrounding対象にし、excluded evidenceでoverclaimを支えない回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_specialist_observers.py` | specialist observersが本文を作らずstructured reportだけ返す回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step13_surface_realizer.py` | Step13 surface policy、generic closing、TemplateGuard回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_step14_guard_strengthening.py` | Step14 grounding / diagnosis-like / general knowledge / repeated surface回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_template_echo_guard_phase5.py` | Phase5 Template/Echo Gateの反復表面・過剰引用回帰。 |
+
+## 支援系としての読み方
+
+これらのtestは、DB physical name、public API route、RN visible nameを変更するためのtestではない。`comment_text` は passed-only、non-passedは空本文、履歴/cross coreはevidence-onlyという境界を守るためのsupport / regression testとして読む。

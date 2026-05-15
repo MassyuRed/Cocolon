@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-11"
+revision_date: "2026-05-15"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1673,3 +1673,23 @@ Input / Save / Dispatch系では、EmlisAI immediate reply と Piece preview が
 - EmlisAI: `emlis_ai_limited_composer_client.py` が候補文を `EmlisObservationComposer` adapter経由で共通Coreへ通す。`emlis_ai_reply_service.py` はmetaをadditiveに残す。
 - Piece: `emotion_piece_generation_service.py` が `evaluate_piece_composer` を呼び、共通Coreでrejectされた回答は空本文・blockedへfail-closedする。publish時再生成は行わない。
 - RN側のInput screen / modal / routeは今回変更なし。
+
+# 2026-05-15 差分追記: EmlisAI immediate reply Step15-20 dispatch境界
+
+`/emotion/submit` 後のEmlisAI immediate replyでは、Step15-20がdispatch後の候補生成・Gate・meta集計にadditive接続されている。入力保存・emotion_log保存・Home gatewayのwrite pathは変更しない。
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py` | Step15 共通Core安定化。CoreTextPayload / TextGenerationResult / Guard結果 / used_evidence_span_ids / quality_flags が共通形式かをmeta化し、中核別出力目的・public契約・DB名を共通Coreへ移さないことを確認する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_rollout_metrics_service.py` | Step16 段階リリース計測。attempted / passed / rejected / unavailable / safety_blocked / primary_reason / coverage_group / composer_model をdeveloper/QA metaへ集計する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py` | Step18 A-P0移行判定。coverage matrix / rollout metrics / diagnostic_summary / Guard結果から、Step19へ進むかB案の戻り先Stepへ返すmetaを作る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_a_plan_equivalent_composer_service.py` | Step19 A案相当Composer導入。A-P0 green時だけ `cocolon_emlis_observation_composer.a1.v1` へpromoteし、B案Gate / scoped graph / fail-closed / passed-onlyを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_long_term_quality_service.py` | Step20 長期品質。previous output similarity、surface variation、history/cross core evidence-only、distance boundary、QA metricsをdeveloper/QA metaへ残す。 |
+
+## dispatch上の読み方
+
+- Step15はCommon Coreのshape確認であり、Emlisの出力責務をCommon Coreへ移さない。
+- Step16はrelease gateとdiagnostic_summaryを計測化する。passed率だけではなく、rejected/unavailable/safety_blockedを残す。
+- Step18は未達時に戻り先Stepを返す。Step19へ無条件進行しない。
+- Step19はA-P0 greenとrollout条件がそろった時だけcomposer_modelをA案相当名へ切り替える。
+- Step20は履歴/cross coreの過剰補完を検出する。履歴を「本心の補完」に使わない。
