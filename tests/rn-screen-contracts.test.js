@@ -31,6 +31,23 @@ function assertNotIncludes(source, tokens, context) {
   }
 }
 
+function loadInputFeedbackModelForContractTest() {
+  const source = read('screens/input/inputFeedbackModel.js')
+    .replace(/export\s+const\s+([A-Za-z0-9_]+)/g, 'const $1')
+    .replace(/export\s+function\s+([A-Za-z0-9_]+)/g, 'function $1');
+
+  return Function(`
+    ${source}
+    return {
+      normalizeEmlisObservationStatus,
+      getEmlisObservationStatus,
+      getEmlisObservationCommentText,
+      isPassedEmlisObservationReply,
+      buildPassedEmlisObservationModalPayload,
+    };
+  `)();
+}
+
 test('App root wires providers through Phase 9 navigation/runtime split modules', () => {
   const app = read('App.js');
   const navRef = read('navigation/navigationRef.js');
@@ -1229,6 +1246,137 @@ test('Phase 10 Emlis observation release gate keeps regression and release-ready
     'observationStatus: meta?.observationStatus || meta?.observation_status',
     'InputScreen.js must not synthesize passed status',
   ], 'phase 10 regression test self-check');
+});
+
+
+test('Step 13 Complete Composer initial RN contract regression keeps passed-only modal display backend-owned', () => {
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+  const input = read('screens/InputScreen.js');
+
+  assertIncludes(inputFeedback, [
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'input?.input_feedback?.comment_text',
+    'getEmlisObservationStatus(input) === EMLIS_OBSERVATION_STATUS.PASSED',
+    'Boolean(getEmlisObservationCommentText(input))',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+  ], 'inputFeedbackModel.js Step 13 Complete Composer public response gate');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'if (!payload) {',
+    'setInputFeedbackModalVisible(false);',
+    'setInputFeedbackModalText("");',
+    'observationStatus: getEmlisObservationStatus(input)',
+    'return false;',
+  ], 'useInputFeedbackModal.js Step 13 fail-closed modal opener');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'const shouldShow = Boolean',
+    'visible &&',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    '<Modal visible={shouldShow}',
+    'Emlisの観測',
+  ], 'InputFeedbackReplyModal.js Step 13 visible title and passed-only guard');
+
+  assertIncludes(input, [
+    'observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status',
+    'observationStatus: inputFeedbackAI?.observation_status',
+    'const openedObservation = inputFeedbackText',
+    'if (!openedObservation)',
+    'completeTutorialAfterReply();',
+  ], 'InputScreen.js Step 13 backend-owned observation status');
+
+  assertNotIncludes(input, [
+    'observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status || "passed"',
+    'observationStatus: inputFeedbackAI?.observation_status || "passed"',
+    'complete_composer_initial',
+    'complete_scorecard_event',
+    'complete_reply_diagnostics',
+  ], 'InputScreen.js Step 13 must not special-case Complete Composer meta or force passed');
+
+  const {
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  const completePassedPayload = {
+    input_feedback: {
+      comment_text: '完全Composer初期版の本文候補が、表示Gate通過後だけ表示されます。',
+      emlis_ai: {
+        observation_status: 'passed',
+        meta: {
+          complete_composer_initial_runtime: { status: 'generated' },
+          complete_scorecard_event: { display_pass: true },
+        },
+      },
+    },
+  };
+
+  assert.equal(getEmlisObservationStatus(completePassedPayload), 'passed');
+  assert.equal(
+    getEmlisObservationCommentText(completePassedPayload),
+    '完全Composer初期版の本文候補が、表示Gate通過後だけ表示されます。'
+  );
+  assert.equal(isPassedEmlisObservationReply(completePassedPayload), true);
+  assert.deepEqual(buildPassedEmlisObservationModalPayload(completePassedPayload), {
+    commentText: '完全Composer初期版の本文候補が、表示Gate通過後だけ表示されます。',
+    observationStatus: 'passed',
+    emotionSummary: '',
+    dominantSummary: '',
+    contextLabel: '',
+  });
+
+  for (const observation_status of ['rejected', 'unavailable', 'safety_blocked', '']) {
+    const nonPassedPayload = {
+      input_feedback: {
+        comment_text: 'non-passed では表示されてはいけない本文です。',
+        emlis_ai: {
+          observation_status,
+          meta: {
+            complete_composer_initial_runtime: { status: 'generated' },
+            complete_scorecard_event: { display_pass: true },
+          },
+        },
+      },
+    };
+    assert.equal(isPassedEmlisObservationReply(nonPassedPayload), false);
+    assert.equal(buildPassedEmlisObservationModalPayload(nonPassedPayload), null);
+  }
+
+  const passedEmptyTextPayload = {
+    input_feedback: {
+      comment_text: '   ',
+      emlis_ai: {
+        observation_status: 'passed',
+        meta: { complete_composer_initial_runtime: { status: 'generated' } },
+      },
+    },
+  };
+  assert.equal(isPassedEmlisObservationReply(passedEmptyTextPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(passedEmptyTextPayload), null);
+
+  const completeMetaCannotOverridePublicStatus = {
+    input_feedback: {
+      comment_text: 'Complete meta 側だけ passed を主張しても表示してはいけない本文です。',
+      emlis_ai: {
+        observation_status: 'rejected',
+        meta: {
+          complete_composer_initial_runtime: { observation_status: 'passed' },
+          complete_scorecard_event: { display_pass: true },
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(completeMetaCannotOverridePublicStatus), 'rejected');
+  assert.equal(isPassedEmlisObservationReply(completeMetaCannotOverridePublicStatus), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(completeMetaCannotOverridePublicStatus), null);
 });
 
 

@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4185,3 +4185,45 @@ EmlisAI A案到達工程では、正解文一致ではなく、構造・根拠�
 ## 支援系としての読み方
 
 これらのtestは、DB physical name、public API route、RN visible nameを変更するためのtestではない。`comment_text` は passed-only、non-passedは空本文、履歴/cross coreはevidence-onlyという境界を守るためのsupport / regression testとして読む。
+
+# 2026-05-15 差分追記: EmlisAI 限定Composer拡張 Step0-11 test / support map
+
+限定Composer拡張では、候補文一致ではなく、診断・根拠束縛・binding-aware Grounding・Gate trace・scorecard・E2E表示契約をtestで固定する。Cocolon側テストやRN表示契約は変更されていません。
+
+| test file | 固定すること |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_extension_steps_0_1.py` | baseline化とcomposer接続状態の可視化。 |
+| `mashos-api/ai/tests/test_emlis_ai_diagnostic_summary_v2.py` | stage、primary_reason、coverage_group、binding有無の診断。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_sentence_binding.py` | body文ごとのSentenceBinding contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_phrase_unit_material.py` | 未完了断片・助詞残り・感情ラベル単独などの材料除外。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_relation_taxonomy.py` | relation taxonomyと主要relation未設定防止。 |
+| `mashos-api/ai/tests/test_emlis_ai_binding_aware_grounding.py` | declared evidence / phrase / relationをGroundingが読むこと。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_binding_reflection.py` | reader / grounding / template / display traceにbinding metaが残ること。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_surface_realizer_stabilization.py` | relation-awareなSurface component選択とTemplate Guard非退行。 |
+| `mashos-api/ai/tests/test_emlis_ai_scorecard_harness.py` | coverage_group別集計とbinding coverage。 |
+| `mashos-api/ai/tests/test_emlis_ai_display_contract.py` | `input_feedback.comment_text` がpassed時のみ表示されること。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_composer_extension_exit_gate.py` | 限定Composer拡張完了Exit Gateとfail-closed維持。 |
+
+この一群は「完全Composer商品品質版」の品質保証ではなく、完全Composer初期版へ進む前に限定Composer拡張の土台を固定する回帰として読む。
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 test / support map
+
+Complete Composer初期版では、候補文の完全一致ではなく、型・材料・coverage・relation・sentence binding・surface signature・Grounding・repair trace・scorecard・RN passed-only契約をtestで固定する。
+
+| test file | 固定すること |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_complete_composer_initial_commit1.py` | AP0 decision report helperと呼称metaのadditive接続。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_composer_types.py` | Complete内部型、fail-closed status、public response shape非変更。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_material_service.py` | 本文化可能材料だけをSentencePlan前へ渡すこと。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_focus_selector.py` | coverage group別の観測核選択。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_relation_graph.py` | RelationGraph 2.0 bridgeとrelation binding seed。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_sentence_plan_v2.py` | SentencePlan 2.0の文数、role、binding、repair policy。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_realizer_v2.py` | 完成文定数ではなくsurface componentで本文を組むこと。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_grounding_binding.py` | Complete binding-aware Grounding input / report。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair.py` | Gate reasonごとのSelf-Repair Loopと新規意味追加禁止。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_composer_client.py` | CompleteComposerClientのAP0 / rollout / evidence / no fallback gate。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_e2e_contract.py` | reply service / diagnostics統合後もpublic contractを壊さないこと。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_scorecard.py` | scorecard / fixture / blind QA rubricの構造。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | Complete metaが入ってもRN表示はpassed-onlyであること。 |
+
+この一群は、完全Composer商品品質版の最終QAではなく、完全Composer初期版の内部層とpublic契約を同時に守るsupport / regression testとして読む。

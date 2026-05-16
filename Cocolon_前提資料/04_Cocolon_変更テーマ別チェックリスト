@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -289,3 +289,34 @@ EmlisAIのA案到達、A-P0判定、A案相当Composer、長期品質を触る�
 8. Step別test: `test_cocolon_text_generation_core_step15_stabilization.py`, `test_emlis_ai_step16_rollout_metrics.py`, `test_emlis_ai_step17_broad_input_fixtures.py`, `test_emlis_ai_step18_ap0_migration_decision.py`, `test_emlis_ai_step19_a_plan_equivalent_composer.py`, `test_emlis_ai_step20_long_term_quality.py`
 
 禁止: A案相当導入を理由に、固定観測文fallback、外部LLM導入、DB rename、public route変更、response key変更、passed-only表示の解除をしない。
+
+# 2026-05-15 差分追記: EmlisAI 限定Composer拡張 Step0-11 を触る時
+
+EmlisAIの限定Composer拡張、SentenceBinding、relation taxonomy、binding-aware Grounding、scorecard、E2E表示契約を触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面と限定Composer拡張境界
+2. `03_Cocolon_命名体系.md` の限定Composer / 完全Composer / 完全Composer商品品質版の読み分け
+3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の名称混在境界
+4. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` の runtime map
+5. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` の contract / verification
+6. `05_Cocolon_ルールファイル索引` の Guard / test 索引
+
+確認必須: raw入力本文を要求せず、`diagnostic_summary` / `coverage_group` / `binding_diagnostic` / `gate_results` / `scorecard` で原因を見る。
+
+禁止: Gate緩和、入力専用テンプレ、固定完成文、外部AI/ローカルLLM導入、DB/API/RN表示契約rename。
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 を触る時
+
+EmlisAIの完全Composer初期版、CompleteComposerClient、SentencePlan 2.0、Surface Realizer 2.0、Self-Repair、scorecard、RN passed-only contractを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面と完全Composer初期版境界
+2. `03_Cocolon_命名体系.md` の限定Composer / 完全Composer初期版 / 完全Composer商品品質版の読み分け
+3. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のEmlisAI runtime map
+4. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` のInput -> immediate reply flow
+5. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / verification
+6. `05_Cocolon_ルールファイル索引` のComplete Composer rule / guard索引
+
+確認禁止の逆条件:
+- 表示率を上げるためにDisplay Gate / Grounding / Readerを緩めない。
+- Complete内部metaをfrontendで直接見てpassed扱いにしない。
+- 外部AIレンタル・ローカルLLM・固定完成文テンプレを追加しない。

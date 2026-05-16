@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 216
-  mashos-api: 443
+  mashos-api: 459
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -352,3 +352,30 @@ Self Structure / MyProfile 系の visible 名は、ユーザー向けには `わ
 | `a2_long_term_quality` / `step20_long_term_quality` | QA meta | 長期品質確認。履歴からユーザーの本心を補完する意味ではない |
 
 `input_feedback.comment_text`、`input_feedback.emlis_ai`、`observation_status`、表示名 `Emlisの観測` は互換名として維持する。
+
+# 2026-05-15 差分追記: 限定Composer / 完全Composer / 完全Composer商品品質版 名称境界
+
+旧来の案名は会話・設計資料上では使わず、現行作業では次の名称で読む。ただし、既存コード内の歴史的なmodel名やtest名を一括renameしない。
+
+| 操作用語 | 実装上の読み方 | rename禁止境界 |
+|---|---|---|
+| 限定Composer | 現在の自作Composer土台。Evidence / scope / Guard / fail-closedを優先し、今回 Step0-11 で診断・binding・relation・surface・scorecardを拡張した。 | `input_feedback.comment_text`、public route、DB physical nameへrenameしない。 |
+| 限定Composer拡張 | 完全Composer初期版へ進む前の足場。SentenceBinding、relation taxonomy、binding-aware Grounding、Gate binding trace、scorecard、E2E表示契約を含む。 | 完全Composerそのものと混同しない。 |
+| 完全Composer | 広い通常入力で、根拠を保持したまま自然なEmlisの観測を自作生成する目標構造。 | 外部AIレンタルやローカルLLMの別名ではない。 |
+| 完全Composer商品品質版 | 表示到達率・読まれた感・根拠保持・安全性・非テンプレ性を商品品質として満たす最終到達ランク。 | `90%+` は評価基準であり、ファイル名・route名・DB名ではない。 |
+| `cocolon_emlis_observation_composer.a1.v1` | 旧資料に残る内部composer model名。 | visible名やpublic response keyへrenameしない。 |
+
+作業時は、旧 `A案` / `B案` を見つけても実ファイルを即renameしない。設計上の読み替えとして、`B案` は限定Composer、`A案相当` は完全Composerへ向かう段階promotionまたは旧内部model名として保管する。
+
+# 2026-05-16 差分追記: 完全Composer初期版の呼称meta境界
+
+最新実ファイルでは、旧 `a_plan_equivalent` / `A-1` 系の物理名・test名を即renameせず、資料・会話・meta上では `完全Composer初期版` として読み替える方針が追加されている。
+
+| 表示・設計上の名前 | 既存実装で見える名前 | 扱い |
+|---|---|---|
+| 限定Composer | `limited_composer`, `cocolon_limited_composer.v1` | 完全Composer初期版の土台。破棄しない。 |
+| 完全Composer初期版 | `a_plan_equivalent`, `A-1`, `complete_initial`, `complete_composer_initial`, `cocolon_emlis_observation_composer.a1.v1` | 内部Composer実装の呼称。DB/API/RN visible名ではない。 |
+| 完全Composer商品品質版 | `Product Gate`, `M7`, `High Quality` | 今回の到達点ではない。scorecard上の将来基準。 |
+| Emlisの観測 | frontend visible title | ユーザー表示名。Complete Composer初期版になっても変更しない。 |
+
+禁止: `complete_composer_initial`、`a_plan_equivalent`、`A-1`、`cocolon_emlis_observation_composer.a1.v1` を理由に、`input_feedback.comment_text`、`emlis_ai` meta、DB physical name、public route、RN visible名を一括renameしない。

@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_file_name_mixing_storage
 title: "Cocolon ファイル名変更保留台帳"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 216
-  mashos-api: 443
+  mashos-api: 459
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 
@@ -124,3 +124,34 @@ DB physical rename / drop / bridge view write switch は、この台帳では扱
 | `cocolon_emlis_observation_composer.a1.v1` | internal composer model | `rename禁止` | A案相当の内部model名。visible名 `Emlisの観測` や `input_feedback.comment_text` へrenameしない |
 | `step18_ap0_migration_decision` | internal decision meta | `rename禁止` | A-P0判定のQA meta。public API keyではない |
 | `step20_long_term_quality` | internal QA meta | `rename禁止` | 長期品質の内部診断用meta。ユーザー表示文ではない |
+
+# 2026-05-15 差分追記: 限定Composer拡張内部名称のrename禁止
+
+限定Composer拡張 Step0-11 で増えた次の名前は、内部meta / helper / test名です。ユーザー表示名・public route・DB物理名へrenameしない。
+
+| 名前 | 種類 | rename可否 | 理由 |
+|---|---|---|---|
+| `limited_composer_extension_baseline` | meta key | `rename禁止` | Step0 baseline確認用。public response keyではない。 |
+| `connection_visibility` | meta key | `rename禁止` | composer未接続とrejection切り分け用。route名ではない。 |
+| `SentenceBinding` / `SentenceBindingBundle` | internal type | `rename禁止` | 文ごとの根拠・phrase・relation束縛型。DB table名ではない。 |
+| `relation_taxonomy` | internal meta / helper | `rename禁止` | relation_not_expressedを構造で追うための内部分類。visible名ではない。 |
+| `limited_surface_realizer` | internal helper | `rename禁止` | 文法部品選択の内部層。固定表示文名ではない。 |
+| `scorecard_harness` | QA meta | `rename禁止` | coverage_group別の進捗集計。商品表示名ではない。 |
+| `step10_e2e_display_contract` | QA meta | `rename禁止` | passed-only表示契約の確認名。public API contract keyではない。 |
+| `step11_e2e_exit_gate` | QA meta | `rename禁止` | 完全Composer初期版へ進む入口判定。route名ではない。 |
+
+visible名は引き続き `Emlisの観測`、公開本文は `input_feedback.comment_text`、表示条件は `observation_status=passed` かつ本文ありの場合のみ。
+
+# 2026-05-16 差分追記: 完全Composer初期版内部名称のrename禁止
+
+Complete Composer初期版では、`complete_*` 系の新規ファイル名と、既存 `a_plan_equivalent` / `A-1` 系の互換名が併存する。これは移行中の構造保管であり、即rename対象ではない。
+
+| 名称 / path | 種別 | 扱い | 理由 |
+|---|---|---|---|
+| `emlis_ai_complete_*` | 新規runtime / meta / test | `rename禁止` | Complete初期版の内部owner名。public route / visible名ではない。 |
+| `a_plan_equivalent` / `A-1` | legacy compatible alias | `rename禁止` | 既存Step18/19およびtest互換を保持するため。資料上は完全Composer初期版として読む。 |
+| `complete_initial` / `complete_composer_initial` | registry alias / meta | `rename禁止` | registry解決用aliasであり、DB/API/RN名ではない。 |
+| `cocolon_emlis_observation_composer.a1.v1` | composer_model | `rename禁止` | 内部model名。ユーザー表示名 `Emlisの観測` を置換しない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RN regression test | `rename禁止` | Complete metaのspecial-case禁止とpassed-only表示契約を固定する。 |
+
+禁止: 完全Composer初期版の実装を理由に、DB physical name、public API route、response key、RN visible titleをrenameしない。

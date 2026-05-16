@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -279,3 +279,42 @@ EmlisAIのStep15-20では、本文を広げるほど、根拠なし補完・固�
 | Template / Echo | `emlis_ai_template_echo_guard.py` | A案相当model markerを許可しても、固定観測文・原文貼り付け・汎用締めを許可していないか |
 
 禁止: `一緒に見ます` などの単独成立固定締め文、role別完成文、fallback観測文、履歴からの本心推定、一般論補完を本文へ戻さない。
+
+# 2026-05-15 差分追記: 限定Composer拡張 Step0-11 rule / guard索引
+
+限定Composer拡張では、表示率を上げるためにGateを緩めず、生成側の根拠束縛・relation・材料品質・surface componentを強くする。次をrule / guardとして同時確認する。
+
+| 領域 | rule / guard owner | 見ること |
+|---|---|---|
+| 接続状態 | `emlis_ai_limited_composer_extension_baseline.py` / `emlis_ai_composer_client_registry.py` | `composer_client_not_connected` と接続後rejectionを分けられているか。 |
+| diagnostic_summary | `emlis_ai_reply_service.py` / `emlis_ai_display_gate.py` | failed_stage、primary_reason、coverage_group、binding_missingがraw入力なしで分かるか。 |
+| SentenceBinding | `cocolon_text_generation_core/types.py` / `emlis_ai_limited_composer_client.py` | body文ごとにevidence / phrase / relationが束縛されているか。 |
+| PhraseUnit材料 | `emlis_ai_limited_sentence_quality_guard.py` / `emlis_ai_phrase_shaping_service.py` | 未完了断片・助詞残り・感情ラベル単独・長すぎる原文貼り付けを材料段階で落としているか。 |
+| relation taxonomy | `emlis_ai_limited_relation_taxonomy.py` | `contrast` / `coexistence` / `pressure` / `recovery` / `approach_avoidance` 等がcanonical relationとして追えるか。 |
+| binding-aware Grounding | `emlis_ai_grounding_judge.py` / `cocolon_text_generation_core/guards/grounding.py` | 表面一致だけでunsupportedにせず、declared evidence / phrase / relationを読めているか。 |
+| Gate trace | `emlis_ai_display_gate.py` / `emlis_observation_composer.py` | reader / grounding / template / display traceにbinding_usedを残しているか。 |
+| Surface Realizer | `emlis_ai_limited_surface_realizer.py` | 固定完成文ではなく、opener / particle / predicate / tailをrelationごとに選ぶか。 |
+| scorecard / Exit Gate | `emlis_ai_coverage_matrix_service.py` / `emlis_ai_limited_composer_extension_exit_gate.py` | coverage_group別結果、binding coverage、次タスクが見えるか。 |
+| E2E表示契約 | `emlis_ai_limited_composer_e2e_contract.py` / `test_emlis_ai_display_contract.py` | non-passedで `comment_text` が出ないか。 |
+
+禁止: これらのrule / guardを迂回して、固定文や入力専用分岐でpassed率だけを上げる。
+
+# 2026-05-16 差分追記: 完全Composer初期版 Commit1-13 rule / guard索引
+
+Complete Composer初期版では、生成側を広げるほど、根拠なし補完・固定文復活・relation欠落・surface反復・frontend passed補正のリスクが増える。次をrule / guardとして同時確認する。
+
+| scope | rule / guard / test | 確認すること |
+|---|---|---|
+| AP0 / 呼称meta | `emlis_ai_complete_composer_initial_meta.py`, `test_emlis_ai_complete_composer_initial_commit1.py` | 旧A案名をComplete初期版へ読み替えてもpublic契約を壊していないか。 |
+| 内部型 | `emlis_ai_complete_composer_types.py`, `test_emlis_ai_complete_composer_types.py` | `CompleteComposerCandidate` / `SentencePlanV2` / `RepairTrace` が内部型に留まっているか。 |
+| Material | `emlis_ai_complete_material_service.py`, `test_emlis_ai_complete_material_service.py` | 根拠不足、未完了断片、感情ラベル単独を材料段階で落としているか。 |
+| Focus / Coverage | `emlis_ai_complete_focus_selector.py`, `test_emlis_ai_complete_focus_selector.py` | 全文要約ではなく観測核を選んでいるか。 |
+| RelationGraph | `emlis_ai_complete_relation_graph_service.py`, `test_emlis_ai_complete_relation_graph.py` | relation_typeが本文生成前の制約として保持されているか。 |
+| SentencePlan | `emlis_ai_complete_sentence_planner.py`, `test_emlis_ai_complete_sentence_plan_v2.py` | 文数・文順・must_include・repair policyがplan化されているか。 |
+| Surface | `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_complete_surface_realizer_v2.py` | 完成文定数ではなく文法部品で組んでいるか。 |
+| Grounding | `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py`, `test_emlis_ai_complete_grounding_binding.py` | evidence / phrase / relation bindingを判定し、overclaimを通していないか。 |
+| Self-Repair | `emlis_ai_complete_self_repair_service.py`, `test_emlis_ai_complete_self_repair.py` | repairが新規意味追加ではなく、最大2回の安全調整に収まっているか。 |
+| Client / registry | `emlis_ai_complete_composer_client.py`, `emlis_ai_composer_client_registry.py`, `test_emlis_ai_complete_composer_client.py` | AP0 green / rollout許可なしでComplete clientを解決していないか。 |
+| Reply diagnostics | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_complete_e2e_contract.py` | diagnostics追加で`comment_text`や`observation_status`を上書きしていないか。 |
+| Scorecard | `emlis_ai_complete_scorecard_service.py`, `test_emlis_ai_complete_scorecard.py` | scorecardがQA metaであり、表示判定そのものになっていないか。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | Complete metaをfrontendでspecial-caseせず、passed-only表示を守っているか。 |

@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-15",
+  "revision_date": "2026-05-16",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 216,
-    "mashos-api": 443,
-    "total": 659
+    "mashos-api": 484,
+    "total": 700
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 659,
-    "national_system_body_includes": 659,
+    "overall_structure_body_includes": 675,
+    "national_system_body_includes": 675,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル659件、国家システム判断対象のcurrent全ファイル659件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 659,
-    "overall_structure_body_includes_current_snapshot_files": 659,
-    "national_system_body_lists_current_snapshot_files_with_relation": 659,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル675件、国家システム判断対象のcurrent全ファイル675件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
+    "current_snapshot_total_files": 700,
+    "overall_structure_body_includes_current_snapshot_files": 675,
+    "national_system_body_lists_current_snapshot_files_with_relation": 675,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -658,7 +658,9 @@
       "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py"
     ],
     "latest_source_basis_2026_05_15": "Cocolon_前提資料(78).zip / Cocolon_7(10).zip / mashos-api_7(13).zip",
-    "emlis_ai_a_plan_boundary_2026_05_15": "Step15-20 are additive EmlisAI meta/QA/promotion layers. DB physical names, public API routes, existing response keys, RN visible names, and passed-only comment_text display are preserved."
+    "emlis_ai_a_plan_boundary_2026_05_15": "Step15-20 are additive EmlisAI meta/QA/promotion layers. DB physical names, public API routes, existing response keys, RN visible names, and passed-only comment_text display are preserved.",
+    "latest_source_basis_2026_05_16": "Cocolon_前提資料(85).zip / Cocolon_15(2).zip / mashos-api_15(3).zip",
+    "complete_composer_initial_policy_2026_05_16": "完全Composer初期版Commit1-13は内部Composer / meta / regressionの追加。DB/API/RN表示契約は変更しない。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1664,15 +1666,15 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(78).zip",
-    "Cocolon": "Cocolon_7(10).zip",
-    "mashos-api": "mashos-api_7(13).zip",
+    "premise": "Cocolon_前提資料(80).zip",
+    "Cocolon": "Cocolon_12(4).zip",
+    "mashos-api": "mashos-api_12(4).zip",
     "file_counts": {
       "Cocolon": 216,
-      "mashos-api": 443,
-      "total": 659
+      "mashos-api": 459,
+      "total": 675
     },
-    "note": "2026-05-15 EmlisAI A案到達 Step15〜20 / わたしマップaccess policy path補正後の最新実ファイル基準面。"
+    "summary": "Current latest source basis after EmlisAI limited Composer extension Step0-11."
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2347,6 +2349,195 @@
       "frontend_passed_only_display_changed": false,
       "external_llm_added": false,
       "watashi_map_access_policy_path_mismatch_resolved": true
+    }
+  },
+  "source_snapshot_2026_05_15_limited_composer_extension_step0_11": {
+    "premise": "Cocolon_前提資料(80).zip",
+    "Cocolon": "Cocolon_12(4).zip",
+    "mashos-api": "mashos-api_12(4).zip",
+    "sha256": {
+      "Cocolon_前提資料(80).zip": "e550e4b0edfeffcc1e9eebbfc9e8295f257e8ea68d3dd07026f870374869fd6a",
+      "Cocolon_12(4).zip": "d31f165522b99a11c3bcec8b80b8d97d3b9bcee4b559cfe391b715baea24bc1c",
+      "mashos-api_12(4).zip": "bc7cb1448d7ef4547c543bdced9ecf497b5bec3f0aae603bb5f68b70d693ace0"
+    },
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 459,
+      "total": 675
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon(160).zip",
+      "mashos-api": "mashos-api(74).zip",
+      "file_counts": {
+        "Cocolon": 216,
+        "mashos-api": 443,
+        "total": 659
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_e2e_contract.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_exit_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_relation_taxonomy.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_surface_realizer.py",
+        "mashos-api/ai/tests/test_emlis_ai_binding_aware_grounding.py",
+        "mashos-api/ai/tests/test_emlis_ai_diagnostic_summary_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_display_contract.py",
+        "mashos-api/ai/tests/test_emlis_ai_gate_binding_reflection.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_composer_extension_exit_gate.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_composer_extension_steps_0_1.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_composer_phrase_unit_material.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_composer_sentence_binding.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_relation_taxonomy.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_surface_realizer_stabilization.py",
+        "mashos-api/ai/tests/test_emlis_ai_scorecard_harness.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/.env",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+        "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/types.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_composer_client_registry.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_coverage_matrix_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+        "mashos-api/ai/tests/test_emlis_ai_phrase_shaping_service.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "EmlisAI限定Composer拡張 Step0-11 を最新実ファイルに反映。",
+      "baseline化、接続状態可視化、diagnostic_summary v2、SentenceBinding、PhraseUnit材料品質、relation taxonomy、binding-aware Grounding、Gate binding reflection、限定Surface Realizer、scorecard harness、E2E表示契約、Exit Gateを追加/接続。",
+      "完全Composer初期版へ進む入口条件を固定したが、完全Composerそのものを完成させた段階ではない。"
+    ],
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "display_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_template_added": false,
+      "raw_input_copied_to_meta": false
+    }
+  },
+  "current_source_snapshot": {
+    "premise": "Cocolon_前提資料(85).zip",
+    "Cocolon": "Cocolon_15(2).zip",
+    "mashos-api": "mashos-api_15(3).zip",
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 484,
+      "total": 700
+    },
+    "summary": "Current latest source basis after EmlisAI Complete Composer initial Commit1-13 and RN contract regression."
+  },
+  "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
+    "premise": "Cocolon_前提資料(85).zip",
+    "Cocolon": "Cocolon_15(2).zip",
+    "mashos-api": "mashos-api_15(3).zip",
+    "sha256": {
+      "Cocolon_前提資料(85).zip": "64a22fc3d75ab87eb67181ba282a5ec533d5a6d90baf233c63bb8b5f513c3e4c",
+      "Cocolon_15(2).zip": "a3828940ebbeddd7db9a5338ea122e1ca79d6c2e795ddc354c67f8fd203849a0",
+      "mashos-api_15(3).zip": "56cfdde40ebd178d66568bbd47dc087ff39648a5bb797bcd27d5c84d45ef36f9"
+    },
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 484,
+      "total": 700
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon_12(4).zip",
+      "mashos-api": "mashos-api_12(4).zip",
+      "file_counts": {
+        "Cocolon": 216,
+        "mashos-api": 459,
+        "total": 675
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_initial_meta.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_material_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_focus_selector.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_relation_graph_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_binding.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_composer_initial_commit1.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_composer_types.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_material_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_focus_selector.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_relation_graph.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_sentence_plan_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_surface_realizer_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_grounding_binding.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_self_repair.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_composer_client.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_e2e_contract.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_scorecard.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_a_plan_equivalent_composer_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_composer_client_registry.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_composer_client_registry.py",
+        "mashos-api/ai/tests/test_emlis_ai_step19_a_plan_equivalent_composer.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "EmlisAI完全Composer初期版Commit1-13を最新実ファイルに反映。",
+      "AP0 decision report、Complete内部型、Material service、FocusSelector、RelationGraph 2.0、SentencePlan 2.0、Surface Realizer 2.0、Binding-aware Grounding、Self-Repair、CompleteComposerClient、Reply diagnostics、Scorecard/fixture、RN contract regressionを追加/接続。",
+      "完全Composer商品品質版ではなく、限定Composerを土台にした初期版Alphaとして読む。"
+    ],
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "display_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_template_added": false,
+      "raw_input_copied_to_meta": false
     }
   }
 }

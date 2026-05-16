@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2459,3 +2459,83 @@ emotion submit
 - `emlis_ai_composer_client_registry.py` はA案相当composer aliasを解決できるが、環境値で無理に `all` 固定して問題を隠さない。
 - `emlis_ai_template_echo_guard.py` はA案相当model markerをAI生成候補として扱う。固定観測文や旧safe fallbackを許可する変更ではない。
 - 履歴・DerivedUserModel・cross core材料は、本文で本心を補完するためではなく、evidence-only / scope-onlyのQA metaとして扱う。
+
+# 2026-05-15 差分追記: EmlisAI 限定Composer拡張 Step0-11 runtime map
+
+`mashos-api_12(4).zip` では、EmlisAI immediate reply の限定Composer拡張として、候補生成前後の診断・文単位根拠束縛・relation・binding-aware Grounding・Gate trace・限定Surface・scorecard・E2E表示契約が追加されています。これはユーザー表示文を無条件に増やす変更ではなく、Emlisの観測を `passed` で表示できる条件を内部metaで説明し、完全Composer初期版へ進む足場を作る変更です。
+
+## runtime flow補正
+
+```text
+render_emlis_ai_reply
+ -> composer registry connection visibility
+ -> limited composer candidate
+ -> PhraseUnit material quality
+ -> relation taxonomy
+ -> SentenceBinding bundle
+ -> limited Surface Realizer
+ -> Reader / binding-aware Grounding / Template Guard
+ -> Display Gate
+ -> Step9 scorecard
+ -> Step10 display contract
+ -> Step11 limited extension Exit Gate
+ -> input_feedback.comment_text only when passed
+```
+
+## 新規runtime owner
+
+| file | 役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py` | baseline / connection visibility / diagnostic_summary v2 / binding presenceのmeta-only helper。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_relation_taxonomy.py` | relation typeを定義し、`relation_not_expressed` を構造で追えるようにする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_surface_realizer.py` | opener、particle、predicate、tail variationをrelationごとに選ぶ限定Surface Realizer。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_e2e_contract.py` | `comment_text` passed-onlyのE2E表示契約をmeta化する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_exit_gate.py` | 限定Composer拡張完了と完全Composer初期版入口条件を判定する。 |
+
+## 変更runtime owner
+
+| file | 役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | SentenceBinding bundle、relation taxonomy、PhraseUnit材料品質、限定Surface Realizer metaをComposer出力へ追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step0-11 metaを `diagnostic_summary` / top-level meta / `multi_perspective` / `phase_gate` へ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py` | binding declared evidence / phrase / relationをGrounding根拠として読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | reader / grounding / template / display traceにbinding情報を残し、non-passed空本文を維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_coverage_matrix_service.py` | coverage_group別scorecardとbinding coverageを集計する。 |
+
+禁止: この差分を理由に、外部AI、ローカルLLM、固定完成文、入力専用テンプレ、Gate緩和、`input_feedback.comment_text` の表示条件変更を入れない。
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 runtime map
+
+`mashos-api_15(3).zip` では、`Emlisの観測` の内部Composerが、限定Composer拡張の足場から完全Composer初期版へ進むためのruntime層を持ちました。これはRN表示名・public response key・DB physical nameを変更するものではありません。
+
+## runtime flow補正
+
+`emotion_submit_service.py` / `api_emotion_submit.py` から見える公開契約は維持し、内部では `emlis_ai_reply_service.py` が CompleteComposerClient / diagnostics / scorecard meta を受け取る。`comment_text` は従来どおり `observation_status=passed` かつ本文ありの場合だけ表示される。
+
+## Complete Composer初期版 owner
+
+| owner | 役割 |
+|---|---|
+| `emlis_ai_complete_composer_initial_meta.py` | AP0 decision report と限定/完全Composer呼称metaをadditiveに保持する。 |
+| `emlis_ai_complete_composer_types.py` | `CompleteComposerCandidate` / `CompleteSentencePlanV2` / `RepairTrace` の内部型。 |
+| `emlis_ai_complete_material_service.py` | EvidenceSpan / PhraseUnit-like row から本文化可能な材料だけを作る。 |
+| `emlis_ai_complete_focus_selector.py` | coverage groupから本文に出す観測核を選ぶ。 |
+| `emlis_ai_complete_relation_graph_service.py` | relation taxonomyをObservationGraph 2.0へ橋渡しする。 |
+| `emlis_ai_complete_sentence_planner.py` | 2〜5文のSentencePlan 2.0を作る。 |
+| `emlis_ai_complete_surface_realizer.py` | 文法部品から自然文を組み、surface_signatureをmetaへ残す。 |
+| `emlis_ai_complete_grounding_binding.py` / `emlis_ai_complete_grounding_service.py` | Complete用bindingをGroundingJudgeへ渡す。 |
+| `emlis_ai_complete_self_repair_service.py` | Gate reasonに応じた安全な自己修復を最大2回だけ行う。 |
+| `emlis_ai_complete_composer_client.py` | AP0 green / rollout許可 / no fallback / used evidenceありの場合だけComplete初期版pipelineを統合する。 |
+| `emlis_ai_complete_reply_diagnostics_service.py` | reply meta / repair trace / scorecard eventを安全に整形する。 |
+| `emlis_ai_complete_scorecard_service.py` | coverage group別に表示到達率・binding・読まれた感・安全性・非テンプレ性を集計する。 |
+
+## RN側の固定
+
+`Cocolon/tests/rn-screen-contracts.test.js` はStep13 regressionとして、Complete Composer初期版metaだけでfrontendが表示を開かないこと、statusを `passed` に補正しないこと、表示名が `Emlisの観測` のままであることを固定する。`InputScreen.js` / `InputFeedbackReplyModal.js` / `useInputFeedbackModal.js` の実装変更ではない。
+
+境界維持:
+- DB physical name、既存API route、public response key、RN表示名 `Emlisの観測` は変更しない。
+- `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけ表示する。
+- 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
+- raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
+- これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。

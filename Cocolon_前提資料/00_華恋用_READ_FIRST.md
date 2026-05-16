@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(78).zip"
-  Cocolon: "Cocolon_7(10).zip"
-  mashos-api: "mashos-api_7(13).zip"
+  premise: "Cocolon_前提資料(85).zip"
+  Cocolon: "Cocolon_15(2).zip"
+  mashos-api: "mashos-api_15(3).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 443
-  total: 659
+  mashos-api: 484
+  total: 700
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 659
-  included_in_overall_structure: 659
-  included_in_national_system: 659
+  total_files: 700
+  included_in_overall_structure: 700
+  included_in_national_system: 700
   excluded_from_main_body: 0
 ---
 
@@ -53,13 +53,13 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_7(10).zip` | 216 | RNアプリ本体。Input保存後のAnalysis home summary refresh signal、わたしマップ access policy の `components/selfStructure` 配置補正を含む |
-| `mashos-api_7(13).zip` | 443 | backend / API / worker / tests。EmlisAI A案到達 Step15〜20、共通Core安定化、段階リリース計測、A-P0判定、A案相当Composer、長期品質metaを含む |
-| total | 659 | 前提資料の構造coverage対象 |
+| `Cocolon_15(2).zip` | 216 | RNアプリ本体。Complete Composer初期版 Commit13のRN contract regressionを `tests/rn-screen-contracts.test.js` で保持する。 |
+| `mashos-api_15(3).zip` | 484 | backend / API / worker / tests。EmlisAI 完全Composer初期版 Commit1-12、CompleteComposerClient、Reply diagnostics、Scorecard fixture、Binding-aware Grounding、Self-Repairを含む。 |
+| total | 700 | 前提資料の構造coverage対象 |
 
-`Cocolon_7(10).zip` / `mashos-api_7(13).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、EmlisAIのA案到達工程 Step15〜20 が developer / QA meta と内部Composer境界として追加されています。`input_feedback.comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示されます。
+`Cocolon_15(2).zip` / `mashos-api_15(3).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、EmlisAIの完全Composer初期版 Commit1-13 が developer / QA meta と内部Composer境界として追加されています。`input_feedback.comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示されます。
 
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / LimitedComposer / 共通Core / Reader・Grounding・Template Guard / Display Gate のfail-closed構造として読む。Step15〜20は、この構造を壊さずに、共通Core安定化、rollout計測、広い入力fixture、A-P0移行判定、A案相当Composer rollout、長期品質確認を積む層として読む。
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13は、この構造を壊さずに、AP0判定・呼称meta・内部型・材料・coverage・relation・文計画・表層生成・根拠判定・自己修復・client統合・reply diagnostics・scorecard・RN契約回帰を追加した完全Composer初期版であり、完全Composer商品品質版ではない。
 
 わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
@@ -347,3 +347,51 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 `Cocolon/lib/analysisHomeSummaryRefreshSignal.js` は最新実ファイルに存在する active signal です。Input保存後にAnalysis home summaryをbest-effortで更新する境界として読み、EmlisAIの表示契約とは混同しません。
 
 禁止: Step15-20を理由に、`input_feedback.comment_text`、`observation_status`、`Emlisの観測` の表示条件、DB physical name、public API route、RN導線、Piece / Analysis の出力目的を変更しない。
+
+# 2026-05-15 差分追記: EmlisAI 限定Composer拡張 Step0-11 current boundary
+
+この差分は、`Cocolon_12(4).zip` / `mashos-api_12(4).zip` を最新実ファイルとして確認した結果を、前提資料へ追記するものです。Cocolon側に追加・削除・変更はありません。mashos-api側では 16件追加・16件変更があり、EmlisAIの限定Composerを「安全に落とす土台」から「根拠を守って通せる土台」へ引き上げるための meta / Guard / test が追加されています。
+
+| Step | current owner | 読み方 |
+|---|---|---|
+| Step0 baseline化 | `emlis_ai_limited_composer_extension_baseline.py` / `emlis_ai_reply_service.py` | `limited_composer_extension_baseline` / `step0_baseline` をmetaに残す。DB/API/RN表示名はrenameしない。 |
+| Step1 接続状態の可視化 | `.env` / `emlis_ai_composer_client_registry.py` / `emlis_ai_reply_service.py` | `composer_client_not_connected` と、接続後のComposer/Gate rejectionを分けて診断する。 |
+| Step2 diagnostic_summary拡張 | `emlis_ai_limited_composer_extension_baseline.py` / `emlis_ai_display_gate.py` | `failed_stage` / `coverage_group` / `binding_present` / `binding_missing` / `binding_count` をraw入力なしで返す。 |
+| Step3 SentenceBinding型追加 | `cocolon_text_generation_core/types.py` / `emlis_ai_limited_composer_client.py` | body文ごとに `sentence_id` / `used_evidence_span_ids` / `used_phrase_unit_ids` / `relation_type` を持たせる。 |
+| Step4 PhraseUnit材料改善 | `emlis_ai_limited_sentence_quality_guard.py` / `emlis_ai_phrase_shaping_service.py` | 未完了断片、助詞残り、感情ラベル単独、長すぎる原文貼り付けを材料段階で除外する。 |
+| Step5 relation taxonomy追加 | `emlis_ai_limited_relation_taxonomy.py` | `contrast` / `coexistence` / `pressure` / `recovery` / `approach_avoidance` 等をrelation typeとして追跡する。 |
+| Step6 binding-aware Grounding | `emlis_ai_grounding_judge.py` / `cocolon_text_generation_core/guards/grounding.py` | 表面一致だけでなく、binding declared evidence / phrase / relationをGroundingが読む。 |
+| Step7 Gateへのbinding反映 | `emlis_ai_display_gate.py` / `cocolon_text_generation_core/adapters/emlis_observation_composer.py` | reader / grounding / template / display traceへ `binding_used` などを残す。 |
+| Step8 限定Surface Realizer安定化 | `emlis_ai_limited_surface_realizer.py` / `emlis_ai_limited_composer_client.py` | opener / particle / predicate / tail variationをrelationごとに選ぶ。固定完成文は追加しない。 |
+| Step9 scorecard harness | `emlis_ai_coverage_matrix_service.py` | coverage_group別の passed / rejected / unavailable と binding coverage を数値化する。 |
+| Step10 E2E表示契約 | `emlis_ai_limited_composer_e2e_contract.py` | `comment_text` が `passed` 時のみ表示されるcontractをmetaとtestで固定する。 |
+| Step11 Exit Gate | `emlis_ai_limited_composer_extension_exit_gate.py` | SentenceBinding、binding-aware Grounding、relation taxonomy、scorecard、passed-only契約が揃ったかを完全Composer初期版の入口条件として判定する。 |
+
+禁止: 限定Composer拡張 Step0-11 を理由に、外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレ、Display Gate / Reader / Grounding の緩和、DB physical rename、public route rename、response key rename、RN表示契約変更を行わない。
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 current boundary
+
+この差分は、`Cocolon_15(2).zip` / `mashos-api_15(3).zip` を最新実ファイルとして確認した結果を、前提資料へ追記するものです。Cocolon側は file count 216 のまま、`tests/rn-screen-contracts.test.js` にComplete Composer初期版のRN contract regressionが追加されています。mashos-api側は file count 484 となり、Complete Composer初期版のservice / testが追加されています。
+
+| Step / Commit | current owner | 読み方 |
+|---|---|---|
+| Commit1 AP0 decision report / 呼称meta | `emlis_ai_complete_composer_initial_meta.py`, `emlis_ai_ap0_migration_decision_service.py`, `emlis_ai_composer_client_registry.py`, `emlis_ai_a_plan_equivalent_composer_service.py`, `emlis_ai_reply_service.py` | 旧 `a_plan_equivalent` / `A-1` を資料・meta上は完全Composer初期版として読み替える。AP0 decision report はadditive metaであり、DB/API/RN契約は変えない。 |
+| Commit2 Complete内部型 | `emlis_ai_complete_composer_types.py` | `CompleteComposerCandidate`、`CompleteSentencePlanV2`、`RepairTrace` を内部型として追加。public response shapeへ直接出さない。 |
+| Commit3 Material service | `emlis_ai_complete_material_service.py` | EvidenceSpan / PhraseUnit-like rowから本文化可能な材料だけを作る。未完了断片・助詞残り・感情ラベル単独・根拠不足材料はSentencePlan前に落とす。 |
+| Commit4 FocusSelector / CoveragePlan | `emlis_ai_complete_focus_selector.py` | short_daily / long_meaning_arc / conflict / recovery / pressure / relationship / history_cross_core から本文に出す観測核を選ぶ。全文要約にはしない。 |
+| Commit5 RelationGraph 2.0 bridge | `emlis_ai_complete_relation_graph_service.py` | 既存 relation taxonomy をComplete側ObservationGraphへ橋渡しし、`relation_type` を本文生成前の制約として保持する。 |
+| Commit6 SentencePlan 2.0 | `emlis_ai_complete_sentence_planner.py` | 2〜5文の文数、文順、must_include、optional、relation表現、closing方針、repair policyを決める。 |
+| Commit7 Surface Realizer 2.0 | `emlis_ai_complete_surface_realizer.py` | 完成文定数ではなく、主語方針・接続・助詞・述語・語尾・距離感・variation policyで自然文を組む。 |
+| Commit8 Binding-aware Grounding強化 | `emlis_ai_complete_grounding_binding.py`, `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py` | `sentence_id` / `used_evidence_span_ids` / `used_phrase_unit_ids` / `relation_type` をGrounding判定へ渡す。overclaimはbindingがあってもreject優先。 |
+| Commit9 Self-Repair Loop | `emlis_ai_complete_self_repair_service.py` | Gate reasonに応じ、文数縮約・関係明示・根拠差し替え・語尾変化・echo削減を最大2回だけ行う。新規意味追加は禁止。 |
+| Commit10 CompleteComposerClient統合 | `emlis_ai_complete_composer_client.py`, `emlis_ai_composer_client_registry.py` | AP0 green、rollout許可、no external AI、no fallback、used evidenceありの場合だけComplete初期版clientを解決する。 |
+| Commit11 Reply diagnostics統合 | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_reply_service.py` | complete meta、repair trace、scorecard eventをdiagnostic_summary / phase_gate / metaへadditive接続する。`comment_text`の既存契約は変えない。 |
+| Commit12 Scorecard / fixture拡張 | `emlis_ai_complete_scorecard_service.py`, `emlis_ai_reply_service.py` | coverage group別の表示到達率、binding、読まれた感、安全性、非テンプレ性を集計する。fixture suiteにraw user inputや期待本文は置かない。 |
+| Commit13 RN contract regression | `Cocolon/tests/rn-screen-contracts.test.js` | Complete初期版metaが入っても、RNはpublic `observation_status=passed` かつ `comment_text` 非空の場合だけモーダルpayloadを作る。表示名は `Emlisの観測` のまま。 |
+
+境界維持:
+- DB physical name、既存API route、public response key、RN表示名 `Emlisの観測` は変更しない。
+- `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけ表示する。
+- 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
+- raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
+- これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。

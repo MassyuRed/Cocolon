@@ -8,12 +8,12 @@ source_repositories:
 source_mode: "local_snapshot"
 file_counts:
   Cocolon: 216
-  mashos-api: 443
+  mashos-api: 459
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 659
+  included_files_total: 675
   included_files_cocolon: 216
-  included_files_mashos_api: 443
+  included_files_mashos_api: 459
 ---
 
 # 1. 1行定義
@@ -53,9 +53,9 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 
 2026-04-22 版の詳細ブロックは保持する。2026-04-25 時点の国家システム coverage は後続の `2026-04-25 差分追記: national system coverage` を正本とする。
 
-- latest full coverage listed in body / 差分追記: `659 files`
+- latest full coverage listed in body / 差分追記: `675 files`
   - Cocolon: `216`
-  - mashos-api: `443`
+  - mashos-api: `459`
 
 # 4. 読み方
 
@@ -1007,3 +1007,17 @@ Input Gate -> Save API -> Emlis / Piece / Analysis runtime
 - EmlisAIが落ちても、fail-closedにより `observation_status` と空 `comment_text` で止まる境界を維持する。
 - Step16/18/20の判断材料はdeveloper / QA metaであり、ユーザー表示文には混ぜない。
 - Step19はB案Gate、scoped graph、common Core、Display Gateを残した段階promotionであり、外部LLM導入・DB rename・API route変更ではない。
+
+# 2026-05-15 差分追記: EmlisAI 限定Composer拡張 Step0-11 national-system flow
+
+最新実ファイル `Cocolon_12(4).zip` / `mashos-api_12(4).zip` では、国家システム上のCocolon側flowに変更はありません。mashos-api側では、Input保存後 immediate reply の内部Composer診断・根拠束縛・品質Gate traceが拡張されています。
+
+| 層 | 差分 | owner |
+|---|---|---|
+| Gate前診断 | composer未接続と接続後rejectionを分ける | `.env`, `emlis_ai_composer_client_registry.py`, `emlis_ai_limited_composer_extension_baseline.py` |
+| Composer材料 | PhraseUnit材料品質、SentenceBinding、relation taxonomyを候補生成と同時に持つ | `emlis_ai_limited_composer_client.py`, `emlis_ai_limited_sentence_quality_guard.py`, `emlis_ai_phrase_shaping_service.py`, `emlis_ai_limited_relation_taxonomy.py` |
+| Guard | Groundingがbinding declared evidence / phrase / relationを読む | `emlis_ai_grounding_judge.py`, `cocolon_text_generation_core/guards/grounding.py` |
+| Display | reader / grounding / template / display traceにbinding_usedを残し、passed-only表示契約を維持する | `emlis_ai_display_gate.py`, `emlis_ai_limited_composer_e2e_contract.py` |
+| Metrics | coverage_group別scorecardとExit Gateで次工程を見える化する | `emlis_ai_coverage_matrix_service.py`, `emlis_ai_limited_composer_extension_exit_gate.py` |
+
+この差分は `Input -> Save -> immediate reply -> Home表示` のpublic contractを変えない。`comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ出る。

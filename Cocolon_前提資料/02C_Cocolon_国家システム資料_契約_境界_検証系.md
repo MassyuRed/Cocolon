@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2405,3 +2405,59 @@ EmlisAI A案到達工程のcontract / boundary / verificationとして、次のc
 - Common Coreは品質・根拠・Guardを共有する層であり、Emlis / Piece / Analysis の出力目的を統合しない。
 - A案相当composer名はinternal `composer_model` であり、public route / DB physical name / RN visible nameのrenameではない。
 - `test_emlis_ai_contracts.py` が環境依存で `jwt` importに止まる場合でも、JWT/subscription周辺をこの差分の対象にしない。
+
+# 2026-05-15 差分追記: 限定Composer拡張 Step0-11 contract / verification
+
+限定Composer拡張で追加されたcontractは、表示率を上げるためのGate緩和ではなく、non-passed時に本文を出さないこと、binding / relation / scorecardがtraceできることを固定するものです。
+
+| contract / guard | owner | 変更境界 |
+|---|---|---|
+| passed-only表示 | `emlis_ai_display_gate.py`, `emlis_ai_limited_composer_e2e_contract.py`, `test_emlis_ai_display_contract.py` | `observation_status=passed` かつ本文ありの場合だけ `comment_text` を出す。 |
+| SentenceBinding contract | `cocolon_text_generation_core/types.py`, `emlis_ai_limited_composer_client.py`, `test_emlis_ai_limited_composer_sentence_binding.py` | body文とbinding数を一致させ、根拠・phrase・relationを追跡する。 |
+| binding-aware Grounding | `emlis_ai_grounding_judge.py`, `cocolon_text_generation_core/guards/grounding.py`, `test_emlis_ai_binding_aware_grounding.py` | declared evidence / phrase / relationを読むが、declared evidence not foundはfail-closed。 |
+| Gate binding trace | `emlis_ai_display_gate.py`, `cocolon_text_generation_core/adapters/emlis_observation_composer.py`, `test_emlis_ai_gate_binding_reflection.py` | reader / grounding / template / display traceにbinding metaを残す。 |
+| Exit Gate | `emlis_ai_limited_composer_extension_exit_gate.py`, `test_emlis_ai_limited_composer_extension_exit_gate.py` | 限定Composer拡張完了を完全Composer初期版の入口条件として判定する。 |
+
+禁止: `comment_text` をnon-passedで露出する変更、固定完成文テンプレ追加、外部AI/ローカルLLM導入、DB/API/RN表示名rename。
+
+# 2026-05-16 差分追記: 完全Composer初期版 Commit1-13 contract / verification
+
+Complete Composer初期版は、表示率を上げるためにGateを緩める変更ではない。契約上の確認対象は、public response shapeを維持しながら、内部meta・repair trace・scorecard eventが増えてもRN表示がpassed-onlyのままかどうかである。
+
+## contract / boundary owner
+
+| owner | 固定する境界 |
+|---|---|
+| `emlis_ai_complete_composer_initial_meta.py` | 限定/完全Composer呼称metaとAP0 decision reportは内部meta。visible名ではない。 |
+| `emlis_ai_complete_composer_types.py` | Complete内部型はpublic response shapeではない。 |
+| `emlis_ai_complete_grounding_service.py` / `emlis_ai_grounding_judge.py` | Complete binding-aware Groundingを追加してもGate閾値を緩めない。 |
+| `emlis_ai_complete_self_repair_service.py` | repairは新規意味追加ではなく、根拠・relationを保った調整だけ。 |
+| `emlis_ai_complete_composer_client.py` / `emlis_ai_composer_client_registry.py` | AP0 green / rollout許可なしではComplete clientを解決しない。 |
+| `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_reply_service.py` | diagnostics / scorecard eventをadditive接続し、`comment_text` の既存契約を変えない。 |
+| `emlis_ai_complete_scorecard_service.py` | scorecardはQA metaであり、表示判定そのものではない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | public `observation_status` と `comment_text` のみでmodal payloadを作ることを固定する。 |
+
+## verification owner
+
+| test | 確認内容 |
+|---|---|
+| `test_emlis_ai_complete_composer_initial_commit1.py` | AP0 report / 呼称meta / registry meta。 |
+| `test_emlis_ai_complete_composer_types.py` | Complete内部型のfail-closed契約。 |
+| `test_emlis_ai_complete_material_service.py` | material段階の根拠不足・断片除外。 |
+| `test_emlis_ai_complete_focus_selector.py` | coverage group別FocusSelector。 |
+| `test_emlis_ai_complete_relation_graph.py` | RelationGraph 2.0 bridge。 |
+| `test_emlis_ai_complete_sentence_plan_v2.py` | SentencePlan 2.0。 |
+| `test_emlis_ai_complete_surface_realizer_v2.py` | Surface Realizer 2.0。 |
+| `test_emlis_ai_complete_grounding_binding.py` | Binding-aware Grounding強化。 |
+| `test_emlis_ai_complete_self_repair.py` | Self-Repair Loop。 |
+| `test_emlis_ai_complete_composer_client.py` | CompleteComposerClient統合。 |
+| `test_emlis_ai_complete_e2e_contract.py` | Reply diagnostics統合後のE2E contract。 |
+| `test_emlis_ai_complete_scorecard.py` | Scorecard / fixture拡張。 |
+| `rn-screen-contracts.test.js` | RN contract regression。 |
+
+境界維持:
+- DB physical name、既存API route、public response key、RN表示名 `Emlisの観測` は変更しない。
+- `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけ表示する。
+- 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
+- raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
+- これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。

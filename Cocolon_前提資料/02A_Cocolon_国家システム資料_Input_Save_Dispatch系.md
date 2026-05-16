@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1693,3 +1693,42 @@ Input / Save / Dispatch系では、EmlisAI immediate reply と Piece preview が
 - Step18は未達時に戻り先Stepを返す。Step19へ無条件進行しない。
 - Step19はA-P0 greenとrollout条件がそろった時だけcomposer_modelをA案相当名へ切り替える。
 - Step20は履歴/cross coreの過剰補完を検出する。履歴を「本心の補完」に使わない。
+
+# 2026-05-15 差分追記: Input / immediate reply 限定Composer拡張 Step0-11
+
+Input保存後のEmlisAI immediate replyは、保存APIやHome gatewayの契約を変えず、内部Composerの診断とGate traceだけを拡張しています。
+
+| Step | 国家システム上の読み方 |
+|---|---|
+| 0-1 | 候補生成前に止まったのか、接続後にrejectionしたのかを `diagnostic_summary` で分ける。 |
+| 2-3 | raw入力本文なしで、failed_stage / coverage_group / SentenceBinding有無を読む。 |
+| 4-5 | 本文化前のPhraseUnit材料とrelation taxonomyを整え、入力専用テンプレにしない。 |
+| 6-7 | Grounding / Display traceがbinding情報を持つが、Gate条件は緩めない。 |
+| 8 | 限定Surface Realizerは文法部品を選ぶだけで、固定完成文を増やさない。 |
+| 9-11 | scorecard、passed-only E2E契約、Exit Gateで完全Composer初期版へ進めるかを判定する。 |
+
+禁止: save route、Home read/write、RN modal表示条件、DB write pathをこの差分で変更しない。
+
+# 2026-05-16 差分追記: Input / immediate reply 完全Composer初期版 Commit1-13
+
+Input保存後のEmlisAI immediate replyは、public route / response key を変更せず、内部でComplete Composer初期版の層を通せる状態になった。国家システム上は `Save -> Dispatch -> internal composer -> Display Gate -> RN passed-only display` の境界を維持する。
+
+| 層 | current owner | 国家システム上の役割 |
+|---|---|---|
+| 入口判定 | `emlis_ai_ap0_migration_decision_service.py`, `emlis_ai_complete_composer_initial_meta.py` | 完全Composer初期版へ進めるかをAP0 reportとしてmeta化する。 |
+| 材料化 | `emlis_ai_complete_material_service.py` | EvidenceSpan / PhraseUnitから本文化可能材料だけを作り、根拠不足をここで止める。 |
+| Coverage選択 | `emlis_ai_complete_focus_selector.py` | 入力全部の要約ではなく、Emlisの観測として出す核を選ぶ。 |
+| Relation保持 | `emlis_ai_complete_relation_graph_service.py` | relation_typeを本文生成前の制約として保持する。 |
+| 文計画 | `emlis_ai_complete_sentence_planner.py` | 2〜5文のSentencePlan 2.0を生成する。 |
+| 表層生成 | `emlis_ai_complete_surface_realizer.py` | 文法部品から自然文を組む。固定完成文テンプレは使わない。 |
+| 根拠判定 | `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py` | sentence bindingに基づき、根拠・phrase・relationを判定する。 |
+| 自己修復 | `emlis_ai_complete_self_repair_service.py` | Gate reasonに応じて最大2回だけ安全にrepairする。 |
+| client統合 | `emlis_ai_complete_composer_client.py`, `emlis_ai_composer_client_registry.py` | AP0 green / rollout許可時のみComplete初期版clientを解決する。 |
+| reply接続 | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_reply_service.py` | diagnostics / repair trace / scorecard eventをadditive接続する。 |
+
+境界維持:
+- DB physical name、既存API route、public response key、RN表示名 `Emlisの観測` は変更しない。
+- `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけ表示する。
+- 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
+- raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
+- これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
