@@ -437,6 +437,170 @@ test('Step 07 Emlis observation frontend regression keeps passed-only modal disp
   ], 'InputScreen.js Step 07 must not force rejected/unavailable/safety observations to passed');
 });
 
+
+
+test('Step 08 Complete Composer initial RN contract regression keeps Complete meta from overriding public passed-only display', () => {
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+  const input = read('screens/InputScreen.js');
+
+  assertIncludes(inputFeedback, [
+    'export function getEmlisObservationStatus(input = {})',
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'export function getEmlisObservationCommentText(input = {})',
+    'input?.input_feedback?.comment_text',
+    'export function buildPassedEmlisObservationModalPayload(input = {})',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+  ], 'inputFeedbackModel.js Step 08 public status/comment_text are the only modal source');
+
+  assertNotIncludes(inputFeedback, [
+    'complete_initial',
+    'complete_composer_initial',
+    'complete_scorecard_event',
+    'complete_reply_diagnostics',
+    'step6_scorecard_display_passed',
+    'display_pass',
+  ], 'inputFeedbackModel.js Step 08 must not read Complete diagnostic meta as display source');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'if (!payload) {',
+    'setInputFeedbackModalVisible(false);',
+    'setInputFeedbackModalText("");',
+    'observationStatus: getEmlisObservationStatus(input)',
+    'return false;',
+    'setInputFeedbackModalVisible(true);',
+    'return true;',
+  ], 'useInputFeedbackModal.js Step 08 fail-closed opener');
+
+  assertNotIncludes(inputFeedbackModal, [
+    'complete_initial',
+    'complete_scorecard_event',
+    'complete_reply_diagnostics',
+    'display_pass',
+  ], 'useInputFeedbackModal.js Step 08 must not add Complete-specific modal exception');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'const shouldShow = Boolean',
+    'visible &&',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    '<Modal visible={shouldShow}',
+  ], 'InputFeedbackReplyModal.js Step 08 public passed/text guard');
+
+  assertNotIncludes(inputFeedbackReplyModal, [
+    'complete_initial',
+    'complete_scorecard_event',
+    'complete_reply_diagnostics',
+    'display_pass',
+  ], 'InputFeedbackReplyModal.js Step 08 must not show by Complete meta');
+
+  assertNotIncludes(input, [
+    'complete_composer_initial',
+    'complete_initial_entry_ap0',
+    'complete_initial_final_ap0_decision',
+    'complete_scorecard_event',
+    'complete_reply_diagnostics',
+    'step6_scorecard_display_passed',
+    'display_pass',
+    'observationStatus: inputFeedbackAI?.observation_status || "passed"',
+  ], 'InputScreen.js Step 08 must not special-case Complete diagnostics or force passed');
+
+  const {
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  const passedPublicPayload = {
+    input_feedback: {
+      comment_text: 'Display Gate passed の public comment_text だけが表示されます。',
+      emlis_ai: {
+        observation_status: 'passed',
+        meta: {
+          complete_initial_entry_ap0_decision: { green: true },
+          complete_initial_final_ap0_decision: { green: true },
+          complete_scorecard_event: { display_pass: true },
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(passedPublicPayload), 'passed');
+  assert.equal(
+    getEmlisObservationCommentText(passedPublicPayload),
+    'Display Gate passed の public comment_text だけが表示されます。'
+  );
+  assert.deepEqual(buildPassedEmlisObservationModalPayload(passedPublicPayload), {
+    commentText: 'Display Gate passed の public comment_text だけが表示されます。',
+    observationStatus: 'passed',
+    emotionSummary: '',
+    dominantSummary: '',
+    contextLabel: '',
+  });
+
+  for (const observation_status of ['rejected', 'unavailable', 'safety_blocked']) {
+    const nonPassedPublicPayload = {
+      input_feedback: {
+        comment_text: 'Complete meta が green でも non-passed なら表示されてはいけません。',
+        emlis_ai: {
+          observation_status,
+          meta: {
+            complete_initial_entry_ap0_decision: { green: true, can_proceed_to_complete_initial: true },
+            complete_initial_runtime: { status: 'generated', observation_status: 'passed' },
+            complete_initial_final_ap0_decision: { green: true },
+            complete_scorecard_event: { display_pass: true, display_reach_rate: 1 },
+          },
+        },
+      },
+    };
+    assert.equal(getEmlisObservationStatus(nonPassedPublicPayload), observation_status);
+    assert.equal(isPassedEmlisObservationReply(nonPassedPublicPayload), false);
+    assert.equal(buildPassedEmlisObservationModalPayload(nonPassedPublicPayload), null);
+  }
+
+  const metaOnlyPassedPayload = {
+    input_feedback: {
+      comment_text: '',
+      emlis_ai: {
+        observation_status: '',
+        meta: {
+          observation_status: 'passed',
+          complete_initial_runtime: {
+            status: 'generated',
+            comment_text: 'meta 内だけの本文は RN 表示対象外です。',
+          },
+          complete_scorecard_event: { display_pass: true },
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(metaOnlyPassedPayload), '');
+  assert.equal(getEmlisObservationCommentText(metaOnlyPassedPayload), '');
+  assert.equal(isPassedEmlisObservationReply(metaOnlyPassedPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyPassedPayload), null);
+
+  const passedBlankPublicTextPayload = {
+    input_feedback: {
+      comment_text: '   ',
+      emlis_ai: {
+        observation_status: 'passed',
+        meta: {
+          complete_initial_runtime: { status: 'generated', comment_text: 'meta本文は使わない' },
+          complete_scorecard_event: { display_pass: true },
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(passedBlankPublicTextPayload), 'passed');
+  assert.equal(getEmlisObservationCommentText(passedBlankPublicTextPayload), '');
+  assert.equal(isPassedEmlisObservationReply(passedBlankPublicTextPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(passedBlankPublicTextPayload), null);
+});
+
 test('Home hooks preserve startup popup priority, today question, and Piece quota screen state', () => {
   const state = read('features/home/useHomeState.js');
   const actions = read('features/home/useHomeActions.js');

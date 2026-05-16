@@ -6,14 +6,18 @@ source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
+source_snapshot:
+  premise: "Cocolon_前提資料(87).zip"
+  Cocolon: "Cocolon_10(7).zip"
+  mashos-api: "mashos-api_10(10).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 484
+  mashos-api: 489
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 700
+  included_files_total: 705
   included_files_cocolon: 216
-  included_files_mashos_api: 484
+  included_files_mashos_api: 489
 ---
 
 # 1. 1行定義
@@ -1252,7 +1256,7 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 
 # 2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 / current path coverage
 
-最新基準面は `Cocolon_前提資料(85).zip` / `Cocolon_15(2).zip` / `mashos-api_15(3).zip`。coverage対象は `Cocolon=216` / `mashos-api=484` / `total=700`。この差分は、限定Composer拡張 Step0-11 を破棄せず、完全Composer初期版の内部runtime / meta / regressionを追加するものです。
+旧基準面 `Cocolon_前提資料(85).zip` / `Cocolon_15(2).zip` / `mashos-api_15(3).zip` の履歴差分として保管します。当時のcoverage対象は `Cocolon=216` / `mashos-api=484` / `total=700`。この差分は、限定Composer拡張 Step0-11 を破棄せず、完全Composer初期版の内部runtime / meta / regressionを追加するものでした。最新正本は後続のE2E表示開通 Step0-9 sectionを優先します。
 
 ## Cocolon 変更path
 
@@ -1311,3 +1315,31 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 - 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
 - raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
 - これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
+
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 / current path coverage
+
+最新基準面は `Cocolon_前提資料(87).zip` / `Cocolon_10(7).zip` / `mashos-api_10(10).zip`。coverage対象は `Cocolon=216` / `mashos-api=489` / `total=705`。この差分は、完全Composer初期版を通常ルートで安全に表示到達させるための E2E 表示開通 Step0-9 を、全体構造資料へ追加するものです。
+
+## 追加 / 未記載補正 path
+
+| path | 全体構造上の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_fixture_qa_service.py` | Step9 fixture / QA run のmeta集計service。表示到達率、candidate生成率、binding pass、Gate reason、非テンプレ性、安全性を sanitized meta として集計し、商品品質版scorecard seedへ接続する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_ap0.py` | Step0 / Step1 のEntry AP0 helper回帰test。AP0 red/green、raw入力混入防止、registry fail-closedを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py` | Step2-6 の通常reply route回帰test。pre-generation seed、resolver注入、resolution meta、candidate生成、Final AP0 / scorecard接続を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py` | Step7 integration test。AP0 red / rollout red / AP0 green + rollout green / Gate rejected / Gate passed をE2Eで固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step9_fixture_qa.py` | Step9 fixture / QA run回帰test。raw入力・comment_text混入禁止、product scorecard seed接続、phase_gate metaを固定する。 |
+
+## 既存ownerへの接続補正
+
+| path | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py` | `build_complete_initial_entry_ap0_decision()` を持つEntry AP0 ownerとして読む。Step18 Final AP0とは役割を分ける。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step2-6 / Step9 の中心owner。Entry AP0 seed、resolver injection、resolution meta、candidate generation path、Final AP0 / scorecard、fixture / QA run meta をadditive接続する。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | Step8 RN contract regression owner。Complete metaだけではRN表示しないことを固定する。 |
+
+境界維持:
+- E2E表示開通は商品品質版Gateではない。完全Composer初期版を商品品質版へ進めるための基礎段階として読む。
+- `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけ表示する。
+- Gate緩和、固定文fallback、外部AI/ローカルLLM、入力専用テンプレ、DB/API/RN rename は行わない。

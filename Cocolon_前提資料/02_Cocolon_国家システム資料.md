@@ -1,19 +1,23 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-15"
+revision_date: "2026-05-16"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
+source_snapshot:
+  premise: "Cocolon_前提資料(87).zip"
+  Cocolon: "Cocolon_10(7).zip"
+  mashos-api: "mashos-api_10(10).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 459
+  mashos-api: 489
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 675
+  included_files_total: 705
   included_files_cocolon: 216
-  included_files_mashos_api: 459
+  included_files_mashos_api: 489
 ---
 
 # 1. 1行定義
@@ -1021,3 +1025,24 @@ Input Gate -> Save API -> Emlis / Piece / Analysis runtime
 | Metrics | coverage_group別scorecardとExit Gateで次工程を見える化する | `emlis_ai_coverage_matrix_service.py`, `emlis_ai_limited_composer_extension_exit_gate.py` |
 
 この差分は `Input -> Save -> immediate reply -> Home表示` のpublic contractを変えない。`comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ出る。
+
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 国家システム境界
+
+最新基準面 `Cocolon_前提資料(87).zip` / `Cocolon_10(7).zip` / `mashos-api_10(10).zip` では、EmlisAI immediate reply の国家システムflowに、完全Composer初期版のE2E表示開通 Step0-9 がadditive接続されています。入力保存API、DB write path、public route、response key、RN表示契約は変更していません。
+
+| flow | owner | 国家システム上の読み方 |
+|---|---|---|
+| Save後 immediate reply入口 | `emlis_ai_reply_service.py` | source / evidence / scope / rollout 後、resolver前に Entry AP0 diagnostic seed を作る。candidate生成後のGate結果はEntry AP0へ入れない。 |
+| Entry AP0 | `emlis_ai_ap0_migration_decision_service.py` | `complete_initial` を試してよいかの入口判定。AP0 red / rollout red / safety red では client を解決しない。 |
+| Composer registry | `emlis_ai_composer_client_registry.py` | `ap0_decision=entry_ap0_decision` を受け、AP0 green + rollout allowed の場合だけ CompleteComposerClient を返す。 |
+| Candidate generation | `emlis_ai_complete_composer_client.py` + Complete系service群 | 候補を作っても、それだけでは表示しない。Reader / Grounding / Template / Display Gate を通す。 |
+| Display Gate / RN | `emlis_ai_reply_service.py`, `Cocolon/tests/rn-screen-contracts.test.js` | public `observation_status=passed` かつ `comment_text` 非空の場合だけ `Emlisの観測` が立ち上がる。Complete metaだけでは表示しない。 |
+| Final AP0 / scorecard | `emlis_ai_reply_service.py`, `emlis_ai_complete_scorecard_service.py` | 実行後に Step18 / scorecard event をdiagnostic metaへ残し、次の改善対象をraw入力なしで見える化する。 |
+| Fixture / QA run | `emlis_ai_complete_initial_fixture_qa_service.py` | eligible fixtureで表示到達率、binding pass、Gate reason、非テンプレ性、安全性を集計し、商品品質版scorecard seedへ渡す。 |
+
+国家システム上の禁止:
+- `rejected` / `unavailable` / `safety_blocked` をRN表示しない。
+- Step9 fixture / QA run がpublic `comment_text` を書かない。
+- scorecard meta をDisplay Gateの代替にしない。
+- DB physical name、public API route、response key、RN visible名を変更しない。

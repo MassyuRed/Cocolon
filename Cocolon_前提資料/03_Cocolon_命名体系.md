@@ -6,9 +6,13 @@ source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
+source_snapshot:
+  premise: "Cocolon_前提資料(87).zip"
+  Cocolon: "Cocolon_10(7).zip"
+  mashos-api: "mashos-api_10(10).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 459
+  mashos-api: 489
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 

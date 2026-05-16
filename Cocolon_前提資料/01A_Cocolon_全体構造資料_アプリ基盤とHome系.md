@@ -2539,3 +2539,18 @@ render_emlis_ai_reply
 - 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
 - raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
 - これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
+
+
+# 2026-05-16 差分追記: EmlisAI immediate reply / 完全Composer初期版 E2E表示開通 Step0-9
+
+最新基準面は `Cocolon_前提資料(87).zip` / `Cocolon_10(7).zip` / `mashos-api_10(10).zip`。Home/Input直後の EmlisAI immediate reply では、完全Composer初期版を通常ルートへ接続するために Entry AP0 / resolver注入 / candidate生成経路 / Final AP0 / scorecard / fixture QA meta が追加されています。
+
+| path | アプリ基盤 / Home系での読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_fixture_qa_service.py` | Home/Input直後replyのComplete初期版QA集計service。表示到達・binding・Gate reasonをsanitized metaとして残す。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_ap0.py` | Entry AP0 helperのfail-closedを固定するtest。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py` | `render_emlis_ai_reply()` の通常経路でEntry AP0 seedからresolver注入、Final AP0 / scorecard接続までを固定するtest。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py` | AP0/rollout/Gate状態ごとのE2E表示可否を固定するintegration test。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step9_fixture_qa.py` | fixture / QA runがraw入力やcomment_textを混入させず、product scorecard seedを作ることを固定するtest。 |
+
+RN側は `input_feedback.comment_text` と public `observation_status` だけを表示条件にし、Complete metaだけでは `Emlisの観測` を表示しない。

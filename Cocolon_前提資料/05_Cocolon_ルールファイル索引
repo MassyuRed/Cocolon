@@ -318,3 +318,22 @@ Complete Composer初期版では、生成側を広げるほど、根拠なし補
 | Reply diagnostics | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_complete_e2e_contract.py` | diagnostics追加で`comment_text`や`observation_status`を上書きしていないか。 |
 | Scorecard | `emlis_ai_complete_scorecard_service.py`, `test_emlis_ai_complete_scorecard.py` | scorecardがQA metaであり、表示判定そのものになっていないか。 |
 | RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | Complete metaをfrontendでspecial-caseせず、passed-only表示を守っているか。 |
+
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 rule / test index
+
+最新基準面 `Cocolon_10(7).zip` / `mashos-api_10(10).zip` では、EmlisAI 完全Composer初期版の通常表示ルートを守るrule / regressionとして次を追加で読む。
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_ap0.py` | Entry AP0 helperのred/green、raw入力混入禁止、registry fail-closed | complete_initial起動条件、AP0判定、rollout境界を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py` | resolver前diagnostic seed、ap0_decision注入、resolution meta、Final AP0 / scorecard接続 | `emlis_ai_reply_service.py` の通常reply routeを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py` | AP0 red / rollout red / AP0 green + rollout green / Gate rejected / Gate passed のE2E contract | Complete Composer初期版のE2E開通条件を触る時 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | Complete metaがpublic passed-only表示契約を上書きしないこと | RN表示条件、InputFeedback modal、`Emlisの観測` 表示境界を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step9_fixture_qa.py` | Step9 fixture / QA runのsanitized meta、product scorecard seed、comment_text非書込 | fixture / QA run、scorecard meta、商品品質版scorecard seedを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_fixture_qa_service.py` | Step9 meta-only集計。raw input / comment_textを混入させず、表示到達・binding・Gate reason・非テンプレ性・安全性を集計する | Product scorecard前のQA集計を読む時 |
+
+この索引の結論:
+- 表示率を上げるために Gate を緩めない。
+- Complete metaをRN表示条件にしない。
+- `passed + comment_text` のpublic契約だけが表示条件。

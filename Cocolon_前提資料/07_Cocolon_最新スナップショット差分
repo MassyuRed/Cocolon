@@ -7,9 +7,9 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(85).zip"
-  Cocolon: "Cocolon_15(2).zip"
-  mashos-api: "mashos-api_15(3).zip"
+  premise: "Cocolon_前提資料(87).zip"
+  Cocolon: "Cocolon_10(7).zip"
+  mashos-api: "mashos-api_10(10).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_15(2).zip` | 216 | RNアプリ本体。Complete Composer初期版のRN contract regressionを `tests/rn-screen-contracts.test.js` で保持する。 |
-| `mashos-api_15(3).zip` | 484 | EmlisAI 完全Composer初期版 Commit1-12、CompleteComposerClient、Reply diagnostics、Scorecard fixture、Binding-aware Grounding、Self-Repairを含む。 |
-| total | 700 | 前提資料coverage対象 |
+| `Cocolon_10(7).zip` | 216 | RNアプリ本体。Step8 RN contract regressionにより、Complete metaだけでは `Emlisの観測` を表示しない契約を保持する。 |
+| `mashos-api_10(10).zip` | 489 | EmlisAI 完全Composer初期版 E2E表示開通 Step0-9、Entry AP0、resolver注入、Final AP0 / scorecard、fixture / QA runを含む。 |
+| total | 705 | 前提資料coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-15以前の差分追記は履歴として残し、2026-05-16時点の最新正本は末尾の `2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 snapshot差分` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-15以前の差分追記は履歴として残し、2026-05-16時点の最新正本は末尾の `2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 snapshot差分` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -1132,3 +1132,39 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
 - raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
 - これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 snapshot差分
+
+比較対象は、前提資料 `Cocolon_前提資料(87).zip` と最新実ファイル `Cocolon_10(7).zip` / `mashos-api_10(10).zip` です。Cocolon側は file count `216` のまま、mashos-api側は file count `489`、合計 `705` を最新coverage対象として読む。
+
+## 前提資料に未記載だった current path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_fixture_qa_service.py` | Step9 fixture / QA runの新規service。scorecard event / fixture suite / recordsをsanitized metaとして集計し、product scorecard seedを作る。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_ap0.py` | Step0 / Step1 Entry AP0 helperの回帰test。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py` | Step2-6 reply route接続の回帰test。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py` | Step7 integration test。AP0 red / rollout red / Gate rejected / Gate passedをE2Eで固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step9_fixture_qa.py` | Step9 fixture / QA runの回帰test。raw入力・comment_text混入禁止とscorecard seed接続を固定する。 |
+
+## 既存ownerの読み方更新
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py` | Step18 Final AP0に加え、registry前の `build_complete_initial_entry_ap0_decision()` を持つ。Entry AP0とFinal AP0は循環防止のため分けて読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step2-6 / Step9の接続owner。Entry AP0 preview、resolver注入、resolution meta、candidate generation path、Final AP0 / scorecard、fixture / QA run metaをdiagnostic_summary / phase_gateへadditiveに残す。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | Step8 RN contract regression。Complete metaだけでpublic statusを上書きせず、passed + textのみ表示することを固定する。 |
+
+## 実行確認
+
+| 対象 | 結果 |
+|---|---|
+| backend Step1-9確認 | `38 passed` |
+| RN contract regression | `21 passed` |
+
+## 構造補正
+
+- E2E表示開通 Step0-9 は、完全Composer商品品質版ではなく、商品品質版に進むための完全Composer初期版の正規基礎段階。
+- Entry AP0がgreenでも、Reader / Grounding / Template / Display Gateで落ちた場合は表示しない。
+- Step9 fixture / QA runはmeta-onlyであり、public `comment_text` を書かない。
+- DB physical name、public API route、既存response key、RN visible名 `Emlisの観測` は変更しない。

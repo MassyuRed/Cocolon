@@ -7,18 +7,18 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(85).zip"
-  Cocolon: "Cocolon_15(2).zip"
-  mashos-api: "mashos-api_15(3).zip"
+  premise: "Cocolon_前提資料(87).zip"
+  Cocolon: "Cocolon_10(7).zip"
+  mashos-api: "mashos-api_10(10).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 484
-  total: 700
+  mashos-api: 489
+  total: 705
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 700
-  included_in_overall_structure: 700
-  included_in_national_system: 700
+  total_files: 705
+  included_in_overall_structure: 705
+  included_in_national_system: 705
   excluded_from_main_body: 0
 ---
 
@@ -53,13 +53,13 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_15(2).zip` | 216 | RNアプリ本体。Complete Composer初期版 Commit13のRN contract regressionを `tests/rn-screen-contracts.test.js` で保持する。 |
-| `mashos-api_15(3).zip` | 484 | backend / API / worker / tests。EmlisAI 完全Composer初期版 Commit1-12、CompleteComposerClient、Reply diagnostics、Scorecard fixture、Binding-aware Grounding、Self-Repairを含む。 |
-| total | 700 | 前提資料の構造coverage対象 |
+| `Cocolon_10(7).zip` | 216 | RNアプリ本体。Complete Composer初期版 E2E表示開通のRN contract regressionを `tests/rn-screen-contracts.test.js` で保持する。 |
+| `mashos-api_10(10).zip` | 489 | backend / API / worker / tests。EmlisAI 完全Composer初期版 E2E表示開通 Step0-9、Entry AP0、resolver注入、Final AP0 / scorecard、fixture / QA run を含む。 |
+| total | 705 | 前提資料の構造coverage対象 |
 
-`Cocolon_15(2).zip` / `mashos-api_15(3).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、EmlisAIの完全Composer初期版 Commit1-13 が developer / QA meta と内部Composer境界として追加されています。`input_feedback.comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示されます。
+`Cocolon_10(7).zip` / `mashos-api_10(10).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、EmlisAIの完全Composer初期版 E2E表示開通 Step0-9 が developer / QA meta と内部Composer境界として追加されています。`input_feedback.comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示されます。
 
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13は、この構造を壊さずに、AP0判定・呼称meta・内部型・材料・coverage・relation・文計画・表層生成・根拠判定・自己修復・client統合・reply diagnostics・scorecard・RN契約回帰を追加した完全Composer初期版であり、完全Composer商品品質版ではない。
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は、この構造を壊さずに、Entry AP0判定・resolver注入・resolution meta・candidate生成経路・Final AP0 / scorecard・integration test・RN契約回帰・fixture / QA runを追加した完全Composer初期版であり、完全Composer商品品質版ではない。
 
 わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
@@ -371,7 +371,7 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 
 # 2026-05-16 差分追記: EmlisAI 完全Composer初期版 Commit1-13 current boundary
 
-この差分は、`Cocolon_15(2).zip` / `mashos-api_15(3).zip` を最新実ファイルとして確認した結果を、前提資料へ追記するものです。Cocolon側は file count 216 のまま、`tests/rn-screen-contracts.test.js` にComplete Composer初期版のRN contract regressionが追加されています。mashos-api側は file count 484 となり、Complete Composer初期版のservice / testが追加されています。
+この差分は、旧基準 `Cocolon_15(2).zip` / `mashos-api_15(3).zip` の履歴として保管します。Cocolon側は file count 216 のまま、`tests/rn-screen-contracts.test.js` にComplete Composer初期版のRN contract regressionが追加され、mashos-api側は file count 484 としてComplete Composer初期版のservice / testが追加されていました。最新正本は後続のE2E表示開通 Step0-9 sectionを優先します。
 
 | Step / Commit | current owner | 読み方 |
 |---|---|---|
@@ -395,3 +395,27 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 - 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
 - raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
 - これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
+
+
+# 2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 current boundary
+
+この差分は、`Cocolon_10(7).zip` / `mashos-api_10(10).zip` を最新実ファイルとして確認した結果を、前提資料へ差分追記するものです。Cocolon側のfile countは `216` のまま、mashos-api側は `489` となり、完全Composer初期版の通常表示ルートを商品品質版へ進む正規工程として開通するための Entry AP0 / diagnostic / resolver / Gate / scorecard / fixture QA meta が追加されています。
+
+| Step | current owner | 読み方 |
+|---|---|---|
+| Step0 baseline確認 | `test_emlis_ai_complete_initial_entry_ap0.py` | Entry AP0未注入では complete_initial が fail-closed で閉じることを固定する。 |
+| Step1 Entry AP0 helper | `emlis_ai_ap0_migration_decision_service.py` | `build_complete_initial_entry_ap0_decision()` を追加し、registry前に使う入口AP0だけを生成する。Step18 full AP0の代替ではない。 |
+| Step2 pre-generation diagnostic seed | `emlis_ai_reply_service.py`, `test_emlis_ai_complete_initial_entry_route.py` | source / evidence / scope / rollout 後、resolver前に Entry AP0 材料とpreviewを diagnostic に残す。 |
+| Step3 resolver注入 | `emlis_ai_reply_service.py` | `resolve_emlis_ai_composer_client(..., ap0_decision=entry_ap0_decision)` へ接続し、AP0 green + rollout allowed の時だけ client を解決する。 |
+| Step4 resolution meta固定 | `emlis_ai_reply_service.py` | `composer_client_resolution` / `complete_initial_gate` / rejection reason を diagnostic_summary へadditiveに残す。 |
+| Step5 candidate生成経路確認 | `emlis_ai_reply_service.py` | CompleteComposerClient.generate() 後も Reader / Grounding / Template / Display Gate を維持する。non-passed の `comment_text` は空のまま。 |
+| Step6 Final AP0 / scorecard接続 | `emlis_ai_reply_service.py` | 実行後の `step18_ap0_migration_decision` と scorecard_event を meta に接続し、次段階の改善対象を raw入力なしで見える化する。 |
+| Step7 integration test | `test_emlis_ai_complete_initial_step7_integration.py` | AP0 red / rollout red / AP0 green + rollout green / Gate rejected / Gate passed をE2Eで固定する。 |
+| Step8 RN contract regression | `Cocolon/tests/rn-screen-contracts.test.js` | Complete metaがgreenでも、public `observation_status=passed` かつ `comment_text` 非空でなければRNは表示しない。 |
+| Step9 fixture / QA run | `emlis_ai_complete_initial_fixture_qa_service.py`, `test_emlis_ai_complete_initial_step9_fixture_qa.py` | eligible fixtureで表示到達率、candidate生成率、binding pass、Gate reason、非テンプレ性、安全性を集計し、商品品質版scorecard seedへ接続する。 |
+
+読み方:
+- Step0-9 は、完全Composer商品品質版を前倒しする工程ではなく、完全Composer初期版を正しい順番でE2E表示ルートへ接続する工程。
+- Entry AP0 が green でも、Reader / Grounding / Template / Display Gate で落ちた場合は表示しない。
+- Step9 は fixture / QA meta と product scorecard seed を作るだけで、`comment_text` を直接書かない。
+- DB physical name、public API route、既存response key、RN visible名 `Emlisの観測`、passed-only表示契約は変更しない。

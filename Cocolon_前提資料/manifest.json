@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 216,
-    "mashos-api": 484,
-    "total": 700
+    "mashos-api": 489,
+    "total": 705
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 675,
-    "national_system_body_includes": 675,
+    "overall_structure_body_includes": 705,
+    "national_system_body_includes": 705,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル675件、国家システム判断対象のcurrent全ファイル675件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 700,
-    "overall_structure_body_includes_current_snapshot_files": 675,
-    "national_system_body_lists_current_snapshot_files_with_relation": 675,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル705件、国家システム判断対象のcurrent全ファイル705件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
+    "current_snapshot_total_files": 705,
+    "overall_structure_body_includes_current_snapshot_files": 705,
+    "national_system_body_lists_current_snapshot_files_with_relation": 705,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -659,8 +659,34 @@
     ],
     "latest_source_basis_2026_05_15": "Cocolon_前提資料(78).zip / Cocolon_7(10).zip / mashos-api_7(13).zip",
     "emlis_ai_a_plan_boundary_2026_05_15": "Step15-20 are additive EmlisAI meta/QA/promotion layers. DB physical names, public API routes, existing response keys, RN visible names, and passed-only comment_text display are preserved.",
-    "latest_source_basis_2026_05_16": "Cocolon_前提資料(85).zip / Cocolon_15(2).zip / mashos-api_15(3).zip",
-    "complete_composer_initial_policy_2026_05_16": "完全Composer初期版Commit1-13は内部Composer / meta / regressionの追加。DB/API/RN表示契約は変更しない。"
+    "latest_source_basis_2026_05_16": "Cocolon_前提資料(87).zip / Cocolon_10(7).zip / mashos-api_10(10).zip",
+    "complete_composer_initial_policy_2026_05_16": "完全Composer初期版Commit1-13は内部Composer / meta / regressionの追加。DB/API/RN表示契約は変更しない。",
+    "latest_source_basis_2026_05_16_complete_initial_e2e_opening_step0_9": {
+      "premise": "Cocolon_前提資料(87).zip",
+      "Cocolon": "Cocolon_10(7).zip",
+      "mashos-api": "mashos-api_10(10).zip",
+      "Cocolon_files": 216,
+      "mashos_api_files": 489,
+      "total_files": 705,
+      "doc_role": "完全Composer初期版 E2E表示開通 Step0-9を含む現状構造を読むための作業用地図。Entry AP0 / resolver注入 / Final AP0 / scorecard / fixture QA metaを保持し、passed-only表示契約を維持する。"
+    },
+    "current_snapshot_unlisted_paths_added_2026_05_16_complete_initial_e2e_opening_step0_9": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_fixture_qa_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_ap0.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_step9_fixture_qa.py"
+    ],
+    "current_snapshot_changed_paths_2026_05_16_complete_initial_e2e_opening_step0_9": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_ap0_migration_decision_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ],
+    "complete_initial_e2e_opening_policy_2026_05_16": "E2E表示開通 Step0-9は完全Composer商品品質版ではなく、商品品質版へ進むための完全Composer初期版の正規基礎段階。AP0 green + rollout allowed + Gate passed + public comment_text の場合だけ表示し、Gate緩和・固定文fallback・外部AI/ローカルLLM・DB/API/RN renameは行わない。",
+    "complete_initial_e2e_opening_verified_tests_2026_05_16": {
+      "backend_step1_9": "38 passed",
+      "rn_contract": "21 passed"
+    }
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1666,15 +1692,9 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(80).zip",
-    "Cocolon": "Cocolon_12(4).zip",
-    "mashos-api": "mashos-api_12(4).zip",
-    "file_counts": {
-      "Cocolon": 216,
-      "mashos-api": 459,
-      "total": 675
-    },
-    "summary": "Current latest source basis after EmlisAI limited Composer extension Step0-11."
+    "premise": "Cocolon_前提資料(87).zip",
+    "Cocolon": "Cocolon_10(7).zip",
+    "mashos-api": "mashos-api_10(10).zip"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2539,5 +2559,16 @@
       "input_specific_template_added": false,
       "raw_input_copied_to_meta": false
     }
+  },
+  "source_snapshot_2026_05_16_complete_initial_e2e_opening_step0_9": {
+    "premise": "Cocolon_前提資料(87).zip",
+    "Cocolon": "Cocolon_10(7).zip",
+    "mashos-api": "mashos-api_10(10).zip",
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 489,
+      "total": 705
+    },
+    "summary": "Current latest source basis after EmlisAI Complete Composer initial E2E opening Step0-9."
   }
 }
