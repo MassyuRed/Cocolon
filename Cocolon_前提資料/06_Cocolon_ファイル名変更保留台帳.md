@@ -7,12 +7,12 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(87).zip"
-  Cocolon: "Cocolon_10(7).zip"
-  mashos-api: "mashos-api_10(10).zip"
+  premise: "Cocolon_前提資料(90).zip"
+  Cocolon: "Cocolon_8(11).zip"
+  mashos-api: "mashos-api_8(16).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 489
+  mashos-api: 504
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 
@@ -159,3 +159,19 @@ Complete Composer初期版では、`complete_*` 系の新規ファイル名と�
 | `Cocolon/tests/rn-screen-contracts.test.js` | RN regression test | `rename禁止` | Complete metaのspecial-case禁止とpassed-only表示契約を固定する。 |
 
 禁止: 完全Composer初期版の実装を理由に、DB physical name、public API route、response key、RN visible titleをrenameしない。
+
+# 2026-05-16 差分追記: 商品品質版接続 Step0-7 内部名称のrename禁止
+
+商品品質版接続 Step0-7 で増えた次の名称・pathは、内部meta / QA / release判定名です。ユーザー表示名、public route、DB physical name、response keyへrenameしない。
+
+| 名称 / path | 種別 | 扱い | 理由 |
+|---|---|---|---|
+| `emlis_ai_complete_tone_policy.py` | Step5 service owner | `rename禁止` | Tone Engineの内部service名。Emlis visible名ではない。 |
+| `emlis_ai_complete_product_quality_scorecard_service.py` | Step6 service owner | `rename禁止` | Product Gate判断材料を作るmeta-only service。public scorecard APIではない。 |
+| `emlis_ai_complete_release_ladder_service.py` | Step7 service owner | `rename禁止` | release ladder判定metaのowner。public rollout操作ではない。 |
+| `complete_product_quality_scorecard` | diagnostic/meta key | `rename禁止` | Product Gate到達宣言ではなく、判断材料。 |
+| `complete_product_quality_release_ladder` | diagnostic/meta key | `rename禁止` | internal / limited / broader_beta / product_gateの判定meta。 |
+| `blind_qa_rubric` / `read_feeling_score` | QA meta | `rename禁止` | 人手QA評価の概念。自動Gateやpublic本文ではない。 |
+| `product_gate_reached` / `product_gate_public_release_applied` | release meta | `rename禁止` | Step7ではfalseを維持する安全契約。 |
+
+visible名は引き続き `Emlisの観測`、公開本文は `input_feedback.comment_text`、表示条件は `observation_status=passed` かつ本文ありの場合のみ。

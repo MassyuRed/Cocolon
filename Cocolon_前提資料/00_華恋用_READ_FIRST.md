@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(87).zip"
-  Cocolon: "Cocolon_10(7).zip"
-  mashos-api: "mashos-api_10(10).zip"
+  premise: "Cocolon_前提資料(92).zip"
+  Cocolon: "Cocolon_9(8).zip"
+  mashos-api: "mashos-api_9(8).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 489
-  total: 705
+  mashos-api: 514
+  total: 730
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 705
-  included_in_overall_structure: 705
-  included_in_national_system: 705
+  total_files: 730
+  included_in_overall_structure: 730
+  included_in_national_system: 730
   excluded_from_main_body: 0
 ---
 
@@ -53,13 +53,13 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_10(7).zip` | 216 | RNアプリ本体。Complete Composer初期版 E2E表示開通のRN contract regressionを `tests/rn-screen-contracts.test.js` で保持する。 |
-| `mashos-api_10(10).zip` | 489 | backend / API / worker / tests。EmlisAI 完全Composer初期版 E2E表示開通 Step0-9、Entry AP0、resolver注入、Final AP0 / scorecard、fixture / QA run を含む。 |
-| total | 705 | 前提資料の構造coverage対象 |
+| `Cocolon_9(8).zip` | 216 | RNアプリ本体。Step7で一時確認用の `Emlis observation debug` console log は残っておらず、Complete / ProductQuality / relation diagnostic metaだけでは `Emlisの観測` を表示しないRN passed-only contractを保持する。 |
+| `mashos-api_9(8).zip` | 514 | backend / API / worker / tests。完全Composer初期版 E2E表示開通 Step0-9、商品品質版接続 Step0-7に加え、`positive_recovery relation_not_expressed` 修正 Step0-7（relation surface contract / Reader検出 / Self-Repair marker / Surface整合 / diagnostic / E2E / log cleanup）を含む。 |
+| total | 730 | 前提資料の構造coverage対象 |
 
-`Cocolon_10(7).zip` / `mashos-api_10(10).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、EmlisAIの完全Composer初期版 E2E表示開通 Step0-9 が developer / QA meta と内部Composer境界として追加されています。`input_feedback.comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示されます。
+`Cocolon_9(8).zip` / `mashos-api_9(8).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、`positive_recovery` で `stage=reader` / `primary_reason=relation_not_expressed` となった非表示ケースに対して、Reader / Surface / Self-Repair が共有する `emlis.relation_surface_contract.v1` が追加されています。`input_feedback.comment_text` は引き続き public `observation_status=passed` かつ本文ありの場合だけ表示されます。
 
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は、この構造を壊さずに、Entry AP0判定・resolver注入・resolution meta・candidate生成経路・Final AP0 / scorecard・integration test・RN契約回帰・fixture / QA runを追加した完全Composer初期版であり、完全Composer商品品質版ではない。
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は完全Composer初期版のE2E基礎、商品品質版接続 Step0-7は Product Gate 判断材料へ接続する meta / contract / QA 層、positive_recovery relation_not_expressed Step0-7は特定coverageのReader relation表現整合修正であり、いずれも完全Composer商品品質版のrelease適用そのものではない。
 
 わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
@@ -419,3 +419,40 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 - Entry AP0 が green でも、Reader / Grounding / Template / Display Gate で落ちた場合は表示しない。
 - Step9 は fixture / QA meta と product scorecard seed を作るだけで、`comment_text` を直接書かない。
 - DB physical name、public API route、既存response key、RN visible名 `Emlisの観測`、passed-only表示契約は変更しない。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 current boundary
+
+この版の最新基準面は `Cocolon_前提資料(90).zip` / `Cocolon_8(11).zip` / `mashos-api_8(16).zip` です。Cocolon側は `216` 件のまま変更なし、mashos-api側は `504` 件、合計 `720` 件をcurrent coverage対象として読む。
+
+| Step | current owner | 読み方 |
+|---|---|---|
+| Step0 binding_used契約整理 | `emlis_ai_display_gate.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_gate_binding_contract_v2.py` | `binding_used` を「bindingが存在する」ではなく「Gate判断で実際に使った」として読む。Reader / Templateは原則false、Grounding / Display / Scorecardはbinding-aware時にtrueになり得る。 |
+| Step1 coverage suite拡張 | `emlis_ai_complete_scorecard_service.py`, `emlis_ai_complete_focus_selector.py`, `emlis_ai_complete_sentence_planner.py`, `test_emlis_ai_complete_product_quality_coverage.py` | `short_daily` / `long_meaning_arc` / `conflict` / `recovery` / `pressure` / `desire_fear` / `relationship` をeligible母集団として構造化する。 |
+| Step2 Grounding強化 | `emlis_ai_complete_grounding_binding.py`, `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py`, `test_emlis_ai_complete_grounding_relation_binding_v2.py` | sentence_id単位で Evidence / PhraseUnit / relation の矛盾を見て、unsupported / relation_not_expressed / phrase_unit_missing をrepairへ渡す。 |
+| Step3 Surface variation強化 | `emlis_ai_complete_surface_realizer.py`, `emlis_ai_template_echo_guard.py`, `test_emlis_ai_complete_surface_variation_v2.py` | 完成文増殖ではなく、surface parts / connector / ending / surface_signatureでテンプレ臭・raw echo・same-endingを検出する。 |
+| Step4 Self-Repair強化 | `emlis_ai_complete_self_repair_service.py`, `test_emlis_ai_complete_self_repair_product_quality_v2.py` | Gate reasonごとに許可operationを分け、`meaning_added=false`、`gate_relaxed=false`、evidence/relation preservedをtraceへ残す。 |
+| Step5 Tone Engine | `emlis_ai_complete_tone_policy.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_complete_tone_engine_v2.py` | Toneを後付け装飾ではなく SentencePlan -> Surface Realizer の制約として扱い、診断調・命令調・過剰慰め・一般論慰めをGuardする。 |
+| Step6 Scorecard / Blind QA | `emlis_ai_complete_product_quality_scorecard_service.py`, `test_emlis_ai_complete_product_quality_scorecard*.py` | machine metrics と Blind QA を分離し、読まれた感はBlind QA由来としてProduct Gate判断材料へ接続する。 |
+| Step7 Release ladder接続 | `emlis_ai_complete_release_ladder_service.py`, `test_emlis_ai_complete_release_ladder*.py` | `internal -> limited -> broader_beta -> product_gate` の判定をStep6 scorecardから作る。ただしpublic release適用や商品品質版到達宣言はしない。 |
+
+禁止: Gate緩和、固定文fallback、外部AI/ローカルLLM、DB/API/RN契約rename、raw入力本文の改善資料化。RN表示は引き続き `observation_status=passed` かつ `comment_text` 非空の場合のみ。
+
+# 2026-05-17 差分追記: EmlisAI positive_recovery relation_not_expressed Step0-7 current boundary
+
+この差分は、`Cocolon_9(8).zip` / `mashos-api_9(8).zip` を最新実ファイルとして確認した結果を、前提資料へ追記するものです。今回の修正は、`Emlisの観測` が非表示だった positive_recovery ケースの `stage=reader / primary_reason=relation_not_expressed` を、Gate緩和ではなく Reader / Surface / Self-Repair の relation surface contract 整合で扱う境界です。
+
+| 領域 | current owner | 読み方 |
+|---|---|---|
+| relation surface contract | `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py` | Reader / Surface / Self-Repair が共有する relation cue 契約。`emlis.relation_surface_contract.v1`、generic cue、recovery cue、marker phraseを持つ。`関係` 単独ではpassさせない。 |
+| Reader relation detection | `emlis_ai_listener_reader_judge.py` | 従来の `_RELATION_RE` に加え、contract detectionを使う。recovery expected時はgeneric cueだけでは通さず、本文中に明示relation cueがある場合だけ `relation_not_expressed` を解消する。 |
+| Self-Repair recovery marker | `emlis_ai_complete_self_repair_service.py` / `emlis_ai_complete_composer_types.py` | `relation_not_expressed` repair時、declared relationの範囲で recovery marker を追加する。`meaning_added=false` / `relation_ids_preserved=true` / `gate_relaxed=false` をtraceへ残す。 |
+| Surface recovery line | `emlis_ai_complete_surface_realizer.py` | recovery relation line / connector / predicate / surface_signature を relation surface contract と整合する。完成文fallbackではなくsurface partsとして扱う。 |
+| diagnostic connection | `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_reply_service.py` / `emlis_ai_display_gate.py` / `emlis_ai_types.py` | `reader_relation_signal_*` と `self_repair_relation_marker_*` を `diagnostic_summary` / gate traceへ additive 接続する。raw input / comment_text本文は入れない。 |
+| E2E / regression | `test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` ほか | positive_recoveryで Reader `relation_not_expressed` が消えること、Gateが緩まないこと、relation cueがない3文候補は引き続きrejectedになることを固定する。 |
+| 一時ログ整理 | `emotion_submit_service.py` / `Cocolon/screens/InputScreen.js` | backendの `emlis_observation_result` はenv flag配下へ整理し、RNの一時debug console logは削除済み。通常ログにraw inputやpublic comment_text本文を出さない。 |
+
+守る境界:
+- RN表示条件は変更しない。`observation_status=passed` かつ `comment_text` 非空だけ `Emlisの観測` を表示する。
+- Readerの `relation_not_expressed` を削除して表示率を上げない。
+- Self-Repairで入力にない prior load / cause / diagnosis を足さない。
+- 通知400（`__global_emotion_notifications__` のUUID syntax error）は今回のEmlis relation修正とは別件として扱う。

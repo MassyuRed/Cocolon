@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1732,3 +1732,37 @@ Input保存後のEmlisAI immediate replyは、public route / response key を変
 - 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
 - raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
 - これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
+
+# 2026-05-16 差分追記: Input / immediate reply 商品品質版接続 Step0-7
+
+最新実ファイル `Cocolon_8(11).zip` / `mashos-api_8(16).zip` では、Input保存後 immediate reply の public flow は維持したまま、Complete Composer初期版の品質接続層が Step0-7 まで入っています。Cocolon側に変更はなく、mashos-api側で `15` 件追加・`18` 件変更があります。
+
+| Step | immediate reply上の読み方 | owner |
+|---|---|---|
+| Step0 binding_used契約整理 | `binding_used` は存在ではなく使用を示す。pre-connectionはfalse、Grounding/Displayはbinding-aware時にtrueになり得る。 | `emlis_ai_display_gate.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_gate_binding_contract_v2.py` |
+| Step1 coverage suite拡張 | `short_daily` / `long_meaning_arc` / `conflict` / `recovery` / `pressure` / `desire_fear` / `relationship` をProduct Quality coverageとして集計する。 | `emlis_ai_complete_scorecard_service.py`, `emlis_ai_complete_focus_selector.py`, `emlis_ai_complete_sentence_planner.py` |
+| Step2 Grounding強化 | unsupported、relation_not_expressed、phrase_unit_missing、weak_material、raw_echo、overclaimをsentence_id単位で渡す。 | `emlis_ai_complete_grounding_binding.py`, `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py` |
+| Step3 Surface variation強化 | connector / ending / surface_signature を持ち、Template/Echo Guardへ渡す。 | `emlis_ai_complete_surface_realizer.py`, `emlis_ai_template_echo_guard.py` |
+| Step4 Self-Repair強化 | `meaning_added=false` / `gate_relaxed=false` / evidence_ids_preserved / relation_ids_preservedをtraceへ残す。 | `emlis_ai_complete_self_repair_service.py` |
+| Step5 Tone Engine | TonePolicyをSurface前制約として組み込み、diagnostic/advice/over-empathy/generic comfortをGuardする。 | `emlis_ai_complete_tone_policy.py`, `emlis_ai_complete_surface_realizer.py` |
+| Step6 Scorecard / Blind QA | `ProductQualityScorecard`、machine metrics、Blind QA rubricをdiagnostic / multi_perspectiveへmeta-only接続する。 | `emlis_ai_complete_product_quality_scorecard_service.py`, `emlis_ai_reply_service.py` |
+| Step7 Release ladder | Step6 scorecardから release ladder guard / criteria を作る。public releaseは適用しない。 | `emlis_ai_complete_release_ladder_service.py`, `emlis_ai_reply_service.py` |
+
+この差分で保存API、DB write path、public route、response key、RN表示名、RN表示条件は変わらない。`comment_text` は引き続き `observation_status=passed` かつ本文ありの場合だけ表示される。
+
+# 2026-05-17 差分追記: Input / immediate reply positive_recovery relation surface contract
+
+`Cocolon_9(8).zip` / `mashos-api_9(8).zip` では、Input保存直後の `Emlisの観測` において、positive_recovery の Reader `relation_not_expressed` を内部relation contractで扱う差分が入っています。`/emotion/submit` の保存契約、Home gateway、DB write path、RN modal表示条件は変更しません。
+
+| Step | Input / Dispatch上の読み方 | owner |
+|---|---|---|
+| Step0 baseline固定 | 非表示ケースを `stage=reader / primary_reason=relation_not_expressed / coverage_group=positive_recovery` としてfixture化する。 | `test_emlis_ai_positive_recovery_relation_baseline.py` |
+| Step1 relation surface contract | Reader / Surface / Self-Repair の共有cue契約を追加する。 | `emlis_ai_relation_surface_contract.py`, `test_emlis_ai_relation_surface_contract.py` |
+| Step2 Reader contract化 | recovery relation cueをReaderが検出する。generic cueだけではrecoveryを通さない。 | `emlis_ai_listener_reader_judge.py`, `test_emlis_ai_listener_reader_relation_surface_contract.py`, `test_emlis_ai_listener_reader_relation_not_over_relaxed.py` |
+| Step3 Self-Repair marker | `relation_not_expressed` repairで、declared recovery relationだけを明示する。 | `emlis_ai_complete_self_repair_service.py`, `test_emlis_ai_complete_self_repair_positive_recovery_relation.py` |
+| Step4 Surface整合 | recovery relation line / connector / surface_signatureをcontractへ整合する。 | `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_complete_surface_recovery_relation_line.py` |
+| Step5 diagnostic接続 | `reader_relation_signal_*` / `self_repair_relation_marker_*` を `diagnostic_summary` へ残す。 | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py`, `emlis_ai_types.py` |
+| Step6 E2E / regression | positive_recoveryでReader `relation_not_expressed` が消えること、Gateが緩まないことを固定する。 | `test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` |
+| Step7 log cleanup | 一時debug logを整理する。 | `emotion_submit_service.py`, `test_emlis_ai_step7_log_cleanup.py`, `Cocolon/screens/InputScreen.js` |
+
+この差分でも、`input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけRNへ表示されます。

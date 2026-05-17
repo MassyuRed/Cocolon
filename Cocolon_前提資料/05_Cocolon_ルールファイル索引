@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -337,3 +337,42 @@ Complete Composer初期版では、生成側を広げるほど、根拠なし補
 - 表示率を上げるために Gate を緩めない。
 - Complete metaをRN表示条件にしない。
 - `passed + comment_text` のpublic契約だけが表示条件。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 rule / test index
+
+最新基準面 `Cocolon_8(11).zip` / `mashos-api_8(16).zip` では、商品品質版接続 Step0-7 のrule / regressionとして次を追加で読む。
+
+| path | 拘束すること | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_gate_binding_contract_v2.py` | Gate別 `binding_used` 契約、pre-connection false、Grounding / Display binding-aware true許容 | Gate diagnostic / Display traceを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_coverage.py` | Product quality coverage suite、`desire_fear` 正規化、coverage report | coverage_group / scorecard集計を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_grounding_relation_binding_v2.py` | Grounding v2のsentence-level Evidence / PhraseUnit / relation判定 | Grounding / relation bindingを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_variation_v2.py` | surface_signature、same-ending、connector repetition、raw echo guard | Surface Realizer / Template Guardを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_v2.py` | reason別repair policy v2 | Self-Repairを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_product_quality_v2.py` | meaning_added=false、gate_relaxed=false、evidence/relation preservation | Product quality repair traceを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_tone_engine_v2.py` | TonePolicy / ToneGuardReport、non-diagnostic / non-advice / over-empathy guard | Tone Engine / Surface tone制約を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py` | ProductQualityScorecard machine metrics | Step6 scorecard集計を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard_blind_qa.py` | Blind QA rubric / review / aggregate | read_feeling / Blind QAを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py` | Scorecard metaのreply接続、comment_text非混入、Gate非緩和 | reply diagnostics接続を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py` | Release ladder criteria / guard / aggregate stage判定 | Release ladder logicを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_connection_e2e.py` | release ladder metaのreply接続、public release未適用 | Step7 reply接続を触る時 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RN passed-only modal display | backend metaが増えた時 |
+
+# 2026-05-17 差分追記: positive_recovery relation_not_expressed rule / test index
+
+positive_recovery の Reader `relation_not_expressed` 修正では、表示率のためにGateを緩めず、relation surface contract と回帰testを同時確認します。
+
+| path | 拘束すること | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py` | Reader / Surface / Self-Repair 共有の relation cue 契約。`関係` 単独pass禁止、recoveryは戻る/回復と前段/負荷/流れのbridgeを要求。 | relation cue、Reader relation判定、recovery markerを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_relation_surface_contract.py` | contract単体。generic / recovery cue検出、raw input非依存、過緩和防止。 | contract語彙を変える時 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_surface_contract.py` | Readerがcontract cueを検出して `relation_not_expressed` を解消すること。 | Reader判定を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_not_over_relaxed.py` | relation cueのない候補やgeneric cueだけでrecoveryを通さないこと。 | Reader Gateの安全性を確認する時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_positive_recovery_relation.py` | Self-Repair markerが `meaning_added=false` / `relation_ids_preserved=true` / `gate_relaxed=false` を守ること。 | Self-Repair relation markerを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_recovery_relation_line.py` | Surface recovery relation lineがcontract marker / surface_signature / grounding metaを残すこと。 | Surface Realizer recovery表現を触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_diagnostic_connection.py` | `reader_relation_signal_*` / `self_repair_relation_marker_*` がdiagnosticへraw inputなしで接続されること。 | diagnostic_summary / gate traceを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | positive_recovery E2EでReader `relation_not_expressed` が消え、Gateは緩まないこと。 | E2E / product quality connectionを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py` | 一時debug logがdefault offで、raw input / public comment_text本文を出さないこと。 | `emotion_submit_service.py` のログを触る時 |
+| `Cocolon/screens/InputScreen.js` | 一時debug console logを削除し、passed-only modal表示契約を維持すること。 | RN Input画面やEmlis観測modalを触る時 |
+
+禁止: `relation_not_expressed` を単純に削除する、`関係` という単語だけでpassさせる、Self-Repairで入力にないprior load/causeを足す、rejected / unavailableをRN表示する。

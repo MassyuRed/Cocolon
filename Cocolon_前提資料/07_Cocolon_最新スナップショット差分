@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(87).zip"
-  Cocolon: "Cocolon_10(7).zip"
-  mashos-api: "mashos-api_10(10).zip"
+  premise: "Cocolon_前提資料(92).zip"
+  Cocolon: "Cocolon_9(8).zip"
+  mashos-api: "mashos-api_9(8).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_10(7).zip` | 216 | RNアプリ本体。Step8 RN contract regressionにより、Complete metaだけでは `Emlisの観測` を表示しない契約を保持する。 |
-| `mashos-api_10(10).zip` | 489 | EmlisAI 完全Composer初期版 E2E表示開通 Step0-9、Entry AP0、resolver注入、Final AP0 / scorecard、fixture / QA runを含む。 |
-| total | 705 | 前提資料coverage対象 |
+| `Cocolon_9(8).zip` | 216 | RNアプリ本体。`Emlis observation debug` の一時console logは残さず、Complete / ProductQuality / relation diagnostic metaだけでは `Emlisの観測` を表示しない契約を保持する。 |
+| `mashos-api_9(8).zip` | 514 | EmlisAI 完全Composer初期版 E2E表示開通 Step0-9、商品品質版接続 Step0-7に加え、positive_recovery relation_not_expressed Step0-7を含む。 |
+| total | 730 | 前提資料coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-15以前の差分追記は履歴として残し、2026-05-16時点の最新正本は末尾の `2026-05-16 差分追記: EmlisAI 完全Composer初期版 E2E表示開通 Step0-9 snapshot差分` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-16以前の差分追記は履歴として残し、2026-05-17時点の最新正本は末尾の `2026-05-17 差分追記: EmlisAI positive_recovery relation_not_expressed Step0-7 snapshot差分` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -1168,3 +1168,155 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - Entry AP0がgreenでも、Reader / Grounding / Template / Display Gateで落ちた場合は表示しない。
 - Step9 fixture / QA runはmeta-onlyであり、public `comment_text` を書かない。
 - DB physical name、public API route、既存response key、RN visible名 `Emlisの観測` は変更しない。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 snapshot差分
+
+比較対象は、前提資料 `Cocolon_前提資料(90).zip` と最新実ファイル `Cocolon_8(11).zip` / `mashos-api_8(16).zip` です。Cocolon側は `216` 件のまま追加・削除・変更なし。mashos-api側は `489 -> 504` 件、合計 `720` 件を最新coverage対象として読む。
+
+## Cocolon 差分
+
+| 区分 | 結果 |
+|---|---|
+| 追加 | 0 |
+| 変更 | 0 |
+| 削除 | 0 |
+| RN contract | `npm test -- --runInBand` で `21 passed`。Complete / ProductQuality metaだけではRN modalを表示しない。 |
+
+## mashos-api 追加path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py` | Step6 Product Quality Scorecard / Blind QA service。machine metrics とBlind QAを分離する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py` | Step7 Release ladder service。Step6 scorecardからinternal / limited / broader_beta / product_gate判定metaを作る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_tone_policy.py` | Step5 Tone Engine service。TonePolicy / ToneGuardReportをSurface前制約として作る。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_grounding_relation_binding_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_coverage.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard_blind_qa.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_connection_e2e.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_product_quality_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_variation_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_tone_engine_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_binding_contract_v2.py` | Step0-7 商品品質版接続 regression / contract。 |
+
+## mashos-api 変更path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_focus_selector.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_binding.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_service.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_types.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/tests/test_emlis_ai_diagnostic_summary_v2.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_binding_reflection.py` | 商品品質版接続 Step0-7 の既存owner変更。 |
+
+## Step0-7 の読み方
+
+| Step | 読み方 |
+|---|---|
+| Step0 binding_used契約整理 | `binding_used` はbinding存在ではなくGate判断で実際に使用したことを示す。 |
+| Step1 coverage suite拡張 | 商品品質版のeligible母集団をcoverage_groupで定義する。`desire_fear` をcurrent coverageとして持つ。 |
+| Step2 Grounding強化 | sentence_idごとにEvidence / PhraseUnit / relationを照合する。 |
+| Step3 Surface variation強化 | 完成文増殖ではなくsurface_signature / connector / endingで非テンプレ性を測る。 |
+| Step4 Self-Repair強化 | Gate reasonごとに安全なrepair policyを持ち、meaning_added=false / gate_relaxed=falseを固定する。 |
+| Step5 Tone Engine | Emlisの距離感をTonePolicyとしてSurface前制約へ接続する。 |
+| Step6 Scorecard / Blind QA | machine metricsとBlind QAを分け、read_feelingはBlind QA由来として扱う。 |
+| Step7 Release ladder接続 | internal -> limited -> broader_beta -> product_gate の判定metaを作る。Step7単体ではpublic releaseを適用しない。 |
+
+## 実行確認
+
+| 対象 | 結果 |
+|---|---|
+| backend EmlisAI regression | `PYTHONPATH=services/ai_inference pytest -q tests/test_emlis_ai_*.py` -> `421 passed` |
+| RN passed-only contract | `npm test -- --runInBand` -> `21 passed` |
+
+## 境界維持
+
+- 商品品質版接続 Step0-7 は Product Gate release そのものではない。
+- ProductQualityScorecard / Release ladder は meta-only で、public `comment_text` を直接書かない。
+- Gate緩和、固定文fallback、外部AI / local LLM、DB/API/RN契約renameは行わない。
+- RNは `observation_status=passed` かつ `comment_text` 非空の場合だけ `Emlisの観測` を表示する。
+
+# 2026-05-17 差分追記: EmlisAI positive_recovery relation_not_expressed Step0-7 snapshot差分
+
+比較対象は、前提資料 `Cocolon_前提資料(92).zip` と最新実ファイル `Cocolon_9(8).zip` / `mashos-api_9(8).zip` です。Cocolon側は file count `216` のまま、InputScreenの一時debug log整理が反映されています。mashos-api側は file count `514`、合計 `730` を最新coverage対象として読む。
+
+## Cocolon 変更path
+
+| path | 差分の意味 |
+|---|---|
+| `Cocolon/screens/InputScreen.js` | Step7 log cleanup。一時確認用の `[Emlis observation debug]` console logを削除し、passed + comment_text のmodal表示契約は維持する。 |
+
+## mashos-api 追加path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py` | Step1 relation surface contract。Reader / Surface / Self-Repair 共有の relation cue / recovery marker / detection meta。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_baseline.py` | Step0 baseline。positive_recovery の `relation_not_expressed` 再現とStep2後の回帰固定。 |
+| `mashos-api/ai/tests/test_emlis_ai_relation_surface_contract.py` | Step1 contract unit test。generic / recovery cue、raw input非依存、過緩和防止。 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_surface_contract.py` | Step2 Reader contract test。relation surface cueをReaderが検出することを固定。 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_not_over_relaxed.py` | Step2 over-relaxation防止。relation cueなし・generic cueのみのrecoveryを通さない。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_positive_recovery_relation.py` | Step3 Self-Repair recovery marker test。meaning_added=false / relation preservation / gate_relaxed=false。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_recovery_relation_line.py` | Step4 Surface recovery relation line test。contract marker / surface_signature / grounding meta。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_diagnostic_connection.py` | Step5 diagnostic connection test。reader_relation_signal / self_repair_relation_marker meta。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | Step6 E2E / regression。positive_recoveryでReader `relation_not_expressed` が消え、Gateが緩まないことを固定。 |
+| `mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py` | Step7 log cleanup test。debug log default off、flag on時もmeta-only、raw input / comment_text本文非混入。 |
+
+## mashos-api 変更path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | Step2。legacy `_RELATION_RE` と relation surface contract detectionを併用し、検出結果をReaderReportへ残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py` | Step3。recovery markerをcontractへ寄せ、repair trace / grounding input / result metaへmarker情報を残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py` | Step3。RepairTrace.as_meta() が relation marker signal系metaを落とさないようadditive拡張。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | Step4。recovery relation line / connector / predicate / surface_signatureをcontractに整合。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_types.py` | Step5。ListenerReaderReportへrelation surface diagnostic fieldをadditive追加。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | Step5。reader gate traceへ relation_surface_contract_version / reader_relation_signal_* を追加。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | Step5。positive_recovery_relation_diagnostic / relation_surface_diagnostic / step5_relation_diagnostic を構築・接続。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step5。relation diagnosticを diagnostic_summary / phase_gate / top-level metaへ接続。 |
+| `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | Step7。`emlis_observation_result` 常時logをenv flag配下へ整理し、例外stack traceもdebug flag配下に置く。通常時はfail-closed warningだけ残す。 |
+
+## Step0-7 の読み方
+
+| Step | 読み方 |
+|---|---|
+| Step0 baseline固定 | 非表示原因を `stage=reader / primary_reason=relation_not_expressed / coverage_group=positive_recovery` としてfixture化する。 |
+| Step1 relation surface contract | Reader / Surface / Self-Repair のrelation cue語彙を共有する。`関係` 単独passは禁止。 |
+| Step2 Reader relation検出contract化 | recovery cueを含む候補だけを検出し、relation cueがない3文候補は引き続きrejectedにする。 |
+| Step3 Self-Repair recovery marker | declared relationだけを明示する。`meaning_added=false` / `relation_ids_preserved=true` / `gate_relaxed=false` を保持。 |
+| Step4 Surface recovery relation line | recovery relation lineをcontract marker / surface_signatureと整合する。固定文fallbackではない。 |
+| Step5 diagnostic接続 | `reader_relation_signal_*` と `self_repair_relation_marker_*` をraw inputなしでdiagnosticに残す。 |
+| Step6 E2E / regression | positive_recoveryでReader `relation_not_expressed` が消えることと、Gate非緩和を固定する。 |
+| Step7 ログ一時コード整理 | RN一時console log削除、backend観測結果logのenv flag化。通常ログにraw input / comment_text本文を出さない。 |
+
+## 実行確認
+
+| 対象 | 結果 |
+|---|---|
+| Step0-7対象テスト | `32 passed` |
+| E2E / product quality connection関連回帰 | `6 passed` |
+| Step6時点の対象テスト | `24 passed` |
+| Step5 diagnostic / E2E 関連回帰 | `7 passed` |
+
+## 境界維持
+
+- positive_recovery relation_not_expressed 修正は、Gate緩和ではなく、Reader / Surface / Self-Repair のrelation surface contract整合として読む。
+- RNは `observation_status=passed` かつ `comment_text` 非空の場合だけ `Emlisの観測` を表示する。
+- fixed fallback、外部AI / local LLM、DB/API/RN契約renameは追加しない。
+- raw inputはdiagnostic / log / scorecardへ混入させない。
+- 通知400は別件であり、この差分の成否判定には使わない。

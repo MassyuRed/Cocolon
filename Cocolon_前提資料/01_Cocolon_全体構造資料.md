@@ -1,23 +1,23 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(87).zip"
-  Cocolon: "Cocolon_10(7).zip"
-  mashos-api: "mashos-api_10(10).zip"
+  premise: "Cocolon_前提資料(92).zip"
+  Cocolon: "Cocolon_9(8).zip"
+  mashos-api: "mashos-api_9(8).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 489
+  mashos-api: 514
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 705
+  included_files_total: 730
   included_files_cocolon: 216
-  included_files_mashos_api: 489
+  included_files_mashos_api: 514
 ---
 
 # 1. 1行定義
@@ -49,6 +49,7 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - Piece public read は `api_nexus.py` / `piece_public_read_service.py`、Analysis read は `report_artifact_read_service.py`、EmlisAI read adapter は `emlis_ai_readers.py` + summary readers へ固定した
 - `CocolonTextGenerationCore` は三大中核の共通文章品質・根拠・安全基盤であり、出力目的・表示名・公開契約は中核別Composerが保持する
 - EmlisAIの完全Composer初期版 Commit1-13 は、限定Composer拡張を土台に、Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / CompleteComposerClient / Reply diagnostics / Scorecard / RN contract regression をadditive metaとして保持する
+- positive_recovery relation_not_expressed 修正 Step0-7 は、Reader / Surface / Self-Repair の relation surface contract を揃え、recovery 系relation cueを正しく検出・修復するための内部Composer修正として読む。RN表示契約・public response key・DB physical nameは変えない
 
 # 4-2. 2026-04-30 current app runtime map
 
@@ -1343,3 +1344,76 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 - E2E表示開通は商品品質版Gateではない。完全Composer初期版を商品品質版へ進めるための基礎段階として読む。
 - `input_feedback.comment_text` は `observation_status=passed` かつ本文ありの場合だけ表示する。
 - Gate緩和、固定文fallback、外部AI/ローカルLLM、入力専用テンプレ、DB/API/RN rename は行わない。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 overall structure
+
+最新実ファイル `Cocolon_8(11).zip` / `mashos-api_8(16).zip` では、Cocolon RN側に追加・削除・変更はありません。mashos-api側は `489 -> 504` 件へ増え、完全Composer初期版 E2E表示開通後の「商品品質版接続」を測定・修復・判定できる内部構造が追加されています。これは Product Gate release 適用ではなく、Product Gateへ進むための contract / metrics / QA / release ladder meta の接続です。
+
+## 追加path
+
+| path | 全体構造上の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_tone_policy.py` | Step5 Tone Engine。Emlisの距離感・温度・non-diagnostic・non-adviceをSentencePlan -> Surface Realizerの制約として持つ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py` | Step6 Product Quality Scorecard / Blind QA。machine metrics と人手QA rubricを分離し、Product Gate判断材料を作る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py` | Step7 Release ladder。Step6 scorecardから internal / limited / broader_beta / product_gate の判定metaを作る。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_binding_contract_v2.py` | Step0 binding_used契約のregression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_coverage.py` | Step1 coverage suite / `desire_fear` 正規化のregression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_grounding_relation_binding_v2.py` | Step2 Grounding / relation binding v2 regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_variation_v2.py` | Step3 surface variation regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_v2.py` / `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_product_quality_v2.py` | Step4 Self-Repair v2 / product quality regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_tone_engine_v2.py` | Step5 Tone Engine regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py` / `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard_blind_qa.py` / `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py` | Step6 Scorecard / Blind QA / E2E meta regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py` / `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_connection_e2e.py` | Step7 Release ladder regression。 |
+
+## 既存ownerの読み方更新
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step6 scorecard と Step7 release ladder を diagnostic_summary / meta / multi_perspective へadditive接続する。public response shapeは変えない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | `emlis.gate_binding_contract.v2` のbinding fieldsを持ち、DisplayはGrounding / binding-aware resultを最終判定に含む場合だけ `binding_used=true` になり得る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | Step3 surface variation と Step5 TonePolicyを読み、surface_signature / tone guard metaを返す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py` | Step4 repair policy v2 を持ち、repairで意味追加・Gate緩和・evidence/relation喪失を起こさない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py` | Step1 coverage aggregation と Step3-5 metrics をScorecard eventへ渡す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py` / `emlis_ai_complete_grounding_service.py` | Step2 sentence-level binding pass rate / unsupported ids / relation_not_expressed idsをmeta化する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py` | surface_signature / same-ending / connector repetition / tone_guard_reportを読む。 |
+
+## 境界維持
+
+- Cocolon RN public表示契約は変更なし。`observation_status=passed` かつ `comment_text` 非空のみ表示。
+- Product Quality Scorecard / Release ladder は meta-only。`comment_text` を直接書かない。
+- Product Gate条件を満たしても、Step7単体では public release applied / product quality released にしない。
+- DB physical name、public API route、既存response key、RN visible名 `Emlisの観測` は変更しない。
+
+# 2026-05-17 差分追記: EmlisAI positive_recovery relation_not_expressed Step0-7 overall structure
+
+最新実ファイル `Cocolon_9(8).zip` / `mashos-api_9(8).zip` では、Cocolon RN側の表示契約は変更されていません。mashos-api側では、`positive_recovery` の候補が Reader Gate で `relation_not_expressed` になったケースに対して、Reader / Surface / Self-Repair の relation表現を共有契約へ寄せる構造が追加されています。
+
+## 追加path
+
+| path | 全体構造上の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py` | relation surface contract owner。Reader / Surface / Self-Repair から参照される低依存の共有cue定義。 |
+| `mashos-api/ai/tests/test_emlis_ai_relation_surface_contract.py` | relation cueのunit regression。generic / recovery検出と過緩和防止。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_baseline.py` | positive_recovery baseline。非表示原因をReader relation_not_expressedとして固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_surface_contract.py` / `test_emlis_ai_listener_reader_relation_not_over_relaxed.py` | Reader contract化と過緩和防止のregression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_positive_recovery_relation.py` | Self-Repair markerの意味追加禁止・relation保持を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_recovery_relation_line.py` | Surface recovery relation line / surface_signatureを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_diagnostic_connection.py` | diagnostic_summaryへの relation signal / repair marker接続を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | positive_recoveryのE2E regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py` | 一時ログ整理のregression。 |
+
+## 既存ownerの読み方更新
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | Readerは `_RELATION_RE` だけでなく relation surface contract を参照する。recovery expected時はstrict bridgeを要求する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py` | `relation_not_expressed` repair時に recovery markerをcontractから取り、meaning_added=false / relation_ids_preserved=trueをtraceに残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | recovery relation line / connector / predicate / surface_signature を contractと整合させる。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_reply_service.py` | relation signal / marker diagnosticをadditive接続する。public response shapeは変えない。 |
+| `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | 観測結果の一時ログはdefault off。env flag有効時のみstatus / stage / primary_reason / coverage_groupをmeta-onlyで出す。 |
+
+境界維持:
+- relation surface contract は表示率を上げるためのGate緩和ではない。
+- Surface / Self-Repair は入力にないprior load、原因、診断、人格を追加しない。
+- Cocolon RNは変更せず、public passed + comment_text のみを表示条件とする。
+

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -320,3 +320,37 @@ EmlisAIの完全Composer初期版、CompleteComposerClient、SentencePlan 2.0、
 - 表示率を上げるためにDisplay Gate / Grounding / Readerを緩めない。
 - Complete内部metaをfrontendで直接見てpassed扱いにしない。
 - 外部AIレンタル・ローカルLLM・固定完成文テンプレを追加しない。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 を触る時
+
+EmlisAIのbinding contract、coverage、Grounding、Surface variation、Self-Repair、Tone Engine、Scorecard / Blind QA、Release ladderを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面と商品品質版接続境界。
+2. `03_Cocolon_命名体系.md` の完全Composer初期版 / 商品品質版接続 / Product Gate の読み分け。
+3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の internal meta / public契約境界。
+4. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のEmlisAI runtime map。
+5. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` のInput -> immediate reply flow。
+6. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / regression。
+7. `05_Cocolon_ルールファイル索引` のproduct quality rule / test index。
+
+確認必須:
+- `binding_used` は存在ではなくGate判断での使用を示す。
+- `ProductQualityScorecard` と `Release ladder` は meta-only。Display Gateの代替ではない。
+- Blind QAなしのread_feelingはProduct Gate到達扱いにしない。
+- Product Gate条件に近づいても、Step7単体では public release applied / product quality released にしない。
+
+禁止: Gate緩和、固定文fallback、外部AI/ローカルLLM、raw入力本文の改善資料化、DB/API/RN表示契約rename。
+
+# 2026-05-17 差分追記: EmlisAI positive_recovery relation_not_expressed 修正チェックリスト
+
+| 確認項目 | 見るファイル | OK条件 |
+|---|---|---|
+| relation cue契約 | `emlis_ai_relation_surface_contract.py` | recoveryは戻る/回復系と前段/負荷/重さ/流れ系の接続を要求する。`関係` 単独ではpassしない。 |
+| Reader | `emlis_ai_listener_reader_judge.py` | relation cueがない候補は引き続き `relation_not_expressed`。recovery expected時にgeneric cueだけで通さない。 |
+| Self-Repair | `emlis_ai_complete_self_repair_service.py` | marker付与時も meaning_added=false / relation_ids_preserved=true / gate_relaxed=false。 |
+| Surface | `emlis_ai_complete_surface_realizer.py` | recovery relation lineをcontract key / surface_signature / grounding metaへ残す。固定完成文fallbackにしない。 |
+| Diagnostic | `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_reply_service.py` | reader_relation_signal_* / self_repair_relation_marker_* がraw入力なしで見える。 |
+| Log | `emotion_submit_service.py` | 一時logはdefault off。enabled時もcomment_text本文とraw inputを出さない。 |
+| RN | `Cocolon/screens/InputScreen.js` / `tests/rn-screen-contracts.test.js` | relation metaでは表示せず、public passed + textだけ表示。 |
+
+このチェックリストでNGが出た場合、Gateを緩めず、relation surface contract / Surface / Self-Repair / diagnostic の整合へ戻す。

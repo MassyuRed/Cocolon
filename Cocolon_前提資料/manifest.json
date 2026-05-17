@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-16",
+  "revision_date": "2026-05-17",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 216,
-    "mashos-api": 489,
-    "total": 705
+    "mashos-api": 514,
+    "total": 730
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 705,
-    "national_system_body_includes": 705,
+    "overall_structure_body_includes": 730,
+    "national_system_body_includes": 730,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル705件、国家システム判断対象のcurrent全ファイル705件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 705,
-    "overall_structure_body_includes_current_snapshot_files": 705,
-    "national_system_body_lists_current_snapshot_files_with_relation": 705,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル730件、国家システム判断対象のcurrent全ファイル730件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
+    "current_snapshot_total_files": 730,
+    "overall_structure_body_includes_current_snapshot_files": 730,
+    "national_system_body_lists_current_snapshot_files_with_relation": 730,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -686,7 +686,60 @@
     "complete_initial_e2e_opening_verified_tests_2026_05_16": {
       "backend_step1_9": "38 passed",
       "rn_contract": "21 passed"
-    }
+    },
+    "latest_source_basis_2026_05_16_product_quality_connection_step0_7": {
+      "premise": "Cocolon_前提資料(90).zip",
+      "Cocolon": "Cocolon_8(11).zip",
+      "mashos-api": "mashos-api_8(16).zip",
+      "Cocolon_files": 216,
+      "mashos_api_files": 504,
+      "total_files": 720,
+      "doc_role": "EmlisAI 完全Composer初期版 E2E表示開通後の商品品質版接続 Step0-7 を含む現状構造を読むための作業用地図。Product Gate releaseではなく、binding contract / coverage / Grounding / Surface / Self-Repair / Tone / Scorecard / Release ladderをmeta-onlyで接続する。"
+    },
+    "current_snapshot_unlisted_paths_added_2026_05_16_product_quality_connection_step0_7": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_tone_policy.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_grounding_relation_binding_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_coverage.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard_blind_qa.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_connection_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_self_repair_product_quality_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_self_repair_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_surface_variation_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_tone_engine_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_binding_contract_v2.py"
+    ],
+    "current_snapshot_changed_paths_2026_05_16_product_quality_connection_step0_7": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_focus_selector.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_binding.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+      "mashos-api/ai/tests/test_emlis_ai_diagnostic_summary_v2.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_binding_reflection.py"
+    ],
+    "product_quality_connection_policy_2026_05_16": "商品品質版接続 Step0-7はProduct Gate releaseではなく、Product Gate判断材料とrelease ladder metaの接続。Gate緩和、固定文fallback、外部AI/local LLM、DB/API/RN rename、raw入力本文の改善資料化は禁止。",
+    "product_quality_connection_verified_tests_2026_05_16": {
+      "backend_emlis_ai_regression": "421 passed",
+      "rn_contract": "21 passed"
+    },
+    "latest_source_basis_2026_05_17": "Cocolon_前提資料(92).zip / Cocolon_9(8).zip / mashos-api_9(8).zip",
+    "positive_recovery_relation_policy_2026_05_17": "positive_recovery relation_not_expressed is handled by shared relation surface contract, Reader detection, Self-Repair marker, Surface relation line, diagnostic meta, E2E regression, and log cleanup without changing RN display contract."
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1692,9 +1745,9 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(87).zip",
-    "Cocolon": "Cocolon_10(7).zip",
-    "mashos-api": "mashos-api_10(10).zip"
+    "premise": "Cocolon_前提資料(92).zip",
+    "Cocolon": "Cocolon_9(8).zip",
+    "mashos-api": "mashos-api_9(8).zip"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2460,15 +2513,15 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(85).zip",
-    "Cocolon": "Cocolon_15(2).zip",
-    "mashos-api": "mashos-api_15(3).zip",
+    "premise": "Cocolon_前提資料(92).zip",
+    "Cocolon": "Cocolon_9(8).zip",
+    "mashos-api": "mashos-api_9(8).zip",
     "file_counts": {
       "Cocolon": 216,
-      "mashos-api": 484,
-      "total": 700
+      "mashos-api": 514,
+      "total": 730
     },
-    "summary": "Current latest source basis after EmlisAI Complete Composer initial Commit1-13 and RN contract regression."
+    "summary": "EmlisAI positive_recovery relation_not_expressed Step0-7 added on top of complete initial E2E and product quality connection. RN passed-only contract unchanged."
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -2570,5 +2623,240 @@
       "total": 705
     },
     "summary": "Current latest source basis after EmlisAI Complete Composer initial E2E opening Step0-9."
+  },
+  "source_snapshot_2026_05_16_product_quality_connection_step0_7": {
+    "premise": "Cocolon_前提資料(90).zip",
+    "Cocolon": "Cocolon_8(11).zip",
+    "mashos-api": "mashos-api_8(16).zip",
+    "sha256": {
+      "Cocolon_前提資料(90).zip": "eb190701499aacfeeb3e935519340e8c28ffa408c5478c0527f5ee4dd4ab7d09",
+      "Cocolon_8(11).zip": "628fa361b5ce85957678651bdc05341474768d425fe43e3925150ba6e7cad619",
+      "mashos-api_8(16).zip": "9777068939de1b7483ed59acad8c5f3ca07f3c15bae3108c27d7b3538f8a4c2d"
+    },
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 504,
+      "total": 720
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon(165).zip",
+      "mashos-api": "mashos-api(79).zip",
+      "file_counts": {
+        "Cocolon": 216,
+        "mashos-api": 489,
+        "total": 705
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_tone_policy.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_grounding_relation_binding_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_coverage.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard_blind_qa.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_connection_e2e.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_self_repair_product_quality_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_self_repair_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_surface_variation_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_tone_engine_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_gate_binding_contract_v2.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_focus_selector.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_binding.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+        "mashos-api/ai/tests/test_emlis_ai_diagnostic_summary_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_gate_binding_reflection.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "EmlisAI 商品品質版接続 Step0-7 を最新実ファイルに反映。",
+      "Step0 binding_used contract v2、Step1 coverage suite、Step2 Grounding relation binding、Step3 Surface variation、Step4 Self-Repair v2、Step5 Tone Engine、Step6 ProductQualityScorecard / Blind QA、Step7 Release ladderを追加/接続。",
+      "Cocolon RN側は変更なし。passed-only表示契約を維持。",
+      "Product Gate releaseではなく、判断材料・release ladder metaの接続として読む。"
+    ],
+    "verified_tests": {
+      "backend": "PYTHONPATH=services/ai_inference pytest -q tests/test_emlis_ai_*.py -> 421 passed",
+      "rn": "npm test -- --runInBand -> 21 passed"
+    },
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "display_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "template_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_template_added": false,
+      "raw_input_copied_to_meta": false,
+      "product_quality_released": false,
+      "public_release_applied": false
+    }
+  },
+  "source_snapshot_2026_05_17_positive_recovery_relation_not_expressed_step0_7": {
+    "premise": "Cocolon_前提資料(92).zip",
+    "Cocolon": "Cocolon_9(8).zip",
+    "mashos-api": "mashos-api_9(8).zip",
+    "sha256": {
+      "premise": "bae99f1de6e92ea89daaf2738fe0ffbae722ac690181951e478b7ed2565beb18",
+      "Cocolon": "348272727f7dd15518a1202f4aebcd710260e02d41b3cdbcb0db673fa28f89a7",
+      "mashos-api": "6a40a1efffd1901affe3ed4b44ceb3990b9a90e0778bb45cf955158c702b6f81"
+    },
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 514,
+      "total": 730
+    },
+    "added_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_baseline.py",
+      "mashos-api/ai/tests/test_emlis_ai_relation_surface_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_surface_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_not_over_relaxed.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_self_repair_positive_recovery_relation.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_surface_recovery_relation_line.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_diagnostic_connection.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py"
+    ],
+    "changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py"
+    ],
+    "removed_files": [],
+    "summary": "Reader / Surface / Self-Repair relation surface contract for positive_recovery relation_not_expressed, diagnostic connection, E2E regression, and temporary log cleanup.",
+    "verified_tests_from_incremental_steps": {
+      "step0_7_target_tests": "32 passed",
+      "e2e_product_quality_related_regression": "6 passed",
+      "rn_contract": "unchanged; passed-only contract retained"
+    },
+    "boundary": [
+      "RN displays Emlis observation only when public observation_status=passed and comment_text is non-empty.",
+      "Relation surface contract does not relax Reader Gate; it only recognizes explicit relation cues.",
+      "Self-Repair keeps meaning_added=false, relation_ids_preserved=true, gate_relaxed=false.",
+      "No fixed fallback, external AI, local LLM, DB/API/RN rename, or notification 400 fix included.",
+      "Debug observation logs are default off and meta-only when enabled."
+    ]
+  },
+  "source_snapshot_2026_05_17_positive_recovery_relation_step0_7": {
+    "premise": "Cocolon_前提資料(92).zip",
+    "Cocolon": "Cocolon_9(8).zip",
+    "mashos-api": "mashos-api_9(8).zip",
+    "sha256": {
+      "Cocolon_前提資料(92).zip": "bae99f1de6e92ea89daaf2738fe0ffbae722ac690181951e478b7ed2565beb18",
+      "Cocolon_9(8).zip": "348272727f7dd15518a1202f4aebcd710260e02d41b3cdbcb0db673fa28f89a7",
+      "mashos-api_9(8).zip": "6a40a1efffd1901affe3ed4b44ceb3990b9a90e0778bb45cf955158c702b6f81"
+    },
+    "file_counts": {
+      "Cocolon": 216,
+      "mashos-api": 514,
+      "total": 730
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon_8(11).zip",
+      "mashos-api": "mashos-api_8(16).zip",
+      "file_counts": {
+        "Cocolon": 216,
+        "mashos-api": 504,
+        "total": 720
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py",
+        "mashos-api/ai/tests/test_emlis_ai_relation_surface_contract.py",
+        "mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_baseline.py",
+        "mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_surface_contract.py",
+        "mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_not_over_relaxed.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_self_repair_positive_recovery_relation.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_surface_recovery_relation_line.py",
+        "mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_diagnostic_connection.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py",
+        "mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [
+        "Cocolon/screens/InputScreen.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_types.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_types.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emotion_submit_service.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "EmlisAI positive_recovery relation_not_expressed 修正 Step0-7 を最新実ファイルに反映。",
+      "Reader / Surface / Self-Repair が relation surface contract を共有し、recovery relation cue をGate緩和なしで検出・修復する。",
+      "diagnostic_summary へ reader_relation_signal_* / self_repair_relation_marker_* をadditive接続。",
+      "Cocolon InputScreen の一時debug logを削除し、emotion_submit_service の詳細logをenv flag配下へ整理。"
+    ],
+    "verified_tests": {
+      "backend_subset": "PYTHONPATH=services/ai_inference pytest -q relation/surface/self-repair/diagnostic/e2e/log-cleanup target tests -> 30 passed",
+      "py_compile": "related 7 services pass"
+    },
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "reader_gate_relaxed": false,
+      "display_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_template_added": false,
+      "raw_input_copied_to_meta": false,
+      "comment_text_logged": false,
+      "notification_400_fixed_in_this_diff": false
+    }
   }
 }

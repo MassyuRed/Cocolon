@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2554,3 +2554,35 @@ render_emlis_ai_reply
 | `mashos-api/ai/tests/test_emlis_ai_complete_initial_step9_fixture_qa.py` | fixture / QA runがraw入力やcomment_textを混入させず、product scorecard seedを作ることを固定するtest。 |
 
 RN側は `input_feedback.comment_text` と public `observation_status` だけを表示条件にし、Complete metaだけでは `Emlisの観測` を表示しない。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 runtime map
+
+Input保存直後の `Emlisの観測` は、Cocolon RN側の表示条件を変えず、backend内部で Complete Composer 初期版の品質接続層を追加している。作業時は次のownerを同時に読む。
+
+| 層 | owner | 読み方 |
+|---|---|---|
+| Binding contract | `emlis_ai_display_gate.py`, `emlis_ai_reply_service.py` | `binding_present` / `binding_available` / `binding_required` / `binding_missing` / `binding_used` / `binding_support_source` を分けて読む。 |
+| Coverage | `emlis_ai_complete_scorecard_service.py`, `emlis_ai_complete_focus_selector.py`, `emlis_ai_complete_sentence_planner.py` | 商品品質版の対象母集団を coverage_group で定義する。fixture文字列へのruntime分岐ではない。 |
+| Grounding | `emlis_ai_complete_grounding_binding.py`, `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py` | sentence_idごとに Evidence / PhraseUnit / relation の根拠を確認する。 |
+| Surface / Template | `emlis_ai_complete_surface_realizer.py`, `emlis_ai_template_echo_guard.py` | surface_signature、connector、ending、raw echo、same-endingをmetaで検出する。 |
+| Self-Repair | `emlis_ai_complete_self_repair_service.py` | Gate reasonに応じて安全なplan/surface調整だけを行う。 |
+| Tone | `emlis_ai_complete_tone_policy.py` | Emlisの距離感をTonePolicyとしてSurface前に制約する。 |
+| Scorecard / Blind QA | `emlis_ai_complete_product_quality_scorecard_service.py` | machine metrics と Blind QA を分ける。読まれた感はBlind QA由来として扱う。 |
+| Release ladder | `emlis_ai_complete_release_ladder_service.py` | internal -> limited -> broader_beta -> product_gate の判定metaを作る。release適用ではない。 |
+
+RN側は `Cocolon/tests/rn-screen-contracts.test.js` の passed-only regression を維持する。Complete / ProductQuality metaだけでmodalを表示しない。
+
+
+# 2026-05-17 差分追記: Input / EmlisAI positive_recovery relation contract
+
+`Cocolon_9(8).zip` / `mashos-api_9(8).zip` では、Input直後の `Emlisの観測` について、positive_recovery 系入力の `relation_not_expressed` を backend 内部で修正する relation surface contract が追加された。これは Home/Input surface の表示条件変更ではなく、Reader / Surface / Self-Repair の語彙整合と diagnostic meta の追加として読む。
+
+| path | アプリ基盤 / Home系での読み方 |
+|---|---|
+| `Cocolon/screens/InputScreen.js` | 一時的な `[Emlis observation debug]` console log は削除済み。`openInputFeedbackModal` は従来どおり本文ありの場合だけ呼ばれる。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py` | recovery relation cue / marker を共有する契約。固定完成文fallbackではなく、Reader / Surface / Self-Repair の基準合わせ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | `detect_relation_surface()` を使い、recovery relation cue が本文にある場合だけ `relation_not_expressed` を回避する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py` | `relation_not_expressed` 時に declared relation の範囲で marker を付与し、意味追加しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | recovery relation line を relation surface contract と整合させ、surface_signature / grounding inputにcontract metaを残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | Reader signal / Self-Repair markerをdiagnostic_summaryにadditive接続する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | positive_recovery fixtureで、Reader relation_not_expressed が今回ケースで消えることを固定するE2E regression。 |

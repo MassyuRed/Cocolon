@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4227,3 +4227,21 @@ Complete Composer初期版では、候補文の完全一致ではなく、型・
 | `Cocolon/tests/rn-screen-contracts.test.js` | Complete metaが入ってもRN表示はpassed-onlyであること。 |
 
 この一群は、完全Composer商品品質版の最終QAではなく、完全Composer初期版の内部層とpublic契約を同時に守るsupport / regression testとして読む。
+
+# 2026-05-17 差分追記: EmlisAI positive_recovery relation contract test / support map
+
+positive_recovery relation_not_expressed 修正では、backend support / regressionとして次のtest群を追加して読む。これは商品品質版接続の一部であり、Account / Subscription / ProfileCreate の契約変更ではない。
+
+| path | 役割 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_baseline.py` | baseline。Reader Gateが relation_not_expressed で落ちたケースを再発防止対象として固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_relation_surface_contract.py` | relation surface contract unit test。`関係` 単独pass禁止とrecovery strict bridgeを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_surface_contract.py` | Readerがcontract cueを認識することを確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_relation_not_over_relaxed.py` | Reader過緩和防止。generic cueだけではrecoveryを通さない。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_self_repair_positive_recovery_relation.py` | Self-Repair markerのmeaning_added=false / gate_relaxed=false / relation保持を確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_surface_recovery_relation_line.py` | Surface recovery relation line / surface_signature / grounding metaの整合を確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_relation_diagnostic_connection.py` | diagnostic_summaryへ reader_relation_signal_* / self_repair_relation_marker_* が入ることを確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | E2E regression。relation surfaceが無ければfail-closed、あればReader relation_not_expressedが消える。 |
+| `mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py` | 一時ログ整理。debug flag default off、raw input / comment_text本文非混入。 |
+
+このsupport層はEmlisAI専用です。DB physical name、public API route、subscription entitlement、account delete対象は変更しません。

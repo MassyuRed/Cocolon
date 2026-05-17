@@ -1073,6 +1073,7 @@ const safeInsets = useSafeAreaInsets();
           ""
       ).trim();
 
+
       await clearPersistedInputDraft();
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);

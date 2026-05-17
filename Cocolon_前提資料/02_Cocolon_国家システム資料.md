@@ -1,23 +1,23 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(87).zip"
-  Cocolon: "Cocolon_10(7).zip"
-  mashos-api: "mashos-api_10(10).zip"
+  premise: "Cocolon_前提資料(92).zip"
+  Cocolon: "Cocolon_9(8).zip"
+  mashos-api: "mashos-api_9(8).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 489
+  mashos-api: 514
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 705
+  included_files_total: 730
   included_files_cocolon: 216
-  included_files_mashos_api: 489
+  included_files_mashos_api: 514
 ---
 
 # 1. 1行定義
@@ -34,6 +34,7 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 - `startup_snapshot_store` は startup 断面
 - `access_policy` は read-side visibility / tier 判定の集約点
 - `EmlisAI` は保存直後 immediate reply path を持つ
+- positive_recovery relation_not_expressed 修正は、保存直後replyの内部Gate / diagnostic correctionであり、Input保存API・DB write path・RN表示条件を変えない
 - 2026-04-22 反映で、三大要素の中核 owner は comment / analysis / piece ごとに 1 本流へ固定した
 
 # 2-2. 2026-04-30 `/app/bootstrap` runtime flow
@@ -1046,3 +1047,35 @@ Input Gate -> Save API -> Emlis / Piece / Analysis runtime
 - Step9 fixture / QA run がpublic `comment_text` を書かない。
 - scorecard meta をDisplay Gateの代替にしない。
 - DB physical name、public API route、response key、RN visible名を変更しない。
+
+# 2026-05-16 差分追記: EmlisAI 商品品質版接続 Step0-7 国家システム境界
+
+最新基準面 `Cocolon_前提資料(90).zip` / `Cocolon_8(11).zip` / `mashos-api_8(16).zip` では、国家システムflowの public 境界は維持されています。差分は `Input -> Save -> immediate reply -> Complete Composer -> Gate -> RN passed-only display` のうち、Complete ComposerとGate diagnosticsの内部品質層です。
+
+| Step | 国家システム上の位置 | owner |
+|---|---|---|
+| Step0 binding contract | Gate diagnostic / Display判定meta | `emlis_ai_display_gate.py`, `emlis_ai_reply_service.py` |
+| Step1 coverage suite | eligible母集団 / reason集計 | `emlis_ai_complete_scorecard_service.py`, `test_emlis_ai_complete_product_quality_coverage.py` |
+| Step2 Grounding | Evidence / PhraseUnit / relation照合 | `emlis_ai_complete_grounding_service.py`, `emlis_ai_grounding_judge.py` |
+| Step3 Surface variation | Template / Echo Guard入力meta | `emlis_ai_complete_surface_realizer.py`, `emlis_ai_template_echo_guard.py` |
+| Step4 Self-Repair | Gate reason based repair trace | `emlis_ai_complete_self_repair_service.py` |
+| Step5 Tone Engine | SentencePlan -> Surface制約 | `emlis_ai_complete_tone_policy.py` |
+| Step6 Scorecard / Blind QA | Product Gate判断材料 | `emlis_ai_complete_product_quality_scorecard_service.py` |
+| Step7 Release ladder | internal / limited / broader_beta / product_gate判定meta | `emlis_ai_complete_release_ladder_service.py` |
+
+禁止: non-passed表示、scorecardによるDisplay Gate代替、Gate緩和、固定文fallback、外部AI/ローカルLLM、DB/API/RN rename。
+
+# 2026-05-17 差分追記: Input / immediate reply positive_recovery relation_not_expressed Step0-7
+
+Input保存後の `Emlisの観測` では、positive_recovery の非表示原因として確認された `stage=reader / primary_reason=relation_not_expressed` を、保存APIやRN表示条件を変えずに内部Composer側で扱うようになりました。国家システム上は `InputScreen -> /emotion/submit -> render_emlis_ai_reply -> Reader / Grounding / Template / Display Gate -> RN passed-only display` の流れを維持します。
+
+| 段階 | owner | 国家システム上の役割 |
+|---|---|---|
+| relation surface contract | `emlis_ai_relation_surface_contract.py` | Reader / Surface / Self-Repair が同じ relation cue を使う。raw inputは読まない。 |
+| Reader Gate | `emlis_ai_listener_reader_judge.py` | recovery relation cueが本文に明示された場合だけReaderが検出する。Gate条件そのものは緩めない。 |
+| Self-Repair | `emlis_ai_complete_self_repair_service.py` | `relation_not_expressed` へのrepairでdeclared relationだけを明示し、`meaning_added=false` を保持する。 |
+| Surface | `emlis_ai_complete_surface_realizer.py` | recovery relation lineをcontract key / surface_signature付きで出す。 |
+| diagnostic | `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_reply_service.py` | relation検出状況とrepair markerを `diagnostic_summary` へadditiveに接続する。 |
+| log cleanup | `emotion_submit_service.py` / `Cocolon/screens/InputScreen.js` | 一時debug logをenv flag配下または削除へ整理し、通常ログにraw inputやpublic comment_text本文を出さない。 |
+
+禁止: Reader Gateを削除する、rejectedをRN表示する、固定文fallbackを入れる、通知400修正と同じ作業に混ぜる。

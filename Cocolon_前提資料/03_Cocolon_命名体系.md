@@ -1,18 +1,18 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(87).zip"
-  Cocolon: "Cocolon_10(7).zip"
-  mashos-api: "mashos-api_10(10).zip"
+  premise: "Cocolon_前提資料(92).zip"
+  Cocolon: "Cocolon_9(8).zip"
+  mashos-api: "mashos-api_9(8).zip"
 file_counts:
   Cocolon: 216
-  mashos-api: 489
+  mashos-api: 514
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -383,3 +383,34 @@ Self Structure / MyProfile 系の visible 名は、ユーザー向けには `わ
 | Emlisの観測 | frontend visible title | ユーザー表示名。Complete Composer初期版になっても変更しない。 |
 
 禁止: `complete_composer_initial`、`a_plan_equivalent`、`A-1`、`cocolon_emlis_observation_composer.a1.v1` を理由に、`input_feedback.comment_text`、`emlis_ai` meta、DB physical name、public route、RN visible名を一括renameしない。
+
+# 2026-05-16 差分追記: 商品品質版接続 Step0-7 名称境界
+
+最新実ファイルでは、完全Composer初期版の上に商品品質版接続用の内部名が追加されています。これらは visible名、public route、DB physical name、response keyではありません。
+
+| 名称 | 見える場所 | 読み方 | rename判断 |
+|---|---|---|---|
+| `emlis.gate_binding_contract.v2` | Gate diagnostic / Display trace | binding_used契約整理のversion | public response keyへ昇格しない |
+| `ProductQualityConnection.Step6` / `Step6_Scorecard_Blind_QA` | product quality scorecard meta | Product Gate判断材料のscorecard段階 | 商品品質版到達宣言ではない |
+| `Step7_Release_ladder_connection` | release ladder meta | internal / limited / broader_beta / product_gateの判定meta | rollout実行やpublic release適用ではない |
+| `complete_product_quality_scorecard` | diagnostic_summary / meta | machine metrics と Blind QA の集約 | `comment_text` ではない |
+| `complete_product_quality_release_ladder` | diagnostic_summary / meta | release ladder guard / criteria | RN表示条件ではない |
+| `TonePolicy` / `ToneGuardReport` | `emlis_ai_complete_tone_policy.py` | Surface前のtone制約・検出report | Emlis visible名へrenameしない |
+| `desire_fear` | coverage_group | `approach_avoidance` relationを商品品質版coverageとして読むcurrent名 | DB/API名ではない |
+
+禁止: 商品品質版接続を理由に、`Emlisの観測`、`input_feedback.comment_text`、public route、DB physical name、RN modal条件をrenameしない。
+
+
+# 2026-05-17 差分追記: EmlisAI relation surface naming boundary
+
+`positive_recovery relation_not_expressed` 修正で追加された名称は、すべて EmlisAI 内部Composer / diagnostic meta の名称として読む。ユーザー表示名、public API route、DB physical name、既存response keyのrename対象ではない。
+
+| 名称 | 種別 | 読み方 |
+|---|---|---|
+| `emlis_ai_relation_surface_contract.py` | backend internal file | Reader / Surface / Self-Repair の relation cue 共有契約。visible名ではない。 |
+| `emlis.relation_surface_contract.v1` | internal contract version | relation cue / marker のバージョン。DB名でもAPI名でもない。 |
+| `reader_relation_signal_*` | diagnostic field | Readerがrelation cueを検出したかを示すmeta。RN表示条件に使わない。 |
+| `self_repair_relation_marker_*` | diagnostic / repair trace field | Self-Repairがdeclared relation markerを付与したかを示すmeta。表示文fallbackではない。 |
+| `positive_recovery` | coverage_group | 商品品質版接続のcoverage分類。入力専用runtime分岐名ではない。 |
+
+visible名は引き続き `Emlisの観測`。`input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は互換維持する。

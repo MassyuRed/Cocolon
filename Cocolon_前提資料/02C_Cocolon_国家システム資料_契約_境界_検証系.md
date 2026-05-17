@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-16"
+revision_date: "2026-05-17"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2461,3 +2461,52 @@ Complete Composer初期版は、表示率を上げるためにGateを緩める�
 - 外部AIレンタル、ローカルLLM、固定完成文テンプレ、入力専用テンプレは追加しない。
 - raw user input を改善資料として要求しない。改善は diagnostic_summary / Gate reason / coverage / binding / repair trace / scorecard event で行う。
 - これは完全Composer商品品質版ではなく、限定Composerの安全境界を土台にした完全Composer初期版のAlpha実装として読む。
+
+# 2026-05-16 差分追記: 商品品質版接続 Step0-7 contract / verification
+
+Complete Composer初期版のE2E表示開通後、商品品質版接続 Step0-7 では次のcontract / regressionを追加で読む。
+
+| contract | owner / test | 固定すること |
+|---|---|---|
+| Gate binding contract v2 | `emlis_ai_display_gate.py`, `test_emlis_ai_gate_binding_contract_v2.py`, `test_emlis_ai_diagnostic_summary_v2.py` | `binding_present` と `binding_used` を混同しない。Reader / Templateは原則 `binding_used=false`。 |
+| Product quality coverage | `emlis_ai_complete_scorecard_service.py`, `test_emlis_ai_complete_product_quality_coverage.py` | coverage_group別に eligible / passed / rejected / unavailable reasonを集計する。 |
+| Grounding relation binding v2 | `emlis_ai_complete_grounding_service.py`, `test_emlis_ai_complete_grounding_relation_binding_v2.py` | sentence_id単位の Evidence / PhraseUnit / relation を見て unsupported / relation_not_expressed を返す。 |
+| Surface variation v2 | `emlis_ai_complete_surface_realizer.py`, `emlis_ai_template_echo_guard.py`, `test_emlis_ai_complete_surface_variation_v2.py` | surface_signature / same-ending / connector repetition / raw echoを検出する。 |
+| Self-Repair v2 | `emlis_ai_complete_self_repair_service.py`, `test_emlis_ai_complete_self_repair_v2.py`, `test_emlis_ai_complete_self_repair_product_quality_v2.py` | reason別repair policy、meaning_added=false、gate_relaxed=falseを固定する。 |
+| Tone Engine | `emlis_ai_complete_tone_policy.py`, `test_emlis_ai_complete_tone_engine_v2.py` | TonePolicyとToneGuardReportをmeta-onlyで扱い、診断調・命令調・過剰慰めを防ぐ。 |
+| Product Quality Scorecard / Blind QA | `emlis_ai_complete_product_quality_scorecard_service.py`, `test_emlis_ai_complete_product_quality_scorecard.py`, `test_emlis_ai_complete_product_quality_scorecard_blind_qa.py`, `test_emlis_ai_complete_product_quality_connection_e2e.py` | machine metrics と Blind QA を分離し、Product Gate到達扱いにしない。 |
+| Release ladder | `emlis_ai_complete_release_ladder_service.py`, `test_emlis_ai_complete_release_ladder_v2.py`, `test_emlis_ai_complete_release_ladder_connection_e2e.py` | internal / limited / broader_beta / product_gate判定をmeta-onlyで出す。public release appliedはfalse。 |
+| RN passed-only | `Cocolon/tests/rn-screen-contracts.test.js` | Complete / ProductQuality metaだけでRN modalを出さない。 |
+
+確認済み: `PYTHONPATH=services/ai_inference pytest -q tests/test_emlis_ai_*.py` は `421 passed`、`npm test -- --runInBand` は `21 passed`。ただしこれは商品品質版release完了ではなく、契約と判断材料が接続された確認として読む。
+
+# 2026-05-17 差分追記: EmlisAI positive_recovery relation contract / regression boundary
+
+positive_recovery relation_not_expressed 修正で守るcontractは次の通りです。
+
+| contract | 固定内容 |
+|---|---|
+| relation surface contract | `emlis.relation_surface_contract.v1`。Reader / Surface / Self-Repair のcue語彙を揃える。 |
+| Reader過緩和防止 | `関係` 単独、generic cue単独、relation cueなし3文候補では recovery relationを通さない。 |
+| Self-Repair | declared relationだけを明示する。meaning_added=false / relation_ids_preserved=true / gate_relaxed=false。 |
+| Surface | recovery relation lineをsurface_signature / grounding input / realization metaへ残す。固定完成文fallbackではない。 |
+| Diagnostic | `reader_relation_signal_*` / `self_repair_relation_marker_*` はmeta-only。public response shapeは変えない。 |
+| Log | 一時観測ログはdefault off。enabled時もraw input / public comment_text本文を出さない。 |
+| RN | relation metaでは表示しない。public `observation_status=passed` + `comment_text` 非空だけ表示。 |
+
+必須regression:
+- `test_emlis_ai_relation_surface_contract.py`
+- `test_emlis_ai_listener_reader_relation_surface_contract.py`
+- `test_emlis_ai_listener_reader_relation_not_over_relaxed.py`
+- `test_emlis_ai_complete_self_repair_positive_recovery_relation.py`
+- `test_emlis_ai_complete_surface_recovery_relation_line.py`
+- `test_emlis_ai_positive_recovery_relation_diagnostic_connection.py`
+- `test_emlis_ai_complete_product_quality_positive_recovery_e2e.py`
+- `test_emlis_ai_step7_log_cleanup.py`
+
+禁止:
+- Readerの `relation_not_expressed` を単純削除する。
+- rejected / unavailable をRN表示する。
+- recovery markerで入力にない原因・診断・prior loadを発明する。
+- 通知400を同じ修正軸に混ぜる。
+
