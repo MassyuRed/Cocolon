@@ -376,3 +376,39 @@ positive_recovery の Reader `relation_not_expressed` 修正では、表示率�
 | `Cocolon/screens/InputScreen.js` | 一時debug console logを削除し、passed-only modal表示契約を維持すること。 | RN Input画面やEmlis観測modalを触る時 |
 
 禁止: `relation_not_expressed` を単純に削除する、`関係` という単語だけでpassさせる、Self-Repairで入力にないprior load/causeを足す、rejected / unavailableをRN表示する。
+
+
+# 2026-05-17 差分追記: Observation Diagnostic Lockdown rule / test index
+
+最新基準面 `Cocolon_9(9).zip` / `mashos-api_9(9).zip` では、EmlisAI 非表示原因の診断固定rule / regressionとして次を追加で読む。
+
+| rule / test | 拘束すること |
+|---|---|
+| `emlis_ai_observation_diagnostic_lockdown.py` | backend診断schema、classification、no raw text。 |
+| `emlis_ai_observation_diagnostic_compare.py` | backend/RN log parse、join、first divergence。 |
+| `emlis_ai_observation_diagnostic_branching.py` | classification別の次工程、touch_files / do_not_touch / repair_allowed。 |
+| `inputFeedbackObservationDiagnostics.js` | RN診断はpublic status / text length / modal_openedのみ。diagnostic metaでstatusを補正しない。 |
+| `test_emlis_ai_observation_diagnostic_lockdown.py` | 全classificationのfixture固定。 |
+| `test_emotion_submit_observation_diagnostic_log.py` | success / exception pathの一行診断とenv opt-in。 |
+| `test_emlis_ai_observation_diagnostic_reply_meta.py` | reply metaからcandidate / gate / repairを抽出できること。 |
+| `test_emlis_ai_observation_diagnostic_backend_step5.py` | fail-closed、Display contract、dict reason safe extraction。 |
+| `test_emlis_ai_observation_diagnostic_compare_step7.py` | 11:35/11:36比較用のparse / join / row / markdown / json。 |
+| `test_emlis_ai_observation_diagnostic_branching_step8.py` | 分類別branchと原因修正禁止条件。 |
+| `rn-screen-contracts.test.js` | RN診断helper、no forced passed、passed-only modal契約。 |
+
+このrule群は、完全Composer商品品質版の文章改善ではなく、原因分類と次工程固定のための検証基盤です。`passed_displayed` はscorecard候補、`unclassified_non_display` / `unknown_diagnostic_missing` はdiagnostic enrichment対象として扱う。
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface rule / guard索引
+
+Reader Relation Surface Step0-8 を触る場合は、以下を同時確認する。目的は Reader rejected 原因の契約整合であり、表示条件やGate緩和ではない。
+
+| rule / guard | owner | 触る時 |
+|---|---|---|
+| Greeting policy alignment | `emlis_ai_listener_reader_judge.py`, `emlis_ai_user_address_service.py` | 宛名・敬称・`Emlisです。` の扱いを変える時。 |
+| Relation surface contract | `emlis_ai_relation_surface_contract.py`, `emlis_ai_listener_reader_judge.py` | relation cue / marker / strict recoveryを変える時。 |
+| Expected relation handoff | `emlis_ai_reply_service.py`, `test_emlis_ai_reply_service_expected_relation_types.py` | Readerへ渡すrelation type抽出を変える時。 |
+| Limited reader repair | `emlis_ai_limited_composer_client.py`, `test_emlis_ai_limited_*reader*repair*.py` | limited/A1の previous rejection repair を変える時。 |
+| Complete self-repair allowlist | `emlis_ai_complete_composer_client.py`, `emlis_ai_complete_self_repair_service.py` | Complete self-repairへ渡すreasonを変える時。 |
+| Diagnostic privacy | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_observation_diagnostic_lockdown.py` | repair meta / diagnostic_summary / backend logを変える時。 |
+
+禁止: `relation_not_expressed` を単語1つで通す、repairで意味を追加する、raw user input / public comment_text本文をdiagnosticへ出す、RN passed-only契約を変える。

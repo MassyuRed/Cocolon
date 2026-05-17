@@ -1766,3 +1766,51 @@ Input保存後のEmlisAI immediate replyは、public route / response key を変
 | Step7 log cleanup | 一時debug logを整理する。 | `emotion_submit_service.py`, `test_emlis_ai_step7_log_cleanup.py`, `Cocolon/screens/InputScreen.js` |
 
 この差分でも、`input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけRNへ表示されます。
+
+
+# 2026-05-17 差分追記: emotion_submit_service Observation Diagnostic Lockdown 接続
+
+`mashos-api_9(9).zip` では、`emotion_submit_service.py` に Observation Diagnostic Lockdown のbackend一行診断が接続されています。これは保存・dispatch・DB write pathを変えるものではなく、`input_feedback_comment` / `input_feedback_meta` が確定した後に、opt-in時だけmeta-only logを出す変更です。
+
+| owner | 読み方 |
+|---|---|
+| `_emlis_ai_observation_diagnostic_lockdown_log_enabled()` | `EMLIS_AI_OBSERVATION_DIAGNOSTIC_LOCKDOWN_LOG_ENABLED` / `COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOCKDOWN_LOG_ENABLED` / 旧Step7 debug flagを読む。通常時は診断行を出さない。 |
+| `_log_emlis_ai_observation_diagnostic_lockdown(...)` | `build_observation_diagnostic_lockdown(...)` と `dump_observation_diagnostic(...)` を呼び、`emlis_observation_diagnostic_lockdown {json}` を1本出す。 |
+| success path | `reply.comment_text` / `reply.meta` 確定後にbackend診断を出す。 |
+| exception path | fail-closed後、`observation_status=unavailable` / `emlis_ai_timeout_or_error` metaでbackend診断を出す。 |
+
+出してよいもの:
+- `emotion_log_id`
+- `created_at`
+- `trace_id`
+- `observation_status`
+- `comment_text_length`
+- `stage / primary_reason / secondary_reasons`
+- `candidate / gate_results / self_repair / classification`
+
+出してはいけないもの:
+- raw input
+- memo
+- current_input
+- public `comment_text` 本文
+- candidate text / reply text / preview text
+
+この差分では、`/emotion/submit` のpublic route、request payload、response key、DB physical name、保存成功時の返却構造は変更しません。
+
+# 2026-05-17 差分追記: Input / immediate reply Reader Relation Surface repair接続
+
+`mashos-api_9(10).zip` では、Input保存後の `Emlisの観測` について、Observation Diagnostic Lockdownで確定した Reader rejected 原因を backend の Reader / limited A1 repair で扱う差分が入っています。`/emotion/submit` の保存契約、request / response shape、DB write path、Home gateway、RN modal表示条件は変更しません。
+
+| Step | Input / Dispatch上の読み方 | owner |
+|---|---|---|
+| Step0 failure再現 | `candidate_generated_but_reader_rejected` の再発条件をtestで固定する。 | `test_emlis_ai_listener_reader_addressee_contract.py`, `test_emlis_ai_limited_reader_repair.py`, `test_emlis_ai_a1_reader_relation_repair_e2e.py` |
+| Step1 宛名契約 | `Mash様、Emlisです。` のような valid greeting をReaderが落とさない。敬称なしを広く通さない。 | `emlis_ai_listener_reader_judge.py` |
+| Step2 expected relation | sentence binding / relation metaからsurface relation typeをReaderへ渡す。`conflict.e1` のようなedge idは渡さない。 | `emlis_ai_reply_service.py`, `test_emlis_ai_reply_service_expected_relation_types.py` |
+| Step3 previous reason | limited/A1 payloadの `composition_contract.previous_rejection_reasons` を読む。 | `emlis_ai_limited_composer_client.py` |
+| Step4 宛名repair | `addressee_not_clear` の場合だけ先頭宛名行をgreeting policyへ揃える。本文意味は増やさない。 | `test_emlis_ai_limited_addressee_repair.py` |
+| Step5 relation marker | `relation_not_expressed` の場合だけ relation surface contract の markerを最小追加する。 | `test_emlis_ai_limited_reader_previous_rejection_reasons.py` |
+| Step6 core hook | repair後も `_core_checked_response` と core evaluation / Gateを通す。落ちたら従来通り非表示。 | `test_emlis_ai_limited_reader_repair_core_hook.py` |
+| Step7 diagnostic meta | `limited_reader_repair_attempted/applied` を本文なしで診断へ出す。 | `test_emlis_ai_limited_reader_repair_diagnostics.py` |
+| Step8 test pass | EmlisAI関連全体を通すための import / retry reason / no-fallback regressionを固定する。 | `tests/conftest.py`, `emlis_ai_complete_composer_client.py`, `emlis_ai_reply_service.py` |
+
+この差分でも、`input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけRNへ表示されます。

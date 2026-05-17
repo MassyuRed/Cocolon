@@ -6,19 +6,19 @@
   ],
   "source_mode": "local_snapshot",
   "file_counts": {
-    "Cocolon": 216,
-    "mashos-api": 514,
-    "total": 730
+    "Cocolon": 217,
+    "mashos-api": 535,
+    "total": 752
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 730,
-    "national_system_body_includes": 730,
+    "overall_structure_body_includes": 752,
+    "national_system_body_includes": 752,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル730件、国家システム判断対象のcurrent全ファイル730件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 730,
-    "overall_structure_body_includes_current_snapshot_files": 730,
-    "national_system_body_lists_current_snapshot_files_with_relation": 730,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル752件、国家システム判断対象のcurrent全ファイル752件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
+    "current_snapshot_total_files": 752,
+    "overall_structure_body_includes_current_snapshot_files": 752,
+    "national_system_body_lists_current_snapshot_files_with_relation": 752,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -739,7 +739,17 @@
       "rn_contract": "21 passed"
     },
     "latest_source_basis_2026_05_17": "Cocolon_前提資料(92).zip / Cocolon_9(8).zip / mashos-api_9(8).zip",
-    "positive_recovery_relation_policy_2026_05_17": "positive_recovery relation_not_expressed is handled by shared relation surface contract, Reader detection, Self-Repair marker, Surface relation line, diagnostic meta, E2E regression, and log cleanup without changing RN display contract."
+    "positive_recovery_relation_policy_2026_05_17": "positive_recovery relation_not_expressed is handled by shared relation surface contract, Reader detection, Self-Repair marker, Surface relation line, diagnostic meta, E2E regression, and log cleanup without changing RN display contract.",
+    "latest_source_basis_2026_05_17_reader_relation_surface_step0_8": {
+      "premise": "Cocolon_前提資料(96).zip",
+      "Cocolon": "Cocolon_9(10).zip",
+      "mashos-api": "mashos-api_9(10).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 535,
+      "total_files": 752,
+      "doc_role": "Observation Diagnostic Lockdown classification candidate_generated_but_reader_rejected に基づき、Reader / relation surface / limited A1 repair を backend で実装した現状構造を読むための作業用地図。"
+    },
+    "reader_relation_surface_policy_2026_05_17": "Reader Relation Surface Step0-8 は、Reader rejected の原因を greeting policy alignment、expected_relation_types、limited/A1 previous rejection repair、core hook、diagnostic metaで扱うbackend修正。RN表示条件、public response key、DB physical name、Display/Grounding/Template Gateは変更しない。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -756,11 +766,11 @@
   "docs": [
     {
       "path": "00_華恋用_READ_FIRST.md",
-      "purpose": "最初に読む作業用地図。前提資料の在り方と最新基準面を固定する"
+      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Observation Diagnostic Lockdown境界を固定する"
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "purpose": "App root / AppRuntimeContext / navigation / runtime / Home / startup / immediate reply / Input split / monitoring RN boundary"
+      "purpose": "App root / runtime / Home / startup / immediate reply / Input split / EmlisAI frontend diagnostic boundary"
     },
     {
       "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
@@ -768,27 +778,27 @@
     },
     {
       "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "purpose": "Account split / Subscription / ProfileCreate / settings / backend support / ops client events / rule / test / CI"
+      "purpose": "Account split / Subscription / backend support / rule / test / EmlisAI diagnostic support map"
     },
     {
       "path": "01_Cocolon_全体構造資料.md",
-      "purpose": "全体構造総論とsystem単位の読み方。value observation current差分を含む"
+      "purpose": "全体構造総論とsystem単位の読み方。EmlisAI Observation Diagnostic Lockdown差分を含む"
     },
     {
       "path": "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "purpose": "Input / Save / Dispatch / Home runtime flag / immediate reply value observation"
+      "purpose": "Input / Save / Dispatch / immediate reply / EmlisAI submit診断接続"
     },
     {
       "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "purpose": "Contract / Boundary / Test / AppRuntimeContext / value observation guard / ops client events contract"
+      "purpose": "Contract / Boundary / Test / EmlisAI Observation Diagnostic Lockdown verification"
     },
     {
       "path": "02_Cocolon_国家システム資料.md",
-      "purpose": "国家システム総論と/app/bootstrap runtime flow。value observation current差分を含む"
+      "purpose": "国家システム総論とimmediate reply診断flow。Observation Diagnostic Lockdown差分を含む"
     },
     {
       "path": "03_Cocolon_命名体系.md",
-      "purpose": "visible名・route名・runtime owner・DB物理名・value observation語彙の写像"
+      "purpose": "visible名・route名・runtime owner・DB物理名・diagnostic内部名の写像"
     },
     {
       "path": "04_Cocolon_変更テーマ別チェックリスト",
@@ -796,7 +806,7 @@
     },
     {
       "path": "05_Cocolon_ルールファイル索引",
-      "purpose": "policy / guard / contract / value observation / common text generation core rule file索引"
+      "purpose": "policy / guard / contract / diagnostic lockdown rule file索引"
     },
     {
       "path": "06_Cocolon_ファイル名変更保留台帳.md",
@@ -804,11 +814,11 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "current snapshotの構造差分。value observation / common text generation core差分を含む"
+      "purpose": "current snapshotの構造差分。Observation Diagnostic Lockdown差分を含む"
     },
     {
       "path": "09_Cocolon_名称混在保管と構造境界_2026-05-10.md",
-      "purpose": "名称混在を作業用地図として保管する構造境界資料"
+      "purpose": "名称混在とdiagnostic内部名を作業用地図として保管する構造境界資料"
     },
     "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
     "08_Cocolon_DB_rename_boundary.md"
@@ -1745,9 +1755,9 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(92).zip",
-    "Cocolon": "Cocolon_9(8).zip",
-    "mashos-api": "mashos-api_9(8).zip"
+    "premise": "Cocolon_前提資料(96).zip",
+    "Cocolon": "Cocolon_9(10).zip",
+    "mashos-api": "mashos-api_9(10).zip"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2513,15 +2523,15 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(92).zip",
-    "Cocolon": "Cocolon_9(8).zip",
-    "mashos-api": "mashos-api_9(8).zip",
+    "premise": "Cocolon_前提資料(96).zip",
+    "Cocolon": "Cocolon_9(10).zip",
+    "mashos-api": "mashos-api_9(10).zip",
     "file_counts": {
-      "Cocolon": 216,
-      "mashos-api": 514,
-      "total": 730
+      "Cocolon": 217,
+      "mashos-api": 535,
+      "total": 752
     },
-    "summary": "EmlisAI positive_recovery relation_not_expressed Step0-7 added on top of complete initial E2E and product quality connection. RN passed-only contract unchanged."
+    "summary": "EmlisAI Reader Relation Surface Step0-8 added on top of Observation Diagnostic Lockdown, positive_recovery relation, complete initial E2E, and product quality connection. RN passed-only contract unchanged."
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -2857,6 +2867,216 @@
       "raw_input_copied_to_meta": false,
       "comment_text_logged": false,
       "notification_400_fixed_in_this_diff": false
+    }
+  },
+  "source_snapshot_2026_05_17_observation_diagnostic_lockdown_step0_8": {
+    "premise": "Cocolon_前提資料(94).zip",
+    "Cocolon": "Cocolon_9(9).zip",
+    "mashos-api": "mashos-api_9(9).zip",
+    "sha256": {
+      "Cocolon_前提資料(94).zip": "50b6a4a517df19cff830c0af12488692a550bbb61647bc635dd39b24a2659480",
+      "Cocolon_9(9).zip": "e0430479ec6688fdf1e866a0a5120da79eefff295285575cb95815f8138801bc",
+      "mashos-api_9(9).zip": "633cb5cf2802c6c8f40ca5eda8e0aaf28efe168e929afe1b4b3703de7d150b5c"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 525,
+      "total": 742
+    },
+    "diff_from": {
+      "premise": "Cocolon_前提資料(92).zip / Cocolon_前提資料(94).zip basis before this update",
+      "Cocolon": "Cocolon_9(8).zip positive_recovery relation basis",
+      "mashos-api": "mashos-api_9(8).zip positive_recovery relation basis",
+      "file_counts": {
+        "previous_Cocolon": 216,
+        "previous_mashos_api": 514,
+        "previous_total": 730
+      }
+    },
+    "added_files": {
+      "Cocolon": [
+        "Cocolon/screens/input/inputFeedbackObservationDiagnostics.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_branching.py",
+        "mashos-api/ai/tools/emlis_observation_compare_1135_1136.py",
+        "mashos-api/ai/tools/emlis_observation_route_next_step.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_lockdown.py",
+        "mashos-api/ai/tests/test_emotion_submit_observation_diagnostic_log.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_reply_meta.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_backend_step5.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_compare_step7.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_branching_step8.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [
+        "Cocolon/screens/InputScreen.js",
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "Observation Diagnostic Lockdown Step0-8を最新実ファイルに反映。",
+      "backend/RN one-line diagnosticをtrace_idまたはemotion_log_idでjoinし、非表示原因のfirst divergenceを出す。",
+      "classification別にtarget_layer / touch_files / do_not_touch / repair_allowedを固定し、原因未分類のまま修正へ進まない。"
+    ],
+    "verified_tests": {
+      "backend_diagnostic_step1_8": "PYTHONPATH=services/ai_inference pytest tests/test_emlis_ai_observation_diagnostic_lockdown.py tests/test_emotion_submit_observation_diagnostic_log.py tests/test_emlis_ai_observation_diagnostic_reply_meta.py tests/test_emlis_ai_observation_diagnostic_backend_step5.py tests/test_emlis_ai_observation_diagnostic_compare_step7.py tests/test_emlis_ai_observation_diagnostic_branching_step8.py -q -> 47 passed, 1 warning",
+      "rn_contract": "cd Cocolon && npm test -- --test-reporter=spec -> 22 passed"
+    },
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "display_gate_relaxed": false,
+      "reader_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_template_added": false,
+      "raw_input_logged_or_copied_to_meta": false,
+      "public_comment_text_logged": false,
+      "diagnostic_log_default_on": false,
+      "classification_required_before_cause_repair": true
+    },
+    "log_prefixes": {
+      "backend": "emlis_observation_diagnostic_lockdown",
+      "frontend": "emlis_observation_frontend_result"
+    },
+    "env_flags": {
+      "backend": [
+        "EMLIS_AI_OBSERVATION_DIAGNOSTIC_LOCKDOWN_LOG_ENABLED",
+        "COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOCKDOWN_LOG_ENABLED"
+      ],
+      "frontend": [
+        "EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG",
+        "EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG"
+      ]
+    },
+    "classification_groups": [
+      "backend_exception_or_timeout",
+      "pre_connection_stop",
+      "candidate_missing",
+      "candidate_generated_but_reader_rejected",
+      "candidate_generated_but_grounding_rejected",
+      "candidate_generated_but_template_rejected",
+      "candidate_generated_but_display_rejected",
+      "passed_backend_frontend_hidden",
+      "passed_displayed",
+      "unclassified_non_display",
+      "unknown_diagnostic_missing"
+    ]
+  },
+  "source_snapshot_2026_05_17_reader_relation_surface_step0_8": {
+    "premise": "Cocolon_前提資料(96).zip",
+    "Cocolon": "Cocolon_9(10).zip",
+    "mashos-api": "mashos-api_9(10).zip",
+    "sha256": {
+      "Cocolon_前提資料(96).zip": "5e4f1559de5c96d8250c45174384707dba510321e5f381a7b74b526943d4eca9",
+      "Cocolon_9(10).zip": "40e6b186de04eab5116fd61871da1120677cc0cd3ca61253230a38de268ffaf8",
+      "mashos-api_9(10).zip": "0579b70a5f031f11e9f77e51d1b257203ae4c721a6733eaeed0fc2053c53030c"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 535,
+      "total": 752
+    },
+    "diff_from": {
+      "premise": "Cocolon_前提資料(96).zip / Observation Diagnostic Lockdown Step0-8 basis",
+      "Cocolon": "Cocolon_9(9).zip Observation Diagnostic Lockdown basis; no source additions in Cocolon_9(10).zip",
+      "mashos-api": "mashos-api_9(9).zip Observation Diagnostic Lockdown basis; Reader Relation Surface Step0-8 adds 10 source support/test files and changes backend EmlisAI services",
+      "file_counts": {
+        "previous_Cocolon": 217,
+        "previous_mashos_api": 525,
+        "previous_total": 742
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/tests/test_emlis_ai_listener_reader_addressee_contract.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_reader_repair.py",
+        "mashos-api/ai/tests/test_emlis_ai_a1_reader_relation_repair_e2e.py",
+        "mashos-api/ai/tests/test_emlis_ai_reply_service_expected_relation_types.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_previous_rejection_reasons.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_reader_previous_rejection_reasons.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_addressee_repair.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_reader_repair_core_hook.py",
+        "mashos-api/ai/tests/test_emlis_ai_limited_reader_repair_diagnostics.py",
+        "mashos-api/ai/tests/conftest.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "Reader宛名判定をgreeting policyと一致させる。",
+      "Readerへsurface relation typeを渡し、edge idを除外する。",
+      "limited/A1がprevious_rejection_reasonsを読み、addressee/relation surfaceを最小repairする。",
+      "repair後もcore evaluation / Gateを通し、fail-closedを維持する。",
+      "limited_reader_repair状態をdiagnostic metaへ本文なしで接続する。",
+      "Step8でEmlisAI関連全体テストを通すためのretry reason allowlistとpytest supportを固定する。"
+    ],
+    "verified_tests": {
+      "step8_target_tests": "43 passed",
+      "step0_7_regression_set": "67 passed",
+      "backend_emlis_ai_related": "531 passed, 1 warning"
+    },
+    "boundary": {
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "display_gate_relaxed": false,
+      "reader_gate_removed": false,
+      "grounding_gate_relaxed": false,
+      "template_guard_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_template_added": false,
+      "raw_input_logged_or_copied_to_meta": false,
+      "public_comment_text_logged": false,
+      "limited_reader_repair_meta_only": true,
+      "repair_requires_post_core_evaluation": true
+    },
+    "step_map": {
+      "Step0": "失敗再現テストを先に追加する",
+      "Step1": "Readerの宛名判定をgreeting policyと一致させる",
+      "Step2": "Readerへexpected_relation_typesを渡す",
+      "Step3": "limited/A1がprevious_rejection_reasonsを読めるようにする",
+      "Step4": "宛名repairを最小適用する",
+      "Step5": "relation_not_expressedにrelation surface markerを適用する",
+      "Step6": "_core_checked_responseの前段にrepair adapterを挿入する",
+      "Step7": "診断metaにlimited repair適用状態を出す",
+      "Step8": "テストを通す"
     }
   }
 }

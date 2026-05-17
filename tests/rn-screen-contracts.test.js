@@ -48,6 +48,22 @@ function loadInputFeedbackModelForContractTest() {
   `)();
 }
 
+function loadInputFeedbackObservationDiagnosticsForContractTest() {
+  const source = read('screens/input/inputFeedbackObservationDiagnostics.js')
+    .replace(/export\s+const\s+([A-Za-z0-9_]+)/g, 'const $1')
+    .replace(/export\s+function\s+([A-Za-z0-9_]+)/g, 'function $1');
+
+  return Function('process', `
+    ${source}
+    return {
+      buildEmlisObservationFrontendDiagnostic,
+      dumpEmlisObservationFrontendDiagnostic,
+      isEmlisObservationFrontendDiagnosticLogEnabled,
+      logEmlisObservationFrontendDiagnostic,
+    };
+  `)(process);
+}
+
 test('App root wires providers through Phase 9 navigation/runtime split modules', () => {
   const app = read('App.js');
   const navRef = read('navigation/navigationRef.js');
@@ -599,6 +615,186 @@ test('Step 08 Complete Composer initial RN contract regression keeps Complete me
   assert.equal(getEmlisObservationCommentText(passedBlankPublicTextPayload), '');
   assert.equal(isPassedEmlisObservationReply(passedBlankPublicTextPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(passedBlankPublicTextPayload), null);
+});
+
+
+test('Observation Diagnostic Lockdown Step 6 RN frontend diagnostics keep debug logging opt-in, text-free, and no forced passed', () => {
+  const input = read('screens/InputScreen.js');
+  const diagnostics = read('screens/input/inputFeedbackObservationDiagnostics.js');
+
+  assertIncludes(input, [
+    'import { logEmlisObservationFrontendDiagnostic } from "./input/inputFeedbackObservationDiagnostics";',
+    'logEmlisObservationFrontendDiagnostic({',
+    'submitResult,',
+    'inputFeedbackText,',
+    'inputFeedbackAI,',
+    'openedObservation,',
+  ], 'InputScreen.js Step 6 frontend diagnostic connection');
+
+  assertIncludes(diagnostics, [
+    'FRONTEND_OBSERVATION_DIAGNOSTIC_LOG_PREFIX = "emlis_observation_frontend_result"',
+    'EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG',
+    'EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG',
+    'export function buildEmlisObservationFrontendDiagnostic',
+    'export function dumpEmlisObservationFrontendDiagnostic',
+    'export function logEmlisObservationFrontendDiagnostic',
+    'return normalizeString(meta?.observation_status || meta?.observationStatus || "");',
+    'comment_text_length: textLength',
+    'comment_text_present: textLength > 0',
+    'modal_opened: normalizeBoolean(openedObservation)',
+    'raw_input_included: false',
+    'comment_text_included: false',
+  ], 'inputFeedbackObservationDiagnostics.js Step 6 helper contract');
+
+  assertNotIncludes(input + diagnostics, [
+    'observationStatus: inputFeedbackAI?.observation_status || "passed"',
+    'observation_status: "passed"',
+    'observationStatus: "passed"',
+    'diagnostic?.observation_status',
+    'diagnostic?.observationStatus',
+    '|| "passed"',
+    "|| 'passed'",
+  ], 'Step 6 RN diagnostics must not force public observation status to passed');
+
+  const {
+    buildEmlisObservationFrontendDiagnostic,
+    dumpEmlisObservationFrontendDiagnostic,
+    isEmlisObservationFrontendDiagnosticLogEnabled,
+    logEmlisObservationFrontendDiagnostic,
+  } = loadInputFeedbackObservationDiagnosticsForContractTest();
+
+  const previousEnvA = process.env.EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG;
+  const previousEnvB = process.env.EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG;
+  try {
+    delete process.env.EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG;
+    delete process.env.EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG;
+    assert.equal(isEmlisObservationFrontendDiagnosticLogEnabled(), false);
+    assert.equal(logEmlisObservationFrontendDiagnostic({}, { info() { throw new Error('disabled log must not emit'); } }), null);
+
+    const rejectedRecord = buildEmlisObservationFrontendDiagnostic({
+      submitResult: {
+        id: 'emotion-log-1',
+        input_feedback: {
+          comment_text: 'public text is deliberately not read from submitResult',
+          emlis_ai: {
+            observation_status: 'rejected',
+            observation_trace_id: 'emlisobs-rejected',
+            diagnostic_summary: { observation_status: 'passed', trace_id: 'diagnostic-must-not-override-public' },
+          },
+        },
+      },
+      inputFeedbackText: '表示対象外でも長さだけを記録する。',
+      openedObservation: false,
+    });
+    assert.deepEqual(rejectedRecord, {
+      version: 'emlis.frontend_observation_diagnostic.v1',
+      source: 'rn_input_screen',
+      emotion_log_id: 'emotion-log-1',
+      trace_id: 'emlisobs-rejected',
+      observation_status: 'rejected',
+      comment_text_length: '表示対象外でも長さだけを記録する。'.length,
+      comment_text_present: true,
+      modal_opened: false,
+      raw_input_included: false,
+      comment_text_included: false,
+    });
+
+    const unavailableRecord = buildEmlisObservationFrontendDiagnostic({
+      submitResult: { emotionLogId: 'emotion-log-2' },
+      inputFeedbackAI: {
+        observation_status: 'unavailable',
+        observation_trace_id: 'emlisobs-unavailable',
+        diagnostic_summary: { observation_status: 'passed' },
+      },
+      inputFeedbackText: '   ',
+      openedObservation: true,
+    });
+    assert.equal(unavailableRecord.observation_status, 'unavailable');
+    assert.equal(unavailableRecord.comment_text_length, 0);
+    assert.equal(unavailableRecord.comment_text_present, false);
+    assert.equal(unavailableRecord.modal_opened, true);
+
+    const metaOnlyDiagnosticStatusRecord = buildEmlisObservationFrontendDiagnostic({
+      submitResult: {
+        emotionLogId: 'emotion-log-meta-only',
+        input_feedback: {
+          emlis_ai: {
+            diagnostic_summary: {
+              observation_status: 'passed',
+              trace_id: 'emlisobs-meta-only-diagnostic',
+            },
+          },
+        },
+      },
+      inputFeedbackText: 'Complete meta 側だけ passed を主張しても RN 診断statusは補正しません。',
+      openedObservation: false,
+    });
+    assert.equal(
+      metaOnlyDiagnosticStatusRecord.observation_status,
+      '',
+      'Complete or diagnostic meta alone must not force RN diagnostic status to passed'
+    );
+    assert.equal(metaOnlyDiagnosticStatusRecord.trace_id, 'emlisobs-meta-only-diagnostic');
+    assert.equal(metaOnlyDiagnosticStatusRecord.modal_opened, false);
+
+    const passedRecord = buildEmlisObservationFrontendDiagnostic({
+      submitResult: { id: 'emotion-log-3' },
+      inputFeedbackAI: {
+        observation_status: 'passed',
+        observation_trace_id: 'emlisobs-passed',
+      },
+      inputFeedbackText: 'Display Gate passed の public comment_text だけが表示対象です。',
+      openedObservation: true,
+    });
+    assert.equal(passedRecord.observation_status, 'passed');
+    assert.equal(passedRecord.comment_text_present, true);
+    assert.equal(passedRecord.modal_opened, true);
+
+    const serialized = dumpEmlisObservationFrontendDiagnostic(passedRecord);
+    assert.equal(serialized.includes('Display Gate passed の public comment_text'), false);
+    assert.equal(JSON.parse(serialized).comment_text_included, false);
+    assert.equal(JSON.parse(serialized).raw_input_included, false);
+
+    assert.throws(
+      () => dumpEmlisObservationFrontendDiagnostic({ ...passedRecord, comment_text: '本文は出さない' }),
+      /must not include record\.comment_text/
+    );
+    assert.throws(
+      () => dumpEmlisObservationFrontendDiagnostic({ nested: { raw_input: '入力本文は出さない' } }),
+      /must not include record\.nested\.raw_input/
+    );
+
+    process.env.EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG = '1';
+    assert.equal(isEmlisObservationFrontendDiagnosticLogEnabled(), true);
+    const emitted = [];
+    const loggedRecord = logEmlisObservationFrontendDiagnostic({
+      submitResult: { id: 'emotion-log-4' },
+      inputFeedbackAI: { observation_status: 'rejected', observation_trace_id: 'emlisobs-logged' },
+      inputFeedbackText: 'ログへ本文そのものは出しません。',
+      openedObservation: false,
+    }, { info(message) { emitted.push(message); } });
+    assert.equal(loggedRecord.observation_status, 'rejected');
+    assert.equal(emitted.length, 1);
+    assert.ok(emitted[0].startsWith('emlis_observation_frontend_result {'));
+    assert.equal(emitted[0].includes('ログへ本文そのものは出しません。'), false);
+    const emittedJson = JSON.parse(emitted[0].replace('emlis_observation_frontend_result ', ''));
+    assert.equal(emittedJson.trace_id, 'emlisobs-logged');
+    assert.equal(emittedJson.comment_text_present, true);
+    assert.equal(emittedJson.modal_opened, false);
+    assert.equal(emittedJson.raw_input_included, false);
+    assert.equal(emittedJson.comment_text_included, false);
+  } finally {
+    if (previousEnvA === undefined) {
+      delete process.env.EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG;
+    } else {
+      process.env.EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG = previousEnvA;
+    }
+    if (previousEnvB === undefined) {
+      delete process.env.EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG;
+    } else {
+      process.env.EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG = previousEnvB;
+    }
+  }
 });
 
 test('Home hooks preserve startup popup priority, today question, and Piece quota screen state', () => {

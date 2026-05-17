@@ -7,18 +7,18 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(92).zip"
-  Cocolon: "Cocolon_9(8).zip"
-  mashos-api: "mashos-api_9(8).zip"
+  premise: "Cocolon_前提資料(96).zip"
+  Cocolon: "Cocolon_9(10).zip"
+  mashos-api: "mashos-api_9(10).zip"
 file_counts:
-  Cocolon: 216
-  mashos-api: 514
-  total: 730
+  Cocolon: 217
+  mashos-api: 535
+  total: 752
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 730
-  included_in_overall_structure: 730
-  included_in_national_system: 730
+  total_files: 752
+  included_in_overall_structure: 752
+  included_in_national_system: 752
   excluded_from_main_body: 0
 ---
 
@@ -53,13 +53,13 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_9(8).zip` | 216 | RNアプリ本体。Step7で一時確認用の `Emlis observation debug` console log は残っておらず、Complete / ProductQuality / relation diagnostic metaだけでは `Emlisの観測` を表示しないRN passed-only contractを保持する。 |
-| `mashos-api_9(8).zip` | 514 | backend / API / worker / tests。完全Composer初期版 E2E表示開通 Step0-9、商品品質版接続 Step0-7に加え、`positive_recovery relation_not_expressed` 修正 Step0-7（relation surface contract / Reader検出 / Self-Repair marker / Surface整合 / diagnostic / E2E / log cleanup）を含む。 |
-| total | 730 | 前提資料の構造coverage対象 |
+| `Cocolon_9(10).zip` | 217 | RNアプリ本体。今回の Reader Relation Surface 修正では追加変更なし。`inputFeedbackObservationDiagnostics.js` と `InputScreen.js` による opt-in RN診断と、`Emlisの観測` のRN passed-only contractを保持する。 |
+| `mashos-api_9(10).zip` | 535 | backend / API / worker / tests。Observation Diagnostic Lockdownで確定した `candidate_generated_but_reader_rejected` に対し、Reader Relation Surface Step0-8（宛名契約、expected_relation_types、limited/A1 previous rejection repair、core hook、diagnostic meta、tests）を追加した。 |
+| total | 752 | 前提資料の構造coverage対象 |
 
-`Cocolon_9(8).zip` / `mashos-api_9(8).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、`positive_recovery` で `stage=reader` / `primary_reason=relation_not_expressed` となった非表示ケースに対して、Reader / Surface / Self-Repair が共有する `emlis.relation_surface_contract.v1` が追加されています。`input_feedback.comment_text` は引き続き public `observation_status=passed` かつ本文ありの場合だけ表示されます。
+`Cocolon_9(10).zip` / `mashos-api_9(10).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、Observation Diagnostic Lockdownで確定した Reader rejected 原因を backend 内部で修正する Reader Relation Surface Step0-8 が追加されています。`input_feedback.comment_text` は引き続き public `observation_status=passed` かつ本文ありの場合だけ表示されます。
 
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は完全Composer初期版のE2E基礎、商品品質版接続 Step0-7は Product Gate 判断材料へ接続する meta / contract / QA 層、positive_recovery relation_not_expressed Step0-7は特定coverageのReader relation表現整合修正であり、いずれも完全Composer商品品質版のrelease適用そのものではない。
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は完全Composer初期版のE2E基礎、商品品質版接続 Step0-7は Product Gate 判断材料へ接続する meta / contract / QA 層、positive_recovery relation_not_expressed Step0-7は特定coverageのReader relation表現整合修正、Observation Diagnostic Lockdown Step0-8は非表示原因をsubmit単位で分類して次修正層を固定する診断工程、Reader Relation Surface Step0-8は分類済みの Reader rejected 原因を Reader / limited A1 repair / diagnostic meta で潰す backend 修正であり、いずれも完全Composer商品品質版のrelease適用そのものではない。
 
 わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
@@ -456,3 +456,49 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 - Readerの `relation_not_expressed` を削除して表示率を上げない。
 - Self-Repairで入力にない prior load / cause / diagnosis を足さない。
 - 通知400（`__global_emotion_notifications__` のUUID syntax error）は今回のEmlis relation修正とは別件として扱う。
+
+
+# 2026-05-17 差分追記: EmlisAI Observation Diagnostic Lockdown Step0-8 current boundary
+
+この差分は、`Cocolon_9(9).zip` / `mashos-api_9(9).zip` を最新実ファイルとして確認した結果を、前提資料へ追記するものです。目的は、`/emotion/submit` が200でも `Emlisの観測` が出ないケースについて、raw inputやpublic `comment_text` 本文を出さずに、backend / RN のどの層で落ちたかをsubmit単位で確定することです。
+
+| Step | current owner | 読み方 |
+|---|---|---|
+| Step1 backend helper | `emlis_ai_observation_diagnostic_lockdown.py` | 既存 `input_feedback_meta` / `diagnostic_summary` / complete meta を正規化し、`classification` を返すmeta-only helper。 |
+| Step2 submit接続 | `emotion_submit_service.py` | `input_feedback_comment` / `input_feedback_meta` 確定後に、opt-in時だけ `emlis_observation_diagnostic_lockdown {json}` を1本出す。success / exception 両方で扱う。 |
+| Step3 reply meta補強 | `emlis_ai_reply_service.py`, `emlis_ai_complete_reply_diagnostics_service.py` | `candidate_generated_before_display_gate`、gate extractability、repair extractability をadditiveに残す。public response shapeは変えない。 |
+| Step4 RN診断 | `Cocolon/screens/input/inputFeedbackObservationDiagnostics.js`, `Cocolon/screens/InputScreen.js` | `openInputFeedbackModal` の戻り値確定後に、opt-in時だけ `emlis_observation_frontend_result {json}` を出す。 |
+| Step5 backend tests | `test_emlis_ai_observation_diagnostic_backend_step5.py` ほか | helper分類、log出力、fail-closed、no raw input、Display contractを固定する。 |
+| Step6 RN tests | `Cocolon/tests/rn-screen-contracts.test.js` | RN診断helperがpublic statusを強制 `passed` にしないこと、本文を出さないことを固定する。 |
+| Step7 11:35/11:36比較 | `emlis_ai_observation_diagnostic_compare.py`, `tools/emlis_observation_compare_1135_1136.py` | backend/RN診断行を `trace_id` / `emotion_log_id` でjoinし、最初の差分層を出す。 |
+| Step8 分岐固定 | `emlis_ai_observation_diagnostic_branching.py`, `tools/emlis_observation_route_next_step.py` | `pre_connection / candidate / reader / grounding / template / display / frontend / scorecard / diagnostic` の分岐表に従い、次に触る層を1系統に固定する。 |
+
+ログprefixとenv:
+- backend: `EMLIS_AI_OBSERVATION_DIAGNOSTIC_LOCKDOWN_LOG_ENABLED` または `COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOCKDOWN_LOG_ENABLED` が有効な時だけ、`emlis_observation_diagnostic_lockdown` を出す。
+- RN: `EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG` または `EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG` が有効な時だけ、`emlis_observation_frontend_result` を出す。
+
+守る境界:
+- `input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけ表示する。
+- raw input、memo、current_input、public `comment_text` 本文を診断log / compare / branchへ入れない。
+- backendだけ、RNだけで結論を出さない。`trace_id` / `emotion_log_id` でjoinする。
+- classificationが `unclassified_non_display` / `unknown_diagnostic_missing` の場合は原因修正へ進まず、diagnostic enrichmentへ戻す。
+- Gate緩和、固定文fallback、外部AI / local LLM、DB/API/RN契約renameは追加しない。
+
+確認済み:
+- backend diagnostic Step1-8対象: `47 passed, 1 warning`
+- RN screen contract: `22 passed`
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface Step0-8 current boundary
+
+この差分は、`Cocolon_前提資料(96).zip` と最新実ファイル `Cocolon_9(10).zip` / `mashos-api_9(10).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `535`、合計 `752` として読む。今回の修正対象は backend の EmlisAI Reader / relation surface / limited A1 repair であり、RN表示条件・DB physical name・public routeは変更しません。
+
+| 層 | owner | current boundary |
+|---|---|---|
+| Reader宛名契約 | `emlis_ai_listener_reader_judge.py` | `さん` 固定ではなく `さん/様/くん/君/ちゃん/氏` を greeting policy と同じ範囲で許容する。敬称なしを広く通す緩和ではない。 |
+| Reader relation期待型 | `emlis_ai_reply_service.py` | `composer_meta` / `sentence_bindings` から surface relation type を抽出し、edge id を除外して Reader へ渡す。 |
+| limited/A1 repair | `emlis_ai_limited_composer_client.py` | `previous_rejection_reasons` が `addressee_not_clear` / `relation_not_expressed` の場合だけ、宛名行・relation marker を最小repairする。 |
+| core hook | `emlis_ai_limited_composer_client.py` | repair後も `_core_checked_response` の core evaluation / Gate を必ず通す。通らなければ表示しない。 |
+| 診断meta | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_observation_diagnostic_lockdown.py`, `emlis_ai_reply_service.py` | `limited_reader_repair_attempted/applied`、marker key、relation type を本文なしで出す。 |
+| Step8 test support | `tests/conftest.py`, Reader repair系test群 | EmlisAI関連全体 `531 passed, 1 warning` の実装確認結果を現状構造として読む。 |
+
+禁止: Gate緩和、固定fallback文、外部AI/local LLM、raw入力本文の診断log混入、DB/API/RN契約rename、RN modal表示条件変更。

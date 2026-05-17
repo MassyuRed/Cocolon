@@ -2586,3 +2586,38 @@ RN側は `Cocolon/tests/rn-screen-contracts.test.js` の passed-only regression 
 | `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | recovery relation line を relation surface contract と整合させ、surface_signature / grounding inputにcontract metaを残す。 |
 | `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | Reader signal / Self-Repair markerをdiagnostic_summaryにadditive接続する。 |
 | `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | positive_recovery fixtureで、Reader relation_not_expressed が今回ケースで消えることを固定するE2E regression。 |
+
+
+# 2026-05-17 差分追記: Input / EmlisAI Observation Diagnostic Lockdown frontend boundary
+
+`Cocolon_9(9).zip` / `mashos-api_9(9).zip` では、Input直後の `Emlisの観測` について、RN表示条件を変えずに frontend 側の診断行を追加しています。これは `Emlisの観測` を強制表示する変更ではなく、backend が `passed + comment_text` を返したか、RNがそれを受けてmodalを開いたかを `trace_id` で照合するための診断です。
+
+| owner | 読み方 |
+|---|---|
+| `Cocolon/screens/input/inputFeedbackObservationDiagnostics.js` | `buildEmlisObservationFrontendDiagnostic()` / `dumpEmlisObservationFrontendDiagnostic()` / `logEmlisObservationFrontendDiagnostic()` を持つ。`trace_id`、`observation_status`、`comment_text_length`、`modal_opened` だけを扱う。 |
+| `Cocolon/screens/InputScreen.js` | submit後、`openInputFeedbackModal(...)` の結果が確定した直後に `logEmlisObservationFrontendDiagnostic(...)` を呼ぶ。modal表示条件は既存の `inputFeedbackText` と public statusのまま。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RN診断helperがenv opt-in、text-free、no forced passedであることを固定する。 |
+
+RN側env:
+- `EXPO_PUBLIC_EMLIS_OBSERVATION_DIAGNOSTIC_LOG`
+- `EXPO_PUBLIC_COCOLON_EMLIS_OBSERVATION_DIAGNOSTIC_LOG`
+
+守る境界:
+- `diagnostic_summary` や Complete meta が `passed` 相当でも、public `input_feedback.emlis_ai.observation_status` が `passed` でなければRNは表示しない。
+- `comment_text` 本文はfrontend diagnosticへ出さない。`comment_text_length` / `comment_text_present` だけを見る。
+- `Emlisの観測` のvisible名、modal title、public response keyは変更しない。
+
+# 2026-05-17 差分追記: Input / EmlisAI Reader Relation Surface Step0-8 runtime map
+
+`Cocolon_9(10).zip` / `mashos-api_9(10).zip` では、Cocolon RN側に今回の追加変更はありません。backend側で、Observation Diagnostic Lockdownの classification `candidate_generated_but_reader_rejected` に対して Reader Relation Surface Step0-8 が実装されています。Home/Input直後の runtime mapでは、`openInputFeedbackModal` ではなく、`render_emlis_ai_reply()` 内部の Reader / limited A1 repair 層として読む。
+
+| owner | アプリ基盤 / Home系での読み方 |
+|---|---|
+| `emlis_ai_listener_reader_judge.py` | `Emlisです。` と敬称つき宛名をReader contractとして認識する。 |
+| `emlis_ai_reply_service.py` | relation type抽出、Reader呼び出し、retry reason allowlist、limited repair diagnostic接続を担う。 |
+| `emlis_ai_limited_composer_client.py` | limited/A1候補に対し、previous Reader rejection reasonがある場合だけrepair adapterを通す。 |
+| `emlis_ai_complete_reply_diagnostics_service.py` | limited repair状態を diagnostic_summary / phase_gate metaへ接続する。 |
+| `emlis_ai_observation_diagnostic_lockdown.py` | backend一行診断へ limited repair状態を載せる。 |
+| `emlis_ai_complete_composer_client.py` | Complete self-repairへ渡す理由を既存の修復可能理由に限定する。 |
+
+RN側は引き続き `input_feedback.comment_text` と public `observation_status` だけで `Emlisの観測` を表示する。limited repair metaやdiagnostic metaだけではmodalを開かない。

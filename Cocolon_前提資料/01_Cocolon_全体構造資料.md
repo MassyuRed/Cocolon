@@ -7,17 +7,17 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(92).zip"
-  Cocolon: "Cocolon_9(8).zip"
-  mashos-api: "mashos-api_9(8).zip"
+  premise: "Cocolon_前提資料(96).zip"
+  Cocolon: "Cocolon_9(10).zip"
+  mashos-api: "mashos-api_9(10).zip"
 file_counts:
-  Cocolon: 216
-  mashos-api: 514
+  Cocolon: 217
+  mashos-api: 535
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 730
-  included_files_cocolon: 216
-  included_files_mashos_api: 514
+  included_files_total: 752
+  included_files_cocolon: 217
+  included_files_mashos_api: 535
 ---
 
 # 1. 1行定義
@@ -50,6 +50,8 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 - `CocolonTextGenerationCore` は三大中核の共通文章品質・根拠・安全基盤であり、出力目的・表示名・公開契約は中核別Composerが保持する
 - EmlisAIの完全Composer初期版 Commit1-13 は、限定Composer拡張を土台に、Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / CompleteComposerClient / Reply diagnostics / Scorecard / RN contract regression をadditive metaとして保持する
 - positive_recovery relation_not_expressed 修正 Step0-7 は、Reader / Surface / Self-Repair の relation surface contract を揃え、recovery 系relation cueを正しく検出・修復するための内部Composer修正として読む。RN表示契約・public response key・DB physical nameは変えない
+- Observation Diagnostic Lockdown Step0-8 は、Emlisの観測の非表示submitを本文なしで `backend -> RN -> compare -> branch` の順に分類する診断層。表示率を上げる修正ではなく、次に触る層を固定するためのmeta-only工程として読む
+- Reader Relation Surface Step0-8 は、診断で確定した `candidate_generated_but_reader_rejected` を backend の Reader / relation surface / limited A1 repair で扱う。RN表示条件、public response key、DB physical nameは変えない
 
 # 4-2. 2026-04-30 current app runtime map
 
@@ -1417,3 +1419,53 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 - Surface / Self-Repair は入力にないprior load、原因、診断、人格を追加しない。
 - Cocolon RNは変更せず、public passed + comment_text のみを表示条件とする。
 
+
+
+# 2026-05-17 差分追記: EmlisAI Observation Diagnostic Lockdown Step0-8 overall structure
+
+最新実ファイル `Cocolon_9(9).zip` / `mashos-api_9(9).zip` では、Cocolon RN側の表示契約を変えずに、`Emlisの観測` が出なかったsubmitを本文なしで分類する診断ハーネスが追加されています。これは文章生成修正ではなく、`candidate前 / candidate後Reader / Grounding / Template / Display / RN` のどの層で落ちたかを確定するための構造です。
+
+## 追加・変更された構造owner
+
+| repo | owner | 構造上の読み方 |
+|---|---|---|
+| Cocolon | `screens/input/inputFeedbackObservationDiagnostics.js` | RN frontend診断helper。public statusとtext length、modal_openedだけを出す。本文は出さない。 |
+| Cocolon | `screens/InputScreen.js` | `openInputFeedbackModal` 後にRN診断をopt-in出力する接続owner。表示条件は変更しない。 |
+| Cocolon | `tests/rn-screen-contracts.test.js` | 診断helper、no forced passed、passed-only modal契約を固定する。 |
+| mashos-api | `emlis_ai_observation_diagnostic_lockdown.py` | backend診断schema / classificationの正規化owner。 |
+| mashos-api | `emotion_submit_service.py` | submit単位のbackend一行診断log接続owner。success / exception両方でfail-closedを維持する。 |
+| mashos-api | `emlis_ai_reply_service.py` | reply metaへ candidate / gate / repair 抽出可能性をadditive接続するowner。 |
+| mashos-api | `emlis_ai_observation_diagnostic_compare.py` | backend/RN診断行をjoinし、11:35/11:36比較rowとfirst divergenceを出すowner。 |
+| mashos-api | `emlis_ai_observation_diagnostic_branching.py` | classificationから次の作業層を固定し、原因未分類のまま修正することを止めるowner。 |
+| mashos-api | `tools/emlis_observation_compare_1135_1136.py` / `tools/emlis_observation_route_next_step.py` | local logから比較・分岐を出す手動確認tool。 |
+
+## 全体flow補正
+
+```text
+/emotion/submit
+ -> emotion_submit_service
+ -> render_emlis_ai_reply
+ -> diagnostic_summary / complete meta / gate_results / repair_trace
+ -> emlis_observation_diagnostic_lockdown backend row
+ -> RN inputFeedbackObservationDiagnostics frontend row
+ -> emlis_ai_observation_diagnostic_compare join
+ -> emlis_ai_observation_diagnostic_branching next branch
+ -> classification別に1層だけ修正対象を決める
+```
+
+この工程で追加されたclassificationは、表示結果そのものではなく修正対象層を決めるための内部診断です。`passed_displayed` は非表示修正対象ではなくscorecard候補、`unclassified_non_display` / `unknown_diagnostic_missing` は原因修正前のdiagnostic enrichment対象として読む。
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface Step0-8 current owner
+
+`Cocolon_9(10).zip` / `mashos-api_9(10).zip` では、Observation Diagnostic Lockdown の実ログ分類 `candidate_generated_but_reader_rejected` を受けて、EmlisAI backend の Reader Relation Surface Step0-8 が入っています。全体構造上は、Input直後の immediate reply pipeline のうち `Composer -> Reader -> Grounding -> Template -> Display Gate` の Reader整合層です。RN surface、public route、DB write path、response key は変更しません。
+
+| owner | 変更の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | Reader宛名判定を greeting policy と一致させ、`様` 等の敬称つき表示名を `addressee_not_clear` にしない。relation判定は過緩和しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Readerへ `expected_relation_types` を渡す。retry reasonはcomposerが消費できる理由に限定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | limited/A1が `previous_rejection_reasons` を読み、宛名repairとrelation surface markerを最小適用する。repair後もcore evaluationを通す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | `limited_reader_repair` の attempted/applied/marker meta を診断へ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py` | backend診断payloadへ limited repair状態を追加する。本文・raw inputは出さない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | Complete self-repairへ渡す理由を `ALLOWED_REPAIR_REASONS` に限定し、Reader-only理由でComplete候補生成が誤って潰れないようにする。 |
+
+この差分は「診断を追加する工程」ではなく、診断で確定した Reader rejected 原因への backend 実修正として読む。表示到達は引き続き public `observation_status=passed` + `comment_text` 非空のときだけです。

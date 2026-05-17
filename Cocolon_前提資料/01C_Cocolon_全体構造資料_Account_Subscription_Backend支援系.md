@@ -4245,3 +4245,63 @@ positive_recovery relation_not_expressed 修正では、backend support / regres
 | `mashos-api/ai/tests/test_emlis_ai_step7_log_cleanup.py` | 一時ログ整理。debug flag default off、raw input / comment_text本文非混入。 |
 
 このsupport層はEmlisAI専用です。DB physical name、public API route、subscription entitlement、account delete対象は変更しません。
+
+
+# 2026-05-17 差分追記: EmlisAI Observation Diagnostic Lockdown backend support / test map
+
+Observation Diagnostic Lockdown Step0-8 では、backend support / regressionとして次のservice / tool / testを追加して読む。Account / Subscription / ProfileCreate の契約変更ではなく、Input直後 `Emlisの観測` の非表示原因を分類するための診断supportです。
+
+## backend service / tool
+
+| owner | 役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py` | submit単位のbackend診断schema、reason正規化、classification、JSON dump。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py` | backend/RN診断log parser、join、row化、first divergence算出。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_branching.py` | classification別の次工程branch plan。`ready_for_cause_repair` / `requires_diagnostic_enrichment` / `do_not_touch` を固定する。 |
+| `mashos-api/ai/tools/emlis_observation_compare_1135_1136.py` | local logから11:35/11:36比較表を出すCLI。 |
+| `mashos-api/ai/tools/emlis_observation_route_next_step.py` | comparisonまたはlogから分類別branchを出すCLI。 |
+
+## regression / contract test
+
+| test | 固定すること |
+|---|---|
+| `test_emlis_ai_observation_diagnostic_lockdown.py` | helper schema、全classification、no raw input / no comment_text。 |
+| `test_emotion_submit_observation_diagnostic_log.py` | submit success / exception pathの一行診断、env opt-in、本文非混入。 |
+| `test_emlis_ai_observation_diagnostic_reply_meta.py` | reply metaからcandidate / gate / repairを抽出できること。 |
+| `test_emlis_ai_observation_diagnostic_backend_step5.py` | backend schema、fail-closed、dict reasonのsafe extraction、Display contract。 |
+| `test_emlis_ai_observation_diagnostic_compare_step7.py` | backend/RN log parse、join、comparison、first divergence、meta-only。 |
+| `test_emlis_ai_observation_diagnostic_branching_step8.py` | classification別branch、touch/do_not_touch、repair_allowed、diagnostic enrichment分岐。 |
+
+確認済み: backend diagnostic Step1-8対象は `47 passed, 1 warning`。既存warningはPydantic deprecationであり、この差分の失敗条件ではない。
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface backend support / test map
+
+Reader Relation Surface Step0-8 では、backend support / regressionとして次のservice / testを追加・変更して読む。これはAccount / Subscription / ProfileCreate の契約変更ではなく、Input直後 `Emlisの観測` の Reader rejected 原因を backend 内部で潰すためのsupport層です。
+
+## backend service owner
+
+| path | 役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | 宛名敬称contractとrelation surface expected type判定。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | expected_relation_types抽出、Reader呼び出し、retry reason allowlist、limited repair診断meta接続。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | previous rejection reason読解、宛名repair、relation marker repair、core hook。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | limited repair diagnosticをsafe metaへ整形する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py` | backend診断payloadへ limited repair状態を追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | Complete self-repairへ渡すreasonを修復可能reasonに限定する。 |
+
+## test / support file
+
+| path | 固定すること |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_addressee_contract.py` | `様` 等のvalid greetingを通し、敬称なし任意宛名を広く通さない。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_repair.py` | limited/A1 relation repairの基本契約。 |
+| `mashos-api/ai/tests/test_emlis_ai_a1_reader_relation_repair_e2e.py` | A1 equivalentがlimited reader repairを継承すること。 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_service_expected_relation_types.py` | Readerへsurface relation typeだけを渡し、edge idを除外すること。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_previous_rejection_reasons.py` | limited payloadの previous rejection reason 読解。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_previous_rejection_reasons.py` | reader由来reasonのみrepair対象にすること。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_addressee_repair.py` | 宛名repairの最小適用と意味追加禁止。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_repair_core_hook.py` | repair後もcore evaluation前段で接続され、fail-closedを維持すること。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_repair_diagnostics.py` | limited repair状態を本文なしでdiagnosticへ出すこと。 |
+| `mashos-api/ai/tests/conftest.py` | EmlisAI関連testをlocal pytestで通すためのtest support。 |
+
+確認済み基準として、Step8時点で `tests/test_emlis_ai_*.py` は `531 passed, 1 warning`。RN、DB、API route、Display Gate、Grounding、Template Guardはこの差分の変更対象ではありません。

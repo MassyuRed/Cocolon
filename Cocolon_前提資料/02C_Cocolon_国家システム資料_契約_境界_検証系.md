@@ -2510,3 +2510,51 @@ positive_recovery relation_not_expressed 修正で守るcontractは次の通り�
 - recovery markerで入力にない原因・診断・prior loadを発明する。
 - 通知400を同じ修正軸に混ぜる。
 
+
+
+# 2026-05-17 差分追記: Observation Diagnostic Lockdown contract / verification boundary
+
+Observation Diagnostic Lockdown Step0-8 で守るcontractは次の通りです。
+
+| contract | 固定内容 |
+|---|---|
+| passed-only表示 | `input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけRNで表示する。diagnostic metaだけでは表示しない。 |
+| backend one-line diagnostic | submit 1回につき、env opt-in時だけ `emlis_observation_diagnostic_lockdown` を1本出す。success / exception両方を扱う。 |
+| RN one-line diagnostic | env opt-in時だけ `emlis_observation_frontend_result` を1本出す。public statusをdiagnostic metaから強制 `passed` に補正しない。 |
+| no raw text | raw input / memo / current_input / public comment_text / preview textを診断log・compare・branchへ入れない。 |
+| compare | backend/RNを `trace_id` / `emotion_log_id` でjoinし、first divergenceを出す。backendだけ、RNだけで結論を出さない。 |
+| branching | classification別に次に触る層を固定する。`unclassified_non_display` / `unknown_diagnostic_missing` は原因修正禁止。 |
+
+必須regression:
+- `test_emlis_ai_observation_diagnostic_lockdown.py`
+- `test_emotion_submit_observation_diagnostic_log.py`
+- `test_emlis_ai_observation_diagnostic_reply_meta.py`
+- `test_emlis_ai_observation_diagnostic_backend_step5.py`
+- `test_emlis_ai_observation_diagnostic_compare_step7.py`
+- `test_emlis_ai_observation_diagnostic_branching_step8.py`
+- `Cocolon/tests/rn-screen-contracts.test.js`
+
+確認済み:
+- backend diagnostic Step1-8対象: `47 passed, 1 warning`
+- RN contract: `22 passed`
+
+禁止:
+- diagnostic分類前にSelfRepair / Surface Realizer / Tone Engineへ進む。
+- Display Gate / Grounding / Readerを緩める。
+- fixed observation sentence / input-specific template を追加する。
+- DB/API/RN visible titleをrenameする。
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface contract / verification boundary
+
+Reader Relation Surface Step0-8 は、Observation Diagnostic Lockdownで確定した `candidate_generated_but_reader_rejected` への backend 修正です。検証系では、表示条件やGateを緩めたかではなく、Reader契約とlimited/A1 repairが fail-closed のまま接続されているかを確認します。
+
+| 契約 | 確認すること |
+|---|---|
+| 宛名契約 | greeting生成側が許容する `さん/様/くん/君/ちゃん/氏` をReaderも許容する。敬称なしの任意名前は広く通さない。 |
+| relation契約 | Readerへ渡すのは surface relation type。graph edge id、runtime branch id、`conflict.e1` などは expected relation として渡さない。 |
+| repair契約 | limited/A1 repairは `addressee_not_clear` / `relation_not_expressed` だけを対象にする。Complete self-repairとは混ぜない。 |
+| core / Gate契約 | repair後も core evaluation、Reader、Grounding、Template、Display Gate を通す。落ちた場合は従来通り `unavailable` / non-passed。 |
+| diagnostic契約 | `limited_reader_repair` のattempted/applied/operations/marker key/relation typeだけを出す。raw input、memo、current_input、comment_text本文は出さない。 |
+| test契約 | Reader repair直結・strict relation・product-quality・diagnostic系を通す。実装確認では EmlisAI関連 `531 passed, 1 warning` が現状基準。 |
+
+非対象: RN表示条件、modal起動条件、response key、API route、DB physical name、Display Gate / Grounding / Template Guard の緩和。

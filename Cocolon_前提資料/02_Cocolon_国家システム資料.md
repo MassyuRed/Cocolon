@@ -7,17 +7,17 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(92).zip"
-  Cocolon: "Cocolon_9(8).zip"
-  mashos-api: "mashos-api_9(8).zip"
+  premise: "Cocolon_前提資料(96).zip"
+  Cocolon: "Cocolon_9(10).zip"
+  mashos-api: "mashos-api_9(10).zip"
 file_counts:
-  Cocolon: 216
-  mashos-api: 514
+  Cocolon: 217
+  mashos-api: 535
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 730
-  included_files_cocolon: 216
-  included_files_mashos_api: 514
+  included_files_total: 752
+  included_files_cocolon: 217
+  included_files_mashos_api: 535
 ---
 
 # 1. 1行定義
@@ -35,6 +35,8 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 - `access_policy` は read-side visibility / tier 判定の集約点
 - `EmlisAI` は保存直後 immediate reply path を持つ
 - positive_recovery relation_not_expressed 修正は、保存直後replyの内部Gate / diagnostic correctionであり、Input保存API・DB write path・RN表示条件を変えない
+- Observation Diagnostic Lockdown Step0-8 は、保存成功後の immediate reply 非表示を backend/RN診断行で分類する。Input保存API・DB write path・RN表示契約は変えず、原因確定前の文章修正を止める
+- Reader Relation Surface Step0-8 は、分類済みの Reader rejected 原因を backend のReader / limited A1 repairで扱う。Input保存API・DB write path・RN表示契約は変えない
 - 2026-04-22 反映で、三大要素の中核 owner は comment / analysis / piece ごとに 1 本流へ固定した
 
 # 2-2. 2026-04-30 `/app/bootstrap` runtime flow
@@ -1079,3 +1081,17 @@ Input保存後の `Emlisの観測` では、positive_recovery の非表示原因
 | log cleanup | `emotion_submit_service.py` / `Cocolon/screens/InputScreen.js` | 一時debug logをenv flag配下または削除へ整理し、通常ログにraw inputやpublic comment_text本文を出さない。 |
 
 禁止: Reader Gateを削除する、rejectedをRN表示する、固定文fallbackを入れる、通知400修正と同じ作業に混ぜる。
+
+# 2026-05-17 差分追記: Input / immediate reply Reader Relation Surface Step0-8
+
+Input保存後の `Emlisの観測` では、Observation Diagnostic Lockdownで `candidate_generated_but_reader_rejected` が確認された後、backend側に Reader Relation Surface Step0-8 が追加されています。国家システム上は、保存API・DB write path・RN表示条件を変えず、`render_emlis_ai_reply -> Reader / Grounding / Template / Display Gate -> RN passed-only display` の内部Reader層だけを契約整合します。
+
+| 段階 | owner | 国家システム上の役割 |
+|---|---|---|
+| Reader宛名契約 | `emlis_ai_listener_reader_judge.py` | user address helperと同じ敬称suffixをReaderが許容する。 |
+| expected relation | `emlis_ai_reply_service.py` | composer metaからsurface relation typeをReaderへ渡す。 |
+| limited/A1 repair | `emlis_ai_limited_composer_client.py` | previous rejection reasonがReader由来の場合だけ、宛名・relation markerを最小repairする。 |
+| core hook | `emlis_ai_limited_composer_client.py` | repair後もcore evaluationと各Gateを通す。通らなければ表示しない。 |
+| diagnostic meta | `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_observation_diagnostic_lockdown.py` | `limited_reader_repair` の状態を本文なしで診断へ出す。 |
+
+禁止: `/emotion/submit` route変更、保存成功response shape変更、DB physical name変更、RN modal条件変更、Reader rejectedをRNで表示すること。

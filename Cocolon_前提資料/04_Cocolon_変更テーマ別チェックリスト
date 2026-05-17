@@ -354,3 +354,56 @@ EmlisAIのbinding contract、coverage、Grounding、Surface variation、Self-Rep
 | RN | `Cocolon/screens/InputScreen.js` / `tests/rn-screen-contracts.test.js` | relation metaでは表示せず、public passed + textだけ表示。 |
 
 このチェックリストでNGが出た場合、Gateを緩めず、relation surface contract / Surface / Self-Repair / diagnostic の整合へ戻す。
+
+
+# 2026-05-17 差分追記: EmlisAI Observation Diagnostic Lockdown チェックリスト
+
+## 対象になる変更
+
+- `/emotion/submit` が成功しているのに `Emlisの観測` が出ない原因を切り分ける。
+- 11:35非表示 / 11:36表示のように、2件を同一schemaで比較する。
+- candidate前、Reader、Grounding、Template、Display、RNのどこで差が出たかを確定する。
+
+## 先に読む資料
+
+1. `00_華恋用_READ_FIRST.md` の Observation Diagnostic Lockdown current boundary。
+2. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` の frontend boundary。
+3. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` の `emotion_submit_service` 接続。
+4. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` の contract / verification boundary。
+5. `05_Cocolon_ルールファイル索引` の rule / test index。
+
+## 必ず確認する実ファイル
+
+| 層 | file |
+|---|---|
+| backend helper | `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py` |
+| submit接続 | `mashos-api/ai/services/ai_inference/emotion_submit_service.py` |
+| reply meta | `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` / `emlis_ai_complete_reply_diagnostics_service.py` |
+| compare | `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py` |
+| branch | `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_branching.py` |
+| RN diagnostic | `Cocolon/screens/input/inputFeedbackObservationDiagnostics.js` / `Cocolon/screens/InputScreen.js` |
+| tests | `test_emlis_ai_observation_diagnostic_*.py`, `test_emotion_submit_observation_diagnostic_log.py`, `rn-screen-contracts.test.js` |
+
+## 禁止
+
+- classification未確定でComposer / Surface / Toneを修正する。
+- Gateを緩める。
+- fixed sentence / input-specific template を足す。
+- raw input / public `comment_text` 本文をlogへ出す。
+- backendだけ、RNだけで原因を断定する。
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface 修正チェックリスト
+
+Observation Diagnostic Lockdownで `candidate_generated_but_reader_rejected` が出た後の修正では、次を確認する。
+
+| 確認対象 | owner | OK条件 |
+|---|---|---|
+| 宛名contract | `emlis_ai_listener_reader_judge.py` | greeting policyと同じ敬称suffixを許容し、敬称なし任意宛名は広く通さない。 |
+| expected relation | `emlis_ai_reply_service.py` | sentence binding / composer metaからsurface relation typeをReaderへ渡す。edge idは除外する。 |
+| limited/A1 previous reason | `emlis_ai_limited_composer_client.py` | `addressee_not_clear` / `relation_not_expressed` だけをlimited repair対象にする。 |
+| addressee repair | `emlis_ai_limited_composer_client.py` | 先頭宛名行だけを置換し、本文意味・根拠を増やさない。 |
+| relation marker repair | `emlis_ai_limited_composer_client.py` / `emlis_ai_relation_surface_contract.py` | 既存contractのmarker phrase/metaを使い、固定fallback文を追加しない。 |
+| core hook | `_core_checked_response` | repair後もcore evaluation / Gateを通す。落ちたらfail-closed。 |
+| diagnostic meta | `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_observation_diagnostic_lockdown.py` | limited repairのattempted/applied/marker情報だけを出し、raw input / comment_text本文は出さない。 |
+
+禁止: RN表示条件変更、Display Gate緩和、Grounding緩和、Template Guard緩和、固定完成文、外部AI/local LLM、DB/API/RN rename。

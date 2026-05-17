@@ -7,9 +7,9 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(92).zip"
-  Cocolon: "Cocolon_9(8).zip"
-  mashos-api: "mashos-api_9(8).zip"
+  premise: "Cocolon_前提資料(96).zip"
+  Cocolon: "Cocolon_9(10).zip"
+  mashos-api: "mashos-api_9(10).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_9(8).zip` | 216 | RNアプリ本体。`Emlis observation debug` の一時console logは残さず、Complete / ProductQuality / relation diagnostic metaだけでは `Emlisの観測` を表示しない契約を保持する。 |
-| `mashos-api_9(8).zip` | 514 | EmlisAI 完全Composer初期版 E2E表示開通 Step0-9、商品品質版接続 Step0-7に加え、positive_recovery relation_not_expressed Step0-7を含む。 |
-| total | 730 | 前提資料coverage対象 |
+| `Cocolon_9(10).zip` | 217 | RNアプリ本体。今回の Reader Relation Surface 修正では追加変更なし。Observation Diagnostic Lockdown のRN診断とpassed-only表示契約は保持する。 |
+| `mashos-api_9(10).zip` | 535 | Observation Diagnostic Lockdownで確定した `candidate_generated_but_reader_rejected` に対する Reader Relation Surface Step0-8 を含む。 |
+| total | 752 | 前提資料coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-16以前の差分追記は履歴として残し、2026-05-17時点の最新正本は末尾の `2026-05-17 差分追記: EmlisAI positive_recovery relation_not_expressed Step0-7 snapshot差分` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-16以前の差分追記とpositive_recovery relation差分は履歴として残し、2026-05-17時点の最新正本は末尾の `2026-05-17 差分追記: EmlisAI Observation Diagnostic Lockdown Step0-8 snapshot差分`、`2026-05-17 差分追記: EmlisAI Reader Relation Surface Step0-8 snapshot差分` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -1320,3 +1320,138 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 - fixed fallback、外部AI / local LLM、DB/API/RN契約renameは追加しない。
 - raw inputはdiagnostic / log / scorecardへ混入させない。
 - 通知400は別件であり、この差分の成否判定には使わない。
+
+
+# 2026-05-17 差分追記: EmlisAI Observation Diagnostic Lockdown Step0-8 snapshot差分
+
+比較対象は、前提資料 `Cocolon_前提資料(94).zip` と最新実ファイル `Cocolon_9(9).zip` / `mashos-api_9(9).zip` です。Cocolon側は file count `217`、mashos-api側は file count `525`、合計 `742` を最新coverage対象として読む。
+
+## Cocolon 追加path
+
+| path | 差分の意味 |
+|---|---|
+| `Cocolon/screens/input/inputFeedbackObservationDiagnostics.js` | RN frontend診断helper。`trace_id` / `observation_status` / `comment_text_length` / `modal_opened` をmeta-onlyで出す。 |
+
+## Cocolon 変更path
+
+| path | 差分の意味 |
+|---|---|
+| `Cocolon/screens/InputScreen.js` | `openInputFeedbackModal` 後に `logEmlisObservationFrontendDiagnostic(...)` を呼ぶ。表示条件は変えない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | Step6 RN tests。診断helper、no raw text、no forced passed、passed-only契約を固定する。 |
+
+## mashos-api 追加path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py` | Step1 backend helper。既存metaを診断schemaへ正規化し、classificationを返す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py` | Step7 compare service。backend/RN診断logをparse / joinし、first divergenceを出す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_branching.py` | Step8 branching service。classificationから次工程のtarget layer / touch_files / do_not_touchを固定する。 |
+| `mashos-api/ai/tools/emlis_observation_compare_1135_1136.py` | 11:35/11:36比較CLI。markdown / json出力。 |
+| `mashos-api/ai/tools/emlis_observation_route_next_step.py` | compare結果またはlogから次工程branchを出すCLI。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_lockdown.py` | helper classification / no raw input test。 |
+| `mashos-api/ai/tests/test_emotion_submit_observation_diagnostic_log.py` | submit one-line diagnostic log test。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_reply_meta.py` | reply meta補強test。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_backend_step5.py` | backend Step5 contract / fail-closed / safe reason extraction test。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_compare_step7.py` | compare Step7 test。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_branching_step8.py` | branching Step8 test。 |
+
+## mashos-api 変更path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | Step2。`input_feedback_comment` / `input_feedback_meta` 確定後にbackend診断行を出す。exception pathもfail-closed metaで診断する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step3。`observation_diagnostic_lockdown_ready`、`candidate_generated_before_display_gate`、gate / repair extractabilityをadditive接続。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | Step3。complete diagnostics側のcandidate / gate / repair metaを診断helperで拾える形に補強。 |
+
+## Step0-8 の読み方
+
+| Step | 読み方 |
+|---|---|
+| Step0 baseline / evidence固定 | コード変更なし。11:35非表示 / 11:36表示はスクショだけでは原因確定できないため、診断schemaで見る対象として固定する。 |
+| Step1 backend helper | `classification` を作るが、Gateや表示条件は変えない。 |
+| Step2 submit接続 | submit 1回につきbackend診断行を1本だけ出す。通常はenv off。 |
+| Step3 reply meta補強 | candidate / gate / repair をraw入力なしで抽出可能にする。public response shapeは変えない。 |
+| Step4 RN frontend診断 | public statusとmodal_openedだけを出す。diagnostic metaでpassed補正しない。 |
+| Step5 backend tests | fail-closed、no raw text、Display contract、classificationを固定する。 |
+| Step6 RN tests | RN診断helperとpassed-only contractを固定する。 |
+| Step7 11:35/11:36比較 | backend/RN診断行をjoinし、最初の差分層を出す。スクショ単体では原因断定しない。 |
+| Step8 分類別次工程へ分岐 | 原因確定前の修正を禁止し、`target_layer` / `do_not_touch` / `repair_allowed` を出す。 |
+
+## 実行確認
+
+| 対象 | 結果 |
+|---|---|
+| backend diagnostic Step1-8対象 | `47 passed, 1 warning` |
+| RN contract | `22 passed` |
+
+## 境界維持
+
+- `input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけ表示する。
+- raw input / memo / current_input / public comment_text本文は診断log・compare・branchに入れない。
+- backendだけ、RNだけで原因を断定しない。`trace_id` / `emotion_log_id` でjoinする。
+- `unclassified_non_display` / `unknown_diagnostic_missing` は原因修正ではなくdiagnostic enrichmentへ戻す。
+- Gate緩和、固定文fallback、外部AI / local LLM、DB/API/RN契約renameは追加しない。
+
+# 2026-05-17 差分追記: EmlisAI Reader Relation Surface Step0-8 snapshot差分
+
+比較対象は、前提資料 `Cocolon_前提資料(96).zip` と最新実ファイル `Cocolon_9(10).zip` / `mashos-api_9(10).zip` です。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `535`、合計 `752` を最新coverage対象として読む。今回の差分は、Observation Diagnostic Lockdownで確定した `candidate_generated_but_reader_rejected` に対する backend 実修正です。
+
+## Cocolon 差分
+
+Cocolon側に今回のsource追加・変更はありません。RN側は既存の `inputFeedbackObservationDiagnostics.js` と `InputScreen.js` のopt-in診断、および public `observation_status=passed` + `comment_text` 非空のみ表示する契約を維持します。
+
+## mashos-api 追加path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_listener_reader_addressee_contract.py` | Step0/1。Reader宛名contractの失敗再現と敬称suffix整合。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_repair.py` | Step0/5。limited reader repairのrelation marker適用。 |
+| `mashos-api/ai/tests/test_emlis_ai_a1_reader_relation_repair_e2e.py` | Step0/5。A1 equivalentがlimited reader repairを通るE2E。 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_service_expected_relation_types.py` | Step2。Readerへ渡すexpected relation typeとedge id除外。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_previous_rejection_reasons.py` | Step3。previous rejection reason読解のunit test。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_previous_rejection_reasons.py` | Step3/5。Reader由来reasonだけをlimited repair対象にする。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_addressee_repair.py` | Step4。宛名repairの最小適用と意味追加禁止。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_repair_core_hook.py` | Step6。repair adapterがcore evaluation前に入ること。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_reader_repair_diagnostics.py` | Step7。limited repair状態が本文なしでdiagnosticへ出ること。 |
+| `mashos-api/ai/tests/conftest.py` | Step8。EmlisAI test群のlocal pytest import support。 |
+
+## mashos-api 変更path
+
+| path | 差分の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py` | Step1。Readerの宛名判定をgreeting policyの敬称suffixと一致させる。relation判定は緩めない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step2/7/8。`expected_relation_types` をReaderへ渡し、limited repair診断metaを接続し、retry reasonをcomposerが消費できる理由に限定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py` | Step3-6/8。previous rejection reason読解、宛名repair、relation marker repair、core hook、source guard regressionを担う。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | Step7。`limited_reader_repair` のattempted/applied/marker metaをsafe diagnosticへ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py` | Step7。backend診断payloadへ limited repair状態を追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | Step8。Complete self-repairへ渡すrejection reasonを `ALLOWED_REPAIR_REASONS` に限定する。 |
+
+## Step0-8 の読み方
+
+| Step | 読み方 |
+|---|---|
+| Step0 失敗再現 | `candidate_generated_but_reader_rejected` をtestで再現し、同じ原因が残らないことを確認する。 |
+| Step1 宛名contract | `様` 等のvalid greetingをReaderが認識する。敬称なし任意名を広く通さない。 |
+| Step2 expected_relation_types | relation surface typeをReaderへ渡し、graph edge idを混ぜない。 |
+| Step3 previous reason | limited/A1が `composition_contract.previous_rejection_reasons` を読めるようにする。 |
+| Step4 addressee repair | `addressee_not_clear` の場合だけ先頭宛名行を最小置換する。 |
+| Step5 relation marker | `relation_not_expressed` の場合だけ既存 relation surface contract のmarkerを使う。 |
+| Step6 core hook | repair後もcore evaluation / Gateを通し、fail-closedを維持する。 |
+| Step7 diagnostic meta | limited repair状態をmeta-onlyでbackend診断へ接続する。 |
+| Step8 tests | 直結テスト、strict relation、product-quality、diagnostic、EmlisAI関連全体を通す。 |
+
+## 実行確認
+
+| 対象 | 結果 |
+|---|---|
+| Step8指定テスト | `43 passed` |
+| Step0-7回帰確認セット | `67 passed` |
+| EmlisAI関連全体 | `531 passed, 1 warning` |
+
+## 境界維持
+
+- RN表示条件、モーダル起動条件、response key、API route、DB physical nameは変更しない。
+- Display Gate / Reader / Grounding / Template Guardを緩めない。Reader契約の不一致を整合するだけ。
+- relation markerは `relation_surface_contract` のphrase/metaを使い、固定fallback文を追加しない。
+- raw input / memo / current_input / public `comment_text` 本文はdiagnostic logへ出さない。
+- backendがpassedなのにRNで表示されない状態が確認された場合だけ、次段でRNを切り分ける。

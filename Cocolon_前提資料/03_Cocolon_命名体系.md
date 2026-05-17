@@ -7,12 +7,12 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(92).zip"
-  Cocolon: "Cocolon_9(8).zip"
-  mashos-api: "mashos-api_9(8).zip"
+  premise: "Cocolon_前提資料(96).zip"
+  Cocolon: "Cocolon_9(10).zip"
+  mashos-api: "mashos-api_9(10).zip"
 file_counts:
-  Cocolon: 216
-  mashos-api: 514
+  Cocolon: 217
+  mashos-api: 535
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -412,5 +412,36 @@ Self Structure / MyProfile 系の visible 名は、ユーザー向けには `わ
 | `reader_relation_signal_*` | diagnostic field | Readerがrelation cueを検出したかを示すmeta。RN表示条件に使わない。 |
 | `self_repair_relation_marker_*` | diagnostic / repair trace field | Self-Repairがdeclared relation markerを付与したかを示すmeta。表示文fallbackではない。 |
 | `positive_recovery` | coverage_group | 商品品質版接続のcoverage分類。入力専用runtime分岐名ではない。 |
+
+visible名は引き続き `Emlisの観測`。`input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は互換維持する。
+
+
+# 2026-05-17 差分追記: Observation Diagnostic Lockdown 名称境界
+
+Observation Diagnostic Lockdownで追加された名称は、すべて内部診断名・log prefix・tool名として読む。ユーザー表示名、public API route、DB physical name、既存response keyのrename対象ではありません。
+
+| 名称 | 層 | 読み方 |
+|---|---|---|
+| `Observation Diagnostic Lockdown` | 診断工程名 | 非表示submitの停止層を本文なしで固定する工程名。表示名ではない。 |
+| `emlis_observation_diagnostic_lockdown` | backend log prefix | backend一行診断。env opt-in時だけ出す。 |
+| `emlis_observation_frontend_result` | RN log prefix | RN一行診断。env opt-in時だけ出す。 |
+| `classification` | 内部分類 | `candidate_missing` など、次修正層を決める内部reason。public statusではない。 |
+| `next_action_branch` / `branch_locked` | 内部分岐meta | 次に触る層を固定するためのCLI / compare出力。ユーザー表示ではない。 |
+
+`Emlisの観測` は引き続きvisible名として扱い、`input_feedback.comment_text` / `input_feedback.emlis_ai` は互換維持のpublic response keyとして残す。
+
+# 2026-05-17 差分追記: Reader Relation Surface / limited repair 名称境界
+
+Reader Relation Surface Step0-8で追加・可視化された名称は、すべて EmlisAI backend 内部のReader / limited repair / diagnostic meta名として扱う。ユーザー表示名、public route、DB physical name、既存response keyのrename対象ではありません。
+
+| 名称 | 種別 | 読み方 |
+|---|---|---|
+| `Reader Relation Surface` | 修正工程名 | Observation Diagnostic Lockdownで分類済みの Reader rejected 原因をbackendで潰す工程名。visible名ではない。 |
+| `limited_reader_repair` | composer / diagnostic meta | limited/A1でReader由来reasonを受け取った場合の最小repair状態。public response keyではない。 |
+| `previous_rejection_reasons` | composition contract field | 直前attemptのGate / Reader reasonを次attemptへ渡す内部契約。DB columnではない。 |
+| `expected_relation_types` | Reader引数 | surface relation contractの期待型。`conflict.e1` のようなedge idとは別物。 |
+| `addressee_not_clear` | Reader rejection reason | 宛名契約不一致のreason。RN表示名ではない。 |
+| `relation_not_expressed` | Reader rejection reason | relation surfaceが本文上で見えないreason。Gate自体を削除しない。 |
+| `relation_marker_key` / `relation_marker_signal_keys` | diagnostic meta | relation surface markerの識別子。観測本文や固定fallback文ではない。 |
 
 visible名は引き続き `Emlisの観測`。`input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は互換維持する。

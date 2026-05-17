@@ -62,6 +62,7 @@ import {
 } from "./input/inputOptions";
 import { normalizeInputDraftData } from "./input/inputDraftModel";
 import { buildInputFeedbackEmotionMeta } from "./input/inputFeedbackModel";
+import { logEmlisObservationFrontendDiagnostic } from "./input/inputFeedbackObservationDiagnostics";
 import { isWelcomeNoticePopupCandidate } from "./input/inputNoticeModel";
 import { useInputDraftPersistence } from "./input/useInputDraftPersistence";
 import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
@@ -1100,6 +1101,12 @@ const safeInsets = useSafeAreaInsets();
             observationStatus: inputFeedbackAI?.observation_status,
           })
         : false;
+      logEmlisObservationFrontendDiagnostic({
+        submitResult,
+        inputFeedbackText,
+        inputFeedbackAI,
+        openedObservation,
+      });
       if (!openedObservation) {
         showToast(`記録しました${inputFeedbackEmotionMeta.emotionSummary ? `
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
