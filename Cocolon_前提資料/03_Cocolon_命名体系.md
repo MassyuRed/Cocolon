@@ -1,18 +1,18 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(96).zip"
-  Cocolon: "Cocolon_9(10).zip"
-  mashos-api: "mashos-api_9(10).zip"
+  premise: "Cocolon_前提資料(98).zip"
+  Cocolon: "Cocolon_11(3).zip"
+  mashos-api: "mashos-api_11(6).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 535
+  mashos-api: 543
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -445,3 +445,18 @@ Reader Relation Surface Step0-8で追加・可視化された名称は、すべ�
 | `relation_marker_key` / `relation_marker_signal_keys` | diagnostic meta | relation surface markerの識別子。観測本文や固定fallback文ではない。 |
 
 visible名は引き続き `Emlisの観測`。`input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は互換維持する。
+
+# 2026-05-18 差分追記: ProductGate Measurement Step0-10 名称境界
+
+最新実ファイルでは、`ProductGate Measurement` 系の内部名が追加されています。これは visible名、public route、DB physical name、response keyではありません。`Product Gate` そのものの達成宣言とも分けて読む必要があります。
+
+| 名前 | 層 | 意味 | rename禁止境界 |
+|---|---|---|---|
+| `ProductGate Measurement` | internal measurement工程名 | 表示/非表示をsubmit単位で分類し、scorecard / release ladder / next action / local report / Exit Gateへ接続する測定工程 | `Product Gate達成` や `商品品質版完成` と同一視しない |
+| `display_confirmed` | measurement derived key | backend public passed + frontend joined + modal_opened が揃った表示確認済み状態 | `observation_status=passed` 単独と同義にしない |
+| `backend_public_passed` | measurement derived key | backend public statusとcomment_text有無が通った状態 | RN表示確認済みとは呼ばない |
+| `scorecard_passed_display_count` | scorecard event count | `display_confirmed=true` の場合だけ1 | backend passedだけで1にしない |
+| `measurement_exit_gate_ready` | Exit Gate meta | 測定接続として必要な分類・count・event・reportが揃った状態 | Product Gate ready / public release appliedへrenameしない |
+| `blind_qa_input_candidates` | Blind QA meta | read_feelingを人手reviewへ渡すためのmeta-only候補 | comment_text本文やraw入力を入れない |
+
+禁止: ProductGate Measurementを理由に、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。

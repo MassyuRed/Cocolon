@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(96).zip"
-  Cocolon: "Cocolon_9(10).zip"
-  mashos-api: "mashos-api_9(10).zip"
+  premise: "Cocolon_前提資料(98).zip"
+  Cocolon: "Cocolon_11(3).zip"
+  mashos-api: "mashos-api_11(6).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 535
-  total: 752
+  mashos-api: 543
+  total: 760
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 752
-  included_in_overall_structure: 752
-  included_in_national_system: 752
+  total_files: 760
+  included_in_overall_structure: 760
+  included_in_national_system: 760
   excluded_from_main_body: 0
 ---
 
@@ -53,13 +53,13 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_9(10).zip` | 217 | RNアプリ本体。今回の Reader Relation Surface 修正では追加変更なし。`inputFeedbackObservationDiagnostics.js` と `InputScreen.js` による opt-in RN診断と、`Emlisの観測` のRN passed-only contractを保持する。 |
-| `mashos-api_9(10).zip` | 535 | backend / API / worker / tests。Observation Diagnostic Lockdownで確定した `candidate_generated_but_reader_rejected` に対し、Reader Relation Surface Step0-8（宛名契約、expected_relation_types、limited/A1 previous rejection repair、core hook、diagnostic meta、tests）を追加した。 |
-| total | 752 | 前提資料の構造coverage対象 |
+| `Cocolon_11(3).zip` | 217 | RNアプリ本体。今回の ProductGate Measurement Step0-10 では追加変更なし。`inputFeedbackObservationDiagnostics.js` と `InputScreen.js` による opt-in RN診断と、`Emlisの観測` のRN passed-only contractを保持する。 |
+| `mashos-api_11(6).zip` | 543 | backend / API / worker / tests。Reader Relation Surface Step0-8 の上に、ProductGate Measurement Step0-10（contract inventory、diagnostic capture / join semantics、scorecard event adapter、measurement report、coverage group aggregation、Blind QA separation、next action routing、local tool、regression、Exit Gate）を追加した。 |
+| total | 760 | 前提資料の構造coverage対象 |
 
-`Cocolon_9(10).zip` / `mashos-api_9(10).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、Observation Diagnostic Lockdownで確定した Reader rejected 原因を backend 内部で修正する Reader Relation Surface Step0-8 が追加されています。`input_feedback.comment_text` は引き続き public `observation_status=passed` かつ本文ありの場合だけ表示されます。
+`Cocolon_11(3).zip` / `mashos-api_11(6).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、Reader Relation Surface後の表示/非表示を submit 単位で測定し、ProductQualityScorecard / Release ladder / next action routing / local report / Exit Gate へ接続する ProductGate Measurement Step0-10 が追加されています。`input_feedback.comment_text` は引き続き public `observation_status=passed` かつ本文ありの場合だけ表示されます。Step10 Exit Gate は測定接続完了の境界であり、Product Gate達成やpublic release適用ではありません。
 
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は完全Composer初期版のE2E基礎、商品品質版接続 Step0-7は Product Gate 判断材料へ接続する meta / contract / QA 層、positive_recovery relation_not_expressed Step0-7は特定coverageのReader relation表現整合修正、Observation Diagnostic Lockdown Step0-8は非表示原因をsubmit単位で分類して次修正層を固定する診断工程、Reader Relation Surface Step0-8は分類済みの Reader rejected 原因を Reader / limited A1 repair / diagnostic meta で潰す backend 修正であり、いずれも完全Composer商品品質版のrelease適用そのものではない。
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は完全Composer初期版のE2E基礎、商品品質版接続 Step0-7は Product Gate 判断材料へ接続する meta / contract / QA 層、positive_recovery relation_not_expressed Step0-7は特定coverageのReader relation表現整合修正、Observation Diagnostic Lockdown Step0-8は非表示原因をsubmit単位で分類して次修正層を固定する診断工程、Reader Relation Surface Step0-8は分類済みの Reader rejected 原因を Reader / limited A1 repair / diagnostic meta で潰す backend 修正、ProductGate Measurement Step0-10は表示/非表示分類を scorecard / release ladder / local report / Exit Gate へ接続する測定工程であり、いずれも完全Composer商品品質版のrelease適用そのものではない。
 
 わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
@@ -502,3 +502,17 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 | Step8 test support | `tests/conftest.py`, Reader repair系test群 | EmlisAI関連全体 `531 passed, 1 warning` の実装確認結果を現状構造として読む。 |
 
 禁止: Gate緩和、固定fallback文、外部AI/local LLM、raw入力本文の診断log混入、DB/API/RN契約rename、RN modal表示条件変更。
+
+# 2026-05-18 差分追記: EmlisAI ProductGate Measurement Step0-10 current boundary
+
+この差分は、`Cocolon_前提資料(98).zip` と最新実ファイル `Cocolon_11(3).zip` / `mashos-api_11(6).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `543`、合計 `760` として読む。今回の修正対象は backend / local tool の EmlisAI ProductGate Measurement 接続であり、RN表示条件・DB physical name・public routeは変更しません。
+
+| 層 | owner | current boundary |
+|---|---|---|
+| contract inventory | `emlis_ai_complete_product_quality_measurement_contract_inventory.py` | Step0-10の対象file・非対象contract・Exit Gate非release境界を固定する。 |
+| diagnostic join | `emlis_ai_observation_diagnostic_compare.py` | backend passed と RN表示確認を分け、frontend未join / modal falseはdisplay countへ入れない。 |
+| measurement connection | `emlis_ai_complete_product_quality_measurement_connection.py` | joined rowをscorecard eventへ変換し、scorecard / release ladder / coverage / Blind QA / routing / Exit Gateを接続する。 |
+| local tool | `emlis_observation_product_quality_measurement.py` | diagnostic log行からJSON/Markdownのmeta-only reportを出す。 |
+| regression / Exit Gate | `test_emlis_ai_complete_product_quality_measurement_regression_step9.py`, `test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py` | public contract、counting semantics、RN期待値、four fixture、Exit Gate非releaseを固定する。 |
+
+禁止: backend passedだけで `passed_display_count` に入れる、diagnostic missingを原因修正へ進める、Blind QAなしでread feelingを埋める、raw input / public `comment_text` 本文をreportへ入れる、Exit Gate readyをProduct Gate達成やpublic release適用にする。

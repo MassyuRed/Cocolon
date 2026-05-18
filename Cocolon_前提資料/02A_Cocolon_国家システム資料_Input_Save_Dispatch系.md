@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1814,3 +1814,13 @@ Input保存後のEmlisAI immediate replyは、public route / response key を変
 | Step8 test pass | EmlisAI関連全体を通すための import / retry reason / no-fallback regressionを固定する。 | `tests/conftest.py`, `emlis_ai_complete_composer_client.py`, `emlis_ai_reply_service.py` |
 
 この差分でも、`input_feedback.comment_text` は public `observation_status=passed` かつ本文ありの場合だけRNへ表示されます。
+
+# 2026-05-18 差分追記: Input / immediate reply ProductGate Measurement接続
+
+`mashos-api_11(6).zip` の ProductGate Measurement Step0-10 は、`/emotion/submit` の保存処理そのものではなく、保存後のEmlisAI診断行を測定reportへ接続する差分です。`emotion_submit_service.py` のpublic response key、DB write path、RNへ渡す `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は変更しません。
+
+Input / Save / Dispatch上の読み方:
+- backend診断行とRN frontend診断行が揃う場合だけ、表示確認済みとしてscorecardへ数える。
+- backend診断行またはRN診断行が欠ける場合、`diagnostic_missing_or_not_captured` 系として扱い、原因層修正に進めない。
+- local tool `emlis_observation_product_quality_measurement.py` はlog行を読むだけで、保存API・dispatch・DB・RNを変更しない。
+- Exit Gateは「測定接続が成立した」ことの境界であり、Input表示率向上patchやProduct Gate releaseではない。

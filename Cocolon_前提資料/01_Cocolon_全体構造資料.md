@@ -1,23 +1,23 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(96).zip"
-  Cocolon: "Cocolon_9(10).zip"
-  mashos-api: "mashos-api_9(10).zip"
+  premise: "Cocolon_前提資料(98).zip"
+  Cocolon: "Cocolon_11(3).zip"
+  mashos-api: "mashos-api_11(6).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 535
+  mashos-api: 543
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 752
+  included_files_total: 760
   included_files_cocolon: 217
-  included_files_mashos_api: 535
+  included_files_mashos_api: 543
 ---
 
 # 1. 1行定義
@@ -1469,3 +1469,56 @@ RN側の `InputScreen.js` / `useInputFeedbackModal.js` / `InputFeedbackReplyModa
 | `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | Complete self-repairへ渡す理由を `ALLOWED_REPAIR_REASONS` に限定し、Reader-only理由でComplete候補生成が誤って潰れないようにする。 |
 
 この差分は「診断を追加する工程」ではなく、診断で確定した Reader rejected 原因への backend 実修正として読む。表示到達は引き続き public `observation_status=passed` + `comment_text` 非空のときだけです。
+
+# 2026-05-18 差分追記: EmlisAI ProductGate Measurement Step0-10 overall structure
+
+最新実ファイル `Cocolon_11(3).zip` / `mashos-api_11(6).zip` では、Cocolon RN側のsource追加・変更はありません。mashos-api側は `535 -> 543` 件へ増え、Reader Relation Surface修正後の表示/非表示を ProductQualityScorecard / Release ladder / next action routing / local report / Exit Gate へ接続する ProductGate Measurement Step0-10 が追加されています。これは文章生成拡張ではなく、submit単位の測定接続です。
+
+## 追加path
+
+| path | 全体構造上の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_contract_inventory.py` | Step0 contract inventory。触るfile、触らないcontract、meta-only境界、Exit Gate非release境界を固定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_connection.py` | Step3-7/10 measurement connection owner。joined rowをscorecard eventへ変換し、scorecard / release ladder / coverage / Blind QA / next action / Exit Gateへ接続する。 |
+| `mashos-api/ai/tools/emlis_observation_product_quality_measurement.py` | Step8 local tool。backend/RN診断log行からJSON/Markdownのmeta-only measurement reportを出す。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_contract_inventory_step0.py` | Step0 contract inventory regression。public route / response key / RN passed-only / DB / Gate / meta-onlyを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_connection.py` | Step3-7/10 measurement connection regression。display_confirmedのみcount、coverage、Blind QA、routing、Exit Gateを固定する。 |
+| `mashos-api/ai/tests/test_emlis_observation_product_quality_measurement_tool_step8.py` | Step8 local tool regression。JSON/Markdown outputとforbidden payload排除を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_regression_step9.py` | Step9 regression。public contract / meta-only / counting semantics / RN表示期待値を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py` | Step10 Exit Gate regression。diagnostic missing、backend rejected、passed hidden、display confirmedの4系統を固定する。 |
+
+## 既存ownerの読み方更新
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py` | Step1-2。diagnostic capture gap と backend/frontend join semanticsを持つ。backend passedだけでは表示確認済みにしない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py` | Step3/5/6。scorecard eventの明示的count、coverage group集計、Blind QA分離を尊重する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py` | Step5。coverage group missingを broader_beta / product_gate blocker として扱う。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_compare_step7.py` | Step1-2 regression。no backend / no frontend / modal false / modal trueのjoin semanticsを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_branching_step8.py` | Step1/7 regression。unknown / unclassified を diagnostic enrichment へ戻し、原因未分類のまま修正しない。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py` | Step3/6 regression。display countとBlind QA由来read_feelingを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py` | Step5 regression。coverage不足・Blind QA不足・contract blockerをrelease ladderで止める。 |
+
+## Step0-10 の読み方
+
+| Step | 読み方 |
+|---|---|
+| Step0 contract inventory | 変更禁止contractと許可touch fileを固定する。 |
+| Step1 diagnostic capture status | backend/RN診断行不足を原因修正へ進めず、diagnostic gapとして扱う。 |
+| Step2 backend/frontend join semantics | `display_confirmed = backend_public_passed + frontend_joined + modal_opened` として数える。 |
+| Step3 scorecard event adapter | joined rowをProductQualityScorecard eventへ変換し、display_confirmedのみ `passed_display_count=1` にする。 |
+| Step4 measurement run builder | scorecard と release ladder を1つのinternal measurement reportへ接続する。 |
+| Step5 coverage group aggregation | 7 coverage groupを集計し、missingを `short_daily` に寄せず blockerにする。 |
+| Step6 Blind QA separation | `read_feeling_score` をmachine metricsから自動推定せず、Blind QA reviewだけから入れる。 |
+| Step7 next action routing | top rejection reasons / release blockers / classificationから次branchを決める。 |
+| Step8 local tool output | diagnostic log行からJSON/Markdown reportを出す。スクショ依存にしない。 |
+| Step9 regression tests | public contract、meta-only、counting semantics、RN表示期待値を固定する。 |
+| Step10 Exit Gate | Product Gate達成ではなく、測定接続完了と次修正判断可能性を固定する。 |
+
+## 境界維持
+
+- Cocolon RN public表示契約は変更なし。`observation_status=passed` かつ `comment_text` 非空のみ表示。
+- `/emotion/submit` route、API response key、DB physical name、write path は変更しない。
+- Reader / Grounding / Template / Display Gate は緩めない。
+- raw input / memo / current_input / public `comment_text` 本文はdiagnostic / scorecard / local tool / release ladderへ入れない。
+- ProductGate Measurement Step10 Exit Gateは、Product Gate達成・public release適用ではない。

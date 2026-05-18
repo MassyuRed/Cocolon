@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -412,3 +412,20 @@ Reader Relation Surface Step0-8 を触る場合は、以下を同時確認する
 | Diagnostic privacy | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_observation_diagnostic_lockdown.py` | repair meta / diagnostic_summary / backend logを変える時。 |
 
 禁止: `relation_not_expressed` を単語1つで通す、repairで意味を追加する、raw user input / public comment_text本文をdiagnosticへ出す、RN passed-only契約を変える。
+
+# 2026-05-18 差分追記: EmlisAI ProductGate Measurement Step0-10 rule / test index
+
+ProductGate Measurement Step0-10 を触る場合は、表示率を上げるpatchではなく、測定接続とcontract固定として次を同時確認する。
+
+| rule / guard | owner | 触る時 |
+|---|---|---|
+| Contract inventory | `emlis_ai_complete_product_quality_measurement_contract_inventory.py`, `test_emlis_ai_complete_product_quality_measurement_contract_inventory_step0.py` | Step0-10の対象/非対象、public contract、Gate非緩和、Exit Gate非releaseを確認する時。 |
+| Diagnostic capture / join semantics | `emlis_ai_observation_diagnostic_compare.py`, `test_emlis_ai_observation_diagnostic_compare_step7.py` | backend/RN診断行不足、`display_confirmed`、modal falseを扱う時。 |
+| Branching guard | `emlis_ai_observation_diagnostic_branching.py`, `test_emlis_ai_observation_diagnostic_branching_step8.py` | unknown / unclassifiedをdiagnostic enrichmentへ戻す時。 |
+| Measurement connection | `emlis_ai_complete_product_quality_measurement_connection.py`, `test_emlis_ai_complete_product_quality_measurement_connection.py` | joined row -> scorecard event、coverage、Blind QA、next action、Exit Gateを扱う時。 |
+| Scorecard / Blind QA | `emlis_ai_complete_product_quality_scorecard_service.py`, `test_emlis_ai_complete_product_quality_scorecard.py`, `test_emlis_ai_complete_product_quality_scorecard_blind_qa.py` | display count、coverage group、read_feelingを扱う時。 |
+| Release ladder | `emlis_ai_complete_release_ladder_service.py`, `test_emlis_ai_complete_release_ladder_v2.py`, `test_emlis_ai_complete_release_ladder_connection_e2e.py` | coverage不足・Blind QA不足・contract blockerを見る時。 |
+| Local tool output | `tools/emlis_observation_product_quality_measurement.py`, `test_emlis_observation_product_quality_measurement_tool_step8.py` | log行からJSON/Markdown reportを出す時。 |
+| Regression / Exit Gate | `test_emlis_ai_complete_product_quality_measurement_regression_step9.py`, `test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py` | public contract / counting semantics / four fixture / Exit Gateを固定する時。 |
+
+禁止: RN passed-only contractを緩める、`/emotion/submit` routeやresponse keyをrenameする、DB physical nameを変える、Gateを緩める、raw入力本文やpublic `comment_text` 本文をreportへ入れる、Exit GateをProduct Gate達成扱いにする。

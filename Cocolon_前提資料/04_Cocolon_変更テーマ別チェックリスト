@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -407,3 +407,23 @@ Observation Diagnostic Lockdownで `candidate_generated_but_reader_rejected` が
 | diagnostic meta | `emlis_ai_complete_reply_diagnostics_service.py` / `emlis_ai_observation_diagnostic_lockdown.py` | limited repairのattempted/applied/marker情報だけを出し、raw input / comment_text本文は出さない。 |
 
 禁止: RN表示条件変更、Display Gate緩和、Grounding緩和、Template Guard緩和、固定完成文、外部AI/local LLM、DB/API/RN rename。
+
+# 2026-05-18 差分追記: EmlisAI ProductGate Measurement Step0-10 を触る時
+
+EmlisAIのProductGate Measurement、diagnostic join、scorecard event adapter、coverage group aggregation、Blind QA separation、next action routing、local tool、Exit Gateを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面とProductGate Measurement境界。
+2. `03_Cocolon_命名体系.md` のProductGate Measurement / Product Gate / display_confirmedの読み分け。
+3. `01_Cocolon_全体構造資料.md` のProductGate Measurement Step0-10 overall structure。
+4. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` のbackend support / test map。
+5. `02_Cocolon_国家システム資料.md` と `02A` のInput保存境界。
+6. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / verification boundary。
+7. `05_Cocolon_ルールファイル索引` のProductGate Measurement rule / test index。
+8. 最新実ファイルの `emlis_ai_complete_product_quality_measurement_*`、`emlis_observation_product_quality_measurement.py`、関連test。
+
+固定:
+- backend passedだけでdisplay countしない。
+- diagnostic missingは原因修正へ進めない。
+- Blind QAなしでread_feelingを埋めない。
+- local tool outputへraw入力本文・public `comment_text` 本文を出さない。
+- Exit Gate readyをProduct Gate達成やpublic release適用にしない。

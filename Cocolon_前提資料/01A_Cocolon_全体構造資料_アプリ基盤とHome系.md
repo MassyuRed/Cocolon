@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2621,3 +2621,28 @@ RN側env:
 | `emlis_ai_complete_composer_client.py` | Complete self-repairへ渡す理由を既存の修復可能理由に限定する。 |
 
 RN側は引き続き `input_feedback.comment_text` と public `observation_status` だけで `Emlisの観測` を表示する。limited repair metaやdiagnostic metaだけではmodalを開かない。
+
+# 2026-05-18 差分追記: Input / EmlisAI ProductGate Measurement Step0-10 runtime map
+
+`Cocolon_11(3).zip` では RN runtime file の追加・変更はありません。`Emlisの観測` は引き続き `input_feedback.emlis_ai.observation_status === "passed"` かつ public `input_feedback.comment_text` 非空のときだけ開きます。
+
+`mashos-api_11(6).zip` では、既存の backend/RN 診断行を材料にして、表示/非表示の submit 単位分類を scorecard / release ladder / next action / local report / Exit Gate へ渡す runtime支援層が増えています。これは `/emotion/submit` の保存処理やRN modal条件を変更するruntimeではなく、診断・測定・次工程判断の internal / local tool runtimeです。
+
+```text
+/emotion/submit public response
+ -> backend diagnostic row: emlis_observation_diagnostic_lockdown
+ -> RN frontend row: emlis_observation_frontend_result
+ -> diagnostic compare / join semantics
+ -> measurement connection
+ -> ProductQualityScorecard event
+ -> Release ladder
+ -> next_action_routing
+ -> local JSON/Markdown report
+ -> Exit Gate summary
+```
+
+runtime上の固定:
+- backendが `passed + comment_text` でも、frontend diagnosticがjoinされて `modal_opened=true` でない限り `display_confirmed` にはしない。
+- RN diagnosticが欠ける場合は `frontend_diagnostic_missing_or_not_captured` として残し、表示確認済みに数えない。
+- local toolはlog行からmeta-only reportを作るだけで、submit pathやpublic responseを変更しない。
+- Exit Gateがreadyでも、public releaseやProduct Gate達成として扱わない。

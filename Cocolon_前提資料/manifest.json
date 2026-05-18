@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-17",
+  "revision_date": "2026-05-18",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 535,
-    "total": 752
+    "mashos-api": 543,
+    "total": 760
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 752,
-    "national_system_body_includes": 752,
+    "overall_structure_body_includes": 760,
+    "national_system_body_includes": 760,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル752件、国家システム判断対象のcurrent全ファイル752件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 752,
-    "overall_structure_body_includes_current_snapshot_files": 752,
-    "national_system_body_lists_current_snapshot_files_with_relation": 752,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル760件、国家システム判断対象のcurrent全ファイル760件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
+    "current_snapshot_total_files": 760,
+    "overall_structure_body_includes_current_snapshot_files": 760,
+    "national_system_body_lists_current_snapshot_files_with_relation": 760,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -766,7 +766,7 @@
   "docs": [
     {
       "path": "00_華恋用_READ_FIRST.md",
-      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Observation Diagnostic Lockdown境界を固定する"
+      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI ProductGate Measurement Step0-10境界を固定する"
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
@@ -778,7 +778,7 @@
     },
     {
       "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "purpose": "Account split / Subscription / backend support / rule / test / EmlisAI diagnostic support map"
+      "purpose": "Account / subscription / backend support / EmlisAI measurement support / contract test boundary"
     },
     {
       "path": "01_Cocolon_全体構造資料.md",
@@ -806,7 +806,7 @@
     },
     {
       "path": "05_Cocolon_ルールファイル索引",
-      "purpose": "policy / guard / contract / diagnostic lockdown rule file索引"
+      "purpose": "rule / policy / guard / test索引。ProductGate Measurement Step0-10のcontract / local tool / Exit Gate testを含む"
     },
     {
       "path": "06_Cocolon_ファイル名変更保留台帳.md",
@@ -814,7 +814,7 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "current snapshotの構造差分。Observation Diagnostic Lockdown差分を含む"
+      "purpose": "最新zipから見える構造差分。ProductGate Measurement Step0-10 snapshot差分を含む"
     },
     {
       "path": "09_Cocolon_名称混在保管と構造境界_2026-05-10.md",
@@ -1755,9 +1755,9 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(96).zip",
-    "Cocolon": "Cocolon_9(10).zip",
-    "mashos-api": "mashos-api_9(10).zip"
+    "premise": "Cocolon_前提資料(98).zip",
+    "Cocolon": "Cocolon_11(3).zip",
+    "mashos-api": "mashos-api_11(6).zip"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2523,15 +2523,15 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(96).zip",
-    "Cocolon": "Cocolon_9(10).zip",
-    "mashos-api": "mashos-api_9(10).zip",
+    "premise": "Cocolon_前提資料(98).zip",
+    "Cocolon": "Cocolon_11(3).zip",
+    "mashos-api": "mashos-api_11(6).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 535,
-      "total": 752
+      "mashos-api": 543,
+      "total": 760
     },
-    "summary": "EmlisAI Reader Relation Surface Step0-8 added on top of Observation Diagnostic Lockdown, positive_recovery relation, complete initial E2E, and product quality connection. RN passed-only contract unchanged."
+    "summary": "EmlisAI ProductGate Measurement Step0-10 added on top of Reader Relation Surface. RN passed-only contract unchanged; Product Gate achievement and public release remain false."
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -3077,6 +3077,105 @@
       "Step6": "_core_checked_responseの前段にrepair adapterを挿入する",
       "Step7": "診断metaにlimited repair適用状態を出す",
       "Step8": "テストを通す"
+    }
+  },
+  "source_snapshot_2026_05_18_product_gate_measurement_step0_10": {
+    "premise": "Cocolon_前提資料(98).zip",
+    "Cocolon": "Cocolon_11(3).zip",
+    "mashos-api": "mashos-api_11(6).zip",
+    "sha256": {
+      "Cocolon_前提資料(98).zip": "afba22e2e6b4e85ac9c5d05bba434f58374e45d87a7e358523157ec0a5439b0b",
+      "Cocolon_11(3).zip": "b54d6769121c664bdb0aab4d91c4d6e3ad67c6dc7b10c151b4e0b5d79dafabf0",
+      "mashos-api_11(6).zip": "9382d28689ec3b3f5ef62f1b6e37c988aaaf398ca47cbf6b644bdd33d8afa521"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 543,
+      "total": 760
+    },
+    "diff_from": {
+      "premise": "Cocolon_前提資料(98).zip / Reader Relation Surface Step0-8 basis",
+      "Cocolon": "No source additions or changes from previous RN basis; passed-only contract unchanged",
+      "mashos-api": "ProductGate Measurement Step0-10 adds measurement connection services, local tool, and regression/exit gate tests",
+      "file_counts": {
+        "previous_Cocolon": 217,
+        "previous_mashos_api": 535,
+        "previous_total": 752
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_contract_inventory.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_connection.py",
+        "mashos-api/ai/tools/emlis_observation_product_quality_measurement.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_contract_inventory_step0.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_connection.py",
+        "mashos-api/ai/tests/test_emlis_observation_product_quality_measurement_tool_step8.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_regression_step9.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_compare_step7.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_branching_step8.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_scorecard.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_release_ladder_v2.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "Step0 contract inventory fixes touch/non-touch contract and meta-only boundaries.",
+      "Step1-Step2 split diagnostic capture gap from backend/frontend display confirmation.",
+      "Step3-Step4 connect joined rows to scorecard events and release ladder report.",
+      "Step5 aggregates seven coverage groups and keeps missing coverage as blocker.",
+      "Step6 separates Blind QA from machine metrics for read_feeling_score.",
+      "Step7 routes next action from classification, top rejection reasons, and release blockers.",
+      "Step8 adds local JSON/Markdown tool output from diagnostic log lines.",
+      "Step9 fixes regression boundaries for public contract, meta-only, counting, and RN expectations.",
+      "Step10 Exit Gate completes measurement connection only; Product Gate achievement and public release stay false."
+    ],
+    "boundary": {
+      "cocolon_rn_source_changed": false,
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "reader_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "template_guard_relaxed": false,
+      "display_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "raw_input_logged_or_copied_to_meta": false,
+      "public_comment_text_logged": false,
+      "backend_passed_counted_as_display_without_frontend": false,
+      "read_feeling_auto_estimated_from_machine_metrics": false,
+      "product_gate_achieved": false,
+      "public_release_applied": false
+    },
+    "step_map": {
+      "Step0": "contract inventory",
+      "Step1": "diagnostic capture status",
+      "Step2": "backend/frontend join semantics",
+      "Step3": "joined row -> scorecard event adapter",
+      "Step4": "measurement run builder",
+      "Step5": "coverage group aggregation",
+      "Step6": "Blind QA separation",
+      "Step7": "next action routing",
+      "Step8": "local tool output",
+      "Step9": "regression tests",
+      "Step10": "Exit Gate"
     }
   }
 }

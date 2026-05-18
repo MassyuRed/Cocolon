@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2558,3 +2558,34 @@ Reader Relation Surface Step0-8 は、Observation Diagnostic Lockdownで確定�
 | test契約 | Reader repair直結・strict relation・product-quality・diagnostic系を通す。実装確認では EmlisAI関連 `531 passed, 1 warning` が現状基準。 |
 
 非対象: RN表示条件、modal起動条件、response key、API route、DB physical name、Display Gate / Grounding / Template Guard の緩和。
+
+# 2026-05-18 差分追記: ProductGate Measurement Step0-10 contract / verification boundary
+
+ProductGate Measurement Step0-10 で守るcontractは次の通りです。これはProduct Gate達成判定ではなく、Product Gateへ進む測定接続の完了境界です。
+
+## contract / boundary owner
+
+| owner | 固定するcontract |
+|---|---|
+| `emlis_ai_complete_product_quality_measurement_contract_inventory.py` | `/emotion/submit`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、RN passed-only、DB physical name、Gate fail-closed、meta-only、Exit Gate非releaseを固定する。 |
+| `emlis_ai_observation_diagnostic_compare.py` | backend passedとdisplay confirmedを分離する。frontend未join / modal falseはdisplay countへ入れない。 |
+| `emlis_ai_complete_product_quality_measurement_connection.py` | scorecard event、coverage group、Blind QA candidate、next action routing、Exit Gate summaryをmeta-onlyで構築する。 |
+| `emlis_ai_complete_product_quality_scorecard_service.py` | read_feelingはBlind QA由来。machine metricsだけでは埋めない。 |
+| `emlis_ai_complete_release_ladder_service.py` | coverage missing / Blind QA missing / contract breakをrelease blockerとして扱う。 |
+| `emlis_observation_product_quality_measurement.py` | local JSON/Markdown outputはdiagnostic log行だけから作り、raw input / public comment本文を含めない。 |
+
+## verification owner
+
+| test | 固定すること |
+|---|---|
+| `test_emlis_ai_complete_product_quality_measurement_contract_inventory_step0.py` | Step0-10 scope、contract locks、non-targets。 |
+| `test_emlis_ai_complete_product_quality_measurement_connection.py` | display_confirmed counting、scorecard / release connection、coverage、Blind QA、routing、Exit Gate。 |
+| `test_emlis_observation_product_quality_measurement_tool_step8.py` | local tool outputのmeta-only / JSON / Markdown。 |
+| `test_emlis_ai_complete_product_quality_measurement_regression_step9.py` | public contract / meta-only / counting semantics / RN表示期待値。 |
+| `test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py` | diagnostic missing、backend rejected、passed hidden、display confirmed のfixture。 |
+
+禁止:
+- backend passedだけを `passed_display_count` として数えない。
+- regression greenやExit Gate readyをProduct Gate達成・public releaseとして扱わない。
+- RN表示条件、public response key、DB physical name、Gate条件を測定のために変えない。
+- raw入力本文・public `comment_text` 本文をdiagnostic / scorecard / release / local toolへ入れない。

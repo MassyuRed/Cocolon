@@ -1,23 +1,23 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(96).zip"
-  Cocolon: "Cocolon_9(10).zip"
-  mashos-api: "mashos-api_9(10).zip"
+  premise: "Cocolon_前提資料(98).zip"
+  Cocolon: "Cocolon_11(3).zip"
+  mashos-api: "mashos-api_11(6).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 535
+  mashos-api: 543
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 752
+  included_files_total: 760
   included_files_cocolon: 217
-  included_files_mashos_api: 535
+  included_files_mashos_api: 543
 ---
 
 # 1. 1行定義
@@ -37,6 +37,7 @@ backend だけで終わらず、**RN surface まで含めて state の流れを�
 - positive_recovery relation_not_expressed 修正は、保存直後replyの内部Gate / diagnostic correctionであり、Input保存API・DB write path・RN表示条件を変えない
 - Observation Diagnostic Lockdown Step0-8 は、保存成功後の immediate reply 非表示を backend/RN診断行で分類する。Input保存API・DB write path・RN表示契約は変えず、原因確定前の文章修正を止める
 - Reader Relation Surface Step0-8 は、分類済みの Reader rejected 原因を backend のReader / limited A1 repairで扱う。Input保存API・DB write path・RN表示契約は変えない
+- ProductGate Measurement Step0-10 は、Reader Relation Surface後の表示/非表示を backend/RN診断join、scorecard event、release ladder、local report、Exit Gateへ接続する。Input保存API・DB write path・RN表示契約・Gate条件は変えず、Product Gate達成やpublic release適用とは扱わない
 - 2026-04-22 反映で、三大要素の中核 owner は comment / analysis / piece ごとに 1 本流へ固定した
 
 # 2-2. 2026-04-30 `/app/bootstrap` runtime flow

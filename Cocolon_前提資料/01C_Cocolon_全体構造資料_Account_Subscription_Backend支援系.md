@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-17"
+revision_date: "2026-05-18"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4305,3 +4305,36 @@ Reader Relation Surface Step0-8 では、backend support / regressionとして�
 | `mashos-api/ai/tests/conftest.py` | EmlisAI関連testをlocal pytestで通すためのtest support。 |
 
 確認済み基準として、Step8時点で `tests/test_emlis_ai_*.py` は `531 passed, 1 warning`。RN、DB、API route、Display Gate、Grounding、Template Guardはこの差分の変更対象ではありません。
+
+# 2026-05-18 差分追記: EmlisAI ProductGate Measurement backend support / test map
+
+ProductGate Measurement Step0-10 は、EmlisAI backend support / test / local tool の追加差分です。Cocolon RN側は変更せず、backendの診断・測定・scorecard接続・release ladder接続・回帰testで商品品質版へ進む判断材料を作ります。
+
+## backend service / tool
+
+| path | support上の読み方 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_contract_inventory.py` | Step0-10のcontract inventory。public route / response key / RN表示条件 / DB / Gate / meta-only / Exit Gate非releaseを固定する。 |
+| `ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_connection.py` | joined diagnostic rowをscorecard eventへ正規化し、scorecard / release ladder / coverage / Blind QA / routing / Exit Gate summaryを構築する。 |
+| `ai/tools/emlis_observation_product_quality_measurement.py` | local logからProductGate Measurement reportをJSON/Markdownで出すtool。raw input / comment_text本文は扱わない。 |
+| `ai/services/ai_inference/emlis_ai_observation_diagnostic_compare.py` | diagnostic capture gap、backend/frontend join、display_confirmed countingを持つcompare owner。 |
+| `ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py` | Step3/5/6 event count、coverage group aggregation、Blind QA separationを受けるscorecard owner。 |
+| `ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py` | coverage missing / Blind QA missing / contract breakをrelease ladder blockerとして扱うowner。 |
+
+## regression / contract test
+
+| path | 固定すること |
+|---|---|
+| `ai/tests/test_emlis_ai_complete_product_quality_measurement_contract_inventory_step0.py` | Step0-10 scope、contract locks、non-targets、meta-only境界。 |
+| `ai/tests/test_emlis_ai_complete_product_quality_measurement_connection.py` | joined row -> event -> scorecard -> release -> coverage -> Blind QA -> routing -> Exit Gate。 |
+| `ai/tests/test_emlis_observation_product_quality_measurement_tool_step8.py` | local tool JSON/Markdown、diagnostic line parse、forbidden key排除。 |
+| `ai/tests/test_emlis_ai_complete_product_quality_measurement_regression_step9.py` | public contract、display counting semantics、RN passed-only期待値。 |
+| `ai/tests/test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py` | diagnostic missing / backend rejected / passed hidden / display confirmed のExit Gate fixture。 |
+| `ai/tests/test_emlis_ai_observation_diagnostic_compare_step7.py` | no backend / no frontend / modal false / modal true のjoin semantics。 |
+| `ai/tests/test_emlis_ai_observation_diagnostic_branching_step8.py` | unknown / unclassifiedをdiagnostic enrichmentへ戻すbranching。 |
+
+support境界:
+- regression greenをProduct Gate達成やpublic releaseとして扱わない。
+- Blind QAなしでread feelingを自動補完しない。
+- backend passedだけで表示確認済みにしない。
+- raw input / public `comment_text` 本文をsupport reportへ入れない。
