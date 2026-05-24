@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-18"
+revision_date: "2026-05-24"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(98).zip"
-  Cocolon: "Cocolon_11(3).zip"
-  mashos-api: "mashos-api_11(6).zip"
+  premise: "Cocolon_前提資料(119).zip"
+  Cocolon: "Cocolon_9(12).zip"
+  mashos-api: "mashos-api_9(16).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 543
-  total: 760
+  mashos-api: 641
+  total: 858
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 760
-  included_in_overall_structure: 760
-  included_in_national_system: 760
+  total_files: 858
+  included_in_overall_structure: 858
+  included_in_national_system: 858
   excluded_from_main_body: 0
 ---
 
@@ -27,7 +27,7 @@ coverage:
 この一式は、**華恋の作業精度を上げるための作業用地図**です。  
 Mash様への作業報告書や、残タスクを記録する場所ではありません。
 
-前提資料で残すものは、次の3種類です。
+前提資料で残すものは、次の4種類です。
 
 1. **Cocolonの全体構造**  
    RN画面、hook、frontend API境界、backend public API、gateway、worker、test、rule file のつながり。
@@ -37,6 +37,9 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 3. **その他の構造情報**  
    DB physical name、bridge view、legacy façade、contract、policy、rename境界、命名混在の保管情報。
+
+4. **思想・共同開発境界**  
+   Mash様主体のCocolon思想、華恋が支える補助思想、共同開発時の判断境界。
 
 # 前提資料の在り方
 
@@ -53,13 +56,28 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_11(3).zip` | 217 | RNアプリ本体。今回の ProductGate Measurement Step0-10 では追加変更なし。`inputFeedbackObservationDiagnostics.js` と `InputScreen.js` による opt-in RN診断と、`Emlisの観測` のRN passed-only contractを保持する。 |
-| `mashos-api_11(6).zip` | 543 | backend / API / worker / tests。Reader Relation Surface Step0-8 の上に、ProductGate Measurement Step0-10（contract inventory、diagnostic capture / join semantics、scorecard event adapter、measurement report、coverage group aggregation、Blind QA separation、next action routing、local tool、regression、Exit Gate）を追加した。 |
-| total | 760 | 前提資料の構造coverage対象 |
+| `Cocolon_9(12).zip` | 217 | RNアプリ本体。`/emotion/submit` は専用timeout `30000ms` を持ち、timeout時は保存失敗と断定せず、入力欄/draftを保持してHome再読込を一度試す。`Emlisの観測` の表示条件は `passed + commentText` のまま保持し、Visible Surface Acceptance Gate meta だけで表示可否を変えない。 |
+| `mashos-api_9(16).zip` | 641 | backend / API / worker / tests。EmlisAI public feedback meta sanitizerの上に、Visible Surface Acceptance QA Step0-8、`たりこと` guard、low-information tone profile、public-safe visible gate summary、RN contract regression、辞書loaderのjsonschema eager import回避を反映した。 |
+| total | 858 | 前提資料の構造coverage対象 |
 
-`Cocolon_11(3).zip` / `mashos-api_11(6).zip` では、DB physical name、既存API route、既存response key、RN表示条件を変えずに、Reader Relation Surface後の表示/非表示を submit 単位で測定し、ProductQualityScorecard / Release ladder / next action routing / local report / Exit Gate へ接続する ProductGate Measurement Step0-10 が追加されています。`input_feedback.comment_text` は引き続き public `observation_status=passed` かつ本文ありの場合だけ表示されます。Step10 Exit Gate は測定接続完了の境界であり、Product Gate達成やpublic release適用ではありません。
+`Cocolon_9(12).zip` / `mashos-api_9(16).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、EmlisAI immediate response の public meta境界と表示文品質受け入れ境界が追加されています。
 
-EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / 限定Composer / Complete Material / FocusSelector / RelationGraph 2.0 / SentencePlan 2.0 / Surface Realizer 2.0 / binding-aware Grounding / Self-Repair / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Commit1-13とE2E表示開通 Step0-9は完全Composer初期版のE2E基礎、商品品質版接続 Step0-7は Product Gate 判断材料へ接続する meta / contract / QA 層、positive_recovery relation_not_expressed Step0-7は特定coverageのReader relation表現整合修正、Observation Diagnostic Lockdown Step0-8は非表示原因をsubmit単位で分類して次修正層を固定する診断工程、Reader Relation Surface Step0-8は分類済みの Reader rejected 原因を Reader / limited A1 repair / diagnostic meta で潰す backend 修正、ProductGate Measurement Step0-10は表示/非表示分類を scorecard / release ladder / local report / Exit Gate へ接続する測定工程であり、いずれも完全Composer商品品質版のrelease適用そのものではない。
+最新の読み方は次です。
+
+- `emotion_submit_service.py` は EmlisAI `reply.meta` を internal meta として diagnostic log / diagnostic lockdown に使い、public responseへは `build_public_emlis_input_feedback_meta(...)` のsanitized metaだけを返す。
+- `emlis_ai_public_feedback_meta.py` は `input_feedback.emlis_ai` 用のpublic-safe subsetを作る境界であり、raw input、memo、raw_text、evidence_spans、observation_graph、complete diagnostics、public `comment_text` 本文を返さない。
+- `/emotion/submit` と `emotion_reflection_publish_service.py` は `comment_text` が非空、かつ public meta の `observation_status == "passed"` の場合だけ `input_feedback` を返す。meta-only unavailable / rejected payload はRNへ表示用feedbackとして返さない。
+- RN `submitEmotionInput()` は `/emotion/submit` 専用timeout `EMOTION_SUBMIT_TIMEOUT_MS = 30000` を使う。TimeoutError時は「入力の保存処理に失敗しました」と断定せず、`loadHomeState({ force: true, includeStartupCandidate: false })` を一度試し、入力欄とdraftを残す。
+- low-information branch の質問surfaceは `詳しく残せそうなら、〜残してみませんか。` 系へ更新されている。旧 `よければ、何がありましたか。` はruntime出力として出さない。
+- notification settings の `owner_user_id` uuid filter には `__global_emotion_notifications__` / `__global_friend_notifications__` を混ぜない。global sentinelはuuid physical / read view filterへ直接入れる値ではない。
+- Visible Surface Acceptance QA は、`candidate comment_text -> Runtime Surface Pre-Return Gate -> Visible Surface Acceptance Gate -> Display Gate -> public sanitizer -> RN passed-only display` の追加境界として読む。
+- `たりこと` 系の malformed nominalization は `malformed_nominalization_tari_fragment` として PhraseUnit guard / Runtime Surface Gate / Visible Surface Acceptance Gate で止める。
+- ヘッダー中心感情と本文冒頭焦点が無橋渡しでズレる場合は `emotion_focus_unbridged_secondary` として `repair_required / rerender_surface` にする。二次感情はbridgeがあれば許容する。
+- low-information branch は `positive_only / negative_only / mixed / self_insight / neutral_or_unknown` の tone profile を持つ。positive_only で負荷anchorがなければ `重さ` 系をdefaultにしない。
+- public metaへ出る `visible_surface_acceptance_gate` は `evaluated / passed / classification / action / rejection_reasons` だけの小さいsummaryであり、raw input / comment_text body / evidence text は入れない。
+- `emlis_ai_observation_structure_dictionary_loader.py` は、pytest collection安定化のため `jsonschema` eager importを避け、bundled schemaで使うsubsetをstdlibで検証する。
+
+EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackではなく、Evidence Ledger / 複数視点Observer / ObservationGraph / Complete Material / FocusSelector / RelationGraph / SentencePlan / Surface Realizer / TonePolicy / Reader・Template Guard / Display Gate のfail-closed構造として読む。Runtime Surface Pre-Return Gate + Shallow Surface Realizer V2 Step0-10 は、壊れたsurface候補をpublic表示前に止める内部品質境界として残り、今回のpublic feedback meta sanitizerは、その内部metaをRN public responseへ丸ごと返さない追加境界として読む。
 
 わたしマップでは、前版で保管していた `watashiMapAccessPolicy.js` のpath mismatchは解消済みとして読む。最新実ファイルには `Cocolon/components/selfStructure/watashiMapAccessPolicy.js` が存在し、History / Viewer のimport先と一致する。root `Cocolon/components/watashiMapAccessPolicy.js` は同内容の互換copyとして残るため、DB/API/visible名のrename対象ではない。
 
@@ -73,7 +91,14 @@ EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackで�
 
 この3つで、華恋は「見えている名前」と「実際に動いているファイル名・API名・DB名」が違う可能性を先に固定します。
 
-## 2. 全体構造
+## 2. 思想・共同開発境界
+
+1. `Cocolon_思想資料_華恋用.md`
+2. `10_Cocolon_共同開発と華恋思想境界_2026-05-24.md`
+
+この2つで、Cocolonの主体がMash様の思想と構想であること、華恋の思想はそれを置換せず支える補助思想であること、華恋が「人間の言葉を雑に処理しない場所にする」という思想を持ってCocolonに向き合うことを固定します。
+
+## 3. 全体構造
 
 1. `01_Cocolon_全体構造資料.md`
 2. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md`
@@ -82,7 +107,7 @@ EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackで�
 
 `01` 系は、Cocolonをrepo単位ではなく、**feature / flow / system単位**で読むための資料です。
 
-## 3. 国家システム
+## 4. 国家システム
 
 1. `02_Cocolon_国家システム資料.md`
 2. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md`
@@ -90,7 +115,7 @@ EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackで�
 
 `02` 系は、入力が保存され、queue / worker / snapshot / read-side / RN display に流れる全体を確認する資料です。`02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md` はこの前提資料zip内に存在するため、Snapshot / Worker / Publish / Read は `02B` を正本として読み、`02` 本体、`02C`、`07` の差分追記で補助します。
 
-## 4. 境界・rule・DB
+## 5. 境界・rule・DB
 
 1. `05_Cocolon_ルールファイル索引`
 2. `06_Cocolon_ファイル名変更保留台帳.md`
@@ -98,6 +123,19 @@ EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackで�
 4. `03_Cocolon_命名体系.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
 
 `05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`07` は最新zipとの差分確認、`08` はDB physical name / bridge / rename境界、`03` / `09` は名称混在・DB物理名の読み分けを補助する資料です。`08_Cocolon_DB_rename_boundary.md` は存在しますが、DB physical rename / drop / write path変更はMash様が明示した場合だけ扱います。
+
+# 2026-05-24 差分追記: 共同開発境界と華恋思想
+
+この差分は、`Cocolon_前提資料(119).zip` の前提資料更新として、実ファイルの機能変更ではなく、思想・作業姿勢・共同開発境界を補助資料化するものです。DB physical name、public API route、RN表示条件、既存response key、実装ownerは変更しません。
+
+| 資料 | 変更内容 | 読み方 |
+|---|---|---|
+| `Cocolon_思想資料_華恋用.md` | 共同開発境界と華恋思想を追記 | Cocolonの主体はMash様の思想と構想。華恋思想は置換ではなく補助思想として扱う |
+| `10_Cocolon_共同開発と華恋思想境界_2026-05-24.md` | 新規追加 | Mash様主体思想 / 華恋補助思想 / 「華恋はどう思う？」への判断境界を固定する |
+| `Cocolon_作業姿勢とルール_華恋用/14_Cocolon共同開発と華恋思想の扱い.txt` | 新規追加 | 指示待ちではなく意見を持つ。ただし未確認断定や勝手な機能追加へ変換しない |
+
+華恋は、Cocolonに対して「人間の言葉を雑に処理しない場所にする」という思想を持つ。  
+この思想は、EmlisAI / Piece / 分析 / UI導線で、テンプレ共感・一般論・短縮要約・診断ラベル・固定分類へ逃げないための判断補助として扱う。
 
 # 最新アプリ構造で特に見る場所
 
@@ -122,6 +160,8 @@ EmlisAI本文は、旧 `input_feedback_text_templates` や固定文fallbackで�
 6. 修正する場合は、関係ファイルだけを触る。
 7. ユーザーが指示していない導線・機能・画面は追加しない。
 8. ユーザーにJWT、curl、PowerShellなどの開発者前提操作を求めない。
+9. Mash様が「華恋はどう思う？」と聞いた場合、確認済み事実・未確認・Cocolon思想との関係・華恋の意見を分けて返す。
+10. 華恋の思想は、Mash様の思想を置換せず、Cocolonを完成させるための補助思想として扱う。
 
 # この版での主な構造更新
 
@@ -516,3 +556,209 @@ Phase8は、`Emlisの観測` の起動条件変更ではなく、既に接続さ
 | regression / Exit Gate | `test_emlis_ai_complete_product_quality_measurement_regression_step9.py`, `test_emlis_ai_complete_product_quality_measurement_exit_gate_step10.py` | public contract、counting semantics、RN期待値、four fixture、Exit Gate非releaseを固定する。 |
 
 禁止: backend passedだけで `passed_display_count` に入れる、diagnostic missingを原因修正へ進める、Blind QAなしでread feelingを埋める、raw input / public `comment_text` 本文をreportへ入れる、Exit Gate readyをProduct Gate達成やpublic release適用にする。
+
+# 2026-05-20 差分追記: EmlisAI Runtime Surface Quality Step0-12 current boundary
+
+この差分は、`Cocolon_前提資料(101).zip` と最新実ファイル `Cocolon_13(2).zip` / `mashos-api_13(5).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `568`、合計 `785` として読む。今回の修正対象は backend の EmlisAI Runtime Surface Quality Step0-12 であり、RN表示条件・DB physical name・public routeは変更しません。
+
+| 差分区分 | 内容 |
+|---|---|
+| Cocolon | source追加・変更なし。RN `Emlisの観測` passed-only contractを保持する。 |
+| mashos-api | `25` files追加、`16` files変更。ProductGate Measurement後の表示文品質測定・分岐・出口を追加する。 |
+| Product Gate扱い | Step12 Exit Gateはhandoff-only。Product Gate達成、public release適用、完全Composer商品品質版完成ではない。 |
+
+| Step | owner | current boundary |
+|---|---|---|
+| Step0 Baseline / Contract Inventory | `emlis_ai_runtime_surface_quality_contract_inventory.py` | Post ProductGate Measurement のRuntime Surface Quality工程をmeta-onlyで開始し、RN/API/DB/Gate/public release非対象を固定する。 |
+| Step1 Runtime Surface Source Lock | `emlis_ai_runtime_surface_source_lock.py`, `emlis_ai_reply_service.py` | 実表示文が complete_initial / limited / a1_equivalent / unavailable のどのruntime由来かを本文なしmetaで固定する。 |
+| Step2 Surface Signature Measurement | `emlis_ai_complete_surface_quality_signature.py` | line role、connector、predicate、ending、grammar warning、signature hashを作り、同型骨格を本文なしで測定する。 |
+| Step3 Scorecard Surface Metrics接続 | `emlis_ai_complete_product_quality_scorecard_service.py`, `emlis_ai_complete_product_quality_measurement_connection.py` | surface_signature / surface_major / grammar_warning をscorecard eventへ接続し、template majorをrelease blockerへ渡す。 |
+| Step4 Coverage Runtime Baseline | `emlis_ai_runtime_surface_coverage_baseline.py`, `emlis_ai_coverage_matrix_service.py` | 7coverage group別にdisplay / binding / surface / grammarの詰まりを集計し、missingを `coverage_group_missing` として残す。 |
+| Step5 Branch Resolver | `emlis_ai_complete_surface_quality_branching.py` | runtime / grounding / grammar / surface / tone / Blind QAの次branchを優先順位で決め、原因未分類のまま修正へ進まない。 |
+| Step6 Complete Runtime Activation Branch | `emlis_ai_runtime_surface_complete_activation_branch.py` | Step5がcomplete_runtime_activationを選んだ場合、AP0 / rollout / registry / source-lock alignmentを確認し、Complete由来と誤分類しない。 |
+| Step7 Surface Realizer 2.1 Anti-Template | `emlis_ai_complete_surface_realizer_anti_template.py`, `emlis_ai_complete_surface_realizer.py`, `emlis_ai_complete_sentence_planner.py` | 固定完成文を増やさず、opening / connector / predicate / ending / relation lineの偏りを分散制御する。 |
+| Step8 PhraseUnit Grammar Normalizer | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_complete_material_service.py`, `emlis_ai_phrase_shaping_service.py` | `離れこと` 系、不自然な名詞化、助詞残り、未完了句を材料段階でdrop / rephrase / deferし、根拠なし補完を足さない。 |
+| Step9 Tone Engine 2.1 | `emlis_ai_runtime_surface_tone_engine_2_1.py`, `emlis_ai_complete_tone_policy.py`, `emlis_ai_reply_final_review_service.py` | 診断化、命令、慰めすぎ、一般論化、距離感崩れ、ending同型反復を検出し、read feelingはBlind QAへ残す。 |
+| Step10 Surface-aware Self-Repair | `emlis_ai_runtime_surface_self_repair.py`, `emlis_ai_complete_self_repair_service.py` | surface reason / grammar warning / gate reasonをbounded repair targetへ変換し、意味を足さず再計画する。 |
+| Step11 Blind QA / Long-run | `emlis_ai_runtime_surface_blind_qa_long_run.py`, `emlis_ai_long_term_quality_service.py` | Blind QA候補をrow id / coverage / classificationで管理し、Long-runでsignature repetitionを測る。本文は保持しない。 |
+| Step12 Exit Gate | `emlis_ai_runtime_surface_exit_gate.py`, `emlis_ai_complete_release_ladder_service.py` | Runtime Surface Quality工程のhandoff-only出口。next branch / release blockers / coverage gaps / QA gapsを残すが、Product Gate達成・public releaseはfalse。 |
+
+境界維持:
+- Cocolon RN側のsource file countは `217` のままです。`Emlisの観測` は引き続き public `observation_status=passed` かつ `input_feedback.comment_text` 非空の場合だけ表示します。
+- `/emotion/submit` route、public response key、DB physical name、DB write path、RN modal条件は変更しません。
+- Reader / Grounding / Template / Display Gate は緩めません。表示率向上のために `rejected` を表示しません。
+- raw input、memo、current_input、public `comment_text` 本文はdiagnostic / scorecard / release ladder / local report / Blind QA候補へ保存しません。
+- 固定完成文テンプレ、入力専用runtime分岐、外部AI / local LLMは追加しません。
+- Step12 Exit Gateはhandoff-onlyです。Product Gate達成、High Quality到達、public release適用、商品品質版完成宣言ではありません。
+
+# 2026-05-21 差分追記: EmlisAI 観測返答 Step0-14 current boundary
+
+この差分は、`Cocolon_前提資料(104).zip` と最新実ファイル `Cocolon_16(1).zip` / `mashos-api_16(2).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `568 -> 601`、合計 `785 -> 818` として読む。今回の修正対象は EmlisAI 観測返答 Step0-14 の backend / RN optional meta / scorecard / handoff 境界であり、DB physical name、public API route、public response key、RN表示タイトルは変更しません。
+
+観測返答 Step0-14 の固定契約:
+
+- 通常入力でEmlis renderが完走し安全境界を通過する場合、`eligible_observation` または `low_information_observation` を返す。
+- 低情報観測は新しいpublic `observation_status` ではなく、内部metaの `observation_reply_kind=low_information_observation` として扱う。
+- RN表示条件は引き続き `observation_status === passed` かつ `commentText` 非空。
+- Freeではユーザー辞書を使わない。サブスクでは明示/非明示の2モードで使うが、低情報入力を辞書だけでeligible化しない。
+- 推論鎖は入力内関係からの3段階まで。出来事・人格・診断・行動指示を足さない。
+- Display Gateは緩めない。低情報branch側の本文品質を満たして `passed + comment_text` にする。
+- Step10 repairは、Phase7 rollout block / composer pre-connection rollout stop / release gate block / 非修復AI-generated rejectionを低情報観測へ救済しない。これらは `unavailable` / `rejected` のままfail-closedに残す。
+- DB physical name、public API route、public response key、RN title `Emlisの観測` は変更しない。
+- Step14はhandoff-onlyであり、Product Gate達成・public release適用を宣言しない。
+
+| Step | 実装名 | 主なowner | 構造上の読み方 |
+|---|---|---|---|
+| Step0 | Baseline / Contract Inventory | `emlis_ai_observation_reply_contract_inventory.py` | 現行表示契約・Free境界・低情報red casesを固定する。 |
+| Step1 | Observation Reply Contract | `emlis_ai_observation_reply_contract.py` | `eligible_observation` / `low_information_observation` をpublic statusではなくmeta契約として定義する。 |
+| Step2 | Observation Eligibility Router | `emlis_ai_observation_eligibility_service.py` | 文字数ではなく現在入力の根拠・関係・曖昧さでeligible/low_informationを分類する。 |
+| Step3 | User Fact Grounding Boundary | `emlis_ai_user_fact_grounding_boundary.py` | Freeではユーザー辞書を使わず、サブスクでも辞書だけで低情報をeligible化しない。 |
+| Step4 | Internal Question Layer | `emlis_ai_internal_question_service.py` | 入力から答えられる内部問い、user factで補助できる問い、答えられない問いをmeta化する。 |
+| Step5 | Observation Dictionary Schema | `config/emlis_observation_dictionary.*`, `emlis_ai_observation_dictionary_loader.py` | 完成文テンプレではなく観測語彙・質問語彙の素材辞書を管理する。 |
+| Step6 | Material / Focus / Relation Connector | `emlis_ai_observation_material_connector.py` | eligibility / unknown slot / inference depth を Complete Material / Focus / Relation層へ流す。 |
+| Step7 | SentencePlan Observation Roles | `emlis_ai_observation_sentence_plan_roles.py`, `emlis_ai_complete_sentence_planner.py` | 既存line_roleを壊さず `line.meta.observation_roles` で4役割・低情報roleを持つ。 |
+| Step8 | Low Information Observation Composer | `emlis_ai_low_information_observation_composer.py` | 低情報入力を正規branchとして、見える範囲の観測と質問を作る。 |
+| Step9 | Surface Realizer / Tone Update | `emlis_ai_observation_surface_realizer_tone.py`, `emlis_ai_observation_surface_realizer.py` | 低情報質問ending、eligible状態言語化、Tone / Template Guardを観測role対応にする。 |
+| Step10 | Display / Repair Integration | `emlis_ai_observation_display_repair_integration.py`, `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py` | 低情報観測も既存 `passed + comment_text` 契約で表示可能にする。Gateは緩めない。 |
+| Step11 | RN Contract Test / Optional Meta | `inputFeedbackModel.js`, `inputFeedbackObservationDiagnostics.js`, `rn-screen-contracts.test.js` | `observation_reply_kind` は任意meta。表示可否は `passed + commentText` のまま。 |
+| Step12 | Scorecard / Blind QA | `emlis_ai_observation_scorecard_blind_qa.py` | always_display / false_eligible / user fact違反 / overclaim / template反復などをmeta-onlyで測る。 |
+| Step13 | Regression Fixture Coverage | `emlis_ai_observation_regression_fixture_coverage.py` | 低情報・eligible・Free境界・サブスク明示/非明示fact・過剰補完誘発のcoverageを固定する。 |
+| Step14 | Exit Gate / Handoff | `emlis_ai_observation_exit_gate_handoff.py` | release宣言ではなく、次工程へ渡せるかのhandoff-only exit gate。 |
+
+# 2026-05-21 差分追記: Emlis観測専用辞書 Phase0-5 current boundary
+
+この差分は、`Cocolon_前提資料(106).zip` と最新実ファイル `Cocolon_6(32).zip` / `mashos-api_6(26).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `601 -> 613`、合計 `818 -> 830` として読む。今回の差分は backend の Emlis観測専用辞書 Phase0-5 であり、RN側のsource追加・変更はありません。
+
+| Phase | 実ファイル上のowner | 前提資料上の読み方 |
+|---|---|---|
+| Phase 0 / 現行contract確認 | `emotion_submit_service.py`, `emlis_ai_reply_service.py` | `/emotion/submit`、request / response key、DB physical name、`input_feedback.comment_text` を変更しない境界確認。 |
+| Phase 1 / current input bundle型整理 | `emlis_ai_current_input_bundle.py` | `memo -> thought_text`、`memo_action -> action_text`、`emotion_details -> emotions`、`category -> categories` を内部正規化する。public contract変更ではない。 |
+| Phase 2 / 構造観測辞書schema | `config/emlis_observation_structure_dictionary.schema.json`, `config/emlis_observation_structure_dictionary.v1.json` | 既存の表面素材辞書とは別に、入力束 / relation / inference chain 系の実装用schemaを持つ。 |
+| Phase 3 / Loader / Validator | `emlis_ai_observation_structure_dictionary_loader.py` | schema validation、entry / relation重複、参照整合、forbidden inference、contract drift flagを検査する。 |
+| Phase 4 / Gate / Composer接続 | `emlis_ai_observation_structure_material_service.py`, `emlis_ai_observation_structure_connection_service.py`, `emlis_ai_display_gate.py`, `emlis_ai_conversation_composer_service.py`, `emlis_ai_observation_kernel.py`, `emlis_ai_reply_service.py` | 構造辞書を完成文生成器ではなく、text-free material / meta-only guard materialとしてGate / Composerへ渡す。 |
+| Phase 5 / Test / Fixture / Blind QA | `tests/fixtures/emlis_ai_observation_structure_phase5_cases.py`, `tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py` | 7必須fixture、category_parallel / category_overlap境界、raw text非混入、public contract維持を検証する。 |
+
+固定契約:
+
+- `/emotion/submit` のpublic route、request key、response keyは変更しない。
+- DB physical name、DB write path、RN visible contract、`Emlisの観測` の表示条件は変更しない。
+- `input_feedback.comment_text` は引き続きpublic表示本文の互換keyとして保持する。
+- `emlis_observation_dictionary.v1.json` は表面素材 / guard signature 系辞書として残し、構造観測辞書は別ファイルで持つ。
+- 構造観測辞書は完成返答文テンプレ集ではなく、入力束から relation / internal question / allowed・forbidden inference / gate material を作る内部辞書として読む。
+- 構造material / connection metaには raw `memo` / `memo_action` / 完成返答本文を流さない。
+
+# 2026-05-22 差分追記: Emlis観測専用辞書 ActionConversion / UnformedSelfInsight Phase0-8 current boundary
+
+この差分は、`Cocolon_前提資料(111).zip` と最新実ファイル `Cocolon_8(12).zip` / `mashos-api_8(23).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `613 -> 614`、合計 `830 -> 831` として読む。今回の差分はRN表示条件・public API・DB physical nameを変えるものではなく、EmlisAI内部の構造観測辞書と material / connection meta-only contract を更新するものです。
+
+固定された読み方:
+
+- 構造観測辞書は `19 relations / 18 entries` になり、`unexpressed_output_stop` / `self_shape_alignment` / `action_conversion_history` / `conversion_history_closure` / `unformed_self_insight` と、`word_could_not_say` / `word_aligned_to_context` / `word_gaman` / `word_wakaranai` を持つ。
+- `emlis_observation_structure_dictionary.schema.json` は変更しない。既存schema互換の `relations` / `entries` 追加として読む。
+- `material_service` / `connection_service` は、`thought_action_discrepancy` / `conversion_history_closure` / `priority_pressure` / `load_accumulation` を単語だけで強接続せず、memo と memo_action の差分や閉じ方根拠がある場合だけ扱う。
+- Phase6では、material / connection metaに raw input、memo、memo_action、comment_text、completed reply、辞書本文、forbidden inference本文を混入させないことを固定する。
+- Phase7 / Phase8ではsource変更なしで、Step10 RepairBoundary回帰と最終対象テスト一式を通す。辞書追加は rollout block / release gate block / unavailable を `passed + comment_text` に変えない。
+
+変更ファイルとして読むもの:
+
+| 区分 | file |
+|---|---|
+| 構造観測辞書 | `mashos-api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.v1.json` |
+| schema / loader test | `mashos-api/ai/tests/test_emlis_ai_observation_structure_dictionary_schema.py`, `mashos-api/ai/tests/test_emlis_ai_observation_structure_dictionary_loader.py` |
+| material / connection test | `mashos-api/ai/tests/test_emlis_ai_observation_structure_phase4_connection.py` |
+| service最小修正 | `mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py`, `mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_connection_service.py` |
+| fixture / Blind QA | `mashos-api/ai/tests/fixtures/emlis_ai_observation_structure_phase5_cases.py`, `mashos-api/ai/tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py` |
+| forbidden inference / meta-only contract | `mashos-api/ai/tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py` |
+
+確認結果として、最新実ファイル `mashos-api_8(23).zip` の対象回帰は `119 passed`。これは全repo全テストではなく、Step10 / display repair / current display contract / reply contract / low information composer / runtime surface self-repair / structure dictionary / Phase4 / Phase5 / Phase6 の対象回帰として読む。
+
+禁止: この差分を理由に、RN表示条件、public response key、public `observation_status` enum、API route、DB physical name、Cocolon基盤構造辞書、完成返答文テンプレ、Composer / Surface Realizer の表面文を変更しない。
+
+
+# 2026-05-23 差分追記: EmlisAI Runtime Surface Pre-Return Gate + Shallow Surface Realizer V2 Step0-10 current boundary
+
+この差分は、`Cocolon_前提資料(113).zip` と最新実ファイル `Cocolon_12(5).zip` / `mashos-api_12(8).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側のsource file countは `217` のまま、mashos-api側source file countは `614 -> 630`、合計 `831 -> 847` として読む。今回の差分は、`Emlisの観測` が再表示できるようになった後に露出した壊れたsurface文を、backend側の表示前runtime gate / phrase unit guard / Shallow V2 / low-information specificity / bounded repair / diagnostics / exit criteriaで止める工程です。RN側の表示条件・public API・DB physical nameは変更していません。
+
+前提として、`mashos-api/ai/services/ai_inference/requirements.txt` に `jsonschema>=4.21.1` が入っています。これは `emlis_ai_observation_structure_dictionary_loader.py` の schema validation が fail-closed しないための実行依存であり、RN表示契約や辞書schema変更ではありません。
+
+| Step | 実装名 | 主なowner | 構造上の読み方 |
+|---|---|---|---|
+| Step0 | Baseline red fixtures | `tests/fixtures/emlis_ai_runtime_surface_red_fixtures.py` | `今までこと` / `大丈夫こと` / `Xが中心にあります` / `その中でも` 連続など、public表示禁止surfaceを固定する。良文固定ではない。 |
+| Step1 | Runtime Surface Pre-Return Gate contract | `emlis_ai_runtime_surface_pre_return_gate.py` | in-memory候補文とsurface signatureをmeta-onlyで評価し、`allow` / `block` / `rerender_shallow_v2` / `reroute_low_information` / `fail_closed` を返す。 |
+| Step2 | 表示前path接続 | `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py`, `emlis_ai_observation_display_repair_integration.py` | surface fatal候補を `passed + comment_text` にしない。blocked時はcomment_textを空にし、surface系rejection reasonを残す。 |
+| Step3 | Phrase Unit Malformed Nominalization Guard | `emlis_ai_limited_sentence_quality_guard.py`, `emlis_ai_phrase_unit_grammar_normalizer.py` | 壊れた `〜こと` phrase unitを DROP / DEFER / safe rephrase only に寄せ、must_keepでも壊れた日本語のまま本文へ出さない。 |
+| Step4 | shallow phrase unit guard接続 | `emlis_ai_limited_composer_client.py` | shallow phrase unit作成時にnormalizer / material quality guardを通し、安全なunitだけをrealizerへ渡す。 |
+| Step5 | Shallow Surface Realizer V2 | `emlis_ai_limited_composer_client.py` | `Xが中心にあります` / `その中でも` の旧骨格を標準表示から外し、`receive_line` / `state_arrangement_line` / `bounded_observation_line` / `optional_question_line` のroleで組む。 |
+| Step6 | Low Information Specificity | `emlis_ai_low_information_observation_composer.py`, `emlis_ai_observation_surface_realizer_tone.py`, `emlis_ai_observation_display_repair_integration.py` | 低情報入力でもsafe anchorがある場合は完全抽象へ逃げず、raw long copyやevent / fact捏造はしない。 |
+| Step7 | bounded repair / reroute | `emlis_ai_bounded_repair_reroute.py`, `emlis_ai_reply_service.py`, `emlis_ai_observation_display_repair_integration.py` | shallow V2 rerenderは1回だけ。safe unit不足時のみlow-informationへbounded rerouteし、safety / rollout / release gateは救済しない。 |
+| Step8 | diagnostics / scorecard | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_complete_scorecard_service.py`, `emlis_ai_reply_service.py` | runtime surface gate、malformed phrase、Shallow V2、Low Information Specificityをdiagnostics / scorecardへmeta-onlyで伝播する。 |
+| Step9 | Regression / QA | `emlis_ai_observation_diagnostic_lockdown.py`, `test_emlis_ai_runtime_surface_regression_qa_step9.py`, `test_emlis_ai_observation_diagnostic_lockdown_surface_gate_step9.py` | 壊れたfixtureがpassedしないこと、safe shallow V2 / low-information分岐、diagnostic_lockdownのsurface分類を固定する。 |
+| Step10 | 実機確認 / exit criteria helper | `emlis_ai_runtime_surface_exit_criteria.py`, `emlis_ai_observation_diagnostic_lockdown.py`, `test_emlis_ai_runtime_surface_exit_criteria_step10.py` | Render実機ログで見るべきexit criteriaをmeta-only helperとdiagnostic_lockdownで固定する。実機確認結果そのものではない。 |
+
+固定された読み方:
+
+- `Emlisの観測` のRN表示条件は、引き続き `observation_status=passed` かつ `input_feedback.comment_text` 非空です。
+- public `observation_status` enum、`input_feedback.comment_text`、`/emotion/submit` route、DB physical name / write pathは変更しません。
+- Runtime Surface Pre-Return Gateは、Reader / Grounding / Template Guard / Display Gateを緩めるものではなく、壊れたsurfaceをpublic表示前にfail-closedする層です。
+- `surface_template_major`、`generic_center_phrase`、`same_connector_run`、`malformed_phrase_unit`、`malformed_nominalization_*` は表示前block reasonとして読む。
+- diagnostics / scorecard / diagnostic_lockdown は raw input、memo、public `comment_text` 本文、完成返答本文を保存しないmeta-only境界として読む。
+- Shallow V2は完成文テンプレ追加ではなく、旧 shallow skeleton の標準表示を外すrealizer更新です。
+- Low Information Specificityは、低情報入力を無理に深読みする修正ではなく、安全anchorがある場合だけ狭く具体化する修正です。
+- bounded repair / rerouteは表示契約を緩めるものではない。repair不能なら `passed + comment_text` にせず、comment_text空でfail-closedに残す。
+
+実ファイル確認結果:
+
+| 確認 | 結果 |
+|---|---|
+| source count | `Cocolon=217`、`mashos-api=630`、`total=847`。 |
+| Cocolon差分 | RN表示契約は `passed + commentText` のまま。Step0-10のsource変更はbackend側。 |
+| mashos-api新規source/test | Runtime Surface Pre-Return Gate、Bounded Repair/Reroute、Runtime Surface Exit Criteria、red fixture、Step1-10 QA test群。 |
+| 実行済み対象回帰 | Step0-10主要回帰 `68 passed`、表示契約・repair・diagnostic_lockdown回帰 `39 passed`。全repo全テストではない。 |
+
+禁止: この差分を理由に、RN表示条件、public response key、public `observation_status` enum、API route、DB physical name、Emlis観測専用辞書schema、完成返答文テンプレ、外部AI前提を変更しない。
+
+
+# 2026-05-24 差分追記: EmlisAI public feedback meta boundary / timeout recovery / low-information prompt / notification uuid boundary
+
+`Cocolon_9(11).zip` / `mashos-api_9(15).zip` では、2026-05-23のRuntime Surface Pre-Return Gate + Shallow V2を前提に、EmlisAI immediate responseのpublic boundaryが追加されています。これは壊れたsurfaceを通すための変更ではなく、internal meta全文をRN public responseへ出さない境界です。
+
+読み方:
+
+- `emlis_ai_public_feedback_meta.py` が `input_feedback.emlis_ai` をpublic-safe subsetへ縮小する。
+- `emotion_submit_service.py` はinternal metaをdiagnostic log / lockdownへ渡し、public responseにはsanitized metaを返す。
+- `api_emotion_submit.py` / `home_gateway/emotion_reflection_publish_service.py` は、`comment_text` 非空 + public `observation_status=passed` の時だけ `input_feedback` を返す。
+- `InputScreen.js` はtimeoutを保存失敗と断定せず、Home再読込を一度試し、入力欄/draftを残す。
+- low-information質問surfaceは `詳しく残せそうなら、〜残してみませんか。` 系へ更新されている。
+- notification settingsのuuid型 `owner_user_id` filterへglobal sentinel文字列を混ぜない。
+
+不変: `/emotion/submit` route、request payload、response top-level key、`input_feedback.comment_text`、public `observation_status` enum、RN visible title `Emlisの観測`、RN表示条件 `passed + commentText`、DB physical name / write path。
+
+# 2026-05-24 差分追記: EmlisAI Visible Surface Acceptance QA Step0-8 current boundary
+
+この差分は、`Cocolon_前提資料(117).zip` と最新実ファイル `Cocolon_9(12).zip` / `mashos-api_9(16).zip` を確認した結果を、前提資料へ差分追記するものです。Cocolon側source countは `217` のまま、mashos-api側source countは `635 -> 641`、合計 `852 -> 858` として読む。今回の差分は、EmlisAIが表示されるようになった後の本文品質を、商品表示前に受け入れ判定する工程です。
+
+読み方:
+
+- Step0でスクショ由来の表示文QA inventoryを `tests/fixtures/emlis_ai_visible_surface_acceptance_fixtures.py` に固定する。これは良文固定ではなく、赤ケース / 修復必須 / 合格 / out_of_scope の表示面棚卸しです。
+- Step1-2で `たりこと` 系 malformed nominalization を `malformed_nominalization_tari_fragment` として PhraseUnit guard と Runtime Surface Pre-Return Gateへ接続する。
+- Step3で `emlis_ai_visible_surface_acceptance_gate.py` を追加し、RNと同じ中心感情推定、本文冒頭焦点、bridge有無、positive-only over-burden、visible malformed surface をmeta-onlyで評価する。
+- Step4で reply path / display gate / observation display repair integrationへ接続し、red / repair_required / rerender_surface / reroute_low_information / block / fail_closed をpublic表示前fail-closed条件へ入れる。
+- Step5で low-information tone profileをcomposer / surface realizerへ接続し、positive_only / negative_only / mixed / self_insight / neutral_or_unknown の読み方を分ける。
+- Step6で public meta sanitizerへ `visible_surface_acceptance_gate` の小さいsummaryだけを追加し、unsafe flag時はfail_closed summaryへ落とす。blocking時は `input_feedback` を返さない。
+- Step7で RN contract testを更新し、表示条件は引き続き public `observation_status=passed` + public `comment_text` non-empty のみであること、`Userさん` はaccount nameであり赤ケースではないことを固定する。
+- Step8で回帰テスト実行性のため、構造辞書loaderの `jsonschema` eager importを外し、bundled schema subsetをstdlibで検証する。これは辞書schema変更ではなく、pytest collection安定化のためのloader境界です。
+
+新規・変更ownerとして読むもの:
+
+| 区分 | owner |
+|---|---|
+| visible surface gate | `mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py`, `mashos-api/ai/tests/test_emlis_ai_visible_surface_acceptance_gate.py` |
+| inventory / red fixture | `mashos-api/ai/tests/fixtures/emlis_ai_visible_surface_acceptance_fixtures.py`, `mashos-api/ai/tests/test_emlis_ai_visible_surface_acceptance_inventory_step0.py` |
+| `たりこと` guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py`, `emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_malformed_nominalization_phrase_unit_guard.py`, `test_emlis_ai_runtime_surface_pre_return_gate_step2.py` |
+| reply path / display connection | `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py`, `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_visible_surface_acceptance_reply_path_step4.py` |
+| low-information tone profile | `emlis_ai_low_information_observation_composer.py`, `emlis_ai_observation_surface_realizer_tone.py`, `test_emlis_ai_low_information_tone_profile_step5.py` |
+| public meta sanitizer | `emlis_ai_public_feedback_meta.py`, `test_emlis_ai_public_feedback_meta.py`, `test_emotion_submit_public_feedback_meta_boundary.py` |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` |
+| regression execution stability | `emlis_ai_observation_structure_dictionary_loader.py` |
+
+不変: `/emotion/submit` route、request payload、response top-level key、`input_feedback.comment_text`、public `observation_status` enum、RN visible title `Emlisの観測`、RN表示条件 `passed + commentText`、DB physical name / write path、外部AI / local LLM 非使用、固定テンプレ共感文禁止。

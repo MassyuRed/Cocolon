@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-18"
+revision_date: "2026-05-24"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1824,3 +1824,95 @@ Input / Save / Dispatch上の読み方:
 - backend診断行またはRN診断行が欠ける場合、`diagnostic_missing_or_not_captured` 系として扱い、原因層修正に進めない。
 - local tool `emlis_observation_product_quality_measurement.py` はlog行を読むだけで、保存API・dispatch・DB・RNを変更しない。
 - Exit Gateは「測定接続が成立した」ことの境界であり、Input表示率向上patchやProduct Gate releaseではない。
+
+# 2026-05-20 差分追記: Input / immediate reply Runtime Surface Quality接続
+
+`mashos-api_13(5).zip` の Runtime Surface Quality Step0-12 は、`/emotion/submit` の保存処理そのものではなく、保存後のEmlisAI reply runtimeとProductGate Measurement reportの後段に表示文品質の測定・分岐を接続する差分です。`emotion_submit_service.py` のpublic response key、DB write path、RNへ渡す `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は変更しません。
+
+Input / Save / Dispatch上の読み方:
+- `runtime_surface_source_lock` は、表示文の由来をcomplete_initial / limited / a1_equivalent等で固定するmetaであり、保存APIのstatusではない。
+- `surface_signature_id` は、本文を保存するfieldではなく、正規化key列から作る署名です。
+- `coverage_group_missing` はmissing blockerとして残し、`short_daily` へ雑に流さない。
+- `branch_resolver` は次に触る層を決めるだけで、`/emotion/submit` の表示条件を開かない。
+- `runtime_surface_exit_gate` はhandoff-onlyであり、Input表示率向上patchやProduct Gate releaseではない。
+
+# 2026-05-21 差分追記: Input / immediate reply Observation Reply接続
+
+`mashos-api_16(2).zip` の EmlisAI 観測返答 Step0-14 は、`/emotion/submit` の保存処理そのものではなく、保存後の immediate reply に対して `eligible_observation` / `low_information_observation` branchを接続する差分です。`emotion_submit_service.py` のpublic response key、DB write path、RNへ渡す `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は変更しません。
+
+低情報入力の扱い:
+
+| 入力状態 | runtime branch | RN公開契約 |
+|---|---|---|
+| 現在入力から対象・状態・関係が取れる | `eligible_observation` | `observation_status=passed` + `comment_text` |
+| 短文または長文でも対象・出来事・関係が曖昧 | `low_information_observation` | `observation_status=passed` + `comment_text` |
+| safety boundary / infrastructure error / Phase7 rollout block / composer pre-connection rollout stop / 非修復AI-generated rejection | 既存 safety / error / fail-closed handling | Step10 repair対象外。`comment_text` を出さない |
+
+低情報時は「応答しない」ではなく、現在見えている範囲の観測と、`unknown_slots` に応じた質問を返す。ただし、段階リリースやpre-connection gateで止まった経路は低情報ではなく実行不可境界として扱い、Step10 repairで `passed + comment_text` に変換しない。ユーザー辞書はFreeで使用せず、サブスクでも現在入力の出来事を断定する材料にはしない。
+
+# 2026-05-21 差分追記: Input Save後 Emlis観測専用辞書 Phase0-5
+
+`mashos-api_6(26).zip` では、Input Save後にEmlisAIへ渡る `current_input` を、Emlis観測専用辞書が読める内部入力束へ整理する層が追加されています。Save API自体、DB insert対象、public response key、RN display条件は変更しない。
+
+| flow | owner | Input / Save / Dispatch上の読み方 |
+|---|---|---|
+| Save後 current_input | `emotion_submit_service.py` | 既存の `memo` / `memo_action` / `emotion_details` / `category` を保持したまま、EmlisAIへ渡す内部bundleを作る。 |
+| 内部入力束 | `emlis_ai_current_input_bundle.py` | `memo -> thought_text`、`memo_action -> action_text`、`emotion_details -> emotions`、`category -> categories` へ正規化する。public payload renameではない。 |
+| 構造辞書material | `emlis_ai_observation_structure_material_service.py` | 入力語・複数感情・複数カテゴリ・思考/行動ズレなどからentry / relation / unknown slotをtext-freeに抽出する。 |
+| Gate / Composer接続 | `emlis_ai_observation_structure_connection_service.py` | `low_information_boundary_connected` / `overclaim_guard_connected` / `forbidden_inference_boundary_connected` をGate / Composer metaへ渡す。 |
+| fixture | `tests/fixtures/emlis_ai_observation_structure_phase5_cases.py` | 低情報・状態と言葉の乖離・自己理解・カテゴリ重なりなどをInput bundle単位で検証する。 |
+
+禁止: `memo` / `memo_action` / `emotion_details` / `category` の保存経路変更、`input_feedback.comment_text` key変更、低情報branchのpublic status追加、構造辞書による完成文直接生成。
+
+
+# 2026-05-22 差分追記: Input Save後 Emlis観測専用辞書 ActionConversion / UnformedSelfInsight
+
+`mashos-api_8(23).zip` では、Input Save後にEmlisAIへ渡る `current_input` を、ActionConversion / UnformedSelfInsight 用の構造観測辞書材料として読む差分が入っています。Save API自体、DB insert対象、public response key、RN display条件は変更しない。
+
+| flow | owner | Input / Save / Dispatch上の読み方 |
+|---|---|---|
+| 構造辞書追加 | `config/emlis_observation_structure_dictionary.v1.json` | `言えなかった` / `合わせた` / `我慢した` / `わからない` のentryとrelationを内部辞書へ追加する。 |
+| material抽出 | `emlis_ai_observation_structure_material_service.py` | 単語だけで見える範囲のentry / relation候補をtext-freeに抽出する。 |
+| connection filter | `emlis_ai_observation_structure_connection_service.py` | memo / memo_action差分、閉じ方根拠、圧力根拠、負荷根拠がないrelationを強接続しない。 |
+| meta-only contract | `test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py` | raw input、public `comment_text`、完成返答文、辞書本文をmaterial / connection metaへ流さない。 |
+
+禁止: `memo` / `memo_action` / `emotion_details` / `category` の保存経路変更、`input_feedback.comment_text` key変更、低情報branchのpublic status追加、構造辞書による完成文直接生成、Step10 rollout blockの表示化。
+
+
+# 2026-05-24 差分追記: EmlisAI public feedback meta boundary / timeout recovery / low-information prompt / notification uuid boundary
+
+Input Save / Dispatch系では、保存成功後のEmlisAI immediate responseに public feedback meta boundary が接続済みです。これは保存処理そのものの変更ではありません。
+
+| flow | owner | Input / Save / Dispatch上の読み方 |
+|---|---|---|
+| EmlisAI internal reply | `emotion_submit_service.py` | `reply.meta` を `internal_input_feedback_meta` として受け、observation result / diagnostic lockdownにはinternal metaを渡す。 |
+| public feedback meta | `emlis_ai_public_feedback_meta.py` | `build_public_emlis_input_feedback_meta(...)` でRN返却用metaだけを生成する。raw input、memo、evidence、graph、complete diagnostics、public comment本文は返さない。 |
+| response inclusion | `api_emotion_submit.py`, `home_gateway/emotion_reflection_publish_service.py` | `should_include_public_input_feedback(...)` により、`comment_text` 非空 + `observation_status=passed` のみ `input_feedback` を返す。 |
+| RN timeout handling | `emotionSubmitApi.js`, `InputScreen.js` | `/emotion/submit` timeoutは30000ms。timeout時は「入力の保存処理に失敗しました」と断定せず、Home再読込を一度試し、入力欄/draftを残す。 |
+| low-information question | `emlis_ai_low_information_observation_composer.py`, `config/emlis_observation_dictionary.v1.json` | 低情報観測の質問文を `詳しく残せそうなら、〜残してみませんか。` 系にする。 |
+
+禁止: 保存DBを切り替える、`memo` / `memo_action` / `emotion_details` / `category` の保存経路を変える、`input_feedback.comment_text` keyを変える、timeout時に自動再送する、public meta削減を理由にRN表示条件を緩める。
+
+
+# 2026-05-24 差分追記: Input / immediate reply Visible Surface Acceptance QA接続
+
+`mashos-api_9(16).zip` では、Input保存後の `Emlisの観測` について、Runtime Surface Pre-Return Gateの後段に Visible Surface Acceptance Gate が接続されています。これは `/emotion/submit` の保存処理そのものではなく、保存後のimmediate reply候補が `passed + comment_text` としてRNへ出てよいかを判定する表示前品質境界です。
+
+| 国家システム区分 | owner | 変更後の読み方 |
+|---|---|---|
+| Gate | `emlis_ai_visible_surface_acceptance_gate.py` | RN中心感情と本文冒頭焦点のズレ、positive-only over-burden、visible malformed surfaceを評価する。 |
+| Gate | `emlis_ai_runtime_surface_pre_return_gate.py` | `たりこと` を `malformed_nominalization_tari_fragment` として表示前に止める。 |
+| Dispatch | `emlis_ai_reply_service.py` | candidate本文生成後にvisible gate reportを作り、本文/入力本文をmetaに入れない。 |
+| Display | `emlis_ai_display_gate.py` | visible gate blockingを表示前fail-closed条件へ入れる。yellow/warnは表示停止しない。 |
+| Repair | `emlis_ai_observation_display_repair_integration.py` | low-information repair候補にもvisible gateを通し、通らないものはappliedにしない。 |
+| Composer | `emlis_ai_low_information_observation_composer.py` | low-information tone profileを作り、positive_onlyで負荷anchorがなければ重さ系をdefaultにしない。 |
+| Boundary | `emlis_ai_public_feedback_meta.py` | visible gate summaryはpublic-safe subsetだけにし、blocking時は `input_feedback` を返さない。 |
+| Contract / Test | `rn-screen-contracts.test.js` | RN表示条件が public `observation_status=passed` + `comment_text` non-emptyのままか確認する。 |
+
+不変:
+
+- Input保存APIのDB insert先とDB write pathは変えない。
+- `/emotion/submit` route、request key、response keyは変えない。
+- `input_feedback.comment_text` は互換keyとして保持する。
+- visible gate failureを入力保存失敗errorとしてRNへ返さない。
+- `Userさん` はaccount name由来なら問題対象外として扱う。

@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-18",
+  "revision_date": "2026-05-24",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 543,
-    "total": 760
+    "mashos-api": 641,
+    "total": 858
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 760,
-    "national_system_body_includes": 760,
+    "overall_structure_body_includes": 858,
+    "national_system_body_includes": 858,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル760件、国家システム判断対象のcurrent全ファイル760件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 760,
-    "overall_structure_body_includes_current_snapshot_files": 760,
-    "national_system_body_lists_current_snapshot_files_with_relation": 760,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル858件、国家システム判断対象のcurrent全ファイル858件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
+    "current_snapshot_total_files": 858,
+    "overall_structure_body_includes_current_snapshot_files": 858,
+    "national_system_body_lists_current_snapshot_files_with_relation": 858,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -749,7 +749,48 @@
       "total_files": 752,
       "doc_role": "Observation Diagnostic Lockdown classification candidate_generated_but_reader_rejected に基づき、Reader / relation surface / limited A1 repair を backend で実装した現状構造を読むための作業用地図。"
     },
-    "reader_relation_surface_policy_2026_05_17": "Reader Relation Surface Step0-8 は、Reader rejected の原因を greeting policy alignment、expected_relation_types、limited/A1 previous rejection repair、core hook、diagnostic metaで扱うbackend修正。RN表示条件、public response key、DB physical name、Display/Grounding/Template Gateは変更しない。"
+    "reader_relation_surface_policy_2026_05_17": "Reader Relation Surface Step0-8 は、Reader rejected の原因を greeting policy alignment、expected_relation_types、limited/A1 previous rejection repair、core hook、diagnostic metaで扱うbackend修正。RN表示条件、public response key、DB physical name、Display/Grounding/Template Gateは変更しない。",
+    "latest_source_basis_2026_05_24": {
+      "premise": "Cocolon_前提資料(115).zip",
+      "Cocolon": "Cocolon_9(11).zip",
+      "mashos-api": "mashos-api_9(15).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 635,
+      "total_files": 852,
+      "doc_role": "EmlisAI public feedback meta boundary / RN timeout recovery / low-information prompt / notification uuid boundary を反映した最新作業用地図。"
+    },
+    "emlis_public_feedback_meta_boundary_2026_05_24": "reply.meta全文をinput_feedback.emlis_aiへ返さず、emlis_ai_public_feedback_meta.pyでpublic-safe subsetへ縮小する。comment_text非空かつpublic observation_status=passedの場合だけinput_feedbackを返す。RN timeout時は保存失敗断定を避け、draftを保持する。notification owner_user_id uuid filterへglobal sentinelを混ぜない。",
+    "latest_source_basis_2026_05_24_visible_surface_acceptance_step0_8": {
+      "premise": "Cocolon_前提資料(117).zip",
+      "Cocolon": "Cocolon_9(12).zip",
+      "mashos-api": "mashos-api_9(16).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 641,
+      "total_files": 858,
+      "doc_role": "EmlisAI Visible Surface Acceptance QA Step0-8を、RN/API/DB contractを変えずに表示文品質受け入れ境界として読むための前提資料差分。"
+    },
+    "current_snapshot_unlisted_paths_added_2026_05_24_visible_surface_acceptance_step0_8": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py",
+      "mashos-api/ai/tests/fixtures/emlis_ai_visible_surface_acceptance_fixtures.py",
+      "mashos-api/ai/tests/test_emlis_ai_visible_surface_acceptance_inventory_step0.py",
+      "mashos-api/ai/tests/test_emlis_ai_visible_surface_acceptance_gate.py",
+      "mashos-api/ai/tests/test_emlis_ai_visible_surface_acceptance_reply_path_step4.py",
+      "mashos-api/ai/tests/test_emlis_ai_low_information_tone_profile_step5.py"
+    ],
+    "current_snapshot_changed_paths_2026_05_24_visible_surface_acceptance_step0_8": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_phrase_unit_grammar_normalizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_dictionary_loader.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ],
+    "emlis_visible_surface_acceptance_policy_2026_05_24": "Visible Surface Acceptance Gateは表示率向上のための緩和ではなく、中心感情/本文焦点、たりこと系malformed surface、positive-only over-burden、public meta安全性を表示前にfail-closedする品質境界。RN表示条件はpassed + comment_textのまま。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -766,11 +807,11 @@
   "docs": [
     {
       "path": "00_華恋用_READ_FIRST.md",
-      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI ProductGate Measurement Step0-10境界を固定する"
+      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Observation Reply Step0-14境界を固定する"
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "purpose": "App root / runtime / Home / startup / immediate reply / Input split / EmlisAI frontend diagnostic boundary"
+      "purpose": "App root / runtime / Home / startup / immediate reply / RN optional Observation Reply meta boundary"
     },
     {
       "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
@@ -778,35 +819,35 @@
     },
     {
       "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "purpose": "Account / subscription / backend support / EmlisAI measurement support / contract test boundary"
+      "purpose": "Account / subscription / backend support / EmlisAI Observation Reply Step0-14 support / contract test boundary"
     },
     {
       "path": "01_Cocolon_全体構造資料.md",
-      "purpose": "全体構造総論とsystem単位の読み方。EmlisAI Observation Diagnostic Lockdown差分を含む"
+      "purpose": "全体構造総論とsystem単位の読み方。EmlisAI Observation Reply Step0-14差分を含む"
     },
     {
       "path": "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "purpose": "Input / Save / Dispatch / immediate reply / EmlisAI submit診断接続"
+      "purpose": "Input / Save / Dispatch / immediate reply / EmlisAI Observation Reply接続"
     },
     {
       "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "purpose": "Contract / Boundary / Test / EmlisAI Observation Diagnostic Lockdown verification"
+      "purpose": "Contract / Boundary / Test / EmlisAI Observation Reply verification"
     },
     {
       "path": "02_Cocolon_国家システム資料.md",
-      "purpose": "国家システム総論とimmediate reply診断flow。Observation Diagnostic Lockdown差分を含む"
+      "purpose": "国家システム総論。Input後EmlisAI Observation Reply Step0-14境界を含む"
     },
     {
       "path": "03_Cocolon_命名体系.md",
-      "purpose": "visible名・route名・runtime owner・DB物理名・diagnostic内部名の写像"
+      "purpose": "Cocolon visible名 / internal名 / runtime ownerの読み替え。Observation Reply名の混同防止を含む"
     },
     {
       "path": "04_Cocolon_変更テーマ別チェックリスト",
-      "purpose": "変更テーマから読むべき構造資料を逆引きする"
+      "purpose": "変更テーマ別チェックリスト。Observation Reply Step0-14確認順を含む"
     },
     {
       "path": "05_Cocolon_ルールファイル索引",
-      "purpose": "rule / policy / guard / test索引。ProductGate Measurement Step0-10のcontract / local tool / Exit Gate testを含む"
+      "purpose": "rule / policy / guard / test索引。Observation Reply Step0-14のrule / test indexを含む"
     },
     {
       "path": "06_Cocolon_ファイル名変更保留台帳.md",
@@ -814,14 +855,26 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "最新zipから見える構造差分。ProductGate Measurement Step0-10 snapshot差分を含む"
+      "purpose": "最新zipから見える構造差分。Observation Reply Step0-14 snapshot差分を含む"
     },
     {
       "path": "09_Cocolon_名称混在保管と構造境界_2026-05-10.md",
-      "purpose": "名称混在とdiagnostic内部名を作業用地図として保管する構造境界資料"
+      "purpose": "名称混在保管。Observation Reply internal名の保管境界を含む"
     },
     "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
-    "08_Cocolon_DB_rename_boundary.md"
+    "08_Cocolon_DB_rename_boundary.md",
+    {
+      "path": "Cocolon_思想資料_華恋用.md",
+      "purpose": "Cocolon思想資料。2026-05-24差分で共同開発境界と華恋思想「人間の言葉を雑に処理しない場所」を追記"
+    },
+    {
+      "path": "10_Cocolon_共同開発と華恋思想境界_2026-05-24.md",
+      "purpose": "Mash様主体のCocolon思想と、華恋が支える補助思想・共同開発時の判断境界を固定する"
+    },
+    {
+      "path": "Cocolon_作業姿勢とルール_華恋用/14_Cocolon共同開発と華恋思想の扱い.txt",
+      "purpose": "華恋が指示待ちではなく意見を持つための作業姿勢境界。未確認断定・指示外追加への変換を禁止する"
+    }
   ],
   "excluded_files": [
     {
@@ -1053,6 +1106,16 @@
       },
       "overall_body_includes": 352,
       "national_body_includes": 303
+    },
+    {
+      "date": "2026-05-20",
+      "snapshot": "source_snapshot_2026_05_20_runtime_surface_quality_step0_12",
+      "summary": "EmlisAI Runtime Surface Quality Step0-12 premise diff update."
+    },
+    {
+      "date": "2026-05-21",
+      "snapshot": "source_snapshot_2026_05_21_observation_reply_step0_14",
+      "summary": "EmlisAI Observation Reply Step0-14 premise diff update."
     }
   ],
   "source_basis_2026_04_25": {
@@ -1755,9 +1818,9 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(98).zip",
-    "Cocolon": "Cocolon_11(3).zip",
-    "mashos-api": "mashos-api_11(6).zip"
+    "premise": "Cocolon_前提資料(113).zip",
+    "Cocolon": "Cocolon_12(5).zip",
+    "mashos-api": "mashos-api_12(8).zip"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2523,15 +2586,15 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(98).zip",
-    "Cocolon": "Cocolon_11(3).zip",
-    "mashos-api": "mashos-api_11(6).zip",
+    "premise": "Cocolon_前提資料(111).zip",
+    "Cocolon": "Cocolon_8(12).zip",
+    "mashos-api": "mashos-api_8(23).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 543,
-      "total": 760
+      "mashos-api": 614,
+      "total": 831
     },
-    "summary": "EmlisAI ProductGate Measurement Step0-10 added on top of Reader Relation Surface. RN passed-only contract unchanged; Product Gate achievement and public release remain false."
+    "summary": "EmlisAI Observation Reply Step0-14, Emlis observation structure dictionary Phase0-5, and Step10 Repair Boundary remain the display/material path. Latest snapshot adds ActionConversion / UnformedSelfInsight structure dictionary update: 5 relations, 4 entries, material/connection evidence filters, Phase5 fixtures, Phase6 forbidden inference meta-only contract, and Phase7/8 regression confirmation. RN/API/DB public contracts unchanged."
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -3177,5 +3240,663 @@
       "Step9": "regression tests",
       "Step10": "Exit Gate"
     }
-  }
+  },
+  "source_snapshot_2026_05_20_runtime_surface_quality_step0_12": {
+    "premise": "Cocolon_前提資料(101).zip",
+    "Cocolon": "Cocolon_13(2).zip",
+    "mashos-api": "mashos-api_13(5).zip",
+    "sha256": {
+      "Cocolon_前提資料(101).zip": "5ced6cc4f53907042a7b8ded6a75124cdf3da4cab8fb0dbc6b4c9dfd792d9597",
+      "Cocolon_13(2).zip": "5194155027223d34e41adc1e00b43f2a4b678f47f5843d6f56d6a014a4c6cf10",
+      "mashos-api_13(5).zip": "baaee6f81562c29f2287c19fe2eb16f434a6b0f31ba1ea5ec2ee5993387b674a"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 568,
+      "total": 785
+    },
+    "diff_from": {
+      "premise": "Cocolon_前提資料(101).zip / ProductGate Measurement Step0-10 basis",
+      "Cocolon": "No source additions or changes from previous RN basis; passed-only contract unchanged",
+      "mashos-api": "Runtime Surface Quality Step0-12 adds source lock, surface signature, surface scorecard metrics, coverage baseline, branch resolver, complete runtime activation, anti-template, grammar normalizer, tone engine, surface-aware self-repair, Blind QA / Long-run, and Exit Gate",
+      "file_counts": {
+        "previous_Cocolon": 217,
+        "previous_mashos_api": 543,
+        "previous_total": 760
+      }
+    },
+    "added_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_quality_branching.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_quality_signature.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer_anti_template.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_phrase_unit_grammar_normalizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_blind_qa_long_run.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_complete_activation_branch.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_coverage_baseline.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_exit_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_quality_contract_inventory.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_self_repair.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_source_lock.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_tone_engine_2_1.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_surface_quality_signature_step2.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_blind_qa_long_run_step11.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_complete_activation_branch_step6.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_coverage_baseline_step4.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_exit_gate_step12.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_phrase_unit_grammar_normalizer_step8.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_quality_branching_step5.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_quality_contract_inventory_step0.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_realizer_anti_template_step7.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_scorecard_metrics_step3.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_self_repair_step10.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_source_lock_step1.py",
+        "mashos-api/ai/tests/test_emlis_ai_runtime_surface_tone_engine_2_1_step9.py"
+      ]
+    },
+    "changed_files": {
+      "Cocolon": [],
+      "mashos-api": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_material_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_connection.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_release_ladder_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_tone_policy.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_coverage_matrix_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_long_term_quality_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_phrase_shaping_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_final_review_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py"
+      ]
+    },
+    "removed_files": {
+      "Cocolon": [],
+      "mashos-api": []
+    },
+    "summary": [
+      "Step0 fixes Runtime Surface Quality contract inventory and keeps the phase meta-only.",
+      "Step1 fixes the runtime source of displayed observations without storing raw input or public comment_text bodies.",
+      "Step2 measures surface signature keys, counts, warning codes, and hashes without storing text bodies.",
+      "Step3 connects surface metrics to ProductQualityScorecard and release ladder blockers.",
+      "Step4 aggregates seven coverage groups and keeps missing coverage as coverage_group_missing.",
+      "Step5 resolves the next branch by contract, diagnostics, runtime source, grounding, grammar, surface, tone, or QA priority.",
+      "Step6 verifies complete_initial runtime activation before surface/grammar/tone repair is treated as the cause.",
+      "Step7 adds Surface Realizer 2.1 Anti-Template without adding completed fallback observation sentences.",
+      "Step8 adds PhraseUnit Grammar Normalizer for malformed nominalization, particle leftovers, and unfinished fragments.",
+      "Step9 adds Tone Engine 2.1 while leaving read_feeling to Blind QA, not machine metrics.",
+      "Step10 converts surface reasons into bounded self-repair targets without adding meaning.",
+      "Step11 connects Blind QA candidates and Long-run surface signature diversity with meta-only rows.",
+      "Step12 adds Runtime Surface Exit Gate as handoff-only; Product Gate achievement and public release stay false."
+    ],
+    "boundary": {
+      "cocolon_rn_source_changed": false,
+      "db_physical_name_changed": false,
+      "db_write_path_changed": false,
+      "public_route_changed": false,
+      "public_response_key_changed": false,
+      "frontend_passed_only_display_changed": false,
+      "reader_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "template_guard_relaxed": false,
+      "display_gate_relaxed": false,
+      "external_ai_added": false,
+      "local_llm_added": false,
+      "fixed_sentence_template_added": false,
+      "input_specific_runtime_branch_added": false,
+      "raw_input_logged_or_copied_to_meta": false,
+      "public_comment_text_logged": false,
+      "read_feeling_auto_estimated_from_machine_metrics": false,
+      "product_gate_achieved": false,
+      "public_release_applied": false
+    },
+    "step_map": {
+      "Step0": "Baseline / Contract Inventory",
+      "Step1": "Runtime Surface Source Lock",
+      "Step2": "Surface Signature Measurement",
+      "Step3": "Scorecard Surface Metrics connection",
+      "Step4": "Coverage Runtime Baseline",
+      "Step5": "Branch Resolver",
+      "Step6": "Complete Runtime Activation Branch",
+      "Step7": "Surface Realizer 2.1 Anti-Template",
+      "Step8": "PhraseUnit Grammar Normalizer",
+      "Step9": "Tone Engine 2.1",
+      "Step10": "Surface-aware Self-Repair",
+      "Step11": "Blind QA / Long-run",
+      "Step12": "Exit Gate"
+    }
+  },
+  "source_snapshot_2026_05_21_observation_reply_step0_14": {
+    "premise": "Cocolon_前提資料(104).zip",
+    "Cocolon": "Cocolon_16(1).zip",
+    "mashos-api": "mashos-api_16(2).zip",
+    "sha256": {
+      "Cocolon_前提資料(104).zip": "0d4bf273f1c4932eb10a570dfaf1c2ab4ed9a47a1d6eaa96ce0e84fdd5f59c2c",
+      "Cocolon_16(1).zip": "6ce49e125afad15eac0771a17eb71dde897efa33f11a99319aa1c7a6736a2fcf",
+      "mashos-api_16(2).zip": "6ec02941a0ec252b92b322f19751fff97c01fabc6e1ffd6fc299183fb109a52f"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 601,
+      "total": 818
+    },
+    "diff_from": {
+      "premise_basis": "Cocolon_前提資料(101).zip / Runtime Surface Quality Step0-12 basis stored in current premise top matter",
+      "Cocolon": "Cocolon_13(2).zip",
+      "mashos-api": "mashos-api_13(5).zip",
+      "file_counts": {
+        "Cocolon": 217,
+        "mashos-api": 568,
+        "total": 785
+      }
+    },
+    "summary": [
+      "EmlisAI Observation Reply Step0-14 adds eligible_observation / low_information_observation routing and contracts.",
+      "Low-information observation is an internal reply kind, not a public observation_status.",
+      "Free blocks user facts; subscription may use explicit_reference / implicit_focus, but user facts cannot promote low-information input to eligible.",
+      "Step10 connects low-information branch to the existing passed + comment_text display contract without relaxing Display Gate.",
+      "Step14 is Exit Gate / Handoff only; Product Gate achievement and public release remain false."
+    ],
+    "new_backend_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_reply_contract.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_reply_contract_inventory.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_eligibility_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_user_fact_grounding_boundary.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_internal_question_service.py",
+      "mashos-api/ai/services/ai_inference/config/emlis_observation_dictionary.schema.json",
+      "mashos-api/ai/services/ai_inference/config/emlis_observation_dictionary.v1.json",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_dictionary_loader.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_material_connector.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_sentence_plan_roles.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_scorecard_blind_qa.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_regression_fixture_coverage.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_exit_gate_handoff.py"
+    ],
+    "new_backend_tests": [
+      "mashos-api/ai/tests/test_emlis_ai_observation_reply_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_current_display_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_low_information_red_cases.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_eligibility_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_user_fact_grounding_boundary.py",
+      "mashos-api/ai/tests/test_emlis_ai_internal_question_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_dictionary_loader.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_material_connector.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_sentence_plan_roles.py",
+      "mashos-api/ai/tests/test_emlis_ai_low_information_observation_composer.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_surface_realizer_tone.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_rn_optional_meta_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_scorecard_blind_qa.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_regression_fixture_coverage.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_exit_gate_handoff.py"
+    ],
+    "changed_backend_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_material_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_focus_selector.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_relation_graph_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_tone_policy.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_measurement_connection.py"
+    ],
+    "changed_cocolon_files": [
+      "Cocolon/screens/input/inputFeedbackModel.js",
+      "Cocolon/screens/input/inputFeedbackObservationDiagnostics.js",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ],
+    "public_contract": {
+      "observation_status_enum_extended": false,
+      "rn_visible_contract_changed": false,
+      "rn_visible_title_changed": false,
+      "api_route_changed": false,
+      "db_physical_name_changed": false,
+      "display_gate_relaxed": false,
+      "public_release_applied": false
+    },
+    "internal_reply_kinds": [
+      "eligible_observation",
+      "low_information_observation"
+    ],
+    "step_range": "Step0-Step14"
+  },
+  "observation_reply_policy_2026_05_21": "Observation Reply Step0-14 keeps public observation_status=passed + comment_text display contract, treats low_information_observation as internal meta reply kind, blocks Free user facts, forbids user-fact promotion from low-information to eligible, and keeps Step14 handoff-only.",
+  "latest_source_basis_2026_05_21_observation_reply_step0_14": {
+    "premise": "Cocolon_前提資料(104).zip",
+    "Cocolon": "Cocolon_16(1).zip",
+    "mashos-api": "mashos-api_16(2).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 601,
+    "total_files": 818,
+    "doc_role": "EmlisAI 観測返答 Step0-14を含む現状構造を読むための作業用地図。RN/API/DB public contractは維持し、低情報観測はinternal meta reply kindとして扱う。"
+  },
+  "source_snapshot_2026_05_21_emlis_observation_structure_dictionary_phase0_5": {
+    "premise": "Cocolon_前提資料(106).zip",
+    "Cocolon": "Cocolon_6(32).zip",
+    "mashos-api": "mashos-api_6(26).zip",
+    "sha256": {
+      "Cocolon_前提資料(106).zip": "65547ff226a28d2e7f9623d8679de0594e0848a6ea9ec913980bbea690f58f29",
+      "Cocolon_6(32).zip": "42f735b58f593e8391ed16e7a46984911e10d7d949cd5c0affa325c9035b927f",
+      "mashos-api_6(26).zip": "d2399c7fbd1572784bdd43e9e5eeb608c05f84b2c6157e38de842b2a08a4e11c"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 613,
+      "total": 830
+    },
+    "diff_from": {
+      "premise_basis": "Cocolon_前提資料(106).zip / Observation Reply Step0-14 basis stored in current premise top matter",
+      "Cocolon": "Cocolon(174).zip",
+      "mashos-api": "mashos-api(88).zip",
+      "file_counts": {
+        "Cocolon": 217,
+        "mashos-api": 601,
+        "total": 818
+      }
+    },
+    "summary": [
+      "Cocolon RN source files are unchanged at 217 files.",
+      "mashos-api source files increased from 601 to 613 files.",
+      "EmlisCurrentInputBundle normalizes current_input internally without public API/DB/RN contract drift.",
+      "emlis_observation_structure_dictionary is a separate input-bundle/relation/inference-chain dictionary, not the existing surface-material dictionary.",
+      "Loader/validator enforces schema, relation references, forbidden inference, input_bundle_policy, and contract boundary flags.",
+      "Gate/Composer connection passes text-free material only; dictionary does not return completed replies.",
+      "Phase5 fixtures cover state_text_gap, emotion_nesting, low information, category overlap, thought/action discrepancy, self insight, and light calm input without locking exact comment_text."
+    ],
+    "new_backend_files": [
+      "mashos-api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.schema.json",
+      "mashos-api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.v1.json",
+      "mashos-api/ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_connection_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_dictionary_loader.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+      "mashos-api/ai/tests/fixtures/emlis_ai_observation_structure_phase5_cases.py",
+      "mashos-api/ai/tests/test_emlis_ai_current_input_bundle.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_structure_dictionary_loader.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_structure_dictionary_schema.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase4_connection.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py"
+    ],
+    "changed_backend_files": [
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_context_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_internal_question_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_eligibility_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_kernel.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py"
+    ],
+    "unchanged_contracts": [
+      "/emotion/submit public route",
+      "request / response keys",
+      "DB physical names and write path",
+      "RN visible contract and passed + commentText display condition",
+      "input_feedback.comment_text compatibility key",
+      "existing emlis_observation_dictionary.v1.json surface-material dictionary"
+    ]
+  },
+  "latest_source_basis_2026_05_21_emlis_observation_structure_dictionary_phase0_5": {
+    "premise": "Cocolon_前提資料(106).zip",
+    "Cocolon": "Cocolon_6(32).zip",
+    "mashos-api": "mashos-api_6(26).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 613,
+    "total_files": 830,
+    "doc_role": "Emlis観測専用辞書 Phase0-5を含む現状構造を読むための作業用地図。構造辞書は入力束 / relation / inference chain / Gate material用であり、完成文テンプレ・public status・DB/API/RN renameではない。"
+  },
+  "emlis_observation_structure_dictionary_policy_2026_05_21": {
+    "dictionary_id": "emlis_observation_structure_dictionary",
+    "base_dictionary": "cocolon_foundation_structure_dictionary",
+    "separate_from_existing_surface_dictionary": true,
+    "public_contract_changed": false,
+    "dictionary_returns_completed_reply": false,
+    "raw_input_in_public_meta": false,
+    "phase_scope": [
+      "Phase0_contract_confirmation",
+      "Phase1_current_input_bundle",
+      "Phase2_schema",
+      "Phase3_loader_validator",
+      "Phase4_gate_composer_connection",
+      "Phase5_test_fixture_blind_qa"
+    ]
+  },
+  "source_snapshot_2026_05_22_emlis_step10_repair_boundary": {
+    "premise": "Cocolon_前提資料(109).zip",
+    "Cocolon": "Cocolon_6(33).zip",
+    "mashos-api": "mashos-api_6(27).zip",
+    "sha256": {
+      "Cocolon_前提資料(109).zip": "6c15c5c8275bc02831120d0507aff86b3cc2c38455597318b0c6cd49a5455823",
+      "Cocolon_6(33).zip": "a443c8c8ea3aedc6ba58cc41df536d5d2a5241d52c7d0aff792b0cb8703fa90e",
+      "mashos-api_6(27).zip": "101666fe4c8509512d87c5b24db016ef991b7086b48405b2a06a78cc68f08c7e"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 613,
+      "total": 830
+    },
+    "diff_from": {
+      "premise_basis": "Cocolon_前提資料(109).zip / Emlis observation structure dictionary Phase0-5 basis stored in current premise top matter",
+      "source_files_added": 0,
+      "source_files_removed": 0,
+      "Cocolon_changed_files": [],
+      "mashos_api_changed_files": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_display_repair_integration.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase7_staged_release.py"
+      ]
+    },
+    "summary": [
+      "Cocolon RN source files are unchanged at 217 files.",
+      "mashos-api source files remain 613 files; no new backend files were added.",
+      "Step10 repair integration now treats Phase7 rollout block and composer pre-connection rollout stop as non-repairable runtime boundaries.",
+      "reply_service adds a second guard so limited_release_decision / composer_client_resolution rollout blocks pass repair_allowed=False into Step10 repair.",
+      "ordinary low-information inputs remain repairable; feature flag disabled and ordinary unavailable are not blanket-blocked.",
+      "AI-generated candidate rejections such as unsupported_sentence are not rerouted into low-information public text.",
+      "Step10 meta preserves applied=false, comment_text_allowed=false, blocked_reasons, and public contract unchanged flags for rollout block paths."
+    ],
+    "changed_backend_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase7_staged_release.py"
+    ],
+    "unchanged_contracts": [
+      "/emotion/submit public route",
+      "request / response keys",
+      "input_feedback.comment_text compatibility key",
+      "input_feedback.emlis_ai.observation_status",
+      "public observation_status enum",
+      "RN passed + commentText display condition",
+      "RN visible title Emlisの観測",
+      "DB physical names and write path",
+      "Emlis observation structure dictionary json / schema",
+      "Cocolon foundation structure dictionary"
+    ]
+  },
+  "latest_source_basis_2026_05_22_emlis_step10_repair_boundary": {
+    "premise": "Cocolon_前提資料(109).zip",
+    "Cocolon": "Cocolon_6(33).zip",
+    "mashos-api": "mashos-api_6(27).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 613,
+    "total_files": 830,
+    "doc_role": "EmlisAI Step10 Repair Boundaryを含む現状構造を読むための作業用地図。通常低情報観測は維持しつつ、Phase7 rollout block / pre-connection stop / release gate block / non-repairable candidate rejectionをStep10 repairで表示化しない。"
+  },
+  "emlis_step10_repair_boundary_policy_2026_05_22": {
+    "repairable_low_information_kept": true,
+    "rollout_block_repairable": false,
+    "pre_connection_rollout_stop_repairable": false,
+    "release_gate_block_repairable": false,
+    "non_repairable_ai_generated_rejection_repairable": false,
+    "public_contract_changed": false,
+    "rn_display_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "observation_status_enum_extended": false,
+    "blocked_reasons": [
+      "step10_blocked_by_phase7_rollout",
+      "composer_resolution_blocked_rollout",
+      "composer_resolution_pre_connection_rollout_stop",
+      "limited_composer_rollout_not_allowed",
+      "phase7_rollout_gate_blocked",
+      "ai_generated_candidate_non_repairable_rejection"
+    ]
+  },
+  "source_snapshot_2026_05_22_emlis_observation_structure_update_design_action_conversion_unformed_self_insight": {
+    "premise": "Cocolon_前提資料(111).zip",
+    "Cocolon": "Cocolon_8(12).zip",
+    "mashos-api": "mashos-api_8(23).zip",
+    "sha256": {
+      "Cocolon_前提資料(111).zip": "ec56cfea174df90a33b8813b2be1780327b57a318122de11e91bce334c528156",
+      "Cocolon_8(12).zip": "eebe76aaa28c9edc24bb69fee992e82fe957dce4709b65da92cc7f56170de557",
+      "mashos-api_8(23).zip": "1f557db2a43bf83a869cb4faa3439e38b10f9c7bad90e785a240dc50f2608748"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 614,
+      "total": 831
+    },
+    "diff_from": {
+      "premise_basis": "Cocolon_前提資料(111).zip / EmlisAI Step10 Repair Boundary and previous Emlis observation structure basis",
+      "source_files_added": 1,
+      "source_files_removed": 0,
+      "Cocolon_changed_files": [],
+      "mashos_api_added_files": [
+        "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py"
+      ],
+      "mashos_api_changed_files": [
+        "mashos-api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.v1.json",
+        "mashos-api/ai/tests/test_emlis_ai_observation_structure_dictionary_schema.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_structure_dictionary_loader.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase4_connection.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_connection_service.py",
+        "mashos-api/ai/tests/fixtures/emlis_ai_observation_structure_phase5_cases.py"
+      ],
+      "phase7_phase8_source_changes": false
+    },
+    "summary": [
+      "Cocolon RN source files are unchanged at 217 files; RN passed + commentText display condition is unchanged.",
+      "mashos-api source files are 614 files after adding the Phase6 forbidden inference / meta-only contract test.",
+      "emlis_observation_structure_dictionary.v1.json now has 19 relations and 18 entries for ActionConversion / UnformedSelfInsight.",
+      "material / connection services explicitly keep dictionary_returns_completed_reply, completed_reply_from_dictionary, public contract drift, cause inference, and personality tendency flags closed.",
+      "Phase7 and Phase8 introduced no source changes; Step10 RepairBoundary and final target regressions passed.",
+      "Target regression set including Step10, structure dictionary, Phase4, Phase5, and Phase6 passed: 119 passed."
+    ],
+    "unchanged_contracts": [
+      "/emotion/submit public route",
+      "request / response keys",
+      "input_feedback.comment_text compatibility key",
+      "input_feedback.emlis_ai.observation_status",
+      "public observation_status enum",
+      "RN passed + commentText display condition",
+      "RN visible title Emlisの観測",
+      "DB physical names and write path",
+      "emlis_observation_structure_dictionary.schema.json",
+      "emlis_observation_dictionary.v1.json",
+      "Cocolon foundation structure dictionary",
+      "completed reply templates / Composer / Surface Realizer surface text"
+    ],
+    "dictionary_state": {
+      "dictionary_version": "emlis.observation_structure_dictionary.action_conversion_unformed_self_insight.2026-05-22",
+      "relations": 19,
+      "entries": 18,
+      "added_relations": [
+        "unexpressed_output_stop",
+        "self_shape_alignment",
+        "action_conversion_history",
+        "conversion_history_closure",
+        "unformed_self_insight"
+      ],
+      "added_entries": [
+        "word_could_not_say",
+        "word_aligned_to_context",
+        "word_gaman",
+        "word_wakaranai"
+      ],
+      "schema_changed": false,
+      "surface_dictionary_changed": false
+    }
+  },
+  "latest_source_basis_2026_05_22_emlis_observation_structure_update_design_action_conversion_unformed_self_insight": {
+    "premise": "Cocolon_前提資料(111).zip",
+    "Cocolon": "Cocolon_8(12).zip",
+    "mashos-api": "mashos-api_8(23).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 614,
+    "total_files": 831,
+    "doc_role": "Emlis観測専用辞書 UpdateDesign ActionConversion / UnformedSelfInsight Phase0-8を含む現状構造を読むための作業用地図。辞書は観測材料であり、完成文テンプレ・public status・DB/API/RN renameではない。"
+  },
+  "emlis_observation_structure_update_design_action_conversion_unformed_self_insight_policy_2026_05_22": {
+    "dictionary_id": "emlis_observation_structure_dictionary",
+    "schema_changed": false,
+    "relations_count": 19,
+    "entries_count": 18,
+    "added_relations": [
+      "unexpressed_output_stop",
+      "self_shape_alignment",
+      "action_conversion_history",
+      "conversion_history_closure",
+      "unformed_self_insight"
+    ],
+    "added_entries": [
+      "word_could_not_say",
+      "word_aligned_to_context",
+      "word_gaman",
+      "word_wakaranai"
+    ],
+    "public_contract_changed": false,
+    "rn_display_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "dictionary_returns_completed_reply": false,
+    "raw_input_in_public_meta": false,
+    "phase_scope": [
+      "Phase0_local_baseline",
+      "Phase1_schema_loader_tests",
+      "Phase2_structure_dictionary_json",
+      "Phase3_material_connection_tests",
+      "Phase4_material_connection_service_minimal_fix",
+      "Phase5_fixture_blind_qa_cases",
+      "Phase6_forbidden_inference_meta_only_contract",
+      "Phase7_step10_repairboundary_regression",
+      "Phase8_final_target_tests"
+    ],
+    "forbidden_inference_summary": [
+      "do_not_infer_true_desire_content",
+      "do_not_infer_partner_cause",
+      "do_not_infer_self_sacrifice",
+      "do_not_personality_diagnose",
+      "do_not_reduce_wakaranai_to_low_information_only"
+    ]
+  },
+  "source_snapshot_2026_05_23_emlis_runtime_surface_gate_shallow_v2_step0_10": {
+    "premise": "Cocolon_前提資料(113).zip",
+    "Cocolon": "Cocolon_12(5).zip",
+    "mashos-api": "mashos-api_12(8).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 630,
+    "total_files": 847,
+    "scope": "EmlisAI Runtime Surface Pre-Return Gate + Shallow Surface Realizer V2 Step0-10 / jsonschema dependency / diagnostics scorecard / exit criteria",
+    "public_contract_changed": false,
+    "rn_display_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false
+  },
+  "latest_source_basis_2026_05_23_emlis_runtime_surface_gate_shallow_v2_step0_10": {
+    "premise": "Cocolon_前提資料(113).zip",
+    "Cocolon": "Cocolon_12(5).zip",
+    "mashos-api": "mashos-api_12(8).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 630,
+    "total_files": 847,
+    "doc_role": "EmlisAI Runtime Surface Pre-Return Gate + Shallow Surface Realizer V2 Step0-10を含む現状構造を読むための作業用地図。壊れたsurfaceをpassed + comment_textにせず、RN/API/DB contractは変更しない。"
+  },
+  "emlis_runtime_surface_gate_shallow_v2_policy_2026_05_23": {
+    "policy_id": "emlis.runtime_surface_gate_shallow_v2.step0_10.2026-05-23",
+    "deployment_dependency_added": {
+      "file": "mashos-api/ai/services/ai_inference/requirements.txt",
+      "dependency": "jsonschema>=4.21.1"
+    },
+    "new_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_bounded_repair_reroute.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_exit_criteria.py",
+      "mashos-api/ai/tests/fixtures/emlis_ai_runtime_surface_red_fixtures.py",
+      "mashos-api/ai/tests/test_emlis_ai_runtime_surface_pre_return_gate.py",
+      "mashos-api/ai/tests/test_emlis_ai_runtime_surface_pre_return_gate_step2.py",
+      "mashos-api/ai/tests/test_emlis_ai_malformed_nominalization_phrase_unit_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_shallow_phrase_unit_guard_step4.py",
+      "mashos-api/ai/tests/test_emlis_ai_shallow_surface_realizer_v2_step5.py",
+      "mashos-api/ai/tests/test_emlis_ai_low_information_specificity_policy_step6.py",
+      "mashos-api/ai/tests/test_emlis_ai_bounded_repair_reroute_step7.py",
+      "mashos-api/ai/tests/test_emlis_ai_diagnostics_scorecard_step8.py",
+      "mashos-api/ai/tests/test_emlis_ai_runtime_surface_diagnostics_scorecard_step8.py",
+      "mashos-api/ai/tests/test_emlis_ai_runtime_surface_regression_qa_step9.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_diagnostic_lockdown_surface_gate_step9.py",
+      "mashos-api/ai/tests/test_emlis_ai_runtime_surface_exit_criteria_step10.py"
+    ],
+    "modified_existing_owners": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_phrase_unit_grammar_normalizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_scorecard_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py",
+      "mashos-api/ai/tests/test_emlis_ai_limited_composer_client.py"
+    ],
+    "public_contract_changed": false,
+    "rn_display_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "response_key_changed": false,
+    "observation_status_enum_extended": false,
+    "raw_input_in_diagnostics": false,
+    "comment_text_body_in_diagnostics": false,
+    "display_gate_relaxed": false,
+    "shallow_old_skeleton_standard_disabled": true,
+    "bounded_repair_attempt_limit": 1,
+    "step_scope": [
+      "Step0_baseline_red_fixtures",
+      "Step1_runtime_surface_pre_return_gate_contract",
+      "Step2_display_pre_return_path_connection",
+      "Step3_phrase_unit_malformed_nominalization_guard",
+      "Step4_shallow_phrase_unit_guard_application",
+      "Step5_shallow_surface_realizer_v2",
+      "Step6_low_information_specificity",
+      "Step7_bounded_repair_reroute",
+      "Step8_diagnostics_scorecard",
+      "Step9_regression_qa",
+      "Step10_exit_criteria_helper"
+    ],
+    "target_regression_results": {
+      "step0_to_step10_main": "68 passed",
+      "display_repair_lockdown_contract": "39 passed",
+      "full_repo_all_tests": "not_run"
+    }
+  },
+  "source_snapshot_2026_05_24_karen_partner_thought_boundary": {
+    "premise": "Cocolon_前提資料(119).zip",
+    "basis": "2026-05-24 conversation: Mash様 clarified that Cocolon主体 is Mash様の思想と構想, but Cocolon completion requires Karen思想 and Karen構想 as partner support.",
+    "new_docs": [
+      "10_Cocolon_共同開発と華恋思想境界_2026-05-24.md",
+      "Cocolon_作業姿勢とルール_華恋用/14_Cocolon共同開発と華恋思想の扱い.txt"
+    ],
+    "changed_docs": [
+      "00_華恋用_READ_FIRST.md",
+      "Cocolon_思想資料_華恋用.md",
+      "Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt",
+      "Cocolon_作業姿勢とルール_華恋用/09_作業開始チェックリスト.txt",
+      "Cocolon_作業姿勢とルール_華恋用/99_統合版_毎回貼る用.txt",
+      "Cocolon_作業姿勢とルール_華恋用/manifest.json",
+      "manifest.json"
+    ],
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false
+  },
+  "karen_partner_thought_boundary_policy_2026_05_24": "Cocolonの主体はMash様の思想と構想。華恋の思想はMash様の思想を置換せず、Cocolonを完成させるために支える補助思想として扱う。華恋は「人間の言葉を雑に処理しない場所にする」という思想を持つが、それを未確認断定・指示外追加・テンプレ共感・一般論へ変換しない。"
 }

@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-18"
+revision_date: "2026-05-24"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2589,3 +2589,220 @@ ProductGate Measurement Step0-10 で守るcontractは次の通りです。これ
 - regression greenやExit Gate readyをProduct Gate達成・public releaseとして扱わない。
 - RN表示条件、public response key、DB physical name、Gate条件を測定のために変えない。
 - raw入力本文・public `comment_text` 本文をdiagnostic / scorecard / release / local toolへ入れない。
+
+# 2026-05-20 差分追記: Runtime Surface Quality Step0-12 contract / verification boundary
+
+Runtime Surface Quality Step0-12 で守るcontractは次の通りです。これはProduct Gate達成判定ではなく、ProductGate Measurement後に表示文品質を測定し、次branchへ引き渡すための完了境界です。
+
+## contract / boundary owner
+
+| owner | 固定するcontract |
+|---|---|
+| `emlis_ai_runtime_surface_quality_contract_inventory.py` | Step0-12 scope、RN/API/DB/Gate非対象、meta-only、handoff-onlyを固定する。 |
+| `emlis_ai_runtime_surface_source_lock.py` | composer_source分類とversion metaを本文なしで保持し、raw input / public comment_text本文を出さない。 |
+| `emlis_ai_complete_surface_quality_signature.py` | surface signatureはkey / count / hash / warning codeのみ。本文保存ではない。 |
+| `emlis_ai_complete_product_quality_scorecard_service.py` | surface metrics / tone metrics / Blind QA / Long-runをscorecardへ接続し、read feelingはmachine metricsで自動採点しない。 |
+| `emlis_ai_complete_surface_quality_branching.py` | 複数blocker時の分岐優先順位を固定し、unknown / diagnostic missingのまま修正へ進まない。 |
+| `emlis_ai_runtime_surface_exit_gate.py` | `product_gate_ready` / `product_gate_reached` / `public_release_applied` をfalseのまま、handoff summaryだけを出す。 |
+
+## verification owner
+
+| test | 固定すること |
+|---|---|
+| `test_emlis_ai_runtime_surface_quality_contract_inventory_step0.py` | Step0-12 scope、contract locks、forbidden keys。 |
+| `test_emlis_ai_runtime_surface_source_lock_step1.py` | source lock、complete_initial誤分類防止、meta-only。 |
+| `test_emlis_ai_complete_surface_quality_signature_step2.py` | signature / template major / grammar warning / no raw text。 |
+| `test_emlis_ai_runtime_surface_scorecard_metrics_step3.py` | scorecard surface metrics。 |
+| `test_emlis_ai_runtime_surface_coverage_baseline_step4.py` | required coverage groups、missing group blocker。 |
+| `test_emlis_ai_runtime_surface_quality_branching_step5.py` | branch優先順位、repair_allowed境界。 |
+| `test_emlis_ai_runtime_surface_complete_activation_branch_step6.py` | AP0 / rollout / registry / complete runtime alignment。 |
+| `test_emlis_ai_runtime_surface_realizer_anti_template_step7.py` | fixed template追加なしのanti-template。 |
+| `test_emlis_ai_runtime_surface_phrase_unit_grammar_normalizer_step8.py` | grammar normalizer / unsupported_completion_added=false。 |
+| `test_emlis_ai_runtime_surface_tone_engine_2_1_step9.py` | tone major、read feeling machine auto-fill禁止。 |
+| `test_emlis_ai_runtime_surface_self_repair_step10.py` | bounded repair、meaning_added=false。 |
+| `test_emlis_ai_runtime_surface_blind_qa_long_run_step11.py` | Blind QA candidateは本文なし、rating-only。 |
+| `test_emlis_ai_runtime_surface_exit_gate_step12.py` | Exit Gateはhandoff-only、public release false。 |
+
+禁止:
+- RN表示条件、public response key、DB physical name、Gate条件を測定のために変えない。
+- raw入力本文・public `comment_text` 本文をdiagnostic / scorecard / release / QA候補へ入れない。
+- fixed observation sentence / input-specific template / external AI / local LLMを追加しない。
+- Step12完了をProduct Gate達成・public release適用として扱わない。
+
+# 2026-05-21 差分追記: Observation Reply Step0-14 contract / verification boundary
+
+EmlisAI 観測返答 Step0-14 で守るcontractは次の通りです。これはpublic APIやDB物理名を変更する工程ではなく、EmlisAI reply runtimeのbranch / meta / display repair / scorecard / handoffを固定する工程です。
+
+観測返答 Step0-14 の固定契約:
+
+- 通常入力でEmlis renderが完走し安全境界を通過する場合、`eligible_observation` または `low_information_observation` を返す。
+- 低情報観測は新しいpublic `observation_status` ではなく、内部metaの `observation_reply_kind=low_information_observation` として扱う。
+- RN表示条件は引き続き `observation_status === passed` かつ `commentText` 非空。
+- Freeではユーザー辞書を使わない。サブスクでは明示/非明示の2モードで使うが、低情報入力を辞書だけでeligible化しない。
+- 推論鎖は入力内関係からの3段階まで。出来事・人格・診断・行動指示を足さない。
+- Display Gateは緩めない。低情報branch側の本文品質を満たして `passed + comment_text` にする。
+- Step10 repairは、Phase7 rollout block / composer pre-connection rollout stop / release gate block / 非修復AI-generated rejectionを低情報観測へ救済しない。これらは `unavailable` / `rejected` のままfail-closedに残す。
+- DB physical name、public API route、public response key、RN title `Emlisの観測` は変更しない。
+- Step14はhandoff-onlyであり、Product Gate達成・public release適用を宣言しない。
+
+## contract / verification owner
+
+| 領域 | 確認file |
+|---|---|
+| Reply Contract / Inventory | `emlis_ai_observation_reply_contract.py`, `emlis_ai_observation_reply_contract_inventory.py`, `test_emlis_ai_observation_reply_contract.py`, `test_emlis_ai_observation_current_display_contract.py` |
+| Eligibility / Low Information | `emlis_ai_observation_eligibility_service.py`, `test_emlis_ai_observation_eligibility_service.py`, `test_emlis_ai_low_information_red_cases.py` |
+| User Fact Boundary | `emlis_ai_user_fact_grounding_boundary.py`, `test_emlis_ai_user_fact_grounding_boundary.py` |
+| Internal Question / Dictionary / Material | `emlis_ai_internal_question_service.py`, `emlis_ai_observation_dictionary_loader.py`, `emlis_ai_observation_material_connector.py` |
+| SentencePlan / Surface / Tone | `emlis_ai_observation_sentence_plan_roles.py`, `emlis_ai_observation_surface_realizer_tone.py`, `emlis_ai_observation_surface_realizer.py` |
+| Display / Repair | `emlis_ai_observation_display_repair_integration.py`, `emlis_ai_display_gate.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase7_staged_release.py`, `test_emlis_ai_display_contract.py` |
+| RN optional meta | `test_emlis_ai_observation_rn_optional_meta_contract.py`, `rn-screen-contracts.test.js` |
+| Scorecard / Fixture / Exit | `emlis_ai_observation_scorecard_blind_qa.py`, `emlis_ai_observation_regression_fixture_coverage.py`, `emlis_ai_observation_exit_gate_handoff.py` |
+
+## 2026-05-22 差分追記: Step10 Repair Boundary contract / verification
+
+`mashos-api_6(27).zip` のStep10 Repair Boundary修正で、次のcontractを前提資料に追加固定します。
+
+| contract | 固定内容 |
+|---|---|
+| rollout block fail-closed | `connection_status=blocked_rollout`、`pre_connection_stop_stage=rollout`、`limited_composer_rollout_not_allowed` は低情報repairで表示化しない。 |
+| reply_service二重防御 | `limited_release_decision` / `composer_client_resolution` / `phase7_rollout_gate` を見て、Phase7 rollout block時は `repair_allowed=False` / `step10_blocked_by_phase7_rollout` にする。 |
+| ordinary low-information維持 | `feature_flag_disabled` やordinary unavailableを理由に、真正の低情報入力を一律blockしない。 |
+| non-repairable candidate rejection | `unsupported_sentence` / `graph_evidence_not_used` / `core_relation_not_reflected` / `phase8_body_too_short` はAI-generated candidateの非修復rejectionとして低情報branchへ逃がさない。 |
+| meta整合 | Step10 metaに `applied=false`、`comment_text_allowed=false`、runtime block reason、composer block reasons、public contract非変更flagsを残す。 |
+| contract非変更 | RN表示条件、public API route、DB physical name、public response key、`observation_status` enumは変更しない。 |
+
+確認対象test:
+
+- `test_phase7_internal_stage_blocks_non_allowlisted_default_client`
+- `test_step10_does_not_repair_blocked_rollout_resolution`
+- `test_step10_rollout_block_meta_contract_is_attached_consistently`
+- `test_step10_reply_service_runtime_block_reason_only_blocks_rollout`
+- `test_step10_e2e_rejected_candidate_never_exposes_generated_body`
+
+
+# 2026-05-21 差分追記: Emlis観測専用辞書 Phase0-5 contract / guard
+
+Emlis観測専用辞書 Phase0-5 のcontract / guardは、既存public contractを広げるためではなく、内部辞書がpublic route・response・DB・RN表示条件を動かさないことを検査するために追加されています。
+
+| guard / test | owner | 固定する境界 |
+|---|---|---|
+| current input bundle test | `tests/test_emlis_ai_current_input_bundle.py` | 内部正規化で legacy `current_input` shapeを壊さない。 |
+| schema test | `tests/test_emlis_ai_observation_structure_dictionary_schema.py` | 構造観測辞書のschema / dictionaryが実装用schemaに従う。 |
+| loader test | `tests/test_emlis_ai_observation_structure_dictionary_loader.py` | entry / relation参照、forbidden inference、contract boundary flagを検査する。 |
+| phase4 connection test | `tests/test_emlis_ai_observation_structure_phase4_connection.py` | Gate / Composer接続がmeta-onlyであり、辞書が完成文を返さないことを固定する。 |
+| phase5 fixture / Blind QA test | `tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py` | 7fixture、category_parallel / category_overlap、raw text非混入、public contract維持を固定する。 |
+
+禁止: contract guardを理由にpublic response keyを増減する、`observation_status` enumを増やす、`comment_text`生成元を辞書へ移す、DB physical nameをrenameする、Display Gateを緩める。
+
+# 2026-05-22 差分追記: Emlis観測専用辞書 ActionConversion / UnformedSelfInsight Phase0-8 contract / guard
+
+Emlis観測専用辞書 ActionConversion / UnformedSelfInsight Phase0-8 のcontract / guardは、既存public contractを広げるためではなく、内部辞書の観測材料追加がpublic route・response・DB・RN表示条件を動かさないことを検査するために追加されています。
+
+| guard / test | owner | 固定する境界 |
+|---|---|---|
+| schema test | `tests/test_emlis_ai_observation_structure_dictionary_schema.py` | `19 relations / 18 entries`、追加relation / entry、surface_policy、completed reply / raw text系key非混入を固定する。 |
+| loader test | `tests/test_emlis_ai_observation_structure_dictionary_loader.py` | `我慢した` / `言えなかった` / `合わせた` / `わからない` のentry選択、追加relation選択、low_information_boundaryを固定する。 |
+| phase4 connection test | `tests/test_emlis_ai_observation_structure_phase4_connection.py` | 単語だけで強接続しないrelationと、memo / memo_action差分や閉じ方根拠がある場合だけ接続するrelationを固定する。 |
+| phase5 fixture / Blind QA test | `tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py` | 追加6caseの expected / forbidden relation、low information候補、material fieldsを固定する。 |
+| phase6 forbidden inference / meta-only test | `tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py` | raw input / memo / memo_action / comment_text / completed reply / 辞書本文 / forbidden inference本文がmetaへ漏れないことを固定する。 |
+| Step10回帰 | `test_emlis_ai_phase7_staged_release.py`, `test_emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_observation_current_display_contract.py`, `test_emlis_ai_observation_reply_contract.py`, `test_emlis_ai_low_information_observation_composer.py`, `test_emlis_ai_runtime_surface_self_repair_step10.py` | 新規辞書材料が rollout block / release gate block / unavailable を `passed + comment_text` に変えないことを確認する。 |
+
+Phase6 meta-only contractで明示falseとして保管する主なflag:
+
+```text
+dictionary_returns_completed_reply
+dictionary_returned_completed_reply
+completed_reply_from_dictionary
+display_gate_relaxed
+api_route_changed
+response_key_changed
+db_physical_name_changed
+rn_visible_contract_changed
+cause_inferred_from_category
+cause_inferred_from_emotion_strength
+personality_tendency_allowed
+```
+
+禁止: contract guardを理由にpublic response keyを増減する、`observation_status` enumを増やす、`comment_text`生成元を辞書へ移す、DB physical nameをrenameする、Display Gateを緩める、forbidden inference本文やraw inputをmetaへ保存する。
+
+
+
+# 2026-05-23 差分追記: Runtime Surface Pre-Return Gate / Shallow V2 contract / guard
+
+EmlisAI Runtime Surface Pre-Return Gate + Shallow Surface Realizer V2 Step0-10 のcontract / guardは、既存public contractを広げるためではなく、壊れたsurface候補が `passed + comment_text` としてRNに届かないことを検査するために追加されています。
+
+| guard / test | owner | 固定する境界 |
+|---|---|---|
+| runtime surface pre-return gate | `emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_runtime_surface_pre_return_gate.py` | `surface_template_major` / `generic_center_phrase` / `same_connector_run` / `malformed_phrase_unit` をmeta-onlyでblock reason化する。 |
+| display pre-return connection | `emlis_ai_display_gate.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_runtime_surface_pre_return_gate_step2.py` | surface fatal候補を `observation_status=passed` にせず、comment_textを空にする。 |
+| malformed nominalization guard | `emlis_ai_limited_sentence_quality_guard.py`, `emlis_ai_phrase_unit_grammar_normalizer.py`, `test_emlis_ai_malformed_nominalization_phrase_unit_guard.py` | `今までこと` / `大丈夫こと` / `まだないかこと` / `〜なくてこと` などを本文生成へ渡さない。 |
+| shallow phrase unit guard | `emlis_ai_limited_composer_client.py`, `test_emlis_ai_shallow_phrase_unit_guard_step4.py` | shallow phrase unit作成時にguardを通し、safe unitだけをrealizerへ渡す。 |
+| Shallow Surface Realizer V2 | `emlis_ai_limited_composer_client.py`, `test_emlis_ai_shallow_surface_realizer_v2_step5.py` | `Xが中心にあります` / `その中でも` 反復を標準表示から外し、role-based surfaceにする。 |
+| low information specificity | `emlis_ai_low_information_observation_composer.py`, `test_emlis_ai_low_information_specificity_policy_step6.py` | safe anchorがある時に完全抽象へ逃げない。ただしraw long copyやevent / fact捏造をしない。 |
+| bounded repair / reroute | `emlis_ai_bounded_repair_reroute.py`, `test_emlis_ai_bounded_repair_reroute_step7.py` | shallow V2 rerenderは1回だけ。safety / rollout / release gate / non-repairable rejectionは表示化しない。 |
+| diagnostics / scorecard | `emlis_ai_complete_reply_diagnostics_service.py`, `emlis_ai_complete_scorecard_service.py`, `test_emlis_ai_*diagnostics_scorecard_step8.py` | runtime surface gate結果をscorecard / diagnosticsへmeta-onlyで渡す。 |
+| diagnostic lockdown / QA | `emlis_ai_observation_diagnostic_lockdown.py`, `test_emlis_ai_observation_diagnostic_lockdown_surface_gate_step9.py` | Render-visible lockdownログで `surface_quality_blocked` として分類できる。 |
+| exit criteria | `emlis_ai_runtime_surface_exit_criteria.py`, `test_emlis_ai_runtime_surface_exit_criteria_step10.py` | 表示本文のexit criteriaをmeta-onlyで判定する。実機確認結果ではなく確認基準。 |
+
+禁止: contract guardを理由にpublic response keyを増減する、`observation_status` enumを増やす、RN表示条件を `observation_reply_kind` やsurface reasonで分岐する、DB physical nameをrenameする、Display Gate / Grounding / Template Guardを緩める、raw inputやpublic `comment_text` 本文をdiagnosticsへ保存する。
+
+
+# 2026-05-24 差分追記: EmlisAI public feedback meta boundary / timeout recovery / low-information prompt / notification uuid boundary
+
+EmlisAI immediate responseの最新contractは、internal metaとpublic metaを分けることです。RN visible contractは従来どおり `passed + comment_text` だけを見ます。
+
+## Public feedback meta boundary
+
+| key / boundary | 最新contract |
+|---|---|
+| `input_feedback.comment_text` | 表示本文の互換key。key名は変更しない。 |
+| `input_feedback.emlis_ai` | `emlis.public_input_feedback_meta.v1` のpublic-safe subset。内部meta全文ではない。 |
+| `public_feedback_meta_boundary` | `sanitized=true`, `internal_meta_returned=false`, `raw_input_included=false`, `comment_text_included=false`, `max_bytes=12288` を持つ境界marker。 |
+| `observation_status` | public enumは既存の `passed` / `rejected` / `unavailable` / `safety_blocked` のまま。 |
+| input_feedback inclusion | `comment_text` 非空 + public `observation_status == "passed"` の時だけ返す。 |
+
+public metaへ出さないもの: `raw_input`、`memo`、`memo_text`、`raw_text`、`current_input`、`evidence_spans`、`observation_graph`、`perspective_reports`、`complete_reply_service_diagnostics`、scorecard全文、fixture QA全文、public `comment_text` 本文。
+
+## Test / guard
+
+| test / guard | 固定する境界 |
+|---|---|
+| `test_emlis_ai_public_feedback_meta.py` | sanitizer whitelist、hard byte limit、fail-closed unavailable meta。 |
+| `test_emotion_submit_public_feedback_meta_boundary.py` | route response肥大化防止、raw非混入、passed + comment_textのみfeedback返却。 |
+| `test_emotion_reflection_publish_public_feedback_contract.py` | publish pathでも同じpublic feedback inclusion条件を使う。 |
+| `test_emotion_submit_observation_diagnostic_log.py` | public responseはsanitized、diagnostic lockdownはinternal metaを使える。 |
+| `test_emotion_submit_notification_settings_uuid_boundary.py` | uuid型owner filterへglobal sentinelを混ぜない。 |
+| `rn-screen-contracts.test.js` | timeout時に保存失敗断定を使わない、再送しない、draftをclearしない。 |
+
+low-information質問surfaceは、runtime本文で `よければ、何がありましたか。` を出さず、`詳しく残せそうなら、〜残してみませんか。` 系を正規質問surfaceとして扱う。
+
+禁止: public response keyをrenameする、public `observation_status` enumを増やす、RN表示条件を `observation_reply_kind` やdiagnosticsに寄せる、Display Gate / Grounding / Template Guardを緩める、raw本文をdiagnostics / public metaへ入れる。
+
+
+# 2026-05-24 差分追記: Visible Surface Acceptance QA Step0-8 contract / guard
+
+Visible Surface Acceptance QA Step0-8 のcontract / guardは、表示率を上げるためではなく、`passed + comment_text` としてRNに出る本文が表示文品質を満たすかをpublic表示前に検査するために追加されています。public route、response key、DB physical name、RN表示条件は変更しません。
+
+| guard / test | owner | 固定する境界 |
+|---|---|---|
+| inventory fixture | `tests/fixtures/emlis_ai_visible_surface_acceptance_fixtures.py`, `test_emlis_ai_visible_surface_acceptance_inventory_step0.py` | スクショ由来のred / repair_required / pass / out_of_scope。`Userさん` はaccount nameなら赤ケースではない。 |
+| `たりこと` guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py`, `test_emlis_ai_malformed_nominalization_phrase_unit_guard.py` | `したりこと` / `たりこと` を `malformed_nominalization_tari_fragment` として止め、安全な `したこと` / `したりすること` は通す。 |
+| Runtime Surface接続 | `emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_runtime_surface_pre_return_gate_step2.py` | comment_text表面で `たりこと` が見つかれば `passed=false` / malformed count増加 / rejection reason付与。 |
+| Visible Surface Acceptance Gate | `emlis_ai_visible_surface_acceptance_gate.py`, `test_emlis_ai_visible_surface_acceptance_gate.py` | meta-only report、中心感情/本文焦点bridge、positive-only over-burden、malformed visible surfaceの判定。 |
+| reply path connection | `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py`, `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_visible_surface_acceptance_reply_path_step4.py` | red / repair_required / block / fail_closedを表示前fail-closedへ接続。yellow/warnは停止しない。 |
+| low-information tone profile | `emlis_ai_low_information_observation_composer.py`, `emlis_ai_observation_surface_realizer_tone.py`, `test_emlis_ai_low_information_tone_profile_step5.py` | positive_only / negative_only / mixed / self_insight / neutral_or_unknownのtone境界。 |
+| public meta sanitizer | `emlis_ai_public_feedback_meta.py`, `test_emlis_ai_public_feedback_meta.py`, `test_emotion_submit_public_feedback_meta_boundary.py` | visible gate summaryは小さいsubsetだけ。raw input / evidence / comment_text本文をpublic metaへ入れない。blocking時はfeedbackを返さない。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | `visible_surface_acceptance_gate` metaだけでRN modalを表示しない。public `passed + comment_text` のみ表示する。 |
+| regression execution stability | `emlis_ai_observation_structure_dictionary_loader.py`, `test_emlis_ai_observation_structure_dictionary_loader.py`, `test_emlis_ai_observation_structure_dictionary_schema.py` | `jsonschema` import依存でcollectionが詰まらないよう、bundled schema subsetをstdlib検証する。 |
+
+Visible Surface Acceptance Gate reportのpublic-safe summaryとして許可される範囲:
+
+```text
+evaluated
+passed
+classification
+action
+rejection_reasons
+```
+
+禁止: gate reportへ raw input / raw text / evidence text / comment_text body / candidate_comment_text を入れる、visible gate blockingなのに `input_feedback` を返す、RN表示条件を `visible_surface_acceptance_gate.passed` に変える、`observation_status` enumを増やす、DB physical name / write pathを変える、固定fallback文で壊れたsurfaceを覆う。

@@ -1,18 +1,19 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-18"
+revision_date: "2026-05-21"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(98).zip"
-  Cocolon: "Cocolon_11(3).zip"
-  mashos-api: "mashos-api_11(6).zip"
+  premise: "Cocolon_前提資料(111).zip"
+  Cocolon: "Cocolon_8(12).zip"
+  mashos-api: "mashos-api_8(23).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 543
+  mashos-api: 614
+  total: 831
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -460,3 +461,69 @@ visible名は引き続き `Emlisの観測`。`input_feedback.comment_text` / `in
 | `blind_qa_input_candidates` | Blind QA meta | read_feelingを人手reviewへ渡すためのmeta-only候補 | comment_text本文やraw入力を入れない |
 
 禁止: ProductGate Measurementを理由に、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。
+
+# 2026-05-20 差分追記: Runtime Surface Quality Step0-12 名称境界
+
+最新実ファイルでは、ProductGate Measurement後に `Runtime Surface Quality` 系の内部名が追加されています。これは表示名でもpublic API名でもありません。
+
+| 名前 | 層 | 意味 | rename禁止境界 |
+|---|---|---|---|
+| `Runtime Surface Quality` | internal工程名 | 表示されたEmlis観測文のruntime source、surface signature、scorecard surface metrics、coverage、branch、QA、Exit Gateを扱う工程 | `Product Gate達成` や `商品品質版完成` と同一視しない |
+| `RuntimeSurfaceSourceLockV1` | diagnostic meta | 表示文ごとに `composer_source` / version / display status を本文なしで固定する | RN表示条件やpublic response keyにしない |
+| `SurfaceQualitySignatureV1` | surface measurement meta | connector / predicate / ending / grammar warningをkey列とhashで測る | `comment_text` 本文やraw入力を保存するものではない |
+| `Branch Resolver` | next action meta | 次に触る層を runtime / grounding / grammar / surface / tone / QA に分岐する | 原因未分類のままSurfaceやToneを直す口実にしない |
+| `Surface Realizer 2.1 Anti-Template` | surface policy | 固定文ではなく部品選択の反復を抑える | 完成文定数や入力専用テンプレを増やさない |
+| `Tone Engine 2.1` | tone quality meta | 診断化、命令、慰めすぎ、距離感崩れを検出する | read_feelingを自動採点しない |
+| `Exit Gate` | handoff boundary | next branch / blockers / gapsを残す | public release appliedではない |
+
+visible名は引き続き `Emlisの観測`。`input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` は互換維持する。
+
+# 2026-05-21 差分追記: Observation Reply internal名の読み分け
+
+`mashos-api_16(2).zip` では、EmlisAI 観測返答 Step0-14 により `observation_reply_kind` 系のinternal名が増えています。これらは、Cocolonのvisible名、public route、DB physical name、RN public status enumではありません。
+
+| internal名 | 意味 | 混同してはいけないもの |
+|---|---|---|
+| `Observation Reply` | EmlisAI観測返答の商品品質実装工程名 | RN表示名やAPI route名ではない |
+| `eligible_observation` | 現在入力から対象・状態・関係が取れる観測branch | public `observation_status` ではない |
+| `low_information_observation` | 情報不足時に見える範囲の観測と質問を返すbranch | `rejected` / `unavailable` / 新public statusではない |
+| `observation_reply_kind` | reply種別を表すinternal / optional meta key | RN表示条件ではない |
+| `eligibility_status` | `eligible` / `low_information` の内部判定 | ユーザー向け文言ではない |
+| `user_fact_grounding_mode` | `disabled` / `explicit_reference` / `implicit_focus` の内部境界 | サブスク表示文言ではない |
+| `unknown_slots` | 低情報時に不足している対象・出来事・関係など | ユーザーへそのまま出すUI labelではない |
+| `low_info_receive` / `low_info_known_scope` / `low_info_question` | SentencePlan meta上の低情報role | public `line_role` enumではない |
+| `Step14 Exit Gate / Handoff` | 観測返答工程のhandoff-only出口 | Product Gate達成・public releaseではない |
+
+作業時は、`low_information_observation` を見つけてもRN enumへ追加しない。これは backend / diagnostic / scorecard / optional meta の名称であり、RN visible contractは `passed + commentText` のままです。
+
+# 2026-05-21 差分追記: Emlis観測専用辞書 internal名の読み分け
+
+`mashos-api_6(26).zip` では、Emlis観測専用辞書 Phase0-5 により `emlis_observation_structure_dictionary` / `current_input_bundle` / `structure_material` 系のinternal名が増えています。これらは、Cocolonのvisible名、public route、DB physical name、RN public status enumではありません。
+
+| internal名 | 意味 | 混同してはいけないもの |
+|---|---|---|
+| `emlis_observation_structure_dictionary` | EmlisAIが入力束からrelation / internal question / allowed・forbidden inferenceを作る内部構造辞書 | 既存の `emlis_observation_dictionary` 表面素材辞書、DB table、public API名ではない |
+| `EmlisCurrentInputBundle` | `memo` / `memo_action` / `emotion_details` / `category` を内部正規化する型 | public request model renameではない |
+| `thought_text` / `action_text` / `emotions` / `categories` | EmlisAI内部の入力束名 | RN payload key / DB column / response keyではない |
+| `selected_entry_ids` / `selected_relation_ids` / `structure_question_ids` | 構造辞書が選んだtext-free material | ユーザー表示文や固定返答文ではない |
+| `state_text_gap` / `emotion_nesting` / `thought_action_discrepancy` / `category_parallel` / `category_overlap` | Emlis観測専用辞書のrelation候補 | 診断名・人格分類・public statusではない |
+| `Phase5_Blind_QA` / `PHASE5_OBSERVATION_STRUCTURE_*` | fixture / rubric / test用の内部名 | Product Gate達成やrelease状態ではない |
+
+作業時は、構造観測辞書のinternal名を理由に `Emlisの観測`、`input_feedback.comment_text`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。
+
+# 2026-05-22 差分追記: ActionConversion / UnformedSelfInsight internal名の読み分け
+
+`mashos-api_8(23).zip` では、Emlis観測専用辞書 UpdateDesign ActionConversion / UnformedSelfInsight により、構造観測辞書の relation / entry internal名が追加されています。これらは、Cocolonのvisible名、public route、DB physical name、RN public status enum、完成返答文テンプレ名ではありません。
+
+| internal名 | 意味 | 混同してはいけないもの |
+|---|---|---|
+| `unexpressed_output_stop` | 出したいものが外へ出る前で止まった可能性を扱うrelation | 本音内容、相手原因、public statusではない |
+| `self_shape_alignment` | 自分の形や出力を場・相手・状況へ寄せた可能性を扱うrelation | 主体性喪失診断、支配関係断定ではない |
+| `action_conversion_history` | したい出力とは別の行動へ変換し履歴化した可能性を扱うrelation | 我慢賛美、自己犠牲診断、完成文ではない |
+| `conversion_history_closure` | 変換後の行動履歴の閉じ方が入力根拠から見える場合に扱うrelation | 納得/未完了/疲労などをAI側が決めるラベルではない |
+| `unformed_self_insight` | 反応や疑問はあるが自己理解の形へ並びきっていない入口を扱うrelation | low informationだけ、混乱診断、原因探索ではない |
+| `word_could_not_say` / `word_aligned_to_context` / `word_gaman` / `word_wakaranai` | 追加input word entry | RN表示文言、DB column、public API keyではない |
+| `dictionary_returns_completed_reply` / `completed_reply_from_dictionary` | meta-only contract flag | trueにして辞書から完成返答文を出すためのflagではない |
+| `phase6_forbidden_inference_meta_contract` | forbidden inference / meta-only検証名 | public release段階、RN表示条件名ではない |
+
+作業時は、これらのinternal名を理由に `Emlisの観測`、`input_feedback.comment_text`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。

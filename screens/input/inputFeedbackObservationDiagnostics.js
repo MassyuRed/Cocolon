@@ -67,6 +67,32 @@ function getObservationStatus(meta) {
   return normalizeString(meta?.observation_status || meta?.observationStatus || "");
 }
 
+function getObservationReplyKind(meta) {
+  const diagnostic = meta?.diagnostic_summary || meta?.multi_perspective?.diagnostic_summary || {};
+  const step10 =
+    meta?.step10_observation_display_repair_integration ||
+    meta?.observation_display_repair_integration ||
+    diagnostic?.step10_observation_display_repair_integration ||
+    diagnostic?.observation_display_repair_integration ||
+    {};
+  const replyMeta =
+    meta?.observation_reply_meta ||
+    meta?.observation_reply_contract ||
+    diagnostic?.observation_reply_meta ||
+    diagnostic?.observation_reply_contract ||
+    step10?.observation_reply_meta ||
+    {};
+  const replyKind = normalizeString(
+    meta?.observation_reply_kind ||
+      replyMeta?.observation_reply_kind ||
+      step10?.observation_reply_kind ||
+      ""
+  );
+  return replyKind === "eligible_observation" || replyKind === "low_information_observation"
+    ? replyKind
+    : "";
+}
+
 function getEmotionLogId(submitResult) {
   return normalizeString(
     submitResult?.id ||
@@ -86,8 +112,8 @@ export function buildEmlisObservationFrontendDiagnostic({
 } = {}) {
   const meta = getInputFeedbackAI(submitResult, inputFeedbackAI);
   const textLength = normalizeString(inputFeedbackText).length;
-
-  return {
+  const observationReplyKind = getObservationReplyKind(meta);
+  const record = {
     version: FRONTEND_OBSERVATION_DIAGNOSTIC_VERSION,
     source: FRONTEND_OBSERVATION_DIAGNOSTIC_SOURCE,
     emotion_log_id: getEmotionLogId(submitResult),
@@ -99,6 +125,10 @@ export function buildEmlisObservationFrontendDiagnostic({
     raw_input_included: false,
     comment_text_included: false,
   };
+  if (observationReplyKind) {
+    record.observation_reply_kind = observationReplyKind;
+  }
+  return record;
 }
 
 function assertNoForbiddenTextPayloadKeys(value, path = "record") {

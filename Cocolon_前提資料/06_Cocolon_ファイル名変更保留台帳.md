@@ -1,18 +1,18 @@
 ---
 doc_id: cocolon_file_name_mixing_storage
 title: "Cocolon ファイル名変更保留台帳"
-revision_date: "2026-05-16"
+revision_date: "2026-05-23"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(90).zip"
-  Cocolon: "Cocolon_8(11).zip"
-  mashos-api: "mashos-api_8(16).zip"
+  premise: "Cocolon_前提資料(113).zip"
+  Cocolon: "Cocolon_12(5).zip"
+  mashos-api: "mashos-api_12(8).zip"
 file_counts:
-  Cocolon: 216
-  mashos-api: 504
+  Cocolon: 217
+  mashos-api: 630
 purpose: "visible名とファイル名・route名・DB物理名のズレを、作業時に誤renameしないために保管する"
 ---
 
@@ -173,5 +173,24 @@ Complete Composer初期版では、`complete_*` 系の新規ファイル名と�
 | `complete_product_quality_release_ladder` | diagnostic/meta key | `rename禁止` | internal / limited / broader_beta / product_gateの判定meta。 |
 | `blind_qa_rubric` / `read_feeling_score` | QA meta | `rename禁止` | 人手QA評価の概念。自動Gateやpublic本文ではない。 |
 | `product_gate_reached` / `product_gate_public_release_applied` | release meta | `rename禁止` | Step7ではfalseを維持する安全契約。 |
+
+visible名は引き続き `Emlisの観測`、公開本文は `input_feedback.comment_text`、表示条件は `observation_status=passed` かつ本文ありの場合のみ。
+
+
+
+# 2026-05-23 差分追記: Runtime Surface Gate / Shallow V2内部名称のrename禁止
+
+Runtime Surface Pre-Return Gate + Shallow Surface Realizer V2 Step0-10 で増えた次の名称・pathは、EmlisAI内部のsurface品質・repair・QA metaです。ユーザー表示名、public route、DB physical name、response keyへrenameしない。
+
+| 名称 / path | 種別 | 扱い | 理由 |
+|---|---|---|---|
+| `runtime_surface_pre_return_gate` | internal gate meta | `rename禁止` | 表示前surface品質gate。public `observation_status` やRN表示条件ではない。 |
+| `surface_quality_blocked` | diagnostic classification | `rename禁止` | lockdown分類名。新しいRN表示状態ではない。 |
+| `shallow_surface_realizer.v2` | internal realizer version | `rename禁止` | shallow本文生成version。visible名やComposer名ではない。 |
+| `bounded_repair_reroute` | internal decision contract | `rename禁止` | repair / reroute可否を決めるmeta。Gate緩和名ではない。 |
+| `low_information_specificity_plan` | internal low-info plan | `rename禁止` | safe anchorを使うかの内部plan。public response keyではない。 |
+| `runtime_surface_exit_criteria` | internal QA helper | `rename禁止` | 実機確認基準のmeta。Product Gate達成やrelease適用ではない。 |
+| `malformed_nominalization_*` | internal reason code | `rename禁止` | 壊れた `〜こと` phrase unit用reason。ユーザー表示文ではない。 |
+| `surface_template_major_blocked` | internal diagnostic key | `rename禁止` | surface major blockのmeta。RN表示分岐ではない。 |
 
 visible名は引き続き `Emlisの観測`、公開本文は `input_feedback.comment_text`、表示条件は `observation_status=passed` かつ本文ありの場合のみ。

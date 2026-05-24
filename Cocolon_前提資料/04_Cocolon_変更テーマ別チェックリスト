@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-18"
+revision_date: "2026-05-24"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -427,3 +427,73 @@ EmlisAIのProductGate Measurement、diagnostic join、scorecard event adapter、
 - Blind QAなしでread_feelingを埋めない。
 - local tool outputへraw入力本文・public `comment_text` 本文を出さない。
 - Exit Gate readyをProduct Gate達成やpublic release適用にしない。
+
+# 2026-05-20 差分追記: EmlisAI Runtime Surface Quality Step0-12 を触る時
+
+EmlisAIのRuntime Surface Quality、source lock、surface signature、scorecard surface metrics、coverage baseline、branch resolver、complete runtime activation、anti-template、grammar normalizer、Tone Engine 2.1、surface-aware self-repair、Blind QA / Long-run、Exit Gateを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面とRuntime Surface Quality境界。
+2. `03_Cocolon_命名体系.md` のRuntime Surface Quality / Product Gate / public releaseの読み分け。
+3. `01_Cocolon_全体構造資料.md` のRuntime Surface Quality Step0-12 overall structure。
+4. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のInput / EmlisAI runtime map。
+5. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` のbackend support owner / tests。
+6. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` の保存API非変更境界。
+7. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / verification boundary。
+8. `05_Cocolon_ルールファイル索引` のRuntime Surface Quality rule / test index。
+9. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` のinternal名保管境界。
+10. 最新実ファイルzip上の対象file。
+
+禁止: RN passed-only contractを緩める、`/emotion/submit` routeやresponse keyをrenameする、DB physical nameを変える、Gateを緩める、raw入力本文やpublic `comment_text` 本文をmetricへ入れる、Step12 Exit GateをProduct Gate達成扱いにする。
+
+# 2026-05-21 差分追記: EmlisAI 観測返答 Step0-14 を触る時
+
+EmlisAIの観測返答、eligible / low_information routing、ユーザー辞書境界、低情報Composer、Surface / Tone、Display Repair、Scorecard / Blind QA、Regression Fixture、Exit Gate / Handoffを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面とObservation Reply Step0-14境界。
+2. `03_Cocolon_命名体系.md` の `observation_reply_kind` / `low_information_observation` / public statusの読み分け。
+3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` のObservation Reply internal名保管境界。
+4. `01_Cocolon_全体構造資料.md` のObservation Reply Step0-14 overall structure。
+5. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のRN optional meta境界。
+6. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` のbackend service / test map。
+7. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` のimmediate reply / low-information branch接続。
+8. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / verification boundary。
+9. `05_Cocolon_ルールファイル索引` のObservation Reply rule / test index。
+
+禁止:
+
+- 低情報観測を新しいpublic `observation_status` にしない。
+- RN表示条件を `observation_reply_kind` だけで開くように変えない。
+- Freeでユーザー辞書を使わない。
+- サブスクでもユーザー辞書だけで低情報入力をeligible化しない。
+- Display Gateを緩めて本文を通さない。
+- 固定fallback、外部AI、local LLM、例文特化runtimeを復活させない。
+
+
+# 2026-05-24 差分追記: EmlisAI public feedback meta boundary / timeout recovery / low-information prompt / notification uuid boundary
+
+EmlisAI immediate response、`/emotion/submit`、RN timeout、low-information質問文、notification settingsを触る時は、次を最短読む順として固定する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面。
+2. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のHome/Input timeout recovery境界。
+3. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` のpublic feedback meta sanitizer / backend test map。
+4. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` のSave後immediate response境界。
+5. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のpublic response contract / test。
+6. `05_Cocolon_ルールファイル索引` のrule / test index。
+7. `08_Cocolon_DB_rename_boundary.md` のnotification uuid sentinel boundary。
+8. 最新実ファイルzip上の対象file。
+
+同時確認する主な実ファイル:
+
+- `Cocolon/lib/api/home/emotionSubmitApi.js`
+- `Cocolon/screens/InputScreen.js`
+- `Cocolon/tests/rn-screen-contracts.test.js`
+- `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py`
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+- `mashos-api/ai/services/ai_inference/api_emotion_submit.py`
+- `mashos-api/ai/services/ai_inference/home_gateway/emotion_reflection_publish_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py`
+- `mashos-api/ai/services/ai_inference/config/emlis_observation_dictionary.v1.json`
+
+禁止: timeout時の自動再送、保存失敗断定、public response key rename、internal Emlis meta全文返却、raw input / public comment本文のpublic meta混入、global sentinel文字列をuuid filterへ混ぜること。

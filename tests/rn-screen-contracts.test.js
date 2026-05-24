@@ -39,7 +39,10 @@ function loadInputFeedbackModelForContractTest() {
   return Function(`
     ${source}
     return {
+      buildInputFeedbackEmotionMeta,
       normalizeEmlisObservationStatus,
+      normalizeEmlisObservationReplyKind,
+      getEmlisObservationReplyKind,
       getEmlisObservationStatus,
       getEmlisObservationCommentText,
       isPassedEmlisObservationReply,
@@ -405,6 +408,54 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 });
 
 
+test('Step 6 emotion submit timeout recovery avoids save-failure wording and preserves the draft', () => {
+  const input = read('screens/InputScreen.js');
+  const emotionSubmitApi = read('lib/api/home/emotionSubmitApi.js');
+
+  assertIncludes(emotionSubmitApi, [
+    'export const EMOTION_SUBMIT_TIMEOUT_MS = 30000;',
+    'apiPost("/emotion/submit", payload || {}, {',
+    'timeoutMs: EMOTION_SUBMIT_TIMEOUT_MS,',
+  ], 'emotionSubmitApi.js Step 6 submit timeout guard');
+
+  assertIncludes(input, [
+    'function isRequestTimeoutError(error)',
+    'name === "TimeoutError" || /timed out/i.test(message)',
+    'function getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)',
+    'async function refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState)',
+    'await loadHomeState({ force: true, includeStartupCandidate: false });',
+    'if (isRequestTimeoutError(error))',
+    '記録の完了確認に時間がかかっています。',
+    '反映されている場合があるため、画面を更新して確認しました。',
+    '反映されている場合があるため、時間をおいて入力履歴を確認してください。',
+    '入力欄はそのまま残しています。',
+    'Alert.alert(\n          "記録の確認",',
+  ], 'InputScreen.js Step 6 timeout recovery branch');
+
+  const timeoutBranchStart = input.indexOf('if (isRequestTimeoutError(error))');
+  const timeoutBranchEnd = input.indexOf('console.error("入力処理エラー:", error);', timeoutBranchStart);
+  assert.ok(timeoutBranchStart >= 0, 'InputScreen.js Step 6 timeout branch must exist');
+  assert.ok(timeoutBranchEnd > timeoutBranchStart, 'InputScreen.js Step 6 timeout branch must end before generic error branch');
+  const timeoutBranch = input.slice(timeoutBranchStart, timeoutBranchEnd);
+
+  assertIncludes(timeoutBranch, [
+    'const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);',
+    'getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)',
+    'return;',
+  ], 'InputScreen.js Step 6 timeout branch refreshes once and returns');
+  assertNotIncludes(timeoutBranch, [
+    '入力の保存処理に失敗しました。',
+    'submitEmotionInput(',
+    'clearPersistedInputDraft',
+    'setPendingInputDraft(null)',
+    'setSelectedEmotions([])',
+    'setMemo("")',
+    'setMemoAction("")',
+    'setSelectedCategories([])',
+  ], 'InputScreen.js Step 6 timeout branch must not imply save failure, retry, or clear the draft');
+});
+
+
 test('Step 07 Emlis observation frontend regression keeps passed-only modal display fail-closed', () => {
   const input = read('screens/InputScreen.js');
   const inputFeedback = read('screens/input/inputFeedbackModel.js');
@@ -452,8 +503,6 @@ test('Step 07 Emlis observation frontend regression keeps passed-only modal disp
     'observationStatus: inputFeedbackAI?.observation_status || "passed"',
   ], 'InputScreen.js Step 07 must not force rejected/unavailable/safety observations to passed');
 });
-
-
 
 test('Step 08 Complete Composer initial RN contract regression keeps Complete meta from overriding public passed-only display', () => {
   const inputFeedback = read('screens/input/inputFeedbackModel.js');
@@ -617,6 +666,156 @@ test('Step 08 Complete Composer initial RN contract regression keeps Complete me
   assert.equal(buildPassedEmlisObservationModalPayload(passedBlankPublicTextPayload), null);
 });
 
+
+
+test('Visible Surface Acceptance QA Step 7 RN keeps backend gate meta behind passed plus comment_text contract', () => {
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+
+  assertIncludes(inputFeedback, [
+    'export function buildInputFeedbackEmotionMeta',
+    'strengthScoreForFeedback',
+    '選択した感情：',
+    '中心として見ている感情：',
+    'export function buildPassedEmlisObservationModalPayload',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+  ], 'inputFeedbackModel.js Visible Surface Acceptance Step 7 contract');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'if (!payload) {',
+    'setInputFeedbackModalVisible(false);',
+    'observationStatus: getEmlisObservationStatus(input)',
+    'return false;',
+  ], 'useInputFeedbackModal.js Visible Surface Acceptance Step 7 opener remains passed-only');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'Emlisの観測',
+    'const shouldShow = Boolean',
+    'visible &&',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    '<Modal visible={shouldShow}',
+  ], 'InputFeedbackReplyModal.js Visible Surface Acceptance Step 7 display title and visibility guard');
+
+  assertNotIncludes(inputFeedback + inputFeedbackModal + inputFeedbackReplyModal, [
+    'visible_surface_acceptance_gate',
+    'candidate_comment_text',
+    'raw_input',
+    'evidence_text',
+    'Userさん',
+  ], 'RN Visible Surface Acceptance Step 7 must not branch on backend gate meta, hidden text, raw input, or account-name literals');
+
+  const {
+    buildInputFeedbackEmotionMeta,
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  assert.deepEqual(
+    buildInputFeedbackEmotionMeta([
+      { type: '悲しみ', strength: 'medium' },
+      { type: '不安', strength: 'medium' },
+    ]),
+    {
+      emotionSummary: '選択した感情：悲しみ／不安',
+      dominantSummary: '中心として見ている感情：悲しみ',
+      dominantLabel: '中心として見ている感情：悲しみ',
+    }
+  );
+
+  assert.deepEqual(
+    buildInputFeedbackEmotionMeta([
+      { type: '悲しみ', strength: 'weak' },
+      { type: '不安', strength: 'strong' },
+    ]),
+    {
+      emotionSummary: '選択した感情：悲しみ／不安',
+      dominantSummary: '中心として見ている感情：不安',
+      dominantLabel: '中心として見ている感情：不安',
+    }
+  );
+
+  const passedWithVisibleGateSummary = {
+    input_feedback: {
+      comment_text: 'Userさん、Emlisです。\n状態が一色ではありません。',
+      emlis_ai: {
+        observation_status: 'passed',
+        visible_surface_acceptance_gate: {
+          evaluated: true,
+          passed: true,
+          classification: 'yellow',
+          action: 'warn',
+          rejection_reasons: [],
+        },
+      },
+    },
+    ...buildInputFeedbackEmotionMeta([
+      { type: '平穏', strength: 'medium' },
+      { type: '喜び', strength: 'medium' },
+    ]),
+  };
+  assert.equal(getEmlisObservationStatus(passedWithVisibleGateSummary), 'passed');
+  assert.equal(
+    getEmlisObservationCommentText(passedWithVisibleGateSummary),
+    'Userさん、Emlisです。\n状態が一色ではありません。'
+  );
+  assert.deepEqual(buildPassedEmlisObservationModalPayload(passedWithVisibleGateSummary), {
+    commentText: 'Userさん、Emlisです。\n状態が一色ではありません。',
+    observationStatus: 'passed',
+    emotionSummary: '選択した感情：平穏／喜び',
+    dominantSummary: '中心として見ている感情：平穏',
+    contextLabel: '',
+  });
+
+  const metaOnlyVisibleGatePayload = {
+    input_feedback: {
+      comment_text: '',
+      emlis_ai: {
+        observation_status: '',
+        visible_surface_acceptance_gate: {
+          evaluated: true,
+          passed: true,
+          classification: 'pass',
+          action: 'allow',
+          candidate_comment_text: 'meta内の本文候補はRN表示対象外です。',
+          raw_input: 'raw input must stay backend-only',
+          evidence_text: 'evidence text must stay backend-only',
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(metaOnlyVisibleGatePayload), '');
+  assert.equal(getEmlisObservationCommentText(metaOnlyVisibleGatePayload), '');
+  assert.equal(isPassedEmlisObservationReply(metaOnlyVisibleGatePayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyVisibleGatePayload), null);
+
+  for (const observation_status of ['rejected', 'unavailable', 'safety_blocked', '']) {
+    const nonPassedWithVisibleGatePass = {
+      input_feedback: {
+        comment_text: 'Visible Surface Acceptance Gate が allow でも public status が non-passed なら表示しません。',
+        emlis_ai: {
+          observation_status,
+          visible_surface_acceptance_gate: {
+            evaluated: true,
+            passed: true,
+            classification: 'pass',
+            action: 'allow',
+            rejection_reasons: [],
+          },
+        },
+      },
+    };
+    assert.equal(getEmlisObservationStatus(nonPassedWithVisibleGatePass), observation_status);
+    assert.equal(isPassedEmlisObservationReply(nonPassedWithVisibleGatePass), false);
+    assert.equal(buildPassedEmlisObservationModalPayload(nonPassedWithVisibleGatePass), null);
+  }
+});
 
 test('Observation Diagnostic Lockdown Step 6 RN frontend diagnostics keep debug logging opt-in, text-free, and no forced passed', () => {
   const input = read('screens/InputScreen.js');
@@ -2151,4 +2350,259 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     '良い役割',
     'いつもこうなります',
   ], 'Guide, terms, tutorial, and fixtures avoid diagnostic/type/fix wording');
+});
+
+test('Observation Reply Step 0/1 RN keeps low-information reply kind meta behind passed plus commentText contract', () => {
+  const model = read('screens/input/inputFeedbackModel.js');
+  assertIncludes(model, [
+    'export function isPassedEmlisObservationReply',
+    'export function buildPassedEmlisObservationModalPayload',
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'input?.input_feedback?.comment_text',
+  ], 'inputFeedbackModel.js must keep public passed plus comment_text display contract');
+
+  const {
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  const lowInformationPassedPayload = {
+    input_feedback: {
+      comment_text: '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。',
+      emlis_ai: {
+        observation_status: 'passed',
+        meta: {
+          observation_reply_kind: 'low_information_observation',
+          eligibility_status: 'low_information',
+          eligible_for_full_observation: false,
+          question_required: true,
+          public_observation_status_added: false,
+        },
+      },
+    },
+  };
+
+  assert.equal(getEmlisObservationStatus(lowInformationPassedPayload), 'passed');
+  assert.equal(
+    getEmlisObservationCommentText(lowInformationPassedPayload),
+    '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。'
+  );
+  assert.equal(isPassedEmlisObservationReply(lowInformationPassedPayload), true);
+  assert.deepEqual(buildPassedEmlisObservationModalPayload(lowInformationPassedPayload), {
+    commentText: '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。',
+    observationStatus: 'passed',
+    emotionSummary: '',
+    dominantSummary: '',
+    contextLabel: '',
+  });
+
+  const lowInformationMetaOnlyPayload = {
+    input_feedback: {
+      comment_text: '',
+      emlis_ai: {
+        observation_status: '',
+        meta: {
+          observation_reply_kind: 'low_information_observation',
+          eligibility_status: 'low_information',
+          public_display_status_for_observation: 'passed',
+          question_required: true,
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(lowInformationMetaOnlyPayload), '');
+  assert.equal(isPassedEmlisObservationReply(lowInformationMetaOnlyPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(lowInformationMetaOnlyPayload), null);
+
+  const lowInformationRejectedPayload = {
+    input_feedback: {
+      comment_text: 'metaがlow_informationでも public status が rejected なら表示してはいけない本文です。',
+      emlis_ai: {
+        observation_status: 'rejected',
+        meta: {
+          observation_reply_kind: 'low_information_observation',
+          eligibility_status: 'low_information',
+          public_display_status_for_observation: 'passed',
+          question_required: true,
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(lowInformationRejectedPayload), 'rejected');
+  assert.equal(isPassedEmlisObservationReply(lowInformationRejectedPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(lowInformationRejectedPayload), null);
+});
+
+
+test('Observation Reply Step 11 RN displays low-information observation with optional meta but does not depend on meta', () => {
+  const model = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+  const diagnostics = read('screens/input/inputFeedbackObservationDiagnostics.js');
+
+  assertIncludes(model, [
+    'export function normalizeEmlisObservationReplyKind',
+    'export function getEmlisObservationReplyKind',
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'input?.input_feedback?.comment_text',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+  ], 'inputFeedbackModel.js Step 11 optional meta helpers and passed plus commentText display contract');
+
+  assertNotIncludes(model, [
+    'LOW_INFORMATION: "low_information_observation",\n  PASSED:',
+    'low_information_observation: "passed"',
+  ], 'inputFeedbackModel.js Step 11 must not add low_information_observation as a public status enum');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'setInputFeedbackModalVisible(false)',
+    'setInputFeedbackModalText("")',
+    'return false;',
+    'return true;',
+  ], 'useInputFeedbackModal.js Step 11 keeps modal opening dependent on passed plus commentText');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'Emlisの観測',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+  ], 'InputFeedbackReplyModal.js Step 11 keeps existing title and passed-only guard');
+
+  assertIncludes(diagnostics, [
+    'record.observation_reply_kind = observationReplyKind',
+    'comment_text_included: false',
+    'raw_input_included: false',
+  ], 'inputFeedbackObservationDiagnostics.js Step 11 may log reply kind without raw text');
+
+  const {
+    normalizeEmlisObservationReplyKind,
+    getEmlisObservationReplyKind,
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  const lowInformationStep10Payload = {
+    input_feedback: {
+      comment_text: '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。',
+      emlis_ai: {
+        observation_status: 'passed',
+        observation_reply_meta: {
+          observation_reply_kind: 'low_information_observation',
+          eligibility_status: 'low_information',
+          eligible_for_full_observation: false,
+          question_required: true,
+        },
+        step10_observation_display_repair_integration: {
+          observation_reply_kind: 'low_information_observation',
+          public_status_extended: false,
+          rn_visible_contract_changed: false,
+        },
+      },
+    },
+  };
+
+  assert.equal(normalizeEmlisObservationReplyKind('low_information_observation'), 'low_information_observation');
+  assert.equal(normalizeEmlisObservationReplyKind('passed'), '');
+  assert.equal(getEmlisObservationReplyKind(lowInformationStep10Payload), 'low_information_observation');
+  assert.equal(getEmlisObservationStatus(lowInformationStep10Payload), 'passed');
+  assert.equal(
+    getEmlisObservationCommentText(lowInformationStep10Payload),
+    '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。'
+  );
+  assert.equal(isPassedEmlisObservationReply(lowInformationStep10Payload), true);
+  assert.deepEqual(buildPassedEmlisObservationModalPayload(lowInformationStep10Payload), {
+    commentText: '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。',
+    observationStatus: 'passed',
+    emotionSummary: '',
+    dominantSummary: '',
+    contextLabel: '',
+  });
+
+  const optionalMetaOnlyPayload = {
+    input_feedback: {
+      comment_text: '',
+      emlis_ai: {
+        observation_status: '',
+        observation_reply_meta: {
+          observation_reply_kind: 'low_information_observation',
+          eligibility_status: 'low_information',
+          question_required: true,
+        },
+        step10_observation_display_repair_integration: {
+          public_observation_status: 'passed',
+          observation_reply_kind: 'low_information_observation',
+        },
+      },
+    },
+  };
+
+  assert.equal(getEmlisObservationReplyKind(optionalMetaOnlyPayload), 'low_information_observation');
+  assert.equal(getEmlisObservationStatus(optionalMetaOnlyPayload), '');
+  assert.equal(isPassedEmlisObservationReply(optionalMetaOnlyPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(optionalMetaOnlyPayload), null);
+
+  const rejectedWithOptionalMetaPayload = {
+    commentText: '表示してはいけない本文です。',
+    observationStatus: 'rejected',
+    emlisAiMeta: {
+      observation_reply_meta: {
+        observation_reply_kind: 'low_information_observation',
+      },
+    },
+  };
+  assert.equal(getEmlisObservationReplyKind(rejectedWithOptionalMetaPayload), 'low_information_observation');
+  assert.equal(isPassedEmlisObservationReply(rejectedWithOptionalMetaPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(rejectedWithOptionalMetaPayload), null);
+});
+
+test('Observation Reply Step 11 frontend diagnostic carries optional reply kind without carrying text', () => {
+  const {
+    buildEmlisObservationFrontendDiagnostic,
+    dumpEmlisObservationFrontendDiagnostic,
+  } = loadInputFeedbackObservationDiagnosticsForContractTest();
+
+  const record = buildEmlisObservationFrontendDiagnostic({
+    submitResult: {
+      id: 'emotion-log-step11',
+      input_feedback: {
+        emlis_ai: {
+          observation_status: 'passed',
+          trace_id: 'trace-step11-rn',
+          observation_reply_meta: {
+            observation_reply_kind: 'low_information_observation',
+            eligibility_status: 'low_information',
+          },
+        },
+      },
+    },
+    inputFeedbackText: '今は、言葉になる前の重さだけが先に出ているように見えます。詳しく残せそうなら、何があったか残してみませんか。',
+    openedObservation: true,
+  });
+
+  assert.deepEqual(record, {
+    version: 'emlis.frontend_observation_diagnostic.v1',
+    source: 'rn_input_screen',
+    emotion_log_id: 'emotion-log-step11',
+    trace_id: 'trace-step11-rn',
+    observation_status: 'passed',
+    observation_reply_kind: 'low_information_observation',
+    comment_text_length: 54,
+    comment_text_present: true,
+    modal_opened: true,
+    raw_input_included: false,
+    comment_text_included: false,
+  });
+
+  const serialized = dumpEmlisObservationFrontendDiagnostic(record);
+  assertIncludes(serialized, ['"observation_reply_kind":"low_information_observation"'], 'Step 11 diagnostic serialized reply kind');
+  assertNotIncludes(serialized, [
+    '今は、言葉にする前の重さ',
+    '何がありましたか',
+    'comment_text":"',
+  ], 'Step 11 diagnostic must not serialize the public comment text');
 });

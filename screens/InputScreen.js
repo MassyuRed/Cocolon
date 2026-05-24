@@ -88,6 +88,38 @@ import InputToastOverlay from "./input/InputToastOverlay";
 // パネル高さ（他画面と同じルールで調整可能）
 const PANEL_MIN_HEIGHT = 690;
 
+const EMOTION_SUBMIT_TIMEOUT_RECOVERY_REFRESHED_MESSAGE =
+  "記録の完了確認に時間がかかっています。\n反映されている場合があるため、画面を更新して確認しました。\n入力欄はそのまま残しています。";
+const EMOTION_SUBMIT_TIMEOUT_RECOVERY_FALLBACK_MESSAGE =
+  "記録の完了確認に時間がかかっています。\n反映されている場合があるため、時間をおいて入力履歴を確認してください。\n入力欄はそのまま残しています。";
+
+function isRequestTimeoutError(error) {
+  const name = String(error?.name || "").trim();
+  const message = String(error?.message || error || "");
+  return name === "TimeoutError" || /timed out/i.test(message);
+}
+
+function getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout) {
+  return refreshedAfterTimeout
+    ? EMOTION_SUBMIT_TIMEOUT_RECOVERY_REFRESHED_MESSAGE
+    : EMOTION_SUBMIT_TIMEOUT_RECOVERY_FALLBACK_MESSAGE;
+}
+
+async function refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState) {
+  if (typeof loadHomeState !== "function") return false;
+
+  try {
+    await loadHomeState({ force: true, includeStartupCandidate: false });
+    return true;
+  } catch (refreshError) {
+    console.warn(
+      "InputScreen: refresh after emotion submit timeout failed",
+      refreshError
+    );
+    return false;
+  }
+}
+
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
@@ -1112,6 +1144,16 @@ const safeInsets = useSafeAreaInsets();
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }
     } catch (error) {
+      if (isRequestTimeoutError(error)) {
+        console.warn("InputScreen: emotion submit completion timed out", error);
+        const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);
+        Alert.alert(
+          "記録の確認",
+          getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)
+        );
+        return;
+      }
+
       console.error("入力処理エラー:", error);
       Alert.alert(
         "エラー",

@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_name_mixing_structure_boundary
 title: "Cocolon 名称混在保管と構造境界"
-revision_date: "2026-05-18"
+revision_date: "2026-05-23"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(98).zip"
-  Cocolon: "Cocolon_11(3).zip"
-  mashos-api: "mashos-api_11(6).zip"
+  premise: "Cocolon_前提資料(113).zip"
+  Cocolon: "Cocolon_12(5).zip"
+  mashos-api: "mashos-api_12(8).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 543
-  total: 760
+  mashos-api: 630
+  total: 847
 purpose: "名称混在を資料で保管し、華恋が作業時に旧名称・current名称・DB物理名・runtime ownerを取り違えないようにする"
 ---
 
@@ -374,3 +374,104 @@ Reader Relation Surface Step0-8で追加された `limited_reader_repair` / `exp
 | `blind_qa_input_candidates` | Blind QAへ渡すmeta-only候補 | 入力本文やEmlis本文の保管場所ではない |
 
 禁止: これらのinternal名を理由に、`Emlisの観測` 表示名、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。
+
+# 2026-05-20 差分追記: Runtime Surface Quality internal名の保管境界
+
+`mashos-api_13(5).zip` では、`runtime_surface_quality` / `surface_signature` / `tone_engine_2_1` / `surface_aware_self_repair` 系の内部名が増えています。これらはCocolonのvisible名、public route、DB physical name、RN modal条件ではありません。
+
+| internal名 | 保管する意味 | 混同してはいけないもの |
+|---|---|---|
+| `Runtime Surface Quality` | ProductGate Measurement後の表示文由来・表層品質・QA接続工程 | Product Gate達成 / public release / 完全Composer商品品質版完成ではない |
+| `runtime_surface_source_lock` | 実表示文がどのcomposer / surface / tone / repair経路から来たかを本文なしで固定するmeta | public `composer_source` renameやRN表示条件ではない |
+| `runtime_composer_source` | Step1/Step5用の分岐source名 | 既存scorecardの `composer_source` 意味を上書きする名前ではない |
+| `surface_signature_id` / `surface_signature_family_key` | 正規化key列から作るsurface署名 | `comment_text` 本文、入力本文、DB保存本文ではない |
+| `coverage_group_missing` | coverage未分類をshort_dailyへ流さず保持するblocker名 | 新しいvisible category名ではない |
+| `surface_realizer_2_1_anti_template` | 固定文ではなく部品選択を分散する内部policy | 完成文テンプレ追加や入力専用分岐ではない |
+| `phrase_unit_grammar_normalizer` | PhraseUnit材料段階のgrammar修正・drop/defer境界 | 意味補完や本文生成ownerではない |
+| `tone_engine_2_1` | 診断化・命令・距離感崩れを検出しBlind QAへ渡す内部Tone境界 | read_feelingをmachine metricsで自動採点するものではない |
+| `surface_aware_self_repair` | surface / grammar reasonをbounded repair targetへ変換するadapter | Gate緩和や新しい意味追加ではない |
+| `blind_qa_long_run` | rating-only reviewとsignature diversity確認 | raw input / public comment_text本文の保管場所ではない |
+| `runtime_surface_exit_gate` | Step12のhandoff-only出口 | `product_gate_ready` / `public_release_applied` ではない |
+
+禁止: これらのinternal名を理由に、`Emlisの観測` 表示名、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。
+
+# 2026-05-21 差分追記: Observation Reply internal名の保管境界
+
+`mashos-api_16(2).zip` では、`observation_reply_kind` / `eligible_observation` / `low_information_observation` / `user_fact_grounding_mode` / `unknown_slots` / `observation_roles` 系の内部名が増えています。これらはCocolonのvisible名、public route、DB physical name、RN modal条件ではありません。
+
+| 領域 | current visible / 操作用語 | 実ファイル・runtime owner | legacy / 混在して残る名前 | 作業時の読み方 |
+|---|---|---|---|---|
+| EmlisAI 観測返答 | `Emlisの観測` | `emlis_ai_reply_service.py`, `emlis_ai_observation_*`, `emlis_ai_display_gate.py`, `inputFeedbackModel.js` | `input_feedback.comment_text`, `input_feedback.emlis_ai`, `observation_status`, `commentText` | 表示名は `Emlisの観測` のまま。reply kindはinternal metaとして読む。 |
+| eligible観測 | Emlisの観測本文 | `emlis_ai_observation_eligibility_service.py`, Complete Composer関連 | `eligible_observation`, `eligibility_status=eligible` | public statusではない。入力整理＋状態言語化のbranch。 |
+| 低情報観測 | Emlisの観測本文 + 質問 | `emlis_ai_low_information_observation_composer.py`, `emlis_ai_observation_display_repair_integration.py` | `low_information_observation`, `unknown_slots`, `question_required` | 通常入力で情報不足時の正規branch。Phase7 rollout block / pre-connection stop / 非修復candidate rejectionを低情報として扱わない。 |
+| ユーザー辞書境界 | サブスクの過去情報補助 | `emlis_ai_user_fact_grounding_boundary.py` | `explicit_reference`, `implicit_focus`, `disabled` | Freeでは使わない。サブスクでも低情報を辞書だけでeligible化しない。 |
+| Exit Gate / Handoff | 次工程への判断材料 | `emlis_ai_observation_exit_gate_handoff.py` | `release_allowed=false`, `product_gate_ready=false` | handoff-only。Product Gate達成やpublic releaseではない。 |
+
+禁止: `low_information_observation` を public `observation_status` に追加しない。`observation_reply_kind` をRN表示条件にしない。`input_feedback.comment_text` / `commentText` / `observation_status=passed` を名称変更しない。
+
+## 2026-05-22 差分追記: Step10 Repair Boundary internal名の保管境界
+
+`mashos-api_6(27).zip` では、Step10 repair境界のために次の内部reason名が実行meta / test上で固定されています。これらはvisible名、public status、RN表示条件、API route、DB physical nameではありません。
+
+| internal reason / key | 読み方 |
+|---|---|
+| `step10_blocked_by_phase7_rollout` | reply_service側の二重防御reason。Phase7 rollout blockを低情報repairへ流さない。 |
+| `composer_resolution_blocked_rollout` | composer resolutionがrolloutで接続不可だったことを示すStep10 block reason。 |
+| `composer_resolution_pre_connection_rollout_stop` | composer接続前のrollout stopを示すStep10 block reason。 |
+| `limited_composer_rollout_not_allowed` | limited composerの段階リリース上の非許可reason。 |
+| `phase7_rollout_gate_blocked` | release gate / phase7 rollout gate由来のblockをStep10 metaへ保持するreason。 |
+| `ai_generated_candidate_non_repairable_rejection` | AI-generated candidateのrejected本文を低情報branchで覆わないための内部reason。 |
+
+禁止: これらのreason名を見つけても、`observation_status` enumへ追加しない。RN側にreason別表示分岐を足さない。backend側で `passed + comment_text` を作らないことで表示契約を守る。
+
+
+# 2026-05-21 差分追記: Emlis観測専用辞書 Phase0-5 構造境界
+
+`mashos-api_6(26).zip` では、`emlis_observation_structure_dictionary` / `EmlisCurrentInputBundle` / `observation_structure_material` 系の内部名が増えています。これらは名称変更ではなく、EmlisAIが現在入力の束を構造材料として読むためのbackend内部境界です。`Emlisの観測` のvisible名、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しません。
+
+| 境界 | 読み方 |
+|---|---|
+| existing surface dictionary | `emlis_observation_dictionary.v1.json` は表面素材・guard signature系辞書として残る。 |
+| new structure dictionary | `emlis_observation_structure_dictionary.v1.json` は入力束 / relation / inference chain系の別辞書。 |
+| current input bundle | `EmlisCurrentInputBundle` は内部正規化型。public request / response keyではない。 |
+| structure material | `selected_entry_ids` / `selected_relation_ids` / `structure_question_ids` はtext-free material。表示文ではない。 |
+| Gate / Composer connection | `low_information_boundary_connected` / `overclaim_guard_connected` / `forbidden_inference_boundary_connected` は内部guard meta。public statusではない。 |
+| Phase5 fixture | Blind QA fixtureは完成返答文の固定正解ではなく、relation / boundary / raw text非混入 / contract維持の確認材料。 |
+
+作業時は、この構造辞書名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。
+
+
+# 2026-05-22 差分追記: ActionConversion / UnformedSelfInsight internal名の保管境界
+
+`mashos-api_8(23).zip` では、Emlis観測専用辞書 UpdateDesign ActionConversion / UnformedSelfInsight により、`unexpressed_output_stop` / `self_shape_alignment` / `action_conversion_history` / `conversion_history_closure` / `unformed_self_insight` 系の内部名が増えています。これらは名称変更ではなく、EmlisAIが現在入力の束を構造材料として読むためのbackend内部境界です。`Emlisの観測` のvisible名、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しません。
+
+| 境界 | 読み方 |
+|---|---|
+| visible名 | `Emlisの観測` のまま。`ActionConversion` や `UnformedSelfInsight` を画面名へ出さない。 |
+| public response | `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` を維持する。構造辞書metaでpublic statusを上書きしない。 |
+| backend internal | 新規relation / entryは `emlis_observation_structure_dictionary.v1.json` の内部辞書ID。DB table / columnではない。 |
+| dictionary split | `emlis_observation_dictionary.v1.json` は表面素材辞書、`emlis_observation_structure_dictionary.v1.json` は構造観測辞書として分けて読む。 |
+| relation condition | `thought_action_discrepancy` / `conversion_history_closure` / `priority_pressure` / `load_accumulation` は根拠条件付き。単語だけで強接続しない。 |
+| meta-only | material / connection metaにraw input、public `comment_text`、完成返答文、辞書本文を流さない。 |
+| Step10 | rollout block / release gate block / pre-connection stopは辞書材料で表示化しない。 |
+
+作業時は、この構造辞書名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。
+
+
+
+# 2026-05-23 差分追記: Runtime Surface Gate / Shallow V2 internal名の保管境界
+
+`mashos-api_12(8).zip` では、`runtime_surface_pre_return_gate` / `shallow_surface_realizer.v2` / `bounded_repair_reroute` / `low_information_specificity_plan` / `runtime_surface_exit_criteria` 系の内部名が増えています。これらはCocolonのvisible名、public route、DB physical name、RN modal条件ではありません。
+
+| internal名 | 保管する意味 | 混同してはいけないもの |
+|---|---|---|
+| `runtime_surface_pre_return_gate` | 表示前にsurface fatalを止めるmeta-only gate | public `observation_status`、RN表示条件、response keyではない |
+| `rerender_shallow_v2` | surface failure時に1回だけ許可されるbounded action | 無制限repairやGate緩和ではない |
+| `reroute_low_information` | safe unit不足時などに許可されるbounded low-info reroute | どんな失敗でも表示するfallbackではない |
+| `shallow_surface_realizer.v2` | shallow pathのsurface role更新 | 完成返答文テンプレ名や画面表示名ではない |
+| `low_information_specificity_plan` | safe anchorがある低情報入力の狭い具体化plan | user fact捏造や過去辞書でのeligible化ではない |
+| `surface_quality_blocked` | diagnostic_lockdown上の分類 | RNに出すエラー表示やpublic statusではない |
+| `runtime_surface_exit_criteria` | 実機ログで確認するexit criteria helper | Render実機確認結果そのもの、Product Gate達成、release適用ではない |
+| `jsonschema>=4.21.1` | 構造辞書schema validationの実行依存 | 外部AI追加や辞書schema変更ではない |
+
+禁止: これらのinternal名を理由に、`Emlisの観測` 表示名、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。blocked surfaceを低情報観測として無条件に表示化しない。

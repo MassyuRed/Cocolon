@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_db_rename_boundary
 title: "Cocolon DB情報 / DB rename境界資料"
-revision_date: "2026-05-09"
+revision_date: "2026-05-24"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -926,3 +926,18 @@ Piece後回しのため、`mymodel_reflections.content_json` と `mymodel_qna_*`
 | `public.today_question_answers.question_id` | personal回答ではnullを許容する。static回答では既存100問のquestion_idを使う |
 
 この境界では、既存 `today_question_bank` にユーザー固有のpersonal questionを混ぜません。共通マスターとユーザー固有質問の責務を分けます。
+
+
+# 2026-05-24 差分追記: EmlisAI public feedback meta boundary / timeout recovery / low-information prompt / notification uuid boundary
+
+notification settings warning対応では、DB physical rename / drop / write path変更は行わない。今回の実装は、uuid型として扱われる `owner_user_id` filterへglobal sentinel文字列を混ぜないAPI-side boundaryです。
+
+| 値 / owner | DB境界上の扱い |
+|---|---|
+| `__global_emotion_notifications__` | global owner sentinel。uuid型 `owner_user_id` filterへ直接入れない。 |
+| `__global_friend_notifications__` | 後方互換global owner sentinel。uuid型 `owner_user_id` filterへ直接入れない。 |
+| actual user UUID | `owner_user_id` filterへ入れてよい値。`_is_uuid_like(...)` で確認する。 |
+| `api_emotion_submit.py` | `_emotion_notification_owner_filter_ids(...)` がuuid-like ownerだけを返す。viewer側もuuid-likeだけをquery対象にする。 |
+| `test_emotion_submit_notification_settings_uuid_boundary.py` | global sentinelがuuid filterへ混入しないこと、uuid-safeでないownerでは通知設定filterだけskipすることを固定する。 |
+
+禁止: uuid warningの解消を理由にDB schema、physical table/view name、通知設定write path、RLS、route、request keyを勝手に変えない。global通知設定の別read pathは、この差分では追加していない。

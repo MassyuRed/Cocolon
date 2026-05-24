@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-18"
+revision_date: "2026-05-24"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2646,3 +2646,125 @@ runtime上の固定:
 - RN diagnosticが欠ける場合は `frontend_diagnostic_missing_or_not_captured` として残し、表示確認済みに数えない。
 - local toolはlog行からmeta-only reportを作るだけで、submit pathやpublic responseを変更しない。
 - Exit Gateがreadyでも、public releaseやProduct Gate達成として扱わない。
+
+# 2026-05-20 差分追記: Input / EmlisAI Runtime Surface Quality Step0-12 runtime map
+
+`Cocolon_13(2).zip` では RN runtime file の追加・変更はありません。`Emlisの観測` は引き続き `input_feedback.emlis_ai.observation_status === "passed"` かつ public `input_feedback.comment_text` 非空のときだけ開きます。
+
+`mashos-api_13(5).zip` では、ProductGate Measurementで表示到達が測れる状態になった後、表示された観測文のruntime由来・表層署名・coverage別baseline・branch・QAをbackend側で測るRuntime Surface Quality Step0-12が追加されています。これは `InputFeedbackReplyModal` や `useInputFeedbackModal` の表示条件を変えるものではありません。
+
+```text
+/emotion/submit public response
+ -> EmlisAI reply runtime
+ -> RuntimeSurfaceSourceLockV1
+ -> SurfaceQualitySignatureV1
+ -> Scorecard Surface Metrics
+ -> Coverage Runtime Baseline
+ -> Branch Resolver
+ -> Surface / Grammar / Tone / Self-Repair / Blind QA / Long-run
+ -> Exit Gate summary
+```
+
+runtime上の固定:
+- Completeを要求しただけでは `complete_initial` 由来と扱わず、AP0 / rollout / registry / source-lock alignmentを確認する。
+- surface signatureやtone reportは本文を保存せず、key / count / warning / hashだけを扱う。
+- RN診断metaやruntime surface metaだけではmodalを開かない。
+- Step12 Exit Gateがreadyでも、public releaseやProduct Gate達成として扱わない。
+
+# 2026-05-21 差分追記: Input / RN EmlisAI Observation Reply optional meta map
+
+`Cocolon_16(1).zip` では、RN側に新規fileはありません。`inputFeedbackModel.js` と `inputFeedbackObservationDiagnostics.js` と `rn-screen-contracts.test.js` は、EmlisAI 観測返答 Step11 の optional meta を扱うように更新されています。
+
+| current file | 追加された読み方 | 変更していない契約 |
+|---|---|---|
+| `Cocolon/screens/input/inputFeedbackModel.js` | `normalizeEmlisObservationReplyKind` / `getEmlisObservationReplyKind` が `eligible_observation` / `low_information_observation` を任意metaとして読む。 | 表示可否は `observation_status === passed` かつ `commentText` 非空のまま。 |
+| `Cocolon/screens/input/inputFeedbackObservationDiagnostics.js` | diagnosticに `observation_reply_kind` を出せる。 | raw input / comment_text本文はdiagnosticへ入れない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | low-information metaだけでは表示されず、`passed + commentText` の場合だけ表示する契約を固定する。 | RN public status enumとmodal title `Emlisの観測` は変更しない。 |
+
+低情報観測は、RN上では新しい表示種別ではありません。backendが `observation_reply_kind=low_information_observation` をoptional metaとして渡しても、RNは既存通り `passed + commentText` の表示契約だけで開閉を判断します。
+
+# 2026-05-21 差分追記: Input / Emlis観測専用辞書 Phase0-5 runtime map
+
+`Cocolon_6(32).zip` ではRN側のsource追加・変更はありません。`mashos-api_6(26).zip` では、Input保存直後の EmlisAI reply path に、Emlis観測専用辞書 Phase0-5 がbackend内部材料として接続されています。Home/Input側では、`openInputFeedbackModal` や `inputFeedbackModel.js` の表示条件を変更した差分ではなく、`render_emlis_ai_reply()` 内部の入力束読み・Gate material・Composer materialとして読む。
+
+| owner | アプリ基盤 / Home系での読み方 |
+|---|---|
+| `emlis_ai_current_input_bundle.py` | `/emotion/submit` 由来の `current_input` を `thought_text` / `action_text` / `emotions` / `categories` へ内部正規化する。 |
+| `config/emlis_observation_structure_dictionary.schema.json` / `v1.json` | 既存の表面素材辞書とは別に、入力束・relation・内部問い・allowed / forbidden inferenceを持つ。 |
+| `emlis_ai_observation_structure_dictionary_loader.py` | 構造観測辞書のschema、参照整合、禁止推論、contract drift flagを検証する。 |
+| `emlis_ai_observation_structure_material_service.py` / `emlis_ai_observation_structure_connection_service.py` | `selected_entry_ids` / `selected_relation_ids` / `structure_question_ids` などのtext-free materialをGate / Composerへ渡す。 |
+| `emlis_ai_display_gate.py` / `emlis_ai_conversation_composer_service.py` / `emlis_ai_reply_service.py` | 構造辞書materialを内部metaとして扱う。public `comment_text` やRN表示条件を直接生成・変更しない。 |
+| `tests/fixtures/emlis_ai_observation_structure_phase5_cases.py` | 7fixtureとBlind QA rubricを持つ。完成返答文の固定正解ではない。 |
+
+Home/Input側の不変契約:
+
+- `/emotion/submit` のpublic route、request key、response keyは変更しない。
+- DB physical name、DB write path、RN visible contract、`Emlisの観測` の表示条件は変更しない。
+- `input_feedback.comment_text` は引き続きpublic表示本文の互換keyとして保持する。
+- `emlis_observation_dictionary.v1.json` は表面素材 / guard signature 系辞書として残し、構造観測辞書は別ファイルで持つ。
+- 構造観測辞書は完成返答文テンプレ集ではなく、入力束から relation / internal question / allowed・forbidden inference / gate material を作る内部辞書として読む。
+- 構造material / connection metaには raw `memo` / `memo_action` / 完成返答本文を流さない。
+
+
+# 2026-05-22 差分追記: Input / Emlis観測専用辞書 ActionConversion / UnformedSelfInsight runtime map
+
+`Cocolon_8(12).zip` ではRN側のsource追加・変更はありません。`mashos-api_8(23).zip` では、Input保存直後の EmlisAI reply path に、ActionConversion / UnformedSelfInsight / 飲み込んだ言葉の観測拡張がbackend内部材料として接続されています。Home/Input側では、`openInputFeedbackModal` や `inputFeedbackModel.js` の表示条件を変更した差分ではなく、`render_emlis_ai_reply()` 内部の構造辞書material更新として読む。
+
+| owner | アプリ基盤 / Home系での読み方 |
+|---|---|
+| `config/emlis_observation_structure_dictionary.v1.json` | 5 relation / 4 entryを追加する。 |
+| `emlis_ai_observation_structure_material_service.py` | 入力語から `word_could_not_say` / `word_aligned_to_context` / `word_gaman` / `word_wakaranai` を選び、text-free materialにする。 |
+| `emlis_ai_observation_structure_connection_service.py` | 単語だけで `thought_action_discrepancy` や `conversion_history_closure` を強接続しない。差分・閉じ方・圧力・負荷は入力束の根拠がある場合だけ接続する。 |
+| `test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py` | material / connection metaへ raw input、public `comment_text`、完成返答文、辞書本文を流さないことを固定する。 |
+
+Home/Input側の不変契約: `/emotion/submit` のpublic route、request key、response key、RN modal条件、`Emlisの観測` のvisible titleは変更しない。今回の辞書材料は、Step10 rollout block / release gate block / pre-connection stop を表示可能文へ変えるものではない。
+
+
+# 2026-05-24 差分追記: EmlisAI public feedback meta boundary / timeout recovery / low-information prompt / notification uuid boundary
+
+Home / Input系での最新読み方は、RN表示条件を変えずに `/emotion/submit` の完了確認timeoutとEmlisAI public meta肥大化を分けて扱うことです。
+
+| owner | Home/Input系での読み方 |
+|---|---|
+| `Cocolon/lib/api/home/emotionSubmitApi.js` | `/emotion/submit` 専用に `EMOTION_SUBMIT_TIMEOUT_MS = 30000` を渡す。これはpublic meta削減後の保険であり、巨大responseを許容するための本体修正ではない。 |
+| `Cocolon/screens/InputScreen.js` | `TimeoutError` / `timed out` は通常の保存失敗Alertと分ける。timeout時は `loadHomeState({ force: true, includeStartupCandidate: false })` を一度試し、入力欄・draftをclearしない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py` | RNへ返す `input_feedback.emlis_ai` をpublic-safe subsetへ縮小する。RNは内部diagnosticsを表示条件に使わない。 |
+| `mashos-api/ai/services/ai_inference/api_emotion_submit.py` | `comment_text` 非空 + public `observation_status=passed` の時だけ `input_feedback` を組み立てる。 |
+
+Home/Input側の不変契約: `Emlisの観測` のvisible title、`input_feedback.comment_text` key、`input_feedback.emlis_ai.observation_status`、表示条件 `passed + commentText` は変更しない。timeout時も自動再送しない。
+
+
+# 2026-05-24 差分追記: Home / Input / EmlisAI Visible Surface Acceptance QA接続
+
+`InputScreen.js -> /emotion/submit -> emotion_submit_service.py` の後、EmlisAI immediate replyは引き続き `Emlisの観測` として扱う。最新実ファイルでは、public meta boundary / timeout recoveryの後段に、表示文品質を受け入れ判定する Visible Surface Acceptance QA が接続されています。RN画面本体、API route、DB write path、表示名は変更しません。
+
+```text
+InputScreen.js
+ -> submitEmotionInput()
+ -> /emotion/submit
+ -> emlis_ai_reply_service.render_emlis_ai_reply()
+ -> runtime_surface_pre_return_gate
+ -> visible_surface_acceptance_gate
+ -> display_gate / repair integration
+ -> build_public_emlis_input_feedback_meta()
+ -> inputFeedbackModel.js
+ -> InputFeedbackReplyModal.js
+```
+
+| owner | Home / Input上の読み方 |
+|---|---|
+| `emlis_ai_visible_surface_acceptance_gate.py` | RNヘッダーの中心感情と本文冒頭焦点のズレ、positive-only over-burden、visible malformed surfaceを表示前に評価するbackend gate。 |
+| `emlis_ai_runtime_surface_pre_return_gate.py` | `たりこと` 系を含む表面文法破綻を、Visible Gate前のsurface fatalとして止める。 |
+| `emlis_ai_reply_service.py` | candidate本文生成後にvisible gate reportを作る。本文やraw inputをreportへ保存しない。 |
+| `emlis_ai_display_gate.py` | visible gateの `red / repair_required / block / fail_closed` を表示前fail-closed条件として読む。 |
+| `emlis_ai_observation_display_repair_integration.py` | low-information repair候補にもvisible gateを通し、gateを通った場合だけappliedにする。 |
+| `emlis_ai_low_information_observation_composer.py` | `positive_only / negative_only / mixed / self_insight / neutral_or_unknown` のtone profileで低情報surfaceを分ける。 |
+| `emlis_ai_public_feedback_meta.py` | visible gate reportはpublic-safe summaryだけ残す。blocking時は `input_feedback` を返さない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RNはvisible gate metaを直接表示判定に使わず、public `observation_status=passed` + `comment_text` non-emptyだけで表示する。 |
+
+Home / Input側の不変契約:
+
+- `InputFeedbackReplyModal.js` のvisible titleは `Emlisの観測` のまま。
+- `inputFeedbackModel.js` の表示条件は `passed + commentText` のまま。
+- `visible_surface_acceptance_gate` meta、hidden raw input、candidate body、evidence textをRN表示材料にしない。
+- `/emotion/submit` timeout recoveryは保持する。visible gate failureを入力保存失敗として表示しない。

@@ -53,6 +53,11 @@ const EMLIS_OBSERVATION_STATUS = Object.freeze({
   SAFETY_BLOCKED: "safety_blocked",
 });
 
+const EMLIS_OBSERVATION_REPLY_KIND = Object.freeze({
+  ELIGIBLE: "eligible_observation",
+  LOW_INFORMATION: "low_information_observation",
+});
+
 export function normalizeEmlisObservationStatus(value) {
   const status = String(value || "").trim().toLowerCase();
   if (status === EMLIS_OBSERVATION_STATUS.PASSED) return EMLIS_OBSERVATION_STATUS.PASSED;
@@ -60,6 +65,56 @@ export function normalizeEmlisObservationStatus(value) {
   if (status === EMLIS_OBSERVATION_STATUS.UNAVAILABLE) return EMLIS_OBSERVATION_STATUS.UNAVAILABLE;
   if (status === EMLIS_OBSERVATION_STATUS.SAFETY_BLOCKED) return EMLIS_OBSERVATION_STATUS.SAFETY_BLOCKED;
   return "";
+}
+
+
+export function normalizeEmlisObservationReplyKind(value) {
+  const replyKind = String(value || "").trim();
+  if (replyKind === EMLIS_OBSERVATION_REPLY_KIND.ELIGIBLE) {
+    return EMLIS_OBSERVATION_REPLY_KIND.ELIGIBLE;
+  }
+  if (replyKind === EMLIS_OBSERVATION_REPLY_KIND.LOW_INFORMATION) {
+    return EMLIS_OBSERVATION_REPLY_KIND.LOW_INFORMATION;
+  }
+  return "";
+}
+
+function getEmlisObservationMeta(input = {}) {
+  const meta =
+    input?.emlisAiMeta ||
+    input?.emlis_ai ||
+    input?.input_feedback?.emlis_ai ||
+    input?.ai ||
+    input ||
+    {};
+  return meta && typeof meta === "object" && !Array.isArray(meta) ? meta : {};
+}
+
+export function getEmlisObservationReplyKind(input = {}) {
+  const meta = getEmlisObservationMeta(input);
+  const diagnostic = meta?.diagnostic_summary || meta?.multi_perspective?.diagnostic_summary || {};
+  const step10 =
+    meta?.step10_observation_display_repair_integration ||
+    meta?.observation_display_repair_integration ||
+    diagnostic?.step10_observation_display_repair_integration ||
+    diagnostic?.observation_display_repair_integration ||
+    {};
+  const replyMeta =
+    meta?.observation_reply_meta ||
+    meta?.observation_reply_contract ||
+    diagnostic?.observation_reply_meta ||
+    diagnostic?.observation_reply_contract ||
+    step10?.observation_reply_meta ||
+    {};
+
+  return normalizeEmlisObservationReplyKind(
+    input?.observationReplyKind ||
+      input?.observation_reply_kind ||
+      meta?.observation_reply_kind ||
+      replyMeta?.observation_reply_kind ||
+      step10?.observation_reply_kind ||
+      ""
+  );
 }
 
 export function getEmlisObservationStatus(input = {}) {
