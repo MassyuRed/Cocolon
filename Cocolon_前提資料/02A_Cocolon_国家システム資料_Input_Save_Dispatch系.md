@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-24"
+revision_date: "2026-05-30"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1916,3 +1916,72 @@ Input Save / Dispatch系では、保存成功後のEmlisAI immediate responseに
 - `input_feedback.comment_text` は互換keyとして保持する。
 - visible gate failureを入力保存失敗errorとしてRNへ返さない。
 - `Userさん` はaccount name由来なら問題対象外として扱う。
+
+
+# 2026-05-25 差分追記: Input / immediate reply Product Visible Surface Reliability接続
+
+`mashos-api_8(27).zip` では、Input保存後の `Emlisの観測` について、Visible Surface Acceptance Gateの後段に koto splice RED固定、relation skeleton修復、一回rerender、表示なし診断分類が接続されています。これは `/emotion/submit` の保存処理そのものではなく、保存後のimmediate reply候補が `passed + comment_text` としてRNへ返ってよいかを判定する表示前品質境界です。
+
+| 国家システム区分 | owner | 変更後の読み方 |
+|---|---|---|
+| PhraseUnit / Limited Guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py` | `取らなければこと` / `予感こと` / `ことこと` / 長い節のkoto attachmentをcandidate material段階で止める。 |
+| Runtime Gate | `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_complete_surface_quality_signature.py` | comment_text表面でもkoto splice codeを検出し、`rerender_shallow_v2` またはblockへ進める。 |
+| Visible Gate | `emlis_ai_visible_surface_acceptance_gate.py` | C相当はred、B相当は `surface_relation_skeleton_major` / `analytic_register_leak` でrepair_requiredにする。 |
+| Composer / Relation | `emlis_ai_limited_composer_client.py`, `emlis_ai_relation_surface_contract.py` | 義務・予定・予感・長いraw clauseを `phrase + こと` へ直結しない。 |
+| Repair | `emlis_ai_bounded_repair_reroute.py`, `emlis_ai_reply_service.py` | Visible Gateの `rerender_surface` を一回だけ安全再表面化候補へ回す。 |
+| Public / Diagnostic | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `emlis_ai_observation_diagnostic_lockdown.py` | `candidate_blocked_koto_splice` / `candidate_blocked_relation_skeleton` / `candidate_repair_attempted` 等を本文なしで分類する。 |
+| RN Contract | `rn-screen-contracts.test.js` | diagnostic meta内のpassedやcandidate本文では表示せず、public `input_feedback.comment_text` + `observation_status=passed` のみ表示する。 |
+
+禁止: 保存DBを切り替える、`input_feedback.comment_text` keyを変える、public metaへraw inputやcandidate本文を入れる、Gateを緩めて危険文を表示する、repair済みでない候補をpassedへ変換する。
+
+
+# 2026-05-26 差分追記: Input保存後 immediate reply の ESO surface completion境界
+
+Input / Save / Dispatch系では、今回の差分を保存処理変更として扱わない。`/emotion/submit` で入力が保存された後、EmlisAI immediate reply候補がpublic `input_feedback.comment_text` へ到達する前のbackend内部境界が増えたものとして読む。
+
+```text
+/emotion/submit save
+→ render_emlis_ai_reply
+→ conversation composer candidate
+→ environment_state_output scope marker completion
+→ runtime surface pre-return gate double check
+→ public feedback meta sanitizer
+→ passed + commentText の場合だけRN表示
+```
+
+`environment_state_output_scope_marker_missing` は、辞書不足やRN不具合ではなく、単一入力観測を示すscope markerがcandidate本文に無い表示surface契約違反として扱う。`schema_invalid` / `rejected` / `unavailable` の本文をRNへ救済表示しない。
+
+
+# 2026-05-26 差分追記: Input / Save / Dispatch側のEmlisAI状態回答境界
+
+Input / Save / Dispatch側では、Phase2-10によるRN入力UI・保存API・dispatch routeの変更はありません。差分は保存後に返すEmlisAI immediate responseの内部materialと表示前Gateに限定されます。
+
+- `memo` / `memo_action` / `emotions` / `category` は、既存の入力材料として扱う。
+- `emlis_state_answer_surface_contract` はpublic request keyではない。
+- `human_follow_layer` / `ratio_policy` / `special_handling` / `metaphor_policy` はpublic response keyではない。
+- low informationやGate block時に、metaだけでRN表示を開かない。
+- `passed + comment_text` の既存表示条件を維持する。
+
+禁止: 入力保存のためのDB write pathを変更する、RN表示条件を状態回答materialに寄せる、raw memo / memo_action / evidence textをpublic metaへ入れる、自己否定や怒りのspecial handlingを保存payload名として追加する。
+
+
+# 2026-05-30 差分追記: Input / Save / Dispatch上のPhase18 EmlisAI商品品質境界
+
+`/emotion/submit` の国家システム境界は、Phase18後も次のまま維持する。
+
+```text
+入力保存
+  ↓
+EmlisAI reply生成 / 表示判定
+  ↓
+public feedback sanitizer
+  ↓
+passed + comment_text non-empty の時だけ input_feedback
+  ↓
+RNは既存commentTextを表示
+```
+
+Phase18で追加されたE2Eは、低情報入力、Complete Initial generated-but-display-rejected、meta boundary、timeout recoveryをpublic response境界で固定する。表示なしケースでRN表示用feedbackを作らず、保存成功と表示fail-closedを分けることが重要である。
+
+禁止: rejected / unavailable / timeoutのinternal metaをRN表示用feedbackとして返す、`observation_text` / `reception_text` を追加する、Phase18 metaだけで表示条件を開く。
+

@@ -1,6 +1,6 @@
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
-revision_date: "2026-05-15"
+revision_date: "2026-05-26"
 ---
 
 # 01B. Analysis / Piece / EmotionLog / Ranking系
@@ -3040,3 +3040,18 @@ Piece作業時は過圧縮防止、Analysis作業時は非診断・非断定を�
 
 - `components/selfStructure/watashiMapAccessPolicy.js` は、`SelfStructureReportHistoryScreen.js` / `SelfStructureReportViewerScreen.js` が参照する現行owner。前回資料にあった「root配置とimport pathの不一致」watchは、最新zipではselfStructure配下にも同一policyがあるため解消済みとして読む。
 - `lib/analysisHomeSummaryRefreshSignal.js` は保存後のHome/Analysis表示更新を助けるlocal signalであり、Analysis report生成・DB write path・API routeを変更しない。
+
+
+# 2026-05-26 差分追記: Piece / Analysis へのEmlisAI状態回答温度流入禁止境界
+
+Phase10横断contractでは、EmlisAI状態回答と人間的フォローのmaterialをPiece / Analysisへ流さない境界が追加されています。これはPiece / Analysisの機能追加ではなく、中核別Composerの役割分離を守るための回帰固定です。
+
+| owner | 境界 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py` | Pieceは公開可能な一問一答・核保持のためのComposerであり、Emlisの感想文や状態回答フォロー層を表示文体として使わない。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py` | Piece input contractへEmlisAI state answer / human follow / special handling materialを混ぜない。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py` | Analysisは期間観測・構造整理のComposerであり、EmlisAIの「Emlisには」等の話しかけ温度を流用しない。 |
+| `mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py` | Analysis input contractへEmlisAI state answer materialを混ぜない。 |
+| `tests/contract/test_emlis_state_answer_phase10_cross_contract_regression.py` | Piece / AnalysisがEmlisAI状態回答materialをimportしないこと、public responseにinternal material keyを出さないことを固定する。 |
+
+禁止: PieceをEmlisの観測文へ寄せる、Analysisを単発状態回答へ寄せる、`Emlisには` / `Emlisは` / `Emlisの感想` 系の温度をPiece / Analysisへ流用する、状態回答materialをpublic key化する。

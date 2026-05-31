@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-24"
+revision_date: "2026-05-30"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2806,3 +2806,85 @@ rejection_reasons
 ```
 
 禁止: gate reportへ raw input / raw text / evidence text / comment_text body / candidate_comment_text を入れる、visible gate blockingなのに `input_feedback` を返す、RN表示条件を `visible_surface_acceptance_gate.passed` に変える、`observation_status` enumを増やす、DB physical name / write pathを変える、固定fallback文で壊れたsurfaceを覆う。
+
+
+# 2026-05-25 差分追記: Product Visible Surface Reliability + Koto Splice Repair contract / guard
+
+EmlisAI Product Visible Surface Reliability + Koto Splice Repair Step0-8 のcontract / guardは、表示率を上げるための緩和ではなく、C相当の壊れたsurfaceを `passed + comment_text` としてRNに届けないための追加境界です。
+
+| guard / test | owner | 固定する境界 |
+|---|---|---|
+| fixture inventory | `tests/fixtures/emlis_ai_visible_surface_acceptance_fixtures.py`, `tests/fixtures/emlis_ai_runtime_surface_red_fixtures.py`, `test_emlis_ai_visible_surface_acceptance_inventory_step0.py` | A pass、B repair_required、C red、runtime redを固定する。 |
+| PhraseUnit / Limited Guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py`, `test_emlis_ai_malformed_nominalization_phrase_unit_guard.py` | `取らなければこと` / `予感こと` / `ことこと` を止め、`感じたこと` / `必要なこと` / `予定のこと` を巻き込まない。 |
+| Runtime Surface Gate | `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_complete_surface_quality_signature.py`, `test_emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_complete_surface_quality_signature_step2.py` | comment_text全体のkoto spliceを検出し、meta-only code / countで返す。 |
+| Visible Surface Acceptance Gate | `emlis_ai_visible_surface_acceptance_gate.py`, `test_emlis_ai_visible_surface_acceptance_gate.py` | koto spliceはred。relation skeleton / analytic registerはrepair_requiredへ回す。 |
+| Shallow Surface Realizer V2 | `emlis_ai_relation_surface_contract.py`, `emlis_ai_limited_composer_client.py`, `test_emlis_ai_relation_surface_contract.py`, `test_emlis_ai_limited_composer_client.py` | `PhraseSurfaceShapeSignal` と圧縮により、危険phraseを `こと` に直結しない。 |
+| bounded repair reroute | `emlis_ai_bounded_repair_reroute.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_bounded_repair_reroute_step7.py` | Visible Gate `rerender_surface` を一回修復に接続し、二回目以降や非修復理由はfail-closedにする。 |
+| public meta / diagnostic | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `emlis_ai_observation_diagnostic_lockdown.py`, `test_emlis_ai_public_feedback_meta.py`, `test_emotion_submit_observation_diagnostic_log.py` | `display_absence_summary` は本文なしのcode / boolean / countだけにする。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | Step7 diagnostic meta、visible gate meta、candidate_comment_text、raw_inputではRN表示を開かない。 |
+
+禁止: `こと` を全面禁止する、safeな `感じたこと` まで落とす、visible gate metaだけで表示を開く、public metaへcandidate本文を入れる、Gateを緩める、固定fallback文へ戻す、外部AI / local LLMを追加する。
+
+
+# 2026-05-26 差分追記: ESO surface contract completion / public meta verification boundary
+
+EmlisAI Environment State Output Surface Contract Completion Phase0-6 で守るcontractは次の通り。
+
+| contract | 固定内容 |
+|---|---|
+| candidate completion | `environment_state_output_frame` connected + single_record_only + scope_marker_required の時だけ、surface validation前にfirst body lineへscope markerを一度だけ付与する。 |
+| idempotent | 既存markerがある場合は二重付与しない。greeting lineには付けない。 |
+| forbidden surface | 期間傾向・人格傾向・診断・category原因化・emotion strength原因化・回復処方は、markerの有無に関係なくrejectする。 |
+| runtime double check | normalize前で補完しても、runtime pre-return gateで実comment_text上のmarker presenceを再確認する。signatureのみでは通さない。 |
+| public meta boundary | completion result / raw input / surface contract full payload / candidate body / output theme ids をpublic metaへ出さない。 |
+| display contract | `observation_status=passed` かつcomment_text非空の時だけpublic `input_feedback` を返す。 |
+
+必須regression:
+
+- `test_emlis_ai_environment_state_output_surface_contract_completion.py`
+- `test_emlis_ai_runtime_surface_pre_return_gate.py`
+- `test_emlis_ai_public_feedback_meta.py`
+- `test_emotion_submit_public_feedback_meta_boundary.py`
+- `test_cocolon_text_generation_core_emlis_observation_adapter.py`
+- `test_cocolon_text_generation_core_step15_stabilization.py`
+- `test_emlis_ai_limited_composer_client.py`
+- `test_emlis_ai_observation_display_repair_integration.py`
+
+禁止: `environment_state_output_scope_marker_missing` を無視する、common core passedをpublic passedへ上書きする、forbidden claimをmarkerで修復する、runtime pre-return gateを削除する、public metaへ内部completion resultやraw inputを出す。
+
+
+# 2026-05-26 差分追記: EmlisAI状態回答 Phase8-10 contract / public meta boundary
+
+EmlisAI状態回答と人間的フォローのcontract / guardは、表示率を上げるための緩和ではなく、内部materialがpublic responseやPiece / Analysisへ漏れないようにするための追加境界です。
+
+| contract / guard | owner | 固定する境界 |
+|---|---|---|
+| 状態回答surface contract | `emlis_ai_state_answer_surface_contract.py`, `test_emlis_ai_state_answer_surface_contract.py` | internal materialとして観測層・フォロー層を分ける。public key化しない。 |
+| Gate boundary | `emlis_ai_state_answer_gate_boundary.py`, `test_emlis_ai_state_answer_gate_boundary.py` | 診断、行動指示、人格断定、原因断定、単発傾向化、怒り同意をblockする。 |
+| Public meta boundary | `emlis_ai_public_feedback_meta.py`, `test_emlis_ai_state_answer_public_meta_boundary.py`, `test_emotion_submit_public_feedback_meta_boundary.py` | raw input / memo / memo_action / raw_text / evidence text / comment_text body / state answer contract bodyをpublicへ出さない。 |
+| Display gate boundary | `emlis_ai_display_gate.py`, `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_visible_surface_acceptance_gate.py` | Gate blocked surfaceを `passed + comment_text` として出さない。 |
+| Composer role plan | `emlis_ai_state_answer_composer_contract.py`, `test_emlis_ai_state_answer_composer_connection.py` | 完成文テンプレではなく、Observation section / Human follow sectionのrole planとして渡す。 |
+| 表示品質QA | `test_emlis_ai_state_answer_visible_surface_qa.py` | 正解文一致ではなく、構造保持・比率・フォロー主役・禁止表面・public meta境界を検査する。 |
+| 横断contract | `tests/contract/test_emlis_state_answer_phase10_cross_contract_regression.py`, `test_emlis_ai_state_answer_phase10_cross_contract_regression.py` | `/emotion/submit` public response維持、internal materialのpublic key化防止、Piece/AnalysisへのEmlis温度漏れ防止を固定する。 |
+
+禁止: `/emotion/submit` routeやresponse modelを変える、`environment_state_output_frame` / `emlis_state_answer_surface_contract` / `state_answer_composer_role_plan` をpublic response key化する、visible gate / state answer gate metaだけでRN表示を開く、Piece / AnalysisへEmlisAIの話しかけ温度や人間的フォローを混ぜる。
+
+
+# 2026-05-30 差分追記: Phase18商品品質安定化 contract / verification boundary
+
+Phase18で確認するcontract / verificationは、表示率を上げるための緩和ではなく、既存public / RN contractを守ったまま商品品質赤を潰すための内部境界である。
+
+| contract / guard | owner | 固定する境界 |
+|---|---|---|
+| Product Quality Matrix | `tests/helpers/emlis_ai_phase18_product_quality_matrix.py`, `test_emlis_ai_phase18_product_quality_stabilization.py` | Phase18対象のgreen/redをmeta-onlyで固定する。 |
+| TwoStage Applicability | `emlis_ai_two_stage_applicability.py`, `test_emlis_ai_phase18_two_stage_applicability.py` | required適用境界。低情報・legacy・pre-connectionをlabel missingで巻き込まない。 |
+| Candidate path | `emlis_ai_complete_composer_client.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_phase18_complete_initial_candidate_path.py` | candidate generationとpublic display decisionを分ける。 |
+| Low information repair | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase18_low_information_public_repair_boundary.py` | 短い低情報だけrepairし、safety / scope / AP0 / provided candidateをpassed化しない。 |
+| Mode context | `emlis_ai_two_stage_section_surface_plan.py`, `emlis_ai_complete_sentence_planner.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_phase18_daily_unpleasant_mode_context.py` | daily_unpleasantをratio / mode contextでSurfaceRealizerへ渡す。 |
+| Meta sanitizer | `emlis_ai_state_answer_surface_contract.py`, `emlis_ai_observation_structure_material_service.py`, `emlis_ai_observation_structure_connection_service.py`, `test_emlis_ai_phase18_state_answer_surface_contract_meta_sanitizer.py` | `surface_policy` 本体、辞書本文、raw input、comment bodyをmetaへ出さない。 |
+| Diagnostic taxonomy | `emlis_ai_diagnostic_failure_taxonomy.py`, diagnostic tests | canonical classification + legacy aliasesをmeta-safeに扱う。 |
+| Readability QA | `emlis_ai_visible_readability_quality.py`, `emlis_ai_visible_surface_acceptance_gate.py`, `test_emlis_ai_phase18_visible_readability_quality.py` | 内部role語・relation skeleton・反復・単純言い換えを検査する。 |
+| Public E2E / RN contract | `test_emotion_submit_phase18_product_quality_e2e.py`, `Cocolon/tests/rn-screen-contracts.test.js` | public response shapeとRN `passed + commentText`契約を維持する。 |
+
+禁止: Gate / Grounding / Reader / Templateを緩める、public response keyを追加する、RNでPhase18 metaを表示条件にする、raw input / generated candidate text / comment_text body / surface_policy本体をpublic metaへ入れる。
+

@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-24",
+  "revision_date": "2026-05-30",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 641,
-    "total": 858
+    "mashos-api": 712,
+    "total": 929
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 858,
-    "national_system_body_includes": 858,
+    "overall_structure_body_includes": 929,
+    "national_system_body_includes": 929,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル858件、国家システム判断対象のcurrent全ファイル858件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。",
-    "current_snapshot_total_files": 858,
-    "overall_structure_body_includes_current_snapshot_files": 858,
-    "national_system_body_lists_current_snapshot_files_with_relation": 858,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル929件、国家システム判断対象のcurrent全ファイル929件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPhase18は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 929,
+    "overall_structure_body_includes_current_snapshot_files": 929,
+    "national_system_body_lists_current_snapshot_files_with_relation": 929,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -790,7 +790,45 @@
       "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_dictionary_loader.py",
       "Cocolon/tests/rn-screen-contracts.test.js"
     ],
-    "emlis_visible_surface_acceptance_policy_2026_05_24": "Visible Surface Acceptance Gateは表示率向上のための緩和ではなく、中心感情/本文焦点、たりこと系malformed surface、positive-only over-burden、public meta安全性を表示前にfail-closedする品質境界。RN表示条件はpassed + comment_textのまま。"
+    "emlis_visible_surface_acceptance_policy_2026_05_24": "Visible Surface Acceptance Gateは表示率向上のための緩和ではなく、中心感情/本文焦点、たりこと系malformed surface、positive-only over-burden、public meta安全性を表示前にfail-closedする品質境界。RN表示条件はpassed + comment_textのまま。",
+    "phase15_scope_note_2026_05_26": "EmlisAI二段受け取り構造 Phase15は指定対象の前提資料5ファイルのみ更新する。01/02 full inventory本文の全面再生成は本Phaseの対象外。",
+    "latest_source_basis_2026_05_26_phase15": {
+      "premise": "Cocolon_前提資料(141).zip",
+      "Cocolon": "Cocolon_15(3).zip",
+      "mashos-api": "mashos-api_15(5).zip",
+      "file_counts": {
+        "Cocolon": 217,
+        "mashos-api": 687,
+        "total": 904
+      }
+    },
+    "phase15_two_stage_reception_update": "Phase15 reflects EmlisAI two-stage reception / Daily Reception / reception assistance dictionary Phase0-14 implementation into premise docs. It does not regenerate 01/02 full structure docs and does not change production code.",
+    "phase16_scope_note_2026_05_29": "EmlisAI TwoStage Composer Surface Connection Phase16-0〜16-9は指定対象の前提資料差分更新。01/02 full inventory本文の全面再生成は本Phaseの対象外。",
+    "latest_source_basis_2026_05_29_phase16": {
+      "premise": "Cocolon_前提資料(145).zip",
+      "Cocolon": "Cocolon_10(10).zip",
+      "mashos-api": "mashos-api_10(18).zip",
+      "file_counts": {
+        "Cocolon": 217,
+        "mashos-api": 696,
+        "total": 913
+      }
+    },
+    "phase16_two_stage_composer_surface_connection_update": "Phase16 reflects EmlisAI TwoStage Composer Surface Connection Phase16-0〜16-9 implementation into premise docs. It does not change production RN UI, DB, API route, public response keys, or observation_status enum.",
+    "phase17_scope_note_2026_05_30": "EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10は指定対象の前提資料差分更新。01/02 full inventory本文の全面再生成は本Phaseの対象外。",
+    "phase17_two_stage_product_visible_fixture_completion_update": "Phase17 reflects EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 implementation into premise docs. It does not change production RN UI, DB, API route, public response keys, or observation_status enum.",
+    "latest_source_basis_2026_05_30_phase17": {
+      "premise": "Cocolon_前提資料(148).zip",
+      "Cocolon": "Cocolon_11(4).zip",
+      "mashos-api": "mashos-api_11(11).zip",
+      "file_counts": {
+        "Cocolon": 217,
+        "mashos-api": 699,
+        "total": 916
+      }
+    },
+    "phase18_target_docs_reflect_product_quality_stabilization": true,
+    "phase18_full_01_02_regeneration": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -807,7 +845,7 @@
   "docs": [
     {
       "path": "00_華恋用_READ_FIRST.md",
-      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Observation Reply Step0-14境界を固定する"
+      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI二段受け取り構造 / Phase16 Composer接続 / Phase17商品到達fixture補完境界を固定する"
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
@@ -839,7 +877,7 @@
     },
     {
       "path": "03_Cocolon_命名体系.md",
-      "purpose": "Cocolon visible名 / internal名 / runtime ownerの読み替え。Observation Reply名の混同防止を含む"
+      "purpose": "Cocolon visible名 / internal名 / runtime ownerの読み替え。EmlisAI二段受け取り構造 / Phase16 CompleteComposer接続 / Phase17 Product-Visible internal名の混同防止を含む"
     },
     {
       "path": "04_Cocolon_変更テーマ別チェックリスト",
@@ -855,11 +893,11 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "最新zipから見える構造差分。Observation Reply Step0-14 snapshot差分を含む"
+      "purpose": "最新zipから見える構造差分。EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 snapshot差分を含む"
     },
     {
-      "path": "09_Cocolon_名称混在保管と構造境界_2026-05-10.md",
-      "purpose": "名称混在保管。Observation Reply internal名の保管境界を含む"
+      "path": "09_Cocolon_名称混在保管と構造境界.md",
+      "purpose": "名称混在保管。EmlisAI二段受け取り構造 / CompleteComposer実表示接続 / Phase17商品到達fixture補完のpublic契約非変更境界を含む"
     },
     "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
     "08_Cocolon_DB_rename_boundary.md",
@@ -874,6 +912,14 @@
     {
       "path": "Cocolon_作業姿勢とルール_華恋用/14_Cocolon共同開発と華恋思想の扱い.txt",
       "purpose": "華恋が指示待ちではなく意見を持つための作業姿勢境界。未確認断定・指示外追加への変換を禁止する"
+    },
+    {
+      "path": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+      "purpose": "Cocolon全体の基盤観測構造。基本観測単位を環境ラベル × 状態ラベル × 出力内容として固定し、EmlisAI / Piece / Analysisへの段階展開を定義する。"
+    },
+    {
+      "path": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "purpose": "EmlisAI専用出力思想資料。状態回答 + 人間的フォローの二層構造に、二段受け取り構造 / Daily Reception / Phase16 TwoStage Composer Surface Connection / Phase17 Product-Visible Fixture Completion追補を含む。"
     }
   ],
   "excluded_files": [
@@ -1116,6 +1162,20 @@
       "date": "2026-05-21",
       "snapshot": "source_snapshot_2026_05_21_observation_reply_step0_14",
       "summary": "EmlisAI Observation Reply Step0-14 premise diff update."
+    },
+    {
+      "date": "2026-05-25",
+      "premise": "Cocolon_前提資料(120).zip",
+      "Cocolon": "Cocolon_8(14).zip",
+      "mashos-api": "mashos-api_8(27).zip",
+      "summary": "EmlisAI Product Visible Surface Reliability + Koto Splice Repair Step0-8 premise diff update."
+    },
+    {
+      "date": "2026-05-25",
+      "premise": "Cocolon_前提資料(121).zip",
+      "Cocolon": "Cocolon(184).zip",
+      "mashos-api": "mashos-api(97).zip",
+      "summary": "Environment State Output Observation Structure Phase0-1 premise diff update."
     }
   ],
   "source_basis_2026_04_25": {
@@ -1818,9 +1878,20 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(113).zip",
-    "Cocolon": "Cocolon_12(5).zip",
-    "mashos-api": "mashos-api_12(8).zip"
+    "premise": "Cocolon_前提資料(150).zip",
+    "Cocolon": "Cocolon_12(7).zip",
+    "mashos-api": "mashos-api_12(10).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 712,
+      "total": 929
+    },
+    "sha256": {
+      "premise": "de695dafbad34ea88bfebf5170ee7ca4616c1d1161da5ff8c9dde9c3e8b87b9e",
+      "Cocolon": "45af7f062ef69874c7671ae46fb2cdb1ce230a51feb8b6e0ee5b24ec73da32b0",
+      "mashos-api": "1b024fb814bda1c8b475cdf49727244c7743d57040a0e8965292c7ce6a2dc3a7"
+    },
+    "source_mode": "local_snapshot"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2586,15 +2657,15 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(111).zip",
-    "Cocolon": "Cocolon_8(12).zip",
-    "mashos-api": "mashos-api_8(23).zip",
+    "premise": "Cocolon_前提資料(148).zip",
+    "Cocolon": "Cocolon_11(4).zip",
+    "mashos-api": "mashos-api_11(11).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 614,
-      "total": 831
+      "mashos-api": 699,
+      "total": 916
     },
-    "summary": "EmlisAI Observation Reply Step0-14, Emlis observation structure dictionary Phase0-5, and Step10 Repair Boundary remain the display/material path. Latest snapshot adds ActionConversion / UnformedSelfInsight structure dictionary update: 5 relations, 4 entries, material/connection evidence filters, Phase5 fixtures, Phase6 forbidden inference meta-only contract, and Phase7/8 regression confirmation. RN/API/DB public contracts unchanged."
+    "summary": "EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 premise reflection. 5件fixtureをpassed + labelled two-stage comment_textへ到達させ、RN production UI / DB / API route / public response keyは変更しない。"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -3898,5 +3969,1603 @@
     "db_physical_name_changed": false,
     "rn_display_contract_changed": false
   },
-  "karen_partner_thought_boundary_policy_2026_05_24": "Cocolonの主体はMash様の思想と構想。華恋の思想はMash様の思想を置換せず、Cocolonを完成させるために支える補助思想として扱う。華恋は「人間の言葉を雑に処理しない場所にする」という思想を持つが、それを未確認断定・指示外追加・テンプレ共感・一般論へ変換しない。"
+  "karen_partner_thought_boundary_policy_2026_05_24": "Cocolonの主体はMash様の思想と構想。華恋の思想はMash様の思想を置換せず、Cocolonを完成させるために支える補助思想として扱う。華恋は「人間の言葉を雑に処理しない場所にする」という思想を持つが、それを未確認断定・指示外追加・テンプレ共感・一般論へ変換しない。",
+  "source_snapshot_2026_05_25_product_visible_surface_reliability_koto_splice_step0_8": {
+    "premise": "Cocolon_前提資料(120).zip",
+    "Cocolon": "Cocolon_8(14).zip",
+    "mashos-api": "mashos-api_8(27).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 641,
+      "total": 858
+    },
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "summary": "EmlisAI Product Visible Surface Reliability + Koto Splice Repair Step0-8を最新実ファイルに反映。koto splice RED、relation skeleton repair、Shallow Surface Realizer V2 safety、bounded repair reroute、public-safe display_absence_summary、RN passed+comment_text contract regressionを追加。"
+  },
+  "latest_source_basis_2026_05_25_product_visible_surface_reliability_koto_splice_step0_8": "Cocolon_前提資料(120).zip / Cocolon_8(14).zip / mashos-api_8(27).zip",
+  "emlis_product_visible_surface_reliability_policy_2026_05_25": "C相当の取らなければこと/予感こと系はPhraseUnit/Limited Guard、Runtime Surface Gate、Visible Surface Acceptance GateでREDまたは修復理由にし、passed+comment_textとしてRNへ返さない。B相当の機械的relation文はrepair_requiredへ回す。修復は最大一回で、public metaはcode/boolean/countに限定し、RN表示条件はpassed+comment_textのまま維持する。",
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase0_1": {
+    "premise": "Cocolon_前提資料(121).zip",
+    "Cocolon": "Cocolon(184).zip",
+    "mashos-api": "mashos-api(97).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 641,
+      "total": 858
+    },
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "summary": "Phase0として環境状態出力観測構造の設計書を追加し、Phase1として前提資料へ差分反映。Cocolonの基本観測単位を文章単体ではなく環境ラベル × 状態ラベル × 出力内容として固定する。",
+    "new_docs": [
+      "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md"
+    ],
+    "changed_docs": [
+      "00_華恋用_READ_FIRST.md",
+      "Cocolon_思想資料_華恋用.md",
+      "03_Cocolon_命名体系.md",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "05_Cocolon_ルールファイル索引",
+      "07_Cocolon_最新スナップショット差分",
+      "manifest.json"
+    ],
+    "unchanged_contracts": [
+      "/emotion/submit public route",
+      "request payload / response top-level key",
+      "input_feedback.comment_text",
+      "input_feedback.emlis_ai.observation_status",
+      "RN visible title Emlisの観測",
+      "RN display condition passed + commentText",
+      "DB physical name / write path"
+    ]
+  },
+  "environment_state_output_observation_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "basic_observation_unit": "environment_label × state_label × output_content",
+    "cocolon_wide_structure": true,
+    "emlis_ai_scope": "single current input observation only",
+    "piece_scope": "must-keep / overcompression prevention",
+    "analysis_scope": "period recurrence observation only",
+    "forbidden": [
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_type_claim",
+      "diagnosis_claim",
+      "recovery_prescription_claim"
+    ],
+    "implementation_note": "JSON/schema案は設計書本文内に置く。実ファイル化はPhase2以降で現物コード・既存schema配置・テスト結果を見て判断する。"
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase2": {
+    "premise": "Cocolon_前提資料(122).zip",
+    "Cocolon": "Cocolon(185).zip",
+    "mashos-api": "mashos-api(98).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 641,
+      "total": 858
+    },
+    "phase_scope": "Phase2_current_input_bundle_connection",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_payload_changed": false,
+    "raw_input_in_public_meta": false,
+    "raw_text_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "summary": "環境状態出力観測構造 Phase2として、EmlisAI current input bundle が環境 / 状態 / 出力 / 時間の材料を持つことをtext-free internal summaryで固定。Phase3 frame builderやschema実ファイル化は行わず、normalize_emlis_current_inputのpublic-compatible shapeを維持した。",
+    "new_docs_or_repaired_docs": [
+      "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md"
+    ],
+    "changed_docs": [
+      "07_Cocolon_最新スナップショット差分",
+      "manifest.json"
+    ],
+    "changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+      "mashos-api/ai/tests/test_emlis_ai_current_input_bundle.py"
+    ],
+    "tests_run": [
+      "pytest -q tests/test_emlis_ai_current_input_bundle.py -> 6 passed",
+      "pytest -q tests/test_emlis_ai_current_input_bundle.py tests/test_emlis_ai_current_input_grounding_guard.py -> 7 passed",
+      "pytest -q tests/test_emlis_ai_observation_structure_phase4_connection.py tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py tests/test_emlis_ai_public_feedback_meta.py -> 34 passed",
+      "python3 -m py_compile ai/services/ai_inference/emlis_ai_current_input_bundle.py -> passed"
+    ]
+  },
+  "environment_state_output_current_input_bundle_connection_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.environment_state_output.input_connection.v1",
+    "phase": "Phase2_current_input_bundle_connection",
+    "scope": "EmlisAI current input bundleの内部text-free summary。environment_state_output_frame builderではない。",
+    "public_contract_changed": false,
+    "summary_method": "EmlisCurrentInputBundle.to_environment_state_output_connection_summary",
+    "normalized_payload_shape_changed": false,
+    "axis_materials": {
+      "environment_axis": [
+        "category",
+        "memo_action"
+      ],
+      "state_axis": [
+        "emotion_details",
+        "emotions",
+        "strength_summary"
+      ],
+      "output_axis": [
+        "memo"
+      ],
+      "time_axis": [
+        "selected_at",
+        "source_record_id"
+      ]
+    },
+    "forbidden": [
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_tendency",
+      "diagnosis_claim",
+      "recovery_prescription_claim",
+      "raw_text_public_meta",
+      "comment_text_public_meta_from_summary",
+      "json_schema_file_materialized_in_phase2"
+    ]
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase3": {
+    "premise": "Cocolon_前提資料(123).zip",
+    "mashos-api": "mashos-api_2(60).zip",
+    "Cocolon": "unchanged_in_phase3",
+    "file_counts": {
+      "mashos-api_source_files_before_phase3": 641,
+      "mashos-api_changed_or_new_files_in_phase3_diff": 2,
+      "premise_changed_files_in_phase3_diff": 3
+    },
+    "phase_scope": "Phase3_environment_state_output_frame_builder",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_comment_text_generated": false,
+    "public_meta_raw_text_added": false,
+    "new_internal_files": [
+      "mashos-api/ai/services/ai_inference/cocolon_environment_state_output_frame.py",
+      "mashos-api/ai/tests/test_cocolon_environment_state_output_frame.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "pytest -q tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_current_input_bundle.py -> 10 passed",
+      "pytest -q tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_current_input_bundle.py tests/test_emlis_ai_current_input_grounding_guard.py tests/test_emlis_ai_observation_structure_phase4_connection.py tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py tests/test_emlis_ai_public_feedback_meta.py -> 45 passed",
+      "python3 -m py_compile services/ai_inference/cocolon_environment_state_output_frame.py services/ai_inference/emlis_ai_current_input_bundle.py -> passed"
+    ]
+  },
+  "environment_state_output_frame_builder_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.environment_state_output_frame.v1",
+    "material_id": "environment_state_output_frame",
+    "phase": "Phase3_environment_state_output_frame_builder",
+    "scope": "EmlisCurrentInputBundleから現在入力1件の環境・状態・出力・時間を内部frameへ変換する。完成文生成や公開レスポンス変更はしない。",
+    "builder": "build_environment_state_output_frame",
+    "new_module": "mashos-api/ai/services/ai_inference/cocolon_environment_state_output_frame.py",
+    "public_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "single_record_only": true,
+    "axis_materials": {
+      "environment_axis": [
+        "category",
+        "memo_action",
+        "evidence_span_ids"
+      ],
+      "state_axis": [
+        "emotion_details",
+        "emotions",
+        "strength_summary",
+        "state_text_gap_candidates"
+      ],
+      "output_axis": [
+        "memo",
+        "output_theme_candidates",
+        "evidence_span_ids"
+      ],
+      "time_axis": [
+        "selected_at",
+        "single_record"
+      ],
+      "evidence": [
+        "span_id",
+        "source_field",
+        "text_hash"
+      ]
+    },
+    "forbidden": [
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_tendency",
+      "diagnosis_claim",
+      "recovery_prescription_claim",
+      "completed_reply_generation",
+      "comment_text_generation",
+      "raw_memo_text_in_frame",
+      "raw_memo_action_text_in_frame",
+      "public_response_key_addition"
+    ]
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase4": {
+    "premise": "Cocolon_前提資料(124).zip",
+    "mashos-api": "mashos-api_3(41).zip",
+    "Cocolon": "unchanged_in_phase4",
+    "file_counts": {
+      "mashos-api_changed_files_in_phase4_diff": 4,
+      "premise_changed_files_in_phase4_diff": 3
+    },
+    "phase_scope": "Phase4_observation_structure_material_connection",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_comment_text_generated": false,
+    "public_meta_raw_text_added": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "modified_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_connection_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase4_connection.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "pytest -q tests/test_emlis_ai_observation_structure_phase4_connection.py -> 14 passed",
+      "pytest -q tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_current_input_bundle.py tests/test_emlis_ai_current_input_grounding_guard.py tests/test_emlis_ai_observation_structure_phase4_connection.py tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py tests/test_emlis_ai_public_feedback_meta.py -> 47 passed",
+      "python3 -m py_compile services/ai_inference/cocolon_environment_state_output_frame.py services/ai_inference/emlis_ai_observation_structure_material_service.py services/ai_inference/emlis_ai_observation_structure_connection_service.py services/ai_inference/emlis_ai_display_gate.py -> passed"
+    ]
+  },
+  "environment_state_output_observation_material_connection_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.environment_state_output_frame.v1",
+    "material_id": "environment_state_output_frame",
+    "phase": "Phase4_observation_structure_material_connection",
+    "scope": "Phase3 frame builderの出力をEmlisAI observation structure material / connection / Display Gate traceへsafe projectionとして接続する。完成文生成やpublic response key追加はしない。",
+    "connected_modules": [
+      "emlis_ai_observation_structure_material_service.py",
+      "emlis_ai_observation_structure_connection_service.py",
+      "emlis_ai_display_gate.py"
+    ],
+    "safe_projection_kind": "phase4_gate_composer_safe_projection",
+    "public_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "single_record_only": true,
+    "exposed_to_public_response": false,
+    "gate_trace_meta_only": true,
+    "forbidden": [
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_tendency",
+      "diagnosis_claim",
+      "recovery_prescription_claim",
+      "completed_reply_generation",
+      "comment_text_generation_from_frame",
+      "raw_memo_text_in_material",
+      "raw_memo_action_text_in_material",
+      "public_response_key_addition",
+      "display_gate_relaxation"
+    ]
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase5": {
+    "premise": "Cocolon_前提資料(125).zip",
+    "mashos-api": "mashos-api_4(37).zip",
+    "Cocolon": "unchanged_in_phase5",
+    "file_counts": {
+      "mashos-api_changed_files_in_phase5_diff": 6,
+      "premise_changed_files_in_phase5_diff": 3
+    },
+    "phase_scope": "Phase5_EmlisObservationComposer_limited_use",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_comment_text_generated_from_frame": false,
+    "public_meta_raw_text_added": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "modified_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase5_limited_use.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "pytest -q tests/test_emlis_ai_observation_structure_phase5_limited_use.py -> 6 passed",
+      "pytest -q tests/test_emlis_ai_observation_structure_phase5_limited_use.py tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py tests/test_emlis_ai_observation_structure_phase4_connection.py tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_current_input_bundle.py tests/test_emlis_ai_runtime_surface_pre_return_gate.py tests/test_emlis_ai_observation_current_display_contract.py tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py tests/test_emlis_ai_public_feedback_meta.py -> 110 passed",
+      "pytest -q tests/test_emlis_ai_observation_structure_phase5_limited_use.py tests/test_emlis_ai_observation_structure_phase5_fixtures_blind_qa.py tests/test_emlis_ai_observation_structure_phase4_connection.py tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_current_input_bundle.py tests/test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py tests/test_emlis_ai_public_feedback_meta.py tests/test_emlis_ai_observation_current_display_contract.py -> 92 passed",
+      "python3 -m py_compile services/ai_inference/emlis_ai_conversation_composer_service.py services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py services/ai_inference/emlis_ai_display_gate.py services/ai_inference/emlis_ai_observation_structure_material_service.py services/ai_inference/emlis_ai_limited_composer_client.py -> passed"
+    ]
+  },
+  "environment_state_output_observation_limited_surface_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.environment_state_output_frame.v1",
+    "surface_contract_version": "cocolon.environment_state_output.surface_limited_use.v1",
+    "material_id": "environment_state_output_frame",
+    "phase": "Phase5_EmlisObservationComposer_limited_use",
+    "scope": "Phase4 safe projectionをEmlisObservationComposerで使う場合の表面契約。完成文テンプレではなく、単発観測範囲・禁止surface・Gate blockingを固定する。",
+    "connected_modules": [
+      "emlis_ai_observation_structure_material_service.py",
+      "emlis_ai_conversation_composer_service.py",
+      "emlis_ai_limited_composer_client.py",
+      "emlis_ai_runtime_surface_pre_return_gate.py",
+      "emlis_ai_display_gate.py"
+    ],
+    "public_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "single_record_only": true,
+    "required_scope_markers": [
+      "今回の入力では",
+      "今の入力では",
+      "この入力では",
+      "今回の記録では",
+      "この記録では"
+    ],
+    "allowed_surface_claim_strength": "single_observation",
+    "exposed_to_public_response": false,
+    "gate_trace_meta_only": true,
+    "forbidden": [
+      "scope_marker_missing_surface",
+      "period_tendency_from_single_record_surface",
+      "personality_tendency_surface",
+      "diagnosis_claim_surface",
+      "cause_from_category_surface",
+      "cause_from_emotion_strength_surface",
+      "recovery_prescription_surface",
+      "completed_reply_generation_from_frame",
+      "raw_memo_text_in_surface_contract",
+      "raw_memo_action_text_in_surface_contract",
+      "public_response_key_addition",
+      "display_gate_relaxation"
+    ],
+    "limited_composer_use": "Phase4 safe projectionの output_theme_candidates を raw textなしのtheme unitとして扱い、「今回の入力では」等のscope marker付き単発観測に限定して本文化する。",
+    "safe_projection_output_theme_candidates_raw_text_included": false,
+    "single_record_scope_marker_required_in_limited_composer": true
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase6": {
+    "premise": "Cocolon_前提資料(126).zip",
+    "mashos-api": "mashos-api_5(38).zip",
+    "Cocolon": "unchanged_in_phase6",
+    "file_counts": {
+      "mashos-api_changed_files_in_phase6_diff": 5,
+      "premise_changed_files_in_phase6_diff": 3
+    },
+    "phase_scope": "Phase6_PieceComposer_overcompression_prevention_connection",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_comment_text_generated_from_frame": false,
+    "public_meta_raw_text_added": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "piece_preview_publish_contract_changed": false,
+    "modified_files": [
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+      "mashos-api/ai/services/ai_inference/emotion_piece_generation_service.py",
+      "mashos-api/ai/tests/test_piece_environment_state_output_phase6.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_piece_environment_state_output_phase6.py -> 4 passed",
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_piece_environment_state_output_phase6.py tests/test_cocolon_text_generation_core_piece_composer.py tests/test_cocolon_text_generation_core_piece_input_contract.py tests/test_emotion_piece_generation_value_observation.py tests/test_emotion_piece_generation_long_input_core.py tests/test_emotion_piece_generation_self_and_others_happiness.py tests/contract/test_new_national_core_piece_contracts.py tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_observation_structure_phase5_limited_use.py -> 34 passed",
+      "PYTHONPATH=services/ai_inference python3 -m py_compile services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py services/ai_inference/emotion_piece_generation_service.py tests/test_piece_environment_state_output_phase6.py -> passed"
+    ]
+  },
+  "environment_state_output_observation_piece_overcompression_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.environment_state_output_frame.v1",
+    "piece_guard_schema_version": "cocolon.piece.environment_state_output_overcompression_guard.v1",
+    "material_id": "piece_environment_state_output_overcompression_guard",
+    "phase": "Phase6_PieceComposer_overcompression_prevention_connection",
+    "scope": "environment_state_output_frameをPieceComposerのmust_keep / overcompression preventionとして使い、環境・状態・出力条件を削りすぎてPieceの核が潰れることを防ぐ。Emlis調やAnalysis傾向化にはしない。",
+    "connected_modules": [
+      "piece_environment_state_output_guard.py",
+      "piece_composer_input_contract.py",
+      "piece_composer.py",
+      "emotion_piece_generation_service.py"
+    ],
+    "public_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "single_record_only": true,
+    "exposed_to_public_response": false,
+    "raw_text_in_guard_material": false,
+    "preview_publish_contract_maintained": true,
+    "must_keep_signal_roles": [
+      "eso_environment:*",
+      "eso_state:*",
+      "eso_output:*"
+    ],
+    "forbidden": [
+      "emlis_voice_in_piece",
+      "analysis_period_tendency_in_piece",
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "personality_tendency",
+      "diagnosis_claim",
+      "recovery_prescription_claim",
+      "raw_memo_text_in_piece_guard_material",
+      "raw_memo_action_text_in_piece_guard_material",
+      "public_response_key_addition",
+      "input_unmentioned_solution_or_conclusion",
+      "preview_publish_identity_breakage"
+    ]
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase7": {
+    "premise": "Cocolon_前提資料(127).zip",
+    "mashos-api": "mashos-api_6(33).zip",
+    "Cocolon": "unchanged_in_phase7",
+    "file_counts": {
+      "mashos-api_changed_files_in_phase7_diff": 2,
+      "premise_changed_files_in_phase7_diff": 3
+    },
+    "phase_scope": "Phase7_Analysis_tendency_material_internal_design",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "analysis_public_text_connected": false,
+    "analysis_content_json_changed": false,
+    "standardReport_contract_changed": false,
+    "contentText_contract_changed": false,
+    "public_meta_raw_text_added": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "modified_files": [
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_material.py",
+      "mashos-api/ai/tests/test_analysis_environment_state_output_phase7.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_analysis_environment_state_output_phase7.py -> 5 passed",
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_analysis_environment_state_output_phase7.py tests/test_piece_environment_state_output_phase6.py tests/test_cocolon_text_generation_core_analysis_input_contract.py tests/test_cocolon_text_generation_core_analysis_composer.py tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_observation_structure_phase5_limited_use.py -> 31 passed",
+      "PYTHONPATH=services/ai_inference python3 -m py_compile services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_material.py tests/test_analysis_environment_state_output_phase7.py -> passed"
+    ]
+  },
+  "environment_state_output_observation_analysis_tendency_material_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.analysis.environment_state_output_period_material.v1",
+    "material_id": "analysis_environment_state_output_period_material",
+    "conditional_output_tendency_schema_version": "cocolon.conditional_output_tendency.v1",
+    "recovery_label_path_schema_version": "cocolon.recovery_label_path.v1",
+    "phase": "Phase7_analysis_internal_tendency_material_design",
+    "scope": "保存済みrecordsからsafe frame projectionを作り、conditional_output_tendency / recovery_label_pathをAnalysis向け内部materialとして生成する。public Analysis textには接続しない。",
+    "connected_modules": [
+      "analysis_environment_state_output_material.py"
+    ],
+    "tests": [
+      "test_analysis_environment_state_output_phase7.py"
+    ],
+    "public_contract_changed": false,
+    "analysis_public_text_connected": false,
+    "analysis_content_json_changed": false,
+    "standardReport_contract_changed": false,
+    "contentText_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "raw_text_in_material": false,
+    "emotion_self_structure_material_mixing_allowed": false,
+    "single_record_period_tendency_allowed": false,
+    "category_cause_allowed": false,
+    "emotion_strength_cause_allowed": false,
+    "recovery_prescription_allowed": false,
+    "forbidden": [
+      "analysis_public_text_from_phase7_material",
+      "raw_memo_text_in_analysis_material",
+      "raw_memo_action_text_in_analysis_material",
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_type",
+      "diagnosis_claim",
+      "recovery_prescription_claim",
+      "emotion_self_structure_material_mixing",
+      "emlis_voice_in_analysis",
+      "piece_public_qna_voice_in_analysis"
+    ]
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase8": {
+    "premise": "Cocolon_前提資料(128).zip",
+    "mashos-api": "mashos-api_7(29).zip",
+    "Cocolon": "unchanged_in_phase8",
+    "file_counts": {
+      "mashos-api_changed_files_in_phase8_diff": 6,
+      "premise_changed_files_in_phase8_diff": 3
+    },
+    "phase_scope": "Phase8_AnalysisComposer_display_connection",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "analysis_public_text_connected": true,
+    "analysis_content_json_changed": false,
+    "standardReport_contract_changed": false,
+    "contentText_contract_changed": false,
+    "public_meta_raw_text_added": false,
+    "raw_memo_text_in_surface_candidate": false,
+    "raw_memo_action_text_in_surface_candidate": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "modified_files": [
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+      "mashos-api/ai/tests/test_analysis_environment_state_output_phase8_display_connection.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_analysis_environment_state_output_phase8_display_connection.py -> 6 passed",
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_analysis_environment_state_output_phase8_display_connection.py tests/test_analysis_environment_state_output_phase7.py tests/test_cocolon_text_generation_core_analysis_input_contract.py tests/test_cocolon_text_generation_core_analysis_composer.py tests/test_analysis_value_observation_boundary.py tests/contract/test_new_national_core_analysis_contracts.py tests/test_piece_environment_state_output_phase6.py tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_observation_structure_phase5_limited_use.py -> 47 passed",
+      "PYTHONPATH=services/ai_inference python3 -m py_compile services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_material.py services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py services/ai_inference/cocolon_text_generation_core/adapters/__init__.py services/ai_inference/cocolon_text_generation_core/__init__.py services/ai_inference/analysis_report_validity_gate.py tests/test_analysis_environment_state_output_phase8_display_connection.py -> passed"
+    ]
+  },
+  "environment_state_output_observation_analysis_display_connection_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "schema_version": "cocolon.analysis.environment_state_output_surface.v1",
+    "material_id": "analysis_environment_state_output_surface",
+    "source_material_id": "analysis_environment_state_output_period_material",
+    "phase": "Phase8_AnalysisComposer_display_connection",
+    "scope": "Phase7 materialのconditional_output_tendency / recovery_label_pathを、AnalysisComposer用のsafe display candidateへ変換する。期間限定観測・非診断・非処方・raw text非混入を固定する。",
+    "connected_modules": [
+      "analysis_environment_state_output_surface.py",
+      "analysis_composer.py",
+      "analysis_report_validity_gate.py"
+    ],
+    "tests": [
+      "test_analysis_environment_state_output_phase8_display_connection.py"
+    ],
+    "public_contract_changed": false,
+    "analysis_public_text_connected": true,
+    "analysis_content_json_changed": false,
+    "standardReport_contract_changed": false,
+    "contentText_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "raw_text_in_surface_candidate": false,
+    "emotion_self_structure_material_mixing_allowed": false,
+    "single_record_period_tendency_allowed": false,
+    "category_cause_allowed": false,
+    "emotion_strength_cause_allowed": false,
+    "recovery_prescription_allowed": false,
+    "required_scope_marker": "この期間の記録では",
+    "forbidden": [
+      "raw_memo_text_in_analysis_surface",
+      "raw_memo_action_text_in_analysis_surface",
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_type",
+      "diagnosis_claim",
+      "recovery_prescription_claim",
+      "recovery_method_surface",
+      "always_claim",
+      "emlis_voice_in_analysis",
+      "piece_public_qna_voice_in_analysis"
+    ]
+  },
+  "source_snapshot_2026_05_25_environment_state_output_observation_phase9": {
+    "premise": "Cocolon_前提資料(129).zip",
+    "mashos-api": "mashos-api_8(28).zip",
+    "Cocolon": "not_provided_for_phase9_backend_diff; RN contract unchanged and not modified",
+    "file_counts": {
+      "mashos-api_changed_files_in_phase9_diff": 7,
+      "premise_changed_files_in_phase9_diff": 3,
+      "phase8_backend_files_reincluded_because_missing_from_received_api_zip": 6,
+      "phase9_new_test_files": 1
+    },
+    "phase_scope": "Phase9_cross_core_contract_tests_and_premise_update",
+    "phase8_backend_completion_needed": true,
+    "phase8_backend_missing_in_received_mashos_api_8_zip": true,
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "analysis_public_text_connected": true,
+    "analysis_content_json_changed": false,
+    "standardReport_contract_changed": false,
+    "contentText_contract_changed": false,
+    "public_meta_raw_text_added": false,
+    "raw_memo_text_in_surface_candidate": false,
+    "raw_memo_action_text_in_surface_candidate": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "modified_files": [
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "mashos-api/ai/services/ai_inference/analysis_report_validity_gate.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+      "mashos-api/ai/tests/test_analysis_environment_state_output_phase8_display_connection.py",
+      "mashos-api/ai/tests/test_environment_state_output_phase9_cross_core_contract.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "tests_run": [
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_environment_state_output_phase9_cross_core_contract.py -> 5 passed",
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_environment_state_output_phase9_cross_core_contract.py tests/test_analysis_environment_state_output_phase8_display_connection.py tests/test_analysis_environment_state_output_phase7.py tests/test_piece_environment_state_output_phase6.py tests/test_cocolon_environment_state_output_frame.py tests/test_emlis_ai_observation_structure_phase5_limited_use.py tests/test_emlis_ai_public_feedback_meta.py tests/test_emotion_submit_public_feedback_meta_boundary.py tests/test_cocolon_text_generation_core_analysis_composer.py tests/test_cocolon_text_generation_core_piece_composer.py tests/contract/test_new_national_core_analysis_contracts.py tests/contract/test_new_national_core_piece_contracts.py tests/contract/test_new_national_core_emlis_contracts.py -> 75 passed, 2 warnings",
+      "PYTHONPATH=services/ai_inference python3 -m py_compile services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py services/ai_inference/analysis_report_validity_gate.py services/ai_inference/cocolon_text_generation_core/adapters/__init__.py services/ai_inference/cocolon_text_generation_core/__init__.py tests/test_analysis_environment_state_output_phase8_display_connection.py tests/test_environment_state_output_phase9_cross_core_contract.py -> passed"
+    ]
+  },
+  "environment_state_output_observation_phase9_cross_core_policy_2026_05_25": {
+    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "phase": "Phase9_cross_core_contract_tests",
+    "scope": "Emlis / Piece / Analysisの横断境界、public meta、/emotion/submit public route/response/DB physical nameの非破壊性をテストで固定する。",
+    "connected_modules": [
+      "cocolon_environment_state_output_frame.py",
+      "emlis_ai_observation_structure_material_service.py",
+      "piece_environment_state_output_guard.py",
+      "analysis_environment_state_output_material.py",
+      "analysis_environment_state_output_surface.py",
+      "analysis_composer.py",
+      "analysis_report_validity_gate.py",
+      "emlis_ai_public_feedback_meta.py",
+      "api_emotion_submit.py"
+    ],
+    "tests": [
+      "test_environment_state_output_phase9_cross_core_contract.py",
+      "test_analysis_environment_state_output_phase8_display_connection.py",
+      "test_analysis_environment_state_output_phase7.py",
+      "test_piece_environment_state_output_phase6.py",
+      "test_emlis_ai_observation_structure_phase5_limited_use.py"
+    ],
+    "emlis_role": "single_record_observation_only",
+    "piece_role": "must_keep_overcompression_prevention",
+    "analysis_role": "period_observation_only",
+    "common_core_role": "quality_grounding_safety_only",
+    "required_analysis_scope_marker": "この期間の記録では",
+    "forbidden_analysis_scope_marker": "今回の入力では",
+    "public_contract_changed": false,
+    "rn_display_contract_changed": false,
+    "api_route_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "json_schema_file_materialized": false,
+    "raw_text_in_public_meta": false,
+    "raw_text_in_piece_guard": false,
+    "raw_text_in_analysis_surface": false,
+    "single_record_period_tendency_allowed": false,
+    "category_cause_allowed": false,
+    "emotion_strength_cause_allowed": false,
+    "recovery_prescription_allowed": false,
+    "forbidden": [
+      "emlis_scope_marker_in_analysis_period_surface",
+      "analysis_period_scope_marker_in_emlis_single_record_surface",
+      "piece_overcompression_to_state_only",
+      "environment_state_output_frame_public_response_key",
+      "raw_memo_text_in_public_meta",
+      "raw_memo_action_text_in_public_meta",
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "period_tendency_from_single_record",
+      "personality_type",
+      "diagnosis_claim",
+      "recovery_prescription_claim"
+    ]
+  },
+  "source_snapshot_2026_05_26_emlis_environment_state_output_surface_contract_completion_phase0_6": {
+    "premise": "Cocolon_前提資料(132).zip",
+    "Cocolon": "Cocolon_7(14).zip",
+    "mashos-api": "mashos-api_7(30).zip",
+    "sha256": {
+      "Cocolon_前提資料(132).zip": "64640f85990eacf3508be83139d2322d775bfdae73fb7b214b372f9703994c9f",
+      "Cocolon_7(14).zip": "50d4ef611f88c1ecacf6e5a7ed9cdee60b93cebddf5692d5f698217347b981c3",
+      "mashos-api_7(30).zip": "8b61c6348559e692f9582428f72a92c9bbfad90412069c208bd8a12f7c0261ed"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 653,
+      "total": 870
+    },
+    "phase_scope": "EmlisAI_environment_state_output_surface_contract_completion_Phase0_6",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_comment_text_key_changed": false,
+    "environment_state_output_frame_public_response_key_added": false,
+    "scope_marker_completion_before_surface_validation": true,
+    "forbidden_surface_claims_rejected_not_repaired": true,
+    "runtime_pre_return_gate_double_check": true,
+    "public_meta_completion_result_exposed": false,
+    "raw_input_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "modified_premise_files": [
+      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
+      "Cocolon_前提資料/01_Cocolon_全体構造資料.md",
+      "Cocolon_前提資料/01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "Cocolon_前提資料/01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
+      "Cocolon_前提資料/02_Cocolon_国家システム資料.md",
+      "Cocolon_前提資料/02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "Cocolon_前提資料/02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "Cocolon_前提資料/03_Cocolon_命名体系.md",
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "confirmed_backend_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py"
+    ],
+    "tests_run": [
+      "PYTHONPATH=services/ai_inference pytest -q tests/test_emlis_ai_environment_state_output_surface_contract_completion.py tests/test_emlis_ai_runtime_surface_pre_return_gate.py tests/test_emlis_ai_public_feedback_meta.py tests/test_emotion_submit_public_feedback_meta_boundary.py tests/test_cocolon_text_generation_core_emlis_observation_adapter.py tests/test_cocolon_text_generation_core_step15_stabilization.py tests/test_emlis_ai_observation_structure_phase5_limited_use.py tests/test_environment_state_output_phase9_cross_core_contract.py tests/test_emlis_ai_limited_composer_client.py tests/test_emlis_ai_observation_display_repair_integration.py -> 125 passed"
+    ]
+  },
+  "emlis_environment_state_output_surface_contract_completion_policy_2026_05_26": {
+    "schema_version": "cocolon.emlis.environment_state_output_surface_contract_completion.v1",
+    "material_id": "environment_state_output_frame",
+    "scope": "EmlisAI public surface candidate exit alignment for single-record environment/state/output observation material.",
+    "required_scope_markers": [
+      "今回の入力では",
+      "今の入力では",
+      "この入力では",
+      "今回の記録では",
+      "この記録では"
+    ],
+    "completion_target": "first_body_line_before_surface_validation",
+    "skip_greeting_line": true,
+    "idempotent": true,
+    "forbidden_surface_claims": [
+      "period_tendency_from_single_record",
+      "personality_tendency",
+      "diagnosis",
+      "cause_from_category",
+      "cause_from_emotion_strength",
+      "recovery_prescription"
+    ],
+    "repair_policy": {
+      "scope_marker_missing": "apply_once_before_surface_validation",
+      "forbidden_surface_claims": "reject_not_repair",
+      "empty_body": "reject",
+      "runtime_marker_missing": "terminal_block"
+    },
+    "public_contract_changed": false,
+    "display_gate_relaxed": false,
+    "public_meta_raw_input_included": false,
+    "completion_result_publicly_exposed": false,
+    "rn_display_condition": "observation_status=passed and comment_text non-empty only"
+  },
+  "source_snapshot_2026_05_26_emlis_state_answer_human_follow_phase0_1": {
+    "premise": "Cocolon_前提資料(134).zip",
+    "design_doc": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+    "Cocolon": "Cocolon(187).zip",
+    "mashos-api": "mashos-api(100).zip",
+    "phase_scope": "Phase0設計書作成済み。Phase1前提資料への差分更新のみ。",
+    "runtime_or_contract_change": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "backend_code_changed": false,
+    "rn_code_changed": false,
+    "new_docs": [
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md"
+    ],
+    "changed_docs": [
+      "00_華恋用_READ_FIRST.md",
+      "Cocolon_思想資料_華恋用.md",
+      "03_Cocolon_命名体系.md",
+      "05_Cocolon_ルールファイル索引",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "manifest.json"
+    ]
+  },
+  "emlis_state_answer_human_follow_policy_2026_05_26": {
+    "scope": "EmlisAI immediate response output philosophy and surface contract design",
+    "design_doc": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+    "state_answer": "EmlisAIは行動指示ではなく、ユーザーが今の自分が何をしているのかを理解するための状態回答を返す。",
+    "human_follow": "観測後に、入力内に見える意図・怖さ/負荷・努力・存在を、人格断定ではなくEmlisの感想として受け止める。",
+    "ratio_policy": "基本は観測6:フォロー4。強い自己否定・悲しみ・消耗・孤独ではフォロー厚め、構造理解要求では観測厚め。観測ゼロ/フォローゼロは禁止。",
+    "self_denial_boundary": "felt stateは受け止め、identity claimは事実扱いしない。Emlisの限定的反対意見は入力内根拠がある場合だけ許す。",
+    "anger_boundary": "相手評価や攻撃には同意せず、怒りの奥の大事にしていた線をユーザー側の状態として観測する。",
+    "metaphor_boundary": "自由比喩生成は禁止寄り。構造理解要求時だけ安全な日常比喩候補として扱う。",
+    "cocolon_wide_boundary": "Cocolon環境状態出力観測構造は何を見るかを定義し、本資料はEmlisAIがどう返すかを定義する。Piece / Analysis / Cocolon全体構造を上書きしない。",
+    "forbidden": [
+      "action_instruction_as_default",
+      "diagnosis",
+      "personality_claim",
+      "cause_claim_from_category_or_emotion_strength",
+      "period_tendency_from_single_record",
+      "anger_target_judgement_agreement",
+      "self_denial_left_unhandled",
+      "over_comfort_or_absolute_support",
+      "free_metaphor_generation",
+      "examples_as_runtime_templates",
+      "public_response_key_change",
+      "raw_input_or_comment_text_body_in_public_meta"
+    ]
+  },
+  "source_snapshot_2026_05_26_emlis_state_answer_human_follow_phase2_10": {
+    "premise": "Cocolon_前提資料(137).zip",
+    "design_doc": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+    "Cocolon": "Cocolon_10(9).zip",
+    "mashos-api": "mashos-api_10(16).zip",
+    "sha256": {
+      "Cocolon_前提資料(137).zip": "6f1ae81cea8d83fccdbb20f6902c8298e4c80ebcea62cbf39d01ab44e21a16b2",
+      "Cocolon_10(9).zip": "5995062a3604eb4ad06937492c0b00d89870cd57209dab4169e92b8dd6babd58",
+      "mashos-api_10(16).zip": "8e12afc4437aff121ca4d1de18449a113444e34919e9ae57ec1d8eddc2786770"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 672,
+      "total": 889
+    },
+    "phase_scope": "EmlisAI状態回答と人間的フォロー Phase2-10 implementation reflection",
+    "rn_code_changed": false,
+    "backend_new_files_count": 19,
+    "backend_modified_files_count": 16,
+    "backend_removed_files_count": 0,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "public_comment_text_key_changed": false,
+    "state_answer_contract_public_response_key_added": false,
+    "raw_input_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "piece_analysis_temperature_leak_guard_added": true,
+    "new_backend_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_human_follow_selector.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_special_cases.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_safe_daily_metaphor_material.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_composer_contract.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_gate_boundary.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_surface_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_human_follow_selector.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_ratio_policy.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_self_denial_and_anger.py",
+      "mashos-api/ai/tests/test_emlis_ai_safe_daily_metaphor_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_composer_connection.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_gate_boundary.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_public_meta_boundary.py",
+      "mashos-api/ai/tests/fixtures/emlis_ai_state_answer_cases.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_visible_surface_qa.py",
+      "mashos-api/ai/tests/contract/test_emlis_state_answer_phase10_cross_contract_regression.py",
+      "mashos-api/ai/tests/test_emlis_ai_state_answer_phase10_cross_contract_regression.py"
+    ],
+    "modified_backend_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_tone_engine_2_1.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+      "mashos-api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+      "mashos-api/ai/tests/contract/test_new_national_core_emlis_contracts.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/tests/test_emotion_submit_public_feedback_meta_boundary.py",
+      "mashos-api/ai/tests/test_environment_state_output_phase9_cross_core_contract.py"
+    ],
+    "modified_premise_files": [
+      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
+      "Cocolon_前提資料/01_Cocolon_全体構造資料.md",
+      "Cocolon_前提資料/01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "Cocolon_前提資料/01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
+      "Cocolon_前提資料/02_Cocolon_国家システム資料.md",
+      "Cocolon_前提資料/02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "Cocolon_前提資料/02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "Cocolon_前提資料/03_Cocolon_命名体系.md",
+      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/manifest.json"
+    ]
+  },
+  "emlis_state_answer_human_follow_phase2_10_policy_2026_05_26": {
+    "schema_version": "cocolon.emlis_state_answer_human_follow.phase2_10.2026-05-26",
+    "materialized_internal_materials": [
+      "emlis_state_answer_surface_contract",
+      "emlis_ai_human_follow_selector",
+      "emlis_ai_state_answer_ratio_policy",
+      "emlis_ai_state_answer_special_cases",
+      "emlis_ai_safe_daily_metaphor_material",
+      "emlis_state_answer_composer_role_plan",
+      "emlis_ai_state_answer_gate_boundary"
+    ],
+    "public_contract_changed": false,
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_display_contract_changed": false,
+    "json_schema_file_materialized": false,
+    "examples_as_runtime_templates": false,
+    "forbidden": [
+      "action_instruction_as_default",
+      "diagnosis",
+      "personality_claim",
+      "cause_claim_from_category_or_emotion_strength",
+      "period_tendency_from_single_record",
+      "anger_target_judgement_agreement",
+      "self_denial_left_unhandled_or_over_comforted",
+      "free_metaphor_generation",
+      "raw_input_or_comment_text_body_in_public_meta",
+      "state_answer_internal_material_public_key",
+      "emlis_temperature_leak_to_piece_or_analysis"
+    ],
+    "public_display_condition": "input_feedback.emlis_ai.observation_status=passed and input_feedback.comment_text non-empty only",
+    "cross_core_boundary": "EmlisAI is single-record state answer + human follow; Piece keeps public Q&A core; Analysis keeps period observation. State answer materials do not overwrite Piece or Analysis composers."
+  },
+  "source_snapshot_2026_05_26_emlis_two_stage_reception_daily_reception_phase0_15": {
+    "premise": "Cocolon_前提資料(141).zip",
+    "design_doc": "Cocolon_EmlisAI_二段受け取り構造_DailyReception_受け取り補助辞書_詳細設計書_実装順_華恋用_2026-05-26(14).md",
+    "Cocolon": "Cocolon_15(3).zip",
+    "mashos-api": "mashos-api_15(5).zip",
+    "sha256": {
+      "Cocolon_前提資料(141).zip": "442e162121971380ff9850f916fb4fb69b8e09d378335f69a523a5108af8ee35",
+      "Cocolon_15(3).zip": "825ace97123fba63f6a026faaf2cde7e92572e4e278e7cbd6dbaced41e538e7b",
+      "mashos-api_15(5).zip": "810dfb51e719b158abf015214fcd366cd0ff1433da9084485b0b43f74dbb884e",
+      "Cocolon_EmlisAI_二段受け取り構造_DailyReception_受け取り補助辞書_詳細設計書_実装順_華恋用_2026-05-26(14).md": "081018805465bb269c32f9134da9a410af5b18e378d44b92e766519007ca9011"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 687,
+      "total": 904
+    },
+    "phase_scope": "EmlisAI二段受け取り構造 / Daily Reception / 受け取り補助辞書 Phase0-15 implementation reflection",
+    "phase15_scope": "前提資料更新のみ。production code / RN production UI / DB / API route変更なし。",
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_production_code_changed_in_phase15": false,
+    "rn_display_contract_changed": false,
+    "public_comment_text_key_changed": false,
+    "observation_text_public_response_key_added": false,
+    "reception_text_public_response_key_added": false,
+    "public_observation_status_enum_added": false,
+    "examples_as_runtime_templates": false,
+    "raw_input_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "modified_premise_files": [
+      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
+      "Cocolon_前提資料/03_Cocolon_命名体系.md",
+      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "confirmed_runtime_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reception_assistance_dictionary_loader.py",
+      "mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json",
+      "mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.schema.json",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_reception_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ]
+  },
+  "emlis_two_stage_reception_daily_reception_policy_2026_05_26": {
+    "schema_version": "cocolon.emlis.two_stage_reception.daily_reception.phase0_15.2026-05-26",
+    "display_shape": "input_feedback.comment_text contains 見えたこと： and Emlisから： labels",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "internal_modes": [
+      "daily_unpleasant_reception",
+      "daily_positive_reception",
+      "self_denial_support",
+      "uncertainty_support",
+      "structure_question_observation",
+      "low_information_question"
+    ],
+    "forbidden": [
+      "public_status_daily_reception",
+      "observation_text_or_reception_text_public_keys",
+      "rn_parse_two_stage_labels",
+      "general_dictionary_for_unknown_words",
+      "completed_reply_templates_in_dictionary",
+      "event_hint_alone_emotion_creation",
+      "target_judgement_agreement",
+      "self_denial_factification",
+      "diagnosis_or_personality_claim",
+      "cause_claim_or_action_instruction",
+      "raw_input_or_comment_text_body_in_public_meta",
+      "examples_as_runtime_templates"
+    ],
+    "phase15_modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "03_Cocolon_命名体系.md",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  },
+  "source_snapshot_2026_05_28_emlis_two_stage_reception_daily_reception_phase0_15": {
+    "premise": "Cocolon_前提資料(141).zip",
+    "design_doc": "Cocolon_EmlisAI_二段受け取り構造_DailyReception_受け取り補助辞書_詳細設計書_実装順_華恋用_2026-05-26(14).md",
+    "Cocolon": "Cocolon_15(3).zip",
+    "mashos-api": "mashos-api_15(5).zip",
+    "sha256": {
+      "Cocolon_前提資料(141).zip": "442e162121971380ff9850f916fb4fb69b8e09d378335f69a523a5108af8ee35",
+      "Cocolon_15(3).zip": "825ace97123fba63f6a026faaf2cde7e92572e4e278e7cbd6dbaced41e538e7b",
+      "mashos-api_15(5).zip": "810dfb51e719b158abf015214fcd366cd0ff1433da9084485b0b43f74dbb884e",
+      "Cocolon_EmlisAI_二段受け取り構造_DailyReception_受け取り補助辞書_詳細設計書_実装順_華恋用_2026-05-26(14).md": "081018805465bb269c32f9134da9a410af5b18e378d44b92e766519007ca9011"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 687,
+      "total": 904
+    },
+    "phase_scope": "EmlisAI two-stage reception / Daily Reception / reception assistance dictionary Phase0-15 premise reflection",
+    "implemented_phase_scope": "Phase0-14 backend/RN tests/materials confirmed in provided snapshots. Phase15 updates premise documents only.",
+    "phase15_scope": "前提資料更新のみ。production code / RN production UI / DB / API route変更なし。",
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_production_code_changed_in_phase15": false,
+    "rn_display_contract_changed": false,
+    "rn_display_title_changed": false,
+    "public_comment_text_key_changed": false,
+    "observation_text_public_response_key_added": false,
+    "reception_text_public_response_key_added": false,
+    "public_observation_status_enum_added": false,
+    "daily_reception_public_status_added": false,
+    "examples_as_runtime_templates": false,
+    "general_dictionary_lookup_required": false,
+    "raw_input_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "modified_premise_files": [
+      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
+      "Cocolon_前提資料/03_Cocolon_命名体系.md",
+      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "confirmed_runtime_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reception_assistance_dictionary_loader.py",
+      "mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json",
+      "mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.schema.json",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_reception_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ]
+  },
+  "emlis_two_stage_reception_daily_reception_policy_2026_05_28": {
+    "schema_version": "cocolon.emlis.two_stage_reception.daily_reception.phase0_15.2026-05-28",
+    "display_shape": "input_feedback.comment_text contains 見えたこと： and Emlisから： labels",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "internal_modes": [
+      "daily_unpleasant_reception",
+      "daily_positive_reception",
+      "self_denial_support",
+      "uncertainty_support",
+      "structure_question_observation",
+      "low_information_question"
+    ],
+    "internal_materials": [
+      "EmlisSharedReceptionEvidence",
+      "EmlisReceptionAssistanceDictionary",
+      "EmlisReceptionModeResolver",
+      "EmlisTwoStageReceptionCrossGate",
+      "submit_speed_regression"
+    ],
+    "forbidden": [
+      "public_status_daily_reception",
+      "observation_text_or_reception_text_public_keys",
+      "rn_parse_two_stage_labels",
+      "general_dictionary_for_unknown_words",
+      "completed_reply_templates_in_dictionary",
+      "event_hint_alone_emotion_creation",
+      "target_judgement_agreement",
+      "self_denial_factification",
+      "diagnosis_or_personality_claim",
+      "cause_claim_or_action_instruction",
+      "raw_input_or_comment_text_body_in_public_meta",
+      "examples_as_runtime_templates"
+    ],
+    "phase15_modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "03_Cocolon_命名体系.md",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  },
+  "source_snapshot_2026_05_29_emlis_two_stage_composer_surface_connection_phase16_0_9": {
+    "premise": "Cocolon_前提資料(145).zip",
+    "design_doc": "Cocolon_EmlisAI_TwoStage_ComposerSurfaceConnection_詳細設計書_実装順_華恋用_2026-05-28(10).md",
+    "Cocolon": "Cocolon_10(10).zip",
+    "mashos-api": "mashos-api_10(18).zip",
+    "sha256": {
+      "Cocolon_前提資料(145).zip": "a4ab1508a06a7cfdad14361b77d7b752ad32ec4b4a0917fe5b61be3c27ca047a",
+      "Cocolon_10(10).zip": "a04b31c07bd46f2dd96838edd8824fa4305e7c253522f6eb416948742f3cc673",
+      "mashos-api_10(18).zip": "12a503ebe3c42c04722d031b949e2c1181767d4c5fe8c16ab4567d3099ab547f",
+      "Cocolon_EmlisAI_TwoStage_ComposerSurfaceConnection_詳細設計書_実装順_華恋用_2026-05-28(10).md": "176490db3e9bec8223baeabbb692565eca8b16d143f3595781a0e83fe23f9ecf"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 696,
+      "total": 913
+    },
+    "phase_scope": "EmlisAI TwoStage Composer Surface Connection Phase16-0〜16-9 premise reflection",
+    "implemented_phase_scope": "Phase16-0 red tests, Phase16-1 required Gate propagation, Phase16-2 section surface plan, Phase16-3 sentence plan section meta, Phase16-4 surface realizer two-stage comment_text, Phase16-5 daily unpleasant surface quality, Phase16-6 CompleteComposerClient connection, Phase16-7 Gate/self-repair/unavailable reason, Phase16-8 /emotion/submit E2E, Phase16-9 RN regression confirmed in provided snapshots.",
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_production_code_changed": false,
+    "rn_display_contract_changed": false,
+    "rn_display_title_changed": false,
+    "public_comment_text_key_changed": false,
+    "observation_text_public_response_key_added": false,
+    "reception_text_public_response_key_added": false,
+    "public_observation_status_enum_added": false,
+    "daily_reception_public_status_added": false,
+    "examples_as_runtime_templates": false,
+    "fixed_sentence_template_added": false,
+    "general_dictionary_lookup_required": false,
+    "raw_input_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "modified_premise_files": [
+      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
+      "Cocolon_前提資料/03_Cocolon_命名体系.md",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "confirmed_runtime_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_reception_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_gate_boundary.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_listener_reader_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ]
+  },
+  "emlis_two_stage_composer_surface_connection_policy_2026_05_29": {
+    "schema_version": "cocolon.emlis.two_stage_composer_surface_connection.phase16_0_9.2026-05-29",
+    "display_shape": "input_feedback.comment_text contains 見えたこと： and Emlisから： labels generated by CompleteComposer pipeline",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "internal_materials": [
+      "two_stage_section_surface_plan",
+      "CompleteSentencePlanLine.meta.two_stage_section_id",
+      "two_stage_surface_realization",
+      "daily_unpleasant_reception_surface_quality",
+      "phase16_7_unavailable_reason_codes"
+    ],
+    "reason_codes": [
+      "two_stage_required_but_unrealized",
+      "two_stage_complete_surface_realizer_label_missing",
+      "two_stage_complete_surface_realizer_section_empty",
+      "two_stage_complete_sentence_plan_section_meta_missing",
+      "two_stage_complete_sentence_plan_reception_section_missing",
+      "two_stage_complete_sentence_plan_observation_section_missing",
+      "two_stage_complete_surface_blocked_by_gate"
+    ],
+    "forbidden": [
+      "public_status_daily_reception",
+      "observation_text_or_reception_text_public_keys",
+      "rn_parse_two_stage_labels",
+      "rn_two_card_ui_in_phase16",
+      "general_dictionary_for_unknown_words",
+      "completed_reply_templates_in_dictionary",
+      "fixed_python_body_for_gate_pass",
+      "event_hint_alone_emotion_creation",
+      "target_judgement_agreement",
+      "self_denial_factification",
+      "diagnosis_or_personality_claim",
+      "cause_claim_or_action_instruction",
+      "raw_input_or_comment_text_body_in_public_meta",
+      "display_gate_relaxed_for_two_stage"
+    ],
+    "phase16_modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "03_Cocolon_命名体系.md",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  },
+  "source_snapshot_2026_05_30_emlis_two_stage_product_visible_fixture_completion_phase17_0_10": {
+    "premise": "Cocolon_前提資料(148).zip",
+    "design_doc": "Cocolon_EmlisAI_TwoStage_ProductVisibleFixtureCompletion_詳細設計書_実装順_華恋用_2026-05-29(10).md",
+    "Cocolon": "Cocolon_11(4).zip",
+    "mashos-api": "mashos-api_11(11).zip",
+    "sha256": {
+      "Cocolon_前提資料(148).zip": "b4c55519cac5e972adba7675be014c112c13f12a06db1134753bee881c268ed2",
+      "Cocolon_11(4).zip": "df9cbec341aebe376fdb8750b299876115c81ac77a23da074f111d59cb607bc3",
+      "mashos-api_11(11).zip": "aef04e0d0151011d029824742feccf12ebbea3983174118b20e2a20c2801a3af",
+      "Cocolon_EmlisAI_TwoStage_ProductVisibleFixtureCompletion_詳細設計書_実装順_華恋用_2026-05-29(10).md": "5411d7b2a9e6aa7cea368a1eb436fc11e9dae7d67ae52a402afa82ac78151bbe"
+    },
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 699,
+      "total": 916
+    },
+    "phase_scope": "EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 premise reflection",
+    "implemented_phase_scope": "Phase17-0 five fixture diagnostic, Phase17-1 product-visible fixture helper, Phase17-2 internal role surface phrase bank, Phase17-3 mode-specific two-stage surface policy, Phase17-4 mode section budget normalization, Phase17-5 Gate strengthening for internal role/relation skeleton leaks, Phase17-6 grounding relation binding for log3 effort/pace context, Phase17-7 self-repair/unavailable reason summary, Phase17-8 /emotion/submit five fixture E2E, Phase17-9 RN contract regression, Phase17-10 existing regression stabilization confirmed in provided snapshots.",
+    "api_route_changed": false,
+    "request_key_changed": false,
+    "response_key_changed": false,
+    "db_physical_name_changed": false,
+    "rn_production_code_changed": false,
+    "rn_display_contract_changed": false,
+    "rn_display_title_changed": false,
+    "public_comment_text_key_changed": false,
+    "observation_text_public_response_key_added": false,
+    "reception_text_public_response_key_added": false,
+    "public_observation_status_enum_added": false,
+    "daily_reception_public_status_added": false,
+    "examples_as_runtime_templates": false,
+    "fixed_sentence_template_added": false,
+    "general_dictionary_lookup_required": false,
+    "raw_input_in_public_meta": false,
+    "comment_text_body_in_public_meta": false,
+    "gate_relaxed": false,
+    "grounding_gate_relaxed": false,
+    "modified_premise_files": [
+      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
+      "Cocolon_前提資料/03_Cocolon_命名体系.md",
+      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "actual_diff_from_phase16_baseline": {
+      "Cocolon_added_files": [],
+      "Cocolon_removed_files": [],
+      "Cocolon_changed_files": [
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "mashos_api_added_files": [
+        "mashos-api/ai/tests/helpers/__init__.py",
+        "mashos-api/ai/tests/helpers/emlis_ai_two_stage_product_visible_fixture_assertions.py",
+        "mashos-api/ai/tests/test_emlis_ai_two_stage_product_visible_fixture_completion.py"
+      ],
+      "mashos_api_removed_files": [],
+      "mashos_api_changed_files": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_binding.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_reception_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_grounding_relation_binding_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_self_repair.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_surface_realizer_two_stage_comment_text.py",
+        "mashos-api/ai/tests/test_emlis_ai_complete_surface_realizer_v2.py",
+        "mashos-api/ai/tests/test_emlis_ai_two_stage_reception_gate.py",
+        "mashos-api/ai/tests/test_emlis_ai_visible_surface_acceptance_gate.py",
+        "mashos-api/ai/tests/test_emotion_submit_two_stage_reception_e2e.py"
+      ]
+    },
+    "confirmed_runtime_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_reception_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_binding.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_grounding_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_grounding_judge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_self_repair_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_template_echo_guard.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py",
+      "mashos-api/ai/tests/helpers/emlis_ai_two_stage_product_visible_fixture_assertions.py",
+      "mashos-api/ai/tests/test_emlis_ai_two_stage_product_visible_fixture_completion.py",
+      "mashos-api/ai/tests/test_emotion_submit_two_stage_reception_e2e.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ]
+  },
+  "emlis_two_stage_product_visible_fixture_completion_policy_2026_05_30": {
+    "schema_version": "cocolon.emlis.two_stage_product_visible_fixture_completion.phase17_0_10.2026-05-30",
+    "display_shape": "input_feedback.comment_text contains labelled 見えたこと： and Emlisから： two-stage text for the five product-visible fixtures",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "target_fixture_ids": [
+      "daily_unpleasant_encounter_A",
+      "self_confidence_uncertainty_B",
+      "positive_change_after_work_streaming",
+      "self_blame_to_gentle_self_observation",
+      "independence_life_health_money_pace"
+    ],
+    "internal_materials": [
+      "product_visible_fixture_evaluation",
+      "product_visible_surface_policy",
+      "phase17_internal_role_surface_phrase_bank",
+      "two_stage_mode_section_budget",
+      "two_stage_internal_role_label_leak",
+      "two_stage_relation_skeleton_leak_surface",
+      "phase17_6_grounding_relation_binding",
+      "phase17_7_self_repair_unavailable_reason",
+      "phase17_10_public_contract_prescan"
+    ],
+    "reason_codes": [
+      "phase17_surface_mode_policy_missing",
+      "phase17_internal_role_label_leak",
+      "phase17_relation_skeleton_leak",
+      "phase17_section_budget_mismatch",
+      "phase17_grounding_relation_binding_missing",
+      "phase17_product_visible_fixture_not_reached",
+      "two_stage_internal_role_label_leak",
+      "two_stage_complete_surface_internal_label_leak",
+      "two_stage_relation_skeleton_leak",
+      "two_stage_relation_skeleton_leak_surface"
+    ],
+    "forbidden": [
+      "public_status_daily_reception",
+      "observation_text_or_reception_text_public_keys",
+      "rn_parse_two_stage_labels",
+      "rn_two_card_ui_in_phase17",
+      "completed_reply_templates_in_dictionary",
+      "fixed_python_body_for_gate_pass",
+      "case_id_specific_runtime_reply_branch",
+      "internal_role_label_surface_leak",
+      "relation_skeleton_surface_leak",
+      "grounding_gate_relaxed_for_log3",
+      "display_gate_relaxed_for_two_stage",
+      "raw_input_or_comment_text_body_in_public_meta"
+    ],
+    "phase17_modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "03_Cocolon_命名体系.md",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  },
+  "source_snapshot_2026_05_30_emlis_product_quality_stabilization_phase18_0_11": {
+    "date": "2026-05-30",
+    "premise": "Cocolon_前提資料(150).zip",
+    "Cocolon": "Cocolon_12(7).zip",
+    "mashos-api": "mashos-api_12(10).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 712,
+      "total": 929
+    },
+    "sha256": {
+      "premise": "de695dafbad34ea88bfebf5170ee7ca4616c1d1161da5ff8c9dde9c3e8b87b9e",
+      "Cocolon": "45af7f062ef69874c7671ae46fb2cdb1ce230a51feb8b6e0ee5b24ec73da32b0",
+      "mashos-api": "1b024fb814bda1c8b475cdf49727244c7743d57040a0e8965292c7ce6a2dc3a7"
+    },
+    "baseline_compared": {
+      "Cocolon": "Cocolon(196).zip",
+      "mashos-api": "mashos-api(109).zip",
+      "sha256": {
+        "Cocolon": "d0adce2e228e423caeaad10fd18a7b00f660c7c8ffaa3a94a6780e47c33d190a",
+        "mashos-api": "87eda95cee7bc6aeff2e3c2a97b79f942d3fecba1a74e541d92293e08261af71"
+      }
+    },
+    "actual_diff_from_phase17_baseline": {
+      "Cocolon_added_files": [],
+      "Cocolon_removed_files": [],
+      "Cocolon_changed_files": [
+        "Cocolon/tests/rn-screen-contracts.test.js"
+      ],
+      "mashos_api_added_files": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_diagnostic_failure_taxonomy.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_applicability.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_visible_readability_quality.py",
+        "mashos-api/ai/tests/helpers/emlis_ai_phase18_product_quality_matrix.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_complete_initial_candidate_path.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_daily_unpleasant_mode_context.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_diagnostic_classification_taxonomy.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_low_information_public_repair_boundary.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_product_quality_stabilization.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_state_answer_surface_contract_meta_sanitizer.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_two_stage_applicability.py",
+        "mashos-api/ai/tests/test_emlis_ai_phase18_visible_readability_quality.py",
+        "mashos-api/ai/tests/test_emotion_submit_phase18_product_quality_e2e.py"
+      ],
+      "mashos_api_removed_files": [],
+      "mashos_api_changed_files": [
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_sentence_planner.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_branching.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_diagnostic_lockdown.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_connection_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_reception_gate.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+        "mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py",
+        "mashos-api/ai/tests/test_emlis_ai_diagnostic_summary.py",
+        "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase4_connection.py",
+        "mashos-api/ai/tests/test_emlis_ai_state_answer_surface_contract.py"
+      ]
+    },
+    "modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "01_Cocolon_全体構造資料.md",
+      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "02_Cocolon_国家システム資料.md",
+      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "03_Cocolon_命名体系.md",
+      "04_Cocolon_変更テーマ別チェックリスト",
+      "05_Cocolon_ルールファイル索引",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ],
+    "runtime_contract_unchanged": true
+  },
+  "emlis_product_quality_stabilization_phase18_policy_2026_05_30": {
+    "schema_version": "cocolon.emlis.product_quality_stabilization.phase18_0_11.2026-05-30",
+    "display_shape": "input_feedback.comment_text remains the only public visible body; labelled 見えたこと： / Emlisから： remains inside comment_text when passed",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "observation_status_enum_added": [],
+    "db_physical_name_changed": false,
+    "api_route_changed": false,
+    "internal_materials": [
+      "product_quality_regression_matrix",
+      "two_stage_applicability_decision",
+      "low_information_public_repair_contract",
+      "two_stage_mode_context",
+      "meta_only_sanitizer",
+      "diagnostic_failure_taxonomy",
+      "visible_readability_quality",
+      "public_feedback_boundary_check",
+      "complete_initial_candidate_generation_path"
+    ],
+    "added_runtime_helpers": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_applicability.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_diagnostic_failure_taxonomy.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_visible_readability_quality.py"
+    ],
+    "added_phase18_tests": [
+      "mashos-api/ai/tests/helpers/emlis_ai_phase18_product_quality_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_complete_initial_candidate_path.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_daily_unpleasant_mode_context.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_diagnostic_classification_taxonomy.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_low_information_public_repair_boundary.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_product_quality_stabilization.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_state_answer_surface_contract_meta_sanitizer.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_two_stage_applicability.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase18_visible_readability_quality.py",
+      "mashos-api/ai/tests/test_emotion_submit_phase18_product_quality_e2e.py"
+    ],
+    "forbidden": [
+      "observation_text_or_reception_text_public_keys",
+      "rn_parse_two_stage_labels",
+      "rn_two_card_ui_in_phase18",
+      "public_response_key_from_phase18_meta",
+      "surface_policy_body_in_public_meta",
+      "raw_input_or_comment_text_body_in_public_meta",
+      "display_gate_relaxed",
+      "grounding_gate_relaxed",
+      "reader_gate_relaxed",
+      "template_gate_relaxed",
+      "completed_reply_templates_in_dictionary",
+      "case_id_specific_runtime_reply_branch",
+      "safety_scope_ap0_rollout_passed_by_low_information_repair"
+    ],
+    "phase18_modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "01_Cocolon_全体構造資料.md",
+      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "02_Cocolon_国家システム資料.md",
+      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "03_Cocolon_命名体系.md",
+      "04_Cocolon_変更テーマ別チェックリスト",
+      "05_Cocolon_ルールファイル索引",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  }
 }

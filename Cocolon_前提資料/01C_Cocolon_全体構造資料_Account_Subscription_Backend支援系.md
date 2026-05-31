@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-24"
+revision_date: "2026-05-26"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4510,3 +4510,41 @@ backend support / tests側では、EmlisAI internal metaを保持する診断系
 | `test_emotion_submit_notification_settings_uuid_boundary.py` | notification settings read viewのuuid filterへglobal sentinel文字列を混ぜないことを固定する。 |
 
 backend診断用のinternal metaは捨てない。`_log_emlis_ai_observation_result` / `_log_emlis_ai_observation_diagnostic_lockdown` はinternal metaを使い、public responseへはsanitized metaだけを返す。
+
+
+# 2026-05-25 差分追記: Backend支援 EmlisAI Product Visible Surface Reliability + Koto Splice Repair Step0-8
+
+`mashos-api_8(27).zip` では、backend support / test領域で EmlisAI Product Visible Surface Reliability + Koto Splice Repair Step0-8 が反映されています。これはAccount / Subscription / DB / public APIの変更ではなく、EmlisAI reply runtime内部の表示文品質、repair reroute、public-safe diagnostic summary、RN contractの更新です。
+
+| path | 変更の読み方 |
+|---|---|
+| `services/ai_inference/emlis_ai_phrase_unit_grammar_normalizer.py` | `malformed_nominalization_conditional_fragment`、`malformed_nominalization_prediction_noun_fragment`、`residual_koto_splice_fragment`、`long_clause_koto_attachment_risk` をguard codeとして持つ。 |
+| `services/ai_inference/emlis_ai_limited_sentence_quality_guard.py` | koto splice系materialをblocking material flagへ反映する。 |
+| `services/ai_inference/emlis_ai_complete_surface_quality_signature.py` | surface signature上に malformed nominalization code / countを保持する。 |
+| `services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py` | comment_text全体のkoto spliceをRuntime Gateで検出し、`koto_splice_detected` / `koto_splice_codes` をmeta-onlyで返す。 |
+| `services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py` | koto spliceをred、relation skeleton / analytic registerをrepair対象として扱う。 |
+| `services/ai_inference/emlis_ai_relation_surface_contract.py` | `PhraseSurfaceShapeSignal`、`classify_phrase_surface_shape(...)`、`compress_phrase_for_relation_surface(...)` を持つ。 |
+| `services/ai_inference/emlis_ai_limited_composer_client.py` | Shallow Surface Realizer V2で `phrase + こと` 直結と長いraw clause passthroughを避ける。 |
+| `services/ai_inference/emlis_ai_bounded_repair_reroute.py` | `visible_surface_acceptance_gate_report` を受け、Visible Gateの `rerender_surface` を一回修復候補に含める。 |
+| `services/ai_inference/emlis_ai_public_feedback_meta.py` | `display_absence_summary` をpublic-safe subsetとして残し、本文・raw input・evidenceを出さない。 |
+| `services/ai_inference/emotion_submit_service.py` | public feedback inclusion / absence summaryを組み立て、non-passedやempty commentではfeedbackを返さない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | Step7 diagnostic metaが表示条件を開かないことを固定する。 |
+
+対象回帰として、backend Step0-7周辺 `173 passed`、async diagnostic / contract `8 passed, 1 warning`、RN contract `28 passed` を確認済みとして読む。warningは既存 Pydantic `@root_validator` deprecationであり、この差分のcontract変更ではない。
+
+
+# 2026-05-26 差分追記: Backend支援 EmlisAI ESO surface contract completion Phase0-6
+
+`mashos-api_7(30).zip` では、EmlisAI backend support / test領域に Environment State Output Surface Contract Completion Phase0-6 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、EmlisAI immediate replyの公開表示前出口整合である。
+
+| path | 変更の読み方 |
+|---|---|
+| `services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py` | 新規shared helper。`EnvironmentStateOutputSurfaceContract` / `ScopeMarkerCompletionResult` を持ち、scope marker補完・idempotent・greeting skip・forbidden surface rejectionを担当する。 |
+| `services/ai_inference/emlis_ai_conversation_composer_service.py` | normalize前candidateへmarker completionを接続し、surface validation前にEmlisAI public surface contractを満たせるか確認する。 |
+| `services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py` | runtime返却直前でもmarker presenceとforbidden surfaceを再確認し、terminal blockをrerenderへ逃がさない。 |
+| `services/ai_inference/emlis_ai_public_feedback_meta.py` | environment_state_output terminal reasons / runtime block / marker check failure時はpublic feedbackを出さず、内部completion resultをpublic metaに出さない。 |
+| `services/ai_inference/emotion_submit_service.py` | `should_include_public_input_feedback(...)` を通ったcomment_textだけをpublic responseへ返す。 |
+| `services/ai_inference/emlis_ai_observation_display_repair_integration.py` | 非repairable unavailable candidateやユーザー由来signalなしの入力をlow-information repairへ持ち上げない。 |
+| `services/ai_inference/emlis_ai_limited_composer_client.py` | limited composer source監査上のfallback文字列を整理し、固定完成文fallbackへ戻さない。 |
+
+対象回帰確認: 前提資料更新時に、surface contract completion / runtime pre-return gate / public meta boundary / environment_state_output cross-core contract のtargeted regression `71 passed` を確認。全量pytestはこの前提資料更新では実行していない。

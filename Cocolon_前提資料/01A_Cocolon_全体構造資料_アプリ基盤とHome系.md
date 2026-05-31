@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-24"
+revision_date: "2026-05-30"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2768,3 +2768,94 @@ Home / Input側の不変契約:
 - `inputFeedbackModel.js` の表示条件は `passed + commentText` のまま。
 - `visible_surface_acceptance_gate` meta、hidden raw input、candidate body、evidence textをRN表示材料にしない。
 - `/emotion/submit` timeout recoveryは保持する。visible gate failureを入力保存失敗として表示しない。
+
+
+# 2026-05-25 差分追記: EmlisAI Product Visible Surface Reliability / Koto Splice Repair 接続
+
+Home / Input系から見た最新構造では、`Emlisの観測` の表示条件は変わらず、backend側の表示前品質境界が強化されています。`Cocolon_8(14).zip` 側はRN本体変更ではなく、`tests/rn-screen-contracts.test.js` にStep7 diagnostic metaが表示条件を開かない回帰が追加されています。`mashos-api_8(27).zip` 側は、C相当のkoto splice RED固定、B相当のrelation skeleton修復、Shallow V2安全化、bounded repair reroute、public-safe diagnostic summaryを持ちます。
+
+Home / Input / immediate reply上の読み方:
+
+| flow | owner | 現行境界 |
+|---|---|---|
+| 表示候補生成 | `emlis_ai_reply_service.py`, `emlis_ai_limited_composer_client.py` | candidate本文生成後にRuntime Gate / Visible Gateへ進む。 |
+| koto splice guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py` | `取らなければこと` / `予感こと` / `ことこと` 等をcandidate material段階で止める。 |
+| runtime surface gate | `emlis_ai_runtime_surface_pre_return_gate.py` | comment_text表面のkoto spliceを `koto_splice_detected` / `koto_splice_codes` としてmeta-onlyで持ち、危険時はrerenderまたはblock。 |
+| visible acceptance gate | `emlis_ai_visible_surface_acceptance_gate.py` | C相当はred、B相当はrepair_required、A相当はpassに分ける。 |
+| shallow relation safety | `emlis_ai_relation_surface_contract.py` | `PhraseSurfaceShapeSignal` と `compress_phrase_for_relation_surface(...)` により、義務・予感・長いraw clauseをrelation lineへ雑に渡さない。 |
+| public meta / display absence | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py` | `display_absence_summary` はcode / booleanだけで、raw inputやcandidate本文を出さない。 |
+| RN display | `inputFeedbackModel.js`, `InputFeedbackReplyModal.js`, `rn-screen-contracts.test.js` | 表示タイトル `Emlisの観測` と `passed + commentText` を維持し、diagnostic metaだけでは表示しない。 |
+
+禁止: koto splice検出を理由にRN表示条件を変える、表示率のためにGateを緩める、public metaへ本文を入れる、fixed fallback良文で上書きする、`/emotion/submit` のroute / key / DB write pathを変える。
+
+
+# 2026-05-26 差分追記: Home / Input / EmlisAI ESO surface contract completion接続
+
+`Cocolon_7(14).zip` 側のRN表示条件は変わらない。`mashos-api_7(30).zip` 側では、Home / Inputから `/emotion/submit` 後に返る `Emlisの観測` のcandidateが、環境状態出力観測構造を本文に使う場合だけ、backend内部で次の順に確認される。
+
+```text
+conversation composer candidate
+→ normalize前 scope marker completion
+→ environment_state_output surface rejection check
+→ Runtime Surface Pre-Return Gate double check
+→ Display Gate / public meta sanitizer
+→ RN passed + commentText display
+```
+
+| owner | Home / Input上の読み方 |
+|---|---|
+| `emlis_ai_environment_state_output_surface_contract_completion.py` | `今回の入力では` 等の単発観測scope markerを、first body lineへ一度だけ付与するshared helper。完成文テンプレではない。 |
+| `emlis_ai_conversation_composer_service.py` | candidate normalize前にhelperを通し、`environment_state_output_scope_marker_missing` をcandidate本文の整形不足として扱う。forbidden surface claimがあれば補完せずschema_invalidにする。 |
+| `emlis_ai_runtime_surface_pre_return_gate.py` | normalize前で補完済みでも、返却直前に実comment_text上のmarkerを再確認する。signatureだけでは通さない。 |
+| `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py` | completion result / surface contract / raw input / candidate bodyをpublic metaへ出さず、public `observation_status=passed` + comment_text非空の場合だけfeedbackを返す。 |
+
+不変契約: `InputFeedbackReplyModal.js` のvisible title、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit` route、RN表示条件 `passed + commentText` は変更しない。
+
+
+# 2026-05-26 差分追記: Home / Input / EmlisAI状態回答と人間的フォロー Phase2-10 接続
+
+Home / Input側から見た最新構造では、`Emlisの観測` の表示条件は変わらず、backend側で状態回答surface contractと人間的フォローの内部materialが接続されています。RN側 `Cocolon_10(9).zip` には今回差分なしです。
+
+| flow | owner | 現行境界 |
+|---|---|---|
+| 入力整理 | `emlis_ai_current_input_bundle.py`, `cocolon_environment_state_output_frame.py` | memo / memo_action / emotions / category / created_atを、raw本文をpublicへ出さずに内部frameへ整理する。 |
+| 状態回答contract | `emlis_ai_state_answer_surface_contract.py` | 観測層と人間的フォロー層をinternal materialに分ける。 |
+| フォロー選択 | `emlis_ai_human_follow_selector.py` | 感情ラベル単体ではなく、frameのoutput themeやrelation roleを併用してfollow keyを選ぶ。 |
+| 比率 / special handling / metaphor | `emlis_ai_state_answer_ratio_policy.py`, `emlis_ai_state_answer_special_cases.py`, `emlis_ai_safe_daily_metaphor_material.py` | 観測6:フォロー4、自己否定/怒り境界、安全日常比喩を内部materialとして扱う。 |
+| Composer接続 | `emlis_ai_state_answer_composer_contract.py`, `emlis_ai_limited_composer_client.py`, `emlis_ai_conversation_composer_service.py` | 完成文テンプレではなく、Observation section / Human follow sectionのrole planとして渡す。 |
+| 表示前Gate | `emlis_ai_state_answer_gate_boundary.py`, `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_visible_surface_acceptance_gate.py`, `emlis_ai_display_gate.py` | 診断・行動指示・人格断定・原因断定・怒り同意・自己否定例外の暴走を表示前に止める。 |
+| public meta | `emlis_ai_public_feedback_meta.py` | `input_feedback.emlis_ai` へ小さいsummaryだけを出し、contract body / raw evidence / comment_text bodyは返さない。 |
+
+Home/Input側の不変契約:
+
+- `InputFeedbackReplyModal.js` のvisible titleは `Emlisの観測` のまま。
+- `inputFeedbackModel.js` の表示条件は `passed + commentText` のまま。
+- `/emotion/submit` のroute、request key、response keyは変更しない。
+- `input_feedback.comment_text` のpublic契約は変更しない。
+- 状態回答contract / human_follow_layer / ratio_policy / special_handling / metaphor_policy はRN表示条件やpublic response keyではない。
+
+
+# 2026-05-30 差分追記: Home / EmlisAI immediate reply Phase18 current owner
+
+Phase18後のHome immediate replyでは、EmlisAIの表示可否は引き続きbackendで決まり、RNは既存 `commentText` を受け取るだけである。Home側production UI、`/emotion/submit` route、public response top-level keyは変更しない。
+
+主なowner:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py
+mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py
+mashos-api/ai/services/ai_inference/emlis_ai_two_stage_applicability.py
+mashos-api/ai/services/ai_inference/emlis_ai_visible_readability_quality.py
+mashos-api/ai/tests/test_emotion_submit_phase18_product_quality_e2e.py
+Cocolon/tests/rn-screen-contracts.test.js
+```
+
+読み方:
+
+- low-informationは短い入力だけrepair可能。保存・表示・診断の境界を混ぜない。
+- Complete Initialはcandidate generationとpublic display decisionを分ける。
+- daily_unpleasantはmode contextをSurfaceRealizerへ伝搬する。
+- public metaへraw input、comment_text body、surface_policy本体を出さない。
+- RNは `observation_text` / `reception_text` を要求しない。
+

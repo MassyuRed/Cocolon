@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-24"
+revision_date: "2026-05-30"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -563,3 +563,181 @@ Visible Surface Acceptance QA Step0-8 を触る場合は、Runtime Surface Gate�
 | Dictionary loader regression stability | `emlis_ai_observation_structure_dictionary_loader.py`, `test_emlis_ai_observation_structure_dictionary_loader.py`, `test_emlis_ai_observation_structure_dictionary_schema.py` | `jsonschema` eager import、schema subset validation、pytest collection実行性を触る時。 |
 
 禁止: visible gate metaだけでRN表示可否を決める、public metaへcomment_text本文やraw inputを入れる、`Userさん` をaccount name由来なのに赤ケース扱いする、positive_onlyで根拠なく重さ系へ寄せる、Display Gate / Grounding / Template Guardを緩める。
+
+
+# 2026-05-25 差分追記: EmlisAI Product Visible Surface Reliability + Koto Splice Repair rule / test index
+
+Product Visible Surface Reliability + Koto Splice Repair Step0-8 を触る場合は、Visible Surface Gateだけでなく、PhraseUnit / Limited Guard、Runtime Surface Gate、Shallow Surface Realizer V2、bounded repair reroute、public meta / diagnostic summary、RN contractを同時確認する。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| Koto splice fixture inventory | `tests/fixtures/emlis_ai_visible_surface_acceptance_fixtures.py`, `tests/fixtures/emlis_ai_runtime_surface_red_fixtures.py`, `test_emlis_ai_visible_surface_acceptance_inventory_step0.py` | A/B/C/表示なしfixture、expected classification、runtime red fixtureを触る時。 |
+| PhraseUnit / Limited Guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py`, `test_emlis_ai_malformed_nominalization_phrase_unit_guard.py` | `malformed_nominalization_conditional_fragment`、`malformed_nominalization_prediction_noun_fragment`、`residual_koto_splice_fragment`、`long_clause_koto_attachment_risk` を触る時。 |
+| Runtime Surface Gate | `emlis_ai_complete_surface_quality_signature.py`, `emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_complete_surface_quality_signature_step2.py` | `koto_splice_detected` / `koto_splice_codes` / `surface_malformed_nominalization_codes` を触る時。 |
+| Visible Surface Acceptance Gate | `emlis_ai_visible_surface_acceptance_gate.py`, `test_emlis_ai_visible_surface_acceptance_gate.py` | C red、B repair_required、relation skeleton / analytic register分類を触る時。 |
+| Shallow Surface Realizer V2 safety | `emlis_ai_relation_surface_contract.py`, `emlis_ai_limited_composer_client.py`, `test_emlis_ai_relation_surface_contract.py`, `test_emlis_ai_limited_composer_client.py` | `PhraseSurfaceShapeSignal`、`compress_phrase_for_relation_surface(...)`、`phrase + こと` 直結禁止を触る時。 |
+| bounded repair reroute | `emlis_ai_bounded_repair_reroute.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_bounded_repair_reroute_step7.py` | Visible Gate `rerender_surface`、`surface_rerender_allowed`、`visible_surface_rerender_allowed`、one-shot rerenderを触る時。 |
+| public meta / diagnostic summary | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `emlis_ai_observation_diagnostic_lockdown.py`, `test_emlis_ai_public_feedback_meta.py`, `test_emotion_submit_public_feedback_meta_boundary.py`, `test_emotion_submit_observation_diagnostic_log.py` | `display_absence_summary`、`candidate_blocked_koto_splice`、`candidate_repair_failed`、raw非混入を触る時。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | diagnostic meta / visible gate meta / candidate_comment_text / raw_input が表示条件を開かないことを触る時。 |
+
+禁止: visible gate / diagnostic metaだけでRN表示する、public metaへ本文を入れる、Display Gate / Grounding / Template Guardを緩める、fixed fallback良文を入れる、`/emotion/submit` route / response key / DB write pathを変える。
+
+# 2026-05-25 差分追記: 環境状態出力観測構造 rule / test index
+
+環境状態出力観測構造を触る場合は、Cocolonが既に取得している `category` / `memo_action` / `emotion_details` / `memo` / `created_at` を、文章単体ではなく「環境ラベル × 状態ラベル × 出力内容」の観測単位として読む。Phase9時点では、current input bundle接続、単発観測frame builder、EmlisAI observation structure material / connection / Display Gate traceへのsafe projection接続、EmlisObservationComposerでの単発観測限定利用、PieceComposerへの過圧縮防止接続、Analysis向け期間再出現material、AnalysisComposer表示接続、横断境界テストまで実装済み。さらにEmlisAI ESO surface contract completionにより、単発観測scope marker補完、forbidden surface claim拒否、runtime二重確認、public meta境界、回帰補正がbackend内部品質境界として固定されている。
+
+| rule / guard / test | owner / 候補 | 触る時 |
+|---|---|---|
+| Phase0正本設計書 | `Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md` | この構造の定義、実装順、json/schema案、禁止境界を確認する時。 |
+| current input bundle境界 | `emlis_ai_current_input_bundle.py`, `test_emlis_ai_current_input_bundle.py` | `memo` / `memo_action` / `emotion_details` / `category` / `created_at` を内部bundleへ読む時。 |
+| 単発観測frame builder | `cocolon_environment_state_output_frame.py`, `test_cocolon_environment_state_output_frame.py` | `EmlisCurrentInputBundle` から `environment_state_output_frame` を作る時。Phase3で内部実装済み。完成文・public response・schema実ファイルは作らない。 |
+| EmlisAI observation material接続 | `emlis_ai_observation_structure_material_service.py`, `emlis_ai_observation_structure_connection_service.py`, `emlis_ai_display_gate.py`, `test_emlis_ai_observation_structure_phase4_connection.py`, `test_emlis_ai_observation_structure_phase6_forbidden_inference_meta_contract.py` | `environment_state_output_frame` safe projectionをGate / Composer参照materialへ渡す時。Phase4で内部接続済み。完成文・public text・raw inputは返さない。 |
+| EmlisAI単発観測限定利用 | `emlis_ai_observation_structure_material_service.py`, `emlis_ai_conversation_composer_service.py`, `emlis_ai_limited_composer_client.py`, `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_display_gate.py`, `test_emlis_ai_observation_structure_phase5_limited_use.py`, `test_emlis_ai_observation_current_display_contract.py` | `environment_state_output_frame` を表示文に使う時。Phase4 safe projection内の `output_theme_candidates` はraw textを含まないtheme id / evidence idsとして扱い、Limited Composerでは安全なtheme unitとscope markerに限定する。必ず「今回の入力では」等の単発観測範囲に限定し、傾向・性格・原因・回復方法として出さない。Phase5で内部実装済み。 |
+| Piece過圧縮防止 | `piece_environment_state_output_guard.py`, `piece_composer.py`, `piece_composer_input_contract.py`, `emotion_piece_generation_service.py`, `test_piece_environment_state_output_phase6.py` | 環境・状態・出力条件を削りすぎてPieceの核が潰れないか見る時。Phase6で `environment_state_output_frame` からPiece用must_keep signalを作り、ユーザー主体の一問一答で核を保持する。ただしEmlis調・Analysis傾向化・入力にない結論追加はしない。 |
+| Analysis期間再出現 | `cocolon_text_generation_core/adapters/analysis_environment_state_output_material.py`, `test_analysis_environment_state_output_phase7.py` | Phase7で保存済みrecordsからsafe frame projectionを作り、`conditional_output_tendency` / `recovery_label_path` を内部materialとして設計する時。public Analysis textにはまだ接続しない。 |
+
+禁止:
+
+- categoryを原因にしない。
+- emotion strengthを原因にしない。
+- 1件の入力から傾向・人格・性格を作らない。
+- recovery_label_pathを治療・処方・回復方法として表示しない。
+- Analysisで「あなたはこういう人です」と言わない。
+- Pieceで「不安です」だけへ潰すような過圧縮をしない。
+- EmlisAIを完成文テンプレや固定共感文へ戻さない。
+- Phase4 safe projectionを理由にDisplay Gateを緩めない。
+- Phase5の表示利用では、scope markerなしで `environment_state_output_frame` を使わない。
+- 1件入力から「いつも」「傾向」「タイプ」「原因」「回復方法」へ表面化しない。
+- `environment_state_output_frame` をpublic response keyとして追加しない。
+- `/emotion/submit` route、response key、DB write path、RN表示条件を変更しない。
+
+
+# 2026-05-25 差分追記: 環境状態出力観測構造 Phase6 PieceComposer 過圧縮防止 rule / test index
+
+Phase6で、`environment_state_output_frame` をPieceComposerへ接続する。ただし接続目的は、Piece本文をEmlisの観測文に寄せることではなく、公開可能な問いと答えへ整える過程で「環境・状態・出力条件」を削りすぎてユーザーの核を潰さないようにすることに限定する。
+
+| rule / guard / test | owner | 拘束内容 |
+|---|---|---|
+| Piece ESO guard | `cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py` | `environment_state_output_frame` から `eso_environment:*` / `eso_state:*` / `eso_output:*` のmust_keep signalを内部生成する。raw `memo` / `memo_action` 本文は返さない。 |
+| Piece input contract | `cocolon_text_generation_core/adapters/piece_composer_input_contract.py` | Pieceの `must_keep_signal_keys` / `source_claims` / `overcompression_risk` へPhase6 guardを接続する。preview / publish同一性を壊さない。 |
+| PieceComposer runtime | `cocolon_text_generation_core/adapters/piece_composer.py` | runtime plan / safety policy / common core guardへPhase6 guard metaを渡す。Emlis voice、Analysis period tendency、原因化、人格化、回復処方は禁止。 |
+| Emotion Piece preview | `emotion_piece_generation_service.py` | core planがない場合にのみ、環境・状態・出力条件を保つpreview文へ補助する。Pieceはユーザー主体の一問一答であり、Emlisの話しかけ文ではない。 |
+| Phase6 regression | `test_piece_environment_state_output_phase6.py` | 「仕事 × 不安 × 継続不安」を「不安です」だけに潰さないこと、state-only過圧縮をcommon coreでrejectすること、guardがraw textを含まないことを固定する。 |
+
+禁止: `environment_state_output_frame` をpublic response keyへ出す、raw `memo` / `memo_action` をguard materialへ入れる、PieceをEmlis調にする、Analysisの期間傾向として出す、categoryを原因にする、emotion strengthを原因にする、1件入力から人格・性格・タイプを作る、入力にない解決策や結論を足す。
+
+
+# 2026-05-25 差分追記: 環境状態出力観測構造 Phase7 Analysis向け傾向material 内部設計 rule / test index
+
+Phase7では、`environment_state_output_frame` をAnalysisのpublic表示へ接続せず、保存済みrecordsから期間内再出現を見るための内部materialを設計・実装する。EmlisAIの単発観測文やPieceのmust_keep guardを流用せず、Analysisでは「この期間の記録では」という期間限定表現へ将来接続できる材料だけを保持する。
+
+| rule / guard / test | owner | 拘束内容 |
+|---|---|---|
+| Analysis ESO period material | `cocolon_text_generation_core/adapters/analysis_environment_state_output_material.py` | 保存済みrecordsからtext-free safe frame projectionを作り、`conditional_output_tendency` と `recovery_label_path` を内部materialとして生成する。raw `memo` / `memo_action` 本文は返さない。 |
+| conditional output tendency | `analysis_environment_state_output_material.py` | 同じ環境・状態・出力themeが期間内で再出現した場合だけ `recurrence_candidate` / `period_tendency_candidate` 等にする。1件入力をperiod tendencyにしない。 |
+| recovery label path | `analysis_environment_state_output_material.py` | 状態が重い入力から、自己理解・平穏・安心等へ移る隣接recordを sequence observation として扱う。治療・処方・回復方法にはしない。 |
+| domain boundary | `analysis_environment_state_output_material.py` | emotion log由来の `category` / `memo_action` は環境材料として許可するが、`text_primary` / `role_hint` 等のself-structure source material混入はrejected_sourcesへ隔離する。 |
+| Phase7 regression | `test_analysis_environment_state_output_phase7.py` | 期間再出現material、1件傾向化禁止、回復経路処方禁止、self-structure素材混入拒否、summary meta-only / raw text非混入を固定する。 |
+
+禁止: Phase7 materialからpublic Analysis本文を作る、Analysis content payload / standardReport / contentTextを変更する、json/schema実ファイル化する、categoryを原因にする、emotion strengthを原因にする、1件入力から傾向・人格・性格・タイプを作る、recovery_label_pathを治療・処方・回復方法として出す、感情分析materialとself-structure素材を混ぜる。
+
+
+# 2026-05-25 差分追記: 環境状態出力観測構造 Phase8 AnalysisComposer表示接続 rule / test index
+
+Phase8で `analysis_environment_state_output_period_material` をAnalysis表示候補へ接続する場合は、Phase7 materialのraw text非混入・record_count / distinct_day_count / representative evidence・期間限定表現・回復処方禁止を同時に確認する。AnalysisComposerに接続しても、content_json / standardReport / contentText の既存contractを勝手に変更してはいけない。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| Phase8 ESO surface adapter | `analysis_environment_state_output_surface.py`, `test_analysis_environment_state_output_phase8_display_connection.py` | `conditional_output_tendency` / `recovery_label_path` をAnalysis表示候補へ変換する時。 |
+| AnalysisComposer Phase8 direct connection | `analysis_composer.py`, `test_analysis_environment_state_output_phase8_display_connection.py` | Phase7 materialを `material_sources` として直接渡し、safe summary sourcesへ変換する時。 |
+| Analysis strict overclaim wording | `analysis_composer.py`, `analysis_report_validity_gate.py` | 「戻りやすい」「回復方法」「原因です」「いつも」など、Analysisが処方・原因・断定に見えるsurfaceを触る時。 |
+| Public contract non-mutation | `analysis_composer.py`, `analysis_report_validity_gate.py`, `analysis_report_schema.json` | Analysis表示接続後も `content_json` / `standardReport` / `contentText` のshapeを変えない境界を触る時。 |
+
+禁止: Phase7 materialをraw materialのままAnalysisComposerへ流す、raw memo / raw memo_actionを表示候補やmetaへ入れる、1件入力をperiod tendencyにする、`recovery_label_path` を「戻りやすい」「回復方法」「治る」にする、categoryやemotion strengthから原因を作る、Analysisを診断・タイプ化・人格化する。
+
+# 2026-05-25 差分追記: 環境状態出力観測構造 Phase9 横断テスト rule / test index
+
+環境状態出力観測構造を触る場合は、Emlis / Piece / Analysis の役割が混ざっていないことを横断で確認する。Phase9では、単発観測・核保持・期間観測の境界、RN表示契約、public API route / response key / DB physical name の非破壊性をテストで固定する。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| Phase9 cross-core contract | `mashos-api/ai/tests/test_environment_state_output_phase9_cross_core_contract.py` | 環境状態出力観測構造をEmlis / Piece / Analysisに横断接続する時。 |
+| Emlis single-record material | `cocolon_environment_state_output_frame.py`, `emlis_ai_observation_structure_material_service.py` | `environment_state_output_frame` の単発観測scope、raw非混入、原因化禁止を触る時。 |
+| Piece overcompression prevention | `piece_environment_state_output_guard.py`, `piece_composer_input_contract.py`, `piece_composer.py`, `emotion_piece_generation_service.py` | `eso_environment:*` / `eso_state:*` / `eso_output:*` のmust_keepや過圧縮防止を触る時。 |
+| Analysis period observation | `analysis_environment_state_output_material.py`, `analysis_environment_state_output_surface.py`, `analysis_composer.py`, `analysis_report_validity_gate.py` | `conditional_output_tendency` / `recovery_label_path` の表示接続やAnalysis安全表面を触る時。 |
+| Public feedback meta / RN display contract | `emlis_ai_public_feedback_meta.py`, `api_emotion_submit.py` | `input_feedback.emlis_ai` のpublic-safe meta、`passed + comment_text` 表示条件、raw非混入を触る時。 |
+| Submit public contract static check | `api_emotion_submit.py` | `/emotion/submit` route、`EmotionSubmitResponse`、`EmotionSubmitInputFeedback`、`friend_emotion_feed` defaultを触る時。 |
+
+禁止: Emlisの「今回の入力では」をAnalysis期間表現へ混ぜる、Analysisの「この期間の記録では」をEmlis単発返答へ混ぜる、Pieceを「不安です」へ過圧縮する、`environment_state_output_frame` をpublic response keyへ追加する、raw `memo` / `memo_action` をpublic meta / Analysis surface / Piece guardへ入れる、categoryやemotion strengthを原因化する、1件入力から期間傾向・人格・性格・タイプを作る、回復ラベル経路を治療・処方・回復方法として表示する。
+
+
+# 2026-05-26 差分追記: EmlisAI ESO surface contract completion rule / test index
+
+`environment_state_output_frame` をEmlisAI表示candidateへ使う場合は、scope marker補完・forbidden surface rejection・runtime二重確認・public meta境界を同時に確認する。これは表示率を上げるためのGate緩和ではなく、読めているmaterialをpublic surface contractに沿って安全に返す出口整合である。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| Surface contract completion helper | `emlis_ai_environment_state_output_surface_contract_completion.py`, `test_emlis_ai_environment_state_output_surface_contract_completion.py` | marker補完、idempotent、greeting skip、forbidden surface rejectionを触る時。 |
+| Conversation composer normalize前接続 | `emlis_ai_conversation_composer_service.py`, `test_cocolon_text_generation_core_emlis_observation_adapter.py`, `test_cocolon_text_generation_core_step15_stabilization.py` | candidate text抽出後・surface validation前のcompletion接続を触る時。 |
+| Runtime pre-return double check | `emlis_ai_runtime_surface_pre_return_gate.py`, `test_emlis_ai_runtime_surface_pre_return_gate.py` | 補完済みcandidateだけを通し、未補完/forbidden claimをterminal blockにする境界を触る時。 |
+| Public meta / response boundary | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `test_emlis_ai_public_feedback_meta.py`, `test_emotion_submit_public_feedback_meta_boundary.py` | internal completion resultやruntime blockをpublic responseへ出す/出さない判定を触る時。 |
+| Low-information repair boundary | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_observation_display_repair_integration.py` | 非repairable unavailable candidateやユーザー由来signalなしの入力をrepairへ逃がさない境界を触る時。 |
+| Limited composer source audit | `emlis_ai_limited_composer_client.py`, `test_emlis_ai_limited_composer_client.py` | fixed fallback / runtime fixed observation surfaceの混入監査を触る時。 |
+
+禁止: scope marker requirementをfalseにする、`environment_state_output_scope_marker_missing` をignoreする、forbidden claimをmarker補完で修復する、runtime gateを緩める、`schema_invalid` / `rejected` / `unavailable` のcomment_textをpublicへ出す、completion resultやraw inputをpublic metaへ出す。
+
+# 2026-05-26 差分追記: EmlisAI状態回答と人間的フォロー rule / test index
+
+EmlisAI immediate response の状態回答・人間的フォローを触る場合は、`Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md` と、`environment_state_output_frame` / Runtime Surface Gate / Visible Surface Gate / Public Feedback Meta boundary を同時確認する。Phase2-10ではbackend内部material / Composer role plan / Gate boundary / QA / cross-core contract regressionとして実装済みだが、API route、DB、RN表示条件、json/schema実ファイルは変更しない。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| 正本設計資料 | `Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md` | 状態回答、人間的フォロー、比率、自己否定例外、怒り境界、比喩境界を確認する時。 |
+| 基盤観測構造 | `Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md`, `cocolon_environment_state_output_frame.py` | 「何を見るか」と「EmlisAIがどう返すか」を混同しないために確認する時。 |
+| 状態回答surface contract material | `emlis_ai_state_answer_surface_contract.py`, `test_emlis_ai_state_answer_surface_contract.py` | 観測層 / フォロー層 / ratio / special handling / metaphor / surface policyをinternal materialとして扱う時。 |
+| フォロー4 Selector | `emlis_ai_human_follow_selector.py`, `test_emlis_ai_human_follow_selector.py` | primary / secondary / afterglow follow keyを入力タイプ別に選ぶ時。感情ラベル単体で選ばない。 |
+| 比率Resolver | `emlis_ai_state_answer_ratio_policy.py`, `test_emlis_ai_state_answer_ratio_policy.py` | `観測6 : フォロー4` と振れ幅をsection role / sentence plan unit / follow key数で扱う時。 |
+| 自己否定・怒りSpecial Handling | `emlis_ai_state_answer_special_cases.py`, `test_emlis_ai_state_answer_self_denial_and_anger.py` | 自己否定でfelt stateとidentity claimを分ける時、怒りでtarget judgement agreementを止める時。 |
+| 安全日常比喩material | `emlis_ai_safe_daily_metaphor_material.py`, `test_emlis_ai_safe_daily_metaphor_material.py` | 構造理解要求時だけ安全比喩候補を扱う時。自由比喩生成はしない。 |
+| Composer接続 | `emlis_ai_state_answer_composer_contract.py`, `test_emlis_ai_state_answer_composer_connection.py`, `emlis_ai_limited_composer_client.py`, `emlis_ai_conversation_composer_service.py` | 状態回答surface contractをObservation section / Human follow sectionのrole planとしてComposerへ渡す時。 |
+| Gate / Public Meta境界 | `emlis_ai_state_answer_gate_boundary.py`, `test_emlis_ai_state_answer_gate_boundary.py`, `test_emlis_ai_state_answer_public_meta_boundary.py`, `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_visible_surface_acceptance_gate.py`, `emlis_ai_display_gate.py`, `emlis_ai_public_feedback_meta.py` | forbidden claim、自己否定allowed exception、怒りtarget judgement block、raw非混入、passed-only表示を守る時。 |
+| 表示品質QA | `tests/fixtures/emlis_ai_state_answer_cases.py`, `test_emlis_ai_state_answer_visible_surface_qa.py` | 正解文一致ではなく、構造保持・禁止表面・比率・フォロー主役・public meta境界で受け入れ判定する時。 |
+| Phase10横断contract | `tests/contract/test_emlis_state_answer_phase10_cross_contract_regression.py`, `test_emlis_ai_state_answer_phase10_cross_contract_regression.py`, `test_new_national_core_emlis_contracts.py`, `test_environment_state_output_phase9_cross_core_contract.py` | `/emotion/submit` public response維持、internal materialのpublic key化防止、Piece/AnalysisへのEmlis温度漏れ防止を確認する時。 |
+| Piece / Analysis adapter境界 | `analysis_composer.py`, `analysis_composer_input_contract.py`, `piece_composer.py`, `piece_composer_input_contract.py` | EmlisAI状態回答の温度・文体・materialをPiece / Analysisへ混ぜない境界を触る時。 |
+
+禁止:
+
+- EmlisAIを行動指示AIにする。
+- 観測ゼロ、フォローゼロ、慰めだけ、行動指示だけにする。
+- 診断、人格断定、原因断定、category原因化、emotion strength原因化、1件入力からの期間傾向化をする。
+- フォローを「あなたは優しい人です」等の人格肯定にする。
+- 自己否定入力で自己否定内容を放置する、または根拠なし慰め・絶対味方宣言へ逃がす。
+- 怒り入力で相手評価や攻撃に同意する。
+- 比喩を自由生成する、専門比喩・攻撃比喩・行動指示比喩にする。
+- 本資料内の例文をruntime固定文・完成文定数・fallback文にする。
+- `/emotion/submit` route、response key、`input_feedback.comment_text`、public `observation_status`、RN表示名 `Emlisの観測`、RN表示条件、DB write pathを変更する。
+- `environment_state_output_frame` / `emlis_state_answer_surface_contract` / `state_answer_composer_role_plan` / `human_follow_layer` / `ratio_policy` / `special_handling` / `metaphor_policy` をpublic response keyにする。
+- public metaへraw input / memo / memo_action / raw_text / evidence text / comment_text body / state answer contract bodyを入れる。
+- Piece / Analysis側へEmlisの話しかけ温度、Emlisの感想、状態回答フォロー層を流用する。
+- json/schema実ファイルを、現物配置未確認のまま追加する。
+
+
+# 2026-05-30 差分追記: EmlisAI Product Quality Stabilization Phase18 rule / test index
+
+EmlisAIの商品品質安定化を触る場合は、Phase18のhelper / testがmeta-only、public contract非変更、Gate非緩和であることを同時に確認する。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| Product Quality Regression Matrix | `tests/helpers/emlis_ai_phase18_product_quality_matrix.py`, `test_emlis_ai_phase18_product_quality_stabilization.py` | Phase18基準面、release blocker、public contract非変更を確認する時。 |
+| TwoStage Applicability | `emlis_ai_two_stage_applicability.py`, `test_emlis_ai_phase18_two_stage_applicability.py`, `emlis_ai_two_stage_reception_gate.py` | label missing / required境界、legacy / low-information / pre-connection exemptを触る時。 |
+| Complete Initial candidate path | `emlis_ai_complete_composer_client.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_phase18_complete_initial_candidate_path.py` | 候補生成とpublic表示判定の分離を触る時。 |
+| Low-information public repair | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase18_low_information_public_repair_boundary.py`, low-information既存回帰 | 短い低情報入力のrepair、safety / scope / AP0 / provided candidate除外を触る時。 |
+| daily_unpleasant mode context | `emlis_ai_two_stage_section_surface_plan.py`, `emlis_ai_complete_sentence_planner.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_phase18_daily_unpleasant_mode_context.py` | reception mode / ratio reason / section meta伝搬を触る時。 |
+| Meta-only sanitizer | `emlis_ai_state_answer_surface_contract.py`, `emlis_ai_observation_structure_material_service.py`, `emlis_ai_observation_structure_connection_service.py`, `test_emlis_ai_phase18_state_answer_surface_contract_meta_sanitizer.py` | `surface_policy` 本体・辞書本文・raw text・comment bodyの非混入を触る時。 |
+| Diagnostic taxonomy | `emlis_ai_diagnostic_failure_taxonomy.py`, `emlis_ai_observation_diagnostic_lockdown.py`, `emlis_ai_observation_diagnostic_branching.py`, `test_emlis_ai_phase18_diagnostic_classification_taxonomy.py` | canonical classification / legacy alias / meta-safe reason codeを触る時。 |
+| Visible readability QA | `emlis_ai_visible_readability_quality.py`, `emlis_ai_visible_surface_acceptance_gate.py`, `test_emlis_ai_phase18_visible_readability_quality.py` | 反復、内部role語、relation skeleton、単純言い換えを検査する時。 |
+| `/emotion/submit` product-quality E2E | `test_emotion_submit_phase18_product_quality_e2e.py`, `emlis_ai_observation_display_repair_integration.py` | public response境界、低情報E2E、timeout保存成功 / 表示fail-closedを確認する時。 |
+| RN contract regression | `Cocolon/tests/rn-screen-contracts.test.js` | RNがPhase18 backend metaを読まず、既存 `commentText` だけで表示することを確認する時。 |
+
+禁止: Phase18のためにpublic response key、RN production UI、DB physical name、API route、observation_status enumを変える。Gate / Grounding / Reader / Templateを緩める。raw input / candidate text / comment_text body / surface_policy本体をpublic metaへ入れる。
+

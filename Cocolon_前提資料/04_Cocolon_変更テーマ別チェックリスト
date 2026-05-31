@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-24"
+revision_date: "2026-05-30"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -497,3 +497,92 @@ EmlisAI immediate response、`/emotion/submit`、RN timeout、low-information質
 - `mashos-api/ai/services/ai_inference/config/emlis_observation_dictionary.v1.json`
 
 禁止: timeout時の自動再送、保存失敗断定、public response key rename、internal Emlis meta全文返却、raw input / public comment本文のpublic meta混入、global sentinel文字列をuuid filterへ混ぜること。
+
+
+# 2026-05-25 差分追記: EmlisAI Product Visible Surface Reliability + Koto Splice Repair を触る時
+
+`取らなければこと` / `予感こと` 系、B相当の機械的relation文、表示なし診断、bounded repair reroute、RN diagnostic meta contractを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面。
+2. `07_Cocolon_最新スナップショット差分` の Product Visible Surface Reliability + Koto Splice Repair Step0-8 snapshot差分。
+3. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のHome / Input / immediate reply境界。
+4. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` のbackend support / test owner。
+5. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` の保存API非変更境界。
+6. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / guard。
+7. `05_Cocolon_ルールファイル索引` のrule / test index。
+8. 最新実ファイルzip上の対象file。
+
+同時確認する主な実ファイル:
+
+- `mashos-api/ai/services/ai_inference/emlis_ai_phrase_unit_grammar_normalizer.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_limited_sentence_quality_guard.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_quality_signature.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_bounded_repair_reroute.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py`
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+- `Cocolon/tests/rn-screen-contracts.test.js`
+
+禁止: 表示率のためにGateを緩める、safeな `感じたこと` を巻き込む、public metaへraw input / candidate本文 / comment_text本文を入れる、RN表示条件をdiagnostic metaで開く、fixed fallback良文をruntimeに入れる、DB/API/RN contractをrenameする。
+
+# 2026-05-26 差分追記: EmlisAI Environment State Output Surface Contract Completion を触る時
+
+`environment_state_output_frame` をEmlisAI表示candidateへ使うpath、scope marker補完、runtime pre-return gate、public feedback meta境界、low-information repair境界を触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` の最新基準面と「EmlisAI ESO surface contract completion Phase0-6」。
+2. `Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md` の単一入力観測境界と2026-05-26実装差分。
+3. `01_Cocolon_全体構造資料.md` の全体構造差分。
+4. `01A_Cocolon_全体構造資料_アプリ基盤とHome系.md` のHome / Input / RN表示非変更境界。
+5. `01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md` のbackend owner / test map。
+6. `02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md` のInput保存後 immediate reply境界。
+7. `02C_Cocolon_国家システム資料_契約_境界_検証系.md` のcontract / meta boundary。
+8. `03_Cocolon_命名体系.md` と `09_Cocolon_名称混在保管と構造境界.md` のinternal名 / public名の分離。
+9. `05_Cocolon_ルールファイル索引` のrule / test index。
+10. 最新実ファイルzip上の対象file。
+
+同時確認する主な実ファイル:
+
+- `mashos-api/ai/services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_pre_return_gate.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py`
+- `mashos-api/ai/services/ai_inference/emotion_submit_service.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py`
+- `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_client.py`
+- `Cocolon/tests/rn-screen-contracts.test.js`
+
+禁止: scope marker requirementをfalseにする、`environment_state_output_scope_marker_missing` をignoreする、forbidden surface claimをmarkerで修復する、runtime pre-return gateを削除・緩和する、signatureだけでmarker確認済みにする、`schema_invalid` / `rejected` / `unavailable` のcomment_textをpublicへ出す、completion result / raw input / candidate bodyをpublic metaへ出す、RN表示条件をdiagnostic metaで開く、DB/API/RN contractをrenameする。
+
+
+# 2026-05-30 差分追記: EmlisAI Product Quality Stabilization Phase18 を触る時
+
+EmlisAIの商品品質安定化、TwoStage適用境界、Complete Initial候補生成、低情報repair、daily_unpleasant mode context、meta-only sanitizer、diagnostic taxonomy、表示文読感QA、`/emotion/submit`商品品質E2E、RN contractを触る時は、次の順で確認する。
+
+1. `00_華恋用_READ_FIRST.md` のPhase18反映と最新基準面。
+2. `03_Cocolon_命名体系.md` のPhase18 internal名の読み分け。
+3. `09_Cocolon_名称混在保管と構造境界.md` のPhase18 internal名保管境界。
+4. `05_Cocolon_ルールファイル索引` のPhase18 rule / test index。
+5. `07_Cocolon_最新スナップショット差分` のPhase18 snapshot差分。
+6. 実ファイル側の対象helper / service / test。
+
+主に確認する実ファイル:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_two_stage_applicability.py
+mashos-api/ai/services/ai_inference/emlis_ai_diagnostic_failure_taxonomy.py
+mashos-api/ai/services/ai_inference/emlis_ai_visible_readability_quality.py
+mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py
+mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py
+mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py
+mashos-api/ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py
+mashos-api/ai/services/ai_inference/emlis_ai_visible_surface_acceptance_gate.py
+mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+mashos-api/ai/tests/test_emotion_submit_phase18_product_quality_e2e.py
+Cocolon/tests/rn-screen-contracts.test.js
+```
+
+禁止: Phase18 internal metaをpublic response keyへ出す、RN側でPhase18 metaを表示条件にする、`observation_text` / `reception_text` を追加する、Gate / Grounding / Reader / Templateを緩める、低情報repairでsafety / scope / AP0 / provided candidate / non-low-information generated failureをpassed化する、辞書本文やsurface_policy本体をpayloadへ出す、完成返答テンプレやcase_id固定文をruntimeへ足す。
+

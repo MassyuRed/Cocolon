@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_name_mixing_structure_boundary
 title: "Cocolon 名称混在保管と構造境界"
-revision_date: "2026-05-23"
+revision_date: "2026-05-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(113).zip"
-  Cocolon: "Cocolon_12(5).zip"
-  mashos-api: "mashos-api_12(8).zip"
+  premise: "Cocolon_前提資料(150).zip"
+  Cocolon: "Cocolon_12(7).zip"
+  mashos-api: "mashos-api_12(10).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 630
-  total: 847
+  mashos-api: 712
+  total: 929
 purpose: "名称混在を資料で保管し、華恋が作業時に旧名称・current名称・DB物理名・runtime ownerを取り違えないようにする"
 ---
 
@@ -475,3 +475,133 @@ Reader Relation Surface Step0-8で追加された `limited_reader_repair` / `exp
 | `jsonschema>=4.21.1` | 構造辞書schema validationの実行依存 | 外部AI追加や辞書schema変更ではない |
 
 禁止: これらのinternal名を理由に、`Emlisの観測` 表示名、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。blocked surfaceを低情報観測として無条件に表示化しない。
+
+# 2026-05-25 差分追記: 環境状態出力観測構造 構造境界
+
+環境状態出力観測構造は、名称変更ではなく、Cocolonの既存入力項目をどう読むかを固定する構造境界である。既存のpublic contract、DB physical name、RN表示名、API routeは変更しない。
+
+| 既存field / 名称 | 新しい内部読み | 境界 |
+|---|---|---|
+| `category` | 環境ラベル / 話題方向 | 原因にしない。renameしない。 |
+| `memo_action` / `action_text` | 実世界で起きたこと / したこと / 状況 | 事実以上に補完しない。 |
+| `emotion_details` / `emotions` | 状態ラベル | 診断名にしない。 |
+| `strength` | 状態の重さ | 原因の強さにしない。 |
+| `memo` / `thought_text` | その環境・状態で外に置かれた出力内容 | 本音や結論を勝手に決めない。 |
+| `created_at` / `selected_at` | 観測時点 | 1件で期間傾向にしない。 |
+
+EmlisAIでは現在入力1件の単発観測、Pieceでは核の過圧縮防止、Analysisでは期間内の再出現観測として扱う。EmlisAIの温度をPiece / Analysisへ漏らさず、Analysisの診断・断定リスクを最も強く防ぐ。
+
+禁止: `environment_state_output_frame` をpublic response keyにしない。`conditional_output_tendency` を1件入力から出さない。`recovery_label_path` を治療・処方・回復方法として表示しない。
+
+
+# 2026-05-26 差分追記: EmlisAI ESO surface contract completion 構造境界
+
+EmlisAI Environment State Output Surface Contract Completion は、`environment_state_output_frame` をpublic表示candidateへ接続する時の出口整合であり、名称変更・DB変更・API変更ではない。
+
+| 境界 | 現行の読み方 | 禁止 |
+|---|---|---|
+| scope marker completion | 単一入力観測を期間傾向・人格傾向に見せないため、candidate surfaceに `今回の入力では` 等を補完する。 | 完成文テンプレや固定共感文として使わない。 |
+| forbidden surface claim | 診断・人格化・原因断定・期間傾向・回復処方は、markerの有無に関係なくrejectする。 | markerがあることを許可理由にしない。 |
+| runtime pre-return gate | normalize前補完済みでも返却直前に再確認する。 | gateを削除・緩和しない。 |
+| public meta boundary | completion resultやcandidate bodyはinternal metaに留める。 | public response keyやRN表示条件にしない。 |
+
+`environment_state_output_surface_contract_completion`、`environment_state_output_scope_marker_completion`、`environment_state_output_runtime_marker_check_performed` は内部実装/summary名であり、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN visible title `Emlisの観測` を置き換える名称ではない。
+
+# 2026-05-26 差分追記: EmlisAI状態回答と人間的フォロー 構造境界
+
+`状態回答` と `人間的フォロー` は、EmlisAI immediate response の出力思想・surface contract設計名である。Phase2-10ではbackend内部materialとして実装済みだが、Cocolon全体の基盤観測構造を置き換える名称ではなく、ユーザー表示名、public route、DB physical name、response key、RN表示条件でもない。
+
+| 境界 | 読み方 | 禁止 |
+|---|---|---|
+| 状態回答 | `環境ラベル × 状態ラベル × 出力内容` をEmlisAIが「今の自分が何をしているのか」の答えとして返す出力思想。`emlis_state_answer_surface_contract` はその内部material。 | 行動指示、診断、原因断定、Analysis傾向文として扱わない。 |
+| 人間的フォロー | 観測後に、入力内に見える意図・怖さ/負荷・努力・存在をEmlisの感想として受け止める層。`emlis_ai_human_follow_selector` は主役1 + 補助2 + 余韻1を選ぶ内部material。 | 人格肯定、絶対味方宣言、固定共感テンプレにしない。 |
+| 観測6:フォロー4 | 基本の表示バランスを示すinternal ratio policy。`emlis_ai_state_answer_ratio_policy` がsection role / sentence plan unit / follow key数で扱う。 | UI設定名、public meta key、固定文字数ルールにしない。 |
+| 自己否定例外 | felt state と identity claim を分け、入力内根拠に基づくEmlisの限定的反対意見だけを許す境界。 | 過剰慰め、人格肯定、医療・心理診断にしない。 |
+| 怒り境界 | 相手評価へ同意せず、怒りの奥の大事にしていた線をユーザー側の状態として観測する境界。 | 相手攻撃への同意、関係指示、相手の内心断定にしない。 |
+| 安全日常比喩 | 構造理解要求時だけ候補化する比喩material方針。`analogy_family` / `safe_daily_analogy_id` として内部扱いする。 | 自由生成、専門比喩、攻撃比喩、行動指示比喩にしない。 |
+| Composer role plan | 状態回答surface contractをObservation section / Human follow sectionのrole planとして渡す。 | 完成文テンプレ、public payload、RN表示条件にしない。 |
+| Gate / Public Meta boundary | forbidden claim と allowed exception を表示前に判定し、public metaは小さいsummaryだけにする。 | raw evidence、raw input、comment_text body、contract bodyをpublicへ出さない。 |
+| Piece / Analysis境界 | Phase10横断contractで、EmlisAI状態回答の温度やフォロー層をPiece / Analysisへ流さない。 | PieceをEmlisの感想文にする、Analysisを単発状態回答にする。 |
+
+作業時は、この設計名を理由に `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。  
+Cocolon環境状態出力観測構造が「何を見るか」を固定し、本資料はEmlisAIが「どう返すか」を固定する。Piece / Analysis / Cocolon全体構造を本資料で上書きしない。
+
+
+# 2026-05-28 Phase15反映: EmlisAI二段受け取り構造 / Daily Reception 構造境界
+
+Phase15構造更新の結論: 二段受け取り構造はEmlisAI immediate responseの内部表示構造であり、Cocolon全体の名称体系、DB physical name、RN表示条件、public response shapeを変更しない。
+
+
+EmlisAI二段受け取り構造は、EmlisAI immediate response の表示候補を「観測section」と「受け取りsection」に分け、既存 `input_feedback.comment_text` 内で結合する内部構造である。名称変更、DB変更、API変更、RN production UI変更ではない。
+
+| 境界 | 現行の読み方 | 禁止 |
+|---|---|---|
+| `comment_text` 二段本文 | `見えたこと：
+...
+
+Emlisから：
+...` を既存public key内の本文として返す。 | `observation_text` / `reception_text` のpublic key追加、RN側parse、別カード化。 |
+| Shared Evidence | event fact、reaction、explicit cue、event hint、mode候補を共通根拠として扱う。 | raw input、memo、memo_action、comment_text bodyをmetaへ出す。 |
+| 受け取り補助辞書 | 一般辞書ではなく、反応をどう受け取るかの内部補助material。 | 未知語意味断定、単語だけで恐怖/怒り/危険を作る、完成文テンプレ化。 |
+| Reception Mode | `daily_unpleasant_reception` / `daily_positive_reception` / `self_denial_support` / `uncertainty_support` などの内部mode。 | public `observation_status` enum化、ユーザー設定モード化、RN表示条件化。 |
+| Eligibility Router | 出来事 + 明示反応がある入力を低情報質問へ逃がさない。 | 情報不足でも無条件に表示する、categoryだけで原因化する。 |
+| Ratio Policy | daily receptionでは観測を1文程度に軽くし、Emlisからを厚くする。 | 観測ゼロ、フォローゼロ、文字数固定、UI設定名化。 |
+| Cross Gate | 二段label、順序、混線、質問逃げ、event hint感情捏造、koto splice、skeleton leakを止める。 | Gate緩和、block surfaceのpassed化、表示率目的のrepair濫用。 |
+| Public Meta / Submit | two-stage gate block時は `passed + comment_text` として扱わず、保存成功と表示fail-closedを分ける。 | non-passed / meta-only / block済みsurfaceをRN表示する。 |
+| RN契約 | `commentText` をそのまま表示する。表示名は `Emlisの観測` のまま。 | `見えたこと` / `Emlisから` をRN側で分解する。 |
+
+A/B/非表示ログ1〜3の表示品質QAは、二段表示の受け入れ基準であり、runtime固定文ではない。A専用ハードコード、固定共感テンプレ、相手評価同意、自己否定の事実化、診断・人格断定・原因断定・行動指示へ変換しない。
+
+
+# 2026-05-29 Phase16反映: EmlisAI TwoStage Composer Surface Connection 構造境界
+
+Phase16構造更新の結論: 二段受け取り構造は、CompleteComposerClientの実出力から `/emotion/submit` public feedbackまで接続済みとして読む。ただし、それは既存 `input_feedback.comment_text` の本文shapeが二段になるという意味であり、Cocolon全体の名称体系、DB physical name、RN表示条件、public response shapeを変更するものではない。
+
+| 境界 | 現行の読み方 | 禁止 |
+|---|---|---|
+| Section Surface Plan | `two_stage_section_surface_plan` はCompleteComposerがsection情報を読むための内部material。 | public response key化、RN表示source化、ユーザー設定化。 |
+| SentencePlan section meta | `CompleteSentencePlanLine.meta` に `two_stage_section_id` 等を持つ。 | dataclass public field増設やAPI schema変更と誤読しない。 |
+| SurfaceRealizer二段join | labelとjoin shapeだけを固定し、本文はSentencePlan / materialからrealizeする。 | Python固定文でA専用本文を足す、完成返答テンプレ化する。 |
+| daily unpleasant surface quality | 日常不快受け取りでskeleton leakや質問逃げを避ける品質層。 | Gateを緩める、相手評価同意や危険断定を許す。 |
+| Gate / self-repair reason | missing label、section empty、section meta missingなどをreason codeで切り分ける。 | reason codeをpublic status enumへ増やす、block済みsurfaceをpassed化する。 |
+| `/emotion/submit` E2E | public `input_feedback.comment_text` へ二段本文が届く。 | route、request key、response top-level key、DB write pathを変える。 |
+| RN Phase16-9回帰 | RNは `observation_status == passed && commentText non-empty` のまま二段本文を表示する。 | RN側で `見えたこと` / `Emlisから` をsplitし、二カード化やsplit key fallbackを作る。 |
+
+作業時は、Phase16を「RN UI二段化」や「public schema二分割」と読まない。二段表示の正本は、既存 `comment_text` 本文内の `見えたこと：` / `Emlisから：` である。
+
+# 2026-05-30 Phase17反映: EmlisAI TwoStage Product-Visible Fixture Completion 構造境界
+
+Phase17構造更新の結論: 二段受け取り構造は、A/B/ログ1/ログ2/ログ3の5件fixtureで商品到達まで補完済みとして読む。ただし、それは既存 `input_feedback.comment_text` の二段本文shapeが5件で安定したという意味であり、Cocolon全体の名称体系、DB physical name、RN表示条件、public response shapeを変更するものではない。
+
+| 境界 | 現行の読み方 | 禁止 |
+|---|---|---|
+| product-visible fixture | 5件fixtureは商品到達の最低受け入れ面。exact文一致ではなくshape / forbidden / feature family / metaで見る。 | fixture本文のruntime固定文化、A/B/ログ別case_id専用runtime分岐。 |
+| internal role phrase | `achievement` / `positive state` / `perfection fear` などは内部role語であり、表示本文へ出さない。 | 英語role語の本文表示、一般辞書で意味断定。 |
+| mode-specific surface policy | reception mode / section / role familyから商品surfaceへ寄せる。 | public mode追加、ユーザー設定化、完成返答テンプレ化。 |
+| section budget | mode別にobservation / reception配分を正規化する内部policy。 | RN表示分割、public `observation_text` / `reception_text` key追加。 |
+| Gate強化 | internal role leak / relation skeleton leakをfail-closedで止める。 | Gate緩和、block済みsurfaceのpassed化。 |
+| grounding relation binding | effort / pace系の関係文を、根拠と関係表現がある場合だけ通す。 | `unsupported_sentence_allowed` や `relation_not_expressed_allowed` をtrueにする。 |
+| self-repair reason | repair可能なsurface問題とdiagnostic-only分類を分ける。 | raw input直貼り、固定本文挿入、public meta本文格納。 |
+| `/emotion/submit` 5件E2E | 保存後public feedbackまで5件二段本文が届くことを確認する。 | route、request key、response top-level key、DB write pathを変える。 |
+| RN Phase17-9回帰 | RNは5件二段本文を既存 `commentText` としてそのまま保持する。 | RN側で `見えたこと` / `Emlisから` をsplitし、二カード化する。 |
+
+作業時は、Phase17を「表示率を上げるためにGateを緩めた」と読まない。Phase17は、Gateを通れる商品surfaceをComposer / SentencePlan / SurfaceRealizer / Grounding側で作り、悪いsurfaceは引き続きfail-closedにする補完である。
+
+
+# 2026-05-30 差分追記: EmlisAI Phase18 商品品質安定化 internal名の保管境界
+
+`mashos-api_12(10).zip` では、Phase18 Product Quality Stabilization により、`product_quality_regression_matrix` / `two_stage_applicability_decision` / `low_information_public_repair_contract` / `two_stage_mode_context` / `meta_only_sanitizer` / `diagnostic_failure_taxonomy` / `visible_readability_quality` 系の内部名が増えている。これらは名称変更ではなく、EmlisAIが既存 `input_feedback.comment_text` とRN `passed + commentText` 契約を壊さず商品品質へ寄せるためのbackend内部境界である。`Emlisの観測` のvisible名、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しない。
+
+| 境界 | 読み方 |
+|---|---|
+| product quality matrix | Phase18対象の基準面をmeta-onlyで固定するtest helper。赤を仕様として許容するものではない。 |
+| TwoStage applicability | 二段label必須判定を必要経路だけに限定し、低情報・legacy・pre-connection経路をlabel missingで巻き込まない。 |
+| low-information repair | 短い低情報入力だけをpublic repairへ戻す。safety / scope / AP0 / provided candidate / positive recoveryを隠さない。 |
+| mode context | daily_unpleasantを `reception_mode_id` / `ratio_reason` でSurfaceRealizerへ伝搬する。case_id固定文ではない。 |
+| meta-only sanitizer | `surface_policy`、辞書本文、raw input、comment_text bodyをpayloadへ出さない。 |
+| diagnostic taxonomy | canonical分類とlegacy aliasで表示不可理由を整理する。public status enumではない。 |
+| visible readability | 本文を内部検査しても、reportにはrule id / count / actionだけを残す。 |
+| public E2E / RN contract | `/emotion/submit` とRNは既存 `input_feedback.comment_text` / `passed + commentText` 契約を維持する。 |
+
+作業時は、このPhase18名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。
+

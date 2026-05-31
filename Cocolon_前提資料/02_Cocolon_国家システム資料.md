@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-05-24"
+revision_date: "2026-05-30"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(113).zip"
-  Cocolon: "Cocolon_12(5).zip"
-  mashos-api: "mashos-api_12(8).zip"
+  premise: "Cocolon_前提資料(150).zip"
+  Cocolon: "Cocolon_12(7).zip"
+  mashos-api: "mashos-api_12(10).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 630
-  total: 847
+  mashos-api: 712
+  total: 929
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 847
+  included_files_total: 929
   included_files_cocolon: 217
-  included_files_mashos_api: 630
+  included_files_mashos_api: 712
 ---
 
 # 1. 1行定義
@@ -1297,3 +1297,76 @@ Input Gate / Save API
 - Visible GateはDisplay Gate / Grounding / Template Guardを緩めない。
 - raw input、memo、memo_action、comment_text本文、candidate本文、evidence textをpublic metaへ入れない。
 - visible gate failureを「入力保存失敗」に戻さない。
+
+
+# 2026-05-25 差分追記: Input / immediate reply Product Visible Surface Reliability接続
+
+`mashos-api_8(27).zip` では、Input保存後の `Emlisの観測` について、Visible Surface Acceptance Gateの後段に koto splice RED固定、relation skeleton修復、一回rerender、表示なし診断分類が接続されています。これは `/emotion/submit` の保存処理そのものではなく、保存後のimmediate reply候補が `passed + comment_text` としてRNへ返ってよいかを判定する表示前品質境界です。
+
+| 国家システム区分 | owner | 変更後の読み方 |
+|---|---|---|
+| PhraseUnit / Limited Guard | `emlis_ai_phrase_unit_grammar_normalizer.py`, `emlis_ai_limited_sentence_quality_guard.py` | `取らなければこと` / `予感こと` / `ことこと` / 長い節のkoto attachmentをcandidate material段階で止める。 |
+| Runtime Gate | `emlis_ai_runtime_surface_pre_return_gate.py`, `emlis_ai_complete_surface_quality_signature.py` | comment_text表面でもkoto splice codeを検出し、`rerender_shallow_v2` またはblockへ進める。 |
+| Visible Gate | `emlis_ai_visible_surface_acceptance_gate.py` | C相当はred、B相当は `surface_relation_skeleton_major` / `analytic_register_leak` でrepair_requiredにする。 |
+| Composer / Relation | `emlis_ai_limited_composer_client.py`, `emlis_ai_relation_surface_contract.py` | 義務・予定・予感・長いraw clauseを `phrase + こと` へ直結しない。 |
+| Repair | `emlis_ai_bounded_repair_reroute.py`, `emlis_ai_reply_service.py` | Visible Gateの `rerender_surface` を一回だけ安全再表面化候補へ回す。 |
+| Public / Diagnostic | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `emlis_ai_observation_diagnostic_lockdown.py` | `candidate_blocked_koto_splice` / `candidate_blocked_relation_skeleton` / `candidate_repair_attempted` 等を本文なしで分類する。 |
+| RN Contract | `rn-screen-contracts.test.js` | diagnostic meta内のpassedやcandidate本文では表示せず、public `input_feedback.comment_text` + `observation_status=passed` のみ表示する。 |
+
+禁止: 保存DBを切り替える、`input_feedback.comment_text` keyを変える、public metaへraw inputやcandidate本文を入れる、Gateを緩めて危険文を表示する、repair済みでない候補をpassedへ変換する。
+
+
+# 2026-05-26 差分追記: EmlisAI Environment State Output Surface Contract Completion Phase0-6 国家システム差分
+
+最新実ファイル `Cocolon_7(14).zip` / `mashos-api_7(30).zip` では、Input保存後の immediate reply path に、`environment_state_output_frame` 表示candidateのscope marker補完とruntime二重確認が入っている。
+
+国家システム上は `/emotion/submit` の保存処理・request key・response key・DB physical nameを変えず、`passed + comment_text` に届く前のbackend内部品質境界として扱う。`schema_invalid` / `rejected` / `unavailable`、runtime block、environment_state_output terminal surface blockでは、public `input_feedback` を出さない。
+
+
+# 2026-05-26 差分追記: EmlisAI状態回答と人間的フォロー Phase2-10 国家システム差分
+
+最新実ファイルでは、Input保存後のEmlisAI immediate response内部で、状態回答surface contractと人間的フォローが追加されています。国家システム上は、保存・queue・DB write path・public routeを変える差分ではなく、`/emotion/submit` responseへ出す前の内部material / Composer / Gate / public sanitizerの差分として読む。
+
+```text
+Input Save
+ -> /emotion/submit
+ -> EmlisAI immediate response internal pipeline
+ -> environment_state_output_frame
+ -> emlis_state_answer_surface_contract
+ -> follow selector / ratio policy / special cases / safe metaphor
+ -> composer role plan
+ -> runtime / visible / display gates
+ -> public feedback meta sanitizer
+ -> input_feedback only when public observation_status=passed + comment_text
+ -> RN passed + commentText display
+```
+
+| Phase | 国家システム上のowner | 扱い |
+|---|---|---|
+| Phase2 | `emlis_ai_state_answer_surface_contract.py`, `emlis_ai_observation_structure_material_service.py` | 単発入力から内部状態回答contractを作る。public response shapeは変えない。 |
+| Phase3 | `emlis_ai_human_follow_selector.py` | follow keyをmaterial化する。ユーザー設定やUI切替ではない。 |
+| Phase4 | `emlis_ai_state_answer_ratio_policy.py` | 観測 / フォロー比率をsection role単位で扱う。文字数厳密計算ではない。 |
+| Phase5 | `emlis_ai_state_answer_special_cases.py`, Tone / Gate owners | 自己否定・怒りのspecial handlingを表示前Gateへ接続する。 |
+| Phase6 | `emlis_ai_safe_daily_metaphor_material.py` | 安全日常比喩候補をinternal materialとして扱う。固定例文ではない。 |
+| Phase7 | `emlis_ai_state_answer_composer_contract.py`, composer owners | Observation section / Human follow sectionをSentencePlan上で扱う。 |
+| Phase8 | `emlis_ai_state_answer_gate_boundary.py`, public meta / gate owners | forbidden claimとpublic meta raw非混入を強化する。 |
+| Phase9 | `test_emlis_ai_state_answer_visible_surface_qa.py`, fixture | 表示文正解一致ではなく、構造保持・禁止表面・public meta境界でQAする。 |
+| Phase10 | contract tests + Piece / Analysis adapters | public contract維持と、Piece / AnalysisへのEmlis温度漏れ防止を固定する。 |
+
+不変: `/emotion/submit` route、request key、response key、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、DB physical name、RN表示名、RN表示条件は変更しない。
+
+
+# 2026-05-30 差分追記: 国家システム上のEmlisAI Product Quality Stabilization Phase18境界
+
+Phase18は、Input -> `/emotion/submit` -> EmlisAI immediate reply -> public sanitizer -> RN display の国家システム境界を変えずに、backend内部の失敗理由・repair・表示品質検査を整理した工程として読む。
+
+| 国家システム区分 | Phase18での読み方 |
+|---|---|
+| Input / Save | emotion保存成功とEmlis表示fail-closedを分離する。timeout時も保存成功を失敗文言へ潰さない。 |
+| Dispatch / Immediate reply | Complete Initial、TwoStage、low-information、daily_unpleasant、state answer materialを、それぞれのinternal contractで処理する。 |
+| Gate / Boundary | TwoStage requiredの過剰適用、surface_policy meta漏れ、diagnostic分類ズレ、表示文反復をGate / meta-only summaryで整理する。 |
+| Public response | `passed + comment_text non-empty` の場合だけ `input_feedback` を返す。unavailable / rejected / timeout / meta-only responseはRN表示用feedbackにしない。 |
+| RN display | RNはPhase18 backend metaを読まず、既存 `commentText` をそのまま `Emlisの観測` modalへ表示する。 |
+
+禁止: Phase18のdiagnostic / readability / applicability metaを理由に、public response keyやRN表示条件を増やさない。
+
