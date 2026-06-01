@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(150).zip"
-  Cocolon: "Cocolon_12(7).zip"
-  mashos-api: "mashos-api_12(10).zip"
+  premise: "Cocolon_前提資料(158).zip"
+  Cocolon: "Cocolon_12(9).zip"
+  mashos-api: "mashos-api_12(12).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_12(7).zip` | 217 | RNアプリ本体。production RN UIは変更せず、Phase18-10としてPhase18 backend metaをRN表示条件にしないcontract回帰を追加済み。 |
-| `mashos-api_12(10).zip` | 712 | EmlisAI Product Quality Stabilization Phase18-0〜18-11を反映。TwoStage適用境界、Complete Initial候補生成、低情報repair、daily_unpleasant mode context、meta-only sanitizer、diagnostic taxonomy、表示文読感QA、`/emotion/submit`商品品質E2E、既存回帰確認を含む。 |
-| total | 929 | Phase18前提資料coverage対象 |
+| `Cocolon_12(9).zip` | 217 | RNアプリ本体。production RN UIは変更せず、Phase20-7以降のRN contract testとして `passed + commentText` の既存表示契約を維持。 |
+| `mashos-api_12(12).zip` | 736 | EmlisAI Phase20-0〜20-10を反映。Internal Response Contract、Safety Triage、Input Material Bundle、Low Information Observation、Gate Recovery Loop、Generic SentencePlan / Surface、Public Boundary / QA Matrix、Phase19撤回、実機A再確認修正を含む。 |
+| total | 953 | Phase20前提資料coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 は履歴として残し、2026-05-30時点の最新正本は末尾の `2026-05-30 差分追記: EmlisAI Product Quality Stabilization Phase18-0〜18-11 snapshot差分` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針は履歴として残し、2026-06-01時点の最新正本は末尾の `2026-06-01 差分追記: EmlisAI Phase20-0〜20-10実装反映 snapshot差分` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -3395,4 +3395,87 @@ Cocolon_前提資料/manifest.json
 ```
 
 01 / 02系のfull inventory本文は全面再生成しない。今回の差分は、Phase18で増えたEmlisAI商品品質安定化の読み方と新規internal ownerを、必要箇所へ差分追記する更新である。
+
+# 2026-06-01 差分追記: EmlisAI Phase20-0〜20-10実装反映 snapshot差分
+
+最新実ファイル `Cocolon_12(9).zip` / `mashos-api_12(12).zip` を確認した。`Cocolon_前提資料(158).zip` はEmlisAI是正方針を持つが、実装反映状態はPhase18 / Phase19撤回方針中心であり、最新実ファイル側にはPhase20-0〜20-10の実装が入っているため、この差分を前提資料へ追記する。
+
+## 確認snapshot
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(158).zip` | 41 premise files | `d0137544ed5a5946d49565ab425e9c162cc37db30cf1aab741a6b2646cf5744b` |
+| `Cocolon_12(9).zip` | 217 | `8f6e2687c30b6e0832e717e75efe8c1ac712feee9bc7c0522921084e487c7f5e` |
+| `mashos-api_12(12).zip` | 736 | `e59f063380fe309e959fd5e48fd09fd400ebc683f3d5215c7cc29d2714be314d` |
+
+## Phase20の実装読み方
+
+| Phase | 実装読み方 | 主なpath |
+|---|---|---|
+| Phase20-0 | Phase19差分を分類し、A/C/D exact fixtureを回帰fixtureへ意味変更する。production挙動はこの段階では変えない。 | `ai/tests/helpers/emlis_ai_phase20_phase19_diff_inventory.py`, `ai/tests/test_emlis_ai_phase20_phase19_diff_inventory.py` |
+| Phase20-1 | Internal Response Contractを追加し、`response_kind` を内部判断の中心にする。 | `ai/services/ai_inference/emlis_ai_response_contract.py` |
+| Phase20-2 | Safety Triageを追加し、自己否定安全応答、safety support、緊急安全境界を分ける。 | `emlis_ai_safety_triage.py`, `emlis_ai_self_denial_safe_state_answer.py` |
+| Phase20-3 | Input Material Bundle / Eligibility Routerを追加し、文字数やC/D専用cueではなく入力束で材料量を読む。 | `emlis_ai_input_material_bundle.py`, `emlis_ai_observation_eligibility_router.py` |
+| Phase20-4 | Low Information Observationを汎用復旧し、見えている範囲とunknown slotsを分けて返す。 | `emlis_ai_low_information_observation_composer.py`, `test_emlis_ai_low_information_observation_phase20_4.py` |
+| Phase20-5 | Gate Recovery Loopを追加し、Gate failureを短縮・限定・断定弱化・低情報/安全応答へ回す。 | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_loop_phase20_5.py` |
+| Phase20-6 | Generic SentencePlan / Surfaceへ移し、C/D専用完成surfaceをruntime本線から外す。 | `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_generic_sentence_surface_realizer_phase20_6.py` |
+| Phase20-7 | Public Boundary / RN Contractを整理し、internal response contractやdiagnosticをpublic表示sourceへ出さない。 | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `Cocolon/tests/rn-screen-contracts.test.js` |
+| Phase20-8 | QA Matrixを追加し、exact generated text一致ではなくfamily品質とfatal条件で見る。 | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py` |
+| Phase20-9 | Phase19 C/D専用mode・cue・完成surfaceをproduction本線から撤回し、汎用materialへ吸収する。 | `emlis_ai_shared_reception_evidence.py`, `emlis_ai_reception_mode_resolver.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_phase20_9_phase19_withdrawal.py` |
+| Phase20-10 | 実機ログでAだけ表示されなかったscope-only blocker問題を、低情報material成立時だけ補正する。 | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` |
+
+## 最新実ファイル上の主な追加 / 変更path
+
+| 区分 | path | 読み方 |
+|---|---|---|
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_response_contract.py` | 内部response_kind contract。 |
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_safety_triage.py` | safety triage分類。 |
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_self_denial_safe_state_answer.py` | 自己否定安全応答surface。 |
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_input_material_bundle.py` | 入力material bundle。 |
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_observation_eligibility_router.py` | material quality -> response kind routing。 |
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py` | Gate failure recovery policy。 |
+| 追加 | `mashos-api/ai/services/ai_inference/emlis_ai_response_contract_qa_matrix.py` | QA Matrix helper。 |
+| 追加 | `mashos-api/ai/tests/helpers/emlis_ai_phase20_phase19_diff_inventory.py` | Phase19差分分類inventory。 |
+| 追加 | `mashos-api/ai/tests/test_emlis_ai_phase20_10_real_device_recheck.py` | 実機A/B/C/D再確認fixture。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py` | 低情報material成立時のscope-only blockerをA実機非表示の最終理由にしない。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | response_kind / safety triage / material bundle / recovery結果をreply生成に接続。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py` | internal contract / mode / diagnostic bodyをpublic metaへ漏らさない。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | public input_feedback境界をPhase20 response_kindに合わせて保持。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py` | Phase19 C/D専用cueをproduction本線から撤回し、generic relation materialへ寄せる。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py` | C/D専用mode priorityを本線から外す。 |
+| 変更 | `mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | mode別完成surfaceではなくgeneric sentence plan / surface ruleへ寄せる。 |
+| 変更 | `mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json` | C/D専用surface復旧ではなくgeneric materialとして扱う。 |
+| 維持 | `Cocolon/tests/rn-screen-contracts.test.js` | RN production UIは変更せず、`passed + commentText` のshape / behavior contractを維持。 |
+
+## Phase20後の固定境界
+
+```text
+DB physical schema: 変更なし
+API route: 追加なし
+RN production UI: 変更なし
+public response key: 追加なし
+public observation_status enum: 増やさない
+visible body: input_feedback.comment_text のみ
+RN modal title: Emlisの観測
+RN open condition: observation_status == passed && commentText non-empty
+```
+
+## A/B/C/D実機確認fixtureの扱い
+
+```text
+A:
+  low_information_observation として表示する。
+  scope-only blockerで無応答にしない。
+
+B:
+  self_denial_safe_state_answer として、自己否定を本人の事実として確定しない。
+
+C / D:
+  C/D専用mode・cue・完成surfaceではなく、generic sentence plan / generic relation materialで返す。
+
+A/C/D exact fixture:
+  runtime条件ではなく、無応答・case専用route・safety境界破壊の再発を検出する回帰fixture。
+```
+
+01 / 02系のfull inventory本文は全面再生成しない。今回の差分は、Phase20で増えたEmlisAI撤回保持再設計のcurrent owner、public/RN境界、内部名、QA・実機再確認の読み方を、必要箇所へ差分追記する更新である。
 

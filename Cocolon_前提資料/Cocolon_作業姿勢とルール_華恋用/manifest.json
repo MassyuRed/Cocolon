@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-05-24",
+  "revision_date": "2026-05-31",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -48,6 +48,21 @@
       "changed_files": [
         "00_READ_FIRST_最初に読む.txt",
         "09_作業開始チェックリスト.txt",
+        "99_統合版_毎回貼る用.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "type": "emlis_ai_correction_policy_guard",
+      "summary": "EmlisAI作業では、是正方針を必読化し、Phase19型のcase専用mode/cue/surface、fixture runtime条件化、Gate failureの無反応化、passed-only目的化を禁止。",
+      "required_doc": "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
+      "changed_files": [
+        "00_READ_FIRST_最初に読む.txt",
+        "05_禁止事項_勝手な補完と構造追加.txt",
+        "09_作業開始チェックリスト.txt",
+        "10_停止判定と書かれていないルール.txt",
+        "13_禁止事項_既出設計の再質問と設計用語への逃げ禁止.txt",
         "99_統合版_毎回貼る用.txt",
         "manifest.json"
       ]

@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2887,4 +2887,18 @@ Phase18で確認するcontract / verificationは、表示率を上げるため�
 | Public E2E / RN contract | `test_emotion_submit_phase18_product_quality_e2e.py`, `Cocolon/tests/rn-screen-contracts.test.js` | public response shapeとRN `passed + commentText`契約を維持する。 |
 
 禁止: Gate / Grounding / Reader / Templateを緩める、public response keyを追加する、RNでPhase18 metaを表示条件にする、raw input / generated candidate text / comment_text body / surface_policy本体をpublic metaへ入れる。
+# 2026-06-01 差分追記: Phase20 contract / verification boundary
 
+Phase20で確認するcontract / verificationは、表示率だけを上げるための緩和ではなく、既存public / RN contractを守ったまま、EmlisAIを入力直後の観測返答へ戻すための内部境界である。
+
+| contract / verification | 主な実ファイル | 読み方 |
+|---|---|---|
+| Internal Response Contract | `emlis_ai_response_contract.py`, `test_emlis_ai_response_contract.py` | `response_kind -> public observation_status / comment_text_required / input_feedback_allowed` の対応を固定する。 |
+| Safety Triage | `emlis_ai_safety_triage.py`, `test_emlis_ai_safety_triage_response_contract.py` | 自己否定安全応答と緊急安全境界を分け、危険入力を通常観測で上書きしない。 |
+| Input Material Bundle | `emlis_ai_input_material_bundle.py`, `test_emlis_ai_input_material_bundle_phase20_3.py` | 文字数・case語彙ではなく入力束から材料量を読む。 |
+| Gate Recovery Loop | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_loop_phase20_5.py` | Gate failureを短縮・限定・低情報/安全応答へ回し、emergency / infra以外のemptyをfatalにする。 |
+| Public Boundary / RN Contract | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `test_emlis_ai_public_boundary_phase20_7.py`, `Cocolon/tests/rn-screen-contracts.test.js` | internal metaをpublic表示源にせず、RNは `passed + commentText` だけを見る。 |
+| QA Matrix | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py` | exact generated text一致ではなく、family品質とfatal条件を確認する。 |
+| Phase19 Withdrawal / Real-device recheck | `test_emlis_ai_phase20_9_phase19_withdrawal.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` | C/D専用route撤回とA低情報実機再確認を回帰として固定する。 |
+
+禁止: Gate / Grounding / Reader / Templateを緩める、public response keyを追加する、RNでPhase20 internal metaを表示条件にする、raw input / generated candidate text / comment_text body / internal contract bodyをpublic metaへ入れる。

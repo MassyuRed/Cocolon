@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -585,4 +585,26 @@ Cocolon/tests/rn-screen-contracts.test.js
 ```
 
 禁止: Phase18 internal metaをpublic response keyへ出す、RN側でPhase18 metaを表示条件にする、`observation_text` / `reception_text` を追加する、Gate / Grounding / Reader / Templateを緩める、低情報repairでsafety / scope / AP0 / provided candidate / non-low-information generated failureをpassed化する、辞書本文やsurface_policy本体をpayloadへ出す、完成返答テンプレやcase_id固定文をruntimeへ足す。
+# 2026-06-01 差分追記: EmlisAI Phase20撤回保持再設計を触る時
 
+EmlisAIのPhase20後実装を触る時は、最低限次を同時に読む。
+
+1. `00_華恋用_READ_FIRST.md` のPhase20反映と最新基準面。
+2. `Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md` の実装反映状態。
+3. `03_Cocolon_命名体系.md` のPhase20 internal名の読み分け。
+4. `09_Cocolon_名称混在保管と構造境界.md` のPhase20 internal名保管境界。
+5. `05_Cocolon_ルールファイル索引` のPhase20 rule / test index。
+6. `07_Cocolon_最新スナップショット差分` のPhase20 snapshot差分。
+
+修正時の確認順:
+
+```text
+1. safety / infra / self-denial 境界かを確認する。
+2. 入力束 thought / action / emotion / category から material_quality を確認する。
+3. low-information / limited / normal の response_kind を確認する。
+4. Gate failure が短縮・限定・再生成・低情報/安全応答へ回るか確認する。
+5. public sanitizer後に internal meta が漏れていないか確認する。
+6. RNが commentText 以外を表示sourceにしていないか確認する。
+```
+
+禁止: Phase20 internal metaをpublic response keyへ出す、RN側で `response_kind` / `diagnostic_summary` / `material_quality` を表示条件にする、C/D専用mode・cue・完成surfaceを復活させる、A低情報をcase専用routeにする、Gate recoveryをfixed fallbackにする、自己否定を本人の事実として確定する、safety emergencyを通常Emlis観測としてpassed化する。

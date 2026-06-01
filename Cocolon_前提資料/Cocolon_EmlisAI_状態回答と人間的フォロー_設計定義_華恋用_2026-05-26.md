@@ -1709,4 +1709,38 @@ Phase18では、本資料で定義した状態回答・人間的フォロー・�
 ### 17.3 作業時の読み替え
 
 `product_quality_regression_matrix`、`two_stage_applicability_decision`、`low_information_public_repair_contract`、`two_stage_mode_context`、`meta_only_sanitizer`、`diagnostic_failure_taxonomy`、`visible_readability_quality` は、状態回答・二段受け取りをpublic表示へ安全に出すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+---
 
+## 18. 2026-06-01 追補: EmlisAI Phase20撤回保持再設計 実装反映
+
+Phase20では、本資料で定義した状態回答・人間的フォローの思想を、Phase19の個別routeではなく汎用観測返答として成立させる方向へ戻した。これは状態回答思想を変更するものではなく、自己否定を事実化しない、低情報を無応答にしない、Gate failureを沈黙で終わらせない、C/D専用完成surfaceへ逃げないためのbackend内部補強である。
+
+### 18.1 Phase20で追加された内部境界
+
+| 境界 | 読み方 |
+|---|---|
+| Internal Response Contract | 状態回答を `passed / rejected / unavailable` だけでなく、`normal_observation`、`low_information_observation`、`limited_grounding_observation`、`self_denial_safe_state_answer` などで読む。 |
+| Safety Triage | 自己否定安全応答と緊急安全境界を分け、自己否定内容を本人の人格事実として扱わない。 |
+| Input Material Bundle | 思考・行動・感情・カテゴリの入力束から、見えている材料と見えていないslotを分ける。 |
+| Low Information Observation | 詳細が少ない入力でも、わかったふりをせず、見えている範囲とユーザー主導の追加促しを返す。 |
+| Gate Recovery Loop | 表示文がGateで落ちた時、短縮・限定・断定弱化・低情報/安全応答へ回す。 |
+| Generic SentencePlan / Surface | C/D専用mode別完成文ではなく、relation / material / tone / boundaryからsurfaceを作る。 |
+| Public Boundary / RN Contract | 状態回答の内部contractをpublic表示sourceにせず、既存 `input_feedback.comment_text` にだけ出す。 |
+| QA Matrix / 実機再確認 | exact本文一致ではなく、family品質、fatal条件、A低情報表示、B自己否定安全応答、C/D専用route撤回を確認する。 |
+
+### 18.2 この追補で変えないこと
+
+```text
+- 状態回答と人間的フォローの基本思想は変えない。
+- self_denialを本人の事実として確定しない。
+- safety emergencyをEmlis通常観測としてpassed化しない。
+- observation_text / reception_text public keyは追加しない。
+- RNはresponse_kindやdiagnostic_summaryを表示sourceにしない。
+- public metaへraw input / memo / memo_action / evidence text / comment_text body / internal contract bodyを出さない。
+- Gate / Grounding / Reader / Templateを緩めない。
+- 完成返答テンプレやcase_id固定文をruntimeへ追加しない。
+```
+
+### 18.3 作業時の読み替え
+
+`response_kind`、`safety_triage_kind`、`material_quality`、`visible_material_slots`、`unknown_slots`、`gate_recovery_loop`、`generic_sentence_plan_surface`、`response_contract_qa_matrix` は、状態回答・人間的フォローをpublic表示へ安全に出すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。

@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2858,4 +2858,17 @@ Cocolon/tests/rn-screen-contracts.test.js
 - daily_unpleasantはmode contextをSurfaceRealizerへ伝搬する。
 - public metaへraw input、comment_text body、surface_policy本体を出さない。
 - RNは `observation_text` / `reception_text` を要求しない。
+# 2026-06-01 差分追記: Home / EmlisAI immediate reply Phase20 current owner
 
+Phase20後のHome immediate replyでは、EmlisAIの表示可否は引き続きbackendで決まり、RNは既存 `commentText` を受け取るだけである。Home側production UI、`/emotion/submit` route、public response top-level keyは変更しない。
+
+最新の読み方:
+
+| 境界 | Phase20後の扱い |
+|---|---|
+| backend reply generation | `response_kind`、material bundle、Gate recovery、low-information composerにより、safety / infra以外の通常入力は観測応答へ向かう。 |
+| public feedback | `build_public_emlis_input_feedback_meta(...)` のsanitized metaだけを返す。internal response contract / safety triage / repair attempts / mode id / diagnostic bodyは表示sourceにしない。 |
+| RN modal | `input_feedback.emlis_ai.observation_status == passed` かつ `input_feedback.comment_text` 非空の場合だけ `Emlisの観測` を開く。 |
+| A低情報実機再確認 | `emlis_ai_observation_display_repair_integration.py` で、低情報material成立時のscope-only blockerがEmlis観測表示を妨げないよう補正済み。 |
+
+禁止: RN側で `response_kind` / `material_quality` / `safety_triage_kind` / `diagnostic_summary` / `observation_text` / `reception_text` を表示条件または本文sourceにすること。

@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -1984,4 +1984,21 @@ RNは既存commentTextを表示
 Phase18で追加されたE2Eは、低情報入力、Complete Initial generated-but-display-rejected、meta boundary、timeout recoveryをpublic response境界で固定する。表示なしケースでRN表示用feedbackを作らず、保存成功と表示fail-closedを分けることが重要である。
 
 禁止: rejected / unavailable / timeoutのinternal metaをRN表示用feedbackとして返す、`observation_text` / `reception_text` を追加する、Phase18 metaだけで表示条件を開く。
+# 2026-06-01 差分追記: Input / Save / Dispatch上のPhase20 EmlisAI観測返答境界
 
+`/emotion/submit` の国家システム境界は、Phase20後も次のまま維持する。
+
+```text
+RN input submit
+ -> backend /emotion/submit
+ -> save path / dispatch path
+ -> EmlisAI reply service
+ -> public feedback sanitizer
+ -> RN receives input_feedback only when observation_status=passed + comment_text non-empty
+```
+
+Phase20で追加されたbackend内部境界は、保存成功やpublic response shapeを変えるものではない。`response_kind`、`safety_triage_kind`、`material_quality`、`visible_material_slots`、`unknown_slots`、Gate recovery attemptsは、EmlisAI内部の判断・diagnostic・test用materialとして読む。
+
+Aの実機再確認修正では、低情報materialが成立している場合に限り、scope-only blockerを最終無応答理由として扱わずlow-information observation branchへ進める。これはSafety Gate、AP0、rollout、infra、実際の品質Gateを緩めるものではない。
+
+禁止: rejected / unavailable / emergency safety / infraをRN表示用feedbackとして偽装する、`observation_text` / `reception_text` public keyを追加する、Phase20 internal metaだけでRN modalを開く。

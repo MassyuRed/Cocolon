@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -741,3 +741,48 @@ EmlisAIの商品品質安定化を触る場合は、Phase18のhelper / testがme
 
 禁止: Phase18のためにpublic response key、RN production UI、DB physical name、API route、observation_status enumを変える。Gate / Grounding / Reader / Templateを緩める。raw input / candidate text / comment_text body / surface_policy本体をpublic metaへ入れる。
 
+
+
+# 2026-05-31 差分追記: EmlisAI是正方針 / Phase19撤回保持再設計 rule / test index
+
+EmlisAIの設計・診断・実装・前提資料更新を行う場合は、Phase19のA/C/D個別通過路線を本線成功扱いせず、次の資料とruleを同時確認する。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| 是正方針正本 | `Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md` | EmlisAIの撤回・保持・再設計、Phase20実装順、Gate recovery、Safety triage、Low informationを触る時。 |
+| 思想正本 | `Cocolon_思想資料_華恋用.md` | EmlisAIを入力直後の観測返答として扱う根拠を確認する時。 |
+| 状態回答・人間的フォロー | `Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md` | 自己否定、安全隣接、観測層/フォロー層、行動指示化禁止を確認する時。 |
+| 環境状態出力観測構造 | `Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md` | 「何を見るか」と「どう返すか」を混同しないために確認する時。 |
+| 作業姿勢ルール | `Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt`, `05_禁止事項_勝手な補完と構造追加.txt`, `09_作業開始チェックリスト.txt`, `10_停止判定と書かれていないルール.txt`, `13_禁止事項_既出設計の再質問と設計用語への逃げ禁止.txt`, `99_統合版_毎回貼る用.txt` | EmlisAI作業前の必読・停止条件・構造テンプレ禁止を確認する時。 |
+
+禁止:
+
+- A/C/D exact fixture を runtime 条件にする。
+- case専用mode / cue / surface / fixed commentText を追加する。
+- Gate failure を empty comment_text / unavailable / rejected の無反応で終わらせる。
+- `passed + comment_text` 到達をEmlisAIの目的として扱う。
+- safety隣接入力を一律に通常観測非表示へ潰す。
+- Phase19個別通過路線を本線成功扱いする。
+
+保持:
+
+- A/C/D fixture は失敗再現・回帰確認として保持する。
+- public `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` / RNタイトル `Emlisの観測` は、明示実装設計なしに変更しない。
+- Gateは保持するが、沈黙装置ではなく安全な応答へ縮退させる品質境界として扱う。
+# 2026-06-01 差分追記: EmlisAI Phase20 rule / test index
+
+EmlisAIのPhase20撤回保持再設計を触る場合は、Phase20のhelper / testがpublic contract非変更、RN production UI非変更、C/D専用route撤回、低情報無応答防止、safety境界保持であることを同時に確認する。
+
+| 領域 | 主なファイル | 使う時 |
+|---|---|---|
+| Phase19差分inventory | `tests/helpers/emlis_ai_phase20_phase19_diff_inventory.py`, `test_emlis_ai_phase20_phase19_diff_inventory.py` | Phase19由来のdelete / quarantine / generalize / retain分類を確認する時。 |
+| Internal Response Contract | `emlis_ai_response_contract.py`, `test_emlis_ai_response_contract.py` | response_kindとpublic status mappingを触る時。 |
+| Safety Triage | `emlis_ai_safety_triage.py`, `emlis_ai_self_denial_safe_state_answer.py`, `test_emlis_ai_safety_triage_response_contract.py` | 自己否定・safety support・emergency境界を触る時。 |
+| Input Material Bundle | `emlis_ai_input_material_bundle.py`, `emlis_ai_observation_eligibility_router.py`, `test_emlis_ai_input_material_bundle_phase20_3.py` | thought / action / emotion / category材料判定を触る時。 |
+| Low Information Observation | `emlis_ai_low_information_observation_composer.py`, `test_emlis_ai_low_information_observation_phase20_4.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` | A相当の短文・材料不足入力が無応答にならないことを確認する時。 |
+| Gate Recovery Loop | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_loop_phase20_5.py` | Gate failure後の短縮・限定・再生成・低情報/安全応答を確認する時。 |
+| Generic SentencePlan / Surface | `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_generic_sentence_surface_realizer_phase20_6.py` | C/D専用完成surfaceを使わずgeneric surfaceで返す境界を確認する時。 |
+| Public Boundary / RN Contract | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `test_emlis_ai_public_boundary_phase20_7.py`, `test_emlis_ai_phase20_7_public_boundary_rn_contract.py`, `Cocolon/tests/rn-screen-contracts.test.js` | public meta sanitizerとRN表示契約を確認する時。 |
+| QA Matrix / Phase19撤回 | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py`, `test_emlis_ai_phase20_9_phase19_withdrawal.py` | exact text一致禁止、C/D専用runtime token撤回を確認する時。 |
+
+禁止: Phase20のためにpublic response key、RN production UI、DB physical name、API route、observation_status enumを変える。Gate / Grounding / Reader / Templateを緩める。raw input / candidate text / comment_text body / internal contract bodyをpublic metaへ入れる。

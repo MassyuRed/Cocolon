@@ -3733,3 +3733,389 @@ test('Phase18-10 RN contract keeps Phase18 product-quality meta behind passed co
   ], 'Phase18-10 frontend diagnostic serialization stays text-free and product-meta-free');
 });
 
+
+test('Phase19-6 / Phase20-0 RN contract keeps ABCD regression samples behind passed plus comment_text only', () => {
+  const input = read('screens/InputScreen.js');
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+  const rnDisplaySources = input + inputFeedback + inputFeedbackModal + inputFeedbackReplyModal;
+
+  assertIncludes(inputFeedback, [
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'input?.input_feedback?.comment_text',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+  ], 'inputFeedbackModel.js Phase19-6 keeps public status/comment_text as the only display gate');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'setInputFeedbackModalText(payload.commentText);',
+    'setInputFeedbackModalVisible(true);',
+    'return true;',
+    'setInputFeedbackModalVisible(false);',
+    'setInputFeedbackModalText("");',
+    'return false;',
+  ], 'useInputFeedbackModal.js Phase19-6 keeps fail-closed modal opener');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'Emlisの観測',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    '<Text style={styles.inputFeedbackBodyText}>{text}</Text>',
+  ], 'InputFeedbackReplyModal.js Phase19-6 keeps title and verbatim commentText rendering');
+
+  assertIncludes(input, [
+    'commentText: inputFeedbackText',
+    'emlisAiMeta: inputFeedbackAI,',
+    'observationStatus: inputFeedbackAI?.observation_status',
+    'const openedObservation = inputFeedbackText',
+    'if (!openedObservation)',
+    'completeTutorialAfterReply();',
+  ], 'InputScreen.js Phase19-6 keeps backend-owned /emotion/submit display path');
+
+  assertNotIncludes(rnDisplaySources, [
+    'input?.input_feedback?.observation_text',
+    'input?.input_feedback?.reception_text',
+    'inputFeedback?.observation_text',
+    'inputFeedback?.reception_text',
+    'observationText',
+    'receptionText',
+    'twoStageDisplay',
+    'sectionLabels',
+    'phase19_public_feedback_recovery_matrix',
+    'self_understanding_learning_shift',
+    'relationship_gratitude_recovery',
+    'candidate_generated_before_display_gate',
+    'first_backend_blocker',
+    'evidence_span_count',
+    'observationStatus: inputFeedbackAI?.observation_status || "passed"',
+    'observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status || "passed"',
+  ], 'RN Phase19-6 display code must not read split keys, backend Phase19 internals, or force passed');
+
+  assertNotIncludes(inputFeedback + inputFeedbackModal + inputFeedbackReplyModal, [
+    'diagnostic_summary?.observation_status',
+    'diagnostic_summary?.comment_text',
+    'diagnostic?.observation_status ||',
+    'diagnostic?.comment_text',
+  ], 'RN Phase19-6 modal helpers must not use diagnostic_summary as display status or body source');
+
+  const {
+    getEmlisObservationReplyKind,
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  // Phase20-0: these are public payload samples for RN shape/behavior checks.
+  // They are not exact backend generation expectations and must not become
+  // runtime cue/mode/surface conditions.
+  const phase20Phase19RegressionPayloadSamples = [
+    {
+      caseId: 'phase19_real_device_A_low_information_fatigue',
+      replyKind: 'low_information_observation',
+      publicCommentTextSample: '疲れの重さが先に出ていて、今は何かを始める力がかなり少なくなっているように見えます。詳しく残せそうなら、だるさが強くなった場面を少しだけ残してみませんか。',
+      expectedTextShape: 'low_information_single_body',
+      emotionSummary: '選択した感情：悲しみ／不安',
+      dominantSummary: '中心として見ている感情：悲しみ',
+      emlisAi: {
+        observation_status: 'passed',
+        observation_reply_meta: {
+          observation_reply_kind: 'low_information_observation',
+          question_required: true,
+        },
+        phase19_complete_initial_low_information_repair_ownership: {
+          repair_allowed_under_complete_initial: true,
+          public_contract_changed: false,
+        },
+      },
+    },
+    {
+      caseId: 'phase19_real_device_C_self_understanding_learning_shift',
+      replyKind: 'eligible_observation',
+      publicCommentTextSample: [
+        '見えたこと：',
+        '人へ向いていた疑問が、物や環境を見る方向にも移ったことで、考え込みすぎていたところに少し余白が生まれているように見えます。',
+        '',
+        'Emlisから：',
+        '授業で得た視点を日常の観察やメモに移しているところまで含めて、今の変化は頭の中だけではなく、行動にも出始めています。',
+      ].join('\n'),
+      expectedTextShape: 'two_stage_labelled',
+      emotionSummary: '選択した感情：自己理解',
+      dominantSummary: '中心として見ている感情：自己理解',
+      emlisAi: {
+        observation_status: 'passed',
+        observation_reply_meta: { observation_reply_kind: 'eligible_observation' },
+        internal_mode: 'self_understanding_learning_shift',
+        visible_surface_acceptance_gate: { evaluated: true, passed: true, rejection_reasons: [] },
+        diagnostic_summary: {
+          candidate_generated: true,
+          mode: 'self_understanding_learning_shift',
+          comment_text_body_included: false,
+        },
+      },
+      splitKeys: {
+        observation_text: 'Cの観測split keyはRN表示対象ではありません。',
+        reception_text: 'Cの受け取りsplit keyもRN表示対象ではありません。',
+      },
+    },
+    {
+      caseId: 'phase19_real_device_D_relationship_gratitude_recovery',
+      replyKind: 'eligible_observation',
+      publicCommentTextSample: [
+        '見えたこと：',
+        '関係が終わった悲しさの中でも、そばに残っている優しさや、自分のために怒ってくれる存在を受け取れているところが見えます。',
+        '',
+        'Emlisから：',
+        'その出来事をただ失ったものとしてだけでなく、友達とのつながりや自分の区切りとして見直そうとしているのだと思います。',
+        '受け取った優しさを別の形で返したいと思えているところまで含めて、今は少しずつ立て直しの方向に向いています。',
+      ].join('\n'),
+      expectedTextShape: 'two_stage_labelled',
+      emotionSummary: '選択した感情：喜び',
+      dominantSummary: '中心として見ている感情：喜び',
+      emlisAi: {
+        observation_status: 'passed',
+        observation_reply_meta: { observation_reply_kind: 'eligible_observation' },
+        internal_mode: 'relationship_gratitude_recovery',
+        evidence_span_count: 3,
+        visible_surface_acceptance_gate: { evaluated: true, passed: true, rejection_reasons: [] },
+        diagnostic_summary: {
+          candidate_generated: true,
+          mode: 'relationship_gratitude_recovery',
+          evidence_span_count: 3,
+          comment_text_body_included: false,
+        },
+      },
+      splitKeys: {
+        observation_text: 'Dの観測split keyはRN表示対象ではありません。',
+        reception_text: 'Dの受け取りsplit keyもRN表示対象ではありません。',
+      },
+    },
+  ];
+
+  for (const fixture of phase20Phase19RegressionPayloadSamples) {
+    const publicCommentText = fixture.publicCommentTextSample;
+    assert.equal(typeof publicCommentText, 'string', `${fixture.caseId} sample text is string`);
+    assert.ok(publicCommentText.trim().length > 0, `${fixture.caseId} sample text is non-empty`);
+
+    if (fixture.expectedTextShape === 'two_stage_labelled') {
+      assert.equal(publicCommentText.split('見えたこと：').length - 1, 1, `${fixture.caseId} has one observation label`);
+      assert.equal(publicCommentText.split('Emlisから：').length - 1, 1, `${fixture.caseId} has one reception label`);
+    } else if (fixture.expectedTextShape === 'low_information_single_body') {
+      assert.equal(publicCommentText.includes('見えたこと：'), false, `${fixture.caseId} low-info sample is not a forced two-stage body`);
+      assert.equal(publicCommentText.includes('Emlisから：'), false, `${fixture.caseId} low-info sample is not a forced two-stage body`);
+    }
+
+    const payload = {
+      input_feedback: {
+        comment_text: publicCommentText,
+        ...(fixture.splitKeys || {}),
+        emlis_ai: fixture.emlisAi,
+      },
+      emotionSummary: fixture.emotionSummary,
+      dominantSummary: fixture.dominantSummary,
+    };
+
+    assert.equal(getEmlisObservationStatus(payload), 'passed', `${fixture.caseId} public status`);
+    assert.equal(getEmlisObservationCommentText(payload), publicCommentText, `${fixture.caseId} public comment_text pass-through`);
+    assert.equal(getEmlisObservationReplyKind(payload), fixture.replyKind, `${fixture.caseId} reply kind`);
+    assert.equal(isPassedEmlisObservationReply(payload), true, `${fixture.caseId} modal eligibility`);
+    assert.deepEqual(buildPassedEmlisObservationModalPayload(payload), {
+      commentText: publicCommentText,
+      observationStatus: 'passed',
+      emotionSummary: fixture.emotionSummary,
+      dominantSummary: fixture.dominantSummary,
+      contextLabel: '',
+    }, `${fixture.caseId} modal payload shape`);
+
+    const modalPayloadText = JSON.stringify(buildPassedEmlisObservationModalPayload(payload));
+    assert.equal(modalPayloadText.includes('self_understanding_learning_shift'), false, `${fixture.caseId} must not expose C internal mode`);
+    assert.equal(modalPayloadText.includes('relationship_gratitude_recovery'), false, `${fixture.caseId} must not expose D internal mode`);
+    assert.equal(modalPayloadText.includes('evidence_span_count'), false, `${fixture.caseId} must not expose evidence count`);
+    assert.equal(modalPayloadText.includes('diagnostic_summary'), false, `${fixture.caseId} must not expose diagnostic summary`);
+  }
+
+  const phase19BSafetyBlockedAbsentPayload = {
+    input_feedback: null,
+  };
+  assert.equal(getEmlisObservationStatus(phase19BSafetyBlockedAbsentPayload), '');
+  assert.equal(getEmlisObservationCommentText(phase19BSafetyBlockedAbsentPayload), '');
+  assert.equal(isPassedEmlisObservationReply(phase19BSafetyBlockedAbsentPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(phase19BSafetyBlockedAbsentPayload), null);
+
+  const phase19BSafetyBlockedExplicitPayload = {
+    input_feedback: {
+      comment_text: 'safety_blocked のBでは、この本文が存在してもRN表示してはいけません。',
+      emlis_ai: {
+        observation_status: 'safety_blocked',
+        diagnostic_summary: { observation_status: 'passed' },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(phase19BSafetyBlockedExplicitPayload), 'safety_blocked');
+  assert.equal(isPassedEmlisObservationReply(phase19BSafetyBlockedExplicitPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(phase19BSafetyBlockedExplicitPayload), null);
+
+  const phase19PassedMissingCommentPayload = {
+    input_feedback: {
+      comment_text: '   ',
+      observation_text: 'split keyだけでは表示しません。',
+      reception_text: 'split keyだけでは表示しません。',
+      emlis_ai: {
+        observation_status: 'passed',
+        diagnostic_summary: {
+          observation_status: 'passed',
+          comment_text: 'diagnostic_summary内の本文はRN表示対象外です。',
+        },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(phase19PassedMissingCommentPayload), 'passed');
+  assert.equal(getEmlisObservationCommentText(phase19PassedMissingCommentPayload), '');
+  assert.equal(isPassedEmlisObservationReply(phase19PassedMissingCommentPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(phase19PassedMissingCommentPayload), null);
+
+  for (const observation_status of ['rejected', 'unavailable', 'safety_blocked', '']) {
+    const nonPassedPhase19Payload = {
+      input_feedback: {
+        comment_text: 'Phase19 backend meta が表示可能に見えても、public status が non-passed なら表示しません。',
+        emlis_ai: {
+          observation_status,
+          internal_mode: 'relationship_gratitude_recovery',
+          visible_surface_acceptance_gate: { evaluated: true, passed: true, rejection_reasons: [] },
+          diagnostic_summary: {
+            observation_status: 'passed',
+            candidate_generated: true,
+            evidence_span_count: 2,
+          },
+        },
+      },
+    };
+    assert.equal(getEmlisObservationStatus(nonPassedPhase19Payload), observation_status);
+    assert.equal(isPassedEmlisObservationReply(nonPassedPhase19Payload), false);
+    assert.equal(buildPassedEmlisObservationModalPayload(nonPassedPhase19Payload), null);
+  }
+});
+
+test('Phase20-7 RN contract ignores internal response_kind and keeps exact text out of display eligibility', () => {
+  const input = read('screens/InputScreen.js');
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+  const rnDisplaySources = input + inputFeedback + inputFeedbackModal + inputFeedbackReplyModal;
+
+  assertIncludes(inputFeedback, [
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'input?.input_feedback?.comment_text',
+    'if (observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText)',
+    'return null;',
+    'commentText,',
+  ], 'inputFeedbackModel.js Phase20-7 keeps passed plus public comment_text as modal contract');
+
+  assertNotIncludes(rnDisplaySources, [
+    'input?.input_feedback?.emlis_ai?.internal_response_contract',
+    'input?.input_feedback?.emlis_ai?.response_kind',
+    'input?.input_feedback?.emlis_ai?.safety_triage_kind',
+    'input?.input_feedback?.emlis_ai?.grounding_scope',
+    'input?.input_feedback?.emlis_ai?.diagnostic_summary?.comment_text',
+    'input?.input_feedback?.emlis_ai?.diagnostic_summary?.observation_status',
+    'input?.input_feedback?.emlis_ai?.diagnostic_summary?.response_kind',
+    'input?.input_feedback?.emlis_ai?.internal_mode',
+    'input?.input_feedback?.observation_text',
+    'input?.input_feedback?.reception_text',
+    'inputFeedback?.observation_text',
+    'inputFeedback?.reception_text',
+    'observationText',
+    'receptionText',
+  ], 'RN Phase20-7 display path must not read internal contract, diagnostic summary, or split-key body sources');
+
+  const {
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  const commentVariants = [
+    'Phase20-7 normal observation sample A. Generated wording may change.',
+    'Phase20-7 normal observation sample B. Contract must not depend on exact generated text.',
+  ];
+
+  for (const commentText of commentVariants) {
+    const payload = {
+      input_feedback: {
+        comment_text: commentText,
+        observation_text: 'split key body must not be displayed',
+        reception_text: 'split key body must not be displayed',
+        emlis_ai: {
+          observation_status: 'passed',
+          response_kind: 'normal_observation',
+          internal_response_contract: {
+            response_kind: 'normal_observation',
+            public_observation_status: 'passed',
+            safety_triage_kind: 'safe_observation',
+            grounding_scope: 'current_input_only',
+          },
+          diagnostic_summary: {
+            observation_status: 'rejected',
+            response_kind: 'safety_blocked_emergency',
+            comment_text: 'diagnostic summary body must not be displayed',
+          },
+          internal_mode: 'relationship_gratitude_recovery',
+        },
+      },
+      emotionSummary: '選択した感情：不安',
+      dominantSummary: '中心として見ている感情：不安',
+    };
+
+    assert.equal(getEmlisObservationStatus(payload), 'passed');
+    assert.equal(getEmlisObservationCommentText(payload), commentText);
+    assert.equal(isPassedEmlisObservationReply(payload), true);
+    assert.deepEqual(buildPassedEmlisObservationModalPayload(payload), {
+      commentText,
+      observationStatus: 'passed',
+      emotionSummary: '選択した感情：不安',
+      dominantSummary: '中心として見ている感情：不安',
+      contextLabel: '',
+    });
+    const modalPayloadText = JSON.stringify(buildPassedEmlisObservationModalPayload(payload));
+    assert.equal(modalPayloadText.includes('normal_observation'), false);
+    assert.equal(modalPayloadText.includes('safety_blocked_emergency'), false);
+    assert.equal(modalPayloadText.includes('relationship_gratitude_recovery'), false);
+    assert.equal(modalPayloadText.includes('diagnostic summary body'), false);
+  }
+
+  const nonPassedWithDisplayableResponseKind = {
+    input_feedback: {
+      comment_text: 'response_kind がnormalでも public status がpassedでなければ表示しません。',
+      emlis_ai: {
+        observation_status: 'rejected',
+        response_kind: 'normal_observation',
+        internal_response_contract: { response_kind: 'normal_observation' },
+        diagnostic_summary: { observation_status: 'passed', comment_text: 'meta本文は使わない' },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(nonPassedWithDisplayableResponseKind), 'rejected');
+  assert.equal(isPassedEmlisObservationReply(nonPassedWithDisplayableResponseKind), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(nonPassedWithDisplayableResponseKind), null);
+
+  const splitKeyOnlyPayload = {
+    input_feedback: {
+      comment_text: '',
+      observation_text: 'split keyだけでは表示しません。',
+      reception_text: 'split keyだけでは表示しません。',
+      emlis_ai: {
+        observation_status: 'passed',
+        response_kind: 'limited_grounding_observation',
+        diagnostic_summary: { observation_status: 'passed', comment_text: 'meta本文は使わない' },
+      },
+    },
+  };
+  assert.equal(getEmlisObservationStatus(splitKeyOnlyPayload), 'passed');
+  assert.equal(getEmlisObservationCommentText(splitKeyOnlyPayload), '');
+  assert.equal(isPassedEmlisObservationReply(splitKeyOnlyPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(splitKeyOnlyPayload), null);
+});

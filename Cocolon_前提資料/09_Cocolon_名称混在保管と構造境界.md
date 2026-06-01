@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_name_mixing_structure_boundary
 title: "Cocolon 名称混在保管と構造境界"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(150).zip"
-  Cocolon: "Cocolon_12(7).zip"
-  mashos-api: "mashos-api_12(10).zip"
+  premise: "Cocolon_前提資料(158).zip"
+  Cocolon: "Cocolon_12(9).zip"
+  mashos-api: "mashos-api_12(12).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 712
-  total: 929
+  mashos-api: 736
+  total: 953
 purpose: "名称混在を資料で保管し、華恋が作業時に旧名称・current名称・DB物理名・runtime ownerを取り違えないようにする"
 ---
 
@@ -604,4 +604,18 @@ Phase17構造更新の結論: 二段受け取り構造は、A/B/ログ1/ログ2/
 | public E2E / RN contract | `/emotion/submit` とRNは既存 `input_feedback.comment_text` / `passed + commentText` 契約を維持する。 |
 
 作業時は、このPhase18名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。
+# 2026-06-01 差分追記: EmlisAI Phase20 internal名の保管境界
 
+`mashos-api_12(12).zip` では、Phase20撤回保持再設計により、`response_kind` / `safety_triage_kind` / `input_material_bundle` / `material_quality` / `gate_recovery_loop` / `generic_sentence_plan_surface` / `response_contract_qa_matrix` 系の内部名が増えている。これらは名称変更ではなく、EmlisAIが既存 `input_feedback.comment_text` とRN `passed + commentText` 契約を壊さず、Phase19個別routeから汎用観測返答へ戻るためのbackend内部境界である。`Emlisの観測` のvisible名、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しない。
+
+| internal名 | 保管する意味 |
+|---|---|
+| response_kind | public statusではなく、EmlisAI内部の応答種別。 |
+| safety_triage_kind | emergency safetyと自己否定安全応答を分ける内部分類。 |
+| input_material_bundle / material_quality | 入力束から見える材料量・不明slotを判断する内部material。 |
+| low_information_observation | 低情報入力を無応答にしない内部branch。 |
+| gate_recovery_loop / repair_attempts | Gate failure後の短縮・限定・再生成・低情報/安全応答の内部履歴。 |
+| generic_sentence_plan_surface | C/D専用modeではなく汎用sentence planでsurface化する内部mode。 |
+| response_contract_qa_matrix | exact本文一致ではなくfamily品質で見るQA helper。 |
+
+作業時は、このPhase20名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。

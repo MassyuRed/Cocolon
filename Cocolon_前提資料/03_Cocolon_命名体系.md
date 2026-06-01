@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(150).zip"
-  Cocolon: "Cocolon_12(7).zip"
-  mashos-api: "mashos-api_12(10).zip"
+  premise: "Cocolon_前提資料(158).zip"
+  Cocolon: "Cocolon_12(9).zip"
+  mashos-api: "mashos-api_12(12).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 712
-  total: 929
+  mashos-api: 736
+  total: 953
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -660,4 +660,19 @@ Phase15名称更新の結論: これらの名称は、Phase0-14で追加され�
 | `candidate_status_before_display_gate` / `candidate_generated_before_display_gate` | backend diagnostic summary | 候補生成と表示判定を分けて記録するbodyなしsummary。 | generated candidate本文のpublic保存ではない。 |
 
 作業時は、Phase18系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。Phase18は「public schemaを増やす工程」ではなく、既存二段本文shapeを壊さず、広い既存回帰をfail-closed / meta-only / passed-onlyで安定させるbackend内部品質補完である。
+# 2026-06-01 差分追記: EmlisAI Phase20 internal名の読み分け
 
+`mashos-api_12(12).zip` では、EmlisAI Phase20-0〜20-10 により、撤回保持再設計用のinternal名が増えている。これらは、visible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| 名称 | 種別 | 読み方 | してはいけない読み替え |
+|---|---|---|---|
+| `response_kind` | backend internal contract | EmlisAI内部の応答種別。normal / low_information / limited / self_denial_safe_state_answer / safety / infraを分ける。 | public `observation_status` enum追加、RN表示条件。 |
+| `safety_triage_kind` | backend internal safety分類 | safe / self_denial_safe_state_answer / safety_support_required / safety_blocked_emergencyを分ける。 | emergency safetyのpassed化。 |
+| `input_material_bundle` | backend internal material | thought / action / emotion / categoryから見える材料とunknown slotsを読む。 | case語彙router、文字数だけのlow-info判定。 |
+| `low_information_observation` | internal response_kind / composer branch | 材料不足入力を無応答にせず、見えている範囲と追加促しに分ける。 | A専用route、固定fallback。 |
+| `gate_recovery_loop` | backend internal repair policy | Gate failureを短縮・限定・断定弱化・低情報/安全応答へ回す。 | Gate緩和、固定文注入。 |
+| `generic_sentence_plan_surface` | backend internal surface mode | C/D専用完成surfaceではなく、relation / material / tone / boundaryから文を組み立てる。 | C/D専用mode復活、完成文bank。 |
+| `response_contract_qa_matrix` | test / QA helper | family単位で品質・fatal条件を見る。 | exact generated text一致を合格条件にする。 |
+| `phase20_10_real_device_recheck` | test / real-device regression | A低情報がscope-only blockerで非表示にならないことを固定する。 | 実機ログ本文をruntime条件にする。 |
+
+作業時は、Phase20系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。

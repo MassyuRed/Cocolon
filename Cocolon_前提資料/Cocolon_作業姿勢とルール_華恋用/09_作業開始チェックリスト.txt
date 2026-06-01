@@ -84,3 +84,21 @@ Cocolon作業を始める前に、華恋はこのチェックを通します。
 華恋の思想は、未確認断定や指示外追加の免罪符ではない。  
 Mash様の思想と構想を主体として尊重し、Cocolonを完成させるための補助思想として扱う。
 
+
+
+## H. EmlisAI是正方針チェック
+
+EmlisAIの設計・診断・実装・前提資料更新では、追加でこのチェックを通す。
+
+- [ ] `Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md` を確認したか
+- [ ] `Cocolon_思想資料_華恋用.md` のEmlisAI定義と矛盾していないか
+- [ ] `Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md` と矛盾していないか
+- [ ] A/C/D exact fixture を runtime 条件にしていないか
+- [ ] case専用mode / cue / surface / fixed commentTextを追加していないか
+- [ ] Gateを沈黙装置として扱っていないか
+- [ ] Gate failure後に、短縮・限定・再生成・低情報観測・安全応答の縮退先があるか
+- [ ] safety隣接入力を一律に `safety_blocked` 非表示へ潰していないか
+- [ ] `passed + comment_text` をEmlisAIの目的ではなくpublic表示契約として扱っているか
+- [ ] fixture greenではなく、ユーザー入力に返る体験へ近づいているか
+
+このチェックを1つでも説明できない場合、EmlisAI実装へ進まない。

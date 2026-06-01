@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-05-30",
+  "revision_date": "2026-06-01",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 712,
-    "total": 929
+    "mashos-api": 736,
+    "total": 953
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 929,
-    "national_system_body_includes": 929,
+    "overall_structure_body_includes": 953,
+    "national_system_body_includes": 953,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル929件、国家システム判断対象のcurrent全ファイル929件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPhase18は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 929,
-    "overall_structure_body_includes_current_snapshot_files": 929,
-    "national_system_body_lists_current_snapshot_files_with_relation": 929,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル953件、国家システム判断対象のcurrent全ファイル953件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPhase20は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 953,
+    "overall_structure_body_includes_current_snapshot_files": 953,
+    "national_system_body_lists_current_snapshot_files_with_relation": 953,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -828,7 +828,9 @@
       }
     },
     "phase18_target_docs_reflect_product_quality_stabilization": true,
-    "phase18_full_01_02_regeneration": false
+    "phase18_full_01_02_regeneration": false,
+    "phase20_target_docs_reflect_emlis_correction_implementation": true,
+    "phase20_full_01_02_regeneration": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -845,7 +847,7 @@
   "docs": [
     {
       "path": "00_華恋用_READ_FIRST.md",
-      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI二段受け取り構造 / Phase16 Composer接続 / Phase17商品到達fixture補完境界を固定する"
+      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Phase20撤回保持再設計 / 実機再確認境界を固定する"
     },
     {
       "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
@@ -893,7 +895,7 @@
     },
     {
       "path": "07_Cocolon_最新スナップショット差分",
-      "purpose": "最新zipから見える構造差分。EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 snapshot差分を含む"
+      "purpose": "最新snapshot差分。Phase20-0〜20-10のEmlisAI実装反映、public/RN境界、A/B/C/D回帰fixtureの読み方を固定する"
     },
     {
       "path": "09_Cocolon_名称混在保管と構造境界.md",
@@ -1878,18 +1880,18 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(150).zip",
-    "Cocolon": "Cocolon_12(7).zip",
-    "mashos-api": "mashos-api_12(10).zip",
+    "premise": "Cocolon_前提資料(158).zip",
+    "Cocolon": "Cocolon_12(9).zip",
+    "mashos-api": "mashos-api_12(12).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 712,
-      "total": 929
+      "mashos-api": 736,
+      "total": 953
     },
     "sha256": {
-      "premise": "de695dafbad34ea88bfebf5170ee7ca4616c1d1161da5ff8c9dde9c3e8b87b9e",
-      "Cocolon": "45af7f062ef69874c7671ae46fb2cdb1ce230a51feb8b6e0ee5b24ec73da32b0",
-      "mashos-api": "1b024fb814bda1c8b475cdf49727244c7743d57040a0e8965292c7ce6a2dc3a7"
+      "premise": "d0137544ed5a5946d49565ab425e9c162cc37db30cf1aab741a6b2646cf5744b",
+      "Cocolon": "8f6e2687c30b6e0832e717e75efe8c1ac712feee9bc7c0522921084e487c7f5e",
+      "mashos-api": "e59f063380fe309e959fd5e48fd09fd400ebc683f3d5215c7cc29d2714be314d"
     },
     "source_mode": "local_snapshot"
   },
@@ -2657,15 +2659,21 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(148).zip",
-    "Cocolon": "Cocolon_11(4).zip",
-    "mashos-api": "mashos-api_11(11).zip",
+    "premise": "Cocolon_前提資料(158).zip",
+    "Cocolon": "Cocolon_12(9).zip",
+    "mashos-api": "mashos-api_12(12).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 699,
-      "total": 916
+      "mashos-api": 736,
+      "total": 953
     },
-    "summary": "EmlisAI TwoStage Product-Visible Fixture Completion Phase17-0〜17-10 premise reflection. 5件fixtureをpassed + labelled two-stage comment_textへ到達させ、RN production UI / DB / API route / public response keyは変更しない。"
+    "sha256": {
+      "premise": "d0137544ed5a5946d49565ab425e9c162cc37db30cf1aab741a6b2646cf5744b",
+      "Cocolon": "8f6e2687c30b6e0832e717e75efe8c1ac712feee9bc7c0522921084e487c7f5e",
+      "mashos-api": "e59f063380fe309e959fd5e48fd09fd400ebc683f3d5215c7cc29d2714be314d"
+    },
+    "source_mode": "local_snapshot",
+    "summary": "EmlisAI Phase20-0〜20-10 implementation reflection. Internal Response Contract / Safety Triage / Input Material Bundle / Low Information Observation / Gate Recovery Loop / Generic SentencePlan Surface / Public Boundary / QA Matrix / Phase19 withdrawal / Phase20-10 real-device A fix. Production RN UI / DB / API route / public response keys remain unchanged."
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -5564,6 +5572,172 @@
       "05_Cocolon_ルールファイル索引",
       "07_Cocolon_最新スナップショット差分",
       "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  },
+  "emlis_ai_correction_policy_2026_05_31": {
+    "new_required_doc": "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
+    "purpose": "Phase19のA/C/D個別通過路線を本線成功扱いせず、EmlisAIを入力直後の観測返答へ戻すための是正方針を前提資料に追加する。",
+    "must_read_with": [
+      "Cocolon_思想資料_華恋用.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+      "Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt"
+    ],
+    "runtime_forbidden": [
+      "A/C/D exact fixture を runtime 条件にする",
+      "case専用mode / cue / surface / fixed commentTextを追加する",
+      "Gate failureを無反応で終わらせる",
+      "passed + comment_text到達をEmlisAIの目的として扱う",
+      "safety隣接入力を一律に通常観測非表示へ潰す"
+    ],
+    "changed_files": [
+      "00_華恋用_READ_FIRST.md",
+      "05_Cocolon_ルールファイル索引",
+      "manifest.json",
+      "Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt",
+      "Cocolon_作業姿勢とルール_華恋用/05_禁止事項_勝手な補完と構造追加.txt",
+      "Cocolon_作業姿勢とルール_華恋用/09_作業開始チェックリスト.txt",
+      "Cocolon_作業姿勢とルール_華恋用/10_停止判定と書かれていないルール.txt",
+      "Cocolon_作業姿勢とルール_華恋用/13_禁止事項_既出設計の再質問と設計用語への逃げ禁止.txt",
+      "Cocolon_作業姿勢とルール_華恋用/99_統合版_毎回貼る用.txt",
+      "Cocolon_作業姿勢とルール_華恋用/manifest.json"
+    ],
+    "implemented_in_latest_snapshot": "mashos-api_12(12).zip / Cocolon_12(9).zip",
+    "implementation_reflection_key": "emlis_phase20_0_10_policy_2026_06_01"
+  },
+  "source_snapshot_2026_06_01_emlis_phase20_0_10": {
+    "date": "2026-06-01",
+    "premise": "Cocolon_前提資料(158).zip",
+    "Cocolon": "Cocolon_12(9).zip",
+    "mashos-api": "mashos-api_12(12).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 736,
+      "total": 953
+    },
+    "sha256": {
+      "premise": "d0137544ed5a5946d49565ab425e9c162cc37db30cf1aab741a6b2646cf5744b",
+      "Cocolon": "8f6e2687c30b6e0832e717e75efe8c1ac712feee9bc7c0522921084e487c7f5e",
+      "mashos-api": "e59f063380fe309e959fd5e48fd09fd400ebc683f3d5215c7cc29d2714be314d"
+    },
+    "phase_scope": "EmlisAI Phase20-0〜20-10 correction implementation and premise diff reflection",
+    "implemented_phase_scope": [
+      "Phase20-0: Phase19 diff inventory classification",
+      "Phase20-1: Internal Response Contract",
+      "Phase20-2: Safety Triage redesign",
+      "Phase20-3: Input Material Bundle / Eligibility Router",
+      "Phase20-4: Low Information Observation restoration",
+      "Phase20-5: Gate Recovery Loop",
+      "Phase20-6: Generic SentencePlan / Surface Realizer",
+      "Phase20-7: Public Boundary / RN Contract",
+      "Phase20-8: QA Matrix",
+      "Phase20-9: Phase19 withdrawal implementation",
+      "Phase20-10: real-device recheck / A low-information scope-only blocker fix"
+    ],
+    "runtime_contract_unchanged": true,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "rn_production_ui_changed": false,
+    "public_response_keys_added": [],
+    "observation_status_enum_added": [],
+    "Cocolon_added_files": [],
+    "Cocolon_removed_files": [],
+    "Cocolon_changed_files": [
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ],
+    "mashos_api_added_or_new_phase20_owner_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_response_contract.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_safety_triage.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_self_denial_safe_state_answer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_input_material_bundle.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_eligibility_router.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_response_contract_qa_matrix.py",
+      "mashos-api/ai/tests/helpers/emlis_ai_phase20_phase19_diff_inventory.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase20_phase19_diff_inventory.py",
+      "mashos-api/ai/tests/test_emlis_ai_phase20_10_real_device_recheck.py"
+    ],
+    "mashos_api_changed_phase20_owner_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json"
+    ],
+    "modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "01_Cocolon_全体構造資料.md",
+      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "02_Cocolon_国家システム資料.md",
+      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "03_Cocolon_命名体系.md",
+      "04_Cocolon_変更テーマ別チェックリスト",
+      "05_Cocolon_ルールファイル索引",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
+      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "manifest.json"
+    ]
+  },
+  "emlis_phase20_0_10_policy_2026_06_01": {
+    "schema_version": "cocolon.emlis.phase20_0_10.2026-06-01",
+    "display_shape": "input_feedback.comment_text remains the only public visible body; Emlisの観測 modal remains passed + commentText only",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "observation_status_enum_added": [],
+    "db_physical_name_changed": false,
+    "api_route_changed": false,
+    "internal_materials": [
+      "response_kind",
+      "safety_triage_kind",
+      "input_material_bundle",
+      "material_quality",
+      "visible_material_slots",
+      "unknown_slots",
+      "gate_recovery_loop",
+      "repair_attempts",
+      "generic_sentence_plan_surface",
+      "response_contract_qa_matrix",
+      "phase20_10_real_device_recheck"
+    ],
+    "forbidden": [
+      "response_kind_as_public_display_source",
+      "safety_triage_kind_as_rn_display_condition",
+      "material_quality_as_public_response_key",
+      "observation_text_or_reception_text_public_keys",
+      "rn_parse_diagnostic_summary",
+      "rn_production_ui_change",
+      "phase19_c_d_dedicated_mode_or_cue_restore",
+      "a_low_information_case_specific_route",
+      "gate_recovery_fixed_fallback",
+      "exact_comment_text_qa_success_condition",
+      "self_denial_identity_claim_as_fact",
+      "safety_emergency_overridden_as_passed_observation",
+      "raw_input_or_comment_text_body_in_public_meta"
+    ],
+    "phase20_modified_premise_files": [
+      "00_華恋用_READ_FIRST.md",
+      "01_Cocolon_全体構造資料.md",
+      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "02_Cocolon_国家システム資料.md",
+      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "03_Cocolon_命名体系.md",
+      "04_Cocolon_変更テーマ別チェックリスト",
+      "05_Cocolon_ルールファイル索引",
+      "07_Cocolon_最新スナップショット差分",
+      "09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
       "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
       "manifest.json"
     ]

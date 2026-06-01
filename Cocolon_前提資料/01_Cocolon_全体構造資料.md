@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(150).zip"
-  Cocolon: "Cocolon_12(7).zip"
-  mashos-api: "mashos-api_12(10).zip"
+  premise: "Cocolon_前提資料(158).zip"
+  Cocolon: "Cocolon_12(9).zip"
+  mashos-api: "mashos-api_12(12).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 712
-  total: 929
+  mashos-api: 736
+  total: 953
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 929
+  included_files_total: 953
   included_files_cocolon: 217
-  included_files_mashos_api: 712
+  included_files_mashos_api: 736
 ---
 
 # 1. 1行定義
@@ -2018,4 +2018,21 @@ emlis_ai_observation_structure_connection_service.py
 - 低情報repairは短い低情報入力だけに限定し、positive recoveryやprovided candidateの失敗を隠さない。
 - diagnostic taxonomy / readability QA / two-stage applicabilityはinternal summaryであり、public schemaではない。
 ```
+# 2026-06-01 差分追記: EmlisAI Phase20 撤回保持再設計 current owner
 
+最新実ファイル `Cocolon_12(9).zip` / `mashos-api_12(12).zip` では、EmlisAI Phase20-0〜20-10 が入っている。旧Phase18の二段表示・商品品質安定化は履歴として保持し、この差分追記をPhase20後のEmlisAI current owner補正として読む。
+
+Phase20は、RN production UI、DB physical schema、API route、public response keyを増やす工程ではない。EmlisAI内部で、`response_kind`、Safety Triage、Input Material Bundle、低情報観測、Gate Recovery Loop、Generic SentencePlan / Surface、Public Boundary、QA Matrix、Phase19撤回、実機A再確認修正を追加・整理した工程である。
+
+| current owner | system | 最新の読み方 |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_response_contract.py` | EmlisAI internal response contract | public `observation_status` ではなく内部 `response_kind` で応答種別を読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_safety_triage.py` | EmlisAI safety triage | 自己否定安全応答、safety support、緊急安全境界を分ける。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_input_material_bundle.py` | EmlisAI input material | `thought / action / emotion / category` の入力束から材料量・観測可能範囲を読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py` | EmlisAI low-information observation | 短文・材料不足を無応答にせず、見えている範囲と未確定slotを分けて返す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py` | EmlisAI gate recovery | Gate failureを即emptyにせず、短縮・限定・断定弱化・低情報/安全応答へ回す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_response_contract_qa_matrix.py` | EmlisAI QA matrix | exact text一致ではなく、input familyごとの品質・禁止事項・表示可否を確認する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_display_repair_integration.py` | EmlisAI display repair / real-device A fix | 低情報materialが成立している場合に限り、scope-only blockerを最終無応答理由として扱わない。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RN contract | production RN UIは変更せず、既存 `passed + commentText` のmodal表示契約を維持する。 |
+
+作業時は、Phase20のinternal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。Phase20は「public schemaを増やす工程」ではなく、入力直後の観測返答へ戻すbackend内部構造の是正である。

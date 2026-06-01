@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-05-30"
+revision_date: "2026-06-01"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(150).zip"
-  Cocolon: "Cocolon_12(7).zip"
-  mashos-api: "mashos-api_12(10).zip"
+  premise: "Cocolon_前提資料(158).zip"
+  Cocolon: "Cocolon_12(9).zip"
+  mashos-api: "mashos-api_12(12).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 712
-  total: 929
+  mashos-api: 736
+  total: 953
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 929
-  included_in_overall_structure: 929
-  included_in_national_system: 929
+  total_files: 953
+  included_in_overall_structure: 953
+  included_in_national_system: 953
   excluded_from_main_body: 0
   phase15_target_docs_reflect_two_stage_increment: true
   phase15_full_01_02_regeneration: false
@@ -28,6 +28,9 @@ coverage:
   phase17_full_01_02_regeneration: false
   phase18_target_docs_reflect_product_quality_stabilization: true
   phase18_full_01_02_regeneration: false
+  phase20_emlis_ai_correction_policy_required: true
+  phase20_target_docs_reflect_emlis_correction_implementation: true
+  phase20_full_01_02_regeneration: false
 ---
 
 # これは何か
@@ -58,17 +61,95 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 - 修正対象にするのは、稼働、public contract、API接続先、DB write path、account delete、access policy、ユーザーデータ保護に影響する箇所だけです。
 - Piece関係は、Mash様が明示していない限り、Piece専用工程として扱います。
 
+
+# 2026-05-31 追加必読: EmlisAI是正方針 / Phase19撤回保持再設計
+
+EmlisAIに関する設計・診断・実装・前提資料更新では、次の資料を必ず読む。
+
+```text
+Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md
+```
+
+この資料は、Phase19のA/C/D個別通過路線を本線成功扱いしないための是正方針である。  
+EmlisAIを `passed + comment_text` に到達したものだけ表示する許可装置として扱わず、ユーザー入力直後の観測返答として戻すための前提資料として固定する。
+
+EmlisAI作業では、最低限次を同時確認する。
+
+```text
+Cocolon_思想資料_華恋用.md
+Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md
+Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md
+Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md
+```
+
+禁止する読み方:
+
+```text
+A/C/D exact fixture を runtime 条件にする。
+case専用mode / cue / surface を追加して通す。
+Gate failure を empty comment_text / unavailable / rejected の無反応で終わらせる。
+EmlisAIの目的を RN modal 表示到達や fixture green に置き換える。
+safety隣接入力を一律に通常観測非表示へ潰す。
+```
+
+保持する読み方:
+
+```text
+A/C/D fixture は失敗再現・回帰確認として扱う。
+Gate は沈黙装置ではなく、安全・短縮・限定・再生成へ回す品質境界として扱う。
+EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読まれた形として返す出口として扱う。
+```
+
 # 最新基準面
 
 この版の基準面は次です。
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_12(7).zip` | 217 | RNアプリ本体。Phase18-10として、production RN UIを変えず、Phase18 backend metaを表示条件にせず、既存 `commentText` だけをmodal本文として扱うcontract回帰を維持。 |
-| `mashos-api_12(10).zip` | 712 | backend / API / worker / tests。Phase18-0〜18-11を反映し、TwoStage適用境界、Complete Initial候補生成、低情報repair、daily_unpleasant mode context、meta-only sanitizer、diagnostic taxonomy、表示文読感QA、`/emotion/submit`商品品質E2E、既存回帰確認まで含む。 |
-| total | 929 | Phase18前提資料反映対象snapshot |
+| `Cocolon_12(9).zip` | 217 | RNアプリ本体。production RN UIは変更せず、`Cocolon/tests/rn-screen-contracts.test.js` で `passed + commentText` の既存表示契約を維持する。 |
+| `mashos-api_12(12).zip` | 736 | backend / API / worker / tests。Phase20-0〜20-10を反映し、Internal Response Contract、Safety Triage、Input Material Bundle、Low Information Observation、Gate Recovery Loop、Generic SentencePlan / Surface、Public Boundary / QA Matrix、Phase19撤回、実機A再確認修正まで含む。 |
+| total | 953 | Phase20前提資料反映対象snapshot |
 
-`Cocolon_12(7).zip` / `mashos-api_12(10).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、Phase17の5件fixture商品到達を維持しつつ、Complete Initial、low-information、daily_unpleasant、meta-only境界、diagnostic分類、読感QA、`/emotion/submit` public boundaryを安定化しています。前提資料は、この実装済み境界を作業用地図へ反映します。
+`Cocolon_12(9).zip` / `mashos-api_12(12).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、EmlisAIを `passed + comment_text` 目的化から入力直後の観測返答へ戻すPhase20実装が入っています。
+
+Phase20後のEmlisAI作業では、次を最新の読み方として固定します。
+
+```text
+normal / low_information / limited_grounding / self_denial_safe_state_answer は内部 response_kind として読む。
+public response は既存 input_feedback.comment_text と input_feedback.emlis_ai.observation_status を維持する。
+RN production UI は内部 response_kind / diagnostic_summary / observation_text / reception_text を表示源にしない。
+A/C/D exact fixture は回帰fixtureであり、runtime条件や完成文テンプレではない。
+B系自己否定入力は、緊急安全境界と自己否定安全応答を分けて読む。
+```
+
+# 2026-06-01 Phase20反映: EmlisAI撤回保持再設計 / 実機再確認
+
+Phase20では、Phase19のA/C/D個別通過路線を本線成功扱いせず、EmlisAIを入力直後の観測返答へ戻すためのbackend内部構造を実装した。これはproduction RN UI、DB physical schema、API route、public response keyを増やす変更ではなく、EmlisAI内部の判断・材料束・低情報復旧・Gate recovery・surface生成・public sanitizer・QAを整理する変更である。
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| Phase20-0 | Phase19差分を `delete / quarantine / generalize / retain` へ分類するtest-only inventory。 | `ai/tests/helpers/emlis_ai_phase20_phase19_diff_inventory.py`, `ai/tests/test_emlis_ai_phase20_phase19_diff_inventory.py` |
+| Phase20-1 | `passed / rejected / unavailable` ではなく内部 `response_kind` を中心にする。 | `emlis_ai_response_contract.py`, `test_emlis_ai_response_contract.py` |
+| Phase20-2 | 自己否定安全応答、support required、emergency safetyを分ける。 | `emlis_ai_safety_triage.py`, `emlis_ai_self_denial_safe_state_answer.py` |
+| Phase20-3 | 入力を `thought / action / emotion / category` のmaterial bundleで読み、C/D専用cueをruntime本線から外す。 | `emlis_ai_input_material_bundle.py`, `emlis_ai_observation_eligibility_router.py` |
+| Phase20-4 | 低情報入力を無応答にせず、見えている範囲と未確定slotを分けて返す。 | `emlis_ai_low_information_observation_composer.py`, `test_emlis_ai_low_information_observation_phase20_4.py` |
+| Phase20-5 | Gate failureを即emptyにせず、短縮・限定・断定弱化・低情報/安全応答へ回す。 | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_loop_phase20_5.py` |
+| Phase20-6 | C/D専用完成surfaceではなく、generic sentence plan / surface ruleで返す。 | `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_generic_sentence_surface_realizer_phase20_6.py` |
+| Phase20-7 | internal contractをpublicへ漏らさず、RN contractをshape / behavior中心へ整理する。 | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `Cocolon/tests/rn-screen-contracts.test.js` |
+| Phase20-8 | exact text一致ではなくfamily品質でQAするResponse Contract QA Matrix。 | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py` |
+| Phase20-9 | Phase19 C/D専用mode・cue・完成surfaceをproduction本線から撤回し、汎用材料へ吸収する。 | `emlis_ai_shared_reception_evidence.py`, `emlis_ai_reception_mode_resolver.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_phase20_9_phase19_withdrawal.py` |
+| Phase20-10 | 実機スクショログでAだけ表示されなかったscope-only blockerを、低情報material成立時だけ無応答理由から外す。 | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` |
+
+作業時の禁止は次です。
+
+```text
+response_kind / safety_triage_kind / material_quality をpublic表示sourceにしない。
+C/D専用mode・cue・完成surfaceを復活させない。
+A低情報をcase専用routeで通さない。
+Gate recoveryをfixed fallback化しない。
+self_denialを本人の事実として確定しない。
+safety emergencyをEmlis通常観測としてpassed化しない。
+```
 
 # 2026-05-28 Phase15反映: EmlisAI二段受け取り構造 / Daily Reception
 

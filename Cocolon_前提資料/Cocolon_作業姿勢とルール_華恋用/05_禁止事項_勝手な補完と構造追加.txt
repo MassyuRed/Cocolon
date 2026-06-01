@@ -47,3 +47,25 @@ Cocolonは既に多くの構造、名称混在、contract、DB境界を持って
 それはユーザーに見える価値へつながるか。
 
 1つでも不明なら、未確認として止めます。
+
+
+## 2026-05-31 差分追記: EmlisAI Phase19型の補完禁止
+
+EmlisAI作業では、次を勝手な補完として禁止する。
+
+- A/C/Dなどの実機入力例に合わせて、runtime用の専用modeを追加する。
+- 入力例の語彙を、そのままruntime feature cue / trigger / mode conditionにする。
+- modeごとの完成surface文、固定surface、固定fallback文を追加する。
+- fixtureを通すためだけにGate、Surface、Repair、Public metaの条件を増やす。
+- Gate failureを `empty_comment_text` / `unavailable` / `rejected` の無反応で終わらせる。
+- `passed + comment_text` 到達をEmlisAIの目的として扱う。
+- safety隣接入力を一律に通常観測非表示へ潰す。
+- 「固定文ではない」ことを理由に、構造テンプレやcase専用routeを許可する。
+
+EmlisAIで許可される修正は、次の条件を満たす場合だけです。
+
+- 入力例ではなく、入力束・根拠・関係・未確定部分・安全境界を汎用に読む構造改善である。
+- 未来の未知入力にも効く、Evidence / Relation / SentencePlan / Surface Realizer の改善である。
+- Gate failure後に、短縮・限定・再生成・低情報観測・安全応答へ回す設計がある。
+- 例文はruntime条件ではなく、失敗再現・回帰確認・QA fixtureとしてだけ扱う。
+- `Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md` の撤回・保持・再設計分類に反していない。
