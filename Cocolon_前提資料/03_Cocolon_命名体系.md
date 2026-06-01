@@ -7,13 +7,13 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(158).zip"
-  Cocolon: "Cocolon_12(9).zip"
-  mashos-api: "mashos-api_12(12).zip"
+  premise: "Cocolon_前提資料(161).zip"
+  Cocolon: "Cocolon_5(22).zip"
+  mashos-api: "mashos-api_5(47).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 736
-  total: 953
+  mashos-api: 738
+  total: 955
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -662,7 +662,7 @@ Phase15名称更新の結論: これらの名称は、Phase0-14で追加され�
 作業時は、Phase18系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。Phase18は「public schemaを増やす工程」ではなく、既存二段本文shapeを壊さず、広い既存回帰をfail-closed / meta-only / passed-onlyで安定させるbackend内部品質補完である。
 # 2026-06-01 差分追記: EmlisAI Phase20 internal名の読み分け
 
-`mashos-api_12(12).zip` では、EmlisAI Phase20-0〜20-10 により、撤回保持再設計用のinternal名が増えている。これらは、visible名、public response key、DB physical name、API route、RN production UI名ではない。
+`mashos-api_5(47).zip` では、EmlisAI Phase20-0〜20-15 により、撤回保持再設計と表示信頼性補強用のinternal名が増えている。これらは、visible名、public response key、DB physical name、API route、RN production UI名ではない。
 
 | 名称 | 種別 | 読み方 | してはいけない読み替え |
 |---|---|---|---|
@@ -674,5 +674,9 @@ Phase15名称更新の結論: これらの名称は、Phase0-14で追加され�
 | `generic_sentence_plan_surface` | backend internal surface mode | C/D専用完成surfaceではなく、relation / material / tone / boundaryから文を組み立てる。 | C/D専用mode復活、完成文bank。 |
 | `response_contract_qa_matrix` | test / QA helper | family単位で品質・fatal条件を見る。 | exact generated text一致を合格条件にする。 |
 | `phase20_10_real_device_recheck` | test / real-device regression | A低情報がscope-only blockerで非表示にならないことを固定する。 | 実機ログ本文をruntime条件にする。 |
+| `phase20_13_post_final_gate_recovery` | backend internal meta / regression | final pre-return gate後にdisplayable response kindが空白へ戻らないことを確認する内部meta / test名。 | public response key、RN表示条件、Gate緩和。 |
+| `post_final_pre_return_gate` | backend recovery context | Gate Recovery後の最終再評価で落ちた通常入力を一回だけ回復対象にするcontext。 | safety emergency / infrastructureのpassed化。 |
+| `phase20_15_gate_recovery_surface_binding` | backend internal meta / QA | Gate Recovery surfaceがmaterial slots / relation family / unknown slotsに接続していることを本文なしで示す。 | comment_text本文保存、raw input保存、fixed fallback証明の単独根拠。 |
+| `gate_recovery_surface_repetition_qa` | backend QA summary | Gate Recovery surface family / closing familyの反復を検出するQA。 | exact本文一致QA、完成文テンプレbank。 |
 
 作業時は、Phase20系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。

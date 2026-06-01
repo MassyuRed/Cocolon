@@ -1997,8 +1997,19 @@ RN input submit
  -> RN receives input_feedback only when observation_status=passed + comment_text non-empty
 ```
 
-Phase20で追加されたbackend内部境界は、保存成功やpublic response shapeを変えるものではない。`response_kind`、`safety_triage_kind`、`material_quality`、`visible_material_slots`、`unknown_slots`、Gate recovery attemptsは、EmlisAI内部の判断・diagnostic・test用materialとして読む。
+Phase20で追加されたbackend内部境界は、保存成功やpublic response shapeを変えるものではない。`response_kind`、`safety_triage_kind`、`material_quality`、`visible_material_slots`、`unknown_slots`、Gate recovery attempts、post-final gate recovery、Gate Recovery surface bindingは、EmlisAI内部の判断・diagnostic・test用materialとして読む。
 
 Aの実機再確認修正では、低情報materialが成立している場合に限り、scope-only blockerを最終無応答理由として扱わずlow-information observation branchへ進める。これはSafety Gate、AP0、rollout、infra、実際の品質Gateを緩めるものではない。
 
 禁止: rejected / unavailable / emergency safety / infraをRN表示用feedbackとして偽装する、`observation_text` / `reception_text` public keyを追加する、Phase20 internal metaだけでRN modalを開く。
+
+Phase20-12〜20-15後は、`/emotion/submit` の保存・dispatch・public response契約を変えず、EmlisAI reply内部だけで次を補強している。
+
+```text
+- 旧fail-closed説明コメントを、displayable response kindではbounded repair / recoveryを通す説明へ更新。
+- final pre-return gate後にnormal / low_information / limited_groundingが落ちても、safety / infraでない限り空白終了へ戻さないpost-final recoveryを追加。
+- Gate Recovery surfaceがfixed fallback化していないことを、本文ではなくbinding meta / repetition QAで検出。
+```
+
+禁止: `phase20_13_post_final_gate_recovery` や `phase20_15_gate_recovery_surface_binding` をpublic response keyやRN表示条件にしない。raw input / generated candidate / comment_text bodyは引き続きpublic metaへ入れない。
+

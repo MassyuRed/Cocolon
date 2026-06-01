@@ -13,10 +13,9 @@
 ### 0.1 今回確認した最新版zip
 
 ```text
-/mnt/data/Cocolon_12(9).zip
-/mnt/data/mashos-api_12(12).zip
-/mnt/data/Cocolon_前提資料(158).zip
-/mnt/data/EmlisAIの実装済み資料(30).zip
+/mnt/data/Cocolon_5(22).zip
+/mnt/data/mashos-api_5(47).zip
+/mnt/data/Cocolon_前提資料(161).zip
 ```
 
 展開後の主な確認対象:
@@ -45,7 +44,7 @@ emlis implemented docs:
 ```
 
 ここで「全ファイルを1行ずつ精読した」とは言わない。  
-本資料の判断根拠に使うのは、以下の直接関係ファイルである。
+本資料の判断根拠に使うのは、以下の直接関係ファイルである。Phase20-12〜20-15差分更新では、post-final gate recoveryとGate Recovery surface bindingに関係する実ファイルを追加確認する。
 
 ### 0.2 主な確認済み資料
 
@@ -73,6 +72,8 @@ mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary
 mashos-api/ai/tests/test_emotion_submit_phase19_real_device_abcd_public_feedback_e2e.py
 mashos-api/ai/tests/helpers/emlis_ai_phase19_public_feedback_matrix.py
 mashos-api/ai/tests/test_emotion_submit_phase19_public_feedback_boundary_e2e.py
+mashos-api/ai/tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_surface_phase20_15.py
 Cocolon/tests/rn-screen-contracts.test.js
 ```
 
@@ -81,7 +82,7 @@ Cocolon/tests/rn-screen-contracts.test.js
 
 ### 0.4 前提資料反映状態
 
-本資料は、2026-05-31時点で必読前提資料として追加され、2026-06-01時点では `Cocolon_前提資料(158).zip` 内でPhase20-0〜20-10実装反映状態まで追記済みの正本として扱う。
+本資料は、2026-05-31時点で必読前提資料として追加され、2026-06-01時点では `Cocolon_前提資料(161).zip` を基準に、最新実ファイル `Cocolon_5(22).zip` / `mashos-api_5(47).zip` でPhase20-0〜20-15実装反映状態まで追記済みの正本として扱う。
 EmlisAIに関する設計・診断・実装・前提資料更新では、`Cocolon_思想資料_華恋用.md`、`Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md`、`Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md` と同時に読む。
 
 ## 1. この設計書の結論
@@ -1455,6 +1456,8 @@ RN productionを壊さず、EmlisAIの新内部contractがpublic responseへ正�
 mashos-api/ai/services/ai_inference/emotion_submit_service.py
 mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py
 mashos-api/ai/tests/test_emotion_submit_phase19_public_feedback_boundary_e2e.py
+mashos-api/ai/tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_surface_phase20_15.py
 Cocolon/tests/rn-screen-contracts.test.js
 ```
 
@@ -1704,17 +1707,17 @@ Phase20の最終合格は、次である。
 
 ## 16. 2026-06-01 実装反映: Phase20-0〜20-10 current state
 
-本資料の是正方針は、最新実ファイル `mashos-api_12(12).zip` / `Cocolon_12(9).zip` でPhase20-0〜20-10として実装反映済みである。ここから先は、本資料のPhase20実装順を「未実装の予定表」ではなく、実装済みの撤回保持再設計境界として読む。
+本資料の是正方針は、最新実ファイル `mashos-api_5(47).zip` / `Cocolon_5(22).zip` でPhase20-0〜20-15として実装反映済みである。ここから先は、本資料のPhase20実装順を「未実装の予定表」ではなく、実装済みの撤回保持再設計境界として読む。
 
 ### 16.1 確認した最新実ファイル
 
 ```text
-premise: Cocolon_前提資料(158).zip
-frontend: Cocolon_12(9).zip
-backend: mashos-api_12(12).zip
+premise: Cocolon_前提資料(161).zip
+frontend: Cocolon_5(22).zip
+backend: mashos-api_5(47).zip
 frontend file count: 217
-backend file count: 736
-total: 953
+backend file count: 738
+total: 955
 ```
 
 ### 16.2 実装済みPhase20の読み方
@@ -1732,6 +1735,11 @@ total: 953
 | Phase20-8 | QA Matrixを追加し、exact generated text一致ではなくfamily品質とfatal条件で見る。 | `emlis_ai_response_contract_qa_matrix.py` |
 | Phase20-9 | Phase19 C/D専用mode・cue・完成surfaceをproduction本線から撤回し、汎用materialへ吸収した。 | `emlis_ai_shared_reception_evidence.py`, `emlis_ai_reception_mode_resolver.py`, `config/emlis_reception_assistance_dictionary.v1.json` |
 | Phase20-10 | 実機再確認でAだけEmlis観測が出なかった問題を、低情報material成立時のscope-only blocker扱いとして修正した。 | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` |
+| Phase20-11 | Mash様の実機確認によりABCD全件でRN modal「Emlisの観測」が表示されたことを資料同期として記録した。 | 資料同期のみ。production RN UI / DB / API / public response key変更なし。 |
+| Phase20-12 | 旧fail-closed説明コメントを、displayable response kindではbounded repair / recoveryを通す説明へ更新した。 | `emlis_ai_reply_service.py` |
+| Phase20-13 | final pre-return gate後にdisplayable response kindが空白へ戻らないことをregression testで固定した。 | `test_emlis_ai_post_final_gate_recovery_phase20_13.py` |
+| Phase20-14 | post-final gate recoveryを実装し、normal / low_information / limited_groundingを空白終了させず、safety / infraは通常観測へ偽装しない境界を追加した。 | `emlis_ai_reply_service.py`, `emlis_ai_gate_recovery_loop.py` |
+| Phase20-15 | Gate Recovery surface binding meta / repetition QAを追加し、fixed fallback化をmaterial / family単位で検出できるようにした。 | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_surface_phase20_15.py` |
 
 ### 16.3 A/B/C/D fixtureの実装後の意味
 
@@ -1791,6 +1799,113 @@ Gate recoveryのfixed fallback化
 self_denialを人格事実として扱うこと
 safety emergencyを通常Emlis観測としてpassed化すること
 ```
+
+### 16.6 Phase20-11 / Mash実機確認: Phase20 ABCD全件表示
+
+2026-06-01時点で、Mash様から次の実機確認が共有された。
+
+```text
+確認者: Mash様
+確認日: 2026-06-01 JST
+確認対象: Phase20にあるA/B/C/Dサンプル入力
+確認内容: A/B/C/DすべてでRN modal「Emlisの観測」が表示された
+確認範囲: 表示有無の確認
+記録しないもの: raw input本文 / comment_text本文 / 実レスポンスJSON本文 / スクリーンショット本文
+```
+
+この確認の扱いは次で固定する。
+
+```text
+- Phase20-10でA低情報入力のscope-only blockerを修正した後、ABCDすべてでEmlisの観測表示を確認済みとして読む。
+- この確認は、実機表示有無の確認であり、文章品質・読感品質・商品品質の最終合格ではない。
+- ABCDは回帰fixtureであり、runtime case専用route、case専用mode、case専用cue、完成文テンプレ、exact commentText一致の根拠にしない。
+- A-only blocker fixは履歴として残すが、最新状態はABCD全件表示確認済みと読む。
+```
+
+このPhase20-11は資料同期と実機確認記録だけであり、production RN UI、DB physical schema、API route、public response key、public observation_status enumは変更しない。
+
+以上を、Phase20後のEmlisAI作業のcurrent stateとして固定する。
+
+
+## 17. 2026-06-01 実装反映: Phase20-12〜20-15 Display Reliability Hardening current state
+
+最新実ファイル `mashos-api_5(47).zip` / `Cocolon_5(22).zip` では、Phase20-11までの資料同期に加えて、Phase20-12〜20-15の表示信頼性補強が実装済みである。これはPhase20をやり直すものではなく、Phase20の撤回保持再設計後に残る「最後に空白へ戻る穴」と「Gate Recovery surfaceのfixed fallback化リスク」を塞ぐ補強として読む。
+
+### 17.1 確認した最新実ファイル
+
+```text
+premise: Cocolon_前提資料(161).zip
+frontend: Cocolon_5(22).zip
+backend: mashos-api_5(47).zip
+frontend file count: 217
+backend file count: 738
+total: 955
+```
+
+### 17.2 実装済み補強の読み方
+
+| Phase | 実装後の扱い | 主な実ファイル |
+|---|---|---|
+| Phase20-12 | 旧fail-closed説明コメントを修正した。Gateを緩めるのではなく、displayable response kindではbounded repair / recoveryを通す説明へ更新した。 | `emlis_ai_reply_service.py` |
+| Phase20-13 | final pre-return gate後に通常入力が空白へ戻らないことをregression testで固定した。 | `test_emlis_ai_post_final_gate_recovery_phase20_13.py` |
+| Phase20-14 | post-final gate recoveryを実装した。normal / low_information / limited_groundingは一回だけ回復対象にし、self_denial_safe_state_answerは既存safe branchを優先し、safety / infraは通常観測へ偽装しない。 | `emlis_ai_reply_service.py`, `emlis_ai_gate_recovery_loop.py` |
+| Phase20-15 | Gate Recovery surface binding meta / repetition QAを追加した。本文・raw input・comment_text bodyを保存せず、material slots / relation family / surface familyでfixed fallback化を検出する。 | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_surface_phase20_15.py` |
+
+### 17.3 追加された内部名の扱い
+
+```text
+phase20_13_post_final_gate_recovery:
+  final pre-return gate後の回復結果を示す内部meta。public response keyではない。
+
+post_final_pre_return_gate:
+  recovery context名。RN表示条件ではない。
+
+phase20_15_gate_recovery_surface_binding:
+  Gate Recovery surfaceとmaterial / relation / unknown slotの接続を示す内部meta。comment_text本文は含めない。
+
+gate_recovery_surface_repetition_qa:
+  surface family / closing family反復を検出するQA。exact本文一致QAではない。
+```
+
+### 17.4 変更していない境界
+
+```text
+production RN UI: 変更なし
+/emotion/submit route: 変更なし
+request / response key: 変更なし
+DB physical schema: 変更なし
+public observation_status enum: 追加なし
+visible body: input_feedback.comment_text のみ
+RN表示条件: observation_status == passed && commentText non-empty
+```
+
+### 17.5 実装後も禁止のままのこと
+
+```text
+- post-final recoveryを理由にGate / Grounding / Reader / Templateを緩める。
+- safety_blocked_emergency / infrastructure_error / safety_support_requiredを通常Emlis観測としてpassed化する。
+- phase20_13_post_final_gate_recovery / phase20_15_gate_recovery_surface_binding をpublic response keyやRN表示条件にする。
+- Gate Recovery surface binding metaへraw input / generated candidate / comment_text bodyを入れる。
+- fixed_fallback_used=falseだけを合格根拠にし、surface family / material bindingを見ない。
+- ABCD exact text一致を合格条件にする。
+```
+
+### 17.6 確認したテスト
+
+```text
+py_compile:
+  emlis_ai_reply_service.py
+  emlis_ai_gate_recovery_loop.py
+  test_emlis_ai_post_final_gate_recovery_phase20_13.py
+  test_emlis_ai_gate_recovery_surface_phase20_15.py
+
+pytest:
+  test_emlis_ai_post_final_gate_recovery_phase20_13.py -> 5 passed
+  test_emlis_ai_gate_recovery_surface_phase20_15.py + test_emlis_ai_gate_recovery_loop_phase20_5.py -> 17 passed
+  Phase20 public boundary / QA matrix / real-device recheck targeted set -> 28 passed, 1 warning
+```
+
+warningは既存の Pydantic `root_validator` deprecation warningであり、本Phase20-12〜20-15差分とは直接関係しない。
 
 以上を、Phase20後のEmlisAI作業のcurrent stateとして固定する。
 

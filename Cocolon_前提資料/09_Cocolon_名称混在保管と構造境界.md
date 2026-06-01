@@ -7,13 +7,13 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(158).zip"
-  Cocolon: "Cocolon_12(9).zip"
-  mashos-api: "mashos-api_12(12).zip"
+  premise: "Cocolon_前提資料(161).zip"
+  Cocolon: "Cocolon_5(22).zip"
+  mashos-api: "mashos-api_5(47).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 736
-  total: 953
+  mashos-api: 738
+  total: 955
 purpose: "名称混在を資料で保管し、華恋が作業時に旧名称・current名称・DB物理名・runtime ownerを取り違えないようにする"
 ---
 
@@ -606,7 +606,7 @@ Phase17構造更新の結論: 二段受け取り構造は、A/B/ログ1/ログ2/
 作業時は、このPhase18名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。
 # 2026-06-01 差分追記: EmlisAI Phase20 internal名の保管境界
 
-`mashos-api_12(12).zip` では、Phase20撤回保持再設計により、`response_kind` / `safety_triage_kind` / `input_material_bundle` / `material_quality` / `gate_recovery_loop` / `generic_sentence_plan_surface` / `response_contract_qa_matrix` 系の内部名が増えている。これらは名称変更ではなく、EmlisAIが既存 `input_feedback.comment_text` とRN `passed + commentText` 契約を壊さず、Phase19個別routeから汎用観測返答へ戻るためのbackend内部境界である。`Emlisの観測` のvisible名、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しない。
+`mashos-api_5(47).zip` では、Phase20撤回保持再設計と表示信頼性補強により、`response_kind` / `safety_triage_kind` / `input_material_bundle` / `material_quality` / `gate_recovery_loop` / `post_final_gate_recovery` / `gate_recovery_surface_binding` / `generic_sentence_plan_surface` / `response_contract_qa_matrix` 系の内部名が増えている。これらは名称変更ではなく、EmlisAIが既存 `input_feedback.comment_text` とRN `passed + commentText` 契約を壊さず、Phase19個別routeから汎用観測返答へ戻るためのbackend内部境界である。`Emlisの観測` のvisible名、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しない。
 
 | internal名 | 保管する意味 |
 |---|---|
@@ -617,5 +617,8 @@ Phase17構造更新の結論: 二段受け取り構造は、A/B/ログ1/ログ2/
 | gate_recovery_loop / repair_attempts | Gate failure後の短縮・限定・再生成・低情報/安全応答の内部履歴。 |
 | generic_sentence_plan_surface | C/D専用modeではなく汎用sentence planでsurface化する内部mode。 |
 | response_contract_qa_matrix | exact本文一致ではなくfamily品質で見るQA helper。 |
+| phase20_13_post_final_gate_recovery / post_final_pre_return_gate | final pre-return gate後にdisplayable response kindが空白へ戻らないことを追う内部meta / context。 |
+| phase20_15_gate_recovery_surface_binding | Gate Recovery surfaceのmaterial binding / relation family / unknown slotを本文なしで保管する内部meta。 |
+| gate_recovery_surface_repetition_qa | surface family / closing familyの反復を検出するQA summary。 |
 
 作業時は、このPhase20名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。

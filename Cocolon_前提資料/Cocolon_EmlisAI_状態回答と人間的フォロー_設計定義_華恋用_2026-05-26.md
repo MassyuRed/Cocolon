@@ -1744,3 +1744,18 @@ Phase20では、本資料で定義した状態回答・人間的フォローの�
 ### 18.3 作業時の読み替え
 
 `response_kind`、`safety_triage_kind`、`material_quality`、`visible_material_slots`、`unknown_slots`、`gate_recovery_loop`、`generic_sentence_plan_surface`、`response_contract_qa_matrix` は、状態回答・人間的フォローをpublic表示へ安全に出すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+
+### 18.4 Phase20-12〜20-15表示信頼性補強の読み方
+
+Phase20-12〜20-15は、状態回答思想を変更するものではない。通常入力に対して観測を返す方針を、final pre-return gate後の空白戻りとGate Recovery surfaceのfixed fallback化から守るためのbackend内部補強である。
+
+| 追加境界 | 読み方 |
+|---|---|
+| 旧fail-closed説明修正 | Gateは緩めないが、displayable response kindではbounded repair / recoveryを通す説明へ更新された。 |
+| post-final gate recovery | final pre-return gate後にnormal / low_information / limited_groundingが落ちても、safety / infraでない限り空白終了へ戻さず一回だけ回復を試す。 |
+| safety / infra保持 | safety_blocked_emergency / infrastructure_error / safety_support_requiredは通常Emlis観測としてpassed化しない。 |
+| Gate Recovery surface binding | Gate Recovery surfaceがmaterial slots / relation family / unknown slotsに接続していることを本文なしで示す。 |
+| surface repetition QA | fixed fallback化を、exact本文一致ではなくsurface family / closing family反復で検出する。 |
+
+`phase20_13_post_final_gate_recovery`、`phase20_15_gate_recovery_surface_binding`、`gate_recovery_surface_repetition_qa` は内部meta / QA名であり、状態回答のpublic response key、RN表示条件、DB/API名ではない。
+

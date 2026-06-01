@@ -2900,5 +2900,7 @@ Phase20で確認するcontract / verificationは、表示率だけを上げる�
 | Public Boundary / RN Contract | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `test_emlis_ai_public_boundary_phase20_7.py`, `Cocolon/tests/rn-screen-contracts.test.js` | internal metaをpublic表示源にせず、RNは `passed + commentText` だけを見る。 |
 | QA Matrix | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py` | exact generated text一致ではなく、family品質とfatal条件を確認する。 |
 | Phase19 Withdrawal / Real-device recheck | `test_emlis_ai_phase20_9_phase19_withdrawal.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` | C/D専用route撤回とA低情報実機再確認を回帰として固定する。 |
+| Post-final Gate Recovery | `emlis_ai_reply_service.py`, `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_post_final_gate_recovery_phase20_13.py` | final pre-return gate後にdisplayable response kindが空白終了へ戻らないこと、safety / infraを通常観測へ偽装しないことを固定する。 |
+| Gate Recovery Surface Binding QA | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_surface_phase20_15.py` | Gate Recovery surfaceのmaterial binding / family / repetitionを本文なしで検査し、fixed fallback化を検出する。 |
 
-禁止: Gate / Grounding / Reader / Templateを緩める、public response keyを追加する、RNでPhase20 internal metaを表示条件にする、raw input / generated candidate text / comment_text body / internal contract bodyをpublic metaへ入れる。
+禁止: Gate / Grounding / Reader / Templateを緩める、public response keyを追加する、RNでPhase20 internal metaを表示条件にする、raw input / generated candidate text / comment_text body / internal contract body / surface binding bodyをpublic metaへ入れる。post-final recoveryはsafety emergency / infrastructureを通常観測へ変換するために使わない。

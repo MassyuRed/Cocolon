@@ -784,5 +784,7 @@ EmlisAIのPhase20撤回保持再設計を触る場合は、Phase20のhelper / te
 | Generic SentencePlan / Surface | `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_generic_sentence_surface_realizer_phase20_6.py` | C/D専用完成surfaceを使わずgeneric surfaceで返す境界を確認する時。 |
 | Public Boundary / RN Contract | `emlis_ai_public_feedback_meta.py`, `emotion_submit_service.py`, `test_emlis_ai_public_boundary_phase20_7.py`, `test_emlis_ai_phase20_7_public_boundary_rn_contract.py`, `Cocolon/tests/rn-screen-contracts.test.js` | public meta sanitizerとRN表示契約を確認する時。 |
 | QA Matrix / Phase19撤回 | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py`, `test_emlis_ai_phase20_9_phase19_withdrawal.py` | exact text一致禁止、C/D専用runtime token撤回を確認する時。 |
+| Post-final Gate Recovery | `emlis_ai_reply_service.py`, `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_post_final_gate_recovery_phase20_13.py` | final pre-return gate後に通常入力が空白終了へ戻らないこと、safety / infraが通常観測へ偽装されないことを確認する時。 |
+| Gate Recovery Surface Binding QA | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_surface_phase20_15.py` | Gate Recovery surfaceがmaterial slots / relation family / unknown slotsに接続し、fixed fallback化していないことを確認する時。 |
 
-禁止: Phase20のためにpublic response key、RN production UI、DB physical name、API route、observation_status enumを変える。Gate / Grounding / Reader / Templateを緩める。raw input / candidate text / comment_text body / internal contract bodyをpublic metaへ入れる。
+禁止: Phase20のためにpublic response key、RN production UI、DB physical name、API route、observation_status enumを変える。Gate / Grounding / Reader / Templateを緩める。raw input / candidate text / comment_text body / internal contract body / surface binding bodyをpublic metaへ入れる。post-final recoveryをsafety emergency / infrastructureのpassed化に使わない。

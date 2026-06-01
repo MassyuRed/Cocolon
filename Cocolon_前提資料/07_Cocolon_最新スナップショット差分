@@ -7,9 +7,9 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(158).zip"
-  Cocolon: "Cocolon_12(9).zip"
-  mashos-api: "mashos-api_12(12).zip"
+  premise: "Cocolon_前提資料(161).zip"
+  Cocolon: "Cocolon_5(22).zip"
+  mashos-api: "mashos-api_5(47).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_12(9).zip` | 217 | RNアプリ本体。production RN UIは変更せず、Phase20-7以降のRN contract testとして `passed + commentText` の既存表示契約を維持。 |
-| `mashos-api_12(12).zip` | 736 | EmlisAI Phase20-0〜20-10を反映。Internal Response Contract、Safety Triage、Input Material Bundle、Low Information Observation、Gate Recovery Loop、Generic SentencePlan / Surface、Public Boundary / QA Matrix、Phase19撤回、実機A再確認修正を含む。 |
-| total | 953 | Phase20前提資料coverage対象 |
+| `Cocolon_5(22).zip` | 217 | RNアプリ本体。production RN UIは変更せず、Phase20-7以降のRN contract testとして `passed + commentText` の既存表示契約を維持。 |
+| `mashos-api_5(47).zip` | 738 | EmlisAI Phase20-0〜20-15を反映。Phase20-0〜20-11に加え、旧fail-closed説明修正、post-final gate recovery、Gate Recovery surface binding / repetition QAを含む。 |
+| total | 955 | Phase20-12〜20-15前提資料差分更新後coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針は履歴として残し、2026-06-01時点の最新正本は末尾の `2026-06-01 差分追記: EmlisAI Phase20-0〜20-10実装反映 snapshot差分` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針は履歴として残し、2026-06-01時点の最新正本は末尾の `2026-06-01 差分追記: EmlisAI Phase20-12〜20-15 表示信頼性補強 snapshot差分` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -3423,6 +3423,7 @@ Cocolon_前提資料/manifest.json
 | Phase20-8 | QA Matrixを追加し、exact generated text一致ではなくfamily品質とfatal条件で見る。 | `emlis_ai_response_contract_qa_matrix.py`, `test_emlis_ai_response_contract_qa_matrix_phase20_8.py` |
 | Phase20-9 | Phase19 C/D専用mode・cue・完成surfaceをproduction本線から撤回し、汎用materialへ吸収する。 | `emlis_ai_shared_reception_evidence.py`, `emlis_ai_reception_mode_resolver.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_phase20_9_phase19_withdrawal.py` |
 | Phase20-10 | 実機ログでAだけ表示されなかったscope-only blocker問題を、低情報material成立時だけ補正する。 | `emlis_ai_observation_display_repair_integration.py`, `test_emlis_ai_phase20_10_real_device_recheck.py` |
+| Phase20-11 | Mash様の実機確認により、Phase20のA/B/C/Dサンプル入力すべてでRN modal「Emlisの観測」が表示されたことを資料同期として記録する。 | 資料同期のみ。production RN UI / DB / API / public response key 変更なし。 |
 
 ## 最新実ファイル上の主な追加 / 変更path
 
@@ -3477,5 +3478,122 @@ A/C/D exact fixture:
   runtime条件ではなく、無応答・case専用route・safety境界破壊の再発を検出する回帰fixture。
 ```
 
+## Phase20-11 資料同期 / Mash実機ABCD表示確認
+
+```text
+Mash様の実機確認により、Phase20にあるA/B/C/Dサンプル入力すべてでRN modal「Emlisの観測」が表示されたことを確認済みとして読む。
+この確認は表示有無の確認であり、文章品質・読感品質・商品品質の最終合格ではない。
+raw input本文、comment_text本文、実レスポンスJSON本文、スクリーンショット本文は前提資料へ記録しない。
+ABCDは引き続き回帰fixtureであり、case専用runtime route、case専用mode、case専用cue、完成文テンプレ、exact commentText一致の根拠にしない。
+```
+
+
 01 / 02系のfull inventory本文は全面再生成しない。今回の差分は、Phase20で増えたEmlisAI撤回保持再設計のcurrent owner、public/RN境界、内部名、QA・実機再確認の読み方を、必要箇所へ差分追記する更新である。
+
+# 2026-06-01 差分追記: EmlisAI Phase20-12〜20-15 表示信頼性補強 snapshot差分
+
+最新実ファイル `Cocolon_5(22).zip` / `mashos-api_5(47).zip` を確認した。`Cocolon_前提資料(161).zip` はPhase20-11までを記録済みであり、最新実ファイル側にはPhase20-12〜20-15の表示信頼性補強が入っているため、この差分を前提資料へ追記する。
+
+## 確認snapshot
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(161).zip` | 41 premise files | `f149da67d933b45ef9eaef2fb6b871367c8320c8a50360a5a150d2688112016b` |
+| `Cocolon_5(22).zip` | 217 | `3b4185f2950d3f5fc6d26a09197bcef842353fbfc922abf5b263e9bf7ad443e7` |
+| `mashos-api_5(47).zip` | 738 | `99e666592689d8f575ec4f9e369531542049ca307c904b6f4f7acb239a73923f` |
+| total実ファイル | 955 | - |
+
+## Phase20-12〜20-15の実装読み方
+
+| Phase | 実装読み方 | 主なpath |
+|---|---|---|
+| Phase20-12 | `render_emlis_ai_reply()` の旧fail-closed説明コメントを、displayable response kindではbounded repair / recoveryを通す説明へ更新した。実装ロジックは変更しない。 | `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` |
+| Phase20-13 | final pre-return gate後にdisplayable response kindが空白へ戻らないこと、safety / infraを通常Emlis観測としてpassed化しないことをregression testで固定した。 | `mashos-api/ai/tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py` |
+| Phase20-14 | post-final gate recoveryを実装し、normal / low_information / limited_grounding がfinal pre-return gate後に落ちても、safety / infraでない限り一回だけ回復を試す。 | `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`, `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py` |
+| Phase20-15 | Gate Recovery surface binding meta / repetition QAを追加し、fixed fallback化を本文一致ではなくmaterial slot / relation family / surface familyで検出する。 | `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py`, `mashos-api/ai/tests/test_emlis_ai_gate_recovery_surface_phase20_15.py` |
+
+## 最新実ファイル上の差分
+
+### Cocolon
+
+| 区分 | 件数 | 内容 |
+|---|---:|---|
+| 追加 | 0 | なし |
+| 削除 | 0 | なし |
+| 修正 | 0 | production RN UI / RN contract変更なし |
+
+### mashos-api
+
+| 区分 | 件数 | 内容 |
+|---|---:|---|
+| 追加 | 2 | `test_emlis_ai_post_final_gate_recovery_phase20_13.py`, `test_emlis_ai_gate_recovery_surface_phase20_15.py` |
+| 削除 | 0 | なし |
+| 修正 | 2 | `emlis_ai_reply_service.py`, `emlis_ai_gate_recovery_loop.py` |
+
+## 追加 / 修正path
+
+```text
+追加:
+  mashos-api/ai/tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py
+  mashos-api/ai/tests/test_emlis_ai_gate_recovery_surface_phase20_15.py
+
+修正:
+  mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+  mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py
+```
+
+## Phase20-12〜20-15後の固定境界
+
+```text
+- RN production UIは変更しない。
+- /emotion/submit route、request key、response keyは変更しない。
+- public response key、observation_status enum、DB physical schemaは増やさない。
+- response_kind / safety_triage_kind / material_quality / phase20_13_post_final_gate_recovery / phase20_15_gate_recovery_surface_binding はRN表示sourceではない。
+- post-final recoveryは、Gateを緩めるものではなく、displayable response kindの最後の空白戻りを一回だけ回復する内部境界である。
+- safety_blocked_emergency / infrastructure_error / safety_support_required は通常Emlis観測としてpassed化しない。
+- Gate Recovery surface binding metaは本文・raw input・comment_text bodyを保存しない。
+- fixed_fallback_used=falseだけを合格根拠にせず、surface family / closing family / relation family / repetition QAで確認する。
+```
+
+## 確認したテスト
+
+```text
+python -m py_compile
+  services/ai_inference/emlis_ai_reply_service.py
+  services/ai_inference/emlis_ai_gate_recovery_loop.py
+  tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py
+  tests/test_emlis_ai_gate_recovery_surface_phase20_15.py
+
+python -m pytest tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py -q
+  5 passed
+
+python -m pytest tests/test_emlis_ai_gate_recovery_surface_phase20_15.py tests/test_emlis_ai_gate_recovery_loop_phase20_5.py -q
+  17 passed
+
+python -m pytest tests/test_emlis_ai_response_contract_qa_matrix_phase20_8.py tests/test_emlis_ai_phase20_7_public_boundary_rn_contract.py tests/test_emlis_ai_public_boundary_phase20_7.py tests/test_emlis_ai_phase20_10_real_device_recheck.py -q
+  28 passed, 1 warning
+```
+
+warningは既存の Pydantic `root_validator` deprecation warning であり、Phase20-12〜20-15差分とは直接関係しない。
+
+## この前提資料更新で触った資料
+
+```text
+Cocolon_前提資料/00_華恋用_READ_FIRST.md
+Cocolon_前提資料/01_Cocolon_全体構造資料.md
+Cocolon_前提資料/01A_Cocolon_全体構造資料_アプリ基盤とHome系.md
+Cocolon_前提資料/02_Cocolon_国家システム資料.md
+Cocolon_前提資料/02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md
+Cocolon_前提資料/02C_Cocolon_国家システム資料_契約_境界_検証系.md
+Cocolon_前提資料/03_Cocolon_命名体系.md
+Cocolon_前提資料/04_Cocolon_変更テーマ別チェックリスト
+Cocolon_前提資料/05_Cocolon_ルールファイル索引
+Cocolon_前提資料/07_Cocolon_最新スナップショット差分
+Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md
+Cocolon_前提資料/Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md
+Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md
+Cocolon_前提資料/manifest.json
+```
+
+01 / 02系のfull inventory本文は全面再生成しない。今回の差分は、Phase20-12〜20-15で増えた表示信頼性補強、post-final recovery、Gate Recovery surface binding / repetition QAの読み方を、必要箇所へ差分追記する更新である。
 

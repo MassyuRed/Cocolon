@@ -602,9 +602,11 @@ EmlisAIのPhase20後実装を触る時は、最低限次を同時に読む。
 1. safety / infra / self-denial 境界かを確認する。
 2. 入力束 thought / action / emotion / category から material_quality を確認する。
 3. low-information / limited / normal の response_kind を確認する。
-4. Gate failure が短縮・限定・再生成・低情報/安全応答へ回るか確認する。
-5. public sanitizer後に internal meta が漏れていないか確認する。
-6. RNが commentText 以外を表示sourceにしていないか確認する。
+4. Gate failure がpre-public / post-finalのどちらで起きているか確認する。
+5. displayable response kindなら、短縮・限定・再生成・低情報/安全応答またはpost-final recoveryへ回るか確認する。
+6. Gate Recovery surfaceがfixed fallback化していないか、surface binding / repetition QAで確認する。
+7. public sanitizer後に internal meta が漏れていないか確認する。
+8. RNが commentText 以外を表示sourceにしていないか確認する。
 ```
 
-禁止: Phase20 internal metaをpublic response keyへ出す、RN側で `response_kind` / `diagnostic_summary` / `material_quality` を表示条件にする、C/D専用mode・cue・完成surfaceを復活させる、A低情報をcase専用routeにする、Gate recoveryをfixed fallbackにする、自己否定を本人の事実として確定する、safety emergencyを通常Emlis観測としてpassed化する。
+禁止: Phase20 internal metaをpublic response keyへ出す、RN側で `response_kind` / `diagnostic_summary` / `material_quality` / `phase20_13_post_final_gate_recovery` / `phase20_15_gate_recovery_surface_binding` を表示条件にする、C/D専用mode・cue・完成surfaceを復活させる、A低情報をcase専用routeにする、Gate recoveryをfixed fallbackにする、自己否定を本人の事実として確定する、safety emergencyを通常Emlis観測としてpassed化する。

@@ -7,18 +7,18 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(158).zip"
-  Cocolon: "Cocolon_12(9).zip"
-  mashos-api: "mashos-api_12(12).zip"
+  premise: "Cocolon_前提資料(161).zip"
+  Cocolon: "Cocolon_5(22).zip"
+  mashos-api: "mashos-api_5(47).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 736
-  total: 953
+  mashos-api: 738
+  total: 955
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 953
+  included_files_total: 955
   included_files_cocolon: 217
-  included_files_mashos_api: 736
+  included_files_mashos_api: 738
 ---
 
 # 1. 1行定義
@@ -1371,12 +1371,12 @@ Phase18は、Input -> `/emotion/submit` -> EmlisAI immediate reply -> public san
 禁止: Phase18のdiagnostic / readability / applicability metaを理由に、public response keyやRN表示条件を増やさない。
 # 2026-06-01 差分追記: 国家システム上のEmlisAI Phase20撤回保持再設計境界
 
-Phase20は、Input -> `/emotion/submit` -> EmlisAI immediate reply -> public sanitizer -> RN display の国家システム境界を変えずに、backend内部の応答種別・安全分類・入力材料束・Gate recovery・surface生成・QAを整理した工程として読む。
+Phase20は、Input -> `/emotion/submit` -> EmlisAI immediate reply -> public sanitizer -> RN display の国家システム境界を変えずに、backend内部の応答種別・安全分類・入力材料束・Gate recovery・post-final recovery・surface生成・surface binding QAを整理した工程として読む。
 
 | 国家システム区分 | Phase20での読み方 |
 |---|---|
 | Input / Save | request payload、DB write path、保存成功判定は変えない。 |
-| EmlisAI internal | `response_kind`、Safety Triage、Input Material Bundle、Gate Recovery Loop、Generic SentencePlan / Surfaceで通常入力を観測応答へ戻す。 |
+| EmlisAI internal | `response_kind`、Safety Triage、Input Material Bundle、Gate Recovery Loop、post-final gate recovery、Generic SentencePlan / Surface、Gate Recovery surface bindingで通常入力を観測応答へ戻し、最後に空白へ戻る穴とfixed fallback化を検出する。 |
 | Public boundary | `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` の既存契約を維持し、internal metaをpublicへ漏らさない。 |
 | Safety / Infra exit | `safety_blocked_emergency` / `infrastructure_error` を通常Emlis観測としてpassed化しない。 |
 | RN display | RNはPhase20 internal metaを読まず、既存 `commentText` だけを `Emlisの観測` modalへ表示する。 |

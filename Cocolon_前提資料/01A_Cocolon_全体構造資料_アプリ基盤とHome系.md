@@ -2872,3 +2872,14 @@ Phase20後のHome immediate replyでは、EmlisAIの表示可否は引き続きb
 | A低情報実機再確認 | `emlis_ai_observation_display_repair_integration.py` で、低情報material成立時のscope-only blockerがEmlis観測表示を妨げないよう補正済み。 |
 
 禁止: RN側で `response_kind` / `material_quality` / `safety_triage_kind` / `diagnostic_summary` / `observation_text` / `reception_text` を表示条件または本文sourceにすること。
+
+Phase20-12〜20-15後の追加読み方:
+
+| 境界 | 追加された扱い |
+|---|---|
+| fail-closed説明 | `emlis_ai_reply_service.py` の旧説明は、displayable response kindではbounded repair / recoveryを通す説明へ更新済み。 |
+| post-final recovery | final pre-return gate後にnormal / low_information / limited_groundingが落ちても、safety / infraでない限り空白終了へ戻さず、一回だけpost-final recoveryを試す。 |
+| Gate Recovery surface QA | `phase20_15_gate_recovery_surface_binding` はbackend内部metaであり、RN表示sourceではない。fixed fallback化をfamily / material bindingで検出する。 |
+
+Home/Input側の不変契約は引き続き同じで、RN production UI、`/emotion/submit` route、public response key、`passed + commentText` 表示条件は変更しない。
+
