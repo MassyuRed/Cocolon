@@ -1,0 +1,76 @@
+{
+  "doc_id": "cocolon_work_attitude_rules_karen_memo",
+  "title": "Cocolonの作業に対する姿勢とルール",
+  "revision_date": "2026-05-31",
+  "created_at": "2026-05-17 18:58:26 JST",
+  "format": "UTF-8 text files for Notepad",
+  "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
+  "basis": [
+    "この会話でのMash様の指摘",
+    "過去記憶に残っているCocolon作業ルール",
+    "GitHub上の Cocolon_前提資料/00_karen_read_first.md の作業用地図方針"
+  ],
+  "files": [
+    "00_read_first.txt",
+    "01_cocolon_business_life_funding_source.txt",
+    "02_forbidden_assumed_understanding_unverified_assertion.txt",
+    "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+    "04_forbidden_mixing_design_and_implementation.txt",
+    "05_forbidden_unrequested_completion_and_structure_addition.txt",
+    "06_forbidden_mentalization_and_template_apology.txt",
+    "07_forbidden_shifting_burden_to_user.txt",
+    "08_artifact_delivery_rules.txt",
+    "09_work_start_checklist.txt",
+    "10_stop_judgment_and_unwritten_rules.txt",
+    "11_cocolon_area_specific_do_not_break.txt",
+    "12_check_items_not_short_oath.txt",
+    "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+    "14_cocolon_joint_development_and_karen_thought_boundary.txt",
+    "99_integrated_paste_each_time.txt"
+  ],
+  "update_notes": [
+    {
+      "date": "2026-05-22",
+      "type": "question_workflow_guard",
+      "summary": "Cocolon質問回で、既出設計をMash様へ再質問しないこと、設計用語で質問しないこと、質問前に現状棚卸しを出すことを追加。",
+      "new_file": "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+      "changed_files": [
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-05-24",
+      "type": "partner_thought_boundary_guard",
+      "summary": "Cocolonの主体はMash様の思想と構想であり、華恋の思想はそれを支える補助思想として扱うことを追加。華恋は指示待ちではなく意見を持つが、未確認断定・勝手な補完・指示外追加へ変換しない境界を固定。",
+      "new_file": "14_cocolon_joint_development_and_karen_thought_boundary.txt",
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "type": "emlis_ai_correction_policy_guard",
+      "summary": "EmlisAI作業では、是正方針を必読化し、Phase19型のcase専用mode/cue/surface、fixture runtime条件化、Gate failureの無反応化、passed-only目的化を禁止。",
+      "required_doc": "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "changed_files": [
+        "00_read_first.txt",
+        "05_forbidden_unrequested_completion_and_structure_addition.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    }
+  ],
+  "folder_name": "work_attitude_rules_for_karen",
+  "filename_policy_2026_06_03": {
+    "all_rule_file_names_ascii": true,
+    "original_japanese_file_names_replaced_by_ascii_names": true
+  }
+}

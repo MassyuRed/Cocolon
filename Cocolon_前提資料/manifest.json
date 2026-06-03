@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-01",
+  "revision_date": "2026-06-03",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 738,
-    "total": 955
+    "mashos-api": 759,
+    "total": 976
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 955,
-    "national_system_body_includes": 955,
+    "overall_structure_body_includes": 976,
+    "national_system_body_includes": 976,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
     "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル955件、国家システム判断対象のcurrent全ファイル955件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPhase20は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 955,
-    "overall_structure_body_includes_current_snapshot_files": 955,
-    "national_system_body_lists_current_snapshot_files_with_relation": 955,
+    "current_snapshot_total_files": 976,
+    "overall_structure_body_includes_current_snapshot_files": 976,
+    "national_system_body_lists_current_snapshot_files_with_relation": 976,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -830,7 +830,8 @@
     "phase18_target_docs_reflect_product_quality_stabilization": true,
     "phase18_full_01_02_regeneration": false,
     "phase20_target_docs_reflect_emlis_correction_implementation": true,
-    "phase20_full_01_02_regeneration": false
+    "phase20_full_01_02_regeneration": false,
+    "coverage_principle_2026_06_03": "Product Read Feel v1 / Structure Insight v2 Phase1-11は01/02系full inventory本文を全面再生成せず、必要な構造・契約・QA境界へ差分追記する。最新実ファイルはCocolon_12(10).zip / mashos-api_12(13).zip、file countは217/759/976。"
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -846,81 +847,81 @@
   ],
   "docs": [
     {
-      "path": "00_華恋用_READ_FIRST.md",
+      "path": "00_karen_read_first.md",
       "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Phase20撤回保持再設計 / 実機再確認境界を固定する"
     },
     {
-      "path": "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
+      "path": "01A_cocolon_overall_structure_app_foundation_home.md",
       "purpose": "App root / runtime / Home / startup / immediate reply / RN optional Observation Reply meta boundary"
     },
     {
-      "path": "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
+      "path": "01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md",
       "purpose": "Analysis / Piece / Nexus / EmotionLog / Ranking / screen split / value observation boundary"
     },
     {
-      "path": "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
+      "path": "01C_cocolon_overall_structure_account_subscription_backend_support.md",
       "purpose": "Account / subscription / backend support / EmlisAI Observation Reply Step0-14 support / contract test boundary"
     },
     {
-      "path": "01_Cocolon_全体構造資料.md",
+      "path": "01_cocolon_overall_structure.md",
       "purpose": "全体構造総論とsystem単位の読み方。EmlisAI Observation Reply Step0-14差分を含む"
     },
     {
-      "path": "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
+      "path": "02A_cocolon_national_system_input_save_dispatch.md",
       "purpose": "Input / Save / Dispatch / immediate reply / EmlisAI Observation Reply接続"
     },
     {
-      "path": "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
+      "path": "02C_cocolon_contract_boundary_validation.md",
       "purpose": "Contract / Boundary / Test / EmlisAI Observation Reply verification"
     },
     {
-      "path": "02_Cocolon_国家システム資料.md",
+      "path": "02_cocolon_national_system.md",
       "purpose": "国家システム総論。Input後EmlisAI Observation Reply Step0-14境界を含む"
     },
     {
-      "path": "03_Cocolon_命名体系.md",
+      "path": "03_cocolon_naming_system.md",
       "purpose": "Cocolon visible名 / internal名 / runtime ownerの読み替え。EmlisAI二段受け取り構造 / Phase16 CompleteComposer接続 / Phase17 Product-Visible internal名の混同防止を含む"
     },
     {
-      "path": "04_Cocolon_変更テーマ別チェックリスト",
+      "path": "04_cocolon_change_theme_checklist.md",
       "purpose": "変更テーマ別チェックリスト。Observation Reply Step0-14確認順を含む"
     },
     {
-      "path": "05_Cocolon_ルールファイル索引",
+      "path": "05_cocolon_rule_file_index.md",
       "purpose": "rule / policy / guard / test索引。Observation Reply Step0-14のrule / test indexを含む"
     },
     {
-      "path": "06_Cocolon_ファイル名変更保留台帳.md",
+      "path": "06_cocolon_filename_change_hold_ledger.md",
       "purpose": "ファイル名・旧名称・legacy façadeを誤renameしないための保管台帳"
     },
     {
-      "path": "07_Cocolon_最新スナップショット差分",
+      "path": "07_latest_snapshot_diff.md",
       "purpose": "最新snapshot差分。Phase20-0〜20-10のEmlisAI実装反映、public/RN境界、A/B/C/D回帰fixtureの読み方を固定する"
     },
     {
-      "path": "09_Cocolon_名称混在保管と構造境界.md",
+      "path": "09_naming_boundary.md",
       "purpose": "名称混在保管。EmlisAI二段受け取り構造 / CompleteComposer実表示接続 / Phase17商品到達fixture補完のpublic契約非変更境界を含む"
     },
-    "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md",
-    "08_Cocolon_DB_rename_boundary.md",
+    "02B_cocolon_national_system_snapshot_worker_publish_read.md",
+    "08_cocolon_db_rename_boundary.md",
     {
-      "path": "Cocolon_思想資料_華恋用.md",
+      "path": "cocolon_thought_material_for_karen.md",
       "purpose": "Cocolon思想資料。2026-05-24差分で共同開発境界と華恋思想「人間の言葉を雑に処理しない場所」を追記"
     },
     {
-      "path": "10_Cocolon_共同開発と華恋思想境界_2026-05-24.md",
+      "path": "10_cocolon_joint_development_karen_thought_boundary_2026_05_24.md",
       "purpose": "Mash様主体のCocolon思想と、華恋が支える補助思想・共同開発時の判断境界を固定する"
     },
     {
-      "path": "Cocolon_作業姿勢とルール_華恋用/14_Cocolon共同開発と華恋思想の扱い.txt",
+      "path": "work_attitude_rules_for_karen/14_cocolon_joint_development_and_karen_thought_boundary.txt",
       "purpose": "華恋が指示待ちではなく意見を持つための作業姿勢境界。未確認断定・指示外追加への変換を禁止する"
     },
     {
-      "path": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+      "path": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
       "purpose": "Cocolon全体の基盤観測構造。基本観測単位を環境ラベル × 状態ラベル × 出力内容として固定し、EmlisAI / Piece / Analysisへの段階展開を定義する。"
     },
     {
-      "path": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "path": "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "purpose": "EmlisAI専用出力思想資料。状態回答 + 人間的フォローの二層構造に、二段受け取り構造 / Daily Reception / Phase16 TwoStage Composer Surface Connection / Phase17 Product-Visible Fixture Completion追補を含む。"
     }
   ],
@@ -1189,7 +1190,7 @@
     "api_current_owner_body_migration": "complete_before_db_rename",
     "legacy_api_files": "kept_as_compat_facade_not_runtime_body",
     "db_physical_rename": "not_started_no_destructive_sql",
-    "db_boundary_doc": "08_Cocolon_DB_rename_boundary.md",
+    "db_boundary_doc": "08_cocolon_db_rename_boundary.md",
     "current_file_counts": {
       "total": 408,
       "Cocolon": 116,
@@ -3961,16 +3962,16 @@
     "premise": "Cocolon_前提資料(119).zip",
     "basis": "2026-05-24 conversation: Mash様 clarified that Cocolon主体 is Mash様の思想と構想, but Cocolon completion requires Karen思想 and Karen構想 as partner support.",
     "new_docs": [
-      "10_Cocolon_共同開発と華恋思想境界_2026-05-24.md",
-      "Cocolon_作業姿勢とルール_華恋用/14_Cocolon共同開発と華恋思想の扱い.txt"
+      "10_cocolon_joint_development_karen_thought_boundary_2026_05_24.md",
+      "work_attitude_rules_for_karen/14_cocolon_joint_development_and_karen_thought_boundary.txt"
     ],
     "changed_docs": [
-      "00_華恋用_READ_FIRST.md",
-      "Cocolon_思想資料_華恋用.md",
-      "Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt",
-      "Cocolon_作業姿勢とルール_華恋用/09_作業開始チェックリスト.txt",
-      "Cocolon_作業姿勢とルール_華恋用/99_統合版_毎回貼る用.txt",
-      "Cocolon_作業姿勢とルール_華恋用/manifest.json",
+      "00_karen_read_first.md",
+      "cocolon_thought_material_for_karen.md",
+      "work_attitude_rules_for_karen/00_read_first.txt",
+      "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+      "work_attitude_rules_for_karen/manifest.json",
       "manifest.json"
     ],
     "runtime_or_contract_change": false,
@@ -4012,15 +4013,15 @@
     "json_schema_file_materialized": false,
     "summary": "Phase0として環境状態出力観測構造の設計書を追加し、Phase1として前提資料へ差分反映。Cocolonの基本観測単位を文章単体ではなく環境ラベル × 状態ラベル × 出力内容として固定する。",
     "new_docs": [
-      "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md"
+      "cocolon_environment_state_output_observation_structure_design_2026_05_25.md"
     ],
     "changed_docs": [
-      "00_華恋用_READ_FIRST.md",
-      "Cocolon_思想資料_華恋用.md",
-      "03_Cocolon_命名体系.md",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
+      "00_karen_read_first.md",
+      "cocolon_thought_material_for_karen.md",
+      "03_cocolon_naming_system.md",
+      "09_naming_boundary.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
       "manifest.json"
     ],
     "unchanged_contracts": [
@@ -4034,7 +4035,7 @@
     ]
   },
   "environment_state_output_observation_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "basic_observation_unit": "environment_label × state_label × output_content",
     "cocolon_wide_structure": true,
     "emlis_ai_scope": "single current input observation only",
@@ -4073,10 +4074,10 @@
     "comment_text_body_in_public_meta": false,
     "summary": "環境状態出力観測構造 Phase2として、EmlisAI current input bundle が環境 / 状態 / 出力 / 時間の材料を持つことをtext-free internal summaryで固定。Phase3 frame builderやschema実ファイル化は行わず、normalize_emlis_current_inputのpublic-compatible shapeを維持した。",
     "new_docs_or_repaired_docs": [
-      "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md"
+      "cocolon_environment_state_output_observation_structure_design_2026_05_25.md"
     ],
     "changed_docs": [
-      "07_Cocolon_最新スナップショット差分",
+      "07_latest_snapshot_diff.md",
       "manifest.json"
     ],
     "changed_files": [
@@ -4091,7 +4092,7 @@
     ]
   },
   "environment_state_output_current_input_bundle_connection_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.environment_state_output.input_connection.v1",
     "phase": "Phase2_current_input_bundle_connection",
     "scope": "EmlisAI current input bundleの内部text-free summary。environment_state_output_frame builderではない。",
@@ -4152,8 +4153,8 @@
       "mashos-api/ai/tests/test_cocolon_environment_state_output_frame.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4163,7 +4164,7 @@
     ]
   },
   "environment_state_output_frame_builder_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.environment_state_output_frame.v1",
     "material_id": "environment_state_output_frame",
     "phase": "Phase3_environment_state_output_frame_builder",
@@ -4240,8 +4241,8 @@
       "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase4_connection.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4251,7 +4252,7 @@
     ]
   },
   "environment_state_output_observation_material_connection_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.environment_state_output_frame.v1",
     "material_id": "environment_state_output_frame",
     "phase": "Phase4_observation_structure_material_connection",
@@ -4310,8 +4311,8 @@
       "mashos-api/ai/tests/test_emlis_ai_observation_structure_phase5_limited_use.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4322,7 +4323,7 @@
     ]
   },
   "environment_state_output_observation_limited_surface_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.environment_state_output_frame.v1",
     "surface_contract_version": "cocolon.environment_state_output.surface_limited_use.v1",
     "material_id": "environment_state_output_frame",
@@ -4394,8 +4395,8 @@
       "mashos-api/ai/tests/test_piece_environment_state_output_phase6.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4405,7 +4406,7 @@
     ]
   },
   "environment_state_output_observation_piece_overcompression_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.environment_state_output_frame.v1",
     "piece_guard_schema_version": "cocolon.piece.environment_state_output_overcompression_guard.v1",
     "material_id": "piece_environment_state_output_overcompression_guard",
@@ -4470,8 +4471,8 @@
       "mashos-api/ai/tests/test_analysis_environment_state_output_phase7.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4481,7 +4482,7 @@
     ]
   },
   "environment_state_output_observation_analysis_tendency_material_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.analysis.environment_state_output_period_material.v1",
     "material_id": "analysis_environment_state_output_period_material",
     "conditional_output_tendency_schema_version": "cocolon.conditional_output_tendency.v1",
@@ -4554,8 +4555,8 @@
       "mashos-api/ai/tests/test_analysis_environment_state_output_phase8_display_connection.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4565,7 +4566,7 @@
     ]
   },
   "environment_state_output_observation_analysis_display_connection_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "schema_version": "cocolon.analysis.environment_state_output_surface.v1",
     "material_id": "analysis_environment_state_output_surface",
     "source_material_id": "analysis_environment_state_output_period_material",
@@ -4645,8 +4646,8 @@
       "mashos-api/ai/tests/test_environment_state_output_phase9_cross_core_contract.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "tests_run": [
@@ -4656,7 +4657,7 @@
     ]
   },
   "environment_state_output_observation_phase9_cross_core_policy_2026_05_25": {
-    "design_doc": "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
+    "design_doc": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
     "phase": "Phase9_cross_core_contract_tests",
     "scope": "Emlis / Piece / Analysisの横断境界、public meta、/emotion/submit public route/response/DB physical nameの非破壊性をテストで固定する。",
     "connected_modules": [
@@ -4742,17 +4743,17 @@
     "raw_input_in_public_meta": false,
     "comment_text_body_in_public_meta": false,
     "modified_premise_files": [
-      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
-      "Cocolon_前提資料/01_Cocolon_全体構造資料.md",
-      "Cocolon_前提資料/01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "Cocolon_前提資料/01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md",
-      "Cocolon_前提資料/02_Cocolon_国家システム資料.md",
-      "Cocolon_前提資料/02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "Cocolon_前提資料/02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "Cocolon_前提資料/03_Cocolon_命名体系.md",
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
-      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/01_cocolon_overall_structure.md",
+      "Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md",
+      "Cocolon_前提資料/01C_cocolon_overall_structure_account_subscription_backend_support.md",
+      "Cocolon_前提資料/02_cocolon_national_system.md",
+      "Cocolon_前提資料/02A_cocolon_national_system_input_save_dispatch.md",
+      "Cocolon_前提資料/02C_cocolon_contract_boundary_validation.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "confirmed_backend_files": [
@@ -4805,7 +4806,7 @@
   },
   "source_snapshot_2026_05_26_emlis_state_answer_human_follow_phase0_1": {
     "premise": "Cocolon_前提資料(134).zip",
-    "design_doc": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+    "design_doc": "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
     "Cocolon": "Cocolon(187).zip",
     "mashos-api": "mashos-api(100).zip",
     "phase_scope": "Phase0設計書作成済み。Phase1前提資料への差分更新のみ。",
@@ -4819,21 +4820,21 @@
     "backend_code_changed": false,
     "rn_code_changed": false,
     "new_docs": [
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md"
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md"
     ],
     "changed_docs": [
-      "00_華恋用_READ_FIRST.md",
-      "Cocolon_思想資料_華恋用.md",
-      "03_Cocolon_命名体系.md",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
+      "00_karen_read_first.md",
+      "cocolon_thought_material_for_karen.md",
+      "03_cocolon_naming_system.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
       "manifest.json"
     ]
   },
   "emlis_state_answer_human_follow_policy_2026_05_26": {
     "scope": "EmlisAI immediate response output philosophy and surface contract design",
-    "design_doc": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+    "design_doc": "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
     "state_answer": "EmlisAIは行動指示ではなく、ユーザーが今の自分が何をしているのかを理解するための状態回答を返す。",
     "human_follow": "観測後に、入力内に見える意図・怖さ/負荷・努力・存在を、人格断定ではなくEmlisの感想として受け止める。",
     "ratio_policy": "基本は観測6:フォロー4。強い自己否定・悲しみ・消耗・孤独ではフォロー厚め、構造理解要求では観測厚め。観測ゼロ/フォローゼロは禁止。",
@@ -4858,7 +4859,7 @@
   },
   "source_snapshot_2026_05_26_emlis_state_answer_human_follow_phase2_10": {
     "premise": "Cocolon_前提資料(137).zip",
-    "design_doc": "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+    "design_doc": "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
     "Cocolon": "Cocolon_10(9).zip",
     "mashos-api": "mashos-api_10(16).zip",
     "sha256": {
@@ -4927,17 +4928,17 @@
       "mashos-api/ai/tests/test_environment_state_output_phase9_cross_core_contract.py"
     ],
     "modified_premise_files": [
-      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
-      "Cocolon_前提資料/01_Cocolon_全体構造資料.md",
-      "Cocolon_前提資料/01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "Cocolon_前提資料/01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md",
-      "Cocolon_前提資料/02_Cocolon_国家システム資料.md",
-      "Cocolon_前提資料/02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "Cocolon_前提資料/02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "Cocolon_前提資料/03_Cocolon_命名体系.md",
-      "Cocolon_前提資料/05_Cocolon_ルールファイル索引",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
-      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/01_cocolon_overall_structure.md",
+      "Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md",
+      "Cocolon_前提資料/01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md",
+      "Cocolon_前提資料/02_cocolon_national_system.md",
+      "Cocolon_前提資料/02A_cocolon_national_system_input_save_dispatch.md",
+      "Cocolon_前提資料/02C_cocolon_contract_boundary_validation.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
       "Cocolon_前提資料/manifest.json"
     ]
   },
@@ -5008,10 +5009,10 @@
     "raw_input_in_public_meta": false,
     "comment_text_body_in_public_meta": false,
     "modified_premise_files": [
-      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
-      "Cocolon_前提資料/03_Cocolon_命名体系.md",
-      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
+      "Cocolon_前提資料/emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "confirmed_runtime_files": [
@@ -5056,10 +5057,10 @@
       "examples_as_runtime_templates"
     ],
     "phase15_modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "03_Cocolon_命名体系.md",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "03_cocolon_naming_system.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5099,10 +5100,10 @@
     "raw_input_in_public_meta": false,
     "comment_text_body_in_public_meta": false,
     "modified_premise_files": [
-      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
-      "Cocolon_前提資料/03_Cocolon_命名体系.md",
-      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
+      "Cocolon_前提資料/emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "confirmed_runtime_files": [
@@ -5154,10 +5155,10 @@
       "examples_as_runtime_templates"
     ],
     "phase15_modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "03_Cocolon_命名体系.md",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "03_cocolon_naming_system.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5197,11 +5198,11 @@
     "raw_input_in_public_meta": false,
     "comment_text_body_in_public_meta": false,
     "modified_premise_files": [
-      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
-      "Cocolon_前提資料/03_Cocolon_命名体系.md",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
-      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
+      "Cocolon_前提資料/emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "confirmed_runtime_files": [
@@ -5260,11 +5261,11 @@
       "display_gate_relaxed_for_two_stage"
     ],
     "phase16_modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "03_Cocolon_命名体系.md",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "03_cocolon_naming_system.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5306,11 +5307,11 @@
     "gate_relaxed": false,
     "grounding_gate_relaxed": false,
     "modified_premise_files": [
-      "Cocolon_前提資料/00_華恋用_READ_FIRST.md",
-      "Cocolon_前提資料/03_Cocolon_命名体系.md",
-      "Cocolon_前提資料/07_Cocolon_最新スナップショット差分",
-      "Cocolon_前提資料/09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_前提資料/Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
+      "Cocolon_前提資料/emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "Cocolon_前提資料/manifest.json"
     ],
     "actual_diff_from_phase16_baseline": {
@@ -5418,11 +5419,11 @@
       "raw_input_or_comment_text_body_in_public_meta"
     ],
     "phase17_modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "03_Cocolon_命名体系.md",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "03_cocolon_naming_system.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5492,18 +5493,18 @@
       ]
     },
     "modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "01_Cocolon_全体構造資料.md",
-      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "02_Cocolon_国家システム資料.md",
-      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "03_Cocolon_命名体系.md",
-      "04_Cocolon_変更テーマ別チェックリスト",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "04_cocolon_change_theme_checklist.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ],
     "runtime_contract_unchanged": true
@@ -5562,29 +5563,29 @@
       "safety_scope_ap0_rollout_passed_by_low_information_repair"
     ],
     "phase18_modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "01_Cocolon_全体構造資料.md",
-      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "02_Cocolon_国家システム資料.md",
-      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "03_Cocolon_命名体系.md",
-      "04_Cocolon_変更テーマ別チェックリスト",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "04_cocolon_change_theme_checklist.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
   "emlis_ai_correction_policy_2026_05_31": {
-    "new_required_doc": "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
+    "new_required_doc": "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
     "purpose": "Phase19のA/C/D個別通過路線を本線成功扱いせず、EmlisAIを入力直後の観測返答へ戻すための是正方針を前提資料に追加する。",
     "must_read_with": [
-      "Cocolon_思想資料_華恋用.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
-      "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md",
-      "Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt"
+      "cocolon_thought_material_for_karen.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+      "cocolon_environment_state_output_observation_structure_design_2026_05_25.md",
+      "work_attitude_rules_for_karen/00_read_first.txt"
     ],
     "runtime_forbidden": [
       "A/C/D exact fixture を runtime 条件にする",
@@ -5594,16 +5595,16 @@
       "safety隣接入力を一律に通常観測非表示へ潰す"
     ],
     "changed_files": [
-      "00_華恋用_READ_FIRST.md",
-      "05_Cocolon_ルールファイル索引",
+      "00_karen_read_first.md",
+      "05_cocolon_rule_file_index.md",
       "manifest.json",
-      "Cocolon_作業姿勢とルール_華恋用/00_READ_FIRST_最初に読む.txt",
-      "Cocolon_作業姿勢とルール_華恋用/05_禁止事項_勝手な補完と構造追加.txt",
-      "Cocolon_作業姿勢とルール_華恋用/09_作業開始チェックリスト.txt",
-      "Cocolon_作業姿勢とルール_華恋用/10_停止判定と書かれていないルール.txt",
-      "Cocolon_作業姿勢とルール_華恋用/13_禁止事項_既出設計の再質問と設計用語への逃げ禁止.txt",
-      "Cocolon_作業姿勢とルール_華恋用/99_統合版_毎回貼る用.txt",
-      "Cocolon_作業姿勢とルール_華恋用/manifest.json"
+      "work_attitude_rules_for_karen/00_read_first.txt",
+      "work_attitude_rules_for_karen/05_forbidden_unrequested_completion_and_structure_addition.txt",
+      "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+      "work_attitude_rules_for_karen/13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+      "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+      "work_attitude_rules_for_karen/manifest.json"
     ],
     "implemented_in_latest_snapshot": "mashos-api_12(12).zip / Cocolon_12(9).zip",
     "implementation_reflection_key": "emlis_phase20_0_10_policy_2026_06_01"
@@ -5672,19 +5673,19 @@
       "mashos-api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json"
     ],
     "modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "01_Cocolon_全体構造資料.md",
-      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "02_Cocolon_国家システム資料.md",
-      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "03_Cocolon_命名体系.md",
-      "04_Cocolon_変更テーマ別チェックリスト",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "04_cocolon_change_theme_checklist.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5727,19 +5728,19 @@
       "raw_input_or_comment_text_body_in_public_meta"
     ],
     "phase20_modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "01_Cocolon_全体構造資料.md",
-      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "02_Cocolon_国家システム資料.md",
-      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "03_Cocolon_命名体系.md",
-      "04_Cocolon_変更テーマ別チェックリスト",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "04_cocolon_change_theme_checklist.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5771,11 +5772,11 @@
     "api_route_changed": false,
     "public_response_keys_added": [],
     "modified_files_for_phase20_11": [
-      "00_華恋用_READ_FIRST.md",
-      "07_Cocolon_最新スナップショット差分",
-      "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
+      "00_karen_read_first.md",
+      "07_latest_snapshot_diff.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
       "manifest.json",
-      "EmlisAIの実装済み資料/Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md"
+      "EmlisAIの実装済み資料/emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md"
     ]
   },
   "source_snapshot_2026_06_01_emlis_phase20_12_15_display_reliability": {
@@ -5818,19 +5819,19 @@
       "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py"
     ],
     "modified_premise_files": [
-      "00_華恋用_READ_FIRST.md",
-      "01_Cocolon_全体構造資料.md",
-      "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md",
-      "02_Cocolon_国家システム資料.md",
-      "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md",
-      "02C_Cocolon_国家システム資料_契約_境界_検証系.md",
-      "03_Cocolon_命名体系.md",
-      "04_Cocolon_変更テーマ別チェックリスト",
-      "05_Cocolon_ルールファイル索引",
-      "07_Cocolon_最新スナップショット差分",
-      "09_Cocolon_名称混在保管と構造境界.md",
-      "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md",
-      "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md",
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "04_cocolon_change_theme_checklist.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "manifest.json"
     ]
   },
@@ -5864,5 +5865,159 @@
       "gate_recovery_surface_phase20_15_plus_phase20_5": "17 passed",
       "phase20_public_boundary_qa_matrix_real_device_targeted": "28 passed, 1 warning"
     }
+  },
+  "source_snapshot_2026_06_03_emlis_product_readfeel_phase1_11": {
+    "date": "2026-06-03",
+    "premise": "Cocolon_前提資料(165).zip",
+    "Cocolon": "Cocolon_12(10).zip",
+    "mashos-api": "mashos-api_12(13).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 759,
+      "total": 976
+    },
+    "sha256": {
+      "premise": "faa51796893bc1e8bc0c26f74599ad5a14c0795997e07733105477dba068fc0f",
+      "Cocolon": "a1ff199a84249fcc2f2311ad4d22a57babfa6f6e19ebea631d75827dc557f0d7",
+      "mashos-api": "b700cfa126e6268db3ef0187a7370b2b31279c33ffe4178cefbd69935bcb0425"
+    },
+    "phase_scope": "EmlisAI Product Read Feel v1 / Structure Insight v2 Phase1-11 premise diff reflection",
+    "runtime_contract_unchanged": true,
+    "api_route_changed": false,
+    "db_physical_name_changed": false,
+    "rn_production_ui_changed": false,
+    "public_response_keys_added": [],
+    "observation_status_enum_added": [],
+    "Cocolon_added_files": [],
+    "Cocolon_removed_files": [],
+    "Cocolon_changed_files": [],
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_構造辞書更新運用_華恋用_2026-06-02.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_mirror_only_surface_detector.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_current_output_inventory.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_long_run_product_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_rubric.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_scorecard.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_structure_insight_candidate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_structure_insight_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_structure_insight_surface.py",
+      "mashos-api/ai/tests/fixtures/emlis_ai_product_readfeel_fixture_families.py",
+      "mashos-api/ai/tests/test_emlis_ai_mirror_only_surface_detector.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_readfeel_current_output_inventory_phase1.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_readfeel_fixture_families.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_readfeel_phase11_long_run_product_gate.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_readfeel_rubric.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_readfeel_scorecard.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_readfeel_surface_v1_phase5.py",
+      "mashos-api/ai/tests/test_emlis_ai_structure_dictionary_update_operation_phase8.py",
+      "mashos-api/ai/tests/test_emlis_ai_structure_insight_candidate.py",
+      "mashos-api/ai/tests/test_emlis_ai_structure_insight_gate.py",
+      "mashos-api/ai/tests/test_emlis_ai_structure_insight_surface_phase10.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_product_quality_scorecard_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_scorecard_blind_qa.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_runtime_surface_blind_qa_long_run.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py"
+    ],
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "09_naming_boundary.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+      "manifest.json"
+    ]
+  },
+  "emlis_product_readfeel_structure_insight_policy_2026_06_03": {
+    "schema_version": "cocolon.emlis.product_readfeel.structure_insight.phase1_11.2026-06-03",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "rn_title": "Emlisの観測",
+    "public_response_keys_added": [],
+    "db_physical_name_changed": false,
+    "api_route_changed": false,
+    "rn_production_ui_changed": false,
+    "product_gate_ready": false,
+    "public_release_applied": false,
+    "internal_materials": [
+      "product_readfeel_current_output_inventory",
+      "product_readfeel_rubric",
+      "product_readfeel_fixture_families",
+      "product_readfeel_scorecard",
+      "product_readfeel_v1_surface_policy",
+      "mirror_only_surface_detector",
+      "structure_insight_candidate",
+      "structure_insight_gate",
+      "structure_insight_surface",
+      "product_readfeel_long_run_product_gate"
+    ],
+    "forbidden": [
+      "read_feeling_auto_filled_from_machine_metrics",
+      "exact_comment_text_qa_success_condition",
+      "case_specific_runtime_mode_or_surface_restore",
+      "product_pass_as_public_status",
+      "structure_insight_ready_as_public_status",
+      "insight_delta_as_initial_release_blocker",
+      "raw_input_or_comment_text_body_in_public_meta",
+      "structure_insight_diagnosis_or_personality_claim",
+      "unsafe_insight_surface_by_gate_relaxation",
+      "deep_structure_insight_for_low_information_or_daily_family_without_gate",
+      "duplicate_same_content_file_for_japanese_filename_encoding"
+    ]
+  },
+  "filename_policy_2026_06_03": {
+    "root_folder_name": "Cocolon_前提資料",
+    "root_folder_name_may_remain_japanese": true,
+    "non_root_file_and_folder_names_are_ascii": true,
+    "reason": "Avoid filename garbling during zip compression/extraction while preserving the requested top-level folder name.",
+    "migration_scope": "All current premise files and internal rule-folder entries, not only the 2026-06-03 diff-update files.",
+    "content_body_policy": "Only explicit filename/path references were normalized; runtime/API/DB/RN contracts were not changed."
+  },
+  "filename_ascii_mapping_2026_06_03": {
+    "00_READ_FIRST_最初に読む.txt": "00_read_first.txt",
+    "00_華恋用_READ_FIRST.md": "00_karen_read_first.md",
+    "01A_Cocolon_全体構造資料_アプリ基盤とHome系.md": "01A_cocolon_overall_structure_app_foundation_home.md",
+    "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系.md": "01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md",
+    "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系.md": "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+    "01_Cocolon_全体構造資料.md": "01_cocolon_overall_structure.md",
+    "01_Cocolonは商売で生活資金源.txt": "01_cocolon_business_life_funding_source.txt",
+    "02A_Cocolon_国家システム資料_Input_Save_Dispatch系.md": "02A_cocolon_national_system_input_save_dispatch.md",
+    "02B_Cocolon_国家システム資料_Snapshot_Worker_Publish_Read系.md": "02B_cocolon_national_system_snapshot_worker_publish_read.md",
+    "02C_Cocolon_国家システム資料_契約_境界_検証系.md": "02C_cocolon_contract_boundary_validation.md",
+    "02_Cocolon_国家システム資料.md": "02_cocolon_national_system.md",
+    "02_禁止事項_わかったふり未確認断定.txt": "02_forbidden_assumed_understanding_unverified_assertion.txt",
+    "02c_cocolon_contract_boundary_validation.md": "02C_cocolon_contract_boundary_validation.md",
+    "03_Cocolon_命名体系.md": "03_cocolon_naming_system.md",
+    "03_禁止事項_前提資料と実ファイル確認不足.txt": "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+    "04_Cocolon_変更テーマ別チェックリスト": "04_cocolon_change_theme_checklist.md",
+    "04_禁止事項_設計と実装の混同.txt": "04_forbidden_mixing_design_and_implementation.txt",
+    "05_Cocolon_ルールファイル索引": "05_cocolon_rule_file_index.md",
+    "05_禁止事項_勝手な補完と構造追加.txt": "05_forbidden_unrequested_completion_and_structure_addition.txt",
+    "06_Cocolon_ファイル名変更保留台帳.md": "06_cocolon_filename_change_hold_ledger.md",
+    "06_禁止事項_メンタル化とテンプレ謝罪.txt": "06_forbidden_mentalization_and_template_apology.txt",
+    "07_Cocolon_最新スナップショット差分": "07_latest_snapshot_diff.md",
+    "07_禁止事項_ユーザー負担押し付け.txt": "07_forbidden_shifting_burden_to_user.txt",
+    "08_Cocolon_DB_rename_boundary.md": "08_cocolon_db_rename_boundary.md",
+    "08_成果物提出ルール.txt": "08_artifact_delivery_rules.txt",
+    "09_Cocolon_名称混在保管と構造境界.md": "09_naming_boundary.md",
+    "09_作業開始チェックリスト.txt": "09_work_start_checklist.txt",
+    "10_Cocolon_共同開発と華恋思想境界_2026-05-24.md": "10_cocolon_joint_development_karen_thought_boundary_2026_05_24.md",
+    "10_停止判定と書かれていないルール.txt": "10_stop_judgment_and_unwritten_rules.txt",
+    "11_Cocolon領域別_特に壊してはいけないもの.txt": "11_cocolon_area_specific_do_not_break.txt",
+    "12_毎回の短い宣誓ではなく確認項目.txt": "12_check_items_not_short_oath.txt",
+    "13_禁止事項_既出設計の再質問と設計用語への逃げ禁止.txt": "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+    "14_Cocolon共同開発と華恋思想の扱い.txt": "14_cocolon_joint_development_and_karen_thought_boundary.txt",
+    "99_統合版_毎回貼る用.txt": "99_integrated_paste_each_time.txt",
+    "Cocolon_EmlisAI_是正方針_撤回保持再設計_華恋用_2026-05-31.md": "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+    "Cocolon_EmlisAI_状態回答と人間的フォロー_設計定義_華恋用_2026-05-26.md": "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+    "Cocolon_作業姿勢とルール_華恋用": "work_attitude_rules_for_karen",
+    "Cocolon_思想資料_華恋用.md": "cocolon_thought_material_for_karen.md",
+    "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md"
   }
 }
