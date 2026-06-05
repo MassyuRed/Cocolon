@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-05-26"
+revision_date: "2026-06-04"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4548,3 +4548,59 @@ backend診断用のinternal metaは捨てない。`_log_emlis_ai_observation_res
 | `services/ai_inference/emlis_ai_limited_composer_client.py` | limited composer source監査上のfallback文字列を整理し、固定完成文fallbackへ戻さない。 |
 
 対象回帰確認: 前提資料更新時に、surface contract completion / runtime pre-return gate / public meta boundary / environment_state_output cross-core contract のtargeted regression `71 passed` を確認。全量pytestはこの前提資料更新では実行していない。
+
+
+# 2026-06-04 差分追記: Backend支援 EmlisAI User Label Connection Observation v1 Phase0-10
+
+`mashos-api_11(15).zip` では、EmlisAI backend support / test領域に User Label Connection Observation v1 Phase0〜10 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、Plus/Premiumで利用可能な owned history と current input を安全に観測材料へ接続するbackend内部構造である。
+
+| path | backend支援系での読み方 |
+|---|---|
+| `services/ai_inference/emlis_ai_user_label_connection_contract_inventory.py` | `/emotion/submit`、RN、DB、public meta、Structure Insight Gate非緩和をcontract inventoryとして固定する。 |
+| `services/ai_inference/emlis_ai_user_label_connection_material.py` | capability / source bundle / grounding boundaryを見て、current pointとowned history pointをtext-free materialへ変換する。 |
+| `services/ai_inference/emlis_ai_user_label_connection_gate.py` | Free tier、low_information、scope/soft marker、禁止claim、raw text混入、安全隣接をblockする専用Gate。 |
+| `services/ai_inference/emlis_ai_user_label_connection_public_meta.py` | internal summaryとpublic safe summaryの分離。raw input / comment_text body / candidate body / surface bodyを出さない。 |
+| `services/ai_inference/emlis_ai_user_label_connection_product_quality_qa.py` | Product Quality QA / Blind QA候補とratings-only review summaryを扱う。pytest greenだけで成果扱いしない。 |
+| `services/ai_inference/emlis_ai_user_label_connection_derived_model_cache.py` | cache検討metaのみ。Derived User Model read/write/persistやDB schema変更は行わない。 |
+
+Subscription境界:
+
+```text
+- Free: history_mode=none / current_input_only。履歴接続edge、history candidate、history surfaceを作らない。
+- Plus/Premium: owned historyを材料化できるが、User Fact Grounding Boundaryを通ったsafe materialだけに限定する。
+- Cross-core contextやDerived User Modelを、人格傾向・診断・未来予測の断定へ使わない。
+```
+
+対象回帰として、`ai/tests/test_emlis_ai_user_label_connection_*.py` と `test_emlis_ai_phase20_7_public_boundary_rn_contract.py` の `107 passed, 1 warning`、RN contract `35 passed` を確認済みとして読む。warningは既存Pydantic deprecationであり、この差分の失敗ではない。
+
+
+# 2026-06-04 差分追記: Backend支援 EmlisAI Product Quality Measurement / Blocker Repair Phase0-8
+
+`mashos-api_9(27).zip` では、EmlisAI backend support / test領域に Product Quality Measurement / Blocker Repair Phase0〜8 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、EmlisAIの商品品質を内部で測定し、blocker、Blind QA、release decision、validation planへ接続するbackend internal QA構造である。
+
+| path | backend支援系での読み方 |
+|---|---|
+| `services/ai_inference/emlis_ai_product_quality_contract_freeze.py` | RN/API/DB/public response/Product QA materialの既存契約を固定するPhase0 meta-only inventory。 |
+| `services/ai_inference/emlis_ai_product_quality_measurement_event.py` | ProductQualityEventV1 schema / normalizer。本文を持たず、表示到達・Gate・binding・reason coverageを内部event化する。 |
+| `services/ai_inference/emlis_ai_product_quality_measurement_runner.py` | Local Product QA Composer BootstrapとMeasurementRunV1。必須familyを流し、scorecard / Blind QA / User Label QA / Phase11 / Matrix / Decision / Validationへ接続する。 |
+| `services/ai_inference/emlis_ai_product_quality_blocker_matrix.py` | blocker taxonomy、owner area、candidate modules、repair policy、repair work queueを作る。 |
+| `services/ai_inference/emlis_ai_product_quality_generation_repair_design.py` | Blocker MatrixからPhase5 repair track / execution orderを作る。本文生成ロジックの直接修正ではない。 |
+| `services/ai_inference/emlis_ai_product_quality_blind_qa_integration.py` | Runtime Surface Blind QAとUser Label Connection QAをratings-onlyで統合し、未実施をrelease blockerにする。 |
+| `services/ai_inference/emlis_ai_product_release_decision.py` | Phase11、scorecard、Blind QA、Blocker Matrix、Composer stateを統合する内部release decision。rollout適用はしない。 |
+| `services/ai_inference/emlis_ai_product_quality_validation_plan.py` | public boundary / RN contract / Runner / scorecard / Blind QA / Phase11 / Matrix / Decision の検証順とacceptance criteriaを固定する。 |
+
+対象test:
+
+```text
+ai/tests/test_emlis_ai_product_quality_phase0_contract_freeze.py
+ai/tests/test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py
+ai/tests/test_emlis_ai_product_quality_measurement_event.py
+ai/tests/test_emlis_ai_product_quality_measurement_runner.py
+ai/tests/test_emlis_ai_product_quality_blocker_matrix.py
+ai/tests/test_emlis_ai_product_quality_generation_repair_design.py
+ai/tests/test_emlis_ai_product_quality_blind_qa_integration.py
+ai/tests/test_emlis_ai_product_release_decision.py
+ai/tests/test_emlis_ai_product_quality_validation_plan.py
+```
+
+禁止: backend支援系materialをpublic response key、DB保存形式、RN表示source、rollout configとして扱わない。

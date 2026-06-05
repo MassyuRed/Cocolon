@@ -2606,3 +2606,97 @@ EmlisAI User Label Connection Observation v1
 
 この4点が揃って初めて、EmlisAIはユーザーの入力履歴を「ただの過去ログ」ではなく、「その人の中で言葉・感情・行動・記憶ラベルがどうつながっているか」として扱える。  
 そして、それを断定せず、行動指示にせず、受け取れる温度で返すことで、EmlisAIはユーザーにとっての「一番の理解者であり、味方」に近づく。
+
+---
+
+## 21. 2026-06-04 実装反映差分: Phase 0〜10 latest actual file boundary
+
+この節は、設計作成時点の「候補」「未実装」記述を、最新実ファイル `mashos-api_11(15).zip` / `Cocolon_11(6).zip` の確認結果で上書きして読むための差分追記である。既存の設計本文は思想・contractの正本として残すが、実装有無についてはこの節を最新基準面とする。
+
+### 21.1 最新確認済み実ファイル
+
+```text
+/mnt/data/Cocolon_前提資料(171).zip
+/mnt/data/Cocolon_11(6).zip
+/mnt/data/mashos-api_11(15).zip
+```
+
+`Cocolon_11(6).zip` はRN production差分なしとして確認する。User Label Connection Observation v1 の実装差分は `mashos-api_11(15).zip` 側のbackend internal layerにある。
+
+### 21.2 実装済みbackend internal files
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_contract_inventory.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_types.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_material.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_candidate.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_gate.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_surface.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_public_meta.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_product_quality_qa.py
+mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_derived_model_cache.py
+```
+
+### 21.3 実装済みtest / guard files
+
+```text
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_e2e_contract.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_material.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_free_tier_boundary.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_no_raw_text_meta.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_edge_family_score.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_candidate.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_gate.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_low_information_boundary.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_surface.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_public_boundary.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_product_quality_qa.py
+mashos-api/ai/tests/test_emlis_ai_user_label_connection_derived_model_cache.py
+```
+
+### 21.4 既存ファイルへの接続差分
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py
+mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+```
+
+- `emlis_ai_public_feedback_meta.py` は、既存 `input_feedback.emlis_ai` 内に `user_label_connection` safe summaryをadditiveに入れるためのsanitizer接続を持つ。
+- `emlis_ai_reply_service.py` は、Phase7 meta-only integrationとPhase8 limited visible surface connectionをEmlisAI reply flow内で評価する。
+- Phase8で本文へ接続する場合も、既存 `comment_text` へ限定的に足すだけであり、RN画面、RN表示タイトル、RN表示条件、DB physical schema、`/emotion/submit` route、response top-level shapeは変更しない。
+
+### 21.5 最新のPhase状態
+
+| Phase | 最新状態 |
+|---|---|
+| Phase 0 | 前提資料への設計書追加済み。 |
+| Phase 1 | Contract inventory / 接続点確認済み。 |
+| Phase 2 | UserLabelPoint / Material builder 実装済み。 |
+| Phase 3 | Edge family / score 実装済み。 |
+| Phase 4 | Candidate builder 実装済み。 |
+| Phase 5 | User Label Connection Gate 実装済み。 |
+| Phase 6 | Surface Plan 実装済み。 |
+| Phase 7 | Meta-only integration 実装済み。 |
+| Phase 8 | Limited visible surface connection 実装済み。 |
+| Phase 9 | Product Quality QA / Blind QA material 実装済み。 |
+| Phase 10 | Derived User Model cache検討層のみ実装済み。cache read/write/persistは未実装。 |
+
+### 21.6 最新基準での不変contract
+
+```text
+- /emotion/submit routeは変更しない。
+- request key / response top-level keyは変更しない。
+- input_feedback.comment_text が唯一のpublic visible bodyである。
+- input_feedback.emlis_ai.user_label_connection はsafe summaryのみ。本文・raw text・candidate body・surface bodyを持たない。
+- RN visible title `Emlisの観測` は変更しない。
+- RN表示条件は observation_status == passed かつ comment_text non-empty のまま。
+- DB physical schema、Derived User Model table/schema、cache persistenceは変更しない。
+- 既存Structure Insight Gateを緩めない。
+- Freeは current_input_only。Plus/Premiumでもowned historyとUser Fact Grounding Boundaryを通った範囲だけ使う。
+- low_information / safety adjacent / self-denial / target judgement では履歴接続観測で通常観測へ無理に昇格させない。
+```
+
+### 21.7 §1.6の読み替え
+
+§1.6の「書かれていない: 今回のzip内に、User Label Connection Observation v1 という専用実装層は存在しない」は、設計書作成時点の記録である。最新実ファイル `mashos-api_11(15).zip` では、専用実装層は存在する。以後の作業では、この21章を最新実装反映として読む。
+

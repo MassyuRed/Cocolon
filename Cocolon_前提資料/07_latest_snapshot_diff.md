@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(161).zip"
-  Cocolon: "Cocolon_5(22).zip"
-  mashos-api: "mashos-api_5(47).zip"
+  premise: "Cocolon_前提資料(173).zip"
+  Cocolon: "Cocolon_9(17).zip"
+  mashos-api: "mashos-api_9(27).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_5(22).zip` | 217 | RNアプリ本体。production RN UIは変更せず、Phase20-7以降のRN contract testとして `passed + commentText` の既存表示契約を維持。 |
-| `mashos-api_5(47).zip` | 738 | EmlisAI Phase20-0〜20-15を反映。Phase20-0〜20-11に加え、旧fail-closed説明修正、post-final gate recovery、Gate Recovery surface binding / repetition QAを含む。 |
-| total | 955 | Phase20-12〜20-15前提資料差分更新後coverage対象 |
+| `Cocolon_9(17).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_9(27).zip` | 797 | EmlisAI Phase20、Product Read Feel / Structure Insight、User Label Connection Observation v1に加え、Product Quality Measurement / Blocker Repair Phase0-8をbackend internal-onlyで反映。 |
+| total | 1014 | Product Quality Measurement Phase0-8前提資料差分更新後coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針は履歴として残し、2026-06-01時点の最新正本は末尾の `2026-06-01 差分追記: EmlisAI Phase20-12〜20-15 表示信頼性補強 snapshot差分` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針は履歴として残し、2026-06-04時点の最新正本は末尾の `2026-06-04 差分追記: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 latest snapshot diff` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -3708,3 +3708,169 @@ Cocolon_前提資料/manifest.json
 ```
 
 01 / 02系のfull inventory本文は全面再生成しない。今回の差分は、Product Read Feel v1 / Structure Insight v2 Phase1〜11で増えたbackend内部material、QA、scorecard、Gate、Long-run Product Gate candidate、filename encoding boundaryの読み方を必要箇所へ差分追記する更新である。
+
+
+# 2026-06-04 差分追記: EmlisAI User Label Connection Observation v1 Phase0-10 latest snapshot diff
+
+## 基準面
+
+```text
+前提資料: Cocolon_前提資料(171).zip
+RN実ファイル: Cocolon_11(6).zip
+backend実ファイル: mashos-api_11(15).zip
+比較基準: Cocolon(206).zip / mashos-api(119).zip
+```
+
+## Cocolon / RN
+
+`Cocolon_11(6).zip` は `Cocolon(206).zip` と比較して追加0、削除0、修正0として確認する。User Label Connection Observation v1 Phase0-10では、RN production UI、RN表示タイトル、RN表示条件、RN contract sourceは変更されていない。
+
+## mashos-api
+
+`mashos-api(119).zip` から `mashos-api_11(15).zip` への全体差分は追加22、修正2、削除1である。このうちUser Label Connection Observation v1関連差分は追加21、修正2、削除0として読む。残る追加1・削除1は、既存の構造辞書運用docがUnicode名からescape名へ見えるfilename encoding差分であり、User Label Connection実装差分ではない。
+
+```text
+追加:
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_candidate.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_contract_inventory.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_derived_model_cache.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_gate.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_material.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_product_quality_qa.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_public_meta.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_surface.py
+  mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_types.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_candidate.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_derived_model_cache.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_e2e_contract.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_edge_family_score.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_free_tier_boundary.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_gate.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_low_information_boundary.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_material.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_no_raw_text_meta.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_product_quality_qa.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_public_boundary.py
+  mashos-api/ai/tests/test_emlis_ai_user_label_connection_surface.py
+
+修正:
+  mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py
+  mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+
+filename encoding差分（ULC対象外）:
+  追加: mashos-api/ai/docs/Cocolon_EmlisAI_#U69cb#U9020#U8f9e#U66f8#U66f4#U65b0#U904b#U7528_#U83ef#U604b#U7528_2026-06-02.md
+  削除: mashos-api/ai/docs/Cocolon_EmlisAI_構造辞書更新運用_華恋用_2026-06-02.md
+```
+
+## Phase別の実装差分
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| Phase0 | 設計書を前提資料へ追加し、初回実装境界を固定する。 | `Cocolon_EmlisAI_UserLabelConnectionObservation_v1_Design_2026-06-03.md` |
+| Phase1 | Contract inventory / 接続点確認で、`/emotion/submit`、RN表示条件、public meta、DB physical boundary、Structure Insight Gate非緩和を固定する。 | `emlis_ai_user_label_connection_contract_inventory.py`, `test_emlis_ai_user_label_connection_e2e_contract.py` |
+| Phase2 | current input / owned history を `UserLabelPoint` と text-free `UserLabelConnectionMaterial` へ正規化する。 | `emlis_ai_user_label_connection_types.py`, `emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_free_tier_boundary.py`, `test_emlis_ai_user_label_connection_no_raw_text_meta.py` |
+| Phase3 | material内でedge familyとprivate scoreを生成する。scoreはpublicへ出さない。 | `emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_edge_family_score.py` |
+| Phase4 | edgeからMechanism candidateを作る。candidateはGate前にvisible化しない。 | `emlis_ai_user_label_connection_candidate.py`, `test_emlis_ai_user_label_connection_candidate.py` |
+| Phase5 | User Label Connection専用Gateを追加し、Free/history、grounding、low_information、scope/soft marker、禁止claim、raw text混入をblockする。 | `emlis_ai_user_label_connection_gate.py`, `test_emlis_ai_user_label_connection_gate.py`, `test_emlis_ai_user_label_connection_low_information_boundary.py` |
+| Phase6 | Gate通過candidateを限定Surface Planへ変換する。connectable familyは `structure_question` / `long_meaning_arc` / `self_understanding_follow` に限定する。 | `emlis_ai_user_label_connection_surface.py`, `test_emlis_ai_user_label_connection_surface.py` |
+| Phase7 | reply flowへmeta-onlyで接続し、`input_feedback.emlis_ai.user_label_connection` にはsafe summaryのみを出す。 | `emlis_ai_user_label_connection_public_meta.py`, `emlis_ai_public_feedback_meta.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_user_label_connection_public_boundary.py` |
+| Phase8 | 限定familyだけを既存 `Emlisの観測` 本文へ接続する。scope marker / soft marker / runtime gate / visible acceptanceを再評価する。 | `emlis_ai_user_label_connection_surface.py`, `emlis_ai_user_label_connection_public_meta.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_user_label_connection_surface.py`, `test_emlis_ai_user_label_connection_public_boundary.py` |
+| Phase9 | Product Quality QA / Blind QA materialを追加し、pytest greenだけでは商品品質合格にしない境界を固定する。 | `emlis_ai_user_label_connection_product_quality_qa.py`, `test_emlis_ai_user_label_connection_product_quality_qa.py` |
+| Phase10 | Derived User Model cacheは実装ではなく検討metaのみ。runtime computed materialをsource of truthとして維持する。 | `emlis_ai_user_label_connection_derived_model_cache.py`, `test_emlis_ai_user_label_connection_derived_model_cache.py` |
+
+## 不変境界
+
+```text
+- RN production UI、RN表示タイトル `Emlisの観測`、RN表示条件は変更しない。
+- /emotion/submit route、request key、response key、DB physical nameは変更しない。
+- public response keyは追加しない。既存 input_feedback.emlis_ai 内のsafe summaryのみ additive に扱う。
+- raw current input、raw history input、memo、memo_action、comment_text body、candidate body、surface body、QA review bodyをmeta/publicへ保持しない。
+- User Fact Grounding Boundary と既存Structure Insight Gateを緩めない。
+- Freeでは履歴接続を使わず current_input_only を維持する。
+- low_informationを履歴だけでeligibleへ昇格させない。
+- scope marker / soft markerなしの履歴接続surfaceを出さない。
+- diagnosis / personality / cause / advice / future_prediction / always / should claimを出さない。
+- Phase10時点では cache read / write / persist / DB schema変更 / label_connection_map実データ永続化をしない。
+```
+
+## 検証済み
+
+```text
+cd mashos-api
+python -m pytest -q ai/tests/test_emlis_ai_user_label_connection_*.py ai/tests/test_emlis_ai_phase20_7_public_boundary_rn_contract.py
+107 passed, 1 warning
+
+cd Cocolon
+node --test tests/rn-screen-contracts.test.js
+35 passed
+```
+
+warningは既存Pydantic deprecation warningであり、今回差分の失敗ではない。
+
+## sha256
+
+| source | sha256 |
+|---|---|
+| `Cocolon_前提資料(171).zip` | `92caaed35379e4ac80f0fab98361f1cd65bb8e147dcf2506ec4ad8aff9f33b1f` |
+| `Cocolon_11(6).zip` | `27b53d403195d8b24032dc6863a6e0bf8a4d0bd2fd0f3693afffa850243ed397` |
+| `mashos-api_11(15).zip` | `b314492d912247855228024932f1e8a3f868d5af486abfd13fe91deec85f2565` |
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 latest snapshot diff
+
+今回のローカル最新基準:
+
+```text
+前提資料: Cocolon_前提資料(173).zip
+RN実ファイル: Cocolon_9(17).zip
+backend実ファイル: mashos-api_9(27).zip
+Cocolon file count: 217
+mashos-api file count: 797
+total file count: 1014
+```
+
+Cocolon側は、EmlisAI Product Quality Measurement Phase0-8に伴うproduction RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。`Cocolon/tests/rn-screen-contracts.test.js` は引き続き `passed + commentText` の既存契約を守るための確認対象として読む。
+
+mashos-api側では、前提資料上のUser Label Connection Observation v1 Phase0-10後に、EmlisAI Product Quality Measurement / Blocker Repair Phase0-8として次のbackend internal-onlyファイルを最新構造へ追加して読む。
+
+| 追加/反映file | snapshot上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_product_quality_contract_freeze.py` | Phase0 contract freeze material。 |
+| `ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py` | Phase2 ProductQualityEventV1 schema / normalizer。 |
+| `ai/services/ai_inference/emlis_ai_product_quality_measurement_runner.py` | Phase1 bootstrap + Phase3 runner + Phase4-8接続hub。 |
+| `ai/services/ai_inference/emlis_ai_product_quality_blocker_matrix.py` | Phase4 blocker matrix。 |
+| `ai/services/ai_inference/emlis_ai_product_quality_generation_repair_design.py` | Phase5 blocker別生成修正設計material。 |
+| `ai/services/ai_inference/emlis_ai_product_quality_blind_qa_integration.py` | Phase6 Blind QA Integration。 |
+| `ai/services/ai_inference/emlis_ai_product_release_decision.py` | Phase7 Release Decision Layer。 |
+| `ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py` | Phase8 Validation Plan。 |
+| `ai/tests/test_emlis_ai_product_quality_phase0_contract_freeze.py` | Phase0 contract freeze test。 |
+| `ai/tests/test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py` | Phase1 composer bootstrap test。 |
+| `ai/tests/test_emlis_ai_product_quality_measurement_event.py` | Phase2 event normalizer test。 |
+| `ai/tests/test_emlis_ai_product_quality_measurement_runner.py` | Phase3 runner test。 |
+| `ai/tests/test_emlis_ai_product_quality_blocker_matrix.py` | Phase4 matrix test。 |
+| `ai/tests/test_emlis_ai_product_quality_generation_repair_design.py` | Phase5 repair design test。 |
+| `ai/tests/test_emlis_ai_product_quality_blind_qa_integration.py` | Phase6 Blind QA integration test。 |
+| `ai/tests/test_emlis_ai_product_release_decision.py` | Phase7 release decision test。 |
+| `ai/tests/test_emlis_ai_product_quality_validation_plan.py` | Phase8 validation plan test。 |
+
+読み方:
+
+- 今回の差分は、商品品質到達宣言ではなく、計測・blocker分解・Blind QA・内部release判断・検証計画の基盤追加である。
+- `product_release_decision.release_allowed` や `phase8_validation_passed` は内部materialであり、public releaseやall rollout適用ではない。
+- validation未実行、Blind QA未実施、Phase11未green、blocker残存はrelease不可として読む。
+
+不変境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `observation_status === passed && commentText non-empty` 変更なし
+/emotion/submit route / request key / public response top-level shape 変更なし
+DB physical schema / write path 変更なし
+public response key追加なし
+Gate緩和なし
+固定テンプレート追加なし
+A/C/D fixture専用runtime branch追加なし
+product_gate_ready / public_release_applied を立てない
+raw input / comment_text body / candidate body / surface body をrelease materialへ入れない
+```

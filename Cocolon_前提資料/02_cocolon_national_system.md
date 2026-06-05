@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(161).zip"
-  Cocolon: "Cocolon_5(22).zip"
-  mashos-api: "mashos-api_5(47).zip"
+  premise: "Cocolon_前提資料(173).zip"
+  Cocolon: "Cocolon_9(17).zip"
+  mashos-api: "mashos-api_9(27).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 738
-  total: 955
+  mashos-api: 797
+  total: 1014
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 955
+  included_files_total: 1014
   included_files_cocolon: 217
-  included_files_mashos_api: 738
+  included_files_mashos_api: 797
 ---
 
 # 1. 1行定義
@@ -1382,3 +1382,76 @@ Phase20は、Input -> `/emotion/submit` -> EmlisAI immediate reply -> public san
 | RN display | RNはPhase20 internal metaを読まず、既存 `commentText` だけを `Emlisの観測` modalへ表示する。 |
 
 禁止: Phase20のためにpublic response key、RN表示条件、DB physical name、API routeを増やすこと。A/C/D exact fixtureをruntime route、固定文、case専用cueに戻すこと。
+
+
+# 2026-06-04 差分追記: 国家システム上のEmlisAI User Label Connection Observation v1 Phase0-10境界
+
+User Label Connection Observation v1は、Input -> `/emotion/submit` -> EmlisAI immediate reply -> public sanitizer -> RN display の国家システム境界を変えずに、EmlisAI内部へ「current input + owned history + user model」を読むためのmaterial / candidate / gate / surface plan / QA / cache considerationを追加した工程として読む。
+
+```text
+Input Save
+ -> /emotion/submit
+ -> normalize_emlis_current_input
+ -> build_emlis_ai_source_bundle
+ -> User Fact Grounding Boundary
+ -> User Label Connection Material / Candidate / Gate / Surface Plan
+ -> Phase7 meta-only integration
+ -> Phase8 limited visible surface connection when allowed
+ -> runtime pre-return gate / visible surface acceptance / display decision
+ -> public feedback meta sanitizer
+ -> input_feedback only when public observation_status=passed + comment_text
+ -> RN passed + commentText display
+```
+
+| 国家システム区分 | Phase0-10での読み方 |
+|---|---|
+| Input / Save | request payload、DB write path、保存成功判定は変えない。 |
+| Capability / Source | Freeは current_input_only。Plus/Premiumのみ owned history を材料候補にする。 |
+| Boundary | User Fact Grounding Boundary、low_information保護、安全隣接、scope/soft marker、禁止claimを緩めない。 |
+| Public response | 新規public response keyは追加しない。既存 `input_feedback.emlis_ai` 内のsafe summaryだけをadditiveに扱う。 |
+| Visible surface | Phase8で限定familyだけ既存 `comment_text` へ接続し、接続後にruntime / visible gatesを再評価する。 |
+| Product QA | Phase9はratings-only / meta-only。pytest greenだけではproduct品質合格にしない。 |
+| Derived model cache | Phase10は検討metaのみ。cache read/write/persist、DB schema変更、実データ永続化は行わない。 |
+| RN display | RNはUser Label Connection metaを表示条件に使わず、既存 `commentText` だけを `Emlisの観測` modalへ表示する。 |
+
+禁止: User Label Connectionのためにpublic response key、RN表示条件、DB physical name、API route、observation_status enumを増やすこと。raw current input / raw history input / memo / memo_action / comment_text body / candidate body / surface bodyをmetaやpublic responseへ入れること。
+
+
+# 2026-06-04 差分追記: 国家システム上のEmlisAI Product Quality Measurement Phase0-8境界
+
+`mashos-api_9(27).zip` では、`/emotion/submit` immediate replyそのものを変更せず、EmlisAIの表示到達・品質・blocker・Blind QA・release判断・validation planを内部QA materialへ流す経路が追加されている。国家システム上は、Input Save / Dispatch / Publish / Readの本流ではなく、保存直後replyの品質測定・release判断補助として読む。
+
+国家システム上の読み方:
+
+```text
+InputScreen submit payload
+↓
+/emotion/submit save path
+↓
+render_emlis_ai_reply / public feedback meta
+↓
+ProductQualityEventV1 Normalizer
+↓
+MeasurementRunV1
+↓
+Product Read Feel / Runtime Surface Blind QA / User Label Connection QA / Phase11 material
+↓
+Blocker Matrix
+↓
+Generation Repair Design
+↓
+Blind QA Integration
+↓
+Release Decision Layer
+↓
+Validation Plan
+```
+
+固定境界:
+
+```text
+- Input save API、DB write path、dispatch、public response shapeは変更しない。
+- RN displayは既存 `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` だけを見る。
+- MeasurementRunV1 / ProductQualityEventV1 / Release Decision / Validation Planはinternal materialであり、read-side APIやstartup snapshotへ公開しない。
+- Blind QA未実施やvalidation未実行はrelease不可blockerであり、機械指標で代替しない。
+```

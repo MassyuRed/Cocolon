@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -809,3 +809,64 @@ EmlisAIの商品読感評価、Structure Insight候補、Gate、Long-run QAを�
 | Complete scorecard connection | `emlis_ai_complete_product_quality_scorecard_service.py`, `test_emlis_ai_complete_product_quality_scorecard.py`, `test_emlis_ai_complete_product_quality_scorecard_blind_qa.py` | Product Read Feel / Structure Insight metaをcomplete scorecardで読む時。 |
 
 禁止: Phase1〜11のためにpublic response key、RN production UI、DB physical name、API route、observation_status enumを変える。`PRODUCT_PASS` / `STRUCTURE_INSIGHT_READY` をpublic statusとして扱う。read_feelingをmachine metricsから自動補完する。raw input / comment_text body / candidate bodyをmetaへ保存する。日本語ファイル名の文字化けだけを理由に同内容ファイルを重複追加する。
+
+
+# 2026-06-04 差分追記: EmlisAI User Label Connection Observation v1 rule / test index
+
+User Label Connection Observation v1を触る場合は、設計書、作業姿勢資料、EmlisAI是正方針、既存Structure Insight Gate、User Fact Grounding Boundary、public feedback meta sanitizerを同時確認する。これは「履歴を使った決めつけ」ではなく、Cocolonの記憶ラベル方式を、断定しない観測線としてEmlisAIへ返すbackend internal layerである。
+
+| rule / guard / test | owner | 触る時 |
+|---|---|---|
+| 設計正本 | `Cocolon_EmlisAI_UserLabelConnectionObservation_v1_Design_2026-06-03.md` | Point / Line / Mechanism / Observation、禁止claim、Phase境界を確認する時。 |
+| Contract inventory | `emlis_ai_user_label_connection_contract_inventory.py`, `test_emlis_ai_user_label_connection_e2e_contract.py` | `/emotion/submit`、RN表示、public meta、composer接続境界を確認する時。 |
+| Point / Material / Edge | `emlis_ai_user_label_connection_types.py`, `emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_edge_family_score.py` | current input / owned history / edge family / private scoreを触る時。 |
+| Free / raw meta boundary | `test_emlis_ai_user_label_connection_free_tier_boundary.py`, `test_emlis_ai_user_label_connection_no_raw_text_meta.py` | Free current_input_onlyやraw非混入を確認する時。 |
+| Candidate | `emlis_ai_user_label_connection_candidate.py`, `test_emlis_ai_user_label_connection_candidate.py` | Mechanism candidate、evidence count、current included、forbidden claimsを触る時。 |
+| Gate | `emlis_ai_user_label_connection_gate.py`, `test_emlis_ai_user_label_connection_gate.py`, `test_emlis_ai_user_label_connection_low_information_boundary.py` | scope marker、soft marker、safety adjacent、low information、claim blockを触る時。 |
+| Surface / visible connection | `emlis_ai_user_label_connection_surface.py`, `test_emlis_ai_user_label_connection_surface.py` | limited surface planやPhase8 comment_text接続を触る時。 |
+| Meta sanitizer / reply flow | `emlis_ai_user_label_connection_public_meta.py`, `emlis_ai_public_feedback_meta.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_user_label_connection_public_boundary.py` | 既存 `input_feedback.emlis_ai` safe summaryやreply flow integrationを触る時。 |
+| Product Quality QA | `emlis_ai_user_label_connection_product_quality_qa.py`, `test_emlis_ai_user_label_connection_product_quality_qa.py` | Blind QA候補、ratings-only summary、pytest green非成果境界を触る時。 |
+| Derived Model cache consideration | `emlis_ai_user_label_connection_derived_model_cache.py`, `test_emlis_ai_user_label_connection_derived_model_cache.py` | cache検討、runtime measurement、DB/cache read/write禁止を触る時。 |
+
+対象回帰:
+
+```text
+python -m pytest -q   ai/tests/test_emlis_ai_user_label_connection_*.py   ai/tests/test_emlis_ai_phase20_7_public_boundary_rn_contract.py
+```
+
+RN production contractを確認する場合は次も維持する。
+
+```text
+node --test tests/rn-screen-contracts.test.js
+```
+
+禁止:
+
+```text
+- User Label ConnectionをRN新画面・public status・public response top-level keyとして扱う。
+- 既存Structure Insight Gateを緩めて履歴接続candidateを通す。
+- `input_feedback.emlis_ai.user_label_connection` のsafe summaryを表示sourceにする。
+- raw input / memo / memo_action / history raw text / comment_text body / candidate body / surface bodyをmetaへ入れる。
+- Freeでowned historyを使う。
+- low_information / safety adjacent / self-denial / target judgementを履歴接続で通常観測へ昇格する。
+- Phase10をcache実装済み、Derived User Modelへの永続化済み、DB schema変更済みとして読む。
+```
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 rule / test index
+
+EmlisAIの商品品質計測、Blocker Matrix、Blind QA Integration、Release Decision、Validation Planを触る場合は、Phase20撤回保持再設計、Product Read Feel / Structure Insight、User Label Connection QAに加えて次を同時確認する。
+
+| rule / test | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `emlis_ai_product_quality_contract_freeze.py` | RN/API/DB/public response/Product QA materialの不変契約 | 商品品質計測の入口、contract変更有無を確認する時 |
+| `emlis_ai_product_quality_measurement_event.py` | ProductQualityEventV1のtext-free normalizer / public display reach判定 | Runner、scorecard、Blocker Matrixへ渡すeventを触る時 |
+| `emlis_ai_product_quality_measurement_runner.py` | Local Composer Bootstrap、MeasurementRunV1、QA material接続 | 実入力family計測、Composer blocker、run summaryを触る時 |
+| `emlis_ai_product_quality_blocker_matrix.py` | blocker taxonomy / owner area / repair policy / repair queue | blocker別生成修正の入口を触る時 |
+| `emlis_ai_product_quality_generation_repair_design.py` | repair track / execution order / fixed template禁止 | Phase5生成修正設計materialを触る時 |
+| `emlis_ai_product_quality_blind_qa_integration.py` | ratings-only review、coverage、machine metrics代替禁止 | Blind QAをrelease判断へ接続する時 |
+| `emlis_ai_product_release_decision.py` | internal release decision、release_blockers、followup fixes | release_allowed / release_stage判断を触る時 |
+| `emlis_ai_product_quality_validation_plan.py` | validation order、required tests、acceptance criteria | Phase8検証計画とvalidation readinessを触る時 |
+| `test_emlis_ai_product_quality_*.py` / `test_emlis_ai_product_release_decision.py` | Phase0-8内部contract回帰 | Phase0-8 materialを修正する時 |
+
+禁止: `product_gate_ready` / `public_release_applied` をPhase0-8 materialでtrueにする、Blind QA未実施をgreen扱いする、Release Decision greenを即rolloutと読む、public response / RN / DB contractを変える。

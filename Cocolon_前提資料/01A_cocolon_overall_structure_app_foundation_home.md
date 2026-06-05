@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2883,3 +2883,29 @@ Phase20-12〜20-15後の追加読み方:
 
 Home/Input側の不変契約は引き続き同じで、RN production UI、`/emotion/submit` route、public response key、`passed + commentText` 表示条件は変更しない。
 
+
+
+# 2026-06-04 差分追記: Home / EmlisAI immediate reply Product Quality Measurement Phase0-8 current owner
+
+Phase0〜8後のHome immediate replyでは、EmlisAIのruntime表示契約は引き続きbackend public boundaryで決まり、RNは既存 `commentText` を受け取るだけである。今回追加された `ProductQualityEventV1` / `Measurement Runner` / `Blocker Matrix` / `Release Decision` / `Validation Plan` は、Home production UIや `/emotion/submit` response shapeではなく、商品品質を測る内部QA基盤として読む。
+
+主なowner:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_contract_freeze.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_runner.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_blocker_matrix.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_blind_qa_integration.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_release_decision.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py
+Cocolon/tests/rn-screen-contracts.test.js
+```
+
+読み方:
+
+- `public_display_reached` はRN表示条件の代替ではなく、既存public feedback include条件と同じ表示到達判定である。
+- `release_allowed` が内部material上でgreenになっても、RN表示条件、API route、DB write path、rollout flagは自動変更しない。
+- Blind QA review queueはlocal review準備であり、RN表示payloadではない。
+
+禁止: RN側で `product_release_decision` / `validation_plan` / `blocker_matrix` / `blind_qa_integration` を表示sourceや表示条件にしない。`comment_text` 以外の本文keyを要求しない。

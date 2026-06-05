@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-06-03"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(165).zip"
-  Cocolon: "Cocolon_12(10).zip"
-  mashos-api: "mashos-api_12(13).zip"
+  premise: "Cocolon_前提資料(173).zip"
+  Cocolon: "Cocolon_9(17).zip"
+  mashos-api: "mashos-api_9(27).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 759
-  total: 976
+  mashos-api: 797
+  total: 1014
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 976
-  included_in_overall_structure: 976
-  included_in_national_system: 976
+  total_files: 1014
+  included_in_overall_structure: 1014
+  included_in_national_system: 1014
   excluded_from_main_body: 0
   phase15_target_docs_reflect_two_stage_increment: true
   phase15_full_01_02_regeneration: false
@@ -38,6 +38,10 @@ coverage:
   phase20_full_01_02_regeneration: false
   product_readfeel_phase11_long_run_product_gate_connected: true
   product_readfeel_full_01_02_regeneration: false
+  user_label_connection_observation_phase0_10_reflected: true
+  user_label_connection_observation_full_01_02_regeneration: false
+  product_quality_measurement_phase0_8_reflected: true
+  product_quality_measurement_full_01_02_regeneration: false
 ---
 
 # これは何か
@@ -113,13 +117,13 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_12(10).zip` | 217 | RNアプリ本体。production RN UIは変更せず、`Cocolon/tests/rn-screen-contracts.test.js` で `passed + commentText` の既存表示契約を維持する。 |
-| `mashos-api_12(13).zip` | 759 | backend / API / worker / tests。Phase20-0〜20-15に加え、Product Read Feel v1 / Structure Insight v2 Phase1〜11を反映し、current output inventory、rubric、fixture family、meta-only evaluator、v1 surface repair、mirror-only detector、Structure Insight candidate / Gate / limited surface、Long-run Product Gate candidateまで含む。 |
-| total | 976 | Product Read Feel / Structure Insight Phase1〜11前提資料差分更新対象snapshot |
+| `Cocolon_9(17).zip` | 217 | RNアプリ本体。production RN UIは変更せず、`Cocolon/tests/rn-screen-contracts.test.js` で `passed + commentText` の既存表示契約を維持する。 |
+| `mashos-api_9(27).zip` | 797 | backend / API / worker / tests。Phase20、Product Read Feel / Structure Insight、EmlisAI User Label Connection Observation v1に加え、EmlisAI Product Quality Measurement / Blocker Repair Phase0〜8をbackend internal-onlyで反映する。 |
+| total | 1014 | EmlisAI商品品質計測・Blocker Matrix・Blind QA・Release Decision・Validation Plan反映後の前提資料差分更新対象snapshot。 |
 
-`Cocolon_12(10).zip` / `mashos-api_12(13).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、EmlisAIを入力直後の観測返答として維持したまま、商品読感評価と構造気づき候補をbackend内部QA / scorecard / Gate / Long-run materialへ接続しています。
+`Cocolon_9(17).zip` / `mashos-api_9(27).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、EmlisAIの商品品質計測基盤をbackend内部のContract Freeze / Composer Bootstrap / ProductQualityEventV1 / Measurement Runner / Blocker Matrix / Generation Repair Design / Blind QA Integration / Release Decision / Validation Planへ接続しています。
 
-Phase20後およびProduct Read Feel Phase1〜11後のEmlisAI作業では、次を最新の読み方として固定します。
+Phase20後、Product Read Feel / Structure Insight Phase1〜11後、User Label Connection Observation v1 Phase0〜10後のEmlisAI作業では、次を最新の読み方として固定します。
 
 ```text
 normal / low_information / limited_grounding / self_denial_safe_state_answer は内部 response_kind として読む。
@@ -216,6 +220,56 @@ EmlisAIの実装済み資料(37).zip
 ```
 
 作業姿勢資料フォルダは、現在 `work_attitude_rules_for_karen` として読む。旧日本語フォルダ名の重複追加や補正は行わない。
+
+# 2026-06-04 追補: EmlisAI User Label Connection Observation v1 Phase0-10 実装反映
+
+最新実ファイル `Cocolon_11(6).zip` / `mashos-api_11(15).zip` を確認した。Cocolon RN側は source file count `217` のままで、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。mashos-api側では、User Label Connection Observation v1 の Phase0〜10 が backend internal-only 層として実装されている。
+
+今回の追加実装は、EmlisAIがユーザーの入力を単発の文字列としてではなく、Cocolonの `category / emotion / strength / memo_action / memo / created_at` による記憶ラベル接続として読むためのbackend内部層である。これは新しい画面、DB schema、API route、public response top-level key、RN表示条件を追加する工程ではない。
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| Phase0 | 設計書を前提資料へ追加し、初回実装境界を固定する。 | `Cocolon_EmlisAI_UserLabelConnectionObservation_v1_Design_2026-06-03.md` |
+| Phase1 | Contract inventory / 接続点確認で、`/emotion/submit`、RN表示条件、public meta、DB physical boundary、Structure Insight Gate非緩和を固定する。 | `emlis_ai_user_label_connection_contract_inventory.py`, `test_emlis_ai_user_label_connection_e2e_contract.py` |
+| Phase2 | current input / owned history を `UserLabelPoint` と text-free `UserLabelConnectionMaterial` へ正規化する。 | `emlis_ai_user_label_connection_types.py`, `emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_free_tier_boundary.py`, `test_emlis_ai_user_label_connection_no_raw_text_meta.py` |
+| Phase3 | material内でedge familyとprivate scoreを生成する。scoreはpublicへ出さない。 | `emlis_ai_user_label_connection_material.py`, `test_emlis_ai_user_label_connection_edge_family_score.py` |
+| Phase4 | edgeからMechanism candidateを作る。candidateはGate前にvisible化しない。 | `emlis_ai_user_label_connection_candidate.py`, `test_emlis_ai_user_label_connection_candidate.py` |
+| Phase5 | User Label Connection専用Gateを追加し、Free/history、grounding、low_information、scope/soft marker、禁止claim、raw text混入をblockする。 | `emlis_ai_user_label_connection_gate.py`, `test_emlis_ai_user_label_connection_gate.py`, `test_emlis_ai_user_label_connection_low_information_boundary.py` |
+| Phase6 | Gate通過candidateを限定Surface Planへ変換する。connectable familyは `structure_question` / `long_meaning_arc` / `self_understanding_follow` に限定する。 | `emlis_ai_user_label_connection_surface.py`, `test_emlis_ai_user_label_connection_surface.py` |
+| Phase7 | reply flowへmeta-onlyで接続し、`input_feedback.emlis_ai.user_label_connection` にはsafe summaryのみを出す。 | `emlis_ai_user_label_connection_public_meta.py`, `emlis_ai_public_feedback_meta.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_user_label_connection_public_boundary.py` |
+| Phase8 | 限定familyだけを既存 `Emlisの観測` 本文へ接続する。scope marker / soft marker / runtime gate / visible acceptanceを再評価する。 | `emlis_ai_user_label_connection_surface.py`, `emlis_ai_user_label_connection_public_meta.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_user_label_connection_surface.py`, `test_emlis_ai_user_label_connection_public_boundary.py` |
+| Phase9 | Product Quality QA / Blind QA materialを追加し、pytest greenだけでは商品品質合格にしない境界を固定する。 | `emlis_ai_user_label_connection_product_quality_qa.py`, `test_emlis_ai_user_label_connection_product_quality_qa.py` |
+| Phase10 | Derived User Model cacheは実装ではなく検討metaのみ。runtime computed materialをsource of truthとして維持する。 | `emlis_ai_user_label_connection_derived_model_cache.py`, `test_emlis_ai_user_label_connection_derived_model_cache.py` |
+
+固定する境界:
+
+```text
+- RN production UI、RN表示タイトル `Emlisの観測`、RN表示条件は変更しない。
+- /emotion/submit route、request key、response key、DB physical nameは変更しない。
+- public response keyは追加しない。既存 input_feedback.emlis_ai 内のsafe summaryのみ additive に扱う。
+- raw current input、raw history input、memo、memo_action、comment_text body、candidate body、surface body、QA review bodyをmeta/publicへ保持しない。
+- User Fact Grounding Boundary と既存Structure Insight Gateを緩めない。
+- Freeでは履歴接続を使わず current_input_only を維持する。
+- low_informationを履歴だけでeligibleへ昇格させない。
+- scope marker / soft markerなしの履歴接続surfaceを出さない。
+- diagnosis / personality / cause / advice / future_prediction / always / should claimを出さない。
+- Phase10時点では cache read / write / persist / DB schema変更 / label_connection_map実データ永続化をしない。
+```
+
+確認済み対象回帰:
+
+```text
+cd mashos-api
+python -m pytest -q ai/tests/test_emlis_ai_user_label_connection_*.py ai/tests/test_emlis_ai_phase20_7_public_boundary_rn_contract.py
+107 passed, 1 warning
+
+cd Cocolon
+node --test tests/rn-screen-contracts.test.js
+35 passed
+```
+
+warningは既存 `api_emotion_submit.py` の Pydantic `@root_validator` deprecation warningであり、User Label Connection Observation v1の失敗ではない。
+
 
 # 2026-06-01 Phase20反映: EmlisAI撤回保持再設計 / 実機再確認 / 表示信頼性補強
 
@@ -1202,3 +1256,56 @@ Phase扱い:
 - `passed + comment_text` 以外でRN表示しない。
 - raw input / memo / memo_action / evidence text / comment_text body / section本文をpublic metaへ入れない。
 - DB physical name、`/emotion/submit` route、request / response top-level key、RN表示タイトル `Emlisの観測` を変更しない。
+
+
+# 2026-06-04 追補: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 実装反映
+
+最新実ファイル `Cocolon_9(17).zip` / `mashos-api_9(27).zip` を確認した。Cocolon RN側は source file count `217` のままで、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。mashos-api側では、EmlisAI Product Quality Measurement / Blocker Repair / Blind QA Integration / Release Decision / Validation Plan の Phase0〜8 がbackend internal-only層として実装されている。
+
+読み方:
+
+- Phase0〜8は、EmlisAIを商品品質到達済みにするrelease適用ではなく、商品品質を測り、blockerを分解し、修正順と検証順を内部material化する計測・判断基盤である。
+- `ProductQualityEventV1` は本文を持たない内部eventであり、`public_display_reached` は `/emotion/submit` の `should_include_public_input_feedback(...)` と同じ表示契約で判定する。
+- `Measurement Runner` は実入力familyを `render_emlis_ai_reply` 相当経路へ流すが、public response key、DB保存物、RN表示payloadを作らない。
+- `Blocker Matrix` と `Generation Repair Design` は、Gateを緩めずに修正対象owner / repair policy / generation trackへ戻すための内部materialである。
+- `Blind QA Integration` は「読まれた感じ」を機械指標で代替しない。review未実施、coverage不足、red reviewはrelease blockerである。
+- `Release Decision Layer` と `Validation Plan` は内部判断であり、Phase11 / scorecard / validation materialへ `product_gate_ready` や `public_release_applied` を立てさせない。
+
+実装済みとして読む主な内部ファイル:
+
+| Phase | 主な実ファイル | 読み方 |
+|---|---|---|
+| Phase0 Contract Freeze | `emlis_ai_product_quality_contract_freeze.py`, `test_emlis_ai_product_quality_phase0_contract_freeze.py` | RN/API/DB/public response/Product QA materialの既存契約を内部meta-onlyで固定する。 |
+| Phase1 Local Product QA Composer Bootstrap | `emlis_ai_product_quality_measurement_runner.py`, `test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py` | local QAでComposer生成経路が開いているかを判定し、無効なら成功扱いせずblocker化する。 |
+| Phase2 ProductQualityEventV1 | `emlis_ai_product_quality_measurement_event.py`, `test_emlis_ai_product_quality_measurement_event.py` | raw input / comment body / candidate bodyを持たない内部QA eventへ正規化する。 |
+| Phase3 Measurement Runner | `emlis_ai_product_quality_measurement_runner.py`, `test_emlis_ai_product_quality_measurement_runner.py` | 必須input familyをEmlisAI経路へ流し、表示到達・Gate・binding・reason coverage・QA接続をevent化する。 |
+| Phase4 Blocker Matrix | `emlis_ai_product_quality_blocker_matrix.py`, `test_emlis_ai_product_quality_blocker_matrix.py` | blockerをowner area / candidate module / repair policyへ接続する。未知blockerはfail-closedでtriageする。 |
+| Phase5 Generation Repair Design | `emlis_ai_product_quality_generation_repair_design.py`, `test_emlis_ai_product_quality_generation_repair_design.py` | Blocker Matrixから生成修正trackと実行順を作る。本文生成ロジック自体はまだ変更しない。 |
+| Phase6 Blind QA Integration | `emlis_ai_product_quality_blind_qa_integration.py`, `test_emlis_ai_product_quality_blind_qa_integration.py` | Runtime Surface Blind QA / User Label Connection QAをratings-onlyで統合し、未実施ならrelease不可にする。 |
+| Phase7 Release Decision Layer | `emlis_ai_product_release_decision.py`, `test_emlis_ai_product_release_decision.py` | Phase11 / scorecard / Blind QA / Blocker Matrix / Composer stateを統合し、内部release判断だけを返す。 |
+| Phase8 Validation Plan | `emlis_ai_product_quality_validation_plan.py`, `test_emlis_ai_product_quality_validation_plan.py` | 検証順・acceptance criteria・未実行blockerを固定する。テスト実行そのものの代替ではない。 |
+
+不変境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `observation_status === passed && commentText non-empty` 変更なし
+/emotion/submit route / request key / public response top-level shape 変更なし
+DB physical schema / write path 変更なし
+public response key追加なし
+Gate緩和なし
+固定テンプレート追加なし
+A/C/D fixture専用runtime branch追加なし
+product_gate_ready / public_release_applied を立てない
+raw input / comment_text body / candidate body / surface body をrelease materialへ入れない
+```
+
+
+作業時の禁止:
+
+- Phase0〜8の内部名を理由にRN表示条件を増やさない。
+- `release_allowed` / `validation_passed` / `PRODUCT_PASS` 系の内部語をpublic `observation_status` enumへ変換しない。
+- `blind_qa_review_queue` やreview用materialをpublic metaまたはRN表示sourceにしない。
+- `generation_repair_design` を「本文生成修正済み」と読まない。Phase5は修正設計materialであり、実生成ロジック修正ではない。
+- Validation Planをテスト実行済み証明として扱わない。未実行ならrelease不可blockerとして読む。

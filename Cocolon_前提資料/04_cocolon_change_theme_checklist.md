@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -610,3 +610,32 @@ EmlisAIのPhase20後実装を触る時は、最低限次を同時に読む。
 ```
 
 禁止: Phase20 internal metaをpublic response keyへ出す、RN側で `response_kind` / `diagnostic_summary` / `material_quality` / `phase20_13_post_final_gate_recovery` / `phase20_15_gate_recovery_surface_binding` を表示条件にする、C/D専用mode・cue・完成surfaceを復活させる、A低情報をcase専用routeにする、Gate recoveryをfixed fallbackにする、自己否定を本人の事実として確定する、safety emergencyを通常Emlis観測としてpassed化する。
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 を触る時
+
+EmlisAIの商品品質計測、Blocker Matrix、Blind QA Integration、Release Decision、Validation Planを触る時は、次の順で確認する。
+
+1. `00_karen_read_first.md` のProduct Quality Measurement Phase0-8反映と最新基準面。
+2. `emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md` のPhase19撤回保持再設計。
+3. `Cocolon_EmlisAI_UserLabelConnectionObservation_v1_Design_2026-06-03.md` とUser Label Connection QA境界。
+4. `01_cocolon_overall_structure.md` / `01C_cocolon_overall_structure_account_subscription_backend_support.md` のbackend internal owner map。
+5. `02A_cocolon_national_system_input_save_dispatch.md` / `02C_cocolon_contract_boundary_validation.md` の保存後reply / contract境界。
+6. `03_cocolon_naming_system.md` / `09_naming_boundary.md` のinternal名とpublic名の分離。
+7. `05_cocolon_rule_file_index.md` のPhase0-8 rule / test index。
+8. `07_latest_snapshot_diff.md` の最新snapshot差分。
+9. 最新実ファイルzip上の対象file。
+
+修正時の確認順:
+
+```text
+1. public/RN/DB契約を変えない対象か確認する。
+2. ProductQualityEventV1が本文を持たないことを確認する。
+3. Measurement Runnerが実入力familyをevent化し、成功扱いではなくblocker分解しているか確認する。
+4. Blocker Matrixでowner area / repair policyが出ているか確認する。
+5. Generation Repair Designを本文生成修正済みと誤読していないか確認する。
+6. Blind QA未実施を機械指標で代替していないか確認する。
+7. Release Decision / Validation Planがrolloutやpublic releaseを適用していないか確認する。
+```
+
+禁止: Phase0-8 internal materialをpublic response keyへ出す、RN表示条件にする、DB保存物にする、Gate緩和する、fixed templateやA/C/D専用runtime branchを追加する、validation未実行を商品品質到達と扱う。

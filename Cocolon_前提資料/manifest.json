@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-03",
+  "revision_date": "2026-06-04",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,8 +7,8 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 759,
-    "total": 976
+    "mashos-api": 797,
+    "total": 1014
   },
   "coverage_policy": {
     "overall_structure_body_includes": 976,
@@ -16,9 +16,9 @@
     "excluded_from_main_body": 0,
     "inventory_removed": true,
     "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル955件、国家システム判断対象のcurrent全ファイル955件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPhase20は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 976,
-    "overall_structure_body_includes_current_snapshot_files": 976,
-    "national_system_body_lists_current_snapshot_files_with_relation": 976,
+    "current_snapshot_total_files": 1014,
+    "overall_structure_body_includes_current_snapshot_files": 1014,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1014,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -831,7 +831,9 @@
     "phase18_full_01_02_regeneration": false,
     "phase20_target_docs_reflect_emlis_correction_implementation": true,
     "phase20_full_01_02_regeneration": false,
-    "coverage_principle_2026_06_03": "Product Read Feel v1 / Structure Insight v2 Phase1-11は01/02系full inventory本文を全面再生成せず、必要な構造・契約・QA境界へ差分追記する。最新実ファイルはCocolon_12(10).zip / mashos-api_12(13).zip、file countは217/759/976。"
+    "coverage_principle_2026_06_03": "Product Read Feel v1 / Structure Insight v2 Phase1-11は01/02系full inventory本文を全面再生成せず、必要な構造・契約・QA境界へ差分追記する。最新実ファイルはCocolon_12(10).zip / mashos-api_12(13).zip、file countは217/759/976。",
+    "product_quality_measurement_phase0_8_reflected": true,
+    "product_quality_measurement_full_01_02_regeneration": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -6019,5 +6021,138 @@
     "Cocolon_作業姿勢とルール_華恋用": "work_attitude_rules_for_karen",
     "Cocolon_思想資料_華恋用.md": "cocolon_thought_material_for_karen.md",
     "Cocolon_環境状態出力観測構造_設計定義_華恋用_2026-05-25.md": "cocolon_environment_state_output_observation_structure_design_2026_05_25.md"
+  },
+  "source_snapshot_2026_06_04_user_label_connection_observation_phase0_10": {
+    "date": "2026-06-04",
+    "premise": "Cocolon_前提資料(171).zip",
+    "Cocolon": "Cocolon_11(6).zip",
+    "mashos-api": "mashos-api_11(15).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 780,
+      "total": 997
+    },
+    "sha256": {
+      "Cocolon_前提資料(171).zip": "92caaed35379e4ac80f0fab98361f1cd65bb8e147dcf2506ec4ad8aff9f33b1f",
+      "Cocolon_11(6).zip": "27b53d403195d8b24032dc6863a6e0bf8a4d0bd2fd0f3693afffa850243ed397",
+      "mashos-api_11(15).zip": "b314492d912247855228024932f1e8a3f868d5af486abfd13fe91deec85f2565"
+    },
+    "scope": "EmlisAI User Label Connection Observation v1 Phase0-10 premise diff update",
+    "rn_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_schema_changed": false,
+    "public_response_top_level_key_added": false,
+    "public_safe_meta_key": "input_feedback.emlis_ai.user_label_connection"
+  },
+  "emlis_user_label_connection_observation_policy_2026_06_04": {
+    "schema_version": "cocolon.emlis.user_label_connection_observation.phase0_10.2026-06-04",
+    "summary": "Backend internal-only memory-label connection observation layer for EmlisAI immediate reply.",
+    "implemented_phases": [
+      "Phase0",
+      "Phase1",
+      "Phase2",
+      "Phase3",
+      "Phase4",
+      "Phase5",
+      "Phase6",
+      "Phase7",
+      "Phase8",
+      "Phase9",
+      "Phase10"
+    ],
+    "source_of_truth_files": [
+      "ai/services/ai_inference/emlis_ai_user_label_connection_contract_inventory.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_types.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_material.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_candidate.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_gate.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_surface.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_public_meta.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_product_quality_qa.py",
+      "ai/services/ai_inference/emlis_ai_user_label_connection_derived_model_cache.py"
+    ],
+    "stable_boundaries": [
+      "POST /emotion/submit route unchanged",
+      "input_feedback.comment_text remains visible body",
+      "RN Emlisの観測 title and passed + commentText display condition unchanged",
+      "DB physical schema unchanged",
+      "raw input/history/memo/comment_text body/candidate body/surface body must not enter public meta",
+      "Phase10 does not persist or apply derived model cache data"
+    ],
+    "targeted_regression": {
+      "backend": "python -m pytest -q ai/tests/test_emlis_ai_user_label_connection_*.py ai/tests/test_emlis_ai_phase20_7_public_boundary_rn_contract.py",
+      "backend_result": "107 passed, 1 warning",
+      "rn": "node --test tests/rn-screen-contracts.test.js",
+      "rn_result": "35 passed"
+    }
+  },
+  "source_snapshot_2026_06_04_product_quality_measurement_phase0_8": {
+    "date": "2026-06-04",
+    "premise": "Cocolon_前提資料(173).zip",
+    "Cocolon": "Cocolon_9(17).zip",
+    "mashos-api": "mashos-api_9(27).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 797,
+      "total": 1014
+    },
+    "sha256": {
+      "Cocolon_前提資料(173).zip": "6d460f77d3bf55154a1835735605a8f0ad056b8acb1904c3792a7d7924dfdd56",
+      "Cocolon_9(17).zip": "68d54efe908dbf84532a02f5e33163b0dfdd454217e5b1c3fac246a76978b2e6",
+      "mashos-api_9(27).zip": "cb3695154b8fe5cb60475bf8416a4efb14d8a075b9ca5c99977e221d0dc03b8f"
+    },
+    "scope": "EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 premise diff update",
+    "rn_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_schema_changed": false,
+    "public_response_top_level_key_added": false,
+    "product_gate_ready_applied": false,
+    "public_release_applied": false
+  },
+  "emlis_product_quality_measurement_policy_2026_06_04": {
+    "schema_version": "cocolon.emlis.product_quality.measurement.phase0_8.2026-06-04",
+    "summary": "Backend internal-only product quality measurement, blocker matrix, blind QA integration, release decision, and validation plan layer for EmlisAI.",
+    "implemented_phases": [
+      "Phase0 Contract Freeze",
+      "Phase1 Local Product QA Composer Bootstrap",
+      "Phase2 ProductQualityEventV1 Schema / Normalizer",
+      "Phase3 Product Quality Measurement Runner",
+      "Phase4 Blocker Matrix",
+      "Phase5 Blocker-specific Generation Repair Design",
+      "Phase6 Blind QA Integration",
+      "Phase7 Release Decision Layer",
+      "Phase8 Validation Plan"
+    ],
+    "source_of_truth_files": [
+      "ai/services/ai_inference/emlis_ai_product_quality_contract_freeze.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_measurement_runner.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_blocker_matrix.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_generation_repair_design.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_blind_qa_integration.py",
+      "ai/services/ai_inference/emlis_ai_product_release_decision.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py"
+    ],
+    "test_files": [
+      "ai/tests/test_emlis_ai_product_quality_phase0_contract_freeze.py",
+      "ai/tests/test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py",
+      "ai/tests/test_emlis_ai_product_quality_measurement_event.py",
+      "ai/tests/test_emlis_ai_product_quality_measurement_runner.py",
+      "ai/tests/test_emlis_ai_product_quality_blocker_matrix.py",
+      "ai/tests/test_emlis_ai_product_quality_generation_repair_design.py",
+      "ai/tests/test_emlis_ai_product_quality_blind_qa_integration.py",
+      "ai/tests/test_emlis_ai_product_release_decision.py",
+      "ai/tests/test_emlis_ai_product_quality_validation_plan.py"
+    ],
+    "stable_boundaries": [
+      "POST /emotion/submit route unchanged",
+      "input_feedback.comment_text remains visible body",
+      "RN Emlisの観測 title and passed + commentText display condition unchanged",
+      "DB physical schema unchanged",
+      "public response top-level keys unchanged",
+      "raw input/history/memo/comment_text body/candidate body/surface body must not enter release material or public meta",
+      "Blind QA read feeling must not be auto-filled from machine metrics",
+      "Release Decision and Validation Plan do not apply rollout or public release"
+    ]
   }
 }

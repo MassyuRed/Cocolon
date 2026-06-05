@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2940,3 +2940,73 @@ Structure Insight系:
 ```
 
 これらはpublic/RN contractを上書きするためのtestではなく、既存contractを守ったまま内部品質を評価するためのtestである。
+
+
+# 2026-06-04 差分追記: EmlisAI User Label Connection Observation v1 contract boundary
+
+`mashos-api_11(15).zip` のUser Label Connection Observation v1は、backend内部のMaterial / Candidate / Gate / Surface Plan / QA / cache considerationであり、public contract変更ではない。
+
+| 境界 | 維持する契約 |
+|---|---|
+| API route | `POST /emotion/submit` を維持する。 |
+| request key | User Label Connection専用の必須request keyを追加しない。 |
+| response shape | `status / id / created_at / input_feedback` の既存shapeを維持する。 |
+| visible body | `input_feedback.comment_text` を維持する。 |
+| Emlis meta | `input_feedback.emlis_ai` のadditive-safe summary内に限定する。 |
+| RN表示条件 | `observation_status == passed` かつ `comment_text` non-empty のまま。 |
+| RN表示タイトル | `Emlisの観測` のまま。 |
+| DB physical schema | 変更しない。 |
+| raw text | raw input / history input / memo / memo_action / comment_text body / candidate body / surface bodyをpublic metaへ出さない。 |
+
+`input_feedback.emlis_ai.user_label_connection` はsafe identifier / boolean / count summaryとして読む。これをRN表示source、public status enum、DB column、ユーザー設定名として扱わない。
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement Phase0-8 contract / validation boundary
+
+`mashos-api_9(27).zip` では、EmlisAI Product Quality Measurement Phase0〜8のcontract / validation boundaryとして、次の内部QA materialとtestが追加されている。これらはpublic API contractの変更ではなく、既存contractを緩めていないことを確認するための内部検証境界である。
+
+| test / material | 固定するcontract |
+|---|---|
+| `test_emlis_ai_product_quality_phase0_contract_freeze.py` | RN表示条件、API public feedback条件、DB/schema非変更、release flag非適用。 |
+| `test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py` | Composer無効時を商品QA成功扱いにしない。`.env` や本番rolloutを変更しない。 |
+| `test_emlis_ai_product_quality_measurement_event.py` | ProductQualityEventV1がraw input / comment_text body / candidate bodyを保持しない。 |
+| `test_emlis_ai_product_quality_measurement_runner.py` | MeasurementRunV1が必須familyをevent化し、内部QA materialへ接続する。 |
+| `test_emlis_ai_product_quality_blocker_matrix.py` | blockerがowner area / repair policyを持ち、unknown blockerをfail-closedにする。 |
+| `test_emlis_ai_product_quality_generation_repair_design.py` | Gate緩和やfixed templateなしでrepair trackへ接続する。 |
+| `test_emlis_ai_product_quality_blind_qa_integration.py` | ratings-only review、coverage不足、machine metrics代替禁止を固定する。 |
+| `test_emlis_ai_product_release_decision.py` | blockerが残る限りrelease_allowed=false。product_gate_ready/public_release_appliedを立てない。 |
+| `test_emlis_ai_product_quality_validation_plan.py` | validation_results未投入ならvalidation未完了blocker。contract relaxation / release flagを検出する。 |
+
+禁止: contract freeze / validation planを理由にpublic response key、RN表示条件、DB physical schema、Gate条件、rollout flagを変更しない。
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement / Release Decision / Validation Plan contract boundary
+
+`mashos-api_9(27).zip` のProduct Quality Measurement Phase0〜8は、EmlisAIの商品品質判断に必要な内部QA境界であり、public/RN/API/DB contract変更ではない。Phase0 Contract Freezeで既存contractを固定し、Phase2以降のevent・matrix・decision・validation materialでも同じ境界を維持する。
+
+| 境界 | 維持する契約 | 今回追加された内部確認 |
+|---|---|---|
+| RN表示条件 | `observation_status == passed` かつ `comment_text` non-empty のまま。 | Contract Freeze / RN contract test / Validation Planで固定する。 |
+| RN表示タイトル | `Emlisの観測` のまま。 | `RN_EMLIS_OBSERVATION_TITLE` をContract Freeze materialに固定する。 |
+| API route | `POST /emotion/submit` を維持する。 | Measurement Runnerはpublic routeを増やさず、internal QA pathとしてEmlisAI経路を呼ぶ。 |
+| response shape | 既存 `input_feedback.comment_text` / `input_feedback.emlis_ai` を維持する。 | ProductQualityEvent / Blocker Matrix / Release Decisionはpublic payloadへ接続しない。 |
+| DB physical schema | 変更しない。 | Contract Freeze / Release Decision / Validation Planで `db_physical_name_changed=false` を固定する。 |
+| raw/comment body | raw input / comment_text body / candidate body / surface bodyをrelease materialへ保持しない。 | Event Normalizer、Blind QA Integration、Release Decision、Validation Planでstrip / blocker化する。 |
+| read feeling | machine metricsで自動補完しない。 | Blind QA Integrationでratings-only reviewを必須化する。 |
+| release flag | Product Read Feel / Phase11 / Release Decision / Validation Planが `product_gate_ready` や `public_release_applied` を直接trueにしない。 | blockerなし・review coverage・shadow evidence等を満たすまでinternal decisionでもrelease不可にする。 |
+
+Phase0〜8で追加された主なcontract test:
+
+```text
+ai/tests/test_emlis_ai_product_quality_phase0_contract_freeze.py
+ai/tests/test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py
+ai/tests/test_emlis_ai_product_quality_measurement_event.py
+ai/tests/test_emlis_ai_product_quality_measurement_runner.py
+ai/tests/test_emlis_ai_product_quality_blocker_matrix.py
+ai/tests/test_emlis_ai_product_quality_generation_repair_design.py
+ai/tests/test_emlis_ai_product_quality_blind_qa_integration.py
+ai/tests/test_emlis_ai_product_release_decision.py
+ai/tests/test_emlis_ai_product_quality_validation_plan.py
+```
+
+これらはpublic/RN contractを上書きするためのtestではなく、既存contractを守ったまま、商品品質計測・blocker分類・release判断・validation順を内部で固定するためのtestである。

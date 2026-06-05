@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -2013,3 +2013,94 @@ Phase20-12〜20-15後は、`/emotion/submit` の保存・dispatch・public respo
 
 禁止: `phase20_13_post_final_gate_recovery` や `phase20_15_gate_recovery_surface_binding` をpublic response keyやRN表示条件にしない。raw input / generated candidate / comment_text bodyは引き続きpublic metaへ入れない。
 
+
+
+# 2026-06-04 差分追記: `/emotion/submit` immediate reply User Label Connection接続
+
+`mashos-api_11(15).zip` では、`/emotion/submit` の保存後EmlisAI immediate reply flowに、User Label Connection Observation v1 のmeta-only integrationとlimited visible surface connectionがbackend内部で接続されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+国家システム上の読み方:
+
+```text
+InputScreen submit payload
+↓
+/emotion/submit save path
+↓
+normalize_emlis_current_input
+↓
+render_emlis_ai_reply
+↓
+User Label Connection material / candidate / gate / surface plan
+↓
+Phase7 meta-only safe summary
+↓
+Phase8 limited visible connection（既存Gate群を再評価して通った場合だけcomment_textへ接続）
+↓
+public meta sanitizer
+↓
+input_feedback.comment_text / input_feedback.emlis_ai
+↓
+RN passed + commentText non-empty modal表示
+```
+
+固定境界:
+
+```text
+- Freeはcurrent_input_onlyで、history edge / history surfaceを作らない。
+- Plus/PremiumでもUser Fact Grounding Boundary、low_information、safety/self-denial/target judgement境界を通らない場合は通常履歴surfaceへ進めない。
+- visible connection後もreader / grounding / template echo / runtime pre-return / visible surface acceptance / display decisionを再評価する。
+- public metaにはraw current input、raw history input、memo、memo_action、comment_text body、candidate body、surface bodyを含めない。
+```
+
+
+# 2026-06-04 差分追記: `/emotion/submit` immediate reply Product Quality Measurement Phase0-8接続
+
+`mashos-api_9(27).zip` では、`/emotion/submit` の保存後EmlisAI immediate reply flowを変えず、その出力を内部QA用の `ProductQualityEventV1` / `MeasurementRunV1` へ正規化して、Blocker Matrix、Blind QA Integration、Release Decision、Validation Planへ接続する構造が追加されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+保存後flowでの読み方:
+
+```text
+/emotion/submit save path
+↓
+render_emlis_ai_reply
+↓
+public feedback meta / should_include_public_input_feedback
+↓
+ProductQualityEventV1（本文なし）
+↓
+Measurement Runner summary
+↓
+Blocker Matrix / Generation Repair Design / Blind QA Integration
+↓
+Release Decision / Validation Plan（内部判断のみ）
+```
+
+禁止: RunnerやRelease Decisionの結果を、保存成功payload、public `input_feedback`、RN表示source、DB保存物へ昇格しない。
+
+
+# 2026-06-04 差分追記: Input / Save / Dispatch上のEmlisAI Product Quality Measurement境界
+
+`mashos-api_9(27).zip` では、`/emotion/submit` の保存後 immediate reply flowを商品品質計測へ接続するためのbackend internal QA materialが追加されている。ただし、この追加は保存API・DB write path・dispatch・public route・request key・response top-level shape・RN modal条件を変更しない。
+
+国家システム上は、次のように読む。
+
+```text
+Input Save /emotion/submit runtime flow
+  -> 既存 render_emlis_ai_reply / public feedback meta / input_feedback.comment_text 契約を維持
+
+Product Quality Measurement Runner
+  -> local product QA profileで、実入力familyをEmlisAI経路へ流す内部計測経路
+  -> raw input / comment_text bodyはrenderer入力として一時利用されるが、run materialへ保持しない
+  -> ProductQualityEventV1 / Blocker Matrix / Blind QA Integration / Release Decision / Validation Planへmeta-onlyで接続
+```
+
+今回追加されたPhase0〜8は、`/emotion/submit` runtimeの保存成功・保存失敗・dispatch・queue・DB publishを変えるものではない。計測Runnerが `/emotion/submit` 相当経路を使う場合も、それは商品品質QA用の内部実行であり、public response keyやRN表示sourceを増やす意味ではない。
+
+固定境界:
+
+```text
+- `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` の表示契約を維持する。
+- Composer無効は商品品質QA成功ではなく `composer_generation_path_not_open_for_product_qa` blockerとして扱う。
+- `display_not_reached` や `blind_qa_review_required` はrelease blockerであり、保存APIの失敗やRN非表示条件の緩和理由ではない。
+- validation planはテスト実行順の内部materialであり、実行済みでない検証をgreen扱いしない。
+```

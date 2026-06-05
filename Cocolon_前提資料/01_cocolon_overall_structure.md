@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(161).zip"
-  Cocolon: "Cocolon_5(22).zip"
-  mashos-api: "mashos-api_5(47).zip"
+  premise: "Cocolon_前提資料(173).zip"
+  Cocolon: "Cocolon_9(17).zip"
+  mashos-api: "mashos-api_9(27).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 738
-  total: 955
+  mashos-api: 797
+  total: 1014
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 955
+  included_files_total: 1014
   included_files_cocolon: 217
-  included_files_mashos_api: 738
+  included_files_mashos_api: 797
 ---
 
 # 1. 1行定義
@@ -2065,4 +2065,61 @@ Phase20は、RN production UI、DB physical schema、API route、public response
 - `observation_text` / `reception_text` / `structure_insight_text` のpublic keyは追加しない。
 - `product_gate_ready` / `public_release_applied` はPhase11時点でfalse維持として読む。
 - raw input / evidence text / candidate body / comment_text bodyをscorecardやpublic metaへ保持しない。
+```
+
+
+# 2026-06-04 差分追記: EmlisAI User Label Connection Observation v1 Phase0-10 overall structure
+
+最新実ファイル `Cocolon_11(6).zip` / `mashos-api_11(15).zip` では、RN production UIを変えずに、EmlisAI immediate reply のbackend内部へ User Label Connection Observation v1 が追加されている。これは、ユーザーの `category / emotion / strength / memo_action / memo / created_at` とowned historyを点から線へつなぎ、限定された場合だけ `Emlisの観測` 本文へ接続するための内部構造である。
+
+| current owner | system | 最新の読み方 |
+|---|---|---|
+| `emlis_ai_user_label_connection_contract_inventory.py` | Contract inventory | public route / RN / composer接続点を実装前境界として固定する。 |
+| `emlis_ai_user_label_connection_types.py` | ULC Point / Material / Edge type | UserLabelPoint、UserLabelConnectionMaterial、private edge scoreを定義する。 |
+| `emlis_ai_user_label_connection_material.py` | Material builder / edge family | current inputとowned historyをtext-free materialへ変換し、edge familyを作る。 |
+| `emlis_ai_user_label_connection_candidate.py` | Candidate builder | edgeからMechanism candidateを作り、Gate前visible化を禁止する。 |
+| `emlis_ai_user_label_connection_gate.py` | User Label Connection Gate | Free/history、grounding、low_information、禁止claim、raw text、safety隣接をblockする。 |
+| `emlis_ai_user_label_connection_surface.py` | Surface Plan / limited visible connection | 限定familyだけSurface Plan化し、既存Gate群通過後だけcomment_textへ接続する。 |
+| `emlis_ai_user_label_connection_public_meta.py` | Meta-only integration | material / candidate / gate / surface safe summaryをreply metaへ接続する。 |
+| `emlis_ai_user_label_connection_product_quality_qa.py` | Product Quality QA | Blind QA候補・ratings-only review・商品品質summaryをmeta-onlyで扱う。 |
+| `emlis_ai_user_label_connection_derived_model_cache.py` | Derived model cache consideration | cache永続ではなく、future review candidate判定だけを扱う。 |
+| `emlis_ai_reply_service.py` | Runtime owner | Phase7 meta-onlyとPhase8 limited visible connectionを既存reply flowへ接続する。 |
+| `emlis_ai_public_feedback_meta.py` | Public boundary | 既存 `input_feedback.emlis_ai` 内にsafe summaryのみを通す。 |
+
+全体構造上の固定:
+
+```text
+- User Label Connection Observation v1はbackend internal observation layerであり、RN画面追加ではない。
+- `input_feedback.comment_text` がvisible bodyである境界は維持する。
+- `input_feedback.emlis_ai.user_label_connection` はsafe identifier / boolean / count summaryであり、raw inputやcomment_text bodyを含めない。
+- Phase8 limited visible connectionは既存comment_text本文への接続であり、public response key追加ではない。
+- Phase10はcache検討層だけであり、Derived User Modelへのlabel_connection_map実データ永続化は行わない。
+```
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 overall structure
+
+最新実ファイル `Cocolon_9(17).zip` / `mashos-api_9(27).zip` では、Cocolon RN側のproduction surface変更はない。mashos-api側に、EmlisAIの商品品質計測・blocker整理・Blind QA統合・内部release判断・validation planを扱うbackend internal-onlyファイルが追加されている。
+
+## 追加された主な構造
+
+| Phase | 主な実ファイル | 読み方 |
+|---|---|---|
+| Phase0 Contract Freeze | `emlis_ai_product_quality_contract_freeze.py`, `test_emlis_ai_product_quality_phase0_contract_freeze.py` | RN/API/DB/public response/Product QA materialの既存契約を内部meta-onlyで固定する。 |
+| Phase1 Local Product QA Composer Bootstrap | `emlis_ai_product_quality_measurement_runner.py`, `test_emlis_ai_product_quality_phase1_local_composer_bootstrap.py` | local QAでComposer生成経路が開いているかを判定し、無効なら成功扱いせずblocker化する。 |
+| Phase2 ProductQualityEventV1 | `emlis_ai_product_quality_measurement_event.py`, `test_emlis_ai_product_quality_measurement_event.py` | raw input / comment body / candidate bodyを持たない内部QA eventへ正規化する。 |
+| Phase3 Measurement Runner | `emlis_ai_product_quality_measurement_runner.py`, `test_emlis_ai_product_quality_measurement_runner.py` | 必須input familyをEmlisAI経路へ流し、表示到達・Gate・binding・reason coverage・QA接続をevent化する。 |
+| Phase4 Blocker Matrix | `emlis_ai_product_quality_blocker_matrix.py`, `test_emlis_ai_product_quality_blocker_matrix.py` | blockerをowner area / candidate module / repair policyへ接続する。未知blockerはfail-closedでtriageする。 |
+| Phase5 Generation Repair Design | `emlis_ai_product_quality_generation_repair_design.py`, `test_emlis_ai_product_quality_generation_repair_design.py` | Blocker Matrixから生成修正trackと実行順を作る。本文生成ロジック自体はまだ変更しない。 |
+| Phase6 Blind QA Integration | `emlis_ai_product_quality_blind_qa_integration.py`, `test_emlis_ai_product_quality_blind_qa_integration.py` | Runtime Surface Blind QA / User Label Connection QAをratings-onlyで統合し、未実施ならrelease不可にする。 |
+| Phase7 Release Decision Layer | `emlis_ai_product_release_decision.py`, `test_emlis_ai_product_release_decision.py` | Phase11 / scorecard / Blind QA / Blocker Matrix / Composer stateを統合し、内部release判断だけを返す。 |
+| Phase8 Validation Plan | `emlis_ai_product_quality_validation_plan.py`, `test_emlis_ai_product_quality_validation_plan.py` | 検証順・acceptance criteria・未実行blockerを固定する。テスト実行そのものの代替ではない。 |
+
+## 全体構造上の固定
+
+```text
+- Phase0-8は、EmlisAIを商品品質到達済みと宣言するものではない。
+- Runner / Event / Matrix / Decision / Validationはいずれもinternal QA materialであり、public response shape、DB schema、RN visible contractを変更しない。
+- Measurement Runnerは、実入力familyを流してblockerを分解する入口であり、fixed templateやA/C/D専用runtime branchを作らない。
+- Release Decision Layerは内部release判断だけを返す。rollout stageを変更せず、all rolloutを適用しない。
 ```

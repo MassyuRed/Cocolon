@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(161).zip"
-  Cocolon: "Cocolon_5(22).zip"
-  mashos-api: "mashos-api_5(47).zip"
+  premise: "Cocolon_前提資料(173).zip"
+  Cocolon: "Cocolon_9(17).zip"
+  mashos-api: "mashos-api_9(27).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 738
-  total: 955
+  mashos-api: 797
+  total: 1014
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -680,3 +680,40 @@ Phase15名称更新の結論: これらの名称は、Phase0-14で追加され�
 | `gate_recovery_surface_repetition_qa` | backend QA summary | Gate Recovery surface family / closing familyの反復を検出するQA。 | exact本文一致QA、完成文テンプレbank。 |
 
 作業時は、Phase20系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。
+
+
+# 2026-06-04 差分追記: User Label Connection Observation v1 internal名の扱い
+
+`mashos-api_11(15).zip` では、`emlis_ai_user_label_connection_*` 系のinternal名が追加されている。これらは名称変更ではなく、Cocolonの記憶ラベル方式をEmlisAIの観測返答へ接続するbackend内部境界である。
+
+| internal名 | 変更してはいけない読み方 |
+|---|---|
+| `user_label_connection` | public response root keyではない。既存 `input_feedback.emlis_ai` 内のsafe summaryとしてだけ扱う。 |
+| `UserLabelPoint` | 1件の入力記録の正規化名。傾向・性格・診断名ではない。 |
+| `UserLabelConnectionMaterial` | text-free material。comment_text生成器ではない。 |
+| `UserLabelConnectionCandidate` | Gate前のMechanism候補。visible本文ではない。 |
+| `UserLabelConnectionGate` | 既存Structure Insight Gateを緩めるものではなく、履歴接続専用Gate。 |
+| `UserLabelConnectionSurfacePlan` | 固定完成文ではなく、既存surface生成系へ渡す限定plan。 |
+| `limited_visible_surface_connection` | 新RN画面や新public keyではなく、既存 `Emlisの観測` comment_textへの限定接続。 |
+| `derived_model_cache_consideration` | cache実装ではなく、将来検討meta。DB schemaや永続化の合図ではない。 |
+
+禁止: `User Label Connection` という名称をRN表示タイトル、API route、DB table/column、subscription UI名、診断・性格分類名へ変換しない。`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai`、`/emotion/submit` route、DB physical nameは変更しない。
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement Phase0-8 internal名の読み分け
+
+`mashos-api_9(27).zip` では、EmlisAI Product Quality Measurement / Blocker Repair Phase0〜8により、商品品質計測とrelease判断用のinternal名が増えている。これらは、visible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| internal名 | 層 | 読み方 | 混同してはいけないもの |
+|---|---|---|---|
+| `ProductQualityEventV1` | backend internal QA event | 表示到達、Gate、binding、reason coverage、surface qualityを本文なしで正規化するevent。 | public response schema、DB保存record、RN表示payload。 |
+| `MeasurementRunV1` | backend internal QA run material | 必須familyを流した計測summary。 | production runtime job、public artifact、ユーザー向けレポート。 |
+| `Contract Freeze` | Phase0 internal inventory | RN/API/DB/public response/Product QA materialの不変境界を固定する。 | contract変更許可、release flag。 |
+| `Local Product QA Composer Bootstrap` | Phase1 QA profile | QA時のComposer生成経路が開いているかを判定する。 | 本番rollout flag、`.env`恒久変更。 |
+| `Blocker Matrix` | internal blocker triage | blockerをowner area / repair policy / candidate moduleへ接続する。 | ユーザー向け診断、public status enum。 |
+| `Generation Repair Design` | internal repair design material | Blocker Matrixから修正trackと実行順を作る。 | 本文生成修正済みの証明、fixed template bank。 |
+| `Blind QA Integration` | internal QA integration | ratings-only reviewを統合し、未実施をrelease blockerにする。 | 機械指標score、public review packet。 |
+| `ProductReleaseDecisionV1` | internal release decision | Phase11 / scorecard / Blind QA / Matrix / Composer stateを統合して内部release判断を返す。 | rollout適用、public release、product_gate_ready。 |
+| `ProductQualityValidationPlanV1` | internal validation plan | 検証順、required validation、acceptance criteriaを固定する。 | テスト実行済み証明、CI artifactそのもの。 |
+
+作業時は、Phase0〜8系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。

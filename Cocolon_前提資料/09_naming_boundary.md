@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_name_mixing_structure_boundary
 title: "Cocolon 名称混在保管と構造境界"
-revision_date: "2026-06-01"
+revision_date: "2026-06-04"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(161).zip"
-  Cocolon: "Cocolon_5(22).zip"
-  mashos-api: "mashos-api_5(47).zip"
+  premise: "Cocolon_前提資料(173).zip"
+  Cocolon: "Cocolon_9(17).zip"
+  mashos-api: "mashos-api_9(27).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 738
-  total: 955
+  mashos-api: 797
+  total: 1014
 purpose: "名称混在を資料で保管し、華恋が作業時に旧名称・current名称・DB物理名・runtime ownerを取り違えないようにする"
 ---
 
@@ -645,3 +645,41 @@ Phase17構造更新の結論: 二段受け取り構造は、A/B/ログ1/ログ2/
 ## 2026-06-03 file name encoding boundary
 
 zip圧縮・展開時に日本語ファイル名がescape名や文字化け名へ変わる場合がある。既存実ファイルに日本語名docが残っている場合でも、それだけを理由に別名同内容ファイルを追加して補正しない。今後の差分成果物、新規前提資料ファイル、新規運用docはASCII file nameを優先する。
+
+
+# 2026-06-04 差分追記: User Label Connection Observation v1 internal名の保管境界
+
+`mashos-api_11(15).zip` では、User Label Connection Observation v1により `user_label_connection` / `UserLabelPoint` / `UserLabelConnectionMaterial` / `edge_family` / `mechanism_family` / `surface_plan` / `limited_visible_surface_connection` / `derived_model_cache_consideration` 系の内部名が増えている。これらはCocolonのvisible名、DB physical name、public API名、RN画面名ではない。
+
+| internal名 | 保管する意味 |
+|---|---|
+| `user_label_connection_meta_only` | Phase7 internal meta-only integration。public bodyではない。 |
+| `user_label_connection` | 既存 `input_feedback.emlis_ai` 内のsafe summary key。top-level public keyではない。 |
+| `UserLabelPoint` | 1件のCocolon入力記録を環境・状態・出力・時点の内部pointとして読む型。 |
+| `edge_family` | text-free接続分類。surface本文へfamily名を出さない。 |
+| `mechanism_family` | Candidate内部分類。診断・人格分類・原因分類ではない。 |
+| `UserLabelConnection_Gate_v1` | 既存Structure Insight Gateを緩めない独立Gate。 |
+| `limited_history_line_observation` | 限定visible connection用surface plan kind。RN表示名ではない。 |
+| `user_label_connection_visible_surface` | Phase8 visible connection meta。comment_text body格納場所ではない。 |
+| `user_label_connection_product_quality_qa` | Phase9 Blind QA material。release flagではない。 |
+| `label_connection_map` | Phase10 future schema preview。v1では実データ永続化しない。 |
+
+作業時は、このinternal名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。
+
+
+# 2026-06-04 差分追記: EmlisAI Product Quality Measurement Phase0-8 internal名の保管境界
+
+`mashos-api_9(27).zip` では、EmlisAI Product Quality Measurement / Blocker Repair Phase0〜8により `ProductQualityEventV1` / `MeasurementRunV1` / `BlockerMatrixV1` / `GenerationRepairDesignV1` / `ProductQualityBlindQAIntegrationV1` / `ProductReleaseDecisionV1` / `ProductQualityValidationPlanV1` 系の内部名が増えている。これらは名称変更ではなく、EmlisAIが既存 `input_feedback.comment_text` とRN `passed + commentText` 契約を壊さず、商品品質計測・blocker分解・Blind QA・release判断・validation計画を扱うためのbackend内部境界である。
+
+| internal名 | 保管する意味 |
+|---|---|
+| `product_quality_contract_freeze` | RN/API/DB/public response/Product QA materialの現状固定。 |
+| `ProductQualityEventV1` | 本文なしの計測event。public response schemaではない。 |
+| `MeasurementRunV1` | local_product_qaの内部run material。production jobやDB保存物ではない。 |
+| `blocker_matrix` | blockerをowner area / repair policyへ接続する内部triage。ユーザー診断名ではない。 |
+| `generation_repair_design` | 次に直す生成面を並べる設計material。本文生成修正済みの証明ではない。 |
+| `blind_qa_integration` | ratings-only review統合。machine metricsでread feelingを代替しない境界。 |
+| `product_release_decision` | 内部release判断。rollout適用やpublic release flagではない。 |
+| `validation_plan` | 検証順とacceptance criteria。テスト実行済み証明ではない。 |
+
+作業時は、このinternal名を理由に、既存の `Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、public response key、DB physical name、RN modal条件をrenameしない。`product_gate_ready` / `public_release_applied` / `all_rollout_applied` をPhase0-8 material内でtrueにしない。
