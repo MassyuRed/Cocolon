@@ -1,24 +1,26 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(173).zip"
-  Cocolon: "Cocolon_9(17).zip"
-  mashos-api: "mashos-api_9(27).zip"
+  premise: "Cocolon_前提資料(176).zip"
+  Cocolon: "Cocolon_13(5).zip"
+  mashos-api: "mashos-api_13(8).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 797
-  total: 1014
+  mashos-api: 812
+  total: 1029
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1014
+  included_files_total: 1029
   included_files_cocolon: 217
-  included_files_mashos_api: 797
+  included_files_mashos_api: 812
+  gate_recovery_public_surface_leak_repair_p0_12_reflected: true
+  gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -1455,3 +1457,27 @@ Validation Plan
 - MeasurementRunV1 / ProductQualityEventV1 / Release Decision / Validation Planはinternal materialであり、read-side APIやstartup snapshotへ公開しない。
 - Blind QA未実施やvalidation未実行はrelease不可blockerであり、機械指標で代替しない。
 ```
+
+# 2026-06-05 差分追記: 国家システム上のEmlisAI Gate Recovery public surface leak repair P0-P12境界
+
+`Cocolon_13(5).zip` / `mashos-api_13(8).zip` では、国家システム上のInput保存・dispatch・DB write path・RN display contractは変更しないまま、保存直後 EmlisAI immediate reply の内部回復境界が補強されている。
+
+国家システム上の読み方は次で固定する。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> Gate Recovery public boundary
+  -> allowed public candidate source
+  -> existing Display Gate / Visible Surface / RN passed + comment_text
+```
+
+Gate Recovery material surfaceは、`Input -> Save -> Dispatch` のpublic outputではない。これは、failure後のrecovery plan / diagnostic meta / ProductQuality blocker materialであり、RNへ表示する本文ではない。
+
+P0〜P12により追加された国家システム上の境界:
+
+- `recover_emlis_gate_failure()` の内部で、material surfaceをpublic候補にしない。
+- `reply_service` でもpre / post-final採用前に保険境界を通す。
+- 低情報・限定groundingは、Gate Recoveryの固定骨格文ではなく `low_information_observation_composer` へ回す。
+- 元Composer候補がある場合は、bounded repaired original candidateとして再接続する。
+- ProductQualityは `surface_origin` を見て、表示到達sourceがGate Recovery material surfaceならrelease blocker扱いにする。
+- RNは引き続きbackendの `passed + comment_text` だけを表示契約にし、source lineageを表示条件に使わない。

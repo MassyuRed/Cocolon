@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -2103,4 +2103,28 @@ Product Quality Measurement Runner
 - Composer無効は商品品質QA成功ではなく `composer_generation_path_not_open_for_product_qa` blockerとして扱う。
 - `display_not_reached` や `blind_qa_review_required` はrelease blockerであり、保存APIの失敗やRN非表示条件の緩和理由ではない。
 - validation planはテスト実行順の内部materialであり、実行済みでない検証をgreen扱いしない。
+```
+
+# 2026-06-05 差分追記: `/emotion/submit` immediate reply Gate Recovery public boundary接続
+
+`mashos-api_13(8).zip` では、`/emotion/submit` 保存直後のEmlisAI immediate replyに、Gate Recovery public surface leak repair P0〜P12が接続されている。これは保存API、dispatch、DB write path、public response shapeを変える変更ではない。
+
+Input / Save / Dispatch上の重要点:
+
+| 境界 | 読み方 |
+|---|---|
+| Save API | 入力保存の成功可否、カテゴリ、感情、memo等の保存契約は変更しない。 |
+| EmlisAI reply runtime | Gate failure後の回復を、固定骨格文ではなくpublic candidate source選択へ回す。 |
+| Gate Recovery material surface | `phase20_5` / `phase20_13` はdiagnostic-onlyとして扱い、public `comment_text` へ昇格しない。 |
+| low-information recovery | 低情報・限定groundingは `low_information_observation_composer` 由来の本文だけを候補にする。 |
+| bounded original repair | 元Composer候補がある場合だけ、bounded repair / re-render候補として再接続する。 |
+| no public candidate | 無理に表示せず、diagnostic blocker / ProductQuality blockerとして保持する。 |
+
+禁止:
+
+```text
+- `/emotion/submit` のresponse keyをP0〜P12用に追加する。
+- RN表示条件をGate Recovery metaやsurface_originへ寄せる。
+- Gate Recovery material surfaceを「仮表示」や「安全fallback文」としてpublicに出す。
+- F/E/G実機fixtureに合わせた保存route / dispatch branch /専用surfaceを追加する。
 ```

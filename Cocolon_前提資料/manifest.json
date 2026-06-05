@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-04",
+  "revision_date": "2026-06-05",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 797,
-    "total": 1014
+    "mashos-api": 812,
+    "total": 1029
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 976,
-    "national_system_body_includes": 976,
+    "overall_structure_body_includes": 1029,
+    "national_system_body_includes": 1029,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル955件、国家システム判断対象のcurrent全ファイル955件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPhase20は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1014,
-    "overall_structure_body_includes_current_snapshot_files": 1014,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1014,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1029件、国家システム判断対象のcurrent全ファイル1029件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のGate Recovery public surface leak repair P0-P12は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1029,
+    "overall_structure_body_includes_current_snapshot_files": 1029,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1029,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -833,7 +833,18 @@
     "phase20_full_01_02_regeneration": false,
     "coverage_principle_2026_06_03": "Product Read Feel v1 / Structure Insight v2 Phase1-11は01/02系full inventory本文を全面再生成せず、必要な構造・契約・QA境界へ差分追記する。最新実ファイルはCocolon_12(10).zip / mashos-api_12(13).zip、file countは217/759/976。",
     "product_quality_measurement_phase0_8_reflected": true,
-    "product_quality_measurement_full_01_02_regeneration": false
+    "product_quality_measurement_full_01_02_regeneration": false,
+    "gate_recovery_public_surface_leak_repair_p0_12_reflected": true,
+    "gate_recovery_public_surface_leak_repair_full_01_02_regeneration": false,
+    "latest_source_basis_2026_06_05_gate_recovery_public_surface_leak_repair": {
+      "premise": "Cocolon_前提資料(176).zip",
+      "Cocolon": "Cocolon_13(5).zip",
+      "mashos-api": "mashos-api_13(8).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 812,
+      "total_files": 1029,
+      "doc_role": "Gate Recovery public surface leak repair P0-P12反映後の作業用地図。01/02 full inventory本文は全面再生成せず、必要資料へ差分追記する。"
+    }
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1883,21 +1894,21 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(161).zip",
-    "Cocolon": "Cocolon_5(22).zip",
-    "mashos-api": "mashos-api_5(47).zip",
+    "premise": "Cocolon_前提資料(176).zip",
+    "Cocolon": "Cocolon_13(5).zip",
+    "mashos-api": "mashos-api_13(8).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 738,
-      "total": 955
+      "mashos-api": 812,
+      "total": 1029
     },
     "sha256": {
-      "premise": "f149da67d933b45ef9eaef2fb6b871367c8320c8a50360a5a150d2688112016b",
-      "Cocolon": "3b4185f2950d3f5fc6d26a09197bcef842353fbfc922abf5b263e9bf7ad443e7",
-      "mashos-api": "99e666592689d8f575ec4f9e369531542049ca307c904b6f4f7acb239a73923f"
+      "premise": "217f3e1827cd85bed8bca2efc77ab485567c7f2fa6d235e7cba51683831bd3a4",
+      "Cocolon": "162b6903d386389c5e4d165ff8853096476851fc973b68ea68a2007c669d0f1b",
+      "mashos-api": "697de196a378649f8aaf769f7f0cbf06ecfa739653633754210abe17ae6de1a0"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI Phase20-12〜20-15 Display Reliability Hardening. Old fail-closed comments updated; post-final gate recovery regression and implementation added; Gate Recovery surface binding / repetition QA added. Production RN UI / DB / API route / public response keys remain unchanged."
+    "summary": "EmlisAI Gate Recovery Public Surface Leak Repair P0-P12. Gate Recovery material surface is blocked from public comment_text; allowed recovery source is routed through public boundary/candidate builder; surface_origin, Blocker Matrix, RN contract, real-device fixtures, and P12 validation plan added. Production RN UI / DB / API route / public response keys remain unchanged."
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2663,21 +2674,21 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(161).zip",
-    "Cocolon": "Cocolon_5(22).zip",
-    "mashos-api": "mashos-api_5(47).zip",
+    "premise": "Cocolon_前提資料(176).zip",
+    "Cocolon": "Cocolon_13(5).zip",
+    "mashos-api": "mashos-api_13(8).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 738,
-      "total": 955
+      "mashos-api": 812,
+      "total": 1029
     },
     "sha256": {
-      "premise": "f149da67d933b45ef9eaef2fb6b871367c8320c8a50360a5a150d2688112016b",
-      "Cocolon": "3b4185f2950d3f5fc6d26a09197bcef842353fbfc922abf5b263e9bf7ad443e7",
-      "mashos-api": "99e666592689d8f575ec4f9e369531542049ca307c904b6f4f7acb239a73923f"
+      "premise": "217f3e1827cd85bed8bca2efc77ab485567c7f2fa6d235e7cba51683831bd3a4",
+      "Cocolon": "162b6903d386389c5e4d165ff8853096476851fc973b68ea68a2007c669d0f1b",
+      "mashos-api": "697de196a378649f8aaf769f7f0cbf06ecfa739653633754210abe17ae6de1a0"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI Phase20-12〜20-15 Display Reliability Hardening. Old fail-closed comments updated; post-final gate recovery regression and implementation added; Gate Recovery surface binding / repetition QA added. Production RN UI / DB / API route / public response keys remain unchanged."
+    "summary": "EmlisAI Gate Recovery Public Surface Leak Repair P0-P12. Gate Recovery material surface is blocked from public comment_text; allowed recovery source is routed through public boundary/candidate builder; surface_origin, Blocker Matrix, RN contract, real-device fixtures, and P12 validation plan added. Production RN UI / DB / API route / public response keys remain unchanged."
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -6154,5 +6165,120 @@
       "Blind QA read feeling must not be auto-filled from machine metrics",
       "Release Decision and Validation Plan do not apply rollout or public release"
     ]
+  },
+  "source_snapshot_2026_06_05_gate_recovery_public_surface_leak_repair_p0_12": {
+    "date": "2026-06-05",
+    "premise": "Cocolon_前提資料(176).zip",
+    "Cocolon": "Cocolon_13(5).zip",
+    "mashos-api": "mashos-api_13(8).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 812,
+      "total": 1029
+    },
+    "sha256": {
+      "Cocolon_前提資料(176).zip": "217f3e1827cd85bed8bca2efc77ab485567c7f2fa6d235e7cba51683831bd3a4",
+      "Cocolon_13(5).zip": "162b6903d386389c5e4d165ff8853096476851fc973b68ea68a2007c669d0f1b",
+      "mashos-api_13(8).zip": "697de196a378649f8aaf769f7f0cbf06ecfa739653633754210abe17ae6de1a0"
+    },
+    "scope": "EmlisAI Gate Recovery Public Surface Leak Repair P0-P12 premise diff update",
+    "rn_contract_changed": false,
+    "api_route_changed": false,
+    "db_physical_schema_changed": false,
+    "public_response_top_level_key_added": false,
+    "product_gate_ready_applied": false,
+    "public_release_applied": false,
+    "compared_to_pre_repair_snapshot": {
+      "Cocolon": "Cocolon(208).zip",
+      "mashos-api": "mashos-api(121).zip",
+      "Cocolon_added": 0,
+      "Cocolon_changed": 1,
+      "Cocolon_removed": 0,
+      "mashos_api_added": 15,
+      "mashos_api_changed": 11,
+      "mashos_api_removed": 0
+    }
+  },
+  "emlis_gate_recovery_public_surface_leak_repair_policy_2026_06_05": {
+    "schema_version": "cocolon.emlis.gate_recovery_public_surface_leak_repair.p0_12.2026-06-05",
+    "summary": "Backend internal-only boundary, candidate selection, ProductQuality surface origin, RN contract regression, real-device fixture handling, and post-implementation validation plan for blocking Gate Recovery material surface public leak.",
+    "implemented_phases": [
+      "P0 public leak RED tests",
+      "P1 blocker/source kind/public role constants",
+      "P2 GateRecoveryPublicBoundaryDecision",
+      "P3 recover_emlis_gate_failure boundary connection",
+      "P4 reply_service pre/post-final insurance boundary",
+      "P5 public candidate builder",
+      "P6 low_information_observation_composer recovery connection",
+      "P7 bounded repaired original candidate connection",
+      "P8 ProductQualityEvent / Measurement Runner surface_origin",
+      "P9 Blocker Matrix / Generation Repair Design repair track",
+      "P10 RN contract regression",
+      "P11 real-device F/E/G regression fixture handling",
+      "P12 post-implementation validation plan"
+    ],
+    "source_of_truth_files": [
+      "ai/services/ai_inference/emlis_ai_gate_recovery_public_constants.py",
+      "ai/services/ai_inference/emlis_ai_gate_recovery_public_boundary.py",
+      "ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py",
+      "ai/services/ai_inference/emlis_ai_gate_recovery_public_surface_validation_plan.py",
+      "ai/services/ai_inference/emlis_ai_gate_recovery_loop.py",
+      "ai/services/ai_inference/emlis_ai_reply_service.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_measurement_runner.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_blocker_matrix.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_generation_repair_design.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py"
+    ],
+    "test_files": [
+      "ai/tests/test_emlis_ai_gate_recovery_public_surface_boundary.py",
+      "ai/tests/test_emlis_ai_gate_recovery_public_boundary_decision.py",
+      "ai/tests/test_emlis_ai_reply_service_gate_recovery_public_boundary_p4.py",
+      "ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p5.py",
+      "ai/tests/test_emlis_ai_gate_recovery_low_information_recovery_p6.py",
+      "ai/tests/test_emlis_ai_gate_recovery_original_candidate_repair_p7.py",
+      "ai/tests/test_emlis_ai_product_quality_surface_origin_p8.py",
+      "ai/tests/test_emlis_ai_product_quality_gate_recovery_repair_design_p9.py",
+      "ai/tests/test_emlis_ai_real_device_gate_recovery_regression_p11.py",
+      "ai/tests/test_emlis_ai_gate_recovery_public_surface_validation_plan_p12.py",
+      "Cocolon/tests/rn-screen-contracts.test.js"
+    ],
+    "stable_boundaries": [
+      "POST /emotion/submit route unchanged",
+      "input_feedback.comment_text remains visible body",
+      "input_feedback.emlis_ai.observation_status remains RN display status source",
+      "RN Emlisの観測 title and passed + commentText display condition unchanged",
+      "DB physical schema unchanged",
+      "public response top-level keys unchanged",
+      "Display/Grounding/Template/Safety gates are not relaxed",
+      "raw input/history/memo/comment_text body/candidate body/surface body must not enter public meta or validation material",
+      "F/E/G real-device cases are regression fixtures, not runtime routes or exact text templates",
+      "Gate Recovery material surface is diagnostic/recovery-plan/QA material, not public observation text"
+    ],
+    "forbidden_public_sources": [
+      "phase20_5_gate_recovery_material_surface",
+      "phase20_13_post_final_gate_recovery_material_surface",
+      "diagnostic_recovery_surface",
+      "_build_recovery_comment_text public fallback"
+    ],
+    "allowed_public_candidate_sources": [
+      "complete_initial_composer",
+      "limited_composer",
+      "low_information_observation_composer",
+      "self_denial_safe_state_answer",
+      "bounded_repaired_original_candidate",
+      "complete_self_repair_candidate"
+    ]
+  },
+  "local_file_inventory_20260605": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_20260605.csv",
+    "covers": [
+      "Cocolon_前提資料(176).zip",
+      "Cocolon_13(5).zip",
+      "mashos-api_13(8).zip"
+    ],
+    "row_count_including_header": 1073,
+    "sha256": "98d8952844a3fb3a1e28282e7a60b45e882638d95a25dd55beceee48473c3694",
+    "role": "latest local zip inventory for 2026-06-05 premise diff update; not a task list."
   }
 }

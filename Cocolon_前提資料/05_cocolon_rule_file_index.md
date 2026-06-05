@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -870,3 +870,45 @@ EmlisAIの商品品質計測、Blocker Matrix、Blind QA Integration、Release D
 | `test_emlis_ai_product_quality_*.py` / `test_emlis_ai_product_release_decision.py` | Phase0-8内部contract回帰 | Phase0-8 materialを修正する時 |
 
 禁止: `product_gate_ready` / `public_release_applied` をPhase0-8 materialでtrueにする、Blind QA未実施をgreen扱いする、Release Decision greenを即rolloutと読む、public response / RN / DB contractを変える。
+
+# 2026-06-05 差分追記: EmlisAI Gate Recovery public surface leak repair P0-P12 rule / guard索引
+
+Gate Recovery public leak修正では、次のrule / guard / testを同時確認する。
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_constants.py` | public leak blocker / source kind / public role定数 | Gate Recovery public boundary、ProductQuality blocker、repair designを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_boundary.py` | Gate Recovery由来candidateをpublic表示してよいかの判定 | `recover_emlis_gate_failure()`、post-final recovery、reply_service差し替えを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | public candidate source選択、low-info回復、bounded original repair | Gate Recovery後に本文候補を作る/選ぶ時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_surface_validation_plan.py` | P0〜P11後のbackend / RN / 実機validation plan | 実装後validation、release判定、商品品質測定を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py` | `surface_origin` normalizer / public leak blocker検出 | ProductQualityEventを変更する時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_runner.py` | surface_origin集計 / P12 validation plan接続 | Measurement Runnerやrun blockerを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_blocker_matrix.py` | Gate Recovery public leak blockerのowner / severity / repair policy | Blocker分類を触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_generation_repair_design.py` | gate_recovery_public_surface_boundary_repair track | Generation repair queueを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py` | P12追加validation items / allowed source / forbidden fragment | ProductQuality validationを触る時 |
+
+P0〜P12関連の主な回帰test:
+
+```text
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_surface_boundary.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_boundary_decision.py
+mashos-api/ai/tests/test_emlis_ai_reply_service_gate_recovery_public_boundary_p4.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p5.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_low_information_recovery_p6.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_original_candidate_repair_p7.py
+mashos-api/ai/tests/test_emlis_ai_product_quality_surface_origin_p8.py
+mashos-api/ai/tests/test_emlis_ai_product_quality_gate_recovery_repair_design_p9.py
+Cocolon/tests/rn-screen-contracts.test.js
+mashos-api/ai/tests/test_emlis_ai_real_device_gate_recovery_regression_p11.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_surface_validation_plan_p12.py
+```
+
+
+禁止:
+
+```text
+- Gate Recovery material surfaceをfixed fallbackではないとmeta宣言してpublicに通す。
+- `_build_recovery_comment_text()` 由来の本文をpublic fallbackとして使う。
+- RN contract testをsource lineage表示分岐のために変更する。
+- ProductQuality validation planを実行済み・release済みの証明として扱う。
+```

@@ -1,25 +1,27 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(173).zip"
-  Cocolon: "Cocolon_9(17).zip"
-  mashos-api: "mashos-api_9(27).zip"
+  premise: "Cocolon_前提資料(176).zip"
+  Cocolon: "Cocolon_13(5).zip"
+  mashos-api: "mashos-api_13(8).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 797
-  total: 1014
+  mashos-api: 812
+  total: 1029
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1014
-  included_in_overall_structure: 1014
-  included_in_national_system: 1014
+  total_files: 1029
+  included_in_overall_structure: 1029
+  included_in_national_system: 1029
   excluded_from_main_body: 0
+  gate_recovery_public_surface_leak_repair_p0_12_reflected: true
+  gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   phase15_target_docs_reflect_two_stage_increment: true
   phase15_full_01_02_regeneration: false
   phase16_target_docs_reflect_two_stage_composer_surface_connection: true
@@ -117,11 +119,11 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_9(17).zip` | 217 | RNアプリ本体。production RN UIは変更せず、`Cocolon/tests/rn-screen-contracts.test.js` で `passed + commentText` の既存表示契約を維持する。 |
-| `mashos-api_9(27).zip` | 797 | backend / API / worker / tests。Phase20、Product Read Feel / Structure Insight、EmlisAI User Label Connection Observation v1に加え、EmlisAI Product Quality Measurement / Blocker Repair Phase0〜8をbackend internal-onlyで反映する。 |
-| total | 1014 | EmlisAI商品品質計測・Blocker Matrix・Blind QA・Release Decision・Validation Plan反映後の前提資料差分更新対象snapshot。 |
+| `Cocolon_13(5).zip` | 217 | RNアプリ本体。production RN UIは変更せず、`Cocolon/tests/rn-screen-contracts.test.js` で `passed + commentText` の既存表示契約を維持する。P10でGate Recovery public boundary後のRN contract回帰を追加済み。 |
+| `mashos-api_13(8).zip` | 812 | backend / API / worker / tests。Phase20、Product Read Feel / Structure Insight、User Label Connection Observation v1、Product Quality Measurement Phase0〜8に加え、Gate Recovery Public Surface Leak Repair P0〜P12をbackend internal-onlyで反映する。 |
+| total | 1029 | Gate Recovery public surface leak repair P0〜P12反映後の前提資料差分更新対象snapshot。 |
 
-`Cocolon_9(17).zip` / `mashos-api_9(27).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、EmlisAIの商品品質計測基盤をbackend内部のContract Freeze / Composer Bootstrap / ProductQualityEventV1 / Measurement Runner / Blocker Matrix / Generation Repair Design / Blind QA Integration / Release Decision / Validation Planへ接続しています。
+`Cocolon_13(5).zip` / `mashos-api_13(8).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、EmlisAIの商品品質計測基盤に加えて、Gate Recovery material surfaceのpublic leakを止めるboundary / public candidate builder / ProductQuality surface_origin / RN contract regression / real-device regression fixture / post-implementation validation planをbackend内部へ接続しています。
 
 Phase20後、Product Read Feel / Structure Insight Phase1〜11後、User Label Connection Observation v1 Phase0〜10後のEmlisAI作業では、次を最新の読み方として固定します。
 
@@ -1309,3 +1311,44 @@ raw input / comment_text body / candidate body / surface body をrelease materia
 - `blind_qa_review_queue` やreview用materialをpublic metaまたはRN表示sourceにしない。
 - `generation_repair_design` を「本文生成修正済み」と読まない。Phase5は修正設計materialであり、実生成ロジック修正ではない。
 - Validation Planをテスト実行済み証明として扱わない。未実行ならrelease不可blockerとして読む。
+
+# 2026-06-05 追補: EmlisAI Gate Recovery Public Surface Leak Repair P0-P12 実装反映
+
+最新実ファイル `Cocolon_13(5).zip` / `mashos-api_13(8).zip` を確認した。Cocolon RN側は source file count `217` のままで、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。mashos-api側では、EmlisAI Gate Recovery public surface leak repair P0〜P12がbackend internal-only層として実装されている。
+
+今回の最新基準面は次として読む。
+
+| source | file count | 位置づけ |
+|---|---:|---|
+| `Cocolon_13(5).zip` | 217 | RNアプリ本体。`Emlisの観測` は引き続き `input_feedback.emlis_ai.observation_status == passed` かつ `input_feedback.comment_text` 非空の場合だけ表示する。P10でRN contract回帰テストを追加。 |
+| `mashos-api_13(8).zip` | 812 | backend / API / worker / tests。Phase20 Gate Recoveryのpublic surface leakを、P0〜P12でboundary / candidate builder / QA / validation planへ接続済み。 |
+| total | 1029 | Gate Recovery public surface leak repair P0〜P12反映後の前提資料差分更新対象snapshot。 |
+
+P0〜P12は、EmlisAIを「Gate Recovery material surfaceを出して表示到達させる装置」へ戻す工程ではない。読み方は次で固定する。
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| P0/P1 | Gate Recovery material surfaceのpublic leakをRED化し、blocker / source kind / public role定数を固定する。 | `emlis_ai_gate_recovery_public_constants.py`, `test_emlis_ai_gate_recovery_public_surface_boundary.py` |
+| P2 | `GateRecoveryPublicBoundaryDecision` を実装し、diagnostic recovery surfaceをpublic candidateとして許可しない境界を作る。 | `emlis_ai_gate_recovery_public_boundary.py`, `test_emlis_ai_gate_recovery_public_boundary_decision.py` |
+| P3 | `recover_emlis_gate_failure()` のcandidate差し替え前にpublic boundaryを接続し、`phase20_5` / `phase20_13` material surfaceを `applied=True` で戻さない。 | `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_gate_recovery_loop_phase20_5.py`, `test_emlis_ai_post_final_gate_recovery_phase20_13.py` |
+| P4 | `reply_service` のpre / post-final差し替え箇所にも保険境界を入れ、leaky recovery resultをpublic採用しない。 | `emlis_ai_reply_service.py`, `test_emlis_ai_reply_service_gate_recovery_public_boundary_p4.py` |
+| P5 | public candidate builderを追加し、Gate Recovery後に採用可能なsourceをmeta-onlyで選ぶ。Gate Recovery material surface本文はfallbackにしない。 | `emlis_ai_gate_recovery_public_candidate_builder.py`, `test_emlis_ai_gate_recovery_public_candidate_builder_p5.py` |
+| P6 | 低情報・限定groundingの回復を `low_information_observation_composer` へ接続する。 | `emlis_ai_gate_recovery_public_candidate_builder.py`, `test_emlis_ai_gate_recovery_low_information_recovery_p6.py` |
+| P7 | 元Composer候補がある場合だけ、bounded repaired original candidateとして再接続する。 | `emlis_ai_gate_recovery_loop.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_gate_recovery_original_candidate_repair_p7.py` |
+| P8 | ProductQualityEvent / Measurement Runnerに `surface_origin` を追加し、表示到達率だけで成功扱いしない。 | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_quality_measurement_runner.py`, `test_emlis_ai_product_quality_surface_origin_p8.py` |
+| P9 | Blocker Matrix / Generation Repair DesignへGate Recovery public leak修正trackを追加する。 | `emlis_ai_product_quality_blocker_matrix.py`, `emlis_ai_product_quality_generation_repair_design.py`, `test_emlis_ai_product_quality_gate_recovery_repair_design_p9.py` |
+| P10 | RN contract回帰確認を固定する。RNは `passed + comment_text` だけを表示契約にし、source lineageで表示分岐しない。 | `Cocolon/tests/rn-screen-contracts.test.js` |
+| P11 | F/E/G実機確認ケースを専用route化せず、meta-only regression fixtureとして扱う。 | `tests/fixtures/emlis_ai_real_device_gate_recovery_regression_cases_p11.py`, `test_emlis_ai_real_device_gate_recovery_regression_p11.py` |
+| P12 | 実装後validation planを固定し、backend / RN / 実機確認条件が揃うまで商品合格扱いにしない。 | `emlis_ai_gate_recovery_public_surface_validation_plan.py`, `emlis_ai_product_quality_validation_plan.py`, `test_emlis_ai_gate_recovery_public_surface_validation_plan_p12.py` |
+
+この追補で固定する境界:
+
+```text
+- Gate Recovery material surface は recovery plan / diagnostic meta / QA groupingであり、public comment_textの作成元ではない。
+- `phase20_5_gate_recovery_material_surface` / `phase20_13_post_final_gate_recovery_material_surface` を商品表示成功として扱わない。
+- public本文として許可するsourceは、通常Composer、low_information_observation_composer、self_denial_safe_state_answer、bounded repaired original candidate等のpublic observation candidateに限る。
+- `今回の入力では...` / `原因や結論までは...` / `誰かを良い悪いで...` はEmlis観測本文として出す構文ではなく、public leak検出対象として読む。
+- ProductQualityは `surface_origin` を見る。表示到達だけでgreenにしない。
+- RN production UI、`/emotion/submit` route、public response top-level key、DB physical schema、RN表示条件は変更しない。
+- F/E/Gなどの実機確認ケースは回帰fixtureであり、runtime条件・case専用surface・完成文テンプレではない。
+```

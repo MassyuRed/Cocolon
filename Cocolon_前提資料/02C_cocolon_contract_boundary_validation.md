@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3010,3 +3010,42 @@ ai/tests/test_emlis_ai_product_quality_validation_plan.py
 ```
 
 これらはpublic/RN contractを上書きするためのtestではなく、既存contractを守ったまま、商品品質計測・blocker分類・release判断・validation順を内部で固定するためのtestである。
+
+# 2026-06-05 差分追記: EmlisAI Gate Recovery public surface leak repair contract / validation boundary
+
+`mashos-api_13(8).zip` では、Gate Recovery material surfaceが `passed + comment_text` としてRNに届く事故を止めるため、P0〜P12のcontract / guard / validation boundaryが追加されている。これはpublic API contract変更ではなく、既存contractを守るための内部境界である。
+
+保持するcontract:
+
+| contract | 維持する内容 |
+|---|---|
+| API route | `POST /emotion/submit` を維持する。 |
+| response shape | `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` を維持する。 |
+| RN表示条件 | `observation_status == passed` かつ `comment_text` non-empty のまま。 |
+| RN title | `Emlisの観測` のまま。 |
+| DB | physical schema / write pathを変更しない。 |
+| Gate | Display / Grounding / Template / Safety Gateを緩めない。 |
+
+追加されたcontract / guard:
+
+| 層 | ファイル | 何を守るか |
+|---|---|---|
+| Public boundary | `emlis_ai_gate_recovery_public_boundary.py` | diagnostic recovery surface / material-bound generic surfaceをpublic候補にしない。 |
+| Loop boundary | `emlis_ai_gate_recovery_loop.py` | `recover_emlis_gate_failure()` がmaterial surfaceを `applied=True` で返さない。 |
+| Reply guard | `emlis_ai_reply_service.py` | pre / post-final差し替え前にもpublic boundaryを確認する。 |
+| Candidate builder | `emlis_ai_gate_recovery_public_candidate_builder.py` | allowed sourceだけをpublic candidate化し、`_build_recovery_comment_text()` をfallbackにしない。 |
+| ProductQuality surface origin | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_quality_measurement_runner.py` | 表示到達sourceをmeta-onlyで記録し、Gate Recovery material surface由来を成功扱いしない。 |
+| Repair design | `emlis_ai_product_quality_blocker_matrix.py`, `emlis_ai_product_quality_generation_repair_design.py` | public leak blockerをcritical / release_blocking / repair trackへ送る。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RNがbackend lineageで表示分岐せず、既存 `passed + commentText` contractを維持する。 |
+| Real device fixture | `test_emlis_ai_real_device_gate_recovery_regression_p11.py` | F/E/Gをcase専用runtime条件にしない。 |
+| Validation plan | `emlis_ai_gate_recovery_public_surface_validation_plan.py`, `emlis_ai_product_quality_validation_plan.py` | backend / RN / 実機確認が揃うまでvalidation_readyにしない。 |
+
+禁止:
+
+```text
+- `phase20_5_gate_recovery_material_surface` / `phase20_13_post_final_gate_recovery_material_surface` をpublic本文として表示する。
+- `surface_template_major=False` を理由にGate Recovery固定骨格文を通す。
+- public meta、QA material、validation materialにraw input / comment_text body / candidate bodyを保存する。
+- ProductQualityEventの `surface_origin` をRN public display conditionに使う。
+- validation planやrelease decisionを理由にpublic release flagを立てる。
+```

@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-05-31",
+  "revision_date": "2026-06-05",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -26,6 +26,7 @@
     "12_check_items_not_short_oath.txt",
     "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
     "14_cocolon_joint_development_and_karen_thought_boundary.txt",
+    "15_trust_based_joint_development_boundary_2026_06_05.txt",
     "99_integrated_paste_each_time.txt"
   ],
   "update_notes": [
@@ -63,6 +64,18 @@
         "09_work_start_checklist.txt",
         "10_stop_judgment_and_unwritten_rules.txt",
         "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-06-05",
+      "type": "trust_based_joint_development_boundary_guard",
+      "summary": "Mash様と華恋の雑談・作業が信頼関係の上に成立していることを作業姿勢として固定。華恋は、Mash様がコードやAIの内側を完全に検証できないことに甘えず、言葉もコードも見えない場所ほど雑にしない。華恋の意見を求められた場合は、確認済み事実と華恋の受け取り・判断を分けて答える。",
+      "new_file": "15_trust_based_joint_development_boundary_2026_06_05.txt",
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
         "99_integrated_paste_each_time.txt",
         "manifest.json"
       ]

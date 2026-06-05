@@ -1,24 +1,26 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(173).zip"
-  Cocolon: "Cocolon_9(17).zip"
-  mashos-api: "mashos-api_9(27).zip"
+  premise: "Cocolon_前提資料(176).zip"
+  Cocolon: "Cocolon_13(5).zip"
+  mashos-api: "mashos-api_13(8).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 797
-  total: 1014
+  mashos-api: 812
+  total: 1029
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1014
+  included_files_total: 1029
   included_files_cocolon: 217
-  included_files_mashos_api: 797
+  included_files_mashos_api: 812
+  gate_recovery_public_surface_leak_repair_p0_12_reflected: true
+  gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -2122,4 +2124,44 @@ Phase20は、RN production UI、DB physical schema、API route、public response
 - Runner / Event / Matrix / Decision / Validationはいずれもinternal QA materialであり、public response shape、DB schema、RN visible contractを変更しない。
 - Measurement Runnerは、実入力familyを流してblockerを分解する入口であり、fixed templateやA/C/D専用runtime branchを作らない。
 - Release Decision Layerは内部release判断だけを返す。rollout stageを変更せず、all rolloutを適用しない。
+```
+
+# 2026-06-05 差分追記: EmlisAI Gate Recovery Public Surface Leak Repair P0-P12 overall structure
+
+最新実ファイル `Cocolon_13(5).zip` / `mashos-api_13(8).zip` では、Cocolon RN側のproduction surface変更はない。mashos-api側に、Gate Recovery material surfaceのpublic leakを止めるためのboundary、public candidate builder、low-information recovery、bounded original repair、surface_origin計測、repair design、RN contract regression、real-device regression fixture、post-implementation validation planが追加・変更されている。
+
+全体構造上は、`/emotion/submit` 保存後の EmlisAI immediate reply runtime を次のように読む。
+
+```text
+Input save
+  -> render_emlis_ai_reply()
+  -> Composer / Reader / Grounding / Template / Display Gate
+  -> Gate Recovery Loop
+  -> GateRecoveryPublicBoundaryDecision
+  -> public candidate builder
+     -> low_information_observation_composer
+     -> bounded repaired original candidate
+     -> self_denial_safe_state_answer applicable route
+     -> no public candidate: diagnostic blocker only
+  -> ProductQuality surface_origin / validation material
+  -> RNは passed + comment_text の既存契約だけを見る
+```
+
+| current owner | 役割 |
+|---|---|
+| `emlis_ai_gate_recovery_public_constants.py` | Gate Recovery public leakのblocker / source kind / public role定数。 |
+| `emlis_ai_gate_recovery_public_boundary.py` | diagnostic recovery surfaceをpublic表示候補にしない境界判定。 |
+| `emlis_ai_gate_recovery_public_candidate_builder.py` | Gate Recovery後にpublic candidate sourceを選ぶ。recovery material surface本文はfallbackにしない。 |
+| `emlis_ai_gate_recovery_public_surface_validation_plan.py` | P0〜P11後のbackend / RN / 実機確認validation planをmeta-onlyで固定する。 |
+| `emlis_ai_product_quality_measurement_event.py` / `emlis_ai_product_quality_measurement_runner.py` | `surface_origin` を持たせ、表示到達sourceがGate Recovery material surfaceなら成功扱いしない。 |
+| `emlis_ai_product_quality_blocker_matrix.py` / `emlis_ai_product_quality_generation_repair_design.py` | Gate Recovery public leakをcritical release blockerとしてrepair trackへ送る。 |
+| `Cocolon/tests/rn-screen-contracts.test.js` | RNは `passed + commentText` のみでmodal表示し、backend QA lineageで表示分岐しないことを固定する。 |
+
+禁止して読むこと:
+
+```text
+Gate Recovery material surfaceをpublic fallback本文として扱う。
+F/E/G実機確認caseをruntime条件や専用routeにする。
+表示到達率だけでProductQuality greenにする。
+RN側でsource_originやblockerを見て表示可否を決める。
 ```

@@ -4119,3 +4119,216 @@ test('Phase20-7 RN contract ignores internal response_kind and keeps exact text 
   assert.equal(isPassedEmlisObservationReply(splitKeyOnlyPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(splitKeyOnlyPayload), null);
 });
+
+test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed plus comment_text boundary', () => {
+  const input = read('screens/InputScreen.js');
+  const inputFeedback = read('screens/input/inputFeedbackModel.js');
+  const inputFeedbackModal = read('screens/input/useInputFeedbackModal.js');
+  const inputFeedbackReplyModal = read('screens/input/InputFeedbackReplyModal.js');
+
+  assertIncludes(inputFeedback, [
+    'export function getEmlisObservationStatus(input = {})',
+    'input?.input_feedback?.emlis_ai?.observation_status',
+    'export function getEmlisObservationCommentText(input = {})',
+    'input?.input_feedback?.comment_text',
+    'export function buildPassedEmlisObservationModalPayload(input = {})',
+    'observationStatus !== EMLIS_OBSERVATION_STATUS.PASSED || !commentText',
+    'return null;',
+  ], 'inputFeedbackModel.js P10 public contract remains status/comment_text only');
+
+  assertIncludes(inputFeedbackModal, [
+    'const payload = buildPassedEmlisObservationModalPayload(input);',
+    'if (!payload) {',
+    'setInputFeedbackModalVisible(false);',
+    'setInputFeedbackModalText("");',
+    'observationStatus: getEmlisObservationStatus(input)',
+    'return false;',
+    'setInputFeedbackModalText(payload.commentText);',
+    'setInputFeedbackModalVisible(true);',
+    'return true;',
+  ], 'useInputFeedbackModal.js P10 opener stays fail-closed and does not rewrite text');
+
+  assertIncludes(inputFeedbackReplyModal, [
+    'const shouldShow = Boolean',
+    'visible &&',
+    'isPassedEmlisObservationReply({',
+    'commentText: text,',
+    'observationStatus: meta?.observationStatus || meta?.observation_status',
+    '<Modal visible={shouldShow}',
+    '<Text style={styles.inputFeedbackBodyText}>{text}</Text>',
+  ], 'InputFeedbackReplyModal.js P10 modal shows the passed public text verbatim only');
+
+  assertIncludes(input, [
+    'const inputFeedback = submitResult?.input_feedback || null;',
+    'const inputFeedbackAI = inputFeedback?.emlis_ai || null;',
+    'inputFeedback?.comment_text',
+    'const openedObservation = inputFeedbackText',
+    'openInputFeedbackModal({',
+    'commentText: inputFeedbackText,',
+    'emlisAiMeta: inputFeedbackAI,',
+    'observationStatus: inputFeedbackAI?.observation_status',
+    'if (!openedObservation)',
+  ], 'InputScreen.js P10 forwards backend public status/text without local rewriting');
+
+  assertNotIncludes(inputFeedback + inputFeedbackModal + inputFeedbackReplyModal + input, [
+    'gate_recovery_material_surface_public_leak',
+    'post_final_gate_recovery_material_surface_public_leak',
+    'diagnostic_recovery_surface',
+    'phase20_5_gate_recovery_material_surface',
+    'phase20_13_post_final_gate_recovery_material_surface',
+    'public_display_allowed_by_boundary',
+    'surface_origin',
+    'candidate_source_kind',
+  ], 'P10 RN display code must not branch on Gate Recovery internal lineage or QA-only blockers');
+
+  const {
+    getEmlisObservationStatus,
+    getEmlisObservationCommentText,
+    isPassedEmlisObservationReply,
+    buildPassedEmlisObservationModalPayload,
+  } = loadInputFeedbackModelForContractTest();
+
+  const allowedRecoveryOrigins = [
+    'low_information_observation_composer',
+    'bounded_repaired_original_candidate',
+    'complete_initial_composer',
+    'complete_self_repair_candidate',
+    'self_denial_safe_state_answer',
+  ];
+
+  allowedRecoveryOrigins.forEach((candidateSourceKind, index) => {
+    const commentText = [
+      'Mashさん、Emlisです。',
+      `${candidateSourceKind} 由来の public comment_text を、そのまま表示します。`,
+      '本文の改行と語順はRN側で組み替えません。',
+    ].join('\n');
+    const payload = {
+      input_feedback: {
+        comment_text: commentText,
+        emlis_ai: {
+          observation_status: 'passed',
+          surface_origin: {
+            candidate_source_kind: candidateSourceKind,
+            public_surface_role: 'public_observation_candidate',
+            public_display_allowed_by_boundary: true,
+          },
+        },
+      },
+      emotionSummary: index === 0 ? '選択した感情：平穏' : '',
+      dominantSummary: index === 0 ? '中心として見ている感情：平穏' : '',
+      contextLabel: index === 0 ? '生活' : '',
+    };
+
+    assert.equal(getEmlisObservationStatus(payload), 'passed');
+    assert.equal(getEmlisObservationCommentText(payload), commentText);
+    assert.equal(isPassedEmlisObservationReply(payload), true);
+    assert.deepEqual(buildPassedEmlisObservationModalPayload(payload), {
+      commentText,
+      observationStatus: 'passed',
+      emotionSummary: index === 0 ? '選択した感情：平穏' : '',
+      dominantSummary: index === 0 ? '中心として見ている感情：平穏' : '',
+      contextLabel: index === 0 ? '生活' : '',
+    });
+  });
+
+  const blockedGateRecoverySurfaces = [
+    {
+      observation_status: 'rejected',
+      composer_model: 'phase20_5_gate_recovery_material_surface',
+      generation_method: 'phase20_5_gate_recovery_loop',
+      blocker: 'gate_recovery_material_surface_public_leak',
+    },
+    {
+      observation_status: 'unavailable',
+      composer_model: 'phase20_13_post_final_gate_recovery_material_surface',
+      generation_method: 'phase20_13_post_final_gate_recovery_loop',
+      blocker: 'post_final_gate_recovery_material_surface_public_leak',
+    },
+    {
+      observation_status: 'safety_blocked',
+      composer_model: 'phase20_5_gate_recovery_material_surface',
+      generation_method: 'phase20_5_gate_recovery_loop',
+      blocker: 'gate_recovery_internal_policy_sentence_leak',
+    },
+    {
+      observation_status: '',
+      composer_model: 'phase20_5_gate_recovery_material_surface',
+      generation_method: 'phase20_5_gate_recovery_loop',
+      blocker: 'gate_recovery_diagnostic_surface_promoted_to_public',
+    },
+  ];
+
+  blockedGateRecoverySurfaces.forEach((surface) => {
+    const blockedText = '今回の入力では、生活に関する記録として、不安の向きが出ています。\nEmlisから：原因や結論までは決めず、いま置かれた材料だけで受け取ります。';
+    const blockedPayload = {
+      input_feedback: {
+        comment_text: blockedText,
+        emlis_ai: {
+          observation_status: surface.observation_status,
+          diagnostic_summary: {
+            observation_status: 'passed',
+            comment_text: 'diagnostic meta内の本文はRN表示対象外です。',
+          },
+          surface_origin: {
+            candidate_source_kind: 'gate_recovery_material_surface',
+            composer_model: surface.composer_model,
+            generation_method: surface.generation_method,
+            public_surface_role: 'diagnostic_recovery_surface',
+            public_display_allowed_by_boundary: false,
+          },
+          blockers: [surface.blocker],
+        },
+      },
+    };
+
+    assert.equal(getEmlisObservationStatus(blockedPayload), surface.observation_status);
+    assert.equal(getEmlisObservationCommentText(blockedPayload), blockedText);
+    assert.equal(isPassedEmlisObservationReply(blockedPayload), false);
+    assert.equal(buildPassedEmlisObservationModalPayload(blockedPayload), null);
+  });
+
+  for (const emptyCommentText of ['', '   ', '\n\t  ']) {
+    const emptyPassedPayload = {
+      input_feedback: {
+        comment_text: emptyCommentText,
+        emlis_ai: {
+          observation_status: 'passed',
+          surface_origin: {
+            candidate_source_kind: 'low_information_observation_composer',
+            public_surface_role: 'public_observation_candidate',
+            public_display_allowed_by_boundary: true,
+          },
+        },
+      },
+    };
+
+    assert.equal(getEmlisObservationStatus(emptyPassedPayload), 'passed');
+    assert.equal(getEmlisObservationCommentText(emptyPassedPayload), '');
+    assert.equal(isPassedEmlisObservationReply(emptyPassedPayload), false);
+    assert.equal(buildPassedEmlisObservationModalPayload(emptyPassedPayload), null);
+  }
+
+  const metaOnlyGateRecoveryPayload = {
+    input_feedback: {
+      comment_text: '',
+      emlis_ai: {
+        observation_status: '',
+        diagnostic_summary: {
+          observation_status: 'passed',
+          comment_text: 'diagnostic metaだけの本文は表示しません。',
+          surface_origin: {
+            candidate_source_kind: 'bounded_repaired_original_candidate',
+            public_surface_role: 'public_observation_candidate',
+            public_display_allowed_by_boundary: true,
+          },
+        },
+      },
+    },
+  };
+
+  assert.equal(getEmlisObservationStatus(metaOnlyGateRecoveryPayload), '');
+  assert.equal(getEmlisObservationCommentText(metaOnlyGateRecoveryPayload), '');
+  assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
+  assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
+});
+

@@ -1,6 +1,6 @@
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 ---
 
 # 01A. アプリ基盤とHome系
@@ -2909,3 +2909,18 @@ Cocolon/tests/rn-screen-contracts.test.js
 - Blind QA review queueはlocal review準備であり、RN表示payloadではない。
 
 禁止: RN側で `product_release_decision` / `validation_plan` / `blocker_matrix` / `blind_qa_integration` を表示sourceや表示条件にしない。`comment_text` 以外の本文keyを要求しない。
+
+# 2026-06-05 差分追記: Home / EmlisAI immediate reply Gate Recovery public boundary current owner
+
+P0〜P12後のHome immediate replyでは、EmlisAIの表示可否は引き続きbackendで決まり、RNは既存 `commentText` を受け取るだけである。今回の修正は、Gate Recovery material surfaceを `passed + comment_text` としてpublicへ昇格させないためのbackend内部境界であり、Home production UI、`/emotion/submit` route、public response top-level keyは変更しない。
+
+| 層 | latest owner | Home / Input上の意味 |
+|---|---|---|
+| Recovery boundary | `emlis_ai_gate_recovery_public_boundary.py` | diagnostic recovery surfaceをpublic候補として許可しない。 |
+| Recovery loop | `emlis_ai_gate_recovery_loop.py` | boundary / builderを通したpublic candidateだけをGateへ流す。material surfaceはdiagnostic metaに留める。 |
+| Reply service guard | `emlis_ai_reply_service.py` | pre / post-final差し替え直前にも保険境界を置く。 |
+| Public candidate builder | `emlis_ai_gate_recovery_public_candidate_builder.py` | low-information composer / bounded repaired original candidate等へ回す。 |
+| ProductQuality source lineage | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_quality_measurement_runner.py` | `surface_origin` で表示sourceを記録し、Gate Recovery material surface由来を成功扱いしない。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RN production UIはsource lineageで分岐せず、`passed + commentText` の既存契約だけを守る。 |
+
+Home/Input側では、`inputFeedbackModel.js` や `InputFeedbackReplyModal.js` の表示条件を変更した差分ではない。本文品質と表示sourceの修正責任はbackend側のGate Recovery public boundary / candidate builder / ProductQuality lineageにある。

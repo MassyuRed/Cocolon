@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -639,3 +639,32 @@ EmlisAIの商品品質計測、Blocker Matrix、Blind QA Integration、Release D
 ```
 
 禁止: Phase0-8 internal materialをpublic response keyへ出す、RN表示条件にする、DB保存物にする、Gate緩和する、fixed templateやA/C/D専用runtime branchを追加する、validation未実行を商品品質到達と扱う。
+
+# 2026-06-05 差分追記: EmlisAI Gate Recovery public surface leak repair P0-P12 を触る時
+
+EmlisAIのGate Recovery、`recover_emlis_gate_failure()`、post-final recovery、`ProductQualityEvent`、Blocker Matrix、RN `passed + commentText` contractを触る時は、次を同時に読む。
+
+1. `00_karen_read_first.md` の Gate Recovery Public Surface Leak Repair P0-P12 追補。
+2. `07_latest_snapshot_diff.md` の P0-P12 latest snapshot diff。
+3. `02C_cocolon_contract_boundary_validation.md` の Gate Recovery public surface leak repair contract / validation boundary。
+4. `05_cocolon_rule_file_index.md` の Gate Recovery public surface leak repair rule / guard索引。
+5. 最新実ファイル `emlis_ai_gate_recovery_public_boundary.py` / `emlis_ai_gate_recovery_public_candidate_builder.py` / `emlis_ai_gate_recovery_loop.py` / `emlis_ai_reply_service.py`。
+
+確認すること:
+
+- `phase20_5_gate_recovery_material_surface` / `phase20_13_post_final_gate_recovery_material_surface` がpublic `comment_text` へ昇格していないか。
+- low-information回復が `low_information_observation_composer` を通っているか。
+- 元Composer候補の再接続が bounded repaired original candidate として扱われているか。
+- ProductQuality側に `surface_origin` が入り、表示到達sourceを見ているか。
+- RN contractは `observation_status == passed && commentText non-empty` のままか。
+- F/E/G実機確認caseを専用route / 専用surface / exact text条件にしていないか。
+
+禁止:
+
+```text
+Gate Recovery material surface を仮表示文・fallback文・Emlis観測本文としてpublic表示する。
+「今回の入力では...」「原因や結論までは...」「誰かを良い悪いで...」をEmlis観測本文として使う。
+表示到達率だけでProductQuality greenにする。
+RN側へsurface_origin / blocker / diagnostic_recovery_surface分岐を持ち込む。
+validation planを理由にpublic response shape、DB physical schema、release flag、Gate条件を変更する。
+```

@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-04"
+revision_date: "2026-06-05"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(173).zip"
-  Cocolon: "Cocolon_9(17).zip"
-  mashos-api: "mashos-api_9(27).zip"
+  premise: "Cocolon_前提資料(176).zip"
+  Cocolon: "Cocolon_13(5).zip"
+  mashos-api: "mashos-api_13(8).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_9(17).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_9(27).zip` | 797 | EmlisAI Phase20、Product Read Feel / Structure Insight、User Label Connection Observation v1に加え、Product Quality Measurement / Blocker Repair Phase0-8をbackend internal-onlyで反映。 |
-| total | 1014 | Product Quality Measurement Phase0-8前提資料差分更新後coverage対象 |
+| `Cocolon_13(5).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。P10でRN contract regressionを追加。 |
+| `mashos-api_13(8).zip` | 812 | EmlisAI Phase20、Product Read Feel / Structure Insight、User Label Connection Observation v1、Product Quality Measurement Phase0-8に加え、Gate Recovery Public Surface Leak Repair P0-P12をbackend internal-onlyで反映。 |
+| total | 1029 | Gate Recovery public surface leak repair P0-P12前提資料差分更新後coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-05-30以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針は履歴として残し、2026-06-04時点の最新正本は末尾の `2026-06-04 差分追記: EmlisAI Product Quality Measurement / Blocker Repair Phase0-8 latest snapshot diff` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-04以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針、Phase20表示信頼性補強、Product Quality Measurement Phase0-8は履歴として残し、2026-06-05時点の最新正本は末尾の `2026-06-05 差分追記: EmlisAI Gate Recovery Public Surface Leak Repair P0-P12 latest snapshot diff` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -3874,3 +3874,99 @@ A/C/D fixture専用runtime branch追加なし
 product_gate_ready / public_release_applied を立てない
 raw input / comment_text body / candidate body / surface body をrelease materialへ入れない
 ```
+
+# 2026-06-05 差分追記: EmlisAI Gate Recovery Public Surface Leak Repair P0-P12 latest snapshot diff
+
+最新実ファイル `Cocolon_13(5).zip` / `mashos-api_13(8).zip` を確認した。`Cocolon_前提資料(176).zip` は2026-06-04のProduct Quality Measurement Phase0-8 / User Label Connection Observation基準を持つが、最新実ファイル側にはGate Recovery public surface leak repair P0〜P12が追加実装されているため、この差分を前提資料へ追記する。
+
+## 基準zip
+
+| source | file count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(176).zip` | 43 | `217f3e1827cd85bed8bca2efc77ab485567c7f2fa6d235e7cba51683831bd3a4` |
+| `Cocolon_13(5).zip` | 217 | `162b6903d386389c5e4d165ff8853096476851fc973b68ea68a2007c669d0f1b` |
+| `mashos-api_13(8).zip` | 812 | `697de196a378649f8aaf769f7f0cbf06ecfa739653633754210abe17ae6de1a0` |
+| total source | 1029 | - |
+
+`mashos-api(121).zip` / `Cocolon(208).zip` をGate Recovery public surface leak repair前の比較基準として見ると、差分は次の通り。
+
+| repo | added | changed | removed | 読み方 |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 1 | 0 | RN production UI変更なし。`rn-screen-contracts.test.js` でP10 contract回帰を追加。 |
+| mashos-api | 15 | 11 | 0 | P0〜P12のboundary / builder / ProductQuality / validation / regression fixtureを追加・接続。 |
+
+`mashos-api_12(14).zip` から `mashos-api_13(8).zip` への最終差分だけを見ると、P12 validation plan finalizationとして backend 2件追加・3件変更である。
+
+## Cocolon側変更
+
+| path | 読み方 |
+|---|---|
+| `Cocolon/tests/rn-screen-contracts.test.js` | RNが `passed + commentText` の既存契約だけでmodal payloadを作ること、non-passedやempty bodyではGate Recovery leakを表示しないことを固定する。production RN UIは変更しない。 |
+
+## mashos-api側追加ファイル
+
+| path | 追加された構造 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_constants.py` | P0/P1: public leak blocker / source kind / public role定数。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_boundary.py` | P2: GateRecoveryPublicBoundaryDecision。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | P5/P6/P7: public candidate builder、low-information recovery、bounded original repair。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_surface_validation_plan.py` | P12: 実装後validation plan。 |
+| `mashos-api/ai/tests/fixtures/emlis_ai_real_device_gate_recovery_regression_cases_p11.py` | P11: F/E/G実機確認caseをmeta-only fixture化。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_surface_boundary.py` | P0: public leak RED / blocker固定。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_boundary_decision.py` | P2: boundary decision単体確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p5.py` | P5: public candidate builder確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_low_information_recovery_p6.py` | P6: low-information recovery接続確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_original_candidate_repair_p7.py` | P7: bounded original repair確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_service_gate_recovery_public_boundary_p4.py` | P4: reply_service保険境界確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_quality_surface_origin_p8.py` | P8: ProductQuality surface_origin確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_quality_gate_recovery_repair_design_p9.py` | P9: blocker matrix / generation repair design確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_real_device_gate_recovery_regression_p11.py` | P11: 実機確認caseを専用route化しない回帰確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_surface_validation_plan_p12.py` | P12: post-implementation validation plan確認。 |
+
+## mashos-api側変更ファイル
+
+| path | 変更された構造 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py` | P3/P6/P7: public boundaryをrecovery loopへ接続し、builder結果だけを既存Gateへ流す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | P4/P7: pre / post-final差し替え前の保険境界、original candidate受け渡し。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py` | P8: `surface_origin` normalizer / public leak blocker検出。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_runner.py` | P8/P12: surface_origin集計、P12 validation plan出力。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_blocker_matrix.py` | P9: Gate Recovery public leak blockerのcritical / release_blocking / owner分類。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_generation_repair_design.py` | P9: `gate_recovery_public_surface_boundary_repair` track追加。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py` | P12: P12 validation item / backend・frontend・real-device validation commands追加。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_loop_phase20_5.py` | P3以降のfail-closed / allowed source期待値へ更新。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_surface_phase20_15.py` | Gate Recovery surface binding / public leak防止期待値を更新。 |
+| `mashos-api/ai/tests/test_emlis_ai_post_final_gate_recovery_phase20_13.py` | post-final recoveryでmaterial surfaceをpublic昇格しない期待値へ更新。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_quality_validation_plan.py` | P12統合後のvalidation plan期待値へ更新。 |
+
+## 固定する読み方
+
+```text
+Gate Recovery material surface は public comment_text の本文生成者ではない。
+Gate Recovery は、表示本文を作る場所ではなく、回復境界・candidate source選択・QA blocker化の入口として読む。
+```
+
+allowed public sourceは次のように読む。
+
+```text
+complete_initial_composer
+limited_composer
+low_information_observation_composer
+self_denial_safe_state_answer
+bounded_repaired_original_candidate
+complete_self_repair_candidate
+```
+
+forbidden public sourceは次である。
+
+```text
+phase20_5_gate_recovery_material_surface
+phase20_13_post_final_gate_recovery_material_surface
+diagnostic_recovery_surface
+_build_recovery_comment_text() 由来の固定骨格文
+「今回の入力では...」「原因や結論までは...」「誰かを良い悪いで...」系の内部姿勢文
+```
+
+## 01 / 02 full inventory本文の扱い
+
+今回の差分は、P0〜P12で増えたGate Recovery public boundary / candidate builder / ProductQuality surface_origin / RN contract / regression fixture / validation planの読み方を、必要箇所へ差分追記する更新である。01 / 02系のfull inventory本文は全面再生成しない。
