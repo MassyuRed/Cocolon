@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-06-04"
+revision_date: "2026-06-06"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4601,6 +4601,35 @@ ai/tests/test_emlis_ai_product_quality_generation_repair_design.py
 ai/tests/test_emlis_ai_product_quality_blind_qa_integration.py
 ai/tests/test_emlis_ai_product_release_decision.py
 ai/tests/test_emlis_ai_product_quality_validation_plan.py
+```
+
+禁止: backend支援系materialをpublic response key、DB保存形式、RN表示source、rollout configとして扱わない。
+
+
+# 2026-06-06 差分追記: Backend支援 EmlisAI Normal Observation Public Recovery P0-P9
+
+`mashos-api_10(25).zip` では、EmlisAI backend support / test領域に Normal Observation Public Recovery P0〜P9 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、通常・高情報量入力が表面品質Gateで落ちた後に、公開可能な通常観測candidateへ一回だけ再表面化するbackend内部構造である。
+
+| path | backend支援系での読み方 |
+|---|---|
+| `services/ai_inference/emlis_ai_gate_recovery_public_constants.py` | normal rebuild source kind / blockerを定義する。 |
+| `services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | eligibility、recovery plan、surface plan、body-free meta、禁止fragment検査を扱う中心owner。 |
+| `services/ai_inference/emlis_ai_gate_recovery_loop.py` | normal rebuild candidateを既存Gateへ通す接続owner。 |
+| `services/ai_inference/emlis_ai_reply_service.py` | actual adopted candidate sourceをpost-final経路でも保持する。 |
+| `services/ai_inference/emlis_ai_display_gate.py` | rerender attempt metaを保持する最小変更。 |
+| `services/ai_inference/emlis_ai_product_quality_measurement_event.py` | normal rebuildをunknown / material surface扱いにしない。 |
+| `services/ai_inference/emlis_ai_product_quality_validation_plan.py` | allowed public candidate sourceへnormal rebuildを追加する。 |
+| `services/ai_inference/emlis_ai_public_feedback_meta.py` | normal rebuild summaryを本文なしでpublic-safeに出す。 |
+
+対象test:
+
+```text
+ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_p8.py
+ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p3_plan.py
+ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_builder_p4.py
+ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_loop_p5.py
+ai/tests/test_emlis_ai_reply_service_normal_observation_rebuild_p6.py
+ai/tests/test_emlis_ai_product_quality_normal_observation_rebuild_p7.py
 ```
 
 禁止: backend支援系materialをpublic response key、DB保存形式、RN表示source、rollout configとして扱わない。

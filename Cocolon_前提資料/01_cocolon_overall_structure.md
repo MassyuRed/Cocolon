@@ -1,26 +1,28 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-05"
+revision_date: "2026-06-06"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(176).zip"
-  Cocolon: "Cocolon_13(5).zip"
-  mashos-api: "mashos-api_13(8).zip"
+  premise: "Cocolon_前提資料(178).zip"
+  Cocolon: "Cocolon_10(13).zip"
+  mashos-api: "mashos-api_10(25).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 812
-  total: 1029
+  mashos-api: 818
+  total: 1035
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1029
+  included_files_total: 1035
   included_files_cocolon: 217
-  included_files_mashos_api: 812
+  included_files_mashos_api: 818
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
+  normal_observation_public_recovery_p0_9_reflected: true
+  normal_observation_public_recovery_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -2164,4 +2166,42 @@ Gate Recovery material surfaceをpublic fallback本文として扱う。
 F/E/G実機確認caseをruntime条件や専用routeにする。
 表示到達率だけでProductQuality greenにする。
 RN側でsource_originやblockerを見て表示可否を決める。
+```
+
+
+# 2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery P0-P9 overall structure
+
+最新実ファイル `Cocolon_10(13).zip` / `mashos-api_10(25).zip` では、Cocolon RN側のproduction surface変更はない。mashos-api側に、通常・高情報量入力がSurface Gate / Visible Surface / Display Gateで落ちた後、`comment_text` 空で終わらせず、公開用の `normal_observation_rebuild_candidate` へ再表面化するbackend internal-only経路が追加されている。
+
+全体構造上は、前回の Gate Recovery public surface leak repair の上に次の枝が増えたと読む。
+
+```text
+Gate Recovery Loop
+  -> Public Candidate Builder
+     -> low_information_observation_composer
+     -> bounded_repaired_original_candidate
+     -> self_denial_safe_state_answer applicable route
+     -> normal_observation_rebuild_candidate
+  -> Existing Runtime / Visible / Display Gate
+  -> RNは passed + comment_text の既存契約だけを見る
+```
+
+| current owner | 役割 |
+|---|---|
+| `emlis_ai_gate_recovery_public_constants.py` | `normal_observation_rebuild_candidate` と `normal_observation_rebuild_candidate_missing` を定義する。 |
+| `emlis_ai_gate_recovery_public_candidate_builder.py` | surface_grammar / relation_skeleton / visible_surface / runtime_surface familyの通常候補だけを、body-free metaを持つpublic candidateへ再構築する。 |
+| `emlis_ai_gate_recovery_loop.py` | normal rebuildをlow-information recoveryと分け、既存Gateへ通す。Gate Recovery material surfaceのpublic boundaryは維持する。 |
+| `emlis_ai_reply_service.py` | pre / post-final採用候補のsource lineageをbody-freeに保持し、diagnostic material surfaceと混同しない。 |
+| `emlis_ai_product_quality_measurement_event.py` / `emlis_ai_product_quality_validation_plan.py` | normal rebuildをallowed public originとして扱い、unknownやGate Recovery material surface扱いにしない。 |
+| `emlis_ai_public_feedback_meta.py` | attempted / applied / source kindのみをpublic safe summaryへ出し、本文は出さない。 |
+| `tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_*.py` / `test_emlis_ai_reply_service_normal_observation_rebuild_p6.py` / `test_emlis_ai_product_quality_normal_observation_rebuild_p7.py` | builder / loop / reply_service / ProductQualityの回帰を固定する。 |
+
+禁止して読むこと:
+
+```text
+normal_observation_rebuild_candidate をGate緩和やRN表示条件変更として扱う。
+Gate Recovery material surfaceを公開候補へ昇格する。
+composer disabledやsource unavailableを通常観測rebuildで埋める。
+safety / infra failureを通常観測として偽装する。
+raw input / original candidate body / comment_text bodyをmetaへ残す。
 ```

@@ -1,5 +1,7 @@
 # EmlisAI / Cocolon ローカル確認証跡 2026-06-05
 
+> 2026-06-06追補あり。1〜6章は旧診断時点の証跡であり、最新 `Cocolon_10(13).zip` / `mashos-api_10(25).zip` の読み方は末尾追補を優先する。
+
 ## 1. 受領zipの全体証跡
 
 - `Cocolon_前提資料(174).zip`: files=40, uncompressed_bytes=3117026, sha256=de4a862a71284afdec0d7cd3ace2f2ec1c42e2450fc625505291b2f372c6559a
@@ -207,3 +209,29 @@
 ## 6. 結論証跡
 
 今回の画面文は、EmlisAIの本来の観測本文ではなく、Gate Recovery material surfaceがpublic本文へ出ている状態。資料の積み重ねは「テンプレ・浅い復唱・表示到達だけの成功」を否定しているが、実コードでは表示復旧経路がそのままpassed + comment_textになっている。
+
+## 7. 2026-06-06追補: Normal Observation Public Recovery P0-P9 後の最新証跡
+
+最新実ファイルとして、次を確認した。
+
+- `Cocolon_前提資料(178).zip`: files=43, uncompressed_bytes=3370120, sha256=ca43d2ab6099c59760f44d836ecc65cbb71865626fbd720e9dc8c4d0412d8ac2
+- `Cocolon_10(13).zip`: files=217, uncompressed_bytes=2828744, sha256=b60ee6404c727ea09d333f2b3c005c07cc77174363ecce13d5d5402628e5c4bc
+- `mashos-api_10(25).zip`: files=818, uncompressed_bytes=14213709, sha256=1e743a4ed865df9b0c0a5407514ff24c09a1062cc87c81aaa9da5543906c9c3a
+
+前提資料上の直前基準からの比較では、Cocolon側は追加・変更・削除なし、mashos-api側は追加6件・変更15件・削除なしである。追加6件は、normal observation rebuildのP0/P3/P4/P5/P6/P7向け回帰testである。変更15件は、`normal_observation_rebuild_candidate` source kind、public candidate builder、Gate Recovery loop、reply_service、display gate meta、ProductQuality / public feedback meta、および関連回帰testの更新である。
+
+最新検証:
+
+```text
+backend normal observation rebuild主要関連: 56 passed
+RN contract: npm run test:rn-screens -> 36 passed
+```
+
+最新結論:
+
+```text
+2026-06-05時点の「Gate Recovery material surfaceがpublic本文へ出ている」証跡は履歴として保持する。
+ただし、最新 `mashos-api_10(25).zip` では Gate Recovery material surface は引き続きpublic禁止であり、通常・高情報量入力のsurface failure後は `normal_observation_rebuild_candidate` を一回だけ試す読み方へ更新する。
+```
+
+補足: `mashos-api_10(25).zip` にはP9 validation report docは含まれていない。P9はコード差分なしのローカル検証として扱い、前提資料側の差分追記で検証結果だけを保持する。

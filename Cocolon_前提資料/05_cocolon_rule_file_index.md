@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-05"
+revision_date: "2026-06-06"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -911,4 +911,46 @@ mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_surface_validation_plan_p
 - `_build_recovery_comment_text()` 由来の本文をpublic fallbackとして使う。
 - RN contract testをsource lineage表示分岐のために変更する。
 - ProductQuality validation planを実行済み・release済みの証明として扱う。
+```
+
+
+# 2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery P0-P9 rule / test index
+
+通常・高情報量入力が `surface_grammar` / `relation_skeleton` / `visible_surface` 系で落ちた後の復旧を触る場合は、Gate Recovery public surface leak repair P0-P12に加えて次を同時確認する。
+
+| rule / guard / test | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `emlis_ai_gate_recovery_public_constants.py` | `normal_observation_rebuild_candidate` source kind / missing blocker / allowed public source | public candidate sourceを追加・判定する時 |
+| `emlis_ai_gate_recovery_public_candidate_builder.py` | normal rebuild eligibility、reason family正規化、recovery plan target、public candidate build | 通常候補が表面品質で落ちた後のrebuildを触る時 |
+| `emlis_ai_gate_recovery_loop.py` | normal rebuild candidateをlow-information recoveryと分け、既存Gateへ通す | Gate Recovery loop採用・source phase・observation_quality_metaを触る時 |
+| `emlis_ai_reply_service.py` | actual adopted public candidateの出自summary、post-final二重試行防止 | final pre-return / post-final recoveryを触る時 |
+| `emlis_ai_display_gate.py` | rerender attempt metaの保持。Gate判定緩和ではない | display decision metaを正規化する時 |
+| `emlis_ai_product_quality_measurement_event.py` | normal rebuildをsurface_origin unknown扱いにしない | ProductQualityEvent / scorecardを触る時 |
+| `emlis_ai_product_quality_validation_plan.py` | P12 allowed public candidate sourceとしてnormal rebuildを扱う | validation plan / allowed sourceを触る時 |
+| `emlis_ai_public_feedback_meta.py` | normal rebuild attempted / applied / source kindをbody-free public summaryへ出す | public diagnostic summaryを触る時 |
+
+P0〜P9関連の主な回帰test:
+
+```text
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_p8.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p3_plan.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_builder_p4.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_loop_p5.py
+mashos-api/ai/tests/test_emlis_ai_reply_service_normal_observation_rebuild_p6.py
+mashos-api/ai/tests/test_emlis_ai_product_quality_normal_observation_rebuild_p7.py
+mashos-api/ai/tests/test_emlis_ai_product_quality_surface_origin_p8.py
+mashos-api/ai/tests/test_emlis_ai_real_device_gate_recovery_regression_p11.py
+Cocolon/tests/rn-screen-contracts.test.js
+```
+
+禁止:
+
+```text
+- RN側で non-passed / empty comment_text を表示する。
+- Surface Gate / Display Gate / Runtime Gateを緩める。
+- Gate Recovery material surfaceをnormal rebuild候補として流用する。
+- composer disabled / source unavailable / phase_not_completeを通常観測rebuildで補う。
+- safety / emergency / infra failureを通常観測としてpassed化する。
+- raw input / original candidate body / candidate body / comment_text bodyをmetaやProductQuality eventへ入れる。
+- 固定完成文やcase専用fixture分岐でnormal rebuildを通す。
 ```

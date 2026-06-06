@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-05"
+revision_date: "2026-06-06"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(176).zip"
-  Cocolon: "Cocolon_13(5).zip"
-  mashos-api: "mashos-api_13(8).zip"
+  premise: "Cocolon_前提資料(178).zip"
+  Cocolon: "Cocolon_10(13).zip"
+  mashos-api: "mashos-api_10(25).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_13(5).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。P10でRN contract regressionを追加。 |
-| `mashos-api_13(8).zip` | 812 | EmlisAI Phase20、Product Read Feel / Structure Insight、User Label Connection Observation v1、Product Quality Measurement Phase0-8に加え、Gate Recovery Public Surface Leak Repair P0-P12をbackend internal-onlyで反映。 |
-| total | 1029 | Gate Recovery public surface leak repair P0-P12前提資料差分更新後coverage対象 |
+| `Cocolon_10(13).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。`npm run test:rn-screens` は `36 passed`。 |
+| `mashos-api_10(25).zip` | 818 | Gate Recovery public surface leak repair P0-P12を維持し、通常・高情報量入力のsurface failure後に `normal_observation_rebuild_candidate` を一回だけ試すbackend internal-only経路を反映。 |
+| total | 1035 | Normal Observation Public Recovery P0-P9前提資料差分更新後coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-04以前の差分追記、Phase18 Product Quality Stabilization、Phase19撤回方針、Phase20表示信頼性補強、Product Quality Measurement Phase0-8は履歴として残し、2026-06-05時点の最新正本は末尾の `2026-06-05 差分追記: EmlisAI Gate Recovery Public Surface Leak Repair P0-P12 latest snapshot diff` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-05以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12は履歴として残し、2026-06-06時点の最新正本は末尾の `2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery P0-P9 latest snapshot diff` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -3970,3 +3970,74 @@ _build_recovery_comment_text() 由来の固定骨格文
 ## 01 / 02 full inventory本文の扱い
 
 今回の差分は、P0〜P12で増えたGate Recovery public boundary / candidate builder / ProductQuality surface_origin / RN contract / regression fixture / validation planの読み方を、必要箇所へ差分追記する更新である。01 / 02系のfull inventory本文は全面再生成しない。
+
+
+# 2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery P0-P9 latest snapshot diff
+
+比較対象は、前提資料 `Cocolon_前提資料(178).zip` と最新実ファイル `Cocolon_10(13).zip` / `mashos-api_10(25).zip` です。Cocolon側source countは `217` のまま、mashos-api側source countは前提資料上の直前基準 `812 -> 818`、合計 `1029 -> 1035` を最新coverage対象として読む。
+
+今回の差分は、情報量がある通常入力で EmlisAI 候補が生成済みなのに `surface_grammar` / `relation_skeleton` / `visible_surface` 系で落ちた場合、`comment_text` 空で終わらせず、Gateを緩めず、公開用の `normal_observation_rebuild_candidate` を一回だけ作って既存Gateへ再投入するbackend内部補強である。
+
+## 追加ファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_p8.py` | P0赤テストからP8回帰へ更新された通常観測rebuild lineage test。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p3_plan.py` | recovery plan / target selection / reason family固定test。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_builder_p4.py` | normal observation rebuild builderのeligibility、body-free meta、防御条件test。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_loop_p5.py` | Gate Recovery loopでnormal rebuild candidateが既存Gateを通ることを固定するtest。 |
+| `mashos-api/ai/tests/test_emlis_ai_reply_service_normal_observation_rebuild_p6.py` | reply_service post-final経路でactual adopted candidate sourceを保持するtest。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_quality_normal_observation_rebuild_p7.py` | ProductQuality / public feedback diagnosticsでnormal rebuildをbody-freeに扱うtest。 |
+
+## 変更された主な既存owner
+
+| file | 差分の読み方 |
+|---|---|
+| `emlis_ai_gate_recovery_public_constants.py` | `normal_observation_rebuild_candidate` source kindとmissing blockerをallowed public candidate sourceとして追加。 |
+| `emlis_ai_gate_recovery_public_candidate_builder.py` | surface failure familyを判定し、通常観測rebuild candidateを生成・選択する中心owner。Gate Recovery material surfaceは流用しない。 |
+| `emlis_ai_gate_recovery_loop.py` | normal rebuild candidateをlow-information recoveryと分け、Reader / Grounding / Template / Runtime / Visible / Display Gateへ通す。 |
+| `emlis_ai_reply_service.py` | pre / post-final採用候補の出自summaryをbody-freeに持ち、diagnostic material surfaceとの混同を避ける。 |
+| `emlis_ai_display_gate.py` | rerender attempt系metaを正規化結果へ通す最小変更。Gate判定は緩めない。 |
+| `emlis_ai_product_quality_measurement_event.py` | surface originとしてnormal rebuildをunknown扱いにせず、attempted / appliedをbody-free eventへ反映。 |
+| `emlis_ai_product_quality_validation_plan.py` | P12 allowed public candidate sourceにnormal rebuildを追加。 |
+| `emlis_ai_public_feedback_meta.py` | public diagnostic summaryにnormal rebuildのattempted / applied / source kindを本文なしで出す。 |
+| `tests/fixtures/emlis_ai_real_device_gate_recovery_regression_cases_p11.py` / `test_emlis_ai_real_device_gate_recovery_regression_p11.py` | Gate Recovery material surface leakはblockedのまま、normal rebuildはpublic candidate lineageとして扱う回帰を追加。 |
+
+## 最新flowでの読み方
+
+```text
+/emotion/submit save path
+  -> render_emlis_ai_reply()
+  -> original composer candidate generated / ai_generated
+  -> Runtime / Visible / Display Gate failure
+  -> failure family = surface_grammar / relation_skeleton / visible_surface / runtime_surface
+  -> Gate Recovery public candidate builder
+  -> normal_observation_rebuild_candidate
+  -> existing Reader / Grounding / Template / Runtime / Visible / Display Gate
+  -> passed + comment_text の場合だけ input_feedback としてRNへ届く
+```
+
+## 維持されたcontract
+
+```text
+- RN production UIは変更しない。
+- RN表示タイトルは `Emlisの観測` のまま。
+- RN表示条件は `input_feedback.emlis_ai.observation_status == passed` かつ `input_feedback.comment_text` 非空のまま。
+- API route / request key / response key / DB write pathは変更しない。
+- Display / Runtime / Visible / Grounding / Template / Safety Gateを緩めない。
+- Gate Recovery material surfaceはpublic本文にしない。
+- composer disabled / source unavailable / safety / infra failureを通常観測rebuildで偽装しない。
+- raw input / original candidate body / candidate body / comment_text bodyをpublic metaやProductQuality eventへ入れない。
+- schema実ファイル化は行っていない。
+```
+
+## ローカル検証
+
+最新実ファイルに対して、normal observation rebuild主要関連backend回帰を確認した。
+
+```text
+backend normal observation rebuild主要関連: 56 passed
+RN contract: 36 passed
+```
+
+P9はローカル検証工程であり、今回の最新実ファイルzip内に追加のproduction code変更はない。

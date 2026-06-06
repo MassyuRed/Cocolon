@@ -1,26 +1,28 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-05"
+revision_date: "2026-06-06"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(176).zip"
-  Cocolon: "Cocolon_13(5).zip"
-  mashos-api: "mashos-api_13(8).zip"
+  premise: "Cocolon_前提資料(178).zip"
+  Cocolon: "Cocolon_10(13).zip"
+  mashos-api: "mashos-api_10(25).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 812
-  total: 1029
+  mashos-api: 818
+  total: 1035
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1029
+  included_files_total: 1035
   included_files_cocolon: 217
-  included_files_mashos_api: 812
+  included_files_mashos_api: 818
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
+  normal_observation_public_recovery_p0_9_reflected: true
+  normal_observation_public_recovery_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -1480,4 +1482,29 @@ P0〜P12により追加された国家システム上の境界:
 - 低情報・限定groundingは、Gate Recoveryの固定骨格文ではなく `low_information_observation_composer` へ回す。
 - 元Composer候補がある場合は、bounded repaired original candidateとして再接続する。
 - ProductQualityは `surface_origin` を見て、表示到達sourceがGate Recovery material surfaceならrelease blocker扱いにする。
+- RNは引き続きbackendの `passed + comment_text` だけを表示契約にし、source lineageを表示条件に使わない。
+
+
+# 2026-06-06 差分追記: 国家システム上のEmlisAI Normal Observation Public Recovery P0-P9境界
+
+`Cocolon_10(13).zip` / `mashos-api_10(25).zip` では、国家システム上のInput保存・dispatch・DB write path・RN display contractは変更しないまま、保存直後 EmlisAI immediate reply の通常観測回復境界が補強されている。
+
+国家システム上の読み方は次で固定する。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> original composer candidate generated
+  -> Surface / Visible / Display Gate failure
+  -> normal_observation_rebuild_candidate
+  -> existing Gate再評価
+  -> passed + comment_text の場合だけ RN display
+```
+
+P0〜P9により追加された国家システム上の境界:
+
+- 通常・高情報量入力のcandidateが `surface_grammar` / `relation_skeleton` / `visible_surface` 系で落ちた場合だけnormal rebuildを試す。
+- original candidateが `ai_generated` で存在しない場合、normal rebuildを作らない。
+- low_information / limited_grounding は既存の低情報経路を維持する。
+- Gate Recovery material surfaceは引き続きdiagnostic-onlyで、public outputではない。
+- ProductQuality / public feedback metaは、normal rebuildのattempted / applied / source kindだけを本文なしで持つ。
 - RNは引き続きbackendの `passed + comment_text` だけを表示契約にし、source lineageを表示条件に使わない。

@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-05"
+revision_date: "2026-06-06"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3048,4 +3048,48 @@ ai/tests/test_emlis_ai_product_quality_validation_plan.py
 - public meta、QA material、validation materialにraw input / comment_text body / candidate bodyを保存する。
 - ProductQualityEventの `surface_origin` をRN public display conditionに使う。
 - validation planやrelease decisionを理由にpublic release flagを立てる。
+```
+
+
+# 2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery contract / validation boundary
+
+`mashos-api_10(25).zip` では、通常・高情報量入力のcandidateが表面品質で落ちた後に `normal_observation_rebuild_candidate` を試すcontract / guard / validation boundaryが追加されている。これはpublic API contract変更ではなく、既存contractを守ったまま、表面品質だけを理由に沈黙する状態を減らすための内部境界である。
+
+保持するcontract:
+
+| contract | 維持する内容 |
+|---|---|
+| API route | `POST /emotion/submit` を維持する。 |
+| response shape | `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` を維持する。 |
+| RN表示条件 | `observation_status == passed` かつ `comment_text` non-empty のまま。 |
+| RN title | `Emlisの観測` のまま。 |
+| DB | physical schema / write pathを変更しない。 |
+| Gate | Display / Runtime / Visible / Grounding / Template / Safety Gateを緩めない。 |
+
+追加されたcontract / guard:
+
+| 層 | ファイル | 何を守るか |
+|---|---|---|
+| Constants | `emlis_ai_gate_recovery_public_constants.py` | normal rebuild source kind / blockerをallowed public candidateとして定義する。 |
+| Candidate builder | `emlis_ai_gate_recovery_public_candidate_builder.py` | 通常surface failureだけをrebuild対象にし、diagnostic material surfaceや非AI生成候補を除外する。 |
+| Loop boundary | `emlis_ai_gate_recovery_loop.py` | normal rebuildを既存Gateへ通し、low-informationやGate Recovery material surfaceと混同しない。 |
+| Reply guard | `emlis_ai_reply_service.py` | post-final採用候補の出自をbody-freeに保持し、二重試行しない。 |
+| ProductQuality / public meta | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_public_feedback_meta.py` | attempted / applied / source kindだけを本文なしで記録する。 |
+| Regression | `test_emlis_ai_gate_recovery_normal_observation_rebuild_*.py`, `test_emlis_ai_reply_service_normal_observation_rebuild_p6.py`, `test_emlis_ai_product_quality_normal_observation_rebuild_p7.py` | normal rebuild lineageとGate Recovery material surface blockedを固定する。 |
+
+確認済みvalidation:
+
+```text
+backend normal observation rebuild主要関連: 56 passed
+RN contract: 36 passed
+```
+
+禁止:
+
+```text
+- `normal_observation_rebuild_candidate` を理由にGate判定を緩める。
+- Gate Recovery material surfaceをpublic本文として表示する。
+- raw input / original candidate body / candidate body / comment_text bodyをpublic metaへ入れる。
+- ProductQualityEventの `surface_origin` をRN public display conditionに使う。
+- validation greenを即release済みとして扱う。
 ```

@@ -1910,4 +1910,34 @@ warningは既存の Pydantic `root_validator` deprecation warningであり、本
 以上を、Phase20後のEmlisAI作業のcurrent stateとして固定する。
 
 
+## 18. 2026-06-06 実装反映: Normal Observation Public Recovery P0-P9 current state
+
+最新実ファイル `Cocolon_10(13).zip` / `mashos-api_10(25).zip` では、Phase20で固定した「Gate failureを沈黙で終わらせない」方針のうち、通常・高情報量入力が `surface_grammar` / `relation_skeleton` / `visible_surface` 系で落ちる場合の復旧先として、`normal_observation_rebuild_candidate` が実装済みである。
+
+### 18.1 実装済み補強の読み方
+
+| Phase | 実装後の扱い | 主な実ファイル |
+|---|---|---|
+| P0/P1 | 通常観測rebuildを赤テストとsource kind / blockerで固定した。 | `test_emlis_ai_gate_recovery_normal_observation_rebuild_p8.py`, `emlis_ai_gate_recovery_public_constants.py` |
+| P2/P3 | public boundaryとrecovery planでnormal rebuildをallowed public candidate lineageとして扱う土台を追加した。 | `test_emlis_ai_gate_recovery_public_boundary_decision.py`, `emlis_ai_gate_recovery_public_candidate_builder.py` |
+| P4 | 通常観測rebuild builderを実装し、AI生成済みoriginal candidateがある通常入力だけを対象にした。 | `emlis_ai_gate_recovery_public_candidate_builder.py` |
+| P5 | Gate Recovery loopへ接続し、既存Gateを通して採用する。 | `emlis_ai_gate_recovery_loop.py` |
+| P6 | reply_service post-final経路でactual adopted candidate sourceを保持する。 | `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py` |
+| P7/P8 | ProductQuality / public feedback diagnostics / real-device regressionでnormal rebuildをpublic candidate lineageとして固定する。 | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_public_feedback_meta.py`, `test_emlis_ai_product_quality_normal_observation_rebuild_p7.py` |
+| P9 | ローカル検証。実装変更なし。 | backend主要関連 `56 passed`、RN contract `36 passed` |
+
+### 18.2 この実装で守る是正方針
+
+```text
+- Gate failure後の通常入力を、empty comment_text で終わらせない縮退先を持つ。
+- ただし、Gate Recovery material surfaceをpublic本文にはしない。
+- Gateを緩めず、再構築候補も既存Gateを通す。
+- low_information / limited_grounding / self_denial / safety / infraを通常観測rebuildと混同しない。
+- A/C/D/F/E/G等の実機・fixture caseをruntime条件にしない。
+- public metaへraw input / original candidate body / comment_text bodyを出さない。
+```
+
+このため、P0〜P9はPhase20是正方針の置換ではなく、Phase20後に残っていた「情報量がある通常入力ほどSurface Gateで沈黙する」穴への追加補強として読む。
+
+
 以上。

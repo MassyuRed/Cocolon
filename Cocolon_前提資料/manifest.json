@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-05",
+  "revision_date": "2026-06-06",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 812,
-    "total": 1029
+    "mashos-api": 818,
+    "total": 1035
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 1029,
-    "national_system_body_includes": 1029,
+    "overall_structure_body_includes": 1035,
+    "national_system_body_includes": 1035,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1029件、国家システム判断対象のcurrent全ファイル1029件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のGate Recovery public surface leak repair P0-P12は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1029,
-    "overall_structure_body_includes_current_snapshot_files": 1029,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1029,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1035件、国家システム判断対象のcurrent全ファイル1035件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のNormal Observation Public Recovery P0-P9は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1035,
+    "overall_structure_body_includes_current_snapshot_files": 1035,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1035,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -844,7 +844,9 @@
       "mashos_api_files": 812,
       "total_files": 1029,
       "doc_role": "Gate Recovery public surface leak repair P0-P12反映後の作業用地図。01/02 full inventory本文は全面再生成せず、必要資料へ差分追記する。"
-    }
+    },
+    "normal_observation_public_recovery_p0_9_reflected": true,
+    "normal_observation_public_recovery_full_01_02_regeneration": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -6280,5 +6282,134 @@
     "row_count_including_header": 1073,
     "sha256": "98d8952844a3fb3a1e28282e7a60b45e882638d95a25dd55beceee48473c3694",
     "role": "latest local zip inventory for 2026-06-05 premise diff update; not a task list."
+  },
+  "local_file_inventory_20260606": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_20260606.csv",
+    "covers": [
+      "Cocolon_前提資料(178).zip",
+      "Cocolon_10(13).zip",
+      "mashos-api_10(25).zip"
+    ],
+    "row_count_including_header": 1079,
+    "sha256": "0470e07aff5197281c45274738de1df4e5582651475715e69657a8eacc590f88",
+    "role": "latest local zip inventory for 2026-06-06 normal observation public recovery premise diff update; not a task list."
+  },
+  "local_file_inventory_diff_20260606": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260606.csv",
+    "compares": [
+      "Cocolon_13(5).zip -> Cocolon_10(13).zip",
+      "mashos-api_13(8).zip -> mashos-api_10(25).zip"
+    ],
+    "change_summary": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 6,
+        "changed": 15,
+        "removed": 0
+      }
+    },
+    "sha256": "9a20e0b4b66d11267a26ed487ad4b383a2733ac628dab0fcbb4166ba2fc8b794"
+  },
+  "source_snapshot_2026_06_06_normal_observation_public_recovery_p0_9": {
+    "date": "2026-06-06",
+    "premise": "Cocolon_前提資料(178).zip",
+    "Cocolon": "Cocolon_10(13).zip",
+    "mashos-api": "mashos-api_10(25).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 818,
+      "total": 1035
+    },
+    "sha256": {
+      "Cocolon_前提資料(178).zip": "ca43d2ab6099c59760f44d836ecc65cbb71865626fbd720e9dc8c4d0412d8ac2",
+      "Cocolon_10(13).zip": "b60ee6404c727ea09d333f2b3c005c07cc77174363ecce13d5d5402628e5c4bc",
+      "mashos-api_10(25).zip": "1e743a4ed865df9b0c0a5407514ff24c09a1062cc87c81aaa9da5543906c9c3a"
+    },
+    "scope": "EmlisAI Normal Observation Public Recovery P0-P9. Backend internal-only normal_observation_rebuild_candidate path after surface_grammar / relation_skeleton / visible_surface gate failure.",
+    "public_contract_changed": false,
+    "rn_production_ui_changed": false,
+    "db_schema_changed": false,
+    "api_route_changed": false,
+    "schema_file_materialized": false,
+    "new_premise_files": [
+      "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "cocolon_local_file_inventory_20260606.csv",
+      "cocolon_local_file_inventory_diff_20260606.csv"
+    ],
+    "added_source_files": [
+      "mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_p8.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_recovery_public_candidate_builder_p3_plan.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_builder_p4.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_loop_p5.py",
+      "mashos-api/ai/tests/test_emlis_ai_reply_service_normal_observation_rebuild_p6.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_quality_normal_observation_rebuild_p7.py"
+    ],
+    "primary_changed_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_constants.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/tests/fixtures/emlis_ai_real_device_gate_recovery_regression_cases_p11.py",
+      "mashos-api/ai/tests/test_emlis_ai_real_device_gate_recovery_regression_p11.py"
+    ],
+    "local_validation": {
+      "backend_normal_observation_rebuild_related": "56 passed",
+      "rn_screen_contracts": "36 passed"
+    }
+  },
+  "emlis_normal_observation_public_recovery_policy_2026_06_06": {
+    "schema_version": "cocolon.emlis.normal_observation_public_recovery.p0_9.2026-06-06",
+    "summary": "normal_observation_rebuild_candidate path for generated normal/high-information Emlis candidates blocked by surface_grammar, relation_skeleton, visible_surface, or runtime_surface failure families.",
+    "implemented_phases": [
+      "P0 red regression",
+      "P1 constants",
+      "P2 public boundary test",
+      "P3 builder meta / recovery plan",
+      "P4 normal observation rebuild builder",
+      "P5 Gate Recovery loop connection",
+      "P6 reply_service post-final path",
+      "P7 product quality / diagnostics",
+      "P8 regression update",
+      "P9 local validation"
+    ],
+    "candidate_source_kind": "normal_observation_rebuild_candidate",
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "visible_body": "input_feedback.comment_text",
+    "gate_relaxed": false,
+    "gate_recovery_material_surface_public_allowed": false,
+    "body_free_meta_required": true,
+    "normal_rebuild_attempt_limit": 1,
+    "eligible_failure_families": [
+      "surface_grammar",
+      "relation_skeleton",
+      "visible_surface",
+      "runtime_surface",
+      "koto_splice"
+    ],
+    "non_repairable_families": [
+      "safety",
+      "source_unavailable",
+      "composer_disabled",
+      "phase_not_complete",
+      "grounding_unsupported",
+      "reader_failure",
+      "template_echo_major",
+      "public_boundary_blocked"
+    ],
+    "forbidden_public_payloads": [
+      "raw input",
+      "original candidate body",
+      "candidate body",
+      "comment_text body"
+    ]
   }
 }

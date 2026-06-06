@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-06-05"
+revision_date: "2026-06-06"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -2127,4 +2127,48 @@ Input / Save / Dispatch上の重要点:
 - RN表示条件をGate Recovery metaやsurface_originへ寄せる。
 - Gate Recovery material surfaceを「仮表示」や「安全fallback文」としてpublicに出す。
 - F/E/G実機fixtureに合わせた保存route / dispatch branch /専用surfaceを追加する。
+```
+
+
+# 2026-06-06 差分追記: `/emotion/submit` immediate reply normal observation rebuild接続
+
+`mashos-api_10(25).zip` では、`/emotion/submit` 保存後のEmlisAI immediate reply flowに、通常・高情報量入力向けの `normal_observation_rebuild_candidate` が接続されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+保存後flowでの読み方:
+
+```text
+/emotion/submit save path
+↓
+render_emlis_ai_reply
+↓
+original composer candidate generated / ai_generated
+↓
+surface_grammar / relation_skeleton / visible_surface failure
+↓
+Gate Recovery public candidate builder
+↓
+normal_observation_rebuild_candidate
+↓
+Runtime / Visible / Display Gate再評価
+↓
+passed + comment_text の場合だけ public input_feedback に含める
+```
+
+接続条件:
+
+```text
+- original_composer_candidate が存在する。
+- original source が ai_generated である。
+- low_information / limited_grounding ではない。
+- safety / emergency / infra / source unavailable / composer disabled ではない。
+- Gate Recovery material surface lineageではない。
+```
+
+禁止:
+
+```text
+- input_feedback.comment_text が空でもRNにタイトルだけ出す。
+- non-passedをRNで表示する。
+- Gate Recovery material surfaceを仮表示文として返す。
+- composer disabledやsource unavailableをnormal rebuildで補う。
 ```

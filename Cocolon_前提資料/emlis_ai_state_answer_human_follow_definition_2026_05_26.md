@@ -1794,3 +1794,36 @@ Phase1〜11では、本資料で定義した状態回答・人間的フォロー
 ### 19.3 作業時の読み替え
 
 `product_readfeel_current_output_inventory`、`product_readfeel_rubric`、`product_readfeel_scorecard`、`mirror_only_surface_detector`、`structure_insight_candidate`、`structure_insight_gate`、`structure_insight_surface`、`product_readfeel_long_run_product_gate` は、状態回答・人間的フォローを商品読感と構造気づき候補として評価するための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+
+
+---
+
+## 20. 2026-06-06 追補: Normal Observation Public Recovery P0-P9 実装反映
+
+P0〜P9では、本資料で定義した状態回答・人間的フォローの思想を、通常・高情報量入力のsurface failure後にも守るため、`normal_observation_rebuild_candidate` がbackend内部へ追加された。これは状態回答思想を変更するものではなく、入力材料が十分あるにもかかわらず表面文法・関係骨格・visible surface品質だけを理由に沈黙する状態を避けるための補強である。
+
+### 20.1 追加された内部境界
+
+| 境界 | 読み方 |
+|---|---|
+| normal_observation_rebuild_candidate | AI生成済み通常候補が表面品質で落ちた場合にだけ、公開用の短い状態回答 + 人間的フォローへ再表面化するcandidate source。 |
+| normal rebuild eligibility | original candidateがai_generatedで存在し、low_information / limited_grounding / safety / infra / source unavailableでない時だけ試す。 |
+| surface plan / precheck | relation skeleton marker、Gate Recovery material fragment、診断・原因・人格・処方claimを避け、既存Gate前に明白な破綻を落とす。 |
+| existing Gate再評価 | rebuild候補もRuntime / Visible / Display Gateを通る。Gate緩和ではない。 |
+| body-free diagnostics | attempted / applied / source kindだけをmetaへ出し、raw input / candidate body / comment_text bodyを保存しない。 |
+
+### 20.2 この追補で変えないこと
+
+```text
+- 状態回答と人間的フォローの基本思想は変えない。
+- `input_feedback.comment_text` が唯一のpublic visible bodyである。
+- `Emlisの観測` のRN表示タイトルと表示条件は変えない。
+- Gate Recovery material surfaceをpublic本文にしない。
+- Surface / Runtime / Visible / Display / Grounding / Template / Safety Gateを緩めない。
+- composer disabled / safety / infraを通常観測へ偽装しない。
+- 完成返答テンプレやcase_id固定文をruntimeへ追加しない。
+```
+
+### 20.3 作業時の読み替え
+
+`normal_observation_rebuild_candidate`、`normal_observation_rebuild_attempted`、`normal_observation_rebuild_applied`、`surface_origin_normal_observation_rebuild_*` は、状態回答・人間的フォローをpublic表示へ安全に戻すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
