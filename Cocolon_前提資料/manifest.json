@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 818,
-    "total": 1035
+    "mashos-api": 834,
+    "total": 1051
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 1035,
-    "national_system_body_includes": 1035,
+    "overall_structure_body_includes": 1051,
+    "national_system_body_includes": 1051,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1035件、国家システム判断対象のcurrent全ファイル1035件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のNormal Observation Public Recovery P0-P9は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1035,
-    "overall_structure_body_includes_current_snapshot_files": 1035,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1035,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1051件、国家システム判断対象のcurrent全ファイル1051件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPublic Observation Recovery P0-P10は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1051,
+    "overall_structure_body_includes_current_snapshot_files": 1051,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1051,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -846,7 +846,9 @@
       "doc_role": "Gate Recovery public surface leak repair P0-P12反映後の作業用地図。01/02 full inventory本文は全面再生成せず、必要資料へ差分追記する。"
     },
     "normal_observation_public_recovery_p0_9_reflected": true,
-    "normal_observation_public_recovery_full_01_02_regeneration": false
+    "normal_observation_public_recovery_full_01_02_regeneration": false,
+    "public_observation_recovery_p0_10_reflected": true,
+    "public_observation_recovery_full_01_02_regeneration": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -6286,19 +6288,19 @@
   "local_file_inventory_20260606": {
     "path": "Cocolon_前提資料/cocolon_local_file_inventory_20260606.csv",
     "covers": [
-      "Cocolon_前提資料(178).zip",
-      "Cocolon_10(13).zip",
-      "mashos-api_10(25).zip"
+      "Cocolon_前提資料(180).zip",
+      "Cocolon_11(8).zip",
+      "mashos-api_11(17).zip"
     ],
-    "row_count_including_header": 1079,
-    "sha256": "0470e07aff5197281c45274738de1df4e5582651475715e69657a8eacc590f88",
-    "role": "latest local zip inventory for 2026-06-06 normal observation public recovery premise diff update; not a task list."
+    "row_count_including_header": 1206,
+    "sha256": "3e780e5c15c0df64c59e71cc98c5f16e9760a73329271bffb1a52bc3fd38f140",
+    "role": "latest local zip inventory for 2026-06-06 public observation recovery P0-P10 premise diff update; not a task list."
   },
   "local_file_inventory_diff_20260606": {
     "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260606.csv",
     "compares": [
-      "Cocolon_13(5).zip -> Cocolon_10(13).zip",
-      "mashos-api_13(8).zip -> mashos-api_10(25).zip"
+      "Cocolon(210).zip -> Cocolon_11(8).zip",
+      "mashos-api(123).zip -> mashos-api_11(17).zip"
     ],
     "change_summary": {
       "Cocolon": {
@@ -6307,12 +6309,12 @@
         "removed": 0
       },
       "mashos-api": {
-        "added": 6,
-        "changed": 15,
+        "added": 16,
+        "changed": 11,
         "removed": 0
       }
     },
-    "sha256": "9a20e0b4b66d11267a26ed487ad4b383a2733ac628dab0fcbb4166ba2fc8b794"
+    "sha256": "a7ef132706711c56962c65e5dba8186af017af6808139f6739100aeb02d7500e"
   },
   "source_snapshot_2026_06_06_normal_observation_public_recovery_p0_9": {
     "date": "2026-06-06",
@@ -6404,6 +6406,121 @@
       "reader_failure",
       "template_echo_major",
       "public_boundary_blocked"
+    ],
+    "forbidden_public_payloads": [
+      "raw input",
+      "original candidate body",
+      "candidate body",
+      "comment_text body"
+    ]
+  },
+  "source_snapshot_2026_06_06_public_observation_recovery_p0_10": {
+    "date": "2026-06-06",
+    "premise": "Cocolon_前提資料(180).zip",
+    "Cocolon": "Cocolon_11(8).zip",
+    "mashos-api": "mashos-api_11(17).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 834,
+      "total": 1051
+    },
+    "sha256": {
+      "Cocolon_前提資料(180).zip": "dc050cae5f58d0cbb22156a888a09b0230aa6f3880caf5186ad01600eb3db1f9",
+      "Cocolon_11(8).zip": "6e4aa76bdde6b47914c5a1fb9a2dbe6ff45a65d569eeec71355d78016d536181",
+      "mashos-api_11(17).zip": "58ba51323694d73a2f778934d35df43c1ca0d7e002a44c4a011e930f920a3692"
+    },
+    "scope": "EmlisAI Public Observation Recovery P0-P10. Separates public_reached / rn_visible / product_surface_valid, adds surface requirement, complete initial surface recomposition, labelled two-stage recomposition, public_surface_lineage, and bounded diagnostic traversal.",
+    "public_contract_changed": false,
+    "rn_production_ui_changed": false,
+    "db_schema_changed": false,
+    "api_route_changed": false,
+    "schema_file_materialized": false,
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "emlisai_local_review_evidence_20260605.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+      "manifest.json",
+      "cocolon_local_file_inventory_20260606.csv",
+      "cocolon_local_file_inventory_diff_20260606.csv"
+    ],
+    "added_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_availability.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_observation_recovery_status.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_observation_recovery_acceptance_p0.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_surface_requirement_p1.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_availability_p4.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_p5.py",
+      "mashos-api/ai/tests/test_emlis_ai_labelled_two_stage_surface_recomposition_p6.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_surface_validation_p3.py",
+      "mashos-api/ai/tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_meta_product_quality_lineage_p8.py"
+    ],
+    "primary_changed_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_constants.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/tests/helpers/emlis_ai_public_observation_recovery_p0.py",
+      "mashos-api/ai/tests/helpers/emlis_ai_phase19_public_feedback_matrix.py",
+      "mashos-api/ai/tests/test_emotion_submit_phase19_real_device_abcd_public_feedback_e2e.py"
+    ],
+    "local_validation_record": {
+      "p0_p8_major": "36 passed, 1 warning",
+      "phase19_abcd": "5 passed, 1 warning",
+      "two_stage_reception": "6 passed, 1 warning",
+      "two_stage_product_visible": "20 passed",
+      "rn_screen_contracts": "36 passed",
+      "note": "P10 production logic unchanged; bounded diagnostic traversal only."
+    }
+  },
+  "emlis_public_observation_recovery_policy_2026_06_06": {
+    "schema_version": "cocolon.emlis.public_observation_recovery.p0_10.2026-06-06",
+    "summary": "Separates public feedback inclusion, RN visibility, and product surface validity; recovers C source_unavailable through complete_initial_surface_recomposition and D/two_stage_required through labelled_two_stage_surface_recomposition without changing RN/API/DB contracts.",
+    "implemented_phases": [
+      "P0 red/status naming",
+      "P1 surface requirement decision",
+      "P2 normal rebuild two-stage boundary",
+      "P3 product surface validation",
+      "P4 complete initial surface availability",
+      "P5 complete initial surface recomposition",
+      "P6 labelled two-stage surface recomposition",
+      "P7 public feedback inclusion summary",
+      "P8 public meta / ProductQuality lineage",
+      "P9 Acceptance E2E green",
+      "P10 regression full check / bounded diagnostic traversal"
+    ],
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "visible_body": "input_feedback.comment_text",
+    "gate_relaxed": false,
+    "gate_recovery_material_surface_public_allowed": false,
+    "source_unavailable_normal_rebuild_allowed": false,
+    "two_stage_required_plain_rebuild_allowed": false,
+    "body_free_meta_required": true,
+    "candidate_source_kinds": [
+      "normal_observation_rebuild_candidate",
+      "complete_initial_surface_recomposition_candidate",
+      "labelled_two_stage_surface_recomposition_candidate"
     ],
     "forbidden_public_payloads": [
       "raw input",

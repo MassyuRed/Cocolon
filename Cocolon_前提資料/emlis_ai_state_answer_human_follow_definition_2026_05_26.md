@@ -1827,3 +1827,35 @@ P0〜P9では、本資料で定義した状態回答・人間的フォローの�
 ### 20.3 作業時の読み替え
 
 `normal_observation_rebuild_candidate`、`normal_observation_rebuild_attempted`、`normal_observation_rebuild_applied`、`surface_origin_normal_observation_rebuild_*` は、状態回答・人間的フォローをpublic表示へ安全に戻すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+
+
+## 21. 2026-06-06 追補: Public Observation Recovery P0-P10 実装反映
+
+P0〜P10では、本資料で定義した状態回答・人間的フォローの思想を、public feedback不達と二段本文shape崩れの両方に対して守るため、Public Observation Recoveryがbackend内部へ追加された。
+
+### 21.1 追加された内部境界
+
+| 境界 | 読み方 |
+|---|---|
+| public surface requirement | 入力familyがplain状態回答でよいのか、二段本文が必要なのか、低情報観測か、安全/infraで閉じるのかを本文なしで決める。 |
+| product surface validation | RNで表示できることと、状態回答・人間的フォローとして成立していることを分ける。 |
+| complete initial surface recomposition | 元候補がないC系source unavailableをnormal rebuildへ偽装せず、material sufficient / safe の場合だけ状態回答candidateへ戻す。 |
+| labelled two-stage recomposition | two_stage_requiredでは「見えたこと：」と「Emlisから：」の二段shapeを守る。 |
+| public_surface_lineage | normal rebuild / complete initial recomposition / labelled two-stage recompositionをbody-freeに区別する。 |
+
+### 21.2 この追補で変えないこと
+
+```text
+- 状態回答と人間的フォローの基本思想は変えない。
+- `input_feedback.comment_text` が唯一のpublic visible bodyである。
+- `Emlisの観測` のRN表示タイトルと表示条件は変えない。
+- Gate Recovery material surfaceをpublic本文にしない。
+- Surface / Runtime / Visible / Display / Grounding / Template / Safety Gateを緩めない。
+- source unavailableをnormal observation rebuildへ広げない。
+- two_stage_requiredをplain surfaceで成功扱いしない。
+- 完成返答テンプレやcase_id固定文をruntimeへ追加しない。
+```
+
+### 21.3 作業時の読み替え
+
+`complete_initial_surface_recomposition_candidate`、`labelled_two_stage_surface_recomposition_candidate`、`product_surface_valid`、`public_surface_lineage` は、状態回答・人間的フォローをCocolonの商品surfaceとして守るための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。

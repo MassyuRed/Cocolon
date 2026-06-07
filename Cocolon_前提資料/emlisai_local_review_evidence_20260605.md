@@ -235,3 +235,28 @@ RN contract: npm run test:rn-screens -> 36 passed
 ```
 
 補足: `mashos-api_10(25).zip` にはP9 validation report docは含まれていない。P9はコード差分なしのローカル検証として扱い、前提資料側の差分追記で検証結果だけを保持する。
+
+
+## 8. 2026-06-06追補: Public Observation Recovery P0-P10 後の最新証跡
+
+この追補以降は、1〜7章の旧診断・Normal Observation P0-P9証跡より、最新 `Cocolon_11(8).zip` / `mashos-api_11(17).zip` の読み方を優先する。
+
+最新zip確認:
+
+```text
+Cocolon_11(8).zip: files=217, sha256=6e4aa76bdde6b47914c5a1fb9a2dbe6ff45a65d569eeec71355d78016d536181
+mashos-api_11(17).zip: files=834, sha256=58ba51323694d73a2f778934d35df43c1ca0d7e002a44c4a011e930f920a3692
+```
+
+最新状態では、単なる `normal_observation_rebuild_candidate` だけではなく、次を分けて読む。
+
+```text
+public_reached / rn_visible / product_surface_valid
+complete_initial_surface_recomposition_candidate
+labelled_two_stage_surface_recomposition_candidate
+public_surface_lineage
+```
+
+C系の `complete_initial_surface_unavailable` はnormal rebuildへ広げず、safe / material sufficient / source unavailable系の場合だけcomplete initial surface recomposition laneで扱う。D / Phase17 / ProductVisible系のtwo_stage_required入力はplain surfaceで成功扱いせず、labelled two-stage recomposition laneで扱う。
+
+P10はproduction本文生成・Gate・RN表示契約の変更ではなく、Phase19 / P0 diagnostic helperが巨大body-free metaを再帰的に広げすぎないためのbounded traversal補正として読む。

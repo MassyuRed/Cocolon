@@ -7,22 +7,24 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(178).zip"
-  Cocolon: "Cocolon_10(13).zip"
-  mashos-api: "mashos-api_10(25).zip"
+  premise: "Cocolon_前提資料(180).zip"
+  Cocolon: "Cocolon_11(8).zip"
+  mashos-api: "mashos-api_11(17).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 818
-  total: 1035
+  mashos-api: 834
+  total: 1051
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1035
+  included_files_total: 1051
   included_files_cocolon: 217
-  included_files_mashos_api: 818
+  included_files_mashos_api: 834
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
   normal_observation_public_recovery_full_01_02_regeneration: false
+  public_observation_recovery_p0_10_reflected: true
+  public_observation_recovery_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -1508,3 +1510,32 @@ P0〜P9により追加された国家システム上の境界:
 - Gate Recovery material surfaceは引き続きdiagnostic-onlyで、public outputではない。
 - ProductQuality / public feedback metaは、normal rebuildのattempted / applied / source kindだけを本文なしで持つ。
 - RNは引き続きbackendの `passed + comment_text` だけを表示契約にし、source lineageを表示条件に使わない。
+
+
+# 2026-06-06 差分追記: 国家システム上のEmlisAI Public Observation Recovery P0-P10境界
+
+`Cocolon_11(8).zip` / `mashos-api_11(17).zip` では、国家システム上のInput保存・dispatch・DB write path・RN display contractは変更しないまま、保存直後 EmlisAI immediate reply のpublic observation recoveryが補強されている。
+
+P0〜P10により追加された国家システム上の境界:
+
+| 境界 | 国家システム上の意味 |
+|---|---|
+| public surface requirement | 保存直後の入力materialを、plainで返すのか、labelled two-stageで返すのか、低情報観測か、安全/infraで閉じるのかを本文なしで決める。 |
+| product surface validation | `input_feedback` が出ることと、商品surfaceとして成立していることを分ける。 |
+| complete initial surface availability | C系のようなcandidate生成前不達をsource unavailableとして診断し、normal rebuildに偽装しない。 |
+| complete initial surface recomposition | safe / material sufficient / source unavailable系だけを、別laneでpublic observation candidateへ戻す。 |
+| labelled two-stage recomposition | two_stage_requiredでは `見えたこと：` / `Emlisから：` の二段surface契約へ戻す。 |
+| public feedback inclusion summary | `public_reached` / `rn_visible` / `product_surface_valid` をinternal diagnosticとして記録する。 |
+| public_surface_lineage | normal rebuild、complete recomposition、labelled two-stage recompositionをbody-freeに区別する。 |
+
+変えないもの:
+
+```text
+POST /emotion/submit
+request key / response top-level key
+DB physical schema / write path
+input_feedback.comment_text
+input_feedback.emlis_ai.observation_status
+RN title: Emlisの観測
+RN condition: passed + comment_text non-empty
+```

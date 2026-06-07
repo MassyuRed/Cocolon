@@ -7,23 +7,26 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(178).zip"
-  Cocolon: "Cocolon_10(13).zip"
-  mashos-api: "mashos-api_10(25).zip"
+  premise: "Cocolon_前提資料(180).zip"
+  Cocolon: "Cocolon_11(8).zip"
+  mashos-api: "mashos-api_11(17).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 818
-  total: 1035
+  mashos-api: 834
+  total: 1051
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1035
-  included_in_overall_structure: 1035
-  included_in_national_system: 1035
+  total_files: 1051
+  included_in_overall_structure: 1051
+  included_in_national_system: 1051
   excluded_from_main_body: 0
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
   normal_observation_public_recovery_validation_recorded: true
+  public_observation_recovery_p0_10_reflected: true
+  public_observation_recovery_validation_recorded: true
+  public_observation_recovery_full_01_02_regeneration: false
   normal_observation_public_recovery_full_01_02_regeneration: false
   phase15_target_docs_reflect_two_stage_increment: true
   phase15_full_01_02_regeneration: false
@@ -122,29 +125,31 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_10(13).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。`npm run test:rn-screens` は `36 passed`。 |
-| `mashos-api_10(25).zip` | 818 | backend / API / worker / tests。Gate Recovery Public Surface Leak Repair P0〜P12を維持した上で、EmlisAI Normal Observation Public Recovery P0〜P8実装とP9ローカル検証を反映する。 |
-| total | 1035 | Normal Observation Public Recovery P0〜P9反映後の前提資料差分更新対象snapshot。 |
+| `Cocolon_11(8).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_11(17).zip` | 834 | backend / API / worker / tests。Gate Recovery Public Surface Leak Repair P0〜P12とNormal Observation Public Recoveryを維持した上で、EmlisAI Public Observation Recovery P0〜P10を反映する。 |
+| total | 1051 | Public Observation Recovery P0〜P10反映後の前提資料差分更新対象snapshot。 |
 
-`Cocolon_10(13).zip` / `mashos-api_10(25).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、通常・高情報量入力が `surface_grammar` / `relation_skeleton` / `visible_surface` 系で落ちた場合の公開用再表面化経路をbackend内部へ接続しています。
+`Cocolon_11(8).zip` / `mashos-api_11(17).zip` では、DB physical name、既存API route、既存request key、`input_feedback.comment_text`、RN表示タイトル `Emlisの観測`、RN表示条件を変えずに、safeな通常入力を沈黙で終わらせないためのpublic observation recoveryがbackend内部へ接続されています。
 
 最新のEmlisAI作業では、次を固定します。
 
 ```text
-normal_observation_rebuild_candidate は、Gate Recovery material surface ではない。
-通常候補が ai_generated として生成済みで、表面品質だけを理由に落ちた場合に、一回だけ公開用候補へ再構築する。
-再構築候補も Runtime / Visible / Display Gate を通る。
-passed + comment_text になった場合だけ RN の既存「Emlisの観測」契約へ届く。
+public_reached / rn_visible / product_surface_valid を分けて読む。
+source unavailable / complete_initial_surface_unavailable は normal rebuild で偽装せず、complete_initial_surface_recomposition_candidate laneで扱う。
+two_stage_required の経路では plain normal rebuild を最終passed扱いにせず、labelled_two_stage_surface_recomposition_candidate へ戻す。
+public meta / ProductQuality meta は body-free lineage として扱い、本文・raw input・candidate bodyを入れない。
+RNは passed + comment_text の既存「Emlisの観測」契約だけを見る。
 ```
 
 禁止する読み方:
 
 ```text
 RN側で non-passed / empty comment_text を表示する。
-Surface Gate / Display Gate を緩める。
+Surface Gate / Display Gate / Runtime Gate を緩める。
 Gate Recovery material surface を public fallback本文として出す。
-composer disabled / source unavailable / safety / infra failure を通常観測rebuildで偽装する。
-raw input / original candidate body / comment_text body をpublic metaやProductQuality eventへ入れる。
+source unavailable を normal_observation_rebuild_candidate で読めたふりにする。
+two_stage_required を plain surface で成功扱いする。
+raw input / original candidate body / candidate body / comment_text body をpublic metaやProductQuality eventへ入れる。
 ```
 
 # 2026-06-06 追補: EmlisAI Normal Observation Public Recovery P0-P9実装反映
@@ -175,6 +180,49 @@ input_feedback.emlis_ai.observation_status contract
 Display / Runtime / Visible / Grounding / Template / Safety Gate の判定
 Gate Recovery material surface の public boundary
 schema実ファイル化
+```
+
+
+# 2026-06-06 追補: EmlisAI Public Observation Recovery P0-P10実装反映
+
+最新実ファイル `Cocolon_11(8).zip` / `mashos-api_11(17).zip` を確認した。Cocolon RN側は前回実体と同一で、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。backend側では、Normal Observation Public Recovery P0-P9を土台に、C系の `complete_initial_surface_unavailable` とD/Phase17系の二段本文shape崩れを分けて扱う **Public Observation Recovery P0〜P10** が反映されている。
+
+今回の最新基準面は次として読む。
+
+| source | file count | 位置づけ |
+|---|---:|---|
+| `Cocolon_11(8).zip` | 217 | RNアプリ本体。`Emlisの観測` は引き続き `input_feedback.emlis_ai.observation_status == passed` かつ `input_feedback.comment_text` 非空の場合だけ表示する。 |
+| `mashos-api_11(17).zip` | 834 | backend / API / worker / tests。EmlisAI Public Observation Recovery P0〜P10を含む。 |
+| total | 1051 | Public Observation Recovery P0〜P10反映後の前提資料差分更新対象snapshot。 |
+
+P0〜P10は、EmlisAIを「とにかく表示する装置」へ戻す工程ではない。読み方は次で固定する。
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| P0 | `public_reached` / `rn_visible` / `product_surface_valid` を分け、C系表示不達とD系本文shape崩れをmachine-readableに固定する。 | `emlis_ai_public_observation_recovery_status.py`, `test_emlis_ai_public_observation_recovery_acceptance_p0.py`, `tests/helpers/emlis_ai_public_observation_recovery_p0.py` |
+| P1 | 候補採用前にsurface requirementを決める。`labelled_two_stage` / `plain_state_answer` / `low_information_observation` / `self_denial_safe_state_answer` / `safety_blocked` / `infrastructure_fail_closed` をbody-freeで扱う。 | `emlis_ai_public_surface_requirement.py`, `test_emlis_ai_public_surface_requirement_p1.py` |
+| P2 | `two_stage_required` ではplain normal rebuildを最終passed扱いにしない。`normal_observation_rebuild_blocked_two_stage_required` をblockerとして保持する。 | `emlis_ai_gate_recovery_public_candidate_builder.py`, `emlis_ai_gate_recovery_public_constants.py`, `test_emlis_ai_gate_recovery_normal_observation_rebuild_boundary_p2.py` |
+| P3 | RNで表示できることと商品surfaceとして成立することを分ける。`two_stage_required + plain surface` は `product_surface_valid=false` として検出する。 | `emlis_ai_product_surface_validation.py`, `test_emlis_ai_product_surface_validation_p3.py` |
+| P4 | `complete_initial_surface_unavailable` をsource unavailable系としてbody-free診断し、normal rebuildへ誤送しない。 | `emlis_ai_complete_initial_surface_availability.py`, `test_emlis_ai_complete_initial_surface_availability_p4.py` |
+| P5 | C系をnormal rebuildではなく `complete_initial_surface_recomposition_candidate` laneで戻す。material sufficient / safe / source unavailable系だけを対象にし、二段requiredではlabelled two-stageを生成する。 | `emlis_ai_complete_initial_surface_recomposition.py`, `emlis_ai_gate_recovery_loop.py`, `emlis_ai_reply_service.py`, `test_emlis_ai_complete_initial_surface_recomposition_p5.py` |
+| P6 | D / Phase17 / ProductVisibleの `two_stage_required` 入力を、plain surfaceやfailed originalではなく `labelled_two_stage_surface_recomposition_candidate` として再構成する。 | `emlis_ai_labelled_two_stage_surface_recomposition.py`, `test_emlis_ai_labelled_two_stage_surface_recomposition_p6.py` |
+| P7 | `/emotion/submit` 内部診断を `public_reached` / `rn_visible` / `product_surface_valid` の三段階summaryへ拡張する。public response top-level keyは増やさない。 | `emotion_submit_service.py`, `test_emotion_submit_public_feedback_inclusion_summary_p7.py` |
+| P8 | public meta / ProductQuality metaに `public_surface_lineage` とP5/P6 source kindをbody-freeで追加し、normal rebuild / complete recomposition / labelled two-stage recompositionを混同しない。 | `emlis_ai_public_feedback_meta.py`, `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_quality_validation_plan.py`, `test_emlis_ai_public_meta_product_quality_lineage_p8.py` |
+| P9 | Acceptance E2Eを緑化する。positive-change / self-understanding / effort-paceが二段surfaceへ届くようにSurfaceRealizer側のmode dispatch / relation expressionを補正する。 | `emlis_ai_complete_surface_realizer.py`, `test_emotion_submit_phase19_real_device_abcd_public_feedback_e2e.py`, `test_emotion_submit_two_stage_reception_e2e.py`, `test_emlis_ai_two_stage_product_visible_fixture_completion.py` |
+| P10 | production本文生成・Gate・RN表示契約は触らず、巨大化したbody-free metaをboundedに走査できるようにP0/Phase19 diagnostic helperを補正する。 | `tests/helpers/emlis_ai_public_observation_recovery_p0.py`, `tests/helpers/emlis_ai_phase19_public_feedback_matrix.py`, `test_emotion_submit_phase19_real_device_abcd_public_feedback_e2e.py` |
+
+この追補で固定する境界:
+
+```text
+- RN production UI、RN表示タイトル、RN表示条件、/emotion/submit route、DB write path、public response top-level keyは変更しない。
+- `input_feedback.comment_text` が唯一のpublic visible bodyである。
+- `input_feedback.emlis_ai.observation_status == passed` かつ `comment_text` non-empty の場合だけRNがEmlisの観測を表示する。
+- Gate Recovery material surface / diagnostic recovery surface はpublic本文にしない。
+- source unavailable / complete_initial_surface_unavailable をnormal_observation_rebuild_candidateで読めたふりにしない。
+- two_stage_required の経路ではplain normal rebuildを成功扱いしない。
+- C/D/Phase17/ProductVisible fixtureは回帰確認であり、runtime専用route・case専用surface・完成文テンプレではない。
+- public meta / ProductQuality meta / diagnostic summaryへraw input、original candidate body、candidate body、comment_text bodyを入れない。
+- P10のbounded diagnostic traversalはテスト診断の安定化であり、production EmlisAI本文生成やGateを変えるものではない。
 ```
 
 # 2026-06-03 追補: EmlisAI Product Read Feel v1 / Structure Insight v2 Phase1-11実装反映

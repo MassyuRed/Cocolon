@@ -2172,3 +2172,29 @@ passed + comment_text の場合だけ public input_feedback に含める
 - Gate Recovery material surfaceを仮表示文として返す。
 - composer disabledやsource unavailableをnormal rebuildで補う。
 ```
+
+
+# 2026-06-06 差分追記: Input Save直後 EmlisAI Public Observation Recovery P0-P10
+
+`mashos-api_11(17).zip` では、`/emotion/submit` 保存後のEmlisAI immediate reply flowに、P0〜P10のpublic observation recoveryが接続されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+Input Save後の読み方:
+
+```text
+safe通常入力
+  -> public surface requirementを決定
+  -> complete initial / normal / two-stage候補を区別
+  -> source unavailableならcomplete_initial_surface_recomposition_candidateへ
+  -> two_stage_requiredならlabelled_two_stage_surface_recomposition_candidateへ
+  -> 表面failureだけならnormal_observation_rebuild_candidateへ
+  -> 既存Gateを通過し、passed + comment_text の場合だけinput_feedbackへ入る
+```
+
+この差分でやってはいけないこと:
+
+```text
+- comment_textが空でもRN modalを開く。
+- source unavailableをnormal rebuildで読めたふりにする。
+- Gate Recovery material surfaceを本文にする。
+- 入力本文やcandidate本文をpublic metaへ入れる。
+```

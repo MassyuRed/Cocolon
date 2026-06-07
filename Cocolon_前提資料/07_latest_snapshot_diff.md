@@ -7,9 +7,9 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(178).zip"
-  Cocolon: "Cocolon_10(13).zip"
-  mashos-api: "mashos-api_10(25).zip"
+  premise: "Cocolon_前提資料(180).zip"
+  Cocolon: "Cocolon_11(8).zip"
+  mashos-api: "mashos-api_11(17).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,9 +19,9 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_10(13).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。`npm run test:rn-screens` は `36 passed`。 |
-| `mashos-api_10(25).zip` | 818 | Gate Recovery public surface leak repair P0-P12を維持し、通常・高情報量入力のsurface failure後に `normal_observation_rebuild_candidate` を一回だけ試すbackend internal-only経路を反映。 |
-| total | 1035 | Normal Observation Public Recovery P0-P9前提資料差分更新後coverage対象 |
+| `Cocolon_11(8).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_11(17).zip` | 834 | Gate Recovery public surface leak repair P0-P12とnormal observation rebuildを維持し、Public Observation Recovery P0〜P10を反映。 |
+| total | 1051 | Public Observation Recovery P0〜P10前提資料差分更新後coverage対象 |
 
 この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-05以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12は履歴として残し、2026-06-06時点の最新正本は末尾の `2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery P0-P9 latest snapshot diff` とこの冒頭summaryです。
 
@@ -4041,3 +4041,52 @@ RN contract: 36 passed
 ```
 
 P9はローカル検証工程であり、今回の最新実ファイルzip内に追加のproduction code変更はない。
+
+
+# 2026-06-06 差分追記: EmlisAI Public Observation Recovery P0-P10 snapshot diff
+
+今回の最新実ファイルは `Cocolon_11(8).zip` / `mashos-api_11(17).zip` として確認する。Cocolon側は作業開始時実体 `Cocolon(210).zip` から変更なし。mashos-api側は作業開始時実体 `mashos-api(123).zip` から、EmlisAI Public Observation Recovery P0〜P10として次の差分がある。
+
+| repo | added | changed | removed |
+|---|---:|---:|---:|
+| Cocolon | 0 | 0 | 0 |
+| mashos-api | 16 | 11 | 0 |
+
+主な追加ファイル:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_public_observation_recovery_status.py
+mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py
+mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_availability.py
+mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py
+mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py
+mashos-api/ai/tests/test_emlis_ai_public_observation_recovery_acceptance_p0.py
+mashos-api/ai/tests/test_emlis_ai_public_surface_requirement_p1.py
+mashos-api/ai/tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_boundary_p2.py
+mashos-api/ai/tests/test_emlis_ai_product_surface_validation_p3.py
+mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_availability_p4.py
+mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_p5.py
+mashos-api/ai/tests/test_emlis_ai_labelled_two_stage_surface_recomposition_p6.py
+mashos-api/ai/tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py
+mashos-api/ai/tests/test_emlis_ai_public_meta_product_quality_lineage_p8.py
+```
+
+主な変更ファイル:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_constants.py
+mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py
+mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py
+mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_quality_validation_plan.py
+mashos-api/ai/services/ai_inference/emlis_ai_complete_surface_realizer.py
+mashos-api/ai/services/ai_inference/emotion_submit_service.py
+mashos-api/ai/tests/helpers/emlis_ai_public_observation_recovery_p0.py
+mashos-api/ai/tests/helpers/emlis_ai_phase19_public_feedback_matrix.py
+mashos-api/ai/tests/test_emotion_submit_phase19_real_device_abcd_public_feedback_e2e.py
+```
+
+差分詳細は `cocolon_local_file_inventory_diff_20260606.csv` に保持する。今回の差分はbackend内部の回復lane / meta / test診断補正であり、RN production UI、API route、DB write path、public response top-level keyの変更ではない。

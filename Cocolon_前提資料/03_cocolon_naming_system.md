@@ -717,3 +717,38 @@ Phase15名称更新の結論: これらの名称は、Phase0-14で追加され�
 | `ProductQualityValidationPlanV1` | internal validation plan | 検証順、required validation、acceptance criteriaを固定する。 | テスト実行済み証明、CI artifactそのもの。 |
 
 作業時は、Phase0〜8系internal名を見つけても、`Emlisの観測`、`input_feedback.comment_text`、`input_feedback.emlis_ai.observation_status`、`/emotion/submit`、DB physical name、RN modal条件をrenameしない。
+
+
+# 2026-06-06 差分追記: EmlisAI Public Observation Recovery P0-P10 internal naming boundary
+
+`mashos-api_11(17).zip` では、EmlisAI public observation recovery用のinternal名が増えている。これらはvisible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+internal名として読むもの:
+
+```text
+public_reached
+rn_visible
+product_surface_valid
+public_surface_requirement
+surface_requirement_family
+labelled_two_stage
+plain_state_answer
+low_information_observation
+complete_initial_surface_availability_summary
+complete_initial_surface_recomposition_candidate
+labelled_two_stage_surface_recomposition_candidate
+public_feedback_inclusion_summary
+public_surface_lineage
+product_surface_validation_summary
+normal_observation_rebuild_blocked_two_stage_required
+product_surface_invalid_plain_used_for_two_stage_required
+```
+
+命名境界:
+
+```text
+- `Emlisの観測` のvisible名は変更しない。
+- `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` はpublic contract名として維持する。
+- recovery candidate source kindをRN表示分岐名やDB column名へ転用しない。
+- source kind / blocker code / diagnostic summaryは、body-free内部診断名として扱う。
+```

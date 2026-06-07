@@ -7,22 +7,24 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(178).zip"
-  Cocolon: "Cocolon_10(13).zip"
-  mashos-api: "mashos-api_10(25).zip"
+  premise: "Cocolon_前提資料(180).zip"
+  Cocolon: "Cocolon_11(8).zip"
+  mashos-api: "mashos-api_11(17).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 818
-  total: 1035
+  mashos-api: 834
+  total: 1051
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1035
+  included_files_total: 1051
   included_files_cocolon: 217
-  included_files_mashos_api: 818
+  included_files_mashos_api: 834
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
   normal_observation_public_recovery_full_01_02_regeneration: false
+  public_observation_recovery_p0_10_reflected: true
+  public_observation_recovery_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -2204,4 +2206,48 @@ Gate Recovery material surfaceを公開候補へ昇格する。
 composer disabledやsource unavailableを通常観測rebuildで埋める。
 safety / infra failureを通常観測として偽装する。
 raw input / original candidate body / comment_text bodyをmetaへ残す。
+```
+
+
+# 2026-06-06 差分追記: EmlisAI Public Observation Recovery P0-P10 overall structure
+
+最新実ファイル `Cocolon_11(8).zip` / `mashos-api_11(17).zip` では、Cocolon RN側のproduction surface変更はない。mashos-api側に、EmlisAIのpublic feedback不達と二段本文shape崩れを分離して回復するP0〜P10が追加・変更されている。
+
+全体構造上は、`/emotion/submit` 保存後の EmlisAI immediate reply runtime を次のように読む。
+
+```text
+Input save
+  -> render_emlis_ai_reply()
+  -> public surface requirement decision
+  -> composer / complete material / candidate generation
+  -> product surface validation
+  -> Gate Recovery public candidate builder
+     -> normal_observation_rebuild_candidate
+     -> complete_initial_surface_recomposition_candidate
+     -> labelled_two_stage_surface_recomposition_candidate
+     -> bounded repaired original candidate等
+  -> public feedback inclusion summary
+  -> public_surface_lineage / ProductQuality surface_origin
+  -> RNは passed + comment_text の既存契約だけを見る
+```
+
+| current owner | 役割 |
+|---|---|
+| `emlis_ai_public_observation_recovery_status.py` | `public_reached` / `rn_visible` / `product_surface_valid` と失敗名を固定する。 |
+| `emlis_ai_public_surface_requirement.py` | labelled two-stage / plain / low-information / safety / infra のsurface requirementをbody-freeで決める。 |
+| `emlis_ai_product_surface_validation.py` | RN表示到達と商品surface成立を分ける。 |
+| `emlis_ai_complete_initial_surface_availability.py` | `complete_initial_surface_unavailable` をsource availabilityとして診断し、normal rebuildへ誤送しない。 |
+| `emlis_ai_complete_initial_surface_recomposition.py` | C系source unavailableを固定文ではなくmaterial由来のpublic observation candidateへ戻す。 |
+| `emlis_ai_labelled_two_stage_surface_recomposition.py` | D/Phase17/ProductVisibleの二段required入力をlabelled two-stageへ戻す。 |
+| `emotion_submit_service.py` | public feedback inclusion summaryを三段階化する。 |
+| `emlis_ai_public_feedback_meta.py` / `emlis_ai_product_quality_measurement_event.py` | source lineageとProductQuality metaをbody-freeに整理する。 |
+
+禁止して読むこと:
+
+```text
+complete_initial_surface_unavailable を normal_observation_rebuild_candidate で拾う。
+two_stage_required の入力を plain normal rebuild で成功扱いする。
+public_reached / rn_visible を product_surface_valid と同一視する。
+RN側で表示条件や本文sourceを増やす。
+Gate Recovery material surface / diagnostic recovery surfaceをpublic本文へ出す。
 ```

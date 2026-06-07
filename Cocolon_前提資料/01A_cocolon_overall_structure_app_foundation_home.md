@@ -2924,3 +2924,19 @@ P0〜P12後のHome immediate replyでは、EmlisAIの表示可否は引き続き
 | RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RN production UIはsource lineageで分岐せず、`passed + commentText` の既存契約だけを守る。 |
 
 Home/Input側では、`inputFeedbackModel.js` や `InputFeedbackReplyModal.js` の表示条件を変更した差分ではない。本文品質と表示sourceの修正責任はbackend側のGate Recovery public boundary / candidate builder / ProductQuality lineageにある。
+
+
+# 2026-06-06 差分追記: Home / Input EmlisAI Public Observation Recovery P0-P10 current owner
+
+P0〜P10後のHome / Input immediate replyでは、EmlisAIの表示可否は引き続きbackendで決まり、RNは既存 `commentText` を受け取るだけである。今回の修正は、safe通常入力のpublic feedback不達と、two-stage required入力のplain surface誤成功を分けて回復するbackend内部境界であり、Home production UI、`/emotion/submit` route、public response top-level keyは変更しない。
+
+| 層 | latest owner | Home / Input上の意味 |
+|---|---|---|
+| Surface requirement | `emlis_ai_public_surface_requirement.py` | 入力がlabelled two-stage / plain / low-information / safety / infraのどれを要求するかを本文なしで決める。 |
+| Product surface validation | `emlis_ai_product_surface_validation.py` | `rn_visible` と `product_surface_valid` を分ける。 |
+| Complete initial recomposition | `emlis_ai_complete_initial_surface_recomposition.py` | C系source unavailableをnormal rebuildではない別laneで表示候補へ戻す。 |
+| Labelled two-stage recomposition | `emlis_ai_labelled_two_stage_surface_recomposition.py` | D/Phase17/ProductVisible系を二段本文へ戻す。 |
+| Public inclusion summary | `emotion_submit_service.py` | `public_reached` / `rn_visible` / `product_surface_valid` をinternal diagnosticとして持つ。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RNはsource lineageで分岐せず、`passed + commentText` の既存契約だけを守る。 |
+
+Home/Input側では、`inputFeedbackModel.js` や `InputFeedbackReplyModal.js` の表示条件を変更した差分ではない。本文品質と表示sourceの修正責任はbackend側のpublic observation recoveryにある。

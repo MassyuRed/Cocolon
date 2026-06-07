@@ -4633,3 +4633,52 @@ ai/tests/test_emlis_ai_product_quality_normal_observation_rebuild_p7.py
 ```
 
 禁止: backend支援系materialをpublic response key、DB保存形式、RN表示source、rollout configとして扱わない。
+
+
+# 2026-06-06 差分追記: Backend支援 EmlisAI Public Observation Recovery P0-P10
+
+`mashos-api_11(17).zip` では、EmlisAI backend support / test領域に Public Observation Recovery P0〜P10 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、保存直後EmlisAI reply runtimeの回復lane、product surface validation、public-safe meta、acceptance regressionを補強するbackend内部差分である。
+
+主なbackend owner:
+
+```text
+services/ai_inference/emlis_ai_public_observation_recovery_status.py
+services/ai_inference/emlis_ai_public_surface_requirement.py
+services/ai_inference/emlis_ai_product_surface_validation.py
+services/ai_inference/emlis_ai_complete_initial_surface_availability.py
+services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py
+services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py
+services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py
+services/ai_inference/emlis_ai_gate_recovery_loop.py
+services/ai_inference/emlis_ai_reply_service.py
+services/ai_inference/emotion_submit_service.py
+services/ai_inference/emlis_ai_public_feedback_meta.py
+services/ai_inference/emlis_ai_product_quality_measurement_event.py
+services/ai_inference/emlis_ai_product_quality_validation_plan.py
+```
+
+主なtest owner:
+
+```text
+tests/test_emlis_ai_public_observation_recovery_acceptance_p0.py
+tests/test_emlis_ai_public_surface_requirement_p1.py
+tests/test_emlis_ai_gate_recovery_normal_observation_rebuild_boundary_p2.py
+tests/test_emlis_ai_product_surface_validation_p3.py
+tests/test_emlis_ai_complete_initial_surface_availability_p4.py
+tests/test_emlis_ai_complete_initial_surface_recomposition_p5.py
+tests/test_emlis_ai_labelled_two_stage_surface_recomposition_p6.py
+tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py
+tests/test_emlis_ai_public_meta_product_quality_lineage_p8.py
+tests/test_emotion_submit_phase19_real_device_abcd_public_feedback_e2e.py
+tests/test_emotion_submit_two_stage_reception_e2e.py
+tests/test_emlis_ai_two_stage_product_visible_fixture_completion.py
+```
+
+Account / Subscription / DB支援領域から見る禁止事項:
+
+```text
+- ProductQuality / validation / public_surface_lineage をRN表示条件へ使わない。
+- `product_surface_valid` をpublic observation_status enumにしない。
+- `complete_initial_surface_recomposition_candidate` / `labelled_two_stage_surface_recomposition_candidate` をDB physical nameやAPI route名へ露出しない。
+- diagnostic metaのためにraw input / comment_text body / candidate bodyを保存しない。
+```

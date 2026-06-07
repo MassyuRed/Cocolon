@@ -3093,3 +3093,40 @@ RN contract: 36 passed
 - ProductQualityEventの `surface_origin` をRN public display conditionに使う。
 - validation greenを即release済みとして扱う。
 ```
+
+
+# 2026-06-06 差分追記: EmlisAI Public Observation Recovery contract / validation boundary
+
+`mashos-api_11(17).zip` では、public feedback不達と本文shape崩れを三段階で検出し、C系 / D系を別laneで回復するcontract / guard / validation boundaryが追加されている。これはpublic API contract変更ではなく、既存contractを守ったまま、safe通常入力を沈黙で終わらせず、二段required入力をplain surfaceで成功扱いしないための内部境界である。
+
+保持するcontract:
+
+| contract | 維持する内容 |
+|---|---|
+| API route | `POST /emotion/submit` を維持する。 |
+| response shape | `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` を維持する。 |
+| RN表示条件 | `observation_status == passed` かつ `comment_text` non-empty のまま。 |
+| RN title | `Emlisの観測` のまま。 |
+| DB | physical schema / write pathを変更しない。 |
+| Gate | Display / Runtime / Visible / Grounding / Template / Safety Gateを緩めない。 |
+
+追加されたcontract / guard:
+
+| 層 | ファイル | 何を守るか |
+|---|---|---|
+| Surface requirement | `emlis_ai_public_surface_requirement.py` | labelled two-stage / plain / low-information / safety / infraの要求surfaceをbody-freeに固定する。 |
+| Product surface validation | `emlis_ai_product_surface_validation.py` | `rn_visible=true` でも商品surface未達を検出する。 |
+| Source availability | `emlis_ai_complete_initial_surface_availability.py` | `complete_initial_surface_unavailable` をsource unavailableとして分類し、normal rebuildへ誤送しない。 |
+| Recomposition lanes | `emlis_ai_complete_initial_surface_recomposition.py`, `emlis_ai_labelled_two_stage_surface_recomposition.py` | C系とD/Phase17系を別source kindで回復する。 |
+| Public inclusion summary | `emotion_submit_service.py` | `public_reached` / `rn_visible` / `product_surface_valid` を診断する。 |
+| Public meta / ProductQuality | `emlis_ai_public_feedback_meta.py`, `emlis_ai_product_quality_measurement_event.py` | public_surface_lineageをbody-freeで保持する。 |
+
+禁止:
+
+```text
+- `public_reached` をRN表示条件として使う。
+- `product_surface_valid` をpublic response keyにする。
+- Gateを緩めてAcceptanceを通す。
+- fixed fallbackやcase専用routeでC/Dを通す。
+- raw input / candidate body / comment_text bodyをmetaへ入れる。
+```

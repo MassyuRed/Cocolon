@@ -1941,3 +1941,35 @@ warningは既存の Pydantic `root_validator` deprecation warningであり、本
 
 
 以上。
+
+
+## 19. 2026-06-06 実装反映: Public Observation Recovery P0-P10 current state
+
+最新実ファイル `Cocolon_11(8).zip` / `mashos-api_11(17).zip` では、Phase20是正方針とNormal Observation Public Recoveryの上に、Public Observation Recovery P0〜P10が実装済みである。
+
+### 19.1 実装済み補強の読み方
+
+| Phase | 実装後の扱い | 主な実ファイル |
+|---|---|---|
+| P0/P1 | 表示到達と商品surface成立を分け、要求surface familyを決める。 | `emlis_ai_public_observation_recovery_status.py`, `emlis_ai_public_surface_requirement.py` |
+| P2/P3 | two_stage_requiredでplain normal rebuildを採用せず、product surface validationで検出する。 | `emlis_ai_gate_recovery_public_candidate_builder.py`, `emlis_ai_product_surface_validation.py` |
+| P4/P5 | C系source unavailableを診断し、normal rebuildではなくcomplete initial surface recomposition laneで扱う。 | `emlis_ai_complete_initial_surface_availability.py`, `emlis_ai_complete_initial_surface_recomposition.py` |
+| P6 | D / Phase17 / ProductVisible系をlabelled two-stage surfaceへ戻す。 | `emlis_ai_labelled_two_stage_surface_recomposition.py` |
+| P7/P8 | public feedback inclusion summaryとpublic_surface_lineage / ProductQuality lineageをbody-freeに整理する。 | `emotion_submit_service.py`, `emlis_ai_public_feedback_meta.py`, `emlis_ai_product_quality_measurement_event.py` |
+| P9 | Acceptance E2E対象の二段surface / positive-change / self-understanding / effort-paceを成立させる。 | `emlis_ai_complete_surface_realizer.py` |
+| P10 | production logicを触らず、回帰検査用diagnostic traversalをboundedにする。 | `tests/helpers/emlis_ai_public_observation_recovery_p0.py`, `tests/helpers/emlis_ai_phase19_public_feedback_matrix.py` |
+
+### 19.2 この実装で守る是正方針
+
+```text
+- Gate failure後の通常入力を、empty comment_text で終わらせない縮退先を持つ。
+- source unavailableをnormal rebuildで読めたふりにしない。
+- two_stage_requiredの入力をplain surfaceで成功扱いしない。
+- public_reached / rn_visible / product_surface_validを同一視しない。
+- Gate Recovery material surfaceをpublic本文にはしない。
+- Gateを緩めず、再構築候補も既存Gateを通す。
+- A/C/D/F/E/G等の実機・fixture caseをruntime条件にしない。
+- public metaへraw input / original candidate body / candidate body / comment_text bodyを出さない。
+```
+
+このため、P0〜P10はPhase20是正方針の置換ではなく、Phase20後に残っていた「表示不達」と「表示はされるが商品surfaceではない」を同時に塞ぐ追加補強として読む。
