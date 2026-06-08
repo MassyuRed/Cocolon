@@ -1,6 +1,6 @@
 ---
 title: "02A_Cocolon_国家システム資料_Input_Save_Dispatch系"
-revision_date: "2026-06-06"
+revision_date: "2026-06-08"
 ---
 
 # 02A. Input / Save / Dispatch系
@@ -2197,4 +2197,132 @@ safe通常入力
 - source unavailableをnormal rebuildで読めたふりにする。
 - Gate Recovery material surfaceを本文にする。
 - 入力本文やcandidate本文をpublic metaへ入れる。
+```
+
+# 2026-06-07 差分追記: `/emotion/submit` immediate reply limited / low-information reception-required接続
+
+`mashos-api_10(27).zip` では、`/emotion/submit` 保存後のEmlisAI immediate reply flowに、P0〜P9のlimited / low-information reception-required境界が接続されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+Input Save / Dispatch上の読み方:
+
+| layer | 最新の扱い |
+|---|---|
+| input material bundle | H/I/Jのような自己理解・回復・比較基準・小さな変化を一般semantic materialとして抽出できるようにする。 |
+| public surface requirement | `limited_grounding` は `labelled_two_stage` / reception required、true `low_information` は `low_information_observation` / reception requiredへ分ける。 |
+| recovery routing | `limited_grounding` を低情報laneから外し、labelled two-stage recomposition targetへ送る。 |
+| surface compose | limitedは `emlis_ai_limited_grounding_reception_surface.py`、low_informationは `emlis_ai_low_information_observation_composer.py` で受け取りsectionを作る。 |
+| product validation | `question_dominance_guard` により、受け取りなし・質問先行・質問中心surfaceをinvalidにする。 |
+| RN display | `input_feedback.emlis_ai.observation_status == passed` かつ `comment_text` 非空のみ表示。RN側追加条件なし。 |
+
+禁止:
+
+```text
+- 長文なら必ずeligibleへ昇格する。
+- low_informationを廃止する。
+- limited_groundingを質問中心低情報surfaceへ戻す。
+- `Emlisから` なしの質問だけsurfaceを商品表示成功にする。
+- H/I/J専用case route / fixed commentTextを追加する。
+```
+
+# 2026-06-07 差分追記: `/emotion/submit` immediate reply D相当入力 source-unavailable recovery接続
+
+`mashos-api_11(18).zip` では、`/emotion/submit` 保存後のEmlisAI immediate reply flowに、D相当入力のsource-unavailable recovery接続が追加されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+Input Save / Dispatch上の読み方:
+
+| layer | 最新の扱い |
+|---|---|
+| material route | safe + eligible + relationship/action/change/value材料を持つ通常観測として扱う。 |
+| surface requirement | relation transition materialを持つ高情報入力は `labelled_two_stage` 要求へ寄せる。 |
+| availability | limited composer shallow emptyをsource unavailable familyとして扱い、material_sufficientを維持する。 |
+| recomposition | normal rebuildではなくcomplete initial surface recomposition candidateを生成する。 |
+| adoption | reader / grounding / template / runtime surface / visible surface / display gateを通った場合だけ採用する。 |
+
+禁止:
+
+```text
+comment_textが空でもRN modalを開く
+D case idで分岐する
+fixed commentTextを入れる
+Gate Recovery material surfaceを本文として出す
+source_unavailableをnormal rebuildで偽装する
+```
+
+# 2026-06-08 差分追記: `/emotion/submit` immediate reply public input_feedback arrival repair
+
+`mashos-api_11(19).zip` では、`/emotion/submit` 保存後のEmlisAI immediate reply flowに、P0-P1 Public Input Feedback Arrival Contract Repair Step0〜10が反映されている。保存API、DB write path、public route、request key、response top-level shape、RN modal条件は変更しない。
+
+保存後flowでの読み方:
+
+```text
+/emotion/submit save path
+↓
+render_emlis_ai_reply()
+↓
+reply.comment_text / internal meta
+↓
+build_public_emlis_input_feedback_meta(...)
+↓
+should_include_public_input_feedback(comment_text, public_meta)
+  - observation_status == passed
+  - comment_text non-empty
+  - visible_surface yellow/warn は非terminal
+  - repair_required / red / terminal action はblock
+  - true unavailable / safety / infrastructure はfail-closed
+↓
+input_feedback inclusion summary
+  - public_reached
+  - rn_visible
+  - product_surface_valid
+↓
+RNは既存 `Emlisの観測` 契約だけを見る
+```
+
+この差分で重要なのは、`visible_surface_acceptance_gate.passed=false` を一律blockとして読まないこと。`classification=yellow` かつ `action=warn` は、Display Gate側で非terminalとして扱われるwarningであり、public inclusion側でも同じ意味論で読む。
+
+ただし、次は引き続きpublic `input_feedback` に含めない。
+
+```text
+observation_status != passed
+comment_text empty
+classification = repair_required / red
+action = rerender_surface / reroute_low_information / block / fail_closed
+passed=false かつ action!=warn
+state_answer / two_stage / runtime のterminal blocker
+true infrastructure_error / true unavailable / safety_blocked
+```
+
+今回の変更owner:
+
+| path | Input / Save / Dispatch上の読み方 |
+|---|---|
+| `emotion_submit_service.py` | `public_feedback_included` をpublic到達のsource of truthとしてsummary化し、yellow/warnをabsence reasonへ落とさない。 |
+| `emlis_ai_public_feedback_meta.py` | public meta helperでyellow/warnをpublic inclusion blockerにしない。body-free markerを追加する。 |
+| `emlis_ai_product_surface_validation.py` | `rn_visible` と `product_surface_valid` を分け、visible yellow/warnをpublic gate blockedとして扱わない。 |
+| `test_emlis_ai_display_contract.py` | `input_feedback` 到達、safe recovery、no body leakをE2E display contractとして固定する。 |
+| `test_emlis_ai_public_feedback_meta.py` | should_include / fail-closed / body-free境界を単体で固定する。 |
+| `test_emotion_submit_public_feedback_inclusion_summary_p7.py` | submit inclusion summaryのreason family誤分類を防ぐ。 |
+| `test_emlis_ai_product_surface_validation_p3.py` | product validation側のrn visibility誤分類を防ぐ。 |
+| `test_emlis_ai_user_label_connection_e2e_contract.py` | User Label Connection側でbody-free markerを本文漏れと誤読しない。 |
+
+この差分で変更しないもの:
+
+```text
+保存DB
+memo / memo_action / emotion_details / category の保存経路
+/emotion/submit route
+request key
+public response top-level key
+input_feedback.comment_text key
+input_feedback.emlis_ai.observation_status key
+RN表示タイトル `Emlisの観測`
+RN表示条件
+DB physical schema / write path
+```
+
+ローカル確認結果:
+
+```text
+focused suite: 51 passed / 1 warning
+User Label Connection sanitizer focused: 1 passed / 1 warning
 ```

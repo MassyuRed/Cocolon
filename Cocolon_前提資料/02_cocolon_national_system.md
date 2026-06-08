@@ -1,30 +1,36 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-06"
+revision_date: "2026-06-08"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(180).zip"
-  Cocolon: "Cocolon_11(8).zip"
-  mashos-api: "mashos-api_11(17).zip"
+  premise: "Cocolon_前提資料(190).zip"
+  Cocolon: "Cocolon_11(10).zip"
+  mashos-api: "mashos-api_11(19).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 834
-  total: 1051
+  mashos-api: 853
+  total: 1070
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1051
+  included_files_total: 1070
   included_files_cocolon: 217
-  included_files_mashos_api: 834
+  included_files_mashos_api: 853
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
   normal_observation_public_recovery_full_01_02_regeneration: false
   public_observation_recovery_p0_10_reflected: true
   public_observation_recovery_full_01_02_regeneration: false
+  limited_low_information_reception_required_p0_9_reflected: true
+  limited_low_information_reception_required_full_01_02_regeneration: false
+  d_source_unavailable_normal_observation_recovery_reflected: true
+  d_source_unavailable_normal_observation_recovery_full_01_02_regeneration: false
+  p0_p1_public_input_feedback_arrival_contract_repair_reflected: true
+  p0_p1_public_input_feedback_arrival_contract_repair_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -1538,4 +1544,103 @@ input_feedback.comment_text
 input_feedback.emlis_ai.observation_status
 RN title: Emlisの観測
 RN condition: passed + comment_text non-empty
+```
+
+# 2026-06-07 差分追記: 国家システム上のEmlisAI Limited Grounding / Low Information 受け取り必須化 P0-P9境界
+
+`Cocolon_10(14).zip` / `mashos-api_10(27).zip` では、国家システム上のInput保存・dispatch・DB write path・RN display contractは変更しないまま、保存直後 EmlisAI immediate reply の `limited_grounding` / true `low_information` surface境界が補強されている。
+
+国家システム上の読み方は次で固定する。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> input material bundle
+  -> public surface requirement
+  -> limited_grounding: labelled two-stage reception lane
+  -> low_information: low_information reception-required lane
+  -> product surface validation + question dominance guard
+  -> passed + comment_text の場合だけ RN display
+```
+
+P0〜P9により追加された国家システム上の境界:
+
+- `limited_grounding` は `low_information_observation_composer` の質問中心laneへ送らない。
+- true `low_information` は残すが、`Emlisから` の受け取りsectionを必須にする。
+- `question_dominance_guard` は、質問先行・質問だけ・質問中心surfaceをproduct validationで止める。
+- H/I/J E2Eは、case専用routingではなく、public response contract上で `passed + comment_text` と二段shapeを確認する回帰である。
+- RNは引き続きbackendの `passed + comment_text` だけを表示契約にし、source lineageやmaterial_qualityを表示条件に使わない。
+
+この差分は、2026-06-06 Normal Observation Public Recoveryでの「low_information / limited_grounding は既存の低情報経路を維持する」という当時の境界を、2026-06-07以降の最新境界では次のように上書きして読む。
+
+```text
+low_information:
+  低情報経路に残す。ただし reception required。
+
+limited_grounding:
+  低情報経路から外し、labelled two-stage reception laneへ送る。
+```
+
+# 2026-06-07 差分追記: 国家システム上のEmlisAI D相当入力 source-unavailable recovery境界
+
+`Cocolon_11(9).zip` / `mashos-api_11(18).zip` では、国家システム上のInput保存、dispatch、DB write path、public API route、RN display contractは変更せず、保存直後EmlisAI immediate replyのsource-unavailable回復境界だけが補強されている。
+
+国家システム上のflowは次で読む。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> safety triage: safe_observation
+  -> material route: eligible / normal_observation
+  -> public surface requirement: labelled_two_stage
+  -> limited composer shallow empty
+  -> availability: source_unavailable + material_sufficient
+  -> complete_initial_surface_recomposition_candidate
+  -> existing Gate chain
+  -> passed + comment_text の場合だけ RN display
+```
+
+国家システム上の注意:
+
+- `source_unavailable` を `normal_observation_rebuild_candidate` で読めたふりにしない。
+- Gate Recovery material surfaceをpublic本文として採用しない。
+- recomposition candidateも既存Gate chainを通し、Gate failure時はfail-closedのままにする。
+- RNはsource lineage / material_quality / recovery_laneを表示条件に使わない。
+
+
+
+# 2026-06-08 差分追記: 国家システム上のEmlisAI public input_feedback arrival repair境界
+
+`Cocolon_11(10).zip` / `mashos-api_11(19).zip` では、国家システム上のInput保存、dispatch、DB write path、public API route、RN display contractは変更せず、保存直後EmlisAI immediate replyのpublic `input_feedback` inclusion境界だけが補強されている。
+
+国家システム上のflowは次で読む。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> display decision / public meta
+  -> build_public_emlis_input_feedback_meta()
+  -> should_include_public_input_feedback(comment_text, public_meta)
+  -> visible_surface yellow/warn warning-onlyは到達可
+  -> repair_required / red / terminal actionはfail-closed
+  -> true unavailable / safety / infrastructureはfail-closed
+  -> passed + comment_text の場合だけ RN display
+```
+
+国家システム上の注意:
+
+- `visible_surface_acceptance_gate` の `yellow / warn` は、RN到達を止めるterminal blockerではなく、product surface側で別に読むwarningである。
+- `runtime_surface_pre_return_gate` / `display_gate` / `state_answer_gate_boundary` / `two_stage_reception_gate` はstrictなまま維持する。
+- true `unavailable` / `safety_blocked` / infrastructure errorはfail-closedし、保存後のpublic `input_feedback` に含めない。
+- Red B1/B2は、safe recovery後にpassedへ戻る場合がある。ただし元unsupported bodyやraw bodyをpublicへ出すことは許可しない。
+- body-free markerはpublic metaへ出してよいが、raw input / candidate body / comment_text bodyは出さない。
+
+変えないもの:
+
+```text
+POST /emotion/submit
+request key / response top-level key
+DB physical schema / write path
+input_feedback.comment_text visible body
+input_feedback.emlis_ai.observation_status contract
+RN production UI
+RN表示タイトル `Emlisの観測`
+RN表示条件 `passed + comment_text`
 ```

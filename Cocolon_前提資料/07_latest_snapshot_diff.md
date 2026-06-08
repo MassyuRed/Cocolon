@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-06"
+revision_date: "2026-06-08"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(180).zip"
-  Cocolon: "Cocolon_11(8).zip"
-  mashos-api: "mashos-api_11(17).zip"
+  premise: "Cocolon_前提資料(190).zip"
+  Cocolon: "Cocolon_11(10).zip"
+  mashos-api: "mashos-api_11(19).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_11(8).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_11(17).zip` | 834 | Gate Recovery public surface leak repair P0-P12とnormal observation rebuildを維持し、Public Observation Recovery P0〜P10を反映。 |
-| total | 1051 | Public Observation Recovery P0〜P10前提資料差分更新後coverage対象 |
+| `Cocolon_11(10).zip` | 217 | RNアプリ本体。`Cocolon(216).zip` とsource内容同一。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_11(19).zip` | 853 | P0-P1 Public Input Feedback Arrival Contract Repair Step0〜10を反映。 |
+| total | 1070 | public `input_feedback` arrival contract repair前提資料差分更新後coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-05以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12は履歴として残し、2026-06-06時点の最新正本は末尾の `2026-06-06 差分追記: EmlisAI Normal Observation Public Recovery P0-P9 latest snapshot diff` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-07以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12、D相当入力 source-unavailable normal observation recoveryは履歴として残し、2026-06-08時点の最新正本は末尾の `2026-06-08 差分追記: EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10 latest snapshot diff` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -4090,3 +4090,265 @@ mashos-api/ai/tests/test_emotion_submit_phase19_real_device_abcd_public_feedback
 ```
 
 差分詳細は `cocolon_local_file_inventory_diff_20260606.csv` に保持する。今回の差分はbackend内部の回復lane / meta / test診断補正であり、RN production UI、API route、DB write path、public response top-level keyの変更ではない。
+
+
+# 2026-06-07 差分追記: EmlisAI Limited Grounding / Low Information 受け取り必須化 P0-P9 latest snapshot diff
+
+比較対象は、前提資料 `Cocolon_前提資料(182).zip` と最新実ファイル `Cocolon_10(14).zip` / `mashos-api_10(27).zip` です。Cocolon側source countは `217` のまま、mashos-api側source countは直前実装基準 `834 -> 846`、合計 `1051 -> 1063` を最新coverage対象として読む。
+
+今回の差分は、`limited_grounding` を true `low_information` と同じ質問中心surfaceへ潰さず、正式観測に届かない場合でも `Emlisから` の受け取りを返すbackend内部補強である。RN側、API route、DB write path、public response top-level keyは変更しない。
+
+## 基準zip
+
+| source | file count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(182).zip` | 46 | `1a24fecff0ece27e7cec47e5922df9698cb89f048dc6217b213c9a34cd3f8331` |
+| `Cocolon_10(14).zip` | 217 | `528c4988c83491345c96f593b018e5c3cf80018e762e92ed9369fd8b8946175c` |
+| `mashos-api_10(27).zip` | 846 | `68f4b9b31d31dd4a72b12812ca2820118436a1dfdad95481a690294af3523735` |
+| total app source | 1063 | - |
+
+`Cocolon(211).zip` / `mashos-api(124).zip` を今回実装前の比較基準として見ると、差分は次の通り。
+
+| repo | added | changed | removed | 読み方 |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | RN production UI変更なし。`Emlisの観測` の表示契約も変更なし。 |
+| mashos-api | 12 | 9 | 0 | P0〜P9のsurface requirement / recovery routing / reception helper / low-information composer / question guard / semantic material / E2E contractを追加・接続。 |
+
+## 追加ファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_grounding_reception_surface.py` | limited_grounding用の受け取りsurface helper。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_question_dominance_guard.py` | 質問支配を検出するbody-free guard。 |
+| `mashos-api/ai/tests/test_emlis_ai_existing_regression_contract_p9.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_limited_lowinfo_reception_p2.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_hij_input_material_bundle_current_p0.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_hij_reception_required_regression_p8.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_input_material_bundle_semantics_p7.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_labelled_two_stage_limited_reception_p3.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_grounding_reception_surface_p4.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_low_information_reception_required_p5.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_surface_question_dominance_guard_p6.py` | P0〜P9のreception-required回帰 / contract確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_public_surface_requirement_limited_lowinfo_reception_p1.py` | P0〜P9のreception-required回帰 / contract確認。 |
+
+## 変更された主な既存owner
+
+| file | 差分の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py` | source unavailable側でもlimited_grounding reception surface helperへ戻せるようにする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | limited_groundingを低情報laneから外し、labelled two-stage recomposition targetへ送る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_input_material_bundle.py` | recovered_energy / future_intention / relationship_wish / comparison_baseline_shift / small_change_preservation / value_preservation / self_observationを追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py` | limited_groundingをunsupportedから外し、reception helperへ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py` | true low_informationを二段reception-required shapeへ組み立てる。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py` | low_informationの二段bodyをline再連結で壊さないようにする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py` | question dominance guardとreception-required validationを追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py` | limited_grounding / low_informationのsurface requirementを分離する。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_low_information_recovery_p6.py` | low_information recoveryの期待をreception-required shapeへ更新する。 |
+
+## 最新flowでの読み方
+
+```text
+/emotion/submit save path
+  -> render_emlis_ai_reply()
+  -> input material bundle
+  -> material_quality = eligible / limited_grounding / low_information / safety / infra
+  -> public surface requirement
+  -> limited_grounding: labelled_two_stage_surface_recomposition_candidate + limited_grounding_reception_surface
+  -> low_information: low_information_observation_composer with reception-required body
+  -> product_surface_validation + question_dominance_guard
+  -> passed + comment_text の場合だけ input_feedback としてRNへ届く
+```
+
+## 維持されたcontract
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key変更なし
+public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+固定テンプレート追加なし
+H/I/J専用case route / case専用surface / fixed commentText追加なし
+raw input / original body / candidate body / comment_text body のpublic meta混入なし
+```
+
+この差分で更新しないもの:
+
+```text
+- 01 / 02 full inventory本文の全面再生成は行わない。
+- local CSV inventoryの全面再生成は行わない。
+- H/I/J入力本文や完成文を前提資料内のruntime固定文として追加しない。
+```
+
+# 2026-06-07 差分追記: EmlisAI D相当入力 source-unavailable normal observation recovery latest snapshot diff
+
+比較対象は、前提資料 `Cocolon_前提資料(186).zip` と最新実ファイル `Cocolon_11(9).zip` / `mashos-api_11(18).zip`。Cocolon側source file countは `217` のまま、mashos-api側source file countは `849`、合計 `1066` を最新coverage対象として読む。
+
+## 基準zip / hash
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(186).zip` | 46 | `daf9fa20896f52301ed7f97f2c57a985801336ba96cd451a44dfe3bd8fc9b9b5` |
+| `Cocolon_11(9).zip` | 217 | `f29417b9cafe5ee4494428ebb92e4c3e3c926cc9fd75794360b91698b938d8e1` |
+| `mashos-api_11(18).zip` | 849 | `317133d1949d1050e918d808bfd551b8ccaf485fa1e494a763eb3fed3a65c576` |
+| total app source | 1066 | - |
+
+`mashos-api(126).zip` を今回実装前の比較基準として見ると、D相当入力のbackend赤修正差分は次の通り。
+
+| repo | added | changed | removed | 読み方 |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | RN production UI変更なし。`Emlisの観測` の表示契約も変更なし。 |
+| mashos-api | 3 | 8 | 0 | source-unavailable availability / recomposition permission / body-free meta / existing Gate chain adoption / focused regressionを追加・接続。 |
+
+## 追加ファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_d_source_unavailable_normal_observation_recovery.py` | D相当入力をD専用routeではなく、safe eligible source-unavailable normal observation recoveryとして固定するfocused regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_body_free_p7.py` | recomposition candidate metaがraw input / comment_text body / candidate bodyを含まないことを固定するbody-free regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_existing_gate_chain_p8.py` | recomposition candidateが既存Gate chain全通過後にだけ採用され、Gate失敗時はfail-closedになることを固定するregression。 |
+
+## 変更された主な既存owner
+
+| file | 差分の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py` | material relationship transition helperを追加し、safe + eligible + high_information_input + relation/action/change/value系materialを `labelled_two_stage` 要求へ寄せる。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_availability.py` | `limited_composer_shallow_empty_candidate` をsource unavailable familyに含め、material route / surface requirementをavailabilityへ渡して `complete_initial_surface_recomposition` laneへ送る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py` | source unavailable後のsafe eligible normal observationについて、complete initial client未解決でもrecompositionを許可し、candidate metaをbody-freeに保つ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | recovery plan / selected candidateのcontract flagsにbody-free / case-specific route否定を保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | recomposition candidateを既存Gate chainへ通し、candidate generatedとadopted/appliedを分ける。 |
+
+## 検証結果
+
+| 対象 | 結果 |
+|---|---|
+| `test_emlis_ai_phase20_10_real_device_recheck.py` | `4 passed` |
+| `test_emlis_ai_d_source_unavailable_normal_observation_recovery.py` + `test_emlis_ai_complete_initial_surface_recomposition_existing_gate_chain_p8.py` | `5 passed` |
+| `test_emlis_ai_public_observation_recovery_acceptance_p0.py` + `test_emlis_ai_hij_reception_required_regression_p8.py` + `test_emlis_ai_existing_regression_contract_p9.py` | `14 passed, 1 warning` |
+| `npm run test:rn-screens` | `36 passed / 0 failed` |
+
+warningは既存のPydantic V1 style `@root_validator` に関する非失敗warningであり、今回の差分では触らない。
+
+## 境界維持
+
+- RN production UI、RN表示タイトル、RN表示条件、public response shapeは変更しない。
+- `/emotion/submit` route、request key、DB physical schema / write pathは変更しない。
+- `D` exact fixture、Phase20-10、Phase19 tokenをruntime条件にしない。
+- Gate Recovery material surfaceをpublic本文へ出さない。
+- source unavailableをnormal observation rebuildで読めたふりにしない。
+- candidate body / raw input / comment_text bodyをmetaへ入れない。
+- Gateを緩めず、既存Gate chainを全通過したcandidateだけ採用する。
+
+# 2026-06-08 差分追記: EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10 latest snapshot diff
+
+比較対象は、前提資料 `Cocolon_前提資料(190).zip` と最新実ファイル `Cocolon_11(10).zip` / `mashos-api_11(19).zip`。Cocolon側source file countは `217` のまま、mashos-api側source file countは `853`、合計 `1070` を最新coverage対象として読む。
+
+## 基準zip / hash
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(190).zip` | 49 | `fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09` |
+| `Cocolon_11(10).zip` | 217 | `aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d` |
+| `mashos-api_11(19).zip` | 853 | `02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c` |
+| total app source | 1070 | - |
+
+`Cocolon(216).zip` / `mashos-api(129).zip` を今回のP0-P1着手前実体として見ると、Public Input Feedback Arrival Contract Repair差分は次の通り。
+
+| repo | added | changed | removed | 読み方 |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | RN production UI変更なし。`Emlisの観測` の表示契約も変更なし。 |
+| mashos-api | 4 | 8 | 0 | public feedback meta / submit inclusion summary / product_surface_validation / display contract / User Label sanitizerを、yellow/warn public arrival policyとbody-free meta境界へ揃える。 |
+
+## 追加ファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedLedger_Step0_20260608.md` | 作業前baselineとRed A/Bのledgerを固定する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step5_RedA_E2EGreen_20260608.md` | Red Aがpublic `input_feedback` へ到達し、body-free public metaを維持したことを記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedBClassification_Step6_20260608.md` | Red B1/B2をstale_contract_expectationとして分類し、true unavailable / safetyは別regressionで守る根拠を記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step10_ExistingGreenRegression_20260608.md` | Step10の既存green回帰確認とUser Label Connection sanitizer assertion更新を記録する。 |
+
+## 変更された主な既存owner
+
+| file | 差分の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py` | `visible_surface_acceptance_gate` の `yellow / warn` をpublic arrival terminal blockerにせず、`repair_required / red / rerender_surface / reroute_low_information / block / fail_closed` はblockする。body-free markerを強化する。 |
+| `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | submit inclusion summaryを同じpolicyへ揃え、yellow/warnを `public_feedback_not_included_visible_surface_gate` やabsence reasonにしない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py` | `visible_surface_acceptance_gate` だけyellow/warn public arrival policyを適用し、runtime / display / state_answer / two_stageはstrictのまま維持する。 |
+| `mashos-api/ai/tests/test_emlis_ai_public_feedback_meta.py` | Red A focused test、true unavailable / safety fail-closed regression、Step8 no body leak regressionを固定する。 |
+| `mashos-api/ai/tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py` | submit inclusion summary上でyellow/warnをabsence扱いにしないことを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_surface_validation_p3.py` | yellow/warn時の `rn_visible` 維持とruntime strict維持を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_display_contract.py` | Red A/Bのdisplay contractを現行契約へ更新し、safe recoveryは表示可、元body / raw / candidate bodyは出さない境界を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_e2e_contract.py` | `candidate_body_included=false` をbody-free markerとして許可し、raw candidate body key/bodyの漏れは禁止する契約へ更新する。 |
+
+## 最新flowでの読み方
+
+```text
+/emotion/submit save path
+  -> render_emlis_ai_reply()
+  -> display_decision / public_meta build
+  -> should_include_public_input_feedback(comment_text, public_meta)
+  -> visible_surface_acceptance_gate:
+       yellow + warn = public arrival warning-only
+       repair_required / red / rerender_surface / reroute_low_information / block / fail_closed = terminal blocker
+  -> public input_feedback included only when observation_status=passed and comment_text non-empty and terminal blockers absent
+  -> product_surface_validation separates public_reached / rn_visible / product_surface_valid
+  -> RN displays only passed + comment_text as `Emlisの観測`
+```
+
+## 維持されたcontract
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key変更なし
+public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed fallback / case専用route / case専用surface追加なし
+true unavailable / infrastructure_error / safety_blocked のfail-closed維持
+raw input / original body / candidate body / comment_text body のpublic meta混入なし
+```
+
+## ローカル確認
+
+今回の前提資料更新作業中に、最新実ファイルzipから展開した実体で次を確認した。
+
+```text
+Cocolon source diff:
+  0 added / 0 changed / 0 removed
+
+P0-P1 backend focused suite:
+  tests/test_emlis_ai_public_feedback_meta.py
+  tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py
+  tests/test_emlis_ai_product_surface_validation_p3.py
+  tests/test_emlis_ai_display_contract.py
+  51 passed / 1 warning
+
+User Label Connection sanitizer focused:
+  1 passed / 1 warning
+```
+
+また、最新実ファイル内のStep10確認記録では次が保持されている。
+
+```text
+RN contract: 36 passed / 0 failed
+API contract: 4 passed / 3 warnings
+TwoStage emotion submit E2E: 6 passed / 1 warning
+Public Recovery / D / limited grounding subset: 53 passed / 1 warning
+User Label Connection / Product Read Feel subset: 108 passed / 1 warning
+Focused suite: 51 passed / 1 warning
+```
+
+この差分で更新しないもの:
+
+```text
+- 01 / 02 full inventory本文の全面再生成は行わない。
+- RN production UI、API route、DB write path、public response top-level keyは更新しない。
+- public metaへ本文を移す設計にはしない。
+```

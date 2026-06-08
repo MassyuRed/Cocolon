@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-06",
+  "revision_date": "2026-06-08",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 834,
-    "total": 1051
+    "mashos-api": 853,
+    "total": 1070
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 1051,
-    "national_system_body_includes": 1051,
+    "overall_structure_body_includes": 1070,
+    "national_system_body_includes": 1070,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1051件、国家システム判断対象のcurrent全ファイル1051件を本文または差分追記で記載する。前提資料は残タスク表ではなく、華恋がアプリのファイル構成・コード構成・名称混在境界を読むための作業用地図として維持する。今回のPublic Observation Recovery P0-P10は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1051,
-    "overall_structure_body_includes_current_snapshot_files": 1051,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1051,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1070件、国家システム判断対象のcurrent全ファイル1070件を本文または差分追記で記載する。今回のP0-P1 public input_feedback arrival contract repairは指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1070,
+    "overall_structure_body_includes_current_snapshot_files": 1070,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1070,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -848,7 +848,87 @@
     "normal_observation_public_recovery_p0_9_reflected": true,
     "normal_observation_public_recovery_full_01_02_regeneration": false,
     "public_observation_recovery_p0_10_reflected": true,
-    "public_observation_recovery_full_01_02_regeneration": false
+    "public_observation_recovery_full_01_02_regeneration": false,
+    "limited_low_information_reception_required_p0_9_reflected": true,
+    "limited_low_information_reception_required_full_01_02_regeneration": false,
+    "d_source_unavailable_normal_observation_recovery_full_01_02_regeneration": false,
+    "d_source_unavailable_normal_observation_recovery_reflected": true,
+    "latest_source_basis_2026_06_07_d_source_unavailable_recovery": {
+      "premise": "Cocolon_前提資料(186).zip",
+      "Cocolon": "Cocolon_11(9).zip",
+      "mashos-api": "mashos-api_11(18).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 849,
+      "total_files": 1066,
+      "policy": "D exact fixture専用routeではなく、safe eligible source-unavailable normal observation recoveryとして反映する。RN表示条件・API route・DB write path・public response keyは変更しない。"
+    },
+    "p0_p1_public_input_feedback_arrival_contract_repair_reflected": true,
+    "p0_p1_public_input_feedback_arrival_contract_repair_full_01_02_regeneration": false,
+    "latest_source_basis_2026_06_08": {
+      "premise": "Cocolon_前提資料(190).zip",
+      "Cocolon": "Cocolon_11(10).zip",
+      "mashos-api": "mashos-api_11(19).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 853,
+      "total_files": 1070,
+      "doc_role": "P0-P1 Public Input Feedback Arrival Contract Repair Step0-10反映後の作業用地図。RN UI / route / DB / public response top-level keyは維持し、backend public input_feedback arrival policyとno body leak contractを差分反映する。"
+    },
+    "current_snapshot_changed_paths_2026_06_08": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_surface_validation_p3.py",
+      "mashos-api/ai/tests/test_emlis_ai_display_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_user_label_connection_e2e_contract.py"
+    ],
+    "current_snapshot_added_paths_2026_06_08": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedLedger_Step0_20260608.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step5_RedA_E2EGreen_20260608.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedBClassification_Step6_20260608.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step10_ExistingGreenRegression_20260608.md"
+    ],
+    "p0_p1_public_input_feedback_arrival_contract_policy_2026_06_08": "visible_surface_acceptance_gate yellow/warn はpublic inclusion terminal blockerではない。repair_required/red/terminal action、true unavailable、safety、infrastructureはfail-closedを維持する。public_reached/rn_visible/product_surface_validを分け、raw input/candidate body/comment_text bodyをpublic metaへ出さない。",
+    "latest_source_basis_2026_06_08_public_input_feedback_arrival_contract_repair": {
+      "premise": "Cocolon_前提資料(190).zip",
+      "Cocolon": "Cocolon_11(10).zip",
+      "mashos-api": "mashos-api_11(19).zip",
+      "file_counts": {
+        "Cocolon": 217,
+        "mashos-api": 853,
+        "total": 1070
+      },
+      "diff_from": {
+        "Cocolon": "Cocolon(216).zip",
+        "mashos-api": "mashos-api(129).zip"
+      },
+      "diff_counts": {
+        "Cocolon": {
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        "mashos-api": {
+          "added": 4,
+          "changed": 8,
+          "removed": 0
+        }
+      },
+      "scope": "EmlisAI P0-P1 public input_feedback arrival contract repair. visible_surface yellow/warn is not treated as terminal public inclusion blocker; true unavailable/safety/infra remains fail-closed; public meta stays body-free."
+    },
+    "public_input_feedback_arrival_contract_repair_step0_10_reflected": true,
+    "public_input_feedback_arrival_contract_repair_full_01_02_regeneration": false,
+    "latest_source_basis_2026_06_08_public_input_feedback_arrival_repair": {
+      "premise": "Cocolon_前提資料(190).zip",
+      "Cocolon": "Cocolon_11(10).zip",
+      "mashos-api": "mashos-api_11(19).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 853,
+      "total_files": 1070,
+      "policy": "visible_surface_acceptance_gate yellow/warn warning-onlyはpublic input_feedback inclusion blockerにしない。repair_required/red/terminal action、true unavailable/safety/infraはfail-closedを維持する。RN表示条件・API route・DB write path・public response keyは変更しない。"
+    },
+    "public_input_feedback_arrival_contract_repair_p0_p1_reflected": true
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -865,11 +945,11 @@
   "docs": [
     {
       "path": "00_karen_read_first.md",
-      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI Phase20撤回保持再設計 / 実機再確認境界を固定する"
+      "purpose": "最初に読む作業用地図。最新基準面とEmlisAI public input_feedback arrival contract repair境界を固定する"
     },
     {
       "path": "01A_cocolon_overall_structure_app_foundation_home.md",
-      "purpose": "App root / runtime / Home / startup / immediate reply / RN optional Observation Reply meta boundary"
+      "purpose": "App root / runtime / Home / startup / immediate reply / RN optional Observation Reply meta boundary / public input_feedback arrival owner"
     },
     {
       "path": "01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md",
@@ -877,27 +957,27 @@
     },
     {
       "path": "01C_cocolon_overall_structure_account_subscription_backend_support.md",
-      "purpose": "Account / subscription / backend support / EmlisAI Observation Reply Step0-14 support / contract test boundary"
+      "purpose": "Account / subscription / backend support / EmlisAI Observation Reply / public input_feedback arrival contract test boundary"
     },
     {
       "path": "01_cocolon_overall_structure.md",
-      "purpose": "全体構造総論とsystem単位の読み方。EmlisAI Observation Reply Step0-14差分を含む"
+      "purpose": "全体構造総論とsystem単位の読み方。EmlisAI public input_feedback arrival contract repair差分を含む"
     },
     {
       "path": "02A_cocolon_national_system_input_save_dispatch.md",
-      "purpose": "Input / Save / Dispatch / immediate reply / EmlisAI Observation Reply接続"
+      "purpose": "Input / Save / Dispatch / immediate reply / EmlisAI public input_feedback arrival接続"
     },
     {
       "path": "02C_cocolon_contract_boundary_validation.md",
-      "purpose": "Contract / Boundary / Test / EmlisAI Observation Reply verification"
+      "purpose": "Contract / Boundary / Test / EmlisAI public input_feedback arrival verification"
     },
     {
       "path": "02_cocolon_national_system.md",
-      "purpose": "国家システム総論。Input後EmlisAI Observation Reply Step0-14境界を含む"
+      "purpose": "国家システム総論。Input後EmlisAI public input_feedback arrival境界を含む"
     },
     {
       "path": "03_cocolon_naming_system.md",
-      "purpose": "Cocolon visible名 / internal名 / runtime ownerの読み替え。EmlisAI二段受け取り構造 / Phase16 CompleteComposer接続 / Phase17 Product-Visible internal名の混同防止を含む"
+      "purpose": "表示名 / route / DB / runtime owner / EmlisAI public input_feedback arrival internal naming境界"
     },
     {
       "path": "04_cocolon_change_theme_checklist.md",
@@ -905,7 +985,7 @@
     },
     {
       "path": "05_cocolon_rule_file_index.md",
-      "purpose": "rule / policy / guard / test索引。Observation Reply Step0-14のrule / test indexを含む"
+      "purpose": "rule / test index。EmlisAI public input_feedback arrival Step0-10 ownerを含む"
     },
     {
       "path": "06_cocolon_filename_change_hold_ledger.md",
@@ -940,6 +1020,14 @@
     {
       "path": "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
       "purpose": "EmlisAI専用出力思想資料。状態回答 + 人間的フォローの二層構造に、二段受け取り構造 / Daily Reception / Phase16 TwoStage Composer Surface Connection / Phase17 Product-Visible Fixture Completion追補を含む。"
+    },
+    {
+      "path": "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "purpose": "EmlisAI Public Observation Recovery / D recovery / P0-P1 public input_feedback arrival contract repairの実装反映メモ"
+    },
+    {
+      "path": "cocolon_local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival.csv",
+      "purpose": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10の実ファイル差分inventory"
     }
   ],
   "excluded_files": [
@@ -1196,6 +1284,13 @@
       "Cocolon": "Cocolon(184).zip",
       "mashos-api": "mashos-api(97).zip",
       "summary": "Environment State Output Observation Structure Phase0-1 premise diff update."
+    },
+    {
+      "date": "2026-06-08",
+      "premise": "Cocolon_前提資料(190).zip",
+      "Cocolon": "Cocolon_11(10).zip",
+      "mashos-api": "mashos-api_11(19).zip",
+      "summary": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10 premise diff update."
     }
   ],
   "source_basis_2026_04_25": {
@@ -1898,21 +1993,21 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(176).zip",
-    "Cocolon": "Cocolon_13(5).zip",
-    "mashos-api": "mashos-api_13(8).zip",
+    "premise": "Cocolon_前提資料(190).zip",
+    "Cocolon": "Cocolon_11(10).zip",
+    "mashos-api": "mashos-api_11(19).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 812,
-      "total": 1029
+      "mashos-api": 853,
+      "total": 1070
     },
     "sha256": {
-      "premise": "217f3e1827cd85bed8bca2efc77ab485567c7f2fa6d235e7cba51683831bd3a4",
-      "Cocolon": "162b6903d386389c5e4d165ff8853096476851fc973b68ea68a2007c669d0f1b",
-      "mashos-api": "697de196a378649f8aaf769f7f0cbf06ecfa739653633754210abe17ae6de1a0"
+      "premise": "fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09",
+      "Cocolon": "aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d",
+      "mashos-api": "02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI Gate Recovery Public Surface Leak Repair P0-P12. Gate Recovery material surface is blocked from public comment_text; allowed recovery source is routed through public boundary/candidate builder; surface_origin, Blocker Matrix, RN contract, real-device fixtures, and P12 validation plan added. Production RN UI / DB / API route / public response keys remain unchanged."
+    "summary": "EmlisAI P0/P1 Public Input Feedback Arrival Contract Repair Step0-10。visible_surface yellow/warnをpublic inclusion terminal blockerにせず、true unavailable/safety fail-closedとbody-free public metaを維持する。RN表示条件・API route・DB write path・public response keyは変更しない。"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2678,21 +2773,21 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(176).zip",
-    "Cocolon": "Cocolon_13(5).zip",
-    "mashos-api": "mashos-api_13(8).zip",
+    "premise": "Cocolon_前提資料(190).zip",
+    "Cocolon": "Cocolon_11(10).zip",
+    "mashos-api": "mashos-api_11(19).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 812,
-      "total": 1029
+      "mashos-api": 853,
+      "total": 1070
     },
     "sha256": {
-      "premise": "217f3e1827cd85bed8bca2efc77ab485567c7f2fa6d235e7cba51683831bd3a4",
-      "Cocolon": "162b6903d386389c5e4d165ff8853096476851fc973b68ea68a2007c669d0f1b",
-      "mashos-api": "697de196a378649f8aaf769f7f0cbf06ecfa739653633754210abe17ae6de1a0"
+      "premise": "fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09",
+      "Cocolon": "aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d",
+      "mashos-api": "02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI Gate Recovery Public Surface Leak Repair P0-P12. Gate Recovery material surface is blocked from public comment_text; allowed recovery source is routed through public boundary/candidate builder; surface_origin, Blocker Matrix, RN contract, real-device fixtures, and P12 validation plan added. Production RN UI / DB / API route / public response keys remain unchanged."
+    "summary": "EmlisAI P0/P1 Public Input Feedback Arrival Contract Repair Step0-10。visible_surface yellow/warnをpublic inclusion terminal blockerにせず、true unavailable/safety fail-closedとbody-free public metaを維持する。RN表示条件・API route・DB write path・public response keyは変更しない。"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -6528,5 +6623,521 @@
       "candidate body",
       "comment_text body"
     ]
+  },
+  "source_snapshot_2026_06_07_limited_lowinfo_reception_required_p0_9": {
+    "date": "2026-06-07",
+    "premise": "Cocolon_前提資料(182).zip",
+    "Cocolon": "Cocolon_10(14).zip",
+    "mashos-api": "mashos-api_10(27).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 846,
+      "total": 1063
+    },
+    "sha256": {
+      "Cocolon_前提資料(182).zip": "1a24fecff0ece27e7cec47e5922df9698cb89f048dc6217b213c9a34cd3f8331",
+      "Cocolon_10(14).zip": "528c4988c83491345c96f593b018e5c3cf80018e762e92ed9369fd8b8946175c",
+      "mashos-api_10(27).zip": "68f4b9b31d31dd4a72b12812ca2820118436a1dfdad95481a690294af3523735"
+    },
+    "scope": "EmlisAI Limited Grounding / Low Information 受け取り必須化 P0-P9. Separates limited_grounding from true low_information, requires Emlisから reception in both limited and low-information surfaces, adds question dominance guard, material semantics, H/I/J E2E regression, and existing contract regression.",
+    "public_contract_changed": false,
+    "rn_production_ui_changed": false,
+    "db_schema_changed": false,
+    "api_route_changed": false,
+    "schema_file_materialized": false,
+    "full_01_02_regeneration": false,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(211).zip",
+      "mashos-api": "mashos-api(124).zip"
+    },
+    "source_diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 12,
+        "changed": 9,
+        "removed": 0
+      }
+    },
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+      "manifest.json"
+    ],
+    "added_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_limited_grounding_reception_surface.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_question_dominance_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_existing_regression_contract_p9.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_recovery_limited_lowinfo_reception_p2.py",
+      "mashos-api/ai/tests/test_emlis_ai_hij_input_material_bundle_current_p0.py",
+      "mashos-api/ai/tests/test_emlis_ai_hij_reception_required_regression_p8.py",
+      "mashos-api/ai/tests/test_emlis_ai_input_material_bundle_semantics_p7.py",
+      "mashos-api/ai/tests/test_emlis_ai_labelled_two_stage_limited_reception_p3.py",
+      "mashos-api/ai/tests/test_emlis_ai_limited_grounding_reception_surface_p4.py",
+      "mashos-api/ai/tests/test_emlis_ai_low_information_reception_required_p5.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_surface_question_dominance_guard_p6.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_surface_requirement_limited_lowinfo_reception_p1.py"
+    ],
+    "primary_changed_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_input_material_bundle.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py",
+      "mashos-api/ai/tests/test_emlis_ai_gate_recovery_low_information_recovery_p6.py"
+    ],
+    "local_validation_record": {
+      "note": "This premise update did not execute tests; it records the latest real-file structure and existing P0-P9 regression owners."
+    }
+  },
+  "emlis_limited_lowinfo_reception_required_policy_2026_06_07": {
+    "schema_version": "cocolon.emlis.limited_lowinfo_reception_required.p0_9.2026-06-07",
+    "summary": "Do not treat limited_grounding as low-information question surface. Keep true low_information but require Emlisから reception; block question-led surfaces through product validation.",
+    "implemented_phases": [
+      "P0 H/I/J current material baseline",
+      "P1 public surface requirement split",
+      "P2 recovery routing removes limited_grounding from low-information lane",
+      "P3 labelled two-stage recomposition supports limited_grounding",
+      "P4 limited_grounding reception surface helper",
+      "P5 true low_information reception-required shape",
+      "P6 product surface validation / question dominance guard",
+      "P7 material semantics extension",
+      "P8 H/I/J E2E regression",
+      "P9 existing regression / contract confirmation"
+    ],
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "visible_body": "input_feedback.comment_text",
+    "gate_relaxed": false,
+    "low_information_removed": false,
+    "limited_grounding_promoted_to_eligible": false,
+    "limited_grounding_low_information_lane_allowed": false,
+    "reception_required_for_limited_grounding": true,
+    "reception_required_for_low_information": true,
+    "question_dominance_guard_required": true,
+    "body_free_meta_required": true,
+    "candidate_source_kinds": [
+      "labelled_two_stage_surface_recomposition_candidate",
+      "complete_initial_surface_recomposition_candidate",
+      "low_information_observation_composer"
+    ],
+    "semantic_material_ids": [
+      "recovered_energy",
+      "future_intention",
+      "relationship_wish",
+      "comparison_baseline_shift",
+      "small_change_preservation",
+      "value_preservation",
+      "self_observation"
+    ],
+    "forbidden_public_payloads": [
+      "raw input",
+      "original candidate body",
+      "candidate body",
+      "comment_text body"
+    ],
+    "forbidden_runtime_shortcuts": [
+      "H/I/J case route",
+      "fixed commentText",
+      "long text auto eligible",
+      "question-only low information surface"
+    ]
+  },
+  "source_snapshot_2026_06_07_d_source_unavailable_normal_observation_recovery_step2_11": {
+    "date": "2026-06-07",
+    "premise": "Cocolon_前提資料(186).zip",
+    "Cocolon": "Cocolon_11(9).zip",
+    "mashos-api": "mashos-api_11(18).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 849,
+      "total": 1066
+    },
+    "sha256": {
+      "Cocolon_前提資料(186).zip": "daf9fa20896f52301ed7f97f2c57a985801336ba96cd451a44dfe3bd8fc9b9b5",
+      "Cocolon_11(9).zip": "f29417b9cafe5ee4494428ebb92e4c3e3c926cc9fd75794360b91698b938d8e1",
+      "mashos-api_11(18).zip": "317133d1949d1050e918d808bfd551b8ccaf485fa1e494a763eb3fed3a65c576"
+    },
+    "scope": "D相当入力が limited_composer_shallow_empty_candidate で空に落ちた後、safe + material eligible + source_unavailable normal observationとしてcomplete initial surface recomposition candidate laneへ戻し、既存Gate通過後だけ採用するbackend内部差分。",
+    "public_contract_changed": false,
+    "rn_production_ui_changed": false,
+    "db_schema_changed": false,
+    "api_route_changed": false,
+    "schema_file_materialized": false,
+    "full_01_02_regeneration": false,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(213).zip",
+      "mashos-api": "mashos-api(126).zip"
+    },
+    "source_diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 3,
+        "changed": 8,
+        "removed": 0
+      }
+    },
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+      "manifest.json",
+      "cocolon_local_file_inventory_diff_20260607_emlis_d_backend_red.csv"
+    ],
+    "added_source_files": [
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_body_free_p7.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_existing_gate_chain_p8.py",
+      "mashos-api/ai/tests/test_emlis_ai_d_source_unavailable_normal_observation_recovery.py"
+    ],
+    "primary_changed_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_availability.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_availability_p4.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_p5.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_surface_requirement_p1.py"
+    ],
+    "local_validation_record": {
+      "phase20_10": "4 passed",
+      "phase20_10_plus_d_focused": "7 passed",
+      "step10_minimum_backend_regression": "14 passed, 1 warning",
+      "rn_contract": "36 passed / 0 failed",
+      "warning_note": "Existing Pydantic V1 style root_validator deprecation warning; not part of this correction."
+    }
+  },
+  "emlis_d_source_unavailable_normal_observation_recovery_policy_2026_06_07": {
+    "schema_version": "cocolon.emlis.d_source_unavailable_normal_observation_recovery.step2_11.2026-06-07",
+    "summary": "Recover safe + eligible D-equivalent source-unavailable normal observation through complete initial surface recomposition without case-specific routes or Gate relaxation.",
+    "implemented_steps": [
+      "Step2 focused regression for D-equivalent source-unavailable recovery",
+      "Step3 material relationship transition surface requirement",
+      "Step4 availability receives material route and composer failure summary",
+      "Step5 source_unavailable recovery lane classification",
+      "Step6 recomposition permission for limited source-unavailable safe eligible input",
+      "Step7 body-free candidate meta",
+      "Step8 reply_service existing gate chain adoption",
+      "Step9 Phase20-10 green",
+      "Step10 backend regression green",
+      "Step11 RN contract green"
+    ],
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "visible_body": "input_feedback.comment_text",
+    "gate_relaxed": false,
+    "normal_observation_rebuild_allowed_for_source_unavailable": false,
+    "complete_initial_surface_recomposition_used": true,
+    "case_specific_route_used": false,
+    "fixed_comment_text_used": false,
+    "phase19_route_reactivated": false,
+    "body_free_meta_required": true,
+    "candidate_source_kinds": [
+      "complete_initial_surface_recomposition_candidate"
+    ],
+    "forbidden_public_payloads": [
+      "raw input",
+      "original candidate body",
+      "candidate body",
+      "comment_text body"
+    ],
+    "forbidden_runtime_shortcuts": [
+      "D case route",
+      "fixed commentText",
+      "Phase19 route token",
+      "display gate relaxation"
+    ]
+  },
+  "latest_source_basis_2026_06_07_emlis_d_source_unavailable_recovery": {
+    "premise": "Cocolon_前提資料(186).zip",
+    "Cocolon": "Cocolon_11(9).zip",
+    "mashos-api": "mashos-api_11(18).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 849,
+      "total": 1066
+    },
+    "zip_sha256": {
+      "Cocolon_前提資料(186).zip": "daf9fa20896f52301ed7f97f2c57a985801336ba96cd451a44dfe3bd8fc9b9b5",
+      "Cocolon_11(9).zip": "f29417b9cafe5ee4494428ebb92e4c3e3c926cc9fd75794360b91698b938d8e1",
+      "mashos-api_11(18).zip": "317133d1949d1050e918d808bfd551b8ccaf485fa1e494a763eb3fed3a65c576"
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon(213).zip",
+      "mashos-api": "mashos-api(126).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 3,
+        "changed": 8,
+        "removed": 0
+      }
+    },
+    "scope": "EmlisAI D-equivalent source-unavailable normal observation recovery. Limited composer shallow empty is treated as recoverable source-unavailable when safe + material eligible + labelled_two_stage; recomposition candidate remains body-free and is adopted only after existing gates pass. Production RN UI / DB / API route / public response keys remain unchanged.",
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260607_emlis_d_backend_red.csv",
+    "diff_inventory_sha256": "df312f6aed998ac4a7693b9704a0c758ff42bc14c8f4c8737d2abd56ea2023bd"
+  },
+  "local_file_inventory_diff_20260607_emlis_d_backend_red": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260607_emlis_d_backend_red.csv",
+    "compares": [
+      "Cocolon(213).zip -> Cocolon_11(9).zip",
+      "mashos-api(126).zip -> mashos-api_11(18).zip"
+    ],
+    "change_summary": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 3,
+        "changed": 8,
+        "removed": 0
+      }
+    },
+    "row_count_including_header": 12,
+    "sha256": "df312f6aed998ac4a7693b9704a0c758ff42bc14c8f4c8737d2abd56ea2023bd",
+    "role": "D相当入力 source-unavailable normal observation recoveryの実ファイル差分一覧。前提資料差分更新用であり、タスクリストではない。"
+  },
+  "emlis_public_input_feedback_arrival_contract_repair_policy_2026_06_08": {
+    "schema_version": "cocolon.emlis.public_input_feedback_arrival_contract_repair.step0_10.2026-06-08",
+    "summary": "Align public feedback meta helper, submit inclusion summary, and product surface validation so visible_surface yellow/warn is warning-only for public arrival while true unavailable/safety and terminal gates remain fail-closed.",
+    "implemented_steps": [
+      "Step0 baseline red ledger",
+      "Step1 Red A focused red tests",
+      "Step2 public feedback meta helper repair",
+      "Step3 submit inclusion summary alignment",
+      "Step4 product surface validation rn_visible alignment",
+      "Step5 Red A E2E display contract green",
+      "Step6 Red B1/B2 stale contract expectation classification",
+      "Step7 true unavailable / safety fail-closed regression",
+      "Step8 no body leak boundary strengthening",
+      "Step9 focused suite green",
+      "Step10 existing green regression confirmation and User Label sanitizer contract repair"
+    ],
+    "public_contract_changed": false,
+    "rn_display_condition": "input_feedback.emlis_ai.observation_status == passed and input_feedback.comment_text non-empty only",
+    "visible_body": "input_feedback.comment_text",
+    "gate_relaxed": false,
+    "visible_surface_yellow_warn_blocks_public_arrival": false,
+    "visible_surface_repair_required_blocks_public_arrival": true,
+    "visible_surface_red_blocks_public_arrival": true,
+    "terminal_visible_surface_actions_block_public_arrival": [
+      "rerender_surface",
+      "reroute_low_information",
+      "block",
+      "fail_closed"
+    ],
+    "true_unavailable_fail_closed": true,
+    "true_safety_fail_closed": true,
+    "body_free_meta_required": true,
+    "public_meta_boundary_markers": [
+      "raw_input_included",
+      "comment_text_body_included",
+      "candidate_body_included",
+      "internal_meta_returned"
+    ],
+    "forbidden_public_payloads": [
+      "raw input",
+      "original candidate body",
+      "candidate body",
+      "comment_text body"
+    ],
+    "forbidden_runtime_shortcuts": [
+      "fixed commentText",
+      "case-specific route",
+      "display gate relaxation",
+      "product_surface_valid as RN display condition"
+    ]
+  },
+  "latest_source_basis_2026_06_08_public_input_feedback_arrival_contract_repair": {
+    "premise": "Cocolon_前提資料(190).zip",
+    "Cocolon": "Cocolon_11(10).zip",
+    "mashos-api": "mashos-api_11(19).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 853,
+      "total": 1070
+    },
+    "zip_sha256": {
+      "premise": "fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09",
+      "Cocolon": "aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d",
+      "mashos-api": "02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c"
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon(216).zip",
+      "mashos-api": "mashos-api(129).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 4,
+        "changed": 8,
+        "removed": 0
+      }
+    },
+    "scope": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10"
+  },
+  "source_snapshot_2026_06_08_public_input_feedback_arrival_contract_repair_step0_10": {
+    "date": "2026-06-08",
+    "premise": "Cocolon_前提資料(190).zip",
+    "Cocolon": "Cocolon_11(10).zip",
+    "mashos-api": "mashos-api_11(19).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 853,
+      "total": 1070
+    },
+    "sha256": {
+      "premise": "fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09",
+      "Cocolon": "aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d",
+      "mashos-api": "02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c"
+    },
+    "scope": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10",
+    "public_contract_changed": false,
+    "rn_production_ui_changed": false,
+    "db_schema_changed": false,
+    "api_route_changed": false,
+    "schema_file_materialized": false,
+    "full_01_02_regeneration": false,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(216).zip",
+      "mashos-api": "mashos-api(129).zip"
+    },
+    "source_diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 4,
+        "changed": 8,
+        "removed": 0
+      }
+    },
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "01A_cocolon_overall_structure_app_foundation_home.md",
+      "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+      "02_cocolon_national_system.md",
+      "02A_cocolon_national_system_input_save_dispatch.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+      "cocolon_local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival.csv",
+      "manifest.json"
+    ],
+    "added_source_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedBClassification_Step6_20260608.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedLedger_Step0_20260608.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step10_ExistingGreenRegression_20260608.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step5_RedA_E2EGreen_20260608.md"
+    ],
+    "primary_changed_source_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emotion_submit_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_display_contract.py",
+      "mashos-api/ai/tests/test_emlis_ai_product_surface_validation_p3.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/tests/test_emlis_ai_user_label_connection_e2e_contract.py",
+      "mashos-api/ai/tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py"
+    ],
+    "local_validation_record": {
+      "cocolon_source_diff": "0 added / 0 changed / 0 removed",
+      "p0_p1_backend_focused_suite_local": "51 passed / 1 warning",
+      "user_label_connection_sanitizer_focused_local": "1 passed / 1 warning",
+      "step10_recorded_rn_contract": "36 passed / 0 failed",
+      "step10_recorded_api_contract": "4 passed / 3 warnings",
+      "step10_recorded_two_stage_e2e": "6 passed / 1 warning",
+      "step10_recorded_public_recovery_d_limited_subset": "53 passed / 1 warning",
+      "step10_recorded_user_label_product_readfeel_subset": "108 passed / 1 warning"
+    }
+  },
+  "latest_modified_premise_files_2026_06_08_public_input_feedback_arrival_contract_repair": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "01A_cocolon_overall_structure_app_foundation_home.md",
+    "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+    "02_cocolon_national_system.md",
+    "02A_cocolon_national_system_input_save_dispatch.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "03_cocolon_naming_system.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+    "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+    "emlis_ai_state_answer_human_follow_definition_2026_05_26.md",
+    "cocolon_local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival.csv",
+    "manifest.json"
+  ],
+  "local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival.csv",
+    "sha256": "4e0ca263fd4270cd20877b239cc26da13324a5b4b17acec0b9d680a337f6861d",
+    "row_count_excluding_header": 12,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(216).zip",
+      "mashos-api": "mashos-api(129).zip"
+    },
+    "source_diff_to": {
+      "Cocolon": "Cocolon_11(10).zip",
+      "mashos-api": "mashos-api_11(19).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 4,
+        "changed": 8,
+        "removed": 0
+      }
+    }
   }
 }

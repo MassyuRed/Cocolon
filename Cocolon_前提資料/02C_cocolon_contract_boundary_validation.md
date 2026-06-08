@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-06"
+revision_date: "2026-06-08"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3130,3 +3130,141 @@ RN contract: 36 passed
 - fixed fallbackやcase専用routeでC/Dを通す。
 - raw input / candidate body / comment_text bodyをmetaへ入れる。
 ```
+
+# 2026-06-07 差分追記: EmlisAI Limited / LowInfo reception-required contract / validation boundary
+
+`mashos-api_10(27).zip` では、limited / low-information reception-required surfaceのcontract / guard / validation boundaryが追加されている。これはpublic API contract変更ではなく、既存contractを守ったまま、正式観測に届かない入力でも「受け取りなし」「質問だけ」で返さないための内部境界である。
+
+追加されたcontract / guard:
+
+| contract / guard | 境界 |
+|---|---|
+| limited_grounding surface requirement | `surface_requirement_family=labelled_two_stage`、`reception_section_required=true`、`low_information_allowed=false`。 |
+| low_information reception-required shape | `surface_requirement_family=low_information_observation` は維持。ただし `見えたこと： / Emlisから：` を必須にする。 |
+| limited_grounding reception surface plan | `cocolon.emlis.limited_grounding_reception_surface_plan.v1`。body-free planであり、raw input / comment_text bodyをmetaへ入れない。 |
+| question dominance guard | `cocolon.emlis.question_dominance_guard.v1`。reception missing / question before reception / question only / question dominantをblocker化する。 |
+| H/I/J E2E regression | `passed + comment_text`、二段shape、low_information misrouteなし、case専用routeなしを確認する。 |
+| existing regression contract | public key追加なし、RN表示contract変更なし、Gate policy変更なし、safety / infra偽装なしを固定する。 |
+
+追加blocker codeとして読むもの:
+
+```text
+product_surface_invalid_reception_section_missing
+product_surface_invalid_question_dominant_surface
+product_surface_invalid_question_before_reception
+product_surface_invalid_question_only_surface
+```
+
+不変contract:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key変更なし
+public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+固定テンプレート追加なし
+H/I/J専用case route / case専用surface / fixed commentText追加なし
+raw input / original body / candidate body / comment_text body のpublic meta混入なし
+```
+
+# 2026-06-07 差分追記: EmlisAI D相当入力 source-unavailable recovery contract boundary
+
+`mashos-api_11(18).zip` では、D相当入力の `limited_composer_shallow_empty_candidate` 後の回復境界が追加されている。これはpublic API contract変更ではなく、既存contractを守ったまま、safe + eligible な通常観測を `infrastructure_error / empty comment_text` で終わらせないための内部境界である。
+
+追加されたcontract / guard:
+
+| contract / guard | 境界 |
+|---|---|
+| material relationship transition surface requirement | `relationship/action/change/value/target` 系materialを持つeligible通常観測を `labelled_two_stage` 要求へ寄せる。 |
+| source-unavailable availability lane | `limited_composer_shallow_empty_candidate` をsource unavailable familyとして扱い、`material_sufficient=true` / `surface_requirement_family=labelled_two_stage` を保持する。 |
+| recomposition permission | `complete_initial_client_resolved=false` でもsource unavailable recovery laneならrecompositionを許可する。 |
+| body-free candidate meta | `candidate_body_in_meta=false` / `case_specific_route_used=false` / `raw_input_included=false` を固定する。 |
+| existing Gate chain adoption | candidate生成と採用を分け、既存Gate全通過時だけ `candidate_adopted_after_existing_gates=true` にする。 |
+
+不変contract:
+
+```text
+RN表示条件変更なし
+/emotion/submit route変更なし
+request key / response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+D専用route / fixed commentText追加なし
+Phase19 route復活なし
+raw input / original body / candidate body / comment_text body のpublic meta混入なし
+```
+
+# 2026-06-08 差分追記: EmlisAI P0-P1 Public Input Feedback Arrival contract / validation boundary
+
+`mashos-api_11(19).zip` では、safe + passed + comment_text non-empty のEmlis応答が、public `input_feedback` に到達しない不整合を修正するcontract / validation boundaryが追加・更新されている。これはpublic API contract変更ではなく、Display Gate側とpublic inclusion側のGate意味論を揃える修正である。
+
+保持するcontract:
+
+| contract | 維持する内容 |
+|---|---|
+| API route | `POST /emotion/submit` を維持する。 |
+| response shape | `input_feedback.comment_text` / `input_feedback.emlis_ai.observation_status` を維持する。 |
+| RN表示条件 | `observation_status == passed` かつ `comment_text` non-empty のまま。 |
+| RN title | `Emlisの観測` のまま。 |
+| DB | physical schema / write pathを変更しない。 |
+| Gate | Display / Runtime / Visible / Grounding / Template / Safety Gateを緩めない。 |
+| public meta | raw input / original candidate body / candidate body / comment_text bodyを含めない。 |
+
+追加・更新されたcontract / guard:
+
+| 層 | ファイル | 何を守るか |
+|---|---|---|
+| Public feedback meta | `emlis_ai_public_feedback_meta.py` | `visible_surface_acceptance_gate` のyellow/warnをterminal blockerにせず、repair_required / red / terminal actionはblockする。 |
+| Submit inclusion summary | `emotion_submit_service.py` | `public_feedback_included` を到達source of truthにし、yellow/warnをabsence reasonへ誤分類しない。 |
+| Product surface validation | `emlis_ai_product_surface_validation.py` | `public_reached` / `rn_visible` / `product_surface_valid` を分け、visible yellow/warn warning-onlyをpublic gate blockerとして扱わない。 |
+| Display contract | `test_emlis_ai_display_contract.py` | Red A到達、Red B safe recovery、public meta no body leakをE2Eで固定する。 |
+| Fail-closed regression | `test_emlis_ai_public_feedback_meta.py` | true unavailable / infrastructure_error / safety_blocked はcomment_textがあってもpublic input_feedbackへ出さない。 |
+| User Label sanitizer | `test_emlis_ai_user_label_connection_e2e_contract.py` | `candidate_body_included=false` はbody-free markerとして許可し、raw `candidate_body` keyやcomment body leakは禁止する。 |
+
+visible surface public inclusion policy:
+
+| visible_surface_acceptance_gate | public inclusion | 読み方 |
+|---|---:|---|
+| `classification=yellow`, `action=warn`, `passed=false` | allow候補 | warning-only。public到達は止めない。 |
+| `classification=repair_required` | block | repair前本文は出さない。 |
+| `classification=red` | block | fail-closed。 |
+| `action=rerender_surface` | block | rerender前本文は出さない。 |
+| `action=reroute_low_information` | block | reroute前本文は出さない。 |
+| `action=block` / `fail_closed` | block | terminal。 |
+| `passed=false` かつ `action!=warn` | block | 不明状態は安全側。 |
+
+no body leak contract:
+
+```text
+public_feedback_meta_boundary.sanitized == true
+internal_meta_returned == false
+raw_input_included == false
+comment_text_included == false
+comment_text_body_included == false
+candidate_body_included == false
+```
+
+禁止:
+
+```text
+- yellow/warn修正をGate緩和と読む。
+- repair_required / red / terminal actionをpublic表示へ通す。
+- public_reachedを商品品質合格として扱う。
+- product_surface_validをRN表示条件へ使う。
+- true unavailable / safety / infrastructureをsafe recoveryと混同する。
+- body-free marker名に `candidate_body` が含まれるだけで本文漏れと扱う。
+- raw input / candidate body / comment_text bodyをpublic meta、diagnostic summary、ProductQuality eventへ入れる。
+```
+
+確認済みvalidation:
+
+```text
+focused suite: 51 passed / 1 warning
+User Label Connection sanitizer focused: 1 passed / 1 warning
+```
+
+warningは既存Pydantic deprecationであり、今回のcontract差分では触らない。

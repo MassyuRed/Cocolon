@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-06-06"
+revision_date: "2026-06-07"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4681,4 +4681,50 @@ Account / Subscription / DB支援領域から見る禁止事項:
 - `product_surface_valid` をpublic observation_status enumにしない。
 - `complete_initial_surface_recomposition_candidate` / `labelled_two_stage_surface_recomposition_candidate` をDB physical nameやAPI route名へ露出しない。
 - diagnostic metaのためにraw input / comment_text body / candidate bodyを保存しない。
+```
+
+# 2026-06-07 差分追記: Backend支援 EmlisAI Limited / LowInfo 受け取り必須化 P0-P9
+
+`mashos-api_10(27).zip` では、EmlisAI backend support / test領域に Limited Grounding / Low Information 受け取り必須化 P0〜P9 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、保存直後EmlisAI reply runtimeのsurface routing、受け取りhelper、product surface validation、E2E / contract regressionを補強するbackend内部差分である。
+
+Backend支援上の読み方:
+
+- `emlis_ai_limited_grounding_reception_surface.py` は新しいpublic APIではなく、P3/P5/P8のrecompositionから呼ばれる内部helperである。
+- `emlis_ai_question_dominance_guard.py` は本文を返すownerではなく、公開候補の構造booleans / blocker codeをbody-freeに出すguardである。
+- `test_emlis_ai_existing_regression_contract_p9.py` は、public response top-level key、RN表示contract、Gate policy、body-free meta境界を変えていないことを固定する。
+- RN / account / subscription / entitlement / DB schemaのowner追加はない。
+
+# 2026-06-07 差分追記: Backend支援 EmlisAI D相当入力 source-unavailable recovery
+
+`mashos-api_11(18).zip` では、EmlisAI backend support / test領域に D相当入力 source-unavailable normal observation recovery が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、保存直後EmlisAI reply runtimeで、limited composerが `limited_composer_shallow_empty_candidate` に落ちたsafe eligible通常入力をcomplete initial surface recompositionへ接続するbackend内部差分である。
+
+Backend支援上の読み方:
+
+- `emlis_ai_complete_initial_surface_availability.py` は新しいpublic APIではなく、material route / surface requirement / composer failureを集約する内部availability ownerである。
+- `emlis_ai_complete_initial_surface_recomposition.py` は、source unavailableをnormal rebuildで偽装せず、safe eligible materialからpublic observation candidateを再構成する内部ownerである。
+- `emlis_ai_reply_service.py` は、candidate generatedとcandidate adoptedを分け、既存Gate chain通過後だけ採用する。
+- `test_emlis_ai_d_source_unavailable_normal_observation_recovery.py` は、D相当入力専用runtime routeではなく、source-unavailable recoveryの回帰確認である。
+- RN / account / subscription / entitlement / DB schemaのowner追加はない。
+
+
+
+# 2026-06-08 差分追記: Backend支援 EmlisAI Public Input Feedback Arrival Contract Repair Step0-10
+
+`mashos-api_11(19).zip` では、EmlisAI backend support / test領域に P0/P1 Public Input Feedback Arrival Contract Repair Step0〜10 が反映されている。これはAccount / Subscription / DB / public APIの変更ではなく、保存直後EmlisAI reply runtimeで `comment_text` が生成されているsafe passed応答を、public `input_feedback` inclusion側だけの解釈違いで落とさないためのbackend内部差分である。
+
+Backend支援上の読み方:
+
+- `emlis_ai_public_feedback_meta.py` は、public meta sanitizerとpublic feedback inclusion policyのownerとして読む。
+- `emotion_submit_service.py` は、submit内部summaryで `public_reached` / `rn_visible` / `product_surface_valid` を分けるownerとして読む。
+- `emlis_ai_product_surface_validation.py` は、RNで表示できることと商品surfaceとして妥当かを分けるownerとして読む。
+- User Label Connection側のsanitizer testは、`candidate_body_included=false` をbody-free markerとして許可し、raw `candidate_body` keyは禁止する。
+
+Account / Subscription / DB支援領域から見る禁止事項:
+
+```text
+- `yellow / warn` policyをsubscription tierやRN表示条件へ持ち込まない。
+- `product_surface_valid` をpublic observation_status enumにしない。
+- public feedback diagnostic summaryをDB physical schemaへ昇格しない。
+- raw input / comment_text body / candidate bodyをpublic metaやUser Label Connection public summaryへ出さない。
+- safe recovery表示可をtrue unavailable / safety表示可へ広げない。
 ```

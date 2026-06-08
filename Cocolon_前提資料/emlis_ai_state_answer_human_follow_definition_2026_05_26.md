@@ -1859,3 +1859,88 @@ P0〜P10では、本資料で定義した状態回答・人間的フォローの
 ### 21.3 作業時の読み替え
 
 `complete_initial_surface_recomposition_candidate`、`labelled_two_stage_surface_recomposition_candidate`、`product_surface_valid`、`public_surface_lineage` は、状態回答・人間的フォローをCocolonの商品surfaceとして守るための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+
+## 22. 2026-06-07 追補: Limited Grounding / Low Information 受け取り必須化 P0-P9 実装反映
+
+P0〜P9では、本資料で定義した「前半: 構造観測 / 状態回答」「後半: 人間的フォロー / Emlisの感想」の二層を、`limited_grounding` と true `low_information` にも適用するためのbackend内部補強が追加された。
+
+### 22.1 追加された内部境界
+
+| 境界 | 読み方 |
+|---|---|
+| limited_grounding reception | 深い断定は避けるが、見えている範囲の限定観測と `Emlisから` の受け取りを必ず持つ。 |
+| low_information reception-required | 低情報は残すが、質問だけで返さず、最小観測 + 受け取り + 必要なら軽い質問へする。 |
+| question dominance guard | 人間的フォローの代わりに質問が主役になるsurfaceをproduct validationで止める。 |
+| semantic material ids | 回復、未来意図、関係願い、比較基準、小さな変化、価値保持、自己観測を一般材料として扱う。 |
+
+### 22.2 この追補で変えないこと
+
+```text
+- 状態回答と人間的フォローの基本思想は変えない。
+- `input_feedback.comment_text` が唯一のpublic visible bodyである。
+- `Emlisの観測` のRN表示タイトルと表示条件は変えない。
+- low_informationを廃止しない。
+- limited_groundingをeligibleへ無理に昇格しない。
+- 完成返答テンプレやH/I/J case_id固定文をruntimeへ追加しない。
+- raw input / memo / memo_action / evidence text / comment_text body / candidate bodyをpublic metaへ出さない。
+```
+
+### 22.3 作業時の読み替え
+
+`limited_grounding_reception_surface_plan`、`low_information_reception_required`、`question_dominance_guard`、`semantic_material_ids` は、状態回答・人間的フォローを正式観測未満の入力でもCocolonらしく返すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+
+## 23. 2026-06-07 追補: D相当入力 source-unavailable recovery と状態回答・人間的フォロー
+
+D相当入力 source-unavailable normal observation recoveryでは、本資料で定義した「前半: 構造観測 / 状態回答」「後半: 人間的フォロー / Emlisの感想」の二層を、limited composerが空候補になったsafe eligible通常入力にも適用するためのbackend内部補強が追加された。
+
+### 23.1 状態回答として読む部分
+
+D相当入力では、関係の区切り、受け取った優しさ、友達が怒ってくれることへの感謝、別の形で返したい意図などがmaterial routeで読める。これらは、case専用固定文ではなく、`relationship / action / change / value` などのvisible material slotsとrelation material idsとして扱う。
+
+### 23.2 人間的フォローとして読む部分
+
+`labelled_two_stage` requirementでは、前半を `見えたこと：` の状態回答、後半を `Emlisから：` の人間的フォローとして扱う。limited composerが `limited_composer_shallow_empty_candidate` で空になっても、safe + eligible + material sufficientなら、complete initial surface recomposition candidateにより二層surfaceへ戻す。
+
+### 23.3 この追補で変えないこと
+
+```text
+状態回答と人間的フォローの基本思想は変えない。
+固定の優しい文で返さない。
+D相当入力専用の完成文を持たない。
+source unavailableをnormal rebuildへ広げない。
+`input_feedback.comment_text` が唯一のpublic visible bodyである。
+`Emlisの観測` のRN表示タイトルと表示条件は変えない。
+raw input / memo / memo_action / evidence text / comment_text body / candidate bodyをpublic metaへ出さない。
+```
+
+### 23.4 作業時の読み替え
+
+`limited_composer_shallow_empty_candidate`、`complete_initial_surface_recomposition_candidate`、`existing_gate_chain`、`candidate_body_in_meta`、`case_specific_route_used` は、状態回答・人間的フォローをsource-unavailable後もCocolonらしく返すための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。
+
+## 24. 2026-06-08 追補: Public Input Feedback Arrival Contract Repair と状態回答・人間的フォロー
+
+P0/P1 Public Input Feedback Arrival Contract Repairでは、本資料で定義した状態回答・人間的フォローが内部では生成されているのに、public `input_feedback` へ届かない状態を閉じるためのbackend内部補強が追加された。
+
+### 24.1 状態回答として読む部分
+
+`visible_surface_acceptance_gate` が `yellow / warn` の場合、その本文は商品品質上の注意を持つ可能性がある。ただし、Display Gateが非terminalとして扱い、`observation_status=passed` と `comment_text` が成立している場合、public inclusion側だけで沈黙させない。
+
+### 24.2 人間的フォローとして読む部分
+
+EmlisAIは、ユーザーが入力した直後に「読まれた形」を返す出口である。`comment_text` が生成されているsafe passed応答を、backend内部summaryの読み違いでRNへ届かないままにすると、状態回答と人間的フォローの思想がユーザー体験へ届かない。
+
+### 24.3 この追補で変えないこと
+
+```text
+状態回答と人間的フォローの基本思想は変えない。
+`input_feedback.comment_text` が唯一のpublic visible bodyである。
+`Emlisの観測` のRN表示タイトルと表示条件は変えない。
+product_surface_validとrn_visibleを同一視しない。
+true unavailable / safety_blockedを読めたふりで返さない。
+完成返答テンプレやcase_id固定文をruntimeへ追加しない。
+raw input / memo / memo_action / evidence text / comment_text body / candidate bodyをpublic metaへ出さない。
+```
+
+### 24.4 作業時の読み替え
+
+`visible_surface_acceptance_gate yellow/warn`、`public_feedback_not_included_visible_surface_gate`、`comment_text_body_included`、`candidate_body_included` は、状態回答・人間的フォローをpublic表示へ安全に届けるための内部contract名として読む。EmlisAIのvisible名、public status、RN表示条件、DB/API名に変換しない。

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-06"
+revision_date: "2026-06-08"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1001,4 +1001,115 @@ Cocolon/tests/rn-screen-contracts.test.js
 - Gate Recovery material surface / diagnostic recovery surfaceを本文へ出す。
 - raw input / original candidate body / candidate body / comment_text bodyをmetaやProductQuality eventへ入れる。
 - fixed fallback、case専用route、case専用surfaceでAcceptanceを通す。
+```
+
+# 2026-06-07 差分追記: EmlisAI Limited Grounding / Low Information 受け取り必須化 P0-P9 rule / test index
+
+最新実ファイル `mashos-api_10(27).zip` では、limited / low-information reception-requiredのrule / guard / regressionが追加・変更されている。RN側のrule / screen contract変更はない。
+
+## Production owner / guard
+
+| path | 何を拘束するか |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py` | limited_groundingをlabelled two-stageへ分岐し、low_informationもreception required shapeへする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | limited_groundingを低情報laneから外し、labelled two-stage recompositionへ送る。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py` | limited_groundingをP6二段recomposition対象にする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_grounding_reception_surface.py` | limited_grounding用の受け取りsurface plan / composer / summary。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_low_information_observation_composer.py` | true low_informationの `見えたこと： / Emlisから：` body assembly。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_observation_surface_realizer_tone.py` | low_informationのreception-required shapeをrealizer側で崩さない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py` | reception-required shapeとquestion dominance guardをproduct surface validationへ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_question_dominance_guard.py` | 質問先行・質問だけ・質問中心surfaceをbody-free summaryで検出する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_input_material_bundle.py` | 回復・未来意図・関係願い・比較基準・小さな変化等のsemantic material ids。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py` | source unavailable側でもlimited_grounding reception helperへ戻せるようにする。 |
+
+## Regression / contract tests
+
+| path | 固定する境界 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_hij_input_material_bundle_current_p0.py` | H=eligible、I/J=limited_groundingのcurrent material基準。 |
+| `mashos-api/ai/tests/test_emlis_ai_public_surface_requirement_limited_lowinfo_reception_p1.py` | limitedとlow_informationのsurface requirement分岐。 |
+| `mashos-api/ai/tests/test_emlis_ai_gate_recovery_limited_lowinfo_reception_p2.py` | limited_groundingを低情報laneから外すrouting。 |
+| `mashos-api/ai/tests/test_emlis_ai_labelled_two_stage_limited_reception_p3.py` | limited_groundingのlabelled two-stage recomposition。 |
+| `mashos-api/ai/tests/test_emlis_ai_limited_grounding_reception_surface_p4.py` | limited reception helperのbody-free plan / semantic material。 |
+| `mashos-api/ai/tests/test_emlis_ai_low_information_reception_required_p5.py` | true low_informationの受け取り必須化。 |
+| `mashos-api/ai/tests/test_emlis_ai_product_surface_question_dominance_guard_p6.py` | question dominance guardとproduct surface validation。 |
+| `mashos-api/ai/tests/test_emlis_ai_input_material_bundle_semantics_p7.py` | semantic material idsの一般化とcategory-only禁止。 |
+| `mashos-api/ai/tests/test_emlis_ai_hij_reception_required_regression_p8.py` | H/I/J E2E public response回帰。 |
+| `mashos-api/ai/tests/test_emlis_ai_existing_regression_contract_p9.py` | 既存RN/API/Gate/public meta contract確認。 |
+
+作業時の注意:
+
+```text
+- `question_dominance_guard` は文章生成ではなくvalidation guardとして読む。
+- H/I/J testはcase専用runtime routeではなく、一般材料認識とpublic contractの回帰として読む。
+- low_informationを消したり、長文を自動でeligibleへ上げたりしない。
+```
+
+# 2026-06-07 差分追記: EmlisAI D相当入力 source-unavailable normal observation recovery rule / test index
+
+最新実ファイル `mashos-api_11(18).zip` では、D相当入力のsource-unavailable recoveryに関するrule / guard / regressionが追加・変更されている。RN側のrule / screen contract変更はない。
+
+## Production owner / guard
+
+| path | 何を拘束するか |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_surface_requirement.py` | relation transition materialを持つeligible通常観測を `labelled_two_stage` 要求へ寄せる。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_availability.py` | source unavailable family / material_sufficient / surface_requirement_family / recovery_laneをbody-free summaryに固定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_initial_surface_recomposition.py` | source unavailable後のcomplete initial surface recomposition permissionとbody-free candidate metaを拘束する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py` | recovery plan / candidate summaryをbody-freeに保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | recomposition candidateを既存Gate chainへ通し、通過時だけ採用する。 |
+
+## Regression / contract test
+
+| path | 固定すること |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_d_source_unavailable_normal_observation_recovery.py` | D相当入力がsafe + eligible + source_unavailableから `normal_observation / passed / comment_textあり` へ戻ること。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_body_free_p7.py` | candidate metaがbody-freeで、raw input / comment_text body / candidate bodyを持たないこと。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_existing_gate_chain_p8.py` | candidate生成と採用を分け、既存Gate全通過時だけ採用すること。 |
+| `mashos-api/ai/tests/test_emlis_ai_phase20_10_real_device_recheck.py` | A/B/C/Dの回帰、特にDが `normal_observation / passed` を維持すること。 |
+
+このrule indexでの禁止:
+
+```text
+Gateを緩めてgreenにする
+D exact fixtureをruntime条件にする
+fixed fallback / fixed commentTextを追加する
+source unavailableをnormal rebuildで偽装する
+bodyをpublic metaへ出す
+RN表示条件をbackend診断metaへ依存させる
+```
+
+# 2026-06-08 差分追記: EmlisAI P0-P1 public input_feedback arrival rule / test index
+
+public `input_feedback` 到達、`Emlisの観測` 表示境界、`visible_surface_acceptance_gate` のpublic inclusion意味論を触る場合は、次を同時確認する。
+
+| path | 何を拘束するか | いつ必須か |
+|---|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py` | `should_include_public_input_feedback()` とpublic-safe `input_feedback.emlis_ai` meta境界。yellow/warn policy、fail-closed、body-free markerを扱う。 | public feedback meta / inclusion条件を触る時 |
+| `mashos-api/ai/services/ai_inference/emotion_submit_service.py` | `/emotion/submit` のpublic feedback inclusion summary。`public_reached` / `rn_visible` / `product_surface_valid` の分類を扱う。 | submit response summary / diagnosticを触る時 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_product_surface_validation.py` | product surface validation。visible yellow/warn warning-onlyとstrict gate blockを分ける。 | product_surface_valid / rn_visible / public_gate_blockedを触る時 |
+| `mashos-api/ai/tests/test_emlis_ai_public_feedback_meta.py` | yellow/warn allow、repair_required block、true unavailable / safety fail-closed、no body leakの単体regression。 | public feedback meta変更時 |
+| `mashos-api/ai/tests/test_emotion_submit_public_feedback_inclusion_summary_p7.py` | inclusion summaryがyellow/warnをabsence reasonへ落とさないこと。 | submit summary変更時 |
+| `mashos-api/ai/tests/test_emlis_ai_product_surface_validation_p3.py` | product validation側のpublic gate / rn_visible誤分類を防ぐ。 | product surface validation変更時 |
+| `mashos-api/ai/tests/test_emlis_ai_display_contract.py` | Red A到達、Red B safe recovery、no body leakをE2E display contractとして守る。 | Emlis display contract変更時 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_e2e_contract.py` | User Label Connection public meta sanitizer。body-free markerは許可し、raw body / raw text leakは禁止する。 | User Label Connection public meta変更時 |
+
+追加された実装記録doc:
+
+```text
+mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedLedger_Step0_20260608.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step5_RedA_E2EGreen_20260608.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_RedBClassification_Step6_20260608.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_Step10_ExistingGreenRegression_20260608.md
+```
+
+固定する読み方:
+
+```text
+- `classification=yellow` + `action=warn` はpublic inclusionのterminal blockerではない。
+- `repair_required` / `red` / `rerender_surface` / `reroute_low_information` / `block` / `fail_closed` はblockerである。
+- true unavailable / infrastructure_error / safety_blockedはcomment_textがあってもfail-closedする。
+- body-free marker `candidate_body_included=false` をbody leakとして扱わない。
+- raw `candidate_body` key、candidate_comment_text、raw input、comment_text bodyは引き続き禁止する。
+- RN表示条件、RN表示タイトル、/emotion/submit route、DB write path、public response top-level keyは変えない。
 ```

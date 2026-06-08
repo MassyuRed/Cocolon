@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-06-04"
+revision_date: "2026-06-08"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(173).zip"
-  Cocolon: "Cocolon_9(17).zip"
-  mashos-api: "mashos-api_9(27).zip"
+  premise: "Cocolon_前提資料(190).zip"
+  Cocolon: "Cocolon_11(10).zip"
+  mashos-api: "mashos-api_11(19).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 797
-  total: 1014
+  mashos-api: 853
+  total: 1070
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -751,4 +751,72 @@ product_surface_invalid_plain_used_for_two_stage_required
 - `input_feedback.comment_text` と `input_feedback.emlis_ai.observation_status` はpublic contract名として維持する。
 - recovery candidate source kindをRN表示分岐名やDB column名へ転用しない。
 - source kind / blocker code / diagnostic summaryは、body-free内部診断名として扱う。
+```
+
+# 2026-06-07 差分追記: EmlisAI Limited / LowInfo reception-required internal naming boundary
+
+`mashos-api_10(27).zip` では、EmlisAI limited / low-information reception-required用のinternal名が増えている。これらはvisible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| internal name | 読み方 |
+|---|---|
+| `limited_grounding_reception_surface` | `limited_grounding` 入力を限定観測 + `Emlisから` の二段surfaceへ戻す内部helper。 |
+| `limited_grounding_reception_surface_plan` | body-free plan名。schema案やpublic response keyではない。 |
+| `question_dominance_guard` | 質問が主役になっていないかを検査する内部guard。本文生成者ではない。 |
+| `recovered_energy` / `future_intention` / `relationship_wish` / `comparison_baseline_shift` / `small_change_preservation` / `value_preservation` / `self_observation` | input material bundleのsemantic material id。H/I/J専用cueではなく一般材料idとして読む。 |
+| `low_information_reception_required` | true low_informationを残したまま、受け取りsectionを必須にする内部decision source。 |
+
+名称境界:
+
+```text
+- `Emlisの観測` のvisible名は変えない。
+- `input_feedback.comment_text` がpublic visible bodyであることは変えない。
+- `limited_grounding_observation` / `low_information_observation` などの内部語をRN表示名やpublic status enumへ変換しない。
+- semantic material idをDB column名・API request key・case専用modeとして扱わない。
+```
+
+# 2026-06-07 差分追記: EmlisAI D相当入力 source-unavailable recovery internal naming boundary
+
+`mashos-api_11(18).zip` では、D相当入力のsource-unavailable recoveryに関係するinternal名が増えている。これらはvisible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| internal name | 読み方 |
+|---|---|
+| `limited_composer_shallow_empty_candidate` | limited composerが浅い候補を作れなかったsource-unavailable系blocker。true infra確定名ではない。 |
+| `source_unavailable_normal_observation_recovery` | safe + eligible normal observationをsource unavailable後にcomplete initial surface recompositionへ接続する境界名。 |
+| `complete_initial_surface_recomposition_candidate` | source unavailable後にmaterial routeを根拠として再構成するpublic candidate source kind。normal rebuildではない。 |
+| `material_relationship_transition_two_stage` | relation / action / change / value / target材料により `labelled_two_stage` を要求する内部surface requirement source。 |
+| `existing_gate_chain` | recomposition candidateを既存reader / grounding / template / runtime / visible / display gateに通したsummary。 |
+| `candidate_body_in_meta` | candidate本文がmetaへ混入していないかを示すbody-free境界flag。常にpublic metaではfalseで扱う。 |
+| `case_specific_route_used` | D専用route / Phase19専用routeを使っていないことを示す内部flag。 |
+
+命名境界:
+
+```text
+`source_unavailable` はRN表示条件名ではない。
+`complete_initial_surface_recomposition_candidate` はAPI key名ではない。
+`existing_gate_chain` はpublic response objectではなくdiagnostic summaryである。
+`candidate_body_in_meta` をtrueにしてデバッグしない。
+D相当・Phase20-10というtest名をruntime条件名へ転用しない。
+```
+
+
+# 2026-06-08 差分追記: EmlisAI public input_feedback arrival internal naming boundary
+
+`mashos-api_11(19).zip` では、P0-P1 Public Input Feedback Arrival Contract Repairに関係するinternal名・test名・doc名が増えている。これらはvisible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| internal name | 読み方 |
+|---|---|
+| `visible_surface_acceptance_gate` | 表示surfaceの警告・修復・block判断を保持する内部gate summary。public response keyではない。 |
+| `yellow / warn` | warning-onlyの場合はpublic inclusion terminal blockerではない。商品品質合格とは別。 |
+| `public_feedback_not_included_visible_surface_gate` | terminal blockerでpublic feedbackが欠落した場合のdiagnostic。yellow/warnだけではtrueにしない。 |
+| `public_feedback_meta_boundary` | public metaが本文やrawを含まないことを示すboundary marker。 |
+| `candidate_body_included` | falseの場合、body-freeであることを示すmarker。raw candidate bodyそのものではない。 |
+| `stale_contract_expectation` | Red B1/B2の旧test期待が現在contractに追従していない分類。runtime名ではない。 |
+
+名称境界:
+
+```text
+- `Emlisの観測` のvisible名は変えない。
+- `input_feedback.comment_text` がpublic visible bodyであることは変えない。
+- `yellow / warn` をpublic status enumへ変換しない。
+- Step名・ledger名をAPI route / DB column / RN表示名にしない。
 ```

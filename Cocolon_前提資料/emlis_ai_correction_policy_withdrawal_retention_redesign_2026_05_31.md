@@ -1973,3 +1973,122 @@ warningは既存の Pydantic `root_validator` deprecation warningであり、本
 ```
 
 このため、P0〜P10はPhase20是正方針の置換ではなく、Phase20後に残っていた「表示不達」と「表示はされるが商品surfaceではない」を同時に塞ぐ追加補強として読む。
+
+## 20. 2026-06-07 実装反映: Limited Grounding / Low Information 受け取り必須化 P0-P9 current state
+
+最新実ファイル `Cocolon_10(14).zip` / `mashos-api_10(27).zip` では、Phase20是正方針とPublic Observation Recoveryの上に、`limited_grounding` と true `low_information` のsurface体験を分ける受け取り必須化P0〜P9が実装済みである。
+
+### 20.1 実装済み補強の読み方
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| P0 | H/I/J入力のcurrent material基準を固定する。Hはeligible、I/Jはlimited_groundingとして扱い、I/Jを「材料なし」と読まない。 | `test_emlis_ai_hij_input_material_bundle_current_p0.py` |
+| P1 | `limited_grounding` を `low_information_observation` へ潰さず、`labelled_two_stage` / reception requiredへ分岐する。true `low_information` も `Emlisから` 必須shapeへ変える。 | `emlis_ai_public_surface_requirement.py`, `test_emlis_ai_public_surface_requirement_limited_lowinfo_reception_p1.py` |
+| P2 | recovery routingから `limited_grounding` を低情報laneから外し、`labelled_two_stage_surface_recomposition_candidate` をdefault targetにする。 | `emlis_ai_gate_recovery_public_candidate_builder.py`, `test_emlis_ai_gate_recovery_limited_lowinfo_reception_p2.py` |
+| P3 | labelled two-stage recompositionが `limited_grounding` を受け、`見えたこと： / Emlisから：` のcandidateをbuildできるようにする。 | `emlis_ai_labelled_two_stage_surface_recomposition.py`, `test_emlis_ai_labelled_two_stage_limited_reception_p3.py` |
+| P4 | `limited_grounding` の受け取りsurface helperを追加し、限定観測のplan / compose / body-free summaryを独立させる。 | `emlis_ai_limited_grounding_reception_surface.py`, `test_emlis_ai_limited_grounding_reception_surface_p4.py` |
+| P5 | true `low_information` を残したまま、本文shapeを `見えたこと： / Emlisから：` にし、質問は受け取り後へ置く。 | `emlis_ai_low_information_observation_composer.py`, `emlis_ai_observation_surface_realizer_tone.py`, `test_emlis_ai_low_information_reception_required_p5.py` |
+| P6 | product surface validationに question dominance guardを接続し、受け取りなし・質問先行・質問中心surfaceをinvalidにする。 | `emlis_ai_product_surface_validation.py`, `emlis_ai_question_dominance_guard.py`, `test_emlis_ai_product_surface_question_dominance_guard_p6.py` |
+| P7 | material semanticsとして `recovered_energy` / `future_intention` / `relationship_wish` / `comparison_baseline_shift` / `small_change_preservation` / `value_preservation` / `self_observation` を追加する。category単独ではsemantic materialを作らない。 | `emlis_ai_input_material_bundle.py`, `test_emlis_ai_input_material_bundle_semantics_p7.py` |
+| P8 | H/I/Jを `/emotion/submit` 相当のpublic responseまで通すE2E回帰を追加し、`passed + comment_text` と二段構成を固定する。 | `emlis_ai_complete_initial_surface_recomposition.py`, `test_emlis_ai_hij_reception_required_regression_p8.py` |
+| P9 | 既存contract回帰を追加し、RN表示contract / public key / Gate policy / safety・infra偽装禁止 / body-free meta境界を確認する。 | `test_emlis_ai_existing_regression_contract_p9.py` |
+
+### 20.2 この実装で守る是正方針
+
+```text
+- Gate failure後をempty comment_textで終わらせない方針を、低情報・限定観測でも維持する。
+- limited_groundingをlow_information質問surfaceへ潰さない。
+- true low_informationは残すが、Emlisからの受け取りを必ず持つ。
+- 質問は受け取りの後に置き、質問中心surfaceをproduct validationで止める。
+- 長文ならeligible、短文ならlow_informationという単純分類にしない。
+- case専用mode / cue / surface / fixed commentTextを追加しない。
+- public metaへraw input / original candidate body / candidate body / comment_text bodyを出さない。
+```
+
+このため、P0〜P9はPhase20是正方針の置換ではなく、Phase20後に残っていた「情報はあるが正式観測までは断定できない入力」と「本当に低情報な入力」が同じ質問中心体験へ落ちる穴への追加補強として読む。
+
+## 20. 2026-06-07 実装反映: D相当入力 source-unavailable normal observation recovery current state
+
+最新実ファイル `mashos-api_11(18).zip` では、Phase20-10のD相当入力について、safe + eligible + relation/action/change/value materialを持つにもかかわらず `limited_composer_shallow_empty_candidate` から `infrastructure_error` へ落ちる問題を、D専用routeではなくsource-unavailable normal observation recoveryとして補強している。
+
+### 20.1 是正方針上の読み方
+
+```text
+D相当入力
+  -> safe_observation
+  -> material_quality eligible
+  -> visible material slotsあり
+  -> limited composer shallow empty
+  -> source_unavailable family
+  -> complete_initial_surface_recomposition_candidate
+  -> 既存Gate chain
+  -> normal_observation / passed / comment_textあり
+```
+
+この補強はPhase20撤回保持再設計の例外ではない。Phase19のD専用完成surfaceを復活させず、関係・区切り・支援・返したい意図などの一般materialを使って、読めた範囲をpublic surfaceへ戻すための実装である。
+
+### 20.2 維持する禁止事項
+
+```text
+D exact fixtureをruntime条件にしない。
+Phase19 D専用route / token / fixed surfaceを復活させない。
+complete composer env切替だけで完了扱いにしない。
+source unavailableをnormal rebuildで読めたふりにしない。
+Gate Recovery material surfaceをpublic本文にしない。
+Gateを緩めない。
+raw input / candidate body / comment_text bodyをmetaへ入れない。
+RN表示条件を緩めない。
+```
+
+### 20.3 回帰確認
+
+```text
+test_emlis_ai_phase20_10_real_device_recheck.py: 4 passed
+test_emlis_ai_d_source_unavailable_normal_observation_recovery.py + existing gate chain: 5 passed
+public_observation_recovery / HIJ / existing contract backend regression: 14 passed, 1 warning
+RN contract: 36 passed / 0 failed
+```
+
+
+
+## 21. 2026-06-08 実装反映: Public Input Feedback Arrival Contract Repair current state
+
+最新実ファイル `mashos-api_11(19).zip` では、Phase20撤回保持再設計、Public Observation Recovery、Limited / LowInfo reception required、D source-unavailable recoveryの方針を維持したまま、P0/P1 Public Input Feedback Arrival Contract Repair Step0〜10が反映されている。
+
+### 21.1 是正方針上の読み方
+
+```text
+safe + eligible + display_decision passed + comment_text non-empty
+  -> public_meta.observation_status = passed
+  -> visible_surface_acceptance_gate = yellow / warn warning-only
+  -> public inclusion側でもterminal blockerにしない
+  -> input_feedback.comment_text として届く
+  -> product_surface_valid は別判定
+```
+
+これはGate緩和ではない。Phase19個別通過路線やcase専用surfaceの復活でもない。Display Gate側で非terminal warningとして扱った `yellow / warn` を、public inclusion側でも同じ意味で読むための契約修正である。
+
+### 21.2 維持する禁止事項
+
+```text
+A/C/D exact fixtureをruntime条件にしない。
+case専用mode / cue / surface / fixed commentTextを追加しない。
+repair_required / red / rerender_surface / reroute_low_information / block / fail_closed を表示許可しない。
+passed=false を一律許可しない。
+true unavailable / infrastructure error / safety_blocked をpassedへ偽装しない。
+Red B1/B2のsafe recovery表示可を、true unavailable / safety表示可へ広げない。
+Gateを緩めない。
+RN表示条件を緩めない。
+public response keyを増やさない。
+raw input / candidate body / comment_text bodyをpublic metaへ入れない。
+```
+
+### 21.3 回帰確認
+
+```text
+Focused suite: 51 passed / 1 warning
+Display contract: 5 passed
+RN contract: 36 passed / 0 failed
+Public Recovery / D / limited grounding subset: 53 passed / 1 warning
+User Label Connection / Product Read Feel subset: 108 passed / 1 warning
+```

@@ -2940,3 +2940,16 @@ P0〜P10後のHome / Input immediate replyでは、EmlisAIの表示可否は引�
 | RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RNはsource lineageで分岐せず、`passed + commentText` の既存契約だけを守る。 |
 
 Home/Input側では、`inputFeedbackModel.js` や `InputFeedbackReplyModal.js` の表示条件を変更した差分ではない。本文品質と表示sourceの修正責任はbackend側のpublic observation recoveryにある。
+
+
+# 2026-06-08 差分追記: Home / Input EmlisAI public input_feedback arrival current owner
+
+P0-P1 Step 0〜10後のHome / Input immediate replyでは、EmlisAIの表示可否は引き続きbackendで決まり、RNは既存 `commentText` を受け取るだけである。今回の修正は、Display Gate側でwarning-onlyとして扱われた `visible_surface_acceptance_gate = yellow / warn` を、public inclusion側でterminal blockerにしないbackend内部境界であり、Home production UI、`/emotion/submit` route、public response top-level keyは変更しない。
+
+| 層 | latest owner | Home / Input上の意味 |
+|---|---|---|
+| Public feedback meta | `emlis_ai_public_feedback_meta.py` | yellow/warn warning-onlyをpublic inclusion blockerにしない。true unavailable/safetyはfail-closed。 |
+| Submit inclusion summary | `emotion_submit_service.py` | public_reached / rn_visibleをyellow/warnで欠落扱いしない。 |
+| Product surface validation | `emlis_ai_product_surface_validation.py` | rn_visibleとproduct_surface_validを分け、runtime/display/state/two_stageはstrict維持。 |
+| Display contract | `tests/test_emlis_ai_display_contract.py` | Red A/B1/B2を現行contractへ更新し、safe recoveryとbody leak禁止を両立する。 |
+| RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RNはsource lineageで分岐せず、`passed + commentText` の既存契約だけを守る。 |
