@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-08"
+revision_date: "2026-06-10"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3268,3 +3268,114 @@ User Label Connection sanitizer focused: 1 passed / 1 warning
 ```
 
 warningは既存Pydantic deprecationであり、今回のcontract差分では触らない。
+
+
+# 2026-06-09 差分追記: EmlisAI P3 Product Read Feel Baseline contract / validation boundary
+
+P3 Product Read Feel baseline P3-0〜P3-9は、表示契約・public契約を変えずに、読感評価のためのmeta-only / ratings-only境界を追加する。契約上の中心は、本文を読むlocal QAと、本文を保持しないscorecard / inventory / decision materialを混ぜないことである。
+
+| Boundary | 守る契約 |
+|---|---|
+| Contract Freeze | `exact_comment_text_required` / `case_specific_runtime_branch` / `runtime_branching_uses_fixture_strings` 等をtrueにしない。 |
+| Baseline Case Matrix | 60件synthetic inputは評価入力であり、runtime条件や固定返答文として使わない。 |
+| Local Review Packet | `comment_text` bodyを持てるのはlocal QAだけ。実ユーザー本文はcommitしない。 |
+| Sanitized Current Output Event | raw input / memo / candidate body / comment_text bodyを含めない。fingerprint / length / bool / reason codeだけを使う。 |
+| Inventory / Scorecard | Product Read Feel / ProductQuality materialはbody-free。release flagやproduct gate readyを立てない。 |
+| Verdict Split | P2 REDとP3 readfeel repairを混同しない。REDがある場合はP3 repairへ進まない。 |
+| Blind QA Ratings | read_feelingをmachine metricsやP3 verdictから自動補完しない。ratings-onlyで接続する。 |
+| Repair Ledger / Design | Gate緩和、fixed template、case-specific branch、history line maskingを禁止修正として扱う。 |
+| Regression / P4-P5 Decision | required regression未実行・P2 RED・P1 display repairがあればP4/P5へ進まない。 |
+
+維持するcontract:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+comment_text生成ロジック変更なし
+P4は2026-06-09時点では未実装。2026-06-10差分ではP4-0〜P4-10実装反映済みとして末尾追補を優先する。
+2026-06-11差分ではP5 User Label Connection P5-0〜P5-7はbackend内部限定接続として実装済み。2026-06-12差分ではP6 Structure Insight v2 P6-0〜P6-9もbackend内部handoffまで反映済みとして末尾追補を優先する。
+raw input / memo / memo_action / candidate body / comment_text body のpublic meta・scorecard混入なし
+```
+
+
+# 2026-06-10 差分追記: EmlisAI P4 Family Product Tuning contract / validation boundary
+
+P4 Family Product Tuningは、Product Read Feelの読感補正・ratings-only再判定・handoff判断を追加するが、public contractは増やさない。contract上の中心は、family別surface補正をしても、Gate緩和・固定文・case専用分岐・body leak・P5先行解放へ寄せないことである。
+
+| Boundary | 守る契約 |
+|---|---|
+| P4-0 Connection Freeze | P3-9のP4 next / P5 holdを初期境界として維持し、P5 visible strengtheningを先に出さない。 |
+| P4-1 / P4-2 Target / Audit | case id、family、coverage slice、visible slot、material qualityだけを保持し、raw input / comment_text bodyを保持しない。 |
+| P4-3 Surface Requirement | rich input、true low_information、limited_grounding、source_unavailableを混同しない。 |
+| P4-4 Policy | family別ratio / temperature / role / anchor / forbidden surface classをpolicyとして固定し、完成文を置かない。 |
+| P4-5 Specificity | generic / repeated / question-only collapseを検知するが、runtime rewrite本文を保持しない。 |
+| P4-6 / P4-7 / P4-8 Runtime Owner | 既存ownerへ最小接続し、Gate・route・public schema・RN表示条件を変えない。 |
+| P4-9 Ratings Review | read_feelingや改善判定をmachine metricsから自動補完せず、ratings-onlyでP3-9へ戻す。 |
+| P4-10 Handoff | required regression suiteがmissing / not green / timeoutならP5 holdを維持する。 |
+
+維持するcontract:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+raw input / memo / memo_action / candidate body / comment_text body / history raw text のpublic meta・scorecard混入なし
+2026-06-11差分ではP5-0〜P5-7実装済み。2026-06-12差分ではP6-0〜P6-9実装済み。
+```
+
+# 2026-06-12 差分追記: EmlisAI P6 Structure Insight v2 contract / validation boundary
+
+P6 Structure Insight v2 P6-0〜P6-9は、P4/P5/RN/public contractを壊さずに、限定familyの構造気づき候補をP7へ渡せるかを判定するbackend内部層として読む。public API、DB、RN契約は変更しない。
+
+| Boundary | 守る契約 |
+|---|---|
+| P6-0 Entry Freeze | P5-7 `p6_ready` をpublic releaseではなく、P6内部評価へ進める入口条件として扱う。 |
+| P6-1 Inventory | 既存Structure Insight candidate / gate / surfaceを棚卸しし、既存Phase名とP6 roadmapを混同しない。 |
+| P6-2 Family Boundary | 初期対象は `structure_question` / `long_meaning_arc` / `self_understanding_follow` のみ。daily / low-info / positive-only / safety adjacentへ深いinsightを出さない。 |
+| P6-3 Relation Policy | relation familyごとにlow / medium / high / blockedを分け、high risk relationを自動visibleにしない。 |
+| P6-4 Quality Rubric | ratings-onlyで候補を評価し、read_feeling / insight_deltaをmachine metricsから自動補完しない。 |
+| P6-5 Gate Hardening | soft expression必須。ただしsoft markerだけで合格にせず、診断・人格断定・原因断定・助言・未来予測・相手判断をblockする。 |
+| P6-6 Surface Role Plan | `structure_question` だけにlimited planを置く。insight seedは1件まで。Gate未通過surfaceは本文へ出ない。 |
+| P6-7 Family Review | `long_meaning_arc` / `self_understanding_follow` を別枠reviewに残し、self-denial事実化や要約だけの処理をblockする。 |
+| P6-8 Product QA | unsafe / weak / readyとP7 field候補をbody-freeで集計する。raw本文やreviewer free textを保持しない。 |
+| P6-9 Regression Handoff | `p7_ready` / `p7_hold` / `p6_continue` / `p5_return` / `p4_return` を分類するが、release_allowedは立てない。 |
+
+維持するcontract:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+Structure Insight専用public body key追加なし
+P6 Product QA / regression handoffをrelease_allowedへ変換しない
+raw input / memo / memo_action / candidate body / comment_text body / surface body / reviewer free text / terminal output のpublic meta・scorecard・handoff summary混入なし
+```
+
+今回の前提資料更新作業中に確認したfocused regression:
+
+```text
+P6 dedicated pytest: 86 passed
+Structure Insight existing / long-run gate focused pytest: 25 passed
+```
+
+全backend suiteではなく、P6-9差分更新に必要な対象回帰を中心に確認した。
+

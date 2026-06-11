@@ -1,0 +1,29 @@
+repo,status,path,p3_phase_or_reason,contract_boundary
+mashos-api,added,ai/services/ai_inference/emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py,P3-5 Blind QA ratings-only review.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/services/ai_inference/emlis_ai_product_readfeel_p3_first_repair_design.py,P3-7 first repair design.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/services/ai_inference/emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py,P3-9 P4/P5 connection decision.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/services/ai_inference/emlis_ai_product_readfeel_p3_regression.py,P3-8 regression boundary.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/services/ai_inference/emlis_ai_product_readfeel_p3_repair_priority_ledger.py,P3-6 repair priority ledger.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/services/ai_inference/emlis_ai_product_readfeel_p3_verdict_split.py,P3-4 P2/P3 verdict split.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py,P3-1 baseline case matrix: 12 required families × 5 synthetic local QA cases.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py,P3-5 Blind QA ratings-only review.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_first_repair_design_20260609.py,P3-7 first repair design.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py,P3-3 sanitized event / inventory connection fixture and test.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py,P3-2 local output capture: separates local review packet from body-free sanitized event.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py,P3-9 P4/P5 connection decision.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_regression_20260609.py,P3-8 regression boundary.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py,P3-6 repair priority ledger.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/fixtures/emlis_ai_product_readfeel_p3_verdict_split_20260609.py,P3-4 P2/P3 verdict split.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py,P3 Product Read Feel baseline support file.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py,P3-5 Blind QA ratings-only review.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py,P3 Product Read Feel baseline support file.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_first_repair_design_20260609.py,P3-7 first repair design.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_inventory_connection_20260609.py,P3-3 sanitized event / inventory connection fixture and test.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py,P3-2 local output capture: separates local review packet from body-free sanitized event.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py,P3-9 P4/P5 connection decision.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_regression_20260609.py,P3-8 regression boundary.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py,P3-6 repair priority ledger.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,added,ai/tests/test_emlis_ai_product_readfeel_p3_verdict_split_20260609.py,P3-4 P2/P3 verdict split.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,changed,ai/services/ai_inference/emlis_ai_product_quality_contract_freeze.py,P3-0 contract freeze strengthened with exact comment_text / case-specific runtime branch / fixture-string branching guards.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,changed,ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py,P3-3 adapter from body-free sanitized current-output event to ProductQuality scorecard row.,No RN/API/DB/public response key/Gate/comment_text generation change.
+mashos-api,changed,ai/services/ai_inference/emlis_ai_product_readfeel_current_output_inventory.py,P3-3 reason markers added for readfeel_gap / structure_insight_gap classification.,No RN/API/DB/public response key/Gate/comment_text generation change.

@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-08"
+revision_date: "2026-06-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(190).zip"
-  Cocolon: "Cocolon_11(10).zip"
-  mashos-api: "mashos-api_11(19).zip"
+  premise: "Cocolon_前提資料(197).zip"
+  Cocolon: "Cocolon_8(17).zip"
+  mashos-api: "mashos-api_8(48).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 853
-  total: 1070
+  mashos-api: 919
+  total: 1136
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1070
+  included_files_total: 1136
   included_files_cocolon: 217
-  included_files_mashos_api: 853
+  included_files_mashos_api: 919
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -31,6 +31,10 @@ coverage:
   d_source_unavailable_normal_observation_recovery_full_01_02_regeneration: false
   p0_p1_public_input_feedback_arrival_contract_repair_reflected: true
   p0_p1_public_input_feedback_arrival_contract_repair_full_01_02_regeneration: false
+  product_readfeel_p3_baseline_p3_0_9_reflected: true
+  product_readfeel_p3_baseline_full_01_02_regeneration: false
+  product_readfeel_p4_family_product_tuning_p4_0_10_reflected: true
+  product_readfeel_p4_family_product_tuning_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -1644,3 +1648,138 @@ RN production UI
 RN表示タイトル `Emlisの観測`
 RN表示条件 `passed + comment_text`
 ```
+
+
+# 2026-06-09 差分追記: 国家システム上のEmlisAI P3 Product Read Feel Baseline境界
+
+最新実ファイル `mashos-api(132).zip` のP3 Product Read Feel baselineは、国家システムのproduction flowを増やすものではない。`/emotion/submit` の保存・dispatch・public response・RN表示契約はそのままに、local QA / internal measurement側で次のbody-free chainを追加する。
+
+```text
+synthetic baseline case matrix
+  -> existing renderer / current output capture helper
+  -> local review packet（本文あり、local QA only）
+  -> sanitized current output event（body-free）
+  -> Product Read Feel inventory / ProductQuality scorecard row / Product Read Feel scorecard
+  -> P2/P3 verdict split
+  -> Blind QA ratings-only review
+  -> repair priority ledger
+  -> first repair design
+  -> regression decision
+  -> P4/P5 connection decision
+```
+
+| 層 | 今回の扱い |
+|---|---|
+| RN display | 変更なし。`Emlisの観測` は従来どおり `passed + comment_text` だけを表示する。 |
+| Public API | `/emotion/submit` route / request key / top-level response keyを変えない。 |
+| DB / write path | physical schema / write pathを変えない。 |
+| Local QA | synthetic baselineとcomment_text bodyを読めるが、実ユーザー本文やpublic materialとして扱わない。 |
+| Scorecard / Inventory | body-free ids / counts / booleans / reason codes / ratings-onlyのみ保持する。 |
+| Phase decision | 2026-06-09 P3時点ではP4 next / P5 holdのみ。2026-06-10差分ではP4-0〜P4-10がbackend内部に接続され、2026-06-11差分ではP5-0〜P5-7がlimited visible connection / P6 hold decisionとして接続され、2026-06-12差分ではP6-0〜P6-9がStructure Insight v2 boundary / QA / P7 hold decisionとして接続された。 |
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+comment_text生成ロジック変更なし
+P4は2026-06-09時点では未実装。2026-06-10差分ではP4-0〜P4-10実装反映済みとして末尾追補を優先する。
+P5 User Label Connection可視文強化は、2026-06-11差分ではP5-0〜P5-7のbackend内部限定接続として実装済み。P6 Structure Insight v2は、2026-06-12差分ではP6-0〜P6-9のbackend内部boundary / QA / P7 hold decisionとして反映済み。
+raw input / memo / memo_action / candidate body / comment_text body のpublic meta・scorecard混入なし
+```
+
+
+# 2026-06-10 差分追記: 国家システム上のEmlisAI P4 Family Product Tuning境界
+
+P4 Family Product Tuning P4-0〜P4-10は、国家システムのproduction ingress / write path / public response / RN displayを増やすものではない。保存直後EmlisAI応答の既存flowは維持し、backend内部の読感評価・family tuning・handoff判断を追加する。
+
+国家システム上のflowは次で読む。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> existing Gate chain
+  -> passed + comment_text の場合だけ public input_feedback / RN display
+
+Product Read Feel internal lane:
+  P3-9 connection decision
+    -> P4 target / audit / family policy
+    -> daily_unpleasant / structure_question / self_denial runtime owner tuning
+    -> ratings-only review
+    -> regression suite status handoff
+    -> P5 hold or future handoff decision
+```
+
+国家システム上の注意:
+
+- P4のcase / audit / ratings materialはlocal / internal materialであり、public response top-level keyへ追加しない。
+- P4-6〜P4-8のruntime owner tuningは、existing Gate chainを通るEmlisAI本文の読感補正であり、RN表示条件を増やさない。
+- P4-9 / P4-10はP5可視文強化のrelease判断ではない。required evidenceが揃わない場合はP5 holdを維持する。
+- raw input / comment_text body / candidate body / history raw textは、public meta、scorecard、handoff summaryへ入れない。
+
+
+# 2026-06-11 差分追記: 国家システム上のEmlisAI P5 User Label Connection境界
+
+P5 User Label Connection P5-0〜P5-7は、国家システムのproduction ingress / save API / DB write path / public response top-level shape / RN表示条件を増やさない。保存直後EmlisAI応答の既存 `passed + comment_text` 契約を維持し、backend内部で履歴線の可視接続可否とP6 hold decisionを判定する。
+
+国家システム上のflowは次で読む。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> existing Gate chain
+  -> passed + existing comment_text
+  -> P5 limited visible connection boundary
+  -> public input_feedback / RN display
+
+User Label Connection P5 internal lane:
+  P4-10 handoff
+    -> P5 readiness / visibility / eligibility
+    -> surface role plan / safety guard
+    -> ratings-only Product Quality QA
+    -> limited visible connection
+    -> regression / P6 hold decision
+```
+
+国家システム上の注意:
+
+- P5-6で接続される本文は、既存 `input_feedback.comment_text` への限定追記であり、新しいpublic response keyではない。
+- `input_feedback.emlis_ai.user_label_connection` はsafe summaryだけを持ち、raw current input、raw history、memo、memo_action、candidate body、comment_text bodyを持たない。
+- Free tier、low_information、safety adjacent、self_denial、target judgement、evidence不足は初期P5 visibleをblock / hold / meta-onlyへ倒す。
+- P5-7はP6 ready / P6 hold / P5 continue / P4 returnを分類するが、release_allowedやproduct releaseを立てない。
+
+# 2026-06-12 差分追記: 国家システム上のEmlisAI P6 Structure Insight v2境界
+
+P6 Structure Insight v2 P6-0〜P6-9は、国家システムのproduction ingress / save API / DB write path / public response top-level shape / RN表示条件を増やさない。保存直後EmlisAI応答の既存 `passed + comment_text` 契約を維持し、backend内部で構造気づき候補のfamily境界・relation risk・Gate・ratings-only QA・P7 hold decisionを判定する。
+
+国家システム上のflowは次で読む。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> existing Gate chain
+  -> passed + comment_text の場合だけ public input_feedback / RN display
+
+Structure Insight P6 internal lane:
+  P5-7 handoff
+    -> P6 entry freeze / inventory
+    -> family boundary / relation policy
+    -> quality rubric / gate hardening
+    -> limited surface role plan for structure_question
+    -> long_meaning_arc / self_understanding_follow review
+    -> ratings-only Product QA
+    -> regression / P7 hold decision
+```
+
+国家システム上の注意:
+
+- P6-6のlimited surface role planは、`structure_question` の観測内でinsight seedを1件まで扱う計画であり、新しいpublic response keyではない。
+- `long_meaning_arc` / `self_understanding_follow` はP6-7で別枠reviewに残し、structure_question planを雑に横展開しない。
+- daily / low_information / positive_only / safety adjacent / target judgement / evidence不足は初期P6 visibleへ接続しない。
+- P6-8 / P6-9はP7へ渡すbody-free materialを作るが、release_allowedやpublic release flagを立てない。
+- raw input / comment_text body / candidate body / surface body / reviewer free text / terminal outputはpublic meta、scorecard、handoff summaryへ入れない。
+

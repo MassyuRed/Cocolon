@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-08",
+  "revision_date": "2026-06-12",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 853,
-    "total": 1070
+    "mashos-api": 939,
+    "total": 1156
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 1070,
-    "national_system_body_includes": 1070,
+    "overall_structure_body_includes": 1156,
+    "national_system_body_includes": 1156,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1070件、国家システム判断対象のcurrent全ファイル1070件を本文または差分追記で記載する。今回のP0-P1 public input_feedback arrival contract repairは指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1070,
-    "overall_structure_body_includes_current_snapshot_files": 1070,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1070,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1156件、国家システム判断対象のcurrent全ファイル1156件を本文または差分追記で記載する。今回のP6 Structure Insight v2 P6-0〜P6-9は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1156,
+    "overall_structure_body_includes_current_snapshot_files": 1156,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1156,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -928,7 +928,15 @@
       "total_files": 1070,
       "policy": "visible_surface_acceptance_gate yellow/warn warning-onlyはpublic input_feedback inclusion blockerにしない。repair_required/red/terminal action、true unavailable/safety/infraはfail-closedを維持する。RN表示条件・API route・DB write path・public response keyは変更しない。"
     },
-    "public_input_feedback_arrival_contract_repair_p0_p1_reflected": true
+    "public_input_feedback_arrival_contract_repair_p0_p1_reflected": true,
+    "product_readfeel_p3_baseline_p3_0_9_reflected": true,
+    "product_readfeel_p3_baseline_full_01_02_regeneration": false,
+    "product_readfeel_p4_family_product_tuning_p4_0_10_reflected": true,
+    "product_readfeel_p4_family_product_tuning_full_01_02_regeneration": false,
+    "user_label_connection_p5_0_7_reflected": true,
+    "user_label_connection_p5_full_01_02_regeneration": false,
+    "structure_insight_p6_0_9_reflected": true,
+    "structure_insight_p6_full_01_02_regeneration": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1993,21 +2001,21 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(190).zip",
-    "Cocolon": "Cocolon_11(10).zip",
-    "mashos-api": "mashos-api_11(19).zip",
+    "premise": "Cocolon_前提資料(193).zip",
+    "Cocolon": "Cocolon(219).zip",
+    "mashos-api": "mashos-api(132).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 853,
-      "total": 1070
+      "mashos-api": 878,
+      "total": 1095
     },
     "sha256": {
-      "premise": "fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09",
-      "Cocolon": "aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d",
-      "mashos-api": "02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c"
+      "premise": "8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9",
+      "Cocolon": "a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda",
+      "mashos-api": "b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI P0/P1 Public Input Feedback Arrival Contract Repair Step0-10。visible_surface yellow/warnをpublic inclusion terminal blockerにせず、true unavailable/safety fail-closedとbody-free public metaを維持する。RN表示条件・API route・DB write path・public response keyは変更しない。"
+    "summary": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9。60件baseline、local output capture、body-free inventory/scorecard connection、P2/P3 verdict split、ratings-only Blind QA、repair priority ledger、first repair design、regression、P4/P5 decisionを追加する。RN/API/DB/public response key/Gate/comment_text generationは変更しない。"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2773,21 +2781,21 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(190).zip",
-    "Cocolon": "Cocolon_11(10).zip",
-    "mashos-api": "mashos-api_11(19).zip",
+    "premise": "Cocolon_前提資料(193).zip",
+    "Cocolon": "Cocolon(219).zip",
+    "mashos-api": "mashos-api(132).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 853,
-      "total": 1070
+      "mashos-api": 878,
+      "total": 1095
     },
     "sha256": {
-      "premise": "fbbaf4fb86ae1b9f90f386fc5520c0ec714749fed0b3502f52fa05013205dd09",
-      "Cocolon": "aecd0dea738875b768939f5646360a7bfd94671660cb0892d564d97cb53d632d",
-      "mashos-api": "02fc41d8eaf3405798daeae52c62423e72e3cc7683fe612efbc8dfe5c81b2e7c"
+      "premise": "8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9",
+      "Cocolon": "a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda",
+      "mashos-api": "b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI P0/P1 Public Input Feedback Arrival Contract Repair Step0-10。visible_surface yellow/warnをpublic inclusion terminal blockerにせず、true unavailable/safety fail-closedとbody-free public metaを維持する。RN表示条件・API route・DB write path・public response keyは変更しない。"
+    "summary": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9。60件baseline、local output capture、body-free inventory/scorecard connection、P2/P3 verdict split、ratings-only Blind QA、repair priority ledger、first repair design、regression、P4/P5 decisionを追加する。RN/API/DB/public response key/Gate/comment_text generationは変更しない。"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -7136,6 +7144,431 @@
       "mashos-api": {
         "added": 4,
         "changed": 8,
+        "removed": 0
+      }
+    }
+  },
+  "source_snapshot_2026_06_09_product_readfeel_p3_baseline_p3_0_9": {
+    "date": "2026-06-09",
+    "premise": "Cocolon_前提資料(193).zip",
+    "Cocolon": "Cocolon(219).zip",
+    "mashos-api": "mashos-api(132).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 878,
+      "total": 1095
+    },
+    "sha256": {
+      "premise": "8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9",
+      "Cocolon": "a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda",
+      "mashos-api": "b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24"
+    },
+    "scope": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9",
+    "public_contract_changed": false,
+    "rn_production_ui_changed": false,
+    "db_schema_changed": false,
+    "api_route_changed": false,
+    "comment_text_generation_changed": false,
+    "gate_relaxed": false,
+    "schema_file_materialized": false,
+    "full_01_02_regeneration": false,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(217).zip",
+      "mashos-api": "mashos-api(130).zip"
+    },
+    "source_diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 25,
+        "changed": 3,
+        "removed": 0
+      }
+    },
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "03_cocolon_naming_system.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+      "manifest.json",
+      "cocolon_local_file_inventory_diff_20260609_p3_product_readfeel_baseline.csv"
+    ],
+    "added_backend_files": [
+      "ai/services/ai_inference/emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py",
+      "ai/services/ai_inference/emlis_ai_product_readfeel_p3_first_repair_design.py",
+      "ai/services/ai_inference/emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py",
+      "ai/services/ai_inference/emlis_ai_product_readfeel_p3_regression.py",
+      "ai/services/ai_inference/emlis_ai_product_readfeel_p3_repair_priority_ledger.py",
+      "ai/services/ai_inference/emlis_ai_product_readfeel_p3_verdict_split.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_first_repair_design_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_regression_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py",
+      "ai/tests/fixtures/emlis_ai_product_readfeel_p3_verdict_split_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_first_repair_design_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_inventory_connection_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_regression_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py",
+      "ai/tests/test_emlis_ai_product_readfeel_p3_verdict_split_20260609.py"
+    ],
+    "changed_backend_files": [
+      "ai/services/ai_inference/emlis_ai_product_quality_contract_freeze.py",
+      "ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py",
+      "ai/services/ai_inference/emlis_ai_product_readfeel_current_output_inventory.py"
+    ]
+  },
+  "emlis_product_readfeel_p3_baseline_policy_2026_06_09": {
+    "schema_version": "cocolon.emlis.product_readfeel.p3_baseline.p3_0_9.2026-06-09",
+    "summary": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9。60件baseline、local output capture、body-free inventory/scorecard connection、P2/P3 verdict split、ratings-only Blind QA、repair priority ledger、first repair design、regression、P4/P5 decisionを追加する。RN/API/DB/public response key/Gate/comment_text generationは変更しない。",
+    "implemented_phases": [
+      "P3-0 Contract Freeze",
+      "P3-1 Baseline Case Matrix",
+      "P3-2 Local Output Capture",
+      "P3-3 Sanitized Event / Inventory Connection",
+      "P3-4 P2/P3 Verdict Split",
+      "P3-5 Blind QA Ratings-only Review",
+      "P3-6 Repair Priority Ledger",
+      "P3-7 First Repair Design",
+      "P3-8 Regression",
+      "P3-9 P4/P5 Connection Decision"
+    ],
+    "baseline_case_count": 60,
+    "required_families": 12,
+    "body_free_scorecard_and_inventory": true,
+    "local_review_packet_body_scope": "local_qa_only",
+    "p4_runtime_implemented": false,
+    "p5_runtime_implemented": false,
+    "default_next_decision": "P4 family tuning next / P5 hold",
+    "forbidden_fix_paths": [
+      "gate_relaxation",
+      "fixed_comment_text_template",
+      "case_specific_runtime_branch",
+      "fixture_string_runtime_condition",
+      "public_response_key_change",
+      "api_route_change",
+      "db_schema_change",
+      "rn_display_contract_change",
+      "history_line_masking_current_input_gap"
+    ]
+  },
+  "latest_source_basis_2026_06_09_product_readfeel_p3_baseline": {
+    "premise": "Cocolon_前提資料(193).zip",
+    "Cocolon": "Cocolon(219).zip",
+    "mashos-api": "mashos-api(132).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 878,
+      "total": 1095
+    },
+    "zip_sha256": {
+      "premise": "8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9",
+      "Cocolon": "a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda",
+      "mashos-api": "b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24"
+    },
+    "diff_from": {
+      "Cocolon": "Cocolon(217).zip",
+      "mashos-api": "mashos-api(130).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 25,
+        "changed": 3,
+        "removed": 0
+      }
+    },
+    "scope": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9"
+  },
+  "latest_modified_premise_files_2026_06_09_product_readfeel_p3_baseline": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "03_cocolon_naming_system.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260609_p3_product_readfeel_baseline.csv"
+  ],
+  "local_file_inventory_diff_20260609_p3_product_readfeel_baseline": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260609_p3_product_readfeel_baseline.csv",
+    "sha256": "411f393f1f55aa66926f5a2608c231dc37d49ee6978912f1adc251a08cdccf20",
+    "row_count_excluding_header": 28,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(217).zip",
+      "mashos-api": "mashos-api(130).zip"
+    },
+    "source_diff_to": {
+      "Cocolon": "Cocolon(219).zip",
+      "mashos-api": "mashos-api(132).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 25,
+        "changed": 3,
+        "removed": 0
+      }
+    }
+  },
+  "source_snapshot_2026_06_10_product_readfeel_p4_family_product_tuning_p4_0_10": {
+    "premise": "Cocolon_前提資料(195).zip",
+    "Cocolon": "Cocolon_11(11).zip",
+    "mashos-api": "mashos-api_11(20).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 903,
+      "total": 1120
+    },
+    "zip_sha256": {
+      "premise": "b5a81ae07d5710368380886192dee32d3656d26c0a9aaaa0980c7ee95d6658e0",
+      "Cocolon": "f4f889cc55cc4ffec0d6b65bd23ba910e9396176dd903ce8cc511aedca100b3a",
+      "mashos-api": "3932e70fbbd91b57a3bb06e784a932983d307778606a0add585330256c857e4a"
+    },
+    "scope": "EmlisAI P4 Family Product Tuning P4-0〜P4-10",
+    "p5_status": "hold_until_p4_9_full_current_only_clean_and_p4_10_required_regression_green"
+  },
+  "emlis_product_readfeel_p4_family_product_tuning_policy_2026_06_10": {
+    "role": "Product Read Feel current-only family tuning and P5 hold handoff boundary",
+    "phases": [
+      "P4-0 connection freeze",
+      "P4-1 target case selection",
+      "P4-2 material audit",
+      "P4-3 public surface requirement boundary",
+      "P4-4 family tuning policy",
+      "P4-5 surface signature audit",
+      "P4-6 daily_unpleasant family tuning",
+      "P4-7 structure_question family tuning",
+      "P4-8 self_denial yellow safety-adjacent review",
+      "P4-9 ratings-only review / P3-9 re-judgement",
+      "P4-10 regression / P5 hold re-check / handoff"
+    ],
+    "contract_unchanged": [
+      "RN production UI",
+      "RN display title",
+      "RN display condition",
+      "/emotion/submit route",
+      "request key",
+      "public response top-level key",
+      "DB physical schema / write path"
+    ],
+    "forbidden": [
+      "gate_relaxation",
+      "fixed_comment_text",
+      "fixed_sentence_template",
+      "case_specific_runtime_branch",
+      "raw_input_or_comment_body_in_public_meta",
+      "p5_visible_surface_strengthening_without_handoff"
+    ]
+  },
+  "latest_source_basis_2026_06_10_product_readfeel_p4_family_product_tuning": {
+    "premise": "Cocolon_前提資料(195).zip",
+    "Cocolon": "Cocolon_11(11).zip",
+    "mashos-api": "mashos-api_11(20).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 903,
+      "total": 1120
+    },
+    "zip_sha256": {
+      "premise": "b5a81ae07d5710368380886192dee32d3656d26c0a9aaaa0980c7ee95d6658e0",
+      "Cocolon": "f4f889cc55cc4ffec0d6b65bd23ba910e9396176dd903ce8cc511aedca100b3a",
+      "mashos-api": "3932e70fbbd91b57a3bb06e784a932983d307778606a0add585330256c857e4a"
+    },
+    "tracked_inventory_rows": {
+      "added": 25,
+      "changed": 9,
+      "removed": 0
+    },
+    "scope": "EmlisAI P4 Family Product Tuning P4-0〜P4-10"
+  },
+  "latest_modified_premise_files_2026_06_10_product_readfeel_p4_family_product_tuning": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260610_p4_family_product_tuning.csv"
+  ],
+  "local_file_inventory_diff_20260610_p4_family_product_tuning": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260610_p4_family_product_tuning.csv",
+    "sha256": "c50efddf1185b7c6941d8ab850d8cd03832e0c4ef5e9664a411b46a1a2edb4a3",
+    "row_count_excluding_header": 34,
+    "source_diff_to": {
+      "Cocolon": "Cocolon_11(11).zip",
+      "mashos-api": "mashos-api_11(20).zip"
+    },
+    "tracked_inventory_rows": {
+      "added": 25,
+      "changed": 9,
+      "removed": 0
+    }
+  },
+  "source_snapshot_2026_06_12_structure_insight_p6_0_9": {
+    "premise": "Cocolon_前提資料(199).zip",
+    "Cocolon": "Cocolon_10(16).zip",
+    "mashos-api": "mashos-api_10(31).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 939,
+      "total": 1156
+    },
+    "zip_sha256": {
+      "premise": "8cb535189dba34635c6670712a3a6f8199cbd393df4f0624df28700bda5f1024",
+      "Cocolon": "803e46199292bb2b326d5c77cc0d9757d6f03d2e45131511dfac3ba9362acd23",
+      "mashos-api": "0a24677743e54836f4c7110bb83e830f190df1be16b93ea7220ad2230d68a349"
+    },
+    "scope": "EmlisAI P6 Structure Insight v2 P6-0〜P6-9",
+    "diff_from_p5_baseline": {
+      "Cocolon": "Cocolon(222).zip",
+      "mashos-api": "mashos-api(135).zip",
+      "diff_counts": {
+        "Cocolon": {
+          "added": 0,
+          "changed": 0,
+          "removed": 0
+        },
+        "mashos-api": {
+          "added": 20,
+          "changed": 1,
+          "removed": 0
+        }
+      }
+    },
+    "diff_from_p6_8": {
+      "mashos-api": "mashos-api_9(36).zip",
+      "diff_counts": {
+        "added": 2,
+        "changed": 2,
+        "removed": 0
+      }
+    }
+  },
+  "emlis_structure_insight_p6_policy_2026_06_12": {
+    "role": "Structure Insight v2 body-free boundary, limited family surface role plan, ratings-only QA, and P7 hold decision",
+    "implemented_phases": [
+      "P6-0 P5-7 handoff / P6 entry freeze",
+      "P6-1 existing Structure Insight inventory",
+      "P6-2 target family / no-connect family boundary",
+      "P6-3 relation family initial set / risk classification",
+      "P6-4 insight candidate quality rubric",
+      "P6-5 gate hardening / soft expression boundary",
+      "P6-6 limited surface role plan for structure_question",
+      "P6-7 long_meaning_arc / self_understanding_follow review",
+      "P6-8 ratings-only Product QA / Blind QA material",
+      "P6-9 regression / P7 hold decision"
+    ],
+    "allowed_initial_families": [
+      "structure_question",
+      "long_meaning_arc",
+      "self_understanding_follow"
+    ],
+    "no_connect_families": [
+      "daily_unpleasant",
+      "daily_positive",
+      "positive_only",
+      "low_information",
+      "safety_triage_required",
+      "emergency_safety",
+      "target_judgement",
+      "self_denial_safety_adjacent"
+    ],
+    "contract_preserved": [
+      "RN production UI",
+      "Emlis observation display title",
+      "passed + comment_text RN display condition",
+      "/emotion/submit route",
+      "request keys",
+      "public response top-level keys",
+      "DB physical schema/write path"
+    ],
+    "not_release_ready": true,
+    "release_allowed": false,
+    "body_free_required": true
+  },
+  "latest_source_basis_2026_06_12_structure_insight_p6": {
+    "premise": "Cocolon_前提資料(199).zip",
+    "Cocolon": "Cocolon_10(16).zip",
+    "mashos-api": "mashos-api_10(31).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 939,
+      "total": 1156
+    },
+    "zip_sha256": {
+      "premise": "8cb535189dba34635c6670712a3a6f8199cbd393df4f0624df28700bda5f1024",
+      "Cocolon": "803e46199292bb2b326d5c77cc0d9757d6f03d2e45131511dfac3ba9362acd23",
+      "mashos-api": "0a24677743e54836f4c7110bb83e830f190df1be16b93ea7220ad2230d68a349"
+    },
+    "tracked_inventory_rows": {
+      "added": 20,
+      "changed": 1,
+      "removed": 0
+    },
+    "p6_focused_pytest": {
+      "p6_dedicated": "86 passed",
+      "structure_insight_existing_long_run": "25 passed"
+    }
+  },
+  "latest_modified_premise_files_2026_06_12_structure_insight_p6": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "Cocolon_EmlisAI_NormalObservation_PublicRecovery_ImplementationStatus_2026-06-06.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260612_p6_structure_insight.csv"
+  ],
+  "local_file_inventory_diff_20260612_p6_structure_insight": {
+    "path": "Cocolon_前提資料/cocolon_local_file_inventory_diff_20260612_p6_structure_insight.csv",
+    "sha256": "a2fa1e161eda68e149c541614e4684c8e768ebda10e4d5b5afe20f5522c89541",
+    "row_count_excluding_header": 21,
+    "source_diff_from": {
+      "Cocolon": "Cocolon(222).zip",
+      "mashos-api": "mashos-api(135).zip"
+    },
+    "source_diff_to": {
+      "Cocolon": "Cocolon_10(16).zip",
+      "mashos-api": "mashos-api_10(31).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 20,
+        "changed": 1,
         "removed": 0
       }
     }

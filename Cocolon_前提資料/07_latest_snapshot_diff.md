@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-08"
+revision_date: "2026-06-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(190).zip"
-  Cocolon: "Cocolon_11(10).zip"
-  mashos-api: "mashos-api_11(19).zip"
+  premise: "Cocolon_前提資料(199).zip"
+  Cocolon: "Cocolon_10(16).zip"
+  mashos-api: "mashos-api_10(31).zip"
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +19,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_11(10).zip` | 217 | RNアプリ本体。`Cocolon(216).zip` とsource内容同一。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_11(19).zip` | 853 | P0-P1 Public Input Feedback Arrival Contract Repair Step0〜10を反映。 |
-| total | 1070 | public `input_feedback` arrival contract repair前提資料差分更新後coverage対象 |
+| `Cocolon_10(16).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_10(31).zip` | 939 | P5 User Label Connectionの上に、P6 Structure Insight v2 P6-0〜P6-9を反映。 |
+| total | 1156 | P6 Structure Insight v2前提資料差分更新後coverage対象 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-07以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12、D相当入力 source-unavailable normal observation recoveryは履歴として残し、2026-06-08時点の最新正本は末尾の `2026-06-08 差分追記: EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10 latest snapshot diff` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-11以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12、D相当入力 source-unavailable normal observation recovery、P3 Product Read Feel baseline、P4 Family Product Tuning、P5 User Label Connectionは履歴として残し、2026-06-12時点の最新正本は末尾の `2026-06-12 差分追記: EmlisAI P6 Structure Insight v2 P6-0〜P6-9 latest snapshot diff` とこの冒頭summaryです。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -4351,4 +4351,382 @@ Focused suite: 51 passed / 1 warning
 - 01 / 02 full inventory本文の全面再生成は行わない。
 - RN production UI、API route、DB write path、public response top-level keyは更新しない。
 - public metaへ本文を移す設計にはしない。
+```
+
+
+# 2026-06-09 差分追記: EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9 latest snapshot diff
+
+比較対象は、前提資料 `Cocolon_前提資料(193).zip` と最新実ファイル `Cocolon(219).zip` / `mashos-api(132).zip` です。前提資料上の直前基準面は `Cocolon_11(10).zip` / `mashos-api_11(19).zip` だが、差分算出では手元の同系統前回実体 `Cocolon(217).zip` / `mashos-api(130).zip` を比較元として使用した。
+
+## 基準zip / hash
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(193).zip` | 49 | `8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9` |
+| `Cocolon(219).zip` | 217 | `a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda` |
+| `mashos-api(132).zip` | 878 | `b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24` |
+| total app source | 1095 | - |
+
+## source差分
+
+| repo | added | changed | removed | 読み方 |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | RN production UI変更なし。`Emlisの観測` の表示契約も変更なし。 |
+| mashos-api | 25 | 3 | 0 | P3 Product Read Feel baseline P3-0〜P3-9のbody-free測定・分類・判断境界を追加する。runtime本文生成修正ではない。 |
+
+差分詳細は `cocolon_local_file_inventory_diff_20260609_p3_product_readfeel_baseline.csv` に保持する。
+
+## 追加ファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py` | P3-5 Blind QA ratings-only review. |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p3_first_repair_design.py` | P3-7 first repair design. |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py` | P3-9 P4/P5 connection decision. |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p3_regression.py` | P3-8 regression boundary. |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p3_repair_priority_ledger.py` | P3-6 repair priority ledger. |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p3_verdict_split.py` | P3-4 P2/P3 verdict split. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py` | P3-1 baseline case matrix: 12 required families × 5 synthetic local QA cases. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py` | P3-5 Blind QA ratings-only review. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_first_repair_design_20260609.py` | P3-7 first repair design. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py` | P3-3 sanitized event / inventory connection fixture and test. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py` | P3-2 local output capture: separates local review packet from body-free sanitized event. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py` | P3-9 P4/P5 connection decision. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_regression_20260609.py` | P3-8 regression boundary. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py` | P3-6 repair priority ledger. |
+| `ai/tests/fixtures/emlis_ai_product_readfeel_p3_verdict_split_20260609.py` | P3-4 P2/P3 verdict split. |
+| `ai/tests/test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py` | P3 Product Read Feel baseline support file. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py` | P3-5 Blind QA ratings-only review. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py` | P3 Product Read Feel baseline support file. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_first_repair_design_20260609.py` | P3-7 first repair design. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_inventory_connection_20260609.py` | P3-3 sanitized event / inventory connection fixture and test. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py` | P3-2 local output capture: separates local review packet from body-free sanitized event. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py` | P3-9 P4/P5 connection decision. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_regression_20260609.py` | P3-8 regression boundary. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py` | P3-6 repair priority ledger. |
+| `ai/tests/test_emlis_ai_product_readfeel_p3_verdict_split_20260609.py` | P3-4 P2/P3 verdict split. |
+
+## 変更された主な既存owner
+
+| file | 差分の読み方 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_product_quality_contract_freeze.py` | P3-0 contract freeze strengthened with exact comment_text / case-specific runtime branch / fixture-string branching guards. |
+| `ai/services/ai_inference/emlis_ai_product_quality_measurement_event.py` | P3-3 adapter from body-free sanitized current-output event to ProductQuality scorecard row. |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_current_output_inventory.py` | P3-3 reason markers added for readfeel_gap / structure_insight_gap classification. |
+
+## P3-0〜P3-9の読み方
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| P3-0 Contract Freeze | P3 baseline用fixtureがruntime分岐・固定返信文・exact `comment_text` 要求へ漏れないよう、不変境界を追加で固定する。 | `emlis_ai_product_quality_contract_freeze.py`, `test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py` |
+| P3-1 Baseline Case Matrix | 既存12 required families × 5件 = 60件のsynthetic local QA入力を固定する。`limited_grounding` / `source_unavailable_high_information` / `history_line_eligible` はfamily追加ではなくcoverage_slicesで扱う。 | `tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py`, `test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py` |
+| P3-2 Local Output Capture | 本文ありのLocal Review Packetとbody-free Sanitized Current Output Eventを分離する。 | `tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py`, `test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py` |
+| P3-3 Sanitized Event / Inventory接続 | body-free sanitized eventをCurrent Output Inventory / ProductQuality scorecard row / Product Read Feel scorecardへ接続する。 | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_readfeel_current_output_inventory.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py` |
+| P3-4 P2/P3 Verdict Split | P2 RED、P1 display repair、P3 repair required、P3 yellow、P3 pass、not evaluatedを分ける。 | `emlis_ai_product_readfeel_p3_verdict_split.py` |
+| P3-5 Blind QA Ratings-only Review | 人間が本文を読むlocal QAと、scorecardへ渡すratings-only materialを分ける。`read_feeling` はmachine metricsやverdictから自動補完しない。 | `emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py` |
+| P3-6 Repair Priority Ledger | P2/P3 verdictとratings-only結果から、最初に直すblockerを最大2件へ絞る。 | `emlis_ai_product_readfeel_p3_repair_priority_ledger.py` |
+| P3-7 First Repair Design | rich inputのlow_information過剰落ち、generic/repeated surfaceなどに対し、runtime修正前のbody-free設計を固定する。 | `emlis_ai_product_readfeel_p3_first_repair_design.py` |
+| P3-8 Regression | P3 runtime修正へ進む前のrequired / optional / manual回帰境界を固定する。 | `emlis_ai_product_readfeel_p3_regression.py` |
+| P3-9 P4/P5接続判断 | P4 family別商品チューニングへ進めるか、P5 User Label Connection可視強化へ進めるかをbody-freeで判断する。defaultの読みはP4 next / P5 hold。 | `emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py` |
+
+## 最新flowでの読み方
+
+```text
+P3-1 baseline case matrix
+  -> P3-2 local output capture
+       local review packet: synthetic input + comment_text body, local QA only
+       sanitized current output event: body-free ids / booleans / counts / reason codes
+  -> P3-3 inventory / ProductQuality scorecard row / Product Read Feel scorecard connection
+  -> P3-4 P2/P3 verdict split
+  -> P3-5 Blind QA ratings-only review connection
+  -> P3-6 repair priority ledger
+  -> P3-7 first repair design
+  -> P3-8 regression boundary
+  -> P3-9 P4/P5 connection decision
+```
+
+## 維持されたcontract
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+comment_text生成ロジック変更なし
+P4は2026-06-09時点では未実装。2026-06-10差分ではP4-0〜P4-10実装反映済みとして末尾追補を優先する。
+P5 User Label Connection可視文強化は、2026-06-11差分ではP5-0〜P5-7のbackend内部限定接続として実装済み。P6 Structure Insight v2は、2026-06-12差分ではP6-0〜P6-9のbackend内部boundary / QA / P7 hold decisionとして反映済み。
+raw input / memo / memo_action / candidate body / comment_text body のpublic meta・scorecard混入なし
+```
+
+## ローカル確認
+
+今回の前提資料更新作業中に、最新実ファイルzipから展開した実体で次を確認した。
+
+```text
+Cocolon source diff:
+  0 added / 0 changed / 0 removed
+
+mashos-api source diff from previous local baseline:
+  25 added / 3 changed / 0 removed
+
+P3 added/changed python py_compile:
+  passed
+
+P3-0 / P3-1 / P3-2 focused:
+  16 passed
+
+P3-3 focused:
+  4 passed
+
+P3-4 focused:
+  6 passed
+```
+
+`P3-0〜P3-9` grouped pytestは今回のローカル前提資料更新中にもtimeoutした。これは前段からYELLOWとして扱っていたgrouped実行timeoutであり、上記focused greenとは分けて読む。前提資料更新では、実装を緩めてtimeoutを消すことはしない。
+
+この差分で更新しないもの:
+
+```text
+- RN production UI、API route、DB write path、public response top-level keyは更新しない。
+- comment_text生成ロジックは更新しない。
+- Gate緩和や固定返信テンプレ追加はしない。
+- P4 family別商品チューニングは2026-06-10差分でP4-0〜P4-10として反映済み。旧P3時点の未実装記述は履歴として読む。
+- P5 User Label Connection可視文強化はしない。
+- 01 / 02 full inventory本文の全面再生成は行わない。
+```
+
+
+# 2026-06-10 差分追記: EmlisAI P4 Family Product Tuning P4-0〜P4-10 latest snapshot diff
+
+最新実ファイル `Cocolon_11(11).zip` / `mashos-api_11(20).zip` を確認した。Cocolon RN側は217 filesで、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更は前提資料上の差分対象にしない。backend側は903 filesで、P3 Product Read Feel baselineの後続としてP4 Family Product Tuning P4-0〜P4-10が追加・接続されている。
+
+## source snapshot
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(195).zip` | 51 | `b5a81ae07d5710368380886192dee32d3656d26c0a9aaaa0980c7ee95d6658e0` |
+| `Cocolon_11(11).zip` | 217 | `f4f889cc55cc4ffec0d6b65bd23ba910e9396176dd903ce8cc511aedca100b3a` |
+| `mashos-api_11(20).zip` | 903 | `3932e70fbbd91b57a3bb06e784a932983d307778606a0add585330256c857e4a` |
+| total app source | 1120 | latest actual source count |
+
+## P4で追加された主なbackend owner
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_target_case_selection.py` | P4-1 target case selection。P3-9 decisionとbaseline case matrixから、P4対象caseをbody-freeに選ぶ。 |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_material_audit.py` | P4-2 material audit。visible material slot / material quality / surface requirement / blocker flagsを監査する。 |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_family_tuning_policy.py` | P4-4 family tuning policy。ratio / temperature / section role / required anchor / forbidden surface classを固定する。 |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_surface_signature_audit.py` | P4-5 surface signature audit。generic / repeated / question-only collapseをbody-free signatureとして検知する。 |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_self_denial_yellow_review.py` | P4-8 self_denial yellow review。自己否定を事実承認せず、安全隣接境界とsurface品質を監査する。 |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_ratings_review.py` | P4-9 ratings-only review。P4後の読感をbody-free rating materialで再判定し、P3-9へ戻す。 |
+| `ai/services/ai_inference/emlis_ai_product_readfeel_p4_regression_handoff.py` | P4-10 regression / P5 hold re-check / handoff。required regression statusとP4-9結果からP5 holdを判断する。 |
+
+## P4で接続・更新された主な既存owner
+
+| path | 差分の読み方 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_public_surface_requirement.py` | P4-3。rich visible material、true low_information、limited_grounding、source_unavailable high-informationのsurface requirement境界を補正する。 |
+| `ai/services/ai_inference/emlis_ai_shared_reception_evidence.py` | P4-6 / P4-7 / P4-8。daily_unpleasant、structure_question、self_denialのvisible evidenceを拾う。 |
+| `ai/services/ai_inference/emlis_ai_reception_mode_resolver.py` | P4 familyごとのreception modeを低情報質問routeへ潰さない。 |
+| `ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py` | daily_unpleasant、structure_question、self_denialのobservation / reception比率をP4 policyへ寄せる。 |
+| `ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py` | structure_questionのsection role / orderをP4 policyへ寄せる。 |
+| `ai/services/ai_inference/emlis_ai_complete_surface_realizer.py` | daily_unpleasant / structure_questionのsurface anchorを既存realizerで扱う。 |
+| `ai/services/ai_inference/emlis_ai_state_answer_special_cases.py` | self_denialでidentity claim as fact、過剰肯定テンプレ、absolute supportを避ける。 |
+| `ai/services/ai_inference/emlis_ai_safety_triage.py` | self_denial yellowとsafety support / emergencyを分離する。 |
+| `ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json` | daily_unpleasant / self_denial等のreception assistance materialを補う。 |
+
+## P4-0〜P4-10の読み方
+
+| Phase | 最新の読み方 |
+|---|---|
+| P4-0 | P3-9のP4 next / P5 holdを凍結し、P5 visible strengtheningへ先に進まない。 |
+| P4-1 | P4 target caseをbody-freeに選び、case id / family / coverage slice / blocker / target layerだけを保持する。 |
+| P4-2 | local synthetic case materialを一時的に読み、visible slot / material quality / surface requirement / blocker flagsだけを残す。 |
+| P4-3 | low_information / limited_grounding / rich input / source_unavailable high-informationのpublic surface requirement境界を補正する。 |
+| P4-4 | daily_unpleasant / structure_question / self_denialなどのfamily policyをratio・temperature・section roleで固定する。 |
+| P4-5 | generic reception surface、repeated closing、question-only collapse、required anchor missingをbody-freeで検知する。 |
+| P4-6 | daily_unpleasantでevent / reaction / reception anchorを拾い、不快を消さず、相手断定や重分析へ寄せない。 |
+| P4-7 | structure_questionで構造の問いをcurrent input内の関係・詰まりとして読み、P6過剰Insightへ飛ばさない。 |
+| P4-8 | self_denialをyellow safety-adjacentとして扱い、自己否定の事実承認と安全boundary bypassを防ぐ。 |
+| P4-9 | P4 target subsetをratings-onlyで再判定し、full current-only clean evidenceがない限りP5 holdを維持する。 |
+| P4-10 | P4-9結果とrequired regression statusをまとめ、missing / timeout / not greenがあればP5 holdを維持する。 |
+
+## 最新flowでの読み方
+
+```text
+P3-9 P4/P5 connection decision
+  -> P4-0 connection freeze
+  -> P4-1 target case selection
+  -> P4-2 material audit
+  -> P4-3 surface requirement boundary
+  -> P4-4 family tuning policy
+  -> P4-5 surface signature audit
+  -> P4-6 daily_unpleasant runtime owner tuning
+  -> P4-7 structure_question runtime owner tuning
+  -> P4-8 self_denial yellow review
+  -> P4-9 ratings-only review / P3-9 re-judgement
+  -> P4-10 regression / P5 hold re-check / handoff
+```
+
+## 維持されたcontract
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+P5 User Label Connection可視文強化はbackend内部のlimited visible connection / regression handoffとして実装済み
+raw input / memo / memo_action / candidate body / comment_text body / history raw text のpublic meta・scorecard・handoff summary混入なし
+```
+
+## ローカル確認
+
+今回の前提資料更新作業中に、最新実ファイルzipから展開した実体で次を確認した。
+
+```text
+Cocolon source count:
+  217 files
+
+mashos-api source count:
+  903 files
+
+P4 key module py_compile:
+  passed
+
+P4 dedicated tests present:
+  test_emlis_ai_product_readfeel_p4_connection_freeze_20260610.py
+  test_emlis_ai_product_readfeel_p4_target_case_selection_20260610.py
+  test_emlis_ai_product_readfeel_p4_material_audit_20260610.py
+  test_emlis_ai_product_readfeel_p4_surface_requirement_boundary_20260610.py
+  test_emlis_ai_product_readfeel_p4_family_tuning_policy_20260610.py
+  test_emlis_ai_product_readfeel_p4_surface_signature_audit_20260610.py
+  test_emlis_ai_product_readfeel_p4_daily_unpleasant_family_tuning_20260610.py
+  test_emlis_ai_product_readfeel_p4_structure_question_family_tuning_20260610.py
+  test_emlis_ai_product_readfeel_p4_self_denial_yellow_review_20260610.py
+  test_emlis_ai_product_readfeel_p4_ratings_review_20260610.py
+  test_emlis_ai_product_readfeel_p4_regression_handoff_20260610.py
+```
+
+この前提資料更新環境では `pytest` module がないため、P4 pytest suiteの再実行はしていない。実装zip側に専用test実体が存在することと、P4主要moduleの構文compileを確認した。pytest結果は各P4実装handoff時の記録を優先する。
+
+この差分で更新しないもの:
+
+```text
+- RN production UI、API route、DB write path、public response top-level keyは更新しない。
+- Gate緩和や固定返信テンプレ追加はしない。
+- P5 User Label Connection以外のP6 Structure Insight v2実装はしない。
+- 01 / 02 full inventory本文の全面再生成は行わない。
+```
+
+
+# 2026-06-11 差分追記: EmlisAI P5 User Label Connection P5-0〜P5-7 latest snapshot diff
+
+最新実ファイル `Cocolon_8(17).zip` / `mashos-api_8(48).zip` を確認した。Cocolon RN側は217 filesで、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更は前提資料上の差分対象にしない。backend側は919 filesで、P4-10 handoffの後続としてP5 User Label Connection P5-0〜P5-7が追加・接続されている。
+
+| source | count | sha256 |
+|---|---:|---|
+| `Cocolon_前提資料(197).zip` | 50 | `1289a6d3d25f5f258faa7bedcdbdb00d3e6572a2307393e13f301bf85e40369b` |
+| `Cocolon_8(17).zip` | 217 | `961a20f6b524bb30ab37e7a9781814785444c3fcdbde41ee3030f6e0cc861254` |
+| `mashos-api_8(48).zip` | 919 | `0a18251963d1a40a399f52f311da293d7243af0d884d20bb0cbe5800b1a21d0f` |
+| total app source | 1136 | latest actual source count |
+
+## P5で追加された主なbackend owner
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_readiness.py` | P5-0。P4-10 handoffからP5 entry / holdをbody-freeに再確認する。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_visibility_boundary.py` | P5-1。Plus/Premium owned history、existing comment_text、existing gates、Free/current-only境界を判定する。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_eligibility_matrix.py` | P5-2。connectable family / edge familyごとのconnectable、meta_only、review_required、blockedを固定する。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_surface_role_plan.py` | P5-3。current observation first、history support line、forbidden roleをbody-free role planにする。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_safety_guard.py` | P5-4。creepy / overclaim / self-blame / always / cause / diagnosis / advice claimをblockする。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_product_quality_review.py` | P5-5。ratings-only Product Quality QAでlimited visible候補を評価する。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_limited_visible_connection.py` | P5-6。条件を満たした時だけ既存 `comment_text` へ短いhistory-line support sectionを接続する。 |
+| `ai/services/ai_inference/emlis_ai_user_label_connection_p5_regression_handoff.py` | P5-7。P5 regression handoffとP6 hold decisionをbody-freeで作る。 |
+
+## P5-0〜P5-7の読み方
+
+| Phase | 最新の読み方 |
+|---|---|
+| P5-0 | P4 handoff / current-only readfeelを再確認し、P5 entry allowed / holdをbody-freeで分ける。 |
+| P5-1 | existing comment_text non-empty、observation passed、existing gates、Plus/Premium owned history、evidence 2件以上を確認する。 |
+| P5-2 | family / edge familyごとの履歴線eligibilityを固定し、suppressed familyをvisibleへ漏らさない。 |
+| P5-3 | 履歴線は主役ではなく補助線。current observation first、history support line、not personality boundaryをrole化する。 |
+| P5-4 | creepy / overclaim / self-blame / always / cause / diagnosis / advice / future predictionを初期P5 visibleから落とす。 |
+| P5-5 | Product Qualityをratings-onlyで評価し、raw input、comment_text body、reviewer free textを保持しない。 |
+| P5-6 | P5-0〜P5-5と既存Gateが通った時だけ、既存 `comment_text` へ限定接続する。public response shapeは変えない。 |
+| P5-7 | required regression statusとP5状態から、`p6_ready` / `p6_hold` / `p5_continue` / `p4_return` を分類する。 |
+
+## 最新flowでの読み方
+
+```text
+P3-9 P4/P5 connection decision
+  -> P4-0〜P4-10 current-only Product Read Feel tuning / handoff
+  -> P5-0〜P5-5 readiness / eligibility / guard / ratings-only QA
+  -> P5-6 limited visible connection
+  -> P5-7 regression / P6 hold decision
+```
+
+## 維持されたcontract
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+Product Quality QA passをrelease_allowedへ変換しない
+raw input / memo / memo_action / candidate body / comment_text body / history raw text のpublic meta・scorecard・handoff summary混入なし
+```
+
+## ローカル確認
+
+今回の前提資料更新作業中に、最新実ファイルzipから展開した実体で次を確認した。
+
+```text
+Cocolon source count:
+  217 files
+
+mashos-api source count:
+  919 files
+
+P5 key module py_compile:
+  passed
+
+P5 direct test function execution with pytest.raises stub:
+  67 passed
+
+P5 dedicated tests present:
+  test_emlis_ai_user_label_connection_p5_readiness_freeze_20260611.py
+  test_emlis_ai_user_label_connection_p5_visibility_boundary_20260611.py
+  test_emlis_ai_user_label_connection_p5_eligibility_matrix_20260611.py
+  test_emlis_ai_user_label_connection_p5_surface_role_plan_20260611.py
+  test_emlis_ai_user_label_connection_p5_safety_guard_20260611.py
+  test_emlis_ai_user_label_connection_p5_product_quality_review_20260611.py
+  test_emlis_ai_user_label_connection_p5_limited_visible_connection_20260611.py
+  test_emlis_ai_user_label_connection_p5_regression_handoff_20260611.py
+```
+
+この前提資料更新環境では `pytest` module がないため、pytest runner自体の再実行はしていない。代替として、P5-0〜P5-7のtest関数を `pytest.raises` stub付きで直接実行し、67件通過を確認した。
+
+この差分で更新しないもの:
+
+```text
+- RN production UI、API route、DB write path、public response top-level keyは更新しない。
+- Gate緩和や固定返信テンプレ追加はしない。
+- P6 Structure Insight v2実装はしない。
+- 01 / 02 full inventory本文の全面再生成は行わない。
 ```

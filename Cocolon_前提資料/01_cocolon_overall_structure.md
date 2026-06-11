@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-08"
+revision_date: "2026-06-12"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(190).zip"
-  Cocolon: "Cocolon_11(10).zip"
-  mashos-api: "mashos-api_11(19).zip"
+  premise: "Cocolon_前提資料(197).zip"
+  Cocolon: "Cocolon_8(17).zip"
+  mashos-api: "mashos-api_8(48).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 853
-  total: 1070
+  mashos-api: 919
+  total: 1136
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1070
+  included_files_total: 1136
   included_files_cocolon: 217
-  included_files_mashos_api: 853
+  included_files_mashos_api: 919
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -31,6 +31,10 @@ coverage:
   d_source_unavailable_normal_observation_recovery_full_01_02_regeneration: false
   p0_p1_public_input_feedback_arrival_contract_repair_reflected: true
   p0_p1_public_input_feedback_arrival_contract_repair_full_01_02_regeneration: false
+  product_readfeel_p3_baseline_p3_0_9_reflected: true
+  product_readfeel_p3_baseline_full_01_02_regeneration: false
+  product_readfeel_p4_family_product_tuning_p4_0_10_reflected: true
+  product_readfeel_p4_family_product_tuning_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -2415,3 +2419,183 @@ User Label Connection sanitizer focused: 1 passed / 1 warning
 ```
 
 warningは既存Pydantic deprecationであり、今回の構造差分では触らない。
+
+
+# 2026-06-09 差分追記: EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9 overall structure
+
+最新実ファイル `mashos-api(132).zip` では、P3 Product Read Feel baseline P3-0〜P3-9がbackend内部の評価・分類・判断構造として追加されている。これは、EmlisAIの本文生成やRN表示を直接変える工程ではなく、「表示されたEmlisが読まれた形へ届いているか」を測るためのlocal QA / scorecard / inventory / verdict / ledger / decision chainである。
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| P3-0 Contract Freeze | P3 baseline用fixtureがruntime分岐・固定返信文・exact `comment_text` 要求へ漏れないよう、不変境界を追加で固定する。 | `emlis_ai_product_quality_contract_freeze.py`, `test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py` |
+| P3-1 Baseline Case Matrix | 既存12 required families × 5件 = 60件のsynthetic local QA入力を固定する。`limited_grounding` / `source_unavailable_high_information` / `history_line_eligible` はfamily追加ではなくcoverage_slicesで扱う。 | `tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py`, `test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py` |
+| P3-2 Local Output Capture | 本文ありのLocal Review Packetとbody-free Sanitized Current Output Eventを分離する。 | `tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py`, `test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py` |
+| P3-3 Sanitized Event / Inventory接続 | body-free sanitized eventをCurrent Output Inventory / ProductQuality scorecard row / Product Read Feel scorecardへ接続する。 | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_readfeel_current_output_inventory.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py` |
+| P3-4 P2/P3 Verdict Split | P2 RED、P1 display repair、P3 repair required、P3 yellow、P3 pass、not evaluatedを分ける。 | `emlis_ai_product_readfeel_p3_verdict_split.py` |
+| P3-5 Blind QA Ratings-only Review | 人間が本文を読むlocal QAと、scorecardへ渡すratings-only materialを分ける。`read_feeling` はmachine metricsやverdictから自動補完しない。 | `emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py` |
+| P3-6 Repair Priority Ledger | P2/P3 verdictとratings-only結果から、最初に直すblockerを最大2件へ絞る。 | `emlis_ai_product_readfeel_p3_repair_priority_ledger.py` |
+| P3-7 First Repair Design | rich inputのlow_information過剰落ち、generic/repeated surfaceなどに対し、runtime修正前のbody-free設計を固定する。 | `emlis_ai_product_readfeel_p3_first_repair_design.py` |
+| P3-8 Regression | P3 runtime修正へ進む前のrequired / optional / manual回帰境界を固定する。 | `emlis_ai_product_readfeel_p3_regression.py` |
+| P3-9 P4/P5接続判断 | P4 family別商品チューニングへ進めるか、P5 User Label Connection可視強化へ進めるかをbody-freeで判断する。defaultの読みはP4 next / P5 hold。 | `emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py` |
+
+構造上の扱い:
+
+```text
+Product Read Feel P3 baseline = backend internal measurement / design boundary
+Local Review Packet = synthetic input + comment_text body, local QA only
+Sanitized Event / Inventory / Scorecard = body-free material only
+P4/P5 connection decision = 2026-06-09 P3時点のnext phase判断。2026-06-10差分ではP4-0〜P4-10がbackend内部へ反映済み。
+```
+
+維持された構造境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+comment_text生成ロジック変更なし
+P4は2026-06-09時点では未実装。2026-06-10差分ではP4-0〜P4-10実装反映済みとして末尾追補を優先する。
+P5 User Label Connection可視文強化は、2026-06-11差分ではP5-0〜P5-7のbackend内部限定接続として実装済み。P6 Structure Insight v2は、2026-06-12差分ではP6-0〜P6-9のbackend内部boundary / QA / P7 hold decisionとして反映済み。
+raw input / memo / memo_action / candidate body / comment_text body のpublic meta・scorecard混入なし
+```
+
+
+# 2026-06-10 差分追記: EmlisAI P4 Family Product Tuning P4-0〜P4-10 overall structure
+
+最新実ファイル `mashos-api_11(20).zip` では、P3 Product Read Feel baselineの後続としてP4 Family Product Tuning P4-0〜P4-10が追加・接続されている。これはRN表示契約やpublic API shapeを変える工程ではなく、EmlisAI current-only出力の読感をfamilyごとのpolicy / audit / runtime owner / ratings-only review / regression handoffで安定させるbackend内部構造である。
+
+```text
+P3-9 P4/P5 connection decision
+  -> P4-0 connection freeze
+  -> P4-1 target case selection
+  -> P4-2 material audit
+  -> P4-3 public surface requirement boundary
+  -> P4-4 family tuning policy
+  -> P4-5 surface signature audit
+  -> P4-6 daily_unpleasant runtime owner tuning
+  -> P4-7 structure_question runtime owner tuning
+  -> P4-8 self_denial yellow review
+  -> P4-9 ratings-only review / P3-9 re-judgement
+  -> P4-10 regression / P5 hold re-check / handoff
+```
+
+| 構造層 | 追加された読み方 |
+|---|---|
+| target / audit | P4対象case、visible material slot、material quality、coverage slice、blockerをbody-freeで固定する。 |
+| policy | family別のratio、temperature、section role、required anchor、forbidden surface classをruntime本文なしで固定する。 |
+| specificity | generic reception、repeated signature、question-only collapseを補正要求として検知する。 |
+| runtime owner | daily_unpleasant / structure_question / self_denialのみ、既存resolver / evidence / ratio / section plan / realizer / safety ownerへ最小接続する。 |
+| review / handoff | ratings-only再判定とrequired regression statusで、P5 hold継続またはhandoff可否を判断する。 |
+
+P4で増えた構造は、`comment_text` bodyをscorecardやpublic metaへ持ち込まない。Local QA / fixture / reviewer materialはbody-free summary、identifier、ratio、flag、ratingだけで接続する。
+
+
+# 2026-06-11 差分追記: EmlisAI P5 User Label Connection P5-0〜P5-7 overall structure
+
+最新実ファイル `mashos-api_8(48).zip` では、P4-10 handoffの後続として User Label Connection のP5-0〜P5-7がbackend内部へ追加されている。これは、履歴線を無条件に表示する機能ではなく、P4 current-only読感を壊さないことを再確認した上で、既存 `input_feedback.comment_text` へ短い履歴補助線を限定接続するための境界である。
+
+```text
+P4-10 regression / P5 hold re-check / handoff
+  -> P5-0 P4 handoff / current-only readfeel re-check freeze
+  -> P5-1 visible readiness boundary
+  -> P5-2 history line eligibility matrix
+  -> P5-3 surface role plan / edge-family mapping
+  -> P5-4 creepy / overclaim / self-blame guard
+  -> P5-5 Product Quality QA / ratings-only review
+  -> P5-6 limited visible connection
+  -> P5-7 regression / P6 hold decision
+```
+
+| 構造層 | 追加された読み方 |
+|---|---|
+| readiness / visibility | P4-10 handoffと既存Gateを再確認し、Plus/Premium owned history、evidence 2件以上、passed comment_textありの場合だけP5候補へ進める。 |
+| eligibility / role plan | connectable familyとedge familyを限定し、current observation first / history support line / not personality boundaryをbody-free role planで固定する。 |
+| guard / QA | creepy、overclaim、self-blame、always/cause/diagnosis/advice claimをblockし、Product Qualityはratings-onlyで判定する。 |
+| limited visible connection | 既存 `comment_text` を主役に置いたまま、短いhistory-line support sectionだけを接続する。metaへcomment_text bodyやhistory raw textは入れない。 |
+| regression / handoff | P5 regression handoffで `p6_ready` / `p6_hold` / `p5_continue` / `p4_return` を分類し、P6へ無条件には進めない。 |
+
+追加されたP5 backend owner:
+
+```text
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_readiness.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_visibility_boundary.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_eligibility_matrix.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_surface_role_plan.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_safety_guard.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_product_quality_review.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_limited_visible_connection.py
+ai/services/ai_inference/emlis_ai_user_label_connection_p5_regression_handoff.py
+```
+
+P5で維持するcontract:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+Product Quality QA passをrelease_allowedへ変換しない
+raw input / memo / memo_action / candidate body / comment_text body / history raw text のpublic meta・scorecard・handoff summary混入なし
+```
+
+# 2026-06-12 差分追記: EmlisAI P6 Structure Insight v2 P6-0〜P6-9 overall structure
+
+最新実ファイル `mashos-api_10(31).zip` では、P5-7 regression / P6 hold decisionの後続として Structure Insight v2 のP6-0〜P6-9がbackend内部へ追加されている。これは、深い分析文を全familyへ広げる機能ではなく、P4 current-only読感とP5履歴線を壊さずに、限定familyだけで「関係が見える」候補を扱えるかをbody-freeで判断する構造である。
+
+```text
+P5-7 regression / P6 hold decision
+  -> P6-0 P5 handoff / P6 entry freeze
+  -> P6-1 existing Structure Insight inventory
+  -> P6-2 target family / no-connect family boundary
+  -> P6-3 relation family initial set / risk classification
+  -> P6-4 insight candidate quality rubric
+  -> P6-5 gate hardening / soft expression boundary
+  -> P6-6 limited surface role plan for structure_question
+  -> P6-7 long_meaning_arc / self_understanding_follow review
+  -> P6-8 ratings-only Product QA / Blind QA material
+  -> P6-9 regression / P7 hold decision
+```
+
+| 構造層 | 追加された読み方 |
+|---|---|
+| entry / inventory | P5-7 handoffをP6入口で再確認し、既存Structure Insight資産をP6本体と混同しない。 |
+| family / relation boundary | 初期対象familyは `structure_question` / `long_meaning_arc` / `self_understanding_follow` に限定し、relation familyごとにriskとvisible可否を固定する。 |
+| quality / gate | ratings-only rubricとGate hardeningで、soft expression不足、診断、人格断定、原因断定、助言、未来予測、相手判断、自己否定事実化を止める。 |
+| limited surface role | `structure_question` にだけlimited surface role planを作り、insight seedは1件までにする。Gateを通らないsurfaceは本文へ出ない。 |
+| family review / QA | `long_meaning_arc` と `self_understanding_follow` は別枠reviewに残し、ratings-only Product QAでunsafe / weak / readyを分ける。 |
+| regression / handoff | P7 ready / P7 hold / P6 continue / P5 return / P4 returnをbody-freeで分類し、release_allowedは立てない。 |
+
+追加されたP6 backend owner:
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_entry_freeze.py` | P6-0。P5-7 handoffを受け、P6 entry allowed / hold / P5 return / P4 returnをbody-freeで分類する。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_inventory.py` | P6-1。既存Structure Insight candidate / gate / surface / long-run gateを棚卸しし、P6本体と既存資産を混同しない。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_family_boundary.py` | P6-2。`structure_question` / `long_meaning_arc` / `self_understanding_follow` だけを初期対象にし、daily / low-info / positive-only / safety adjacentをno-connectへ止める。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_relation_policy.py` | P6-3。relation familyごとのlow / medium / high / blocked riskとvisible可否を固定する。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_quality_rubric.py` | P6-4。insight candidateをratings-onlyで評価し、read_feeling / insight_deltaをmachine metricsから自動補完しない。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_gate_hardening.py` | P6-5。soft expression必須、診断・人格・原因・助言・未来予測・相手判断・自己否定事実化をblockする。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_surface_role_plan.py` | P6-6。`structure_question` だけにlimited surface role planを作り、insight seedは1件までに制限する。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_family_review.py` | P6-7。`long_meaning_arc` / `self_understanding_follow` を別枠でallow / hold / block reviewする。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_product_quality_review.py` | P6-8。ratings-only Product QA / Blind QA materialをbody-freeで集計し、unsafe / weak / readyを分ける。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_regression_handoff.py` | P6-9。P7 ready / P7 hold / P6 continue / P5 return / P4 returnをbody-freeで判断する。 |
+
+変更された既存owner:
+
+| path | 差分の読み方 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_structure_insight_candidate.py` | safety-triage materialでは通常Structure Insight化をしない。ただし、内部Gateが自己否定事実化を止められるよう、groundedな `self_denial_identity_split` 候補だけを内部materialとして残す。visibleへ昇格させる変更ではない。 |
+| `ai/services/ai_inference/emlis_ai_structure_insight_p6_gate_hardening.py` | P6-9直前比で、review_required / meta_only relationがpolicy-review-only理由でREPAIR_REQUIREDになった場合、可視候補ではなくreview扱いとして止める。Gate緩和ではない。 |
+
+P6で増えた構造は、`comment_text` bodyやcandidate bodyをscorecard / public meta / handoffへ持ち込まない。P6はP7へ渡すbody-free評価材料であり、release readyではない。
+

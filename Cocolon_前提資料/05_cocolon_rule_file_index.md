@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-08"
+revision_date: "2026-06-12"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1113,3 +1113,125 @@ mashos-api/ai/docs/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepai
 - raw `candidate_body` key、candidate_comment_text、raw input、comment_text bodyは引き続き禁止する。
 - RN表示条件、RN表示タイトル、/emotion/submit route、DB write path、public response top-level keyは変えない。
 ```
+
+
+# 2026-06-09 差分追記: EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9 rule / test index
+
+EmlisAI Product Read Feel baselineを触る場合は、P3-0〜P3-9の各層がbody-free / ratings-only / no-runtime-changeの境界であることを同時確認する。P3 baselineは、本文生成を直す前に「読まれた形へ届いているか」を測るための足場であり、Gate緩和・固定返信テンプレ・case専用分岐で通してはいけない。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| P3-0 Contract Freeze | `emlis_ai_product_quality_contract_freeze.py`, `test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py` | P3評価fixtureやProductQuality meta boundaryを触る時。 |
+| P3-1 Baseline Case Matrix | `tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py`, `test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py` | 60件baseline、family coverage、coverage_slicesを触る時。 |
+| P3-2 Local Output Capture | `tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py`, `test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py` | local review packet / sanitized current output eventを触る時。 |
+| P3-3 Inventory Connection | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_readfeel_current_output_inventory.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py`, `test_emlis_ai_product_readfeel_p3_inventory_connection_20260609.py` | body-free eventをinventory / scorecardへ接続する時。 |
+| P3-4 Verdict Split | `emlis_ai_product_readfeel_p3_verdict_split.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_verdict_split_20260609.py`, `test_emlis_ai_product_readfeel_p3_verdict_split_20260609.py` | P2 RED / P1 display repair / P3 repair / P3 yellow / passを分ける時。 |
+| P3-5 Blind QA Ratings | `emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py`, `test_emlis_ai_product_readfeel_p3_blind_qa_ratings_review_20260609.py` | read_feelingやfamily別ratingsをscorecardへ接続する時。 |
+| P3-6 Repair Priority Ledger | `emlis_ai_product_readfeel_p3_repair_priority_ledger.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py`, `test_emlis_ai_product_readfeel_p3_repair_priority_ledger_20260609.py` | 最初に直すblocker、候補ファイル、禁止修正を固定する時。 |
+| P3-7 First Repair Design | `emlis_ai_product_readfeel_p3_first_repair_design.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_first_repair_design_20260609.py`, `test_emlis_ai_product_readfeel_p3_first_repair_design_20260609.py` | runtime修正前の小修正設計を固定する時。 |
+| P3-8 Regression | `emlis_ai_product_readfeel_p3_regression.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_regression_20260609.py`, `test_emlis_ai_product_readfeel_p3_regression_20260609.py` | P3修正前後のrequired / optional suite判定を触る時。 |
+| P3-9 P4/P5 Decision | `emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py`, `test_emlis_ai_product_readfeel_p3_p4_p5_connection_decision_20260609.py` | P4 family tuningへ進むか、P5履歴線強化を保留するか判断する時。 |
+
+禁止:
+
+```text
+P3 baseline fixture本文をruntime条件にする。
+exact comment_text一致を成功条件にする。
+Gateを緩めて表示率だけを上げる。
+P2 REDをP3読感修正へ混ぜる。
+read_feelingをmachine metricsやverdictから自動補完する。
+P5履歴線でcurrent-only読感不足を隠す。
+```
+
+
+# 2026-06-10 差分追記: EmlisAI P4 Family Product Tuning P4-0〜P4-10 rule / test index
+
+EmlisAI Product Read FeelのP4 family tuningを触る場合は、P4-0〜P4-10がbody-free / ratings-only / no-contract-change境界でつながっていることを同時確認する。特にP4-6〜P4-8のruntime owner tuningは、Gate緩和や固定文ではなく、既存owner上のfamily読感補正として読む。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| P4-0 Connection Freeze | `test_emlis_ai_product_readfeel_p4_connection_freeze_20260610.py`, `emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py` | P4/P5接続判断、P5 hold、visible strengthening境界を触る時。 |
+| P4-1 Target Case Selection | `emlis_ai_product_readfeel_p4_target_case_selection.py`, `tests/fixtures/emlis_ai_product_readfeel_p4_target_cases_20260610.py`, `test_emlis_ai_product_readfeel_p4_target_case_selection_20260610.py` | P4対象case、family coverage、target layerを触る時。 |
+| P4-2 Material Audit | `emlis_ai_product_readfeel_p4_material_audit.py`, `tests/fixtures/emlis_ai_product_readfeel_p4_material_audit_20260610.py`, `test_emlis_ai_product_readfeel_p4_material_audit_20260610.py` | visible material slot、material quality、rich input overroute replayを触る時。 |
+| P4-3 Surface Requirement Boundary | `emlis_ai_public_surface_requirement.py`, `test_emlis_ai_product_readfeel_p4_surface_requirement_boundary_20260610.py` | low_information / limited_grounding / source_unavailable / rich input境界を触る時。 |
+| P4-4 Family Tuning Policy | `emlis_ai_product_readfeel_p4_family_tuning_policy.py`, `tests/fixtures/emlis_ai_product_readfeel_p4_family_tuning_policy_20260610.py`, `test_emlis_ai_product_readfeel_p4_family_tuning_policy_20260610.py` | ratio、temperature、section role、required anchor、forbidden surface classを触る時。 |
+| P4-5 Surface Signature Audit | `emlis_ai_product_readfeel_p4_surface_signature_audit.py`, `tests/fixtures/emlis_ai_product_readfeel_p4_surface_signature_audit_20260610.py`, `test_emlis_ai_product_readfeel_p4_surface_signature_audit_20260610.py` | generic reception、repeated signature、question-only collapseを触る時。 |
+| P4-6 daily_unpleasant | `emlis_ai_shared_reception_evidence.py`, `emlis_ai_reception_mode_resolver.py`, `emlis_ai_state_answer_ratio_policy.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_product_readfeel_p4_daily_unpleasant_family_tuning_20260610.py` | daily_unpleasantのevent / reaction anchor、ratio、surface realizationを触る時。 |
+| P4-7 structure_question | `emlis_ai_two_stage_section_surface_plan.py`, `emlis_ai_state_answer_ratio_policy.py`, `emlis_ai_complete_surface_realizer.py`, `test_emlis_ai_product_readfeel_p4_structure_question_family_tuning_20260610.py` | structure_questionのsection role、ratio、P6過剰Insight境界を触る時。 |
+| P4-8 self_denial yellow | `emlis_ai_product_readfeel_p4_self_denial_yellow_review.py`, `emlis_ai_state_answer_special_cases.py`, `emlis_ai_safety_triage.py`, `test_emlis_ai_product_readfeel_p4_self_denial_yellow_review_20260610.py` | self_denial yellow、安全隣接、identity claim as fact禁止を触る時。 |
+| P4-9 Ratings-only Review | `emlis_ai_product_readfeel_p4_ratings_review.py`, `tests/fixtures/emlis_ai_product_readfeel_p4_ratings_review_20260610.py`, `test_emlis_ai_product_readfeel_p4_ratings_review_20260610.py` | P4改善判定、P3-9再判定、ratings-only materialを触る時。 |
+| P4-10 Regression Handoff | `emlis_ai_product_readfeel_p4_regression_handoff.py`, `tests/fixtures/emlis_ai_product_readfeel_p4_regression_handoff_20260610.py`, `test_emlis_ai_product_readfeel_p4_regression_handoff_20260610.py` | required regression status、P5 hold re-check、handoff可否を触る時。 |
+
+禁止:
+
+```text
+P4 fixture本文をruntime条件にする。
+exact comment_text一致を成功条件にする。
+Gateを緩めて表示率だけを上げる。
+family policyを完成文テンプレートとして扱う。
+generic/repeated検知をpublic本文として出す。
+read_feelingをmachine metricsやverdictから自動補完する。
+P5履歴線でcurrent-only読感不足を隠す。
+required regression missing / timeoutをP5 readyとして扱う。
+```
+
+
+# 2026-06-11 差分追記: EmlisAI P5 User Label Connection P5-0〜P5-7 rule / test index
+
+EmlisAI User Label Connection P5を触る場合は、P5-0〜P5-7がbody-free / ratings-only / limited visible / no-contract-change境界でつながっていることを同時確認する。P5は履歴線を使うが、current-only読感不足を覆うための深読みではなく、既存comment_textを主役にした短い補助線としてのみ扱う。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| P5-0 Readiness Freeze | `emlis_ai_user_label_connection_p5_readiness.py`, `test_emlis_ai_user_label_connection_p5_readiness_freeze_20260611.py` | P4-10 handoff、current-only readfeel re-check、P5 entry allowed / holdを触る時。 |
+| P5-1 Visibility Boundary | `emlis_ai_user_label_connection_p5_visibility_boundary.py`, `test_emlis_ai_user_label_connection_p5_visibility_boundary_20260611.py` | Plus/Premium owned history、existing comment_text、existing gates、Free/current-only境界を触る時。 |
+| P5-2 Eligibility Matrix | `emlis_ai_user_label_connection_p5_eligibility_matrix.py`, `test_emlis_ai_user_label_connection_p5_eligibility_matrix_20260611.py` | connectable family、edge family、review_required / meta_only / blocked分類を触る時。 |
+| P5-3 Surface Role Plan | `emlis_ai_user_label_connection_p5_surface_role_plan.py`, `test_emlis_ai_user_label_connection_p5_surface_role_plan_20260611.py` | current observation first、history support line、forbidden roleを触る時。 |
+| P5-4 Safety Guard | `emlis_ai_user_label_connection_p5_safety_guard.py`, `test_emlis_ai_user_label_connection_p5_safety_guard_20260611.py` | creepy / overclaim / self-blame / always / cause / diagnosis / advice claimを触る時。 |
+| P5-5 Ratings-only Product QA | `emlis_ai_user_label_connection_p5_product_quality_review.py`, `test_emlis_ai_user_label_connection_p5_product_quality_review_20260611.py` | history_connection_naturalness、creepy_absence、overclaim_absence、current_input_not_masked_by_history等のratings-only QAを触る時。 |
+| P5-6 Limited Visible Connection | `emlis_ai_user_label_connection_p5_limited_visible_connection.py`, `test_emlis_ai_user_label_connection_p5_limited_visible_connection_20260611.py` | existing comment_textへのhistory-line support section接続、public/RN契約維持を触る時。 |
+| P5-7 Regression / P6 Hold | `emlis_ai_user_label_connection_p5_regression_handoff.py`, `test_emlis_ai_user_label_connection_p5_regression_handoff_20260611.py` | P6 ready / P6 hold / P5 continue / P4 return、required regression suiteを触る時。 |
+
+禁止:
+
+```text
+P5履歴線でcurrent-only読感不足を隠す。
+Free tierでhistory / user dictionaryを使う。
+evidence_record_count < 2 で履歴線を出す。
+low_information / safety adjacent / self_denial / target judgementへ初期P5 visibleを出す。
+creepy / overclaim / self-blame / always / cause / diagnosis / advice claimをvisibleへ通す。
+ratings-only QAへraw input、comment_text body、reviewer free textを保持する。
+P5 Product Quality QA passをrelease_allowedへ変換する。
+P6 readyをP6実装済みまたはpublic release可能と読む。
+RN表示条件、API route、request key、public response top-level key、DB physical schemaを増やす。
+```
+
+# 2026-06-12 差分追記: EmlisAI P6 Structure Insight v2 P6-0〜P6-9 rule / test index
+
+EmlisAI Structure Insight v2を触る場合は、P6-0〜P6-9がbody-free / ratings-only / limited family / no-contract-change境界でつながっていることを同時確認する。P6は「深い分析文を増やす工程」ではなく、P4 current-only読感とP5履歴線を壊さず、限定familyだけで安全な構造気づき候補をP7へ渡せるかを判定する工程である。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| P6-0 Entry Freeze | `emlis_ai_structure_insight_p6_entry_freeze.py`, `test_emlis_ai_structure_insight_p6_entry_freeze_20260611.py` | P5-7 handoff、P6 entry allowed / hold、P5/P4 returnを触る時。 |
+| P6-1 Inventory | `emlis_ai_structure_insight_p6_inventory.py`, `test_emlis_ai_structure_insight_p6_inventory_20260611.py` | 既存Structure Insight candidate / gate / surface / long-run gateの流用範囲を触る時。 |
+| P6-2 Family Boundary | `emlis_ai_structure_insight_p6_family_boundary.py`, `test_emlis_ai_structure_insight_p6_family_boundary_20260611.py` | target family、no-connect family、daily / low-info / safety adjacent suppressionを触る時。 |
+| P6-3 Relation Policy | `emlis_ai_structure_insight_p6_relation_policy.py`, `test_emlis_ai_structure_insight_p6_relation_policy_20260611.py` | relation family risk、initial visible / review / meta-only / blockedを触る時。 |
+| P6-4 Quality Rubric | `emlis_ai_structure_insight_p6_quality_rubric.py`, `test_emlis_ai_structure_insight_p6_quality_rubric_20260611.py` | ratings-only評価、read_feeling / insight_delta / forbidden claim absenceを触る時。 |
+| P6-5 Gate Hardening | `emlis_ai_structure_insight_p6_gate_hardening.py`, `test_emlis_ai_structure_insight_p6_gate_hardening_20260611.py` | soft expression、diagnosis / personality / cause / advice / future prediction / target judgement blockを触る時。 |
+| P6-6 Surface Role Plan | `emlis_ai_structure_insight_p6_surface_role_plan.py`, `test_emlis_ai_structure_insight_p6_surface_role_plan_20260611.py` | `structure_question` limited plan、insight seed count、section placementを触る時。 |
+| P6-7 Family Review | `emlis_ai_structure_insight_p6_family_review.py`, `test_emlis_ai_structure_insight_p6_family_review_20260611.py` | `long_meaning_arc` / `self_understanding_follow` のallow / hold / blockを触る時。 |
+| P6-8 Product QA | `emlis_ai_structure_insight_p6_product_quality_review.py`, `test_emlis_ai_structure_insight_p6_product_quality_review_20260611.py` | ratings-only Product QA、unsafe / weak / ready、P7 field candidatesを触る時。 |
+| P6-9 Regression Handoff | `emlis_ai_structure_insight_p6_regression_handoff.py`, `test_emlis_ai_structure_insight_p6_regression_handoff_20260611.py` | P7 ready / hold / P6 continue / P5 return / P4 returnを触る時。 |
+
+禁止:
+
+```text
+P6 fixture本文をruntime条件にする。
+Structure Insight用public response keyを追加する。
+Gateを緩めて深い文を通す。
+daily / low-information / positive-only / safety adjacentへ深いinsightを強制する。
+soft markerだけで診断・原因・人格・相手判断を通す。
+P5履歴線やP6 insightでcurrent-only読感不足を隠す。
+ratings-only QAへraw input、comment_text body、candidate body、reviewer free textを保持する。
+P6 Product QA / regression handoffをrelease_allowedへ変換する。
+```
+

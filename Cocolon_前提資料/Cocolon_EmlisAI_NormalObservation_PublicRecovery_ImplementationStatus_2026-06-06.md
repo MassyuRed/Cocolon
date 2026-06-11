@@ -1,9 +1,9 @@
 # Cocolon EmlisAI Public Observation Recovery 実装反映メモ
 
 作成日: 2026-06-06  
-最終差分更新: 2026-06-08  
+最終差分更新: 2026-06-09  
 対象: `Cocolon_前提資料(180).zip` / `Cocolon_11(8).zip` / `mashos-api_11(17).zip`  
-最新差分追記対象: `Cocolon_前提資料(190).zip` / `Cocolon_11(10).zip` / `mashos-api_11(19).zip`  
+最新差分追記対象: `Cocolon_前提資料(193).zip` / `Cocolon(219).zip` / `mashos-api(132).zip`  
 作業種別: 前提資料差分更新。コード変更なし。  
 基準判断: ローカル実ファイル基準。GitHub接続確認不要。  
 
@@ -335,3 +335,97 @@ User Label Connection sanitizer focused: 1 passed / 1 warning
 ```
 
 warningは既存Pydantic deprecationであり、今回の追補では触らない。
+
+
+## 9. 2026-06-09 追補: P3 Product Read Feel Baseline P3-0〜P3-9 current state
+
+最新実ファイル `Cocolon(219).zip` / `mashos-api(132).zip` では、Public Observation Recovery / P0-P1 public input_feedback arrival contract repairの上に、P3 Product Read Feel baseline P3-0〜P3-9が追加されている。
+
+この追補は、public recoveryの実装をさらに緩めるものではない。`comment_text`生成やpublic到達条件を変えず、現行Emlis応答が「読まれた形」に届いているかを、local QAとbody-free scorecardで測るための境界である。
+
+| Phase | 最新の読み方 | 主な実ファイル |
+|---|---|---|
+| P3-0 Contract Freeze | P3 baseline用fixtureがruntime分岐・固定返信文・exact `comment_text` 要求へ漏れないよう、不変境界を追加で固定する。 | `emlis_ai_product_quality_contract_freeze.py`, `test_emlis_ai_product_readfeel_p3_contract_freeze_20260609.py` |
+| P3-1 Baseline Case Matrix | 既存12 required families × 5件 = 60件のsynthetic local QA入力を固定する。`limited_grounding` / `source_unavailable_high_information` / `history_line_eligible` はfamily追加ではなくcoverage_slicesで扱う。 | `tests/fixtures/emlis_ai_product_readfeel_baseline_cases_20260609.py`, `test_emlis_ai_product_readfeel_baseline_case_matrix_20260609.py` |
+| P3-2 Local Output Capture | 本文ありのLocal Review Packetとbody-free Sanitized Current Output Eventを分離する。 | `tests/fixtures/emlis_ai_product_readfeel_p3_local_output_capture_20260609.py`, `test_emlis_ai_product_readfeel_p3_local_output_capture_20260609.py` |
+| P3-3 Sanitized Event / Inventory接続 | body-free sanitized eventをCurrent Output Inventory / ProductQuality scorecard row / Product Read Feel scorecardへ接続する。 | `emlis_ai_product_quality_measurement_event.py`, `emlis_ai_product_readfeel_current_output_inventory.py`, `tests/fixtures/emlis_ai_product_readfeel_p3_inventory_connection_20260609.py` |
+| P3-4 P2/P3 Verdict Split | P2 RED、P1 display repair、P3 repair required、P3 yellow、P3 pass、not evaluatedを分ける。 | `emlis_ai_product_readfeel_p3_verdict_split.py` |
+| P3-5 Blind QA Ratings-only Review | 人間が本文を読むlocal QAと、scorecardへ渡すratings-only materialを分ける。`read_feeling` はmachine metricsやverdictから自動補完しない。 | `emlis_ai_product_readfeel_p3_blind_qa_ratings_review.py` |
+| P3-6 Repair Priority Ledger | P2/P3 verdictとratings-only結果から、最初に直すblockerを最大2件へ絞る。 | `emlis_ai_product_readfeel_p3_repair_priority_ledger.py` |
+| P3-7 First Repair Design | rich inputのlow_information過剰落ち、generic/repeated surfaceなどに対し、runtime修正前のbody-free設計を固定する。 | `emlis_ai_product_readfeel_p3_first_repair_design.py` |
+| P3-8 Regression | P3 runtime修正へ進む前のrequired / optional / manual回帰境界を固定する。 | `emlis_ai_product_readfeel_p3_regression.py` |
+| P3-9 P4/P5接続判断 | P4 family別商品チューニングへ進めるか、P5 User Label Connection可視強化へ進めるかをbody-freeで判断する。defaultの読みはP4 next / P5 hold。 | `emlis_ai_product_readfeel_p3_p4_p5_connection_decision.py` |
+
+最新の読み方:
+
+```text
+P3 baselineは、P1表示到達の次に置く商品読感評価の足場である。
+P2 REDはP3修正に混ぜず、先に戻す。
+P3-5のratings-only reviewは、本文を人間が読んだ後の数値評価だけを保持する。
+P3-6 / P3-7は修正優先順位と最初の修正設計を固定するが、runtime本文生成はまだ変えない。
+P3-9ではP4 next / P5 holdを判断する。P5 User Label Connection可視強化へは、current-only読感が見えるまで飛ばない。
+```
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+case専用runtime分岐 / fixture文字列runtime条件追加なし
+comment_text生成ロジック変更なし
+2026-06-10差分ではP4 runtime tuning P4-0〜P4-10実装済み
+2026-06-11差分ではP5 User Label Connection P5-0〜P5-7実装済み
+2026-06-12差分ではP6 Structure Insight v2 P6-0〜P6-9実装済み
+raw input / memo / memo_action / candidate body / comment_text body のpublic meta・scorecard混入なし
+```
+
+## 10. 2026-06-12 追補: P6 Structure Insight v2 P6-0〜P6-9 current state
+
+最新実ファイル `Cocolon_10(16).zip` / `mashos-api_10(31).zip` では、P5 User Label Connection P5-0〜P5-7の後続として、P6 Structure Insight v2 P6-0〜P6-9がbackend内部に追加されている。
+
+この追補は、public recoveryのGateを緩めたり、Structure Insight専用のpublic response keyを追加したりするものではない。P6は、P4 current-only読感とP5履歴線を壊さず、限定familyだけで構造気づき候補をP7へ渡せるかをbody-freeで判断する境界である。
+
+最新の読み方:
+
+```text
+P5-7 regression / P6 hold decision
+  -> P6-0 entry freeze
+  -> P6-1 inventory
+  -> P6-2 family boundary
+  -> P6-3 relation policy
+  -> P6-4 quality rubric
+  -> P6-5 gate hardening
+  -> P6-6 structure_question limited surface role plan
+  -> P6-7 long_meaning_arc / self_understanding_follow review
+  -> P6-8 ratings-only Product QA
+  -> P6-9 regression / P7 hold decision
+```
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText / fixed sentence template追加なし
+raw input / candidate body / comment_text body / surface body / reviewer free text のpublic meta・scorecard・handoff summary混入なし
+P6 Product QA / regression handoffをrelease_allowedへ変換しない
+```
+
+確認済みvalidation:
+
+```text
+P6 dedicated pytest: 86 passed
+Structure Insight existing / long-run gate focused pytest: 25 passed
+```
+

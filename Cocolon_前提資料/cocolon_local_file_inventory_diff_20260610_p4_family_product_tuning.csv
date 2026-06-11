@@ -1,0 +1,35 @@
+repo,path,change_type,owner_phase,meaning
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_target_case_selection.py,added,P4-1,target case selection body-free material
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_material_audit.py,added,P4-2,material audit visible slots and blocker flags
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_family_tuning_policy.py,added,P4-4,family ratio temperature section role policy
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_surface_signature_audit.py,added,P4-5,generic and repeated surface signature audit
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_self_denial_yellow_review.py,added,P4-8,self denial yellow safety-adjacent review
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_ratings_review.py,added,P4-9,ratings-only review and P3-9 re-judgement
+mashos-api,ai/services/ai_inference/emlis_ai_product_readfeel_p4_regression_handoff.py,added,P4-10,regression and P5 hold handoff
+mashos-api,ai/services/ai_inference/emlis_ai_public_surface_requirement.py,changed,P4-3,low information limited grounding rich input boundary correction
+mashos-api,ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json,changed,P4-6/P4-8,reception assistance material for family tuning
+mashos-api,ai/services/ai_inference/emlis_ai_shared_reception_evidence.py,changed,P4-6/P4-7/P4-8,family visible evidence anchors
+mashos-api,ai/services/ai_inference/emlis_ai_reception_mode_resolver.py,changed,P4-6/P4-7/P4-8,family reception mode routing
+mashos-api,ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py,changed,P4-6/P4-7/P4-8,observation and reception ratio policy
+mashos-api,ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py,changed,P4-7,structure question section role plan
+mashos-api,ai/services/ai_inference/emlis_ai_complete_surface_realizer.py,changed,P4-6/P4-7,family surface anchors in realizer
+mashos-api,ai/services/ai_inference/emlis_ai_state_answer_special_cases.py,changed,P4-8,self denial special case boundary
+mashos-api,ai/services/ai_inference/emlis_ai_safety_triage.py,changed,P4-8,self denial safety boundary separation
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_target_cases_20260610.py,added,P4-1,target case fixture without raw body
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_material_audit_20260610.py,added,P4-2,material audit fixture
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_family_tuning_policy_20260610.py,added,P4-4,family policy fixture
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_surface_signature_audit_20260610.py,added,P4-5,surface signature audit fixture
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_self_denial_yellow_review_20260610.py,added,P4-8,self denial yellow review fixture
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_ratings_review_20260610.py,added,P4-9,ratings-only review fixture
+mashos-api,ai/tests/fixtures/emlis_ai_product_readfeel_p4_regression_handoff_20260610.py,added,P4-10,regression handoff fixture
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_connection_freeze_20260610.py,added,P4-0,connection freeze test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_target_case_selection_20260610.py,added,P4-1,target case selection test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_material_audit_20260610.py,added,P4-2,material audit test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_surface_requirement_boundary_20260610.py,added,P4-3,surface requirement boundary test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_family_tuning_policy_20260610.py,added,P4-4,family tuning policy test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_surface_signature_audit_20260610.py,added,P4-5,surface signature audit test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_daily_unpleasant_family_tuning_20260610.py,added,P4-6,daily unpleasant family tuning test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_structure_question_family_tuning_20260610.py,added,P4-7,structure question family tuning test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_self_denial_yellow_review_20260610.py,added,P4-8,self denial yellow review test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_ratings_review_20260610.py,added,P4-9,ratings-only review test
+mashos-api,ai/tests/test_emlis_ai_product_readfeel_p4_regression_handoff_20260610.py,added,P4-10,regression handoff test

@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-06-08"
+revision_date: "2026-06-11"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(190).zip"
-  Cocolon: "Cocolon_11(10).zip"
-  mashos-api: "mashos-api_11(19).zip"
+  premise: "Cocolon_前提資料(197).zip"
+  Cocolon: "Cocolon_8(17).zip"
+  mashos-api: "mashos-api_8(48).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 853
-  total: 1070
+  mashos-api: 919
+  total: 1136
 purpose: "華恋が Mash の指示語と current code の語彙を安全に写像する"
 ---
 
@@ -819,4 +819,57 @@ D相当・Phase20-10というtest名をruntime条件名へ転用しない。
 - `input_feedback.comment_text` がpublic visible bodyであることは変えない。
 - `yellow / warn` をpublic status enumへ変換しない。
 - Step名・ledger名をAPI route / DB column / RN表示名にしない。
+```
+
+
+# 2026-06-09 差分追記: EmlisAI P3 Product Read Feel Baseline internal naming boundary
+
+`mashos-api(132).zip` では、P3 Product Read Feel baselineのinternal名・test名・fixture名が追加されている。これらはvisible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| internal名 | 読み方 |
+|---|---|
+| `P3-0_Contract_Freeze` | 既存public/RN契約とfixture leak禁止境界の固定。 |
+| `P3-1_Baseline_Case_Matrix` | 12 required families × 5件のsynthetic local QA入力matrix。 |
+| `P3-2_Local_Output_Capture` | local review packetとsanitized current output eventの分離。 |
+| `P3-3_Sanitized_Event_Inventory_Connection` | body-free eventをinventory / scorecardへ接続する内部境界。 |
+| `P3-4_P2_P3_Verdict_Split` | P2 REDとP3 readfeel repairを分ける分類名。 |
+| `P3-5_Blind_QA_Ratings_Only_Review` | 本文を読んだ後のratings-only接続名。 |
+| `P3-6_Repair_Priority_Ledger` | 修正優先順位のbody-free ledger名。 |
+| `P3-7_First_Repair_Design` | 最初のruntime repairへ進む前の設計境界名。 |
+| `P3-8_Regression` | required / optional / manual回帰境界名。 |
+| `P3-9_P4_P5_Connection_Decision` | P4へ進むか、P5を保留するかの判断境界名。 |
+
+命名上の禁止:
+
+```text
+P3のinternal phase名をRN visible labelへ出さない。
+Product Read Feel scorecard名をpublic response keyへ出さない。
+Baseline case idやfixture textをruntime condition名として使わない。
+P4/P5 connection decisionを、P4/P5実装済みと読まない。
+```
+
+
+# 2026-06-11 差分追記: EmlisAI P5 User Label Connection internal naming boundary
+
+`mashos-api_8(48).zip` では、User Label Connection P5-0〜P5-7のinternal名・schema名・test名が追加されている。これらはvisible名、public response key、DB physical name、API route、RN production UI名ではない。
+
+| internal名 | 読み方 |
+|---|---|
+| `P5-0_P4_Handoff_CurrentOnlyReadfeel_RecheckFreeze` | P4-10 handoffからP5 entry可否をbody-freeで再確認する境界。 |
+| `P5-1_UserLabelConnection_VisibleReadinessBoundary` | Plus/Premium owned history、existing comment_text、既存Gate通過を確認するvisible readiness境界。 |
+| `P5-2_HistoryLineEligibilityMatrix` | family / edge familyごとのconnectable / meta_only / review_required / blocked分類。 |
+| `P5-3_SurfaceRolePlan_EdgeFamilyMapping` | current observation first / history support lineをrole planとして固定する内部境界。 |
+| `P5-4_CreepyOverclaimSelfBlameGuard` | creepy / overclaim / self-blame / always / cause / diagnosis / advice claimをblockするguard。 |
+| `P5-5_ProductQualityQA_RatingsOnlyReview` | Product Qualityをratings-onlyで見るQA境界。reviewer free textやcomment_text bodyは保持しない。 |
+| `P5-6_LimitedVisibleConnection` | 既存 `comment_text` へ短いhistory-line support sectionを限定接続する境界。public response keyではない。 |
+| `P5-7_Regression_P6HoldDecision` | P6 ready / P6 hold / P5 continue / P4 returnをbody-freeで分類するhandoff境界。 |
+
+命名上の禁止:
+
+```text
+P5 internal phase名をRN visible labelへ出さない。
+limited visible connectionをpublic response top-level keyへしない。
+ratings-only QA passをrelease_allowedへ変換しない。
+P6 readyをP6実装済みやP6 public releaseと読まない。
+history-line support sectionを診断名・人格分類名・未来予測名へ寄せない。
 ```

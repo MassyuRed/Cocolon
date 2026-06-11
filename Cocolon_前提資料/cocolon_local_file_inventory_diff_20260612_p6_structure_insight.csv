@@ -1,0 +1,22 @@
+repo,status,path,p6_phase_or_reason,contract_boundary
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_entry_freeze.py,P6-0,P5-7 handoff / P6 entry freeze; body-free entry classification.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_inventory.py,P6-1,Existing Structure Insight inventory; existing assets are inventoried without public body.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_family_boundary.py,P6-2,Target family / no-connect family boundary; daily low-info positive safety adjacent deep insight suppression.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_relation_policy.py,P6-3,Relation family initial set and risk classification.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_quality_rubric.py,P6-4,Ratings-only insight candidate quality rubric; no machine read_feeling fill.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_gate_hardening.py,P6-5,Gate hardening and soft expression boundary; no comment_text write.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_surface_role_plan.py,P6-6,Limited surface role plan for structure_question; insight seed max one.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_family_review.py,P6-7,long_meaning_arc / self_understanding_follow family review; allow hold block only.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_product_quality_review.py,P6-8,Ratings-only Product QA / Blind QA material; unsafe weak ready summary.
+mashos-api,added,ai/services/ai_inference/emlis_ai_structure_insight_p6_regression_handoff.py,P6-9,Regression / P7 hold decision; p7_ready p7_hold p6_continue p5_return p4_return.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_entry_freeze_20260611.py,P6-0 test,Entry freeze contract and body-free checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_inventory_20260611.py,P6-1 test,Inventory readiness and body-free checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_family_boundary_20260611.py,P6-2 test,Allowed/no-connect family boundary checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_relation_policy_20260611.py,P6-3 test,Relation risk classification checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_quality_rubric_20260611.py,P6-4 test,Ratings-only rubric and forbidden body checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_gate_hardening_20260611.py,P6-5 test,Soft expression and unsafe claim boundary checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_surface_role_plan_20260611.py,P6-6 test,Limited structure_question surface role plan checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_family_review_20260611.py,P6-7 test,long_meaning_arc / self_understanding_follow review checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_product_quality_review_20260611.py,P6-8 test,Ratings-only Product QA summary checks.
+mashos-api,added,ai/tests/test_emlis_ai_structure_insight_p6_regression_handoff_20260611.py,P6-9 test,P7 hold decision and contract preservation checks.
+mashos-api,changed,ai/services/ai_inference/emlis_ai_structure_insight_candidate.py,P6-9 repair,Safety-triage material keeps only grounded self_denial_identity_split internal candidate for downstream Gate; no visible promotion.
