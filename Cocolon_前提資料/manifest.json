@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-12",
+  "revision_date": "2026-06-13",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 939,
-    "total": 1156
+    "mashos-api": 1005,
+    "total": 1222
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 1156,
-    "national_system_body_includes": 1156,
+    "overall_structure_body_includes": 1222,
+    "national_system_body_includes": 1222,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1156件、国家システム判断対象のcurrent全ファイル1156件を本文または差分追記で記載する。今回のP6 Structure Insight v2 P6-0〜P6-9は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1156,
-    "overall_structure_body_includes_current_snapshot_files": 1156,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1156,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1222件、国家システム判断対象のcurrent全ファイル1222件を本文または差分追記で記載する。今回のP7-HOLD-004 Phase16 Composer Red Classification R0〜R9は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1222,
+    "overall_structure_body_includes_current_snapshot_files": 1222,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1222,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -936,7 +936,53 @@
     "user_label_connection_p5_0_7_reflected": true,
     "user_label_connection_p5_full_01_02_regeneration": false,
     "structure_insight_p6_0_9_reflected": true,
-    "structure_insight_p6_full_01_02_regeneration": false
+    "structure_insight_p6_full_01_02_regeneration": false,
+    "p7_product_quality_runner_p7_0_9_reflected": true,
+    "p7_product_quality_runner_full_01_02_regeneration": false,
+    "p7_product_quality_runner_design_implementation": true,
+    "latest_source_basis_2026_06_12_product_quality_runner_p7_0_9": {
+      "premise": "Cocolon_前提資料(206).zip",
+      "Cocolon": "Cocolon_10(16).zip",
+      "mashos-api": "mashos-api_6(56).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 972,
+      "total_files": 1189,
+      "scope": "EmlisAI P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9 premise diff reflection",
+      "p7_added_files": 22,
+      "p7_changed_existing_files": 0,
+      "p7_removed_files": 0
+    },
+    "p7_red_hold_closure_r0_r12_reflected": true,
+    "p7_red_hold_closure_full_01_02_regeneration": false,
+    "latest_source_basis_2026_06_13_p7_red_hold_closure_r0_r12": {
+      "premise": "Cocolon_前提資料(208).zip",
+      "Cocolon": "Cocolon_10(16).zip",
+      "mashos-api": "mashos-api_8(51).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 985,
+      "total_files": 1202,
+      "scope": "EmlisAI P7 RED/HOLD Closure R0-R12 premise diff reflection",
+      "p7_red_hold_added_files": 13,
+      "p7_red_hold_changed_existing_files": 14,
+      "p7_red_hold_removed_files": 0
+    },
+    "p7_red003_body_free_guard_repair_r13_reflected": true,
+    "p7_red003_body_free_guard_repair_full_01_02_regeneration": false,
+    "p7_hold004_phase16_composer_r0_r9_reflected": true,
+    "p7_hold004_phase16_composer_full_01_02_regeneration": false,
+    "p7_hold004_phase16_composer_red_classification_r0_r9_reflected": true,
+    "p7_hold004_phase16_composer_red_classification_r0_r9_added_files": 11,
+    "p7_hold004_phase16_composer_red_classification_r0_r9_changed_files": 4,
+    "p7_hold004_phase16_composer_red_classification_r0_r9_removed_files": 0,
+    "p7_hold004_phase16_composer_red_classification_full_01_02_regeneration": false,
+    "latest_source_basis_2026_06_13_p7_hold004_phase16_composer_red_classification_r0_r9": {
+      "premise": "Cocolon_前提資料(212).zip",
+      "Cocolon": "Cocolon(230).zip",
+      "mashos-api": "mashos-api_7(55).zip",
+      "Cocolon_files": 217,
+      "mashos_api_files": 1005,
+      "total_files": 1222
+    }
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1036,7 +1082,8 @@
     {
       "path": "cocolon_local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival.csv",
       "purpose": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10の実ファイル差分inventory"
-    }
+    },
+    "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv"
   ],
   "excluded_files": [
     {
@@ -1299,6 +1346,20 @@
       "Cocolon": "Cocolon_11(10).zip",
       "mashos-api": "mashos-api_11(19).zip",
       "summary": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10 premise diff update."
+    },
+    {
+      "date": "2026-06-13",
+      "premise": "Cocolon_前提資料(208).zip",
+      "Cocolon": "Cocolon_10(16).zip",
+      "mashos-api": "mashos-api_8(51).zip",
+      "summary": "EmlisAI P7 RED/HOLD Closure R0〜R12 premise diff update."
+    },
+    {
+      "date": "2026-06-13",
+      "premise": "Cocolon_前提資料(210).zip",
+      "Cocolon": "Cocolon(229).zip",
+      "mashos-api": "mashos-api_7(54).zip",
+      "summary": "EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13 premise diff update."
     }
   ],
   "source_basis_2026_04_25": {
@@ -2001,21 +2062,94 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(193).zip",
-    "Cocolon": "Cocolon(219).zip",
-    "mashos-api": "mashos-api(132).zip",
+    "premise": "Cocolon_前提資料(212).zip",
+    "Cocolon": "Cocolon(230).zip",
+    "mashos-api": "mashos-api_7(55).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 878,
-      "total": 1095
+      "mashos-api": 1005,
+      "total": 1222
     },
-    "sha256": {
-      "premise": "8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9",
-      "Cocolon": "a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda",
-      "mashos-api": "b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24"
+    "zip_sha256": {
+      "premise": "3ea1f72a5dc4d3a774895ca37caa321e8d8076daa3e4eded03bb4e801c531856",
+      "Cocolon": "c656afa7506283d9a5530a5883f36a0acc79ddc8e0fe2c1c39bc9a9f12674e45",
+      "mashos-api": "86d685b8b2cdff4d61aa0734f521d05f914c9a3dec76a116774c24b42f9d2512"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9。60件baseline、local output capture、body-free inventory/scorecard connection、P2/P3 verdict split、ratings-only Blind QA、repair priority ledger、first repair design、regression、P4/P5 decisionを追加する。RN/API/DB/public response key/Gate/comment_text generationは変更しない。"
+    "scope": "EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9",
+    "summary": "P7-HOLD-004 full backend suite green未確認の切り分けとして、Phase16 Complete Composer candidate boundaryをbody-free分類し、R4-Aでcandidate generationとtone/display readinessを分離し、R5/R6でmetadata summaryとadjacent public redを分離し、R7/R8/R9でP7 hold matrix / validation matrix / release handoff / implementation result docへ接続する。P7-HOLD-004は未解消、full backend suite green未確認、p7_complete=false、p8_start_allowed=false、release_allowed=falseを維持する。RN/API/DB/public response key変更は行わない。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "CLOSED / body_free_guard_repaired / PASSED_ISOLATED",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / Phase16 candidate boundary registered / adjacent public red registered / full backend suite green unconfirmed",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_hold004_phase16_results": {
+      "classification": "candidate_readiness_display_gate_boundary_mixed",
+      "decision_kind": "repair_candidate_display_boundary",
+      "repair_branch": "R4-A",
+      "target_phase16_complete_composer": "2 passed recorded in implementation result",
+      "r9_implementation_result_handoff_test": "3 passed in premise update check",
+      "full_backend_suite_green_confirmed": false,
+      "hold004_close_allowed": false
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "display_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "template_gate_relaxed": false,
+      "fixed_comment_text_added": false,
+      "case_specific_branch_added": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py"
+    ],
+    "mashos_api_removed_files": [],
+    "tracked_inventory_rows": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    },
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+      "manifest.json"
+    ],
+    "diff_inventory_sha256": "652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -2781,21 +2915,94 @@
     }
   },
   "current_source_snapshot": {
-    "premise": "Cocolon_前提資料(193).zip",
-    "Cocolon": "Cocolon(219).zip",
-    "mashos-api": "mashos-api(132).zip",
+    "premise": "Cocolon_前提資料(212).zip",
+    "Cocolon": "Cocolon(230).zip",
+    "mashos-api": "mashos-api_7(55).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 878,
-      "total": 1095
+      "mashos-api": 1005,
+      "total": 1222
     },
-    "sha256": {
-      "premise": "8b67afa37a88b9910a7e43dfad998a0a0c8b5badf62090467ca5fc0c4bfc23c9",
-      "Cocolon": "a63de4ebdb67b34e7b4db0871a7302f4ae8ee75a8157c299571c4933fd58cfda",
-      "mashos-api": "b88d85fc27154fbb56c727e8a651b0e14b2f0a302a880eba83893a0e8acf9c24"
+    "zip_sha256": {
+      "premise": "3ea1f72a5dc4d3a774895ca37caa321e8d8076daa3e4eded03bb4e801c531856",
+      "Cocolon": "c656afa7506283d9a5530a5883f36a0acc79ddc8e0fe2c1c39bc9a9f12674e45",
+      "mashos-api": "86d685b8b2cdff4d61aa0734f521d05f914c9a3dec76a116774c24b42f9d2512"
     },
     "source_mode": "local_snapshot",
-    "summary": "EmlisAI P3 Product Read Feel Baseline P3-0〜P3-9。60件baseline、local output capture、body-free inventory/scorecard connection、P2/P3 verdict split、ratings-only Blind QA、repair priority ledger、first repair design、regression、P4/P5 decisionを追加する。RN/API/DB/public response key/Gate/comment_text generationは変更しない。"
+    "scope": "EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9",
+    "summary": "P7-HOLD-004 full backend suite green未確認の切り分けとして、Phase16 Complete Composer candidate boundaryをbody-free分類し、R4-Aでcandidate generationとtone/display readinessを分離し、R5/R6でmetadata summaryとadjacent public redを分離し、R7/R8/R9でP7 hold matrix / validation matrix / release handoff / implementation result docへ接続する。P7-HOLD-004は未解消、full backend suite green未確認、p7_complete=false、p8_start_allowed=false、release_allowed=falseを維持する。RN/API/DB/public response key変更は行わない。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "CLOSED / body_free_guard_repaired / PASSED_ISOLATED",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / Phase16 candidate boundary registered / adjacent public red registered / full backend suite green unconfirmed",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_hold004_phase16_results": {
+      "classification": "candidate_readiness_display_gate_boundary_mixed",
+      "decision_kind": "repair_candidate_display_boundary",
+      "repair_branch": "R4-A",
+      "target_phase16_complete_composer": "2 passed recorded in implementation result",
+      "r9_implementation_result_handoff_test": "3 passed in premise update check",
+      "full_backend_suite_green_confirmed": false,
+      "hold004_close_allowed": false
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "display_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "template_gate_relaxed": false,
+      "fixed_comment_text_added": false,
+      "case_specific_branch_added": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py"
+    ],
+    "mashos_api_removed_files": [],
+    "tracked_inventory_rows": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    },
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+      "manifest.json"
+    ],
+    "diff_inventory_sha256": "652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -7572,5 +7779,915 @@
         "removed": 0
       }
     }
+  },
+  "source_snapshot_2026_06_12_product_quality_runner_p7_0_9": {
+    "premise": "Cocolon_前提資料(206).zip",
+    "Cocolon": "Cocolon_10(16).zip",
+    "mashos-api": "mashos-api_6(56).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 972,
+      "total": 1189
+    },
+    "zip_sha256": {
+      "premise": "e933ef02e48a535c4242c01167366461048fe8b5fcbcccb9d8da36a18a1e1a49",
+      "mashos-api": "b7abe12596af7e1a1a05af2e6ba39ea861a87d1dcc0b9b2b878fd7b94c68f4aa"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9",
+    "summary": "P5/P6 body-free handoff後続としてP7 handoff normalizer、red ledger、module inventory、runner plan、event bridge、evaluation matrix、ratings-only Blind QA material、long-run gate candidate material、release decision handoff、validation matrixをbackend internal-onlyで追加する。RN/API/DB/public response key/release_allowed true化は行わない。",
+    "p7_test_results": {
+      "p7_core_contract": "50 passed",
+      "existing_product_quality_reuse_subset": "31 passed, 1 warning",
+      "positive_recovery_e2e": "RED ledgered / isolated as P7-RED-001 and P7-RED-002",
+      "product_quality_connection_e2e": "timeout / hang isolated as P7-RED-003",
+      "full_backend_suite": "unconfirmed HOLD"
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_contracts.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_handoff_normalizer.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_red_ledger.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_module_inventory.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_runner_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_event_bridge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_evaluation_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_blind_qa_material.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_long_run_gate_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_handoff_normalizer_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_red_ledger_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_module_inventory_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_runner_plan_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_event_bridge_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_evaluation_matrix_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_blind_qa_material_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_long_run_gate_handoff_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_ProductQualityRunner_ImplementationResult_20260612.md"
+    ],
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "manifest.json"
+    ]
+  },
+  "latest_source_basis_2026_06_12_product_quality_runner_p7_0_9": {
+    "premise": "Cocolon_前提資料(206).zip",
+    "Cocolon": "Cocolon_10(16).zip",
+    "mashos-api": "mashos-api_6(56).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 972,
+      "total": 1189
+    },
+    "zip_sha256": {
+      "premise": "e933ef02e48a535c4242c01167366461048fe8b5fcbcccb9d8da36a18a1e1a49",
+      "mashos-api": "b7abe12596af7e1a1a05af2e6ba39ea861a87d1dcc0b9b2b878fd7b94c68f4aa"
+    },
+    "tracked_inventory_rows": {
+      "added": 22,
+      "changed": 0,
+      "removed": 0
+    },
+    "p7_focused_pytest": {
+      "p7_core_contract": "50 passed",
+      "existing_product_quality_reuse_subset": "31 passed, 1 warning"
+    }
+  },
+  "latest_modified_premise_files_2026_06_12_product_quality_runner_p7_0_9": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json"
+  ],
+  "source_snapshot_2026_06_13_p7_red_hold_closure_r0_r12": {
+    "premise": "Cocolon_前提資料(208).zip",
+    "Cocolon": "Cocolon_10(16).zip",
+    "mashos-api": "mashos-api_8(51).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 985,
+      "total": 1202
+    },
+    "zip_sha256": {
+      "premise": "16e6c983e14b2837638d3af5e53cdbf2c1b2a48263a7139ecdef5d03b8ae9fdf",
+      "mashos-api": "af3d7da2f2729aed5b341533a6ba5b12c3dc6910e1dc0ff94121d14a9e043fd5"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7 RED/HOLD Closure R0-R12",
+    "summary": "P7 Product Quality Runner後続として、Positive Recovery strict relation closure、P7-RED-003 timeout isolation、red classification、P5 human QA material boundary、P6 visible boundary validation、real device/full backend HOLD matrix、release/validation final alignment、implementation result mdをbackend internal-onlyで反映する。RN/API/DB/public response key/release_allowed true化は行わない。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "CLASSIFIED / TIMEOUT_ISOLATED / unresolved",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary blocked and validated but HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / full backend suite green unconfirmed",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_test_results": {
+      "r0_r11_major_suite": "34 passed in 18.43s",
+      "p7_core_r6_r11": "70 passed in 9.68s",
+      "existing_product_quality_reuse_subset": "31 passed in 17.52s",
+      "product_quality_connection_e2e_10s": "EXIT_STATUS:124"
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RedHoldClosure_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r10_real_device_full_backend_hold_matrix_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r8_human_qa_material_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r9_p6_visible_expansion_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_red_closure_classification_matrix_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_r2_r3_contract_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_r4_r5_fail_closed_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_strict_relation_trace_20260613.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_blind_qa_material.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_event_bridge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_long_run_gate_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_runner_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py"
+    ],
+    "mashos_api_removed_files": [],
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv",
+    "diff_inventory_sha256": "776b96fa927e091c34f7b2784b03497150517220cf7b5490129e2a88a2e2510b",
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv",
+      "manifest.json"
+    ]
+  },
+  "latest_source_basis_2026_06_13_p7_red_hold_closure_r0_r12": {
+    "premise": "Cocolon_前提資料(208).zip",
+    "Cocolon": "Cocolon_10(16).zip",
+    "mashos-api": "mashos-api_8(51).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 985,
+      "total": 1202
+    },
+    "zip_sha256": {
+      "premise": "16e6c983e14b2837638d3af5e53cdbf2c1b2a48263a7139ecdef5d03b8ae9fdf",
+      "mashos-api": "af3d7da2f2729aed5b341533a6ba5b12c3dc6910e1dc0ff94121d14a9e043fd5"
+    },
+    "diff_from": {
+      "mashos-api": "mashos-api(141).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 13,
+        "changed": 14,
+        "removed": 0
+      }
+    },
+    "scope": "EmlisAI P7 RED/HOLD Closure R0-R12. Backend internal-only; no RN/API/DB/public response shape change.",
+    "tracked_inventory_rows": {
+      "added": 13,
+      "changed": 14,
+      "removed": 0
+    },
+    "focused_pytest": {
+      "r0_r11_major_suite": "34 passed in 18.43s",
+      "p7_core_r6_r11": "70 passed in 9.68s",
+      "existing_product_quality_reuse_subset": "31 passed in 17.52s",
+      "product_quality_connection_e2e_10s": "EXIT_STATUS:124"
+    }
+  },
+  "latest_modified_premise_files_2026_06_13_p7_red_hold_closure_r0_r12": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv",
+    "manifest.json"
+  ],
+  "local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12": {
+    "path": "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv",
+    "sha256": "776b96fa927e091c34f7b2784b03497150517220cf7b5490129e2a88a2e2510b",
+    "row_count_excluding_header": 27,
+    "source_diff_from": "mashos-api(141).zip",
+    "source_diff_to": "mashos-api_8(51).zip",
+    "diff_counts": {
+      "added": 13,
+      "changed": 14,
+      "removed": 0
+    }
+  },
+  "p7_red_hold_closure_policy_2026_06_13": {
+    "p7_red_001": "CLOSED",
+    "p7_red_002": "CLOSED",
+    "p7_red_003": "CLASSIFIED_TIMEOUT_ISOLATED_UNRESOLVED",
+    "p7_hold_001": "UNRESOLVED_P5_HUMAN_QA_INCOMPLETE",
+    "p7_hold_002": "UNRESOLVED_P6_VISIBLE_BOUNDARY_VALIDATED_BUT_HOLD",
+    "p7_hold_003": "UNRESOLVED_REAL_DEVICE_SUBMIT_MODAL_READFEEL_UNVERIFIED",
+    "p7_hold_004": "UNRESOLVED_FULL_BACKEND_SUITE_GREEN_UNCONFIRMED",
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "full_backend_suite_green_confirmed": false
+  },
+  "p7_red_hold_closure_changed_paths_2026_06_13": {
+    "added": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RedHoldClosure_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r10_real_device_full_backend_hold_matrix_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r8_human_qa_material_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r9_p6_visible_expansion_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_red_closure_classification_matrix_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_r2_r3_contract_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_r4_r5_fail_closed_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_positive_recovery_strict_relation_trace_20260613.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_blind_qa_material.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_event_bridge.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_long_run_gate_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_runner_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py"
+    ],
+    "removed": []
+  },
+  "emlis_p7_red_hold_closure_policy_2026_06_13": {
+    "schema_version": "cocolon.emlis.p7.red_hold_closure.premise_policy.v1",
+    "summary": "P7-RED-001/002 are closed by strict Positive Recovery relation contract and fail-closed boundary. P7-RED-003 remains classified / timeout isolated. P7-HOLD-001〜004 remain unresolved. P7 complete, P8 start allowed, and release_allowed remain false.",
+    "closed_red_refs": [
+      "P7-RED-001",
+      "P7-RED-002"
+    ],
+    "unresolved_red_refs": [
+      "P7-RED-003"
+    ],
+    "unresolved_hold_refs": [
+      "P7-HOLD-001",
+      "P7-HOLD-002",
+      "P7-HOLD-003",
+      "P7-HOLD-004"
+    ],
+    "release_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "P7 core green as P7 complete",
+      "Product Quality reuse subset green as full backend suite green",
+      "Positive Recovery red closure as all Emlis quality pass",
+      "timeout isolation as timeout closure",
+      "HOLD matrix as human QA / real device / full suite completion"
+    ]
+  },
+  "source_snapshot_2026_06_13_p7_red003_body_free_guard_repair_r13": {
+    "premise": "Cocolon_前提資料(210).zip",
+    "Cocolon": "Cocolon(229).zip",
+    "mashos-api": "mashos-api_7(54).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 994,
+      "total": 1211
+    },
+    "zip_sha256": {
+      "premise": "17f025f549d0ca048d7eff6aa374c8397249e8d4210b455d007f7e21bb09ba74",
+      "Cocolon": "f56e1b35ffaf7b20d61428f2897af5b9db060c4aa5f78a384b163ce12d9bd59d",
+      "mashos-api": "47da8969f4ef6c8a1562ccd9a3368c84181a1c8ea8809b28040162edf3bc0b07"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13-0〜R13-11",
+    "summary": "P7 RED・HOLD Closure R0〜R12後続として、Product Quality Connection E2Eの過広なbody-free leak guardを構造化し、default pytest timeoutを解消し、P7-RED-003をbody_free_guard_repairedとしてclosed伝播する。P7-HOLD-001〜004、p7_complete=false、p8_start_allowed=false、release_allowed=falseは維持する。RN/API/DB/public response key変更は行わない。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "CLOSED / body_free_guard_repaired / PASSED_ISOLATED",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary blocked and validated but HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / full backend suite green unconfirmed",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_test_results": {
+      "r13_related_minimum_validation_release_subset": "40 passed",
+      "product_quality_connection_e2e_timeout_wrapper": "1 passed / EXIT_STATUS:0",
+      "p7_core_r6_r11": "72 passed",
+      "existing_product_quality_reuse_subset": "31 passed",
+      "rn_contract": "36 passed",
+      "full_backend_suite": "unconfirmed HOLD"
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_BodyFreeLeakGuardRepair_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_0_R13_1_BaselineAndBodyFreeContract_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_2_R13_3_BodyFreeLeakGuardHelper_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_4_R13_5_ProductQualityConnectionE2E_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_6_R13_7_ObservationAndRedClosureClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_8_R13_9_ValidationAndReleaseHandoff_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_body_free_leak_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_body_free_leak_guard_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_body_free_leak_guard_contract_20260613.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_red_closure_classification_matrix_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py"
+    ],
+    "mashos_api_removed_files": [],
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260613_p7_red003_body_free_leak_guard_repair_r13.csv",
+    "diff_inventory_sha256": "2eec477fd9d8c90dc03dd970a480ca731090add7bf8fea3777d10a9c7c1aade7",
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "cocolon_local_file_inventory_diff_20260613_p7_red003_body_free_leak_guard_repair_r13.csv",
+      "manifest.json"
+    ]
+  },
+  "latest_source_basis_2026_06_13_p7_red003_body_free_guard_repair_r13": {
+    "premise": "Cocolon_前提資料(210).zip",
+    "Cocolon": "Cocolon(229).zip",
+    "mashos-api": "mashos-api_7(54).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 994,
+      "total": 1211
+    },
+    "zip_sha256": {
+      "premise": "17f025f549d0ca048d7eff6aa374c8397249e8d4210b455d007f7e21bb09ba74",
+      "Cocolon": "f56e1b35ffaf7b20d61428f2897af5b9db060c4aa5f78a384b163ce12d9bd59d",
+      "mashos-api": "47da8969f4ef6c8a1562ccd9a3368c84181a1c8ea8809b28040162edf3bc0b07"
+    },
+    "diff_from": {
+      "mashos-api": "mashos-api(142).zip"
+    },
+    "diff_counts": {
+      "Cocolon": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "mashos-api": {
+        "added": 9,
+        "changed": 10,
+        "removed": 0
+      }
+    },
+    "scope": "EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13-0〜R13-11. Backend internal-only; no RN/API/DB/public response shape change.",
+    "tracked_inventory_rows": {
+      "added": 9,
+      "changed": 10,
+      "removed": 0
+    },
+    "focused_pytest": {
+      "r13_related_minimum_validation_release_subset": "40 passed",
+      "product_quality_connection_e2e_timeout_wrapper": "1 passed / EXIT_STATUS:0",
+      "p7_core_r6_r11": "72 passed",
+      "existing_product_quality_reuse_subset": "31 passed",
+      "rn_contract": "36 passed",
+      "full_backend_suite": "unconfirmed HOLD"
+    }
+  },
+  "latest_modified_premise_files_2026_06_13_p7_red003_body_free_guard_repair_r13": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "cocolon_local_file_inventory_diff_20260613_p7_red003_body_free_leak_guard_repair_r13.csv",
+    "manifest.json"
+  ],
+  "local_file_inventory_diff_20260613_p7_red003_body_free_guard_repair_r13": {
+    "path": "cocolon_local_file_inventory_diff_20260613_p7_red003_body_free_leak_guard_repair_r13.csv",
+    "sha256": "2eec477fd9d8c90dc03dd970a480ca731090add7bf8fea3777d10a9c7c1aade7",
+    "row_count_excluding_header": 19,
+    "source_diff_from": "mashos-api(142).zip",
+    "source_diff_to": "mashos-api_7(54).zip",
+    "diff_counts": {
+      "added": 9,
+      "changed": 10,
+      "removed": 0
+    }
+  },
+  "p7_red003_body_free_guard_repair_policy_2026_06_13": {
+    "p7_red_003": "CLOSED_BODY_FREE_GUARD_REPAIRED_PASSED_ISOLATED",
+    "product_quality_connection_timeout_closed": true,
+    "product_quality_connection_timeout_remains_ledgered_or_isolated": false,
+    "p7_hold_001": "UNRESOLVED_P5_HUMAN_QA_INCOMPLETE",
+    "p7_hold_002": "UNRESOLVED_P6_VISIBLE_BOUNDARY_VALIDATED_BUT_HOLD",
+    "p7_hold_003": "UNRESOLVED_REAL_DEVICE_SUBMIT_MODAL_READFEEL_UNVERIFIED",
+    "p7_hold_004": "UNRESOLVED_FULL_BACKEND_SUITE_GREEN_UNCONFIRMED",
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "full_backend_suite_green_confirmed": false
+  },
+  "p7_red003_body_free_guard_repair_changed_paths_2026_06_13": {
+    "added": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_BodyFreeLeakGuardRepair_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_0_R13_1_BaselineAndBodyFreeContract_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_2_R13_3_BodyFreeLeakGuardHelper_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_4_R13_5_ProductQualityConnectionE2E_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_6_R13_7_ObservationAndRedClosureClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_8_R13_9_ValidationAndReleaseHandoff_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_body_free_leak_guard.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_body_free_leak_guard_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_body_free_leak_guard_contract_20260613.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_red_closure_classification_matrix_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py"
+    ],
+    "removed": []
+  },
+  "emlis_p7_red003_body_free_guard_repair_policy_2026_06_13": {
+    "schema_version": "cocolon.emlis.p7.red003_body_free_guard_repair.premise_policy.v1",
+    "summary": "P7-RED-003 is closed by structured Product Quality scorecard body-free guard repair. Safe rubric vocabulary is allowed only by path/exact value; raw current_input key/body/id remains forbidden. P7-HOLD-001〜004 remain unresolved. P7 complete, P8 start allowed, and release_allowed remain false.",
+    "closed_red_refs": [
+      "P7-RED-001",
+      "P7-RED-002",
+      "P7-RED-003"
+    ],
+    "unresolved_red_refs": [],
+    "unresolved_timeout_refs": [],
+    "unresolved_hold_refs": [
+      "P7-HOLD-001",
+      "P7-HOLD-002",
+      "P7-HOLD-003",
+      "P7-HOLD-004"
+    ],
+    "release_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "current_input safe vocabulary as raw current_input allowance",
+      "Product Quality Connection E2E green as P7 complete",
+      "R13 regression subset as full backend suite green",
+      "RN contract green as real device submit / modal readfeel confirmed",
+      "release_input_status review_required as release ready",
+      "P7-RED-003 closure as P7-HOLD closure"
+    ]
+  },
+  "source_snapshot_2026_06_13_p7_hold004_phase16_composer_r0_r9": {
+    "premise": "Cocolon_前提資料(212).zip",
+    "Cocolon": "Cocolon(230).zip",
+    "mashos-api": "mashos-api_7(55).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 1005,
+      "total": 1222
+    },
+    "zip_sha256": {
+      "premise": "3ea1f72a5dc4d3a774895ca37caa321e8d8076daa3e4eded03bb4e801c531856",
+      "Cocolon": "c656afa7506283d9a5530a5883f36a0acc79ddc8e0fe2c1c39bc9a9f12674e45",
+      "mashos-api": "86d685b8b2cdff4d61aa0734f521d05f914c9a3dec76a116774c24b42f9d2512"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9",
+    "summary": "P7-RED-003 R13後続として、P7-HOLD-004内のPhase16 Complete Composer redをbody-free分類し、direct/conversation/public/adjacent pathを分け、candidate generationとdisplay/tone readinessを最小分離し、P7 hold matrix / validation matrix / release handoff / implementation result docへ未解消HOLDとして接続する。P7-HOLD-004、full backend suite green未確認、p7_complete=false、p8_start_allowed=false、release_allowed=falseは維持する。RN/API/DB/public response key変更は行わない。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "CLOSED / body_free_guard_repaired / PASSED_ISOLATED",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary blocked and validated but HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / Phase16 candidate boundary registered / adjacent public red registered / full backend suite green unconfirmed",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_hold004_phase16_results": {
+      "classification": "candidate_readiness_display_gate_boundary_mixed",
+      "decision_kind": "repair_candidate_display_boundary",
+      "repair_branch": "R4-A",
+      "phase16_complete_composer_target": "green recorded in implementation result doc",
+      "adjacent_public_red": "positive_change_after_work_streaming public path shape mismatch registered separately",
+      "full_backend_suite_green_confirmed": false,
+      "hold004_close_allowed": false
+    },
+    "p7_test_results": {
+      "r0_r1_classification": "2 passed, 1 warning",
+      "r2_r3_path_matrix_decision_rule": "4 passed",
+      "r7_r8_validation_release_handoff": "3 passed",
+      "r9_implementation_result_handoff": "3 passed",
+      "phase16_complete_composer_target": "2 passed recorded in implementation result doc; premise-update rerun process killed, not counted as fresh confirmation",
+      "full_backend_suite": "unconfirmed HOLD"
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "gate_relaxed": false,
+      "fixed_comment_text_added": false,
+      "case_specific_branch_added": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py"
+    ],
+    "mashos_api_removed_files": [],
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "diff_inventory_sha256": "652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4",
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+      "manifest.json"
+    ]
+  },
+  "latest_source_basis_2026_06_13_p7_hold004_phase16_composer_r0_r9": {
+    "premise": "Cocolon_前提資料(212).zip",
+    "Cocolon": "Cocolon(230).zip",
+    "mashos-api": "mashos-api_7(55).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 1005,
+      "total": 1222
+    },
+    "zip_sha256": {
+      "premise": "3ea1f72a5dc4d3a774895ca37caa321e8d8076daa3e4eded03bb4e801c531856",
+      "Cocolon": "c656afa7506283d9a5530a5883f36a0acc79ddc8e0fe2c1c39bc9a9f12674e45",
+      "mashos-api": "86d685b8b2cdff4d61aa0734f521d05f914c9a3dec76a116774c24b42f9d2512"
+    },
+    "diff_from": "mashos-api_7(54).zip",
+    "diff_counts": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    },
+    "scope": "P7-HOLD-004 Phase16 Composer Red Classification R0〜R9",
+    "tracked_inventory_rows": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    },
+    "focused_pytest": {
+      "r9_implementation_result_handoff": "3 passed"
+    }
+  },
+  "latest_modified_premise_files_2026_06_13_p7_hold004_phase16_composer_r0_r9": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "manifest.json"
+  ],
+  "local_file_inventory_diff_20260613_p7_hold004_phase16_composer_r0_r9": {
+    "path": "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "sha256": "652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4",
+    "row_count_excluding_header": 15,
+    "source_diff_from": "mashos-api_7(54).zip",
+    "source_diff_to": "mashos-api_7(55).zip",
+    "diff_counts": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    }
+  },
+  "p7_hold004_phase16_composer_policy_2026_06_13": {
+    "p7_hold_004": "unresolved / Phase16 candidate boundary registered / adjacent public red registered / full backend suite green unconfirmed",
+    "phase16_candidate_boundary_registered": true,
+    "adjacent_public_red_registered": true,
+    "target_green_closes_hold004": false,
+    "full_backend_suite_green_confirmed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false
+  },
+  "p7_hold004_phase16_composer_changed_paths_2026_06_13": {
+    "added": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py"
+    ],
+    "removed": []
+  },
+  "emlis_p7_hold004_phase16_composer_policy_2026_06_13": {
+    "schema_version": "cocolon.emlis.p7_hold004.phase16_composer_policy.v1",
+    "summary": "Keep candidate generation and public display permission separated. Record Phase16 Complete Composer target repair and adjacent public red in P7-HOLD-004 without closing HOLD-004.",
+    "hold_refs": [
+      "P7-HOLD-004"
+    ],
+    "closed_red_refs": [
+      "P7-RED-001",
+      "P7-RED-002",
+      "P7-RED-003"
+    ],
+    "unresolved_hold_refs": [
+      "P7-HOLD-001",
+      "P7-HOLD-002",
+      "P7-HOLD-003",
+      "P7-HOLD-004"
+    ],
+    "release_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "target Phase16 green equals full backend suite green",
+      "R9 document equals HOLD-004 closure",
+      "generated equals public display permission",
+      "public daily path pass deletes internal candidate boundary red",
+      "adjacent public red is closed by daily_A repair",
+      "Gate/tone/display/grounding/template relaxed"
+    ]
+  },
+  "source_snapshot_2026_06_13_p7_hold004_phase16_composer_red_classification_r0_r9": {
+    "premise": "Cocolon_前提資料(212).zip",
+    "Cocolon": "Cocolon(230).zip",
+    "mashos-api": "mashos-api_7(55).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 1005,
+      "total": 1222
+    },
+    "zip_sha256": {
+      "premise": "3ea1f72a5dc4d3a774895ca37caa321e8d8076daa3e4eded03bb4e801c531856",
+      "Cocolon": "c656afa7506283d9a5530a5883f36a0acc79ddc8e0fe2c1c39bc9a9f12674e45",
+      "mashos-api": "86d685b8b2cdff4d61aa0734f521d05f914c9a3dec76a116774c24b42f9d2512"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9",
+    "summary": "P7-HOLD-004 full backend suite green未確認の切り分けとして、Phase16 Complete Composer candidate boundaryをbody-free分類し、R4-Aでcandidate generationとtone/display readinessを分離し、R5/R6でmetadata summaryとadjacent public redを分離し、R7/R8/R9でP7 hold matrix / validation matrix / release handoff / implementation result docへ接続する。P7-HOLD-004は未解消、full backend suite green未確認、p7_complete=false、p8_start_allowed=false、release_allowed=falseを維持する。RN/API/DB/public response key変更は行わない。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "CLOSED / body_free_guard_repaired / PASSED_ISOLATED",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / Phase16 candidate boundary registered / adjacent public red registered / full backend suite green unconfirmed",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_hold004_phase16_results": {
+      "classification": "candidate_readiness_display_gate_boundary_mixed",
+      "decision_kind": "repair_candidate_display_boundary",
+      "repair_branch": "R4-A",
+      "target_phase16_complete_composer": "2 passed recorded in implementation result",
+      "r9_implementation_result_handoff_test": "3 passed in premise update check",
+      "full_backend_suite_green_confirmed": false,
+      "hold004_close_allowed": false
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "display_gate_relaxed": false,
+      "grounding_gate_relaxed": false,
+      "template_gate_relaxed": false,
+      "fixed_comment_text_added": false,
+      "case_specific_branch_added": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py"
+    ],
+    "mashos_api_removed_files": [],
+    "tracked_inventory_rows": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    },
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "modified_premise_files": [
+      "00_karen_read_first.md",
+      "01_cocolon_overall_structure.md",
+      "02_cocolon_national_system.md",
+      "02C_cocolon_contract_boundary_validation.md",
+      "05_cocolon_rule_file_index.md",
+      "07_latest_snapshot_diff.md",
+      "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+      "manifest.json"
+    ],
+    "diff_inventory_sha256": "652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4"
+  },
+  "latest_source_basis_2026_06_13_p7_hold004_phase16_composer_red_classification_r0_r9": {
+    "premise": "Cocolon_前提資料(212).zip",
+    "Cocolon": "Cocolon(230).zip",
+    "mashos-api": "mashos-api_7(55).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 1005,
+    "total_files": 1222,
+    "diff_from": "mashos-api(143).zip",
+    "added_files": 11,
+    "changed_files": 4,
+    "removed_files": 0
+  },
+  "latest_modified_premise_files_2026_06_13_p7_hold004_phase16_composer_red_classification_r0_r9": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "manifest.json"
+  ],
+  "local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9": {
+    "path": "cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv",
+    "sha256": "652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4",
+    "source_diff_from": "mashos-api(143).zip",
+    "source_diff_to": "mashos-api_7(55).zip",
+    "rows": {
+      "added": 11,
+      "changed": 4,
+      "removed": 0
+    }
+  },
+  "p7_hold004_phase16_composer_red_classification_policy_2026_06_13": {
+    "hold_id": "P7-HOLD-004",
+    "status": "unresolved",
+    "classification": "candidate_readiness_display_gate_boundary_mixed",
+    "repair_branch": "R4-A",
+    "target_green_is_full_backend_suite_green": false,
+    "hold004_close_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "forbidden_misreads": [
+      "Phase16 target green as full backend suite green",
+      "R9 implementation result document as HOLD-004 closure",
+      "candidate generated as public display allowed",
+      "public daily path pass as adjacent public red closure",
+      "R4-A repair as Gate relaxation",
+      "P7-HOLD-004 classified/registered as P7 complete"
+    ]
+  },
+  "p7_hold004_phase16_composer_red_classification_changed_paths_2026_06_13": {
+    "added": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py"
+    ],
+    "removed": []
   }
 }

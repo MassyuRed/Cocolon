@@ -1,15 +1,19 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-12"
+revision_date: "2026-06-13"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(199).zip"
-  Cocolon: "Cocolon_10(16).zip"
-  mashos-api: "mashos-api_10(31).zip"
+  premise: "Cocolon_前提資料(212).zip"
+  Cocolon: "Cocolon(230).zip"
+  mashos-api: "mashos-api_7(55).zip"
+file_counts:
+  Cocolon: 217
+  mashos-api: 1005
+  total: 1222
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -19,11 +23,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon_10(16).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_10(31).zip` | 939 | P5 User Label Connectionの上に、P6 Structure Insight v2 P6-0〜P6-9を反映。 |
-| total | 1156 | P6 Structure Insight v2前提資料差分更新後coverage対象 |
+| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004差分でproduction RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_7(55).zip` | 1005 | P7-RED-003 Body-Free Leak Guard Repair R13後続として、P7-HOLD-004 Phase16 Composer Red Classification R0〜R9成果物を含む。 |
+| total | 1222 | Phase16 Complete Composer candidate boundary分類・最小修復、body-free metadata summary、adjacent public red分離、P7 hold / validation / release handoff、implementation result document反映後のcoverage対象。 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-11以前の差分追記、Phase20表示信頼性補強、Product Read Feel / Structure Insight、User Label Connection Observation、Product Quality Measurement、Gate Recovery Public Surface Leak Repair P0-P12、D相当入力 source-unavailable normal observation recovery、P3 Product Read Feel baseline、P4 Family Product Tuning、P5 User Label Connectionは履歴として残し、2026-06-12時点の最新正本は末尾の `2026-06-12 差分追記: EmlisAI P6 Structure Insight v2 P6-0〜P6-9 latest snapshot diff` とこの冒頭summaryです。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-13時点の最新正本は末尾の `2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はPhase16 candidate boundaryとして一段具体化したが、full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -4729,4 +4733,485 @@ P5 dedicated tests present:
 - Gate緩和や固定返信テンプレ追加はしない。
 - P6 Structure Insight v2実装はしない。
 - 01 / 02 full inventory本文の全面再生成は行わない。
+```
+
+
+# 2026-06-12 差分追記: EmlisAI P5/P6 runtime repair R0〜R10 latest snapshot diff
+
+この差分は、P5/P6を「module/testがあるから完了」と読まないための現在地更新案です。  
+比較元は `mashos-api(138).zip`、比較先は `mashos-api_10(32).zip` です。Cocolon RN側は変更対象にしていません。
+
+## 追加ファイル
+
+| file | R step | 構造上の意味 |
+|---|---:|---|
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P5_P6_RedLedger_RuntimeRepair_R0_20260612.md` | R0 | P5/P6 red ledger固定。P5/P6 test greenをruntime完了にしない境界を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_p5_runtime_bridge_20260612.py` | R1/R2 | P5 runtime bridge赤テスト・本線接続確認。 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_p5_visible_connection_r3_boundary_20260612.py` | R3 | P5 visible connectionが旧Phase8直呼びではなくP5-6境界経由であることを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_p5_public_meta_human_qa_boundary_r4_20260612.py` | R4 | P5 public/meta boundaryとhuman QA未完分離を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_p5_body_free_public_meta_boundary_r4_20260612.py` | R4 | P5 body-free public/meta境界を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_structure_insight_p6_runtime_bridge_20260612.py` | R5/R6 | P6 runtime bridge赤テスト・P5 handoff後評価層接続確認。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_structure_insight_p6_limited_surface_connection.py` | R7/R8 | P6 limited surfaceをstructure_questionのみに限定し、no-connect familyをblockする境界module。 |
+| `mashos-api/ai/tests/test_emlis_ai_structure_insight_p6_limited_surface_r7_20260612.py` | R7 | P6 limited surfaceがstructure_question限定・1 seed・再Gate必須であることを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_structure_insight_p6_no_connect_regression_r8_20260612.py` | R8 | low-info / daily / positive / safety / target judgement等のno-connect family regressionを固定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p5_p6_split_test_matrix.py` | R9 | P5/P6 split test matrixとhandoff lockをbody-freeに固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p5_p6_split_test_matrix_handoff_r9_20260612.py` | R9 | split matrix / handoff lock / full suite shortcut禁止を固定する。 |
+
+## 変更ファイル
+
+| file | R step | 変更内容 |
+|---|---:|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | R2/R3/R6/R7/R8/R9 | P5 chainをreply_service本線へ接続し、P6をP5 handoff後のruntime評価層へ接続。P6 limited surfaceはstructure_question限定。R9 handoff lockを内部metaへ追加。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py` | R4/R6/R7/R8 | P5/P6 runtime bridge summaryを既存meta経路へbody-freeでsanitize。public top-level keyは増やさない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_p5_limited_visible_connection.py` | R3/R4 | 旧Phase8 connectorをP5-6内部adapter化し、visible connection route / post-connection regate / human QA boundaryを追加。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_user_label_connection_p5_product_quality_review.py` | R4 | P5 Product Quality Reviewをratings-only / human QA未完分離として固定。 |
+| `mashos-api/ai/tests/test_emlis_ai_user_label_connection_p5_limited_visible_connection_20260611.py` | R3/R4 | P5-6 boundary / human QA separationに合わせた回帰確認を追加。 |
+
+削除ファイルはありません。
+
+## 検証結果
+
+```text
+python -m py_compile target R0〜R9 files
+=> passed
+
+PYTHONPATH=services/ai_inference pytest -q --tb=short \
+  tests/test_emlis_ai_user_label_connection_p5_runtime_bridge_20260612.py \
+  tests/test_emlis_ai_user_label_connection_p5_visible_connection_r3_boundary_20260612.py \
+  tests/test_emlis_ai_user_label_connection_p5_public_meta_human_qa_boundary_r4_20260612.py \
+  tests/test_emlis_ai_user_label_connection_p5_body_free_public_meta_boundary_r4_20260612.py \
+  tests/test_emlis_ai_structure_insight_p6_runtime_bridge_20260612.py \
+  tests/test_emlis_ai_structure_insight_p6_limited_surface_r7_20260612.py \
+  tests/test_emlis_ai_structure_insight_p6_no_connect_regression_r8_20260612.py \
+  tests/test_emlis_ai_p5_p6_split_test_matrix_handoff_r9_20260612.py
+=> 46 passed
+```
+
+この確認はR0〜R9 targeted / split matrixの確認であり、full backend suite greenではありません。
+
+## 最新の読み方
+
+```text
+P5:
+  runtime bridgeはreply_service本線に接続済み。
+  旧Phase8 visible connector直呼びではなく、P5-6境界経由として読む。
+  ただし、P5-HOLD-001 human QA未完は残る。
+  product_quality_confirmed / release_allowedはtrue化しない。
+
+P6:
+  runtime bridgeはP5 handoff後の評価層に接続済み。
+  limited surfaceはstructure_questionだけに限定する。
+  no-connect familyではvisible_applied=falseを維持する。
+  P6 Product QAはratings/material層であり、P7 readyではない。
+
+R9:
+  split test matrix / handoff lockを固定済み。
+  full backend suite一括green shortcutは禁止。
+
+P7:
+  このP5/P6 runtime repair section時点では未着手・対象外だった。
+  最新正本では、後続のP7差分追記を優先し、P7-0〜P7-9はbackend internal-only測定構造として実装済みと読む。
+```
+
+## 禁止する誤読
+
+```text
+P5 module/test存在 = P5 runtime完了
+P5 runtime_evaluated = P5商品品質確認済み
+P5 visible_applied = human QA完了
+P6 module/test存在 = Structure Insightが実応答に出ている
+P6 visible_applied = P7 ready
+R0〜R9 targeted green = full backend suite green
+P5/P6 handoff = release_allowed
+```
+
+## 次工程へ渡すもの
+
+```text
+P5/P6 body-free handoff
+split test matrix
+no-connect family regression結果
+P5-HOLD-001 human QA未完
+P6-HOLD-001 long/self-understanding初期visible横展開禁止
+P7-0〜P7-9は別設計として実装済み。直後のP7差分追記を優先する。
+```
+
+
+# 2026-06-12 差分追記: EmlisAI P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9 latest snapshot diff
+
+この差分は、P5/P6 runtime repair後の材料を「release ready」と読まないためのP7実装反映です。比較対象は、前提資料上でP7実装が未反映だった状態と、最新実ファイル `mashos-api_6(56).zip` です。Cocolon RN側は今回の受領差分対象ではなく、P7はbackend internal-only測定構造として読む。
+
+## 追加ファイル
+
+| file | P7 step | 構造上の意味 |
+|---|---:|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_contracts.py` | P7-0/P7-1 | P7共通schema id、RED/HOLD/OUT id、body-free / public contract markerを固定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_handoff_normalizer.py` | P7-0 | P5/P6 handoffをsafe id / bool / count / reason codeだけへ正規化し、P7 ready / release readyへ変換しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_red_ledger.py` | P7-1 | P7-RED-001〜003、P7-HOLD-001〜004、P7-OUT-001〜008をbody-free ledgerとして保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_module_inventory.py` | P7-2 | 既存Product Quality系moduleをreuse_direct / reuse_with_adapter / heavy_e2e_isolated / release_decision_isolatedへ分類する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_runner_plan.py` | P7-3 | P7 core、existing reuse、heavy isolated red、timeout budgetを分け、heavy E2Eを本線green条件から隔離する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_event_bridge.py` | P7-4 | `ProductQualityEventV1` とP7 handoff / red ledgerをbody-free scorecard rowへbridgeする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_evaluation_matrix.py` | P7-5 | family / sequence / history-line matrixを作り、PRODUCT_PASS候補をrelease readyへ変換しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_blind_qa_material.py` | P7-6 | ratings-only Blind QA materialを作る。未レビューdimensionをreview_missing / rating_requiredに残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_long_run_gate_handoff.py` | P7-7 | Long-run Product Gate candidate materialを作る。red / holdがある場合はblocked / review_requiredへ残す。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | P7-8 | Release Decisionへ渡す材料を分離する。`release_decision_input_ready` と `release_allowed` を混同しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | P7-9 | greenと呼べる範囲、RED/HOLD/isolated/unverifiedとして残す範囲をmatrix化する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_ProductQualityRunner_ImplementationResult_20260612.md` | P7-9 | P7-8/P7-9実装結果、確認結果、維持したRED/HOLD、変更していないcontractを記録する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_handoff_normalizer_20260612.py` | P7-0 | handoff normalizerのbody-free / release-closed境界を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_red_ledger_20260612.py` | P7-1 | red ledger / blocker registryの初期RED/HOLD/OUTを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_module_inventory_20260612.py` | P7-2 | module inventory / adapter分類を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_runner_plan_20260612.py` | P7-3 | runner plan / timeout budget / heavy isolationを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_event_bridge_20260612.py` | P7-4 | Product Quality Event bridge / body-free scorecard row接続を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_evaluation_matrix_20260612.py` | P7-5 | family / sequence / history-line evaluation matrixを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_blind_qa_material_20260612.py` | P7-6 | ratings-only Blind QA material exportを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_long_run_gate_handoff_20260612.py` | P7-7 | Long-run Product Gate candidate materialを固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py` | P7-8 | Release Decision handoff material分離を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py` | P7-9 | Validation / regression matrixを固定する。 |
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回のP7差分対象外。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 22 | 0 | 0 | P7-0〜P7-9のbackend internal-only測定構造を追加。 |
+
+## P7の読み方
+
+```text
+P5/P6 R9 body-free handoff lock
+  -> P7-0 handoff intake / normalizer
+  -> P7-1 red ledger / blocker registry
+  -> P7-2 module inventory / adapter classification
+  -> P7-3 runner plan / command matrix / timeout budget
+  -> P7-4 ProductQualityEvent bridge / scorecard row
+  -> P7-5 family / sequence / history-line evaluation matrix
+  -> P7-6 ratings-only Blind QA material
+  -> P7-7 Long-run Product Gate candidate material
+  -> P7-8 Release Decision handoff material
+  -> P7-9 validation / regression matrix
+```
+
+P7は、Emlis本文を増やす工程でも、Product Pass候補をRelease Readyへ上げる工程でもない。P7の成果物は、body-free measurement rows、red / hold / blocker refs、ratings-required candidates、long-run candidate material、release decision handoff materialであり、`release_allowed` はfalseのまま読む。
+
+## ローカル確認
+
+```text
+P7-0〜P7-9 core:
+  50 passed
+
+existing Product Quality reuse subset:
+  31 passed, 1 warning
+```
+
+warningは既存 `pytest.mark.asyncio` unknown mark由来として読む。Positive Recovery E2EとProduct Quality Connection E2Eは、P7本線green条件ではなく、P7-RED-001 / P7-RED-002 / P7-RED-003として保持・隔離する。
+
+## 維持されたcontract
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+fixed commentText / fixed surface追加なし
+Emlis本文生成追加なし
+P5/P6 HOLDのgreen化なし
+heavy E2E timeout / hangのgreen化なし
+full backend suite green未確認の断定なし
+release_allowed true化なし
+Product Pass / Long-run candidate -> Release Ready変換なし
+raw input / comment_text body / candidate body / surface body / reviewer free text のscorecard・handoff・public meta混入なし
+```
+
+
+# 2026-06-13 差分追記: EmlisAI P7 RED・HOLD Closure R0〜R12 latest snapshot diff
+
+比較元は、P7-0〜P7-9実装後に受領していた `mashos-api(141).zip` です。比較先は、今回の最新実ファイル `mashos-api_8(51).zip` です。Cocolon側の最新実ファイルは今回受領していないため、RN基準面は既存の `Cocolon_10(16).zip` を継続参照します。
+
+## 追加ファイル
+
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RedHoldClosure_ImplementationResult_20260613.md` | R12実装結果md。R0〜R11の確認済み、未確認、red/timeout/HOLD、推測禁止、次工程を記録する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | R10。実機submit / modal読感未確認、full backend suite未実行を自動greenへ吸収しないHOLD matrix。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py` | R7。P7-RED-001〜003をCLOSED / CLASSIFIED / TIMEOUT_ISOLATEDとしてbody-freeに分類するmatrix。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py` | R6。Product Quality Connection E2E timeout / hangをP7 core greenへ混ぜないisolation material。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_strict_relation_trace_20260613.py` | R1 strict relation trace regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_r2_r3_contract_boundary_20260613.py` | R2/R3 relation type / signal key / marker key分離とGate Recovery合成ReaderReport境界test。 |
+| `mashos-api/ai/tests/test_emlis_ai_positive_recovery_r4_r5_fail_closed_boundary_20260613.py` | R4/R5 Positive Recovery fail-closed境界test。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py` | R6 timeout isolation regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_red_closure_classification_matrix_20260613.py` | R7 red closure classification regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_r8_human_qa_material_boundary_20260613.py` | R8 P5 human QA material boundary regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_r9_p6_visible_expansion_boundary_20260613.py` | R9 P6 visible expansion boundary validation regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_r10_real_device_full_backend_hold_matrix_20260613.py` | R10 real-device / full backend HOLD matrix regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py` | R11 release handoff / validation final alignment regression。 |
+
+## 変更ファイル
+
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_relation_surface_contract.py` | Positive Recoveryで、広いrelation type `recovery` と具体signal key `recovery_load_bridge` 系を分離する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_loop.py` | `used_relation_ids=["recovery"]` をReader signal keyへ昇格せず、合成surfaceからstrict relationを再検出する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | repair後もstrict relation surfaceがmissingなら、Positive Recoveryをpassedへ進ませない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | strict relation missing時のdisplay fail-closed / comment_text_allowed=false境界を保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_reply_diagnostics_service.py` | strict relation trace / source priority / broad type only / fail-closed metaをbody-freeに保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_runner_plan.py` | P7-RED-003 timeout isolationとgreen claim splitをrunner planへ反映する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | unresolved RED/HOLD、timeout、human QA、実機/full suite未確認をrelease blocker materialへ反映し、release_allowed=falseを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | R6〜R11のvalidation row / final summaryを追加し、P7 complete / P8 start / release_allowedをfalseで整合する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_blind_qa_material.py` | P5 human QA material boundaryを追加し、reviewer free textや本文をrelease materialへ流さない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_event_bridge.py` | P7 RED/HOLD、human QA、P6 visible boundaryをbody-free scorecard rowへ保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_long_run_gate_handoff.py` | long-run candidateをrelease readyへ変換せず、P5 human QA requiredを保持する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | Positive Recovery RED-001 / RED-002 closureとfail-closed回帰防止を更新する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py` | R6〜R11のrelease handoff未解消RED/HOLD保持を確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py` | R6〜R11のvalidation matrix最終整合を確認する。 |
+
+## 確認済みvalidation
+
+最新実ファイル `mashos-api_8(51).zip` 展開後に、次を確認した。
+
+```text
+R0〜R11主要確認suite: 34 passed
+P7 core + R6〜R11: 70 passed
+既存Product Quality reuse subset: 31 passed
+Product Quality Connection E2E: timeout / EXIT_STATUS:124（R0〜R12時点。R13後は timeout 30s wrapper で 1 passed / EXIT_STATUS:0）
+```
+
+## 最新状態の読み方
+
+```text
+P7-RED-001: CLOSED
+P7-RED-002: CLOSED
+P7-RED-003: CLASSIFIED / TIMEOUT_ISOLATED / 未解消（R0〜R12時点。R13後はCLOSED / body_free_guard_repaired / PASSED_ISOLATEDへ更新済み。最新状態は下記R13差分追記を参照）
+P7-HOLD-001: 未解消
+P7-HOLD-002: 未解消
+P7-HOLD-003: 未解消
+P7-HOLD-004: 未解消
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_8(51).zip` へ更新し、P7 RED・HOLD closure R0〜R12の読み方を追記。 |
+| `01_cocolon_overall_structure.md` | backend internal-onlyのstrict relation / timeout isolation / HOLD matrix / release validation構造を追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさず、P7 internal laneとして読む境界を追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | relation type/signal分離、fail-closed、RED/HOLD保持、release_allowed=falseのcontractを追記。 |
+| `05_cocolon_rule_file_index.md` | R0〜R12で追加・修正されたservice/test/docの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、diff counts、test result、modified premise filesを反映。 |
+| `cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv` | `mashos-api(141).zip` -> `mashos-api_8(51).zip` の追加13件・変更14件を記録。 |
+
+## 禁止する読み方
+
+```text
+P7-RED-003 timeoutを環境問題として閉じる。
+P7 core + R6〜R11 70 passedをP7 completeと読む。
+R0〜R11主要suite 34 passedをfull backend suite greenと読む。
+P5 human QA material boundaryをP5 human QA完了と読む。
+P6 visible expansion blockedをP6 visible拡張済みと読む。
+R10 HOLD matrixを実機submit確認済みと読む。
+release handoff materialの存在をrelease_allowedと読む。
+P8へ進むために未解消HOLDをgreen化する。
+```
+
+
+# 2026-06-13 差分追記: EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13-0〜R13-11 latest snapshot diff
+
+比較元は、P7 RED・HOLD Closure R0〜R12反映後に受領していた `mashos-api(142).zip` です。比較先は、今回の最新実ファイル `mashos-api_7(54).zip` です。Cocolon側はR13差分対象外であり、RN contract確認基準として `Cocolon(230).zip` を参照します。
+
+## 追加ファイル
+
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_0_R13_1_BaselineAndBodyFreeContract_ImplementationResult_20260613.md` | R13-0/R13-1結果md。baseline再現固定とbody-free leak guard contract定義を記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_2_R13_3_BodyFreeLeakGuardHelper_ImplementationResult_20260613.md` | R13-2/R13-3結果md。helper追加と単体test境界を記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_4_R13_5_ProductQualityConnectionE2E_ImplementationResult_20260613.md` | R13-4/R13-5結果md。Product Quality Connection E2E更新とdefault pytest timeout解消確認を記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_6_R13_7_ObservationAndRedClosureClassification_ImplementationResult_20260613.md` | R13-6/R13-7結果md。PASSED_ISOLATED observationとRED-003 closed classification pathを記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_R13_8_R13_9_ValidationAndReleaseHandoff_ImplementationResult_20260613.md` | R13-8/R13-9結果md。validation matrix / release handoffへのRED-003 closed伝播を記録する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_RED003_BodyFreeLeakGuardRepair_ImplementationResult_20260613.md` | R13-10/R13-11最終実装結果md。regression suite、RED-003判定、残HOLD、未確認を記録する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_body_free_leak_guard.py` | P7 body-free leak guard helper。forbidden key / forbidden raw value / forbidden true flag / allowed safe vocabulary / failure output policyを構造化する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_body_free_leak_guard_contract_20260613.py` | body-free leak guard contract test。raw valueをcontract materialへ持たない境界を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_body_free_leak_guard_20260613.py` | helper単体test。current_input key、raw memo body、input id、true marker、safe rubric vocabularyを分けて検査する。 |
+
+## 変更ファイル
+
+| file | 補正内容 |
+|---|---|
+| `mashos-api/ai/tests/test_emlis_ai_complete_product_quality_connection_e2e.py` | 50万文字超serializedへのglobal substring assertionをやめ、構造化body-free guardへ置換する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py` | R13修復後の `PASSED_ISOLATED` / `product_quality_scorecard_body_free_guard` observationを追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py` | P7-RED-003を `body_free_guard_repaired` としてCLOSEDにできるclassification pathを追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | `product_quality_connection_timeout_closed=true` とRED-003 closedをvalidation summaryへ伝播する。P7 complete / P8 / releaseはfalse維持。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | closed_red_refsへP7-RED-003を伝播し、unresolved_red_refs / unresolved_timeout_refsから外す。ただしHOLD保持によりreview_required / release_allowed=false。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py` | R13 passed observation / timeout resolved boundaryを確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_red_closure_classification_matrix_20260613.py` | P7-RED-003 closed / body_free_guard_repaired matrixを確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_validation_matrix_20260612.py` | validation matrix上のRED-003 closed伝播とHOLD保持を確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_release_handoff_20260612.py` | release handoff上のRED-003 closed伝播、unresolved_timeout_refs空、HOLD保持を確認する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py` | R11 final alignmentをR13後のRED-003 closed / HOLD保持へ更新する。 |
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | R13はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 9 | 10 | 0 | P7-RED-003 body-free leak guard repair R13-0〜R13-11を追加・更新。 |
+
+## 確認済みvalidation
+
+最新実ファイル `mashos-api_7(54).zip` 展開後の実装結果mdでは、次が確認済みとして記録されている。
+
+```text
+R13 related minimum / validation / release subset: 40 passed
+Product Quality Connection E2E timeout wrapper: 1 passed / EXIT_STATUS:0
+P7 core + R6〜R11 subset: 72 passed
+既存Product Quality reuse subset: 31 passed
+RN contract: 36 passed
+```
+
+## 最新状態の読み方
+
+```text
+P7-RED-001: CLOSED
+P7-RED-002: CLOSED
+P7-RED-003: CLOSED / body_free_guard_repaired / PASSED_ISOLATED
+P7-HOLD-001: 未解消 / P5 human QA未完
+P7-HOLD-002: 未解消 / P6 visible expansion blocked・validatedだがHOLD保持
+P7-HOLD-003: 未解消 / 実機submit・modal読感未確認
+P7-HOLD-004: 未解消 / full backend suite green未確認
+
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_7(54).zip` へ更新し、R13後のRED-003 closed / HOLD保持を追記。 |
+| `01_cocolon_overall_structure.md` | P7-RED-003 body-free leak guard repairのbackend internal-only構造を追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさず、P7 internal測定laneとして読む境界を追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | body-free leak guard contract、safe vocabulary許可、RED-003 closed伝播、release_allowed=falseを追記。 |
+| `05_cocolon_rule_file_index.md` | R13で追加・修正されたservice/test/docの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、diff counts、test result、modified premise filesを反映。 |
+| `cocolon_local_file_inventory_diff_20260613_p7_red003_body_free_leak_guard_repair_r13.csv` | `mashos-api(142).zip` -> `mashos-api_7(54).zip` の追加9件・変更10件を記録。 |
+
+## 禁止する読み方
+
+```text
+P7-RED-003 closedをP7 completeと読む。
+Product Quality Connection E2E greenを商品品質合格と読む。
+R13 regression suite greenをfull backend suite greenと読む。
+RN contract greenを実機submit / modal読感確認済みと読む。
+P7-HOLD-001〜004をgreen化する。
+release_input_status=review_requiredをrelease readyと読む。
+P8へ進むために未確認HOLDを閉じる。
+```
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9 latest snapshot diff
+
+比較元は、P7-RED-003 R13反映済みの利用可能backend基準 `mashos-api(143).zip` です。比較先は、今回の最新実ファイル `mashos-api_7(55).zip` です。Cocolon側は今回のHOLD-004差分対象外であり、RN contract確認基準として `Cocolon(230).zip` を参照します。
+
+## 追加ファイル
+
+```text
+  mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py
+```
+
+## 変更ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 11 | 4 | 0 | P7-HOLD-004 Phase16 Composer Red Classification R0〜R9を追加・更新。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv
+diff_inventory_sha256: 652ab14f43a16a6335287737160ab2d8c04fb5ff13478e4c330fd5dde93f65a4
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-RED-001: CLOSED
+P7-RED-002: CLOSED
+P7-RED-003: CLOSED / body_free_guard_repaired / PASSED_ISOLATED
+P7-HOLD-001: 未解消 / P5 human QA未完
+P7-HOLD-002: 未解消 / P6 visible expansion blocked・validatedだがHOLD保持
+P7-HOLD-003: 未解消 / 実機submit・modal読感未確認
+P7-HOLD-004: 未解消 / Phase16 candidate boundary classified and registered / full backend suite green未確認
+
+hold004_phase16_classified_red_present: true
+hold004_phase16_candidate_boundary_registered: true
+hold004_public_adjacent_red_registered: true
+hold004_phase16_implementation_result_documented: true
+full_backend_suite_green_confirmed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## 実装結果documentから反映する確認結果
+
+```text
+R0/R1 classification: 2 passed, 1 warning
+R2/R3 path matrix / decision rule: 4 passed
+R7/R8 validation / release handoff: 3 passed
+target Phase16 Complete Composer direct/conversation: 2 passed
+R9 implementation result / handoff: 3 passed
+```
+
+今回の前提資料更新時に追加で確認した範囲は、実ファイル差分、主要file存在、R9 implementation result handoff test `3 passed` です。full backend suite green、public two-stage fixture suite全体、実機submit / modal読感、P5 human QAは未確認として残します。
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_7(55).zip` へ更新し、P7-HOLD-004 R0〜R9後のHOLD保持・禁止誤読を追記。 |
+| `01_cocolon_overall_structure.md` | Phase16 candidate boundary分類、path matrix、candidate/display境界修復、metadata summary、P7 matrix接続のbackend internal-only構造を追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさず、P7 internal測定laneとして読む境界を追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | generatedとpublic display permission分離、HOLD-004未close、release_allowed=falseのcontractを追記。 |
+| `05_cocolon_rule_file_index.md` | P7-HOLD-004 R0〜R9で読むべきdoc/service/test owner索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、diff counts、policy、modified premise filesを反映。 |
+| `cocolon_local_file_inventory_diff_20260613_p7_hold004_phase16_composer_red_classification_r0_r9.csv` | `mashos-api(143).zip` -> `mashos-api_7(55).zip` の追加11件・変更4件を記録。 |
+
+## 禁止する読み方
+
+```text
+target Phase16 Composer greenをfull backend suite greenと読む。
+R9 implementation result doc追加をP7-HOLD-004 closureと読む。
+adjacent public redをdaily_A修復で閉じた扱いにする。
+generatedをpublic display permissionと同一視する。
+tone_guard削除・Gate緩和・fixed commentText追加・case専用branch追加が行われたと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
 ```

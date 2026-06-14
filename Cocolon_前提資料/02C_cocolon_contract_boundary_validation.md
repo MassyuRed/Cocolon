@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-10"
+revision_date: "2026-06-13"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3378,4 +3378,247 @@ Structure Insight existing / long-run gate focused pytest: 25 passed
 ```
 
 全backend suiteではなく、P6-9差分更新に必要な対象回帰を中心に確認した。
+
+
+# 2026-06-12 差分追記: EmlisAI P7 Product Quality Runner contract / validation boundary
+
+P7 Product Quality Runner / Long-run Product Gateは、P5/P6後続の測定・分類・handoff materialを追加するが、public contractは増やさない。contract上の中心は、body-free、red-preserving、release-closedを崩さないことである。
+
+| Boundary | 守る契約 |
+|---|---|
+| P7 Handoff Normalizer | P5/P6 handoffをsafe id / bool / count / reason codeへ正規化し、raw input / comment_text body / candidate body / surface bodyを拒否する。 |
+| P7 Red Ledger | P7-RED-001〜003、P7-HOLD-001〜004、P7-OUT-001〜008を初期登録し、Positive Recovery赤やtimeoutを推測で閉じない。 |
+| Runner Plan | P7 core / existing reuse / heavy isolated redを分け、combined timeoutやheavy E2Eをgreen扱いしない。 |
+| Event Bridge / Scorecard | `ProductQualityEventV1` を置換せず、body-free scorecard rowへ接続する。read_feeling等はrating_requiredとして残す。 |
+| Blind QA / Long-run | ratings-only reviewだけを受け、未レビューdimensionをmachine metricsで補完しない。long-run candidateはrelease_allowedではない。 |
+| Release Handoff | `release_decision_input_ready` と `release_allowed` を分ける。P7ではrelease_allowedを常にfalseとして扱う。 |
+| Validation Matrix | P7 core greenはP7 core groupのみ、existing subset greenはそのsubsetのみ。full backend suite green、P7 complete、release readyとは呼ばない。 |
+
+確認済みvalidation:
+
+```text
+P7-0〜P7-9 core: 50 passed
+existing Product Quality reuse subset: 31 passed, 1 warning
+```
+
+warningは既存 `pytest.mark.asyncio` unknown mark由来であり、P7の契約変更ではない。Positive Recovery E2EとProduct Quality Connection E2Eは、P7本線greenではなくRED / timeout isolatedとして保持する。
+
+禁止:
+
+```text
+P7からrelease_allowedをtrueにする。
+Product Pass候補をRelease Readyにする。
+Long-run candidateをrelease readyにする。
+P5/P6 HOLDをrunnerでgreen化する。
+read_feelingをmachine metricsで埋める。
+heavy E2E timeout / hangを環境扱いで閉じる。
+full backend suite一括greenを未確認のまま主張する。
+RN表示条件、API route、request key、public response top-level key、DB physical schemaを増やす。
+raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
+```
+
+
+
+# 2026-06-13 差分追記: EmlisAI P7 RED・HOLD Closure contract / validation boundary
+
+P7 RED・HOLD Closure R0〜R12は、public contractを増やさず、P7のred-preserving / hold-preserving / release-closed境界を強める差分である。contract上の中心は、Positive Recoveryで「読めていないものを読めた扱いにしない」ことと、残るtimeout/HOLDをgreen化しないことである。
+
+| Boundary | 守る契約 |
+|---|---|
+| relation type / signal key / marker key split | `recovery` は広いrelation typeとして保持し、Readerが読めた具体surface signalは `recovery_load_bridge` 系keyで保持する。 |
+| Gate Recovery strict synthesis | `used_relation_ids=["recovery"]` だけで `reader_relation_signal_keys=["recovery"]` を作らない。合成surfaceから具体signalを再検出する。 |
+| Positive Recovery fail-closed | strict relation requiredでrepair後も具体signalが出ない場合、`observation_status=passed` へ進ませない。 |
+| P7-RED-003 timeout isolation | Product Quality Connection E2E timeout / hangはP7 core green・full backend suite greenへ混ぜず、release blockerへ残す。 |
+| red closure classification | P7-RED-001 / 002はclosed、P7-RED-003はclassified / timeout isolatedとして分ける。closedでもP7 completeではない。 |
+| human QA material boundary | P5 human QA材料はratings/reason code/boolean中心で扱い、raw input / comment_text body / reviewer free textをrelease materialへ入れない。 |
+| P6 visible boundary | structure_question以外のvisible expansionをP7内で進めない。meta-only / no-connect / holdを保持する。 |
+| HOLD matrix | 実機submit / modal読感未確認とfull backend suite未実行を自動test greenへ吸収しない。 |
+| release / validation final alignment | P7 complete / P8 start / release_allowed / release rollout / product gate readyはfalseのまま保持する。 |
+
+確認済みvalidation:
+
+```text
+R0〜R11主要確認suite: 34 passed
+P7 core + R6〜R11: 70 passed
+既存Product Quality reuse subset: 31 passed
+Product Quality Connection E2E: timeout / EXIT_STATUS:124
+```
+
+禁止:
+
+```text
+`recovery` relation typeだけでstrict recovery surface presentと読む。
+relation surface missingでもsafe fallbackならpassedでよいと読む。
+P7-RED-003 timeoutを環境問題として閉じる。
+34 passed / 70 passed / 31 passedをfull backend suite greenと読む。
+P7-RED-001 / 002 closureをEmlisAI全体の商品品質合格と読む。
+P5 human QA material boundaryをP5 human QA完了と読む。
+P6 visible expansion blockedをP6 visible拡張済みと読む。
+R10 HOLD matrixを実機確認完了と読む。
+release handoff materialの存在をrelease_allowedと読む。
+```
+
+
+# 2026-06-13 差分追記: EmlisAI P7-RED-003 Body-Free Leak Guard Repair contract / validation boundary
+
+P7-RED-003 Body-Free Leak Guard Repair R13は、P7のbody-free contractとvalidation / release handoff伝播を修復する差分である。contract上の中心は、`current_input` という語を無条件禁止することではなく、raw payloadとsafe rubric vocabularyを分けることである。
+
+| contract境界 | R13後の読み方 |
+|---|---|
+| forbidden key | `current_input`, `raw_input`, `memo`, `memo_action`, `source_text`, `comment_text`, `candidate_body`, `surface_body` などがdict keyとして出たらRED。 |
+| forbidden raw value | current input memo本文、input id、comment_text body、candidate bodyなどのraw valueがscorecard / handoff materialへ入ったらRED。 |
+| forbidden true flag | `raw_input_included=true`, `comment_text_body_included=true`, `release_allowed=true` などはRED。false markerはbody leakではない。 |
+| allowed safe vocabulary | `claims_stay_within_current_input_or_safe_known_user_fact` はrubric説明文のpath限定・exact value限定でSAFE。 |
+| failure output | violation summary / exception messageへraw bodyや巨大serialized payloadを出さない。 |
+
+R13後のvalidation読み:
+
+```text
+Product Quality Connection E2E: pass / timeoutなし
+P7-RED-003 observed_status: PASSED_ISOLATED
+P7-RED-003 classification: body_free_guard_repaired
+P7-RED-003 status: CLOSED
+product_quality_connection_timeout_closed: true
+product_quality_connection_timeout_remains_ledgered_or_isolated: false
+closed_red_refs: P7-RED-001, P7-RED-002, P7-RED-003
+unresolved_red_refs: []
+unresolved_timeout_refs: []
+```
+
+ただし、release boundaryは次を維持する。
+
+```text
+P7-HOLD-001: P5 human QA未完
+P7-HOLD-002: P6 visible expansion boundaryはblocked/validatedだがHOLD保持
+P7-HOLD-003: 実機submit / modal読感未確認
+P7-HOLD-004: full backend suite green未確認
+release_input_status: review_required
+release_decision_input_ready: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+禁止:
+
+```text
+`current_input` safe vocabulary許可を、current_input object許可と読む。
+Product Quality Connection E2E greenをP7 completeと読む。
+P7-RED-003 closedをrelease_allowed=trueへ変換する。
+R13 regression subset greenをfull backend suite greenと読む。
+P7-HOLD-001〜004をRED-003 closureに連動して閉じる。
+```
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification contract / validation boundary
+
+P7-HOLD-004 Phase16 Composer Red Classification R0〜R9は、public contractを増やさず、candidate generationとpublic display permissionを分離する差分である。contract上の中心は、読める形まで届いたtwo-stage surfaceをtone/display blocker混線で`unavailable`へ落とさないことと、public表示可否は別Gateでfail-closedさせることを同時に守ることである。
+
+| contract境界 | R0〜R9後の読み方 |
+|---|---|
+| body-free classification | HOLD-004 Phase16 red materialはtest id / path id / status / reason code / boolean / countだけを保持し、raw input / candidate body / surface body / comment_text bodyを保持しない。 |
+| generated vs display allowed | `generated` はcandidate generation before display gateであり、public comment_text割当や表示許可ではない。 |
+| R4-A repair | two-stage structural readyならcandidate generationを復帰させる。ただしdisplay_gate_relaxed=false、grounding_gate_relaxed=false、template_gate_relaxed=falseを維持する。 |
+| R4-B design | stale contract replacement materialは存在するが、現行判断はR4-A。旧direct generated期待をstale置換した扱いにしない。 |
+| metadata summary | top-level `composer_meta` にbody-free診断summaryを残すが、surface_text / comment_text / raw inputを入れない。 |
+| adjacent public red | `positive_change_after_work_streaming` public shape redはdaily_A direct/conversation修復と分けて登録し、同時closureしない。 |
+| validation / release handoff | P7 hold matrix / validation matrix / release handoffはHOLD-004 materialとR9 doc refを持つが、HOLD close / release_allowedへ変換しない。 |
+
+確認済みvalidation:
+
+```text
+R0/R1 classification: 2 passed, 1 warning
+R2/R3 path matrix / decision rule: 4 passed
+R7/R8 validation / release handoff: 3 passed
+target Phase16 Complete Composer: 2 passed
+R9 implementation result / handoff: 3 passed
+前提資料更新時spot確認: R9 implementation result / handoff = 3 passed
+R7/R8 / target Phase16はR9実装結果documentの記録として保持。今回の前提資料更新ではfull backend suite green確認へ変換しない。
+```
+
+release boundaryは次を維持する。
+
+```text
+P7-HOLD-001: P5 human QA未完
+P7-HOLD-002: P6 visible expansion boundaryはblocked/validatedだがHOLD保持
+P7-HOLD-003: 実機submit / modal読感未確認
+P7-HOLD-004: full backend suite green未確認 / Phase16 targetのみgreen
+release_decision_input_ready: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+禁止:
+
+```text
+Phase16 target greenをfull backend suite greenと読む。
+P7-HOLD-004をR9で閉じた扱いにする。
+generatedをpublic表示許可と読む。
+tone_guard削除、Gate緩和、fixed commentText追加、case専用branch追加が行われたと読む。
+adjacent public redをtarget修復で解消済みと読む。
+R9 doc参照をrelease_allowedの根拠にする。
+```
+
+# 2026-06-13 差分追記: P7-HOLD-004 Phase16 Composer Red Classification R0〜R9 contract / boundary
+
+今回のP7-HOLD-004 R0〜R9で追加されたcontract境界は次です。
+
+## candidate generation と public display permissionの分離
+
+```text
+candidate_generated_before_display_gate == true
+```
+
+は、public表示を許可する意味ではありません。tone/display blockerがある場合、candidate generationは成立しても、public comment_text assignmentやRN表示へ進めるかは別Gateで判断します。
+
+必ず維持するfalse境界:
+
+```text
+display_gate_relaxed: false
+grounding_gate_relaxed: false
+template_gate_relaxed: false
+fixed_string_renderer_used: false
+public_comment_text_assigned: false
+comment_text_publicly_assigned: false
+external_ai_used: false
+local_llm_used: false
+```
+
+## HOLD-004 closure禁止境界
+
+以下は、どれもP7-HOLD-004 closure条件ではありません。
+
+```text
+Phase16 Complete Composer target file green
+R0〜R9 targeted tests green
+R9 implementation result document追加
+P7 hold matrix / validation / release handoffへのdoc参照追加
+public daily path pass
+```
+
+closureを主張できるのは、full backend suite greenと残HOLD整理が確認された後です。現時点では次を維持します。
+
+```text
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete_claim_allowed: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## regression確認の入口
+
+今回追加されたP7-HOLD-004 regression入口は次です。
+
+```text
+tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py
+tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py
+tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py
+tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py
+tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py
+tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py
+tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py
+```
+
+これらはP7 internal measurement / handoffのcontract testであり、RN表示条件やAPI response shapeを変更するtestではありません。
 

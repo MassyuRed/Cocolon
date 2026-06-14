@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-06-12"
+revision_date: "2026-06-13"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(199).zip"
-  Cocolon: "Cocolon_10(16).zip"
-  mashos-api: "mashos-api_10(31).zip"
+  premise: "Cocolon_前提資料(212).zip"
+  Cocolon: "Cocolon(230).zip"
+  mashos-api: "mashos-api_7(55).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 939
-  total: 1156
+  mashos-api: 1005
+  total: 1222
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1156
-  included_in_overall_structure: 1156
-  included_in_national_system: 1156
+  total_files: 1222
+  included_in_overall_structure: 1222
+  included_in_national_system: 1222
   excluded_from_main_body: 0
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
@@ -64,6 +64,39 @@ coverage:
   user_label_connection_p5_full_01_02_regeneration: false
   structure_insight_p6_0_9_reflected: true
   structure_insight_p6_full_01_02_regeneration: false
+  p5_p6_runtime_repair_r0_r10_update_proposal_reflected: true
+  p5_p6_runtime_repair_code_patch_r0_r9_verified_in_latest_mashos_api_10_32: true
+  p5_p6_runtime_repair_full_01_02_regeneration: false
+  p7_product_quality_runner_design_implementation: true
+  p7_product_quality_runner_p7_0_9_reflected: true
+  p7_product_quality_runner_full_01_02_regeneration: false
+  p7_red_hold_closure_r0_r12_reflected: true
+  p7_red003_body_free_leak_guard_r13_reflected: true
+  p7_red003_body_free_leak_guard_r13_added_files: 9
+  p7_red003_body_free_leak_guard_r13_changed_files: 10
+  p7_red_003_body_free_guard_repaired_closed: true
+  p7_red_003_timeout_resolved: true
+  p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
+  p7_positive_recovery_red_001_002_closed: true
+  p7_red_003_timeout_isolated_unresolved: false
+  p7_red_003_body_free_guard_repaired_r13_reflected: true
+  p7_red_003_closed_after_r13: true
+  p7_holds_001_004_preserved: true
+  p7_hold004_phase16_composer_r0_r9_reflected: true
+  p7_hold004_phase16_composer_added_files: 11
+  p7_hold004_phase16_composer_changed_files: 4
+  p7_hold004_phase16_target_composer_green_confirmed: true
+  p7_hold004_phase16_candidate_boundary_registered: true
+  p7_hold004_phase16_adjacent_public_red_registered: true
+  p7_hold004_phase16_implementation_result_doc_reflected: true
+  p7_hold004_phase16_full_backend_suite_green_confirmed: false
+  p7_hold004_unresolved_after_r9: true
+  p7_hold004_phase16_full_01_02_regeneration: false
+  p7_complete: false
+  p8_start_allowed: false
+  release_allowed: false
+  p7_red_hold_closure_full_01_02_regeneration: false
+  p7_red003_body_free_guard_repair_r13_full_01_02_regeneration: false
 ---
 
 # これは何か
@@ -139,12 +172,11 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon_10(16).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_10(31).zip` | 939 | backend / API / worker / tests。P5 User Label Connectionの後続としてP6 Structure Insight v2 P6-0〜P6-9を反映する。 |
-| total | 1156 | EmlisAI P6 Structure Insight v2 P6-0〜P6-9差分更新後の前提資料差分更新対象snapshot。 |
+| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004 R0〜R9差分はbackend internal-onlyであり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
+| `mashos-api_7(55).zip` | 1005 | backend / API / worker / tests。P7-RED-003 R13後続として、P7-HOLD-004 Phase16 Complete Composer Red Classification R0〜R9実装を含む。 |
+| total | 1222 | R13 body-free leak guard、P7-HOLD-004 Phase16 classification / path matrix / candidate-display boundary修復 / metadata summary / adjacent public red登録 / validation・release handoff / R9 implementation result doc反映後の前提資料差分更新対象snapshot。 |
 
-`Cocolon(222).zip` から `Cocolon_10(16).zip` へのsource差分はありません。  
-`mashos-api(135).zip` から `mashos-api_10(31).zip` では、P6 Structure Insight v2 P6-0〜P6-9として added 20 / changed 1 / removed 0 の差分があります。P6-9直前 `mashos-api_9(36).zip` から `mashos-api_10(31).zip` では added 2 / changed 2 / removed 0 です。
+`mashos-api_7(55).zip` を今回の最新実ファイルとして受領し、R13反映済み基準 `mashos-api(143).zip` からのP7-HOLD-004 R0〜R9差分として追加11件・変更4件・削除0件を確認しました。Cocolon側は今回のHOLD-004差分対象ではないため、既存RN契約確認基準として `Cocolon(230).zip` を参照し、HOLD-004差分はbackend internal-onlyとして読む。
 
 P0/P1 public feedback arrival以降も、EmlisAI全体で次を固定します。
 
@@ -175,6 +207,45 @@ source unavailable を normal_observation_rebuild_candidate で読めたふり�
 two_stage_required を plain surface で成功扱いする。
 raw input / original candidate body / candidate body / comment_text body をpublic metaやProductQuality eventへ入れる。
 ```
+
+
+# 2026-06-12 追補: EmlisAI P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9実装反映
+
+最新実ファイル `mashos-api_6(56).zip` では、P5/P6 handoff後のEmlisAIをrelease readyに変換せず、Product Quality Runner / Long-run Product Gateへ渡すbody-free測定構造がP7-0〜P7-9として実装済みです。これは本文生成やRN表示拡張ではなく、赤・HOLD・timeout・未レビューを隠さず次層へ渡すbackend internal-only構造として読む。
+
+| P7範囲 | 最新の読み方 |
+|---|---|
+| P7-0 / P7-1 | P5/P6 body-free handoff intakeとP7 red ledgerを固定する。P5/P6 runtime接続をP7 ready / release readyへ変換しない。 |
+| P7-2 / P7-3 | 既存Product Quality系moduleをinventory / adapter分類し、runner plan / command matrix / timeout budgetを分ける。heavy E2Eは本線green条件へ入れない。 |
+| P7-4 / P7-5 | `ProductQualityEventV1` を壊さずP7 scorecard rowへbridgeし、family / sequence / history-line evaluation matrixを作る。 |
+| P7-6 / P7-7 | ratings-only Blind QA materialとLong-run Product Gate candidate materialを作る。未レビューをgreen化せず、long-run candidateをrelease_allowedへ変換しない。 |
+| P7-8 / P7-9 | Release Decision handoff materialを分離し、validation / regression matrixでgreenと呼べる範囲を固定する。P7 core greenや既存subset greenをP7 complete / release readyと呼ばない。 |
+
+P7で維持する初期赤・HOLDは次です。
+
+```text
+P7-RED-001: Positive Recovery relation signal mismatch
+P7-RED-002: Positive Recovery fail-closed regression
+P7-RED-003: Product Quality Connection E2E timeout / hang
+P7-HOLD-001: P5 human Blind QA未完
+P7-HOLD-002: P6 visible横展開禁止
+P7-HOLD-003: 実機submit / スマホmodal読感未確認
+P7-HOLD-004: full backend suite未実行
+```
+
+P7実装後も、前提資料上では次を禁止のまま固定します。
+
+```text
+release_allowed true化
+Product Pass / Long-run candidate -> Release Ready変換
+P5/P6 HOLDのgreen化
+heavy E2E timeout / hangのgreen化
+full backend suite greenの未確認断定
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write path変更
+raw input / comment_text body / candidate body / surface body / reviewer free textのscorecard・handoff・public meta混入
+```
+
+ローカル確認結果として、P7 core contractは `50 passed`、既存Product Quality reuse subsetは `31 passed, 1 warning` として確認した。warningは既存 `pytest.mark.asyncio` unknown mark由来であり、今回のP7前提資料差分ではgreen範囲をP7 core / existing subsetのみに限定して読む。Positive Recovery E2Eの赤とProduct Quality Connection E2E timeout / hangは、P7-RED-001〜003として隔離・保持する。
 
 # 2026-06-06 追補: EmlisAI Normal Observation Public Recovery P0-P9実装反映
 
@@ -1810,3 +1881,282 @@ Gate緩和 / 固定返信テンプレ / case専用runtime分岐
 P7 Product Quality Runner本体
 ```
 
+
+
+# 2026-06-12 追加必読: EmlisAI P5/P6 runtime repair R0〜R10 現在地更新案
+
+この追記は、P5/P6を「module/testが存在するから完了」と誤読しないための現在地更新案です。  
+`mashos-api_10(32).zip` を確認対象とし、P5 User Label Connection v1 と P6 Structure Insight v2 のruntime接続・body-free境界・handoff境界を、前提資料上の最新の読み方として固定します。
+
+## 最新基準面
+
+| source | file count | 位置づけ |
+|---|---:|---|
+| `Cocolon_10(16).zip` | 217 | RNアプリ本体。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_10(32).zip` | 950 | backend / API / worker / tests。P5/P6 runtime repair R0〜R9成果物を含む。P5/P6はrelease readyではない。 |
+| total | 1167 | EmlisAI P5/P6 runtime repair R0〜R10現在地更新案の前提資料差分更新対象snapshot。 |
+
+`mashos-api(138).zip` から `mashos-api_10(32).zip` では、added 11 / changed 5 / removed 0 の差分があります。  
+この差分はP5/P6 runtime repair R0〜R9の実装成果物であり、R10ではコード変更を行わず、前提資料・実装済み資料の現在地更新案だけを作成します。
+
+## R10で固定する読み方
+
+```text
+P5:
+  R0〜R4で、red ledger固定、P5 runtime bridge test、reply_service本線接続、P5-6境界経由、body-free public/meta境界、human QA未完分離まで反映済み。
+  P5 runtime_evaluated は true になり得る。
+  ただし product_quality_confirmed / human_qa_completed / release_allowed へ変換しない。
+
+P6:
+  R5〜R8で、P6 runtime bridge test、P5 handoff後のruntime評価層接続、structure_question限定limited surface、no-connect family regressionまで反映済み。
+  P6 visible_applied は structure_question の限定条件内だけで許可され得る。
+  P6 Product QAはratings/material層であり、P7 ready / release readyではない。
+
+P5/P6 handoff:
+  R9で split test matrix と handoff lock を固定済み。
+  full backend suite一括green shortcutは禁止。
+  timeout / hang はgreen扱いしない。
+
+P7:
+  今回は未着手・対象外。
+  P5/P6のbody-free handoffだけをP7再設計へ渡す。
+```
+
+## R10時点の確認結果
+
+確認済み:
+
+```text
+R0 red ledger doc: present
+R1/R2 P5 runtime bridge test: present
+R3 P5 visible boundary test/module: present
+R4 P5 public/meta human QA boundary tests: present
+R5/R6 P6 runtime bridge test: present
+R7 P6 limited surface module/test: present
+R8 P6 no-connect regression test: present
+R9 P5/P6 split matrix module/test: present
+```
+
+実行確認:
+
+```text
+python -m py_compile target R0〜R9 files
+=> passed
+
+PYTHONPATH=services/ai_inference pytest -q --tb=short R0-R9 targeted tests
+=> 46 passed
+```
+
+注意:
+
+```text
+- 上記はR0〜R9 targeted / split確認であり、full backend suite greenではない。
+- P5/P6のruntime接続は、release readyまたは商品品質確認済みを意味しない。
+- P5 human QA / P6 ratings-only QA / P7 long-run Product Gate / release decisionは別工程として残る。
+```
+
+## 禁止する誤読
+
+```text
+P5 test green = P5 runtime完了
+P5 runtime_evaluated = P5商品品質確認済み
+P5 visible_applied = human QA完了
+P6 test green = Structure Insightが実応答に出ている
+P6 visible_applied = P7 ready
+R0〜R9 targeted green = full backend suite green
+P5/P6 handoff = release_allowed
+```
+
+## 現在地の結論
+
+```text
+P5/P6はruntime接続とbody-free handoffの現在地まで進んだ。
+ただし、P5 human QA、P6 ratings-only QA、P7長期品質設計、release decisionは別工程として残る。
+前提資料・実装済み資料では、この状態を「P5/P6 runtime repair R0〜R10現在地更新案」として扱う。
+```
+
+
+# 2026-06-13 追補: EmlisAI P7 RED・HOLD Closure R0〜R12実装反映
+
+最新実ファイル `mashos-api_8(51).zip` では、P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9の後続として、P7 RED・HOLD closure R0〜R12がbackend internal-onlyで実装済みです。これはP8へ進む実装ではなく、P7に残っていたPositive Recovery赤、Product Quality Connection E2E timeout、P5/P6/実機/full suite HOLDを、body-free materialとして分類・保持するための差分です。
+
+今回の差分で閉じたもの、閉じていないものは次です。
+
+```text
+P7-RED-001: CLOSED
+P7-RED-002: CLOSED
+P7-RED-003: CLASSIFIED / TIMEOUT_ISOLATED / 未解消（R0〜R12時点。R13後はCLOSED / body_free_guard_repaired / PASSED_ISOLATEDへ更新済み。最新状態は下記R13追補を参照）
+P7-HOLD-001: 未解消 / P5 human QA未完
+P7-HOLD-002: 未解消 / P6 visible expansion blocked・validatedだがHOLD保持
+P7-HOLD-003: 未解消 / 実機submit・modal読感未確認
+P7-HOLD-004: 未解消 / full backend suite green未確認
+
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+R0〜R12で追加された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R1〜R5 Positive Recovery | `recovery` は広いrelation type、`recovery_load_bridge` 系はReaderが読む具体signal keyとして分離する。具体signalがrepair後も出ない場合はpassedへ進ませない。 |
+| R6〜R7 P7-RED-003 | Product Quality Connection E2E timeout / hangをP7 core greenへ混ぜず、`TIMEOUT_ISOLATED` / `P7-RED-003` としてrelease blockerに残す。これはR0〜R12時点の読みであり、R13後はtimeout解消・CLOSEDへ更新済み。ただしP7 complete / P8 start / release_allowedはfalse維持。 |
+| R8 P5 human QA | human QA材料とrelease materialを分け、raw input / comment_text body / reviewer free textをscorecardやhandoffへ流さない。 |
+| R9 P6 visible | visible expansionはstructure_question限定を維持し、daily / low-info / positive-only / safety adjacentへ横展開しない。 |
+| R10 HOLD matrix | 実機submit / modal読感未確認、full backend suite未実行を自動test greenへ吸収しない。 |
+| R11 release / validation | REDが一部closedしても、P7 complete / P8 start / release_allowedはfalseのまま保持する。 |
+| R12 result md | R0〜R11の実装結果、確認済み、未確認、書かれていない、推測禁止、次工程をmdとして追加する。 |
+
+確認済みの最新zip上のテスト結果は次です。
+
+```text
+R0〜R11主要確認suite: 34 passed
+P7 core + R6〜R11: 70 passed
+既存Product Quality reuse subset: 31 passed
+Product Quality Connection E2E: timeout / EXIT_STATUS:124
+```
+
+P7 RED・HOLD closure後も、前提資料上では次を禁止のまま固定します。
+
+```text
+P7 complete扱い
+P8着手可扱い
+release_allowed true化
+Product Pass / Long-run candidate -> Release Ready変換
+P7-RED-003 timeoutの環境断定
+P5 human QA未完のgreen化
+実機submit / modal読感未確認の確認済み化
+full backend suite未実行をfull backend suite greenと呼ぶこと
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write path変更
+raw input / comment_text body / candidate body / surface body / reviewer free textのscorecard・handoff・public meta混入
+```
+
+
+# 2026-06-13 追補: EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13-0〜R13-11実装反映
+
+最新実ファイル `mashos-api_7(54).zip` では、P7 RED・HOLD Closure R0〜R12の後続として、P7-RED-003 Product Quality Connection E2Eのbody-free leak guard修復 R13-0〜R13-11がbackend internal-onlyで実装済みです。これはEmlis本文生成・RN表示・API shapeを増やす差分ではなく、P7の測定器が `current_input` safe rubric vocabularyをraw leakとして誤検知していた境界を、key/path/raw value/safe vocabularyへ分け直した差分として読む。
+
+R13後の状態は次です。
+
+```text
+P7-RED-003: CLOSED
+classification: body_free_guard_repaired
+owner_layer: product_quality_scorecard_body_free_guard
+observed_status: PASSED_ISOLATED
+Product Quality Connection E2E: timeoutなし / pass
+body-free leak guard: pass
+validation matrix: product_quality_connection_timeout_closed=true
+release handoff: closed_red_refs に P7-RED-003 を含む
+unresolved_red_refs: []
+unresolved_timeout_refs: []
+
+P7-HOLD-001〜004: 未解消のまま保持
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R13で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R13-0/R13-1 | baseline再現を固定し、body-free leak guard contractを定義する。`current_input` dict key / raw body / input idはRED、rubric説明文のsafe vocabularyはpath限定でSAFE。 |
+| R13-2/R13-3 | `emlis_ai_p7_body_free_leak_guard.py` と単体testを追加し、forbidden key / raw value / true flag / safe vocabularyを分けて検査する。failure messageへraw bodyや巨大serializedを出さない。 |
+| R13-4/R13-5 | Product Quality Connection E2Eのglobal substring assertionを構造化body-free guardへ置換し、default pytest timeoutを解消する。 |
+| R13-6/R13-7 | timeout isolationを `PASSED_ISOLATED` / `product_quality_scorecard_body_free_guard` へ更新し、red closure classification上でP7-RED-003をclosed pathへ載せる。 |
+| R13-8/R13-9 | validation matrix / release handoffへP7-RED-003 closedを伝播する。ただしP7-HOLD-001〜004が残るためreview_required / release_allowed=falseを維持する。 |
+| R13-10/R13-11 | regression suite確認結果と最終実装結果mdを追加する。full backend suite、実機submit、modal読感、P5 human QAは未確認として残す。 |
+
+確認済みのR13 regression結果は次です。
+
+```text
+R13 related minimum / validation / release subset: 40 passed
+Product Quality Connection E2E timeout wrapper: 1 passed / EXIT_STATUS:0
+P7 core + R6〜R11 subset: 72 passed
+既存Product Quality reuse subset: 31 passed
+RN contract: 36 passed
+```
+
+R13後も、前提資料上では次を禁止のまま固定します。
+
+```text
+P7-RED-003 closedをP7 completeと読む。
+Product Quality Connection E2E greenを商品品質合格と読む。
+R13 subset greenをfull backend suite greenと読む。
+RN contract greenを実機submit / modal読感確認済みと読む。
+release_input_status=review_requiredをrelease readyと読む。
+P7-HOLD-001〜004を自動で閉じる。
+P8 start allowedへ昇格する。
+release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
+```
+
+# 2026-06-13 追補: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9実装反映
+
+最新実ファイル `mashos-api_7(55).zip` では、P7-RED-003 R13後の次工程として、P7-HOLD-004 full backend suite green未確認の中で最初に見えていた Phase16 Complete Composer Two-Stage Surface Connection red を、R0〜R9でbody-freeに分類・最小修復・handoff連携・実装結果document化している。
+
+これはP7-HOLD-004を閉じる差分ではない。`tests/test_emlis_ai_complete_composer_two_stage_surface_connection.py` のdirect / conversation targetはgreen確認されているが、full backend suite green、P7 complete、P8 start allowed、release_allowedへは昇格しない。
+
+R0〜R9後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Phase16 candidate boundary classified and registered
+classification: candidate_readiness_display_gate_boundary_mixed
+repair branch: R4-A / candidate generation and display permission separated
+target Phase16 Complete Composer direct/conversation path: green confirmed
+adjacent public red: positive_change_after_work_streaming public shape boundary registered separately
+full_backend_suite_green_confirmed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R0〜R9で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R0/R1 | Phase16 redをP7-HOLD-004内のclassified unresolved materialとしてbody-freeに固定する。raw input / candidate body / surface body / comment_text bodyは保持しない。 |
+| R2/R3 | direct / conversation / public daily / adjacent public fixture pathを分け、implementation regressionならR4-Aへ進むdecision ruleを固定する。 |
+| R4-A | two-stage surfaceが構造的にreadyな場合、tone/display blockerだけでcandidate generationを`unavailable`へ落とさない。ただしpublic表示許可とは分ける。 |
+| R4-B | stale contract expectationの場合の置換設計materialを持つが、今回の判断はR4-Aであり旧testのstale置換は適用しない。 |
+| R5 | unavailable / generatedどちらでも必要なPhase16/17診断をtop-level `composer_meta` のbody-free summaryで読めるようにする。 |
+| R6 | `positive_change_after_work_streaming` public adjacent redを、daily_A direct/conversation修復と混ぜず別登録する。 |
+| R7/R8 | P7 hold matrix / validation matrix / release handoffへHOLD-004 Phase16 materialを接続しつつ、HOLD close / P7 complete / release_allowedはfalse維持する。 |
+| R9 | implementation result documentとhandoff参照を追加し、target greenをfull backend suite greenに変換しない境界を固定する。 |
+
+確認済みとして扱う範囲:
+
+```text
+R0/R1 classification: 2 passed, 1 warning
+R2/R3 path matrix / decision rule: 4 passed
+R7/R8 validation / release handoff: 3 passed
+target Phase16 Complete Composer: 2 passed
+R9 implementation result / handoff: 3 passed
+前提資料更新時spot確認: R9 implementation result / handoff = 3 passed
+```
+
+未確認として残す範囲:
+
+```text
+full backend suite green
+full backend suiteの全赤一覧
+public two-stage fixture suite全体のgreen
+実機submit / modal読感
+P5 human QA
+P8へ進める根拠
+```
+
+R0〜R9後も、前提資料上では次を禁止のまま固定します。
+
+```text
+target Phase16 Composer greenをfull backend suite greenと読む。
+R9 implementation result doc追加をP7-HOLD-004 closureと読む。
+adjacent public redをdaily_A修復で閉じた扱いにする。
+generatedをpublic display permissionと同一視する。
+tone_guard削除・Gate緩和・fixed commentText追加・case専用branch追加が行われたと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
+```

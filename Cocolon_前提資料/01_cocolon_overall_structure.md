@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-12"
+revision_date: "2026-06-13"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(197).zip"
-  Cocolon: "Cocolon_8(17).zip"
-  mashos-api: "mashos-api_8(48).zip"
+  premise: "Cocolon_前提資料(212).zip"
+  Cocolon: "Cocolon(230).zip"
+  mashos-api: "mashos-api_7(55).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 919
-  total: 1136
+  mashos-api: 1005
+  total: 1222
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1136
+  included_files_total: 1222
   included_files_cocolon: 217
-  included_files_mashos_api: 919
+  included_files_mashos_api: 1005
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -35,6 +35,19 @@ coverage:
   product_readfeel_p3_baseline_full_01_02_regeneration: false
   product_readfeel_p4_family_product_tuning_p4_0_10_reflected: true
   product_readfeel_p4_family_product_tuning_full_01_02_regeneration: false
+  p5_user_label_connection_p5_0_7_reflected: true
+  structure_insight_p6_0_9_reflected: true
+  p7_product_quality_runner_p7_0_9_reflected: true
+  p7_red_hold_closure_r0_r12_reflected: true
+  p7_red003_body_free_leak_guard_r13_reflected: true
+  p7_hold004_phase16_composer_red_classification_r0_r9_reflected: true
+  p7_hold004_phase16_composer_red_classification_r0_r9_added_files: 11
+  p7_hold004_phase16_composer_red_classification_r0_r9_changed_files: 4
+  p7_hold004_phase16_composer_target_green_confirmed: true
+  p7_hold004_phase16_full_backend_suite_green_confirmed: false
+  p7_hold004_phase16_full_01_02_regeneration: false
+  p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
+  p7_red_hold_closure_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -2598,4 +2611,270 @@ P5-7 regression / P6 hold decision
 | `ai/services/ai_inference/emlis_ai_structure_insight_p6_gate_hardening.py` | P6-9直前比で、review_required / meta_only relationがpolicy-review-only理由でREPAIR_REQUIREDになった場合、可視候補ではなくreview扱いとして止める。Gate緩和ではない。 |
 
 P6で増えた構造は、`comment_text` bodyやcandidate bodyをscorecard / public meta / handoffへ持ち込まない。P6はP7へ渡すbody-free評価材料であり、release readyではない。
+
+
+# 2026-06-12 差分追記: EmlisAI P7 Product Quality Runner / Long-run Product Gate overall structure
+
+最新実ファイル `mashos-api_6(56).zip` では、P6 Structure Insight v2のP7 hold decision後続として、P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9がbackend内部構造として追加されている。これはEmlisAI本文を増やす構造ではなく、P5/P6から来た材料をbody-freeで測り、赤・HOLD・timeout・未レビューをrelease decision層へ渡す前に分離する構造である。
+
+```text
+P5/P6 body-free handoff
+  -> P7 handoff normalizer
+  -> P7 red ledger / blocker registry
+  -> Product Quality module inventory / adapter classification
+  -> runner plan / timeout budget
+  -> ProductQualityEvent bridge / P7 scorecard row
+  -> family / sequence / history-line evaluation matrix
+  -> ratings-only Blind QA material
+  -> Long-run Product Gate candidate material
+  -> Release Decision handoff material
+  -> validation / regression matrix
+```
+
+| 構造層 | 追加された読み方 |
+|---|---|
+| handoff / ledger | P5/P6 runtime接続状態をP7 readyやrelease readyに変換せず、RED/HOLD/OUTをbody-freeで保持する。 |
+| inventory / runner | 既存Product Quality系moduleはP7完了証拠ではなく、reuse / adapter / heavy isolation / release decision isolationへ分類する。 |
+| scorecard / matrix | `ProductQualityEventV1` を置換せず、P7 scorecard rowとfamily / sequence / history-line matrixへ接続する。 |
+| Blind QA / long-run | 未レビューdimensionをmachine metricsで補完せず、ratings-only材料とlong-run candidate materialへ渡す。 |
+| release handoff / validation | release decisionへ渡す材料は作るが、P7自身はrelease判断しない。P7 core greenやexisting subset greenをrelease readyにしない。 |
+
+追加されたP7 backend owner:
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_p7_contracts.py` | P7共通schema / marker / RED/HOLD/OUT id / body-free / public contract boundary。 |
+| `ai/services/ai_inference/emlis_ai_p7_handoff_normalizer.py` | P7-0。P5/P6 handoffをsafe id / bool / count / reason codeへ正規化する。 |
+| `ai/services/ai_inference/emlis_ai_p7_red_ledger.py` | P7-1。P7-RED-001〜003、P7-HOLD-001〜004、P7-OUT-001〜008を保持する。 |
+| `ai/services/ai_inference/emlis_ai_p7_module_inventory.py` | P7-2。既存Product Quality moduleのadapter分類を固定する。 |
+| `ai/services/ai_inference/emlis_ai_p7_runner_plan.py` | P7-3。runner group / command matrix / timeout budget / heavy E2E isolationを固定する。 |
+| `ai/services/ai_inference/emlis_ai_p7_event_bridge.py` | P7-4。ProductQualityEventからP7ScorecardRowへのbody-free bridge。 |
+| `ai/services/ai_inference/emlis_ai_p7_evaluation_matrix.py` | P7-5。family / sequence / history-line matrix。 |
+| `ai/services/ai_inference/emlis_ai_p7_blind_qa_material.py` | P7-6。ratings-only Blind QA material / review schema。 |
+| `ai/services/ai_inference/emlis_ai_p7_long_run_gate_handoff.py` | P7-7。Long-run Product Gate candidate material。 |
+| `ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | P7-8。Release Decision handoff material分離。 |
+| `ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | P7-9。Validation / regression matrix。 |
+| `ai/docs/Cocolon_EmlisAI_P7_ProductQualityRunner_ImplementationResult_20260612.md` | P7実装結果、確認結果、RED/HOLD保持、contract不変更を記録する。 |
+
+P7で増えた構造は、RN production UI、API route、public response top-level key、DB schema / write pathを増やさない。P7はbody-free測定材料とrelease handoff materialを作るだけであり、`release_allowed` はfalseのまま読む。
+
+
+
+# 2026-06-13 差分追記: EmlisAI P7 RED・HOLD Closure R0〜R12 overall structure
+
+最新実ファイル `mashos-api_8(51).zip` では、P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9の後続として、P7 RED・HOLD closure R0〜R12がbackend internal-onlyで追加・更新されている。これはEmlisAI本文生成を増やす構造ではなく、Positive Recoveryのstrict relation/fail-closed境界を閉じ、残るtimeout/HOLDをP7 completeへ変換せず保持する構造である。
+
+```text
+P7-0〜P7-9 body-free measurement material
+  -> R1 strict relation trace
+  -> R2 relation type / signal key / marker key contract split
+  -> R3 Gate Recovery synthesized ReaderReport strict repair
+  -> R4 Positive Recovery fail-closed boundary
+  -> R5 Positive Recovery E2E closure tests
+  -> R6 P7-RED-003 timeout isolation
+  -> R7 P7 red closure classification matrix
+  -> R8 P5 human QA material boundary
+  -> R9 P6 visible expansion boundary validation
+  -> R10 real-device / full backend HOLD matrix
+  -> R11 release handoff / validation final alignment
+  -> R12 implementation result md
+```
+
+追加されたP7 RED・HOLD closure backend owner:
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_p7_timeout_isolation.py` | R0〜R12時点ではProduct Quality Connection E2E timeout / hangをP7 core greenやfull backend suite greenへ混ぜず、P7-RED-003として隔離する。R13後は `PASSED_ISOLATED` / `product_quality_scorecard_body_free_guard` observationも保持する。 |
+| `ai/services/ai_inference/emlis_ai_p7_red_closure_classification.py` | P7-RED-001 / 002 / 003をCLOSED / CLASSIFIED / TIMEOUT_ISOLATEDとしてbody-free分類する。 |
+| `ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | 実機submit / modal読感未確認とfull backend suite未実行を自動test greenへ吸収しないHOLD matrix。 |
+| `ai/docs/Cocolon_EmlisAI_P7_RedHoldClosure_ImplementationResult_20260613.md` | R0〜R11の実装結果、実行commands、green/red/timeout/unverified、次工程を記録する。 |
+
+R0〜R12で修正された既存ownerは、relation surface contract、Gate Recovery loop、reply service、display gate、diagnostics、P7 runner/release/validation/QA/handoff系である。構造上の中心は次で読む。
+
+| 領域 | 最新の読み方 |
+|---|---|
+| Positive Recovery | `recovery` はrelation type、`recovery_load_bridge` 系は具体signal key。具体signalがない場合は読めた扱いにしない。 |
+| Gate Recovery | `used_relation_ids=["recovery"]` をReader signal keyへ昇格しない。合成surfaceからstrict relationを再検出する。 |
+| fail-closed | repair後もstrict relation surfaceがmissingなら、safe fallbackでpassedへ進ませない。 |
+| timeout isolation | R0〜R12時点ではProduct Quality Connection E2E timeoutを`P7-RED-003`として保持し、P7 core greenやfull backend suite greenへ混ぜない。R13後はProduct Quality Connection E2Eのdefault pytest timeoutは解消済みで、`PASSED_ISOLATED`へ更新済み。 |
+| human QA | P5 human QA材料とrelease materialを分け、reviewer free textや本文をscorecardへ流さない。 |
+| P6 visible | visible expansionはstructure_question限定を維持し、daily / low-info / positive-only / safety adjacentへ広げない。 |
+| release validation | R0〜R12時点ではP7-RED-001 / 002がclosedしても、P7-RED-003とP7-HOLD-001〜004が残る限り、P7 complete / P8 start / release_allowedはfalse。R13後はP7-RED-003もclosedへ伝播済みだが、P7-HOLD-001〜004が残るため false 維持。 |
+
+P7 RED・HOLD closure後も、RN production UI、RN表示条件、API route、public response top-level key、DB schema / write pathは変更されていない。
+
+
+# 2026-06-13 差分追記: EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13 overall structure
+
+最新実ファイル `mashos-api_7(54).zip` では、P7 RED・HOLD Closure R0〜R12の後続として、P7-RED-003 Product Quality Connection E2Eのbody-free leak guard repair R13-0〜R13-11がbackend internal-onlyで追加・更新されている。これはEmlisAI本文生成、RN表示条件、API route、public response top-level key、DB write pathを変える構造ではなく、P7測定materialのbody-free境界とRED-003 closure伝播を修復する構造である。
+
+```text
+P7 RED・HOLD closure R0〜R12
+  -> R13-0 baseline freeze / no-code再現固定
+  -> R13-1 body-free leak guard contract定義
+  -> R13-2 body-free leak guard helper追加
+  -> R13-3 helper単体test追加
+  -> R13-4 Product Quality Connection E2E更新
+  -> R13-5 default pytest timeout解消確認
+  -> R13-6 P7-RED-003 timeout isolation / observation更新
+  -> R13-7 red closure classification matrix更新
+  -> R13-8 validation matrix更新
+  -> R13-9 release handoff更新
+  -> R13-10 regression suite実行
+  -> R13-11 実装結果md作成
+```
+
+追加されたP7-RED-003 body-free repair backend owner:
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_p7_body_free_leak_guard.py` | Product Quality scorecardなどのP7 materialをrecursiveに走査し、forbidden key / forbidden raw value / forbidden true flag / safe rubric vocabularyを分けるbody-free guard。 |
+| `ai/tests/test_emlis_ai_p7_body_free_leak_guard_contract_20260613.py` | contract定義、raw value非material化、failure output body-free境界を固定するtest。 |
+| `ai/tests/test_emlis_ai_p7_body_free_leak_guard_20260613.py` | helper単体のkey/path/raw value/true flag/safe vocabulary境界を固定するtest。 |
+| `ai/docs/Cocolon_EmlisAI_P7_RED003_BodyFreeLeakGuardRepair_ImplementationResult_20260613.md` | R13-10/R13-11実装結果、regression suite、RED-003 closed、残HOLD、未確認を記録する。 |
+
+R13で修正された既存ownerは、Product Quality Connection E2E test、P7 timeout isolation、red closure classification、validation matrix、release handoff、および対応testである。構造上の中心は次で読む。
+
+| 領域 | 最新の読み方 |
+|---|---|
+| body-free guard | `current_input` を文字列一括禁止にせず、dict key / raw body / input idをRED、rubric説明文のsafe vocabularyをpath限定SAFEとして扱う。 |
+| Product Quality Connection E2E | 巨大serialized文字列へのglobal substring assertionをやめ、構造化guardでraw leakを検査する。default pytest timeoutはR13後に解消済み。 |
+| timeout isolation | P7-RED-003 observationは `PASSED_ISOLATED` / `product_quality_scorecard_body_free_guard` へ更新される。 |
+| red closure classification | P7-RED-003は `body_free_guard_repaired` としてCLOSED pathに載る。 |
+| validation / release handoff | P7-RED-003 closedを伝播するが、P7-HOLD-001〜004が残るためP7 complete / P8 start / release_allowedはfalse。 |
+
+R13後も、P7はbody-free測定材料とrelease handoff materialを扱うbackend internal-only層であり、Cocolonのユーザー表示・保存・公開contractを変えない。
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9 overall structure
+
+最新実ファイル `mashos-api_7(55).zip` では、P7-RED-003 R13後続として、P7-HOLD-004 full backend suite green未確認をPhase16 Complete Composer redから切り分けるbackend internal-only構造が追加・更新されている。これはEmlisAI本文生成、RN表示条件、API route、public response top-level key、DB write pathを変える構造ではない。
+
+```text
+P7-HOLD-004 full backend suite green未確認
+  -> R0/R1 Phase16 Complete Composer red classification
+  -> R2/R3 path matrix / decision rule
+  -> R4-A candidate generation and display/tone readiness minimal separation
+  -> R4-B stale contract replacement design material only
+  -> R5 top-level body-free composer_meta summary
+  -> R6 adjacent public red registration
+  -> R7/R8 P7 hold matrix / validation matrix / release handoff connection
+  -> R9 implementation result document / handoff doc ref
+```
+
+追加されたHOLD-004 backend owner:
+
+| path | 構造上の意味 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py` | R0/R1。Phase16 Complete Composer redをbody-freeに観測・分類し、P7-HOLD-004 unresolvedを保持する。 |
+| `ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py` | R2/R3/R6。direct / conversation / public daily / adjacent public pathとdecision ruleを分ける。 |
+| `ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py` | R4-A/R4-B。runtime repair summaryとstale contract replacement design materialをbody-freeで保持する。 |
+| `ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md` | R9。R0〜R8の実装結果、target green、未確認、non-closure、次工程を記録する。 |
+
+変更された既存owner:
+
+| path | 差分の読み方 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_complete_composer_client.py` | two-stage surfaceが構造的にreadyならtone/display blockerだけでcandidate generationを`unavailable`へ落とさない。public表示許可とは分け、body-free metaにreasonを残す。 |
+| `ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | HOLD-004 Phase16 classification / path matrix / adjacent public redを受け取り、closed扱いにしない。 |
+| `ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | HOLD-004 Phase16 row、implementation result doc path、unresolved_hold_refsを保持し、full_backend_suite_green_confirmed=falseを維持する。 |
+| `ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | required_followup_fixes / release_blockers / doc refへHOLD-004 Phase16材料を連携し、release_allowed=falseを維持する。 |
+
+R0〜R9後も、P7-HOLD-004は未解消のまま保持する。target test greenは「Phase16 candidate boundaryの赤が最小修復された」ことを意味するが、full backend suite green、P7 complete、P8 start allowed、release_allowedではない。
+
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification overall structure
+
+最新実ファイル `mashos-api_7(55).zip` では、P7-HOLD-004 full backend suite green未確認の中で最初に具体化したPhase16 Complete Composer Two-Stage Surface Connection赤を、P7測定構造へ分離登録するbackend internal-only構造が追加されている。
+
+構造上の中心は次です。
+
+```text
+P7-HOLD-004 Phase16 lane:
+  baseline freeze / red classification
+  -> direct / conversation / public / adjacent public path matrix
+  -> decision rule: repair_candidate_display_boundary / R4-A
+  -> Complete Composer candidate generation と display/tone readiness の最小分離
+  -> body-free metadata summary
+  -> adjacent public red registration
+  -> P7 hold matrix / validation matrix / release handoff
+  -> implementation result document reference
+```
+
+追加されたP7-HOLD-004 backend owner:
+
+| path | 構造上の読み方 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py` | Phase16 Complete Composer赤をbody-freeで分類し、two-stage structural readyとtone/display blockerを分ける。 |
+| `ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py` | direct / conversation / public daily / adjacent public pathを分け、public path passをinternal red closureへ変換しないmatrix。 |
+| `ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py` | stale contract expectationの場合の置換設計material。ただし今回のR3判断はR4-Aであり、旧test置換ではない。 |
+| `ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md` | R0〜R9で何を確認し、何を残すかを固定するimplementation result / handoff document。 |
+
+修正された既存ownerは、`emlis_ai_complete_composer_client.py`、`emlis_ai_p7_hold_matrix.py`、`emlis_ai_p7_validation_matrix.py`、`emlis_ai_p7_release_handoff.py` である。
+
+| owner | 最新構造 |
+|---|---|
+| Complete Composer | two-stage surfaceが構造的にreadyの場合、tone/display blockerだけでcandidate generation自体を `unavailable` に落とさない。ただしpublic表示許可とは分ける。 |
+| P7 hold matrix | HOLD-004 Phase16分類・path matrix・decision rule・adjacent public redをoptional inputとして受け、HOLD-004を閉じずにrequired follow-upへ残す。 |
+| P7 validation matrix | `hold004_phase16_classified_red` rowとimplementation result doc参照を持つ。green claim scopeは `classified_hold004_material_only_not_full_backend_suite_green`。 |
+| P7 release handoff | `hold004_phase16_implementation_result_doc_ref` を保持し、release_allowed / p8_start_allowed falseを維持する。 |
+
+この差分で守る境界:
+
+```text
+generated != public display permission
+public daily path pass != adjacent public red close
+target Phase16 file green != full backend suite green
+P7-HOLD-004 Phase16 classification != P7-HOLD-004 closure
+```
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9構造
+
+P7-HOLD-004 Phase16 Composer Red Classification R0〜R9は、Cocolon全体構造上、EmlisAIのpublic表示経路ではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回追加された構造は次です。
+
+| path | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py` | Phase16 Complete Composer redをbody-freeに分類するP7-HOLD-004材料。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py` | direct / conversation / public daily / adjacent public pathを分けるmatrixとdecision rule。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py` | stale contract replacement候補を保持するが、現行判断ではR4-A修復を採用する材料。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md` | R0〜R9の実装結果、確認済み、未確認、非closure境界を記録するdoc。 |
+
+今回修正された構造は次です。
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | structurally-ready two-stage surfaceがある場合、tone/display blockerだけでcandidate generationをunavailableにしない。ただしpublic表示許可は別層。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | HOLD-004 Phase16 classification / path matrix / adjacent redをP7 hold matrixへ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | HOLD-004 Phase16 classified red rowとimplementation result doc参照を保持し、full suite greenを主張しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | release handoffへHOLD-004 follow-upとdoc参照を渡すが、release_allowed=falseを維持する。 |
+
+構造上の中心は次で読む。
+
+```text
+Complete Composer candidate path
+  -> two-stage surface structural readiness
+  -> tone/display blocker summary
+  -> candidate generation before display gate
+  -> public display permissionは別Gate
+  -> P7-HOLD-004 classification / path matrix
+  -> P7 hold matrix / validation matrix / release handoff
+```
+
+この差分で変えていないもの:
+
+```text
+RN production UI
+RN表示タイトル
+RN表示条件
+/emotion/submit route
+request key
+public response top-level key
+DB physical schema / write path
+Gate閾値
+fixed commentText
+case専用branch
+```
+
+P7-HOLD-004は、Phase16 targetがgreenになってもclosedではありません。full backend suite green、実機submit / modal読感、P5 human QAが未確認のため、P7 complete / P8 start / release_allowedはfalseのまま扱います。
 

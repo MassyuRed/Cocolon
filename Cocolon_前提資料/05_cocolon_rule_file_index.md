@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-12"
+revision_date: "2026-06-13"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1233,5 +1233,204 @@ soft markerだけで診断・原因・人格・相手判断を通す。
 P5履歴線やP6 insightでcurrent-only読感不足を隠す。
 ratings-only QAへraw input、comment_text body、candidate body、reviewer free textを保持する。
 P6 Product QA / regression handoffをrelease_allowedへ変換する。
+```
+
+
+# 2026-06-12 差分追記: EmlisAI P7 Product Quality Runner / Long-run Product Gate rule / test index
+
+EmlisAI P7を触る場合は、P7-0〜P7-9がbody-free / red-preserving / release-closed境界でつながっていることを同時確認する。P7は「商品品質を通ったことにするrunner」ではなく、P5/P6後続の測定材料、赤、HOLD、timeout、release handoff materialを分けるbackend内部構造として読む。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| P7-0 Handoff Normalizer | `emlis_ai_p7_contracts.py`, `emlis_ai_p7_handoff_normalizer.py`, `test_emlis_ai_p7_handoff_normalizer_20260612.py` | P5/P6 handoff、body-free intake、P7 ready false境界を触る時。 |
+| P7-1 Red Ledger | `emlis_ai_p7_red_ledger.py`, `test_emlis_ai_p7_red_ledger_20260612.py` | P7-RED-001〜003、P7-HOLD-001〜004、P7-OUT-001〜008を触る時。 |
+| P7-2 Module Inventory | `emlis_ai_p7_module_inventory.py`, `test_emlis_ai_p7_module_inventory_20260612.py` | 既存Product Quality moduleのreuse / adapter / heavy isolation / release decision isolationを触る時。 |
+| P7-3 Runner Plan | `emlis_ai_p7_runner_plan.py`, `test_emlis_ai_p7_runner_plan_20260612.py` | runner group、command matrix、timeout budget、heavy E2E isolationを触る時。 |
+| P7-4 Event Bridge | `emlis_ai_p7_event_bridge.py`, `test_emlis_ai_p7_event_bridge_20260612.py` | ProductQualityEvent bridge、P7ScorecardRow、body-free flagsを触る時。 |
+| P7-5 Evaluation Matrix | `emlis_ai_p7_evaluation_matrix.py`, `test_emlis_ai_p7_evaluation_matrix_20260612.py` | family / sequence / history-line evaluation matrixを触る時。 |
+| P7-6 Blind QA Material | `emlis_ai_p7_blind_qa_material.py`, `test_emlis_ai_p7_blind_qa_material_20260612.py` | ratings-only Blind QA material、review_missing / rating_requiredを触る時。 |
+| P7-7 Long-run Gate Handoff | `emlis_ai_p7_long_run_gate_handoff.py`, `test_emlis_ai_p7_long_run_gate_handoff_20260612.py` | long-run candidate material、history-line value growth、risk aggregationを触る時。 |
+| P7-8 Release Handoff | `emlis_ai_p7_release_handoff.py`, `test_emlis_ai_p7_release_handoff_20260612.py` | release decision handoff material、release_decision_input_ready / release_allowed分離を触る時。 |
+| P7-9 Validation Matrix | `emlis_ai_p7_validation_matrix.py`, `test_emlis_ai_p7_validation_matrix_20260612.py`, `docs/Cocolon_EmlisAI_P7_ProductQualityRunner_ImplementationResult_20260612.md` | green claim scope、RED/HOLD/timeout isolation、implementation resultを触る時。 |
+
+禁止:
+
+```text
+P7 core greenをP7 completeと読む。
+existing Product Quality subset greenをfull backend suite greenと読む。
+Positive Recovery赤を古いtest扱いで閉じる。
+Product Quality Connection E2E timeoutを環境扱いで閉じる。
+P5/P6 HOLDやhuman QA未完をgreen化する。
+read_feelingをmachine metricsで補完する。
+Product Pass / Long-run candidateをRelease Readyへ変換する。
+release_allowedをP7からtrueにする。
+raw input / comment_text body / candidate body / surface body / reviewer free textをP7 materialへ入れる。
+RN表示条件、API route、request key、public response top-level key、DB physical schemaを増やす。
+```
+
+
+
+# 2026-06-13 差分追記: EmlisAI P7 RED・HOLD Closure R0〜R12 rule / test index
+
+EmlisAI P7 RED・HOLD closureを触る場合は、P7-0〜P7-9のbody-free measurementに加えて、R0〜R12のstrict relation / fail-closed / timeout isolation / HOLD matrix / release validation境界を同時確認する。R0〜R12時点ではP7-RED-001 / 002はclosed、P7-RED-003とP7-HOLD-001〜004は未解消として保持する。R13後はP7-RED-003もCLOSEDへ更新済みだが、P7-HOLD-001〜004は未解消として保持する。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| R1 strict relation trace | `emlis_ai_relation_surface_contract.py`, `emlis_ai_complete_reply_diagnostics_service.py`, `test_emlis_ai_positive_recovery_strict_relation_trace_20260613.py` | `recovery` と `recovery_load_bridge` の混同、diagnostic trace、body-free metaを触る時。 |
+| R2/R3 contract / Gate Recovery | `emlis_ai_relation_surface_contract.py`, `emlis_ai_gate_recovery_loop.py`, `test_emlis_ai_positive_recovery_r2_r3_contract_boundary_20260613.py` | relation type / signal key / marker key分離、合成ReaderReportを触る時。 |
+| R4/R5 fail-closed | `emlis_ai_reply_service.py`, `emlis_ai_display_gate.py`, `test_emlis_ai_positive_recovery_r4_r5_fail_closed_boundary_20260613.py`, `test_emlis_ai_complete_product_quality_positive_recovery_e2e.py` | Positive Recoveryのrelation surface missing / rejected / comment_text empty境界を触る時。 |
+| R6 timeout isolation | `emlis_ai_p7_timeout_isolation.py`, `emlis_ai_p7_runner_plan.py`, `test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py` | Product Quality Connection E2E timeout / hangをP7 core greenへ混ぜない境界を触る時。 |
+| R7 red classification | `emlis_ai_p7_red_closure_classification.py`, `test_emlis_ai_p7_red_closure_classification_matrix_20260613.py` | P7-RED-001 / 002 / 003のclosed/classified/unresolved状態を触る時。 |
+| R8 human QA boundary | `emlis_ai_p7_blind_qa_material.py`, `emlis_ai_p7_event_bridge.py`, `test_emlis_ai_p7_r8_human_qa_material_boundary_20260613.py` | P5 human QA material、ratings-only、reviewer free text exclusionを触る時。 |
+| R9 P6 visible boundary | `emlis_ai_p7_event_bridge.py`, `emlis_ai_p7_validation_matrix.py`, `test_emlis_ai_p7_r9_p6_visible_expansion_boundary_20260613.py` | structure_question限定visible、meta-only/no-connect family boundaryを触る時。 |
+| R10 HOLD matrix | `emlis_ai_p7_hold_matrix.py`, `test_emlis_ai_p7_r10_real_device_full_backend_hold_matrix_20260613.py` | 実機submit / modal読感未確認、full backend suite未実行を触る時。 |
+| R11 release / validation | `emlis_ai_p7_release_handoff.py`, `emlis_ai_p7_validation_matrix.py`, `test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py` | release_allowed=false、P7 complete false、P8 start falseの最終整合を触る時。 |
+| R12 implementation result | `docs/Cocolon_EmlisAI_P7_RedHoldClosure_ImplementationResult_20260613.md` | R0〜R11実装結果、green/red/timeout/unverified、次工程を確認する時。 |
+
+確認済みテスト読み:
+
+```text
+R0〜R11主要確認suite: 34 passed
+P7 core + R6〜R11: 70 passed
+既存Product Quality reuse subset: 31 passed
+Product Quality Connection E2E: timeout / EXIT_STATUS:124
+```
+
+禁止:
+
+```text
+P7-RED-003 timeoutを環境問題として閉じる。
+R0〜R11主要suite greenをfull backend suite greenと読む。
+P7 core + R6〜R11 greenをP7 completeと読む。
+P5 human QA material boundaryをhuman QA完了と読む。
+P6 visible expansion blockedをvisible拡張済みと読む。
+R10 HOLD matrixを実機submit確認済みと読む。
+release handoff materialをrelease_allowedと読む。
+P8へ進むためにHOLDをgreen化する。
+```
+
+
+# 2026-06-13 差分追記: EmlisAI P7-RED-003 Body-Free Leak Guard Repair R13 rule / test index
+
+EmlisAI P7-RED-003 body-free leak guard repairを触る場合は、R13-0〜R13-11のbody-free contract / helper / E2E / classification / validation / release handoffを同時確認する。R13はtestを甘くする工程ではなく、raw body leak検査を構造化し、safe rubric vocabularyの誤検知を分離する工程である。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| R13 contract / helper | `emlis_ai_p7_body_free_leak_guard.py`, `test_emlis_ai_p7_body_free_leak_guard_contract_20260613.py`, `test_emlis_ai_p7_body_free_leak_guard_20260613.py` | current_input key/raw body/input id、safe rubric vocabulary、failure output policyを触る時。 |
+| Product Quality Connection E2E | `test_emlis_ai_complete_product_quality_connection_e2e.py` | scorecard body-free boundary、raw memo / memo_action / source_text / current_input object混入検査を触る時。 |
+| timeout observation | `emlis_ai_p7_timeout_isolation.py`, `test_emlis_ai_p7_connection_e2e_timeout_isolation_20260613.py` | P7-RED-003のTIMEOUT_ISOLATED / PASSED_ISOLATED扱いを触る時。 |
+| red closure classification | `emlis_ai_p7_red_closure_classification.py`, `test_emlis_ai_p7_red_closure_classification_matrix_20260613.py` | P7-RED-003をCLOSED / unresolvedに分類する境界を触る時。 |
+| validation matrix | `emlis_ai_p7_validation_matrix.py`, `test_emlis_ai_p7_validation_matrix_20260612.py` | product_quality_connection_timeout_closed、closed_red_refs、p7_complete falseを触る時。 |
+| release handoff | `emlis_ai_p7_release_handoff.py`, `test_emlis_ai_p7_release_handoff_20260612.py`, `test_emlis_ai_p7_r11_release_validation_final_alignment_20260613.py` | RED-003 closed伝播、unresolved_timeout_refs空、P7-HOLD保持、release_allowed=falseを触る時。 |
+| R13 result docs | `docs/Cocolon_EmlisAI_P7_RED003_R13_*.md`, `docs/Cocolon_EmlisAI_P7_RED003_BodyFreeLeakGuardRepair_ImplementationResult_20260613.md` | R13各段階の実装結果、検証結果、未確認、推測禁止を確認する時。 |
+
+確認済みテスト読み:
+
+```text
+R13 related minimum / validation / release subset: 40 passed
+Product Quality Connection E2E timeout wrapper: 1 passed / EXIT_STATUS:0
+P7 core + R6〜R11 subset: 72 passed
+既存Product Quality reuse subset: 31 passed
+RN contract: 36 passed
+```
+
+禁止:
+
+```text
+current_input safe vocabulary許可をraw current_input許可へ拡張する。
+body-free helperを通したからraw body検査不要と読む。
+Product Quality Connection E2E greenをP7 completeと読む。
+P7-RED-003 closedをP8 start allowedやrelease_allowedへ変換する。
+R13 subset greenをfull backend suite greenと読む。
+RN contract greenを実機submit / modal読感確認済みと読む。
+P7-HOLD-001〜004を閉じる。
+```
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9 rule / test index
+
+EmlisAI P7-HOLD-004 Phase16 Complete Composer red classificationを触る場合は、R0〜R9のclassification / path matrix / candidate-display boundary / metadata summary / adjacent red / validation・release handoff / implementation result documentを同時確認する。R0〜R9はP7-HOLD-004を閉じる工程ではなく、full backend suite green未確認HOLDの中身を次赤へ進められる粒度に分けるbackend internal-only差分である。
+
+| 領域 | 確認するfile | 触る時の意味 |
+|---|---|---|
+| R0/R1 classification | `emlis_ai_p7_hold004_phase16_composer_classification.py`, `test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py` | Phase16 Complete Composer redをbody-freeに分類し、P7-HOLD-004 unresolvedを保持する時。 |
+| R2/R3 path matrix / decision | `emlis_ai_p7_hold004_path_matrix.py`, `test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py` | direct / conversation / public daily / adjacent public pathを分け、R4-A/R4-B判断を固定する時。 |
+| R4-A runtime repair | `emlis_ai_complete_composer_client.py`, `test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py` | two-stage surface structural readyとtone/display blockerを分け、candidate generationを復帰させる時。 |
+| R4-B replacement design | `emlis_ai_p7_hold004_r4_contract_material.py`, `test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py` | stale contract expectationの場合の置換設計materialを扱う時。今回の現行判断はR4-A。 |
+| R5/R6 metadata / adjacent red | `emlis_ai_complete_composer_client.py`, `emlis_ai_p7_hold004_path_matrix.py`, `test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py` | top-level composer_meta summaryとpositive public fixture adjacent red分離を触る時。 |
+| R7/R8 matrix handoff | `emlis_ai_p7_hold_matrix.py`, `emlis_ai_p7_validation_matrix.py`, `emlis_ai_p7_release_handoff.py`, `test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py` | HOLD-004 materialをP7 hold / validation / release handoffへ流し、closureしない境界を触る時。 |
+| R9 implementation result | `docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md`, `test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py` | 実装結果document、doc path参照、non-closure claim、release false維持を確認する時。 |
+
+確認済みvalidation:
+
+```text
+R0/R1 classification: 2 passed, 1 warning
+R2/R3 path matrix / decision rule: 4 passed
+R7/R8 validation / release handoff: 3 passed
+target Phase16 Complete Composer: 2 passed
+R9 implementation result / handoff: 3 passed
+前提資料更新時spot確認: R9 implementation result / handoff = 3 passed
+R7/R8 / target Phase16はR9実装結果documentの記録として保持。今回の前提資料更新ではfull backend suite green確認へ変換しない。
+```
+
+禁止:
+
+```text
+Phase16 target greenをfull backend suite greenと読む。
+P7-HOLD-004をR9で閉じた扱いにする。
+generatedをpublic display permissionと同一視する。
+Gate / Display / Grounding / Template / Toneを緩める。
+fixed commentText / case専用branchを追加する。
+adjacent public redをdaily_A target修復で閉じた扱いにする。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+```
+
+# 2026-06-13 差分追記: P7-HOLD-004 Phase16 Composer Red Classification R0〜R9必読索引
+
+P7-HOLD-004 / full backend suite切り分け / Phase16 Complete Composer candidate boundaryを触る場合、次を先に読む。
+
+## 実装結果doc
+
+| path | 何を拘束するか |
+|---|---|
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Phase16ComposerRedClassification_ImplementationResult_20260613.md` | R0〜R9の実装結果、target green、adjacent public red、full backend suite未確認、P7/P8/release false維持を固定する。 |
+
+## P7-HOLD-004 classification / matrix / contract material
+
+| path | 何を拘束するか |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_phase16_composer_classification.py` | Phase16 Complete Composer redをbody-free classified materialとして扱う。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_path_matrix.py` | direct / conversation / public daily / adjacent public pathを混ぜない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_r4_contract_material.py` | stale contract replacement候補を保持するが、現行R3判断ではR4-Aを選ぶ。 |
+
+## 修正owner
+
+| path | 読むべき理由 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_complete_composer_client.py` | candidate generation と tone/display readiness の境界修復owner。Gate緩和・public表示許可ではない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | HOLD-004 Phase16 materialをP7 hold matrixへ接続するowner。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | HOLD-004 classified red / implementation result doc参照 / full suite green falseを保持するowner。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | release handoffへHOLD-004 follow-upを渡しつつrelease_allowed=falseを維持するowner。 |
+
+## regression test
+
+```text
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_phase16_composer_classification_20260613.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_path_matrix_decision_rule_20260613.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_20260613.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_r4_candidate_boundary_replacement_20260613.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_r5_r6_metadata_adjacent_boundary_20260613.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_r7_r8_validation_release_handoff_20260613.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py
+```
+
+この索引で禁止する誤読:
+
+```text
+Phase16 target green = full backend suite green
+HOLD-004 registered = HOLD-004 closed
+R9 doc added = release ready
+candidate generated = public display allowed
+R4-A repair = Gate relaxation
+adjacent public red = daily_A修復でclosed
 ```
 

@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-12"
+revision_date: "2026-06-13"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(197).zip"
-  Cocolon: "Cocolon_8(17).zip"
-  mashos-api: "mashos-api_8(48).zip"
+  premise: "Cocolon_前提資料(212).zip"
+  Cocolon: "Cocolon(230).zip"
+  mashos-api: "mashos-api_7(55).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 919
-  total: 1136
+  mashos-api: 1005
+  total: 1222
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1136
+  included_files_total: 1222
   included_files_cocolon: 217
-  included_files_mashos_api: 919
+  included_files_mashos_api: 1005
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -35,6 +35,16 @@ coverage:
   product_readfeel_p3_baseline_full_01_02_regeneration: false
   product_readfeel_p4_family_product_tuning_p4_0_10_reflected: true
   product_readfeel_p4_family_product_tuning_full_01_02_regeneration: false
+  p7_product_quality_runner_p7_0_9_reflected: true
+  p7_red_hold_closure_r0_r12_reflected: true
+  p7_red003_body_free_leak_guard_r13_reflected: true
+  p7_hold004_phase16_composer_red_classification_r0_r9_reflected: true
+  p7_hold004_phase16_composer_red_classification_r0_r9_added_files: 11
+  p7_hold004_phase16_composer_red_classification_r0_r9_changed_files: 4
+  p7_hold004_phase16_composer_target_green_confirmed: true
+  p7_hold004_phase16_full_backend_suite_green_confirmed: false
+  p7_hold004_phase16_full_01_02_regeneration: false
+  p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
 ---
 
 # 1. 1行定義
@@ -1782,4 +1792,278 @@ Structure Insight P6 internal lane:
 - daily / low_information / positive_only / safety adjacent / target judgement / evidence不足は初期P6 visibleへ接続しない。
 - P6-8 / P6-9はP7へ渡すbody-free materialを作るが、release_allowedやpublic release flagを立てない。
 - raw input / comment_text body / candidate body / surface body / reviewer free text / terminal outputはpublic meta、scorecard、handoff summaryへ入れない。
+
+
+# 2026-06-12 差分追記: 国家システム上のEmlisAI P7 Product Quality Runner境界
+
+P7 Product Quality Runner / Long-run Product Gate P7-0〜P7-9は、国家システムのproduction ingress / save API / dispatch / DB write path / public response top-level shape / RN表示条件を増やさない。保存直後EmlisAI応答の既存 `passed + comment_text` 契約を維持し、その後続のbackend internal測定laneとして、body-free scorecard、ratings-only QA material、long-run candidate material、release decision handoff materialを作る。
+
+国家システム上のflowは次で読む。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> existing Gate chain
+  -> passed + comment_text の場合だけ public input_feedback / RN display
+
+P7 Product Quality Runner internal lane:
+  P5/P6 body-free handoff
+    -> handoff normalizer / red ledger
+    -> module inventory / runner plan
+    -> ProductQualityEvent bridge / scorecard row
+    -> family + sequence + history-line matrix
+    -> ratings-only Blind QA material
+    -> Long-run Product Gate candidate material
+    -> Release Decision handoff material
+    -> validation / regression matrix
+```
+
+国家システム上の注意:
+
+- P7 scorecard / matrix / handoff materialは、public API payloadではなくbackend internal materialとして読む。
+- P7-RED-001〜003、P7-HOLD-001〜004はgreen化せず、release blocker / review required / unverified materialとして残す。
+- Product Pass候補、Long-run candidate、Release Decision input materialは、Release Readyや`release_allowed=true`へ変換しない。
+- heavy E2E timeout / hangは、国家システムの正常処理確認ではなく、P7-RED-003として隔離する。
+- raw input、comment_text body、candidate body、surface body、reviewer free textはscorecard / handoff / public metaへ入れない。
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+release_allowed true化なし
+Product Pass / Long-run candidate -> Release Ready変換なし
+```
+
+
+
+# 2026-06-13 差分追記: 国家システム上のEmlisAI P7 RED・HOLD Closure境界
+
+P7 RED・HOLD Closure R0〜R12は、国家システムのproduction ingress / save API / dispatch / DB write path / public response top-level shape / RN表示条件を増やさない。保存直後EmlisAI応答の既存 `passed + comment_text` 契約を維持し、backend internal laneでPositive Recovery strict relation/fail-closed境界とP7 RED/HOLD materialを整理する。
+
+国家システム上の追加読みは次。
+
+```text
+Input Gate -> Save API -> EmlisAI immediate reply runtime
+  -> relation surface contract / Reader Gate / Gate Recovery / Display Gate
+  -> strict relation missingならfail-closed
+  -> passed + comment_text の場合だけ public input_feedback / RN display
+
+P7 RED・HOLD Closure internal lane:
+  Positive Recovery RED closure
+    -> strict relation trace / contract split / Gate Recovery strict repair / fail-closed
+  P7 RED/HOLD material
+    -> timeout isolation / red classification / human QA boundary / P6 visible boundary
+    -> real-device + full backend HOLD matrix
+    -> release handoff / validation final alignment
+```
+
+国家システム上の状態は次で固定する。
+
+```text
+P7-RED-001: CLOSED
+P7-RED-002: CLOSED
+P7-RED-003: CLASSIFIED / TIMEOUT_ISOLATED / 未解消（R0〜R12時点。R13後はCLOSED / body_free_guard_repaired / PASSED_ISOLATEDへ更新済み。最新状態は下記R13追記を参照）
+P7-HOLD-001〜004: 未解消
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル変更なし
+RN表示条件変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Product Pass / Long-run candidate -> Release Ready変換なし
+full backend suite green未確認
+実機submit / modal読感未確認
+```
+
+
+# 2026-06-13 差分追記: 国家システム上のEmlisAI P7-RED-003 Body-Free Leak Guard Repair R13境界
+
+P7-RED-003 Body-Free Leak Guard Repair R13は、国家システムのproduction ingress / save / dispatch / worker / publish / read / RN displayを変更しない。変更されたのは、P7 Product Quality Runner内部の測定material、RED classification、validation matrix、release handoffである。
+
+国家システム上の読み方は次で固定する。
+
+```text
+/emotion/submit production route
+  -> 既存EmlisAI reply / public feedback contract
+  -> 既存RN visible contract
+  -> P7 Product Quality Runner internal measurement lane
+       -> Product Quality Connection scorecard
+       -> body-free leak guard
+       -> P7-RED-003 observation / classification
+       -> validation matrix
+       -> release handoff
+  -> release_allowed=false / p7_complete=false / p8_start_allowed=false
+```
+
+R13で変わったのは、Product Quality Connection E2Eが `current_input` 文字列のglobal substring assertionでtimeout化していた状態を、body-free構造検査へ置き換えたことです。raw input / comment_text body / candidate body / surface bodyをpublic metaやrelease materialへ出してよいという意味ではない。
+
+国家システム上で変えないもの:
+
+```text
+RN production UI
+RN表示タイトル `Emlisの観測`
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty`
+/emotion/submit route
+request key
+public response top-level key
+DB physical schema
+DB write path
+public metaのraw body-free境界
+```
+
+R13後のP7状態:
+
+```text
+P7-RED-003: CLOSED / body_free_guard_repaired / PASSED_ISOLATED
+P7-HOLD-001〜004: 未解消
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+したがって、R13は国家システムの表示・保存・API契約の進行ではなく、P7 internal measurement laneの信頼性修復として読む。
+
+# 2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification national system boundary
+
+P7-HOLD-004 Phase16 Composer Red Classification R0〜R9は、国家システムのproduction ingress / save / dispatch / read / RN displayを変更しない。変更されたのは、P7 Product Quality Runner内部のHOLD-004分類・測定・handoff laneである。
+
+国家システム上の読み方は次で固定する。
+
+```text
+/emotion/submit production route
+  -> 既存EmlisAI reply / public feedback contract
+  -> 既存RN visible contract
+  -> P7 Product Quality Runner internal measurement lane
+       -> P7-HOLD-004 Phase16 Complete Composer classification
+       -> direct / conversation / public / adjacent path matrix
+       -> candidate generation before display gate repair summary
+       -> metadata summary / adjacent public red registration
+       -> P7 hold matrix / validation matrix / release handoff
+       -> R9 implementation result document reference
+  -> release_allowed=false / p7_complete=false / p8_start_allowed=false
+```
+
+R4-Aで変わったのは、two-stage surfaceが構造的に成立している場合に、tone/display blockerだけでComplete Composer candidate generation自体を`unavailable`に落とさない境界である。これはpublic表示許可ではない。public display / tone / grounding / template Gateを緩めたものでもない。
+
+国家システム上で変えないもの:
+
+```text
+RN production UI
+RN表示タイトル `Emlisの観測`
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty`
+/emotion/submit route
+request key
+public response top-level key
+DB physical schema
+DB write path
+public metaのraw body-free境界
+```
+
+R0〜R9後のP7状態:
+
+```text
+P7-HOLD-004: 未解消 / Phase16 candidate boundary classified and target repaired / full backend suite green未確認
+Phase16 target Complete Composer: 2 passed
+adjacent public red: 別登録のまま保持
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+したがって、R0〜R9は国家システムの表示・保存・API契約の進行ではなく、P7 internal measurement laneのHOLD-004切り分け・最小修復・handoff連携として読む。
+
+
+# 2026-06-13 差分追記: 国家システム上のEmlisAI P7-HOLD-004 Phase16 Composer Red Classification境界
+
+P7-HOLD-004 Phase16 Composer Red Classification R0〜R9は、国家システムのproduction ingress / save / dispatch / worker / publish / read / RN displayを変更しない。変更されたのは、P7 Product Quality Runner内部のComplete Composer candidate boundary測定、hold matrix、validation matrix、release handoffである。
+
+国家システム上の読み方:
+
+```text
+/emotion/submit public route
+  -> existing save / Emlis public feedback path unchanged
+  -> P7 Product Quality Runner internal measurement lane
+       -> Phase16 Complete Composer candidate boundary classification
+       -> path matrix / decision rule
+       -> body-free metadata summary
+       -> adjacent public red registration
+       -> P7 hold / validation / release handoff
+```
+
+この差分により、Phase16 Complete Composer direct/conversation pathのtarget redは実装結果document上でgreen確認されている。ただし、これは国家システムのpublic route成功条件を変えたものではなく、full backend suite greenでもない。
+
+維持する境界:
+
+```text
+RN表示条件: 変更なし
+API route: 変更なし
+request key: 変更なし
+public response top-level key: 変更なし
+DB write path: 変更なし
+Gate緩和: なし
+fixed commentText: なし
+case専用branch: なし
+```
+
+P7状態は次のまま読む。
+
+```text
+P7-HOLD-004: unresolved / Phase16 candidate boundary registered / full backend suite green unconfirmed
+positive_public_fixture_shape_boundary: adjacent public redとして別保持
+P7 complete: false
+P8 start allowed: false
+release_allowed: false
+```
+
+# 2026-06-13 差分追記: 国家システム上のEmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9境界
+
+P7-HOLD-004 Phase16 Composer Red Classification R0〜R9は、国家システムのproduction ingress / save / dispatch / worker / publish / read / RN displayを変更しません。変更されたのは、Complete Composer内部のcandidate boundaryと、それをP7 internal matrix / validation / release handoffへ渡す材料です。
+
+国家システム上の読み方は次で固定します。
+
+```text
+/emotion/submit production route
+  -> 既存EmlisAI reply / public feedback contract
+  -> 既存RN visible contract
+  -> P7 Product Quality Runner internal measurement lane
+       -> Phase16 Complete Composer classification
+       -> path matrix / decision rule
+       -> candidate generation vs public display permission boundary
+       -> metadata summary / adjacent public red separation
+       -> P7 hold matrix / validation matrix / release handoff
+  -> release_allowed=false / p7_complete=false / p8_start_allowed=false
+```
+
+今回のR4-A修復は、`generated` をpublic表示許可にする修正ではありません。構造的に成立しているtwo-stage surfaceを、tone/display blockerだけでcandidate generation前に `unavailable` へ落とさないように分離した修正です。public表示は既存Gateで別に判断します。
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText追加なし
+case専用branch追加なし
+full backend suite green未確認
+P7-HOLD-004 closeなし
+release_allowed true化なし
+```
+
+P7-HOLD-004は、国家システム上では「full backend suite未確認のHOLD」から、「Phase16 candidate boundary修復結果とadjacent public redを分けて持つHOLD」へ進んだ状態として扱います。
 
