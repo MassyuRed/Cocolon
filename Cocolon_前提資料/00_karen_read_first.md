@@ -7,18 +7,18 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(214).zip"
-  Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_6(60).zip"
+  premise: "Cocolon_前提資料(216).zip"
+  Cocolon: "Cocolon(232).zip"
+  mashos-api: "mashos-api_9(38).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1008
-  total: 1225
+  mashos-api: 1012
+  total: 1229
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1225
-  included_in_overall_structure: 1225
-  included_in_national_system: 1225
+  total_files: 1229
+  included_in_overall_structure: 1229
+  included_in_national_system: 1229
   excluded_from_main_body: 0
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
@@ -97,6 +97,16 @@ coverage:
   p7_hold004_positive_public_shape_target_green_confirmed: true
   p7_hold004_positive_public_shape_public_e2e_labelled_two_stage_confirmed: true
   p7_hold004_positive_public_shape_full_backend_suite_green_confirmed: false
+  p7_hold004_step5_candidate_gate_preservation_r0_r12_reflected: true
+  p7_hold004_step5_candidate_gate_preservation_added_files: 4
+  p7_hold004_step5_candidate_gate_preservation_changed_files: 8
+  p7_hold004_step5_candidate_gate_preservation_removed_files: 0
+  p7_hold004_step5_candidate_gate_preservation_target_subset_green_confirmed: true
+  p7_hold004_step5_candidate_gate_preservation_full_backend_collect_only_count: 2673
+  p7_hold004_step5_candidate_gate_preservation_full_backend_maxfail1_attempted_incomplete: true
+  p7_hold004_step5_candidate_gate_preservation_full_backend_suite_green_confirmed: false
+  p7_hold004_step5_candidate_gate_preservation_next_red_captured: false
+  p7_hold004_step5_candidate_gate_preservation_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_complete: false
@@ -179,11 +189,11 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004 Positive Public Shape Boundary R0〜R8差分はbackend internal / test / docs中心であり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
-| `mashos-api_6(60).zip` | 1008 | backend / API / worker / tests。P7-HOLD-004 Phase16 Composer Red Classification後続として、Positive Public Shape Boundary R0〜R8実装を含む。 |
-| total | 1225 | P7-HOLD-004 positive public shape target green、safety triage expression-difficulty false positive修復、matrix / validation / release handoff / implementation result doc反映後の前提資料差分更新対象snapshot。 |
+| `Cocolon(232).zip` | 217 | RNアプリ本体。今回のStep5 Candidate Gate Preservation R0〜R12差分はbackend internal / tests / docs中心であり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
+| `mashos-api_9(38).zip` | 1012 | backend / API / worker / tests。P7-HOLD-004 Phase16 Composer / Positive Public Shape Boundary後続として、Step5 Candidate Gate Preservation Red Classification R0〜R12実装結果docまでを含む。 |
+| total | 1229 | P7-HOLD-004 Step5 display-binding red分類、Display binding trace整合、stale expectation置換、mixed HOLD保持、matrix / validation / release handoff / implementation result doc反映後の前提資料差分更新対象snapshot。 |
 
-`mashos-api_6(60).zip` を今回の最新実ファイルとして受領し、前回P7-HOLD-004 Phase16基準 `mashos-api(144).zip` からのPositive Public Shape Boundary R0〜R8差分として追加3件・変更4件・削除0件を確認しました。Cocolon側の新規zipはこの回で受領していないため、既存RN契約確認基準として `Cocolon(230).zip` を維持し、今回差分はbackend internal / tests / docs onlyとして読む。
+`mashos-api_9(38).zip` を今回の最新実ファイルとして受領し、前提資料上の前回backend基準 `mashos-api(145).zip` からのStep5 Candidate Gate Preservation R0〜R12差分として追加4件・変更8件・削除0件を確認しました。Cocolon側は今回差分対象外として `Cocolon(232).zip` を参照し、今回差分はbackend internal / tests / docs onlyとして読む。
 
 # 2026-06-14 追補: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8実装反映
 
@@ -2222,3 +2232,92 @@ P7 complete / P8 start allowed / release_allowedをtrueにする。
 RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
 raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
 ```
+
+# 2026-06-14 追補: EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation Red Classification R0〜R12実装反映
+
+最新実ファイル `mashos-api_9(38).zip` では、P7-HOLD-004 full backend suite green未確認の中で次に見えていた Complete Initial Step5 Candidate Generation Path の赤を、R0〜R12でbody-free分類・最小修復・target/subset検証・implementation result doc化している。
+
+これはP7-HOLD-004を閉じる差分ではない。Step5対象の旧fail-closed期待は、R4-Cで「public表示禁止」ではなく、**Gate保存・Display binding consistency・public assignment consistency** を見る契約へ置換された。R4-Dでは mixed contract conflict をHOLD materialとして保持し、full backend suite green未確認、P7 complete false、P8 start allowed false、release_allowed falseを維持する。
+
+R0〜R12後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Step5 display-binding contract classification connected
+red_id: P7-HOLD004-RED-STEP5-DISPLAY-BINDING-CONTRACT-CONSISTENCY
+classification: mixed_contract_conflict_preserved_as_hold_material
+R4-B: display binding trace / expected count alignment applied
+R4-C: stale fail-closed expectation replaced by gate preservation and binding consistency
+R4-D: mixed contract conflict held as HOLD material
+R5/R6: Step5 meta extension and P7-HOLD-004 material connection reflected
+R7/R8 target/subset: green confirmed in implementation result
+R11 full backend maxfail=1: attempted but incomplete in current environment
+full_backend_suite_green_confirmed: false
+next_red_captured: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R0〜R12で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R0/R1 | Step5の現行赤をbody-free baselineとして固定し、fail-closed期待とpublic recovery期待の衝突をcontract pair matrixへ分離する。 |
+| R2/R3 | `binding_missing=true` かつ `display.passed=true` を無説明で許さず、Display Binding Contract Decision Ruleとowner layer判定を固定する。 |
+| R4-A/R4-B | binding missing without exceptionのfail-closed理由を保持しつつ、今回のpublic recovery正本ではdisplay expected count sourceを整合させ、`binding_missing=false / passed=true` へ直す。 |
+| R4-C | 古い「Step5はpublic表示してはいけない」期待を、Gate保存・Display binding consistency・public assignment consistency・body leak absenceの期待へ置換する。 |
+| R4-D | R4-A/B/Cの混在を消さず、mixed contract conflictをP7-HOLD-004 materialとして保持する。 |
+| R5/R6 | Step5 diagnostic / multi_perspective metaにcandidate path、Gate保存、Display binding consistency、public assignment consistencyをbody-freeで出し、hold matrix / validation matrix / release handoffへ接続する。 |
+| R7/R8 | target testとsubset validationで、旧fail-closed期待の置換とHOLD material保持が両立していることを確認する。 |
+| R9/R10 | P7 subset / RN contract確認段階ではsource変更不要。RN表示契約は変更しない。 |
+| R11/R12 | full backend suite maxfail=1を再実行したが、この環境では完走結果・次赤・greenを取得できず、implementation result docへ未確認として記録する。 |
+
+確認済みとして扱う範囲:
+
+```text
+latest実ファイルmarker確認:
+  R0/R1 red id, R4C, R4D, R5 helper, R6 helper, display_sentence_binding_missing, R7/R8 target test, R12 doc present
+
+前提資料更新時spot確認:
+  py_compile relevant Step5 / P7-HOLD-004 files: ok
+  tests/test_emlis_ai_p7_hold004_step5_candidate_gate_classification_20260614.py
+  tests/test_emlis_ai_p7_hold004_step5_r7_r8_target_subset_validation_20260614.py
+    => 22 passed
+
+R12 implementation result doc内記録:
+  R8 subset: 7 passed
+  full backend suite collect-only: 2673 tests collected / exit_status=0
+  full backend suite maxfail=1: attempted / completed=false / next_red_captured=false
+```
+
+未確認として残す範囲:
+
+```text
+full backend suite green
+full backend suite maxfail=1の完走結果
+Step5赤が閉じた後の次赤
+full backend suiteの全赤一覧
+P7-HOLD-004 closure根拠
+実機submit / modal読感
+P5 human QA
+P6 visible expansion boundaryの人間読感
+P8へ進める根拠
+```
+
+R0〜R12後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R0〜R8 target greenをfull backend suite greenと読む。
+R8 subset greenをP7-HOLD-004 closureと読む。
+collect-only成功をfull backend suite greenと読む。
+R11 maxfail=1 attemptedを次赤取得済みと読む。
+R12 implementation result doc追加をrelease readyと読む。
+R4-C stale expectation replacementをtest緩和だけのgreen化と読む。
+R4-B binding trace alignmentをDisplay Gate緩和と読む。
+public comment_text presentだけを読めている証明にする。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
+```
+

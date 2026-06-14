@@ -7,13 +7,13 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(214).zip"
-  Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_6(60).zip"
+  premise: "Cocolon_前提資料(216).zip"
+  Cocolon: "Cocolon(232).zip"
+  mashos-api: "mashos-api_9(38).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1008
-  total: 1225
+  mashos-api: 1012
+  total: 1229
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -23,11 +23,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004 Positive Public Shape Boundary差分でproduction RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_6(60).zip` | 1008 | P7-HOLD-004 Phase16 Composer Red Classification後続として、Positive Public Shape Boundary R0〜R8成果物を含む。 |
-| total | 1225 | expression-difficulty false positive修復、positive public E2E labelled two-stage復帰、P7 matrix / validation / release handoff、implementation result document反映後のcoverage対象。 |
+| `Cocolon(232).zip` | 217 | Cocolon側は今回差分対象外。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なしとして読む。 |
+| `mashos-api_9(38).zip` | 1012 | P7-HOLD-004 Step5 Candidate Gate Preservation Red Classification R0〜R12成果物を含む最新backend。 |
+| total | 1229 | Step5 display-binding red classification、target/subset validation、implementation result document、full backend suite未確認保持までのcoverage対象。 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-14時点の最新正本は末尾の `2026-06-14 差分追記: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はPositive Public Shape target greenを保持する段階まで進んだが、full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-14時点の最新正本は末尾の `2026-06-14 差分追記: EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はPositive Public Shape target greenの後に、Step5 display-binding red classification / target subset green / implementation result doc作成まで進んだが、full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -5214,4 +5214,77 @@ tone_guard削除・Gate緩和・fixed commentText追加・case専用branch追加
 P7 complete / P8 start allowed / release_allowedをtrueにする。
 RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
 raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
+```
+
+# 2026-06-14 差分追記: EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12 latest snapshot diff
+
+この差分は、前提資料上で未反映だった P7-HOLD-004 Step5 Candidate Gate Preservation Red Classification R0〜R12 を、最新実ファイル `mashos-api_9(38).zip` から確認して追記するものです。Cocolon側は今回差分対象外のため、RN UI / RN表示条件 / public response top-level key は変更なしとして扱い、backend差分のみを更新します。
+
+比較上、前提資料更新時に照合可能だった直前backend基準 `mashos-api(145).zip` から最新 `mashos-api_9(38).zip` へのStep5関連差分は、追加4件・変更8件・削除0件です。
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260614_p7_hold004_step5_candidate_gate_preservation_r0_r12.csv
+diff_inventory_sha256: dd2bfbdfd9e165201629777aa5586a19307979ab8873b512ced437ec565938e1
+```
+
+## 追加ファイル
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Step5CandidateGatePreservationRedClassification_ImplementationResult_20260614.md` | R12 implementation result document。R0〜R12、target/subset validation、full backend maxfail未完走、次赤未取得、false release/P7/P8を記録する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_step5_candidate_gate_classification.py` | R0〜R6のStep5 body-free classification / conflict matrix / decision rule / owner layer / R4C/R4D / R5/R6 helper material。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_hold004_step5_candidate_gate_classification_20260614.py` | R0〜R6 classification materialの回帰test。binding missing + passed、stale expectation、mixed HOLD、body-free境界を固定する。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_hold004_step5_r7_r8_target_subset_validation_20260614.py` | R7/R8 target subset validation。Display binding consistency、public assignment consistency、HOLD material保持、body leak absenceを固定する。 |
+
+## 変更ファイル
+
+| file | 変更の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | `display_sentence_binding_missing` をfail-closed境界として扱い、binding_missing without exception とcomment_text許可の関係を明示する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py` | Display expected binding count sourceを実際のdisplayable / accepted sentence binding rowへ揃え、passed display traceが`binding_missing=false`で整合するようにする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step5 diagnostic / multi_perspective metaに candidate path / Gate preservation / Display binding consistency / public assignment consistency をbody-freeで追加する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | Step5 display-binding redとmixed HOLD materialをP7-HOLD-004へ保持する。HOLD closeへは昇格しない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | Step5 material / validation row / implementation result doc参照を持つ。full backend suite green、P7 complete、release_allowedはfalse維持。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | Step5 materialとR12 doc refをrelease handoffへ渡すが、release_allowed=falseを維持する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py` | 古い「public表示禁止」期待を、Gate保存・Display binding consistency・public assignment consistency・body-free boundaryへ置換する。 |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py` | Step7 integration側の旧fail-closed期待を、Display binding/public assignment contract consistencyへ置換する。 |
+
+## 確認結果
+
+```text
+前提資料更新時spot確認:
+  latest marker presence: confirmed
+  py_compile relevant Step5 / P7-HOLD-004 files: ok
+  R0〜R8 classification / target tests: 22 passed
+
+R12 implementation result doc内記録:
+  R8 subset: 7 passed
+  full backend suite collect-only: 2673 tests collected / exit_status=0
+  full backend suite maxfail=1: attempted / completed=false / next_red_captured=false
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_9(38).zip` へ更新し、P7-HOLD-004 Step5 R0〜R12の読み方を追記。 |
+| `01_cocolon_overall_structure.md` | Step5 candidate gate preservationをP7 internal laneとして追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさないbackend internal差分として追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | Display binding consistency / public assignment consistency / stale expectation replacement / full suite未確認のcontractを追記。 |
+| `05_cocolon_rule_file_index.md` | R0〜R12で追加・修正されたservice/test/docの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、coverage、追加path、境界維持、diff csv参照を反映。 |
+| `cocolon_local_file_inventory_diff_20260614_p7_hold004_step5_candidate_gate_preservation_r0_r12.csv` | 最新backend差分のadded/changed pathとsha256を記録。 |
+
+## 禁止する読み方
+
+```text
+R0〜R8 target green = full backend suite green
+R8 subset green = P7-HOLD-004 closed
+collect-only = full backend suite green
+R11 maxfail attempted = 次赤取得済み
+R4-C stale expectation replacement = test緩和だけのgreen化
+R4-B display binding trace repair = Gate緩和
+public comment_text present = 読めている証明
+R12 doc追加 = release ready
 ```

@@ -3682,3 +3682,59 @@ tests/test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py
 ```
 
 このtestは、R0/R1 classification、R2 safety triage false positive repair、R3 input material bundle route、R4 public E2E labelled two-stage restoration、R5 true safety boundary、R6 matrix/handoff、R8 doc/handoff参照を同じbody-free boundaryで確認するものです。RN表示条件やAPI response shapeを変更するtestではありません。
+
+# 2026-06-14 差分追記: P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12 contract / boundary
+
+今回のP7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12で追加・修正されたcontract境界は次です。
+
+| contract | 境界 |
+|---|---|
+| Step5 candidate path | candidate生成の確認とpublic表示許可を同一視しない。 |
+| Existing Gate preservation | Reader / Grounding / Template / Display Gateが評価されたことをbody-freeに確認する。 |
+| Display Binding Contract | `binding_missing=true` かつ `display.passed=true` は、valid exceptionまたはtrace repairなしにconsistent扱いしない。 |
+| Display expected count | public recovery正本でpassedする場合、Displayが実際に扱えるbinding単位にexpected count sourceを合わせる。 |
+| Public assignment | `public_comment_text_present=true` は、Display binding consistencyとpublic assignment consistencyの両方が必要。 |
+| Stale expectation replacement | 古いpublic-empty fail-closed期待は、Gate保存・binding consistency・body leak absenceへ置換する。 |
+| Mixed conflict HOLD | stale expectationを置換しても、R4-D mixed contract conflictをHOLD materialとして保持する。 |
+| P7-HOLD-004 non-closure | target/subset green、collect-only、R12 doc追加をHOLD closureへ変換しない。 |
+
+以下は、どれもP7-HOLD-004 closure条件ではありません。
+
+```text
+R0〜R8 classification / target tests 22 passed
+R8 subset 7 passed
+full backend suite collect-only 2673 collected
+R11 maxfail=1 attempted
+R12 implementation result doc created
+```
+
+closureに必要だが未確認のもの:
+
+```text
+full backend suite maxfail=1 completed result
+Step5赤後の次赤取得
+full backend suite全体green
+P7-HOLD-004 closure根拠
+```
+
+今回追加されたP7-HOLD-004 Step5 regression入口は次です。
+
+```text
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_step5_candidate_gate_classification_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_step5_r7_r8_target_subset_validation_20260614.py
+mashos-api/ai/tests/test_emlis_ai_complete_initial_entry_route.py::test_step5_candidate_generation_path_keeps_existing_gates_fail_closed
+mashos-api/ai/tests/test_emlis_ai_phase18_complete_initial_candidate_path.py::test_phase18_3_complete_initial_generates_candidate_before_display_gate_without_public_body_leak
+mashos-api/ai/tests/test_emlis_ai_complete_initial_step7_integration.py
+```
+
+禁止:
+
+```text
+Display binding trace repairをGate緩和と読む。
+R4-C stale expectation replacementをtestを甘くしただけと読む。
+public_comment_text_presentだけでpublic assignment contractを満たしたと読む。
+full backend collect-onlyをfull backend greenと読む。
+R11 incompleteを次赤取得済みと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+```
+

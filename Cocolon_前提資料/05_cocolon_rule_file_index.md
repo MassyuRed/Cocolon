@@ -1475,3 +1475,47 @@ positive_change_after_work_streaming専用branchやfixed commentTextで通す。
 R4-B positive transition material ruleを、不要確認後に追加する。
 RN表示条件、API route、request key、public response top-level key、DB physical schemaを増やす。
 ```
+
+# 2026-06-14 差分追記: EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12 rule / test index
+
+EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation / Display Binding Contract Consistencyを触る場合は、R0〜R12のclassification / display binding decision / stale expectation replacement / mixed HOLD material / Step5 meta / validation・release handoff / implementation result documentを同時確認する。R0〜R12はP7-HOLD-004を閉じる工程ではなく、Step5赤を閉じられる範囲と残HOLDへ分けるbackend internal-only差分である。
+
+| 領域 | 必ず確認するfile | 触る時 |
+|---|---|---|
+| R0〜R6 classification material | `emlis_ai_p7_hold004_step5_candidate_gate_classification.py`, `test_emlis_ai_p7_hold004_step5_candidate_gate_classification_20260614.py` | Step5赤ID、conflict matrix、Decision Rule、owner layer、R4C/R4D、R5/R6 material helperを触る時。 |
+| Display binding decision | `emlis_ai_display_gate.py` | `display_sentence_binding_missing`、binding_missing without exception、comment_text allowed / blocked を触る時。 |
+| Display expected count source | `emlis_ai_limited_composer_extension_baseline.py` | Display binding trace / expected count source / `binding_missing=false` alignmentを触る時。 |
+| Step5 diagnostic meta | `emlis_ai_reply_service.py` | candidate path、Gate保存、Display binding consistency、public assignment consistency のbody-free metaを触る時。 |
+| P7 hold matrix | `emlis_ai_p7_hold_matrix.py` | Step5 display-binding redとR4D mixed HOLD materialをP7-HOLD-004に残す時。 |
+| P7 validation matrix | `emlis_ai_p7_validation_matrix.py` | Step5 display-binding material、validation row、full suite green false、P7 complete falseを触る時。 |
+| release handoff | `emlis_ai_p7_release_handoff.py` | Step5 implementation result doc ref、release blockers、release_allowed=falseを触る時。 |
+| stale expectation replacement | `test_emlis_ai_complete_initial_entry_route.py`, `test_emlis_ai_complete_initial_step7_integration.py` | 古いpublic-empty fail-closed期待をGate保存 / binding consistency / body-free boundaryへ置換した契約を触る時。 |
+| R7/R8 target subset | `test_emlis_ai_p7_hold004_step5_r7_r8_target_subset_validation_20260614.py` | target/subset validation、body leak absence、HOLD material retentionを確認する時。 |
+| R12 result doc | `docs/Cocolon_EmlisAI_P7_HOLD004_Step5CandidateGatePreservationRedClassification_ImplementationResult_20260614.md` | R0〜R12の実装結果、full backend maxfail未完走、次赤未取得、non-closure claimを確認する時。 |
+
+確認済みvalidation:
+
+```text
+前提資料更新時spot確認:
+  py_compile relevant Step5 / P7-HOLD-004 files: ok
+  R0〜R8 classification / target tests: 22 passed
+
+R12 implementation result doc内記録:
+  R8 subset: 7 passed
+  full backend suite collect-only: 2673 tests collected / exit_status=0
+  full backend suite maxfail=1: attempted / completed=false / next_red_captured=false
+```
+
+禁止:
+
+```text
+Step5 target greenをfull backend suite greenと読む。
+R4-C stale expectation replacementをtest期待の単純緩和と読む。
+Display binding trace alignmentをGate緩和と読む。
+public_comment_text_presentだけを表示許可根拠にする。
+R12 doc追加をP7-HOLD-004 closureと読む。
+collect-only成功をfull backend suite greenと読む。
+full backend maxfail attemptedを次赤取得済みと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+```
+

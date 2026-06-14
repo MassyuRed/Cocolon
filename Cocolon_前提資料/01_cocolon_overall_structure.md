@@ -7,18 +7,18 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(214).zip"
-  Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_6(60).zip"
+  premise: "Cocolon_前提資料(216).zip"
+  Cocolon: "Cocolon(232).zip"
+  mashos-api: "mashos-api_9(38).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1008
-  total: 1225
+  mashos-api: 1012
+  total: 1229
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1225
+  included_files_total: 1229
   included_files_cocolon: 217
-  included_files_mashos_api: 1008
+  included_files_mashos_api: 1012
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -51,6 +51,13 @@ coverage:
   p7_hold004_positive_public_shape_target_green_confirmed: true
   p7_hold004_positive_public_shape_public_e2e_labelled_two_stage_confirmed: true
   p7_hold004_positive_public_shape_full_backend_suite_green_confirmed: false
+  p7_hold004_step5_candidate_gate_preservation_r0_r12_reflected: true
+  p7_hold004_step5_candidate_gate_preservation_added_files: 4
+  p7_hold004_step5_candidate_gate_preservation_changed_files: 8
+  p7_hold004_step5_candidate_gate_preservation_target_subset_green_confirmed: true
+  p7_hold004_step5_candidate_gate_preservation_full_backend_suite_green_confirmed: false
+  p7_hold004_step5_candidate_gate_preservation_next_red_captured: false
+  p7_hold004_step5_candidate_gate_preservation_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
@@ -2935,3 +2942,56 @@ R4-B positive transition material rule
 ```
 
 P7-HOLD-004は、Positive Public Shape targetがgreenになってもclosedではありません。full backend suite green、実機submit / modal読感、P5 human QA、P6 visible expansion boundaryが未確認のため、P7 complete / P8 start / release_allowedはfalseのまま扱います。
+
+# 2026-06-14 差分追記: EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12構造
+
+P7-HOLD-004 Step5 Candidate Gate Preservation Red Classification R0〜R12は、Cocolon全体構造上、EmlisAIのpublic表示経路そのものではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回の差分は、Complete Initial Step5 candidate generation pathで見えていた `display_observation_status == passed` まわりの赤を、candidate生成・Gate保存・Display binding consistency・public assignment consistencyへ分解する構造です。public表示を単独で止める修正でも、public表示を読めた証明へ昇格する修正でもありません。
+
+構造上の流れは次です。
+
+```text
+P7-HOLD-004 full backend suite red classification
+  -> Complete Initial Step5 Candidate Generation Path
+  -> Display Binding Contract Decision Rule
+  -> R4-B display binding trace / expected count alignment
+  -> R4-C stale fail-closed expectation replacement
+  -> R4-D mixed contract conflict HOLD material
+  -> R5 Step5 diagnostic meta extension
+  -> R6 P7-HOLD-004 material connection
+  -> R7/R8 target/subset validation
+  -> R11/R12 full backend maxfail attempted / implementation result doc
+```
+
+追加されたP7-HOLD-004 Step5 owner:
+
+| path | 構造上の役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_step5_candidate_gate_classification.py` | Step5 display-binding redをbody-freeに分類し、Decision Rule、owner layer、R4C/R4D、R5/R6 materialを持つ。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_hold004_step5_candidate_gate_classification_20260614.py` | R0〜R6のclassification / contract / body-free boundary regression。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_hold004_step5_r7_r8_target_subset_validation_20260614.py` | R7/R8 target subset validation。Step5契約置換とHOLD material保持を固定する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_Step5CandidateGatePreservationRedClassification_ImplementationResult_20260614.md` | R0〜R12の実装結果、full backend suite未確認、次赤未取得、non-closure境界を記録するdoc。 |
+
+更新された既存owner:
+
+| path | 読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_display_gate.py` | binding_missing without exceptionのfail-closed理由を保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_limited_composer_extension_baseline.py` | Display expected count sourceをdisplayable / accepted sentence binding rowへ合わせる。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | Step5 metaをcandidate生成・Gate保存・binding整合・public assignment整合に分ける。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | Step5 red / mixed HOLD materialをP7-HOLD-004へ保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | Step5 materialをvalidationへ接続し、full suite green falseを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | Step5 materialとR12 doc refをhandoffするがrelease_allowed=falseを維持する。 |
+
+R0〜R12後の構造上の結論:
+
+```text
+Step5 target/subset green != full backend suite green
+Step5 display-binding material connected != P7-HOLD-004 closed
+collect-only success != full backend suite green
+R11 maxfail attempted != next red captured
+public comment_text present != 読めている証明
+```
+
+P7-HOLD-004は、Step5 targetがgreenになってもclosedではありません。full backend suite green、maxfail=1完走結果、次赤、実機submit / modal読感、P5 human QAが未確認のため、P7 complete / P8 start / release_allowedはfalseのまま扱います。

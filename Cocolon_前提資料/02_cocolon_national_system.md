@@ -7,18 +7,18 @@ source_repositories:
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(214).zip"
-  Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_6(60).zip"
+  premise: "Cocolon_前提資料(216).zip"
+  Cocolon: "Cocolon(232).zip"
+  mashos-api: "mashos-api_9(38).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1008
-  total: 1225
+  mashos-api: 1012
+  total: 1229
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1225
+  included_files_total: 1229
   included_files_cocolon: 217
-  included_files_mashos_api: 1008
+  included_files_mashos_api: 1012
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -49,6 +49,13 @@ coverage:
   p7_hold004_positive_public_shape_target_green_confirmed: true
   p7_hold004_positive_public_shape_public_e2e_labelled_two_stage_confirmed: true
   p7_hold004_positive_public_shape_full_backend_suite_green_confirmed: false
+  p7_hold004_step5_candidate_gate_preservation_r0_r12_reflected: true
+  p7_hold004_step5_candidate_gate_preservation_added_files: 4
+  p7_hold004_step5_candidate_gate_preservation_changed_files: 8
+  p7_hold004_step5_candidate_gate_preservation_target_subset_green_confirmed: true
+  p7_hold004_step5_candidate_gate_preservation_full_backend_suite_green_confirmed: false
+  p7_hold004_step5_candidate_gate_preservation_next_red_captured: false
+  p7_hold004_step5_candidate_gate_preservation_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
@@ -2114,3 +2121,58 @@ release_allowed true化なし
 ```
 
 P7-HOLD-004は、国家システム上では「Phase16 candidate boundary修復結果とadjacent public redを分けて持つHOLD」から、「Positive Public Shape target greenをさらにbody-freeに保持するHOLD」へ進んだ状態として扱います。
+
+# 2026-06-14 差分追記: 国家システム上のEmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12境界
+
+P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12は、国家システムの production ingress / save / dispatch / worker / publish / read / RN display を変更しません。変更されたのは、EmlisAI reply生成後のStep5 diagnostic metaと、P7 internal matrix / validation / release handoffへ渡すbody-free materialです。
+
+国家システム上の位置づけは次です。
+
+```text
+/emotion/submit
+  -> emotion_submit_service / emlis_ai_reply_service
+  -> Complete Initial Step5 candidate path diagnostic
+  -> Display Gate / binding trace / public assignment contract
+  -> P7 Product Quality Runner internal material
+  -> hold matrix / validation matrix / release handoff
+  -> release_allowed=false / p7_complete=false / p8_start_allowed=false
+```
+
+この差分で変わらないもの:
+
+```text
+RN表示タイトル
+RN表示条件
+public response top-level key
+API route
+request key
+DB write path
+production save/publish/read flow
+fixed commentText
+case専用branch
+Gate緩和
+```
+
+この差分で国家システム上新しく読めるようになったもの:
+
+```text
+candidate_path_confirmed
+existing gate preservation
+Display binding contract consistency
+public assignment contract consistency
+mixed contract conflict HOLD material
+full backend suite green未確認
+next red未取得
+```
+
+Step5 exact target / R8 subsetがgreenでも、国家システム上のrelease判定は変わりません。
+
+```text
+P7-HOLD-004: unresolved / Step5 display-binding material connected / full backend suite green unconfirmed
+full backend suite collect-only: 2673 tests collected, but not green
+R11 maxfail=1: attempted, incomplete, next red not captured
+release_allowed: false
+p7_complete: false
+p8_start_allowed: false
+```
+
