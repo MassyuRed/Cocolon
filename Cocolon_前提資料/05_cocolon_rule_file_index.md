@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-13"
+revision_date: "2026-06-14"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1434,3 +1434,44 @@ R4-A repair = Gate relaxation
 adjacent public red = daily_A修復でclosed
 ```
 
+# 2026-06-14 差分追記: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8 rule / test index
+
+EmlisAI P7-HOLD-004 Positive Public Shape Boundaryを触る場合は、Phase16 Composer Red Classification R0〜R9に加えて、R0〜R8のpositive public shape / expression-difficulty / safety regression / matrix / handoff / implementation result documentを同時確認する。R0〜R8はP7-HOLD-004を閉じる工程ではなく、positive public targetをgreenにしつつfull backend suite未確認を残すbackend internal-only差分である。
+
+| 領域 | 確認するfile | 触る時の意味 |
+|---|---|---|
+| R0/R1 positive boundary material | `emlis_ai_p7_hold004_positive_public_shape_boundary.py`, `test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py` | positive public adjacent redをbody-freeに分類し、release/P8/P7 complete falseを固定する時。 |
+| R2 safety triage boundary | `emlis_ai_safety_triage.py` | expression difficultyとtrue self-denialを分け、emergency/support requiredを維持する時。 |
+| R3 material route | `emlis_ai_input_material_bundle.py`, `test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py` | positive inputが `safety_triage_required` に潰れずeligible materialとして扱われるか確認する時。 |
+| R4 public E2E | `test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py` | `/emotion/submit` public pathがlabelled two-stageへ戻り、self_denial candidateへ戻らないことを確認する時。 |
+| R5 safety regression | `emlis_ai_safety_triage.py`, `test_emlis_ai_safety_triage_response_contract.py`, `test_emlis_ai_public_surface_requirement_p1.py`, `test_emlis_ai_gate_recovery_public_candidate_builder_p5.py` | true self-denial / emergency / support requiredを通常観測へ戻していないか確認する時。 |
+| R6/R7 matrix / validation / release handoff | `emlis_ai_p7_hold_matrix.py`, `emlis_ai_p7_validation_matrix.py`, `emlis_ai_p7_release_handoff.py` | positive boundary target greenをP7 matrixへ渡しつつ、HOLD-004 close / full suite green / release_allowedをfalseに保つ時。 |
+| R8 implementation result | `docs/Cocolon_EmlisAI_P7_HOLD004_PositivePublicShapeBoundary_ImplementationResult_20260614.md` | R0〜R8実装結果、確認済み、未確認、doc path/ref、非release境界を確認する時。 |
+
+確認済みvalidation:
+
+```text
+R8実装結果doc内記録:
+  py_compile: passed
+  R0〜R8 target file including R4 public E2E: 24 passed, 1 warning
+  R0〜R8 target subset excluding R4 public E2E: 23 passed, 1 deselected
+  release / validation / handoff related subset: 36 passed, 1 deselected
+  R4 public E2E single target: 1 passed, 1 warning
+
+前提資料更新時spot確認:
+  py_compile: passed
+  tests/test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py -k 'not r4_emotion_submit': 23 passed, 1 deselected
+```
+
+禁止:
+
+```text
+positive public shape target greenをfull backend suite greenと読む。
+R8 doc追加をP7-HOLD-004 closureと読む。
+release handoff doc refをrelease_allowedの根拠にする。
+self-denial false positive修正をsafety gate relaxationと読む。
+true self-denial / emergency / support requiredを通常観測へ戻す。
+positive_change_after_work_streaming専用branchやfixed commentTextで通す。
+R4-B positive transition material ruleを、不要確認後に追加する。
+RN表示条件、API route、request key、public response top-level key、DB physical schemaを増やす。
+```

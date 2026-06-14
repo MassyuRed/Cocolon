@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-13"
+revision_date: "2026-06-14"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(212).zip"
+  premise: "Cocolon_前提資料(214).zip"
   Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_7(55).zip"
+  mashos-api: "mashos-api_6(60).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1005
-  total: 1222
+  mashos-api: 1008
+  total: 1225
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1222
+  included_files_total: 1225
   included_files_cocolon: 217
-  included_files_mashos_api: 1005
+  included_files_mashos_api: 1008
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -45,6 +45,13 @@ coverage:
   p7_hold004_phase16_composer_red_classification_r0_r9_changed_files: 4
   p7_hold004_phase16_composer_target_green_confirmed: true
   p7_hold004_phase16_full_backend_suite_green_confirmed: false
+  p7_hold004_positive_public_shape_boundary_r0_r8_reflected: true
+  p7_hold004_positive_public_shape_boundary_r0_r8_added_files: 3
+  p7_hold004_positive_public_shape_boundary_r0_r8_changed_files: 4
+  p7_hold004_positive_public_shape_target_green_confirmed: true
+  p7_hold004_positive_public_shape_public_e2e_labelled_two_stage_confirmed: true
+  p7_hold004_positive_public_shape_full_backend_suite_green_confirmed: false
+  p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
   p7_red_hold_closure_full_01_02_regeneration: false
@@ -2878,3 +2885,53 @@ case専用branch
 
 P7-HOLD-004は、Phase16 targetがgreenになってもclosedではありません。full backend suite green、実機submit / modal読感、P5 human QAが未確認のため、P7 complete / P8 start / release_allowedはfalseのまま扱います。
 
+# 2026-06-14 差分追記: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8構造
+
+P7-HOLD-004 Positive Public Shape Boundary R0〜R8は、Cocolon全体構造上、EmlisAIの `/emotion/submit` public pathに関係するtarget修復ですが、RN UIやpublic response shapeを変えるものではありません。P7 Product Quality Runner内部で、positive / expression-difficulty入力が self-denial safe-state laneへ誤流入する境界を修復し、その結果をbody-free material / matrix / validation / release handoff / implementation result docへ接続する差分です。
+
+今回追加された構造は次です。
+
+| path | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_positive_public_shape_boundary.py` | Positive Public Shape Boundaryをbody-freeに分類し、`REPAIRED_TARGET_GREEN_PENDING_FULL_SUITE` としてtarget greenとfull suite未確認を分離する材料。 |
+| `mashos-api/ai/tests/test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py` | R0〜R8 target / regression test。expression difficulty、true self-denial、emergency/support、material route、public E2E、matrix/handoff/doc参照を固定する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_PositivePublicShapeBoundary_ImplementationResult_20260614.md` | R0〜R8の実装結果、確認済み、未確認、非release境界を記録するdoc。 |
+
+今回修正された構造は次です。
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_safety_triage.py` | `自分/私 + できない` の広いself-denial判定を狭め、表現困難はtrue self-denial markerがなければsafe observationへ残す。emergency/support requiredは先に維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | Positive Public Shape target greenをP7 hold/backend split matrixへ渡すが、P7-HOLD-004は閉じない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | `P7-VAL-019` とpositive boundary summaryを追加し、green scopeをtarget-onlyに限定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | Positive Public Shape実装結果doc path/refをhandoffへ渡すが、release decision input ready / release_allowedへ変換しない。 |
+
+構造上の中心は次で読む。
+
+```text
+/emotion/submit public path
+  -> safety triage expression-difficulty boundary
+  -> input material bundle eligible route
+  -> labelled two-stage public surface
+  -> P7-HOLD-004 positive boundary material
+  -> P7 hold matrix / validation matrix / release handoff
+  -> implementation result doc reference only
+```
+
+この差分で変えていないもの:
+
+```text
+RN production UI
+RN表示タイトル
+RN表示条件
+/emotion/submit route
+request key
+public response top-level key
+DB physical schema / write path
+Gate閾値
+fixed commentText
+case専用branch
+R4-B positive transition material rule
+```
+
+P7-HOLD-004は、Positive Public Shape targetがgreenになってもclosedではありません。full backend suite green、実機submit / modal読感、P5 human QA、P6 visible expansion boundaryが未確認のため、P7 complete / P8 start / release_allowedはfalseのまま扱います。

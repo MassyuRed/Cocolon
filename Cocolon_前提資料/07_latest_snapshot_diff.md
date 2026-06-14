@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-13"
+revision_date: "2026-06-14"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(212).zip"
+  premise: "Cocolon_前提資料(214).zip"
   Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_7(55).zip"
+  mashos-api: "mashos-api_6(60).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1005
-  total: 1222
+  mashos-api: 1008
+  total: 1225
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -23,11 +23,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004差分でproduction RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
-| `mashos-api_7(55).zip` | 1005 | P7-RED-003 Body-Free Leak Guard Repair R13後続として、P7-HOLD-004 Phase16 Composer Red Classification R0〜R9成果物を含む。 |
-| total | 1222 | Phase16 Complete Composer candidate boundary分類・最小修復、body-free metadata summary、adjacent public red分離、P7 hold / validation / release handoff、implementation result document反映後のcoverage対象。 |
+| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004 Positive Public Shape Boundary差分でproduction RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なし。 |
+| `mashos-api_6(60).zip` | 1008 | P7-HOLD-004 Phase16 Composer Red Classification後続として、Positive Public Shape Boundary R0〜R8成果物を含む。 |
+| total | 1225 | expression-difficulty false positive修復、positive public E2E labelled two-stage復帰、P7 matrix / validation / release handoff、implementation result document反映後のcoverage対象。 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-13時点の最新正本は末尾の `2026-06-13 差分追記: EmlisAI P7-HOLD-004 Phase16 Composer Red Classification R0〜R9 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はPhase16 candidate boundaryとして一段具体化したが、full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-14時点の最新正本は末尾の `2026-06-14 差分追記: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はPositive Public Shape target greenを保持する段階まで進んだが、full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
 
 # 2. Cocolon側の2026-05-12差分履歴
 

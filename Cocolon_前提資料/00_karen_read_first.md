@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-06-13"
+revision_date: "2026-06-14"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(212).zip"
+  premise: "Cocolon_前提資料(214).zip"
   Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_7(55).zip"
+  mashos-api: "mashos-api_6(60).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1005
-  total: 1222
+  mashos-api: 1008
+  total: 1225
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1222
-  included_in_overall_structure: 1222
-  included_in_national_system: 1222
+  total_files: 1225
+  included_in_overall_structure: 1225
+  included_in_national_system: 1225
   excluded_from_main_body: 0
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
@@ -91,6 +91,13 @@ coverage:
   p7_hold004_phase16_implementation_result_doc_reflected: true
   p7_hold004_phase16_full_backend_suite_green_confirmed: false
   p7_hold004_unresolved_after_r9: true
+  p7_hold004_positive_public_shape_boundary_r0_r8_reflected: true
+  p7_hold004_positive_public_shape_boundary_added_files: 3
+  p7_hold004_positive_public_shape_boundary_changed_files: 4
+  p7_hold004_positive_public_shape_target_green_confirmed: true
+  p7_hold004_positive_public_shape_public_e2e_labelled_two_stage_confirmed: true
+  p7_hold004_positive_public_shape_full_backend_suite_green_confirmed: false
+  p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_complete: false
   p8_start_allowed: false
@@ -172,11 +179,66 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004 R0〜R9差分はbackend internal-onlyであり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
-| `mashos-api_7(55).zip` | 1005 | backend / API / worker / tests。P7-RED-003 R13後続として、P7-HOLD-004 Phase16 Complete Composer Red Classification R0〜R9実装を含む。 |
-| total | 1222 | R13 body-free leak guard、P7-HOLD-004 Phase16 classification / path matrix / candidate-display boundary修復 / metadata summary / adjacent public red登録 / validation・release handoff / R9 implementation result doc反映後の前提資料差分更新対象snapshot。 |
+| `Cocolon(230).zip` | 217 | RNアプリ本体。今回のP7-HOLD-004 Positive Public Shape Boundary R0〜R8差分はbackend internal / test / docs中心であり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
+| `mashos-api_6(60).zip` | 1008 | backend / API / worker / tests。P7-HOLD-004 Phase16 Composer Red Classification後続として、Positive Public Shape Boundary R0〜R8実装を含む。 |
+| total | 1225 | P7-HOLD-004 positive public shape target green、safety triage expression-difficulty false positive修復、matrix / validation / release handoff / implementation result doc反映後の前提資料差分更新対象snapshot。 |
 
-`mashos-api_7(55).zip` を今回の最新実ファイルとして受領し、R13反映済み基準 `mashos-api(143).zip` からのP7-HOLD-004 R0〜R9差分として追加11件・変更4件・削除0件を確認しました。Cocolon側は今回のHOLD-004差分対象ではないため、既存RN契約確認基準として `Cocolon(230).zip` を参照し、HOLD-004差分はbackend internal-onlyとして読む。
+`mashos-api_6(60).zip` を今回の最新実ファイルとして受領し、前回P7-HOLD-004 Phase16基準 `mashos-api(144).zip` からのPositive Public Shape Boundary R0〜R8差分として追加3件・変更4件・削除0件を確認しました。Cocolon側の新規zipはこの回で受領していないため、既存RN契約確認基準として `Cocolon(230).zip` を維持し、今回差分はbackend internal / tests / docs onlyとして読む。
+
+# 2026-06-14 追補: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8実装反映
+
+最新実ファイル `mashos-api_6(60).zip` では、P7-HOLD-004内の `positive_change_after_work_streaming` public path が、positive / expression-difficulty入力を `self_denial_safe_state_answer` へ誤分類していた境界を修復・固定済みとして読む。これはP7-HOLD-004全体のclosureではなく、target greenをbody-free materialとして保持し、full backend suite未確認・P7 complete false・P8 start false・release_allowed falseを維持する差分である。
+
+今回追加された主な実ファイルは次です。
+
+```text
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_PositivePublicShapeBoundary_ImplementationResult_20260614.md
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_positive_public_shape_boundary.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py
+```
+
+今回変更された主な実ファイルは次です。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+mashos-api/ai/services/ai_inference/emlis_ai_safety_triage.py
+```
+
+読み方は次で固定する。
+
+```text
+expression difficulty:
+  表現できない / 言葉にできない / 整理できない / うまく言えない
+
+true self-denial:
+  自己価値否定 / できない人間 / 価値がない / 自分が悪い / 自分が嫌い など
+
+修復結果:
+  expression difficulty は true self-denial marker がなければ safe_observation へ残す。
+  positive public E2E は labelled two-stage shape へ復帰確認済みとして記録する。
+  true self-denial / emergency / support required は通常観測へ戻さない。
+```
+
+保持する非release境界:
+
+```text
+P7-HOLD-004: unresolved / positive public shape target green pending full suite
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+RN変更: なし
+DB変更: なし
+API route / request key / public response top-level key変更: なし
+Gate緩和: なし
+fixed commentText追加: なし
+case専用branch追加: なし
+```
+
+R8実装結果docは `docs/Cocolon_EmlisAI_P7_HOLD004_PositivePublicShapeBoundary_ImplementationResult_20260614.md` として追加され、release handoffはdoc path / doc refをbody-free identifierとして参照する。ただし、この参照はrelease許可ではない。
 
 P0/P1 public feedback arrival以降も、EmlisAI全体で次を固定します。
 

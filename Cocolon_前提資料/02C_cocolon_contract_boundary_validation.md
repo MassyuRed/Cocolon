@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-13"
+revision_date: "2026-06-14"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3622,3 +3622,63 @@ tests/test_emlis_ai_p7_hold004_r9_implementation_result_handoff_20260613.py
 
 これらはP7 internal measurement / handoffのcontract testであり、RN表示条件やAPI response shapeを変更するtestではありません。
 
+# 2026-06-14 差分追記: P7-HOLD-004 Positive Public Shape Boundary R0〜R8 contract / boundary
+
+今回のP7-HOLD-004 Positive Public Shape Boundary R0〜R8で追加・修正されたcontract境界は次です。
+
+## expression difficulty と true self-denialの分離
+
+`emlis_ai_safety_triage.py` では、広すぎた `自分/私 + できない` self-denial判定を分解します。
+
+```text
+expression difficulty:
+  表現できない / 言葉にできない / 整理できない / うまく言えない
+
+true self-denial marker:
+  価値がない / できない人間 / できない自分 / 自分が悪い / 自分が嫌い など
+```
+
+expression difficultyは、hard self-denial markerまたはidentity-shaped inability markerがなければ `safe_observation` に残します。これはsafety緩和ではなく、false positive抑制です。
+
+## safety境界維持
+
+必ず維持する境界:
+
+```text
+emergency: safety_blocked_emergency のまま
+support required: safety_support_required のまま
+true self-denial: self_denial_safe_state_answer のまま
+self_denial_safe_state_answer candidate: triageがself_denialのときだけ採用
+```
+
+## positive public shape target greenの非closure境界
+
+以下は、どれもP7-HOLD-004 closure条件ではありません。
+
+```text
+Positive Public Shape target green
+R0〜R8 target tests green
+R4 public E2E labelled two-stage復帰確認
+R8 implementation result document追加
+release handoffへのdoc path/ref追加
+```
+
+現時点では次を維持します。
+
+```text
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete_claim_allowed: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## regression確認の入口
+
+今回追加されたP7-HOLD-004 positive boundary regression入口は次です。
+
+```text
+tests/test_emlis_ai_p7_hold004_positive_public_shape_boundary_20260614.py
+```
+
+このtestは、R0/R1 classification、R2 safety triage false positive repair、R3 input material bundle route、R4 public E2E labelled two-stage restoration、R5 true safety boundary、R6 matrix/handoff、R8 doc/handoff参照を同じbody-free boundaryで確認するものです。RN表示条件やAPI response shapeを変更するtestではありません。

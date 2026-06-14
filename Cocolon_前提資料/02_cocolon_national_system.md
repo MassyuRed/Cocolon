@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-13"
+revision_date: "2026-06-14"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(212).zip"
+  premise: "Cocolon_前提資料(214).zip"
   Cocolon: "Cocolon(230).zip"
-  mashos-api: "mashos-api_7(55).zip"
+  mashos-api: "mashos-api_6(60).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1005
-  total: 1222
+  mashos-api: 1008
+  total: 1225
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1222
+  included_files_total: 1225
   included_files_cocolon: 217
-  included_files_mashos_api: 1005
+  included_files_mashos_api: 1008
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -43,6 +43,13 @@ coverage:
   p7_hold004_phase16_composer_red_classification_r0_r9_changed_files: 4
   p7_hold004_phase16_composer_target_green_confirmed: true
   p7_hold004_phase16_full_backend_suite_green_confirmed: false
+  p7_hold004_positive_public_shape_boundary_r0_r8_reflected: true
+  p7_hold004_positive_public_shape_boundary_r0_r8_added_files: 3
+  p7_hold004_positive_public_shape_boundary_r0_r8_changed_files: 4
+  p7_hold004_positive_public_shape_target_green_confirmed: true
+  p7_hold004_positive_public_shape_public_e2e_labelled_two_stage_confirmed: true
+  p7_hold004_positive_public_shape_full_backend_suite_green_confirmed: false
+  p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
 ---
@@ -2067,3 +2074,43 @@ release_allowed true化なし
 
 P7-HOLD-004は、国家システム上では「full backend suite未確認のHOLD」から、「Phase16 candidate boundary修復結果とadjacent public redを分けて持つHOLD」へ進んだ状態として扱います。
 
+# 2026-06-14 差分追記: 国家システム上のEmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8境界
+
+P7-HOLD-004 Positive Public Shape Boundary R0〜R8は、国家システムのproduction ingress / save / dispatch / worker / publish / read / RN displayを変更しません。変更されたのは、`/emotion/submit` immediate reply内部のsafety triage誤分類境界と、それをP7 internal matrix / validation / release handoffへ渡すbody-free材料です。
+
+国家システム上の読み方は次で固定します。
+
+```text
+/emotion/submit production route
+  -> existing save / Emlis public feedback contract
+  -> safety triage expression-difficulty false positive repair
+  -> existing input material bundle / labelled two-stage public surface path
+  -> existing RN visible contract
+  -> P7 Product Quality Runner internal measurement lane
+       -> Positive Public Shape Boundary material
+       -> hold matrix / validation matrix / release handoff
+       -> implementation result doc reference
+  -> full_backend_suite_green_confirmed=false
+  -> release_allowed=false / p7_complete=false / p8_start_allowed=false
+```
+
+今回のR2修復は、self-denial安全境界を弱める修正ではありません。`表現できない` / `言葉にできない` / `整理できない` / `うまく言えない` などの表現困難を、自己価値否定や人格化された不能表現と分ける修正です。emergency / support required / true self-denialは通常観測へ戻しません。
+
+維持する境界:
+
+```text
+RN production UI変更なし
+RN表示タイトル `Emlisの観測` 変更なし
+RN表示条件 `input_feedback.emlis_ai.observation_status == passed && input_feedback.comment_text non-empty` 変更なし
+/emotion/submit route変更なし
+request key / public response top-level key変更なし
+DB physical schema / write path変更なし
+Gate緩和なし
+fixed commentText追加なし
+case専用branch追加なし
+full backend suite green未確認
+P7-HOLD-004 closeなし
+release_allowed true化なし
+```
+
+P7-HOLD-004は、国家システム上では「Phase16 candidate boundary修復結果とadjacent public redを分けて持つHOLD」から、「Positive Public Shape target greenをさらにbody-freeに保持するHOLD」へ進んだ状態として扱います。
