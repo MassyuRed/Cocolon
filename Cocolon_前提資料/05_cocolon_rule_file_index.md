@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-14"
+revision_date: "2026-06-15"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1519,3 +1519,75 @@ full backend maxfail attemptedを次赤取得済みと読む。
 P7 complete / P8 start allowed / release_allowedをtrueにする。
 ```
 
+# 2026-06-15 差分追記: EmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12 rule / test index
+
+EmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistencyを触る場合は、Step5 Candidate Gate Preservation R0〜R12に加えて、R0〜R12のcollect baseline / group inventory / execution plan / result normalizer / execution summary / matrix consistency / minimal group execution orderを同時確認する。R0〜R12はP7-HOLD-004を閉じる工程ではなく、full backend suite未確認をbody-freeに分割して読むためのbackend internal-only差分である。
+
+## Backend suite split / matrix consistency owner
+
+| 用途 | 必読ファイル | 読む理由 |
+|---|---|---|
+| R0/R1 collect baseline | `emlis_ai_p7_hold004_backend_suite_split_consistency.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | 416 files / 2673 tests / 1 warning、body-free、release false、full suite green falseを固定する時。 |
+| R2/R3 inventory / plan | `emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py`, `test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py`, `test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py` | 13 group / 19 batch / timeout budget / capture-confirmation分離を確認する時。 |
+| R4/R5 result / summary | `emlis_ai_p7_hold004_backend_suite_execution_results.py`, `test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py`, `test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py` | PASS / FAIL / TIMEOUT / NOT_RUNなどのstatus正規化とexecution summaryを触る時。 |
+| R6/R7 backend split / R10 hold | `emlis_ai_p7_hold_matrix.py`, `test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py` | execution summaryとRED closure正本をbackend split / R10 hold matrixへ渡す時。 |
+| R8/R9 release / validation | `emlis_ai_p7_release_handoff.py`, `emlis_ai_p7_validation_matrix.py`, `test_emlis_ai_p7_hold004_release_validation_connection_20260615.py` | release handoff / validation matrixへsplit summaryとmatrix consistencyを接続する時。 |
+| R10 matrix consistency | `emlis_ai_p7_hold004_matrix_consistency_report.py`, `test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py` | backend_split / R10 / release_handoff / validationのRED/HOLD/release false整合を見る時。 |
+| R11 minimal execution order | `emlis_ai_p7_hold004_group_execution_minimal_order.py`, `test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py` | group_02_p7_hold004から走らせ、fail/timeoutで止める最小確認順を見る時。 |
+| R12 result doc | `docs/Cocolon_EmlisAI_P7_HOLD004_BackendSuiteSplit_MatrixConsistency_ImplementationResult_20260615.md` | R0〜R12の実装結果、検証結果、未確認、前提資料反映diffを確認する時。 |
+
+前提資料更新時に確認した結果:
+
+```text
+py_compile relevant R0〜R11 files: ok
+R0〜R11 added tests: 183 passed
+R0〜R11 + existing P7 subset: 207 passed
+```
+
+禁止する読み方:
+
+```text
+R0〜R12 material実装をP7-HOLD-004 closureと読む。
+13 group inventory作成をgroup execution完了と読む。
+default matrix consistency PASSをrelease readyと読む。
+R0〜R11 test greenをfull backend suite greenと読む。
+release_allowed / p7_complete / p8_start_allowedをtrueにする。
+```
+
+
+# 2026-06-15 差分追記: EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20 rule / test index
+
+EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcileを触る場合は、Backend Suite Split / Matrix Consistency R0〜R12に加えて、R13〜R20のcurrent baseline reconcile / active collect baseline / group inventory / execution plan / execution summary / matrix reconnect / official group_02 adoption rule / implementation result documentを同時確認する。
+
+R13〜R20はP7-HOLD-004を閉じる工程ではなく、old baseline 416 / 2673をcurrent baselineとして扱わないためのbackend internal-only差分である。
+
+| 用途 | 必読ファイル | 読む理由 |
+|---|---|---|
+| R13 reconcile material | `emlis_ai_p7_hold004_current_snapshot_baseline_reconcile.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | previous/current baselineを混同していないか確認する時。 |
+| R14 collect baseline | `emlis_ai_p7_hold004_backend_suite_split_consistency.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | active collect baselineが425 files / 2856 tests / 1 warningであることを確認する時。 |
+| R15 group inventory | `emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py`, `test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py` | group_02が19 files / 252 tests、totalが425 / 2856であることを確認する時。 |
+| R16 execution plan / minimal order | `emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py`, `emlis_ai_p7_hold004_group_execution_minimal_order.py`, `test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py`, `test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py` | first_capture_group_idとcurrent plan connectionを確認する時。 |
+| R17 execution summary | `emlis_ai_p7_hold004_backend_suite_execution_results.py`, `test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py`, `test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py` | group result / summaryがcurrent baselineを参照しているか確認する時。 |
+| R18 matrix reconnect | `emlis_ai_p7_hold004_matrix_consistency_report.py`, `emlis_ai_p7_hold_matrix.py`, `emlis_ai_p7_release_handoff.py`, `emlis_ai_p7_validation_matrix.py` | matrix / handoff / validationが同じcurrent baselineを読んでいるか確認する時。 |
+| R19 official group_02 adoption | `emlis_ai_p7_hold004_backend_suite_execution_results.py`, `test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py` | official group_02 capture resultを採用できる条件を確認する時。 |
+| R20 implementation result | `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_CurrentSnapshotBaselineReconcile_ImplementationResult_20260615.md` | 確認済み / 未確認 / 書かれていない / 推測禁止を確認する時。 |
+
+検証基準として読む結果:
+
+```text
+py_compile relevant R13〜R20 files: ok
+R13〜R20 target tests: 183 passed
+full collect-only: 2856 tests collected / 1 warning
+group_02 collect-only: 252 tests collected / 1 warning
+```
+
+禁止する読み:
+
+```text
+R13〜R20完了をP7-HOLD-004 closureと読む。
+current collect-onlyをfull backend suite greenと読む。
+group_02 collect-only / ad hoc passをofficial resultと読む。
+R19 adoption rule fixedをofficial run executedと読む。
+old baseline idのrun resultをcurrent official resultへ混ぜる。
+release_allowed / p8_start_allowedをtrueにする。
+```

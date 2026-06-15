@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-14"
+revision_date: "2026-06-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(216).zip"
-  Cocolon: "Cocolon(232).zip"
-  mashos-api: "mashos-api_9(38).zip"
+  premise: "Cocolon_前提資料(220).zip"
+  Cocolon: "Cocolon(234).zip"
+  mashos-api: "mashos-api_6(63).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1012
-  total: 1229
+  mashos-api: 1029
+  total: 1246
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1229
+  included_files_total: 1246
   included_files_cocolon: 217
-  included_files_mashos_api: 1012
+  included_files_mashos_api: 1029
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -56,6 +56,43 @@ coverage:
   p7_hold004_step5_candidate_gate_preservation_full_backend_suite_green_confirmed: false
   p7_hold004_step5_candidate_gate_preservation_next_red_captured: false
   p7_hold004_step5_candidate_gate_preservation_full_01_02_regeneration: false
+  p7_hold004_backend_suite_split_matrix_consistency_r0_r12_reflected: true
+  p7_hold004_backend_suite_split_matrix_consistency_added_files: 15
+  p7_hold004_backend_suite_split_matrix_consistency_changed_files: 3
+  p7_hold004_backend_suite_split_matrix_consistency_removed_files: 0
+  p7_hold004_backend_collect_baseline_file_count: 425
+  p7_hold004_backend_collect_baseline_test_count: 2856
+  p7_hold004_backend_collect_warning_count: 1
+  p7_hold004_previous_backend_collect_baseline_file_count: 416
+  p7_hold004_previous_backend_collect_baseline_test_count: 2673
+  p7_hold004_previous_backend_collect_warning_count: 1
+  p7_hold004_backend_collect_baseline_delta_file_count: 9
+  p7_hold004_backend_collect_baseline_delta_test_count: 183
+  p7_hold004_backend_collect_baseline_delta_warning_count: 0
+  p7_hold004_current_group_02_file_count: 19
+  p7_hold004_current_group_02_test_count: 252
+  p7_hold004_backend_group_count: 13
+  p7_hold004_backend_total_batch_count: 19
+  p7_hold004_backend_matrix_consistency_report_connected: true
+  p7_hold004_backend_minimal_group_execution_order_created: true
+  p7_hold004_backend_group_execution_started: false
+  p7_hold004_backend_group_run_results_recorded: false
+  p7_hold004_backend_full_backend_suite_green_confirmed: false
+  p7_hold004_backend_hold004_close_allowed: false
+  p7_hold004_backend_suite_split_matrix_consistency_full_01_02_regeneration: false
+  p7_hold004_current_snapshot_baseline_reconcile_r13_r20_reflected: true
+  p7_hold004_current_snapshot_baseline_reconcile_added_files: 2
+  p7_hold004_current_snapshot_baseline_reconcile_changed_files: 17
+  p7_hold004_current_snapshot_baseline_reconcile_removed_files: 0
+  p7_hold004_current_backend_collect_baseline_id: p7_hold004_backend_collect_baseline_20260615
+  p7_hold004_previous_backend_collect_baseline_id: p7_hold004_backend_collect_baseline_20260614
+  p7_hold004_current_backend_test_items_fingerprint_sha256: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+  p7_hold004_current_backend_test_files_fingerprint_sha256: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  p7_hold004_official_group_02_capture_adoption_rule_fixed: true
+  p7_hold004_official_group_02_capture_run_executed: false
+  p7_hold004_official_group_02_capture_result_recorded: false
+  p7_hold004_official_group_02_capture_green_confirmed: false
+  p7_hold004_current_snapshot_baseline_reconcile_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
@@ -2176,3 +2213,116 @@ p7_complete: false
 p8_start_allowed: false
 ```
 
+# 2026-06-15 差分追記: 国家システム上のEmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12境界
+
+P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12は、国家システムの production ingress / save / dispatch / worker / publish / read / RN display を変更しません。変更されたのは、P7 Product Quality Runner内部でfull backend suite未確認を扱うためのcollect / split / matrix consistency materialです。
+
+```text
+Input Gate
+  -> Save API
+  -> Dispatch
+  -> Snapshot / Queue / Worker
+  -> Publish / Access Policy
+  -> Read API / Startup
+  -> RN display
+```
+
+上記の国家システム本線には、今回のR0〜R12で新規routeや新規public keyを足しません。今回の差分は次の内部測定laneに閉じます。
+
+```text
+P7 internal measurement lane
+  -> backend collect baseline
+  -> backend suite group inventory
+  -> execution plan
+  -> group run result normalizer
+  -> execution summary
+  -> backend split matrix
+  -> R10 hold matrix
+  -> release handoff
+  -> validation matrix
+  -> matrix consistency report
+  -> minimal group execution order
+```
+
+国家システム上の保持境界:
+
+```text
+RN production UI変更なし
+RN表示条件変更なし
+/emotion/submit route変更なし
+request key変更なし
+public response top-level key変更なし
+DB schema / write path変更なし
+Emlis本文runtime変更なし
+Gate runtime変更なし
+P8 user model / dictionary変更なし
+release_allowed true化なし
+```
+
+P7-HOLD-004の国家システム上の読みは次です。
+
+```text
+P7-HOLD-004: unresolved / Backend Suite Split・Matrix Consistency material implemented
+collect baseline: 416 files / 2673 tests
+split inventory: 13 groups / 19 batches
+group_execution_started: false
+group_run_results_recorded: false
+full_backend_suite_green_confirmed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+collect-only、target subset、matrix consistency default PASS、R0〜R11 tests greenは、国家システム上のrelease判断を変えません。
+
+
+# 2026-06-15 差分追記: 国家システム上のEmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20境界
+
+P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20は、国家システムの production ingress / save / dispatch / worker / publish / read / RN display を変更しません。変更されたのは、P7 Product Quality Runner内部で、古いbackend collect baselineをcurrent baselineとして扱わないための測定正本です。
+
+```text
+/ emotion submit production path
+  Input -> Save -> Dispatch -> Worker -> Publish -> Read -> RN display
+    変更なし
+
+P7 internal measurement path
+  collect baseline 416 / 2673 previous
+    -> current snapshot reconcile
+    -> active collect baseline 425 / 2856
+    -> group inventory 13 groups / 19 batches
+    -> group_02 19 files / 252 tests
+    -> execution summary / matrix / handoff / validation current connection
+    -> official group_02 capture adoption rule fixed
+```
+
+国家システム上の読み替えは次です。
+
+| 項目 | R13〜R20後の扱い |
+|---|---|
+| production ingress | 変更なし。 |
+| RN表示条件 | 変更なし。`input_feedback.comment_text` 表示契約を変えない。 |
+| API route / request key | 変更なし。 |
+| public response top-level key | 追加なし。 |
+| DB schema / write path | 変更なし。 |
+| Gate threshold | 緩和なし。 |
+| P7 internal baseline | active currentを425 files / 2856 testsへ更新。 |
+| previous baseline | 416 files / 2673 testsとして保持。 |
+| group_02 | current baseline上では19 files / 252 tests。 |
+| official group_02 capture | 採用条件のみ固定。run / result記録は未実行。 |
+
+P7-HOLD-004の国家システム上の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Current Snapshot Baseline Reconcile R13-R20 implemented
+current baseline connected: true
+official group_02 capture adoption rule fixed: true
+official group_02 capture run executed: false
+official group_02 capture result recorded: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+この差分を、EmlisAI runtime改善、RN表示改善、release ready、P8開始根拠として読んではいけません。

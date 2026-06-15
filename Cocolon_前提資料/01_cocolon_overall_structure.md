@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-14"
+revision_date: "2026-06-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(216).zip"
-  Cocolon: "Cocolon(232).zip"
-  mashos-api: "mashos-api_9(38).zip"
+  premise: "Cocolon_前提資料(220).zip"
+  Cocolon: "Cocolon(234).zip"
+  mashos-api: "mashos-api_6(63).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1012
-  total: 1229
+  mashos-api: 1029
+  total: 1246
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1229
+  included_files_total: 1246
   included_files_cocolon: 217
-  included_files_mashos_api: 1012
+  included_files_mashos_api: 1029
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -58,6 +58,43 @@ coverage:
   p7_hold004_step5_candidate_gate_preservation_full_backend_suite_green_confirmed: false
   p7_hold004_step5_candidate_gate_preservation_next_red_captured: false
   p7_hold004_step5_candidate_gate_preservation_full_01_02_regeneration: false
+  p7_hold004_backend_suite_split_matrix_consistency_r0_r12_reflected: true
+  p7_hold004_backend_suite_split_matrix_consistency_added_files: 15
+  p7_hold004_backend_suite_split_matrix_consistency_changed_files: 3
+  p7_hold004_backend_suite_split_matrix_consistency_removed_files: 0
+  p7_hold004_backend_collect_baseline_file_count: 425
+  p7_hold004_backend_collect_baseline_test_count: 2856
+  p7_hold004_backend_collect_warning_count: 1
+  p7_hold004_previous_backend_collect_baseline_file_count: 416
+  p7_hold004_previous_backend_collect_baseline_test_count: 2673
+  p7_hold004_previous_backend_collect_warning_count: 1
+  p7_hold004_backend_collect_baseline_delta_file_count: 9
+  p7_hold004_backend_collect_baseline_delta_test_count: 183
+  p7_hold004_backend_collect_baseline_delta_warning_count: 0
+  p7_hold004_current_group_02_file_count: 19
+  p7_hold004_current_group_02_test_count: 252
+  p7_hold004_backend_group_count: 13
+  p7_hold004_backend_total_batch_count: 19
+  p7_hold004_backend_matrix_consistency_report_connected: true
+  p7_hold004_backend_minimal_group_execution_order_created: true
+  p7_hold004_backend_group_execution_started: false
+  p7_hold004_backend_group_run_results_recorded: false
+  p7_hold004_backend_full_backend_suite_green_confirmed: false
+  p7_hold004_backend_hold004_close_allowed: false
+  p7_hold004_backend_suite_split_matrix_consistency_full_01_02_regeneration: false
+  p7_hold004_current_snapshot_baseline_reconcile_r13_r20_reflected: true
+  p7_hold004_current_snapshot_baseline_reconcile_added_files: 2
+  p7_hold004_current_snapshot_baseline_reconcile_changed_files: 17
+  p7_hold004_current_snapshot_baseline_reconcile_removed_files: 0
+  p7_hold004_current_backend_collect_baseline_id: p7_hold004_backend_collect_baseline_20260615
+  p7_hold004_previous_backend_collect_baseline_id: p7_hold004_backend_collect_baseline_20260614
+  p7_hold004_current_backend_test_items_fingerprint_sha256: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+  p7_hold004_current_backend_test_files_fingerprint_sha256: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  p7_hold004_official_group_02_capture_adoption_rule_fixed: true
+  p7_hold004_official_group_02_capture_run_executed: false
+  p7_hold004_official_group_02_capture_result_recorded: false
+  p7_hold004_official_group_02_capture_green_confirmed: false
+  p7_hold004_current_snapshot_baseline_reconcile_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
@@ -2995,3 +3032,122 @@ public comment_text present != 読めている証明
 ```
 
 P7-HOLD-004は、Step5 targetがgreenになってもclosedではありません。full backend suite green、maxfail=1完走結果、次赤、実機submit / modal読感、P5 human QAが未確認のため、P7 complete / P8 start / release_allowedはfalseのまま扱います。
+
+# 2026-06-15 差分追記: EmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12構造
+
+P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12は、Cocolon全体構造上、EmlisAIのpublic表示経路ではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回の差分は、full backend suite未確認を「未実行」や「timeout」で曖昧に残すのではなく、collect baseline、group inventory、execution plan、group run result normalizer、execution summary、matrix consistency、minimal group execution orderへ分解する構造です。Emlis本文生成、RN表示、API route、request key、public response top-level key、DB write pathは変更しません。
+
+```text
+P7 Product Quality Runner
+  -> P7-HOLD-004 Backend Suite Split / Matrix Consistency
+     -> collect baseline: 416 files / 2673 tests / 1 warning
+     -> group inventory: 13 groups
+     -> execution plan: 19 batches
+     -> group run result normalizer
+     -> execution summary material
+     -> backend suite split matrix connection
+     -> R10 hold matrix connection
+     -> release handoff connection
+     -> validation matrix connection
+     -> matrix consistency report
+     -> minimal group execution order
+```
+
+追加されたP7-HOLD-004 backend suite split owner:
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py` | R0/R1。設計境界freezeとcollect baseline material。416 files / 2673 tests / body-free / release falseを固定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py` | R2/R3。13 group inventoryと19 batch execution planを持つ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py` | R4/R5。group run result normalizerとexecution summary materialを持つ。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py` | R10。backend split / R10 / release handoff / validationのRED・HOLD・release falseを比較する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py` | R11。group_02_p7_hold004から始める最小確認順とstop_on_first_fail_or_timeoutを固定する。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_BackendSuiteSplit_MatrixConsistency_ImplementationResult_20260615.md` | R12。R0〜R12実装結果、検証結果、前提資料反映diff、未確認範囲を記録する。 |
+
+変更された既存P7 matrix owner:
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | R6/R7。execution summary / RED closure正本をbackend split matrixとR10 hold matrixへ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | R8。execution summary / matrix consistencyの読みをrelease handoffへ渡すが、release_allowed=falseを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | R9。backend_suite_split_execution_summary / matrix_consistency_report rowを追加し、full suite green falseを維持する。 |
+
+現在読み:
+
+```text
+Backend Suite Split / Matrix Consistency material implemented != P7-HOLD-004 closed
+13 group inventory created != group execution completed
+R0〜R11 tests 207 passed != full backend suite green
+default matrix consistency PASS != release ready
+
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+P7-HOLD-004は、backend suite split / matrix consistencyの器が揃ってもclosedではありません。次に必要なのは、R11 minimal orderに従った実group execution結果のbody-free投入です。
+
+
+# 2026-06-15 差分追記: EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20構造
+
+P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20は、Cocolon全体構造上、EmlisAIのpublic表示経路ではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回の構造差分は、R0〜R12で作ったbackend suite split / matrix consistencyの器を、current zip実測のbaselineへ再固定するものです。EmlisAI本文runtime、RN UI、RN表示条件、API route、request key、public response top-level key、DB write path、Gate thresholdは変更しません。
+
+```text
+P7 Product Quality Runner
+  -> P7-HOLD-004 Backend Suite Split / Matrix Consistency
+    -> R13 Current Snapshot Baseline Reconcile
+    -> R14 Active Current Collect Baseline
+    -> R15 Current Group Inventory
+    -> R16 Current Execution Plan / Minimal Order
+    -> R17 Current Execution Summary
+    -> R18 Current Matrix Connection
+    -> R19 Official group_02 Capture Adoption Rule
+    -> R20 Implementation Result Doc / Premise Reflection Candidate
+```
+
+追加されたcurrent snapshot owner:
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_current_snapshot_baseline_reconcile.py` | previous baseline 416 / 2673 と current baseline 425 / 2856を分離し、delta +9 / +183をbody-freeに保持するR13 material。 |
+| `mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_CurrentSnapshotBaselineReconcile_ImplementationResult_20260615.md` | R13〜R20の実装結果、official group_02 capture採用条件、未確認、推測禁止、前提資料反映候補を残すR20 doc。 |
+
+更新された既存owner:
+
+| file | 構造上の意味 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py` | active collect baselineを20260615 currentの425 files / 2856 testsへ更新する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py` | group inventory / execution planをcurrent baselineへ再接続し、group_02を19 files / 252 testsへ更新する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py` | execution summaryのbaseline参照をcurrentへ更新し、official group_02 capture adoption ruleを固定する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py` | matrix consistencyがcurrent collect / inventory / plan / summaryを同じ正本として読むようにする。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py` | minimal orderをcurrent baselineへ再接続し、first capture groupをgroup_02のまま保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | HOLD matrixがcurrent baseline connectionを読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | release handoffがcurrent baseline connectionを読むが、release_allowed=falseを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | validation matrixがcurrent baseline connectionを読むが、p8_start_allowed=falseを維持する。 |
+
+current baselineの構造上の正本は次です。
+
+```text
+active current baseline:
+  p7_hold004_backend_collect_baseline_20260615
+  425 files / 2856 tests / 1 warning
+
+previous baseline:
+  p7_hold004_backend_collect_baseline_20260614
+  416 files / 2673 tests / 1 warning
+
+delta:
+  +9 files / +183 tests / warnings delta 0
+  affected_group_ids: group_02_p7_hold004
+
+group_02_p7_hold004 current:
+  19 files / 252 tests / 1 batch
+```
+
+P7-HOLD-004は、current baseline reconcileが完了してもclosedではありません。次に必要なのは、R19で固定した採用条件に基づくofficial group_02 capture runを実行・body-free記録するかの判断です。

@@ -1,0 +1,19 @@
+path,change_type,phase,work_item,notes
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R0-R1,contract boundary freeze and collect baseline material
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R2-R3,13 group inventory and execution plan material
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R4-R5,group run result normalizer and execution summary material
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py,modified,P7-HOLD-004,Backend Suite Split Matrix Consistency R6-R7,backend split matrix and R10 hold matrix connection
+mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py,modified,P7-HOLD-004,Backend Suite Split Matrix Consistency R8,release handoff connection
+mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py,modified,P7-HOLD-004,Backend Suite Split Matrix Consistency R9,validation matrix rows and summary connection
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R10,matrix consistency report material
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R11,minimal group execution confirmation order material
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R0-R1,collect baseline and boundary contract tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R2,group inventory tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R3,execution plan tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R4,group run result normalizer tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R5,execution summary tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R6-R7,backend split and R10 hold matrix connection tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R8-R9,release handoff and validation matrix connection tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R10,matrix consistency report tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R11,minimal group execution order tests
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_BackendSuiteSplit_MatrixConsistency_ImplementationResult_20260615.md,added,P7-HOLD-004,Backend Suite Split Matrix Consistency R12,implementation result and premise diff organization

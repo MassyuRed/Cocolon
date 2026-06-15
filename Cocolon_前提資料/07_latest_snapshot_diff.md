@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-14"
+revision_date: "2026-06-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(216).zip"
-  Cocolon: "Cocolon(232).zip"
-  mashos-api: "mashos-api_9(38).zip"
+  premise: "Cocolon_前提資料(220).zip"
+  Cocolon: "Cocolon(234).zip"
+  mashos-api: "mashos-api_6(63).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1012
-  total: 1229
+  mashos-api: 1029
+  total: 1246
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 ---
 
@@ -23,11 +23,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(232).zip` | 217 | Cocolon側は今回差分対象外。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なしとして読む。 |
-| `mashos-api_9(38).zip` | 1012 | P7-HOLD-004 Step5 Candidate Gate Preservation Red Classification R0〜R12成果物を含む最新backend。 |
-| total | 1229 | Step5 display-binding red classification、target/subset validation、implementation result document、full backend suite未確認保持までのcoverage対象。 |
+| `Cocolon(234).zip` | 217 | Cocolon側は今回差分対象外。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なしとして読む。 |
+| `mashos-api_6(63).zip` | 1029 | P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20成果物を含む最新backend。 |
+| total | 1246 | current collect baseline、previous baseline separation、13 group inventory、19 batch execution plan、execution summary、matrix再接続、official group_02 capture adoption rule、implementation result documentまでのcoverage対象。 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-14時点の最新正本は末尾の `2026-06-14 差分追記: EmlisAI P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はPositive Public Shape target greenの後に、Step5 display-binding red classification / target subset green / implementation result doc作成まで進んだが、full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-15時点の最新正本は末尾の `2026-06-15 差分追記: EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はBackend Suite Split / Matrix Consistency R0〜R12後に、current snapshot baselineをR13〜R20で再固定したが、official group_02 capture run、split group全体execution、un-split full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -5287,4 +5287,241 @@ R4-C stale expectation replacement = test緩和だけのgreen化
 R4-B display binding trace repair = Gate緩和
 public comment_text present = 読めている証明
 R12 doc追加 = release ready
+```
+
+# 2026-06-15 差分追記: EmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12 latest snapshot diff
+
+比較元は、前提資料上の直前backend基準 `mashos-api_9(38).zip` です。比較先は、今回の最新実ファイル `mashos-api_8(53).zip` です。Cocolon側は今回のHOLD-004差分対象外であり、既存基準 `Cocolon(232).zip` を維持します。
+
+## 追加ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py
+  mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_BackendSuiteSplit_MatrixConsistency_ImplementationResult_20260615.md
+```
+
+## 変更ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 15 | 3 | 0 | P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12を追加・更新。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260615_p7_hold004_backend_suite_split_matrix_consistency_r0_r12.csv
+diff_inventory_sha256: 2171df4784d16c1bb56d0d5def975338f0b44dbaa761eef75e75d54e53a59dcf
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-HOLD-004: unresolved / Backend Suite Split・Matrix Consistency material implemented
+collect baseline: 416 files / 2673 tests / 1 warning
+group inventory: 13 groups
+total batch count: 19
+matrix consistency report connected: true
+minimal group execution order created: true
+group_execution_started: false
+group_run_results_recorded: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## 実装結果documentと前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認: R0〜R12主要18ファイル present
+py_compile relevant R0〜R11 implementation/test files: ok
+R0〜R11 added tests: 183 passed
+R0〜R11 + existing P7 subset: 207 passed
+```
+
+未確認として残す範囲:
+
+```text
+actual group execution results
+各group / batchのPASS / FAIL / TIMEOUT
+first red / first timeoutの実観測
+un-split full backend suite green
+実機submit / modal読感
+P5 human Blind QA
+P8へ進める根拠
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_8(53).zip` へ更新し、Backend Suite Split / Matrix Consistency R0〜R12後のHOLD保持・禁止誤読を追記。 |
+| `01_cocolon_overall_structure.md` | collect baseline、13 group inventory、execution plan、group result normalizer、execution summary、matrix consistency、minimal orderのbackend internal-only構造を追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさず、P7 internal測定laneとして読む境界を追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | body-free collect / group inventory / status normalizer / matrix consistency / non-closure contractを追記。 |
+| `05_cocolon_rule_file_index.md` | R0〜R12で追加・修正されたservice/test/docの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、diff counts、policy、modified premise filesを反映。 |
+| `cocolon_local_file_inventory_diff_20260615_p7_hold004_backend_suite_split_matrix_consistency_r0_r12.csv` | `mashos-api_9(38).zip` -> `mashos-api_8(53).zip` の追加15件・変更3件を記録。 |
+
+## 禁止する読み方
+
+```text
+Backend Suite Split / Matrix Consistency material implementedをP7-HOLD-004 closureと読む。
+collect-only成功をfull backend suite greenと読む。
+13 group inventory / 19 batch plan作成をgroup execution完了と読む。
+default matrix consistency PASSをrelease readyと読む。
+R0〜R11 tests 207 passedをP7 completeと読む。
+split_all_groups_green_confirmedをfull backend suite greenと同一視する。
+group_execution_started=falseなのにgroup run result recordedと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+
+# 2026-06-15 差分追記: EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20 latest snapshot diff
+
+比較元は、前提資料上の直前backend基準 `mashos-api_8(53).zip` です。比較先は、今回の最新実ファイル `mashos-api_6(63).zip` です。Cocolon側は今回のHOLD-004差分対象外であり、latest received `Cocolon(234).zip` は217 filesで既存RN production UI / 表示条件 / public response shapeの変更なしとして扱います。
+
+## 追加ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_current_snapshot_baseline_reconcile.py
+  mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_CurrentSnapshotBaselineReconcile_ImplementationResult_20260615.md
+```
+
+## 変更ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py
+  mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 2 | 17 | 0 | P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20を追加・更新。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260615_p7_hold004_current_snapshot_baseline_reconcile_r13_r20.csv
+diff_inventory_sha256: 007b49980225c7493fdd28989d182b48f8f5350bf56a7058dd88d0105413cfa8
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-HOLD-004: unresolved / Current Snapshot Baseline Reconcile R13-R20 implemented
+active current collect baseline: p7_hold004_backend_collect_baseline_20260615
+active current collect baseline count: 425 files / 2856 tests / 1 warning
+previous collect baseline: p7_hold004_backend_collect_baseline_20260614 / 416 files / 2673 tests / 1 warning
+baseline delta: +9 files / +183 tests / warnings delta 0
+affected_group_ids: group_02_p7_hold004
+group_02_p7_hold004 current: 19 files / 252 tests
+backend group count: 13
+backend total batch count: 19
+official group_02 capture adoption rule fixed: true
+official group_02 capture run executed: false
+official group_02 capture result recorded: false
+official group_02 capture green confirmed: false
+group_execution_started: false
+group_run_results_recorded: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## 実装結果documentと前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認: R13 reconcile module present / R20 implementation result doc present
+py_compile relevant R13〜R20 implementation/test files: ok
+R13〜R20 target tests: 183 passed
+full collect-only: 2856 tests collected / 1 warning
+group_02 collect-only: 252 tests collected / 1 warning
+```
+
+未確認として残す範囲:
+
+```text
+official group_02 capture run
+official group_02 capture resultの実記録
+split group全体のexecution結果
+full backend suite execution green
+first red / first timeoutの実観測
+実機submit / modal読感
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+P8 user model / dictionaryへ進める条件
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_6(63).zip` へ更新し、R13〜R20後のcurrent baseline / previous baseline / official capture未実行を追記。 |
+| `01_cocolon_overall_structure.md` | Current Snapshot Baseline ReconcileをP7 internal laneとして追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさないbackend internal差分として追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | previous/current baseline separation、group_02 current count、official capture adoption boundaryを追記。 |
+| `05_cocolon_rule_file_index.md` | R13〜R20で追加・修正されたservice/test/docの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、coverage、追加path、境界維持、diff csv参照を反映。 |
+| `cocolon_local_file_inventory_diff_20260615_p7_hold004_current_snapshot_baseline_reconcile_r13_r20.csv` | `mashos-api_8(53).zip` -> `mashos-api_6(63).zip` の追加2件・変更17件を記録。 |
+
+## 禁止する読み方
+
+```text
+R13〜R20完了をP7-HOLD-004 closureと読む。
+current collect-only 2856 collectedをfull backend suite greenと読む。
+group_02 252 passedの過去ad hoc確認をofficial resultと読む。
+R19 adoption rule fixedをofficial run executedと読む。
+matrix current connectionをrelease readyと読む。
+old baseline idのrun resultをcurrent official resultへ混ぜる。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
 ```

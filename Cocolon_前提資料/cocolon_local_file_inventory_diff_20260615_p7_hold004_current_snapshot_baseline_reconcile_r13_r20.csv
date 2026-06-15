@@ -1,0 +1,20 @@
+path,change_type,phase,work_item,notes
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_current_snapshot_baseline_reconcile.py,added,P7-HOLD-004,Current Snapshot Baseline Reconcile R13,current snapshot baseline reconcile material builder
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_CurrentSnapshotBaselineReconcile_ImplementationResult_20260615.md,added,P7-HOLD-004,Current Snapshot Baseline Reconcile R20,implementation result document and premise reflection candidate
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R14,active current collect baseline updated to 425 files / 2856 tests
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R15-R16,group inventory and execution plan connected to current baseline
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R17-R19,execution summary current references and official group_02 adoption rule
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,matrix consistency report reconnected to current baseline
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R16,minimal order connected to current baseline and group_02 19 files / 252 tests
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,hold matrix current baseline connection
+mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,release handoff current baseline connection while release_allowed remains false
+mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,validation matrix current baseline connection while p8_start_allowed remains false
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R13-R14,reconcile contract and active current collect baseline assertions
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R15,group inventory assertions updated to 13 groups / 19 batches / 425 files / 2856 tests
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R16,execution plan assertions connected to current baseline
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R17-R19,group result current baseline and official adoption rule contract assertions
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R17,execution summary current baseline assertions
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,backend suite split / hold matrix current baseline assertions
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,release handoff / validation current baseline assertions
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R18,matrix consistency current baseline assertions
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py,modified,P7-HOLD-004,Current Snapshot Baseline Reconcile R16,minimal order current baseline contract assertions

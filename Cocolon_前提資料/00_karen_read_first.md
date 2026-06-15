@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-06-14"
+revision_date: "2026-06-15"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(216).zip"
-  Cocolon: "Cocolon(232).zip"
-  mashos-api: "mashos-api_9(38).zip"
+  premise: "Cocolon_前提資料(220).zip"
+  Cocolon: "Cocolon(234).zip"
+  mashos-api: "mashos-api_6(63).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1012
-  total: 1229
+  mashos-api: 1029
+  total: 1246
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1229
-  included_in_overall_structure: 1229
-  included_in_national_system: 1229
+  total_files: 1246
+  included_in_overall_structure: 1246
+  included_in_national_system: 1246
   excluded_from_main_body: 0
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
@@ -107,6 +107,43 @@ coverage:
   p7_hold004_step5_candidate_gate_preservation_full_backend_suite_green_confirmed: false
   p7_hold004_step5_candidate_gate_preservation_next_red_captured: false
   p7_hold004_step5_candidate_gate_preservation_full_01_02_regeneration: false
+  p7_hold004_backend_suite_split_matrix_consistency_r0_r12_reflected: true
+  p7_hold004_backend_suite_split_matrix_consistency_added_files: 15
+  p7_hold004_backend_suite_split_matrix_consistency_changed_files: 3
+  p7_hold004_backend_suite_split_matrix_consistency_removed_files: 0
+  p7_hold004_backend_collect_baseline_file_count: 425
+  p7_hold004_backend_collect_baseline_test_count: 2856
+  p7_hold004_backend_collect_warning_count: 1
+  p7_hold004_previous_backend_collect_baseline_file_count: 416
+  p7_hold004_previous_backend_collect_baseline_test_count: 2673
+  p7_hold004_previous_backend_collect_warning_count: 1
+  p7_hold004_backend_collect_baseline_delta_file_count: 9
+  p7_hold004_backend_collect_baseline_delta_test_count: 183
+  p7_hold004_backend_collect_baseline_delta_warning_count: 0
+  p7_hold004_current_group_02_file_count: 19
+  p7_hold004_current_group_02_test_count: 252
+  p7_hold004_backend_group_count: 13
+  p7_hold004_backend_total_batch_count: 19
+  p7_hold004_backend_matrix_consistency_report_connected: true
+  p7_hold004_backend_minimal_group_execution_order_created: true
+  p7_hold004_backend_group_execution_started: false
+  p7_hold004_backend_group_run_results_recorded: false
+  p7_hold004_backend_full_backend_suite_green_confirmed: false
+  p7_hold004_backend_hold004_close_allowed: false
+  p7_hold004_backend_suite_split_matrix_consistency_full_01_02_regeneration: false
+  p7_hold004_current_snapshot_baseline_reconcile_r13_r20_reflected: true
+  p7_hold004_current_snapshot_baseline_reconcile_added_files: 2
+  p7_hold004_current_snapshot_baseline_reconcile_changed_files: 17
+  p7_hold004_current_snapshot_baseline_reconcile_removed_files: 0
+  p7_hold004_current_backend_collect_baseline_id: p7_hold004_backend_collect_baseline_20260615
+  p7_hold004_previous_backend_collect_baseline_id: p7_hold004_backend_collect_baseline_20260614
+  p7_hold004_current_backend_test_items_fingerprint_sha256: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+  p7_hold004_current_backend_test_files_fingerprint_sha256: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  p7_hold004_official_group_02_capture_adoption_rule_fixed: true
+  p7_hold004_official_group_02_capture_run_executed: false
+  p7_hold004_official_group_02_capture_result_recorded: false
+  p7_hold004_official_group_02_capture_green_confirmed: false
+  p7_hold004_current_snapshot_baseline_reconcile_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_complete: false
@@ -189,11 +226,11 @@ EmlisAI は入力直後の観測返答であり、ユーザーの言葉を読ま
 
 | source | file count | 位置づけ |
 |---|---:|---|
-| `Cocolon(232).zip` | 217 | RNアプリ本体。今回のStep5 Candidate Gate Preservation R0〜R12差分はbackend internal / tests / docs中心であり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
-| `mashos-api_9(38).zip` | 1012 | backend / API / worker / tests。P7-HOLD-004 Phase16 Composer / Positive Public Shape Boundary後続として、Step5 Candidate Gate Preservation Red Classification R0〜R12実装結果docまでを含む。 |
-| total | 1229 | P7-HOLD-004 Step5 display-binding red分類、Display binding trace整合、stale expectation置換、mixed HOLD保持、matrix / validation / release handoff / implementation result doc反映後の前提資料差分更新対象snapshot。 |
+| `Cocolon(232).zip` | 217 | RNアプリ本体。今回のBackend Suite Split / Matrix Consistency R0〜R12差分はbackend internal / tests / docs中心であり、production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更はない。 |
+| `mashos-api_8(53).zip` | 1027 | backend / API / worker / tests。P7-HOLD-004 Step5 Candidate Gate Preservation後続として、Backend Suite Split / Matrix Consistency R0〜R12実装結果docまでを含む。 |
+| total | 1244 | P7-HOLD-004 backend collect baseline、13 group inventory、19 batch execution plan、group result normalizer、execution summary、matrix consistency、minimal group execution order、implementation result doc反映後の前提資料差分更新対象snapshot。 |
 
-`mashos-api_9(38).zip` を今回の最新実ファイルとして受領し、前提資料上の前回backend基準 `mashos-api(145).zip` からのStep5 Candidate Gate Preservation R0〜R12差分として追加4件・変更8件・削除0件を確認しました。Cocolon側は今回差分対象外として `Cocolon(232).zip` を参照し、今回差分はbackend internal / tests / docs onlyとして読む。
+`mashos-api_8(53).zip` を今回の最新実ファイルとして受領し、前提資料上の前回backend基準 `mashos-api_9(38).zip` からのBackend Suite Split / Matrix Consistency R0〜R12差分として追加15件・変更3件・削除0件を確認しました。Cocolon側は今回差分対象外として `Cocolon(232).zip` を参照し、今回差分はbackend internal / tests / docs onlyとして読む。
 
 # 2026-06-14 追補: EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8実装反映
 
@@ -2321,3 +2358,177 @@ RN UI / RN表示条件 / API route / request key / public response top-level key
 raw input / comment_text body / candidate body / surface body / reviewer free textをscorecard・handoff・public metaへ入れる。
 ```
 
+# 2026-06-15 追補: EmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12実装反映
+
+最新実ファイル `mashos-api_8(53).zip` では、P7-HOLD-004 Step5 Candidate Gate Preservation後続として、Backend Suite Split / Matrix Consistency R0〜R12がbackend internal-onlyで実装済みです。
+
+これはP7-HOLD-004を閉じる差分ではありません。R0〜R12は、full backend suite未確認を雑にgreen化せず、collect baseline / group inventory / execution plan / group run result normalizer / execution summary / matrix consistency / minimal group execution orderとして、未確認・HOLD・timeout・target greenをbody-freeに読めるようにするための器です。
+
+R0〜R12後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Backend Suite Split・Matrix Consistency material implemented
+collect baseline: 416 files / 2673 tests / 1 warning
+group inventory: 13 groups
+total batch count: 19
+matrix consistency report: connected
+group execution minimal order: created
+group_execution_started: false
+group_run_results_recorded: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R0〜R12で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R0/R1 | RN / API / DB / release / P8を変えない境界を固定し、416 files / 2673 testsのcollect baselineをbody-free materialとして保持する。 |
+| R2/R3 | backend suiteを13 group / 19 batchへ分けるinventoryとexecution planを固定する。group_10は2 batch、group_11は6 batch。 |
+| R4/R5 | pytest結果を PASS / PASS_WITH_SKIPS / FAIL / TIMEOUT / COLLECTION_FAILED / NOT_RUN / INTERRUPTED / BLOCKED_BY_PREVIOUS_RED に正規化し、execution summaryへ集約する。 |
+| R6/R7 | backend_suite_execution_summaryとRED closure正本をbackend suite split matrix / R10 hold matrixへ接続する。RED-003 closed材料がある場合でもHOLD-004は保持する。 |
+| R8/R9 | release handoff / validation matrixへexecution summaryとmatrix consistencyの読みを接続する。split greenをfull backend suite greenへ昇格しない。 |
+| R10/R11 | matrix consistency reportと、group_02_p7_hold004から始める最小group execution順をmaterial化する。 |
+| R12 | 実装結果docを追加し、前提資料反映用diffを整理する。source / test / runtime / RN / API / DBは変更しない。 |
+
+確認済みとして扱う範囲:
+
+```text
+latest実ファイルmarker確認:
+  R0/R1 baseline file, R2/R3 inventory plan, R4/R5 execution results,
+  R10 matrix consistency report, R11 minimal group order, R12 implementation result doc present
+
+前提資料更新時確認:
+  py_compile relevant R0〜R11 implementation/test files: ok
+  R0〜R11 added tests: 183 passed
+  R0〜R11 + existing P7 subset: 207 passed
+
+R12 implementation result doc内記録:
+  R0〜R11 added tests: 183 passed
+  R0〜R11 + existing P7 subset: 207 passed
+  group_execution_started=false
+  group_run_results_recorded=false
+```
+
+未確認として残す範囲:
+
+```text
+actual group execution results
+各group / batchのPASS / FAIL / TIMEOUT
+first red / first timeoutの実観測
+un-split full backend suite green
+実機submit / modal読感
+P5 human Blind QA
+P8へ進める根拠
+```
+
+R0〜R12後も、前提資料上では次を禁止のまま固定します。
+
+```text
+Backend Suite Split / Matrix Consistency material implementedをP7-HOLD-004 closureと読む。
+collect-only成功をfull backend suite greenと読む。
+13 group inventory / 19 batch plan作成をgroup execution完了と読む。
+default matrix consistency PASSをrelease readyと読む。
+R0〜R11 tests 207 passedをP7 completeと読む。
+split_all_groups_green_confirmedをfull backend suite greenと同一視する。
+group_execution_started=falseなのにgroup run result recordedと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+
+# 2026-06-15 追補: EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20実装反映
+
+最新実ファイル `mashos-api_6(63).zip` では、P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12後続として、Current Snapshot Baseline Reconcile R13〜R20がbackend internal-onlyで実装済みです。
+
+これはP7-HOLD-004を閉じる差分ではありません。R13〜R20は、古いbaselineをcurrent baselineとして扱わないために、current collect baseline、group inventory、execution plan、execution summary、matrix connection、official group_02 capture採用条件を同じ20260615 current snapshotへ再接続する差分です。
+
+R13〜R20後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Current Snapshot Baseline Reconcile R13-R20 implemented
+active current collect baseline: 425 files / 2856 tests / 1 warning
+previous collect baseline: 416 files / 2673 tests / 1 warning
+baseline delta: +9 files / +183 tests / warnings delta 0
+affected_group_ids: group_02_p7_hold004
+current group_02_p7_hold004: 19 files / 252 tests
+group inventory: 13 groups
+total batch count: 19
+official group_02 capture adoption rule fixed: true
+official group_02 capture run executed: false
+official group_02 capture result recorded: false
+official group_02 capture green confirmed: false
+group_execution_started: false
+group_run_results_recorded: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R13〜R20で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R13 | previous baseline 416 / 2673 と current baseline 425 / 2856 を分離し、deltaをbody-free materialとして保持する。 |
+| R14 | active current collect baselineを `p7_hold004_backend_collect_baseline_20260615` へ更新する。 |
+| R15 | group inventoryをcurrent baselineへ更新し、`group_02_p7_hold004` を19 files / 252 testsへ更新する。 |
+| R16 | execution plan / minimal orderをcurrent baselineへ再接続し、first capture groupをgroup_02のまま保持する。 |
+| R17 | group run result / execution summaryのbaseline参照を20260615 currentへ更新する。 |
+| R18 | matrix consistency / hold matrix / release handoff / validation matrixを同じcurrent baselineへ再接続する。 |
+| R19 | refreshed baseline上のofficial group_02 capture採用条件を固定する。ただしrunは未実行。 |
+| R20 | implementation result docと前提資料反映候補を追加する。 |
+
+確認済みとして扱う範囲:
+
+```text
+latest実ファイルmarker確認:
+  R13 reconcile module present
+  R20 implementation result doc present
+
+前提資料更新時確認:
+  py_compile relevant R13〜R20 implementation/test files: ok
+  R13〜R20 target tests: 183 passed
+  full collect-only: 2856 tests collected / 1 warning
+  group_02 collect-only: 252 tests collected / 1 warning
+
+R20 implementation result doc内記録:
+  official_capture_run_executed=false
+  official_capture_result_recorded=false
+  official_group_02_capture_green_confirmed=false
+  group_run_results_recorded=false_or_summary_default
+```
+
+未確認として残す範囲:
+
+```text
+official group_02 capture run
+official group_02 capture resultの実記録
+split group全体のexecution結果
+full backend suite execution green
+first red / first timeoutの実観測
+実機submit / modal読感
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+P8 user model / dictionaryへ進める条件
+```
+
+R13〜R20後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R13〜R20完了をP7-HOLD-004 closureと読む。
+current collect-only 2856 collectedをfull backend suite greenと読む。
+group_02 252 passedの過去ad hoc確認をofficial resultと読む。
+R19採用条件固定をofficial run実行済みと読む。
+matrix consistency PASSをrelease readyと読む。
+old baseline 416 / 2673をcurrent baselineとして扱う。
+current group_02 19 / 252をfull backend suite greenと同一視する。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```

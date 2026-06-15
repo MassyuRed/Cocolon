@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-14"
+revision_date: "2026-06-15"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -3738,3 +3738,105 @@ R11 incompleteを次赤取得済みと読む。
 P7 complete / P8 start allowed / release_allowedをtrueにする。
 ```
 
+# 2026-06-15 差分追記: P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12 contract / boundary
+
+今回のP7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12で追加・修正されたcontract境界は次です。
+
+| 境界 | 固定すること |
+|---|---|
+| R0 design boundary | RN / API / DB / Emlis本文runtime / Gate runtime / P8 / release判断を変更しない。 |
+| R1 collect baseline | 416 files / 2673 tests / 1 warningをbody-free baselineとして保持する。collect-only成功をfull backend suite greenへ変換しない。 |
+| R2 group inventory | 13 group / unassigned 0 / duplicate 0 / total 416 files / 2673 testsを固定する。 |
+| R3 execution plan | 19 batches、group_10=2 batches、group_11=6 batches、capture run / confirmation run分離を固定する。 |
+| R4 result normalizer | PASS / PASS_WITH_SKIPS / FAIL / TIMEOUT / COLLECTION_FAILED / NOT_RUN / INTERRUPTED / BLOCKED_BY_PREVIOUS_RED へ正規化する。terminal output / traceback bodyは保持しない。 |
+| R5 execution summary | group status / failed group / timeout group / first red / first timeoutをbody-freeに集約する。split greenをfull suite greenへ昇格しない。 |
+| R6/R7 matrix connection | execution summaryとRED closure正本をbackend split matrix / R10 hold matrixへ接続する。RED-003 closed材料があってもHOLD-004は保持する。 |
+| R8/R9 release / validation | release handoff / validation matrixへ接続するが、release_allowed=false、p7_complete=false、p8_start_allowed=falseを維持する。 |
+| R10 matrix consistency | RED / HOLD / full suite green false / release false / body-freeをbackend split / R10 / release / validation間で比較する。 |
+| R11 minimal order | group_02_p7_hold004から開始し、fail/timeoutで止める最小group execution順を固定する。 |
+| R12 implementation result | 実装結果docと前提資料反映diffを残す。実group execution結果とは扱わない。 |
+
+以下は、どれもP7-HOLD-004 closure条件ではありません。
+
+```text
+collect-only success
+13 group inventory created
+19 batch execution plan created
+default matrix consistency PASS
+R0〜R11 added tests 183 passed
+R0〜R11 + existing P7 subset 207 passed
+R12 implementation result document added
+```
+
+今回追加されたP7-HOLD-004 backend suite split regression入口は次です。
+
+```text
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py
+```
+
+禁止する誤読:
+
+```text
+split_all_groups_green_confirmed を full_backend_suite_green_confirmed と同一視する。
+body-free materialに raw input / comment_text body / candidate body / surface body / terminal output / traceback bodyを入れる。
+group_execution_started=falseの状態をgroup execution完了と読む。
+release_allowed / p7_complete / p8_start_allowed をtrueにする。
+```
+
+
+# 2026-06-15 差分追記: P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20 contract / boundary
+
+今回のP7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20で追加・修正されたcontract境界は次です。
+
+| 境界 | contract |
+|---|---|
+| previous/current baseline separation | 416 files / 2673 testsの旧baselineを、425 files / 2856 testsのcurrent baselineとして扱わない。 |
+| active current collect baseline | `p7_hold004_backend_collect_baseline_20260615` は425 files / 2856 tests / 1 warningで固定する。 |
+| current group inventory | group count 13 / total batch count 19 / total group file count 425 / total group test item count 2856で固定する。 |
+| group_02 current count | `group_02_p7_hold004` は19 files / 252 tests / 1 batchとして扱う。 |
+| execution plan connection | collect baseline / inventory / execution plan / execution summaryは20260615 current idsで一致させる。 |
+| matrix current connection | backend suite split matrix / R10 hold matrix / release handoff / validation matrix / matrix consistency reportは同じcurrent baselineを読む。 |
+| official group_02 adoption rule | official captureとして採用できるのは、current baseline / current inventory / current plan / group_02 19 files / 252 testsと一致するbody-free run resultだけ。 |
+| old baseline rejection | old baseline idのrun resultをcurrent official resultとして採用しない。 |
+| non-closure | R13〜R20 green、collect-only、matrix consistency、adoption rule固定をHOLD closure / release readyへ変換しない。 |
+
+以下は、どれもP7-HOLD-004 closure条件ではありません。
+
+```text
+current baseline 425 / 2856 fixed
+full collect-only 2856 collected
+group_02 collect-only 252 collected
+group_02過去ad hoc 252 passed
+R19 official adoption rule fixed
+matrix current connection PASS
+R13〜R20 target tests 183 passed
+```
+
+今回追加・更新されたP7-HOLD-004 current snapshot regression入口は次です。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_current_snapshot_baseline_reconcile.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_CurrentSnapshotBaselineReconcile_ImplementationResult_20260615.md
+```
