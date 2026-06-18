@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-06-15"
+revision_date: "2026-06-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(220).zip"
+  premise: "Cocolon_前提資料(233).zip"
   Cocolon: "Cocolon(234).zip"
-  mashos-api: "mashos-api_6(63).zip"
+  mashos-api: "mashos-api_9(40).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1029
-  total: 1246
+  mashos-api: 1069
+  total: 1286
 purpose: "華恋が国家システムに関係する全ファイルを Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN の流れで復元できるようにする"
 coverage:
-  included_files_total: 1246
+  included_files_total: 1286
   included_files_cocolon: 217
-  included_files_mashos_api: 1029
+  included_files_mashos_api: 1069
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -96,6 +96,45 @@ coverage:
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
+  p7_hold004_group02_result_current_snapshot_reconcile_r41_r46_reflected: true
+  p7_hold004_group02_result_current_snapshot_reconcile_added_files: 4
+  p7_hold004_group02_result_current_snapshot_reconcile_changed_files: 0
+  p7_hold004_group02_result_current_snapshot_reconcile_removed_files: 0
+  p7_hold004_r42_r40_default_not_run_preserved: true
+  p7_hold004_r42_explicit_source_accepted_result_status: PASSED_ISOLATED
+  p7_hold004_r43_current_working_snapshot_collect_file_count: 432
+  p7_hold004_r43_current_working_snapshot_collect_test_count: 2892
+  p7_hold004_r44_drift_classification_status: R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY
+  p7_hold004_r45_release_projection_keeps_release_closed: true
+  p7_hold004_r46_next_recommended_work: P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW
+  p7_hold004_latest_full_backend_collect_after_r41_r46_file_count: 434
+  p7_hold004_latest_full_backend_collect_after_r41_r46_test_count: 2906
+  p7_hold004_group02_result_current_snapshot_reconcile_full_01_02_regeneration: false
+  p7_r46_display_contract_p5p6_return_r0_r14_reflected: true
+  p7_r46_display_contract_p5p6_return_r0_r14_added_files: 18
+  p7_r46_display_contract_p5p6_return_r0_r14_changed_files: 5
+  p7_r46_display_contract_p5p6_return_r0_r14_removed_files: 0
+  p7_r46_display_contract_green_confirmed: true
+  p7_r46_p5_human_blind_qa_run: false
+  p7_r46_p6_limited_human_readfeel_run: false
+  p7_r46_real_device_modal_review_run: false
+  p7_r46_full_backend_suite_green_confirmed: false
+  p7_r46_release_allowed: false
+  p7_r46_p7_complete: false
+  p7_r46_p8_start_allowed: false
+  p7_r47_local_review_packet_policy_r0_r15_reflected: true
+  p7_r47_local_review_packet_policy_r0_r15_added_files: 9
+  p7_r47_local_review_packet_policy_r0_r15_changed_files: 0
+  p7_r47_local_review_packet_policy_r0_r15_removed_files: 0
+  p7_r47_policy_ready: true
+  p7_r47_p5_human_blind_qa_start_allowed_after_policy: true
+  p7_r47_p5_human_blind_qa_confirmed: false
+  p7_r47_p6_limited_human_readfeel_run: false
+  p7_r47_real_device_modal_review_run: false
+  p7_r47_full_backend_suite_green_confirmed: false
+  p7_r47_release_allowed: false
+  p7_r47_p7_complete: false
+  p7_r47_p8_start_allowed: false
 ---
 
 # 1. 1行定義
@@ -2326,3 +2365,209 @@ release_allowed: false
 ```
 
 この差分を、EmlisAI runtime改善、RN表示改善、release ready、P8開始根拠として読んではいけません。
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29国家システム境界
+
+R21〜R29は、国家システム上の `Input -> Save -> Dispatch -> Snapshot -> Worker -> Publish -> Read -> RN` のproduction経路を変更しません。今回の差分は、P7 Product Quality Runner内部で、backend test suiteの正本・受領snapshot・official capture readinessを読むための測定laneです。
+
+国家システム上は次のように読む。
+
+```text
+production ingress: unchanged
+RN display: unchanged
+public API route / request key / response top-level key: unchanged
+DB schema / write path: unchanged
+Emlis本文runtime: unchanged
+Gate runtime: unchanged
+P7 internal material lane:
+  received snapshot scope / collect summary
+  active-vs-received fingerprint reconcile
+  adoption decision / evidence freeze
+  official group_02 readiness guard
+  matrix / handoff / validation blocking status
+  timeout classification policy
+  verification procedure freeze
+```
+
+R21〜R29で重要なのは、`mashos-api(148).zip` を受領した事実を、active `source_snapshot_ref` に即変換しないことです。active baselineは引き続き `p7_hold004_backend_collect_baseline_20260615` / `mashos-api(147).zip` / `fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1` として読み、received snapshotは `mashos-api(148).zip` / `4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d` として分離して読む。
+
+禁止する国家システム上の誤読:
+
+```text
+received snapshot material追加をproduction API変更と読む。
+readiness guard追加をGate緩和と読む。
+R29 verification procedure fixedを実機確認済みと読む。
+collect-only greenをproduction runtime greenと読む。
+P7 internal blocker refsをpublic responseへ出す。
+RN表示条件やpublic response shapeが変わったと読む。
+DB write pathやaccount/access policyへ影響したと読む。
+```
+
+# 2026-06-16 差分追記: P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40の国家システム上の読み方
+
+R30〜R40は、国家システム上はbackend internal測定laneの差分です。ユーザー入力、保存、課金、RN表示、API public response、DB write pathには新しい入口を追加しません。
+
+```text
+production ingress: unchanged
+RN visible contract: unchanged
+/emotion/submit route: unchanged
+request key: unchanged
+public response top-level key: unchanged
+DB schema / write path: unchanged
+Emlis本文runtime: unchanged
+P7 material / matrix / release handoff / validation: updated
+```
+
+国家システム上、今回の差分で変わったのは「P7-HOLD-004の測定正本をどう読むか」です。R21〜R29でblockedだったreceived snapshot mismatchは、R30〜R35のadoption evidenceを経て、R36〜R38でpost-adoption active baselineとしてruntime material buildersへ接続されました。ただし、official group_02 readiness READYは、実行済みやgreenを意味しません。
+
+```text
+READY_FOR_OFFICIAL_CAPTURE_RUN
+  != official_group_02_capture_green_confirmed
+  != full_backend_suite_green_confirmed
+  != hold004_close_allowed
+  != release_allowed
+```
+
+R40では、official group_02 result recording materialが追加されました。defaultは `NOT_RUN` であり、body-freeなrun_resultを明示的に渡さない限り、実行済み扱いにはしません。group_02 isolated PASSが投入されても、full backend suite greenへは昇格しません。
+
+国家システム上の禁止読み:
+
+```text
+active baseline refresh appliedをrelease readyと読む。
+received snapshot mismatch resolvedをfull backend suite greenと読む。
+READY_FOR_OFFICIAL_CAPTURE_RUNをgroup_02 greenと読む。
+group_02 isolated PASSをfull backend suite greenと読む。
+R30〜R40をP7-HOLD-004 closureと読む。
+P8開始条件が揃ったと読む。
+```
+
+# 2026-06-17 差分追記: P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46の国家システム上の読み方
+
+R41〜R46は、国家システム上はbackend internal測定laneの差分です。ユーザー入力、保存、課金、RN表示、API public response、DB write pathには新しい入口を追加しません。
+
+```text
+production ingress: unchanged
+RN visible contract: unchanged
+/emotion/submit route: unchanged
+request key: unchanged
+public response top-level key: unchanged
+DB schema / write path: unchanged
+Emlis本文runtime: unchanged
+P7 material / matrix / release handoff / validation: updated through internal projection
+```
+
+国家システム上、今回の差分で変わったのは「P7-HOLD-004の測定結果をどう読むか」です。group_02はisolated resultとしてPASSED_ISOLATEDへ投影可能になりましたが、full backend suite green、release_allowed、P7 complete、P8 startへは進みません。
+
+```text
+PASSED_ISOLATED(group_02)
+  != full_backend_suite_green_confirmed
+  != hold004_close_allowed
+  != p7_complete
+  != p8_start_allowed
+  != release_allowed
+```
+
+R46では、次作業としてP5/P6 human readfeel / real device modal reviewへ戻る判断がmaterial化されています。これはP5/P6が完了したという意味ではなく、P7検証整理だけでCocolonを前へ進めた扱いにしないための国家システム上の戻り道です。
+
+国家システム上の禁止読み:
+
+```text
+R41〜R46をP7-HOLD-004 closureと読む。
+group_02 PASSED_ISOLATEDをfull backend suite greenと読む。
+current collect-only 432 / 2892またはlatest collect-only 434 / 2906をexecution greenと読む。
+R44 drift classificationをactive baseline updateと読む。
+R46 P5/P6 return decisionをP5/P6読感確認済みと読む。
+P7 internal blocker refsをpublic responseへ出す。
+RN表示条件やpublic response shapeが変わったと読む。
+DB write pathやaccount/access policyへ影響したと読む。
+```
+
+# 2026-06-18 差分追記: EmlisAI P7-R46 R0〜R14 国家システム上の扱い
+
+latest実ファイル `mashos-api_9(39).zip` では、P7-R46 P5/P6 Return + Display Contract Red Classification R0〜R14がbackend internal-onlyで反映済みです。比較元は、R0/R1開始前の受領backend snapshot `mashos-api(153).zip`、比較先は `mashos-api_9(39).zip` です。Cocolon側は今回差分対象外で、前提資料上の217 filesを維持します。
+
+国家システム上、今回のR0〜R14は `/emotion/submit` production ingressを変えるものではなく、EmlisAIの表示契約・public meta・handoff materialを整理するbackend internal laneです。
+
+## Input -> EmlisAI immediate observation flowでの位置づけ
+
+```text
+Input submit
+  -> existing /emotion/submit route unchanged
+  -> EmlisAI reply runtime unchanged in public response shape
+  -> gate recovery / labelled two-stage / complete_initial lineage meta refined
+  -> public_feedback_meta body-free final-source lineage stabilized
+  -> input_feedback.comment_text visible contract unchanged
+  -> P5/P6 review handoff and real device checklist are internal material only
+```
+
+## 変更しない国家システム境界
+
+```text
+RN production UI: unchanged
+RN表示タイトル `Emlisの観測`: unchanged
+RN表示条件 observation_status == passed + comment_text non-empty: unchanged
+/emotion/submit route: unchanged
+request key: unchanged
+public response top-level key: unchanged
+DB schema / DB write path: unchanged
+Gate threshold relaxation: not applied
+fixed commentText / case専用surface / case専用mode: not added
+release_allowed / p7_complete / p8_start_allowed: false maintained
+```
+
+## 国家システム上の次順
+
+```text
+1. local review packet storage / generation / disposal policyを決める
+2. P5 human Blind QA material generation and review
+3. P6 limited human readfeel review after P5
+4. real device submit / modal readfeel review
+```
+
+この順番を飛ばしてP8 / release readinessへ進むことは、国家システム上の未確認を成果化する扱いになるため禁止です。
+
+# 2026-06-18 差分追記: EmlisAI P7-R47 R0〜R15 国家システム上の扱い
+
+latest実ファイル `mashos-api_9(40).zip` では、P7-R47 Local Review Packet Policy R0〜R15がbackend internal-onlyで反映済みです。比較元は、R47開始前の受領backend snapshot `mashos-api(154).zip`、比較先は `mashos-api_9(40).zip` です。Cocolon側は今回差分対象外で、前提資料上の217 filesを維持します。
+
+国家システム上、今回のR47は `/emotion/submit` production ingressを変えるものではありません。P5/P6/実機読感へ進む前に、本文入りlocal review packetとbody-free P7 materialを分けるためのbackend internal policy laneです。
+
+## Input -> EmlisAI immediate observation flowでの位置づけ
+
+```text
+Input submit
+  -> existing /emotion/submit route unchanged
+  -> EmlisAI reply runtime unchanged
+  -> input_feedback.comment_text visible contract unchanged
+  -> P7-R46 branch A handoff reads local_review_packet_storage_generation_disposal_policy as next step
+  -> P7-R47 fixes local-only review packet policy / schema / disposal / review packet policies
+  -> P5 human Blind QA may start after policy, but actual review is not completed here
+```
+
+## 変更しない国家システム境界
+
+```text
+RN production UI: unchanged
+RN表示タイトル `Emlisの観測`: unchanged
+RN表示条件 observation_status == passed + comment_text non-empty: unchanged
+/emotion/submit route: unchanged
+request key: unchanged
+public response top-level key: unchanged
+DB schema / DB write path: unchanged
+Emlis本文runtime: unchanged
+Gate threshold relaxation: not applied
+fixed commentText / case専用surface / case専用mode: not added
+release_allowed / p7_complete / p8_start_allowed: false maintained
+```
+
+## 国家システム上の次順
+
+```text
+1. P5 human Blind QA material generation and review
+2. P6 limited human readfeel review after P5
+3. real device submit / modal readfeel review
+4. full backend suite execution green確認
+5. P7-HOLD-004 closure判断
+```
+
+R47 policy readyを、P5/P6/実機review完了、P7 complete、P8開始、release readinessへ変換することは禁止です。

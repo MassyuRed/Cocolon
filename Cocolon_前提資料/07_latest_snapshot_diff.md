@@ -1,20 +1,46 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-06-15"
+revision_date: "2026-06-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(220).zip"
+  premise: "Cocolon_前提資料(233).zip"
   Cocolon: "Cocolon(234).zip"
-  mashos-api: "mashos-api_6(63).zip"
+  mashos-api: "mashos-api_9(40).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1029
-  total: 1246
+  mashos-api: 1069
+  total: 1286
 purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
+coverage:
+  p7_r46_display_contract_p5p6_return_r0_r14_reflected: true
+  p7_r46_display_contract_p5p6_return_r0_r14_added_files: 18
+  p7_r46_display_contract_p5p6_return_r0_r14_changed_files: 5
+  p7_r46_display_contract_p5p6_return_r0_r14_removed_files: 0
+  p7_r46_display_contract_green_confirmed: true
+  p7_r46_p5_human_blind_qa_run: false
+  p7_r46_p6_limited_human_readfeel_run: false
+  p7_r46_real_device_modal_review_run: false
+  p7_r46_full_backend_suite_green_confirmed: false
+  p7_r46_release_allowed: false
+  p7_r46_p7_complete: false
+  p7_r46_p8_start_allowed: false
+  p7_r47_local_review_packet_policy_r0_r15_reflected: true
+  p7_r47_local_review_packet_policy_r0_r15_added_files: 9
+  p7_r47_local_review_packet_policy_r0_r15_changed_files: 0
+  p7_r47_local_review_packet_policy_r0_r15_removed_files: 0
+  p7_r47_policy_ready: true
+  p7_r47_p5_human_blind_qa_start_allowed_after_policy: true
+  p7_r47_p5_human_blind_qa_confirmed: false
+  p7_r47_p6_limited_human_readfeel_run: false
+  p7_r47_real_device_modal_review_run: false
+  p7_r47_full_backend_suite_green_confirmed: false
+  p7_r47_release_allowed: false
+  p7_r47_p7_complete: false
+  p7_r47_p8_start_allowed: false
 ---
 
 # 1. 今回の基準面
@@ -23,11 +49,11 @@ purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(234).zip` | 217 | Cocolon側は今回差分対象外。production RN UI、RN表示タイトル、RN表示条件、public response shapeの変更なしとして読む。 |
-| `mashos-api_6(63).zip` | 1029 | P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20成果物を含む最新backend。 |
-| total | 1246 | current collect baseline、previous baseline separation、13 group inventory、19 batch execution plan、execution summary、matrix再接続、official group_02 capture adoption rule、implementation result documentまでのcoverage対象。 |
+| `Cocolon(234).zip` | 217 | Cocolon側zipは今回差分対象外。production RN UI、RN表示条件、public response shapeの変更なしとして読む。 |
+| `mashos-api_9(40).zip` | 1069 | P7-R47 Local Review Packet Policy R0〜R15成果物を含む最新backend。R47 policy readyはtrueだが、P5/P6/実機review完了ではない。 |
+| total | 1286 | R46 display/public lineage整理に加えて、R47 local-only packet policy / schema / rating / notes / disposal / P5/P6/実機packet policy / R46 ledger接続 / contract test / validation matrix / touch boundaryまでのcoverage対象。 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-15時点の最新正本は末尾の `2026-06-15 差分追記: EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20 latest snapshot diff` とこの冒頭summaryです。P7-HOLD-004はBackend Suite Split / Matrix Consistency R0〜R12後に、current snapshot baselineをR13〜R20で再固定したが、official group_02 capture run、split group全体execution、un-split full backend suite green、P7 complete、P8 start、release_allowedはいずれも未成立です。
+この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-06-18時点の最新正本は末尾の `2026-06-18 差分追記: EmlisAI P7-R47 Local Review Packet Policy R0〜R15 latest snapshot diff` とこの冒頭summaryです。R47 R0〜R15で、P5/P6/実機読感へ進む前のlocal-only review packet policy、body-full/body-free境界、rating/blocker/notes/disposal schema、R46 next-decision ledger接続、contract test方針、target validation command matrix、touch/no-touch boundaryをbackend internal-onlyで固定しました。R47 policy readyとP5 Blind QA開始可否のpolicy条件はtrueになりましたが、P5 human Blind QA結果、P6 limited human readfeel、実機modal読感、full backend suite execution green、P7 complete、P8 start、release_allowedはいずれも未成立です。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -5524,4 +5550,709 @@ old baseline idのrun resultをcurrent official resultへ混ぜる。
 P7 complete / P8 start allowed / release_allowedをtrueにする。
 RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
 raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29 latest snapshot diff
+
+比較元は、前提資料上の直前backend基準 `mashos-api(148).zip` です。比較先は、今回の最新実ファイル `mashos-api_7(58).zip` です。Cocolon側zipは今回受領されていないため、latest received `Cocolon(234).zip` は217 filesで既存RN production UI / 表示条件 / public response shapeの変更なしとして扱います。
+
+## 追加ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py
+```
+
+## 変更ファイル
+
+```text
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 1 | 10 | 0 | P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29を追加・更新。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29.csv
+diff_inventory_sha256: e1b8106b3db8718cbbfbcae8082779d4ee5ab4114e3a1116bb3e0f02629f1a7a
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-HOLD-004: unresolved / Received Snapshot Baseline Fingerprint Reconcile R21-R29 implemented
+received_zip_ref: mashos-api(148).zip
+active_source_snapshot_ref_at_receipt: mashos-api(147).zip
+active current collect baseline id: p7_hold004_backend_collect_baseline_20260615
+active current item fingerprint: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+received snapshot collect: 425 files / 2856 tests / 1 warning
+received snapshot item fingerprint: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+received snapshot file fingerprint: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+received snapshot item fingerprint mismatch: unclassified blocker
+official group_02 capture readiness: BLOCKED_BY_RECEIVED_SNAPSHOT_ITEM_FINGERPRINT_MISMATCH
+default conditional active baseline adoption: BLOCKED_UNCLASSIFIED_ITEM_FINGERPRINT_MISMATCH
+R27 adoption evidence freeze: required
+R29 verification procedure fixed: true
+active baseline promoted to received snapshot: false
+official group_02 capture run executed: false
+official group_02 capture result recorded: false
+official group_02 capture green confirmed: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## 実ファイル確認と前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認:
+  R21/R22 scope and collect summary builders present
+  R23/R24 reconcile and adoption decision builders present
+  R25 readiness guard present
+  R26 matrix / handoff / validation blocker connection present
+  R27 conditional adoption builder present
+  Pre-R29 adoption evidence freeze builder present
+  R28 timeout classification policy present
+  R29 verification procedure builder present
+
+前提資料更新時確認:
+  py_compile relevant R21〜R29 implementation files: ok
+  R25/R26 + R27/R28 + R29 focused subset: 85 passed
+  R21〜R29 P7-HOLD-004 target subset: 183 passed
+  full backend collect-only: 425 files / 2856 tests / 1 warning
+  full backend collect-only item fingerprint: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+  full backend collect-only file fingerprint: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  group_02 collect-only: 19 files / 252 tests / 1 warning
+```
+
+未確認として残す範囲:
+
+```text
+item fingerprint mismatchのroot cause
+source identity adoption decision
+official group_02 capture run
+official group_02 capture resultの実記録
+split group全体のexecution結果
+full backend suite execution green
+first red / first timeoutの実観測
+実機submit / modal読感
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+P8 user model / dictionaryへ進める条件
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_7(58).zip` へ更新し、R21〜R29後のreceived snapshot mismatch / readiness blocked / non-closure境界を追記。 |
+| `01_cocolon_overall_structure.md` | Received Snapshot Baseline Fingerprint ReconcileをP7 internal laneとして追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさないbackend internal差分として追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | received snapshot identity separation、official group_02 readiness guard、timeout boundary、R29 verification readingを追記。 |
+| `05_cocolon_rule_file_index.md` | R21〜R29で追加・修正されたservice/testの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、coverage、追加path、境界維持、diff csv参照を反映。 |
+| `cocolon_local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29.csv` | `mashos-api(148).zip` -> `mashos-api_7(58).zip` の追加1件・変更10件を記録。 |
+
+## 禁止する読み方
+
+```text
+R21〜R29完了をP7-HOLD-004 closureと読む。
+received snapshot item fingerprint 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d をactive baselineへ即採用したと読む。
+`mashos-api(148).zip` をactive source_snapshot_refへ昇格済みと読む。
+R27 conditional adoption branchの存在をactive baseline更新済みと読む。
+R29 verification procedure fixedを検証結果greenやrelease readyと読む。
+full collect-only 2856 collectedをfull backend suite execution greenと読む。
+group_02 collect-only 252 collectedをofficial group greenと読む。
+group_02 TIMEOUTをgreenまたは即FAILへ変換する。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40 latest snapshot diff
+
+比較元は、前提資料が保持していたR21〜R29後状態です。ローカル差分確認では `mashos-api(151).zip` を基準にし、比較先は今回の最新実ファイル `mashos-api_7(59).zip` です。Cocolon側は今回差分対象外で、前提資料上の参照 `Cocolon(234).zip` / 217 files を維持します。今回差分はbackend internal-onlyです。
+
+## 追加ファイル
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_adoption_evidence.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_runtime_builder_refresh.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r30_r31_20260616.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r32_r33_20260616.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r34_r35_20260616.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r36_r37_20260616.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r38_r39_20260616.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r40_20260616.py
+```
+
+## 変更ファイル
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py
+mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 8 | 13 | 0 | P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40を追加・更新。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40.csv
+diff_inventory_sha256: 6cd0d645bfd482a1409ab61eba2956c25d12b01fde175af0a0fc8e3f23b28d5b
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-HOLD-004: unresolved / Active Baseline Adoption Evidence + Runtime Builder Refresh R30-R40 implemented
+previous active baseline id: p7_hold004_backend_collect_baseline_20260615
+previous active source_snapshot_ref: mashos-api(147).zip
+previous active item fingerprint: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+current active baseline id: p7_hold004_backend_collect_baseline_20260615_received_148
+current active source_snapshot_ref: mashos-api(148).zip
+current active item fingerprint: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+current active file fingerprint: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+same_baseline_id_hash_replacement_allowed: false
+historical_r21_r29_material_rewritten: false
+received_snapshot_baseline_fingerprint_reconciled: true
+received_snapshot_item_fingerprint_mismatch_unresolved: false
+active_baseline_update_applied_to_runtime_builders: true
+source_snapshot_ref_updated_in_active_builders: true
+official group_02 capture readiness: READY_FOR_OFFICIAL_CAPTURE_RUN
+official group_02 capture result recording default: NOT_RUN
+official group_02 capture green confirmed: false
+can_claim_group_green: false
+can_claim_full_backend_suite_green: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## 実ファイル確認と前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認:
+  active baseline adoption evidence module present
+  active baseline runtime builder refresh module present
+  R30/R31/R32/R33/R34/R35 contract tests present
+  R36/R37/R38/R39/R40 contract tests present
+
+前提資料更新時確認:
+  py_compile relevant R30〜R40 implementation files: ok
+  R30〜R40 active baseline adoption / runtime refresh tests: 27 passed
+  group_02 collect-only: 19 files / 252 tests / 1 warning
+  full backend collect-only: 431 files / 2883 tests / 1 warning
+```
+
+未確認として残す範囲:
+
+```text
+official group_02 full run result body-free recording
+official group_02 capture green confirmation
+all backend groups official execution
+full backend suite execution green
+first red / first timeoutの実観測
+実機submit / modal読感
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+P8 user model / dictionaryへ進める条件
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_7(59).zip` へ更新し、R30〜R40後のactive baseline adoption / runtime refresh / non-closure境界を追記。 |
+| `01_cocolon_overall_structure.md` | Active Baseline Adoption Evidence / Runtime Builder RefreshをP7 internal laneとして追記。 |
+| `02_cocolon_national_system.md` | 国家システム上、production ingress / RN / API / DBを増やさないbackend internal差分として追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | adoption evidence、same baseline id hash replacement禁止、readiness / result / full suite gate分離を追記。 |
+| `05_cocolon_rule_file_index.md` | R30〜R40で追加・修正されたservice/testの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新実ファイル差分と追加/変更pathを反映。 |
+| `manifest.json` | 最新snapshot、coverage、追加path、境界維持、diff csv参照を反映。 |
+| `cocolon_local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40.csv` | `mashos-api(151).zip` -> `mashos-api_7(59).zip` の追加8件・変更13件を記録。 |
+
+## 禁止する読み方
+
+```text
+R30〜R40完了をP7-HOLD-004 closureと読む。
+post-adoption active baseline materialをfull backend suite greenと読む。
+official group_02 readiness READYをgroup greenと読む。
+official group_02 result recording default NOT_RUNを実行済みと読む。
+group_02 isolated PASSだけでfull backend suite greenと読む。
+full collect-only 2883 collectedをfull backend suite execution greenと読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-17 差分追記: EmlisAI P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46 latest snapshot diff
+
+比較元は、前提資料が保持していたR30〜R40後状態です。ローカル差分確認では `mashos-api(152).zip` を直前backend working snapshotとして使用し、比較先は今回の最新実ファイル `mashos-api_4(72).zip` です。Cocolon側は今回差分対象外で、前提資料上の参照 `Cocolon(234).zip` / 217 files を維持します。今回差分はbackend internal-onlyです。
+
+## 追加ファイル
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group02_result_current_snapshot_reconcile.py
+mashos-api/ai/tests/test_emlis_ai_p7_group02_current_snapshot_reconcile_r41_r42_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_current_snapshot_collect_drift_r43_r44_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_projection_next_decision_r45_r46_20260617.py
+```
+
+## 変更ファイル
+
+```text
+既存ファイルの変更は、直前backend working snapshotとの差分では検出していません。
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / 表示条件 / public response shapeは変えない。 |
+| mashos-api | 4 | 0 | 0 | P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46を追加。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260617_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46.csv
+diff_inventory_sha256: 1ab535607453906b0e1a0fb07f71b034e14a570defaa413b911eff56f1aa657e
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-HOLD-004: unresolved / Group02 Result + Current Snapshot Reconcile R41-R46 implemented
+R41 group_02 local evidence: 252 passed / 1 warning / non-official local evidence
+R42 official group_02 result recording reconcile: explicit source-accepted PASSED_ISOLATED supported / R40 default NOT_RUN preserved
+R43 current working snapshot collect drift evidence: 432 files / 2892 tests / 1 warning
+R44 drift classification: R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY
+R45 release projection: group_02 isolated result and current snapshot drift projected, release closed
+R46 next decision: P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW recommended
+latest full backend collect-only after R41-R46 tests present: 434 files / 2906 tests / 1 warning
+latest full backend collect-only items_sha256: 404fc91c9a5b918c17197a2a438e59489517eccd12504f02e7b357e6d1c30414
+latest full backend collect-only files_sha256: 01f689231aa44ad04032b22abf51ac9006b33612cae48871df72ed752301b7d5
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## 実ファイル確認と前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認:
+  group02 result / current snapshot reconcile module present
+  R41/R42 contract test present
+  R43/R44 contract test present
+  R45/R46 contract test present
+
+前提資料更新時確認:
+  py_compile R41〜R46 reconcile module: ok
+  R41〜R46 target contract tests: 23 passed
+  R40 regression: 4 passed
+  P5/P6 return boundary subset: 22 passed
+  group_02 collect-only: 19 files / 252 tests / 1 warning
+  full backend collect-only: 434 files / 2906 tests / 1 warning
+```
+
+未確認として残す範囲:
+
+```text
+group_02 official execution rerun completion in latest container session
+all backend groups official execution
+full backend suite execution green
+first red / first timeoutの実観測
+P7-HOLD-004 closure
+P7 complete
+P8 start
+release readiness
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+実機submit / modal読感
+外部ユーザーpilot
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_4(72).zip` へ更新し、R41〜R46後のgroup_02 result / current snapshot reconcile / P5-P6 return decision境界を追記。 |
+| `01_cocolon_overall_structure.md` | R41〜R46のbackend internal測定lane構造と、production RN/API/DB非変更境界を追記。 |
+| `02_cocolon_national_system.md` | R41〜R46が国家システム上backend internal測定laneであり、production ingressやpublic responseへ影響しないことを追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | R41〜R46のcontract owner、validation結果、禁止読みを追記。 |
+| `05_cocolon_rule_file_index.md` | R41〜R46で追加されたmodule / contract testの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新snapshot差分として本sectionを追記。 |
+| `manifest.json` | source snapshot / file count / R41〜R46反映状態 / diff inventory metadataを更新。 |
+| `cocolon_local_file_inventory_diff_20260617_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46.csv` | `mashos-api(152).zip` -> `mashos-api_4(72).zip` の追加4件を記録。 |
+
+## 禁止する読み
+
+```text
+R41〜R46完了をP7-HOLD-004 closureと読む。
+R42 PASSED_ISOLATEDをfull backend suite greenと読む。
+R43 collect-only 432 / 2892をexecution greenと読む。
+latest collect-only 434 / 2906をexecution greenと読む。
+R44 drift classificationをactive baseline adoptionと読む。
+R45 projectionをrelease permissionと読む。
+R46 P5/P6 return decisionをP5/P6人間読感完了と読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+```
+
+# 2026-06-18 差分追記: EmlisAI P7-R46 Display Contract Red Classification / P5-P6 Return R0〜R14 latest snapshot diff
+
+latest実ファイル `mashos-api_9(39).zip` では、P7-R46 P5/P6 Return + Display Contract Red Classification R0〜R14がbackend internal-onlyで反映済みです。比較元は、R0/R1開始前の受領backend snapshot `mashos-api(153).zip`、比較先は `mashos-api_9(39).zip` です。Cocolon側は今回差分対象外で、前提資料上の217 filesを維持します。
+
+## 追加ファイル
+
+```text
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_BodyFreeLineageRecord_RedDC001_R4_R5_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_DisplayContractRedLedger_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_NextDecisionSummaryHandoffLedger_R14_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_P5P6HumanReadfeelHandoffMaterial_R10_R11_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_PublicMetaFinalSourceConsistencyGuard_TargetValidationMatrix_R8_R9_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_RealDeviceModalReviewChecklist_ClosedValidation_R12_R13_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_RedDC002_DisplayContractTestReconstruction_R6_R7_20260617.md
+mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_SourceLineageRecoveryLaneMatrix_R2_R3_20260617.md
+mashos-api/ai/services/ai_inference/emlis_ai_body_free_public_source_lineage.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_next_decision_handoff_ledger.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_real_device_modal_review_closed_validation.py
+mashos-api/ai/tests/test_emlis_ai_body_free_public_source_lineage_r4_r5_20260617.py
+mashos-api/ai/tests/test_emlis_ai_display_contract_lineage_semantics_r6_r7_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_r46_next_decision_handoff_ledger_r14_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material_r10_r11_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_r46_real_device_modal_review_closed_validation_r12_r13_20260617.py
+mashos-api/ai/tests/test_emlis_ai_public_meta_final_source_consistency_guard_r8_r9_20260617.py
+```
+
+## 変更ファイル
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py
+mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py
+mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py
+mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py
+mashos-api/ai/tests/test_emlis_ai_display_contract.py
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / RN表示条件 / public response shapeは変えない。 |
+| mashos-api | 18 | 5 | 0 | P7-R46 Display Contract Red Classification / P5-P6 Return R0〜R14を反映。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260618_p7_r46_display_contract_p5p6_return_r0_r14.csv
+diff_inventory_sha256: e89d80105872b3c16ba3c4d0e50222bc63755b77d74362b566f714135914e6ca
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-R46 Display Contract / P5-P6 Return bridge: R0-R14 implemented and reflected
+source_snapshot_ref_for_this_update: mashos-api_9(39).zip
+base_snapshot_ref_for_diff: mashos-api(153).zip
+backend_file_count: 1060
+total_reference_file_count_with_Cocolon_217: 1277
+
+R0/R1 display red reproduction freeze:
+  initial display contract state before repair: 3 passed / 2 failed
+  RED-DC-001: original_candidate_source_kind expected ai_generated but actual labelled_two_stage_surface_recomposition_candidate
+  RED-DC-002: composer_model expected complete_initial_surface_recomposition_v1 but actual labelled_two_stage_surface_recomposition_v1
+  body-free red ledger materialized: true
+
+R2/R3 source lineage / recovery lane semantics:
+  root_candidate_source_kind / recovery_input_candidate_source_kind / selected_public_candidate_source_kind / pre_public_candidate_source_kind / final_public_candidate_source_kind fixed
+  original_candidate_source_kind kept as root alias / compatibility field
+  complete_initial pre-public attempt and labelled final public source are separated
+
+R4/R5 body-free lineage / RED-DC-001:
+  body-free public source lineage helper added
+  raw input / comment_text body / candidate body / surface body excluded by sanitizer contract
+  RED-DC-001 root source lineage protected against final labelled alias overwrite
+
+R6/R7 RED-DC-002 / display contract reconstruction:
+  RED-DC-002 classified as stale final-source expectation + public meta semantic drift, not runtime regression requiring complete_initial final
+  display contract reconstructed to assert final labelled source and pre-public complete_initial attempt separately
+
+R8/R9 public meta final-source guard / validation matrix:
+  public_surface_lineage final_public_candidate_source_kind aligned to applied final source
+  stale pre-public public_surface_lineage is not allowed to override applied final source
+  post-final not-applied material is not falsely promoted to final source
+
+R10/R11 P5/P6 human readfeel handoff:
+  body-free handoff material added
+  actual human review packet bodies are not materialized here
+  P5 human Blind QA not run
+  P6 limited human readfeel review not run
+
+R12/R13 real device / closed validation:
+  real device submit / modal readfeel checklist added
+  real device modal review remains NOT_RUN
+  P7 hold / release / P8 closed validation keeps release_allowed=false / p7_complete=false / p8_start_allowed=false
+
+R14 next decision ledger:
+  default branch: A_DISPLAY_GREEN_PUBLIC_LINEAGE_CONSISTENT
+  next order: local_review_packet_storage_generation_disposal_policy -> P5 human Blind QA -> P6 limited human readfeel after P5 -> real device submit/modal readfeel review
+  P5/P6 formal review is not treated as already completed
+  P7-HOLD-004 closure not allowed
+  release_allowed: false
+  p7_complete: false
+  p8_start_allowed: false
+  hold004_close_allowed: false
+```
+
+## 実ファイル確認と前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認:
+  R0/R1 red ledger doc present
+  R2/R3 source lineage / recovery lane matrix doc present
+  R4/R5 body-free public source lineage helper and tests present
+  R6/R7 display contract lineage semantic tests present
+  R8/R9 final-source consistency guard tests present
+  R10/R11 P5/P6 human readfeel handoff module and tests present
+  R12/R13 real device modal review closed validation module and tests present
+  R14 next decision handoff ledger module and tests present
+
+前提資料更新時確認:
+  py_compile relevant R0〜R14 implementation files: ok
+  display contract: 5 passed
+  R4〜R14 combined: 33 passed
+  P5 major subset: 63 passed / 1 warning
+  P6 major subset: 43 passed
+  API public contract + two-stage reception E2E: 10 passed / 3 warnings
+  full backend collect-only after R0〜R14: 440 files / 2934 tests / 1 warning
+  latest full backend collect-only items_sha256: 63fb9731892b06b86b2b41913d805208081fadc30252a72ea0b435e842c727b1
+  latest full backend collect-only files_sha256: 4f4fefd174af1e85e7ad176a802fe78608ed9d588aba17568e527bc8e48755cf
+```
+
+未確認として残す範囲:
+
+```text
+full backend suite execution green
+RN contract実行 in this update
+実機submit / modal読感
+P5 human Blind QA実施
+P6 limited human readfeel review実施
+actual local review packet storage / generation / disposal policy
+P7-HOLD-004 closure
+P7 complete
+P8 start
+release readiness
+外部ユーザーpilot
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_9(39).zip` へ更新し、R0〜R14後のdisplay contract green / body-free lineage / P5-P6 return handoff / real device checklist / closed validation境界を追記。 |
+| `01_cocolon_overall_structure.md` | R0〜R14のbackend internal測定lane構造、lineage material、human readfeel handoff、real device closed validation、next decision ledgerを追記。 |
+| `02_cocolon_national_system.md` | R0〜R14が国家システム上backend internal測定laneであり、production ingress / RN / API / DBを変更していないことを追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | display contract semantic reconstruction、body-free lineage guard、public meta final-source consistency、closed validationのcontract ownerと検証結果を追記。 |
+| `05_cocolon_rule_file_index.md` | R0〜R14で追加・修正されたservice/testの確認索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新snapshot差分として本sectionを追記。 |
+| `manifest.json` | source snapshot / file count / R0〜R14反映状態 / diff inventory metadataを更新。 |
+| `cocolon_local_file_inventory_diff_20260618_p7_r46_display_contract_p5p6_return_r0_r14.csv` | `mashos-api(153).zip` -> `mashos-api_9(39).zip` の追加18件・変更5件を記録。 |
+
+## 禁止する読み
+
+```text
+R0〜R14完了をP7-HOLD-004 closureと読む。
+display contract greenをP5/P6 human readfeel完了と読む。
+P5/P6 handoff materialをactual review packet作成済みまたはreview実施済みと読む。
+real device checklist作成を実機modal読感確認済みと読む。
+R14 default branch AをP8開始許可またはrelease readinessと読む。
+full backend collect-only 440 / 2934をfull backend suite execution greenと読む。
+R8 final-source guardをcomment_text本文品質向上修正と読む。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+release_allowed / p7_complete / p8_start_allowed / hold004_close_allowedをtrueにする。
+```
+
+# 2026-06-18 差分追記: EmlisAI P7-R47 Local Review Packet Policy R0〜R15 latest snapshot diff
+
+latest実ファイル `mashos-api_9(40).zip` では、P7-R47 Local Review Packet Policy R0〜R15がbackend internal-onlyで反映済みです。比較元は、R47開始前の受領backend snapshot `mashos-api(154).zip`、比較先は `mashos-api_9(40).zip` です。Cocolon側は今回差分対象外で、前提資料上の217 filesを維持します。
+
+## 追加ファイル
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r47_local_review_packet_policy.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r0_r1_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r2_r3_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r4_r5_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r6_r7_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r8_r9_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r10_r11_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r12_r13_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r14_r15_20260618.py
+```
+
+## 変更ファイル
+
+```text
+0件
+```
+
+削除ファイルはありません。
+
+## 差分count
+
+| source | added | changed | removed | 読み |
+|---|---:|---:|---:|---|
+| Cocolon | 0 | 0 | 0 | 今回差分はbackend internal-only。RN production UI / RN表示条件 / public response shapeは変えない。 |
+| mashos-api | 9 | 0 | 0 | P7-R47 Local Review Packet Policy R0〜R15を反映。 |
+
+```text
+diff_inventory: cocolon_local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15.csv
+diff_inventory_sha256: c1020e056aada6771476ddc64be2236416ca4bd28b8c5c5c27b2b428f876ee78
+```
+
+## 前提資料へ反映する最新状態
+
+```text
+P7-R47 Local Review Packet Policy: R0-R15 implemented and reflected
+source_snapshot_ref_for_this_update: mashos-api_9(40).zip
+base_snapshot_ref_for_diff: mashos-api(154).zip
+backend_file_count: 1069
+total_reference_file_count_with_Cocolon_217: 1286
+
+R0/R1 current source / scope freeze:
+  R46 branch A handoff and HOLD state are refrozen
+  R47 scope / schema version / packet kind enum fixed
+
+R2/R3 storage / export policy:
+  COCOLON_EMLIS_LOCAL_REVIEW_ROOT fixed
+  body-full generation denied when root unset
+  repo/docs/tests/services/.git/release/public_meta/premise/implemented-docs and /mnt/data roots rejected
+  body-full packet / local-only json / reviewer notes / body-full zip export denied
+
+R4/R5 packet / manifest schema:
+  body-full local packet schema proposal fixed as local-only and must_not_export
+  body-free manifest schema proposal fixed
+  actual body-full packet and actual manifest are not materialized here
+
+R6/R7 rating / notes:
+  body-free rating row and blocker row schema proposals fixed
+  reviewer free text / notes local-only policy fixed
+  reviewer notes may only reduce to sanitized_reason_id / blocker_id for P7 material
+
+R8/R9 disposal / P5:
+  body-full packet retention max 72h fixed
+  reviewer notes retention after rating finalized max 24h fixed
+  body-free disposal receipt schema fixed
+  P5 human Blind QA packet policy fixed
+
+R10/R11 P6 / real device:
+  P6 limited human readfeel packet policy fixed
+  real device modal review packet policy fixed
+  actual P6 review and actual real device review are not run
+
+R12/R13 R46 ledger / contract test:
+  R47 connects to R46 branch A as body-free policy-ready handoff material
+  r47_policy_ready=true
+  P5 human Blind QA start allowed after policy=true
+  R47 contract test policy fixed
+
+R14/R15 validation / touch boundary:
+  target validation command matrix fixed
+  touch candidate and no-touch boundary fixed
+  actual validation execution green and full backend suite green are not claimed
+
+release_allowed: false
+p7_complete: false
+p8_start_allowed: false
+hold004_close_allowed: false
+```
+
+## 実ファイル確認と前提資料更新時確認から反映する確認結果
+
+```text
+latest実ファイル marker確認:
+  R47 policy module present
+  R0/R1 through R14/R15 split contract tests present
+  R47 implemented steps R0〜R15 fixed
+  R47 not_yet_implemented_steps is empty after R14/R15
+  r47_policy_ready / local_review_packet_policy_ready / policy_ready true
+  P5 human Blind QA confirmed false
+  P6 limited human readfeel confirmed false
+  real device modal review confirmed false
+  release_allowed / p7_complete / p8_start_allowed / hold004_close_allowed false
+
+validation confirmed during premise update:
+  py_compile R47 policy module: ok
+  R47 R0/R1〜R14/R15 target: 275 passed
+  display + R46 regression + R47 R0/R1〜R14/R15: 308 passed
+  backend collect-only: 448 test files / 3209 tests / 1 warning
+```
+
+## 前提資料としての変更
+
+| file | 変更理由 |
+|---|---|
+| `00_karen_read_first.md` | 最新基準面を `mashos-api_9(40).zip` へ更新し、P7-R47 R0〜R15の読み方・検証結果・禁止読みを追記。 |
+| `01_cocolon_overall_structure.md` | R47がCocolon全体構造上backend internal / human readfeel preparation laneであることを追記。 |
+| `02_cocolon_national_system.md` | R47がproduction ingress / RN/API/DBを変えないlocal review policy laneであることを追記。 |
+| `02C_cocolon_contract_boundary_validation.md` | R47のcontract owner、target検証、禁止読みを追記。 |
+| `05_cocolon_rule_file_index.md` | R47で追加されたmodule / split contract testの索引を追記。 |
+| `07_latest_snapshot_diff.md` | 最新snapshot差分として本sectionを追記。 |
+| `manifest.json` | source snapshot / file count / R47反映状態 / diff inventory metadataを更新。 |
+| `cocolon_local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15.csv` | `mashos-api(154).zip` -> `mashos-api_9(40).zip` の追加9件を記録。 |
+
+## 禁止する読み
+
+```text
+R47 policy readyをP5/P6/real device review完了と読む。
+P5 human Blind QA start allowed after policyをP5 confirmedと読む。
+body-full local packet schema固定をactual body-full packet生成済みと読む。
+body-free manifest schema固定をactual manifest生成済みと読む。
+rating row / blocker row schema固定をactual rating rows生成済みと読む。
+reviewer notes policy固定をactual notes生成済みと読む。
+disposal policy固定をactual disposal run済みと読む。
+R47 target 275 passedまたはcollect-only 3209をfull backend suite execution greenと読む。
+release_allowed / p7_complete / p8_start_allowed / hold004_close_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write path / Gate threshold / Emlis本文runtimeを変更済みと読む。
+body-full packet / reviewer free text / terminal output / traceback bodyを前提資料・実装済み資料・release material・成果物zipへ混ぜる。
 ```

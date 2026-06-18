@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-06-15"
+revision_date: "2026-06-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(220).zip"
+  premise: "Cocolon_前提資料(233).zip"
   Cocolon: "Cocolon(234).zip"
-  mashos-api: "mashos-api_6(63).zip"
+  mashos-api: "mashos-api_9(40).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1029
-  total: 1246
+  mashos-api: 1069
+  total: 1286
 purpose: "華恋が作業前にCocolonのファイル構成・コード構成・名称混在境界を復元するための作業用地図"
 coverage:
-  total_files: 1246
-  included_in_overall_structure: 1246
-  included_in_national_system: 1246
+  total_files: 1286
+  included_in_overall_structure: 1286
+  included_in_national_system: 1286
   excluded_from_main_body: 0
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
@@ -146,11 +146,104 @@ coverage:
   p7_hold004_current_snapshot_baseline_reconcile_full_01_02_regeneration: false
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
+  p7_hold004_received_snapshot_baseline_reconcile_r21_r29_reflected: true
+  p7_hold004_received_snapshot_baseline_reconcile_added_files: 1
+  p7_hold004_received_snapshot_baseline_reconcile_changed_files: 10
+  p7_hold004_received_snapshot_baseline_reconcile_removed_files: 0
+  p7_hold004_received_snapshot_received_zip_ref: mashos-api(148).zip
+  p7_hold004_received_snapshot_active_source_snapshot_ref_at_receipt: mashos-api(147).zip
+  p7_hold004_received_snapshot_test_items_fingerprint_sha256: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+  p7_hold004_received_snapshot_test_files_fingerprint_sha256: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  p7_hold004_active_current_test_items_fingerprint_sha256: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+  p7_hold004_received_snapshot_item_fingerprint_mismatch_unclassified: true
+  p7_hold004_official_group02_capture_readiness_status: BLOCKED_BY_RECEIVED_SNAPSHOT_ITEM_FINGERPRINT_MISMATCH
+  p7_hold004_conditional_active_baseline_adoption_default_status: BLOCKED_UNCLASSIFIED_ITEM_FINGERPRINT_MISMATCH
+  p7_hold004_r27_adoption_evidence_freeze_required: true
+  p7_hold004_r29_verification_procedure_fixed: true
+  p7_hold004_received_snapshot_full_collect_item_count: 2856
+  p7_hold004_received_snapshot_full_collect_file_count: 425
+  p7_hold004_received_snapshot_full_collect_warning_count: 1
+  p7_hold004_received_snapshot_group02_collect_file_count: 19
+  p7_hold004_received_snapshot_group02_collect_test_count: 252
+  p7_hold004_received_snapshot_group02_timeout_is_green: false
+  p7_hold004_received_snapshot_group02_timeout_is_immediate_fail: false
+  p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40_reflected: true
+  p7_hold004_active_baseline_adoption_runtime_refresh_added_files: 8
+  p7_hold004_active_baseline_adoption_runtime_refresh_changed_files: 13
+  p7_hold004_active_baseline_adoption_runtime_refresh_removed_files: 0
+  p7_hold004_previous_active_baseline_id: p7_hold004_backend_collect_baseline_20260615
+  p7_hold004_previous_active_source_snapshot_ref: mashos-api(147).zip
+  p7_hold004_previous_active_test_items_fingerprint_sha256: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+  p7_hold004_post_adoption_active_baseline_id: p7_hold004_backend_collect_baseline_20260615_received_148
+  p7_hold004_post_adoption_active_source_snapshot_ref: mashos-api(148).zip
+  p7_hold004_post_adoption_active_test_items_fingerprint_sha256: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+  p7_hold004_post_adoption_active_test_files_fingerprint_sha256: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  p7_hold004_same_baseline_id_hash_replacement_allowed: false
+  p7_hold004_historical_r21_r29_material_rewritten: false
+  p7_hold004_received_snapshot_baseline_fingerprint_reconciled_after_adoption: true
+  p7_hold004_received_snapshot_item_fingerprint_mismatch_unresolved_after_adoption: false
+  p7_hold004_active_baseline_update_applied_to_runtime_builders: true
+  p7_hold004_source_snapshot_ref_updated_in_active_builders: true
+  p7_hold004_official_group02_capture_readiness_status_after_refresh: READY_FOR_OFFICIAL_CAPTURE_RUN
+  p7_hold004_official_group02_result_recording_default_status: NOT_RUN
+  p7_hold004_group02_green_confirmed_after_r40: false
+  p7_hold004_full_backend_collect_after_r30_r40_test_count: 2883
+  p7_hold004_full_backend_collect_after_r30_r40_file_count: 431
+  p7_hold004_full_backend_collect_after_r30_r40_warning_count: 1
+  p7_hold004_active_baseline_adoption_runtime_refresh_full_01_02_regeneration: false
+  p7_hold004_group02_result_current_snapshot_reconcile_r41_r46_reflected: true
+  p7_hold004_group02_result_current_snapshot_reconcile_added_files: 4
+  p7_hold004_group02_result_current_snapshot_reconcile_changed_files: 0
+  p7_hold004_group02_result_current_snapshot_reconcile_removed_files: 0
+  p7_hold004_r41_group02_local_execution_evidence_frozen: true
+  p7_hold004_r42_official_group02_result_recording_reconcile_implemented: true
+  p7_hold004_r42_r40_default_not_run_preserved: true
+  p7_hold004_r42_explicit_source_accepted_result_status: PASSED_ISOLATED
+  p7_hold004_r42_group02_result_scope: group_02_isolated_only
+  p7_hold004_r43_current_working_snapshot_collect_file_count: 432
+  p7_hold004_r43_current_working_snapshot_collect_test_count: 2892
+  p7_hold004_r43_current_working_snapshot_collect_warning_count: 1
+  p7_hold004_r43_current_working_snapshot_items_sha256: ae01c9f99025c065d29543b3b97508b9a9080ef1058c172fcee77181a66695f1
+  p7_hold004_r43_current_working_snapshot_files_sha256: 97a8c0a77c18f63920deeb750c54228ed36f8714c5677c15449a6beedb301125
+  p7_hold004_r44_drift_classification_status: R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY
+  p7_hold004_r45_release_projection_keeps_release_closed: true
+  p7_hold004_r46_next_recommended_work: P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW
+  p7_hold004_latest_full_backend_collect_after_r41_r46_file_count: 434
+  p7_hold004_latest_full_backend_collect_after_r41_r46_test_count: 2906
+  p7_hold004_latest_full_backend_collect_after_r41_r46_warning_count: 1
+  p7_hold004_latest_full_backend_collect_after_r41_r46_items_sha256: 404fc91c9a5b918c17197a2a438e59489517eccd12504f02e7b357e6d1c30414
+  p7_hold004_latest_full_backend_collect_after_r41_r46_files_sha256: 01f689231aa44ad04032b22abf51ac9006b33612cae48871df72ed752301b7d5
+  p7_hold004_group02_result_current_snapshot_reconcile_full_01_02_regeneration: false
   p7_complete: false
   p8_start_allowed: false
   release_allowed: false
   p7_red_hold_closure_full_01_02_regeneration: false
   p7_red003_body_free_guard_repair_r13_full_01_02_regeneration: false
+  p7_r46_display_contract_p5p6_return_r0_r14_reflected: true
+  p7_r46_display_contract_p5p6_return_r0_r14_added_files: 18
+  p7_r46_display_contract_p5p6_return_r0_r14_changed_files: 5
+  p7_r46_display_contract_p5p6_return_r0_r14_removed_files: 0
+  p7_r46_display_contract_green_confirmed: true
+  p7_r46_p5_human_blind_qa_run: false
+  p7_r46_p6_limited_human_readfeel_run: false
+  p7_r46_real_device_modal_review_run: false
+  p7_r46_full_backend_suite_green_confirmed: false
+  p7_r46_release_allowed: false
+  p7_r46_p7_complete: false
+  p7_r46_p8_start_allowed: false
+  p7_r47_local_review_packet_policy_r0_r15_reflected: true
+  p7_r47_local_review_packet_policy_r0_r15_added_files: 9
+  p7_r47_local_review_packet_policy_r0_r15_changed_files: 0
+  p7_r47_local_review_packet_policy_r0_r15_removed_files: 0
+  p7_r47_policy_ready: true
+  p7_r47_p5_human_blind_qa_start_allowed_after_policy: true
+  p7_r47_p5_human_blind_qa_confirmed: false
+  p7_r47_p6_limited_human_readfeel_run: false
+  p7_r47_real_device_modal_review_run: false
+  p7_r47_full_backend_suite_green_confirmed: false
+  p7_r47_release_allowed: false
+  p7_r47_p7_complete: false
+  p7_r47_p8_start_allowed: false
 ---
 
 # これは何か
@@ -2531,4 +2624,535 @@ current group_02 19 / 252をfull backend suite greenと同一視する。
 P7 complete / P8 start allowed / release_allowedをtrueにする。
 RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
 raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-16 追補: EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29実装反映
+
+最新実ファイル `mashos-api_7(58).zip` では、P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20後続として、Received Snapshot Baseline Fingerprint Reconcile R21〜R29がbackend internal-onlyで実装済みです。
+
+これはP7-HOLD-004を閉じる差分ではありません。R21〜R29は、受領zip `mashos-api(148).zip` のcollect結果をactive baselineへ黙って昇格せず、source identity、fingerprint差分、adoption evidence、official group_02 readiness、timeout policy、検証手順の読み方をbody-freeに固定する差分です。
+
+R21〜R29後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Received Snapshot Baseline Fingerprint Reconcile R21-R29 implemented
+received_zip_ref: mashos-api(148).zip
+active_source_snapshot_ref_at_receipt: mashos-api(147).zip
+active current collect baseline id: p7_hold004_backend_collect_baseline_20260615
+active current item fingerprint: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+received snapshot collect: 425 files / 2856 tests / 1 warning
+received snapshot item fingerprint: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+received snapshot file fingerprint: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+received snapshot item fingerprint mismatch: unclassified blocker
+official group_02 capture readiness: BLOCKED_BY_RECEIVED_SNAPSHOT_ITEM_FINGERPRINT_MISMATCH
+default conditional active baseline adoption: BLOCKED_UNCLASSIFIED_ITEM_FINGERPRINT_MISMATCH
+R27 adoption evidence freeze: required
+R29 verification procedure: fixed
+active baseline constants updated to received snapshot: false
+source_snapshot_ref promoted to mashos-api(148).zip: false
+official group_02 capture run executed: false
+official group_02 capture result recorded: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R21〜R29で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R21/R22 | `received_zip_ref` と active `source_snapshot_ref` を分離し、received collect summaryをnodeid一覧・terminal outputなしで保持する。 |
+| R23/R24 | active baselineとreceived snapshotのcount / warning / file fingerprint / item fingerprint / source identityを別々に比較し、adoption decisionを分離する。 |
+| R25 | received snapshot mismatchが未解消なら、PASS形のgroup_02 resultでもofficial captureとして採用しないreadiness guardを固定する。 |
+| R26 | backend split matrix / R10 hold matrix / release handoff / validation / matrix consistency reportへblocking statusを接続する。 |
+| R27 | active baseline adoptionは条件付きmaterialとしてのみ扱い、defaultでは正本昇格しない。 |
+| Pre-R29 | adoption evidence freezeを追加し、manual booleanだけでADOPTABLEにしない。 |
+| R28 | group_02 TIMEOUTはgreenではなく、即FAIL断定でもなく、body-free timeout classification materialとして扱う。 |
+| R29 | 検証手順とgreenと呼べる範囲を固定し、collect-onlyやtarget subset greenをexecution greenへ昇格しない。 |
+
+確認済みとして扱う範囲:
+
+```text
+latest実ファイルmarker確認:
+  received snapshot reconcile module present
+  R21/R22 scope and collect summary builders present
+  R23/R24 reconcile and adoption decision builders present
+  R25 official group_02 readiness guard present
+  R26 matrix / handoff / validation blocking connection present
+  R27 conditional adoption builder present
+  Pre-R29 adoption evidence freeze builder present
+  R28 timeout classification policy present
+  R29 verification procedure builder present
+
+前提資料更新時確認:
+  py_compile relevant R21〜R29 implementation files: ok
+  R25/R26 + R27/R28 + R29 focused subset: 85 passed
+  R21〜R29 P7-HOLD-004 target subset: 183 passed
+  full backend collect-only: 425 files / 2856 tests / 1 warning
+  full backend collect-only item fingerprint: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+  full backend collect-only file fingerprint: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+  group_02 collect-only: 19 files / 252 tests / 1 warning
+```
+
+未確認として残す範囲:
+
+```text
+item fingerprint mismatchのroot cause
+actionable source identity adoption decision
+official group_02 full run green
+full backend suite execution green
+split group全体のexecution結果
+first red / first timeoutの実観測
+実機submit / modal読感
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+P8 user model / dictionaryへ進める条件
+```
+
+R21〜R29後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R21〜R29完了をP7-HOLD-004 closureと読む。
+received snapshot item fingerprint 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d をactive currentへ即昇格したと読む。
+`mashos-api(148).zip` をactive source_snapshot_refへ昇格済みと読む。
+R27 adoptable branchの存在をactive baseline更新済みと読む。
+R29 verification procedure fixedを検証結果greenやrelease readyと読む。
+full collect-only 2856 collectedをfull backend suite execution greenと読む。
+group_02 collect-only 252 collectedをofficial group greenと読む。
+group_02 TIMEOUTをgreen扱いする。
+group_02 TIMEOUTを即FAIL断定する。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-16 追補: EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40実装反映
+
+最新実ファイル `mashos-api_7(59).zip` では、P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29後続として、Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40がbackend internal-onlyで実装済みです。
+
+これはP7-HOLD-004を閉じる差分ではありません。R30〜R40は、received snapshot側で安定していた `4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d` を、同一baseline idへ上書きせず、証拠・採用許可・post-adoption正本・runtime builder接続・official group_02 result recording・full backend suite gateへ分けて読むための差分です。
+
+R30〜R40後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Active Baseline Adoption Evidence + Runtime Builder Refresh R30-R40 implemented
+previous active baseline:
+  id: p7_hold004_backend_collect_baseline_20260615
+  source_snapshot_ref: mashos-api(147).zip
+  item fingerprint: fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1
+current active baseline after adoption:
+  id: p7_hold004_backend_collect_baseline_20260615_received_148
+  source_snapshot_ref: mashos-api(148).zip
+  item fingerprint: 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+  file fingerprint: 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6
+same_baseline_id_hash_replacement_allowed: false
+historical R21-R29 material rewritten: false
+received_snapshot_baseline_fingerprint_reconciled: true
+received_snapshot_item_fingerprint_mismatch_unresolved: false
+active_baseline_update_applied_to_runtime_builders: true
+source_snapshot_ref_updated_in_active_builders: true
+official group_02 capture readiness: READY_FOR_OFFICIAL_CAPTURE_RUN
+official group_02 result recording default: NOT_RUN
+official group_02 capture green confirmed: false
+can_claim_group_green: false
+can_claim_full_backend_suite_green: false
+full_backend_suite_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R30〜R40で追加・修正された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R30 | 受領snapshot側のlocal repeat collect evidenceをbody-freeに固定する。これはexecution greenではない。 |
+| R31 | `mashos-api(148).zip` とlocal attachment名を混同せず、`mashos-api(151).zip` をsource_snapshot_refへ昇格しない。 |
+| R32 | item fingerprint差分のroot causeを `BASELINE_CONSTANT_STALE` として分類可能にするが、semantic差分なしとは断定しない。 |
+| R33 | `NO_TEST_SEMANTIC_CHANGE_DETECTED` を根拠なしに使わず、`TEST_SEMANTIC_CHANGE_ACCEPTED_AS_BASELINE_REFRESH` として扱う。 |
+| R34 | R30〜R33の証拠をadoption evidence bundleとして束ね、R27条件へ接続するが、ここではactive baseline更新を適用しない。 |
+| R35 | conditional active baseline adoption gateでupdate allowedをtrueにする。ただしruntime builder適用・official capture・releaseへは進めない。 |
+| R36 | post-adoption active baseline materialをnew baseline idで作り、previous active baselineとhistorical R21〜R29を保持する。 |
+| R37 | P7-HOLD-004 runtime material buildersがpost-adoption active baselineを読むよう接続する。 |
+| R38 | hold matrix / release handoff / validation matrix / matrix consistency reportへactive baseline refresh stateを伝播する。 |
+| R39 | official group_02 capture runを行ってよい状態へ再判定する。ただしreadyはgreenではない。 |
+| R40 | official group_02 result recordingとfull backend suite gateを分ける。group_02 PASSでもfull backend suite greenにはしない。 |
+
+確認済みとして扱う範囲:
+
+```text
+latest実ファイルmarker確認:
+  active baseline adoption evidence module present
+  active baseline runtime builder refresh module present
+  R30/R31/R32/R33/R34/R35 contract tests present
+  R36/R37/R38/R39/R40 contract tests present
+
+前提資料更新時確認:
+  py_compile relevant R30〜R40 implementation files: ok
+  R30〜R40 active baseline adoption / runtime refresh tests: 27 passed
+  group_02 collect-only: 19 files / 252 tests / 1 warning
+  full backend collect-only: 431 files / 2883 tests / 1 warning
+
+読み分け:
+  R30で固定した 425 files / 2856 tests / 4698... はreceived snapshot時点のevidence。
+  R30〜R40のtest追加後current collect-onlyは431 files / 2883 tests。
+  current collect-only増加はreceived snapshot evidenceを書き換える理由ではない。
+```
+
+未確認として残す範囲:
+
+```text
+official group_02 full runのbody-free result投入
+official group_02 capture green confirmation
+all backend groups official execution
+full backend suite execution green
+first red / first timeoutの実観測
+実機submit / modal読感
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+P8 user model / dictionaryへ進める条件
+```
+
+R30〜R40後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R30〜R40完了をP7-HOLD-004 closureと読む。
+post-adoption active baseline material作成をfull backend suite greenと読む。
+official group_02 readiness READYをgroup greenと読む。
+official group_02 result recording default NOT_RUNを実行済みと読む。
+group_02 PASSだけをfull backend suite greenへ昇格する。
+R30 received snapshot evidenceの425 / 2856 / 4698...を、実装後current suite 431 / 2883へ雑に上書きする。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-17 追補: EmlisAI P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46実装反映
+
+最新実ファイル `mashos-api_4(72).zip` では、P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40後続として、Group02 Result / Current Snapshot Reconcile R41〜R46がbackend internal-onlyで実装済みです。
+
+これはP7-HOLD-004を閉じる差分ではありません。R41〜R46は、R40でREADY/NOT_RUNとして分離したofficial group_02 result recordingと、R30〜R40後のcurrent working snapshot collect driftを、body-free materialとして嘘なく読み分け、次にP5/P6人間読感・実機modal確認へ戻る判断をmaterial化する差分です。
+
+R41〜R46後の状態は次です。
+
+```text
+P7-HOLD-004: unresolved / Group02 Result + Current Snapshot Reconcile R41-R46 implemented
+latest backend source checked for this premise update:
+  mashos-api_4(72).zip
+added files from previous backend working snapshot:
+  4
+changed files from previous backend working snapshot:
+  0
+removed files from previous backend working snapshot:
+  0
+R41 local group_02 evidence:
+  result: 252 passed / 1 warning
+  official_result_recording_applied: false
+  can_claim_group_green: false
+  can_claim_full_backend_suite_green: false
+R42 official group_02 recording reconcile:
+  R40 default NOT_RUN preserved: true
+  explicit source-accepted wrapper result status: PASSED_ISOLATED
+  group_green_scope: group_02_isolated_only
+  full_backend_suite_green_confirmed: false
+R43 current working snapshot collect drift evidence:
+  evidence snapshot ref: mashos-api_2(97).zip
+  collect-only: 432 files / 2892 tests / 1 warning
+  items_sha256: ae01c9f99025c065d29543b3b97508b9a9080ef1058c172fcee77181a66695f1
+  files_sha256: 97a8c0a77c18f63920deeb750c54228ed36f8714c5677c15449a6beedb301125
+R44 drift classification:
+  R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY
+  active_baseline_update_allowed: false
+  active_baseline_update_applied: false
+R45 projection:
+  group02_result_recording_status: PASSED_ISOLATED
+  group02_result_scope: group_02_isolated_only
+  release_allowed: false
+  p7_complete: false
+  p8_start_allowed: false
+R46 next decision:
+  next_recommended_work: P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW
+  backend_group03_execution_allowed_now: false
+  backend_group03_execution_required_later: true
+  backend_group03_execution_permanently_forbidden: false
+latest full backend collect-only after R41-R46 tests are present:
+  434 files / 2906 tests / 1 warning
+  items_sha256: 404fc91c9a5b918c17197a2a438e59489517eccd12504f02e7b357e6d1c30414
+  files_sha256: 01f689231aa44ad04032b22abf51ac9006b33612cae48871df72ed752301b7d5
+full_backend_suite_execution_green_confirmed: false
+hold004_close_allowed: false
+p7_complete: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+R41〜R46で追加された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R41 | group_02 local execution 252 passed / 1 warningをbody-free evidenceとして固定する。ただしR41単体ではofficial greenにしない。 |
+| R42 | R40 default NOT_RUNを維持し、明示的なsource-accepted wrapper経由だけでPASSED_ISOLATEDを記録できる。PASSED_ISOLATEDでもfull backend suite greenにはしない。 |
+| R43 | current working snapshot collect driftを432 files / 2892 tests / 1 warningとして固定する。これはR43 evidenceであり、latest full collect 434 / 2906へ雑に上書きしない。 |
+| R44 | active baseline 425 / 2856とR43 current working snapshot 432 / 2892の差分をR30〜R42 contract test additionとして分類する。ただしbaseline採用ではない。 |
+| R45 | group_02 isolated resultとcurrent snapshot driftをmatrix / release handoff / validationへ投影するが、release / P7 complete / P8 startは閉じたままにする。 |
+| R46 | 次作業をP5/P6 human readfeel / real device modal reviewへ戻す判断をmaterial化する。group_03以降は今すぐ自動連鎖しないが、永久不要にも永久禁止にもしない。 |
+
+確認済みとして扱う範囲:
+
+```text
+latest実ファイルmarker確認:
+  group02 result / current snapshot reconcile module present
+  R41/R42 contract test present
+  R43/R44 contract test present
+  R45/R46 contract test present
+
+前提資料更新時確認:
+  py_compile R41〜R46 reconcile module: ok
+  R41〜R46 target contract tests: 23 passed
+  R40 regression: 4 passed
+  P5/P6 return boundary subset: 22 passed
+  group_02 collect-only: 19 files / 252 tests / 1 warning
+  full backend collect-only: 434 files / 2906 tests / 1 warning
+```
+
+未確認として残す範囲:
+
+```text
+group_02 official execution rerun completion in latest container session
+all backend groups official execution
+full backend suite execution green
+first red / first timeoutの実観測
+P7-HOLD-004 closure
+P7 complete
+P8 start
+release readiness
+P5 human Blind QA
+P6 limited visible expansionの人間読感
+実機submit / modal読感
+外部ユーザーpilot
+```
+
+R41〜R46後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R41〜R46完了をP7-HOLD-004 closureと読む。
+R42 PASSED_ISOLATEDをfull backend suite greenと読む。
+R43 collect-only 432 / 2892をexecution greenと読む。
+latest collect-only 434 / 2906をexecution greenと読む。
+R44 drift classificationをactive baseline adoptionと読む。
+R45 projectionをrelease permissionと読む。
+R46 P5/P6 return decisionをP5/P6人間読感完了と読む。
+group_03 deferredを永久不要・永久禁止と読む。
+P7 complete / P8 start allowed / release_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+raw input / comment_text body / candidate body / surface body / terminal full output / traceback bodyをP7 materialやrelease materialへ入れる。
+```
+
+# 2026-06-18 追補: EmlisAI P7-R46 Display Contract Red Classification / P5-P6 Return R0〜R14実装反映
+
+最新実ファイル `mashos-api_9(39).zip` では、P7-R46後のP5/P6 return bridgeに入る前に必要だったdisplay contract赤分類とsource lineage / public meta / closed validationがR0〜R14まで反映済みです。
+
+これはP7を完了させる差分ではありません。display contract greenとpublic lineage consistencyを確認し、P5/P6 human readfeelへ戻る入口を作りましたが、P5/P6人間読感・実機modal読感・full backend suite execution greenは未完のままです。
+
+R0〜R14後の状態は次です。
+
+```text
+P7 current phase: P7 Product Quality Runner / P5-P6 return bridge
+latest backend source checked for this premise update:
+  mashos-api_9(39).zip
+base backend source used for diff:
+  mashos-api(153).zip
+added files from base backend snapshot:
+  18
+changed files from base backend snapshot:
+  5
+removed files from base backend snapshot:
+  0
+backend file count:
+  1060
+total reference file count:
+  1277
+
+R0/R1:
+  display red reproduction frozen and body-free red ledger materialized
+R2/R3:
+  source lineage terms and recovery lane decision matrix fixed
+R4/R5:
+  body-free public source lineage helper added and RED-DC-001 root lineage guard fixed
+R6/R7:
+  RED-DC-002 classified and display contract test reconstructed semantically
+R8/R9:
+  public meta final-source consistency guard added and validation matrix recorded
+R10/R11:
+  P5/P6 human readfeel body-free handoff material added; actual review not run
+R12/R13:
+  real device submit/modal checklist and P7/release/P8 closed validation added; actual real device review not run
+R14:
+  next decision summary / handoff ledger added
+
+display_contract_latest:
+  5 passed
+R4_R14_combined:
+  33 passed
+P5_major_subset:
+  63 passed / 1 warning
+P6_major_subset:
+  43 passed
+API_contract_plus_two_stage_reception_E2E:
+  10 passed / 3 warnings
+full_backend_collect_only_latest:
+  440 files / 2934 tests / 1 warning
+  items_sha256: 63fb9731892b06b86b2b41913d805208081fadc30252a72ea0b435e842c727b1
+  files_sha256: 4f4fefd174af1e85e7ad176a802fe78608ed9d588aba17568e527bc8e48755cf
+
+release_allowed: false
+p7_complete: false
+p8_start_allowed: false
+hold004_close_allowed: false
+```
+
+R0〜R14で追加された主な読み方は次です。
+
+| 範囲 | 前提資料上の読み方 |
+|---|---|
+| R0/R1 | display contract 2赤をbody-free red ledgerに固定した。ここでは赤を直さず、source lineage / recovery laneの赤として分類した。 |
+| R2/R3 | `root / recovery_input / selected / pre_public / final` のsource語彙を分け、`original_candidate_source_kind` をroot aliasとして扱う方向を固定した。 |
+| R4/R5 | body-free lineage record builder / sanitizerを追加し、RED-DC-001のroot sourceがfinal labelled aliasで上書きされないようにした。 |
+| R6/R7 | RED-DC-002を「complete_initialをfinalに戻すべき赤」ではなく、pre-public attemptとfinal labelled sourceのsemantic driftとして再構成した。 |
+| R8/R9 | public metaがpre-public sourceをfinalのように見せないよう、applied final sourceを優先するguardを追加した。 |
+| R10/R11 | P5/P6 human readfeelへ戻るためのbody-free handoff materialを作ったが、review本文packetや人間review結果は作っていない。 |
+| R12/R13 | 実機modal読感checklistとclosed validationを作ったが、実機確認済みにはしていない。 |
+| R14 | branch Aをdefaultにし、次はlocal review packet policy -> P5 -> P6 after P5 -> real deviceへ進むと固定した。ただしrelease / P8は閉じたまま。 |
+
+未確認として残す範囲:
+
+```text
+full backend suite execution green
+RN contract実行 in this update
+実機submit / modal読感
+P5 human Blind QA実施
+P6 limited human readfeel review実施
+actual local review packet storage / generation / disposal policy
+P7-HOLD-004 closure
+P7 complete
+P8 start
+release readiness
+```
+
+R0〜R14後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R0〜R14完了をP7-HOLD-004 closureと読む。
+display contract greenをP5/P6 human review合格と読む。
+P5/P6 handoff materialをreview本文packet作成済みと読む。
+real device checklist作成を実機modal読感確認済みと読む。
+R14 branch Aをrelease permission / P8 start allowedと読む。
+full collect-only 440 / 2934をfull backend suite execution greenと読む。
+public meta lineageがbody-freeであることを、ユーザーに見えるEmlis本文品質合格に変換する。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write pathを変更済みと読む。
+```
+
+# 2026-06-18 追補: EmlisAI P7-R47 Local Review Packet Policy R0〜R15実装反映
+
+最新実ファイル `mashos-api_9(40).zip` では、P7-R46 branch Aの次順として固定されていた `local_review_packet_storage_generation_disposal_policy` が、P7-R47 R0〜R15としてbackend internal-onlyに反映済みです。
+
+今回のR47は、P5 human Blind QA、P6 limited human readfeel、実機modal読感を実施した差分ではありません。本文入りreview packetを実生成せず、本文入りlocal-only materialとP7へ残してよいbody-free materialを混ぜないためのpolicy / schema / contract / validation境界を固定した差分です。
+
+最新状態は次です。
+
+```text
+P7 current phase: P7 Product Quality Runner / Local Review Packet Policy
+latest backend source checked for this premise update:
+  mashos-api_9(40).zip
+base backend source used for diff:
+  mashos-api(154).zip
+added files from base backend snapshot:
+  9
+changed files from base backend snapshot:
+  0
+removed files from base backend snapshot:
+  0
+backend file count:
+  1069
+total reference file count:
+  1286
+
+R0/R1:
+  current source / R46 branch A handoff / HOLD状態を再freezeし、R47 scope / schema version / packet kind enumを固定
+R2/R3:
+  COCOLON_EMLIS_LOCAL_REVIEW_ROOTとlocal-only storage root policy、export denylist / git・zip混入防止policyを固定
+R4/R5:
+  body-full local packet schema案とbody-free manifest schema案を固定。実packet生成はしない
+R6/R7:
+  body-free rating row / blocker row schema案とreviewer free text / notes local-only policyを固定
+R8/R9:
+  disposal / cleanup / retention policyとP5 human Blind QA packet policyを固定
+R10/R11:
+  P6 limited human readfeel packet policyとreal device modal review packet policyを固定
+R12/R13:
+  R46 next-decision ledgerとのbody-free接続方針とR47 contract test方針を固定
+R14/R15:
+  target validation command matrixと実装段階で触る候補 / 触らない境界を固定
+
+r47_policy_ready: true
+local_review_packet_policy_ready: true
+policy_ready: true
+p5_human_blind_qa_start_allowed_after_policy: true
+p5_human_blind_qa_confirmed: false
+p6_limited_human_readfeel_start_allowed: false
+p6_limited_human_readfeel_confirmed: false
+real_device_modal_review_start_allowed: false
+real_device_modal_review_confirmed: false
+release_allowed: false
+p7_complete: false
+p8_start_allowed: false
+hold004_close_allowed: false
+```
+
+前提資料更新時に確認したvalidationは次です。
+
+```text
+py_compile:
+  emlis_ai_p7_r47_local_review_packet_policy.py OK
+R47 R0/R1〜R14/R15 target:
+  275 passed
+display + R46 regression + R47 R0/R1〜R14/R15:
+  308 passed
+backend collect-only:
+  448 test files / 3209 tests collected / 1 warning
+```
+
+R47で追加された実ファイルは次です。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r47_local_review_packet_policy.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r0_r1_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r2_r3_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r4_r5_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r6_r7_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r8_r9_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r10_r11_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r12_r13_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r14_r15_20260618.py
+```
+
+R47後も、前提資料上では次を禁止のまま固定します。
+
+```text
+R47 policy readyをP5 human Blind QA完了と読む。
+P5 packet policy固定を実review packet生成済みと読む。
+body-full local packet schema固定を本文入りpacket実生成済みと読む。
+body-free manifest schema固定を実manifest生成済みと読む。
+rating / blocker row schema固定をactual rating rows生成済みと読む。
+reviewer notes policy固定をreviewer notes実生成済みと読む。
+disposal / retention policy固定をactual disposal実行済みと読む。
+P6 packet policy固定をP6 limited human readfeel開始・完了と読む。
+real device packet policy固定を実機modal読感確認済みと読む。
+R47 target 275 passedまたはcollect-only 3209をfull backend suite execution greenと読む。
+P7 complete / P8 start / release_allowed / hold004_close_allowedをtrueにする。
+RN UI / RN表示条件 / API route / request key / public response top-level key / DB write path / Gate threshold / Emlis本文runtimeを変更済みと読む。
+body-full packet / reviewer free text / terminal output / traceback bodyを前提資料・実装済み資料・release material・成果物zipへ混ぜる。
 ```

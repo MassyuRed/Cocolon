@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-06-15",
+  "revision_date": "2026-06-18",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -7,18 +7,18 @@
   "source_mode": "local_snapshot",
   "file_counts": {
     "Cocolon": 217,
-    "mashos-api": 1029,
-    "total": 1246
+    "mashos-api": 1069,
+    "total": 1286
   },
   "coverage_policy": {
-    "overall_structure_body_includes": 1246,
-    "national_system_body_includes": 1246,
+    "overall_structure_body_includes": 1286,
+    "national_system_body_includes": 1286,
     "excluded_from_main_body": 0,
     "inventory_removed": true,
-    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1246件、国家システム判断対象のcurrent全ファイル1246件を本文または差分追記で記載する。今回のP7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
-    "current_snapshot_total_files": 1246,
-    "overall_structure_body_includes_current_snapshot_files": 1246,
-    "national_system_body_lists_current_snapshot_files_with_relation": 1246,
+    "coverage_principle": "01/02にはCocolon構造に関係するcurrent全ファイル1286件、国家システム判断対象のcurrent全ファイル1286件を本文または差分追記で記載する。今回のP7-R47 Local Review Packet Policy R0〜R15は指定対象資料への差分反映であり、01/02 full inventory本文の全面再生成は行わない。",
+    "current_snapshot_total_files": 1286,
+    "overall_structure_body_includes_current_snapshot_files": 1286,
+    "national_system_body_lists_current_snapshot_files_with_relation": 1286,
     "db_info_doc_added": true,
     "coverage_principle_2026_04_25": "01/02の本文へcurrent full coverageを差分追記し、旧本文は履歴として保持する",
     "legacy_excluded_files_note_2026_04_25": "excluded_files は2026-04-22版の除外理由を保持した履歴フィールド。2026-04-25版では01/02本文にcurrent full coverageを差分追記しており、main bodyからの未記載除外は0件。",
@@ -1066,7 +1066,67 @@
       "p7_complete": false,
       "p8_start_allowed": false,
       "release_allowed": false
-    }
+    },
+    "p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40_reflected": true,
+    "p7_hold004_active_baseline_adoption_runtime_refresh_added_files": 8,
+    "p7_hold004_active_baseline_adoption_runtime_refresh_changed_files": 13,
+    "p7_hold004_active_baseline_adoption_runtime_refresh_removed_files": 0,
+    "p7_hold004_post_adoption_active_baseline_id": "p7_hold004_backend_collect_baseline_20260615_received_148",
+    "p7_hold004_previous_active_baseline_id": "p7_hold004_backend_collect_baseline_20260615",
+    "p7_hold004_previous_active_source_snapshot_ref": "mashos-api(147).zip",
+    "p7_hold004_post_adoption_active_source_snapshot_ref": "mashos-api(148).zip",
+    "p7_hold004_post_adoption_active_test_items_fingerprint_sha256": "4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d",
+    "p7_hold004_post_adoption_active_test_files_fingerprint_sha256": "6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6",
+    "p7_hold004_same_baseline_id_hash_replacement_allowed": false,
+    "p7_hold004_historical_r21_r29_material_rewritten": false,
+    "p7_hold004_received_snapshot_baseline_fingerprint_reconciled_after_adoption": true,
+    "p7_hold004_received_snapshot_item_fingerprint_mismatch_unresolved_after_adoption": false,
+    "p7_hold004_active_baseline_update_applied_to_runtime_builders": true,
+    "p7_hold004_source_snapshot_ref_updated_in_active_builders": true,
+    "p7_hold004_official_group02_capture_readiness_status_after_refresh": "READY_FOR_OFFICIAL_CAPTURE_RUN",
+    "p7_hold004_official_group02_result_recording_default_status": "NOT_RUN",
+    "p7_hold004_group02_green_confirmed_after_r40": false,
+    "p7_hold004_full_backend_collect_after_r30_r40_file_count": 431,
+    "p7_hold004_full_backend_collect_after_r30_r40_test_count": 2883,
+    "p7_hold004_full_backend_collect_after_r30_r40_warning_count": 1,
+    "p7_hold004_active_baseline_adoption_runtime_refresh_full_01_02_regeneration": false,
+    "p7_hold004_full_backend_suite_green_confirmed": false,
+    "p7_hold004_backend_hold004_close_allowed": false,
+    "p7_hold004_current_active_collect_baseline_id_after_r37": "p7_hold004_backend_collect_baseline_20260615_received_148",
+    "p7_hold004_current_active_source_snapshot_ref_after_r37": "mashos-api(148).zip",
+    "p7_hold004_current_active_test_items_fingerprint_sha256_after_r37": "4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d",
+    "p7_hold004_previous_active_test_items_fingerprint_sha256_after_r36": "fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1",
+    "p7_hold004_official_group02_capture_readiness_status_after_r39": "READY_FOR_OFFICIAL_CAPTURE_RUN",
+    "p7_hold004_official_group02_result_recording_default_status_after_r40": "NOT_RUN",
+    "p7_hold004_full_backend_suite_gate_satisfied_after_r40": false,
+    "p7_hold004_hold004_close_allowed_after_r40": false,
+    "p7_hold004_p8_start_allowed_after_r40": false,
+    "p7_hold004_release_allowed_after_r40": false,
+    "p7_hold004_group02_result_current_snapshot_reconcile_r41_r46_reflected": true,
+    "p7_hold004_group02_result_current_snapshot_reconcile_added_files": 4,
+    "p7_hold004_group02_result_current_snapshot_reconcile_changed_files": 0,
+    "p7_hold004_group02_result_current_snapshot_reconcile_removed_files": 0,
+    "p7_hold004_r42_r40_default_not_run_preserved": true,
+    "p7_hold004_r42_explicit_source_accepted_result_status": "PASSED_ISOLATED",
+    "p7_hold004_r43_current_working_snapshot_collect_file_count": 432,
+    "p7_hold004_r43_current_working_snapshot_collect_test_count": 2892,
+    "p7_hold004_r44_drift_classification_status": "R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY",
+    "p7_hold004_r45_release_projection_keeps_release_closed": true,
+    "p7_hold004_r46_next_recommended_work": "P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW",
+    "p7_hold004_latest_full_backend_collect_after_r41_r46_file_count": 434,
+    "p7_hold004_latest_full_backend_collect_after_r41_r46_test_count": 2906,
+    "p7_hold004_latest_full_backend_collect_after_r41_r46_warning_count": 1,
+    "p7_hold004_latest_full_backend_collect_after_r41_r46_items_sha256": "404fc91c9a5b918c17197a2a438e59489517eccd12504f02e7b357e6d1c30414",
+    "p7_hold004_latest_full_backend_collect_after_r41_r46_files_sha256": "01f689231aa44ad04032b22abf51ac9006b33612cae48871df72ed752301b7d5",
+    "p7_hold004_group02_result_current_snapshot_reconcile_full_01_02_regeneration": false,
+    "p7_r46_display_contract_p5p6_return_r0_r14_reflected": true,
+    "p7_r46_display_contract_p5p6_return_r0_r14_added_files": 18,
+    "p7_r46_display_contract_p5p6_return_r0_r14_changed_files": 5,
+    "p7_r46_display_contract_p5p6_return_r0_r14_removed_files": 0,
+    "p7_r46_full_backend_suite_green_confirmed": false,
+    "p7_r46_p5_human_blind_qa_run": false,
+    "p7_r46_p6_limited_human_readfeel_run": false,
+    "p7_r46_real_device_modal_review_run": false
   },
   "inclusion_rules": [
     "現行 runtime で使われるコード",
@@ -1123,7 +1183,7 @@
     },
     {
       "path": "05_cocolon_rule_file_index.md",
-      "purpose": "rule / test index。EmlisAI public input_feedback arrival Step0-10 ownerを含む"
+      "purpose": "rule / test index。EmlisAI P7-R47 Local Review Packet Policy R0〜R15 ownerを含む"
     },
     {
       "path": "06_cocolon_filename_change_hold_ledger.md",
@@ -1131,7 +1191,7 @@
     },
     {
       "path": "07_latest_snapshot_diff.md",
-      "purpose": "最新snapshot差分。P7-HOLD-004 Step5 Candidate Gate Preservation R0〜R12のbackend internal-only差分、HOLD保持、full suite未確認を固定する"
+      "purpose": "最新snapshot差分。P7-R47 Local Review Packet Policy R0〜R15のbackend internal-only差分、body-full/body-free境界、policy readyとreview未実施の分離、release/P7/P8 closedを固定する"
     },
     {
       "path": "09_naming_boundary.md",
@@ -1179,6 +1239,18 @@
     {
       "path": "cocolon_local_file_inventory_diff_20260615_p7_hold004_backend_suite_split_matrix_consistency_r0_r12.csv",
       "purpose": "EmlisAI P7-HOLD-004 Backend Suite Split / Matrix Consistency R0〜R12の実ファイル差分inventory"
+    },
+    {
+      "path": "cocolon_local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29.csv",
+      "purpose": "EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29の実ファイル差分inventory"
+    },
+    {
+      "path": "cocolon_local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40.csv",
+      "purpose": "EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40の実ファイル差分inventory"
+    },
+    {
+      "path": "cocolon_local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15.csv",
+      "purpose": "EmlisAI P7-R47 Local Review Packet Policy R0〜R15の実ファイル差分inventory"
     }
   ],
   "excluded_files": [
@@ -2158,55 +2230,38 @@
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
   "source_snapshot": {
-    "premise": "Cocolon_前提資料(220).zip",
+    "premise": "Cocolon_前提資料(233).zip",
     "Cocolon": "Cocolon(234).zip",
-    "mashos-api": "mashos-api_6(63).zip",
+    "mashos-api": "mashos-api_9(40).zip",
     "file_counts": {
       "Cocolon": 217,
-      "mashos-api": 1029,
-      "total": 1246
+      "mashos-api": 1069,
+      "total": 1286
     },
     "zip_sha256": {
-      "premise": "a1bad382eb4deb0673394e40601404dac30e6c932a85914be26b570e48bb1e05",
-      "Cocolon": "13ed67d2a673c823400949034ccbe5012bce1fc7fcb2c9b27aa30d744ff607a3",
-      "mashos-api": "28efb1c01ed79842db624a86ea7a158b9149e0f488d6d2ad68bd9d7fefd0fb59"
+      "premise": "db0d1eb28539d885545fa0e6f3f5b4e44437f21f87f0e4287ba3472b9d4da967",
+      "mashos-api": "c06b71c936d12cdec686c38298ef8bcec24706ad12930e827ccd017bb28592a0"
     },
     "source_mode": "local_snapshot",
-    "scope": "EmlisAI P7-HOLD-004 Current Snapshot Baseline Reconcile R13〜R20",
-    "summary": "P7-HOLD-004 backend suite split / matrix consistencyの正本を20260615 current baselineへ再固定する。active current collect baselineは425 files / 2856 tests / 1 warning、previous baselineは416 files / 2673 tests / 1 warningとして分離保持する。official group_02 capture adoption ruleは固定済みだが、official run/result、full backend suite green、HOLD004 close、P7 complete、P8 start、release_allowedはいずれも未成立。RN/API/DB/public response key変更は行わない。",
+    "scope": "EmlisAI P7-R47 Local Review Packet Policy R0〜R15",
+    "summary": "P7-R46 branch Aの次順として、local-only review packet storage / generation / disposal policyをR0〜R15で反映。body-full packetとbody-free P7 materialの分離、schema、rating/blocker、reviewer notes、disposal、P5/P6/real-device packet policy、R46 ledger接続、contract test方針、validation command matrix、touch/no-touch boundaryを固定。R47 policy readyとP5 human Blind QA start allowed after policyはtrueだが、P5/P6/real-device review、full backend suite execution green、P7 complete、P8 start、release_allowedはいずれもfalse。",
     "p7_current_status": {
-      "P7-RED-001": "CLOSED",
-      "P7-RED-002": "CLOSED",
-      "P7-RED-003": "default materialではunresolved保持 / observed-connected closure materialでは各matrix読み一致",
-      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
-      "P7-HOLD-002": "unresolved / P6 visible expansion boundary HOLD preserved",
+      "P7-HOLD-001": "unresolved / P5 human QA not confirmed",
+      "P7-HOLD-002": "unresolved / P6 limited human readfeel not confirmed",
       "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
-      "P7-HOLD-004": "unresolved / Current Snapshot Baseline Reconcile R13〜R20 implemented pending official group_02 capture and full backend suite green",
+      "P7-HOLD-004": "unresolved / full backend suite execution green unconfirmed; closure not allowed",
+      "r47_policy_ready": true,
+      "local_review_packet_policy_ready": true,
+      "policy_ready": true,
+      "p5_human_blind_qa_start_allowed_after_policy": true,
+      "p5_human_blind_qa_confirmed": false,
+      "p6_limited_human_readfeel_start_allowed": false,
+      "p6_limited_human_readfeel_confirmed": false,
+      "real_device_modal_review_start_allowed": false,
+      "real_device_modal_review_confirmed": false,
       "p7_complete": false,
       "p8_start_allowed": false,
-      "release_allowed": false
-    },
-    "p7_hold004_backend_suite_split_matrix_consistency_results": {
-      "active_current_collect_baseline": "425 files / 2856 tests / 1 warning",
-      "active_current_collect_baseline_id": "p7_hold004_backend_collect_baseline_20260615",
-      "previous_collect_baseline": "416 files / 2673 tests / 1 warning",
-      "previous_collect_baseline_id": "p7_hold004_backend_collect_baseline_20260614",
-      "baseline_delta": "+9 files / +183 tests / warnings delta 0",
-      "affected_group_ids": [
-        "group_02_p7_hold004"
-      ],
-      "current_group_02": "19 files / 252 tests",
-      "group_count": 13,
-      "total_batch_count": 19,
-      "matrix_consistency_report_connected": true,
-      "minimal_group_execution_order_created": true,
-      "official_group_02_capture_adoption_rule_fixed": true,
-      "official_group_02_capture_run_executed": false,
-      "official_group_02_capture_result_recorded": false,
-      "official_group_02_capture_green_confirmed": false,
-      "group_execution_started": false,
-      "group_run_results_recorded": false,
-      "full_backend_suite_green_confirmed": false,
+      "release_allowed": false,
       "hold004_close_allowed": false
     },
     "contract_unchanged": {
@@ -2219,44 +2274,30 @@
       "gate_relaxed": false,
       "fixed_comment_text_added": false,
       "case_specific_branch_added": false,
+      "emlis_body_runtime_changed": false,
       "release_allowed_true_applied": false
     },
     "mashos_api_added_files": [
-      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_HOLD004_CurrentSnapshotBaselineReconcile_ImplementationResult_20260615.md",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_current_snapshot_baseline_reconcile.py"
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_r47_local_review_packet_policy.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r0_r1_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r2_r3_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r4_r5_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r6_r7_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r8_r9_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r10_r11_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r12_r13_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r14_r15_20260618.py"
     ],
-    "mashos_api_changed_files": [
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
-      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_summary_20260614.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py",
-      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py"
-    ],
+    "mashos_api_changed_files": [],
     "mashos_api_removed_files": [],
     "validation_recorded": {
-      "premise_update_marker_presence": "confirmed",
-      "premise_update_py_compile_relevant_files": "ok",
-      "premise_update_r13_r20_target_tests": "183 passed",
-      "premise_update_full_collect_only": "2856 tests collected / 1 warning",
-      "premise_update_group_02_collect_only": "252 tests collected / 1 warning",
-      "implementation_result_doc_official_capture_run_executed": "false",
-      "implementation_result_doc_official_capture_result_recorded": "false",
-      "implementation_result_doc_official_group_02_capture_green_confirmed": "false"
+      "premise_update_py_compile_r47_policy_module": "ok",
+      "premise_update_r47_r0_r15_target": "275 passed",
+      "premise_update_display_r46_regression_plus_r47": "308 passed",
+      "premise_update_full_collect_only": "448 test files / 3209 tests / 1 warning"
     },
-    "diff_inventory": "cocolon_local_file_inventory_diff_20260615_p7_hold004_current_snapshot_baseline_reconcile_r13_r20.csv",
-    "diff_inventory_sha256": "007b49980225c7493fdd28989d182b48f8f5350bf56a7058dd88d0105413cfa8"
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15.csv",
+    "diff_inventory_sha256": "c1020e056aada6771476ddc64be2236416ca4bd28b8c5c5c27b2b428f876ee78"
   },
   "source_snapshot_2026_05_09_rn_split_monitoring": {
     "premise": "Cocolon_前提資料(51).zip",
@@ -9389,6 +9430,661 @@
       "R0-R11 tests as P7 complete",
       "split_all_groups_green_confirmed as full_backend_suite_green_confirmed",
       "group_execution_started=false as group results recorded"
+    ]
+  },
+  "source_snapshot_2026_06_16_p7_hold004_received_snapshot_baseline_reconcile_r21_r29": {
+    "premise": "Cocolon_前提資料(225).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_7(58).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 1030,
+      "total": 1247
+    },
+    "zip_sha256": {
+      "premise": "998fbd6171984db16f7e684fa0cf1a88dce38ce4f1d23f6ee455533c9cc6e509",
+      "Cocolon": "13ed67d2a673c823400949034ccbe5012bce1fc7fcb2c9b27aa30d744ff607a3",
+      "mashos-api": "0c1724b0f49670fa6292f86d161462c032e6434bc2818690619302ab682219a9"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29",
+    "summary": "P7-HOLD-004 received snapshot baseline fingerprint reconcileをR21〜R29で固定する。received_zip_ref=mashos-api(148).zipをactive source_snapshot_ref=mashos-api(147).zipへ即昇格せず、received item fingerprint 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d とactive item fingerprint fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1 の不一致を未分類blockerとして保持する。official group_02 capture readinessはblocked、active baseline adoptionは条件付きmaterialのみ、R29は検証手順固定であり、P7-HOLD-004 close / P8 start / release_allowedはいずれもfalse。",
+    "p7_current_status": {
+      "P7-RED-001": "CLOSED",
+      "P7-RED-002": "CLOSED",
+      "P7-RED-003": "default materialではunresolved保持 / observed-connected closure materialでは各matrix読み一致",
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / Received Snapshot Baseline Fingerprint Reconcile R21〜R29 implemented pending root cause classification, official group_02 capture, and full backend suite green",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_hold004_received_snapshot_reconcile_results": {
+      "active_current_collect_baseline_id": "p7_hold004_backend_collect_baseline_20260615",
+      "active_source_snapshot_ref_at_receipt": "mashos-api(147).zip",
+      "received_zip_ref": "mashos-api(148).zip",
+      "received_collect_summary": "425 files / 2856 tests / 1 warning",
+      "active_current_test_items_fingerprint_sha256": "fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1",
+      "received_test_items_fingerprint_sha256": "4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d",
+      "received_test_files_fingerprint_sha256": "6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6",
+      "item_fingerprint_match": false,
+      "file_fingerprint_match": true,
+      "root_cause_status": "UNCLASSIFIED",
+      "official_group02_capture_readiness_status": "BLOCKED_BY_RECEIVED_SNAPSHOT_ITEM_FINGERPRINT_MISMATCH",
+      "conditional_active_baseline_adoption_default_status": "BLOCKED_UNCLASSIFIED_ITEM_FINGERPRINT_MISMATCH",
+      "adoption_evidence_freeze_required": true,
+      "r29_verification_procedure_fixed": true,
+      "active_baseline_update_allowed_by_default": false,
+      "source_snapshot_ref_update_allowed_by_default": false,
+      "official_group_02_capture_run_allowed_by_default": false,
+      "official_group_02_capture_result_recording_allowed_by_default": false,
+      "group02_timeout_is_green": false,
+      "group02_timeout_is_immediate_fail": false,
+      "full_backend_suite_green_confirmed": false,
+      "hold004_close_allowed": false
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "gate_relaxed": false,
+      "emlis_body_runtime_changed": false,
+      "fixed_comment_text_added": false,
+      "case_specific_branch_added": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py"
+    ],
+    "mashos_api_removed_files": [],
+    "validation_recorded": {
+      "premise_update_marker_presence": "confirmed",
+      "premise_update_py_compile_relevant_files": "ok",
+      "premise_update_r25_r29_focused_subset": "85 passed",
+      "premise_update_r21_r29_target_subset": "183 passed",
+      "premise_update_full_collect_only": "425 files / 2856 tests / 1 warning / item fingerprint 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d / file fingerprint 6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6",
+      "premise_update_group_02_collect_only": "19 files / 252 tests / 1 warning",
+      "official_capture_run_executed": "false",
+      "official_capture_result_recorded": "false",
+      "official_group_02_capture_green_confirmed": "false"
+    },
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29.csv",
+    "diff_inventory_sha256": "e1b8106b3db8718cbbfbcae8082779d4ee5ab4114e3a1116bb3e0f02629f1a7a"
+  },
+  "latest_source_basis_2026_06_16_p7_hold004_received_snapshot_baseline_reconcile_r21_r29": {
+    "premise": "Cocolon_前提資料(225).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_7(58).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 1030,
+    "total_files": 1247,
+    "diff_from": "mashos-api(148).zip",
+    "diff_to": "mashos-api_7(58).zip",
+    "diff_counts": {
+      "added": 1,
+      "changed": 10,
+      "removed": 0
+    },
+    "doc_role": "P7-HOLD-004 received snapshot mismatchをofficial group_02 capture前に止め、adoption evidenceとR29 verification readingを確認するための作業用地図。"
+  },
+  "latest_modified_premise_files_2026_06_16_p7_hold004_received_snapshot_baseline_reconcile_r21_r29": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29.csv"
+  ],
+  "local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29": {
+    "path": "cocolon_local_file_inventory_diff_20260616_p7_hold004_received_snapshot_baseline_reconcile_r21_r29.csv",
+    "diff_from": "mashos-api(148).zip",
+    "diff_to": "mashos-api_7(58).zip",
+    "rows": 11,
+    "sha256": "e1b8106b3db8718cbbfbcae8082779d4ee5ab4114e3a1116bb3e0f02629f1a7a"
+  },
+  "p7_hold004_received_snapshot_baseline_reconcile_changed_paths_2026_06_16": {
+    "added": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_matrix_connection_20260615.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_matrix_consistency_report_20260615.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_release_validation_connection_20260615.py"
+    ],
+    "removed": []
+  },
+  "p7_hold004_received_snapshot_baseline_reconcile_policy_2026_06_16": {
+    "hold_id": "P7-HOLD-004",
+    "status": "unresolved / received snapshot item fingerprint mismatch unclassified",
+    "received_zip_ref": "mashos-api(148).zip",
+    "active_source_snapshot_ref_at_receipt": "mashos-api(147).zip",
+    "active_test_items_fingerprint_sha256": "fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1",
+    "received_test_items_fingerprint_sha256": "4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d",
+    "test_files_fingerprint_sha256": "6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6",
+    "official_group02_capture_readiness_status": "BLOCKED_BY_RECEIVED_SNAPSHOT_ITEM_FINGERPRINT_MISMATCH",
+    "active_baseline_update_allowed_by_default": false,
+    "source_snapshot_ref_update_allowed_by_default": false,
+    "full_backend_suite_green_confirmed": false,
+    "hold004_close_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "R21-R29 material implemented == P7-HOLD-004 closed",
+      "received item fingerprint adopted as active current",
+      "mashos-api(148).zip promoted to active source_snapshot_ref",
+      "full collect-only == execution green",
+      "group_02 collect-only == official group green",
+      "R29 verification procedure fixed == release ready",
+      "timeout == green",
+      "timeout == immediate fail",
+      "release_allowed true"
+    ]
+  },
+  "source_snapshot_2026_06_16_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40": {
+    "premise": "Cocolon_前提資料(227).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_7(59).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 1038,
+      "total": 1255
+    },
+    "zip_sha256": {
+      "premise": "88d64d4bfd0093f0cc3bee3f4b5e70bbb344f33129d7fb66d4b9c39e38f05ac4",
+      "mashos-api": "cba401e570502f5bfbd771d2950fbfb2f8bf00b2dd65b8a80a3c670e720fe103"
+    },
+    "source_mode": "local_snapshot",
+    "scope": "EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40",
+    "summary": "R30〜R40でreceived snapshot 4698...をnew active baseline idとしてpost-adoption active baselineへ採用し、runtime material builders / matrix / release / validationへ接続した。R39 readinessはREADY_FOR_OFFICIAL_CAPTURE_RUNだがgreenではなく、R40 result recording defaultはNOT_RUN、full backend suite green / P7 complete / P8 start / release_allowedはいずれもfalse。",
+    "p7_current_status": {
+      "P7-HOLD-001": "unresolved / P5 human QA incomplete",
+      "P7-HOLD-002": "unresolved / P6 visible expansion boundary HOLD preserved",
+      "P7-HOLD-003": "unresolved / real device submit and modal readfeel unverified",
+      "P7-HOLD-004": "unresolved / active baseline adoption evidence and runtime builder refresh implemented; pending official group_02 result recording and full backend suite green",
+      "p7_complete": false,
+      "p8_start_allowed": false,
+      "release_allowed": false
+    },
+    "p7_hold004_active_baseline_adoption_runtime_refresh_results": {
+      "previous_active_baseline_id": "p7_hold004_backend_collect_baseline_20260615",
+      "previous_active_source_snapshot_ref": "mashos-api(147).zip",
+      "previous_active_test_items_fingerprint_sha256": "fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1",
+      "current_active_baseline_id": "p7_hold004_backend_collect_baseline_20260615_received_148",
+      "current_active_source_snapshot_ref": "mashos-api(148).zip",
+      "current_active_test_items_fingerprint_sha256": "4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d",
+      "current_active_test_files_fingerprint_sha256": "6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6",
+      "local_attachment_ref_observed": "mashos-api(151).zip",
+      "local_attachment_promoted_to_source_snapshot_ref": false,
+      "root_cause_status": "BASELINE_CONSTANT_STALE",
+      "test_semantics_review_outcome": "TEST_SEMANTIC_CHANGE_ACCEPTED_AS_BASELINE_REFRESH",
+      "active_baseline_adoption_ready": true,
+      "active_baseline_update_allowed": true,
+      "active_baseline_update_applied_to_runtime_builders": true,
+      "source_snapshot_ref_updated_in_active_builders": true,
+      "received_snapshot_baseline_fingerprint_reconciled": true,
+      "received_snapshot_item_fingerprint_mismatch_unresolved": false,
+      "official_group02_capture_readiness_status": "READY_FOR_OFFICIAL_CAPTURE_RUN",
+      "official_group_02_capture_run_allowed": true,
+      "official_group_02_capture_result_recording_allowed": true,
+      "official_group_02_result_recording_default_status": "NOT_RUN",
+      "can_claim_group_green": false,
+      "can_claim_full_backend_suite_green": false,
+      "full_backend_suite_green_confirmed": false,
+      "full_backend_suite_gate_satisfied": false,
+      "hold004_close_allowed": false
+    },
+    "contract_unchanged": {
+      "rn_production_ui_changed": false,
+      "rn_visible_contract_changed": false,
+      "api_route_changed": false,
+      "request_key_changed": false,
+      "public_response_top_level_key_added": false,
+      "db_schema_or_write_path_changed": false,
+      "gate_relaxed": false,
+      "emlis_body_runtime_changed": false,
+      "fixed_comment_text_added": false,
+      "case_specific_branch_added": false,
+      "release_allowed_true_applied": false
+    },
+    "mashos_api_added_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_adoption_evidence.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_runtime_builder_refresh.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r30_r31_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r32_r33_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r34_r35_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r36_r37_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r38_r39_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r40_20260616.py"
+    ],
+    "mashos_api_changed_files": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py"
+    ],
+    "mashos_api_removed_files": [],
+    "validation_recorded": {
+      "premise_update_marker_presence": "confirmed",
+      "premise_update_py_compile_relevant_files": "ok",
+      "premise_update_r30_r40_contract_tests": "27 passed",
+      "premise_update_group_02_collect_only": "19 files / 252 tests / 1 warning",
+      "premise_update_full_collect_only_after_r40": "2883 tests / 1 warning",
+      "official_capture_result_recorded_default": "false / NOT_RUN",
+      "official_group_02_capture_green_confirmed": "false",
+      "full_backend_suite_green_confirmed": "false"
+    },
+    "diff_inventory": "cocolon_local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40.csv",
+    "diff_inventory_sha256": "6cd0d645bfd482a1409ab61eba2956c25d12b01fde175af0a0fc8e3f23b28d5b"
+  },
+  "latest_source_basis_2026_06_16_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40": {
+    "premise": "Cocolon_前提資料(227).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_7(59).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 1038,
+    "total_files": 1255,
+    "diff_from": "mashos-api(151).zip",
+    "diff_to": "mashos-api_7(59).zip",
+    "diff_counts": {
+      "added": 8,
+      "changed": 13,
+      "removed": 0
+    },
+    "doc_role": "P7-HOLD-004 active baseline adoption evidence / runtime builder refresh / official group_02 readiness / result gateを確認するための作業用地図。"
+  },
+  "latest_modified_premise_files_2026_06_16_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40.csv"
+  ],
+  "local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40": {
+    "path": "cocolon_local_file_inventory_diff_20260616_p7_hold004_active_baseline_adoption_runtime_refresh_r30_r40.csv",
+    "diff_from": "mashos-api(151).zip",
+    "diff_to": "mashos-api_7(59).zip",
+    "rows": 21,
+    "sha256": "6cd0d645bfd482a1409ab61eba2956c25d12b01fde175af0a0fc8e3f23b28d5b"
+  },
+  "p7_hold004_active_baseline_adoption_runtime_refresh_changed_paths_2026_06_16": {
+    "added": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_adoption_evidence.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_runtime_builder_refresh.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r30_r31_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r32_r33_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_adoption_evidence_r34_r35_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r36_r37_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r38_r39_20260616.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r40_20260616.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_execution_plan_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_backend_suite_group_inventory_20260614.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_hold004_group_execution_minimal_order_20260615.py"
+    ],
+    "removed": []
+  },
+  "p7_hold004_active_baseline_adoption_runtime_refresh_policy_2026_06_16": {
+    "hold_id": "P7-HOLD-004",
+    "status": "unresolved / active baseline adoption evidence and runtime builder refresh implemented; full backend suite green unconfirmed",
+    "previous_active_baseline_id": "p7_hold004_backend_collect_baseline_20260615",
+    "previous_active_source_snapshot_ref": "mashos-api(147).zip",
+    "previous_active_test_items_fingerprint_sha256": "fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1",
+    "current_active_baseline_id": "p7_hold004_backend_collect_baseline_20260615_received_148",
+    "current_active_source_snapshot_ref": "mashos-api(148).zip",
+    "current_active_test_items_fingerprint_sha256": "4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d",
+    "test_files_fingerprint_sha256": "6866231daf68427dca2de1b2011feea49450f7b4a8b3c5b9dec0f9ccd5f3e9c6",
+    "readiness_status": "READY_FOR_OFFICIAL_CAPTURE_RUN",
+    "result_recording_default_status": "NOT_RUN",
+    "full_backend_suite_green_confirmed": false,
+    "hold004_close_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "R39 readiness READY == group green",
+      "R40 default NOT_RUN == official PASS recorded",
+      "group_02 isolated PASS == full backend suite green",
+      "full collect-only == execution green",
+      "mashos-api(151).zip promoted to source_snapshot_ref",
+      "release_allowed true"
+    ]
+  },
+  "latest_source_basis_2026_06_17_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46": {
+    "premise": "Cocolon_前提資料(229).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_4(72).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 1042,
+    "total_files": 1259,
+    "diff_from": "mashos-api(152).zip",
+    "diff_to": "mashos-api_4(72).zip",
+    "diff_counts": {
+      "added": 4,
+      "changed": 0,
+      "removed": 0
+    },
+    "doc_role": "P7-HOLD-004 group_02 result recording / current snapshot collect drift / release projection / P5-P6 return decisionを確認するための作業用地図。"
+  },
+  "latest_modified_premise_files_2026_06_17_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260617_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46.csv"
+  ],
+  "local_file_inventory_diff_20260617_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46": {
+    "path": "cocolon_local_file_inventory_diff_20260617_p7_hold004_group02_result_current_snapshot_reconcile_r41_r46.csv",
+    "diff_from": "mashos-api(152).zip",
+    "diff_to": "mashos-api_4(72).zip",
+    "rows": 4,
+    "sha256": "1ab535607453906b0e1a0fb07f71b034e14a570defaa413b911eff56f1aa657e"
+  },
+  "p7_hold004_group02_result_current_snapshot_reconcile_changed_paths_2026_06_17": {
+    "added": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group02_result_current_snapshot_reconcile.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_group02_current_snapshot_reconcile_r41_r42_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_current_snapshot_collect_drift_r43_r44_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_projection_next_decision_r45_r46_20260617.py"
+    ],
+    "changed": [],
+    "removed": []
+  },
+  "p7_hold004_group02_result_current_snapshot_reconcile_policy_2026_06_17": {
+    "hold_id": "P7-HOLD-004",
+    "status": "unresolved / group_02 isolated result and current snapshot drift reconciled; full backend suite green unconfirmed; P5/P6 return recommended",
+    "group02_result_status": "PASSED_ISOLATED via explicit source-accepted wrapper only",
+    "group02_result_scope": "group_02_isolated_only",
+    "r40_default_not_run_preserved": true,
+    "r43_collect_drift_evidence": "432 files / 2892 tests / 1 warning",
+    "latest_full_backend_collect_only": "434 files / 2906 tests / 1 warning",
+    "latest_full_backend_collect_only_items_sha256": "404fc91c9a5b918c17197a2a438e59489517eccd12504f02e7b357e6d1c30414",
+    "latest_full_backend_collect_only_files_sha256": "01f689231aa44ad04032b22abf51ac9006b33612cae48871df72ed752301b7d5",
+    "drift_classification_status": "R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY",
+    "next_recommended_work": "P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW",
+    "backend_group03_execution_allowed_now": false,
+    "backend_group03_execution_required_later": true,
+    "backend_group03_execution_permanently_forbidden": false,
+    "full_backend_suite_green_confirmed": false,
+    "hold004_close_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "R42 PASSED_ISOLATED == full backend suite green",
+      "R43 collect-only == execution green",
+      "latest collect-only 434/2906 == execution green",
+      "R44 drift classification == active baseline adoption",
+      "R45 projection == release permission",
+      "R46 P5/P6 return decision == P5/P6 human readfeel completed",
+      "release_allowed true"
+    ]
+  },
+  "latest_source_basis_2026_06_18_p7_r46_display_contract_p5p6_return_r0_r14": {
+    "premise": "Cocolon_前提資料(231).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_9(39).zip",
+    "Cocolon_files": 217,
+    "mashos_api_files": 1060,
+    "total_files": 1277,
+    "diff_from": "mashos-api(153).zip",
+    "diff_to": "mashos-api_9(39).zip",
+    "diff_counts": {
+      "added": 18,
+      "changed": 5,
+      "removed": 0
+    },
+    "doc_role": "P7-R46 display contract red classification / source lineage / public meta final-source consistency / P5-P6 handoff / real device checklist / next decision ledgerを確認するための作業用地図。"
+  },
+  "latest_modified_premise_files_2026_06_18_p7_r46_display_contract_p5p6_return_r0_r14": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260618_p7_r46_display_contract_p5p6_return_r0_r14.csv"
+  ],
+  "local_file_inventory_diff_20260618_p7_r46_display_contract_p5p6_return_r0_r14": {
+    "path": "cocolon_local_file_inventory_diff_20260618_p7_r46_display_contract_p5p6_return_r0_r14.csv",
+    "diff_from": "mashos-api(153).zip",
+    "diff_to": "mashos-api_9(39).zip",
+    "rows": 23,
+    "sha256": "e89d80105872b3c16ba3c4d0e50222bc63755b77d74362b566f714135914e6ca"
+  },
+  "p7_r46_display_contract_p5p6_return_r0_r14_changed_paths_2026_06_18": {
+    "added": [
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_BodyFreeLineageRecord_RedDC001_R4_R5_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_DisplayContractRedLedger_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_NextDecisionSummaryHandoffLedger_R14_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_P5P6HumanReadfeelHandoffMaterial_R10_R11_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_PublicMetaFinalSourceConsistencyGuard_TargetValidationMatrix_R8_R9_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_RealDeviceModalReviewChecklist_ClosedValidation_R12_R13_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_RedDC002_DisplayContractTestReconstruction_R6_R7_20260617.md",
+      "mashos-api/ai/docs/Cocolon_EmlisAI_P7_R46_SourceLineageRecoveryLaneMatrix_R2_R3_20260617.md",
+      "mashos-api/ai/services/ai_inference/emlis_ai_body_free_public_source_lineage.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_next_decision_handoff_ledger.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_real_device_modal_review_closed_validation.py",
+      "mashos-api/ai/tests/test_emlis_ai_body_free_public_source_lineage_r4_r5_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_display_contract_lineage_semantics_r6_r7_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r46_next_decision_handoff_ledger_r14_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material_r10_r11_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r46_real_device_modal_review_closed_validation_r12_r13_20260617.py",
+      "mashos-api/ai/tests/test_emlis_ai_public_meta_final_source_consistency_guard_r8_r9_20260617.py"
+    ],
+    "changed": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_gate_recovery_public_candidate_builder.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_labelled_two_stage_surface_recomposition.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+      "mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py",
+      "mashos-api/ai/tests/test_emlis_ai_display_contract.py"
+    ],
+    "removed": []
+  },
+  "p7_r46_display_contract_p5p6_return_policy_2026_06_18": {
+    "status": "display contract green and public lineage consistent; P5/P6 return handoff ready but human/real-device review not run",
+    "display_contract": "5 passed",
+    "r4_r14_combined": "33 passed",
+    "p5_major_subset": "63 passed / 1 warning",
+    "p6_major_subset": "43 passed",
+    "api_contract_two_stage_e2e": "10 passed / 3 warnings",
+    "latest_full_backend_collect_only": "440 files / 2934 tests / 1 warning",
+    "latest_full_backend_collect_only_items_sha256": "63fb9731892b06b86b2b41913d805208081fadc30252a72ea0b435e842c727b1",
+    "latest_full_backend_collect_only_files_sha256": "4f4fefd174af1e85e7ad176a802fe78608ed9d588aba17568e527bc8e48755cf",
+    "next_default_branch": "A_DISPLAY_GREEN_PUBLIC_LINEAGE_CONSISTENT",
+    "next_order": [
+      "local_review_packet_storage_generation_disposal_policy",
+      "P5 human Blind QA material generation and review",
+      "P6 limited human readfeel review after P5",
+      "real device submit / modal readfeel review"
+    ],
+    "full_backend_suite_green_confirmed": false,
+    "p5_human_blind_qa_run": false,
+    "p6_limited_human_readfeel_run": false,
+    "real_device_modal_review_run": false,
+    "hold004_close_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "release_allowed": false,
+    "body_free_required": true,
+    "forbidden_misreads": [
+      "display contract green == P5/P6 human readfeel complete",
+      "P5/P6 handoff material == actual review packet materialized",
+      "real device checklist == real device review complete",
+      "full collect-only 440/2934 == full backend suite execution green",
+      "R14 branch A == release permission",
+      "release_allowed true"
+    ]
+  },
+  "latest_source_basis_2026_06_18_p7_r47_local_review_packet_policy_r0_r15": {
+    "premise": "Cocolon_前提資料(233).zip",
+    "Cocolon": "Cocolon(234).zip",
+    "mashos-api": "mashos-api_9(40).zip",
+    "base_mashos_api_for_diff": "mashos-api(154).zip",
+    "file_counts": {
+      "Cocolon": 217,
+      "mashos-api": 1069,
+      "total": 1286
+    },
+    "diff_added": 9,
+    "diff_changed": 0,
+    "diff_removed": 0,
+    "zip_sha256": {
+      "premise": "db0d1eb28539d885545fa0e6f3f5b4e44437f21f87f0e4287ba3472b9d4da967",
+      "mashos-api": "c06b71c936d12cdec686c38298ef8bcec24706ad12930e827ccd017bb28592a0"
+    },
+    "body_full_packet_generated": false,
+    "actual_human_review_run": false,
+    "actual_real_device_review_run": false
+  },
+  "latest_modified_premise_files_2026_06_18_p7_r47_local_review_packet_policy_r0_r15": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "cocolon_local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15.csv"
+  ],
+  "local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15": {
+    "path": "cocolon_local_file_inventory_diff_20260618_p7_r47_local_review_packet_policy_r0_r15.csv",
+    "diff_from": "mashos-api(154).zip",
+    "diff_to": "mashos-api_9(40).zip",
+    "rows": 9,
+    "sha256": "c1020e056aada6771476ddc64be2236416ca4bd28b8c5c5c27b2b428f876ee78"
+  },
+  "p7_r47_local_review_packet_policy_r0_r15_changed_paths_2026_06_18": {
+    "added": [
+      "mashos-api/ai/services/ai_inference/emlis_ai_p7_r47_local_review_packet_policy.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r0_r1_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r2_r3_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r4_r5_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r6_r7_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r8_r9_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r10_r11_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r12_r13_20260618.py",
+      "mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r14_r15_20260618.py"
+    ],
+    "changed": [],
+    "removed": []
+  },
+  "p7_r47_local_review_packet_policy_2026_06_18": {
+    "status": "local review packet policy ready; P5 human Blind QA may start after policy, but actual P5/P6/real-device review is not run",
+    "implemented_steps": [
+      "R0_current_source_r46_handoff_hold_refreeze",
+      "R1_scope_schema_version_packet_kind_enum_freeze",
+      "R2_local_only_storage_root_policy",
+      "R3_export_denylist_git_zip_mixing_prevention",
+      "R4_body_full_local_packet_schema",
+      "R5_body_free_manifest_schema",
+      "R6_body_free_rating_blocker_rows",
+      "R7_reviewer_free_text_notes_local_only_policy",
+      "R8_disposal_cleanup_retention_policy",
+      "R9_p5_human_blind_qa_packet_policy",
+      "R10_p6_limited_human_readfeel_packet_policy",
+      "R11_real_device_modal_review_packet_policy",
+      "R12_r46_next_decision_ledger_connection",
+      "R13_r47_contract_test_policy",
+      "R14_target_validation_command_matrix",
+      "R15_touch_candidate_and_no_touch_boundary"
+    ],
+    "r47_policy_ready": true,
+    "local_review_packet_policy_ready": true,
+    "policy_ready": true,
+    "p5_human_blind_qa_start_allowed_after_policy": true,
+    "p5_human_blind_qa_confirmed": false,
+    "p6_limited_human_readfeel_start_allowed": false,
+    "p6_limited_human_readfeel_confirmed": false,
+    "real_device_modal_review_start_allowed": false,
+    "real_device_modal_review_confirmed": false,
+    "actual_body_full_packet_generated_here": false,
+    "actual_body_free_manifest_materialized_here": false,
+    "actual_rating_rows_materialized_here": false,
+    "actual_blocker_rows_materialized_here": false,
+    "actual_notes_materialized_here": false,
+    "actual_disposal_run_here": false,
+    "actual_cleanup_run_here": false,
+    "actual_disposal_receipt_materialized_here": false,
+    "body_full_writer_created_here": false,
+    "actual_human_review_run_here": false,
+    "actual_real_device_review_run_here": false,
+    "full_backend_suite_green_confirmed": false,
+    "release_allowed": false,
+    "p7_complete": false,
+    "p8_start_allowed": false,
+    "hold004_close_allowed": false,
+    "validation_recorded": {
+      "py_compile": "ok",
+      "r47_target": "275 passed",
+      "display_r46_r47_combined": "308 passed",
+      "backend_collect_only": "448 test files / 3209 tests / 1 warning"
+    },
+    "forbidden_misreads": [
+      "R47 policy ready == P5/P6/real-device review complete",
+      "P5 human Blind QA start allowed after policy == P5 confirmed",
+      "body-full schema fixed == body-full packet generated",
+      "rating/blocker schema fixed == actual rating rows generated",
+      "disposal policy fixed == actual disposal executed",
+      "R47 target passed == full backend suite execution green",
+      "release_allowed true"
     ]
   }
 }

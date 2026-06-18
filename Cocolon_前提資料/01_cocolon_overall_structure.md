@@ -1,24 +1,24 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-06-15"
+revision_date: "2026-06-18"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "local_snapshot"
 source_snapshot:
-  premise: "Cocolon_前提資料(220).zip"
+  premise: "Cocolon_前提資料(233).zip"
   Cocolon: "Cocolon(234).zip"
-  mashos-api: "mashos-api_6(63).zip"
+  mashos-api: "mashos-api_9(40).zip"
 file_counts:
   Cocolon: 217
-  mashos-api: 1029
-  total: 1246
+  mashos-api: 1069
+  total: 1286
 purpose: "華恋が Cocolon 構造に関係する全ファイルを system / relation 単位で復元できるようにする"
 coverage:
-  included_files_total: 1246
+  included_files_total: 1286
   included_files_cocolon: 217
-  included_files_mashos_api: 1029
+  included_files_mashos_api: 1069
   gate_recovery_public_surface_leak_repair_p0_12_reflected: true
   gate_recovery_public_surface_leak_repair_full_01_02_regeneration: false
   normal_observation_public_recovery_p0_9_reflected: true
@@ -98,7 +98,46 @@ coverage:
   p7_hold004_positive_public_shape_full_01_02_regeneration: false
   p7_hold004_phase16_full_01_02_regeneration: false
   p7_red003_body_free_leak_guard_r13_full_01_02_regeneration: false
+  p7_hold004_group02_result_current_snapshot_reconcile_r41_r46_reflected: true
+  p7_hold004_group02_result_current_snapshot_reconcile_added_files: 4
+  p7_hold004_group02_result_current_snapshot_reconcile_changed_files: 0
+  p7_hold004_group02_result_current_snapshot_reconcile_removed_files: 0
+  p7_hold004_r42_r40_default_not_run_preserved: true
+  p7_hold004_r42_explicit_source_accepted_result_status: PASSED_ISOLATED
+  p7_hold004_r43_current_working_snapshot_collect_file_count: 432
+  p7_hold004_r43_current_working_snapshot_collect_test_count: 2892
+  p7_hold004_r44_drift_classification_status: R30_R42_CONTRACT_TEST_ADDITION_DRIFT_ACCEPTED_AS_CURRENT_WORKING_SNAPSHOT_ONLY
+  p7_hold004_r45_release_projection_keeps_release_closed: true
+  p7_hold004_r46_next_recommended_work: P5_P6_HUMAN_READFEEL_AND_REAL_DEVICE_MODAL_REVIEW
+  p7_hold004_latest_full_backend_collect_after_r41_r46_file_count: 434
+  p7_hold004_latest_full_backend_collect_after_r41_r46_test_count: 2906
+  p7_hold004_group02_result_current_snapshot_reconcile_full_01_02_regeneration: false
   p7_red_hold_closure_full_01_02_regeneration: false
+  p7_r46_display_contract_p5p6_return_r0_r14_reflected: true
+  p7_r46_display_contract_p5p6_return_r0_r14_added_files: 18
+  p7_r46_display_contract_p5p6_return_r0_r14_changed_files: 5
+  p7_r46_display_contract_p5p6_return_r0_r14_removed_files: 0
+  p7_r46_display_contract_green_confirmed: true
+  p7_r46_p5_human_blind_qa_run: false
+  p7_r46_p6_limited_human_readfeel_run: false
+  p7_r46_real_device_modal_review_run: false
+  p7_r46_full_backend_suite_green_confirmed: false
+  p7_r46_release_allowed: false
+  p7_r46_p7_complete: false
+  p7_r46_p8_start_allowed: false
+  p7_r47_local_review_packet_policy_r0_r15_reflected: true
+  p7_r47_local_review_packet_policy_r0_r15_added_files: 9
+  p7_r47_local_review_packet_policy_r0_r15_changed_files: 0
+  p7_r47_local_review_packet_policy_r0_r15_removed_files: 0
+  p7_r47_policy_ready: true
+  p7_r47_p5_human_blind_qa_start_allowed_after_policy: true
+  p7_r47_p5_human_blind_qa_confirmed: false
+  p7_r47_p6_limited_human_readfeel_run: false
+  p7_r47_real_device_modal_review_run: false
+  p7_r47_full_backend_suite_green_confirmed: false
+  p7_r47_release_allowed: false
+  p7_r47_p7_complete: false
+  p7_r47_p8_start_allowed: false
 ---
 
 # 1. 1行定義
@@ -3151,3 +3190,254 @@ group_02_p7_hold004 current:
 ```
 
 P7-HOLD-004は、current baseline reconcileが完了してもclosedではありません。次に必要なのは、R19で固定した採用条件に基づくofficial group_02 capture runを実行・body-free記録するかの判断です。
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29構造
+
+P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29は、Cocolon全体構造上、EmlisAIのpublic表示経路ではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回の差分は、`mashos-api(148).zip` の受領snapshot collect結果をactive baselineへ黙って上書きせず、active source snapshot `mashos-api(147).zip` とreceived zipを分けて保持する構造です。full collect countは425 files / 2856 tests / 1 warningで一致している一方、active item fingerprint `fee1eca805564d0840dc5b23f60a7e2d6c7297d658a76dc4ce175e0137c261f1` とreceived item fingerprint `4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d` は不一致です。この差分を未分類blockerとして残し、official group_02 captureとrelease判断へ誤昇格させないためのmaterial / matrix接続が追加されています。
+
+構造上の流れは次です。
+
+```text
+P7-HOLD-004 current baseline material
+  -> received snapshot scope freeze R21
+  -> received collect summary R22
+  -> active vs received fingerprint reconcile R23
+  -> source identity / adoption decision R24
+  -> official group_02 capture readiness guard R25
+  -> matrix / hold / release handoff / validation blocking connection R26
+  -> conditional active baseline adoption material R27
+  -> adoption evidence freeze Pre-R29
+  -> group_02 timeout / long-run classification R28
+  -> verification procedure freeze R29
+```
+
+追加された構造owner:
+
+| path | 構造上の役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py` | received snapshot scope / collect summary / reconcile / adoption decision / adoption evidence freeze / conditional adoption / R29 verification procedureをbody-freeに保持する。 |
+
+更新された既存owner:
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py` | official group_02 capture readiness guardとgroup_02 timeout classification policyを持つ。readiness blockedならPASS形resultもofficial adoptionしない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py` | received snapshot mismatch unresolvedをREVIEW_REQUIREDとして保持し、matrix PASSへ隠さない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | P7-HOLD-004未解決理由へreceived snapshot mismatchを接続し、HOLDを継続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | release blocker refsへreceived snapshot mismatchを渡し、release_allowed=falseを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | official group_02 readiness blocked rowをvalidationへ残し、P8 start falseを維持する。 |
+
+この差分で変えていないもの:
+
+```text
+RN production UI
+RN表示条件
+/emotion/submit route
+request key
+public response top-level key
+DB physical schema / write path
+Emlis本文composer / surface runtime
+Gate runtime
+active baseline constantsのreceived snapshot昇格
+source_snapshot_refのmashos-api(148).zip昇格
+official group_02 capture result記録
+release_allowed true化
+```
+
+P7-HOLD-004は、R21〜R29が入ってもclosedではありません。今回固定されたのは、received snapshot mismatchをどう読むかと、どの検証をgreenと呼んではいけないかです。
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40構造
+
+P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40は、Cocolon全体構造上、EmlisAIのpublic本文runtimeではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回の差分は、R21〜R29で未分類blockerとして止めていたreceived snapshot item fingerprint差分を、証拠・root cause・source identity・test semantics・adoption gate・post-adoption active baseline・runtime builder refresh・matrix / release / validation接続・official group_02 result recordingに分けて扱う構造です。RN UI、RN表示条件、API route、request key、public response top-level key、DB write path、Emlis本文runtime、Gate thresholdは変更しません。
+
+```text
+P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21-R29
+  -> R30 local repeat collect evidence freeze
+  -> R31 source identity decision boundary
+  -> R32 root cause review material
+  -> R33 test semantics review boundary
+  -> R34 adoption evidence bundle / R27 connection
+  -> R35 conditional active baseline adoption gate
+  -> R36 post-adoption active baseline material
+  -> R37 runtime builder refresh
+  -> R38 matrix / release handoff / validation connection refresh
+  -> R39 official group_02 capture readiness re-evaluation
+  -> R40 official group_02 result recording / full backend suite gate
+```
+
+追加された構造owner:
+
+| path | 構造上の役割 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_adoption_evidence.py` | R30〜R35。local repeat collect evidence、source identity、root cause review、test semantics review、adoption evidence bundle、conditional adoption gateをbody-freeに保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_runtime_builder_refresh.py` | R36〜R40。post-adoption active baseline、runtime builder refresh、matrix/release/validation接続、official group_02 result recording、full backend suite gateをbody-freeに保持する。 |
+
+更新された既存owner:
+
+| path | 最新の読み方 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_split_consistency.py` | current active collect baselineを `p7_hold004_backend_collect_baseline_20260615_received_148` / `mashos-api(148).zip` / `4698...` へ接続し、previous active baselineを保持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py` | group inventory / execution planがpost-adoption active baselineを読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py` | official group_02 readinessとresult recording boundaryを、ready / not-run / pass-isolated / full-suite-gateに分ける。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group_execution_minimal_order.py` | minimal orderがpost-adoption active baselineを読む。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_matrix_consistency_report.py` | received snapshot mismatch resolvedとactive baseline refresh appliedをmatrix consistencyへ接続する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py` | R21〜R29のat-receipt履歴materialを残し、post-adoption reconcileと混ぜない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py` | active baseline refresh appliedを読むが、P7-HOLD-004 closureへは進めない。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py` | refresh stateを読むが、release_allowed=falseを維持する。 |
+| `mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py` | refresh stateを読むが、p8_start_allowed=falseを維持する。 |
+
+現在の構造上の正本は次です。
+
+```text
+previous active baseline:
+  p7_hold004_backend_collect_baseline_20260615 / mashos-api(147).zip / fee1...
+
+post-adoption current active baseline:
+  p7_hold004_backend_collect_baseline_20260615_received_148 / mashos-api(148).zip / 4698...
+
+received snapshot reconcile after adoption:
+  received_snapshot_baseline_fingerprint_reconciled: true
+  received_snapshot_item_fingerprint_mismatch_unresolved: false
+
+runtime builder refresh:
+  active_baseline_update_applied_to_runtime_builders: true
+  source_snapshot_ref_updated_in_active_builders: true
+
+official group_02:
+  readiness_status: READY_FOR_OFFICIAL_CAPTURE_RUN
+  result_status default: NOT_RUN
+  official_group_02_capture_green_confirmed: false
+
+full backend suite:
+  full_backend_suite_green_confirmed: false
+  hold004_close_allowed: false
+  p7_complete: false
+  p8_start_allowed: false
+  release_allowed: false
+```
+
+P7-HOLD-004は、R30〜R40が入ってもclosedではありません。次に必要なのは、official group_02 full run resultをbody-freeに記録すること、さらに全backend groupのofficial execution greenを別gateとして確認することです。
+
+# 2026-06-17 差分追記: EmlisAI P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46構造
+
+P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46は、Cocolon全体構造上、EmlisAI本文runtimeではなく、P7 Product Quality Runner / Long-run Product Gateのbackend internal測定laneに属します。
+
+今回追加された構造は次の1 module + 3 contract testです。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group02_result_current_snapshot_reconcile.py
+mashos-api/ai/tests/test_emlis_ai_p7_group02_current_snapshot_reconcile_r41_r42_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_current_snapshot_collect_drift_r43_r44_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_projection_next_decision_r45_r46_20260617.py
+```
+
+構造上の読み方は次です。
+
+```text
+R41/R42:
+  group_02 local execution evidenceとofficial result recording reconcileを扱う。
+  R40 default NOT_RUNを壊さず、明示的source-accepted wrapper経由だけでPASSED_ISOLATEDを扱う。
+R43/R44:
+  current working snapshot collect driftをbody-free evidenceとして固定し、active baselineとの差分を分類する。
+  collect-onlyをexecution greenへ変換しない。
+R45/R46:
+  matrix / release handoff / validationへbody-free projectionし、release / P7 / P8を閉じたまま、P5/P6 human readfeel / real device modal reviewへ戻る判断をmaterial化する。
+```
+
+全体構造上、今回変えないもの:
+
+```text
+RN production UI
+RN表示タイトル `Emlisの観測`
+RN表示条件
+/emotion/submit route
+request key
+public response top-level key
+DB schema / write path
+Emlis本文runtime
+Gate runtime
+subscription / entitlement / account / access policy
+```
+
+P7-HOLD-004は、R41〜R46が入ってもclosedではありません。最新full collect-onlyは434 files / 2906 tests / 1 warningですが、これはexecution greenではなく、active baseline adoptionでもありません。次に戻るべき本線は、P5/P6の人間読感と実機modal確認です。
+
+# 2026-06-18 差分追記: EmlisAI P7-R46 Display Contract Red Classification / P5-P6 Return R0〜R14 構造反映
+
+latest実ファイル `mashos-api_9(39).zip` では、P7-R46 P5/P6 Return + Display Contract Red Classification R0〜R14がbackend internal-onlyで反映済みです。比較元は、R0/R1開始前の受領backend snapshot `mashos-api(153).zip`、比較先は `mashos-api_9(39).zip` です。Cocolon側は今回差分対象外で、前提資料上の217 filesを維持します。
+
+今回の差分は、Cocolon全体構造上では **EmlisAI backend internal measurement / handoff lane** に属します。RN production UI、RN表示条件、`/emotion/submit` route、public response top-level key、DB schema / write pathは変更していません。
+
+## 構造上追加されたbackend internal材料
+
+| 構造領域 | 追加・更新された読み方 | 主なowner |
+|---|---|---|
+| display contract red ledger | R0/R1でRED-DC-001 / RED-DC-002をbody-freeに固定し、本文body leakやGate relaxationではなくsource lineage / recovery laneの赤として扱う | `docs/Cocolon_EmlisAI_P7_R46_DisplayContractRedLedger_20260617.md` |
+| source lineage semantics | root / recovery_input / selected / pre_public / final sourceを分離し、`original_candidate_source_kind` をroot aliasとして保護する | `emlis_ai_gate_recovery_public_candidate_builder.py`, `emlis_ai_labelled_two_stage_surface_recomposition.py` |
+| body-free lineage record | public materialへraw input / comment_text body / candidate body / surface bodyを出さず、識別子・boolean・reasonだけでlineageを記録する | `emlis_ai_body_free_public_source_lineage.py` |
+| public meta final-source consistency | pre-public complete_initial attemptが残っていても、applied final labelled sourceをpublic lineage finalとして優先する | `emlis_ai_public_feedback_meta.py` |
+| display contract semantic test | final labelled sourceとpre-public complete_initial attemptを分けてassertする | `tests/test_emlis_ai_display_contract.py`, `tests/test_emlis_ai_display_contract_lineage_semantics_r6_r7_20260617.py` |
+| P5/P6 human readfeel handoff | actual review bodyを作らず、P5/P6 reviewへ進むためのbody-free index / boundaryを作る | `emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material.py` |
+| real device modal checklist | 実機確認済みを偽装せず、NOT_RUN defaultのchecklistとclosed validationを作る | `emlis_ai_p7_r46_real_device_modal_review_closed_validation.py` |
+| next decision ledger | branch A-E-Xと次順をbody-freeに固定し、release / P8を閉じる | `emlis_ai_p7_r46_next_decision_handoff_ledger.py` |
+
+## 現在の構造判断
+
+```text
+P7-R46 display contract / public lineage: target green
+P5 human Blind QA: not run
+P6 limited human readfeel review: not run
+real device submit / modal readfeel: not run
+full backend suite execution green: not confirmed
+P7-HOLD-004 closure: not allowed
+release_allowed: false
+p7_complete: false
+p8_start_allowed: false
+```
+
+この差分により、Cocolonの本線である「読まれた形」「記録の線」「構造気づき」へ戻るための評価材料は安定しました。ただし、評価そのもの、つまり人間が読んでどう感じるかと実機modalでどう届くかは、まだ実施されていません。
+
+# 2026-06-18 差分追記: EmlisAI P7-R47 Local Review Packet Policy R0〜R15 構造反映
+
+latest実ファイル `mashos-api_9(40).zip` では、P7-R46 branch Aの次工程だった Local Review Packet Policy がR0〜R15までbackend internal-onlyで反映済みです。比較元は、R47開始前の受領backend snapshot `mashos-api(154).zip`、比較先は `mashos-api_9(40).zip` です。Cocolon側は今回差分対象外で、前提資料上の217 filesを維持します。
+
+今回の差分は、Cocolon全体構造上では **EmlisAI P7 Product Quality Runner / human readfeel review preparation lane** に属します。Emlis本文runtimeやRN production UIを変える差分ではなく、P5/P6/実機読感へ進む前に、本文入りlocal packetとbody-free P7 materialを混ぜないための境界を固定する差分です。
+
+## 構造上追加されたbackend internal材料
+
+| 構造領域 | 追加された読み方 | 主なowner |
+|---|---|---|
+| R47 policy module | R0〜R15のlocal review packet policyを1 module内でbody-freeに固定する | `emlis_ai_p7_r47_local_review_packet_policy.py` |
+| R0/R1 source / scope freeze | R46 branch A handoff、HOLD未完、R47 scope/schema/packet kind enumを固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r0_r1_20260618.py` |
+| R2/R3 storage / export guard | repo外local-only root、`COCOLON_EMLIS_LOCAL_REVIEW_ROOT`、export denylist、git/zip混入防止を固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r2_r3_20260618.py` |
+| R4/R5 schema boundary | body-full local packet schema案とbody-free manifest schema案を固定し、実packet生成はしない | `test_emlis_ai_p7_r47_local_review_packet_policy_r4_r5_20260618.py` |
+| R6/R7 rating / notes | body-free rating row / blocker row schema案、reviewer free text / notes local-only扱いを固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r6_r7_20260618.py` |
+| R8/R9 disposal / P5 | 72h/24h retention、body-free disposal receipt、P5 human Blind QA packet policyを固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r8_r9_20260618.py` |
+| R10/R11 P6 / real device | P6 limited human readfeel packet policyとreal device modal review packet policyを固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r10_r11_20260618.py` |
+| R12/R13 ledger / contract tests | R46 next-decision ledgerへbody-freeに接続し、R47 contract test方針を固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r12_r13_20260618.py` |
+| R14/R15 validation / touch boundary | target validation command matrixと実装段階で触る候補 / 触らない境界を固定する | `test_emlis_ai_p7_r47_local_review_packet_policy_r14_r15_20260618.py` |
+
+## 現在の構造判断
+
+```text
+R47 local review packet policy: ready
+P5 human Blind QA start allowed after policy: true
+P5 human Blind QA confirmed: false
+P6 limited human readfeel review: not run
+real device submit / modal readfeel: not run
+body-full packet writer: not created
+actual body-full packet: not generated
+actual rating / blocker rows: not generated
+actual reviewer notes: not generated
+actual disposal run: not executed
+full backend suite execution green: not confirmed
+P7-HOLD-004 closure: not allowed
+release_allowed: false
+p7_complete: false
+p8_start_allowed: false
+```
+
+この差分により、CocolonはP5 human Blind QAへ進むためのpolicy境界を得ました。ただし、Cocolonの商品価値を確認する本線である「履歴線を人間が読んで自然か」「構造気づきが深読みになっていないか」「実機modalで重すぎないか」は、まだ未実施です。

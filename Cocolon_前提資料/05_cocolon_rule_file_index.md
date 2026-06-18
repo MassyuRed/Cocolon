@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-06-15"
+revision_date: "2026-06-18"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1590,4 +1590,215 @@ group_02 collect-only / ad hoc passをofficial resultと読む。
 R19 adoption rule fixedをofficial run executedと読む。
 old baseline idのrun resultをcurrent official resultへ混ぜる。
 release_allowed / p8_start_allowedをtrueにする。
+```
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcile R21〜R29 rule / test index
+
+EmlisAI P7-HOLD-004 Received Snapshot Baseline Fingerprint Reconcileを触る場合は、Current Snapshot Baseline Reconcile R13〜R20に加えて、R21〜R29のreceived snapshot scope / collect summary / fingerprint reconcile / adoption evidence / official group_02 readiness / timeout policy / verification procedureを同時確認する。
+
+R21〜R29はP7-HOLD-004を閉じる工程ではなく、received snapshot mismatchをbody-freeに分類してofficial capture前に止めるbackend internal-only差分である。
+
+| 用途 | 必読ファイル | 読む理由 |
+|---|---|---|
+| R21/R22 received scope / collect summary | `emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | `received_zip_ref=mashos-api(148).zip` とactive source snapshotを混同せず、nodeid一覧やterminal outputなしでcollect summaryを読む時。 |
+| R23/R24 reconcile / adoption decision | `emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | count / warning / file hash / item hash / source identityを分け、item hash mismatch未分類ではactive baseline更新を止める時。 |
+| R25 official group_02 readiness | `emlis_ai_p7_hold004_backend_suite_execution_results.py`, `test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py` | readiness blocked時にPASS形materialをofficial resultへ採用しない時。 |
+| R26 matrix / handoff / validation | `emlis_ai_p7_hold004_matrix_consistency_report.py`, `emlis_ai_p7_hold_matrix.py`, `emlis_ai_p7_release_handoff.py`, `emlis_ai_p7_validation_matrix.py`, related matrix tests | received snapshot mismatch unresolvedをmatrix上もREVIEW_REQUIRED / blockerとして残す時。 |
+| R27 / Pre-R29 adoption evidence | `emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | manual booleanだけでactive baseline adoptionを成立させず、repeat collect / root cause / source identity / semantics / traceability evidenceを確認する時。 |
+| R28 timeout policy | `emlis_ai_p7_hold004_backend_suite_execution_results.py`, `test_emlis_ai_p7_hold004_backend_suite_group_result_20260614.py` | group_02 TIMEOUTをgreenにも即FAILにもせず、long-run classification materialとして読む時。 |
+| R29 verification procedure | `emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py`, `test_emlis_ai_p7_hold004_backend_suite_collect_baseline_20260614.py` | py_compile / focused subset / full collect-only / group_02 collect-only / group_02 conditional full runの読み方を固定する時。 |
+
+検証基準として読む結果:
+
+```text
+py_compile relevant R21〜R29 files: ok
+R25/R26 + R27/R28 + R29 focused subset: 85 passed
+R21〜R29 P7-HOLD-004 target subset: 183 passed
+full backend collect-only: 425 files / 2856 tests / 1 warning / item fingerprint 4698ce5240707f71fc3678a0153a15626ba9718fbadad83294e57d11946c2e0d
+group_02 collect-only: 19 files / 252 tests / 1 warning
+```
+
+禁止する読み:
+
+```text
+received snapshot item fingerprintをactive baselineへ即採用する。
+source_snapshot_refをmashos-api(148).zipへ昇格済みと読む。
+full collect-onlyをexecution greenと読む。
+group_02 collect-onlyをofficial greenと読む。
+TIMEOUTをgreenまたは即FAILへ変換する。
+R29完了をP7-HOLD-004 closureと読む。
+release_allowed / p8_start_allowedをtrueにする。
+```
+
+# 2026-06-16 差分追記: EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refresh R30〜R40 rule / test index
+
+EmlisAI P7-HOLD-004 Active Baseline Adoption Evidence / Runtime Builder Refreshを触る場合は、R21〜R29に加えて、R30〜R40のadoption evidence / post-adoption active baseline / runtime builder refresh / official group_02 result recording / full backend suite gateを同時確認する。
+
+R30〜R40はP7-HOLD-004を閉じる工程ではなく、received snapshot evidenceをactive baselineへ採用し、runtime material buildersへ反映し、次のofficial group_02 captureを実行できる状態へ進めるbackend internal-only差分である。
+
+| 用途 | 必読ファイル | 読む理由 |
+|---|---|---|
+| R30〜R35 adoption evidence | `emlis_ai_p7_hold004_active_baseline_adoption_evidence.py`, `test_emlis_ai_p7_active_baseline_adoption_evidence_r30_r31_20260616.py`, `test_emlis_ai_p7_active_baseline_adoption_evidence_r32_r33_20260616.py`, `test_emlis_ai_p7_active_baseline_adoption_evidence_r34_r35_20260616.py` | repeat collect / source identity / root cause / semantics / adoption evidence / conditional gateを確認する時。 |
+| R36〜R40 runtime refresh | `emlis_ai_p7_hold004_active_baseline_runtime_builder_refresh.py`, `test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r36_r37_20260616.py`, `test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r38_r39_20260616.py`, `test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r40_20260616.py` | post-adoption active baseline / runtime builder refresh / matrix refresh / official group_02 result recording / full backend suite gateを確認する時。 |
+| Runtime builder connection | `emlis_ai_p7_hold004_backend_suite_split_consistency.py`, `emlis_ai_p7_hold004_backend_suite_group_inventory_plan.py`, `emlis_ai_p7_hold004_backend_suite_execution_results.py`, `emlis_ai_p7_hold004_group_execution_minimal_order.py` | builder群がcurrent active baseline id `p7_hold004_backend_collect_baseline_20260615_received_148` を読んでいるか確認する時。 |
+| Matrix / release / validation | `emlis_ai_p7_hold004_matrix_consistency_report.py`, `emlis_ai_p7_hold_matrix.py`, `emlis_ai_p7_release_handoff.py`, `emlis_ai_p7_validation_matrix.py` | received snapshot mismatch resolvedとactive baseline refresh appliedが伝播しているが、release / P8 / HOLD closureがfalseのままか確認する時。 |
+| Historical reconcile boundary | `emlis_ai_p7_hold004_received_snapshot_baseline_fingerprint_reconcile.py` | R21〜R29のat-receipt materialを後から書き換えていないか確認する時。 |
+
+検証基準として読む結果:
+
+```text
+py_compile relevant R30〜R40 implementation files: ok
+R30〜R40 active baseline adoption / runtime refresh tests: 27 passed
+group_02 collect-only: 19 files / 252 tests / 1 warning
+full backend collect-only after R30〜R40 tests added: 431 files / 2883 tests / 1 warning
+```
+
+禁止する読み:
+
+```text
+R30〜R40完了をP7-HOLD-004 closureと読む。
+post-adoption active baselineをfull backend suite greenと読む。
+official group_02 readiness READYをgreenと読む。
+result_status NOT_RUNを実行済みと読む。
+group_02 isolated PASSだけでfull backend suite greenと読む。
+release_allowed / p8_start_allowedをtrueにする。
+```
+
+# 2026-06-17 差分追記: EmlisAI P7-HOLD-004 Group02 Result / Current Snapshot Reconcile R41〜R46 rule / test index
+
+EmlisAI P7-HOLD-004 Group02 Result / Current Snapshot Reconcileを触る場合は、R30〜R40に加えて、R41〜R46のgroup_02 local evidence / official result recording reconcile / current working snapshot collect drift / release projection / P5-P6 return decisionを同時確認する。
+
+R41〜R46はP7-HOLD-004を閉じる工程ではなく、P5/P6へ戻る前にP7測定層が嘘をつかないようにするbackend internal-only差分である。
+
+## 必読module / test
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_group02_result_current_snapshot_reconcile.py
+mashos-api/ai/tests/test_emlis_ai_p7_group02_current_snapshot_reconcile_r41_r42_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_current_snapshot_collect_drift_r43_r44_20260617.py
+mashos-api/ai/tests/test_emlis_ai_p7_projection_next_decision_r45_r46_20260617.py
+```
+
+## 維持確認する既存contract
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_active_baseline_runtime_builder_refresh.py
+mashos-api/ai/tests/test_emlis_ai_p7_active_baseline_runtime_builder_refresh_r40_20260616.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold004_backend_suite_execution_results.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_release_handoff.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_validation_matrix.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_hold_matrix.py
+```
+
+## 前提資料更新時確認
+
+```text
+py_compile R41〜R46 reconcile module: ok
+R41〜R46 target contract tests: 23 passed
+R40 regression: 4 passed
+P5/P6 return boundary subset: 22 passed
+group_02 collect-only: 19 files / 252 tests / 1 warning
+full backend collect-only after R41〜R46 tests present: 434 files / 2906 tests / 1 warning
+```
+
+## 禁止する読み
+
+```text
+R41〜R46完了をP7-HOLD-004 closureと読む。
+R42 PASSED_ISOLATEDをfull backend suite greenと読む。
+R43/R44 collect drift classificationをactive baseline updateと読む。
+R45 projectionをrelease permissionと読む。
+R46 P5/P6 return decisionをP5/P6人間読感完了と読む。
+group_03 deferredを永久禁止・永久不要と読む。
+```
+
+# 2026-06-18 差分追記: EmlisAI P7-R46 Display Contract / P5-P6 Return R0〜R14 rule / test index
+
+EmlisAI P7-R46 Display Contract Red Classification / P5-P6 Returnを触る場合は、R0〜R14のsource lineage / public meta final-source consistency / P5-P6 handoff / real device closed validationを同時確認する。
+
+R0〜R14はP7-HOLD-004を閉じる工程ではなく、P5/P6 human readfeelと実機modal確認へ戻る前に、表示契約と評価材料が嘘をつかないようにするbackend internal-only差分である。
+
+| 用途 | 必読ファイル | 読む理由 |
+|---|---|---|
+| R0/R1 red ledger | `docs/Cocolon_EmlisAI_P7_R46_DisplayContractRedLedger_20260617.md` | RED-DC-001 / RED-DC-002の初期分類、body-free red ledger、Gate relaxationではないことを確認する時。 |
+| R2/R3 source lineage / recovery lane | `docs/Cocolon_EmlisAI_P7_R46_SourceLineageRecoveryLaneMatrix_R2_R3_20260617.md`, `emlis_ai_gate_recovery_public_candidate_builder.py`, `emlis_ai_labelled_two_stage_surface_recomposition.py`, `emlis_ai_reply_service.py` | root / recovery_input / pre_public / final sourceを混同しない時。 |
+| R4/R5 body-free lineage / RED-DC-001 | `emlis_ai_body_free_public_source_lineage.py`, `test_emlis_ai_body_free_public_source_lineage_r4_r5_20260617.py` | source lineageをpublic material化しても本文body leakしないこと、root sourceがfinal sourceで上書きされないことを確認する時。 |
+| R6/R7 RED-DC-002 / display contract | `tests/test_emlis_ai_display_contract.py`, `test_emlis_ai_display_contract_lineage_semantics_r6_r7_20260617.py` | complete_initial pre-public attemptとlabelled final public sourceを意味別にassertする時。 |
+| R8/R9 public meta guard | `emlis_ai_public_feedback_meta.py`, `test_emlis_ai_public_meta_final_source_consistency_guard_r8_r9_20260617.py` | public_surface_lineageがstale pre-public sourceをfinalとして出さないか確認する時。 |
+| R10/R11 P5/P6 handoff | `emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material.py`, `test_emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material_r10_r11_20260617.py` | actual review body packetなしで、P5/P6 human readfeelへ渡すbody-free入口を確認する時。 |
+| R12/R13 real device / closed validation | `emlis_ai_p7_r46_real_device_modal_review_closed_validation.py`, `test_emlis_ai_p7_r46_real_device_modal_review_closed_validation_r12_r13_20260617.py` | 実機未確認をNOT_RUNのまま保持し、P7 / release / P8を閉じているか確認する時。 |
+| R14 next decision ledger | `emlis_ai_p7_r46_next_decision_handoff_ledger.py`, `test_emlis_ai_p7_r46_next_decision_handoff_ledger_r14_20260617.py` | branch A-E-X、次順、unresolved holds、release closed flagsを確認する時。 |
+
+検証基準として読む結果:
+
+```text
+py_compile relevant R0〜R14 implementation files: ok
+display contract: 5 passed
+R4〜R14 combined: 33 passed
+P5 major subset: 63 passed / 1 warning
+P6 major subset: 43 passed
+API public contract + two-stage reception E2E: 10 passed / 3 warnings
+full backend collect-only: 440 files / 2934 tests / 1 warning
+```
+
+禁止する読み:
+
+```text
+R0〜R14完了をP7-HOLD-004 closureと読む。
+display contract greenをP5/P6 human readfeel合格と読む。
+P5/P6 handoff materialをactual review packet作成済みと読む。
+real device checklistを実機modal読感確認済みと読む。
+R14 branch Aをrelease permissionまたはP8 start allowedと読む。
+full backend collect-onlyをexecution greenと読む。
+```
+
+# 2026-06-18 差分追記: EmlisAI P7-R47 Local Review Packet Policy R0〜R15 rule / test index
+
+EmlisAI P7-R47 Local Review Packet Policyを触る場合は、R0〜R15のlocal-only storage / export denylist / body-full schema / body-free manifest / rating-blocker rows / reviewer notes / disposal / P5-P6-real-device packet policy / R46 ledger connection / contract test / validation matrix / touch boundaryを同時確認する。
+
+R47はP5/P6/実機読感を完了する工程ではなく、本文入りreview packetを扱う前に、P7 materialへ本文やfree textを混ぜないためのbackend internal-only差分である。
+
+## 必読module / test
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r47_local_review_packet_policy.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r0_r1_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r2_r3_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r4_r5_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r6_r7_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r8_r9_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r10_r11_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r12_r13_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r47_local_review_packet_policy_r14_r15_20260618.py
+```
+
+## 維持確認する既存contract
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_next_decision_handoff_ledger.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_real_device_modal_review_closed_validation.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_contracts.py
+mashos-api/ai/tests/test_emlis_ai_display_contract.py
+```
+
+## 前提資料更新時確認
+
+```text
+py_compile R47 policy module: ok
+R47 R0/R1〜R14/R15 target: 275 passed
+display + R46 regression + R47 R0/R1〜R14/R15: 308 passed
+backend collect-only: 448 test files / 3209 tests / 1 warning
+```
+
+## 禁止する読み
+
+```text
+R47 policy readyをP5/P6/実機review完了と読む。
+body-full packet schema固定をbody-full packet生成済みと読む。
+P5 human Blind QA start allowed after policyをP5 confirmedと読む。
+P6 packet policy固定をP6開始許可または完了と読む。
+real device packet policy固定を実機modal確認済みと読む。
+R47 target greenをfull backend suite greenと読む。
+release_allowed / p7_complete / p8_start_allowed / hold004_close_allowedをtrueにする。
 ```
