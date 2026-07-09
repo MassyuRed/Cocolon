@@ -1,6 +1,6 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-06-18"
+revision_date: "2026-07-09"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -4099,4 +4099,1529 @@ disposal/retention policy固定をactual disposal run済みにしない。
 R47 target passedやcollect-onlyをfull backend suite execution greenへ変換しない。
 RN/API/DB/public response/Gate threshold/Emlis本文runtimeを変更したと読まない。
 raw input / comment_text body / candidate body / surface body / reviewer free text / terminal outputをP7 materialやrelease materialへ入れない。
+```
+
+# 2026-06-19 差分追記: P7-R48 P5 Human Blind QA Actual Review Packet R0〜R18 contract / boundary
+
+P7-R48 R0〜R18を触る時は、以下を同時確認する。R48はP5履歴線の人間読感を安全に実施するためのbackend internal-only差分であり、P5/P6/実機読感の完了やrelease判断ではない。
+
+## 必読module / test
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r0_r1_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r2_r3_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r4_r5_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r6_r7_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r8_r9_20260618.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r10_r11_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r12_r13_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r14_r15_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r16_r17_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r48_p5_human_blind_qa_actual_review_packet_r18_20260619.py
+```
+
+## 維持確認する既存contract
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r47_local_review_packet_policy.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_next_decision_handoff_ledger.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_p5_p6_human_readfeel_handoff_material.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r46_real_device_modal_review_closed_validation.py
+mashos-api/ai/services/ai_inference/emlis_ai_p7_contracts.py
+mashos-api/ai/tests/test_emlis_ai_display_contract.py
+```
+
+## 前提資料更新時確認
+
+```text
+py_compile R48 policy module: ok
+R48 R0/R1〜R18 target: 82 passed by split execution
+backend collect-only: 3291 tests collected / 1 warning
+```
+
+## 禁止する読み
+
+```text
+R48 R0〜R18完了をP5 human Blind QA完了と読む。
+P5 confirmed candidate gate固定をP5 confirmed本体と読む。
+body-full materialization guard固定をbody-full packet生成済みと読む。
+reviewer-facing local packet schema固定をactual reviewer packet payload生成済みと読む。
+rating row normalizer / blocker row builder固定をactual review result生成済みと読む。
+disposal receipt builder固定をactual disposal verifiedと読む。
+P5 review handoff summaryをP6 start本体やrelease判断に変換する。
+R48 target greenをfull backend suite greenと読む。
+release_allowed / p7_complete / p8_start_allowed / hold004_close_allowedをtrueにする。
+```
+
+# 2026-06-20 差分追記: EmlisAI P7-R49 Actual Review Execution / Question Need Observation contract boundary
+
+P7-R49を触る場合は、次を契約境界として先に確認する。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r0_r1_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r2_r3_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r4_r5_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r6_r7_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r8_r9_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r10_r11_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r12_r13_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r14_r15_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r16_r17_20260619.py
+mashos-api/ai/tests/test_emlis_ai_p7_r49_p5_human_blind_qa_actual_review_execution_r18_20260619.py
+```
+
+## 固定されたcontract
+
+```text
+R49 review session status enum:
+  NOT_STARTED / PRECHECK_BLOCKED / LOCAL_PACKETS_READY / REVIEW_IN_PROGRESS / RATINGS_CAPTURED_BODYFREE / QUESTION_OBSERVATIONS_CAPTURED_BODYFREE / DISPOSAL_PENDING / DISPOSAL_VERIFIED / SUMMARY_FINALIZED / BLOCKED
+question need observation material:
+  body-free only
+  question text / draft question text / reviewer free text / raw input / returned surface / local path / body hash prohibited
+rating vs question observation:
+  P5 readfeel ratingとquestion need observationを混ぜない
+  RED / REPAIR_REQUIREDをquestion candidateだけで覆わない
+candidate handoff:
+  P5 confirmed candidate / P6 start candidate / P8 design material candidateは本体許可ではない
+no-touch:
+  RN production files / API route / DB / public response key / Emlis runtime / Gate threshold / P8 implementation / release decision
+```
+
+## 前提資料更新時確認
+
+```text
+py_compile R49 helper: ok
+R49 R0/R1〜R18 target: 76 passed by split execution
+backend collect-only: 3367 tests collected / 1 warning
+```
+
+# 2026-06-20 差分追記: EmlisAI P7-R50 Manual Run Decision contract boundary
+
+P7-R50を触る場合は、次をcontract boundaryとして先に確認する。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r0_r1_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r2_r3_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r4_r5_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r6_r7_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r8_r9_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r10_r11_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r12_r13_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r14_r15_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r16_r17_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r18_r19_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r50_p5_human_blind_qa_manual_run_decision_r20_20260620.py
+```
+
+R50 contractの主眼:
+
+```text
+- GOはlocal-only manual review準備への許可であり、review完了ではない。
+- body-full packet generation requestは生成要求であり、packet実生成ではない。
+- reviewer free text / body-full surface / question text / path / hash / terminal outputをbody-free materialへ混ぜない。
+- readfeel blockerとexecution blockerを混同しない。
+- question need observationを、P5修正回避やP8実装開始の根拠にしない。
+- disposal receipt builder / verifierを、actual purge実行済みと読まない。
+- P5/P6/P8 handoffはcandidateであり、start allowed / release allowedではない。
+```
+
+確認済みvalidation:
+
+```text
+py_compile R50 helper/tests: ok
+R50 target tests: 99 passed
+```
+
+未確認として残すもの:
+
+```text
+P5 actual human Blind QA実レビュー
+local-only body-full packet実生成
+actual rating rows / actual question observation rows実記入
+actual purge / disposal receipt実ファイル作成
+full backend suite execution green
+実機modal読感
+```
+
+# 2026-06-21 差分追記: EmlisAI P7-R51 Actual Local-Only Manual Run contract boundary
+
+P7-R51を触る場合は、次をcontract boundaryとして先に確認する。
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r0_r1_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r2_r3_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r4_r5_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r6_r7_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r8_r9_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r10_r11_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r12_r13_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r14_r15_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r16_r17_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r18_r19_20260620.py
+mashos-api/ai/tests/test_emlis_ai_p7_r51_p5_human_blind_qa_actual_local_manual_run_r20_20260621.py
+```
+
+R51 contractの主眼:
+
+```text
+- R51はP5 Human Blind QA actual local-only manual runのbody-free controllerであり、P8開始ではない。
+- body-full packet / reviewer notes / raw input / returned surface / question text / local path / hash / terminal outputをbody-free materialへ混ぜない。
+- actual review captureはsanitized rowsの受け取りであり、外部review運用完了主張ではない。
+- readfeel blockerとexecution blockerを混同しない。
+- question need observationを、P5修正回避やP8実装開始の根拠にしない。
+- purge evidence / disposal receipt builderを、helperによるactual local delete ops実行済みと読まない。
+- P5/P6/P8 handoffはcandidateであり、confirmed final / start allowed / release allowedではない。
+- R51-20はno body leak / no question text / no-touch validationであり、P7 complete判定ではない。
+```
+
+確認済みvalidation:
+
+```text
+py_compile R51 helper/target tests: ok
+R51 target recorded at R51-20 completion: 125 passed
+R50 regression recorded at R51-20 completion: 99 passed
+```
+
+未確認として残すもの:
+
+```text
+actual external review operation
+P6 limited human readfeel start判断
+P8 detailed design start判断
+P7 complete判断
+release判断
+full backend suite execution green
+```
+
+# 2026-06-21 差分追記: P7-R52 body-free evidence decision gate contract boundary
+
+R52で追加された契約・境界系は、`mashos-api/ai/services/ai_inference/emlis_ai_p7_r52_r51_handoff_p6_p8_start_decision_gate.py` とR52 target tests 8件です。
+
+この境界は、R51 body-free handoff materialを受けて、actual review evidence completeness / disposal / execution blocker / rating-question consistency / P5 repair / P6 candidate / P8 material candidate / final decision / no-touchを判定します。ただし、public contractやruntime flowを変更する境界ではありません。
+
+R52 contractで禁止される読み:
+
+```text
+- R52 target greenをP5 human Blind QA confirmedと読む。
+- R52 evidence completeness checkerを、actual external review operationと読む。
+- P6 candidate / P8 material candidateをstart_allowedへ自動昇格する。
+- question text / draft question text / trigger logic / API / DB / RN UI / response keyをR52成果物として作る。
+- raw input / raw answer / comment_text body / reviewer free text / local path / hash / terminal outputをR52 materialへ混ぜる。
+```
+
+R52 verification recorded in this premise update:
+
+```text
+R52 target: 219 passed
+backend collect-only: 3810 tests collected / 1 warning
+full backend suite execution green: not confirmed
+```
+
+
+# 2026-06-21 差分追記: P7-R53 R51 actual review evidence materialization contract boundary
+
+R53で追加された契約・境界系は、`mashos-api/ai/services/ai_inference/emlis_ai_p7_r53_r51_actual_local_review_execution_evidence_materialization.py` とR53 target tests 11件です。
+
+この境界は、R52後にR51 actual local-only human reviewへ戻るため、current received snapshot refreeze、R51/R52 source delta freeze、R49 timeout preflight、R51 R0/R1 current snapshot override、explicit allow / local root / purge plan、24-case manifest、packet completeness、reviewer form、sanitized capture、rating/blocker/question normalization、rating-question guard、pause/abort/expiration、purge/disposal receipt、summary、P5/P6/P8 candidate handoff、final no-body-leak/no-question-text/no-touch、R52 re-intake handoffを固定します。
+
+R53 contractで禁止される読み:
+
+```text
+- R53 target greenをP5 human Blind QA confirmed finalと読む。
+- R53 actual human review capture builderを、actual external review operation完了と読む。
+- R53 packet request / optional writer boundaryを、body-full packet実生成済みと読む。
+- R53 purge evidence / disposal receipt builderを、helperがlocal delete opsを実行したものと読む。
+- R53 question need observation rowsをquestion text / draft question text / P8 schemaとして扱う。
+- R53 P8 material candidate handoffをP8 start allowed / P8 implementationと読む。
+- raw input / raw answer / comment_text body / returned surface / owned history body / reviewer free text / local path / hash / terminal outputをR53 materialへ混ぜる。
+- RN / API / DB / public response key / runtime / P8実装へtouchが広がったと読む。
+```
+
+R53 verification recorded in this premise update:
+
+```text
+R53 helper present: true
+R53 target test files present: 11
+py_compile R53 helper and target tests: ok
+R53 split execution verified in this premise update: 291 passed by split execution
+R53 all-in-one target green: not claimed
+full backend suite green: not claimed
+R53 split execution verified in this premise update:
+  R0-R1: 42 passed
+  R2-R3: 34 passed
+  R4-R5: 35 passed
+  R6-R7: 26 passed + 6 passed by split filter
+  R8-R9: 41 passed
+  R10-R11: 39 passed
+  R12-R13: 34 passed
+  R14-R15: 12 passed
+  R16-R17: 7 passed
+  R18-R19: 7 passed by individual test-function split
+  R20-R21: 8 passed
+  total: 291 passed by split execution
+R53 collect-only: 291 tests collected
+R53 all-in-one target green: not claimed
+full backend suite green: not claimed
+R49 wildcard / split matrix green: not newly claimed in this premise update
+```
+
+# 2026-06-23 差分追記: P7-R54 P5 actual review result handoff contract boundary
+
+R54で追加された契約・境界系は、`mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_p5_human_blind_qa_actual_local_review_result_handoff.py` とR54 target tests 12件です。
+
+この境界は、R53後にP5 actual local-only review resultをR52へ返すため、current received snapshot refreeze、R53 source delta freeze、R49〜R53 validation evidence intake、explicit allow / local root / purge plan、24-case manifest、packet generation request、packet completeness / export denylist scan、reviewer instruction / rating form、operation state、sanitized capture、rating row normalization、readfeel/execution blocker分離、question need observation row normalization、rating-question guard、pause/abort/expiration、purge/disposal receipt、post-review summary、P5/P6/P8 candidate handoff、final no-body-leak/no-question-text/no-touch、R52 re-intake handoff、validation command matrixを固定します。
+
+R54 contractで禁止される読み:
+
+```text
+- R54 target greenをP5 human Blind QA confirmed finalと読む。
+- R54 operation state captureをactual external review operation完了と読む。
+- R54 packet request / packet scanをbody-full packet実生成済みと読む。
+- R54 purge evidence / disposal receipt builderを、helperがlocal delete opsを実行したものと読む。
+- R54 question need observation rowsをquestion text / draft question text / P8 schemaとして扱う。
+- R54 P8 material candidate handoffをP8 start allowed / P8 implementationと読む。
+- R54 R52 re-intake handoffをR52がP6/P8へ自動昇格する材料と読む。
+- raw input / raw answer / comment_text body / returned surface / owned history body / reviewer free text / local path / hash / terminal outputをR54 materialへ混ぜる。
+- RN / API / DB / public response key / runtime / P8実装へtouchが広がったと読む。
+```
+
+R54 verification recorded in this premise update:
+
+```text
+R54 helper present: true
+R54 target test files present: 12
+py_compile R54 helper: passed
+R54 R0/R1 target re-run in this premise update: 43 passed
+R54 all-target one-shot run in this premise update: timeout / green not claimed
+R54 target collect-only in this premise update: 309 tests collected
+R54 split/all-target green in this premise update: not claimed
+full backend suite green: not claimed
+RN contract re-run: not run in this premise update
+```
+
+# 2026-06-24 差分追記: P7-R55 R54 evidence reconcile / R52 re-intake decision contract boundary
+
+R55で追加された契約・境界系は、`mashos-api/ai/services/ai_inference/emlis_ai_p7_r55_r54_evidence_reconcile_r52_reintake_decision_materialization.py` とR55 target tests 6件です。
+
+この境界は、R54 default body-free handoffを現在の受領snapshot基準で読み直し、prior helper source refs、validation evidence claim level、R54 handoff intake、body-free forbidden payload scan、actual review evidence gap、R52 re-intake decision、P5/P6/P8/release separation、final no-touch、validation command matrix、final summaryを固定します。
+
+R55 contractで禁止される読み:
+
+```text
+- R55 target greenをP5 human Blind QA actual review completionと読む。
+- R55 final summary readyをP5 confirmed final / P6 start allowed / P8 start allowed / release readinessと読む。
+- R55 command matrixをactual run evidenceやfull backend suite greenとして読む。
+- R55 R52 re-intake decision materialをR52 enum変更やR52 write path変更として読む。
+- R55 actual review evidence missingをP5 repair required / P5 confirmed candidate / P8 materialへ誤昇格する。
+- raw input / raw answer / comment_text body / returned surface / owned history body / reviewer free text / local path / hash / terminal outputをR55 materialへ混ぜる。
+- RN / API / DB / public response key / runtime / Gate threshold / P8実装へtouchが広がったと読む。
+```
+
+R55 verification recorded in this premise update:
+
+```text
+R55 helper present: true
+R55 target test files present: 6
+py_compile R55 helper: passed
+R55 all target tests in this premise update: 613 passed
+R54 R22/R23 spot regression in this premise update: 9 passed
+R52 broad target continuation in this premise update: timeout / green not claimed
+full backend suite green: not claimed
+RN contract re-run: not run in this premise update
+```
+
+# 2026-06-24 差分追記: P4 Runtime Backfill / H Future Direction Surface Repair contract boundary
+
+P4 Runtime Backfill / H-I-J Future Direction Surface Repair R0〜R10では、`P4-HIJ-FUTURE-DIRECTION-SURFACE-001` をcurrent-only surface specificity redとして閉じた。ただし、contract上の変更は限定される。
+
+## contract上の変更あり
+
+```text
+runtime internal:
+  emlis_ai_labelled_two_stage_surface_recomposition.py
+
+内容:
+  eligible non-limited labelled two-stage pathで、body-free semantic focus summaryを作り、recovered_energy_future_direction surface roleをgeneric fallbackより前に扱う。
+```
+
+public metaへ入れてよいのは、body-free summaryに限定する。
+
+```text
+allowed:
+  schema_version
+  semantic_focus_id
+  semantic_material_ids
+  surface_role_requirements
+  blocked_generic_signature_ids
+
+forbidden:
+  raw input body
+  raw memo body
+  comment_text body
+  candidate body
+  expected surface text
+  generic surface text
+```
+
+## contract上の変更なし
+
+```text
+RN production UI:
+  変更なし
+RN表示条件:
+  observation_status == passed && comment_text non-empty のまま
+visible body:
+  input_feedback.comment_text のまま
+API route:
+  /emotion/submit のまま
+request key / response key:
+  変更なし
+DB physical schema / write path:
+  変更なし
+public meta key:
+  追加なし
+Gate threshold:
+  変更なし
+runtime Gate:
+  R4では追加しない。test_audit_only。
+case_id runtime condition:
+  追加しない
+fixed fallback:
+  追加しない
+```
+
+## validation / result boundary
+
+R10結果メモ上の確認は次である。
+
+```text
+R0/R1 + R2/R3 + R4 targeted:
+  5 passed / 1 warning
+H/I/J submit E2E:
+  3 passed / 1 warning
+P0〜P4周辺回帰:
+  59 passed / 1 warning
+P3 Product Read Feel Regression:
+  59 passed
+P4 Product Read Feel Regression:
+  60 passed
+RN Contract Regression:
+  36 passed
+compileall:
+  pass
+collect-only:
+  5028 tests collected / 1 warning
+```
+
+この結果は、H future-direction surface red closureの境界で読む。P4完了、Product Read Feel v1商品合格、P5/P6/P8開始、release_allowed trueに変換しない。
+
+
+
+# 2026-06-25 差分追記: P4-R11 Residual Family Current-only Surface Audit contract boundary
+
+P4-R11で追加された契約・境界系は、P4 Product Read Feelのbody-free audit / triage補助層である。production contractは変えない。
+
+P4-R11で追加された主なcontract owner:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_p4_r11_residual_family_surface_audit.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_p4_r11_surface_specificity_role_verdict_audit.py
+mashos-api/ai/services/ai_inference/emlis_ai_product_readfeel_p4_r11_summary_decision_handoff.py
+```
+
+## P4-R11 contractで禁止されるbody-bearing payload
+
+```text
+raw input
+raw text
+raw memo
+comment_text body
+candidate body
+surface text
+reviewer free text
+question text / draft question text
+stdout / stderr / traceback body
+local filesystem path
+DB record id
+raw user id
+```
+
+## P4-R11 contractでfalse維持するもの
+
+```text
+public_response_key_added: false
+response_shape_changed: false
+api_route_changed: false
+db_physical_name_changed: false
+rn_visible_contract_changed: false
+display_gate_relaxed: false
+visible_surface_gate_relaxed: false
+runtime_surface_gate_relaxed: false
+fixed_fallback_used: false
+case_specific_route_used: false
+runtime_changed_here: false
+json_schema_file_materialized: false
+p5_human_review_evidence_created_here: false
+question_observation_rows_created_here: false
+p6_start_allowed: false
+p8_start_allowed: false
+release_allowed: false
+```
+
+## P4-R11 verification recorded in latest actual snapshot
+
+```text
+R11 target tests:
+  83 passed
+P4 existing regression:
+  60 passed
+H/I/J runtime backfill regression:
+  8 passed / warnings only
+P3 Product Read Feel regression:
+  59 passed
+R54/R55 hold boundary regression:
+  922 passed
+RN contract:
+  36 passed
+backend collect-only:
+  5111 tests collected / 1 warning
+```
+
+この前提資料更新時点では、最新実ファイルに対するcompileallを再実行し、`pass`を確認した。
+
+## P4-R11 contractの禁止読み
+
+```text
+P4-R11 target greenをP4 completeとして読む。
+P4-R11 all-pass helper pathをactual external readfeel no-blocker evidenceとして読む。
+P4-R11 audit rowsをR54 actual review rows / P5 rating rows / question observation rowsとして読む。
+R55 holdをP4-R11 greenで解除する。
+P8 question detailed design / implementationが始まったと読む。
+release_allowed trueの材料として読む。
+```
+
+
+# 2026-06-26 差分追記: R54 Actual Local-only Human Review Operation Re-entry contract boundary
+
+R54 operation re-entry OP00〜OP24で追加された契約・境界系は、P5 Human Blind QA actual local-only reviewをbody-free evidenceとしてR52へ戻すためのoperation helperである。production contractは変えない。
+
+R54 operation re-entryで追加された主なcontract owner:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_actual_local_review_operation_reentry_20260625.py
+```
+
+## R54 operation re-entry contractで禁止されるbody-bearing payload
+
+```text
+raw input
+raw memo
+raw action
+comment_text body
+returned Emlis body
+bounded history surface body
+reviewer free text
+reviewer notes body
+local file path
+local directory path
+body hash
+body-full packet content
+question text
+draft question text
+terminal output / stdout / stderr
+command result body
+```
+
+## R54 operation re-entry contractでfalse維持するもの
+
+```text
+api_changed: false
+db_changed: false
+rn_changed: false
+runtime_changed: false
+public_response_key_changed: false
+question_implementation_started_here: false
+p8_implementation_spec_finalized_here: false
+p6_limited_human_readfeel_start_allowed: false
+p8_start_allowed: false
+release_allowed: false
+full_backend_suite_green_claimed: false
+real_device_modal_verified_claimed: false
+actual_human_review_complete_claimed_by_helper: false
+terminal_output_stored_here: false
+command_result_body_stored_here: false
+```
+
+## この前提資料更新で確認したverification
+
+```text
+R54 operation re-entry OP00〜OP24 target:
+  471 passed
+R54/R55 selected regression:
+  280 passed
+backend compileall:
+  pass
+backend collect-only:
+  この更新では完走確認なし / green claimなし
+full backend suite green:
+  未確認
+RN contract re-run:
+  未実行
+```
+
+## R54 operation re-entry contractの禁止読み
+
+```text
+OP00〜OP24 target greenをactual external human review完了として読む。
+body-free packet requestをbody-full packet成果物として読む。
+R52 re-intake handoff builderをP5 confirmed finalとして読む。
+P6 candidate / P8 material candidateをstart_allowedとして読む。
+question need observation rowsをP8 question text / trigger / API / DB / RN実装として読む。
+collect-onlyやselected regressionをfull backend suite greenとして読む。
+```
+
+
+# 2026-06-26 差分追記: R54 Actual Review Execution Evidence Materialization EV00〜EV22 contract boundary
+
+R54-EV00〜EV22で追加された契約・境界系は、P5 Human Blind QA actual local-only reviewをbody-free evidenceとしてR52へ戻すためのmaterialization helperである。production contractは変えない。
+
+R54-EVで追加された主なcontract owner:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_actual_review_execution_evidence_materialization_20260626.py
+```
+
+## R54-EV contractで禁止されるbody-bearing payload
+
+```text
+raw input
+raw memo
+raw action
+comment_text body
+returned Emlis body
+bounded history surface body
+reviewer free text
+reviewer notes body
+local absolute path
+local directory path
+body hash
+packet content
+body-full packet artifact
+question text
+draft question text
+terminal output / stdout / stderr
+command string / command result body
+```
+
+## R54-EV contractでfalse維持するもの
+
+```text
+api_changed: false
+db_changed: false
+rn_changed: false
+runtime_changed: false
+public_response_key_changed: false
+question_implementation_started_here: false
+question_text_materialized_here: false
+draft_question_text_materialized_here: false
+question_trigger_logic_implemented: false
+question_api_implemented: false
+question_db_schema_implemented: false
+question_rn_ui_implemented: false
+p5_human_blind_qa_confirmed_final: false
+p6_limited_human_readfeel_start_allowed: false
+p8_start_allowed: false
+p7_complete: false
+release_allowed: false
+full_backend_suite_green_claimed: false
+real_device_modal_verified_claimed: false
+actual_human_review_complete_claimed_by_helper: false
+```
+
+## 最新result memo上のverification
+
+```text
+EV00-EV22 selected target total by split executions:
+  802 passed
+R54-OP target:
+  471 passed
+R55 target:
+  613 passed
+P4-R11 regression target:
+  83 passed
+backend collect-only:
+  6384 tests collected / 1 warning
+```
+
+この前提資料更新自体ではbackend full suite greenを新規主張しない。最新result memoのcollect-only warningは既存のPydantic `root_validator` deprecation warningとして記録されている。
+
+## R54-EV contractの禁止読み
+
+```text
+EV target greenをactual human review完了として読む。
+R52 handoff readinessをP5 final confirmationとして読む。
+P6/P8 candidate-only handoffをstart_allowedとして読む。
+question observation normalizationをP8 question実装として読む。
+validation matrixをrelease readinessとして読む。
+```
+
+
+# 2026-06-27 差分追記: R54-CLR00〜CLR24 contract / validation boundary
+
+## 2026-06-27-R54-CLR-CB-0. 追加されたcontract boundary
+
+`mashos-api_14(7).zip` のR54-CLR00〜CLR24は、actual local-only human review operationをbody-free evidenceとして安全に扱うためのcontract boundaryである。前提資料上では、helper greenをactual human review completeへ変換しないことを最優先の読み方として固定する。
+
+```text
+CLR chain validation recorded by result memos: 257 passed by split
+selected regression recorded by result memos: 1746 passed by split
+compileall recorded by result memos: passed
+full backend suite green confirmed: false
+RN contract re-run in this premise update: false
+RN real-device modal verified: false
+```
+
+## 2026-06-27-R54-CLR-CB-1. 禁止payload
+
+```text
+must not be treated as newly available artifacts:
+  body-full packet content
+  raw input
+  returned Emlis body
+  history surface
+  reviewer free text
+  reviewer notes body
+  question text
+  draft question text
+  local absolute path
+  body hash
+  terminal output body
+```
+
+## 2026-06-27-R54-CLR-CB-2. false固定する状態
+
+```text
+actual_human_review_execution_by_person = false
+actual_body_full_packet_content_generation_confirmed = false
+actual_rating_rows_from_real_review_confirmed = false
+actual_question_need_observation_rows_from_real_review_confirmed = false
+actual_r52_reintake_execution_confirmed = false
+p5_confirmed_final = false
+p6_start_allowed = false
+p8_start_allowed = false
+p7_complete = false
+release_allowed = false
+```
+
+## 2026-06-27-R54-CLR-CB-3. 追加coverage一覧
+
+詳細なfile-level coverageは、短名CSV `r54clr_diff_20260627.csv` を参照する。
+
+
+# 2026-06-28 差分追記: R54-AHR00〜AHR24 contract / validation boundary
+
+## 2026-06-28-R54-AHR-CB-0. 追加されたcontract boundary
+
+`mashos-api_14(8).zip` のR54-AHR00〜AHR24は、actual human review execution / body-free evidence intakeを安全に扱うためのcontract boundaryである。前提資料上では、AHR helper greenをactual human review completeへ変換しないことを最優先の読み方として固定する。
+
+```text
+AHR chain validation recorded by result memos: 499 passed by split
+selected CLR18〜CLR24 regression recorded by result memos: 38 passed
+selected R55 regression recorded by result memos: 613 passed
+selected R52 regression recorded by result memos: 49 passed
+compileall recorded by result memos: passed
+full backend suite green confirmed: false
+RN contract re-run in this premise update: false
+RN real-device modal verified: false
+```
+
+## 2026-06-28-R54-AHR-CB-1. 禁止payload
+
+```text
+must not be treated as newly available artifacts:
+  body-full packet content
+  raw input
+  returned Emlis body
+  history surface
+  reviewer free text
+  reviewer notes body
+  question text
+  draft question text
+  local absolute path
+  body hash
+  terminal output body
+  stdout / stderr / traceback body
+```
+
+## 2026-06-28-R54-AHR-CB-2. false固定する状態
+
+```text
+actual live human review execution by person in this premise update = false
+actual live body-full packet content generation confirmed = false
+actual live rating rows from external review confirmed = false
+actual live question observation rows from external review confirmed = false
+actual live disposal / purge operation confirmed = false
+actual_r52_reintake_execution_confirmed = false
+p5_confirmed_final = false
+p6_start_allowed = false
+p8_start_allowed = false
+p7_complete = false
+release_allowed = false
+```
+
+## 2026-06-28-R54-AHR-CB-3. 追加coverage一覧
+
+詳細なfile-level coverageは、短名CSV `r54ahr_diff_20260628.csv` を参照する。
+
+# 2026-06-28 差分追記: R54-AHR-CS00〜CS18 contract / validation boundary
+
+## 2026-06-28-R54-AHR-CS-CB-0. 追加されたcontract boundary
+
+`mashos-api_11(31).zip` のR54-AHR-CS00〜CS18は、current `262/84/257/170` basis上でactual review re-entry evidenceを扱うためのcontract boundaryである。前提資料上では、CS helper greenをactual human review completeへ変換しないことを最優先の読み方として固定する。
+
+## 2026-06-28-R54-AHR-CS-CB-1. 禁止payload
+
+```text
+raw input
+current input body
+returned Emlis body
+history surface
+comment_text body
+body-full packet content
+reviewer free text
+reviewer notes body
+question text
+draft question text
+local absolute path
+body hash
+terminal output body
+stdout / stderr / traceback body
+```
+
+## 2026-06-28-R54-AHR-CS-CB-2. false固定する状態
+
+```text
+actual_human_review_complete: false
+actual_body_full_packet_generation_confirmed: false
+actual_rating_rows_from_live_review_confirmed: false
+actual_question_need_observation_rows_from_live_review_confirmed: false
+actual_disposal_purge_operation_confirmed: false
+actual_r52_reintake_execution_confirmed: false
+p5_confirmed_final: false
+p6_start_allowed: false
+p8_start_allowed: false
+p7_complete: false
+release_allowed: false
+full_backend_suite_green_confirmed: false
+rn_real_device_modal_verified: false
+```
+
+## 2026-06-28-R54-AHR-CS-CB-3. 追加coverage一覧
+
+詳細なfile-level coverageは、短名CSV `r54cs_diff_20260628.csv` を参照する。
+
+```text
+service helper: emlis_ai_p7_r54_ahr_current_snapshot_actual_review_reentry_20260628.py
+target tests: test_r54_ahr_current_snapshot_actual_review_reentry_cs00_cs01_20260628.py ... test_r54_ahr_current_snapshot_actual_review_reentry_cs18_20260628.py
+result memos: R54_AHR_CS00_CS01_CurrentSnapshotActualReviewReentry_Result_20260628.md ... R54_AHR_CS18_CurrentSnapshotActualReviewReentry_Result_20260628.md
+```
+
+
+
+# 2026-06-29 差分追記: R54-AHR-CR00〜CR22 contract / validation boundary
+
+## 2026-06-29-R54-AHR-CR-CB-0. 追加されたcontract boundary
+
+`mashos-api_13(15).zip` のR54-AHR-CR00〜CR22は、current received `264/85/258/171` basis上でactual local-only human review operation evidenceをbody-freeに扱うためのcontract boundaryである。前提資料上では、CR helper green / target green / documentation outputをactual human review complete、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+## 2026-06-29-R54-AHR-CR-CB-1. 禁止payload
+
+```text
+raw input
+raw body
+returned Emlis body
+history surface
+comment_text body
+reviewer free text
+reviewer notes body
+question text
+draft question text
+body-full packet content
+local absolute path
+body hash
+terminal output body
+stdout body
+stderr body
+traceback body
+```
+
+## 2026-06-29-R54-AHR-CR-CB-2. false固定する状態
+
+```text
+actual local human review newly run here: false
+full backend suite green confirmed: false
+RN contract green confirmed: false
+RN real-device modal verified: false
+P5 final allowed: false
+P6 start allowed: false
+P8 start allowed: false
+R52 actual re-intake execution confirmed: false
+P7 complete: false
+release allowed: false
+```
+
+## 2026-06-29-R54-AHR-CR-CB-3. 追加coverage一覧
+
+詳細なfile-level coverageは、短名CSV `r54cr_diff_20260629.csv` を参照する。
+
+```text
+service helper: emlis_ai_p7_r54_ahr_current_received_snapshot_actual_local_review_operation_20260628.py
+target tests: test_r54_ahr_current_received_actual_local_review_operation_cr00_cr01_20260628.py ... test_r54_ahr_current_received_actual_local_review_operation_cr22_20260628.py
+result memos: R54_AHR_CR00_CR01_CurrentReceivedActualLocalReviewOperation_Result_20260628.md ... R54_AHR_CR22_CurrentReceivedActualLocalReviewOperation_Result_20260628.md
+```
+
+
+# 2026-06-30 差分追記: R54-AHR Post-CR22 EX00〜EX18 contract / validation boundary
+
+## 2026-06-30-R54-AHR-POSTCR22-CB-0. 追加されたcontract boundary
+
+`mashos-api_11(33).zip` のR54-AHR Post-CR22 EX00〜EX18は、current received `264/85/258/171` basis上で、actual local-only human review execution evidence completionをbody-freeに扱うためのcontract boundaryである。前提資料上では、EX helper green / target green / result memo outputをactual human review complete、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+## 2026-06-30-R54-AHR-POSTCR22-CB-1. 禁止payload
+
+```text
+raw input
+raw body
+returned Emlis body
+history surface
+comment_text body
+reviewer free text
+reviewer notes body
+question text
+draft question text
+body-full packet content
+local absolute path
+body hash
+terminal output body
+stdout body
+stderr body
+traceback body
+```
+
+## 2026-06-30-R54-AHR-POSTCR22-CB-2. false固定する状態
+
+```text
+actual local human review newly run here: false
+actual selection rows created by this premise update: false
+actual review execution completion claimed: false
+full backend suite green confirmed: false
+RN contract green confirmed: false
+RN real-device modal verified: false
+P5 final allowed: false
+P6 start allowed: false
+P8 start allowed: false
+R52 actual re-intake execution confirmed: false
+P7 complete: false
+release allowed: false
+```
+
+## 2026-06-30-R54-AHR-POSTCR22-CB-3. 追加coverage一覧
+
+詳細なfile-level coverageは、短名CSV `r54pc22_diff_20260630.csv` を参照する。
+
+```text
+service helper: emlis_ai_p7_r54_ahr_post_cr22_actual_local_review_execution_evidence_completion_20260629.py
+target tests: test_r54_ahr_post_cr22_actual_local_review_execution_evidence_completion_ex00_ex01_20260629.py ... test_r54_ahr_post_cr22_actual_local_review_execution_evidence_completion_ex18_20260630.py
+result memos: R54_AHR_PostCR22_ActualLocalReviewExecutionEvidenceCompletion_EX00_EX01_Result_20260629.md ... R54_AHR_PostCR22_ActualLocalReviewExecutionEvidenceCompletion_EX18_Result_20260630.md
+```
+
+
+
+# 2026-06-30 差分追記: R54-AHR Post-EX18 MN00〜MN11 contract / validation boundary
+
+## 2026-06-30-R54-AHR-POSTEX18-CB-0. 追加されたcontract boundary
+
+`mashos-api_7(79).zip` のR54-AHR Post-EX18 MN00〜MN11は、Post-CR22 EX18 next-decision holdをbody-freeに読み、actual review evidence未成立時に `RETURN_TO_ACTUAL_REVIEW_OPERATION_REQUIRED` へ閉じるcontract boundaryである。前提資料上では、MN helper green / target green / result memo outputをactual human review complete、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+## 2026-06-30-R54-AHR-POSTEX18-CB-1. 禁止payload
+
+```text
+raw input
+raw body
+returned Emlis body
+history surface
+comment_text body
+reviewer free text
+reviewer notes body
+question text
+draft question text
+question answer body
+body-full packet content
+local absolute path
+file path
+body hash
+terminal output body
+stdout body
+stderr body
+traceback body
+```
+
+## 2026-06-30-R54-AHR-POSTEX18-CB-2. false固定する状態
+
+```text
+actual local human review newly run here: false
+actual review evidence complete from real review: false
+actual selection rows created by this premise update: false
+actual rating rows created by this premise update: false
+actual question need observation rows created by this premise update: false
+actual review execution completion claimed: false
+full backend suite green confirmed: false
+RN contract green confirmed: false
+RN real-device modal verified: false
+P5 final allowed: false
+P6 start allowed: false
+P8 start allowed: false
+R52 actual re-intake execution confirmed: false
+P7 complete: false
+release allowed: false
+```
+
+## 2026-06-30-R54-AHR-POSTEX18-CB-3. 追加coverage一覧
+
+詳細なfile-level coverageは、短名CSV `r54mn_diff_20260630.csv` を参照する。
+
+```text
+service helper: emlis_ai_p7_r54_ahr_post_ex18_manual_next_decision_return_to_actual_review_operation_20260630.py
+target tests: test_r54_ahr_post_ex18_manual_next_decision_return_to_actual_review_operation_mn00_mn01_20260630.py ... test_r54_ahr_post_ex18_manual_next_decision_return_to_actual_review_operation_mn10_mn11_contract_20260630.py
+result memos: R54_AHR_PostEX18_ManualNextDecision_ReturnToActualReviewOperation_MN00_MN01_Result_20260630.md ... R54_AHR_PostEX18_ManualNextDecision_ReturnToActualReviewOperation_MN10_MN11_Result_20260630.md
+```
+
+
+# 2026-06-30 差分追記: R54-AHR Post-MN11 PMN-OP00〜OP23 contract / validation boundary
+
+`mashos-api_13(16).zip` のR54-AHR Post-MN11 PMN-OP00〜OP23は、MN11 return-operation decisionをbody-freeに受け、actual local-only human review operation evidenceを受け直すためのcontract boundaryである。前提資料上では、PMN helper green / target green / result memo outputをactual human review complete、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+## Contractで固定されたこと
+
+```text
+api_changed: false
+db_changed: false
+rn_changed: false
+runtime_changed: false
+response_key_changed: false
+p8_question_design: false
+p8_question_implementation: false
+actual_body_full_packet_generation: not_run
+actual_local_human_review_execution: not_run
+actual_operation_receipt_from_real_operation: not_received
+actual_sanitized_review_result_rows_from_real_operation: not_received
+actual_rating_rows_from_real_operation: not_received
+actual_question_need_observation_rows_from_real_operation: not_received
+actual_disposal_purge_execution: not_run
+actual_review_evidence_complete_from_real_operation_claimed: false
+postcr22_ex_reentry_executed_here: false
+full_backend_suite_green_claimed: false
+rn_contract_green_claimed: false
+rn_real_device_modal_verified_claimed: false
+```
+
+## Validation record
+
+```text
+PMN-OP00〜OP23 grouped target total: 461 passed across grouped target runs
+PMN-OP22/OP23 target: 37 passed
+Post-EX18 MN00〜MN11 selected regression: 62 passed
+PostCR22 EX00〜EX18 selected regression: 361 passed
+compileall target helper: passed
+```
+
+上記はlatest result memoの記録であり、この前提資料更新でfull backend suite greenやRN real-device modal verifiedを新規主張するものではない。
+
+## generated artifact boundary
+
+latest backend zipには28件の `__pycache__` generated artifactが含まれる。これはsource implementationではなく、runtime contract変更としても扱わない。詳細なfile-level coverageは、短名CSV `r54pmn_diff_20260630.csv` を参照する。
+
+# 2026-07-02 差分追記: R54-AHR Post-PMN23 DMH-OP00〜OP18 contract / validation boundary
+
+`mashos-api_11(35).zip` のR54-AHR Post-PMN23 DMH-OP00〜OP18は、PMN-OP23 downstream manual decision holdをbody-freeに受け、actual local-only human review evidence intakeを検査し、下流手動判断へ閉じるcontract boundaryである。前提資料上では、DMH helper green / target green / result memo outputをactual human review execution、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+## Contractで固定されたこと
+
+```text
+api_changed: false
+db_changed: false
+rn_changed: false
+runtime_changed: false
+response_key_changed: false
+p8_question_design: false
+p8_question_implementation: false
+actual_body_full_packet_generation_run_here: false
+actual_local_human_review_execution_run_here: false
+actual_operation_receipt_newly_created_here: false
+actual_sanitized_review_result_rows_newly_created_here: false
+actual_rating_rows_newly_created_here: false
+actual_question_need_observation_rows_newly_created_here: false
+actual_disposal_purge_execution_run_here: false
+postcr22_ex07_ex18_actual_reentry_executed_here: false
+actual_review_evidence_complete_candidate_supported: true
+actual_review_evidence_complete_from_real_operation_claimed_here: false
+downstream_manual_decision_required_without_auto_execution: true
+full_backend_suite_green_claimed: false
+rn_contract_green_claimed: false
+rn_real_device_modal_verified_claimed: false
+```
+
+## Validation record
+
+```text
+DMH-OP18 target: 42 passed
+Current DMH OP00〜OP18 target: 562 passed
+PMN-OP22/OP23 selected regression: 37 passed
+compileall: passed
+```
+
+上記のうち、OP18 target / PMN-OP22-OP23 selected regression / compileallは、この前提資料更新でローカル確認した。Current DMH OP00〜OP18 target 562 passedはlatest result memoの記録であり、この前提資料更新でfull backend suite greenやRN real-device modal verifiedを新規主張するものではない。
+
+## no-leak / no-promotion boundary
+
+DMH-OP15以降も、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw input
+raw body
+returned Emlis body
+comment_text body
+history body
+body-full packet content
+reviewer free text
+reviewer notes body
+question text
+draft question text
+question answer body
+local absolute path
+file path
+body hash
+terminal output body
+stdout body
+stderr body
+traceback body
+```
+
+詳細なfile-level coverageは、短名CSV `r54dmh_diff_20260702.csv` を参照する。
+
+# 2026-07-03 差分追記: R54-AHR Post-DMH18 DMD-OP00〜OP08 contract / validation boundary
+
+`mashos-api_7(82).zip` のR54-AHR Post-DMH18 DMD-OP00〜OP08は、DMH-OP18 finalizerを受け、actual evidence candidateとreal-operation evidence claimを分離し、body-free / invalid source / promotion claimを検査したうえでmanual decision materialへ閉じるcontract boundaryである。前提資料上では、DMD helper green / target green / result memo outputをactual human review execution、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+```text
+DMD-OP00〜OP08 target: 74 passed
+DMD-OP08 target only: 9 passed
+DMH-OP18 selected regression: 42 passed
+DMH-OP16/OP17 selected regression: 79 passed
+PMN-OP22/OP23 selected regression: 37 passed
+compileall: passed
+```
+
+上記は、この前提資料更新でローカル確認した。ただし、full backend suite green、RN contract green、RN real-device modal verifiedを新規主張するものではない。
+
+DMD-OP00〜OP08でも、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw input / comment_text body / reviewer note body
+question_text / draft_question_text
+body-full packet body
+local path / hash / terminal output body
+```
+
+詳細なfile-level coverageは、短名CSV `r54dmd_diff_20260703.csv` を参照する。
+
+# 2026-07-03 差分追記: R54-AHR Post-DMD08 ALR-OP00〜OP12 contract / validation boundary
+
+`mashos-api_8(73).zip` のR54-AHR Post-DMD08 ALR-OP00〜OP12は、DMD-OP08 result memo / branchを受け、actual local-only human review operationを続行・再試行・修復停止・complete receipt manual decisionへ分けるcontract boundaryである。前提資料上では、ALR helper green / target green / result memo outputをactual human review execution、P5 final、P6 start、P8 start、R52 execution、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+```text
+ALR-OP00〜OP12 target: 97 passed
+ALR-OP12 target only: 10 passed
+DMD-OP00〜OP08 regression: 74 passed
+selected PMN/DMH/MN regression: 158 passed with --assert=plain
+compileall: passed
+```
+
+上記はlatest ALR result memoの記録として反映する。ただし、full backend suite green、RN contract green、RN real-device modal verifiedを新規主張するものではない。
+
+ALR-OP00〜OP12でも、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw input / comment_text body / reviewer note body
+question_text / draft_question_text / reviewer free text
+body-full packet body
+local path / hash / terminal output body
+```
+
+詳細なfile-level coverageは、短名CSV `r54alr_diff_20260703.csv` を参照する。
+
+# 2026-07-04 差分追記: R54-AHR Post-ALR12 ELR-OP00〜OP19 contract / validation boundary
+
+`mashos-api_11(36).zip` のR54-AHR Post-ALR12 ELR-OP00〜OP19は、ALR-OP12の `ALR_ACTION_RETRY_OR_START_LOCAL_ONLY_REVIEW_REQUIRED` を受け、actual local-only human review start/retry入口からDMD-compatible handoff candidateまでをbody-freeで検査するcontract boundaryである。前提資料上では、ELR helper green / target green / result memo outputをactual human review execution、DMD再実行、R52 execution、P5 final、P6 start、P8 start、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+```text
+ELR-OP00〜OP19 target: 350 passed
+ELR-OP18/OP19 target only: 34 passed
+ALR selected regression: 97 passed
+DMD selected regression: 74 passed
+selected DMH OP16/OP17 + OP18 regression: 121 passed with --assert=plain
+selected PMN OP22/OP23 contract: 37 passed by split with --assert=plain
+compileall services/ai_inference: passed
+full backend suite green: not confirmed
+RN contract green: not confirmed
+RN real-device modal verified: not confirmed
+```
+
+ELR-OP00〜OP19でも、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw input body
+comment_text body
+returned Emlis body
+reviewer note body
+question text / draft question text
+local absolute path
+body hash
+terminal output body
+```
+
+詳細なfile-level coverageは、短名CSV `r54elr_diff_20260704.csv` を参照する。
+
+# 2026-07-04 差分追記: R54-AHR Post-ELR19 DHR-OP00〜OP09 contract / validation boundary
+
+`mashos-api_6(91).zip` のR54-AHR Post-ELR19 DHR-OP00〜OP09は、ELR-OP19 closure後に、DMD handoff-ready / retry-or-start / repair / wait / unresolved holdをbody-freeで分けるcontract boundaryである。前提資料上では、DHR helper green / target green / result memo outputをactual human review execution、DMD execution、R52 execution、P8 start、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+```text
+DHR-OP00〜OP09 combined target: 139 passed
+ELR OP16〜OP19 selected regression: 80 passed
+DMD OP00〜OP08 selected regression: 74 passed
+ALR OP00〜OP12 selected regression: 97 passed
+compileall services/ai_inference: passed
+```
+
+DHR-OP00〜OP09でも、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw body
+comment_text
+question_text / draft_question_text
+local_path / body_hash
+terminal output body
+p8_start_allowed: true
+release_allowed: true
+dmd_execution_started_here: true
+r52_actual_execution_started_here: true
+```
+
+詳細なfile-level coverageは、短名CSV `r54dhr_diff_20260704.csv` を参照する。
+
+
+# 2026-07-04 差分追記: R54-AHR Post-DHR09 RSR-OP00〜OP16 contract / validation boundary
+
+`mashos-api_10(49).zip` のR54-AHR Post-DHR09 RSR-OP00〜OP16は、DHR-OP09 closure後に、actual local-only human review retry/startを偽装せずにbody-freeで検査するcontract boundaryである。前提資料上では、RSR helper green / target green / result memo outputをactual human review execution、DHR re-intake execution、DMD execution、R52 execution、P8 start、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+```text
+RSR-OP00〜OP16 target: 338 passed
+RSR-OP00〜OP16 + DHR-OP00〜OP09: 477 passed
+DHR-OP00〜OP09 / ELR / DMD / ALR selected regression: 390 passed
+compileall services/ai_inference: passed
+```
+
+RSR-OP00〜OP16でも、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw body
+comment_text
+returned surface body
+reviewer free text / reviewer note body
+question_text / draft_question_text
+local_path / relative_path / body_hash / input_hash
+terminal output body
+p8_start_allowed: true
+release_allowed: true
+dhr_reintake_execution_started_here: true
+dmd_execution_started_here: true
+r52_actual_execution_started_here: true
+```
+
+詳細なfile-level coverageは、短名CSV `r54rsr_diff_20260704.csv` を参照する。
+
+
+# 2026-07-05 差分追記: R54-AHR Post-RSR16 DRI-OP00〜OP12 contract / validation boundary
+
+`mashos-api_8(76).zip` のR54-AHR Post-RSR16 DRI-OP00〜OP12は、RSR-OP16 closure後に、DHR actual source claim re-intake materialをbody-freeで再検査するcontract boundaryである。前提資料上では、DRI helper green / target green / result memo outputをDHR-OP04 call、DHR actual source claim confirmation、DHR re-intake execution、DMD execution、R52 execution、P8 start、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+最新result memoに記録された検証summary:
+
+```text
+DRI-OP00〜OP12 split target subtotal: 227 passed
+RSR selected regression: 338 passed
+DHR selected regression: 139 passed
+RSR + DHR selected regression: 477 passed
+DRI split target + RSR selected + DHR selected split total: 704 passed
+services/ai_inference compileall: passed
+```
+
+DRI-OP00〜OP12でも、成果物・result memo・public metaへ次を残さない。
+
+```text
+raw input
+body-full packet body
+returned surface body
+reviewer free text
+question_text / draft_question_text
+local path / file path / hash
+terminal output body
+DHR confirmed claim
+P8 start / release promotion claim
+```
+
+DRI-OP09の `external_actual_operation_evidence_claim_bodyfree_optional` は、DHR-OP04 input candidateであり、DHR confirmed resultではない。DRI-OP12のclosureは、body-free result memo / target tests / selected regression closureであり、DHR re-intake実行済みではない。
+
+詳細なfile-level coverageは、短名CSV `r54dri_diff_20260705.csv` を参照する。
+
+
+# 2026-07-05 差分追記: R54-AHR Post-DRI MRB-OP00〜OP08 contract / validation boundary
+
+`mashos-api_6(94).zip` のR54-AHR Post-DRI MRB-OP00〜OP08は、DRIで閉じたbody-free candidate materialをDHR-OP04へ明示手動再投入するためのcontract boundaryである。前提資料上では、MRB helper green / target green / result memo outputをDHR-OP05 execution、DMD execution、R52 execution、P8 start、P7 complete、releaseへ変換しないことを最優先の読み方として固定する。
+
+```text
+contract boundary:
+  DRI-OP09 candidate accepted != DHR actual source claim confirmed
+  DHR-OP03 ready material accepted != actual source claim confirmed
+  MRB-OP04 input envelope ready != DHR-OP04 called
+  MRB-OP05 DHR-OP04 result capture != DHR-OP05 auto call
+  MRB-OP06 confirmed stopped branch != downstream promotion
+  MRB-OP08 result memo closure != P7 complete / release ready
+
+validation record:
+  MRB-OP00〜OP08 split target: 72 passed
+  DRI selected regression recorded in MRB memo: DRI-OP09 focused subset 16 passed / 17 deselected; DRI-OP10/OP11 + DRI-OP12 55 passed
+  DHR selected regression recorded in MRB memo: 63 passed
+  compileall: passed
+```
+
+MRB-OP05では、explicit manual requestとready envelopeがある場合だけ既存DHR-OP04 builderを呼び、result status refsをbody-freeでcaptureする。これはDRI helperのauto executionではなく、MRBの明示手動境界である。どのDHR-OP04 result branchでも、DHR-OP05 / DHR-OP06 / DMD / R52 / P8 / releaseは自動実行しない。
+
+禁止する読み:
+
+```text
+MRB target greenをactual human review executionへ変換しない。
+MRB-OP02 candidate scan greenをDHR actual source claim confirmedへ変換しない。
+MRB-OP05 explicit manual call result captureをDHR-OP05以降の実行許可へ変換しない。
+MRB-OP06 classifier branchをbranch先の自動実行として読まない。
+MRB-OP08 closureをfull backend suite green / P7 complete / release readyとして読まない。
+P8 question design / implementation / API / DB / RN / trigger / question_textが開始されたとは読まない。
+```
+
+# 2026-07-06 差分追記: R54-AHR Post-MRB08 RDB-OP00〜OP08 contract / boundary validation
+
+Post-MRB08 RDB-OP00〜OP08のcontract / boundary確認対象は次です。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_mrb08_dhr_op04_result_manual_decision_20260705.py` | MRB-OP08後のDHR-OP04 result manual decision helper。DHR-OP05 / DHR-OP06 / DMD / R52 / P8 / releaseは実行しない。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_mrb08_dhr_op04_result_manual_decision_rdb_op00_op01_20260705.py` ... `test_r54_ahr_post_mrb08_dhr_op04_result_manual_decision_rdb_op08_result_20260705.py` | RDB-OP00〜OP08の段階別contract tests。target greenはhelper contract成立であり、full backend suite green / RN green / release許可ではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostMRB08_DHROP04ResultManualDecision_RDB_OP00_OP01_Result_20260705.md` ... `R54_AHR_PostMRB08_DHROP04ResultManualDecision_RDB_OP00_OP08_Result_20260705.md` | body-free result memo。OP08 closureはcandidate not executedのclosureであり、DHR-OP05実行・P8開始・P7完了ではない。 |
+| premise diff CSV | `r54rdb_diff_20260706.csv` | 前提資料側の短名coverage一覧。11 entries added / 0 changed / 0 removedを記録する。 |
+
+RDB-OP00〜OP08では、次をfalse境界として固定する。
+
+```text
+api_route_changed: false
+db_schema_changed: false
+rn_production_ui_changed: false
+runtime_generation_changed: false
+response_key_changed: false
+dhr_op04_recalled_here: false
+dhr_op05_called_here: false
+dhr_op06_called_here: false
+dhr_op07_materialized_here: false
+dmd_execution_started_here: false
+r52_actual_execution_started_here: false
+p8_question_design_started: false
+p8_question_implementation_started: false
+p7_complete: false
+release_allowed: false
+```
+
+# 2026-07-06 差分追記: R54-AHR Post-RDB08 NCI-OP00〜OP08 contract / boundary validation
+
+Post-RDB08 NCI-OP00〜OP08のcontract / boundary確認対象は次です。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_rdb08_selected_next_stage_candidate_intake_20260706.py` | RDB-OP08後のselected_next_stage_candidateを実行せず、body-freeにintake / shape validation / lane resolver / handoff-or-stop closureするhelper。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_rdb08_selected_next_stage_candidate_intake_nci_op00_op01_20260706.py` ... `test_r54_ahr_post_rdb08_selected_next_stage_candidate_intake_nci_op08_result_20260706.py` | NCI-OP00〜OP08の段階別contract tests。target greenはhelper contract成立であり、selected candidate execution / full backend suite green / RN green / release許可ではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostRDB08_SelectedNextStageCandidateIntake_NCI_OP00_OP01_Result_20260706.md` ... `R54_AHR_PostRDB08_SelectedNextStageCandidateIntake_NCI_OP00_OP08_Result_20260706.md` | NCI各段階のbody-free result memo。OP08 closureでもDHR-OP05 / DMD / R52 / P8 / releaseへ進めたとは読まない。 |
+| premise diff CSV | `r54nci_diff_20260706.csv` | 前提資料側の短名coverage一覧。11 entries added / 0 changed / 0 removedを記録する。 |
+
+NCI-OP00〜OP08では、次をfalse境界として固定する。
+
+```text
+selected_next_stage_candidate_executed_here: false
+handoff_or_stop_envelope_executed_here: false
+DHR-OP05 called: false
+DHR-OP06 called: false
+DMD execution: false
+R52 actual execution: false
+actual body-full packet generated: false
+actual local-only human review execution: false
+actual rows / question observation rows created by helper: false
+P5 final / P6 start / P8 start / P7 complete / release allowed: false
+API / DB / RN / runtime / response key change: false
+question_text materialized: false
+full backend suite green confirmed: false
+RN contract green confirmed: false
+RN real-device modal verified: false
+```
+
+# 2026-07-07 差分追記: R54-AHR Post-NCI PNT-OP00〜OP08 contract / boundary validation
+
+Post-NCI PNT-OP00〜OP08のcontract / boundary確認対象は次です。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_nci_selected_handoff_or_stop_decision_triage_20260707.py` | NCI-OP08後のselected_handoff_or_stop_refを実行せず、explicit inputとしてbody-freeにintake / shape validation / lane resolver / next boundary selection closureするhelper。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_nci_selected_handoff_or_stop_decision_triage_pnt_op00_op01_20260707.py` ... `test_r54_ahr_post_nci_selected_handoff_or_stop_decision_triage_pnt_op08_result_20260707.py` | PNT-OP00〜OP08の段階別contract tests。target greenはhelper contract成立であり、selected boundary execution / full backend suite green / RN green / release許可ではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostNCI_SelectedHandoffOrStopDecisionTriage_PNT_OP00_OP01_Result_20260707.md` ... `R54_AHR_PostNCI_SelectedHandoffOrStopDecisionTriage_PNT_R11_NextWorkDecision_20260707.md` | PNT各段階とR7〜R11のbody-free result memo。R11 next work decisionでもDHR-OP05 / DMD / R52 / P8 / releaseへ進めたとは読まない。 |
+| premise diff CSV | `r54pnt_diff_20260707.csv` | 前提資料側の短名coverage一覧。16 entries added / 0 changed / 0 removedを記録する。 |
+
+PNT-OP00〜OP08では、次をfalse境界として固定する。
+
+```text
+NCI-OP08 default builder call allowed: false
+selected_handoff_or_stop_ref executed: false
+selected_post_nci_next_boundary_ref executed: false
+DHR-OP05 called / builder called: false
+DHR-OP06 / DHR-OP07 called: false
+DMD execution: false
+R52 actual execution: false
+actual body-full packet generated: false
+actual local-only human review execution: false
+actual rows / question observation rows created by helper: false
+P5 final / P6 start / P8 start / P7 complete / release allowed: false
+API / DB / RN / runtime / response key change: false
+question_text materialized: false
+full backend suite green confirmed: false
+RN contract green confirmed: false
+RN real-device modal verified: false
+```
+
+# 2026-07-08 差分追記: R54-AHR Post-PNT PCM-OP00〜OP08 contract / boundary validation
+
+Post-PNT PCM-OP00〜OP08のcontract / boundary確認対象は次です。
+
+| 種別 | path | contract上の読み方 |
+|---|---|---|
+| helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_pnt_closed_material_next_boundary_confirmation_20260707.py` | explicit closed PNT-OP08 material required / single selected lane confirmation / next_design_candidate・wait_hold・stop closure helper。PNT-OP08 material synthesis、DHR-OP05、P8、releaseを実行しない。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_pnt_closed_material_next_boundary_confirmation_pcm_op00_op01_20260707.py` ... `test_r54_ahr_post_pnt_closed_material_next_boundary_confirmation_pcm_op08_result_20260707.py` | PCM-OP00〜OP08の段階別contract tests。target greenはhelper contract成立であり、current lane inference / selected boundary execution / full backend suite green / RN green / release許可ではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostPNT_ClosedMaterialNextBoundaryConfirmation_PCM_OP00_OP01_Result_20260707.md` ... `R54_AHR_PostPNT_ClosedMaterialNextBoundaryConfirmation_PCM_R11_NextWorkDecision_20260707.md` | OP00〜OP08 / R7〜R11のbody-free closure記録。validation結果とnext work decisionを記録するが、DHR-OP05 / actual review / P8 / releaseへ進まない。 |
+| premise diff CSV | `r54pcm_diff_20260708.csv` | 前提資料側の短名coverage一覧。16 entries added / 0 changed / 0 removedを記録する。 |
+
+PCM-OP00〜OP08では、次をfalse境界として固定する。
+
+```text
+pnt_op08_builder_called_here: false
+pnt_op08_material_synthesized_here: false
+pnt_op08_decision_table_as_single_lane_allowed: false
+selected_post_nci_next_boundary_executed_here: false
+selected_pcm_next_boundary_executed_here: false
+dhr_op05_called_here: false
+dhr_op05_builder_called_here: false
+dhr_op06_called_here: false
+dhr_op07_materialized_here: false
+dmd_execution_started_here: false
+r52_actual_execution_started_here: false
+actual_review_started_here: false
+actual_rows_created_here: false
+actual_question_need_observation_rows_created_here: false
+p8_question_design_started: false
+question_text_materialized: false
+api_changed: false
+db_changed: false
+rn_changed: false
+runtime_changed: false
+response_key_changed: false
+p7_complete: false
+release_allowed: false
+```
+
+検証記録の読み方:
+
+```text
+PCM target: 140 passed (latest result memo recorded)
+selected regression: 426 passed (latest result memo recorded)
+compileall: passed (latest result memo recorded / this premise update local compileall passed)
+full backend suite green: not claimed
+RN contract green: not claimed
+RN real-device modal verified: not claimed
+```
+
+# 2026-07-09 差分追記: R54-AHR Post-PCM DHB-OP00〜OP08 contract / boundary validation
+
+Post-PCM DHB-OP00〜OP08のcontract / boundary確認対象は次です。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_pcm_dhr_op05_manual_handoff_boundary_20260708.py` | DHB-OP00〜OP08のbody-free Post-PCM DHR-OP05 manual handoff helper。PCM-OP08 material synthesis、DHR-OP05 call、existing DHR-OP05 builder call、DHR-OP06、DMD、R52、P8、releaseを実行したとは読まない。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_pcm_dhr_op05_manual_handoff_boundary_dhb_r0_r1_20260708.py` ... `test_r54_ahr_post_pcm_dhr_op05_manual_handoff_boundary_dhb_op08_result_20260708.py` | DHB skeleton / OP00〜OP08の段階別contract tests。target greenはhelper contract成立であり、DHR-OP05 execution permissionやfull backend suite greenではない。 |
+| selected regression fixture repair | `mashos-api/ai/tests/r54_ahr_post_pnt_pcm_compact_pnt_op08_fixture_20260708.py` and modified PCM regression tests | R8 selected regressionのcollection負荷を避けるbody-free fixture intake repair。production helper変更やPNT-OP08 material synthesisではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostPCM_DHROP05ManualHandoffBoundary_DHB_R7_TargetValidation_Result_20260708.md` ... `R54_AHR_PostPCM_DHROP05ManualHandoffBoundary_DHB_R11_NextWorkDecision_20260708.md` | target validation / selected regression / compileall / result memo closure / next work decisionをbody-freeで記録する。R11で次候補を記録してもcurrent execution allowanceはnone。 |
+| premise diff CSV | `r54dhb_diff_20260709.csv` | 前提資料側の短名coverage一覧。13 entries added / 5 changed / 0 removedを記録する。 |
+
+DHB-OP00〜OP08を読むときの禁止:
+
+```text
+DHB target greenをcurrent DHR-OP05 lane確定として読まない。
+PCM R11 memo / decision tableをexplicit PCM-OP08 DHR lane materialとして読まない。
+DHB-OP04 manual handoff envelopeをDHR-OP05実行結果として読まない。
+DHB-OP05 compatibility crosswalkをexisting DHR-OP05 builder callとして読まない。
+R7/R8/R9 greenをfull backend suite green / RN contract green / RN real-device verifiedとして読まない。
+R10/R11 closureをDHR-OP05 execution permission / P8 start / P7 complete / release allowedへ変換しない。
+```
+
+# 2026-07-09 差分追記: R54-AHR Post-DHB DHC-OP00〜OP08 contract / boundary validation
+
+Post-DHB DHC-OP00〜OP08のcontract / boundary確認対象は次です。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_dhb_dhr_op05_manual_call_execution_consideration_20260709.py` | DHC-OP00〜OP08のbody-free Post-DHB DHR-OP05 manual call consideration helper。DHB closureをDHR-OP05 runtime call、DHR-OP06、DMD、R52、P8、releaseへ変換したとは読まない。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_dhb_dhr_op05_manual_call_execution_consideration_dhc_r0_r1_20260709.py` ... `test_r54_ahr_post_dhb_dhr_op05_manual_call_execution_consideration_dhc_op08_result_20260709.py` | DHC skeleton / OP00〜OP08の段階別contract tests。target greenはhelper contract成立であり、runtime DHR-OP05 call permissionやfull backend suite greenではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostDHB_DHROP05ManualCallExecutionConsideration_DHC_R7_TargetValidation_Result_20260709.md` ... `R54_AHR_PostDHB_DHROP05ManualCallExecutionConsideration_DHC_R11_NextWorkDecision_20260709.md` | target validation / selected regression / compileall / result memo closure / next work decisionをbody-freeで記録する。R11で次候補を記録してもcurrent execution allowanceはnone。 |
+| premise diff CSV | `r54dhc_diff_20260709.csv` | 前提資料側の短名coverage一覧。12 entries added / 0 changed / 0 removedを記録する。 |
+
+DHC-OP00〜OP08を読むときの禁止:
+
+```text
+DHC target greenをcurrent DHR-OP05 runtime callとして読まない。
+DHB-OP08 closureをDHR-OP05 execution permissionとして読まない。
+DHB handoff envelopeをDHR-OP04 actual source claim separationとして読まない。
+DHC-OP03 manual_call_allowedをDHR-OP06 permissionとして読まない。
+DHC-OP04 controlled builder pathをruntime execution済みとして読まない。
+DHC-OP05 scan clear classificationをDHR-OP06 / DHR-OP07 / DMD / R52 execution許可として読まない。
+R7/R8/R9 greenをfull backend suite green / RN contract green / RN real-device verifiedとして読まない。
+R10/R11 closureをP8 start / P7 complete / release allowedへ変換しない。
+```
+
+検証記録の読み方:
+
+```text
+R0〜R6 existing target confirmation: 250 passed (latest result memo recorded)
+DHC target: 198 passed (latest result memo recorded / this premise update local recheck passed)
+selected regression: 519 passed (latest result memo recorded / this premise update local recheck passed)
+compileall: passed (latest result memo recorded / this premise update local recheck passed)
+full backend suite green: not claimed
+RN contract green: not claimed
+RN real-device modal verified: not claimed
 ```

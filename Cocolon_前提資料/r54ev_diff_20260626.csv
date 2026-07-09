@@ -1,0 +1,26 @@
+path,change_type,phase,work_item,notes
+mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_actual_review_execution_evidence_materialization_20260626.py,added,P7-R54-EV00-EV22,Actual review execution evidence materialization helper,EV00〜EV22をbody-free境界層として扱う。既存R54-OP helperをhistoricalとして分離し、API/DB/RN/runtime/P8 question実装へ接続しない。
+mashos-api/ai/tests/test_emlis_ai_p7_r54_actual_review_execution_evidence_materialization_ev00_ev01_20260626.py,added,P7-R54-EV00-EV01,scope / existing helper capability tests,scope/no-touch境界と既存helper capabilityを確認し、20260626 actual review basisには薄い境界層が必要と固定する。
+mashos-api/ai/tests/test_emlis_ai_p7_r54_actual_review_execution_evidence_materialization_ev02_ev03_20260626.py,added,P7-R54-EV02-EV03,operation current refs / R55 hold intake tests,20260626 refsをactual basisとして再固定し、R55 holdを解除せずR54 actual local-only review requiredとして受け直す。
+mashos-api/ai/tests/test_r54_ev04_ev05_20260626.py,added,P7-R54-EV04-EV05,local-only preflight / 24-case manifest tests,preflightをデフォルトblockedにし、explicit allow / purge plan / retention / export denylistと24-case manifestをbody-freeで固定する。
+mashos-api/ai/tests/test_r54_ev06_ev07_20260626.py,added,P7-R54-EV06-EV07,packet request / local boundary tests,body-full packet生成要求をbody-free化し、local operation boundary instructionを固定する。packet本体・local path・hashは成果物化しない。
+mashos-api/ai/tests/test_r54_ev08_ev09_20260626.py,added,P7-R54-EV08-EV09,reviewer selection form / sanitized intake tests,reviewer selection-only formを固定し、sanitized review result row intakeをbody-freeで受ける。free text・question textは禁止する。
+mashos-api/ai/tests/test_r54_ev10_ev11_20260626.py,added,P7-R54-EV10-EV11,rating normalization / blocker ingestion tests,sanitized rowsをrating rowsへ正規化し、readfeel blockerとexecution blockerを分ける。actual review完了にはしない。
+mashos-api/ai/tests/test_r54_ev12_ev13_20260626.py,added,P7-R54-EV12-EV13,question observation normalization / consistency guard tests,question need observation rowsをbody-free enumとして正規化し、P5修正対象をP8材料へ逃がさないguardを固定する。
+mashos-api/ai/tests/test_r54_ev14_ev15_20260626.py,added,P7-R54-EV14-EV15,pause/abort/expiration / disposal receipt tests,pause / abort / expiration状態を分け、purge / disposal receiptを外部削除済みのbody-free receiptとして受ける。helperで削除は実行しない。
+mashos-api/ai/tests/test_r54_ev16_ev17_20260626.py,added,P7-R54-EV16-EV17,post-review summary / P5 candidate separation tests,rating/blocker/question/disposalをbody-free count summaryにし、P5 confirmed candidate / repair / P4-R12 / inconclusiveを分ける。
+mashos-api/ai/tests/test_r54_ev18_ev19_20260626.py,added,P7-R54-EV18-EV19,P6 candidate-only / P8 material candidate-only tests,P6 limited human readfeelとP8 question-design materialをcandidate-onlyにし、start_allowed / question implementationはfalse維持する。
+mashos-api/ai/tests/test_r54_ev20_ev21_20260626.py,added,P7-R54-EV20-EV21,final validation / R52 re-intake handoff tests,final no-body-leak / no-question-text / no-touch validation後、R52 re-intake handoffをbody-free evidenceとしてmaterializeする。P5 final/P6/P8/releaseは許可しない。
+mashos-api/ai/tests/test_r54_ev22_20260626.py,added,P7-R54-EV22,validation command matrix / documentation output tests,collect-onlyやhelper greenをfull suite green、actual review complete、P5 final、release readinessへ誇張しないguardを固定する。
+mashos-api/ai/tests/Cocolon_EmlisAI_P7_R54ActualLocalReviewOperation_ExecutionEvidenceMaterialization_EV00_EV01_ImplementationResult_20260626.md,added,P7-R54-EV00-EV01,EV00-EV01 result memo,既存helper capability inspectionとno-touch境界をbody-freeで記録する。
+mashos-api/ai/tests/R54_EV02_EV03_Result_20260626.md,added,P7-R54-EV02-EV03,EV02-EV03 result memo,operation_current_refs 20260626 refreezeとR55 hold intake再固定を記録する。
+mashos-api/ai/tests/R54_EV04_EV05_Result_20260626.md,added,P7-R54-EV04-EV05,EV04-EV05 result memo,local-only preflightと24-case manifest再固定を記録する。
+mashos-api/ai/tests/R54_EV06_EV07_Result_20260626.md,added,P7-R54-EV06-EV07,EV06-EV07 result memo,body-full packet generation request body-free化とlocal operation boundary instructionを記録する。
+mashos-api/ai/tests/R54_EV08_EV09_Result_20260626.md,added,P7-R54-EV08-EV09,EV08-EV09 result memo,reviewer selection form固定とsanitized review result row intakeを記録する。
+mashos-api/ai/tests/R54_EV10_EV11_Result_20260626.md,added,P7-R54-EV10-EV11,EV10-EV11 result memo,rating row normalizationとblocker ingestionを記録する。
+mashos-api/ai/tests/R54_EV12_EV13_Result_20260626.md,added,P7-R54-EV12-EV13,EV12-EV13 result memo,question need observation row normalizationとrating/question consistency guardを記録する。
+mashos-api/ai/tests/R54_EV14_EV15_Result_20260626.md,added,P7-R54-EV14-EV15,EV14-EV15 result memo,pause/abort/expiration protocolとpurge/disposal receiptを記録する。
+mashos-api/ai/tests/R54_EV16_EV17_Result_20260626.md,added,P7-R54-EV16-EV17,EV16-EV17 result memo,body-free post-review summaryとP5 decision candidate separationを記録する。
+mashos-api/ai/tests/R54_EV18_EV19_Result_20260626.md,added,P7-R54-EV18-EV19,EV18-EV19 result memo,P6 candidate-only handoffとP8 material candidate-only handoffを記録する。
+mashos-api/ai/tests/R54_EV20_EV21_Result_20260626.md,added,P7-R54-EV20-EV21,EV20-EV21 result memo,final validationとR52 re-intake handoffを記録する。
+mashos-api/ai/tests/R54_EV22_Result_20260626.md,added,P7-R54-EV22,EV22 result memo,validation command matrix / documentation outputとclaim boundaryを記録する。
