@@ -1,0 +1,67 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e2_owner_ready_deferral_stop_receipt.v1",
+  "created_at_jst": "2026-07-20",
+  "scope": "Step 11 / Cycle 001 / rc0030 / E2",
+  "repair_predecessor_commit": "c5c02940a80a7f1238b8983b4657289af19e5790",
+  "state": "OWNER_READY_DEFERRAL_IMPLEMENTED_BODY_ONLY_PARSER_STOP",
+  "repository_paths": [
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py"
+  ],
+  "repository_file_sha256": {
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": "5f548499e05e5a982f375dde5f059d7eba08f06fbc59bd0a76d9ed788a1e8eaf",
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": "bb787abafc3f1467099b196f8cf278f8697627c7027bf41d7efc85381aba71bd",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py": "2600fcfd31c7a2137b7841d6adef394fbda9bf012607505c06d7f61f6696bda8"
+  },
+  "schedule_evidence": {
+    "source_semantic_atom_count": 10,
+    "structure_pack_count": 6,
+    "maximum_atoms_per_pack": 2,
+    "ready_pack_distribution": [3, 1, 2],
+    "assigned_pack_distribution": [2, 2, 2],
+    "strict_deferred_pack_count": 1,
+    "candidate_1_density_fail_closed": true,
+    "candidate_2_forward_candidate_produced": true,
+    "peak_group_units": 4,
+    "peak_chunk_clauses": 2,
+    "peak_complexity_load": 4,
+    "peak_repeated_joiners": 2
+  },
+  "parser_stop_evidence": {
+    "planned_semantic_atom_count": 10,
+    "parsed_semantic_atom_count": 7,
+    "missing_group_ordinal": 3,
+    "missing_semantic_atom_count": 3,
+    "direct_parser_cause": "STEP11_RC0030_OWNER_EXPRESSION_AMBIGUOUS",
+    "runtime_closed_code": "STEP11_RC0030_BASE_PREFIX_COMMITMENT_MISMATCH",
+    "e2_test_red_code": "STEP11_RC0030_E2_BODY_ONLY_OWNER_EXPRESSION_NOT_SYNCHRONIZED",
+    "source_particle_positions_in_directed_owner_prefix": 2,
+    "scheduling_can_change_item_bytes": false
+  },
+  "verification": {
+    "python_compile": "PASS",
+    "git_diff_check": "PASS",
+    "representative_control_7": "PASS",
+    "representative_control_7_result": "1 passed in 212.33s",
+    "p2_deterministic_forward_plan_render_control_4": "PASS",
+    "p2_deterministic_forward_plan_render_control_4_result": "4 passed in 123.78s",
+    "p3_parser_signature_and_forward_import_rejection": "PASS",
+    "p3_parser_signature_and_forward_import_rejection_result": "13 passed in 0.28s",
+    "p5_cardinality_control_non_regression": "PASS",
+    "p5_cardinality_control_non_regression_result": "3 passed in 40.28s",
+    "density_full_chain": "RED",
+    "density_full_chain_result": "1 failed in 62.53s"
+  },
+  "evidence_debt": {
+    "retained_33_fresh_execution_ledger": "NOT_STARTED_BECAUSE_DENSITY_RED",
+    "pending_20_execution_ledger": "NOT_STARTED_BECAUSE_DENSITY_RED",
+    "support_positive_full_chain": "SOURCE_AUTHORITY_REQUIRED"
+  },
+  "successor_manifest_created": false,
+  "e3_started": false,
+  "e4_started": false,
+  "cycle_001_accepted": false,
+  "secure_material_required": false,
+  "next_authority": "DELIMITER_SAFE_OWNER_EXPRESSION_ADDENDUM_APPROVAL_AFTER_GITHUB_PREDECESSOR"
+}

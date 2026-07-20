@@ -1,0 +1,250 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.p2_forward.body_free.v1",
+  "body_free": true,
+  "evidence_date": "2026-07-19",
+  "stage": "Step11_Cycle001_rc0030_P2_forward",
+  "baseline": {
+    "github_repository": "MassyuRed/mashos-api",
+    "github_main_commit": "8d337a2aeaeac338d012be3c558d05265404e201",
+    "github_main_commit_verified_latest": true,
+    "github_main_commit_verified_at_stage_end": true,
+    "rc0029_source_dependency_closure_sha256": "cd46925c6db478ac07e501acb64c45cae3a122ab0c1d834d06a83f1190cfb082",
+    "rc0030_design20_3_addendum_sha256": "135a861a5d965423fe80d3a46e65ff4528b4ab67ac857c6fc8b11b943885872d",
+    "p1_fixture_sha256": "9cfbdafaf43a3caed8b5dc00e68b56cd2b24003a002f0a7cbd1c3ec06d598fa5",
+    "p1_red_test_sha256": "56bc3603392df982ae748c9c4ae635fc7eca7867213f77bab1de051f35f38191"
+  },
+  "authority": {
+    "approved_phase": "P2_FORWARD_ONLY",
+    "modified_existing_path_count": 2,
+    "new_path_count": 2,
+    "runtime_connected": false,
+    "public_route_changed": false,
+    "parser_started": false,
+    "independent_matcher_started": false,
+    "hard_gate_started": false,
+    "manifest_started": false,
+    "tool_started": false,
+    "p3_started": false,
+    "p4_started": false,
+    "p5_started": false,
+    "e2_started": false,
+    "e3_started": false,
+    "e4_started": false,
+    "secure_material_required": false,
+    "repository_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_rc0030_experiment_surface_catalog_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_surface_planning_mutation.py"
+    ]
+  },
+  "frozen_exact4_prefix": {
+    "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py": {
+      "byte_count": 103805,
+      "sha256": "43e99c6077e93db61908e11672d08122cb5928fe63fe64ae0ca565659b43bff4"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": {
+      "byte_count": 290131,
+      "sha256": "2f797d7aad7f16b234b8a8dad57204b5788e4ae23e43306ac8ca5da790eba7a2"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": {
+      "byte_count": 589793,
+      "sha256": "9bdae4b5c3d99e99dd01b622b9b191afbfa0e601789fba082a03c069b70028b5"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py": {
+      "byte_count": 129756,
+      "sha256": "6911291682508bcd6df66d39acb7a6b29b1cfc411434d1ff13160125c9af6c9a"
+    }
+  },
+  "p2_files": [
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "change": "MODIFY_APPEND_ONLY",
+      "full_sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28",
+      "full_byte_count": 129615,
+      "full_line_count": 3378,
+      "p2_append_byte_count": 25810,
+      "p2_append_line_count": 676,
+      "responsibility": "rc0027 grounded phrase and E1b typed-owner projection into clause-ready rc0030 lexemes"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "change": "MODIFY_APPEND_ONLY",
+      "full_sha256": "8f8ea6f197bac02edc8ee3594165625e1e8f06e5a6a7bb44e41445d880ae9c37",
+      "full_byte_count": 357476,
+      "full_line_count": 9436,
+      "p2_append_byte_count": 67345,
+      "p2_append_line_count": 1696,
+      "responsibility": "owner-connected realization plan, exact-reuse commitment boundary, grounded Reception predication, and schema-free renderer"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_rc0030_experiment_surface_catalog_v3.py",
+      "change": "NEW",
+      "file_sha256": "d51b8df3a7914aaa095a8b5249dd799f3dab2d8c706b07cea93e71a5b01ceb86",
+      "artifact_sha256": "b4ba44958e546048efe0b51b19d1ea16822e8cf584f1bf92b78ad3abc5b1c024",
+      "byte_count": 15593,
+      "line_count": 435,
+      "responsibility": "closed single-choice nominal semantic fragments and fixed resource denominator"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0030_surface_planning_mutation.py",
+      "change": "NEW",
+      "sha256": "b04e8a6c6038ebc0dfde8b15d520ec9454f290977f611b295c7765299035925e",
+      "byte_count": 39563,
+      "line_count": 1037,
+      "responsibility": "P2 boundary, determinism, resource, chunk-render correspondence, and exact-reuse adversarial verification"
+    }
+  ],
+  "catalog_denominator": {
+    "realization_alternatives_per_semantic_key": 1,
+    "construction_key_count": 13,
+    "construction_layout_count": 13,
+    "role_position_key_count": 9,
+    "relation_type_direction_key_count": 28,
+    "semantic_link_type_direction_key_count": 10,
+    "unknown_dimension_key_count": 4,
+    "owner_role_key_count": 8,
+    "owner_kind_key_count": 12,
+    "reception_act_key_count": 3
+  },
+  "resource_contract": {
+    "candidate_total_max": 12,
+    "candidate_variants_per_base_candidate_max": 1,
+    "replan_max": 1,
+    "owner_max": 24,
+    "referent_scalar_max": 32,
+    "realization_units_per_discourse_group_max": 4,
+    "visible_clauses_per_grammatical_sentence_max": 2,
+    "complexity_load_max": 4,
+    "repeated_joiners_per_group_max": 2,
+    "reception_moves_max": 3,
+    "reception_sentences_max": 3,
+    "reception_moves_per_sentence_max": 2,
+    "resource_bound_widened": false
+  },
+  "p2_execution": {
+    "test_path": "ai/tests/test_emlis_nls_v3_s11_rc0030_surface_planning_mutation.py",
+    "collected": 17,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 143.20,
+    "status": "GREEN",
+    "coverage": [
+      "frozen exact4 prefix and P1 byte identity",
+      "closed catalog denominator and one alternative per key",
+      "deterministic clause-ready lexical projection",
+      "owner-connected semantic chunk assignment",
+      "nominal semantic pack with exactly one finite predicate",
+      "plan-to-render grammatical chunk punctuation identity",
+      "grounded exact and bounded-scheduled Reception association",
+      "six malformed exact-reuse commitments",
+      "cross-semantic-family exact-reuse basis attack",
+      "0100 multi-group owner obligation disambiguation"
+    ]
+  },
+  "representative_forward_smoke": {
+    "not_e3_or_product_read": true,
+    "no_body_exported": true,
+    "without_p3_exact_reuse_candidate_available": [
+      "nls3s_b001_0001",
+      "nls3s_b001_0002",
+      "nls3s_b001_0009",
+      "nls3s_b001_0019",
+      "nls3s_b001_0035",
+      "nls3s_b001_0043",
+      "nls3s_b001_0100"
+    ],
+    "without_p3_exact_reuse_fail_closed": [
+      {
+        "case_id": "nls3s_b001_0063",
+        "base_candidate_count": 2,
+        "closed_code": "STEP11_RC0030_SURFACE_PLAN_DENSITY_UNSATISFIABLE",
+        "reason": "all typed atoms were treated as additions because P3 body-only exact-reuse evidence does not yet exist"
+      }
+    ],
+    "additional_frozen100_lexical_probe": {
+      "case_id": "nls3s_b001_0069",
+      "lexeme_count": 5,
+      "revalidation": "PASS"
+    }
+  },
+  "p1_freeze_reexecution": {
+    "passed": 1,
+    "intentionally_failed": 5,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 111.29,
+    "failure_codes_unchanged": [
+      "STEP11_RC0030_MAIN_MEANING_APPENDIX_DOMINANCE",
+      "STEP11_RC0030_SCHEMA_EXPOSITION",
+      "STEP11_RC0030_SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+      "STEP11_RC0030_GROUNDED_RECEPTION_PREFIX_LIST",
+      "STEP11_RC0030_CONTROL_NON_REGRESSION"
+    ]
+  },
+  "predecessor_regression": {
+    "scope": [
+      "rc0029 predecessor immutability",
+      "rc0027 default behavior",
+      "rc0028 experiment behavior",
+      "rc0029 runtime disconnect"
+    ],
+    "collected": 11,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 32.88,
+    "status": "GREEN"
+  },
+  "static_audit": {
+    "python_compile": "PASS",
+    "git_diff_check": "PASS",
+    "rc0030_forward_parser_import_count": 0,
+    "rc0030_forward_matcher_import_count": 0,
+    "rc0030_forward_hard_gate_import_count": 0,
+    "rc0030_forward_runtime_adapter_import_count": 0,
+    "case_review_corpus_failure_control_runtime_branch_count": 0,
+    "matcher_full_hash_unchanged": true,
+    "hard_gate_full_hash_unchanged": true,
+    "p1_fixture_hash_unchanged": true,
+    "p1_test_hash_unchanged": true
+  },
+  "decision": "P2_FORWARD_COMPLETE_STOP_BEFORE_P3_PENDING_FREEZE_APPROVAL",
+  "status": {
+    "p0": "COMPLETE",
+    "p1": "COMPLETE_RED_FROZEN",
+    "p2": "COMPLETE_FORWARD_GREEN",
+    "p3": "NOT_STARTED",
+    "p4": "NOT_STARTED",
+    "p5": "NOT_STARTED",
+    "e2": "NOT_STARTED",
+    "e3": "NOT_STARTED",
+    "e4": "NOT_STARTED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "facts": [
+    "GitHub main remains at commit 8d337a2aeaeac338d012be3c558d05265404e201.",
+    "The final P2 suite passed all 17 collected nodes.",
+    "The P1 fixture and test stayed byte-identical and still produced exactly the same five intentional RED failures.",
+    "The four frozen prefixes are unchanged; Matcher and Hard Gate full files are unchanged.",
+    "No Parser, Independent Matcher, Hard Gate, runtime adapter, manifest, tool, E2, E3, or E4 work was started.",
+    "Case 0063 has no resource-valid forward candidate when every typed atom is added and no P3 exact-reuse commitment exists."
+  ],
+  "inferences": [
+    "Case 0063 is evidence for the necessity of P3 body-only exact-reuse analysis, not evidence that the frozen P2 resource bound should be widened.",
+    "P2 now provides the deterministic forward contract needed by P3, but semantic coverage and Product Read acceptance remain unproved."
+  ],
+  "karen_opinion": [
+    "Freeze this P2 state instead of extending P2 until every representative case builds without inverse evidence.",
+    "After explicit P2 freeze approval, start P3 Body-only Parser and Independent Matcher only.",
+    "Keep 0063 fail-closed until P3 can prove exact base-body reuse; do not drop atoms, expand resources, or add a case-specific branch."
+  ],
+  "next_boundary": "P2 freeze approval -> P3 Body-only Parser / Independent Matcher"
+}

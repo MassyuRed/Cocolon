@@ -1,0 +1,132 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.rc0028.e3_product_read_stop.body_free.v1",
+  "body_free": true,
+  "evaluation_stage": "E3_representative8_product_read",
+  "machine_receipt_sha256": "1a473850fc0e13bcb9288713cbe547635a065ec63f28aab0ff407ba9c7565de4",
+  "representative_fixture_sha256": "6703815684c878b6d00554ad393f23964aa69d7110888e8786fc074faa2d6efd",
+  "source_dependency_closure_sha256": "08a83e30954055facdb711e1253a81145101e565afde4327567f239169f2d942",
+  "review_axis_authority": "DetailedDesign section 18.4 exact 12 axes",
+  "independent_reviewer_count": 2,
+  "reviewer_severity_consensus": true,
+  "severity_counts": {
+    "PASS": 1,
+    "MINOR": 1,
+    "MAJOR": 6,
+    "BLOCKER": 0
+  },
+  "rows": [
+    {
+      "case_id": "nls3s_b001_0001",
+      "experiment_role": "control",
+      "baseline_severity": "PASS",
+      "current_severity": "MINOR",
+      "comparison": "worse",
+      "reason_codes": [
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "DUPLICATIVE_UNKNOWN",
+        "GENERIC_RECEPTION"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0002",
+      "experiment_role": "control",
+      "baseline_severity": "PASS",
+      "current_severity": "PASS",
+      "comparison": "not_worse",
+      "reason_codes": []
+    },
+    {
+      "case_id": "nls3s_b001_0009",
+      "experiment_role": "control",
+      "baseline_severity": "MINOR",
+      "current_severity": "MAJOR",
+      "comparison": "worse",
+      "reason_codes": [
+        "OPAQUE_ORDINAL_REFERENTS",
+        "RELATION_UNREADABLE",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0019",
+      "experiment_role": "improvement_target",
+      "baseline_severity": "MAJOR",
+      "current_severity": "MAJOR",
+      "comparison": "not_improved",
+      "reason_codes": [
+        "MAIN_MEANING_OBSCURED",
+        "SCHEMA_EXPOSITION",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0035",
+      "experiment_role": "improvement_target",
+      "baseline_severity": "MAJOR",
+      "current_severity": "MAJOR",
+      "comparison": "not_improved",
+      "reason_codes": [
+        "MAIN_MEANING_OBSCURED",
+        "OPAQUE_ORDINAL_REFERENTS",
+        "REPETITIVE_EXPOSITION",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "EMLIS_RECEPTION_UNBOUND"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0043",
+      "experiment_role": "improvement_target",
+      "baseline_severity": "MAJOR",
+      "current_severity": "MAJOR",
+      "comparison": "not_improved",
+      "reason_codes": [
+        "MAIN_MEANING_OBSCURED",
+        "RELATION_MISREAD",
+        "SCHEMA_EXPOSITION",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0063",
+      "experiment_role": "improvement_target",
+      "baseline_severity": "MAJOR",
+      "current_severity": "MAJOR",
+      "comparison": "not_improved",
+      "reason_codes": [
+        "MAIN_MEANING_OBSCURED",
+        "SELF_DENIAL_SEPARATION_UNDEREXPLICIT",
+        "UNKNOWN_PARTIAL",
+        "DEPTH_OVERSHOOT",
+        "SCHEMA_EXPOSITION"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0100",
+      "experiment_role": "improvement_target",
+      "baseline_severity": "MAJOR",
+      "current_severity": "MAJOR",
+      "comparison": "not_improved",
+      "reason_codes": [
+        "MAIN_MEANING_OBSCURED",
+        "UNKNOWN_DROPPED",
+        "OPAQUE_ORDINAL_REFERENTS",
+        "REPETITIVE_EXPOSITION",
+        "EMLIS_RECEPTION_UNBOUND"
+      ]
+    }
+  ],
+  "gate_results": {
+    "machine_8_of_8_selected": true,
+    "former_major_all_pass_or_minor": false,
+    "controls_not_worse": false,
+    "new_major_or_blocker_zero": false
+  },
+  "decision": "STOP_BEFORE_E4",
+  "formal_acceptance": "not_claimed",
+  "cycle_001_accepted": false,
+  "e4_started": false,
+  "private_body_included": false
+}

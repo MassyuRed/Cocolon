@@ -1,0 +1,144 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0028.bounded_experiment_receipt.20260719.v1",
+  "candidate": "nls_v3_rc_0028",
+  "checkpoint_label": "rc0028 upstream bounded experiment started",
+  "authority": {
+    "decision": "A_APPROVED_DESIGN_20_3_IMPACT_ADDENDUM_AND_UPSTREAM_BOUNDED_EXPERIMENT",
+    "status": "AUTHORIZED_FOR_BOUNDED_EXPERIMENT",
+    "impact_addendum_sha256": "07cc49353cd19cf2887861174a154cd0bc9ad085fe6372790d7a4c504d31784e"
+  },
+  "baseline": {
+    "repository": "MassyuRed/mashos-api",
+    "commit": "5d16f9e87cb90acd8f2d62a71aa39549d40938a3",
+    "tree": "cba93be590bc4f203568369996aa06b7494fd78f",
+    "predecessor_candidate": "nls_v3_rc_0027",
+    "predecessor_surface_catalog_sha256": "1beec18839ed77abd1e52b0a06eb60c5867223fd54183c251a8f0efbc37ccc08"
+  },
+  "status": {
+    "rc0028": "EXPERIMENT_ONLY_NOT_FROZEN",
+    "e0a_upstream_red": "GREEN",
+    "e1a_isolated_upstream_propagation": "GREEN",
+    "e1_lossless_information_sufficiency": "NOT_COMPLETE",
+    "e0b_downstream_red": "NOT_STARTED",
+    "e2_independent_consumption": "NOT_STARTED",
+    "cycle_001": "NOT_ACCEPTED",
+    "active_surface_candidate": "nls_v3_rc_0027",
+    "production_connection": "UNCHANGED"
+  },
+  "contracts": {
+    "witness_schema": "cocolon.emlis.nls_v3.grounded_lexical_role_witness.rc0028.experiment.v1",
+    "witness_adapter": "cocolon.emlis.nls_v3.grounded_lexical_role_adapter.20260719.v1",
+    "experiment_snapshot_schema": "cocolon.emlis.nls_v3.grounded_lexical_role_experiment_snapshot.rc0028.experiment.v1",
+    "experiment_snapshot_adapter": "cocolon.emlis.nls_v3.grounded_lexical_role_experiment_snapshot_adapter.20260719.v1",
+    "active_grounded_source_snapshot_schema": "cocolon.emlis.nls_v3.grounded_source_snapshot.v1",
+    "active_frozen_source_policy_sha256": "de77b13a27e08ae3337d3ea8c11e1ba18ff24fb3f601d7639fe38c3948b8ff8c",
+    "resource_bound_formula": "6*adapted_nucleus_count+2*relation_count+unknown_count",
+    "max_facets_per_nucleus": 6,
+    "duplicate_role_kind_per_nucleus_allowed": false,
+    "range_coordinate_system": "EVIDENCE_SPAN_LOCAL_HALF_OPEN",
+    "covered_owner_means_semantic_coverage": false,
+    "body_free": true
+  },
+  "changed_repo_files": [
+    {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_lexical_role_witness_v3.py",
+      "change": "NEW",
+      "sha256": "1523690453647bee2a6e61fb91d7b14823baee4e383c006bc2814006a4beb94b"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_lexical_role_experiment_snapshot_v3.py",
+      "change": "NEW",
+      "sha256": "4671aa22c4e432f907780f0becf900fead57044c53ea3bbc1bf501eb5abc1a27"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_upstream_lexical_role_red.py",
+      "change": "NEW",
+      "sha256": "3907fabdc33b40c70118cdd6279bb8b22bc17ee3be676bcff14cf03689a46e61"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_lexical_role_snapshot_red.py",
+      "change": "NEW",
+      "sha256": "4d71b27ad4755d7412a847b328cb9475190af843c66f7c6979be81610b4f2b23"
+    }
+  ],
+  "existing_owner_invariants": {
+    "semantic_obligation_inventory_matches_baseline": true,
+    "step4_test_matches_baseline": true,
+    "step9_historical_dependency_manifest_changed": false,
+    "surface_or_catalog_changed": false,
+    "parser_matcher_gate_changed": false,
+    "formal_lineage_changed": false,
+    "public_api_db_rn_safety_question_changed": false
+  },
+  "whole_100_structural_diagnostic": {
+    "rows": 100,
+    "request_level_build_errors": 0,
+    "validator_failures": 0,
+    "owner_partition_failures": 0,
+    "materialization_failures": 0,
+    "required_text_owners": 240,
+    "facet_present_owners": 94,
+    "unresolved_owners": 146,
+    "facets": 230,
+    "zero_facet_rows": 37,
+    "unresolved_reasons": {
+      "LEXICAL_ROLE_NO_CLOSED_CONSTRUCTION": 145,
+      "LEXICAL_ROLE_AMBIGUOUS_ROLE_OVERLAP": 1
+    },
+    "semantic_coverage_claimed": false,
+    "surface_improvement_claimed": false
+  },
+  "representative_8_structural_diagnostic": {
+    "rows": 8,
+    "facet_present_owners": 16,
+    "unresolved_owners": 3,
+    "facets": 43,
+    "major_target_constructions_observed": 13,
+    "product_read_performed": false
+  },
+  "verification": {
+    "upstream_snapshot_and_original_step4": {
+      "result": "PASS",
+      "passed": 49,
+      "failed": 0,
+      "seconds": 6.52,
+      "existing_warnings": 1
+    },
+    "step9_frozen_dependency_policy_spot_check": {
+      "result": "PASS",
+      "passed": 1,
+      "failed": 0
+    },
+    "step9_full_hard_gate_selector_recovery": {
+      "result": "PASS",
+      "passed": 10,
+      "failed": 0,
+      "seconds": 896.18,
+      "existing_warnings": 1
+    },
+    "independent_final_audit": {
+      "blocker": 0,
+      "major": 0,
+      "minor": 0
+    },
+    "git_diff_check": "CLEAN"
+  },
+  "rolled_back_local_probe": {
+    "attempt": "DIRECT_ACTIVE_GROUNDED_SOURCE_SNAPSHOT_INTEGRATION",
+    "observation": "STEP9_DEPENDENCY_SOURCE_BYTES_DRIFT",
+    "resolution": "FULLY_REVERTED_BEFORE_DELIVERY_AND_ISOLATED_IN_NEW_EXPERIMENT_OWNER",
+    "distributed": false
+  },
+  "known_limits": [
+    "146_OF_240_REQUIRED_TEXT_OWNERS_UNRESOLVED",
+    "ONE_OWNER_LOCAL_OVERLAP_FAIL_CLOSED_BUT_NOT_LOSSLESS",
+    "CROSS_SPAN_RELATIONS_NOT_YET_CLOSED",
+    "RELATION_ENDPOINT_DIRECTION_AND_UNKNOWN_FACETS_NOT_YET_GENERATED",
+    "PARTICLE_OBJECT_SCOPE_NOT_UNIVERSALLY_PROVEN",
+    "NO_E2_OR_PRODUCT_READ_EVIDENCE"
+  ],
+  "next_authorized_boundary": "E1B_RED_FOR_CROSS_SPAN_OVERLAP_RELATION_UNKNOWN_AND_COVERAGE_MISUSE",
+  "mash_secure_or_private_work_required": false,
+  "raw_input_or_output_in_receipt": false,
+  "secure_material_in_receipt": false
+}

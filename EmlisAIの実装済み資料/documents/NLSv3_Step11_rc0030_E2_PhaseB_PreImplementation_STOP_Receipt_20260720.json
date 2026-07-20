@@ -1,0 +1,107 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e2_phase_b_preimplementation_stop_receipt.v1",
+  "created_at_jst": "2026-07-20",
+  "scope": {
+    "step": 11,
+    "cycle": 1,
+    "release_candidate": "rc0030",
+    "phase": "E2_PHASE_B",
+    "disposition": "STOP_BEFORE_OUT_OF_SCOPE_OWNER_CHANGE"
+  },
+  "github_predecessor": {
+    "repository": "MassyuRed/mashos-api",
+    "commit_sha": "a18ceaf9f2d858c59244a12aaca3d798acc36cdd",
+    "parent_sha": "2c789d3fa9f5a7a910c9a9392f2ebfd1bc009ea7",
+    "commit_date": "2026-07-20T12:26:29+09:00",
+    "e2_test_sha256": "c8e2f980919f4f3785b2471449ebb01478bd355fb635b2e67dc8cc9cffde44a2",
+    "clean_worktree_after_diagnosis": true
+  },
+  "formal_red": {
+    "test": "test_rc0030_e2_phase_a_support_positive_reaches_full_chain",
+    "result": "FAILED_AS_EXPECTED",
+    "elapsed_seconds": 71.22,
+    "closed_code": "STEP11_RC0030_E2_SUPPORT_POSITIVE_FULL_CHAIN_UNREACHABLE"
+  },
+  "baseline_non_regression": {
+    "selection": "E2 integration excluding Phase A support-positive RED",
+    "passed": 12,
+    "deselected": 1,
+    "failed": 0,
+    "elapsed_seconds": 305.72
+  },
+  "support_authority": {
+    "case_order": [
+      "D",
+      "I6-D02"
+    ],
+    "base_candidate_count": {
+      "D": 2,
+      "I6-D02": 4
+    },
+    "source_denominator": {
+      "D": {
+        "semantic": 2,
+        "reception_total": 2,
+        "support_bearing_reception": 1
+      },
+      "I6-D02": {
+        "semantic": 2,
+        "reception_total": 3,
+        "support_bearing_reception": 1
+      }
+    }
+  },
+  "baseline_failure": {
+    "base_inverse_candidate_count": 6,
+    "base_inverse_rejected_candidate_count": 6,
+    "closed_code": "STEP11_RC0030_BASE_BINDING_REVALIDATION_FAILED"
+  },
+  "body_free_bounded_diagnostic": {
+    "persisted_code_change": false,
+    "base_inverse_pass_count": 6,
+    "experiment_candidate_count": {
+      "D": 2,
+      "I6-D02": 2
+    },
+    "hard_gate_pass_count": 0,
+    "rc0030_gate_code": "STEP11_RC0030_BASE_GATE_REJECTED",
+    "shared_base_gate_failure_codes": [
+      "S11_GATE05_EVIDENCE_RESOLUTION",
+      "S11_GATE06_REQUIRED_OBLIGATION_COVERAGE",
+      "S11_GATE07_BOUND_RECEPTION",
+      "S11_GATE08_POLARITY_MODALITY_TIME",
+      "S11_GATE12_SELF_DENIAL",
+      "S11_GATE13_UNSUPPORTED_CLAIM",
+      "S11_GATE15_INPUT_ENUMERATION",
+      "S11_GATE16_CONTRIBUTION_DISTINCTNESS",
+      "S11_GATE17_DEPTH"
+    ]
+  },
+  "owner_boundary": {
+    "approved_exact_2_sufficient": false,
+    "required_next_owner": "rc0030-specific Hard Gate base-predecessor policy",
+    "shared_matcher_change_required": false,
+    "shared_step9_change_required": false,
+    "natural_surface_change_proven_required": false
+  },
+  "repository_delta": {
+    "production_modified": 0,
+    "test_modified": 0,
+    "new_repository_path": 0,
+    "manifest_created": false
+  },
+  "progression": {
+    "pending20_closed": false,
+    "e2_green": false,
+    "e3_started": false,
+    "e4_started": false,
+    "cycle001_accepted": false
+  },
+  "privacy": {
+    "body_free": true,
+    "raw_body_included": false,
+    "owner_expression_included": false,
+    "support_expression_included": false,
+    "secure_material_required": false
+  }
+}

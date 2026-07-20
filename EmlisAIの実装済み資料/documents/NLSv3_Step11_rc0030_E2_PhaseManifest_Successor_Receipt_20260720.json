@@ -1,0 +1,104 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e2_phase_manifest_successor_receipt.v1",
+  "created_at_jst": "2026-07-20",
+  "scope": {
+    "step": 11,
+    "cycle": 1,
+    "release_candidate": "rc0030",
+    "phase": "E2_INTEGRATED_SYNCHRONIZATION",
+    "disposition": "GREEN_STOP_BEFORE_E3_GITHUB_PREDECESSOR"
+  },
+  "github_predecessor": {
+    "repository": "MassyuRed/mashos-api",
+    "commit_sha": "45b178cfc0e7d94ab8385682ab3c7bbf0ab9aa25",
+    "parent_sha": "a18ceaf9f2d858c59244a12aaca3d798acc36cdd",
+    "commit_date": "2026-07-20T13:46:57+09:00"
+  },
+  "historical_phase_predecessor": {
+    "p5_manifest_origin_commit": "924bd458255f226db54c17d84dd4aafc5db2b1e2",
+    "p5_phase_predecessor_commit": "3897331a5f605762e09f9953e47801d45d3c5da2",
+    "p5_manifest_schema": "cocolon.emlis.nls_v3.rc0030_surface_planning_experiment_dependency_manifest.v2",
+    "p5_manifest_phase": "P5_CARDINALITY_REGRESSION",
+    "p5_manifest_file_sha256": "4ceb33aa6bb6f15d6ad9b7212bbdcee901edb352707f3f19a90e91ff6d91f62c",
+    "p5_manifest_artifact_sha256": "265418796ec720112ea046014b7dd3c612d392382647a64db5fe7396b4a976b7",
+    "p5_source_dependency_closure_sha256": "7c905f06c88ed4a19f8ece102cafbb1333dcce1b3e840081952682703ec038e5",
+    "p5_file_hashes_sha256": "75663d3799c8da7e196d4a30fcc29b1358ab4fc3a56b2461f7eb3b9ec2ecbf70",
+    "p5_source_file_count": 222
+  },
+  "repository_delta": {
+    "modified_paths": [
+      "ai/services/ai_inference/emlis_ai_rc0030_surface_planning_experiment_dependency_manifest_v3.py",
+      "ai/tools/emlis_nls_v3_rc0030_surface_planning_dependency_manifest.py",
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0030_surface_planning_experiment.json",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_dependency_closure.py"
+    ],
+    "new_repository_paths": [],
+    "semantic_production_logic_modified": false,
+    "exact_scope": 4
+  },
+  "repository_file_sha256": {
+    "ai/services/ai_inference/emlis_ai_rc0030_surface_planning_experiment_dependency_manifest_v3.py": "589b528fd90b4554ba0e14d722ea38b45bd927d4b62c7f6d5b9865c29405e79d",
+    "ai/tools/emlis_nls_v3_rc0030_surface_planning_dependency_manifest.py": "b8174c4ade010bc45eba7f2bea3aaf4a524a725520f78f16aa7a1ff560af21ce",
+    "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0030_surface_planning_experiment.json": "754e79dc0f871b9b6c650b174f067f16cef35a9f141bf91205d42c308b1041f7",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_dependency_closure.py": "0722415f895f84acfcbaeb750d315d8d5a240d66bc23b3fb95581f03b30d2136"
+  },
+  "manifest_closure": {
+    "schema_version": "cocolon.emlis.nls_v3.rc0030_surface_planning_experiment_dependency_manifest.v3",
+    "manifest_phase": "E2_INTEGRATED_SYNCHRONIZATION",
+    "manifest_file_sha256": "754e79dc0f871b9b6c650b174f067f16cef35a9f141bf91205d42c308b1041f7",
+    "manifest_artifact_sha256": "fe468b51e3b9f37558f30b010aad205500759806dfb939f859b0b9699466e097",
+    "source_dependency_closure_sha256": "a49e9bc2b8ce1443c955c9fd010fd07454e2e8a17c70a845db180e97b7023832",
+    "source_file_count": 223,
+    "exact18_closed_maximum": true,
+    "active_new_paths": 15,
+    "hashed_new_paths": 14,
+    "newly_active_indices": [10],
+    "reserved_required_absent_indices": [5, 16, 17],
+    "static_project_import_edges": 61,
+    "dynamic_project_import_edges": 18,
+    "unexpected_paths": 0,
+    "unbound_project_imports": 0,
+    "forbidden_reverse_imports": 0,
+    "reserved_paths_present": 0,
+    "generated_manifest_self_hash_excluded": true
+  },
+  "exact3_predecessor_pins": {
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30",
+    "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py": "88514bb2a179e8d726f36e1666d2618330d95979107403ededc93aa35655943b",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py": "789008643a4d7ba388a26f35fbf2276eea5f1c3702f94ea6089377ce372d5eaa"
+  },
+  "acceptance_evidence": {
+    "e2_dependency_closure": "5 passed in 18.65s",
+    "manifest_tool_check": "PASS",
+    "e2_integration": "13 passed in 444.07s",
+    "control_and_runtime": "16 passed in 246.88s",
+    "retained_rc0029_mandatory_attack": "33 passed, 12 deselected in 362.52s",
+    "historical_closure_diagnostic": "14 passed, 7 historical failures in 31.20s; current rc0030 E2 5/5 PASS",
+    "new_failure_caused_by_exact4": 0,
+    "git_diff_check": "PASS"
+  },
+  "unchanged": [
+    "Phase B exact 3 semantic logic",
+    "shared Matcher",
+    "shared Step 9 all 20 owners",
+    "Natural Surface",
+    "Body-only Parser",
+    "Grounded Lexicalization",
+    "catalog",
+    "runtime",
+    "selector",
+    "resource bounds",
+    "exact18 closed maximum",
+    "rc0027 through rc0029 behavior",
+    "E1b",
+    "shared and public route"
+  ],
+  "progression": {
+    "e2_phase_manifest_successor": "GREEN",
+    "e3": "NOT_STARTED",
+    "e4": "NOT_STARTED",
+    "cycle001": "NOT_ACCEPTED",
+    "next_required_action": "reflect exact4 to GitHub, commit and push, then provide SHA"
+  },
+  "body_free": true
+}

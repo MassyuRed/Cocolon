@@ -1,0 +1,103 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p2_forward.body_free.v1",
+  "generated_date_jst": "2026-07-20",
+  "body_free": true,
+  "phase": "Step11_Cycle001_rc0031_P2_source_grounded_proposition_forward",
+  "predecessor": {
+    "repository": "MassyuRed/mashos-api",
+    "local_base_commit": "f63269fde48eed7aa9d8dfe4e818a011894b6f8e",
+    "revised_cycle_detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "approval_scope": {
+    "p2_not_prefrozen": true,
+    "red_first_surface_composition_revision": true,
+    "target_case": "nls3s_b001_0063",
+    "target_denominator": {"S": 10, "R": 1, "exact_reuse": 0},
+    "resource_maximums": [4, 2, 4, 2],
+    "p1_unchanged_except_authorized_path_scope": true,
+    "fixture_changed": false,
+    "closed_code_changed": false,
+    "control_changed": false,
+    "attack_changed": false,
+    "resource_changed": false,
+    "denominator_changed": false
+  },
+  "repository_file_commitments": {
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": {
+      "operation": "MODIFY_APPEND_ONLY_AFTER_FROZEN_PREFIX",
+      "sha256": "e19eae9a62068ec3095785fc20aafda6c277df96470a7b1e48ca51ca3142d7d4"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py": {
+      "operation": "NEW",
+      "sha256": "a4e8bc9753a1398571d511d5d0c1219a886c498661b3a4f702d3b20b5672c6cc"
+    },
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py": {
+      "operation": "MODIFY_PATH_SCOPE_ONLY",
+      "sha256": "14e90025a18f1fcab8b2d4d8571e7d2be31b271ec2d4ca8e3a22fa56f14f193c"
+    },
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py": {
+      "operation": "NEW",
+      "sha256": "2d71f9241abb7f38ad9de41633c89b7c257b461df2b3e7df92e2d74df4b684a2"
+    }
+  },
+  "red_first_evidence": {
+    "executed_before_production_implementation": true,
+    "node_count_replaced_not_added": 1,
+    "observed_result": "INTENTIONAL_RED",
+    "observed_closed_code": "STEP11_RC0031_NO_VALID_FORWARD_CANDIDATE"
+  },
+  "surface_composition_contract": {
+    "modes": ["construction_modified_head", "independent_clauses"],
+    "modifier_target_equals_construction_owner": true,
+    "modifier_target_is_head_endpoint": true,
+    "modifier_targets_distinct_per_head": true,
+    "compact_atom_max": 3,
+    "independent_atom_max": 2,
+    "owner_connected": true,
+    "owner_ready_earliest_feasible_deferral": true,
+    "complexity_formula": "max(atom_count, distinct_owner_count, visible_clause_count)",
+    "case_family_control_branch": false
+  },
+  "case_0063_witness": {
+    "public_candidate_count": 1,
+    "semantic_atom_count": 10,
+    "construction_atom_count": 6,
+    "relation_atom_count": 4,
+    "required_reception_count": 1,
+    "exact_reuse_count": 0,
+    "composition_unit_count": 5,
+    "composition_atom_sizes_by_group": [[2, 2], [2], [3, 1]],
+    "additional_units_by_group": [2, 1, 2],
+    "total_units_by_group": [4, 3, 4],
+    "actual_resource_peaks": [4, 2, 4, 1],
+    "resource_maximums": [4, 2, 4, 2],
+    "semantic_atoms_realized_exactly_once": true,
+    "validator_issue_count": 0
+  },
+  "reuse_boundary": {
+    "public_non_empty_reuse": "REJECTED",
+    "private_shape_valid_non_empty_reuse": "REJECTED",
+    "private_shape_valid_closed_code": "STEP11_RC0031_P3_EXACT_REUSE_NOT_AVAILABLE",
+    "private_malformed_closed_code": "STEP11_RC0031_VERIFIED_REUSE_COMPOSITION_INVALID",
+    "body_only_parser_implemented": false,
+    "independent_matcher_implemented": false,
+    "p3_started": false
+  },
+  "verification": {
+    "p2_exact24": {"collected": 24, "passed": 24, "duration_seconds": 412.44},
+    "p1_exact7_refreeze": {"passed": 1, "intentional_red": 6, "duration_seconds": 87.55},
+    "rc0030_predecessor_behavior": {"collected": 4, "passed": 4, "duration_seconds": 78.33},
+    "python_compile": "PASS",
+    "git_diff_check": "PASS",
+    "frozen_exact4_prefix": "MATCH",
+    "catalog_key_sets_and_layout_vs_frozen_predecessor": "MATCH",
+    "warning": "pre-existing Pydantic V1 root_validator deprecation warning outside this change scope"
+  },
+  "design_addendum": {
+    "path": "documents/NLSv3_Step11_rc0031_P2_0063_SurfaceComposition_Addendum_20260720.md",
+    "sha256": "7cdc46d947aa075b19f45a90702196ab0f0f39a280000d7fb6da83bd10fa986a"
+  },
+  "decision": "P2_FORWARD_IMPLEMENTATION_LOCALLY_VERIFIED",
+  "freeze_status": "NOT_FROZEN_PENDING_GITHUB_COMMIT_AND_EXPLICIT_P2_FREEZE_APPROVAL",
+  "next_phase_status": "P3_NOT_STARTED_NOT_AUTHORIZED_BY_THIS_RECEIPT"
+}

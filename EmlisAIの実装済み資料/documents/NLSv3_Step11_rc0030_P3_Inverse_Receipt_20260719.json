@@ -1,0 +1,261 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.p3_inverse.body_free.v1",
+  "body_free": true,
+  "evidence_date": "2026-07-19",
+  "stage": "Step11_Cycle001_rc0030_P3_inverse",
+  "baseline": {
+    "github_repository": "MassyuRed/mashos-api",
+    "github_branch": "main",
+    "github_main_commit": "b94bf539da1339dfc8cc1204a88f9656b67fcea7",
+    "github_main_commit_verified_before_p3": true,
+    "p1_fixture_sha256": "9cfbdafaf43a3caed8b5dc00e68b56cd2b24003a002f0a7cbd1c3ec06d598fa5",
+    "p1_red_test_sha256": "56bc3603392df982ae748c9c4ae635fc7eca7867213f77bab1de051f35f38191",
+    "hard_gate_sha256": "6911291682508bcd6df66d39acb7a6b29b1cfc411434d1ff13160125c9af6c9a"
+  },
+  "p2_predecessor_files": [
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "byte_count": 129615,
+      "sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "byte_count": 357476,
+      "sha256": "8f8ea6f197bac02edc8ee3594165625e1e8f06e5a6a7bb44e41445d880ae9c37"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_rc0030_experiment_surface_catalog_v3.py",
+      "byte_count": 15593,
+      "sha256": "d51b8df3a7914aaa095a8b5249dd799f3dab2d8c706b07cea93e71a5b01ceb86"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0030_surface_planning_mutation.py",
+      "byte_count": 39563,
+      "sha256": "b04e8a6c6038ebc0dfde8b15d520ec9454f290977f611b295c7765299035925e"
+    }
+  ],
+  "authority": {
+    "approved_phase": "P3_INVERSE_ONLY",
+    "modified_existing_path_count": 1,
+    "new_path_count": 1,
+    "runtime_connected": false,
+    "public_route_changed": false,
+    "hard_gate_started": false,
+    "selector_started": false,
+    "manifest_started": false,
+    "tool_started": false,
+    "p4_started": false,
+    "p5_started": false,
+    "e2_started": false,
+    "e3_started": false,
+    "e4_started": false,
+    "secure_material_required": false,
+    "repository_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_forward_inverse_independence.py"
+    ]
+  },
+  "p3_files": [
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+      "change": "MODIFY_APPEND_ONLY",
+      "full_byte_count": 696912,
+      "full_line_count": 17680,
+      "full_sha256": "629305364ac50530265d7d87a6ca28678eb3e1be6ac7289ae770b3b5f871d8c9",
+      "frozen_prefix_byte_count": 589793,
+      "frozen_prefix_sha256": "9bdae4b5c3d99e99dd01b622b9b191afbfa0e601789fba082a03c069b70028b5",
+      "p3_suffix_byte_count": 107119,
+      "p3_suffix_line_count": 2787,
+      "p3_suffix_sha256": "16da3059e90655b4048e7ff300aa68fa06bc9fe51397a963824c435daef07e34",
+      "responsibility": "rc0030 final/base body-only parsers, parser-issued provenance, independent source matching, exact base reuse, semantic placement, reception association, and body-free verification material"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0030_forward_inverse_independence.py",
+      "change": "NEW",
+      "byte_count": 34643,
+      "line_count": 994,
+      "sha256": "e910ba05b8a272784b3a9704604eec510eb153993b1ab094476d5b19631ba30e",
+      "responsibility": "P3 frozen predecessor, inverse boundary, provenance, placement, reception, reuse, source swap, resource, privacy, and fail-closed verification"
+    }
+  ],
+  "public_api_signatures": [
+    "parse_step11_rc0030_experiment_surface(body: bytes)",
+    "parse_step11_rc0030_base_body_exact_reuse(base_body: bytes)",
+    "match_step11_rc0030_base_body_exact_reuse(base_body_witness, *, successor_snapshot, inventory_result, content_plan, discourse_plan, current_input)",
+    "match_step11_rc0030_experiment_surface(witness, *, base_body_witness, successor_snapshot, inventory_result, content_plan, discourse_plan, current_input, verified_base_reuse_bindings=())"
+  ],
+  "inverse_contract": {
+    "final_parser_body_only": true,
+    "base_parser_body_only": true,
+    "parser_issued_final_witness_required": true,
+    "parser_issued_base_witness_required": true,
+    "forward_module_import_count": 0,
+    "forward_plan_input_count": 0,
+    "candidate_ast_input_count": 0,
+    "span_map_input_count": 0,
+    "candidate_owner_or_coverage_input_count": 0,
+    "semantic_placement_reconstructed_independently": true,
+    "reception_schedule_reconstructed_independently": true,
+    "base_reuse_recomputed_independently": true,
+    "semantic_coverage_authorized": false,
+    "closed_error_codes_only": true,
+    "exported_material_body_free": true
+  },
+  "resource_contract": {
+    "body_byte_max": 1000000,
+    "decomposition_locus_max": 38,
+    "evaluated_decomposition_max": 76,
+    "peak_stored_decomposition_exclusive_max": 2,
+    "body_scan_pass_max": 2,
+    "combined_owner_max": 24,
+    "owner_comparison_max": 576,
+    "reception_move_max": 3,
+    "reception_moves_per_sentence_max": 2,
+    "permutation_or_backtracking_added": false,
+    "resource_bound_widened": false
+  },
+  "representative_direct_counts": [
+    {
+      "case_id": "nls3s_b001_0001",
+      "semantic_atom_count": 1,
+      "reception_binding_count": 1,
+      "decomposition_locus_count": 5,
+      "evaluated_decomposition_count": 7,
+      "peak_stored_decomposition_count": 1,
+      "body_scan_pass_count": 2,
+      "owner_binding_comparison_count": 4,
+      "unique_solution_count": 1,
+      "hard_verified": true,
+      "semantic_coverage_authorized": false
+    },
+    {
+      "case_id": "nls3s_b001_0009",
+      "semantic_atom_count": 1,
+      "reception_binding_count": 1,
+      "decomposition_locus_count": 4,
+      "evaluated_decomposition_count": 6,
+      "peak_stored_decomposition_count": 1,
+      "body_scan_pass_count": 2,
+      "owner_binding_comparison_count": 10,
+      "unique_solution_count": 1,
+      "hard_verified": true,
+      "semantic_coverage_authorized": false
+    },
+    {
+      "case_id": "nls3s_b001_0035",
+      "semantic_atom_count": 7,
+      "reception_binding_count": 1,
+      "decomposition_locus_count": 19,
+      "evaluated_decomposition_count": 32,
+      "peak_stored_decomposition_count": 1,
+      "body_scan_pass_count": 2,
+      "owner_binding_comparison_count": 28,
+      "unique_solution_count": 1,
+      "hard_verified": true,
+      "semantic_coverage_authorized": false
+    },
+    {
+      "case_id": "nls3s_b001_0100",
+      "semantic_atom_count": 8,
+      "reception_binding_count": 2,
+      "decomposition_locus_count": 23,
+      "evaluated_decomposition_count": 41,
+      "peak_stored_decomposition_count": 1,
+      "body_scan_pass_count": 2,
+      "owner_binding_comparison_count": 52,
+      "unique_solution_count": 1,
+      "hard_verified": true,
+      "semantic_coverage_authorized": false
+    }
+  ],
+  "p3_execution": {
+    "test_path": "ai/tests/test_emlis_nls_v3_s11_rc0030_forward_inverse_independence.py",
+    "collected": 54,
+    "passed": 54,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "elapsed_seconds": 139.23,
+    "status": "GREEN",
+    "independent_second_run": {
+      "collected": 54,
+      "passed": 54,
+      "warning_count": 1,
+      "warning_category_captured": false,
+      "elapsed_seconds": 136.26
+    }
+  },
+  "regression_execution": {
+    "p2_forward": {
+      "collected": 17,
+      "passed": 17,
+      "failed": 0,
+      "elapsed_seconds": 144.72,
+      "status": "GREEN"
+    },
+    "predecessor_selected": {
+      "collected": 11,
+      "passed": 11,
+      "failed": 0,
+      "elapsed_seconds": 33.32,
+      "status": "GREEN"
+    },
+    "p1_freeze": {
+      "passed": 1,
+      "intentionally_failed": 5,
+      "errors": 0,
+      "elapsed_seconds": 112.03,
+      "failure_codes_unchanged": [
+        "STEP11_RC0030_MAIN_MEANING_APPENDIX_DOMINANCE",
+        "STEP11_RC0030_SCHEMA_EXPOSITION",
+        "STEP11_RC0030_SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "STEP11_RC0030_GROUNDED_RECEPTION_PREFIX_LIST",
+        "STEP11_RC0030_CONTROL_NON_REGRESSION"
+      ],
+      "status": "EXPECTED_RED_FROZEN"
+    }
+  },
+  "static_audit": {
+    "python_compile": "PASS",
+    "p3_suffix_append_only": true,
+    "p3_suffix_forbidden_forward_runtime_gate_import_count": 0,
+    "rc0030_definition_count": 37,
+    "rc0030_duplicate_definition_count": 0,
+    "independent_read_only_review": "PASS_NO_CORRECTNESS_BLOCKER",
+    "p2_exact4_hash_unchanged": true,
+    "matcher_prefix_hash_unchanged": true,
+    "hard_gate_hash_unchanged": true,
+    "p1_fixture_and_test_hash_unchanged": true
+  },
+  "decision": "P3_INVERSE_COMPLETE_STOP_BEFORE_P4_PENDING_GITHUB_FREEZE",
+  "status": {
+    "p0": "COMPLETE",
+    "p1": "COMPLETE_RED_FROZEN",
+    "p2": "COMPLETE_FORWARD_GREEN_FROZEN",
+    "p3": "COMPLETE_INVERSE_GREEN_PENDING_GITHUB_FREEZE",
+    "p4": "NOT_STARTED",
+    "p5": "NOT_STARTED",
+    "e2": "NOT_STARTED",
+    "e3": "NOT_STARTED",
+    "e4": "NOT_STARTED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "facts": [
+    "GitHub main commit b94bf539da1339dfc8cc1204a88f9656b67fcea7 contained all four P2 files with the exact frozen byte counts and SHA-256 values.",
+    "The final P3 suite passed all 54 collected nodes in the main run and an independent second run.",
+    "The matcher P2 prefix, Hard Gate, P1 fixture and test, and all four P2 files stayed byte-identical.",
+    "P2 and selected predecessor regressions passed; P1 retained exactly the same five intentional RED codes.",
+    "No P4, P5, E2, E3, E4, shared runtime, public route, secure material, or formal candidate work was started."
+  ],
+  "inferences": [
+    "P3 now provides the body-only verification evidence required for a later P4 gate/runtime integration.",
+    "Integrated representative-eight selection, P1 GREEN, and Cycle 001 acceptance cannot be concluded before P4 and P5."
+  ],
+  "karen_opinion": [
+    "Freeze P3 now instead of mixing Hard Gate, selector, runtime, or manifest ownership into the inverse implementation.",
+    "Use the GitHub commit created from this P3 ZIP as the formal predecessor for P4.",
+    "Keep the approved P4 -> P5 -> E2 -> E3 -> E4 order and stop before implementation if an owner, path, resource, or case-specific branch outside the approved addendum becomes necessary."
+  ],
+  "next_boundary": "P3 inverse GitHub freeze -> P4 Hard Gate / selector / disconnected runtime / manifest"
+}

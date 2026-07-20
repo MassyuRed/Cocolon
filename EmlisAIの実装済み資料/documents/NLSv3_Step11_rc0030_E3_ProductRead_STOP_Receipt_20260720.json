@@ -1,0 +1,158 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e3_product_read_stop.body_free.v1",
+  "evidence_date": "2026-07-20",
+  "evaluation_stage": "Step11_Cycle001_rc0030_E3_Product_Read",
+  "phase_predecessor_git_commit": "38ca7fa779065998a363ce9bb581338d98b8f79d",
+  "machine_prerequisite": {
+    "representative_count": 8,
+    "selected_count": 8,
+    "no_valid_candidate_count": 0,
+    "fail_close_count": 0,
+    "focused_test_passed": 13,
+    "focused_test_failed": 0,
+    "dependency_closure_sha256": "be45dc1c8a34a231c0726fe1570c24e873f55e93b338e614b912112f1c201fbb",
+    "dependency_manifest_sha256": "06327f7e0e6d63923bbdf836aa5d25744a83eeb8f8a704aa23c89a3ca057857b",
+    "machine_body_free_receipt_sha256": "56fad0a7f96f2af46e94a8b3fe1ca7e6f7500a9605bf8cc7aed8b4a95fd86f7c",
+    "status": "GREEN"
+  },
+  "review_contract": {
+    "independent_reviewer_count": 2,
+    "severity_merge_rule": "maximum_per_case",
+    "reviewers_agreed_on_all_case_severities": true,
+    "body_private": true,
+    "body_or_quote_exported": false,
+    "design_18_4_axis_count": 12,
+    "former_major_case_ids": [
+      "nls3s_b001_0019",
+      "nls3s_b001_0035",
+      "nls3s_b001_0043",
+      "nls3s_b001_0063",
+      "nls3s_b001_0100"
+    ],
+    "control_case_ids": [
+      "nls3s_b001_0001",
+      "nls3s_b001_0002",
+      "nls3s_b001_0009"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "nls3s_b001_0001",
+      "severity": "MINOR",
+      "failed_axes": [6, 8],
+      "closed_reason_codes": [
+        "GENERIC_RECEPTION",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0002",
+      "severity": "PASS",
+      "failed_axes": [],
+      "closed_reason_codes": []
+    },
+    {
+      "case_id": "nls3s_b001_0009",
+      "severity": "MAJOR",
+      "failed_axes": [1, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "GENERIC_RECEPTION",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "MAIN_MEANING_OBSCURED",
+        "RELATION_MISREAD",
+        "RELATION_UNREADABLE",
+        "SCHEMA_EXPOSITION"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0019",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "MAIN_MEANING_OBSCURED",
+        "RELATION_MISREAD",
+        "SCHEMA_EXPOSITION"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0035",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "DEPTH_OVERSHOOT",
+        "EMLIS_RECEPTION_UNBOUND",
+        "MAIN_MEANING_OBSCURED",
+        "RELATION_MISREAD",
+        "SCHEMA_EXPOSITION",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0043",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "MAIN_MEANING_OBSCURED",
+        "RELATION_MISREAD",
+        "SCHEMA_EXPOSITION"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0063",
+      "severity": "MAJOR",
+      "failed_axes": [1, 4, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "DEPTH_OVERSHOOT",
+        "EMLIS_RECEPTION_UNBOUND",
+        "MAIN_MEANING_OBSCURED",
+        "SCHEMA_EXPOSITION",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "UNKNOWN_PARTIAL"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0100",
+      "severity": "MAJOR",
+      "failed_axes": [1, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "DEPTH_OVERSHOOT",
+        "EMLIS_RECEPTION_UNBOUND",
+        "MAIN_MEANING_OBSCURED",
+        "REQUIRED_MEANING_PARTIAL",
+        "SCHEMA_EXPOSITION",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED"
+      ]
+    }
+  ],
+  "aggregate": {
+    "severity_counts": {
+      "PASS": 1,
+      "MINOR": 1,
+      "MAJOR": 6,
+      "BLOCKER": 0
+    },
+    "former_major_pass_or_minor_count": 0,
+    "former_major_total": 5,
+    "former_major_all_pass_or_minor": false,
+    "control_not_worse_count": 1,
+    "control_total": 3,
+    "controls_all_not_worse": false,
+    "new_major_count": 1,
+    "new_blocker_count": 0,
+    "new_major_or_blocker_zero": false,
+    "self_denial_non_promotion_preserved": true,
+    "relation_non_regression_met": false,
+    "unknown_non_regression_met": false,
+    "required_meaning_non_regression_met": false
+  },
+  "decision": "STOP_BEFORE_E4",
+  "e4_authorized": false,
+  "e4_frozen100_executed": false,
+  "formal_acceptance": "not_claimed",
+  "cycle001_status": "NOT_ACCEPTED",
+  "body_free": true
+}

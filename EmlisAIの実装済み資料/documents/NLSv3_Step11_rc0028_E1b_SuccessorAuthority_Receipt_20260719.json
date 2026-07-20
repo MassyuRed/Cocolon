@@ -1,0 +1,158 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.rc0028.e1b_successor_authority_receipt.20260719.v1",
+  "issued_at_jst": "2026-07-19",
+  "body_free": true,
+  "authority_decision": "rc0028 E1b RED / STOP accepted; impact scope addendum only",
+  "document_status": "IMPACT_SCOPE_DEFINED",
+  "successor_implementation_status": "NOT_STARTED_NOT_AUTHORIZED_BY_THIS_RECEIPT",
+  "e0b_status": "NOT_STARTED_NOT_AUTHORIZED",
+  "e2_status": "NOT_STARTED_NOT_AUTHORIZED",
+  "formal_status": "NOT_AUTHORIZED",
+  "production_status": "NOT_AUTHORIZED",
+  "cycle_001_status": "NOT_ACCEPTED",
+  "secure_material_required": false,
+  "github_baseline": {
+    "repository": "MassyuRed/mashos-api",
+    "branch": "main",
+    "commit": "31d3cf183589b27481338277574f90500f3c5b11",
+    "tree": "c826c3ed5587356f313a90a5b67611e3972abd42",
+    "commit_time_jst": "2026-07-19T08:06:06+09:00",
+    "predecessor_commit": "50f80a4f875b8edd9211025a9094a21ca5363512",
+    "delta_file_count": 1,
+    "e1b_red_test_path": "ai/tests/test_emlis_nls_v3_s11_rc0028_e1b_information_sufficiency_red.py",
+    "e1b_red_test_git_blob_sha": "56d24b252ae09acd018bbfb93be8cea3acfa4df3",
+    "e1b_red_test_sha256": "f449b44ef4bc007fb783a81b1e3884dcdcba017633b09fda3a4771bfd3149d50"
+  },
+  "baseline_verification": {
+    "step9_dependency_validation": "PASS",
+    "v1_e0a_e1a_step4_tests": {
+      "passed": 49,
+      "failed": 0
+    },
+    "e1b_information_sufficiency_red": {
+      "passed": 0,
+      "failed": 5,
+      "disposition": "EXPECTED_RED_STOP"
+    },
+    "s5_runtime_disconnect_test": {
+      "passed": 11,
+      "failed": 1,
+      "disposition": "KNOWN_PREEXISTING_BASELINE_FAILURE"
+    }
+  },
+  "step9_frozen_commitments": {
+    "source_owner_count": 20,
+    "manifest_source_sha256": "19a21d5853c44130c2c874e8b9c6bbbc0a1fc79591c529fb060e7c1e3cd7742e",
+    "grounded_observation_plan_sha256": "b422093f907f3a825ec30f687f2f8b1d2688bf89950d9bc7436bfe0b5a67d177",
+    "semantic_restatement_sha256": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc",
+    "semantic_obligation_inventory_sha256": "1dadb411fad46abb617da9ef9fcb48b18d8be987318966616d804c6ec69adbcb",
+    "mutation_policy": "BYTE_IMMUTABLE"
+  },
+  "v1_experiment_predecessor": {
+    "lexical_role_witness_sha256": "1523690453647bee2a6e61fb91d7b14823baee4e383c006bc2814006a4beb94b",
+    "experiment_snapshot_sha256": "4671aa22c4e432f907780f0becf900fead57044c53ea3bbc1bf501eb5abc1a27",
+    "disposition": "HISTORICAL_V1_CHECKPOINT"
+  },
+  "rc0027_source_predecessor": {
+    "candidate_version_id": "nls_v3_rc_0027",
+    "source_file_count": 161,
+    "source_closure_sha256": "1214bb6c586a0aecbb3f7d6b251613c9b05e190057aa276d5c29a045be538dc7",
+    "manifest_artifact_sha256": "d7a3fc26fd3778f4c08c51e453cebaedd5e0f9674960d403090000b7cccfd450",
+    "disposition": "SOURCE_PREDECESSOR_ONLY_NOT_FORMAL_FREEZE"
+  },
+  "known_step10_baseline_drift": {
+    "present": true,
+    "failure_codes": [
+      "STEP10_DEPENDENCY_SOURCE_BYTES_DRIFT",
+      "STEP10_SOURCE_CLOSURE_DRIFT"
+    ],
+    "frozen_source_closure_sha256": "2b4cd6cb5ea0f0d69ae7de31930dd6833ba21fce8eb7262f579cad514f14a8e9",
+    "recomputed_source_closure_sha256": "d7958aa26a10d598f57f7544b51133edc0ea05c2f45e6767b9c9bdb4fda1d1cd",
+    "drift_paths": [
+      "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py"
+    ],
+    "disposition": "OUT_OF_SCOPE_REQUIRES_SEPARATE_VERSIONED_RECONCILIATION"
+  },
+  "whole100_body_free_reference_counts": {
+    "required_cross_span_relations": 68,
+    "required_cross_span_relation_type_counts": {
+      "action_supports_change": 33,
+      "attempt_and_block": 4,
+      "continuation_or_refusal": 8,
+      "contrast": 9,
+      "preserves_despite": 2,
+      "shift_from_to": 2,
+      "wish_and_constraint": 10
+    },
+    "source_explicit_unknowns": 27,
+    "semantic_units": 10,
+    "semantic_links": 5,
+    "owner_local_overlap_rows": 1,
+    "plan_missing_information_unknowns": 516
+  },
+  "successor_relation_projection_contract": {
+    "plan_relation_set": "ALL_FROZEN_PLAN_RELATIONS_EXACTLY_ONCE",
+    "plan_projection_type_rule": "EFFECTIVE_TYPE_EQUALS_SOURCE_RELATION_KIND",
+    "direction_rule": "COEXISTENCE_BIDIRECTIONAL_OTHER_THIRTEEN_SOURCE_TO_TARGET",
+    "only_allowed_refinement": "UNCERTAIN_CONNECTION_TO_COEXISTENCE_EXPERIMENT_OVERLAY",
+    "source_row_mutated": false,
+    "base_required_relation_ids_mutated": false,
+    "relation_count_increased": false
+  },
+  "future_implementation_scope_requires_new_instruction": {
+    "new_source_owners": [
+      "ai/services/ai_inference/emlis_ai_grounded_relation_construction_authority_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_grounded_lexical_role_witness_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_grounded_lexical_role_experiment_snapshot_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_rc0028_experiment_dependency_manifest_v3.py"
+    ],
+    "new_tool_owners": [
+      "ai/tools/emlis_nls_v3_rc0028_experiment_dependency_manifest.py"
+    ],
+    "new_fixture_owners": [
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0027.json"
+    ],
+    "new_test_classes": [
+      "successor_authority_red_and_green",
+      "independent_mutation",
+      "resource_bound",
+      "privacy_static_scan",
+      "runtime_reverse_import",
+      "experiment_dependency_closure"
+    ],
+    "conditional_existing_test_change": {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_e1b_information_sufficiency_red.py",
+      "allowed": [
+        "retarget imports and builder to successor v2",
+        "read cross-span relation from successor authority instead of frozen plan",
+        "replace only the coexistence grounding assertion with the source-explicit-refinement composite authority assertion",
+        "repair eager getattr default evaluation bug",
+        "mechanically map to closed v2 field names"
+      ],
+      "forbidden": [
+        "remove or weaken any of the five semantic assertions",
+        "skip or xfail",
+        "change samples or expected relation semantics",
+        "alter frozen Plan required coverage",
+        "erase predecessor hash or retarget diff from lineage"
+      ]
+    }
+  },
+  "explicitly_forbidden": [
+    "modify any Step 9 source owner or manifest bytes",
+    "overwrite v1 lexical witness or v1 experiment snapshot",
+    "modify active GroundedSourceSnapshot",
+    "connect Surface Parser Matcher Gate or runtime",
+    "modify public API DB RN Safety question routing or production owner",
+    "weaken Gate one-anchor candidate recovery or replan bounds",
+    "add arbitrary relation phrase bank topic dictionary or case cue",
+    "store raw body private corpus unsalted body digest HMAC key or nonce in shareable material",
+    "claim E1b information closure as E2 Product Read formal acceptance or Cycle 001 acceptance"
+  ],
+  "impact_addendum": {
+    "path": "NLSv3_Step11_rc0028_E1b_SuccessorAuthority_Impact_Addendum_20260719.md",
+    "sha256": "43fe182e06dd61a4d912014b664c54b99a7ded5c4e67d1a5892ad75bfb12ca97"
+  },
+  "next_explicit_authority_required": "IMPLEMENT_RC0028_E1B_SUCCESSOR_A0_THROUGH_A6_ONLY"
+}

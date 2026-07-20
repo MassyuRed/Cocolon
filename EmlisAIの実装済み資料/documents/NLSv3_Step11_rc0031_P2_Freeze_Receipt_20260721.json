@@ -1,0 +1,83 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p2_freeze.body_free.v1",
+  "generated_date_jst": "2026-07-21",
+  "body_free": true,
+  "phase": "Step11_Cycle001_rc0031_P2_source_grounded_proposition_forward_freeze",
+  "repository": {
+    "full_name": "MassyuRed/mashos-api",
+    "default_branch": "main",
+    "frozen_commit_sha": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "frozen_commit_url": "https://github.com/MassyuRed/mashos-api/commit/9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "immediate_predecessor_sha": "f63269fde48eed7aa9d8dfe4e818a011894b6f8e",
+    "predecessor_compare_status": "ahead",
+    "ahead_by": 1,
+    "behind_by": 0,
+    "main_vs_frozen_commit_status": "identical"
+  },
+  "exact_repository_changes": [
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "operation": "MODIFY_APPEND_ONLY_AFTER_FROZEN_PREFIX",
+      "git_blob_sha1": "9f03d4d37ffcd19d9641823e3ee23985efec8294",
+      "sha256": "e19eae9a62068ec3095785fc20aafda6c277df96470a7b1e48ca51ca3142d7d4"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+      "operation": "NEW",
+      "git_blob_sha1": "a9f9e380db4524b6399f3540bac54e0871a1dd4c",
+      "sha256": "a4e8bc9753a1398571d511d5d0c1219a886c498661b3a4f702d3b20b5672c6cc"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py",
+      "operation": "MODIFY_PATH_SCOPE_ONLY",
+      "git_blob_sha1": "9712f44f7faf3d00b4f447fd3877a11c218740bd",
+      "sha256": "14e90025a18f1fcab8b2d4d8571e7d2be31b271ec2d4ca8e3a22fa56f14f193c"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py",
+      "operation": "NEW",
+      "git_blob_sha1": "55ca582d5e9d1600db2c27d80d6a623247aae4de",
+      "sha256": "2d71f9241abb7f38ad9de41633c89b7c257b461df2b3e7df92e2d74df4b684a2"
+    }
+  ],
+  "byte_identity": {
+    "github_files_vs_locally_verified_zip": "4_OF_4_EXACT_GIT_BLOB_MATCH",
+    "unexpected_changed_paths": 0,
+    "verification_basis": "GitHub commit comparison plus exact Git blob SHA equality"
+  },
+  "carried_local_verification": {
+    "p2_exact24": "24_PASS_0_FAIL",
+    "p1_exact7": "1_PASS_6_INTENTIONAL_RED",
+    "rc0030_predecessor_behavior": "4_PASS_0_FAIL",
+    "case_0063": {
+      "public_candidate_count": 1,
+      "semantic_atom_count": 10,
+      "required_reception_count": 1,
+      "exact_reuse_count": 0,
+      "actual_resource_peaks": [4, 2, 4, 1],
+      "resource_maximums": [4, 2, 4, 2]
+    },
+    "github_rerun_required_for_byte_identity": false
+  },
+  "unchanged_contracts": {
+    "p1_fixture": true,
+    "p1_closed_codes": true,
+    "control": true,
+    "attack": true,
+    "resource": true,
+    "denominator": true,
+    "frozen_predecessor_prefix": true,
+    "production_runtime_connection": false
+  },
+  "decision": "P2_FROZEN",
+  "p3_status": "NOT_STARTED_AWAITING_SEPARATE_EXPLICIT_APPROVAL",
+  "non_authorizations": [
+    "P3_BODY_ONLY_PARSER",
+    "P3_INDEPENDENT_MATCHER",
+    "P4_HARD_GATE_OR_RUNTIME",
+    "E2_OR_LATER",
+    "PRODUCTION_CONNECTION",
+    "CYCLE001_ACCEPTANCE",
+    "CYCLE002"
+  ]
+}

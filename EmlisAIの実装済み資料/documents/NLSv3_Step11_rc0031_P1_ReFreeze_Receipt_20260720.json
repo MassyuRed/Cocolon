@@ -1,0 +1,68 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p1_refreeze.body_free.v1",
+  "generated_date_jst": "2026-07-20",
+  "body_free": true,
+  "phase": "Step11_Cycle001_rc0031_P1_exact7_RED_refreeze",
+  "predecessor": {
+    "repository": "MassyuRed/mashos-api",
+    "local_base_commit": "f63269fde48eed7aa9d8dfe4e818a011894b6f8e",
+    "revised_cycle_detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "authorized_change": {
+    "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py",
+    "scope": "adapter-absent path-scope recognition only",
+    "recognized_exact_active_states": ["P1", "P2", "P3"],
+    "production_source_changed_by_p1_refreeze": false,
+    "fixture_changed": false,
+    "closed_code_changed": false,
+    "control_changed": false,
+    "attack_changed": false,
+    "resource_changed": false,
+    "denominator_changed": false
+  },
+  "file_commitments": {
+    "p1_test_base_sha256": "18f4f28a5e326369c6ed9d1041c7a6e4a9f9490b66798ba199ebcafd84bb0454",
+    "p1_test_refrozen_sha256": "14e90025a18f1fcab8b2d4d8571e7d2be31b271ec2d4ca8e3a22fa56f14f193c",
+    "p1_fixture_sha256": "15e8047cd95b453fba4a7a677b428955ea2819e6738e4e1fc1488d24952b78a8"
+  },
+  "frozen_exact4_prefix": {
+    "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py": {
+      "byte_count": 129615,
+      "sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": {
+      "byte_count": 360675,
+      "sha256": "5f548499e05e5a982f375dde5f059d7eba08f06fbc59bd0a76d9ed788a1e8eaf"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": {
+      "byte_count": 722658,
+      "sha256": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py": {
+      "byte_count": 208041,
+      "sha256": "88514bb2a179e8d726f36e1666d2618330d95979107403ededc93aa35655943b"
+    }
+  },
+  "exact7_result": {
+    "collected": 7,
+    "passed": 1,
+    "intentional_red": 6,
+    "duration_seconds": 87.55,
+    "intentional_red_codes": [
+      "STEP11_RC0031_SOURCE_ROOT_DOMINANCE_NOT_PROVED",
+      "STEP11_RC0031_SCHEMA_FREE_PROPOSITION_NOT_PROVED",
+      "STEP11_RC0031_RELATION_PROPOSITION_NOT_PROVED",
+      "STEP11_RC0031_DISTRIBUTION_DEPTH_NOT_PROVED",
+      "STEP11_RC0031_GROUNDED_RECEPTION_PREDICATION_NOT_PROVED",
+      "STEP11_RC0031_CONTROL_RETAINED_NON_REGRESSION_NOT_PROVED"
+    ]
+  },
+  "resource_contract": {
+    "maximums": [4, 2, 4, 2],
+    "candidate_total_max": 12,
+    "replan_max": 1,
+    "changed": false
+  },
+  "decision": "P1_LOCAL_REFREEZE_CONFIRMED",
+  "github_freeze_status": "PENDING_MASH_APPLY_COMMIT_PUSH"
+}

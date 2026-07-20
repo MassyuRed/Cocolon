@@ -1,0 +1,77 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_red_viability_stop_receipt.v1",
+  "created_at_jst": "2026-07-21",
+  "body_free": true,
+  "status": "P3_RED_EXACT2_FROZEN_STOP_BEFORE_PRODUCTION_IMPLEMENTATION",
+  "immutable_predecessor_commit": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+  "revised_cycle_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+  "repository_scope": {
+    "new_files": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "modified_files": [],
+    "production_source_change_count": 0,
+    "fixture_change_count": 0
+  },
+  "p3_red": {
+    "test_sha256": "a69856605fcbfd633255ff56649985d808dec1442672c9bd9fa1298f8633a680",
+    "test_byte_count": 9685,
+    "collected_count": 2,
+    "pass_count": 1,
+    "intentional_red_count": 1,
+    "intentional_red_codes": [
+      "STEP11_RC0031_P3_DUPLICATE_BASE_REEXPOSITION_NOT_RESOLVED"
+    ]
+  },
+  "machine_observation": {
+    "case_id": "nls3s_b001_0001",
+    "p2_candidate_count": 1,
+    "p2_added_semantic_atom_count": 1,
+    "p2_added_semantic_family": "explicit_unknown",
+    "independent_base_exact_reuse_count": 1,
+    "independent_base_exact_reuse_family": "explicit_unknown",
+    "same_source_meaning_intersection_count": 1,
+    "p2_declared_exact_reuse_count": 0
+  },
+  "retained_regression": {
+    "rc0031_p1": {
+      "collected_count": 7,
+      "pass_count": 1,
+      "intentional_red_count": 6
+    },
+    "rc0031_p2": {
+      "collected_count": 24,
+      "pass_count": 23,
+      "historical_stage_lock_red_count": 1,
+      "historical_stage_lock_code": "STEP11_RC0031_P2_PATH_SCOPE_INVALID"
+    },
+    "rc0030_p3_and_predecessor_behavior": {
+      "collected_count": 58,
+      "pass_count": 57,
+      "historical_stage_lock_red_count": 1,
+      "historical_stage_lock_code": "STEP11_RC0030_P3_P2_PREDECESSOR_DRIFT"
+    },
+    "rc0030_predecessor_behavior_pass_count": 4
+  },
+  "resource_contract": {
+    "candidate_max": 12,
+    "replan_max": 1,
+    "owner_max": 24,
+    "referent_scalar_max": 32,
+    "parser_body_byte_max": 1000000,
+    "decomposition_locus_max": 38,
+    "evaluated_decomposition_max": 76,
+    "stored_decomposition_max_exclusive": 2,
+    "body_scan_pass_max": 2,
+    "owner_comparison_max": 576,
+    "surface_resource_maximum": [4, 2, 4, 2],
+    "case_0063_measured_peak": [4, 2, 4, 1]
+  },
+  "stop": {
+    "production_implementation_started": false,
+    "p4_started": false,
+    "runtime_or_manifest_started": false,
+    "reason": "P2_REEXPOSES_ONE_SEMANTIC_ATOM_ALREADY_EXACTLY_BOUND_IN_BASE_WHILE_NONEMPTY_VERIFIED_REUSE_COMPOSITION_IS_CLOSED",
+    "next_authority_required": "P2_P3_VERIFIED_BASE_REUSE_COMPOSITION_DESIGN_ADDENDUM_AND_RED_ONLY_APPROVAL"
+  }
+}

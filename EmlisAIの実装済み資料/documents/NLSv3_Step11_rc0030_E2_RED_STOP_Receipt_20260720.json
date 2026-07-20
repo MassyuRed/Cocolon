@@ -1,0 +1,53 @@
+{
+  "body_free": true,
+  "cycle": "Cycle 001",
+  "cycle_001_accepted": false,
+  "documents": [
+    {
+      "path": "documents/NLSv3_Step11_rc0030_E2_DensitySynchronization_Design20_3_Impact_Addendum_20260720.md",
+      "sha256": "94596115915eb558412bb7f5794ec2637dd08045071fe637dcb6a0fd20ccfad9"
+    },
+    {
+      "path": "documents/NLSv3_Step11_rc0030_E2_RED_STOP_Handoff_20260720.md",
+      "sha256": "580329667928f3abbb44629a8cce86402b4755269f47d665a6cd41835f9a464f"
+    }
+  ],
+  "e2": {
+    "green": false,
+    "manifest_successor_created": false,
+    "machine_result": {
+      "duration_seconds": 288.07,
+      "failed": 1,
+      "passed": 7,
+      "unexpected_failure_count": 0
+    },
+    "sole_red": {
+      "case_id": "nls3s_b001_0063",
+      "closed_code": "STEP11_RC0030_E2_FORWARD_DENSITY_NOT_SYNCHRONIZED",
+      "underlying_code": "STEP11_RC0030_SURFACE_PLAN_DENSITY_UNSATISFIABLE"
+    },
+    "state": "E2_RED_STOP_BEFORE_NATURAL_SURFACE_REPAIR_AUTHORITY"
+  },
+  "e3_started": false,
+  "e4_started": false,
+  "exact18_closed_maximum_retained": true,
+  "immutable_p5_manifest": {
+    "artifact_sha256": "265418796ec720112ea046014b7dd3c612d392382647a64db5fe7396b4a976b7",
+    "file_sha256": "4ceb33aa6bb6f15d6ad9b7212bbdcee901edb352707f3f19a90e91ff6d91f62c",
+    "source_dependency_closure_sha256": "7c905f06c88ed4a19f8ece102cafbb1333dcce1b3e840081952682703ec038e5",
+    "source_file_count": 222
+  },
+  "p5_git_predecessor": "924bd458255f226db54c17d84dd4aafc5db2b1e2",
+  "repository_changes": [
+    {
+      "change_kind": "ADD",
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py",
+      "sha256": "4edc9845e231e3ba8737c2f8bdd6e2bbe05d504c0e47a8b2343cb7b717518ee9",
+      "size_bytes": 25860
+    }
+  ],
+  "repository_path_count": 1,
+  "schema_version": "cocolon.emlis.nls_v3.rc0030_e2_red_stop_receipt.v1",
+  "secure_material_required": false,
+  "step": "Step 11"
+}

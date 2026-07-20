@@ -1,0 +1,214 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.p1_red.body_free.v1",
+  "body_free": true,
+  "evidence_date": "2026-07-19",
+  "stage": "Step11_Cycle001_rc0030_P0_P1_five_concern_RED",
+  "baseline": {
+    "github_repository": "MassyuRed/mashos-api",
+    "github_commit": "e1e2ec5c17fa165f9972373304899802832ecd5b",
+    "github_main_compare_status": "identical",
+    "github_ahead_by": 0,
+    "github_behind_by": 0,
+    "rc0029_source_dependency_closure_sha256": "cd46925c6db478ac07e501acb64c45cae3a122ab0c1d834d06a83f1190cfb082",
+    "rc0029_e3_machine_receipt_sha256": "38178b8050a545362a712b616a4a25a55b6c7c6d9435899e09a7852050e57659",
+    "rc0029_e3_product_read_stop_receipt_sha256": "64f0da11c3983d70a28676749115f712af4c1c49a396d07d9513773ab63c9794",
+    "rc0030_design20_3_addendum_sha256": "135a861a5d965423fe80d3a46e65ff4528b4ab67ac857c6fc8b11b943885872d",
+    "rc0030_impact_boundary_receipt_sha256": "dfb93bec3a2797b55399aa65178fc58dededbb497a5b26b0d1a83a5123a6af73"
+  },
+  "authority": {
+    "new_repository_path_count": 2,
+    "modified_existing_path_count": 0,
+    "production_source_edited_before_red": false,
+    "rc0030_implementation_started": false,
+    "runtime_connected": false,
+    "public_route_changed": false,
+    "secure_material_required": false,
+    "new_paths": [
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0030_representative8_body_free.json",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_surface_planning_red.py"
+    ]
+  },
+  "frozen_exact4_prefix": {
+    "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py": {
+      "byte_count": 103805,
+      "sha256": "43e99c6077e93db61908e11672d08122cb5928fe63fe64ae0ca565659b43bff4"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": {
+      "byte_count": 290131,
+      "sha256": "2f797d7aad7f16b234b8a8dad57204b5788e4ae23e43306ac8ca5da790eba7a2"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": {
+      "byte_count": 589793,
+      "sha256": "9bdae4b5c3d99e99dd01b622b9b191afbfa0e601789fba082a03c069b70028b5"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py": {
+      "byte_count": 129756,
+      "sha256": "6911291682508bcd6df66d39acb7a6b29b1cfc411434d1ff13160125c9af6c9a"
+    }
+  },
+  "p1_artifacts": {
+    "fixture": {
+      "path": "ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0030_representative8_body_free.json",
+      "sha256": "9cfbdafaf43a3caed8b5dc00e68b56cd2b24003a002f0a7cbd1c3ec06d598fa5",
+      "byte_count": 22751,
+      "line_count": 383
+    },
+    "red_test": {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0030_surface_planning_red.py",
+      "sha256": "56bc3603392df982ae748c9c4ae635fc7eca7867213f77bab1de051f35f38191",
+      "byte_count": 24620,
+      "line_count": 655
+    },
+    "freeze_declaration": "TEST_AND_FIXTURE_BYTES_IMMUTABLE_THROUGH_P5_GREEN"
+  },
+  "collection": {
+    "collected": 6,
+    "collection_errors": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 0.11
+  },
+  "semantic_red_execution": {
+    "passed": 1,
+    "intentionally_failed": 5,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 111.24,
+    "exit_code": 1,
+    "failure_nodes": [
+      {
+        "node": "test_rc0030_p1_main_meaning_dominance_is_body_only_proved",
+        "closed_code": "STEP11_RC0030_MAIN_MEANING_APPENDIX_DOMINANCE"
+      },
+      {
+        "node": "test_rc0030_p1_schema_free_realization_rejects_schema_postscript",
+        "closed_code": "STEP11_RC0030_SCHEMA_EXPOSITION"
+      },
+      {
+        "node": "test_rc0030_p1_semantic_atoms_have_owner_connected_chunk_distribution",
+        "closed_code": "STEP11_RC0030_SURFACE_DISTRIBUTION_OVERCONCENTRATED"
+      },
+      {
+        "node": "test_rc0030_p1_grounded_reception_is_predication_not_handle_prefix_list",
+        "closed_code": "STEP11_RC0030_GROUNDED_RECEPTION_PREFIX_LIST"
+      },
+      {
+        "node": "test_rc0030_p1_controls_share_common_contract_without_regression",
+        "closed_code": "STEP11_RC0030_CONTROL_NON_REGRESSION"
+      }
+    ]
+  },
+  "retained_mutation_execution": {
+    "test_path": "ai/tests/test_emlis_nls_v3_s11_rc0029_surface_repair_mutation.py",
+    "test_sha256": "7f313a69d2912d76996cd06744a196b6e7458979d8d9c5d6de64819da9fa460b",
+    "executed_attack_denominator": 33,
+    "pytest_passed": 45,
+    "pytest_failed": 0,
+    "pytest_errors": 0,
+    "pytest_skipped": 0,
+    "pytest_xfailed": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 354.91,
+    "status": "GREEN"
+  },
+  "pending_rc0030_mutation_contract": {
+    "attack_count": 20,
+    "counted_as_executed_at_p1": false,
+    "support_omission_representative8_denominator": 0,
+    "support_positive_existing_authority_fixture_sha256": "cb601019dc2c7e4e46281133d3965addf04adf4f6af8defaf715f91f522e3efb",
+    "support_positive_existing_authority_case_ids": [
+      "D",
+      "I6-D02"
+    ],
+    "support_positive_mutation_required_before_full_attack_green": true
+  },
+  "resource_contract": {
+    "candidate_total_max": 12,
+    "candidate_variants_per_base_candidate_max": 1,
+    "replan_max": 1,
+    "owner_max": 24,
+    "natural_handle_scalar_max": 32,
+    "parser_body_bytes_max": 1000000,
+    "visible_source_anchor_max": 1,
+    "realization_units_per_discourse_group_max": 4,
+    "visible_clauses_per_grammatical_sentence_max": 2,
+    "complexity_load_max": 4,
+    "repeated_joiners_per_group_max": 2,
+    "decomposition_loci_per_candidate_max": 38,
+    "evaluated_decompositions_per_candidate_max": 76,
+    "distinct_handle_binding_comparisons_max": 576,
+    "parser_invocations_per_candidate_max": 2,
+    "matcher_invocations_per_candidate_max": 2,
+    "permutation_or_backtracking_allowed": false,
+    "counter_status": "CONTRACT_FROZEN_IMPLEMENTATION_COUNTER_NOT_YET_PRESENT"
+  },
+  "control_contract": [
+    {
+      "case_id": "nls3s_b001_0001",
+      "source_case_commitment": "edaa674852ece02333b504e279999f711f3e6a37aef4ea03f2ecb6e9c007b67c",
+      "baseline": "PASS",
+      "rc0029": "MINOR",
+      "rc0030_required": [
+        "PASS"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0002",
+      "source_case_commitment": "56525717f0c64d882d3f48f5c04494eef946d2d532196f3893c04572b0f1d122",
+      "baseline": "PASS",
+      "rc0029": "PASS",
+      "rc0030_required": [
+        "PASS"
+      ]
+    },
+    {
+      "case_id": "nls3s_b001_0009",
+      "source_case_commitment": "8a5c4a0d4a1c25df4313906f83b420e7d9e952edb5263df4567e8bda6c73a0e9",
+      "baseline": "MINOR",
+      "rc0029": "MAJOR",
+      "rc0030_required": [
+        "PASS",
+        "MINOR"
+      ]
+    }
+  ],
+  "static_and_privacy_audit": {
+    "exact4_forbidden_case_id_or_product_reason_literal_count": 0,
+    "exact4_rc0030_symbol_count": 0,
+    "fixture_forbidden_body_key_count": 0,
+    "private_input_or_output_exported": false,
+    "unsalted_body_digest_exported": false,
+    "case_or_control_runtime_branch_added": false,
+    "public_or_shared_runtime_import_added": false
+  },
+  "decision": "P1_RED_FROZEN_STOP_BEFORE_P2",
+  "status": {
+    "p0": "COMPLETE",
+    "p1": "COMPLETE_RED",
+    "p2": "NOT_STARTED",
+    "p3": "NOT_STARTED",
+    "p4": "NOT_STARTED",
+    "p5": "NOT_STARTED",
+    "e2": "NOT_STARTED",
+    "e3": "NOT_STARTED",
+    "e4": "NOT_STARTED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "facts": [
+    "GitHub main is identical to the approved e1e2ec5 predecessor.",
+    "The P1 suite collected normally and produced exactly five closed semantic RED failures.",
+    "No production source file was changed in P1.",
+    "The retained rc0029 mutation suite remained green with 45 passed tests over 33 executed mutations.",
+    "All representative-eight reception support counts are zero."
+  ],
+  "inferences": [
+    "The five failures share a common Surface-planning topology rather than one isolated case-specific phrase defect.",
+    "A repair appears conditionally feasible within the approved exact-four responsibility set, but Product Read remains the final authority."
+  ],
+  "karen_opinion": [
+    "Approve and preserve the P1 freeze before starting P2.",
+    "Implement a new rc0030 realization plan from immutable rc0027 base authority and E1b typed authority; do not append another repair to rc0029 final bytes.",
+    "Stop rather than widening resource bounds or inventing support-positive data if the existing frozen authority cannot drive the required mutation."
+  ]
+}

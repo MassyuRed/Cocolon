@@ -1,0 +1,91 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.rc0028.e1b_successor_a0_baseline_ledger.20260719.v1",
+  "created_at_jst": "2026-07-19",
+  "body_free": true,
+  "status": "A0_BASELINE_FROZEN",
+  "implementation_authority": {
+    "authorized": true,
+    "scope": "E1B_SUCCESSOR_A0_THROUGH_A6_WITH_CONDITIONAL_PROGRESS_TO_E0B_E2_E3_E4_FORMAL",
+    "gate_policy": "NEXT_PHASE_ONLY_AFTER_PREVIOUS_PHASE_PASSES",
+    "secure_boundary_policy": "STOP_AND_REQUEST_MASH_ACTION_IF_SECURE_MATERIAL_IS_REQUIRED"
+  },
+  "github_baseline": {
+    "repository": "MassyuRed/mashos-api",
+    "branch": "main",
+    "commit": "31d3cf183589b27481338277574f90500f3c5b11",
+    "tree": "c826c3ed5587356f313a90a5b67611e3972abd42",
+    "predecessor_commit": "50f80a4f875b8edd9211025a9094a21ca5363512",
+    "baseline_delta_file_count": 1
+  },
+  "step9_frozen": {
+    "source_owner_count": 20,
+    "validation_status": "PASS",
+    "manifest_source_sha256": "19a21d5853c44130c2c874e8b9c6bbbc0a1fc79591c529fb060e7c1e3cd7742e",
+    "grounded_observation_plan_sha256": "b422093f907f3a825ec30f687f2f8b1d2688bf89950d9bc7436bfe0b5a67d177",
+    "semantic_restatement_sha256": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc",
+    "semantic_obligation_inventory_sha256": "1dadb411fad46abb617da9ef9fcb48b18d8be987318966616d804c6ec69adbcb",
+    "mutation_policy": "BYTE_IMMUTABLE"
+  },
+  "v1_predecessor": {
+    "lexical_role_witness_sha256": "1523690453647bee2a6e61fb91d7b14823baee4e383c006bc2814006a4beb94b",
+    "experiment_snapshot_sha256": "4671aa22c4e432f907780f0becf900fead57044c53ea3bbc1bf501eb5abc1a27",
+    "regression_test_result": "49_PASSED"
+  },
+  "e1b_red_predecessor": {
+    "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_e1b_information_sufficiency_red.py",
+    "git_blob_sha": "56d24b252ae09acd018bbfb93be8cea3acfa4df3",
+    "sha256": "f449b44ef4bc007fb783a81b1e3884dcdcba017633b09fda3a4771bfd3149d50",
+    "result": "5_FAILED_EXPECTED_RED_STOP"
+  },
+  "rc0027_source_predecessor": {
+    "candidate_version_id": "nls_v3_rc_0027",
+    "source_file_count": 161,
+    "source_closure_sha256": "1214bb6c586a0aecbb3f7d6b251613c9b05e190057aa276d5c29a045be538dc7",
+    "manifest_artifact_sha256": "d7a3fc26fd3778f4c08c51e453cebaedd5e0f9674960d403090000b7cccfd450",
+    "disposition": "SOURCE_PREDECESSOR_ONLY_NOT_FORMAL_FREEZE"
+  },
+  "known_step10_baseline_drift": {
+    "failure_codes": [
+      "STEP10_DEPENDENCY_SOURCE_BYTES_DRIFT",
+      "STEP10_SOURCE_CLOSURE_DRIFT"
+    ],
+    "frozen_source_closure_sha256": "2b4cd6cb5ea0f0d69ae7de31930dd6833ba21fce8eb7262f579cad514f14a8e9",
+    "recomputed_source_closure_sha256": "d7958aa26a10d598f57f7544b51133edc0ea05c2f45e6767b9c9bdb4fda1d1cd",
+    "disposition": "OUT_OF_E1B_SCOPE_REQUIRES_SEPARATE_VERSIONED_RECONCILIATION"
+  },
+  "e1b_exact_path_allowlist": {
+    "new_sources": [
+      "ai/services/ai_inference/emlis_ai_grounded_relation_construction_authority_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_grounded_lexical_role_witness_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_grounded_lexical_role_experiment_snapshot_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_rc0028_experiment_dependency_manifest_v3.py"
+    ],
+    "new_tools": [
+      "ai/tools/emlis_nls_v3_rc0028_experiment_dependency_manifest.py"
+    ],
+    "new_fixtures": [
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0027.json",
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0028_experiment.json"
+    ],
+    "new_tests": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0028_successor_authority.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0028_successor_lexical_role.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0028_successor_snapshot.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0028_successor_dependency_closure.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0028_successor_runtime_disconnect.py"
+    ],
+    "conditional_modified_tests": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0028_e1b_information_sufficiency_red.py"
+    ],
+    "generated_manifest_self_hash_policy": "ARTIFACT_NOT_INCLUDED_IN_ITS_OWN_FILE_HASHES_OUTER_RECEIPT_BINDS_HASH"
+  },
+  "explicitly_forbidden": [
+    "modify Step9 source owner or manifest bytes",
+    "modify v1 lexical witness snapshot or E0a E1a tests",
+    "modify active GroundedSourceSnapshot",
+    "connect Surface Parser Matcher Gate or runtime during E1b",
+    "weaken E1b five semantic assertions",
+    "skip xfail or mock-only green",
+    "store raw body private corpus unsalted body digest or secure key in shareable artifacts"
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.impact_boundary.body_free.v1",
+  "evidence_date": "2026-07-20",
+  "evaluation_stage": "Step11_Cycle001_post_rc0030_E3_pre_rc0031_implementation",
+  "repository": "MassyuRed/mashos-api",
+  "branch": "main",
+  "github_predecessor_commit": "25b98ec8b59eaff717d1dc3261ff21156ccce7ed",
+  "github_verification": {
+    "prior_incomplete_commit": "af59e778f6d6bf4c46a296182803495b5c6181fe",
+    "phase_predecessor_commit": "38ca7fa779065998a363ce9bb581338d98b8f79d",
+    "missing_exact3_only_from_prior_incomplete": true,
+    "approved_exact6_only_from_phase_predecessor": true,
+    "outside_approved_exact6_path_count": 0,
+    "blob_match_count": 6,
+    "blob_expected_count": 6
+  },
+  "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+  "rc0030_evidence": {
+    "source_closure_sha256": "be45dc1c8a34a231c0726fe1570c24e873f55e93b338e614b912112f1c201fbb",
+    "dependency_manifest_file_sha256": "06327f7e0e6d63923bbdf836aa5d25744a83eeb8f8a704aa23c89a3ca057857b",
+    "dependency_manifest_artifact_sha256": "4b59a83b26830504247cd2078611b3aee19a7699e04927633bb4bf549b9ca8f6",
+    "source_file_list_artifact_sha256": "08bb90db3a20b5ecf1f79b4dbad3dcd46e13a151a4e68c263f38467ab020f80c",
+    "e3_machine_body_free_receipt_sha256": "56fad0a7f96f2af46e94a8b3fe1ca7e6f7500a9605bf8cc7aed8b4a95fd86f7c",
+    "e3_product_read_stop_receipt_sha256": "608a1c73fb94fa67a4df39c78661edadb7ec9ec8e905438cb3716b920ea87f95",
+    "e3_handoff_sha256": "42263731f19ac5426d943407aafecf9412ac03524c29b30e8a148e5b2fd3542e",
+    "e3_stop_package_sha256": "9e0d06b0bd40f570c362878c8ce243446da9452e2b5354022870e4acd2937846",
+    "machine_selected_count": 8,
+    "machine_representative_count": 8,
+    "active_required_passed": 80,
+    "active_required_total": 80,
+    "product_read_severity_counts": {
+      "PASS": 1,
+      "MINOR": 1,
+      "MAJOR": 6,
+      "BLOCKER": 0
+    },
+    "former_major_pass_or_minor_count": 0,
+    "former_major_total": 5,
+    "control_not_worse_count": 1,
+    "control_total": 3,
+    "new_major_count": 1,
+    "new_blocker_count": 0,
+    "decision": "FROZEN_AS_E3_PRODUCT_READ_STOP_EVIDENCE"
+  },
+  "rc0031_status": {
+    "impact_scope": "DEFINED",
+    "implementation": "NOT_STARTED",
+    "implementation_authority": "NOT_GRANTED_BY_THIS_RECEIPT",
+    "feasibility": "CONDITIONALLY_FEASIBLE_WITHIN_EXISTING_EXACT4_RESPONSIBILITY_SET",
+    "new_upstream_authority_required_on_current_evidence": false,
+    "e4_authorized": false,
+    "cycle001_status": "NOT_ACCEPTED",
+    "cycle002_authorized": false
+  },
+  "concerns": [
+    "source_grounded_main_proposition_and_main_meaning_dominance",
+    "schema_free_proposition_realization",
+    "relation_endpoint_direction_and_legibility",
+    "semantic_chunk_distribution_and_depth_compaction",
+    "grounded_reception_target_support_act_binding_and_naturalization",
+    "control_and_retained_improvement_non_regression"
+  ],
+  "conditional_modify_exact4": [
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "frozen_prefix_bytes": 129615,
+      "frozen_prefix_sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28",
+      "required": "conditional"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "frozen_prefix_bytes": 360675,
+      "frozen_prefix_sha256": "5f548499e05e5a982f375dde5f059d7eba08f06fbc59bd0a76d9ed788a1e8eaf",
+      "required": "primary"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+      "frozen_prefix_bytes": 722658,
+      "frozen_prefix_sha256": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30",
+      "required": "lockstep"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py",
+      "frozen_prefix_bytes": 208041,
+      "frozen_prefix_sha256": "88514bb2a179e8d726f36e1666d2618330d95979107403ededc93aa35655943b",
+      "required": "lockstep"
+    }
+  ],
+  "new_exact18_closed_maximum_allowlist": [
+    "ai/services/ai_inference/emlis_ai_rc0031_proposition_surface_experiment_dependency_manifest_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_runtime_adapter_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+    "ai/tools/emlis_nls_v3_rc0031_proposition_surface_dependency_manifest.py",
+    "ai/tools/emlis_nls_v3_rc0031_proposition_surface_bounded_experiment.py",
+    "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0031_proposition_surface_experiment.json",
+    "ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_e2_integration.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_runtime_disconnect.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_predecessor_immutability.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_predecessor_behavior_regression.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_control_non_regression.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_e3_representative8.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_e4_frozen100_read_only.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_dependency_closure.py"
+  ],
+  "p1_red": {
+    "collected_exact_count": 7,
+    "freeze_integrity_expected_pass_count": 1,
+    "intentional_semantic_red_count": 6,
+    "new_pending_attack_count": 24,
+    "existing_attack_denominator_retained": true,
+    "production_source_edit_before_freeze": false,
+    "skip_xfail_mock_or_collection_error_accepted_as_red": false
+  },
+  "phase_order": [
+    "P0_PREDECESSOR_FREEZE",
+    "P1_EXACT7_RED_AND_EXACT24_ATTACK_FREEZE",
+    "P2_PROPOSITION_FORWARD_PLAN_RENDERER",
+    "P3_BODY_ONLY_PARSER_AND_INDEPENDENT_MATCHER",
+    "P4_HARD_GATE_SELECTOR_DISCONNECTED_RUNTIME_MANIFEST",
+    "P5_IDENTICAL_P1_GREEN_AND_ALL_RETAINED_REGRESSION",
+    "E2_INTEGRATED_SYNCHRONIZATION",
+    "E3_REPRESENTATIVE8_MACHINE",
+    "E3_REPRESENTATIVE8_PRODUCT_READ",
+    "E4_FROZEN100_ONLY_AFTER_E3_ACCEPTANCE"
+  ],
+  "resource_bounds": {
+    "candidate_max": 12,
+    "replan_max": 1,
+    "source_owner_max": 24,
+    "referent_scalar_max": 32,
+    "parser_body_bytes_max": 1000000,
+    "visible_source_anchor_max": 1,
+    "existing_depth_clause_joiner_and_p3_bounds_unchanged": true
+  },
+  "immutable_boundaries": [
+    "STEP9_ALL20_OWNERS",
+    "E1B_SUCCESSOR_AUTHORITY",
+    "CONTENT_SELECTION",
+    "DISCOURSE_GRAPH_PLANNER",
+    "PLANNING_FRONTIER",
+    "GROUNDED_HUMAN_RECEPTION_AUTHORITY",
+    "RC0027_DEFAULT_BEHAVIOR",
+    "RC0028_BEHAVIOR",
+    "RC0029_BEHAVIOR",
+    "RC0030_PREFIXED_BYTES_SYMBOLS_BEHAVIOR_AND_EVIDENCE",
+    "SHARED_RUNTIME_AND_PUBLIC_ROUTE",
+    "REPLY_DB_RN_SAFETY_AND_QUESTION_OWNERS",
+    "BATCH001_KNOWN28_DEVELOPMENT42_INVALID16_AND_HISTORICAL_PRODUCT_READ"
+  ],
+  "privacy": {
+    "body_free": true,
+    "body_or_quote_exported": false,
+    "secure_material_required": false,
+    "real_user_raw_included": false
+  },
+  "decision": "STOP_BEFORE_RC0031_IMPLEMENTATION_PENDING_EXPLICIT_ADDENDUM_APPROVAL"
+}

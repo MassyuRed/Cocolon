@@ -1,0 +1,239 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p1_red.body_free.v1",
+  "body_free": true,
+  "evidence_date": "2026-07-20",
+  "stage": "Step11_Cycle001_rc0031_P0_P1_exact7_RED",
+  "baseline": {
+    "github_repository": "MassyuRed/mashos-api",
+    "github_commit": "25b98ec8b59eaff717d1dc3261ff21156ccce7ed",
+    "worktree_mode": "detached_exact_commit_local_only",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "rc0031_design20_3_addendum_sha256": "e032e9681b7da465faf379a19d68f139c02e13f722d721b9a3fd79aced9806e0",
+    "rc0031_impact_boundary_receipt_sha256": "57ce1d4c347142eda8665378137b5c2c6239b19de25be8ec630000951f2c7fe0",
+    "rc0031_session_handoff_sha256": "2763c28a6773d56f06cfc70f4193881178e2e16ad363921b35f998ae44dff023",
+    "rc0030_source_dependency_closure_sha256": "be45dc1c8a34a231c0726fe1570c24e873f55e93b338e614b912112f1c201fbb",
+    "rc0030_manifest_file_sha256": "06327f7e0e6d63923bbdf836aa5d25744a83eeb8f8a704aa23c89a3ca057857b",
+    "rc0030_e3_machine_receipt_sha256": "56fad0a7f96f2af46e94a8b3fe1ca7e6f7500a9605bf8cc7aed8b4a95fd86f7c",
+    "rc0030_e3_product_read_stop_receipt_sha256": "608a1c73fb94fa67a4df39c78661edadb7ec9ec8e905438cb3716b920ea87f95"
+  },
+  "authority": {
+    "explicit_rc0031_addendum_section14_approval_received": true,
+    "authorized_endpoint": "P1_RED_FROZEN_STOP_BEFORE_P2",
+    "new_repository_path_count": 2,
+    "modified_existing_path_count": 0,
+    "production_source_edited_before_red": false,
+    "runtime_connected": false,
+    "public_route_changed": false,
+    "secure_material_required": false,
+    "new_paths": [
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py"
+    ]
+  },
+  "frozen_exact4_prefix": {
+    "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py": {
+      "byte_count": 129615,
+      "sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": {
+      "byte_count": 360675,
+      "sha256": "5f548499e05e5a982f375dde5f059d7eba08f06fbc59bd0a76d9ed788a1e8eaf"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": {
+      "byte_count": 722658,
+      "sha256": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30"
+    },
+    "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py": {
+      "byte_count": 208041,
+      "sha256": "88514bb2a179e8d726f36e1666d2618330d95979107403ededc93aa35655943b"
+    }
+  },
+  "p1_artifacts": {
+    "fixture": {
+      "path": "ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json",
+      "sha256": "15e8047cd95b453fba4a7a677b428955ea2819e6738e4e1fc1488d24952b78a8",
+      "byte_count": 19889,
+      "line_count": 279
+    },
+    "red_test": {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py",
+      "sha256": "18f4f28a5e326369c6ed9d1041c7a6e4a9f9490b66798ba199ebcafd84bb0454",
+      "byte_count": 24000,
+      "line_count": 623
+    },
+    "freeze_declaration": "TEST_AND_FIXTURE_BYTES_IMMUTABLE_THROUGH_P5_GREEN"
+  },
+  "collection": {
+    "collected": 7,
+    "collection_errors": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 0.11
+  },
+  "semantic_red_execution": {
+    "passed": 1,
+    "intentionally_failed": 6,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 88.41,
+    "exit_code": 1,
+    "failure_nodes": [
+      {
+        "node": "test_rc0031_p1_source_root_and_main_meaning_dominance_is_proved",
+        "closed_code": "STEP11_RC0031_SOURCE_ROOT_DOMINANCE_NOT_PROVED"
+      },
+      {
+        "node": "test_rc0031_p1_schema_free_proposition_realization_is_proved",
+        "closed_code": "STEP11_RC0031_SCHEMA_FREE_PROPOSITION_NOT_PROVED"
+      },
+      {
+        "node": "test_rc0031_p1_relation_endpoint_direction_and_legibility_is_proved",
+        "closed_code": "STEP11_RC0031_RELATION_PROPOSITION_NOT_PROVED"
+      },
+      {
+        "node": "test_rc0031_p1_semantic_chunk_distribution_and_depth_is_proved",
+        "closed_code": "STEP11_RC0031_DISTRIBUTION_DEPTH_NOT_PROVED"
+      },
+      {
+        "node": "test_rc0031_p1_grounded_reception_target_support_act_predication_is_proved",
+        "closed_code": "STEP11_RC0031_GROUNDED_RECEPTION_PREDICATION_NOT_PROVED"
+      },
+      {
+        "node": "test_rc0031_p1_controls_and_retained_improvements_do_not_regress",
+        "closed_code": "STEP11_RC0031_CONTROL_RETAINED_NON_REGRESSION_NOT_PROVED"
+      }
+    ],
+    "red_basis": "selected_rc0030_final_bytes_and_body_free_independent_evidence",
+    "missing_rc0031_module_counted_as_red": false,
+    "always_fail_mock_used": false,
+    "fixture_severity_changed": false
+  },
+  "p0_current_valid_regression_execution": {
+    "test_paths": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_dependency_closure.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_predecessor_immutability.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_predecessor_behavior_regression.py"
+    ],
+    "passed": 12,
+    "failed": 0,
+    "deselected_historical_stage_lock": 1,
+    "warning_count": 1,
+    "elapsed_seconds": 97.14,
+    "status": "GREEN_FOR_CURRENT_VALID_CONTRACTS"
+  },
+  "historical_stage_lock_observation": {
+    "full_unfiltered_run_passed": 12,
+    "full_unfiltered_run_failed": 1,
+    "elapsed_seconds": 120.57,
+    "failing_node": "test_rc0030_p5_preserves_every_non_successor_p4_path_byte_exactly",
+    "classification": "HISTORICAL_P4_FULL_FILE_LOCK_EXPECTED_TO_DIVERGE_AFTER_APPROVED_LATER_APPEND",
+    "current_manifest_or_prefix_drift": false,
+    "hidden_or_ignored": false
+  },
+  "attack_freeze": {
+    "inherited_named_attack_count": 53,
+    "new_pending_attack_count": 24,
+    "combined_named_attack_count_minimum": 77,
+    "new_family_count": 6,
+    "new_attacks_per_family": 4,
+    "new_attacks_executed_at_p1": 0,
+    "new_attacks_executor_phase": "P5",
+    "each_new_attack_binds_consumer_and_expected_closed_code": true,
+    "inherited_replacement_or_subtraction_allowed": false
+  },
+  "resource_contract": {
+    "candidate_total_max": 12,
+    "replan_max": 1,
+    "source_owner_max": 24,
+    "referent_scalar_max": 32,
+    "parser_body_bytes_max": 1000000,
+    "visible_source_anchor_max": 1,
+    "realization_units_per_discourse_group_max": 4,
+    "visible_clauses_per_grammatical_sentence_max": 2,
+    "complexity_load_max": 4,
+    "repeated_joiners_per_group_max": 2,
+    "decomposition_loci_per_candidate_max": 38,
+    "evaluated_decompositions_per_candidate_max": 76,
+    "distinct_owner_binding_comparisons_max": 576,
+    "parser_invocations_per_candidate_max": 2,
+    "matcher_invocations_per_candidate_max": 2,
+    "parser_invocations_across_candidates_max": 24,
+    "matcher_invocations_across_candidates_max": 24,
+    "body_byte_inspections_across_candidates_max": 48000000,
+    "permutation_or_unbounded_backtracking_allowed": false
+  },
+  "control_contract": [
+    {
+      "case_id": "nls3s_b001_0001",
+      "baseline": "PASS",
+      "rc0030": "MINOR",
+      "rc0031_required": ["PASS"]
+    },
+    {
+      "case_id": "nls3s_b001_0002",
+      "baseline": "PASS",
+      "rc0030": "PASS",
+      "rc0031_required": ["PASS"]
+    },
+    {
+      "case_id": "nls3s_b001_0009",
+      "baseline": "MINOR",
+      "rc0030": "MAJOR",
+      "rc0031_required": ["PASS", "MINOR"]
+    }
+  ],
+  "current_rc0030_product_read_evidence": {
+    "severity_counts": {"PASS": 1, "MINOR": 1, "MAJOR": 6, "BLOCKER": 0},
+    "former_major_pass_or_minor_count": 0,
+    "former_major_total": 5,
+    "control_not_worse_count": 1,
+    "control_total": 3,
+    "new_major_count": 1,
+    "emlis_reception_unbound_count": 5
+  },
+  "static_and_privacy_audit": {
+    "repository_delta_path_count": 2,
+    "repository_delta_matches_p1_active_allowlist": true,
+    "exact4_prefix_match_count": 4,
+    "exact4_prefix_total": 4,
+    "production_source_modified_count": 0,
+    "later_phase_rc0031_path_present_count": 0,
+    "private_input_or_output_exported": false,
+    "body_or_quote_exported": false,
+    "parsed_span_or_binding_detail_exported": false,
+    "unsalted_body_digest_exported": false,
+    "case_or_control_runtime_branch_added": false,
+    "public_or_shared_runtime_import_added": false
+  },
+  "decision": "P1_RED_FROZEN_STOP_BEFORE_P2",
+  "status": {
+    "p0": "COMPLETE",
+    "p1": "COMPLETE_RED",
+    "p2": "NOT_STARTED_REQUIRES_EXPLICIT_NEXT_AUTHORITY",
+    "p3": "NOT_STARTED",
+    "p4": "NOT_STARTED",
+    "p5": "NOT_STARTED",
+    "e2": "NOT_STARTED",
+    "e3": "NOT_STARTED",
+    "e4": "NOT_STARTED_NOT_INCLUDED_IN_SECTION14_APPROVAL",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "confirmed_facts": [
+    "The supplied detailed design matches the required SHA-256.",
+    "The local predecessor is the exact approved GitHub commit.",
+    "The exact-four frozen prefixes match four of four before and after P1.",
+    "The exact-seven suite collected normally and produced one PASS plus six closed semantic RED failures.",
+    "No production source file was changed in P1.",
+    "The new exact-twenty-four contract is pending and does not count as executed in P1."
+  ],
+  "inferences": [
+    "The six failures remain consistent with a shared Proposition Surface realization problem rather than one isolated case phrase.",
+    "P2 appears conditionally feasible within the approved exact-four maximum, but that conclusion is not implementation completion or Product Read acceptance."
+  ],
+  "karen_opinion": [
+    "Preserve this P1 fixture and test byte-for-byte through P5.",
+    "Do not begin P2 until this freeze is reflected as an immutable predecessor and P2 is explicitly authorized.",
+    "Stop instead of widening resource, owner, or path scope if P2 cannot satisfy the frozen contract."
+  ]
+}

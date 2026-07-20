@@ -1,0 +1,128 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0028.e1b_red_receipt.20260719.v1",
+  "candidate": "nls_v3_rc_0028",
+  "checkpoint_label": "rc0028 E1b RED fixed information sufficiency not satisfied",
+  "baseline": {
+    "repository": "MassyuRed/mashos-api",
+    "commit": "50f80a4f875b8edd9211025a9094a21ca5363512",
+    "tree": "b47802c49900cf2d7355ff4ad9d7b945fc1f7138",
+    "predecessor_checkpoint": "rc0028 E0a E1a upstream bounded experiment"
+  },
+  "status": {
+    "rc0028": "EXPERIMENT_ONLY_NOT_FROZEN",
+    "e0a_upstream_red": "GREEN",
+    "e1a_isolated_upstream_propagation": "GREEN",
+    "e1b_information_sufficiency_red": "RED_CONFIRMED",
+    "e1_lossless_information_sufficiency": "NOT_SATISFIED",
+    "authority_boundary": "STOP",
+    "e0b_downstream_red": "NOT_STARTED",
+    "e2_independent_consumption": "NOT_STARTED",
+    "cycle_001": "NOT_ACCEPTED",
+    "production_connection": "UNCHANGED"
+  },
+  "frozen_owner_closure": {
+    "step9_dependency_manifest_validation": "PASS",
+    "source_files": {
+      "emlis_ai_grounded_observation_plan.py": "b422093f907f3a825ec30f687f2f8b1d2688bf89950d9bc7436bfe0b5a67d177",
+      "emlis_ai_grounded_observation_semantic_restatement_v3.py": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc",
+      "emlis_ai_semantic_obligation_inventory_v3.py": "1dadb411fad46abb617da9ef9fcb48b18d8be987318966616d804c6ec69adbcb"
+    },
+    "frozen_owner_bytes_changed": false,
+    "historical_manifest_changed": false
+  },
+  "e1b_red": {
+    "test_file": "ai/tests/test_emlis_nls_v3_s11_rc0028_e1b_information_sufficiency_red.py",
+    "result": "EXPECTED_RED",
+    "passed": 0,
+    "failed": 5,
+    "collection_errors": 0,
+    "failure_areas": [
+      "CROSS_SPAN_RELATION_OWNER_CLOSURE",
+      "OWNER_LOCAL_OVERLAP_LOSSLESSNESS",
+      "RELATION_ENDPOINT_DIRECTION_MUTATION",
+      "EXPLICIT_UNKNOWN_OWNER_BINDING",
+      "FACET_PRESENCE_SEMANTIC_COVERAGE_MISUSE"
+    ],
+    "source_body_in_receipt": false,
+    "output_body_in_receipt": false
+  },
+  "baseline_regression": {
+    "suites": [
+      "test_emlis_nls_v3_s11_rc0028_upstream_lexical_role_red.py",
+      "test_emlis_nls_v3_s11_rc0028_lexical_role_snapshot_red.py",
+      "test_emlis_nls_v3_s4_semantic_obligation_inventory.py"
+    ],
+    "result": "PASS",
+    "passed": 49,
+    "failed": 0,
+    "existing_warnings": 1
+  },
+  "whole_100_body_free_diagnostic": {
+    "rows": 100,
+    "plan_relations": 165,
+    "required_cross_span_relations": 68,
+    "required_cross_span_relation_rows": 45,
+    "required_relation_both_lexical_endpoints": 17,
+    "required_relation_one_lexical_endpoint": 26,
+    "required_relation_no_lexical_endpoints": 25,
+    "plan_unknowns": 516,
+    "plan_unknowns_with_evidence": 0,
+    "semantic_units": 10,
+    "semantic_links": 5,
+    "explicit_unknowns": 27,
+    "explicit_unknown_rows": 20,
+    "explicit_unknowns_with_direct_covered_owner": 8,
+    "covered_unknown_rows": 7,
+    "ambiguous_overlap_rows": 1
+  },
+  "information_sufficiency_findings": {
+    "cross_span_contrast_authority": "PRESENT_BUT_LEXICAL_ENDPOINT_BINDING_MISSING",
+    "cross_span_sequence_authority": "PRESENT_BUT_LEXICAL_ENDPOINT_BINDING_MISSING",
+    "natural_cross_span_coexistence_authority": "MISSING_REQUIRED_CANONICAL_RELATION",
+    "nested_overlap": "NUMERIC_BOUND_FITS_BUT_OWNER_UNIQUENESS_AND_NESTED_TOPOLOGY_DO_NOT_CLOSE",
+    "relation_endpoint_direction_binding": "MISSING",
+    "explicit_unknown_binding": "MISSING",
+    "covered_field_semantic_coverage_authority": "NOT_MACHINE_DENIED",
+    "active_runtime_misuse_observed": false
+  },
+  "stop_reasons": [
+    "LEXICAL_WITNESS_MUST_NOT_INVENT_MISSING_COEXISTENCE_AUTHORITY",
+    "NESTED_CONSTRUCTION_OWNER_GRAPH_NOT_AUTHORIZED_IN_CURRENT_EXPERIMENT_SCHEMA",
+    "PARENT_TO_SEMANTIC_UNIT_ALIAS_NOT_LOSSLESS_FOR_RANGE_CROSSING_FACETS",
+    "FROZEN_PLAN_RESTATEMENT_INVENTORY_BYTES_MUST_NOT_CHANGE",
+    "E2_PREREQUISITES_NOT_MET"
+  ],
+  "required_additional_impact_scope": [
+    "VERSIONED_EXPERIMENT_ONLY_UPSTREAM_RELATION_AUTHORITY_SUCCESSOR",
+    "CLOSED_CONSTRUCTION_INSTANCE_AND_NESTED_GRAPH_SCHEMA",
+    "PARENT_NUCLEUS_TO_SEMANTIC_UNIT_ALIAS_CLOSURE",
+    "TYPED_RELATION_ENDPOINT_DIRECTION_AND_EXPLICIT_UNKNOWN_BINDINGS",
+    "FACET_PRESENCE_ONLY_NEGATIVE_AUTHORITY",
+    "APPEND_ONLY_RC0028_EXPERIMENT_DEPENDENCY_CLOSURE"
+  ],
+  "explicitly_unchanged": [
+    "GROUND_OBSERVATION_PLAN",
+    "GROUND_SEMANTIC_RESTATEMENT",
+    "SEMANTIC_OBLIGATION_INVENTORY",
+    "STEP9_HISTORICAL_DEPENDENCY_MANIFEST",
+    "RC0028_E0A_E1A_RUNTIME_OWNERS",
+    "STEP11_SURFACE_PARSER_MATCHER_GATE",
+    "PUBLIC_API_DB_RN_SAFETY_QUESTION_ROUTING",
+    "CANDIDATE_REPLAN_RECOVERY_AND_ONE_ANCHOR_BOUNDS"
+  ],
+  "changed_files": [
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_e1b_information_sufficiency_red.py",
+      "change": "NEW",
+      "sha256": "f449b44ef4bc007fb783a81b1e3884dcdcba017633b09fda3a4771bfd3149d50"
+    },
+    {
+      "path": "NLSv3_Step11_rc0028_E1b_RED_Stop_Handoff_20260719.md",
+      "change": "NEW",
+      "sha256": "cc0ccc4dbcd752c819ab441084da5ffc356cc07f33519cf92b4e4a393c29c776"
+    }
+  ],
+  "mash_secure_or_private_work_required": false,
+  "mash_additional_authority_required": true,
+  "recommended_next_boundary": "APPROVE_VERSIONED_EXPERIMENT_ONLY_UPSTREAM_RELATION_AND_NESTED_CONSTRUCTION_AUTHORITY_ADDENDUM"
+}

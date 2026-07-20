@@ -1,0 +1,53 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e2_delimiter_safe_parser_stop_receipt.v1",
+  "created_at_jst": "2026-07-20",
+  "scope": "Step 11 / Cycle 001 / rc0030 / E2",
+  "predecessor_git_commit": "1997d860cf02cd9b10ff502f0d5099c014d4eb1c",
+  "state": "DELIMITER_SAFE_PARSER_GREEN_E2_EVIDENCE_CLOSURE_STOP",
+  "repository_paths": [
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py"
+  ],
+  "repository_file_sha256": {
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": "0c475bcc15e8fe191b69440d94753d5bf6523b9d30645147c01cac096a05c04d",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py": "007a606ab6a3ee7bc9e54d3039b99bd14da9462c64a65895fcdae2a9332a8412"
+  },
+  "bounded_parser_contract": {
+    "public_signature_body_only": true,
+    "body_scan_pass_max": 2,
+    "owner_candidate_stored_max": 2,
+    "evaluated_decomposition_max": 76,
+    "owner_comparison_max": 576,
+    "body_bytes_max": 1000000,
+    "raw_candidate_exported": false,
+    "forward_metadata_read": false,
+    "case_specific_production_branch": false
+  },
+  "acceptance_evidence": {
+    "planned_semantic_atom_count": 10,
+    "parsed_semantic_atom_count": 10,
+    "verified_semantic_binding_count": 10,
+    "verified_base_reuse_count": 0,
+    "verified_reception_binding_count": 1,
+    "unique_owner_candidate_solution_count": 1,
+    "e2_integration": "12 passed in 309.75s",
+    "p3_and_p5_controls": "16 passed in 43.76s",
+    "p2_forward_render_controls": "4 passed in 126.25s",
+    "e2_selected_control7": "1 passed in 219.19s",
+    "retained_rc0029_attacks": "33 passed in 358.43s",
+    "git_diff_check": "PASS",
+    "python_compile": "PASS"
+  },
+  "evidence_debt": {
+    "pending_rc0030_attack_ledger": "20 IDS_FIXED_BUT_NOT_EXECUTED_AS_EXACT_LEDGER",
+    "representative8_support_positive_count": 0,
+    "support_positive_rc0030_full_chain": "AUTHORITY_REQUIRED"
+  },
+  "manifest_successor_created": false,
+  "e3_started": false,
+  "e4_started": false,
+  "cycle_001_accepted": false,
+  "secure_material_required": false,
+  "body_free": true,
+  "next_authority": "PENDING20_AND_SUPPORT_POSITIVE_READ_ONLY_RED_ADDENDUM"
+}

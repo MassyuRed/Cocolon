@@ -1,0 +1,115 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e2_phase_a_read_only_red_stop_receipt.v1",
+  "created_at_jst": "2026-07-20",
+  "scope": "Step 11 / Cycle 001 / rc0030 / E2 evidence closure",
+  "state": "PHASE_A_RED_REPRODUCED_STOP_BEFORE_MATCHER_SUCCESSOR_AUTHORITY",
+  "github_audit_predecessor": {
+    "commit": "2c789d3fa9f5a7a910c9a9392f2ebfd1bc009ea7",
+    "parent": "1997d860cf02cd9b10ff502f0d5099c014d4eb1c",
+    "diff_path_count": 2,
+    "matcher_blob_sha1": "b9b010425ad717bd6af690fba14698bd8e9c804d",
+    "e2_test_blob_sha1": "9f51b7db0aa3f555aa779119c4d641869b9eee69",
+    "local_bytes_match_github": true
+  },
+  "repository_changes": [
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py",
+      "sha256": "c8e2f980919f4f3785b2471449ebb01478bd355fb635b2e67dc8cc9cffde44a2",
+      "git_blob_sha1": "4981622c3cc5a4541d1cbfad95d49ceda26fab65"
+    }
+  ],
+  "repository_path_count": 1,
+  "production_changes": [],
+  "fixture_changes": [],
+  "manifest_changes": [],
+  "support_authority": {
+    "fixture_path": "ai/tests/fixtures/grounded_human_reception_exact8_v2_20260712.json",
+    "fixture_sha256": "cb601019dc2c7e4e46281133d3965addf04adf4f6af8defaf715f91f522e3efb",
+    "case_ids": [
+      "D",
+      "I6-D02"
+    ],
+    "representative8_support_positive_count": 0,
+    "service_case_branch_authorized": false,
+    "case_specific_projection_added": false
+  },
+  "phase_a_result": {
+    "closed_code": "STEP11_RC0030_E2_SUPPORT_POSITIVE_FULL_CHAIN_UNREACHABLE",
+    "test_result": "1 failed in 70.65s",
+    "cases": [
+      {
+        "case_id": "D",
+        "base_candidate_count": 2,
+        "support_bearing_base_candidate_count": 2,
+        "base_parser_invocation_count": 2,
+        "base_matcher_invocation_count": 2,
+        "base_closed_code": "STEP11_RC0030_BASE_BINDING_REVALIDATION_FAILED",
+        "experiment_candidate_count": 0,
+        "final_parser_invocation_count": 0,
+        "final_matcher_invocation_count": 0,
+        "hard_gate_pass_count": 0
+      },
+      {
+        "case_id": "I6-D02",
+        "base_candidate_count": 4,
+        "support_bearing_base_candidate_count": 4,
+        "base_parser_invocation_count": 4,
+        "base_matcher_invocation_count": 4,
+        "base_closed_code": "STEP11_RC0030_BASE_BINDING_REVALIDATION_FAILED",
+        "experiment_candidate_count": 0,
+        "final_parser_invocation_count": 0,
+        "final_matcher_invocation_count": 0,
+        "hard_gate_pass_count": 0
+      }
+    ],
+    "support_omission_executed": false,
+    "support_omission_block_reason": "FINAL_BODY_NOT_REACHED"
+  },
+  "verification": {
+    "frozen_authority": "1 passed in 0.39s",
+    "collection": "13 tests collected",
+    "git_diff_check": "PASS",
+    "python_compile": "PASS",
+    "raw_body_exported": false,
+    "owner_or_support_text_exported": false
+  },
+  "evidence_debt": {
+    "pending20_exact_execution_closed": false,
+    "pending20_ids_and_order_frozen": true,
+    "support_positive_full_chain_closed": false,
+    "e2_formal_closure": false
+  },
+  "first_required_production_owner": {
+    "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+    "scope": "rc0030-specific base reuse and base context",
+    "phase_a_change_authorized": false
+  },
+  "requested_successor_authority": {
+    "write_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py"
+    ],
+    "path_count": 2,
+    "new_repository_paths_allowed": false,
+    "fixture_change_allowed": false,
+    "resource_expansion_allowed": false,
+    "manifest_change_allowed": false
+  },
+  "documents": [
+    {
+      "path": "documents/NLSv3_Step11_rc0030_E2_PhaseA_ReadOnly_RED_STOP_Handoff_20260720.md",
+      "sha256": "da0b9eec4192c27b3782ff1f02f3efa3b41440da8172a4df1d55a14b09391189"
+    },
+    {
+      "path": "documents/NLSv3_Step11_rc0030_E2_SupportPositiveBaseBinding_Design20_3_Impact_Addendum_20260720.md",
+      "sha256": "42fe1d866a1a17c3f16095ef56e4b85a4047dc378609600604dc48f4564aa654"
+    }
+  ],
+  "manifest_successor_created": false,
+  "e3_started": false,
+  "e4_started": false,
+  "cycle_001_accepted": false,
+  "secure_material_required": false,
+  "body_free": true,
+  "next_boundary": "MASH_REFLECTS_PHASE_A_TEST_AND_APPROVES_SUPPORT_POSITIVE_BASE_BINDING_ADDENDUM"
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0030.e2_phase_b_exact3_receipt.v1",
+  "created_at_jst": "2026-07-20",
+  "scope": {
+    "step": 11,
+    "cycle": 1,
+    "release_candidate": "rc0030",
+    "phase": "E2_PHASE_B",
+    "disposition": "GREEN_STOP_BEFORE_E2_PHASE_MANIFEST_SUCCESSOR"
+  },
+  "github_predecessor": {
+    "repository": "MassyuRed/mashos-api",
+    "commit_sha": "a18ceaf9f2d858c59244a12aaca3d798acc36cdd",
+    "parent_sha": "2c789d3fa9f5a7a910c9a9392f2ebfd1bc009ea7",
+    "commit_date": "2026-07-20T12:26:29+09:00"
+  },
+  "repository_delta": {
+    "modified_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py"
+    ],
+    "production_modified": 2,
+    "test_modified": 1,
+    "new_repository_path": 0,
+    "manifest_modified": false
+  },
+  "repository_file_sha256": {
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30",
+    "ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py": "88514bb2a179e8d726f36e1666d2618330d95979107403ededc93aa35655943b",
+    "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py": "789008643a4d7ba388a26f35fbf2276eea5f1c3702f94ea6089377ce372d5eaa"
+  },
+  "acceptance_evidence": {
+    "e2_integration": "13 passed in 443.58s",
+    "phase_b_support_positive_focus": "1 passed in 134.94s",
+    "control_non_regression": "3 passed in 42.57s",
+    "runtime_disconnect": "13 passed in 204.64s",
+    "retained_rc0029_mandatory_attack": "33 passed, 12 deselected in 364.19s",
+    "rc0028_forward_inverse": "5 passed",
+    "predecessor_and_rc0029_behavior": "12 passed, 1 historical stale-freeze failure",
+    "broader_rc0030_rc0029_forward_inverse_retained": "108 passed, 2 historical-evidence failures",
+    "dependency_closure_diagnostic": "10 passed, 7 manifest-or-hash drift failures",
+    "exact3_execution_logic_regression_count": 0,
+    "python_compile_exact3": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "support_authority": {
+    "D": {
+      "semantic": 2,
+      "reception_total": 2,
+      "support_bearing_reception": 1,
+      "selected": true
+    },
+    "I6-D02": {
+      "semantic": 2,
+      "reception_total": 3,
+      "support_bearing_reception": 1,
+      "selected": true
+    },
+    "no_support_control_0002": {
+      "semantic": 0,
+      "reception_total": 1,
+      "support_bearing_reception": 0,
+      "selected": true
+    }
+  },
+  "security_negative_evidence": [
+    "support omission",
+    "forged base schema",
+    "forward Reception metadata forge",
+    "stale base context",
+    "ambiguous base phrase projection",
+    "duplicate base reuse credit"
+  ],
+  "unchanged": [
+    "shared Matcher",
+    "shared Step 9 all 20 owners",
+    "Natural Surface",
+    "Body-only Parser",
+    "catalog",
+    "Grounded Lexicalization",
+    "runtime",
+    "selector",
+    "manifest",
+    "fixture",
+    "resource bounds",
+    "exact18 closed maximum",
+    "rc0027 through rc0029",
+    "E1b",
+    "shared and public route"
+  ],
+  "progression": {
+    "phase_b_green": true,
+    "e2_phase_manifest_created": false,
+    "e2_formal_closure_green": false,
+    "e3_started": false,
+    "e4_started": false,
+    "cycle001_accepted": false
+  },
+  "formal_evidence_debt": {
+    "current_manifest_phase": "P5_CARDINALITY_REGRESSION",
+    "e2_manifest_successor_required": true,
+    "p3_historical_full_file_lock_overwrite_allowed": false,
+    "rc0029_historical_scanner_change_in_exact3_allowed": false,
+    "final_phase_qualified_evidence_authority_required": true
+  },
+  "privacy": {
+    "body_free": true,
+    "raw_body_included": false,
+    "owner_expression_included": false,
+    "support_expression_included": false,
+    "secure_material_required": false
+  },
+  "next_boundary": "REFLECT_EXACT3_TO_GITHUB_THEN_APPROVE_E2_PHASE_MANIFEST_EXACT4"
+}

@@ -1,0 +1,71 @@
+{
+  "body_free": true,
+  "cycle": "Cycle 001",
+  "cycle_001_accepted": false,
+  "documents": [
+    {
+      "path": "documents/NLSv3_Step11_rc0030_E2_OwnerReadyDeferral_Design20_3_Impact_Addendum_20260720.md",
+      "sha256": "29b957af61b77aa0811990623443c7aa2328c6e5935bb54a2ea70e28178600ba"
+    },
+    {
+      "path": "documents/NLSv3_Step11_rc0030_E2_PreImplementation_STOP_Handoff_20260720.md",
+      "sha256": "4226be455b624f02847feb36eaec1c57d1f00e05fea3ba2dfe0020f806fa53c6"
+    }
+  ],
+  "e2": {
+    "green": false,
+    "manifest_successor_created": false,
+    "red_reproduction": {
+      "closed_code": "STEP11_RC0030_E2_FORWARD_DENSITY_NOT_SYNCHRONIZED",
+      "duration_seconds": 58.15,
+      "failed": 1,
+      "underlying_code": "STEP11_RC0030_SURFACE_PLAN_DENSITY_UNSATISFIABLE"
+    },
+    "state": "PRE_IMPLEMENTATION_STOP_BEFORE_MATCHER_SUCCESSOR_AUTHORITY"
+  },
+  "e3_started": false,
+  "e4_started": false,
+  "evidence_debt": {
+    "pending_20_actual_execution_closed": false,
+    "representative8_true_support_positive_count": 0,
+    "retained_33_actual_execution_ledger_closed": false,
+    "support_positive_full_chain_closed": false,
+    "true_support_positive_current_full_chain_pass_count": 0,
+    "true_support_positive_existing_frozen_case_count": 5
+  },
+  "exact18_closed_maximum_retained": true,
+  "github_repair_predecessor": {
+    "commit": "c5c02940a80a7f1238b8983b4657289af19e5790",
+    "index10_blob_sha1": "3f76ed7bfe993670dab942ace6109b8a50a1954f",
+    "index10_path": "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py",
+    "index10_sha256": "4edc9845e231e3ba8737c2f8bdd6e2bbe05d504c0e47a8b2343cb7b717518ee9",
+    "parent_commit": "924bd458255f226db54c17d84dd4aafc5db2b1e2",
+    "parent_diff_path_count": 1
+  },
+  "immutable_p5_manifest": {
+    "artifact_sha256": "265418796ec720112ea046014b7dd3c612d392382647a64db5fe7396b4a976b7",
+    "file_sha256": "4ceb33aa6bb6f15d6ad9b7212bbdcee901edb352707f3f19a90e91ff6d91f62c",
+    "git_commit": "924bd458255f226db54c17d84dd4aafc5db2b1e2",
+    "source_dependency_closure_sha256": "7c905f06c88ed4a19f8ece102cafbb1333dcce1b3e840081952682703ec038e5",
+    "source_file_count": 222
+  },
+  "production_changes": [],
+  "repair_owner_predecessor_sha256": {
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py": "7665406076bdbae621a713df9fdf40ac6bf7cf2bfbbbc6659bcc2829908ddb5a",
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py": "8f8ea6f197bac02edc8ee3594165625e1e8f06e5a6a7bb44e41445d880ae9c37"
+  },
+  "repository_path_count": 0,
+  "requested_successor_authority": {
+    "density_repair_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0030_e2_integration.py"
+    ],
+    "new_repository_paths_allowed": false,
+    "path_count": 3,
+    "resource_expansion_allowed": false
+  },
+  "schema_version": "cocolon.emlis.nls_v3.rc0030_e2_preimplementation_stop_receipt.v1",
+  "secure_material_required": false,
+  "step": "Step 11"
+}

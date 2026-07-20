@@ -1,0 +1,36 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.rc0029.surface_repair_red.body_free.v1",
+  "body_free": true,
+  "stage": "Step11_Cycle001_rc0029_R1_four_family_RED",
+  "run_date_jst": "2026-07-19",
+  "github_predecessor_commit": "e069ffd782e4d2b960b2c1e770d9018ab78a8b1d",
+  "immutable_predecessor": "rc0028_E3_Product_Read_STOP",
+  "red_test_path": "ai/tests/test_emlis_nls_v3_s11_rc0029_surface_repair_red.py",
+  "red_test_sha256": "560ceced908ddf77090440258a2222013c843773d288b3fc66e07d7a7c7848bd",
+  "red_test_line_count": 330,
+  "red_test_byte_count": 12132,
+  "family_count": 4,
+  "attack_denominator": 13,
+  "pytest": {
+    "passed": 1,
+    "intentionally_failed": 5,
+    "collection_errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "warning_count": 1,
+    "elapsed_seconds": 156.79
+  },
+  "closed_red_codes": [
+    "STEP11_RC0029_SCHEMA_EXPOSITION",
+    "STEP11_RC0029_SCHEMA_RECORD_PER_LINE",
+    "STEP11_RC0029_OPAQUE_ORDINAL_REFERENT",
+    "STEP11_RC0029_DEPTH_COMPACTION_FAILURE",
+    "STEP11_RC0029_RECEPTION_BINDING_FAILURE"
+  ],
+  "production_source_edited_before_red": false,
+  "fixture_baseline_severity_changed": false,
+  "denominator_changed_after_red": false,
+  "private_body_included": false,
+  "decision": "R1_RED_FROZEN_R2_AUTHORIZED",
+  "cycle_001_accepted": false
+}
