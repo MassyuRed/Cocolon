@@ -1,0 +1,205 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p2_p3_verified_base_reuse_composition_red_receipt.v1",
+  "created_at_jst": "2026-07-21",
+  "body_free": true,
+  "status": "DESIGN_FROZEN_RED_EXACT10_STOP_BEFORE_PRODUCTION_IMPLEMENTATION",
+  "authority": {
+    "immutable_p2_freeze_commit": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "verified_github_head": "9d4e4496144fec24569c913d9ad710aeb653390c",
+    "github_commits_ahead_of_p2_freeze": 1,
+    "github_added_paths_since_p2_freeze": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "revised_cycle_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "repository_scope": {
+    "modified_files": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "new_files": [],
+    "production_source_change_count": 0,
+    "fixture_change_count": 0,
+    "p1_test_change_count": 0,
+    "p2_test_change_count": 0,
+    "catalog_change_count": 0,
+    "gate_change_count": 0,
+    "runtime_or_manifest_change_count": 0
+  },
+  "artifacts": {
+    "received_p3_test_sha256": "a69856605fcbfd633255ff56649985d808dec1442672c9bd9fa1298f8633a680",
+    "revised_p3_test_sha256": "5ef1c4bc38f8b0f4c641da33c3d2e20a5a42d76d656bf4a1961a7530055d1654",
+    "revised_p3_test_byte_count": 33893,
+    "revised_p3_test_line_count": 966,
+    "design_addendum_sha256": "4b70e750fd7e5f872f94f6c6685bd021a3561a5966237c2520525c23b60dca08",
+    "design_addendum_byte_count": 18869
+  },
+  "production_freeze": {
+    "natural_surface": {
+      "byte_count": 482504,
+      "sha256": "e19eae9a62068ec3095785fc20aafda6c277df96470a7b1e48ca51ca3142d7d4",
+      "future_private_validator_slot": {
+        "prefix_byte_count": 404481,
+        "prefix_sha256": "50cd281d79619f785d8065f411eaa020cb3ed8c335025983e5068ea29672e7ed",
+        "current_slot_byte_count": 2192,
+        "current_slot_sha256": "217eb68048f9a420214088e81f708e9747b6cf327781d6e24885bb9abc966c32",
+        "slot_byte_max": 8192,
+        "suffix_byte_count": 75831,
+        "suffix_sha256": "f2f8e3f0201efddf6c197618a8a5f31e8dd823d352ca6241bd331a88e1962985"
+      }
+    },
+    "matcher_frozen_full_file": {
+      "byte_count": 722658,
+      "sha256": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30"
+    },
+    "service_python_path_inventory": {
+      "path_count": 546,
+      "sorted_path_list_sha256": "46db0d14852dde6ebb6012596234cbb935243b27ed227465d9e94876ce4f5d56"
+    },
+    "repository_python_frozen_material": {
+      "excluded_paths": [
+        "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+        "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+      ],
+      "frozen_file_count": 1533,
+      "path_size_content_sha256_aggregate": "ff684888cb4ca3b92494ba5128fdd3ca16ea9bc08a9d263ee2ea0c9f35c47573"
+    },
+    "lexical_sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28",
+    "gate_sha256": "88514bb2a179e8d726f36e1666d2618330d95979107403ededc93aa35655943b",
+    "catalog_sha256": "a4e8bc9753a1398571d511d5d0c1219a886c498661b3a4f702d3b20b5672c6cc",
+    "fixture_sha256": "15e8047cd95b453fba4a7a677b428955ea2819e6738e4e1fc1488d24952b78a8",
+    "p1_test_sha256": "14e90025a18f1fcab8b2d4d8571e7d2be31b271ec2d4ca8e3a22fa56f14f193c",
+    "p2_test_sha256": "2d71f9241abb7f38ad9de41633c89b7c257b461df2b3e7df92e2d74df4b684a2"
+  },
+  "representative8_denominator": {
+    "case_count": 8,
+    "predecessor_base_candidate_count": 13,
+    "emitted_p2_candidate_count": 10,
+    "current_semantic_atom_count": 39,
+    "semantic_family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 3
+    },
+    "independently_verified_base_reuse_count": 1,
+    "duplicate_reexposition_intersection_count": 1,
+    "reuse_case": "nls3s_b001_0001",
+    "reuse_source_atom_id": "semantic_unknown:u2fddc7083cf9a9f771ab8c08",
+    "reuse_semantic_family": "explicit_unknown",
+    "reuse_match_basis": "unknown_id_dimension_exact_target",
+    "other_emitted_candidate_reuse_count": 0,
+    "post_composition_added_semantic_atom_count": 38,
+    "post_composition_exact_reuse_count": 1
+  },
+  "case_contracts": {
+    "0001_current": {
+      "semantic_atom_count": 1,
+      "required_reception_count": 1,
+      "exact_reuse_count": 0,
+      "resource_peak": [2, 1, 1, 0]
+    },
+    "0001_required_after_composition": {
+      "semantic_atom_count": 0,
+      "required_reception_count": 1,
+      "exact_reuse_count": 1,
+      "resource_peak": [1, 1, 1, 0]
+    },
+    "0063_unchanged": {
+      "semantic_atom_count": 10,
+      "required_reception_count": 1,
+      "exact_reuse_count": 0,
+      "resource_peak": [4, 2, 4, 1]
+    },
+    "surface_resource_maximum": [4, 2, 4, 2]
+  },
+  "preplanning_proof_resource": {
+    "measured_predecessor_base_candidate_count": 13,
+    "measured_emitted_candidate_count": 10,
+    "measured_parser_invocation_count": 13,
+    "measured_matcher_invocation_count": 13,
+    "measured_body_scan_count": 26,
+    "measured_base_body_byte_count": 6249,
+    "measured_byte_inspection_count": 12498,
+    "candidate_maximum": 12,
+    "preplanning_parser_invocation_maximum": 12,
+    "preplanning_matcher_invocation_maximum": 12,
+    "preplanning_byte_inspection_maximum": 24000000,
+    "two_pass_parser_invocation_maximum": 24,
+    "two_pass_matcher_invocation_maximum": 24,
+    "two_pass_byte_inspection_maximum": 48000000
+  },
+  "composition_red_exact10": {
+    "collected_count": 10,
+    "pass_count": 5,
+    "intentional_red_count": 5,
+    "skip_count": 0,
+    "xfail_count": 0,
+    "collection_error_count": 0,
+    "current_blocker_code": "STEP11_RC0031_P3_EXACT_REUSE_NOT_AVAILABLE",
+    "intentional_red_codes": [
+      "STEP11_RC0031_P3_VERIFIED_REUSE_PREPLAN_CONSUMPTION_MISSING",
+      "STEP11_RC0031_P3_VERIFIED_REUSE_XOR_INVALID",
+      "STEP11_RC0031_P3_DUPLICATE_BASE_REEXPOSITION_NOT_RESOLVED",
+      "STEP11_RC0031_P3_VERIFIED_REUSE_CANONICAL_MISMATCH",
+      "STEP11_RC0031_P3_VERIFIED_REUSE_ATTACK_NOT_CLOSED"
+    ],
+    "red_mechanism": "FRESH_EXISTING_BASE_PARSER_AND_MATCHER_PROOF_REACHES_EXISTING_PRIVATE_COMPOSITION_BUILDER_AND_IS_REJECTED_BY_THE_SINGLE_CLOSED_VALIDATOR",
+    "missing_symbol_red": false,
+    "unconditional_fail_red": false,
+    "mock_only_green": false
+  },
+  "retained_regression": {
+    "rc0031_p1": {
+      "collected_count": 7,
+      "pass_count": 1,
+      "intentional_red_count": 6,
+      "new_regression_count": 0
+    },
+    "rc0031_p2": {
+      "collected_count": 24,
+      "pass_count": 23,
+      "historical_stage_lock_red_count": 1,
+      "historical_stage_lock_code": "STEP11_RC0031_P2_PATH_SCOPE_INVALID",
+      "new_regression_count": 0
+    },
+    "rc0030_p3_and_predecessor_behavior": {
+      "collected_count": 58,
+      "pass_count": 57,
+      "historical_stage_lock_red_count": 1,
+      "historical_stage_lock_code": "STEP11_RC0030_P3_P2_PREDECESSOR_DRIFT",
+      "new_regression_count": 0
+    },
+    "rc0030_predecessor_behavior": {
+      "collected_count": 4,
+      "pass_count": 4
+    }
+  },
+  "security_boundary": {
+    "public_nonempty_reuse_remains_rejected": true,
+    "private_composition_exported": false,
+    "caller_digest_is_proof_authority": false,
+    "projected_fields_authenticate_matcher_origin": false,
+    "test_local_trusted_orchestrator_required": true,
+    "dynamic_import_eval_exec_allowed_in_patch_slot": false,
+    "patch_slot_call_allowlist_enforced": true,
+    "patch_slot_dunder_name_or_attribute_allowed": false,
+    "output_file_process_network_sink_allowed_in_patch_slot": false,
+    "valid_and_attack_composition_stdout_stderr_empty_required": true,
+    "same_call_parser_matcher_origin_required": true,
+    "final_matcher_independent_rederivation_required": true,
+    "p3_public_activation_owner_exists": false,
+    "p4_disconnected_adapter_required_for_production_reachability": true
+  },
+  "stop": {
+    "production_implementation_started": false,
+    "p3_final_parser_or_matcher_started": false,
+    "p4_started": false,
+    "runtime_or_manifest_started": false,
+    "e2_or_later_started": false,
+    "next_required_actions": [
+      "REFLECT_REPOSITORY_MODIFIED_EXACT1_TO_MASHOS_API",
+      "PROVIDE_COMMIT_SHA",
+      "EXPLICITLY_APPROVE_EXACT10_RED_FREEZE_AND_SEPARATE_PRODUCTION_IMPLEMENTATION_SCOPE"
+    ]
+  }
+}
