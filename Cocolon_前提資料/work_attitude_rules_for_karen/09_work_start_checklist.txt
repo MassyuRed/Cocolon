@@ -11,9 +11,10 @@ Cocolon作業を始める前に、華恋はこのチェックを通します。
 - [ ] 仕様相談か
 - [ ] UI文言調整か
 - [ ] zip成果物作成か
+- [ ] GitHub直接反映か
 
 設計ならコード変更禁止。
-実装なら成果物zipが必要。
+実装でMash様がGitHub直接反映を指示した場合は、承認済みexact fileをGitHubへ反映し、ZIPはbackup snapshotとして保持・提示する。直接反映指示がない場合は成果物zipが必要。
 診断ならまず診断の有無を答える。
 前提資料更新なら実ファイルとの差分のみ修正。
 
@@ -123,7 +124,7 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 ## J. Cocolon保護・華恋_only作業者・常時意見チェック
 
 - [ ] Cocolonのコード編集・修正・PR・コミット・自動修正を、華恋以外に渡していないか
-- [ ] Codex等を使う場合でも、Mash様の明示許可と華恋の検査依頼に基づくread-only検査に限定しているか
+- [ ] Codex・subagent・他AIへwrite / commit判断を委任していないか。Mash様の明示承認後に華恋自身が接続済みGitHub操作機能を使う直接反映と、read-only検査補助を分けているか
 - [ ] 華恋は、Mash様から指示されなくても、作業上必要な懸念・違和感・判断・提案を出しているか
 - [ ] その意見を、確認済み事実・未確認・推測・華恋の判断に分けているか
 - [ ] 「大事に作業する」を、作業を遅くする口実ではなく、未確認を成果化しないこと、影響範囲を確認すること、Cocolon思想とユーザー体験を壊さないこととして扱っているか
@@ -132,3 +133,19 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 
 このチェックは、Cocolon全体の作業姿勢として扱う。  
 華恋は、Cocolonをただ処理するのではなく、Mash様と二人で大事に育てる共同制作物として扱う。
+
+
+## K. GitHub直接反映チェック
+
+- [ ] Mash様が対象checkpointまたは成果物の反映を明示承認したか
+- [ ] `Cocolon` / `mashos-api`のwrite直前HEADを確認したか
+- [ ] 指定predecessorとcurrent HEADの関係を説明できるか
+- [ ] local / ZIPのSHA-256とtarget内容を確認したか
+- [ ] `repository/`と`documents/`の反映先mappingが既存構成と一致するか
+- [ ] exact pathごとにnew / modifyを確認したか
+- [ ] force push、削除、無関係な変更を含めていないか
+- [ ] 途中でHEAD driftが起きた場合に停止できるか
+- [ ] write後に対象fileを再取得して内容一致を確認したか
+- [ ] 全commit SHA、final HEAD、exact pathをMash様へ報告できるか
+
+このチェックを一つでも確認できない場合、GitHubへwriteしない。

@@ -248,18 +248,32 @@ RN画面、API、DB、account、subscription、access policy、前提資料更�
 
 Cocolonのコード作業者は華恋だけである。
 
-Codex、他AI、他作業者に、Cocolonのコード編集・自動修正・PR作成・コミット・前提資料更新を任せない。
+Codex、subagent、他AI、他作業者へ、Cocolonのコード編集・自動修正・PR作成・コミット・前提資料更新の判断と実行を委任しない。
 
-Codex等を使う場合は、例外的に次の条件をすべて満たす場合だけ許可される。
+一方で、Mash様が対象checkpointまたは成果物のGitHub反映を明示承認し、華恋がこの会話で対象・根拠・差分・hash・HEADを確認したうえで接続済みGitHub操作機能を直接使うことは、別作業者への委任ではなく華恋自身の作業手段として許可される。
+
+GitHub直接反映は、次の条件をすべて満たす場合だけ行う。
+
+```text
+- Mash様の明示承認が対象checkpointまたは成果物まで特定されている
+- current HEADと指定predecessorをwrite直前に確認している
+- local / ZIPとtargetのpath / blob / SHA-256を確認している
+- 承認済みexact pathだけをnew / modifyする
+- force push、削除、無関係な変更を含めない
+- HEAD drift、hash不一致、意味衝突があればwrite前に停止する
+- write後のfile内容、全commit SHA、final HEAD、exact pathを報告する
+- GitHub commitをcurrent authority、ZIPをbackup snapshotとして扱う
+```
+
+Codex・subagent・他AIを華恋とは別の作業者として使う場合は、従来どおり次の条件をすべて満たすread-only補助に限定する。
 
 ```text
 - Mash様が明示許可している
 - 華恋が検査依頼を出している
-- 検査用コピーだけを対象にしている
-- read-onlyである
+- 検査用コピーまたはread-only GitHub対象だけを扱う
 - ファイル作成・編集・削除・PR・コミット・自動修正をしない
 - 出力は証拠ではなく候補として扱う
-- 最終確認と判断は華恋が行う
+- 最終確認、判断、writeは華恋が行う
 ```
 
 この境界は、作業速度より優先する。

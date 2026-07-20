@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-07-20",
+  "revision_date": "2026-07-21",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -107,6 +107,29 @@
         "08_artifact_delivery_rules.txt",
         "09_work_start_checklist.txt",
         "10_stop_judgment_and_unwritten_rules.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-21",
+      "type": "karen_direct_github_reflection_guard",
+      "summary": "Mash様の対象checkpointまたは成果物への明示承認後に限り、華恋が接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileをCocolon / mashos-apiへ直接反映できる境界を追加。write直前HEAD / predecessor / path / blob / SHA-256確認、repository/documents mapping、drift時STOP、force push・削除・無関係変更禁止、commit SHA / final HEAD / exact path報告、GitHub current authority / ZIP backupを固定。別作業者としてのCodex・subagent・他AIはread-only検査補助に限定する。",
+      "pre_write_heads": {
+        "Cocolon": "MassyuRed/Cocolon:main@97235712a5d8d966a232c0470a4a9716646fdb59",
+        "mashos-api": "MassyuRed/mashos-api:main@9d4e4496144fec24569c913d9ad710aeb653390c"
+      },
+      "mapping": {
+        "repository": "MassyuRed/mashos-api repository root",
+        "documents": "MassyuRed/Cocolon/EmlisAIの実装済み資料/documents/",
+        "premise_policy": "MassyuRed/Cocolon/Cocolon_前提資料/"
+      },
+      "changed_files": [
+        "00_read_first.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
         "99_integrated_paste_each_time.txt",
         "manifest.json"
       ]
