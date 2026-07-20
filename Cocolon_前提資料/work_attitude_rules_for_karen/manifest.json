@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-06-16",
+  "revision_date": "2026-07-20",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -89,6 +89,24 @@
         "09_work_start_checklist.txt",
         "14_cocolon_joint_development_and_karen_thought_boundary.txt",
         "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-20",
+      "type": "github_pinned_source_and_local_materialization_identity_guard",
+      "summary": "current implementation確認元を原則GitHub上のCocolon / mashos-apiとし、開始時にpredecessor commitを固定する。固定commitからmaterializeしたlocal checkout / ZIP / copyはpath / blob / hash一致時に同じ実ファイルであり、local/cloud差を仕様分岐にしない。不一致、未push overlay、作業中head変化は黙って吸収せずSTOPする。過去local ZIP記録とprivate local-only evidence boundaryは保持する。",
+      "current_source": {
+        "Cocolon": "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748",
+        "mashos-api": "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+      },
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
         "99_integrated_paste_each_time.txt",
         "manifest.json"
       ]

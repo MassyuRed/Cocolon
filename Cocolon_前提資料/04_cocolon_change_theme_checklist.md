@@ -1,11 +1,14 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-06-05"
+revision_date: "2026-07-20"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "local_snapshot"
+source_mode: "github_pinned_commits_with_local_materialization"
+current_source:
+  Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
+  mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
 purpose: "変更テーマから、華恋が読むべき構造資料を逆引きする"
 ---
 
@@ -668,3 +671,27 @@ Gate Recovery material surface を仮表示文・fallback文・Emlis観測本文
 RN側へsurface_origin / blocker / diagnostic_recovery_surface分岐を持ち込む。
 validation planを理由にpublic response shape、DB physical schema、release flag、Gate条件を変更する。
 ```
+
+# 2026-07-20 差分追記: NLS v3 Step 11 Cycle 001を触る時
+
+読む順:
+
+1. `NLSv3_Step11_Cycle001_rc0031_Session_Handoff_20260720.md`
+2. NLS v3 Revised Cycle設計の§18、§20.3、§21.1 / Step 11、§22
+3. current RCの設計20.3影響範囲補遺とbody-free receipt
+4. immediate predecessorのmachine / Product Read receipt
+5. `00_karen_read_first.md` / `01` / `02` / `02C` / `05` / `07`
+6. GitHub上の`Cocolon` / `mashos-api` head、predecessor、exact path
+
+開始前check:
+
+- [ ] 両repoのheadを取得したか
+- [ ] floating mainではなくpredecessor commitを固定したか
+- [ ] local materializationが同じpath / blob / hashか
+- [ ] 現在地をStep 11 / Cycle 001と確認したか
+- [ ] 前RCのmachine結果とProduct Read結果を分離したか
+- [ ] current addendumがscope定義かimplementation authorityかを分けたか
+- [ ] E4 / formal / Cycle 002のauthorityがあるか
+- [ ] public / DB / RN / Safety / question ownerの非変更を確認したか
+
+current rc0031では§14明示承認前に実装しません。承認後も最初はP1 exact 7 RED + new24だけで、production sourceを編集しません。

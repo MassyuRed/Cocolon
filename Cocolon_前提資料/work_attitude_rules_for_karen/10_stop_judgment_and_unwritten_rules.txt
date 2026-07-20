@@ -9,8 +9,10 @@ Mash様が明示的に許可した場合だけ、仮説案として分けて提�
 ## 止まるべき条件
 
 - 対象ファイルが確認できない。
-- 最新zipと前提資料の基準が不明。
-- GitHub main基準かローカルzip基準か不明。
+- GitHub上のcurrent headまたは設計・handoff指定predecessor commitを確認できない。
+- 固定GitHub commitとlocal checkout / ZIP / copyのpath / blob / hashが一致しない。
+- user-supplied未push overlayとGitHub predecessorの境界が不明。
+- 作業中にGitHub mainが進み、固定predecessorを維持するかrebaseするかのauthorityがない。
 - 指示が設計なのか実装なのか不明。
 - 既存contractに影響するが、該当資料を見ていない。
 - DB write path / physical name / legacy routeに触れそうだが、明示指示がない。

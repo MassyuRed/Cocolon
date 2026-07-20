@@ -1,11 +1,14 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-07-09"
+revision_date: "2026-07-20"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "local_snapshot"
+source_mode: "github_pinned_commits_with_local_materialization"
+current_source:
+  Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
+  mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
 purpose: "見落とすと構造誤読や contract 破壊を起こしやすい rule / policy / guard / test を索引化する"
 ---
 
@@ -2677,3 +2680,422 @@ DHC-OP04 controlled builder pathをruntime execution済みとして読まない�
 scan clear stoppedをDHR-OP06 call permissionとして読まない。
 R10/R11 result memo closureをP8 start / P7 complete / release allowedへ変換しない。
 ```
+
+# 2026-07-10 差分追記: R54-AHR Post-DHC DHD必読セット
+
+Post-DHC Direction Decision Boundaryを読むときは、次を必読扱いにします。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_dhc_direction_decision_boundary_20260709.py` | DHD R0〜R1 / OP00〜OP08のbody-free direction decision helper。DHC result合成、DHR-OP06 call、P7 actual evaluation、P8、releaseを実行したとは読まない。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_dhc_direction_decision_boundary_dhd_r0_r1_20260709.py` ... `test_r54_ahr_post_dhc_direction_decision_boundary_dhd_op08_result_20260709.py` | DHD段階別contract tests。six direction outcome、decision/candidate pair、no-touch、stopped closureを固定する。greenはruntime permissionではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostDHC_DirectionDecisionBoundary_DHD_R7_TargetValidation_Result_20260709.md` ... `R54_AHR_PostDHC_DirectionDecisionBoundary_DHD_R11_NextWorkDecision_20260709.md` | 294 target / 865 selected / optional readfeel 15 / five-file compileall / R10 closure / R11 next-work decisionを記録する。current execution allowanceはnone。 |
+| premise diff CSV | `r54dhd_diff_20260710.csv` | 前提資料側の短名coverage一覧。12 entries added / 0 changed / 0 removedを記録する。 |
+
+DHDを読むときの禁止:
+
+```text
+DHD helper greenをcurrent production direction確定や実行許可へ変換しない。
+DHC R11 memoやDHC greenをcurrent selected DHC-OP08 materialへ変換しない。
+DHR-OP06 considerationをDHR-OP06 builder callへ変換しない。
+P7 readfeel reconnection design firstをactual evaluation / P7 completeへ変換しない。
+OP08 closureをselected direction実行済みとして読まない。
+optional readfeel regression greenをproduct readinessへ変換しない。
+R10/R11 closureをP8 start / question_text / release allowedへ変換しない。
+```
+
+# 2026-07-11 差分追記: P7-PQR / Grounded Adaptive Observation 必読セット
+
+## P7-PQR actual local reviewを読むとき
+
+| 種別 | path | 必読理由 |
+|---|---|---|
+| preflight | `mashos-api/ai/tests/P7_PQR_I0_I3Q_Preflight_Result_20260710.md` | I0〜I3-Qのcurrent basis、blocked条件、actual rows 0を固定する。 |
+| blank sidecar | `mashos-api/ai/tests/P7_PQR_I3Q_Sidecar_Form_20260710.md` | 24-slot formをactual evidenceへ昇格させない。 |
+| controller | `mashos-api/ai/tools/emlis_p7_p5_actual_local_review.py` | local root / exact allow / human attestation / Pass A-B-C / purgeのfail-closed owner。 |
+| controller test | `mashos-api/ai/tests/test_emlis_p7_p5_actual_local_review_20260710.py` | controller contract。今回12 passed。 |
+| operation result | `P7_PQR_P5_Actual24_LocalReview_Operation_Result_20260710.md`, `P7_PQR_P5_Actual24_LocalReview_ExecutionAttempt2_Result_20260710.md` | `P5_EXECUTION_BLOCKED_STOPPED`、human rows 0、P5/P6/P8/release falseを固定する。 |
+| diff | `p7pqr_diff_20260711.csv` | 7 addedのfile-level正本。 |
+
+## Grounded Adaptive Observationを読むとき
+
+| 種別 | path | 必読理由 |
+|---|---|---|
+| I0 | `tests/helpers/emlis_ai_grounded_observation_i0_inventory.py`, `tests/test_emlis_ai_grounded_observation_i0_inventory.py` | frozen inventory / reachability。current localでは4 passed / 3 failedなのでgreen扱い禁止。 |
+| I1-I2 | `services/ai_inference/emlis_ai_grounded_observation_plan.py`, `tests/test_emlis_ai_grounded_observation_plan_i1.py` | canonical plan、real evidence ids、nuclei / relations / coverage / Safety policy。 |
+| I3-I4 | `services/ai_inference/emlis_ai_grounded_sentence_surface.py`, `tests/test_emlis_ai_grounded_observation_i2_i4.py` | functional surface、low-info / limited / self-denial overlay、plan-preserving recovery。 |
+| I5 | `services/ai_inference/emlis_ai_grounded_observation_gate.py`, `services/ai_inference/emlis_ai_reply_service.py`, `tests/test_emlis_ai_grounded_observation_i5.py` | canonical public reply cutoverとsemantic Gate。external API/DB/RN contractは維持。 |
+| I6 | `tests/helpers/emlis_ai_grounded_observation_i6_cases.py`, `tests/test_emlis_ai_grounded_observation_i6.py` | known4 + unseen12、metamorphic / Safety / anti-template / reachability QA。 |
+| I7 | `tests/helpers/emlis_ai_grounded_observation_i7_readfeel.py`, `tests/test_emlis_ai_grounded_observation_i7.py` | local readfeelと8 canonical device evidence gate。旧A〜D logsはruntime mismatch。 |
+| diff | `gao_diff_20260711.csv` | 12 added / 16 changedのfile-level正本。 |
+
+同時に必ず読む既存前提:
+
+```text
+emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md
+cocolon_thought_material_for_karen.md
+emlis_ai_state_answer_human_follow_definition_2026_05_26.md
+02C_cocolon_contract_boundary_validation.md
+07_latest_snapshot_diff.md
+```
+
+禁止する読み:
+
+```text
+focused test greenをfull backend greenへ昇格しない。
+I0 / legacy regressionの7 failuresを無視しない。
+functional surfaceをfixed sentence templateと同一視しない。
+旧A〜D exact fixtureやdevice logsをruntime条件にしない。
+I5 internal reply cutoverをpublic API / DB / RN contract変更と混同しない。
+P7-PQRのcontrollerやblank formをhuman Product QA実績にしない。
+```
+
+# 2026-07-11 差分追記: P7 Gate 0 current-input 意味保持・読感修復 必読セット
+
+指定設計を実装済みとして読む場合でも、設計書だけで完了判断せず、次のactual filesを順に確認します。
+
+| 種別 | path | 必読理由 |
+|---|---|---|
+| 指定設計 | `Cocolon_EmlisAI_P7_Gate0_CurrentInput_SemanticRetention_ReadfeelRepair_DetailedDesign_ImplementationOrder_20260711.md` | R0〜R10の目的、停止条件、8項目、Gate 0完了条件。actual implementation/resultが優先。 |
+| R0/R1 result | `mashos-api/ai/tests/Gate0_R0_R1_Result_20260711.md` | baseline・owner・failure classification・intentional RED。 |
+| R2/R3 result | `mashos-api/ai/tests/Gate0_R2_R3_Result_20260711.md` | required retention・relation endpoint/direction/reversal修復。 |
+| R6/R7 result | `mashos-api/ai/tests/Gate0_R6_R7_Result_20260711.md` | inventory/historical alignment、affected matrix、full-suite非主張。 |
+| R8/R9/R10 result | `mashos-api/ai/tests/Gate0_R8_R9_R10_Result_20260711.md` | 7 pass / 9 repair、`GATE0_REPAIR_RETURN_STOPPED`、packet未生成。 |
+| Plan owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | semantic version i2.v1、major arc retention、relation semantics。 |
+| Surface owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | lexical fidelity、relation surface、human follow role。 |
+| Gate owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | semantic subcheckとrepetition guard。human readの代替ではない。 |
+| I0 | `tests/helpers/emlis_ai_grounded_observation_i0_inventory.py`, `tests/test_emlis_ai_grounded_observation_i0_inventory.py` | final fingerprint、canonical reachability、legacy zero-reachability、Safety owner。 |
+| R1/R5 tests | `tests/test_emlis_ai_gate0_r1_semantic_retention.py`, `tests/test_emlis_ai_gate0_r5_semantic_subchecks.py` | exact bodyではなくnucleus/relation/lexical/follow/Gate構造を固定。 |
+| I7 actual read boundary | `tests/helpers/emlis_ai_grounded_observation_i7_readfeel.py`, `tests/test_emlis_ai_grounded_observation_i7.py` | automated candidateとactual human readを分離。 |
+| R8 receipt / R9 decision | `tests/fixtures/emlis_gate0_r8_karen_local_review_receipt_20260711.json`, `tests/fixtures/emlis_gate0_r9_decision_20260711.json` | body-free actual verdictと二値decisionの正本。 |
+| exact8 boundary | `tests/helpers/emlis_ai_gate0_r9_r10_boundary.py`, `tests/test_emlis_ai_gate0_r8_r10_boundary.py` | 16/16 local passなしでpacketを作らない。 |
+| local-only body-full | `tests/local_only/emlis_gate0_r0_baseline_20260711.json`, `tests/local_only/emlis_gate0_r8_local_comparison_20260711.json` | before/after actual read材料。public meta・実機証拠ではない。 |
+| historical display | `tests/test_emlis_ai_phase20_10_real_device_recheck.py` | historical local display contract。actual device evidence=false。 |
+| premise diff | `gate0_diff_20260711.csv` | 16 added / 10 changed / 0 removed、更新前後SHA-256。 |
+
+必読順:
+
+```text
+設計の停止条件
+-> R0/R1 baseline / RED
+-> current Plan / Surface / Gate source
+-> R2/R3・R6/R7 result
+-> R8 body-free receipt
+-> R9 decision
+-> R10 fail-closed boundary
+-> premise diff CSV
+```
+
+禁止する読み:
+
+```text
+R1/R5 structural greenをhuman read passへ変換しない。
+automated 16/16をGate 0 passへ変換しない。
+7 local_human_pass / 9 repair_requiredを部分合格へ緩和しない。
+body-full local-only artifactをpublic meta / actual device evidenceへ昇格しない。
+historical Phase20-10 testをactual device provenanceとして扱わない。
+exact8 helper実装をexact8 packet生成済みとして扱わない。
+GATE0_REPAIR_RETURN_STOPPEDのままP5 / P6 / P8 / releaseへ進めない。
+```
+
+# 2026-07-11 差分追記: P7 Gate 0 読感修復・Gate判定契約閉包 必読セット
+
+指定設計の実装後を読むときは、旧R0〜R10資料だけで完了判断せず、次を順に確認します。
+
+| 種別 | path | 必読理由 |
+|---|---|---|
+| 指定設計 | `Cocolon_EmlisAI_P7_Gate0_ReadfeelRepair_GateContractClosure_DetailedDesign_ImplementationOrder_20260711.md` | RR0〜RR10のcontract、validation順、stop条件。actual source/result/evidenceを優先。 |
+| RR0-RR2 result | `mashos-api/ai/tests/Gate0_RR0_RR2_Result_20260711.md` | freeze、structural RED、Plan role/target修復。 |
+| RR3-RR6 result | `mashos-api/ai/tests/Gate0_RR3_RR6_Result_20260711.md` | delivery/relation/clause surfaceとdecision v2。 |
+| RR7-RR10 result | `mashos-api/ai/tests/Gate0_RR7_RR10_Result_20260711.md` | obsolete import移管、RR8 validation failure、RR9/RR10未開始。 |
+| RR0 freeze | `tests/fixtures/gate0_rr0_freeze_20260711.json`, `tests/helpers/generate_emlis_ai_gate0_rr0_freeze.py` | pre-repair source/case/reason/body-free freeze。 |
+| Plan owner | `services/ai_inference/emlis_ai_grounded_observation_plan.py` | shared role classifier、role-first target、semantic i2.v2。 |
+| Surface owner | `services/ai_inference/emlis_ai_grounded_sentence_surface.py` | delivery、relation surface role、complete-clause safety、clause unit。 |
+| structural tests | `tests/test_emlis_ai_gate0_rr1_structural_red.py`, `tests/test_emlis_ai_gate0_rr3_rr5_surface_contract.py` | exact本文ではなく一般構造を固定。 |
+| decision v2 | `tests/helpers/emlis_ai_gate0_r9_r10_boundary.py`, `tests/test_emlis_ai_gate0_rr6_decision_contract_v2.py`, `tests/test_emlis_ai_gate0_r8_r10_boundary.py` | validation evidenceとexact8 fail-closed。 |
+| artifact generator | `tests/helpers/generate_emlis_ai_gate0_r8_r9_artifacts.py` | hard-coded greenなし。fingerprint一致必須。 |
+| RR8 evidence | `tests/fixtures/gate0_rr8_validation_20260711.json` | V1-V5、172 failure refs、current stopのbody-free正本。 |
+| migrated old tests | `tests/test_emlis_ai_bounded_repair_reroute_step7.py`, `tests/test_emlis_ai_complete_initial_surface_recomposition_existing_gate_chain_p8.py` | private helperを復活させずcanonical ownerへ移管。 |
+| premise diff | `g0rr_diff_20260711.csv` | 11 added / 8 changed / 0 removed、before/after size・SHA-256。短名。 |
+
+必読順:
+
+```text
+指定設計のstop条件
+-> RR0 freeze / RR1 structural tests
+-> current Plan / Surface source
+-> RR3-RR6 decision contract v2
+-> RR7 migrated tests / I0 inventory
+-> RR8 validation fixture
+-> current stop
+-> premise diff CSV
+```
+
+禁止する読み:
+
+```text
+structural greenをhuman product passへ変換しない。
+V1-V4 greenだけでfull validation passにしない。
+full backend 172 failuresを既知原因として推測しない。
+旧7/9/0 receiptをpost-RR7 fingerprintのreviewとして流用しない。
+RR7-RR10 resultというファイル名だけでRR9/RR10実施済みにしない。
+productionへ削除済みprivate helper・旧substantive routeを戻さない。
+exact8、P5、P6、P8、releaseを開始済みにしない。
+```
+
+# 2026-07-12 差分追記: P7 Gate 0 FB172 failure closure 必読セット
+
+| 種別 | path | 拘束すること |
+|---|---|---|
+| 指定設計 | `Cocolon_EmlisAI_P7_Gate0_FB172_FailureClosure_Design_20260711.md` | B0〜B7の設計名。今回の受領ZIP内に実体はないためactual result/test/ledgerを実装確認の正本にする |
+| B0〜B2 result | `mashos-api/ai/tests/Gate0_FB172_B0_B2_Result_20260712.md` | baseline/ref freeze、environment isolation、B1/B2 migration、50 pending時点の停止 |
+| B3〜B5 result | `mashos-api/ai/tests/Gate0_FB172_B3_B5_Result_20260712.md` | exact body撤回、P5/P6 hold、public/Safety/low-information、13 pending時点の停止 |
+| owner ledger | `mashos-api/ai/tests/fixtures/fb172_owner_ledger_20260712.json` | official 172 refs、B0〜B7分類、current owner、protected obligation、変更許可、closure state |
+| environment evidence | `mashos-api/ai/tests/fixtures/fb172_environment_20260712.json` | official RR8 baselineと段階validation記録。final collect値は再確認12714を優先 |
+| migration registry | `mashos-api/ai/tests/helpers/emlis_ai_fb172_migration.py` | historical node IDをcurrent obligationへtest-onlyで移管 |
+| pytest setup | `mashos-api/ai/tests/conftest.py` | ai_inference import pathとFB172 migration plugin接続。production ownerではない |
+| B0/B1/B2 integrity | `mashos-api/ai/tests/test_emlis_ai_fb172_b0_b2_migration.py` | frozen counts、old owner非復活、current meta/low-information/Safety obligation |
+| B3〜B7 integrity | `mashos-api/ai/tests/test_emlis_ai_fb172_b3_b5_migration.py` | final batch closure、hold、B6 single production permission、B7 negative reachability |
+| B6 current owner | `mashos-api/ai/tests/test_emlis_ai_fb172_b6_current_owner.py` | relation direction、D/H lineage、canonical reply、old material ID非依存 |
+| sentence owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | directional relation groupのfrom-before-to stable ordering |
+| Gate owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | sentence ownerと同一定数でrequired direction/reversal判定 |
+| B7 inventory | `mashos-api/ai/tests/helpers/emlis_ai_grounded_observation_i0_inventory.py` / `test_emlis_ai_grounded_observation_i0_inventory.py` | retired route/tokenのpublic entry negative reachability |
+| API registry | `mashos-api/ai/tests/contract/test_api_contract_registry.py` | session-shared app stateを避けたclean subprocess route検査 |
+| premise diff | `fb172_diff_20260712.csv` | 8 added / 6 changedのfile-level before/after SHA-256 |
+
+必ず分ける読み:
+
+```text
+B0-B7 ledger pending 0 != full backend green
+frozen 172 selected 172 passed != V5 all pass
+test-only migration != production legacy owner restoration
+P5/P6 hold test green != P5/P6 runtime start
+public E2E current path確認 != API schema change
+full collect 12714 / 0 errors != full backend pass
+```
+
+current stopは `12543 passed / 169 failed / 2 skipped` による `GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED` です。same16、Gate0 pass decision、exact8、device、P5、P6、P8、releaseへ進めません。
+
+# 2026-07-12 差分追記: P7 Gate A Post-FB172 current-input closure 必読セット
+
+| 種別 | path | 拘束すること |
+|---|---|---|
+| 指定設計 | `Cocolon_EmlisAI_P7_GateA_PostFB172_CurrentInputClosure_DetailedDesign_ImplementationOrder_20260711.md` | GA0〜GA9、同一fingerprint、full backend、same16、Karen read、exact8後stopの設計境界 |
+| GA0 / GA1 result | `mashos-api/ai/tests/GateA_GA0_GA1_Result_20260712.md` | pre-repair 169 failure freeze、official dependency、13 RED / 9 pass。GA2以降の完了証拠ではない |
+| freeze helper | `mashos-api/ai/tests/helpers/gate0_rr_gatea_ga0_freeze.py` | deterministic source / same16 / failure-set body-free freeze |
+| freeze artifact | `mashos-api/ai/tests/local_only/gatea_ga0_freeze_bodyfree_20260712.json` | baseline fingerprint、169 refs、raw input / reply / comment非収録 |
+| GA0 integrity | `mashos-api/ai/tests/test_emlis_ai_gatea_ga0_freeze.py` | archive / source / same16 / failure-set hash integrity |
+| GA1 structural | `mashos-api/ai/tests/test_emlis_ai_gatea_ga1_structural_red.py` | contribution、self-denial、stem、closure、clause、short、metamorphic、no-exact-body |
+| GA2 contract | `mashos-api/ai/tests/test_emlis_ai_gatea_ga2_contract.py` | generic Plan / Sentence / Surface / Gate repairとcase-specific branch禁止 |
+| Plan owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | follow role / selected target / contribution delivery owner |
+| Surface owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | relation role、human-follow contribution、closure modality/scope、clause/de-dup surface |
+| Gate owner | `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | misclassification、duplicate、closure mismatch、stem、short-state loop rejection |
+| GA5 ledger | `mashos-api/ai/tests/fixtures/gatea_ga5_residual_closure_20260712.json` | frozen 169をO0〜O5 current ownerへ投影しopen 0を固定 |
+| GA5 integrity | `mashos-api/ai/tests/test_emlis_ai_gatea_ga5_closure.py` | owner evidence、cwd normalization、fail-closed、body-free closure |
+| GA6 official | `mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga6_official_20260712.json` | same16 deterministic / semantic Gate / public path 各16/16、本文非収録 |
+| GA7 Karen receipt | `mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga7_karen_review_20260712.json` | local human 16 pass / 0 repair / 0 fatal。device evidenceではない |
+| GA8 validation | `mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_validation_20260712.json` | targeted 303、Safety/public 69、RN carried-forward 36、collect 12834、backend 12832 green |
+| GA8 decision | `mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_decision_20260712.json` | Gate0 local pass、exact8許可、device未開始、P5/P6/P8 false |
+| exact8 packet | `mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_exact8_20260712.json` | local-only exact8。ready待機。本文を前提資料/public metaへ転記しない |
+| final link | `mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_final_link_20260712.json` | freeze / ledger / same16 / review / validation / decision / exact8 hash接続、open 0 |
+| inventory helper | `mashos-api/ai/tests/helpers/emlis_ai_grounded_observation_i0_inventory.py` | current source / known fixture / prohibited route inventoryを最新bytesへ整合 |
+| FB172 migration | `mashos-api/ai/tests/helpers/emlis_ai_fb172_migration.py` | historical test-only migrationのcurrent Grounded assertionsをGateA semanticsへ整合 |
+| semantic retention | `mashos-api/ai/tests/test_emlis_ai_gate0_r1_semantic_retention.py` | protective counterdirection retention |
+| semantic Gate subchecks | `mashos-api/ai/tests/test_emlis_ai_gate0_r5_semantic_subchecks.py` | counterdirection誤分類とshort-state duplicate rejection |
+| surface contract | `mashos-api/ai/tests/test_emlis_ai_gate0_rr3_rr5_surface_contract.py` | self-denial contribution delivery / integrated ownership |
+| grounded I2-I4 | `mashos-api/ai/tests/test_emlis_ai_grounded_observation_i2_i4.py` | current Plan / Surface semantic regression |
+| premise diff | `gatea_diff_20260712.csv` | 14 added / 9 changed / 0 removed、before/after size・SHA-256。短名 |
+
+必読順:
+
+```text
+指定設計
+-> GA0 freeze / GA1 structural RED
+-> current Plan / Surface / Gate
+-> GA2 generic contract
+-> GA5 residual owner closure
+-> GA8 validation
+-> GA6 same16 + GA7 Karen receipt
+-> GA8 decision / exact8 / final link
+-> current stop
+-> premise diff CSV
+```
+
+必ず分ける読み:
+
+```text
+GA1 RED作成 != repair完了
+focused 120 pass != official full backend rerun
+RN carried-forward 36 pass != RN production source再検証・変更
+same16 automated 16/16 != Karen human pass
+Karen local 16/16 != device 8/8
+Gate0 local pass != Gate B / P8 / release
+exact8 packet ready != device evidence取得済み
+decision時点 exact8_packet_generated=false != current packet不存在
+body-full exact8 local artifact != premise/public metaへ本文掲載許可
+```
+
+current stopは `GATE0_LOCAL_PASS_DEVICE_PACKET_READY_STOPPED` です。次はMash様のexact8実機確認であり、P5、P6、P8、releaseは開始しません。
+
+# 2026-07-12 差分追記: Grounded Human Reception作業時の必読owner
+
+## production owner
+
+| path | 読む理由 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | mandatory two-stageとbody-free Reception Planのowner |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | act / stance / referent / Surfaceの専用owner |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | observation / reception行の分離とvisible two-stage join |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | seven Reception Gatesと旧semantic Gateのowner |
+| `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py` | public return直前のfour guards |
+
+## evidence / test owner
+
+| path | 読む理由 |
+|---|---|
+| `mashos-api/ai/tests/fixtures/grounded_human_reception_exact8_v2_20260712.json` | app-valid exact8 current input identity |
+| `mashos-api/ai/tests/fixtures/grounded_human_reception_r6_local_qa_receipt_20260712.json` | technical acceptanceとboundary regression |
+| `mashos-api/ai/tests/fixtures/grounded_human_reception_r6_karen_review_receipt_20260712.json` | 実機前local product readの履歴。current pass ownerではない |
+| `mashos-api/ai/tests/fixtures/grounded_human_reception_r7_representative4_device_readiness_20260712.json` | device証拠要件と停止条件。latest bytesではnot_run |
+| `mashos-api/ai/tests/test_emlis_ai_grounded_human_reception_r0_baseline.py` 〜 `r7_representative4_device_ready.py` | R0〜R7 contractと進行捏造防止 |
+| `ghr_diff_20260712.csv` | latest premise basis以降の49実ファイル差分 |
+
+## 読み違えてはいけないrule
+
+- exact fixture語句、case ID、expected hash、完成文をproduction routeに使わない。
+- 入力が長いから文字数比例で全要素へ返答する設計にしない。
+- 短い入力を二〜三文へ水増ししない。
+- 人間的応答の多様性をrandom synonymで作らない。
+- technical pass、local human read、actual-device evidence、Product Read Feel、P5/P6/P8開始許可を分離する。
+- external実機証拠がrepo receiptより新しい場合、古いreceiptをcurrent statusとして使わない。
+- この2026-07-12 snapshotではresponse-depth detailed designは未実装。2026-07-14 current statusは後続節を優先する。
+
+# 2026-07-14 差分追記: Response Depth / Richness Repair必読owner
+
+## 読む順序
+
+1. `Cocolon_EmlisAI_R8_GroundedHumanReception_ResponseDepth_RichnessRepair_DetailedDesign_ImplementationOrder_20260712.md`
+2. `ai/tests/GroundedHumanReception_RR0_RR1_Result_20260712.md`
+3. `ai/tests/GroundedHumanReception_RR2_RR3_Result_20260712.md`
+4. `ai/tests/GroundedHumanReception_RR4_RR5_Result_20260712.md`
+5. `ai/tests/GroundedHumanReception_RR6_RR7_Result_20260712.md`
+6. `ai/docs/Cocolon_EmlisAI_GroundedHumanReception_RR8_RR9_LocalQA_KarenReadFeel_ImplementationResult_20260713.md`
+7. `ai/docs/Cocolon_EmlisAI_GroundedHumanReception_RR10_Representative4_ActualDeviceDirectionCheck_ImplementationResult_20260713.md`
+
+## production / contract owner
+
+| path | current responsibility |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | Opportunity、Depth Policy、MovePlan |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | Clause / Move単位のhuman reception realization |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | multi-Move sentence surfaceと二段join |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 12 Reception Gates、Depth / Move / non-enumeration検査 |
+| `ai/services/ai_inference/emlis_ai_reply_service.py` | public return直前のfinal fail-closed guard |
+| `ai/tests/fixtures/grounded_human_reception_rr0_r8_freeze_20260712.json` | repair前failure / progression freeze |
+| `ai/tests/fixtures/grounded_human_reception_rr8_local_qa_receipt_20260713.json` | RR8 technical acceptance。実機authorityなし |
+| `ai/tests/fixtures/grounded_human_reception_rr9_karen_review_receipt_20260713.json` | 9件×13軸local read。progression authorityなし |
+| `ai/tests/fixtures/grounded_human_reception_rr10_representative4_device_readiness_20260713.json` | RR10 body-free readiness。actual deviceはnot_run |
+| `ai/tools/emlis_grounded_human_reception_rr10_verify_device_evidence.py` | 実機証拠bundleのpath / bytes整合検査。実機操作の真正性自体は証明しない |
+
+## 読み違え禁止
+
+- RR0〜RR9実装とRR10 readinessを、RR10 actual-device PASS、RR11、RR12完了へ拡張しない。
+- RR9華恋local human passをMash判定や進行権限へ変換しない。
+- RR10 expected packet / templateを実結果で上書きしない。
+- 12 Gate technical passを商品読感passへ変換しない。
+- file-level差分は`eai714_diff.csv`の`R8_RESPONSE_DEPTH`行を読む。
+
+# 2026-07-14 差分追記: Model-Free Natural Language Surface v2必読owner
+
+## 読む順序
+
+1. `Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV2_DetailedDesign_ImplementationOrder_20260713.md`
+2. `ai/docs/Cocolon_EmlisAI_NLSv2_AllSteps_Audit_Correction_20260713.md`
+3. `ai/docs/Cocolon_EmlisAI_NLSv2_S0_S1_Result_20260713.md`から`S12_S13_DeviceCheck_Blocked_Result_20260713.md`までの段階別result
+4. `ai/tests/fixtures/emlis_nls_v2_all_steps_audit_20260713.json`
+5. 各Step freeze / receipt / test
+
+監査訂正文書とaudit receiptを、段階別resultの冒頭に追加された訂正よりも含むcurrent全Step authorityとして読む。過去freezeとone-shot receiptは変更せず、current判定だけを訂正する。
+
+## offline module owner
+
+| path | current responsibility / boundary |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_reception_content_plan_v2.py` | ContentPlan v2。Step 3 underimplemented |
+| `ai/services/ai_inference/emlis_ai_grounded_reception_candidate_plan_v2.py` | CandidatePlan v2。Step 4 partial |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception_v2.py` | candidate Surface。Step 5 product goal unmet |
+| `ai/services/ai_inference/emlis_ai_grounded_reception_candidate_selector_v2.py` | 14 Hard Gate / Soft score。Step 6 semantic gate underimplemented |
+
+これら4 moduleはoffline candidate branchであり、production runtime ownerではない。
+
+## freeze / receipt / test owner
+
+| path | 読む理由 |
+|---|---|
+| `ai/tests/fixtures/emlis_nls_v2_s0_freeze_20260713.json` | 設計・owner・no-change boundary |
+| `ai/tests/fixtures/emlis_nls_v2_s1_receipt_20260713.json` | v1 baseline receipt |
+| `ai/tests/fixtures/emlis_nls_v2_s2_corpus_manifest_20260713.json` | 70件identity / cohort manifest。本文を前提資料へ載せない |
+| `ai/tests/fixtures/emlis_nls_v2_s7_freeze_20260713.json` | 歴史artifact。監査後はcompletion ownerではない |
+| `ai/tests/fixtures/emlis_nls_v2_s8_s9_protocol_freeze_20260713.json` | A/B one-shot protocol |
+| `ai/tests/fixtures/emlis_nls_v2_s8_holdout_a_receipt_20260713.json` | run 1 / STOPを保持 |
+| `ai/tests/fixtures/emlis_nls_v2_s9_holdout_b_receipt_20260713.json` | not_evaluated。A STOP後の正しい遮断 |
+| `ai/tests/fixtures/emlis_nls_v2_s10_s11_runtime_blocked_20260713.json` | shadow / switch停止証拠。feature実装証拠ではない |
+| `ai/tests/fixtures/emlis_nls_v2_s12_s13_device_blocked_20260713.json` | v1 device baselineとv2停止証拠。formal v2実機passではない |
+| `ai/tests/test_emlis_nls_v2_all_steps_audit.py` | Step 3 / 4 / 6欠陥、freeze保全、AST runner検査のcurrent audit test |
+
+## 読み違え禁止
+
+- Step 7 freezeをcurrent合格ownerへ戻さない。
+- Holdout A / BをDevelopment化、再開封、同一v2の再評価へ使わない。
+- `62 passed / 3 classified failed`のpass数だけを切り出して全Step greenと書かない。
+- blocked guard / receiptをStep 10〜13のfeature実装と呼ばない。
+- 4 moduleの存在をruntime import、shadow、owner switchと同一視しない。
+- 次のsource変更は新versionとfresh independent holdoutを前提にする。
+- file-level差分は`eai714_diff.csv`の`NLS_V2`行を読む。
+
+# 2026-07-20 差分追記: NLS v3 Step 11必読owner / rule index
+
+## current authority read order
+
+| order | artifact | role |
+|---:|---|---|
+| 1 | `NLSv3_Step11_Cycle001_rc0031_Session_Handoff_20260720.md` | current status / navigation |
+| 2 | `Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md` | invariant / order / acceptance |
+| 3 | `NLSv3_Step11_rc0031_PropositionSurface_Design20_3_Impact_Addendum_20260720.md` | current narrow allowed scope |
+| 4 | `NLSv3_Step11_rc0031_ImpactBoundary_BodyFree_Receipt_20260720.json` | scope identity / non-claim |
+| 5 | rc0030 E3 machine / Product Read STOP handoff and receipts | immediate predecessor result |
+| 6 | GitHub pin上のactual paths | current bytes |
+
+## rc0031 conditional existing owner
+
+| path | responsibility |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py` | conditional predicate-ready projection。P1必要性判定前は編集しない |
+| `ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py` | root proposition、relation、distribution、Receptionのprimary repair |
+| `ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py` | Body-only Parser / Independent Matcher lockstep |
+| `ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py` | additive Gate / selector lockstep |
+
+exact 4はclosed maximumであり、全4編集義務ではありません。既存prefixはimmutableです。new fileは補遺§7.2のexact 18 maximum allowlistだけで、phase active subsetを守ります。
+
+## current gate / evidence owner
+
+| artifact / test family | rule |
+|---|---|
+| P1 exact 7 | 1 freeze PASS + 6 semantic intentional RED。source edit前freeze |
+| new pending attack exact 24 | root / schema / relation / distribution / Reception / boundary各4 |
+| forward / inverse independence | inverseがforward plan / AST / span / self-claimを読まない |
+| E3 representative8 | machine 8 / 8後に2 reviewer Product Read |
+| E4 frozen100 | E3 Product Read acceptance後のみread-only |
+| formal closure | E4後の別authority / new run ID |
+
+## immutable predecessor groups
+
+- Step 9全20 owner / manifest
+- E1b successor authority
+- rc0027 default、rc0028、rc0029、rc0030
+- Content Selection / Discourse / Planning Frontier
+- Grounded Human Reception authority
+- shared/public runtime / route / reply / DB / RN / Safety / question
+- corpus / historical Product Read
+
+file-level current deltaは`eai720_diff.csv`です。GitHub compare 235 pathのうち、既に`eai714_diff.csv`へ反映済みNLS v2 10 pathと、未反映NLS v3 225 pathを分離しています。

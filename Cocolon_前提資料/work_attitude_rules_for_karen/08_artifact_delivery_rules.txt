@@ -32,7 +32,10 @@ Mash様の指示した成果物形式を変えない。
 
 ### 「前提資料の差分更新」
 
-- 最新実ファイルzipと前提資料を照合する
+- GitHub上の`Cocolon` / `mashos-api` headと作業predecessor commitを固定し、前提資料と照合する
+- local checkout / ZIP / copyを使う場合は、固定commitとのpath / blob / hash一致を確認する
+- localとGitHubが一致する同じ実ファイルを、二つの別仕様・別差分として二重計上しない
+- 差分台帳にはrepository / branch / commit / path / blobまたはhashを記録する
 - 差分がある前提資料のみ修正する
 - 変更点がない資料は触らない
 - 修正した前提資料のみzipにする

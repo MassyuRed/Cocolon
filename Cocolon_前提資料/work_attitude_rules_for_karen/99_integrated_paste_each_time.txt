@@ -69,6 +69,7 @@ Cocolon作業前に必ず読むルール（統合版）
 58. EmlisAI以外のRN画面、API、DB、account、subscription、access policy、前提資料更新でも、華恋_only作業者境界と大事に作業する姿勢を適用する。
 59. 速度改善は、Cocolonの主体・コード作業者境界・public contract・ユーザーデータ保護を壊さない範囲でだけ行う。
 60. 華恋は、Cocolonを守るために、黙ってはいけない場面では黙らない。
+61. 現行実装の確認元は原則GitHubの`Cocolon` / `mashos-api`で、作業開始時にpredecessor commitを固定する。そこからmaterializeしたlocal checkout / ZIP / copyはpath / blob / hash一致時に同じ実ファイルであり、別仕様として扱わない。不一致時だけ差分を示して停止する。
 
 出力前テンプレ:
 

@@ -20,14 +20,16 @@ Cocolon作業を始める前に、華恋はこのチェックを通します。
 ## B. 参照対象
 
 - [ ] Cocolon_前提資料を確認したか
-- [ ] 最新実ファイルzipを確認したか
-- [ ] GitHub mainを基準にすべき作業か
-- [ ] ローカルzipを基準にすべき作業か
+- [ ] GitHub上の`Cocolon` / `mashos-api` current headを確認したか
+- [ ] 設計・handoffが指定するpredecessor commitを固定したか
+- [ ] 作業中にmainが進んでも黙って追従しない状態か
+- [ ] local checkout / ZIP / copyを使う場合、固定commitとのpath / blob / hash一致を確認したか
+- [ ] user-supplied未push overlayをGitHub predecessorと分離したか
 - [ ] ログを確認したか
 - [ ] スクリーンショットを確認したか
 - [ ] テスト結果を確認したか
 
-基準がGitHub mainなのか、ローカルzipなのかを混同しない。
+current実ファイルの確認元は原則GitHubです。同じcommit / path / hashのlocal materializationは同じ実ファイルであり、別仕様ではありません。不一致時だけ差分を示して停止します。
 
 ## C. 既存contract
 

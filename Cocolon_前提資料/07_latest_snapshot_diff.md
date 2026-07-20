@@ -1,21 +1,26 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-07-09"
+revision_date: "2026-07-20"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "local_snapshot"
+source_mode: "github_pinned_commits_with_local_materialization"
 source_snapshot:
-  premise: "Cocolon_前提資料(303).zip"
-  Cocolon: "Cocolon(257).zip (unchanged from previous premise basis / no new Cocolon app zip in this update)"
-  mashos-api: "mashos-api_9(62).zip"
+  historical_premise: "Cocolon_前提資料(335).zip"
+  historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
+  historical_mashos-api: "mashos-api_10(51).zip"
+  current_Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
+  current_mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+  materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copy"
 file_counts:
+  count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
   Cocolon: 217
-  mashos-api: 1618
-  total: 1835
-purpose: "最新zipから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
+  mashos-api: 1792
+  total: 2009
+purpose: "pin済みGitHub commitと歴史local snapshotから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 coverage:
+  nls_v3_step11_cycle001_rc0031_scope_reflected: true
   p4_runtime_backfill_hij_future_direction_surface_repair_r0_r10_reflected: true
   p4_runtime_backfill_hij_future_direction_surface_repair_added_files: 6
   p4_runtime_backfill_hij_future_direction_surface_repair_changed_files: 1
@@ -1061,6 +1066,196 @@ coverage:
   p7_r54_ahr_post_dhb_dhr_op05_manual_call_execution_consideration_rn_real_device_modal_verified: false
   p7_r54_ahr_post_dhb_dhr_op05_manual_call_execution_consideration_next_work_candidate: "Post-DHC DHR-OP06 branch resolver consideration vs P7 readfeel reconnection decision boundary / no auto execution"
   p7_r54_ahr_post_dhb_dhr_op05_manual_call_execution_consideration_current_execution_allowance: "none"
+
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_reflected: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_added_files: 12
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_changed_files: 0
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_removed_files: 0
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_full_01_02_regeneration: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_source_mode: "local_received_zip_only"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_diff_csv: "r54dhd_diff_20260710.csv"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op08_implemented_steps: "R0〜R1 / DHD-OP00〜DHD-OP08 / R7〜R11 result memo closure"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_selected_stage_ref: "P7-R54-AHR Post-DHC Direction Decision Boundary"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_upstream_dhc_basis: "DHC R11-only basis; not current selected DHC-OP08 material or current DHR-OP05 wrapper"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_current_production_dhc_op08_material_inferred: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_current_production_dhr_op05_wrapper_inferred: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhc_result_synthesis_allowed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhr_op06_builder_call_allowed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhr_op06_implicit_op05_fallback_allowed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_direction_comparator_supported: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_six_stopped_direction_outcomes_supported: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_no_touch_no_promotion_guard_supported: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_validation_plan_count_only_supported: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_op08_stopped_closure_supported: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_selected_direction_executed_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_p7_readfeel_reconnection_candidate_supported: true
+  p7_r54_ahr_post_dhc_direction_decision_boundary_p7_readfeel_actual_case_created_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_p7_readfeel_actual_evaluation_started_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dhr_op07_materialized_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_dmd_execution_started_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_r52_actual_execution_started_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_actual_review_started_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_actual_rows_created_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_question_need_observation_rows_created_here: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_p8_start_allowed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_p8_question_design_started: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_question_text_materialized: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_api_changed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_db_changed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_rn_changed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_runtime_changed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_response_key_changed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_json_schema_file_created: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_p7_complete: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_release_allowed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_target_recorded_in_latest_result_memo: "294 passed"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_target_verified_in_this_premise_update: "294 passed"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_selected_regression_recorded_in_latest_result_memo: "865 passed"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_selected_regression_verified_in_this_premise_update: "865 passed"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_optional_readfeel_recorded_in_latest_result_memo: "15 passed"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_optional_readfeel_verified_in_this_premise_update: "15 passed"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_compileall_recorded_in_latest_result_memo: "passed / 5 target files"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_compileall_verified_in_this_premise_update: "passed / 5 target files"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_full_backend_suite_green_confirmed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_rn_contract_green_confirmed: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_rn_real_device_modal_verified: false
+  p7_r54_ahr_post_dhc_direction_decision_boundary_r11_direction_decision_ref: "DHD_DECISION_P7_READFEEL_RECONNECTION_DESIGN_FIRST"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_r11_next_design_candidate_ref: "P7_readfeel_reconnection_product_QA_return_detailed_design"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_r11_stopped_closure_status_ref: "DHD_OP08_P7_READFEEL_RECONNECTION_DESIGN_CLOSED_STOPPED"
+  p7_r54_ahr_post_dhc_direction_decision_boundary_current_execution_allowance: "none"
+
+  p7_pqr_actual_local_review_boundary_20260710_reflected: true
+  p7_pqr_actual_local_review_boundary_added_files: 7
+  p7_pqr_actual_local_review_boundary_changed_files: 0
+  p7_pqr_actual_local_review_boundary_removed_files: 0
+  p7_pqr_actual_local_review_boundary_diff_csv: "p7pqr_diff_20260711.csv"
+  p7_pqr_preflight_status: "I0 COMPLETE / I1 COMPLETE / I2 COMPLETE / I3 BLOCKED_STOPPED / I3-Q FORM_FIXED / I4 NOT_STARTED"
+  p7_pqr_actual_operation_status: "P5_EXECUTION_BLOCKED_STOPPED"
+  p7_pqr_actual_current_24_source_body_present: false
+  p7_pqr_human_pass_a_rows: 0
+  p7_pqr_human_pass_b_rows: 0
+  p7_pqr_human_pass_c_rows: 0
+  p7_pqr_actual_24_disposal_verified: false
+  p7_pqr_p5_confirmed_candidate: false
+  p7_pqr_p6_start_allowed: false
+  p7_pqr_p8_start_allowed: false
+  p7_pqr_release_allowed: false
+  p7_pqr_controller_test_verified_in_this_premise_update: "12 passed"
+  p7_pqr_selected_regression_recorded_in_latest_result_memo: "423 passed"
+  p7_pqr_selected_regression_verified_in_this_premise_update: "not rerun"
+  p7_pqr_full_backend_suite_green_confirmed: false
+
+  grounded_adaptive_observation_core_repair_i0_i7_reflected: true
+  grounded_adaptive_observation_core_repair_added_files: 12
+  grounded_adaptive_observation_core_repair_changed_files: 16
+  grounded_adaptive_observation_core_repair_removed_files: 0
+  grounded_adaptive_observation_core_repair_diff_csv: "gao_diff_20260711.csv"
+  grounded_adaptive_observation_canonical_generation_path: "grounded_observation_plan_sentence_surface_canonical_v1"
+  grounded_adaptive_observation_canonical_composer_source: "grounded_plan_realizer"
+  grounded_adaptive_observation_runtime_internal_reply_path_changed: true
+  grounded_adaptive_observation_public_contract_changed: false
+  grounded_adaptive_observation_api_route_changed: false
+  grounded_adaptive_observation_db_physical_name_changed: false
+  grounded_adaptive_observation_rn_visible_contract_changed: false
+  grounded_adaptive_observation_i1_i7_focused_verified_in_this_premise_update: "78 passed / 41 subtests passed"
+  grounded_adaptive_observation_i0_inventory_verified_in_this_premise_update: "4 passed / 3 failed"
+  grounded_adaptive_observation_impacted_material_regression_verified_in_this_premise_update: "20 passed"
+  grounded_adaptive_observation_legacy_recovery_real_device_verified_in_this_premise_update: "3 passed / 4 failed"
+  grounded_adaptive_observation_combined_verification: "117 passed / 7 failed / 41 subtests passed"
+  grounded_adaptive_observation_changed_python_compile_verified: "30 passed / 0 failed"
+  grounded_adaptive_observation_full_regression_green_confirmed: false
+  grounded_adaptive_observation_known4_unseen12_local_readfeel_candidate_ready: true
+  grounded_adaptive_observation_supplied_abcd_device_evidence_current_path_verified: false
+  grounded_adaptive_observation_required_canonical_device_records: 8
+  grounded_adaptive_observation_p5_formal_24_started: false
+
+  p7_gate0_current_input_semantic_retention_readfeel_repair_reflected: true
+  p7_gate0_current_input_semantic_retention_readfeel_repair_added_files: 16
+  p7_gate0_current_input_semantic_retention_readfeel_repair_changed_files: 10
+  p7_gate0_current_input_semantic_retention_readfeel_repair_removed_files: 0
+  p7_gate0_current_input_semantic_retention_readfeel_repair_diff_csv: "gate0_diff_20260711.csv"
+  p7_gate0_implemented_scope: "R0-R1 / R2-R3 / R4-R5 code+tests / R6-R7 / R8-R10"
+  p7_gate0_r4_r5_standalone_result_memo_present: false
+  p7_gate0_grounded_semantic_version: "cocolon.emlis.grounded_semantics.i2.v1"
+  p7_gate0_canonical_generation_path: "grounded_observation_plan_sentence_surface_canonical_v1"
+  p7_gate0_canonical_composer_source: "grounded_plan_realizer"
+  p7_gate0_public_contract_changed: false
+  p7_gate0_api_route_changed: false
+  p7_gate0_db_physical_name_changed: false
+  p7_gate0_rn_visible_contract_changed: false
+  p7_gate0_r8_automated_candidate_pass: "16 / 16"
+  p7_gate0_r8_deterministic_body_match: "16 / 16"
+  p7_gate0_r8_karen_local_review_count: 16
+  p7_gate0_r8_local_human_pass: 7
+  p7_gate0_r8_repair_required: 9
+  p7_gate0_r8_hard_fatal: 0
+  p7_gate0_r9_decision: "GATE0_REPAIR_RETURN_STOPPED"
+  p7_gate0_exact8_device_packet_generated: false
+  p7_gate0_device_evidence_started: false
+  p7_gate0_targeted_verified_in_this_premise_update: "137 passed / 41 subtests passed"
+  p7_gate0_changed_new_python_compile_verified_in_this_premise_update: "17 passed / 0 failed"
+  p7_gate0_full_collect_recorded_in_latest_result_memo: "12631 collected / 2 classified pre-existing errors"
+  p7_gate0_full_collect_completed_in_this_premise_update: false
+  p7_gate0_full_backend_suite_green_confirmed: false
+  p7_gate0_p5_formal_24_started: false
+  p7_gate0_p6_started: false
+  p7_gate0_p8_started: false
+  p7_gate0_release_allowed: false
+
+  p7_gate0_readfeel_repair_gate_contract_closure_reflected: true
+  p7_gate0_readfeel_repair_gate_contract_closure_source_premise: "Cocolon_前提資料(320).zip"
+  p7_gate0_readfeel_repair_gate_contract_closure_source_backend: "mashos-api(209).zip"
+  p7_gate0_readfeel_repair_gate_contract_closure_added_files: 11
+  p7_gate0_readfeel_repair_gate_contract_closure_changed_files: 8
+  p7_gate0_readfeel_repair_gate_contract_closure_removed_files: 0
+  p7_gate0_readfeel_repair_gate_contract_closure_diff_csv: "g0rr_diff_20260711.csv"
+  p7_gate0_rr0_pre_repair_source_snapshot_fingerprint: "8d80af59708affcc0b4ee66c694330e71a08cb7de8b9bc359ff70ffbf7ad2cfe"
+  p7_gate0_post_rr7_source_snapshot_fingerprint: "88286e4499bcfa09d23d8db613f775a0890e2781cd22a2a7653badddaa50c340"
+  p7_gate0_post_rr7_fingerprinted_file_count: 1353
+  p7_gate0_grounded_semantic_version_current: "cocolon.emlis.grounded_semantics.i2.v2"
+  p7_gate0_validation_schema_current: "cocolon.emlis.gate0.validation.bodyfree.v2"
+  p7_gate0_rr7_obsolete_private_imports_migrated: true
+  p7_gate0_rr7_production_private_helpers_restored: false
+  p7_gate0_rr8_targeted_validation: "186 passed / 41 subtests passed"
+  p7_gate0_rr8_safety_public_contract_validation: "77 passed"
+  p7_gate0_rr8_rn_contract_validation: "36 passed"
+  p7_gate0_rr8_full_collect_validation: "12700 collected / 0 errors"
+  p7_gate0_rr8_full_backend_validation: "12526 passed / 172 failed / 2 skipped / 41 subtests passed"
+  p7_gate0_rr8_validation_all_pass: false
+  p7_gate0_current_stop_code: "GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED"
+  p7_gate0_rr8_unclassified_failure_count: 172
+  p7_gate0_rr9_same16_actual_read_started: false
+  p7_gate0_rr9_new_review_receipt_generated: false
+  p7_gate0_rr10_pass_decision_generated: false
+  p7_gate0_exact8_device_packet_generated_current_cycle: false
+  p7_gate0_api_production_changed_current_cycle: false
+  p7_gate0_db_production_changed_current_cycle: false
+  p7_gate0_rn_production_changed_current_cycle: false
+  p7_gate0_p5_formal_24_started_current_cycle: false
+  p7_gate0_p6_started_current_cycle: false
+  p7_gate0_p8_started_current_cycle: false
+  p7_gate0_release_allowed_current_cycle: false
+  mandatory_two_stage_runtime_repair_reflected: true
+  grounded_human_reception_r0_r7_reflected: true
+  grounded_human_reception_r0_r7_added_files: 26
+  grounded_human_reception_r0_r7_changed_files: 23
+  grounded_human_reception_r0_r7_removed_files: 0
+  grounded_human_reception_diff_csv: "ghr_diff_20260712.csv"
+  grounded_human_reception_r6_technical_acceptance_recorded: "67 R0-R6 contract + 342 relevant backend / 0 failed / 1 existing warning"
+  grounded_human_reception_actual_device_exact8_evidence_received: true
+  grounded_human_reception_actual_device_raw_comment_hash_machine_match_confirmed: false
+  grounded_human_reception_r8_status: "REPAIR_REQUIRED"
+  grounded_human_reception_response_depth_design_exists_external: true
+  grounded_human_reception_rr0_rr9_implemented: true
+  grounded_human_reception_rr10_readiness_implemented: true
+  grounded_human_reception_rr10_actual_device_status: "not_run"
+  grounded_human_reception_rr11_rr12_implemented: false
+  grounded_human_reception_valid_for_progression: false
+  model_free_nls_v2_current_state: "offline_only_stopped"
+  model_free_nls_v2_last_fully_verified_step: 2
+  model_free_nls_v2_runtime_owner: "grounded_sentence_surface_canonical_v1"
+  grounded_human_reception_p5_p6_p8_release_allowed: false
+  grounded_human_reception_full_01_02_regeneration: false
 ---
 # 1. 今回の基準面
 
@@ -1068,11 +1263,11 @@ coverage:
 
 | source | count | 差分 |
 |---|---:|---|
-| `Cocolon(257).zip` | 217 | Cocolon側は今回差分対象外。RN production UI、RN表示条件、public response shapeの変更なしとして読む。 |
-| `mashos-api_9(62).zip` | 1618 | R54-AHR Post-DHB DHR-OP05 Manual Call / Existing Preflight Scan Execution Consideration DHC-OP00〜OP08 / R7〜R11 のbody-free helper / target tests / result memosを含む最新backend。うち28件は`__pycache__`生成物で、source implementation coverageとは分けて読む。 |
-| total | 1835 | 前提資料(303)のbackend coverage 1606 entriesから12 entries追加、既存coverage修正0、削除0。API / DB / RN / runtime / response key / P8 question implementationはno-touch。 |
+| `Cocolon(257).zip` | 217 | Cocolon app zipは今回新規受領なし。previous premise basisを維持。 |
+| `mashos-api(209).zip` | 1676 | prior `mashos-api(205).zip` 1665 filesから11 files増。generated `__pycache__` 28件はsource implementationと分ける。 |
+| total | 1893 | `Cocolon_前提資料(320).zip` current coverage 1882からbackend +11。 |
 
-この資料は、作業記録ではなく、**最新アプリ構造の読み方**を固定するための差分資料です。2026-07-09時点の最新正本は `2026-07-09 差分追記: P7-R54-AHR Post-DHB DHR-OP05 Manual Call / Existing Preflight Scan Execution Consideration DHC-OP00〜OP08 / R7〜R11 反映` とこの冒頭summaryです。Post-DHB DHC-OP00〜OP08で、Post-DHB scope refreeze、explicit DHB-OP08 closed material intake、explicit DHR-OP04 actual source claim separation eligibility、manual call permission gate、DHC-OP04内だけのcontrolled existing DHR-OP05 builder path、DHR-OP05 result classification、no-touch/no-promotion/no-auto-downstream guard、validation plan refs、OP08 closure、R7 target validation、R8 selected regression、R9 compileall、R10 result memo closure、R11 next work decisionが揃いました。ただし、この前提資料更新でDHR-OP05 runtime call、existing DHR-OP05 builder runtime call、implicit DHR-OP04 fallback、DHR-OP06以降、DMD実行、R52 actual execution、actual human review実行、body-full packet生成、actual rows作成、P5 final、P6/P8 start、P7 complete、release_allowedはいずれも成立していません。
+この資料のcurrent正本は、冒頭summary、末尾の `P7 Gate 0 FB172 failure closure actual snapshot差分`、`fb172_diff_20260712.csv` です。B0〜B7 ledgerはpending 0で、official frozen 172の単独選択は `172 passed`、final collectは `12714 / 0 errors` でした。ただしfull backendは `12543 passed / 169 failed / 2 skipped` でreturn code 1となり、current stopは `GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED` です。same16 actual read、new review receipt、Gate0 pass decision、exact8、P5/P6/P8/releaseは未成立です。
 
 # 2. Cocolon側の2026-05-12差分履歴
 
@@ -9702,3 +9897,884 @@ P8 question design / implementation / API / DB / RN / trigger / question_textが
 ```
 
 今回言ってよいのは、R54-AHR Post-DHB DHC-OP00〜OP08のbody-free helper / target tests / R7〜R11 result memosがlatest backendに入り、明示DHB-OP08 materialと明示DHR-OP04 materialがある場合だけDHC-OP04内のcontrolled existing DHR-OP05 builder pathを評価し、その結果をDHC内で分類して止める境界が閉じた、というところまでです。DHR-OP06 call / DHR-OP07 materialization / DMD / R52 / actual review / P8 / P7完了 / release判断は別の明示指示と別工程で確認します。
+
+# 2026-07-10 差分追記: P7-R54-AHR Post-DHC Direction Decision Boundary DHD R0〜R1 / DHD-OP00〜OP08 / R7〜R11 反映
+
+最新実ファイル `mashos-api_9(63).zip` では、P7-R54-AHR Post-DHC Direction Decision Boundary の R0〜R1 / DHD-OP00〜OP08 / R7〜R11 が backend internal-only / body-free / no-touch / no-promotion / no-auto-execution helper lineとして反映済みです。前提資料(306)はPost-DHB DHC-OP00〜OP08 / R7〜R11までを反映済みでしたが、Post-DHC DHD coverageは未記載だったため、今回12 entries added / 0 changed / 0 removedとして差分追記しました。Cocolon app zipは今回新規受領していないため、既存の217 files countを維持し、mashos-api側は1618 -> 1630、合計は1835 -> 1847として読みます。
+
+```text
+R54-AHR-PostDHC-DHD premise coverage:
+  reflected: true
+  source_mode: local_received_zip_only
+  github_connection_check: not_required_by_Mash_instruction / not_performed
+  added_entries: 12
+  changed_entries: 0
+  removed_entries: 0
+  source_implementation_added_files: 12
+  generated_pycache_new_entries_in_this_diff: 0
+  generated_pycache_entries_in_latest_backend_zip: 28
+  generated_pycache_treated_as_source_implementation: false
+  CSV: r54dhd_diff_20260710.csv
+```
+
+## R54-AHR-PostDHC-DHDで固定された読み方
+
+```text
+R54-AHR-PostDHC-DHD implemented steps: R0〜R1 / DHD-OP00〜DHD-OP08 / R7〜R11 result memo closure
+R54-AHR-PostDHC-DHD role: DHC R11-only basisと明示されたcurrent materialを区別し、DHC outcome / current-material sufficiency、DHR-OP06 consideration eligibility without call、P7 readfeel reconnection eligibility、six-way direction comparator、no-touch / no-promotion / no-question-system guard、count-only validation plan、OP08 stopped closure、R7 target validation、R8 selected regression、R9 compileall、R10 result memo closure、R11 next work decisionまでを扱うPost-DHC direction decision boundary。
+dhd_terminal_closure: OP07-carried direction decision / candidate pairを同じindexのOP08 status / next-design candidateとして閉じ、選択方向は実行しない
+r11_direction_decision_ref: DHD_DECISION_P7_READFEEL_RECONNECTION_DESIGN_FIRST
+r11_next_design_candidate_ref: P7_readfeel_reconnection_product_QA_return_detailed_design
+r11_stopped_closure_status_ref: DHD_OP08_P7_READFEEL_RECONNECTION_DESIGN_CLOSED_STOPPED
+current_execution_allowance: none
+```
+
+この差分は、DHC R11、DHD target validation、selected regression、compileallをcurrent production DHC-OP08 material / DHR-OP05 wrapperの選択、DHR-OP06 execution permission、P7 readfeel actual evaluation、P8 start、release readyへ変換した証明ではありません。DHDはDHC resultを合成せず、DHR-OP06 builderを呼ばず、implicit OP05 fallbackを使いません。OP08はOP07から運ばれたdecision / candidate pairを閉じるだけで、新しい判断へ差し替えず、選択方向を実行しません。
+
+## R54-AHR-PostDHC-DHDで追加された実ファイル
+
+詳細なfile-level coverageは、短名CSV `r54dhd_diff_20260710.csv` を参照します。
+
+```text
+new:
+  mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_dhc_direction_decision_boundary_20260709.py
+  mashos-api/ai/tests/test_r54_ahr_post_dhc_direction_decision_boundary_dhd_r0_r1_20260709.py
+  mashos-api/ai/tests/test_r54_ahr_post_dhc_direction_decision_boundary_dhd_op00_op01_20260709.py ... test_r54_ahr_post_dhc_direction_decision_boundary_dhd_op08_result_20260709.py
+  mashos-api/ai/tests/R54_AHR_PostDHC_DirectionDecisionBoundary_DHD_R7_TargetValidation_Result_20260709.md ... R54_AHR_PostDHC_DirectionDecisionBoundary_DHD_R11_NextWorkDecision_20260709.md
+
+modified:
+  none
+```
+
+## R54-AHR-PostDHC-DHD validation recordの読み方
+
+最新実ファイル内のDHD R7〜R11 result memo、および今回の前提資料差分更新時のローカル再確認では、次が記録・確認されています。
+
+```text
+DHD R0/R1 / OP00〜OP08 target:
+  294 passed (latest result memo recorded / this premise update local recheck passed)
+selected regression:
+  865 passed (latest result memo recorded / this premise update local recheck passed)
+optional product readfeel regression:
+  15 passed (latest result memo recorded / this premise update local recheck passed)
+compileall:
+  passed / 5 target files (latest result memo recorded / this premise update local recheck passed)
+```
+
+full backend suite green、RN contract green、RN real-device modal verifiedは新規確認していません。optional product readfeel regression greenも、actual P7 readfeel evaluation、P7 complete、release readyの証明ではありません。
+
+## R54-AHR-PostDHC-DHD後も禁止する読み
+
+```text
+DHD helper / target greenをcurrent production direction実行許可として読まない。
+DHC R11-only basisをcurrent selected DHC-OP08 materialとして読まない。
+DHC test validation greenをcurrent selected scan-clear resultとして読まない。
+DHR-OP06 consideration eligibilityをDHR-OP06 builder call permissionとして読まない。
+DHR-OP06 implicit OP05 fallbackを許可されたとは読まない。
+P7 readfeel reconnection candidateをactual case creation / actual evaluation / P7 completeとして読まない。
+DHD-OP05 comparator resultをruntime branch executionとして読まない。
+DHD-OP07 validation plan refsをhelperによるvalidation実行として読まない。
+DHD-OP08 / R10 / R11 closureをP8 start / question_text materialization / release allowedへ変換しない。
+R11 P7 readfeel next candidateをcurrent production DHD-OP08 material実行済みとして読まない。
+```
+
+今回言ってよいのは、R54-AHR Post-DHC DHD R0〜R1 / OP00〜OP08のbody-free helper / target tests / R7〜R11 result memosがlatest backendに入り、DHC後の次方向を6候補からbody-freeで比較し、R11-only basisではP7 readfeel reconnection / product QA return detailed designを停止した次候補として記録した、というところまでです。DHR-OP06 call、P7 actual readfeel evaluation、DHR-OP07 / DMD / R52、actual review、P8、P7完了、release判断は別の明示指示と別工程で確認します。
+
+# 2026-07-11 差分追記: P7-PQR actual local review boundary / Grounded Adaptive Observation I0〜I7
+
+## 1. source / count
+
+| source | count | current reading |
+|---|---:|---|
+| `Cocolon(257).zip` | 217 | 今回新規Cocolon app zipなし。previous premise basisを維持。 |
+| `mashos-api_2(139).zip` | 1649 | P7-PQR 7 added、Grounded Adaptive Observation 12 added / 16 changedを含む。うち28件はgenerated `__pycache__`。 |
+| total | 1866 | 前提資料(313)の1847から19 entries増。19 added / 16 changed / 0 removed。 |
+
+file-level正本:
+
+```text
+p7pqr_diff_20260711.csv
+  7 added / 0 changed / 0 removed
+
+gao_diff_20260711.csv
+  12 added / 16 changed / 0 removed
+```
+
+## 2. P7-PQR差分
+
+追加7件は、preflight / blank sidecar / I4-I6 stopped result、local-only controller、controller test、actual 24 operation result 2件です。current actual 24 source/bodyとhuman reviewer provenanceはlatest received materialにないため、Pass A / B / Cは各0件で、`P5_EXECUTION_BLOCKED_STOPPED`、actual 24 disposal verified=false、P5 confirmed=false、P6/P8/release=falseです。
+
+今回ローカルで `test_emlis_p7_p5_actual_local_review_20260710.py` は12 passedです。latest execution-attempt memoはselected regression 423 passedを記録しますが、この更新では423件を再実行していません。
+
+## 3. Grounded Adaptive Observation差分
+
+追加12件 / 変更16件により、Emlis substantive immediate replyのcanonical ownerが次へ接続されています。
+
+```text
+Evidence Ledger
+-> GroundedObservationPlan
+-> GroundedSentencePlan / Surface / plan-preserving Recovery
+-> Grounded Observation Gate
+-> ReplyEnvelope
+```
+
+I5 internal cutoverのcurrent identifiers:
+
+```text
+generation_path: grounded_observation_plan_sentence_surface_canonical_v1
+composer_source: grounded_plan_realizer
+public_reply_path_connected: true
+public_contract_changed: false
+api_route_changed: false
+db_physical_name_changed: false
+rn_visible_contract_changed: false
+```
+
+## 4. local verification
+
+```text
+P7-PQR controller: 12 passed
+Grounded I1-I7 focused: 78 passed / 41 subtests passed
+Grounded I0: 4 passed / 3 failed
+Impacted material/meaning: 20 passed
+Legacy D recovery / Phase20 device: 3 passed / 4 failed
+combined: 117 passed / 7 failed / 41 subtests passed
+Python compile: 30 passed / 0 failed
+```
+
+failed boundary:
+
+```text
+I0 received-snapshot fingerprint expectation: stale against current reply_service
+I0 direct caller ownership expectation: stale against gate / surface / reply-service current import graph
+I0 legacy fixture phrase occurrence expectation: stale because current reachable canonical runtime has zero occurrences
+legacy D source recovery metadata / recomposition expectation: 3 failures
+Phase20-10 A material_quality expectation: 1 failure
+```
+
+よって、canonical focused pathはgreenでも、full regression green / release ready / RN current canonical device evidence verifiedとは読みません。
+
+## 5. I7 / Product QA progression boundary
+
+known4 + unseen12 local deterministic readfeelはcandidate-passです。ただし、supplied A〜D device evidenceはcurrent canonical generation path / composer / semantic gate / public-path metaを持たないためruntime mismatchです。P5 formal 24を開くにはknown4 + unseen4の計8件でcurrent canonical device evidenceが必要です。今回P5 formal 24、P6、P8、releaseは開始していません。
+
+# 2026-07-11 差分追記: P7 Gate 0 current-input 意味保持・読感修復 actual snapshot差分
+
+## 1. source / count / hash
+
+| source | count | current reading |
+|---|---:|---|
+| `Cocolon(257).zip` | 217 | 今回新規app zipなし。previous basisを維持。 |
+| `mashos-api(205).zip` | 1665 | 前提資料(316) current backend 1649から16 entries増。 |
+| total | 1882 | 16 added / 10 changed / 0 removed。 |
+
+```text
+premise input SHA-256: c4d84a1970b12498bc0e854d262b97b6830e181d76b2137e7eaee90a12007075
+backend input SHA-256: cfb378d93a7ff9d65542012ca3176cea6fb5f20f1a49756df16971eb37e93b00
+file-level diff: gate0_diff_20260711.csv
+CSV rows excluding header: 26
+```
+
+latest backend zip内のgenerated `__pycache__` は28件で、今回差分の新規source implementationとして数えていません。
+
+## 2. added 16
+
+```text
+mashos-api/ai/tests/Gate0_R0_R1_Result_20260711.md
+mashos-api/ai/tests/Gate0_R2_R3_Result_20260711.md
+mashos-api/ai/tests/Gate0_R6_R7_Result_20260711.md
+mashos-api/ai/tests/Gate0_R8_R9_R10_Result_20260711.md
+mashos-api/ai/tests/fixtures/emlis_gate0_r0_freeze_20260711.json
+mashos-api/ai/tests/fixtures/emlis_gate0_r8_karen_local_review_receipt_20260711.json
+mashos-api/ai/tests/fixtures/emlis_gate0_r9_decision_20260711.json
+mashos-api/ai/tests/helpers/emlis_ai_gate0_r9_r10_boundary.py
+mashos-api/ai/tests/helpers/generate_emlis_ai_gate0_r0_baseline.py
+mashos-api/ai/tests/helpers/generate_emlis_ai_gate0_r8_r9_artifacts.py
+mashos-api/ai/tests/local_only/emlis_gate0_r0_baseline_20260711.json
+mashos-api/ai/tests/local_only/emlis_gate0_r8_local_comparison_20260711.json
+mashos-api/ai/tests/test_emlis_ai_gate0_r0_baseline.py
+mashos-api/ai/tests/test_emlis_ai_gate0_r1_semantic_retention.py
+mashos-api/ai/tests/test_emlis_ai_gate0_r5_semantic_subchecks.py
+mashos-api/ai/tests/test_emlis_ai_gate0_r8_r10_boundary.py
+```
+
+## 3. changed 10
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py
+mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py
+mashos-api/ai/tests/helpers/emlis_ai_grounded_observation_i0_inventory.py
+mashos-api/ai/tests/helpers/emlis_ai_grounded_observation_i7_readfeel.py
+mashos-api/ai/tests/test_emlis_ai_grounded_observation_plan_i1.py
+mashos-api/ai/tests/test_emlis_ai_grounded_observation_i0_inventory.py
+mashos-api/ai/tests/test_emlis_ai_grounded_observation_i6.py
+mashos-api/ai/tests/test_emlis_ai_grounded_observation_i7.py
+mashos-api/ai/tests/test_emlis_ai_phase20_10_real_device_recheck.py
+```
+
+更新前後のsize / SHA-256は `gate0_diff_20260711.csv` に記録しています。
+
+## 4. implementation delta
+
+```text
+Plan:
+  semantic version i2.v1
+  major semantic arc roles
+  fixed four-required cap removal
+  relation local scope / direction / reversal
+  response selection / same-plan retention
+
+Surface:
+  lexical source predicate retention
+  relation-specific realization
+  integrated short-state follow
+  human follow functional roles
+
+Gate:
+  major arc coverage
+  relation direction / reversal
+  lexical anchor / no new sensation family
+  human follow compatibility
+  duplicate anchor / semantic repetition guard
+
+Test / progression:
+  R0 freeze + structural RED
+  final I0 owner/fingerprint alignment
+  historical local display contract alignment
+  actual 16-case Karen local read
+  Gate 0 binary decision
+  exact 8 fail-closed packet boundary
+```
+
+API / DB / RN public contract、canonical generation path、composer source、Safety ownerは変更していません。
+
+## 5. actual result
+
+```text
+canonical generation: 16 / 16
+semantic Gate: 16 / 16
+automated candidate: 16 / 16
+deterministic rerun: 16 / 16
+Karen local_human_pass: 7
+repair_required: 9
+hard_fatal: 0
+R9: GATE0_REPAIR_RETURN_STOPPED
+exact 8 packet: not generated
+```
+
+今回のlocal targeted recheckは `137 passed / 41 subtests passed`、modified/new Python compileは `17 passed / 0 failed` です。latest result memoはfull collect-only `12631 collected / 2 classified pre-existing errors` を記録しますが、この更新ではfull collectを完了再確認していないため、full backend suite greenとはしません。
+
+## 6. current boundary
+
+```text
+Gate 0 local pass: false
+device verification: not started
+P5 formal 24: not started
+P6: not started
+P8: not started
+release allowed: false
+next: nine repair-required casesのsentence surface / human follow修復後、R7 -> R8を再実行
+```
+
+# 2026-07-11 差分追記: P7 Gate 0 読感修復・Gate判定契約閉包 actual snapshot差分
+
+## 1. source / count / hash
+
+```text
+received premise: Cocolon_前提資料(320).zip
+received premise SHA-256: 8d10a518a4d37258de4a8a49dc313017cc1df008926c7703eaf0f7f21166130c
+previous backend basis: mashos-api(205).zip
+previous backend SHA-256: cfb378d93a7ff9d65542012ca3176cea6fb5f20f1a49756df16971eb37e93b00
+latest backend: mashos-api(209).zip
+latest backend SHA-256: c2c155d82ba79d7a539efc1b45fd0f1497425b9c994bdc9010633e85917277fb
+Cocolon files: 217 unchanged
+mashos-api files: 1665 -> 1676
+total files: 1882 -> 1893
+added: 11
+modified: 8
+removed: 0
+pycache/pyc in latest backend: 28
+file-level diff: g0rr_diff_20260711.csv
+```
+
+## 2. changed paths
+
+| path | change | scope | current bytes | current SHA-256 |
+|---|---|---|---:|---|
+| `mashos-api/ai/tests/Gate0_RR0_RR2_Result_20260711.md` | added | RR0-RR2 | 3055 | `02be09b1e80c3c4b1fb0a64215589dab9f6b18473c6146b182564cbf4326f2fc` |
+| `mashos-api/ai/tests/fixtures/gate0_rr0_freeze_20260711.json` | added | RR0 | 30729 | `17be584ded05a57636ffc3fa1b6f9636dd5a7c8c8e13f970f9ac6d62d1b532c6` |
+| `mashos-api/ai/tests/helpers/generate_emlis_ai_gate0_rr0_freeze.py` | added | RR0 | 15438 | `1c36ff3a66de8bcadc8309f18cdb6b6e6de0eb9b68999c5108f06a32c997df2e` |
+| `mashos-api/ai/tests/local_only/gate0_rr0_body_local_20260711.json` | added | RR0 | 456509 | `c27de1f703da37f9e5806cc40b2a2af3eb7d61864891393e9db58bad0caced20` |
+| `mashos-api/ai/tests/test_emlis_ai_gate0_rr0_freeze.py` | added | RR0 | 3931 | `fead8069ee2fb41066f825007afee23c8157c3e2b192e210f41582b856f04b3a` |
+| `mashos-api/ai/tests/Gate0_RR3_RR6_Result_20260711.md` | added | RR3-RR6 | 4287 | `c84be36554ecdfcb1ff87c8023a8470e3caa46973faf668e968bf6f7dde46aa1` |
+| `mashos-api/ai/tests/test_emlis_ai_gate0_rr1_structural_red.py` | added | RR1 | 12106 | `fbbb3cee79053b61e16a0649b5331e6ed5bd3e8c2380ad04bfba7679846e593d` |
+| `mashos-api/ai/tests/test_emlis_ai_gate0_rr3_rr5_surface_contract.py` | added | RR3-RR5 | 5535 | `0801e8d5880fe7e2422ab75fddd29754326d0d664e28800f02ab773b88959776` |
+| `mashos-api/ai/tests/test_emlis_ai_gate0_rr6_decision_contract_v2.py` | added | RR6 | 6396 | `07d3d9a7b81a82f81a50ec626afe736d9ec7233dd09ae16d273f7d2296d37bc7` |
+| `mashos-api/ai/tests/Gate0_RR7_RR10_Result_20260711.md` | added | RR7-RR10 | 2110 | `7eb41f32c3c0d2958f5b35e3e5d4d02afc1d639e6897b0ac5ef0df93a8ca524d` |
+| `mashos-api/ai/tests/fixtures/gate0_rr8_validation_20260711.json` | added | RR8 | 56804 | `ef256ec4756ce01c3394b40facef041b9d915d9d0449a0f021d620a75e938d76` |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | modified | RR2 | 117458 | `b32a17e98036ceea1568145d344a631c070c37a669f5c7aa8ba1e3f92b9b5f40` |
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | modified | RR3-RR5 | 82236 | `f9c14c70f0fc29f2de1f2ae6eb7101a239e5e0cf8979476bd24274b33be6771b` |
+| `mashos-api/ai/tests/helpers/emlis_ai_gate0_r9_r10_boundary.py` | modified | RR6 | 16325 | `675dc981dccb32fae9f6ccfe9872f7d6a4e98027b130df7307adb90c268cf4ba` |
+| `mashos-api/ai/tests/helpers/generate_emlis_ai_gate0_r8_r9_artifacts.py` | modified | RR6 | 9040 | `c60ef0eb67a242b4c36315cba2bc74934fd4991064255866cead32619ef04b7d` |
+| `mashos-api/ai/tests/test_emlis_ai_gate0_r8_r10_boundary.py` | modified | RR6 | 7035 | `990da899cf1df884e80c0850b026e707553c98757b0f041cb33d193d60abbebf` |
+| `mashos-api/ai/tests/helpers/emlis_ai_grounded_observation_i0_inventory.py` | modified | RR7 | 41516 | `f308401314161f8ebe6ddddfde9bcf6360f8712d4bfa84790f5b0ce5587a4adc` |
+| `mashos-api/ai/tests/test_emlis_ai_bounded_repair_reroute_step7.py` | modified | RR7 | 14657 | `09078ec106ab1480e12ac8db052b4a362ff31e3ac18ada76ef37b57cc0613960` |
+| `mashos-api/ai/tests/test_emlis_ai_complete_initial_surface_recomposition_existing_gate_chain_p8.py` | modified | RR7 | 3892 | `f8feeff8f09a95ddaaea1879c8f5217c20839d02515e7e15feea9ddce0f441cf` |
+
+before/after size・SHA-256、change kind、claim boundaryは `g0rr_diff_20260711.csv` を正本とします。
+
+## 3. implementation delta
+
+```text
+Plan:
+  common human-follow role classifier
+  normal / self-denial priority split
+  role-first follow target selection
+  grounded semantic i2.v2
+
+Sentence Surface:
+  integrated / separate human-follow delivery
+  relation_surface role
+  endpoint complete-clause predicate safety
+  SurfaceClauseUnit
+  duplicate anchor / repeated opening structural guard
+
+Gate0 decision boundary:
+  Gate0ValidationEvidence
+  decision schema v2
+  source/review/validation fingerprint equality
+  explicit full collect / collection error / full backend evidence
+  exact8 v2 fail-closed guard
+
+Legacy test alignment:
+  obsolete private imports removed
+  canonical owner assertions adopted
+  production private helper restoration = false
+```
+
+pre-repair fingerprintは `8d80af59708affcc0b4ee66c694330e71a08cb7de8b9bc359ff70ffbf7ad2cfe`、post-RR7 fingerprintは `88286e4499bcfa09d23d8db613f775a0890e2781cd22a2a7653badddaa50c340`（1353 fingerprinted files）です。
+
+## 4. validation evidence
+
+| step | result |
+|---|---:|
+| V1 targeted | `186 passed / 41 subtests passed` |
+| V2 safety/public contract | `77 passed` |
+| V3 RN contract | `36 passed` |
+| V4 full collect | `12700 collected / 0 errors` |
+| V5 full backend | `12526 passed / 172 failed / 2 skipped / 41 subtests passed` |
+
+```text
+validation schema: cocolon.emlis.gate0.validation.bodyfree.v2
+validation fixture SHA-256: ef256ec4756ce01c3394b40facef041b9d915d9d0449a0f021d620a75e938d76
+validation_all_pass: false
+unclassified_failure_refs: 172
+gate0_stop_code: GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED
+```
+
+172 failuresのnode IDsはfixtureに記録されていますが、原因は未分類です。原因や一括修復方針を前提資料で推測しません。
+
+## 5. unchanged external boundary
+
+```text
+canonical generation path: grounded_observation_plan_sentence_surface_canonical_v1
+composer source: grounded_plan_realizer
+API route / top-level response key: unchanged
+DB physical schema / migration / write path: unchanged
+RN production source / visible contract: unchanged
+Safety emergency/support owner: unchanged
+question policy: false
+```
+
+## 6. current progression boundary
+
+```text
+RR0-RR7 implementation/evidence changes: reflected
+RR8 validation run: completed with V5 failure
+RR9 same16 regeneration / Karen actual read: not started
+post-repair human pass count: not established
+new R8 review receipt: not generated
+Gate0 local-pass decision v2: not generated
+exact8 packet: not generated
+device evidence: not started
+P5 formal 24 / P6 / P8 / release: false
+```
+
+旧R8 7 pass / 9 repair / 0 fatalと旧R9 `GATE0_REPAIR_RETURN_STOPPED` はpre-repair historyです。今回のsource fingerprintへ更新されたhuman evidenceではなく、current stop codeを置き換えません。
+
+# 2026-07-12 差分追記: P7 Gate 0 FB172 failure closure actual snapshot差分
+
+## 1. source basis
+
+```text
+received premise: Cocolon_前提資料(323).zip
+received premise SHA-256: d94b8afd04ba61d239328e60d7fcea224f29d4d334c2fc63237b20dbf0a006d7
+previous backend basis: mashos-api(209).zip
+previous backend SHA-256: c2c155d82ba79d7a539efc1b45fd0f1497425b9c994bdc9010633e85917277fb
+latest backend: mashos-api(212).zip
+latest backend SHA-256: 977bba3699e06754960db513aac5630ff33b67a1c8c1e0b50ca5707e29282058
+Cocolon: 217 unchanged
+mashos-api: 1676 -> 1684
+combined: 1893 -> 1901
+actual diff: 8 added / 6 changed / 0 removed
+generated __pycache__/pyc: 28 unchanged / source implementationとは分離
+file-level diff: fb172_diff_20260712.csv
+```
+
+## 2. added / changed scope
+
+追加8件はB0〜B5 result 2件、body-free ledger/environment 2件、migration helper 1件、B0/B2・B3/B5・B6 current-owner tests 3件です。変更6件はtest setup、API registry test、Grounded Sentence Surface、Grounded Gate、I0 inventory helper/testです。
+
+指定設計書 `Cocolon_EmlisAI_P7_Gate0_FB172_FailureClosure_Design_20260711.md` は受領した2 ZIP内にありません。このため設計本文の存在は前提資料へ捏造せず、actual B0〜B7 result/test/ledger/codeを実装確認根拠にしました。
+
+## 3. implementation result
+
+```text
+official refs: 172 / unique 172
+batch counts: B0=2 B1=35 B2=85 B3=11 B4=19 B5=7 B6=9 B7=4
+final ledger: 2 clean subprocess / 170 migrated current owner
+pending / unclassified / current-owner missing: 0 / 0 / 0
+old owner restored: false
+skip / xfail: false
+exact body assert added: false
+production change applied: 1 relation-direction family
+```
+
+B0〜B5 result memoは存在します。B6/B7専用result memoはありませんが、final ledger、environment evidence、B3〜B7 integrity test、B6 current-owner test、I0 negative reachability、production diffから実装済み範囲を確認しました。
+
+## 4. premise-update local recheck
+
+```text
+Python compile: pass / 9 changed-new Python files
+focused FB172/current-owner/inventory/API registry: 31 passed
+official frozen 172 selected: 172 passed
+full collect: 12714 collected / 0 errors
+full backend: 12543 passed / 169 failed / 2 skipped / return code 1
+```
+
+latest environment fixtureの `12712 collected` は最終2 tests追加前の段階記録です。current snapshot countは今回再確認した `12714` です。full backendではselected実行時にgreenだったofficial refを含むfailureが再出現するため、order/context非依存のclosureは未証明です。
+
+## 5. current boundary
+
+```text
+B0-B7 implementation/classification: reflected
+full backend green: false
+Gate0: GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED
+same16 post-FB172 regeneration / Karen actual read: not started
+new review receipt / Gate0 pass decision: not generated
+exact8 / device: not started
+P5 / P6 / P8 / release: false
+```
+
+# 2026-07-12 差分追記: P7 Gate A Post-FB172 current-input closure actual snapshot差分
+
+## 1. source basis
+
+```text
+received premise: Cocolon_前提資料(326).zip
+received premise SHA-256: 12492919324a17eb7ee966866d9e926ba37dcd1adf7003f8a5575d7bca9c8d0a
+specified design: Cocolon_EmlisAI_P7_GateA_PostFB172_CurrentInputClosure_DetailedDesign_ImplementationOrder_20260711.md
+specified design SHA-256: 7eda063f75a5f5e99b18332db24027a13d2de75ca11835e6c8b90f725257cee8
+previous backend basis: mashos-api(212).zip
+previous backend SHA-256: 977bba3699e06754960db513aac5630ff33b67a1c8c1e0b50ca5707e29282058
+latest backend: mashos-api(215).zip
+latest backend SHA-256: c743f083cd05a1012834ee20d054e8c086c58da5b235e3323739265e8db7e57c
+Cocolon: 217 unchanged
+mashos-api: 1684 -> 1698
+combined: 1901 -> 1915
+actual diff: 14 added / 9 changed / 0 removed
+generated __pycache__/pyc in latest backend zip: 28 / source implementationとは分離
+file-level diff: gatea_diff_20260712.csv
+```
+
+## 2. added scope
+
+追加14件:
+
+```text
+mashos-api/ai/tests/GateA_GA0_GA1_Result_20260712.md
+mashos-api/ai/tests/helpers/gate0_rr_gatea_ga0_freeze.py
+mashos-api/ai/tests/local_only/gatea_ga0_freeze_bodyfree_20260712.json
+mashos-api/ai/tests/test_emlis_ai_gatea_ga0_freeze.py
+mashos-api/ai/tests/test_emlis_ai_gatea_ga1_structural_red.py
+mashos-api/ai/tests/test_emlis_ai_gatea_ga2_contract.py
+mashos-api/ai/tests/fixtures/gatea_ga5_residual_closure_20260712.json
+mashos-api/ai/tests/test_emlis_ai_gatea_ga5_closure.py
+mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga6_official_20260712.json
+mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga7_karen_review_20260712.json
+mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_validation_20260712.json
+mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_decision_20260712.json
+mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_exact8_20260712.json
+mashos-api/ai/tests/fixtures/gate0_rr_gatea_ga8_final_link_20260712.json
+```
+
+freeze / RED / generic contract、residual owner closure、same16 / local review / validation / decision / exact8 / final-linkのevidence層です。exact8だけはexact inputを持つlocal-only body-full artifactであり、前提資料へ本文を複製していません。
+
+## 3. changed scope
+
+変更9件:
+
+```text
+mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+mashos-api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py
+mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py
+mashos-api/ai/tests/helpers/emlis_ai_grounded_observation_i0_inventory.py
+mashos-api/ai/tests/helpers/emlis_ai_fb172_migration.py
+mashos-api/ai/tests/test_emlis_ai_gate0_r1_semantic_retention.py
+mashos-api/ai/tests/test_emlis_ai_gate0_r5_semantic_subchecks.py
+mashos-api/ai/tests/test_emlis_ai_gate0_rr3_rr5_surface_contract.py
+mashos-api/ai/tests/test_emlis_ai_grounded_observation_i2_i4.py
+```
+
+production changeはPlan / Sentence Surface / Grounded Gateです。一般semantic contribution owner、integrated / separate delivery、relation surface role、closure role / modality / scope、self-denial de-dup、roleなしstem反復、short-state duplicate loopを扱います。helper / testsはcurrent ownerとnegative / metamorphic contractを更新します。
+
+## 4. freeze / closure evidence
+
+```text
+GA0 archive ref: mashos-api(214).zip
+GA0 archive SHA-256: 9fbe8ed2ba6b0d245a60aa4f6f0c6a73cce5c58f77adfbaa4f6a5769ba72b9f7
+baseline fingerprint: 394b5da7a9546d5f893e00fe27417e2e10231dcc267a2d728e6f11025d2aa0c3
+baseline fingerprinted files: 1359
+baseline full collect: 12714 / 0 errors
+baseline full backend: 12543 passed / 169 failed / 2 skipped
+failure set ID: post_fb172_residual_fd8dc9bd19e9
+failure refs SHA-256: fd8dc9bd19e95db6edcb8dce951dedc50a477865145c8f5c3d08c92e978fc34a
+pre-GA2 structural RED: 13 failed / 9 passed
+GA5 closure O0-O5: 0 / 128 / 11 / 26 / 1 / 3
+baseline closed / current open: 169 / 0
+introduced failure: 0
+```
+
+## 5. final validation / read / decision
+
+```text
+final fingerprint: a4eeace949fe127a96551d9eaaaee58e5ae58b85365434af7eb3e5c2a0457d26
+final fingerprinted files: 1364
+targeted: 303 passed
+Safety / public: 69 passed
+RN: 36 passed / carried_forward_no_rn_production_change
+full collect: 12834 / 0 errors
+full backend: 12832 passed / 0 failed / 0 errors / 2 skipped
+same16 automated / deterministic / semantic / public path: 16 / 16
+Karen local review: 16 pass / 0 repair / 0 fatal
+Gate0 decision: GATE0_LOCAL_PASS_DEVICE_PACKET_READY_STOPPED
+Gate0 local pass: true
+exact8 packet status: ready_waiting_for_device_evidence
+device evidence: not started
+```
+
+GA8 decision JSONの `exact8_packet_generated=false` はdecision作成時点の値です。後続のexact8 artifact SHA-256 `43a402f6d4c802400ac7fb5065c899c51ac1ffa85e1d787331f87900a507ba8c` とfinal-linkにより、current packet実体は確認できます。
+
+## 6. premise-update local recheck
+
+```text
+changed/new Python compile: pass / 14 files
+GateA GA0 / GA1 / GA2 / GA5: 120 passed / 1 warning
+full backend rerun: not performed
+```
+
+actual validation fixtureはofficial compatible environmentでfull backend greenを記録します。今回の前提資料更新環境ではfocused testだけを再実行したため、両者を分けて記録します。
+
+## 7. unchanged external boundary / current stop
+
+```text
+canonical generation path: unchanged
+composer source: grounded_plan_realizer
+API route / response shape: unchanged
+DB schema / write path: unchanged
+RN production source: unchanged
+Safety owner: unchanged
+raw input / returned surface / comment in premise update: not included
+P5 / P6 / P8 / release: false
+next boundary: Mash exact8 device evidence 8 / 8
+```
+
+local backend / read closureをdevice pass、Gate B、P8、releaseへ変換しません。
+
+# 2026-07-12 差分追記: Mandatory Two-stage / Grounded Human Reception R0〜R8 handoff
+
+## source / file-level diff
+
+```text
+received premise: Cocolon_前提資料(331).zip
+received premise SHA-256: 3c90bc272b029cf0f38c00a307f41b7cc22898ace67bb630a261d8e1348c9fc2
+latest backend: mashos-api_3(121).zip
+latest backend SHA-256: f8fa0cc8785fdd4d40b3ec5b8c897dfc88e3f3e4e49c00e88f7f5e63fae5f3d4
+Cocolon: 217 unchanged
+mashos-api: 1698 -> 1724
+combined: 1915 -> 1941
+actual diff: 26 added / 23 changed / 0 removed
+file-level diff: ghr_diff_20260712.csv
+generated __pycache__ entries in latest backend zip: 28 / source implementation countに含めず
+```
+
+`ghr_diff_20260712.csv` は49件すべてについて、added / modified、owner種別、実装範囲、claim boundary、更新前後size・SHA-256を記録します。CSV名はzip展開性を優先して短名にしています。
+
+## 実装差分の要約
+
+```text
+26 added
+  - Grounded Human Reception production owner 1
+  - mandatory two-stage / device handoff docs 2
+  - app-valid exact8 / withdrawal / R6 / R7 fixtures・receipts
+  - local-only visible / unseen / device packets
+  - R0-R7 contract tests and mandatory two-stage tests
+
+23 modified
+  - Plan / Sentence Surface / Gate / Reply public return owners
+  - old GateA decision / review / validation / exact8 lineage
+  - Gate0 / GateA / I6 / I7 helper and regression contracts
+
+0 removed
+```
+
+## current implementation / validation facts
+
+- mandatory two-stageとmechanical restatement guardがruntimeへ接続済み。
+- GroundedHumanReceptionPlan、専用realizer、七Reception Gate、四final return guardが接続済み。
+- app-valid exact8 v2がcurrent identity owner。旧mandatory exact8 packetはsuperseded。
+- R6 receiptはR0-R6 `67 passed`、関連backend `342 passed`、failure 0、既存warning 1を記録。
+- exact8 / same16 / unseen8のtechnical cohortはreceipt上pass。
+- API / DB / RN / public top-level contractはunchanged。
+- 今回の前提資料更新ではfull backendを再実行していない。
+
+## actual-device evidence / product decision
+
+```text
+actual-device evidence: 実機確認結果２.zip
+actual-device evidence SHA-256: 6c78d5dc5efd9c75c412dfc54b195ef089af77fb735b6c98c1cf15d13e89915b
+app-valid exact8 source: Emlis_exact8_app_validated_inputs_20260712(5).md
+app-valid exact8 source SHA-256: 1edd057a6fc246ab24ec1f886eaf1b22292b658cd09bf92a53665bf55bb02c86
+actual-device screenshot/log set: exact8 8 / 8 received
+raw comment_text SHA-256 machine match: not confirmed
+R8 current decision: REPAIR_REQUIRED
+P5 / P6 / P8 / release: false / false / false / false
+```
+
+画面では二段・順序・scroll/layout方向を確認できました。Mash様は文章の質とEmlisの温度を肯定しつつ、意味の厚い入力に対する応答が短すぎること、同語・同骨格の反復があることを修復要求として明示しました。これは単なる文字数不足ではなく、Receptionが一手で閉じる生成構造の不足として扱います。
+
+R6 local Karen receiptの `human_pass` はcurrent product acceptanceから退きます。R7 readiness / packetはrepo bytes上 `not_run` のままです。外部実機証拠の受領は記録しますが、生body hash一致を確認済みにせず、新しいrepo receiptが存在するとも書きません。
+
+## handoff / next boundary
+
+```text
+next design: Cocolon_EmlisAI_R8_GroundedHumanReception_ResponseDepth_RichnessRepair_DetailedDesign_ImplementationOrder_20260712.md
+next design SHA-256: bef049a1751e636dc05bc065c90e297ab5bded23208bfd52523f8e36ae0c22f4
+status in latest backend zip: not present / not implemented
+next implementation boundary: semantic richnessに応じたReception Opportunity / Depth Policy / Move Planの実装
+```
+
+current stop:
+
+```text
+R8 exact8 actual-device product decision: REPAIR_REQUIRED
+response-depth/richness implementation: not started
+representative4 recheck after repair: A / B / I6-L03 / I6-D02
+exact8 recheck after representative4 pass: required
+P5 / P6 / P8 / release: blocked
+```
+
+# 2026-07-14 差分追記: R8 Response Depth / Richness Repair・NLS v2 actual snapshot差分
+
+## 1. source basis / integrity
+
+```text
+received premise: Cocolon_前提資料(335).zip
+received premise SHA-256: 0fc80fb9b7bcf34fe8eb6cca8c34b19a43461c88bb64a53ca8a8de7cb03e16b9
+latest backend: mashos-api_10(51).zip
+latest backend SHA-256: 2f01929a341f55899b3e0ee1878c6323716112797350bf35ec53cf31ebf7db10
+latest backend ZIP integrity: pass
+latest backend files: 1792
+source / non-cache files: 1764
+generated pyc: 28
+unsafe path / symlink / duplicate entry: 0 / 0 / 0
+latest Cocolon: Cocolon(297).zip
+latest Cocolon SHA-256: 625a58d773d5ed8ac7da3e28d032f7467533f8bb1e3a011e457883a267f3a21e
+Cocolon ZIP integrity: pass
+Cocolon files: 217 / prerequisite-unrepresented paths: 0
+combined physical files: 2009
+combined source / non-cache coverage: 1981
+```
+
+R8 design:
+
+```text
+Cocolon_EmlisAI_R8_GroundedHumanReception_ResponseDepth_RichnessRepair_DetailedDesign_ImplementationOrder_20260712.md
+SHA-256: bef049a1751e636dc05bc065c90e297ab5bded23208bfd52523f8e36ae0c22f4
+```
+
+NLS v2 design:
+
+```text
+Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV2_DetailedDesign_ImplementationOrder_20260713.md
+SHA-256: b2441917ee80b22c84973c4205bc1cb1a9c471037fe270391438cbd7d7694752
+```
+
+## 2. file-level diff
+
+| scope | added | modified | removed |
+|---|---:|---:|---:|
+| R8 Response Depth / Richness Repair | 27 | 13 | 0 |
+| Natural Language Surface v2 | 41 | 0 | 0 |
+| total | 68 | 13 | 0 |
+
+`eai714_diff.csv`は81行についてscope、change type、kind、summary、claim boundary、before / current size・SHA-256を記録する。CSV filenameは展開性のため短名にした。
+
+R8の13 modifiedはproduction owner 5件と既存contract / regression test 8件です。前提資料内の直前hashをbefore ownerとし、12件は`ghr_diff_20260712.csv`、`test_emlis_ai_grounded_observation_i0_inventory.py`だけは後続`fb172_diff_20260712.csv`のcurrent hashから比較した。
+
+R8完了時点の`mashos-api(222).zip`からlatestまでの全byte比較は41 added / 0 modified / 0 removedで、すべてNLS v2 pathです。前提資料内の全md / json / csv / txtに記録されたbasenameと最新sourceを横断照合し、R8 / NLS v2以外の未反映feature系列は確認されなかった。
+
+## 3. R8 Response Depth / Richness Repair implementation delta
+
+```text
+RR0: evidence / progression freeze complete
+RR1: intentional RED established
+RR2: Reception Opportunity Inventory implemented
+RR3: Depth Policy / MovePlan implemented
+RR4: ClausePlan / SentencePlan implemented
+RR5: multi-Move Surface implemented
+RR6: 12 Reception Gates / final guard implemented
+RR7: Move-preserving Recovery implemented
+RR8: local automated QA passed
+RR9: Karen local Product Read Feel human_pass / progression_authority none
+RR10: expected packet / template / validator / verifier / readiness implemented
+RR10 actual device: not_run
+RR11 exact8 actual device: not started
+RR12 docs handoff: not complete
+```
+
+RR8 receipt上はexact8 8、same16 16、unseen12 12で、完全重複0、rich一文0、short水増し0、unused support 0、observation hash exact8 8 / 8一致です。記録されたvalidationはRR0〜RR8 17 files / 223 tests、RR9 validator 7 tests、relevant backend 342 testsのpassです。
+
+RR10代表4件の順序は`A -> B -> I6-L03 -> I6-D02`。4 / 4実機pass前にRR11を開かず、expected packet / not-run templateを実結果へ書き換えない。
+
+## 4. Natural Language Surface v2全Step result
+
+| Step | current result |
+|---:|---|
+| 0 | verified complete |
+| 1 | verified complete |
+| 2 | verified complete |
+| 3 | first confirmed underimplementation |
+| 4 | partial / purpose unproven |
+| 5 | first clear Surface product defect |
+| 6 | semantic Gate underimplemented |
+| 7 | completion / freeze revoked |
+| 8 | one-shot evaluated `STOP` |
+| 9 | not evaluated; correctly blocked by A STOP |
+| 10 | feature not implemented / shadow 0 |
+| 11 | feature not implemented / owner switch 0 |
+| 12 | formal v2 device run 0; four reviewed images are v1 |
+| 13 | production adjustment 0; v1 ratio analysis only |
+
+Holdout A current metrics:
+
+```text
+evaluation run: 1
+machine failure: 1
+distribution: FAIL
+naturalness: 5 / 14
+non-template: 1 / 14
+overclaim absence: 13 / 14
+v2 clearly better / same / v1 clearly better: 5 / 3 / 6
+overall: STOP
+```
+
+current audit validation:
+
+```text
+all-Step audit: 7 passed
+NLS v2 zero-argument suite: 62 passed / 3 classified failed
+unclassified failure: 0
+compileall / JSON parse: pass / pass
+AST forbidden Holdout runner call: 0
+```
+
+3 classified failureはA `STOP`とB `not_evaluated`に反する旧pass expectation各1件、凍結testの文字列自己一致defect 1件です。これを未分類failureへ数えない一方、62 passを全Step合格とも扱わない。
+
+## 5. unchanged boundary / current stop
+
+```text
+public runtime owner: grounded_sentence_surface_canonical_v1
+NLS v2 state: offline_only_stopped
+runtime shadow / owner switch: 0 / 0
+API / DB / RN / naming changed: false / false / false / false
+R8 RR10 actual device: not_run
+P5 / P6 / P8 / release: false / false / false / false
+```
+
+R8の次工程にはMash actual-device operatorによる代表4件の証拠取得が必要です。NLS v2の次工程は同じsourceの継続修正ではなく、新versionの詳細設計と、既知A/Bを再利用しないfresh independent holdoutの用意です。二つの停止境界を相互に代替しない。
+
+## 6. 推測と華恋の意見
+
+推測: NLS v2のHoldout A failureは、Step 3の意味選択不足からStep 7の証拠不足な完了判断までの連鎖で説明できる。ただし層別の置換対照実験をしていないため、唯一の原因とは断定しない。
+
+華恋の意見: R8はlocal repairの方向を保ちつつ実機で止めるのが妥当です。NLS v2は凍結Holdoutへ合わせて延命せず、意味責任とGateを新versionとして再設計するべきです。
+
+# 2026-07-20 差分追記: GitHub pinned NLS v3 Step 11 snapshot
+
+## 1. source identity
+
+```text
+Cocolon      MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748
+mashos-api   MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed
+verified at  2026-07-20 JST
+source mode  github pinned commits + local materialization as needed
+```
+
+GitHubとlocalは別implementationではありません。同じcommit / path / blob / hashなら同一実ファイルです。過去のlocal ZIP記録は当時snapshotの履歴として保持します。
+
+`Cocolon`のcurrent headは記録しましたが、この差分でNLS v3用Cocolon production path変更を主張しません。rc0030 E3 exact 6は`mashos-api`だけです。
+
+## 2. reconstructed file-level delta
+
+7/14前提資料のlogical baselineとGitHub履歴は、NLS v2 auditと初期NLS v3が後日まとめてpushされたため、単一GitHub base commitだけでは一致しません。そこで次の分離を行いました。
+
+1. GitHub transport comparison anchor `d81865a4bf952cbc091171fb52913d34156f4e9c`からcurrent headまでをcompare。
+2. compare 235 path = 229 added / 6 modified / 0 removed。
+3. `eai714_diff.csv`ですでに7/14反映済みのNLS v2 10 path = 6 added / 4 modifiedを除外分類。
+4. 未反映NLS v3 current delta = 225 path = 223 added / 2 modified / 0 removed。
+5. 235 pathすべてをcurrent headのGit blob SHA-1へ再照合。fetch error 0。
+
+この方法で`d81865...`を過去local ZIPとbyte-identicalだとは主張しません。あくまでGitHub transport比較anchorです。logical baselineの既反映判定は7/14前提資料と`eai714_diff.csv`を使います。
+
+full row ownerは`eai720_diff.csv`です。
+
+## 3. NLS v3 current status
+
+```text
+Step 11 / Cycle 001
+rc0030 E3 machine: 8/8 selected / active required 80/80 PASS
+rc0030 Product Read: PASS1 / MINOR1 / MAJOR6 / BLOCKER0
+former MAJOR improved: 0/5
+controls non-worse: 1/3
+new MAJOR: 1
+rc0030: frozen as E3 Product Read STOP evidence
+rc0031: impact scope defined / implementation not started
+E4: not started
+Cycle 001: NOT_ACCEPTED
+Cycle 002: NOT_AUTHORIZED
+```
+
+rc0031補遺本文の`EMLIS_RECEPTION_UNBOUND 4件`は、canonical Product Read receiptでは5件です。receiptを集計正本とします。
+
+## 4. current exact 6 reflection
+
+`38ca7fa779065998a363ce9bb581338d98b8f79d -> 25b98ec8b59eaff717d1dc3261ff21156ccce7ed`は承認済みexact 6だけです。
+
+| path | SHA-256 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_rc0030_surface_planning_experiment_dependency_manifest_v3.py` | `4f473c9ccea9088c4372afacd903b1fa0130983acbacdf526bba57488883f5ff` |
+| `ai/tools/emlis_nls_v3_rc0030_surface_planning_dependency_manifest.py` | `5b7440780761106d6972bbfd7f9a62f79b9608f84ca1b01ba04bd20cce73665f` |
+| `ai/tools/emlis_nls_v3_rc0030_surface_planning_bounded_experiment.py` | `e0ca3d39aa43c1fbe1dce493177583200b488241fa1a91ab5954b97a1c6863e5` |
+| `ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest_rc0030_surface_planning_experiment.json` | `06327f7e0e6d63923bbdf836aa5d25744a83eeb8f8a704aa23c89a3ca057857b` |
+| `ai/tests/test_emlis_nls_v3_s11_rc0030_e3_representative8.py` | `30b2b3043c566631d1329e4d516c9d932a103a70f61609f3237e6a45a9538c2e` |
+| `ai/tests/test_emlis_nls_v3_s11_rc0030_dependency_closure.py` | `926b0e4bd0ebf5604fc08761d8660d8c62efd3d8a7ee255b84d739ad654b8582` |
+
+exact 6外変更は0 path、blob / local最終版一致は6 / 6です。
+
+## 5. next boundary
+
+rc0031補遺§14の明示承認後、P1 exact 7 RED + new24 attacksをproduction source edit 0でfreezeします。P1後だけP2、P3、P4、P5、E2、E3へ進み、E3 Product Read通過後だけE4を開始します。
+
+現設計の最低1000件は未改訂です。500件以下でStep 14へ進む場合は、実装判断ではなく設計改訂の明示承認が必要です。

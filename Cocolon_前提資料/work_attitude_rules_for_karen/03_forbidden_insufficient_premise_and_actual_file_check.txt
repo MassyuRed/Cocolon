@@ -17,7 +17,8 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - `02_cocolon_national_system.md` 系
 - `05_cocolon_rule_file_index.md`
 - `07_latest_snapshot_diff.md`
-- 最新実ファイルzipまたはGitHubの対象ファイル
+- GitHub上の`Cocolon` / `mashos-api` current head、固定predecessor commit、対象実ファイル
+- local checkout / ZIP / copyを使う場合、そのpath / blob / hashが固定GitHub commitと一致すること
 - 必要なログ / スクリーンショット / テスト結果
 
 ## 前提資料の読み方
@@ -47,7 +48,11 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 
 ## Cocolon_前提資料更新時のルール
 
-- 最新実ファイルzipを基準にする。
+- 原則としてGitHub上の`Cocolon` / `mashos-api`をcurrent実ファイル確認元にし、作業開始時にpredecessor commitを固定する。
+- GitHubからmaterializeしたlocal checkout / ZIP / copyは、path / hash一致時に同じ実ファイルとして扱う。local / cloud差を別仕様にしない。
+- user-supplied未push overlayがある場合はhandoff materialとして分離し、固定GitHub predecessorを黙って置換しない。
+- GitHubとlocal materializationが不一致なら同一視せず、commit / path / hash差を提示して停止する。
+- 過去local ZIPのsnapshot名・hash・countは当時の証拠として残し、current GitHub値へ遡及上書きしない。
 - 前提資料との差分だけを見る。
 - 変更点がない資料は触らない。
 - 修正必要箇所のみ差分修正・差分追記する。

@@ -1,6 +1,13 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-07-09"
+revision_date: "2026-07-20"
+source_repositories:
+  - Cocolon
+  - mashos-api
+source_mode: "github_pinned_commits_with_local_materialization"
+current_source:
+  Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
+  mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -5624,4 +5631,569 @@ compileall: passed (latest result memo recorded / this premise update local rech
 full backend suite green: not claimed
 RN contract green: not claimed
 RN real-device modal verified: not claimed
+```
+
+# 2026-07-10 差分追記: R54-AHR Post-DHC DHD contract / boundary validation
+
+Post-DHC DHDのcontract / boundary確認対象は次です。
+
+| 種別 | path | 読み方 |
+|---|---|---|
+| service helper | `mashos-api/ai/services/ai_inference/emlis_ai_p7_r54_ahr_post_dhc_direction_decision_boundary_20260709.py` | R0〜R1 / DHD-OP00〜OP08のbody-free direction decision helper。DHC result合成、DHR-OP06 call、P7 actual evaluation、P8、releaseを実行したとは読まない。 |
+| target tests | `mashos-api/ai/tests/test_r54_ahr_post_dhc_direction_decision_boundary_dhd_r0_r1_20260709.py` ... `test_r54_ahr_post_dhc_direction_decision_boundary_dhd_op08_result_20260709.py` | DHD skeleton / OP00〜OP08の段階別contract tests。target greenはdirection boundary contract成立であり、current production materialやruntime execution permissionではない。 |
+| result memos | `mashos-api/ai/tests/R54_AHR_PostDHC_DirectionDecisionBoundary_DHD_R7_TargetValidation_Result_20260709.md` ... `R54_AHR_PostDHC_DirectionDecisionBoundary_DHD_R11_NextWorkDecision_20260709.md` | target / selected / optional readfeel / compileall / R10 closure / R11 next-work decisionをbody-freeで記録する。R11 P7 readfeel candidateもcurrent execution allowanceはnone。 |
+| premise diff CSV | `r54dhd_diff_20260710.csv` | 前提資料側の短名coverage一覧。12 entries added / 0 changed / 0 removedを記録する。 |
+
+DHDを読むときの禁止:
+
+```text
+DHD target greenをcurrent production direction execution permissionとして読まない。
+DHC R11-only basisをcurrent selected DHC-OP08 materialとして読まない。
+DHC validation greenをcurrent selected scan-clear resultとして読まない。
+DHR-OP06 consideration eligibilityをbuilder call permissionとして読まない。
+implicit OP05 fallbackが許可されたとは読まない。
+P7 readfeel reconnection candidateをactual evaluation / P7 completeとして読まない。
+OP05 comparator outputをruntime branch executionとして読まない。
+OP07 validation plan refsをhelperによるvalidation executionとして読まない。
+OP08 carried pair closureを新しい判断生成やselected direction executionとして読まない。
+R10/R11 closureをP8 start / question_text materialization / release allowedへ変換しない。
+```
+
+検証記録の読み方:
+
+```text
+DHD target: 294 passed (latest result memo recorded / this premise update local recheck passed)
+selected regression: 865 passed (latest result memo recorded / this premise update local recheck passed)
+optional product readfeel regression: 15 passed (latest result memo recorded / this premise update local recheck passed)
+compileall: passed / 5 target files (latest result memo recorded / this premise update local recheck passed)
+full backend suite green: not claimed
+RN contract green: not claimed
+RN real-device modal verified: not claimed
+P7 readfeel actual evaluation: not started
+current execution allowance: none
+```
+
+# 2026-07-11 差分追記: P7-PQR / Grounded Adaptive Observation contract・boundary・validation
+
+## P7-PQR contract boundary
+
+| 対象 | current owner | 固定する境界 |
+|---|---|---|
+| preflight / plan / sidecar | `P7_PQR_I0_I3Q_Preflight_Result_20260710.md`, `P7_PQR_I3Q_Sidecar_Form_20260710.md` | 24 slotはblank form。actual source/body、human row、P5 evidenceではない。 |
+| operation controller | `ai/tools/emlis_p7_p5_actual_local_review.py` | external local root、R50/R51 exact scoped allow、human attestation、Pass A -> B -> C、purgeをfail-closedで強制する。 |
+| controller tests | `test_emlis_p7_p5_actual_local_review_20260710.py` | 今回 `12 passed`。controller contract確認でありhuman QA passではない。 |
+| operation result | `P7_PQR_P5_Actual24_LocalReview_Operation_Result_20260710.md`, `...ExecutionAttempt2...md` | actual 24 source/body 0、human rows 0、P5 confirmed false、P6/P8/release false。latest memoの423 passedはselected contract regression record。 |
+| premise diff | `p7pqr_diff_20260711.csv` | 7 added / 0 changed / 0 removed。 |
+
+禁止境界:
+
+```text
+sample / fixture / template / historical memo -> current actual 24 sourceへの昇格禁止
+AI / machine -> human reviewer / human rating / semantic observationへの昇格禁止
+0-case blocked-session purge -> actual 24 disposal verifiedへの昇格禁止
+contract green -> P5 confirmed / P6 start / releaseへの昇格禁止
+```
+
+## Grounded Adaptive Observation contract boundary
+
+| 対象 | current owner | 固定する境界 |
+|---|---|---|
+| canonical plan | `emlis_ai_grounded_observation_plan.py` | real Evidence Span id、nuclei / relations / unknown boundaries、retention、coverage、Safety policy。synthetic evidenceやfixture vocabularyを根拠にしない。 |
+| sentence / surface / recovery | `emlis_ai_grounded_sentence_surface.py` | plan-preserving functional realization。low-info、limited、self-denial overlayを同一planから作り、required nucleus / relationを縮退でも保持する。 |
+| semantic gate | `emlis_ai_grounded_observation_gate.py` | plan validity、evidence resolution、required coverage、text semantic retention、anti-template、question dominance、depth adequacyをbody-freeで検査する。 |
+| public orchestration | `emlis_ai_reply_service.py` | I5 canonical single cutover。`generation_path=grounded_observation_plan_sentence_surface_canonical_v1`、`composer_source=grounded_plan_realizer`。public contract changed=false。 |
+| I6 | `test_emlis_ai_grounded_observation_i6.py` / helper | known4 + unseen12、metamorphic、Safety perimeter、anti-template、static reachabilityを固定する。 |
+| I7 | `test_emlis_ai_grounded_observation_i7.py` / helper | local candidate-passとcurrent canonical device evidenceを分離し、8 verified device records前にP5 formal 24を開かない。 |
+| premise diff | `gao_diff_20260711.csv` | 12 added / 16 changed / 0 removed。 |
+
+## 今回のvalidation record
+
+| scope | result | 読み |
+|---|---:|---|
+| P7-PQR controller | `12 passed` | local-only controller contract。human review実施証明ではない。 |
+| Grounded I1-I7 focused | `78 passed / 41 subtests passed` | canonical focused pathはgreen。full regressionではない。 |
+| Grounded I0 inventory | `4 passed / 3 failed` | reply-service fingerprint、direct caller ownership、legacy fixture-phrase occurrence期待がcurrent pathと不一致。 |
+| impacted material / meaning tests | `20 passed` | modified material / meaning boundaryのsubset。 |
+| legacy D recovery + Phase20 device | `3 passed / 4 failed` | 旧nested metadata / recomposition期待3件とA low-information metadata期待1件がcurrent canonical pathと不一致。 |
+| changed/new Python compile | `30 passed / 0 failed` | syntax/import compile確認。runtime correctness / release証明ではない。 |
+
+`full_backend_suite_green_confirmed=false`、`rn_real_device_current_canonical_path_verified=false` とします。A〜D旧device evidenceはcurrent canonical generation path / composer / semantic gate / public-path metaを持たないため、I7ではruntime mismatchとして扱います。
+
+# 2026-07-11 差分追記: P7 Gate 0 current-input 意味保持・読感修復 contract / boundary / validation
+
+## contract matrix
+
+| contract | current owner / evidence | current status |
+|---|---|---|
+| required nucleus / whole-input retention | `emlis_ai_grounded_observation_plan.py`, R1/R2 tests | fixed four-required capを廃止しmajor semantic turnをrequired化。 |
+| relation type / endpoint / direction / reversal | Plan relation builder、R1/I1/I6 tests | local marker scopeとgrounding strengthを使い、false shiftを抑止。 |
+| short lexical fidelity | Sentence Surface、R1/R5 tests | source predicate保持とungrounded sensation family禁止。 |
+| human follow role | Sentence Surface、I7 helper、R1/R5 tests | burden / concrete effort / valued change / retained intention / protective / help-seeking / integrated stateを分離。 |
+| anti-template / repetition | Grounded Gate、R5/I6 tests | duplicate anchor、same semantic setの無目的反復、short-state余剰followをreject。 |
+| current cutover inventory | I0 helper/test | canonical owner reachable、legacy substantive ownerはnon-public shadow、Safety owner維持。 |
+| historical Phase20-10 | `test_emlis_ai_phase20_10_real_device_recheck.py` | `historical_local_display_only` / `actual_device_evidence=false`。 |
+| local product read | I7 helper + R8 body-free receipt | automated candidateとactual `karen_local_product_read`を分離。 |
+| exact 8 device entry | `emlis_ai_gate0_r9_r10_boundary.py` | 16/16 local_human_passがないactual decisionでは`gate0_local_pass_required`。 |
+
+public contract boundary:
+
+```text
+generation_path = grounded_observation_plan_sentence_surface_canonical_v1
+composer_source = grounded_plan_realizer
+public API / DB / RN / top-level response key = unchanged
+question policy = false
+runtime product_readfeel_status = not_evaluated
+raw input / returned body in public meta = none added
+```
+
+## validation record
+
+今回latest zip上で次を再確認しました。
+
+| scope | result | boundary |
+|---|---:|---|
+| Gate 0 / Grounded I0-I7 / historical Phase20-10 targeted | `137 passed / 41 subtests passed` | modified/adjacent targeted green。full backend suiteではない。 |
+| modified/new Python compile | `17 passed / 0 failed` | syntax compile。product readinessではない。 |
+| latest R8/R9/R10 memo full collect | `12631 collected / 2 classified pre-existing errors` | result memo記録。この更新ではfull collectを完了再確認していない。 |
+| unclassified targeted failures | `0` | classified/pre-existing boundaryを維持。 |
+
+## R8 human boundary
+
+```text
+automated candidate: 16 / 16
+semantic Gate: 16 / 16
+deterministic body match: 16 / 16
+actual local reviews: 16
+local_human_pass: 7
+repair_required: 9
+hard_fatal: 0
+```
+
+local_human_pass caseは `D`, `I6-S01`, `I6-S02`, `I6-S03`, `I6-D01`, `I6-D02`, `I6-D03` です。
+
+repair-required caseとreason code:
+
+| case | body-free reason refs |
+|---|---|
+| A | `duplicate_anchor_follow_readfeel`, `repetitive_state_sentence_opening` |
+| B | `unnatural_dependent_clause_compaction` |
+| C | `human_follow_role_surface_mismatch`, `generic_change_tail_for_intention` |
+| I6-L01 | `relation_surface_awkward_reversal`, `human_follow_role_surface_mismatch` |
+| I6-L02 | `human_follow_target_misses_retained_intention` |
+| I6-L03 | `duplicated_predicate_in_reversal_surface`, `human_follow_role_surface_mismatch` |
+| I6-C01 | `relation_surface_awkward_reversal`, `human_follow_role_surface_mismatch` |
+| I6-C02 | `human_follow_role_surface_mismatch`, `generic_change_tail_for_intention` |
+| I6-C03 | `relation_surface_awkward_reversal`, `human_follow_role_surface_mismatch` |
+
+required nuclei、required relation direction、lexical source fidelityはこの9件でも後退なしと記録されています。ただし自然な日本語・human follow fit・non-template readfeelが不合格なので、構造greenを商品合格へ昇格しません。
+
+## Gate / device boundary
+
+```text
+R9 decision: GATE0_REPAIR_RETURN_STOPPED
+Gate 0 local pass: false
+exact 8 order helper: implemented
+exact 8 order: A -> B -> C -> D -> I6-S03 -> I6-L03 -> I6-C01 -> I6-D02
+required device meta: generation_path / composer_source / semantic_quality_gate / public_reply_path_connected
+exact 8 packet file: absent
+actual device evidence: not started
+P5 / P6 / P8 / release: false
+```
+
+次はR3/R4 sentence-surface / human-follow ownerのrepairです。修復後にR7 affected validationとR8 same-16 actual local readを再実行し、16/16 `local_human_pass`でなければR9/R10へ進みません。
+
+# 2026-07-11 差分追記: P7 Gate 0 読感修復・Gate判定契約閉包 contract / boundary / validation v2
+
+## semantic / surface contract
+
+| contract | actual owner | current fact |
+|---|---|---|
+| human-follow role | `emlis_ai_grounded_observation_plan.py` | shared classifier、normal/self-denial priority分離、intentionをvalued changeより先に分類。semantic `i2.v2`。 |
+| follow target | Plan `_build_response_and_policies()` | role-first、required retention、relation接続、source orderの順で選択。 |
+| line delivery | `emlis_ai_grounded_sentence_surface.py` | `human_follow_delivery:integrated|separate`、homogeneous state grouping、duplicate anchor guard。 |
+| relation grammar | Sentence Surface | relation typeとsurface roleを分離し、complete clauseへgeneric述語を二重付加しない。 |
+| dependent clause | Sentence Surface | internal `SurfaceClauseUnit`でinterrogative/quotative/dependent fragmentを保持。 |
+| public boundary | existing canonical path | generation path、composer source、API/DB/RN/Safety ownerは不変。 |
+
+## Gate0 decision contract v2
+
+`Gate0ValidationEvidence` はtargeted、safety/public、RN、full collect、collection errors、full backend、unclassified failures、source fingerprintを独立証拠として持ちます。artifact generatorのhard-coded `affected_suites_green=True` / `unclassified_failure_count=0` は削除済みです。
+
+pass decisionとexact8には、少なくとも次が必要です。
+
+```text
+validation evidence exists
+source == review == validation fingerprint
+full_collect_success == true
+collection_error_count == 0
+full_backend_green == true
+unclassified_failure_count == 0
+same16 Karen local_human_pass == 16 / 16
+```
+
+不足時はpass decisionを生成せず、exact8も生成しません。
+
+## obsolete import / legacy route boundary
+
+次のprivate symbolsはproductionへ復活していません。
+
+```text
+_regeneration_reasons_for_retry
+_reply_service_recomposition_existing_gate_chain_summary
+```
+
+旧2 testはcurrent `build_plan_preserving_recovery_sequence`、Grounded Plan / Surface / Gate、`render_emlis_ai_reply`へassertを移管しました。V4 full collectは `12700 collected / 0 errors` です。
+
+## actual validation evidence
+
+| validation | result | contract reading |
+|---|---:|---|
+| V1 targeted | `186 passed / 41 subtests passed` | local structural/owner/boundary set。 |
+| V2 safety/public | `77 passed` | safety/public contract subset。 |
+| V3 RN | `36 passed` | RN screen contract。RN source変更ではない。 |
+| V4 full collect | `12700 collected / 0 errors` | obsolete import blockerは解消。 |
+| V5 full backend | `12526 passed / 172 failed / 2 skipped / 41 subtests passed` | return code 1。Gate0 pass不可。 |
+
+body-free validation fixture:
+
+```text
+schema: cocolon.emlis.gate0.validation.bodyfree.v2
+source fingerprint: 88286e4499bcfa09d23d8db613f775a0890e2781cd22a2a7653badddaa50c340
+SHA-256: ef256ec4756ce01c3394b40facef041b9d915d9d0449a0f021d620a75e938d76
+validation_all_pass: false
+unclassified_failure_count: 172
+gate0_stop_code: GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED
+rr9_started: false
+rr10_pass_decision_generated: false
+exact8_packet_generated: false
+```
+
+failure refs 172件は記録されていますが、原因分類は未確定です。前提資料側で分類を発明しません。
+
+## review / device history boundary
+
+pre-repair R8の7 pass / 9 repair / 0 fatalとpre-repair R9 `GATE0_REPAIR_RETURN_STOPPED` は上書きしていません。ただしpost-RR7 source fingerprintとは一致しないため、current review evidenceやGate0 decisionとして再利用できません。RR9 same16 actual readが未開始のため、修復後9件の自然日本語合格、16/16 human pass、exact8 readyを主張しません。
+
+# 2026-07-12 差分追記: P7 Gate 0 FB172 contract / boundary / validation
+
+## freeze / owner ledger contract
+
+| 項目 | current値 |
+|---|---:|
+| schema | `cocolon.emlis.gate0.fb172.owner_ledger.bodyfree.v1` |
+| baseline source fingerprint | `88286e4499bcfa09d23d8db613f775a0890e2781cd22a2a7653badddaa50c340` |
+| baseline fingerprinted files | `1353` |
+| official refs / unique | `172 / 172` |
+| ref-list SHA-256 | `cbd93f86451eef88cf2a3b6a3a53afc618a6ffa21da028d4a77ff92d73a58a7c` |
+| record count | `172` |
+| clean subprocess / migrated | `2 / 170` |
+| pending / unclassified / current owner missing | `0 / 0 / 0` |
+| production change allowed/applied | `1 / 1` |
+| skip / xfail | `0` |
+| exact body assert追加 | `0` |
+
+B6でproduction変更を許したのはpositive-recovery relation directionの1件だけです。D/H lineageはcurrent Grounded ownerで既に成立することを検証し、旧recomposition summaryやold material IDを復活させていません。B7はpublic reply entryからretired route/tokenへのnegative reachabilityが空であることをscoped import graphで検査します。
+
+## final snapshot validation
+
+| check | result | 読み方 |
+|---|---:|---|
+| changed/new Python compile | pass / 9 files | syntax確認 |
+| FB172 focused current owners | `31 passed` | migration/owner/inventory/API registryのfocused結果 |
+| frozen official refs selected | `172 passed` | 単独選択結果。full suite greenではない |
+| full collect | `12714 collected / 0 errors` | 最終ZIP再確認値 |
+| full backend | `12543 passed / 169 failed / 2 skipped` | return code 1 / Gate0 stop |
+
+`fb172_environment_20260712.json` は途中結果として `12712 collected` を記録しますが、最終ZIPにはさらに2 testsが入り、再確認値は `12714` です。さらに、frozen 172 selected greenとfull backendは一致しません。full-suite order/contextでofficial refを含むfailureが再出現しているため、isolated selected greenだけでV5 greenを作りません。
+
+## unchanged external boundary / stop
+
+```text
+public API schema: unchanged
+DB schema / physical name / write path: unchanged
+RN source / visible condition: unchanged
+public top-level response key: unchanged
+Safety emergency/support owner: unchanged
+P5/P6 overlay: hold / public meta非露出
+Gate0 decision: GATE0_TEST_OR_CONTRACT_BLOCKED_STOPPED
+same16 / review receipt / exact8 / device: not started
+P5 / P6 / P8 / release: false
+```
+
+# 2026-07-12 差分追記: P7 Gate A Post-FB172 contract / boundary / validation
+
+## source / semantic contract
+
+| contract | actual current fact |
+|---|---|
+| baseline freeze | `mashos-api(214).zip`、fingerprint `394b5d...a0c3`、169 failuresをbody-free固定 |
+| final snapshot | fingerprint `a4eeac...7d26`、1364 fingerprinted files |
+| follow role | Planがhelp-seeking / protective counterdirection / retained intention等をsemantic nucleiから分類 |
+| delivery owner | Planがrelation統合 / observation統合 / separate distinct contributionを決定 |
+| sentence binding | Surfaceがhuman-follow contribution、closure role / modality / selected-target scopeをatom化 |
+| Gate | misclassification、重複counterdirection、closure mismatch、roleなしstem反復、short-state duplicate loopを拒否 |
+| case-specific prohibition | case ID / exact current input / completed bodyをproduction branch条件にしない |
+| external contract | API / DB / RN production / Safety owner / top-level response keyは不変 |
+
+GA1 structural testはpre-GA2で13 REDを作り、GA2後はgeneric contractとしてgreenです。exact completed body assertionとcase-order依存をAST / metamorphic testで拒否しています。
+
+## residual owner closure contract
+
+| 項目 | current値 |
+|---|---:|
+| frozen baseline failures | `169` |
+| O0 environment | `0` |
+| O1 historical test migration | `128` |
+| O2 semantic obligation migration | `11` |
+| O3 hold / Safety / public migration | `26` |
+| O4 current owner contract repair | `1` |
+| O5 inventory negative reachability | `3` |
+| closed / open | `169 / 0` |
+| unclassified / unresolved / owner missing | `0 / 0 / 0` |
+| introduced failure | `0` |
+| old owner restored | `false` |
+| skip / xfail | `false` |
+| exact body assert追加 | `false` |
+| production contract relaxed | `false` |
+
+historical FB172 ledgerはmutateせず、frozen failure refをjoin keyにcurrent owner evidenceへ投影しています。
+
+## final validation evidence
+
+| validation | result | boundary reading |
+|---|---:|---|
+| targeted | `303 passed` | GA2 / owner / decision focused set |
+| Safety / public | `69 passed` | existing Safety / public contract |
+| RN | `36 passed` | carried-forward evidence。RN source変更・今回再実行ではない |
+| full collect | `12834 collected / 0 errors` | duplicate node ID 0 |
+| full backend | `12832 passed / 0 failed / 0 errors / 2 skipped` | return code 0 |
+| same16 | automated / deterministic / semantic / public path 各 `16 / 16` | body-free official receipt |
+| Karen review | `16 local_human_pass / 0 repair / 0 fatal` | local product readのみ |
+
+source、validation、same16、review、decision、exact8、final-linkは同じfinal fingerprintを参照します。final-linkはbaseline 169 closed、introduced 0、total open 0を記録します。
+
+## decision / exact8 chronology
+
+```text
+decision code: GATE0_LOCAL_PASS_DEVICE_PACKET_READY_STOPPED
+gate0_local_pass: true
+exact8_packet_generation_allowed: true
+decision artifact exact8_packet_generated: false
+separate exact8 artifact: present
+exact8 packet_status: ready_waiting_for_device_evidence
+final-link exact8 SHA-256: 43a402f6d4c802400ac7fb5065c899c51ac1ffa85e1d787331f87900a507ba8c
+device_evidence_status: not_started
+```
+
+`exact8_packet_generated=false` はdecision生成時点のfieldです。後続のexact8 artifactとfinal-linkがcurrent packet実体を証明します。この時系列差をpacket不存在と読みません。一方、packet readyをdevice evidence取得済み、Gate B、P8、releaseとも読みません。
+
+exact8 artifactはexact inputを含むlocal-only body-full packetです。前提資料更新ではその本文を複製せず、path / status / hash / stop boundaryだけを反映します。
+
+## premise-update verification boundary
+
+```text
+changed/new Python compile: pass / 14 files
+GateA focused: 120 passed / 1 warning
+official full backend rerun in premise update environment: not performed
+```
+
+official full resultはactual validation artifactから反映し、focused recheckをfull rerunへ昇格しません。
+
+## current stop
+
+```text
+public API / DB / RN production / Safety owner: unchanged
+Gate0 local pass: true
+exact8 device packet: ready
+Mash device evidence: not started
+P5 / P6 / P8 / release: false
+```
+
+# 2026-07-12 差分追記: Mandatory Two-stage / Grounded Human Reception contract boundary
+
+## Cocolon public boundary
+
+| 境界 | current contract |
+|---|---|
+| API route | `/emotion/submit` 維持 |
+| visible body | `input_feedback.comment_text` 維持 |
+| section order | `見えたこと：` -> `Emlisから：` 必須 |
+| RN title / display | `Emlisの観測` と既存表示条件を維持 |
+| DB | physical name / write path変更なし |
+| Safety | emergency / separate safety ownerを維持 |
+| public meta | raw input、comment body、source anchorを含めない |
+
+## runtime mandatory gates
+
+```text
+two_stage_contract_gate
+mechanical_restatement_gate
+reception_plan_gate
+reception_grounding_gate
+reception_role_distinctness_gate
+reception_quote_reuse_gate
+reception_policy_exposure_gate
+reception_human_voice_gate
+reception_safety_boundary_gate
+runtime_visible_contract_guard
+runtime_reception_contract_guard
+runtime_gate_meta_body_free_guard
+runtime_final_contract_guard
+```
+
+Reception Gate一つでも失敗した場合にpublic `passed` を返しません。technical Gate passはProduct Read Feel pass、actual-device pass、進行許可と同値ではありません。
+
+## fixture / receipt authority
+
+| artifact | current authority |
+|---|---|
+| `grounded_human_reception_exact8_v2_20260712.json` | app-valid exact8 current input identity owner |
+| `gatea_mandatory_two_stage_exact8_recheck_20260712.json` | superseded。4件の旧アプリ非実在選択肢を含み、進行ownerではない |
+| R6 local QA receipt | technical acceptanceのみ。進行権限なし |
+| R6 Karen review receipt | 実機前local readの履歴。実機結果2後のcurrent product passではない |
+| R7 readiness / packet | latest repoではactual device `not_run`。外部証拠より古い |
+| `実機確認結果２.zip` | exact8 screenshot/logの外部実機証拠。raw comment hash machine matchは未確認 |
+| response-depth detailed design | この2026-07-12 snapshot時点では未実装。2026-07-14 current authorityは後続節を読む |
+
+## current stop
+
+```text
+actual-device evidence: 実機確認結果２.zip
+actual-device evidence SHA-256: 6c78d5dc5efd9c75c412dfc54b195ef089af77fb735b6c98c1cf15d13e89915b
+app-valid exact8 source: Emlis_exact8_app_validated_inputs_20260712(5).md
+app-valid exact8 source SHA-256: 1edd057a6fc246ab24ec1f886eaf1b22292b658cd09bf92a53665bf55bb02c86
+actual-device screenshot/log set: exact8 8 / 8 received
+raw comment_text SHA-256 machine match: not confirmed
+R8 current decision: REPAIR_REQUIRED
+P5 / P6 / P8 / release: false / false / false / false
+```
+
+# 2026-07-20 差分追記: NLS v3 Step 11 rc0030 / rc0031 contract boundary
+
+## current resultを分離する
+
+| layer | current result | 許可しない読み替え |
+|---|---|---|
+| rc0030 representative machine | 8 / 8 selected | Product Read PASS |
+| active required suite | 80 / 80 PASS | Cycle 001 accepted |
+| Product Read | PASS1 / MINOR1 / MAJOR6 / BLOCKER0 | E4開始 |
+| rc0031 impact addendum | scope defined | implementation authority |
+| E4 | not started | bounded experiment viable |
+| formal closure | not started | Cycle 001 accepted |
+
+Body-only Parserはfinal bytesだけを読み、forward plan、candidate AST、span map、candidate self-claim、hidden markerを読みません。Independent MatcherはParsed Witnessとimmutable source authorityから期待bindingを独立再計算します。Hard Gateはforwardのcoverage宣言だけを信用しません。
+
+## rc0031 progression gate
+
+```text
+P1 exact7 RED + new24 freeze
+-> P2 forward
+-> P3 Body-only Parser / Independent Matcher
+-> P4 Gate / selector / disconnected runtime / manifest
+-> P5 same P1 GREEN + retained regression
+-> E2
+-> E3 machine
+-> E3 Product Read
+-> only then E4 frozen100
+-> separate formal-candidate authority / full rerun
+```
+
+E3 acceptanceはformer MAJOR 5件全PASS/MINOR、0001 PASS、0002 PASS、0009 PASS/MINOR、新MAJOR/BLOCKER 0を要求します。E4はselected > 56、旧selected56非回帰、代表外new selected >= 1、changed/new selectedのProduct Read MAJOR/BLOCKER 0を要求します。
+
+E4を通過してもCycle 001 acceptedではありません。別authority / new run IDでsecurity、Step 0〜9、正式100、Known28、Development42、invalid16、全100 Product Read、evidence finalizationを再実行します。
+
+## scope / privacy / resource guard
+
+- exact existing owner 4、new allowlist 18をclosed maximumとする。
+- P1中はproduction source edit 0。
+- case / family / topic / input word / review / control branchを禁止する。
+- Parser / MatcherのP3迂回、metadata / hidden marker bypassを禁止する。
+- candidate <= 12、replan <= 1、owner <= 24、referent <= 32、body <= 1MB、visible anchor <= 1と既存depth / clause boundsを維持する。
+- resourceに収めるためrequired meaningをdrop / generic化しない。
+- raw input/output、body-full packet、Product Read本文note、unsalted body digest、secure keyをrepo / shareable ZIPへ出さない。
+- shared/public path、DB、RN、Safety、question owner変更が必要ならSTOPする。
+
+応答深度修復を実装・再検証する前に、旧local human passやR7 readinessを更新済み実機receiptとして扱いません。exact8 screenshotの存在だけでP5/P6/P8/releaseを開きません。
+
+# 2026-07-14 差分追記: R8 repair / NLS v2 contract・boundary・validation訂正
+
+## Response Depth / Richness Repair contract
+
+R8設計のcurrent実装境界は一括`complete`ではなく、段階別に読む。
+
+| 段階 | current status | contract authority |
+|---|---|---|
+| RR0 | 完了 | R8実機failure baselineと進行停止をfreeze |
+| RR1 | intentional RED成立 | Depth / Move不足をfailureとして固定 |
+| RR2 | 実装済み | Reception Opportunity Inventory |
+| RR3 | 実装済み | minimal / focused / layered、1〜3 Move、文字数比例を使わないDepth Policy |
+| RR4 | 実装済み | ClausePlan / SentencePlan、Move貢献境界 |
+| RR5 | 実装済み | multi-Move Surface。case専用完成文・random synonymなし |
+| RR6 | 実装済み | 12 Reception Gatesとfinal guard |
+| RR7 | 実装済み | Move保持Recovery / fail-closed |
+| RR8 | local automated PASS | exact8 / same16 / unseen12、observation freeze保持 |
+| RR9 | 華恋local human PASS | 9 cases × 13 axes。progression authorityなし |
+| RR10 | readinessのみ実装 | expected packet / template / validator / verifier。actual device `not_run` |
+| RR11 | 未実施 | RR10 4 / 4 actual-device PASS前は開始不可 |
+| RR12 | 未実施 | docs / premise handoff未完了 |
+
+RR6で追加された必須Gateは`reception_depth_plan_gate`、`reception_move_realization_gate`、`reception_depth_proportionality_gate`、`reception_move_distinctness_gate`、`reception_non_enumeration_gate`です。既存7 Reception Gateと合わせた12 Gateがfinal guardの必須条件です。
+
+RR7 Recoveryは`full`、`optional_removed`、`integrated`、`hedged`、`minimal_grounded`を持つ。required / Safety Move、Depth別最小文数、Move identityを再検査し、全候補不成立時はgeneric empathyや旧bodyを返さず`rejected`にする。
+
+RR8 receiptの5-owner source manifest aggregate SHA-256は`ed9d7463778909c97115096345d25d6ce260d21ed737a72d7c06ccd8e08687ac`で、現行bytesと一致する。RR8 / RR9の記録値は、RR0〜RR8 17 files / 223 tests PASS、RR9 validator 7 tests PASS、relevant backend 342 tests PASSです。今回の前提資料更新環境でそれら全件を再実行した、という意味ではない。
+
+## Natural Language Surface v2全Step contract訂正
+
+current判定ownerは`Cocolon_EmlisAI_NLSv2_AllSteps_Audit_Correction_20260713.md`とbody-free audit receiptです。過去の各Step resultやfreezeと矛盾する場合、歴史artifactを改変せず監査訂正を優先する。
+
+| Step | current audit status | contract / stop boundary |
+|---:|---|---|
+| 0 | verified complete | 設計hash、owner、変更禁止、Holdout境界をfreeze |
+| 1 | verified complete | v1 28 baselineを再生成可能。body-full / body-free分離 |
+| 2 | verified complete | 14 family × 5 = 70、Development42 / A14 / B14分離 |
+| 3 | underimplemented | validatorがinvalid role、非bool required、誤Safety ref、上限外quote、未知strategyを拒否しない。`felt_response` 0 / 42 |
+| 4 | partial | 213 candidateはbounded / stable。merged group 0 / 42、文数variation 0 / 42 |
+| 5 | product goal unmet | 汎用骨格とanchor replay。Holdout A non-template 1 / 14 |
+| 6 | semantic gate underimplemented | 本文だけ汎用3文へ置換しmetadataを保持すると14 / 14 Gate PASS |
+| 7 | completion revoked | case別review / body hash / reason、pre-post lineage、事前freeze閾値なし |
+| 8 | evaluated STOP | run 1、machine failure 1、distribution FAIL、naturalness 5 / 14、non-template 1 / 14、v2 better 5 / same 3 / v1 better 6 |
+| 9 | correctly blocked | Holdout B run 0。A STOP後なので未実施がcontractどおり |
+| 10 | feature未実装・未実行 | shadow 0。停止guardのみ |
+| 11 | feature未実装・未実行 | owner switch 0。runtime ownerはcanonical v1 |
+| 12 | formal v2未実施 | 代表4画像はcanonical v1。exact8 / Holdout由来v2実機0 |
+| 13 | feature未実装・未実行 | production adjustment 0。v1比率分析のみ |
+
+Step 3の正常系testがgreenでも、invalid planを拒否するnegative contractは成立しない。Step 6のGate passはself-reported metadataに循環依存するため、最終本文がsemantic obligationを実現した証明ではない。Step 7 freezeはcurrent completion ownerとして使わない。
+
+## freeze / Holdout / runtime boundary
+
+- Step 0〜9の既存freeze、protocol、A/B receipt、testは履歴証拠として変更しない。
+- Holdout A / BをDevelopmentへ移さず、本文を再開封しない。
+- A結果を見た後に同じv2 sourceを修正して再評価しない。
+- Step 10〜13のblocked receiptは停止状態の証明であり、shadow / switch / device / adjustmentの機能実装証明ではない。
+- v2 moduleはexisting runtime sourceからimportされず、public runtime、API、DB、RN contractを変更しない。
+- 次の実装には別version identityとfresh independent holdoutが必要。
+
+## current validation evidence
+
+```text
+new all-Step audit tests: 7 passed
+all NLS v2 zero-argument tests: 62 passed / 3 classified failed
+unclassified failures: 0
+compileall: pass
+JSON parse: pass
+Holdout runner actual forbidden call count by AST: 0
+```
+
+分類済み3 FAILは、Holdout Aへ`pass`を要求する凍結test 1件、not-evaluatedのHoldout Bへ`pass`を要求する凍結test 1件、禁止文字列assertionが自身へ一致する凍結test defect 1件です。Aの実receiptが`STOP`、Bが`not_evaluated`であることと整合し、未分類の実装failureとして数えない。一方で、`62 passed`だけを切り出して全Step greenとも読まない。
+
+## progression authority
+
+```text
+R8 RR10 actual device: not_run
+R8 valid_for_progression: false
+NLS v2 state: offline_only_stopped
+NLS v2 runtime owner switch: 0
+P5 / P6 / P8 / release: false / false / false / false
 ```

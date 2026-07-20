@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-06-16
+revision_date: 2026-07-20
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 
@@ -81,9 +81,12 @@ Cocolonがリリースできて、売れる商品品質に届かなければ、�
 4. `15_trust_based_joint_development_boundary_2026_06_05.txt`
 5. Cocolon_前提資料の READ_FIRST / 命名体系 / 名称混在資料 / 思想資料 / 共同開発境界資料
 6. EmlisAI作業では `emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md`
-7. 今回の最新実ファイルzipまたはGitHub上の対象ファイル
-8. 必要ならログ・スクリーンショット・テスト結果
-9. 指示された成果物形式
+7. GitHub上の `Cocolon` / `mashos-api` current headと、設計・handoffが指定するpredecessor commit
+8. 固定commit上の対象実ファイル。local checkout / ZIP / copyを使う場合はpath / blob / hash一致を確認する
+9. 必要ならログ・スクリーンショット・テスト結果
+10. 指示された成果物形式
+
+GitHubとlocal materializationは、同じcommit / path / hashなら同じ実ファイルです。保存場所の違いを仕様・owner・authorityの違いにしません。過去のlocal ZIP記録は当時snapshotの履歴として保持します。作業中にGitHub mainが進んでも、固定したpredecessorから黙って追従しません。
 
 # 作業中の出力形式
 
