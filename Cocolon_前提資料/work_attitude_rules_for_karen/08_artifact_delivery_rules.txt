@@ -46,6 +46,41 @@ Mash様の指示した成果物形式を変えない。
 - 追加説明は最小限
 - 先に「RN側ログが必要」などを広げない
 
+## 2026-07-21 差分追記: 華恋によるGitHub直接反映
+
+Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した場合、華恋は接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileだけを直接反映できます。
+
+### 反映先
+
+- ZIPの`repository/`以下 → `MassyuRed/mashos-api` repository root
+- ZIPの`documents/`以下 → `MassyuRed/Cocolon/EmlisAIの実装済み資料/documents/`
+- 作業方針・前提差分 → `MassyuRed/Cocolon/Cocolon_前提資料/`の既存owner
+- ZIPのREADME・SHA256SUMS等の配布管理fileは、明示反映対象でない限りrepositoryへ追加しない
+
+### write前
+
+- 両repositoryのcurrent HEADと指定predecessorを確認する
+- local / ZIPのSHA-256と対象file内容を確認する
+- target pathがnewかmodifyか、既存blobと衝突しないか確認する
+- 承認済みexact path、変更種別、根拠、必要性を固定する
+- HEAD drift、hash不一致、意味衝突、権限不足があれば停止する
+
+### write時
+
+- 承認済みexact path以外を変更しない
+- force push、削除、無関係なrename・整形・production変更をしない
+- repositoryごとに一つの目的へ変更をまとめることを原則とする
+- 使用機能の制約でcommitが分かれる場合は、同一の連続head chainで反映し、途中に別headが入ったら停止する
+- historical handoffの当時の境界・記録は履歴として変更しない
+- 従来どおり、進行checkpointごとの報告とMash様の明示承認を維持する
+
+### write後
+
+- 反映後のHEADを再取得する
+- GitHub上の各対象fileを再取得し、local / ZIPと同一内容であることを確認する
+- repositoryごとの全commit SHA、final HEAD、exact path、new / modifyをMash様へ報告する
+- GitHub commitをcurrent authority、ZIPをbackup snapshotとして扱う
+
 ## 提出前チェック
 
 - 指示された形式か
