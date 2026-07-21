@@ -9,9 +9,9 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "a7f6f9f76e67ebe20662be527e8ce67a9858b19c"
+  Cocolon_last_reflected_task_head: "52b971de738f76efb9a036fbe6f9363d099fcac2"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  mashos_api: "MassyuRed/mashos-api:main@9a32e20aefed8f91179e499da5ba934b0a969807"
   verified_at: "2026-07-21 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
@@ -11039,5 +11039,160 @@ P3_PRODUCT_SURFACE_B5_OWNER_BOUNDARY_DESIGN_FREEZE_AND_RED_ONLY
 
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回のB5はread-only owner allocationであり、production構造変更ではないため全面更新しない。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+# 2026-07-21 current authority: rc0031 P3 Product Surface B5 owner boundary design freeze / RED-only
+
+この節が後発current authorityであり、直前の`Product Surface owner boundary read-only`を履歴として保持したうえで次checkpointを定義する。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決する。file自身へ自分を含むcommit SHAを埋め込まない。
+
+## 1. authority identity
+
+```text
+approved authority:                 P3_PRODUCT_SURFACE_B5_OWNER_BOUNDARY_DESIGN_FREEZE_AND_RED_ONLY
+Cocolon ref:                        MassyuRed/Cocolon:main
+Cocolon work start:                 52b971de738f76efb9a036fbe6f9363d099fcac2
+Cocolon authority record commit:    this fileを含むGitHub revisionから解決
+mashos-api work start:              a904ba192b05ca1445e32006b64fc87e7cda48bf
+mashos-api result:                  9a32e20aefed8f91179e499da5ba934b0a969807
+mashos-api comparison:              2 commits ahead / 1 modified path / +1000 / -0
+verified at:                        2026-07-21 JST
+```
+
+last full audit basisはCocolon `7533587673f1e895ea056b18562deaa6059f0aba`、mashos-api `a904ba192b05ca1445e32006b64fc87e7cda48bf`のままである。今回のB5 addendumがcontract差分を担い、production topologyと実装owner mappingは前checkpointから変えていないため、広範な構造資料の全面更新は行わない。
+
+## 2. decision
+
+read-onlyで識別済みの最小boundaryを、production未変更のP3 test EOFへ設計契約とintentional REDとして固定した。
+
+```text
+B5_SOURCE_GROUNDED_PROPOSITION_CLUSTER_WITH_AST_BOUND_RECEPTION
+```
+
+状態:
+
+```text
+B5_OWNER_BOUNDARY_DESIGN_FROZEN
+B5_RED_EXACT6_FROZEN
+PRODUCTION_IMPLEMENTATION_NOT_AUTHORIZED
+```
+
+## 3. repository / test identity
+
+開始点からのaggregate変更は次のtest 1 pathだけである。
+
+```text
+ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py
+```
+
+testはa904正本の全161,191 bytesをexact prefixとして保持し、B5 exact6だけをEOFへ追加した。
+
+```text
+predecessor prefix:     161,191 bytes / SHA-256 045ca06eabbff7c6d902174ecf84db75d67b21e27ce9956726467f7d19c36860
+B5 EOF append:           40,447 bytes
+result:                 201,638 bytes / SHA-256 a027cdbee9423f2490a3700fdcca6c071bd5503388a9e739fed6cae821bac67d
+result Git blob:        116909714b4be72eb078dfcf7f29a77303476428
+aggregate diff:         1,000 additions / 0 deletions
+unexpected path:        0
+production change:      0
+```
+
+## 4. frozen B5 contract
+
+```text
+final candidate context / unique case:       10 / 8
+new atom / verified reuse:                   38 / 1
+construction / relation / link / unknown:    22 / 13 / 1 / 2
+current proposition unit:                    18
+
+clause-ready owner occurrence:               24
+exactly-one owner-connected source fragment: 24 / 24
+input case/family/review/severity branch:      0
+
+reviewed witness Product cluster:            13
+implementation Product cluster maximum:      13
+maximum cluster load:                         4
+exact38 accounted:                           38 / 38
+
+required / safety Reception:                 11
+base AST-bound Reception:                    10
+unmatched required opportunity:               1
+richer AST binding:                           2
+
+visible source anchor maximum:                1
+schema-free Surface:                         required
+candidate metadata required:                 false
+visible clauses / complexity / joiner / unit: 2 / 4 / 2 / 4
+resource expansion:                           0
+```
+
+owner expressionはowner-connected source fragmentからcanonical導出し、一意でなければfail-closeする。exact38はrelation-connected clusterへ配置し、drop、generic coverage、schema label、hidden markerへ逃がさない。Receptionはbase AST bindingを先に保持し、未表現required opportunityだけを追加する。
+
+## 5. B5 exact6 RED result
+
+targeted compatibility harnessで次を確認した。
+
+| node | result | closed code |
+|---|---|---|
+| freeze scope / predecessor behavior | PASS | — |
+| denominator / resource envelope | PASS | — |
+| source-fragment Product owner expression | intentional RED | `STEP11_RC0031_P3_B5_PRODUCT_OWNER_EXPRESSION_NOT_AVAILABLE` |
+| relation-connected Product cluster | intentional RED | `STEP11_RC0031_P3_B5_PRODUCT_PROPOSITION_CLUSTER_NOT_AVAILABLE` |
+| AST-first Reception | intentional RED | `STEP11_RC0031_P3_B5_AST_BOUND_RECEPTION_NOT_AVAILABLE` |
+| schema-free / metadata-free / case-agnostic Product boundary | intentional RED | `STEP11_RC0031_P3_B5_PRODUCT_BOUNDARY_NOT_AVAILABLE` |
+
+```text
+B5 exact6 targeted harness:          2 PASS / 4 intentional RED
+predecessor exact24 inherited:      15 PASS / 9 intentional RED
+projected exact30 aggregate:        17 PASS / 13 intentional RED
+```
+
+今回の環境では`No module named pytest`のためfull pytest suiteを実行できない。predecessor exact24は既存frozen evidenceからの継承であり、`17 / 13`はそのexact24と今回のtargeted exact6を加えた算術projectionである。新しいfull-pytest exact30 resultは主張しない。
+
+4 REDはclosed semantic reason codeで発生し、collection / import / mock-only / unconditional failureは0件である。
+
+## 6. unchanged / prohibited boundary
+
+```text
+repository modified path:              1 test path only
+Catalog change:                        0
+Grounded Lexicalization change:        0 / whole-file immutable
+Natural Surface change:                0
+Parser / Matcher / Hard Gate change:   0
+fixture / P1 / P2 change:              0
+P4 / runtime / manifest / E2+:         not started
+API / DB / RN / public / shared:       unchanged
+Cycle 001:                             NOT_ACCEPTED
+```
+
+B5 REDがfrozenになったことはproduction implementation authorityではない。current REDを見かけ上GREENにするためのappend validator緩和、lexical whole-file freezeの暗黙解除、未承認Surface import追加は行わない。
+
+## 7. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_OwnerBoundary_DesignFreeze_REDOnly_Addendum_20260721.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_OwnerBoundary_DesignFreeze_REDOnly_BodyFree_Receipt_20260721.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_OwnerBoundary_DesignFreeze_REDOnly_Handoff_20260721.md`
+4. previous Product Surface owner boundary read-only addendum / receipt / handoff
+5. previous Product Surface grammar Product Read STOP addendum / receipt / handoff
+6. Revised Cycle設計とcurrent P1 / P2 / P3 evidence
+
+private本文、raw input、引用、raw digest、verification keyは新規shareable artifactへ出していない。
+
+## 8. next authority
+
+今回のRED freezeから実装へ自動進行しない。次へ進む場合の候補authorityは次である。
+
+```text
+P3_PRODUCT_SURFACE_B5_CATALOG_LEXICAL_SURFACE_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+別承認には、Catalog / Grounded Lexicalization / Natural Surfaceだけを対象に、Grounded Lexicalizationのbounded EOF scope amendmentと、Natural Surfaceのexact import allowanceまたは承認済みsafe equivalentを明記する必要がある。frozen B5 exact6の4 intentional REDをGREENへ変える実装条件も同じauthorityで限定する。
+
+Parser / Matcher、P4、runtime、dependency manifest、E2以降、API、DB、RN、public / shared routeは含めない。
+
+## 9. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回のB5 contract差分は新規addendumへ閉じ、production topology不変のため全面更新しない。
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
