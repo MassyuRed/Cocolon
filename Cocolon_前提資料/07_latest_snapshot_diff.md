@@ -9,7 +9,7 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "6f3369477b9f0d5ea900bd81e101d193ce07b3fb"
+  Cocolon_last_reflected_task_head: "b136ec48b1e4f3f096c8375ad05a869e3fe123e8"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
   mashos_api: "MassyuRed/mashos-api:main@c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
   verified_at: "2026-07-22 JST"
@@ -58,7 +58,12 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b6_current_product_effective_act_consumption_count: 0
   nls_v3_step11_cycle001_rc0031_p3_b6_actual_product_read_run: false
   nls_v3_step11_cycle001_rc0031_p3_b6_broad_surface_production_implemented: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_production_implementation_authorized: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_production_implementation_authorized: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_typed_implementation_attempted: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_typed_implementation_applied: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_typed_implementation_stop: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_long_fragment_count: 5
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_missing_exact_range_count: 3
   nls_v3_step11_cycle001_rc0031_p3_b5_product_surface_freeze_viable: false
   nls_v3_step11_cycle001_rc0031_p3_b5_actual_output_remediation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_final_inverse_authorized: false
@@ -11873,5 +11878,116 @@ P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATI
 ## 8. premise update operation
 
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase / RC / release gate等の節目で全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+# 2026-07-22 current authority: rc0031 P3 Product Surface B6 owner role inflection / typed recomposition implementation GREEN-only STOP
+
+この節がEOFの最新current authorityである。直前の`B6 source congruence / Reception focus authority implementation / GREEN-only`をimmutable predecessorとして保持し、承認済みowner role-inflection / typed recomposition implementation checkpointで検出したprerequisite STOPだけを更新する。
+
+## 1. authority identity
+
+```text
+approved authority:              P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY
+Cocolon ref:                     MassyuRed/Cocolon:main
+Cocolon work start:              b136ec48b1e4f3f096c8375ad05a869e3fe123e8
+Cocolon authority record commit: this fileを含むGitHub revisionから解決
+mashos-api work start:           c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14
+mashos-api result:               c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14 (unchanged)
+verified at:                     2026-07-22 JST
+```
+
+今回はphase / RC / release gateではなく、B6 implementation前提を確認した小checkpointである。構造資料の全面監査は行わず、body-free evidenceとcurrent authorityの小差分だけを更新する。
+
+## 2. RED-first / STOP result
+
+既存B6残存2 REDを先に再現した。
+
+```text
+owner role inflection: STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED
+typed recomposition:   STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED
+observed:              0 PASS / 2 EXPECTED_RED / 0 UNEXPECTED / 339.65 s
+```
+
+owner 24 / 24のexact-source boundaryを実装前にprobeした結果は次である。
+
+```text
+owner / exactly-one exact source fragment: 24 / 24
+whole fragment <=32 / long fragment:        19 / 5
+long grounded phrase exact substring:       0 / 5
+long with existing safe exact segment:      2 / 5
+long without authorized exact range:        3 / 5
+```
+
+grounded phraseで残りを補うとgeneric / non-exact fallbackになり、freeze済みのsame-owner / same-nucleus / exact-source witnessを満たさない。固定slice、ellipsis、任意longest、case / fixture branchも禁止されている。このため次を確定する。
+
+```text
+OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_MISSING
+IMPLEMENTATION_STOPPED_BEFORE_GREEN
+OWNER_ROLE_INFLECTION_RED_PRESERVED
+TYPED_RECOMPOSITION_RED_PRESERVED
+RECEPTION_PRODUCT_REBUILD_REQUIRED_6
+CURRENT_PRODUCT_EFFECTIVE_ACT_CONSUMPTION_0
+ACTUAL_PRODUCT_READ_NOT_RUN
+P3_FINAL_INVERSE_NOT_AUTHORIZED
+CYCLE001_NOT_ACCEPTED
+```
+
+## 3. repository result
+
+mashos-apiへのtask-local変更は0であり、main commitは開始点のままである。
+
+```text
+Catalog blob:                 94e87e7bdd58359dd3790e30fcd765151ad792d9
+Grounded Lexicalization blob: 49a47629b3dcd82ed6326ba815c9e044f65c0cf1
+Natural Surface blob:         ab10c70629edc57ab971760816fc106747f3de34
+P3 test blob:                 21f014f1ed2eaabe8a63b9c66b5050307de0eb35
+relation authority blob:      d622874a8ac2c9686a2e716c55c5b7816b46efa8
+Reception authority blob:     7ddd4b62a5a46bf55bb97063d58801228849dd68
+mashos-api changed path:      0
+mashos-api GitHub write:      0
+```
+
+未成立のLexical / Catalog案はtask-localで差し戻し、Natural Surface / testはapply前に停止した。existing B6 exact6の`4 PASS / 2 intentional RED`、B5 exact6の`6 PASS`、source suite9の`9 PASS`はpredecessor履歴として保持し、今回のpost-implementation実測へ昇格しない。
+
+## 4. authority seam prerequisite
+
+Reception authorityの`rebuild-required 6`を正当にProductへ消費するには、authority生成時のplan / resolver / inventory / content / current-inputを保持したprivate injection seamが必要である。現行exported Product builderの入力だけからauthorityをprovenance-safeに再構成しない。
+
+次回設計ではprevalidated authorityとvalidation parentsをprivate experimental seamへ注入し、public / runtime APIを不変に保つ。Natural Surface側でauthorityを推測または重複実装しない。
+
+## 5. privacy / prohibited boundary
+
+shareable evidenceはaggregate count、body-free cause、repository commitmentだけを持つ。raw input / body / quote、識別可能な言い換え、original case / candidate / atom / owner / anchor mapping、個別relation意味、specific focus / act mapping、raw body digest、packet hash、verification key、private noteはGitHubへ反映しない。
+
+```text
+Catalog / Lexical / Natural Surface / test implementation: 0 / 0 / 0 / 0
+Product effective-act consumption:                          0
+counterfactual / actual Product Read:                       not run / not run
+Parser / Matcher / Hard Gate:                               not authorized / unchanged
+P4 / runtime / manifest / E2以降:                           not authorized / unchanged
+API / DB / RN / public / shared runtime:                    unchanged
+release / Cycle 001 acceptance:                             not authorized / NOT_ACCEPTED
+```
+
+## 6. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ImplementationAndGreenOnly_STOP_Addendum_20260722.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ImplementationAndGreenOnly_STOP_BodyFree_Receipt_20260722.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ImplementationAndGreenOnly_STOP_Handoff_20260722.md`
+4. previous B6 source / Reception authority implementation evidence
+
+## 7. next authority
+
+実装へ自動進行しない。次へ進む場合の候補だけを置く。
+
+```text
+P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY
+```
+
+これはbody-free upstream grammatical-head / exact-range witness authorityとprivate Reception injection seamの設計・RED freezeだけを対象とする。Catalog / Lexical / Surface implementation、actual Product Read、P3 final inverse、Parser / Matcher、P4以降は別承認である。
+
+## 8. premise update operation
+
+- 作業完了またはSTOP確定ごとに、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase / RC / release gate等の節目で全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
