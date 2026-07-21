@@ -1,0 +1,118 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_prerequisite_consistency_red_receipt.v1",
+  "created_at_jst": "2026-07-21",
+  "body_free": true,
+  "status": "PRE_FREEZE_RED_PREREQUISITE_CONSISTENCY_CLOSED_PRODUCT_GRAMMAR_UNRESOLVED_PRODUCTION_STOP",
+  "source_pins": {
+    "mashos_api_start_commit": "b8e6fb59710a8b7ea15c6e5f016da275d4d3c54b",
+    "cocolon_start_commit": "541fab094c1bf32c83403cb8ed73f1f66d7fff58",
+    "mashos_api_result_commit": "a904ba192b05ca1445e32006b64fc87e7cda48bf",
+    "p2_immutable_predecessor_commit": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "composition_green_predecessor_commit": "f7caf169c36d6097a63ca389706a75eb98783116"
+  },
+  "premise_reconciliation": {
+    "cocolon_premise_invariants_retained": true,
+    "premise_status_pins_are_historical": true,
+    "current_authority_is_user_pinned_pair": true,
+    "p1_original_freeze_commit": "f63269fde48eed7aa9d8dfe4e818a011894b6f8e",
+    "p1_phase_scope_correction_commit": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "p2_current_tree_path_scope_is_historical_red": true,
+    "p2_current_tree_path_scope_code": "STEP11_RC0031_P2_PATH_SCOPE_INVALID"
+  },
+  "repository_scope": {
+    "modified_files": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "new_production_files": [],
+    "production_source_change_count": 0,
+    "fixture_change_count": 0,
+    "p1_p2_test_change_count": 0
+  },
+  "predecessor_contract": {
+    "catalog": {
+      "byte_count": 19951,
+      "sha256": "a4e8bc9753a1398571d511d5d0c1219a886c498661b3a4f702d3b20b5672c6cc",
+      "append_byte_max": 16384,
+      "append_marker": "# rc0031 experiment-only body-dimension grammar (append-only P3 owner)"
+    },
+    "natural_surface": {
+      "byte_count": 485490,
+      "sha256": "ee2f4bc0ab260e8cf1ce2b87acf499e84712ed6b3e639a6a1a6a0141bd3ea520",
+      "append_byte_max": 65536,
+      "append_marker": "# rc0031 experiment-only dimension-bearing Surface successor (append-only P3 owner)",
+      "old_internal_mutable_slot_closed": true
+    },
+    "matcher": {
+      "byte_count": 722658,
+      "sha256": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30",
+      "append_byte_max": 131072
+    },
+    "repository_python_frozen_material": {
+      "file_count": 1531,
+      "sha256": "014ba3d399ca182265f67728c4b13c45aac6ea33dbae4874521585b79c066bd2"
+    }
+  },
+  "product_surface_boundary": {
+    "representative_context_count": 10,
+    "new_semantic_atom_count": 38,
+    "verified_base_reuse_count": 1,
+    "contexts_with_multiple_new_atoms": 7,
+    "maximum_new_atoms_per_context": 10,
+    "machine_injective_fixed_slot_probe_is_product_approval": false,
+    "fixed_complete_slot_prefix_max_per_candidate": 1,
+    "schema_free_natural_language_surface_required": true,
+    "product_read_required_before_implementation_authority": true
+  },
+  "dimension_recovery_contract": {
+    "schema_version": "cocolon.emlis.nls_v3.step11.rc0031_body_dimension_recovery.v1",
+    "catalog_derived_dimensions": [
+      "observation_stage",
+      "source_role"
+    ],
+    "body_recovered_dimensions": [
+      "polarity",
+      "modality",
+      "temporal_scope",
+      "topic_fingerprint_sha256",
+      "referent_scope"
+    ],
+    "candidate_metadata_required": false
+  },
+  "p3_red": {
+    "test_path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+    "test_byte_count": 161191,
+    "test_sha256": "045ca06eabbff7c6d902174ecf84db75d67b21e27ce9956726467f7d19c36860",
+    "collected_count": 24,
+    "pass_count": 15,
+    "intentional_red_count": 9,
+    "elapsed_seconds": 401.16,
+    "intentional_red_codes": {
+      "STEP11_RC0031_P3_DIMENSION_SURFACE_NOT_AVAILABLE": 1,
+      "STEP11_RC0031_P3_FIXED_SLOT_PREFIX_PRODUCT_CONTRACT_NOT_SATISFIED": 1,
+      "STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE": 7
+    },
+    "historical_p2_collision_is_separate_pass": true
+  },
+  "retained_regression": {
+    "rc0031_p1": {
+      "collected_count": 7,
+      "pass_count": 1,
+      "intentional_red_count": 6
+    },
+    "rc0031_p2": {
+      "collected_count": 24,
+      "pass_count": 23,
+      "historical_path_scope_red_count": 1,
+      "historical_path_scope_code": "STEP11_RC0031_P2_PATH_SCOPE_INVALID"
+    }
+  },
+  "stop": {
+    "p3_surface_implementation_started": false,
+    "catalog_or_surface_production_append_started": false,
+    "production_parser_or_matcher_started": false,
+    "p4_started": false,
+    "runtime_or_manifest_started": false,
+    "e2_or_later_started": false,
+    "next_authority_required": "P3_PRODUCT_SURFACE_GRAMMAR_DESIGN_AND_PRODUCT_READ_ONLY"
+  }
+}
