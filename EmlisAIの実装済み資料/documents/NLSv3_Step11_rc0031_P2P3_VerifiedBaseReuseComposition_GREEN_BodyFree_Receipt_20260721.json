@@ -1,0 +1,174 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p2_p3_verified_base_reuse_composition_green_receipt.v1",
+  "created_at_jst": "2026-07-21",
+  "body_free": true,
+  "status": "PRIVATE_COMPOSITION_GREEN_AWAITING_SEPARATE_FREEZE_AND_P3_FINAL_INVERSE_APPROVAL",
+  "authority": {
+    "repository": "MassyuRed/mashos-api",
+    "immutable_p2_predecessor_commit": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "composition_red_freeze_commit": "0560875de7776aa752b5824ce8573c191feaaf34",
+    "composition_green_commit": "f7caf169c36d6097a63ca389706a75eb98783116",
+    "composition_green_parent_commit": "0560875de7776aa752b5824ce8573c191feaaf34",
+    "green_commits_ahead_of_red": 1,
+    "green_commits_behind_red": 0,
+    "revised_cycle_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "composition_design_addendum_sha256": "4b70e750fd7e5f872f94f6c6685bd021a3561a5966237c2520525c23b60dca08",
+    "composition_red_documents_commit": "191007230ba1b498bee6f775be7391520f91cf8d"
+  },
+  "confirmed_facts": {
+    "repository_scope": {
+      "modified_files": [
+        "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py"
+      ],
+      "new_repository_files": [],
+      "modified_symbol_count": 1,
+      "modified_symbol": "_step11_rc0031_validate_verified_reuse_composition",
+      "production_source_change_count": 1,
+      "test_change_count": 0,
+      "fixture_change_count": 0,
+      "matcher_change_count": 0,
+      "catalog_change_count": 0,
+      "gate_change_count": 0,
+      "runtime_or_manifest_change_count": 0
+    },
+    "natural_surface_before": {
+      "byte_count": 482504,
+      "git_blob_sha1": "9f03d4d37ffcd19d9641823e3ee23985efec8294"
+    },
+    "natural_surface_after": {
+      "byte_count": 485490,
+      "line_count": 12760,
+      "sha256": "ee2f4bc0ab260e8cf1ce2b87acf499e84712ed6b3e639a6a1a6a0141bd3ea520",
+      "git_blob_sha1": "24c3748069fe1a164934d977fc0f6c6c2e2130c4",
+      "git_diff_additions": 110,
+      "git_diff_deletions": 39
+    },
+    "single_private_slot": {
+      "prefix_byte_count": 404481,
+      "prefix_sha256": "50cd281d79619f785d8065f411eaa020cb3ed8c335025983e5068ea29672e7ed",
+      "slot_byte_count": 5178,
+      "slot_sha256": "3356cecd99d65009c34e512966ae154857c4f167afe714c6907744d68a33ddea",
+      "slot_byte_maximum": 8192,
+      "suffix_byte_count": 75831,
+      "suffix_sha256": "f2f8e3f0201efddf6c197618a8a5f31e8dd823d352ca6241bd331a88e1962985"
+    },
+    "matcher_frozen_full_file": {
+      "byte_count": 722658,
+      "sha256": "648a3a6690f8df860053c811a5416fcfc9983524e5ff880a0e6921a122a52e30"
+    },
+    "unchanged_test_commitments": {
+      "composition_exact10_sha256": "5ef1c4bc38f8b0f4c641da33c3d2e20a5a42d76d656bf4a1961a7530055d1654",
+      "p1_fixture_sha256": "15e8047cd95b453fba4a7a677b428955ea2819e6738e4e1fc1488d24952b78a8",
+      "p1_test_sha256": "14e90025a18f1fcab8b2d4d8571e7d2be31b271ec2d4ca8e3a22fa56f14f193c",
+      "p2_test_sha256": "2d71f9241abb7f38ad9de41633c89b7c257b461df2b3e7df92e2d74df4b684a2"
+    },
+    "private_validator_contract": {
+      "empty_binding_tuple_accepted": true,
+      "nonempty_binding_requires_current_source_record": true,
+      "source_id_unique": true,
+      "semantic_family_matches_current_record": true,
+      "family_specific_match_basis_required": true,
+      "parsed_atom_and_obligation_id_format_checked": true,
+      "base_surface_sha256_recomputed_from_current_base": true,
+      "source_authority_sha256_matches_current_successor": true,
+      "independent_binding_sha256_recomputed_from_frozen_body_free_material": true,
+      "foreign_base_or_authority_transplant_code": "STEP11_RC0031_VERIFIED_REUSE_COMPOSITION_INVALID",
+      "shape_valid_nonempty_without_source_records_code": "STEP11_RC0031_P3_EXACT_REUSE_NOT_AVAILABLE",
+      "generic_mismatch_code": "STEP11_RC0031_VERIFIED_REUSE_COMPOSITION_INVALID"
+    },
+    "security_boundary": {
+      "public_nonempty_reuse_remains_rejected": true,
+      "public_reuse_code": "STEP11_RC0031_P3_EXACT_REUSE_NOT_AVAILABLE",
+      "private_composition_exported": false,
+      "hash_is_signature": false,
+      "hash_semantics": "CONSISTENCY_COMMITMENT_ONLY",
+      "same_call_parser_matcher_origin_still_required": true,
+      "final_independent_revalidation_still_required": true,
+      "runtime_connected": false
+    }
+  },
+  "verification": {
+    "baseline_composition_exact10": {
+      "collected_count": 10,
+      "pass_count": 5,
+      "intentional_red_count": 5,
+      "direct_cause_for_all_red": "STEP11_RC0031_P3_EXACT_REUSE_NOT_AVAILABLE"
+    },
+    "final_composition_exact10": {
+      "collected_count": 10,
+      "pass_count": 10,
+      "failure_count": 0,
+      "duration_seconds": 422.02
+    },
+    "final_rc0031_p1_exact7": {
+      "collected_count": 7,
+      "pass_count": 1,
+      "intentional_red_count": 6,
+      "unexpected_failure_count": 0,
+      "intentional_red_codes": [
+        "STEP11_RC0031_SOURCE_ROOT_DOMINANCE_NOT_PROVED",
+        "STEP11_RC0031_SCHEMA_FREE_PROPOSITION_NOT_PROVED",
+        "STEP11_RC0031_RELATION_PROPOSITION_NOT_PROVED",
+        "STEP11_RC0031_DISTRIBUTION_DEPTH_NOT_PROVED",
+        "STEP11_RC0031_GROUNDED_RECEPTION_PREDICATION_NOT_PROVED",
+        "STEP11_RC0031_CONTROL_RETAINED_NON_REGRESSION_NOT_PROVED"
+      ]
+    },
+    "final_rc0031_p2_exact24": {
+      "collected_count": 24,
+      "pass_count": 23,
+      "historical_stage_lock_red_count": 1,
+      "historical_stage_lock_code": "STEP11_RC0031_P2_PATH_SCOPE_INVALID",
+      "unexpected_failure_count": 0,
+      "duration_seconds": 576.74
+    },
+    "final_rc0030_p3_and_predecessor": {
+      "collected_count": 58,
+      "pass_count": 57,
+      "historical_stage_lock_red_count": 1,
+      "historical_stage_lock_code": "STEP11_RC0030_P3_P2_PREDECESSOR_DRIFT",
+      "predecessor_behavior_exact4_pass_count": 4,
+      "unexpected_failure_count": 0,
+      "duration_seconds": 232.53
+    },
+    "static_patch_hole": {
+      "pass_count": 1,
+      "failure_count": 0,
+      "prefix_suffix_matcher_and_path_scope_preserved": true
+    },
+    "privacy": {
+      "stdout_stderr_empty_for_valid_and_attack_composition": true,
+      "body_or_rendered_text_leak_detected": false,
+      "parsed_span_or_source_payload_leak_detected": false,
+      "unsalted_body_digest_exposure_detected": false
+    }
+  },
+  "intermediate_safety_detection": {
+    "published_intermediate_candidate": false,
+    "first_detected_issue": "P2_PRIVATE_UNGROUNDED_REUSE_ACCEPTED",
+    "second_detected_issue": "FOREIGN_CONTEXT_ATTACK_WAS_CLOSED_WITH_THE_LEGACY_UNAVAILABLE_CODE_INSTEAD_OF_INVALID",
+    "final_resolution": "CHECK_CURRENT_BASE_AND_AUTHORITY_TRANSPLANT_BEFORE_PRESERVING_THE_EXACT_EMPTY_RECORDS_LEGACY_CLOSURE",
+    "final_unexpected_regression_count": 0
+  },
+  "inference": [
+    "The unchanged private downstream planner, renderer, and candidate validator are sufficient for the approved composition step under the exact10 contract.",
+    "This GREEN does not authenticate Matcher origin and does not establish the safety of a public coordinator."
+  ],
+  "karen_opinion": [
+    "Keep the public reuse API closed and never describe the hash fields as signatures.",
+    "Freeze this composition commit separately, then design and RED-test the final Body-only Parser and Independent Matcher boundary before any further production implementation."
+  ],
+  "stop": {
+    "p3_final_parser_or_matcher_started": false,
+    "p4_started": false,
+    "runtime_or_manifest_started": false,
+    "e2_or_later_started": false,
+    "next_explicit_approval_required": true
+  },
+  "excluded_payload_fields": [
+    "body",
+    "rendered_text",
+    "parsed_span",
+    "source_payload"
+  ]
+}
