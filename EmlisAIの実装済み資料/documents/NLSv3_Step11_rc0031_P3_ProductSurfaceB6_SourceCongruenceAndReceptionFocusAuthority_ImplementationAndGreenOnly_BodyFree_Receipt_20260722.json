@@ -1,0 +1,256 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_product_surface_b6_source_congruence_and_reception_focus_authority.implementation_and_green_only.body_free.v1",
+  "created_at_jst": "2026-07-22",
+  "body_free": true,
+  "result_finalized": true,
+  "verification_completed": true,
+  "verified_at_jst": "2026-07-22 JST",
+  "approved_authority": "P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_AND_RECEPTION_FOCUS_AUTHORITY_IMPLEMENTATION_AND_GREEN_ONLY",
+  "status": "SOURCE_AND_RECEPTION_AUTHORITY_GREEN_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_INTENTIONAL_RED",
+  "decision_flags": {
+    "b6_contract_frozen": true,
+    "source_congruence_authority_implemented": true,
+    "reception_focus_authority_implemented": true,
+    "source_congruence_green": true,
+    "owner_role_inflection_green": false,
+    "reception_focus_authority_green": true,
+    "typed_recomposition_green": false,
+    "reception_product_rebuild_required_count": 6,
+    "current_product_effective_act_consumption_count": 0,
+    "broad_surface_production_implemented": false,
+    "actual_product_read_run": false,
+    "actual_product_read_authorized": false,
+    "p3_final_inverse_authorized": false,
+    "cycle001_accepted": false
+  },
+  "source_pins": {
+    "cocolon_start_commit": "6f3369477b9f0d5ea900bd81e101d193ce07b3fb",
+    "mashos_api_start_commit": "46b41a8230b09016f0d0a22535891d65c4dee8ee",
+    "mashos_api_result_commit": "c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
+  },
+  "predecessor_red_freeze": {
+    "design_id": "B6_SOURCE_CONGRUENCE_GATED_TYPED_RECOMPOSITION_WITH_FOCUS_BOUND_RECEPTION",
+    "source_congruence_role_inflection_reception_focus_contract_frozen": true,
+    "red_only_evidence_frozen": true,
+    "predecessor_b6_exact6_summary": "2 PASS / 4 INTENTIONAL_RED / 0 UNEXPECTED",
+    "source_congruence_predecessor_result": "INTENTIONAL_RED",
+    "owner_role_inflection_predecessor_result": "INTENTIONAL_RED",
+    "reception_focus_authority_predecessor_result": "INTENTIONAL_RED",
+    "typed_recomposition_predecessor_result": "INTENTIONAL_RED",
+    "overwritten_as_historical_evidence": false
+  },
+  "repository_scope": {
+    "authorized_exact_path_count": 3,
+    "authorized_exact_paths": [
+      "ai/services/ai_inference/emlis_ai_grounded_relation_construction_authority_successor_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "expected_new_path_count": 1,
+    "expected_modified_path_count": 2,
+    "expected_unexpected_changed_path_count": 0,
+    "observed_changed_path_count": 3,
+    "observed_unexpected_changed_path_count": 0,
+    "mashos_api_ahead_by": 1,
+    "mashos_api_behind_by": 0,
+    "addition_count": 1044,
+    "deletion_count": 16,
+    "catalog_change_count": 0,
+    "grounded_lexicalization_change_count": 0,
+    "natural_surface_change_count": 0,
+    "parser_matcher_hard_gate_change_count": 0,
+    "fixture_p1_p2_change_count": 0,
+    "p4_runtime_manifest_e2_change_count": 0,
+    "api_db_rn_public_shared_change_count": 0
+  },
+  "file_commitments": {
+    "relation_construction_authority_successor": {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_relation_construction_authority_successor_v3.py",
+      "predecessor_byte_count": 66122,
+      "predecessor_sha256": "e89c2fb8018fcfebc759603102f92abb1ee6d0465ceb4af08501c433f137ee70",
+      "predecessor_git_blob_sha1": "87fa929a613942f809471568699c6a15400452b6",
+      "change_mode": "BOUNDED_SOURCE_EXPLICIT_CONGRUENCE_REFINEMENT",
+      "result_byte_count": 67858,
+      "result_sha256": "018cda1b462b2b633ea77cb1aa73819e48b126a66bab054a67c1d439232feccd",
+      "result_git_blob_sha1": "d622874a8ac2c9686a2e716c55c5b7816b46efa8"
+    },
+    "reception_focus_authority": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py",
+      "predecessor_present": false,
+      "change_mode": "NEW_BODY_FREE_RUNTIME_DISCONNECTED_AUTHORITY_OWNER",
+      "result_byte_count": 27280,
+      "result_sha256": "af141bc43728f915e19f675f261c18d5381f7da80b3fb1145257965fd3917753",
+      "result_git_blob_sha1": "7ddd4b62a5a46bf55bb97063d58801228849dd68"
+    },
+    "p3_test": {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+      "predecessor_byte_count": 224767,
+      "predecessor_sha256": "0af7c0177ade14c94ec2426e3245833793ce5690fde835ab95be0cb58fe517c7",
+      "predecessor_git_blob_sha1": "043300b67f691dadaa2df3beb80d2610b41f884a",
+      "change_mode": "BOUNDED_EOF_GREEN_AMENDMENT",
+      "predecessor_prefix_exactly_preserved_target": true,
+      "predecessor_prefix_exactly_preserved_observed": true,
+      "result_byte_count": 235266,
+      "result_sha256": "baa4cdd1df995c87518e25069e237e4a721dd0de2dd3d91b316b97c4894c5f33",
+      "result_git_blob_sha1": "21f014f1ed2eaabe8a63b9c66b5050307de0eb35"
+    }
+  },
+  "frozen_denominator": {
+    "final_candidate_context_count": 10,
+    "unique_case_count": 8,
+    "new_semantic_atom_count": 38,
+    "verified_base_reuse_count": 1,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "owner_occurrence_count": 24,
+    "exact_source_projection_count": 24,
+    "product_proposition_cluster_count_max": 13,
+    "product_cluster_load_max": 4,
+    "base_ast_reception_binding_count": 10,
+    "additional_required_reception_count": 1,
+    "total_reception_count": 11,
+    "richer_ast_binding_count": 2,
+    "visible_source_anchor_max": 1,
+    "resource_maxima": {
+      "visible_clauses_per_grammatical_sentence": 2,
+      "grammatical_complexity_load": 4,
+      "repeated_joiner_per_group": 2,
+      "realization_unit_per_group": 4
+    },
+    "candidate_metadata_required": false,
+    "case_family_review_severity_branch_count": 0,
+    "literal_internal_schema_exposure_count": 0
+  },
+  "source_congruence_implementation": {
+    "opaque_blocker_id": "B6-SRC-001",
+    "cause_class": "REQUIRED_MEANING_AND_SOURCE_EFFECTIVE_AUTHORITY_NOT_CONGRUENT",
+    "implementation_owner": "experiment_relation_construction_authority_successor",
+    "source_type_retained": true,
+    "effective_refinement_separately_recorded": true,
+    "endpoint_order_and_direction_recorded": true,
+    "source_local_provenance_recorded": true,
+    "origin_rebuild_validation_required": true,
+    "semantic_atom_denominator": 38,
+    "target_exact_chain_count": 38,
+    "target_conflict_count": 0,
+    "neutralization_omission_or_hidden_marker_allowed": false,
+    "case_or_fixture_phrase_branch_allowed": false,
+    "target_result": "GREEN",
+    "observed_result": "GREEN"
+  },
+  "reception_focus_authority_implementation": {
+    "opaque_blocker_id": "B6-REC-001",
+    "cause_class": "PRODUCT_INPUT_SPECIFIC_FOCUS_AUTHORITY_NOT_COMPLETE",
+    "implementation_owner": "step11_rc0031_reception_focus_authority",
+    "body_free": true,
+    "experimental_only": true,
+    "runtime_connected": false,
+    "source_authority_join_required": true,
+    "origin_rebuild_validation_required": true,
+    "reception_denominator": 11,
+    "selected_base_ast_binding_count": 10,
+    "unmatched_required_opportunity_count": 1,
+    "focus_nonempty_count": 11,
+    "focus_distinct_from_target_count": 5,
+    "aspect_congruent_count": 11,
+    "aspect_refinement_count": 6,
+    "product_rebuild_required_count": 6,
+    "maximum_owner_count": 4,
+    "current_product_effective_act_consumption_count": 0,
+    "visible_support_role_difference_required": true,
+    "unbound_focus_or_support_allowed": false,
+    "natural_surface_changed": false,
+    "target_result": "GREEN",
+    "observed_result": "GREEN"
+  },
+  "remaining_red_contract": {
+    "owner_role_inflection": {
+      "target_result": "INTENTIONAL_RED",
+      "closed_code": "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "implementation_authorized": false
+    },
+    "typed_recomposition": {
+      "target_result": "INTENTIONAL_RED",
+      "closed_code": "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED",
+      "implementation_authorized": false
+    },
+    "remaining_intentional_red_count": 2
+  },
+  "b6_exact6_partial_green_suite": {
+    "node_count": 6,
+    "frozen_target": {
+      "pass_count": 4,
+      "intentional_red_count": 2,
+      "unexpected_failure_count": 0
+    },
+    "expected_intentional_red_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ],
+    "observed_summary": "4 PASS / 2 INTENTIONAL_RED / 0 UNEXPECTED",
+    "duration_seconds": 449.90
+  },
+  "regression_accounting": {
+    "b5_exact6_target": "6 PASS / 0 FAILURE",
+    "b5_exact6_observed": "6 PASS / 0 FAILURE",
+    "b5_exact6_duration_seconds": 460.23,
+    "source_suite9_target": "9 PASS / 0 FAILURE",
+    "source_suite9_observed": "9 PASS / 0 FAILURE",
+    "source_suite9_duration_seconds": 0.46,
+    "collection_target": "36 COLLECTED",
+    "collection_observed": "36 COLLECTED",
+    "collection_duration_seconds": 0.11,
+    "py_compile_result": "PASS",
+    "diff_check_result": "PASS",
+    "predecessor_exact30_historical_summary": "23 PASS / 7 INTENTIONAL_FINAL_INVERSE_RED",
+    "predecessor_exact30_rerun_in_this_task": false,
+    "full_exact36_run": false,
+    "full_exact36_actual_summary": "NOT_RUN",
+    "full_backend_suite_run": false
+  },
+  "privacy_anonymization": {
+    "body_or_quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "raw_input_exported": false,
+    "original_case_candidate_atom_owner_anchor_mapping_exported": false,
+    "individual_relation_meaning_exported": false,
+    "specific_focus_mapping_exported": false,
+    "exact_act_mapping_exported": false,
+    "raw_body_digest_exported": false,
+    "raw_packet_sha256_exported": false,
+    "verification_key_exported": false,
+    "private_free_text_note_exported": false,
+    "failure_messages_body_free_required": true,
+    "new_body_full_packet_created": false
+  },
+  "product_read_boundary": {
+    "current_product_rebuilt": false,
+    "current_product_effective_act_consumption_count": 0,
+    "rebuild_required_count": 6,
+    "counterfactual_product_read_run": false,
+    "actual_product_read_run": false,
+    "product_read_may_start": false
+  },
+  "decision": "B6_SOURCE_CONGRUENCE_AND_RECEPTION_FOCUS_AUTHORITY_IMPLEMENTED_CORRESPONDING_TWO_REDS_GREEN_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_RED",
+  "stop_gate": {
+    "triggered": false,
+    "stop_if_b6_exact6_target_not_met": true,
+    "stop_if_b5_or_source_suite_regresses": true,
+    "stop_if_scope_denominator_resource_or_privacy_drifts": true,
+    "stop_if_current_product_consumes_unapproved_effective_act": true
+  },
+  "next_boundary": {
+    "next_authority_selected": false,
+    "candidate_only": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY",
+    "separate_approval_required": true,
+    "owner_role_inflection_and_typed_recomposition_only": true,
+    "reception_rebuild_required_six_consumption_requires_new_scope": true,
+    "actual_product_read_allowed_by_candidate": false,
+    "final_inverse_allowed_by_candidate": false,
+    "parser_matcher_p4_runtime_e2_allowed_by_candidate": false
+  }
+}
