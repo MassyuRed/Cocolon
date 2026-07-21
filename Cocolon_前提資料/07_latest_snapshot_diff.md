@@ -9,7 +9,7 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "7533587673f1e895ea056b18562deaa6059f0aba"
+  Cocolon_last_reflected_task_head: "a7f6f9f76e67ebe20662be527e8ce67a9858b19c"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
   mashos_api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
   verified_at: "2026-07-21 JST"
@@ -10786,7 +10786,7 @@ rc0031補遺§14の明示承認後、P1 exact 7 RED + new24 attacksをproduction
 
 現設計の最低1000件は未改訂です。500件以下でStep 14へ進む場合は、実装判断ではなく設計改訂の明示承認が必要です。
 
-# 2026-07-21 current authority: rc0031 P3 prerequisite consistency
+# 2026-07-21 current authority: rc0031 P3 Product Surface grammar Product Read STOP
 
 この節がcurrent authorityです。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決します。file自身へ自分を含むcommit SHAを埋め込まず、直前に反映済みだったtask headと分離します。
 
@@ -10794,42 +10794,16 @@ rc0031補遺§14の明示承認後、P1 exact 7 RED + new24 attacksをproduction
 
 ```text
 Cocolon ref:                       MassyuRed/Cocolon:main
-Cocolon last reflected task head:  7533587673f1e895ea056b18562deaa6059f0aba
+Cocolon last reflected task head:  a7f6f9f76e67ebe20662be527e8ce67a9858b19c
 Cocolon authority record commit:   this fileを含むGitHub revisionから解決
 mashos-api current checkpoint:      a904ba192b05ca1445e32006b64fc87e7cda48bf
-work start Cocolon / mashos-api:    541fab094c1bf32c83403cb8ed73f1f66d7fff58 / b8e6fb59710a8b7ea15c6e5f016da275d4d3c54b
+work start Cocolon / mashos-api:    a7f6f9f76e67ebe20662be527e8ce67a9858b19c / a904ba192b05ca1445e32006b64fc87e7cda48bf
 verified at:                        2026-07-21 JST
 ```
 
-## 2. last full audit delta
+last full audit basisはCocolon `7533587673f1e895ea056b18562deaa6059f0aba`、mashos-api `a904ba192b05ca1445e32006b64fc87e7cda48bf`のままである。今回、構造・runtime接続・owner実装は変更していないため、構造資料の全体更新は行わない。
 
-### Cocolon
-
-`5a58c4d... -> 7533587...`は10 commits / 176 pathsです。
-
-| class | paths | current interpretation |
-|---|---:|---|
-| premise material | 18 | 00 / 01 / 02 / 02C / 04 / 05 / 07 / manifest、diff owner等 |
-| work attitude rule | 8 | GitHub pin / direct reflection rule等 |
-| EmlisAI documents | 150 | rc0024〜rc0031 handoff / receipt / addendum |
-| Cocolon RN / app source | 0 | production RN / app behavior変更なし |
-
-### mashos-api
-
-`25b98ec... -> a904ba1...`は9 commits / 6 pathsです。
-
-| path | delta |
-|---|---|
-| `ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py` | modified。rc0031 P2 experiment forward owner / private validator |
-| `ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py` | added |
-| `ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json` | added |
-| `ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py` | added / P1 |
-| `ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py` | added / P2 |
-| `ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py` | added / P3 |
-
-Natural Surfaceというproduction-path fileのsource bytesは変更されています。ただしrc0031 ownerはexperiment-only / private / shareable false / runtime disconnectedで、production runtime / public / shared behaviorの変更は0です。API、DB、RN、Parser、Matcher、Gate、runtime adapter、dependency manifestからの接続はありません。
-
-## 3. current result
+## 2. unchanged machine checkpoint
 
 | boundary | result | reading |
 |---|---|---|
@@ -10837,9 +10811,9 @@ Natural Surfaceというproduction-path fileのsource bytesは変更されてい
 | P2 freeze | `9f8a816...`で`24 PASS` | immutable predecessor |
 | P2 current tree | `23 PASS / 1 historical path-scope RED` | 後続P3 pathによるphase-lock。semantic regressionではない |
 | private verified reuse | `f7caf169...` / exact10 `10 PASS` | private composition GREENのみ |
-| P3 exact24 | `15 PASS / 9 intentional RED` | PRE-FREEZE RED / prerequisite consistency closed |
+| P3 exact24 | `15 PASS / 9 intentional RED` | PRE-FREEZE RED維持 |
 
-P3 intentional REDの内訳:
+P3 intentional RED:
 
 ```text
 STEP11_RC0031_P3_DIMENSION_SURFACE_NOT_AVAILABLE                    1
@@ -10847,32 +10821,93 @@ STEP11_RC0031_P3_FIXED_SLOT_PREFIX_PRODUCT_CONTRACT_NOT_SATISFIED  1
 STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE                       7
 ```
 
-## 4. STOP / next authority
+mashos-api変更は0件。Catalog、Natural Surface、Parser / Matcher、P1 / P2 / P3 test、fixture、runtime / manifest、API / DB / RNは開始点`a904ba...`から不変である。
+
+## 3. Product Surface design result
+
+design candidate `G2_SCOPE_LIFTED_FAMILY_INFLECTION`をexact38へread-only投影した。
 
 ```text
-Product Surface grammar: unresolved
-P3 Product Surface successor: not started
-dimension append: not started
-Parser / Matcher append: not started
-P4: not started
-runtime / dependency manifest: not started
-E2 and later: not started
-production runtime / API / DB / RN: unchanged and disconnected
-next authority: Product Surface grammar design + Product Read only
+new semantic atom:                  38
+verified base reuse:                 1
+Reception binding:                  11
+observed family+dimension profile:  23
+exact38 rule coverage:           38 / 38
+fixed complete four-slot bundle:     0
+candidate metadata read:             0
+source ID / dimension visible copy:  0
+verified reuse rewrite:               0
 ```
 
-P3 Surface実装へ進みません。test-local dimension lattice / fixed-slot prefixを商品文法へ昇格せず、Catalog / Natural Surfaceの既存prefixとP2 immutable predecessorを変更しません。
+G2は共通temporal cueをsentence / groupへscope-liftし、modalityをfinite ending、polarityをpredicate voice、construction scopeをgrammatical headへ屈折する。relation / semantic linkはendpointとdirection、explicit unknownはvisible terminalから構造導出する。
 
-## 5. latest evidence
+schema-free、内部schema非露出、candidate metadata不要のbody-only recovery候補は成立した。ただし、これはProduct承認、Parser / Matcher GREEN、large-corpus totalityの証明ではない。
 
-1. Revised Cycle設計
-2. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md`
-3. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json`
-4. SurfaceGrammar / BodyDimension / FinalInverse補遺
-5. VerifiedBaseReuseComposition GREEN handoff / receipt
-6. P2 Freeze handoff / receipt
+## 4. private Product Read result
 
-## 6. premise update operation
+10 final candidate contextをbody-full private境界で読んだ。body、raw input、引用、free-text note、raw SHA-256はshareable artifactへ出していない。
+
+```text
+candidate severity:                 PASS 1 / MINOR 2 / MAJOR 7 / BLOCKER 0
+case max severity:                  PASS 1 / MINOR 2 / MAJOR 5 / BLOCKER 0
+former MAJOR PASS-or-MINOR:         0 / 5
+controls not worse:                 3 / 3
+self-denial non-promotion:          met
+unknown non-regression:             met
+relation non-regression:            not met
+required-meaning non-regression:    not met
+```
+
+2 reviewer独立一致は主張しない。1 reviewerがsemantic-safetyとproduct-surfaceの2 passで確認し、結果はSTOPにだけ使用した。
+
+## 5. STOP
+
+decision:
+
+```text
+STOP_AT_PRODUCT_SURFACE_GRAMMAR_DESIGN
+```
+
+固定slot反復を除いても、generic owner expression、7〜10 atom density、generic endpoint relation、Receptionの入力固有bindingが残り、非template性、main meaning保持、relation可読性、depth fitは成立しなかった。
+
+```text
+Catalog / Natural Surface implementation: not authorized / not started
+P3 Product Surface successor:             not authorized / not started
+dimension append:                         not authorized / not started
+Parser / Matcher append:                  not authorized / not started
+P4:                                       not started
+runtime / dependency manifest:            not started
+E2 and later:                             not started
+production runtime / API / DB / RN:       unchanged and disconnected
+Cycle 001:                                NOT_ACCEPTED
+```
+
+Product Read不成立のため、Catalog / Surface appendの実装承認候補を出さない。current P3 REDを変更せず、実装へ自動進行しない。
+
+## 6. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceGrammar_Design20_3_Addendum_ProductRead_STOP_20260721.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceGrammar_ProductRead_STOP_BodyFree_Receipt_20260721.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceGrammar_ProductRead_STOP_Handoff_20260721.md`
+4. Revised Cycle設計
+5. P3 PrerequisiteConsistency addendum / receipt
+6. SurfaceGrammar / BodyDimension / FinalInverse補遺
+7. VerifiedBaseReuseComposition GREEN handoff / receipt
+8. P2 Freeze handoff / receipt
+
+## 7. next authority
+
+今回のSTOPから実装へ進まない。続ける場合は別のread-only承認で、generic owner expression、multiple-atom visibility、relation grouping、Reception bindingのどこを変更ownerにするかを先に決める。
+
+candidate:
+
+```text
+P3_PRODUCT_SURFACE_OWNER_EXPRESSION_DENSITY_AND_RECEPTION_BOUNDARY_REDESIGN_READ_ONLY
+```
+
+明示承認があるまで開始しない。
+
+## 8. premise update operation
 
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。単なるHEAD前進だけでは更新しない。
