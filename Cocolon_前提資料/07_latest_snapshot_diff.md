@@ -9,9 +9,9 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "52b971de738f76efb9a036fbe6f9363d099fcac2"
+  Cocolon_last_reflected_task_head: "53a49271bd5d2f79858e517f46d63e99ada3f6b2"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@9a32e20aefed8f91179e499da5ba934b0a969807"
+  mashos_api: "MassyuRed/mashos-api:main@63d14cb467adffaa1a50bd53fe104abaa5dbfa16"
   verified_at: "2026-07-21 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
@@ -27,6 +27,13 @@ file_counts:
   total: 2009
 purpose: "pin済みGitHub commitと歴史local snapshotから見えるCocolonの構造差分を、華恋の作業用地図として固定する"
 coverage:
+  nls_v3_step11_cycle001_rc0031_p3_b5_catalog_lexical_surface_implementation_reflected: true
+  nls_v3_step11_cycle001_rc0031_p3_b5_catalog_lexical_surface_modified_paths: 4
+  nls_v3_step11_cycle001_rc0031_p3_b5_exact6_result: "6 passed / 0 red"
+  nls_v3_step11_cycle001_rc0031_p3_exact30_result: "23 passed / 7 intentional final-inverse red"
+  nls_v3_step11_cycle001_rc0031_p3_actual_output_product_read_run: false
+  nls_v3_step11_cycle001_rc0031_p3_final_inverse_authorized: false
+  nls_v3_step11_cycle001_accepted: false
   nls_v3_step11_cycle001_rc0031_scope_reflected: true
   p4_runtime_backfill_hij_future_direction_surface_repair_r0_r10_reflected: true
   p4_runtime_backfill_hij_future_direction_surface_repair_added_files: 6
@@ -10914,6 +10921,7 @@ P3_PRODUCT_SURFACE_OWNER_EXPRESSION_DENSITY_AND_RECEPTION_BOUNDARY_REDESIGN_READ
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
 
+
 # 2026-07-21 current authority: rc0031 P3 Product Surface owner boundary read-only
 
 この節が後発current authorityであり、直前の`Product Surface grammar Product Read STOP`を履歴として保持したうえで次checkpointを定義する。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決する。file自身へ自分を含むcommit SHAを埋め込まない。
@@ -11194,5 +11202,132 @@ Parser / Matcher、P4、runtime、dependency manifest、E2以降、API、DB、RN
 
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回のB5 contract差分は新規addendumへ閉じ、production topology不変のため全面更新しない。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+# 2026-07-21 current authority: rc0031 P3 Product Surface B5 Catalog / Lexical / Surface implementation and GREEN-only
+
+この節が後発current authorityである。直前の`B5 owner boundary design freeze / RED-only`を履歴として保持し、承認済み実装checkpointだけを更新する。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決し、file自身へ自分を含むcommit SHAを埋め込まない。
+
+## 1. authority identity
+
+```text
+approved authority:              P3_PRODUCT_SURFACE_B5_CATALOG_LEXICAL_SURFACE_IMPLEMENTATION_AND_GREEN_ONLY
+Cocolon ref:                     MassyuRed/Cocolon:main
+Cocolon work start:              53a49271bd5d2f79858e517f46d63e99ada3f6b2
+Cocolon authority record commit: this fileを含むGitHub revisionから解決
+mashos-api work start:           9a32e20aefed8f91179e499da5ba934b0a969807
+mashos-api result:               63d14cb467adffaa1a50bd53fe104abaa5dbfa16
+mashos-api comparison:           1 commit ahead / 4 modified paths / +1383 / -22
+verified at:                     2026-07-21 JST
+```
+
+last full audit basisはCocolon `7533587673f1e895ea056b18562deaa6059f0aba`、mashos-api `a904ba192b05ca1445e32006b64fc87e7cda48bf`のままである。今回はphase / RC / release gateではなく、既にfreeze済みのB5 contractをexact ownerへ実装した小checkpointであるため、全前提資料の全面監査は行っていない。
+
+## 2. decision
+
+承認されたexact boundary内で、B5の4 intentional REDをCatalog / Grounded Lexicalization / Natural Surface実装によりGREENへ移した。
+
+```text
+B5_CATALOG_LEXICAL_SURFACE_IMPLEMENTED
+B5_EXACT6_GREEN
+ACTUAL_IMPLEMENTED_OUTPUT_PRODUCT_READ_NOT_RUN
+P3_FINAL_INVERSE_NOT_AUTHORIZED
+```
+
+Cycle 001は`NOT_ACCEPTED`のままである。machine GREENはactual production outputのbody-full Product Read完了を意味せず、Parser / Matcherまたは次工程への実装authorityにもならない。
+
+## 3. exact repository scope
+
+mashos-apiの変更は次のexact 4 pathだけである。
+
+```text
+ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py
+ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py
+ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py
+ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+```
+
+| owner | predecessor | bounded change | result |
+|---|---|---:|---|
+| Catalog | 19,951 bytes / `a4e8bc97...` | EOF +4,613 bytes | 24,564 bytes / `75d6d3f6...` |
+| Grounded Lexicalization | 129,615 bytes / `592f3ab7...` | EOF +3,634 bytes | 133,249 bytes / `3ea0f94b...` |
+| Natural Surface | 485,490 bytes / `ee2f4bc0...` | EOF +43,442 bytes | 528,932 bytes / `acaf74b4...` |
+| current P3 test | 201,638 bytes / `a027cdbe...` | bounded scope amendment | 202,968 bytes / `0821ec54...` |
+
+3 production sourceはpredecessor prefixをbyte-exactに保持した。test amendmentはLexicalのbounded EOF owner、SurfaceのCatalog + Lexical exact dynamic import set、repository freeze material、B5 premarker commitmentだけを更新し、既存30 test nodeとB5 contract本文を維持する。
+
+## 4. implemented B5 contract
+
+- Catalog: body-dimension recovery contract、Product grammar、resource、owner、cluster、Reception morphologyをbounded EOFへ追加した。
+- Grounded Lexicalization: 24 owner occurrenceをowner-connected `exact_source_span`からcanonical expressionへ導出するprivate projectionを追加した。missing / ambiguous source fragmentはfail-closeし、projectionは`__all__`へ公開していない。
+- Natural Surface: canonical predecessorとretained verified reuseからのみ再構築し、same-group / owner-connected / load 4以内のProduct cluster、AST-first Reception、dimension-bearing Product render、deterministic validatorを追加した。
+- Natural Surfaceの新規dynamic importはCatalogとGrounded Lexicalizationのexact 2だけであり、generalized import allowanceは追加していない。
+
+観測値:
+
+```text
+context / unique case:                     10 / 8
+family construction/relation/link/unknown: 22 / 13 / 1 / 2
+new semantic atom / verified reuse:        38 / 1
+owner exact source projection:             24 / 24
+Product cluster / maximum load:            12 / 4
+Reception:                                 10 AST-bound + 1 unmatched = 11
+richer AST binding:                        2
+visible source anchor maximum:             1
+resource clauses/complexity/joiner/units:  2 / 4 / 2 / 4
+candidate metadata / case branch:          false / 0
+visible internal schema token hit:         0
+```
+
+## 5. verification result
+
+```text
+py_compile / EOF scope / API availability: GREEN
+B5 exact6 actual:                          6 PASS / 0 RED
+exact30 actual:                            23 PASS / 7 intentional RED
+unexpected failure:                        0
+captured body output:                      0
+```
+
+exact30の残存7件はすべて`STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE`である。対象はfinal Parser / Matcherのsymbols、round-trip、reuse rederivation、mutation / attack closureであり、今回の禁止範囲を越えてGREEN化していない。production変更後のexact24 subsetは、同じexact30実行内で`17 PASS / 7 intentional RED`として実測した。旧`15 / 9`の継承や算術projectionではない。
+
+## 6. unchanged / prohibited boundary
+
+```text
+Parser / Matcher / Hard Gate:         unchanged / not authorized
+P3 Surface successor append beyond B5: not started
+P4 / runtime / dependency manifest:   not started
+E2以降:                               not started
+fixture / P1 / P2:                    unchanged
+API / DB / RN / public / shared:      unchanged
+actual body-full Product Read:        not run
+Cycle 001:                            NOT_ACCEPTED
+```
+
+今回の実装はprivate experiment Surfaceに閉じる。bodyをshareable artifactへ写さず、candidate metadata、内部schema、case-specific branch、raw digestまたはverification keyをcurrent authorityへ持ち込まない。
+
+## 7. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_CatalogLexicalSurface_ImplementationAndGreenOnly_Addendum_20260721.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_CatalogLexicalSurface_ImplementationAndGreenOnly_BodyFree_Receipt_20260721.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_CatalogLexicalSurface_ImplementationAndGreenOnly_Handoff_20260721.md`
+4. previous B5 owner boundary design freeze / RED-only addendum、receipt、handoff
+5. Revised Cycle設計とcurrent P1 / P2 / P3 evidence
+
+## 8. next authority
+
+GREEN成立後もactual production outputを自動でProduct Readせず、Catalog / Surface successor、Parser / MatcherまたはP4へ進まない。次へ進む場合は実装承認ではなく、次の別承認が必要である。
+
+```text
+P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_READ_ONLY
+```
+
+このread-only authorityでは実装済みactual outputだけをprivateに読み、main meaning、owner density、dimension reception、schema-free性、Reception read feelを判定する。不成立なら設計段階へSTOPし、成立してもfinal inverse実装へ自動進行しない。
+
+## 9. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回の実装owner差分は専用addendumへ閉じ、全面更新しない。
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。

@@ -1,0 +1,256 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_product_surface_b5_catalog_lexical_surface_implementation_and_green_only.body_free.v1",
+  "created_at_jst": "2026-07-21",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "P3_PRODUCT_SURFACE_B5_CATALOG_LEXICAL_SURFACE_IMPLEMENTATION_AND_GREEN_ONLY",
+  "status": "B5_CATALOG_LEXICAL_SURFACE_IMPLEMENTED_B5_EXACT6_GREEN_ACTUAL_IMPLEMENTED_OUTPUT_PRODUCT_READ_NOT_RUN_P3_FINAL_INVERSE_NOT_AUTHORIZED",
+  "source_pins": {
+    "cocolon_start_commit": "53a49271bd5d2f79858e517f46d63e99ada3f6b2",
+    "mashos_api_start_commit": "9a32e20aefed8f91179e499da5ba934b0a969807",
+    "mashos_api_result_commit": "63d14cb467adffaa1a50bd53fe104abaa5dbfa16"
+  },
+  "repository_compare": {
+    "ahead_by": 1,
+    "behind_by": 0,
+    "changed_path_count": 4,
+    "addition_count": 1383,
+    "deletion_count": 22,
+    "unexpected_changed_path_count": 0
+  },
+  "authorized_exact_paths": [
+    "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+  ],
+  "observed_changed_paths": [
+    "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+    "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+    "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+  ],
+  "file_commitments": {
+    "catalog": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+      "predecessor_byte_count": 19951,
+      "predecessor_sha256": "a4e8bc9753a1398571d511d5d0c1219a886c498661b3a4f702d3b20b5672c6cc",
+      "change_mode": "BOUNDED_EOF_APPEND",
+      "append_byte_count": 4613,
+      "append_sha256": "3a582e1fff13adf65f41fd10c0fc42cc602c745865f6c1f34be8d7181fc9fd38",
+      "result_byte_count": 24564,
+      "result_sha256": "75d6d3f673203728d5ed1b3d007ac673edc8569429e14c2e0e68b2d80d6c8609",
+      "result_git_blob_sha1": "94e87e7bdd58359dd3790e30fcd765151ad792d9",
+      "predecessor_prefix_exact": true
+    },
+    "grounded_lexicalization": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "predecessor_byte_count": 129615,
+      "predecessor_sha256": "592f3ab7c90831c3191f51e9e7dd9a1f8c3fe4add1fd31bba9fdc65dccaecc28",
+      "change_mode": "BOUNDED_EOF_APPEND_AFTER_EXPLICIT_SCOPE_AMENDMENT",
+      "append_byte_count": 3634,
+      "append_sha256": "d93cf23bbf957ee8efb0a30ecce235c3beb1e0b1260681dd72886824f096aa94",
+      "append_byte_max": 32768,
+      "result_byte_count": 133249,
+      "result_sha256": "3ea0f94b350dd1243c50783a1c424aff14df5c7694d1aeb4899a80cb5b4c7b71",
+      "result_git_blob_sha1": "49a47629b3dcd82ed6326ba815c9e044f65c0cf1",
+      "predecessor_prefix_exact": true
+    },
+    "natural_surface": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "predecessor_byte_count": 485490,
+      "predecessor_sha256": "ee2f4bc0ab260e8cf1ce2b87acf499e84712ed6b3e639a6a1a6a0141bd3ea520",
+      "change_mode": "BOUNDED_EOF_APPEND_WITH_EXACT_DYNAMIC_IMPORT_ALLOWANCE",
+      "append_byte_count": 43442,
+      "append_sha256": "3cfd5ff4a7c0dc745188c9ed90b26d5e25bca9aff2e453402b564bdad1af3318",
+      "result_byte_count": 528932,
+      "result_sha256": "acaf74b4ff25b5e312a60b6741e08a7f802aa9202281a5272d32952a9d06509c",
+      "result_git_blob_sha1": "ab10c70629edc57ab971760816fc106747f3de34",
+      "predecessor_prefix_exact": true
+    },
+    "p3_test": {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+      "task_predecessor_byte_count": 201638,
+      "task_predecessor_sha256": "a027cdbee9423f2490a3700fdcca6c071bd5503388a9e739fed6cae821bac67d",
+      "change_mode": "AUTHORIZED_SCOPE_AMENDMENT_AND_B5_GREEN_CONTRACT_UPDATE",
+      "result_byte_count": 202968,
+      "result_sha256": "0821ec5408c43208bdef2c776d3d6c13363ad6c3b21cd79779e95d0aa8ff3813",
+      "result_git_blob_sha1": "21de62b19af09920a613ee4858c6b957e1342a77",
+      "a904_byte_prefix_exact": false,
+      "a904_prefix_change_was_explicit_scope_amendment": true,
+      "result_b5_marker_prefix_byte_count": 162521,
+      "result_b5_marker_prefix_sha256": "f4922b32d76816e615fb2e448b61a780185800440fc1cbdb9fad0f43117b0d91",
+      "predecessor_test_name_count": 24,
+      "predecessor_test_names_preserved": true
+    }
+  },
+  "scope_amendments": {
+    "lexical_previous_whole_file_lock_superseded_only_by_bounded_eof": true,
+    "lexical_append_byte_max": 32768,
+    "lexical_append_marker_exact_count": 1,
+    "surface_exact_dynamic_import_allowance": [
+      "emlis_ai_step11_grounded_lexicalization_v3",
+      "emlis_ai_step11_rc0031_experiment_surface_catalog_v3"
+    ],
+    "surface_safe_equivalent_used": false,
+    "wildcard_import_allowed": false,
+    "static_import_allowed_in_append": false,
+    "dynamic_import_outside_exact_allowlist_allowed": false,
+    "generalized_import_allowance": false,
+    "unrelated_append_validator_relaxation": false,
+    "scope_validation_result": "GREEN"
+  },
+  "implementation_exports": {
+    "catalog_exports": [
+      "STEP11_RC0031_EXPERIMENT_BODY_DIMENSION_RECOVERY_CONTRACT",
+      "validate_step11_rc0031_experiment_body_dimension_recovery_contract"
+    ],
+    "catalog_duplicate_export_count": 0,
+    "lexical_private_projection": "_step11_rc0031_product_owner_expression_projection",
+    "lexical_private_projection_signature": [
+      "base_candidate",
+      "successor_snapshot",
+      "lexical_atom_specs"
+    ],
+    "lexical_private_projection_in___all__": false,
+    "surface_builder_export": "build_step11_rc0031_dimension_bearing_experiment_surface_candidate",
+    "surface_validator_export": "validate_step11_rc0031_dimension_bearing_experiment_surface_candidate",
+    "surface_export_signatures_valid": true
+  },
+  "frozen_denominator": {
+    "final_candidate_context_count": 10,
+    "unique_case_count": 8,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "new_semantic_atom_count": 38,
+    "verified_base_reuse_count": 1,
+    "owner_occurrence_count": 24,
+    "exactly_one_owner_source_fragment_count": 24,
+    "product_cluster_count_max": 13,
+    "product_cluster_load_max": 4,
+    "base_ast_reception_binding_count": 10,
+    "unmatched_required_reception_count": 1,
+    "total_reception_count": 11,
+    "richer_ast_binding_count": 2,
+    "visible_source_anchor_max": 1,
+    "candidate_metadata_required": false,
+    "case_family_review_severity_branch_count": 0,
+    "resource_maxima": [
+      2,
+      4,
+      2,
+      4
+    ]
+  },
+  "observed_body_free_contract": {
+    "final_candidate_context_count": 10,
+    "unique_case_count": 8,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "new_semantic_atom_count": 38,
+    "verified_base_reuse_count": 1,
+    "owner_occurrence_count": 24,
+    "exactly_one_owner_source_fragment_count": 24,
+    "product_cluster_count": 12,
+    "product_cluster_loads_by_context": [
+      [],
+      [],
+      [1],
+      [3],
+      [3],
+      [4, 3],
+      [3],
+      [3],
+      [4, 2, 4],
+      [4, 4]
+    ],
+    "product_cluster_load_max": 4,
+    "base_ast_reception_binding_count": 10,
+    "unmatched_required_reception_count": 1,
+    "total_reception_count": 11,
+    "richer_ast_binding_count": 2,
+    "visible_source_anchor_at_most": 1,
+    "resource_maxima": [
+      2,
+      4,
+      2,
+      4
+    ],
+    "candidate_metadata_required": false,
+    "case_family_review_severity_branch_count": 0,
+    "forbidden_visible_schema_token_hit_count": 0
+  },
+  "fail_closed_attack_evidence": {
+    "owner_source_missing_or_duplicate_closed": true,
+    "cluster_drop_duplicate_disconnect_or_overload_closed": true,
+    "ast_binding_weakening_or_additional_duplication_closed": true,
+    "schema_metadata_case_anchor_or_resource_attack_closed": true,
+    "unexpected_failure_count": 0
+  },
+  "verification": {
+    "b5_exact6": {
+      "executed": true,
+      "node_count": 6,
+      "pass_count": 6,
+      "intentional_red_count": 0,
+      "duration_seconds": 443.14,
+      "execution_basis": "DIRECT_COMPATIBILITY_HARNESS"
+    },
+    "prior_not_available_code_remaining_count": 0,
+    "pre_implementation_exact24_historical_baseline": "15_PASS_9_INTENTIONAL_RED",
+    "historical_exact24_inherited_as_post_implementation_result": false,
+    "post_implementation_exact24": {
+      "executed": true,
+      "node_count": 24,
+      "pass_count": 17,
+      "intentional_red_count": 7,
+      "intentional_red_codes": {
+        "STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE": 7
+      }
+    },
+    "exact30": {
+      "executed": true,
+      "actual_execution": true,
+      "projection": false,
+      "node_count": 30,
+      "pass_count": 23,
+      "intentional_red_count": 7,
+      "duration_seconds": 581.12,
+      "execution_basis": "DIRECT_COMPATIBILITY_HARNESS",
+      "intentional_red_codes": {
+        "STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE": 7
+      }
+    },
+    "full_pytest_available": false,
+    "full_pytest_unavailable_reason": "NO_MODULE_NAMED_PYTEST",
+    "compile_probe_green": true,
+    "import_probe_green": true,
+    "scope_probe_green": true,
+    "captured_stdout_stderr_count": 0
+  },
+  "privacy_and_review_boundary": {
+    "actual_implemented_output_product_read_run": false,
+    "counterfactual_paper_read_used_as_actual_output_evidence": false,
+    "private_body_exported": false,
+    "body_quote_exported": false,
+    "body_digest_exported": false,
+    "free_text_review_note_exported": false,
+    "verification_key_exported": false
+  },
+  "decision": "B5_CATALOG_LEXICAL_SURFACE_IMPLEMENTED_B5_EXACT6_GREEN",
+  "implementation_authorized_outside_exact4": false,
+  "actual_product_read_authorized": false,
+  "parser_matcher_hard_gate_authorized": false,
+  "p4_runtime_manifest_e2_authorized": false,
+  "api_db_rn_public_shared_authorized": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "next_authority_required": "P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_READ_ONLY"
+}
