@@ -9,9 +9,9 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "8881fb77cabdfcd02c7762aa09abc44aa1af8eab"
+  Cocolon_last_reflected_task_head: "6f3369477b9f0d5ea900bd81e101d193ce07b3fb"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@46b41a8230b09016f0d0a22535891d65c4dee8ee"
+  mashos_api: "MassyuRed/mashos-api:main@c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
   verified_at: "2026-07-22 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
@@ -40,12 +40,24 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b6_design_freeze_authorized: true
   nls_v3_step11_cycle001_rc0031_p3_b6_contract_frozen: true
   nls_v3_step11_cycle001_rc0031_p3_b6_red_only_run: true
-  nls_v3_step11_cycle001_rc0031_p3_b6_exact6_result: "2 passed / 4 intentional red / 0 unexpected"
+  nls_v3_step11_cycle001_rc0031_p3_b6_red_only_predecessor_exact6_result: "2 passed / 4 intentional red / 0 unexpected"
+  nls_v3_step11_cycle001_rc0031_p3_b6_authority_implementation_authorized: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_authority_implementation_reflected: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_authority_implementation_result_commit: "c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
+  nls_v3_step11_cycle001_rc0031_p3_b6_exact6_result: "4 passed / 2 intentional red / 0 unexpected"
   nls_v3_step11_cycle001_rc0031_p3_b5_exact6_regression_result: "6 passed / 0 failure"
-  nls_v3_step11_cycle001_rc0031_p3_b6_source_congruence_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_source_suite9_result: "9 passed / 0 failure"
+  nls_v3_step11_cycle001_rc0031_p3_b6_collection_result: "36 tests"
+  nls_v3_step11_cycle001_rc0031_p3_b6_py_compile_result: "passed"
+  nls_v3_step11_cycle001_rc0031_p3_b6_diff_check_result: "passed"
+  nls_v3_step11_cycle001_rc0031_p3_b6_source_congruence_green: true
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_role_inflection_green: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_reception_focus_authority_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_reception_focus_authority_green: true
   nls_v3_step11_cycle001_rc0031_p3_b6_typed_recomposition_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_rebuild_required_count: 6
+  nls_v3_step11_cycle001_rc0031_p3_b6_current_product_effective_act_consumption_count: 0
+  nls_v3_step11_cycle001_rc0031_p3_b6_actual_product_read_run: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_broad_surface_production_implemented: false
   nls_v3_step11_cycle001_rc0031_p3_b6_production_implementation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_b5_product_surface_freeze_viable: false
   nls_v3_step11_cycle001_rc0031_p3_b5_actual_output_remediation_authorized: false
@@ -11734,4 +11746,132 @@ P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_AND_RECEPTION_FOCUS_AUTHORITY_IMPLEMENTA
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回はB6 body-free addendumとcurrent authority差分に閉じ、全面更新しない。
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+# 2026-07-22 current authority: rc0031 P3 Product Surface B6 source congruence / Reception focus authority implementation / GREEN-only
+
+この節がEOFの最新current authorityである。直前の`B6 source congruence / role inflection / Reception focus design freeze / RED-only`をimmutable predecessorとして保持し、承認済みauthority implementation checkpointの確定結果を記録する。
+
+## 1. authority identity
+
+```text
+approved authority:              P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_AND_RECEPTION_FOCUS_AUTHORITY_IMPLEMENTATION_AND_GREEN_ONLY
+Cocolon ref:                     MassyuRed/Cocolon:main
+Cocolon work start:              6f3369477b9f0d5ea900bd81e101d193ce07b3fb
+Cocolon authority record commit: this fileを含むGitHub revisionから解決
+mashos-api work start:           46b41a8230b09016f0d0a22535891d65c4dee8ee
+mashos-api result:               c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14
+verified at:                     2026-07-22 JST
+```
+
+今回はphase / RC / release gateではなくB6 authorityの小checkpointであるため、全前提資料の全面監査は行わない。
+
+## 2. exact scope / verification result
+
+承認scopeは次のexact3 pathに限る。
+
+```text
+ai/services/ai_inference/emlis_ai_grounded_relation_construction_authority_successor_v3.py
+ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py
+ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py
+```
+
+```text
+result commit:           c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14
+ahead / behind:          1 / 0
+changed path count:      3
+unexpected changed path: 0
+additions / deletions:   1044 / 16
+relation result blob:    d622874a8ac2c9686a2e716c55c5b7816b46efa8
+Reception result blob:   7ddd4b62a5a46bf55bb97063d58801228849dd68
+P3 test result blob:     21f014f1ed2eaabe8a63b9c66b5050307de0eb35
+```
+
+verification result:
+
+```text
+B6 targeted exact6: 4 PASS / 2 INTENTIONAL_RED / 0 UNEXPECTED / 449.90 s
+B5 exact6:          6 PASS / 0 failure / 460.23 s
+source suite9:      9 PASS / 0 failure / 0.46 s
+collection:         36 tests / 0.11 s
+py_compile:         PASS
+diff-check:         PASS
+```
+
+B6の4 PASS targetは既存2 PASSにsource congruenceとReception focus authorityの2 GREENを加える。残す2 intentional REDはowner role inflectionとtyped recompositionだけである。
+
+## 3. bounded authority result contract
+
+relation / construction authority successorはsource type、endpoint order、direction、refinement basis、source-local provenanceを保持し、originから独立再構築できるeffective refinement authorityだけを記録する。case / fixture phrase branch、neutralization、omissionは許可しない。
+
+Reception authorityはGrounded primary meaning、required opportunity、selected base ASTをbody-freeにjoinし、focus / target / support / visible-support difference / act / aspect authorityを記録する。
+
+```text
+exact atom authority chain target:        38 / 38
+source/effective conflict target:         0
+Reception authority binding:              11 / 11
+selected base AST / unmatched:            10 / 1
+focus non-empty / target-distinct focus:  11 / 5
+aspect-congruent / aspect refinement:     11 / 6
+maximum owner count:                      4
+authority-recorded Product rebuild need:  6
+current Product effective-act consumption: 0
+```
+
+authorityは`rebuild-required 6`を記録するが、current Product Surfaceによるeffective actの消費は`0`である。Natural Surface変更、Product body rebuild、actual-output remediationも`0`とし、authority GREENをcurrent Product output GREENまたはProduct Read readinessへ読み替えない。
+
+verification後も次を残す。
+
+```text
+STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED
+STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED
+RECEPTION_PRODUCT_REBUILD_REQUIRED_6
+CURRENT_PRODUCT_EFFECTIVE_ACT_CONSUMPTION_0
+ACTUAL_PRODUCT_READ_NOT_AUTHORIZED
+P3_FINAL_INVERSE_NOT_AUTHORIZED
+CYCLE001_NOT_ACCEPTED
+```
+
+## 4. immutable predecessor / prohibited boundary
+
+P3 test predecessorは`224,767 bytes / SHA-256 0af7c0177ade14c94ec2426e3245833793ce5690fde835ab95be0cb58fe517c7 / Git blob 043300b67f691dadaa2df3beb80d2610b41f884a`である。既存B6 RED-only nodes、B5 exact6、predecessor exact30を改変しない。
+
+```text
+Catalog / Grounded Lexicalization / Natural Surface: 0 / 0 / 0
+owner role-inflection / typed recomposition:         not authorized / not implemented
+Parser / Matcher / Hard Gate:                        not authorized / unchanged
+fixture / P1 / P2:                                   unchanged
+P4 / runtime / dependency manifest / E2以降:         not authorized / unchanged
+API / DB / RN / public / shared runtime:             unchanged
+counterfactual / actual Product Read:                not run / not run
+release / Cycle 001 acceptance:                      not authorized / NOT_ACCEPTED
+```
+
+## 5. privacy / STOP
+
+shareable evidenceはopaque blocker alias、非識別的cause class、aggregate denominator、repository file commitmentだけを持つ。raw input、body、引用、識別可能な言い換え、original case / candidate / atom / owner / anchor mapping、個別relation意味、具体的focus mapping、exact act mapping、raw body digest、raw packet SHA-256、verification key、private free-text noteはGitHubへ反映しない。
+
+B6 target未成立、B5 / source suite regression、scope / denominator / resource / privacy drift、unexpected path、または未承認のProduct effective-act消費があればSTOPする。actual Product Readは実行しない。
+
+## 6. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_SourceCongruenceAndReceptionFocusAuthority_ImplementationAndGreenOnly_Addendum_20260722.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_SourceCongruenceAndReceptionFocusAuthority_ImplementationAndGreenOnly_BodyFree_Receipt_20260722.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_SourceCongruenceAndReceptionFocusAuthority_ImplementationAndGreenOnly_Handoff_20260722.md`
+4. previous B6 design-freeze / RED-only evidence
+
+## 7. next authority
+
+GREEN成立後も自動進行しない。次へ進む場合の候補だけを置く。
+
+```text
+P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+この候補は残存2 REDと、authorityが記録した`rebuild-required 6`のProduct消費を対象とする。actual Product Read、P3 final inverse、Parser / Matcher、P4以降はさらに別承認である。
+
+## 8. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase / RC / release gate等の節目で全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
