@@ -1,14 +1,28 @@
 {
-  "revision_date": "2026-07-20",
+  "revision_date": "2026-07-21",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
-  "source_mode": "github_pinned_commits_with_local_materialization",
-  "current_source_policy": {
-    "Cocolon": "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748",
-    "mashos-api": "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed",
-    "verified_at": "2026-07-20 JST",
+  "source_mode": "canonical_current_authority_plus_last_full_audit",
+  "canonical_current_authority": "07_latest_snapshot_diff.md",
+  "authority_resolution": {
+    "Cocolon_ref": "MassyuRed/Cocolon:main",
+    "Cocolon_last_reflected_task_head": "7533587673f1e895ea056b18562deaa6059f0aba",
+    "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
+    "mashos-api": "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf",
+    "verified_at": "2026-07-21 JST"
+  },
+  "update_policy": {
+    "current_authority": "after_each_completed_github_reflection_and_post_write_verification",
+    "structural_docs": "only_on_structure_owner_contract_read_order_or_naming_boundary_change",
+    "full_audit": "phase_rc_release_gate_milestones",
+    "zip_delivery": "only_when_github_reflection_fails; changed_and_new_files_only"
+  },
+  "last_full_audit_source_policy": {
+    "Cocolon": "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba",
+    "mashos-api": "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf",
+    "verified_at": "2026-07-21 JST",
     "identity_rule": "repository + branch + pinned commit + path + blob/hash",
     "local_materialization_rule": "same commit/path/hash means the same implementation file; local/cloud location is not a specification or authority fork",
     "main_advance_rule": "do not silently follow a moving main after predecessor freeze",
@@ -1483,7 +1497,7 @@
   "docs": [
     {
       "path": "00_karen_read_first.md",
-      "purpose": "華恋用READ FIRST。R8 repairはRR0-RR9とRR10 readinessまで、RR10実機はnot_run。NLS v2はStep 3から未達、Step 8 STOP、offline-only、runtime v1維持として読む。"
+      "purpose": "華恋用READ FIRST。currentは07を単一authorityとして読み、rc0031 P3 prerequisite RED / Product grammar unresolved / production STOPを確認する。"
     },
     {
       "path": "01A_cocolon_overall_structure_app_foundation_home.md",
@@ -1499,7 +1513,7 @@
     },
     {
       "path": "01_cocolon_overall_structure.md",
-      "purpose": "Cocolon全体構造。R8 Opportunity / Depth / Move / Clause / 12 Gate / Recovery ownerと、runtimeへ未接続のNLS v2 offline branchを記録する。"
+      "purpose": "Cocolon全体構造。rc0031 Catalog / P2 experiment forward owner / P3 test branchと、Product Surface successor・runtime未接続を分離して記録する。"
     },
     {
       "path": "02A_cocolon_national_system_input_save_dispatch.md",
@@ -1507,11 +1521,11 @@
     },
     {
       "path": "02C_cocolon_contract_boundary_validation.md",
-      "purpose": "契約・境界・検証系。R8の12 Reception GatesとRR10 not_run、NLS v2 Step 0〜13監査訂正・Holdout A STOP・runtime v1維持を記録する。"
+      "purpose": "契約・境界・検証系。rc0031 P1 / P2 / verified reuse / P3 exact result、historical path-scope RED、Product grammar STOPを記録する。"
     },
     {
       "path": "02_cocolon_national_system.md",
-      "purpose": "Cocolon国家システム。現行v1 R8 repair flowと、public dispatchへ入らない停止済みNLS v2 local evaluation branchを記録する。"
+      "purpose": "Cocolon国家システム。rc0031 source-tree前進と、既存public production flow / API / DB / RN非変更を分離して記録する。"
     },
     {
       "path": "03_cocolon_naming_system.md",
@@ -1519,11 +1533,11 @@
     },
     {
       "path": "04_cocolon_change_theme_checklist.md",
-      "purpose": "変更テーマ別チェックリスト。Observation Reply Step0-14確認順を含む"
+      "purpose": "変更テーマ別チェックリスト。07 current authorityを入口に、rc0031 Product Surface grammar design-only / production STOPを確認する。"
     },
     {
       "path": "05_cocolon_rule_file_index.md",
-      "purpose": "rule / policy / guard / test索引。R8 RR0-RR10 ownerとNLS v2 design・audit correction・offline module・freeze/receipt/testの必読順を含む。"
+      "purpose": "rule / policy / guard / test索引。07 current authority、最新P3 addendum / receipt、前提資料更新運用、GitHub-first delivery ruleを索引化する。"
     },
     {
       "path": "06_cocolon_filename_change_hold_ledger.md",
@@ -1531,7 +1545,7 @@
     },
     {
       "path": "07_latest_snapshot_diff.md",
-      "purpose": "最新snapshot差分。R8 27 added / 13 modified、NLS v2 41 added、RR10実機not_run、NLS v2 Holdout A STOPを記録する。"
+      "purpose": "canonical current authority。作業完了ごとのexact heads、最新差分、rc0031 state / STOP / next authorityを小差分更新する。"
     },
     {
       "path": "eai714_diff.csv",
@@ -2770,19 +2784,19 @@
     ],
     "conclusion": "GitHub正本では再現に必要な主要RN/native/config/scripts/CI構成が存在する。ローカルzip欠落のみでは再現性欠落と判断しない。"
   },
-  "source_snapshot": {
+  "last_full_audit_source_snapshot": {
     "source_mode": "github_pinned_commits_with_local_materialization",
     "Cocolon": {
       "repository": "MassyuRed/Cocolon",
       "branch": "main",
-      "commit": "5a58c4d2573b13944b61c77cba8665faeb261748"
+      "commit": "7533587673f1e895ea056b18562deaa6059f0aba"
     },
     "mashos-api": {
       "repository": "MassyuRed/mashos-api",
       "branch": "main",
-      "commit": "25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+      "commit": "a904ba192b05ca1445e32006b64fc87e7cda48bf"
     },
-    "verified_at": "2026-07-20 JST",
+    "verified_at": "2026-07-21 JST",
     "historical_local_snapshot": {
       "premise": "Cocolon_前提資料(340).zip",
       "premise_sha256": "c2c2f3d4d71127b5ee7e029f3240dfb2b8f33c3e34b1c0b47c28c20ec73d4d5b",
@@ -15431,6 +15445,58 @@
     "work_attitude_rules_for_karen/08_artifact_delivery_rules.txt",
     "work_attitude_rules_for_karen/09_work_start_checklist.txt",
     "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+    "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+    "work_attitude_rules_for_karen/manifest.json"
+  ],
+  "nls_v3_step11_cycle001_rc0031_2026_07_21": {
+    "reflected": true,
+    "status": "PRE_FREEZE_RED_PREREQUISITE_CONSISTENCY_CLOSED_PRODUCT_GRAMMAR_UNRESOLVED_PRODUCTION_STOP",
+    "mashos_api_checkpoint": "a904ba192b05ca1445e32006b64fc87e7cda48bf",
+    "cocolon_last_reflected_task_head": "7533587673f1e895ea056b18562deaa6059f0aba",
+    "work_start": {
+      "Cocolon": "541fab094c1bf32c83403cb8ed73f1f66d7fff58",
+      "mashos-api": "b8e6fb59710a8b7ea15c6e5f016da275d4d3c54b"
+    },
+    "p1_exact7": "1 PASS / 6 intentional RED",
+    "p2_freeze_commit": "9f8a816a66e75cedb6fcc09ddec00e4bf78bbb4d",
+    "p2_current_exact24": "23 PASS / 1 historical path-scope RED",
+    "p2_semantic_regression": false,
+    "private_verified_reuse_exact10": "10 PASS",
+    "p3_exact24": "15 PASS / 9 intentional RED",
+    "p3_red_breakdown": {
+      "STEP11_RC0031_P3_DIMENSION_SURFACE_NOT_AVAILABLE": 1,
+      "STEP11_RC0031_P3_FIXED_SLOT_PREFIX_PRODUCT_CONTRACT_NOT_SATISFIED": 1,
+      "STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE": 7
+    },
+    "production_path_source_bytes_changed": true,
+    "production_runtime_connected": false,
+    "public_api_db_rn_changed": false,
+    "p3_product_surface_successor_started": false,
+    "parser_matcher_p4_runtime_manifest_e2_plus_started": false,
+    "next_authority": "PRODUCT_SURFACE_GRAMMAR_DESIGN_AND_PRODUCT_READ_ONLY",
+    "latest_handoff": "NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md",
+    "latest_receipt": "NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json"
+  },
+  "full_audit_delta_2026_07_21": {
+    "Cocolon": "5a58c4d... -> 7533587... / 10 commits / 176 paths / RN-app-source 0",
+    "mashos-api": "25b98ec... -> a904ba1... / 9 commits / 6 paths / runtime-public connection 0"
+  },
+  "latest_modified_premise_files_2026_07_21_current_authority_audit": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "04_cocolon_change_theme_checklist.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/00_read_first.txt",
+    "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+    "work_attitude_rules_for_karen/04_forbidden_mixing_design_and_implementation.txt",
+    "work_attitude_rules_for_karen/08_artifact_delivery_rules.txt",
+    "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+    "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+    "work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
     "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
     "work_attitude_rules_for_karen/manifest.json"
   ]

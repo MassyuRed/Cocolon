@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-06-16
+revision_date: 2026-07-21
 created_at: 2026-06-05 JST
 format: UTF-8 text / Notepad向け
 
@@ -262,7 +262,8 @@ GitHub直接反映は、次の条件をすべて満たす場合だけ行う。
 - force push、削除、無関係な変更を含めない
 - HEAD drift、hash不一致、意味衝突があればwrite前に停止する
 - write後のfile内容、全commit SHA、final HEAD、exact pathを報告する
-- GitHub commitをcurrent authority、ZIPをbackup snapshotとして扱う
+- GitHub commitと`Cocolon_前提資料/07_latest_snapshot_diff.md`をcurrent authorityとして扱い、反映と反映後確認に成功した場合はZIPを作成・提出しない
+- GitHubへ反映できなかった場合だけ、新規・修正fileに限定したZIPを提出する
 ```
 
 Codex・subagent・他AIを華恋とは別の作業者として使う場合は、従来どおり次の条件をすべて満たすread-only補助に限定する。
@@ -278,6 +279,8 @@ Codex・subagent・他AIを華恋とは別の作業者として使う場合は�
 
 この境界は、作業速度より優先する。
 速度改善のためにCocolonの作業主体を華恋以外へ渡してはいけない。
+
+前提資料は、作業完了ごとに`07_latest_snapshot_diff.md`のcurrent authorityだけを小さく更新する。構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase・RC・release gate等の節目で全体監査する。
 
 ### 9.4 Mash様の指示がなくても華恋の意見を出す
 

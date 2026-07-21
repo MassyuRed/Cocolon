@@ -1,14 +1,15 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
-current_source:
-  Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+source_mode: "canonical_current_authority_plus_last_structural_audit"
+current_authority: "07_latest_snapshot_diff.md"
+last_structural_audit_source:
+  Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
 purpose: "変更テーマから、華恋が読むべき構造資料を逆引きする"
 ---
 
@@ -20,12 +21,13 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 読む順は固定です。
 
 1. `00_karen_read_first.md`
-2. `03_cocolon_naming_system.md`
-3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
-4. 作業テーマに応じた `01` 系
-5. 国家システムに関係する場合は `02` 系
-6. contract / policy / guard に関係する場合は `05`
-7. DB / rename / bridge view に関係する場合は `03` / `06` / `09`（DB名が関わる場合は `08` も読む。destructive DB変更はMash様が明示した場合だけ扱う）
+2. `07_latest_snapshot_diff.md`
+3. `03_cocolon_naming_system.md`
+4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+5. 作業テーマに応じた `01` 系
+6. 国家システムに関係する場合は `02` 系
+7. contract / policy / guard に関係する場合は `05`
+8. DB / rename / bridge view に関係する場合は `03` / `06` / `09`（DB名が関わる場合は `08` も読む。destructive DB変更はMash様が明示した場合だけ扱う）
 
 # 2. テーマ別の最短読む順
 
@@ -672,7 +674,7 @@ RN側へsurface_origin / blocker / diagnostic_recovery_surface分岐を持ち込
 validation planを理由にpublic response shape、DB physical schema、release flag、Gate条件を変更する。
 ```
 
-# 2026-07-20 差分追記: NLS v3 Step 11 Cycle 001を触る時
+# 2026-07-20 履歴断面: NLS v3 Step 11 Cycle 001を触る時
 
 読む順:
 
@@ -695,3 +697,34 @@ validation planを理由にpublic response shape、DB physical schema、release 
 - [ ] public / DB / RN / Safety / question ownerの非変更を確認したか
 
 current rc0031では§14明示承認前に実装しません。承認後も最初はP1 exact 7 RED + new24だけで、production sourceを編集しません。
+
+# 2026-07-21 差分追記: rc0031 P3 prerequisite consistency後の作業check
+
+読む順:
+
+1. `07_latest_snapshot_diff.md`
+2. NLS v3 Revised Cycle設計
+3. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md`
+4. 同Body-free receipt
+5. SurfaceGrammar / BodyDimension / FinalInverse補遺
+6. VerifiedBaseReuseComposition GREEN handoff / receipt
+7. P2 Freeze handoff / receipt
+
+開始前check:
+
+- [ ] P3 exact24を`15 PASS / 9 intentional RED`と確認したか
+- [ ] 9 REDの内訳をdimension surface 1 / fixed-slot prefix product contract 1 / final inverse 7と確認したか
+- [ ] P2 current treeの1 REDをhistorical path-scopeとsemantic regressionに分けたか
+- [ ] P2 forward owner / Catalogのsource-tree存在とproduction runtime未接続を分けたか
+- [ ] Product Surface grammarが未解決で、P3 Surface successor実装が未開始だと確認したか
+- [ ] 次のauthorityがProduct Surface grammarのdesign-only + Product Readに限定されるか
+- [ ] Parser / Matcher / P4 / runtime / manifest / E2以降へ進んでいないか
+
+禁止:
+
+```text
+P3 REDを理由にSurface successorを先行実装する。
+test-local fixed-slot prefixを商品文法へ昇格する。
+historical P2 path-scope REDをsemantic regressionとして修復する。
+disconnected source-tree ownerの存在をpublic runtime接続済みと読む。
+```

@@ -1,13 +1,14 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
-current_source:
-  Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+source_mode: "canonical_current_authority_plus_last_structural_audit"
+current_authority: "07_latest_snapshot_diff.md"
+last_structural_audit_source:
+  Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -2729,6 +2730,7 @@ cause_inferred_from_category
 cause_inferred_from_emotion_strength
 personality_tendency_allowed
 ```
+
 
 禁止: contract guardを理由にpublic response keyを増減する、`observation_status` enumを増やす、`comment_text`生成元を辞書へ移す、DB physical nameをrenameする、Display Gateを緩める、forbidden inference本文やraw inputをmetaへ保存する。
 
@@ -6068,6 +6070,7 @@ R8 current decision: REPAIR_REQUIRED
 P5 / P6 / P8 / release: false / false / false / false
 ```
 
+
 # 2026-07-20 差分追記: NLS v3 Step 11 rc0030 / rc0031 contract boundary
 
 ## current resultを分離する
@@ -6197,3 +6200,36 @@ NLS v2 state: offline_only_stopped
 NLS v2 runtime owner switch: 0
 P5 / P6 / P8 / release: false / false / false / false
 ```
+
+# 2026-07-21 差分追記: rc0031 P3 prerequisite consistency contract
+
+current authorityは`07_latest_snapshot_diff.md`です。最新のbody-free validation ownerは次です。
+
+| boundary | current result | interpretation |
+|---|---|---|
+| P1 exact7 | `1 PASS / 6 intentional RED` | source-edit前freezeの履歴を保持 |
+| P2 freeze | `9f8a816...`で`24 PASS` | immutable P2 predecessor |
+| P2 current tree | `23 PASS / 1 historical path-scope RED` | `STEP11_RC0031_P2_PATH_SCOPE_INVALID`は後続P3 path出現によるphase-lockでsemantic regressionではない |
+| verified reuse | `f7caf169...` / exact10 `10 PASS` | private composition reuseだけGREEN。public ownerではない |
+| P3 exact24 | `15 PASS / 9 intentional RED` | prerequisite consistency closed / Product grammar unresolved |
+
+P3の9 REDは次の固定内訳です。
+
+```text
+STEP11_RC0031_P3_DIMENSION_SURFACE_NOT_AVAILABLE                    1
+STEP11_RC0031_P3_FIXED_SLOT_PREFIX_PRODUCT_CONTRACT_NOT_SATISFIED  1
+STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE                       7
+```
+
+contract境界:
+
+- test-local dimension lattice / fixed-slot prefixをProduct Surface grammarへ昇格しない。
+- Catalog / Natural Surfaceの既存prefixとP2 immutable predecessorを変更しない。
+- P3 Product Surface successor、Parser / Matcher append、P4、runtime / manifestは未開始として扱う。
+- API / DB / RN / public / shared runtimeは未接続のまま保持する。
+- 次のauthorityはProduct Surface grammarのdesign-only + Product Readまで。P3 Surface実装はSTOPする。
+
+最新証拠:
+
+1. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md`
+2. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json`

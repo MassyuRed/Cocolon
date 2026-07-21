@@ -1,17 +1,24 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
+source_mode: "github_canonical_current_authority"
+authority_role: "canonical_current_authority"
+authority_resolution:
+  Cocolon_ref: "MassyuRed/Cocolon:main"
+  Cocolon_last_reflected_task_head: "7533587673f1e895ea056b18562deaa6059f0aba"
+  Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
+  mashos_api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  verified_at: "2026-07-21 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  current_Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  current_mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+  last_full_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  last_full_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copy"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -10711,7 +10718,7 @@ R8の次工程にはMash actual-device operatorによる代表4件の証拠取�
 
 華恋の意見: R8はlocal repairの方向を保ちつつ実機で止めるのが妥当です。NLS v2は凍結Holdoutへ合わせて延命せず、意味責任とGateを新versionとして再設計するべきです。
 
-# 2026-07-20 差分追記: GitHub pinned NLS v3 Step 11 snapshot
+# 2026-07-20 履歴断面: GitHub pinned NLS v3 Step 11 snapshot
 
 ## 1. source identity
 
@@ -10778,3 +10785,96 @@ exact 6外変更は0 path、blob / local最終版一致は6 / 6です。
 rc0031補遺§14の明示承認後、P1 exact 7 RED + new24 attacksをproduction source edit 0でfreezeします。P1後だけP2、P3、P4、P5、E2、E3へ進み、E3 Product Read通過後だけE4を開始します。
 
 現設計の最低1000件は未改訂です。500件以下でStep 14へ進む場合は、実装判断ではなく設計改訂の明示承認が必要です。
+
+# 2026-07-21 current authority: rc0031 P3 prerequisite consistency
+
+この節がcurrent authorityです。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決します。file自身へ自分を含むcommit SHAを埋め込まず、直前に反映済みだったtask headと分離します。
+
+## 1. authority identity
+
+```text
+Cocolon ref:                       MassyuRed/Cocolon:main
+Cocolon last reflected task head:  7533587673f1e895ea056b18562deaa6059f0aba
+Cocolon authority record commit:   this fileを含むGitHub revisionから解決
+mashos-api current checkpoint:      a904ba192b05ca1445e32006b64fc87e7cda48bf
+work start Cocolon / mashos-api:    541fab094c1bf32c83403cb8ed73f1f66d7fff58 / b8e6fb59710a8b7ea15c6e5f016da275d4d3c54b
+verified at:                        2026-07-21 JST
+```
+
+## 2. last full audit delta
+
+### Cocolon
+
+`5a58c4d... -> 7533587...`は10 commits / 176 pathsです。
+
+| class | paths | current interpretation |
+|---|---:|---|
+| premise material | 18 | 00 / 01 / 02 / 02C / 04 / 05 / 07 / manifest、diff owner等 |
+| work attitude rule | 8 | GitHub pin / direct reflection rule等 |
+| EmlisAI documents | 150 | rc0024〜rc0031 handoff / receipt / addendum |
+| Cocolon RN / app source | 0 | production RN / app behavior変更なし |
+
+### mashos-api
+
+`25b98ec... -> a904ba1...`は9 commits / 6 pathsです。
+
+| path | delta |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py` | modified。rc0031 P2 experiment forward owner / private validator |
+| `ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py` | added |
+| `ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json` | added |
+| `ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py` | added / P1 |
+| `ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py` | added / P2 |
+| `ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py` | added / P3 |
+
+Natural Surfaceというproduction-path fileのsource bytesは変更されています。ただしrc0031 ownerはexperiment-only / private / shareable false / runtime disconnectedで、production runtime / public / shared behaviorの変更は0です。API、DB、RN、Parser、Matcher、Gate、runtime adapter、dependency manifestからの接続はありません。
+
+## 3. current result
+
+| boundary | result | reading |
+|---|---|---|
+| P1 exact7 | `1 PASS / 6 intentional RED` | freeze保持 |
+| P2 freeze | `9f8a816...`で`24 PASS` | immutable predecessor |
+| P2 current tree | `23 PASS / 1 historical path-scope RED` | 後続P3 pathによるphase-lock。semantic regressionではない |
+| private verified reuse | `f7caf169...` / exact10 `10 PASS` | private composition GREENのみ |
+| P3 exact24 | `15 PASS / 9 intentional RED` | PRE-FREEZE RED / prerequisite consistency closed |
+
+P3 intentional REDの内訳:
+
+```text
+STEP11_RC0031_P3_DIMENSION_SURFACE_NOT_AVAILABLE                    1
+STEP11_RC0031_P3_FIXED_SLOT_PREFIX_PRODUCT_CONTRACT_NOT_SATISFIED  1
+STEP11_RC0031_P3_FINAL_INVERSE_NOT_AVAILABLE                       7
+```
+
+## 4. STOP / next authority
+
+```text
+Product Surface grammar: unresolved
+P3 Product Surface successor: not started
+dimension append: not started
+Parser / Matcher append: not started
+P4: not started
+runtime / dependency manifest: not started
+E2 and later: not started
+production runtime / API / DB / RN: unchanged and disconnected
+next authority: Product Surface grammar design + Product Read only
+```
+
+P3 Surface実装へ進みません。test-local dimension lattice / fixed-slot prefixを商品文法へ昇格せず、Catalog / Natural Surfaceの既存prefixとP2 immutable predecessorを変更しません。
+
+## 5. latest evidence
+
+1. Revised Cycle設計
+2. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md`
+3. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json`
+4. SurfaceGrammar / BodyDimension / FinalInverse補遺
+5. VerifiedBaseReuseComposition GREEN handoff / receipt
+6. P2 Freeze handoff / receipt
+
+## 6. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。単なるHEAD前進だけでは更新しない。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。

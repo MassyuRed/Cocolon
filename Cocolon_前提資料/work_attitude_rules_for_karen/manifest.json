@@ -114,7 +114,8 @@
     {
       "date": "2026-07-21",
       "type": "karen_direct_github_reflection_guard",
-      "summary": "Mash様の対象checkpointまたは成果物への明示承認後に限り、華恋が接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileをCocolon / mashos-apiへ直接反映できる境界を追加。write直前HEAD / predecessor / path / blob / SHA-256確認、repository/documents mapping、drift時STOP、force push・削除・無関係変更禁止、commit SHA / final HEAD / exact path報告、GitHub current authority / ZIP backupを固定。別作業者としてのCodex・subagent・他AIはread-only検査補助に限定する。",
+      "summary": "Mash様の対象checkpointまたは成果物への明示承認後に限り、華恋が接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileをCocolon / mashos-apiへ直接反映できる境界を追加。write直前HEAD / predecessor / path / blob / SHA-256確認、repository/documents mapping、drift時STOP、force push・削除・無関係変更禁止、commit SHA / final HEAD / exact path報告を固定。成果物delivery ruleは同日後続のsuperseding ruleを正とする。別作業者としてのCodex・subagent・他AIはread-only検査補助に限定する。",
+      "superseded_delivery_rule": "2026-07-21 current_authority_incremental_update_and_github_failure_zip_only",
       "pre_write_heads": {
         "Cocolon": "MassyuRed/Cocolon:main@97235712a5d8d966a232c0470a4a9716646fdb59",
         "mashos-api": "MassyuRed/mashos-api:main@9d4e4496144fec24569c913d9ad710aeb653390c"
@@ -126,6 +127,23 @@
       },
       "changed_files": [
         "00_read_first.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-21",
+      "type": "current_authority_incremental_update_and_github_failure_zip_only",
+      "summary": "current authorityは作業成果のGitHub反映と反映後確認が完了するごとに07_latest_snapshot_diff.mdへ小さく更新する。構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase・RC・release gate等の節目で全体監査する。GitHub反映成功時はZIPを作成・提出せず、GitHubへ反映できなかった場合だけ新規・修正file限定ZIPを提出する。",
+      "current_authority_owner": "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "04_forbidden_mixing_design_and_implementation.txt",
         "08_artifact_delivery_rules.txt",
         "09_work_start_checklist.txt",
         "10_stop_judgment_and_unwritten_rules.txt",

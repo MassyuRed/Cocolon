@@ -1,17 +1,18 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
+source_mode: "canonical_current_authority_plus_last_structural_audit"
+current_authority: "07_latest_snapshot_diff.md"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  current_Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  current_mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+  last_structural_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  last_structural_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copy"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -5619,3 +5620,23 @@ NLS v3 evaluation path
 ## source確認
 
 GitHubをcurrent確認元とし、作業開始時に両repo headと対象predecessorをpinします。local copyはpath / hash一致時に同じ実ファイルです。private bodyをGitHubへ移す変更ではありません。
+
+# 2026-07-21 差分追記: source-tree前進と国家runtime非接続の分離
+
+current authorityは`07_latest_snapshot_diff.md`です。2026-07-20節の「rc0031 P1前」は履歴断面で、現在はP2 forward owner / Catalog / P3 prerequisite REDまでsource treeが前進しています。
+
+ただし、国家システムのproduction flowは変わりません。
+
+```text
+Input -> Save -> Dispatch -> grounded_sentence_surface_canonical_v1
+      -> input_feedback.comment_text -> existing RN modal
+
+rc0031 Catalog / P2 forward owner / P3 tests
+      -> private disconnected experiment evidence
+      -X-> API / DB / RN / shared or public runtime
+```
+
+- Natural Surfaceのproduction-path file bytesは変更されていますが、追加されたrc0031 ownerは`experimental_only=true` / `private_body_full=true` / `shareable=false` / `runtime_connected=false`です。
+- rc0031 symbolはNatural Surface、Catalog、P1 / P2 / P3 testに閉じ、runtime adapter、dependency manifest、API、DB、RN、Parser、Matcher、Gateからのimport接続はありません。
+- public production owner、response shape、DB physical name / write path、RN表示条件、Safety、question ownerは変更していません。
+- P3 Product Surface grammarは未解決で、production接続判断はSTOPです。

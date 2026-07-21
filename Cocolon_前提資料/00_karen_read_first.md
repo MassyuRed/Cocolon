@@ -1,17 +1,18 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
+source_mode: "canonical_current_authority_plus_last_full_audit"
+current_authority_owner: "07_latest_snapshot_diff.md"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  current_Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  current_mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+  last_full_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  last_full_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copyであり、別実装ではない"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -1499,6 +1500,10 @@ Mash様への作業報告書や、残タスクを記録する場所ではあり�
 - 華恋は、作業時にこの資料を読んで、旧名称を見つけても即renameしません。
 - 修正対象にするのは、稼働、public contract、API接続先、DB write path、account delete、access policy、ユーザーデータ保護に影響する箇所だけです。
 - Piece関係は、Mash様が明示していない限り、Piece専用工程として扱います。
+- 作業成果のGitHub反映と反映後確認が完了するたび、`07_latest_snapshot_diff.md`のcurrent authorityを同じcheckpointの小さい差分として更新します。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新します。単なるHEAD前進だけでは更新しません。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査します。
+- GitHub反映と反映後確認に成功した場合、成果物ZIPは作成・提出しません。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出します。
 
 
 # 2026-05-31 追加必読: EmlisAI是正方針 / Phase19撤回保持再設計
@@ -2085,8 +2090,9 @@ Phase18では、Phase17の5件fixture商品到達を維持したまま、商品�
 ## 1. 入口
 
 1. `00_karen_read_first.md`
-2. `03_cocolon_naming_system.md`
-3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+2. `07_latest_snapshot_diff.md`
+3. `03_cocolon_naming_system.md`
+4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
 
 この3つで、華恋は「見えている名前」と「実際に動いているファイル名・API名・DB名」が違う可能性を先に固定します。
 
@@ -7550,7 +7556,7 @@ NLS v2は、既知になったHoldout A / Bへ後付け調整して延命すべ�
 - local-only corpus、Holdout、visible packet、生本文を前提資料本文やpublic metaへ転記しない。
 - current差分のfile-level ownerは`eai714_diff.csv`。旧diff CSVは当時snapshotの履歴として変更しない。
 
-# 2026-07-20 差分追記: NLS v3 Step 11 Cycle 001 / GitHub確認元運用
+# 2026-07-20 履歴断面: NLS v3 Step 11 Cycle 001 / GitHub確認元運用
 
 ## 確認元の固定
 
@@ -7604,3 +7610,33 @@ rc0031補遺の`EMLIS_RECEPTION_UNBOUND 4件`表記は軽微なcount誤記で、
 6. GitHub pin上の対象実ファイル
 
 file-level current delta ownerは`eai720_diff.csv`です。`eai714_diff.csv`を上書きしません。
+
+# 2026-07-21 差分追記: current authority reconciliation
+
+この節が2026-07-20履歴断面を上書きするcurrent読み方です。詳細の単一正本は`07_latest_snapshot_diff.md`とし、今後の作業完了ごとの小さいcurrent authority更新は同fileだけへ行います。
+
+```text
+last structural audit Cocolon:    7533587673f1e895ea056b18562deaa6059f0aba
+current mashos-api checkpoint:    a904ba192b05ca1445e32006b64fc87e7cda48bf
+P1 exact7:                        1 PASS / 6 intentional RED
+P2 exact24 on current tree:       23 PASS / 1 historical path-scope RED
+private verified reuse exact10:   10 PASS
+P3 exact24:                       15 PASS / 9 intentional RED
+P3 state:                         PRE-FREEZE RED / prerequisite consistency closed
+Product Surface grammar:          unresolved
+production runtime / API / DB / RN: disconnected and unchanged
+next authority:                   Product Surface grammar design + Product Read only
+```
+
+P2 forward ownerとrc0031 Catalogはsource treeへ追加済みですが、`experimental_only=true` / `runtime_connected=false`のdisconnected branchです。P3 Product Surface successor、Parser / Matcher append、P4、runtime / manifest、E2以降は開始していません。P3 Surface実装へ進んだとは読みません。
+
+最新の必読順は次です。
+
+1. `07_latest_snapshot_diff.md`
+2. NLS v3 Revised Cycle設計
+3. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md`
+4. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json`
+5. SurfaceGrammar / BodyDimension / FinalInverse補遺
+6. VerifiedBaseReuseComposition GREEN handoff / receipt
+7. P2 Freeze handoff / receipt
+8. 2026-07-20 Session Handoffは履歴navigation

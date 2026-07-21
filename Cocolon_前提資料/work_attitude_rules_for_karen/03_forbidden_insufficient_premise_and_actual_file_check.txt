@@ -56,5 +56,8 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - 前提資料との差分だけを見る。
 - 変更点がない資料は触らない。
 - 修正必要箇所のみ差分修正・差分追記する。
-- 修正したファイルのみzipで渡す。
+- 作業成果のGitHub反映と反映後確認が完了するごとに、`07_latest_snapshot_diff.md`のcurrent authorityだけを同じcheckpointの小さい差分として更新する。
+- 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、単なるHEAD前進では触らない。
+- phase、RC、release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合はZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、修正・新規fileに限定したZIPを渡す。
 - 作業報告や残タスクを前提資料に混ぜない。

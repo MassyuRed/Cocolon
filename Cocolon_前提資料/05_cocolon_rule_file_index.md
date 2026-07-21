@@ -1,14 +1,15 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
-current_source:
-  Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+source_mode: "canonical_current_authority_plus_last_structural_audit"
+current_authority: "07_latest_snapshot_diff.md"
+last_structural_audit_source:
+  Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
 purpose: "見落とすと構造誤読や contract 破壊を起こしやすい rule / policy / guard / test を索引化する"
 ---
 
@@ -3055,7 +3056,7 @@ current stopは `GATE0_LOCAL_PASS_DEVICE_PACKET_READY_STOPPED` です。次はMa
 
 # 2026-07-20 差分追記: NLS v3 Step 11必読owner / rule index
 
-## current authority read order
+## 2026-07-20 authority read order（履歴）
 
 | order | artifact | role |
 |---:|---|---|
@@ -3099,3 +3100,37 @@ exact 4はclosed maximumであり、全4編集義務ではありません。既�
 - corpus / historical Product Read
 
 file-level current deltaは`eai720_diff.csv`です。GitHub compare 235 pathのうち、既に`eai714_diff.csv`へ反映済みNLS v2 10 pathと、未反映NLS v3 225 pathを分離しています。
+
+# 2026-07-21 差分追記: current authority / rc0031 P3 rule index
+
+## current authority read order
+
+| order | artifact | role |
+|---:|---|---|
+| 1 | `07_latest_snapshot_diff.md` | canonical current authority / latest exact heads / STOP |
+| 2 | Revised Cycle設計 | invariant / phase order / acceptance |
+| 3 | `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md` | latest prerequisite reconciliation / next authority |
+| 4 | `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json` | body-free exact result / non-claim |
+| 5 | SurfaceGrammar / BodyDimension / FinalInverse補遺 | P3 blocker lineage |
+| 6 | VerifiedBaseReuseComposition GREEN handoff / receipt | private reuse GREEN boundary |
+| 7 | P2 Freeze handoff / receipt | immutable forward predecessor |
+| 8 | GitHub上のactual paths | current bytes |
+
+## current rule owner
+
+| owner | fixed rule |
+|---|---|
+| `07_latest_snapshot_diff.md` | 作業完了ごとの小さいcurrent authority更新 |
+| `work_attitude_rules_for_karen/00_read_first.txt` | current authority / structure-on-change / milestone audit / GitHub-first delivery |
+| `work_attitude_rules_for_karen/08_artifact_delivery_rules.txt` | GitHub成功時ZIPなし、GitHub transport不能時だけ変更file限定ZIP |
+| `work_attitude_rules_for_karen/09_work_start_checklist.txt` | write前後確認と前提資料更新check |
+| `work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt` | drift / conflictをZIPで迂回しない停止境界 |
+
+## rc0031 current gate
+
+- P1 exact7は`1 PASS / 6 intentional RED`。
+- P2 current tree exact24は`23 PASS / 1 historical path-scope RED`。semantic regressionに数えない。
+- private verified reuse exact10は`10 PASS`だが、private / disconnected boundaryを越えない。
+- P3 exact24は`15 PASS / 9 intentional RED`。Product Surface grammarは未解決。
+- P3 Product Surface successor、Parser / Matcher append、P4、runtime / manifest、E2以降は未開始。
+- 次のauthorityはProduct Surface grammarのdesign-only + Product Readまで。Surface実装はSTOP。

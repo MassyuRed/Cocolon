@@ -1,17 +1,18 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-07-20"
+revision_date: "2026-07-21"
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "github_pinned_commits_with_local_materialization"
+source_mode: "canonical_current_authority_plus_last_structural_audit"
+current_authority: "07_latest_snapshot_diff.md"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  current_Cocolon: "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748"
-  current_mashos-api: "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+  last_structural_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
+  last_structural_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copy"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -6624,3 +6625,27 @@ conditional existing ownerはexact 4 closed maximum、新rc0031 lifecycle file�
 これらをrc0031 Surface修復として黙って変更しません。owner不足が判明した時は、実装前に必要ownerとexact pathを提示してSTOPします。
 
 file-level差分は`eai720_diff.csv`を読みます。225件のNLS v3 current deltaは223 added / 2 modified / 0 removedで、既反映NLS v2 10件は別分類のままです。
+
+# 2026-07-21 差分追記: rc0031 P1 / P2 / P3 disconnected topology
+
+current authorityは`07_latest_snapshot_diff.md`です。この構造監査では、`mashos-api:25b98ec... -> a904ba1...`の6 pathを次のように読みます。
+
+```text
+typed semantic authority
+  -> rc0031 experiment Catalog
+  -> Natural Surface内のP2 experiment-only forward owner
+  -> private verified-reuse validator
+  -> P3 independence / prerequisite RED probes
+  -X-> Product Surface successor / Parser / Matcher / Gate / runtime / public
+```
+
+| path | structural role | current state |
+|---|---|---|
+| `ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py` | existing Natural Surface内のrc0031 P2 forward owner / private reuse validation | source bytes変更済み。experiment-only / private / runtime disconnected |
+| `ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py` | rc0031 body-free experiment Catalog | added / runtime disconnected |
+| `ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json` | body-free representative fixture | added |
+| `ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py` | P1 exact7 freeze | added |
+| `ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py` | P2 exact24 / mutation boundary | added |
+| `ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py` | P3 exact24 independence / prerequisite boundary | added |
+
+P2 forward ownerは実装済みですが、P3 Product Surface successorではありません。P3 Product Surface grammar、dimension append、Body-only Parser、Independent Matcher、P4、runtime adapter、dependency manifest、E2以降は未開始です。Cocolon RN / app source差分はありません。

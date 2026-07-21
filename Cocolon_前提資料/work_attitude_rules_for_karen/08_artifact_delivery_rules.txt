@@ -16,16 +16,16 @@ Mash様の指示した成果物形式を変えない。
 - patchなし
 - 実装zipなし
 
-### 「修正必要箇所のみ修正し、新規ファイルと修正ファイルのみzipで渡して。」
+### 「修正必要箇所のみ修正してGitHubへ反映し、反映できない場合だけ新規ファイルと修正ファイルをzipで渡して。」
 
-- 新規ファイル
-- 修正ファイル
-- zip
-- 未変更ファイルは入れない
-- 不要な全量zipを渡さない
+- 承認済みの新規ファイル・修正ファイルだけをGitHubへ反映する
+- 反映後HEADと内容一致まで確認できた場合はzipを作成・提出しない
+- GitHubへ反映できなかった場合だけ、新規ファイル・修正ファイル限定zipを提出する
+- fallback zipへ未変更ファイルや不要な全量repositoryを入れない
 
-### 「修正したファイルのみzipで渡して。」
+### 「GitHubへ反映できなかった場合は、修正したファイルのみzipで渡して。」
 
+- GitHub反映不能を確認してからfallbackへ切り替える
 - 修正したファイルだけを入れる
 - 新規ファイルがあれば新規ファイルも入れる
 - 触っていないファイルを含めない
@@ -38,7 +38,8 @@ Mash様の指示した成果物形式を変えない。
 - 差分台帳にはrepository / branch / commit / path / blobまたはhashを記録する
 - 差分がある前提資料のみ修正する
 - 変更点がない資料は触らない
-- 修正した前提資料のみzipにする
+- GitHub反映と反映後確認に成功した場合はZIPを作成・提出しない
+- GitHubへ反映できなかった場合だけ、修正・新規の前提資料に限定してZIPにする
 
 ### 「診断が出ているかだけ答えろ」
 
@@ -79,7 +80,16 @@ Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した
 - 反映後のHEADを再取得する
 - GitHub上の各対象fileを再取得し、local / ZIPと同一内容であることを確認する
 - repositoryごとの全commit SHA、final HEAD、exact path、new / modifyをMash様へ報告する
-- GitHub commitをcurrent authority、ZIPをbackup snapshotとして扱う
+- GitHub commitと`Cocolon_前提資料/07_latest_snapshot_diff.md`をcurrent authorityとして扱う
+- GitHub反映と反映後確認に成功した場合、成果物ZIPは作成・提出しない
+- GitHubへ反映できなかった場合だけ、新規・修正fileに限定したZIPを提出する。未変更fileや全量repositoryは含めない
+
+### current authority / 前提資料更新運用
+
+- 作業成果のGitHub反映と反映後確認が完了するごとに、`Cocolon_前提資料/07_latest_snapshot_diff.md`のcurrent authorityを同じcheckpointの小さい差分として更新する
+- `01` / `02` / `03` / `04` / `05` / `06` / `09`等の構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新する
+- 単なるHEAD前進だけでは構造資料を更新しない
+- phase、RC、release gate等の節目では、全前提資料のsource参照、相互link、current status、重複・historical表記を全体監査する
 
 ## 提出前チェック
 

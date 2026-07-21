@@ -10,17 +10,18 @@ Cocolon作業を始める前に、華恋はこのチェックを通します。
 - [ ] 前提資料更新か
 - [ ] 仕様相談か
 - [ ] UI文言調整か
-- [ ] zip成果物作成か
+- [ ] GitHub反映不能時のzip fallbackが必要か
 - [ ] GitHub直接反映か
 
 設計ならコード変更禁止。
-実装でMash様がGitHub直接反映を指示した場合は、承認済みexact fileをGitHubへ反映し、ZIPはbackup snapshotとして保持・提示する。直接反映指示がない場合は成果物zipが必要。
+GitHub反映が承認されている作業では、承認済みexact fileをGitHubへ反映し、反映後確認まで成功した場合はZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規・修正fileに限定したZIPを提出する。
 診断ならまず診断の有無を答える。
 前提資料更新なら実ファイルとの差分のみ修正。
 
 ## B. 参照対象
 
 - [ ] Cocolon_前提資料を確認したか
+- [ ] `07_latest_snapshot_diff.md`のcurrent authorityを確認したか
 - [ ] GitHub上の`Cocolon` / `mashos-api` current headを確認したか
 - [ ] 設計・handoffが指定するpredecessor commitを固定したか
 - [ ] 作業中にmainが進んでも黙って追従しない状態か
@@ -149,3 +150,12 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 - [ ] 全commit SHA、final HEAD、exact pathをMash様へ報告できるか
 
 このチェックを一つでも確認できない場合、GitHubへwriteしない。
+
+## L. current authority / 前提資料更新チェック
+
+- [ ] 今回はGitHub反映と反映後確認まで完了した作業checkpointか
+- [ ] 完了した場合、`07_latest_snapshot_diff.md`へ小さいcurrent authority差分を同じcheckpointで反映するか
+- [ ] 構造・owner・contract・必読順・名称境界に変更がある資料だけを差分更新しているか
+- [ ] 単なるHEAD前進を理由に構造資料を更新していないか
+- [ ] phase、RC、release gate等の節目なら全前提資料を監査したか
+- [ ] GitHubへ反映できなかった場合だけ、変更・新規file限定ZIPへ切り替えているか
