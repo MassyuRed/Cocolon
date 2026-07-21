@@ -10913,3 +10913,131 @@ P3_PRODUCT_SURFACE_OWNER_EXPRESSION_DENSITY_AND_RECEPTION_BOUNDARY_REDESIGN_READ
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。単なるHEAD前進だけでは更新しない。
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+# 2026-07-21 current authority: rc0031 P3 Product Surface owner boundary read-only
+
+この節が後発current authorityであり、直前の`Product Surface grammar Product Read STOP`を履歴として保持したうえで次checkpointを定義する。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決する。file自身へ自分を含むcommit SHAを埋め込まない。
+
+## 1. authority identity
+
+```text
+approved authority:                 P3_PRODUCT_SURFACE_OWNER_EXPRESSION_DENSITY_AND_RECEPTION_BOUNDARY_REDESIGN_READ_ONLY
+Cocolon ref:                        MassyuRed/Cocolon:main
+Cocolon work start:                 1c10c5a26644bb8c3a05e6c5f458958a94f61aed
+Cocolon authority record commit:    this fileを含むGitHub revisionから解決
+mashos-api work start / result:     a904ba192b05ca1445e32006b64fc87e7cda48bf / a904ba192b05ca1445e32006b64fc87e7cda48bf
+verified at:                        2026-07-21 JST
+```
+
+構造・runtime接続・production owner実装は変更していないため、構造資料は今回差分更新しない。current authorityと新規body-free evidenceだけを小さく更新する。
+
+## 2. decision
+
+read-only比較で次の最小combined boundaryを識別した。
+
+```text
+B5_SOURCE_GROUNDED_PROPOSITION_CLUSTER_WITH_AST_BOUND_RECEPTION
+```
+
+状態:
+
+```text
+MINIMUM_OWNER_BOUNDARY_IDENTIFIED
+COUNTERFACTUAL_PRODUCT_READ_VIABLE
+IMPLEMENTATION_NOT_AUTHORIZED
+```
+
+4 concernはexisting exact4内の2 implementation locusへ閉じる。
+
+| locus | B5 responsibility |
+|---|---|
+| `emlis_ai_step11_grounded_lexicalization_v3.py` | owner-connected exact source fragmentからProduct owner expressionをcanonical導出する |
+| `emlis_ai_step11_natural_surface_v3.py` | relation-connected proposition cluster、endpoint grouping、AST-first Receptionを所有する |
+
+今回の10 contextでは、E1b relation authority、Content Selection、Discourse Planner、Planning Frontier、Grounded Human Receptionの変更は必要と判定しない。
+
+## 3. evidence summary
+
+```text
+clause-ready lexeme occurrence:              24
+exactly-one exact source fragment available: 24 / 24
+current referent == grounded phrase:          24 / 24
+
+new semantic atom:                            38
+verified base reuse:                           1
+required / safety Reception opportunity:      11
+current proposition unit:                     18
+B5 Product proposition cluster:               13
+B5 maximum cluster load:                       4
+resource expansion:                            0
+
+base AST Reception binding:                   10
+unmatched required opportunity:                1
+AST binding richer than raw opportunity:       2
+B5 Reception accounting:                      10 + 1 = 11
+```
+
+24 / 24 source fragment authorityがすでに存在するためowner expressionの不足はupstream source欠落ではない。current clause-ready projectionが24 / 24で`referent_text == grounded_phrase_text`を選ぶことが直接原因である。
+
+exact38はcluster load `3 / 4`以下へrelation-connected partitionでき、existing visible clause / complexity / joiner / unit maximaを拡張しない。Receptionはbase AST bindingをselected authorityとして先に保持し、未表現required opportunityだけを追加する。
+
+## 4. private counterfactual Product Read
+
+10 final candidate contextへB5をbody-full privateでpaper-renderした。1 reviewerがsemantic-safety / product-surfaceの2 passを行い、2 reviewer独立一致は主張しない。
+
+```text
+candidate severity:                 PASS 4 / MINOR 6 / MAJOR 0 / BLOCKER 0
+unique-case maximum severity:       PASS 2 / MINOR 6 / MAJOR 0 / BLOCKER 0
+former MAJOR PASS-or-MINOR:         5 / 5
+controls not worse:                 3 / 3
+self-denial / relation / unknown / required meaning non-regression: met at design read
+```
+
+private本文、raw input、引用、free-text note、raw SHA-256、verification keyはshareable artifactへ出していない。結果はdesign viabilityに限り、algorithmic totality、production correctness、Parser / Matcher GREEN、E3 / E4、Cycle 001 acceptanceを主張しない。
+
+## 5. unchanged / prohibited boundary
+
+```text
+mashos-api source change:              0
+Cocolon production change:             0
+Catalog / Natural Surface append:      not authorized / not started
+Product lexical projection:            not authorized / not started
+P3 successor / dimension append:       not authorized / not started
+Parser / Matcher / Hard Gate:           not authorized / not started
+P1 / P2 / P3 RED / fixture change:     0
+P4 / runtime / manifest / E2+:          not started
+API / DB / RN / public / shared:        unchanged
+Cycle 001:                              NOT_ACCEPTED
+```
+
+current 38 new / reuse 1 / Reception 11とresource maximaを維持する。B5境界の識別から実装へ自動進行しない。
+
+current P3 testは`161,191 bytes / SHA-256 045ca06e...`でmashos-api `a904ba...`正本と一致する。今回の環境にはpytest moduleがないため新規suite結果は主張せず、`15 PASS / 9 intentional RED`は既存frozen evidenceから継承する。
+
+## 6. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceOwnerBoundary_Redesign_ReadOnly_Addendum_20260721.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceOwnerBoundary_ReadOnly_BodyFree_Receipt_20260721.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceOwnerBoundary_ReadOnly_Handoff_20260721.md`
+4. previous Product Surface grammar Product Read STOP addendum / receipt / handoff
+5. Revised Cycle設計
+6. current P1 / P2 / P3 evidence
+
+## 7. next authority
+
+次は実装承認ではなく、B5固有契約をproduction未変更のREDへ固定する別承認を先に置く。
+
+candidate:
+
+```text
+P3_PRODUCT_SURFACE_B5_OWNER_BOUNDARY_DESIGN_FREEZE_AND_RED_ONLY
+```
+
+このauthorityでは、source-fragment expression uniqueness、exact38 cluster accounting、maximum load 4、AST-first Reception 10 + unmatched required 1、resource不変、case branch 0をREDへfreezeする。明示承認までcurrent REDとproduction sourceを変更しない。
+
+## 8. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回のB5はread-only owner allocationであり、production構造変更ではないため全面更新しない。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
