@@ -1,0 +1,99 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_product_surface_b6_owner_head_range_and_reception_injection.design_freeze_red_only.stop.body_free.v1",
+  "created_at_jst": "2026-07-22",
+  "body_free": true,
+  "approved_authority": "P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY",
+  "status": "STOP_PREDECESSOR_SCOPE_MANIFEST_AND_PHASE_PROJECTION_DRIFT",
+  "source_pins": {
+    "cocolon_start_commit": "009292c7c13a6a2696886a5d322c3ef12dca893b",
+    "mashos_api_start_commit": "c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14",
+    "mashos_api_result_commit": "c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
+  },
+  "decision_flags": {
+    "predecessor_scope_green": false,
+    "predecessor_phase_projection_green": false,
+    "owner_range_design_frozen": false,
+    "reception_injection_design_frozen": false,
+    "trial_test_append_retained": false,
+    "mashos_api_change_retained": false,
+    "implementation_applied": false,
+    "actual_product_read_run": false,
+    "cycle001_accepted": false
+  },
+  "unexpected_red": {
+    "count": 2,
+    "closed_codes": [
+      "STEP11_RC0031_P3_OUTSIDE_APPEND_SCOPE_DRIFT",
+      "STEP11_RC0031_P3_PREDECESSOR_PHASE_PROJECTION_INVALID"
+    ],
+    "focused_observed": "0 PASS / 2 UNEXPECTED_RED",
+    "focused_duration_seconds": 0.39
+  },
+  "diagnostic_full_run": {
+    "trial_collection_count": 40,
+    "pass_count": 27,
+    "intentional_red_count": 11,
+    "unexpected_red_count": 2,
+    "duration_seconds": 633.42,
+    "trial_nodes_retained": false,
+    "predecessor_exact36_slice": "25 PASS / 9 INTENTIONAL_RED / 2 UNEXPECTED_RED"
+  },
+  "scope_manifest_diagnosis": {
+    "unreconciled_path": "ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py",
+    "unreconciled_path_git_blob_sha1": "7ddd4b62a5a46bf55bb97063d58801228849dd68",
+    "service_path_count_frozen": 546,
+    "service_path_count_observed": 547,
+    "service_path_list_sha256_observed": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "repository_material_path_count_frozen": 1530,
+    "repository_material_path_count_observed": 1531,
+    "repository_material_sha256_observed": "084889e2d155fa3583bdf91f5f31d33feef4bb68c3865afca0fe7153f287b6ff",
+    "active_rc0031_path_count_frozen": 5,
+    "active_rc0031_path_count_observed": 6
+  },
+  "restored_repository_state": {
+    "mashos_api_changed_path_count": 0,
+    "mashos_api_github_write_count": 0,
+    "p3_test_bytes": 235266,
+    "p3_test_sha256": "baa4cdd1df995c87518e25069e237e4a721dd0de2dd3d91b316b97c4894c5f33",
+    "p3_test_git_blob_sha1": "21f014f1ed2eaabe8a63b9c66b5050307de0eb35",
+    "restored_collection_count": 36,
+    "py_compile": "PASS",
+    "diff_check": "PASS"
+  },
+  "design_audit_findings": {
+    "new_owner_authority_module_allowed_before_scope_reconciliation": false,
+    "bounded_existing_owner_candidate": "emlis_ai_step11_grounded_lexicalization_v3.py",
+    "bounded_existing_private_consumer_candidate": "emlis_ai_step11_natural_surface_v3.py",
+    "safe_anchor_may_be_relabelled_as_grammatical_head_without_witness": false,
+    "long_owner_exact_range_witness_target_count": 5,
+    "reception_source_inventory_metadata_may_be_overwritten_to_simulate_consumption": false,
+    "actual_rendered_reception_behavioral_consumption_required": true,
+    "raw_text_quote_or_unsalted_body_digest_allowed_in_authority": false,
+    "findings_are_frozen_design": false
+  },
+  "prohibited_and_unchanged": {
+    "catalog_lexical_surface_implementation": false,
+    "product_effective_act_consumption_count": 0,
+    "product_read_run": false,
+    "final_inverse_parser_matcher_changed": false,
+    "p4_runtime_dependency_manifest_e2_changed": false,
+    "api_db_rn_public_shared_runtime_changed": false
+  },
+  "next_boundary": {
+    "candidate_only": "P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_DESIGN_FREEZE_RED_ONLY",
+    "separate_approval_required": true,
+    "test_contract_design_and_red_only": true,
+    "production_change_allowed": false,
+    "current_owner_range_injection_design_may_auto_resume": false
+  },
+  "privacy": {
+    "raw_input_or_body_exported": false,
+    "quote_or_identifying_paraphrase_exported": false,
+    "original_id_mapping_exported": false,
+    "individual_relation_focus_or_act_mapping_exported": false,
+    "raw_body_digest_exported": false,
+    "verification_key_exported": false,
+    "body_full_product_read_run": false
+  },
+  "decision": "STOP_DISCARD_TRIAL_APPEND_PRESERVE_MASHOS_MAIN_AND_REQUEST_SCOPE_RECONCILIATION_DESIGN_APPROVAL"
+}
