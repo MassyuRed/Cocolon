@@ -1,0 +1,353 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_product_surface_b5_actual_output_product_read_and_freeze_read_only.body_free.v1",
+  "created_at_jst": "2026-07-21",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_READ_ONLY",
+  "status": "B5_ACTUAL_OUTPUT_PRODUCT_READ_STOP_B5_PRODUCT_SURFACE_FREEZE_REJECTED_PRODUCTION_REMEDIATION_NOT_AUTHORIZED_P3_FINAL_INVERSE_NOT_AUTHORIZED",
+  "source_pins": {
+    "cocolon_start_commit": "95f4a291936e775f0731b8b1595a424a6fce7ec1",
+    "mashos_api_start_commit": "63d14cb467adffaa1a50bd53fe104abaa5dbfa16",
+    "mashos_api_result_commit": "63d14cb467adffaa1a50bd53fe104abaa5dbfa16"
+  },
+  "entry_integrity": {
+    "drift_detected": false,
+    "unexpected_path_count": 0,
+    "catalog": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+      "byte_count": 24564,
+      "sha256": "75d6d3f673203728d5ed1b3d007ac673edc8569429e14c2e0e68b2d80d6c8609",
+      "git_blob_sha1": "94e87e7bdd58359dd3790e30fcd765151ad792d9"
+    },
+    "grounded_lexicalization": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "byte_count": 133249,
+      "sha256": "3ea0f94b350dd1243c50783a1c424aff14df5c7694d1aeb4899a80cb5b4c7b71",
+      "git_blob_sha1": "49a47629b3dcd82ed6326ba815c9e044f65c0cf1"
+    },
+    "natural_surface": {
+      "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "byte_count": 528932,
+      "sha256": "acaf74b4ff25b5e312a60b6741e08a7f802aa9202281a5272d32952a9d06509c",
+      "git_blob_sha1": "ab10c70629edc57ab971760816fc106747f3de34"
+    },
+    "p3_test": {
+      "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+      "byte_count": 202968,
+      "sha256": "0821ec5408c43208bdef2c776d3d6c13363ad6c3b21cd79779e95d0aa8ff3813",
+      "git_blob_sha1": "21de62b19af09920a613ee4858c6b957e1342a77"
+    }
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "production_source_change_count": 0,
+    "test_change_count": 0,
+    "catalog_lexical_surface_change_count": 0,
+    "parser_matcher_hard_gate_change_count": 0,
+    "p4_runtime_manifest_e2_change_count": 0,
+    "api_db_rn_public_shared_change_count": 0
+  },
+  "frozen_denominator": {
+    "final_candidate_context_count": 10,
+    "unique_case_count": 8,
+    "new_semantic_atom_count": 38,
+    "verified_base_reuse_count": 1,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "owner_occurrence_count": 24,
+    "exactly_one_owner_source_fragment_count": 24,
+    "product_cluster_count": 12,
+    "product_cluster_load_max": 4,
+    "base_ast_reception_binding_count": 10,
+    "additional_required_reception_count": 1,
+    "total_reception_count": 11,
+    "richer_ast_binding_count": 2,
+    "visible_source_anchor_max": 1,
+    "resource_maxima": [2, 4, 2, 4],
+    "candidate_metadata_required": false,
+    "case_family_review_severity_branch_count": 0
+  },
+  "actual_generation": {
+    "generated_from_pinned_implementation": true,
+    "candidate_context_count": 10,
+    "unique_case_count": 8,
+    "generation_failure_count": 0,
+    "candidate_validation_failure_count": 0,
+    "private_input_body_pair_count": 10,
+    "private_packet_exact_machine_comparison_run": true,
+    "private_packet_case_input_body_ordinal_mismatch_count": 0
+  },
+  "formal_boundary": {
+    "literal_internal_schema_exposure_context_count": 0,
+    "candidate_metadata_exposure_context_count": 0,
+    "required_reception_missing_count": 0,
+    "source_owner_formally_traceable_context_count": 10,
+    "schema_free_formal_boundary_preserved": true,
+    "resource_boundary_preserved": true
+  },
+  "private_evidence": {
+    "local_only": true,
+    "body_private": true,
+    "body_or_quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "raw_input_exported": false,
+    "free_text_review_note_exported": false,
+    "raw_body_digest_exported": false,
+    "raw_packet_sha256_exported": false,
+    "packet_byte_count": 34004,
+    "commitment_method": "HMAC-SHA-256_WITH_LOCAL_ONLY_RANDOM_256_BIT_KEY",
+    "packet_hmac_sha256": "1bbdfbd5245d8f1dab6415decc8f9c578ffccb09d7ab9477d85215aa169bc2de",
+    "verification_key_exported": false,
+    "packet_and_key_git_tracked": false
+  },
+  "review_contract": {
+    "revised_cycle_section": "18.4",
+    "axis_count": 12,
+    "axes": {
+      "1": "MAIN_INPUT_MEANING_RETAINED",
+      "2": "THOUGHT_ACTION_RELATION_DIRECTION_CORRECT",
+      "3": "EMOTION_CATEGORY_NOT_PROMOTED",
+      "4": "UNKNOWN_NOT_INVENTED",
+      "5": "SELF_DENIAL_NOT_ADOPTED_AS_FACT",
+      "6": "EMLIS_FROM_INPUT_SPECIFIC",
+      "7": "VISIBLE_AND_EMLIS_PROPOSITIONS_DISTINCT",
+      "8": "NATURAL_NO_REPETITION_OVERQUOTE_EXPLANATORY_PROSE",
+      "9": "SURFACE_DISTRIBUTION_NOT_OVERCONCENTRATED",
+      "10": "DEPTH_FITS_INPUT_AMOUNT_AND_STRUCTURE",
+      "11": "QUESTION_NEEDED_AMBIGUITY_NOT_FALSELY_COMPLETED",
+      "12": "READS_AS_COCOLON_IMMEDIATE_OBSERVATION"
+    },
+    "review_pass_count": 2,
+    "review_passes": [
+      "SEMANTIC_SAFETY",
+      "PRODUCT_SURFACE"
+    ],
+    "reviewer_identity_count": 1,
+    "independent_two_reviewer_claimed": false,
+    "internal_cross_check_counted_as_reviewer": false,
+    "severity_order": ["PASS", "MINOR", "MAJOR", "BLOCKER"],
+    "severity_merge_rule": "MAXIMUM_PER_CANDIDATE_THEN_MAXIMUM_PER_UNIQUE_CASE",
+    "control_comparator": "PRIOR_B5_COUNTERFACTUAL_DESIGN_PRODUCT_READ"
+  },
+  "candidate_contexts": [
+    {
+      "context_id": "nls3s_b001_0001::candidate_01",
+      "role": "control_exact_reuse",
+      "severity": "MAJOR",
+      "failed_axes": [6, 8, 12],
+      "closed_reason_codes": [
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0002::candidate_01",
+      "role": "control",
+      "severity": "MAJOR",
+      "failed_axes": [6, 8, 12],
+      "closed_reason_codes": [
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0009::candidate_01",
+      "role": "control",
+      "severity": "MAJOR",
+      "failed_axes": [6, 8, 12],
+      "closed_reason_codes": [
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0019::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": [
+        "MAIN_MEANING_DOMINANCE_OBSCURED",
+        "RELATION_TEMPORAL_READABILITY_DISTORTED",
+        "RECEPTION_UNBOUND_TO_PRIMARY_THOUGHT",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0019::candidate_02",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": [
+        "MAIN_MEANING_DOMINANCE_OBSCURED",
+        "RELATION_TEMPORAL_READABILITY_DISTORTED",
+        "RECEPTION_UNBOUND_TO_PRIMARY_THOUGHT",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0035::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": [
+        "MAIN_MEANING_RELATIONALLY_DISTORTED",
+        "RELATION_ENDPOINT_SEPARATION_MISREAD",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "OWNER_FRAGMENT_TRUNCATION_READABILITY",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0043::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": [
+        "CONCRETE_SEQUENCE_OBSCURED",
+        "RELATION_TEMPORAL_READABILITY_DISTORTED",
+        "RECEPTION_UNBOUND_TO_PRIMARY_STATE",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "OWNER_FRAGMENT_TRUNCATION_READABILITY",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0043::candidate_02",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": [
+        "CONCRETE_SEQUENCE_OBSCURED",
+        "RELATION_TEMPORAL_READABILITY_DISTORTED",
+        "RECEPTION_UNBOUND_TO_PRIMARY_STATE",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "OWNER_FRAGMENT_TRUNCATION_READABILITY",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0063::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "MAIN_MEANING_DOMINANCE_OBSCURED",
+        "RELATION_READABILITY_DISTORTED",
+        "RECEPTION_UNBOUND_TO_PRIMARY_THOUGHT_STATE",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "OWNER_FRAGMENT_TRUNCATION_READABILITY",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    },
+    {
+      "context_id": "nls3s_b001_0100::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": [
+        "REQUIRED_MEANING_DOMINANCE_OBSCURED",
+        "RELATION_TEMPORAL_READABILITY_DISTORTED",
+        "RECEPTION_TARGET_SUPPORT_OVERLAP",
+        "RECEPTION_PREDICATION_UNNATURAL",
+        "OWNER_FRAGMENT_TRUNCATION_READABILITY",
+        "DIMENSION_EXPLANATORY_TAIL",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "DEPTH_DENSITY_OVERSHOOT",
+        "IMMEDIATE_OBSERVATION_NOT_READ"
+      ]
+    }
+  ],
+  "actual_output_product_read": {
+    "candidate_severity_counts": {
+      "PASS": 0,
+      "MINOR": 0,
+      "MAJOR": 10,
+      "BLOCKER": 0
+    },
+    "unique_case_maximum_severity_counts": {
+      "PASS": 0,
+      "MINOR": 0,
+      "MAJOR": 8,
+      "BLOCKER": 0
+    },
+    "former_major_pass_or_minor_count": 0,
+    "former_major_total": 5,
+    "unresolved_former_major_count": 5,
+    "controls_not_worse_count": 0,
+    "control_total": 3,
+    "new_major_control_count": 3,
+    "emotion_category_non_promotion_preserved": true,
+    "unknown_non_invention_preserved": true,
+    "self_denial_non_adoption_preserved": true,
+    "visible_emlis_proposition_distinction_preserved": true,
+    "question_needed_ambiguity_non_completion_preserved": true,
+    "required_meaning_non_regression_met": false,
+    "relation_non_regression_met": false,
+    "input_specific_reception_met": false,
+    "product_naturalness_met": false,
+    "depth_fit_met": false,
+    "immediate_observation_read_met": false
+  },
+  "closed_concern_counts": {
+    "reception_target_support_overlap_context_count": 10,
+    "reception_predication_or_naturalness_failure_context_count": 10,
+    "immediate_observation_failure_context_count": 10,
+    "dimension_explanatory_tail_applicable_context_count": 8,
+    "dimension_explanatory_tail_failure_count": 8,
+    "main_meaning_or_concrete_sequence_obscured_context_count": 7,
+    "relation_or_temporal_readability_distortion_context_count": 7,
+    "depth_density_overshoot_context_count": 7,
+    "owner_fragment_truncation_context_count": 5,
+    "owner_fragment_truncation_unique_case_count": 4,
+    "surface_distribution_overconcentration_context_count": 2
+  },
+  "freeze_gate": {
+    "all_candidates_major_blocker_zero": false,
+    "all_unique_cases_major_blocker_zero": false,
+    "former_major_five_of_five_pass_or_minor": false,
+    "controls_three_of_three_not_worse": false,
+    "new_major_control_zero": false,
+    "required_meaning_relation_reception_non_regression": false,
+    "owner_specificity_density_dimension_recovery_ast_first_reception_schema_privacy_all_pass": false,
+    "b5_actual_output_product_surface_viable": false
+  },
+  "decision": "B5_ACTUAL_OUTPUT_PRODUCT_READ_STOP_B5_PRODUCT_SURFACE_FREEZE_REJECTED",
+  "rejection_evidence_frozen": true,
+  "product_surface_viability_frozen": false,
+  "production_remediation_authorized": false,
+  "final_inverse_authorized": false,
+  "parser_matcher_hard_gate_authorized": false,
+  "p4_runtime_manifest_e2_authorized": false,
+  "api_db_rn_public_shared_authorized": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "next_authority_required": "P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_FAILURE_LOCALIZATION_AND_REMEDIATION_DESIGN_READ_ONLY"
+}

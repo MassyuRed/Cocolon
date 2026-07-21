@@ -9,7 +9,7 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "53a49271bd5d2f79858e517f46d63e99ada3f6b2"
+  Cocolon_last_reflected_task_head: "95f4a291936e775f0731b8b1595a424a6fce7ec1"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
   mashos_api: "MassyuRed/mashos-api:main@63d14cb467adffaa1a50bd53fe104abaa5dbfa16"
   verified_at: "2026-07-21 JST"
@@ -31,7 +31,10 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b5_catalog_lexical_surface_modified_paths: 4
   nls_v3_step11_cycle001_rc0031_p3_b5_exact6_result: "6 passed / 0 red"
   nls_v3_step11_cycle001_rc0031_p3_exact30_result: "23 passed / 7 intentional final-inverse red"
-  nls_v3_step11_cycle001_rc0031_p3_actual_output_product_read_run: false
+  nls_v3_step11_cycle001_rc0031_p3_actual_output_product_read_run: true
+  nls_v3_step11_cycle001_rc0031_p3_actual_output_product_read_result: "STOP: candidate 0 pass / 0 minor / 10 major / 0 blocker; unique case 0 pass / 0 minor / 8 major / 0 blocker"
+  nls_v3_step11_cycle001_rc0031_p3_b5_product_surface_freeze_viable: false
+  nls_v3_step11_cycle001_rc0031_p3_b5_actual_output_remediation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_final_inverse_authorized: false
   nls_v3_step11_cycle001_accepted: false
   nls_v3_step11_cycle001_rc0031_scope_reflected: true
@@ -11329,5 +11332,115 @@ P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_RE
 
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回の実装owner差分は専用addendumへ閉じ、全面更新しない。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+# 2026-07-21 current authority: rc0031 P3 Product Surface B5 actual-output private Product Read / freeze rejection
+
+この節が後発current authorityである。直前の`B5 Catalog / Lexical / Surface implementation and GREEN-only`を履歴として保持し、承認済みactual-output read-only checkpointだけを更新する。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決し、file自身へ自分を含むcommit SHAを埋め込まない。
+
+## 1. authority identity
+
+```text
+approved authority:              P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_READ_ONLY
+Cocolon ref:                     MassyuRed/Cocolon:main
+Cocolon work start:              95f4a291936e775f0731b8b1595a424a6fce7ec1
+Cocolon authority record commit: this fileを含むGitHub revisionから解決
+mashos-api work start/result:     63d14cb467adffaa1a50bd53fe104abaa5dbfa16
+mashos-api change in this task:   0
+verified at:                     2026-07-21 JST
+```
+
+last full audit basisはCocolon `7533587673f1e895ea056b18562deaa6059f0aba`、mashos-api `a904ba192b05ca1445e32006b64fc87e7cda48bf`のままである。今回はphase / RC / release gateではなく、実装済みexact outputのread-only checkpointであるため、全前提資料の全面監査は行っていない。
+
+## 2. decision
+
+pin済みB5実装からactual output 10 candidate context / 8 unique caseを生成し、全件をbody-full privateでProduct Readした。freeze条件は成立しなかった。
+
+```text
+candidate severity:           PASS 0 / MINOR 0 / MAJOR 10 / BLOCKER 0
+unique-case maximum severity: PASS 0 / MINOR 0 / MAJOR  8 / BLOCKER 0
+former-MAJOR PASS-or-MINOR:   0 / 5
+controls not worse:           0 / 3
+new MAJOR controls:           3 / 3
+```
+
+確定状態:
+
+```text
+B5_ACTUAL_OUTPUT_PRODUCT_READ_STOP
+B5_PRODUCT_SURFACE_FREEZE_REJECTED
+PRODUCTION_REMEDIATION_NOT_AUTHORIZED
+P3_FINAL_INVERSE_NOT_AUTHORIZED
+CYCLE001_NOT_ACCEPTED
+```
+
+機械的GREEN、exact38 accounting、schema/privacy boundaryは保持するが、Product Surface viabilityまたはfreezeへ読み替えない。
+
+## 3. entry / formal boundary
+
+mashos-api `63d14cb...`のexact4 file commitmentは前checkpointからdrift 0である。
+
+```text
+context / unique case:                     10 / 8
+new semantic atom / verified reuse:        38 / 1
+owner exact source projection:             24 / 24
+Product cluster / maximum load:            12 / 4
+Reception:                                 10 AST-bound + 1 additional = 11
+richer AST binding:                        2
+resource clauses/complexity/joiner/units:  2 / 4 / 2 / 4
+candidate metadata / case branch:          false / 0
+literal internal-schema exposure:          0 / 10
+required Reception missing:                0 / 11
+generation / candidate validation failure: 0 / 0
+```
+
+formal boundaryは成立したが、Product ReadではReception target / support overlap、入力固有predication、dimension explanatory tail、main-meaning dominance、relation / temporal readability、density、owner fragment truncationが共通のfreeze blockerになった。
+
+## 4. review / privacy boundary
+
+- Revised Cycle設計18.4の12軸を使い、1 reviewerがsemantic-safety / product-surfaceの2 passを分離して判定した。
+- 2 reviewer独立一致は主張しない。
+- comparatorはprior B5 counterfactual design Product Readであり、rc0030または以前のG2 STOP readではない。
+- body-full input、actual output、free-text noteはlocal-only private packetへ閉じた。
+- shareable artifactへ本文、引用、識別可能な言い換え、raw digest、verification keyを出さない。
+- private packetとverification keyはGitHubへ反映しない。
+
+## 5. unchanged / prohibited boundary
+
+```text
+mashos-api production / test change:     0
+Catalog / Lexical / Surface append:      0
+Parser / Matcher / Hard Gate:            not authorized / not started
+P4 / runtime / dependency manifest:      not authorized / not started
+E2以降:                                  not authorized / not started
+API / DB / RN / public / shared runtime: unchanged
+release / Cycle 001 acceptance:          not authorized / NOT_ACCEPTED
+```
+
+STOP結果からremediation実装、final inverse、P4またはCycle acceptanceへ自動進行しない。
+
+## 6. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_ActualOutput_ProductReadAndFreeze_ReadOnly_Addendum_20260721.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_ActualOutput_ProductReadAndFreeze_ReadOnly_BodyFree_Receipt_20260721.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB5_ActualOutput_ProductReadAndFreeze_ReadOnly_Handoff_20260721.md`
+4. previous B5 implementation / GREEN-only addendum、receipt、handoff
+5. Revised Cycle設計とcurrent P1 / P2 / P3 evidence
+
+## 7. next authority
+
+次へ進む場合は実装承認でもfinal inverse承認でもなく、次の別承認候補を置く。
+
+```text
+P3_PRODUCT_SURFACE_B5_ACTUAL_OUTPUT_FAILURE_LOCALIZATION_AND_REMEDIATION_DESIGN_READ_ONLY
+```
+
+このauthorityでは、current exact4 production、38 / reuse 1 / Reception 11、resource、schema/privacy boundaryを変更せず、Reception owner、owner fragment、dimension cue、cluster densityのfailure localizationとremediation contract設計だけを許可する。成立してもRED freezeまたはproduction実装へ自動進行しない。
+
+## 8. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回はread-only rejection checkpointであり、production topology不変のため全面更新しない。
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
