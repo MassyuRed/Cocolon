@@ -11991,3 +11991,99 @@ P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJEC
 - 作業完了またはSTOP確定ごとに、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase / RC / release gate等の節目で全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+# 2026-07-22 current authority: rc0031 P3 Product Surface B6 owner grammatical-head range / Reception injection design-freeze RED-only STOP
+
+この節がEOFの最新current authorityである。直前の`B6 owner role inflection / typed recomposition implementation GREEN-only STOP`をimmutable predecessorとして保持し、承認済みowner grammatical-head range authority / Reception injection seam design-freeze作業で検出したpredecessor scope不整合だけを更新する。
+
+## 1. authority identity
+
+```text
+approved authority:              P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY
+Cocolon ref:                     MassyuRed/Cocolon:main
+Cocolon work start:              009292c7c13a6a2696886a5d322c3ef12dca893b
+Cocolon authority record commit: this fileを含むGitHub revisionから解決
+mashos-api work start/result:     c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14 / unchanged
+verified at:                     2026-07-22 JST
+status:                          STOP / DESIGN NOT FROZEN
+```
+
+今回はphase / RC / release gateではなく、B6 design前提を確認した小checkpointである。構造資料の全面監査は行わず、body-free evidenceとcurrent authorityの小差分だけを更新する。
+
+## 2. predecessor inconsistency
+
+開始点full P3 moduleは、既知9 intentional REDに加えて次の2 unexpected REDを持つ。
+
+```text
+STEP11_RC0031_P3_OUTSIDE_APPEND_SCOPE_DRIFT
+STEP11_RC0031_P3_PREDECESSOR_PHASE_PROJECTION_INVALID
+```
+
+原因はaccepted Reception focus authority pathが旧scope manifest / P2→P3 projectionへ未反映なことである。
+
+```text
+unreconciled path: ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py
+service paths:      frozen 546 / observed 547
+repository paths:   frozen 1530 / observed 1531
+active rc0031:      frozen 5 / observed 6
+```
+
+Reception authority target GREENを取り消す結果ではないが、predecessor exact36をGREEN+intentional REDだけの基準として扱えない。
+
+## 3. verification / repository result
+
+```text
+diagnostic trial exact40: 27 PASS / 11 INTENTIONAL_RED / 2 UNEXPECTED_RED / 633.42 s
+predecessor exact36 slice: 25 PASS / 9 INTENTIONAL_RED / 2 UNEXPECTED_RED
+focused scope exact2:      0 PASS / 2 UNEXPECTED_RED / 0.39 s
+restored collection:       36 tests / 0.18 s
+P3 test restored:          235266 bytes / SHA-256 baa4cdd1df995c87518e25069e237e4a721dd0de2dd3d91b316b97c4894c5f33
+mashos-api changed path:    0
+mashos-api GitHub write:    0
+```
+
+trial-only owner-range / injection exact4は監査後に全破棄した。mashos-api mainは開始点のままであり、design freeze成立、実装ready、Product Read readinessを主張しない。
+
+## 4. retained design findings / not frozen
+
+- 新規owner authority moduleは現scope driftを増やすため不可。既存bounded seam候補はLexical owner / Natural Surface private consumerだが未freeze。
+- long 5件すべてにindependent grammatical-head exact-range witnessが必要。safe-anchorをhead witnessへ読み替えない。
+- Reception source / inventory metadataの書換えでは消費証明にならない。prevalidated authorityを一時注入し、actual rendered Receptionのtarget / visible support / effective act消費をbehavioralに証明する。
+- raw text / quote / unsalted body digestをbody-free authorityへ持たせない。
+
+これらは次設計の入力findingであり、現承認下のcontractではない。
+
+## 5. unchanged / prohibited boundary
+
+```text
+Catalog / Lexical / Natural Surface implementation: 0 / 0 / 0
+Reception / relation authority change:               0 / 0
+Product effective-act consumption:                   0
+actual Product Read:                                 not run
+P3 final inverse / Parser / Matcher:                  not authorized / unchanged
+P4 / runtime / dependency manifest / E2 onward:      not authorized / unchanged
+API / DB / RN / public shared runtime:                unchanged
+release / Cycle 001 acceptance:                      not authorized / NOT_ACCEPTED
+```
+
+## 6. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_DesignFreeze_REDOnly_STOP_Addendum_20260722.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_DesignFreeze_REDOnly_STOP_BodyFree_Receipt_20260722.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_DesignFreeze_REDOnly_STOP_Handoff_20260722.md`
+4. previous owner role inflection / typed recomposition implementation STOP evidence
+
+## 7. next authority candidate
+
+自動進行しない。次の別承認候補だけを置く。
+
+```text
+P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_DESIGN_FREEZE_RED_ONLY
+```
+
+候補はtest-owned scope manifestとP2→P3 phase projectionのreconciliation設計・RED freezeだけである。production code変更、owner-range / injection implementation、Product Read、final inverse以降は含まない。設計成立後のmigration実装・GREENと、今回authorityの再開はそれぞれ別承認を要する。
+
+## 8. premise update operation
+
+- 作業完了またはSTOP確定ごとに、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase / RC / release gate等の節目で全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
