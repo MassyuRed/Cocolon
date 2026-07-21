@@ -9,7 +9,7 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "b136ec48b1e4f3f096c8375ad05a869e3fe123e8"
+  Cocolon_last_reflected_task_head: "009292c7c13a6a2696886a5d322c3ef12dca893b"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
   mashos_api: "MassyuRed/mashos-api:main@c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
   verified_at: "2026-07-22 JST"
@@ -30,7 +30,7 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b5_catalog_lexical_surface_implementation_reflected: true
   nls_v3_step11_cycle001_rc0031_p3_b5_catalog_lexical_surface_modified_paths: 4
   nls_v3_step11_cycle001_rc0031_p3_b5_exact6_result: "6 passed / 0 red"
-  nls_v3_step11_cycle001_rc0031_p3_exact30_result: "23 passed / 7 intentional final-inverse red"
+  nls_v3_step11_cycle001_rc0031_p3_exact30_result: "21 passed / 7 intentional final-inverse red / 2 unexpected scope red"
   nls_v3_step11_cycle001_rc0031_p3_actual_output_product_read_run: true
   nls_v3_step11_cycle001_rc0031_p3_actual_output_product_read_result: "STOP: candidate 0 pass / 0 minor / 10 major / 0 blocker; unique case 0 pass / 0 minor / 8 major / 0 blocker"
   nls_v3_step11_cycle001_rc0031_p3_actual_output_failure_localization_run: true
@@ -64,6 +64,13 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_typed_implementation_stop: true
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_long_fragment_count: 5
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_missing_exact_range_count: 3
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_head_reception_design_authorized: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_head_reception_design_frozen: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_scope_manifest_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_phase_projection_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_unexpected_red_count: 2
+  nls_v3_step11_cycle001_rc0031_p3_b6_full_exact36_result: "25 passed / 9 intentional red / 2 unexpected scope red"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_required: true
   nls_v3_step11_cycle001_rc0031_p3_b5_product_surface_freeze_viable: false
   nls_v3_step11_cycle001_rc0031_p3_b5_actual_output_remediation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_final_inverse_authorized: false
