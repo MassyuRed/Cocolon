@@ -1,0 +1,282 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_product_surface_b6_source_congruence_role_inflection_reception_focus.design_freeze_red_only.body_free.v1",
+  "created_at_jst": "2026-07-22",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_ROLE_INFLECTION_AND_RECEPTION_FOCUS_DESIGN_FREEZE_RED_ONLY",
+  "status": "B6_SOURCE_CONGRUENCE_ROLE_INFLECTION_RECEPTION_FOCUS_CONTRACT_FROZEN_B6_RED_ONLY_EVIDENCE_FROZEN_PRODUCTION_IMPLEMENTATION_NOT_AUTHORIZED",
+  "decision_flags": {
+    "b6_contract_frozen": true,
+    "b6_red_only_evidence_frozen": true,
+    "source_congruence_green": false,
+    "owner_role_inflection_green": false,
+    "reception_focus_authority_green": false,
+    "typed_recomposition_green": false,
+    "production_implementation_authorized": false,
+    "counterfactual_product_read_run": false,
+    "actual_product_read_run": false,
+    "p3_final_inverse_authorized": false,
+    "cycle001_accepted": false
+  },
+  "source_pins": {
+    "cocolon_start_commit": "8881fb77cabdfcd02c7762aa09abc44aa1af8eab",
+    "mashos_api_start_commit": "63d14cb467adffaa1a50bd53fe104abaa5dbfa16",
+    "mashos_api_result_commit": "46b41a8230b09016f0d0a22535891d65c4dee8ee"
+  },
+  "predecessor_stop_boundary": {
+    "b5_actual_output_failure_localized": true,
+    "b5_remediation_design_stop": true,
+    "source_authority_congruence_blocker": true,
+    "counterfactual_product_read_established": false,
+    "implementation_authorized": false,
+    "overwritten_by_b6": false
+  },
+  "repository_scope": {
+    "mashos_api_ahead_by_commit_count": 1,
+    "aggregate_addition_count": 555,
+    "aggregate_deletion_count": 0,
+    "aggregate_modified_path_count": 1,
+    "modified_files": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "new_files": [],
+    "unexpected_changed_path_count": 0,
+    "production_source_change_count": 0,
+    "upstream_semantic_authority_change_count": 0,
+    "catalog_change_count": 0,
+    "grounded_lexicalization_change_count": 0,
+    "natural_surface_change_count": 0,
+    "parser_matcher_hard_gate_change_count": 0,
+    "fixture_p1_p2_change_count": 0,
+    "p4_runtime_manifest_e2_change_count": 0,
+    "api_db_rn_public_shared_change_count": 0
+  },
+  "test_commitment": {
+    "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+    "predecessor_prefix": {
+      "byte_count": 202968,
+      "sha256": "0821ec5408c43208bdef2c776d3d6c13363ad6c3b21cd79779e95d0aa8ff3813",
+      "git_blob_sha1": "21de62b19af09920a613ee4858c6b957e1342a77"
+    },
+    "b6_eof_append_byte_count": 21799,
+    "predecessor_prefix_exactly_preserved": true,
+    "result": {
+      "byte_count": 224767,
+      "sha256": "0af7c0177ade14c94ec2426e3245833793ce5690fde835ab95be0cb58fe517c7",
+      "git_blob_sha1": "043300b67f691dadaa2df3beb80d2610b41f884a"
+    }
+  },
+  "frozen_denominator": {
+    "final_candidate_context_count": 10,
+    "unique_case_count": 8,
+    "new_semantic_atom_count": 38,
+    "verified_base_reuse_count": 1,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "owner_occurrence_count": 24,
+    "exact_source_projection_count": 24,
+    "product_proposition_cluster_count_max": 13,
+    "product_cluster_load_max": 4,
+    "base_ast_reception_binding_count": 10,
+    "additional_required_reception_count": 1,
+    "total_reception_count": 11,
+    "richer_ast_binding_count": 2,
+    "visible_source_anchor_max": 1,
+    "resource_maxima": {
+      "visible_clauses_per_grammatical_sentence": 2,
+      "grammatical_complexity_load": 4,
+      "repeated_joiner_per_group": 2,
+      "realization_unit_per_group": 4
+    },
+    "candidate_metadata_required": false,
+    "case_family_review_severity_branch_count": 0,
+    "literal_internal_schema_exposure_count": 0
+  },
+  "b6_design_contract": {
+    "design_id": "B6_SOURCE_CONGRUENCE_GATED_TYPED_RECOMPOSITION_WITH_FOCUS_BOUND_RECEPTION",
+    "source_congruence_precedes_surface_recomposition": true,
+    "reception_focus_authority_precedes_visible_reception": true,
+    "boundary_safe_owner_role_inflection_required": true,
+    "typed_head_and_construction_modifier_required": true,
+    "deterministic_source_graph_partition_required": true,
+    "main_meaning_first_required": true,
+    "plan_visible_clause_and_actual_finite_predicate_count_equal_required": true,
+    "body_only_independent_recovery_required": true,
+    "per_atom_explanatory_prefix_bundle_allowed": false,
+    "base_body_explanatory_tail_append_allowed": false,
+    "source_order_greedy_maximum_fill_allowed": false,
+    "generic_fallback_allowed": false,
+    "case_or_fixture_phrase_branch_allowed": false,
+    "candidate_metadata_required": false,
+    "resource_expansion_allowed": false
+  },
+  "source_congruence_contract": {
+    "atom_denominator": 38,
+    "full_atom_chain_green_required": true,
+    "required_meaning_check_required": true,
+    "source_plan_authority_check_required": true,
+    "successor_effective_authority_check_required": true,
+    "p3_atom_authority_check_required": true,
+    "relation_type_endpoint_order_and_direction_check_required": true,
+    "owner_lifecycle_aspect_modality_temporal_scope_check_required": true,
+    "maximum_allowed_conflict_count": 0,
+    "current_negative_witness_count_minimum": 1,
+    "current_negative_witness_runtime_joined": true,
+    "full_38_chain_green_proved": false,
+    "neutralization_omission_or_hidden_marker_allowed": false,
+    "current_result": "INTENTIONAL_RED",
+    "closed_code": "STEP11_RC0031_P3_B6_SOURCE_CONGRUENCE_NOT_PROVED"
+  },
+  "owner_role_inflection_contract": {
+    "owner_denominator": 24,
+    "exact_source_provenance_required": true,
+    "syntactic_boundary_preservation_required": true,
+    "arbitrary_scalar_or_fixed_ellipsis_slice_allowed": false,
+    "grammatical_role_and_existing_predicate_morphology_required": true,
+    "exactly_one_canonical_body_recoverable_form_required": true,
+    "construction_modifier_locus_required": true,
+    "relation_finite_head_locus_required": true,
+    "semantic_link_connective_locus_required": true,
+    "explicit_unknown_terminal_locus_required": true,
+    "current_result": "INTENTIONAL_RED",
+    "closed_code": "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED"
+  },
+  "reception_focus_authority_contract": {
+    "reception_denominator": 11,
+    "base_ast_binding_count": 10,
+    "additional_required_opportunity_count": 1,
+    "richer_ast_binding_count": 2,
+    "focus_target_support_act_and_aspect_congruence_required": true,
+    "base_ast_precedes_raw_opportunity_projection": true,
+    "visible_support_derived_from_stable_role_difference_required": true,
+    "same_target_and_support_zero_allomorph_required": true,
+    "unbound_support_or_focus_invention_allowed": false,
+    "current_result": "INTENTIONAL_RED",
+    "closed_code": "STEP11_RC0031_P3_B6_RECEPTION_FOCUS_AUTHORITY_NOT_PROVED"
+  },
+  "typed_recomposition_contract": {
+    "exact_new_atom_accounted_count": 38,
+    "verified_reuse_count": 1,
+    "reception_accounted_count": 11,
+    "typed_finite_head_required": true,
+    "construction_modifier_required": true,
+    "head_modifier_and_locus_consumed_by_renderer_required": true,
+    "relation_endpoint_type_and_direction_preservation_required": true,
+    "dimension_predicate_morphology_required": true,
+    "deterministic_source_graph_partition_required": true,
+    "main_meaning_first_finite_predicate_required": true,
+    "body_only_recovery_without_production_parser_required": true,
+    "privacy_and_resource_boundary_required": true,
+    "current_result": "INTENTIONAL_RED",
+    "closed_code": "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+  },
+  "anonymous_blocker_evidence": {
+    "identifying_mapping_exported": false,
+    "items": [
+      {
+        "opaque_id": "B6-SRC-001",
+        "cause_class": "REQUIRED_MEANING_AND_SOURCE_EFFECTIVE_RELATION_AUTHORITY_NOT_CONGRUENT"
+      },
+      {
+        "opaque_id": "B6-REC-001",
+        "cause_class": "PRODUCT_INPUT_SPECIFIC_FOCUS_AUTHORITY_NOT_COMPLETE"
+      }
+    ]
+  },
+  "b6_exact6_targeted_red_only_suite": {
+    "node_count": 6,
+    "frozen_target": {
+      "pass_count": 2,
+      "intentional_red_count": 4,
+      "unexpected_failure_count": 0,
+      "collection_import_mock_or_unconditional_red_count": 0
+    },
+    "observed_summary": "2 PASS / 4 INTENTIONAL_RED / 0 UNEXPECTED",
+    "nodes": [
+      {
+        "name": "test_rc0031_p3_b6_freeze_scope_and_predecessor_behavior_are_exact",
+        "target_result": "PASS",
+        "observed_result": "PASS"
+      },
+      {
+        "name": "test_rc0031_p3_b6_denominators_authority_chain_resource_and_privacy_are_exact",
+        "target_result": "PASS",
+        "observed_result": "PASS"
+      },
+      {
+        "name": "test_rc0031_p3_b6_required_meaning_source_successor_and_atom_authorities_are_congruent_or_fail_closed",
+        "target_result": "INTENTIONAL_RED",
+        "observed_result": "INTENTIONAL_RED",
+        "closed_code": "STEP11_RC0031_P3_B6_SOURCE_CONGRUENCE_NOT_PROVED"
+      },
+      {
+        "name": "test_rc0031_p3_b6_product_owner_expressions_are_boundary_safe_and_role_inflected_or_fail_closed",
+        "target_result": "INTENTIONAL_RED",
+        "observed_result": "INTENTIONAL_RED",
+        "closed_code": "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED"
+      },
+      {
+        "name": "test_rc0031_p3_b6_reception_focus_target_support_act_and_aspect_are_congruent_or_fail_closed",
+        "target_result": "INTENTIONAL_RED",
+        "observed_result": "INTENTIONAL_RED",
+        "closed_code": "STEP11_RC0031_P3_B6_RECEPTION_FOCUS_AUTHORITY_NOT_PROVED"
+      },
+      {
+        "name": "test_rc0031_p3_b6_typed_recomposition_is_body_only_recoverable_resource_bounded_and_private",
+        "target_result": "INTENTIONAL_RED",
+        "observed_result": "INTENTIONAL_RED",
+        "closed_code": "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+      }
+    ]
+  },
+  "regression_accounting": {
+    "predecessor_exact30_inherited_summary": "23 PASS / 7 INTENTIONAL_FINAL_INVERSE_RED",
+    "predecessor_exact30_rerun_in_this_task": false,
+    "b5_exact6_regression_observed_summary": "6 PASS / 0 FAILURE",
+    "b6_targeted_exact6_observed_summary": "2 PASS / 4 INTENTIONAL_RED / 0 UNEXPECTED",
+    "aggregate_exact36_accounted_summary": "25 PASS / 11 INTENTIONAL_RED",
+    "full_exact36_run": false,
+    "collection_observed_summary": "36 COLLECTED",
+    "pytest_noconftest_used": true,
+    "full_backend_suite_run": false,
+    "b6_exact6_is_design_freeze_not_implementation_success": true
+  },
+  "privacy_anonymization": {
+    "body_or_quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "raw_input_exported": false,
+    "original_case_candidate_atom_owner_mapping_exported": false,
+    "individual_relation_meaning_exported": false,
+    "raw_body_digest_exported": false,
+    "raw_packet_sha256_exported": false,
+    "verification_key_exported": false,
+    "private_free_text_note_exported": false,
+    "failure_messages_body_free": true,
+    "new_body_full_packet_created": false
+  },
+  "stop_gate": {
+    "triggered": true,
+    "reasons": [
+      "SOURCE_CONGRUENCE_NOT_PROVED",
+      "OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "RECEPTION_FOCUS_AUTHORITY_NOT_PROVED",
+      "TYPED_RECOMPOSITION_NOT_PROVED"
+    ],
+    "production_implementation_may_start": false,
+    "product_read_may_start": false
+  },
+  "next_boundary": {
+    "next_authority_selected": false,
+    "candidate_only": "P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_AND_RECEPTION_FOCUS_AUTHORITY_IMPLEMENTATION_AND_GREEN_ONLY",
+    "separate_approval_required": true,
+    "source_congruence_and_reception_focus_authority_implementation_only": true,
+    "owner_role_inflection_or_typed_surface_implementation_allowed_by_candidate": false,
+    "actual_product_read_allowed_by_candidate": false,
+    "final_inverse_allowed_by_candidate": false,
+    "parser_matcher_p4_runtime_e2_allowed_by_candidate": false
+  }
+}

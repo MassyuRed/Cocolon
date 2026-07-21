@@ -9,9 +9,9 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "f220c52abb8b806fe004b7656df6b770bfeefdad"
+  Cocolon_last_reflected_task_head: "8881fb77cabdfcd02c7762aa09abc44aa1af8eab"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@63d14cb467adffaa1a50bd53fe104abaa5dbfa16"
+  mashos_api: "MassyuRed/mashos-api:main@46b41a8230b09016f0d0a22535891d65c4dee8ee"
   verified_at: "2026-07-22 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
@@ -37,7 +37,16 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_actual_output_failure_localization_result: "localized; source/reception authority blockers confirmed in at least 2 contexts"
   nls_v3_step11_cycle001_rc0031_p3_b5_remediation_design_viable: false
   nls_v3_step11_cycle001_rc0031_p3_b6_counterfactual_product_read_run: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_design_freeze_authorized: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_design_freeze_authorized: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_contract_frozen: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_red_only_run: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_exact6_result: "2 passed / 4 intentional red / 0 unexpected"
+  nls_v3_step11_cycle001_rc0031_p3_b5_exact6_regression_result: "6 passed / 0 failure"
+  nls_v3_step11_cycle001_rc0031_p3_b6_source_congruence_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_role_inflection_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_reception_focus_authority_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_typed_recomposition_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_production_implementation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_b5_product_surface_freeze_viable: false
   nls_v3_step11_cycle001_rc0031_p3_b5_actual_output_remediation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_final_inverse_authorized: false
@@ -11584,5 +11593,145 @@ P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_ROLE_INFLECTION_AND_RECEPTION_FOCUS_DESI
 
 - 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回はbody-free addendumとcurrent authority差分に閉じ、全面更新しない。
+- phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
+- GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+# 2026-07-22 current authority: rc0031 P3 Product Surface B6 source congruence / role inflection / Reception focus design freeze / RED-only
+
+この節が後発current authorityである。直前の`B5 actual-output failure localization / remediation-design STOP`をimmutable predecessorとして保持し、承認済みB6 design-freeze / RED-only checkpointだけを更新する。Cocolon側は、このfileを含むGitHub revisionをauthority record commitとして解決し、file自身へ自分を含むcommit SHAを埋め込まない。
+
+## 1. authority identity
+
+```text
+approved authority:              P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_ROLE_INFLECTION_AND_RECEPTION_FOCUS_DESIGN_FREEZE_RED_ONLY
+Cocolon ref:                     MassyuRed/Cocolon:main
+Cocolon work start:              8881fb77cabdfcd02c7762aa09abc44aa1af8eab
+Cocolon authority record commit: this fileを含むGitHub revisionから解決
+mashos-api work start:           63d14cb467adffaa1a50bd53fe104abaa5dbfa16
+mashos-api result:               46b41a8230b09016f0d0a22535891d65c4dee8ee
+verified at:                     2026-07-22 JST
+```
+
+last full audit basisはCocolon `7533587673f1e895ea056b18562deaa6059f0aba`、mashos-api `a904ba192b05ca1445e32006b64fc87e7cda48bf`のままである。今回はphase / RC / release gateではなく、B5 STOPから分離した小checkpointであるため、全前提資料の全面監査は行っていない。
+
+## 2. decision
+
+次のB6設計契約をproduction未変更のP3 test EOFへfreezeした。
+
+```text
+B6_SOURCE_CONGRUENCE_GATED_TYPED_RECOMPOSITION_WITH_FOCUS_BOUND_RECEPTION
+```
+
+実行結果:
+
+```text
+B6 targeted exact6:   2 PASS / 4 intentional RED / 0 unexpected
+B5 exact6 regression: 6 PASS / 0 failure
+collection:            36 tests
+```
+
+確定状態:
+
+```text
+B6_SOURCE_CONGRUENCE_ROLE_INFLECTION_RECEPTION_FOCUS_CONTRACT_FROZEN
+B6_RED_ONLY_EVIDENCE_FROZEN
+SOURCE_CONGRUENCE_RED
+OWNER_ROLE_INFLECTION_RED
+RECEPTION_FOCUS_AUTHORITY_RED
+TYPED_RECOMPOSITION_RED
+PRODUCTION_IMPLEMENTATION_NOT_AUTHORIZED
+P3_FINAL_INVERSE_NOT_AUTHORIZED
+CYCLE001_NOT_ACCEPTED
+```
+
+2 PASSはscope / predecessor exact性と、exact38 authority join・denominator・resource・privacyを確認する。4 REDはcurrent semantic evidenceからそれぞれ固有closed codeで生じ、missing import、mock-onlyまたはunconditional failureではない。design freeze成立をproduction GREEN、Product Surface viabilityまたはCycle acceptanceへ読み替えない。
+
+## 3. repository / immutable predecessor
+
+mashos-apiは`63d14cb...`から1 commit aheadで、変更は次の1 test pathだけである。
+
+```text
+path:                   ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py
+predecessor prefix:     202,968 bytes / SHA-256 0821ec5408c43208bdef2c776d3d6c13363ad6c3b21cd79779e95d0aa8ff3813
+B6 EOF append:           21,799 bytes
+result:                 224,767 bytes / SHA-256 0af7c0177ade14c94ec2426e3245833793ce5690fde835ab95be0cb58fe517c7
+result Git blob:        043300b67f691dadaa2df3beb80d2610b41f884a
+commit delta:           555 additions / 0 deletions
+production path change: 0
+```
+
+exact prefixにより既存top-level exact30を変更していない。predecessor exact30の`23 PASS / 7 intentional final-inverse RED`はこのtaskでは再実行せず、prefix継承で保持する。`25 PASS / 11 intentional RED`はprefix継承とB6 targeted exact6のaccountingであり、full exact36再実行結果とは主張しない。
+
+## 4. frozen denominator / design boundary
+
+```text
+context / unique case:                     10 / 8
+new semantic atom / verified reuse:        38 / 1
+family construction/relation/link/unknown: 22 / 13 / 1 / 2
+owner exact-source projection:             24 / 24
+Product cluster / maximum load:            <= 13 / <= 4
+Reception:                                 10 AST-bound + 1 additional = 11
+richer AST binding:                        2
+visible source anchor:                     <= 1
+resource clauses/complexity/joiner/units:  2 / 4 / 2 / 4
+candidate metadata / repair branch:        false / 0
+literal internal-schema exposure:          0
+```
+
+B6 GREENには、exact38全件でrequired meaningからsource plan、successor effective authority、P3 atom、endpoint / direction、owner lifecycle / aspect / modality / temporal scopeまでconflict 0を要求する。今回のPASSは38 / 38のfamily / key / direction / owner authority joinを確認し、source REDは匿名化した既知blocker chainの非両立をnegative witnessとして固定する。full source-congruence GREENは主張しない。
+
+owner 24 / 24はarbitrary scalar cutを禁止し、syntactic boundaryとexact-source witnessを保持したrole-inflected canonical formを要求する。typed recompositionはconstruction modifier、finite head、connective、unknown terminal、dimension morphology、deterministic source-graph partition、main-meaning-first predicateを要求し、atomごとの説明prefixとbase bodyへのexplanatory-tail appendを禁止する。
+
+Reception 11 / 11はfocus / target / support / act / aspect authorityを要求する。semantic target / support overlap自体を削除せず、visible supportだけをstable `support - target`差分へ投影する。unbound focus / supportをSurfaceで発明しない。
+
+## 5. anonymous RED evidence / privacy
+
+shareable evidenceは次のopaque blockerと非識別的cause classだけを保持する。
+
+```text
+B6-SRC-001: required meaning / source / successor / atom authority non-congruence
+B6-REC-001: Product input-specific focus authority incomplete
+```
+
+raw input、actual / counterfactual body、引用、識別可能な言い換え、original case / candidate / atom / owner mapping、個別relation意味、raw body digest、raw packet SHA-256、verification key、private free-text noteはGitHubへ反映していない。新しいbody-full packetまたはProduct Readは作成していない。
+
+local環境ではrepository共通conftestの無関係なmigration pluginが未導入依存でimportできないため、self-containedなP3 moduleを`--noconftest`で収集・実行した。full backend suiteは今回実行していない。
+
+## 6. unchanged / prohibited boundary
+
+```text
+upstream source / Reception authority change: 0
+Catalog / Grounded Lexicalization change:      0 / 0
+Natural Surface / successor change:            0 / 0
+fixture / P1 / P2 change:                      0
+Parser / Matcher / Hard Gate:                   not authorized / not started
+P4 / runtime / dependency manifest:             not authorized / not started
+E2以降:                                         not authorized / not started
+API / DB / RN / public / shared runtime:        unchanged
+counterfactual / actual Product Read:           not run
+release / Cycle 001 acceptance:                 not authorized / NOT_ACCEPTED
+```
+
+## 7. latest evidence
+
+1. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_SourceCongruenceRoleInflectionReceptionFocus_DesignFreeze_REDOnly_Addendum_20260722.md`
+2. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_SourceCongruenceRoleInflectionReceptionFocus_DesignFreeze_REDOnly_BodyFree_Receipt_20260722.json`
+3. `NLSv3_Step11_rc0031_P3_ProductSurfaceB6_SourceCongruenceRoleInflectionReceptionFocus_DesignFreeze_REDOnly_Handoff_20260722.md`
+4. previous B5 actual-output failure-localization / remediation-design STOP evidence
+
+## 8. next authority
+
+implementationへ自動進行しない。次へ進む場合の候補authorityだけを置く。
+
+```text
+P3_PRODUCT_SURFACE_B6_SOURCE_CONGRUENCE_AND_RECEPTION_FOCUS_AUTHORITY_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+この候補はsource-congruenceとReception-focus authorityだけを実装して対応REDをGREENへ変える範囲である。owner role-inflection / typed recompositionのCatalog・Lexical・Surface実装、Product Read、P3 final inverse、Parser / Matcher、P4、runtime、manifest、E2以降へは進まない。いずれも別承認が必要である。
+
+## 9. premise update operation
+
+- 作業成果のGitHub反映と反映後確認が完了するたび、このcurrent authorityを同じcheckpointの小さい差分として更新する。
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ差分更新する。今回はB6 body-free addendumとcurrent authority差分に閉じ、全面更新しない。
 - phase / RC / release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
