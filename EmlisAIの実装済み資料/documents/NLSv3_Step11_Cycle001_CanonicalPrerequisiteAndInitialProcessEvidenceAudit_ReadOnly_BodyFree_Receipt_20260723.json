@@ -1,0 +1,234 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.canonical_prerequisite_and_initial_process_evidence_audit_read_only.body_free.v1",
+  "created_at_jst": "2026-07-23",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_EVIDENCE_AUDIT_READ_ONLY",
+  "status": "G1_NOT_PROVED_G2_FAILED_AUTHORITY_STOP_CYCLE001_NOT_ACCEPTED",
+  "source_pins": {
+    "cocolon_start_commit": "4e2435897d2739fb205dbc0c46523e611d929d3b",
+    "mashos_api_start_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_result_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "entry_drift_detected": false,
+    "mashos_api_change_count": 0
+  },
+  "normative_identity": {
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "g1": {
+    "overall_verdict": "NOT_PROVED",
+    "rows": [
+      {
+        "step": 0,
+        "verdict": "PROVED",
+        "owner_and_contract": "PROVED",
+        "positive_test": "PROVED",
+        "independent_negative_test": "PROVED",
+        "case_or_artifact_receipt": "PROVED",
+        "parent_or_source_hash": "PROVED",
+        "completion_condition": "PROVED",
+        "next_step_authority": "PROVED",
+        "all_step_stop_conditions_false": "PROVED",
+        "primary_evidence": "ai/tests/fixtures/emlis_nls_v3_s0_boundary_20260714.json@blob:1e6f889caec5eb50a24dba65f3c47b5f01073473"
+      },
+      {
+        "step": 1,
+        "verdict": "PROVED",
+        "owner_and_contract": "PROVED",
+        "positive_test": "PROVED",
+        "independent_negative_test": "PROVED",
+        "case_or_artifact_receipt": "PROVED",
+        "parent_or_source_hash": "PROVED",
+        "completion_condition": "PROVED",
+        "next_step_authority": "PROVED",
+        "all_step_stop_conditions_false": "PROVED",
+        "primary_evidence": "ai/tests/fixtures/emlis_nls_v3_s1_baseline_receipt_20260714.json@blob:2440b641387618c0a14039558a00a4fcdc41c99b"
+      },
+      {
+        "step": 2,
+        "verdict": "PROVED",
+        "owner_and_contract": "PROVED",
+        "positive_test": "PROVED",
+        "independent_negative_test": "PROVED",
+        "case_or_artifact_receipt": "PROVED",
+        "parent_or_source_hash": "PROVED",
+        "completion_condition": "PROVED",
+        "next_step_authority": "PROVED",
+        "all_step_stop_conditions_false": "PROVED",
+        "primary_evidence": "ai/tests/fixtures/emlis_nls_v3_s2_corpus_registry_20260714.json@blob:2648d1fb3fdba36bf1c3bb3ff68b91aa2c60a60e"
+      },
+      {
+        "step": 3,
+        "verdict": "PROVED",
+        "owner_and_contract": "PROVED",
+        "positive_test": "PROVED",
+        "independent_negative_test": "PROVED",
+        "case_or_artifact_receipt": "PROVED",
+        "parent_or_source_hash": "PROVED",
+        "completion_condition": "PROVED",
+        "next_step_authority": "PROVED",
+        "all_step_stop_conditions_false": "PROVED",
+        "primary_evidence": "ai/tests/fixtures/emlis_nls_v3_s3_contract_receipt_20260715.json@blob:791e0f1d4394b3f67ba5bed0ac94d53a9dfa968e"
+      },
+      {
+        "step": 4,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "EVIDENCE_PRESENT",
+        "completion_condition": "NOT_PROVED",
+        "next_step_authority": "NOT_PROVED",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP4_COMPLETION_RECEIPT_CHAIN"
+      },
+      {
+        "step": 5,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "EVIDENCE_PRESENT",
+        "completion_condition": "NOT_PROVED",
+        "next_step_authority": "NOT_PROVED",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP5_COMPLETION_RECEIPT_CHAIN"
+      },
+      {
+        "step": 6,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "EVIDENCE_PRESENT",
+        "completion_condition": "NOT_PROVED",
+        "next_step_authority": "NOT_PROVED",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP6_COMPLETION_RECEIPT_CHAIN"
+      },
+      {
+        "step": 7,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "EVIDENCE_PRESENT",
+        "completion_condition": "NOT_PROVED",
+        "next_step_authority": "NOT_PROVED",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP7_COMPLETION_RECEIPT_CHAIN"
+      },
+      {
+        "step": 8,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "EVIDENCE_PRESENT",
+        "completion_condition": "NOT_PROVED",
+        "next_step_authority": "NOT_PROVED",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP8_COMPLETION_RECEIPT_CHAIN"
+      },
+      {
+        "step": 9,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "SOURCE_EMBEDDED_MANIFEST_PRESENT",
+        "completion_condition": "NOT_PROVED_AS_STANDALONE_RECEIPT",
+        "next_step_authority": "NOT_PROVED_AS_STANDALONE_RECEIPT",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP9_COMPLETION_RECEIPT_CHAIN"
+      },
+      {
+        "step": 10,
+        "verdict": "NOT_PROVED",
+        "owner_and_contract": "EVIDENCE_PRESENT",
+        "positive_test": "EVIDENCE_PRESENT",
+        "independent_negative_test": "EVIDENCE_PRESENT",
+        "case_or_artifact_receipt": "NOT_PROVED",
+        "parent_or_source_hash": "SOURCE_EMBEDDED_MANIFEST_PRESENT",
+        "completion_condition": "SMOKE_ONLY_NOT_FORMAL_INITIAL_RUN",
+        "next_step_authority": "STEP11_INITIAL_RUN_ONLY_PRESENT",
+        "all_step_stop_conditions_false": "NOT_PROVED",
+        "missing_evidence": "STANDALONE_STEP10_COMPLETION_RECEIPT_CHAIN"
+      }
+    ]
+  },
+  "g2": {
+    "overall_verdict": "FAILED",
+    "batch_provenance_verdict": "PROVED",
+    "initial_process_verdict": "FAILED",
+    "rows": [
+      {"condition": "VALID_EXACT100", "verdict": "PROVED"},
+      {"condition": "APP_REACHABLE_100_OF_100", "verdict": "PROVED"},
+      {"condition": "EXACT_DUPLICATE_0", "verdict": "PROVED"},
+      {"condition": "NEAR_DUPLICATE_NOVELTY_RESOLVED", "verdict": "PROVED"},
+      {"condition": "COVERAGE_COMPLETE", "verdict": "PROVED"},
+      {"condition": "PRIVACY_PASSED", "verdict": "PROVED"},
+      {"condition": "EXPECTED_ANSWER_CUE_0", "verdict": "PROVED"},
+      {"condition": "MANIFEST_FROZEN_BEFORE_OUTPUT_REVIEW", "verdict": "PROVED"},
+      {"condition": "POST_FREEZE_SAMPLE_SEMANTIC_REPLACEMENT_0", "verdict": "PROVED"},
+      {"condition": "RC0010_MACHINE_EXACT100", "verdict": "PROVED"},
+      {"condition": "INITIAL_RUN_LOCKED", "verdict": "FAILED", "evidence": "formal_batch001_initial_run_locked=false; step10_smoke_only=true"},
+      {"condition": "INITIAL_EXACT100_FULL_READ", "verdict": "FAILED", "evidence": "local_reviewed_count=0; not_reviewed_x100"},
+      {"condition": "FIRST_TEXT_AFFECTING_CORRECTION_ARTIFACT", "verdict": "PROVED", "evidence": "rc0011_dependency_manifest"},
+      {"condition": "SEQUENCE_PROOF", "verdict": "FAILED", "evidence": "required_lock_and_full_read_predecessors_absent_or_contradicted"}
+    ],
+    "primary_evidence": {
+      "batch001_manifest": "ai/tests/fixtures/emlis_nls_v3/generated/batch_001_manifest.json@blob:4101da243f0e64cce4503b2750074eb2f854848d",
+      "initial_rc0010_summary": "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_initial_rc0010_summary.json@blob:f521690bf28bebcfd3bc2ade49f5b06cc7273a1d",
+      "first_correction_manifest": "ai/tests/fixtures/emlis_nls_v3/cycle_001/cycle001_dependency_manifest.json@blob:dda3f743890e795e489752c9bc980c7c2e2c256e"
+    }
+  },
+  "missing_evidence": [
+    "STEP4_TO_STEP10_STANDALONE_COMPLETION_RECEIPT_CHAIN",
+    "RC0010_FORMAL_INITIAL_RUN_LOCK_ARTIFACT",
+    "RC0010_INITIAL_EXACT100_CASE_LEVEL_12_AXIS_REVIEW_ROWS",
+    "LOCK_FULL_READ_FIRST_CORRECTION_APPEND_ONLY_SEQUENCE_LEDGER"
+  ],
+  "stop": {
+    "required": true,
+    "trigger_codes": [
+      "CANONICAL_PRE_STEP11_PREREQUISITE_NOT_PROVED",
+      "PROCESS_NONCONFORMANCE_INITIAL_EXACT100_REVIEW_FAILED",
+      "PARENT_DESIGN_RECOVERY_ROUTE_DECISION_REQUIRED"
+    ],
+    "retroactive_completion_claimed": false,
+    "late_review_backfill_authorized": false,
+    "new_initial_run_authorized": false,
+    "batch_replacement_authorized": false,
+    "b6_remediation_authorized": false
+  },
+  "privacy_boundary": {
+    "raw_input_or_output_exported": false,
+    "quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "individual_mapping_exported": false,
+    "parsed_span_exported": false,
+    "private_note_exported": false,
+    "body_digest_exported": false,
+    "verification_key_exported": false
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "source_test_fixture_sample_manifest_change_count": 0,
+    "test_execution_count": 0,
+    "exact100_rerun_count": 0,
+    "new_product_read_count": 0,
+    "api_db_rn_runtime_public_shared_change_count": 0
+  },
+  "decision": "AUTHORITY_STOP_G1_NOT_PROVED_G2_FAILED",
+  "queued_b6_authority_returned": false,
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_NONCONFORMANCE_RECOVERY_ROUTE_DECISION_READ_ONLY",
+  "cycle001_status": "NOT_ACCEPTED",
+  "automatic_progression": false
+}
