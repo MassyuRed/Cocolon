@@ -1,0 +1,113 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.process_nonconformance_recovery_route_decision_read_only.body_free.v1",
+  "created_at_jst": "2026-07-23",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_NONCONFORMANCE_RECOVERY_ROUTE_DECISION_READ_ONLY",
+  "status": "RECOVERY_ROUTE_SELECTED_PARENT_DESIGN_ADDENDUM_REQUIRED_AUTHORITY_STOP_CYCLE001_NOT_ACCEPTED",
+  "source_pins": {
+    "cocolon_start_commit": "c5d5fdc76f9e18e1c09d296a72b29260ead903a8",
+    "mashos_api_start_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_result_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "entry_drift_detected": false,
+    "mashos_api_change_count": 0
+  },
+  "normative_identity": {
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "execution_plan_blob": "d7752df2afc99231fef94a29980cd0d6fceb7dc2",
+    "predecessor_audit_receipt_blob": "b247f6188373a6ece460593cc7da06dc272f28bb",
+    "predecessor_current_authority_blob": "d04d989521f47e68a6033aaa58f286c39cac1c40"
+  },
+  "predecessor_verdict": {
+    "g1": "NOT_PROVED",
+    "g2": "FAILED",
+    "batch001_provenance": "PROVED",
+    "initial_run_locked": "FAILED",
+    "initial_exact100_full_read": "FAILED",
+    "sequence_proof": "FAILED"
+  },
+  "route_rows": [
+    {
+      "route_id": "R0_HISTORICAL_BACKFILL",
+      "verdict": "REJECTED",
+      "reason_code": "AFFIRMATIVE_EVIDENCE_AND_REQUIRED_ORDER_CONTRADICTION"
+    },
+    {
+      "route_id": "R1_CONTINUE_CURRENT_RC0031_B6_AS_CANONICAL",
+      "verdict": "REJECTED",
+      "reason_code": "G1_G2_ENTRY_GATE_NOT_SATISFIED"
+    },
+    {
+      "route_id": "R2_RELABEL_CURRENT_BATCH_OR_RC_AS_NEW_INITIAL",
+      "verdict": "REJECTED",
+      "reason_code": "ALREADY_OBSERVED_BATCH_AND_POST_CORRECTION_SOURCE"
+    },
+    {
+      "route_id": "R3_SILENT_BATCH_REPLACEMENT_UNDER_EXISTING_PLAN",
+      "verdict": "REJECTED",
+      "reason_code": "PARENT_DESIGN_RECOVERY_SEMANTICS_ABSENT"
+    },
+    {
+      "route_id": "R4_NLS_V3_METHOD_STOP",
+      "verdict": "NOT_TRIGGERED",
+      "reason_code": "DETAILED_DESIGN_22_5_TRIGGER_EVIDENCE_ABSENT"
+    },
+    {
+      "route_id": "R5_FRESH_CANONICAL_RECOVERY_EPOCH_BY_PARENT_DESIGN_ADDENDUM",
+      "verdict": "SELECTED",
+      "reason_code": "ONLY_FUTURE_ONLY_NON_RETROACTIVE_CONFORMANT_ROUTE"
+    }
+  ],
+  "selected_route": {
+    "route_id": "R5_FRESH_CANONICAL_RECOVERY_EPOCH_BY_PARENT_DESIGN_ADDENDUM",
+    "current_attempt_disposition": "PRESERVE_AS_NONCONFORMING_DEVELOPMENT_HISTORY",
+    "historical_acceptance_credit": false,
+    "current_batch001_overwritten": false,
+    "current_batch001_relabelled_as_new_initial": false,
+    "fresh_exact100_separate_identity_required": true,
+    "pre_output_manifest_freeze_required": true,
+    "current_step0_10_receipt_chain_before_run_required": true,
+    "step4_10_historical_backfill_allowed": false,
+    "formal_initial_lock_before_full_read_required": true,
+    "same_exact100_case_level_12_axis_full_read_required": true,
+    "first_text_affecting_correction_after_full_read_required": true,
+    "append_only_sequence_ledger_required": true,
+    "parent_design_addendum_before_execution_required": true
+  },
+  "method_decision": {
+    "nls_v3_method_stop": false,
+    "detailed_design_22_5_trigger_proved": false,
+    "current_authority_stop": true
+  },
+  "downstream_state": {
+    "current_b6_stop_preserved": true,
+    "b6_authority_returned": false,
+    "g3_and_later_blocked": true,
+    "cycle001_status": "NOT_ACCEPTED",
+    "cycle002_authorized": false,
+    "automatic_progression": false
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "cocolon_source_test_fixture_sample_manifest_change_count": 0,
+    "test_execution_count": 0,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "private_body_generation_count": 0,
+    "detailed_design_change_count": 0,
+    "api_db_rn_runtime_public_shared_change_count": 0
+  },
+  "privacy_boundary": {
+    "raw_input_or_output_exported": false,
+    "quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "individual_mapping_exported": false,
+    "parsed_span_exported": false,
+    "private_note_exported": false,
+    "digest_exported": false,
+    "verification_key_exported": false
+  },
+  "decision": "SELECT_R5_CANONICAL_RECOVERY_EPOCH_PARENT_DESIGN_ADDENDUM_REQUIRED",
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_PROCESS_NONCONFORMANCE_CANONICAL_RECOVERY_EPOCH_PARENT_DESIGN_ADDENDUM_READ_ONLY",
+  "automatic_progression": false
+}
