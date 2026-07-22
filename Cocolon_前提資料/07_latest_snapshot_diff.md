@@ -12950,3 +12950,69 @@ STOP. 次の別承認候補は一つだけである。
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY`
 
 この候補はP1だけを扱う。current source/test/tool closure固定、既存named positive/negative test実行、Step 0–10 current completion receipt生成・検証を許可候補とする。source/test修正、fresh batch作成、exact100、Product Read、correction、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
+
+
+## 2026-07-23 NLS v3 Step 11 Cycle 001 Recovery Epoch 001 P1 source/prerequisite closure current authority
+
+この節が後発current authorityである。既存のhistorical audit、recovery route、parent-design addendum、current authorityをimmutable historyとして保持し、承認されたP1のbody-free実行結果だけを追記する。
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY`
+- Cocolon entry: `62b24158b125468df16a928e4c5eb0f0aa8af95c`
+- Cocolon evidence head before this append: `b5ffbc6ec44e7b4e82659596f7daa1019f01eabc`
+- mashos-api start / result: `c9739a0e2de5632d08607636656ada2f712c62b9`
+- mashos-api candidate tree: `3447c3e74b6347421822a466a7cb92958cb7e0f3`
+- mashos-api changed path: exact0
+- state: `P1_FAILED_STOP / SOURCE_BASELINE_UNLOCKED / STEP0_10_NOT_PROVED / AUTHORITY_STOP`
+- Cycle 001 accepted: false
+- automatic progression: false
+
+P1 result:
+
+| Step | verdict | current result |
+|---:|---|---|
+| 0–3 | `NOT_PROVED` | current parent/source hashへ結ぶreceipt chain不足 |
+| 4 | `FAILED` | `REFINED_SOURCE_PARTITION_OWNER_UNAVAILABLE`; Detailed Design Step 4 STOP true |
+| 5 | `FAILED` | independent-negative 11/12; current successor import / guard conflict |
+| 6–9 | `NOT_PROVED` | named tests GREENだがcurrent standalone completion receipt不足 |
+| 10 | `FAILED` | 3 PASS / 12 FAIL / 1 collection error; dependency source bytes / closure drift |
+
+Named-test total:
+
+- collected 120
+- passed 106
+- failed 13
+- collection error 1
+- Step 9 10/10 GREEN
+- Step 10 frozen closure `2b4cd6cb5ea0f0d69ae7de31930dd6833ba21fce8eb7262f579cad514f14a8e9`
+- Step 10 current recomputed closure `d7958aa26a10d598f57f7544b51133edc0ea05c2f45e6767b9c9bdb4fda1d1cd`
+
+Confirmed facts:
+
+- candidate `c9739a...`をRecovery Epoch 001 source baselineへlockしていない。
+- sequence event 1 `SOURCE_BASELINE_LOCKED` / event 2 `STEP0_10_PREREQUISITES_PROVED`は作成していない。
+- successful current Step completion receipt countは0。partial success receiptとhistorical backdateは0。
+- reserved fresh batchは`RESERVED_NOT_CREATED`、P2は未承認である。
+- source/test/fixture/sample/manifest/runtime、Detailed Design、API/DB/RN/public/shared routeの変更は0である。
+- exact100、Product Read、private body生成、correction、B6作業は0である。
+- current B6 STOPとhistorical G1/G2 failureを変更していない。
+
+Inference:
+
+- Step 5 conflictは後続successor source追加後に既存guard closureが追随していない可能性がある。ただしguard、successor import、owner配置のどれを変更すべきかは未決定である。
+
+Karen opinion:
+
+- source責任、independent negative、dependency closureが閉じる前にfresh100へ進むと、sourceの問題をbatchの問題へ誤帰属する。receiptだけを成功にせずP1を失敗として残すことが、今回のrecovery順序とCocolonの目的に合う。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationOnly_ReadOnly_Addendum_20260723.md` @ blob `245bce571110f378d42fdd36a63a804af2aa3c51`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationOnly_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `965f6b9a9467769e24508340c1c59aafa4f40797`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationOnly_ReadOnly_Handoff_20260723.md` @ blob `9ae4cc3fefbb80a1034f54cfd9c05e1bcf3d6b4f`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `bf03aa2a7deb2eb7c9ee34a3c7dbc77810bc98bd`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY`
+
+この候補はStep 0/1 current rebinding、Step 4 refined-source partition owner、Step 5 source/test closure conflict、Step 6–10 standalone receipt回復の設計だけを扱う。source/test修正、receipt成功生成、baseline lock、P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
