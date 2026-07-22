@@ -12521,3 +12521,88 @@ Latest body-free evidence:
 STOP. Next authority: `UNSELECTED / separate approval required`.
 
 次のDesign Freeze RED-onlyでは、one exact owner locusのdeterministic chained modifiersまたはsurplus same-owner constructionのtyped standalone locusを選び、body parser / expected role contractを整合させる。Product Read、P3 final inverse、Parser / Matcher / Hard Gate、P4、runtime、manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
+
+## 2026-07-22 rc0031 P3 B6 owner-role inflection / typed recomposition chained-modifier locus multiplicity reconciliation Design Freeze RED-only current authority
+
+Current authority:
+
+`P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_RECONCILIATION_DESIGN_FREEZE_RED_ONLY`
+
+Status:
+
+- `DESIGN_FROZEN_RED_ONLY_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_RECONCILED`
+- body-free: true
+- implementation applied: false
+- Cycle 001 accepted: false
+- automatic progression: false
+
+Pins / result:
+
+- Cocolon start: `84098a54a5d9a508fae576732b829f19f10a1c3c`
+- mashos-api start: `b139daae89f2f927ec146fad76162369f7dba99c`
+- mashos-api result: `f9ac14de0756e5bebe79b047bb8f031599612e80`
+- Cocolon evidence head before this current-authority append: `ddf49d845d3478898f7edd8b9ff53892f940f2b8`
+- mashos-api changed path: P3 test exact1 / EOF append-only
+- production changed path: exact0
+- P3 test: 408,042 bytes / SHA-256 `d618700d54922c96792fe138ddb4ac4f4b0d55f37bb69f515b2e59aba8fb2397` / blob `26ed24616af731c506d8caafd3de9358cfae5d9b`
+- predecessor prefix: 344,556 bytes / SHA-256 `8c9113c991da379e47c4beb496e86b7c25b48b29ab944908eb261ed98768b0c8` / blob `3e2dd6c2a0b2e80483f5a552848a4b8672c7f7d0`
+- total test projection: exact52
+
+Frozen selection / topology:
+
+- typed standalone locusは非採用。accepted head-owner locusへのdeterministic chained construction modifiersを採用。
+- modifier exact22 / accepted head-owner locus exact20
+- exact18 loci x1 + exact2 loci x2 / max depth2
+- one-fragment capacity20 / two-fragment capacity22 / assigned22 / unresolved0
+- accepted head12 / missing0 / modifier-not-head0 / alternate finite owner locus3
+- candidate内head signature collision0。同一caseの兄弟candidate collision excess2はcandidate body単位で分離し、body identityとして扱わない。
+- source order / same-owner / same-nucleus / exact-source / `construction_modifier`を保持。`construction_standalone`は禁止。
+
+Frozen parser:
+
+- Catalog construction fragment exact13 / unique13 / prefix collision0
+- ordered pair169 / collision0 / pair-equals-single0
+- owner + 0–2 chain domain exact183
+- context-local term exact4,392 / collision0
+- finite16 = relation/link14 + explicit-unknown2
+- finite16 + modifier22 = semantic atom38 exactly once
+- relation/linkは全templateの全literal境界を列挙し、owner + bounded chain decode後のfull typed candidate exact1だけを受理する。lazy-first regexは不可。
+- relation/link raw boundary19 -> valid decoded14 / zero0 / multi0
+
+RED / verification:
+
+- new Design RED:
+  - `STEP11_RC0031_P3_B6_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_NOT_PROVED`
+  - `STEP11_RC0031_P3_B6_CHAINED_MODIFIER_BODY_RECOVERY_NOT_PROVED`
+- inherited RED:
+  - `STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED`
+  - `STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED`
+- Design exact4: `2 PASS / 2 intentional RED / 0 unexpected`
+- direct exact24: `18 PASS / 6 intentional RED / 0 unexpected`
+- full exact52: `NOT_RUN`
+
+Invariant:
+
+- context / unique case / binding `10/8/12`
+- family `22/13/1/2` / owner24 (short19 / long5)
+- Reception11 / rebuild6 / reuse1
+- service Python exact547 / `f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d`
+- repository frozen material exact1531 / `3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e`
+- active rc0031 exact6 / `5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c`
+- cluster `<=13` / load `<=4` / resource `(2,4,2,4)`
+- production blob / Reception-relation-construction-owner-range authorities / Catalog / Lexical / Matcher / Gate / privacy境界: unchanged
+- future GREEN window: Natural Surface private append exact11,090 bytes以下 + P3 mechanical flag only
+
+Latest body-free evidence:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ChainedModifierLocusMultiplicityReconciliation_DesignFreeze_REDOnly_Addendum_20260722.md` @ `668d9a802a54f114ffa2c5565f8074791a5dd8c9`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ChainedModifierLocusMultiplicityReconciliation_DesignFreeze_REDOnly_BodyFree_Receipt_20260722.json` @ `e53f6b1da138a6aa835453b018dc3195fc0190d4`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ChainedModifierLocusMultiplicityReconciliation_DesignFreeze_REDOnly_Handoff_20260722.md` @ `ddf49d845d3478898f7edd8b9ff53892f940f2b8`
+
+STOP. Cycle 001 remains `NOT_ACCEPTED`. No automatic implementation.
+
+Next separate authority only:
+
+`P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+Product body export / Product Read / P3 final inverse / Parser / Matcher / Hard Gate / P4 / runtime / production dependency manifest / E2+ / API / DB / RN / public / shared runtimeへ自動進行しない。
