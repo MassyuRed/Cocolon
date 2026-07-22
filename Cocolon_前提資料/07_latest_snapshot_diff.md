@@ -12212,3 +12212,79 @@ STOP. Current next authority candidate, separate approval only:
 `P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY`
 
 Product body / Product Read / P3 final inverse / Parser / Matcher / P4 / runtime / production dependency manifest / E2以降 / API / DB / RN / public / shared runtimeへは進まない。
+
+## 2026-07-22 rc0031 P3 B6 owner grammatical-head range / Reception injection Design Freeze RED-only current authority
+
+- approved authority: `P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY`
+- Cocolon start: `f561067554b83811e8a4c1b9b974a7816ebf4023`
+- mashos-api start: `ac0e679de7ff33b011f9750b392f991bb34950a5`
+- mashos-api result: `ffaf1fd8c97e677d82c7a7bb1c083f6864cd6401`
+- state: `DESIGN_FROZEN_RED_ONLY`
+- production implementation: 0
+- Cycle 001 accepted: false
+
+Reconciliation predecessorはGREENである。
+
+- service Python exact547 / `f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d`
+- repository material exact1531 / `3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e`
+- active rc0031 exact6 / `5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c`
+- reconciliation exact6: `6 PASS / 0 failure`
+- unexpected predecessor RED: 0
+
+Owner range authority designを次でfreezeした。
+
+- owner / exactly-one exact source fragment: `24 / 24`
+- normalized whole fragment `<=32`: 19
+- long fragment `>32`: 5
+- long grounded phrase exact substring: `0 / 5`
+- long existing safe-anchor: `2 / 5`
+- independent grammatical-head exact-range witness required: `5 / 5`
+- witness: same-owner / same-nucleus / same-anchor / exact-source / unique / syntactic-boundary-safe
+- authority material: IDs / absolute range / basisだけ。raw text / quote / unsalted body digestなし
+- fixed slice / ellipsis / generic phrase / arbitrary longest / case-fixture branch: forbidden
+
+Reception injection seam designを次でfreezeした。
+
+- accepted authority exact11 / rebuild-required6 / current Product effective-act consumption0
+- private experimental non-exported seam
+- prevalidated authority + `plan / resolver / successor / base / inventory / content / current-input`
+- exact11 opportunity join
+- actual Product plan / renderでtarget / visible support / effective actをbehavioralに消費
+- metadata rewrite、Surface authority再推論・重複実装、public/runtime API変更: forbidden
+
+Design RED-only exact4 result:
+
+- predecessor / scope / privacy / resource boundary: PASS
+- contract / future GREEN window / design fingerprint: PASS
+- `STEP11_RC0031_P3_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_NOT_PROVED`: intentional RED
+- `STEP11_RC0031_P3_B6_RECEPTION_INJECTION_SEAM_NOT_PROVED`: intentional RED
+- aggregate: `2 PASS / 2 intentional RED / 0 unexpected`
+
+Regression:
+
+- B5 exact6: `6 PASS`
+- B6 exact6: `4 PASS / 2 intentional RED / 0 unexpected`
+- inherited B6 RED: owner-role inflection / typed recomposition exact2
+- total test node: exact44
+- source compile / diff check: PASS
+- full exact44: not run
+
+Future implementation windowは別承認後のexact3 pathだけである。
+
+1. Grounded Lexicalization current EOF後のbounded append
+2. Natural Surface current EOF後のprivate bounded append
+3. P3 test mechanical implementation-state window
+
+新module / path、Catalog、Reception / relation authority、Matcher / Hard Gate、fixture / P1 / P2、public / runtimeはwindow外である。long 5 / 5のgenuine witnessまたはReception behavioral consumptionを閉じられなければSTOPする。
+
+Latest body-free evidence:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_DesignFreeze_REDOnly_Addendum_20260722.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_DesignFreeze_REDOnly_BodyFree_Receipt_20260722.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_DesignFreeze_REDOnly_Handoff_20260722.md`
+
+STOP. Current next authority candidate, separate approval only:
+
+`P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_IMPLEMENTATION_AND_GREEN_ONLY`
+
+owner-role inflection / typed recomposition implementation、Product body / Product Read、P3 final inverse、Parser / Matcher、P4、runtime、production dependency manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
