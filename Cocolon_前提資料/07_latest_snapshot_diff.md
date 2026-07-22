@@ -12873,3 +12873,80 @@ STOP. 次の別承認候補は一つだけである。
 `NLS_V3_STEP11_CYCLE001_PROCESS_NONCONFORMANCE_CANONICAL_RECOVERY_EPOCH_PARENT_DESIGN_ADDENDUM_READ_ONLY`
 
 この候補はrecovery epochのidentity、state machine、fresh batch境界、receipt / sequence ledger、gate順序、STOP、future authority分割をparent-design addendumとして設計するだけである。source/test/sample/manifest変更、batch生成、test実行、run、Product Read、correction、B6、formal closure、Cycle acceptanceを自動承認しない。Cycle 001は`NOT_ACCEPTED`のままである。
+
+## 2026-07-23 NLS v3 Step 11 Cycle 001 Recovery Epoch 001 parent-design addendum current authority
+
+この節が後発current authorityである。既存のhistorical audit、R5 route decision、current authorityをimmutable historyとして保持し、承認されたparent-design addendumのbody-free結果だけを追記する。
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_PROCESS_NONCONFORMANCE_CANONICAL_RECOVERY_EPOCH_PARENT_DESIGN_ADDENDUM_READ_ONLY`
+- Cocolon entry: `0fa9cf72f36ceff5e179c6102c80c67440da75ad`
+- Cocolon evidence head before this append: `578d68183adaac5146eac49078a2181ad7d57f48`
+- mashos-api start / result: `c9739a0e2de5632d08607636656ada2f712c62b9`
+- mashos-api changed path: exact0
+- state: `PARENT_DESIGN_ADDENDUM_FROZEN / RECOVERY_EPOCH_DEFINED_NOT_STARTED / AUTHORITY_STOP`
+- NLS v3 method STOP: false
+- Cycle 001 accepted: false
+- automatic progression: false
+
+Identity:
+
+- logical cycle: `NLS_V3_CYCLE_001` / `NOT_ACCEPTED`
+- historical attempt: `NLS_V3_CYCLE001_HISTORICAL_ATTEMPT_001` / `PROCESS_NONCONFORMING_HISTORY`
+- recovery epoch: `NLS_V3_CYCLE001_RECOVERY_EPOCH_001` / `DEFINED_NOT_STARTED`
+- reserved fresh batch: `NLS_V3_CYCLE001_RECOVERY_EPOCH001_BATCH_001` / `RESERVED_NOT_CREATED`
+- recovery source baseline: `UNLOCKED`
+- formal initial run ID: `UNALLOCATED`
+
+Canonical order:
+
+```text
+P1 source baseline + Step 0–10 current completion receipts
+ -> P2 fresh exact100 create / validate / freeze
+ -> P3 formal initial exact100 run lock
+ -> P4 same exact100 case-level 12-axis full read
+ -> P5 correction decision
+ -> P6 correction / cumulative rerun
+ -> P7 mandatory reread
+ -> P8 acceptance recomputation
+```
+
+Confirmed facts:
+
+- P0 parent addendumだけが完了した。P1–P8は`NOT_STARTED`である。
+- current sourceはdesign時点candidateであり、recovery baselineとして未lockである。
+- fresh batchはreserved identityだけであり、body/manifestは未作成である。
+- old attempt/batch/rc0010/B6へrecovery initial-sequence acceptance creditを付けない。
+- Step 4–10 historical completionをbackfillしない。
+- Detailed Design既存file、mashos-api、source/test/fixture/sample/manifestの変更は0である。
+- test、exact100、Product Read、private body生成は0である。
+
+Recovery-specific invariants:
+
+- P1でStep 0–10全rowをcurrent source closureへ結び、全row `PROVED`かつ全STOP=falseにする。
+- P1 source lock後にhistorical overlap 0のfresh exact100を作り、output前にfreezeする。
+- P1後P4前のrelevant source driftを禁止する。
+- `formal initial lock -> full read -> first correction`をappend-only sequence ledgerで証明する。
+- order違反はlate lock/reviewで補わず、epoch invalidationとする。
+- old valid casesをfresh initial denominatorへ数えず、fresh P4後のregressionだけに限定する。
+- current B6はhistorical diagnosticであり、P5へ自動継承しない。
+
+Inference:
+
+- current source/testはP1で再利用できる可能性があるが、current test resultとreceiptがない限りcompletionへ変換しない。
+
+Karen opinion:
+
+- fresh batchより先にsourceとStep責任を固定し、full read完了までsourceを動かさない順序が必要である。新しい100件のfailureを過去の都合から切り離し、共通構造へ正しく結べる。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ProcessNonconformance_CanonicalRecoveryEpoch001_ParentDesignAddendum_ReadOnly_20260723.md` @ blob `3333ae29ec0f4e9dde614bc9cd520448f61d2386`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ProcessNonconformance_CanonicalRecoveryEpoch001_ParentDesignAddendum_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `bdfbd559535db06ae4af35fe1bb58716d6566126`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ProcessNonconformance_CanonicalRecoveryEpoch001_ParentDesignAddendum_ReadOnly_Handoff_20260723.md` @ blob `883cc3f98c9ba880cd6176cca2f2d3e5c81877a2`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `f42366c777037500fce4d96136c0cdb4581ac2e0`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY`
+
+この候補はP1だけを扱う。current source/test/tool closure固定、既存named positive/negative test実行、Step 0–10 current completion receipt生成・検証を許可候補とする。source/test修正、fresh batch作成、exact100、Product Read、correction、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
