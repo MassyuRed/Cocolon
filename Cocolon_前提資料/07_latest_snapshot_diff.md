@@ -9,9 +9,9 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "0f370c948c2c48633f81e97cefe41cdcfe590eda"
+  Cocolon_last_reflected_task_head: "cfff0ab07a6fa361b446d59f5f53cb02aec75e4c"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9"
+  mashos_api: "MassyuRed/mashos-api:main@ac0e679de7ff33b011f9750b392f991bb34950a5"
   verified_at: "2026-07-22 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
@@ -66,18 +66,27 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_missing_exact_range_count: 3
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_head_reception_design_authorized: true
   nls_v3_step11_cycle001_rc0031_p3_b6_owner_head_reception_design_frozen: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_scope_manifest_green: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_phase_projection_green: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_unexpected_red_count: 2
+  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_scope_manifest_green: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_phase_projection_green: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_unexpected_red_count: 0
   nls_v3_step11_cycle001_rc0031_p3_b6_full_exact36_result: "25 passed / 9 intentional red / 2 unexpected scope red"
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_required: true
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_design_authorized: true
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_design_frozen: true
-  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_migration_implemented: false
-  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_implementation_authorized: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_implementation_result: "6 passed / 0 failure"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_completed: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_b5_exact6_result: "6 passed / 0 failure"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_b6_exact6_result: "4 passed / 2 intentional red / 0 unexpected"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_full_exact36_run: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_full_exact40_run: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_github_status_count: 0
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_github_workflow_run_count: 0
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_migration_implemented: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_green: true
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_red_only_result: "2 passed / 2 intentional red / 0 unexpected"
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_future_green_simulation_result: "6 passed / 0 failure / not committed"
-  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_result_commit: "9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_result_commit: "ac0e679de7ff33b011f9750b392f991bb34950a5"
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_service_path_count: 547
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_repository_path_count: 1531
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_active_path_count: 6
@@ -12151,3 +12160,55 @@ Current next authority candidate, separate approval only:
 `P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 Do not auto-progress. Reconciliation完了後のowner grammatical-head range authority / Reception injection seam designも、さらに別承認とする。
+
+## 2026-07-22 rc0031 P3 B6 Reception authority scope / phase reconciliation Implementation and GREEN-only current authority
+
+- approved authority: `P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+- Cocolon start: `0a24cbd9fb866bdde866dfd0b1c54b6daaab7098`
+- mashos-api start: `9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9`
+- mashos-api result: `ac0e679de7ff33b011f9750b392f991bb34950a5`
+- state: `IMPLEMENTED_AND_GREEN`
+- changed path: P3 test-owned path exact1
+- scope / phase reconciliation completed: true
+- Cycle 001 accepted: false
+
+Implemented frozen window:
+
+- service scope constants: `547 / f778dab0...ee54d`
+- repository scope constants: `1531 / 3bb8ccac...1369e`
+- active rc0031: exact6 / `5acf3f92...6c4c`
+- P2 active exact4: unchanged
+- P3-only additions: P3 test path + accepted Reception authority path exact2
+- phase relation: `P3 exact6 = P2 exact4 | P3-only exact2`
+- B5 / B6 mirror literals: exact6
+- masked predecessor / full-design commitments: unchanged
+- production owners / privacy / resource boundaries: unchanged
+
+Actual results:
+
+- legacy scope / phase exact2: 2 PASS
+- reconciliation exact4: 4 PASS
+- combined reconciliation target: 6 PASS / 0 failure
+- B5 exact6: 6 PASS / 0 failure
+- B6 exact6: 4 PASS / 2 intentional RED / 0 unexpected
+- resolved: `SCOPE_MANIFEST_RECONCILIATION_NOT_PROVED`
+- resolved: `PHASE_PROJECTION_RECONCILIATION_NOT_PROVED`
+- resolved: `STEP11_RC0031_P3_OUTSIDE_APPEND_SCOPE_DRIFT`
+- resolved: `STEP11_RC0031_P3_PREDECESSOR_PHASE_PROJECTION_INVALID`
+- remaining B6 RED: owner-role inflection / typed recomposition exact2 only
+- source compile / diff check: PASS
+- pytest package unavailable; direct function harnessを使用
+- full exact36 / exact40: not run in this checkpoint; pre-reconciliation historical resultsをcurrent actualへ昇格しない
+- GitHub status / workflow run: 0 / 0
+
+Latest body-free evidence:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ReceptionAuthorityScopeManifestAndPhaseProjectionReconciliation_ImplementationAndGreenOnly_Addendum_20260722.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ReceptionAuthorityScopeManifestAndPhaseProjectionReconciliation_ImplementationAndGreenOnly_BodyFree_Receipt_20260722.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ReceptionAuthorityScopeManifestAndPhaseProjectionReconciliation_ImplementationAndGreenOnly_Handoff_20260722.md`
+
+STOP. Current next authority candidate, separate approval only:
+
+`P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY`
+
+Product body / Product Read / P3 final inverse / Parser / Matcher / P4 / runtime / production dependency manifest / E2以降 / API / DB / RN / public / shared runtimeへは進まない。
