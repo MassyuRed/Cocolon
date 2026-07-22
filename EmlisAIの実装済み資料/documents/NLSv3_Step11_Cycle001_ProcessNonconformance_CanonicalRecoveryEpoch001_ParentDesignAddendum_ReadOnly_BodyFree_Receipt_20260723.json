@@ -1,0 +1,151 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.parent_design_addendum_read_only.body_free.v1",
+  "created_at_jst": "2026-07-23",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_PROCESS_NONCONFORMANCE_CANONICAL_RECOVERY_EPOCH_PARENT_DESIGN_ADDENDUM_READ_ONLY",
+  "status": "PARENT_DESIGN_ADDENDUM_FROZEN_RECOVERY_EPOCH_DEFINED_NOT_STARTED_AUTHORITY_STOP",
+  "source_pins": {
+    "cocolon_start_commit": "0fa9cf72f36ceff5e179c6102c80c67440da75ad",
+    "mashos_api_start_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_result_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "entry_drift_detected": false,
+    "mashos_api_change_count": 0
+  },
+  "normative_identity": {
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "selected_route_receipt_blob": "4090f57332d01523b8f15d413b85d37a07fc93c4",
+    "execution_plan_blob": "bcf5f7313bfa7edd69b05720be9d0e44c7d5d4d1",
+    "entry_current_authority_blob": "b60fb7288d980f80c1bd7074ba88a05757b8f194",
+    "precedence": "DETAILED_DESIGN_THEN_SCOPED_RECOVERY_ADDENDUM"
+  },
+  "identity_model": {
+    "logical_cycle_id": "NLS_V3_CYCLE_001",
+    "historical_attempt_classification": "NLS_V3_CYCLE001_HISTORICAL_ATTEMPT_001",
+    "historical_attempt_state": "PROCESS_NONCONFORMING_HISTORY",
+    "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_001",
+    "recovery_epoch_state": "DEFINED_NOT_STARTED",
+    "reserved_fresh_batch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH001_BATCH_001",
+    "reserved_fresh_batch_state": "RESERVED_NOT_CREATED",
+    "recovery_source_baseline_state": "UNLOCKED",
+    "formal_initial_run_id_state": "UNALLOCATED"
+  },
+  "historical_disposition": {
+    "artifacts_preserved": true,
+    "files_or_ids_renamed": false,
+    "historical_initial_acceptance_credit": false,
+    "historical_step4_10_completion_credit": false,
+    "current_b6_acceptance_credit": false,
+    "historical_cases_in_fresh_initial_denominator": false,
+    "historical_regression_use_before_fresh_full_read": false
+  },
+  "state_machine": [
+    "DEFINED_NOT_STARTED",
+    "SOURCE_BASELINE_LOCKED",
+    "STEP0_10_PREREQUISITES_PROVED",
+    "FRESH_BATCH_DRAFT",
+    "FRESH_BATCH_VALIDATED",
+    "FRESH_BATCH_FROZEN",
+    "INITIAL_RUN_LOCKED",
+    "INITIAL_EXACT100_FULL_READ_COMPLETE",
+    "CORRECTION_IN_PROGRESS_OR_NO_TEXT_CHANGE_REQUIRED",
+    "CUMULATIVE_RERUN_COMPLETE",
+    "MANDATORY_REREAD_COMPLETE",
+    "ACCEPTANCE_RECOMPUTED",
+    "ACCEPTED_OR_REJECTED_OR_EPOCH_INVALIDATED"
+  ],
+  "gate_order": [
+    {"gate": "P0", "name": "PARENT_ADDENDUM", "state": "COMPLETE_IN_REVISION_CONTAINING_RECEIPT"},
+    {"gate": "P1", "name": "SOURCE_AND_STEP0_10_PREREQUISITE_CLOSURE", "state": "NOT_STARTED"},
+    {"gate": "P2", "name": "FRESH_EXACT100_CREATION_VALIDATION_FREEZE", "state": "NOT_STARTED"},
+    {"gate": "P3", "name": "INITIAL_EXACT100_RUN_LOCK", "state": "NOT_STARTED"},
+    {"gate": "P4", "name": "INITIAL_EXACT100_FULL_READ", "state": "NOT_STARTED"},
+    {"gate": "P5", "name": "CORRECTION_DECISION", "state": "NOT_STARTED"},
+    {"gate": "P6", "name": "CORRECTION_AND_CUMULATIVE_RERUN", "state": "NOT_STARTED"},
+    {"gate": "P7", "name": "MANDATORY_REREAD", "state": "NOT_STARTED"},
+    {"gate": "P8", "name": "ACCEPTANCE_RECOMPUTATION", "state": "NOT_STARTED"}
+  ],
+  "p1_contract": {
+    "source_baseline_before_batch_required": true,
+    "step_count": 11,
+    "required_row_fields": [
+      "actual_owner",
+      "strict_contract",
+      "positive_test_result",
+      "independent_negative_test_result",
+      "case_or_artifact_receipt",
+      "parent_or_source_hash",
+      "completion_condition",
+      "next_step_authority",
+      "all_step_stop_conditions_false"
+    ],
+    "all_rows_must_be_proved": true,
+    "step0_3_reuse_only_on_current_hash_match": true,
+    "step4_10_current_standalone_receipts_required": true,
+    "historical_backdating_allowed": false,
+    "fixes_inside_p1_allowed": false
+  },
+  "p2_contract": {
+    "fresh_exact100_required": true,
+    "separate_batch_identity_required": true,
+    "historical_case_inclusion_count": 0,
+    "app_reachable_required_count": 100,
+    "exact_duplicate_required_count": 0,
+    "normalized_duplicate_required_count": 0,
+    "unresolved_near_duplicate_required_count": 0,
+    "coverage_required": true,
+    "privacy_required": true,
+    "expected_answer_cue_required_count": 0,
+    "manifest_freeze_before_output_required": true,
+    "source_drift_before_full_read_allowed": false
+  },
+  "p3_p4_sequence_contract": {
+    "formal_initial_run_lock_before_review_required": true,
+    "step10_smoke_accepted_as_formal_initial": false,
+    "same_locked_exact100_full_read_required": true,
+    "case_level_review_required_count": 100,
+    "axis_required_count_per_case": 12,
+    "not_reviewed_required_count": 0,
+    "full_read_before_first_text_affecting_correction_required": true,
+    "late_lock_or_review_backfill_allowed": false
+  },
+  "sequence_ledger": {
+    "append_only": true,
+    "required_event_count": 11,
+    "first_correction_event_ordinal": 7,
+    "initial_lock_event_ordinal": 4,
+    "full_read_event_ordinal": 5,
+    "required_order": "4_LT_5_LT_7",
+    "raw_body_digest_or_key_exported": false
+  },
+  "invalidation_triggers": [
+    "RELEVANT_SOURCE_DRIFT_AFTER_P1_BEFORE_P4",
+    "OUTPUT_BEFORE_BATCH_FREEZE",
+    "POST_FREEZE_CASE_SEMANTIC_REPLACEMENT",
+    "REVIEW_OR_CORRECTION_BEFORE_FORMAL_INITIAL_LOCK",
+    "TEXT_AFFECTING_CORRECTION_BEFORE_FULL_READ_COMPLETION",
+    "LOCKED_OUTPUT_REVIEW_TARGET_MISMATCH",
+    "SEQUENCE_LEDGER_MISSING_REVERSED_OR_CONFLICTING"
+  ],
+  "downstream_state": {
+    "current_b6_stop_preserved": true,
+    "b6_authority_returned": false,
+    "cycle001_status": "NOT_ACCEPTED",
+    "cycle002_authorized": false,
+    "nls_v3_method_stop": false,
+    "automatic_progression": false
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "cocolon_source_test_fixture_sample_manifest_change_count": 0,
+    "detailed_design_existing_file_change_count": 0,
+    "test_execution_count": 0,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "private_body_generation_count": 0,
+    "api_db_rn_runtime_public_shared_change_count": 0
+  },
+  "decision": "FREEZE_CANONICAL_RECOVERY_EPOCH001_PARENT_DESIGN_ADDENDUM",
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY",
+  "automatic_progression": false
+}
