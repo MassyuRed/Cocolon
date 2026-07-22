@@ -726,8 +726,8 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `NOT_PROVED` | known evidence candidates; no 1:1 §22.1 reconciliation receipt | entry-conformance read-only audit |
-| G2 batch / initial process | `NOT_PROVED` | rc0010 smoke100; formal lock false; local review 0; aggregate later failure only | same read-only audit; do not backfill |
+| G1 Step 0–10 readiness | `NOT_PROVED_STOP` | confirmed audit receipt blob `b247f6188373a6ece460593cc7da06dc272f28bb`; Step 0–3 `PROVED` / Step 4–10 `NOT_PROVED`; standalone §22.1 completion receipt chain absent | recovery-route decision only; do not backfill canonical completion |
+| G2 batch / initial process | `FAILED_STOP` | batch provenance `PROVED`; rc0010 formal lock false / local review 0 / `not_reviewed x100`; required sequence `FAILED` | recovery-route decision only; no late lock or late review backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
 | G5 B6 implementation | `BLOCKED_BY_G4` | none | do not start |
