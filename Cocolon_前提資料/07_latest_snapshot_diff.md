@@ -12461,3 +12461,63 @@ STOP. Current next authority candidate, separate approval only:
 `P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 実装・GREEN、Product body export / Product Read、P3 final inverse、Parser / Matcher、P4、runtime、production dependency manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
+
+## 2026-07-22 rc0031 P3 B6 owner-role inflection / typed recomposition Implementation and GREEN-only modifier-locus capacity STOP current authority
+
+- approved authority: `P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY`
+- predecessor authority: `P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_DESIGN_FREEZE_RED_ONLY`
+- Cocolon start: `b8eb91ef5b6e68c747bae7ccb0de54177bc4ab1b`
+- mashos-api start/result: `b139daae89f2f927ec146fad76162369f7dba99c`
+- state: `STOP_FROZEN_ORACLE_MODIFIER_LOCUS_CAPACITY_20_LT_22`
+- mashos-api write / retained implementation: `0 / 0`
+- Cycle 001 accepted: false
+
+Body-free feasibility result:
+
+- context / unique case / binding: `10 / 8 / 12`
+- semantic atom exactly38 = family `22 / 13 / 1 / 2`
+- required construction modifier / target: `22 / 22`
+- frozen finite owner occurrence modifier capacity: 20
+- deficit: 2 across exact2 bindings
+- parser accepts one construction fragment per exact owner occurrence
+
+standalone constructionはexpected `construction_modifier` roleと一致しない。relation複製はatom exact38 / finite countを壊し、endpoint移動はsame-owner / accepted relation authorityを壊す。chained owner fragmentまたはexpected role/parser変更はmechanical test window外である。このためcurrent exact2 windowではGREEN不能である。
+
+Repositoryは開始点へ完全復元した。
+
+- Natural Surface: 537,842 bytes / `18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4` / blob `478454a1c5fb5b15e0c281ae93a63aa058bf8e26`
+- P3 test: 344,556 bytes / `8c9113c991da379e47c4beb496e86b7c25b48b29ab944908eb261ed98768b0c8` / blob `3e2dd6c2a0b2e80483f5a552848a4b8672c7f7d0`
+- `_B6_ROLE_TYPED_IMPLEMENTATION_PRESENT`: false
+- Surface new marker: absent
+- Catalog / Lexical / Natural Surface / Reception / relation authority / Matcher / Hard Gate / fixture / P1 / P2: unchanged
+
+Preserved verification:
+
+- new Design exact4: `2 PASS / 2 intentional RED / 0 unexpected`
+- inherited B6 exact6: `4 PASS / 2 same intentional RED / 0 unexpected`
+- B5 exact6: `6 PASS / 0 failure`
+- owner-range / Reception-seam exact4: `4 PASS / 0 failure`
+- full exact48: `NOT_RUN`
+
+残存RED:
+
+- `STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED`
+- `STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED`
+
+Invariant:
+
+- service Python exact547 / `f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d`
+- repository frozen material exact1531 / `3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e`
+- active rc0031 exact6 / `5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c`
+- cluster `<=13` / load `<=4` / resource `(2,4,2,4)`: unchanged
+- raw body / quote / individual mapping / parsed span / unsalted digest export: false
+
+Latest body-free evidence:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ImplementationAndGreenOnly_ModifierLocusCapacity_STOP_Addendum_20260722.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ImplementationAndGreenOnly_ModifierLocusCapacity_STOP_BodyFree_Receipt_20260722.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerRoleInflectionAndTypedRecomposition_ImplementationAndGreenOnly_ModifierLocusCapacity_STOP_Handoff_20260722.md`
+
+STOP. Next authority: `UNSELECTED / separate approval required`.
+
+次のDesign Freeze RED-onlyでは、one exact owner locusのdeterministic chained modifiersまたはsurplus same-owner constructionのtyped standalone locusを選び、body parser / expected role contractを整合させる。Product Read、P3 final inverse、Parser / Matcher / Hard Gate、P4、runtime、manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
