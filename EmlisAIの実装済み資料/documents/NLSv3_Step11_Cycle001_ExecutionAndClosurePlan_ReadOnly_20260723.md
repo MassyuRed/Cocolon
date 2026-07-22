@@ -741,7 +741,7 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 
 - approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY`
 - result receipt: blob `965f6b9a9467769e24508340c1c59aafa4f40797`
-- result: `P1_FAILED_STOP / SOURCE_BASELINE_UNL0CKED / STEP0_10_NOT_PROVED`
+- result: `P1_FAILED_STOP / SOURCE_BASELINE_UNLOCKED / STEP0_10_NOT_PROVED`
 - mashos-api result: `c9739a0e2de5632d08607636656ada2f712c62b9` / changed path exact0
 - sequence event 1 / 2: not created
 - P2: not authorized
