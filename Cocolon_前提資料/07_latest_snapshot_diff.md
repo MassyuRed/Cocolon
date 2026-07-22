@@ -12288,3 +12288,86 @@ STOP. Current next authority candidate, separate approval only:
 `P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_IMPLEMENTATION_AND_GREEN_ONLY`
 
 owner-role inflection / typed recomposition implementation、Product body / Product Read、P3 final inverse、Parser / Matcher、P4、runtime、production dependency manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
+
+## 2026-07-22 rc0031 P3 B6 owner grammatical-head range / Reception injection Implementation and GREEN-only current authority
+
+- approved authority: `P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_IMPLEMENTATION_AND_GREEN_ONLY`
+- predecessor authority: `P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY`
+- Cocolon start: `ceee25780049c71d493d7d37b70ca745cef13317`
+- mashos-api start: `ffaf1fd8c97e677d82c7a7bb1c083f6864cd6401`
+- mashos-api result: `8d6e5d1137ebdd32a07907aa2a233d9c52362e5a`
+- state: `IMPLEMENTED_AND_GREEN`
+- Cycle 001 accepted: false
+
+Changed pathはexact3だけである。
+
+1. `ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py`
+2. `ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py`
+3. `ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py`
+
+- unexpected changed path: 0
+- new path: 0
+- result blobs: Lexical `f0fe1fe6c376a9a80a16b8a5b8679de97c13fa5d` / Natural Surface `478454a1c5fb5b15e0c281ae93a63aa058bf8e26` / P3 test `2a184e901c4e6202873a542520446833d668bbdc`
+
+Owner grammatical-head exact-range authorityを次で実装した。
+
+- owner / exact source: `24 / 24`
+- short exact19: whole exact-source range
+- long exact5: typed construction exact-source syntactic range
+- long scalar count body-free aggregate: `29 / 22 / 9 / 24 / 9`
+- maximum 32 / ellipsis 0 / arbitrary scalar cut 0
+- same-owner / same-nucleus / same-anchor / exact-source / unique / syntactic-boundary-safe
+- private / experimental / non-exported / runtime-disconnected
+- raw/head text、quote、unsalted body digest、individual owner / source / range mapping: not exported
+
+Reception authority injection seamを次で実装した。
+
+- official validator first
+- accepted authority / opportunity join: exact11 / exact11
+- target / visible support / effective act: exact11 behavioral consumption
+- rebuild-required / rebuild behavioral consumption: exact6 / exact6
+- source scope / opportunity / base binding / inventory provenance: preserved
+- Surface authority再推論・重複実装、metadata-only rewrite、public API変更、global state: 0
+- private / experimental / non-exported / runtime-disconnected
+
+GREEN verification:
+
+- owner range: `PASS`
+- Reception seam: `PASS`
+- implementation exact4: `4 PASS / 0 failure`
+- legacy/reconciliation active scope / phase: `4 PASS / 0 failure`
+- legacy predecessor-boundary exact2: authorized appendを検知。PASSへ昇格しない
+- replacement bounded-append boundary: `2 PASS / 0 failure`
+- B5 exact6: `6 PASS / 0 failure`
+- B6 exact6: `4 PASS / 2 inherited intentional RED / 0 unexpected`
+- source compile / exact3 diff: `PASS / PASS`
+- full exact44: `NOT_RUN`
+
+次のDesign Freeze RED exact2を解消する。
+
+- `STEP11_RC0031_P3_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_NOT_PROVED`
+- `STEP11_RC0031_P3_B6_RECEPTION_INJECTION_SEAM_NOT_PROVED`
+
+次のinherited B6 RED exact2は継続する。
+
+- `STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED`
+- `STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED`
+
+Invariant:
+
+- service Python exact547 / repository material exact1531 / active rc0031 exact6: `PASS`
+- immutable production blobs: `PASS`
+- resource `(2,4,2,4)` / visible source anchor `<=1` / Reception owner max4: `PASS`
+- body / quote / owner-range / focus-act mapping / unsalted body digest export: false
+- runtime connected: false
+- formal / production eligible: false
+
+Latest body-free evidence:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_ImplementationAndGreenOnly_Addendum_20260722.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_ImplementationAndGreenOnly_BodyFree_Receipt_20260722.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_OwnerGrammaticalHeadRangeAuthorityAndReceptionInjectionSeam_ImplementationAndGreenOnly_Handoff_20260722.md`
+
+STOP. Next authority candidate: `UNSELECTED / separate approval required`.
+
+owner-role inflection / typed recomposition implementation remains unapproved. Product body / Product Read、P3 final inverse、Parser / Matcher、P4、runtime、production dependency manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
