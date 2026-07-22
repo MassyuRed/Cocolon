@@ -9,9 +9,9 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "009292c7c13a6a2696886a5d322c3ef12dca893b"
+  Cocolon_last_reflected_task_head: "0f370c948c2c48633f81e97cefe41cdcfe590eda"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
+  mashos_api: "MassyuRed/mashos-api:main@9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9"
   verified_at: "2026-07-22 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
@@ -71,6 +71,19 @@ coverage:
   nls_v3_step11_cycle001_rc0031_p3_b6_predecessor_unexpected_red_count: 2
   nls_v3_step11_cycle001_rc0031_p3_b6_full_exact36_result: "25 passed / 9 intentional red / 2 unexpected scope red"
   nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_required: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_design_authorized: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_design_frozen: true
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_migration_implemented: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_green: false
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_red_only_result: "2 passed / 2 intentional red / 0 unexpected"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_future_green_simulation_result: "6 passed / 0 failure / not committed"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_result_commit: "9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_service_path_count: 547
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_repository_path_count: 1531
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_active_path_count: 6
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_repository_material_sha256: "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e"
+  nls_v3_step11_cycle001_rc0031_p3_b6_scope_reconciliation_total_test_node_count: 40
+  nls_v3_step11_cycle001_rc0031_p3_b6_owner_head_reception_design_reapproval_required_after_reconciliation: true
   nls_v3_step11_cycle001_rc0031_p3_b5_product_surface_freeze_viable: false
   nls_v3_step11_cycle001_rc0031_p3_b5_actual_output_remediation_authorized: false
   nls_v3_step11_cycle001_rc0031_p3_final_inverse_authorized: false
@@ -12094,3 +12107,47 @@ P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RE
 - 作業完了またはSTOP確定ごとに、このcurrent authorityを同じcheckpointの小さい差分として更新する。
 - 構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase / RC / release gate等の節目で全体監査する。
 - GitHub反映と反映後確認に成功した場合は成果物ZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規fileと修正fileに限定したZIPを提出する。
+
+## 2026-07-22 rc0031 P3 B6 Reception authority scope / phase reconciliation Design Freeze RED-only current authority
+
+- approved authority: `P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_DESIGN_FREEZE_RED_ONLY`
+- Cocolon start: `abc2cb5100112dd726b93a299c9235d95202d750`
+- mashos-api start: `c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14`
+- mashos-api design result: `9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9`
+- state: `DESIGN_FROZEN_RED_ONLY`
+- migration implemented: false
+- GREEN authorized: false
+- Cycle 001 accepted: false
+
+Canonical body-free scope evidence:
+
+- service Python path: exact547 / `f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d`
+- repository frozen material: exact1531 / `3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e`
+- active rc0031 path: exact6 / `5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c`
+- P2 active exact4: unchanged
+- P3-only exact2: P3 test path + accepted Reception authority path
+- target projection: `P3 exact6 = P2 exact4 | P3-only exact2`
+- historical `084889e2...b6ff` repository hash: canonical再計算不一致のためcurrent evidenceではsuperseded。履歴receiptは未変更。
+
+RED-only result:
+
+- predecessor / immutable boundary: PASS
+- future window / full-design fingerprint: PASS
+- `SCOPE_MANIFEST_RECONCILIATION_NOT_PROVED`: intentional RED
+- `PHASE_PROJECTION_RECONCILIATION_NOT_PROVED`: intentional RED
+- disposable future-GREEN proof: legacy exact2 + reconciliation exact4 = 6 PASS / 0 failure / not committed
+- B5 exact6: 6 PASS
+- B6 exact6: 4 PASS / 2 intentional RED
+- pytest package unavailable; direct function harness、source compile、diff checkで確認
+
+Latest body-free evidence:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ReceptionAuthorityScopeManifestAndPhaseProjectionReconciliation_DesignFreeze_REDOnly_Addendum_20260722.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ReceptionAuthorityScopeManifestAndPhaseProjectionReconciliation_DesignFreeze_REDOnly_BodyFree_Receipt_20260722.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ReceptionAuthorityScopeManifestAndPhaseProjectionReconciliation_DesignFreeze_REDOnly_Handoff_20260722.md`
+
+Current next authority candidate, separate approval only:
+
+`P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+Do not auto-progress. Reconciliation完了後のowner grammatical-head range authority / Reception injection seam designも、さらに別承認とする。
