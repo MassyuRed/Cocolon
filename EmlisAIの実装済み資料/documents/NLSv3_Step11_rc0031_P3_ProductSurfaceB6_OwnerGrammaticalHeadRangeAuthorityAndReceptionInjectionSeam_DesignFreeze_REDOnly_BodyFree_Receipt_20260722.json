@@ -1,0 +1,150 @@
+{
+  "schema_version": "nls_v3_step11_rc0031_p3_b6_owner_head_range_reception_injection_design_freeze_red_only_receipt.v1",
+  "revision_date": "2026-07-22",
+  "authority": "P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY",
+  "status": "DESIGN_FROZEN_RED_ONLY",
+  "body_free": true,
+  "cycle_001_accepted": false,
+  "automatic_progression": false,
+  "source_pins": {
+    "cocolon_start": "f561067554b83811e8a4c1b9b974a7816ebf4023",
+    "mashos_api_start": "ac0e679de7ff33b011f9750b392f991bb34950a5",
+    "mashos_api_result": "ffaf1fd8c97e677d82c7a7bb1c083f6864cd6401"
+  },
+  "repository_scope": {
+    "changed_paths": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "changed_path_count": 1,
+    "unexpected_changed_path_count": 0,
+    "production_or_runtime_changed_path_count": 0,
+    "predecessor_test_file": {
+      "bytes": 254855,
+      "sha256": "e058eb840d0183df5fe955c5af34f58ed8b88c4b2740816eacf40ada6ec08499",
+      "git_blob_sha1": "fe5d80c102bcebedf28aad664dce42bea7c81f67"
+    },
+    "result_test_file": {
+      "bytes": 291115,
+      "sha256": "2d5afa7cbccaa381d886c7bec3f0f204998ff8ee6970b497ea7de4e7a0dd7f31",
+      "git_blob_sha1": "3494d2625378c31222a714e0382e471f2e1e88e1"
+    },
+    "test_node_count_before": 40,
+    "test_node_count_after": 44
+  },
+  "predecessor_reconciliation": {
+    "service_python_path_count": 547,
+    "service_python_path_list_sha256": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "repository_frozen_material_path_count": 1531,
+    "repository_frozen_material_sha256": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "active_rc0031_path_count": 6,
+    "active_rc0031_path_list_sha256": "5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c",
+    "target_result": "6 PASS / 0 failure",
+    "unexpected_failure_count": 0
+  },
+  "owner_range_authority_contract": {
+    "owner_occurrence_count": 24,
+    "exactly_one_exact_source_fragment_count": 24,
+    "whole_fragment_at_most_32_count": 19,
+    "long_fragment_over_32_count": 5,
+    "long_grounded_phrase_exact_substring_count": 0,
+    "long_existing_safe_anchor_count": 2,
+    "independent_long_witness_required_count": 5,
+    "same_owner_required": true,
+    "same_nucleus_required": true,
+    "same_source_anchor_required": true,
+    "unique_exact_source_range_required": true,
+    "syntactic_boundary_required": true,
+    "maximum_range_scalars": 32,
+    "raw_or_head_text_in_authority_material": false,
+    "quote_in_authority_material": false,
+    "unsalted_body_digest_in_authority_material": false,
+    "fixed_or_arbitrary_slice_allowed": false,
+    "ellipsis_allowed": false,
+    "generic_phrase_fallback_allowed": false,
+    "arbitrary_longest_selection_allowed": false,
+    "case_or_fixture_branch_allowed": false
+  },
+  "reception_injection_contract": {
+    "authority_binding_count": 11,
+    "base_ast_binding_count": 10,
+    "additional_required_count": 1,
+    "product_rebuild_required_count": 6,
+    "current_product_effective_act_consumption_count": 0,
+    "validation_parents": [
+      "plan",
+      "resolver",
+      "successor_snapshot",
+      "base_candidate",
+      "inventory_result",
+      "content_plan",
+      "current_input"
+    ],
+    "private_experimental_nonexported": true,
+    "runtime_connected": false,
+    "exact_opportunity_join_required": 11,
+    "rendered_target_visible_support_effective_act_consumption_required": true,
+    "metadata_rewrite_is_consumption_proof": false,
+    "surface_authority_rederivation_allowed": false,
+    "public_api_change_allowed": false
+  },
+  "design_red_suite": {
+    "test_count": 4,
+    "result": "2 PASS / 2 INTENTIONAL_RED / 0 unexpected",
+    "causal": true,
+    "unconditional_red": false,
+    "newly_frozen_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_RECEPTION_INJECTION_SEAM_NOT_PROVED"
+    ]
+  },
+  "regression_accounting": {
+    "reconciliation_exact6": "6 PASS / 0 failure",
+    "b5_exact6": "6 PASS / 0 failure",
+    "b6_exact6": "4 PASS / 2 intentional RED / 0 unexpected",
+    "remaining_inherited_b6_red_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ],
+    "source_compile": "PASS",
+    "diff_check": "PASS",
+    "full_exact44_run": false,
+    "runner": "standard_library_direct_function_harness",
+    "pytest_available": false
+  },
+  "future_implementation_window": {
+    "paths": [
+      "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "path_count": 3,
+    "lexical_prefix_bytes": 133249,
+    "lexical_prefix_sha256": "3ea0f94b350dd1243c50783a1c424aff14df5c7694d1aeb4899a80cb5b4c7b71",
+    "lexical_prefix_git_blob_sha1": "49a47629b3dcd82ed6326ba815c9e044f65c0cf1",
+    "lexical_append_byte_max": 24000,
+    "surface_prefix_bytes": 528932,
+    "surface_prefix_sha256": "acaf74b4ff25b5e312a60b6741e08a7f802aa9202281a5272d32952a9d06509c",
+    "surface_prefix_git_blob_sha1": "ab10c70629edc57ab971760816fc106747f3de34",
+    "surface_append_byte_max": 20000,
+    "test_mechanical_state_window_only": true,
+    "new_service_path_allowed": false
+  },
+  "privacy": {
+    "body_or_quote_exported": false,
+    "parsed_span_or_binding_detail_exported": false,
+    "unsalted_body_digest_exported": false,
+    "runtime_connected": false,
+    "formal_or_production_eligible": false
+  },
+  "resource_boundary": {
+    "visible_clauses_per_grammatical_sentence_max": 2,
+    "grammatical_complexity_load_max": 4,
+    "repeated_joiner_per_group_max": 2,
+    "realization_units_per_group_max": 4,
+    "visible_source_anchor_max": 1,
+    "reception_owner_max": 4
+  },
+  "next_authority_candidate": "P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_IMPLEMENTATION_AND_GREEN_ONLY",
+  "next_authority_requires_separate_approval": true,
+  "decision": "DESIGN_FROZEN_RED_ONLY_STOP_BEFORE_IMPLEMENTATION"
+}
