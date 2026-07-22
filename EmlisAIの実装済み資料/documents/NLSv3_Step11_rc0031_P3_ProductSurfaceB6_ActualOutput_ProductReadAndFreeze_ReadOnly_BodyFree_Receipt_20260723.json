@@ -1,0 +1,257 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.rc0031.p3_product_surface_b6_actual_output_product_read_and_freeze_read_only.body_free.v1",
+  "created_at_jst": "2026-07-23",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "P3_PRODUCT_SURFACE_B6_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_READ_ONLY",
+  "status": "B6_ACTUAL_OUTPUT_PRODUCT_READ_STOP_B6_PRODUCT_SURFACE_FREEZE_REJECTED_PRODUCTION_REMEDIATION_NOT_AUTHORIZED_P3_FINAL_INVERSE_NOT_AUTHORIZED",
+  "source_pins": {
+    "cocolon_start_commit": "792cd28fc28c34b0e4d7867c56f5786e04e2b5b5",
+    "mashos_api_start_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_result_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "drift_detected": false
+  },
+  "entry_integrity": {
+    "catalog": {
+      "byte_count": 24564,
+      "sha256": "75d6d3f673203728d5ed1b3d007ac673edc8569429e14c2e0e68b2d80d6c8609",
+      "git_blob_sha1": "94e87e7bdd58359dd3790e30fcd765151ad792d9"
+    },
+    "grounded_lexicalization": {
+      "byte_count": 153831,
+      "sha256": "5efc83126afc7edec179b7e623d35bd65ae90ed9e2965c3b8742acc4ffc3dc34",
+      "git_blob_sha1": "f0fe1fe6c376a9a80a16b8a5b8679de97c13fa5d"
+    },
+    "natural_surface": {
+      "byte_count": 548866,
+      "sha256": "22295885af5c25d1738988a06846b3c70ab86f8d1ee88a6e6db7767e8774cd39",
+      "git_blob_sha1": "1c19b6c293e20a9094b9180fded8c167daaaf5eb"
+    },
+    "reception_authority": {
+      "byte_count": 27280,
+      "sha256": "af141bc43728f915e19f675f261c18d5381f7da80b3fb1145257965fd3917753",
+      "git_blob_sha1": "7ddd4b62a5a46bf55bb97063d58801228849dd68"
+    },
+    "p3_test": {
+      "byte_count": 408068,
+      "sha256": "ac457122e12e87c95fb0f5e9b2d8d2eddc5d7bce7430dcdfb14bdfc03c5a6b19",
+      "git_blob_sha1": "0b49a7ae02234a9b8741b6bc7d1c8580630e099b"
+    }
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "production_source_change_count": 0,
+    "test_change_count": 0,
+    "api_db_rn_public_shared_change_count": 0,
+    "cocolon_body_free_evidence_file_count": 4
+  },
+  "frozen_denominator": {
+    "candidate_context_count": 10,
+    "unique_case_count": 8,
+    "proposition_binding_count": 12,
+    "accepted_finite_head_count": 12,
+    "other_finite_head_count": 4,
+    "semantic_atom_count": 38,
+    "verified_reuse_count": 1,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "owner_grammatical_head_count": 24,
+    "owner_short_count": 19,
+    "owner_long_count": 5,
+    "catalog_owner_role_count": 8,
+    "catalog_owner_kind_count": 12,
+    "construction_modifier_count": 22,
+    "head_owner_locus_count": 20,
+    "single_modifier_locus_count": 18,
+    "double_modifier_locus_count": 2,
+    "maximum_chain_depth": 2,
+    "unresolved_modifier_count": 0,
+    "reception_count": 11,
+    "rebuild_required_count": 6,
+    "product_cluster_max": 13,
+    "product_cluster_load_max": 4,
+    "resource_maxima": [2, 4, 2, 4],
+    "service_python_path_count": 547,
+    "repository_frozen_material_path_count": 1531,
+    "active_rc0031_path_count": 6
+  },
+  "execution": {
+    "private_actual_output_generation_run": true,
+    "private_builder_success_count": 10,
+    "generation_failure_count": 0,
+    "body_full_private_product_read_count": 10,
+    "approved_exact24_run": false,
+    "approved_exact24_result": "NOT_RUN_READ_ONLY_AUTHORITY",
+    "full_exact52_run": false,
+    "full_exact52_result": "NOT_RUN_OUTSIDE_APPROVED_SCOPE"
+  },
+  "private_evidence": {
+    "local_only": true,
+    "in_memory_review_only": true,
+    "private_packet_created": false,
+    "private_packet_persisted": false,
+    "commitment_method": "NONE_IN_MEMORY_REVIEW",
+    "body_or_quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "raw_input_exported": false,
+    "individual_mapping_exported": false,
+    "parsed_span_exported": false,
+    "free_text_review_note_exported": false,
+    "raw_body_digest_exported": false,
+    "packet_digest_exported": false,
+    "verification_key_exported": false
+  },
+  "review_contract": {
+    "revised_cycle_section": "18.4",
+    "axis_count": 12,
+    "axes": {
+      "1": "MAIN_INPUT_MEANING_RETAINED",
+      "2": "THOUGHT_ACTION_RELATION_DIRECTION_CORRECT",
+      "3": "EMOTION_CATEGORY_NOT_PROMOTED",
+      "4": "UNKNOWN_NOT_INVENTED",
+      "5": "SELF_DENIAL_NOT_ADOPTED_AS_FACT",
+      "6": "EMLIS_FROM_INPUT_SPECIFIC",
+      "7": "VISIBLE_AND_EMLIS_PROPOSITIONS_DISTINCT",
+      "8": "NATURAL_NO_REPETITION_OVERQUOTE_EXPLANATORY_PROSE",
+      "9": "SURFACE_DISTRIBUTION_NOT_OVERCONCENTRATED",
+      "10": "DEPTH_FITS_INPUT_AMOUNT_AND_STRUCTURE",
+      "11": "QUESTION_NEEDED_AMBIGUITY_NOT_FALSELY_COMPLETED",
+      "12": "READS_AS_COCOLON_IMMEDIATE_OBSERVATION"
+    },
+    "review_pass_count": 2,
+    "review_passes": ["SEMANTIC_SAFETY", "PRODUCT_SURFACE"],
+    "reviewer_identity_count": 1,
+    "independent_two_reviewer_claimed": false,
+    "severity_order": ["PASS", "MINOR", "MAJOR", "BLOCKER"],
+    "severity_merge_rule": "MAXIMUM_PER_CANDIDATE_THEN_MAXIMUM_PER_UNIQUE_CASE",
+    "control_comparator": "PRIOR_B5_COUNTERFACTUAL_DESIGN_PRODUCT_READ"
+  },
+  "candidate_contexts": [
+    {
+      "context_id": "nls3s_b001_0001::candidate_01",
+      "role": "control_exact_reuse",
+      "severity": "MINOR",
+      "failed_axes": [6, 8],
+      "closed_reason_codes": ["RECEPTION_PREDICATION_LOCAL_SPECIFICITY_RESIDUE", "RECEPTION_PREDICATION_LOCAL_NATURALNESS_RESIDUE"]
+    },
+    {
+      "context_id": "nls3s_b001_0002::candidate_01",
+      "role": "control",
+      "severity": "MINOR",
+      "failed_axes": [8, 12],
+      "closed_reason_codes": ["RECEPTION_PREDICATION_LOCAL_NATURALNESS_RESIDUE", "IMMEDIATE_OBSERVATION_LOCAL_READFEEL_RESIDUE"]
+    },
+    {
+      "context_id": "nls3s_b001_0009::candidate_01",
+      "role": "control",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0019::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0019::candidate_02",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0035::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "SURFACE_DISTRIBUTION_OVERCONCENTRATED", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0043::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0043::candidate_02",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0063::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "SURFACE_DISTRIBUTION_OVERCONCENTRATED", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "context_id": "nls3s_b001_0100::candidate_01",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "SURFACE_DISTRIBUTION_OVERCONCENTRATED", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    }
+  ],
+  "actual_output_product_read": {
+    "candidate_severity_counts": {"PASS": 0, "MINOR": 2, "MAJOR": 8, "BLOCKER": 0},
+    "unique_case_maximum_severity_counts": {"PASS": 0, "MINOR": 2, "MAJOR": 6, "BLOCKER": 0},
+    "former_major_pass_or_minor_count": 0,
+    "former_major_total": 5,
+    "former_major_context_pass_or_minor_count": 0,
+    "former_major_context_total": 7,
+    "controls_not_worse_count": 1,
+    "control_total": 3,
+    "new_major_control_count": 1,
+    "emotion_category_non_promotion_preserved": true,
+    "unknown_non_invention_preserved": true,
+    "self_denial_non_adoption_preserved": true,
+    "visible_emlis_proposition_distinction_preserved": true,
+    "question_needed_ambiguity_non_completion_preserved": true
+  },
+  "control_comparison": [
+    {"context_id": "nls3s_b001_0001::candidate_01", "not_worse": true},
+    {"context_id": "nls3s_b001_0002::candidate_01", "not_worse": false},
+    {"context_id": "nls3s_b001_0009::candidate_01", "not_worse": false}
+  ],
+  "closed_concern_counts": {
+    "reception_specificity_or_naturalness_context_count": 10,
+    "owner_role_grammatical_join_failure_context_count": 8,
+    "typed_recomposition_explanatory_density_context_count": 8,
+    "main_meaning_dominance_obscured_context_count": 8,
+    "relation_or_temporal_readability_distortion_context_count": 8,
+    "depth_density_overshoot_context_count": 8,
+    "immediate_observation_failure_context_count": 9,
+    "surface_distribution_overconcentration_context_count": 3
+  },
+  "freeze_gate": {
+    "all_candidates_major_blocker_zero": false,
+    "all_unique_cases_major_blocker_zero": false,
+    "former_major_five_of_five_pass_or_minor": false,
+    "controls_three_of_three_not_worse": false,
+    "new_major_control_zero": false,
+    "semantic_safety_blocker_zero": true,
+    "formal_denominator_preserved": true,
+    "privacy_boundary_preserved": true,
+    "b6_actual_output_product_surface_viable": false
+  },
+  "decision": "B6_ACTUAL_OUTPUT_PRODUCT_READ_STOP_B6_PRODUCT_SURFACE_FREEZE_REJECTED",
+  "rejection_evidence_frozen": true,
+  "product_surface_viability_frozen": false,
+  "production_remediation_authorized": false,
+  "final_inverse_authorized": false,
+  "parser_matcher_hard_gate_authorized": false,
+  "p4_runtime_manifest_e2_authorized": false,
+  "api_db_rn_public_shared_authorized": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "next_authority_required": "UNSELECTED_SEPARATE_APPROVAL_REQUIRED"
+}
