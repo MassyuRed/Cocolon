@@ -1,0 +1,204 @@
+{
+  "schema_version": "nls_v3_step11_rc0031_p3_b6_owner_role_inflection_typed_recomposition_design_freeze_red_only_receipt.v1",
+  "revision_date": "2026-07-22",
+  "authority": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_DESIGN_FREEZE_RED_ONLY",
+  "status": "DESIGN_FROZEN_RED_ONLY",
+  "body_free": true,
+  "cycle_001_accepted": false,
+  "production_implementation_applied": false,
+  "automatic_progression": false,
+  "source_pins": {
+    "cocolon_start_commit": "159f1725e1258908c7c99bea80239a52f2bfd199",
+    "mashos_api_start_commit": "8d6e5d1137ebdd32a07907aa2a233d9c52362e5a",
+    "mashos_api_result_commit": "b139daae89f2f927ec146fad76162369f7dba99c"
+  },
+  "repository_scope": {
+    "changed_path_count": 1,
+    "changed_paths": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "unexpected_changed_path_count": 0,
+    "new_path_count": 0,
+    "production_source_change_count": 0,
+    "predecessor_test": {
+      "utf8_bytes": 291114,
+      "sha256": "05ecc4e8be9407686818fc3743d3757ec6104bca8f126d6d609bf765a3c57b92",
+      "git_blob_sha1": "2a184e901c4e6202873a542520446833d668bbdc"
+    },
+    "result_test": {
+      "utf8_bytes": 344556,
+      "sha256": "8c9113c991da379e47c4beb496e86b7c25b48b29ab944908eb261ed98768b0c8",
+      "git_blob_sha1": "3e2dd6c2a0b2e80483f5a552848a4b8672c7f7d0"
+    },
+    "eof_append_bytes": 53442,
+    "eof_append_lines": 1365,
+    "test_node_count_before": 44,
+    "test_node_count_after": 48
+  },
+  "accepted_predecessors": {
+    "scope_phase_reconciliation_green": true,
+    "source_congruence_green": true,
+    "reception_focus_green": true,
+    "owner_grammatical_head_range_green": true,
+    "owner_range_count": 24,
+    "owner_whole_short_count": 19,
+    "owner_syntactic_long_count": 5,
+    "reception_injection_seam_green": true,
+    "reception_authority_count": 11,
+    "reception_rebuild_required_count": 6
+  },
+  "owner_role_inflection_contract": {
+    "owner_occurrence_count": 24,
+    "accepted_exact_range_count": 24,
+    "owner_role_pattern_count": 8,
+    "owner_kind_pattern_count": 12,
+    "same_owner_required": true,
+    "same_nucleus_required": true,
+    "same_source_anchor_required": true,
+    "exact_source_required": true,
+    "body_only_role_recovery_required": true,
+    "unique_body_recovery_required": true,
+    "multi_role_owner_count": 22,
+    "construction_modifier_locus_required": true,
+    "relation_finite_head_locus_required": true,
+    "semantic_link_connective_locus_required": true,
+    "explicit_unknown_terminal_locus_required": true,
+    "fixed_slice_allowed": false,
+    "ellipsis_allowed": false,
+    "generic_phrase_fallback_allowed": false,
+    "arbitrary_longest_allowed": false,
+    "case_or_fixture_phrase_branch_allowed": false
+  },
+  "typed_recomposition_contract": {
+    "context_count": 10,
+    "unique_case_count": 8,
+    "proposition_binding_count": 12,
+    "source_semantic_atom_count": 38,
+    "source_semantic_atom_exactly_once_required": true,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "deterministic_finite_head_count": 12,
+    "construction_modifier_count": 22,
+    "construction_modifier_target_owner_count": 22,
+    "other_finite_dependent_count": 4,
+    "verified_base_reuse_count": 1,
+    "verified_base_reuse_exactly_once_required": true,
+    "reception_count": 11,
+    "reception_rebuild_required_count": 6,
+    "endpoint_type_direction_and_order_required": true,
+    "temporal_scope_proposition_once_required": true,
+    "modality_finite_locus_required": true,
+    "polarity_predicate_voice_or_connective_locus_required": true,
+    "referent_scope_grammatical_role_locus_required": true,
+    "per_atom_explanatory_bundle_allowed": false,
+    "metadata_only_proof_allowed": false
+  },
+  "current_causal_body_evidence": {
+    "plan_head_count": 12,
+    "required_modifier_count": 22,
+    "current_plan_modifier_count": 0,
+    "current_plan_modifier_target_count": 0,
+    "body_recovered_head_count": 12,
+    "body_recovered_other_finite_count": 3,
+    "target_other_finite_count": 4,
+    "atom_local_explanatory_bundle_count": 12,
+    "unparsed_product_locus_count": 1,
+    "ambiguous_product_locus_count": 0,
+    "body_recovered_reception_count": 11,
+    "resource_boundary_pass_count": 10,
+    "dimension_non_reuse_source_count": 38
+  },
+  "design_red_suite": {
+    "test_count": 4,
+    "pass_count": 2,
+    "intentional_red_count": 2,
+    "unexpected_failure_count": 0,
+    "causal_body_evidence": true,
+    "unconditional_failure": false,
+    "symbol_only_failure": false,
+    "closed_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ]
+  },
+  "regression_accounting": {
+    "b5_exact6": "6 PASS / 0 failure",
+    "b6_exact6": "4 PASS / 2 intentional RED / 0 unexpected",
+    "owner_range_reception_seam_exact4": "4 PASS / 0 failure",
+    "source_compile": "PASS",
+    "diff_check": "PASS",
+    "full_exact48_run": false,
+    "pytest_package_available": false,
+    "runner": "standard_library_direct_function_harness"
+  },
+  "future_implementation_window": {
+    "separate_approval_required": true,
+    "path_count": 2,
+    "paths": [
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "natural_surface_prefix": {
+      "utf8_bytes": 537842,
+      "sha256": "18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4",
+      "git_blob_sha1": "478454a1c5fb5b15e0c281ae93a63aa058bf8e26",
+      "append_byte_max": 48000
+    },
+    "private_plan_ast_render_candidate_augmentation_allowed": true,
+    "private_builder_nonexported_required": true,
+    "test_mechanical_state_only": true,
+    "catalog_change_allowed": false,
+    "grounded_lexicalization_change_allowed": false,
+    "reception_or_relation_authority_change_allowed": false,
+    "new_path_allowed": false,
+    "public_or_runtime_change_allowed": false
+  },
+  "canonical_scope": {
+    "service_python_path_count": 547,
+    "service_python_path_list_sha256": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "repository_frozen_material_path_count": 1531,
+    "repository_frozen_material_sha256": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "active_rc0031_path_count": 6,
+    "active_rc0031_path_list_sha256": "5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c"
+  },
+  "immutable_git_blobs_expected": {
+    "catalog": "94e87e7bdd58359dd3790e30fcd765151ad792d9",
+    "grounded_lexicalization": "f0fe1fe6c376a9a80a16b8a5b8679de97c13fa5d",
+    "natural_surface": "478454a1c5fb5b15e0c281ae93a63aa058bf8e26",
+    "reception_authority": "7ddd4b62a5a46bf55bb97063d58801228849dd68",
+    "relation_authority": "d622874a8ac2c9686a2e716c55c5b7816b46efa8",
+    "matcher": "9d7a82fc746e7827b1893228d6de128d669af975",
+    "hard_gate": "b5dadd0e100adddb016dcf5a08dc0afefe477d06",
+    "fixture": "56e4d96f8559e2411305b1dac83b5932df88d1a8",
+    "p1_test": "9712f44f7faf3d00b4f447fd3877a11c218740bd",
+    "p2_test": "55ca582d5e9d1600db2c27d80d6a623247aae4de"
+  },
+  "resource_boundary": {
+    "grammatical_cluster_size_max": 13,
+    "visible_clauses_per_grammatical_sentence_max": 2,
+    "grammatical_complexity_load_max": 4,
+    "repeated_joiner_per_group_max": 2,
+    "realization_units_per_group_max": 4,
+    "visible_source_anchor_max": 1
+  },
+  "privacy": {
+    "raw_input_or_body_exported": false,
+    "quote_or_identifying_paraphrase_exported": false,
+    "individual_owner_range_focus_or_act_mapping_exported": false,
+    "parsed_span_or_binding_detail_exported": false,
+    "unsalted_body_digest_exported": false,
+    "body_full_product_read_run": false,
+    "runtime_connected": false,
+    "formal_or_production_eligible": false
+  },
+  "next_authority_candidate": {
+    "authority": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY",
+    "separate_approval_required": true,
+    "automatic_progression": false
+  },
+  "decision": "DESIGN_FROZEN_RED_ONLY_STOP_BEFORE_IMPLEMENTATION"
+}
