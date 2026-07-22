@@ -12812,3 +12812,64 @@ STOP. G1 / G2が両方成立していないため、`P3_PRODUCT_SURFACE_B6_ACTUA
 `NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_NONCONFORMANCE_RECOVERY_ROUTE_DECISION_READ_ONLY`
 
 これはrecovery routeのread-only decisionだけを候補化する。standalone receiptのbackfill、late review、new initial run、batch差替え、B6 remediation、source / test変更、formal closure、Cycle acceptance、Cycle 002を自動承認しない。Cycle 001は`NOT_ACCEPTED`のままである。
+
+## 2026-07-23 NLS v3 Step 11 Cycle 001 process nonconformance recovery route decision read-only current authority
+
+この節が後発current authorityである。既存のaudit結果とcurrent authorityをimmutable historyとして保持し、承認されたrecovery-route decisionのbody-free結果だけを追記する。
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_NONCONFORMANCE_RECOVERY_ROUTE_DECISION_READ_ONLY`
+- Cocolon entry: `c5d5fdc76f9e18e1c09d296a72b29260ead903a8`
+- Cocolon evidence head before this append: `0df174c0ff9960266e70754631c650941e0c424e`
+- mashos-api start / result: `c9739a0e2de5632d08607636656ada2f712c62b9`
+- mashos-api changed path: exact0
+- state: `R5_FRESH_CANONICAL_RECOVERY_EPOCH_SELECTED / PARENT_DESIGN_ADDENDUM_REQUIRED / AUTHORITY_STOP`
+- NLS v3 method STOP: false
+- Cycle 001 accepted: false
+- automatic progression: false
+
+Confirmed facts:
+
+- predecessor G1は`NOT_PROVED`、G2は`FAILED`であり、historical initial sequenceはbackfillできない。
+- current batch001はvalid/frozenだが、既にoutput/correction lineageに使用済みであり、未実行のnew initialへ再ラベルしない。
+- current rc0031/B6をcanonical corrective laneとして継続するentry条件は成立しない。
+- Detailed Design §22.5のmethod STOP条件が成立した証拠はない。
+- current Detailed Design / planは、このspecific process nonconformanceのrecovery epoch semanticsを定義していない。
+
+Route decision:
+
+- R0 historical backfill: `REJECTED`
+- R1 current rc0031/B6 canonical continuation: `REJECTED`
+- R2 current batch/current RC new-initial relabel: `REJECTED`
+- R3 silent batch replacement under existing plan: `REJECTED`
+- R4 NLS v3 method STOP: `NOT_TRIGGERED`
+- R5 fresh canonical recovery epoch by parent-design addendum: `SELECTED`
+
+Selected boundary:
+
+- 現行Cycle 001 attempt、batch001、RC、Product Read、change lineageをnonconforming development historyとして保持する。
+- historical attemptへcanonical initial-sequence acceptance creditを付けない。
+- recovery epochはold batchを上書きせず、別identityのfresh exact100を用いる。
+- initial run前にcurrent Step 0–10 §22.1 receipt chainと全STOP=falseを確定し、Step 4–10を過去へbackfillしない。
+- future orderは`formal initial run lock -> same exact100 case-level 12-axis full read -> first text-affecting correction`とする。
+- accepted parent-design addendumが成立するまで、batch作成、test、run、review、correction、B6へ進まない。
+
+Inference:
+
+- current sourceはdevelopment predecessorとして再利用可能な可能性があるが、再利用範囲はfuture source closure / receiptで証明する。可能性をcompletionへ読み替えない。
+
+Karen opinion:
+
+- 失敗した履歴を消さず、新しい100件に正しい順序で向き直るrouteがCocolonに最も誠実である。現行実装を無条件に捨てず、無条件にも正当化しない。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CanonicalPrerequisiteAndInitialProcessNonconformanceRecoveryRouteDecision_ReadOnly_Addendum_20260723.md` @ blob `fc7905fe2ea7f73e9af2df59b799f8a85580aa05`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CanonicalPrerequisiteAndInitialProcessNonconformanceRecoveryRouteDecision_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `4090f57332d01523b8f15d413b85d37a07fc93c4`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CanonicalPrerequisiteAndInitialProcessNonconformanceRecoveryRouteDecision_ReadOnly_Handoff_20260723.md` @ blob `cd6d27720571143db2b22a090e8cfd3bde5f297d`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `bcf5f7313bfa7edd69b05720be9d0e44c7d5d4d1`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_PROCESS_NONCONFORMANCE_CANONICAL_RECOVERY_EPOCH_PARENT_DESIGN_ADDENDUM_READ_ONLY`
+
+この候補はrecovery epochのidentity、state machine、fresh batch境界、receipt / sequence ledger、gate順序、STOP、future authority分割をparent-design addendumとして設計するだけである。source/test/sample/manifest変更、batch生成、test実行、run、Product Read、correction、B6、formal closure、Cycle acceptanceを自動承認しない。Cycle 001は`NOT_ACCEPTED`のままである。
