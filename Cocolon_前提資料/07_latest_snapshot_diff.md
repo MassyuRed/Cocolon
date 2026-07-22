@@ -12766,3 +12766,49 @@ G1 / G2成立後にだけ、次をqueued B6 authorityへ戻す。
 `P3_PRODUCT_SURFACE_B6_ACTUAL_OUTPUT_FAILURE_LOCALIZATION_AND_REMEDIATION_DESIGN_READ_ONLY`
 
 STOP. Cycle 001 remains `NOT_ACCEPTED`. Current authority STOPをNLS v3 method STOPへ自動昇格せず、次authorityは`SEPARATE_APPROVAL_REQUIRED`である。
+
+## 2026-07-23 NLS v3 Step 11 Cycle 001 canonical prerequisite / initial process evidence audit read-only current authority
+
+この節が後発current authorityである。既存節をimmutable historyとして保持し、承認されたread-only auditのbody-free確定結果だけを追記する。
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_EVIDENCE_AUDIT_READ_ONLY`
+- Cocolon audit entry: `4e2435897d2739fb205dbc0c46523e611d929d3b`
+- Cocolon evidence head before this append: `468e8b23c8e586006018c9ff5316a2259bafaf8e`
+- mashos-api start / result: `c9739a0e2de5632d08607636656ada2f712c62b9`
+- mashos-api changed path: exact0
+- state: `G1_NOT_PROVED / G2_FAILED / AUTHORITY_STOP`
+- Cycle 001 accepted: false
+- automatic progression: false
+
+Confirmed facts:
+
+- G1はStep 0–3 `PROVED`、Step 4–10 `NOT_PROVED`、overall `NOT_PROVED`である。
+- Step 4–10には実source / named testsが存在するが、Detailed Design §22.1のowner、strict contract、positive、independent negative、case/artifact receipt、parent/source hash、completion、next authority、各Step STOP=falseを一組にしたstandalone completion receipt chainは確認できない。
+- batch001 provenanceはvalid exact100、App-Reachable 100 / 100、duplicate / novelty、coverage、privacy、expected-answer cue 0、pre-output freeze、post-freeze replacement 0について`PROVED`である。
+- rc0010 machine exact100は`PROVED`だが、`formal_batch001_initial_run_locked=false`、`step10_smoke_only=true`、`local_reviewed_count=0`、case review `not_reviewed x100`である。
+- `INITIAL_RUN_LOCKED=FAILED`、`INITIAL_EXACT100_FULL_READ=FAILED`、`SEQUENCE_PROOF=FAILED`のため、G2 overallは`FAILED`である。
+- rc0026 aggregate Product Readとcurrent B6 exact10 / exact8は、initial exact100 case-level 12-axis review rowsまたはinitial sequence proofではない。
+- test実行、exact100 rerun、new Product Read、source / test / fixture / sample / manifest変更は0である。
+
+Inference:
+
+- Step 4–10のsource / test存在は実装の存在を支持するが、canonical completionを証明しない。Git commit順はartifactのGitHub materialization順だけを示し、local execution時刻を補完しない。
+
+Karen opinion:
+
+- late lock / late reviewで過去の順序を作るべきではない。B6へ進む前に、Mash様の別承認でparent-design準拠のrecovery routeを選ぶ必要がある。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CanonicalPrerequisiteAndInitialProcessEvidenceAudit_ReadOnly_Addendum_20260723.md` @ blob `44862831943034d4c07327b5c668c2b5c3406f5f`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CanonicalPrerequisiteAndInitialProcessEvidenceAudit_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `b247f6188373a6ece460593cc7da06dc272f28bb`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CanonicalPrerequisiteAndInitialProcessEvidenceAudit_ReadOnly_Handoff_20260723.md` @ blob `30e9b1f31f11f3396d56e2996ac5c2f8168fd482`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `d7752df2afc99231fef94a29980cd0d6fceb7dc2`
+
+STOP. G1 / G2が両方成立していないため、`P3_PRODUCT_SURFACE_B6_ACTUAL_OUTPUT_FAILURE_LOCALIZATION_AND_REMEDIATION_DESIGN_READ_ONLY`はqueued authorityへ戻さない。
+
+次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_CANONICAL_PREREQUISITE_AND_INITIAL_PROCESS_NONCONFORMANCE_RECOVERY_ROUTE_DECISION_READ_ONLY`
+
+これはrecovery routeのread-only decisionだけを候補化する。standalone receiptのbackfill、late review、new initial run、batch差替え、B6 remediation、source / test変更、formal closure、Cycle acceptance、Cycle 002を自動承認しない。Cycle 001は`NOT_ACCEPTED`のままである。
