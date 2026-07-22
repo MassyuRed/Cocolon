@@ -1,0 +1,111 @@
+{
+  "schema_version": "nls_v3_step11_rc0031_p3_b6_owner_role_typed_implementation_modifier_locus_capacity_stop_receipt.v1",
+  "revision_date": "2026-07-22",
+  "authority": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "status": "STOP_FROZEN_ORACLE_MODIFIER_LOCUS_CAPACITY_20_LT_22",
+  "body_free": true,
+  "cycle_001_accepted": false,
+  "implementation_applied": false,
+  "green_verified": false,
+  "automatic_progression": false,
+  "source_pins": {
+    "cocolon_start_commit": "b8eb91ef5b6e68c747bae7ccb0de54177bc4ab1b",
+    "mashos_api_start_commit": "b139daae89f2f927ec146fad76162369f7dba99c",
+    "mashos_api_result_commit": "b139daae89f2f927ec146fad76162369f7dba99c",
+    "mashos_api_write_count": 0
+  },
+  "predecessor": {
+    "authority": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_DESIGN_FREEZE_RED_ONLY",
+    "design_commit": "b139daae89f2f927ec146fad76162369f7dba99c",
+    "intentional_red_count": 2
+  },
+  "feasibility": {
+    "context_count": 10,
+    "unique_case_count": 8,
+    "proposition_binding_count": 12,
+    "semantic_atom_count": 38,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "required_construction_modifier_count": 22,
+    "required_modifier_target_count": 22,
+    "finite_owner_occurrence_modifier_capacity": 20,
+    "capacity_deficit": 2,
+    "deficit_binding_count": 2,
+    "one_fragment_per_finite_owner_occurrence": true,
+    "green_possible_in_current_window": false,
+    "stop_cause": "FROZEN_BODY_PARSER_MODIFIER_LOCUS_CAPACITY_20_LT_REQUIRED_22"
+  },
+  "forbidden_workarounds": {
+    "standalone_construction_role_matches_expected_modifier_role": false,
+    "duplicate_relation_preserves_atom_exact38": false,
+    "endpoint_reassignment_preserves_same_owner_and_relation_authority": false,
+    "chained_fragment_parser_change_is_mechanical_test_update": false,
+    "expected_role_change_allowed": false
+  },
+  "effective_window": {
+    "design_surface_append_byte_max": 48000,
+    "inherited_surface_prefix_bytes": 528932,
+    "inherited_total_append_byte_max": 20000,
+    "accepted_existing_tail_bytes": 8910,
+    "effective_new_append_byte_max": 11090,
+    "p3_test_mechanical_flag_only": true
+  },
+  "restored_repository_state": {
+    "retained_changed_path_count": 0,
+    "natural_surface": {
+      "utf8_bytes": 537842,
+      "sha256": "18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4",
+      "git_blob_sha1": "478454a1c5fb5b15e0c281ae93a63aa058bf8e26"
+    },
+    "p3_test": {
+      "utf8_bytes": 344556,
+      "sha256": "8c9113c991da379e47c4beb496e86b7c25b48b29ab944908eb261ed98768b0c8",
+      "git_blob_sha1": "3e2dd6c2a0b2e80483f5a552848a4b8672c7f7d0"
+    },
+    "implementation_present_flag": false,
+    "surface_append_marker_present": false
+  },
+  "preserved_results": {
+    "new_design_exact4": "2 PASS / 2 intentional RED / 0 unexpected",
+    "inherited_b6_exact6": "4 PASS / 2 same intentional RED / 0 unexpected",
+    "b5_exact6": "6 PASS / 0 failure",
+    "owner_range_reception_seam_exact4": "4 PASS / 0 failure",
+    "full_exact48_run": false,
+    "closed_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ]
+  },
+  "canonical_scope": {
+    "service_python_path_count": 547,
+    "service_python_path_list_sha256": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "repository_frozen_material_path_count": 1531,
+    "repository_frozen_material_sha256": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "active_rc0031_path_count": 6,
+    "active_rc0031_path_list_sha256": "5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c"
+  },
+  "privacy": {
+    "raw_input_or_body_exported": false,
+    "quote_or_identifying_paraphrase_exported": false,
+    "individual_owner_relation_focus_or_act_mapping_exported": false,
+    "parsed_span_or_binding_detail_exported": false,
+    "unsalted_body_digest_exported": false,
+    "body_full_product_read_run": false,
+    "runtime_connected": false,
+    "formal_or_production_eligible": false
+  },
+  "next_boundary": {
+    "next_authority_selected": false,
+    "separate_approval_required": true,
+    "design_freeze_red_only_required": true,
+    "candidate_options": [
+      "DETERMINISTIC_CHAINED_CONSTRUCTION_MODIFIERS_AT_ONE_EXACT_OWNER_LOCUS",
+      "TYPED_STANDALONE_LOCUS_FOR_SURPLUS_SAME_OWNER_CONSTRUCTION"
+    ]
+  },
+  "decision": "STOP_WITHOUT_IMPLEMENTATION_PRESERVE_TWO_B6_REDS_AND_REQUEST_SEPARATE_DESIGN_CORRECTION"
+}
