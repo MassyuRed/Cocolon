@@ -726,8 +726,8 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `NOT_PROVED_STOP` | audit receipt blob `b247f6188373a6ece460593cc7da06dc272f28bb`; route receipt blob `4090f57332d01523b8f15d413b85d37a07fc93c4`; R5 fresh recovery epoch selected | parent-design recovery-epoch addendum only; historical completion remains unbackfilled |
-| G2 batch / initial process | `FAILED_STOP` | batch provenance `PROVED`; required historical sequence `FAILED`; route receipt blob `4090f57332d01523b8f15d413b85d37a07fc93c4`; R5 fresh recovery epoch selected | parent-design recovery-epoch addendum only; no relabel, overwrite, late lock or late review |
+| G1 Step 0–10 readiness | `NOT_PROVED_STOP` | parent addendum receipt blob `bdfbd559535db06ae4af35fe1bb58716d6566126`; Recovery Epoch 001 `DEFINED_NOT_STARTED`; P1 prerequisites `NOT_STARTED` | P1 source baseline + Step 0–10 completion receipt generation/verification only |
+| G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P0 complete; fresh batch `RESERVED_NOT_CREATED`; P1–P4 `NOT_STARTED` | complete P1 first; do not create batch/run/review or backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
 | G5 B6 implementation | `BLOCKED_BY_G4` | none | do not start |
