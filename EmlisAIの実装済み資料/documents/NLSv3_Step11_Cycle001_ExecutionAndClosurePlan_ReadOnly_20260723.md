@@ -726,8 +726,8 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `NOT_PROVED_STOP` | parent addendum receipt blob `bdfbd559535db06ae4af35fe1bb58716d6566126`; Recovery Epoch 001 `DEFINED_NOT_STARTED`; P1 prerequisites `NOT_STARTED` | P1 source baseline + Step 0–10 completion receipt generation/verification only |
-| G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P0 complete; fresh batch `RESERVED_NOT_CREATED`; P1–P4 `NOT_STARTED` | complete P1 first; do not create batch/run/review or backfill |
+| G1 Step 0–10 readiness | `P1_FAILED_STOP` | P1 receipt blob `965f6b9a9467769e24508340c1c59aafa4f40797`; Step 4 STOP true; Step 5 independent-negative FAIL; Step 10 dependency closure FAIL; source baseline `UNLOCKED` | approved read-only remediation design required; do not lock baseline |
+| G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P1 failed; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | resolve P1 prerequisite nonconformance first; do not create batch/run/review or backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
 | G5 B6 implementation | `BLOCKED_BY_G4` | none | do not start |
@@ -736,6 +736,19 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | G8 cumulative machine rerun | `BLOCKED_BY_G7` | historical RC only | do not run |
 | G9 mandatory Product QA | `BLOCKED_BY_G8` | current all100 not run / read | do not accept subset |
 | G10 Cycle acceptance | `BLOCKED_BY_G1_G2_G8_G9` | unresolved prerequisites and MAJOR | do not accept |
+
+### 12.1 2026-07-23 Recovery Epoch 001 P1 mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY`
+- result receipt: blob `965f6b9a9467769e24508340c1c59aafa4f40797`
+- result: `P1_FAILED_STOP / SOURCE_BASELINE_UNL0CKED / STEP0_10_NOT_PROVED`
+- mashos-api result: `c9739a0e2de5632d08607636656ada2f712c62b9` / changed path exact0
+- sequence event 1 / 2: not created
+- P2: not authorized
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY`
+
+This dated entry is later than the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
 
 ## 13. next separate authority
 
