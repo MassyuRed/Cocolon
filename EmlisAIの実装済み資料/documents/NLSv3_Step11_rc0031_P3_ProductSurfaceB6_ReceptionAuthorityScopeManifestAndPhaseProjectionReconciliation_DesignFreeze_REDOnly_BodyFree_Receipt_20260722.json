@@ -1,0 +1,155 @@
+{
+  "schema_version": "nls_v3_step11_rc0031_p3_b6_scope_projection_reconciliation_design_freeze_red_only_receipt.v1",
+  "revision_date": "2026-07-22",
+  "authority": "P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_DESIGN_FREEZE_RED_ONLY",
+  "status": "DESIGN_FROZEN_RED_ONLY",
+  "body_free": true,
+  "cycle_001_accepted": false,
+  "migration_implemented": false,
+  "green_authorized": false,
+  "start": {
+    "cocolon": "abc2cb5100112dd726b93a299c9235d95202d750",
+    "mashos_api": "c94ce5f436cb53a9d6bd1c7e5c6870f008a7fa14"
+  },
+  "result": {
+    "mashos_api": "9435ca9360a9ee3125fddaa543e0d4bc6aadbcb9",
+    "changed_paths": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "changed_path_count": 1,
+    "service_or_runtime_changed_path_count": 0,
+    "test_file": {
+      "bytes": 254440,
+      "sha256": "2d1f83040aea0a12076a9630d39ee6a8b967504237210447a96ac3930ce893a7",
+      "git_blob_sha1": "d54372ed30c269c183e04dbe340377c21efbaf8a"
+    }
+  },
+  "canonical_physical_scope": {
+    "service_python_path_count": 547,
+    "service_python_path_list_sha256": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "repository_frozen_material_path_count": 1531,
+    "repository_frozen_material_sha256": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "active_rc0031_path_count": 6,
+    "active_rc0031_path_list_sha256": "5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c",
+    "active_rc0031_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_rc0031_experiment_surface_catalog_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py",
+      "ai/tests/fixtures/emlis_nls_v3/cycle_001/rc0031_representative8_body_free.json",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_mutation.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_proposition_surface_red.py"
+    ]
+  },
+  "canonical_correction": {
+    "superseded_repository_hash": "084889e2d155fa3583bdf91f5f31d33feef4bb68c3865afca0fe7153f287b6ff",
+    "canonical_repository_hash": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "historical_receipt_modified": false
+  },
+  "phase_projection": {
+    "p2_active_count": 4,
+    "p2_active_changed": false,
+    "p3_additive_path_count": 2,
+    "p3_additive_paths": [
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+      "ai/services/ai_inference/emlis_ai_step11_rc0031_reception_focus_authority_v3.py"
+    ],
+    "p3_active_count": 6,
+    "relation": "P3_ACTIVE_EXACT6_EQUALS_P2_ACTIVE_EXACT4_UNION_P3_ONLY_EXACT2"
+  },
+  "future_change_window": {
+    "scope_assignment_names": [
+      "_SERVICE_PY_PATH_COUNT",
+      "_SERVICE_PY_PATH_LIST_SHA256",
+      "_REPOSITORY_PY_FROZEN_FILE_COUNT",
+      "_REPOSITORY_PY_FROZEN_MATERIAL_SHA256",
+      "_EXPECTED_P3_ACTIVE"
+    ],
+    "assertion_owners": [
+      "test_rc0031_p3_predecessor_phase_projection_is_exact",
+      "test_rc0031_p3_b5_freeze_scope_and_predecessor_behavior_are_exact",
+      "TestRc0031P3B6DesignFreezeRedOnly.test_rc0031_p3_b6_freeze_scope_and_predecessor_behavior_are_exact"
+    ],
+    "mechanical_commitment_only": true,
+    "masked_predecessor_sha256": "725fcfbe842d4f292c3c6fad69a3a1be2ead0186b683997fcebcc399125e3726",
+    "masked_design_sha256": "a0a034fbccf61c1fcd8baa6fc234afda68e74ebdc952821022ad669099c49e70",
+    "exact_ast_shape_required": true
+  },
+  "red_only_tests": {
+    "test_count": 4,
+    "passed": 2,
+    "intentional_red": 2,
+    "unexpected": 0,
+    "red_codes": [
+      "SCOPE_MANIFEST_RECONCILIATION_NOT_PROVED",
+      "PHASE_PROJECTION_RECONCILIATION_NOT_PROVED"
+    ],
+    "unconditional_failure_used": false,
+    "future_green_simulation": {
+      "passed": true,
+      "pass_count": 6,
+      "failure_count": 0,
+      "committed": false,
+      "mechanical_commitments": {
+        "b5_prefix": {
+          "bytes": 162734,
+          "sha256": "f3ffa433806b0453feef9ccc7b336d8555dda1ca87ba71d28af700185e203b4f"
+        },
+        "b6_prefix": {
+          "bytes": 203280,
+          "sha256": "5b7bc4eba199ad5a2ec864fd8e36d2725c02e250ba2ae9a03aab12380a70cd74"
+        },
+        "b6_red_only_prefix": {
+          "bytes": 225182,
+          "sha256": "cd400abfadce39b08a2e19b4ec5b808bd98d51a06954eb5486c24efc0367220e"
+        },
+        "reconciliation_prefix": {
+          "bytes": 235683,
+          "sha256": "77b1360e53f9781079afc21671420ca4f765271701647a9958776a0cd8eaef23",
+          "git_blob_sha1": "864116ec879d5016e455f01a3aa350d7cfa4d5b0"
+        }
+      }
+    }
+  },
+  "existing_results": {
+    "b5_exact6": "6 PASS / 0 failure",
+    "b6_exact6": "4 PASS / 2 intentional RED / 0 unexpected",
+    "b6_intentional_red_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ],
+    "legacy_scope_phase_red_codes": [
+      "STEP11_RC0031_P3_OUTSIDE_APPEND_SCOPE_DRIFT",
+      "STEP11_RC0031_P3_PREDECESSOR_PHASE_PROJECTION_INVALID"
+    ],
+    "top_level_test_count": 30,
+    "total_test_node_count": 40
+  },
+  "verification": {
+    "pytest_available": false,
+    "runner": "standard_library_direct_function_harness",
+    "source_compile": "PASS",
+    "diff_check": "PASS"
+  },
+  "immutable_git_blobs": {
+    "catalog": "94e87e7bdd58359dd3790e30fcd765151ad792d9",
+    "lexical": "49a47629b3dcd82ed6326ba815c9e044f65c0cf1",
+    "natural_surface": "ab10c70629edc57ab971760816fc106747f3de34",
+    "matcher": "9d7a82fc746e7827b1893228d6de128d669af975",
+    "hard_gate": "b5dadd0e100adddb016dcf5a08dc0afefe477d06",
+    "relation_authority": "d622874a8ac2c9686a2e716c55c5b7816b46efa8",
+    "reception_authority": "7ddd4b62a5a46bf55bb97063d58801228849dd68",
+    "fixture": "56e4d96f8559e2411305b1dac83b5932df88d1a8",
+    "p1_test": "9712f44f7faf3d00b4f447fd3877a11c218740bd",
+    "p2_test": "55ca582d5e9d1600db2c27d80d6a623247aae4de"
+  },
+  "privacy": {
+    "body_or_quote_exported": false,
+    "parsed_span_or_binding_detail_exported": false,
+    "unsalted_body_digest_exported": false,
+    "runtime_connected": false,
+    "formal_or_production_eligible": false
+  },
+  "next_authority_candidate": "P3_PRODUCT_SURFACE_B6_RECEPTION_AUTHORITY_SCOPE_MANIFEST_AND_PHASE_PROJECTION_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "owner_head_reception_injection_design_requires_later_separate_approval": true,
+  "automatic_progression": false
+}
