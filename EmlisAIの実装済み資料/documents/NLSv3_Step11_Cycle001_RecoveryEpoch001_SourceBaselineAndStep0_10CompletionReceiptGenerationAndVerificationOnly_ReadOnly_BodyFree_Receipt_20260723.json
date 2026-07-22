@@ -1,0 +1,120 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.p1_source_prerequisite_closure.body_free.v1",
+  "created_at_jst": "2026-07-23",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY",
+  "status": "P1_FAILED_SOURCE_BASELINE_UNLOCKED_STEP0_10_NOT_PROVED_AUTHORITY_STOP",
+  "source_pins": {
+    "cocolon_start_commit": "62b24158b125468df16a928e4c5eb0f0aa8af95c",
+    "mashos_api_start_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_result_commit": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_candidate_tree": "3447c3e74b6347421822a466a7cb92958cb7e0f3",
+    "entry_drift_detected": false,
+    "mashos_api_change_count": 0
+  },
+  "normative_identity": {
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "parent_addendum_blob": "bdfbd559535db06ae4af35fe1bb58716d6566126",
+    "entry_plan_blob": "f42366c777037500fce4d96136c0cdb4581ac2e0",
+    "entry_current_authority_blob": "e73830a8c6cc745299e211749057727ee20bae9b"
+  },
+  "identity_model": {
+    "logical_cycle_id": "NLS_V3_CYCLE_001",
+    "cycle_status": "NOT_ACCEPTED",
+    "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_001",
+    "recovery_epoch_state": "DEFINED_NOT_STARTED",
+    "reserved_fresh_batch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH001_BATCH_001",
+    "reserved_fresh_batch_state": "RESERVED_NOT_CREATED",
+    "source_baseline_state": "UNLOCKED",
+    "candidate_closure_promoted_to_baseline": false
+  },
+  "test_execution": {
+    "python_version": "3.12.13",
+    "pytest_version": "9.1.1",
+    "bytecode_write_disabled": true,
+    "pytest_cache_disabled": true,
+    "step_results": [
+      {"step": "0_1", "collected": 11, "passed": 11, "failed": 0},
+      {"step": "2", "collected": 13, "passed": 13, "failed": 0},
+      {"step": "3", "collected": 22, "passed": 22, "failed": 0},
+      {"step": "4", "collected": 17, "passed": 17, "failed": 0},
+      {"step": "5", "collected": 12, "passed": 11, "failed": 1},
+      {"step": "6", "collected": 4, "passed": 4, "failed": 0},
+      {"step": "7", "collected": 7, "passed": 7, "failed": 0},
+      {"step": "8", "collected": 8, "passed": 8, "failed": 0},
+      {"step": "9", "collected": 10, "passed": 10, "failed": 0},
+      {"step": "10", "collected": 16, "passed": 3, "failed": 12, "errors": 1}
+    ],
+    "total_collected": 120,
+    "total_passed": 106,
+    "total_failed": 13,
+    "total_errors": 1,
+    "failing_steps": [4, 5, 10],
+    "first_failing_named_test_step": 5,
+    "failing_test": "test_s5_new_modules_are_runtime_disconnected_and_do_not_read_fixture_cues",
+    "failure_class": "CURRENT_SOURCE_INDEPENDENT_NEGATIVE_GUARD_CONFLICT"
+  },
+  "step_verdicts": [
+    {"step": 0, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_RECEIPT_REBINDING_MISSING"},
+    {"step": 1, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_PARENT_SOURCE_BINDING_MISSING"},
+    {"step": 2, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_STEP0_1_PARENT_CHAIN_NOT_PROVED"},
+    {"step": 3, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_STEP0_2_PARENT_CHAIN_NOT_PROVED"},
+    {"step": 4, "verdict": "FAILED", "all_stop_conditions_false": false, "gap": "REFINED_SOURCE_PARTITION_OWNER_UNAVAILABLE"},
+    {"step": 5, "verdict": "FAILED", "all_stop_conditions_false": true, "gap": "INDEPENDENT_NEGATIVE_TEST_FAILED"},
+    {"step": 6, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_STANDALONE_COMPLETION_RECEIPT_MISSING"},
+    {"step": 7, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_STANDALONE_COMPLETION_RECEIPT_MISSING"},
+    {"step": 8, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_STANDALONE_COMPLETION_RECEIPT_MISSING"},
+    {"step": 9, "verdict": "NOT_PROVED", "all_stop_conditions_false": true, "gap": "CURRENT_STANDALONE_COMPLETION_RECEIPT_MISSING"},
+    {"step": 10, "verdict": "FAILED", "all_stop_conditions_false": false, "gap": "CURRENT_DEPENDENCY_SOURCE_BYTES_AND_CLOSURE_DRIFT"}
+  ],
+  "primary_failures": [
+    {
+      "step": 4,
+      "condition": "DETAILED_DESIGN_STEP4_ORIGINAL_SUPPLEMENTAL_SOURCE_DISTINCTION_STOP_TRUE",
+      "source_blob": "bc3e574d892abfcb00d7d2766a5a11f2f62b72f5"
+    },
+    {
+      "step": 5,
+      "condition": "NAMED_INDEPENDENT_NEGATIVE_TEST_FAILED",
+      "test_blob": "fb91c1f6067f75e5aa36d28338711f1c70434e62",
+      "conflicting_source_blob": "d622874a8ac2c9686a2e716c55c5b7816b46efa8"
+    },
+    {
+      "step": 10,
+      "condition": "NAMED_SUITE_FAILED_CURRENT_DEPENDENCY_MANIFEST_DRIFT",
+      "frozen_closure_sha256": "2b4cd6cb5ea0f0d69ae7de31930dd6833ba21fce8eb7262f579cad514f14a8e9",
+      "current_closure_sha256": "d7958aa26a10d598f57f7544b51133edc0ea05c2f45e6767b9c9bdb4fda1d1cd"
+    }
+  ],
+  "sequence_ledger": {
+    "event0_parent_addendum_frozen": true,
+    "event1_source_baseline_locked": false,
+    "event2_step0_10_prerequisites_proved": false,
+    "new_event_count": 0
+  },
+  "completion_receipts": {
+    "successful_current_step_receipt_count": 0,
+    "partial_success_receipts_emitted": false,
+    "historical_receipts_backdated": false
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "source_test_fixture_sample_manifest_runtime_change_count": 0,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "private_body_generation_count": 0,
+    "b6_work_count": 0,
+    "api_db_rn_public_shared_change_count": 0
+  },
+  "downstream_state": {
+    "p2_authorized": false,
+    "fresh_batch_materialized": false,
+    "current_b6_stop_preserved": true,
+    "cycle001_status": "NOT_ACCEPTED",
+    "cycle002_authorized": false,
+    "automatic_progression": false
+  },
+  "decision": "REJECT_SOURCE_BASELINE_LOCK_AND_STOP_P1",
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY"
+}
