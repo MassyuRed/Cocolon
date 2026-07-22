@@ -1,0 +1,193 @@
+{
+  "schema_version": "nls_v3_step11_rc0031_p3_b6_owner_head_range_reception_injection_implementation_and_green_only_receipt.v1",
+  "revision_date": "2026-07-22",
+  "authority": "P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_IMPLEMENTATION_AND_GREEN_ONLY",
+  "status": "IMPLEMENTED_AND_GREEN",
+  "body_free": true,
+  "cycle_001_accepted": false,
+  "implementation_completed_in_worktree": true,
+  "green_verified": true,
+  "automatic_progression": false,
+  "source_pins": {
+    "cocolon_start": "ceee25780049c71d493d7d37b70ca745cef13317",
+    "mashos_api_start": "ffaf1fd8c97e677d82c7a7bb1c083f6864cd6401",
+    "mashos_api_result": "8d6e5d1137ebdd32a07907aa2a233d9c52362e5a"
+  },
+  "predecessor": {
+    "authority": "P3_PRODUCT_SURFACE_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_AND_RECEPTION_INJECTION_SEAM_DESIGN_FREEZE_RED_ONLY",
+    "mashos_api_commit": "ffaf1fd8c97e677d82c7a7bb1c083f6864cd6401",
+    "design_test_git_blob_sha1": "3494d2625378c31222a714e0382e471f2e1e88e1",
+    "design_test_sha256": "2d5afa7cbccaa381d886c7bec3f0f204998ff8ee6970b497ea7de4e7a0dd7f31",
+    "design_test_bytes": 291115,
+    "new_causal_red_count": 2
+  },
+  "repository_scope": {
+    "changed_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py"
+    ],
+    "changed_path_count": 3,
+    "unexpected_changed_path_count": 0,
+    "new_path_count": 0,
+    "lexical_predecessor": {
+      "bytes": 133249,
+      "sha256": "3ea0f94b350dd1243c50783a1c424aff14df5c7694d1aeb4899a80cb5b4c7b71",
+      "git_blob_sha1": "49a47629b3dcd82ed6326ba815c9e044f65c0cf1"
+    },
+    "lexical_result": {
+      "bytes": 153831,
+      "sha256": "5efc83126afc7edec179b7e623d35bd65ae90ed9e2965c3b8742acc4ffc3dc34",
+      "git_blob_sha1": "f0fe1fe6c376a9a80a16b8a5b8679de97c13fa5d"
+    },
+    "natural_surface_predecessor": {
+      "bytes": 528932,
+      "sha256": "acaf74b4ff25b5e312a60b6741e08a7f802aa9202281a5272d32952a9d06509c",
+      "git_blob_sha1": "ab10c70629edc57ab971760816fc106747f3de34"
+    },
+    "natural_surface_result": {
+      "bytes": 537842,
+      "sha256": "18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4",
+      "git_blob_sha1": "478454a1c5fb5b15e0c281ae93a63aa058bf8e26"
+    },
+    "p3_test_predecessor": {
+      "bytes": 291115,
+      "sha256": "2d5afa7cbccaa381d886c7bec3f0f204998ff8ee6970b497ea7de4e7a0dd7f31",
+      "git_blob_sha1": "3494d2625378c31222a714e0382e471f2e1e88e1"
+    },
+    "p3_test_result": {
+      "bytes": 291114,
+      "sha256": "05ecc4e8be9407686818fc3743d3757ec6104bca8f126d6d609bf765a3c57b92",
+      "git_blob_sha1": "2a184e901c4e6202873a542520446833d668bbdc"
+    }
+  },
+  "owner_range_authority": {
+    "private": true,
+    "experimental_only": true,
+    "exported_in___all__": false,
+    "runtime_connected": false,
+    "binding_count": 24,
+    "exact_source_fragment_count": 24,
+    "short_whole_exact_source_count": 19,
+    "short_selection_basis": "whole_exact_source_fragment",
+    "long_typed_construction_range_count": 5,
+    "long_selection_basis": "grounded_syntactic_head_exact_source_range",
+    "long_range_scalar_counts_body_free": [
+      29,
+      22,
+      9,
+      24,
+      9
+    ],
+    "maximum_range_scalars": 32,
+    "range_over_max_count": 0,
+    "ellipsis_projection_count": 0,
+    "fixed_or_arbitrary_scalar_cut_count": 0,
+    "same_owner_required": true,
+    "same_nucleus_required": true,
+    "same_source_anchor_required": true,
+    "unique_exact_source_required": true,
+    "syntactic_boundary_required": true,
+    "raw_or_head_text_in_authority_material": false,
+    "quote_in_authority_material": false,
+    "unsalted_body_digest_in_authority_material": false,
+    "individual_owner_or_range_mapping_exported": false,
+    "tamper_validation_fail_closed": true
+  },
+  "reception_injection_seam": {
+    "private": true,
+    "experimental_only": true,
+    "exported_in___all__": false,
+    "runtime_connected": false,
+    "official_validator_called_before_consumption": true,
+    "authority_binding_count": 11,
+    "opportunity_bijection_join_count": 11,
+    "target_owner_behavioral_consumption_count": 11,
+    "visible_support_owner_behavioral_consumption_count": 11,
+    "effective_reception_act_behavioral_consumption_count": 11,
+    "product_rebuild_required_count": 6,
+    "product_rebuild_behavioral_consumption_count": 6,
+    "source_scope_preserved": true,
+    "source_opportunity_preserved": true,
+    "base_binding_preserved": true,
+    "inventory_provenance_preserved": true,
+    "surface_authority_rederived": false,
+    "authority_logic_duplicated": false,
+    "metadata_only_rewrite": false,
+    "public_builder_signature_changed": false,
+    "global_state_added": false,
+    "tamper_validation_fail_closed": true
+  },
+  "green_results": {
+    "owner_range": "PASS",
+    "reception_seam": "PASS",
+    "implementation_exact4": "4 PASS / 0 failure",
+    "legacy_reconciliation_active_scope_phase": "4 PASS / 0 failure",
+    "legacy_predecessor_boundary_superseded_by_authorized_append": "2 EXPECTED_NON_GREEN / 0 unexpected",
+    "replacement_bounded_append_boundary": "2 PASS / 0 failure",
+    "b5_exact6": "6 PASS / 0 failure",
+    "b6_exact6": "4 PASS / 2 intentional RED / 0 unexpected",
+    "resolved_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_GRAMMATICAL_HEAD_RANGE_AUTHORITY_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_RECEPTION_INJECTION_SEAM_NOT_PROVED"
+    ],
+    "remaining_inherited_b6_red_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ],
+    "unexpected_failure_count": 0
+  },
+  "verification": {
+    "runner": "standard_library_direct_function_harness",
+    "pytest_available": false,
+    "source_compile": "PASS",
+    "diff_check": "PASS",
+    "full_exact44_run": false,
+    "full_exact44_result": "NOT_RUN",
+    "github_status_count": 0,
+    "github_workflow_run_count": 0
+  },
+  "canonical_scope": {
+    "service_python_path_count": 547,
+    "service_python_path_list_sha256_expected": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "service_python_scope_result": "PASS",
+    "repository_frozen_material_path_count": 1531,
+    "repository_frozen_material_sha256": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "active_rc0031_path_count": 6,
+    "active_rc0031_path_list_sha256_expected": "5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c",
+    "active_rc0031_scope_result": "PASS"
+  },
+  "immutable_git_blobs_expected": {
+    "catalog": "94e87e7bdd58359dd3790e30fcd765151ad792d9",
+    "matcher": "9d7a82fc746e7827b1893228d6de128d669af975",
+    "hard_gate": "b5dadd0e100adddb016dcf5a08dc0afefe477d06",
+    "relation_authority": "d622874a8ac2c9686a2e716c55c5b7816b46efa8",
+    "reception_authority": "7ddd4b62a5a46bf55bb97063d58801228849dd68",
+    "fixture": "56e4d96f8559e2411305b1dac83b5932df88d1a8",
+    "p1_test": "9712f44f7faf3d00b4f447fd3877a11c218740bd",
+    "p2_test": "55ca582d5e9d1600db2c27d80d6a623247aae4de"
+  },
+  "immutable_git_blob_verification": "PASS",
+  "resource_boundary": {
+    "visible_clauses_per_grammatical_sentence_max": 2,
+    "grammatical_complexity_load_max": 4,
+    "repeated_joiner_per_group_max": 2,
+    "realization_units_per_group_max": 4,
+    "visible_source_anchor_max": 1,
+    "reception_owner_max": 4,
+    "result": "PASS"
+  },
+  "privacy": {
+    "body_or_quote_exported": false,
+    "parsed_span_or_binding_detail_exported": false,
+    "owner_or_range_mapping_exported": false,
+    "individual_focus_or_act_mapping_exported": false,
+    "unsalted_body_digest_exported": false,
+    "runtime_connected": false,
+    "formal_or_production_eligible": false
+  },
+  "next_authority_candidate": "UNSELECTED",
+  "next_authority_requires_separate_approval": true,
+  "owner_role_inflection_or_typed_recomposition_implementation_approved": false,
+  "decision": "IMPLEMENTED_AND_GREEN_STOP"
+}
