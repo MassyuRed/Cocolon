@@ -12676,3 +12676,50 @@ Latest body-free evidence:
 STOP. Next authority: `UNSELECTED / separate approval required`.
 
 Cycle 001は`NOT_ACCEPTED`のままである。Product body export / Product Read、P3 final inverse、Parser / Matcher / Hard Gate、P4、runtime、production dependency manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
+
+## 2026-07-23 rc0031 P3 B6 actual-output private Product Read / freeze rejection current authority
+
+この節が後発current authorityである。直前の`B6 chained-modifier locus multiplicity reconciliation Implementation and GREEN-only`をimmutable predecessorとして保持し、承認済みread-only Product Read checkpointだけを更新する。
+
+- approved authority: `P3_PRODUCT_SURFACE_B6_ACTUAL_OUTPUT_BODY_FULL_PRIVATE_PRODUCT_READ_AND_FREEZE_READ_ONLY`
+- Cocolon start: `792cd28fc28c34b0e4d7867c56f5786e04e2b5b5`
+- mashos-api start/result: `c9739a0e2de5632d08607636656ada2f712c62b9`
+- mashos-api changed path: exact0
+- state: `B6_ACTUAL_OUTPUT_PRODUCT_READ_STOP / B6_PRODUCT_SURFACE_FREEZE_REJECTED`
+- Cycle 001 accepted: false
+
+pin済みB6 private Product actual output exact10 / unique case exact8をbody-full privateで全件Product Readした。
+
+```text
+candidate severity:           PASS 0 / MINOR 2 / MAJOR 8 / BLOCKER 0
+unique-case maximum severity: PASS 0 / MINOR 2 / MAJOR 6 / BLOCKER 0
+former-MAJOR PASS-or-MINOR:   0 / 5 cases; 0 / 7 contexts
+controls not worse:           1 / 3
+new MAJOR controls:           1 / 3
+```
+
+formal denominatorは維持した。
+
+- context / unique case / binding: `10 / 8 / 12`
+- semantic atom / reuse / family: `38 / 1 / (22,13,1,2)`
+- owner grammatical-head: `24 = short19 + long5`
+- modifier / locus topology: `22 / 20 = 18x1 + 2x2`、depth2、unresolved0
+- Reception / rebuild-required: `11 / 6`
+- cluster / load / resource: `<=13 / <=4 / (2,4,2,4)`
+- service Python / repository frozen material / active rc0031 path: `547 / 1531 / 6`
+
+Product Readでは、主意味のdominance、relation / temporal readability、Reception specificity、owner-roleの文法接続、typed recompositionの説明密度、depthが複合してMAJORとなった。emotion昇格、unknown創作、self-denial事実化、question-needed ambiguityの虚偽補完はなく、BLOCKERは0である。
+
+raw input / bodyはin-memory reviewだけに使用した。private packetは作成・永続化せず、本文、引用、識別可能な言い換え、個別mapping、parsed span、digest、key、free-text noteをGitHubへ反映していない。
+
+Latest body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ActualOutput_ProductReadAndFreeze_ReadOnly_Addendum_20260723.md`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ActualOutput_ProductReadAndFreeze_ReadOnly_BodyFree_Receipt_20260723.json`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ActualOutput_ProductReadAndFreeze_ReadOnly_Handoff_20260723.md`
+
+STOP. `PRODUCTION_REMEDIATION_NOT_AUTHORIZED`、`P3_FINAL_INVERSE_NOT_AUTHORIZED`。approved exact24 / full exact52は`NOT_RUN / NOT_RUN`である。
+
+Next authority: `UNSELECTED / separate approval required`.
+
+Cycle 001は`NOT_ACCEPTED`のままである。remediation design / implementation、P3 final inverse、Parser / Matcher / Hard Gate、P4、runtime、production dependency manifest、E2以降、API / DB / RN / public / shared runtimeへ自動進行しない。
