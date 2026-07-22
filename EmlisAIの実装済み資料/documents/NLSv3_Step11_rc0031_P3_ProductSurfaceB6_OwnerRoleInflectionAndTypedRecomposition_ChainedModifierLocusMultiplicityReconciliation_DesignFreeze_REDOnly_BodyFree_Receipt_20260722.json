@@ -1,0 +1,169 @@
+{
+  "schema_version": "nls_v3_step11_rc0031_p3_b6_owner_role_typed_chained_modifier_locus_multiplicity_reconciliation_design_freeze_red_only_receipt.v1",
+  "revision_date": "2026-07-22",
+  "authority": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_RECONCILIATION_DESIGN_FREEZE_RED_ONLY",
+  "status": "DESIGN_FROZEN_RED_ONLY_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_RECONCILED",
+  "body_free": true,
+  "cycle_001_accepted": false,
+  "implementation_applied": false,
+  "automatic_progression": false,
+  "source_pins": {
+    "cocolon_start_commit": "84098a54a5d9a508fae576732b829f19f10a1c3c",
+    "mashos_api_start_commit": "b139daae89f2f927ec146fad76162369f7dba99c",
+    "mashos_api_design_result_commit": "f9ac14de0756e5bebe79b047bb8f031599612e80"
+  },
+  "selected_design": {
+    "choice": "DETERMINISTIC_CHAINED_CONSTRUCTION_MODIFIERS_AT_ACCEPTED_HEAD_OWNER_LOCUS",
+    "typed_standalone_selected": false,
+    "construction_standalone_allowed": false,
+    "head_only_locus_required": true,
+    "same_owner_same_nucleus_exact_source_required": true,
+    "source_graph_order_required": true,
+    "unique_decomposition_required": true,
+    "role": "construction_modifier"
+  },
+  "topology": {
+    "context_count": 10,
+    "unique_case_count": 8,
+    "binding_count": 12,
+    "accepted_head_count": 12,
+    "required_modifier_count": 22,
+    "modifier_target_count": 22,
+    "one_fragment_capacity": 20,
+    "two_fragment_capacity": 22,
+    "modifier_bearing_locus_count": 20,
+    "single_modifier_locus_count": 18,
+    "double_modifier_locus_count": 2,
+    "maximum_chain_depth": 2,
+    "deficit_binding_count": 2,
+    "assigned_modifier_count": 22,
+    "missing_head_count": 0,
+    "modifier_not_head_count": 0,
+    "unresolved_modifier_count": 0,
+    "alternate_finite_owner_locus_count": 3,
+    "within_candidate_head_signature_collision_count": 0,
+    "same_case_sibling_head_signature_collision_excess": 2,
+    "body_evidence_compared_per_candidate": true,
+    "body_claims_sibling_candidate_identity": false,
+    "source_order_preserved": true
+  },
+  "catalog_fragment_contract": {
+    "fragment_count": 13,
+    "unique_fragment_count": 13,
+    "ordered_pair_count": 169,
+    "pair_collision_count": 0,
+    "pair_equals_single_count": 0,
+    "prefix_collision_count": 0,
+    "chain_domain_per_owner_count": 183,
+    "catalog_changed": false
+  },
+  "owner_term_contract": {
+    "owner_count": 24,
+    "context_local_term_count": 4392,
+    "term_collision_count": 0,
+    "expected_locus_count": 20,
+    "expected_locus_ambiguity_count": 0
+  },
+  "synthetic_clause_contract": {
+    "finite_clause_count": 16,
+    "relation_or_semantic_link_clause_count": 14,
+    "explicit_unknown_clause_count": 2,
+    "raw_relation_link_literal_boundary_count": 19,
+    "decoded_relation_link_candidate_count": 14,
+    "decoded_total_candidate_count": 16,
+    "full_parser_atom_count": 38,
+    "recovered_modifier_count": 22,
+    "unparsed_count": 0,
+    "ambiguous_count": 0,
+    "semantic_mismatch_count": 0,
+    "exhaustive_literal_boundary_required": true,
+    "lazy_first_regex_allowed": false
+  },
+  "preserved_denominators": {
+    "semantic_atom_count": 38,
+    "family_counts": {
+      "construction": 22,
+      "relation": 13,
+      "semantic_link": 1,
+      "explicit_unknown": 2
+    },
+    "finite_head_count": 12,
+    "other_finite_count": 4,
+    "owner_grammatical_head_count": 24,
+    "owner_short_count": 19,
+    "owner_long_count": 5,
+    "catalog_owner_role_count": 8,
+    "catalog_owner_kind_count": 12,
+    "reception_count": 11,
+    "reception_rebuild_required_count": 6,
+    "verified_reuse_count": 1,
+    "cluster_max": 13,
+    "grammatical_load_max": 4,
+    "resource_tuple": [
+      2,
+      4,
+      2,
+      4
+    ]
+  },
+  "change_scope": {
+    "mashos_api_changed_path_count": 1,
+    "changed_path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+    "p3_test_eof_append_only": true,
+    "predecessor_byte_count": 344556,
+    "predecessor_sha256": "8c9113c991da379e47c4beb496e86b7c25b48b29ab944908eb261ed98768b0c8",
+    "predecessor_git_blob_sha1": "3e2dd6c2a0b2e80483f5a552848a4b8672c7f7d0",
+    "production_source_changed": false,
+    "future_surface_effective_append_byte_max": 11090,
+    "future_test_change_mechanical_flag_only": true
+  },
+  "test_commitment": {
+    "total_test_projection": 52,
+    "utf8_bytes": 408042,
+    "sha256": "d618700d54922c96792fe138ddb4ac4f4b0d55f37bb69f515b2e59aba8fb2397",
+    "git_blob_sha1": "26ed24616af731c506d8caafd3de9358cfae5d9b",
+    "design_masked_sha256": "55ba2f0d658b2c05e356bb0eaa72a4bc0adfbf404edd4491579ab56a4df8641c",
+    "design_exact4": {
+      "pass": 2,
+      "intentional_red": 2,
+      "unexpected": 0
+    },
+    "direct_regression_exact24": {
+      "pass": 18,
+      "intentional_red": 6,
+      "unexpected": 0
+    },
+    "full_exact52": "NOT_RUN",
+    "inherited_red_codes": [
+      "STEP11_RC0031_P3_B6_OWNER_ROLE_INFLECTION_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_TYPED_RECOMPOSITION_NOT_PROVED"
+    ],
+    "inherited_red_occurrence_count_each": 2,
+    "intentional_design_red_codes": [
+      "STEP11_RC0031_P3_B6_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_NOT_PROVED",
+      "STEP11_RC0031_P3_B6_CHAINED_MODIFIER_BODY_RECOVERY_NOT_PROVED"
+    ],
+    "intentional_design_red_occurrence_count_each": 1
+  },
+  "canonical_scope": {
+    "service_python_path_count": 547,
+    "service_python_path_list_sha256": "f778dab004d3482f80143c39e78388a968efdbc956a86e8ef81cc112efdee54d",
+    "repository_frozen_material_path_count": 1531,
+    "repository_frozen_material_sha256": "3bb8ccac539c2d92369c0bd2af228d339e516fdaac96bf98eaa6cfbe1531369e",
+    "active_rc0031_path_count": 6,
+    "active_rc0031_path_list_sha256": "5acf3f928bdd260532355702e020fa5d104780025fff28068a84a1c6f3936c4c"
+  },
+  "privacy": {
+    "raw_body_or_quote_exported": false,
+    "individual_mapping_exported": false,
+    "parsed_span_exported": false,
+    "unsalted_body_digest_exported": false,
+    "runtime_connected": false,
+    "formal_or_production_eligible": false
+  },
+  "next_boundary": {
+    "separate_approval_required": true,
+    "next_authority": "P3_PRODUCT_SURFACE_B6_OWNER_ROLE_INFLECTION_AND_TYPED_RECOMPOSITION_CHAINED_MODIFIER_LOCUS_MULTIPLICITY_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY"
+  },
+  "decision": "DESIGN_FREEZE_RED_ONLY_STOP_WITHOUT_IMPLEMENTATION"
+}
