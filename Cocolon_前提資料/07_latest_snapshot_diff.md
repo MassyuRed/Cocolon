@@ -16043,3 +16043,90 @@ STOP. Exactly one next separate authority candidate is:
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_STEP5_CURRENT_CLOSURE_ROOT_IMPLEMENTATION_AND_GREEN_ONLY`
 
 Automatic progression is false.
+
+## 2026-07-24 post-implementation current dependency closure root contract reconciliation RED correction / refreeze authority entry
+
+### 承認済みauthority
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+### 確認済み
+
+1. 承認時のapproved predecessorは、Cocolon main
+   `18d670ddf551cb47509290b13a25a35d02182738`、mashos-api main
+   `c3bafd02615e73d47afd222d1ddef53bfc87af59`である。
+2. Cocolon predecessor current-authority blobは
+   `b806d5d655207192292e840c21a144e20396a19c`、Execution and Closure
+   Plan blobは`a632a5cbd384479fe3bcf0379930dc52721e2c96`である。
+3. predecessor result / receipt / handoff blobsは
+   `7c3605dd209ba91f0e7822208dbe6371df641352` /
+   `ba3ea33e990c7aaef0d264356fb6357ef51b3653` /
+   `ad9766653a3aded79e9acc7786cd44cfc1101e57`である。
+4. mashos-apiの対象testは
+   `ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py`
+   exact1、entry blobは
+   `98a80d62b65975d17733c635324e06732dff82d7`、raw SHA-256は
+   `1670bc19e00f5d651466d4f456247ee705e397d643e0be5a61d2105d4c118e24`
+   である。
+5. historical dependency closureはexact17 /
+   `3d42e942239666dc37d14c9c2969d548988c02e38ac497bb65b825d9b4c1f3bd`
+   である。
+6. `7d15cc072ac4ac28b6b9ce90676c6238ba08d5f59fd1896a7273ce7d57a7f302`
+   はpost-Step5 current treeの実装前closure exact38として再現できる。
+7. approved exact9はclosure memberのdormant runtime adapter変更を必須とするため、
+   `7d15...`をpost-implementation live-current rootへ固定したままでは成立しない。
+8. current GitHubにはexact9 implementation resultがなく、post-implementation
+   closure count / rootは未導出・未freezeである。
+9. entry full recoveryは
+   `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected`、
+   Step 5 authoritative exact7は`7 collected / 7 passed`である。
+
+### 承認範囲
+
+- mashos-api changed path:
+  上記recovery RED test exact1のみ
+- `7d15...`をpost-Step5 pre-implementation predecessorとして保存
+- pre-implementation root literalとpost-implementation live-current root契約を分離
+- post-implementation rootはfinal implementation bytesからcanonical ownerと
+  independent verifierがfresh再導出する契約へ固定
+- current entry treeのfull recovery denominatorを
+  `exact15 / 9 passed / 6 causal failed`のまま維持
+- Step 5 exact7 non-regression:
+  `7 passed / 7`
+- body-free result / receipt / handoff、Execution and Closure Plan、
+  current snapshotの証跡更新
+
+### 未確認
+
+- exact1反映後のfinal test blob / commit
+- final fresh full recoveryとStep 5 exact7
+- post-implementation closure count / root
+- exact9 implementation / GREEN
+- canonical current completion receiptとsource baseline lock
+
+### 書かれていないこと / 推測禁止境界
+
+- production / tool / source、別test、fixture / sample / manifestは変更しない。
+- exact9 implementation / GREENを開始しない。
+- post-implementation closure count / rootを予測・創作しない。
+- `7d15...`をhistorical Step 1 rootへ再分類しない。
+- causal REDをsuccessful Step 0–10 completion receiptへ昇格しない。
+- Step 5をformal completionへ昇格しない。
+- source baselineをlockしない。
+- P1 retry002、G2 / P2、fresh batch、formal exact100、Product Read、
+  correction、B6、Cycle 001 acceptanceへ進まない。
+- result未確認のまま次authorityを自動承認しない。
+
+### 華恋の意見
+
+旧rootを捨てずpredecessorとして保存し、final bytesから再導出されるrootだけを
+post-implementation currentへ結ぶことが、実ファイルと証明を一致させる最小修復である。
+helper、reply service、protected sourceを変更してroot移動を隠してはならない。
+
+```text
+STATE:
+APPROVED_AUTHORITY_ACTIVE
+
+AUTOMATIC_PROGRESSION:
+false
+```
