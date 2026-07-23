@@ -7,7 +7,7 @@ document_authority: "NLS_V3_STEP11_CYCLE001_EXECUTION_AND_CLOSURE_PLAN_READ_ONLY
 body_free: true
 automatic_progression: false
 cycle001_status: "NOT_ACCEPTED"
-next_authority: "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY / SEPARATE_APPROVAL_REQUIRED"
+next_authority: "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY / SEPARATE_APPROVAL_REQUIRED"
 ---
 
 # Cocolon EmlisAI NLS v3 Step 11 Cycle 001 実行・完了計画書
@@ -726,7 +726,7 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `P1_FAILED_STOP / REMEDIATION_RED_FROZEN` | P1 receipt blob `965f6b9a9467769e24508340c1c59aafa4f40797`; remediation design receipt blob `b689c2386669f2b089e17166fd21f341cd77f1d1`; RED receipt blob `01a36488dd52f304242fffef53cfb6528328b709`; mashos-api `23f029ee1ca71abeed46b344db533f6a078dab29`; source baseline `UNLOCKED` | separate implementation / GREEN approval required; do not lock baseline or create completion receipt |
+| G1 Step 0–10 readiness | `P1_FAILED_STOP / REMEDIATION_IMPLEMENTED_GREEN / P1_RETRY_NOT_AUTHORIZED` | P1 receipt blob `965f6b9a9467769e24508340c1c59aafa4f40797`; implementation / GREEN receipt blob `4b33d6cdba6f4a48360b8277faf087da7cd2ad86`; mashos-api `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; targeted test 56 / 56; source baseline `UNLOCKED` | separate P1 retry approval required; do not lock baseline or create fresh batch |
 | G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P1 failed; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | resolve P1 prerequisite nonconformance first; do not create batch/run/review or backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
@@ -793,9 +793,33 @@ This dated entry is later than §12.1 and the historical next-authority text in 
 
 This dated entry is later than §12.2 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
 
+### 12.4 2026-07-23 Recovery Epoch 001 Step 0–10 remediation implementation / GREEN mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+- result receipt: blob `4b33d6cdba6f4a48360b8277faf087da7cd2ad86`
+- addendum: blob `336834b3cb3fa7ce61a205e6f118e41abf33ef42`
+- handoff: blob `0c71372441a8c266f8d94c9e4461415f56d61297`
+- result: `REMEDIATION_IMPLEMENTED_GREEN / P1_RETRY_NOT_AUTHORIZED / AUTHORITY_STOP`
+- candidate: `nls_v3_rc_0032 / RECOVERY_EPOCH001_PREREQUISITE_ONLY`
+- source predecessor: `nls_v3_rc_0027 / SOURCE_PREDECESSOR_ONLY_NOT_CYCLE_ACCEPTANCE`
+- historical Step 10: `nls_v3_rc_0010 / IMMUTABLE_NOT_CURRENT_AUTHORITY`
+- mashos-api: entry `23f029ee1ca71abeed46b344db533f6a078dab29` -> result `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; changed path production exact6 / test exact4
+- targeted suites: Recovery contract 12 / 12; Step 4 17 / 17; Step 5 12 / 12; Step 10 15 / 15; total 56 / 56
+- current source closure: `07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22`
+- historical Step 9 source drift: preserved
+- successful completion receipt count: 0
+- source baseline: `UNLOCKED_PENDING_P1_RETRY`
+- P1 retry / P2: not authorized
+- fresh batch: `RESERVED_NOT_CREATED`
+- exact100 / Product Read / B6: not executed
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY`
+
+This dated entry is later than §12.3 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
+
 ## 13. historical initial next separate authority
 
-この節は本書作成時のhistorical entryである。current next authorityはfrontmatterと§12.3を正とし、次の内容へ自動的に戻さない。
+この節は本書作成時のhistorical entryである。current next authorityはfrontmatterと§12.4を正とし、次の内容へ自動的に戻さない。
 
 当時、次の一つだけを候補とした。
 

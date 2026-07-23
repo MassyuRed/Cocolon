@@ -1,0 +1,64 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.prerequisite_remediation_implementation_green_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "result": "REMEDIATION_IMPLEMENTED_GREEN_AUTHORITY_STOP",
+  "repositories": {
+    "cocolon_entry_head": "38bfe22a8c83f134808121e7f72705242256a17a",
+    "mashos_api_entry_head": "23f029ee1ca71abeed46b344db533f6a078dab29",
+    "mashos_api_result_head": "bd62ef0eec2348e3b190ec2a39c3794886ccd10d",
+    "mashos_api_changed_path_count": 10,
+    "production_changed_path_count": 6,
+    "test_changed_path_count": 4
+  },
+  "candidate_identity": {
+    "candidate_version_id": "nls_v3_rc_0032",
+    "scope": "RECOVERY_EPOCH001_PREREQUISITE_ONLY",
+    "source_predecessor_candidate_version_id": "nls_v3_rc_0027",
+    "source_predecessor_disposition": "SOURCE_PREDECESSOR_ONLY_NOT_CYCLE_ACCEPTANCE",
+    "historical_step10_candidate_version_id": "nls_v3_rc_0010",
+    "historical_step10_disposition": "HISTORICAL_IMMUTABLE_NOT_CURRENT_AUTHORITY"
+  },
+  "source_closure": {
+    "manifest_schema": "cocolon.emlis.nls_v3.recovery_epoch001_source_baseline_manifest.v1",
+    "manifest_blob_sha1": "e95967eb35e2d24745d6e9f90e687afb1fcc83b6",
+    "manifest_source_normalized_sha256": "2821918c9fea1cdb40fc508eda3ca07b73759d9abcfa09a57dd4c40da4119ca8",
+    "source_closure_sha256": "07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22",
+    "manifest_validation_issue_count": 0,
+    "source_baseline_state": "UNLOCKED_PENDING_P1_RETRY"
+  },
+  "test_results": {
+    "recovery_contract": {"collected": 12, "passed": 12, "failed": 0, "error": 0},
+    "step4": {"collected": 17, "passed": 17, "failed": 0, "error": 0},
+    "step5": {"collected": 12, "passed": 12, "failed": 0, "error": 0},
+    "step10": {"collected": 15, "passed": 15, "failed": 0, "error": 0},
+    "total": {"collected": 56, "passed": 56, "failed": 0, "error": 0}
+  },
+  "protected_boundaries": {
+    "historical_step10_manifest_changed": false,
+    "reply_service_changed": false,
+    "step11_cycle_evidence_changed": false,
+    "fixture_or_sample_changed": false,
+    "receipt_schema_changed": false,
+    "api_db_rn_public_or_shared_route_changed": false,
+    "default_public_routing_state": "disabled",
+    "production_owner": "grounded_sentence_surface_canonical_v1",
+    "v3_general_account_visible": false,
+    "owner_activation_permitted": false
+  },
+  "completion_boundary": {
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline_locked": false,
+    "recovery_sequence_event_1_created": false,
+    "recovery_sequence_event_2_created": false,
+    "p1_retry_executed": false,
+    "fresh_batch_state": "RESERVED_NOT_CREATED",
+    "exact100_executed": false,
+    "product_read_executed": false,
+    "b6_remediation_started": false,
+    "cycle001_accepted": false
+  },
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY"
+}
