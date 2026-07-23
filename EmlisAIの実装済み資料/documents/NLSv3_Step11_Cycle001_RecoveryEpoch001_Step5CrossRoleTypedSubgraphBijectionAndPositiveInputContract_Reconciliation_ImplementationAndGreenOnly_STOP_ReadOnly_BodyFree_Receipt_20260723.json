@@ -1,0 +1,79 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_typed_subgraph_reconciliation_implementation_green_stop_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "result": "AUTHORITY_STOP_IMMUTABLE_TEST_CONTRACT_CONFLICT",
+  "revision_date": "2026-07-23",
+  "entry_heads": {
+    "cocolon_main": "739bc332d3383948950fef9e408e6f56b7823c5a",
+    "mashos_api_main": "d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d",
+    "related_drift_count": 0
+  },
+  "pre_write_head_recheck": {
+    "cocolon_main": "739bc332d3383948950fef9e408e6f56b7823c5a",
+    "mashos_api_main": "d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d",
+    "related_drift_count": 0
+  },
+  "evidence_chain": {
+    "current_authority_blob": "048f664933a52508821485cfcbb2e31b1bbce6a0",
+    "execution_and_closure_plan_blob": "aca4a46225e76f08eb1077774bac922a4baf75f8",
+    "corrected_red_result_blob": "4f8cfdd12b97313b6c0205c067dd2fd0a1399359",
+    "corrected_red_receipt_blob": "f39e53720a7864f5156fcb1748559fdb3de41d07",
+    "corrected_red_handoff_blob": "e47bf086a5293059489156b1d58b0d289984d340",
+    "reconciliation_result_blob": "691ab5bf5be7fd51b6a1d4683bd167ba2c5f37ac",
+    "reconciliation_receipt_blob": "a33d26fa141d059fedbe47b031927a1444ddcde4",
+    "reconciliation_handoff_blob": "d67f265ca06441009a064ac2179a76431774dd57",
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "predecessor_causal_red_receipt_blob": "e78d528600fef27ce3de52ef91c1118d6866d2ed",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "immutable_test_identity": {
+    "semantic_test_blob": "9a0e058fb00391b9efd5f33ac8a511afb10cdf0b",
+    "semantic_test_sha256": "2e7ed277b55972adbae9bccdb71ad7fe538000c0779b791f2050bf4ca94785f9",
+    "original_projected_count": 8,
+    "supplemental_projected_count": 8,
+    "cardinality_assertion_required_binding_count": 1,
+    "onto_assertions_required_minimum_binding_count": 8,
+    "simultaneous_satisfaction": false
+  },
+  "green_denominator_conflict": {
+    "corrected_red_authority_surface_pass_count": 1,
+    "corrected_red_causal_failure_count": 6,
+    "exact7_all_green_with_source_exact3_changed": false,
+    "causal_exact6_green_denominator_authority_frozen": false,
+    "failure_codes": [
+      "GREEN_DENOMINATOR_UNRESOLVED",
+      "PREIMPLEMENTATION_SOURCE_HASH_PIN_CONFLICT"
+    ]
+  },
+  "minimal_construction_run": {
+    "run_count": 1,
+    "collected": 2,
+    "passed": 0,
+    "failed": 2,
+    "errors": 0,
+    "green": 0,
+    "semantic_direct_node": "IMMUTABLE_POSITIVE_CARDINALITY_ASSERTION_CONFLICT",
+    "inventory_direct_node": "LEGACY_CONNECTED_NONISOMORPHIC_WITNESS_NOT_EMPTY",
+    "decisive_failure_is_causal_source_failure": false
+  },
+  "github_change_counts": {
+    "mashos_api": 0,
+    "source_exact3": 0,
+    "test_exact4": 0,
+    "protected_surface": 0
+  },
+  "state": {
+    "local_construction_scaffold": "NOT_PUBLISHED_NONAUTHORITATIVE",
+    "implementation_green": "NOT_ESTABLISHED",
+    "mashos_api_result_head": "d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d",
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "cycle001": "NOT_ACCEPTED",
+    "authority": "STOP"
+  },
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_READ_ONLY",
+  "body_free": true
+}
