@@ -1509,3 +1509,78 @@ earlier result. Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.20 2026-07-24 Step 5 unmatched optional selection / CONTENT_DEPTH_ONLY implementation and GREEN
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+- Cocolon authority entry / pre-source-write head:
+  `69e8bbf830b99d447bd875ae2d857d9aee53c3ba`
+- mashos-api entry head:
+  `a3d43433841f58313c3cd381ce779fa0a14cdbd7`
+- mashos-api final result head / tree:
+  `5033435bc94c4c0260cb3193a3c64b177971ceb5` /
+  `704fa0b97cd2737d5fe108b5624889a5ebaba2d6`
+- final predecessor compare:
+  ahead by 2 commits / behind by 0 / changed path exact1 / additions 2 /
+  deletions 14
+- changed path exact1:
+  `ai/services/ai_inference/emlis_ai_content_selection_v3.py`
+- predecessor / final source blobs:
+  `6096dd41e46fe9d9abc7695b49b3125b2f87cea1` /
+  `995feb6066842f44b6f69b71b2b97a6109a7e40c`
+- final source SHA-256:
+  `81df9f3205e14efe6de1eac5d2a92c7975df3d51af4451a8059f066aaa223d8b`
+- implementation:
+  builder and validator no longer union witness-derived cross-role unmatched
+  IDs into `forced_active_ids`; independent required obligations and targets
+  of required bound reception obligations remain active
+- preserved contract:
+  optional unmatched obligations retain
+  `deferred_by_budget / OPTIONAL_DEFERRED_BY_BUDGET`; unmatched meanings,
+  source roles/refs, original reception/control ownership, and
+  `CONTENT_DEPTH_ONLY` witness remain unchanged
+- predecessor exact7 reproduction:
+  `7 collected / 5 passed / 2 causal failed / 0 error / 0 unexpected /
+  0 warning / 9.98 seconds`
+- predecessor stable causal code:
+  `RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED`
+- final fresh-GitHub exact7:
+  `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+  0 warning / 11.36 seconds`
+- protected source/test changes:
+  exact0
+- write-integrity incident:
+  first commit `38f3beb421df4c5da86f87a715b97e7a45f7f07e` contained one
+  unintended local character-count line and was rejected as evidence; final
+  non-force correction commit `5033435bc94c4c0260cb3193a3c64b177971ceb5`
+  has the expected blob and passed fresh-remote exact7; history was not hidden
+  or rewritten
+- result / receipt / handoff blobs:
+  `89231e3b199b4c748f5b6dbcd3ff39190f22886c` /
+  `90156d19c47d8517e8711c223b00a313448868af` /
+  `c728a68fb253c5c52d97eec25064613ca90a5a7e`
+- Cocolon result / receipt / handoff commits:
+  `5e0c870af50270ce5055d5eff2e65e2537525569` /
+  `42c96cb0417a46ae04546f7eee4a00adfd6d0ef0` /
+  `bbc164766b37a83a6f29237e371a41d9a1b90f97`
+- broad regression / canonical closure / formal exact100 / Product Read:
+  `NOT_RUN`
+- successful Step 0–10 completion receipt count:
+  0
+- Step 5:
+  `NOT_COMPLETED`
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / G2 / P2 / fresh batch / correction / B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- Mash-side work for this completed authority:
+  none
+- next authority:
+  `UNSELECTED / SEPARATE APPROVAL REQUIRED`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
