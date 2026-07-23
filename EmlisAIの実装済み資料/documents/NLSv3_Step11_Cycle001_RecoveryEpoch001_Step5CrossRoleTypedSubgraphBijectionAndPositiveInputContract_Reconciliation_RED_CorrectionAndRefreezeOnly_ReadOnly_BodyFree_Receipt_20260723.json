@@ -1,0 +1,176 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_typed_subgraph_red_correction_refreeze_receipt.v1",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY",
+  "revision_date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "cocolon_head": "3bd0bcb8077ecaab07b04e913bdffaa2f66f3c7f",
+    "mashos_api_head": "e485f4a3c07ec0edeb2c248a74449b95f5017a58",
+    "current_authority_blob": "662ba8d1bbc67a23dc155cfdd7e163aadbe8af7c",
+    "execution_and_closure_plan_blob": "748b787977e059d1c10b3d83b290429152a69ac3",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "evidence_chain": {
+    "result_blob": "4f8cfdd12b97313b6c0205c067dd2fd0a1399359",
+    "reconciliation_result_blob": "691ab5bf5be7fd51b6a1d4683bd167ba2c5f37ac",
+    "reconciliation_receipt_blob": "a33d26fa141d059fedbe47b031927a1444ddcde4",
+    "reconciliation_handoff_blob": "d67f265ca06441009a064ac2179a76431774dd57",
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "predecessor_causal_red_receipt_blob": "e78d528600fef27ce3de52ef91c1118d6866d2ed"
+  },
+  "result": {
+    "status": "CORRECTED_CAUSAL_RED_REFROZEN_AUTHORITY_STOP",
+    "mashos_api_result_head": "d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d",
+    "test_exact4_change_count": 4,
+    "future_source_exact3_change_count": 0,
+    "protected_surface_change_count": 0,
+    "implementation_authorized": false,
+    "green_run": false
+  },
+  "test_execution": {
+    "exact7_command_execution_count": 6,
+    "prefinal_construction_or_refinement_run_count": 5,
+    "authoritative_final_run_count": 1,
+    "selected_node_count": 7,
+    "collected_count": 7,
+    "passed_count": 1,
+    "causal_failed_count": 6,
+    "error_count": 0,
+    "unexpected_count": 0,
+    "warning_count": 1,
+    "prefinal_bundle_identity_collision_corrected_in_test_exact4": true,
+    "causal_failure_counts": {
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_SEMANTIC_RESTATEMENT_OWNER_NOT_PROVED": 2,
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_REFINED_SNAPSHOT_BINDING_NOT_PROVED": 2,
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_DEPTH_NONINFLATION_NOT_PROVED": 2
+    }
+  },
+  "schemas": {
+    "witness": "cocolon.emlis.nls_v3.grounded_cross_role_semantic_restatement_witness.v1",
+    "adapter": "cocolon.emlis.nls_v3.grounded_cross_role_semantic_restatement_adapter.20260723.v1",
+    "depth_equivalence": "cocolon.emlis.nls_v3.cross_role_semantic_depth_equivalence.v1",
+    "refined_snapshot": "cocolon.emlis.nls_v3.refined_source_snapshot.v2"
+  },
+  "proof_contract": {
+    "proof_code": "TYPED_SEMANTIC_GRAPH_EQUIVALENCE",
+    "proof_basis": "COMPLETE_BODY_FREE_TYPED_COMPONENT_BIJECTION",
+    "closure_rule": "INCIDENT_RELATION_AND_UNKNOWN_AFFECTED_GRAPH_CLOSURE",
+    "effect_scope": "CONTENT_DEPTH_ONLY",
+    "full_owner_chain_positive_class": "INDEPENDENT_ROLE_LOCAL_FULL_TYPED_GRAPH_REPLAY",
+    "nonidentical_owner_positive_class": "EXPLICIT_REFERENT_PREDICATE_CLOSED_SINGLE_COMPONENT_RESTATEMENT",
+    "legacy_graph_disposition": "EMPTY_WITNESS_FALSE_COLLAPSE_NEGATIVE",
+    "exact_one_to_one_and_onto": true,
+    "connected_partial_salvage_allowed": false,
+    "disconnected_unmatched_meaning_retained": true,
+    "raw_normalized_or_case_cue_is_proof": false
+  },
+  "typed_component_fields": [
+    "source_role",
+    "source_kind",
+    "component_id",
+    "component_kind",
+    "semantic_identity_sha256",
+    "referent_identity_sha256",
+    "topic_identity_sha256",
+    "predicate_identity_sha256",
+    "polarity",
+    "modality",
+    "time_scope",
+    "quantifier_degree",
+    "relation_type",
+    "relation_direction",
+    "relation_from_identity_sha256",
+    "relation_to_identity_sha256",
+    "unknown_dimension",
+    "affected_identity_sha256s",
+    "must_separate",
+    "required",
+    "body_free"
+  ],
+  "component_binding_fields": [
+    "binding_id",
+    "component_kind",
+    "original_source_role",
+    "original_source_kind",
+    "original_component_id",
+    "supplemental_source_role",
+    "supplemental_source_kind",
+    "supplemental_component_id",
+    "canonical_typed_component_sha256",
+    "proof_code",
+    "proof_basis"
+  ],
+  "witness_fields": [
+    "schema_version",
+    "adapter_version",
+    "original_plan_binding_sha256",
+    "supplemental_plan_binding_sha256",
+    "original_source_witness_sha256",
+    "supplemental_source_witness_sha256",
+    "component_bindings",
+    "effect_scope",
+    "depth_equivalence_schema_version",
+    "witness_sha256",
+    "body_free"
+  ],
+  "negative_codes": [
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_TYPE_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_SCHEMA_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_ADAPTER_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_PLAN_BINDING_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_SOURCE_WITNESS_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_ROLE_PAIR_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_COMPONENT_UNRESOLVED",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_COMPONENT_KIND_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_AMBIGUOUS",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_GRAPH_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_PROOF_CODE_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_PROOF_BASIS_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_EFFECT_SCOPE_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_DEPTH_CONTRACT_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_BODY_FREE_REQUIRED",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_ORDER_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_HASH_MISMATCH"
+  ],
+  "mashos_api_identity": {
+    "test_exact4_blobs": {
+      "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py": "9a0e058fb00391b9efd5f33ac8a511afb10cdf0b",
+      "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py": "3f0bd59facec541d8bad09d1af9410344c753e45",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py": "7886477ff74ab10eb761fc1a5273e2b99f52fce0",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py": "24d7db3e80754f66c98e6587c44b3e5c2dc79b1f"
+    },
+    "future_source_exact3": {
+      "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": {
+        "blob": "d28e2ab3086fa09a62c8dbdb3d887a7bff116c78",
+        "sha256": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc"
+      },
+      "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": {
+        "blob": "685ff7ccc8f5d7fd04dc9ed301b1649b608a868a",
+        "sha256": "0a66adbf3163cf3aad1d4454a8a26aa6292284911b4bd5ba1825e0780e3aa2bc"
+      },
+      "ai/services/ai_inference/emlis_ai_content_selection_v3.py": {
+        "blob": "7172a628f5ecdfb6ba888c36d42a6a62d0d7c22e",
+        "sha256": "ec2ccfc92c5566e8ec780e67db54b4a4c620a9334f2ab2cac91a314550f43f0d"
+      }
+    }
+  },
+  "execution_state": {
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "NOT_AUTHORIZED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "correction": "NOT_RUN",
+    "b6": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "next_authority_approved": false,
+  "authority_stop": true
+}
