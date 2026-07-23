@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-07-21
+revision_date: 2026-07-23
 created_at: 2026-06-05 JST
 format: UTF-8 text / Notepad向け
 
@@ -266,19 +266,23 @@ GitHub直接反映は、次の条件をすべて満たす場合だけ行う。
 - GitHubへ反映できなかった場合だけ、新規・修正fileに限定したZIPを提出する
 ```
 
-Codex・subagent・他AIを華恋とは別の作業者として使う場合は、従来どおり次の条件をすべて満たすread-only補助に限定する。
+Codex・subagent・他AIのread-only検査補助は、Mash様の2026-07-23の常設許可「必要なら活用する」に基づき、華恋が必要性を判断して使う。作業ごと・subagentごとのMash様の再許可は不要である。
 
 ```text
-- Mash様が明示許可している
-- 華恋が検査依頼を出している
+- 独立確認または並列化が速度・網羅性・見落とし防止に実質的に役立つ場合に使う
+- 華恋が検査対象、問い、current authority、privacy境界を固定する
 - 検査用コピーまたはread-only GitHub対象だけを扱う
-- ファイル作成・編集・削除・PR・コミット・自動修正をしない
+- private bodyは承認済みlocal-only boundaryの外へ渡さない
+- ファイル作成・編集・削除・PR・コミット・自動修正を委任しない
 - 出力は証拠ではなく候補として扱う
-- 最終確認、判断、writeは華恋が行う
+- 原典、path、blob、hash、結果を華恋が再確認する
+- 最終確認、判断、write / commit、GitHub反映は華恋が行う
+- 実質的効果がない場合、または実行枠を利用できない場合は利用を強制しない
+- 利用不可により華恋単体で要求品質を維持できない場合はSTOPする
 ```
 
 この境界は、作業速度より優先する。
-速度改善のためにCocolonの作業主体を華恋以外へ渡してはいけない。
+subagentを使うこと自体を成果にせず、必要な独立確認を省略せず、Cocolonの作業主体を華恋以外へ渡してはいけない。
 
 前提資料は、作業完了ごとに`07_latest_snapshot_diff.md`のcurrent authorityだけを小さく更新する。構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase・RC・release gate等の節目で全体監査する。
 
