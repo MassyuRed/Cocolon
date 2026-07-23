@@ -1364,3 +1364,70 @@ earlier result.  Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.18 2026-07-23 Step 5 unmatched optional selection / CONTENT_DEPTH_ONLY contract reconciliation
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY`
+- Cocolon entry / pre-evidence-write head:
+  `a9be4960aca76427cb0dcd66730dce8c4a84d7dc`
+- mashos-api entry / current result head:
+  `b43f84a6b868e983a91c40e73735e03865806818`
+- mashos-api predecessor:
+  `4abc06bc544709f359ad4984357af0cd60fe083f`
+- implementation delta:
+  one commit, source exact3, test exact0
+- result / receipt / handoff blobs:
+  `d624d99c81eb6234bab0807e623ef5b187b4d0c0` /
+  `b6efcd9252b9b1a7e0cd09aad0491d1c58c9d57a` /
+  `223b6d4c82a71642476cdea1686bf37b4e23c8ad`
+- result:
+  `TARGETED_EXACT7_MACHINE_GREEN_CONFIRMED_UNMATCHED_OPTIONAL_SELECTION_PARENT_CONTRACT_CONFLICT_CONFIRMED_IMPLEMENTATION_GREEN_REJECTED_STEP5_NOT_COMPLETED_AUTHORITY_STOP`
+- authoritative exact7:
+  `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+  0 warning / 8.22 seconds`
+- parent conflict:
+  effect scope is `CONTENT_DEPTH_ONLY`, but current Content Selection unions
+  witness-derived unmatched obligation IDs into `forced_active_ids` and
+  changes optional decisions to `selected`; current S5 test requires the same
+  behavior
+- body-free aggregate:
+  unmatched 33 / required 10 / optional 23 / unmatched selected 33 /
+  optional selected 23 / optional reception selected 1
+- read-only causal diagnostic:
+  without witness-derived forcing, selected 10 / required 10 /
+  optional selected 0 / depth layered / policy issue 0
+- owner disposition:
+  semantic and inventory owners remain protected; causal conflict is localized
+  to Content Selection decision authority plus S5/recovery test expectations
+- machine GREEN / parent-contract GREEN:
+  `CONFIRMED` / `REJECTED`
+- mashos-api change under this read-only authority:
+  exact0; current main is neither rolled back nor accepted as Step 5 completion
+- next RED correction/refreeze changed path:
+  test exact2 — S5 content-selection assertion owner + recovery
+  evidence/authority lineage owner
+- next RED authoritative exact7 expectation:
+  `7 collected / 5 passed / 2 causal failed / 0 error / 0 unexpected`
+- next RED stable causal code:
+  `RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED`
+- next RED production source change:
+  exact0
+- future implementation candidate after a separately approved RED:
+  source exact1 —
+  `ai/services/ai_inference/emlis_ai_content_selection_v3.py`
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / G2 / P2 / fresh batch / formal exact100 / Product Read /
+  correction / B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
