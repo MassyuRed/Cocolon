@@ -1,0 +1,53 @@
+{
+  "schema": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step0_10_prerequisite_nonconformance_remediation_design_read_only.body_free.v1",
+  "revision_date": "2026-07-23",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY",
+  "body_free": true,
+  "automatic_progression": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "pins": {
+    "cocolon_entry": "44e249e3d71366fa57db2ed828f159754662bdaa",
+    "mashos_api_source_candidate": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "parent_design_receipt_blob": "bdfbd559535db06ae4af35fe1bb58716d6566126",
+    "p1_failure_receipt_blob": "965f6b9a9467769e24508340c1c59aafa4f40797"
+  },
+  "entry_state": {
+    "p1": "FAILED_STOP",
+    "source_baseline": "UNLOCKED",
+    "step0_10": "NOT_PROVED",
+    "fresh_batch": "RESERVED_NOT_CREATED"
+  },
+  "confirmed": {
+    "step0_3": "CURRENT_PARENT_SOURCE_RECEIPT_CHAIN_MISSING",
+    "step4": "REFINED_SOURCE_PARTITION_OWNER_UNAVAILABLE",
+    "step5": "INDEPENDENT_NEGATIVE_11_OF_12",
+    "step6_9": "CURRENT_STANDALONE_COMPLETION_RECEIPTS_MISSING",
+    "step10": "DEPENDENCY_CLOSURE_FAILED_AND_COLLECTION_ERROR"
+  },
+  "design_decisions": {
+    "history": "IMMUTABLE_APPEND_ONLY_RECOVERY",
+    "step0_3": "CURRENT_HASH_REBIND_RECEIPTS_REQUIRED",
+    "step4": "INDEPENDENT_BODY_FREE_REFINED_SOURCE_PARTITION_OWNER_REQUIRED",
+    "step5": "HASH_BOUND_OFFLINE_DORMANT_DEPENDENCY_GUARD_REQUIRED",
+    "step6_9": "CURRENT_PARENT_SOURCE_STANDALONE_RECEIPTS_REQUIRED",
+    "step10": "NEW_CANDIDATE_VERSIONED_SUCCESSOR_CLOSURE_REQUIRED",
+    "receipt_chain": "ELEVEN_ORDERED_ROWS_WITH_DETAILED_DESIGN_22_1_FIELDS_AND_STOP_FALSE"
+  },
+  "current_actions": {
+    "source_changes": 0,
+    "test_changes": 0,
+    "fixture_changes": 0,
+    "sample_changes": 0,
+    "manifest_changes": 0,
+    "test_runs": 0,
+    "exact100_runs": 0,
+    "product_reads": 0,
+    "private_body_generation": 0,
+    "mashos_api_changed_paths": 0
+  },
+  "result": "REMEDIATION_DESIGN_FROZEN_P1_RETRY_NOT_AUTHORIZED_AUTHORITY_STOP",
+  "next_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY",
+  "separate_approval_required": true
+}
+
