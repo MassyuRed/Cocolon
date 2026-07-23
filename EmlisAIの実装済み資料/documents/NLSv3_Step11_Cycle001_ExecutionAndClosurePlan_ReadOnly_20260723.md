@@ -1431,3 +1431,81 @@ earlier result. Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.19 2026-07-23 Step 5 unmatched optional selection / CONTENT_DEPTH_ONLY RED correction and refreeze
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+- Cocolon entry / pre-evidence-write head:
+  `d2c50d5559ee69303c1e93ab6074eea40c25b0b7`
+- Cocolon result / receipt / handoff commits:
+  `7de566fea5e73e4594f17de2aec58b062bc3fa03` /
+  `5563eb2d218f287cf01488a125fa404a7c22161b` /
+  `ec6ff83ead9239748a08618a6728561ebc3177d4`
+- mashos-api entry head:
+  `b43f84a6b868e983a91c40e73735e03865806818`
+- mashos-api result head / atomic commit:
+  `a3d43433841f58313c3cd381ce779fa0a14cdbd7`
+- changed path exact2:
+  S5 content-selection assertion owner + recovery evidence/authority lineage
+  owner
+- result / receipt / handoff blobs:
+  `ab1987233c8932398308e5efa323fd6a994fe661` /
+  `8475b1b3aa542a1f702186a8e73004085d96054c` /
+  `8cddfcaebf46d3780b62a4913d87f179d6f842cc`
+- result:
+  `UNMATCHED_OPTIONAL_SELECTION_POLICY_CORRECTED_AND_CAUSAL_RED_REFROZEN_AUTHORITY_STOP`
+- withdrawn test contract:
+  all unmatched obligations are selected
+- corrected body-free policy:
+  independently selected unmatched obligations equal unmatched obligations
+  intersected with required obligation IDs plus targets of required
+  `bound_emlis_reception` obligations; remaining optional unmatched
+  obligations retain
+  `deferred_by_budget / OPTIONAL_DEFERRED_BY_BUDGET`
+- oracle boundary:
+  test-owned and independent; production
+  `_cross_role_unmatched_obligation_ids(...)` is not used as the expected-value
+  oracle
+- non-vacuous proof:
+  original and supplemental unmatched source/obligation sets plus optional
+  unmatched set must all be non-empty
+- parent boundary:
+  witness effect remains `CONTENT_DEPTH_ONLY`; witness does not own
+  requiredness, decision status, selection policy, source roles/refs, or
+  original reception/control owner
+- authoritative exact7 result:
+  `7 collected / 5 passed / 2 causal failed / 0 error / 0 unexpected /
+  0 warning / 11.03 seconds`
+- causal nodes:
+  Content Selection direct + recovery Content consumer
+- stable causal code:
+  `RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED`
+- source exact3:
+  unchanged
+- future implementation source candidate:
+  exact1 —
+  `ai/services/ai_inference/emlis_ai_content_selection_v3.py`
+- future implementation / GREEN under this authority:
+  `NOT_AUTHORIZED` / `NOT_RUN`
+- future authoritative exact7 expectation:
+  `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected`
+- broad regression:
+  `NOT_RUN`
+- successful Step 0–10 completion receipt count:
+  0
+- Step 5:
+  `NOT_COMPLETED`
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / G2 / P2 / fresh batch / formal exact100 / Product Read /
+  correction / B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
