@@ -1,0 +1,122 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.p1_retry_source_prerequisite_closure.body_free.v1",
+  "created_at_jst": "2026-07-23",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY",
+  "status": "P1_RETRY_FAILED_SOURCE_BASELINE_UNLOCKED_STEP0_10_NOT_PROVED_AUTHORITY_STOP",
+  "source_pins": {
+    "cocolon_start_commit": "f791837be86906d6a1b4ee64038ec3f5ee5d8488",
+    "mashos_api_start_commit": "bd62ef0eec2348e3b190ec2a39c3794886ccd10d",
+    "mashos_api_result_commit": "bd62ef0eec2348e3b190ec2a39c3794886ccd10d",
+    "entry_drift_detected": false,
+    "mashos_api_change_count": 0
+  },
+  "normative_identity": {
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "candidate_version_id": "nls_v3_rc_0032",
+    "candidate_scope": "RECOVERY_EPOCH001_PREREQUISITE_ONLY",
+    "manifest_source_sha256": "ec6007f5b35fdcc0ec8a330822e4fe9086884dada2415e8557d7f314e2a65127",
+    "manifest_normalized_source_sha256": "2821918c9fea1cdb40fc508eda3ca07b73759d9abcfa09a57dd4c40da4119ca8",
+    "declared_source_closure_sha256": "07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22"
+  },
+  "identity_model": {
+    "logical_cycle_id": "NLS_V3_CYCLE_001",
+    "cycle_status": "NOT_ACCEPTED",
+    "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_001",
+    "recovery_epoch_state": "DEFINED_NOT_STARTED",
+    "reserved_fresh_batch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH001_BATCH_001",
+    "reserved_fresh_batch_state": "RESERVED_NOT_CREATED",
+    "source_baseline_state": "UNLOCKED",
+    "candidate_closure_promoted_to_baseline": false
+  },
+  "test_execution": {
+    "python_version": "3.12.13",
+    "pytest_version": "9.1.1",
+    "bytecode_write_disabled": true,
+    "pytest_cache_disabled": true,
+    "step_results": [
+      {"scope": "recovery_contract", "collected": 12, "passed": 12, "failed": 0},
+      {"step": "0_1", "collected": 11, "passed": 11, "failed": 0},
+      {"step": 2, "collected": 13, "passed": 13, "failed": 0},
+      {"step": 3, "collected": 22, "passed": 22, "failed": 0},
+      {"step": 4, "collected": 17, "passed": 17, "failed": 0},
+      {"step": 5, "collected": 12, "passed": 12, "failed": 0},
+      {"step": 6, "collected": 4, "passed": 4, "failed": 0},
+      {"step": 7, "collected": 7, "passed": 7, "failed": 0},
+      {"step": 8, "collected": 8, "passed": 8, "failed": 0},
+      {"step": 9, "collected": 10, "passed": 2, "failed": 8},
+      {"step": 10, "collected": 15, "passed": 15, "failed": 0}
+    ],
+    "total_collected": 131,
+    "total_passed": 123,
+    "total_failed": 8,
+    "total_errors": 0,
+    "failing_steps": [9],
+    "primary_failure_code": "STEP9_DEPENDENCY_SOURCE_BYTES_DRIFT",
+    "failure_class": "CANONICAL_STEP9_VERSUS_ADAPTER_LOCAL_STEP10_SUCCESSOR_CONFLICT"
+  },
+  "step_verdicts": [
+    {"step": 0, "verdict": "NOT_PROVED", "gap": "CURRENT_DUAL_LINEAGE_RECEIPT_AND_CLOSURE_BINDING_MISSING"},
+    {"step": 1, "verdict": "NOT_PROVED", "gap": "HISTORICAL_SNAPSHOT_NOT_CURRENT_CLOSURE_AND_CURRENT_RECEIPT_MISSING"},
+    {"step": 2, "verdict": "NOT_PROVED", "gap": "CURRENT_STEP1_PARENT_AND_RELEVANT_CLOSURE_BINDING_MISSING"},
+    {"step": 3, "verdict": "NOT_PROVED", "gap": "CURRENT_STEP2_PARENT_AND_RELEVANT_CLOSURE_BINDING_MISSING"},
+    {"step": 4, "verdict": "NOT_PROVED", "gap": "ACTIVE_DEPENDENCY_OUTSIDE_DECLARED_CLOSURE_AND_CURRENT_RECEIPT_MISSING"},
+    {"step": 5, "verdict": "NOT_PROVED", "gap": "REFINED_CONTENT_SELECTION_POSITIVE_AND_CLOSED_DEPENDENCY_GUARD_NOT_PROVED"},
+    {"step": 6, "verdict": "NOT_PROVED", "gap": "STEP5_PARENT_AND_CURRENT_RECEIPT_MISSING"},
+    {"step": 7, "verdict": "NOT_PROVED", "gap": "GRAMMAR_OWNER_OUTSIDE_DECLARED_CLOSURE_AND_CURRENT_RECEIPT_MISSING"},
+    {"step": 8, "verdict": "NOT_PROVED", "gap": "LIVE_PARSER_CONTRACT_GRAMMAR_OWNERS_OUTSIDE_DECLARED_CLOSURE"},
+    {"step": 9, "verdict": "CONFLICT", "gap": "CANONICAL_STANDALONE_HISTORICAL_VALIDATOR_AND_STEP10_ADAPTER_LOCAL_SUCCESSOR_MUTUALLY_EXCLUSIVE"},
+    {"step": 10, "verdict": "NOT_PROVED", "gap": "STEP9_PARENT_CONFLICT_AND_LIVE_TOOL_CONTRACT_CLOSURE_INCOMPLETE"}
+  ],
+  "primary_nonconformances": [
+    {
+      "condition": "CURRENT_RELEVANT_SOURCE_TEST_TOOL_CONFIG_CLOSURE_NOT_CLOSED",
+      "declared_path_count": 40,
+      "declared_closure_sha256": "07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22"
+    },
+    {
+      "step": 5,
+      "condition": "REFINED_PARTITION_TO_CONTENT_SELECTION_POSITIVE_PROOF_MISSING"
+    },
+    {
+      "step": 9,
+      "condition": "NAMED_SUITE_FAILED_AND_CURRENT_EVIDENCE_CONFLICT",
+      "test_source_sha256": "3e30a9ee2190054e2a7585d3df7068566cde1f1b6b8134d5ab9db6e652f52ed6",
+      "historical_expected_inventory_sha256_prefix": "1dadb411",
+      "current_inventory_sha256_prefix": "0a66adbf"
+    }
+  ],
+  "sequence_ledger": {
+    "event0_parent_addendum_frozen": true,
+    "event1_source_baseline_locked": false,
+    "event2_step0_10_prerequisites_proved": false,
+    "new_event_count": 0
+  },
+  "completion_receipts": {
+    "successful_current_step_receipt_count": 0,
+    "partial_success_receipts_emitted": false,
+    "historical_receipts_backdated": false
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "source_test_fixture_sample_manifest_runtime_change_count": 0,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "private_output_packet_count": 0,
+    "b6_work_count": 0,
+    "api_db_rn_public_shared_change_count": 0,
+    "read_only_subagent_count": 3,
+    "subagent_write_test_commit_count": 0
+  },
+  "downstream_state": {
+    "p2_authorized": false,
+    "fresh_batch_materialized": false,
+    "current_b6_stop_preserved": true,
+    "cycle001_status": "NOT_ACCEPTED",
+    "cycle002_authorized": false,
+    "automatic_progression": false
+  },
+  "decision": "REJECT_SOURCE_BASELINE_LOCK_AND_STOP_P1_RETRY",
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY"
+}
