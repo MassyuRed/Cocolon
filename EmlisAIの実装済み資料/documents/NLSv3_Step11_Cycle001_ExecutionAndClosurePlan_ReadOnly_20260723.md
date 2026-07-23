@@ -7,7 +7,7 @@ document_authority: "NLS_V3_STEP11_CYCLE001_EXECUTION_AND_CLOSURE_PLAN_READ_ONLY
 body_free: true
 automatic_progression: false
 cycle001_status: "NOT_ACCEPTED"
-next_authority: "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY / SEPARATE_APPROVAL_REQUIRED"
+next_authority: "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY / SEPARATE_APPROVAL_REQUIRED"
 ---
 
 # Cocolon EmlisAI NLS v3 Step 11 Cycle 001 実行・完了計画書
@@ -726,7 +726,7 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `P1_FAILED_STOP / REMEDIATION_DESIGN_FROZEN` | P1 receipt blob `965f6b9a9467769e24508340c1c59aafa4f40797`; remediation design receipt blob `b689c2386669f2b089e17166fd21f341cd77f1d1`; source baseline `UNLOCKED` | separate RED freeze approval required; do not implement or lock baseline |
+| G1 Step 0–10 readiness | `P1_FAILED_STOP / REMEDIATION_RED_FROZEN` | P1 receipt blob `965f6b9a9467769e24508340c1c59aafa4f40797`; remediation design receipt blob `b689c2386669f2b089e17166fd21f341cd77f1d1`; RED receipt blob `01a36488dd52f304242fffef53cfb6528328b709`; mashos-api `23f029ee1ca71abeed46b344db533f6a078dab29`; source baseline `UNLOCKED` | separate implementation / GREEN approval required; do not lock baseline or create completion receipt |
 | G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P1 failed; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | resolve P1 prerequisite nonconformance first; do not create batch/run/review or backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
@@ -768,9 +768,34 @@ This dated entry is later than the historical next-authority text in §13 and is
 
 This dated entry is later than §12.1 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
 
+### 12.3 2026-07-23 Recovery Epoch 001 Step 0–10 remediation RED freeze mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY`
+- result receipt: blob `01a36488dd52f304242fffef53cfb6528328b709`
+- addendum: blob `00957c786d4b3826f96d676b531a3fd94cc52b01`
+- handoff: blob `af5c9aa927564424bdef5576d6a218ba7305a7bb`
+- result: `RED_FROZEN / IMPLEMENTATION_GREEN_NOT_AUTHORIZED / AUTHORITY_STOP`
+- candidate reservation: `nls_v3_rc_0032 / RECOVERY_EPOCH001_PREREQUISITE_ONLY`
+- source predecessor: `nls_v3_rc_0027 / SOURCE_PREDECESSOR_ONLY_NOT_CYCLE_ACCEPTANCE`
+- historical Step 10: `nls_v3_rc_0010 / IMMUTABLE_NOT_CURRENT_AUTHORITY`
+- mashos-api: entry `c9739a0e2de5632d08607636656ada2f712c62b9` -> result `23f029ee1ca71abeed46b344db533f6a078dab29`; changed path exact2, both tests
+- final causal RED: 12 collected / 5 PASS / 7 intentional FAIL / 0 unexpected / 0 error
+- Step 10 collection: 16 including foreign callable / 1 collection error -> 15 intended tests / 0 collection error
+- Step 10 execution after collection repair: 3 PASS / 12 historical-closure FAIL / 0 error
+- future surface: production exact6 / test exact4
+- production source / fixture / sample / historical manifest / public runtime / API / DB / RN change: exact0
+- successful completion receipt count: 0
+- source baseline: `UNLOCKED`
+- P1 retry / P2: not authorized
+- fresh batch: `RESERVED_NOT_CREATED`
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This dated entry is later than §12.2 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
+
 ## 13. historical initial next separate authority
 
-この節は本書作成時のhistorical entryである。current next authorityはfrontmatterと§12.2を正とし、次の内容へ自動的に戻さない。
+この節は本書作成時のhistorical entryである。current next authorityはfrontmatterと§12.3を正とし、次の内容へ自動的に戻さない。
 
 当時、次の一つだけを候補とした。
 
