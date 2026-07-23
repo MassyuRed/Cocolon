@@ -1,0 +1,147 @@
+{
+  "schema": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step0_10_prerequisite_nonconformance_remediation.red_freeze_only.body_free.v1",
+  "revision_date": "2026-07-23",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY",
+  "body_free": true,
+  "automatic_progression": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "pins": {
+    "cocolon_entry_head": "084fa6767e8f09364e7e5fbd825adebe461751e0",
+    "mashos_api_entry_head": "c9739a0e2de5632d08607636656ada2f712c62b9",
+    "mashos_api_result_head": "23f029ee1ca71abeed46b344db533f6a078dab29",
+    "red_test_commit": "976d08b50186e5e0808f6d83cd50967433f25b0c",
+    "collection_repair_commit": "23f029ee1ca71abeed46b344db533f6a078dab29",
+    "parent_design_receipt_blob": "b689c2386669f2b089e17166fd21f341cd77f1d1",
+    "red_addendum_blob": "00957c786d4b3826f96d676b531a3fd94cc52b01"
+  },
+  "identity": {
+    "candidate_version_id": "nls_v3_rc_0032",
+    "scope": "RECOVERY_EPOCH001_PREREQUISITE_ONLY",
+    "source_predecessor_candidate_version_id": "nls_v3_rc_0027",
+    "source_predecessor_disposition": "SOURCE_PREDECESSOR_ONLY_NOT_CYCLE_ACCEPTANCE",
+    "historical_step10_candidate_version_id": "nls_v3_rc_0010",
+    "historical_step10_disposition": "HISTORICAL_IMMUTABLE_NOT_CURRENT_AUTHORITY"
+  },
+  "mashos_api_changes": {
+    "changed_path_count": 2,
+    "production_source_changed_path_count": 0,
+    "fixture_changed_path_count": 0,
+    "sample_changed_path_count": 0,
+    "historical_manifest_changed_path_count": 0,
+    "public_runtime_api_db_rn_changed_path_count": 0,
+    "paths": [
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_prerequisite_red.py",
+        "action": "added",
+        "blob": "2f0045950c48bb97147a353d41e37fe43a0d1fc2",
+        "sha256": "4750b6d079d2371645d56465bea3b5791bc906bd86205b2b75d2d34348dfa792"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_s10_dormant_runtime_batch_evidence.py",
+        "action": "modified_assertion_neutral_collection_alias_exact2_lines",
+        "blob": "93b1a3a0201a09768f451586585e2cdf01e571f6",
+        "sha256": "ceb501796190a9f1c50df4f30c46eef36399cdc841d12ab4a0d6f9d8d3708ebf"
+      }
+    ]
+  },
+  "historical_step10_manifest": {
+    "path": "ai/services/ai_inference/emlis_ai_step10_dependency_manifest_v3.py",
+    "blob": "0c1748956ea4db1587bd578f892d57b068a4f3f3",
+    "source_sha256": "3bc1311c264cbbae71e69c643d055575e9b80c58b71d321ff28e744ad0ee090c",
+    "frozen_closure_sha256": "2b4cd6cb5ea0f0d69ae7de31930dd6833ba21fce8eb7262f579cad514f14a8e9",
+    "frozen_artifact_sha256": "83af18e635b16a7ca5680940f7362e9b844961bf2ac23101ba65a1b44fcc1af2",
+    "changed": false
+  },
+  "test_execution": {
+    "pytest_invocation_count": 9,
+    "collection_only_invocation_count": 3,
+    "executing_invocation_count": 6,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "private_body_generation_count": 0,
+    "runs": [
+      {
+        "id": "T01_CURRENT_STEP4_STEP5_CAUSAL_BASELINE",
+        "result": "1_pass_1_fail_0_error"
+      },
+      {
+        "id": "T02_STEP10_PRE_REPAIR_COLLECTION",
+        "result": "16_collected_including_1_foreign_callable"
+      },
+      {
+        "id": "T03_STEP10_PRE_REPAIR_EXECUTION",
+        "result": "3_pass_12_fail_1_collection_error"
+      },
+      {
+        "id": "T04_PROVISIONAL_RED_EXECUTION",
+        "result": "5_pass_5_intentional_fail_0_error"
+      },
+      {
+        "id": "T05_FINAL_RED_COLLECTION",
+        "result": "12_collected"
+      },
+      {
+        "id": "T06_FINAL_RED_EXECUTION",
+        "result": "5_pass_7_intentional_fail_0_unexpected_0_error"
+      },
+      {
+        "id": "T07_STEP10_POST_REPAIR_COLLECTION",
+        "result": "15_collected_0_foreign_callable_test_node"
+      },
+      {
+        "id": "T08_STEP10_POST_REPAIR_EXECUTION",
+        "result": "3_pass_12_fail_0_collection_error"
+      },
+      {
+        "id": "T09_FINAL_RED_PLUS_CURRENT_STEP4_STEP5_CAUSAL",
+        "result": "6_pass_8_fail_0_error"
+      }
+    ]
+  },
+  "intentional_red_codes": [
+    "RECOVERY_EPOCH001_STEP4_REFINED_SOURCE_PARTITION_OWNER_NOT_PROVED",
+    "RECOVERY_EPOCH001_STEP4_INDEPENDENT_NEGATIVE_PARTITION_NOT_PROVED",
+    "RECOVERY_EPOCH001_STEP4_REFINED_SOURCE_PARTITION_INTEGRATION_NOT_PROVED",
+    "RECOVERY_EPOCH001_STEP5_CLOSED_DEPENDENCY_GUARD_NOT_PROVED",
+    "RECOVERY_EPOCH001_STEP5_INDEPENDENT_NEGATIVE_GUARD_NOT_PROVED",
+    "RECOVERY_EPOCH001_STEP10_VERSIONED_SUCCESSOR_CLOSURE_NOT_PROVED",
+    "RECOVERY_EPOCH001_STEP10_INDEPENDENT_SUCCESSOR_NEGATIVE_NOT_PROVED"
+  ],
+  "future_implementation_surface": {
+    "production_path_count": 6,
+    "production_paths": [
+      "ai/services/ai_inference/emlis_ai_refined_source_partition_v3.py",
+      "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py",
+      "ai/services/ai_inference/emlis_ai_recovery_epoch001_source_baseline_manifest_v3.py",
+      "ai/services/ai_inference/emlis_ai_dormant_runtime_adapter_v3.py",
+      "ai/services/ai_inference/emlis_ai_step10_evidence_v3.py",
+      "ai/tools/emlis_nls_v3_batch_run.py"
+    ],
+    "test_path_count": 4,
+    "test_paths": [
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_prerequisite_red.py",
+      "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py",
+      "ai/tests/test_emlis_nls_v3_s10_dormant_runtime_batch_evidence.py"
+    ]
+  },
+  "protected_paths": [
+    "ai/services/ai_inference/emlis_ai_step10_dependency_manifest_v3.py",
+    "ai/services/ai_inference/emlis_ai_reply_service.py",
+    "ai/services/ai_inference/emlis_ai_step11_cycle_evidence_v3.py"
+  ],
+  "state": {
+    "red": "FROZEN",
+    "implementation": "NOT_AUTHORIZED",
+    "green": "NOT_RUN",
+    "successful_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "b6": "NOT_STARTED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "result": "RED_FROZEN_IMPLEMENTATION_GREEN_NOT_AUTHORIZED_AUTHORITY_STOP",
+  "next_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "separate_approval_required": true
+}
