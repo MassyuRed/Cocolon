@@ -940,3 +940,30 @@ This dated entry is later than §12.5 and the historical next-authority text in 
 - automatic progression: `false`
 - next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_PARENT_DESIGN_ADDENDUM_READ_ONLY`
 - state: `AUTHORITY_STOP`
+
+### 12.7 2026-07-23 Step 5 cross-role semantic-restatement witness / depth-noninflation parent-design mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_PARENT_DESIGN_ADDENDUM_READ_ONLY`
+- Cocolon entry head: `a8a1506eb0721a5f70598e476af1913108ea9796`
+- result receipt: blob `fdb64ba8ddab5b050556eb8025b77fd026c7aa50`
+- addendum: blob `df8d2e49287554b3da2867afde634b3afbec4a37`
+- handoff: blob `ed9f5725ebd843bd258ef767dd0b7a7b74df8277`
+- result: `PARENT_DESIGN_FROZEN / RED_NOT_AUTHORIZED / SOURCE_BASELINE_UNLOCKED / AUTHORITY_STOP`
+- selected ownership chain: grounded semantic-restatement proof owner → semantic obligation inventory witness binding / alias / refined snapshot owner → Content Selection depth-only consumer
+- partition boundary: `refined_source_partition_v3` remains unchanged; `cross_source_bindings == []` remains exact; `TrustedFutureStageAuthority` and question-decision control remain nonsemantic and unchanged
+- semantic effect: complete body-free typed-component bijection may normalize depth identity only; it may not omit, integrate, defer, or drop an obligation or role
+- refined depth floor: original-only depth; unmatched meanings remain distinct; proof unavailable means empty witness and no equivalence
+- frozen future Step 5 source surface: exact3
+- next RED test surface: exact4
+- merged future production / tool surface: exact10
+- merged future test surface: exact6
+- source / test / fixture / sample / manifest change under this authority: exact0
+- test / exact100 / Product Read / private body generation under this authority: exact0
+- mashos-api: entry/result `21600c3d07b4f3d870beb3acb0bd78bf3e898f36`; changed path exact0
+- successful Step 0–10 completion receipt count: 0
+- source baseline: `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction / B6: `NOT_AUTHORIZED / NOT_RUN`
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY`
+
+This dated entry is later than the historical next-authority text above and is the current progress-ledger state. Automatic progression is false.
