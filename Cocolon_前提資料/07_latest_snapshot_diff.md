@@ -14727,3 +14727,179 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDI
 It is not approved by this record. Source implementation, GREEN, broad
 regression, completion, baseline lock, later Cycle work, and acceptance require
 separate authority.
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 implementation/GREEN parent-test conflict STOP
+
+~~~text
+COMPLETED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+COCOLON_ENTRY_AND_PRE_EVIDENCE_WRITE_HEAD:
+b3f204046350041b67a20f8b913c6b451e743bf6
+
+MASHOS_API_ENTRY_AND_RESULT_HEAD:
+f2e73dfcc0b1f0091f077c41afbf9110e4b1b333
+
+RELATED_DRIFT_COUNT:
+0
+
+RESULT_BLOB:
+8c5254e267d9bddf10f681784ae0a901e2d4122f
+
+BODY_FREE_RECEIPT_BLOB:
+a75164968cc49a073c0f1413792c4205c041a9a7
+
+HANDOFF_BLOB:
+352ba688754e15e11cdd354623c2c84aff91d72e
+
+EXECUTION_AND_CLOSURE_PLAN_PREDECESSOR_BLOB:
+1b7c20e5a91b37bf7c9e03fff8d60b68bcb5d872
+
+RESULT:
+PARENT_TEST_CONFLICT_AUTHORITY_STOP
+
+DECISIVE_CONFLICT:
+BOUND_SELECTED_INTERSECTION_VS_CONTENT_DEPTH_ONLY_AND_UNCHANGED_OBLIGATION_DECISIONS
+
+PYTEST_COMMAND_ATTEMPT_COUNT:
+12
+
+RUNNER_PRECOLLECTION_FAILURE_COUNT:
+2
+
+COLLECTED_CASE_RESULT_COUNT:
+10
+
+PASSED_CASE_RESULT_COUNT:
+2
+
+FAILED_CASE_RESULT_COUNT:
+8
+
+ERROR_CASE_RESULT_COUNT:
+0
+
+AUTHORITATIVE_EXACT7_EXECUTION_COUNT:
+0
+
+IMPLEMENTATION_GREEN:
+FALSE
+
+MASHOS_API_GITHUB_CHANGE_COUNT:
+0
+
+SOURCE_EXACT3_GITHUB_CHANGE_COUNT:
+0
+
+TEST_EXACT4_CHANGE_COUNT:
+0
+
+PROTECTED_SURFACE_CHANGE_COUNT:
+0
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CORRECTION:
+NOT_RUN
+
+B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+~~~
+
+Confirmed facts:
+
+- Both main heads matched the approved entry identities at entry and at the
+  pre-evidence-write recheck.
+- The frozen S5 safety positive requires a witness-bound/selected intersection
+  for both roles while also excluding the entire must-separate
+  incident/affected closure from witness binding.
+- Each role's legally witnessable outside-safety closure has three bound
+  optional obligations, all deferred and none required or selected.
+- Parent design freezes `CONTENT_DEPTH_ONLY`, unchanged obligation decision
+  status, and no witness use for omit / defer / integrate.
+- No parent-compliant source-only path can satisfy the frozen intersection.
+- mashos-api main, source exact3, test exact4, and protected surfaces remain
+  unchanged on GitHub.
+
+Inference:
+
+- The selected-intersection assertion likely over-strengthened the established
+  both-active-role condition.
+- A test-contract reconciliation appears necessary before implementation can
+  resume.
+
+Unconfirmed:
+
+- Future reconciliation disposition, future test/source/policy identities, and
+  exact7 GREEN.
+- Broad regression, successful Step 0–10 completion, source-baseline lock,
+  later Cycle work, and Cycle acceptance.
+
+Unwritten:
+
+- No production source implementation or test correction is reflected.
+- No GREEN, baseline, completion, fresh-batch, exact100, Product Read,
+  correction, B6, or Cycle-acceptance claim is written.
+- No raw/private body, identifiable paraphrase, individual mapping, parsed
+  span, body digest, key, or expected surface is recorded.
+
+No-guess boundary:
+
+- Do not make witness affect obligation decision status.
+- Do not bind a must-separate incident/affected closure.
+- Do not change test exact4 or parent design under the stopped authority.
+- Do not treat construction passes as authoritative exact7 GREEN.
+- Do not guess future result identities or continue automatically.
+
+Karen opinion:
+
+STOP is mandatory because a green obtained by changing obligation selection
+would contradict the proof's frozen depth-only purpose. Mash should first
+reconcile the immutable assertion with the parent contract under a separate
+read-only authority.
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRolePositiveBindingCardinalityAssertionAndGreenDenominator_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_20260723.md @ blob 8c5254e267d9bddf10f681784ae0a901e2d4122f
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRolePositiveBindingCardinalityAssertionAndGreenDenominator_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_BodyFree_Receipt_20260723.json @ blob a75164968cc49a073c0f1413792c4205c041a9a7
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRolePositiveBindingCardinalityAssertionAndGreenDenominator_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_Handoff_20260723.md @ blob 352ba688754e15e11cdd354623c2c84aff91d72e
+
+STOP. Exactly one next separate authority candidate is:
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY
+
+It is not approved by this record.

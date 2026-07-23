@@ -1197,3 +1197,56 @@ earlier result. Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.15 2026-07-23 Step 5 cardinality / GREEN denominator implementation parent-test conflict STOP
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+- Cocolon entry / pre-evidence-write head:
+  `b3f204046350041b67a20f8b913c6b451e743bf6`
+- mashos-api entry / result head:
+  `f2e73dfcc0b1f0091f077c41afbf9110e4b1b333`
+- result / receipt / handoff blobs:
+  `8c5254e267d9bddf10f681784ae0a901e2d4122f` /
+  `a75164968cc49a073c0f1413792c4205c041a9a7` /
+  `352ba688754e15e11cdd354623c2c84aff91d72e`
+- result:
+  `PARENT_TEST_CONFLICT_AUTHORITY_STOP`
+- decisive conflict:
+  frozen S5 requires a witness-bound/selected intersection for both roles,
+  while the legally witnessable safety-case closure contains only optional
+  deferred obligations and the selected safety obligations belong to the
+  must-separate closure that must remain unbound
+- parent boundary:
+  `CONTENT_DEPTH_ONLY`; obligation decision status, requiredness, source
+  roles/refs, and original reception owner unchanged
+- body-free per-role diagnostic:
+  witness bindings 3 / bound obligations 3 / required 0 / selected 0 /
+  deferred 3
+- construction ledger:
+  pytest command attempts 12 / precollection failures 2 / collected case
+  results 10 / pass 2 / fail 8 / error 0
+- authoritative exact7 / broad regression:
+  `NOT_RUN` / `NOT_RUN`
+- local decision-status experiment:
+  rejected, discarded, not committed, and not reflected
+- mashos-api / source exact3 / test exact4 / protected-surface GitHub change:
+  exact0
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- Mash required work:
+  reconcile the frozen selected-intersection assertion with the parent
+  depth-only and unchanged-decision contract under separate read-only authority
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
