@@ -1302,3 +1302,65 @@ earlier result. Automatic progression is false.
 This entry supersedes only the prior next-authority pointer.  It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result.  Automatic progression is false.
+
+### 12.17 2026-07-23 Step 5 bound-selected / CONTENT_DEPTH_ONLY RED correction and refreeze
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+- Cocolon entry / pre-evidence-write head:
+  `d5892abc8ee50619e6d751f2e191c8a21cc0eff0`
+- mashos-api entry head:
+  `f2e73dfcc0b1f0091f077c41afbf9110e4b1b333`
+- mashos-api result head / atomic commit:
+  `4abc06bc544709f359ad4984357af0cd60fe083f`
+- changed path exact2:
+  S5 content-selection assertion owner + recovery evidence/authority lineage
+  owner
+- result / receipt / handoff blobs:
+  `6559b60f7a9041e754111d02b11ae59114319a43` /
+  `a88a76a0c7f9e0a6aada8e473ec9407fa20a4279` /
+  `d7698ae68fcbbe423e55de4c60789e52caa13435`
+- result:
+  `BOUND_SELECTED_INTERSECTION_CORRECTED_AND_CAUSAL_RED_REFROZEN_AUTHORITY_STOP`
+- corrected S5 rule:
+  each endpoint role retains a non-empty role-local bound-obligation set;
+  selected intersection is not required
+- parent boundary:
+  `CONTENT_DEPTH_ONLY`; requiredness, decision status, selection policy,
+  source roles/refs, and original reception/control owner remain unchanged
+- preserved proof:
+  required-bound subset selected, required coverage 100%, both refined roles
+  active, source-role separation, original reception/control owner, safety
+  closure exclusion, unmatched preservation, depth equality/floor,
+  determinism, body-free lineage, and tamper rejection
+- recovery lineage:
+  reconciliation evidence, latest STOP evidence, corrected rule, and changed
+  path exact2 added; exact7 identities/order, phase expectations, and source
+  predecessor lineage unchanged
+- authoritative test ledger:
+  three runner capability checks / zero selected tests collected, then one
+  authoritative exact7 execution
+- authoritative exact7 result:
+  `7 collected / 1 lineage-surface pass / 6 causal fail / 0 error /
+  0 unexpected / 1 known non-causal warning`
+- causal codes:
+  semantic owner exact2 / Inventory owner exact2 / Content consumer exact2
+- source exact3 / semantic test / S4 test / protected-surface change:
+  exact0
+- implementation / GREEN / broad regression:
+  `NOT_AUTHORIZED` / `NOT_RUN` / `NOT_RUN`
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
