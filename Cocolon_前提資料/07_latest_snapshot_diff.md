@@ -13446,3 +13446,126 @@ FALSE
 STATE:
 AUTHORITY_STOP
 ```
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 cross-role semantic-restatement witness / depth-noninflation parent-design result
+
+```text
+COMPLETED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_PARENT_DESIGN_ADDENDUM_READ_ONLY
+
+COCOLON_ENTRY_HEAD:
+a8a1506eb0721a5f70598e476af1913108ea9796
+
+COCOLON_EVIDENCE_AND_LEDGER_HEAD:
+5eb2b8cde77f8b27f6fc1ff7f89c25e9c722134b
+
+MASHOS_API_ENTRY_AND_RESULT_HEAD:
+21600c3d07b4f3d870beb3acb0bd78bf3e898f36
+
+ADDENDUM_BLOB:
+df8d2e49287554b3da2867afde634b3afbec4a37
+
+BODY_FREE_RECEIPT_BLOB:
+fdb64ba8ddab5b050556eb8025b77fd026c7aa50
+
+HANDOFF_BLOB:
+ed9f5725ebd843bd258ef767dd0b7a7b74df8277
+
+EXECUTION_AND_CLOSURE_PLAN_BLOB:
+4f4cdd8fd43af06844b8c303443c3635ce62d0ba
+
+RESULT:
+PARENT_DESIGN_FROZEN
+
+NEXT_RED_AUTHORIZED:
+FALSE
+
+PRODUCTION_SOURCE_CHANGE_COUNT:
+0
+
+TEST_CHANGE_COUNT:
+0
+
+TEST_EXECUTION_COUNT:
+0
+
+MASHOS_API_CHANGED_PATH_COUNT:
+0
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+```
+
+Confirmed facts:
+
+- semantic proof ownerは`emlis_ai_grounded_observation_semantic_restatement_v3.py`、witness binding / alias / refined snapshot ownerは`emlis_ai_semantic_obligation_inventory_v3.py`、depth-only consumerは`emlis_ai_content_selection_v3.py`として凍結した。
+- `emlis_ai_refined_source_partition_v3.py`は変更対象にせず、`cross_source_bindings == []`を維持する。`TrustedFutureStageAuthority`とquestion-decision controlもnonsemanticのまま変更しない。
+- cross-role equivalenceは`COMPLETE_BODY_FREE_TYPED_COMPONENT_BIJECTION`でのみ証明し、効果を`CONTENT_DEPTH_ONLY`へ限定する。original-only depthを下限とし、unmatched meaningはdistinctのまま、証明不能時はempty witness / no equivalenceとする。
+- future Step 5 source surfaceはexact3、次のRED test surfaceはexact4、merged future production / tool surfaceはexact10、merged future test surfaceはexact6として凍結した。
+- このauthorityではCocolonのbody-free文書、receipt、handoff、mechanical ledger、current authority以外を変更していない。mashos-api変更はexact0である。
+
+Unconfirmed:
+
+- implementation feasibility、GREEN、独立false-collapse negativeの全結果、future policy hash / closure rootは未確認である。
+- downstream Discourse / Rendererが選択済みの意味重複を不自然な反復なく一度だけ実現するかは未確認である。
+
+Not written:
+
+- raw input / output、引用、識別可能な言い換え、individual mapping、parsed span、private note、body digest、keyはGitHubへ書いていない。
+- implementation、GREEN、successful completion receipt、source baseline lock、P1 retry002、P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptanceは書き換えていない。
+
+No-guess boundary:
+
+- raw text equality、normalized text、synonym list、case / family / fixture cue、broad typed shellだけをsemantic equivalenceへ格上げしてはならない。
+- one-to-one typed component proofが欠ける場合に、同義、depth noninflation、Step 5 completionを推測してはならない。
+
+Karen opinion:
+
+- 同義性の証明をsemantic owner、current graphへの結合をInventory、depth利用をContent Selectionへ分けることが、意味責任と利用責任を混同せず、partition authorityを膨張させない最小の責任分離である。
+- witnessはobligationを消すためではなく、同じ意味によるdepth水増しだけを防ぐために使うべきである。original-only depth floorとfail-closedを同時に固定する必要がある。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_ParentDesignAddendum_ReadOnly_20260723.md` @ blob `df8d2e49287554b3da2867afde634b3afbec4a37`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_ParentDesignAddendum_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `fdb64ba8ddab5b050556eb8025b77fd026c7aa50`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_ParentDesignAddendum_ReadOnly_Handoff_20260723.md` @ blob `ed9f5725ebd843bd258ef767dd0b7a7b74df8277`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `4f4cdd8fd43af06844b8c303443c3635ce62d0ba`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY`
+
+この候補はcausal REDとexact future implementation / protected surfaceのfreezeだけを扱う。implementation、GREEN、successful receipt、source baseline lock、P1 retry002、P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
