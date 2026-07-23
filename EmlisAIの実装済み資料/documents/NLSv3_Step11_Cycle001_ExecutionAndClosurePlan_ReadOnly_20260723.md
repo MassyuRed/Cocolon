@@ -1085,3 +1085,30 @@ This dated entry is later than §12.9 and the historical next-authority text abo
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, accepted history, or any earlier result. Automatic progression is
 false.
+
+### 12.12 2026-07-23 Step 5 typed-subgraph reconciliation implementation / GREEN immutable-test-contract STOP
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+- Cocolon entry / pre-write head: `739bc332d3383948950fef9e408e6f56b7823c5a`
+- mashos-api entry / result head: `d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d`; GitHub changed path exact0
+- STOP result / receipt / handoff blobs:
+  `75c32197055cef81b160636e75a382a378c0e6d3` /
+  `102a3299f4f5d1967eed33252925ba1c62448e12` /
+  `867c8bb275431adb6b82c7ad2837f6f6bd92c6b0`
+- result: `AUTHORITY_STOP_IMMUTABLE_TEST_CONTRACT_CONFLICT`
+- minimal construction run: 2 collected / 0 pass / 2 fail / 0 error / 0 GREEN; run count 1
+- decisive conflict: corrected semantic positive projects exact8 components per role, while its current parenthesized cardinality comparison requires exact1 binding and its immediately following onto assertions require at least exact8 bindings
+- secondary conflict: the RED authority/surface node pins preimplementation source exact3 hashes; exact7 all-GREEN is impossible after source implementation, while a postimplementation causal exact6 denominator is not authority-frozen
+- local construction scaffold: non-authoritative / not published
+- source exact3 / test exact4 / protected-surface GitHub change: exact0
+- successful Step 0–10 completion receipt count: 0
+- source baseline: `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6: `NOT_AUTHORIZED` or `NOT_RUN`
+- Cycle 001: `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_READ_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, accepted history, or any earlier result.
+Automatic progression is false.
