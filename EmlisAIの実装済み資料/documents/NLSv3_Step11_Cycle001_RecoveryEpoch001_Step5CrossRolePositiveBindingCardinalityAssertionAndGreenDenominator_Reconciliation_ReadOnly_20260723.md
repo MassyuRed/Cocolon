@@ -150,7 +150,8 @@ All remain unchanged.
 
 ### 4.2 Exact correction location
 
-Only this cardinality defect was found:
+The only currently confirmed occurrence of this same nested-boolean
+cardinality shape is:
 
 ```text
 ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py
@@ -247,6 +248,7 @@ yet and are not predeclared.
 
 `ai/tests/test_emlis_nls_v3_s11_rc0028_lexical_role_snapshot_red.py` blob
 `17c2fad2d4d2045d19b70300af90872d8f27e0dc` pins the Step 4 policy identity
+`de77b13a27e08ae3337d3ea8c11e1ba18ff24fb3f601d7639fe38c3948b8ff8c`
 that existed for rc0028.  Parent design explicitly requires a future policy
 refreeze when cross-role witness metadata is added.
 
@@ -327,8 +329,6 @@ Cycle acceptance is authorized.
   implementation-result identity.
 - The corrected RED exact7 consists of one identity pass and six causal owner
   failures.
-- A lineage-aware exact7 can remain the same selected matrix before and after
-  source implementation.
 - No source, test, protected surface, or mashos-api file changed and no test ran
   under this authority.
 
@@ -336,6 +336,9 @@ Cycle acceptance is authorized.
 
 - The malformed parentheses likely resulted from a transcription of the
   intended three-way comparison.
+- The lineage-aware exact7 is expected to remain the same selected matrix before
+  and after source implementation, provided the future correction and
+  implementation satisfy their frozen receipts.
 
 This inference is not the authority for correction.  The already frozen
 complete-bijection contract is the authority.
