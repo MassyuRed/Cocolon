@@ -1653,3 +1653,85 @@ This entry supersedes only the previous next-authority pointer and current
 post-Step5 RED denominator. It preserves historical RED, Step 5 implementation
 history, accepted history, and all downstream STOP boundaries. Automatic
 progression is false.
+
+### 12.22 2026-07-24 post-implementation current dependency-closure root contract RED correction and refreeze
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+- Cocolon approved predecessor / authority-entry commit:
+  `18d670ddf551cb47509290b13a25a35d02182738` /
+  `ca8d4f334c1687ead4a91e1885cb6235e3574d05`
+- current-authority entry blob:
+  `e4db769813cf45af7ba12ea13fa18d1e501b9d21`
+- mashos-api entry / result commits:
+  `c3bafd02615e73d47afd222d1ddef53bfc87af59` /
+  `7a771247ca26ce435d325b5eb484197b1bdec7c2`
+- changed path exact1:
+  `ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py`
+- entry / result test blobs:
+  `98a80d62b65975d17733c635324e06732dff82d7` /
+  `bfc51ba1eea0b7bff30d1d12a43f08edc8111a14`
+- result test SHA-256:
+  `85be3175afbc8bbc13cadadaf77dbd99bc8dbf69009ef4c7e6f551a3287e6609`
+- predecessor compare:
+  ahead by 1 / behind by 0 / changed path exact1 / additions 112 /
+  deletions 4
+- historical dependency closure:
+  exact17 /
+  `3d42e942239666dc37d14c9c2969d548988c02e38ac497bb65b825d9b4c1f3bd`
+- pre-Step5 current predecessor:
+  exact38 /
+  `948d1ff82c0c311c7c3c0c5189013c5c08af2a72415ad599505aec245e0a1c7c`
+- post-Step5 pre-implementation predecessor:
+  exact38 /
+  `7d15cc072ac4ac28b6b9ce90676c6238ba08d5f59fd1896a7273ce7d57a7f302`
+- post-implementation current dependency-closure count / root:
+  `NOT_DERIVED / NOT_DERIVED`
+- refrozen derivation contract:
+  derive from final exact9 bytes; exact4 add is all-or-none; partial surface
+  fails closed; successor must be in the live closure; predecessor-root reuse
+  is rejected; canonical owner and independent verifier must return the same
+  complete graph
+- current exact9 surface:
+  add exact4 all absent / modify exact5 all unchanged / implementation not
+  started
+- final full recovery:
+  `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected /
+  0 warning / 3.57 seconds`
+- final Step 5 exact7:
+  `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+  0 warning / 9.58 seconds`
+- independent final review:
+  two GO / zero STOP / zero blocking issue
+- result / receipt / handoff commits:
+  `37f36363c0aee3ee53df72151d61ae3805b4dc4f` /
+  `47ed2f58fd468ee2edaaae0da4d103a1dc455576` /
+  `06732471cc9c110bd1966b06bd2b74536f7e9836`
+- result / receipt / handoff blobs:
+  `2b68f43147a17b7d54497f124a0a9403ce9982ea` /
+  `2332510f0fcac908233d732d344e7453a68d09dc` /
+  `3c66793508e503e862b8d3bacf758f5b27c16949`
+- G1:
+  `REMAINING_CAUSAL_RED_REFROZEN_NOT_COMPLETED`
+- G2:
+  `BLOCKED / NOT_AUTHORIZED`
+- Step 5:
+  `NOT_COMPLETED`
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- broad regression / P1 retry002 / P2 / fresh batch / formal exact100 /
+  Product Read / correction / B6:
+  `NOT_RUN`, `NOT_AUTHORIZED`, or `RESERVED_NOT_CREATED`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- Mash-side work for this completed authority:
+  none
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This entry supersedes only the prior post-implementation current-root
+interpretation and next-authority pointer. It preserves all historical
+lineages, Step 5 evidence, causal RED history, and downstream STOP
+boundaries. Automatic progression is false.
