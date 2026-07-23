@@ -1053,3 +1053,35 @@ This candidate is read-only and unapproved. No implementation, test correction, 
 - next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
 
 This dated entry is later than §12.9 and the historical next-authority text above and is the current progress-ledger state. Automatic progression is false.
+
+### 12.11 2026-07-23 Step 5 typed-subgraph positive-input corrected RED refreeze
+
+- approved authority: NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+- Cocolon entry head: 3bd0bcb8077ecaab07b04e913bdffaa2f66f3c7f
+- mashos-api entry head: e485f4a3c07ec0edeb2c248a74449b95f5017a58
+- mashos-api result head: d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d
+- result / receipt / handoff blobs:
+  4f8cfdd12b97313b6c0205c067dd2fd0a1399359 / f39e53720a7864f5156fcb1748559fdb3de41d07 / e47bf086a5293059489156b1d58b0d289984d340
+- authoritative final causal RED: 7 collected / 1 pass / 6 causal fail /
+  0 error / 0 unexpected
+- causal owner counts: semantic 2 / refined snapshot 2 / depth consumer 2
+- exact7 command execution count: 6; pre-final construction/refinement 5;
+  authoritative final 1
+- test exact4 changed; future source exact3 and protected surface unchanged
+- positive classes: INDEPENDENT_ROLE_LOCAL_FULL_TYPED_GRAPH_REPLAY and
+  EXPLICIT_REFERENT_PREDICATE_CLOSED_SINGLE_COMPONENT_RESTATEMENT
+- legacy connected non-isomorphic graph: EMPTY_WITNESS_FALSE_COLLAPSE_NEGATIVE
+- closure: incident relation and unknown affected graph; exact one-to-one/onto
+- partial binding: exact bound closure only; disconnected unmatched meaning,
+  source refs, obligations, selection, and required coverage retained
+- effect: CONTENT_DEPTH_ONLY; original-only depth floor retained
+- successful Step 0–10 completion receipt count: 0
+- source baseline: UNLOCKED
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6: NOT_AUTHORIZED or NOT_RUN
+- Cycle 001: NOT_ACCEPTED
+- exactly one next separate authority candidate: NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, accepted history, or any earlier result. Automatic progression is
+false.
