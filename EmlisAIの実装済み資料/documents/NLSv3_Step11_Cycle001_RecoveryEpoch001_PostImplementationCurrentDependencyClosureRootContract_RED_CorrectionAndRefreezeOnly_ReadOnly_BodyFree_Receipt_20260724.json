@@ -95,7 +95,7 @@
     "errors": 0,
     "unexpected": 0,
     "warnings": 0,
-    "duration_seconds": 3.57,
+    "duration_seconds": 3.53,
     "remaining_stable_causal_codes": [
       "RECOVERY_EPOCH001_CANONICAL_CURRENT_CLOSURE_OWNER_NOT_PROVED",
       "RECOVERY_EPOCH001_CANONICAL_CURRENT_CLOSURE_INDEPENDENT_VERIFIER_NOT_PROVED",
@@ -113,7 +113,7 @@
     "errors": 0,
     "unexpected": 0,
     "warnings": 0,
-    "duration_seconds": 9.58,
+    "duration_seconds": 9.84,
     "formal_step5_completion": "NOT_COMPLETED"
   },
   "verification_environment": {
@@ -122,6 +122,8 @@
     "pydantic": "1.10.24",
     "starlette": "0.27.0",
     "isolated_temporary_environment": true,
+    "pytest_cache_provider_disabled": true,
+    "ignored_local_pytest_cache_unchanged": true,
     "repository_cache_writes": false
   },
   "protected_identity": {
@@ -147,9 +149,9 @@
   },
   "cocolon_evidence": {
     "result_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_PostImplementationCurrentDependencyClosureRootContract_RED_CorrectionAndRefreezeOnly_ReadOnly_20260724.md",
-    "result_commit": "37f36363c0aee3ee53df72151d61ae3805b4dc4f",
-    "result_blob": "2b68f43147a17b7d54497f124a0a9403ce9982ea",
-    "result_sha256": "a5b26b0c6136849569cabacd9efc461f8f6e40f0b2e088ea20f73787d3145750"
+    "result_commit": "4316a8f70ef35305b1d512835311243eb6bb45c4",
+    "result_blob": "a89dc73cd2c7c647f65ac2a77abbacc4c6da3b86",
+    "result_sha256": "0076e3dfc5cfad8a4bda9528afa0c34985663e429410a943e64fc22c5b5cabe3"
   },
   "completion_claims": {
     "canonical_current_closure_owner": "NOT_PROVED",
