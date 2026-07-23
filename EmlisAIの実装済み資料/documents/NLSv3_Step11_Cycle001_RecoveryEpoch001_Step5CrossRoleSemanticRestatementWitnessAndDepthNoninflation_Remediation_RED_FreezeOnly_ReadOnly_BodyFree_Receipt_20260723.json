@@ -1,0 +1,129 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_remediation_red_freeze_receipt.v1",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY",
+  "revision_date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "cocolon_head": "ec66fdbadef3ebee4b5a531f77391252146b2e4e",
+    "mashos_api_head": "21600c3d07b4f3d870beb3acb0bd78bf3e898f36",
+    "current_authority_blob": "3e98c712dcc9a22f8b377b214be6ff51476eefb1",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "execution_and_closure_plan_blob": "4f4cdd8fd43af06844b8c303443c3635ce62d0ba",
+    "predecessor_causal_red_receipt_blob": "e78d528600fef27ce3de52ef91c1118d6866d2ed"
+  },
+  "result": {
+    "status": "RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_AUTHORITY_STOP",
+    "mashos_api_result_head": "e485f4a3c07ec0edeb2c248a74449b95f5017a58",
+    "changed_path_count": 4,
+    "changed_test_path_count": 4,
+    "production_source_change_count": 0,
+    "fixture_change_count": 0,
+    "sample_change_count": 0,
+    "manifest_change_count": 0,
+    "protected_surface_change_count": 0
+  },
+  "test_surface_exact4": [
+    {
+      "path": "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py",
+      "blob": "2d27401250f84468339ec995afa5628e7b323ace"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py",
+      "blob": "fa94723d02b37de72572d027372cdb8936e184a5"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py",
+      "blob": "711385416c845e5225493b25868b94fd3cc68e46"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py",
+      "blob": "33c73d30292c96e1d61cf6599a421414817ffd4b"
+    }
+  ],
+  "owner_chain": {
+    "semantic_proof_owner": "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py",
+    "witness_binding_alias_snapshot_owner": "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py",
+    "depth_only_consumer": "ai/services/ai_inference/emlis_ai_content_selection_v3.py"
+  },
+  "future_source_exact3_unchanged_sha256": {
+    "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc",
+    "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": "0a66adbf3163cf3aad1d4454a8a26aa6292284911b4bd5ba1825e0780e3aa2bc",
+    "ai/services/ai_inference/emlis_ai_content_selection_v3.py": "ec2ccfc92c5566e8ec780e67db54b4a4c620a9334f2ab2cac91a314550f43f0d"
+  },
+  "protected_source_unchanged_sha256": {
+    "ai/services/ai_inference/emlis_ai_refined_source_partition_v3.py": "02d943e3cb6f3e1a60bae38242900af0f929de9bf0b5300c3f9d4be10a44389a",
+    "ai/services/ai_inference/emlis_ai_nls_v3_artifact_contract.py": "c20b262495276c9b549b257380e1a7c28069c316a7aca4b6e00a49de03d1512b"
+  },
+  "frozen_contract": {
+    "witness_schema_version": "cocolon.emlis.nls_v3.grounded_cross_role_semantic_restatement_witness.v1",
+    "witness_adapter_version": "cocolon.emlis.nls_v3.grounded_cross_role_semantic_restatement_adapter.20260723.v1",
+    "depth_equivalence_schema_version": "cocolon.emlis.nls_v3.cross_role_semantic_depth_equivalence.v1",
+    "refined_source_snapshot_schema_version": "cocolon.emlis.nls_v3.refined_source_snapshot.v2",
+    "proof_code": "TYPED_SEMANTIC_GRAPH_EQUIVALENCE",
+    "proof_basis": "COMPLETE_BODY_FREE_TYPED_COMPONENT_BIJECTION",
+    "effect_scope": "CONTENT_DEPTH_ONLY",
+    "partition_cross_source_bindings": "EXACT_EMPTY_PRESERVED",
+    "question_decision_is_semantic_source": false,
+    "empty_witness_is_fail_closed_no_equivalence": true,
+    "original_only_depth_is_floor": true,
+    "unmatched_meaning_remains_distinct": true,
+    "original_reception_owner_retained": true
+  },
+  "stable_negative_codes_exact18": [
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_TYPE_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_SCHEMA_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_ADAPTER_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_PLAN_BINDING_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_SOURCE_WITNESS_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_ROLE_PAIR_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_COMPONENT_UNRESOLVED",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_COMPONENT_KIND_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_AMBIGUOUS",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_GRAPH_MISMATCH",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_PROOF_CODE_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_PROOF_BASIS_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_EFFECT_SCOPE_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_DEPTH_CONTRACT_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_BODY_FREE_REQUIRED",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_ORDER_INVALID",
+    "CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_HASH_MISMATCH"
+  ],
+  "authoritative_final_red": {
+    "collected": 5,
+    "passed": 1,
+    "failed": 4,
+    "error": 0,
+    "unexpected_failure": 0,
+    "causal_failure_codes": [
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_SEMANTIC_RESTATEMENT_OWNER_NOT_PROVED",
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_REFINED_SNAPSHOT_BINDING_NOT_PROVED",
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_DEPTH_NONINFLATION_NOT_PROVED",
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_SEMANTIC_RESTATEMENT_OWNER_NOT_PROVED"
+    ],
+    "authoritative_final_targeted_execution_count": 1,
+    "superseded_targeted_collected_development_execution_count": 5,
+    "total_targeted_collected_execution_count": 6,
+    "nonverdict_precollection_environment_setup_attempt_count": 2,
+    "broad_suite_execution_count": 0
+  },
+  "execution_state": {
+    "implementation_started": false,
+    "green_run": false,
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "NOT_AUTHORIZED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "correction": "NOT_RUN",
+    "b6": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY"
+}
