@@ -15631,3 +15631,192 @@ STOP. Exactly one next separate authority candidate is:
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 It is not approved by this record. Automatic progression is false.
+
+## 2026-07-24 — Step 5 unmatched optional selection / CONTENT_DEPTH_ONLY implementation and GREEN
+
+Current authority completed:
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+Execution class:
+
+`APPROVED_SOURCE_EXACT1_IMPLEMENTATION_AND_TARGETED_EXACT7_GREEN_ONLY`
+
+Entry / result identity:
+
+- Cocolon authority entry head:
+  `69e8bbf830b99d447bd875ae2d857d9aee53c3ba`
+- mashos-api entry head:
+  `a3d43433841f58313c3cd381ce779fa0a14cdbd7`
+- mashos-api final result head:
+  `5033435bc94c4c0260cb3193a3c64b177971ceb5`
+- mashos-api final tree:
+  `704fa0b97cd2737d5fe108b5624889a5ebaba2d6`
+- implementation result / receipt / handoff commits:
+  `5e0c870af50270ce5055d5eff2e65e2537525569` /
+  `42c96cb0417a46ae04546f7eee4a00adfd6d0ef0` /
+  `bbc164766b37a83a6f29237e371a41d9a1b90f97`
+- Execution and Closure Plan update commit / blob:
+  `45793a6f9c94adaa96a8d91f6622675106a8c689` /
+  `371507bee6b66e2198b2f02f734013d94adb9c88`
+
+Result:
+
+`APPROVED_EXACT1_IMPLEMENTATION_REFLECTED_TARGETED_EXACT7_GREEN_STEP5_NOT_COMPLETED_AUTHORITY_STOP`
+
+### 確認済み事実
+
+1. write直前に両main head、current authority、Execution and Closure Plan、
+   predecessor RED result/receipt/handoff、parent design、source exact3、
+   test exact2を再取得し、関連drift 0を確認した。
+2. predecessor `a3d43433841f...` からfinal
+   `5033435bc94c...` までのGitHub compareは
+   `ahead_by=2 / behind_by=0` であり、最終差分はapproved exact1だけである。
+3. changed pathは次の1件だけである。
+
+   `ai/services/ai_inference/emlis_ai_content_selection_v3.py`
+
+4. builderとvalidatorの `forced_active_ids` から、
+   witness-derived cross-role unmatched IDsのunionを除いた。
+5. independent required obligation IDsとrequired
+   `bound_emlis_reception` target closureは維持した。
+6. remaining optional unmatched obligationsは
+   `deferred_by_budget / OPTIONAL_DEFERRED_BY_BUDGET` と
+   `integrated_into_obligation_id=None` を維持する。
+7. unmatched meanings、source roles/refs、original reception/control owner、
+   `CONTENT_DEPTH_ONLY` witness、normal depth floorは維持される。
+8. source blobは
+   `6096dd41e46fe9d9abc7695b49b3125b2f87cea1`
+   から
+   `995feb6066842f44b6f69b71b2b97a6109a7e40c`
+   へ変わった。
+9. final source SHA-256は
+   `81df9f3205e14efe6de1eac5d2a92c7975df3d51af4451a8059f066aaa223d8b`
+   である。
+10. authoritative exact7は同一node orderで、predecessorの
+    `5 passed / 2 causal failed / 0 error / 0 unexpected / 0 warning /
+    9.98 seconds`
+    から、final fresh-GitHub materializationの
+    `7 passed / 0 failed / 0 error / 0 unexpected / 0 warning /
+    11.36 seconds`
+    へ変わった。
+11. predecessor causal failure exact2のstable codeは両方とも
+    `RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED`
+    であり、finalでは両nodeがPASSした。
+12. semantic-restatement owner、Semantic Obligation Inventory owner、
+    authoritative test exact4、partition/artifact、fixture/sample/manifest、
+    API/DB/RN/runtime/public/shared routeの変更は0件である。
+13. first source write commit
+    `38f3beb421df4c5da86f87a715b97e7a45f7f07e`
+    にはcommand runnerのstderr統合による文字数行1件が末尾へ混入した。
+    immediate remote-byte比較で不一致を検出し、そのtreeのtest/evidenceは
+    受理していない。
+14. current blobをpredecessorにしたnon-force correction commit
+    `5033435bc94c4c0260cb3193a3c64b177971ceb5`
+    でexpected blobへ訂正し、fresh remote exact7を再実行した。
+    historyは隠蔽・force rewriteしていない。
+
+### Final changed surface exact1
+
+| path | entry blob | final blob | final SHA-256 |
+|---|---|---|---|
+| `ai/services/ai_inference/emlis_ai_content_selection_v3.py` | `6096dd41e46fe9d9abc7695b49b3125b2f87cea1` | `995feb6066842f44b6f69b71b2b97a6109a7e40c` | `81df9f3205e14efe6de1eac5d2a92c7975df3d51af4451a8059f066aaa223d8b` |
+
+Diff aggregate:
+
+- final changed path count:
+  1
+- additions:
+  2
+- deletions:
+  14
+- test changed path count:
+  0
+- protected surface changed path count:
+  0
+
+### Closure state
+
+- approved implementation:
+  `REFLECTED`
+- targeted parent-contract exact7:
+  `GREEN`
+- broad regression:
+  `NOT_RUN`
+- successful Step 0–10 completion receipt count:
+  0
+- Step 5:
+  `NOT_COMPLETED`
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / G2 / P2:
+  `NOT_AUTHORIZED`
+- fresh batch:
+  `RESERVED_NOT_CREATED`
+- formal exact100:
+  `NOT_RUN`
+- Product Read:
+  `NOT_RUN`
+- correction / B6:
+  `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+
+### 推測
+
+実装結果の判定に推測は用いていない。root cause、final diff、owner境界、
+REDからGREENへの遷移はいずれもGitHub実bytesと同一node実行で確認した。
+
+Step 5全体のcompletion inputsが揃ったかどうかは、このtargeted exact7だけでは
+確定できないため `NOT_COMPLETED` を維持する。
+
+### 未確認
+
+- Step 5 completionとsuccessful Step 0–10 completion receipt
+- source baseline lockとcanonical current closure
+- P1 retry002 / G2 / P2 / fresh batch
+- formal exact100 / Product Read / correction / B6
+- Cycle 001 acceptance
+- next authorityのidentityと必要性
+
+### 書かれていないこと / 推測禁止境界
+
+- targeted exact7をbroad regressionへ昇格しない。
+- targeted GREENをStep 5 completionへ昇格しない。
+- source baselineをlock済みと扱わない。
+- P1 retry002、G2/P2、fresh batch、formal exact100、Product Read、
+  correction、B6、Cycle acceptanceへ自動進行しない。
+- protected ownerやtestへ変更範囲を拡大しない。
+- future authorityを現在の証拠から創作しない。
+- transient malformed commitをfinal resultとして引用しない。
+- write incidentを隠蔽またはhistory rewriteしない。
+
+### 華恋の意見
+
+semantic witnessはrole-localな意味の対応とcontent depthを証明できるが、
+optional obligationを選択する権限ではない。今回のexact1修正は、その境界を
+builderとvalidatorの両方で一致させ、witnessとselection policyの役割を
+最小差分で分離したため妥当である。
+
+write incidentはfinal treeの正しさとは分けて、信頼のために明示的に残す。
+final bytesとfresh remote exact7を再検証できたので現authorityは完了できるが、
+transient commitが存在した事実は消さない。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_20260724.md`
+   @ blob `89231e3b199b4c748f5b6dbcd3ff39190f22886c`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_BodyFree_Receipt_20260724.json`
+   @ blob `90156d19c47d8517e8711c223b00a313448868af`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_Handoff_20260724.md`
+   @ blob `c728a68fb253c5c52d97eec25064613ca90a5a7e`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md`
+   @ blob `371507bee6b66e2198b2f02f734013d94adb9c88`
+
+No Mash-side work is required for this completed authority.
+
+STOP. Current next authority is:
+
+`UNSELECTED / SEPARATE APPROVAL REQUIRED`
+
+Automatic progression is false.
