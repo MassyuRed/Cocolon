@@ -726,8 +726,8 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `P1_RETRY_FAILED_STOP / STEP0_10_NOT_PROVED` | P1 retry receipt blob `2f20d7558ae70ad5f34c2e05acce198dcfced689`; mashos-api `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; named tests 131 collected / 123 passed / 8 failed; Step 9 `CONFLICT`; source baseline `UNLOCKED` | separate canonical current closure / standalone completion proof remediation design approval required; do not lock baseline or create fresh batch |
-| G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P1 retry failed; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | resolve canonical current closure / standalone completion proof nonconformance first; do not create batch/run/review or backfill |
+| G1 Step 0–10 readiness | `CANONICAL_CLOSURE_REMEDIATION_DESIGN_FROZEN / RED_NOT_AUTHORIZED / STEP0_10_NOT_PROVED` | design receipt blob `d1d67c057251a5b29f0ef0082163762af4c59658`; predecessor P1 retry receipt blob `2f20d7558ae70ad5f34c2e05acce198dcfced689`; source baseline `UNLOCKED` | separate causal RED freeze approval required; do not implement, lock baseline, or create fresh batch |
+| G2 batch / initial process | `BLOCKED_BY_G1_REMEDIATION / RECOVERY_EPOCH_DEFINED_NOT_STARTED` | canonical closure remediation design frozen; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | complete G1 RED / implementation / P1 retry under separate approvals first; do not create batch/run/review or backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
 | G5 B6 implementation | `BLOCKED_BY_G4` | none | do not start |
@@ -901,3 +901,24 @@ NEXT_AUTHORITY_SEPARATE_APPROVAL_REQUIRED
 ```
 
 本書は、局所authorityをCycle 001全体のどこに位置付けるかを記録し、canonical entry gapを隠さない。representative subsetをexact100へ格上げせず、initial processを遡及補完せず、各gateを別承認で通過した場合だけCycle 001 acceptanceへ到達する。
+
+### 12.6 2026-07-23 canonical current closure / standalone completion proof remediation design mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY`
+- result receipt: blob `d1d67c057251a5b29f0ef0082163762af4c59658`
+- addendum: blob `3685319526203abbc991393acc3069d45a4d5321`
+- handoff: blob `37d95eeae2797e2e4a27a700c281b59cbc7e5e7b`
+- result: `REMEDIATION_DESIGN_FROZEN / RED_NOT_AUTHORIZED / SOURCE_BASELINE_UNLOCKED / AUTHORITY_STOP`
+- design: Step 0 / 1 dual-lineage current binding; one canonical current closure with derived views; existing-local-unlisted import rejection; Step 5 refined end-to-end positive; standalone Step 9 successor; Step 10 same-graph import; exact Step 0→10→P2 receipt chain
+- historical boundary: Step 0 / 1 artifacts、historical Step 9 source / manifest、rc0032 manifest remain immutable noncurrent evidence
+- source / test / fixture / sample / manifest change: exact0
+- test / exact100 / Product Read / private body generation: exact0
+- mashos-api: entry/result `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; changed path exact0
+- successful completion receipt count: 0
+- source baseline: `UNLOCKED`
+- sequence event 1 / 2: not created
+- P2 / fresh batch / exact100 / Product Read / correction / B6: not authorized or not executed
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY`
+
+This dated entry is later than §12.5 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
