@@ -16168,21 +16168,21 @@ false
    のままであり、implementationは開始していない。
 10. final full recoveryは
     `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected /
-    0 warning / 3.57 seconds`である。
+    0 warning / 3.53 seconds`である。
 11. final Step 5 exact7は
     `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
-    0 warning / 9.58 seconds`である。
+    0 warning / 9.84 seconds`である。
 12. 独立read-only review 2系統はともにGO、blocking issueは0である。
 13. result / receipt / handoff commitsは
-    `37f36363c0aee3ee53df72151d61ae3805b4dc4f` /
-    `47ed2f58fd468ee2edaaae0da4d103a1dc455576` /
-    `06732471cc9c110bd1966b06bd2b74536f7e9836`、blobsは
-    `2b68f43147a17b7d54497f124a0a9403ce9982ea` /
-    `2332510f0fcac908233d732d344e7453a68d09dc` /
-    `3c66793508e503e862b8d3bacf758f5b27c16949`である。
+    `4316a8f70ef35305b1d512835311243eb6bb45c4` /
+    `b7c96eccdc6e5810ee97821dad3227d44970f8f2` /
+    `d7232f8dc4e38e1a8cc78de904ee5cd0e3c25a7c`、blobsは
+    `a89dc73cd2c7c647f65ac2a77abbacc4c6da3b86` /
+    `fc3a283e40bd80eaa264e919acd0b253a965b58f` /
+    `1fde9bf0c81723948484dc27c0c5708cfe6943e3`である。
 14. Execution and Closure Plan §12.22 reflection commit / blobは
-    `e9391943d89d36fe2800bb8dc15f3172fac3157a` /
-    `4ba6f42c45cedddc8ec8d8895d6b971962700828`である。
+    `3ad62616904b32ef5ee6ce53531e0439357e9021` /
+    `29449d5eeb1da3112ba7ff95c45a67523149d1c6`である。
 
 ### 推測
 
