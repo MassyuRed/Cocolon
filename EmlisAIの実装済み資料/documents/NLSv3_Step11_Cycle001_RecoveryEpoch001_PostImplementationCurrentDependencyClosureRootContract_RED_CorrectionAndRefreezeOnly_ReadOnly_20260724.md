@@ -208,7 +208,7 @@ The original protected exact14 also passed its byte checks.
 0 error
 0 unexpected
 0 warning
-3.57 seconds
+3.53 seconds
 ```
 
 The remaining stable causal codes are:
@@ -229,12 +229,15 @@ The remaining stable causal codes are:
 0 error
 0 unexpected
 0 warning
-9.58 seconds
+9.84 seconds
 ```
 
 The accepted final run used Python 3.12 with FastAPI `0.95.2`, Pydantic
 `1.10.24`, and Starlette `0.27.0` in an isolated temporary verification
-environment. Generated caches were redirected outside the repository.
+environment. Pytest's cache provider was disabled, bytecode caches were
+redirected outside the repository, and the pre-existing ignored local
+`.pytest_cache` file timestamps and sizes remained unchanged across both
+accepted commands.
 
 ### 7.3 Independent review
 
