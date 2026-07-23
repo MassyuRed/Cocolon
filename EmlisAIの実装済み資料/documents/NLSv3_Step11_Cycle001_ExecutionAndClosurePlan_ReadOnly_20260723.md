@@ -1029,3 +1029,27 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTI
 ```
 
 This candidate is read-only and unapproved. No implementation, test correction, GREEN, baseline lock, fresh batch, exact100, Product Read, B6, or Cycle acceptance is authorized.
+
+### 12.10 2026-07-23 Step 5 typed-subgraph bijection / positive-input contract reconciliation
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY`
+- Cocolon entry head: `bfaa4ca3a5b255072a0f31d8985bc05b79444a07`
+- mashos-api entry/result head: `e485f4a3c07ec0edeb2c248a74449b95f5017a58`; changed path exact0
+- reconciliation: blob `691ab5bf5be7fd51b6a1d4683bd167ba2c5f37ac`
+- body-free receipt: blob `a33d26fa141d059fedbe47b031927a1444ddcde4`
+- handoff: blob `d67f265ca06441009a064ac2179a76431774dd57`
+- result: `POSITIVE_INPUT_CONTRACT_RECONCILED / PARENT_DESIGN_UNCHANGED / AUTHORITY_STOP`
+- selected proof boundary: complete same-granularity incident-relation / unknown-affected-graph closed typed subgraph; exact one-to-one and onto binding
+- cardinality boundary: binding count equals both eligible closed-graph component counts; an arbitrary minimum is not completeness proof
+- full owner-chain positive class: `INDEPENDENT_ROLE_LOCAL_FULL_TYPED_GRAPH_REPLAY`
+- non-identical semantic-owner positive class: `EXPLICIT_REFERENT_PREDICATE_CLOSED_SINGLE_COMPONENT_RESTATEMENT`
+- current default graph: future `EMPTY_WITNESS_FALSE_COLLAPSE_NEGATIVE`; historical RED and STOP evidence remain immutable
+- test exact4 / source exact3 / fixture / sample / manifest / protected-surface change: exact0
+- test / exact100 / Product Read / private-body generation: exact0
+- successful Step 0–10 completion receipt count: 0
+- source baseline: `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction / B6: `NOT_AUTHORIZED / NOT_RUN`
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+This dated entry is later than §12.9 and the historical next-authority text above and is the current progress-ledger state. Automatic progression is false.

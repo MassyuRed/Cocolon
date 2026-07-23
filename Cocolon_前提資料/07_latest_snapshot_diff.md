@@ -13822,3 +13822,161 @@ STOP. 次の別承認候補は一つだけである。
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY`
 
 この候補はread-onlyかつ未承認である。source implementation、test correction、GREENへ自動進行しない。
+
+## 2026-07-23 Recovery Epoch 001 Step 5 typed-subgraph bijection / positive-input contract reconciliation
+
+Approved authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY
+```
+
+Entry identity:
+
+```text
+Cocolon main: bfaa4ca3a5b255072a0f31d8985bc05b79444a07
+mashos-api main: e485f4a3c07ec0edeb2c248a74449b95f5017a58
+RELATED_DRIFT_0
+```
+
+Result:
+
+```text
+POSITIVE_INPUT_CONTRACT_RECONCILED
+PARENT_DESIGN_UNCHANGED
+HISTORICAL_RED_AND_STOP_EVIDENCE_IMMUTABLE
+CURRENT_TEST_EXACT4_REQUIRES_SEPARATE_RED_CORRECTION
+MASHOS_API_CHANGE_COUNT_0
+TEST_CHANGE_COUNT_0
+TEST_RUN_COUNT_0
+SOURCE_CHANGE_COUNT_0
+IMPLEMENTATION_NOT_AUTHORIZED
+GREEN_NOT_AUTHORIZED
+SOURCE_BASELINE_UNLOCKED
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT_0
+FRESH_BATCH_RESERVED_NOT_CREATED
+CYCLE001_NOT_ACCEPTED
+AUTHORITY_STOP
+```
+
+Body-free evidence:
+
+- reconciliation: blob `691ab5bf5be7fd51b6a1d4683bd167ba2c5f37ac`
+- receipt: blob `a33d26fa141d059fedbe47b031927a1444ddcde4`
+- handoff: blob `d67f265ca06441009a064ac2179a76431774dd57`
+- updated Execution and Closure Plan: blob `748b787977e059d1c10b3d83b290429152a69ac3`
+- parent-design addendum / receipt / handoff:
+  `df8d2e49287554b3da2867afde634b3afbec4a37` /
+  `fdb64ba8ddab5b050556eb8025b77fd026c7aa50` /
+  `ed9f5725ebd843bd258ef767dd0b7a7b74df8277`
+- frozen causal RED receipt: blob `a544760ba508778aa339cad57fed330dc3048b26`
+- implementation/GREEN STOP result / receipt / handoff:
+  `9776f827a4cd384ec47f29ce0e83d4fe5e82ae96` /
+  `37ab784cf8f2f44945bafbeda33d56db4150b129` /
+  `360d070747c8bba247c1f4feec38acd1eabaa167`
+- Detailed Design SHA-256:
+  `6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc`
+
+Selected owner chain remains:
+
+1. `emlis_ai_grounded_observation_semantic_restatement_v3.py` — semantic proof owner
+2. `emlis_ai_semantic_obligation_inventory_v3.py` — witness / alias / refined snapshot owner
+3. `emlis_ai_content_selection_v3.py` — depth-only consumer
+
+Reconciled contract:
+
+- witness eligibility requires a complete, same-granularity,
+  incident-relation and unknown-affected-graph closed typed subgraph;
+- binding is exact one-to-one and onto after independent role-local
+  projection;
+- binding count equals both eligible closed-graph component counts and is not
+  established by an arbitrary minimum;
+- a connected relation, endpoint, unknown, dependent component, safety
+  pressure, or `must_separate` boundary cannot be removed to salvage a
+  partial match;
+- disconnected unmatched meanings remain distinct;
+- no eligible closed component means empty witness / no equivalence;
+- effect remains `CONTENT_DEPTH_ONLY`;
+- original / supplemental exact2 roles, every obligation/source ref,
+  required coverage, original reception/control owner, question-decision
+  nonsemantic status, and `cross_source_bindings == []` remain unchanged.
+
+Positive-input reconciliation:
+
+```text
+full owner-chain:
+INDEPENDENT_ROLE_LOCAL_FULL_TYPED_GRAPH_REPLAY
+
+non-identical semantic owner:
+EXPLICIT_REFERENT_PREDICATE_CLOSED_SINGLE_COMPONENT_RESTATEMENT
+
+current default graph:
+EMPTY_WITNESS_FALSE_COLLAPSE_NEGATIVE
+```
+
+Confirmed:
+
+- the parent design remains coherent and does not require amendment;
+- the current default positive is connected and non-isomorphic, with
+  one-to-two granularity pressure and relation type/direction/endpoint
+  mismatch;
+- the current semantic-owner non-identical positive does not freeze complete
+  closure or exact cardinality;
+- historical RED and STOP receipts remain valid and immutable;
+- no test, source, fixture, sample, manifest, or protected surface was changed
+  and no test was run.
+
+Inference:
+
+- independent full typed-graph replay is the selected coherent future
+  end-to-end positive;
+- retaining the current conflicting graph as a negative preserves the
+  one-to-many and partial-salvage rejection evidence.
+
+Unconfirmed:
+
+- corrected positive projected component count and kind histogram;
+- availability of a non-identical public input satisfying every owner-level
+  proof condition without a case cue;
+- corrected causal RED count and failure codes;
+- future implementation, GREEN, completion receipt, baseline lock, or Cycle
+  acceptance.
+
+Unwritten:
+
+- test exact4 correction or source exact3 implementation;
+- GREEN, canonical closure, successful completion receipt, baseline event,
+  P1 retry002, P2, fresh batch, exact100, Product Read, correction, B6, or
+  Cycle acceptance;
+- raw input/output, quotation, identifiable paraphrase, individual mapping,
+  parsed span, private note, body digest, key, or expected surface.
+
+No-guess boundary:
+
+- equal or normalized body, synonym list, component kind, broad typed shell,
+  source-local restatement status, case/family/fixture cue, or a non-empty
+  partial witness is not semantic equivalence proof;
+- an empty witness for an ineligible graph is not implementation failure;
+- this read-only authority must not be interpreted as test correction,
+  implementation, GREEN, or acceptance authority.
+
+Karen opinion:
+
+The parent contract is correct; the frozen positive denominator is not. The
+safe recovery is to retain that graph as a false-collapse negative and prove
+the future positive with two independently projected complete role-local
+graphs. This preserves a person's connected semantic differences instead of
+processing them as disposable repetition.
+
+Exactly one next separate authority candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+```
+
+It may change only test exact4 and run the minimum causal RED needed to freeze
+the corrected positive/negative contract. Future source exact3,
+implementation, GREEN, protected surfaces, later Cycle work, and acceptance
+remain prohibited.
+
+STOP. Separate approval required.

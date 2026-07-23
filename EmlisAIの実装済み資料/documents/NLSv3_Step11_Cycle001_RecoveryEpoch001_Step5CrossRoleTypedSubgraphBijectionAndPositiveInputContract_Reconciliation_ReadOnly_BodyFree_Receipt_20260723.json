@@ -1,0 +1,106 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_positive_input_reconciliation_receipt.v1",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY",
+  "revision_date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "cocolon_head": "bfaa4ca3a5b255072a0f31d8985bc05b79444a07",
+    "mashos_api_head": "e485f4a3c07ec0edeb2c248a74449b95f5017a58",
+    "current_authority_blob": "cf802ffe1d66b5c42c4e2eb659423bb2c4ce7196",
+    "execution_and_closure_plan_blob": "d5f5d185116ad0aaab86c3ab0afc65afd30fe22f",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "evidence_chain": {
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "frozen_red_receipt_blob": "a544760ba508778aa339cad57fed330dc3048b26",
+    "implementation_green_stop_result_blob": "9776f827a4cd384ec47f29ce0e83d4fe5e82ae96",
+    "implementation_green_stop_receipt_blob": "37ab784cf8f2f44945bafbeda33d56db4150b129",
+    "implementation_green_stop_handoff_blob": "360d070747c8bba247c1f4feec38acd1eabaa167"
+  },
+  "result": {
+    "status": "POSITIVE_INPUT_CONTRACT_RECONCILED_AUTHORITY_STOP",
+    "parent_design_changed": false,
+    "historical_red_immutable": true,
+    "historical_stop_immutable": true,
+    "current_default_positive_eligible": false,
+    "current_default_positive_future_disposition": "EMPTY_WITNESS_FALSE_COLLAPSE_NEGATIVE",
+    "current_test_exact4_requires_separate_red_correction": true,
+    "mashos_api_change_count": 0,
+    "test_change_count": 0,
+    "test_run_count": 0,
+    "source_change_count": 0,
+    "protected_surface_change_count": 0
+  },
+  "reconciled_contract": {
+    "proof_code": "TYPED_SEMANTIC_GRAPH_EQUIVALENCE",
+    "proof_basis": "COMPLETE_BODY_FREE_TYPED_COMPONENT_BIJECTION",
+    "closure_rule": "INCIDENT_RELATION_AND_UNKNOWN_AFFECTED_GRAPH_CLOSURE",
+    "same_granularity_required": true,
+    "one_to_one_and_onto_required": true,
+    "binding_count_rule": "EXACT_ELIGIBLE_CLOSED_GRAPH_CARDINALITY_EQUALITY_NOT_ARBITRARY_MINIMUM",
+    "connected_partial_salvage_allowed": false,
+    "parent_to_decomposed_unit_binding_allowed": false,
+    "independent_unmatched_meaning_remains_distinct": true,
+    "connected_mismatch_is_ineligible": true,
+    "empty_witness_is_fail_closed_no_equivalence": true,
+    "effect_scope": "CONTENT_DEPTH_ONLY",
+    "original_only_depth_is_floor": true,
+    "obligation_status_change_allowed": false,
+    "source_role_drop_allowed": false,
+    "original_reception_owner_change_allowed": false,
+    "partition_cross_source_bindings": "EXACT_EMPTY_PRESERVED",
+    "question_decision_is_semantic_source": false
+  },
+  "positive_contract": {
+    "full_owner_chain_positive_class": "INDEPENDENT_ROLE_LOCAL_FULL_TYPED_GRAPH_REPLAY",
+    "full_owner_chain_selected_positive_unmatched_eligible_component_count": 0,
+    "independent_bundle_build_required": true,
+    "independent_ledger_resolver_plan_and_source_witness_required": true,
+    "complete_graph_reprojection_required": true,
+    "raw_or_normalized_equality_is_proof": false,
+    "nonidentical_semantic_owner_positive_class": "EXPLICIT_REFERENT_PREDICATE_CLOSED_SINGLE_COMPONENT_RESTATEMENT",
+    "explicit_referent_and_predicate_proof_required": true,
+    "first_match_batch_selector_allowed": false,
+    "case_family_fixture_cue_allowed": false
+  },
+  "current_mashos_api_identity": {
+    "test_exact4_blobs": {
+      "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py": "2d27401250f84468339ec995afa5628e7b323ace",
+      "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py": "fa94723d02b37de72572d027372cdb8936e184a5",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py": "711385416c845e5225493b25868b94fd3cc68e46",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py": "33c73d30292c96e1d61cf6599a421414817ffd4b"
+    },
+    "future_source_exact3_blobs": {
+      "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": "d28e2ab3086fa09a62c8dbdb3d887a7bff116c78",
+      "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": "685ff7ccc8f5d7fd04dc9ed301b1649b608a868a",
+      "ai/services/ai_inference/emlis_ai_content_selection_v3.py": "7172a628f5ecdfb6ba888c36d42a6a62d0d7c22e"
+    }
+  },
+  "next_red_correction_surface_exact4": [
+    "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py",
+    "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py",
+    "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py",
+    "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py"
+  ],
+  "next_red_source_exact3_change_allowed": false,
+  "execution_state": {
+    "implementation_authorized": false,
+    "green_authorized": false,
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "NOT_AUTHORIZED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "correction": "NOT_RUN",
+    "b6": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY",
+  "authority_stop": true
+}
+
