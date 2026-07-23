@@ -14903,3 +14903,167 @@ STOP. Exactly one next separate authority candidate is:
 NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY
 
 It is not approved by this record.
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 bound-selected / CONTENT_DEPTH_ONLY reconciliation
+
+~~~text
+COMPLETED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY
+
+COCOLON_ENTRY_AND_PRE_EVIDENCE_WRITE_HEAD:
+cad49a542aa60d2cbac9497d00c85cf7857a7316
+
+MASHOS_API_ENTRY_AND_RESULT_HEAD:
+f2e73dfcc0b1f0091f077c41afbf9110e4b1b333
+
+RELATED_DRIFT_COUNT:
+0
+
+RESULT_BLOB:
+1d5a91eb0d2f46563c54fc68f12b8f154f5ae2f3
+
+BODY_FREE_RECEIPT_BLOB:
+3842046ec8d07cf1cfafb980bd1a1336445aff99
+
+HANDOFF_BLOB:
+d1dbb6c199486ad5c95f13b18142fec875e199b9
+
+EXECUTION_AND_CLOSURE_PLAN_PREDECESSOR_BLOB:
+e86a66aa71ea3fa67a923e4e52aac4a40241f8db
+
+RESULT:
+BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_RECONCILED_AUTHORITY_STOP
+
+DECISIVE_DISPOSITION:
+REMOVE_ONLY_SELECTED_INTERSECTION_FROM_ROLE_LOCAL_BOUND_OBLIGATION_PRESENCE_ASSERTION
+
+FUTURE_TEST_CORRECTION_SURFACE_COUNT:
+2
+
+MASHOS_API_CHANGE_COUNT:
+0
+
+SOURCE_CHANGE_COUNT:
+0
+
+TEST_CHANGE_COUNT:
+0
+
+TEST_RUN_COUNT:
+0
+
+IMPLEMENTATION_AUTHORIZED:
+FALSE
+
+GREEN_RUN:
+FALSE
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CORRECTION:
+NOT_RUN
+
+B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+~~~
+
+Confirmed facts:
+
+- Both main heads matched the approved authority-entry identities and the
+  required evidence was available without conflict.
+- Parent design limits witness effect to `CONTENT_DEPTH_ONLY` and freezes
+  obligation decision status and selection policy.
+- The frozen S5 helper separately preserves role-local bound-obligation
+  presence, required-bound selection, active refined roles, source-role
+  separation, original reception, and safety closure.
+- Its extra per-role `bound_ids & selected` condition cannot be satisfied in
+  the safety positive without selecting optional witness-bound obligations or
+  binding the protected must-separate closure.
+- The exact future correction removes only ` & selected`, leaving an explicit
+  per-role non-empty bound-obligation assertion.
+- The future correction/refreeze surface is test exact2: S5 assertion owner
+  plus recovery evidence/authority lineage owner.
+- No mashos-api source, test, or protected file changed and no test ran.
+
+Inference:
+
+- The stopped assertion likely conflated active source-role preservation with
+  selection inside the witness-bound subset.
+- The token-level correction is the smallest contract-preserving disposition.
+
+Unconfirmed:
+
+- Future corrected test blobs/head and correction/refreeze exact7 result.
+- Future source implementation, source/policy hashes, exact7 GREEN, broad
+  regression, completion, baseline lock, and Cycle acceptance.
+
+Unwritten:
+
+- No test correction, production source implementation, RED refreeze, GREEN,
+  broad regression, completion, baseline, fresh-batch, exact100, Product Read,
+  correction, B6, or Cycle-acceptance claim is written.
+- No raw/private body, quotation, identifiable paraphrase, individual mapping,
+  parsed span, body digest, key, or expected surface is recorded.
+
+No-guess boundary:
+
+- Do not make witness control obligation selection or decision status.
+- Do not bind a must-separate incident/affected closure.
+- Do not weaken required-bound coverage, both-active-role proof, unmatched
+  preservation, original reception, lineage, or tamper guards.
+- Do not change source exact3, semantic/S4 tests, parent, or protected surfaces
+  under the next correction/refreeze.
+- Do not guess future result identities or continue automatically.
+
+Karen opinion:
+
+The witness should establish semantic identity for depth, not choose an
+optional obligation for display.  Keeping role-local obligation presence while
+removing only the selected intersection preserves both the proof chain and the
+Content Selection boundary.
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleBoundSelectedIntersectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_20260723.md @ blob 1d5a91eb0d2f46563c54fc68f12b8f154f5ae2f3
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleBoundSelectedIntersectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_BodyFree_Receipt_20260723.json @ blob 3842046ec8d07cf1cfafb980bd1a1336445aff99
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleBoundSelectedIntersectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_Handoff_20260723.md @ blob d1dbb6c199486ad5c95f13b18142fec875e199b9
+
+STOP. Exactly one next separate authority candidate is:
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+
+It is not approved by this record.
