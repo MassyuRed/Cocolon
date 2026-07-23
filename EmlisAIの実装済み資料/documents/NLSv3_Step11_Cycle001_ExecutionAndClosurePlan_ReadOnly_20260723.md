@@ -922,3 +922,21 @@ NEXT_AUTHORITY_SEPARATE_APPROVAL_REQUIRED
 - next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY`
 
 This dated entry is later than §12.5 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
+
+## 2026-07-23 Recovery Epoch 001 canonical current closure remediation RED freeze
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY`
+- Cocolon entry: `3cb7867c3f8cbe39ee38ffe5c55179df81b5b0fa`
+- mashos-api entry / RED result: `bd62ef0eec2348e3b190ec2a39c3794886ccd10d` → `21600c3d07b4f3d870beb3acb0bd78bf3e898f36`
+- body-free receipt blob: `e78d528600fef27ce3de52ef91c1118d6866d2ed`
+- causal RED: 12 collected / 5 passed / 7 failed / 0 error
+- Step 5 refined end-to-end positive: `PROVED`
+- Step 5 active-role-drop independent negative: `PROVED`
+- Step 5 cross-role semantic-restatement / depth noninflation: `CONFLICT`
+- canonical source baseline: `UNLOCKED`
+- successful Step 0–10 completion receipt count: `0`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read: `NOT_AUTHORIZED / NOT_RUN`
+- Cycle 001: `NOT_ACCEPTED`
+- automatic progression: `false`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_PARENT_DESIGN_ADDENDUM_READ_ONLY`
+- state: `AUTHORITY_STOP`
