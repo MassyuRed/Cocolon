@@ -1,0 +1,157 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_unmatched_optional_selection_content_depth_only_red_refreeze.body_free_receipt.v1",
+  "date": "2026-07-23",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY",
+  "execution_class": "TEST_CONTRACT_CORRECTION_CAUSAL_RED_REFREEZE_AND_BODY_FREE_EVIDENCE_RECORDING",
+  "result": "UNMATCHED_OPTIONAL_SELECTION_POLICY_CORRECTED_AND_CAUSAL_RED_REFROZEN_AUTHORITY_STOP",
+  "entry_heads": {
+    "Cocolon": "d2c50d5559ee69303c1e93ab6074eea40c25b0b7",
+    "mashos-api": "b43f84a6b868e983a91c40e73735e03865806818"
+  },
+  "result_heads": {
+    "mashos-api": "a3d43433841f58313c3cd381ce779fa0a14cdbd7",
+    "mashos-api_tree": "1ee1c3cfa6bd7dc809d81c02cc9a04e6a8978c46",
+    "mashos-api_parent": "b43f84a6b868e983a91c40e73735e03865806818",
+    "mashos-api_atomic_commit": true
+  },
+  "parent_contract": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_ParentDesignAddendum_ReadOnly_20260723.md",
+    "blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "effect_scope": "CONTENT_DEPTH_ONLY",
+    "unmatched_meaning_distinct": true,
+    "witness_selection_authority": false,
+    "witness_decision_status_authority": false
+  },
+  "predecessor_reconciliation_evidence": {
+    "current_authority_blob": "8762def982bc16417b617faf45161d77b9e9bb01",
+    "execution_plan_blob": "5a561b315426d6a3d67302619f740804fc6829aa",
+    "result_blob": "d624d99c81eb6234bab0807e623ef5b187b4d0c0",
+    "receipt_blob": "b6efcd9252b9b1a7e0cd09aad0491d1c58c9d57a",
+    "handoff_blob": "223b6d4c82a71642476cdea1686bf37b4e23c8ad"
+  },
+  "changed_surface": {
+    "path_count": 2,
+    "production_source_path_count": 0,
+    "paths": {
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py": {
+        "entry_blob": "f2e702a75c2294d689e3f55a6b7b7b8da149fa2a",
+        "result_blob": "52e1b069f21861a89a1a22bc97de422cd2ac314d",
+        "entry_sha256": "cb55178ca5df4746074b7d1c242d46463c5335d7d0a7962900933e5c11cf62f9",
+        "result_sha256": "ea18716e54a1e85c84b78d85fe8a8ff269d14c911deef08b89013277293fa475"
+      },
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py": {
+        "entry_blob": "51454fe9d1f0f6267d04e5f9872689be0072bed7",
+        "result_blob": "7f7f82a048562034189a2514c281c7853c754024",
+        "entry_sha256": "0ddbe5c7e1aef2f56276775694e0b016c5902e367fa1de98e7848cc6ab6e3cb1",
+        "result_sha256": "3893ac2333b5ae0fe970cef705c331ffb92d6e3913eb785218afa92f7604859d"
+      }
+    },
+    "additions": 410,
+    "deletions": 1
+  },
+  "corrected_contract": {
+    "old_contract": "ALL_UNMATCHED_OBLIGATIONS_ARE_SELECTED",
+    "old_contract_disposition": "WITHDRAWN_PARENT_CONFLICT",
+    "oracle_owner": "TEST_OWNED_BODY_FREE_INDEPENDENT_POLICY_ORACLE",
+    "production_unmatched_helper_used_as_oracle": false,
+    "independently_selected_unmatched_rule": "UNMATCHED_INTERSECTION_REQUIRED_IDS_UNION_REQUIRED_BOUND_RECEPTION_TARGET_IDS",
+    "remaining_optional_status": "deferred_by_budget",
+    "remaining_optional_reason_code": "OPTIONAL_DEFERRED_BY_BUDGET",
+    "remaining_optional_integrated_into": null,
+    "non_vacuous_original_role": true,
+    "non_vacuous_supplemental_role": true,
+    "non_vacuous_optional_unmatched": true,
+    "stable_causal_code": "RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED"
+  },
+  "authoritative_exact7": {
+    "collected": 7,
+    "passed": 5,
+    "causal_failed": 2,
+    "errors": 0,
+    "unexpected": 0,
+    "warnings": 0,
+    "duration_seconds": 11.03,
+    "causal_nodes": [
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py::test_s5_cross_role_depth_noninflation_floor_and_effect_scope_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_content_consumer_is_resolved_or_red"
+    ],
+    "stable_causal_code": "RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED"
+  },
+  "diagnostic_execution": {
+    "s5_direct": {
+      "passed": 0,
+      "causal_failed": 1,
+      "errors": 0,
+      "duration_seconds": 5.64
+    },
+    "authority_and_recovery_content": {
+      "passed": 1,
+      "causal_failed": 1,
+      "errors": 0,
+      "duration_seconds": 3.89
+    },
+    "included_in_authoritative_counts": false
+  },
+  "protected_source_exact3": {
+    "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": {
+      "blob": "cd2caeac0dfa4b502c798e1e5f65653033c96e2c",
+      "sha256": "348003adbe7991de1717a8a2a7ca9d26a04e7f42caccdef2e4a0f31634f171b6"
+    },
+    "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": {
+      "blob": "241d38331b00fd6c7bd17d4c8a30b6b52b0c3f69",
+      "sha256": "ddc42e6f30c46876b4ccc6c7f936c6cc7dcc6f394cbc2d9825694c7617b465f9"
+    },
+    "ai/services/ai_inference/emlis_ai_content_selection_v3.py": {
+      "blob": "6096dd41e46fe9d9abc7695b49b3125b2f87cea1",
+      "sha256": "3c9c51a9e514169a1b17d408329b3d2d526bab08b8663e0fb2606ae358eec3bb"
+    }
+  },
+  "protected_other_blobs": {
+    "semantic_direct_test": "49864c6ee6a944c603da21ebd18ba60633e56fb9",
+    "inventory_direct_test": "3f0bd59facec541d8bad09d1af9410344c753e45",
+    "refined_partition": "fb6f4c299f5e61c6527acc86323a610b416c8e1d",
+    "artifact_contract": "953d062fa858870e65d96cf03694d68c99003594"
+  },
+  "body_free": {
+    "raw_input_recorded": false,
+    "raw_output_recorded": false,
+    "quoted_body_recorded": false,
+    "individual_mapping_recorded": false,
+    "parsed_span_recorded": false,
+    "private_note_recorded": false,
+    "body_digest_recorded": false,
+    "key_recorded": false
+  },
+  "closure_state": {
+    "red_correction_refreeze": "COMPLETED",
+    "source_implementation": "NOT_AUTHORIZED",
+    "green": "NOT_RUN",
+    "broad_regression": "NOT_RUN",
+    "successful_step0_10_completion_receipt_count": 0,
+    "step5": "NOT_COMPLETED",
+    "source_baseline": "UNLOCKED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "future_boundary": {
+    "next_source_candidate_count": 1,
+    "next_source_candidate": "ai/services/ai_inference/emlis_ai_content_selection_v3.py",
+    "next_exact7_expected": {
+      "collected": 7,
+      "passed": 7,
+      "failed": 0,
+      "errors": 0,
+      "unexpected": 0
+    },
+    "authorized_here": false
+  },
+  "cocolon_evidence": {
+    "result_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_20260723.md",
+    "result_blob": "ab1987233c8932398308e5efa323fd6a994fe661",
+    "result_sha256": "97929bb9e230428ce01f706595dfd54cab449c23d2ddfd52aa54f193d23c86ce"
+  },
+  "automatic_progression": false,
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY"
+}
