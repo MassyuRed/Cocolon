@@ -1,0 +1,133 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_unmatched_optional_selection_content_depth_only_reconciliation.body_free_receipt.v1",
+  "date": "2026-07-23",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY",
+  "execution_class": "READ_ONLY_CONTRACT_RECONCILIATION_AND_BODY_FREE_EVIDENCE_RECORDING",
+  "result": "TARGETED_EXACT7_MACHINE_GREEN_CONFIRMED_UNMATCHED_OPTIONAL_SELECTION_PARENT_CONTRACT_CONFLICT_CONFIRMED_IMPLEMENTATION_GREEN_REJECTED_STEP5_NOT_COMPLETED_AUTHORITY_STOP",
+  "entry_heads": {
+    "Cocolon": "a9be4960aca76427cb0dcd66730dce8c4a84d7dc",
+    "mashos-api": "b43f84a6b868e983a91c40e73735e03865806818"
+  },
+  "predecessor": {
+    "mashos_api_commit": "4abc06bc544709f359ad4984357af0cd60fe083f",
+    "implementation_commit": "b43f84a6b868e983a91c40e73735e03865806818",
+    "compare_status": "ahead",
+    "ahead_by": 1,
+    "behind_by": 0,
+    "changed_path_count": 3,
+    "changed_paths": [
+      "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py",
+      "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py",
+      "ai/services/ai_inference/emlis_ai_content_selection_v3.py"
+    ],
+    "test_changed_path_count": 0
+  },
+  "parent_contract": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_ParentDesignAddendum_ReadOnly_20260723.md",
+    "blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "effect_scope": "CONTENT_DEPTH_ONLY",
+    "selection_policy_change_authorized": false,
+    "decision_status_change_authorized": false,
+    "omit_defer_integrate_authorized": false,
+    "unmatched_meaning_must_remain_distinct": true
+  },
+  "materialization_identity": {
+    "github_ref": "b43f84a6b868e983a91c40e73735e03865806818",
+    "source_exact3_git_blobs": {
+      "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": "cd2caeac0dfa4b502c798e1e5f65653033c96e2c",
+      "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": "241d38331b00fd6c7bd17d4c8a30b6b52b0c3f69",
+      "ai/services/ai_inference/emlis_ai_content_selection_v3.py": "6096dd41e46fe9d9abc7695b49b3125b2f87cea1"
+    },
+    "test_exact4_git_blobs": {
+      "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py": "49864c6ee6a944c603da21ebd18ba60633e56fb9",
+      "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py": "3f0bd59facec541d8bad09d1af9410344c753e45",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py": "f2e702a75c2294d689e3f55a6b7b7b8da149fa2a",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py": "51454fe9d1f0f6267d04e5f9872689be0072bed7"
+    },
+    "identity_match": true
+  },
+  "authoritative_exact7": {
+    "collected": 7,
+    "passed": 7,
+    "failed": 0,
+    "errors": 0,
+    "unexpected": 0,
+    "warnings": 0,
+    "duration_seconds": 8.22,
+    "classification": "TARGETED_MACHINE_GREEN_NOT_PARENT_CONTRACT_GREEN"
+  },
+  "body_free_conflict_diagnostic": {
+    "partition_issue_count": 0,
+    "effect_scope": "CONTENT_DEPTH_ONLY",
+    "unmatched_obligation_count": 33,
+    "required_unmatched_count": 10,
+    "optional_unmatched_count": 23,
+    "unmatched_selected_count": 33,
+    "optional_unmatched_selected_count": 23,
+    "optional_reception_selected_count": 1,
+    "optional_kind_counts": {
+      "bound_emlis_reception": 1,
+      "grounded_nucleus_notice": 10,
+      "grounded_relation_preservation": 1,
+      "significance_or_shift": 1,
+      "unknown_boundary_preservation": 10
+    },
+    "raw_body_recorded": false,
+    "individual_mapping_recorded": false,
+    "body_digest_recorded": false
+  },
+  "read_only_counterfactual_diagnostic": {
+    "file_change_count": 0,
+    "selected_count_without_witness_forcing": 10,
+    "required_count": 10,
+    "required_all_selected": true,
+    "optional_selected_count": 0,
+    "depth": "layered",
+    "policy_issue_count": 0,
+    "implementation_evidence": false
+  },
+  "causal_localization": {
+    "semantic_owner_conflict": false,
+    "inventory_owner_conflict": false,
+    "content_selection_owner_conflict": true,
+    "cause": "WITNESS_DERIVED_UNMATCHED_IDS_ARE_UNIONED_INTO_FORCED_ACTIVE_IDS_AND_OPTIONAL_DECISIONS_BECOME_SELECTED",
+    "current_test_encodes_conflict": true
+  },
+  "acceptance": {
+    "targeted_machine_green": "CONFIRMED",
+    "parent_contract_green": "REJECTED",
+    "step5": "NOT_COMPLETED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_red_boundary": {
+    "changed_test_path_count": 2,
+    "changed_test_paths": [
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py"
+    ],
+    "production_source_change_count": 0,
+    "expected_exact7": {
+      "collected": 7,
+      "passed": 5,
+      "causal_failed": 2,
+      "errors": 0,
+      "unexpected": 0
+    },
+    "stable_causal_code": "RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED",
+    "future_implementation_source_candidate_count": 1,
+    "future_implementation_source_candidate": "ai/services/ai_inference/emlis_ai_content_selection_v3.py"
+  },
+  "cocolon_evidence": {
+    "result_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_20260723.md",
+    "result_blob": "d624d99c81eb6234bab0807e623ef5b187b4d0c0",
+    "result_sha256": "0872ad32166b9102ccef1cf3ff5a5ebf51db5c83d33f726b76844a2fcbec580b"
+  },
+  "mashos_api_changed_path_count_under_this_authority": 0,
+  "automatic_progression": false,
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY"
+}
