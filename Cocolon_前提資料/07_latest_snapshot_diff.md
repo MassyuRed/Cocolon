@@ -15268,3 +15268,170 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSE
 It is not approved by this record. Source implementation, GREEN, broad
 regression, completion, baseline lock, later Cycle work, and acceptance require
 separate authority.
+
+## 2026-07-23 — Step 5 unmatched optional selection / CONTENT_DEPTH_ONLY contract reconciliation
+
+Approved authority:
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY`
+
+Entry / evidence pins:
+
+- Cocolon entry head:
+  `a9be4960aca76427cb0dcd66730dce8c4a84d7dc`
+- Cocolon pre-current-authority-update head:
+  `39f69fbbbb59e711cf089ed78a31e53147021685`
+- mashos-api current head:
+  `b43f84a6b868e983a91c40e73735e03865806818`
+- mashos-api implementation predecessor:
+  `4abc06bc544709f359ad4984357af0cd60fe083f`
+- parent-design blob:
+  `df8d2e49287554b3da2867afde634b3afbec4a37`
+
+Result:
+
+`TARGETED_EXACT7_MACHINE_GREEN_CONFIRMED_UNMATCHED_OPTIONAL_SELECTION_PARENT_CONTRACT_CONFLICT_CONFIRMED_IMPLEMENTATION_GREEN_REJECTED_STEP5_NOT_COMPLETED_AUTHORITY_STOP`
+
+### Confirmed facts
+
+1. GitHub compare from `4abc06bc...` to `b43f84a6...` is one commit,
+   ahead 1 / behind 0, with source exact3 and test exact0.
+2. The verification materialization's source exact3 and authoritative exact7
+   test exact4 Git blobs match GitHub `b43f84a6...`.
+3. Authoritative exact7 reproduced
+   `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+   0 warning / 8.22 seconds`.
+4. The parent design fixes witness effect to `CONTENT_DEPTH_ONLY` and forbids
+   witness-driven obligation decision-status or selection/defer/integrate
+   changes.
+5. Current Content Selection unions witness-derived unmatched obligation IDs
+   into `forced_active_ids`; current S5 test requires every unmatched
+   obligation to be selected.
+6. Body-free aggregate is:
+   unmatched obligation 33 / required unmatched 10 / optional unmatched 23 /
+   unmatched selected 33 / optional unmatched selected 23 /
+   optional reception selected 1.
+7. A file-unmodified read-only counterfactual diagnostic, removing only
+   witness-derived unmatched forcing, produced selected 10 / required 10 /
+   optional selected 0 / depth layered / policy issue 0.
+8. Therefore current exact7 is targeted machine GREEN but not parent-contract
+   GREEN. Step 5 completion is not established.
+
+Optional kind aggregate, body-free:
+
+- bound reception: 1
+- grounded nucleus notice: 10
+- grounded relation preservation: 1
+- significance or shift: 1
+- unknown boundary preservation: 10
+
+### Causal localization
+
+- semantic witness owner:
+  current contract portion GREEN; protected for next RED
+- inventory / refined snapshot owner:
+  current contract portion GREEN; protected for next RED
+- content-selection owner:
+  parent conflict; witness is being used as optional decision authority
+- S5 direct and recovery content tests:
+  currently encode or fail to detect the forbidden decision change
+
+The conflict is not the preservation of unmatched role-local meaning. That
+distinctness remains required. The conflict is changing optional decision
+status merely because the witness identifies unmatched components.
+
+### Acceptance and closure
+
+- targeted machine GREEN:
+  `CONFIRMED`
+- parent-contract GREEN:
+  `REJECTED`
+- prior implementation:
+  `EXECUTED_BUT_NOT_ACCEPTED_AS_STEP5_COMPLETION`
+- mashos-api change under this read-only authority:
+  exact0
+- Step 5:
+  `NOT_COMPLETED`
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / G2 / P2:
+  `NOT_AUTHORIZED`
+- fresh batch:
+  `RESERVED_NOT_CREATED`
+- formal exact100 / Product Read:
+  `NOT_RUN` / `NOT_RUN`
+- correction / B6:
+  `NOT_AUTHORIZED`
+- Cycle 001:
+  `NOT_ACCEPTED`
+
+### Next RED boundary — not approved here
+
+Changed test path exact2:
+
+1. `ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py`
+2. `ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py`
+
+Expected authoritative exact7:
+
+- 7 collected
+- 5 passed
+- 2 causal failed
+- 0 error
+- 0 unexpected
+- stable causal code:
+  `RECOVERY_EPOCH001_S5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_POLICY_NOT_PROVED`
+
+Production source change in next RED is exact0. A later, separately approved
+implementation may consider source exact1 only:
+
+`ai/services/ai_inference/emlis_ai_content_selection_v3.py`
+
+Semantic source, inventory source, semantic direct test, S4 direct test,
+partition/artifact owners, fixture/sample/manifest, API/DB/RN/runtime/public/
+shared route, historical evidence, Detailed Design, parent design, and accepted
+authority history remain protected.
+
+### 推測
+
+なし。結果は GitHub bytes、parent design、exact7、body-free aggregate の
+直接照合である。
+
+### 未確認事項
+
+- corrected test exact2 bytes / Git blobs / SHA-256
+- corrected RED actual 5 pass / 2 causal fail
+- future source exact1 bytes / Git blob / SHA-256
+- future implementation exact7 GREEN
+- broad regression / canonical closure / formal exact100 / Product Read
+
+### 書かれていないこと / 推測禁止境界
+
+- current mashos-api main を rollback していない。
+- current machine GREEN を Step 5 completion として受理していない。
+- optional obligation を常に deferred とする一般規則は固定していない。
+- read-only counterfactual diagnostic は implementation evidence ではない。
+- next RED、future implementation、GREEN、baseline lock、P1 retry002、G2、
+  fresh batch、formal exact100、Product Read、B6、Cycle acceptance は未承認。
+
+### 華恋の意見
+
+親契約違反を含む GREEN を成功証跡として先へ運ぶべきではない。衝突が
+Content Selection の decision authority に局在しているため、次は test
+exact2 で causal RED を再固定し、その後の別権限で source exact1 だけを
+修正するのが最小かつ追跡可能である。
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_20260723.md @ blob d624d99c81eb6234bab0807e623ef5b187b4d0c0
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_BodyFree_Receipt_20260723.json @ blob b6efcd9252b9b1a7e0cd09aad0491d1c58c9d57a
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ReadOnly_Handoff_20260723.md @ blob 223b6d4c82a71642476cdea1686bf37b4e23c8ad
+4. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md @ blob 5a561b315426d6a3d67302619f740804fc6829aa
+
+STOP. Exactly one next separate authority candidate is:
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_UNMATCHED_OPTIONAL_SELECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+It is not approved by this record. Automatic progression is false.
