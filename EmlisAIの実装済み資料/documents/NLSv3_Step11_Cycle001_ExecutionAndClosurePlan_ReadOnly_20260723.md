@@ -1250,3 +1250,55 @@ earlier result. Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.16 2026-07-23 Step 5 bound-selected / CONTENT_DEPTH_ONLY reconciliation
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_READ_ONLY`
+- Cocolon entry / pre-evidence-write head:
+  `cad49a542aa60d2cbac9497d00c85cf7857a7316`
+- mashos-api entry / result head:
+  `f2e73dfcc0b1f0091f077c41afbf9110e4b1b333`
+- result / receipt / handoff blobs:
+  `1d5a91eb0d2f46563c54fc68f12b8f154f5ae2f3` /
+  `3842046ec8d07cf1cfafb980bd1a1336445aff99` /
+  `d1dbb6c199486ad5c95f13b18142fec875e199b9`
+- result:
+  `BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_RECONCILED_AUTHORITY_STOP`
+- parent disposition:
+  unchanged; witness effect remains `CONTENT_DEPTH_ONLY` and obligation
+  decision status / selection policy remain outside witness authority
+- exact future S5 correction:
+  remove only ` & selected` from the per-role bound-obligation aggregate,
+  retaining the explicit non-empty role-local sets
+- preserved proof:
+  required-bound subset selected, required coverage 100%, both refined roles
+  active, source-role separation, original reception/control owner, depth
+  equality/floor, safety closure exclusion, unmatched preservation,
+  determinism, body-free lineage, and tamper rejection
+- future correction/refreeze changed path:
+  test exact2 — S5 assertion owner and recovery evidence/authority lineage
+  owner
+- future correction/refreeze exact7:
+  7 collected / 1 lineage pass / 6 causal fail / 0 error / 0 unexpected
+- mashos-api / source / test / protected-surface change:
+  exact0 under this read-only authority
+- test run:
+  exact0
+- implementation / GREEN:
+  not authorized / not run
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+This entry supersedes only the prior next-authority pointer.  It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result.  Automatic progression is false.
