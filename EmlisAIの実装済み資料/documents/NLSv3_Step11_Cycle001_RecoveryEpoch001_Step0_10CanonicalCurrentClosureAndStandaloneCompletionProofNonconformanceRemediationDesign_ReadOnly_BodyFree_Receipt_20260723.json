@@ -1,0 +1,68 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.remediation_design_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY",
+  "result": "REMEDIATION_DESIGN_FROZEN_RED_NOT_AUTHORIZED_AUTHORITY_STOP",
+  "body_free": true,
+  "automatic_progression": false,
+  "fixed_identity": {
+    "cocolon_entry": "fe7d24daf9028ccc151981d31f0d113c84442e6e",
+    "mashos_api_entry_result": "bd62ef0eec2348e3b190ec2a39c3794886ccd10d",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "recovery_parent_design_receipt_blob": "bdfbd559535db06ae4af35fe1bb58716d6566126",
+    "predecessor_p1_retry_receipt_blob": "2f20d7558ae70ad5f34c2e05acce198dcfced689",
+    "predecessor_candidate": "nls_v3_rc_0032",
+    "predecessor_declared_closure_sha256": "07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22"
+  },
+  "predecessor_result": {
+    "tests_collected": 131,
+    "tests_passed": 123,
+    "tests_failed": 8,
+    "tests_error": 0,
+    "step9_verdict": "CONFLICT",
+    "other_step_verdict_count_not_proved": 10,
+    "proved_count": 0
+  },
+  "design_decisions": [
+    "HISTORICAL_AND_CURRENT_LINEAGE_SEPARATE",
+    "CURRENT_STANDALONE_RECEIPT_OWNER_REQUIRED",
+    "SINGLE_CANONICAL_CURRENT_CLOSURE_WITH_DERIVED_VIEWS",
+    "EXISTING_LOCAL_UNLISTED_IMPORT_MUST_FAIL",
+    "STEP5_REFINED_END_TO_END_POSITIVE_REQUIRED",
+    "STEP9_STANDALONE_SUCCESSOR_SINGLE_GRAPH_REQUIRED",
+    "STEP10_ADAPTER_LOCAL_CLONE_FORBIDDEN",
+    "STEP0_TO_STEP10_TO_P2_RECEIPT_CHAIN_EXACT"
+  ],
+  "state": {
+    "source_baseline": "UNLOCKED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "sequence_event_1_source_baseline_locked": false,
+    "sequence_event_2_step0_10_prerequisites_proved": false,
+    "recovery_epoch001": "DEFINED_NOT_STARTED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "p2_authorized": false,
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "execution_boundary": {
+    "source_change_count": 0,
+    "test_change_count": 0,
+    "fixture_change_count": 0,
+    "sample_change_count": 0,
+    "manifest_change_count": 0,
+    "test_execution_count": 0,
+    "exact100_execution_count": 0,
+    "product_read_count": 0,
+    "private_body_generation_count": 0,
+    "mashos_api_change_count": 0,
+    "subagent_count": 3,
+    "subagent_write_test_commit_count": 0
+  },
+  "privacy": {
+    "raw_input_output_included": false,
+    "individual_mapping_included": false,
+    "parsed_span_included": false,
+    "private_note_included": false,
+    "body_digest_included": false,
+    "key_included": false
+  },
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY"
+}
