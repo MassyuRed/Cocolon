@@ -15898,3 +15898,148 @@ APPROVED_AUTHORITY_ACTIVE
 AUTOMATIC_PROGRESSION:
 false
 ```
+
+## 2026-07-24 post-Step5 current closure root RED correction / refreeze completion
+
+### 確認済み
+
+1. completed authority:
+   `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_STEP5_CURRENT_CLOSURE_ROOT_RED_CORRECTION_AND_REFREEZE_ONLY`
+2. Cocolon authority-entry commit:
+   `cdf87802e0a841fc37a342e5800cb1aa7dcf36e7`
+3. mashos-api entry / result commits:
+   `5033435bc94c4c0260cb3193a3c64b177971ceb5` /
+   `c3bafd02615e73d47afd222d1ddef53bfc87af59`
+4. changed path exact1:
+   `ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py`
+5. entry / result test blobs:
+   `7f7f82a048562034189a2514c281c7853c754024` /
+   `98a80d62b65975d17733c635324e06732dff82d7`
+6. historical dependency closureはexact17 /
+   `3d42e942239666dc37d14c9c2969d548988c02e38ac497bb65b825d9b4c1f3bd`
+   のまま不変である。
+7. post-Step5 current dependency closureはexact38 /
+   `7d15cc072ac4ac28b6b9ce90676c6238ba08d5f59fd1896a7273ce7d57a7f302`
+   へ再固定された。
+8. entry full recoveryは
+   `15 collected / 8 passed / 1 current-lineage mismatch /
+   6 causal failed / 0 error / 0 unexpected / 3.79 seconds`である。
+9. final fresh-current full recoveryは
+   `15 collected / 9 passed / 6 causal failed / 0 error /
+   0 unexpected / 0 warning / 4.04 seconds`である。
+10. final Step 5 authoritative exact7は
+    `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+    0 warning / 10.45 seconds`である。
+11. Step 5 parent conflictは`RESOLVED`、targeted exact7は`GREEN`、
+    formal Step 5 completionは`NOT_COMPLETED`である。
+12. Step 5 source exact3 / test exact4はimplemented protected surfaceへ移り、
+    remaining future surfaceはproduction/tool exact7 / test exact2である。
+13. body-free result / receipt / handoff commits:
+    `36cf7500b69935aae37f56f234faadfc8b1ba030` /
+    `4f2c4c87bae10e098beebf33b890ffd80c1e1141` /
+    `bbb820ea14ae662d13143823890bdabaf8eedfde`
+14. body-free result / receipt / handoff blobs:
+    `7c3605dd209ba91f0e7822208dbe6371df641352` /
+    `ba3ea33e990c7aaef0d264356fb6357ef51b3653` /
+    `ad9766653a3aded79e9acc7786cd44cfc1101e57`
+15. Execution and Closure Plan commit / blob:
+    `4982f643ee56e5aa401af7f95ff32e776094b131` /
+    `a632a5cbd384479fe3bcf0379930dc52721e2c96`
+
+### Closure state
+
+```text
+CANONICAL_CURRENT_CLOSURE_OWNER:
+NOT_PROVED
+
+INDEPENDENT_VERIFIER:
+NOT_PROVED
+
+CURRENT_COMPLETION_RECEIPT:
+NOT_CREATED
+
+G1:
+REMAINING_CAUSAL_RED_REFROZEN_NOT_COMPLETED
+
+G2:
+BLOCKED_NOT_AUTHORIZED
+
+STEP5:
+NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+BROAD_REGRESSION:
+NOT_RUN
+
+P1_RETRY002 / P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100 / PRODUCT_READ / CORRECTION / B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+```
+
+### 推測
+
+current rootの移動は、承認済みStep 5 source chainによるcurrent source bytesの
+変更と、未変更helperによる決定的再導出で説明できる。旧rootはpre-Step5
+current predecessorとして保持し、歴史的誤りへ再分類しない。
+
+### 未確認
+
+- remaining production/tool exact7とtest exact2の実装結果
+- recovery exact15のall GREEN
+- Step 9 / Step 10 full GREEN
+- successful Step 0–10 completion receipt
+- source baseline lock
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / B6
+- Cycle 001 acceptance
+
+### 書かれていないこと / 推測禁止境界
+
+- RED refreezeをremaining implementation完了へ昇格しない。
+- Step 5 targeted GREENをformal completionへ昇格しない。
+- successful receiptとbaseline lockを創作しない。
+- P1 retry002、P2、fresh exact100、Product Read、B6、Cycle acceptanceへ
+  自動進行しない。
+- protected recovery test、Step 5 source exact3 / test exact4、original
+  protected surfaceを次実装で変更しない。
+
+### 華恋の意見
+
+current lineageとremaining denominatorが同じpost-Step5 treeへ揃ったため、
+次は別のread-only代理作業ではなく、凍結済みexact9だけで残るcausal exact6を
+GREENへ閉じる段階である。ただし、その実装は別authorityであり、現在はSTOPする。
+
+Body-free evidence:
+
+1. result:
+   `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_PostStep5CurrentClosureRoot_RED_CorrectionAndRefreezeOnly_ReadOnly_20260724.md`
+   @ blob `7c3605dd209ba91f0e7822208dbe6371df641352`
+2. receipt:
+   `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_PostStep5CurrentClosureRoot_RED_CorrectionAndRefreezeOnly_ReadOnly_BodyFree_Receipt_20260724.json`
+   @ blob `ba3ea33e990c7aaef0d264356fb6357ef51b3653`
+3. handoff:
+   `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_PostStep5CurrentClosureRoot_RED_CorrectionAndRefreezeOnly_ReadOnly_Handoff_20260724.md`
+   @ blob `ad9766653a3aded79e9acc7786cd44cfc1101e57`
+4. Execution and Closure Plan:
+   `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md`
+   @ blob `a632a5cbd384479fe3bcf0379930dc52721e2c96`
+
+No Mash-side file operation is required for this completed authority.
+
+STOP. Exactly one next separate authority candidate is:
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_STEP5_CURRENT_CLOSURE_ROOT_IMPLEMENTATION_AND_GREEN_ONLY`
+
+Automatic progression is false.
