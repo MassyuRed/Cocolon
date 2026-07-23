@@ -7,7 +7,7 @@ document_authority: "NLS_V3_STEP11_CYCLE001_EXECUTION_AND_CLOSURE_PLAN_READ_ONLY
 body_free: true
 automatic_progression: false
 cycle001_status: "NOT_ACCEPTED"
-next_authority: "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY / SEPARATE_APPROVAL_REQUIRED"
+next_authority: "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY / SEPARATE_APPROVAL_REQUIRED"
 ---
 
 # Cocolon EmlisAI NLS v3 Step 11 Cycle 001 実行・完了計画書
@@ -726,8 +726,8 @@ private bodyを必要とするgateはlocal-onlyまたは承認済みprivate revi
 | gate | current state | current evidence | next action |
 |---|---|---|---|
 | G0 plan / source freeze | `COMPLETE_IN_REVISION_CONTAINING_THIS_FILE` | this document | authority STOP |
-| G1 Step 0–10 readiness | `P1_FAILED_STOP / REMEDIATION_IMPLEMENTED_GREEN / P1_RETRY_NOT_AUTHORIZED` | P1 receipt blob `965f6b9a9467769e24508340c1c59aafa4f40797`; implementation / GREEN receipt blob `4b33d6cdba6f4a48360b8277faf087da7cd2ad86`; mashos-api `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; targeted test 56 / 56; source baseline `UNLOCKED` | separate P1 retry approval required; do not lock baseline or create fresh batch |
-| G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P1 failed; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | resolve P1 prerequisite nonconformance first; do not create batch/run/review or backfill |
+| G1 Step 0–10 readiness | `P1_RETRY_FAILED_STOP / STEP0_10_NOT_PROVED` | P1 retry receipt blob `2f20d7558ae70ad5f34c2e05acce198dcfced689`; mashos-api `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; named tests 131 collected / 123 passed / 8 failed; Step 9 `CONFLICT`; source baseline `UNLOCKED` | separate canonical current closure / standalone completion proof remediation design approval required; do not lock baseline or create fresh batch |
+| G2 batch / initial process | `FAILED_STOP` | historical sequence remains `FAILED`; Recovery Epoch 001 P1 retry failed; source baseline `UNLOCKED`; fresh batch `RESERVED_NOT_CREATED`; P2–P4 `NOT_STARTED` | resolve canonical current closure / standalone completion proof nonconformance first; do not create batch/run/review or backfill |
 | G3 B6 failure localization | `EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2` | current B6 Product Read rejection exact10 / exact8 | do not start remediation |
 | G4 B6 RED freeze | `BLOCKED_BY_G3` | none | do not start |
 | G5 B6 implementation | `BLOCKED_BY_G4` | none | do not start |
@@ -817,9 +817,32 @@ This dated entry is later than §12.2 and the historical next-authority text in 
 
 This dated entry is later than §12.3 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
 
+
+### 12.5 2026-07-23 Recovery Epoch 001 P1 retry mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY`
+- result receipt: blob `2f20d7558ae70ad5f34c2e05acce198dcfced689`
+- addendum: blob `d23966dca07c0f9a43c0e9d311a70a6445a12dfe`
+- handoff: blob `678f53424d2a0c5bed831992b6159af373920a85`
+- result: `P1_RETRY_FAILED_STOP / SOURCE_BASELINE_UNLOCKED / STEP0_10_NOT_PROVED / AUTHORITY_STOP`
+- mashos-api: entry/result `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`; changed path exact0
+- candidate: `nls_v3_rc_0032 / RECOVERY_EPOCH001_PREREQUISITE_ONLY`
+- named tests: 131 collected / 123 passed / 8 failed / 0 error
+- failing scope: standalone Step 9 exact8; verdict `CONFLICT`
+- Step 10: adapter-local successor 15 / 15 GREEN; canonical Step 9 completionへ遡及変換しない
+- additional gaps: current relevant source/test/tool closure not closed; Step 5 refined content-selection positive proof missing
+- successful completion receipt count: 0
+- source baseline: `UNLOCKED`
+- sequence event 1 / 2: not created
+- P2 / fresh batch / exact100 / Product Read / correction / B6: not authorized or not executed
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY`
+
+This dated entry is later than §12.4 and the historical next-authority text in §13 and is the current progress-ledger state. Automatic progression is false.
+
 ## 13. historical initial next separate authority
 
-この節は本書作成時のhistorical entryである。current next authorityはfrontmatterと§12.4を正とし、次の内容へ自動的に戻さない。
+この節は本書作成時のhistorical entryである。current next authorityはfrontmatterと§12.5を正とし、次の内容へ自動的に戻さない。
 
 当時、次の一つだけを候補とした。
 
