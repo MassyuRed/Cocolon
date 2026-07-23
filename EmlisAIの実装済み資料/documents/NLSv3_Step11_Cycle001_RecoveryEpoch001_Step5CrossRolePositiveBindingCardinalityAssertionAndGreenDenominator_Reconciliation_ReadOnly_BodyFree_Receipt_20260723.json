@@ -44,7 +44,7 @@
     "observed_supplemental_count": 8,
     "current_boolean_required_binding_count": 1,
     "onto_required_minimum_binding_count": 8,
-    "other_malformed_exact4_cardinality_occurrence_count": 0
+    "same_nested_boolean_shape_other_confirmed_occurrence_count": 0
   },
   "postimplementation_green_matrix": {
     "schema": "LINEAGE_AWARE_AUTHORITY_SURFACE_EXACT1_PLUS_CAUSAL_OWNER_EXACT6",
@@ -95,6 +95,11 @@
     "future_result_identity_owner": "BODY_FREE_IMPLEMENTATION_RECEIPT_AND_POST_WRITE_GITHUB_VERIFICATION",
     "future_result_hashes_predeclared": false,
     "test_refreeze_head_and_source_predecessor_are_same_identity": false,
+    "historical_rc0028_policy_pin": {
+      "test_path": "ai/tests/test_emlis_nls_v3_s11_rc0028_lexical_role_snapshot_red.py",
+      "test_blob": "17c2fad2d4d2045d19b70300af90872d8f27e0dc",
+      "source_policy_sha256": "de77b13a27e08ae3337d3ea8c11e1ba18ff24fb3f601d7639fe38c3948b8ff8c"
+    },
     "historical_rc0028_policy_pin_in_green_denominator": false,
     "unlocked_source_baseline_manifest_blob": "e95967eb35e2d24745d6e9f90e687afb1fcc83b6",
     "source_baseline_manifest_in_green_denominator": false,
