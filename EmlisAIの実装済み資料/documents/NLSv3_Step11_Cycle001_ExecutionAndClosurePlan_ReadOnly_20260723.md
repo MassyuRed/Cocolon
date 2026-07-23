@@ -1703,6 +1703,15 @@ progression is false.
   0 warning / 9.84 seconds`
 - independent final review:
   two GO / zero STOP / zero blocking issue
+- accepted final verification hygiene:
+  pytest cache provider disabled / bytecode cache redirected outside repository /
+  ignored local `.pytest_cache` timestamps and sizes unchanged; the earlier
+  cache-enabled local run was superseded and caused no tracked or GitHub write
+- evidence write-integrity corrections:
+  completion snapshot commit `5a176a38c18f77a675612d939d3b90188a517186`
+  rendered one intended state label as `NaN`; non-force correction commit
+  `a389705f891d399a130602460e8f4a2a68bf0ca8` changed exactly that label;
+  accepted-run evidence was then rebound without history rewrite
 - result / receipt / handoff commits:
   `4316a8f70ef35305b1d512835311243eb6bb45c4` /
   `b7c96eccdc6e5810ee97821dad3227d44970f8f2` /
