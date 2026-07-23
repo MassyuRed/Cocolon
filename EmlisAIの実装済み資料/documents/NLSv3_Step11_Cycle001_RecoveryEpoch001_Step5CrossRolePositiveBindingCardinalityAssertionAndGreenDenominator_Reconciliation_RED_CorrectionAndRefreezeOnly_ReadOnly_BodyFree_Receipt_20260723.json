@@ -1,0 +1,155 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_positive_binding_cardinality_green_denominator_red_correction_refreeze_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY",
+  "result": "CORRECTED_CARDINALITY_AND_LINEAGE_AWARE_CAUSAL_RED_REFROZEN_AUTHORITY_STOP",
+  "revision_date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "cocolon_main": "db507d9737b078b97a69d5651e62ce43aff27ea1",
+    "mashos_api_main": "d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d",
+    "related_drift_count": 0
+  },
+  "pre_evidence_write_recheck": {
+    "cocolon_main": "db507d9737b078b97a69d5651e62ce43aff27ea1",
+    "mashos_api_main": "f2e73dfcc0b1f0091f077c41afbf9110e4b1b333",
+    "authorized_mashos_api_advance_only": true,
+    "unrelated_drift_count": 0
+  },
+  "evidence_chain": {
+    "current_authority_blob": "c298cd7759bc0e6df81b4be0231eafd048c41a2c",
+    "execution_and_closure_plan_blob": "201828886ccee706af38c42c1fceb6b848d53278",
+    "cardinality_reconciliation_result_blob": "e0f7d270a265251cbf1204f784dd7c0e283b1946",
+    "cardinality_reconciliation_receipt_blob": "0eee62cfcaece10c79ae0267d2f4df6d835c6a33",
+    "cardinality_reconciliation_handoff_blob": "61f309fd4f96e164448ae685b5584f26b0a474a9",
+    "latest_stop_result_blob": "75c32197055cef81b160636e75a382a378c0e6d3",
+    "latest_stop_receipt_blob": "102a3299f4f5d1967eed33252925ba1c62448e12",
+    "latest_stop_handoff_blob": "867c8bb275431adb6b82c7ad2837f6f6bd92c6b0",
+    "corrected_predecessor_red_result_blob": "4f8cfdd12b97313b6c0205c067dd2fd0a1399359",
+    "corrected_predecessor_red_receipt_blob": "f39e53720a7864f5156fcb1748559fdb3de41d07",
+    "corrected_predecessor_red_handoff_blob": "e47bf086a5293059489156b1d58b0d289984d340",
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "predecessor_causal_red_receipt_blob": "e78d528600fef27ce3de52ef91c1118d6866d2ed",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "result_document_blob": "bbaa8981883c773f8b20cff408eda03078998013"
+  },
+  "mashos_api_result": {
+    "result_head": "f2e73dfcc0b1f0091f077c41afbf9110e4b1b333",
+    "commits": [
+      "66698bb48892861f2601b34a0a1408e5f876977d",
+      "f2e73dfcc0b1f0091f077c41afbf9110e4b1b333"
+    ],
+    "ahead_by": 2,
+    "behind_by": 0,
+    "changed_path_count": 2,
+    "changed_paths": [
+      "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py"
+    ]
+  },
+  "test_exact2_identity": {
+    "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py": {
+      "predecessor_blob": "9a0e058fb00391b9efd5f33ac8a511afb10cdf0b",
+      "result_blob": "49864c6ee6a944c603da21ebd18ba60633e56fb9",
+      "predecessor_sha256": "2e7ed277b55972adbae9bccdb71ad7fe538000c0779b791f2050bf4ca94785f9",
+      "result_sha256": "28e74e82e7351a4e3f92345a30cf21e0a59aeb1b820a639baad509316ff3215b"
+    },
+    "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py": {
+      "predecessor_blob": "24d7db3e80754f66c98e6587c44b3e5c2dc79b1f",
+      "result_blob": "4c295bab09965194608947585da559198b5a3e2b",
+      "predecessor_sha256": "4bde64926240ce89ba8994bb4a9ea954955dc9ca9c4b1d936b424e3f13bd0585",
+      "result_sha256": "20b006716cbcb959020e9fc7e77be6c34de0a4d474bd5e8e5093f6d2eb28cc0f"
+    }
+  },
+  "cardinality_correction": {
+    "normative_rule": "BINDING_COUNT_EQUALS_BOTH_ELIGIBLE_CLOSED_GRAPH_COMPONENT_COUNTS_AND_IS_POSITIVE",
+    "old_nested_boolean_removed": true,
+    "new_assertion_shape": "THREE_WAY_CHAINED_DYNAMIC_COUNT_EQUALITY",
+    "literal_exact8_rule": false,
+    "arbitrary_minimum_rule": false,
+    "custom_length_or_iteration_behavior": false,
+    "observed_original_component_count": 8,
+    "observed_supplemental_component_count": 8,
+    "surrounding_closure_onto_typed_negative_and_tamper_proof_preserved": true
+  },
+  "source_lineage": {
+    "preimplementation_head": "d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d",
+    "preimplementation_source_exact3": {
+      "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": {
+        "blob": "d28e2ab3086fa09a62c8dbdb3d887a7bff116c78",
+        "sha256": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc"
+      },
+      "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": {
+        "blob": "685ff7ccc8f5d7fd04dc9ed301b1649b608a868a",
+        "sha256": "0a66adbf3163cf3aad1d4454a8a26aa6292284911b4bd5ba1825e0780e3aa2bc"
+      },
+      "ai/services/ai_inference/emlis_ai_content_selection_v3.py": {
+        "blob": "7172a628f5ecdfb6ba888c36d42a6a62d0d7c22e",
+        "sha256": "ec2ccfc92c5566e8ec780e67db54b4a4c620a9334f2ab2cac91a314550f43f0d"
+      }
+    },
+    "disposition": "HISTORICAL_PREIMPLEMENTATION_NOT_FUTURE_RESULT",
+    "current_source_bytes_required_to_equal_preimplementation_hashes": false,
+    "future_source_or_policy_hashes_predeclared": false,
+    "future_result_identity_owner": "BODY_FREE_IMPLEMENTATION_RECEIPT_AND_POST_WRITE_GITHUB_VERIFICATION"
+  },
+  "authoritative_exact7": {
+    "selected_node_count": 7,
+    "nodes": [
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_step5_cross_role_red_authority_and_surface_are_exact",
+      "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py::test_cross_role_semantic_restatement_contract_false_collapse_and_tamper_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_semantic_owner_is_resolved_or_red",
+      "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py::test_s4_cross_role_refined_snapshot_lineage_alias_and_tamper_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_inventory_owner_is_resolved_or_red",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py::test_s5_cross_role_depth_noninflation_floor_and_effect_scope_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_content_consumer_is_resolved_or_red"
+    ],
+    "pytest_command_invocation_count": 3,
+    "precollection_runner_setup_attempt_count": 2,
+    "precollection_collected_count": 0,
+    "precollection_runner_setup_repository_change_count": 0,
+    "authoritative_execution_count": 1,
+    "collected_count": 7,
+    "lineage_surface_passed_count": 1,
+    "causal_failed_count": 6,
+    "test_case_error_count": 0,
+    "unexpected_count": 0,
+    "warning_count": 1,
+    "warning_disposition": "KNOWN_NON_CAUSAL_PYDANTIC_DEPRECATION",
+    "causal_failure_counts": {
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_SEMANTIC_RESTATEMENT_OWNER_NOT_PROVED": 2,
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_REFINED_SNAPSHOT_BINDING_NOT_PROVED": 2,
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_DEPTH_NONINFLATION_NOT_PROVED": 2
+    }
+  },
+  "unchanged_surface": {
+    "s4_test_blob": "3f0bd59facec541d8bad09d1af9410344c753e45",
+    "s5_test_blob": "7886477ff74ab10eb761fc1a5273e2b99f52fce0",
+    "source_exact3_change_count": 0,
+    "refined_partition_blob": "fb6f4c299f5e61c6527acc86323a610b416c8e1d",
+    "artifact_contract_blob": "953d062fa858870e65d96cf03694d68c99003594",
+    "historical_rc0028_policy_pin_test_blob": "17c2fad2d4d2045d19b70300af90872d8f27e0dc",
+    "historical_rc0028_policy_sha256": "de77b13a27e08ae3337d3ea8c11e1ba18ff24fb3f601d7639fe38c3948b8ff8c",
+    "unlocked_source_baseline_manifest_blob": "e95967eb35e2d24745d6e9f90e687afb1fcc83b6",
+    "protected_surface_change_count": 0
+  },
+  "execution_state": {
+    "implementation_authorized": false,
+    "green_run": false,
+    "broad_regression_run": false,
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "NOT_AUTHORIZED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "correction": "NOT_RUN",
+    "b6": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED",
+    "authority": "STOP"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY"
+}
