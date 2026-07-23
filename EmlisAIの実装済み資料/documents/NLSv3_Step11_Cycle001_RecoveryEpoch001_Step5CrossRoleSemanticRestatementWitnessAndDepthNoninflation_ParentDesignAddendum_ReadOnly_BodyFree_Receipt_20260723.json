@@ -1,0 +1,74 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_parent_design_receipt.v1",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_PARENT_DESIGN_ADDENDUM_READ_ONLY",
+  "revision_date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "cocolon_head": "a8a1506eb0721a5f70598e476af1913108ea9796",
+    "mashos_api_head": "21600c3d07b4f3d870beb3acb0bd78bf3e898f36",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "predecessor_red_receipt_blob": "e78d528600fef27ce3de52ef91c1118d6866d2ed",
+    "recovery_candidate": "nls_v3_rc_0034"
+  },
+  "result": {
+    "status": "PARENT_DESIGN_FROZEN_RED_NOT_AUTHORIZED_AUTHORITY_STOP",
+    "selected_route": "TRUSTED_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AT_SEMANTIC_OWNER_AND_INVENTORY",
+    "option_a": "NOT_SELECTED_CURRENT_BODY_FREE_FIELDS_INSUFFICIENT_FOR_FALSE_COLLAPSE_PROOF",
+    "semantic_proof_owner": "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py",
+    "witness_binding_owner": "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py",
+    "depth_only_consumer": "ai/services/ai_inference/emlis_ai_content_selection_v3.py",
+    "partition_source_change_required": false,
+    "partition_cross_source_bindings": "EXACT_EMPTY_PRESERVED",
+    "trusted_future_stage_authority_change_required": false,
+    "question_decision_is_semantic_source": false,
+    "witness_effect_scope": "CONTENT_DEPTH_ONLY"
+  },
+  "future_contract": {
+    "witness_schema_version": "cocolon.emlis.nls_v3.grounded_cross_role_semantic_restatement_witness.v1",
+    "witness_adapter_version": "cocolon.emlis.nls_v3.grounded_cross_role_semantic_restatement_adapter.20260723.v1",
+    "mapped_depth_contract_schema_version": "cocolon.emlis.nls_v3.cross_role_semantic_depth_equivalence.v1",
+    "proof_basis": "COMPLETE_BODY_FREE_TYPED_COMPONENT_BIJECTION",
+    "refined_snapshot_schema_version": "cocolon.emlis.nls_v3.refined_source_snapshot.v2",
+    "one_to_one_typed_component_binding_required": true,
+    "empty_witness_is_fail_closed_no_equivalence": true,
+    "required_obligation_status_change_allowed": false,
+    "source_role_drop_allowed": false,
+    "original_reception_owner_change_allowed": false,
+    "refined_depth_below_original_only_allowed": false
+  },
+  "future_source_surface_exact3": [
+    "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py",
+    "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py",
+    "ai/services/ai_inference/emlis_ai_content_selection_v3.py"
+  ],
+  "next_red_test_surface_exact4": [
+    "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py",
+    "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py",
+    "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py",
+    "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py"
+  ],
+  "protected_surface": {
+    "refined_source_partition_source_unchanged": true,
+    "artifact_contract_source_unchanged": true,
+    "fixture_change_count": 0,
+    "sample_change_count": 0,
+    "manifest_change_count": 0,
+    "api_db_rn_public_route_change_count": 0,
+    "mashos_api_change_count": 0
+  },
+  "execution_state": {
+    "test_run_count": 0,
+    "implementation_started": false,
+    "green_confirmed": false,
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "NOT_AUTHORIZED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY"
+}
