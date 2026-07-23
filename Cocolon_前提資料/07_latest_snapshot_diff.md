@@ -13173,3 +13173,63 @@ STOP. 次の別承認候補は一つだけである。
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 この候補はfrozen production exact6 / test exact4だけを実装し、targeted / prerequisite GREENを確認する。successful Step 0–10 completion receipt、source baseline lock、P1 retry、P2、fresh batch、exact100、Product Read、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
+
+## 2026-07-23 NLS v3 Step 11 Cycle 001 Recovery Epoch 001 Step 0–10 prerequisite remediation implementation / GREEN current authority
+
+この節がNLS v3 Step 11 Cycle 001についての後発current authorityである。承認されたR2 production exact6 / test exact4のimplementation / GREENだけを固定し、successful Step 0–10 completion receipt、source baseline lock、P1 retry、P2、fresh batch、exact100、Product Read、B6、Cycle acceptanceを未承認のまま維持する。
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+- Cocolon entry head: `38bfe22a8c83f134808121e7f72705242256a17a`
+- Cocolon evidence / ledger head before this append: `347ca4982f912aad9ddb5da5f1691af2384ebf90`
+- mashos-api entry: `23f029ee1ca71abeed46b344db533f6a078dab29`
+- mashos-api result: `bd62ef0eec2348e3b190ec2a39c3794886ccd10d`
+- mashos-api changed path: production exact6 / test exact4
+- state: `REMEDIATION_IMPLEMENTED_GREEN / P1_RETRY_NOT_AUTHORIZED / AUTHORITY_STOP`
+- source baseline: `UNLOCKED_PENDING_P1_RETRY`
+- successful Step 0–10 completion receipt count: 0
+- fresh batch: `RESERVED_NOT_CREATED`
+- Cycle 001 accepted: false
+- automatic progression: false
+
+Confirmed facts:
+
+- start時とmashos-api反映直前にCocolon / mashos-api両headを再確認し、関連driftはなかった。
+- `nls_v3_rc_0032 / RECOVERY_EPOCH001_PREREQUISITE_ONLY`をcurrent implementation candidateとした。`nls_v3_rc_0027`はsource predecessorだけであり、historical `nls_v3_rc_0010`はimmutable historyである。
+- Step 4へindependent body-free refined-source partition ownerを追加した。original / supplementalを別role / commitmentとして扱い、question decisionをsemantic sourceへ昇格させず、original control-planeを保持した。
+- Step 5へliteral exact path、exact hash、owner role、runtime-connected、body-free、AST import edgeを持つsingle Recovery Epoch manifest ownerを追加した。
+- manifest self hashはfrozen slot exact2だけをnormalizeする。normalized source SHA-256は`2821918c9fea1cdb40fc508eda3ca07b73759d9abcfa09a57dd4c40da4119ca8`、current source closureは`07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22`である。
+- dormant adapter、Step 10 evidence、batch runnerを同じrc0032 closureへ接続した。
+- historical Step 9 validatorはcurrent sourceの`STEP9_DEPENDENCY_SOURCE_BYTES_DRIFT`を保持する。adapterはhistorical module globalを書き換えず、adapter-local successor function graphでcurrent dependency validatorだけを差し替える。
+- targeted resultはRecovery contract 12 / 12、Step 4 17 / 17、Step 5 12 / 12、Step 10 15 / 15、合計56 / 56 GREEN、failed 0、error 0である。
+- mashos-api compareはahead 1 / behind 0 / changed path exact10である。
+- historical Step 10 manifest、reply service、Step 11 cycle evidence、fixture、sample、receipt schema、API、DB、RN、public / shared route変更はexact0である。
+- public default routeはdisabled、production ownerは`grounded_sentence_surface_canonical_v1`、general-account visibilityはfalse、owner activationは不許可のままである。
+- successful completion receipt、source baseline lock、Recovery Epoch sequence event 1 / 2、P1 retry、fresh batch body / manifest、exact100、Product Read、correction、B6は作成または実行していない。
+- standing ruleに基づきStep 4、Step 5、Step 10の独立監査へsubagent exact3を使用した。subagent write / commit / test実行は0であり、華恋がsource、contract、test result、hash closure、GitHub反映を統合・再検証した。
+- raw input / output、引用、識別可能な言い換え、individual mapping、parsed span、private note、body digest、keyをGitHub evidenceへ含めていない。
+
+Inference:
+
+- R1で固定したStep 4 / Step 5 / Step 10の直接的な実装nonconformanceは、targeted 56 / 56 GREENにより回復したと推定できる。
+- ただしStep 0–10全rowをDetailed Design §22.1へ結ぶcurrent standalone receipt chainと各Step STOP falseは未検証であり、R2 GREENから遡及して`PROVED`としない。
+- source baseline lockはP1 retryが全rowを検証し、successful receiptを発行した場合だけ成立する。
+
+Karen opinion:
+
+- historical rc0010 / Step 9のdriftを消さず、rc0032のcurrent closureだけを別責任として成立させたことが、履歴保存とcurrent proofを両立する。
+- 次の判断はtest件数ではなく、Detailed Design §22.1の8項目と各Step STOP falseをcurrent rc0032へ1:1で結べるかで行うべきである。一rowでも成立しなければbaselineをlockせずSTOPする。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10PrerequisiteNonconformanceRemediation_ImplementationAndGreenOnly_Addendum_20260723.md` @ blob `336834b3cb3fa7ce61a205e6f118e41abf33ef42`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10PrerequisiteNonconformanceRemediation_ImplementationAndGreenOnly_BodyFree_Receipt_20260723.json` @ blob `4b33d6cdba6f4a48360b8277faf087da7cd2ad86`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10PrerequisiteNonconformanceRemediation_ImplementationAndGreenOnly_Handoff_20260723.md` @ blob `0c71372441a8c266f8d94c9e4461415f56d61297`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `96130ae1b0295ae7e4045b2b279b34827369b121`
+5. `ai/services/ai_inference/emlis_ai_recovery_epoch001_source_baseline_manifest_v3.py` @ mashos-api blob `e95967eb35e2d24745d6e9f90e687afb1fcc83b6`
+6. `ai/services/ai_inference/emlis_ai_refined_source_partition_v3.py` @ mashos-api blob `fb6f4c299f5e61c6527acc86323a610b416c8e1d`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY_ONLY`
+
+この候補はP1 retryだけを扱う。current source closureの再固定、既存named positive / independent negative test実行、Step 0–10 current completion receipt生成・検証を許可候補とする。source修正、P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
