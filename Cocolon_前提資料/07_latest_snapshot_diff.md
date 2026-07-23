@@ -15820,3 +15820,81 @@ STOP. Current next authority is:
 `UNSELECTED / SEPARATE APPROVAL REQUIRED`
 
 Automatic progression is false.
+
+## 2026-07-24 post-Step5 current closure root RED correction / refreeze authority entry
+
+### 承認済みauthority
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_STEP5_CURRENT_CLOSURE_ROOT_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+### 確認済み
+
+1. 承認時のpredecessorは、Cocolon main
+   `9bea50895a9237bc396825811bb251067c442032`、mashos-api main
+   `5033435bc94c4c0260cb3193a3c64b177971ceb5`である。
+2. mashos-apiの対象testは
+   `ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py`
+   exact1、entry blobは
+   `7f7f82a048562034189a2514c281c7853c754024`である。
+3. entry treeのfull recovery REDは
+   `15 collected / 8 passed / 7 failed / 0 error`である。
+4. failure exact1は、承認済みStep 5 source変更後のcurrent dependency
+   closure exact38に対し、pre-Step5 current root
+   `948d1ff82c0c311c7c3c0c5189013c5c08af2a72415ad599505aec245e0a1c7c`
+   を期待しているlineage mismatchである。helperによるcurrent再導出rootは
+   `7d15cc072ac4ac28b6b9ce90676c6238ba08d5f59fd1896a7273ce7d57a7f302`
+   である。
+5. 残るfailure exact6は、canonical current closure owner、independent
+   verifier、current completion receipt owner、standalone Step 9
+   successor、Step 9 / Step 10 same graph without local clone、Step 10
+   start/end closure bindingのcausal REDである。
+6. Step 5 authoritative exact7はentry treeで
+   `7 collected / 7 passed / 0 failed`である。
+
+### 承認範囲
+
+- mashos-api changed path:
+  上記recovery RED test exact1のみ
+- current dependency closure root exact38の現行値へのrebind
+- Step 5 parent conflictをhistorical unresolvedからcurrent
+  `RESOLVED`へ分類
+- Step 5 source exact3 / test exact4をimplemented protected surfaceへ移管
+- remaining future surfaceをproduction/tool exact7 / test exact2へ再固定
+- final full recovery expectation:
+  `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected`
+- Step 5 exact7 non-regression:
+  `7 passed / 7`
+- body-free result / receipt / handoff、Execution and Closure Plan、
+  current snapshotの証跡更新
+
+### 未確認
+
+- exact1反映後のfinal test blob / commit
+- final full recovery `9 passed / 6 causal failed`
+- Step 5 exact7のfinal non-regression
+- body-free result / receipt / handoff identity
+
+### 書かれていないこと / 推測禁止境界
+
+- production / tool / source、別test、fixture / sample / manifestは変更しない。
+- remaining implementation / GREENを開始しない。
+- causal REDをsuccessful completion receiptへ昇格しない。
+- Step 5をformal completionへ昇格しない。
+- source baselineをlockしない。
+- P1 retry002、G2 / P2、fresh batch、formal exact100、Product Read、
+  correction、B6、Cycle 001 acceptanceへ進まない。
+- result未確認のまま次authorityを自動承認しない。
+
+### 華恋の意見
+
+Step 5の実装をやり直すのではなく、承認済み変更によって正当に進んだcurrent
+lineageだけを現行rootへ結び直し、残るcausal exact6とfuture surfaceを再固定する
+ことが、親G1本線へ戻るための最小修復である。
+
+```text
+STATE:
+APPROVED_AUTHORITY_ACTIVE
+
+AUTOMATIC_PROGRESSION:
+false
+```
