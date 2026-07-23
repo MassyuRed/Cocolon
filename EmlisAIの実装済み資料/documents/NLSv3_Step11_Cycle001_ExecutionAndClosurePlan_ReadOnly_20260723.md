@@ -1142,3 +1142,58 @@ Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.14 2026-07-23 Step 5 cardinality / GREEN denominator RED correction and refreeze
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+- Cocolon entry / pre-evidence-write head:
+  `db507d9737b078b97a69d5651e62ce43aff27ea1`
+- mashos-api entry head:
+  `d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d`
+- mashos-api result head:
+  `f2e73dfcc0b1f0091f077c41afbf9110e4b1b333`
+- mashos-api commits:
+  `66698bb48892861f2601b34a0a1408e5f876977d`,
+  `f2e73dfcc0b1f0091f077c41afbf9110e4b1b333`
+- changed path exact2:
+  semantic-restatement test + recovery current-closure test
+- result / receipt / handoff blobs:
+  `bbaa8981883c773f8b20cff408eda03078998013` /
+  `0f8319c6519e6e38bd5139d50d292038573b5271` /
+  `d2214c0097eebb6b3d2e024643a6b262cacdb4f7`
+- result:
+  `CORRECTED_CARDINALITY_AND_LINEAGE_AWARE_CAUSAL_RED_REFROZEN_AUTHORITY_STOP`
+- cardinality:
+  binding count equals both independently projected eligible closed-graph
+  component counts and is positive; the test now uses a three-way chained
+  dynamic equality
+- historical lineage:
+  d9a source exact3 blobs / SHA-256 remain predecessor evidence; future current
+  source bytes are no longer required to equal predecessor hashes
+- authoritative test ledger:
+  two precollection runner-setup attempts / zero collected, then one
+  authoritative exact7 execution
+- authoritative exact7 result:
+  `7 collected / 1 lineage-surface pass / 6 causal fail / 0 error /
+  0 unexpected / 1 known non-causal warning`
+- causal codes:
+  semantic owner exact2 / Inventory owner exact2 / Content consumer exact2
+- source exact3 / S4 / S5 / protected-surface change:
+  exact0
+- implementation / GREEN / broad regression:
+  `NOT_AUTHORIZED` / `NOT_RUN` / `NOT_RUN`
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6:
+  `NOT_AUTHORIZED`, `RESERVED_NOT_CREATED`, or `NOT_RUN`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
