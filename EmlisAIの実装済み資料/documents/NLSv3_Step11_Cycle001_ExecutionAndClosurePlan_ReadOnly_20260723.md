@@ -967,3 +967,26 @@ This dated entry is later than §12.5 and the historical next-authority text in 
 - next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY`
 
 This dated entry is later than the historical next-authority text above and is the current progress-ledger state. Automatic progression is false.
+
+### 12.8 2026-07-23 Step 5 cross-role semantic-restatement / depth-noninflation remediation RED freeze mechanical update
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_RED_FREEZE_ONLY`
+- Cocolon entry head: `ec66fdbadef3ebee4b5a531f77391252146b2e4e`
+- result receipt: blob `a544760ba508778aa339cad57fed330dc3048b26`
+- RED freeze: blob `691d3e125a65ef8d7ac8a8acc29baba72fffaa2b`
+- handoff: blob `a0e4b2d990e9b3d046677ff8b3484a13311bc38c`
+- result: `RED_FROZEN / IMPLEMENTATION_NOT_AUTHORIZED / SOURCE_BASELINE_UNLOCKED / AUTHORITY_STOP`
+- mashos-api: entry `21600c3d07b4f3d870beb3acb0bd78bf3e898f36` -> result `e485f4a3c07ec0edeb2c248a74449b95f5017a58`; changed path test exact4
+- authoritative final causal RED: 5 collected / 1 passed / 4 causal failed / 0 error / 0 unexpected
+- owner failure chain: semantic proof owner -> Inventory witness/alias/refined-snapshot owner -> Content Selection depth-only consumer
+- frozen contract: body-free one-to-one typed graph proof; `CONTENT_DEPTH_ONLY`; original-only depth floor; unmatched meaning distinct; proof unavailable means empty witness / no equivalence
+- safety boundary: actual safety projection must be `must_separate`; safety endpoints remain unbound; reciprocal separation obligations remain intact
+- partition / artifact contract / fixture / sample / manifest / API / DB / RN / runtime / public / shared route change: exact0
+- production source change: exact0
+- successful Step 0–10 completion receipt count: 0
+- source baseline: `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction / B6: `NOT_AUTHORIZED / NOT_RUN`
+- Cycle 001: `NOT_ACCEPTED`
+- next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This dated entry is later than §12.7 and the historical next-authority text above and is the current progress-ledger state. Automatic progression is false.
