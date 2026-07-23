@@ -1,0 +1,149 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_bound_selected_intersection_content_depth_only_red_correction_refreeze_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY",
+  "result": "BOUND_SELECTED_INTERSECTION_CORRECTED_AND_CAUSAL_RED_REFROZEN_AUTHORITY_STOP",
+  "revision_date": "2026-07-23",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "cocolon_main": "d5892abc8ee50619e6d751f2e191c8a21cc0eff0",
+    "mashos_api_main": "f2e73dfcc0b1f0091f077c41afbf9110e4b1b333",
+    "related_drift_count": 0
+  },
+  "pre_evidence_write_recheck": {
+    "cocolon_main": "d5892abc8ee50619e6d751f2e191c8a21cc0eff0",
+    "mashos_api_main": "4abc06bc544709f359ad4984357af0cd60fe083f",
+    "authorized_mashos_api_advance_only": true,
+    "unrelated_drift_count": 0
+  },
+  "evidence_chain": {
+    "current_authority_blob": "d15439587bd1a795f51b90fe7e65ca47bee0ff97",
+    "execution_and_closure_plan_blob": "eb72ef4dc0833173efa8f7e16a0a15a6a71ba029",
+    "bound_selected_reconciliation_result_blob": "1d5a91eb0d2f46563c54fc68f12b8f154f5ae2f3",
+    "bound_selected_reconciliation_receipt_blob": "3842046ec8d07cf1cfafb980bd1a1336445aff99",
+    "bound_selected_reconciliation_handoff_blob": "d1dbb6c199486ad5c95f13b18142fec875e199b9",
+    "latest_stop_result_blob": "8c5254e267d9bddf10f681784ae0a901e2d4122f",
+    "latest_stop_receipt_blob": "a75164968cc49a073c0f1413792c4205c041a9a7",
+    "latest_stop_handoff_blob": "352ba688754e15e11cdd354623c2c84aff91d72e",
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "predecessor_causal_red_receipt_blob": "e78d528600fef27ce3de52ef91c1118d6866d2ed",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "mashos_api_result": {
+    "result_head": "4abc06bc544709f359ad4984357af0cd60fe083f",
+    "commit": "4abc06bc544709f359ad4984357af0cd60fe083f",
+    "commit_message": "test(nls-v3): refreeze Step 5 depth-only selection boundary",
+    "ahead_by": 1,
+    "behind_by": 0,
+    "changed_path_count": 2,
+    "changed_paths": [
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py"
+    ]
+  },
+  "test_exact2_identity": {
+    "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py": {
+      "predecessor_blob": "7886477ff74ab10eb761fc1a5273e2b99f52fce0",
+      "result_blob": "f2e702a75c2294d689e3f55a6b7b7b8da149fa2a",
+      "predecessor_sha256": "31a8238d0c55f6e88e7e94cf2fae06f454c27de5ecceecf56f12c25beb574469",
+      "result_sha256": "cb55178ca5df4746074b7d1c242d46463c5335d7d0a7962900933e5c11cf62f9"
+    },
+    "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py": {
+      "predecessor_blob": "4c295bab09965194608947585da559198b5a3e2b",
+      "result_blob": "51454fe9d1f0f6267d04e5f9872689be0072bed7",
+      "predecessor_sha256": "20b006716cbcb959020e9fc7e77be6c34de0a4d474bd5e8e5093f6d2eb28cc0f",
+      "result_sha256": "0ddbe5c7e1aef2f56276775694e0b016c5902e367fa1de98e7848cc6ab6e3cb1"
+    }
+  },
+  "assertion_correction": {
+    "parent_effect_scope": "CONTENT_DEPTH_ONLY",
+    "old_rule": "EACH_ROLE_BOUND_OBLIGATION_SET_INTERSECTS_SELECTED",
+    "new_rule": "EACH_ROLE_BOUND_OBLIGATION_SET_NONEMPTY_AND_SELECTED_INTERSECTION_NOT_REQUIRED",
+    "removed_expression": "SELECTED_INTERSECTION_ONLY",
+    "required_bound_subset_selected_preserved": true,
+    "active_role_policy_preserved": true,
+    "unmatched_assertions_preserved": true,
+    "safety_closure_exclusion_preserved": true,
+    "parent_design_changed": false
+  },
+  "recovery_lineage": {
+    "new_reconciliation_evidence_bound": true,
+    "latest_stop_evidence_bound": true,
+    "future_correction_surface_count": 2,
+    "authoritative_exact7_nodes_changed": false,
+    "red_phase_expectation_changed": false,
+    "implementation_phase_expectation_changed": false,
+    "source_predecessor_lineage_changed": false,
+    "protected_surface_changed": false
+  },
+  "authoritative_exact7": {
+    "selected_node_count": 7,
+    "nodes": [
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_step5_cross_role_red_authority_and_surface_are_exact",
+      "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py::test_cross_role_semantic_restatement_contract_false_collapse_and_tamper_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_semantic_owner_is_resolved_or_red",
+      "ai/tests/test_emlis_nls_v3_s4_semantic_obligation_inventory.py::test_s4_cross_role_refined_snapshot_lineage_alias_and_tamper_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_inventory_owner_is_resolved_or_red",
+      "ai/tests/test_emlis_nls_v3_s5_content_selection_stage_context.py::test_s5_cross_role_depth_noninflation_floor_and_effect_scope_red",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py::test_recovery_epoch001_s5_cross_role_content_consumer_is_resolved_or_red"
+    ],
+    "pytest_runner_capability_check_count": 3,
+    "capability_check_selected_test_collection_count": 0,
+    "runner_setup_repository_change_count": 0,
+    "authoritative_execution_count": 1,
+    "collected_count": 7,
+    "lineage_surface_passed_count": 1,
+    "causal_failed_count": 6,
+    "test_case_error_count": 0,
+    "unexpected_count": 0,
+    "warning_count": 1,
+    "warning_disposition": "KNOWN_NON_CAUSAL_PYDANTIC_DEPRECATION",
+    "causal_failure_counts": {
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_SEMANTIC_RESTATEMENT_OWNER_NOT_PROVED": 2,
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_REFINED_SNAPSHOT_BINDING_NOT_PROVED": 2,
+      "RECOVERY_EPOCH001_S5_CROSS_ROLE_DEPTH_NONINFLATION_NOT_PROVED": 2
+    }
+  },
+  "source_exact3_unchanged": {
+    "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py": {
+      "blob": "d28e2ab3086fa09a62c8dbdb3d887a7bff116c78",
+      "sha256": "a014e942b34c2c8f2a424dda0b0ecd30cb34ff99112e813d2182ad84d34b65fc"
+    },
+    "ai/services/ai_inference/emlis_ai_semantic_obligation_inventory_v3.py": {
+      "blob": "685ff7ccc8f5d7fd04dc9ed301b1649b608a868a",
+      "sha256": "0a66adbf3163cf3aad1d4454a8a26aa6292284911b4bd5ba1825e0780e3aa2bc"
+    },
+    "ai/services/ai_inference/emlis_ai_content_selection_v3.py": {
+      "blob": "7172a628f5ecdfb6ba888c36d42a6a62d0d7c22e",
+      "sha256": "ec2ccfc92c5566e8ec780e67db54b4a4c620a9334f2ab2cac91a314550f43f0d"
+    }
+  },
+  "unchanged_surface": {
+    "semantic_test_blob": "49864c6ee6a944c603da21ebd18ba60633e56fb9",
+    "s4_test_blob": "3f0bd59facec541d8bad09d1af9410344c753e45",
+    "refined_partition_blob": "fb6f4c299f5e61c6527acc86323a610b416c8e1d",
+    "artifact_contract_blob": "953d062fa858870e65d96cf03694d68c99003594",
+    "historical_rc0028_policy_pin_test_blob": "17c2fad2d4d2045d19b70300af90872d8f27e0dc",
+    "unlocked_source_baseline_manifest_blob": "e95967eb35e2d24745d6e9f90e687afb1fcc83b6",
+    "protected_surface_change_count": 0
+  },
+  "execution_state": {
+    "implementation_authorized": false,
+    "green_run": false,
+    "broad_regression_run": false,
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "NOT_AUTHORIZED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "correction": "NOT_RUN",
+    "b6": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED",
+    "authority": "STOP"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY"
+}
