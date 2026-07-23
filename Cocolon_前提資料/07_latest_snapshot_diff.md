@@ -14146,3 +14146,189 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTI
 
 It is not approved by this record. Implementation/GREEN and all later Cycle
 work require separate authority.
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 typed-subgraph reconciliation implementation / GREEN immutable-test-contract STOP
+
+~~~text
+STOPPED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+COCOLON_ENTRY_AND_PRE_WRITE_HEAD:
+739bc332d3383948950fef9e408e6f56b7823c5a
+
+MASHOS_API_ENTRY_AND_RESULT_HEAD:
+d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d
+
+RELATED_DRIFT_COUNT:
+0
+
+RESULT_BLOB:
+75c32197055cef81b160636e75a382a378c0e6d3
+
+BODY_FREE_RECEIPT_BLOB:
+102a3299f4f5d1967eed33252925ba1c62448e12
+
+HANDOFF_BLOB:
+867c8bb275431adb6b82c7ad2837f6f6bd92c6b0
+
+EXECUTION_AND_CLOSURE_PLAN_BLOB:
+a2f63dba0338f51ee670688e0a582d6f018fc9cf
+
+RESULT:
+AUTHORITY_STOP_IMMUTABLE_TEST_CONTRACT_CONFLICT
+
+TEST_COMMAND_EXECUTION_COUNT:
+1
+
+DECISIVE_CONSTRUCTION_RUN:
+2_COLLECTED_0_PASS_2_FAIL_0_ERROR_0_GREEN
+
+PRIMARY_FAILURE_CONDITION:
+IMMUTABLE_POSITIVE_CARDINALITY_ASSERTION_CONFLICT
+
+CARDINALITY_ASSERTION_REQUIRED_BINDING_COUNT:
+1
+
+ONTO_ASSERTIONS_REQUIRED_MINIMUM_BINDING_COUNT:
+8
+
+SECONDARY_FAILURE_CONDITION:
+GREEN_DENOMINATOR_UNRESOLVED_PREIMPLEMENTATION_SOURCE_HASH_PIN_CONFLICT
+
+MASHOS_API_GITHUB_CHANGE_COUNT:
+0
+
+SOURCE_EXACT3_GITHUB_CHANGE_COUNT:
+0
+
+TEST_EXACT4_GITHUB_CHANGE_COUNT:
+0
+
+PROTECTED_SURFACE_GITHUB_CHANGE_COUNT:
+0
+
+LOCAL_CONSTRUCTION_SCAFFOLD:
+NOT_PUBLISHED_NONAUTHORITATIVE
+
+IMPLEMENTATION_GREEN:
+NOT_ESTABLISHED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CORRECTION:
+NOT_RUN
+
+B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_READ_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+~~~
+
+Confirmed facts:
+
+- Both main heads matched the current expected identities at entry and
+  immediately before the STOP evidence write; related drift count was zero.
+- The current test exact4 and source exact3 identities matched the corrected RED
+  receipt at entry.
+- The corrected semantic positive projects exact8 components per role.
+- Its current parenthesized count comparison requires binding length exact1.
+- Its immediately following onto assertions require all exact8 projected IDs
+  from each role and therefore at least exact8 binding rows.
+- Source exact3 implementation cannot satisfy both requirements.
+- The RED authority/surface node pins the future source exact3 SHA-256 values to
+  their preimplementation identities.
+- Any source exact3 implementation necessarily makes that identity node fail.
+- The one minimal construction run collected 2 nodes and produced 0 pass,
+  2 fail, 0 error, and 0 GREEN.
+- mashos-api source exact3, test exact4, and all protected surfaces have GitHub
+  change count zero under this authority.
+
+Inference:
+
+- The cardinality assertion likely intended a chained equality among binding
+  count, original projected count, and supplemental projected count.
+- The six causal owner/consumer nodes likely were intended as the
+  postimplementation GREEN denominator.
+
+These are not accepted authority and were not applied.
+
+Unconfirmed:
+
+- The authorized corrected cardinality assertion.
+- The exact postimplementation GREEN node list and denominator.
+- The approved lineage treatment for the preimplementation source-hash node.
+- Future implementation blobs, source-policy hash, closure root, GREEN,
+  successful Step 0–10 completion, source baseline lock, fresh batch, exact100,
+  Product Read, B6, and Cycle acceptance.
+
+Unwritten:
+
+- No private body/output, quotation, identifiable paraphrase, individual
+  mapping, parsed span, private note, body digest, key, or expected surface is
+  recorded.
+- No source implementation, test correction, GREEN, successful completion
+  receipt, baseline event, later Cycle work, or acceptance claim is written.
+
+No-guess boundary:
+
+- Test exact4 may not be changed under the stopped authority.
+- Production code may not fake length, iteration, mapping cardinality, or
+  validation semantics to compensate for a contradictory test.
+- A causal exact6 matrix may not be treated as accepted GREEN authority without
+  an explicit freeze.
+- Complete one-to-one/onto typed-component bijection, graph closure, body-free
+  proof, and CONTENT_DEPTH_ONLY remain unchanged.
+- Raw/normalized equality, synonym lists, broad typed shells, and
+  case/family/fixture cues remain prohibited proof.
+
+Karen opinion:
+
+- This STOP is mandatory. Hiding a test-cardinality defect inside production
+  behavior would corrupt the witness contract, and silently choosing a GREEN
+  denominator would weaken the evidence chain.
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_20260723.md @ blob 75c32197055cef81b160636e75a382a378c0e6d3
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_BodyFree_Receipt_20260723.json @ blob 102a3299f4f5d1967eed33252925ba1c62448e12
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_Handoff_20260723.md @ blob 867c8bb275431adb6b82c7ad2837f6f6bd92c6b0
+4. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md @ blob a2f63dba0338f51ee670688e0a582d6f018fc9cf
+
+STOP. Exactly one next separate authority candidate is:
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_READ_ONLY
+
+It is not approved by this record. Test correction, source implementation,
+GREEN, and all later Cycle work require separate authority.
