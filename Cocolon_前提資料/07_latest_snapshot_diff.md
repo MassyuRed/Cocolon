@@ -13980,3 +13980,169 @@ implementation, GREEN, protected surfaces, later Cycle work, and acceptance
 remain prohibited.
 
 STOP. Separate approval required.
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 typed-subgraph positive-input corrected causal RED refreeze
+
+~~~text
+COMPLETED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+
+COCOLON_ENTRY_AND_PRE_WRITE_HEAD:
+3bd0bcb8077ecaab07b04e913bdffaa2f66f3c7f
+
+MASHOS_API_ENTRY_HEAD:
+e485f4a3c07ec0edeb2c248a74449b95f5017a58
+
+MASHOS_API_RESULT_HEAD:
+d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d
+
+RESULT_BLOB:
+4f8cfdd12b97313b6c0205c067dd2fd0a1399359
+
+BODY_FREE_RECEIPT_BLOB:
+f39e53720a7864f5156fcb1748559fdb3de41d07
+
+HANDOFF_BLOB:
+e47bf086a5293059489156b1d58b0d289984d340
+
+EXECUTION_AND_CLOSURE_PLAN_BLOB:
+aca4a46225e76f08eb1077774bac922a4baf75f8
+
+RESULT:
+CORRECTED_CAUSAL_RED_REFROZEN
+
+AUTHORITATIVE_FINAL_CAUSAL_RED:
+7_COLLECTED_1_PASS_6_CAUSAL_FAIL_0_ERROR_0_UNEXPECTED
+
+TEST_COMMAND_EXECUTION_COUNT:
+6
+
+TEST_EXACT4_CHANGE_COUNT:
+4
+
+FUTURE_SOURCE_EXACT3_CHANGE_COUNT:
+0
+
+PROTECTED_SURFACE_CHANGE_COUNT:
+0
+
+IMPLEMENTATION_AUTHORIZED:
+FALSE
+
+GREEN_RUN:
+FALSE
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CORRECTION:
+NOT_RUN
+
+B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+~~~
+
+Confirmed facts:
+
+- Both main heads matched the approved entry identities and no related drift or
+  evidence conflict was found before write.
+- mashos-api changed only test exact4 at result head d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d.
+- The corrected tests freeze independent full role-local graph replay, explicit
+  non-identical semantic-owner proof, exact typed cardinality/kind/dimensions,
+  relation and unknown topology, topic mapping, deterministic ordering,
+  lineage, tamper rejection, and body-free source-cue rejection.
+- The legacy connected non-isomorphic graph and anchor-absent same-shell
+  candidate are empty-witness negatives.
+- Partial binding requires exact bound closure on both roles and preserves every
+  disconnected unmatched source reference, role-pure obligation, selection,
+  and required-coverage decision.
+- Final exact7 is 1 authority/surface pass plus 6 intended causal failures:
+  semantic owner 2, refined snapshot owner 2, depth consumer 2; error and
+  unexpected counts are zero.
+- Source exact3, partition, artifact contract, fixture/sample/manifest,
+  API/DB/RN/runtime/public/shared surfaces, v1, stopped v2, historical receipts,
+  Detailed Design, and accepted authority history were unchanged.
+
+Inference:
+
+- Source exact3 implementation is necessary to resolve the causal RED, but the
+  tests do not prescribe a unique internal algorithm.
+- CONTENT_DEPTH_ONLY is the smallest effect that prevents depth inflation
+  without authorizing meaning omission or control-owner changes.
+
+Unconfirmed:
+
+- Source implementation feasibility, GREEN, policy hash, broad regression,
+  successful Step 0–10 completion, source baseline lock, fresh batch, exact100,
+  Product Read, B6, and Cycle acceptance remain unconfirmed.
+
+Unwritten:
+
+- No private body/output, quotation, identifiable paraphrase, individual
+  mapping, parsed span, private note, body digest, key, or expected surface is
+  recorded in this authority evidence.
+- No production implementation, GREEN, successful receipt, baseline event,
+  later Cycle work, or acceptance claim is written.
+
+No-guess boundary:
+
+- Raw/normalized equality, synonym lists, broad typed shells,
+  case/family/fixture cues, and non-empty partial results are not equivalence
+  proof.
+- Connected relation/unknown/dependent/safety differences cannot be removed to
+  salvage a match.
+- RED is not GREEN, Step completion, or Cycle acceptance.
+
+Karen opinion:
+
+- This corrected RED preserves a person's connected semantic differences while
+  preventing repeated meaning from inflating depth. Keeping semantic proof,
+  graph binding, and depth consumption in separate owners is the smallest
+  honest responsibility split.
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_20260723.md @ blob 4f8cfdd12b97313b6c0205c067dd2fd0a1399359
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_BodyFree_Receipt_20260723.json @ blob f39e53720a7864f5156fcb1748559fdb3de41d07
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_Handoff_20260723.md @ blob e47bf086a5293059489156b1d58b0d289984d340
+4. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md @ blob aca4a46225e76f08eb1077774bac922a4baf75f8
+
+STOP. Exactly one next separate authority candidate is:
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+It is not approved by this record. Implementation/GREEN and all later Cycle
+work require separate authority.
