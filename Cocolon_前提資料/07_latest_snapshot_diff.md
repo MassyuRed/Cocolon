@@ -13709,3 +13709,116 @@ STOP. 次の別承認候補は一つだけである。
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 この候補は未承認である。automatic progressionはfalse、Cycle 001は`NOT_ACCEPTED`のままである。
+
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 implementation / GREEN evidence-conflict STOP
+
+```text
+APPROVED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+COCOLON_ENTRY_AND_PRE_WRITE_HEAD:
+764471c8f745592951ed9be24a34541eb45a1369
+
+MASHOS_API_ENTRY_AND_RESULT_HEAD:
+e485f4a3c07ec0edeb2c248a74449b95f5017a58
+
+RESULT:
+AUTHORITY_STOP_EVIDENCE_CONFLICT
+
+DECISIVE_MINIMAL_RUN:
+2_COLLECTED_1_PASS_1_CAUSAL_FAIL_0_ERROR_0_UNEXPECTED
+
+CAUSAL_FAILURE:
+CROSS_ROLE_POSITIVE_TYPED_GRAPH_BIJECTION_CONFLICT
+
+STRICT_BINDING_COUNT:
+0
+
+FROZEN_POSITIVE_MINIMUM:
+2
+
+MASHOS_API_GITHUB_CHANGE_COUNT:
+0
+
+SOURCE_EXACT3_GITHUB_CHANGE_COUNT:
+0
+
+TEST_EXACT4_GITHUB_CHANGE_COUNT:
+0
+
+PROTECTED_SURFACE_GITHUB_CHANGE_COUNT:
+0
+
+IMPLEMENTATION_GREEN:
+NOT_ESTABLISHED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+```
+
+Confirmed facts:
+
+- 開始時と反映直前の両main headにrelated driftはなかった。
+- frozen positiveのdecisive graphでは、一方の共有境界が1 component、他方が2 decomposed componentsであり、one-to-one bijectionが成立しない。
+- 両roleのrelationはtype、direction、endpoint provenanceが非同型で、mismatched relationはcandidate graphへ接続している。
+- strict general proofの正しい結果はempty witnessである。
+- non-empty minimumを満たすにはone-to-many、partial graph salvage、またはbody/input-specific proofが必要で、parent designとREDが禁止する。
+- decisive testは2 collected / 1 pass / 1 causal fail / 0 errorであり、toolingまたはunrelated failureではない。
+- mashos-api mainは変更していない。
+
+Inference:
+
+- 真にisomorphicなtyped graph pairならone-to-one contractを弱めずpositiveを再構成できる可能性がある。
+- aggregate equivalenceを採用する場合はparent design変更が必要であり、現authorityから推測してはならない。
+
+Unconfirmed:
+
+- future positive input、future implementation、policy hash、closure root、GREEN、Step 0–10 completion、Cycle acceptanceは未確認である。
+
+Not written:
+
+- raw input/output、引用、識別可能な言い換え、individual mapping、parsed span、private note、body digest、key、expected surfaceはGitHubへ書いていない。
+
+No-guess boundary:
+
+- graph不一致をraw/normalized equality、containment、broad shell、case/family cueで補ってはならない。
+- relationを除去してnucleusだけを同義扱いしてはならない。
+- one-to-manyをone-to-one witnessへ読み替えてはならない。
+
+Karen opinion:
+
+- false collapseを防ぐためempty witnessを維持し、positive contractを別authorityでreconcileすることが唯一安全である。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_Remediation_ImplementationAndGreenOnly_STOP_ReadOnly_20260723.md` @ blob `9776f827a4cd384ec47f29ce0e83d4fe5e82ae96`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_Remediation_ImplementationAndGreenOnly_STOP_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `37ab784cf8f2f44945bafbeda33d56db4150b129`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleSemanticRestatementWitnessAndDepthNoninflation_Remediation_ImplementationAndGreenOnly_STOP_ReadOnly_Handoff_20260723.md` @ blob `360d070747c8bba247c1f4feec38acd1eabaa167`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY`
+
+この候補はread-onlyかつ未承認である。source implementation、test correction、GREENへ自動進行しない。

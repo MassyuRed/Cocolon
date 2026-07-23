@@ -990,3 +990,42 @@ This dated entry is later than the historical next-authority text above and is t
 - next separate authority candidate: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 This dated entry is later than §12.7 and the historical next-authority text above and is the current progress-ledger state. Automatic progression is false.
+
+
+### 12.9 2026-07-23 Step 5 cross-role remediation implementation / GREEN evidence-conflict STOP
+
+Approved authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+Result:
+
+```text
+AUTHORITY_STOP_EVIDENCE_CONFLICT
+DECISIVE_2_COLLECTED_1_PASS_1_CAUSAL_FAIL_0_ERROR
+STRICT_BINDING_COUNT_0
+FROZEN_POSITIVE_MINIMUM_2
+MASHOS_API_RESULT_HEAD_e485f4a3c07ec0edeb2c248a74449b95f5017a58
+SOURCE_EXACT3_GITHUB_CHANGE_COUNT_0
+TEST_EXACT4_GITHUB_CHANGE_COUNT_0
+SOURCE_BASELINE_UNLOCKED
+CYCLE001_NOT_ACCEPTED
+```
+
+The decisive positive graph is not a complete one-to-one typed subgraph. Its candidate boundary is one-to-two, and its connected relations disagree in type, direction, and endpoint provenance. A non-empty minimum requires one-to-many collapse, partial graph salvage, or body/input-specific proof. Parent Design §4.2, §6, and §10 require empty witness and STOP.
+
+Body-free evidence:
+
+- STOP result blob: `9776f827a4cd384ec47f29ce0e83d4fe5e82ae96`
+- receipt blob: `37ab784cf8f2f44945bafbeda33d56db4150b129`
+- handoff blob: `360d070747c8bba247c1f4feec38acd1eabaa167`
+
+Next separate authority candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY
+```
+
+This candidate is read-only and unapproved. No implementation, test correction, GREEN, baseline lock, fresh batch, exact100, Product Read, B6, or Cycle acceptance is authorized.

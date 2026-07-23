@@ -1,0 +1,68 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.step5_cross_role_remediation_implementation_green_stop_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_SEMANTIC_RESTATEMENT_WITNESS_AND_DEPTH_NONINFLATION_REMEDIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "result": "AUTHORITY_STOP_EVIDENCE_CONFLICT",
+  "revision_date": "2026-07-23",
+  "start_heads": {
+    "cocolon_main": "764471c8f745592951ed9be24a34541eb45a1369",
+    "mashos_api_main": "e485f4a3c07ec0edeb2c248a74449b95f5017a58"
+  },
+  "pre_write_head_recheck": {
+    "cocolon_main": "764471c8f745592951ed9be24a34541eb45a1369",
+    "mashos_api_main": "e485f4a3c07ec0edeb2c248a74449b95f5017a58",
+    "related_drift_count": 0
+  },
+  "evidence_chain": {
+    "current_authority_blob": "bc7818dfbf923cfbd735f1f00da60d899440a9d0",
+    "parent_design_addendum_blob": "df8d2e49287554b3da2867afde634b3afbec4a37",
+    "parent_design_receipt_blob": "fdb64ba8ddab5b050556eb8025b77fd026c7aa50",
+    "parent_design_handoff_blob": "ed9f5725ebd843bd258ef767dd0b7a7b74df8277",
+    "execution_and_closure_plan_blob": "29c11038b0747ffd806de19133673d7e66246ba2",
+    "predecessor_red_receipt_blob": "a544760ba508778aa339cad57fed330dc3048b26",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "decisive_minimal_run": {
+    "collected": 2,
+    "passed": 1,
+    "failed": 1,
+    "errors": 0,
+    "unexpected_failures": 0,
+    "semantic_owner_node": "PASS",
+    "inventory_snapshot_node": "CAUSAL_FAIL",
+    "causal_failure_code": "CROSS_ROLE_POSITIVE_TYPED_GRAPH_BIJECTION_CONFLICT",
+    "strict_binding_count": 0,
+    "required_binding_count_minimum": 2
+  },
+  "body_free_graph_fact": {
+    "original_nucleus_count": 5,
+    "original_relation_count": 1,
+    "supplemental_nucleus_count": 2,
+    "supplemental_relation_count": 1,
+    "one_to_many_pressure": true,
+    "relation_type_match": false,
+    "relation_direction_match": false,
+    "relation_endpoint_provenance_match": false
+  },
+  "prohibited_recovery_required_for_green": [
+    "ONE_TO_MANY_OR_AGGREGATE_COLLAPSE",
+    "PARTIAL_GRAPH_SALVAGE",
+    "BODY_OR_INPUT_SPECIFIC_CUE_PROOF"
+  ],
+  "github_change_counts": {
+    "mashos_api": 0,
+    "source_exact3": 0,
+    "test_exact4": 0,
+    "protected_surface": 0
+  },
+  "state": {
+    "implementation_green": "NOT_ESTABLISHED",
+    "mashos_api_result_head": "e485f4a3c07ec0edeb2c248a74449b95f5017a58",
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "cycle001": "NOT_ACCEPTED",
+    "authority": "STOP"
+  },
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_TYPED_SUBGRAPH_BIJECTION_AND_POSITIVE_INPUT_CONTRACT_RECONCILIATION_READ_ONLY",
+  "body_free": true
+}
