@@ -76,22 +76,22 @@ the later evidence commits.
 - path:
   `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_PostImplementationCurrentDependencyClosureRootContract_RED_CorrectionAndRefreezeOnly_ReadOnly_20260724.md`
 - commit:
-  `37f36363c0aee3ee53df72151d61ae3805b4dc4f`
+  `4316a8f70ef35305b1d512835311243eb6bb45c4`
 - blob:
-  `2b68f43147a17b7d54497f124a0a9403ce9982ea`
+  `a89dc73cd2c7c647f65ac2a77abbacc4c6da3b86`
 - SHA-256:
-  `a5b26b0c6136849569cabacd9efc461f8f6e40f0b2e088ea20f73787d3145750`
+  `0076e3dfc5cfad8a4bda9528afa0c34985663e429410a943e64fc22c5b5cabe3`
 
 ### Body-free receipt
 
 - path:
   `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_PostImplementationCurrentDependencyClosureRootContract_RED_CorrectionAndRefreezeOnly_ReadOnly_BodyFree_Receipt_20260724.json`
 - commit:
-  `47ed2f58fd468ee2edaaae0da4d103a1dc455576`
+  `b7c96eccdc6e5810ee97821dad3227d44970f8f2`
 - blob:
-  `2332510f0fcac908233d732d344e7453a68d09dc`
+  `fc3a283e40bd80eaa264e919acd0b253a965b58f`
 - SHA-256:
-  `dd52ee9453046bf768069bdd40f842015fbfa848b921549fcb60fae11510ccc3`
+  `eb544bc458cfad66d539acde2b4ae88f9da6226e454d74758a24a6792afd11d2`
 
 ## 4. Refrozen lineage contract
 
@@ -129,7 +129,7 @@ Final remote-equivalent full recovery:
 0 error
 0 unexpected
 0 warning
-3.57 seconds
+3.53 seconds
 ```
 
 Final Step 5 exact7:
@@ -141,7 +141,7 @@ Final Step 5 exact7:
 0 error
 0 unexpected
 0 warning
-9.58 seconds
+9.84 seconds
 ```
 
 Remaining causal RED exact6:
