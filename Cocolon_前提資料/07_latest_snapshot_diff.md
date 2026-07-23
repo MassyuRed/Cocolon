@@ -16180,9 +16180,18 @@ false
     `a89dc73cd2c7c647f65ac2a77abbacc4c6da3b86` /
     `fc3a283e40bd80eaa264e919acd0b253a965b58f` /
     `1fde9bf0c81723948484dc27c0c5708cfe6943e3`である。
-14. Execution and Closure Plan §12.22 reflection commit / blobは
-    `3ad62616904b32ef5ee6ce53531e0439357e9021` /
-    `29449d5eeb1da3112ba7ff95c45a67523149d1c6`である。
+14. Execution and Closure Plan §12.22 final reflection commit / blobは
+    `7ab07dc28f11a3aeed380acf54ff542443627f00` /
+    `36aaaa8964fcfd24c4342d9ca1ec55302f8c3ca0`である。
+15. accepted final verificationはpytest cache providerを無効化し、bytecode
+    cacheをrepository外へredirectした。ignored local `.pytest_cache`の時刻・
+    sizeは両command前後で不変である。先行cache-enabled local runはsupersede
+    され、tracked / GitHub writeを生じていない。
+16. completion snapshot commit
+    `5a176a38c18f77a675612d939d3b90188a517186`では意図したstate label一行が
+    `NaN`となった。non-force correction
+    `a389705f891d399a130602460e8f4a2a68bf0ca8`はその一行だけを訂正し、
+    accepted-run evidence rebindもhistory rewriteなしで行った。
 
 ### 推測
 
