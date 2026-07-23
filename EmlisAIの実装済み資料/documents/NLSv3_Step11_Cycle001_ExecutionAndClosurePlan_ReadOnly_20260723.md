@@ -1584,3 +1584,72 @@ earlier result. Automatic progression is false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, STOP history, accepted history, or any
 earlier result. Automatic progression is false.
+
+### 12.21 2026-07-24 post-Step5 current closure root RED correction and refreeze
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_STEP5_CURRENT_CLOSURE_ROOT_RED_CORRECTION_AND_REFREEZE_ONLY`
+- Cocolon approved predecessor / authority-entry commit:
+  `9bea50895a9237bc396825811bb251067c442032` /
+  `cdf87802e0a841fc37a342e5800cb1aa7dcf36e7`
+- mashos-api entry / result commits:
+  `5033435bc94c4c0260cb3193a3c64b177971ceb5` /
+  `c3bafd02615e73d47afd222d1ddef53bfc87af59`
+- changed path exact1:
+  `ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py`
+- entry / result test blobs:
+  `7f7f82a048562034189a2514c281c7853c754024` /
+  `98a80d62b65975d17733c635324e06732dff82d7`
+- historical dependency closure:
+  exact17 /
+  `3d42e942239666dc37d14c9c2969d548988c02e38ac497bb65b825d9b4c1f3bd`
+- post-Step5 current dependency closure:
+  exact38 /
+  `7d15cc072ac4ac28b6b9ce90676c6238ba08d5f59fd1896a7273ce7d57a7f302`
+- entry full recovery:
+  `15 collected / 8 passed / 1 current-lineage mismatch /
+  6 causal failed / 0 error / 0 unexpected / 3.79 seconds`
+- final full recovery:
+  `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected /
+  0 warning / 4.04 seconds`
+- final Step 5 exact7:
+  `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+  0 warning / 10.45 seconds`
+- Step 5 parent conflict / targeted exact7:
+  `RESOLVED` / `GREEN`
+- Step 5 formal completion:
+  `NOT_COMPLETED`
+- implemented protected Step 5 surface:
+  source exact3 / test exact4
+- remaining future surface:
+  production/tool exact7 / test exact2
+- result / receipt / handoff commits:
+  `36cf7500b69935aae37f56f234faadfc8b1ba030` /
+  `4f2c4c87bae10e098beebf33b890ffd80c1e1141` /
+  `bbb820ea14ae662d13143823890bdabaf8eedfde`
+- result / receipt / handoff blobs:
+  `7c3605dd209ba91f0e7822208dbe6371df641352` /
+  `ba3ea33e990c7aaef0d264356fb6357ef51b3653` /
+  `ad9766653a3aded79e9acc7786cd44cfc1101e57`
+- G1:
+  `REMAINING_CAUSAL_RED_REFROZEN_NOT_COMPLETED`
+- G2:
+  `BLOCKED / NOT_AUTHORIZED`
+- successful Step 0–10 completion receipt count:
+  0
+- source baseline:
+  `UNLOCKED`
+- broad regression / P1 retry002 / P2 / fresh batch / formal exact100 /
+  Product Read / correction / B6:
+  `NOT_RUN`, `NOT_AUTHORIZED`, or `RESERVED_NOT_CREATED`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- Mash-side work for this completed authority:
+  none
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_STEP5_CURRENT_CLOSURE_ROOT_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This entry supersedes only the previous next-authority pointer and current
+post-Step5 RED denominator. It preserves historical RED, Step 5 implementation
+history, accepted history, and all downstream STOP boundaries. Automatic
+progression is false.
