@@ -15067,3 +15067,204 @@ STOP. Exactly one next separate authority candidate is:
 NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
 
 It is not approved by this record.
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 bound-selected / CONTENT_DEPTH_ONLY RED correction and refreeze
+
+~~~text
+COMPLETED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+
+COCOLON_ENTRY_AND_PRE_EVIDENCE_WRITE_HEAD:
+d5892abc8ee50619e6d751f2e191c8a21cc0eff0
+
+MASHOS_API_ENTRY_HEAD:
+f2e73dfcc0b1f0091f077c41afbf9110e4b1b333
+
+MASHOS_API_RESULT_HEAD:
+4abc06bc544709f359ad4984357af0cd60fe083f
+
+RELATED_DRIFT_COUNT:
+0
+
+RESULT_BLOB:
+6559b60f7a9041e754111d02b11ae59114319a43
+
+BODY_FREE_RECEIPT_BLOB:
+a88a76a0c7f9e0a6aada8e473ec9407fa20a4279
+
+HANDOFF_BLOB:
+d7698ae68fcbbe423e55de4c60789e52caa13435
+
+EXECUTION_AND_CLOSURE_PLAN_BLOB:
+49396bd8222f93debada04c9135813453e463180
+
+RESULT:
+BOUND_SELECTED_INTERSECTION_CORRECTED_AND_CAUSAL_RED_REFROZEN_AUTHORITY_STOP
+
+MASHOS_API_COMMIT_COUNT:
+1
+
+MASHOS_API_CHANGED_PATH_COUNT:
+2
+
+CORRECTED_RULE:
+EACH_ROLE_BOUND_OBLIGATION_SET_NONEMPTY_AND_SELECTED_INTERSECTION_NOT_REQUIRED
+
+PARENT_EFFECT_SCOPE:
+CONTENT_DEPTH_ONLY
+
+PYTEST_RUNNER_CAPABILITY_CHECK_COUNT:
+3
+
+CAPABILITY_CHECK_SELECTED_TEST_COLLECTION_COUNT:
+0
+
+AUTHORITATIVE_EXACT7_EXECUTION_COUNT:
+1
+
+AUTHORITATIVE_FINAL_CAUSAL_RED:
+7_COLLECTED_1_LINEAGE_SURFACE_PASS_6_CAUSAL_FAIL_0_ERROR_0_UNEXPECTED
+
+WARNING_COUNT:
+1_KNOWN_NON_CAUSAL_PYDANTIC_DEPRECATION
+
+SOURCE_EXACT3_CHANGE_COUNT:
+0
+
+SEMANTIC_AND_S4_TEST_CHANGE_COUNT:
+0
+
+PROTECTED_SURFACE_CHANGE_COUNT:
+0
+
+IMPLEMENTATION_AUTHORIZED:
+FALSE
+
+GREEN_RUN:
+FALSE
+
+BROAD_REGRESSION:
+NOT_RUN
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CORRECTION:
+NOT_RUN
+
+B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+~~~
+
+Confirmed facts:
+
+- Both main heads matched the approved entry identities, and all required
+  evidence was available without conflict.
+- mashos-api advanced by one atomic commit and changed only the approved test
+  exact2.
+- The S5 correction removed only the selected intersection from the per-role
+  non-empty bound-obligation assertion.
+- Required-bound selection, required coverage 100%, both active roles,
+  source-role separation, original reception/control ownership, safety
+  closure exclusion, unmatched preservation, depth equality/floor, lineage,
+  determinism, and tamper rejection remain frozen.
+- The recovery test change binds the authority, evidence, corrected rule, and
+  exact2 surface without changing the exact7 identities or RED/GREEN
+  denominators.
+- The authoritative exact7 produced one lineage/surface pass and six causal
+  failures, with zero error and zero unexpected result.
+- The semantic-owner, Inventory-owner, and Content-consumer stable causal
+  codes each occurred exactly twice.
+- Source exact3, semantic/S4 tests, and all protected surfaces remained
+  unchanged.
+
+Inference:
+
+- Source exact3 implementation is required to resolve the six causal RED
+  nodes, but the tests do not prescribe a unique internal algorithm.
+- The removed intersection likely conflated endpoint-role representation with
+  optional content selection.
+
+Unconfirmed:
+
+- Future source exact3 implementation feasibility and future source / policy
+  hashes.
+- Exact7 GREEN, broad regression, successful Step 0–10 completion,
+  source-baseline lock, later Cycle work, and Cycle acceptance.
+
+Unwritten:
+
+- No production source implementation, GREEN, broad regression, successful
+  completion receipt, baseline event, later Cycle work, or acceptance claim is
+  written.
+- No raw input/output, quotation, identifiable paraphrase, individual
+  mapping, parsed span, private note, body digest, key, or expected surface is
+  recorded.
+
+No-guess boundary:
+
+- Do not make witness control obligation selection or decision status.
+- Do not bind a must-separate incident/affected closure.
+- Do not weaken required-bound coverage, active-role proof, unmatched
+  preservation, original reception, exact graph bijection, or tamper guards.
+- Do not reduce the authoritative denominator to causal exact6.
+- Do not rewrite predecessor source hashes as future result hashes or guess
+  future source/policy hashes.
+- Do not change test exact4 or protected surfaces during implementation.
+- RED is not GREEN, Step completion, source-baseline lock, or Cycle
+  acceptance.
+
+Karen opinion:
+
+The exact2 correction is the smallest honest recovery.  It keeps role-local
+endpoint representation explicit while preventing a depth-only witness from
+choosing optional content.  The remaining six failures are again causal
+implementation gaps, which is the correct refrozen RED state.
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleBoundSelectedIntersectionAndContentDepthOnlyContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_20260723.md @ blob 6559b60f7a9041e754111d02b11ae59114319a43
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleBoundSelectedIntersectionAndContentDepthOnlyContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_BodyFree_Receipt_20260723.json @ blob a88a76a0c7f9e0a6aada8e473ec9407fa20a4279
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleBoundSelectedIntersectionAndContentDepthOnlyContract_Reconciliation_RED_CorrectionAndRefreezeOnly_ReadOnly_Handoff_20260723.md @ blob d7698ae68fcbbe423e55de4c60789e52caa13435
+4. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md @ blob 49396bd8222f93debada04c9135813453e463180
+
+STOP. Exactly one next separate authority candidate is:
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_BOUND_SELECTED_INTERSECTION_AND_CONTENT_DEPTH_ONLY_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+
+It is not approved by this record. Source implementation, GREEN, broad
+regression, completion, baseline lock, later Cycle work, and acceptance require
+separate authority.
