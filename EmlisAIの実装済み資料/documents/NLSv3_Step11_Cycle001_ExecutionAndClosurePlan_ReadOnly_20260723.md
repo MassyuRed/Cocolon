@@ -1112,3 +1112,33 @@ false.
 This entry supersedes only the prior next-authority pointer. It does not alter
 parent design, corrected RED history, accepted history, or any earlier result.
 Automatic progression is false.
+
+### 12.13 2026-07-23 Step 5 positive binding cardinality / GREEN denominator reconciliation
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_READ_ONLY`
+- Cocolon entry / pre-write head: `ad8095d2e3e8ed6eb642bb5f4c014484edbb608e`
+- mashos-api entry / result head: `d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d`; changed path exact0
+- reconciliation result / receipt / handoff blobs:
+  `e0f7d270a265251cbf1204f784dd7c0e283b1946` /
+  `0eee62cfcaece10c79ae0267d2f4df6d835c6a33` /
+  `61f309fd4f96e164448ae685b5584f26b0a474a9`
+- result: `BINDING_CARDINALITY_AND_GREEN_DENOMINATOR_RECONCILED_AUTHORITY_STOP`
+- cardinality: binding count equals both independently projected eligible closed-graph component counts; the future assertion is a three-way chained equality, not literal exact8, arbitrary minimum, or nested boolean
+- future correction/refreeze RED: exact7 = 1 lineage/surface pass + 6 causal fail; 0 error / 0 unexpected
+- future implementation GREEN: exact7 = 1 lineage/surface pass + 6 causal GREEN; 7 pass / 0 fail / 0 error / 0 unexpected
+- d9a source exact3 hashes remain immutable preimplementation lineage; future result source/policy hashes are recorded only after implementation by the body-free receipt and GitHub verification
+- historical rc0028 policy pin and unlocked source-baseline manifest remain outside the targeted exact7; broad GREEN is not claimed
+- next correction/refreeze mashos-api surface: semantic test + recovery test exact2
+- source exact3 / S4 test / S5 test / protected-surface change: exact0
+- test run count: 0
+- successful Step 0–10 completion receipt count: 0
+- source baseline: `UNLOCKED`
+- P1 retry002 / P2 / fresh batch / formal exact100 / Product Read / correction /
+  B6: `NOT_AUTHORIZED` or `NOT_RUN`
+- Cycle 001: `NOT_ACCEPTED`
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY`
+
+This entry supersedes only the prior next-authority pointer. It does not alter
+parent design, corrected RED history, STOP history, accepted history, or any
+earlier result. Automatic progression is false.
