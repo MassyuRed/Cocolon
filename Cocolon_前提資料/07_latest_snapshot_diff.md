@@ -14332,3 +14332,202 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDI
 
 It is not approved by this record. Test correction, source implementation,
 GREEN, and all later Cycle work require separate authority.
+
+## CURRENT AUTHORITY APPEND — 2026-07-23 Step 5 positive binding cardinality / GREEN denominator reconciliation
+
+~~~text
+COMPLETED_AUTHORITY:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_READ_ONLY
+
+COCOLON_ENTRY_AND_PRE_WRITE_HEAD:
+ad8095d2e3e8ed6eb642bb5f4c014484edbb608e
+
+MASHOS_API_ENTRY_AND_RESULT_HEAD:
+d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d
+
+RELATED_DRIFT_COUNT:
+0
+
+RESULT_BLOB:
+e0f7d270a265251cbf1204f784dd7c0e283b1946
+
+BODY_FREE_RECEIPT_BLOB:
+0eee62cfcaece10c79ae0267d2f4df6d835c6a33
+
+HANDOFF_BLOB:
+61f309fd4f96e164448ae685b5584f26b0a474a9
+
+EXECUTION_AND_CLOSURE_PLAN_BLOB:
+201828886ccee706af38c42c1fceb6b848d53278
+
+RESULT:
+BINDING_CARDINALITY_AND_GREEN_DENOMINATOR_RECONCILED_AUTHORITY_STOP
+
+CARDINALITY_RULE:
+BINDING_COUNT_EQUALS_BOTH_ELIGIBLE_CLOSED_GRAPH_COMPONENT_COUNTS_AND_IS_POSITIVE
+
+FUTURE_ASSERTION_SHAPE:
+THREE_WAY_CHAINED_DYNAMIC_COUNT_EQUALITY
+
+POSTIMPLEMENTATION_AUTHORITATIVE_MATRIX:
+LINEAGE_AWARE_EXACT1_PLUS_CAUSAL_EXACT6_EQUALS_EXACT7
+
+FUTURE_RED_EXPECTATION:
+7_COLLECTED_1_LINEAGE_PASS_6_CAUSAL_FAIL_0_ERROR_0_UNEXPECTED
+
+FUTURE_GREEN_EXPECTATION:
+7_COLLECTED_7_PASS_0_FAIL_0_ERROR_0_UNEXPECTED
+
+PREIMPLEMENTATION_SOURCE_IDENTITY:
+MASHOS_API_d9a65dc7d5ee329ba3387c8659f435f3fb9f8e8d_EXACT3
+
+FUTURE_RESULT_IDENTITY_OWNER:
+BODY_FREE_IMPLEMENTATION_RECEIPT_AND_POST_WRITE_GITHUB_VERIFICATION
+
+MASHOS_API_CHANGE_COUNT:
+0
+
+TEST_CHANGE_COUNT:
+0
+
+SOURCE_CHANGE_COUNT:
+0
+
+TEST_RUN_COUNT:
+0
+
+IMPLEMENTATION_AUTHORIZED:
+FALSE
+
+GREEN_RUN:
+FALSE
+
+BROAD_REGRESSION:
+NOT_RUN
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+NOT_AUTHORIZED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100:
+NOT_RUN
+
+PRODUCT_READ:
+NOT_RUN
+
+CORRECTION:
+NOT_RUN
+
+B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+FALSE
+
+NEXT_SEPARATE_AUTHORITY_CANDIDATE:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+
+NEXT_AUTHORITY_APPROVED:
+FALSE
+
+STATE:
+AUTHORITY_STOP
+~~~
+
+Confirmed facts:
+
+- Both main heads matched the expected identities at entry and immediately
+  before evidence write; related drift count was zero.
+- The current cardinality expression nests the original/supplemental count
+  equality and therefore compares binding length to a boolean.
+- The selected positive projects exact8 components per role, so the malformed
+  expression requires exact1 while the onto assertions require at least exact8.
+- The complete-bijection contract requires dynamic equality among binding count
+  and both eligible closed-graph counts; the general result is positive.
+- The only currently confirmed occurrence of the same nested-boolean
+  cardinality shape is in the semantic test at current blob
+  9a0e058fb00391b9efd5f33ac8a511afb10cdf0b.
+- The S5 helper already uses a chained equality; S4 and the recovery content
+  node reuse it.
+- The corrected RED exact7 is one authority/surface pass plus six causal owner
+  failures.
+- The d9a source exact3 hashes are preimplementation predecessor identities, not
+  future result expectations.
+- The rc0028 source-policy pin and unlocked source-baseline manifest are
+  historical/unlocked evidence outside the targeted exact7.
+- No mashos-api source, test, or protected surface changed and no test ran under
+  this read-only authority.
+
+Inference:
+
+- The malformed parentheses likely resulted from transcription of the intended
+  three-way chained equality.
+- A lineage-aware exact7 is expected to remain the same selected matrix before
+  and after source implementation if the future correction and implementation
+  satisfy their receipts.
+
+Neither inference is an implementation or GREEN result.
+
+Unconfirmed:
+
+- Future corrected test blobs and result head.
+- Future source blobs / SHA-256, source-policy hash, implementation feasibility,
+  RED refreeze, and exact7 GREEN.
+- Broad regression, temporal policy-pin disposition, source-baseline lock,
+  successful Step 0–10 completion, later Cycle work, and Cycle acceptance.
+
+Unwritten:
+
+- No test or source change, test execution, implementation, GREEN, broad
+  regression, successful completion receipt, or baseline event is written.
+- No P1 retry002, P2, fresh batch, exact100, Product Read, correction, B6, or
+  Cycle acceptance is written.
+- No raw input/output, quotation, identifiable paraphrase, individual mapping,
+  parsed span, private note, body digest, key, or expected surface is recorded.
+
+No-guess boundary:
+
+- Do not silently use causal exact6 alone as the authoritative final matrix.
+- Do not require future current source bytes to equal preimplementation hashes.
+- Do not predeclare future source or policy hashes.
+- Do not hard-code exact8 or an arbitrary minimum as the general rule.
+- Do not fake length, iteration, endpoint, or mapping cardinality.
+- Do not alter S4/S5 tests, source exact3, historical policy pins, unlocked
+  baseline manifest, or protected surfaces under the next correction authority.
+- Do not treat targeted exact7 GREEN as broad regression, Step completion, or
+  Cycle acceptance.
+
+Karen opinion:
+
+- Preserving a lineage-aware identity node is safer than dropping the evidence
+  chain and silently shrinking the authoritative result to exact6. Cardinality
+  must remain derived from the complete closed typed graph so that meaning
+  differences are not reduced to a fixture count or boolean.
+
+Body-free evidence:
+
+1. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRolePositiveBindingCardinalityAssertionAndGreenDenominator_Reconciliation_ReadOnly_20260723.md @ blob e0f7d270a265251cbf1204f784dd7c0e283b1946
+2. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRolePositiveBindingCardinalityAssertionAndGreenDenominator_Reconciliation_ReadOnly_BodyFree_Receipt_20260723.json @ blob 0eee62cfcaece10c79ae0267d2f4df6d835c6a33
+3. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRolePositiveBindingCardinalityAssertionAndGreenDenominator_Reconciliation_ReadOnly_Handoff_20260723.md @ blob 61f309fd4f96e164448ae685b5584f26b0a474a9
+4. EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md @ blob 201828886ccee706af38c42c1fceb6b848d53278
+
+STOP. Exactly one next separate authority candidate is:
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP5_CROSS_ROLE_POSITIVE_BINDING_CARDINALITY_ASSERTION_AND_GREEN_DENOMINATOR_RECONCILIATION_RED_CORRECTION_AND_REFREEZE_ONLY
+
+It is not approved by this record. Test correction/refreeze, source
+implementation, GREEN, and all later Cycle work require separate authority.
