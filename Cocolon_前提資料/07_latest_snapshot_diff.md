@@ -13016,3 +13016,98 @@ STOP. 次の別承認候補は一つだけである。
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY`
 
 この候補はStep 0/1 current rebinding、Step 4 refined-source partition owner、Step 5 source/test closure conflict、Step 6–10 standalone receipt回復の設計だけを扱う。source/test修正、receipt成功生成、baseline lock、P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
+
+## 2026-07-23 Cocolon subagent必要時活用 standing work-rule current authority
+
+この節が、subagent利用条件についての後発current authorityである。2026-06-16 / 2026-07-21の履歴を削除せず、read-only補助に対する作業ごとの明示許可条件だけをsupersedeする。Cocolonのwrite / commit、GitHub反映、最終判断を華恋が担う境界は変更しない。
+
+- Mash様の指示: `subagentを必要なら活用する`
+- standing permission date: `2026-07-23`
+- rule update entry head: `ed5c19f92f6fbab4dd28f27b617ad40210c1ea7c`
+- decision: `AS_NEEDED_READ_ONLY_SUBAGENT_ASSISTANCE_STANDING_PERMISSION`
+- per-work / per-subagent reapproval: not required
+- subagent write / commit authority: none
+- Karen final verification / judgment / write responsibility: required
+
+Confirmed facts:
+
+- 旧ruleはread-only補助にもMash様の都度明示許可を要求していた。
+- 新ruleは、独立確認・並列化が速度、網羅性、見落とし防止へ実質的に役立つ場合に華恋が活用する。
+- 利用自体は強制しない。実質的効果がない場合または実行枠を利用できない場合は華恋が直接確認する。
+- 利用不可により華恋単体で要求品質を維持できない場合はSTOPする。
+- subagent出力は候補であり、原典、path、blob、hash、結果を華恋が再確認する。
+- private bodyは承認済みlocal-only boundaryの外へ渡さない。
+- `14_cocolon_joint_development_and_karen_thought_boundary.txt`の華恋_only write boundaryは変更していない。
+
+Inference:
+
+- Mash様の指示はsubagentへのwrite委任ではなく、既存read-only補助境界内の都度許可をstanding permissionへ変更するものと解する。
+
+Karen opinion:
+
+- subagentの使用数を成果にせず、独立確認が必要な場面で使い、最終判断を華恋が統合・再検証する運用が最も見落としを減らしやすい。利用不能を理由に必要品質を下げないSTOP条件も必要である。
+
+Updated rule artifacts:
+
+1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt` @ blob `13df7fcc032d9456567e61bdc830f5c1864dfe59`
+2. `Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt` @ blob `ad8dfd60a7a5b2525d521693f17a359e22e8a734`
+3. `Cocolon_前提資料/work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt` @ blob `b3ac626c9b39185fd8f9cf3e58b07f589cb0a2d2`
+4. `Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt` @ blob `3bc50d24a959e1a7db453522a9503f7f43517365`
+5. `Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json` @ blob `27df8ce1c2ac1545a63b3f01114ea3ecdc07deaf`
+
+## 2026-07-23 NLS v3 Step 11 Cycle 001 Recovery Epoch 001 Step 0–10 prerequisite remediation design current authority
+
+この節がNLS v3 Step 11 Cycle 001についての後発current authorityである。承認されたread-only remediation designだけを固定し、P1失敗、source baseline unlocked、fresh batch未作成、B6 STOP、Cycle 001 `NOT_ACCEPTED`を維持する。
+
+- approved authority: `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_DESIGN_READ_ONLY`
+- Cocolon entry: `44e249e3d71366fa57db2ed828f159754662bdaa`
+- Cocolon evidence / ledger head before this append: `113405636a389ffecbe52e394bdbe21d2a06e311`
+- mashos-api start / result: `c9739a0e2de5632d08607636656ada2f712c62b9`
+- mashos-api changed path: exact0
+- state: `REMEDIATION_DESIGN_FROZEN / P1_RETRY_NOT_AUTHORIZED / AUTHORITY_STOP`
+- source baseline: `UNLOCKED`
+- fresh batch: `RESERVED_NOT_CREATED`
+- Cycle 001 accepted: false
+- automatic progression: false
+
+Confirmed facts:
+
+- Step 0–3はcurrent parent/source hashへ結ぶappend-only completion receipt chainを必要とする。
+- Step 4はindependent refined-source partition ownerを必要とし、現行STOPはtrueである。
+- Step 5は11 / 12で、後続body-free / runtime-disconnected successorとearly-Stepの静的filename guardが衝突する。
+- Step 6–9はcurrent standalone completion receiptを必要とする。
+- Step 10はhistorical closureとcurrent closureがdriftし、test collection collisionもある。
+- 今回のsource / test / fixture / sample / manifest変更、test実行、exact100、Product Read、private body生成は全てexact0である。
+
+Inference:
+
+- Step 5はsuccessor sourceを一件ずつ削除またはallowlist追加するのではなく、hash-boundなoffline / dormant closed dependency boundaryへ回復する必要がある。
+- Step 4はpublic question systemを実装せず、disconnected body-free partition ownerとして回復できる見込みである。public runtime変更が必要ならSTOPする。
+
+Karen opinion:
+
+- historical rc0010 manifestや過去receiptをcurrent bytesへ書き換える方法は採らず、新candidate identityのversioned successor closureとRecovery Epoch current receipt chainを作るべきである。これが履歴保存、Detailed Design §22.1、各Step STOP falseを同時に満たす。
+
+Selected remediation design:
+
+1. historical result / receipt / RC / manifestをimmutable historyとして保持する。
+2. Step 0–3をcurrent hashesへappend-onlyでrebindする。
+3. Step 4へindependent body-free refined-source partition ownerを設計する。
+4. Step 5 guardをhash-bound offline / dormant dependency closureへ設計し直す。
+5. Step 6–9へcurrent parent/source standalone receiptを作る。
+6. Step 10はrc0010を再利用せず、new candidate identityのversioned successor closureを作る。
+7. successful P1 retry時だけ、Detailed Design §22.1の8項目とStep固有STOP falseを持つ11-row receipt chainを生成する。
+
+Body-free evidence:
+
+1. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10PrerequisiteNonconformanceRemediationDesign_ReadOnly_Addendum_20260723.md` @ blob `5d3d9d1dc01ed37eb08f530d9cad54b9df86c524`
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10PrerequisiteNonconformanceRemediationDesign_ReadOnly_BodyFree_Receipt_20260723.json` @ blob `b689c2386669f2b089e17166fd21f341cd77f1d1`
+3. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10PrerequisiteNonconformanceRemediationDesign_ReadOnly_Handoff_20260723.md` @ blob `dece3d74b0866e161618a08fc0f21453a1f5c057`
+4. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` progress ledger @ blob `8d31b88f8af9bb98049a5954486d321c63aa9da5`
+
+STOP. 次の別承認候補は一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_PREREQUISITE_NONCONFORMANCE_REMEDIATION_RED_FREEZE_ONLY`
+
+この候補はcausal RED、test collection collisionのassertion-neutralなmechanical repair、new candidate identity予約、exact future implementation surfaceのfreezeだけを扱う。production source implementation、GREEN化、successful completion receipt、source baseline lock、P1 retry、P2、fresh batch、exact100、Product Read、B6、Cycle acceptanceへ自動進行しない。Cycle 001は`NOT_ACCEPTED`のままである。
+
