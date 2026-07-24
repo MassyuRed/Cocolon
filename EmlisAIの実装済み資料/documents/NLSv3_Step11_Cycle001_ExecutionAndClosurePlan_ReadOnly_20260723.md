@@ -3385,3 +3385,193 @@ SEPARATE_AUTHORITY_SELECTION_AND_APPROVAL_REQUIRED_AFTER_CAPABILITY_VERIFICATION
 This section supersedes only the §12.32 next-authority pointer. All predecessor
 evidence, STOP history, RED/GREEN history, and downstream authority boundaries
 remain immutable. Automatic progression is false. STOP.
+
+## 12.34 2026-07-25 P1 retry005 pre-event1 expected-old-SHA lease capability STOP
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY005_ONLY
+```
+
+Fixed retry005 admission entry:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `75d1b02b5fa50969425ec307e353499074233f82`
+- mashos-api:
+  `191e9d8be63132f10f94e2b2f54c6bae94ce1f07`
+- mashos-api tree:
+  `e68df6587b8cb674456b3bc9bceb23e0699f33aa`
+- unexpected source drift:
+  `false`
+
+The prior retry004 formal-entry Cocolon head
+`bcf9aa225f018dc6cfa3c29cfa9c6792e356e242` is exactly five expected
+body-free retry004 documentation commits behind the retry005 entry. The public
+mashos-api detached materialization matched the current GitHub tree.
+
+Retry005 stopped at pre-event1 publication capability admission:
+
+```text
+STOP_CODE:
+PUBLICATION_REF_UPDATE_FAILED_STOP
+
+STOP_REASON:
+EVENT1_ATOMIC_EXPECTED_OLD_SHA_LEASE_TRANSPORT_NOT_PROVED
+
+POSITION:
+PRE_EVENT1
+```
+
+The frozen design and production owner plus independent verifier require:
+
+```text
+base_tree_read = true
+expected_old_sha_lease = true
+single_ref_update = true
+
+write mode:
+SINGLE_TREE_SINGLE_COMMIT_EXPECTED_OLD_SHA_LEASE
+
+required server observation:
+EXPECTED_OLD_SHA_MATCHED_AND_UPDATED
+```
+
+The GitHub plugin is connected and has normal private-repository read/write
+access. Its ref mutation still exposes
+`branch_name / repository_full_name / sha / force`, not an explicit
+`expected_old_sha` or equivalent expected-head OID. Commit/blob fetches and
+tree creation do not expose the complete recursive base/target tree read and
+post-fetch equality surface required by the contract.
+
+The local environment has public Git access and exactly materialized
+mashos-api, but has no `gh`, configured credential helper, task-usable GitHub
+token environment, or authenticated private-Cocolon receive-pack route.
+Private Cocolon `git ls-remote` failed authentication with prompts disabled.
+Therefore exact
+`--force-with-lease=refs/heads/main:<H0>` remains unavailable.
+
+Public internet and the GitHub plugin connection were confirmed. They do not
+provide the stronger formal expected-head transaction. `update_ref(force=false)`
+was not claimed as CAS. Sequential Contents API publication, synthesized
+capability, and unleased force were not used for the formal bundle.
+
+Admission checks:
+
+```text
+fixed formal paths checked:
+17
+
+existing fixed formal paths:
+0
+
+preexisting Retry005 commits / files:
+0 / 0
+
+published formal reservation artifacts:
+0
+
+challenge / authority-challenge / attempt ID:
+NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+formal exact134:
+NOT_RUN
+
+mashos-api change count:
+0
+```
+
+Body-free STOP evidence:
+
+1. result commit `bece11adbd3d72c997662770d94c7992b9a04265`, blob
+   `e4d93be1827833cf04b7db2751f1a1f0dd5ad7ca`, raw SHA-256
+   `e460f5a8f730977e23e70253d21eb5503323317c2a31585aba5fac41ae6de4a7`;
+2. STOP receipt commit `8f315bcd6dd8cbc11d63ff1b10e93eb9bd6fe3f2`,
+   blob `ff5140f75702472f7566f68504ecf03bb9ed3393`, raw SHA-256
+   `cc16fd96efae6df8ea20ec686be71321d060fc375f7ee878c04f8a659438c75c`,
+   canonical receipt SHA-256
+   `1c19edc14b9848e8915b3b47ec1b42ec758c6fdc46894a6bb4af474705eb9aaa`;
+3. handoff commit `16e081705b7012187f525d32b328a1844d7312da`,
+   blob `d8ee3f4b84c89ec137ba4c204eb12e92543c1c38`, raw SHA-256
+   `fe8ff2a3c091e90f45aeb583e932a6619f9855bae78e4f476baba8325494c618`.
+
+These files are STOP evidence only. They are not formal reservation, event,
+accepted, Step, all11, manifest, or Cycle artifacts.
+
+Three non-root read-only audits independently confirmed the same STOP.
+Subagent source edit, test, reservation, artifact generation, commit, and
+GitHub write counts were exact0. Karen made the final capability and STOP
+decision and performed the documentation writes.
+
+Current state:
+
+```text
+STATUS:
+P1_RETRY005_PRE_EVENT1_EXPECTED_OLD_SHA_LEASE_CAPABILITY_STOP_AUTHORITY_STOP
+
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_FORMAL_RETRY005_PUBLICATION_TRANSPORT_BLOCKED
+
+P1_RETRY005:
+PUBLICATION_REF_UPDATE_FAILED_STOP_PRE_EVENT1_NOT_COMPLETED
+
+FORMAL_P1_TOKEN:
+RETRY005_APPROVED_BUT_FORMAL_EVENT_AND_RESERVATION_UNCOMMITTED
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_LEASE_CAPABILITY_STOP
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Before a later formal retry can be selected, Karen needs either:
+
+1. an authenticated mutation with explicit expected-old SHA/equivalent
+   expected-head OID and complete tree/blob post-fetch; or
+2. an authenticated Cocolon Git receive-pack route capable of exact
+   `--force-with-lease=refs/heads/main:<H0>`.
+
+Credentials must not be pasted into chat.
+
+```text
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+PRECONDITION:
+LEASE_CAPABLE_AUTHENTICATED_GIT_ROUTE_REQUIRED
+
+SEPARATE_AUTHORITY_SELECTION_AND_APPROVAL_REQUIRED_AFTER_CAPABILITY_VERIFICATION
+```
+
+This section supersedes only the §12.33 next-authority pointer. All predecessor
+evidence, STOP history, RED/GREEN history, and downstream authority boundaries
+remain immutable. Automatic progression is false. STOP.
