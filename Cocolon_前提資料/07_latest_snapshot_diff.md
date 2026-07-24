@@ -16523,3 +16523,32 @@ UNSELECTED / SEPARATE APPROVAL REQUIRED
 ```
 
 STOP。
+
+
+### 2026-07-24 current-snapshot write-integrity correction note
+
+- rejected intermediate snapshot commit:
+  `366ceedcf984610f378ac6d7dab12ce51d10e773`
+- cause:
+  normal large-file fetch returned an empty body before append update
+- detected compare:
+  `16311 deletions`
+- accepted full-content restoration commit / blob:
+  `597e670e0d989d2de5d81bde6f98c6510e16e606` /
+  `90907325003ec833e67b1fe94054ba218b8a9621`
+- restoration basis:
+  exact predecessor blob
+  `2b83a753ce528c8948fa57504331260a2d4eaba1`, verified full length
+  `915997` characters
+- accepted predecessor-to-restored compare:
+  `150 additions / 0 deletions`
+- Plan correction record commit / blob:
+  `7fe6a40dbd9aa19796aa82ff13501f7fa7e90fe9` /
+  `4dba70e473630dcef51cbd21d895694b8aaef906`
+- production / tests / closure / result / receipt / handoff changed:
+  false
+- force update / history rewrite:
+  false
+
+The intermediate truncation remains visible in history and is not accepted as
+current evidence.
