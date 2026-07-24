@@ -2332,3 +2332,228 @@ Automatic progression is false. STOP.
 
 The initial append remains visible in history and is not the accepted current
 Plan evidence. The corrected full document is the accepted current version.
+
+
+## 12.28 2026-07-24 current-step receipt reconciliation implementation / targeted GREEN / authority STOP
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+Fixed entry and no-drift:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `7aec47f67ea2be4f28d5a12a43bec9459b316150`
+- mashos-api:
+  `e14f764e4cd8c8a765628d87226964ef7587d798`
+- reflection直前のrelated drift:
+  `false / false / false`
+
+mashos-api result:
+
+- commit / tree:
+  `78276950d0d7650968fe938bc63a6e13455a8d6c` /
+  `e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2`
+- entry relation:
+  `ahead_by=1 / behind_by=0 / total_commits=1`
+- GitHub reflection:
+  `main fast-forward / force=false`
+- exact7:
+  implementation source/tool exact7
+- compare:
+  `6432 additions / 388 deletions`
+- frozen test exact13:
+  unchanged
+- fixture / sample / schema / config / requirements:
+  unchanged
+
+Implemented contract:
+
+1. exact7を含むcommit-bound canonical current closure owner;
+2. Step 0–10 exact11 immutable requirement registry;
+3. clean pinned detached worktree / isolated subprocess / fixed environment /
+   timeout-bound body-free exact134 proof runner;
+4. commit / tree / closure / registry / node / source / runner / start-end /
+   outcome / count / proof-hash-bound accepted-run receipt owner;
+5. registry / accepted run / fresh closure / formal nodes / artifact evidence /
+   prior full chain-derived current Step receipt owner;
+6. owner module非依存のclosure / registry / run / receipt / all11 independent
+   verifier;
+7. owner + independent acceptance後だけ返るin-memory
+   `STAGED_NOT_PUBLISHED` all11 candidate.
+
+Authority gate:
+
+- selected formal P1 authority token:
+  `None / UNSELECTED`
+- arbitrary authority string:
+  closed rejection
+- event 1:
+  not creatable under current token state
+- implementation capability:
+  present
+- issuance authority:
+  absent
+
+Registry and final GitHub-commit-bound closure:
+
+```text
+step_count:
+11
+
+positive / dedicated_negative / formal nodes:
+123 / 11 / 134
+
+registry_sha256:
+70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728
+
+formal_node_registry_sha256:
+fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf
+
+canonical_current_file_count:
+224
+
+dependency_closure_count:
+39
+
+source_dependency_closure_sha256:
+02501497a78dd0466ef965cad20d7e2664b560abb1650486ed333f45f53086fe
+
+canonical_current_closure_sha256:
+fb04764568424c4ea89a6993ebbaf196275f52d896590d1fcd9c70cbb541ff60
+
+owner / independent:
+equal / zero issue
+```
+
+Final GitHub-commit-bound verification:
+
+```text
+targeted reconciliation:
+36 collected / 36 passed / 0 failed / 0 error / 0 unexpected /
+1 unrelated warning / 63.49 seconds
+
+legacy Step10 compatibility:
+1 collected / 1 passed / 0 failed / 0 error / 0 unexpected /
+1 unrelated warning / 126.63 seconds
+
+exact7 AST:
+7 / 7
+
+git diff check / worktree:
+PASS / CLEAN
+```
+
+The warning is the unrelated Pydantic v1 root-validator deprecation.
+Broad regression and formal exact134 were not run or claimed.
+
+Protected SHA-256 remained:
+
+- source baseline manifest:
+  `ec6007f5b35fdcc0ec8a330822e4fe9086884dada2415e8557d7f314e2a65127`
+- reply service:
+  `162b94eb185c519e50dceee62e591cc8ab02204312761874eb2fbb636ffbe50a`
+- Step11 cycle evidence:
+  `e9f77f7411b581e96a7035d05aa3a50eb4628cbba37a02b0786a0d35b818d43d`
+- Step9 dependency manifest:
+  `19a21d5853c44130c2c874e8b9c6bbbc0a1fc79591c529fb060e7c1e3cd7742e`
+- Step10 dependency manifest:
+  `3bc1311c264cbbae71e69c643d055575e9b80c58b71d321ff28e744ad0ee090c`
+
+Body-free evidence:
+
+1. result commit `d4abf70dd6f28408302e342f669282c921b54112`,
+   blob `4e795f66d7822611d99bc0ea995dfaac1ed92d5c`,
+   SHA-256
+   `8f72f29480c04bc6bcd1fcd095fe74faa07d8920a07b453a7f075b8ec646971a`;
+2. receipt commit `548703b951c12c8594920f61499e59858a3f0d7a`,
+   blob `ee3fce4ff55af54ad8b2f3e0daf899e7eb5b30b7`,
+   SHA-256
+   `255e1e50966e0b4348eb766533e4524f9cb82f5214b35df6a78c5b76d9c9fb7b`;
+3. handoff commit `934ce919360625225ccf5d4a52c0cb970de7bc92`,
+   blob `799f08111468859d95a88bfcc0a782d5e2682ba6`,
+   SHA-256
+   `96669c0be532f9b41a611983f277927efca2ce85646665b71cabaa7910029ec5`.
+
+Proof scope:
+
+```text
+BODY_FREE_HASH_BOUND_RUNNER_OUTPUT
+NOT_EXTERNAL_THIRD_PARTY_EXECUTION_ATTESTATION
+```
+
+Current issuance and downstream state:
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+BLOCKED_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT134:
+NOT_RUN_NOT_AUTHORIZED
+
+FORMAL_EXACT100 / PRODUCT_READ / CORRECTION / B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+Required future parent order remains:
+
+```text
+final clean commit / fresh closure
+-> SOURCE_BASELINE_LOCKED
+-> same-baseline accepted exact134 run
+-> Step 0..10 ordered receipts
+-> all11 atomic publication
+-> STEP0_10_PREREQUISITES_PROVED
+-> AUTHORITY STOP
+-> P2 SEPARATE APPROVAL REQUIRED
+```
+
+No future formal P1 authority token is selected by this record.
+
+```text
+NEXT_AUTHORITY:
+UNSELECTED / SEPARATE APPROVAL REQUIRED
+```
+
+This entry supersedes only the §12.27 implementation next-lane pointer.
+It preserves all predecessor evidence, causal RED history, protected bytes,
+baseline/event order, and downstream STOP boundaries. Automatic progression
+is false. STOP.
+
