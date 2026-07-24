@@ -1,0 +1,95 @@
+{
+  "artifact_issuance": {
+    "accepted_successful_receipt_count": 0,
+    "formal_reservation_count": 0,
+    "sequence_event1_count": 0,
+    "sequence_event2_count": 0,
+    "step0_10_completion_receipt_count": 0
+  },
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_RED_FREEZE_ONLY",
+  "body_free": true,
+  "broad_regression_run": false,
+  "entry": {
+    "cocolon_commit_sha1": "fee21e9a92450d4171536f280e859d95e344804e",
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "mashos_api_commit_sha1": "78276950d0d7650968fe938bc63a6e13455a8d6c",
+    "mashos_api_tree_sha1": "e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2",
+    "related_entry_drift": false
+  },
+  "formal_exact134_run": false,
+  "mashos_api_red_freeze": {
+    "ahead_by": 1,
+    "base_commit_sha1": "78276950d0d7650968fe938bc63a6e13455a8d6c",
+    "behind_by": 0,
+    "changed_path_count": 4,
+    "commit_sha1": "37ad05927b596322e3fa0791ca8cadd5a63b56c1",
+    "files": [
+      {
+        "change": "ADDED",
+        "git_blob_sha1": "ccd1e82c56624f603693b38a02ab802a07df317e",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_exact134_accepted_success_red.py",
+        "raw_file_sha256": "58ba36ded0a1b51ed9ee03bf4a4f8a88dde06c775c520d713a67505b8f63379f"
+      },
+      {
+        "change": "ADDED",
+        "git_blob_sha1": "afb77e6ddaf67d92e6386ea557b6509460f9deb8",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_sequence_ledger_publication_red.py",
+        "raw_file_sha256": "2dc0e00f2d53734399bc9f5682fc01c2a1447d8e3974653d71989f11ff339db7"
+      },
+      {
+        "change": "MODIFIED",
+        "git_blob_sha1": "bb411ebb3e5a57fe78f39defe299608afd9a7cf3",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py",
+        "raw_file_sha256": "ec894e14fcc28d6562b0415ab34f18a3cf7be40942c313103f52991888a5db52"
+      },
+      {
+        "change": "MODIFIED",
+        "git_blob_sha1": "93a62943d4c6351dbc7223d1a65215433714739d",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_proved_receipt_contract_red.py",
+        "raw_file_sha256": "ba9f39f83cdaa18096973706e896dd31dfa79ba2d25eec8921d6e6bcf8ef853f"
+      }
+    ],
+    "force_ref_update": false,
+    "parent_commit_sha1": "78276950d0d7650968fe938bc63a6e13455a8d6c",
+    "production_source_change_count": 0,
+    "repository_full_name": "MassyuRed/mashos-api",
+    "tree_sha1": "c54e2562697eeb608f9ebdc79b455b4e0e3133ca"
+  },
+  "next_separate_approval_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+  "next_separate_approval_candidate_state": "UNAPPROVED_INACTIVE",
+  "recorded_on_jst": "2026-07-24",
+  "receipt_sha256": "0bc834be6f611b1521fd3a5bdbb707e2b8a52587b02c0928c467ac23cc7a31be",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "reserved_future_formal_p1_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY",
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.contract_reconciliation_red_freeze_receipt.v1",
+  "state": {
+    "automatic_progression": false,
+    "cycle001": "NOT_ACCEPTED",
+    "g1": "IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED",
+    "g2": "CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED",
+    "source_baseline": "UNLOCKED"
+  },
+  "subagent_audit": {
+    "final_residual_blocker_count": 0,
+    "nested_independent_reaudit_count": 1,
+    "read_only_subagent_total_count": 4,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0,
+    "top_level_audit_lane_count": 3
+  },
+  "test_freeze": {
+    "accepted_attack_code_count": 30,
+    "accepted_test_count": 10,
+    "collection_error_count": 0,
+    "compiled_changed_test_file_count": 4,
+    "exact_selected_test_count": 40,
+    "failed_count": 35,
+    "passed_count": 5,
+    "sequence_publication_requirement_family_count": 23,
+    "sequence_publication_test_count": 27,
+    "state": "CAUSAL_RED",
+    "warning_count": 1
+  }
+}
