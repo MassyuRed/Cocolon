@@ -17674,3 +17674,174 @@ P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptance�
 This section supersedes only the previous design next-lane pointer.
 All predecessor evidence and STOP history remain immutable.
 Automatic progression is false. STOP.
+
+
+## 2026-07-24 accepted exact134 / sequence ledger / atomic publication contract reconciliation RED freeze
+
+### 完了したauthority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+### 確認した事実
+
+1. fixed entryはKaren-Diary
+   `700f749f5149cac1f8bd4bab8a364d524a56985b`、Cocolon
+   `fee21e9a92450d4171536f280e859d95e344804e`、mashos-api
+   `78276950d0d7650968fe938bc63a6e13455a8d6c` / tree
+   `e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2`で、related entry
+   driftはなかった。
+2. mashos-api result commit
+   `37ad05927b596322e3fa0791ca8cadd5a63b56c1` / tree
+   `c54e2562697eeb608f9ebdc79b455b4e0e3133ca`はfixed entryの
+   verified direct childである。compareは`ahead_by=1` /
+   `behind_by=0`で、exact4 intended test pathsだけが変わった。
+3. production-source changeはexact0である。changed exact4はaccepted
+   exact134 RED新規1、sequence/publication RED新規1、existing
+   reconciliation test更新2である。
+4. accepted surfaceはexact10 tests / exact30 named attack codes、
+   sequence/publication surfaceはexact27 tests /
+   `L01`–`L09` + `S01`–`S04` + `P01`–`P10` exact23 familiesである。
+5. selected existing reconciliation exact3を合わせてexact40を収集した。
+6. exact40は`5 passed / 35 failed / 0 errors / 1 warning`だった。
+   accepted exact10は`2/8`、sequence/publication exact27は`1/26`、
+   selected existing exact3は`2/1`である。
+7. failureはcurrent v1 accepted fail-open、accepted-v2 owner /
+   reservation / runner / verifier / downstream gate、sequence owner /
+   verifier / atomic publisher、future closure pathの不在を原因とする
+   causal REDである。collection/import/syntax/fixture errorではない。
+8. changed exact4の`py_compile`と`git diff --check`はPASSした。
+9. result / receipt / handoff evidence commitsは
+   `24e53b2379e48d8a9090a7520782e6845159e862` /
+   `c981659ba709c13c7ceb8f4976a4a45ddd07b01e` /
+   `545da3f0df81798cdfb294e572c88818ef7d8dc0`である。
+10. result / receipt / handoff blobsは
+    `2276f3507b670053fc9782f9cc48a0d677805e9d` /
+    `59ad362dc58c3f829979657f6d6a2cd3f6dbf78b` /
+    `848fd03c786e1a59e7af7d0c8407fc969fe45d3d`である。
+11. result / receipt / handoff SHA-256は
+    `437c920ed0a1def6d10f76e0e3c6cb14cc47acdd8c8cb3321a8784cb19cb3cfe` /
+    `bc9f7922c03f47242586d7b49f44937edee4524f850216c9860566350d4293ea` /
+    `c2023e683eb462a1d6513d7c589b0afb271e867e03bf2b979969eb3fd9bda92f`
+    である。
+12. Execution and Closure Plan §12.31 append commit / blobは
+    `bcdc754634ce9645bf7e3b4a8b92302370197144` /
+    `d3d75ee11f935cc1f5c0407c9ef8a9c413fc99b3`である。
+13. top-level read-only audit lane exact3をaccepted-run、
+    sequence-ledger、atomic-publication監査へ使用した。
+    atomic-publication laneのnested independent re-audit exact1を合わせ、
+    non-root subagent totalはexact4だった。subagent
+    edit/test/commit/GitHub writeはexact0で、華恋による修正後のRED-spec
+    residual blockerはexact0だった。
+14. formal reservation、formal exact134、accepted/Step/all11/event
+    artifact、private body、broad regression、formal P1 token commitは
+    全てexact0または未実行である。
+
+### 推測
+
+1. attempt-ID preimage内の
+   `source_baseline_event.event_sha256` /
+   `source_closure.source_commit_sha1`はliteral dotted labelsとして
+   解釈した。future implementationはこれを維持するか、別authorityで
+   明示的にsupersedeする必要がある。
+2. publication failureはphaseで分ける。bundle/set/schema failureは
+   `PUBLICATION_BUNDLE_INVALID`、immutable target-path conflictは
+   `PUBLICATION_PATH_CONFLICT`、stale expected head/T0は
+   `PUBLICATION_HEAD_DRIFT_STOP`、plan/capability/direct-child/lease
+   failureは`PUBLICATION_REF_UPDATE_FAILED_STOP`、
+   partial/reachability/post-fetch failureは
+   `PUBLICATION_POSTVERIFY_CONFLICT_STOP`である。
+3. causal REDは必要なfuture owner surfaceを示すが、future GREENを
+   証明しない。
+4. 今回のnon-force fast-forward GitHub reflectionはformal event
+   publicationに必要なexpected-old-SHA lease / verified base-tree routeの
+   実証ではない。
+
+### 華恋の意見
+
+acceptedはwell-formed resultではなく、fixed exact134の完全成功と一致させる。
+failure/timeout/infraは監査可能なattempt STOPとして残し、successful
+receiptへ昇格させない。
+
+authorityはworker start前のone-shot reservationで永続消費する。
+reservation後のresult不在はretry許可ではなく
+`ATTEMPT_CONSUMPTION_UNKNOWN_STOP`である。
+
+formal event publicationはactual expected-old-SHA lease、verified base tree、
+direct-child target、post-fetchを実装・証明するまで停止する。
+
+### 現在状態とSTOP
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_CONTRACT_STOP
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P1_RETRY003:
+PRE_EVENT1_CONTRACT_NONCONFORMANCE_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Reserved future formal P1 token:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+reservedであり、approved / active / committedではない。
+
+Exactly one next separate-approval candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+このcandidateは未承認・inactiveである。別途明示的に承認された場合だけ、
+frozen REDに必要なimplementationとtargeted GREENを対象とする。formal
+reservation/event/receipt、formal exact134、formal P1 token commitment、
+P2、fresh batch、exact100、Product Read、correction、B6、Cycle
+acceptanceは含まない。
+
+This section supersedes only the previous RED-freeze next-lane pointer.
+All predecessor evidence and STOP history remain immutable.
+Automatic progression is false. STOP.
