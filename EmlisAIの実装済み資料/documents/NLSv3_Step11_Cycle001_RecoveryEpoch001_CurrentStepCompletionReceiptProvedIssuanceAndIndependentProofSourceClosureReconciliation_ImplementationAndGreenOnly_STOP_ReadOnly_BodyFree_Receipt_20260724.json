@@ -1,0 +1,111 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.receipt_reconciliation_implementation_green_stop.v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_RECEIPT_RECONCILIATION_IMPLEMENTATION_GREEN_STOP_20260724",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "date": "2026-07-24",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_heads": {
+    "Karen-Diary": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "Cocolon": "7aec47f67ea2be4f28d5a12a43bec9459b316150",
+    "mashos-api": "e14f764e4cd8c8a765628d87226964ef7587d798"
+  },
+  "related_entry_drift": false,
+  "mashos_api_result": {
+    "commit": "78276950d0d7650968fe938bc63a6e13455a8d6c",
+    "tree": "e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2",
+    "ahead_by": 1,
+    "behind_by": 0,
+    "total_commits": 1,
+    "changed_path_count": 7,
+    "additions": 6432,
+    "deletions": 388,
+    "fast_forward": true,
+    "force": false
+  },
+  "cocolon_result_evidence": {
+    "commit": "d4abf70dd6f28408302e342f669282c921b54112",
+    "blob": "4e795f66d7822611d99bc0ea995dfaac1ed92d5c",
+    "sha256": "8f72f29480c04bc6bcd1fcd095fe74faa07d8920a07b453a7f075b8ec646971a"
+  },
+  "implementation": {
+    "exact7": "IMPLEMENTED",
+    "frozen_test_exact13_changed": 0,
+    "fixture_sample_schema_config_requirements_changed": 0,
+    "selected_formal_p1_authority_token": null,
+    "formal_p1_entry": "FAIL_CLOSED_UNSELECTED_AUTHORITY",
+    "all11_candidate_disposition": "STAGED_NOT_PUBLISHED_ONLY",
+    "external_execution_attestation_claimed": false
+  },
+  "registry": {
+    "step_count": 11,
+    "positive_node_count": 123,
+    "dedicated_negative_node_count": 11,
+    "formal_node_count": 134,
+    "registry_sha256": "70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728",
+    "formal_node_registry_sha256": "fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf"
+  },
+  "closure": {
+    "source_commit": "78276950d0d7650968fe938bc63a6e13455a8d6c",
+    "canonical_current_file_count": 224,
+    "dependency_closure_count": 39,
+    "source_dependency_closure_sha256": "02501497a78dd0466ef965cad20d7e2664b560abb1650486ed333f45f53086fe",
+    "canonical_current_closure_sha256": "fb04764568424c4ea89a6993ebbaf196275f52d896590d1fcd9c70cbb541ff60",
+    "owner_independent_equal": true,
+    "owner_issue_count": 0,
+    "independent_issue_count": 0
+  },
+  "verification": {
+    "targeted_reconciliation": {
+      "collected": 36,
+      "passed": 36,
+      "failed": 0,
+      "errors": 0,
+      "unexpected_failures": 0,
+      "warnings": 1,
+      "seconds": 63.49
+    },
+    "legacy_step10_compatibility": {
+      "collected": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "unexpected_failures": 0,
+      "warnings": 1,
+      "seconds": 126.63
+    },
+    "exact7_ast_parse": "7_OF_7",
+    "git_diff_check": "PASS",
+    "final_worktree": "CLEAN",
+    "broad_regression": "NOT_RUN_NOT_CLAIMED",
+    "formal_exact134": "NOT_RUN_NOT_AUTHORIZED"
+  },
+  "protected_sha256": {
+    "ai/services/ai_inference/emlis_ai_recovery_epoch001_source_baseline_manifest_v3.py": "ec6007f5b35fdcc0ec8a330822e4fe9086884dada2415e8557d7f314e2a65127",
+    "ai/services/ai_inference/emlis_ai_reply_service.py": "162b94eb185c519e50dceee62e591cc8ab02204312761874eb2fbb636ffbe50a",
+    "ai/services/ai_inference/emlis_ai_step11_cycle_evidence_v3.py": "e9f77f7411b581e96a7035d05aa3a50eb4628cbba37a02b0786a0d35b818d43d",
+    "ai/services/ai_inference/emlis_ai_step9_dependency_manifest_v3.py": "19a21d5853c44130c2c874e8b9c6bbbc0a1fc79591c529fb060e7c1e3cd7742e",
+    "ai/services/ai_inference/emlis_ai_step10_dependency_manifest_v3.py": "3bc1311c264cbbae71e69c643d055575e9b80c58b71d321ff28e744ad0ee090c"
+  },
+  "issuance": {
+    "source_baseline_locked_event": "NOT_CREATED",
+    "accepted_formal_run_receipt": "NOT_CREATED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "all11_publication": "NOT_CREATED",
+    "step0_10_prerequisites_proved_event": "NOT_CREATED"
+  },
+  "state": {
+    "status": "RECONCILIATION_IMPLEMENTATION_GREEN_FORMAL_P1_NOT_AUTHORIZED_AUTHORITY_STOP",
+    "G1": "IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED",
+    "G2": "BLOCKED_NOT_AUTHORIZED",
+    "STEP5": "TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED",
+    "SOURCE_BASELINE": "UNLOCKED",
+    "P1_RETRY002": "ADMISSION_STOPPED_NOT_COMPLETED",
+    "FUTURE_P1": "NOT_AUTHORIZED",
+    "P2": "NOT_AUTHORIZED",
+    "FRESH_BATCH": "RESERVED_NOT_CREATED",
+    "FORMAL_EXACT100_PRODUCT_READ_CORRECTION_B6": "NOT_RUN",
+    "CYCLE001": "NOT_ACCEPTED"
+  },
+  "next_authority": "UNSELECTED / SEPARATE APPROVAL REQUIRED"
+}
