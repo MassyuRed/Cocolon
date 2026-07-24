@@ -1744,3 +1744,82 @@ This entry supersedes only the prior post-implementation current-root
 interpretation and next-authority pointer. It preserves all historical
 lineages, Step 5 evidence, causal RED history, and downstream STOP
 boundaries. Automatic progression is false.
+
+### 12.23 2026-07-24 predecessor evidence SHA-256 and historical prerequisite disposition append-only correction and refreeze
+
+- approved authority:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_PREDECESSOR_EVIDENCE_SHA256_AND_HISTORICAL_PREREQUISITE_DISPOSITION_APPEND_ONLY_CORRECTION_AND_REFREEZE_ONLY`
+- Cocolon / mashos-api entry heads:
+  `6bd0a4332abf5547dace7edef5ae8feb5814d4fa` /
+  `7a771247ca26ce435d325b5eb484197b1bdec7c2`
+- corrected target:
+  `ai/tests/helpers/emlis_nls_v3_s0_s1_baseline.py`
+- target Git blob:
+  `77bcb55fed34d19b38ae54734eadef54e092f6ce`
+- incorrect predecessor evidence SHA-256:
+  `652bd446883ebf4213b5859340945d25885428c040b6a68a34c55dc4d1679f80`
+- correct actual / oracle / remote-equivalent SHA-256:
+  `652bd446bd33995d9575b6db60f765caa97305b98d439d294de33bc569ea9f80`
+- correction classification:
+  `EVIDENCE_STRING_TRANSCRIPTION_ERROR / ACTUAL_BYTES_UNCHANGED`
+- immutable predecessor result / receipt blobs:
+  `a89dc73cd2c7c647f65ac2a77abbacc4c6da3b86` /
+  `fc3a283e40bd80eaa264e919acd0b253a965b58f`
+- predecessor records rewritten:
+  `false`
+- append-only result / receipt / handoff commits:
+  `d2f37e737798660f5b05f89c8aa2d0cba471913e` /
+  `8373bbc6713222a9b779e0f8962537eff4459558` /
+  `9853105d25b218ff02b142026294fe8f07a05a24`
+- append-only result / receipt / handoff blobs:
+  `e5179ee6774c9b47a209d9579b06393364d841ed` /
+  `64e3f06a65b0e869879f702bdf65194c256fb18d` /
+  `57cef316780ea6652a6b47752df8f0fece241bed`
+- historical prerequisite test / manifest blobs:
+  `b97c42adef45155e80ccee745e9a48ad666f8680` /
+  `e95967eb35e2d24745d6e9f90e687afb1fcc83b6`
+- historical prerequisite current run:
+  `12 collected / 10 passed / 2 historical drift failed / 0 error /
+  8.25 seconds`
+- historical drift codes:
+  `RECOVERY_SOURCE_BASELINE_SOURCE_HASH_DRIFT` /
+  `RECOVERY_SOURCE_BASELINE_UNLISTED_IMPORTER`
+- historical frozen / current actual-byte rederived roots:
+  `07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22` /
+  `203c23be5b8655230c48871228614689bdc23b5038290ae779724d7dc0df9a1b`
+- historical prerequisite disposition:
+  `HISTORICAL_IMMUTABLE_SUPERSEDED_NOT_EXACT9_GREEN_GATE`
+- broad-regression GREEN claimed:
+  `false`
+- recovery exact15:
+  `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected /
+  3.51 seconds`
+- Step 5 exact7:
+  `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+  10.00 seconds`
+- mashos-api changed paths / exact9 implementation:
+  `0 / NOT_STARTED`
+- G1:
+  `REMAINING_CAUSAL_RED_REFROZEN_NOT_COMPLETED`
+- G2:
+  `BLOCKED / NOT_AUTHORIZED`
+- Step 5:
+  `NOT_COMPLETED`
+- successful Step 0–10 completion receipt count:
+  `0`
+- source baseline:
+  `UNLOCKED`
+- Cycle 001:
+  `NOT_ACCEPTED`
+- Mash-side work for this completed authority:
+  none
+- exactly one next separate authority candidate:
+  `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+This entry supersedes only the two incorrect predecessor baseline-helper SHA-256
+fields and the ambiguous historical-prerequisite GREEN disposition. It does
+not modify predecessor evidence, historical bytes, the refrozen oracle, or
+exact9. The historical prerequisite suite remains a protected negative-drift
+witness and is not part of the exact9 GREEN denominator. Broad-regression GREEN
+must not be claimed. Automatic progression is false.
+
