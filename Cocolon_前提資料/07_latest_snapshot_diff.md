@@ -16246,3 +16246,130 @@ false
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
 
 この候補は未承認である。STOP。
+
+## 2026-07-24 predecessor evidence SHA-256 and historical prerequisite disposition append-only correction / refreeze completion
+
+### 完了したauthority
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_PREDECESSOR_EVIDENCE_SHA256_AND_HISTORICAL_PREREQUISITE_DISPOSITION_APPEND_ONLY_CORRECTION_AND_REFREEZE_ONLY`
+
+### 確認した事実
+
+1. entry headsはKaren-Diary
+   `700f749f5149cac1f8bd4bab8a364d524a56985b`、Cocolon
+   `6bd0a4332abf5547dace7edef5ae8feb5814d4fa`、mashos-api
+   `7a771247ca26ce435d325b5eb484197b1bdec7c2`で、driftはなかった。
+2. baseline helper
+   `ai/tests/helpers/emlis_nls_v3_s0_s1_baseline.py`のGit blobは
+   `77bcb55fed34d19b38ae54734eadef54e092f6ce`、actual SHA-256は
+   `652bd446bd33995d9575b6db60f765caa97305b98d439d294de33bc569ea9f80`
+   である。
+3. predecessor result / receiptが記録した
+   `652bd446883ebf4213b5859340945d25885428c040b6a68a34c55dc4d1679f80`
+   はactual bytesと一致しない。両predecessor blobは変更せず、append-only
+   correctionがこの二fieldだけをsupersedeする。
+4. historical prerequisite test / manifest blobsは
+   `b97c42adef45155e80ccee745e9a48ad666f8680` /
+   `e95967eb35e2d24745d6e9f90e687afb1fcc83b6`のまま不変である。
+5. historical prerequisite current runは
+   `12 collected / 10 passed / 2 historical drift failed / 0 error /
+   8.25 seconds`で、codesは
+   `RECOVERY_SOURCE_BASELINE_SOURCE_HASH_DRIFT` /
+   `RECOVERY_SOURCE_BASELINE_UNLISTED_IMPORTER`である。
+6. historical frozen rootは
+   `07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22`、
+   current actual-byte rederivationは
+   `203c23be5b8655230c48871228614689bdc23b5038290ae779724d7dc0df9a1b`
+   である。
+7. historical prerequisite dispositionは
+   `HISTORICAL_IMMUTABLE_SUPERSEDED_NOT_EXACT9_GREEN_GATE`である。
+   protectedはbyte immutableを意味し、later current treeでもGREENを要求する
+   意味ではない。broad-regression GREENは主張しない。
+8. recovery exact15は
+   `15 collected / 9 passed / 6 causal failed / 0 error / 0 unexpected /
+   3.51 seconds`、Step 5 exact7は
+   `7 collected / 7 passed / 0 failed / 0 error / 0 unexpected /
+   10.00 seconds`である。
+9. mashos-api changed pathはexact0、exact9 implementationは未開始である。
+10. append-only result / receipt / handoff commitsは
+    `d2f37e737798660f5b05f89c8aa2d0cba471913e` /
+    `8373bbc6713222a9b779e0f8962537eff4459558` /
+    `9853105d25b218ff02b142026294fe8f07a05a24`、blobsは
+    `e5179ee6774c9b47a209d9579b06393364d841ed` /
+    `64e3f06a65b0e869879f702bdf65194c256fb18d` /
+    `57cef316780ea6652a6b47752df8f0fece241bed`である。
+11. Execution and Closure Plan §12.23 commit / blobは
+    `f777f9515a4d8530993269fd465e46f58d77b12c` /
+    `106843844b05c7efd0219a2eef44d9d05296facd`である。
+
+### 推測
+
+誤ったSHAは、actual bytes、Git blob、recovery oracleの三者が一致し、
+predecessor result / receiptの文字列だけが異なるため、source driftではなく
+evidence transcription errorと判断できる。
+
+### 未確認
+
+- exact9 implementation / GREEN
+- post-implementation current dependency-closure count / root
+- successful Step 0–10 completion receipt
+- source baseline lock
+- P1 retry002 / G2 / P2 / fresh exact100 / Product Read / B6
+- Cycle 001 acceptance
+
+### 書かれていないこと / 推測禁止境界
+
+- predecessor result / receipt / handoffをhistory rewriteしない。
+- historical prerequisite test / manifestをcurrent bytesへ追従させない。
+- historical prerequisite suiteをexact9 GREEN分母へ追加しない。
+- targeted gate結果をbroad-regression GREENへ昇格しない。
+- exact9 implementation、successful receipt、baseline lock、downstream gateへ
+  自動進行しない。
+
+### 華恋の意見
+
+正しいblobを持つ過去証跡を削除・上書きせず、誤った二つのSHA fieldだけを
+append-only correctionでsupersedeすることで、作業履歴とactual-byte integrityを
+同時に守れる。rc0032 prerequisiteはcurrent treeへ合わせて弱めず、歴史的な
+negative-drift witnessとして残すのが妥当である。
+
+### 現在状態とSTOP
+
+```text
+STATUS:
+PREDECESSOR_EVIDENCE_CORRECTED_AND_REFROZEN_AUTHORITY_STOP
+
+G1:
+REMAINING_CAUSAL_RED_REFROZEN_NOT_COMPLETED
+
+G2:
+BLOCKED_NOT_AUTHORIZED
+
+STEP5:
+NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+CYCLE001:
+NOT_ACCEPTED
+
+MASH_REQUIRED_WORK:
+NONE_FOR_THIS_COMPLETED_AUTHORITY
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+次の候補は次のexact authority一つだけである。
+
+`NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY`
+
+この候補は未承認である。STOP。
+
