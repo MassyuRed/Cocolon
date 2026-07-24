@@ -1944,3 +1944,93 @@ Automatic progression is false.
 
 The rejected intermediate commit remains visible. Only the corrected full
 snapshot is accepted as current evidence.
+
+## 12.25 2026-07-24 Recovery Epoch 001 P1 retry002 Step 0 admission STOP
+
+Mash approved the R3 / P1 retry002 all11 current-receipt verification lane.
+Because the repository did not contain an initiating token, the following
+exact external authority was selected from the existing P1 / retry naming
+sequence:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY002_ONLY
+```
+
+Fixed entry:
+
+- Cocolon: `87d7b0e42f533ddfa3d9d781013c068003b9aa71`
+- mashos-api: `8def65c53df9b50795b52a22b6779e5adc5c4465`
+- entry drift: `false`
+- mashos-api changed paths: `exact0`
+
+The lane entered Step 0 and stopped at admission. The current receipt builder,
+owner validator, and independent verifier reject `PROVED`. The immutable
+per-Step requirement registry and accepted-run receipt owner required by the
+current owner comment do not exist. In addition, the receipt contract requires
+different positive and independent-negative `source_path` values, while Steps
+`0, 1, 2, 3, 5, 6, 7, 8, 10` have only one current test source in their Step
+views.
+
+Body-free admission evidence:
+
+1. result commit `e6f1cf59db641ec7dab95d3d28eb5404ec5930d7`,
+   blob `d9445becdf84992001af8c9b7fd8a8d2d99bfebf`;
+2. receipt commit `2689d947ccc5da2d9622dac73c4ed2f23548e32f`,
+   blob `251587083914546d99cf462ab2553321e19f51e0`;
+3. handoff commit `7a2ad821f244c1039a8cf2062b8af22cf333c63b`,
+   blob `dd2ca0db0538979639f9c0450596c39dada490c7`.
+
+Admission identity:
+
+- current dependency count: `39`
+- live dependency root:
+  `f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1`
+- commit-bound canonical root:
+  `6428abbd2433b4714abbd5a888785d25280b511d26aad91c3925312beb345715`
+- owner / independent closure equal: `true`
+- owner / independent closure issues: `0 / 0`
+- formal pytest: `NOT_RUN`
+- broad regression: `NOT_RUN_NOT_CLAIMED`
+
+Receipt-order result:
+
+```text
+STEP0_SUCCESS_RECEIPT:
+NOT_ISSUED
+
+STEP1_10:
+NOT_ENTERED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+The next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+This candidate is read-only. It may freeze the missing per-Step registry,
+accepted-run ownership, independent proof-source closure, synchronized
+validator behavior, and final-commit/root/run/receipt order. It may not change
+source/tests, issue `PROVED`, lock the baseline, authorize P2, create the fresh
+batch, run exact100, perform Product Read, correct output, run B6, or accept
+Cycle 001.
+
+Automatic progression is false. STOP.
