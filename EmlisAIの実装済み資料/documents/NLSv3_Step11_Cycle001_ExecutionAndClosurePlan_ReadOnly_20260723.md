@@ -2149,3 +2149,169 @@ source baseline lock, future P1, P2, fresh batch, exact100, Product Read,
 correction, B6, or Cycle acceptance.
 
 Automatic progression is false. STOP.
+
+## 12.27 2026-07-24 current-step receipt reconciliation causal RED freeze
+
+Mash approved:
+
+\`\`\`text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_RED_FREEZE_ONLY
+\`\`\`
+
+Fixed entry and result:
+
+- Cocolon entry:
+  \`232738e728ff35c5d8ae7b19884ac80394cad72a\`
+- mashos-api entry:
+  \`8def65c53df9b50795b52a22b6779e5adc5c4465\`
+- mashos-api RED result:
+  \`e14f764e4cd8c8a765628d87226964ef7587d798\`
+- result tree:
+  \`0a858db5558070cd3c99eaeda2ece826f5bf27b0\`
+- entry/result relation:
+  \`ahead_by=1 / behind_by=0 / total_commits=1\`
+- related drift:
+  \`false\`
+
+Changed surface is test-only exact13:
+
+- existing current-closure RED modified:
+  exact1
+- reconciliation aggregate added:
+  exact1
+- Step 0–10 dedicated independent-negative source added:
+  exact11
+- production source / helper / fixture / schema / config / requirements:
+  exact0
+- GitHub compare:
+  \`2667 additions / 1 deletion\`
+
+Frozen registry identities:
+
+- positive literal node count:
+  exact123
+- dedicated negative node count:
+  exact11
+- formal node count:
+  exact134
+- exact11 registry root:
+  \`70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728\`
+- formal node registry root:
+  \`fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf\`
+
+Commit-bound closure:
+
+- dependency count:
+  exact39
+- live dependency root:
+  \`f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1\`
+- canonical/full graph root:
+  \`08be2192138cb30d639a0ca8d7479f8ab2dd2734bc9369539341f5656abecd52\`
+- all-relevant / completion-proof path counts:
+  \`208 / 83\`
+- owner / independent verifier equal:
+  \`true\`
+- owner / verifier issues:
+  \`exact0 / exact0\`
+- current completion-proof missing paths:
+  exact16
+
+Missing exact16 is future source exact4 plus the new aggregate / dedicated
+negative test exact12. Owner/verifier agreement proves the current graph is
+rederived consistently; it does not prove that the missing receipt proof
+system exists.
+
+Authoritative final causal RED on GitHub result head:
+
+\`\`\`text
+COLLECTED_36
+PASSED_17
+FAILED_19
+ERROR_0
+UNEXPECTED_FAILURE_0
+BROAD_REGRESSION_NOT_RUN_NOT_CLAIMED
+\`\`\`
+
+The failure set is aggregate exact8 plus Step 00–10 dedicated-negative
+exact11. There was one unrelated Pydantic v1 root-validator deprecation
+warning. No collection, fixture, environment, or unrelated failure entered
+the denominator.
+
+Body-free evidence:
+
+1. result commit \`3727a51141fbc89ec563219fc984103a0d31ce0f\`,
+   blob \`2ece83c1264db1c2e42e418fc12de2134ccd4f50\`,
+   SHA-256
+   \`9e7f9acdcf76b6be8609d32f75d023c674a77197630a25ef82fbb152c220b504\`;
+2. receipt commit \`3b638ed52f6a806f2c1fcaa6421fed69359d7075\`,
+   blob \`768c7b5d5034bff12421e04f7829105fb1fac6f4\`,
+   SHA-256
+   \`79f159e8e959006d51c596ce52bffce9da09ed9fc992142d5a2ea628963a7f8d\`;
+3. handoff commit \`29f263cd5dcc56e0c8dacd382edf02e87640347e\`,
+   blob \`e3fb226b3cd2c758af6e3a28aa1774a2028fe8ec\`,
+   SHA-256
+   \`5b5b63819142b7e035f2bd0ae7476ed3f32935c86f5cdba1ed2c54bff1711fbc\`.
+
+Parent order remains:
+
+\`\`\`text
+final clean commit / fresh closure
+-> SOURCE_BASELINE_LOCKED
+-> same-baseline accepted run / Step 0..10 ordered receipts
+-> all11 atomic publication
+-> STEP0_10_PREREQUISITES_PROVED
+-> AUTHORITY STOP
+-> P2 SEPARATE APPROVAL REQUIRED
+\`\`\`
+
+State remains:
+
+\`\`\`text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+BLOCKED_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100 / PRODUCT_READ / CORRECTION / B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+\`\`\`
+
+Exactly one next separate-approval candidate:
+
+\`\`\`text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+\`\`\`
+
+This candidate is not approved here. It may implement and GREEN only the
+frozen reconciliation contract. It does not automatically issue successful
+receipts, lock the source baseline, enter formal P1, authorize P2, create the
+fresh batch, run exact100, perform Product Read, correct output, run B6, or
+accept Cycle 001.
+
+Automatic progression is false. STOP.
+
