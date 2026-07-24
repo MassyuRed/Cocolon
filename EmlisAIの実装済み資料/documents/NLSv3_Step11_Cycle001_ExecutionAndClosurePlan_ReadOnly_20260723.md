@@ -3575,3 +3575,191 @@ SEPARATE_AUTHORITY_SELECTION_AND_APPROVAL_REQUIRED_AFTER_CAPABILITY_VERIFICATION
 This section supersedes only the §12.33 next-authority pointer. All predecessor
 evidence, STOP history, RED/GREEN history, and downstream authority boundaries
 remain immutable. Automatic progression is false. STOP.
+
+## 12.35 2026-07-25 RETRY005 capability false-negative append-only correction
+
+Mash approved:
+
+```text
+1. RETRY005の誤ったSTOP理由を、履歴を消さずに訂正する。
+2. 登録済みSSH鍵を正しく使用し、新しいretryとして正式検証をやり直す。
+```
+
+The correction authority selected for item 1 is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_RETRY005_PRE_EVENT1_PUBLICATION_CAPABILITY_FALSE_NEGATIVE_APPEND_ONLY_CORRECTION_AND_REFREEZE_ONLY
+```
+
+Entry pins:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+9c2ce2fcb89179de346c29bbcb594d82e58fa10b
+
+Cocolon tree:
+7445738d4c04b9d5457939d7b6a4ef1ac24d5096
+
+mashos-api:
+191e9d8be63132f10f94e2b2f54c6bae94ce1f07
+
+mashos-api tree:
+e68df6587b8cb674456b3bc9bceb23e0699f33aa
+```
+
+RETRY005's result, receipt, and handoff remain byte-immutable. Their commits /
+blobs / raw SHA-256 remain:
+
+```text
+result:
+bece11adbd3d72c997662770d94c7992b9a04265
+e4d93be1827833cf04b7db2751f1a1f0dd5ad7ca
+e460f5a8f730977e23e70253d21eb5503323317c2a31585aba5fac41ae6de4a7
+
+receipt:
+8f315bcd6dd8cbc11d63ff1b10e93eb9bd6fe3f2
+ff5140f75702472f7566f68504ecf03bb9ed3393
+cc16fd96efae6df8ea20ec686be71321d060fc375f7ee878c04f8a659438c75c
+
+handoff:
+16e081705b7012187f525d32b328a1844d7312da
+d8ee3f4b84c89ec137ba4c204eb12e92543c1c38
+fe8ff2a3c091e90f45aeb583e932a6619f9855bae78e4f476baba8325494c618
+```
+
+The prior capability conclusion was a false negative. The registered Work
+deploy key existed before the RETRY005 result, but RETRY005 did not select it.
+It treated an unauthenticated local Git failure as proof that no authenticated
+route existed.
+
+Corrected capability reading:
+
+```text
+base tree read:
+AVAILABLE
+
+complete recursive tree / blob fetch:
+AVAILABLE
+
+authenticated private-Cocolon ls-remote:
+AVAILABLE
+
+authenticated receive-pack:
+AVAILABLE
+
+exact expected-old-SHA lease:
+AVAILABLE
+
+RETRY005 formal ref update:
+NOT_ATTEMPTED
+
+RETRY005 formal post-fetch:
+NOT_PERFORMED
+```
+
+The same key identity was remeasured without exposing secret material.
+Authenticated SSH 443, strict official host identity, full recursive fetch,
+current-H0 lease dry-run acceptance, and stale-H0 rejection were confirmed.
+It then completed these two actual expected-old-SHA lease publications:
+
+```text
+94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce
+  -> 9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5
+
+9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5
+  -> 9c2ce2fcb89179de346c29bbcb594d82e58fa10b
+```
+
+Both targets were verified direct children. Expected old SHA, remote head,
+parent, and tree matched before/after the exact lease transaction.
+
+Append-only correction evidence:
+
+1. result commit `e5f749092d0e0836d4ec1d937d4f6455a147f8a1`, blob
+   `07becc0bc2dd032c37a3f0caeebce56b64d9f0d4`, raw SHA-256
+   `a090855dba95570770b8371ef2e742e43033aee8c684ad1158ae91bd90bffc3e`;
+2. body-free receipt commit `88ae99309d7ee856c5861c4842d8bd7246027e4f`,
+   blob `97864ea2184dce6ce19de3f5975fa54062f48554`, raw SHA-256
+   `10badc052c16ba790cc7e098973292661c39b28679c2571cc83ac9e74ef9fd91`,
+   canonical receipt SHA-256
+   `0261e349fe0caf0c5a631df54ec27a673e14619634d3b46b97107a2bd7db3a87`;
+3. handoff commit `4c74ca6f15c3f9b7525c298ff72871b486618a6f`,
+   blob `c574709330f95a4bffa2437e9305f52024c5a213`, raw SHA-256
+   `2fe77b5da3a5dbea2db8c06ce7e46ce253925ffb96afad1b870e01f41b1c3572`.
+
+This correction supersedes only:
+
+```text
+capability_admission.base_tree_read_proved
+capability_admission.complete_recursive_tree_fetch_available
+capability_admission.expected_old_sha_lease_proved
+capability_admission.local_authenticated_cocolon_git_receive_pack_available
+capability_admission.private_cocolon_git_ls_remote_authenticated
+capability_admission.stop_code
+capability_admission.stop_reason
+evidence_class
+next_boundary.authenticated_capability_required
+state.formal_exact134
+state.g2
+state.p1_retry005
+```
+
+The original zero issuance counts, unlocked baseline, uncreated events,
+uncreated reservation, unexecuted exact134, unchanged mashos-api, unauthorized
+P2, and `NOT_ACCEPTED` Cycle001 remain unchanged. No formal success is
+backfilled.
+
+Cross-session continuity is now owned by:
+
+```text
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+```
+
+It records only non-secret identity and requires session-by-session
+fingerprint / host / repository / live H0 / full fetch / exact lease
+remeasurement.
+
+Corrected current state:
+
+```text
+RETRY005:
+HISTORICAL_TERMINAL_FALSE_NEGATIVE_STOP_RETAINED
+
+RETRY005_CAPABILITY_BLOCKER:
+SUPERSEDED
+
+FORMAL_EVENT / RESERVATION / EXACT134:
+NOT_CREATED / NOT_CREATED / NOT_RUN
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Item 2 is a separate formal authority. Mash's instruction separately approved
+a new retry, and the selected authority is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY006_ONLY
+```
+
+RETRY006 must start from the live head after this correction chain and must run
+complete source / owner / verifier / formal-path / transport admission before
+event 1. RETRY005's authority/challenge is not reusable. This §12.35 correction
+does not itself issue event 1 or consume a reservation.
