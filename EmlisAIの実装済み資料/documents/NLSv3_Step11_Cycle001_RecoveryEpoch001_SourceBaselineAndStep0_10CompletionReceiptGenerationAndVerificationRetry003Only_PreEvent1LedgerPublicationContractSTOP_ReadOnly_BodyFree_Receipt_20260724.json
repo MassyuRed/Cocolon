@@ -1,0 +1,55 @@
+{
+  "schema_version": "nls_v3_step11_cycle001_recovery_epoch001_pre_event1_contract_stop_body_free_receipt.v1",
+  "receipt_type": "BODY_FREE_PRE_EVENT1_AUTHORITY_STOP",
+  "status": "P1_RETRY003_PRE_EVENT1_CONTRACT_NONCONFORMANCE_AUTHORITY_STOP",
+  "recorded_at": "2026-07-24T19:36:24+09:00",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY003_ONLY",
+  "automatic_progression": false,
+  "body_free": true,
+  "cycle001_status": "NOT_ACCEPTED",
+  "repository": "MassyuRed/Cocolon",
+  "result_artifact": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationRetry003Only_PreEvent1LedgerPublicationContractSTOP_ReadOnly_20260724.md",
+    "commit": "75874a6d73c655efd17ef25d5faa736a6f275bed",
+    "blob": "0ababf0f013366a4d73491eeb36deec7e850a16a",
+    "raw_sha256": "9c61d0f6d5de55830b94bff91b6c141efc70bf6e85e63e2fe943c2884f81c190"
+  },
+  "entry_heads": {
+    "Karen-Diary": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "Cocolon": "77e6523c350cc685882e77b6b4409b1e7f9a9fe8",
+    "mashos-api": "78276950d0d7650968fe938bc63a6e13455a8d6c"
+  },
+  "source_result": {
+    "mashos_api_github_change_count": 0,
+    "approved_token_committed": false,
+    "source_baseline": "UNLOCKED",
+    "sequence_event_1": "NOT_CREATED",
+    "sequence_event_2": "NOT_CREATED",
+    "formal_exact134": "NOT_RUN_PRE_EVENT1_CONTRACT_STOP",
+    "successful_step0_10_completion_receipt_count": 0,
+    "all11_publication": "NOT_CREATED",
+    "broad_regression": "NOT_RUN_NOT_CLAIMED",
+    "p2": "NOT_AUTHORIZED"
+  },
+  "verification": {
+    "clean_source_commit": "78276950d0d7650968fe938bc63a6e13455a8d6c",
+    "targeted_reconciliation_owner_and_closure": {
+      "collected": 25,
+      "passed": 25
+    },
+    "step0_10_independent_negative": {
+      "collected": 11,
+      "passed": 11
+    },
+    "targeted_total": {
+      "collected": 36,
+      "passed": 36
+    }
+  },
+  "stop_reasons": [
+    "CURRENT_EVENT1_DOES_NOT_CONFORM_TO_PARENT_SEQUENCE_LEDGER_REQUIRED_FIELDS",
+    "ACCEPTED_RUN_RECEIPT_DOES_NOT_ENFORCE_FULL_EXACT134_SUCCESS_ALL_ZERO_CONTRACT",
+    "ALL11_OWNER_STAGES_ONLY_AND_COMPLIANT_EVENT2_ATOMIC_PUBLISHER_IS_ABSENT"
+  ],
+  "next_separate_approval_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY"
+}
