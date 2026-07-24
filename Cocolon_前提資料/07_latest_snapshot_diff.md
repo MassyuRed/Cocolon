@@ -18450,3 +18450,153 @@ false
 次は、RETRY005の誤ったcapability STOPをappend-only correctionとして訂正する。
 このpremise/rule checkpoint自体はformal event issuanceまたはCycle001 acceptanceを
 意味しない。
+
+# 2026-07-25 差分追記: RETRY005 capability false-negative append-only correction
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_RETRY005_PRE_EVENT1_PUBLICATION_CAPABILITY_FALSE_NEGATIVE_APPEND_ONLY_CORRECTION_AND_REFREEZE_ONLY
+```
+
+## 確認した事実
+
+1. RETRY005のresult / receipt / handoffは変更せず、次のidentityを維持した。
+
+   ```text
+   result:
+   bece11adbd3d72c997662770d94c7992b9a04265
+   e4d93be1827833cf04b7db2751f1a1f0dd5ad7ca
+   e460f5a8f730977e23e70253d21eb5503323317c2a31585aba5fac41ae6de4a7
+
+   receipt:
+   8f315bcd6dd8cbc11d63ff1b10e93eb9bd6fe3f2
+   ff5140f75702472f7566f68504ecf03bb9ed3393
+   cc16fd96efae6df8ea20ec686be71321d060fc375f7ee878c04f8a659438c75c
+
+   handoff:
+   16e081705b7012187f525d32b328a1844d7312da
+   d8ee3f4b84c89ec137ba4c204eb12e92543c1c38
+   fe8ff2a3c091e90f45aeb583e932a6619f9855bae78e4f476baba8325494c618
+   ```
+
+2. RETRY005前に登録済みSSH key routeが存在し、authenticated
+   `ls-remote`、complete tree / blob fetch、current-H0 lease dry-run受理、
+   stale-H0拒否まで成立していた。
+3. RETRY005は登録済みkeyを選択せずにlocal Gitを試し、そのunauthenticated
+   failureを「authenticated routeなし」と誤判定した。
+4. current environmentで同key identityを再照合し、authenticated SSH 443、
+   strict GitHub host identity、complete fetch、lease accept / stale rejectを
+   再実測した。
+5. さらに同routeでpremise/rule checkpointをactual exact lease publishし、
+   次のdirect-child chainのremote head / parent / treeをpost-fetchした。
+
+   ```text
+   94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce
+     -> 9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5
+     -> 9c2ce2fcb89179de346c29bbcb594d82e58fa10b
+   ```
+
+6. RETRY005 capability false-negative correction resultはcommit
+   `e5f749092d0e0836d4ec1d937d4f6455a147f8a1`、blob
+   `07becc0bc2dd032c37a3f0caeebce56b64d9f0d4`、raw SHA-256
+   `a090855dba95570770b8371ef2e742e43033aee8c684ad1158ae91bd90bffc3e`
+   である。
+7. correction receiptはcommit
+   `88ae99309d7ee856c5861c4842d8bd7246027e4f`、blob
+   `97864ea2184dce6ce19de3f5975fa54062f48554`、raw SHA-256
+   `10badc052c16ba790cc7e098973292661c39b28679c2571cc83ac9e74ef9fd91`、
+   canonical SHA-256
+   `0261e349fe0caf0c5a631df54ec27a673e14619634d3b46b97107a2bd7db3a87`
+   である。
+8. correction handoffはcommit
+   `4c74ca6f15c3f9b7525c298ff72871b486618a6f`、blob
+   `c574709330f95a4bffa2437e9305f52024c5a213`、raw SHA-256
+   `2fe77b5da3a5dbea2db8c06ce7e46ce253925ffb96afad1b870e01f41b1c3572`
+   である。
+9. Execution and Closure Plan §12.35 append commit / blob / raw SHA-256は
+   `18140adf72d869b91c9f736da5040e579c5db10c` /
+   `55b057533cf43046243b688490283a57d34496e3` /
+   `a8e010ac7ac87431c09270307b848d4a401e4fd0198c669906cb5dbfcc2f2c20`
+   である。
+10. correction exact5 path以外のformal path、mashos-api、Karen-Diaryは
+    変更していない。
+11. fixed formal path existing count、event、reservation、attempt、
+    accepted、Step receipt、all11、manifestは全て0のままである。
+12. source baselineは`UNLOCKED`、formal exact134は`NOT_RUN`、
+    P2は`NOT_AUTHORIZED`、Cycle001は`NOT_ACCEPTED`のままである。
+
+## Append-only supersession boundary
+
+次だけを訂正する。
+
+```text
+capability_admission.base_tree_read_proved
+capability_admission.complete_recursive_tree_fetch_available
+capability_admission.expected_old_sha_lease_proved
+capability_admission.local_authenticated_cocolon_git_receive_pack_available
+capability_admission.private_cocolon_git_ls_remote_authenticated
+capability_admission.stop_code
+capability_admission.stop_reason
+evidence_class
+next_boundary.authenticated_capability_required
+state.formal_exact134
+state.g2
+state.p1_retry005
+```
+
+RETRY005におけるconnectorのexplicit expected-old-SHA field不存在、
+`gh` / credential helper / token不存在、formal server update未実施、
+formal post-fetch未実施、artifact issuance exact0、baseline `UNLOCKED`、
+exact134未実行は訂正しない。
+
+## 推測
+
+unauthenticated local Git failureの原因は、registered deploy key routeが
+存在しなかったことではなく、RETRY005がそのidentityを選ばなかったことにある。
+
+## 華恋の意見
+
+Mashが有効にした鍵を使わず、前提資料にも残さず、「routeがない」と記録した
+のは華恋のミスである。旧記録を消すと誤りの経緯まで失われるため、旧fileを
+immutableに保ち、新しい訂正chainでcurrent readingだけを置換する。
+
+## 現在状態
+
+```text
+RETRY005:
+HISTORICAL_TERMINAL_FALSE_NEGATIVE_STOP_RETAINED
+
+RETRY005_CAPABILITY_BLOCKER:
+SUPERSEDED
+
+FORMAL_EVENT / RESERVATION / EXACT134:
+NOT_CREATED / NOT_CREATED / NOT_RUN
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Mashが別項目として承認したnew formal retryは次である。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY006_ONLY
+```
+
+RETRY006は、このcorrection chain後のlive H0を新たに固定し、event1前に
+source / owner / independent verifier / formal path / transportの全admissionを
+行う。RETRY005 token / challengeは再利用しない。
