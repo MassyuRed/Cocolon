@@ -1,0 +1,130 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.p1_retry002_step0_admission_stop.body_free.v1",
+  "created_at_jst": "2026-07-24",
+  "body_free": true,
+  "result_finalized": true,
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY002_ONLY",
+  "authority_selection": {
+    "token_preexisting_in_repositories": false,
+    "basis": "MASH_EXPLICIT_R3_P1_RETRY002_ALL11_LANE_APPROVAL_AND_EXISTING_P1_RETRY_NAMING_SEQUENCE"
+  },
+  "status": "P1_RETRY002_STOPPED_AT_STEP0_ADMISSION_PROVED_ISSUANCE_CONTRACT_NOT_IMPLEMENTED_AUTHORITY_STOP",
+  "source_pins": {
+    "cocolon_start_commit": "87d7b0e42f533ddfa3d9d781013c068003b9aa71",
+    "cocolon_result_commit": "e6f1cf59db641ec7dab95d3d28eb5404ec5930d7",
+    "mashos_api_start_commit": "8def65c53df9b50795b52a22b6779e5adc5c4465",
+    "mashos_api_result_commit": "8def65c53df9b50795b52a22b6779e5adc5c4465",
+    "entry_drift_detected": false,
+    "mashos_api_change_count": 0
+  },
+  "normative_identity": {
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "recovery_parent_design_receipt_blob": "bdfbd559535db06ae4af35fe1bb58716d6566126",
+    "candidate_version_id": "nls_v3_rc_0034",
+    "live_dependency_count": 39,
+    "live_dependency_root": "f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1",
+    "commit_bound_canonical_root": "6428abbd2433b4714abbd5a888785d25280b511d26aad91c3925312beb345715"
+  },
+  "result_artifact": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationRetry002Only_STEP0AdmissionSTOP_20260724.md",
+    "commit": "e6f1cf59db641ec7dab95d3d28eb5404ec5930d7",
+    "git_blob_sha1": "d9445becdf84992001af8c9b7fd8a8d2d99bfebf",
+    "sha256": "0551e22eb993b57f93f12d47a63997c985ce378084c1d37cab2d590a1992f586"
+  },
+  "execution": {
+    "formal_pytest_executed": false,
+    "pytest_available": false,
+    "broad_regression_executed": false,
+    "broad_regression_claimed": false,
+    "direct_import_admission_check_executed": true,
+    "product_output_generation_executed": false,
+    "private_body_generated": false,
+    "owner_independent_closure_equal": true,
+    "owner_closure_issue_count": 0,
+    "independent_closure_issue_count": 0
+  },
+  "issuance_boundary": {
+    "proved_issuance_authorized": false,
+    "builder_rejects_proved": true,
+    "owner_validator_rejects_proved": true,
+    "independent_verifier_rejects_proved": true,
+    "rejection_code": "RECOVERY_CURRENT_STEP_COMPLETION_RECEIPT_VERDICT_INVALID",
+    "immutable_per_step_requirement_registry_present": false,
+    "accepted_run_receipt_owner_present": false,
+    "accepted_test_results_is_only_caller_supplied_validator_input": true
+  },
+  "independent_proof_source_closure": {
+    "positive_and_negative_source_path_must_differ": true,
+    "step_test_source_counts": {
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 2,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 2,
+      "10": 1
+    },
+    "steps_with_fewer_than_two_test_sources": [0, 1, 2, 3, 5, 6, 7, 8, 10],
+    "all11_capable": false
+  },
+  "step_admission": [
+    {
+      "step": 0,
+      "status": "ADMISSION_BLOCKED",
+      "successful_receipt_issued": false,
+      "blockers": [
+        "PROVED_ISSUANCE_CONTRACT_NOT_IMPLEMENTED",
+        "ACCEPTED_RUN_REGISTRY_NOT_IMPLEMENTED",
+        "INDEPENDENT_NEGATIVE_SOURCE_PATH_UNAVAILABLE"
+      ]
+    },
+    {"step": 1, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 2, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 3, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 4, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 5, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 6, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 7, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 8, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 9, "status": "NOT_ENTERED", "successful_receipt_issued": false},
+    {"step": 10, "status": "NOT_ENTERED", "successful_receipt_issued": false}
+  ],
+  "sequence_ledger": {
+    "event1_source_baseline_locked": false,
+    "event2_step0_10_prerequisites_proved": false,
+    "new_event_count": 0
+  },
+  "completion_receipts": {
+    "successful_current_step_receipt_count": 0,
+    "partial_success_receipts_emitted": false,
+    "historical_receipts_backdated": false
+  },
+  "repository_scope": {
+    "mashos_api_modified_files": [],
+    "source_test_fixture_sample_manifest_runtime_change_count": 0,
+    "cocolon_result_artifact_count": 1,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "b6_work_count": 0,
+    "api_db_rn_public_shared_change_count": 0,
+    "read_only_subagent_count": 3,
+    "subagent_write_test_commit_count": 0
+  },
+  "downstream_state": {
+    "g1": "IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED",
+    "g2": "BLOCKED_NOT_AUTHORIZED",
+    "step5": "TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED",
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "ADMISSION_STOPPED_NOT_COMPLETED",
+    "p2_authorized": false,
+    "fresh_batch_materialized": false,
+    "cycle001_status": "NOT_ACCEPTED",
+    "automatic_progression": false
+  },
+  "decision": "STOP_BEFORE_STEP0_SUCCESS_RECEIPT_AND_REJECT_BASELINE_LOCK",
+  "next_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_DESIGN_READ_ONLY"
+}
