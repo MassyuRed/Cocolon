@@ -2154,24 +2154,24 @@ Automatic progression is false. STOP.
 
 Mash approved:
 
-\`\`\`text
+```text
 NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_RED_FREEZE_ONLY
-\`\`\`
+```
 
 Fixed entry and result:
 
 - Cocolon entry:
-  \`232738e728ff35c5d8ae7b19884ac80394cad72a\`
+  `232738e728ff35c5d8ae7b19884ac80394cad72a`
 - mashos-api entry:
-  \`8def65c53df9b50795b52a22b6779e5adc5c4465\`
+  `8def65c53df9b50795b52a22b6779e5adc5c4465`
 - mashos-api RED result:
-  \`e14f764e4cd8c8a765628d87226964ef7587d798\`
+  `e14f764e4cd8c8a765628d87226964ef7587d798`
 - result tree:
-  \`0a858db5558070cd3c99eaeda2ece826f5bf27b0\`
+  `0a858db5558070cd3c99eaeda2ece826f5bf27b0`
 - entry/result relation:
-  \`ahead_by=1 / behind_by=0 / total_commits=1\`
+  `ahead_by=1 / behind_by=0 / total_commits=1`
 - related drift:
-  \`false\`
+  `false`
 
 Changed surface is test-only exact13:
 
@@ -2184,7 +2184,7 @@ Changed surface is test-only exact13:
 - production source / helper / fixture / schema / config / requirements:
   exact0
 - GitHub compare:
-  \`2667 additions / 1 deletion\`
+  `2667 additions / 1 deletion`
 
 Frozen registry identities:
 
@@ -2195,24 +2195,24 @@ Frozen registry identities:
 - formal node count:
   exact134
 - exact11 registry root:
-  \`70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728\`
+  `70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728`
 - formal node registry root:
-  \`fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf\`
+  `fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf`
 
 Commit-bound closure:
 
 - dependency count:
   exact39
 - live dependency root:
-  \`f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1\`
+  `f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1`
 - canonical/full graph root:
-  \`08be2192138cb30d639a0ca8d7479f8ab2dd2734bc9369539341f5656abecd52\`
+  `08be2192138cb30d639a0ca8d7479f8ab2dd2734bc9369539341f5656abecd52`
 - all-relevant / completion-proof path counts:
-  \`208 / 83\`
+  `208 / 83`
 - owner / independent verifier equal:
-  \`true\`
+  `true`
 - owner / verifier issues:
-  \`exact0 / exact0\`
+  `exact0 / exact0`
 - current completion-proof missing paths:
   exact16
 
@@ -2223,14 +2223,14 @@ system exists.
 
 Authoritative final causal RED on GitHub result head:
 
-\`\`\`text
+```text
 COLLECTED_36
 PASSED_17
 FAILED_19
 ERROR_0
 UNEXPECTED_FAILURE_0
 BROAD_REGRESSION_NOT_RUN_NOT_CLAIMED
-\`\`\`
+```
 
 The failure set is aggregate exact8 plus Step 00–10 dedicated-negative
 exact11. There was one unrelated Pydantic v1 root-validator deprecation
@@ -2239,22 +2239,22 @@ the denominator.
 
 Body-free evidence:
 
-1. result commit \`3727a51141fbc89ec563219fc984103a0d31ce0f\`,
-   blob \`2ece83c1264db1c2e42e418fc12de2134ccd4f50\`,
+1. result commit `3727a51141fbc89ec563219fc984103a0d31ce0f`,
+   blob `2ece83c1264db1c2e42e418fc12de2134ccd4f50`,
    SHA-256
-   \`9e7f9acdcf76b6be8609d32f75d023c674a77197630a25ef82fbb152c220b504\`;
-2. receipt commit \`3b638ed52f6a806f2c1fcaa6421fed69359d7075\`,
-   blob \`768c7b5d5034bff12421e04f7829105fb1fac6f4\`,
+   `9e7f9acdcf76b6be8609d32f75d023c674a77197630a25ef82fbb152c220b504`;
+2. receipt commit `3b638ed52f6a806f2c1fcaa6421fed69359d7075`,
+   blob `768c7b5d5034bff12421e04f7829105fb1fac6f4`,
    SHA-256
-   \`79f159e8e959006d51c596ce52bffce9da09ed9fc992142d5a2ea628963a7f8d\`;
-3. handoff commit \`29f263cd5dcc56e0c8dacd382edf02e87640347e\`,
-   blob \`e3fb226b3cd2c758af6e3a28aa1774a2028fe8ec\`,
+   `79f159e8e959006d51c596ce52bffce9da09ed9fc992142d5a2ea628963a7f8d`;
+3. handoff commit `29f263cd5dcc56e0c8dacd382edf02e87640347e`,
+   blob `e3fb226b3cd2c758af6e3a28aa1774a2028fe8ec`,
    SHA-256
-   \`5b5b63819142b7e035f2bd0ae7476ed3f32935c86f5cdba1ed2c54bff1711fbc\`.
+   `5b5b63819142b7e035f2bd0ae7476ed3f32935c86f5cdba1ed2c54bff1711fbc`.
 
 Parent order remains:
 
-\`\`\`text
+```text
 final clean commit / fresh closure
 -> SOURCE_BASELINE_LOCKED
 -> same-baseline accepted run / Step 0..10 ordered receipts
@@ -2262,11 +2262,11 @@ final clean commit / fresh closure
 -> STEP0_10_PREREQUISITES_PROVED
 -> AUTHORITY STOP
 -> P2 SEPARATE APPROVAL REQUIRED
-\`\`\`
+```
 
 State remains:
 
-\`\`\`text
+```text
 G1:
 IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
 
@@ -2299,13 +2299,13 @@ NOT_RUN
 
 CYCLE001:
 NOT_ACCEPTED
-\`\`\`
+```
 
 Exactly one next separate-approval candidate:
 
-\`\`\`text
+```text
 NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
-\`\`\`
+```
 
 This candidate is not approved here. It may implement and GREEN only the
 frozen reconciliation contract. It does not automatically issue successful
@@ -2315,3 +2315,20 @@ accept Cycle 001.
 
 Automatic progression is false. STOP.
 
+#### 12.27.1 evidence-write formatting correction
+
+- initial §12.27 append commit / blob:
+  `c7313513b1fcec61731128c6b29a168f61c88232` /
+  `031e70f3d51b222785e78f967401f49745be0ab2`
+- detected issue:
+  Markdown backticks in §12.27 were written with literal escape characters
+- correction:
+  remove only those escape characters and retain the complete predecessor
+  document plus every authority, identity, count, state, and STOP value
+- source / test / result / receipt / handoff change:
+  exact0
+- history rewrite:
+  false
+
+The initial append remains visible in history and is not the accepted current
+Plan evidence. The corrected full document is the accepted current version.
