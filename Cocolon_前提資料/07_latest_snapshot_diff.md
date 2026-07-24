@@ -16552,3 +16552,134 @@ STOP。
 
 The intermediate truncation remains visible in history and is not accepted as
 current evidence.
+
+## 2026-07-24 Recovery Epoch 001 R3 / P1 retry002 Step 0 admission STOP
+
+Mash explicitly approved starting the R3 / P1 retry002 all11 current-receipt
+verification lane. No exact initiating authority token existed in the
+repository, so Karen selected the following token from the established P1 /
+retry naming sequence:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY002_ONLY
+```
+
+Pinned entry:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `87d7b0e42f533ddfa3d9d781013c068003b9aa71`
+- mashos-api:
+  `8def65c53df9b50795b52a22b6779e5adc5c4465`
+- entry drift:
+  `false`
+- mashos-api source/test changes:
+  `exact0`
+
+The lane entered Step 0 and stopped during admission. It did not enter the
+Step 0 positive proof run or any later Step.
+
+Admission facts:
+
+- current dependency closure:
+  `exact39`
+- live dependency root:
+  `f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1`
+- commit-bound canonical current root:
+  `6428abbd2433b4714abbd5a888785d25280b511d26aad91c3925312beb345715`
+- owner / independent closure:
+  `equal / zero issue`
+- current receipt builder:
+  rejects `PROVED`
+- current owner validator:
+  rejects `PROVED`
+- current independent verifier:
+  rejects `PROVED`
+- immutable per-Step requirement registry:
+  `NOT_IMPLEMENTED`
+- accepted-run receipt owner and independent validation:
+  `NOT_IMPLEMENTED`
+- Steps with only one current test source despite the distinct positive /
+  independent-negative `source_path` requirement:
+  `0, 1, 2, 3, 5, 6, 7, 8, 10`
+- formal pytest:
+  `NOT_RUN`
+- broad regression:
+  `NOT_RUN_NOT_CLAIMED`
+
+The admission-only direct-import check confirmed the current closure identity
+and all three `PROVED` rejection paths. It is not a formal pytest result and
+does not substitute for a successful Step receipt.
+
+Append-only result / receipt / handoff:
+
+| artifact | commit | blob |
+|---|---|---|
+| result | `e6f1cf59db641ec7dab95d3d28eb5404ec5930d7` | `d9445becdf84992001af8c9b7fd8a8d2d99bfebf` |
+| body-free receipt | `2689d947ccc5da2d9622dac73c4ed2f23548e32f` | `251587083914546d99cf462ab2553321e19f51e0` |
+| handoff | `7a2ad821f244c1039a8cf2062b8af22cf333c63b` | `dd2ca0db0538979639f9c0450596c39dada490c7` |
+| execution-plan append | `aa488114a88702350308375ed486a60bde145857` | `c6dc48b4c641d0c9296fa263f52d742335cd32f1` |
+
+Current state:
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+BLOCKED_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+STEP0_SUCCESS_RECEIPT:
+NOT_ISSUED
+
+STEP1_10:
+NOT_ENTERED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P2:
+NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+FORMAL_EXACT100 / PRODUCT_READ / CORRECTION / B6:
+NOT_RUN
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+Exactly one next separate-approval candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+That candidate is read-only. It may define the missing per-Step registry,
+accepted-run ownership, independent proof-source closure, synchronized
+owner/verifier behavior, and final-commit/root/run/receipt order. It may not
+change source/tests, issue `PROVED`, lock the baseline, authorize P2, create a
+fresh batch, run exact100, perform Product Read, correct output, run B6, or
+accept Cycle 001.
+
+This section supersedes only the previous R3 / P1 retry002 next-lane pointer.
+It preserves all predecessor evidence and STOP history. Automatic progression
+is false. STOP.
