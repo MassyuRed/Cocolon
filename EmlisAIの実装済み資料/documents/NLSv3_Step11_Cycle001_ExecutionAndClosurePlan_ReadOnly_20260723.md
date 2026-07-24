@@ -3031,3 +3031,179 @@ correction, B6, or Cycle001 acceptance.
 This section supersedes only the §12.30 next-authority pointer. All predecessor
 evidence, STOP history, parent order, and downstream authority boundaries
 remain immutable. Automatic progression is false. STOP.
+
+## 12.32 2026-07-25 accepted exact134 / sequence ledger / atomic publication contract reconciliation implementation and targeted GREEN
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+Fixed implementation entry:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `18347f6229d67f65768cf47053b1da8e277e84e0`
+- mashos-api:
+  `37ad05927b596322e3fa0791ca8cadd5a63b56c1`
+- mashos-api tree:
+  `c54e2562697eeb608f9ebdc79b455b4e0e3133ca`
+- related entry drift:
+  `false`
+
+The frozen causal RED was implemented in production exact8. mashos-api result
+commit `191e9d8be63132f10f94e2b2f54c6bae94ce1f07` / tree
+`e68df6587b8cb674456b3bc9bceb23e0699f33aa` is the verified direct child of
+the fixed mashos-api entry. Compare is `ahead_by=1`, `behind_by=0`, one commit,
+exact8 changed production paths, exact2 added, exact6 modified, 6763 additions,
+and 373 deletions.
+
+The exact8 roles are:
+
+1. accepted owner;
+2. canonical closure owner;
+3. new sequence-ledger owner;
+4. Step receipt owner;
+5. proof runner;
+6. all11 issuer;
+7. new atomic-publication bundle construction / verification / fail-closed
+   contract owner; and
+8. independent verifier.
+
+The implementation binds accepted-v2 to frozen exact134 full success and
+environment identity, consumes one-shot reservation before worker execution,
+preserves unknown-consumption STOP, owns source closure/event1/event2/reservation
+ordering in one sequence ledger, carries accepted-v2 through Step/all11,
+validates deterministic body-free bundles and lease/direct-child/path/postverify
+conditions, independently rederives owner claims, rejects private body and
+partial states, binds the actual Step5 owner symbol, and restricts clean
+same-HEAD/tree closure reuse while forcing dirty-worktree rederivation.
+
+The publication source implements deterministic bundle construction,
+verification, and the fail-closed contract. It does not by itself constitute a
+real formal Git transport. This authority invoked no formal event publication.
+
+The frozen exact4 test files stayed byte-immutable. The targeted denominator
+remained:
+
+```text
+accepted-success exact10
++ sequence/ledger/publication exact27
++ selected existing reconciliation exact3
+= exact40
+```
+
+Authoritative final verification ran from a clean detached checkout of the
+actual GitHub result commit:
+
+```text
+40 passed / 0 failed / 0 errors / 1 warning
+836.31 s (00:13:56)
+```
+
+The warning is the existing Pydantic V1 `@root_validator` deprecation at
+`api_emotion_submit.py:906`; the protected file stayed unchanged. The frozen
+test filename containing `exact134` is a contract oracle. This targeted exact40
+run is not formal exact134 and is not broad-regression GREEN.
+
+Body-free implementation evidence:
+
+1. result commit `dff837bb47efd56c2425902e358e3adabc1276ce`, blob
+   `edf9e3fcb475724a29260c2680efc4f62eb30237`, raw SHA-256
+   `a954d6dfb0d558d8ff7b14bb229fc2e539e5f29e82dda4cd656b2c4960046464`;
+2. implementation evidence receipt commit
+   `08a37544043adfe7c8bf031d4e615f09e2fe8724`, blob
+   `59a336f7793b342f34f110b093a25b463484cb11`, raw SHA-256
+   `a68b73932c96983f10bb2bf585b63799d1496c29696a586d9de570a08f2e2ee9`,
+   canonical receipt SHA-256
+   `5f676af34d4f841d8551fe97199c53db3239f72944a4a4ca3209e502223d7d70`;
+3. STOP handoff commit `a87c1b1c2a33ca815dc0409d1b11a2589afadb21`,
+   blob `148de0f1d9e39df7afa3bf56beed1b5ea4ab1d42`, raw SHA-256
+   `43c81ae39bc669d945b779a2101bc164679ce3181b8ac83191276fb3e429214a`.
+
+The evidence receipt is implementation evidence only. It is not a formal
+accepted-success, Step, all11, event, or Cycle receipt.
+
+Implementation read-only audit lanes exact3 and publication-record read-only
+audit exact1 produced no residual blocking issue. Non-root subagent total was
+exact4. Subagent edit/test/commit/GitHub write was exact0. Karen performed the
+final source review, actual-GitHub-commit targeted exact40 run, object
+verification, and GitHub writes.
+
+This authority created no formal reservation, accepted-success receipt, Step
+0–10 completion receipt, all11 formal publication, sequence event1/event2,
+atomic formal manifest, private body, formal exact134 result, broad-regression
+result, or completion transition.
+
+Current state:
+
+```text
+STATUS:
+CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_AUTHORITY_STOP
+
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_FORMAL_RETRY004_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_FORMAL_RETRY004_NOT_AUTHORIZED
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P1_RETRY003:
+PRE_EVENT1_CONTRACT_NONCONFORMANCE_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+The exactly one selected and design-reserved next candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+Its state is:
+
+```text
+SELECTED_RESERVED_UNAPPROVED_INACTIVE_UNCOMMITTED
+SEPARATE_APPROVAL_REQUIRED
+```
+
+This section supersedes only the §12.31 next-authority pointer. All predecessor
+evidence, RED history, STOP history, parent order, and downstream authority
+boundaries remain immutable. Automatic progression is false. STOP.
