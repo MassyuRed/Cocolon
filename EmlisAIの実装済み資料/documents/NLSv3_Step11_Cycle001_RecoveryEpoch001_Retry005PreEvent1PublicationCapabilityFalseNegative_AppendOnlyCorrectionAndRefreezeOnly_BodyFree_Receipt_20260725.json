@@ -1,0 +1,177 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.retry005_capability_false_negative_append_only_correction_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_RETRY005_PRE_EVENT1_PUBLICATION_CAPABILITY_FALSE_NEGATIVE_APPEND_ONLY_CORRECTION_AND_REFREEZE_ONLY",
+  "status": "RETRY005_HISTORICAL_FALSE_NEGATIVE_STOP_RETAINED_CAPABILITY_BLOCKER_SUPERSEDED_AUTHORITY_STOP",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_pins": {
+    "karen_diary": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon": "9c2ce2fcb89179de346c29bbcb594d82e58fa10b",
+    "cocolon_tree": "7445738d4c04b9d5457939d7b6a4ef1ac24d5096",
+    "mashos_api": "191e9d8be63132f10f94e2b2f54c6bae94ce1f07",
+    "mashos_api_tree": "e68df6587b8cb674456b3bc9bceb23e0699f33aa",
+    "head_drift_detected": false
+  },
+  "correction_result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Retry005PreEvent1PublicationCapabilityFalseNegative_AppendOnlyCorrectionAndRefreezeOnly_20260725.md",
+    "commit": "e5f749092d0e0836d4ec1d937d4f6455a147f8a1",
+    "blob": "07becc0bc2dd032c37a3f0caeebce56b64d9f0d4",
+    "sha256": "a090855dba95570770b8371ef2e742e43033aee8c684ad1158ae91bd90bffc3e"
+  },
+  "immutable_retry005_records": {
+    "result": {
+      "commit": "bece11adbd3d72c997662770d94c7992b9a04265",
+      "blob": "e4d93be1827833cf04b7db2751f1a1f0dd5ad7ca",
+      "sha256": "e460f5a8f730977e23e70253d21eb5503323317c2a31585aba5fac41ae6de4a7",
+      "modified": false
+    },
+    "body_free_receipt": {
+      "commit": "8f315bcd6dd8cbc11d63ff1b10e93eb9bd6fe3f2",
+      "blob": "ff5140f75702472f7566f68504ecf03bb9ed3393",
+      "sha256": "cc16fd96efae6df8ea20ec686be71321d060fc375f7ee878c04f8a659438c75c",
+      "canonical_sha256": "1c19edc14b9848e8915b3b47ec1b42ec758c6fdc46894a6bb4af474705eb9aaa",
+      "modified": false
+    },
+    "handoff": {
+      "commit": "16e081705b7012187f525d32b328a1844d7312da",
+      "blob": "d8ee3f4b84c89ec137ba4c204eb12e92543c1c38",
+      "sha256": "fe8ff2a3c091e90f45aeb583e932a6619f9855bae78e4f476baba8325494c618",
+      "modified": false
+    }
+  },
+  "registered_transport_identity": {
+    "repository": "MassyuRed/Cocolon",
+    "deploy_key_title": "Karen Work Cocolon Lease 2026-07-25",
+    "key_algorithm": "ssh-ed25519",
+    "public_key_sha256_fingerprint": "SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA",
+    "write_access_registered": true,
+    "ssh_endpoint": "ssh.github.com:443",
+    "github_ed25519_host_key_sha256_fingerprint": "SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU",
+    "private_key_material_recorded": false,
+    "credential_material_recorded": false
+  },
+  "historical_availability_evidence": {
+    "key_material_created_before_retry005_result": true,
+    "derived_public_fingerprint_matched_registered_deploy_key": true,
+    "strict_github_host_identity_matched": true,
+    "authenticated_ls_remote_main": "75d1b02b5fa50969425ec307e353499074233f82",
+    "complete_recursive_tree_and_blob_fetch_succeeded": true,
+    "current_h0_exact_lease_dry_run_accepted": true,
+    "stale_h0_exact_lease_dry_run_rejected": true,
+    "retry005_selected_registered_identity": false,
+    "classification": "CAPABILITY_FALSE_NEGATIVE_WRONG_LOCAL_IDENTITY_PATH"
+  },
+  "current_remeasurement": {
+    "starting_cocolon_main": "94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce",
+    "starting_cocolon_tree": "8724181820e1cff1d060a48f0ccdf206e7d639bd",
+    "tracked_path_count": 824,
+    "authenticated_ls_remote": true,
+    "base_tree_read": true,
+    "complete_recursive_tree_and_blob_fetch": true,
+    "fsck_missing_object_issue_count": 0,
+    "current_h0_exact_lease_dry_run_accepted": true,
+    "stale_75d1b02_exact_lease_dry_run_rejected": true,
+    "dry_run_remote_ref_change_count": 0,
+    "actual_exact_lease_transactions": [
+      {
+        "expected_old_sha": "94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce",
+        "target_direct_child": "9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5",
+        "postfetch_head_parent_tree_matched": true
+      },
+      {
+        "expected_old_sha": "9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5",
+        "target_direct_child": "9c2ce2fcb89179de346c29bbcb594d82e58fa10b",
+        "postfetch_head_parent_tree_matched": true
+      }
+    ]
+  },
+  "supersession": {
+    "mode": "APPEND_ONLY",
+    "prior_records_rewritten": false,
+    "supersedes_only": [
+      "capability_admission.base_tree_read_proved",
+      "capability_admission.complete_recursive_tree_fetch_available",
+      "capability_admission.expected_old_sha_lease_proved",
+      "capability_admission.local_authenticated_cocolon_git_receive_pack_available",
+      "capability_admission.private_cocolon_git_ls_remote_authenticated",
+      "capability_admission.stop_code",
+      "capability_admission.stop_reason",
+      "evidence_class",
+      "next_boundary.authenticated_capability_required",
+      "state.formal_exact134",
+      "state.g2",
+      "state.p1_retry005"
+    ],
+    "corrected_values": {
+      "capability_admission.base_tree_read_proved": true,
+      "capability_admission.complete_recursive_tree_fetch_available": true,
+      "capability_admission.expected_old_sha_lease_proved": true,
+      "capability_admission.local_authenticated_cocolon_git_receive_pack_available": true,
+      "capability_admission.private_cocolon_git_ls_remote_authenticated": true,
+      "capability_admission.stop_code": "RETRY005_HISTORICAL_CAPABILITY_FALSE_NEGATIVE_STOP",
+      "capability_admission.stop_reason": "REGISTERED_AUTHENTICATED_SSH_LEASE_ROUTE_WAS_AVAILABLE_BUT_NOT_SELECTED",
+      "evidence_class": "BODY_FREE_APPEND_ONLY_RETRY005_CAPABILITY_FALSE_NEGATIVE_CORRECTION",
+      "next_boundary.authenticated_capability_required": "SATISFIED_BEFORE_RETRY005_BUT_NOT_USED",
+      "state.formal_exact134": "NOT_RUN_RETRY005_TERMINAL_NO_BACKFILL",
+      "state.g2": "CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_TRANSPORT_CAPABLE_RETRY005_TERMINAL_FALSE_NEGATIVE_CORRECTED",
+      "state.p1_retry005": "HISTORICAL_FALSE_NEGATIVE_STOP_RETAINED_NOT_COMPLETED"
+    },
+    "disposition": [
+      "RETRY005_HISTORICAL_FALSE_NEGATIVE_STOP_RETAINED",
+      "CAPABILITY_BLOCKER_SUPERSEDED",
+      "FORMAL_RETRY_NOT_EXECUTED",
+      "NO_FORMAL_SUCCESS_BACKFILLED"
+    ]
+  },
+  "preserved_retry005_facts": {
+    "connector_explicit_expected_old_sha_parameter_available": false,
+    "local_gh_executable_available": false,
+    "local_git_credential_helper_available": false,
+    "source_publication_module_has_transport": false,
+    "retry005_formal_server_update_observed": false,
+    "retry005_formal_full_postfetch_proved": false,
+    "existing_fixed_formal_path_count": 0,
+    "formal_reservation_count": 0,
+    "sequence_event1_count": 0,
+    "sequence_event2_count": 0,
+    "formal_attempt_count": 0,
+    "accepted_successful_receipt_count": 0,
+    "step0_10_completion_receipt_count": 0,
+    "all11_completion_chain_count": 0,
+    "atomic_formal_manifest_count": 0,
+    "formal_exact134_run": false,
+    "source_baseline": "UNLOCKED",
+    "mashos_api_change_count": 0,
+    "p2": "NOT_AUTHORIZED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "premise_and_rule_correction": {
+    "continuity_owner": "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+    "continuity_owner_commit": "9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5",
+    "snapshot_reflection_commit": "9c2ce2fcb89179de346c29bbcb594d82e58fa10b",
+    "secret_material_recorded": false,
+    "session_reverification_required": true
+  },
+  "state": {
+    "retry005": "HISTORICAL_TERMINAL_FALSE_NEGATIVE_STOP_RETAINED",
+    "retry005_capability_blocker": "SUPERSEDED",
+    "formal_event_count": 0,
+    "formal_reservation_count": 0,
+    "formal_exact134": "NOT_RUN",
+    "source_baseline": "UNLOCKED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "cycle001": "NOT_ACCEPTED",
+    "automatic_progression": false
+  },
+  "next_formal_retry": {
+    "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY006_ONLY",
+    "approved_by_mash_as_separate_action": true,
+    "must_use_new_live_h0": true,
+    "retry005_authority_reuse_forbidden": true,
+    "automatic_progression": false
+  },
+  "receipt_sha256": "0261e349fe0caf0c5a631df54ec27a673e14619634d3b46b97107a2bd7db3a87",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "recorded_on_jst": "2026-07-25",
+  "verdict": "RETRY005_HISTORICAL_FALSE_NEGATIVE_STOP_RETAINED_CAPABILITY_BLOCKER_SUPERSEDED_AUTHORITY_STOP"
+}
