@@ -17470,3 +17470,207 @@ exact100、Product Read、correction、B6、Cycle acceptanceを承認しない�
 This section supersedes only the previous formal-P1 next-lane pointer.
 All predecessor evidence and STOP history remain immutable.
 Automatic progression is false. STOP.
+
+
+## 2026-07-24 accepted exact134 / sequence ledger / atomic publication contract reconciliation design
+
+### 完了したauthority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+### 確認した事実
+
+1. fixed entryはKaren-Diary
+   `700f749f5149cac1f8bd4bab8a364d524a56985b`、Cocolon
+   `3d91614c5beb73a78b2ebc96b696563ec2f6de4e`、mashos-api
+   `78276950d0d7650968fe938bc63a6e13455a8d6c` / tree
+   `e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2`で、related entry
+   driftはなかった。
+2. Mash共有local資料はDetailed Design 132,892 bytes /
+   SHA-256 `6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc`、
+   Step 11 Plan 41,460 bytes /
+   `31682e71ac047ac5f2f329d62ebc51b471bdcb00430a6ab35bcfb934c1438ca7`、
+   roadmap 69,980 bytes /
+   `04fb9e4e11af2b1530d03d95d8e959ba644503722f72094a289bde1d4368ce5b`
+   として全体接続を確認した。normative precedenceはDetailed Design /
+   Recovery parentである。
+3. current formal candidateは`nls_v3_rc_0034`である。
+   legacy source-baseline manifestの`nls_v3_rc_0032`はcurrent
+   event/accepted/all11 identityではない。
+4. current accepted owner / verifierはfull exact134 successを
+   fail-closedで強制せず、133 pass / 1 failed / exit1等の整合した
+   non-success runを`accepted=true`へできる。
+5. current event 1はparent §10のstate、timestamp、prior identity、
+   evidence path/blobを欠く。
+6. current all11 ownerは`STAGED_NOT_PUBLISHED`だけを返し、
+   parent-compliant event 2 / atomic publisherは存在しない。
+7. existing P0 parent doc / receiptはcommits
+   `90a2c009b8a463110e01b907224e52ea50912bd8` /
+   `f20165e3eda11dc0262373d5f82f63377df76f10`、blobs
+   `3333ae29ec0f4e9dde614bc9cd520448f61d2386` /
+   `bdfbd559535db06ae4af35fe1bb58716d6566126`のimmutable pairである。
+8. current GitHub connectorではexpected-old-SHA leaseとbase-tree取得を
+   含むformal CAS routeをまだ実証していない。単なる
+   `update_ref(force=false)`をexact CASとは扱わない。
+9. design / receipt / handoff commitsは
+   `dd9b200cf974d8026c4aeaed5b3154131c67814b` /
+   `73a9f77bb2168dabdc8a16bfefa9f262185ea3c0` /
+   `10a8be7a5fc02f94956a231c646bd4c009254530`である。
+10. design / receipt / handoff blobsは
+    `7e7d454d888141cbdb872244bf6df93c046e0b6c` /
+    `76e490ebec6bfeae6029393f293615ed6f500496` /
+    `52b8b2a6a9ecd7c198706f598c73b93076595fc3`である。
+11. design / receipt / handoff SHA-256は
+    `8bb377d49f04a33d6d21323a40bcd5ddc0d30eee8d4d2a2700ad7f074e32bb64` /
+    `02cbf600c3cea638a4ee00be3518b2999c7ee4166e33992e409b0dd6e2150cfa` /
+    `1caa954cef5f6b50cbcb5f472dfb476b3a9d3cf81b1726c8781831691bf3d2a1`
+    で、GitHub再取得bytesとlocal bytesはexact equalityだった。
+12. Execution and Closure Plan §12.30 append commit / blobは
+    `7e23ea1e5042a6006fec11655b3e4bd3fcdcd52e` /
+    `89ace1c5f0d5e474aba8eac755971728098edf7b`である。
+13. read-only subagent exact3をaccepted-run、event-ledger、
+    atomic-publication監査へ使用した。subagent write/test/commit/GitHub
+    writeはexact0で、華恋による修正後再監査の残存blockerはexact0だった。
+14. 本authorityでmashos-api source/test/fixture/sample/manifest change、
+    test、formal exact134、broad regression、reservation、event、
+    successful receipt、private body生成は全てexact0または未実行である。
+
+### 固定した設計
+
+1. `accepted=true`はexact134全PASSED、全非成功count 0、exit0、
+   timeout false、exact negative code、clean same-source、full provenance /
+   environment / hash / body-free成立時だけ。
+2. formal worker前にone-shot reservationをmainへ公開する。一つのformal
+   authority tokenはchallenge違いを含めexact1 reservationだけを持つ。
+3. reservation後のcrash / result不在は
+   `ATTEMPT_CONSUMPTION_UNKNOWN_STOP`で、同じattemptを再実行しない。
+4. reservation、attempt v2、accepted v2、source-baseline receipt v2、
+   event v2、all11 v2、atomic manifest v2のliteral schema / keyset /
+   type / hash preimageを固定した。
+5. P0は`LEGACY_IMMUTABLE_P0_ANCHOR` genesis descriptorとし、
+   new event0 / backfillを作らない。
+6. eventはtransition evidence artifactを参照し、自身のGit blobを
+   埋め込まない。
+7. event1 exact2 / event2 exact15、supporting exact14の
+   path-role-schema-logical-hash mappingを固定した。
+8. logical SHA、raw-file SHA、Git blob SHAを分離した。
+9. candidate validationとpublished validationを分離し、
+   expected-old-SHA lease + verified direct-child single commit +
+   post-fetchだけで`PUBLISHED_ATOMIC`を成立させる。
+10. sequential Contents publication、unleased force、non-descendant update、
+    missing base-tree/CAS capability fallbackを禁止した。
+
+### 推測
+
+targeted exact36 GREENとformal registryの静的整合から、formal runnerは
+実行可能と推測する。しかしformal exact134は未実行であり、
+GREEN、accepted、successful receipt、event 2の発行可能性は推測しない。
+
+Git object content addressingとexpected-old-SHA leaseを正しく実装すれば、
+exact bundleのpartial per-file visibilityを避けられると推測する。
+actual connector / Git transport behaviorはfuture causal RED / GREENまで
+未確認である。
+
+### 書かれていないこと / 推測禁止境界
+
+- design freezeをRED / implementation / GREENへ読み替えない。
+- current `nls_v3_rc_0034`をsource baseline lockへ読み替えない。
+- targeted exact36 GREENをformal exact134 GREENへ読み替えない。
+- reservation candidateをpublished reservationへ読み替えない。
+- event candidate / orphan Git objectをpublished eventへ読み替えない。
+- failure attemptをaccepted receiptへ読み替えない。
+- `STAGED_NOT_PUBLISHED`をpublished all11 / event 2へ読み替えない。
+- reserved retry004 tokenをapproved / active / committedへ読み替えない。
+- P2以降へ自動進行しない。
+
+### 華恋の意見
+
+acceptedは「形が正しい実行」ではなく「固定したexact134を完全成功した実行」
+に一致させるべきである。failureを別historyへ残し、Step/all11入口でも
+accepted v2を再検証する方が、運用判断による成功への読み替えを防げる。
+
+また、run開始前にauthorityを永続消費し、crash後のsame-token retryを
+禁止する必要がある。実行結果がないことは再実行許可ではなく、
+消費状態不明のSTOPである。
+
+P0は後からevent0 wrapperを作るのではなく、既存immutable pairをlegacy
+genesisとして明示する。atomic publicationはAPI名ではなく、exact bundle、
+expected-old head、direct-child commit、main reachability、post-fetchの
+全てで成立させる。
+
+### 現在状態とSTOP
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+BLOCKED_CONTRACT_RECONCILIATION_DESIGN_FROZEN_RED_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_CONTRACT_STOP
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P1_RETRY003:
+PRE_EVENT1_CONTRACT_NONCONFORMANCE_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Reserved future formal P1 token:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+reservedであり、承認済み・active・committedではない。
+
+Exactly one next separate-approval candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+この候補はone-shot reservation、exact134 fail-closed、literal schemas、
+event sequence、exact2/exact15、expected-old-SHA publicationのcausal RED
+だけを対象とする。implementation、GREEN、formal token、event/receipt、
+P2、fresh batch、exact100、Product Read、correction、B6、Cycle acceptanceを
+承認しない。
+
+This section supersedes only the previous design next-lane pointer.
+All predecessor evidence and STOP history remain immutable.
+Automatic progression is false. STOP.
