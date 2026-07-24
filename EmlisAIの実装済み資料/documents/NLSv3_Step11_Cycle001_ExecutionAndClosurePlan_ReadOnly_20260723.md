@@ -3207,3 +3207,181 @@ SEPARATE_APPROVAL_REQUIRED
 This section supersedes only the §12.31 next-authority pointer. All predecessor
 evidence, RED history, STOP history, parent order, and downstream authority
 boundaries remain immutable. Automatic progression is false. STOP.
+
+## 12.33 2026-07-25 P1 retry004 pre-event1 expected-old-SHA lease capability STOP
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+Fixed admission entry:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `bcf9aa225f018dc6cfa3c29cfa9c6792e356e242`
+- mashos-api:
+  `191e9d8be63132f10f94e2b2f54c6bae94ce1f07`
+- mashos-api tree:
+  `e68df6587b8cb674456b3bc9bceb23e0699f33aa`
+- related entry drift:
+  `false`
+
+Retry004 stopped at pre-event1 publication capability admission:
+
+```text
+STOP_CODE:
+PUBLICATION_REF_UPDATE_FAILED_STOP
+
+STOP_REASON:
+EVENT1_ATOMIC_EXPECTED_OLD_SHA_LEASE_TRANSPORT_NOT_PROVED
+
+POSITION:
+PRE_EVENT1
+```
+
+The reconciliation design §6.2 and the production owner plus independent
+verifier require exact transport capabilities:
+
+```text
+base_tree_read = true
+expected_old_sha_lease = true
+single_ref_update = true
+
+write mode:
+SINGLE_TREE_SINGLE_COMMIT_EXPECTED_OLD_SHA_LEASE
+
+required server observation:
+EXPECTED_OLD_SHA_MATCHED_AND_UPDATED
+```
+
+The production atomic-publication module is intentionally inert and performs
+no Git transport or ref write. The available GitHub connector exposes
+`update_ref(branch_name, sha, force)` but no `expected_old_sha` or equivalent
+expected-head OID. It also does not expose the full base/target tree read and
+blob post-fetch surface required to prove the exact transaction.
+
+The local environment has no `gh` executable, configured Git remote,
+credential helper, or authenticated Git receive-pack route. Consequently the
+design-authorized exact
+`--force-with-lease=refs/heads/main:<H0>` alternative is unavailable.
+
+`update_ref(force=false)` was not claimed as CAS. Sequential Contents API
+writes, capability synthesis, and unleased force were not used.
+
+Admission checks:
+
+```text
+fixed formal paths checked:
+17
+
+existing fixed formal paths:
+0
+
+published formal reservation artifacts:
+0
+
+challenge / authority-challenge / attempt ID:
+NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+formal exact134:
+NOT_RUN
+
+mashos-api change count:
+0
+```
+
+Body-free STOP evidence:
+
+1. result commit `e2c20cf993213102243c489eb735d30f50fadce9`, blob
+   `6cb8f7d7e7226a368be70500adf9cb8be880ec56`, raw SHA-256
+   `03ec7edec2da0d4ab4bf3d9df7ee1482f113e11e7267e197c71b087226b7da4a`;
+2. STOP receipt commit `e1762be169a4a74a368478eb6566f6740caaabb7`,
+   blob `7e9f71746e88de8ee0838dbefd1ea6a287c2f988`, raw SHA-256
+   `11391a48219e079e77943ad1a9ec067f0b97345a3104d13a83b72f75ebd11e59`,
+   canonical receipt SHA-256
+   `02081d559b5ed75a0c6ceedbcf8f119ab24be5b4ec8d7384b1a1b3f8631d9c8b`;
+3. handoff commit `d03423da9f92f9a3c80b81fc2150b791589703b2`,
+   blob `a99b1deb5accb610e5d21c758aa57c14fb57ebd4`, raw SHA-256
+   `6f93c5a1c708f0f548bb4e9f37315c4ca20ae99b16105e849d4ba438711d4aed`.
+
+These files are STOP evidence only. They are not formal reservation, event,
+accepted, Step, all11, manifest, or Cycle artifacts.
+
+Three non-root read-only audits independently confirmed the same STOP.
+Subagent source edit, test, reservation, artifact generation, commit, and
+GitHub write counts were exact0. Karen made the final capability and STOP
+decision and performed the documentation writes.
+
+Current state:
+
+```text
+STATUS:
+P1_RETRY004_PRE_EVENT1_EXPECTED_OLD_SHA_LEASE_CAPABILITY_STOP_AUTHORITY_STOP
+
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_FORMAL_RETRY004_PUBLICATION_TRANSPORT_BLOCKED
+
+P1_RETRY004:
+PUBLICATION_REF_UPDATE_FAILED_STOP_PRE_EVENT1_NOT_COMPLETED
+
+FORMAL_P1_TOKEN:
+APPROVED_BUT_UNCOMMITTED
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_LEASE_CAPABILITY_STOP
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Before a later formal retry can be selected, Karen needs either:
+
+1. an authenticated ref mutation with explicit expected-old SHA/equivalent
+   expected-head OID and full tree/blob post-fetch; or
+2. an authenticated Cocolon Git receive-pack route capable of exact
+   `--force-with-lease=refs/heads/main:<H0>`.
+
+Credentials must not be pasted into chat.
+
+```text
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+PRECONDITION:
+LEASE_CAPABLE_AUTHENTICATED_GIT_ROUTE_REQUIRED
+
+SEPARATE_AUTHORITY_SELECTION_AND_APPROVAL_REQUIRED_AFTER_CAPABILITY_VERIFICATION
+```
+
+This section supersedes only the §12.32 next-authority pointer. All predecessor
+evidence, STOP history, RED/GREEN history, and downstream authority boundaries
+remain immutable. Automatic progression is false. STOP.
