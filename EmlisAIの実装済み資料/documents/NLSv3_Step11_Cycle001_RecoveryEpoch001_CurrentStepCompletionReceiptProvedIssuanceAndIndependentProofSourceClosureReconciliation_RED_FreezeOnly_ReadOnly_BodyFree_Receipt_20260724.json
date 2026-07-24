@@ -1,0 +1,217 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch001.current_step_receipt_reconciliation_red_freeze_receipt.v1",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_RED_FREEZE_ONLY",
+  "revision_date": "2026-07-24",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_identity": {
+    "karen_diary_head": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon_head": "232738e728ff35c5d8ae7b19884ac80394cad72a",
+    "mashos_api_head": "8def65c53df9b50795b52a22b6779e5adc5c4465",
+    "reconciliation_design_blob": "f074cdd402eb9f160e6f3fbae67527d386e31161",
+    "reconciliation_design_sha256": "31d69238c92f493e8185a983eb925bd93e68cc7f4933a6b92793217b26b04869",
+    "reconciliation_design_receipt_blob": "c914a619c3ff4022389a8e08fa424892212d44b9",
+    "reconciliation_design_handoff_blob": "05b1c36ef1d833e296ab55b0573a1c8e9b4c4b56",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc",
+    "execution_and_closure_plan_blob": "d194977c0febb68b34268a72722b665bd6647ad7",
+    "latest_snapshot_blob": "0d789d0ece46c4c538fa4fece4c482c1db319f04",
+    "red_result_artifact_commit": "3727a51141fbc89ec563219fc984103a0d31ce0f",
+    "red_result_artifact_blob": "2ece83c1264db1c2e42e418fc12de2134ccd4f50",
+    "red_result_artifact_sha256": "9e7f9acdcf76b6be8609d32f75d023c674a77197630a25ef82fbb152c220b504"
+  },
+  "result": {
+    "status": "RECONCILIATION_CAUSAL_RED_FROZEN_IMPLEMENTATION_GREEN_NOT_AUTHORIZED_AUTHORITY_STOP",
+    "mashos_api_result_head": "e14f764e4cd8c8a765628d87226964ef7587d798",
+    "mashos_api_result_parent": "8def65c53df9b50795b52a22b6779e5adc5c4465",
+    "mashos_api_result_tree": "0a858db5558070cd3c99eaeda2ece826f5bf27b0",
+    "changed_path_count": 13,
+    "changed_test_path_count": 13,
+    "production_source_change_count": 0,
+    "helper_change_count": 0,
+    "fixture_change_count": 0,
+    "schema_change_count": 0,
+    "config_change_count": 0,
+    "requirements_change_count": 0,
+    "protected_surface_change_count": 0,
+    "additions": 2667,
+    "deletions": 1
+  },
+  "test_surface_exact13": [
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py",
+      "blob": "d37d75b2a28a7ba74468a96db073f80dce3609f8",
+      "sha256": "fdd5e5ef87b73c52400108db799ee26fab8edf2aa66b6ee97e329e646a052bfe"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_proved_receipt_contract_red.py",
+      "blob": "c5d1580273eb2b8d73befdb5670845a18ef926e7",
+      "sha256": "d718e0c58ba08e5bc0ffa975c83b6945e48f80bb48e8122adf6cb78b4fb4ec5a"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step00_independent_negative.py",
+      "blob": "71e3a782fee5e0e4afec2a2f5e8e9e5c9bdc5833",
+      "sha256": "ae977c994fe463a505a1cb2fd1372be6625d3317b180932f6f3417610b76ea2d"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step01_independent_negative.py",
+      "blob": "ad20f20601afec29d1f63968ff0ac726d4c4a18d",
+      "sha256": "3429b6f4959daadda6cf9cbb8dc457117e423664cdf84c366373f29c9b46f57f"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step02_independent_negative.py",
+      "blob": "8e42f8102de2c0b498a8f34049feba87edb3b39a",
+      "sha256": "1bf1afa067c671aaca0ba3126dc12c1137fee6463c7461b3c28bc3c24439c05b"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step03_independent_negative.py",
+      "blob": "7649412b47d687cbdd5dafbe7d130636c5df02af",
+      "sha256": "d96c4188f8d57eede7b5529c963288b7f246e03b5ff4e2f4422ad0d327d8e465"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step04_independent_negative.py",
+      "blob": "3ce136c61fb7d068b73f58518814e3c2dbeccc61",
+      "sha256": "ae1f4be4e87b493f6996de53da5ba3eb5ce2852b2b0ddb731dc4198457bdfdeb"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step05_independent_negative.py",
+      "blob": "96e4f3ab464da20fa165e0dc9090e580f98e721d",
+      "sha256": "aebda07c80a48c4a75360c841087dd09fb74b4f5ebda640765257df4badd5331"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step06_independent_negative.py",
+      "blob": "7e520ae0f6f6b6ca4007ff3fbda5220be91948dc",
+      "sha256": "31f961cd5cad09638acf4e8c15a8ead8362a478afab844dab2049359a5658089"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step07_independent_negative.py",
+      "blob": "6233df99170b77988824dfd8b8b6733b4eb418c0",
+      "sha256": "cc308d6f86caf9b140c990d5abbe0c14e010827bf41465a0d3833d482b150ce4"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step08_independent_negative.py",
+      "blob": "43869896b60858c6726d802e42c89c3a92b054d9",
+      "sha256": "db74c86e45eb1448d8d2142b5b028f3fc846e5bc5806ec24b05cae47223cd9cd"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step09_independent_negative.py",
+      "blob": "d65efb0476f082be1a015a5cb4d33793ae5cf004",
+      "sha256": "59d5b126be1ae95d6d4b2d3590c754210d010e1da1ae52e07ed13395754c5101"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_step10_independent_negative.py",
+      "blob": "7753c2125ed836756e2bcebc139fbe9d5c404520",
+      "sha256": "a17e8a7b65e085f322d32271d131c705f9bda346cd9a183f972d024ea12183a9"
+    }
+  ],
+  "literal_registry": {
+    "step_count": 11,
+    "positive_node_count": 123,
+    "dedicated_negative_node_count": 11,
+    "formal_node_count": 134,
+    "positive_nodes_per_step_0_to_10": [
+      3,
+      8,
+      13,
+      22,
+      18,
+      15,
+      4,
+      7,
+      8,
+      10,
+      15
+    ],
+    "registry_sha256": "70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728",
+    "formal_node_registry_sha256": "fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf"
+  },
+  "future_source_surface_exact7": [
+    "ai/services/ai_inference/emlis_ai_recovery_epoch001_canonical_current_closure_v3.py",
+    "ai/services/ai_inference/emlis_ai_recovery_epoch001_step_completion_receipt_v3.py",
+    "ai/tools/emlis_nls_v3_recovery_epoch001_closure_receipt_verify.py",
+    "ai/services/ai_inference/emlis_ai_recovery_epoch001_current_step_requirement_registry_v3.py",
+    "ai/services/ai_inference/emlis_ai_recovery_epoch001_accepted_test_run_receipt_v3.py",
+    "ai/tools/emlis_nls_v3_recovery_epoch001_current_step_proof_run.py",
+    "ai/tools/emlis_nls_v3_recovery_epoch001_all11_receipt_issue.py"
+  ],
+  "current_closure": {
+    "source_commit": "e14f764e4cd8c8a765628d87226964ef7587d798",
+    "dependency_closure_count": 39,
+    "source_dependency_closure_sha256": "f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1",
+    "full_graph_sha256": "08be2192138cb30d639a0ca8d7479f8ab2dd2734bc9369539341f5656abecd52",
+    "canonical_current_closure_sha256": "08be2192138cb30d639a0ca8d7479f8ab2dd2734bc9369539341f5656abecd52",
+    "all_relevant_path_count": 208,
+    "completion_proof_path_count": 83,
+    "owner_independent_verifier_equal": true,
+    "owner_issue_count": 0,
+    "independent_verifier_issue_count": 0,
+    "proof_system_missing_path_count": 16
+  },
+  "authoritative_final_red": {
+    "source_commit": "e14f764e4cd8c8a765628d87226964ef7587d798",
+    "collected": 36,
+    "passed": 17,
+    "failed": 19,
+    "error": 0,
+    "unexpected_failure": 0,
+    "unrelated_warning_count": 1,
+    "elapsed_seconds": 60.79,
+    "aggregate_causal_failure_codes_exact8": [
+      "RECOVERY_EPOCH001_RECONCILIATION_CURRENT_CLOSURE_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_REGISTRY_OWNER_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_ACCEPTED_RUN_OWNER_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_PROOF_RUNNER_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_ALL11_ISSUER_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_RECEIPT_OWNER_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_INDEPENDENT_VERIFIER_NOT_PROVED",
+      "RECOVERY_EPOCH001_RECONCILIATION_PARENT_SEQUENCE_NOT_PROVED"
+    ],
+    "dedicated_causal_failure_codes_exact11": [
+      "RECOVERY_EPOCH001_STEP00_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP01_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP02_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP03_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP04_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP05_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP06_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP07_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP08_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP09_DEDICATED_NEGATIVE_NOT_PROVED",
+      "RECOVERY_EPOCH001_STEP10_DEDICATED_NEGATIVE_NOT_PROVED"
+    ],
+    "authoritative_final_targeted_execution_count": 1,
+    "superseded_or_diagnostic_targeted_execution_count": 6,
+    "total_targeted_executing_run_count": 7,
+    "nonverdict_collection_only_count": 1,
+    "broad_suite_execution_count": 0,
+    "python_version": "3.12.13",
+    "pytest_version": "9.1.1",
+    "repository_dependency_added": false
+  },
+  "parent_sequence": [
+    "FINAL_MASHOS_COMMIT_CLEAN_TREE_FRESH_CLOSURE",
+    "SOURCE_BASELINE_LOCKED",
+    "SAME_BASELINE_ACCEPTED_RUN",
+    "STEP0_THROUGH_STEP10_ORDERED_PROVED_RECEIPTS",
+    "ALL11_ATOMIC_VERIFICATION_AND_PUBLICATION",
+    "STEP0_10_PREREQUISITES_PROVED",
+    "AUTHORITY_STOP",
+    "P2_SEPARATE_APPROVAL_REQUIRED"
+  ],
+  "execution_state": {
+    "g1": "IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED",
+    "g2": "BLOCKED_NOT_AUTHORIZED",
+    "step5": "TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "broad_regression": "NOT_RUN_NOT_CLAIMED",
+    "p1_retry002": "ADMISSION_STOPPED_NOT_COMPLETED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "formal_exact100": "NOT_RUN",
+    "product_read": "NOT_RUN",
+    "correction": "NOT_RUN",
+    "b6": "NOT_RUN",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_separate_authority_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY"
+}
