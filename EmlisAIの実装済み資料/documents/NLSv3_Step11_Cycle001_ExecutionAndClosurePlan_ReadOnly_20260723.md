@@ -2879,3 +2879,155 @@ fresh batch, exact100, Product Read, correction, B6, or Cycle acceptance.
 This section supersedes only the §12.29 next-authority pointer. All predecessor
 evidence, STOP history, parent order, and downstream authority boundaries
 remain immutable. Automatic progression is false. STOP.
+
+
+## 12.31 2026-07-24 accepted exact134 / sequence ledger / atomic publication contract reconciliation RED freeze
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+Fixed RED-freeze entry:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `fee21e9a92450d4171536f280e859d95e344804e`
+- mashos-api:
+  `78276950d0d7650968fe938bc63a6e13455a8d6c`
+- mashos-api tree:
+  `e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2`
+- related entry drift:
+  `false`
+
+Causal RED was frozen as exact4 test-file changes and exact0 production-source
+changes. mashos-api result commit
+`37ad05927b596322e3fa0791ca8cadd5a63b56c1` / tree
+`c54e2562697eeb608f9ebdc79b455b4e0e3133ca` is a verified direct child of
+the fixed mashos-api entry. Compare was `ahead_by=1`, `behind_by=0`, and only
+the exact4 intended test paths changed.
+
+The frozen test surface is:
+
+1. accepted exact134 exact10 tests with exact30 named attack codes;
+2. sequence/event/publication exact27 tests covering requirement families
+   `L01`–`L09`, `S01`–`S04`, and `P01`–`P10`;
+3. selected existing reconciliation exact3 tests;
+4. total exact40 collected.
+
+Verification result:
+
+```text
+py_compile exact4:
+PASS
+
+git diff --check:
+PASS
+
+exact40:
+5 passed / 35 failed / 0 errors / 1 warning
+```
+
+The failures are the expected causal RED: current v1 accepted fail-open,
+missing accepted-v2 owner/reservation/runner/verifier/downstream gates,
+missing sequence owner/independent verifier/atomic publisher, and missing
+future closure paths. No collection, import, syntax, or fixture error occurred.
+
+Body-free RED evidence:
+
+1. result commit `24e53b2379e48d8a9090a7520782e6845159e862`, blob
+   `2276f3507b670053fc9782f9cc48a0d677805e9d`, SHA-256
+   `437c920ed0a1def6d10f76e0e3c6cb14cc47acdd8c8cb3321a8784cb19cb3cfe`;
+2. receipt commit `c981659ba709c13c7ceb8f4976a4a45ddd07b01e`, blob
+   `59ad362dc58c3f829979657f6d6a2cd3f6dbf78b`, SHA-256
+   `bc9f7922c03f47242586d7b49f44937edee4524f850216c9860566350d4293ea`;
+3. handoff commit `545da3f0df81798cdfb294e572c88818ef7d8dc0`, blob
+   `848fd03c786e1a59e7af7d0c8407fc969fe45d3d`, SHA-256
+   `c2023e683eb462a1d6513d7c589b0afb271e867e03bf2b979969eb3fd9bda92f`.
+
+Top-level read-only audit lanes exact3 covered accepted-run, sequence-ledger,
+and atomic-publication surfaces. The atomic-publication lane also used nested
+independent re-audit exact1, so non-root subagent total was exact4. Subagent
+edit/test/commit/GitHub write was exact0. After Karen reconciliation, final
+RED-spec residual blocker count was exact0. Karen performed the final test and
+GitHub object/commit verification.
+
+This authority issued no formal reservation, formal run, accepted receipt,
+Step receipt, sequence event, all11 chain, atomic formal manifest, private
+body, broad-regression result, or completion transition.
+
+Current state:
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_CONTRACT_STOP
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P1_RETRY003:
+PRE_EVENT1_CONTRACT_NONCONFORMANCE_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Reserved future formal P1 token remains selected but not approved, active, or
+committed:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+Exactly one next separate-approval candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+This candidate is unapproved and inactive. If separately approved, it would
+authorize only implementation required by the frozen RED and targeted GREEN.
+It would not authorize formal reservation/event/receipt issuance, formal
+exact134, formal P1 token commitment, P2, fresh batch, exact100, Product Read,
+correction, B6, or Cycle001 acceptance.
+
+This section supersedes only the §12.30 next-authority pointer. All predecessor
+evidence, STOP history, parent order, and downstream authority boundaries
+remain immutable. Automatic progression is false. STOP.
