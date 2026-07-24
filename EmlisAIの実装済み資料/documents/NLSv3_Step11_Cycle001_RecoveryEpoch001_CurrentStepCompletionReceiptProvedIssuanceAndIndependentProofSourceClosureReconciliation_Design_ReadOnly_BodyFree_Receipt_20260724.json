@@ -1,0 +1,78 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.current_step_receipt_reconciliation_design_receipt.v1",
+  "document_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_DESIGN_READ_ONLY",
+  "revision_date": "2026-07-24",
+  "result": "RECONCILIATION_DESIGN_FROZEN_RED_NOT_AUTHORIZED_AUTHORITY_STOP",
+  "entry_identity": {
+    "karen_diary_commit": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon_commit": "15840d13ac8ac55ff2b8c54caaf3cfc4b956a93a",
+    "mashos_api_commit": "8def65c53df9b50795b52a22b6779e5adc5c4465",
+    "recovery_parent_design_blob": "3333ae29ec0f4e9dde614bc9cd520448f61d2386",
+    "p1_retry002_stop_result_blob": "d9445becdf84992001af8c9b7fd8a8d2d99bfebf",
+    "p1_retry002_stop_receipt_blob": "251587083914546d99cf462ab2553321e19f51e0",
+    "p1_retry002_stop_handoff_blob": "dd2ca0db0538979639f9c0450596c39dada490c7",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "current_proof_identity": {
+    "candidate_version_id": "nls_v3_rc_0034",
+    "canonical_current_closure_count": 39,
+    "live_dependency_root": "f30ec276ca5d60e27b7ee3c739396469a83153c758f8883579b47d1b2620bba1",
+    "canonical_current_closure_root": "6428abbd2433b4714abbd5a888785d25280b511d26aad91c3925312beb345715",
+    "closure_owner_blob": "54d225d136cba69da9d60d371b69df618fa282de",
+    "step_receipt_owner_blob": "c077bbdda3ba5322566e7eb370a98331c6c0ef1f",
+    "independent_verifier_blob": "45f9093388b8361ea1cc13829e697a7bad021555"
+  },
+  "confirmed_state": {
+    "proved_builder_authorized": false,
+    "proved_owner_validator_accepts": false,
+    "proved_independent_verifier_accepts": false,
+    "immutable_exact11_registry_present": false,
+    "accepted_run_receipt_owner_present": false,
+    "dedicated_independent_negative_source_count": 0,
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "p1_retry002": "ADMISSION_STOPPED_NOT_COMPLETED",
+    "p2": "NOT_AUTHORIZED",
+    "fresh_batch": "RESERVED_NOT_CREATED",
+    "broad_regression": "NOT_RUN_NOT_CLAIMED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "frozen_design": {
+    "requirement_registry_row_count": 11,
+    "dedicated_independent_negative_source_required_count": 11,
+    "accepted_run_caller_result_map_authority": false,
+    "owner_independent_verifier_mutual_import_allowed": false,
+    "all11_atomic_publication_required": true,
+    "parent_sequence": [
+      "SOURCE_BASELINE_LOCKED",
+      "STEP0_10_PREREQUISITES_PROVED",
+      "AUTHORITY_STOP",
+      "P2_SEPARATE_APPROVAL_REQUIRED"
+    ],
+    "historical_rewrite": false,
+    "historical_as_current": false,
+    "backfill": false
+  },
+  "execution": {
+    "mashos_api_changed_path_count": 0,
+    "source_test_fixture_sample_manifest_change_count": 0,
+    "test_execution_count": 0,
+    "successful_receipt_issuance_count": 0,
+    "source_baseline_lock_event_count": 0,
+    "private_body_generation_count": 0,
+    "exact100_run_count": 0,
+    "product_read_count": 0,
+    "api_db_rn_public_shared_safety_change_count": 0,
+    "subagent_read_only_count": 3,
+    "subagent_write_test_commit_count": 0
+  },
+  "design_artifact": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_CurrentStepCompletionReceiptProvedIssuanceAndIndependentProofSourceClosureReconciliation_Design_ReadOnly_20260724.md",
+    "bytes": 30563,
+    "sha256": "31d69238c92f493e8185a983eb925bd93e68cc7f4933a6b92793217b26b04869"
+  },
+  "next_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_RED_FREEZE_ONLY",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_material_sha256": "68f183b2955e95be7329d20b38e833fbbad6cdb2b6a4af1190636b4a197c4ea8"
+}
