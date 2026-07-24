@@ -2034,3 +2034,118 @@ batch, run exact100, perform Product Read, correct output, run B6, or accept
 Cycle 001.
 
 Automatic progression is false. STOP.
+
+## 12.26 2026-07-24 current-step `PROVED` issuance / independent-proof source closure reconciliation design
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+Fixed entry:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `15840d13ac8ac55ff2b8c54caaf3cfc4b956a93a`
+- mashos-api:
+  `8def65c53df9b50795b52a22b6779e5adc5c4465`
+- related entry drift:
+  `false`
+
+Confirmed admission gaps:
+
+- current builder / owner validator / independent verifier:
+  `PROVED_REJECTED`
+- immutable Step 0–10 exact11 requirement registry:
+  `NOT_IMPLEMENTED`
+- accepted-run receipt owner:
+  `NOT_IMPLEMENTED`
+- caller-supplied `accepted_test_results`:
+  `NOT_ACCEPTED_AS_FUTURE_AUTHORITY`
+- current different-source deficit:
+  nine Step views have exact1 test source
+- Step 4 / 9 second source:
+  adjacent-Step transitive source; Step-specific independent oracle not proved
+- builder `PROVED` next authority:
+  current candidate is always `None`, expected Step token therefore cannot pass
+
+Frozen design responsibility:
+
+1. immutable exact11 per-Step requirement registry;
+2. clean pinned commit / tree / closure / registry / exact-node / start-end
+   bound body-free accepted-run receipt;
+3. Step 0–10 exact11 dedicated independent-negative source modules;
+4. registry/run-derived current receipt v1 construction;
+5. owner-independent closure / registry / run / receipt verification;
+6. Step 0→10 ordered chain and all11 atomic Cocolon publication.
+
+Parent sequence reconciliation:
+
+```text
+final mashos commit / fresh closure
+-> event 1 SOURCE_BASELINE_LOCKED
+-> same-baseline accepted run / Step 0..10 receipts
+-> event 2 STEP0_10_PREREQUISITES_PROVED
+-> AUTHORITY STOP
+-> P2 SEPARATE APPROVAL REQUIRED
+```
+
+Recovery parent blob `3333ae29ec0f4e9dde614bc9cd520448f61d2386`
+§4 / §6.1 / §10 has precedence. A later record must not be interpreted as
+`all11 -> baseline lock`. Existing retry002 admission produced no event 1 and
+is connected as pre-formal-P1 admission STOP; it is not promoted to Step 0
+completion.
+
+Body-free design evidence:
+
+1. result commit `fda87e0dd48808df32c11f60b0466a7fee48eda7`,
+   blob `f074cdd402eb9f160e6f3fbae67527d386e31161`,
+   SHA-256
+   `31d69238c92f493e8185a983eb925bd93e68cc7f4933a6b92793217b26b04869`;
+2. receipt commit `5ddfafc651a74fc7794456680dbf3e0c78318485`,
+   blob `c914a619c3ff4022389a8e08fa424892212d44b9`,
+   SHA-256
+   `bb326d79c70bcf2945409580108d6f24ff0b2378e7b563e4db3382ff07b31739`;
+3. handoff commit `7c0da4b3225b5aed2624ac710f1f7f47bcd9c6b4`,
+   blob `05b1c36ef1d833e296ab55b0573a1c8e9b4c4b56`,
+   SHA-256
+   `e27511c5fe4c2292b4ec0b2b76befc2a899dada4878fd96b14ae517c4c9d88b7`.
+
+Execution boundary:
+
+- mashos-api changed path:
+  `exact0`
+- source/test/fixture/sample/manifest change:
+  `exact0`
+- formal pytest / broad regression:
+  `NOT_RUN_NOT_CLAIMED`
+- private body / exact100 / Product Read:
+  `0`
+- successful Step 0–10 receipt:
+  `0`
+- source baseline:
+  `UNLOCKED`
+- P1 retry002:
+  `ADMISSION_STOPPED_NOT_COMPLETED`
+- P2:
+  `NOT_AUTHORIZED`
+- fresh batch:
+  `RESERVED_NOT_CREATED`
+- Cycle 001:
+  `NOT_ACCEPTED`
+
+The next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_CURRENT_STEP_COMPLETION_RECEIPT_PROVED_ISSUANCE_AND_INDEPENDENT_PROOF_SOURCE_CLOSURE_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+This candidate freezes causal RED, the exact candidate/path/protected set,
+literal registry/node set, and dedicated independent-negative source contract.
+It does not authorize implementation, GREEN, successful receipt issuance,
+source baseline lock, future P1, P2, fresh batch, exact100, Product Read,
+correction, B6, or Cycle acceptance.
+
+Automatic progression is false. STOP.
