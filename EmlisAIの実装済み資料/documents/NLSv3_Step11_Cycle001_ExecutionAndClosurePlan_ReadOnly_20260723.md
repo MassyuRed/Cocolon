@@ -1914,3 +1914,33 @@ This entry supersedes only the prior exact9 implementation pointer and causal
 RED denominator. It preserves predecessor evidence, historical drift evidence,
 all protected bytes, Step 5 history, and downstream STOP boundaries.
 Automatic progression is false.
+
+
+#### 12.24.1 evidence-write integrity correction
+
+- initial current-snapshot update commit:
+  `366ceedcf984610f378ac6d7dab12ce51d10e773`
+- initial update disposition:
+  rejected as final evidence; the normal large-file fetch returned an empty
+  body and the update therefore replaced predecessor content with only the new
+  append
+- detection:
+  final compare reported `16311 deletions` on
+  `Cocolon_前提資料/07_latest_snapshot_diff.md`
+- correction method:
+  fetch the exact predecessor blob
+  `2b83a753ce528c8948fa57504331260a2d4eaba1` through the blob API,
+  verify full length `915997` characters, append the intended current
+  section, and update non-force without rewriting history
+- accepted correction commit / blob:
+  `597e670e0d989d2de5d81bde6f98c6510e16e606` /
+  `90907325003ec833e67b1fe94054ba218b8a9621`
+- accepted entry-to-result snapshot compare:
+  `150 additions / 0 deletions`
+- production code, test result, closure identity, result / receipt / handoff:
+  unchanged
+- history rewrite:
+  false
+
+The rejected intermediate commit remains visible. Only the corrected full
+snapshot is accepted as current evidence.
