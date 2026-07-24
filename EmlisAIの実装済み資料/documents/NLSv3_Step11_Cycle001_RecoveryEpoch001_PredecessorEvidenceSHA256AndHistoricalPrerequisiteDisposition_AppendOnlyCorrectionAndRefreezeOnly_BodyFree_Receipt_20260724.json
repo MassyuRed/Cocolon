@@ -1,0 +1,128 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.predecessor_evidence_append_only_correction_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_PREDECESSOR_EVIDENCE_SHA256_AND_HISTORICAL_PREREQUISITE_DISPOSITION_APPEND_ONLY_CORRECTION_AND_REFREEZE_ONLY",
+  "status": "PREDECESSOR_EVIDENCE_CORRECTED_AND_REFROZEN_AUTHORITY_STOP",
+  "body_free": true,
+  "automatic_progression": false,
+  "entry_pins": {
+    "karen_diary": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon": "6bd0a4332abf5547dace7edef5ae8feb5814d4fa",
+    "mashos_api": "7a771247ca26ce435d325b5eb484197b1bdec7c2",
+    "head_drift_detected": false
+  },
+  "correction_result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_PredecessorEvidenceSHA256AndHistoricalPrerequisiteDisposition_AppendOnlyCorrectionAndRefreezeOnly_20260724.md",
+    "commit": "d2f37e737798660f5b05f89c8aa2d0cba471913e",
+    "blob": "e5179ee6774c9b47a209d9579b06393364d841ed",
+    "sha256": "e66d2a07558f279f7c29adce87893cf634e0fd0037fa57ee7f7d88b7538519be"
+  },
+  "immutable_predecessor_records": {
+    "result": {
+      "blob": "a89dc73cd2c7c647f65ac2a77abbacc4c6da3b86",
+      "sha256": "0076e3dfc5cfad8a4bda9528afa0c34985663e429410a943e64fc22c5b5cabe3",
+      "modified": false
+    },
+    "body_free_receipt": {
+      "blob": "fc3a283e40bd80eaa264e919acd0b253a965b58f",
+      "sha256": "eb544bc458cfad66d539acde2b4ae88f9da6226e454d74758a24a6792afd11d2",
+      "modified": false
+    },
+    "handoff": {
+      "blob": "1fde9bf0c81723948484dc27c0c5708cfe6943e3",
+      "sha256": "42c5e98a48c5f56b7bab134a4beebabf1b4742b38e6aaa16030f8a30cfe15888",
+      "modified": false
+    }
+  },
+  "baseline_helper_correction": {
+    "path": "ai/tests/helpers/emlis_nls_v3_s0_s1_baseline.py",
+    "git_ref": "7a771247ca26ce435d325b5eb484197b1bdec7c2",
+    "git_blob": "77bcb55fed34d19b38ae54734eadef54e092f6ce",
+    "incorrect_predecessor_evidence_sha256": "652bd446883ebf4213b5859340945d25885428c040b6a68a34c55dc4d1679f80",
+    "correct_actual_sha256": "652bd446bd33995d9575b6db60f765caa97305b98d439d294de33bc569ea9f80",
+    "recovery_oracle_expected_sha256": "652bd446bd33995d9575b6db60f765caa97305b98d439d294de33bc569ea9f80",
+    "local_remote_equivalent_sha256": "652bd446bd33995d9575b6db60f765caa97305b98d439d294de33bc569ea9f80",
+    "git_blob_changed": false,
+    "actual_bytes_changed": false,
+    "classification": "EVIDENCE_STRING_TRANSCRIPTION_ERROR"
+  },
+  "supersession": {
+    "mode": "APPEND_ONLY",
+    "prior_records_rewritten": false,
+    "supersedes_only": [
+      "predecessor_result.baseline_helper_sha256_statement",
+      "predecessor_body_free_receipt.lineage.baseline_helper_sha256"
+    ],
+    "other_predecessor_claims_changed": false
+  },
+  "historical_prerequisite": {
+    "test_path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_prerequisite_red.py",
+    "test_blob": "b97c42adef45155e80ccee745e9a48ad666f8680",
+    "test_sha256": "fffda42687a77f5f2c1f83d39c96cbf4eb7099438b8c0f7179dacdf5b02ceb14",
+    "manifest_path": "ai/services/ai_inference/emlis_ai_recovery_epoch001_source_baseline_manifest_v3.py",
+    "manifest_blob": "e95967eb35e2d24745d6e9f90e687afb1fcc83b6",
+    "manifest_sha256": "ec6007f5b35fdcc0ec8a330822e4fe9086884dada2415e8557d7f314e2a65127",
+    "bytes_changed": false,
+    "current_run": {
+      "collected": 12,
+      "passed": 10,
+      "historical_drift_failed": 2,
+      "errors": 0,
+      "duration_seconds": 8.25,
+      "failed_nodes": [
+        "test_recovery_epoch001_step5_closed_dependency_guard_is_proved_or_red",
+        "test_recovery_epoch001_step10_versioned_successor_is_proved_or_red"
+      ],
+      "issue_codes": [
+        "RECOVERY_SOURCE_BASELINE_SOURCE_HASH_DRIFT",
+        "RECOVERY_SOURCE_BASELINE_UNLISTED_IMPORTER"
+      ]
+    },
+    "frozen_rc0032_root": "07ffb9ee2015df1cf057a50b69dbbb62e4ebf7b06c3bb9a045db350f1a69bf22",
+    "current_actual_byte_rederivation": "203c23be5b8655230c48871228614689bdc23b5038290ae779724d7dc0df9a1b",
+    "disposition": "HISTORICAL_IMMUTABLE_SUPERSEDED_NOT_EXACT9_GREEN_GATE",
+    "broad_regression_green_claimed": false,
+    "exact9_green_denominator_member": false,
+    "negative_drift_witness_retained": true
+  },
+  "verification": {
+    "recovery_exact15": {
+      "collected": 15,
+      "passed": 9,
+      "causal_failed": 6,
+      "errors": 0,
+      "unexpected": 0,
+      "duration_seconds": 3.51
+    },
+    "step5_exact7": {
+      "collected": 7,
+      "passed": 7,
+      "failed": 0,
+      "errors": 0,
+      "unexpected": 0,
+      "duration_seconds": 10.0
+    },
+    "pytest_cache_provider_disabled": true,
+    "bytecode_cache_outside_repository": true,
+    "tracked_test_write_count": 0
+  },
+  "change_scope": {
+    "mashos_api_changed_paths": [],
+    "exact9_implementation_started": false,
+    "predecessor_records_modified": [],
+    "historical_prerequisite_files_modified": [],
+    "cocolon_append_only_documents": 3,
+    "cocolon_mechanical_current_state_updates": 2
+  },
+  "state": {
+    "g1": "REMAINING_CAUSAL_RED_REFROZEN_NOT_COMPLETED",
+    "g2": "BLOCKED_NOT_AUTHORIZED",
+    "step5": "NOT_COMPLETED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "source_baseline": "UNLOCKED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "next_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_STEP0_10_CANONICAL_CURRENT_CLOSURE_AND_STANDALONE_COMPLETION_PROOF_NONCONFORMANCE_REMEDIATION_POST_IMPLEMENTATION_CURRENT_DEPENDENCY_CLOSURE_ROOT_CONTRACT_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "next_authority_approved": false,
+  "mash_side_file_operation_required": false,
+  "verdict": "PREDECESSOR_EVIDENCE_CORRECTED_AND_REFROZEN_AUTHORITY_STOP"
+}
