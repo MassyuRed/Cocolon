@@ -2695,3 +2695,187 @@ formal exact134, receipt publication, P2, fresh batch, exact100, Product Read,
 correction, B6, or Cycle acceptance.
 
 Automatic progression is false. STOP.
+
+
+## 12.30 2026-07-24 accepted exact134 / sequence ledger / atomic publication contract reconciliation design
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+Fixed entry and no-drift:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `3d91614c5beb73a78b2ebc96b696563ec2f6de4e`
+- mashos-api:
+  `78276950d0d7650968fe938bc63a6e13455a8d6c`
+- mashos-api tree:
+  `e13b8bcfce4d56ab1b25d0a4309326b8cc36eca2`
+- related entry drift:
+  `false`
+
+Shared local context was connected as follows:
+
+- Revised Cycle Detailed Design:
+  132,892 bytes /
+  `6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc`
+- Step 11 Execution and Closure Plan:
+  41,460 bytes /
+  `31682e71ac047ac5f2f329d62ebc51b471bdcb00430a6ab35bcfb934c1438ca7`
+- long-term roadmap:
+  69,980 bytes /
+  `04fb9e4e11af2b1530d03d95d8e959ba644503722f72094a289bde1d4368ce5b`
+
+Detailed Design and Recovery parent remain normative. Local Plan / roadmap are
+navigation and long-term connection material, not execution authority or
+completion evidence.
+
+Confirmed current nonconformances:
+
+1. current accepted owner / independent verifier can accept a semantically
+   consistent non-success run such as 133 pass / 1 failed / exit1;
+2. current event 1 lacks parent-required state, timestamp, prior identity,
+   and evidence artifact path/blob;
+3. current all11 is only `STAGED_NOT_PUBLISHED`, with no parent-compliant
+   event 2 or atomic publisher;
+4. current formal candidate is `nls_v3_rc_0034`; legacy
+   source-baseline-manifest `nls_v3_rc_0032` is not the current event identity;
+5. current connector exposes object creation/non-force ref update, but an
+   expected-old-SHA lease route and base-tree read route have not been proved.
+
+Frozen reconciliation:
+
+1. `accepted=true` means exact134 collected/executed/outcome order,
+   134/134/134 passed, every non-success count 0, exit0, timeout false,
+   exact negative closed codes, clean same-source binding, and full
+   provenance/environment/hash/body-free validity;
+2. a one-shot reservation is published before a formal worker starts;
+   one formal authority token permits exact1 reservation, including when a
+   different challenge is supplied;
+3. failure / timeout / infra outcomes remain body-free attempt STOP history
+   and never produce accepted / Step / all11 / event2 artifacts;
+4. reservation, attempt v2, accepted v2, source-baseline closure receipt v2,
+   common sequence event v2, all11 v2, and atomic manifest v2 literal schemas
+   are fixed;
+5. P0 uses existing parent doc/receipt as
+   `LEGACY_IMMUTABLE_P0_ANCHOR`; no new event0 wrapper or backfill is created;
+6. event container references transition evidence rather than its own Git
+   blob, avoiding cryptographic self-reference;
+7. logical artifact SHA-256, published raw-file SHA-256, and Git blob SHA-1
+   remain separate identities;
+8. event1 is exact2 and event2 is exact15; the supporting exact14
+   path/role/schema/logical-hash mapping is literal;
+9. supporting-set candidate validation, complete-bundle candidate validation,
+   expected-old-SHA ref update, and post-publication validation are separate
+   phases;
+10. publication requires one single-tree/single-commit
+    expected-old-SHA lease with a verified direct-child target. Sequential
+    Contents writes, unleased force, non-descendant updates, and unverified
+    base-tree fallback are forbidden.
+
+Body-free design evidence:
+
+1. design commit `dd9b200cf974d8026c4aeaed5b3154131c67814b`,
+   blob `7e7d454d888141cbdb872244bf6df93c046e0b6c`,
+   SHA-256
+   `8bb377d49f04a33d6d21323a40bcd5ddc0d30eee8d4d2a2700ad7f074e32bb64`;
+2. receipt commit `73a9f77bb2168dabdc8a16bfefa9f262185ea3c0`,
+   blob `76e490ebec6bfeae6029393f293615ed6f500496`,
+   SHA-256
+   `02cbf600c3cea638a4ee00be3518b2999c7ee4166e33992e409b0dd6e2150cfa`;
+3. handoff commit `10a8be7a5fc02f94956a231c646bd4c009254530`,
+   blob `52b8b2a6a9ecd7c198706f598c73b93076595fc3`,
+   SHA-256
+   `1caa954cef5f6b50cbcb5f472dfb476b3a9d3cf81b1726c8781831691bf3d2a1`.
+
+Independent audit:
+
+- read-only subagent exact3;
+- accepted-run, event-ledger, and atomic-publication audits;
+- subagent source edits / tests / commits / GitHub writes:
+  exact0;
+- final residual blocker:
+  exact0 after Karen reconciliation and re-audit.
+
+Execution boundary and current state:
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+BLOCKED_CONTRACT_RECONCILIATION_DESIGN_FROZEN_RED_NOT_AUTHORIZED
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_CONTRACT_STOP
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P1_RETRY003:
+PRE_EVENT1_CONTRACT_NONCONFORMANCE_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+mashos-api source/test/fixture/sample/manifest changes, test runs, formal
+exact134, broad regression, event/receipt issuance, private body, exact100,
+Product Read, correction, and B6 are all exact0 or not run under this
+read-only authority.
+
+Reserved future formal P1 token:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+This token is selected for a future lane but is not approved, active, or
+committed by this record.
+
+Exactly one next separate-approval candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+This candidate freezes only causal RED for one-shot reservation, exact134
+fail-closed acceptance, literal schemas, sequence order, exact2/exact15
+bundles, and expected-old-SHA publication. It does not authorize
+implementation, GREEN, formal P1 token commit, event/receipt issuance, P2,
+fresh batch, exact100, Product Read, correction, B6, or Cycle acceptance.
+
+This section supersedes only the §12.29 next-authority pointer. All predecessor
+evidence, STOP history, parent order, and downstream authority boundaries
+remain immutable. Automatic progression is false. STOP.
