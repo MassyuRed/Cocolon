@@ -1,0 +1,109 @@
+{
+  "artifact_issuance": {
+    "accepted_successful_receipt_count": 0,
+    "all11_completion_chain_count": 0,
+    "atomic_formal_manifest_count": 0,
+    "formal_attempt_count": 0,
+    "formal_reservation_count": 0,
+    "private_body_artifact_count": 0,
+    "sequence_event1_count": 0,
+    "sequence_event2_count": 0,
+    "source_baseline_closure_receipt_count": 0,
+    "step0_10_completion_receipt_count": 0
+  },
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY",
+  "authority_approved": true,
+  "automatic_progression": false,
+  "body_free": true,
+  "broad_regression_run": false,
+  "capability_admission": {
+    "available_github_update_ref_parameters": [
+      "branch_name",
+      "force",
+      "repository_full_name",
+      "sha"
+    ],
+    "base_tree_read_proved": false,
+    "expected_old_sha_lease_proved": false,
+    "full_postfetch_tree_and_blob_proved": false,
+    "local_authenticated_git_receive_pack_available": false,
+    "single_ref_update_proved": true,
+    "required_transport_capabilities": {
+      "base_tree_read": true,
+      "expected_old_sha_lease": true,
+      "single_ref_update": true
+    },
+    "server_result_expected_old_sha_matched_and_updated_observable": false,
+    "source_publication_module_has_transport": false,
+    "stop_code": "PUBLICATION_REF_UPDATE_FAILED_STOP",
+    "stop_position": "PRE_EVENT1",
+    "stop_reason": "EVENT1_ATOMIC_EXPECTED_OLD_SHA_LEASE_TRANSPORT_NOT_PROVED"
+  },
+  "challenge_and_attempt": {
+    "attempt_id_created": false,
+    "authority_challenge_id_created": false,
+    "challenge_id_created": false,
+    "formal_p1_token_committed": false
+  },
+  "cycle001_status": "NOT_ACCEPTED",
+  "entry": {
+    "cocolon_commit_sha1": "bcf9aa225f018dc6cfa3c29cfa9c6792e356e242",
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "mashos_api_commit_sha1": "191e9d8be63132f10f94e2b2f54c6bae94ce1f07",
+    "mashos_api_tree_sha1": "e68df6587b8cb674456b3bc9bceb23e0699f33aa",
+    "related_entry_drift": false
+  },
+  "evidence_class": "BODY_FREE_PRE_EVENT1_PUBLICATION_CAPABILITY_AUTHORITY_STOP",
+  "formal_exact134_run": false,
+  "formal_path_admission": {
+    "existing_fixed_formal_path_count": 0,
+    "fixed_event1_path_count": 2,
+    "fixed_event2_path_count": 15,
+    "fixed_formal_path_checked_count": 17,
+    "published_formal_reservation_artifact_count": 0
+  },
+  "mashos_api_change_count": 0,
+  "next_boundary": {
+    "authenticated_capability_required": "EXPLICIT_EXPECTED_OLD_SHA_API_OR_AUTHENTICATED_GIT_RECEIVE_PACK_EXACT_LEASE",
+    "credentials_in_chat_required": false,
+    "next_formal_retry_authority": "UNSELECTED",
+    "separate_authority_selection_and_approval_required": true
+  },
+  "prohibited_fallbacks_preserved": {
+    "connector_capability_synthesized": false,
+    "sequential_contents_api_used_for_formal_bundle": false,
+    "unleased_force_used": false,
+    "update_ref_force_false_claimed_as_cas": false
+  },
+  "receipt_sha256": "02081d559b5ed75a0c6ceedbcf8f119ab24be5b4ec8d7384b1a1b3f8631d9c8b",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "recorded_on_jst": "2026-07-25",
+  "result_evidence": {
+    "commit_sha1": "e2c20cf993213102243c489eb735d30f50fadce9",
+    "git_blob_sha1": "6cb8f7d7e7226a368be70500adf9cb8be880ec56",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationRetry004Only_PreEvent1PublicationLeaseCapabilitySTOP_ReadOnly_20260725.md",
+    "raw_file_sha256": "03ec7edec2da0d4ab4bf3d9df7ee1482f113e11e7267e197c71b087226b7da4a"
+  },
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.retry004_pre_event1_publication_lease_capability_stop_receipt.v1",
+  "state": {
+    "automatic_progression": false,
+    "cycle001": "NOT_ACCEPTED",
+    "formal_exact134": "NOT_RUN_PRE_EVENT1_LEASE_CAPABILITY_STOP",
+    "formal_p1_token": "APPROVED_BUT_UNCOMMITTED",
+    "g1": "IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED",
+    "g2": "CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_FORMAL_RETRY004_PUBLICATION_TRANSPORT_BLOCKED",
+    "p1_retry004": "PUBLICATION_REF_UPDATE_FAILED_STOP_PRE_EVENT1_NOT_COMPLETED",
+    "p2": "NOT_AUTHORIZED",
+    "source_baseline": "UNLOCKED"
+  },
+  "subagent_audit": {
+    "read_only_subagent_total_count": 3,
+    "subagent_artifact_generation_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "subagent_reservation_count": 0,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0
+  },
+  "verdict": "P1_RETRY004_PRE_EVENT1_EXPECTED_OLD_SHA_LEASE_CAPABILITY_STOP_AUTHORITY_STOP"
+}
