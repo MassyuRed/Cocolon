@@ -18026,3 +18026,169 @@ SEPARATE_EXPLICIT_APPROVAL_ONLY_IF_FORMAL_RETRY004_SHOULD_BEGIN
 This section supersedes only the previous RED-freeze next-lane pointer.
 All predecessor evidence and STOP history remain immutable.
 Automatic progression is false. STOP.
+
+## 2026-07-25 P1 retry004 pre-event1 expected-old-SHA lease capability STOP
+
+### 完了したauthority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY004_ONLY
+```
+
+### 確認した事実
+
+1. fixed entryはKaren-Diary
+   `700f749f5149cac1f8bd4bab8a364d524a56985b`、Cocolon
+   `bcf9aa225f018dc6cfa3c29cfa9c6792e356e242`、mashos-api
+   `191e9d8be63132f10f94e2b2f54c6bae94ce1f07` / tree
+   `e68df6587b8cb674456b3bc9bceb23e0699f33aa`で、related entry
+   driftはなかった。
+2. retry004はpre-event1 publication capability admissionで
+   `PUBLICATION_REF_UPDATE_FAILED_STOP`となった。reasonは
+   `EVENT1_ATOMIC_EXPECTED_OLD_SHA_LEASE_TRANSPORT_NOT_PROVED`である。
+3. frozen designとproduction owner / independent verifierは
+   `base_tree_read=true`、`expected_old_sha_lease=true`、
+   `single_ref_update=true`をexact capabilityとして要求する。
+4. write modeは
+   `SINGLE_TREE_SINGLE_COMMIT_EXPECTED_OLD_SHA_LEASE`、targetはH0の
+   parent exact1 direct child、server observationは
+   `EXPECTED_OLD_SHA_MATCHED_AND_UPDATED`でなければならない。
+5. production atomic-publication moduleは意図的にinertであり、
+   Git transport / ref-writeを持たない。これはD2で凍結契約を実装した
+   事実と整合し、formal transportを実装済みとは意味しない。
+6. available GitHub connectorの`update_ref`は
+   `branch_name / repository_full_name / sha / force`だけを受け取り、
+   explicit `expected_old_sha`またはequivalent expected-head OIDを
+   持たない。
+7. connectorにはformal contractが要求するfull base/target tree readと
+   blob post-fetchのexact surfaceもない。
+8. local environmentは`gh` executable、configured Git remote、
+   credential helper、authenticated Git receive-pack routeを持たない。
+   exact `--force-with-lease=refs/heads/main:<H0>` routeは実行不能だった。
+9. `update_ref(force=false)`をCASと読み替えず、sequential Contents API、
+   synthesized capability、unleased forceをformal publicationへ使用して
+   いない。
+10. design-fixed formal exact17 pathsはCocolon entryで全て不存在だった。
+    published reservation artifactもexact0だった。
+11. challenge、authority-challenge、attempt IDは作成していない。
+    formal P1 tokenはapprovedだがuncommittedである。
+12. event1 exact2、reservation exact1、formal exact134、accepted receipt、
+    Step exact11、all11、manifest、event2 exact15は全て未作成・未実行である。
+13. mashos-api source/test/fixture/sample/manifest changeはexact0である。
+14. result / receipt / handoff commitsは
+    `e2c20cf993213102243c489eb735d30f50fadce9` /
+    `e1762be169a4a74a368478eb6566f6740caaabb7` /
+    `d03423da9f92f9a3c80b81fc2150b791589703b2`である。
+15. result / receipt / handoff blobsは
+    `6cb8f7d7e7226a368be70500adf9cb8be880ec56` /
+    `7e9f71746e88de8ee0838dbefd1ea6a287c2f988` /
+    `a99b1deb5accb610e5d21c758aa57c14fb57ebd4`である。
+16. result / receipt / handoff raw SHA-256は
+    `03ec7edec2da0d4ab4bf3d9df7ee1482f113e11e7267e197c71b087226b7da4a` /
+    `11391a48219e079e77943ad1a9ec067f0b97345a3104d13a83b72f75ebd11e59` /
+    `6f93c5a1c708f0f548bb4e9f37315c4ca20ae99b16105e849d4ba438711d4aed`
+    である。receipt canonical SHA-256は
+    `02081d559b5ed75a0c6ceedbcf8f119ab24be5b4ec8d7384b1a1b3f8631d9c8b`
+    である。
+17. Execution and Closure Plan §12.33 append commit / blobは
+    `2de419ecd0b5b6839e4512f8b7a4a55b22f49057` /
+    `aa386df3e3965d0d3f8a02b0cbe65808923a5bf8`である。
+18. non-root read-only audit exact3がnormative sequencing、runner/interface、
+    publication capabilityを独立確認し、全て同じpre-event1 STOPへ一致した。
+    subagent edit/test/reservation/artifact/commit/GitHub writeはexact0である。
+
+### 推測
+
+1. source側のbundle、owner、independent verifierは実装済みtargeted GREENで
+   ある。一方、unreachable candidateをformal published eventへ変える
+   external transportは現在の華恋environmentから利用できない。
+2. explicit expected-head mutationとfull tree/blob post-fetchをconnectorへ
+   追加するか、authenticated Git receive-pack exact lease routeを提供すれば、
+   future formal admissionは技術的に可能になると推測する。ただし能力は
+   実際のinterfaceとserver observationで確認する必要がある。
+3. event1もreservationも作っていないためformal stateは進行していない。
+   ただしretry004 authorityは今回のSTOPで終了し、後続formal retry tokenは
+   capability確認後に別途選定・承認する必要がある。
+
+### 華恋の意見
+
+fast-forward-only ref updateは通常運用では安全でも、今回のRecovery contractが
+要求するexact expected-head leaseと同じ証明ではない。弱いoperationを同値と
+記録するより、source baselineをUNLOCKED、reservationを0件のまま止める方が
+正しい。
+
+formal-looking partial sequenceを作らなかったことが重要である。event1の
+exact2 publicationを証明できない状態でformal exact134へ進めば、成功しても
+ordered ledgerへ接続できず、今回閉じたretrospective completion riskを再び
+作る。
+
+### 現在状態とSTOP
+
+```text
+STATUS:
+P1_RETRY004_PRE_EVENT1_EXPECTED_OLD_SHA_LEASE_CAPABILITY_STOP_AUTHORITY_STOP
+
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+CONTRACT_RECONCILIATION_IMPLEMENTED_TARGETED_EXACT40_GREEN_FORMAL_RETRY004_PUBLICATION_TRANSPORT_BLOCKED
+
+P1_RETRY004:
+PUBLICATION_REF_UPDATE_FAILED_STOP_PRE_EVENT1_NOT_COMPLETED
+
+FORMAL_P1_TOKEN:
+APPROVED_BUT_UNCOMMITTED
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_TEST_RUN_RESERVATION_COUNT:
+0
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_LEASE_CAPABILITY_STOP
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Mash側で必要なのは、credentialsをchatへ貼ることではなく、次のどちらかを
+華恋environmentから利用可能にすることである。
+
+1. explicit `expected_old_sha` / equivalent expected-head OIDとfull
+   base/target tree・blob post-fetchを持つauthenticated connector/API;
+2. Cocolonへexact
+   `--force-with-lease=refs/heads/main:<H0>`を行えるauthenticated Git
+   receive-pack route。
+
+```text
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+PRECONDITION:
+LEASE_CAPABLE_AUTHENTICATED_GIT_ROUTE_REQUIRED
+
+SEPARATE_AUTHORITY_SELECTION_AND_APPROVAL_REQUIRED_AFTER_CAPABILITY_VERIFICATION
+```
+
+This section supersedes only the previous retry004 next-lane pointer.
+All predecessor evidence and STOP history remain immutable.
+Automatic progression is false. STOP.
