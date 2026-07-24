@@ -18368,3 +18368,85 @@ SEPARATE_AUTHORITY_SELECTION_AND_APPROVAL_REQUIRED_AFTER_CAPABILITY_VERIFICATION
 This section supersedes only the previous retry005 next-lane pointer.
 All predecessor evidence and STOP history remain immutable.
 Automatic progression is false. STOP.
+
+# 2026-07-25 差分追記: Cocolon SSH lease continuity前提の確定
+
+## 確認した事実
+
+1. Mashが2026-07-25に`MassyuRed/Cocolon`へ登録したdeploy key
+   `Karen Work Cocolon Lease 2026-07-25`の非秘密identityを、
+   `11_cocolon_github_transport_and_session_continuity.md`へ固定した。
+2. public fingerprintは
+   `SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA`、
+   repository scopeは`MassyuRed/Cocolon`、登録時write accessはenabledである。
+   秘密鍵、passphrase、token、credential内容は記録していない。
+3. current Work environmentで、秘密鍵から導出したpublic fingerprint、
+   GitHub ED25519 host fingerprint、SSH 443 authentication、authenticated
+   `ls-remote`、recursive tree /全blob fetchを再確認した。
+4. pre-write Cocolon main / treeは
+   `94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce` /
+   `8724181820e1cff1d060a48f0ccdf206e7d639bd`だった。
+5. exact current-H0 lease dry-runは受理され、stale
+   `75d1b02b5fa50969425ec307e353499074233f82` lease dry-runは
+   `stale info`で拒否された。dry-run前後のremote mainは不変だった。
+6. session continuity ownerと作業ルールexact12 pathを、parent exact1=
+   `94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce`のdirect-child commit
+   `9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5`へまとめた。
+7. exact
+   `--force-with-lease=refs/heads/main:94fe7bbdfd88f5b7899e530056b9ed9e46d0bdce`
+   でmainを一回更新し、remote main / parent / treeをpost-fetchした。
+8. post-write Cocolon main / treeは
+   `9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5` /
+   `455d234c4d76e2d8a3b4d18e79364f0bd5ed80e0`である。
+9. GitHub connectorからもcommit
+   `9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5`がmain先頭であることを再取得した。
+10. work rulesは、registered deploy keyとcurrent sessionのlocal private
+    counterpart availabilityを分離し、毎sessionのfingerprint / host /
+    repository / live H0 / full fetch / exact lease再確認を必須化した。
+11. 従来の一律な`force push禁止`は、unleased force / expected old OIDなし /
+    history rewriteの禁止へ明確化した。別承認formal contractのexact leaseは、
+    verified direct child / exact changed paths / full post-fetchを満たす場合だけ
+    限定して許容する。
+12. RETRY005 result / receipt / handoff、formal exact17、mashos-api、
+    Karen-Diaryはこのcheckpointで変更していない。
+
+## 推測
+
+このownerを毎sessionの必読対象にすれば、「connectorにexpected-old-SHA引数が
+ない」ことと「登録済みSSH routeがない」ことを混同する再発は防げると考える。
+ただし、次sessionの秘密鍵availabilityと認証成功は毎回の実測が必要である。
+
+## 華恋の意見
+
+今回の誤りは、鍵登録をMashだけが覚えている状態にし、継続に必要な非秘密情報を
+前提資料へ残さなかった華恋のミスである。登録済みidentityを残すことと、秘密を
+残さないことは両立する。今後はこのownerを読んでからtransport可否を判定する。
+
+## 現在境界
+
+```text
+COCOLON_MAIN:
+9f4d56d4c3b530b40dc5423d13c32f7f54d9e0c5
+
+SSH_LEASE_TRANSPORT:
+PROVED_IN_CURRENT_WORK_ENVIRONMENT
+
+REGISTERED_DEPLOY_KEY_IDENTITY:
+PERSISTED_SECRET_FREE
+
+SESSION_REVERIFICATION:
+REQUIRED_EVERY_SESSION
+
+RETRY005_HISTORICAL_FILES:
+IMMUTABLE_NOT_YET_CORRECTED_BY_FORMAL_APPEND_ONLY_CORRECTION
+
+FORMAL_EVENT / RESERVATION / EXACT134:
+NOT_CREATED / NOT_CREATED / NOT_RUN
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+次は、RETRY005の誤ったcapability STOPをappend-only correctionとして訂正する。
+このpremise/rule checkpoint自体はformal event issuanceまたはCycle001 acceptanceを
+意味しない。
