@@ -2557,3 +2557,141 @@ It preserves all predecessor evidence, causal RED history, protected bytes,
 baseline/event order, and downstream STOP boundaries. Automatic progression
 is false. STOP.
 
+
+
+## 12.29 2026-07-24 retry003 pre-event1 ledger / publication contract STOP
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY003_ONLY
+```
+
+Fixed pre-write entry and no-drift:
+
+- Karen-Diary:
+  `700f749f5149cac1f8bd4bab8a364d524a56985b`
+- Cocolon:
+  `77e6523c350cc685882e77b6b4409b1e7f9a9fe8`
+- mashos-api:
+  `78276950d0d7650968fe938bc63a6e13455a8d6c`
+- related pre-write drift:
+  `false`
+
+The selected formal P1 token remained uncommitted in the exact3 authority
+gates. The three GitHub blobs remained:
+
+- accepted-run owner:
+  `66fbb62b02fcab4ac9817cbfe90bb67126144a8d`
+- proof runner:
+  `0da03f9854934f87e8d0dae41d97f3ef8dceebf7`
+- independent verifier:
+  `d70c217e6f83148c2d0db4fe9e1e1f793e687158`
+
+Clean current-commit verification on mashos-api
+`78276950d0d7650968fe938bc63a6e13455a8d6c`:
+
+```text
+reconciliation owner / closure:
+25 collected / 25 passed
+
+Step 0..10 independent negative:
+11 collected / 11 passed
+
+targeted total:
+36 / 36 passed
+```
+
+One unrelated Pydantic v1 root-validator deprecation warning was present.
+Formal exact134 and broad regression were not run or claimed.
+
+Pre-event1 admission found three contract nonconformances:
+
+1. current event 1 does not carry every parent sequence-ledger §10 field,
+   including state, timestamp, prior-event identity, and body-free artifact
+   path / blob;
+2. accepted-run owner and independent verifier do not fail closed on the full
+   exact134 success / all-zero condition;
+3. current all11 owner returns only `STAGED_NOT_PUBLISHED`, and no compliant
+   event 2 / atomic Git publication owner exists.
+
+Therefore retry003 stopped before token commit and before sequence event 1.
+No mashos-api source changed, the source baseline remained unlocked, and no
+formal-run or Step 0–10 completion receipt was issued.
+
+Body-free STOP evidence:
+
+1. result commit `75874a6d73c655efd17ef25d5faa736a6f275bed`,
+   blob `0ababf0f013366a4d73491eeb36deec7e850a16a`,
+   SHA-256
+   `9c61d0f6d5de55830b94bff91b6c141efc70bf6e85e63e2fe943c2884f81c190`;
+2. receipt commit `d6f53c328f791b1812af54abfcc968a627337d5a`,
+   blob `4443bb670735fa37b0b13c3b22ae180efbe2d2e0`,
+   SHA-256
+   `5667ceb2169cf68deb1a8147a2670ef5c6b9871fb92609b4701e829db383464a`;
+3. handoff commit `9f4459447b1bbe4e8c3700ddd691995faa64eb82`,
+   blob `9458283c45df6e87bbaf14731e9ab97269bbfa34`,
+   SHA-256
+   `474b787ea52cc9359d2bc225a0398c9708e100e90a1c4c312854d6c82b33766d`.
+
+Current state:
+
+```text
+G1:
+IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED
+
+G2:
+BLOCKED_PRE_EVENT1_PROOF_LEDGER_PUBLICATION_CONTRACT_NONCONFORMANCE
+
+STEP5:
+TARGETED_EXACT7_GREEN_FORMAL_COMPLETION_NOT_COMPLETED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SEQUENCE_EVENT_1 / SEQUENCE_EVENT_2:
+NOT_CREATED / NOT_CREATED
+
+FORMAL_EXACT134:
+NOT_RUN_PRE_EVENT1_CONTRACT_STOP
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P1_RETRY002:
+ADMISSION_STOPPED_NOT_COMPLETED
+
+P1_RETRY003:
+PRE_EVENT1_CONTRACT_NONCONFORMANCE_STOPPED_NOT_COMPLETED
+
+FUTURE_P1 / P2:
+NOT_AUTHORIZED / NOT_AUTHORIZED
+
+FRESH_BATCH:
+RESERVED_NOT_CREATED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+Exactly one next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_SEQUENCE_EVENT1_EVENT2_SHAREABLE_LEDGER_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+This candidate may only reconcile the read-only design for the exact134
+accepted-success contract, parent-compliant event 1 / event 2 shareable
+ledger, body-free artifact identities, atomic all11 publication, exact
+Cocolon paths, and future RED / implementation / formal-retry separation.
+It does not authorize source/test changes, token commit, event issuance,
+formal exact134, receipt publication, P2, fresh batch, exact100, Product Read,
+correction, B6, or Cycle acceptance.
+
+Automatic progression is false. STOP.
