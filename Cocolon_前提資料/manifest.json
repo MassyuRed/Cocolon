@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-07-21",
+  "revision_date": "2026-07-25",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -15493,6 +15493,35 @@
     "work_attitude_rules_for_karen/00_read_first.txt",
     "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
     "work_attitude_rules_for_karen/04_forbidden_mixing_design_and_implementation.txt",
+    "work_attitude_rules_for_karen/08_artifact_delivery_rules.txt",
+    "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+    "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+    "work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
+    "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+    "work_attitude_rules_for_karen/manifest.json"
+  ],
+  "github_transport_session_continuity_2026_07_25": {
+    "reflected": true,
+    "owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "repository_scope": "MassyuRed/Cocolon",
+    "deploy_key_title": "Karen Work Cocolon Lease 2026-07-25",
+    "key_algorithm": "ssh-ed25519",
+    "public_key_sha256_fingerprint": "SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA",
+    "write_access_registered": true,
+    "ssh_endpoint": "ssh.github.com:443",
+    "github_ed25519_host_key_sha256_fingerprint": "SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU",
+    "private_key_material_recorded": false,
+    "session_reverification_required": true,
+    "missing_local_private_counterpart_does_not_negate_registered_identity": true,
+    "exact_lease_scope": "approved formal contract only; exact ref and H0; verified direct child; exact changed paths; full post-fetch"
+  },
+  "latest_modified_premise_files_2026_07_25_github_transport_continuity": [
+    "00_karen_read_first.md",
+    "05_cocolon_rule_file_index.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/00_read_first.txt",
+    "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
     "work_attitude_rules_for_karen/08_artifact_delivery_rules.txt",
     "work_attitude_rules_for_karen/09_work_start_checklist.txt",
     "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",

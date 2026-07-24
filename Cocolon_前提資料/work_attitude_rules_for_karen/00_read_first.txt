@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-07-23
+revision_date: 2026-07-25
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 
@@ -81,13 +81,18 @@ Cocolonがリリースできて、売れる商品品質に届かなければ、�
 33. GitHub直接反映は、Mash様が対象checkpointまたは対象成果物を明示承認した後だけ行う。
 34. 書込直前に`Cocolon` / `mashos-api`のHEAD、指定predecessor、対象pathの存在・blob、local / ZIPのSHA-256を再確認する。
 35. ZIPの`repository/`は`mashos-api` repository rootへ、`documents/`は`Cocolon/EmlisAIの実装済み資料/documents/`へ対応させる。前提方針は`Cocolon/Cocolon_前提資料/`の既存ownerへ差分更新する。
-36. 承認済みexact path以外、force push、削除、無関係な整形・rename・production変更を混ぜない。
+36. 承認済みexact path以外、unleased force、expected old OIDを省略したforce-with-lease、history rewrite、削除、無関係な整形・rename・production変更を混ぜない。別承認されたformal contractが要求するexact `--force-with-lease=refs/heads/main:<H0>`は、verified direct child / exact changed paths / full post-fetchを満たす場合だけ禁止対象から除く。
 37. 反映後はrepositoryごとのcommit SHAとexact pathをMash様へ報告し、GitHub commitと`Cocolon_前提資料/07_latest_snapshot_diff.md`をcurrent authorityとして扱う。GitHub反映と反映後確認に成功した場合、成果物ZIPは作成・提出しない。
 38. HEAD drift、hash不一致、既存targetとの意味衝突、権限不足、承認外変更の必要が一つでもあればwrite前に停止する。
 39. 作業成果のGitHub反映と反映後確認が完了するごとに、`Cocolon_前提資料/07_latest_snapshot_diff.md`のcurrent authorityを同じcheckpointの小さい差分として更新する。
 40. 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新する。単なるHEAD前進だけでは更新しない。
 41. phase、RC、release gate等の節目では、全前提資料のsource参照、相互link、current status、重複・historical表記を全体監査する。
 42. GitHubへ反映できなかった場合だけ、新規・修正fileに限定した成果物ZIPを提出する。未変更fileや全量repositoryは含めない。
+43. GitHub transport可否を判断する前に、`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`の登録済み非秘密identityを確認する。
+44. 登録済みdeploy keyとcurrent sessionの秘密鍵availabilityを分離し、秘密鍵未発見だけで登録route不存在と断定しない。
+45. 毎session、秘密鍵から導出した公開fingerprint、GitHub host identity、exact repository、live H0、full fetch、exact leaseを再確認する。
+46. 秘密鍵、passphrase、token、credential内容を前提資料、GitHub、Library、chat、receipt、logへ記録しない。
+47. dry-run成功をformal ref update成功へ、normal fast-forwardをexpected-old-SHA CASへ読み替えない。
 
 
 # 毎回の作業前に華恋が見るべき順序
@@ -96,7 +101,7 @@ Cocolonがリリースできて、売れる商品品質に届かなければ、�
 2. `09_work_start_checklist.txt`
 3. `14_cocolon_joint_development_and_karen_thought_boundary.txt`
 4. `15_trust_based_joint_development_boundary_2026_06_05.txt`
-5. Cocolon_前提資料の READ_FIRST / `07_latest_snapshot_diff.md` current authority / 命名体系 / 名称混在資料 / 思想資料 / 共同開発境界資料
+5. Cocolon_前提資料の READ_FIRST / `07_latest_snapshot_diff.md` current authority / `11_cocolon_github_transport_and_session_continuity.md` / 命名体系 / 名称混在資料 / 思想資料 / 共同開発境界資料
 6. EmlisAI作業では `emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md`
 7. GitHub上の `Cocolon` / `mashos-api` current headと、設計・handoffが指定するpredecessor commit
 8. 固定commit上の対象実ファイル。local checkout / ZIP / copyを使う場合はpath / blob / hash一致を確認する

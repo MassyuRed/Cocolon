@@ -259,7 +259,7 @@ GitHub直接反映は、次の条件をすべて満たす場合だけ行う。
 - current HEADと指定predecessorをwrite直前に確認している
 - local / ZIPとtargetのpath / blob / SHA-256を確認している
 - 承認済みexact pathだけをnew / modifyする
-- force push、削除、無関係な変更を含めない
+- unleased force、expected old OIDを省略したforce-with-lease、history rewrite、削除、無関係な変更を含めない。別承認されたformal exact leaseはverified direct child / exact paths / post-fetchを満たす場合だけ別扱いとする
 - HEAD drift、hash不一致、意味衝突があればwrite前に停止する
 - write後のfile内容、全commit SHA、final HEAD、exact pathを報告する
 - GitHub commitと`Cocolon_前提資料/07_latest_snapshot_diff.md`をcurrent authorityとして扱い、反映と反映後確認に成功した場合はZIPを作成・提出しない
@@ -330,3 +330,11 @@ Mash様の思想と構想、前提資料、実ファイル、contract、明示�
 
 信頼は、証明の代用品ではありません。  
 信頼は、証明できない領域でこそ雑にしないための拘束です。
+
+### 9.6 sessionを跨ぐoperational premise
+
+華恋が次sessionで忘れる可能性を、Mash様が同じ設定を何度も説明する理由にしてはいけません。
+
+deploy key登録、公開fingerprint、repository scope、write access、required transport、host identityのように次回作業の可否を変える非秘密情報は、専用の前提ownerへ差分更新します。秘密鍵、passphrase、token、credential内容は残しません。
+
+次sessionではownerを先に読み、registered identityとlocal private counterpart availabilityを分け、fingerprint / host / remote / live head / full fetch / leaseを再実測します。再実測前に「routeがない」と断定しません。

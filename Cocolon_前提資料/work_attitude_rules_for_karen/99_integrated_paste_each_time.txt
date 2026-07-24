@@ -72,12 +72,18 @@ Cocolon作業前に必ず読むルール（統合版）
 61. 現行実装の確認元は原則GitHubの`Cocolon` / `mashos-api`で、作業開始時にpredecessor commitを固定する。そこからmaterializeしたlocal checkout / ZIP / copyはpath / blob / hash一致時に同じ実ファイルであり、別仕様として扱わない。不一致時だけ差分を示して停止する。
 62. GitHub直接反映は、Mash様が対象checkpointまたは成果物を明示承認した後だけ、華恋が自分の作業手段として行う。
 63. ZIPの`repository/`は`mashos-api` root、`documents/`は`Cocolon/EmlisAIの実装済み資料/documents/`へ対応させ、前提差分は`Cocolon_前提資料/`の既存ownerへ反映する。
-64. write直前にHEAD、predecessor、path、blob / SHA-256、new / modifyを確認し、承認外path、force push、削除、無関係な変更を行わない。HEAD driftや不一致があれば停止する。
+64. write直前にHEAD、predecessor、path、blob / SHA-256、new / modifyを確認し、承認外path、unleased force、expected old OIDなしのforce-with-lease、history rewrite、削除、無関係な変更を行わない。別承認formal exact leaseはverified direct child / exact paths / post-fetchを満たす場合だけ別扱いとする。HEAD driftや不一致があれば停止する。
 65. write後はGitHub上のfile内容を再確認し、全commit SHA、final HEAD、exact pathを報告する。GitHub commitと`Cocolon_前提資料/07_latest_snapshot_diff.md`をcurrent authorityとして扱い、成功時はZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、新規・修正file限定ZIPを提出する。
 66. 作業成果のGitHub反映と反映後確認が完了するごとに、`Cocolon_前提資料/07_latest_snapshot_diff.md`のcurrent authorityを同じcheckpointの小さい差分として更新する。
 67. 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新する。単なるHEAD前進だけでは更新しない。
 68. phase、RC、release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 69. subagentは、独立確認・並列化が実質的に有効なら活用し、有効でない場合または実行枠を利用できない場合は強制しない。利用できず華恋単体でも要求品質を維持できない場合はSTOPする。subagent利用自体を成果にせず、必要な独立確認を省略しない。
+70. GitHub transport可否を判断する前に、`11_cocolon_github_transport_and_session_continuity.md`の登録済み非秘密identityを確認する。
+71. registered deploy keyとcurrent sessionのlocal private counterpart availabilityを分け、秘密鍵未発見だけで登録route不存在と断定しない。
+72. 毎session、秘密鍵から導出した公開fingerprint、GitHub host、exact repository、live H0、full fetch、exact leaseを再確認する。
+73. 秘密鍵、passphrase、token、credential内容をrepo、前提資料、Library、chat、artifact、logへ残さない。
+74. dry-run成功、normal fast-forward、connector write permissionをformal expected-old-SHA update成功へ読み替えない。
+75. formal exact leaseはexact ref / H0 / verified direct child / exact changed paths / full post-fetchを全て満たす場合だけ使い、通常writeやhistory rewriteへ一般化しない。
 
 出力前テンプレ:
 

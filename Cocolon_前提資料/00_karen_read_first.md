@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-07-21"
+revision_date: "2026-07-25"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -7640,3 +7640,13 @@ P2 forward ownerとrc0031 Catalogはsource treeへ追加済みですが、`exper
 6. VerifiedBaseReuseComposition GREEN handoff / receipt
 7. P2 Freeze handoff / receipt
 8. 2026-07-20 Session Handoffは履歴navigation
+
+# 2026-07-25 差分追記: Cocolon GitHub transport / session continuity
+
+formal GitHub反映またはGitHub transport可否を判断する作業では、`07_latest_snapshot_diff.md`に加えて`11_cocolon_github_transport_and_session_continuity.md`を必読ownerとします。
+
+同ownerには、登録済みCocolon deploy keyの非秘密identity、repository scope、write access、GitHub SSH 443 endpoint、host fingerprint、sessionごとの再確認手順を記録します。秘密鍵、passphrase、token、credential内容は記録しません。
+
+登録済みdeploy keyと、current sessionで秘密鍵を実際に利用できることは別の事実です。session開始時にfingerprint、host、exact repository、live head、full fetch、exact expected-old-SHA leaseを実測します。current sessionの秘密鍵をまだ発見できないだけで、登録済みrouteそのものを「存在しない」と断定しません。
+
+formal contractが要求する`--force-with-lease=refs/heads/main:<H0>`は、exact `H0`、verified direct child、exact changed paths、post-fetchを全て固定した場合だけ使用できます。これは通常のforce pushやhistory rewriteの許可ではありません。

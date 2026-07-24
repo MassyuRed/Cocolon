@@ -69,7 +69,7 @@ Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した
 ### write時
 
 - 承認済みexact path以外を変更しない
-- force push、削除、無関係なrename・整形・production変更をしない
+- unleased force、expected old OIDを省略したforce-with-lease、history rewrite、削除、無関係なrename・整形・production変更をしない
 - repositoryごとに一つの目的へ変更をまとめることを原則とする
 - 使用機能の制約でcommitが分かれる場合は、同一の連続head chainで反映し、途中に別headが入ったら停止する
 - historical handoffの当時の境界・記録は履歴として変更しない
@@ -90,6 +90,14 @@ Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した
 - `01` / `02` / `03` / `04` / `05` / `06` / `09`等の構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新する
 - 単なるHEAD前進だけでは構造資料を更新しない
 - phase、RC、release gate等の節目では、全前提資料のsource参照、相互link、current status、重複・historical表記を全体監査する
+
+### formal exact expected-old-SHA leaseの限定
+
+本ルールで禁止するforceは、`--force`、expected old OIDを明示しない`--force-with-lease`、non-direct-child target、または承認外ref rewriteです。
+
+別承認されたformal contractが要求し、exact ref、live exact `H0`、parent exact1=`H0`のverified direct-child target、exact changed paths、push直前head再確認、full post-fetchを全て固定した`--force-with-lease=refs/heads/main:<H0>`は、この禁止対象へ含めません。
+
+この例外はformal CAS transactionだけです。通常write、history rewrite、unleased forceへ一般化しません。lease mismatch / head drift時はrefを変更せずSTOPします。
 
 ## 提出前チェック
 

@@ -17,6 +17,7 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - `02_cocolon_national_system.md` 系
 - `05_cocolon_rule_file_index.md`
 - `07_latest_snapshot_diff.md`
+- GitHub transportを使う作業では`11_cocolon_github_transport_and_session_continuity.md`
 - GitHub上の`Cocolon` / `mashos-api` current head、固定predecessor commit、対象実ファイル
 - local checkout / ZIP / copyを使う場合、そのpath / blob / hashが固定GitHub commitと一致すること
 - 必要なログ / スクリーンショット / テスト結果
@@ -61,3 +62,11 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - phase、RC、release gate等の節目では、全前提資料のsource参照・相互link・current status・重複・historical表記を全体監査する。
 - GitHub反映と反映後確認に成功した場合はZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、修正・新規fileに限定したZIPを渡す。
 - 作業報告や残タスクを前提資料に混ぜない。
+
+## 2026-07-25 差分追記: session continuity情報
+
+- deploy key登録・rotation・scope・write access・公開fingerprint・required transport・host identityが作業継続へ必要になった時は、秘密情報を除いたcontinuity ownerを同checkpointで差分更新する。
+- 秘密鍵、passphrase、token、credential内容、agent socket、環境変数値、traceは前提資料へ残さない。
+- registered public identityとcurrent sessionのlocal private counterpart availabilityを別field / 別事実として扱う。
+- current sessionで秘密鍵候補を未発見でも、登録identityの記録を読まずに「routeなし」と断定しない。
+- sessionが変わったら以前の認証成功を継承せず、fingerprint / host / remote / live H0 / full fetch / exact leaseを再実測する。

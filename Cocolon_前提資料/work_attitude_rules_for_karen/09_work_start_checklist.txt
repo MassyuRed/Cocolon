@@ -144,7 +144,7 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 - [ ] local / ZIPのSHA-256とtarget内容を確認したか
 - [ ] `repository/`と`documents/`の反映先mappingが既存構成と一致するか
 - [ ] exact pathごとにnew / modifyを確認したか
-- [ ] force push、削除、無関係な変更を含めていないか
+- [ ] unleased force、expected old OIDなしのforce-with-lease、history rewrite、削除、無関係な変更を含めていないか
 - [ ] 途中でHEAD driftが起きた場合に停止できるか
 - [ ] write後に対象fileを再取得して内容一致を確認したか
 - [ ] 全commit SHA、final HEAD、exact pathをMash様へ報告できるか
@@ -171,3 +171,22 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 - [ ] 実行枠を利用できず、華恋単体で要求品質を維持できない場合にSTOPできるか
 
 subagent利用は必要性に基づく華恋の作業手段であり、利用自体を成果としない。必要な独立確認を省略せず、不要な分割も増やさない。
+
+## N. GitHub SSH transport / session continuityチェック
+
+- [ ] `11_cocolon_github_transport_and_session_continuity.md`のdeploy key title、algorithm、public fingerprint、repository scope、write accessを確認したか
+- [ ] registered public identityとcurrent sessionのlocal private counterpart availabilityを分けたか
+- [ ] 秘密鍵内容を表示せず、導出公開鍵fingerprintがowner記録とexact一致したか
+- [ ] private key fileのgroup / other permissionが0か。0400 / 0600等のowner-onlyか
+- [ ] 秘密鍵、passphrase、token、環境変数値、agent socket、traceをrepo / Library / chat / artifact / logへ残していないか
+- [ ] verified known_hosts、`BatchMode=yes`、`IdentitiesOnly=yes`、`StrictHostKeyChecking=yes`を使ったか
+- [ ] remoteがexact `ssh://git@ssh.github.com:443/MassyuRed/Cocolon.git`か
+- [ ] authenticated `ls-remote`のmain OIDが固定したlive `H0`とexact一致したか
+- [ ] `H0`のcommit / base tree / recursive tree /全blobを取得できたか
+- [ ] receive-pack / lease dry-runを、server-side actual update成功やpost-fetch成功と混同していないか
+- [ ] actual formal writeはexact ref / exact `H0` / verified direct child / exact changed pathsを固定したか
+- [ ] actual push直前にlive head=`H0`を再確認し、exact `--force-with-lease=refs/heads/main:<H0>`を使うか
+- [ ] actual push後にremote head / parent / tree / exact changed paths /全対象bytes・blob・hashをpost-fetchするか
+- [ ] session変更、credential handle消失、fingerprint / key / title / scope変更後に以前の確認を継承せず再確認したか
+
+このcheckを通す前に「認証routeなし」と断定しない。登録identityはあるがlocal private counterpartを利用できない場合、その二つを分けてSTOPする。

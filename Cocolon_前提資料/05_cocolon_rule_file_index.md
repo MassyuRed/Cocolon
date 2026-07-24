@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-07-21"
+revision_date: "2026-07-25"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -3125,6 +3125,18 @@ file-level current deltaは`eai720_diff.csv`です。GitHub compare 235 pathの�
 | `work_attitude_rules_for_karen/08_artifact_delivery_rules.txt` | GitHub成功時ZIPなし、GitHub transport不能時だけ変更file限定ZIP |
 | `work_attitude_rules_for_karen/09_work_start_checklist.txt` | write前後確認と前提資料更新check |
 | `work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt` | drift / conflictをZIPで迂回しない停止境界 |
+
+# 2026-07-25 差分追記: GitHub transport / session continuity owner
+
+| owner | responsibility |
+|---|---|
+| `11_cocolon_github_transport_and_session_continuity.md` | 登録済みCocolon deploy keyの非秘密identity、repository scope、SSH 443 / host identity、sessionごとの認証・full fetch・exact lease再確認 |
+| `07_latest_snapshot_diff.md` | 当該checkpointで実測したtransport capabilityと、formal authorityへの影響をsecret-freeで差分記録 |
+| `work_attitude_rules_for_karen/08_artifact_delivery_rules.txt` | unleased force / history rewriteと、承認済みexact expected-old-SHA leaseを区別 |
+| `work_attitude_rules_for_karen/09_work_start_checklist.txt` | credential fingerprint、host、remote、live H0、fetch、receive-pack / lease preflightをsessionごとに再確認 |
+| `work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt` | credential露出、fingerprint / host / repository不一致、認証失敗、lease拒否、post-fetch不能時のSTOP |
+
+Karen-DiaryはCocolon transport前提の正本ではありません。秘密情報を残さず、Cocolon作業のcontinuityは上記ownerで復元します。
 
 ## rc0031 current gate
 
