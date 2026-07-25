@@ -107,6 +107,39 @@ recursive blob count:
 
 この確認でReplacement 01の認証、repository scope、registered write capability、current bytes取得までは成立しました。formal exact lease更新、server-side main更新、post-fetch、formal completionは別の確認対象です。
 
+# 2026-07-25 Replacement 01による最初のformal exact lease publish成立
+
+上記観測の後、Mash様が承認した前提資料・作業ルールcheckpointを、同じcurrent sessionのReplacement 01 routeでformal publishした。
+
+```text
+expected old main:
+f3e2e405e2536188ee4d166753f1a823afd99e0b
+
+published direct child:
+f04343129ac927639d7d0a5e1b8d52731e0e0a68
+
+published tree:
+fbeb6b7273640c348259c65c19273826b9bface8
+
+changed path count:
+10
+
+recursive blob count after post-fetch:
+845
+```
+
+確認結果:
+
+- write直前のremote mainはexpected old mainとexact一致した。
+- `--force-with-lease=refs/heads/main:f3e2e405e2536188ee4d166753f1a823afd99e0b`で、verified direct childだけを`main`へ反映した。
+- server-side mainは`f04343129ac927639d7d0a5e1b8d52731e0e0a68`へ更新された。
+- post-fetch後のremote commit、parent exact1、tree、exact 10 changed pathsはlocal publish対象と一致した。
+- exact 10 pathsのremote blob SHA-1、local blob SHA-1、local bytesを照合し、blob SHA-1は全件一致した。
+- recursive 845 blobは全て取得済みで、missing / corrupt objectを検出しなかった。
+- GitHub connectorでもpublished commit上のowner fileを取得し、expected blobを確認した。
+
+この節はReplacement 01が2026-07-25 current sessionでformal exact lease routeとして実際に成立した証拠である。将来sessionのprivate counterpart利用可能性、認証成功、live main、lease成立を保証しない。将来のwriteは毎回、下記のsession開始手順とexact lease contractを再実行する。
+
 # session開始時の必須手順
 
 1. このownerと`07_latest_snapshot_diff.md`の最新追記を先に読む。

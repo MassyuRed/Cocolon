@@ -19558,3 +19558,65 @@ ACCEPTED / ACTUAL REF NOT CREATED
 5. その後、別checkpointとしてRecovery Epoch 002 parent designの成立条件を確認する。
 
 自動進行しない。
+
+# 2026-07-25 差分追記: Replacement 01による最初のformal exact lease publish完了
+
+## 確認済み
+
+前節の前提資料・作業ルールcheckpointは、Replacement 01を用いたexact expected-old-SHA leaseでCocolon `main`へ反映された。
+
+```text
+expected old main:
+f3e2e405e2536188ee4d166753f1a823afd99e0b
+
+published direct child:
+f04343129ac927639d7d0a5e1b8d52731e0e0a68
+
+published tree:
+fbeb6b7273640c348259c65c19273826b9bface8
+
+changed paths:
+Cocolon_前提資料/00_karen_read_first.md
+Cocolon_前提資料/05_cocolon_rule_file_index.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/manifest.json
+Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json
+
+recursive blobs after post-fetch:
+845 / 845 present
+```
+
+post-fetchでremote main、parent exact1、tree、exact changed paths、全10対象のblob SHA-1、local bytes由来SHA-1、recursive object completenessを確認した。GitHub connectorでもpublished commit上のowner fileを取得した。private key本文、保存path、public key本文、credential traceはrepositoryへ記録していない。
+
+## 未確認
+
+- Recovery Epoch002 parent designの設計commit、body-free receipt、handoff反映。
+- Epoch002の新release-candidate ID。
+- Recovery Epoch002 D1 RED、D2 implementation、formal event1以降。
+
+## 書かれていない
+
+- 秘密鍵本文、秘密鍵保存path、passphrase、token、credential trace。
+- 旧deploy keyの削除・失効判断。
+- Epoch002 D1 RED以降の開始許可。
+
+## 推測禁止
+
+- current sessionの成功を将来sessionのtransport成功として無検証継承しない。
+- このpremise checkpoint成立を、Epoch002 parent designまたは後続実装の成立へ読み替えない。
+- exact leaseの`force`表記をhistory rewrite許可へ読み替えない。
+
+## 次に実行すべきこと
+
+承認済みauthority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY
+```
+
+の範囲だけで、Epoch001 invalidation decisionとRecovery Epoch002 parent designをbody-freeに確定する。D1 RED、D2 implementation、new source-baseline event、reservation、formal attemptは開始しない。

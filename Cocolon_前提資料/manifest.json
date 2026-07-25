@@ -15539,6 +15539,25 @@
     "session_reverification_required": true,
     "exact_lease_scope": "approved formal contract only; exact ref and H0; verified direct child; exact changed paths; full post-fetch"
   },
+  "github_transport_session_continuity_replacement01_first_formal_publish_2026_07_25": {
+    "reflected": true,
+    "owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "repository_scope": "MassyuRed/Cocolon",
+    "deploy_key_title": "Karen Work Cocolon Lease 2026-07-25 Replacement 01",
+    "expected_old_main_sha1": "f3e2e405e2536188ee4d166753f1a823afd99e0b",
+    "published_direct_child_sha1": "f04343129ac927639d7d0a5e1b8d52731e0e0a68",
+    "published_tree_sha1": "fbeb6b7273640c348259c65c19273826b9bface8",
+    "changed_path_count": 10,
+    "recursive_blob_count": 845,
+    "main_exact_expected_old_lease_verified": true,
+    "formal_publish_verified": true,
+    "post_fetch_remote_head_parent_tree_and_paths_verified": true,
+    "target_blob_sha1s_verified": true,
+    "complete_blob_fetch_confirmed": true,
+    "private_key_material_recorded": false,
+    "public_key_body_recorded": false,
+    "session_reverification_required": true
+  },
   "latest_modified_premise_files_2026_07_25_github_transport_continuity": [
     "00_karen_read_first.md",
     "05_cocolon_rule_file_index.md",
