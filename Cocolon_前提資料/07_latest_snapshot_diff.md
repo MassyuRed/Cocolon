@@ -19620,3 +19620,183 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERV
 ```
 
 の範囲だけで、Epoch001 invalidation decisionとRecovery Epoch002 parent designをbody-freeに確定する。D1 RED、D2 implementation、new source-baseline event、reservation、formal attemptは開始しない。
+
+# 2026-07-25 差分追記: Recovery Epoch001 invalidationとRecovery Epoch002 P0 parent design閉鎖
+
+## 確認済み
+
+承認authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY
+```
+
+Parent design:
+
+```text
+commit:
+832a93becb7795f2a3f1f4110d75ae03e9444ef4
+
+parent exact1:
+575e7e91a7510507e677159e59f7c378ed681b07
+
+tree:
+b772b86ced57d3f02676ac4f115430de53c3da54
+
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_20260725.md
+
+blob:
+af00c5c4a49207fb94108afbf383ea0e830620ae
+
+raw SHA-256:
+8b6564442d69fea1b38cb59ea3c5302874e6f92f87bfd5ce0728985094739829
+```
+
+Body-free receipt:
+
+```text
+commit:
+149fb1e9156d245d8399a4bb3bf7a6f202099a56
+
+parent exact1:
+832a93becb7795f2a3f1f4110d75ae03e9444ef4
+
+tree:
+ea99d57603660849b186322800f6b27d3a97e0cb
+
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_BodyFree_Receipt_20260725.json
+
+blob:
+25081708104ba208c54887e53ed2d2c34c1d175e
+
+raw SHA-256:
+740accc32f3bdfe4458f9a2e6cb2692bacde0feaebc24d03764be10318642c4c
+
+logical SHA-256:
+d2cd0b3541db68ccddcb9357ba78ffb3ea72df2c0b87e7c49b17b688e6cfffb2
+```
+
+両commitはexact expected-old-SHA lease、parent exact1、exact1 new path、
+full post-fetch、local/GitHub connector blob一致まで確認した。
+
+Recovery Epoch002 P0 external identity:
+
+```text
+schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch002.p0_external_identity.v1
+
+canonicalization:
+jq -cS JSON line with trailing LF
+
+P0 SHA-256:
+0b5f4b0e3c3c023867a858782869c570e5a55c27cb72d8db108c309408581ce0
+```
+
+このidentityはdesignのpath/commit/blob/rawとreceiptの
+path/commit/blob/raw/logicalをbindする。future Epoch002 event1はこのexact
+P0 identityをbindしなければならない。
+
+固定したstate:
+
+```text
+Recovery Epoch001:
+EPOCH_INVALIDATED
+
+Recovery Epoch002:
+DEFINED_NOT_STARTED
+
+Epoch002 source baseline:
+UNLOCKED
+
+Epoch002 candidate version:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+Epoch002 event1 / readiness / reservation / attempt:
+NOT_CREATED / NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+Cycle001:
+NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+`nls_v3_rc_0034`、Epoch001 event1、消費済みRETRY007 reservation、
+unknown-consumption historyはimmutable historyとして保持する。Epoch002は
+それらの実行権限、生成出力、Product Read、distribution、depth、surface、
+performance、correction、acceptance creditを継承しない。
+
+Epoch002ではD2 final closure postverification後かつevent1前にdistinct
+immutable candidate IDを割り当てる。reservationはhistorical base schemaを
+additiveに保持する。remote publish/postverification後はauthorityとattempt IDを
+spawn前に不可逆消費する。publication outcome不明と`SPAWN_FAILED`は同じ
+authority/challenge/attempt/reservationのrerunを許可しない。
+
+mashos-api source変更、test、pytest、exact134、broad regression、private body、
+Product Readはこのauthorityで実行していない。
+
+## 推測
+
+RETRY007 result欠落の最有力説明は、isolated runtimeの不完全なdependency
+closureに起因するcollection/bootstrap import failureである。
+
+## 未確認
+
+- RETRY007のexact exception、exit code、signal、timeout、collection state、test outcome。
+- future Epoch002 candidate ID、source commit/tree/closure。
+- future event1、readiness、reservation、attempt、result、terminal identities。
+- D1 RED、D2 implementation、future exact134の結果。
+- P2、fresh batch、Product Read、correction、B6、Cycle001 acceptance。
+
+## 書かれていない
+
+- private body、prompt/response、PII。
+- 秘密鍵、公開鍵本文、passphrase、token、credential trace、秘密鍵保存path。
+- D1、D2、formal P1、P2の開始許可。
+
+## 推測禁止
+
+- FastAPI不在をRETRY007のexact exceptionまたは唯一原因と断定しない。
+- `nls_v3_rc_0034`またはEpoch001 acceptance evidenceをEpoch002へ継承しない。
+- parent designとreceiptの成立をD1以降の実行許可へ読み替えない。
+- final three-path reflectionのpublish前に、handoff完了やD1 eligibilityを主張しない。
+
+## 華恋の意見
+
+Epoch001をinvalidated historyとして保存し、修復をEpoch002の新baselineへ
+分離することが、消費済み権限と将来のsource変更を最も正確に扱える。
+reservationのsemantic event ancestryとcurrent Git parentを分け、
+reservation前にbootstrap readinessを証明することで、一回限り権限の
+二重消費を防げる。
+
+## Final reflection contract
+
+次のexact 3 pathsを一つのdirect-child commitで反映する。
+
+```text
+expected old main / parent exact1:
+149fb1e9156d245d8399a4bb3bf7a6f202099a56
+
+paths:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_Handoff_20260725.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+```
+
+exact expected-old-SHA leaseと全3 pathsのblob/raw/post-fetchが成功した時だけ、
+`P0_PARENT_DESIGN_AND_DOCUMENTATION_REFLECTION_COMPLETE_AUTHORITY_STOP`とする。
+失敗または不明なら`P0_DOCUMENTATION_REFLECTION_INCOMPLETE_STOP`である。
+
+## 次の承認候補
+
+final reflection postverification後のexact one candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+これはD1 causal RED freezeだけを許可する。implementation、event1、readiness、
+reservation、exact134、P2、fresh batch、Product Read、correction、B6、
+Cycle001 acceptanceは許可しない。別明示承認が必要であり、自動進行しない。

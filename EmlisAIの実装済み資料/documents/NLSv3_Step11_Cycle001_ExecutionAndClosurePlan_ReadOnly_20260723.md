@@ -4629,3 +4629,184 @@ It does not authorize mashos-api source changes, tests, exact134, a new source
 baseline event, reservation, attempt, P2, fresh batch, exact100, Product Read,
 correction, B6, or Cycle001 acceptance. It is not approved; separate explicit
 approval is required. Mash has no file, Git, SSH, or GitHub setup work.
+
+## 12.40 2026-07-25 Recovery Epoch 001 invalidation and Recovery Epoch 002 P0 parent-design closure
+
+Approved authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY
+```
+
+This authority closed the previously undefined post-reservation retry and
+formal-worker bootstrap boundary without changing source or running tests or
+formal execution.
+
+Confirmed parent-design publication:
+
+```text
+commit:
+832a93becb7795f2a3f1f4110d75ae03e9444ef4
+
+parent exact1:
+575e7e91a7510507e677159e59f7c378ed681b07
+
+tree:
+b772b86ced57d3f02676ac4f115430de53c3da54
+
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_20260725.md
+
+blob / raw SHA-256:
+af00c5c4a49207fb94108afbf383ea0e830620ae
+8b6564442d69fea1b38cb59ea3c5302874e6f92f87bfd5ce0728985094739829
+
+postverified:
+true
+```
+
+Confirmed body-free receipt publication:
+
+```text
+commit:
+149fb1e9156d245d8399a4bb3bf7a6f202099a56
+
+parent exact1:
+832a93becb7795f2a3f1f4110d75ae03e9444ef4
+
+tree:
+ea99d57603660849b186322800f6b27d3a97e0cb
+
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_BodyFree_Receipt_20260725.json
+
+blob / raw / logical SHA-256:
+25081708104ba208c54887e53ed2d2c34c1d175e
+740accc32f3bdfe4458f9a2e6cb2692bacde0feaebc24d03764be10318642c4c
+d2cd0b3541db68ccddcb9357ba78ffb3ea72df2c0b87e7c49b17b688e6cfffb2
+
+postverified:
+true
+```
+
+Derived Recovery Epoch 002 P0 external identity:
+
+```text
+schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch002.p0_external_identity.v1
+
+canonicalization:
+jq -cS JSON line with trailing LF
+
+P0 SHA-256:
+0b5f4b0e3c3c023867a858782869c570e5a55c27cb72d8db108c309408581ce0
+```
+
+The P0 identity binds the design path/commit/blob/raw and receipt
+path/commit/blob/raw/logical identities. Future event1 must bind this exact
+identity.
+
+Fixed process decisions:
+
+1. Recovery Epoch 001 is `EPOCH_INVALIDATED`; its event1, consumed RETRY007
+   reservation, and unknown-consumption evidence remain immutable history.
+2. Recovery Epoch 002 is `DEFINED_NOT_STARTED`, with source baseline
+   `UNLOCKED`.
+3. `nls_v3_rc_0034` is Epoch001 historical-only. Epoch002 receives a
+   distinct immutable candidate ID after D2 final closure postverification
+   and before event1.
+4. No Epoch001 output, Product Read, distribution, depth, surface,
+   performance, correction, or acceptance credit is inherited.
+5. Epoch002 reservation lineage keeps the historical base reservation
+   contract additively and uses current-main direct-child publication while
+   retaining event1 as semantic ancestry.
+6. Reservation remote publication plus postverification irreversibly
+   consumes the one-shot authority and attempt ID before spawn.
+7. Reservation publication outcome unknown blocks READY_UNUSED, a new
+   reservation, and spawn until separately approved authoritative
+   reconciliation. Fetch failure is not absence proof.
+8. `PARENT_SPAWN_INTENT_PERSISTED` precedes child creation. `SPAWN_FAILED`
+   without trustworthy terminal bytes closes as unknown consumption and
+   never authorizes rerun.
+9. Formal worker bootstrap readiness must close before reservation and must
+   cover plugin/import/distribution/runtime identities without collecting or
+   running tests.
+
+Separated evidence:
+
+- confirmed: the current lineage/bootstrap contracts are incomplete and
+  relevant repair changes the Epoch001 source/proof closure;
+- inference: the most likely RETRY007 cause is a collection/bootstrap import
+  failure from incomplete isolated-runtime dependency closure;
+- unknown: exact exception, child stage, exit/signal/timeout, collection and
+  test outcome, future Epoch002 candidate/source/event/run identities.
+
+Repository and execution boundary:
+
+```text
+mashos-api source changes:
+0
+
+test / pytest / exact134 / broad regression:
+NOT_RUN / NOT_RUN / NOT_RUN / NOT_RUN
+
+new event / readiness / reservation / attempt:
+0 / 0 / 0 / 0
+
+private body / Product Read:
+0 / 0
+
+P2 / fresh batch / correction / B6:
+NOT_AUTHORIZED
+
+Cycle001:
+NOT_ACCEPTED
+```
+
+The final documentation reflection is the exact three-path commit containing:
+
+```text
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_Handoff_20260725.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+```
+
+Its expected old main and parent exact1 are
+`149fb1e9156d245d8399a4bb3bf7a6f202099a56`. Exact lease and full
+post-fetch are mandatory. Until that succeeds, status is
+`P0_DOCUMENTATION_REFLECTION_INCOMPLETE_STOP`.
+
+On successful reflection postverification:
+
+```text
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED
+
+RECOVERY_EPOCH002_CANDIDATE_VERSION:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+LINEAGE / BOOTSTRAP:
+DESIGNED_NOT_IMPLEMENTED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Exactly one next separate-approval candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+It permits D1 causal RED freeze only. D2 implementation, formal P1, event1,
+readiness, reservation, exact134, P2, fresh batch, Product Read, correction,
+B6, and Cycle001 acceptance remain unauthorized. Separate explicit approval
+is required. Do not progress automatically.
