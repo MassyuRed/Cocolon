@@ -3763,3 +3763,256 @@ RETRY006 must start from the live head after this correction chain and must run
 complete source / owner / verifier / formal-path / transport admission before
 event 1. RETRY005's authority/challenge is not reusable. This §12.35 correction
 does not itself issue event 1 or consume a reservation.
+
+## 12.36 2026-07-25 RETRY006 pre-event1 formal lane owner completeness STOP
+
+Approved authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY006_ONLY
+```
+
+Entry pins:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+935960f0c9bad0c9932bfd32c85ad6578f55c268
+
+Cocolon tree:
+44e6d7736e73afa685b72c1fd2d6dd7186f4faac
+
+mashos-api:
+191e9d8be63132f10f94e2b2f54c6bae94ce1f07
+
+mashos-api tree:
+e68df6587b8cb674456b3bc9bceb23e0699f33aa
+```
+
+The registered deploy-key route was selected. The following were remeasured:
+
+```text
+authenticated SSH 443 / ls-remote:
+PASS
+
+complete recursive tree / blob fetch:
+PASS
+
+current-H0 exact lease dry-run:
+ACCEPTED
+
+stale 18140adf... exact lease dry-run:
+REJECTED_STALE_INFO
+
+dry-run remote ref change count:
+0
+```
+
+The deploy-key title and public fingerprint were:
+
+```text
+Karen Work Cocolon Lease 2026-07-25
+SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA
+```
+
+Credential material was not recorded. Transport is not the RETRY006 blocker.
+
+Formal admission:
+
+```text
+fixed event1 / event2 paths checked:
+2 / 15
+
+existing fixed formal path count:
+0
+
+published reservation / failure-attempt STOP count:
+0 / 0
+
+preexisting RETRY006 path count:
+0
+
+registry owner issue count:
+0
+
+canonical closure owner issue count:
+0
+
+registry step / formal node count:
+11 / 134
+
+dependency closure count:
+39
+```
+
+Pinned mashos-api source identities:
+
+```text
+registry SHA-256:
+70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728
+
+formal node registry SHA-256:
+fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf
+
+canonical current closure SHA-256:
+56a961afca480d5be297049af30fb10d52046bd252871174caf7537aad491592
+
+source dependency closure SHA-256:
+4f801c4fa00de795d98c40aac69dc537cc683057322584bacb91c5fd27c4919b
+```
+
+Pre-event1 owner completeness admission found two closed blockers.
+
+First, frozen event2 exact15 requires the
+`all11_atomic_publication_manifest.v2` manifest. Pinned production source has:
+
+```text
+production manifest builder count:
+0
+
+production manifest exact-keyset / semantic owner count:
+0
+
+test-owned complete event2 manifest builder count:
+1
+
+production top-level formal executor count:
+0
+```
+
+A coherent body-free negative changed required `core_artifact_count` from
+`13` to invalid `12`, then recomputed the manifest logical hash, identity,
+supporting identities, event material, event hash, and complete bundle.
+Observed:
+
+```text
+owner supporting-set issues:
+()
+
+independent supporting-set issues:
+()
+
+owner candidate issues:
+()
+
+independent candidate issues:
+()
+```
+
+Both production validators accepted the semantically invalid but coherently
+rehashed manifest. The exact15 success publication lane is therefore not
+owner-complete.
+
+Second, formal failure-attempt states are not aligned:
+
+```text
+runner partial:
+PARTIAL / RUN_PARTIAL
+
+owner and independent partial:
+FAILED / RUN_PARTIAL
+
+runner collection failure:
+COLLECTION_ERROR / RUN_COLLECTION_ERROR
+
+owner and independent collection failure:
+FAILED / RUN_COLLECTION_ERROR
+```
+
+A failed formal run can therefore become `RUN_PROVENANCE_INVALID`, risking
+`ATTEMPT_CONSUMPTION_UNKNOWN_STOP` after reservation consumption. The failure
+lane is not owner-complete.
+
+RETRY006 stopped before event 1 because repairing these source contracts
+changes the source closure. Issuing event 1 first would lock an immediately
+obsolete baseline. No one-shot reservation was consumed.
+
+Final STOP:
+
+```text
+PRIMARY_STOP_CODE:
+PUBLICATION_BUNDLE_INVALID
+
+PRIMARY_STOP_REASON:
+EVENT2_ATOMIC_MANIFEST_OWNER_AND_INDEPENDENT_SEMANTIC_VALIDATION_NOT_PROVED
+
+ADDITIONAL_STOP_CODE:
+RUN_PROVENANCE_INVALID
+
+ADDITIONAL_STOP_REASON:
+FORMAL_FAILURE_ATTEMPT_OUTCOME_STATE_ALIGNMENT_NOT_PROVED
+
+POSITION:
+PRE_EVENT1_PRE_RESERVATION
+```
+
+Body-free evidence:
+
+1. result commit `6efd1b7cdb1f08972001b90fa0617d9951c789a5`, blob
+   `b7ce7ca22840d359c722bd94cbf71a23354a1746`, raw SHA-256
+   `510745b5065a9fc5f6a11d58a4937983693cf972e5c7d7e87ff8fc2062e95948`;
+2. receipt commit `5411f70d9a707775139261f7d481c1e2fd81ab96`, blob
+   `1e921186f2789c4503ecb18d9c5556e53104831f`, raw SHA-256
+   `4e0ec33759ad88f75fe204ff2d5fe00b2b2635c9fafc604bb8d58d5f4b825e61`,
+   canonical receipt SHA-256
+   `74d361643773ab4be1df3c2b99bf4396353802adacb095debcd6cd547d10f62c`;
+3. handoff commit `0183de77f7c889f8be5bc1f8dc798f7fcc145fe8`, blob
+   `b93a9eab3e719bb0f11bf4b6cdf0e3d0ec45bb7e`, raw SHA-256
+   `824b80785890c4ecb62bd554f6a0c242729c3dbef274e7af7f3956c861e447b9`.
+
+Preserved state:
+
+```text
+STATUS:
+P1_RETRY006_PRE_EVENT1_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_STOP_AUTHORITY_STOP
+
+CHALLENGE / AUTHORITY-CHALLENGE / ATTEMPT:
+NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+SOURCE BASELINE RECEIPT / EVENT1:
+NOT_CREATED / NOT_CREATED
+
+FORMAL RESERVATION / ATTEMPT COUNT:
+0 / 0
+
+FORMAL EXACT134:
+NOT_RUN
+
+ACCEPTED / STEP00-10 / ALL11 / MANIFEST / EVENT2:
+NOT_ISSUED / NOT_ISSUED / NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+The candidate next authority is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+It must add and GREEN-freeze:
+
+1. the production all11 atomic manifest v2 builder and semantic owner;
+2. the independent manifest semantic verifier;
+3. coherent manifest-semantic negatives;
+4. runner failure outcome-state alignment; and
+5. the complete formal parent orchestration boundary.
+
+This candidate authority is not approved. Separate approval is required.
+Mash is not required to perform Git, SSH, or GitHub configuration. A later
+formal retry authority is selected only after the repair authority completes
+and is independently reverified. Automatic progression is false. STOP.
