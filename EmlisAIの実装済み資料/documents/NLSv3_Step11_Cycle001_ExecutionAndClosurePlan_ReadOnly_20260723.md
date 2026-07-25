@@ -4183,3 +4183,196 @@ verified. It permits only the production repair required by the byte-frozen
 RED and targeted GREEN verification. It does not authorize formal exact134,
 broad regression, formal artifact issuance, private body, P2, fresh batch,
 exact100, Product Read, correction, B6, or Cycle001 acceptance.
+
+## 12.38 2026-07-25 formal success/failure lane owner completeness implementation / targeted GREEN / authority STOP
+
+Approved and completed authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+Fixed entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+1db795b8b9abf1925b581401575edc23f1f5021e
+
+Cocolon tree:
+81131fb7fd787d01da1cdc884817f88609dd78b2
+
+mashos-api:
+ef9996aee20e2aed7b51d65a3559b9aea30f429e
+
+mashos-api tree:
+a22b035febb6db4b1de274e656b6fbe0557d8cd9
+```
+
+mashos-api implementation reflection:
+
+```text
+result:
+e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+tree:
+1c8970e91dbc793fcb3b81b51c73291f0326a565
+
+parent:
+ef9996aee20e2aed7b51d65a3559b9aea30f429e
+
+compare:
+ahead 1 / behind 0 / total commits 1
+
+changed production paths:
+exact5
+
+added / modified:
+1 / 4
+
+additions / deletions:
+1238 / 15
+```
+
+The exact5 production roles are:
+
+1. canonical current-closure owner;
+2. atomic manifest builder and semantic owner;
+3. independent verifier;
+4. exact134 proof runner; and
+5. formal success/failure parent owner.
+
+The implementation closes:
+
+1. exact15 manifest construction and exact13 core semantics;
+2. owner and independent rejection of exact17 coherent attacks at supporting,
+   candidate, and published layers;
+3. success / partial / collection / timeout / infrastructure terminal-state
+   agreement;
+4. exact134 checkpoint and real environment preservation for timeout and
+   post-start infrastructure failure;
+5. event1 -> reservation -> exact134 once -> attempt verification -> exactly
+   one terminal lane -> postverification ownership;
+6. success/failure mutual exclusion and unknown-consumption STOP; and
+7. owner/independent completion-closure registration.
+
+The formal parent keeps Git/GitHub mutation and exact134 execution behind
+explicit external ports. This authority invoked neither formal transport nor
+formal exact134.
+
+Frozen RED identity remained:
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch001_formal_lane_owner_completeness_red.py
+
+Git blob SHA-1:
+c410cdc4ed0d24565035cfb735b5039bb8ffbf36
+
+raw SHA-256:
+ab6b340fe5e845d546f6a86ef25c78c511a5f6f703c320d8b75d13041f1bb96f
+```
+
+The targeted denominator is:
+
+```text
+accepted-success exact10
++ sequence/ledger/publication exact27
++ selected existing reconciliation exact3
++ formal-lane owner completeness exact12
+= targeted exact52
+```
+
+Authoritative verification ran from a clean detached checkout of the actual
+GitHub result commit:
+
+```text
+exact12:
+12 passed / 0 failed / 0 errors / 1 warning
+66.83 s
+
+exact52:
+52 passed / 0 failed / 0 errors / 1 warning
+888.54 s
+```
+
+The warning is the existing Pydantic V1 `@root_validator` deprecation at
+`api_emotion_submit.py:906`; that file was unchanged. The filename containing
+`exact134` is a contract oracle. These runs were not formal exact134 and not
+broad regression.
+
+Body-free evidence:
+
+1. result commit `1202e271b6ff7aae709e5caaafcd5aa0a4011555`,
+   blob `4ace545968c0861e85bc191ecb75e3888b353f3d`, raw SHA-256
+   `476b75430a07a6938c0ea8b249a9359b5f30617381f10af78004e1995ce2f1f0`;
+2. implementation evidence receipt commit
+   `f888d3372134629231a03241dcaf0e1aa9aa23fb`, blob
+   `d8c8155a3613c93f0e3e9fc046f6b9f44cb4550d`, raw SHA-256
+   `987c908667a6e59d514ddd21c35bf352ad806bb49cf612d7aacbb5206536df48`,
+   canonical receipt SHA-256
+   `e978d1ae062056eec012f9f2d891549700ba2c8b485dbc8535e55bb18f3cd759`;
+3. STOP handoff commit `81106214a1e9e1d163ba1e465ead328f5bbb1b8e`,
+   blob `d5c931b54b06755eb60d9dc7f344bc367b75d699`, raw SHA-256
+   `f63890a741d626cdf51dcc1f1811887bf70fe0a35c6cf061acd79b235c85058d`.
+
+Two implementation audits and one evidence audit were read-only. Subagent
+edits, tests, commits, and GitHub writes were exact0. Karen performed the
+source reconciliation, final test selection and execution, object/ref writes,
+lease-protected Cocolon writes, and full post-fetch verification.
+
+Preserved state:
+
+```text
+REPAIR:
+FORMAL_LANE_OWNER_COMPLETENESS_IMPLEMENTED_TARGETED_EXACT52_GREEN
+
+P1_RETRY006:
+CLOSED_NOT_RESUMABLE_NOT_REUSABLE
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FORMAL EVENT / RESERVATION / ATTEMPT / EXACT134:
+NOT_CREATED / 0 / 0 / NOT_RUN
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+BROAD REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+The existing records do not select an exact formal-retry token after
+RETRY006. The next boundary is:
+
+```text
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+REQUIRED_MASH_DECISION:
+SEPARATE_AUTHORITY_SELECTION_AND_EXPLICIT_APPROVAL
+
+MASH_FILE_GIT_SSH_GITHUB_SETUP_WORK:
+NONE
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+No RETRY006 resume/reuse, inferred token, formal exact134, formal artifact
+issuance, P2, fresh batch, exact100, Product Read, correction, B6, or Cycle001
+acceptance is authorized by this completed implementation authority.
