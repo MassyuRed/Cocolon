@@ -3138,6 +3138,18 @@ file-level current deltaは`eai720_diff.csv`です。GitHub compare 235 pathの�
 
 Karen-DiaryはCocolon transport前提の正本ではありません。秘密情報を残さず、Cocolon作業のcontinuityは上記ownerで復元します。
 
+# 2026-07-25 差分追記: Mash様への作業依頼説明owner
+
+| owner | responsibility |
+|---|---|
+| `work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt` | Mash様へ作業を求める前の代行不能確認、現在状態→直接原因→依頼操作による解消→代替不能→未実施 / 完了時の影響という必要性説明、目的・端末・時間 / session制約・開始画面・一操作ずつの手順・禁止事項・完了条件・返答・華恋follow-upを全て含む説明contract |
+| `work_attitude_rules_for_karen/00_read_first.txt` | 詳細説明をCocolon作業の絶対ruleとして必読化 |
+| `work_attitude_rules_for_karen/09_work_start_checklist.txt` | Mash様へ依頼を出す直前の説明完全性check |
+| `work_attitude_rules_for_karen/99_integrated_paste_each_time.txt` | 毎回読む統合ruleへ同じ境界を固定 |
+| `11_cocolon_github_transport_and_session_continuity.md` | local private counterpart消失時のGitHub Deploy keys画面操作と、登録後に華恋が引き取るtransport確認・反映手順 |
+
+専門用語だけ、複数案だけ、または「ファイルパスを教えてください」だけの依頼は不十分です。Mash様が追加質問なしで安全に完了できる画面操作単位まで説明します。
+
 ## rc0031 current gate
 
 - P1 exact7は`1 PASS / 6 intentional RED`。

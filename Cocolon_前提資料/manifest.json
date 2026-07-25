@@ -15515,6 +15515,30 @@
     "missing_local_private_counterpart_does_not_negate_registered_identity": true,
     "exact_lease_scope": "approved formal contract only; exact ref and H0; verified direct child; exact changed paths; full post-fetch"
   },
+  "github_transport_session_continuity_replacement01_2026_07_25": {
+    "reflected": true,
+    "owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "repository_scope": "MassyuRed/Cocolon",
+    "deploy_key_title": "Karen Work Cocolon Lease 2026-07-25 Replacement 01",
+    "key_algorithm": "ssh-ed25519",
+    "public_key_sha256_fingerprint": "SHA256:GO/Q1Aro3b9iQYrNXjbgKNK554rq+Y/7WnMN9jvwzPo",
+    "write_access_registered": true,
+    "current_session_state": "ACTIVE_CURRENT_SESSION_AUTHENTICATED",
+    "old_identity_registration_state": "REGISTERED_HISTORY_CURRENT_SESSION_NOT_VERIFIED",
+    "ssh_endpoint": "ssh.github.com:443",
+    "github_ed25519_host_key_sha256_fingerprint": "SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU",
+    "live_main_sha1": "f3e2e405e2536188ee4d166753f1a823afd99e0b",
+    "live_main_tree_sha1": "bff819e3cf3dcc22442ba56d93fff1c37ef26732",
+    "recursive_blob_count": 845,
+    "complete_blob_fetch_confirmed": true,
+    "receive_pack_new_ref_dry_run_accepted_without_ref_creation": true,
+    "main_exact_expected_old_lease_verified_in_this_observation": false,
+    "formal_publish_verified_in_this_observation": false,
+    "private_key_material_recorded": false,
+    "public_key_body_recorded": false,
+    "session_reverification_required": true,
+    "exact_lease_scope": "approved formal contract only; exact ref and H0; verified direct child; exact changed paths; full post-fetch"
+  },
   "latest_modified_premise_files_2026_07_25_github_transport_continuity": [
     "00_karen_read_first.md",
     "05_cocolon_rule_file_index.md",
@@ -15526,6 +15550,57 @@
     "work_attitude_rules_for_karen/09_work_start_checklist.txt",
     "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
     "work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
+    "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+    "work_attitude_rules_for_karen/manifest.json"
+  ],
+  "latest_modified_premise_files_2026_07_25_github_transport_replacement01": [
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "manifest.json"
+  ],
+  "mash_action_request_detailed_instruction_guard_2026_07_25": {
+    "reflected": true,
+    "primary_owner": "work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+    "transport_procedure_owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "karen_delegation_precheck_required": true,
+    "plain_language_required": true,
+    "single_recommended_route_required": true,
+    "required_instruction_fields": [
+      "confirmed_current_state",
+      "direct_blocking_cause",
+      "why_requested_action_resolves_cause",
+      "alternatives_checked_and_why_insufficient",
+      "consequence_if_not_done",
+      "scope_resumed_after_completion",
+      "purpose",
+      "why_karen_cannot_complete_alone",
+      "device",
+      "time_or_session_constraint",
+      "start_url_or_screen",
+      "file_location_and_lookup_method_when_applicable",
+      "step_by_step_buttons_and_values",
+      "do_not_share",
+      "completion_condition",
+      "error_reporting_without_secrets",
+      "user_completion_reply",
+      "karen_followup_scope"
+    ],
+    "forbidden_request_shapes": [
+      "unexplained_technical_terms_only",
+      "multiple_technical_options_without_recommendation",
+      "file_path_request_without_location_method",
+      "repeat_same_abstract_request_after_user_cannot_understand"
+    ]
+  },
+  "latest_modified_premise_files_2026_07_25_mash_action_request_detailed_instruction": [
+    "00_karen_read_first.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/00_read_first.txt",
+    "work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+    "work_attitude_rules_for_karen/09_work_start_checklist.txt",
     "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
     "work_attitude_rules_for_karen/manifest.json"
   ]

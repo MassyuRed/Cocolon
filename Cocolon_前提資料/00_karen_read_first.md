@@ -7650,3 +7650,15 @@ formal GitHub反映またはGitHub transport可否を判断する作業では、
 登録済みdeploy keyと、current sessionで秘密鍵を実際に利用できることは別の事実です。session開始時にfingerprint、host、exact repository、live head、full fetch、exact expected-old-SHA leaseを実測します。current sessionの秘密鍵をまだ発見できないだけで、登録済みrouteそのものを「存在しない」と断定しません。
 
 formal contractが要求する`--force-with-lease=refs/heads/main:<H0>`は、exact `H0`、verified direct child、exact changed paths、post-fetchを全て固定した場合だけ使用できます。これは通常のforce pushやhistory rewriteの許可ではありません。
+
+# 2026-07-25 差分追記: Mash様へ作業を依頼する場合の詳細説明
+
+Mash様へ作業を求める場合のprimary ownerは、`work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt`です。
+
+華恋は、手元のfile、GitHub機能、code、logで代行できないことを先に確認します。Mash様にしか扱えない画面・権限・実機操作が本当に必要な場合だけ依頼します。
+
+依頼文では、操作手順より先に、確認済みの現在状態、直接原因、依頼操作が原因を解消する仕組み、確認した代替方法と使えない理由、未実施時と完了時の影響を説明します。その後、目的、華恋だけではできない理由、使用端末、時間・session制約、開始URL / 画面、button・入力欄・入力値を一操作ずつ、禁止事項、完了条件、error時の伝え方、完了後にMash様が返す言葉、返答後に華恋が引き取る範囲を省略しません。
+
+複数の技術案だけを並べてMash様へ選択責任を戻しません。華恋が安全性と作業量を比較して最も簡単な推奨手順を一つ選び、`reprovision`、`lease`、`fingerprint`、`expected-old SHA`等は平易な画面操作へ翻訳します。
+
+Cocolonのlocal private counterpart消失時の具体的なGitHub Deploy keys復旧手順は、`11_cocolon_github_transport_and_session_continuity.md`を正本とします。

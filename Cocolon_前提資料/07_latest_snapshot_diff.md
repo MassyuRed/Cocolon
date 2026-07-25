@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-07-22"
+revision_date: "2026-07-25"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -9,10 +9,10 @@ source_mode: "github_canonical_current_authority"
 authority_role: "canonical_current_authority"
 authority_resolution:
   Cocolon_ref: "MassyuRed/Cocolon:main"
-  Cocolon_last_reflected_task_head: "cfff0ab07a6fa361b446d59f5f53cb02aec75e4c"
+  Cocolon_last_reflected_task_head: "f3e2e405e2536188ee4d166753f1a823afd99e0b"
   Cocolon_authority_file_commit: "resolve_from_github_revision_containing_this_file"
-  mashos_api: "MassyuRed/mashos-api:main@ac0e679de7ff33b011f9750b392f991bb34950a5"
-  verified_at: "2026-07-22 JST"
+  mashos_api: "MassyuRed/mashos-api:main@e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd"
+  verified_at: "2026-07-25 JST"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
@@ -19457,3 +19457,104 @@ mashos-api source変更、test、exact134、new source-baseline event、reservat
 attempt、P2、fresh batch、exact100、Product Read、correction、B6、Cycle001
 acceptanceは許可しない。このcandidateは未承認であり、別明示承認が必要である。
 Mashにfile、Git、SSH、GitHubの追加設定作業はない。自動進行しない。
+
+# 2026-07-25 差分追記: Mash様への作業依頼説明contractとReplacement 01 transport確認
+
+## 確認済み
+
+Mash様は、華恋がMash様へ作業を依頼する場合、操作方法だけでなく、確認済みの現在状態、止まっている直接原因、依頼操作が原因を解消する仕組み、代替方法が使えない理由、未実施時と完了時の影響を説明することを明示要求した。
+
+この要求を次のprimary ownerと必読ownerへ差分反映する。
+
+```text
+Cocolon_前提資料/00_karen_read_first.md
+Cocolon_前提資料/05_cocolon_rule_file_index.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/manifest.json
+Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json
+```
+
+Mash様が登録し、current Workで実測したReplacement 01の非秘密identityは次である。
+
+```text
+repository:
+MassyuRed/Cocolon
+
+deploy key title:
+Karen Work Cocolon Lease 2026-07-25 Replacement 01
+
+algorithm:
+ssh-ed25519
+
+public fingerprint:
+SHA256:GO/Q1Aro3b9iQYrNXjbgKNK554rq+Y/7WnMN9jvwzPo
+
+write access at registration:
+enabled
+
+current-session state:
+ACTIVE_CURRENT_SESSION_AUTHENTICATED
+```
+
+current sessionの確認結果:
+
+```text
+Cocolon live main:
+f3e2e405e2536188ee4d166753f1a823afd99e0b
+
+Cocolon live tree:
+bff819e3cf3dcc22442ba56d93fff1c37ef26732
+
+recursive blobs:
+845 / 845 present
+
+GitHub ED25519 host fingerprint:
+SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU
+
+deploy-key authentication:
+SUCCESS
+
+receive-pack new-ref dry-run:
+ACCEPTED / ACTUAL REF NOT CREATED
+```
+
+旧key `Karen Work Cocolon Lease 2026-07-25`は登録・検証履歴として保持する。Replacement 01登録後の削除、失効、認証失敗は確認していない。一方、対応する旧秘密鍵をcurrent sessionで利用できないため、`REGISTERED_HISTORY_CURRENT_SESSION_NOT_VERIFIED`として扱う。
+
+## 未確認
+
+- Replacement 01によるmainのexact expected-old-SHA lease成功。
+- この差分のGitHub main反映、commit SHA、post-fetch。
+- Recovery Epoch 002 parent designのGitHub反映。
+
+認証、full fetch、receive-pack dry-runをformal main更新成功へ読み替えない。この節を含むrevisionがGitHub mainへ反映され、exact path / bytes / blob / raw SHA-256をpost-fetchした時だけcurrent authorityとして成立する。
+
+## 書かれていない
+
+- 秘密鍵本文、秘密鍵保存path、passphrase、token、credential trace。
+- 旧keyの削除または失効判断。
+- Recovery Epoch 002 D1 / D2 / formal P1の開始許可。
+
+## 推測禁止
+
+- `Never used`表示だけから、鍵が無効または有効でないと判断しない。
+- Replacement 01のcurrent-session成功を将来sessionへ無検証継承しない。
+- connector write、normal fast-forward、dry-runをformal exact lease成功へ変換しない。
+
+## 次に実行すべきこと
+
+1. 上記前提資料差分のJSON、diff、body-free、secret-freeを確認する。
+2. write直前にCocolon live mainが
+   `f3e2e405e2536188ee4d166753f1a823afd99e0b`のままか再確認する。
+3. 承認済みexact pathだけを、verified direct childとexact
+   `--force-with-lease=refs/heads/main:f3e2e405e2536188ee4d166753f1a823afd99e0b`
+   で反映する。
+4. remote main、parent exact1、tree、changed paths、全対象bytes / blob / raw
+   SHA-256をpost-fetchする。
+5. その後、別checkpointとしてRecovery Epoch 002 parent designの成立条件を確認する。
+
+自動進行しない。

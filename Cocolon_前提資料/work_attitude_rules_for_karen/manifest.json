@@ -191,6 +191,40 @@
         "99_integrated_paste_each_time.txt",
         "manifest.json"
       ]
+    },
+    {
+      "date": "2026-07-25",
+      "type": "mash_action_request_detailed_instruction_guard",
+      "summary": "Mash様へ作業を求める場合、華恋側で代行不能かを先に確認し、目的、必要理由、使用端末、開始URL / 画面、fileの保存場所と見つけ方、button・入力欄・入力値の一操作ずつ、禁止事項、完了条件、error時の伝え方、完了後の返答、華恋が引き取る後続作業を省略しない。複数の技術案だけを並べず、華恋が最も簡単な推奨手順を選び、専門用語を平易な操作へ翻訳する。",
+      "primary_owner": "07_forbidden_shifting_burden_to_user.txt",
+      "external_transport_procedure_owner": "../11_cocolon_github_transport_and_session_continuity.md",
+      "required_instruction_fields": [
+        "confirmed_current_state",
+        "direct_blocking_cause",
+        "why_requested_action_resolves_cause",
+        "alternatives_checked_and_why_insufficient",
+        "consequence_if_not_done",
+        "scope_resumed_after_completion",
+        "purpose",
+        "why_karen_cannot_complete_alone",
+        "device",
+        "time_or_session_constraint",
+        "start_url_or_screen",
+        "file_location_and_lookup_method_when_applicable",
+        "step_by_step_buttons_and_values",
+        "do_not_share",
+        "completion_condition",
+        "error_reporting_without_secrets",
+        "user_completion_reply",
+        "karen_followup_scope"
+      ],
+      "changed_files": [
+        "00_read_first.txt",
+        "07_forbidden_shifting_burden_to_user.txt",
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
     }
   ],
   "folder_name": "work_attitude_rules_for_karen",
