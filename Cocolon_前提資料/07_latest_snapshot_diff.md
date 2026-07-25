@@ -18816,3 +18816,165 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_C
 このcandidate authorityは未承認であり、別承認が必要である。MashにGit、
 SSH、GitHubの追加設定作業は求めない。repair authorityの完了と独立再検証後に
 のみ、later formal retry authorityを選定する。自動進行しない。
+
+# 2026-07-25 差分追記: formal success/failure lane owner completeness RED freeze
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+## 確認した事実
+
+1. RED entryは次で固定した。
+
+   ```text
+   Karen-Diary:
+   700f749f5149cac1f8bd4bab8a364d524a56985b
+
+   Cocolon:
+   5722c4aea2e1d42d7f84e9b36e6322b538615bf2
+
+   Cocolon tree:
+   a804fcbf4691ea9c842f1c8fa13b368f87836aa0
+
+   mashos-api:
+   191e9d8be63132f10f94e2b2f54c6bae94ce1f07
+
+   mashos-api tree:
+   e68df6587b8cb674456b3bc9bceb23e0699f33aa
+   ```
+
+2. mashos-apiへ追加したのは次のtest exact1であり、production changed
+   pathはexact0である。
+
+   ```text
+   ai/tests/test_emlis_nls_v3_recovery_epoch001_formal_lane_owner_completeness_red.py
+   ```
+
+3. RED test identityはGit blob SHA-1
+   `c410cdc4ed0d24565035cfb735b5039bb8ffbf36`、raw SHA-256
+   `ab6b340fe5e845d546f6a86ef25c78c511a5f6f703c320d8b75d13041f1bb96f`
+   である。
+4. mashos-api resultは
+   `ef9996aee20e2aed7b51d65a3559b9aea30f429e`、tree
+   `a22b035febb6db4b1de274e656b6fbe0557d8cd9`、parent
+   `191e9d8be63132f10f94e2b2f54c6bae94ce1f07`である。GitHub compareは
+   `ahead_by=1 / behind_by=0`、changed path exact1を返した。
+5. actual GitHub result commitでexact12をcollectionし、collection errorは
+   0だった。
+6. execution結果は`3 passed / 9 causal failed / 0 error / 1 warning`である。
+7. exact9 failureは、次の不足だけに対応する。
+   - production manifest builder / semantic owner;
+   - exact17 coherent semantic attackの全publication layer rejection;
+   - partial / collection / infra state alignment;
+   - timeout時のexact134 checkpointとreal pytest version保持;
+   - post-start infraのbody-free failure envelope;
+   - complete formal parent;
+   - current completion closure。
+8. authority/entry/protected hash、success state、既存timeout classificationの
+   exact3はPASSした。syntax、import、fixture、collection、unexpected errorは
+   0だった。
+9. test内のGit graphはin-memory、worker failureはmonkeypatchであり、
+   formal exact134は実行していない。
+10. formal reservation、attempt artifact、accepted receipt、Step00-10、
+    all11、atomic manifest、sequence event1/event2、private body、P2、
+    Cycle acceptanceは全て0または未作成である。
+11. read-only subagent exact3は、authority/evidence chain、manifest semantics、
+    runner/formal parentを分担した。subagentのedit、test、commit、GitHub writeは
+    exact0だった。final test、commit、GitHub write、post-fetch確認は華恋が行った。
+12. RED resultはcommit
+    `8f3332e3bda39058deb6a0fce8a285afbf793870`、blob
+    `a7c8917b13f41e661348a833795055c5d806018e`、raw SHA-256
+    `32f0e40545bf0bc1e240f21c2211478adb657b1863e63477711df34438c34754`
+    である。
+13. RED receiptはcommit
+    `4530e759e3ea577cb2ff8c265704c3f95bcb8e5c`、blob
+    `26b3fc485204f1ae83b9d5ef77fe4f124aef8cc2`、raw SHA-256
+    `a648e9c7eed7f6128237019804fb1f66fd8fbc933452121df6d8d938729c7f87`、
+    canonical receipt SHA-256
+    `def1bc2fdd42d4881b2fc0f1a34fed8b82e8526f542fa45baf94bca9c6d5c7fe`
+    である。
+14. RED handoffはcommit
+    `e3b354a5f5cd20c9375eaa6b33acc8ffa09f41b9`、blob
+    `7ddcd8a90a2f2a1c50b5d40cf2bd48f5079bc4a2`、raw SHA-256
+    `3b6bd3702ee5f33ad4b7a8a023979a4a84da2caf0dac94d056bdd7b5ecc507e6`
+    である。
+15. Execution and Closure Plan §12.37 appendはcommit
+    `6802004a1123946b4762484f795e533de6527cf4`、blob
+    `783217c58d0f005f2b111875d7fa2300587e65e4`、raw SHA-256
+    `fa9873734e22d746b6d69c37beae390e102a26b6c96a49b6adc4a3079037ba9c`
+    である。
+16. Cocolon書込は全て直前のGitHub `main`をexpected old SHAにしたexact
+    `--force-with-lease`を使い、各commitをfull post-fetchで確認した。公開鍵
+    fingerprintは
+    `SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA`、host key
+    fingerprintは
+    `SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU`と一致した。
+
+## 推測
+
+preceding exact40 GREENはcomponent contractを証明したが、event1から
+terminal publicationまでを一つに閉じるproduction parentを証明していなかった。
+そのため、hash-consistentなsemantic-invalid manifestと、runner由来では
+owner/verifier invalidになるfailure resultが残った。
+
+one-shot reservationを使う前に、success laneとfailure laneを同時に修復する
+必要がある。片方だけでは、event2 semantic bypassまたはreservation消費後の
+terminal evidence欠落が残る。
+
+## 華恋の意見
+
+今回のREDは、本番実装を変えずに「どこが未完成か」をactual GitHub commit上で
+再現できる形に固定した。GREENではこのtestを変更せず、production ownerを
+閉じるべきである。
+
+formal parentはorderingとmutual exclusionをownerとして持つ一方、実Git/GitHub
+writeはexplicit portとpost-fetch proofの外部境界に残す。自動retryやP2進行を
+helper内部へ隠してはいけない。
+
+## 現在状態
+
+```text
+RED:
+CAUSAL_RED_FROZEN
+
+MASHOS_API_RED_COMMIT:
+ef9996aee20e2aed7b51d65a3559b9aea30f429e
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FORMAL EXACT134 / BROAD REGRESSION:
+NOT_RUN / NOT_RUN
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+P1_RETRY006:
+PRE_EVENT1_REPAIR_IN_PROGRESS
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+## 次の境界
+
+Mashは同じ指示で、RED完了後に次のseparate sequential authorityへ進むことを
+明示承認した。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+このauthorityで許可されるのは、byte-frozen REDに必要なproduction修復、
+current completion closure登録、targeted GREEN確認だけである。formal exact134、
+broad regression、formal artifact issuance、private body、P2、fresh batch、
+exact100、Product Read、correction、B6、Cycle001 acceptanceは許可されない。
