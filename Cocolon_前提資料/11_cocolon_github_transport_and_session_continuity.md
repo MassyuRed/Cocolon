@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_github_transport_and_session_continuity
 title: "Cocolon GitHub transport / session continuity owner"
-revision_date: "2026-07-25"
+revision_date: "2026-07-26"
 repository_scope: "MassyuRed/Cocolon"
 secret_material_allowed: false
 ---
@@ -542,3 +542,92 @@ reportはreconciliationの前後でproduction mainをActions側Gitから取得�
 local guardian testsは64件成功しています。production flagと
 `publish-main`の静的停止は変更しません。GitHub sandbox試験は
 `0 / 5 NOT_RUN`で、今回maintenance自体を試験成功へ数えません。
+
+# 2026-07-26 Replacement 03 guardian report localization maintenance reflection boundary
+
+## 確認した事実
+
+- Issue #10 / #11のreport jobはworkflowで
+  `GH_TOKEN: ${{ github.token }}`を受け取り、実行ごとにGitHubが発行する
+  Actions tokenでIssue comment / close APIを呼ぶ。
+- このreport経路は、deploy keyの秘密鍵を使うSSH exact lease経路とは
+  別である。したがって、Issue #10 / #11の
+  `RESULT_UNKNOWN_STOP / GIT`はdeploy keyの登録不良や秘密鍵不一致の
+  証拠ではない。
+- LOCAL_GREEN_ONLY完了時点の承認範囲はローカル実装とローカル試験だけであり、
+  Replacement 02秘密鍵の探索、fingerprint再照合、SSH認証、full fetch、
+  live head観測、lease、push、post-fetchは実行していない。
+- Replacement 02の追加、変更、削除も行っていない。
+- ローカルguardian試験は72件成功した。LOCAL_GREEN_ONLY完了時点では、
+  GitHub反映とActions実地試験は未実行だった。
+- Replacement 02の公開identityはGitHubに残るが、current sessionで対応する
+  秘密鍵を利用できなかったため、Mash様の承認後に次をCocolon Read/write
+  Deploy keyとして登録した。
+
+```text
+deploy_key_title:
+Karen Work Cocolon Lease 2026-07-26 Replacement 03
+
+key_algorithm:
+ssh-ed25519
+
+public_key_sha256_fingerprint:
+SHA256:Mm6YWPYIqZGna0vHC5YXl/XP9CxHFkzVATD7pUCPUEM
+
+github_write_access:
+enabled at registration
+
+ssh_endpoint:
+ssh.github.com:443
+
+ssh_repository_url:
+ssh://git@ssh.github.com:443/MassyuRed/Cocolon.git
+```
+
+- current sessionの秘密鍵本文を表示せず、導出公開fingerprintが
+  Replacement 03とexact一致し、秘密鍵`0600`、保管directory`0700`、
+  GitHub公式ED25519 host fingerprint、repository認証を確認した。
+- authenticated `ls-remote`と全branch / tagのfull fetch後の`main`は
+  `b9c0edd192569f91dae999927955eac5e5ba560f`でexact一致し、
+  `git fsck --full --strict --no-dangling`でfindingは0件だった。
+- 秘密鍵本文、公開鍵本文、秘密鍵保存path、passphrase、token、
+  credential traceは記録しない。
+
+## 今回のtransport境界
+
+このmaintenanceはcandidate inspection内のread-only Git failureを
+固定stageへ分けるだけで、SSH route、Actions token権限、remote URL、
+鍵管理、exact lease、write permit、retry policyを変更しない。
+
+Replacement 02 / 03は、Mash様の別cleanup承認またはformal route切替完了まで
+登録状態を勝手に変更しない。current formal maintenance routeは
+Replacement 03とするが、その認証成功はcurrent sessionだけの事実である。
+future sessionでは秘密鍵本文を表示せずtitle / fingerprint、認証、full fetch、
+live expected-old、exact lease、post-fetchを改めて確認し、過去sessionの
+成功を継承しない。
+
+GitHub反映authorityは次だけである。
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_REPORT_GIT_FAILURE_LOCALIZATION_MAINTENANCE_GITHUB_REFLECTION_AND_POST_FETCH_ONLY
+```
+
+GitHub `main`が
+`b9c0edd192569f91dae999927955eac5e5ba560f`のままで、そのdirect childを
+exact 6 paths、一回のexact leaseで反映し、full post-fetchが成立した場合だけ
+formal反映とする。失敗または結果不明なら未反映で停止する。
+このauthorityはIssue作成、Actions実行、試験branch / ref操作、
+sandbox再試験、production有効化を許可しない。
+
+## 未確認
+
+- formal反映状態は上記conditional reflection contractだけで確定する。
+- 反映後のfresh sandbox suiteは`0 / 5 NOT_RUN`である。
+- Replacement 03のcurrent-session認証成功をfuture sessionで再利用できるか。
+
+## 華恋の意見
+
+Issue #10 / #11のreport失敗を鍵問題へ読み替えず、Actions内Gitの四操作へ
+診断範囲を保つべきである。Replacement 03は旧report失敗の修正ではなく、
+番人自身のlocked pathをformal反映するためのbootstrap / maintenance
+transportである。通常成果物のActions routeと混同しない。

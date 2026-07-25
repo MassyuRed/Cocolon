@@ -780,6 +780,7 @@ def git(
     input_bytes: bytes | None = None,
     timeout: int = 120,
     failure_code: str = "GIT_COMMAND_FAILED",
+    failure_stage: str | None = None,
     write_attempted: bool = False,
 ) -> bytes:
     command = [
@@ -806,7 +807,7 @@ def git(
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise GuardianReject(
             "RESULT_UNKNOWN_STOP",
-            "GIT_EXEC",
+            failure_stage or "GIT_EXEC",
             type(exc).__name__,
             write_attempted=write_attempted,
             result_uncertain=write_attempted,
@@ -814,7 +815,7 @@ def git(
     if result.returncode:
         raise GuardianReject(
             failure_code,
-            "GIT",
+            failure_stage or "GIT",
             f"exit={result.returncode}",
             write_attempted=write_attempted,
             result_uncertain=write_attempted,
@@ -833,10 +834,15 @@ def verify_trusted_checkout(workflow_sha1: str) -> None:
         raise GuardianReject("REJECTED_OBJECT_FORMAT", "TRUSTED_CHECKOUT")
 
 
-def remote_ref_sha(ref: str) -> str | None:
+def remote_ref_sha(
+    ref: str,
+    *,
+    failure_stage: str | None = None,
+) -> str | None:
     output = git(
         ["ls-remote", "--refs", "origin", ref],
         failure_code="RESULT_UNKNOWN_STOP",
+        failure_stage=failure_stage,
     ).decode("ascii", "strict")
     lines = [line for line in output.splitlines() if line]
     if not lines:
@@ -881,11 +887,17 @@ def observe_unchanged_target(target_ref: str, observed_before: str) -> str:
     return observed_after
 
 
-def _fetch_exact(ref: str, namespace: str) -> str:
+def _fetch_exact(
+    ref: str,
+    namespace: str,
+    *,
+    fetch_failure_stage: str | None = None,
+) -> str:
     local_ref = f"refs/cocolon-guardian/{namespace}"
     git(
         ["fetch", "--no-tags", "--force", "--depth=128", "origin", f"{ref}:{local_ref}"],
         failure_code="RESULT_UNKNOWN_STOP",
+        failure_stage=fetch_failure_stage,
     )
     return git(["rev-parse", local_ref]).decode("ascii").strip()
 
@@ -953,17 +965,31 @@ def _tree_path_map(commit_sha1: str) -> dict[str, tuple[str, str, str]]:
 
 
 def inspect_candidate(request: PublicationRequest, policy: Policy) -> CandidateProof:
-    staging_remote = remote_ref_sha(request.staging_ref)
+    staging_remote = remote_ref_sha(
+        request.staging_ref,
+        failure_stage="CANDIDATE_STAGING_REF_OBSERVATION",
+    )
     if staging_remote != request.staging_head_sha1:
         raise GuardianReject("REJECTED_STAGING_REF_DRIFT", "CANDIDATE")
-    staging_head = _fetch_exact(request.staging_ref, f"staging-{request.request_sha256}")
+    staging_head = _fetch_exact(
+        request.staging_ref,
+        f"staging-{request.request_sha256}",
+        fetch_failure_stage="CANDIDATE_STAGING_REF_FETCH",
+    )
     if staging_head != request.staging_head_sha1:
         raise GuardianReject("REJECTED_STAGING_FETCH", "CANDIDATE")
     # Fetch the target object as an exact object/ref before lineage inspection.
-    target_remote = remote_ref_sha(request.target_ref)
+    target_remote = remote_ref_sha(
+        request.target_ref,
+        failure_stage="CANDIDATE_TARGET_REF_OBSERVATION",
+    )
     if target_remote is None:
         raise GuardianReject("REJECTED_TARGET_MISSING", "CANDIDATE")
-    _fetch_exact(request.target_ref, f"target-{request.request_sha256}")
+    _fetch_exact(
+        request.target_ref,
+        f"target-{request.request_sha256}",
+        fetch_failure_stage="CANDIDATE_TARGET_REF_FETCH",
+    )
     base_type = git(["cat-file", "-t", request.expected_old_sha1]).decode("ascii").strip()
     head_type = git(["cat-file", "-t", staging_head]).decode("ascii").strip()
     if base_type != "commit" or head_type != "commit":

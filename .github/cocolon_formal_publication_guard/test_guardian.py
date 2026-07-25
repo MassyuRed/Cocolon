@@ -524,6 +524,68 @@ class GitObjectTests(GuardianTestCase):
         self.assertIs(runner.call_args.kwargs["shell"], False)
         self.assertIsInstance(runner.call_args.args[0], list)
 
+    def test_git_failure_stage_defaults_and_sanitization_are_preserved(self) -> None:
+        secret = "transport-secret-sentinel"
+        remote_url = "https://credential@example.invalid/repository.git"
+        completed = subprocess.CompletedProcess(
+            ["git"],
+            128,
+            stdout=b"",
+            stderr=secret.encode("ascii"),
+        )
+        cases = (
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    return_value=completed,
+                ),
+                ["ls-remote", remote_url, "refs/heads/main"],
+                {},
+                "RESULT_UNKNOWN_STOP",
+                "GIT",
+            ),
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    side_effect=OSError(secret),
+                ),
+                ["status"],
+                {},
+                "RESULT_UNKNOWN_STOP",
+                "GIT_EXEC",
+            ),
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    side_effect=subprocess.TimeoutExpired(["git"], 1),
+                ),
+                ["status"],
+                {"failure_stage": "FIXED_OPERATION_STAGE"},
+                "RESULT_UNKNOWN_STOP",
+                "FIXED_OPERATION_STAGE",
+            ),
+        )
+        for patch, args, kwargs, expected_code, expected_stage in cases:
+            with self.subTest(expected_stage=expected_stage), patch:
+                with self.assertRaises(guardian.GuardianReject) as caught:
+                    guardian.git(
+                        args,
+                        failure_code="RESULT_UNKNOWN_STOP",
+                        **kwargs,
+                    )
+            self.assertEqual(expected_code, caught.exception.code)
+            self.assertEqual(expected_stage, caught.exception.stage)
+            self.assertIs(caught.exception.write_attempted, False)
+            self.assertIs(caught.exception.result_uncertain, False)
+            receipt = guardian.fixed_receipt(
+                guardian.sanitized_failure(caught.exception)
+            )
+            self.assertNotIn(secret, receipt)
+            self.assertNotIn(remote_url, receipt)
+
     def test_raw_diff_parser_accepts_exact_add(self) -> None:
         raw = (
             b":000000 100644 "
@@ -602,6 +664,164 @@ class GitObjectTests(GuardianTestCase):
                 guardian.postverify_after_write(request, proof)
         self.assertIs(caught.exception.write_attempted, True)
         self.assertIs(caught.exception.result_uncertain, True)
+
+
+class CandidateFailureLocalizationTests(GuardianTestCase):
+    def event_and_request(self) -> tuple[dict, guardian.PublicationRequest]:
+        value = self.request_dict(sandbox=True)
+        user = {"id": 175191163, "login": "MassyuRed", "type": "User"}
+        event = {
+            "action": "opened",
+            "repository": {
+                "id": self.policy.repository_id,
+                "full_name": self.policy.repository,
+            },
+            "issue": {
+                "number": 10,
+                "title": guardian.TITLE_PREFIX + value["request_id"],
+                "body": self.body(value),
+                "created_at": "2026-07-25T00:00:00Z",
+                "user": dict(user),
+            },
+            "sender": dict(user),
+        }
+        request = guardian.parse_request_body(
+            event["issue"]["body"],
+            self.policy,
+            issue_created_at=event["issue"]["created_at"],
+        )
+        return event, request
+
+    def assert_candidate_transport_failure(
+        self,
+        *,
+        failed_operation: str,
+        expected_stage: str,
+        expected_operations: list[str],
+    ) -> None:
+        event, request = self.event_and_request()
+        secret = "candidate-transport-secret-sentinel"
+
+        for execution_mode in ("preflight", "reconcile"):
+            observed_operations: list[str] = []
+
+            def run(command, **_kwargs):
+                if "ls-remote" in command:
+                    ref = command[-1]
+                    if ref == request.staging_ref:
+                        operation = "staging-ref-observation"
+                        sha1 = request.staging_head_sha1
+                    else:
+                        self.assertEqual(request.target_ref, ref)
+                        operation = "target-ref-observation"
+                        sha1 = request.expected_old_sha1
+                    stdout = f"{sha1}\t{ref}\n".encode("ascii")
+                elif "fetch" in command:
+                    fetched_ref = command[-1].split(":", 1)[0]
+                    if fetched_ref == request.staging_ref:
+                        operation = "staging-ref-fetch"
+                    else:
+                        self.assertEqual(request.target_ref, fetched_ref)
+                        operation = "target-ref-fetch"
+                    stdout = b""
+                elif "rev-parse" in command:
+                    local_ref = command[-1]
+                    if local_ref.startswith("refs/cocolon-guardian/staging-"):
+                        operation = "staging-ref-rev-parse"
+                        stdout = f"{request.staging_head_sha1}\n".encode("ascii")
+                    else:
+                        self.assertTrue(
+                            local_ref.startswith("refs/cocolon-guardian/target-")
+                        )
+                        operation = "target-ref-rev-parse"
+                        stdout = f"{request.expected_old_sha1}\n".encode("ascii")
+                else:
+                    self.fail(
+                        f"unexpected git command before localized failure: {command!r}"
+                    )
+                observed_operations.append(operation)
+                return subprocess.CompletedProcess(
+                    command,
+                    128 if operation == failed_operation else 0,
+                    stdout=b"" if operation == failed_operation else stdout,
+                    stderr=secret.encode("ascii"),
+                )
+
+            with (
+                self.subTest(execution_mode=execution_mode),
+                mock.patch.dict(
+                    os.environ,
+                    {"GITHUB_SHA": request.workflow_sha1},
+                ),
+                mock.patch.object(guardian, "verify_trusted_checkout"),
+                mock.patch.object(guardian.subprocess, "run", side_effect=run),
+                mock.patch.object(guardian, "make_write_permit") as permit,
+                mock.patch.object(guardian, "push_exact_lease") as push,
+                mock.patch.object(
+                    guardian,
+                    "postverify_after_write",
+                ) as postverify,
+            ):
+                with self.assertRaises(guardian.GuardianReject) as caught:
+                    guardian.evaluate_request(
+                        event,
+                        self.policy,
+                        execution_mode=execution_mode,
+                    )
+            self.assertEqual("RESULT_UNKNOWN_STOP", caught.exception.code)
+            self.assertEqual(expected_stage, caught.exception.stage)
+            self.assertIs(caught.exception.write_attempted, False)
+            self.assertIs(caught.exception.result_uncertain, False)
+            self.assertEqual(expected_operations, observed_operations)
+            permit.assert_not_called()
+            push.assert_not_called()
+            postverify.assert_not_called()
+            sanitized = guardian.sanitized_failure(caught.exception)
+            self.assertIs(sanitized["postverified"], False)
+            receipt = guardian.fixed_receipt(sanitized)
+            self.assertNotIn(secret, receipt)
+
+    def test_candidate_staging_ref_observation_failure_is_localized(self) -> None:
+        self.assert_candidate_transport_failure(
+            failed_operation="staging-ref-observation",
+            expected_stage="CANDIDATE_STAGING_REF_OBSERVATION",
+            expected_operations=["staging-ref-observation"],
+        )
+
+    def test_candidate_staging_ref_fetch_failure_is_localized(self) -> None:
+        self.assert_candidate_transport_failure(
+            failed_operation="staging-ref-fetch",
+            expected_stage="CANDIDATE_STAGING_REF_FETCH",
+            expected_operations=[
+                "staging-ref-observation",
+                "staging-ref-fetch",
+            ],
+        )
+
+    def test_candidate_target_ref_observation_failure_is_localized(self) -> None:
+        self.assert_candidate_transport_failure(
+            failed_operation="target-ref-observation",
+            expected_stage="CANDIDATE_TARGET_REF_OBSERVATION",
+            expected_operations=[
+                "staging-ref-observation",
+                "staging-ref-fetch",
+                "staging-ref-rev-parse",
+                "target-ref-observation",
+            ],
+        )
+
+    def test_candidate_target_ref_fetch_failure_is_localized(self) -> None:
+        self.assert_candidate_transport_failure(
+            failed_operation="target-ref-fetch",
+            expected_stage="CANDIDATE_TARGET_REF_FETCH",
+            expected_operations=[
+                "staging-ref-observation",
+                "staging-ref-fetch",
+                "staging-ref-rev-parse",
+                "target-ref-observation",
+                "target-ref-fetch",
+            ],
+        )
 
 
 class ReconcileAndReportTests(GuardianTestCase):
@@ -694,6 +914,59 @@ class ReconcileAndReportTests(GuardianTestCase):
                 event,
                 {"outcome": "NOT_APPLIED_CONFIRMED_STOP"},
             )
+
+    def test_result_unknown_stop_is_reported_without_issue_close(self) -> None:
+        event, _, _ = self.event_and_request()
+        secret = "report-token-secret-sentinel"
+        with (
+            mock.patch.dict(
+                os.environ,
+                {
+                    "GH_TOKEN": secret,
+                    "GITHUB_REPOSITORY": self.policy.repository,
+                },
+            ),
+            mock.patch.object(
+                guardian,
+                "observe_production_main",
+                side_effect=["a" * 40, "a" * 40],
+            ),
+            mock.patch.object(
+                guardian,
+                "run_guardian",
+                side_effect=guardian.GuardianReject(
+                    "RESULT_UNKNOWN_STOP",
+                    "CANDIDATE_TARGET_REF_FETCH",
+                ),
+            ),
+            mock.patch.object(guardian, "load_event", return_value=event),
+            mock.patch.object(guardian, "_github_api") as github_api,
+            mock.patch.object(guardian, "_write_outputs") as write_outputs,
+        ):
+            exit_code = guardian.main(
+                [
+                    "report",
+                    "--event-path",
+                    "/tmp/guardian-test-event.json",
+                    "--policy-path",
+                    str(self.policy_path),
+                ]
+            )
+        self.assertEqual(1, exit_code)
+        github_api.assert_called_once()
+        method, url, token, payload = github_api.call_args.args
+        self.assertEqual("POST", method)
+        self.assertTrue(url.endswith("/comments"))
+        self.assertEqual(secret, token)
+        self.assertIn('"outcome":"RESULT_UNKNOWN_STOP"', payload["body"])
+        self.assertIn(
+            '"stage":"CANDIDATE_TARGET_REF_FETCH"',
+            payload["body"],
+        )
+        self.assertNotIn(secret, payload["body"])
+        reported = write_outputs.call_args.args[0]
+        self.assertEqual("RESULT_UNKNOWN_STOP", reported["outcome"])
+        self.assertEqual("unknown", reported["write_attempted"])
 
     def test_receipt_contains_exact_paths_but_not_failure_detail(self) -> None:
         value = self.request_dict()
@@ -1009,6 +1282,63 @@ class ReconcileAndReportTests(GuardianTestCase):
         for prefix in ("PREFLIGHT", "MAIN", "SANDBOX"):
             self.assertIn(f"GUARDIAN_{prefix}_OBSERVED_BEFORE:", workflow)
             self.assertIn(f"GUARDIAN_{prefix}_OBSERVED_AFTER:", workflow)
+
+    def test_unknown_preflight_cannot_unlock_publish_jobs(self) -> None:
+        with (
+            mock.patch.object(
+                guardian,
+                "run_guardian",
+                side_effect=guardian.GuardianReject(
+                    "RESULT_UNKNOWN_STOP",
+                    "CANDIDATE_STAGING_REF_OBSERVATION",
+                ),
+            ),
+            mock.patch.object(guardian, "_write_outputs") as write_outputs,
+            mock.patch.object(guardian, "make_write_permit") as permit,
+            mock.patch.object(guardian, "push_exact_lease") as push,
+        ):
+            exit_code = guardian.main(
+                [
+                    "preflight",
+                    "--event-path",
+                    "/tmp/guardian-test-event.json",
+                ]
+            )
+        self.assertEqual(1, exit_code)
+        output = write_outputs.call_args.args[0]
+        self.assertEqual("RESULT_UNKNOWN_STOP", output["outcome"])
+        self.assertEqual(
+            "CANDIDATE_STAGING_REF_OBSERVATION",
+            output["stage"],
+        )
+        permit.assert_not_called()
+        push.assert_not_called()
+
+        workflow_path = (
+            MODULE_PATH.parents[1]
+            / "workflows"
+            / "cocolon_formal_publication_guard.yml"
+        )
+        workflow = workflow_path.read_text(encoding="utf-8")
+        sandbox_job = workflow.split("  publish-sandbox:", 1)[1].split(
+            "\n  publish-main:",
+            1,
+        )[0]
+        main_job = workflow.split("  publish-main:", 1)[1].split(
+            "\n  report:",
+            1,
+        )[0]
+        self.assertIn("needs.preflight.result == 'success'", sandbox_job)
+        self.assertIn(
+            "needs.preflight.outputs.outcome == 'PREFLIGHT_PASSED'",
+            sandbox_job,
+        )
+        self.assertIn(
+            "needs.preflight.outputs.target_class == 'sandbox'",
+            sandbox_job,
+        )
+        self.assertIn("if: ${{ false }}", main_job)
+        self.assertIs(self.policy.production_main_enabled, False)
 
     def test_post_push_stop_is_uncertain_only_after_one_push_attempt(self) -> None:
         policy = dataclass_replace(
@@ -1342,6 +1672,281 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
                 os.chdir(old_cwd)
             self.assertEqual(proof.candidate_sha1, observed)
             self.assertEqual(base, proof.parent_sha1)
+
+    def test_corrected_merge_fixture_matches_preflight_and_reconcile(self) -> None:
+        with tempfile.TemporaryDirectory() as directory_name:
+            work = pathlib.Path(directory_name) / "work"
+            work.mkdir()
+            self.git_run(work, "init", "-q")
+            self.git_run(work, "config", "user.name", "test")
+            self.git_run(work, "config", "user.email", "test@example.invalid")
+            self.git_run(work, "checkout", "-qb", "main")
+            (work / "base.txt").write_text("base\n", encoding="utf-8")
+            self.git_run(work, "add", "base.txt")
+            self.git_run(work, "commit", "-qm", "base")
+            base = self.git_run(work, "rev-parse", "HEAD")
+
+            self.git_run(work, "checkout", "-qb", "candidate")
+            sandbox_path = pathlib.Path(
+                "Cocolon_前提資料/github_actions_guardian_sandbox/"
+                "suite-local/merge-lineage.txt"
+            )
+            raw = b"corrected merge lineage fixture\n"
+            (work / sandbox_path).parent.mkdir(parents=True)
+            (work / sandbox_path).write_bytes(raw)
+            self.git_run(work, "add", sandbox_path.as_posix())
+            self.git_run(work, "commit", "-qm", "candidate")
+            candidate = self.git_run(work, "rev-parse", "HEAD")
+            new_blob = self.git_run(
+                work,
+                "rev-parse",
+                f"HEAD:{sandbox_path.as_posix()}",
+            )
+
+            self.git_run(work, "checkout", "-q", "main")
+            self.git_run(
+                work,
+                "merge",
+                "--no-ff",
+                "-qm",
+                "corrected merge fixture",
+                "candidate",
+            )
+            corrected_merge = self.git_run(work, "rev-parse", "HEAD")
+            self.assertEqual(
+                [base, candidate],
+                self.git_run(
+                    work,
+                    "show",
+                    "-s",
+                    "--format=%P",
+                    corrected_merge,
+                ).split(),
+            )
+            self.git_run(work, "checkout", "--detach", "-q", base)
+
+            target_ref = (
+                "refs/heads/guardian/sandbox/suite-local/merge-lineage"
+            )
+            files = [
+                {
+                    "path": sandbox_path.as_posix(),
+                    "operation": "add",
+                    "old_mode": None,
+                    "new_mode": "100644",
+                    "old_blob_sha1": None,
+                    "new_blob_sha1": new_blob,
+                    "raw_sha256": guardian.sha256_hex(raw),
+                    "size_bytes": len(raw),
+                }
+            ]
+            files_sha256 = guardian.files_hash(files)
+            request_id = guardian.bound_request_id(
+                target_ref,
+                base,
+                files_sha256,
+            )
+            now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
+            value = self.request_dict(sandbox=True)
+            value.update(
+                {
+                    "request_id": request_id,
+                    "target_ref": target_ref,
+                    "workflow_sha1": base,
+                    "expected_old_sha1": base,
+                    "staging_ref": (
+                        f"{self.policy.staging_ref_prefix}{request_id}"
+                    ),
+                    "staging_head_sha1": corrected_merge,
+                    "commit": {
+                        "subject": "test: corrected merge fixture",
+                        "timestamp_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    },
+                    "expires_at_utc": (
+                        now + dt.timedelta(hours=1)
+                    ).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "files": files,
+                    "files_sha256": files_sha256,
+                }
+            )
+            value["request_sha256"] = guardian.request_hash(value)
+            user = {"id": 175191163, "login": "MassyuRed", "type": "User"}
+            event = {
+                "action": "opened",
+                "repository": {
+                    "id": self.policy.repository_id,
+                    "full_name": self.policy.repository,
+                },
+                "issue": {
+                    "number": 11,
+                    "title": guardian.TITLE_PREFIX + request_id,
+                    "body": self.body(value),
+                    "created_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "user": dict(user),
+                },
+                "sender": dict(user),
+            }
+
+            def observe(ref: str, *, failure_stage: str | None = None):
+                if ref == value["staging_ref"]:
+                    return corrected_merge
+                self.assertEqual(target_ref, ref)
+                return base
+
+            def fetch(
+                ref: str,
+                _namespace: str,
+                *,
+                fetch_failure_stage: str | None = None,
+            ):
+                if ref == value["staging_ref"]:
+                    return corrected_merge
+                self.assertEqual(target_ref, ref)
+                return base
+
+            outcomes: list[tuple[str, str]] = []
+            old_cwd = os.getcwd()
+            try:
+                os.chdir(work)
+                for execution_mode in ("preflight", "reconcile"):
+                    with (
+                        self.subTest(execution_mode=execution_mode),
+                        mock.patch.dict(os.environ, {"GITHUB_SHA": base}),
+                        mock.patch.object(
+                            guardian,
+                            "remote_ref_sha",
+                            side_effect=observe,
+                        ) as remote,
+                        mock.patch.object(
+                            guardian,
+                            "_fetch_exact",
+                            side_effect=fetch,
+                        ) as exact_fetch,
+                        mock.patch.object(
+                            guardian,
+                            "make_write_permit",
+                        ) as permit,
+                        mock.patch.object(
+                            guardian,
+                            "push_exact_lease",
+                        ) as push,
+                        mock.patch.object(
+                            guardian,
+                            "postverify_after_write",
+                        ) as postverify,
+                    ):
+                        with self.assertRaises(
+                            guardian.GuardianReject
+                        ) as caught:
+                            guardian.evaluate_request(
+                                event,
+                                self.policy,
+                                execution_mode=execution_mode,
+                            )
+                    outcomes.append(
+                        (caught.exception.code, caught.exception.stage)
+                    )
+                    receipt = guardian.fixed_receipt(
+                        guardian.sanitized_failure(caught.exception)
+                    )
+                    self.assertIn(
+                        '"outcome":"REJECTED_NON_LINEAR_LINEAGE"',
+                        receipt,
+                    )
+                    self.assertIn('"stage":"CANDIDATE"', receipt)
+                    self.assertNotIn("RESULT_UNKNOWN_STOP", receipt)
+                    self.assertEqual(2, remote.call_count)
+                    self.assertEqual(2, exact_fetch.call_count)
+                    permit.assert_not_called()
+                    push.assert_not_called()
+                    postverify.assert_not_called()
+
+                with (
+                    mock.patch.dict(
+                        os.environ,
+                        {
+                            "GITHUB_SHA": base,
+                            "GH_TOKEN": "report-token",
+                            "GITHUB_REPOSITORY": self.policy.repository,
+                        },
+                    ),
+                    mock.patch.object(
+                        guardian,
+                        "load_event",
+                        return_value=event,
+                    ),
+                    mock.patch.object(
+                        guardian,
+                        "observe_production_main",
+                        side_effect=[base, base],
+                    ),
+                    mock.patch.object(
+                        guardian,
+                        "remote_ref_sha",
+                        side_effect=observe,
+                    ),
+                    mock.patch.object(
+                        guardian,
+                        "_fetch_exact",
+                        side_effect=fetch,
+                    ),
+                    mock.patch.object(guardian, "_github_api") as github_api,
+                    mock.patch.object(
+                        guardian,
+                        "_write_outputs",
+                    ) as write_outputs,
+                    mock.patch.object(
+                        guardian,
+                        "make_write_permit",
+                    ) as report_permit,
+                    mock.patch.object(
+                        guardian,
+                        "push_exact_lease",
+                    ) as report_push,
+                    mock.patch.object(
+                        guardian,
+                        "postverify_after_write",
+                    ) as report_postverify,
+                ):
+                    report_exit = guardian.main(
+                        [
+                            "report",
+                            "--event-path",
+                            "/tmp/guardian-merge-event.json",
+                            "--policy-path",
+                            str(self.policy_path),
+                        ]
+                    )
+                self.assertEqual(0, report_exit)
+                self.assertEqual(
+                    ["POST", "PATCH"],
+                    [call.args[0] for call in github_api.call_args_list],
+                )
+                receipt = github_api.call_args_list[0].args[3]["body"]
+                self.assertIn(
+                    '"outcome":"REJECTED_NON_LINEAR_LINEAGE"',
+                    receipt,
+                )
+                self.assertIn('"stage":"CANDIDATE"', receipt)
+                self.assertNotIn("RESULT_UNKNOWN_STOP", receipt)
+                reported = write_outputs.call_args.args[0]
+                self.assertEqual(
+                    "REJECTED_NON_LINEAR_LINEAGE",
+                    reported["outcome"],
+                )
+                self.assertEqual("CANDIDATE", reported["stage"])
+                report_permit.assert_not_called()
+                report_push.assert_not_called()
+                report_postverify.assert_not_called()
+            finally:
+                os.chdir(old_cwd)
+            self.assertEqual(
+                [
+                    ("REJECTED_NON_LINEAR_LINEAGE", "CANDIDATE"),
+                    ("REJECTED_NON_LINEAR_LINEAGE", "CANDIDATE"),
+                ],
+                outcomes,
+            )
 
     def test_head_drift_fixture_advances_target_and_stale_lease_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory_name:

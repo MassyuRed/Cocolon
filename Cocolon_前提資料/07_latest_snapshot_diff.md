@@ -20180,3 +20180,136 @@ target保存自体が安全でも、設計どおりの前後観測がreceiptに�
 この閉鎖はGitHub transport maintenanceだけであり、D1 RED、
 mashos-api source / test、event1、readiness、reservation、formal attempt、
 exact134、P2、Product Read、correction、B6、Cycle001 acceptanceを開始しない。
+
+# 2026-07-26 guardian Test 3 merge-lineage report Git failure localization maintenance / conditional reflection contract
+
+実装とローカル試験は、次の承認範囲で作成した。
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_REPORT_GIT_FAILURE_LOCALIZATION_MAINTENANCE_IMPLEMENTATION_AND_LOCAL_GREEN_ONLY
+```
+
+GitHub反映とfull post-fetchだけは、次の別承認で行う。
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_REPORT_GIT_FAILURE_LOCALIZATION_MAINTENANCE_GITHUB_REFLECTION_AND_POST_FETCH_ONLY
+```
+
+この節を含むrevisionは、GitHub `main`が
+`b9c0edd192569f91dae999927955eac5e5ba560f`とexact一致し、そのdirect childを
+承認済みexact 6 pathsだけで一回のexact leaseにより反映し、full post-fetchで
+remote head、parent exact1、tree、exact path set、全対象bytes、Git blob、
+raw SHA-256、sizeが一致した場合に限り、
+`REFLECTED_POST_FETCH_VERIFIED_FRESH_SANDBOX_SUITE_NOT_RUN`として成立する。
+いずれかが失敗または結果不明なら
+`LOCAL_GREEN_NOT_REFLECTED_STOP`のまま停止する。
+revision自身へ自己参照するcommit SHAは埋め込まず、この条件とpost-fetch証拠で
+formal stateを決める。
+
+承認済み設計:
+
+```text
+Cocolon_GitHub_Actions_Publication_Guardian_Report_Git_Failure_Localization_Maintenance_Design_ReadOnly_20260726.md
+UTF-8 SHA-256:
+3a2d84ed35551cefbeada0769d80846996ed03ee2c7b05e8e1a99e756203d9cb
+```
+
+## 確認した事実
+
+- ローカル開始点は
+  `b9c0edd192569f91dae999927955eac5e5ba560f`。
+- GitHub登録済みReplacement 03のtitle / fingerprintとcurrent sessionの
+  秘密鍵から導出した公開fingerprintがexact一致し、owner-only permission、
+  GitHub公式host identity、repository認証を確認した。
+- authenticated `ls-remote`、全branch / tag fetch、strict fsck後の
+  GitHub `main`も
+  `b9c0edd192569f91dae999927955eac5e5ba560f`であり、ローカル開始点と
+  exact一致した。
+- Issue #9 / run `30162841240`の最終結果は
+  `REJECTED_GIT_DIFF_FORMAT / CANDIDATE`であり、Issueはcloseされたが
+  Test 3合格ではない。
+- Issue #10 / run `30163030641`とIssue #11 / run `30176589327`は、
+  preflightが`REJECTED_NON_LINEAR_LINEAGE / CANDIDATE`、
+  reportが`RESULT_UNKNOWN_STOP / GIT`となった。両Issueはopenのまま残り、
+  Issue #11で承認された一回だけの再試行は消費済みである。
+- 上記試行後もproduction mainと試験targetは
+  `b9c0edd192569f91dae999927955eac5e5ba560f`から変化していない。
+  修正済み二親merge staging
+  `4e23a9fee57062285afa7236771f5c0578ce5d2a`も証拠として保持する。
+- 旧GitHub sandbox suiteはTest 1 / 2だけが合格、Test 3はpartial blocked、
+  Test 4 / 5は未実行で、合計`2 / 5`である。
+- `RESULT_UNKNOWN_STOP / GIT`となり得たcandidate inspection内の
+  Git実行は、次の四つに限定されていた。
+
+```text
+CANDIDATE_STAGING_REF_OBSERVATION
+CANDIDATE_STAGING_REF_FETCH
+CANDIDATE_TARGET_REF_OBSERVATION
+CANDIDATE_TARGET_REF_FETCH
+```
+
+- `guardian.py`へ上記固定stageを追加した。既存callerの既定stage
+  `GIT` / `GIT_EXEC`、failure code、write状態、retry回数、
+  stderr非掲載、receipt schemaは変更していない。
+- 修正済み二親merge fixtureを、preflightとreconcileの両方が
+  `REJECTED_NON_LINEAR_LINEAGE / CANDIDATE`で拒否することを
+  ローカル試験で確認した。
+- `RESULT_UNKNOWN_STOP`はreceipt commentだけを作る契約でIssueをcloseせず、
+  preflightのexit 1によりsandbox publishを解放せず、
+  production publishは静的falseのままであることを確認した。
+- ローカルguardian試験は、既存64件と新規8件の合計72件が成功した。
+
+```text
+python .github/cocolon_formal_publication_guard/test_guardian.py -v
+Ran 72 tests
+OK
+```
+
+exact maintenance changed paths:
+
+```text
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+workflow、policy、request schema、`00`、`05`、work attitude、
+mashos-apiは変更していない。LOCAL_GREEN_ONLY完了時点では、
+GitHub commit / push、Issue操作、Actions実行、branch / test ref操作、
+main / production操作は0件だった。
+reflection authorityが許可するGitHub writeは、上記conditional contractを
+満たすmainへの一回だけであり、Issue、Actions、試験branch / ref、
+production操作は許可しない。
+作業開始前から存在した`android/app/libs/unityLibrary-debug.aar`の変更と
+guardian `__pycache__`はscope外であり、上記6 pathsへ含めていない。
+
+## 未確認
+
+- Issue #10 / #11の旧revisionでは、上記四操作のどれが実際に失敗したか。
+- runner、通信経路、credential、GitHub serviceのどれが外部原因だったか。
+- formal GitHub反映状態は、上記conditional reflection contractだけで確定する。
+- Actions上の四stage実測、新しいsandbox 5試験。
+- 新revisionのGitHub sandbox suiteは`0 / 5 NOT_RUN`である。
+
+## 推測
+
+旧receiptのexactな`RESULT_UNKNOWN_STOP / GIT`により、失敗位置を
+上記四つのnonzero Git commandへ限定できる。ただし、その証拠だけから
+network、credential、runner、GitHub serviceのいずれかを原因と断定できない。
+
+## 華恋の意見
+
+旧guardianが不明時にwriteを解放せず停止した判断は正しかった。
+不足していたのは安全性ではなく、四地点を一つの`GIT`へ畳んだ診断粒度である。
+今回の最小修正で安全条件を弱めず、同じ四操作のGit実行失敗が再発した場合は、
+次の一回の実測で停止地点を特定できる状態にした。
+
+## Step 11境界
+
+このmaintenance revisionはGitHub transport診断保守だけである。
+D1 RED、mashos-api source / test、event1、readiness、reservation、
+formal attempt、exact134、P2、Product Read、correction、B6、
+Cycle001 acceptanceを開始しない。

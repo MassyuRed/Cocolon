@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_github_actions_publication_guard
 title: "Cocolon GitHub Actions formal publication guardian owner"
-revision_date: "2026-07-25"
+revision_date: "2026-07-26"
 repository_scope: "MassyuRed/Cocolon"
 repository_id: 1163713768
 secret_material_allowed: false
@@ -732,3 +732,141 @@ uncertain stopとなることを含む。
 production policyはfalse、`publish-main`は静的disabledのまま変更しない。
 このmaintenance反映後のworkflow SHAで全request body / hash / candidateを
 再生成してから、pre-suite boundary Issueと5試験を開始する。
+
+# 2026-07-26 sandbox suite partial completion / report Git failure localization maintenance
+
+## GitHub実動で確認した状態
+
+| 証拠 | 確認済み結果 | Issue | 試験判定 |
+|---|---|---|---|
+| #9 / run 30162841240 | final `REJECTED_GIT_DIFF_FORMAT / CANDIDATE` | closed | Test 3不合格 |
+| #10 / run 30163030641 | preflight `REJECTED_NON_LINEAR_LINEAGE / CANDIDATE`、report `RESULT_UNKNOWN_STOP / GIT` | open | partial blocked |
+| #11 / run 30176589327 | preflight `REJECTED_NON_LINEAR_LINEAGE / CANDIDATE`、report `RESULT_UNKNOWN_STOP / GIT` | open | 一回だけの再試行を消費しpartial blocked |
+
+旧suiteはTest 1 / 2が合格、Test 3がpartial blocked、Test 4 / 5が
+未実行で、`2 / 5`である。Issue #9 / #10 / #11、各run、試験branch、
+待機branchは再実行・改変・削除せず証拠として残す。
+
+## 旧`RESULT_UNKNOWN_STOP / GIT`が示す範囲
+
+Issue #10 / #11の旧revisionで、candidate inspectionが
+`REJECTED_NON_LINEAR_LINEAGE / CANDIDATE`まで進んだ後、
+report reconciliationが同じcandidateを再取得する前段で
+`RESULT_UNKNOWN_STOP / GIT`となり得た場所は次の四つである。
+
+```text
+staging ref ls-remote
+staging ref fetch
+target ref ls-remote
+target ref fetch
+```
+
+これは四つのどれかへ限定する証拠であり、network、credential、runner、
+GitHub serviceのどれが原因かを確定する証拠ではない。
+
+## ローカル実装
+
+`git()`へ任意の固定`failure_stage`を受け取るkeyword-only引数を追加した。
+candidate inspectionからだけ、次の固定literalを渡す。
+
+```text
+CANDIDATE_STAGING_REF_OBSERVATION
+CANDIDATE_STAGING_REF_FETCH
+CANDIDATE_TARGET_REF_OBSERVATION
+CANDIDATE_TARGET_REF_FETCH
+```
+
+`remote_ref_sha()`はこのstageを`ls-remote`だけへ渡す。
+`_fetch_exact()`は`fetch_failure_stage`をfetchだけへ渡し、
+後続local `rev-parse`の既存分類は変えない。
+
+次は変更しない。
+
+- stage未指定nonzeroの`GIT`
+- stage未指定OSError / timeoutの`GIT_EXEC`
+- malformed remote outputの`REMOTE_REF`
+- caller指定failure code
+- `write_attempted` / `result_uncertain`
+- retryなし
+- failure detailからstderr、実行Git command、操作対象remote URL、
+  token、credentialをreceiptへ新たに加えないこと
+- 既存の許可済み`target_ref` / Actions `run_url` receipt field
+- request / receipt schema
+- workflow / policy
+
+## ローカル試験
+
+既存64件に次の8件を追加し、合計72件が成功した。
+
+1. staging ref観測失敗を固定stageへ分離する。
+2. staging fetch失敗を固定stageへ分離する。
+3. target ref観測失敗を固定stageへ分離する。
+4. target fetch失敗を固定stageへ分離する。
+5. 既定`GIT` / `GIT_EXEC`とsecret非掲載を維持する。
+6. 修正済み二親merge fixtureをpreflight / reconcileが同じ
+   `REJECTED_NON_LINEAR_LINEAGE / CANDIDATE`で拒否する。
+7. `RESULT_UNKNOWN_STOP`はcommentを残すがIssueをcloseしない。
+8. unknown preflightはsandbox publishを解放せず、
+   production publishも静的falseのままにする。
+
+全ての四stage failureで、write permit、push、postverify-after-writeが
+0回であることも確認した。
+
+```text
+python .github/cocolon_formal_publication_guard/test_guardian.py -v
+Ran 72 tests
+OK
+```
+
+## 現在の安全境界
+
+- policyは`OBSERVE_AND_SANDBOX_ONLY`、
+  `production_main_enabled=false`を維持する。
+- workflowの`publish-main`は`if: ${{ false }}`を維持する。
+- `publish-sandbox`はpreflight job success、`PREFLIGHT_PASSED`、
+  target class sandboxの三条件が揃った場合だけ実行する。
+- unknown reportはremote-firstの保守結果をcommentし、Issueをopenのまま残す。
+- 今回はworkflow、policy、schemaを変更していない。
+- LOCAL_GREEN_ONLY完了時点では、GitHub commit / push、Issue / Actions、
+  branch / test ref、main / productionの変更は0件だった。
+
+## Formal reflection contract
+
+authority:
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_REPORT_GIT_FAILURE_LOCALIZATION_MAINTENANCE_GITHUB_REFLECTION_AND_POST_FETCH_ONLY
+```
+
+expected old:
+
+```text
+b9c0edd192569f91dae999927955eac5e5ba560f
+```
+
+current maintenance transportはReplacement 03である。GitHub `main`が
+expected oldとexact一致し、そのdirect childを一回のexact leaseと
+exact 6 pathsのfull post-fetchで確認できた場合だけ
+`REFLECTED_POST_FETCH_VERIFIED_FRESH_SANDBOX_SUITE_NOT_RUN`とする。
+失敗または結果不明なら`LOCAL_GREEN_NOT_REFLECTED_STOP`とする。
+
+このauthorityはIssue作成、Actions実行、試験branch / ref操作、
+sandbox再試験、production有効化、EmlisAI作業を許可しない。
+
+## 未確認
+
+- formal GitHub反映状態は上記conditional reflection contractだけで確定する。
+- GitHub Actions上で四stageのどれが実測されるか。
+- 新revisionを基準にしたfresh sandbox suite。現在`0 / 5 NOT_RUN`。
+- Test 4 / 5、post-suite boundary、production activation / canary。
+
+guardian revisionが変わったため、次に実地試験を承認する場合は、
+旧suiteの残数だけを継続せず、新しいworkflow-bound pre-suite boundary、
+新suite ID、新request ID、新staging / target refs、新Issueで
+fresh `0 / 5`から行う。旧Issueと旧refは証拠として保持する。
+
+## Step 11境界
+
+このmaintenance revisionはGitHub transport診断保守だけである。
+Step 11のsource、worker、reservation、formal attempt、Cycle001 stateを
+進めない。
