@@ -4016,3 +4016,170 @@ This candidate authority is not approved. Separate approval is required.
 Mash is not required to perform Git, SSH, or GitHub configuration. A later
 formal retry authority is selected only after the repair authority completes
 and is independently reverified. Automatic progression is false. STOP.
+
+## 12.37 2026-07-25 formal success/failure lane owner completeness RED freeze
+
+Approved and completed RED authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+Fixed entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+5722c4aea2e1d42d7f84e9b36e6322b538615bf2
+
+Cocolon tree:
+a804fcbf4691ea9c842f1c8fa13b368f87836aa0
+
+mashos-api:
+191e9d8be63132f10f94e2b2f54c6bae94ce1f07
+
+mashos-api tree:
+e68df6587b8cb674456b3bc9bceb23e0699f33aa
+```
+
+The RED freeze changed exact1 test path and exact0 production paths:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch001_formal_lane_owner_completeness_red.py
+```
+
+Frozen identity:
+
+```text
+Git blob SHA-1:
+c410cdc4ed0d24565035cfb735b5039bb8ffbf36
+
+raw SHA-256:
+ab6b340fe5e845d546f6a86ef25c78c511a5f6f703c320d8b75d13041f1bb96f
+```
+
+GitHub reflection:
+
+```text
+mashos-api result:
+ef9996aee20e2aed7b51d65a3559b9aea30f429e
+
+result tree:
+a22b035febb6db4b1de274e656b6fbe0557d8cd9
+
+parent:
+191e9d8be63132f10f94e2b2f54c6bae94ce1f07
+
+ahead / behind:
+1 / 0
+
+changed test / production path count:
+1 / 0
+```
+
+The exact12 test collection and execution on the actual GitHub result commit
+were:
+
+```text
+collected:
+12
+
+passed:
+3
+
+causal failed:
+9
+
+collection / unexpected errors:
+0 / 0
+
+warnings:
+1
+```
+
+The RED freezes:
+
+1. production build and split semantic verification of the exact15-key
+   `all11_atomic_publication_manifest.v2`;
+2. exact17 coherent manifest-semantic attacks and rejection at supporting,
+   candidate, and published layers;
+3. runner/owner/independent terminal-state agreement for success, partial,
+   collection, timeout, and infrastructure outcomes;
+4. exact134 checkpoint and real environment preservation after timeout or
+   post-start infrastructure failure;
+5. a complete parent ordering event1, reservation, exact134 once, attempt
+   verification, mutually exclusive success/failure publication, and
+   postverification; and
+6. current completion-closure ownership.
+
+The exact9 causal failures were limited to those missing production owners.
+There were no syntax, import, fixture, or collection faults.
+
+Body-free evidence:
+
+1. result commit `8f3332e3bda39058deb6a0fce8a285afbf793870`, blob
+   `a7c8917b13f41e661348a833795055c5d806018e`, raw SHA-256
+   `32f0e40545bf0bc1e240f21c2211478adb657b1863e63477711df34438c34754`;
+2. receipt commit `4530e759e3ea577cb2ff8c265704c3f95bcb8e5c`, blob
+   `26b3fc485204f1ae83b9d5ef77fe4f124aef8cc2`, raw SHA-256
+   `a648e9c7eed7f6128237019804fb1f66fd8fbc933452121df6d8d938729c7f87`,
+   canonical receipt SHA-256
+   `def1bc2fdd42d4881b2fc0f1a34fed8b82e8526f542fa45baf94bca9c6d5c7fe`;
+3. handoff commit `e3b354a5f5cd20c9375eaa6b33acc8ffa09f41b9`, blob
+   `7ddcd8a90a2f2a1c50b5d40cf2bd48f5079bc4a2`, raw SHA-256
+   `3b6bd3702ee5f33ad4b7a8a023979a4a84da2caf0dac94d056bdd7b5ecc507e6`.
+
+Three read-only subagent lanes audited the authority/evidence pattern,
+manifest semantics, and runner/formal-parent boundary. Subagent edits, test
+runs, commits, and GitHub writes were exact0. Karen performed the final
+specification reconciliation, exact12 execution, commit, lease-protected
+Cocolon writes, and post-fetch verification.
+
+No formal exact134 or broad regression was run. No formal reservation,
+attempt artifact, accepted receipt, Step receipt, all11 chain, atomic
+manifest, sequence event, private body, P2 transition, or Cycle acceptance
+was created.
+
+Preserved state:
+
+```text
+RED:
+CAUSAL_RED_FROZEN
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FORMAL EXACT134 / BROAD REGRESSION:
+NOT_RUN / NOT_RUN
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+P1_RETRY006:
+PRE_EVENT1_REPAIR_IN_PROGRESS
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+Mash's same instruction already approved the next separate sequential
+authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+It becomes active only after the RED result, receipt, handoff, this plan entry,
+and the current latest-snapshot reflection are committed and full-postfetch
+verified. It permits only the production repair required by the byte-frozen
+RED and targeted GREEN verification. It does not authorize formal exact134,
+broad regression, formal artifact issuance, private body, P2, fresh batch,
+exact100, Product Read, correction, B6, or Cycle001 acceptance.
