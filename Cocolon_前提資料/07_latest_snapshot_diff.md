@@ -18978,3 +18978,251 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_C
 current completion closure登録、targeted GREEN確認だけである。formal exact134、
 broad regression、formal artifact issuance、private body、P2、fresh batch、
 exact100、Product Read、correction、B6、Cycle001 acceptanceは許可されない。
+
+# 2026-07-25 差分追記: formal success/failure lane owner completeness implementation / targeted GREEN / authority STOP
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+## 確認した事実
+
+1. implementation / GREEN entryは次で固定した。
+
+   ```text
+   Karen-Diary:
+   700f749f5149cac1f8bd4bab8a364d524a56985b
+
+   Cocolon:
+   1db795b8b9abf1925b581401575edc23f1f5021e
+
+   Cocolon tree:
+   81131fb7fd787d01da1cdc884817f88609dd78b2
+
+   mashos-api:
+   ef9996aee20e2aed7b51d65a3559b9aea30f429e
+
+   mashos-api tree:
+   a22b035febb6db4b1de274e656b6fbe0557d8cd9
+   ```
+
+2. mashos-api resultは
+   `e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd`、tree
+   `1c8970e91dbc793fcb3b81b51c73291f0326a565`、parent
+   `ef9996aee20e2aed7b51d65a3559b9aea30f429e`である。
+3. GitHub compareは`ahead_by=1 / behind_by=0 / total_commits=1`である。
+   changed production pathはexact5、add exact1 / modify exact4、
+   additions 1238 / deletions 15である。
+4. exact5 identityは次である。
+
+   | change | role | path | Git blob SHA-1 | raw SHA-256 |
+   |---|---|---|---|---|
+   | modified | canonical current-closure owner | `ai/services/ai_inference/emlis_ai_recovery_epoch001_canonical_current_closure_v3.py` | `25ba71682721834de82002c44f5de3fba03ef5be` | `c8cc109adbb0b95e5d571b7d75f267d52d5076e17b169fd96699667b02782436` |
+   | modified | atomic manifest builder / semantic owner | `ai/tools/emlis_nls_v3_recovery_epoch001_atomic_publication_bundle_v3.py` | `89a4604b80112b7876f431c7a240f4bca1fcc11a` | `d3963b89e04278fea3759a9f30bb25b168f91adf8ac54dea68095719c98d1528` |
+   | modified | independent verifier | `ai/tools/emlis_nls_v3_recovery_epoch001_closure_receipt_verify.py` | `d734ba89efab75d85987de0a8039bb7dbe053641` | `600b0eec2850ff58529c5ffe40a251ee119236265cfa745dbcf2e27fbbc0ed33` |
+   | modified | exact134 proof runner | `ai/tools/emlis_nls_v3_recovery_epoch001_current_step_proof_run.py` | `fe1ee4dfbc044739f9452b3b3e0f32061a895596` | `df42d097ec356c9c5a860ffda54e5cdf119d3a1d8cef0518576f99d0dbd8c749` |
+   | added | formal success/failure parent owner | `ai/tools/emlis_nls_v3_recovery_epoch001_formal_parent_orchestrator_v3.py` | `f06f16d2bb838102d9e1068ff823e055de62fa2b` | `6293b075e48c5501f9e443545d7d04484b92265f0378ff30d847bed81a66a7b0` |
+
+5. test、fixture、formal artifact、public API、DB、RN、product runtime、
+   unrelated production pathの変更は0である。
+6. atomic publication ownerはexact15-key
+   `all11_atomic_publication_manifest.v2`をbuildし、exact13 core identity /
+   order / uniqueness / count / set hash、supporting exact14、changed path
+   exact15、source event、base commit、event path、ref mode、body-free、
+   self hashをsemantic validationする。
+7. independent verifierは同じsemantic claimをownerから独立して再導出する。
+   supporting、candidate、publishedの各layerでexact17 coherent attackを
+   `PUBLICATION_BUNDLE_INVALID`へ閉じる。
+8. runner / owner / independent verifierのterminal stateは次で一致する。
+
+   ```text
+   success:
+   SUCCEEDED / None
+
+   partial:
+   FAILED / RUN_PARTIAL
+
+   collection error:
+   FAILED / RUN_COLLECTION_ERROR
+
+   timeout:
+   TIMED_OUT / RUN_TIMED_OUT
+
+   infrastructure exit 125:
+   INFRA_ERROR / RUN_INFRA_ERROR
+   ```
+
+9. timeoutとpost-start infrastructure failureはvalid exact134 collection
+   checkpoint、exact134 failure envelope、real pytest versionを保持する。
+10. new formal parentは次の順序をownerとして持つ。
+
+    ```text
+    pre-event1 admission
+    -> event1 postverification
+    -> reservation postverification
+    -> exact134 once
+    -> owner and independent attempt verification
+    -> exactly one terminal lane
+    -> terminal publication postverification
+    ```
+
+11. `SUCCEEDED`だけがaccepted -> Step exact11 -> all11 -> manifest ->
+    event2へ進む。`FAILED` / `TIMED_OUT` / `INFRA_ERROR`はfailure-attempt
+    STOPだけへ進む。reservation消費後の不確実性は
+    `ATTEMPT_CONSUMPTION_UNKNOWN_STOP`となり、自動retryもterminal
+    publicationも行わない。
+12. Git/GitHub mutationとexact134 workerはexplicit external portである。
+    formal parentはsubprocess、git、GitHub、test moduleをimportせず、
+    authorityやtransportをhelper内部へ隠さない。
+13. canonical ownerとindependent verifierのcompletion closureはnew formal
+    parentとbyte-frozen REDを共に含み、parent roleも一致する。
+14. frozen RED testはGit blob
+    `c410cdc4ed0d24565035cfb735b5039bb8ffbf36`、raw SHA-256
+    `ab6b340fe5e845d546f6a86ef25c78c511a5f6f703c320d8b75d13041f1bb96f`
+    のままである。preceding exact4 protected testsもbyte-immutableである。
+15. targeted denominatorは次である。
+
+    ```text
+    accepted-success exact10
+    + sequence/ledger/publication exact27
+    + selected existing reconciliation exact3
+    + formal-lane owner completeness exact12
+    = exact52
+    ```
+
+16. actual GitHub result commitのclean detached checkoutで、bytecode writeと
+    pytest plugin autoloadをdisableして次を実測した。
+
+    ```text
+    exact12:
+    12 passed / 0 failed / 0 errors / 1 warning
+    66.83 s
+
+    exact52:
+    52 passed / 0 failed / 0 errors / 1 warning
+    888.54 s
+    ```
+
+17. warningは既存
+    `api_emotion_submit.py:906`のPydantic V1 `@root_validator`
+    deprecationであり、そのfileは変更していない。
+18. exact134を名前に含むtest fileはcontract oracleである。formal
+    exact134とbroad regressionは実行していない。
+19. formal reservation、attempt artifact、accepted receipt、Step00-10、
+    all11、atomic manifest、event1/event2、private body、P2、Cycle
+    acceptanceは全て0または未作成である。source baselineは`UNLOCKED`である。
+20. implementation resultはcommit
+    `1202e271b6ff7aae709e5caaafcd5aa0a4011555`、blob
+    `4ace545968c0861e85bc191ecb75e3888b353f3d`、raw SHA-256
+    `476b75430a07a6938c0ea8b249a9359b5f30617381f10af78004e1995ce2f1f0`
+    である。
+21. implementation evidence receiptはcommit
+    `f888d3372134629231a03241dcaf0e1aa9aa23fb`、blob
+    `d8c8155a3613c93f0e3e9fc046f6b9f44cb4550d`、raw SHA-256
+    `987c908667a6e59d514ddd21c35bf352ad806bb49cf612d7aacbb5206536df48`、
+    canonical SHA-256
+    `e978d1ae062056eec012f9f2d891549700ba2c8b485dbc8535e55bb18f3cd759`
+    である。
+22. STOP handoffはcommit
+    `81106214a1e9e1d163ba1e465ead328f5bbb1b8e`、blob
+    `d5c931b54b06755eb60d9dc7f344bc367b75d699`、raw SHA-256
+    `f63890a741d626cdf51dcc1f1811887bf70fe0a35c6cf061acd79b235c85058d`
+    である。
+23. Execution and Closure Plan §12.38 appendはcommit
+    `29f9183ea1a47586b658842a2007fded43f487f8`、blob
+    `09c0764f9908b98dfca2b099f6aef407da976b07`、raw SHA-256
+    `d09a1ca72f93e9a73b165ae2a16bb31caa3c079c69b474ad9a7fdd6d17ecad6f`
+    である。
+24. result / receipt / handoff / planは各exact1 path commitであり、直前の
+    GitHub mainをexpected-old SHAにしたleaseとfull post-fetchで確認した。
+25. current authorityのread-only subagentはimplementation audit exact2と
+    evidence audit exact1である。subagent edit / test / commit / GitHub
+    writeはexact0であり、最終判断・変更・test・commit・GitHub writeは華恋が
+    行った。
+
+## 推測
+
+preceding exact40 GREENはcomponent contractを証明したが、event1からterminal
+publicationまでのone-shot orderとmutual exclusionを一つのproduction parentで
+証明していなかった。そのためsemantic-invalid manifestと、runner由来では
+owner/verifier invalidになり得るfailure envelopeが残った。
+
+current exact52 GREENは、このsource commitにおけるcontract connectionと
+fail-closed性を証明する。future formal exact134の成否、future environment、
+fresh authority / challenge / reservation / publication leaseまでは予測しない。
+
+RETRY006はclosed historical pre-event1 STOPであり、このrepairはsource closureを
+変更した。RETRY006をresume/reuseすることはできない。
+
+## 華恋の意見
+
+implementation authorityは完了した。しかしformal processは進んでおらず、
+Cycle001も完了していない。この二つを分離して記録することが、targeted GREENを
+formal acceptanceへ誤昇格させないために必要である。
+
+success、ordinary failure、timeout、infrastructure failure、reservation
+consumption uncertaintyの行先が一つのparentで排他的に閉じたため、formal retryを
+再検討できる技術的前提は整った。ただし、existing recordにpost-RETRY006 exact
+tokenは存在しない。数字の連番からtokenを推測して発行せず、authority選定と
+明示承認を別のuser decisionへ戻す。
+
+## 現在状態
+
+```text
+STATUS:
+FORMAL_LANE_OWNER_COMPLETENESS_IMPLEMENTED_TARGETED_EXACT52_GREEN_AUTHORITY_STOP
+
+REPAIR:
+FORMAL_LANE_OWNER_COMPLETENESS_IMPLEMENTED_TARGETED_EXACT52_GREEN
+
+P1_RETRY006:
+CLOSED_NOT_RESUMABLE_NOT_REUSABLE
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FORMAL EVENT / RESERVATION / ATTEMPT / EXACT134:
+NOT_CREATED / 0 / 0 / NOT_RUN
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+BROAD_REGRESSION:
+NOT_RUN_NOT_CLAIMED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+## 次の境界
+
+```text
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+REQUIRED_MASH_DECISION:
+SEPARATE_AUTHORITY_SELECTION_AND_EXPLICIT_APPROVAL
+
+MASH_FILE_GIT_SSH_GITHUB_SETUP_WORK:
+NONE
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+current recordはpost-RETRY006 exact formal-retry tokenを選定していない。次へ
+進める場合、Mashに必要なのはfile / Git / SSH / GitHub設定作業ではなく、新しい
+formal retry authorityの別途選定と明示承認である。P2、fresh batch、exact100、
+Product Read、correction、B6、Cycle001 acceptanceへは自動進行しない。
