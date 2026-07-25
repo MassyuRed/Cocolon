@@ -1,0 +1,239 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.retry007_attempt_consumption_unknown_stop_receipt.v1",
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY007_ONLY",
+  "authority_approved": true,
+  "status": "P1_RETRY007_ATTEMPT_CONSUMPTION_UNKNOWN_STOP_AUTHORITY_STOP",
+  "evidence_class": "BODY_FREE_RESERVATION_ONLY_ATTEMPT_CONSUMPTION_UNKNOWN_STOP",
+  "body_free": true,
+  "automatic_progression": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "entry": {
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon_commit_sha1": "21f0cd0603b1af6ad90856f792fe2da1442887f6",
+    "cocolon_tree_sha1": "24ddde87e10bb584776f906eb52a766a59b3bdd6",
+    "mashos_api_commit_sha1": "e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd",
+    "mashos_api_tree_sha1": "1c8970e91dbc793fcb3b81b51c73291f0326a565",
+    "mashos_api_worktree_clean": true,
+    "mashos_api_change_count": 0
+  },
+  "source_closure": {
+    "candidate_version_id": "nls_v3_rc_0034",
+    "requirement_registry_sha256": "70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728",
+    "formal_node_registry_sha256": "fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf",
+    "formal_step_count": 11,
+    "formal_node_count": 134,
+    "formal_node_unique_count": 134,
+    "formal_test_file_count": 21,
+    "canonical_current_closure_sha256": "2e171332086e0dad14917c9adcd40b7b3b49c759cb160719f3f99c0e14b8a4d0",
+    "source_dependency_closure_sha256": "594f8105b29b516b1d1eb8eb3ed9f434bd69a88c7851674c596b09d2328a5b67",
+    "detailed_design_sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+  },
+  "transport_admission": {
+    "repository": "MassyuRed/Cocolon",
+    "deploy_key_title": "Karen Work Cocolon Lease 2026-07-25",
+    "public_key_sha256_fingerprint": "SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA",
+    "ssh_endpoint": "ssh.github.com:443",
+    "github_ed25519_host_key_sha256_fingerprint": "SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU",
+    "credential_material_recorded": false,
+    "authenticated_ls_remote": true,
+    "complete_recursive_tree_and_blob_fetch": true,
+    "connectivity_missing_object_issue_count": 0,
+    "expected_old_sha_lease_proved": true,
+    "single_ref_update_proved": true,
+    "direct_child_proved": true,
+    "postfetch_proved": true,
+    "transport_caused_stop": false
+  },
+  "formal_path_admission": {
+    "fixed_event1_path_count": 2,
+    "fixed_event2_path_count": 15,
+    "fixed_formal_path_checked_count": 17,
+    "existing_fixed_formal_path_count_before_event1": 0,
+    "published_formal_reservation_count_before_retry007": 0,
+    "published_failure_attempt_stop_count_before_retry007": 0,
+    "preexisting_retry007_path_count": 0,
+    "p0_document_blob": "3333ae29ec0f4e9dde614bc9cd520448f61d2386",
+    "p0_receipt_blob": "bdfbd559535db06ae4af35fe1bb58716d6566126",
+    "p0_backfill_created": false
+  },
+  "event1_publication": {
+    "base_commit_sha1": "21f0cd0603b1af6ad90856f792fe2da1442887f6",
+    "commit_sha1": "de9a448f072cb9e3da60e344d31aee5b13c91847",
+    "tree_sha1": "b87aacf81f41d867e73284ba401ce8798aa6a862",
+    "parent_sha1": "21f0cd0603b1af6ad90856f792fe2da1442887f6",
+    "changed_path_count": 2,
+    "exact_lease": true,
+    "direct_child": true,
+    "postverified": true,
+    "source_baseline_receipt": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineClosure_BodyFree_Receipt_20260724.json",
+      "git_blob_sha1": "745074a8d998204eb1c1ec8bdf615879d16563fc",
+      "raw_sha256": "08c300ca238081a7a9ce97d02c2902a6c5b9f4df13c1ea7e42ce69efad842c87",
+      "logical_artifact_sha256": "16e99eac8009890615573d1235c59a301fa580b839915bbde760b75975e21f62"
+    },
+    "sequence_event": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SequenceEvent01_SourceBaselineLocked_BodyFree_Event_20260724.json",
+      "git_blob_sha1": "1a5bc8a66c113661d345b7556ca1baa2d35105bf",
+      "raw_sha256": "efeca263e3d2f776e36ea64aa0fc20046736dd278fd2b142b9fb0b35b6896f2e",
+      "event_sha256": "33da356d87da0e00d7f3f901468dc151dea8fa4e5d9ac632ebe4a20cc7bb80bc",
+      "identity_sha256": "03219827fa14a57fb304d005efa755f2c815ce9d7f3040706ff6031e85f1ac90",
+      "challenge_id": "2c706b3b4d08eeddbdd6931726c3452d3dd14c64f9dc2c77c358dbfd250b7af1",
+      "state": "SOURCE_BASELINE_LOCKED"
+    }
+  },
+  "reservation_publication": {
+    "base_commit_sha1": "de9a448f072cb9e3da60e344d31aee5b13c91847",
+    "commit_sha1": "9a831823137413226cbae9f1521041cc9202cedf",
+    "tree_sha1": "fb22a8f46d040380704aa0c06e42b294dadd8dd2",
+    "parent_sha1": "de9a448f072cb9e3da60e344d31aee5b13c91847",
+    "changed_path_count": 1,
+    "exact_lease": true,
+    "direct_child": true,
+    "postverified": true,
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Attempt_14bfcb655ebff5320611018fa7510b7e676d3f29ae5ca3020dc8279d95714a5e_FormalTestRunReservation_BodyFree_Receipt_20260724.json",
+    "git_blob_sha1": "41fb8cf26009eb21ddfd5872b5f1271fdb43461c",
+    "raw_sha256": "495c58b1fd73d46f30e71413979c6b93a3e895550bf0d39b537b2b46e200aef4",
+    "logical_artifact_sha256": "4d5e171c95238d6a8addcf8582c5f6cb3d86e5dcfa3a4d242fd68755a7d062b2",
+    "identity_sha256": "6428c820e572b45d01f98537da1989ee8292d2a0a70c2033076a0880d2617baa",
+    "formal_challenge_id": "2aff9fce294833aabb0f88d59fbd9b476cb999b70a9316385ddd4706596b0397",
+    "authority_challenge_id": "47cd89db37666be906fd940280123fe946f9270b6c89871b86c673b31753ad73",
+    "attempt_id": "14bfcb655ebff5320611018fa7510b7e676d3f29ae5ca3020dc8279d95714a5e",
+    "reservation_state": "ONE_SHOT_AUTHORITY_CONSUMED_BEFORE_RUN",
+    "reserved_at_utc": "2026-07-25T04:23:21Z"
+  },
+  "execution": {
+    "consumption_state": "CONSUMPTION_STARTED",
+    "consumption_started_at_utc": "2026-07-25T04:24:03Z",
+    "formal_exact134_invocation_count": 1,
+    "formal_exact134_consumed": true,
+    "formal_exact134_outcome": "UNKNOWN_NOT_CLAIMABLE",
+    "attempt_checkpoint_present": false,
+    "attempt_summary_present": false,
+    "formal_attempt_artifact_issued": false,
+    "success_terminal_lane_published": false,
+    "failure_terminal_lane_published": false,
+    "terminal_publication_commit_sha1": null,
+    "same_attempt_rerun_performed": false,
+    "broad_regression_run": false,
+    "local_body_free_execution_result_sha256": "fbb1a7b41fe224b6201edfb7e6bca11e30034fb1e38ac4d74d3ee81352548414",
+    "final_formal_cocolon_commit_sha1": "9a831823137413226cbae9f1521041cc9202cedf",
+    "final_formal_cocolon_tree_sha1": "fb22a8f46d040380704aa0c06e42b294dadd8dd2"
+  },
+  "diagnostic_boundary": {
+    "diagnostic_only": true,
+    "formal_exact134_rerun": false,
+    "pytest_collection_run": false,
+    "worker_run": false,
+    "source_edit_count": 0,
+    "mashos_api_git_write_count": 0,
+    "worker_python_version": "3.12.13",
+    "worker_pytest_version": "9.1.1",
+    "worker_include_system_site_packages": false,
+    "worker_installed_distribution_count": 6,
+    "fastapi_present": false,
+    "conftest_explicit_plugin": "helpers.emlis_ai_fb172_migration",
+    "plugin_imports_emotion_submit_service": true,
+    "emotion_submit_service_imports_fastapi": true,
+    "formal_node_fb172_ledger_overlap_count": 0,
+    "child_stdout_stderr_preserved": false,
+    "missing_or_invalid_worker_result_closed_code": "RECOVERY_PROOF_ENVIRONMENT_ENTRY_INVALID",
+    "most_likely_cause": "COLLECTION_BOOTSTRAP_IMPORT_FAILURE_FROM_INCOMPLETE_ISOLATED_RUNTIME_DEPENDENCY_CLOSURE",
+    "most_likely_cause_is_confirmed_exact_exception": false
+  },
+  "source_evidence": [
+    {
+      "path": "ai/tests/conftest.py",
+      "git_blob_sha1": "ecf83cda03fe1375e5240576ae6b7bdffca35632",
+      "raw_sha256": "2f269b3589da7c619c44c638422799271379ff70a70c04cd1283d1fca812a999"
+    },
+    {
+      "path": "ai/tests/helpers/emlis_ai_fb172_migration.py",
+      "git_blob_sha1": "94664072a08eafec4113b43b64b3ee1878821dff",
+      "raw_sha256": "94cbf59a31f92a966df6a87b8c4a046b02a12dd8b0fee1b693a839f32b7fde48"
+    },
+    {
+      "path": "ai/services/ai_inference/emotion_submit_service.py",
+      "git_blob_sha1": "f467741a0bf2d349680ce855539c4f027848966c",
+      "raw_sha256": "818ee1edb7ac4ff5f12cc7f8537eeb10fedc9f7dd37a4d165c5248a7249830f2"
+    },
+    {
+      "path": "ai/tools/emlis_nls_v3_recovery_epoch001_current_step_proof_run.py",
+      "git_blob_sha1": "fe1ee4dfbc044739f9452b3b3e0f32061a895596",
+      "raw_sha256": "df42d097ec356c9c5a860ffda54e5cdf119d3a1d8cef0518576f99d0dbd8c749"
+    }
+  ],
+  "stop": {
+    "primary_code": "ATTEMPT_CONSUMPTION_UNKNOWN_STOP",
+    "primary_reason": "RESERVATION_CONSUMED_EXACT134_STARTED_ONCE_TRUSTWORTHY_WORKER_RESULT_ABSENT",
+    "same_authority_challenge_rerun_forbidden": true,
+    "automatic_retry": false,
+    "position": "POST_RESERVATION_POST_EXACT134_START_PRE_ATTEMPT_MATERIALIZATION",
+    "transport_caused_stop": false
+  },
+  "artifact_issuance": {
+    "source_baseline_closure_receipt_count": 1,
+    "sequence_event1_count": 1,
+    "formal_reservation_count": 1,
+    "formal_attempt_count": 0,
+    "accepted_successful_receipt_count": 0,
+    "step0_10_completion_receipt_count": 0,
+    "all11_completion_chain_count": 0,
+    "atomic_formal_manifest_count": 0,
+    "sequence_event2_count": 0,
+    "private_body_artifact_count": 0
+  },
+  "result_evidence": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationRetry007Only_AttemptConsumptionUnknownSTOP_ReadOnly_20260725.md",
+    "commit_sha1": "e561d2f22423c9b05f79aefa57d842eefea8f47d",
+    "git_blob_sha1": "74cce408594a2373465d498838f418f2d565aa59",
+    "raw_sha256": "cac8053c3ab66737480860704b690efd00ce132aafb7c1e40bbe5c8f172ecafb"
+  },
+  "state": {
+    "retry007": "CLOSED_NOT_RESUMABLE_NOT_REUSABLE",
+    "source_baseline": "LOCKED_EVENT1_PUBLISHED",
+    "formal_exact134": "STARTED_ONCE_OUTCOME_UNKNOWN_NOT_CLAIMABLE",
+    "formal_attempt": "NOT_ISSUED",
+    "terminal_lane": "NOT_PUBLISHED",
+    "successful_step0_10_completion_receipt_count": 0,
+    "p2": "NOT_AUTHORIZED",
+    "cycle001": "NOT_ACCEPTED",
+    "automatic_progression": false
+  },
+  "next_boundary": {
+    "candidate_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY008_ONLY",
+    "candidate_authority_approved": false,
+    "separate_approval_required": true,
+    "existing_event1_reuse_allowed_only_if_closure_exact": true,
+    "new_formal_challenge_required": true,
+    "new_authority_challenge_id_required": true,
+    "new_attempt_id_required": true,
+    "new_exact1_reservation_required": true,
+    "pre_reservation_requirements": [
+      "published event1 source proof-system registry closure exact revalidation",
+      "fresh isolated worker dependency closure with exact package versions and artifact hashes",
+      "same-interpreter minus-I minus-B explicit conftest and plugin bootstrap preflight",
+      "Python and pytest identity revalidation",
+      "no exact134 invocation and no reservation consumption during preflight"
+    ],
+    "preflight_failure_boundary": "PRE_RESERVATION_AUTHORITY_STOP_WITHOUT_CONSUMPTION",
+    "source_or_registry_drift_boundary": "EVENT1_REUSE_FORBIDDEN_SEPARATE_EPOCH_INVALIDATION_OR_RECOVERY_DECISION",
+    "formal_exact134_allowed_after_preflight": "EXACTLY_ONCE",
+    "terminal_lane_requirement": "EXACTLY_ONE_SUCCESS_OR_FAILURE_LANE_OR_UNKNOWN_CONSUMPTION_STOP",
+    "automatic_progression": false
+  },
+  "subagent_audit": {
+    "read_only_subagent_total_count": 3,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0,
+    "subagent_artifact_generation_count": 0,
+    "subagent_reservation_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "karen_reverified_primary_source": true,
+    "karen_final_judgment": true
+  },
+  "receipt_sha256": "68d8dc98471ebbfc33d64f94dbf8abaf768e5479c1ffe12ce19e49e17351f447",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "recorded_on_jst": "2026-07-25",
+  "verdict": "P1_RETRY007_ATTEMPT_CONSUMPTION_UNKNOWN_STOP_AUTHORITY_STOP"
+}
