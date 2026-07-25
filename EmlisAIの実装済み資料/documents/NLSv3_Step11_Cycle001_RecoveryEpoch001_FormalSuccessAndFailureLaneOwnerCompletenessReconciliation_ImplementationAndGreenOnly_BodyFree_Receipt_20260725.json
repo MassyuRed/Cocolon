@@ -1,0 +1,161 @@
+{
+  "artifact_issuance": {
+    "accepted_successful_receipt_count": 0,
+    "all11_formal_publication_count": 0,
+    "atomic_formal_manifest_count": 0,
+    "formal_attempt_artifact_count": 0,
+    "formal_reservation_count": 0,
+    "private_body_artifact_count": 0,
+    "sequence_event1_count": 0,
+    "sequence_event2_count": 0,
+    "step0_10_completion_receipt_count": 0
+  },
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "body_free": true,
+  "broad_regression_run": false,
+  "entry": {
+    "cocolon_commit_sha1": "1db795b8b9abf1925b581401575edc23f1f5021e",
+    "cocolon_tree_sha1": "81131fb7fd787d01da1cdc884817f88609dd78b2",
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "mashos_api_commit_sha1": "ef9996aee20e2aed7b51d65a3559b9aea30f429e",
+    "mashos_api_tree_sha1": "a22b035febb6db4b1de274e656b6fbe0557d8cd9",
+    "related_entry_drift": false
+  },
+  "evidence_class": "IMPLEMENTATION_EVIDENCE_ONLY_NOT_FORMAL_RUN_OR_FORMAL_ARTIFACT",
+  "formal_exact134_run": false,
+  "frozen_oracles": {
+    "bytes_changed": false,
+    "files": [
+      {
+        "git_blob_sha1": "c410cdc4ed0d24565035cfb735b5039bb8ffbf36",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_formal_lane_owner_completeness_red.py",
+        "raw_file_sha256": "ab6b340fe5e845d546f6a86ef25c78c511a5f6f703c320d8b75d13041f1bb96f"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_exact134_accepted_success_red.py",
+        "raw_file_sha256": "58ba36ded0a1b51ed9ee03bf4a4f8a88dde06c775c520d713a67505b8f63379f"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_sequence_ledger_publication_red.py",
+        "raw_file_sha256": "2dc0e00f2d53734399bc9f5682fc01c2a1447d8e3974653d71989f11ff339db7"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_current_closure_completion_red.py",
+        "raw_file_sha256": "ec894e14fcc28d6562b0415ab34f18a3cf7be40942c313103f52991888a5db52"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_proved_receipt_contract_red.py",
+        "raw_file_sha256": "ba9f39f83cdaa18096973706e896dd31dfa79ba2d25eec8921d6e6bcf8ef853f"
+      }
+    ]
+  },
+  "mashos_api_implementation": {
+    "additions": 1238,
+    "ahead_by": 1,
+    "base_commit_sha1": "ef9996aee20e2aed7b51d65a3559b9aea30f429e",
+    "behind_by": 0,
+    "changed_path_count": 5,
+    "commit_sha1": "e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd",
+    "deletions": 15,
+    "files": [
+      {
+        "change": "MODIFIED",
+        "git_blob_sha1": "25ba71682721834de82002c44f5de3fba03ef5be",
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch001_canonical_current_closure_v3.py",
+        "raw_file_sha256": "c8cc109adbb0b95e5d571b7d75f267d52d5076e17b169fd96699667b02782436",
+        "role": "canonical_current_closure_owner"
+      },
+      {
+        "change": "MODIFIED",
+        "git_blob_sha1": "89a4604b80112b7876f431c7a240f4bca1fcc11a",
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch001_atomic_publication_bundle_v3.py",
+        "raw_file_sha256": "d3963b89e04278fea3759a9f30bb25b168f91adf8ac54dea68095719c98d1528",
+        "role": "atomic_manifest_builder_and_semantic_owner"
+      },
+      {
+        "change": "MODIFIED",
+        "git_blob_sha1": "d734ba89efab75d85987de0a8039bb7dbe053641",
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch001_closure_receipt_verify.py",
+        "raw_file_sha256": "600b0eec2850ff58529c5ffe40a251ee119236265cfa745dbcf2e27fbbc0ed33",
+        "role": "independent_verifier"
+      },
+      {
+        "change": "MODIFIED",
+        "git_blob_sha1": "fe1ee4dfbc044739f9452b3b3e0f32061a895596",
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch001_current_step_proof_run.py",
+        "raw_file_sha256": "df42d097ec356c9c5a860ffda54e5cdf119d3a1d8cef0518576f99d0dbd8c749",
+        "role": "formal_exact134_proof_runner"
+      },
+      {
+        "change": "ADDED",
+        "git_blob_sha1": "f06f16d2bb838102d9e1068ff823e055de62fa2b",
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch001_formal_parent_orchestrator_v3.py",
+        "raw_file_sha256": "6293b075e48c5501f9e443545d7d04484b92265f0378ff30d847bed81a66a7b0",
+        "role": "formal_success_failure_parent_owner"
+      }
+    ],
+    "force_ref_update": false,
+    "parent_commit_sha1": "ef9996aee20e2aed7b51d65a3559b9aea30f429e",
+    "repository_full_name": "MassyuRed/mashos-api",
+    "tree_sha1": "1c8970e91dbc793fcb3b81b51c73291f0326a565"
+  },
+  "next_formal_retry_authority": "UNSELECTED",
+  "next_formal_retry_boundary": "SEPARATE_AUTHORITY_SELECTION_AND_EXPLICIT_APPROVAL_REQUIRED",
+  "recorded_on_jst": "2026-07-25",
+  "receipt_sha256": "e978d1ae062056eec012f9f2d891549700ba2c8b485dbc8535e55bb18f3cd759",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "result_evidence": {
+    "commit_sha1": "1202e271b6ff7aae709e5caaafcd5aa0a4011555",
+    "git_blob_sha1": "4ace545968c0861e85bc191ecb75e3888b353f3d",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_FormalSuccessAndFailureLaneOwnerCompletenessReconciliation_ImplementationAndGreenOnly_Result_20260725.md",
+    "raw_file_sha256": "476b75430a07a6938c0ea8b249a9359b5f30617381f10af78004e1995ce2f1f0"
+  },
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.formal_lane_owner_completeness_implementation_green_evidence_receipt.v1",
+  "state": {
+    "automatic_progression": false,
+    "cycle001": "NOT_ACCEPTED",
+    "formal_artifacts": "NOT_ISSUED",
+    "formal_exact134": "NOT_RUN",
+    "p1_retry006": "CLOSED_NOT_RESUMABLE_NOT_REUSABLE",
+    "p2": "NOT_AUTHORIZED",
+    "repair": "FORMAL_LANE_OWNER_COMPLETENESS_IMPLEMENTED_TARGETED_EXACT52_GREEN",
+    "source_baseline": "UNLOCKED"
+  },
+  "subagent_audit": {
+    "evidence_read_only_audit_count": 1,
+    "implementation_read_only_audit_count": 2,
+    "read_only_subagent_total_count": 3,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0
+  },
+  "targeted_verification": {
+    "actual_github_commit_checkout": true,
+    "bytecode_writing_disabled": true,
+    "combined_exact52": {
+      "collected_count": 52,
+      "duration_seconds": 888.54,
+      "error_count": 0,
+      "failed_count": 0,
+      "passed_count": 52,
+      "state": "TARGETED_GREEN",
+      "warning_count": 1
+    },
+    "final_worktree_clean": true,
+    "formal_exact134_denominator": false,
+    "new_frozen_exact12": {
+      "collected_count": 12,
+      "duration_seconds": 66.83,
+      "error_count": 0,
+      "failed_count": 0,
+      "passed_count": 12,
+      "state": "TARGETED_GREEN",
+      "warning_count": 1
+    },
+    "predecessor_targeted_exact40_test_count": 40,
+    "pytest_plugin_autoload_disabled": true,
+    "warning_identity": "EXISTING_PYDANTIC_V1_ROOT_VALIDATOR_DEPRECATION_API_EMOTION_SUBMIT_LINE906"
+  },
+  "verdict": "FORMAL_LANE_OWNER_COMPLETENESS_IMPLEMENTED_TARGETED_EXACT52_GREEN_AUTHORITY_STOP"
+}
