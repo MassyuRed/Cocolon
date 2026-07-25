@@ -166,7 +166,7 @@
       "const": 1163713768
     },
     "request_id": {
-      "pattern": "^[a-z0-9][a-z0-9._-]{7,79}$",
+      "pattern": "^g1-[0-9a-f]{64}$",
       "type": "string"
     },
     "request_mode": {

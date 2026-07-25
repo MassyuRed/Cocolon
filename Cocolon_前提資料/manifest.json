@@ -15790,5 +15790,43 @@
     "11_cocolon_github_transport_and_session_continuity.md",
     "12_cocolon_github_actions_publication_guard.md",
     "manifest.json"
+  ],
+  "github_actions_publication_guardian_request_id_binding_maintenance_2026_07_25": {
+    "reflected_when_exact_lease_and_post_fetch_complete": true,
+    "expected_old_main_sha1": "a5fb4fd9467e23f7fc6420260f6a96e2d0513a65",
+    "reason": "close approved Test 3 subcase 8 before any sandbox Issue is opened",
+    "confirmed_gap": "a fully rehashed manifest and matching moved staging ref could reuse an opaque request ID",
+    "request_id_scheme": "g1-<sha256(domain-separated canonical target_ref + expected_old_sha1 + files_sha256 binding)>",
+    "request_id_hash_domain": "cocolon.formal_publication.request-id.v1 followed by NUL",
+    "mismatch_outcome": "REJECTED_REQUEST_ID_BINDING",
+    "same_exact_request_remains_idempotent": true,
+    "local_security_tests_passed": 56,
+    "github_sandbox_issues_created_before_closure": 0,
+    "github_sandbox_tests_passed_before_closure": 0,
+    "github_sandbox_tests_required": 5,
+    "normal_case_setup_refs_created_before_closure": true,
+    "normal_case_existing_target_ref_reusable_after_exact_reverification": true,
+    "normal_case_old_opaque_id_staging_ref_reusable_under_new_contract": false,
+    "normal_case_new_g1_staging_ref_required": true,
+    "normal_case_guardian_write_before_closure": false,
+    "production_main_enabled": false,
+    "publish_main_job_statically_disabled": true,
+    "changed_path_count": 7,
+    "exact_changed_paths": [
+      ".github/cocolon_formal_publication_guard/guardian.py",
+      ".github/cocolon_formal_publication_guard/request_v1.schema.json",
+      ".github/cocolon_formal_publication_guard/test_guardian.py",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "automatic_step11_progression": false
+  },
+  "latest_modified_premise_files_2026_07_25_github_actions_publication_guardian_request_id_binding": [
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "12_cocolon_github_actions_publication_guard.md",
+    "manifest.json"
   ]
 }

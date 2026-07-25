@@ -28,9 +28,10 @@ TITLE_PREFIX = f"{MAGIC} "
 REQUEST_SCHEMA_VERSION = "cocolon.formal_publication.request.v1"
 POLICY_SCHEMA_VERSION = "cocolon.formal_publication.guardian.policy.v1"
 REQUEST_HASH_DOMAIN = b"cocolon.formal_publication.request.v1\0"
+REQUEST_ID_HASH_DOMAIN = b"cocolon.formal_publication.request-id.v1\0"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
-REQUEST_ID = re.compile(r"^[a-z0-9][a-z0-9._-]{7,79}$")
+REQUEST_ID = re.compile(r"^g1-[0-9a-f]{64}$")
 RFC3339_UTC = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$")
 SANDBOX_REF = re.compile(
     r"^refs/heads/guardian/sandbox/[a-z0-9][a-z0-9._-]{0,79}/"
@@ -243,6 +244,22 @@ def request_hash(value: Mapping[str, Any]) -> str:
 
 def files_hash(files: Sequence[Mapping[str, Any]]) -> str:
     return sha256_hex(canonical_json_bytes(list(files)) + b"\n")
+
+
+def bound_request_id(
+    target_ref: str,
+    expected_old_sha1: str,
+    files_sha256: str,
+) -> str:
+    binding = {
+        "expected_old_sha1": expected_old_sha1,
+        "files_sha256": files_sha256,
+        "target_ref": target_ref,
+    }
+    digest = sha256_hex(
+        REQUEST_ID_HASH_DOMAIN + canonical_json_bytes(binding) + b"\n"
+    )
+    return f"g1-{digest}"
 
 
 def _require_exact_keys(value: Any, expected: frozenset[str], stage: str) -> Mapping[str, Any]:
@@ -624,6 +641,12 @@ def parse_request_body(
     expected_files_hash = _require_hex(exact["files_sha256"], HEX64, "FILES_HASH")
     if expected_files_hash != files_hash(file_values):
         raise GuardianReject("REJECTED_FILES_HASH", "FILES")
+    if request_id != bound_request_id(
+        target_ref,
+        expected_old,
+        expected_files_hash,
+    ):
+        raise GuardianReject("REJECTED_REQUEST_ID_BINDING", "REQUEST")
     expected_request_hash = _require_hex(exact["request_sha256"], HEX64, "REQUEST_HASH")
     if expected_request_hash != request_hash(exact):
         raise GuardianReject("REJECTED_REQUEST_HASH", "REQUEST")

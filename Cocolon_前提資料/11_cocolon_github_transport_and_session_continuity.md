@@ -429,3 +429,52 @@ job成功とrequest / candidate identityが一致しないoutputは信用しま�
 終わるまでReplacement 02を通常のformal main routeとして維持します。
 鍵を通常運用から外す条件はActions canaryのfull postverification成功であり、
 sandbox有効化だけでは満たしません。秘密鍵本文、公開鍵本文、保存pathは記録しません。
+
+# 2026-07-25 Replacement 02 request ID binding maintenance
+
+sandbox-only enable revisionは次のformal identityで成立しました。
+
+```text
+expected old:
+208f2b278baf81f558fa67ec84892542177a8886
+
+published direct child:
+a5fb4fd9467e23f7fc6420260f6a96e2d0513a65
+
+tree:
+66520565ccd4536af96f358b3f58b1e5470aa39f
+
+changed paths:
+exactly 8
+```
+
+parent exact1、tree、exact 8 paths、全対象blob / raw SHA-256 / size、
+full fetch、strict fsckをpost-fetchで確認し、connectorからpolicy / workflowも
+独立確認しました。
+
+5 sandbox試験Issueを作る前に、同じrequest IDへ別manifestを完全整合させる
+再利用経路を確認したため、試験を0/5のまま停止しました。
+
+次のmaintenanceは`a5fb4fd9467e23f7fc6420260f6a96e2d0513a65`をexpected oldとし、
+request IDをtarget ref、expected old、files SHA-256へ決定的にbindingします。
+変更は次のexact 7 pathsです。
+
+```text
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/request_v1.schema.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+local guardian tests 56件成功後、stale lease拒否とcurrent lease dry-runを再確認し、
+Replacement 02で一回だけ反映します。
+
+production flagと`publish-main`の静的停止は変更しません。
+正常case用に作成済みのsandbox / staging準備refには秘密情報がなく、
+Issue未作成・guardian write未実施です。sandbox target refは再確認後に利用できます。
+旧opaque ID名のstaging refは新contractでは利用せず、binding revision反映後の
+workflow SHAで依頼票を再生成し、計算された`g1-<64 hex>`とexact一致する
+新しいstaging refを作成します。

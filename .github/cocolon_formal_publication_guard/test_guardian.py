@@ -50,7 +50,6 @@ class GuardianTestCase(unittest.TestCase):
         }
 
     def request_dict(self, *, sandbox: bool = False) -> dict:
-        request_id = "request-0001"
         files = [
             self.file_entry(
                 path=(
@@ -61,19 +60,27 @@ class GuardianTestCase(unittest.TestCase):
                 )
             )
         ]
+        target_ref = (
+            "refs/heads/guardian/sandbox/suite-01/normal"
+            if sandbox
+            else self.policy.default_ref
+        )
+        expected_old_sha1 = "2" * 40 if sandbox else "1" * 40
+        files_sha256 = guardian.files_hash(files)
+        request_id = guardian.bound_request_id(
+            target_ref,
+            expected_old_sha1,
+            files_sha256,
+        )
         value = {
             "schema_version": guardian.REQUEST_SCHEMA_VERSION,
             "request_id": request_id,
             "request_mode": "publish",
             "repository_id": self.policy.repository_id,
             "repository": self.policy.repository,
-            "target_ref": (
-                "refs/heads/guardian/sandbox/suite-01/normal"
-                if sandbox
-                else self.policy.default_ref
-            ),
+            "target_ref": target_ref,
             "workflow_sha1": "1" * 40,
-            "expected_old_sha1": "2" * 40 if sandbox else "1" * 40,
+            "expected_old_sha1": expected_old_sha1,
             "staging_ref": f"{self.policy.staging_ref_prefix}{request_id}",
             "staging_head_sha1": "3" * 40,
             "authority": {"name": "test authority", "utf8_lf_sha256": "4" * 64},
@@ -83,7 +90,7 @@ class GuardianTestCase(unittest.TestCase):
             },
             "expires_at_utc": "2026-07-25T01:00:00Z",
             "files": files,
-            "files_sha256": guardian.files_hash(files),
+            "files_sha256": files_sha256,
             "sandbox_test": None,
             "request_sha256": "",
         }
@@ -107,7 +114,7 @@ class GuardianTestCase(unittest.TestCase):
 class CanonicalJsonTests(GuardianTestCase):
     def test_valid_production_request(self) -> None:
         parsed = guardian.parse_request_body(self.body(self.request_dict()), self.policy)
-        self.assertEqual("request-0001", parsed.request_id)
+        self.assertTrue(parsed.request_id.startswith("g1-"))
         self.assertEqual("refs/heads/main", parsed.target_ref)
 
     def test_valid_sandbox_request(self) -> None:
@@ -190,6 +197,55 @@ class CanonicalJsonTests(GuardianTestCase):
             guardian.parse_request_body,
             self.body(value),
             self.policy,
+        )
+
+    def test_same_request_id_with_different_manifest_rejected(self) -> None:
+        value = self.request_dict(sandbox=True)
+        original_request_id = value["request_id"]
+        value["files"][0]["path"] = (
+            "Cocolon_前提資料/github_actions_guardian_sandbox/"
+            "suite-01/different.txt"
+        )
+        value["files_sha256"] = guardian.files_hash(value["files"])
+        value["request_sha256"] = guardian.request_hash(value)
+        self.assertEqual(original_request_id, value["request_id"])
+        self.assertRejected(
+            "REJECTED_REQUEST_ID_BINDING",
+            guardian.parse_request_body,
+            self.body(value),
+            self.policy,
+        )
+
+    def test_bound_request_id_covers_target_base_and_manifest(self) -> None:
+        value = self.request_dict(sandbox=True)
+        original = value["request_id"]
+        changed_target = guardian.bound_request_id(
+            "refs/heads/guardian/sandbox/suite-01/other",
+            value["expected_old_sha1"],
+            value["files_sha256"],
+        )
+        changed_base = guardian.bound_request_id(
+            value["target_ref"],
+            "3" * 40,
+            value["files_sha256"],
+        )
+        changed_manifest = guardian.bound_request_id(
+            value["target_ref"],
+            value["expected_old_sha1"],
+            "f" * 64,
+        )
+        self.assertEqual(67, len(original))
+        self.assertEqual(
+            original,
+            guardian.bound_request_id(
+                value["target_ref"],
+                value["expected_old_sha1"],
+                value["files_sha256"],
+            ),
+        )
+        self.assertEqual(
+            4,
+            len({original, changed_target, changed_base, changed_manifest}),
         )
 
     def test_bool_not_integer(self) -> None:
@@ -856,8 +912,6 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
 
             target_ref = "refs/heads/guardian/sandbox/suite-local/normal"
             self.git_run(work, "push", "-q", "origin", f"{base}:{target_ref}")
-            request_id = "request-local-01"
-            staging_ref = f"refs/heads/guardian/staging/{request_id}"
             sandbox_path = pathlib.Path(
                 "Cocolon_前提資料/github_actions_guardian_sandbox/"
                 "suite-local/normal.txt"
@@ -869,7 +923,6 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
             self.git_run(work, "commit", "-qm", "candidate")
             staging_head = self.git_run(work, "rev-parse", "HEAD")
             new_blob = self.git_run(work, "rev-parse", f"HEAD:{sandbox_path.as_posix()}")
-            self.git_run(work, "push", "-q", "origin", f"HEAD:{staging_ref}")
 
             policy = dataclass_replace(
                 self.policy,
@@ -888,6 +941,14 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
                     "size_bytes": len(raw),
                 }
             ]
+            files_sha256 = guardian.files_hash(files)
+            request_id = guardian.bound_request_id(
+                target_ref,
+                base,
+                files_sha256,
+            )
+            staging_ref = f"refs/heads/guardian/staging/{request_id}"
+            self.git_run(work, "push", "-q", "origin", f"HEAD:{staging_ref}")
             value = self.request_dict(sandbox=True)
             value.update(
                 {
@@ -897,7 +958,7 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
                     "staging_ref": staging_ref,
                     "staging_head_sha1": staging_head,
                     "files": files,
-                    "files_sha256": guardian.files_hash(files),
+                    "files_sha256": files_sha256,
                 }
             )
             value["request_sha256"] = guardian.request_hash(value)
@@ -942,8 +1003,6 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
 
             target_ref = "refs/heads/guardian/sandbox/suite-local/head-drift"
             self.git_run(work, "push", "-q", "origin", f"{base}:{target_ref}")
-            request_id = "request-drift-01"
-            staging_ref = f"refs/heads/guardian/staging/{request_id}"
             self.git_run(work, "checkout", "-qb", "staging-test")
             sandbox_path = pathlib.Path(
                 "Cocolon_前提資料/github_actions_guardian_sandbox/"
@@ -956,7 +1015,6 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
             self.git_run(work, "commit", "-qm", "candidate")
             staging_head = self.git_run(work, "rev-parse", "HEAD")
             new_blob = self.git_run(work, "rev-parse", f"HEAD:{sandbox_path.as_posix()}")
-            self.git_run(work, "push", "-q", "origin", f"HEAD:{staging_ref}")
             self.git_run(work, "checkout", "-q", "main")
 
             policy = dataclass_replace(
@@ -978,6 +1036,14 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
                     "size_bytes": len(raw),
                 }
             ]
+            files_sha256 = guardian.files_hash(files)
+            request_id = guardian.bound_request_id(
+                target_ref,
+                base,
+                files_sha256,
+            )
+            staging_ref = f"refs/heads/guardian/staging/{request_id}"
+            self.git_run(work, "push", "-q", "origin", f"{staging_head}:{staging_ref}")
             now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
             expires = now + dt.timedelta(hours=1)
             value = self.request_dict(sandbox=True)
@@ -995,7 +1061,7 @@ class LocalBareRemoteIntegrationTests(GuardianTestCase):
                     },
                     "expires_at_utc": expires.strftime("%Y-%m-%dT%H:%M:%SZ"),
                     "files": files,
-                    "files_sha256": guardian.files_hash(files),
+                    "files_sha256": files_sha256,
                     "sandbox_test": {
                         "case": "head_drift",
                         "drift_ref": target_ref,

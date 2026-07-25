@@ -509,3 +509,75 @@ conservative reconcile outcomeを維持する。
 
 未確認事項を成功扱いしない。5試験開始時点では0/5であり、
 このmaintenance自体をproduction許可やStep 11開始許可へ変換しない。
+
+# 2026-07-25 sandbox試験前request ID / manifest binding閉鎖
+
+## 確認した設計差
+
+sandbox実動Issueを作る直前の再監査で、同じ`request_id`に対して
+manifest、hash、staging ref / headを全て整合させて差し替えた場合、
+従来contractではrequest ID再利用だけを理由に拒否できないことを確認した。
+
+これは設計Test 3 subcase 8
+「同じrequest IDで別manifestを拒否」を完全には満たさない。
+GitHub sandbox Issueはまだ作成しておらず、Actions guardianによるsandbox writeは
+0件、5試験は`0 / 5 NOT_RUN`のまま停止した。
+
+## 閉鎖contract
+
+request IDを次のdeterministic bindingへ変更する。
+
+```text
+binding:
+{
+  "expected_old_sha1": <exact target old>,
+  "files_sha256": <exact manifest hash>,
+  "target_ref": <exact target ref>
+}
+
+request_id:
+g1-<SHA-256(
+  "cocolon.formal_publication.request-id.v1" + NUL
+  + canonical_json(binding) + LF
+)>
+```
+
+`request_id`は常に`g1-`とlowercase hex 64文字で構成する。
+target、expected old、manifestの一つでも変わればbound IDも変わる。
+依頼票のIDが再計算値とexact一致しなければ
+`REJECTED_REQUEST_ID_BINDING`で、candidate inspectionとwrite permitより前に拒否する。
+
+同じtarget、expected old、manifestを持つexact同一requestの二回目は同じIDとなり、
+従来どおりremote-first postverification後に
+`ALREADY_APPLIED_POSTVERIFIED`として扱える。
+
+## Replacement 02 maintenance
+
+expected old:
+
+```text
+a5fb4fd9467e23f7fc6420260f6a96e2d0513a65
+```
+
+exact changed paths:
+
+```text
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/request_v1.schema.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+local guardian testsは56件成功した。production policyはfalse、
+`publish-main`は静的disabledのまま変更しない。
+
+事前準備として、正常caseのsandbox target refを上記expected oldへ、
+staging refをそのdirect child fixtureへ新規作成したが、Issueは作成していない。
+既存target refは再確認後に利用できる。一方、既存staging ref名は旧opaque IDであり、
+新しい`g1-<64 hex>` contractでは受付不能なので試験には利用しない。
+request ID binding revision反映後、最終workflow SHAで依頼票を再生成し、
+計算された新IDとexact一致する新しいstaging refを作成してから試験する。
+この準備refを試験成功やguardian writeへ数えない。

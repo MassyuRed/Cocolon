@@ -20018,3 +20018,67 @@ reservation / attempt `NOT_CREATED`、Cycle001 `NOT_ACCEPTED`を維持する。
 このmaintenanceと5 sandbox試験はD1 RED、mashos-api source / test、
 event1、readiness、reservation、formal attempt、exact134、P2、
 Product Read、correction、B6、Cycle001 acceptanceを開始しない。
+
+# 2026-07-25 current authority: sandbox試験前request ID binding閉鎖
+
+## 確認した事実
+
+- sandbox-only maintenance
+  `a5fb4fd9467e23f7fc6420260f6a96e2d0513a65`は、parent
+  `208f2b278baf81f558fa67ec84892542177a8886`、tree
+  `66520565ccd4536af96f358b3f58b1e5470aa39f`、exact 8 pathsとして
+  Replacement 02 exact leaseとfull post-fetchを完了した。
+- GitHub connectorでもpolicyは`OBSERVE_AND_SANDBOX_ONLY`、
+  production false、sandbox true、workflow `publish-main if:false`を確認した。
+- 5試験Issue作成前の再監査で、同じrequest IDへ別manifestを完全整合させて
+  再利用する経路が未閉鎖だと確認した。
+- 正常caseのtarget / staging準備refは作成したが、Issue作成とActions guardian
+  writeは0件。GitHub sandbox試験は`0 / 5 NOT_RUN`。
+- 既存target refは再確認後に利用できるが、旧opaque ID名のstaging refは
+  新contractで利用不能。最終workflow SHAで新IDを計算し、
+  `refs/heads/guardian/staging/g1-<64 hex>`を新規作成する必要がある。
+
+## 今回の閉鎖
+
+request IDをtarget ref、expected old SHA、files SHA-256からdomain-separated
+SHA-256で決める`g1-<64 lowercase hex>`へ固定する。
+同じIDのままmanifestを変えた依頼は
+`REJECTED_REQUEST_ID_BINDING`でwrite前に拒否する。
+
+expected old:
+
+```text
+a5fb4fd9467e23f7fc6420260f6a96e2d0513a65
+```
+
+exact changed paths:
+
+```text
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/request_v1.schema.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+local guardian testsは56件成功。production policyとworkflow停止は変更しない。
+
+## 未確認
+
+- request ID binding revisionのexact lease / post-fetch。
+- このrevisionをworkflow SHAにしたGitHub sandbox 5試験。
+- production activation、canary、Actions main route active化。
+
+## 華恋の意見
+
+Test 3 subcase 8を、古いhashを残した単純改変拒否で代用しない。
+完全に整合させた別manifestでも同じIDを使えないことを静的contractとGitHub実動の
+両方で確認してから、5試験成功とする。
+
+## Step 11境界
+
+この閉鎖はGitHub transport maintenanceだけであり、D1 RED、
+mashos-api source / test、event1、readiness、reservation、formal attempt、
+exact134、P2、Product Read、correction、B6、Cycle001 acceptanceを開始しない。
