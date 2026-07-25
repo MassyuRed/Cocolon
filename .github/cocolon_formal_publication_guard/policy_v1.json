@@ -1,0 +1,30 @@
+{
+  "actor_allowlist": [],
+  "author_email": "cocolon-publication-guardian@users.noreply.github.com",
+  "author_name": "Cocolon Publication Guardian",
+  "default_ref": "refs/heads/main",
+  "design_sha256": "799f0faeeef316bb456fb6b90f694e57f48c4fc49aa38d4fc41abf9e77f30f35",
+  "locked_exact_paths": [
+    ".gitmodules",
+    "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md"
+  ],
+  "locked_path_prefixes": [
+    ".github/"
+  ],
+  "maximum_request_body_bytes": 65536,
+  "maximum_single_file_bytes": 8388608,
+  "maximum_staging_commits": 64,
+  "maximum_total_changed_bytes": 33554432,
+  "maximum_total_paths": 64,
+  "mode": "OBSERVE_ONLY",
+  "production_main_enabled": false,
+  "repository": "MassyuRed/Cocolon",
+  "repository_id": 1163713768,
+  "request_validity_seconds": 7200,
+  "sandbox_fault_injection_enabled": false,
+  "sandbox_target_prefix": "refs/heads/guardian/sandbox/",
+  "sandbox_test_path_prefix": "Cocolon_前提資料/github_actions_guardian_sandbox/",
+  "sandbox_write_enabled": false,
+  "schema_version": "cocolon.formal_publication.guardian.policy.v1",
+  "staging_ref_prefix": "refs/heads/guardian/staging/"
+}

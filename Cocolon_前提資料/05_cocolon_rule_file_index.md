@@ -3150,6 +3150,24 @@ Karen-DiaryはCocolon transport前提の正本ではありません。秘密情�
 
 専門用語だけ、複数案だけ、または「ファイルパスを教えてください」だけの依頼は不十分です。Mash様が追加質問なしで安全に完了できる画面操作単位まで説明します。
 
+# 2026-07-25 差分追記: GitHub Actions publication guardian rule index
+
+| owner / rule | responsibility |
+|---|---|
+| `12_cocolon_github_actions_publication_guard.md` | Actions番人の状態、request canonicalization、actor、locked path、exact lease、postverification、reconcile、5試験、activation、SSH fallback境界 |
+| `.github/workflows/cocolon_formal_publication_guard.yml` | trusted default-branch入口、job別最小権限、static queue、bootstrapのproduction / sandbox静的disabled |
+| `.github/cocolon_formal_publication_guard/guardian.py` | 不信Issue入力のstrict検査、candidate非実行、Git object検査、direct-child再構築、write gate、typed receipt |
+| `.github/cocolon_formal_publication_guard/policy_v1.json` | repository ID、actor allowlist、mode、production / sandbox flag、branch namespace、locked path、上限 |
+| `.github/cocolon_formal_publication_guard/request_v1.schema.json` | production / sandbox / fault / reconcile依頼票の公開shape |
+| `.github/cocolon_formal_publication_guard/test_guardian.py` | local security regression。GitHub sandbox 5試験の代用ではない |
+| `11_cocolon_github_transport_and_session_continuity.md` | migration中のactive SSH exact lease、Replacement 02、maintenance / fallback route |
+| `07_latest_snapshot_diff.md` | installed disabled state、未確認、次checkpoint、D1非開始のcurrent authority |
+
+bootstrapの読取順は`07 → 12 → 11`です。Actions番人が
+`POSTVERIFIED_ACTIVE`になるまでは、`11`のSSH exact leaseをactive routeとして
+読みます。番人自身、workflow、policy、schema、test、owner `12`は通常番人から
+変更できないlocked pathで、Replacement 02 maintenance authorityへ戻します。
+
 ## rc0031 current gate
 
 - P1 exact7は`1 PASS / 6 intentional RED`。

@@ -7662,3 +7662,24 @@ Mash様へ作業を求める場合のprimary ownerは、`work_attitude_rules_for
 複数の技術案だけを並べてMash様へ選択責任を戻しません。華恋が安全性と作業量を比較して最も簡単な推奨手順を一つ選び、`reprovision`、`lease`、`fingerprint`、`expected-old SHA`等は平易な画面操作へ翻訳します。
 
 Cocolonのlocal private counterpart消失時の具体的なGitHub Deploy keys復旧手順は、`11_cocolon_github_transport_and_session_continuity.md`を正本とします。
+
+# 2026-07-25 差分追記: GitHub Actions publication guardian bootstrap
+
+Cocolonのformal publication guardianを扱う時は、次の順で読みます。
+
+1. `07_latest_snapshot_diff.md`の最新追記。
+2. `12_cocolon_github_actions_publication_guard.md`。
+3. `11_cocolon_github_transport_and_session_continuity.md`。
+
+bootstrap時の番人は`OBSERVE_ONLY`です。production mainとsandboxのwrite jobは
+workflow上も静的disabledで、actor未観測、GitHub sandbox試験`0 / 5 NOT_RUN`、
+production canary`NOT_RUN`、Actions publication route`NOT_ACTIVE`です。
+
+このmigration中のactive formal routeは、`11`のReplacement 02
+SSH exact expected-old-SHA leaseです。Actionsのfileがmainに存在すること、
+local unit testが通ること、actorを観測することのいずれも、Actions routeの
+production有効化やSSH routeの削除を意味しません。
+
+番人bootstrapはGitHub transport整備だけです。Step 11 D1 RED、mashos-api変更、
+event1、readiness、reservation、formal attempt、exact134、Product Read、
+Cycle001 acceptanceを開始しません。次の作業へ自動進行しません。

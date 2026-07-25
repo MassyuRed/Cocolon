@@ -2,11 +2,26 @@ name: phase6-contract-guards
 
 on:
   push:
+    branches-ignore:
+      - "guardian/staging/**"
+      - "guardian/sandbox/**"
+    tags:
+      - "**"
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   contract-guards:
+    if: >-
+      ${{
+        !startsWith(github.ref, 'refs/heads/guardian/staging/') &&
+        !startsWith(github.ref, 'refs/heads/guardian/sandbox/') &&
+        !startsWith(github.head_ref || '', 'guardian/staging/') &&
+        !startsWith(github.head_ref || '', 'guardian/sandbox/')
+      }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
 

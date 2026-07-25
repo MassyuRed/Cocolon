@@ -19800,3 +19800,137 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORM
 これはD1 causal RED freezeだけを許可する。implementation、event1、readiness、
 reservation、exact134、P2、fresh batch、Product Read、correction、B6、
 Cycle001 acceptanceは許可しない。別明示承認が必要であり、自動進行しない。
+
+# 2026-07-25 current authority: GitHub Actions publication guardian disabled bootstrap
+
+この節は、Step 11とは別のGitHub transport maintenance authorityです。
+
+Mash様は、設計artifact
+`Cocolon_GitHub_Actions_Publication_Guardian_Design_ReadOnly_20260725.md`
+（UTF-8 bytes SHA-256
+`799f0faeeef316bb456fb6b90f694e57f48c4fc49aa38d4fc41abf9e77f30f35`）
+と、次の実施順を承認しました。
+
+1. production無効状態で番人をbootstrap。
+2. connectorがIssueを作る時のactor identityをobserve-onlyで実測。
+3. Replacement 02 maintenanceでactor allowlistとsandbox writeだけを有効化。
+4. 正常、head競合、改変拒否、重複・同時、保存直後停止の5試験。
+5. 全件成功の独立確認後だけproduction activationとcanary。
+6. canary成功とactive owner finalization後、別cleanup承認で鍵を通常運用から外す。
+
+bootstrap expected old:
+
+```text
+Cocolon main:
+bbe13d85923f8dc197bc8b19e3a1fe1eace77f21
+```
+
+bootstrap exact changed paths:
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/policy_v1.json
+.github/cocolon_formal_publication_guard/request_v1.schema.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+.github/workflows/phase6_contract_guards.yml
+Cocolon_前提資料/00_karen_read_first.md
+Cocolon_前提資料/05_cocolon_rule_file_index.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/manifest.json
+```
+
+このrevisionがexact expected-old-SHA leaseで`main`へ反映され、remote head、
+parent exact1、tree、exact 12 paths、全対象blob / raw SHA-256をpost-fetchで
+確認した時だけ、次のstatusです。
+
+```text
+guardian bootstrap:
+INSTALLED_DISABLED_PENDING_SANDBOX_TESTS
+
+policy mode:
+OBSERVE_ONLY
+
+production_main_enabled:
+false
+
+sandbox_write_enabled:
+false
+
+workflow write jobs:
+publish-main STATICALLY_DISABLED
+publish-sandbox STATICALLY_DISABLED
+
+actor identity:
+UNOBSERVED
+
+local guardian tests:
+51 PASSED
+
+GitHub sandbox tests:
+0 / 5 NOT_RUN
+
+production canary:
+NOT_RUN
+
+Actions guardian active:
+false
+
+current formal publication route:
+REPLACEMENT_02_SSH_EXACT_LEASE_ACTIVE
+
+automatic progression:
+false
+```
+
+## 確認した事実
+
+- Replacement 02のtitle、fingerprint、Cocolon Read/write登録がMash様の
+  GitHub画面で確認された。
+- current session内の秘密鍵から導出したfingerprintがReplacement 02と一致した。
+- GitHub公式current ED25519 host fingerprintと接続先が一致した。
+- Replacement 02でCocolon repository認証、authenticated `ls-remote`、
+  full fetch、`git fsck --full --strict`が成功した。
+- fetch時点のmainは上記expected old、commit count 503、
+  remote / tag ref count 5。
+- guardian local security testは51件成功した。
+- bootstrap policyは`OBSERVE_ONLY`、actor allowlistは空、
+  production / sandbox flagはfalse。
+- workflowのproduction / sandbox write jobは両方`if: false`。
+- candidate branchをcheckout / executeせず、Git objectだけを検査する。
+- `phase6_contract_guards.yml`はguardian staging / sandbox branchを
+  triggerとjobの二箇所で拒否する。
+
+## 未確認
+
+- connectorがIssueを作る時のevent sender / Issue creator identity。
+- GitHub上でobserve-only workflowとbody-free Issue receiptが実動すること。
+- Actions tokenのsandbox write、repository ruleset / branch protectionとの適合。
+- `queue: max`、runner上Python / Git、GitHub server exact leaseの実動。
+- GitHub sandbox試験5件。
+- production activationとproduction canary。
+- Actions routeのactive化とSSH route cleanup。
+
+## 推測
+
+なし。未確認事項を成功扱いしない。
+
+## 華恋の意見
+
+最初のrevisionではwrite jobをpolicyだけで止めず、workflow上も静的に停止する。
+これによりactor identityを実測する前に書込み権限へ到達しない。次のcheckpointは
+observe-only Issue一件の作成と結果確認であり、sandbox write、production
+activation、D1 REDではない。
+
+## Step 11境界
+
+Recovery Epoch001 `EPOCH_INVALIDATED`、Recovery Epoch002
+`DEFINED_NOT_STARTED`、source baseline `UNLOCKED`、candidate
+`UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034`、event1 / readiness /
+reservation / attempt `NOT_CREATED`、Cycle001 `NOT_ACCEPTED`を維持する。
+
+guardian bootstrapはD1 REDを実行せず、mashos-api source / test、event1、
+readiness、reservation、formal attempt、exact134、P2、Product Read、
+correction、B6、Cycle001 acceptanceを開始しない。

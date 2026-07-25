@@ -283,3 +283,64 @@ error時:
 6. commit SHA、final HEAD、exact pathsをMash様へ報告する。
 
 新しい鍵の認証成功を確認する前に、既存deploy keyを削除するよう求めません。旧鍵の整理が必要な場合は、replacement routeの成功後に別途、削除対象titleとGitHub画面操作を同じ説明粒度で示します。
+
+# 2026-07-25 Replacement 02 / Actions guardian bootstrap identity
+
+Mash様は、次の公開identityをCocolon repositoryのRead/write Deploy keyとして
+登録したことを確認しました。
+
+```text
+repository:
+MassyuRed/Cocolon
+
+deploy_key_title:
+Karen Work Cocolon Lease 2026-07-25 Replacement 02
+
+key_algorithm:
+ssh-ed25519
+
+public_key_sha256_fingerprint:
+SHA256:juey2q+Jw9m06eetJi9yiexE7r9/zB1u//OvD15nyXE
+
+github_write_access:
+enabled at registration
+
+ssh_endpoint:
+ssh.github.com:443
+
+ssh_repository_url:
+ssh://git@ssh.github.com:443/MassyuRed/Cocolon.git
+
+github_ed25519_host_key_sha256_fingerprint:
+SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU
+
+purpose:
+GitHub Actions publication guardian bootstrap / maintenance / activation /
+forward disable or fix / SSH fallback
+```
+
+current sessionで秘密鍵本文を表示せず、次を実測しました。
+
+- 一時directoryはowner-only `0700`、秘密鍵fileはowner-only `0600`。
+- 秘密鍵から導出した公開fingerprintは上記Replacement 02とexact一致。
+- GitHub公式current ED25519 host fingerprintと接続先host keyがexact一致。
+- `ssh.github.com:443`経由で`MassyuRed/Cocolon`へのrepository認証が成功。
+- authenticated `ls-remote`の`main`は
+  `bbe13d85923f8dc197bc8b19e3a1fe1eace77f21`。
+- current commitと全remote / tag refsをfetchし、`git fsck --full --strict`で
+  missing / corrupt objectを検出しなかった。
+- fetch時点のcommit countは503、remote / tag ref countは5。
+
+秘密鍵本文、公開鍵本文、秘密鍵保存path、token、credential traceは記録しません。
+この認証状態はcurrent Work sessionだけの事実で、future sessionへ無検証継承しません。
+
+このownerを含むguardian bootstrap revisionは、上記mainをexpected oldとする
+exact lease、verified direct child、exact 12 changed paths、full post-fetchが
+全て成功した時だけformal installとします。
+
+guardianのcurrent ownerは
+`12_cocolon_github_actions_publication_guard.md`です。bootstrap後もActions routeは
+`OBSERVE_ONLY / NOT_ACTIVE`で、SSH routeを置き換えません。Replacement 02は
+actor allowlist maintenance、sandbox有効化、5試験中の番人修正、production
+activation、canary、active owner finalizationまで維持します。削除はMash様の
+別cleanup承認後だけです。

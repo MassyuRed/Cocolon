@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MassyuRed/Cocolon/.github/cocolon_formal_publication_guard/request_v1.schema.json",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "properties": {
+            "sandbox_test": {
+              "type": "null"
+            },
+            "target_ref": {
+              "const": "refs/heads/main"
+            }
+          }
+        },
+        {
+          "properties": {
+            "files": {
+              "items": {
+                "properties": {
+                  "path": {
+                    "pattern": "^Cocolon_前提資料/github_actions_guardian_sandbox/"
+                  }
+                }
+              }
+            },
+            "target_ref": {
+              "pattern": "^refs/heads/guardian/sandbox/[a-z0-9][a-z0-9._-]{0,79}/[a-z0-9][a-z0-9._-]{0,79}$"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "authority": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "utf8_lf_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "utf8_lf_sha256"
+      ],
+      "type": "object"
+    },
+    "commit": {
+      "additionalProperties": false,
+      "properties": {
+        "subject": {
+          "maxLength": 120,
+          "minLength": 1,
+          "type": "string"
+        },
+        "timestamp_utc": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "timestamp_utc"
+      ],
+      "type": "object"
+    },
+    "expected_old_sha1": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "expires_at_utc": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "new_blob_sha1": {
+            "pattern": "^[0-9a-f]{40}$",
+            "type": "string"
+          },
+          "new_mode": {
+            "enum": [
+              "100644",
+              "100755"
+            ]
+          },
+          "old_blob_sha1": {
+            "oneOf": [
+              {
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "old_mode": {
+            "oneOf": [
+              {
+                "enum": [
+                  "100644",
+                  "100755"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "operation": {
+            "enum": [
+              "add",
+              "modify"
+            ]
+          },
+          "path": {
+            "maxLength": 512,
+            "minLength": 1,
+            "type": "string"
+          },
+          "raw_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "size_bytes": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path",
+          "operation",
+          "old_mode",
+          "new_mode",
+          "old_blob_sha1",
+          "new_blob_sha1",
+          "raw_sha256",
+          "size_bytes"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "files_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "repository": {
+      "const": "MassyuRed/Cocolon"
+    },
+    "repository_id": {
+      "const": 1163713768
+    },
+    "request_id": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{7,79}$",
+      "type": "string"
+    },
+    "request_mode": {
+      "enum": [
+        "publish",
+        "reconcile"
+      ]
+    },
+    "request_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "sandbox_test": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "case": {
+              "enum": [
+                "head_drift",
+                "post_push_stop"
+              ]
+            },
+            "drift_ref": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "drift_sha1": {
+              "oneOf": [
+                {
+                  "pattern": "^[0-9a-f]{40}$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "case",
+            "drift_ref",
+            "drift_sha1"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "cocolon.formal_publication.request.v1"
+    },
+    "staging_head_sha1": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "staging_ref": {
+      "type": "string"
+    },
+    "target_ref": {
+      "type": "string"
+    },
+    "workflow_sha1": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "request_mode",
+    "repository_id",
+    "repository",
+    "target_ref",
+    "workflow_sha1",
+    "expected_old_sha1",
+    "staging_ref",
+    "staging_head_sha1",
+    "authority",
+    "commit",
+    "expires_at_utc",
+    "files",
+    "files_sha256",
+    "sandbox_test",
+    "request_sha256"
+  ],
+  "title": "Cocolon formal publication request v1",
+  "type": "object"
+}

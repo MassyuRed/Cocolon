@@ -1729,6 +1729,14 @@
     {
       "path": "ghr_diff_20260712.csv",
       "purpose": "Mandatory two-stage / Grounded Human Reception R0-R7の実ファイル差分。26 added / 23 changed / 0 removedと更新前後SHA-256を短名CSVで記録する。"
+    },
+    {
+      "path": "11_cocolon_github_transport_and_session_continuity.md",
+      "purpose": "Cocolon formal GitHub transportの登録identity、session continuity、Replacement 02 bootstrap / maintenance / fallback exact lease owner。秘密情報は記録しない。"
+    },
+    {
+      "path": "12_cocolon_github_actions_publication_guard.md",
+      "purpose": "GitHub Actions publication guardianのstate、strict request、actor、candidate非実行、exact lease、postverification、5試験、activation、SSH fallback owner。"
     }
   ],
   "excluded_files": [
@@ -15622,5 +15630,80 @@
     "work_attitude_rules_for_karen/09_work_start_checklist.txt",
     "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
     "work_attitude_rules_for_karen/manifest.json"
+  ],
+  "github_actions_publication_guardian_bootstrap_2026_07_25": {
+    "reflected": true,
+    "repository": "MassyuRed/Cocolon",
+    "repository_id": 1163713768,
+    "approved_design": "Cocolon_GitHub_Actions_Publication_Guardian_Design_ReadOnly_20260725.md",
+    "approved_design_utf8_sha256": "799f0faeeef316bb456fb6b90f694e57f48c4fc49aa38d4fc41abf9e77f30f35",
+    "expected_old_main_sha1": "bbe13d85923f8dc197bc8b19e3a1fe1eace77f21",
+    "owner": "12_cocolon_github_actions_publication_guard.md",
+    "bootstrap_status_after_exact_lease_and_post_fetch": "INSTALLED_DISABLED_PENDING_SANDBOX_TESTS",
+    "policy_mode": "OBSERVE_ONLY",
+    "production_main_enabled": false,
+    "sandbox_write_enabled": false,
+    "publish_main_job_statically_disabled": true,
+    "publish_sandbox_job_statically_disabled": true,
+    "actor_identity": "UNOBSERVED",
+    "local_security_tests_passed": 51,
+    "github_sandbox_tests_passed": 0,
+    "github_sandbox_tests_required": 5,
+    "production_canary": "NOT_RUN",
+    "actions_guardian_active": false,
+    "current_formal_route": "REPLACEMENT_02_SSH_EXACT_LEASE_ACTIVE",
+    "automatic_step11_progression": false,
+    "bootstrap_exact_changed_paths": [
+      ".github/workflows/cocolon_formal_publication_guard.yml",
+      ".github/cocolon_formal_publication_guard/guardian.py",
+      ".github/cocolon_formal_publication_guard/policy_v1.json",
+      ".github/cocolon_formal_publication_guard/request_v1.schema.json",
+      ".github/cocolon_formal_publication_guard/test_guardian.py",
+      "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md",
+      ".github/workflows/phase6_contract_guards.yml",
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "unconfirmed": [
+      "connector_issue_actor_identity",
+      "observe_only_workflow_and_receipt_runtime",
+      "actions_sandbox_write_permission_and_ruleset",
+      "queue_runner_and_server_lease_runtime",
+      "five_github_sandbox_tests",
+      "production_activation_and_canary"
+    ]
+  },
+  "github_transport_session_continuity_replacement02_2026_07_25": {
+    "reflected": true,
+    "owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "repository_scope": "MassyuRed/Cocolon",
+    "deploy_key_title": "Karen Work Cocolon Lease 2026-07-25 Replacement 02",
+    "key_algorithm": "ssh-ed25519",
+    "public_key_sha256_fingerprint": "SHA256:juey2q+Jw9m06eetJi9yiexE7r9/zB1u//OvD15nyXE",
+    "write_access_registered": true,
+    "current_session_state": "ACTIVE_CURRENT_SESSION_AUTHENTICATED_FULL_FETCH_VERIFIED",
+    "ssh_endpoint": "ssh.github.com:443",
+    "github_ed25519_host_key_sha256_fingerprint": "SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU",
+    "observed_main_sha1": "bbe13d85923f8dc197bc8b19e3a1fe1eace77f21",
+    "commit_count": 503,
+    "remote_and_tag_ref_count": 5,
+    "complete_fetch_and_fsck_confirmed": true,
+    "bootstrap_exact_lease_verified": false,
+    "bootstrap_formal_publish_verified": false,
+    "private_key_material_recorded": false,
+    "public_key_body_recorded": false,
+    "session_reverification_required": true,
+    "purpose": "guardian bootstrap, maintenance, activation, forward disable or fix, SSH fallback"
+  },
+  "latest_modified_premise_files_2026_07_25_github_actions_publication_guardian_bootstrap": [
+    "00_karen_read_first.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "12_cocolon_github_actions_publication_guard.md",
+    "manifest.json"
   ]
 }

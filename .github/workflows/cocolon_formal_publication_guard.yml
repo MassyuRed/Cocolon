@@ -1,0 +1,151 @@
+name: cocolon-formal-publication-guardian
+
+on:
+  issues:
+    types:
+      - opened
+
+permissions: {}
+
+concurrency:
+  group: cocolon-formal-publication-guardian-main-v1
+  queue: max
+
+jobs:
+  preflight:
+    if: >-
+      ${{
+        github.event_name == 'issues' &&
+        github.event.action == 'opened' &&
+        github.event.repository.id == 1163713768 &&
+        startsWith(
+          github.event.issue.title,
+          'COCOLON_FORMAL_PUBLICATION_REQUEST_V1 '
+        )
+      }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    outputs:
+      outcome: ${{ steps.guard.outputs.outcome }}
+      postverified: ${{ steps.guard.outputs.postverified }}
+      target_class: ${{ steps.guard.outputs.target_class }}
+      request_sha256: ${{ steps.guard.outputs.request_sha256 }}
+      candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
+    steps:
+      - name: Checkout trusted main revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Read-only preflight
+        id: guard
+        env:
+          GUARDIAN_EVENT_PATH: ${{ github.event_path }}
+        run: python .github/cocolon_formal_publication_guard/guardian.py preflight
+
+  publish-sandbox:
+    needs: preflight
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    outputs:
+      outcome: ${{ steps.guard.outputs.outcome }}
+      postverified: ${{ steps.guard.outputs.postverified }}
+      write_attempted: ${{ steps.guard.outputs.write_attempted }}
+      request_sha256: ${{ steps.guard.outputs.request_sha256 }}
+      candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
+    steps:
+      - name: Checkout trusted main revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Publish sandbox with exact lease
+        id: guard
+        env:
+          GUARDIAN_EVENT_PATH: ${{ github.event_path }}
+        run: >-
+          python .github/cocolon_formal_publication_guard/guardian.py publish
+          --expected-target-class sandbox
+
+  publish-main:
+    needs: preflight
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    outputs:
+      outcome: ${{ steps.guard.outputs.outcome }}
+      postverified: ${{ steps.guard.outputs.postverified }}
+      write_attempted: ${{ steps.guard.outputs.write_attempted }}
+      request_sha256: ${{ steps.guard.outputs.request_sha256 }}
+      candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
+    steps:
+      - name: Checkout trusted main revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Publish main with exact lease
+        id: guard
+        env:
+          GUARDIAN_EVENT_PATH: ${{ github.event_path }}
+        run: >-
+          python .github/cocolon_formal_publication_guard/guardian.py publish
+          --expected-target-class production
+
+  report:
+    needs:
+      - preflight
+      - publish-sandbox
+      - publish-main
+    if: >-
+      ${{
+        always() &&
+        github.event_name == 'issues' &&
+        github.event.action == 'opened' &&
+        github.event.repository.id == 1163713768 &&
+        startsWith(
+          github.event.issue.title,
+          'COCOLON_FORMAL_PUBLICATION_REQUEST_V1 '
+        )
+      }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout trusted main revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Reconcile and report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GUARDIAN_EVENT_PATH: ${{ github.event_path }}
+          GUARDIAN_MAIN_CANDIDATE_SHA1: ${{ needs.publish-main.outputs.candidate_sha1 }}
+          GUARDIAN_MAIN_OUTCOME: ${{ needs.publish-main.outputs.outcome }}
+          GUARDIAN_MAIN_POSTVERIFIED: ${{ needs.publish-main.outputs.postverified }}
+          GUARDIAN_MAIN_REQUEST_SHA256: ${{ needs.publish-main.outputs.request_sha256 }}
+          GUARDIAN_MAIN_WRITE_ATTEMPTED: ${{ needs.publish-main.outputs.write_attempted }}
+          GUARDIAN_SANDBOX_CANDIDATE_SHA1: ${{ needs.publish-sandbox.outputs.candidate_sha1 }}
+          GUARDIAN_SANDBOX_OUTCOME: ${{ needs.publish-sandbox.outputs.outcome }}
+          GUARDIAN_SANDBOX_POSTVERIFIED: ${{ needs.publish-sandbox.outputs.postverified }}
+          GUARDIAN_SANDBOX_REQUEST_SHA256: ${{ needs.publish-sandbox.outputs.request_sha256 }}
+          GUARDIAN_SANDBOX_WRITE_ATTEMPTED: ${{ needs.publish-sandbox.outputs.write_attempted }}
+        run: python .github/cocolon_formal_publication_guard/guardian.py report
