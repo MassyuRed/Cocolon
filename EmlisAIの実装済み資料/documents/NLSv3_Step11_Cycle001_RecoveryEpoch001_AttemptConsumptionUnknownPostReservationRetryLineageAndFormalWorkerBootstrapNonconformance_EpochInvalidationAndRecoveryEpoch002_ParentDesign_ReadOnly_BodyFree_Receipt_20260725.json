@@ -1,0 +1,155 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch002.parent_design.body_free_receipt.v1",
+  "approved_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY",
+  "decision": "INVALIDATE_RECOVERY_EPOCH001_AND_FREEZE_RECOVERY_EPOCH002_PARENT_DESIGN",
+  "status": "RECOVERY_EPOCH001_INVALIDATED_RECOVERY_EPOCH002_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_AUTHORITY_STOP",
+  "created_at_jst": "2026-07-25",
+  "body_free": true,
+  "automatic_progression": false,
+  "result_finalized": true,
+  "decision_effective_when": "THIS_RECEIPT_IS_REACHABLE_ON_COCOLON_MAIN_AND_FULL_POSTFETCH_VERIFIED",
+  "identity": {
+    "logical_cycle_id": "NLS_V3_CYCLE_001",
+    "recovery_epoch001_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_001",
+    "recovery_epoch001_state": "EPOCH_INVALIDATED",
+    "recovery_epoch002_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_002",
+    "recovery_epoch002_state": "DEFINED_NOT_STARTED",
+    "recovery_epoch002_source_baseline_state": "UNLOCKED",
+    "recovery_epoch002_candidate_version_id_state": "UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034",
+    "cycle001_state": "NOT_ACCEPTED"
+  },
+  "parent_design_publication": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "ref": "refs/heads/main",
+    "publication_commit_sha1": "832a93becb7795f2a3f1f4110d75ae03e9444ef4",
+    "publication_parent_sha1": "575e7e91a7510507e677159e59f7c378ed681b07",
+    "publication_tree_sha1": "b772b86ced57d3f02676ac4f115430de53c3da54",
+    "changed_path_count": 1,
+    "document_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_20260725.md",
+    "document_git_blob_sha1": "af00c5c4a49207fb94108afbf383ea0e830620ae",
+    "document_raw_sha256": "8b6564442d69fea1b38cb59ea3c5302874e6f92f87bfd5ce0728985094739829",
+    "post_fetch_commit_parent_tree_path_blob_raw_verified": true,
+    "github_connector_blob_verified": true
+  },
+  "receipt_publication_contract": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "ref": "refs/heads/main",
+    "expected_old_main_sha1": "832a93becb7795f2a3f1f4110d75ae03e9444ef4",
+    "required_parent_exact1_sha1": "832a93becb7795f2a3f1f4110d75ae03e9444ef4",
+    "required_changed_path_count": 1,
+    "required_new_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_BodyFree_Receipt_20260725.json",
+    "exact_expected_old_sha_lease_required": true,
+    "full_post_fetch_required": true,
+    "self_git_commit_blob_raw_identity_embedded": false
+  },
+  "epoch001_invalidation": {
+    "reason_codes": [
+      "POST_RESERVATION_RETRY_LINEAGE_CONTRACT_NONCONFORMANCE",
+      "FORMAL_WORKER_BOOTSTRAP_DEPENDENCY_CLOSURE_NONCONFORMANCE",
+      "FORMAL_WORKER_PRE_RESULT_DIAGNOSTIC_NONCONFORMANCE",
+      "RELEVANT_SOURCE_PROOF_CLOSURE_REPAIR_REQUIRED"
+    ],
+    "event1_state": "PUBLISHED_IMMUTABLE_HISTORICAL_NOT_REUSABLE",
+    "retry007_reservation_state": "PUBLISHED_IMMUTABLE_CONSUMED_NOT_REUSABLE",
+    "retry007_reserved_attempt_id_state": "CONSUMED_ONE_SHOT_ID_NOT_REUSABLE",
+    "retry007_formal_attempt_artifact_state": "NOT_PRODUCED",
+    "retry007_consumption_state": "CONSUMPTION_UNKNOWN_NO_TRUSTWORTHY_TERMINAL",
+    "retry007_same_attempt_rerun_allowed": false,
+    "history_rewrite_or_deletion_allowed": false,
+    "source_drift_claimed_by_this_authority": false,
+    "source_repair_executed_by_this_authority": false
+  },
+  "epoch002_release_candidate_boundary": {
+    "epoch001_historical_candidate_version_id": "nls_v3_rc_0034",
+    "epoch001_candidate_reuse_allowed": false,
+    "future_candidate_version_id": null,
+    "future_candidate_allocation_boundary": "AFTER_D2_FINAL_CLOSURE_POSTVERIFICATION_AND_BEFORE_EVENT1",
+    "distinct_immutable_candidate_required": true,
+    "required_lineage_bindings": [
+      "event1",
+      "readiness",
+      "reservation",
+      "result",
+      "accepted_run",
+      "later_sequence_and_acceptance_lineage"
+    ],
+    "inherited_epoch001_generated_output_credit": false,
+    "inherited_epoch001_product_read_credit": false,
+    "inherited_epoch001_distribution_credit": false,
+    "inherited_epoch001_depth_or_surface_credit": false,
+    "inherited_epoch001_acceptance_credit": false,
+    "cumulative_rerun_completed": false,
+    "product_read_completed": false
+  },
+  "epoch002_reservation_and_worker_boundary": {
+    "historical_base_reservation_schema_retained_additively": true,
+    "reservation_state": "ONE_SHOT_AUTHORITY_CONSUMED_BEFORE_RUN",
+    "reservation_remote_publish_and_postverify_consumes_authority": true,
+    "reservation_remote_publish_and_postverify_consumes_attempt_id": true,
+    "spawn_intent_stage": "PARENT_SPAWN_INTENT_PERSISTED",
+    "spawn_failure_diagnostic": "SPAWN_FAILED",
+    "spawn_failure_without_trustworthy_terminal_disposition": "ATTEMPT_CONSUMPTION_UNKNOWN_STOP",
+    "same_authority_challenge_attempt_or_reservation_rerun_allowed": false,
+    "reservation_publication_unknown_state": "RESERVATION_PUBLICATION_OUTCOME_UNKNOWN_STOP",
+    "publication_unknown_ready_unused_allowed": false,
+    "publication_unknown_new_reservation_allowed": false,
+    "publication_unknown_formal_spawn_allowed": false,
+    "ready_unused_requires_authoritative_remote_absence_postfetch": true,
+    "fetch_failure_is_absence_proof": false,
+    "durable_valid_result_publication_failure_route": "SEPARATELY_APPROVED_PUBLICATION_ONLY"
+  },
+  "repository_scope": {
+    "cocolon_parent_design_change_count": 1,
+    "cocolon_receipt_change_count": 1,
+    "mashos_api_source_change_count": 0,
+    "test_execution_count": 0,
+    "pytest_execution_count": 0,
+    "formal_exact134_invocation_count": 0,
+    "new_sequence_event_count": 0,
+    "new_reservation_count": 0,
+    "new_attempt_count": 0,
+    "private_body_generation_count": 0,
+    "product_read_count": 0
+  },
+  "confirmed_facts": [
+    "EPOCH001_EVENT1_AND_RETRY007_RESERVATION_REMAIN_PUBLISHED_HISTORY",
+    "RETRY007_EXACT134_WAS_INVOKED_ONCE_AFTER_CONSUMPTION_STARTED",
+    "RETRY007_TRUSTWORTHY_TERMINAL_RESULT_IS_ABSENT",
+    "CURRENT_LATER_RESERVATION_DIRECT_PARENT_CONTRACT_CONFLICTS_WITH_APPEND_ONLY_HISTORY",
+    "CURRENT_FORMAL_ORDER_LACKS_COMPLETE_PRE_RESERVATION_BOOTSTRAP_PREFLIGHT",
+    "CURRENT_SOURCE_CLOSURE_DOES_NOT_FULLY_MODEL_PLUGIN_AND_INSTALLED_DISTRIBUTION_BOUNDARY",
+    "PARENT_DESIGN_PUBLICATION_WAS_POSTFETCH_VERIFIED"
+  ],
+  "inference_not_promoted_to_fact": [
+    "RETRY007_MOST_LIKELY_FAILED_IN_COLLECTION_OR_BOOTSTRAP_IMPORT_BOUNDARY"
+  ],
+  "unknown_and_not_written": [
+    "RETRY007_EXACT_EXCEPTION_EXIT_SIGNAL_TIMEOUT_COLLECTION_AND_TEST_OUTCOME",
+    "FUTURE_EPOCH002_CANDIDATE_VERSION_ID",
+    "FUTURE_EPOCH002_SOURCE_COMMIT_TREE_AND_CLOSURE",
+    "FUTURE_EVENT_READINESS_RESERVATION_ATTEMPT_RESULT_AND_TERMINAL_IDENTITIES",
+    "FUTURE_DEPENDENCY_VERSIONS_AND_INSTALLER_HASHES",
+    "D1_RED_RESULT",
+    "D2_IMPLEMENTATION_RESULT",
+    "FUTURE_FORMAL_EXACT134_RESULT",
+    "P2_FRESH_BATCH_PRODUCT_READ_CORRECTION_B6_AND_CYCLE_ACCEPTANCE"
+  ],
+  "downstream_authority": {
+    "next_separate_approval_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY",
+    "d1_authorized_by_this_receipt": false,
+    "d2_authorized_by_this_receipt": false,
+    "formal_p1_authorized_by_this_receipt": false,
+    "p2_authorized_by_this_receipt": false,
+    "automatic_progression": false,
+    "authority_stop": true
+  },
+  "p0_external_identity": {
+    "parent_design_external_identity_bound": true,
+    "receipt_external_identity_embedded": false,
+    "receipt_external_identity_derived_after_postfetch": true,
+    "future_event1_must_bind_parent_design_and_receipt_external_identities": true,
+    "future_p0_identity_derived_after_receipt_postfetch": true
+  },
+  "logical_receipt_hash_scheme": "SHA256_OF_UTF8_JQ_C_SORTED_JSON_LINE_WITH_TRAILING_LF_AND_TOP_LEVEL_LOGICAL_RECEIPT_SHA256_REMOVED",
+  "logical_receipt_sha256": "d2cd0b3541db68ccddcb9357ba78ffb3ea72df2c0b87e7c49b17b688e6cfffb2"
+}
