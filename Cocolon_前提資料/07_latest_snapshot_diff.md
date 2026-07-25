@@ -20082,3 +20082,101 @@ Test 3 subcase 8を、古いhashを残した単純改変拒否で代用しない
 この閉鎖はGitHub transport maintenanceだけであり、D1 RED、
 mashos-api source / test、event1、readiness、reservation、formal attempt、
 exact134、P2、Product Read、correction、B6、Cycle001 acceptanceを開始しない。
+
+# 2026-07-25 current authority: sandbox試験前receipt観測完全性閉鎖
+
+## 確認した事実
+
+- request ID binding maintenanceはexpected old
+  `a5fb4fd9467e23f7fc6420260f6a96e2d0513a65`からdirect child
+  `c333b0c032b20a1ecbde2426de9894b57d6be70a`へexact leaseで反映済み。
+- treeは`ccf7e97445347fe0fa8f38816d7b09bfb077d833`。parent exact1、
+  exact 7 changed paths、全対象blob / raw SHA-256 / size、full fetch、
+  strict fsckを確認済み。
+- GitHub connectorでもguardian blob
+  `7fecbd4b1f563bf27132d57be5d7e9474d4932ac`とschema blob
+  `9ed292e81583a3858fde1241775b81c15e733e92`を独立確認した。
+- 新しい`g1-<64 hex>`正常case staging refは準備済みだが、Issue作成と
+  Actions guardian writeは0件。GitHub sandbox試験は`0 / 5 NOT_RUN`。
+- Issue作成直前のreceipt監査で、publish jobが観測したtargetの保存前後SHAを
+  final reportが保持しないことを確認した。
+- 同じ監査で、sandbox suite前後のproduction mainをActions側Gitが
+  receiptへ固定する経路がないことを確認した。
+
+## 今回の閉鎖
+
+expected old:
+
+```text
+c333b0c032b20a1ecbde2426de9894b57d6be70a
+```
+
+exact changed paths:
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+trusted preflight / publish jobは`observed_before`と`observed_after`を
+request SHA-256、candidate SHA-1、job result、outcome、write attempted、
+postverifiedと一緒にreportへ渡す。
+
+reportはremote-first reconciliation後、次の関係をexact確認できた場合だけ
+job側の観測pairをfinal receiptへ保持する。
+
+```text
+normal:
+H0 -> C1
+
+duplicate:
+C1 -> C1
+
+no-write head drift:
+D -> D
+
+fault-injected head drift:
+H0 -> D
+```
+
+job失敗、output欠落、hash不一致、観測pair不一致、または
+`D == H0 / C1`は信用しない。`post_push_stop`の失敗jobは成功へ昇格せず、
+reportのremote-first再確認による`C1 -> C1`と
+`APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT`を維持する。
+no-writeの`D -> D`は一回の値の複写ではなくtarget refを二回取得する。
+二回目が不存在、取得不能、または一回目と不一致なら
+`RESULT_UNKNOWN_STOP / TARGET_OBSERVATION`で停止する。
+
+report jobはreconciliation前後で`refs/heads/main`をActions側Gitから読み、
+`production_main_observed_before / after`を固定fieldとしてreceiptへ残す。
+5試験の前後にはvalid sandbox requestを`request_mode=reconcile`で実行する
+read-only boundary Issueを一件ずつ置く。両Issueはwrite permitを作らず、
+Actions側のmain pairが同じcurrent mainであることを示す。
+華恋は同じ前後点をGitHub connectorとReplacement 02 full fetchでも照合する。
+
+local guardian testsは64件成功。production policyはfalse、
+`publish-main`は静的disabledのまま変更しない。
+
+## 未確認
+
+- receipt観測完全性revisionのexact lease / post-fetch。
+- read-only pre-suite boundary Issueの実動。
+- GitHub sandbox 5試験。現在`0 / 5 NOT_RUN`。
+- post-suite boundary Issue、production activation、canary、Actions main route。
+
+## 華恋の意見
+
+target保存自体が安全でも、設計どおりの前後観測がreceiptに残らなければ
+試験成功の根拠が欠ける。Issueを先に動かして後から解釈で補わず、
+証拠経路を閉じたrevisionを新しいworkflow SHAとして依頼票を作り直す。
+
+## Step 11境界
+
+この閉鎖はGitHub transport maintenanceだけであり、D1 RED、
+mashos-api source / test、event1、readiness、reservation、formal attempt、
+exact134、P2、Product Read、correction、B6、Cycle001 acceptanceを開始しない。

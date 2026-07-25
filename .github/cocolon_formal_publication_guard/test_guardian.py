@@ -667,6 +667,8 @@ class ReconcileAndReportTests(GuardianTestCase):
         result, _, _ = self.evaluate_reconcile(request.expected_old_sha1)
         self.assertEqual("NOT_APPLIED_CONFIRMED_STOP", result["outcome"])
         self.assertEqual("unknown", result["write_attempted"])
+        self.assertEqual(request.expected_old_sha1, result["observed_before"])
+        self.assertEqual(request.expected_old_sha1, result["observed_after"])
 
     def test_reconcile_original_publish_request_candidate(self) -> None:
         result, proof, _ = self.evaluate_reconcile("a" * 40)
@@ -674,10 +676,14 @@ class ReconcileAndReportTests(GuardianTestCase):
         self.assertEqual(
             "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT", result["outcome"]
         )
+        self.assertEqual(proof.candidate_sha1, result["observed_before"])
+        self.assertEqual(proof.candidate_sha1, result["observed_after"])
 
     def test_reconcile_original_publish_request_other(self) -> None:
         result, _, _ = self.evaluate_reconcile("c" * 40)
         self.assertEqual("DRIFT_AFTER_ATTEMPT_STOP", result["outcome"])
+        self.assertEqual("c" * 40, result["observed_before"])
+        self.assertEqual("c" * 40, result["observed_after"])
 
     def test_report_missing_token_fails(self) -> None:
         event, _, _ = self.event_and_request()
@@ -701,19 +707,26 @@ class ReconcileAndReportTests(GuardianTestCase):
                         "blob_sha1": value["files"][0]["new_blob_sha1"],
                     }
                 ],
+                "production_main_observed_before": "a" * 40,
+                "production_main_observed_after": "b" * 40,
                 "write_attempted": True,
                 "postverified": True,
             }
         )
         self.assertIn(value["files"][0]["path"], receipt)
         self.assertIn(value["files"][0]["raw_sha256"], receipt)
+        self.assertIn(f'"production_main_observed_before":"{"a" * 40}"', receipt)
+        self.assertIn(f'"production_main_observed_after":"{"b" * 40}"', receipt)
 
     def test_report_preserves_verified_normal_publish_outcome(self) -> None:
         result = {
             "outcome": "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",
             "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
             "request_sha256": "a" * 64,
             "candidate_sha1": "b" * 40,
+            "observed_before": "b" * 40,
+            "observed_after": "b" * 40,
             "write_attempted": "unknown",
             "postverified": True,
         }
@@ -722,6 +735,8 @@ class ReconcileAndReportTests(GuardianTestCase):
             "GUARDIAN_SANDBOX_OUTCOME": "APPLIED_AND_POSTVERIFIED",
             "GUARDIAN_SANDBOX_REQUEST_SHA256": "a" * 64,
             "GUARDIAN_SANDBOX_CANDIDATE_SHA1": "b" * 40,
+            "GUARDIAN_SANDBOX_OBSERVED_BEFORE": "d" * 40,
+            "GUARDIAN_SANDBOX_OBSERVED_AFTER": "b" * 40,
             "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "true",
             "GUARDIAN_SANDBOX_POSTVERIFIED": "true",
         }
@@ -729,28 +744,41 @@ class ReconcileAndReportTests(GuardianTestCase):
             bound = guardian.bind_trusted_publish_result(result)
         self.assertEqual("APPLIED_AND_POSTVERIFIED", bound["outcome"])
         self.assertIs(bound["write_attempted"], True)
+        self.assertEqual("d" * 40, bound["observed_before"])
+        self.assertEqual("b" * 40, bound["observed_after"])
 
     def test_report_preserves_verified_duplicate_outcome(self) -> None:
         result = {
             "outcome": "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",
-            "target_class": "production",
+            "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
             "request_sha256": "a" * 64,
             "candidate_sha1": "b" * 40,
+            "observed_before": "b" * 40,
+            "observed_after": "b" * 40,
             "write_attempted": "unknown",
             "postverified": True,
         }
-        env = {
-            "GUARDIAN_PREFLIGHT_JOB_RESULT": "success",
-            "GUARDIAN_PREFLIGHT_OUTCOME": "ALREADY_APPLIED_POSTVERIFIED",
-            "GUARDIAN_PREFLIGHT_REQUEST_SHA256": "a" * 64,
-            "GUARDIAN_PREFLIGHT_CANDIDATE_SHA1": "b" * 40,
-            "GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED": "false",
-            "GUARDIAN_PREFLIGHT_POSTVERIFIED": "true",
-        }
-        with mock.patch.dict(os.environ, env, clear=True):
-            bound = guardian.bind_trusted_publish_result(result)
-        self.assertEqual("ALREADY_APPLIED_POSTVERIFIED", bound["outcome"])
-        self.assertIs(bound["write_attempted"], False)
+        for prefix in ("GUARDIAN_PREFLIGHT", "GUARDIAN_SANDBOX"):
+            env = {
+                f"{prefix}_JOB_RESULT": "success",
+                f"{prefix}_OUTCOME": "ALREADY_APPLIED_POSTVERIFIED",
+                f"{prefix}_REQUEST_SHA256": "a" * 64,
+                f"{prefix}_CANDIDATE_SHA1": "b" * 40,
+                f"{prefix}_OBSERVED_BEFORE": "b" * 40,
+                f"{prefix}_OBSERVED_AFTER": "b" * 40,
+                f"{prefix}_WRITE_ATTEMPTED": "false",
+                f"{prefix}_POSTVERIFIED": "true",
+            }
+            with (
+                self.subTest(prefix=prefix),
+                mock.patch.dict(os.environ, env, clear=True),
+            ):
+                bound = guardian.bind_trusted_publish_result(result)
+            self.assertEqual("ALREADY_APPLIED_POSTVERIFIED", bound["outcome"])
+            self.assertIs(bound["write_attempted"], False)
+            self.assertEqual("b" * 40, bound["observed_before"])
+            self.assertEqual("b" * 40, bound["observed_after"])
 
     def test_report_preserves_verified_head_drift(self) -> None:
         claims = (
@@ -762,8 +790,11 @@ class ReconcileAndReportTests(GuardianTestCase):
             result = {
                 "outcome": "DRIFT_AFTER_ATTEMPT_STOP",
                 "target_class": "sandbox",
+                "expected_old_sha1": "d" * 40,
                 "request_sha256": "a" * 64,
                 "candidate_sha1": "b" * 40,
+                "observed_before": "c" * 40,
+                "observed_after": "c" * 40,
                 "write_attempted": "unknown",
                 "postverified": False,
             }
@@ -772,6 +803,10 @@ class ReconcileAndReportTests(GuardianTestCase):
                 f"{prefix}_OUTCOME": "REJECTED_HEAD_DRIFT",
                 f"{prefix}_REQUEST_SHA256": "a" * 64,
                 f"{prefix}_CANDIDATE_SHA1": "b" * 40,
+                f"{prefix}_OBSERVED_BEFORE": (
+                    "d" * 40 if attempted_text == "true" else "c" * 40
+                ),
+                f"{prefix}_OBSERVED_AFTER": "c" * 40,
                 f"{prefix}_WRITE_ATTEMPTED": attempted_text,
                 f"{prefix}_POSTVERIFIED": "false",
             }
@@ -782,13 +817,21 @@ class ReconcileAndReportTests(GuardianTestCase):
                 bound = guardian.bind_trusted_publish_result(result)
             self.assertEqual("REJECTED_HEAD_DRIFT", bound["outcome"])
             self.assertIs(bound["write_attempted"], attempted_bool)
+            self.assertEqual(
+                "d" * 40 if attempted_text == "true" else "c" * 40,
+                bound["observed_before"],
+            )
+            self.assertEqual("c" * 40, bound["observed_after"])
 
     def test_report_does_not_trust_unbound_publish_outcome(self) -> None:
         result = {
             "outcome": "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",
             "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
             "request_sha256": "a" * 64,
             "candidate_sha1": "b" * 40,
+            "observed_before": "b" * 40,
+            "observed_after": "b" * 40,
             "write_attempted": "unknown",
             "postverified": True,
         }
@@ -797,6 +840,8 @@ class ReconcileAndReportTests(GuardianTestCase):
             "GUARDIAN_SANDBOX_OUTCOME": "APPLIED_AND_POSTVERIFIED",
             "GUARDIAN_SANDBOX_REQUEST_SHA256": "c" * 64,
             "GUARDIAN_SANDBOX_CANDIDATE_SHA1": "b" * 40,
+            "GUARDIAN_SANDBOX_OBSERVED_BEFORE": "d" * 40,
+            "GUARDIAN_SANDBOX_OBSERVED_AFTER": "b" * 40,
             "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "true",
             "GUARDIAN_SANDBOX_POSTVERIFIED": "true",
         }
@@ -810,8 +855,11 @@ class ReconcileAndReportTests(GuardianTestCase):
         result = {
             "outcome": "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",
             "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
             "request_sha256": "a" * 64,
             "candidate_sha1": "b" * 40,
+            "observed_before": "b" * 40,
+            "observed_after": "b" * 40,
             "write_attempted": "unknown",
             "postverified": True,
         }
@@ -820,6 +868,8 @@ class ReconcileAndReportTests(GuardianTestCase):
             "GUARDIAN_SANDBOX_OUTCOME": "APPLIED_AND_POSTVERIFIED",
             "GUARDIAN_SANDBOX_REQUEST_SHA256": "a" * 64,
             "GUARDIAN_SANDBOX_CANDIDATE_SHA1": "b" * 40,
+            "GUARDIAN_SANDBOX_OBSERVED_BEFORE": "d" * 40,
+            "GUARDIAN_SANDBOX_OBSERVED_AFTER": "b" * 40,
             "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "true",
             "GUARDIAN_SANDBOX_POSTVERIFIED": "true",
         }
@@ -828,6 +878,317 @@ class ReconcileAndReportTests(GuardianTestCase):
         self.assertEqual(
             "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT", bound["outcome"]
         )
+
+    def test_report_does_not_trust_inconsistent_observations(self) -> None:
+        cases = (
+            ("c" * 40, "b" * 40, "b" * 40, "b" * 40),
+            ("d" * 40, "c" * 40, "b" * 40, "b" * 40),
+            ("d" * 40, "b" * 40, "b" * 40, "c" * 40),
+        )
+        for claim_before, claim_after, remote_before, remote_after in cases:
+            result = {
+                "outcome": "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",
+                "target_class": "sandbox",
+                "expected_old_sha1": "d" * 40,
+                "request_sha256": "a" * 64,
+                "candidate_sha1": "b" * 40,
+                "observed_before": remote_before,
+                "observed_after": remote_after,
+                "write_attempted": "unknown",
+                "postverified": True,
+            }
+            env = {
+                "GUARDIAN_SANDBOX_JOB_RESULT": "success",
+                "GUARDIAN_SANDBOX_OUTCOME": "APPLIED_AND_POSTVERIFIED",
+                "GUARDIAN_SANDBOX_REQUEST_SHA256": "a" * 64,
+                "GUARDIAN_SANDBOX_CANDIDATE_SHA1": "b" * 40,
+                "GUARDIAN_SANDBOX_OBSERVED_BEFORE": claim_before,
+                "GUARDIAN_SANDBOX_OBSERVED_AFTER": claim_after,
+                "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "true",
+                "GUARDIAN_SANDBOX_POSTVERIFIED": "true",
+            }
+            with (
+                self.subTest(
+                    claim_before=claim_before,
+                    claim_after=claim_after,
+                    remote_after=remote_after,
+                ),
+                mock.patch.dict(os.environ, env, clear=True),
+            ):
+                bound = guardian.bind_trusted_publish_result(result)
+            self.assertEqual(
+                "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",
+                bound["outcome"],
+            )
+            self.assertEqual(remote_before, bound["observed_before"])
+            self.assertEqual(remote_after, bound["observed_after"])
+
+    def test_report_does_not_trust_invalid_head_drift_relation(self) -> None:
+        cases = (
+            ("GUARDIAN_SANDBOX", "d" * 40, "false"),
+            ("GUARDIAN_SANDBOX", "b" * 40, "false"),
+            ("GUARDIAN_PREFLIGHT", "c" * 40, "true"),
+        )
+        for prefix, remote_sha1, attempted in cases:
+            result = {
+                "outcome": "DRIFT_AFTER_ATTEMPT_STOP",
+                "target_class": "sandbox",
+                "expected_old_sha1": "d" * 40,
+                "request_sha256": "a" * 64,
+                "candidate_sha1": "b" * 40,
+                "observed_before": remote_sha1,
+                "observed_after": remote_sha1,
+                "write_attempted": "unknown",
+                "postverified": False,
+            }
+            env = {
+                f"{prefix}_JOB_RESULT": "success",
+                f"{prefix}_OUTCOME": "REJECTED_HEAD_DRIFT",
+                f"{prefix}_REQUEST_SHA256": "a" * 64,
+                f"{prefix}_CANDIDATE_SHA1": "b" * 40,
+                f"{prefix}_OBSERVED_BEFORE": (
+                    "d" * 40 if attempted == "true" else remote_sha1
+                ),
+                f"{prefix}_OBSERVED_AFTER": remote_sha1,
+                f"{prefix}_WRITE_ATTEMPTED": attempted,
+                f"{prefix}_POSTVERIFIED": "false",
+            }
+            with (
+                self.subTest(
+                    prefix=prefix,
+                    remote_sha1=remote_sha1,
+                    attempted=attempted,
+                ),
+                mock.patch.dict(os.environ, env, clear=True),
+            ):
+                bound = guardian.bind_trusted_publish_result(result)
+            self.assertEqual("DRIFT_AFTER_ATTEMPT_STOP", bound["outcome"])
+            self.assertEqual("unknown", bound["write_attempted"])
+
+    def test_write_outputs_exports_observation_pair(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output_path = pathlib.Path(directory) / "github-output"
+            with (
+                mock.patch.dict(
+                    os.environ,
+                    {"GITHUB_OUTPUT": str(output_path)},
+                    clear=True,
+                ),
+                mock.patch("builtins.print"),
+            ):
+                guardian._write_outputs(
+                    {
+                        "outcome": "APPLIED_AND_POSTVERIFIED",
+                        "observed_before": "a" * 40,
+                        "observed_after": "b" * 40,
+                    }
+                )
+            rendered = output_path.read_text(encoding="utf-8")
+        self.assertIn(f"observed_before={'a' * 40}\n", rendered)
+        self.assertIn(f"observed_after={'b' * 40}\n", rendered)
+
+    def test_workflow_forwards_observation_pair_from_each_job(self) -> None:
+        workflow_path = (
+            MODULE_PATH.parents[1]
+            / "workflows"
+            / "cocolon_formal_publication_guard.yml"
+        )
+        workflow = workflow_path.read_text(encoding="utf-8")
+        self.assertEqual(
+            3,
+            workflow.count(
+                "observed_before: ${{ steps.guard.outputs.observed_before }}"
+            ),
+        )
+        self.assertEqual(
+            3,
+            workflow.count(
+                "observed_after: ${{ steps.guard.outputs.observed_after }}"
+            ),
+        )
+        for prefix in ("PREFLIGHT", "MAIN", "SANDBOX"):
+            self.assertIn(f"GUARDIAN_{prefix}_OBSERVED_BEFORE:", workflow)
+            self.assertIn(f"GUARDIAN_{prefix}_OBSERVED_AFTER:", workflow)
+
+    def test_post_push_stop_is_uncertain_only_after_one_push_attempt(self) -> None:
+        policy = dataclass_replace(
+            self.policy,
+            actor_allowlist=((175191163, "MassyuRed", "User"),),
+            mode="OBSERVE_AND_SANDBOX_ONLY",
+            sandbox_write_enabled=True,
+            sandbox_fault_injection_enabled=True,
+        )
+        value = self.request_dict(sandbox=True)
+        now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
+        value["commit"]["timestamp_utc"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        value["expires_at_utc"] = (now + dt.timedelta(hours=1)).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        )
+        value["sandbox_test"] = {
+            "case": "post_push_stop",
+            "drift_ref": None,
+            "drift_sha1": None,
+        }
+        value["request_sha256"] = guardian.request_hash(value)
+        user = {"id": 175191163, "login": "MassyuRed", "type": "User"}
+        event = {
+            "action": "opened",
+            "repository": {
+                "id": policy.repository_id,
+                "full_name": policy.repository,
+            },
+            "issue": {
+                "number": 8,
+                "title": guardian.TITLE_PREFIX + value["request_id"],
+                "body": self.body(value),
+                "created_at": value["commit"]["timestamp_utc"],
+                "user": dict(user),
+            },
+            "sender": dict(user),
+        }
+        request = guardian.parse_request_body(
+            event["issue"]["body"],
+            policy,
+            issue_created_at=event["issue"]["created_at"],
+        )
+        proof = guardian.CandidateProof(
+            "a" * 40,
+            "b" * 40,
+            request.expected_old_sha1,
+            request.files,
+        )
+        with (
+            mock.patch.dict(os.environ, {"GITHUB_SHA": request.workflow_sha1}),
+            mock.patch.object(guardian, "verify_trusted_checkout"),
+            mock.patch.object(guardian, "inspect_candidate", return_value=proof),
+            mock.patch.object(
+                guardian,
+                "remote_ref_sha",
+                return_value=request.expected_old_sha1,
+            ),
+            mock.patch.object(guardian, "make_write_permit", return_value=object()),
+            mock.patch.object(guardian, "push_exact_lease") as push,
+            mock.patch.object(guardian, "postverify_after_write") as postverify,
+        ):
+            with self.assertRaises(guardian.GuardianReject) as caught:
+                guardian.evaluate_request(
+                    event,
+                    policy,
+                    execution_mode="publish",
+                    expected_target_class="sandbox",
+                )
+        self.assertEqual("RESULT_UNKNOWN_STOP", caught.exception.code)
+        self.assertEqual("INTENTIONAL_POST_PUSH_STOP", caught.exception.stage)
+        self.assertIs(caught.exception.write_attempted, True)
+        self.assertIs(caught.exception.result_uncertain, True)
+        push.assert_called_once()
+        postverify.assert_not_called()
+
+    def test_report_observes_production_main_around_reconciliation(self) -> None:
+        result = {
+            "outcome": "NOT_APPLIED_CONFIRMED_STOP",
+            "write_attempted": "unknown",
+            "postverified": False,
+        }
+        event = {"issue": {"number": 8}}
+        with (
+            mock.patch.object(
+                guardian,
+                "remote_ref_sha",
+                side_effect=["a" * 40, "a" * 40],
+            ) as observe,
+            mock.patch.object(guardian, "run_guardian", return_value=result),
+            mock.patch.object(guardian, "load_event", return_value=event),
+            mock.patch.object(guardian, "report_result") as report,
+            mock.patch.object(guardian, "_write_outputs"),
+        ):
+            exit_code = guardian.main(
+                [
+                    "report",
+                    "--event-path",
+                    "/tmp/guardian-test-event.json",
+                    "--policy-path",
+                    str(self.policy_path),
+                ]
+            )
+        self.assertEqual(0, exit_code)
+        self.assertEqual(2, observe.call_count)
+        reported = report.call_args.args[1]
+        self.assertEqual("a" * 40, reported["production_main_observed_before"])
+        self.assertEqual("a" * 40, reported["production_main_observed_after"])
+
+    def test_production_main_observation_normalizes_missing_or_failed_read(
+        self,
+    ) -> None:
+        cases = (
+            None,
+            guardian.GuardianReject("RESULT_UNKNOWN_STOP", "GIT"),
+        )
+        for observed in cases:
+            patch = (
+                mock.patch.object(
+                    guardian,
+                    "remote_ref_sha",
+                    return_value=None,
+                )
+                if observed is None
+                else mock.patch.object(
+                    guardian,
+                    "remote_ref_sha",
+                    side_effect=observed,
+                )
+            )
+            with self.subTest(observed=observed), patch:
+                with self.assertRaises(guardian.GuardianReject) as caught:
+                    guardian.observe_production_main(self.policy)
+            self.assertEqual("RESULT_UNKNOWN_STOP", caught.exception.code)
+            self.assertEqual(
+                "PRODUCTION_MAIN_OBSERVATION",
+                caught.exception.stage,
+            )
+
+    def test_no_write_target_observation_requires_second_matching_read(
+        self,
+    ) -> None:
+        with mock.patch.object(
+            guardian,
+            "remote_ref_sha",
+            return_value="a" * 40,
+        ) as observe:
+            observed_after = guardian.observe_unchanged_target(
+                "refs/heads/guardian/sandbox/suite/case",
+                "a" * 40,
+            )
+        self.assertEqual("a" * 40, observed_after)
+        observe.assert_called_once()
+
+        cases = (
+            None,
+            "b" * 40,
+            guardian.GuardianReject("RESULT_UNKNOWN_STOP", "GIT"),
+        )
+        for observed in cases:
+            patch = (
+                mock.patch.object(
+                    guardian,
+                    "remote_ref_sha",
+                    return_value=observed,
+                )
+                if not isinstance(observed, Exception)
+                else mock.patch.object(
+                    guardian,
+                    "remote_ref_sha",
+                    side_effect=observed,
+                )
+            )
+            with self.subTest(observed=observed), patch:
+                with self.assertRaises(guardian.GuardianReject) as caught:
+                    guardian.observe_unchanged_target(
+                        "refs/heads/guardian/sandbox/suite/case",
+                        "a" * 40,
+                    )
+            self.assertEqual("RESULT_UNKNOWN_STOP", caught.exception.code)
+            self.assertEqual("TARGET_OBSERVATION", caught.exception.stage)
 
     def test_resolved_duplicate_and_head_drift_exit_success(self) -> None:
         cases = (

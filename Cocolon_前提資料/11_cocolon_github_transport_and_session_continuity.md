@@ -478,3 +478,67 @@ Issue未作成・guardian write未実施です。sandbox target refは再確認�
 旧opaque ID名のstaging refは新contractでは利用せず、binding revision反映後の
 workflow SHAで依頼票を再生成し、計算された`g1-<64 hex>`とexact一致する
 新しいstaging refを作成します。
+
+# 2026-07-25 Replacement 02 receipt observation maintenance
+
+request ID binding revisionは次のformal identityで成立しました。
+
+```text
+expected old:
+a5fb4fd9467e23f7fc6420260f6a96e2d0513a65
+
+published direct child:
+c333b0c032b20a1ecbde2426de9894b57d6be70a
+
+tree:
+ccf7e97445347fe0fa8f38816d7b09bfb077d833
+
+changed paths:
+exactly 7
+```
+
+parent exact1、tree、exact 7 paths、全対象blob / raw SHA-256 / size、
+full fetch、strict fsckをpost-fetchで確認しました。GitHub connectorでも
+guardianとrequest schemaのblob identityを独立確認しました。
+
+新contractの正常case targetと
+`refs/heads/guardian/staging/g1-5ee9e6ef21c3de886c2829d839a2ae89b565baefc85a86963c2dfaf7e5457adb`
+は準備済みですが、Issue作成とActions guardian writeはまだ0件です。
+stagingには秘密情報がなく、final workflow SHAを含むrequest body /
+request SHA-256 / candidate SHA-1は今回maintenance反映後に再計算します。
+
+Issue作成前の最終監査で、次の二つのreceipt不足を確認しました。
+
+1. publish / preflight jobが見たtargetの`observed_before / after`が、
+   final reportで保存時のpairとして残らない。
+2. sandbox suite前後のproduction mainをActions側Gitで観測した証拠が
+   receiptに残らない。
+
+次のReplacement 02 maintenanceはcurrent main
+`c333b0c032b20a1ecbde2426de9894b57d6be70a`をexpected oldとし、
+変更を次のexact 7 pathsへ限定します。
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+job側の観測pairは、reportがremote-firstで全内容を再確認し、request、
+candidate、job success、outcome、write attempted、postverifiedと
+SHA関係が全て一致した時だけ保持します。失敗jobや不一致outputは信用しません。
+no-writeのtarget pairもrefを二回実取得して作り、二回目の不存在、取得不能、
+またはSHA変化は`RESULT_UNKNOWN_STOP / TARGET_OBSERVATION`で停止します。
+
+reportはreconciliationの前後でproduction mainをActions側Gitから取得し、
+固定fieldとしてIssue receiptへ残します。suiteの前後に
+`request_mode=reconcile`のread-only boundary Issueを一件ずつ実行し、
+両方のActions観測をconnectorとReplacement 02 full fetchへ照合します。
+
+local guardian testsは64件成功しています。production flagと
+`publish-main`の静的停止は変更しません。GitHub sandbox試験は
+`0 / 5 NOT_RUN`で、今回maintenance自体を試験成功へ数えません。

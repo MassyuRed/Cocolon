@@ -581,3 +581,154 @@ staging refをそのdirect child fixtureへ新規作成したが、Issueは作�
 request ID binding revision反映後、最終workflow SHAで依頼票を再生成し、
 計算された新IDとexact一致する新しいstaging refを作成してから試験する。
 この準備refを試験成功やguardian writeへ数えない。
+
+# 2026-07-25 sandbox試験前receipt観測完全性閉鎖
+
+## request ID binding revisionの反映
+
+次のformal publishとpost-fetchを確認した。
+
+```text
+expected old:
+a5fb4fd9467e23f7fc6420260f6a96e2d0513a65
+
+published direct child:
+c333b0c032b20a1ecbde2426de9894b57d6be70a
+
+tree:
+ccf7e97445347fe0fa8f38816d7b09bfb077d833
+
+changed paths:
+exactly 7
+```
+
+新しい`g1-<64 hex>`正常case staging refは準備済みだが、
+Issue作成とguardian sandbox writeは0件、5試験は`0 / 5 NOT_RUN`である。
+
+## 確認したreceipt差
+
+承認済み設計17節はfinal Issue receiptにtargetの
+`observed before / after`を要求する。
+しかしrequest ID binding revisionのworkflowでは、preflight / publish jobから
+reportへ渡す固定outputがoutcome、request SHA-256、candidate SHA-1、
+write attempted、postverifiedだけで、保存時の観測pairを保持できなかった。
+
+また設計20節はsuite前後のproduction main不変を
+Actions側GitとGitHub connectorの二経路で確認するが、report完了時に
+Actions側Gitが`refs/heads/main`を取得してreceiptへ固定する経路がなかった。
+
+この二点をGitHub Issue実動前のBLOCKERとして扱う。
+
+## target観測pairのtrusted binding
+
+preflight / publish job outputへ次を追加する。
+
+```text
+observed_before
+observed_after
+```
+
+reportはremote-first reconciliationを先に行う。job側pairは次の全条件が
+一致した時だけfinal receiptへ保持する。
+
+```text
+job result:
+success
+
+identity:
+request SHA-256 exact
+candidate SHA-1 exact
+
+normal:
+job H0 -> C1
+report C1 -> C1
+
+duplicate:
+job C1 -> C1
+report C1 -> C1
+
+no-write head drift:
+job D -> D
+report D -> D
+
+fault-injected head drift:
+job H0 -> D
+report D -> D
+
+drift exclusion:
+D != H0
+D != C1
+```
+
+outcome、write attempted、postverified、lowercase SHA-1形式もexact一致させる。
+job failure、output欠落、identity不一致、観測pair不一致は信用せず、
+remote-firstのconservative outcomeを維持する。
+
+no-writeの`D -> D`は同じ変数の複写ではなく、target refを二回実取得する。
+二回目が不存在、取得不能、または一回目と異なる場合は
+`RESULT_UNKNOWN_STOP / TARGET_OBSERVATION`で停止し、安定pairを主張しない。
+
+`post_push_stop`ではpublish jobが意図的にfailureとなるため、job outputを
+成功結果へbindingしない。reportがcandidateをremote-firstで全検証した時だけ
+`APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT`、target `C1 -> C1`、
+write attempted `unknown`を記録する。
+
+## production mainのActions側境界観測
+
+report jobはreconciliationの直前と直後に`refs/heads/main`を
+Actions側Gitから取得し、次をfixed receipt fieldへ含める。
+
+```text
+production_main_observed_before
+production_main_observed_after
+```
+
+取得不能またはref不存在ではreceipt成功扱いにせず
+`RESULT_UNKNOWN_STOP / PRODUCTION_MAIN_OBSERVATION`で停止する。
+
+5試験の開始前と終了後には、valid sandbox candidateを対象に
+`request_mode=reconcile`としたread-only boundary Issueを一件ずつ実行する。
+このrequestはwrite permitを作らず、targetがH0なら
+`NOT_APPLIED_CONFIRMED_STOP`となる。
+
+合格条件:
+
+```text
+pre-suite Actions main before == after == M0
+post-suite Actions main before == after == M0
+connector pre-suite main == M0
+connector post-suite main == M0
+Replacement 02 full-fetch post-suite main == M0
+```
+
+boundary Issueは5試験の成功数へ含めない。Issueとreceiptは監査証拠として
+close後も削除しない。
+
+## Replacement 02 maintenance
+
+expected old:
+
+```text
+c333b0c032b20a1ecbde2426de9894b57d6be70a
+```
+
+exact changed paths:
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+local guardian testsは64件成功した。追加確認は、観測pairのpositive /
+negative matrix、workflow output forwarding、receipt固定field、
+production main boundary観測、`post_push_stop`が一回のpush後にだけ
+uncertain stopとなることを含む。
+
+production policyはfalse、`publish-main`は静的disabledのまま変更しない。
+このmaintenance反映後のworkflow SHAで全request body / hash / candidateを
+再生成してから、pre-suite boundary Issueと5試験を開始する。

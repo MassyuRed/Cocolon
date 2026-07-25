@@ -34,6 +34,8 @@ jobs:
       write_attempted: ${{ steps.guard.outputs.write_attempted }}
       request_sha256: ${{ steps.guard.outputs.request_sha256 }}
       candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
+      observed_before: ${{ steps.guard.outputs.observed_before }}
+      observed_after: ${{ steps.guard.outputs.observed_after }}
     steps:
       - name: Checkout trusted main revision
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -66,6 +68,8 @@ jobs:
       write_attempted: ${{ steps.guard.outputs.write_attempted }}
       request_sha256: ${{ steps.guard.outputs.request_sha256 }}
       candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
+      observed_before: ${{ steps.guard.outputs.observed_before }}
+      observed_after: ${{ steps.guard.outputs.observed_after }}
     steps:
       - name: Checkout trusted main revision
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -95,6 +99,8 @@ jobs:
       write_attempted: ${{ steps.guard.outputs.write_attempted }}
       request_sha256: ${{ steps.guard.outputs.request_sha256 }}
       candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
+      observed_before: ${{ steps.guard.outputs.observed_before }}
+      observed_after: ${{ steps.guard.outputs.observed_after }}
     steps:
       - name: Checkout trusted main revision
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -146,18 +152,24 @@ jobs:
           GUARDIAN_EVENT_PATH: ${{ github.event_path }}
           GUARDIAN_PREFLIGHT_CANDIDATE_SHA1: ${{ needs.preflight.outputs.candidate_sha1 }}
           GUARDIAN_PREFLIGHT_JOB_RESULT: ${{ needs.preflight.result }}
+          GUARDIAN_PREFLIGHT_OBSERVED_AFTER: ${{ needs.preflight.outputs.observed_after }}
+          GUARDIAN_PREFLIGHT_OBSERVED_BEFORE: ${{ needs.preflight.outputs.observed_before }}
           GUARDIAN_PREFLIGHT_OUTCOME: ${{ needs.preflight.outputs.outcome }}
           GUARDIAN_PREFLIGHT_POSTVERIFIED: ${{ needs.preflight.outputs.postverified }}
           GUARDIAN_PREFLIGHT_REQUEST_SHA256: ${{ needs.preflight.outputs.request_sha256 }}
           GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED: ${{ needs.preflight.outputs.write_attempted }}
           GUARDIAN_MAIN_CANDIDATE_SHA1: ${{ needs.publish-main.outputs.candidate_sha1 }}
           GUARDIAN_MAIN_JOB_RESULT: ${{ needs.publish-main.result }}
+          GUARDIAN_MAIN_OBSERVED_AFTER: ${{ needs.publish-main.outputs.observed_after }}
+          GUARDIAN_MAIN_OBSERVED_BEFORE: ${{ needs.publish-main.outputs.observed_before }}
           GUARDIAN_MAIN_OUTCOME: ${{ needs.publish-main.outputs.outcome }}
           GUARDIAN_MAIN_POSTVERIFIED: ${{ needs.publish-main.outputs.postverified }}
           GUARDIAN_MAIN_REQUEST_SHA256: ${{ needs.publish-main.outputs.request_sha256 }}
           GUARDIAN_MAIN_WRITE_ATTEMPTED: ${{ needs.publish-main.outputs.write_attempted }}
           GUARDIAN_SANDBOX_CANDIDATE_SHA1: ${{ needs.publish-sandbox.outputs.candidate_sha1 }}
           GUARDIAN_SANDBOX_JOB_RESULT: ${{ needs.publish-sandbox.result }}
+          GUARDIAN_SANDBOX_OBSERVED_AFTER: ${{ needs.publish-sandbox.outputs.observed_after }}
+          GUARDIAN_SANDBOX_OBSERVED_BEFORE: ${{ needs.publish-sandbox.outputs.observed_before }}
           GUARDIAN_SANDBOX_OUTCOME: ${{ needs.publish-sandbox.outputs.outcome }}
           GUARDIAN_SANDBOX_POSTVERIFIED: ${{ needs.publish-sandbox.outputs.postverified }}
           GUARDIAN_SANDBOX_REQUEST_SHA256: ${{ needs.publish-sandbox.outputs.request_sha256 }}

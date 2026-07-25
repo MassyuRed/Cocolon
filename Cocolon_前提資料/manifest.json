@@ -15828,5 +15828,65 @@
     "11_cocolon_github_transport_and_session_continuity.md",
     "12_cocolon_github_actions_publication_guard.md",
     "manifest.json"
+  ],
+  "github_actions_publication_guardian_receipt_observation_maintenance_2026_07_25": {
+    "reflected_when_exact_lease_and_post_fetch_complete": true,
+    "expected_old_main_sha1": "c333b0c032b20a1ecbde2426de9894b57d6be70a",
+    "request_id_binding_revision_reflected": true,
+    "request_id_binding_published_sha1": "c333b0c032b20a1ecbde2426de9894b57d6be70a",
+    "request_id_binding_tree_sha1": "ccf7e97445347fe0fa8f38816d7b09bfb077d833",
+    "request_id_binding_changed_path_count": 7,
+    "request_id_binding_post_fetch_verified": true,
+    "request_id_binding_connector_guardian_and_schema_verified": true,
+    "reason": "close approved receipt observation and two-route production-main evidence requirements before any sandbox Issue is opened",
+    "confirmed_gaps": [
+      "final report did not preserve the trusted publish or preflight observed-before and observed-after pair",
+      "sandbox suite had no Actions-side Git production-main boundary observation in its receipt"
+    ],
+    "trusted_job_observation_pair_binding": {
+      "normal": "job H0-to-C1 and remote-first report C1-to-C1",
+      "duplicate": "job C1-to-C1 and remote-first report C1-to-C1",
+      "no_write_head_drift": "job and remote-first report each require two actual matching D reads",
+      "fault_injected_head_drift": "job H0-to-D and remote-first report D-to-D",
+      "drift_must_differ_from_expected_old_and_candidate": true,
+      "failed_job_missing_output_identity_or_pair_mismatch_is_not_trusted": true,
+      "post_push_stop_failed_job_is_never_promoted": true
+    },
+    "receipt_production_main_fields": [
+      "production_main_observed_before",
+      "production_main_observed_after"
+    ],
+    "production_main_observation_failure_outcome": "RESULT_UNKNOWN_STOP",
+    "production_main_observation_failure_stage": "PRODUCTION_MAIN_OBSERVATION",
+    "pre_and_post_suite_read_only_boundary_issues_required": true,
+    "boundary_request_mode": "reconcile",
+    "boundary_issue_counts_toward_five_tests": false,
+    "target_observation_failure_outcome": "RESULT_UNKNOWN_STOP",
+    "target_observation_failure_stage": "TARGET_OBSERVATION",
+    "local_security_tests_passed": 64,
+    "github_sandbox_issues_created_before_maintenance": 0,
+    "github_sandbox_tests_passed_before_maintenance": 0,
+    "github_sandbox_tests_required": 5,
+    "normal_case_new_g1_staging_ref_created": true,
+    "normal_case_guardian_write_before_maintenance": false,
+    "production_main_enabled": false,
+    "publish_main_job_statically_disabled": true,
+    "changed_path_count": 7,
+    "exact_changed_paths": [
+      ".github/workflows/cocolon_formal_publication_guard.yml",
+      ".github/cocolon_formal_publication_guard/guardian.py",
+      ".github/cocolon_formal_publication_guard/test_guardian.py",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "automatic_step11_progression": false
+  },
+  "latest_modified_premise_files_2026_07_25_github_actions_publication_guardian_receipt_observation": [
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "12_cocolon_github_actions_publication_guard.md",
+    "manifest.json"
   ]
 }

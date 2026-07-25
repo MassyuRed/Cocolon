@@ -849,6 +849,38 @@ def remote_ref_sha(ref: str) -> str | None:
     return sha
 
 
+def observe_production_main(policy: Policy) -> str:
+    try:
+        observed = remote_ref_sha(policy.default_ref)
+    except GuardianReject as exc:
+        raise GuardianReject(
+            "RESULT_UNKNOWN_STOP",
+            "PRODUCTION_MAIN_OBSERVATION",
+        ) from exc
+    if observed is None:
+        raise GuardianReject(
+            "RESULT_UNKNOWN_STOP",
+            "PRODUCTION_MAIN_OBSERVATION",
+        )
+    return observed
+
+
+def observe_unchanged_target(target_ref: str, observed_before: str) -> str:
+    try:
+        observed_after = remote_ref_sha(target_ref)
+    except GuardianReject as exc:
+        raise GuardianReject(
+            "RESULT_UNKNOWN_STOP",
+            "TARGET_OBSERVATION",
+        ) from exc
+    if observed_after is None or observed_after != observed_before:
+        raise GuardianReject(
+            "RESULT_UNKNOWN_STOP",
+            "TARGET_OBSERVATION",
+        )
+    return observed_after
+
+
 def _fetch_exact(ref: str, namespace: str) -> str:
     local_ref = f"refs/cocolon-guardian/{namespace}"
     git(
@@ -1284,13 +1316,38 @@ def evaluate_request(
             if execution_mode == "reconcile"
             else "ALREADY_APPLIED_POSTVERIFIED"
         )
-        return {**base, "outcome": outcome, "postverified": True}
+        return {
+            **base,
+            "outcome": outcome,
+            "observed_after": proof.candidate_sha1,
+            "postverified": True,
+        }
     if execution_mode == "reconcile" or request.request_mode == "reconcile":
+        observed_after = observe_unchanged_target(
+            request.target_ref,
+            observed_before,
+        )
         if observed_before == request.expected_old_sha1:
-            return {**base, "outcome": "NOT_APPLIED_CONFIRMED_STOP"}
-        return {**base, "outcome": "DRIFT_AFTER_ATTEMPT_STOP"}
+            return {
+                **base,
+                "outcome": "NOT_APPLIED_CONFIRMED_STOP",
+                "observed_after": observed_after,
+            }
+        return {
+            **base,
+            "outcome": "DRIFT_AFTER_ATTEMPT_STOP",
+            "observed_after": observed_after,
+        }
     if observed_before != request.expected_old_sha1:
-        return {**base, "outcome": "REJECTED_HEAD_DRIFT"}
+        observed_after = observe_unchanged_target(
+            request.target_ref,
+            observed_before,
+        )
+        return {
+            **base,
+            "outcome": "REJECTED_HEAD_DRIFT",
+            "observed_after": observed_after,
+        }
     if _parse_utc(request.expires_at_utc, "EXPIRY") <= dt.datetime.now(dt.timezone.utc):
         raise GuardianReject("REJECTED_EXPIRED_REQUEST", "WRITE_PERMIT")
     if execution_mode == "preflight":
@@ -1419,6 +1476,8 @@ def fixed_receipt(result: Mapping[str, Any]) -> str:
         "candidate_sha1",
         "observed_before",
         "observed_after",
+        "production_main_observed_before",
+        "production_main_observed_after",
         "files_sha256",
         "request_sha256",
         "policy_sha256",
@@ -1510,6 +1569,14 @@ def _write_outputs(result: Mapping[str, Any]) -> None:
             ),
             "request_sha256": result.get("request_sha256", ""),
             "candidate_sha1": result.get("candidate_sha1", ""),
+            "observed_before": result.get("observed_before", ""),
+            "observed_after": result.get("observed_after", ""),
+            "production_main_observed_before": result.get(
+                "production_main_observed_before", ""
+            ),
+            "production_main_observed_after": result.get(
+                "production_main_observed_after", ""
+            ),
         }
         with open(output_path, "a", encoding="utf-8", newline="\n") as handle:
             for key, value in safe.items():
@@ -1524,6 +1591,8 @@ def _job_claim(prefix: str) -> dict[str, str]:
         "candidate_sha1": os.environ.get(f"{prefix}_CANDIDATE_SHA1", ""),
         "write_attempted": os.environ.get(f"{prefix}_WRITE_ATTEMPTED", ""),
         "postverified": os.environ.get(f"{prefix}_POSTVERIFIED", ""),
+        "observed_before": os.environ.get(f"{prefix}_OBSERVED_BEFORE", ""),
+        "observed_after": os.environ.get(f"{prefix}_OBSERVED_AFTER", ""),
     }
 
 
@@ -1548,18 +1617,30 @@ def bind_trusted_publish_result(reconciled: Mapping[str, Any]) -> dict[str, Any]
             or claimed["candidate_sha1"] != result.get("candidate_sha1")
         ):
             continue
+        observed_before = claimed["observed_before"]
+        observed_after = claimed["observed_after"]
+        if not HEX40.fullmatch(observed_before) or not HEX40.fullmatch(observed_after):
+            continue
         if (
             source == "publish"
             and reconciled_outcome == "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT"
             and claimed["outcome"] == "APPLIED_AND_POSTVERIFIED"
             and claimed["write_attempted"] == "true"
             and claimed["postverified"] == "true"
+            and observed_before == result.get("expected_old_sha1")
+            and observed_after == result.get("candidate_sha1")
+            and result.get("observed_before") == result.get("candidate_sha1")
+            and result.get("observed_after") == result.get("candidate_sha1")
+            and result.get("write_attempted") == "unknown"
+            and result.get("postverified") is True
         ):
             result.update(
                 {
                     "outcome": "APPLIED_AND_POSTVERIFIED",
                     "write_attempted": True,
                     "postverified": True,
+                    "observed_before": observed_before,
+                    "observed_after": observed_after,
                 }
             )
             return result
@@ -1568,12 +1649,20 @@ def bind_trusted_publish_result(reconciled: Mapping[str, Any]) -> dict[str, Any]
             and claimed["outcome"] == "ALREADY_APPLIED_POSTVERIFIED"
             and claimed["write_attempted"] == "false"
             and claimed["postverified"] == "true"
+            and observed_before == result.get("candidate_sha1")
+            and observed_after == result.get("candidate_sha1")
+            and result.get("observed_before") == result.get("candidate_sha1")
+            and result.get("observed_after") == result.get("candidate_sha1")
+            and result.get("write_attempted") == "unknown"
+            and result.get("postverified") is True
         ):
             result.update(
                 {
                     "outcome": "ALREADY_APPLIED_POSTVERIFIED",
                     "write_attempted": False,
                     "postverified": True,
+                    "observed_before": observed_before,
+                    "observed_after": observed_after,
                 }
             )
             return result
@@ -1591,12 +1680,31 @@ def bind_trusted_publish_result(reconciled: Mapping[str, Any]) -> dict[str, Any]
                 )
             )
             and claimed["postverified"] == "false"
+            and result.get("observed_before") == result.get("observed_after")
+            and result.get("observed_before") != result.get("expected_old_sha1")
+            and result.get("observed_before") != result.get("candidate_sha1")
+            and result.get("write_attempted") == "unknown"
+            and result.get("postverified") is False
+            and (
+                (
+                    claimed["write_attempted"] == "true"
+                    and observed_before == result.get("expected_old_sha1")
+                    and observed_after == result.get("observed_before")
+                )
+                or (
+                    claimed["write_attempted"] == "false"
+                    and observed_before == result.get("observed_before")
+                    and observed_after == result.get("observed_before")
+                )
+            )
         ):
             result.update(
                 {
                     "outcome": "REJECTED_HEAD_DRIFT",
                     "write_attempted": claimed["write_attempted"] == "true",
                     "postverified": False,
+                    "observed_before": observed_before,
+                    "observed_after": observed_after,
                 }
             )
             return result
@@ -1626,6 +1734,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     event_path = pathlib.Path(args.event_path)
     policy_path = pathlib.Path(args.policy_path)
     command = "reconcile" if args.command == "report" else args.command
+    report_policy = None
+    production_main_observed_before = None
+    if args.command == "report":
+        try:
+            report_policy = load_policy(policy_path)
+            production_main_observed_before = observe_production_main(
+                report_policy
+            )
+        except GuardianReject as observation_exc:
+            _write_outputs(sanitized_failure(observation_exc))
+            return 1
     try:
         result = run_guardian(
             event_path,
@@ -1639,6 +1758,28 @@ def main(argv: Sequence[str] | None = None) -> int:
             result["write_attempted"] = "unknown"
 
     if args.command == "report":
+        try:
+            if report_policy is None:
+                raise GuardianReject(
+                    "RESULT_UNKNOWN_STOP",
+                    "PRODUCTION_MAIN_OBSERVATION",
+                )
+            production_main_observed_after = observe_production_main(
+                report_policy
+            )
+        except GuardianReject as observation_exc:
+            _write_outputs(sanitized_failure(observation_exc))
+            return 1
+        result.update(
+            {
+                "production_main_observed_before": (
+                    production_main_observed_before
+                ),
+                "production_main_observed_after": (
+                    production_main_observed_after
+                ),
+            }
+        )
         result = bind_trusted_publish_result(result)
         try:
             report_result(load_event(event_path), result)
