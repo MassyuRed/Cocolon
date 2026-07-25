@@ -1,0 +1,93 @@
+{
+  "artifact_issuance": {
+    "accepted_successful_receipt_count": 0,
+    "all11_completion_chain_count": 0,
+    "atomic_formal_manifest_count": 0,
+    "formal_attempt_count": 0,
+    "formal_reservation_count": 0,
+    "private_body_artifact_count": 0,
+    "sequence_event1_count": 0,
+    "sequence_event2_count": 0,
+    "source_baseline_closure_receipt_count": 0,
+    "step0_10_completion_receipt_count": 0
+  },
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY",
+  "body_free": true,
+  "broad_regression_run": false,
+  "entry": {
+    "cocolon_commit_sha1": "5722c4aea2e1d42d7f84e9b36e6322b538615bf2",
+    "cocolon_tree_sha1": "a804fcbf4691ea9c842f1c8fa13b368f87836aa0",
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "mashos_api_commit_sha1": "191e9d8be63132f10f94e2b2f54c6bae94ce1f07",
+    "mashos_api_tree_sha1": "e68df6587b8cb674456b3bc9bceb23e0699f33aa",
+    "related_entry_drift": false
+  },
+  "formal_exact134_run": false,
+  "mashos_api_red_freeze": {
+    "ahead_by": 1,
+    "base_commit_sha1": "191e9d8be63132f10f94e2b2f54c6bae94ce1f07",
+    "behind_by": 0,
+    "changed_path_count": 1,
+    "commit_sha1": "ef9996aee20e2aed7b51d65a3559b9aea30f429e",
+    "files": [
+      {
+        "change": "ADDED",
+        "git_blob_sha1": "c410cdc4ed0d24565035cfb735b5039bb8ffbf36",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch001_formal_lane_owner_completeness_red.py",
+        "raw_file_sha256": "ab6b340fe5e845d546f6a86ef25c78c511a5f6f703c320d8b75d13041f1bb96f"
+      }
+    ],
+    "force_ref_update": false,
+    "parent_commit_sha1": "191e9d8be63132f10f94e2b2f54c6bae94ce1f07",
+    "production_source_change_count": 0,
+    "repository_full_name": "MassyuRed/mashos-api",
+    "tree_sha1": "a22b035febb6db4b1de274e656b6fbe0557d8cd9"
+  },
+  "next_separate_approval_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "next_separate_approval_candidate_state": "APPROVED_SEQUENCED_ACTIVE_AFTER_RED_REFLECTION",
+  "recorded_on_jst": "2026-07-25",
+  "receipt_sha256": "def1bc2fdd42d4881b2fc0f1a34fed8b82e8526f542fa45baf94bca9c6d5c7fe",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "result_evidence": {
+    "cocolon_commit_sha1": "8f3332e3bda39058deb6a0fce8a285afbf793870",
+    "git_blob_sha1": "a7c8917b13f41e661348a833795055c5d806018e",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_FormalSuccessAndFailureLaneOwnerCompletenessReconciliation_RED_Freeze_Result_20260725.md",
+    "raw_file_sha256": "32f0e40545bf0bc1e240f21c2211478adb657b1863e63477711df34438c34754"
+  },
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.formal_lane_owner_completeness_red_freeze_receipt.v1",
+  "state": {
+    "automatic_progression": false,
+    "cycle001": "NOT_ACCEPTED",
+    "g1": "IMPLEMENTATION_GREEN_CURRENT_STEP_RECEIPTS_NOT_ISSUED_NOT_COMPLETED",
+    "g2": "CAUSAL_RED_FROZEN",
+    "p1_retry006": "PRE_EVENT1_FORMAL_LANE_OWNER_COMPLETENESS_REPAIR_IN_PROGRESS",
+    "source_baseline": "UNLOCKED"
+  },
+  "subagent_audit": {
+    "final_residual_red_spec_blocker_count": 0,
+    "read_only_subagent_total_count": 3,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0,
+    "top_level_audit_lane_count": 3
+  },
+  "test_freeze": {
+    "collection_error_count": 0,
+    "exact_selected_test_count": 12,
+    "failed_count": 9,
+    "manifest_semantic_attack_count": 17,
+    "passed_count": 3,
+    "production_source_change_count": 0,
+    "state": "CAUSAL_RED",
+    "test_changed_path_count": 1,
+    "unexpected_error_count": 0,
+    "warning_count": 1
+  },
+  "transport": {
+    "cocolon_expected_old_sha_lease_used": true,
+    "cocolon_full_postfetch_verified": true,
+    "cocolon_ssh_public_key_fingerprint": "SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA",
+    "github_ssh_ed25519_host_key_fingerprint": "SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU"
+  }
+}
