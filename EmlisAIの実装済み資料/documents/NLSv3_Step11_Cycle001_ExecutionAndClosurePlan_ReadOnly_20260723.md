@@ -4376,3 +4376,256 @@ AUTHORITY_STOP
 No RETRY006 resume/reuse, inferred token, formal exact134, formal artifact
 issuance, P2, fresh batch, exact100, Product Read, correction, B6, or Cycle001
 acceptance is authorized by this completed implementation authority.
+
+## 12.39 2026-07-25 RETRY007 event1 / reservation publication, exact134 consumption unknown STOP, and next-boundary correction
+
+Approved and closed authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY007_ONLY
+```
+
+Fixed entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+21f0cd0603b1af6ad90856f792fe2da1442887f6
+
+Cocolon tree:
+24ddde87e10bb584776f906eb52a766a59b3bdd6
+
+mashos-api:
+e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+mashos-api tree:
+1c8970e91dbc793fcb3b81b51c73291f0326a565
+```
+
+Pinned source/proof-system roots:
+
+```text
+candidate:
+nls_v3_rc_0034
+
+requirement registry:
+70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728
+
+formal node registry:
+fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf
+
+formal denominator:
+Step exact11 / node exact134
+
+canonical current closure:
+2e171332086e0dad14917c9adcd40b7b3b49c759cb160719f3f99c0e14b8a4d0
+
+source dependency closure:
+594f8105b29b516b1d1eb8eb3ed9f434bd69a88c7851674c596b09d2328a5b67
+```
+
+Transport admission passed with the registered Cocolon deploy key,
+`ssh.github.com:443`, complete object fetch, current-head exact lease,
+single-ref direct-child update, and full post-fetch verification. Credential
+material was not recorded.
+
+Event 1 exact2:
+
+```text
+base:
+21f0cd0603b1af6ad90856f792fe2da1442887f6
+
+commit:
+de9a448f072cb9e3da60e344d31aee5b13c91847
+
+tree:
+b87aacf81f41d867e73284ba401ce8798aa6a862
+
+source-baseline receipt blob / raw / logical:
+745074a8d998204eb1c1ec8bdf615879d16563fc
+08c300ca238081a7a9ce97d02c2902a6c5b9f4df13c1ea7e42ce69efad842c87
+16e99eac8009890615573d1235c59a301fa580b839915bbde760b75975e21f62
+
+event blob / raw / event hash / identity:
+1a5bc8a66c113661d345b7556ca1baa2d35105bf
+efeca263e3d2f776e36ea64aa0fc20046736dd278fd2b142b9fb0b35b6896f2e
+33da356d87da0e00d7f3f901468dc151dea8fa4e5d9ac632ebe4a20cc7bb80bc
+03219827fa14a57fb304d005efa755f2c815ce9d7f3040706ff6031e85f1ac90
+
+postverified:
+true
+```
+
+Reservation exact1:
+
+```text
+base:
+de9a448f072cb9e3da60e344d31aee5b13c91847
+
+commit:
+9a831823137413226cbae9f1521041cc9202cedf
+
+tree:
+fb22a8f46d040380704aa0c06e42b294dadd8dd2
+
+attempt:
+14bfcb655ebff5320611018fa7510b7e676d3f29ae5ca3020dc8279d95714a5e
+
+formal challenge:
+2aff9fce294833aabb0f88d59fbd9b476cb999b70a9316385ddd4706596b0397
+
+authority-challenge:
+47cd89db37666be906fd940280123fe946f9270b6c89871b86c673b31753ad73
+
+reservation blob / raw / logical / identity:
+41fb8cf26009eb21ddfd5872b5f1271fdb43461c
+495c58b1fd73d46f30e71413979c6b93a3e895550bf0d39b537b2b46e200aef4
+4d5e171c95238d6a8addcf8582c5f6cb3d86e5dcfa3a4d242fd68755a7d062b2
+6428c820e572b45d01f98537da1989ee8292d2a0a70c2033076a0880d2617baa
+
+postverified:
+true
+```
+
+After reservation postverification, the durable consumption marker was
+written before the worker call:
+
+```text
+state:
+CONSUMPTION_STARTED
+
+started at UTC:
+2026-07-25T04:24:03Z
+
+formal exact134 invocation count:
+1
+```
+
+The worker did not produce a trustworthy result. Attempt checkpoint,
+formal-attempt artifact, success terminal, and failure terminal were absent.
+The same attempt was not rerun. Frozen design therefore closes RETRY007 as:
+
+```text
+ATTEMPT_CONSUMPTION_UNKNOWN_STOP
+SAME_AUTHORITY_CHALLENGE_RERUN_FORBIDDEN
+AUTOMATIC_RETRY_FALSE
+```
+
+No accepted receipt, Step00-10 receipt, all11 chain, atomic manifest, event 2,
+private body, broad regression, P2 transition, or Cycle acceptance was
+created.
+
+Read-only post-stop diagnosis confirmed:
+
+1. exact134 is exact134 unique nodes across exact21 test files;
+2. shared conftest explicitly loads the FB172 migration plugin;
+3. the plugin import chain reaches `emotion_submit_service -> fastapi`;
+4. the RETRY007 isolated venv had Python 3.12.13, pytest 9.1.1,
+   system-site-packages disabled, and no FastAPI;
+5. exact134 and the FB172 migration ledger overlap exact0;
+6. child diagnostics were discarded and absent/invalid result closes as
+   `RECOVERY_PROOF_ENVIRONMENT_ENTRY_INVALID`; and
+7. Git, transport, worktree, and source materialization remained valid.
+
+The most likely cause is a pre-result collection/bootstrap import failure
+from the incomplete isolated runtime dependency closure. The exact child
+exception was not retained, so this remains a high-confidence inference, not
+an exact exception claim.
+
+The first RETRY007 closure receipt inferred an unapproved runtime-only
+RETRY008 candidate. Complete topology review then confirmed that the
+reservation validator requires each reservation commit to have event 1 as its
+only parent. Because the consumed RETRY007 reservation already occupies that
+position, a second append-only reservation cannot satisfy the current
+contract. The RETRY008 candidate was withdrawn before approval.
+
+The incorrect inference was not rewritten. It was corrected append-only:
+
+1. RETRY007 result commit `e561d2f22423c9b05f79aefa57d842eefea8f47d`,
+   blob `74cce408594a2373465d498838f418f2d565aa59`, raw SHA-256
+   `cac8053c3ab66737480860704b690efd00ce132aafb7c1e40bbe5c8f172ecafb`;
+2. RETRY007 receipt commit `86b7ca4bc074d18523fbd4e3bb1e4ac79e2271b1`,
+   blob `620c80f835852cd842f69dadbddd251020258d43`, raw SHA-256
+   `bc1c1f308dea64c32ab81e9e550d31f83e7f2957183de721119a8352fcc8d461`,
+   canonical SHA-256
+   `68d8dc98471ebbfc33d64f94dbf8abaf768e5479c1ffe12ce19e49e17351f447`;
+3. next-boundary correction commit
+   `761c6761f38a430439ba99c9c8b781b542b0b2d2`, blob
+   `17f884b05ac0630286ccaad07b683e68f401a929`, raw SHA-256
+   `546baa76587b9995b79e9e4333d35b553660e4d002fbbef950eb48a89de108ad`;
+4. correction receipt commit `4dd84ffdffef2da0684b2ea9ce33d2f8a89642ab`,
+   blob `3be9761fc24735884e9ad65d92f868ec3bbb532b`, raw SHA-256
+   `8f752486a6219a30a6ecacf51245c10b9d2442ed7ee7c41f4a10c64454bf1767`,
+   canonical SHA-256
+   `7716deee92f8b94f5ecb1a22035959a67cc69b6460ec37dd3d35ba4d7668d8d7`;
+5. final handoff commit `be6e78ca52e09b1c3d9352e96e49bbac6e2e51ad`,
+   blob `615f7789f01f4350f5fb86719bcf0d7b8aabe647`, raw SHA-256
+   `e7d8a62027f9e83426925ad549fc1d13c47f204d9b1962af600044d2167ea100`.
+
+Three subagent lanes were read-only. Subagent edits, tests, artifact
+generation, commits, and GitHub writes were exact0. Karen reverified the
+source, runtime boundary, reservation topology, Git objects, exact leases,
+and full post-fetch results, and owns the final judgment.
+
+Preserved state:
+
+```text
+STATUS:
+P1_RETRY007_ATTEMPT_CONSUMPTION_UNKNOWN_STOP_AUTHORITY_STOP
+
+RETRY007:
+CLOSED_NOT_RESUMABLE_NOT_REUSABLE
+
+SOURCE BASELINE / EVENT1:
+LOCKED / PUBLISHED
+
+FORMAL RESERVATION COUNT:
+1
+
+FORMAL EXACT134:
+STARTED_ONCE_OUTCOME_UNKNOWN_NOT_CLAIMABLE
+
+FORMAL ATTEMPT / TERMINAL LANE:
+NOT_ISSUED / NOT_PUBLISHED
+
+ACCEPTED / STEP00-10 / ALL11 / MANIFEST / EVENT2:
+NOT_ISSUED / NOT_ISSUED / NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+RETRY008:
+WITHDRAWN_NOT_APPROVED
+
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+RECOVERY_EPOCH001:
+INVALIDATION_DECISION_REQUIRED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+Candidate next authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY
+```
+
+It permits only append-only Epoch001 invalidation and Recovery Epoch002 parent
+design evidence. It must define post-reservation retry lineage, new
+source-baseline publication, runtime/bootstrap readiness, body-free
+diagnostics, and separate RED / implementation / formal authority boundaries.
+
+It does not authorize mashos-api source changes, tests, exact134, a new source
+baseline event, reservation, attempt, P2, fresh batch, exact100, Product Read,
+correction, B6, or Cycle001 acceptance. It is not approved; separate explicit
+approval is required. Mash has no file, Git, SSH, or GitHub setup work.
