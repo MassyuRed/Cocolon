@@ -1,0 +1,130 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch001.retry007_runtime_only_retry008_candidate_false_negative_append_only_correction.v1",
+  "status": "RETRY007_NEXT_BOUNDARY_FALSE_NEGATIVE_CORRECTED_APPEND_ONLY",
+  "body_free": true,
+  "automatic_progression": false,
+  "cycle001_status": "NOT_ACCEPTED",
+  "correction_kind": "APPEND_ONLY_NEXT_BOUNDARY_INFERENCE_CORRECTION",
+  "formal_execution_history_changed": false,
+  "source_changed": false,
+  "test_or_worker_run": false,
+  "corrected_receipt": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_SourceBaselineAndStep0_10CompletionReceiptGenerationAndVerificationRetry007Only_AttemptConsumptionUnknownSTOP_ReadOnly_BodyFree_Receipt_20260725.json",
+    "commit_sha1": "86b7ca4bc074d18523fbd4e3bb1e4ac79e2271b1",
+    "git_blob_sha1": "620c80f835852cd842f69dadbddd251020258d43",
+    "raw_sha256": "bc1c1f308dea64c32ab81e9e550d31f83e7f2957183de721119a8352fcc8d461",
+    "canonical_receipt_sha256": "68d8dc98471ebbfc33d64f94dbf8abaf768e5479c1ffe12ce19e49e17351f447",
+    "historical_file_rewritten": false
+  },
+  "withdrawn_inference": {
+    "candidate_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY008_ONLY",
+    "candidate_was_approved": false,
+    "runtime_only_retry008_viable": false,
+    "existing_event1_reusable_for_new_append_only_reservation_under_current_contract": false,
+    "withdrawn": true
+  },
+  "published_topology": {
+    "event1_commit_sha1": "de9a448f072cb9e3da60e344d31aee5b13c91847",
+    "retry007_reservation_commit_sha1": "9a831823137413226cbae9f1521041cc9202cedf",
+    "retry007_result_commit_sha1": "e561d2f22423c9b05f79aefa57d842eefea8f47d",
+    "retry007_receipt_commit_sha1": "86b7ca4bc074d18523fbd4e3bb1e4ac79e2271b1",
+    "append_only_history_preserved": true,
+    "non_fast_forward_rewind_permitted": false,
+    "consumed_reservation_hidden_or_removed": false
+  },
+  "reservation_contract": {
+    "owner_path": "ai/services/ai_inference/emlis_ai_recovery_epoch001_sequence_ledger_v3.py",
+    "owner_git_blob_sha1": "e1d517264c77c60fcba01e1064f75c1578f0d8db",
+    "owner_raw_sha256": "5fbdda03b25830fa8d77c7b9bc6d4c782cc3ebacac94d854cdc146d58d72968b",
+    "required_publication_parent": "SOURCE_BASELINE_EVENT_PUBLICATION_COMMIT_ONLY",
+    "required_snapshot_parent": "SOURCE_BASELINE_EVENT_PUBLICATION_COMMIT_ONLY",
+    "new_append_only_reservation_can_satisfy_current_parent_contract": false,
+    "validated_source_line_ranges": [
+      "1154-1159",
+      "1169-1179"
+    ]
+  },
+  "runtime_finding": {
+    "incomplete_dependency_closure_confirmed": true,
+    "python_version": "3.12.13",
+    "pytest_version": "9.1.1",
+    "include_system_site_packages": false,
+    "fastapi_present": false,
+    "exact134_node_fb172_ledger_overlap_count": 0,
+    "most_likely_missing_worker_result_cause": "COLLECTION_BOOTSTRAP_IMPORT_FAILURE_FROM_INCOMPLETE_ISOLATED_RUNTIME_DEPENDENCY_CLOSURE",
+    "exact_exception_retained": false,
+    "finding_superseded": false
+  },
+  "required_repair": {
+    "append_only_post_reservation_retry_lineage": true,
+    "prior_consumed_reservation_closure": true,
+    "formal_worker_bootstrap_dependency_boundary": true,
+    "body_free_bootstrap_diagnostics": true,
+    "second_reservation_topology_red_coverage": true,
+    "pre_result_bootstrap_failure_red_coverage": true,
+    "source_protocol_change_required": true,
+    "source_closure_change_expected": true
+  },
+  "epoch_boundary": {
+    "recovery_epoch001_source_baseline_state": "LOCKED_EVENT1_PUBLISHED",
+    "relevant_post_p1_source_drift_if_repaired": true,
+    "parent_design_rule": "RELEVANT_SOURCE_DRIFT_AFTER_P1_REQUIRES_EPOCH_INVALIDATION_AND_SEPARATE_RECOVERY_EPOCH_DECISION",
+    "existing_event1_late_replacement_permitted": false,
+    "recovery_epoch001_invalidation_decision_required": true,
+    "recovery_epoch002_automatic_start": false
+  },
+  "preserved_formal_state": {
+    "retry007": "CLOSED_NOT_RESUMABLE_NOT_REUSABLE",
+    "formal_exact134": "STARTED_ONCE_OUTCOME_UNKNOWN_NOT_CLAIMABLE",
+    "formal_attempt": "NOT_ISSUED",
+    "terminal_lane": "NOT_PUBLISHED",
+    "accepted_receipt": "NOT_ISSUED",
+    "step0_10_receipts": "NOT_ISSUED",
+    "all11_manifest_event2": "NOT_CREATED",
+    "p2": "NOT_AUTHORIZED",
+    "cycle001": "NOT_ACCEPTED"
+  },
+  "corrected_next_boundary": {
+    "next_formal_retry_authority": "UNSELECTED",
+    "candidate_authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY",
+    "candidate_authority_approved": false,
+    "separate_explicit_approval_required": true,
+    "allowed_scope": [
+      "append-only Recovery Epoch001 invalidation decision",
+      "Recovery Epoch002 parent design",
+      "post-reservation retry lineage contract",
+      "new source-baseline publication contract",
+      "formal worker bootstrap readiness and body-free diagnostic contract",
+      "separate downstream RED implementation and formal authority boundaries"
+    ],
+    "forbidden_scope": [
+      "mashos-api source change",
+      "test execution",
+      "formal exact134",
+      "new source baseline event",
+      "new reservation or attempt",
+      "P2 or later recovery gates",
+      "Cycle001 acceptance"
+    ],
+    "automatic_progression": false
+  },
+  "correction_evidence": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Retry007RuntimeOnlyRetry008CandidateFalseNegative_AppendOnlyCorrectionAndRefreezeOnly_20260725.md",
+    "commit_sha1": "761c6761f38a430439ba99c9c8b781b542b0b2d2",
+    "git_blob_sha1": "17f884b05ac0630286ccaad07b683e68f401a929",
+    "raw_sha256": "546baa76587b9995b79e9e4333d35b553660e4d002fbbef950eb48a89de108ad"
+  },
+  "subagent_audit": {
+    "read_only_subagent_total_count": 3,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "karen_reverified_production_parent_contract": true,
+    "karen_final_judgment": true
+  },
+  "receipt_sha256": "7716deee92f8b94f5ecb1a22035959a67cc69b6460ec37dd3d35ba4d7668d8d7",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON after deleting receipt_sha256",
+  "recorded_on_jst": "2026-07-25",
+  "verdict": "RETRY007_NEXT_BOUNDARY_FALSE_NEGATIVE_CORRECTED_APPEND_ONLY"
+}
