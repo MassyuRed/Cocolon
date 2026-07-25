@@ -344,3 +344,88 @@ guardianのcurrent ownerは
 actor allowlist maintenance、sandbox有効化、5試験中の番人修正、production
 activation、canary、active owner finalizationまで維持します。削除はMash様の
 別cleanup承認後だけです。
+
+# 2026-07-25 Replacement 02 bootstrap publishとsandbox maintenance継続
+
+## disabled bootstrapのformal反映
+
+Replacement 02で、次の一回のformal exact lease publishとfull post-fetchが
+成立しました。
+
+```text
+expected old main:
+bbe13d85923f8dc197bc8b19e3a1fe1eace77f21
+
+published direct child:
+208f2b278baf81f558fa67ec84892542177a8886
+
+published tree:
+5c2c6fadd713937338f70c8096558315d9412c6c
+
+parent count:
+exactly 1
+
+changed path count:
+exactly 12
+```
+
+remote head、parent exact1、tree、exact path set、全12対象のGit blob SHA-1、
+raw SHA-256、sizeをfull fetch後に照合し、
+`git fsck --full --strict`でもmissing / corrupt objectを検出しませんでした。
+GitHub connectorからownerとpolicyを独立取得し、同じbootstrap commitのblobと
+一致することも確認しました。
+
+## actor observe-onlyの実動結果
+
+```text
+Issue:
+https://github.com/MassyuRed/Cocolon/issues/2
+
+Actions run ID:
+30159464499
+
+workflow SHA:
+208f2b278baf81f558fa67ec84892542177a8886
+
+sender / issue creator:
+175191163 / MassyuRed / User
+
+outcome:
+OBSERVE_ONLY_ACTOR_CAPTURE
+
+write attempted:
+false
+```
+
+実行後も`main`は
+`208f2b278baf81f558fa67ec84892542177a8886`で不変でした。
+
+## 次のReplacement 02 maintenance
+
+sandbox試験開始revisionは上記`main`をexpected oldとし、変更を次の8 pathsへ
+限定します。
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/policy_v1.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+このmaintenanceではsandbox writeだけを有効化し、production writeはpolicyと
+workflowの二箇所で停止したままにします。local guardian tests 54件成功後、
+stale expected oldの拒否とcurrent expected oldのdry-run acceptanceを再確認し、
+一回だけformal exact leaseを試行します。
+
+guardian本体の変更は、publish jobがskipされる重複・事前head競合でも、
+preflightのtyped resultをremote-first reportへ安全にbindingするためです。
+job成功とrequest / candidate identityが一致しないoutputは信用しません。
+
+5 sandbox試験、production activation、canary、active owner finalizationが
+終わるまでReplacement 02を通常のformal main routeとして維持します。
+鍵を通常運用から外す条件はActions canaryのfull postverification成功であり、
+sandbox有効化だけでは満たしません。秘密鍵本文、公開鍵本文、保存pathは記録しません。

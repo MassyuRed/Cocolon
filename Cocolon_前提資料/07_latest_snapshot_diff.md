@@ -19934,3 +19934,87 @@ reservation / attempt `NOT_CREATED`、Cycle001 `NOT_ACCEPTED`を維持する。
 guardian bootstrapはD1 REDを実行せず、mashos-api source / test、event1、
 readiness、reservation、formal attempt、exact134、P2、Product Read、
 correction、B6、Cycle001 acceptanceを開始しない。
+
+# 2026-07-25 current authority: guardian actor実測完了・sandbox試験開始
+
+この節は直前のdisabled bootstrap節を、実際のbootstrap反映とactor実測結果で
+進めるGitHub transport maintenance authorityです。
+
+## 確認した事実
+
+- disabled bootstrapはexpected old
+  `bbe13d85923f8dc197bc8b19e3a1fe1eace77f21`からdirect child
+  `208f2b278baf81f558fa67ec84892542177a8886`へexact leaseで反映済み。
+- treeは`5c2c6fadd713937338f70c8096558315d9412c6c`。parent exact1、
+  exact 12 changed paths、対象bytes、full fetch、strict fsckを確認済み。
+- observe-only Issueは
+  `https://github.com/MassyuRed/Cocolon/issues/2`、Actions runは
+  `30159464499`、workflow SHAは
+  `208f2b278baf81f558fa67ec84892542177a8886`。
+- senderとIssue creatorは共に
+  `175191163 / MassyuRed / User`。
+- outcomeは`OBSERVE_ONLY_ACTOR_CAPTURE`、write attemptなし、
+  postverificationなし。Issueはcompletedとしてclose済み。
+- observe-only前後で`main`は
+  `208f2b278baf81f558fa67ec84892542177a8886`から変わっていない。
+- sandbox開始maintenanceのlocal guardian testは54件成功。
+
+## 今回のmaintenance
+
+expected old:
+
+```text
+208f2b278baf81f558fa67ec84892542177a8886
+```
+
+exact changed paths:
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/policy_v1.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+反映後はactor三要素をexact allowlistへ固定し、policyを
+`OBSERVE_AND_SANDBOX_ONLY`、sandbox writeとsandbox-only fault injectionを
+trueにする。production flagと`publish-main` jobはfalseのまま維持する。
+`publish-sandbox`はtrusted preflightがsandbox requestを
+`PREFLIGHT_PASSED`とした場合だけ実行する。
+
+重複またはhead競合がpreflightで確定してpublish jobがskipされた場合も、
+preflightのtyped resultをreportへ渡す。reportがremote-firstで全bytesを
+再確認し、request / candidate identityとjob成功が一致した場合だけ、
+重複またはhead競合のoutcomeを保持する。失敗job、欠落output、不一致は信用しない。
+
+## 未確認
+
+- GitHub上の5 sandbox試験は`0 / 5 NOT_RUN`。
+- Actions tokenのsandbox write、ruleset、queue、runner、server exact lease。
+- production activation、production canary、Actions main routeのactive化。
+- Replacement 02を通常運用から外せる状態。
+
+## 推測
+
+なし。actor実測成功をsandbox試験成功やproduction成功へ昇格しない。
+
+## 華恋の意見
+
+本人確認が実測できたため、空allowlistのまま推測で有効化する段階は終わった。
+次は`main`を一切対象にせず、検証用refだけで5種類の失敗条件を含む実動試験を
+行う。全件成功前にproductionを有効化しない。
+
+## Step 11境界
+
+Recovery Epoch001 `EPOCH_INVALIDATED`、Recovery Epoch002
+`DEFINED_NOT_STARTED`、source baseline `UNLOCKED`、candidate
+`UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034`、event1 / readiness /
+reservation / attempt `NOT_CREATED`、Cycle001 `NOT_ACCEPTED`を維持する。
+
+このmaintenanceと5 sandbox試験はD1 RED、mashos-api source / test、
+event1、readiness、reservation、formal attempt、exact134、P2、
+Product Read、correction、B6、Cycle001 acceptanceを開始しない。

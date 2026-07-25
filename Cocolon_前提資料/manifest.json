@@ -15705,5 +15705,90 @@
     "11_cocolon_github_transport_and_session_continuity.md",
     "12_cocolon_github_actions_publication_guard.md",
     "manifest.json"
+  ],
+  "github_actions_publication_guardian_bootstrap_formal_publish_2026_07_25": {
+    "reflected": true,
+    "repository": "MassyuRed/Cocolon",
+    "transport": "REPLACEMENT_02_SSH_EXACT_LEASE",
+    "expected_old_main_sha1": "bbe13d85923f8dc197bc8b19e3a1fe1eace77f21",
+    "published_direct_child_sha1": "208f2b278baf81f558fa67ec84892542177a8886",
+    "published_tree_sha1": "5c2c6fadd713937338f70c8096558315d9412c6c",
+    "parent_exact1": true,
+    "changed_path_count": 12,
+    "one_push_attempt_succeeded": true,
+    "post_fetch_remote_head_parent_tree_paths_and_all_target_bytes_verified": true,
+    "strict_fsck_passed": true,
+    "connector_owner_and_policy_blob_identity_verified": true,
+    "production_enabled": false,
+    "sandbox_enabled": false
+  },
+  "github_actions_publication_guardian_actor_observation_2026_07_25": {
+    "reflected": true,
+    "issue_url": "https://github.com/MassyuRed/Cocolon/issues/2",
+    "actions_run_id": 30159464499,
+    "workflow_sha1": "208f2b278baf81f558fa67ec84892542177a8886",
+    "sender": {
+      "id": 175191163,
+      "login": "MassyuRed",
+      "type": "User"
+    },
+    "issue_creator": {
+      "id": 175191163,
+      "login": "MassyuRed",
+      "type": "User"
+    },
+    "outcome": "OBSERVE_ONLY_ACTOR_CAPTURE",
+    "write_attempted": false,
+    "postverified": false,
+    "issue_closed_as_completed": true,
+    "main_unchanged": true
+  },
+  "github_actions_publication_guardian_sandbox_enable_maintenance_2026_07_25": {
+    "reflected_when_exact_lease_and_post_fetch_complete": true,
+    "expected_old_main_sha1": "208f2b278baf81f558fa67ec84892542177a8886",
+    "state_after_reflection": "SANDBOX_TESTING_ENABLED_PRODUCTION_DISABLED",
+    "policy_mode_after_reflection": "OBSERVE_AND_SANDBOX_ONLY",
+    "actor_allowlist": [
+      {
+        "id": 175191163,
+        "login": "MassyuRed",
+        "type": "User"
+      }
+    ],
+    "production_main_enabled": false,
+    "sandbox_write_enabled": true,
+    "sandbox_fault_injection_enabled": true,
+    "publish_main_job_statically_disabled": true,
+    "publish_sandbox_job_enabled_only_after_trusted_sandbox_preflight": true,
+    "local_security_tests_passed": 54,
+    "github_sandbox_tests_passed_at_maintenance_start": 0,
+    "github_sandbox_tests_required": 5,
+    "production_canary": "NOT_RUN",
+    "actions_guardian_active_for_main": false,
+    "current_formal_main_route": "REPLACEMENT_02_SSH_EXACT_LEASE_ACTIVE",
+    "changed_path_count": 8,
+    "remote_first_typed_result_binding": {
+      "preflight_duplicate_preserved_after_exact_identity_match": true,
+      "preflight_head_drift_preserved_after_exact_identity_match": true,
+      "publish_result_preserved_after_exact_identity_match": true,
+      "failed_job_missing_output_or_identity_mismatch_is_not_trusted": true
+    },
+    "exact_changed_paths": [
+      ".github/workflows/cocolon_formal_publication_guard.yml",
+      ".github/cocolon_formal_publication_guard/guardian.py",
+      ".github/cocolon_formal_publication_guard/policy_v1.json",
+      ".github/cocolon_formal_publication_guard/test_guardian.py",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md",
+      "Cocolon_前提資料/manifest.json"
+    ],
+    "automatic_step11_progression": false
+  },
+  "latest_modified_premise_files_2026_07_25_github_actions_publication_guardian_sandbox_enable": [
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "12_cocolon_github_actions_publication_guard.md",
+    "manifest.json"
   ]
 }

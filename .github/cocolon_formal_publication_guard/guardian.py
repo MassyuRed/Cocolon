@@ -1493,66 +1493,90 @@ def _write_outputs(result: Mapping[str, Any]) -> None:
                 handle.write(f"{key}={value}\n")
 
 
-def bind_trusted_publish_result(reconciled: Mapping[str, Any]) -> dict[str, Any]:
-    """Preserve a trusted publish outcome only after remote-first reconciliation."""
-
-    result = dict(reconciled)
-    target_class = result.get("target_class")
-    if target_class not in {"sandbox", "production"}:
-        return result
-    prefix = "GUARDIAN_SANDBOX" if target_class == "sandbox" else "GUARDIAN_MAIN"
-    claimed = {
+def _job_claim(prefix: str) -> dict[str, str]:
+    return {
+        "job_result": os.environ.get(f"{prefix}_JOB_RESULT", ""),
         "outcome": os.environ.get(f"{prefix}_OUTCOME", ""),
         "request_sha256": os.environ.get(f"{prefix}_REQUEST_SHA256", ""),
         "candidate_sha1": os.environ.get(f"{prefix}_CANDIDATE_SHA1", ""),
         "write_attempted": os.environ.get(f"{prefix}_WRITE_ATTEMPTED", ""),
         "postverified": os.environ.get(f"{prefix}_POSTVERIFIED", ""),
     }
-    if (
-        claimed["request_sha256"] != result.get("request_sha256")
-        or claimed["candidate_sha1"] != result.get("candidate_sha1")
-    ):
+
+
+def bind_trusted_publish_result(reconciled: Mapping[str, Any]) -> dict[str, Any]:
+    """Preserve a trusted job outcome only after remote-first reconciliation."""
+
+    result = dict(reconciled)
+    target_class = result.get("target_class")
+    if target_class not in {"sandbox", "production"}:
         return result
     reconciled_outcome = result.get("outcome")
-    if (
-        reconciled_outcome == "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT"
-        and claimed["outcome"] == "APPLIED_AND_POSTVERIFIED"
-        and claimed["write_attempted"] == "true"
-        and claimed["postverified"] == "true"
+    publish_prefix = (
+        "GUARDIAN_SANDBOX" if target_class == "sandbox" else "GUARDIAN_MAIN"
+    )
+    for source, claimed in (
+        ("publish", _job_claim(publish_prefix)),
+        ("preflight", _job_claim("GUARDIAN_PREFLIGHT")),
     ):
-        result.update(
-            {
-                "outcome": "APPLIED_AND_POSTVERIFIED",
-                "write_attempted": True,
-                "postverified": True,
-            }
-        )
-    elif (
-        reconciled_outcome == "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT"
-        and claimed["outcome"] == "ALREADY_APPLIED_POSTVERIFIED"
-        and claimed["write_attempted"] == "false"
-        and claimed["postverified"] == "true"
-    ):
-        result.update(
-            {
-                "outcome": "ALREADY_APPLIED_POSTVERIFIED",
-                "write_attempted": False,
-                "postverified": True,
-            }
-        )
-    elif (
-        reconciled_outcome == "DRIFT_AFTER_ATTEMPT_STOP"
-        and claimed["outcome"] == "REJECTED_HEAD_DRIFT"
-        and claimed["write_attempted"] == "true"
-        and claimed["postverified"] == "false"
-    ):
-        result.update(
-            {
-                "outcome": "REJECTED_HEAD_DRIFT",
-                "write_attempted": True,
-                "postverified": False,
-            }
-        )
+        if (
+            claimed["job_result"] != "success"
+            or claimed["request_sha256"] != result.get("request_sha256")
+            or claimed["candidate_sha1"] != result.get("candidate_sha1")
+        ):
+            continue
+        if (
+            source == "publish"
+            and reconciled_outcome == "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT"
+            and claimed["outcome"] == "APPLIED_AND_POSTVERIFIED"
+            and claimed["write_attempted"] == "true"
+            and claimed["postverified"] == "true"
+        ):
+            result.update(
+                {
+                    "outcome": "APPLIED_AND_POSTVERIFIED",
+                    "write_attempted": True,
+                    "postverified": True,
+                }
+            )
+            return result
+        if (
+            reconciled_outcome == "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT"
+            and claimed["outcome"] == "ALREADY_APPLIED_POSTVERIFIED"
+            and claimed["write_attempted"] == "false"
+            and claimed["postverified"] == "true"
+        ):
+            result.update(
+                {
+                    "outcome": "ALREADY_APPLIED_POSTVERIFIED",
+                    "write_attempted": False,
+                    "postverified": True,
+                }
+            )
+            return result
+        if (
+            reconciled_outcome == "DRIFT_AFTER_ATTEMPT_STOP"
+            and claimed["outcome"] == "REJECTED_HEAD_DRIFT"
+            and (
+                (
+                    source == "publish"
+                    and claimed["write_attempted"] in {"true", "false"}
+                )
+                or (
+                    source == "preflight"
+                    and claimed["write_attempted"] == "false"
+                )
+            )
+            and claimed["postverified"] == "false"
+        ):
+            result.update(
+                {
+                    "outcome": "REJECTED_HEAD_DRIFT",
+                    "write_attempted": claimed["write_attempted"] == "true",
+                    "postverified": False,
+                }
+            )
+            return result
     return result
 
 
@@ -1604,11 +1628,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     _write_outputs(result)
     outcome = result["outcome"]
     if args.command == "preflight":
-        return 0 if outcome in {"PREFLIGHT_PASSED", "OBSERVE_ONLY_ACTOR_CAPTURE"} else 1
+        return 0 if outcome in {
+            "PREFLIGHT_PASSED",
+            "OBSERVE_ONLY_ACTOR_CAPTURE",
+            "ALREADY_APPLIED_POSTVERIFIED",
+            "REJECTED_HEAD_DRIFT",
+        } else 1
     if args.command == "publish":
         return 0 if outcome in {
             "APPLIED_AND_POSTVERIFIED",
             "ALREADY_APPLIED_POSTVERIFIED",
+            "REJECTED_HEAD_DRIFT",
         } else 1
     return 0 if outcome in {
         "APPLIED_CONFIRMED_AFTER_AMBIGUOUS_RESULT",

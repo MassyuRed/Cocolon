@@ -406,3 +406,106 @@ canary成功後も、cleanupはMash様の別承認を得てから行います。
 
 安全条件を弱めて通しません。必要なGitHub画面設定が一つに特定できた場合だけ、
 Mash様へ目的、必要性、操作、完了条件を平易に説明して依頼します。
+
+# 2026-07-25 bootstrap反映・actor実測・sandbox試験開始状態
+
+## 確認した事実
+
+- disabled bootstrapは、`main`
+  `bbe13d85923f8dc197bc8b19e3a1fe1eace77f21`をexpected oldとして、
+  direct child `208f2b278baf81f558fa67ec84892542177a8886`へ一回のexact
+  leaseで反映された。
+- bootstrap treeは`5c2c6fadd713937338f70c8096558315d9412c6c`で、parent
+  exact1、exact 12 changed paths、全対象bytes、full fetch、
+  `git fsck --full --strict`をpost-fetchで確認した。
+- observe-only Issue
+  `https://github.com/MassyuRed/Cocolon/issues/2`に対するActions run
+  `30159464499`は、workflow SHA
+  `208f2b278baf81f558fa67ec84892542177a8886`から実行された。
+- event senderとIssue creatorは共に
+  `id=175191163 / login=MassyuRed / type=User`だった。
+- receipt outcomeは`OBSERVE_ONLY_ACTOR_CAPTURE`、`write_attempted=false`、
+  `postverified=false`だった。IssueはActionsによりcloseされた。
+- observe-only実行後も`main`は
+  `208f2b278baf81f558fa67ec84892542177a8886`のままだった。
+
+## sandbox試験開始maintenance
+
+上記actor三要素をexact allowlistへ固定し、検証用refだけを書き込める状態へ進める。
+本節を含むmaintenance revisionのexpected oldは
+`208f2b278baf81f558fa67ec84892542177a8886`で、変更を次の8 pathsへ限定する。
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/policy_v1.json
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+反映後の固定状態:
+
+```text
+guardian state:
+SANDBOX_TESTING_ENABLED_PRODUCTION_DISABLED
+
+actor allowlist:
+175191163 / MassyuRed / User
+
+policy mode:
+OBSERVE_AND_SANDBOX_ONLY
+
+production_main_enabled:
+false
+
+sandbox_write_enabled:
+true
+
+sandbox_fault_injection_enabled:
+true
+
+workflow publish-main:
+STATICALLY_DISABLED
+
+workflow publish-sandbox:
+trusted preflightがsandbox requestをPREFLIGHT_PASSEDとした場合だけ実行
+
+local guardian tests:
+54 PASSED
+
+GitHub sandbox tests:
+0 / 5 NOT_RUN
+
+production canary:
+NOT_RUN
+
+Actions guardian active for main:
+false
+
+current formal main publication route:
+REPLACEMENT_02_SSH_EXACT_LEASE_ACTIVE
+```
+
+fault injectionはsandbox test requestだけに許可し、production requestでは引き続き
+拒否する。`publish-main`の静的停止は5試験と独立確認が全て終わるまで解除しない。
+
+重複またはhead競合をpreflightで確定した場合、publish jobは起動しない。
+preflight / publishのtyped resultはjob成功、request SHA-256、candidate SHA-1、
+write attempted、postverifiedを固定してreportへ渡す。reportはremote-firstで
+全bytesを再検査し、exact identityが一致した時だけ
+`ALREADY_APPLIED_POSTVERIFIED`または`REJECTED_HEAD_DRIFT`を保持する。
+job失敗、output欠落、identity不一致ではtyped resultを信用せず、
+conservative reconcile outcomeを維持する。
+
+## 未確認
+
+- GitHub Actionsのsandbox `contents: write`とrepository rulesetの実動適合。
+- 正常、head競合、改変拒否、重複・同時、保存直後停止の5試験。
+- 5試験中の各Issue receipt、run、target ref、main不変。
+- production activation、production canary、Actions main routeのactive化。
+
+未確認事項を成功扱いしない。5試験開始時点では0/5であり、
+このmaintenance自体をproduction許可やStep 11開始許可へ変換しない。
