@@ -19226,3 +19226,234 @@ current recordはpost-RETRY006 exact formal-retry tokenを選定していない�
 進める場合、Mashに必要なのはfile / Git / SSH / GitHub設定作業ではなく、新しい
 formal retry authorityの別途選定と明示承認である。P2、fresh batch、exact100、
 Product Read、correction、B6、Cycle001 acceptanceへは自動進行しない。
+
+# 2026-07-25 差分追記: RETRY007 exact134 consumption unknown STOP と next-boundary append-only correction
+
+## Authority
+
+Mashが明示承認したauthorityは次である。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY007_ONLY
+```
+
+## 確認した事実
+
+1. RETRY007 entryは次で固定した。
+
+   ```text
+   Karen-Diary:
+   700f749f5149cac1f8bd4bab8a364d524a56985b
+
+   Cocolon:
+   21f0cd0603b1af6ad90856f792fe2da1442887f6
+
+   Cocolon tree:
+   24ddde87e10bb584776f906eb52a766a59b3bdd6
+
+   mashos-api:
+   e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+   mashos-api tree:
+   1c8970e91dbc793fcb3b81b51c73291f0326a565
+   ```
+
+2. mashos-apiはcleanで、source変更はexact0だった。registryはStep
+   exact11 / node exact134、requirement registry SHA-256
+   `70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728`、
+   formal node registry SHA-256
+   `fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf`
+   である。
+3. canonical current closureは
+   `2e171332086e0dad14917c9adcd40b7b3b49c759cb160719f3f99c0e14b8a4d0`、
+   source dependency closureは
+   `594f8105b29b516b1d1eb8eb3ed9f434bd69a88c7851674c596b09d2328a5b67`
+   である。
+4. registered Cocolon deploy key、`ssh.github.com:443`、GitHub公式host
+   keyを使い、authenticated full fetch、object connectivity、exact
+   expected-old-SHA lease、single-ref direct-child update、full post-fetchを
+   確認した。credential materialは記録していない。
+5. event1 exact2はentry `21f0cd0...`のdirect child
+   `de9a448f072cb9e3da60e344d31aee5b13c91847`、tree
+   `b87aacf81f41d867e73284ba401ce8798aa6a862`として公開し、
+   postverifyした。
+6. source-baseline receiptはblob
+   `745074a8d998204eb1c1ec8bdf615879d16563fc`、raw SHA-256
+   `08c300ca238081a7a9ce97d02c2902a6c5b9f4df13c1ea7e42ce69efad842c87`、
+   logical SHA-256
+   `16e99eac8009890615573d1235c59a301fa580b839915bbde760b75975e21f62`
+   である。
+7. sequence event1はblob
+   `1a5bc8a66c113661d345b7556ca1baa2d35105bf`、raw SHA-256
+   `efeca263e3d2f776e36ea64aa0fc20046736dd278fd2b142b9fb0b35b6896f2e`、
+   event SHA-256
+   `33da356d87da0e00d7f3f901468dc151dea8fa4e5d9ac632ebe4a20cc7bb80bc`、
+   identity SHA-256
+   `03219827fa14a57fb304d005efa755f2c815ce9d7f3040706ff6031e85f1ac90`
+   である。
+8. reservation exact1はevent1のdirect child
+   `9a831823137413226cbae9f1521041cc9202cedf`、tree
+   `fb22a8f46d040380704aa0c06e42b294dadd8dd2`として公開し、
+   postverifyした。
+9. attempt IDは
+   `14bfcb655ebff5320611018fa7510b7e676d3f29ae5ca3020dc8279d95714a5e`、
+   reservation blob / raw / logical / identityは
+   `41fb8cf26009eb21ddfd5872b5f1271fdb43461c` /
+   `495c58b1fd73d46f30e71413979c6b93a3e895550bf0d39b537b2b46e200aef4` /
+   `4d5e171c95238d6a8addcf8582c5f6cb3d86e5dcfa3a4d242fd68755a7d062b2` /
+   `6428c820e572b45d01f98537da1989ee8292d2a0a70c2033076a0880d2617baa`
+   である。
+10. reservation postverify後、`CONSUMPTION_STARTED` markerをdurableに
+    保存し、exact134を一度だけ開始した。開始時刻は
+    `2026-07-25T04:24:03Z`である。
+11. trustworthy worker resultとattempt checkpointは生成されなかった。
+    formal attempt、success terminal、failure terminalは全て未発行である。
+    同じattemptの再実行は行っていない。
+12. frozen designに従い、terminal classificationは次である。
+
+    ```text
+    ATTEMPT_CONSUMPTION_UNKNOWN_STOP
+    SAME_AUTHORITY_CHALLENGE_RERUN_FORBIDDEN
+    AUTOMATIC_RETRY_FALSE
+    ```
+
+13. accepted receipt、Step00-10、all11、atomic manifest、event2、private
+    body、broad regression、P2、Cycle acceptanceは未発行・未実行である。
+14. post-stop read-only診断で、exact134はexact21 test files、shared
+    conftestはFB172 migration pluginを明示loadし、そのimport chainが
+    `emotion_submit_service -> fastapi`へ到達することを確認した。
+15. RETRY007 isolated venvはPython 3.12.13 / pytest 9.1.1、
+    system-site-packages falseで、FastAPIは存在しなかった。exact134 nodeと
+    FB172 ledgerのoverlapはexact0だった。
+16. child stdout/stderrは破棄され、result absent/invalidは
+    `RECOVERY_PROOF_ENVIRONMENT_ENTRY_INVALID`へ閉じる。従ってexact exceptionは
+    保存されていない。
+17. reservation validatorは、各reservation commitのonly parentをevent1
+    publication commitそのものに固定する。RETRY007 reservationがすでにその
+    positionを占めるため、new append-only reservationはcurrent contractを
+    満たせない。
+18. first RETRY007 receiptに記録したunapproved runtime-only RETRY008
+    candidateは、このtopology確認を欠いたfalse negativeだった。candidateは
+    承認前にwithdrawし、published receiptは書き換えずappend-only correctionを
+    発行した。
+19. closure evidenceは次である。
+
+    - result: commit
+      `e561d2f22423c9b05f79aefa57d842eefea8f47d`、blob
+      `74cce408594a2373465d498838f418f2d565aa59`、raw SHA-256
+      `cac8053c3ab66737480860704b690efd00ce132aafb7c1e40bbe5c8f172ecafb`;
+    - receipt: commit
+      `86b7ca4bc074d18523fbd4e3bb1e4ac79e2271b1`、blob
+      `620c80f835852cd842f69dadbddd251020258d43`、raw SHA-256
+      `bc1c1f308dea64c32ab81e9e550d31f83e7f2957183de721119a8352fcc8d461`、
+      canonical SHA-256
+      `68d8dc98471ebbfc33d64f94dbf8abaf768e5479c1ffe12ce19e49e17351f447`;
+    - correction: commit
+      `761c6761f38a430439ba99c9c8b781b542b0b2d2`、blob
+      `17f884b05ac0630286ccaad07b683e68f401a929`、raw SHA-256
+      `546baa76587b9995b79e9e4333d35b553660e4d002fbbef950eb48a89de108ad`;
+    - correction receipt: commit
+      `4dd84ffdffef2da0684b2ea9ce33d2f8a89642ab`、blob
+      `3be9761fc24735884e9ad65d92f868ec3bbb532b`、raw SHA-256
+      `8f752486a6219a30a6ecacf51245c10b9d2442ed7ee7c41f4a10c64454bf1767`、
+      canonical SHA-256
+      `7716deee92f8b94f5ecb1a22035959a67cc69b6460ec37dd3d35ba4d7668d8d7`;
+    - handoff: commit
+      `be6e78ca52e09b1c3d9352e96e49bbac6e2e51ad`、blob
+      `615f7789f01f4350f5fb86719bcf0d7b8aabe647`、raw SHA-256
+      `e7d8a62027f9e83426925ad549fc1d13c47f204d9b1962af600044d2167ea100`;
+    - Execution and Closure Plan §12.39: commit
+      `47cb62640c257bc1e86725f717ba582bb5e8d4e4`、blob
+      `ca0f0de1d8ca7b2013b04e9f0c50cd36bebcd975`、raw SHA-256
+      `5fc283fd29deaa104ece4554410a15dfc0d095c36d32b44a7de4c5609ee20cd4`.
+
+20. read-only subagent exact3はone-shot history、runner/API boundary、
+    transport/runtime/topologyを分担した。subagent edit / test / artifact /
+    commit / GitHub writeはexact0である。最終判断、文書変更、commit、exact
+    lease、GitHub反映、full post-fetchは華恋が行った。
+
+## 推測
+
+trustworthy worker resultが生成されなかった最有力原因は、isolated runtime
+dependency closure不足によるcollection/bootstrap import failureである。
+missing FastAPIまでのimport chainは確認済みだが、child diagnostic streamが
+残っていないためexact exceptionとは断定しない。
+
+runtime-only RETRY008案はsource/environment bindingだけを見れば成立するように
+見えた。しかしreservation direct-parent contractを全体topologyへ加えると成立
+しない。これはformal stateの変化ではなく、華恋のnext-boundary inferenceの
+false negativeである。
+
+## 華恋の意見
+
+RETRY007をfailureまたはsuccessへ推測昇格させず、reservation-only unknown
+historyとして閉じることが正しい。同じattemptを再実行したり、mainをevent1へ
+rewindしてconsumed reservationを隠したりしてはいけない。
+
+runtime defectとpost-reservation retry-lineage defectは別々に見えて、次のformal
+retryを成立させるためには同時に閉じる必要がある。対象ownerはevent1がlockした
+source closure内なので、修復前にEpoch001 invalidationとRecovery Epoch002
+parent designを別authorityで定義するべきである。
+
+## 現在状態
+
+```text
+STATUS:
+P1_RETRY007_ATTEMPT_CONSUMPTION_UNKNOWN_STOP_AUTHORITY_STOP
+
+RETRY007:
+CLOSED_NOT_RESUMABLE_NOT_REUSABLE
+
+SOURCE BASELINE / EVENT1:
+LOCKED / PUBLISHED
+
+FORMAL RESERVATION COUNT:
+1
+
+FORMAL EXACT134:
+STARTED_ONCE_OUTCOME_UNKNOWN_NOT_CLAIMABLE
+
+FORMAL ATTEMPT / TERMINAL LANE:
+NOT_ISSUED / NOT_PUBLISHED
+
+ACCEPTED / STEP00-10 / ALL11 / MANIFEST / EVENT2:
+NOT_ISSUED / NOT_ISSUED / NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+RETRY008:
+WITHDRAWN_NOT_APPROVED
+
+NEXT_FORMAL_RETRY_AUTHORITY:
+UNSELECTED
+
+RECOVERY_EPOCH001:
+INVALIDATION_DECISION_REQUIRED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+## 次の境界
+
+candidate authorityは次である。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_ATTEMPT_CONSUMPTION_UNKNOWN_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_NONCONFORMANCE_EPOCH_INVALIDATION_AND_RECOVERY_EPOCH002_PARENT_DESIGN_ONLY
+```
+
+許可範囲は、append-only Epoch001 invalidation decision、Recovery Epoch002
+parent design、post-reservation retry lineage、new source-baseline publication、
+runtime/bootstrap readiness、body-free diagnostic、および後続RED /
+implementation / formal authorityの分離だけである。
+
+mashos-api source変更、test、exact134、new source-baseline event、reservation、
+attempt、P2、fresh batch、exact100、Product Read、correction、B6、Cycle001
+acceptanceは許可しない。このcandidateは未承認であり、別明示承認が必要である。
+Mashにfile、Git、SSH、GitHubの追加設定作業はない。自動進行しない。
