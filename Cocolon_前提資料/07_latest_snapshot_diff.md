@@ -18600,3 +18600,219 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION
 RETRY006は、このcorrection chain後のlive H0を新たに固定し、event1前に
 source / owner / independent verifier / formal path / transportの全admissionを
 行う。RETRY005 token / challengeは再利用しない。
+
+# 2026-07-25 差分追記: RETRY006 pre-event1 formal lane owner completeness STOP
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_RETRY006_ONLY
+```
+
+## 確認した事実
+
+1. RETRY006 entryは次のexact refで固定した。
+
+   ```text
+   Karen-Diary:
+   700f749f5149cac1f8bd4bab8a364d524a56985b
+
+   Cocolon:
+   935960f0c9bad0c9932bfd32c85ad6578f55c268
+
+   Cocolon tree:
+   44e6d7736e73afa685b72c1fd2d6dd7186f4faac
+
+   mashos-api:
+   191e9d8be63132f10f94e2b2f54c6bae94ce1f07
+
+   mashos-api tree:
+   e68df6587b8cb674456b3bc9bceb23e0699f33aa
+   ```
+
+2. `11_cocolon_github_transport_and_session_continuity.md`を参照し、登録済み
+   deploy key `Karen Work Cocolon Lease 2026-07-25`を選択した。public
+   fingerprintは
+   `SHA256:gCA4W3puVpLcATfGVc9f97n8l4allD0kzc5x5mml9OA`である。秘密鍵、
+   passphrase、token、credential内容は記録していない。
+3. current sessionでSSH 443 host identity、authenticated `ls-remote`、
+   complete recursive tree / blob fetchを再実測し、全てPASSした。
+4. current-H0 exact lease dry-runは受理され、stale
+   `18140adf72d869b91c9f736da5040e579c5db10c` lease dry-runは
+   `stale info`で拒否された。dry-runによるremote ref変更は0だった。
+5. transportは`expected_old_sha_lease_proved=true`であり、RETRY006の
+   STOP原因ではない。
+6. fixed formal path exact17を確認し、existing exact0だった。published
+   reservation、failure-attempt STOP、preexisting RETRY006 pathもexact0
+   だった。
+7. current registry / closureは次である。
+
+   ```text
+   registry SHA-256:
+   70a75ae561fad0846604d05b1262615be4c4a16b36b332150f8c7dc04ee71728
+
+   formal node registry SHA-256:
+   fbe29ce0b819563cb5db2dc79fec8277b32ae0dea5a3a5cba64230ba4a1f73cf
+
+   step / formal node count:
+   11 / 134
+
+   canonical current closure SHA-256:
+   56a961afca480d5be297049af30fb10d52046bd252871174caf7537aad491592
+
+   source dependency closure SHA-256:
+   4f801c4fa00de795d98c40aac69dc537cc683057322584bacb91c5fd27c4919b
+
+   dependency closure count:
+   39
+
+   registry / closure owner issue count:
+   0 / 0
+   ```
+
+8. frozen event2 exact15は
+   `all11_atomic_publication_manifest.v2`を要求する。一方、pinned sourceの
+   production manifest builderは0、manifest exact-keyset / semantic
+   ownerは0、production top-level formal executorは0である。completeな
+   event2 manifest builderはRED test helper内に1件だけ存在する。
+9. body-free coherent negativeで、manifestのrequired
+   `core_artifact_count=13`をinvalid `12`へ変更し、logical hash、
+   manifest identity、supporting identities、event material、event hash、
+   complete bundleを全て再計算した。
+10. invalid manifestに対してproduction owner / independent verifierの
+    supporting-set issues / candidate issuesは全て空tupleだった。従って、
+    hash整合したsemantic-invalid manifestを両validatorが受理する。
+11. runner failure stateはowner / independent verifierと一致しない。
+
+    ```text
+    runner:
+    PARTIAL / RUN_PARTIAL
+    COLLECTION_ERROR / RUN_COLLECTION_ERROR
+
+    owner / independent verifier:
+    FAILED / RUN_PARTIAL
+    FAILED / RUN_COLLECTION_ERROR
+    ```
+
+12. success laneはevent2 manifest semantic owner不足、failure laneは
+    `RUN_PROVENANCE_INVALID`となり得るstate driftにより、どちらもformal
+    terminal artifactへ安全に到達できることを証明できない。
+13. source修復はmashos-api closureを変更する。従ってevent1で現closureを
+    lockする前に、`PRE_EVENT1_PRE_RESERVATION`でSTOPした。
+14. challenge / authority-challenge / attempt ID、source baseline receipt、
+    event1、reservation、attempt、exact134、accepted、Step00-10、all11、
+    manifest、event2は全て未作成・未実行である。reservation countは0、
+    source baselineは`UNLOCKED`である。
+15. mashos-api source changeはexact0であり、worktreeはcleanである。
+    coherent manifest negativeとstate comparisonはdiagnostic-onlyであり、
+    formal exact134またはbroad regressionではない。
+16. RETRY006 resultはcommit
+    `6efd1b7cdb1f08972001b90fa0617d9951c789a5`、blob
+    `b7ce7ca22840d359c722bd94cbf71a23354a1746`、raw SHA-256
+    `510745b5065a9fc5f6a11d58a4937983693cf972e5c7d7e87ff8fc2062e95948`
+    である。
+17. RETRY006 receiptはcommit
+    `5411f70d9a707775139261f7d481c1e2fd81ab96`、blob
+    `1e921186f2789c4503ecb18d9c5556e53104831f`、raw SHA-256
+    `4e0ec33759ad88f75fe204ff2d5fe00b2b2635c9fafc604bb8d58d5f4b825e61`、
+    canonical SHA-256
+    `74d361643773ab4be1df3c2b99bf4396353802adacb095debcd6cd547d10f62c`
+    である。
+18. RETRY006 handoffはcommit
+    `0183de77f7c889f8be5bc1f8dc798f7fcc145fe8`、blob
+    `b93a9eab3e719bb0f11bf4b6cdf0e3d0ec45bb7e`、raw SHA-256
+    `824b80785890c4ecb62bd554f6a0c242729c3dbef274e7af7f3956c861e447b9`
+    である。
+19. Execution and Closure Plan §12.36 appendはcommit
+    `449af8966d11bfe1293ec8c1a5a14cad8318cab7`、blob
+    `94ca507cc020eb99c9efeb1476e9708e185fc93d`、raw SHA-256
+    `5bd3b68f25817271d77ab79edc1253f45358c74b64a6189c9357adf55e51a9a6`
+    である。
+20. RETRY006 closure changeはresult、receipt、handoff、Execution Plan、
+    このlatest snapshotのexact5 pathである。formal path、mashos-api、
+    Karen-Diary、RETRY005 historical filesは変更していない。
+21. RETRY005 historical result / receipt / handoff blobs
+    `e4d93be1827833cf04b7db2751f1a1f0dd5ad7ca` /
+    `ff5140f75702472f7566f68504ecf03bb9ed3393` /
+    `d8ee3f4b84c89ec137ba4c204eb12e92543c1c38`は維持されている。
+
+## 推測
+
+targeted GREENがこの不足を検出しなかったのは、valid event2 manifestを
+production builderではなくRED test helperが組み立て、coherently rehashedな
+manifest semantic negativeを試験していなかったためと考える。
+
+registered SSH routeが存在することと、formal publication内容がowner-complete
+であることは別の条件である。今回は前者をPASSしたことで、後者が本当の
+blockerとして分離された。
+
+## 華恋の意見
+
+RETRY005では鍵を使わずにtransport不足と誤判定した。RETRY006では前提資料に
+残したidentityから正しいrouteを選択し、その誤りを再発させていない。
+
+ただし、鍵が使えたことを理由に、semantic-invalid manifestを受理する
+publication laneや、failure receipt自身がinvalidになるattempt laneへ進んでは
+いけない。event1もreservationも発行しない今回のSTOPは、irreversibleなformal
+historyを不完全なsourceで作らないために必要である。
+
+## 現在状態
+
+```text
+STATUS:
+P1_RETRY006_PRE_EVENT1_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_STOP_AUTHORITY_STOP
+
+TRANSPORT:
+AUTHENTICATED_FULL_FETCH_AND_EXACT_LEASE_PROVED
+
+PRIMARY_STOP:
+PUBLICATION_BUNDLE_INVALID
+EVENT2_ATOMIC_MANIFEST_OWNER_AND_INDEPENDENT_SEMANTIC_VALIDATION_NOT_PROVED
+
+ADDITIONAL_STOP:
+RUN_PROVENANCE_INVALID
+FORMAL_FAILURE_ATTEMPT_OUTCOME_STATE_ALIGNMENT_NOT_PROVED
+
+POSITION:
+PRE_EVENT1_PRE_RESERVATION
+
+FORMAL EVENT / RESERVATION / ATTEMPT / EXACT134:
+NOT_CREATED / 0 / 0 / NOT_RUN
+
+SOURCE_BASELINE:
+UNLOCKED
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+## 次の境界
+
+candidate authorityは次である。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH001_FORMAL_SUCCESS_AND_FAILURE_LANE_OWNER_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+必要範囲は次の5点である。
+
+1. production all11 atomic manifest v2 builder / semantic owner;
+2. independent manifest semantic verifier;
+3. coherent manifest-semantic negative;
+4. runner failure outcome-state alignment;
+5. complete formal parent orchestration boundary。
+
+このcandidate authorityは未承認であり、別承認が必要である。MashにGit、
+SSH、GitHubの追加設定作業は求めない。repair authorityの完了と独立再検証後に
+のみ、later formal retry authorityを選定する。自動進行しない。
