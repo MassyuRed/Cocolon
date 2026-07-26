@@ -5002,3 +5002,145 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORM
 
 It is not approved. Separate explicit approval is required. Do not progress
 automatically.
+
+## 12.42 2026-07-26 Recovery Epoch002 oracle correction / D2 targeted GREEN
+
+Approved and completed authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_ORACLE_EXACT5_COLLISION_CORRECTION_REFREEZE_AND_IMPLEMENTATION_GREEN_ONLY
+```
+
+Confirmed mashos-api chain:
+
+```text
+D1 entry:
+8b2b05809867ae53ba2fc3e525e99eea5e92f390
+
+oracle correction:
+082b0dd54e4ba3cc8fd0fc632334cb4bfb37b107
+
+D2 initial implementation:
+3b99c549cc9ef32d0a4f0f014db08c8627471457
+
+D2 operational-closure correction / final:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+final tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+
+entry -> final:
+ahead 3 / behind 0 / total commits 3
+
+changed paths:
+corrected oracle exact1 + owner/configuration exact9 = exact10
+
+force:
+false
+```
+
+The historical D1 oracle remains immutable. Later review found exact5
+collision defects: L04 exact4 targeted the wrong fixture and L05 exact1 was
+an assertion-neutral singleton reversal. The append-only correction produced
+110 unique states for 110 validator calls, with same-case collision exact0
+and expected-code conflict exact0.
+
+Correction-only execution refroze exact4 current-fact PASS plus exact42
+causal RED. The final implementation executed the same corrected exact46 as
+46 PASS / 0 FAIL / 0 ERROR. One pre-existing Pydantic deprecation warning was
+captured. This was not formal exact134 and not broad regression.
+
+The actual read-only bootstrap/source reconciliation closed:
+
+```text
+formal nodes / formal test paths / owner roles / installed distributions:
+134 / 21 / 12 / 46
+
+source paths / imports / first-party imports:
+211 / 251 / 191
+
+unclassified / unresolved dynamic imports:
+0 / 0
+
+dependency-lock / bootstrap-shape / operational-bootstrap /
+operational-source / source-closure / formal-node-registry validators:
+PASS / PASS / PASS / PASS / PASS / PASS
+```
+
+Final closure:
+
+```text
+canonical current:
+f2d69acef07e210f5ca61da6d9cec07d97c53add7ad95d0e2c3c9516a8464f18
+
+source dependency:
+594f8105b29b516b1d1eb8eb3ed9f434bd69a88c7851674c596b09d2328a5b67
+
+proof source:
+93f1032fe17b265a6a268688e7ecd3a2e53cb3f68bac5b3ecf9e8345aa0c8a43
+
+formal-test manifest:
+ba5b15f22c5ced74936d6a94e3a24a31c0243e42609c2f1b519a71c5e9984e6a
+
+bootstrap:
+3d53021646fc550794cf8a094cb46daa81892d79ac0de0c8051bbccc84d79b04
+
+D2 final:
+2d15d58d7bbdd2dab91f526486dcaf29a05c7326ec3944a91fc04757c1d73fbe
+
+exact15 source closure:
+b05eac06b1dc411164a1a7546229ffb79f811c17c3d32ee4c72004b88f8fcd60
+```
+
+The final exact1 correction stayed inside the frozen canonical-closure owner
+path. It corrected modeled search roots, runtime relative-import names, and
+fallback reachability; it did not expand the exact10 path set. Fixed-runtime
+owner and preferred-first-party import smoke passed. The retired/disabled
+guardian was not used.
+
+No candidate allocation, source-baseline event1, readiness, reservation,
+attempt, formal worker spawn, formal terminal artifact, private body, P2,
+fresh batch, exact100, Product Read, correction, B6, or Cycle001 acceptance
+was performed.
+
+Preserved state:
+
+```text
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D2_IMPLEMENTED_TARGETED_GREEN
+
+ORACLE:
+EXACT5_COLLISION_CORRECTED_CAUSAL_RED_REFROZEN
+
+RECOVERY_EPOCH002_CANDIDATE_VERSION:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+The only next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY
+```
+
+It is not approved. Separate explicit approval is required. Do not progress
+automatically.

@@ -20786,3 +20786,144 @@ policy、schema、diagnostic maintenanceをcurrent publication routeとして使
 
 番人maintenanceへ戻らず、本retirementをEmlisAI D2の自動承認へ変換しません。
 D2は別のMash様明示承認が必要です。
+
+# 2026-07-26 current authority: Recovery Epoch002 oracle correction / D2 GREEN
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_ORACLE_EXACT5_COLLISION_CORRECTION_REFREEZE_AND_IMPLEMENTATION_GREEN_ONLY
+```
+
+## 確認した事実
+
+```text
+mashos-api D1 entry:
+8b2b05809867ae53ba2fc3e525e99eea5e92f390
+
+oracle correction:
+082b0dd54e4ba3cc8fd0fc632334cb4bfb37b107
+
+D2 initial implementation:
+3b99c549cc9ef32d0a4f0f014db08c8627471457
+
+D2 operational-closure correction / final:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+final tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+
+entry -> final:
+ahead 3 / behind 0 / total commits 3
+
+changed paths:
+corrected oracle exact1 + owner/configuration exact9 = exact10
+
+force:
+false
+```
+
+D1の履歴bytesは保持した。後発監査で、L04 exact4のfixture誤配線と、
+L05 exact1のsingleton reverseによるassertion-neutral collisionを確認し、
+oracle exact1だけをappend-only訂正した。110 validator callsは110 unique
+statesとなり、same-case collisionとexpected-code conflictはともにexact0。
+
+訂正直後はexact4 current-fact PASS + exact42 causal REDを再凍結した。
+最終bytesでは同じcorrected exact46が46 PASS / 0 FAIL / 0 ERROR。
+既存Pydantic validatorのdeprecation warning exact1を捕捉した。
+
+実source/bootstrap照合:
+
+```text
+formal nodes / test paths / owner roles / installed:
+134 / 21 / 12 / 46
+
+source / imports / first-party:
+211 / 251 / 191
+
+unclassified / unresolved dynamic:
+0 / 0
+
+official read-only validators:
+all PASS
+```
+
+最終closure:
+
+```text
+canonical:
+f2d69acef07e210f5ca61da6d9cec07d97c53add7ad95d0e2c3c9516a8464f18
+
+proof:
+93f1032fe17b265a6a268688e7ecd3a2e53cb3f68bac5b3ecf9e8345aa0c8a43
+
+formal-test:
+ba5b15f22c5ced74936d6a94e3a24a31c0243e42609c2f1b519a71c5e9984e6a
+
+bootstrap:
+3d53021646fc550794cf8a094cb46daa81892d79ac0de0c8051bbccc84d79b04
+
+D2:
+2d15d58d7bbdd2dab91f526486dcaf29a05c7326ec3944a91fc04757c1d73fbe
+
+source exact15:
+b05eac06b1dc411164a1a7546229ffb79f811c17c3d32ee4c72004b88f8fcd60
+```
+
+最終exact1はfrozen exact9内のcanonical-closure owner pathだけを更新した。
+actual search roots、relative runtime package name、import fallback
+reachabilityを補正し、exact10 path setは増やしていない。
+
+formal exact134、broad regression、candidate allocation、event1、readiness、
+reservation、attempt、worker spawn、terminal artifact、private body、P2、
+fresh batch、exact100、Product Read、correction、B6、Cycle001 acceptanceは
+実行していない。retired/disabled guardianも使用していない。
+
+## 推測
+
+訂正済みoracleがowner未実装時にcausal REDを維持し、同じbytesのまま
+実装後にtargeted GREENへ変わったため、testを弱めたpassではなく、
+frozen contractを実装した結果と判断できる。
+
+## 華恋の意見
+
+本authorityはD2 targeted-GREENで停止するのが正しい。formal executionや
+candidate allocationを折り込まず、次段階は別承認に分離する。
+
+## 現在地
+
+```text
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D2_IMPLEMENTED_TARGETED_GREEN
+
+ORACLE:
+EXACT5_COLLISION_CORRECTED_CAUSAL_RED_REFROZEN
+
+CANDIDATE:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+SOURCE_BASELINE / EVENT1:
+UNLOCKED / NOT_CREATED
+
+READINESS / RESERVATION / ATTEMPT / EXACT134:
+NOT_PUBLISHED / 0 / 0 / NOT_RUN
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+次のlogical candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY
+```
+
+未承認。別の明示承認が必要であり、自動進行しない。
