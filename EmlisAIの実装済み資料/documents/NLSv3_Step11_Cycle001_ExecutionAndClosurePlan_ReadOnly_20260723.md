@@ -4810,3 +4810,195 @@ It permits D1 causal RED freeze only. D2 implementation, formal P1, event1,
 readiness, reservation, exact134, P2, fresh batch, Product Read, correction,
 B6, and Cycle001 acceptance remain unauthorized. Separate explicit approval
 is required. Do not progress automatically.
+
+## 12.41 2026-07-26 Recovery Epoch002 retry-lineage / formal-worker-bootstrap D1 causal RED freeze
+
+Approved and completed authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+Fixed entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+64f27c5c12acc6704f8973de7c4139808c10cee4
+
+mashos-api:
+e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+mashos-api tree:
+1c8970e91dbc793fcb3b81b51c73291f0326a565
+
+Epoch002 P0 external identity:
+0b5f4b0e3c3c023867a858782869c570e5a55c27cb72d8db108c309408581ce0
+```
+
+mashos-api D1 RED reflection:
+
+```text
+result:
+8b2b05809867ae53ba2fc3e525e99eea5e92f390
+
+tree:
+1a154bbbd23c152e6c16ba73a262a0a5af5563aa
+
+parent exact1:
+e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+compare:
+ahead 1 / behind 0 / total commits 1
+
+changed test / production paths:
+exact1 / exact0
+
+force:
+false
+```
+
+Frozen RED identity:
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch002_retry_lineage_and_formal_worker_bootstrap_reconciliation_red.py
+
+Git blob SHA-1:
+8badf41f78a0f853e13cc0824d2dcd7be734ad6d
+
+raw SHA-256:
+619605e3520bec66062d7903d8e495c3e413a8e367b78de49bd824c78f777358
+```
+
+The exact46 collection and targeted execution on the final bytes were:
+
+```text
+collected:
+46
+
+positive/current-fact passed:
+4
+
+causal RED failed:
+42
+
+collection / import / syntax / fixture errors:
+0
+
+unexpected failures / warnings:
+0 / 0
+```
+
+The exact42 causal matrix is `L01-L18 + B01-B24`. Every matrix row stopped at
+its frozen missing Recovery Epoch002 owner path. Exact4 positive tests proved
+the fixed authority/protected bytes, the current Epoch001 direct-parent
+conflict, the current bootstrap/checkpoint gaps, and the repair-boundary
+cardinalities.
+
+The RED freezes exact9 future owner/configuration paths and exact12 roles for:
+
+1. additive post-reservation lineage with current-main direct-child
+   publication and event1 semantic ancestry;
+2. prior consumed reservation/disposition history and replay prevention;
+3. distinct post-D2 Epoch002 candidate allocation;
+4. source, proof, registry, formal-test, and bootstrap closure identities;
+5. dependency-complete pre-reservation readiness;
+6. `PIP_REQUIRE_HASHES_WHEEL_LOCK_V1`;
+7. `--noconftest`, empty formal plugin allowlist, and complete static-import
+   plus third-party distribution/RECORD mapping;
+8. durable preflight, spawn-intent, collection, execution, terminal, and
+   publication checkpoints;
+9. body-free diagnostic and unknown-disposition contracts; and
+10. terminal/publication reconciliation without automatic retry.
+
+Confirmed current nonconformance:
+
+1. Epoch001 reservation validation requires the reservation commit to have
+   event1 as its direct and only parent;
+2. the current formal parent has no pre-reservation bootstrap-preflight
+   stage;
+3. the runner suppresses child stdout/stderr, synthesizes expected collection
+   nodes on timeout, and writes its result only after pytest returns; and
+4. shared conftest loads the FB172 migration plugin through an import chain
+   that reaches FastAPI.
+
+Inference:
+
+The post-reservation retry topology and dependency-complete bootstrap meet at
+one reservation boundary. Repairing only one class can still consume a
+one-shot authority without an auditable terminal result.
+
+Karen's opinion:
+
+Any later D2 implementation must preserve the RED bytes and satisfy the
+frozen owners. GitHub mutation and worker execution must remain explicit
+ports, with readiness and checkpoints durably established before each
+irreversible action.
+
+Body-free evidence:
+
+1. result commit `1680ff7b7424aa2fdfba5b1168e22e92eac52538`, blob
+   `868ab6429b8b8419226ba3d50e494f7a74cc1f95`, raw SHA-256
+   `a28762615f0c272739634f5562b44450796b888bf6d46f738611be6e881e5281`;
+2. receipt commit `4da5cda520daba0fdb59c08bb32b4eec86518e76`, blob
+   `0081971737454c3f607e92b297fe6034d9820cf4`, raw SHA-256
+   `68f3a87fdb174b6f8d844ff44763e620bedcadbba4d1735311091336c509bcb6`,
+   canonical receipt SHA-256
+   `e62467023472bb828b6d345106be0602d66117315898d56ee09c20aed102c672`;
+3. handoff commit `088101e9cf4855489b9181e106497b221e273ef9`, blob
+   `99d3f2bb8ac963f1a078933aeb9d5e2e49df2cd1`, raw SHA-256
+   `032a2b137cac0b3173672573e36b541cb94b0419265e06189c71766aaa3ce394`.
+
+Two subagent lanes were read-only. Subagent edits, test runs, commits, and
+GitHub writes were exact0. Karen performed the final contract reconciliation,
+test execution, repository publication, and post-fetch verification.
+
+No D2 production implementation, formal exact134, broad regression,
+candidate allocation, event1, readiness, reservation, attempt, formal
+terminal artifact, private body, P2 transition, fresh batch, exact100,
+Product Read, correction, B6, or Cycle001 acceptance was performed.
+
+Preserved state:
+
+```text
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D1_CAUSAL_RED_FROZEN
+
+RECOVERY_EPOCH002_CANDIDATE_VERSION:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+SOURCE_BASELINE:
+UNLOCKED
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+D2:
+NOT_STARTED_NOT_APPROVED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+The next logical candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+It is not approved. Separate explicit approval is required. Do not progress
+automatically.
