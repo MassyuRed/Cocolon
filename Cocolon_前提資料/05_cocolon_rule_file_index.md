@@ -3176,3 +3176,20 @@ bootstrapの読取順は`07 → 12 → 11`です。Actions番人が
 - P3 exact24は`15 PASS / 9 intentional RED`。Product Surface grammarは未解決。
 - P3 Product Surface successor、Parser / Matcher append、P4、runtime / manifest、E2以降は未開始。
 - 次のauthorityはProduct Surface grammarのdesign-only + Product Readまで。Surface実装はSTOP。
+
+## 2026-07-26 current actual environment / guardian retirement index
+
+`12_cocolon_github_actions_publication_guard.md`はhistorical owner /
+retired system recordです。current execution authorityではありません。
+workflowはrepository metadataで`disabled_manually`です。再開には、
+changed actual environmentを根拠とするMash様の新しい明示authorityが必要です。
+
+work attitude owner:
+
+- `03_forbidden_insufficient_premise_and_actual_file_check.txt`:
+  current actual environment、比例性、future trigger、system中止条件の正本。
+- `09_work_start_checklist.txt`:
+  proportionality check、same-package continuation、結果不明時の停止条件の正本。
+
+過去のguardian owner参照、Issue、run、branch、refはhistorical evidenceとして
+保持し、current routeとして再利用しません。
