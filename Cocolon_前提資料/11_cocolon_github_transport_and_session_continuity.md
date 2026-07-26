@@ -743,3 +743,33 @@ Replacement 03の再登録・削除・rotationを今回の結果から要求し�
 通常成果物を保存するActions routeと、番人自身を保守反映するSSH routeを
 分離したまま維持する。今回の診断はActions route内の失敗証拠を狭めるための
 ものであり、鍵運用を通常成果物へ戻す変更ではない。
+
+## 2026-07-26 current transport: guardian retirement
+
+GitHub Actions publication guardianはcurrent publication routeではありません。
+workflowはrepository metadataで`disabled_manually`です。
+
+guardianのための新しいReplacement keyを作成しません。
+guardian maintenanceを理由にMash様へdeploy key登録を求めません。
+既存deploy keyは本作業だけを理由に削除せず、現行の別formal Git transportで
+使用中かを確認せずrevokeしません。
+
+future GitHub reflectionは、その作業時点で利用可能なcurrent routeを確認し、
+次の最小条件だけを維持します。
+
+```text
+HEAD確認
+承認済みexact scope
+一つの承認済みreflection checkpoint
+force rewrite禁止
+postverification
+結果不明時の自動retry禁止
+```
+
+一つのreflection checkpointは、文字どおり一回のnetwork callを意味しません。
+connector上で複数のbounded operationが必要な場合は、同じ承認scope内で
+current remote stateを追跡し、結果不明を残さず完了させます。
+
+番人のretirementと一般のGitHub transport安全条件を混同せず、番人workflow、
+Issue-driven publication、sandbox publication、guardian diagnostic maintenanceを
+通常成果物の保存経路へ戻しません。
