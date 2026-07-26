@@ -70,3 +70,51 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - registered public identityとcurrent sessionのlocal private counterpart availabilityを別field / 別事実として扱う。
 - current sessionで秘密鍵候補を未発見でも、登録identityの記録を読まずに「routeなし」と断定しない。
 - sessionが変わったら以前の認証成功を継承せず、fingerprint / host / remote / live H0 / full fetch / exact leaseを再実測する。
+
+## 2026-07-26 差分追記: current actual environmentを設計前提の最上位に置く
+
+Cocolonのarchitecture、security、test、transport、運用設計は、
+一般的なアプリ開発環境ではなく、現在確認できるCocolonの実運用環境から始める。
+
+設計前に、少なくとも次を確認する。
+
+- 現在のproject主体。
+- 実際のコード作業者とwrite判断者。
+- repositoryがpublicかprivateか。
+- 現在存在するwrite route。
+- 現在存在する競合actor。
+- Mash様の承認境界。
+- 既存の防止策。
+- 現在のリリース目的と期限。
+
+複数の独立したコード作業者、不特定多数のcontributor、公開repository、
+外部botによるproduction publication、将来の開発チーム、将来想定の
+大規模同時運用は、実在を確認するまでcurrent requirementへ混ぜない。
+一般的なbest practiceは検討候補であり、current requirementへ自動昇格させない。
+
+ただし、秘密情報を記録・公開しない、承認scopeを越えない、履歴を
+force rewriteしない、user dataを保護する等の最低限の安全境界は維持する。
+actual environment優先を、必要な安全境界を無視する理由に使わない。
+
+「一般的には必要」「より安全になる」だけでは追加systemの根拠にならない。
+actual actor、actual route、actual failure、既存対策を差し引いた残余risk、
+最小代替、構築費、継続保守費、中止条件を説明できる場合だけ採用する。
+
+future requirementの再検討triggerは、複数の独立writer、public contribution、
+自動production publication、最小確認を行っても反復する実競合事故、
+法令・契約・security上の新要件のいずれかが実在した時とする。
+trigger成立だけで自動再開せず、Mash様の新しい明示承認を必要とする。
+
+## 2026-07-26 差分追記: 選択した仕組み自体を中止する判断
+
+一度採用したsystem、security mechanism、test framework、transport routeでも、
+次のいずれかが成立した場合は内部の未完了項目を増やさず、方式自体を再評価する。
+
+- 本来守る対象より、補助system自身の保守が主作業になった。
+- 新しい情報を得ず、system自身が生んだfailureを閉じ続けている。
+- current actual environmentに存在しない脅威が主要根拠になっている。
+- 防ぐriskより構築・継続保守・停止時間が大きい。
+- Cocolon完成への導線を説明できない。
+
+中止時は、完成させてから捨てるのではなく、safe disable、
+historical preservation、current authorityの更新だけを行う。
