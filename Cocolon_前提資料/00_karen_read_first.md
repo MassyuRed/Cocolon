@@ -7683,3 +7683,44 @@ production有効化やSSH routeの削除を意味しません。
 番人bootstrapはGitHub transport整備だけです。Step 11 D1 RED、mashos-api変更、
 event1、readiness、reservation、formal attempt、exact134、Product Read、
 Cycle001 acceptanceを開始しません。次の作業へ自動進行しません。
+
+## 2026-07-26 current actual operating environment / guardian retirement
+
+Cocolonのcurrent設計判断では、次を前提の最上位に置きます。
+
+- project主体はMash様です。
+- Cocolonのコード編集・write判断は華恋が担います。
+- subagentは必要な場合だけread-only補助として使います。
+- repositoryはprivateです。
+- GitHub writeはMash様の明示承認後だけ行います。
+- 現実の主な競合はMash様の別更新、別session、HEAD drift、通信断・結果不明です。
+
+複数の独立開発者、不特定contributor、公開repository、外部bot、
+将来の大規模運用はcurrent requirementではありません。
+最低限の秘密情報保護、承認scope、no force rewriteは維持します。
+
+詳細な比例性判断と中止条件は
+`work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt`、
+同一作業packageの継続条件は
+`work_attitude_rules_for_karen/09_work_start_checklist.txt`を正本とします。
+
+```text
+guardian:
+RETIRED_DISABLED
+
+workflow repository state:
+disabled_manually
+
+production:
+NEVER_ACTIVATED
+
+fresh suite:
+CANCELLED_AT_3_OF_5
+
+unreflected maintenance:
+ABANDONED_NOT_TO_BE_REFLECTED
+```
+
+番人のworkflow、Issue駆動publication、sandbox publication、diagnostic
+maintenanceはcurrent publication routeとして使いません。再開には、
+changed actual environmentを根拠とするMash様の新しい明示authorityが必要です。
