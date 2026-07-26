@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-07-25",
+  "revision_date": "2026-07-26",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -223,6 +223,26 @@
         "07_forbidden_shifting_burden_to_user.txt",
         "09_work_start_checklist.txt",
         "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "type": "actual_environment_first_proportionality_same_package_and_system_retirement",
+      "summary": "current actual environmentを設計前提の最上位に置き、future actor・future scale・一般best practiceをcurrent requirementへ自動昇格させない。最低限の安全境界は維持する。新しいsubsystemはactual risk、既存対策後の残余risk、最小代替、構築費、継続保守費、中止条件を説明できる場合だけ採用する。同一目的・同一scopeの局所修正は一つの承認packageで継続し、結果不明の外部writeは自動retryしない。補助system自身の保守が主作業になった場合はsafe disable、historical preservation、current authority更新だけでretireする。",
+      "decision_owner": "Mash",
+      "primary_actual_environment_owner": "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+      "primary_package_continuation_owner": "09_work_start_checklist.txt",
+      "actual_environment_first_required": true,
+      "general_practice_candidate_only": true,
+      "minimum_security_boundary_preserved": true,
+      "guardian_state": "RETIRED_DISABLED",
+      "guardian_workflow_state": "disabled_manually",
+      "guardian_reactivation_requires_new_mash_authority": true,
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "09_work_start_checklist.txt",
         "manifest.json"
       ]
     }
