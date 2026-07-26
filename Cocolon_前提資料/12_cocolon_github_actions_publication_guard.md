@@ -1091,3 +1091,56 @@ COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOS
 この候補は未承認である。
 反映成立後もfresh suiteは`0 / 5 NOT_RUN`から始め、Issue #12 / #13、
 現在のstaging / target refsを再利用しない。
+
+## 2026-07-26 guardian retirement
+
+Decision owner:
+
+```text
+Mash
+```
+
+Decision:
+
+current Cocolon actual environmentに対して、guardianの保証水準と継続保守費が
+過剰であるため廃止します。これは華恋の独断による打切りではありません。
+
+```text
+Final state:
+RETIRED_DISABLED
+
+workflow repository state:
+disabled_manually
+
+production activation:
+never performed / cancelled
+
+production canary:
+not run / cancelled
+
+fresh suite:
+3 / 5 stopped / no continuation
+
+unreflected local maintenance:
+abandoned / not to be reflected
+
+historical Issues, runs, branches, refs:
+preserved / not rerun / not reused / not current authority
+
+active publication route:
+none derived from guardian
+
+reactivation:
+forbidden without a new explicit Mash authority based on a changed actual environment
+```
+
+HEAD drift防止、承認済みscope、one reflection checkpoint、postverification、
+結果不明時の自動retry禁止という最小安全条件は通常作業へ残します。
+
+一方、Issue-driven publication、actor / candidate adversarial model、
+fresh 5-suite、diagnostic maintenanceはcurrent actual environmentに対して
+過剰でした。guardian自身が新しいfailure、保守、停止、handoffを生み、
+Cocolon本体作業を止めました。current費用対効果が成立しないためretireします。
+
+番人が危険だった、安全性が無意味だった、という意味ではありません。
+実行systemとして再利用せず、最小安全原則だけを通常のGitHub反映へ戻します。
