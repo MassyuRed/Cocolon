@@ -21341,3 +21341,183 @@ body-free receipt logical SHA-256:
 ```text
 913058df480e113f949185d874ed48ddfddb21b36773c5ec5d77771aba3873ac
 ```
+
+# 2026-07-27 current authority: Recovery Epoch002 Parent Addendum external-identity binding correction
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_PARENT_ADDENDUM_EXTERNAL_IDENTITY_SOURCE_CLOSURE_COMPLETION_AND_EVENT1_BINDING_CONTRACT_CORRECTION_DESIGN_READ_ONLY
+```
+
+## 確認した事実
+
+固定entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+462c933a597233b111962bb2e8ac41f0182dac12
+
+mashos-api:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+mashos-api tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+```
+
+Parent Addendumのsource closure exact20 / completion exact13は
+`parent_addendum_external_identity_sha256`を持ち、Event1もidentity bindingを
+要求するが、対象がMarkdownかreceiptか、exact10、hash preimage、postfetch、
+Event1の直接/推移bindingが未凍結だった。S1は複数のproduction meaningから
+選ばず停止した。S1のGitHub反映は0である。
+
+補正後の唯一のidentity target:
+
+```text
+original Parent Addendum body-free receipt
+```
+
+strict exact10:
+
+```text
+artifact_role:
+PARENT_ADDENDUM_DESIGN_FROZEN_RECEIPT
+
+schema_version:
+cocolon.emlis.nls_v3.recovery_epoch002.post_d2_successor_parent_addendum_design_frozen_receipt.v1
+
+repository:
+MassyuRed/Cocolon
+
+receipt blob:
+06972af95e59daf953e3ef059ba38a3d4a295f42
+
+receipt raw SHA-256:
+b81a9956a6419d1bdb1cb9440569f151da2aeb22230c72ee774944d6aefdc6e8
+
+receipt logical SHA-256:
+913058df480e113f949185d874ed48ddfddb21b36773c5ec5d77771aba3873ac
+
+publication commit:
+462c933a597233b111962bb2e8ac41f0182dac12
+
+body_free:
+true
+
+identity_sha256:
+527eb11a767582a2f86531e34e044dffa9f0ed034af91ef063c3acc33813ba6d
+```
+
+source closure exact20とcompletion exact13はkeysetを変えず、この同じ
+identity SHA-256を保持する。owner/independent verifierはfull exact10とfresh
+postfetch evidenceを検証し、bare hashだけを受け入れない。
+
+Event1 exact23はkeyを増やさない。`source_closure`とprimary evidenceである
+successor completion receiptを通じて同じidentityを推移的かつ二重にbindする。
+supporting artifact countはexact1のままである。
+
+original Parent Addendum exact5 publication
+`2c3fc3d3... -> 462c933a...`、receipt/Markdown双方のblob/raw/logical linkage、
+current refからの到達可能性と不変性をfresh postfetchする。このdocumentation
+postfetchは将来P1のformal expected-old transport capabilityではない。
+
+このauthorityで実行していないもの:
+
+```text
+original Parent Addendum file change:
+0
+
+mashos-api change:
+0
+
+local successor RED draft change:
+0
+
+test / collection / RED / GREEN / exact134:
+0 / 0 / 0 / 0 / 0
+
+candidate / Event1 / readiness / reservation / attempt:
+0 / 0 / 0 / 0 / 0
+
+terminal / accepted / Step00..10 / all11 / manifest / Event2:
+0 / 0 / 0 / 0 / 0 / 0
+
+private body / Product Read / Guardian:
+0 / 0 / 0
+```
+
+## 推測
+
+body-free receiptはschemaとlogical self-hashを持ち、Markdown path/rawを既に
+bindするため、既存keysetを変えず曖昧性を閉じられる。Event1のfull source
+closureとsuccessor completion evidenceを使うことで、top-level fieldや
+supporting artifactを追加せず同一identityへ到達できる。
+
+## 華恋の意見
+
+targetをoriginal body-free receiptへ固定するのが最小で正直である。Markdown
+direct identityやcorrection receiptへの差し替えは別schema/別identityを作り、
+元Addendumの意味を後から移動させる。
+
+Event1のexact23/supporting exact1も維持する。新key追加は補正ではなく再設計に
+なるため採用しない。
+
+## 現在地
+
+```text
+CURRENT_AUTHORITY_RESULT:
+RECOVERY_EPOCH002_POST_D2_PARENT_ADDENDUM_EXTERNAL_IDENTITY_SOURCE_CLOSURE_COMPLETION_AND_EVENT1_BINDING_CONTRACT_CORRECTION_DESIGN_FROZEN_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+POST_D2_SUCCESSOR_CLOSURE_NOT_IMPLEMENTED_PRE_EVENT1_AUTHORITY_STOP
+
+PARENT_ADDENDUM EXTERNAL IDENTITY:
+ORIGINAL_BODY_FREE_RECEIPT / 527eb11a767582a2f86531e34e044dffa9f0ed034af91ef063c3acc33813ba6d
+
+SOURCE CLOSURE / COMPLETION / EVENT1 KEYSETS:
+UNCHANGED
+
+POST_D2 SUCCESSOR:
+DESIGNED_NOT_IMPLEMENTED
+
+SOURCE BASELINE / CANDIDATE:
+UNLOCKED / UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+EVENT1 / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0
+
+TERMINAL / ACCEPTED / STEP / ALL11 / MANIFEST / EVENT2:
+0 / 0 / 0 / 0 / 0 / 0
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+exactly one next logical candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_REMEDIATION_RED_FREEZE_ONLY
+```
+
+前回承認はambiguity STOPで終了した。補正公開後も自動復活せず、別の明示的な
+再承認が必要である。
+
+Correction Design raw SHA-256:
+
+```text
+bb3264dab193fe2dab6126142a29779d452eb8d9ae1bbb718e963bd62ac68877
+```
+
+Correction body-free receipt logical SHA-256:
+
+```text
+b4ecc1cae4e5e97fedfd14a3cd40fc47868925d07bbda02a5b762d4fc6f62a26
+```

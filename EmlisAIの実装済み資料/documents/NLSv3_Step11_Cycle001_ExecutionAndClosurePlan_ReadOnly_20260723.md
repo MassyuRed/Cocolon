@@ -5538,3 +5538,148 @@ Body-free receipt logical SHA-256:
 ```text
 913058df480e113f949185d874ed48ddfddb21b36773c5ec5d77771aba3873ac
 ```
+
+## 12.46 2026-07-27 Recovery Epoch002 Parent Addendum external-identity binding contract correction
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_PARENT_ADDENDUM_EXTERNAL_IDENTITY_SOURCE_CLOSURE_COMPLETION_AND_EVENT1_BINDING_CONTRACT_CORRECTION_DESIGN_READ_ONLY
+```
+
+Karen rechecked Karen-Diary
+`700f749f5149cac1f8bd4bab8a364d524a56985b`, Cocolon
+`462c933a597233b111962bb2e8ac41f0182dac12`, mashos-api
+`5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74` / tree
+`b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7`, the current premise/work
+rules, Revised Cycle Detailed Design, roadmap, current Plan, original Parent
+Addendum exact5, and current source identity helpers.
+
+The stopped S1 audit confirmed one materially ambiguous production meaning.
+The Parent Addendum required
+`parent_addendum_external_identity_sha256` in source closure exact20 and
+completion exact13 and required Event1 to bind it, but did not freeze the
+target artifact, role/exact10 values, identity preimage, historical
+postfetch predicate, or Event1 route.
+
+The correction fixes the target as the original Parent Addendum body-free
+receipt:
+
+```text
+artifact role:
+PARENT_ADDENDUM_DESIGN_FROZEN_RECEIPT
+
+receipt logical SHA-256:
+913058df480e113f949185d874ed48ddfddb21b36773c5ec5d77771aba3873ac
+
+receipt raw SHA-256:
+b81a9956a6419d1bdb1cb9440569f151da2aeb22230c72ee774944d6aefdc6e8
+
+receipt Git blob:
+06972af95e59daf953e3ef059ba38a3d4a295f42
+
+publication commit:
+462c933a597233b111962bb2e8ac41f0182dac12
+
+strict exact10 identity SHA-256:
+527eb11a767582a2f86531e34e044dffa9f0ed034af91ef063c3acc33813ba6d
+```
+
+The exact10 self-hash covers the other exact9 canonical JSON keys with no
+trailing LF. The receipt raw hash includes exactly one trailing LF. The
+receipt binds the normative Parent Addendum Markdown raw identity.
+
+Corrected binding:
+
+```text
+source closure exact20:
+same keyset; parent_addendum_external_identity_sha256 = 527eb11a...
+
+completion exact13:
+same keyset; same field exact-equal to closure and full exact10 identity
+
+Event1 exact23:
+same keyset; no new supporting artifact; bind through source_closure and
+successor completion receipt
+
+C06:
+freeze target/exact10/self-hash/postfetch/closure-completion-Event1 parity
+```
+
+Owner and independent verifier must receive the full exact10 identity plus
+fresh postfetch evidence and reject bare-hash injection.
+
+The original Parent Addendum files remain byte-immutable. The correction
+does not change any other Parent Addendum schema, count, gate, owner, or
+authority meaning.
+
+Fixed result:
+
+```text
+CURRENT_AUTHORITY_RESULT:
+RECOVERY_EPOCH002_POST_D2_PARENT_ADDENDUM_EXTERNAL_IDENTITY_SOURCE_CLOSURE_COMPLETION_AND_EVENT1_BINDING_CONTRACT_CORRECTION_DESIGN_FROZEN_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+POST_D2_SUCCESSOR_CLOSURE_NOT_IMPLEMENTED_PRE_EVENT1_AUTHORITY_STOP
+
+PARENT_ADDENDUM_EXTERNAL_IDENTITY_TARGET:
+ORIGINAL_BODY_FREE_RECEIPT
+
+PARENT_ADDENDUM_EXTERNAL_IDENTITY_SHA256:
+527eb11a767582a2f86531e34e044dffa9f0ed034af91ef063c3acc33813ba6d
+
+SOURCE CLOSURE / COMPLETION / EVENT1 KEYSETS:
+UNCHANGED
+
+POST_D2 SUCCESSOR:
+DESIGNED_NOT_IMPLEMENTED
+
+SOURCE BASELINE:
+UNLOCKED
+
+CANDIDATE / EVENT1 / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0 / 0
+
+TERMINAL / ACCEPTED / STEP00..10 / ALL11 / MANIFEST / EVENT2:
+0 / 0 / 0 / 0 / 0 / 0
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+No mashos-api change, local RED draft change, test execution, formal
+attempt, private body, Product Read, or Guardian use occurred under this
+authority. The correction Design, body-free receipt, Handoff, this Plan
+append, and latest-snapshot append form the exact5 documentation reflection.
+
+The preceding S1 approval ended at its contract-ambiguity STOP. Exactly one
+next separate reapproval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_REMEDIATION_RED_FREEZE_ONLY
+```
+
+If separately reapproved, it may resume only the exact64 causal RED freeze.
+It must first reconcile the non-authoritative local draft against this
+correction. It may not implement production owners, allocate a candidate,
+publish Event1, reserve/run exact134, publish terminal/exact15, start P2, or
+accept Cycle001.
+
+Do not progress automatically.
+
+Correction Design raw SHA-256:
+
+```text
+bb3264dab193fe2dab6126142a29779d452eb8d9ae1bbb718e963bd62ac68877
+```
+
+Correction receipt logical SHA-256:
+
+```text
+b4ecc1cae4e5e97fedfd14a3cd40fc47868925d07bbda02a5b762d4fc6f62a26
+```
