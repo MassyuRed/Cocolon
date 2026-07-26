@@ -215,3 +215,54 @@ subagent利用は必要性に基づく華恋の作業手段であり、利用自
 - [ ] Mash様が理解できないと伝えた既存文を繰り返さず、目的から完了条件まで全文を書き直したか
 
 一つでも満たせない場合、Mash様へ作業依頼を出さない。詳細は`07_forbidden_shifting_burden_to_user.txt`を正本とする。
+
+## P. actual environment / proportionality check
+
+新しいsecurity system、CI / publication route、監査・証明・閉包基盤、
+migration layer、継続保守を生むsubsystemを提案・実装する場合だけ確認する。
+
+- [ ] current actual actor / route / repository / approval modelを確認したか
+- [ ] 現在の環境で、誰が、どの経路で、何を壊し得るか説明できるか
+- [ ] その事故経路は現在実在するか
+- [ ] 既存の承認、HEAD確認、path限定、postverificationで防げないか
+- [ ] 既存対策を差し引いた残余riskを説明できるか
+- [ ] 最も簡単な対策を先に比較したか
+- [ ] 一回の構築費と継続保守費を見積もったか
+- [ ] 新しいsystem自身が生むfailure、停止、診断、handoff費を計上したか
+- [ ] 中止・廃止条件を開始前に定めたか
+- [ ] future environmentをcurrent requirementへ混ぜていないか
+- [ ] 最低限維持すべき安全境界と、環境依存の追加対策を分離したか
+
+「一般的には必要」「より安全になる」だけでは採用しない。
+
+## Q. 同一作業パッケージ内の継続条件
+
+目的、actual environment、authority、contract、対象scopeが変わらない限り、
+次を一つの承認範囲で継続できる。
+
+現状確認
+→ 実装
+→ local test
+→ 原因が特定できる局所修正
+→ 再test
+→ 承認済みGitHub反映
+→ postverification
+
+小さいtest failure、文法修正、JSON整合、link修正ごとには停止しない。
+「一つの反映単位」は一つの承認済みcheckpointを意味し、利用可能な
+GitHub connectorが複数のbounded API operationを必要とする場合まで、
+文字どおり一回のnetwork callへ強制しない。
+
+ただし、GitHub書き込みの結果が不明な場合は自動retryしない。
+確認できたremote stateを基にreconcileするまで次のwriteへ進まない。
+同一packageの継続を、新しい外部write、未承認scope、不可逆操作の
+黙示承認へ拡張しない。
+
+停止するのは次の場合だけ。
+
+- 作業開始時の前提が誤っていた。
+- 新しいarchitecture / subsystemが必要になった。
+- authority、contract、対象scopeが実質的に拡大する。
+- credential、Mash様による画面操作、未承認の不可逆操作が必要になる。
+- 同じ設計境界で失敗を繰り返し、選択した方式自体を疑う必要がある。
+- 作業量が開始時想定を明確に超え、Cocolon完成への費用対効果が崩れた。
