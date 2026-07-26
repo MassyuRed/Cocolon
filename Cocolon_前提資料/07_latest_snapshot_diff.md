@@ -20507,3 +20507,217 @@ full post-fetchでremote head、parent exact1、tree、exact path set、
 
 この候補は未承認であり、Issue、Actions、試験ref、fresh suite再試行、
 production有効化、EmlisAI / Step 11を許可しない。
+
+# 2026-07-26 current authority: Recovery Epoch002 retry-lineage / formal-worker-bootstrap D1 causal RED freeze
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+このauthorityはD1 test-only causal REDとbody-free証拠反映だけを許可した。
+番人maintenanceへは戻らず、D2 implementation / GREEN、formal P1、
+candidate allocation、event1、readiness、reservation、attempt、exact134、
+P2、fresh batch、exact100、Product Read、correction、B6、Cycle001
+acceptanceを開始しない。
+
+## 確認した事実
+
+固定開始点:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+64f27c5c12acc6704f8973de7c4139808c10cee4
+
+mashos-api:
+e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+mashos-api tree:
+1c8970e91dbc793fcb3b81b51c73291f0326a565
+
+Epoch002 P0 external identity:
+0b5f4b0e3c3c023867a858782869c570e5a55c27cb72d8db108c309408581ce0
+```
+
+mashos-apiへexact1 test path、exact0 production pathを反映した。
+
+```text
+result:
+8b2b05809867ae53ba2fc3e525e99eea5e92f390
+
+parent exact1:
+e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd
+
+tree:
+1a154bbbd23c152e6c16ba73a262a0a5af5563aa
+
+compare:
+ahead 1 / behind 0 / total commits 1
+
+force:
+false
+```
+
+Frozen test:
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch002_retry_lineage_and_formal_worker_bootstrap_reconciliation_red.py
+
+Git blob SHA-1:
+8badf41f78a0f853e13cc0824d2dcd7be734ad6d
+
+raw SHA-256:
+619605e3520bec66062d7903d8e495c3e413a8e367b78de49bd824c78f777358
+```
+
+最終test結果:
+
+```text
+collected:
+46
+
+positive/current-fact passed:
+4
+
+causal RED failed:
+42
+
+matrix:
+L01-L18 + B01-B24
+
+collection / import / syntax / fixture errors:
+0
+
+unexpected failures / warnings:
+0 / 0
+```
+
+exact42はすべて、case ID別の
+`RECOVERY_EPOCH002_OWNER_PATH_NOT_IMPLEMENTED`で停止した。
+exact4 positive testはauthority / protected exact14 bytes、現行Epoch001の
+direct-parent conflict、bootstrap/checkpoint gap、D1 contract cardinalityを
+独立確認した。
+
+D1はexact9 future owner/configuration pathsとexact12 rolesを固定した。
+主な閉鎖対象は次である。
+
+1. current-main direct-child publicationとevent1 semantic ancestryを分離した
+   additive post-reservation lineage。
+2. consumed reservation / disposition historyの保持とreplay防止。
+3. D2 final closure後のdistinct Epoch002 candidate allocation。
+4. source / proof / registry / formal-test / bootstrap closure。
+5. reservation前のdependency-complete bootstrap readiness。
+6. `PIP_REQUIRE_HASHES_WHEEL_LOCK_V1`、`--noconftest`、empty formal
+   plugin allowlist。
+7. static import、third-party distribution、RECORD、Python / pytest /
+   environment / argv identity。
+8. preflight、spawn intent、collection、execution、terminal、publicationの
+   durable checkpoint。
+9. body-free diagnostic、unknown disposition、terminal/publication
+   reconciliation。
+
+現行Epoch001 sourceから次を確認した。
+
+- reservation commitのparentをevent1 direct exact1に固定している。
+- formal parentにpre-reservation bootstrap preflightがない。
+- runnerはchild stdout / stderrを破棄し、timeout時にexpected nodesを
+  collection evidenceとして合成し、pytest return後にだけresultを書く。
+- shared conftestはFB172 pluginをloadし、import chainがFastAPIへ到達する。
+
+formal exact134とbroad regressionは実行していない。
+candidate、event1、readiness、reservation、attempt、terminal artifact、
+private body、P2、Cycle acceptanceは作成していない。
+
+## Body-free evidence
+
+```text
+result:
+commit 1680ff7b7424aa2fdfba5b1168e22e92eac52538
+blob   868ab6429b8b8419226ba3d50e494f7a74cc1f95
+raw    a28762615f0c272739634f5562b44450796b888bf6d46f738611be6e881e5281
+
+receipt:
+commit 4da5cda520daba0fdb59c08bb32b4eec86518e76
+blob   0081971737454c3f607e92b297fe6034d9820cf4
+raw    68f3a87fdb174b6f8d844ff44763e620bedcadbba4d1735311091336c509bcb6
+self   e62467023472bb828b6d345106be0602d66117315898d56ee09c20aed102c672
+
+handoff:
+commit 088101e9cf4855489b9181e106497b221e273ef9
+blob   99d3f2bb8ac963f1a078933aeb9d5e2e49df2cd1
+raw    032a2b137cac0b3173672573e36b541cb94b0419265e06189c71766aaa3ce394
+
+execution-plan append:
+commit 9ddfcf95dd1d5960635afc2cbf5f8486141a25d9
+blob   615de34a1290ebcc423e40910e34cb051ad372ec
+raw    c470afe28e356a8d629eed8acc695a6954a75efd487f939f52605eeeb2b5f4dd
+append-only true
+```
+
+二つのsubagent laneはread-only。subagentのedit / test / commit /
+GitHub writeはexact0。華恋が最終contract reconciliation、test実行、
+commit、GitHub反映、post-fetch照合を行った。
+
+## 推測
+
+lineageとbootstrapはreservation境界で一体である。
+lineageだけを直すと未証明workerで新しいone-shot authorityを消費し得る。
+bootstrapだけを直しても、consumed reservation後のappend-only retryを
+表現できない。
+
+## 華恋の意見
+
+後続D2はこのRED bytesを変更せず、exact9 owner/configuration pathsで
+contractを実装する必要がある。GitHub mutationとworker executionは
+explicit portのままにし、不可逆操作より前にreadiness / spawn intent /
+checkpointをdurableに確定すべきである。
+
+## 現在地
+
+```text
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D1_CAUSAL_RED_FROZEN
+
+RECOVERY_EPOCH002_CANDIDATE_VERSION:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+SOURCE_BASELINE:
+UNLOCKED
+
+D2:
+NOT_STARTED_NOT_APPROVED
+
+FORMAL ARTIFACTS:
+NOT_ISSUED
+
+P2:
+NOT_AUTHORIZED
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+次のlogical candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY
+```
+
+未承認。別の明示承認が必要であり、自動進行しない。
+
+このD1 authorityでは、先行する未反映guardian code / workflow /
+premise exact10を反映していない。本節はEmlisAI D1 current authorityの
+append-only記録であり、guardian maintenanceの再開または承認ではない。
