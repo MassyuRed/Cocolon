@@ -870,3 +870,224 @@ fresh `0 / 5`から行う。旧Issueと旧refは証拠として保持する。
 このmaintenance revisionはGitHub transport診断保守だけである。
 Step 11のsource、worker、reservation、formal attempt、Cycle001 stateを
 進めない。
+
+# 2026-07-26 publish target fetch failure diagnostic evidence maintenance / local GREEN
+
+## Authority / baseline
+
+```text
+authority:
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOSTIC_EVIDENCE_MAINTENANCE_IMPLEMENTATION_AND_LOCAL_GREEN_ONLY
+
+design:
+Cocolon_GitHub_Actions_Publication_Guardian_Publish_Target_Fetch_Failure_Diagnostic_Evidence_Maintenance_Design_ReadOnly_20260726.md
+
+design UTF-8 SHA-256:
+30da6647b976b4e7930584c2f852fa2daf32ed3804e4f8c9cabc11d3fe748858
+
+predecessor:
+44b61fcf3e6d5e61ca381b6247e9d35a4b56e0f4
+
+state:
+LOCAL_GREEN_NOT_REFLECTED
+```
+
+作業開始時、predecessorとGitHub `main`は`identical`だった。
+Issue #12のpre-suite boundaryは成立済み、Issue #13のfresh Test 1は
+`CANDIDATE_TARGET_REF_FETCH`でblockedしたため、fresh suiteは`0 / 5`である。
+
+## fixed diagnostic contract
+
+final reconcile resultとfailed publish attemptを別層として扱う。
+
+```text
+final:
+NOT_APPLIED_CONFIRMED_STOP
+
+failed operation:
+CANDIDATE_TARGET_REF_FETCH
+
+optional evidence:
+publish_failure
+```
+
+`git_failure_kind`:
+
+```text
+NONZERO_EXIT
+TIMEOUT
+SPAWN_OS_ERROR
+SIGNAL_TERMINATED
+```
+
+`git_stderr_hint`:
+
+```text
+REMOTE_REF_MISSING_OR_MOVED
+AUTH_OR_ACCESS_REJECTED
+NAME_RESOLUTION_FAILURE
+NETWORK_CONNECTION_FAILURE
+TLS_OR_HOST_IDENTITY_FAILURE
+LOCAL_REF_OR_IO_FAILURE
+OBJECT_TRANSFER_OR_INTEGRITY_FAILURE
+REMOTE_SERVICE_OR_PROTOCOL_FAILURE
+UNCLASSIFIED_OR_AMBIGUOUS
+NOT_EVALUATED
+```
+
+nonzero exitのraw stderrは最大64 KiBをASCII lower-case fixed markerで
+memory内照合する。exact一分類だけならfixed hint、0または複数分類なら
+`UNCLASSIFIED_OR_AMBIGUOUS`とする。
+timeout、spawn OSError、signal terminationではstderrを分類せず
+`NOT_EVALUATED`とする。
+
+classifier例外、不正type、unknown enumはfixed ambiguousまたはfield dropへ
+fail closedし、arbitrary stringを出力しない。
+
+次は記録しない。
+
+```text
+raw stderr / matched marker
+command / URL / ref / path
+token / credential / secret
+exit / signal / errno / exception message
+stderr hash / length / timing
+```
+
+診断対象はexact `CANDIDATE_TARGET_REF_FETCH`だけである。
+他のcandidate Git stageと既定`GIT / GIT_EXEC`には新診断fieldを付けない。
+
+## trusted receipt binding
+
+final receiptへ追加可能なobjectはexact次だけである。
+
+```json
+{
+  "publish_failure": {
+    "job": "publish-sandbox",
+    "outcome": "RESULT_UNKNOWN_STOP",
+    "stage": "CANDIDATE_TARGET_REF_FETCH",
+    "git_failure_kind": "NONZERO_EXIT",
+    "git_stderr_hint": "UNCLASSIFIED_OR_AMBIGUOUS",
+    "write_attempted": false,
+    "result_uncertain": false,
+    "postverified": false
+  }
+}
+```
+
+上記kind / hintはshape例であり、Issue #13へ遡及適用しない。
+
+次の三者をexact bindingする。
+
+1. report remote-first result:
+   sandbox、`NOT_APPLIED_CONFIRMED_STOP`、H0からH0、
+   write unknown、postverified false、valid request / candidate identity。
+2. preflight:
+   job success、`PREFLIGHT_PASSED`、reportと同じrequest / candidate、
+   observed_before H0、write false、postverified false。
+3. publish-sandbox:
+   job failure、`RESULT_UNKNOWN_STOP`、exact stage、fixed kind / hint、
+   write false、result_uncertain false、postverified false。
+
+一条件でも欠落・不一致なら`publish_failure`全体を捨てる。
+`fixed_receipt()`はexact 8 keys、fixed literal、allowlisted enum、
+三つのexact falseを再検証し、extra key、wrong type、
+unknown stringがあればobject全体を捨てる。
+
+診断は次を変更しない。
+
+```text
+final outcome
+write_attempted
+postverified
+Issue close decision
+retry可否
+write permit / exact lease
+```
+
+## workflow connection
+
+publish-sandbox job outputとreport envの間に次の4値だけを追加した。
+
+```text
+failure_stage
+git_failure_kind
+git_stderr_hint
+result_uncertain
+```
+
+Issue #13でfailed publish jobの既存outputがreportへ届くことを確認済みのため、
+`continue-on-error`、`if: failure()`、追加failure step、
+publish再実行、自動retryは追加していない。
+
+permissions、concurrency、preflight gate、sandbox gate三条件、
+checkout SHA pin、publish command、publish-main `if: ${{ false }}`、
+report `always()`を変更していない。
+
+## local verification
+
+```text
+existing tests:
+72
+
+new test definitions:
+4
+
+total:
+76
+
+result:
+OK
+```
+
+確認範囲:
+
+- fixed marker classification matrix。
+- invalid UTF-8、unknown、複数match、64 KiB limit。
+- positive nonzero / negative signal / timeout / OSError。
+- target-fetch-only diagnostic。
+- raw secret / URL / ref / path / command非掲載。
+- safe GITHUB_OUTPUTとworkflow exact4 forwarding。
+- trusted binder positive。
+- report / preflight / publish各条件のnegative matrix。
+- malformed nested receipt全体drop。
+- report main end-to-endでfinal state不変。
+- 既存APPLIED / ALREADY / HEAD_DRIFT / corrected merge /
+  local bare remote / preflight gate回帰。
+
+## unchanged boundary
+
+- candidateをcheckout / executeしない。
+- policyは`OBSERVE_AND_SANDBOX_ONLY`。
+- `production_main_enabled=false`。
+- publish-mainは静的false。
+- request schema / policy bytes不変。
+- exact expected-old lease / postverification不変。
+- no automatic retry。
+- Issue #9〜#13と既存refを証拠として保持。
+- EmlisAI / Step 11を開始しない。
+
+exact local changed pathsはworkflow、guardian、test、前提資料3点、
+manifestの7件である。
+GitHub commit / push / Issue / Actions / ref操作は0件である。
+
+## 未確認
+
+- Issue #13のexact process kind / stderr hint。
+- GitHub Actions上で新fixed fieldsがfinal receiptへ届くこと。
+- maintenanceのGitHub reflection / full post-fetch。
+- fresh pre-suite boundary、fresh 5 tests、post-suite boundary。
+- production activation / canary。
+
+## 次の境界
+
+次は別authority候補で、GitHub反映とfull post-fetchだけを扱う。
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOSTIC_EVIDENCE_MAINTENANCE_GITHUB_REFLECTION_AND_POST_FETCH_ONLY
+```
+
+この候補は未承認である。
+反映成立後もfresh suiteは`0 / 5 NOT_RUN`から始め、Issue #12 / #13、
+現在のstaging / target refsを再利用しない。

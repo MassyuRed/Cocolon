@@ -82,6 +82,154 @@ FILE_FIELDS = frozenset(
     }
 )
 SANDBOX_TEST_FIELDS = frozenset({"case", "drift_ref", "drift_sha1"})
+TARGET_FETCH_FAILURE_STAGE = "CANDIDATE_TARGET_REF_FETCH"
+GIT_FAILURE_KINDS = frozenset(
+    {
+        "NONZERO_EXIT",
+        "TIMEOUT",
+        "SPAWN_OS_ERROR",
+        "SIGNAL_TERMINATED",
+    }
+)
+GIT_STDERR_HINTS = frozenset(
+    {
+        "REMOTE_REF_MISSING_OR_MOVED",
+        "AUTH_OR_ACCESS_REJECTED",
+        "NAME_RESOLUTION_FAILURE",
+        "NETWORK_CONNECTION_FAILURE",
+        "TLS_OR_HOST_IDENTITY_FAILURE",
+        "LOCAL_REF_OR_IO_FAILURE",
+        "OBJECT_TRANSFER_OR_INTEGRITY_FAILURE",
+        "REMOTE_SERVICE_OR_PROTOCOL_FAILURE",
+        "UNCLASSIFIED_OR_AMBIGUOUS",
+        "NOT_EVALUATED",
+    }
+)
+FIXED_GIT_STDERR_MARKERS: Mapping[str, tuple[bytes, ...]] = {
+    "REMOTE_REF_MISSING_OR_MOVED": (
+        b"couldn't find remote ref",
+        b"remote ref does not exist",
+        b"could not find remote branch",
+    ),
+    "AUTH_OR_ACCESS_REJECTED": (
+        b"authentication failed",
+        b"could not read username",
+        b"repository not found",
+        b"requested url returned error: 401",
+        b"requested url returned error: 403",
+    ),
+    "NAME_RESOLUTION_FAILURE": (
+        b"could not resolve host",
+        b"name or service not known",
+        b"temporary failure in name resolution",
+    ),
+    "NETWORK_CONNECTION_FAILURE": (
+        b"failed to connect",
+        b"connection reset",
+        b"network is unreachable",
+        b"connection timed out",
+    ),
+    "TLS_OR_HOST_IDENTITY_FAILURE": (
+        b"server certificate verification failed",
+        b"ssl certificate problem",
+        b"certificate verify failed",
+        b"tls connect error",
+        b"gnutls_handshake() failed",
+    ),
+    "LOCAL_REF_OR_IO_FAILURE": (
+        b"cannot lock ref",
+        b"unable to update local ref",
+        b"unable to create temporary file",
+        b"no space left on device",
+    ),
+    "OBJECT_TRANSFER_OR_INTEGRITY_FAILURE": (
+        b"index-pack failed",
+        b"fsck error",
+        b"object corrupt",
+        b"did not send all necessary objects",
+        b"bad object",
+    ),
+    "REMOTE_SERVICE_OR_PROTOCOL_FAILURE": (
+        b"rpc failed",
+        b"early eof",
+        b"remote end hung up",
+        b"requested url returned error: 500",
+        b"requested url returned error: 502",
+        b"requested url returned error: 503",
+        b"requested url returned error: 504",
+    ),
+}
+PUBLISH_FAILURE_FIELDS = frozenset(
+    {
+        "job",
+        "outcome",
+        "stage",
+        "git_failure_kind",
+        "git_stderr_hint",
+        "write_attempted",
+        "result_uncertain",
+        "postverified",
+    }
+)
+FIXED_RECEIPT_RESULT_FIELDS = (
+    "outcome",
+    "stage",
+    "request_id",
+    "repository",
+    "target_ref",
+    "workflow_sha1",
+    "expected_old_sha1",
+    "candidate_sha1",
+    "observed_before",
+    "observed_after",
+    "production_main_observed_before",
+    "production_main_observed_after",
+    "files_sha256",
+    "request_sha256",
+    "policy_sha256",
+    "design_sha256",
+    "target_class",
+    "paths",
+    "write_attempted",
+    "result_uncertain",
+    "postverified",
+    "sender_id",
+    "sender_login",
+    "sender_type",
+    "issue_user_id",
+    "issue_user_login",
+    "issue_user_type",
+)
+
+
+def _is_valid_git_failure_values(kind: object, stderr_hint: object) -> bool:
+    if (
+        type(kind) is not str
+        or kind not in GIT_FAILURE_KINDS
+        or type(stderr_hint) is not str
+        or stderr_hint not in GIT_STDERR_HINTS
+    ):
+        return False
+    if kind == "NONZERO_EXIT":
+        return stderr_hint != "NOT_EVALUATED"
+    return stderr_hint == "NOT_EVALUATED"
+
+
+@dataclasses.dataclass(frozen=True)
+class GitFailureDiagnostic:
+    kind: str
+    stderr_hint: str
+
+    def __post_init__(self) -> None:
+        if not _is_valid_git_failure_values(self.kind, self.stderr_hint):
+            raise ValueError("invalid Git failure diagnostic")
+
+
+def _is_valid_git_failure_diagnostic(value: object) -> bool:
+    return (
+        type(value) is GitFailureDiagnostic
+        and _is_valid_git_failure_values(value.kind, value.stderr_hint)
+    )
 
 
 class GuardianReject(Exception):
@@ -95,6 +243,7 @@ class GuardianReject(Exception):
         *,
         write_attempted: bool = False,
         result_uncertain: bool = False,
+        git_failure: GitFailureDiagnostic | None = None,
     ) -> None:
         super().__init__(f"{code} at {stage}: {detail}")
         self.code = code
@@ -102,6 +251,11 @@ class GuardianReject(Exception):
         self.detail = detail
         self.write_attempted = write_attempted
         self.result_uncertain = result_uncertain
+        self.git_failure = (
+            git_failure
+            if _is_valid_git_failure_diagnostic(git_failure)
+            else None
+        )
 
 
 @dataclasses.dataclass(frozen=True)
@@ -774,6 +928,44 @@ def _git_env() -> dict[str, str]:
     return env
 
 
+def classify_git_stderr_hint(stderr: bytes) -> str:
+    """Return one fixed diagnostic hint without retaining raw stderr."""
+
+    try:
+        if type(stderr) is not bytes:
+            return "UNCLASSIFIED_OR_AMBIGUOUS"
+        sample = stderr[:65536].lower()
+        matched = {
+            hint
+            for hint, markers in FIXED_GIT_STDERR_MARKERS.items()
+            if any(marker in sample for marker in markers)
+        }
+    except Exception:
+        return "UNCLASSIFIED_OR_AMBIGUOUS"
+    if len(matched) != 1:
+        return "UNCLASSIFIED_OR_AMBIGUOUS"
+    return next(iter(matched))
+
+
+def _target_fetch_git_failure_diagnostic(
+    failure_stage: str | None,
+    *,
+    kind: str,
+    stderr: bytes = b"",
+) -> GitFailureDiagnostic | None:
+    if failure_stage != TARGET_FETCH_FAILURE_STAGE:
+        return None
+    hint = (
+        classify_git_stderr_hint(stderr)
+        if kind == "NONZERO_EXIT"
+        else "NOT_EVALUATED"
+    )
+    try:
+        return GitFailureDiagnostic(kind=kind, stderr_hint=hint)
+    except ValueError:
+        return None
+
+
 def git(
     args: Sequence[str],
     *,
@@ -804,21 +996,47 @@ def git(
             timeout=timeout,
             env=_git_env(),
         )
-    except (OSError, subprocess.TimeoutExpired) as exc:
+    except subprocess.TimeoutExpired as exc:
         raise GuardianReject(
             "RESULT_UNKNOWN_STOP",
             failure_stage or "GIT_EXEC",
             type(exc).__name__,
             write_attempted=write_attempted,
             result_uncertain=write_attempted,
+            git_failure=_target_fetch_git_failure_diagnostic(
+                failure_stage,
+                kind="TIMEOUT",
+            ),
+        ) from exc
+    except OSError as exc:
+        raise GuardianReject(
+            "RESULT_UNKNOWN_STOP",
+            failure_stage or "GIT_EXEC",
+            type(exc).__name__,
+            write_attempted=write_attempted,
+            result_uncertain=write_attempted,
+            git_failure=_target_fetch_git_failure_diagnostic(
+                failure_stage,
+                kind="SPAWN_OS_ERROR",
+            ),
         ) from exc
     if result.returncode:
+        failure_kind = (
+            "SIGNAL_TERMINATED"
+            if result.returncode < 0
+            else "NONZERO_EXIT"
+        )
         raise GuardianReject(
             failure_code,
             failure_stage or "GIT",
             f"exit={result.returncode}",
             write_attempted=write_attempted,
             result_uncertain=write_attempted,
+            git_failure=_target_fetch_git_failure_diagnostic(
+                failure_stage,
+                kind=failure_kind,
+                stderr=result.stderr,
+            ),
         )
     return result.stdout
 
@@ -1443,13 +1661,24 @@ def evaluate_request(
 
 
 def sanitized_failure(exc: GuardianReject) -> dict[str, Any]:
-    return {
+    result = {
         "outcome": exc.code,
         "stage": exc.stage,
         "write_attempted": exc.write_attempted,
         "result_uncertain": exc.result_uncertain,
         "postverified": False,
     }
+    if (
+        exc.stage == TARGET_FETCH_FAILURE_STAGE
+        and _is_valid_git_failure_diagnostic(exc.git_failure)
+    ):
+        result.update(
+            {
+                "git_failure_kind": exc.git_failure.kind,
+                "git_stderr_hint": exc.git_failure.stderr_hint,
+            }
+        )
+    return result
 
 
 def run_guardian(
@@ -1490,37 +1719,39 @@ def _github_api(method: str, url: str, token: str, payload: Mapping[str, Any]) -
         raise GuardianReject("REPORT_FAILED", "REPORT_API", type(exc).__name__) from exc
 
 
+def _validated_publish_failure(value: object) -> dict[str, Any] | None:
+    if (
+        type(value) is dict
+        and frozenset(value) == PUBLISH_FAILURE_FIELDS
+        and value.get("job") == "publish-sandbox"
+        and value.get("outcome") == "RESULT_UNKNOWN_STOP"
+        and value.get("stage") == TARGET_FETCH_FAILURE_STAGE
+        and _is_valid_git_failure_values(
+            value.get("git_failure_kind"),
+            value.get("git_stderr_hint"),
+        )
+        and type(value.get("write_attempted")) is bool
+        and value.get("write_attempted") is False
+        and type(value.get("result_uncertain")) is bool
+        and value.get("result_uncertain") is False
+        and type(value.get("postverified")) is bool
+        and value.get("postverified") is False
+    ):
+        return dict(value)
+    return None
+
+
 def fixed_receipt(result: Mapping[str, Any]) -> str:
-    allowed = [
-        "outcome",
-        "stage",
-        "request_id",
-        "repository",
-        "target_ref",
-        "workflow_sha1",
-        "expected_old_sha1",
-        "candidate_sha1",
-        "observed_before",
-        "observed_after",
-        "production_main_observed_before",
-        "production_main_observed_after",
-        "files_sha256",
-        "request_sha256",
-        "policy_sha256",
-        "design_sha256",
-        "target_class",
-        "paths",
-        "write_attempted",
-        "result_uncertain",
-        "postverified",
-        "sender_id",
-        "sender_login",
-        "sender_type",
-        "issue_user_id",
-        "issue_user_login",
-        "issue_user_type",
-    ]
-    receipt = {key: result[key] for key in allowed if key in result}
+    receipt = {
+        key: result[key]
+        for key in FIXED_RECEIPT_RESULT_FIELDS
+        if key in result
+    }
+    publish_failure = _validated_publish_failure(
+        result.get("publish_failure")
+    )
+    if publish_failure is not None:
+        receipt["publish_failure"] = publish_failure
     if type(result.get("paths")) is list:
         receipt["path_count"] = len(result["paths"])
     receipt.update(
@@ -1578,7 +1809,36 @@ def report_result(event: Mapping[str, Any], result: Mapping[str, Any]) -> None:
 
 
 def _write_outputs(result: Mapping[str, Any]) -> None:
-    rendered = canonical_json_bytes(result).decode("utf-8")
+    rendered_result = {
+        key: result[key]
+        for key in FIXED_RECEIPT_RESULT_FIELDS
+        if key in result
+    }
+    stage = result.get("stage")
+    kind = result.get("git_failure_kind")
+    hint = result.get("git_stderr_hint")
+    diagnostic_supplied = (
+        "git_failure_kind" in result or "git_stderr_hint" in result
+    )
+    valid_diagnostic = (
+        stage == TARGET_FETCH_FAILURE_STAGE
+        and _is_valid_git_failure_values(kind, hint)
+    )
+    if not valid_diagnostic:
+        if diagnostic_supplied:
+            rendered_result.pop("stage", None)
+    else:
+        rendered_result["git_failure_kind"] = kind
+        rendered_result["git_stderr_hint"] = hint
+    result_uncertain = result.get("result_uncertain")
+    if type(result_uncertain) is not bool:
+        rendered_result.pop("result_uncertain", None)
+    publish_failure = _validated_publish_failure(
+        result.get("publish_failure")
+    )
+    if publish_failure is not None:
+        rendered_result["publish_failure"] = publish_failure
+    rendered = canonical_json_bytes(rendered_result).decode("utf-8")
     print(rendered)
     output_path = os.environ.get("GITHUB_OUTPUT")
     if output_path:
@@ -1603,6 +1863,16 @@ def _write_outputs(result: Mapping[str, Any]) -> None:
             "production_main_observed_after": result.get(
                 "production_main_observed_after", ""
             ),
+            "failure_stage": stage if valid_diagnostic else "",
+            "git_failure_kind": kind if valid_diagnostic else "",
+            "git_stderr_hint": hint if valid_diagnostic else "",
+            "result_uncertain": (
+                "true"
+                if result_uncertain is True
+                else "false"
+                if result_uncertain is False
+                else ""
+            ),
         }
         with open(output_path, "a", encoding="utf-8", newline="\n") as handle:
             for key, value in safe.items():
@@ -1619,6 +1889,19 @@ def _job_claim(prefix: str) -> dict[str, str]:
         "postverified": os.environ.get(f"{prefix}_POSTVERIFIED", ""),
         "observed_before": os.environ.get(f"{prefix}_OBSERVED_BEFORE", ""),
         "observed_after": os.environ.get(f"{prefix}_OBSERVED_AFTER", ""),
+        "failure_stage": os.environ.get(f"{prefix}_FAILURE_STAGE", ""),
+        "git_failure_kind": os.environ.get(
+            f"{prefix}_GIT_FAILURE_KIND",
+            "",
+        ),
+        "git_stderr_hint": os.environ.get(
+            f"{prefix}_GIT_STDERR_HINT",
+            "",
+        ),
+        "result_uncertain": os.environ.get(
+            f"{prefix}_RESULT_UNCERTAIN",
+            "",
+        ),
     }
 
 
@@ -1737,6 +2020,68 @@ def bind_trusted_publish_result(reconciled: Mapping[str, Any]) -> dict[str, Any]
     return result
 
 
+def bind_trusted_publish_failure_diagnostic(
+    reconciled: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Bind one fixed failed-publish diagnostic without changing final state."""
+
+    result = dict(reconciled)
+    result.pop("publish_failure", None)
+    expected_old = result.get("expected_old_sha1")
+    request_sha256 = result.get("request_sha256")
+    candidate_sha1 = result.get("candidate_sha1")
+    if (
+        result.get("target_class") != "sandbox"
+        or result.get("outcome") != "NOT_APPLIED_CONFIRMED_STOP"
+        or not isinstance(expected_old, str)
+        or not HEX40.fullmatch(expected_old)
+        or result.get("observed_before") != expected_old
+        or result.get("observed_after") != expected_old
+        or result.get("write_attempted") != "unknown"
+        or result.get("postverified") is not False
+        or not isinstance(request_sha256, str)
+        or not HEX64.fullmatch(request_sha256)
+        or not isinstance(candidate_sha1, str)
+        or not HEX40.fullmatch(candidate_sha1)
+    ):
+        return result
+
+    preflight = _job_claim("GUARDIAN_PREFLIGHT")
+    publish = _job_claim("GUARDIAN_SANDBOX")
+    if (
+        preflight["job_result"] != "success"
+        or preflight["outcome"] != "PREFLIGHT_PASSED"
+        or preflight["request_sha256"] != request_sha256
+        or preflight["candidate_sha1"] != candidate_sha1
+        or preflight["write_attempted"] != "false"
+        or preflight["postverified"] != "false"
+        or preflight["observed_before"] != expected_old
+        or publish["job_result"] != "failure"
+        or publish["outcome"] != "RESULT_UNKNOWN_STOP"
+        or publish["failure_stage"] != TARGET_FETCH_FAILURE_STAGE
+        or not _is_valid_git_failure_values(
+            publish["git_failure_kind"],
+            publish["git_stderr_hint"],
+        )
+        or publish["write_attempted"] != "false"
+        or publish["result_uncertain"] != "false"
+        or publish["postverified"] != "false"
+    ):
+        return result
+
+    result["publish_failure"] = {
+        "job": "publish-sandbox",
+        "outcome": "RESULT_UNKNOWN_STOP",
+        "stage": TARGET_FETCH_FAILURE_STAGE,
+        "git_failure_kind": publish["git_failure_kind"],
+        "git_stderr_hint": publish["git_stderr_hint"],
+        "write_attempted": False,
+        "result_uncertain": False,
+        "postverified": False,
+    }
+    return result
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=("preflight", "publish", "reconcile", "report"))
@@ -1807,6 +2152,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
         )
         result = bind_trusted_publish_result(result)
+        result = bind_trusted_publish_failure_diagnostic(result)
         try:
             report_result(load_event(event_path), result)
         except GuardianReject as report_exc:

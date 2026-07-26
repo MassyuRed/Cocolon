@@ -20313,3 +20313,197 @@ network、credential、runner、GitHub serviceのいずれかを原因と断定�
 D1 RED、mashos-api source / test、event1、readiness、reservation、
 formal attempt、exact134、P2、Product Read、correction、B6、
 Cycle001 acceptanceを開始しない。
+
+# 2026-07-26 current authority: publish target fetch failure diagnostic evidence maintenance / local GREEN
+
+## Authority
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOSTIC_EVIDENCE_MAINTENANCE_IMPLEMENTATION_AND_LOCAL_GREEN_ONLY
+```
+
+承認済み設計:
+
+```text
+Cocolon_GitHub_Actions_Publication_Guardian_Publish_Target_Fetch_Failure_Diagnostic_Evidence_Maintenance_Design_ReadOnly_20260726.md
+
+UTF-8 SHA-256:
+30da6647b976b4e7930584c2f852fa2daf32ed3804e4f8c9cabc11d3fe748858
+```
+
+実装predecessor:
+
+```text
+44b61fcf3e6d5e61ca381b6247e9d35a4b56e0f4
+```
+
+作業開始時、GitHub `main`と上記commitのcompareは`identical`、
+ahead / behindとも0だった。local checkout HEAD、設計固定revision、
+GitHub上のguardian / test / workflow blobも同じrevisionと一致した。
+
+## 確認済み
+
+- Issue #12 / run `30179652097`はfresh suite前のread-only boundaryとして
+  `NOT_APPLIED_CONFIRMED_STOP`を確認済みで、5種類の試験には数えない。
+- Issue #13 / run `30179774714`では、preflight job `89734290424`が
+  `PREFLIGHT_PASSED`、publish-sandbox job `89734308504`が
+  `RESULT_UNKNOWN_STOP / CANDIDATE_TARGET_REF_FETCH`、
+  `write_attempted=false`、`result_uncertain=false`となった。
+- Issue #13のreport job `89734326539`はremote-first再確認により
+  `NOT_APPLIED_CONFIRMED_STOP`を確定し、targetとproduction mainは
+  `44b61fcf3e6d5e61ca381b6247e9d35a4b56e0f4`から変化していない。
+- 旧Issue #9〜#13と既存staging / target refは今回変更していない。
+- fresh suiteはTest 1不合格、`0 / 5 STOPPED`のままである。
+
+今回、target exact fetch失敗だけに次の固定診断を追加した。
+
+```text
+git_failure_kind:
+NONZERO_EXIT
+TIMEOUT
+SPAWN_OS_ERROR
+SIGNAL_TERMINATED
+
+git_stderr_hint:
+REMOTE_REF_MISSING_OR_MOVED
+AUTH_OR_ACCESS_REJECTED
+NAME_RESOLUTION_FAILURE
+NETWORK_CONNECTION_FAILURE
+TLS_OR_HOST_IDENTITY_FAILURE
+LOCAL_REF_OR_IO_FAILURE
+OBJECT_TRANSFER_OR_INTEGRITY_FAILURE
+REMOTE_SERVICE_OR_PROTOCOL_FAILURE
+UNCLASSIFIED_OR_AMBIGUOUS
+NOT_EVALUATED
+```
+
+raw stderrは最大64 KiBのmemory内分類にだけ使い、次は出力・保存しない。
+
+```text
+raw stderr
+matched marker
+Git command
+remote URL
+ref / local path
+token / credential / secret
+exit number / signal number / errno / exception message
+stderr hash / length / timing
+```
+
+診断はexact
+`CANDIDATE_TARGET_REF_FETCH`だけに付ける。
+staging observation / fetch、target observation、既定`GIT / GIT_EXEC`の
+failure contractは変更していない。
+
+publish-sandboxの固定診断は、次の全条件が一致した場合だけ、
+final receiptのnested `publish_failure`へ追加する。
+
+```text
+report:
+sandbox / NOT_APPLIED_CONFIRMED_STOP /
+observed H0 -> H0 / write unknown / postverified false /
+request SHA-256とcandidate SHA-1がvalid
+
+preflight:
+job success / PREFLIGHT_PASSED /
+requestとcandidateがreport再導出値にexact一致 /
+observed_before H0 / write false / postverified false
+
+publish-sandbox:
+job failure / RESULT_UNKNOWN_STOP /
+CANDIDATE_TARGET_REF_FETCH /
+fixed kind + fixed hint /
+write false / result_uncertain false / postverified false
+```
+
+一つでも欠落・不一致ならnested object全体を捨て、
+conservative final receiptだけを維持する。
+診断はfinal outcome、write状態、retry、Issue close判断を変更しない。
+
+workflowはpublish-sandbox outputとreport envの間に、次の4値だけを追加した。
+
+```text
+failure_stage
+git_failure_kind
+git_stderr_hint
+result_uncertain
+```
+
+`continue-on-error`、failure専用step、自動retry、publish再実行は追加していない。
+permissions、concurrency、preflight gate、sandbox gate三条件、
+checkout action pin、publish-mainの静的`false`、report `always()`を維持した。
+
+local guardian testは既存72件と新規4 test definitionの合計76件が成功した。
+既存testのうち4件も、新診断のprocess kind、target-fetch-only scope、
+safe output、workflow exact forwardingを確認するよう強化した。
+
+```text
+python .github/cocolon_formal_publication_guard/test_guardian.py -v
+Ran 76 tests
+OK
+```
+
+exact changed paths:
+
+```text
+.github/workflows/cocolon_formal_publication_guard.yml
+.github/cocolon_formal_publication_guard/guardian.py
+.github/cocolon_formal_publication_guard/test_guardian.py
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/manifest.json
+```
+
+policy、request schema、`00`、`05`、work attitude、
+`android/app/libs/unityLibrary-debug.aar`、guardian `__pycache__`、
+mashos-apiは変更していない。
+
+このLOCAL_GREEN_ONLY authorityでは、commit / push / PR / Issue / Actions、
+branch / ref、main / production操作を実行していない。
+状態は`LOCAL_GREEN_NOT_REFLECTED`である。
+
+## 未確認
+
+- Issue #13の失われた失敗がnonzero、timeout、spawn OSError、
+  signal terminationのどれだったか。
+- Issue #13のstderrがどのfixed hintに該当したか。
+- 新しい4 outputがGitHub Actions上でfinal Issue receiptまで届くこと。
+- GitHub反映後のfresh pre-suite boundaryと5種類のsandbox試験。
+- post-suite boundary、production activation / canary。
+
+## 書かれていない
+
+Issue #13の既存log / receiptには、失われたraw stderr、return code、
+exception kindが書かれていない。後から復元せず、新分類を遡及付与しない。
+
+## 推測禁止
+
+Issue #13をReplacement 03、Actions token、GitHub service、runner、
+network、ref反映遅延、object transferのいずれかへ断定しない。
+
+## 華恋の意見
+
+番人が不明時にwriteを解放せず停止した安全判断は維持すべきである。
+今回必要だったのは安全条件の緩和ではなく、秘密情報を残さず、
+次回の一回で停止理由を固定分類へ狭められる証拠経路である。
+成功・競合・close契約へ診断を混ぜず、nested補助証拠として分離した。
+
+## 次の境界
+
+GitHub反映とfull post-fetchは別authority候補である。
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOSTIC_EVIDENCE_MAINTENANCE_GITHUB_REFLECTION_AND_POST_FETCH_ONLY
+```
+
+GitHub `main`が
+`44b61fcf3e6d5e61ca381b6247e9d35a4b56e0f4`のままで、
+そのverified direct childをexact 7 paths、一回のexact leaseで反映し、
+full post-fetchでremote head、parent exact1、tree、exact path set、
+全対象bytes / blob / raw SHA-256 / sizeが一致した場合だけ
+`REFLECTED_POST_FETCH_VERIFIED_FRESH_SANDBOX_SUITE_NOT_RUN`とする。
+失敗または結果不明なら`LOCAL_GREEN_NOT_REFLECTED_STOP`とする。
+
+この候補は未承認であり、Issue、Actions、試験ref、fresh suite再試行、
+production有効化、EmlisAI / Step 11を許可しない。

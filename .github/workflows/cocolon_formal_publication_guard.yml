@@ -70,6 +70,10 @@ jobs:
       candidate_sha1: ${{ steps.guard.outputs.candidate_sha1 }}
       observed_before: ${{ steps.guard.outputs.observed_before }}
       observed_after: ${{ steps.guard.outputs.observed_after }}
+      failure_stage: ${{ steps.guard.outputs.failure_stage }}
+      git_failure_kind: ${{ steps.guard.outputs.git_failure_kind }}
+      git_stderr_hint: ${{ steps.guard.outputs.git_stderr_hint }}
+      result_uncertain: ${{ steps.guard.outputs.result_uncertain }}
     steps:
       - name: Checkout trusted main revision
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -167,11 +171,15 @@ jobs:
           GUARDIAN_MAIN_REQUEST_SHA256: ${{ needs.publish-main.outputs.request_sha256 }}
           GUARDIAN_MAIN_WRITE_ATTEMPTED: ${{ needs.publish-main.outputs.write_attempted }}
           GUARDIAN_SANDBOX_CANDIDATE_SHA1: ${{ needs.publish-sandbox.outputs.candidate_sha1 }}
+          GUARDIAN_SANDBOX_FAILURE_STAGE: ${{ needs.publish-sandbox.outputs.failure_stage }}
+          GUARDIAN_SANDBOX_GIT_FAILURE_KIND: ${{ needs.publish-sandbox.outputs.git_failure_kind }}
+          GUARDIAN_SANDBOX_GIT_STDERR_HINT: ${{ needs.publish-sandbox.outputs.git_stderr_hint }}
           GUARDIAN_SANDBOX_JOB_RESULT: ${{ needs.publish-sandbox.result }}
           GUARDIAN_SANDBOX_OBSERVED_AFTER: ${{ needs.publish-sandbox.outputs.observed_after }}
           GUARDIAN_SANDBOX_OBSERVED_BEFORE: ${{ needs.publish-sandbox.outputs.observed_before }}
           GUARDIAN_SANDBOX_OUTCOME: ${{ needs.publish-sandbox.outputs.outcome }}
           GUARDIAN_SANDBOX_POSTVERIFIED: ${{ needs.publish-sandbox.outputs.postverified }}
           GUARDIAN_SANDBOX_REQUEST_SHA256: ${{ needs.publish-sandbox.outputs.request_sha256 }}
+          GUARDIAN_SANDBOX_RESULT_UNCERTAIN: ${{ needs.publish-sandbox.outputs.result_uncertain }}
           GUARDIAN_SANDBOX_WRITE_ATTEMPTED: ${{ needs.publish-sandbox.outputs.write_attempted }}
         run: python .github/cocolon_formal_publication_guard/guardian.py report

@@ -631,3 +631,115 @@ Issue #10 / #11のreport失敗を鍵問題へ読み替えず、Actions内Gitの�
 診断範囲を保つべきである。Replacement 03は旧report失敗の修正ではなく、
 番人自身のlocked pathをformal反映するためのbootstrap / maintenance
 transportである。通常成果物のActions routeと混同しない。
+
+# 2026-07-26 publish target fetch failure diagnostic evidence maintenance / local GREEN transport boundary
+
+## 確認済み
+
+authority:
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOSTIC_EVIDENCE_MAINTENANCE_IMPLEMENTATION_AND_LOCAL_GREEN_ONLY
+```
+
+設計:
+
+```text
+Cocolon_GitHub_Actions_Publication_Guardian_Publish_Target_Fetch_Failure_Diagnostic_Evidence_Maintenance_Design_ReadOnly_20260726.md
+
+UTF-8 SHA-256:
+30da6647b976b4e7930584c2f852fa2daf32ed3804e4f8c9cabc11d3fe748858
+```
+
+implementation predecessor / current GitHub main at work start:
+
+```text
+44b61fcf3e6d5e61ca381b6247e9d35a4b56e0f4
+```
+
+GitHub compareは上記commitと`main`を`identical`として返し、
+local checkoutと対象guardian / test / workflow blobも一致した。
+
+Issue #13 / run `30179774714`の
+`RESULT_UNKNOWN_STOP / CANDIDATE_TARGET_REF_FETCH`は、
+publish-sandbox job内でGitHub Actionsが発行した`GITHUB_TOKEN`を使う
+HTTPS Git経路のread-only candidate fetchで発生した。
+
+これはWork側のSSH maintenance routeと別経路である。
+Issue #13をReplacement 03の秘密鍵不良、公開鍵登録不良、
+SSH endpoint不良の証拠へ読み替えない。
+Issue #12 / #13とfresh suiteのstaging / target refsはrerun・改変・削除せず
+証拠として保持し、fresh suiteは`0 / 5 STOPPED`のままとする。
+
+今回のLOCAL_GREEN_ONLYでは、Replacement 03の秘密鍵探索、
+fingerprint照合、SSH認証、`ls-remote`、full fetch、receive-pack、
+lease、push、post-fetchを行っていない。
+Replacement 02 / 03の登録、変更、削除、再登録も行っていない。
+
+今回追加したfixed diagnosticはActions内target fetchのstderrを
+memory内で最大64 KiBだけ分類する。次をrepository、Issue、Actions output、
+receipt、前提資料へ残さない。
+
+```text
+raw stderr
+Git command
+remote URL
+ref / local path
+token / credential / private key
+exit / signal / errno / exception message
+stderr hash / length / timing
+```
+
+workflowへ追加したのはpublish-sandboxからreportへの次の固定値だけである。
+
+```text
+failure_stage
+git_failure_kind
+git_stderr_hint
+result_uncertain
+```
+
+Actions route、SSH route、remote URL、鍵管理、exact lease、
+write permit、retry policyを変更していない。
+local testは76件成功し、GitHub writeは0件である。
+
+## current transport境界
+
+このrevisionは`LOCAL_GREEN_NOT_REFLECTED`である。
+GitHub反映とfull post-fetchは、次の別authority候補が明示承認された場合だけ
+検討する。
+
+```text
+COCOLON_GITHUB_ACTIONS_PUBLICATION_GUARDIAN_PUBLISH_TARGET_FETCH_FAILURE_DIAGNOSTIC_EVIDENCE_MAINTENANCE_GITHUB_REFLECTION_AND_POST_FETCH_ONLY
+```
+
+そのsessionでは、過去sessionのReplacement 03認証成功を継承しない。
+`main`のexpected old、利用可能なcurrent transport、
+認証、full fetch、exact lease、post-fetchを再確認する。
+
+GitHub `main`が
+`44b61fcf3e6d5e61ca381b6247e9d35a4b56e0f4`と一致し、
+verified direct child / exact 7 paths / one exact lease / full post-fetchが
+全て成立した場合だけformal反映とする。
+
+失敗または結果不明ならGitHub refを追加操作せず、
+`LOCAL_GREEN_NOT_REFLECTED_STOP`で停止する。
+
+## 未確認
+
+- Issue #13のexact subprocess kindとstderr hint。
+- 新fixed outputのGitHub Actions上の到達性。
+- 次sessionでReplacement 03のlocal private counterpartが利用可能か。
+- reflection authority、fresh suite authority、cleanup authorityの承認。
+
+## 推測禁止
+
+Issue #13の失敗理由を鍵、network、GitHub service、runner、token、
+ref、object transferのいずれかへ断定しない。
+Replacement 03の再登録・削除・rotationを今回の結果から要求しない。
+
+## 華恋の意見
+
+通常成果物を保存するActions routeと、番人自身を保守反映するSSH routeを
+分離したまま維持する。今回の診断はActions route内の失敗証拠を狭めるための
+ものであり、鍵運用を通常成果物へ戻す変更ではない。

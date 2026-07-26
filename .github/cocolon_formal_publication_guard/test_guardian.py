@@ -527,6 +527,8 @@ class GitObjectTests(GuardianTestCase):
     def test_git_failure_stage_defaults_and_sanitization_are_preserved(self) -> None:
         secret = "transport-secret-sentinel"
         remote_url = "https://credential@example.invalid/repository.git"
+        secret_ref = "refs/heads/secret-ref-sentinel"
+        secret_local_path = "refs/cocolon-guardian/secret-path-sentinel"
         completed = subprocess.CompletedProcess(
             ["git"],
             128,
@@ -585,6 +587,156 @@ class GitObjectTests(GuardianTestCase):
             )
             self.assertNotIn(secret, receipt)
             self.assertNotIn(remote_url, receipt)
+            self.assertIsNone(caught.exception.git_failure)
+
+        target_cases = (
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    return_value=subprocess.CompletedProcess(
+                        ["git"],
+                        128,
+                        stdout=b"",
+                        stderr=b"authentication failed: " + secret.encode("ascii"),
+                    ),
+                ),
+                "NONZERO_EXIT",
+                "AUTH_OR_ACCESS_REJECTED",
+            ),
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    return_value=subprocess.CompletedProcess(
+                        ["git"],
+                        -9,
+                        stdout=b"",
+                        stderr=secret.encode("ascii"),
+                    ),
+                ),
+                "SIGNAL_TERMINATED",
+                "NOT_EVALUATED",
+            ),
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    side_effect=subprocess.TimeoutExpired(
+                        ["git"],
+                        1,
+                        stderr=secret.encode("ascii"),
+                    ),
+                ),
+                "TIMEOUT",
+                "NOT_EVALUATED",
+            ),
+            (
+                mock.patch.object(
+                    guardian.subprocess,
+                    "run",
+                    side_effect=OSError(13, secret),
+                ),
+                "SPAWN_OS_ERROR",
+                "NOT_EVALUATED",
+            ),
+        )
+        for patch, expected_kind, expected_hint in target_cases:
+            with self.subTest(expected_kind=expected_kind), patch:
+                with self.assertRaises(guardian.GuardianReject) as caught:
+                    guardian.git(
+                        [
+                            "fetch",
+                            remote_url,
+                            f"{secret_ref}:{secret_local_path}",
+                        ],
+                        failure_code="RESULT_UNKNOWN_STOP",
+                        failure_stage=guardian.TARGET_FETCH_FAILURE_STAGE,
+                    )
+            sanitized = guardian.sanitized_failure(caught.exception)
+            self.assertEqual(expected_kind, sanitized["git_failure_kind"])
+            self.assertEqual(expected_hint, sanitized["git_stderr_hint"])
+            self.assertEqual(
+                guardian.TARGET_FETCH_FAILURE_STAGE,
+                sanitized["stage"],
+            )
+            rendered = guardian.canonical_json_bytes(sanitized).decode("utf-8")
+            for forbidden in (
+                secret,
+                remote_url,
+                secret_ref,
+                secret_local_path,
+                "authentication failed",
+                "exit=",
+                "128",
+                "-9",
+                "13",
+                "TimeoutExpired",
+                "OSError",
+            ):
+                self.assertNotIn(forbidden, rendered)
+
+    def test_git_stderr_classifier_returns_only_fixed_allowlisted_hints(self) -> None:
+        cases = (
+            (
+                b"fatal: couldn't find remote ref refs/heads/missing",
+                "REMOTE_REF_MISSING_OR_MOVED",
+            ),
+            (
+                b"fatal: authentication failed for trusted endpoint",
+                "AUTH_OR_ACCESS_REJECTED",
+            ),
+            (
+                b"fatal: could not resolve host: trusted.invalid",
+                "NAME_RESOLUTION_FAILURE",
+            ),
+            (
+                b"fatal: network is unreachable",
+                "NETWORK_CONNECTION_FAILURE",
+            ),
+            (
+                b"fatal: ssl certificate problem",
+                "TLS_OR_HOST_IDENTITY_FAILURE",
+            ),
+            (
+                b"fatal: cannot lock ref refs/cocolon-guardian/example",
+                "LOCAL_REF_OR_IO_FAILURE",
+            ),
+            (
+                b"fatal: index-pack failed",
+                "OBJECT_TRANSFER_OR_INTEGRITY_FAILURE",
+            ),
+            (
+                b"error: rpc failed",
+                "REMOTE_SERVICE_OR_PROTOCOL_FAILURE",
+            ),
+            (b"", "UNCLASSIFIED_OR_AMBIGUOUS"),
+            (b"\xff\xfe\x00", "UNCLASSIFIED_OR_AMBIGUOUS"),
+            (b"unknown fixed-free failure", "UNCLASSIFIED_OR_AMBIGUOUS"),
+            (
+                b"couldn't find remote ref and failed to connect",
+                "UNCLASSIFIED_OR_AMBIGUOUS",
+            ),
+            (
+                b"x" * 65536 + b" authentication failed",
+                "UNCLASSIFIED_OR_AMBIGUOUS",
+            ),
+        )
+        for stderr, expected in cases:
+            with self.subTest(expected=expected):
+                observed = guardian.classify_git_stderr_hint(stderr)
+            self.assertEqual(expected, observed)
+            self.assertIn(observed, guardian.GIT_STDERR_HINTS)
+
+        secret = b"token-secret-sentinel"
+        observed = guardian.classify_git_stderr_hint(
+            b"authentication failed "
+            + secret
+            + b" https://credential@example.invalid/repository.git "
+            + b"refs/heads/private /tmp/private"
+        )
+        self.assertEqual("AUTH_OR_ACCESS_REJECTED", observed)
+        self.assertNotIn(secret.decode("ascii"), observed)
 
     def test_raw_diff_parser_accepts_exact_add(self) -> None:
         raw = (
@@ -778,6 +930,18 @@ class CandidateFailureLocalizationTests(GuardianTestCase):
             postverify.assert_not_called()
             sanitized = guardian.sanitized_failure(caught.exception)
             self.assertIs(sanitized["postverified"], False)
+            if expected_stage == guardian.TARGET_FETCH_FAILURE_STAGE:
+                self.assertEqual(
+                    "NONZERO_EXIT",
+                    sanitized["git_failure_kind"],
+                )
+                self.assertEqual(
+                    "UNCLASSIFIED_OR_AMBIGUOUS",
+                    sanitized["git_stderr_hint"],
+                )
+            else:
+                self.assertNotIn("git_failure_kind", sanitized)
+                self.assertNotIn("git_stderr_hint", sanitized)
             receipt = guardian.fixed_receipt(sanitized)
             self.assertNotIn(secret, receipt)
 
@@ -822,6 +986,64 @@ class CandidateFailureLocalizationTests(GuardianTestCase):
                 "target-ref-fetch",
             ],
         )
+
+        secret = "main-publish-output-secret-sentinel"
+        failure = guardian.GuardianReject(
+            "RESULT_UNKNOWN_STOP",
+            guardian.TARGET_FETCH_FAILURE_STAGE,
+            f"exit=128 {secret}",
+            git_failure=guardian.GitFailureDiagnostic(
+                "NONZERO_EXIT",
+                "UNCLASSIFIED_OR_AMBIGUOUS",
+            ),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            output_path = pathlib.Path(directory) / "github-output"
+            with (
+                mock.patch.dict(
+                    os.environ,
+                    {"GITHUB_OUTPUT": str(output_path)},
+                    clear=True,
+                ),
+                mock.patch.object(
+                    guardian,
+                    "run_guardian",
+                    side_effect=failure,
+                ),
+                mock.patch("builtins.print") as printer,
+            ):
+                exit_code = guardian.main(
+                    [
+                        "publish",
+                        "--event-path",
+                        "/tmp/guardian-test-event.json",
+                        "--expected-target-class",
+                        "sandbox",
+                    ]
+                )
+            rendered = output_path.read_text(encoding="utf-8")
+            printed = printer.call_args.args[0]
+        self.assertEqual(1, exit_code)
+        self.assertEqual(
+            1,
+            rendered.count(
+                f"failure_stage={guardian.TARGET_FETCH_FAILURE_STAGE}\n"
+            ),
+        )
+        self.assertEqual(
+            1,
+            rendered.count("git_failure_kind=NONZERO_EXIT\n"),
+        )
+        self.assertEqual(
+            1,
+            rendered.count(
+                "git_stderr_hint=UNCLASSIFIED_OR_AMBIGUOUS\n"
+            ),
+        )
+        self.assertEqual(1, rendered.count("result_uncertain=false\n"))
+        for forbidden in (secret, "exit=", "128"):
+            self.assertNotIn(forbidden, rendered)
+            self.assertNotIn(forbidden, printed)
 
 
 class ReconcileAndReportTests(GuardianTestCase):
@@ -1238,7 +1460,312 @@ class ReconcileAndReportTests(GuardianTestCase):
             self.assertEqual("DRIFT_AFTER_ATTEMPT_STOP", bound["outcome"])
             self.assertEqual("unknown", bound["write_attempted"])
 
+    def test_report_binds_fixed_target_fetch_failure_diagnostic(self) -> None:
+        result = {
+            "outcome": "NOT_APPLIED_CONFIRMED_STOP",
+            "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
+            "request_sha256": "a" * 64,
+            "candidate_sha1": "b" * 40,
+            "observed_before": "d" * 40,
+            "observed_after": "d" * 40,
+            "write_attempted": "unknown",
+            "postverified": False,
+        }
+        env = {
+            "GUARDIAN_PREFLIGHT_JOB_RESULT": "success",
+            "GUARDIAN_PREFLIGHT_OUTCOME": "PREFLIGHT_PASSED",
+            "GUARDIAN_PREFLIGHT_REQUEST_SHA256": "a" * 64,
+            "GUARDIAN_PREFLIGHT_CANDIDATE_SHA1": "b" * 40,
+            "GUARDIAN_PREFLIGHT_OBSERVED_BEFORE": "d" * 40,
+            "GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED": "false",
+            "GUARDIAN_PREFLIGHT_POSTVERIFIED": "false",
+            "GUARDIAN_SANDBOX_JOB_RESULT": "failure",
+            "GUARDIAN_SANDBOX_OUTCOME": "RESULT_UNKNOWN_STOP",
+            "GUARDIAN_SANDBOX_FAILURE_STAGE": (
+                guardian.TARGET_FETCH_FAILURE_STAGE
+            ),
+            "GUARDIAN_SANDBOX_GIT_FAILURE_KIND": "NONZERO_EXIT",
+            "GUARDIAN_SANDBOX_GIT_STDERR_HINT": (
+                "UNCLASSIFIED_OR_AMBIGUOUS"
+            ),
+            "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "false",
+            "GUARDIAN_SANDBOX_RESULT_UNCERTAIN": "false",
+            "GUARDIAN_SANDBOX_POSTVERIFIED": "false",
+        }
+        secret = "job-claim-secret-sentinel"
+        env["GUARDIAN_SANDBOX_RAW_STDERR"] = secret
+        with mock.patch.dict(os.environ, env, clear=True):
+            claim = guardian._job_claim("GUARDIAN_SANDBOX")
+            bound = guardian.bind_trusted_publish_failure_diagnostic(result)
+        self.assertEqual(
+            {
+                "job_result",
+                "outcome",
+                "request_sha256",
+                "candidate_sha1",
+                "write_attempted",
+                "postverified",
+                "observed_before",
+                "observed_after",
+                "failure_stage",
+                "git_failure_kind",
+                "git_stderr_hint",
+                "result_uncertain",
+            },
+            set(claim),
+        )
+        self.assertNotIn(
+            secret,
+            guardian.canonical_json_bytes(claim).decode("utf-8"),
+        )
+        self.assertEqual(result, {k: v for k, v in bound.items() if k != "publish_failure"})
+        self.assertEqual(
+            {
+                "job": "publish-sandbox",
+                "outcome": "RESULT_UNKNOWN_STOP",
+                "stage": guardian.TARGET_FETCH_FAILURE_STAGE,
+                "git_failure_kind": "NONZERO_EXIT",
+                "git_stderr_hint": "UNCLASSIFIED_OR_AMBIGUOUS",
+                "write_attempted": False,
+                "result_uncertain": False,
+                "postverified": False,
+            },
+            bound["publish_failure"],
+        )
+        receipt = guardian.fixed_receipt(bound)
+        self.assertIn('"publish_failure":{', receipt)
+        self.assertIn('"git_failure_kind":"NONZERO_EXIT"', receipt)
+        self.assertIn(
+            '"git_stderr_hint":"UNCLASSIFIED_OR_AMBIGUOUS"',
+            receipt,
+        )
+        self.assertEqual("NOT_APPLIED_CONFIRMED_STOP", bound["outcome"])
+        self.assertEqual("unknown", bound["write_attempted"])
+        self.assertIs(bound["postverified"], False)
+
+    def test_report_rejects_unbound_or_malformed_failure_diagnostic(self) -> None:
+        base_result = {
+            "outcome": "NOT_APPLIED_CONFIRMED_STOP",
+            "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
+            "request_sha256": "a" * 64,
+            "candidate_sha1": "b" * 40,
+            "observed_before": "d" * 40,
+            "observed_after": "d" * 40,
+            "write_attempted": "unknown",
+            "postverified": False,
+        }
+        base_env = {
+            "GUARDIAN_PREFLIGHT_JOB_RESULT": "success",
+            "GUARDIAN_PREFLIGHT_OUTCOME": "PREFLIGHT_PASSED",
+            "GUARDIAN_PREFLIGHT_REQUEST_SHA256": "a" * 64,
+            "GUARDIAN_PREFLIGHT_CANDIDATE_SHA1": "b" * 40,
+            "GUARDIAN_PREFLIGHT_OBSERVED_BEFORE": "d" * 40,
+            "GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED": "false",
+            "GUARDIAN_PREFLIGHT_POSTVERIFIED": "false",
+            "GUARDIAN_SANDBOX_JOB_RESULT": "failure",
+            "GUARDIAN_SANDBOX_OUTCOME": "RESULT_UNKNOWN_STOP",
+            "GUARDIAN_SANDBOX_FAILURE_STAGE": (
+                guardian.TARGET_FETCH_FAILURE_STAGE
+            ),
+            "GUARDIAN_SANDBOX_GIT_FAILURE_KIND": "NONZERO_EXIT",
+            "GUARDIAN_SANDBOX_GIT_STDERR_HINT": (
+                "UNCLASSIFIED_OR_AMBIGUOUS"
+            ),
+            "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "false",
+            "GUARDIAN_SANDBOX_RESULT_UNCERTAIN": "false",
+            "GUARDIAN_SANDBOX_POSTVERIFIED": "false",
+        }
+        missing = object()
+        cases = (
+            ("report target", {"target_class": "production"}, {}),
+            ("report outcome", {"outcome": "RESULT_UNKNOWN_STOP"}, {}),
+            ("report expected", {"expected_old_sha1": "z" * 40}, {}),
+            ("report before", {"observed_before": "c" * 40}, {}),
+            ("report after", {"observed_after": "c" * 40}, {}),
+            ("report write", {"write_attempted": False}, {}),
+            ("report postverify", {"postverified": True}, {}),
+            ("report request", {"request_sha256": "A" * 64}, {}),
+            ("report candidate", {"candidate_sha1": "z" * 40}, {}),
+            (
+                "preflight result",
+                {},
+                {"GUARDIAN_PREFLIGHT_JOB_RESULT": "failure"},
+            ),
+            (
+                "preflight outcome",
+                {},
+                {"GUARDIAN_PREFLIGHT_OUTCOME": "RESULT_UNKNOWN_STOP"},
+            ),
+            (
+                "preflight request",
+                {},
+                {"GUARDIAN_PREFLIGHT_REQUEST_SHA256": "c" * 64},
+            ),
+            (
+                "preflight candidate",
+                {},
+                {"GUARDIAN_PREFLIGHT_CANDIDATE_SHA1": "c" * 40},
+            ),
+            (
+                "preflight write",
+                {},
+                {"GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED": "true"},
+            ),
+            (
+                "preflight postverify",
+                {},
+                {"GUARDIAN_PREFLIGHT_POSTVERIFIED": "true"},
+            ),
+            (
+                "preflight observed",
+                {},
+                {"GUARDIAN_PREFLIGHT_OBSERVED_BEFORE": "c" * 40},
+            ),
+            (
+                "publish result",
+                {},
+                {"GUARDIAN_SANDBOX_JOB_RESULT": "success"},
+            ),
+            (
+                "publish outcome",
+                {},
+                {"GUARDIAN_SANDBOX_OUTCOME": "PREFLIGHT_PASSED"},
+            ),
+            (
+                "publish stage",
+                {},
+                {"GUARDIAN_SANDBOX_FAILURE_STAGE": "CANDIDATE"},
+            ),
+            (
+                "publish kind",
+                {},
+                {"GUARDIAN_SANDBOX_GIT_FAILURE_KIND": "UNKNOWN_KIND"},
+            ),
+            (
+                "publish hint",
+                {},
+                {"GUARDIAN_SANDBOX_GIT_STDERR_HINT": "raw secret"},
+            ),
+            (
+                "publish nonzero unevaluated mismatch",
+                {},
+                {"GUARDIAN_SANDBOX_GIT_STDERR_HINT": "NOT_EVALUATED"},
+            ),
+            (
+                "publish timeout classified mismatch",
+                {},
+                {
+                    "GUARDIAN_SANDBOX_GIT_FAILURE_KIND": "TIMEOUT",
+                    "GUARDIAN_SANDBOX_GIT_STDERR_HINT": (
+                        "NAME_RESOLUTION_FAILURE"
+                    ),
+                },
+            ),
+            (
+                "publish write",
+                {},
+                {"GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "true"},
+            ),
+            (
+                "publish uncertain",
+                {},
+                {"GUARDIAN_SANDBOX_RESULT_UNCERTAIN": "true"},
+            ),
+            (
+                "publish postverify",
+                {},
+                {"GUARDIAN_SANDBOX_POSTVERIFIED": "true"},
+            ),
+            (
+                "missing publish hint",
+                {},
+                {"GUARDIAN_SANDBOX_GIT_STDERR_HINT": missing},
+            ),
+        )
+        for label, result_updates, env_updates in cases:
+            result = copy.deepcopy(base_result)
+            result.update(result_updates)
+            env = dict(base_env)
+            for key, value in env_updates.items():
+                if value is missing:
+                    env.pop(key, None)
+                else:
+                    env[key] = value
+            with (
+                self.subTest(label=label),
+                mock.patch.dict(os.environ, env, clear=True),
+            ):
+                bound = guardian.bind_trusted_publish_failure_diagnostic(result)
+                self.assertNotIn("publish_failure", bound)
+
+        valid_failure = {
+            "job": "publish-sandbox",
+            "outcome": "RESULT_UNKNOWN_STOP",
+            "stage": guardian.TARGET_FETCH_FAILURE_STAGE,
+            "git_failure_kind": "NONZERO_EXIT",
+            "git_stderr_hint": "UNCLASSIFIED_OR_AMBIGUOUS",
+            "write_attempted": False,
+            "result_uncertain": False,
+            "postverified": False,
+        }
+        preexisting = copy.deepcopy(base_result)
+        preexisting["publish_failure"] = dict(valid_failure)
+        mismatched_env = dict(base_env)
+        mismatched_env["GUARDIAN_SANDBOX_JOB_RESULT"] = "success"
+        with mock.patch.dict(os.environ, mismatched_env, clear=True):
+            rebound = guardian.bind_trusted_publish_failure_diagnostic(
+                preexisting
+            )
+        self.assertNotIn("publish_failure", rebound)
+
+        secret = "raw-secret-sentinel"
+        malformed = []
+        extra = dict(valid_failure)
+        extra["raw_stderr"] = secret
+        malformed.append(extra)
+        for key, value in (
+            ("job", secret),
+            ("outcome", secret),
+            ("stage", secret),
+            ("git_failure_kind", secret),
+            ("git_failure_kind", ["NONZERO_EXIT"]),
+            ("git_stderr_hint", secret),
+            ("git_stderr_hint", ["NOT_EVALUATED"]),
+            ("git_stderr_hint", "NOT_EVALUATED"),
+            ("write_attempted", 0),
+            ("result_uncertain", None),
+            ("postverified", True),
+        ):
+            candidate = dict(valid_failure)
+            candidate[key] = value
+            malformed.append(candidate)
+        malformed.append([valid_failure])
+        for candidate in malformed:
+            with self.subTest(candidate=candidate):
+                receipt = guardian.fixed_receipt(
+                    {
+                        "outcome": "NOT_APPLIED_CONFIRMED_STOP",
+                        "publish_failure": candidate,
+                    }
+                )
+                self.assertNotIn('"publish_failure"', receipt)
+                self.assertNotIn(secret, receipt)
+
+        with self.assertRaises(ValueError):
+            guardian.GitFailureDiagnostic(
+                kind=secret,
+                stderr_hint="NOT_EVALUATED",
+            )
+        with self.assertRaises(ValueError):
+            guardian.GitFailureDiagnostic(
+                kind="TIMEOUT",
+                stderr_hint="NAME_RESOLUTION_FAILURE",
+            )
+
     def test_write_outputs_exports_observation_pair(self) -> None:
+        unsafe_output_secret = "unsafe-output-extra-sentinel"
         with tempfile.TemporaryDirectory() as directory:
             output_path = pathlib.Path(directory) / "github-output"
             with (
@@ -1247,18 +1774,157 @@ class ReconcileAndReportTests(GuardianTestCase):
                     {"GITHUB_OUTPUT": str(output_path)},
                     clear=True,
                 ),
-                mock.patch("builtins.print"),
+                mock.patch("builtins.print") as printer,
             ):
                 guardian._write_outputs(
                     {
-                        "outcome": "APPLIED_AND_POSTVERIFIED",
+                        "outcome": "RESULT_UNKNOWN_STOP",
                         "observed_before": "a" * 40,
                         "observed_after": "b" * 40,
+                        "stage": guardian.TARGET_FETCH_FAILURE_STAGE,
+                        "git_failure_kind": "NONZERO_EXIT",
+                        "git_stderr_hint": "NAME_RESOLUTION_FAILURE",
+                        "result_uncertain": False,
+                        "raw_stderr": unsafe_output_secret,
+                        "command": ["git", unsafe_output_secret],
+                        "remote_url": unsafe_output_secret,
+                        "local_path": unsafe_output_secret,
+                        "token": unsafe_output_secret,
+                        "matched_marker": unsafe_output_secret,
+                        "stderr_sha256": unsafe_output_secret,
+                        "stderr_length": 999,
+                        "exit_code": 128,
+                        "signal": 9,
+                        "errno": 13,
+                        "exception_message": unsafe_output_secret,
                     }
                 )
             rendered = output_path.read_text(encoding="utf-8")
+            printed = printer.call_args.args[0]
         self.assertIn(f"observed_before={'a' * 40}\n", rendered)
         self.assertIn(f"observed_after={'b' * 40}\n", rendered)
+        self.assertIn(
+            f"failure_stage={guardian.TARGET_FETCH_FAILURE_STAGE}\n",
+            rendered,
+        )
+        self.assertIn("git_failure_kind=NONZERO_EXIT\n", rendered)
+        self.assertIn(
+            "git_stderr_hint=NAME_RESOLUTION_FAILURE\n",
+            rendered,
+        )
+        self.assertIn("result_uncertain=false\n", rendered)
+        for forbidden in (
+            unsafe_output_secret,
+            "raw_stderr",
+            "command",
+            "remote_url",
+            "local_path",
+            "token",
+            "matched_marker",
+            "stderr_sha256",
+            "stderr_length",
+            "exit_code",
+            '"signal"',
+            '"errno"',
+            "exception_message",
+        ):
+            self.assertNotIn(forbidden, rendered)
+            self.assertNotIn(forbidden, printed)
+
+        secret = "invalid-diagnostic-secret-sentinel"
+        invalid_diagnostics = (
+            {
+                "stage": secret,
+                "git_failure_kind": "NONZERO_EXIT",
+                "git_stderr_hint": "NAME_RESOLUTION_FAILURE",
+                "result_uncertain": False,
+            },
+            {
+                "stage": guardian.TARGET_FETCH_FAILURE_STAGE,
+                "git_failure_kind": secret,
+                "git_stderr_hint": "NAME_RESOLUTION_FAILURE",
+                "result_uncertain": False,
+            },
+            {
+                "stage": guardian.TARGET_FETCH_FAILURE_STAGE,
+                "git_failure_kind": "NONZERO_EXIT",
+                "git_stderr_hint": secret,
+                "result_uncertain": False,
+            },
+            {
+                "stage": guardian.TARGET_FETCH_FAILURE_STAGE,
+                "git_failure_kind": "NONZERO_EXIT",
+                "git_stderr_hint": "NAME_RESOLUTION_FAILURE",
+                "result_uncertain": "invalid-result-uncertain-sentinel",
+            },
+        )
+        for invalid in invalid_diagnostics:
+            with self.subTest(invalid=invalid):
+                with tempfile.TemporaryDirectory() as directory:
+                    output_path = pathlib.Path(directory) / "github-output"
+                    with (
+                        mock.patch.dict(
+                            os.environ,
+                            {"GITHUB_OUTPUT": str(output_path)},
+                            clear=True,
+                        ),
+                        mock.patch("builtins.print") as printer,
+                    ):
+                        guardian._write_outputs(
+                            {
+                                "outcome": "RESULT_UNKNOWN_STOP",
+                                **invalid,
+                            }
+                        )
+                    rendered = output_path.read_text(encoding="utf-8")
+                    printed = printer.call_args.args[0]
+                valid_diagnostic = (
+                    invalid["stage"]
+                    == guardian.TARGET_FETCH_FAILURE_STAGE
+                    and guardian._is_valid_git_failure_values(
+                        invalid["git_failure_kind"],
+                        invalid["git_stderr_hint"],
+                    )
+                )
+                expected_stage = (
+                    guardian.TARGET_FETCH_FAILURE_STAGE
+                    if valid_diagnostic
+                    else ""
+                )
+                expected_kind = (
+                    invalid["git_failure_kind"]
+                    if valid_diagnostic
+                    else ""
+                )
+                expected_hint = (
+                    invalid["git_stderr_hint"]
+                    if valid_diagnostic
+                    else ""
+                )
+                self.assertIn(
+                    f"failure_stage={expected_stage}\n",
+                    rendered,
+                )
+                self.assertIn(
+                    f"git_failure_kind={expected_kind}\n",
+                    rendered,
+                )
+                self.assertIn(
+                    f"git_stderr_hint={expected_hint}\n",
+                    rendered,
+                )
+                expected_uncertain = (
+                    "result_uncertain=\n"
+                    if type(invalid["result_uncertain"]) is not bool
+                    else "result_uncertain=false\n"
+                )
+                self.assertIn(expected_uncertain, rendered)
+                for forbidden in (
+                    secret,
+                    "invalid-result-uncertain-sentinel",
+                ):
+                    self.assertNotIn(forbidden, rendered)
+                    self.assertNotIn(forbidden, printed)
 
     def test_workflow_forwards_observation_pair_from_each_job(self) -> None:
         workflow_path = (
@@ -1282,6 +1948,193 @@ class ReconcileAndReportTests(GuardianTestCase):
         for prefix in ("PREFLIGHT", "MAIN", "SANDBOX"):
             self.assertIn(f"GUARDIAN_{prefix}_OBSERVED_BEFORE:", workflow)
             self.assertIn(f"GUARDIAN_{prefix}_OBSERVED_AFTER:", workflow)
+
+        preflight_job = workflow.split("  preflight:", 1)[1].split(
+            "\n  publish-sandbox:",
+            1,
+        )[0]
+        sandbox_job = workflow.split("  publish-sandbox:", 1)[1].split(
+            "\n  publish-main:",
+            1,
+        )[0]
+        main_job = workflow.split("  publish-main:", 1)[1].split(
+            "\n  report:",
+            1,
+        )[0]
+        report_job = workflow.split("  report:", 1)[1]
+        sandbox_outputs = sandbox_job.split("    outputs:\n", 1)[1].split(
+            "\n    steps:",
+            1,
+        )[0]
+        sandbox_output_lines = [
+            line
+            for line in sandbox_outputs.splitlines()
+            if line.startswith("      ")
+        ]
+        sandbox_output_keys = {
+            line.strip().split(":", 1)[0]
+            for line in sandbox_output_lines
+        }
+        self.assertEqual(
+            len(sandbox_output_lines),
+            len(sandbox_output_keys),
+        )
+        self.assertEqual(
+            {
+                "outcome",
+                "postverified",
+                "write_attempted",
+                "request_sha256",
+                "candidate_sha1",
+                "observed_before",
+                "observed_after",
+                "failure_stage",
+                "git_failure_kind",
+                "git_stderr_hint",
+                "result_uncertain",
+            },
+            sandbox_output_keys,
+        )
+        report_env = report_job.split(
+            "      - name: Reconcile and report\n",
+            1,
+        )[1].split("        env:\n", 1)[1].split("\n        run:", 1)[0]
+        report_env_lines = [
+            line
+            for line in report_env.splitlines()
+            if line.startswith("          ")
+        ]
+        report_env_keys = {
+            line.strip().split(":", 1)[0]
+            for line in report_env_lines
+        }
+        self.assertEqual(len(report_env_lines), len(report_env_keys))
+        self.assertEqual(
+            {
+                "GH_TOKEN",
+                "GUARDIAN_EVENT_PATH",
+                "GUARDIAN_PREFLIGHT_CANDIDATE_SHA1",
+                "GUARDIAN_PREFLIGHT_JOB_RESULT",
+                "GUARDIAN_PREFLIGHT_OBSERVED_AFTER",
+                "GUARDIAN_PREFLIGHT_OBSERVED_BEFORE",
+                "GUARDIAN_PREFLIGHT_OUTCOME",
+                "GUARDIAN_PREFLIGHT_POSTVERIFIED",
+                "GUARDIAN_PREFLIGHT_REQUEST_SHA256",
+                "GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED",
+                "GUARDIAN_MAIN_CANDIDATE_SHA1",
+                "GUARDIAN_MAIN_JOB_RESULT",
+                "GUARDIAN_MAIN_OBSERVED_AFTER",
+                "GUARDIAN_MAIN_OBSERVED_BEFORE",
+                "GUARDIAN_MAIN_OUTCOME",
+                "GUARDIAN_MAIN_POSTVERIFIED",
+                "GUARDIAN_MAIN_REQUEST_SHA256",
+                "GUARDIAN_MAIN_WRITE_ATTEMPTED",
+                "GUARDIAN_SANDBOX_CANDIDATE_SHA1",
+                "GUARDIAN_SANDBOX_FAILURE_STAGE",
+                "GUARDIAN_SANDBOX_GIT_FAILURE_KIND",
+                "GUARDIAN_SANDBOX_GIT_STDERR_HINT",
+                "GUARDIAN_SANDBOX_JOB_RESULT",
+                "GUARDIAN_SANDBOX_OBSERVED_AFTER",
+                "GUARDIAN_SANDBOX_OBSERVED_BEFORE",
+                "GUARDIAN_SANDBOX_OUTCOME",
+                "GUARDIAN_SANDBOX_POSTVERIFIED",
+                "GUARDIAN_SANDBOX_REQUEST_SHA256",
+                "GUARDIAN_SANDBOX_RESULT_UNCERTAIN",
+                "GUARDIAN_SANDBOX_WRITE_ATTEMPTED",
+            },
+            report_env_keys,
+        )
+        forwarding = (
+            ("failure_stage", "FAILURE_STAGE"),
+            ("git_failure_kind", "GIT_FAILURE_KIND"),
+            ("git_stderr_hint", "GIT_STDERR_HINT"),
+            ("result_uncertain", "RESULT_UNCERTAIN"),
+        )
+        for output_name, env_name in forwarding:
+            output_forwarding = (
+                f"{output_name}: "
+                f"${{{{ steps.guard.outputs.{output_name} }}}}"
+            )
+            self.assertEqual(1, sandbox_job.count(output_forwarding))
+            self.assertNotIn(
+                output_forwarding,
+                preflight_job,
+            )
+            self.assertNotIn(
+                output_forwarding,
+                main_job,
+            )
+            report_forwarding = (
+                f"GUARDIAN_SANDBOX_{env_name}: "
+                f"${{{{ needs.publish-sandbox.outputs.{output_name} }}}}"
+            )
+            self.assertEqual(1, report_job.count(report_forwarding))
+        self.assertEqual(
+            ["if: ${{ false }}"],
+            [
+                line.strip()
+                for line in main_job.splitlines()
+                if line.startswith("    if:")
+            ],
+        )
+        self.assertEqual(
+            ["if: >-"],
+            [
+                line.strip()
+                for line in report_job.splitlines()
+                if line.startswith("    if:")
+            ],
+        )
+        report_if_block = report_job.split("    if: >-\n", 1)[1].split(
+            "\n    runs-on:",
+            1,
+        )[0]
+        self.assertIn("always() &&", report_if_block)
+        report_needs = report_job.split("    needs:\n", 1)[1].split(
+            "\n    if:",
+            1,
+        )[0]
+        self.assertEqual(
+            ["- preflight", "- publish-sandbox", "- publish-main"],
+            [line.strip() for line in report_needs.splitlines()],
+        )
+        self.assertIn(
+            "GUARDIAN_SANDBOX_JOB_RESULT: "
+            "${{ needs.publish-sandbox.result }}",
+            report_job,
+        )
+        self.assertNotIn("continue-on-error", workflow)
+        self.assertNotIn("if: failure()", workflow)
+        self.assertNotIn("retry", workflow.lower())
+        self.assertEqual(
+            [
+                "- name: Checkout trusted main revision",
+                "- name: Publish sandbox with exact lease",
+            ],
+            [
+                line.strip()
+                for line in sandbox_job.splitlines()
+                if line.startswith("      - ")
+            ],
+        )
+        self.assertEqual(
+            1,
+            sandbox_job.count(
+                "python .github/cocolon_formal_publication_guard/guardian.py publish"
+            ),
+        )
+        self.assertEqual(
+            1,
+            main_job.count(
+                "python .github/cocolon_formal_publication_guard/guardian.py publish"
+            ),
+        )
+        self.assertEqual(
+            2,
+            workflow.count(
+                "python .github/cocolon_formal_publication_guard/guardian.py publish"
+            ),
+        )
 
     def test_unknown_preflight_cannot_unlock_publish_jobs(self) -> None:
         with (
@@ -1446,6 +2299,94 @@ class ReconcileAndReportTests(GuardianTestCase):
         reported = report.call_args.args[1]
         self.assertEqual("a" * 40, reported["production_main_observed_before"])
         self.assertEqual("a" * 40, reported["production_main_observed_after"])
+
+    def test_report_main_records_bound_failure_without_changing_final_state(
+        self,
+    ) -> None:
+        secret = "report-secret-sentinel"
+        result = {
+            "outcome": "NOT_APPLIED_CONFIRMED_STOP",
+            "target_class": "sandbox",
+            "expected_old_sha1": "d" * 40,
+            "request_sha256": "a" * 64,
+            "candidate_sha1": "b" * 40,
+            "observed_before": "d" * 40,
+            "observed_after": "d" * 40,
+            "write_attempted": "unknown",
+            "postverified": False,
+            "raw_stderr": secret,
+        }
+        event = {"issue": {"number": 13}}
+        env = {
+            "GH_TOKEN": "test-token",
+            "GITHUB_REPOSITORY": "MassyuRed/Cocolon",
+            "GITHUB_RUN_ID": "30179774714",
+            "GITHUB_RUN_ATTEMPT": "1",
+            "GUARDIAN_PREFLIGHT_JOB_RESULT": "success",
+            "GUARDIAN_PREFLIGHT_OUTCOME": "PREFLIGHT_PASSED",
+            "GUARDIAN_PREFLIGHT_REQUEST_SHA256": "a" * 64,
+            "GUARDIAN_PREFLIGHT_CANDIDATE_SHA1": "b" * 40,
+            "GUARDIAN_PREFLIGHT_OBSERVED_BEFORE": "d" * 40,
+            "GUARDIAN_PREFLIGHT_WRITE_ATTEMPTED": "false",
+            "GUARDIAN_PREFLIGHT_POSTVERIFIED": "false",
+            "GUARDIAN_SANDBOX_JOB_RESULT": "failure",
+            "GUARDIAN_SANDBOX_OUTCOME": "RESULT_UNKNOWN_STOP",
+            "GUARDIAN_SANDBOX_FAILURE_STAGE": (
+                guardian.TARGET_FETCH_FAILURE_STAGE
+            ),
+            "GUARDIAN_SANDBOX_GIT_FAILURE_KIND": "NONZERO_EXIT",
+            "GUARDIAN_SANDBOX_GIT_STDERR_HINT": (
+                "UNCLASSIFIED_OR_AMBIGUOUS"
+            ),
+            "GUARDIAN_SANDBOX_WRITE_ATTEMPTED": "false",
+            "GUARDIAN_SANDBOX_RESULT_UNCERTAIN": "false",
+            "GUARDIAN_SANDBOX_POSTVERIFIED": "false",
+            "GUARDIAN_SANDBOX_RAW_STDERR": secret,
+        }
+        api_calls = []
+
+        def api(method, url, token, payload):
+            api_calls.append((method, url, token, payload))
+
+        with (
+            mock.patch.dict(os.environ, env, clear=True),
+            mock.patch.object(
+                guardian,
+                "remote_ref_sha",
+                side_effect=["c" * 40, "c" * 40],
+            ),
+            mock.patch.object(guardian, "run_guardian", return_value=result),
+            mock.patch.object(guardian, "load_event", return_value=event),
+            mock.patch.object(guardian, "_github_api", side_effect=api),
+            mock.patch.object(guardian, "_write_outputs") as write_outputs,
+        ):
+            exit_code = guardian.main(
+                [
+                    "report",
+                    "--event-path",
+                    "/tmp/guardian-test-event.json",
+                    "--policy-path",
+                    str(self.policy_path),
+                ]
+            )
+        self.assertEqual(0, exit_code)
+        self.assertEqual(["POST", "PATCH"], [call[0] for call in api_calls])
+        body = api_calls[0][3]["body"]
+        self.assertIn('"outcome":"NOT_APPLIED_CONFIRMED_STOP"', body)
+        self.assertIn('"publish_failure":{', body)
+        self.assertIn('"stage":"CANDIDATE_TARGET_REF_FETCH"', body)
+        self.assertIn('"git_failure_kind":"NONZERO_EXIT"', body)
+        self.assertNotIn(secret, body)
+        reported = write_outputs.call_args.args[0]
+        self.assertEqual("NOT_APPLIED_CONFIRMED_STOP", reported["outcome"])
+        self.assertEqual("unknown", reported["write_attempted"])
+        self.assertIs(reported["postverified"], False)
+        self.assertEqual("c" * 40, reported["production_main_observed_before"])
+        self.assertEqual("c" * 40, reported["production_main_observed_after"])
+        self.assertEqual(
+            guardian.TARGET_FETCH_FAILURE_STAGE,
+            reported["publish_failure"]["stage"],
+        )
 
     def test_production_main_observation_normalizes_missing_or_failed_read(
         self,
