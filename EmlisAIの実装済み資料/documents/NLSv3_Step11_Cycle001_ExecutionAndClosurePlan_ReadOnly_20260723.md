@@ -5144,3 +5144,132 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_SOURCE_BASELINE_AND_STEP0_10_COMPLETION
 
 It is not approved. Separate explicit approval is required. Do not progress
 automatically.
+
+## 12.43 2026-07-26 Recovery Epoch002 formal P1 pre-event1 completion-owner-graph nonconformance STOP
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_SOURCE_BASELINE_AND_STEP0_10_COMPLETION_RECEIPT_GENERATION_AND_VERIFICATION_ONLY
+```
+
+Karen fixed current entry before any irreversible P1 publication or formal
+attempt:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+972f3b46ffbb0ec439cbc5e5b43d43587959a3a9
+
+mashos-api:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+mashos-api tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+```
+
+A fresh locked runtime was rematerialized from dependency-lock raw SHA-256
+`9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787`
+and the exact46 locked wheel set. It contained exact46 verified
+distributions. On the clean current mashos-api commit/tree, the corrected
+frozen D1/D2 denominator revalidated as:
+
+```text
+46 passed / 0 failed / 0 error
+```
+
+This was targeted exact46, not formal exact134 or broad regression.
+
+Pre-event1 owner-graph admission found a structural success-path
+nonconformance. Current Epoch002 source implements source-baseline,
+preflight/readiness, reservation, formal worker, terminal result, and generic
+exact-one-path publication boundaries, but has no Epoch002-specific
+production owner plus independent verifier for:
+
+```text
+accepted exact134 success receipt
+Step00..10 completion receipts exact11
+all11 completion chain
+success sequence event2
+atomic success publication
+```
+
+Epoch001 implementations are hard-coded to
+`NLS_V3_CYCLE001_RECOVERY_EPOCH_001`, `nls_v3_rc_0034`, and Epoch001
+schemas/paths. The Epoch002 parent design forbids inheriting Epoch001 event,
+run, Step-completion, all11, event2, or acceptance credit. They cannot be
+renamed or used as substitute owners.
+
+The corrected D1 exact9-path / exact12-role oracle also contains these
+success-issuance roles by exact0. D2 exact46 GREEN therefore did not exercise
+or close this later boundary.
+
+Because this gap was known before event1, Karen did not allocate a candidate,
+publish event1, publish readiness, consume a reservation, claim an attempt,
+run exact134, or create a terminal result. Hand-authored substitute receipts
+were not issued.
+
+Fixed result:
+
+```text
+STATUS:
+PRE_EVENT1_EPOCH002_COMPLETION_PUBLICATION_OWNER_GRAPH_NONCONFORMANCE_AUTHORITY_STOP
+
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D2_IMPLEMENTED_TARGETED_GREEN_P1_PRE_EVENT1_STOP
+
+RECOVERY_EPOCH002_CANDIDATE_VERSION:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+SOURCE_BASELINE:
+UNLOCKED
+
+EVENT1 / READINESS / RESERVATION / ATTEMPT / TERMINAL:
+NOT_CREATED / NOT_PUBLISHED / 0 / 0 / NOT_CREATED
+
+FORMAL_EXACT134:
+NOT_RUN / INVOCATION_COUNT_0
+
+SUCCESSFUL_STEP0_10_COMPLETION_RECEIPT_COUNT:
+0
+
+ALL11 / EVENT2:
+NOT_CREATED / NOT_CREATED
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+The result, body-free receipt, handoff, this plan append, and
+`07_latest_snapshot_diff.md` append form the exact5 documentation reflection.
+No mashos-api source/test/fixture/sample/lock change and no private-body
+publication occurred. The retired/disabled guardian was not used.
+
+The D2 owner/configuration topology is not yet reflected in structural premise
+files `01`, `02`, `02C`, and `05`. That earlier documentation debt is not
+mixed into this verification-only authority and requires separate explicit
+scope.
+
+Karen's exactly one proposed next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_STEP0_10_COMPLETION_RECEIPT_ALL11_EVENT2_OWNER_GRAPH_AND_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+If separately approved, it permits read-only reconciliation of Epoch002
+accepted / Step00..10 / all11 / event2 owner, independent-verifier, lineage,
+path, hash, and atomic publication contracts. It does not authorize
+source/test changes, causal RED, implementation/GREEN, event1, readiness,
+reservation, exact134, P2, fresh batch, exact100, Product Read, correction,
+B6, or Cycle001 acceptance. Separate explicit approval is required. Do not
+progress automatically.
