@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-07-25",
+  "revision_date": "2026-07-26",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -16103,5 +16103,72 @@
     "11_cocolon_github_transport_and_session_continuity.md",
     "12_cocolon_github_actions_publication_guard.md",
     "manifest.json"
+  ],
+  "actual_environment_first_and_guardian_retirement_2026_07_26": {
+    "authority": "COCOLON_ACTUAL_ENVIRONMENT_FIRST_RULE_AND_GUARDIAN_RETIREMENT_IMPLEMENTATION_AND_GITHUB_REFLECTION_ONLY",
+    "decision_owner": "Mash",
+    "Cocolon_H0": "5ff22c0c830b4a1f1c1c89049f2e6a1f822e292b",
+    "result_commit": "resolve_from_github_revision_containing_this_checkpoint",
+    "actual_environment_first_required": true,
+    "actual_environment": {
+      "project_owner": "Mash",
+      "code_and_write_decision_owner": "Karen",
+      "subagent_role": "read_only_assistance_when_materially_useful",
+      "repository_visibility": "private",
+      "github_write_requires_explicit_mash_approval": true
+    },
+    "general_practice_candidate_only": true,
+    "universal_minimum_safety_preserved": [
+      "no_secret_disclosure",
+      "approved_scope_only",
+      "no_force_history_rewrite",
+      "user_data_protection",
+      "postverification",
+      "no_automatic_retry_when_result_unknown"
+    ],
+    "guardian_state": "RETIRED_DISABLED",
+    "guardian_workflow_state_before": "CONNECTOR_METADATA_READ_UNAVAILABLE",
+    "guardian_workflow_state": "disabled_manually",
+    "guardian_workflow_state_confirmation": "github_repository_ui_before_reflection",
+    "guardian_production_activated": false,
+    "guardian_production_canary_run": false,
+    "guardian_fresh_suite_completed": false,
+    "guardian_fresh_suite_final": "3/5 STOPPED",
+    "guardian_unreflected_overlay": "ABANDONED_NOT_TO_BE_REFLECTED",
+    "guardian_execution_route_reused": false,
+    "guardian_minimum_safety_principles_retained": true,
+    "guardian_reactivation_requires_new_mash_authority": true,
+    "historical_issues_runs_branches_refs": "PRESERVED_NOT_RERUN_NOT_REUSED",
+    "retired_request_issues": [
+      10,
+      11
+    ],
+    "d2_started": false,
+    "d2_approved": false,
+    "automatic_progression": false,
+    "exact_changed_paths": [
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md",
+      "Cocolon_前提資料/manifest.json",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json"
+    ]
+  },
+  "latest_modified_premise_files_2026_07_26_actual_environment_first_and_guardian_retirement": [
+    "00_karen_read_first.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "11_cocolon_github_transport_and_session_continuity.md",
+    "12_cocolon_github_actions_publication_guard.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/00_read_first.txt",
+    "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+    "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+    "work_attitude_rules_for_karen/manifest.json"
   ]
 }
