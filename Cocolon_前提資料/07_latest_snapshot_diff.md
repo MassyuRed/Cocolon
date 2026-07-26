@@ -21197,3 +21197,147 @@ body-free receipt logical SHA-256:
 ```text
 f85639fdd37052caa3012ddae4c43f5bbb731521291509db26145d43b7cf6afe
 ```
+
+# 2026-07-26 current authority: Recovery Epoch002 post-D2 successor Parent Addendum design freeze
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_ADDENDUM_DESIGN_READ_ONLY
+```
+
+## 確認した事実
+
+固定entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+2c3fc3d3b29365b073ee228c0ac536d4ffc3cffc
+
+mashos-api:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+mashos-api tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+
+historical D2 final closure:
+2d15d58d7bbdd2dab91f526486dcaf29a05c7326ec3944a91fc04757c1d73fbe
+```
+
+historical D2は公開済みtargeted GREENとしてimmutableである。candidate /
+Event1 / readiness / reservation / attempt / exact134 / terminal / accepted /
+Step00..10 / all11 / manifest / Event2は全て0である。
+
+現行sourceにはEpoch002 success-owner graphが揃っておらず、terminalもStep
+完了に必要なexact134 per-node evidenceを持たない。現connectorは将来formal
+publicationのtrue expected-old/full-tree契約を単体では証明せず、transient
+scratchはdurable write-once terminal storeを単体では証明しない。
+
+Parent Addendumは旧D2を変更せず、その後に次を追加する。
+
+```text
+successor causal RED exact64
+-> implementation + targeted exact110 GREEN
+-> successor source closure exact20
+-> successor completion receipt exact13
+-> operational admission exact20
+-> distinct candidate v2 / Event1 v2
+```
+
+将来の成功graphは、production exact10、role exact15/path exact12、
+independent-negative adapter exact11、terminal v2 exact32/outcome exact134、
+accepted exact17、Step receipt exact20 × exact11、all11 exact21、manifest
+exact15 keys、Event2、parent exact9 phase/external port exact7を持つ。
+
+success terminalはsuccess bundle外のexact1 commit `T`で先に
+publish/postverifyする。accepted1 + Step11 + all11 1 + manifest1 + Event2 1
+= exact15をdirect-child commit `S`でatomic publishする。
+
+このauthorityでは次を一切実行していない。
+
+```text
+mashos-api変更:
+0
+
+test / RED / GREEN / exact134:
+0 / 0 / 0 / 0
+
+candidate / Event1 / readiness / reservation / attempt:
+0 / 0 / 0 / 0 / 0
+
+terminal / accepted / Step00..10 / all11 / manifest / Event2:
+0 / 0 / 0 / 0 / 0 / 0
+
+private body / Product Read / Guardian:
+0 / 0 / 0
+```
+
+## 推測
+
+不可逆なP1 identityがまだ無いため、旧D2を履歴として保存するadditive
+successorでRecovery Epoch002を継続できる。これはsuccessor、capability、
+Event1、formal、success publicationの全gateが閉じることを条件とする。
+
+## 華恋の意見
+
+旧D2を再開封するより、旧D2後かつcandidate前にadditive successorを置く方が
+履歴を壊さず正直である。one-shot formal runのStep evidenceは後から再構成
+せず、terminal v2へ実行時に保存すべきである。Git transportとdurable store
+はP1前のadmission gateとして扱う。
+
+## 現在地
+
+```text
+CURRENT_AUTHORITY_RESULT:
+RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_PARENT_ADDENDUM_DESIGN_FROZEN_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+POST_D2_SUCCESSOR_CLOSURE_NOT_IMPLEMENTED_PRE_EVENT1_AUTHORITY_STOP
+
+HISTORICAL_D2:
+IMMUTABLE_TARGETED_GREEN_RETAINED
+
+POST_D2_SUCCESSOR:
+DESIGNED_NOT_IMPLEMENTED
+
+SOURCE_BASELINE / CANDIDATE:
+UNLOCKED / UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+EVENT1 / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0
+
+TERMINAL / ACCEPTED / STEP / ALL11 / MANIFEST / EVENT2:
+0 / 0 / 0 / 0 / 0 / 0
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+華恋が提案するexactly one next logical candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_REMEDIATION_RED_FREEZE_ONLY
+```
+
+未承認。別の明示承認が必要であり、自動進行しない。現時点でMashの準備作業は
+ない。
+
+Parent Addendum raw SHA-256:
+
+```text
+10ecd8dfb549c514c0fca2f9bd7c0bde225feb5eabc1100a13375187c6ef7300
+```
+
+body-free receipt logical SHA-256:
+
+```text
+913058df480e113f949185d874ed48ddfddb21b36773c5ec5d77771aba3873ac
+```

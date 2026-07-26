@@ -5404,3 +5404,137 @@ Body-free receipt logical SHA-256:
 ```text
 f85639fdd37052caa3012ddae4c43f5bbb731521291509db26145d43b7cf6afe
 ```
+
+## 12.45 2026-07-26 Recovery Epoch002 post-D2 successor Parent Addendum design freeze
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_ADDENDUM_DESIGN_READ_ONLY
+```
+
+Karen performed read-only reconciliation against Karen-Diary
+`700f749f5149cac1f8bd4bab8a364d524a56985b`, Cocolon
+`2c3fc3d3b29365b073ee228c0ac536d4ffc3cffc`, mashos-api
+`5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74` / tree
+`b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7`, the Revised Cycle Detailed
+Design, roadmap, current Plan, historical Epoch001 success contracts,
+Recovery Epoch002 Parent Design, D1/D2 artifacts, and current source owner
+graph.
+
+Confirmed history:
+
+```text
+historical D2:
+immutable targeted GREEN
+
+D2 final closure:
+2d15d58d7bbdd2dab91f526486dcaf29a05c7326ec3944a91fc04757c1d73fbe
+
+candidate / Event1 / reservation / attempt / exact134:
+0 / 0 / 0 / 0 / 0
+
+terminal / accepted / Step00..10 / all11 / manifest / Event2:
+0 / 0 / 0 / 0 / 0 / 0
+```
+
+The Addendum prospectively supersedes only the old future-eligibility edge:
+
+```text
+historical D2
+-> Parent Addendum
+-> causal RED exact64
+-> implementation + historical46/successor64 targeted exact110 GREEN
+-> successor source closure exact20
+-> successor completion receipt exact13 publication/postverification
+-> fresh operational-admission exact20 publication/postverification
+-> distinct candidate v2 inside successor Event1 v2
+-> Event1 publication/postverification
+```
+
+It does not edit, reopen, or reissue D2.
+
+The frozen future success graph includes production exact10, exact15 roles
+over exact12 paths, existing exact11 negative evidence adapters, terminal v2
+exact32 with exact134 outcome rows, accepted exact17, Step00..10 exact11
+receipts each exact20, all11 exact21, atomic manifest exact15 keys, Event2
+v2, and a parent continuation with exact9 phases / exact7 external ports.
+
+The successful terminal is published/postverified in exact1 commit `T`
+outside the success bundle. Accepted exact1 + Step exact11 + all11 exact1 +
+manifest exact1 + Event2 exact1 form exact15 in one direct-child commit `S`,
+using candidate identities before publication and external identities only
+after complete postfetch.
+
+P1 must first prove fresh expected-old Git transaction capability and a
+durable write-once recovery store. The current connector and transient
+scratch do not themselves prove those formal capabilities. This exact5
+documentation reflection is explicitly not capability inheritance.
+
+Fixed result:
+
+```text
+CURRENT_AUTHORITY_RESULT:
+RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_PARENT_ADDENDUM_DESIGN_FROZEN_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+POST_D2_SUCCESSOR_CLOSURE_NOT_IMPLEMENTED_PRE_EVENT1_AUTHORITY_STOP
+
+HISTORICAL_D2:
+IMMUTABLE_TARGETED_GREEN_RETAINED
+
+POST_D2_SUCCESSOR:
+DESIGNED_NOT_IMPLEMENTED
+
+SOURCE_BASELINE:
+UNLOCKED
+
+CANDIDATE:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034
+
+OPERATIONAL_ADMISSION:
+NOT_CREATED / NOT_PUBLISHED
+
+EVENT1 / READINESS / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0 / 0
+
+TERMINAL / ACCEPTED / STEP00..10 / ALL11 / MANIFEST / EVENT2:
+0 / 0 / 0 / 0 / 0 / 0
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+No mashos-api source/test/schema/fixture/sample/config/lock change, test
+execution, formal attempt, private body, Product Read, or Guardian use
+occurred. The Parent Addendum, body-free receipt, Handoff, this Plan append,
+and latest-snapshot append form the exact5 documentation reflection.
+
+Karen's exactly one proposed next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_REMEDIATION_RED_FREEZE_ONLY
+```
+
+If separately approved, it may create/run only the exact64 successor causal
+RED surface and freeze its concrete mutation/closed-code oracle. It may not
+implement production owners, allocate a candidate, publish Event1, reserve
+or run exact134, publish terminal/exact15, start P2, or accept Cycle001.
+Do not progress automatically.
+
+Parent Addendum raw SHA-256:
+
+```text
+10ecd8dfb549c514c0fca2f9bd7c0bde225feb5eabc1100a13375187c6ef7300
+```
+
+Body-free receipt logical SHA-256:
+
+```text
+913058df480e113f949185d874ed48ddfddb21b36773c5ec5d77771aba3873ac
+```
