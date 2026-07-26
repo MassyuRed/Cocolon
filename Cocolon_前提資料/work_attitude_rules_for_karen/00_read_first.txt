@@ -125,3 +125,15 @@ Cocolon作業では、原則として次の5区分を使う。
 次に実行すべきこと:
 
 この5区分を使えないほど事実確認が不足している場合は、作業判断を出してはいけません。
+
+# 2026-07-26 current actual environment最優先
+
+- Cocolonの設計判断は、一般的なアプリ制作環境ではなく、current actual environmentを最上位前提にする。
+- future actor / future scale / general best practiceをcurrent requirementへ自動昇格させない。
+- 新しいsubsystemは、actual risk、既存対策後の残余risk、最小代替、構築費、継続保守費、中止条件を説明できる場合だけ採用する。
+- 同一目的・同一scope内の局所修正は一つの承認で進め、小さいfailureごとに停止しない。
+- 選択した仕組み自体がCocolon完成を妨げ始めた場合、完成まで続けずsafe disableとretirementを選ぶ。
+- actual environment優先を、秘密情報保護、承認scope、no force rewrite等の最低限の安全境界を外す理由にしない。
+
+比例性判断とsystem中止条件は`03_forbidden_insufficient_premise_and_actual_file_check.txt`、
+同一作業packageの継続条件は`09_work_start_checklist.txt`を正本とする。
