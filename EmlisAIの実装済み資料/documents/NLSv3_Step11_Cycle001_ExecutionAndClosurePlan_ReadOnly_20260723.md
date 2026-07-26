@@ -5273,3 +5273,134 @@ source/test changes, causal RED, implementation/GREEN, event1, readiness,
 reservation, exact134, P2, fresh batch, exact100, Product Read, correction,
 B6, or Cycle001 acceptance. Separate explicit approval is required. Do not
 progress automatically.
+
+## 12.44 2026-07-26 Recovery Epoch002 success-owner / atomic-publication reconciliation parent-contract conflict STOP
+
+Mash approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_STEP0_10_COMPLETION_RECEIPT_ALL11_EVENT2_OWNER_GRAPH_AND_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+Karen performed read-only reconciliation against Karen-Diary
+`700f749f5149cac1f8bd4bab8a364d524a56985b`, Cocolon
+`dc80508b7fabec619775e0171377e6e02b80da2c`, mashos-api
+`5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74` / tree
+`b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7`, the current tracked Plan,
+the Revised Cycle Detailed Design, roadmap, Epoch001 success contract, and
+the Recovery Epoch002 Parent Design.
+
+Confirmed historical structure and reconciled non-operative draft:
+
+```text
+successful terminal publication/postverification:
+prerequisite outside success bundle
+
+accepted exact1
++ Step00..10 exact11
++ all11 exact1
++ manifest exact1
++ event2 exact1
+= atomic success exact15
+```
+
+The initial publication lane requires success commit `S` to be the direct
+child of terminal publication commit `T`, all exact15 paths absent at `T`,
+one target tree, one commit, one exact expected-old `T -> S` lease, and full
+postfetch of head, parent, tree, changed exact15, all artifact hashes and
+lineages, and all unchanged paths. Co-published artifacts use candidate
+identities without publication commit; external identities are formed only
+after postfetch.
+
+The current source does not have the required Epoch002 accepted, Step,
+all11, event2, exact15, terminal-postverification, or independent-verifier
+owner graph. The terminal result also lacks all per-node evidence needed for
+current Step issuance. The connected GitHub ref-update operation has no
+expected-old SHA parameter, and this workspace has no `gh` executable or
+other proved exact-lease transport.
+
+The governing parent creates a harder conflict. It fixes:
+
+```text
+D2 final closure
+-> candidate allocation
+-> event1 bound to exact D2 source/test/runner/schema/dependency closure
+```
+
+The immutable D2 receipt records final closure
+`2d15d58d7bbdd2dab91f526486dcaf29a05c7326ec3944a91fc04757c1d73fbe`.
+Implementing the missing success owner graph necessarily changes at least
+source, tests, schema, formal-parent, and closure. Whether runner/evidence is
+extended or independently rederived remains a design choice. Reopening D2
+would rewrite history; binding event1 to the old D2 would bind a source known
+to lack the success closure.
+
+The approved authority is read-only contract reconciliation and does not
+authorize Parent Design amendment. Karen therefore records the success
+contract as:
+
+```text
+DRAFT_RECONCILED_NOT_FROZEN_PARENT_ADDENDUM_REQUIRED
+```
+
+and fixes:
+
+```text
+CURRENT_AUTHORITY_RESULT:
+PARENT_ADDENDUM_REQUIRED_BEFORE_SUCCESS_OWNER_GRAPH_DESIGN_FREEZE_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+PRE_EVENT1_EPOCH002_COMPLETION_PUBLICATION_OWNER_GRAPH_NONCONFORMANCE_AUTHORITY_STOP
+
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D2_IMPLEMENTED_TARGETED_GREEN_P1_PRE_EVENT1_STOP
+
+CANDIDATE / SOURCE_BASELINE:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034 / UNLOCKED
+
+EVENT1 / READINESS / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0 / 0
+
+TERMINAL / ACCEPTED / STEP00..10 / ALL11 / EVENT2:
+0 / 0 / 0 / 0 / 0
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+No mashos-api source/test/schema/fixture/sample/lock change and no test,
+formal attempt, private body, or guardian use occurred. The Result, body-free
+receipt, Handoff, this Plan append, and `07_latest_snapshot_diff.md` append
+form the exact5 documentation reflection.
+
+Because no candidate, event1, reservation, or formal attempt has been
+consumed, Karen recommends an additive parent amendment instead of immediate
+Epoch002 invalidation. The current D2 remains immutable historical targeted
+GREEN, followed by a new success-owner contract / causal RED /
+implementation-GREEN / combined-final-closure gate before candidate
+allocation.
+
+Karen's exactly one proposed next separate-approval candidate is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_ADDENDUM_DESIGN_READ_ONLY
+```
+
+If separately approved, it permits read-only Parent Design amendment only.
+It does not authorize source/test change, RED/GREEN execution, candidate
+allocation, event1, reservation, exact134, P2, Product Read, correction, B6,
+or Cycle001 acceptance. Do not progress automatically.
+
+Body-free receipt logical SHA-256:
+
+```text
+f85639fdd37052caa3012ddae4c43f5bbb731521291509db26145d43b7cf6afe
+```

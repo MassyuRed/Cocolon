@@ -21046,3 +21046,154 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_
 ```
 
 未承認。別の明示承認が必要であり、自動進行しない。
+
+# 2026-07-26 current authority: Recovery Epoch002 success-owner / atomic-publication reconciliation parent-contract conflict STOP
+
+## Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_ACCEPTED_TEST_RUN_EXACT134_SUCCESS_AND_STEP0_10_COMPLETION_RECEIPT_ALL11_EVENT2_OWNER_GRAPH_AND_ATOMIC_PUBLICATION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+## 確認した事実
+
+固定entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+dc80508b7fabec619775e0171377e6e02b80da2c
+
+mashos-api:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+mashos-api tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+
+D2 final closure:
+2d15d58d7bbdd2dab91f526486dcaf29a05c7326ec3944a91fc04757c1d73fbe
+```
+
+履歴上の成功構造から照合した、未凍結・非operativeのbundle草案は次の
+exact15である。
+
+```text
+accepted exact1
++ Step00..10 exact11
++ all11 exact1
++ manifest exact1
++ event2 exact1
+= exact15
+```
+
+成功terminalはexact15外の先行artifactであり、公開・独立postverify済みの
+external identityをacceptedがbindする。exact15はterminal commitのdirect
+child、single tree、single commit、exact expected-old lease、full postfetchで
+一括公開する。同一commit内参照はpublication commitを持たないcandidate
+identityを使い、self-referenceを作らない。
+
+現行mashos-apiにはEpoch002固有のaccepted / Step00..10 / all11 / event2 /
+exact15 publisher / terminal postverifier / independent success verifierがない。
+現terminal resultもStep receiptに必要なper-node source、evidence、negative
+proofのexpected/actual closed codeを全て保持しない。
+
+現GitHub connectorのref updateにはexpected-old SHA引数がなく、workspaceに
+`gh`もない。将来のexact15についてtrue lease capabilityは未証明である。
+
+現Parent DesignはD2 final closureの直後にcandidateを割り当て、event1をexact
+D2 source/test/runner/schema/dependency closureへbindすると固定する。一方、
+missing success owner graphの実装は少なくともsource/test/schema/formal-parent
+とclosureを変更する。runner/evidenceを拡張するか、frozen evidenceから独立
+再導出するかは未凍結のdesign choiceである。公開済みD2 receiptを再開封または
+上書きできない。
+
+このauthorityでは次を一切実行していない。
+
+```text
+mashos-api変更:
+0
+
+test:
+0
+
+candidate / event1 / readiness / reservation / attempt:
+0 / 0 / 0 / 0 / 0
+
+formal exact134:
+NOT_RUN / INVOCATION_COUNT_0
+
+terminal / accepted / Step00..10 / all11 / event2:
+0 / 0 / 0 / 0 / 0
+
+private body / guardian:
+0 / 0
+```
+
+## 推測
+
+成功ownerを旧D2の後へ実装しても、現parentのevent1は旧D2 closureへbindする
+ため、新ownerを含むsource identityと一致しない。旧D2の中へ実装を遡及混入
+するとimmutable historyを書き換える。どちらも現契約では正当化できない。
+
+candidate、event1、reservation、attemptが全て0なので、Epoch002を直ちに
+invalidateするより、旧D2を履歴として保存したadditive Parent Addendumを
+先に設計する余地がある。
+
+## 華恋の意見
+
+成功契約の草案は照合できたが、現parent順序のまま`DESIGN_FROZEN`とは扱わない。
+旧D2の後かつcandidate割当前へ、success-owner contract / causal RED /
+implementation-GREEN / combined final closureを明示的に追加するParent
+Addendumが必要である。
+
+## 現在地
+
+```text
+CURRENT_AUTHORITY_RESULT:
+PARENT_ADDENDUM_REQUIRED_BEFORE_SUCCESS_OWNER_GRAPH_DESIGN_FREEZE_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+PRE_EVENT1_EPOCH002_COMPLETION_PUBLICATION_OWNER_GRAPH_NONCONFORMANCE_AUTHORITY_STOP
+
+DESIGN:
+DRAFT_RECONCILED_NOT_FROZEN_PARENT_ADDENDUM_REQUIRED
+
+RECOVERY_EPOCH001:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002:
+D2_IMPLEMENTED_TARGETED_GREEN_P1_PRE_EVENT1_STOP
+
+CANDIDATE / SOURCE_BASELINE:
+UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034 / UNLOCKED
+
+EVENT1 / READINESS / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0 / 0
+
+TERMINAL / ACCEPTED / STEP00..10 / ALL11 / EVENT2:
+0 / 0 / 0 / 0 / 0
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+```
+
+華恋が提案するexactly one next logical candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_ADDENDUM_DESIGN_READ_ONLY
+```
+
+未承認。別の明示承認が必要であり、自動進行しない。
+
+body-free receipt logical SHA-256:
+
+```text
+f85639fdd37052caa3012ddae4c43f5bbb731521291509db26145d43b7cf6afe
+```
