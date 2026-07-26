@@ -1,0 +1,135 @@
+{
+  "artifact_issuance": {
+    "bootstrap_readiness_artifact_count": 0,
+    "candidate_allocation_count": 0,
+    "formal_attempt_count": 0,
+    "formal_reservation_count": 0,
+    "formal_terminal_artifact_count": 0,
+    "private_body_artifact_count": 0,
+    "sequence_event1_count": 0
+  },
+  "authority": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_RED_FREEZE_ONLY",
+  "body_free": true,
+  "broad_regression_run": false,
+  "entry": {
+    "cocolon_commit_sha1": "64f27c5c12acc6704f8973de7c4139808c10cee4",
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "mashos_api_commit_sha1": "e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd",
+    "mashos_api_tree_sha1": "1c8970e91dbc793fcb3b81b51c73291f0326a565",
+    "related_entry_drift": false
+  },
+  "formal_exact134_run": false,
+  "frozen_repair_boundary": {
+    "bootstrap_manifest_key_count": 31,
+    "candidate_allocation_key_count": 8,
+    "conftest_plugin_mode": "DISABLED_BY_NOCONFTEST",
+    "d2_final_closure_preimage_key_count": 10,
+    "diagnostic_key_count": 22,
+    "event1_key_count": 23,
+    "external_artifact_identity_key_count": 10,
+    "formal_checkpoint_key_count": 23,
+    "formal_plugin_allowlist": [],
+    "formal_pytest_options": [
+      "-q",
+      "--disable-warnings",
+      "--noconftest",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "formal_stage_count": 13,
+    "future_owner_and_config_path_count": 9,
+    "future_role_count": 12,
+    "installer_identity_class": "PIP_REQUIRE_HASHES_WHEEL_LOCK_V1",
+    "p0_external_identity_key_count": 6,
+    "preflight_checkpoint_key_count": 18,
+    "prior_reservation_row_key_count": 5,
+    "protected_current_path_count": 14,
+    "published_event1_identity_key_count": 18,
+    "readiness_key_count": 30,
+    "reservation_key_count": 25,
+    "source_closure_key_count": 15,
+    "success_lineage_key_count": 8,
+    "terminal_result_key_count": 28,
+    "unknown_disposition_key_count": 13
+  },
+  "mashos_api_red_freeze": {
+    "ahead_by": 1,
+    "base_commit_sha1": "e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd",
+    "behind_by": 0,
+    "changed_path_count": 1,
+    "commit_sha1": "8b2b05809867ae53ba2fc3e525e99eea5e92f390",
+    "files": [
+      {
+        "change": "ADDED",
+        "git_blob_sha1": "8badf41f78a0f853e13cc0824d2dcd7be734ad6d",
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch002_retry_lineage_and_formal_worker_bootstrap_reconciliation_red.py",
+        "raw_file_sha256": "619605e3520bec66062d7903d8e495c3e413a8e367b78de49bd824c78f777358"
+      }
+    ],
+    "force_ref_update": false,
+    "parent_commit_sha1": "e4917fd7380cdf9b8a29c8ad1c9d045d162f56fd",
+    "production_source_change_count": 0,
+    "repository_full_name": "MassyuRed/mashos-api",
+    "total_commits": 1,
+    "tree_sha1": "1a154bbbd23c152e6c16ba73a262a0a5af5563aa"
+  },
+  "next_separate_approval_candidate": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_RESERVATION_RETRY_LINEAGE_AND_FORMAL_WORKER_BOOTSTRAP_COMPLETENESS_RECONCILIATION_IMPLEMENTATION_AND_GREEN_ONLY",
+  "next_separate_approval_candidate_state": "NOT_APPROVED_SEPARATE_EXPLICIT_APPROVAL_REQUIRED",
+  "parent_design_identity": {
+    "git_blob_sha1": "af00c5c4a49207fb94108afbf383ea0e830620ae",
+    "p0_external_identity_sha256": "0b5f4b0e3c3c023867a858782869c570e5a55c27cb72d8db108c309408581ce0",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AttemptConsumptionUnknownPostReservationRetryLineageAndFormalWorkerBootstrapNonconformance_EpochInvalidationAndRecoveryEpoch002_ParentDesign_ReadOnly_20260725.md",
+    "raw_file_sha256": "8b6564442d69fea1b38cb59ea3c5302874e6f92f87bfd5ce0728985094739829"
+  },
+  "receipt_sha256": "e62467023472bb828b6d345106be0602d66117315898d56ee09c20aed102c672",
+  "receipt_sha256_preimage_rule": "SHA256 of UTF-8 compact sorted-key JSON with trailing LF after deleting receipt_sha256",
+  "recorded_on_jst": "2026-07-26",
+  "result_evidence": {
+    "cocolon_commit_sha1": "1680ff7b7424aa2fdfba5b1168e22e92eac52538",
+    "git_blob_sha1": "868ab6429b8b8419226ba3d50e494f7a74cc1f95",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostReservationRetryLineageAndFormalWorkerBootstrapCompletenessReconciliation_RED_Freeze_Result_20260726.md",
+    "raw_file_sha256": "a28762615f0c272739634f5562b44450796b888bf6d46f738611be6e881e5281"
+  },
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch002.retry_lineage_and_formal_worker_bootstrap_red_freeze_receipt.v1",
+  "state": {
+    "automatic_progression": false,
+    "cycle001": "NOT_ACCEPTED",
+    "d2": "NOT_STARTED_NOT_APPROVED",
+    "g2": "CAUSAL_RED_FROZEN",
+    "p2": "NOT_AUTHORIZED",
+    "recovery_epoch001": "EPOCH_INVALIDATED",
+    "recovery_epoch002": "D1_CAUSAL_RED_FROZEN",
+    "recovery_epoch002_candidate_version": "UNALLOCATED_DISTINCT_FROM_NLS_V3_RC_0034",
+    "source_baseline": "UNLOCKED"
+  },
+  "subagent_audit": {
+    "final_residual_red_spec_blocker_count": 0,
+    "read_only_subagent_total_count": 2,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "subagent_source_edit_count": 0,
+    "subagent_test_run_count": 0,
+    "top_level_audit_lane_count": 2
+  },
+  "test_freeze": {
+    "bootstrap_matrix_count": 24,
+    "causal_failed_count": 42,
+    "collection_error_count": 0,
+    "exact_collected_test_count": 46,
+    "lineage_matrix_count": 18,
+    "matrix_failure_cause": "RECOVERY_EPOCH002_OWNER_PATH_NOT_IMPLEMENTED",
+    "passed_current_fact_and_boundary_count": 4,
+    "production_source_change_count": 0,
+    "state": "CAUSAL_RED",
+    "test_changed_path_count": 1,
+    "unexpected_error_or_failure_count": 0,
+    "warning_count": 0
+  },
+  "transport": {
+    "cocolon_entry_head_rechecked_before_first_write": true,
+    "cocolon_result_direct_child_postverified": true,
+    "cocolon_result_postfetch_bytes_verified": true,
+    "mashos_api_force_ref_update": false,
+    "mashos_api_postfetch_bytes_verified": true
+  }
+}
