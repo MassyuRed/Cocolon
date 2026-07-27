@@ -3120,13 +3120,16 @@ file-level current deltaは`eai720_diff.csv`です。GitHub compare 235 pathの�
 
 | owner | fixed rule |
 |---|---|
+| `11_cocolon_github_transport_and_session_continuity.md` | GitHub反映方法と完了判定の唯一のcurrent正本 |
 | `07_latest_snapshot_diff.md` | 作業完了ごとの小さいcurrent authority更新 |
-| `work_attitude_rules_for_karen/00_read_first.txt` | current authority / structure-on-change / milestone audit / GitHub-first delivery |
-| `work_attitude_rules_for_karen/08_artifact_delivery_rules.txt` | GitHub成功時ZIPなし、GitHub transport不能時だけ変更file限定ZIP |
-| `work_attitude_rules_for_karen/09_work_start_checklist.txt` | write前後確認と前提資料更新check |
-| `work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt` | drift / conflictをZIPで迂回しない停止境界 |
+| `work_attitude_rules_for_karen/00_read_first.txt` | current authority / actual environment / GitHub contract必読 |
+| `work_attitude_rules_for_karen/08_artifact_delivery_rules.txt` | GitHub成功時ZIPなし、実反映不能時だけ変更file限定ZIP |
+| `work_attitude_rules_for_karen/09_work_start_checklist.txt` | current contractに沿うwrite前後check |
+| `work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt` | target conflict / actual failure / unknown / no permission / unapproved or irreversible operationだけの停止境界 |
 
-# 2026-07-25 差分追記: GitHub transport / session continuity owner
+# HISTORICAL_NON_NORMATIVE: 2026-07-25 GitHub transport / session continuity
+
+この節のdeploy key、SSH、fingerprint、full fetch、exact leaseは当時の履歴であり、current GitHub反映条件または停止条件ではない。
 
 | owner | responsibility |
 |---|---|
@@ -3146,11 +3149,11 @@ Karen-DiaryはCocolon transport前提の正本ではありません。秘密情�
 | `work_attitude_rules_for_karen/00_read_first.txt` | 詳細説明をCocolon作業の絶対ruleとして必読化 |
 | `work_attitude_rules_for_karen/09_work_start_checklist.txt` | Mash様へ依頼を出す直前の説明完全性check |
 | `work_attitude_rules_for_karen/99_integrated_paste_each_time.txt` | 毎回読む統合ruleへ同じ境界を固定 |
-| `11_cocolon_github_transport_and_session_continuity.md` | local private counterpart消失時のGitHub Deploy keys画面操作と、登録後に華恋が引き取るtransport確認・反映手順 |
+| `11_cocolon_github_transport_and_session_continuity.md` | GitHub反映の唯一のcurrent契約。実際のwrite権限不足が確認された場合だけ、必要な権限回復説明の参照先にもなる |
 
 専門用語だけ、複数案だけ、または「ファイルパスを教えてください」だけの依頼は不十分です。Mash様が追加質問なしで安全に完了できる画面操作単位まで説明します。
 
-# 2026-07-25 差分追記: GitHub Actions publication guardian rule index
+# HISTORICAL_NON_NORMATIVE: 2026-07-25 GitHub Actions publication guardian rule index
 
 | owner / rule | responsibility |
 |---|---|
@@ -3163,10 +3166,7 @@ Karen-DiaryはCocolon transport前提の正本ではありません。秘密情�
 | `11_cocolon_github_transport_and_session_continuity.md` | migration中のactive SSH exact lease、Replacement 02、maintenance / fallback route |
 | `07_latest_snapshot_diff.md` | installed disabled state、未確認、次checkpoint、D1非開始のcurrent authority |
 
-bootstrapの読取順は`07 → 12 → 11`です。Actions番人が
-`POSTVERIFIED_ACTIVE`になるまでは、`11`のSSH exact leaseをactive routeとして
-読みます。番人自身、workflow、policy、schema、test、owner `12`は通常番人から
-変更できないlocked pathで、Replacement 02 maintenance authorityへ戻します。
+この節全体はGuardian構築当時の履歴である。Guardianは`RETIRED_DISABLED`であり、`11`の旧SSH exact lease、Guardian workflow、Issue-driven publication、sandbox publicationをcurrent routeとして読まない。
 
 ## rc0031 current gate
 
@@ -3193,3 +3193,24 @@ work attitude owner:
 
 過去のguardian owner参照、Issue、run、branch、refはhistorical evidenceとして
 保持し、current routeとして再利用しません。
+
+
+## 2026-07-27 current GitHub reflection contract index
+
+- 唯一のcurrent正本:
+  `11_cocolon_github_transport_and_session_continuity.md`の
+  `CURRENT_NORMATIVE_CONTRACT`。
+- 作業者:
+  華恋だけ。Mash様が承認したscopeだけを書く。
+- 方法:
+  現在利用できるGitHub機能。特定鍵・transport・command・single commitを必須にしない。
+- pre/post:
+  current latest、approved exact path、target conflict、target bytes、今回のwrite commit群のchanged path、latestへの全成果物包含を確認する。
+- stop:
+  target conflict、actual write failure、unknown result、actual no permission、unapproved path requirement、delete/history rewrite/unapproved irreversible operationだけ。
+- priority:
+  過去・後続の設計、test、receipt、planは条件を厳しくできない。
+- change authority:
+  Mash様が変更条文と変更後内容を別作業として明示承認した場合だけ。
+
+旧transport条件だけで失敗するactive testは、作業停止理由ではなくtest不具合とする。
