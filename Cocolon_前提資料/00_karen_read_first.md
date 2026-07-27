@@ -7663,7 +7663,7 @@ Mash様へ作業を求める場合のprimary ownerは、`work_attitude_rules_for
 
 複数の技術案だけを並べてMash様へ選択責任を戻しません。華恋が安全性と作業量を比較して最も簡単な推奨手順を一つ選び、`reprovision`、`lease`、`fingerprint`、`expected-old SHA`等は平易な画面操作へ翻訳します。
 
-Cocolonのlocal private counterpart消失時の具体的なGitHub Deploy keys復旧手順は、`11_cocolon_github_transport_and_session_continuity.md`を正本とします。
+`HISTORICAL_NON_NORMATIVE`: 2026-07-25時点のlocal private counterpart消失とGitHub Deploy keys復旧手順は、`11_cocolon_github_transport_and_session_continuity.md`のhistorical記録節に保存します。currentのGitHub反映条件・復旧要求ではありません。currentでは特定鍵やDeploy keyを必須にせず、利用可能なGitHub機能を使い、実際のwrite権限不足を確認した場合だけ必要作業を説明します。
 
 # HISTORICAL_NON_NORMATIVE: 2026-07-25 GitHub Actions publication guardian bootstrap
 
@@ -7730,7 +7730,7 @@ maintenanceはcurrent publication routeとして使いません。再開には�
 changed actual environmentを根拠とするMash様の新しい明示authorityが必要です。
 
 
-## 2026-07-27 current GitHub reflection contract
+# 2026-07-27 CURRENT GitHub reflection contract
 
 GitHub反映方法と完了判定の唯一のcurrent正本は
 `11_cocolon_github_transport_and_session_continuity.md`の
