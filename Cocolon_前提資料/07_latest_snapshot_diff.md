@@ -22294,3 +22294,186 @@ AUTHORITY_STOP
 
 この追記は過去receipt、欠落S1 JSON、既存closureを改変せず、S2、P1、candidate、
 Event1、formal exact134、Event2、P2、Cycle001 acceptanceを開始・承認しない。
+
+
+## 2026-07-28 actual S1 historical identity / current active test identity separation and combined-GREEN boundary reconciliation
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_ACTUAL_S1_HISTORICAL_IDENTITY_AND_CURRENT_ACTIVE_TEST_IDENTITY_SEPARATION_SUCCESSOR_COMBINED_GREEN_PUBLICATION_BOUNDARY_CONTRACT_RECONCILIATION_READ_ONLY
+```
+
+### 確認した事実
+
+- Cocolon entryは
+  `841ed0a2762f5ad55aa8f880537262d7333d2767`、mashos-api entryは
+  `05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b`だった。
+- 公開済みactual S1 causal REDのlogical hashは
+  `7b3b6d0890038642d69feb18e46630fbf97a5918fe0e95db766b8c8175e2d179`、
+  external identityは
+  `1504bf4f58ca02b76df7f0a9fd6f88a429b01a56c59b7a9082648a25fb3614b4`
+  である。
+- actual S1が保持するhistorical test blob/rawは
+  `1616de8b9f738b7037b6e18a64113280fa6ec478` /
+  `3e5cdcd5c2cd2113f273f6cc1a43ff09bdd4845b14cd7aea49237d26cfc0753b`
+  である。
+- current active successor test blob/rawは
+  `a57e7e4b20acf28b6b997a2317a4d16f9bcbaa0a` /
+  `361384b49dfa9aba98489b23159ade1e9196ca1ec8f81d5d79996d7ae9e8c587`
+  であり、historical S1 identityとは異なる。
+- ledger ownerはactual S1を受理する一方、historical test identity自体をexact
+  freezeしていない。
+- independent verifierはhistorical S1 test identityをcurrent live fileへ
+  解決するため、actual S1を
+  `SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID`で拒否する。
+- current exact64 fixtureは`_source_file_identity(_THIS_PATH)`からsynthetic
+  S1を作るため、この不一致を検出しない。
+- ownerはcombined-GREEN `test_node_ids`をfixed ordered exact110へ照合するが、
+  independent completion verifierはlength 110、unique、execution/outcomeの
+  自己整合までしか確認せず、独立再構成manifestとのexact order parityがない。
+- combined-GREEN exact16とsuccessor completion exact13の固定pathは、entry
+  Cocolon mainでどちらも不存在だった。
+- source closure exact20はsemantic objectであり、独立publication fileではない。
+
+### position correction
+
+prior position:
+
+```text
+current-source-derived synthetic S1 fixture and current exact110 GREEN are
+sufficient to proceed directly to exact20 / exact13 issuance.
+```
+
+current position:
+
+```text
+actual published S1 must be accepted by owner and independent verifier;
+a coherently rebound current-test substitute must be rejected by both;
+combined-GREEN ordered exact110 nodes must equal the independently
+reconstructed current success-contract manifest;
+then exact16 must be published/postverified before exact13 issuance.
+```
+
+change basis:
+
+```text
+actual historical test identity != current active test identity
+owner historical identity under-validation
+independent historical identity live-file over-binding
+synthetic fixture masking
+independent exact16 ordered-manifest parity omission
+```
+
+correction:
+
+```text
+DIRECT_EXACT20_EXACT13_ISSUANCE:
+NOT_AUTHORIZED
+
+HISTORICAL_S1_AND_CURRENT_ACTIVE_TEST_ROLE_SEPARATION:
+REQUIRED
+
+INDEPENDENT_ORDERED_EXACT110_MANIFEST_PARITY:
+REQUIRED
+
+COMBINED_GREEN_EXACT16_POSTVERIFICATION_BEFORE_EXACT13:
+REQUIRED
+```
+
+Parent Addendum、historical S1 bytes、GitHub reflection contractは変更していない。
+
+### Frozen read-only design
+
+```text
+design:
+EmlisAIの実装済み資料/documents/
+NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_ActualS1Identity_CurrentActiveTestIdentitySeparation_CombinedGreenBoundary_ContractReconciliation_Design_ReadOnly_20260728.md
+
+design write commit:
+a092b3f446522f50133e8b82b4ce84f28d1b16f3
+
+design Git blob:
+fc0af47a520599676e4a640a44a4f3570f349325
+
+design raw SHA-256:
+28f06036f1a3d9cf28636660d8183b6ab71dc17374a18e191480e4d4877ad783
+
+handoff:
+EmlisAIの実装済み資料/documents/
+NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_ActualS1Identity_CurrentActiveTestIdentitySeparation_CombinedGreenBoundary_ContractReconciliation_Handoff_20260728.md
+
+handoff write commit:
+864823ff427261f6ad43755c56ae1cfaff4255de
+
+handoff Git blob:
+ec3f978ebdb7bf61fc3e0ac42b4455dfff074066
+
+handoff raw SHA-256:
+a36d6314842e35b13b55c9c999973b3d8b0ed416c35f3353678e2386c15f9d15
+```
+
+Design / handoffはactual S1 positive、coherently rebound current-identity
+negative、coherent non-manifest exact110 GREEN negativeを既存C09内に置き、
+top-level exact64 / total exact110 denominatorを維持する次RED境界を固定した。
+
+complete correction surfaceはtest exact1、owner exact1、independent verifier
+exact1である。RED freezeではtest exact1だけを変更し、productionを変更しない。
+
+### This checkpoint scope and verification
+
+```text
+approved changed paths:
+exact3
+
+add:
+EmlisAIの実装済み資料/documents/
+NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_ActualS1Identity_CurrentActiveTestIdentitySeparation_CombinedGreenBoundary_ContractReconciliation_Design_ReadOnly_20260728.md
+
+add:
+EmlisAIの実装済み資料/documents/
+NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_ActualS1Identity_CurrentActiveTestIdentitySeparation_CombinedGreenBoundary_ContractReconciliation_Handoff_20260728.md
+
+append:
+Cocolon_前提資料/07_latest_snapshot_diff.md
+
+design commit changed paths:
+exact1 / design only
+
+handoff commit changed paths:
+exact1 / handoff only
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+```
+
+Tracked Execution and Closure Plan、separate body-free receipt/result、manifest、
+00/05/11、work rules、mashos-api、S1、exact16、exact13は変更していない。
+
+### Current result
+
+```text
+ACTUAL_S1_HISTORICAL_IDENTITY_AND_CURRENT_ACTIVE_TEST_IDENTITY_ROLES_SEPARATED
+OWNER_AND_INDEPENDENT_VERIFIER_REMEDIATION_SURFACE_FROZEN
+INDEPENDENT_EXACT16_ORDERED_EXACT110_MANIFEST_PARITY_REQUIRED
+SUCCESSOR_COMBINED_GREEN_PUBLICATION_BOUNDARY_FROZEN
+MASHOS_API_CHANGE_COUNT_0
+TEST_EXECUTION_COUNT_0
+COMBINED_GREEN_NOT_PUBLISHED
+SUCCESSOR_COMPLETION_NOT_PUBLISHED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_ACTUAL_S1_HISTORICAL_IDENTITY_AND_CURRENT_ACTIVE_TEST_IDENTITY_SEPARATION_SUCCESSOR_COMBINED_GREEN_EXACT110_MANIFEST_PARITY_AND_PUBLICATION_BOUNDARY_CONTRACT_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+次authorityはmashos-api current exact64 test file exact1だけを変更し、actual
+S1 positive、coherent current-identity forgery negative、coherent non-manifest
+exact110 GREEN negativeを既存C09内でfreezeする。production、combined-GREEN
+exact16、source closure exact20、completion exact13、P1以降は変更・発行せず、
+causal RED記録後にautomatic progression falseでauthority STOPする。
+
