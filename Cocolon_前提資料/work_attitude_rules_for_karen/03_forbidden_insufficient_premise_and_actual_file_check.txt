@@ -17,8 +17,8 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - `02_cocolon_national_system.md` 系
 - `05_cocolon_rule_file_index.md`
 - `07_latest_snapshot_diff.md`
-- GitHub transportを使う作業では`11_cocolon_github_transport_and_session_continuity.md`
-- GitHub上の`Cocolon` / `mashos-api` current head、固定predecessor commit、対象実ファイル
+- GitHub反映では`11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`
+- GitHub上の`Cocolon` / `mashos-api` current head、承認対象exact path、対象実ファイル。設計・実装sourceに指定predecessorがある場合は、そのsource identityも分離して確認する
 - local checkout / ZIP / copyを使う場合、そのpath / blob / hashが固定GitHub commitと一致すること
 - 必要なログ / スクリーンショット / テスト結果
 
@@ -49,10 +49,10 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 
 ## Cocolon_前提資料更新時のルール
 
-- 原則としてGitHub上の`Cocolon` / `mashos-api`をcurrent実ファイル確認元にし、作業開始時にpredecessor commitを固定する。
+- 原則としてGitHub上の`Cocolon` / `mashos-api`をcurrent実ファイル確認元にする。設計・実装sourceに指定predecessorがある場合はsource identityとして固定するが、GitHub反映時のHEAD drift停止条件へ変換しない。
 - GitHubからmaterializeしたlocal checkout / ZIP / copyは、path / hash一致時に同じ実ファイルとして扱う。local / cloud差を別仕様にしない。
-- user-supplied未push overlayがある場合はhandoff materialとして分離し、固定GitHub predecessorを黙って置換しない。
-- GitHubとlocal materializationが不一致なら同一視せず、commit / path / hash差を提示して停止する。
+- user-supplied未push overlayがある場合はhandoff materialとして分離し、source baselineを黙って置換しない。
+- GitHubとlocal materializationが不一致なら同一視せず、commit / path / hash差を提示する。GitHub反映では承認targetが確認後に別内容へ変わった場合だけ衝突停止とする。
 - 過去local ZIPのsnapshot名・hash・countは当時の証拠として残し、current GitHub値へ遡及上書きしない。
 - 前提資料との差分だけを見る。
 - 変更点がない資料は触らない。
@@ -63,13 +63,12 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - GitHub反映と反映後確認に成功した場合はZIPを作成・提出しない。GitHubへ反映できなかった場合だけ、修正・新規fileに限定したZIPを渡す。
 - 作業報告や残タスクを前提資料に混ぜない。
 
-## 2026-07-25 差分追記: session continuity情報
+## 2026-07-27 current GitHub反映情報
 
-- deploy key登録・rotation・scope・write access・公開fingerprint・required transport・host identityが作業継続へ必要になった時は、秘密情報を除いたcontinuity ownerを同checkpointで差分更新する。
+- GitHub反映方法と完了判定は`11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`を唯一の正本とする。
+- 特定鍵、fingerprint、host、SSH、full fetch、exact leaseをcurrent GitHub反映の必須条件にしない。
 - 秘密鍵、passphrase、token、credential内容、agent socket、環境変数値、traceは前提資料へ残さない。
-- registered public identityとcurrent sessionのlocal private counterpart availabilityを別field / 別事実として扱う。
-- current sessionで秘密鍵候補を未発見でも、登録identityの記録を読まずに「routeなし」と断定しない。
-- sessionが変わったら以前の認証成功を継承せず、fingerprint / host / remote / live H0 / full fetch / exact leaseを再実測する。
+- GitHubへのwrite権限が実際にない場合だけ、権限不足として停止する。
 
 ## 2026-07-26 差分追記: current actual environmentを設計前提の最上位に置く
 
