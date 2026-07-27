@@ -22242,3 +22242,55 @@ DEPLOY_KEY_RECOVERY_REFERENCE_HISTORICAL_NON_NORMATIVE
 CURRENT_HEADING_HIERARCHY_EXPLICIT
 AUTHORITY_STOP
 ```
+
+
+## 2026-07-28 two reported residuals audit correction and exact110 final
+
+直前に未修正と分類した二残件は、GitHub current mainではなく旧local checkoutを
+監査対象に混在させた誤分類だった。mashos-api current main
+`05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b`を再取得し、次を確認した。
+
+- P1/Event1 canonical fixtureは`transport_capability`、`durable_store_capability`、
+  `transaction_capability`、`ref_update_mode`を含まず、owner/independent validatorが受理する。
+- success exact15は`write_commits`と`publication_commit_sha1_by_path`で複数write commitを受理する。
+- B08は異なる2 commitへ7 path / 8 pathを分割したstateをowner/independent validatorが受理する。
+- content/bytes、hash、schema、因果、terminal lineage、owner graph、path scope、
+  target postverificationのnegative検証は維持されている。
+
+mashos-api対象commitはGitHub commit objectでchanged path exact1、current target blobは
+clean checkoutと一致することを再確認した。
+
+```text
+298665c10f27cfee48038ada615c63a2a99f4c00  accepted_test_run_receipt_v3.py
+1826f723804c6ab8ae78eb0c41b2d993d45d4fe4  sequence_ledger_v3.py
+80cc2939360df853f9d070df8c09dc0564b73666  atomic_publication_bundle_v3.py
+ce635d27b0fbd0c1c6cd65ac7866bdd7090e1f06  post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+e9449a2c7367ad80c642ebcfe12095fc9ad2ebed  closure_receipt_verify.py
+
+historical exact46 + targeted C09/C10:
+48 passed, 1 warning in 44.63s
+
+historical exact46 + current exact64 = exact110:
+110 passed, 1 warning in 186.52s
+
+correction design commit:
+37b2721099b9cdcf80d65afe427dd1a39461887d
+```
+
+初回診断のC09/C10失敗は、診断importが生成した未追跡`__pycache__`を
+live clean-source invariantが検出したものだった。生成物をrepository外へ隔離したclean
+checkoutで再実行し、実装不具合ではないことを確認した。よって不要なmashos-api
+no-op commitは作成せず、誤監査だけを訂正した。
+
+```text
+STALE_LOCAL_RESIDUAL_CLASSIFICATION_RETRACTED
+CURRENT_MAIN_TWO_REPORTED_RESIDUALS_ALREADY_RESOLVED
+CONTENT_HASH_SCHEMA_CAUSALITY_OWNER_GRAPH_NEGATIVES_PRESERVED
+EXACT110_GREEN
+NO_ADDITIONAL_MASHOS_API_DELTA_REQUIRED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+この追記は過去receipt、欠落S1 JSON、既存closureを改変せず、S2、P1、candidate、
+Event1、formal exact134、Event2、P2、Cycle001 acceptanceを開始・承認しない。
