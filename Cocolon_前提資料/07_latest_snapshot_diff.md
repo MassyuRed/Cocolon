@@ -21793,3 +21793,162 @@ body-free receipt logical SHA-256:
 ~~~text
 38f2fe73718c22a12607bbe70d1045e308f26ba8da2ed67e95d2a34166835829
 ~~~
+
+# 2026-07-27 current authority correction: work-rule observable-effect gate and next-work determination
+
+## Authority
+
+~~~text
+COCOLON_WORK_ATTITUDE_OBSERVABLE_EFFECT_AUTHORITY_AND_POSITION_CONSISTENCY_ENFORCEMENT_CORRECTION_AND_NEXT_WORK_DETERMINATION_ONLY
+~~~
+
+## 確認した事実
+
+直前のCocolon mainは次で固定した。
+
+~~~text
+Cocolon parent:
+37be1f0accdbdbc2d0e9f93a3b82090a5b30abb2
+
+mashos-api current:
+61547113629ac3143be237ec79800da790c78970
+
+Karen-Diary current:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+~~~
+
+既存ruleはMash様への作業依頼に詳細説明を要求していたが、
+条件文・必要条件の列挙・resource指定要求をuser作業依頼として判定する
+実効分類がなかった。frozen contract mutation、同一論点のposition反転、
+intentとobservable effectが衝突した場合の優先基準にも明示的な出力前blockが
+なかった。
+
+このcheckpointは、新規rule fileや新規subsystemを追加せず、既存ownerへ
+次の強制停止を追加する。
+
+~~~text
+user_action_effect without complete causal/action instruction:
+STOP_NO_USER_REQUEST
+
+frozen contract mutation without exact identity/clause/authority:
+STOP_PRESERVE_FROZEN_CONTRACT
+
+position change without new fact/new authority/old reasoning exact error:
+STOP_KEEP_PRIOR_POSITION
+~~~
+
+違反draftは無効であり、remote stateを変えず、最後に確認できたauthorityへ
+戻る。同じ回復出力へ新しい技術案、Mash様への作業要求、代替contract、
+別の次authorityを混ぜない。ただし、Mash様は同じ指示で次作業の確定も
+明示したため、本記録では回復節と分離し、同じgateを独立して通過した
+next workを固定する。gateを通せない場合はCocolonの作業判断、
+依頼、contract変更案、次authority、GitHub writeを出さない。
+
+変更対象はexact9である。
+
+~~~text
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/manifest.json
+Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/05_forbidden_unrequested_completion_and_structure_addition.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json
+~~~
+
+Cocolon / mashos-api source、Parent Addendum、transport owner、Guardian、
+直前exact5 NLS evidenceは変更しない。P1 capability、admission、candidate、
+Event1、Event2、P2は実行していない。
+
+## position correction
+
+prior position:
+
+~~~text
+NEXT=P1_OPERATIONAL_CAPABILITY_PROOF
+MASH_MUST_IDENTIFY_OR_PROVIDE_EXPECTED_OLD_TRANSPORT_AND_DURABLE_STORE
+~~~
+
+newly confirmed change basis:
+
+1. frozen Parent AddendumはS1 -> S2 -> P1の順序を固定し、S2 exitを
+   `POST_D2_SUCCESSOR_COMPLETION_PUBLISHED_AND_POSTVERIFIED` とする。
+2. 直前authorityはsuccessor completionを
+   `SOURCE_IMPLEMENTATION_ONLY_NO_OPERATIONAL_RECEIPT_ISSUANCE` と再定義したが、
+   Parent Addendumを変更する別authorityは存在しない。
+3. frozen validatorが要求するformal RED、formal GREEN、successor completionの
+   exact3 artifactはcurrent Cocolon mainに存在しない。
+4. 旧推論のexact errorは、source graph implementation + exact110 GREENを、
+   S2のformal publication / postverification completionと同値にしたことである。
+
+correction:
+
+~~~text
+P1_IS_NOT_NEXT
+NO_DURABLE_STORE_REQUEST_AT_CURRENT_STAGE
+NEXT=S1_SUCCESSOR_CAUSAL_RED_FORMAL_ARTIFACT_REMEDIATION
+~~~
+
+## 推測
+
+既存のimmutable S1 RED evidenceからformal RED artifactを再構成できる可能性は
+高い。ただし、artifact bytesとindependent verificationを作る前に成功扱いせず、
+formal publicationにはfrozen contractが要求するexpected-old transactionと
+full postfetchが必要である。
+
+## 華恋の意見
+
+最小の次作業は、欠落した順序の先頭だけを直すS1 remediationである。
+S1、S2、P1を一つにまとめず、S1のformal RED artifactを発行・postverifyして
+AUTHORITY_STOPへ戻る。durable write-once recovery storeはP1の条件であり、
+現在Mash様へ求める作業ではない。
+
+## 現在地とexactly one next work
+
+NLS operational stateは直前authorityから変更しない。
+
+~~~text
+CURRENT_AUTHORITY_RESULT:
+RECOVERY_EPOCH002_POST_D2_SUCCESS_OWNER_GRAPH_IMPLEMENTED_TARGETED_GREEN_SUCCESSOR_IMPLEMENTATION_COMPLETION_RECORDED_AUTHORITY_STOP
+
+SOURCE_BASELINE:
+UNLOCKED
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+~~~
+
+exactly one next work:
+
+~~~text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_ISSUANCE_EXPECTED_OLD_PUBLICATION_AND_POSTVERIFICATION_REMEDIATION_ONLY
+~~~
+
+scope:
+
+~~~text
+mashos-api source/test change: exact0
+RED reimplementation: exact0
+input evidence: existing immutable S1 RED evidence only
+RED test blob: 1616de8b9f738b7037b6e18a64113280fa6ec478
+RED execution: 64 failed / 0 passed / 0 errors
+existing S1 receipt logical SHA-256: ef65ab63be52ef0ff1e51177c1062338e81a7c3a0cf834149f6f75ac58d0b7c2
+target: EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_Successor_RED_Result_20260726.json exact1
+publication: expected-old direct child exact1 + full postfetch
+GREEN / successor completion / P1 / Event1 / Event2 / P2: exact0
+end: AUTHORITY_STOP
+~~~
+
+status:
+
+~~~text
+KAREN_DETERMINED_SEPARATE_MASH_APPROVAL_REQUIRED
+~~~
+
+このrule correction checkpoint自体は、Mash様へdeploy key、publication
+transport、store、path、秘密情報の提供・指定を求めない。

@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-07-26",
+  "revision_date": "2026-07-27",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -16169,6 +16169,55 @@
     "work_attitude_rules_for_karen/00_read_first.txt",
     "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
     "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+    "work_attitude_rules_for_karen/manifest.json"
+  ],
+  "work_attitude_observable_effect_authority_and_position_consistency_guard_2026_07_27": {
+    "authority": "COCOLON_WORK_ATTITUDE_OBSERVABLE_EFFECT_AUTHORITY_AND_POSITION_CONSISTENCY_ENFORCEMENT_CORRECTION_AND_NEXT_WORK_DETERMINATION_ONLY",
+    "decision_owner": "Mash",
+    "cocolon_parent_commit": "37be1f0accdbdbc2d0e9f93a3b82090a5b30abb2",
+    "result_commit": "resolve_from_github_revision_containing_this_checkpoint",
+    "observable_effect_over_stated_intent": true,
+    "blocked_states": [
+      "STOP_NO_USER_REQUEST",
+      "STOP_PRESERVE_FROZEN_CONTRACT",
+      "STOP_KEEP_PRIOR_POSITION"
+    ],
+    "primary_owners": {
+      "user_action_effect": "work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+      "frozen_contract_mutation": "work_attitude_rules_for_karen/05_forbidden_unrequested_completion_and_structure_addition.txt",
+      "output_gate": "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "stop_and_violation_recovery": "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt"
+    },
+    "current_nls_state_changed": false,
+    "p1_started": false,
+    "mash_action_requested": false,
+    "guardian_reactivated": false,
+    "next_work": {
+      "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_ISSUANCE_EXPECTED_OLD_PUBLICATION_AND_POSTVERIFICATION_REMEDIATION_ONLY",
+      "status": "KAREN_DETERMINED_SEPARATE_MASH_APPROVAL_REQUIRED",
+      "durable_store_required_at_current_stage": false
+    },
+    "exact_changed_paths": [
+      "07_latest_snapshot_diff.md",
+      "manifest.json",
+      "work_attitude_rules_for_karen/00_read_first.txt",
+      "work_attitude_rules_for_karen/05_forbidden_unrequested_completion_and_structure_addition.txt",
+      "work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+      "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+      "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+      "work_attitude_rules_for_karen/manifest.json"
+    ]
+  },
+  "latest_modified_premise_files_2026_07_27_work_attitude_observable_effect_authority_and_position_consistency_guard": [
+    "07_latest_snapshot_diff.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/00_read_first.txt",
+    "work_attitude_rules_for_karen/05_forbidden_unrequested_completion_and_structure_addition.txt",
+    "work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+    "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+    "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+    "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
     "work_attitude_rules_for_karen/manifest.json"
   ]
 }

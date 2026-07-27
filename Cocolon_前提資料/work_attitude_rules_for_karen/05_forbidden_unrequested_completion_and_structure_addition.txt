@@ -69,3 +69,28 @@ EmlisAIで許可される修正は、次の条件を満たす場合だけです�
 - Gate failure後に、短縮・限定・再生成・低情報観測・安全応答へ回す設計がある。
 - 例文はruntime条件ではなく、失敗再現・回帰確認・QA fixtureとしてだけ扱う。
 - `emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md` の撤回・保持・再設計分類に反していない。
+
+## 2026-07-27 差分追記: frozen contract mutationの実効判定
+
+approved / frozen contractについて、次のいずれかを生じさせる出力は、
+file writeの有無や「意見」「提案」「再検討」というlabelに関係なく
+`contract_mutation_effect=true` とする。
+
+- 撤回、置換、弱化、retire、suspend、bypass。
+- 新しい前提を追加し、既存contractを実質的に利用不能にする。
+- 既に承認されたstate、gate、順序、completion条件を無効化する。
+- 後続authorityから、先に凍結された条項を説明なく再定義する。
+
+contract mutationを次作業として提示できるのは、次を全て確認した場合だけとする。
+
+1. contract owner path。
+2. frozen ref、blob、またはlogical hash。
+3. そのまま保持する条項。
+4. 変更する条項と変更後の意味。
+5. withdraw / replace / weaken / suspend / bypass等のoperation種別。
+6. その変更を許可するMash様の明示authority。
+
+一つでも欠ける場合は、現contractを保持し
+`STOP_PRESERVE_FROZEN_CONTRACT` とする。
+懸念は確認済み事実と華恋の意見に分けて示せるが、代替contract、
+新しい前提、Mash様へのprovisioning依頼、次authorityへ昇格させない。

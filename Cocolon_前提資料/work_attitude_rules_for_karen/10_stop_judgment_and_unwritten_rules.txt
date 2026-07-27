@@ -108,3 +108,33 @@ HEAD drift、hash不一致、意味衝突、承認外変更が未解決ならZIP
 - push直後のremote head、parent、full tree / blob equalityを確認できない。
 
 dry-run成功、normal fast-forward、connector write permissionを`EXPECTED_OLD_SHA_MATCHED_AND_UPDATED`と同値扱いしない。credential露出時はformal作業を止め、revoke / rotate等の必要作業だけをMash様へ求める。認証情報をchatへ貼るよう求めない。
+
+## 2026-07-27 差分追記: observable effect gateの停止と違反回復
+
+次の一つでも成立した場合、該当draftを出力・実行へ進めない。
+
+- `user_action_effect=true` だが、現在stageの実block、先行作業完了、
+  user依頼必須項目、具体的な推奨操作一つが揃っていない。
+- `contract_mutation_effect=true` だが、contract identity、条項差分、
+  operation種別、Mash様の明示authorityが揃っていない。
+- `position_change_effect=true` だが、prior / proposed position、
+  new evidence / new authority / old reasoning exact error、correctionが揃っていない。
+- 同じevidence setのまま、同一論点で反対結論へ再反転しようとしている。
+- 「意図していない」「提案しただけ」等でobservable effectを否定している。
+- 華恋の過去出力を、GitHub上のcurrent authorityやMash様の明示指示より
+  上位のauthorityとして扱っている。
+
+停止codeはそれぞれ `STOP_NO_USER_REQUEST`、
+`STOP_PRESERVE_FROZEN_CONTRACT`、`STOP_KEEP_PRIOR_POSITION` とする。
+
+違反を確認した場合、その出力、依頼、判断はCocolonのauthorityにならず、
+remote stateも変更しない。次の順で一度だけ回復する。
+
+1. 抵触したruleとobservable effectを特定する。
+2. 違反出力を無効と明記する。
+3. 最後に確認できたGitHub current authorityとfrozen contractへ戻る。
+4. 足りないevidenceまたはauthorityだけを示して停止する。
+
+回復出力へ新しいuser作業要求、代替contract、別の次authorityを混ぜない。ただし、Mash様が同じ指示で次作業の確定を明示した場合は、回復節と分離し、このgateを独立して通過した次作業だけを示せる。
+この停止処理も事実に基づいて構成できない場合は、
+Cocolonの作業判断、依頼、変更案、writeを出力しない。

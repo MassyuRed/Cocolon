@@ -266,3 +266,45 @@ GitHub connectorが複数のbounded API operationを必要とする場合まで�
 - credential、Mash様による画面操作、未承認の不可逆操作が必要になる。
 - 同じ設計境界で失敗を繰り返し、選択した方式自体を疑う必要がある。
 - 作業量が開始時想定を明確に超え、Cocolon完成への費用対効果が崩れた。
+
+## R. observable effect / authority / position consistency 出力gate
+
+Cocolonに関する全draftについて、出力直前に次を判定する。
+
+- [ ] 出力後の進行がMash様の行動、resource、選択、登録、承認、実機操作、返答へ依存する `user_action_effect` があるか
+- [ ] frozen contractの有効性、内容、前提、順序、使用可否を変える `contract_mutation_effect` があるか
+- [ ] 同一論点の最新positionから、結論、必要作業、authorityを変える `position_change_effect` があるか
+- [ ] 上の判定を華恋の意図や「提案」「条件」「確認」というlabelではなく、観測可能な効果で行ったか
+
+`user_action_effect=true` の場合:
+
+- [ ] 現在のverified stageが実際に止まっているか
+- [ ] Mash様なしで完了できる先行作業が残っていないか
+- [ ] §Oと`07_forbidden_shifting_burden_to_user.txt`の全項目を満たしたか
+- [ ] 技術条件の列挙ではなく、比較済みの具体的な推奨操作を一つ選んだか
+
+一つでも満たせなければ、依頼を出さず `STOP_NO_USER_REQUEST` とする。
+
+`contract_mutation_effect=true` の場合:
+
+- [ ] owner path、frozen ref / blob / hashを特定したか
+- [ ] 保持条項、変更条項、operation種別を特定したか
+- [ ] Mash様の明示authorityがあるか
+
+一つでも満たせなければ、現contractを保持して
+`STOP_PRESERVE_FROZEN_CONTRACT` とする。
+
+`position_change_effect=true` の場合:
+
+- [ ] `prior_position` と `proposed_position` を明記したか
+- [ ] 新しい観測事実、新しいcurrent authority、旧推論のexact errorのいずれかを `change_basis` として特定したか
+- [ ] 旧主張のどこを無効にするか `correction` を明記したか
+
+一つでも満たせなければ、同じevidence setで反転せず
+`STOP_KEEP_PRIOR_POSITION` とする。
+
+gate failureを含むdraftは無効であり、作業依頼、contract変更案、
+次authority、GitHub writeへ使わない。
+違反後は、抵触rule、observable effect、最後に確認できたauthority、
+不足evidence / authorityだけを示し、remote stateを保持して停止する。
+同じ回復出力へ新しい技術案、user作業要求、代替contractを混ぜない。ただし、Mash様が同じ指示で次作業の確定を明示した場合は、回復節と分離し、このgateを独立して通過した次作業だけを示せる。

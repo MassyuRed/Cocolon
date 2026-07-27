@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-07-26",
+  "revision_date": "2026-07-27",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -243,6 +243,31 @@
         "00_read_first.txt",
         "03_forbidden_insufficient_premise_and_actual_file_check.txt",
         "09_work_start_checklist.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "type": "observable_effect_authority_and_position_consistency_output_guard",
+      "summary": "Cocolonの全draftを意図やlabelではなくobservable effectで分類する。抽象的・時期尚早なMash作業依頼、authorityなしのfrozen contract mutation、new evidence / authority / exact errorなしのposition反転を出力前にblockし、違反出力を無効化して最後に確認できたauthorityへ戻る。gateを通せない場合は作業判断・依頼・contract変更案・次authority・GitHub writeを出さない。",
+      "primary_owners": {
+        "user_action_effect": "07_forbidden_shifting_burden_to_user.txt",
+        "frozen_contract_mutation": "05_forbidden_unrequested_completion_and_structure_addition.txt",
+        "output_gate": "09_work_start_checklist.txt",
+        "stop_and_violation_recovery": "10_stop_judgment_and_unwritten_rules.txt"
+      },
+      "blocked_states": [
+        "STOP_NO_USER_REQUEST",
+        "STOP_PRESERVE_FROZEN_CONTRACT",
+        "STOP_KEEP_PRIOR_POSITION"
+      ],
+      "changed_files": [
+        "00_read_first.txt",
+        "05_forbidden_unrequested_completion_and_structure_addition.txt",
+        "07_forbidden_shifting_burden_to_user.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "99_integrated_paste_each_time.txt",
         "manifest.json"
       ]
     }
