@@ -22161,3 +22161,54 @@ mashos-api exact8 writeの最終headは
 `05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b`である。Cocolon / mashos-apiとも、特定鍵、SSH、
 expected-old CAS、direct-child、single commit、whole-repository/full-recursive/durable-store
 をGitHub反映条件にせず完了した。
+
+
+## 2026-07-27 Work Unit B separate exact1 postverification closure
+
+Work Unit Bは契約修正と混ぜず、欠落JSON exact1だけを別commitで作成した。
+
+```text
+Work Unit A Cocolon head:
+f103b987002273d1f83b6da51286d4dab121820c
+
+Work Unit B JSON write commit:
+a45a958cab1a5e1d052e6b470dd26d8e19764b7b
+
+exact changed path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_Successor_RED_Result_20260726.json
+
+byte count:
+1045
+
+Git blob SHA-1:
+fa2ac8978294e9eb92211147c09989ae7583455e
+
+raw SHA-256:
+f03bf71f267813d25664ceacd1344d74fb354156a9c65b19c14a3c7f315e4c03
+
+logical receipt SHA-256:
+7b3b6d0890038642d69feb18e46630fbf97a5918fe0e95db766b8c8175e2d179
+```
+
+GitHubからtargetを再取得し、prepared bytes、Git blob、schema/state、logical hashを
+照合した。JSON write commitはbase/head compareでtotal commit exact1、changed path
+exact1であり、承認外pathは0。current mainにtargetが含まれることを確認した。
+
+この実反映では、特定鍵、SSH、expected-old CAS、direct-child、single commit contract、
+whole repository / all unchanged path、full recursive postfetch、durable storeを前提に
+せず、同じ理由で停止しなかった。
+
+```text
+S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_PUBLISHED_AND_POSTVERIFIED
+TARGET_EXACT1_PRESENT
+TARGET_BYTES_HASHES_MATCHED
+UNAPPROVED_WRITE_PATHS_EXACT0
+CURRENT_MAIN_CONTAINS_TARGET
+AUTOMATIC_PROGRESSION_FALSE
+OVER_SAFETY_CONDITION_OPERATIONALLY_RESOLVED
+AUTHORITY_STOP
+```
+
+このclosureは欠落historical S1 RED result artifactのpublication gapだけを閉じる。
+S2 successor completion、P1、candidate、Event1、formal exact134、Event2、P2、
+Cycle001 acceptanceは開始・完了していない。
