@@ -21689,3 +21689,107 @@ RED body-free receipt logical SHA-256:
 ```text
 ef65ab63be52ef0ff1e51177c1062338e81a7c3a0cf834149f6f75ac58d0b7c2
 ```
+
+# 2026-07-27 current authority: Recovery Epoch002 post-D2 success-owner implementation targeted GREEN
+
+## Authority
+
+~~~text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_IMPLEMENTATION_TARGETED_GREEN_AND_SUCCESSOR_COMPLETION_ONLY
+~~~
+
+## 確認した事実
+
+~~~text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry:
+11ad567a35c6b73b36cf192ea76c0e6bc65813bc
+
+mashos-api implementation parent:
+e4ea7b6b90642a1ab4e9e1e08aac3ee7bcc9374d
+
+mashos-api result:
+61547113629ac3143be237ec79800da790c78970
+
+mashos-api result tree:
+27bd2616e1d357ca10cfef03eb0f7853b43d4265
+
+mashos-api changed paths:
+exact10
+~~~
+
+success-owner graphのexact10 source ownerを実装した。historical D1
+exact46とsuccessor causal exact64を同じstable treeで実行し、exact110は
+110 passed / 0 failed / 0 errors / 691.02sでGREENになった。D1 exact46
+の独立rerunは46 passed / 1.83sだった。
+
+frozen successor RED blob
+1616de8b9f738b7037b6e18a64113280fa6ec478とhistorical D1 blob
+6e1f904d91c0e6852b8af66500a0563e20648026は不変である。remote
+postfetchはahead_by=1 / behind_by=0 / exact1 commit / exact10 pathsを
+確認した。independent final auditはBlocker 0だった。
+
+exact12 APIはcanonical controlを受理し、top/deep raw_body、
+raw_payload、private_body、private_payload、unexpected keyを拒否した。
+malformed inputはfail closedで、caller self-hashをexternal success
+authorityとして扱わない。
+
+operational candidate / Event1 / readiness / reservation / attempt /
+formal exact134 / terminal / accepted / Step00..10 / all11 / manifest /
+operational admission / Event2は全て0である。source baselineはUNLOCKED、
+P2はNOT_AUTHORIZED、Cycle001はNOT_ACCEPTEDである。
+
+## 推測
+
+exact110 GREENはfrozen contractに対するsource graphの実装完了を示す。
+expected-old ref transactionとdurable write-once recovery storeの実運用
+能力を示すものではない。したがって、このauthorityのsuccessor
+completionはsource implementation completionであり、operational
+exact20/exact13 receiptの発行ではない。
+
+## 華恋の意見
+
+3つの新規receipt ownerだけで局所的に終わらせず、closure、sequence、
+formal evidence、atomic publication、independent verifier、formal parent
+まで同じidentityとstop ruleに揃えたことを完了条件とする。external
+publisherの代わりにtestやcaller hashをauthorityにしないため、ここで
+止めるのが正しい。
+
+## 現在地
+
+~~~text
+CURRENT_AUTHORITY_RESULT:
+RECOVERY_EPOCH002_POST_D2_SUCCESS_OWNER_GRAPH_IMPLEMENTED_TARGETED_GREEN_SUCCESSOR_IMPLEMENTATION_COMPLETION_RECORDED_AUTHORITY_STOP
+
+GOVERNING_OPERATIONAL_STATE:
+POST_D2_SUCCESS_OWNER_GRAPH_EXACT10_IMPLEMENTED_EXACT110_GREEN_PRE_OPERATIONAL_ADMISSION_AUTHORITY_STOP
+
+SOURCE BASELINE:
+UNLOCKED
+
+P2 / CYCLE001:
+NOT_AUTHORIZED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP
+~~~
+
+次に必要な判断はP1 operational-capability proofである。Mashがreal
+expected-old ref transaction transportとdurable write-once recovery storeを
+指定または提供し、別途承認する必要がある。自動進行しない。
+
+result raw SHA-256:
+
+~~~text
+8322ed1c764ced54c5aee9a6f32bf00ff7eb77d0ee38b181014a12e6c4ebce8a
+~~~
+
+body-free receipt logical SHA-256:
+
+~~~text
+38f2fe73718c22a12607bbe70d1045e308f26ba8da2ed67e95d2a34166835829
+~~~

@@ -5808,3 +5808,109 @@ RED body-free receipt logical SHA-256:
 ```text
 ef65ab63be52ef0ff1e51177c1062338e81a7c3a0cf834149f6f75ac58d0b7c2
 ```
+
+## 12.48 2026-07-27 Recovery Epoch002 post-D2 success-owner graph implementation, targeted GREEN, and successor implementation completion
+
+Approved authority:
+
+~~~text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_IMPLEMENTATION_TARGETED_GREEN_AND_SUCCESSOR_COMPLETION_ONLY
+~~~
+
+Immediately before the mashos-api publication, Karen-Diary, Cocolon, and
+mashos-api matched 700f749f5149cac1f8bd4bab8a364d524a56985b,
+11ad567a35c6b73b36cf192ea76c0e6bc65813bc, and
+e4ea7b6b90642a1ab4e9e1e08aac3ee7bcc9374d respectively.
+
+The frozen causal contract was implemented across exact10 source owners:
+canonical closure, sequence ledger, accepted-test-run receipt,
+Step-completion receipt, formal-worker evidence, current-step proof runner,
+atomic publication bundle, formal-parent orchestrator, independent closure
+verifier, and all11 issuer.
+
+The exact10 publication is one direct child:
+
+~~~text
+commit:
+61547113629ac3143be237ec79800da790c78970
+
+tree:
+27bd2616e1d357ca10cfef03eb0f7853b43d4265
+
+parent:
+e4ea7b6b90642a1ab4e9e1e08aac3ee7bcc9374d
+
+parent tree:
+1f489c9a08c6d84d6f795643a94d5d4659bcc24c
+
+remote compare:
+ahead_by=1 / behind_by=0 / total_commits=1 / changed paths exact10
+~~~
+
+The protected successor exact64 RED and historical D1 exact46 sources were
+unchanged. Final verification on the stable source tree returned:
+
+~~~text
+historical exact46 + successor exact64:
+110 passed in 691.02s (0:11:31)
+
+historical D1 exact46 rerun:
+46 passed in 1.83s
+
+focused C05/C06:
+PASS
+
+focused I05:
+PASS
+
+independent release audit:
+Blocker 0
+~~~
+
+The exact12 API surface accepted canonical controls and rejected the tested
+top-level/deep raw_body, raw_payload, private_body, private_payload, and
+unexpected-key variants. Malformed input fails closed, source identities are
+symlink-safe, phase compatibility holds across self/deep-copy/legacy/current/
+runtime forms, and a caller self-hash is not external success authority.
+
+The owner graph supplies source contracts for successor closure/completion,
+terminal exact134 evidence, accepted, Step00..10, all11, Event2 exact13/14/15
+atomicity, independent replay, and formal-parent continuation. The success
+publication port remains authority-stopped without a distinct external
+publisher.
+
+No operational exact134, P1, Event1, Event2, or P2 action ran. Candidate,
+readiness, reservation, attempt, terminal, accepted, Step00..10, all11,
+manifest, and operational admission remain zero. Source baseline remains
+UNLOCKED and Cycle001 remains NOT_ACCEPTED.
+
+For this authority, successor completion is fixed as source implementation
+completion plus targeted GREEN evidence. It is not issuance/postverification
+of the operational exact20 source-closure or exact13 successor-completion
+receipt.
+
+Cocolon records this result through exact5 paths: this plan, the latest
+snapshot, the implementation result, its body-free receipt, and its handoff.
+
+Fixed result:
+
+~~~text
+RECOVERY_EPOCH002_POST_D2_SUCCESS_OWNER_GRAPH_IMPLEMENTED_TARGETED_GREEN_SUCCESSOR_IMPLEMENTATION_COMPLETION_RECORDED_AUTHORITY_STOP
+~~~
+
+Exactly one next decision topic is P1 operational-capability proof for an
+expected-old ref transaction and durable write-once recovery store. It is
+USER_INPUT_AND_SEPARATE_REAPPROVAL_REQUIRED. Mash must identify or provide
+that real transport and store. No automatic progression occurs.
+
+Result raw SHA-256:
+
+~~~text
+8322ed1c764ced54c5aee9a6f32bf00ff7eb77d0ee38b181014a12e6c4ebce8a
+~~~
+
+Body-free receipt logical SHA-256:
+
+~~~text
+38f2fe73718c22a12607bbe70d1045e308f26ba8da2ed67e95d2a34166835829
+~~~
