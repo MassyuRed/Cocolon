@@ -23,8 +23,8 @@ GitHub反映が承認されている作業では、承認済みexact fileをGitH
 - [ ] Cocolon_前提資料を確認したか
 - [ ] `07_latest_snapshot_diff.md`のcurrent authorityを確認したか
 - [ ] GitHub上の`Cocolon` / `mashos-api` current headを確認したか
-- [ ] 設計・handoffが指定するpredecessor commitを固定したか
-- [ ] 作業中にmainが進んでも黙って追従しない状態か
+- [ ] 設計・実装sourceに指定predecessorがある場合、そのsource identityを固定したか
+- [ ] GitHub反映では最新版を再取得し、target非衝突のHEAD前進を停止理由にしていないか
 - [ ] local checkout / ZIP / copyを使う場合、固定commitとのpath / blob / hash一致を確認したか
 - [ ] user-supplied未push overlayをGitHub predecessorと分離したか
 - [ ] ログを確認したか
@@ -138,18 +138,24 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 
 ## K. GitHub直接反映チェック
 
+- [ ] `11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`を確認したか
 - [ ] Mash様が対象checkpointまたは成果物の反映を明示承認したか
-- [ ] `Cocolon` / `mashos-api`のwrite直前HEADを確認したか
-- [ ] 指定predecessorとcurrent HEADの関係を説明できるか
-- [ ] local / ZIPのSHA-256とtarget内容を確認したか
+- [ ] `Cocolon` / `mashos-api`のwrite直前最新版を確認したか
+- [ ] 承認済みexact pathを確認したか
+- [ ] newなら同じexact pathが不存在か
+- [ ] modifyならcurrent内容が作業時に確認した内容と一致するか
 - [ ] `repository/`と`documents/`の反映先mappingが既存構成と一致するか
-- [ ] exact pathごとにnew / modifyを確認したか
-- [ ] unleased force、expected old OIDなしのforce-with-lease、history rewrite、削除、無関係な変更を含めていないか
-- [ ] 途中でHEAD driftが起きた場合に停止できるか
-- [ ] write後に対象fileを再取得して内容一致を確認したか
-- [ ] 全commit SHA、final HEAD、exact pathをMash様へ報告できるか
+- [ ] 現在利用できるGitHub機能を使い、特定鍵・通信方法・command・single commitを必須にしていないか
+- [ ] 承認外path、history rewrite、削除、承認外不可逆操作、無関係な変更を含めていないか
+- [ ] HEADが進んだだけで停止せず、target conflictの有無を確認したか
+- [ ] write後に対象fileを再取得し、作成成果物と一致するか
+- [ ] 華恋が生成したwrite commit群に承認外pathがないか
+- [ ] GitHub最新版に承認済み全成果物が含まれるか
+- [ ] repository全体・全tree・全blob・全unchanged path検証を必須にしていないか
+- [ ] 結果不明時はtargetを再取得し、不明targetを自動retryしていないか
+- [ ] write commit SHA、final HEAD、exact pathをMash様へ報告できるか
 
-このチェックを一つでも確認できない場合、GitHubへwriteしない。
+target conflict、実write失敗、結果不明、実権限不足、承認外変更の必要、削除・history rewrite・承認外不可逆操作の必要が確認された場合だけ停止する。
 
 ## L. current authority / 前提資料更新チェック
 
@@ -172,24 +178,15 @@ EmlisAIの設計・診断・実装・前提資料更新では、追加でこの�
 
 subagent利用は必要性に基づく華恋の作業手段であり、利用自体を成果としない。必要な独立確認を省略せず、不要な分割も増やさない。
 
-## N. GitHub SSH transport / session continuityチェック
+## N. GitHub反映契約チェック
 
-- [ ] `11_cocolon_github_transport_and_session_continuity.md`のdeploy key title、algorithm、public fingerprint、repository scope、write accessを確認したか
-- [ ] registered public identityとcurrent sessionのlocal private counterpart availabilityを分けたか
-- [ ] 秘密鍵内容を表示せず、導出公開鍵fingerprintがowner記録とexact一致したか
-- [ ] private key fileのgroup / other permissionが0か。0400 / 0600等のowner-onlyか
-- [ ] 秘密鍵、passphrase、token、環境変数値、agent socket、traceをrepo / Library / chat / artifact / logへ残していないか
-- [ ] verified known_hosts、`BatchMode=yes`、`IdentitiesOnly=yes`、`StrictHostKeyChecking=yes`を使ったか
-- [ ] remoteがexact `ssh://git@ssh.github.com:443/MassyuRed/Cocolon.git`か
-- [ ] authenticated `ls-remote`のmain OIDが固定したlive `H0`とexact一致したか
-- [ ] `H0`のcommit / base tree / recursive tree /全blobを取得できたか
-- [ ] receive-pack / lease dry-runを、server-side actual update成功やpost-fetch成功と混同していないか
-- [ ] actual formal writeはexact ref / exact `H0` / verified direct child / exact changed pathsを固定したか
-- [ ] actual push直前にlive head=`H0`を再確認し、exact `--force-with-lease=refs/heads/main:<H0>`を使うか
-- [ ] actual push後にremote head / parent / tree / exact changed paths /全対象bytes・blob・hashをpost-fetchするか
-- [ ] session変更、credential handle消失、fingerprint / key / title / scope変更後に以前の確認を継承せず再確認したか
+- [ ] GitHub反映方法と完了判定について、`11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`以外から追加条件を持ち込んでいないか
+- [ ] 特定の秘密鍵、SSH、fingerprint、host、command、expected-old、direct-child、single commit、full repository fetchを必須にしていないか
+- [ ] 古い設計、test、receipt、handoffの厳しいtransport条件をcurrent停止条件にしていないか
+- [ ] runtime durability、hash、schema、因果、owner graphの検証をGitHub書き込み方法の条件へ変換していないか
+- [ ] 秘密鍵、passphrase、token、credential内容をrepo / Library / chat / artifact / logへ残していないか
 
-このcheckを通す前に「認証routeなし」と断定しない。登録identityはあるがlocal private counterpartを利用できない場合、その二つを分けてSTOPする。
+古いtransport条件だけを理由に失敗するtestは、GitHub反映停止ではなくtest側の不具合として扱う。
 
 ## O. Mash様へ作業を依頼する前の説明チェック
 
