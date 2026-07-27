@@ -3195,7 +3195,7 @@ work attitude owner:
 保持し、current routeとして再利用しません。
 
 
-## 2026-07-27 current GitHub reflection contract index
+# 2026-07-27 CURRENT GitHub reflection contract index
 
 - 唯一のcurrent正本:
   `11_cocolon_github_transport_and_session_continuity.md`の
