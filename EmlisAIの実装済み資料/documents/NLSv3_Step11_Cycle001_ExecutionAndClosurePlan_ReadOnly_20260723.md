@@ -5914,3 +5914,102 @@ Body-free receipt logical SHA-256:
 ~~~text
 38f2fe73718c22a12607bbe70d1045e308f26ba8da2ed67e95d2a34166835829
 ~~~
+
+
+## 12.49 2026-07-27 current GitHub reflection contract correction
+
+### authority
+
+```text
+COCOLON_GITHUB_REFLECTION_CONTRACT_CURRENT_ACTUAL_ENVIRONMENT_REPLACEMENT_AND_ACTIVE_TRANSPORT_GATE_REMOVAL_ONLY
+```
+
+Mash様が変更条文と変更後内容を明示し、独立したcontract変更作業として承認した。
+
+current owner:
+
+```text
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+#CURRENT_NORMATIVE_CONTRACT
+```
+
+current downstream correction design:
+
+```text
+NLSv3_Step11_Cycle001_RecoveryEpoch002_GitHubReflectionContractCorrection_20260727.md
+```
+
+### historical disposition
+
+§12.30〜§12.48、旧Parent Design、Parent Addendum、correction、RED/GREEN result、receipt、handoffは当時のledgerとして改変しない。そこに記録されたartifact bytes、hash、schema、因果関係、owner graph、実行結果は保持する。
+
+ただし、次をGitHub反映方法、反映完了判定、作業停止条件へ使う効力は`HISTORICAL_NON_NORMATIVE`とする。
+
+```text
+specific key / SSH
+expected-old ref CAS / exact lease
+direct-child
+single-tree / single-commit
+whole repository / all unchanged paths
+full recursive postfetch
+durable store as repository-reflection prerequisite
+```
+
+### active implementation correction
+
+```text
+mashos-api baseline:
+61547113629ac3143be237ec79800da790c78970
+
+mashos-api correction commit:
+05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b
+
+active changed paths:
+298665c10f27cfee48038ada615c63a2a99f4c00  ai/services/ai_inference/emlis_ai_recovery_epoch002_accepted_test_run_receipt_v3.py
+1826f723804c6ab8ae78eb0c41b2d993d45d4fe4  ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ce635d27b0fbd0c1c6cd65ac7866bdd7090e1f06  ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+80cc2939360df853f9d070df8c09dc0564b73666  ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py
+e9449a2c7367ad80c642ebcfe12095fc9ad2ebed  ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+52e781f348578637ffd56ce52a1bd0163011cb07  ai/tools/emlis_nls_v3_recovery_epoch002_current_step_proof_run.py
+ee89220f6c0421c067eb9dca2bd3d807574623d1  ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b  ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_evidence_v3.py
+
+reflection contract marker:
+COCOLON_GITHUB_REFLECTION_CONTRACT_V1
+
+targeted verification:
+targeted C10/A06: 2 passed in 100.41s
+subagent exact110: 110 passed in 455.41s
+Karen independent exact110: 110 passed, 1 warning in 456.65s
+semantic audit: blocker exact0
+```
+
+runtimeのwrite-once checkpoint、artifact content、canonical bytes、schema、raw/logical/blob hash、successor causality、accepted / Step00..10 / all11 / Event2 lineage、owner graph、owner-independent split、観測捏造禁止は維持する。それらをGitHub write transportの形式条件へ変換しない。
+
+### current state and next boundary
+
+```text
+OLD EXPECTED-OLD / DIRECT-CHILD / FULL-TREE / DURABLE-STORE NEXT:
+HISTORICAL_NON_NORMATIVE
+
+CURRENT NLS STATE:
+POST_D2_SUCCESS_OWNER_GRAPH_IMPLEMENTED
+S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_PUBLICATION_PENDING
+
+NEXT SEPARATE WORK:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_PUBLICATION_AND_POSTVERIFICATION_REMEDIATION_ONLY
+
+SCOPE:
+Cocolon missing JSON exact1 only
+
+PUBLICATION:
+currently available GitHub functionality
+approved exact1
+target content + Karen write-commit path + current main postverification
+
+AUTOMATIC_PROGRESSION:
+false
+
+P1 / Event1 / exact134 / Event2 / P2:
+NOT_STARTED_BY_THIS_CORRECTION
+```
