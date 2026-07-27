@@ -22212,3 +22212,33 @@ AUTHORITY_STOP
 このclosureは欠落historical S1 RED result artifactのpublication gapだけを閉じる。
 S2 successor completion、P1、candidate、Event1、formal exact134、Event2、P2、
 Cycle001 acceptanceは開始・完了していない。
+
+
+## 2026-07-27 independent audit residual classification correction
+
+Work Unit A/B postverification後の独立監査で、旧expected-old next-work tokenの
+manifest objectと、旧Deploy-key復旧参照のcurrent/historical分類、00/05の
+current heading階層に曖昧さを検出した。旧token・旧記録内容は削除せず、
+`HISTORICAL_NON_NORMATIVE`とcurrent契約への`superseded_by`を明示した。
+
+```text
+verified correction commit and exact changed path:
+6ba360e6ed6167a99ccb353f656a3c60c776244f  Cocolon_前提資料/00_karen_read_first.md
+92903106c2c26d96359ad51a52807493a07872f3  Cocolon_前提資料/05_cocolon_rule_file_index.md
+2e76bc4745e5f367b22b8ebd32d52f73d8ed4739  Cocolon_前提資料/manifest.json
+
+this 07 audit-bookkeeping commit:
+resolve_from_github_revision_containing_this_section
+```
+
+各correction commitはbase/head compareでtotal commit exact1、changed path exact1、
+remote target content一致を確認した。current GitHub反映契約、欠落JSON bytes/hash、
+mashos-api実装、NLS authority stopは変更していない。
+
+```text
+INDEPENDENT_COCOLON_CONTRACT_AUDIT_RESIDUALS_CORRECTED
+SUPERSEDED_EXPECTED_OLD_TOKEN_HISTORICAL_NON_NORMATIVE
+DEPLOY_KEY_RECOVERY_REFERENCE_HISTORICAL_NON_NORMATIVE
+CURRENT_HEADING_HIERARCHY_EXPLICIT
+AUTHORITY_STOP
+```
