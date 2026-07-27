@@ -47,9 +47,11 @@ Mash様の指示した成果物形式を変えない。
 - 追加説明は最小限
 - 先に「RN側ログが必要」などを広げない
 
-## 2026-07-21 差分追記: 華恋によるGitHub直接反映
+## 2026-07-27 current: 華恋によるGitHub直接反映
 
-Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した場合、華恋は接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileだけを直接反映できます。
+Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した場合、華恋は接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileだけを直接反映します。
+
+GitHub反映方法と反映完了判定の唯一の正本は`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`です。本資料はその条件を追加・厳格化しません。
 
 ### 反映先
 
@@ -60,44 +62,41 @@ Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した
 
 ### write前
 
-- 両repositoryのcurrent HEADと指定predecessorを確認する
-- local / ZIPのSHA-256と対象file内容を確認する
-- target pathがnewかmodifyか、既存blobと衝突しないか確認する
+- 現在のGitHub最新版と承認済みexact pathを確認する
+- newなら同じexact pathに既存fileがないことを確認する
+- modifyならcurrent内容が作業時に確認した内容と一致することを確認する
 - 承認済みexact path、変更種別、根拠、必要性を固定する
-- HEAD drift、hash不一致、意味衝突、権限不足があれば停止する
+- 最新版が進んでも対象fileに衝突がなければ、最新版を読み直して続行する
 
 ### write時
 
+- 現在利用できるGitHub機能を使う
 - 承認済みexact path以外を変更しない
-- unleased force、expected old OIDを省略したforce-with-lease、history rewrite、削除、無関係なrename・整形・production変更をしない
-- repositoryごとに一つの目的へ変更をまとめることを原則とする
-- 使用機能の制約でcommitが分かれる場合は、同一の連続head chainで反映し、途中に別headが入ったら停止する
+- history rewrite、削除、承認外の不可逆操作、無関係なrename・整形・production変更をしない
+- GitHub機能の都合による複数write / commitを許容し、一つのcommitへ強制しない
 - historical handoffの当時の境界・記録は履歴として変更しない
-- 従来どおり、進行checkpointごとの報告とMash様の明示承認を維持する
 
 ### write後
 
-- 反映後のHEADを再取得する
-- GitHub上の各対象fileを再取得し、local / ZIPと同一内容であることを確認する
-- repositoryごとの全commit SHA、final HEAD、exact path、new / modifyをMash様へ報告する
-- GitHub commitと`Cocolon_前提資料/07_latest_snapshot_diff.md`をcurrent authorityとして扱う
+- GitHub上の各対象fileを再取得し、作成成果物と同一内容であることを確認する
+- 華恋が今回生成したwrite commit群のchanged-path setに承認外pathがないことを確認する
+- GitHub最新版に承認済み全成果物が含まれることを確認する
+- repository全体、全tree、全blob、全unchanged pathの取得・検証を必須にしない
+- write応答だけで結果が確定しない場合は対象exact pathを再取得し、結果不明の対象を自動retryしない
+- repositoryごとのwrite commit SHA、final HEAD、exact path、new / modifyをMash様へ報告する
 - GitHub反映と反映後確認に成功した場合、成果物ZIPは作成・提出しない
-- GitHubへ反映できなかった場合だけ、新規・修正fileに限定したZIPを提出する。未変更fileや全量repositoryは含めない
+- GitHubへ実際に反映できなかった場合だけ、新規・修正file限定ZIPを提出する
 
 ### current authority / 前提資料更新運用
 
 - 作業成果のGitHub反映と反映後確認が完了するごとに、`Cocolon_前提資料/07_latest_snapshot_diff.md`のcurrent authorityを同じcheckpointの小さい差分として更新する
-- `01` / `02` / `03` / `04` / `05` / `06` / `09`等の構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新する
+- 構造資料は、構造・owner・contract・必読順・名称境界が変わった時だけ該当箇所を差分更新する
 - 単なるHEAD前進だけでは構造資料を更新しない
-- phase、RC、release gate等の節目では、全前提資料のsource参照、相互link、current status、重複・historical表記を全体監査する
+- phase、RC、release gate等の節目では全前提資料を全体監査する
 
-### formal exact expected-old-SHA leaseの限定
+### HISTORICAL_NON_NORMATIVE
 
-本ルールで禁止するforceは、`--force`、expected old OIDを明示しない`--force-with-lease`、non-direct-child target、または承認外ref rewriteです。
-
-別承認されたformal contractが要求し、exact ref、live exact `H0`、parent exact1=`H0`のverified direct-child target、exact changed paths、push直前head再確認、full post-fetchを全て固定した`--force-with-lease=refs/heads/main:<H0>`は、この禁止対象へ含めません。
-
-この例外はformal CAS transactionだけです。通常write、history rewrite、unleased forceへ一般化しません。lease mismatch / head drift時はrefを変更せずSTOPします。
+2026-07-25までのformal exact expected-old-SHA lease、direct-child、single-chain、full post-fetch条件はcurrent GitHub反映条件ではありません。Git履歴上の当時記録としてのみ扱います。
 
 ## 提出前チェック
 
