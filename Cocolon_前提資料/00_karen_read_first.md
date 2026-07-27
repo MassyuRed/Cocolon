@@ -7560,7 +7560,7 @@ NLS v2は、既知になったHoldout A / Bへ後付け調整して延命すべ�
 
 ## 確認元の固定
 
-今後のcurrent implementation確認元は、原則としてGitHub上の`MassyuRed/Cocolon:main`と`MassyuRed/mashos-api:main`です。作業開始時にheadを確認し、設計・handoffが指定するpredecessor commitを固定します。作業中に`main`が進んでも黙って追従しません。
+今後のcurrent implementation確認元は、原則としてGitHub上の`MassyuRed/Cocolon:main`と`MassyuRed/mashos-api:main`です。作業開始時にheadを確認し、設計・handoffが指定するpredecessor commitを固定します。設計・実装sourceの指定predecessorは黙って差し替えません。GitHub反映ではcurrent contractを優先し、target非衝突のHEAD前進なら最新版を読み直して続行します。
 
 固定commitからcheckout、download、ZIP、作業用copyとしてlocalへmaterializeしたfileは、path / blob / hashが一致する限りGitHub上の同じ実ファイルです。localかcloudかを仕様、owner、authorityの分岐にしません。不一致時だけ同一視を止め、commit / path / hash差を提示してSTOPします。
 
@@ -7641,7 +7641,9 @@ P2 forward ownerとrc0031 Catalogはsource treeへ追加済みですが、`exper
 7. P2 Freeze handoff / receipt
 8. 2026-07-20 Session Handoffは履歴navigation
 
-# 2026-07-25 差分追記: Cocolon GitHub transport / session continuity
+# HISTORICAL_NON_NORMATIVE: 2026-07-25 Cocolon GitHub transport / session continuity
+
+この節のdeploy key、fingerprint、SSH、full fetch、expected-old lease、direct-child、post-fetch条件は当時の履歴であり、current GitHub反映条件ではありません。
 
 formal GitHub反映またはGitHub transport可否を判断する作業では、`07_latest_snapshot_diff.md`に加えて`11_cocolon_github_transport_and_session_continuity.md`を必読ownerとします。
 
@@ -7663,7 +7665,9 @@ Mash様へ作業を求める場合のprimary ownerは、`work_attitude_rules_for
 
 Cocolonのlocal private counterpart消失時の具体的なGitHub Deploy keys復旧手順は、`11_cocolon_github_transport_and_session_continuity.md`を正本とします。
 
-# 2026-07-25 差分追記: GitHub Actions publication guardian bootstrap
+# HISTORICAL_NON_NORMATIVE: 2026-07-25 GitHub Actions publication guardian bootstrap
+
+この節はGuardian構築当時の履歴です。Guardianは`RETIRED_DISABLED`であり、Replacement 02 SSH routeをcurrent routeとして読みません。
 
 Cocolonのformal publication guardianを扱う時は、次の順で読みます。
 
@@ -7724,3 +7728,16 @@ ABANDONED_NOT_TO_BE_REFLECTED
 番人のworkflow、Issue駆動publication、sandbox publication、diagnostic
 maintenanceはcurrent publication routeとして使いません。再開には、
 changed actual environmentを根拠とするMash様の新しい明示authorityが必要です。
+
+
+## 2026-07-27 current GitHub reflection contract
+
+GitHub反映方法と完了判定の唯一のcurrent正本は
+`11_cocolon_github_transport_and_session_continuity.md`の
+`CURRENT_NORMATIVE_CONTRACT`です。
+
+華恋単独writer、Mash様承認scope、current latestとtarget conflictの確認、target contentと今回のwrite commit changed pathsのpostverificationを維持します。
+
+特定鍵、SSH、expected-old CAS、direct-child、single commit、whole repository / all unchanged paths、full recursive postfetch、future-scale proof、durable storeをGitHub反映の必須条件にしません。
+
+HEADが進んだだけでは停止せず、targetに衝突がなければ最新版を読み直して続行します。この契約を華恋、設計書、test、receipt、後続資料は厳しく変更できません。変更できるのは、Mash様が変更条文と変更後内容を別作業として明示承認した場合だけです。
