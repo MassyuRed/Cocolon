@@ -5683,3 +5683,128 @@ Correction receipt logical SHA-256:
 ```text
 b4ecc1cae4e5e97fedfd14a3cd40fc47868925d07bbda02a5b762d4fc6f62a26
 ```
+
+## 12.47 2026-07-27 Recovery Epoch002 post-D2 successor causal RED freeze
+
+Approved authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_REMEDIATION_RED_FREEZE_ONLY
+```
+
+Entry pins were re-read immediately before publication and matched:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+e862a5600dd90927d7b74ef3214cc284908a2a4f
+
+mashos-api:
+5eb4d6d1f0a18a715f33305e7fb7cfe92be42d74
+
+mashos-api tree:
+b7ad6dd2dbc90e9db296f8599103597d6bbd7ff7
+```
+
+Exactly one mashos-api test path was added in direct child
+`e4ea7b6b90642a1ab4e9e1e08aac3ee7bcc9374d`:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+```
+
+Frozen identity:
+
+```text
+raw SHA-256:
+3e5cdcd5c2cd2113f273f6cc1a43ff09bdd4845b14cd7aea49237d26cfc0753b
+
+Git blob SHA-1:
+1616de8b9f738b7037b6e18a64113280fa6ec478
+
+lines / bytes / trailing LF:
+10075 / 363349 / exact1
+```
+
+The static gates passed: pyflakes, exact64 collection, the embedded static
+contract, exact64 unique case IDs/codes, exact15 roles over exact12 paths,
+and exact22 target-plus-protected hashes.
+
+Final independent audits on the same raw SHA-256 returned:
+
+```text
+identity/hash/semantic:
+Blocker 0 / High 0 / Medium 0
+
+postfetch/publication:
+Blocker 0 / High 0
+
+independent input collision:
+1209 inputs / different-code 0 / valid-negative 0
+```
+
+The one permitted executing RED used isolated pytest with plugin autoload,
+conftest, cache provider, bytecode, PYTEST_ADDOPTS, and PYTEST_PLUGINS
+disabled. It ran exactly once:
+
+```text
+exit 1
+64 failed
+0 passed
+0 errors
+3.56s
+```
+
+The exact64 order is C01..C10, T01..T10, A01..A08, R01..R10, B01..B12,
+I01..I06, and P01..P08. The contract spans successor closure/completion,
+terminal exact134 evidence, accepted/Step00..10/all11 lineage, Event2
+exact13/exact14/exact15 atomic publication, independent replay, and
+formal-parent phase/port/stop behavior.
+
+The corrected Parent Addendum body-free receipt exact10 remains the identity
+target:
+
+```text
+identity SHA-256:
+527eb11a767582a2f86531e34e044dffa9f0ed034af91ef063c3acc33813ba6d
+```
+
+No production source/config/fixture/sample/lock changed. No owner was
+implemented. Candidate, Event1, readiness, reservation, attempt, terminal,
+accepted, Step00..10, all11, manifest, operational admission, Event2, and
+formal exact134 invocation remain zero. Source baseline remains unlocked.
+P2 and Cycle001 acceptance remain unauthorized.
+
+Cocolon reflects this result through exact5 paths: this plan, the latest
+snapshot, the RED result, its body-free receipt, and its handoff.
+
+Fixed state:
+
+```text
+RECOVERY_EPOCH002_POST_D2_SUCCESSOR_CAUSAL_RED_FROZEN_AUTHORITY_STOP
+```
+
+Exactly one next logical candidate:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SOURCE_BASELINE_ELIGIBILITY_SUCCESSION_ACCEPTED_STEP0_10_ALL11_EVENT2_ATOMIC_SUCCESS_OWNER_GRAPH_AND_FORMAL_PARENT_CONTINUATION_IMPLEMENTATION_TARGETED_GREEN_AND_SUCCESSOR_COMPLETION_ONLY
+```
+
+It is `KAREN_PROPOSED_SEPARATE_REAPPROVAL_REQUIRED`. It may not start
+automatically. The current authority does not permit production
+implementation, GREEN, candidate allocation, Event1/Event2 publication,
+formal exact134, P2, or Cycle001 acceptance.
+
+RED result raw SHA-256:
+
+```text
+020a6211750a45c7b78223af281d791269877775eac7c642917eb684cd9d94d4
+```
+
+RED body-free receipt logical SHA-256:
+
+```text
+ef65ab63be52ef0ff1e51177c1062338e81a7c3a0cf834149f6f75ac58d0b7c2
+```
