@@ -16186,7 +16186,9 @@
     "next_work": {
       "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_ISSUANCE_EXPECTED_OLD_PUBLICATION_AND_POSTVERIFICATION_REMEDIATION_ONLY",
       "status": "KAREN_DETERMINED_SEPARATE_MASH_APPROVAL_REQUIRED",
-      "durable_store_required_at_current_stage": false
+      "durable_store_required_at_current_stage": false,
+      "normative_status": "HISTORICAL_NON_NORMATIVE",
+      "superseded_by": "github_reflection_contract_replacement_2026_07_27"
     },
     "exact_changed_paths": [
       "07_latest_snapshot_diff.md",
@@ -16198,7 +16200,10 @@
       "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
       "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
       "work_attitude_rules_for_karen/manifest.json"
-    ]
+    ],
+    "normative_status": "HISTORICAL_NON_NORMATIVE",
+    "superseded_by": "github_reflection_contract_replacement_2026_07_27",
+    "historical_note": "This object preserves the authority and next-work state observed at its checkpoint. Its expected-old publication token is not a current GitHub reflection condition or current next-work authority."
   },
   "latest_modified_premise_files_2026_07_27_work_attitude_observable_effect_authority_and_position_consistency_guard": [
     "07_latest_snapshot_diff.md",
