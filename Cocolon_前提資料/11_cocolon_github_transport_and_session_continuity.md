@@ -1,16 +1,117 @@
 ---
 doc_id: cocolon_github_transport_and_session_continuity
-title: "Cocolon GitHub transport / session continuity owner"
-revision_date: "2026-07-26"
+title: "Cocolon GitHub reflection contract / historical transport record"
+revision_date: "2026-07-27"
 repository_scope: "MassyuRed/Cocolon"
 secret_material_allowed: false
 ---
 
 # 目的
 
-この資料は、Cocolonのformal GitHub反映に必要なtransport前提をsession間で失わないためのownerです。
+この資料は、Cocolonとmashos-apiのGitHub反映方法および反映完了判定の唯一のcurrent契約と、旧transport記録のhistorical ownerです。秘密鍵、passphrase、token、環境変数値、agent socket、credential traceは記録しません。
 
-登録済みdeploy keyというGitHub側の継続事実と、現在のWork sessionに秘密鍵が存在して実際に使えるというsession限定事実を分けます。秘密鍵、passphrase、token、環境変数値、agent socket、credential traceは記録しません。
+# CURRENT_NORMATIVE_CONTRACT: Cocolon GitHub反映契約
+
+normative_status: `CURRENT`
+
+この節だけを、Cocolonとmashos-apiのGitHub反映方法および反映完了判定のcurrent正本とする。
+
+この節より後ろに残す鍵、SSH、expected-old、Guardian、receipt、run、過去commitの記録は、当時の経緯を保存する`HISTORICAL_NON_NORMATIVE`であり、現在のGitHub反映条件、停止条件、成果物の正式性条件として使用しない。
+
+ここでいう`exact path`は、対象repository内の同一完全pathを意味する。
+
+## 1. 作業者
+
+Cocolonとmashos-apiへ書き込む作業者は華恋だけとする。
+書き込みは、Mash様が承認した作業範囲に限る。
+他の作業者が同時に書き込むことを、事実確認なしに前提へ入れない。
+将来の複数人作業や大規模運用を理由に、現在の書き込み条件を厳しくしない。
+
+## 2. 書き込み前に確認すること
+
+華恋は書き込み直前に、次だけを確認する。
+
+- 現在のGitHub最新版。
+- 承認された対象ファイル。
+- 新規ファイルなら、同じexact pathに既存ファイルがないこと。
+- 修正ファイルなら、現在の内容が作業時に確認した内容と一致すること。
+- 承認外のファイルを変更しないこと。
+
+## 3. 書き込み方法
+
+現在利用できるGitHub機能を使って書き込む。
+特定の鍵、特定の通信方法、特定のコマンドを必須にしない。
+GitHub機能の都合で複数回の書き込みになることを許容する。
+「一回の承認につき必ず一つのcommitにまとめる」とは要求しない。
+承認されたファイル以外を混ぜない。
+
+## 4. 書き込み後に確認すること
+
+書き込み後は、次をGitHubから取得して確認する。
+
+- 対象ファイルが存在すること。
+- 対象ファイルの内容が、作成した成果物と一致すること。
+- 華恋が今回生成したwrite commit群のchanged-path setに、承認外のファイルが含まれていないこと。
+- GitHubの最新版に、承認された全成果物が含まれていること。
+
+対象ファイルと今回のwrite commit群のchanged-path setを確認できればよく、repository全体、全tree、全blob、全unchanged pathを毎回取得・検証する必要はない。
+
+## 5. 作業を止める条件
+
+華恋が停止してよいのは、次の事実が確認された場合だけとする。
+
+- 対象ファイルが、確認後に別内容へ変更されていた。
+- 承認外のファイルを変更しなければ完了できない。
+- GitHubへの書き込みが実際に失敗した。
+- 書き込み結果が成功か失敗か確認できない。
+- 書き込み権限が実際にない。
+- 削除、履歴の書き換え、承認外の不可逆操作が必要になった。
+
+最新版が進んでいても、対象ファイルに衝突がなければ、最新版を読み直して続行する。最新版が変わったことだけでは停止しない。
+
+書き込み応答だけで成功・失敗が確定しない場合は、対象exact pathをGitHubから再取得して状態を確定する。成果物と一致すれば成功、書き込み前の内容または不存在のままなら未反映、別内容または取得不能なら結果不明として停止する。結果不明の対象を自動で再書き込みしない。
+
+## 6. 必須にしてはいけない条件
+
+次を通常のGitHub反映の必須条件にしてはいけない。
+
+- 特定の秘密鍵が現在のsessionに存在すること。
+- 特定のSSH経路、通信方法、書き込みコマンドを使うこと。
+- expected-old ref CASまたはexact leaseを使うこと。
+- direct-child commitを作ること。
+- single-treeまたは必ず一つのcommitで完了すること。
+- GitHub全体、全tree、全blobを毎回取得すること。
+- 全ファイル、全unchanged pathを毎回検証すること。
+- full recursive postfetchを行うこと。
+- durable write-once recovery storeの存在をrepository反映の前提にすること。
+- 複数作業者を前提にした競合防止機構。
+- 将来の大規模運用を前提にした証明作業。
+- 書き込み方法そのものを成果物の正式性条件にすること。
+
+これらを利用できないことだけを理由に、作業を停止してはいけない。
+
+## 7. 他資料との優先関係
+
+この契約を、GitHub反映方法と反映完了判定の唯一の正本とする。
+設計書、追加資料、テスト、成果物、receipt、後続計画は、この契約を厳しく変更できない。
+この契約より厳しい条件が過去資料または後続資料へ入っている場合、GitHub反映方法と反映完了判定に関するその条件は無効とする。
+古い厳しい条件だけを理由にテストが失敗した場合、作業停止理由ではなく、そのテスト側の不具合として扱う。
+「より安全になる」という理由でも、条件追加を認めない。
+
+runtime処理自体に必要なdata durability、hash、schema、因果関係、owner graph等は、それぞれのruntime/product contractで検証できる。ただし、それらをGitHubの書き込み方法、GitHub反映の正式性、GitHub反映開始の追加条件へ変換してはいけない。
+
+## 8. 変更権限
+
+華恋は、この契約を独断で変更できない。
+設計作業の一部として変更できない。
+テストを通すために変更できない。
+より厳しい条件を追加することも「契約変更」とみなす。
+変更できるのは、Mash様が変更する条文と変更後の内容を明示し、別作業として承認した場合だけとする。
+他作業の承認へ契約変更を混ぜてはいけない。
+
+# HISTORICAL_NON_NORMATIVE_TRANSPORT_RECORDS
+
+以下は当時の鍵、SSH、expected-old、Guardian、receipt、run、commitを保存する履歴である。現在のGitHub反映条件、停止条件、成果物正式性条件ではない。
 
 # 継続して参照する非秘密情報
 
@@ -744,7 +845,7 @@ Replacement 03の再登録・削除・rotationを今回の結果から要求し�
 分離したまま維持する。今回の診断はActions route内の失敗証拠を狭めるための
 ものであり、鍵運用を通常成果物へ戻す変更ではない。
 
-## 2026-07-26 current transport: guardian retirement
+## HISTORICAL_NON_NORMATIVE: 2026-07-26 guardian retirement record
 
 GitHub Actions publication guardianはcurrent publication routeではありません。
 workflowはrepository metadataで`disabled_manually`です。
