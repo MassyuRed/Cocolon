@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
-revision_date: "2026-07-25"
+revision_date: "2026-07-27"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -21952,3 +21952,212 @@ KAREN_DETERMINED_SEPARATE_MASH_APPROVAL_REQUIRED
 
 このrule correction checkpoint自体は、Mash様へdeploy key、publication
 transport、store、path、秘密情報の提供・指定を求めない。
+
+
+# 2026-07-27 current authority correction: single-worker GitHub reflection contract replacement
+
+## Authority
+
+```text
+Mash explicit approval:
+contract replacement + duplicated-rule reconciliation + active downstream
+transport-condition removal + normal GitHub publication/postverification
+```
+
+## 確認した事実
+
+- Cocolonとmashos-apiのwrite作業者は華恋だけである。
+- GitHub writeはMash様が承認したscopeだけを対象にする。
+- Guardianは`RETIRED_DISABLED`であり、current publication routeではない。
+- 旧current資料とactive downstream testは、特定鍵、SSH、expected-old ref CAS、direct-child、single commit、whole-tree / all-unchanged-path verification、full recursive postfetch、durable store capabilityをGitHub反映の成立条件にしていた。
+- その条件はcurrent actual environmentに対して過剰であり、通常のGitHub機能による反映を停止させた。
+- `11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`を、GitHub反映方法と完了判定の唯一のcurrent正本とした。
+- 旧鍵、SSH、expected-old、Guardian、receipt、runの記録は`HISTORICAL_NON_NORMATIVE`として保持する。
+- old Parent Design、Parent Addendum、result、receipt、handoffのbytesは変更していない。
+
+## position correction
+
+prior position:
+
+```text
+S1 artifact publication requires expected-old direct-child exact1 + full postfetch.
+P1 operational capability requires a user-provided publication transport and durable store proof.
+```
+
+current position:
+
+```text
+S1 artifact publication uses currently available GitHub functionality and is
+complete when target content, Karen write-commit changed paths, and current latest
+are postverified under the approved exact scope.
+
+A special publication transport or durable store is not a repository-reflection
+prerequisite. Runtime durability may be handled only as a separate runtime contract
+and cannot tighten this GitHub reflection contract.
+```
+
+change basis:
+
+1. Mash様がGitHub反映契約の変更条文と変更後内容を明示し、別作業として承認した。
+2. current actual environmentは華恋単独writerであり、仮想的な複数writerをcurrent requirementへ入れない。
+3. Guardian退役後の最小境界と旧expected-old/full-tree条件が矛盾していた。
+4. 旧推論のexact errorは、runtime/product evidenceの厳格性をGitHub write transportの正式性へ変換したことである。
+
+correction:
+
+```text
+specific key / SSH / expected-old CAS / direct-child / single commit /
+whole-repository verification / full recursive postfetch /
+durable store as GitHub-reflection prerequisite:
+INVALID_FOR_CURRENT_GITHUB_REFLECTION
+
+artifact content / hash / schema / causality / owner graph:
+RETAINED
+```
+
+## current contract implementation
+
+```text
+canonical owner:
+Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+
+current downstream design:
+EmlisAIの実装済み資料/documents/
+NLSv3_Step11_Cycle001_RecoveryEpoch002_GitHubReflectionContractCorrection_20260727.md
+
+mashos-api baseline:
+61547113629ac3143be237ec79800da790c78970
+
+mashos-api correction commit:
+05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b
+
+active changed paths:
+298665c10f27cfee48038ada615c63a2a99f4c00  ai/services/ai_inference/emlis_ai_recovery_epoch002_accepted_test_run_receipt_v3.py
+1826f723804c6ab8ae78eb0c41b2d993d45d4fe4  ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ce635d27b0fbd0c1c6cd65ac7866bdd7090e1f06  ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+80cc2939360df853f9d070df8c09dc0564b73666  ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py
+e9449a2c7367ad80c642ebcfe12095fc9ad2ebed  ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+52e781f348578637ffd56ce52a1bd0163011cb07  ai/tools/emlis_nls_v3_recovery_epoch002_current_step_proof_run.py
+ee89220f6c0421c067eb9dca2bd3d807574623d1  ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b  ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_evidence_v3.py
+
+reflection contract marker:
+COCOLON_GITHUB_REFLECTION_CONTRACT_V1
+
+targeted verification:
+targeted C10/A06: 2 passed in 100.41s
+subagent exact110: 110 passed in 455.41s
+Karen independent exact110: 110 passed, 1 warning in 456.65s
+semantic audit: blocker exact0
+```
+
+## current GitHub reflection state
+
+```text
+writer:
+Karen
+
+method:
+currently available GitHub functionality
+
+multiple bounded write operations:
+allowed
+
+head advance without target conflict:
+continue after rereading latest
+
+whole repository verification:
+not required
+
+unknown result:
+refetch target / no blind retry
+
+contract change authority:
+Mash explicit separate approval identifying clause and replacement text
+```
+
+## Historical disposition of prior current tail
+
+The previous tail statement:
+
+```text
+publication: expected-old direct child exact1 + full postfetch
+```
+
+is `HISTORICAL_NON_NORMATIVE` for GitHub reflection method and completion. The target path, artifact bytes, hash, schema, causal RED result, and owner evidence remain valid.
+
+## Work Unit A completion state
+
+```text
+COCOLON_GITHUB_REFLECTION_CONTRACT_CURRENT_ACTUAL_ENVIRONMENT_REPLACED
+ACTIVE_SPECIAL_TRANSPORT_GATES_REMOVED
+ACTIVE_TARGETED_TESTS_GREEN
+HISTORICAL_ARTIFACTS_PRESERVED
+S1_RESULT_ARTIFACT_NOT_YET_PUBLISHED
+```
+
+## Next separate work unit
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_S1_SUCCESSOR_CAUSAL_RED_RESULT_ARTIFACT_PUBLICATION_AND_POSTVERIFICATION_REMEDIATION_ONLY
+
+target:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_Successor_RED_Result_20260726.json
+
+operation:
+create exact1 with currently available GitHub functionality
+
+postverify:
+target exists
+target bytes equal prepared artifact
+Karen write commit contains no unapproved path
+current Cocolon main contains the target
+
+GREEN / successor completion / P1 / Event1 / Event2 / P2:
+exact0
+
+automatic progression:
+false
+```
+
+Contract replacement and this current-authority correction do not themselves claim the missing JSON has already been published. Record that publication only after its separate write and postverification succeed.
+
+
+## 2026-07-27 Work Unit A GitHub publication evidence
+
+```text
+Cocolon baseline before Work Unit A:
+7f29fadcadd3a3682a1243f5ed48149d40ae2a92
+
+Cocolon head before this 07 authority write:
+6703262638f99c0647a3545ca72acce36250b204
+
+verified write commit and exact changed path before this 07 write:
+e179d68083abc8be3cd25843051c07e2120e0005  Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md
+00b0cc528f48b316e8e5f7bc9f33578516650bb2  Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
+71a7a4e8349f3a710471096391d3a6770242af00  Cocolon_前提資料/work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt
+46e408765469c7c7b4c7160cf6c9b9a09173ca32  Cocolon_前提資料/work_attitude_rules_for_karen/08_artifact_delivery_rules.txt
+18ab91d615c69d6c281b0fae432f61e43fbe9dc1  Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt
+06905557d32fccc8b5280814a7eebd88b3de3afd  Cocolon_前提資料/work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt
+87d150b8e841e56624d0e25e4b57ef577d36ac94  Cocolon_前提資料/work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt
+4b4e5a8f9cd941600889faa07dc8c47409098932  Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt
+a084311ad2a4c34257487b6b8b959f81560e6c24  Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json
+0f69325ab2e8cc249991af6258c365d2944ec11a  Cocolon_前提資料/00_karen_read_first.md
+c0eed793b3b943b75068c6d99d7d6aed247f84d7  Cocolon_前提資料/05_cocolon_rule_file_index.md
+4a376b232aca24726051eb4c042f9ebe8eee794b  EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+296e51d5d185e4c7c5e9132c8df1d2adf6778511  EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_GitHubReflectionContractCorrection_20260727.md
+6703262638f99c0647a3545ca72acce36250b204  Cocolon_前提資料/manifest.json
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+```
+
+上記14 commitは各々base/head compareでtotal commit exact1、changed path exact1を確認し、
+current mainのtarget blob/contentをprepared artifactと照合した。この`07`自身も同じ
+exact1 changed-path確認とcontent照合を行い、Work Unit Aのfinal current headとする。
+
+mashos-api exact8 writeの最終headは
+`05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b`である。Cocolon / mashos-apiとも、特定鍵、SSH、
+expected-old CAS、direct-child、single commit、whole-repository/full-recursive/durable-store
+をGitHub反映条件にせず完了した。
