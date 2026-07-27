@@ -12,7 +12,7 @@ Mash様が明示的に許可した場合だけ、仮説案として分けて提�
 - GitHub上のcurrent headまたは設計・handoff指定predecessor commitを確認できない。
 - 固定GitHub commitとlocal checkout / ZIP / copyのpath / blob / hashが一致しない。
 - user-supplied未push overlayとGitHub predecessorの境界が不明。
-- 作業中にGitHub mainが進み、固定predecessorを維持するかrebaseするかのauthorityがない。
+- 設計・実装sourceが指定predecessorへ依存し、そのsource自体が変更されているが、どのsourceを使うかのauthorityがない。GitHub反映時のtarget非衝突HEAD前進だけでは停止しない。
 - 指示が設計なのか実装なのか不明。
 - 既存contractに影響するが、該当資料を見ていない。
 - DB write path / physical name / legacy routeに触れそうだが、明示指示がない。
@@ -69,45 +69,28 @@ EmlisAI作業では、次の状態になったら実装を止める。
 この停止条件に該当した場合は、修正に入らず、確認済み・未確認・書かれていない・推測禁止・次に実行すべきことを出して止める。
 
 
-## 2026-07-21 差分追記: GitHub直接反映の停止条件
+## 2026-07-27 current: GitHub直接反映の停止条件
 
-次のいずれか一つでも該当する場合、GitHubへwriteせず停止する。
+GitHub反映方法と完了判定は`11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`だけを正本とする。
 
-- Mash様の明示承認が対象checkpointまたは対象成果物まで特定できない。
-- write直前の`Cocolon` / `mashos-api` HEADを確認できない。
-- current HEADと指定predecessorの関係が不明である。
-- local / ZIPのSHA-256、target path、new / modifyの別を確認できない。
-- 既存target blobと承認済み成果物が意味上衝突する。
-- 作業中にHEAD driftが起き、固定predecessor維持または追従のauthorityがない。
-- 承認済みexact path外、unleased force、expected old OIDなしのforce-with-lease、history rewrite、削除、無関係なrename・整形・production変更が必要になる。
-- GitHub上の反映後fileを再取得できず、内容一致とfinal HEADを確認できない。
+華恋がGitHub反映を停止してよいのは、次の事実が確認された場合だけである。
 
-停止時は、確認済みHEAD、期待path / hash、実際の差分、必要なMash様の判断だけを示す。推測でrebase、上書き、削除、unleased forceをしない。
+- 対象fileが確認後に別内容へ変更されていた。
+- 承認外fileを変更しなければ完了できない。
+- GitHubへのwriteが実際に失敗した。
+- write結果が成功か失敗か確認できない。
+- GitHub write権限が実際にない。
+- 削除、history rewrite、承認外の不可逆操作が必要になった。
 
-## 2026-07-21 差分追記: ZIP fallback停止境界
+最新版が進んでいても対象fileに衝突がなければ、最新版を読み直して続行する。最新版が変わったことだけでは停止しない。
 
-GitHub反映不能、write失敗、または反映後確認不成立の場合は、GitHub反映済みとは報告しない。部分反映の有無とcurrent HEADを先に確認する。
+write応答だけで結果が確定しない場合は対象exact pathを再取得する。成果物と一致すれば成功、write前の内容または不存在のままなら未反映、別内容または取得不能なら結果不明とする。結果不明の対象を自動retryしない。
 
-HEAD drift、hash不一致、意味衝突、承認外変更が未解決ならZIPで迂回せずSTOPする。成果物が完成済みで、反映不能が権限・接続・GitHub操作機能等のtransport境界に限られる場合だけ、確認できた新規fileと修正fileに限定したZIPをfallback成果物として提出できる。未変更fileや全量repositoryを含めず、remoteで確認できた状態と未確認範囲を分ける。
+GitHub反映不能、write失敗、または反映後確認不成立の場合は、GitHub反映済みとは報告しない。部分反映の有無とcurrent target stateを先に確認する。成果物が完成済みでGitHubへ実際に反映できない場合だけ、確認できた新規fileと修正fileに限定したZIPをfallback成果物として提出できる。未変更fileや全量repositoryを含めない。
 
-## 2026-07-25 差分追記: formal Git transport停止条件
+## HISTORICAL_NON_NORMATIVE: 2026-07-25 formal Git transport停止条件
 
-次の一つでも該当すればformal Git transportを実行しない。
-
-- `11_cocolon_github_transport_and_session_continuity.md`の期待fingerprint / repository scope / write accessを未確認。
-- 秘密鍵が不在・読取不能、導出fingerprint不一致、またはgroup / other permissionが0でない。
-- 秘密鍵、passphrase、token、credential内容が出力・記録へ露出した。
-- GitHub host identityをstrictに検証できない。
-- remoteがexact repositoryでない。
-- authenticated `ls-remote`が失敗、またはmainが固定`H0`と不一致。
-- `H0`のbase tree / recursive tree /全blobを取得できない。
-- receive-pack / exact lease preflightが失敗。
-- session変更後のfingerprint / host / repository / live head / fetch / lease再確認が未了。
-- actual targetが`H0`のverified direct childでない、changed pathsがexact setでない。
-- actual exact lease pushがrejected / stale / unknown。
-- push直後のremote head、parent、full tree / blob equalityを確認できない。
-
-dry-run成功、normal fast-forward、connector write permissionを`EXPECTED_OLD_SHA_MATCHED_AND_UPDATED`と同値扱いしない。credential露出時はformal作業を止め、revoke / rotate等の必要作業だけをMash様へ求める。認証情報をchatへ貼るよう求めない。
+当時の鍵、SSH、fingerprint、host、full fetch、expected-old lease、direct-child、full-tree / blob equality条件はGit履歴上の旧ruleである。現在のGitHub反映条件または停止条件として使用しない。秘密情報を出力・記録しない一般境界だけを維持する。
 
 ## 2026-07-27 差分追記: observable effect gateの停止と違反回復
 
