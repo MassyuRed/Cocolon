@@ -802,3 +802,88 @@ blocker exact0
 
 このevidenceはWork Unit Aだけを成立させる。欠落S1 JSONのpublicationは
 Work Unit Bまで未成立であり、P1、Event1、formal exact134、Event2、P2へは進めない。
+
+
+# 11. 2026-07-28 二残件の監査訂正と exact110 再確認
+
+## 11.1 訂正した事実
+
+直前の監査で、次の二点をcurrent mainの未修正残件と分類したが、その分類は誤りだった。
+GitHub current mainではなく、反映前の旧local checkoutを確認対象に混在させたことが原因である。
+
+1. P1 operational admission / Event1のcanonical current fixtureに、
+   `transport_capability`、`durable_store_capability`、
+   `transaction_capability`、`ref_update_mode`が残り、実質必須であるという分類。
+2. success exact15がsingle-commitを実質必須とし、複数write commitを受理しないという分類。
+
+GitHub上のmashos-api current main `05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b`を
+再取得して確認した事実は次のとおり。
+
+- operational admission validatorは`transport_capability`と`durable_store_capability`をoptional keyとして扱う。
+- Event publication validatorは`transaction_capability`と`ref_update_mode`をoptional keyとして扱う。
+- canonical C10 fixtureは上記4 keyを持たない状態をowner validatorとindependent verifierの双方で受理する。
+- success exact15は`write_commits`と`publication_commit_sha1_by_path`でpathごとのwrite commitを拘束する。
+- B08は異なる2 commitへ7 path / 8 pathを分割したmulti-write stateをowner validatorとindependent verifierの双方で受理する。
+- direct-child、single-tree、single-commit、repository全体のunchanged path、full recursive postfetchをcurrent成立条件へ戻していない。
+
+したがって、この二点に対する追加production/test修正は不要であり、no-op commitも作成しない。
+既存のcurrent実装を変更しないことが承認された「二件だけの最小修正」に対する最小処置となる。
+
+## 11.2 mashos-api対象commitとcurrent blobの再確認
+
+```text
+298665c10f27cfee48038ada615c63a2a99f4c00  ai/services/ai_inference/emlis_ai_recovery_epoch002_accepted_test_run_receipt_v3.py
+1826f723804c6ab8ae78eb0c41b2d993d45d4fe4  ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+80cc2939360df853f9d070df8c09dc0564b73666  ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py
+ce635d27b0fbd0c1c6cd65ac7866bdd7090e1f06  ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+e9449a2c7367ad80c642ebcfe12095fc9ad2ebed  ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+
+current main head:
+05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b
+
+current blob:
+95a96d26a667ae2af4c06f96fa5d4deded38dc1a  accepted_test_run_receipt_v3.py
+933d8bcbbb50e997c119b33f554e68bb3599cb36  sequence_ledger_v3.py
+0ff7d11191d1232d979754c59bf5356d7f048331  atomic_publication_bundle_v3.py
+a57e7e4b20acf28b6b997a2317a4d16f9bcbaa0a  post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+3015e656b0ded5cfa3a392a16925050a51236bbb  closure_receipt_verify.py
+```
+
+各対象commitはGitHub commit objectでchanged path exact1を確認し、current mainのtarget blobは
+再検証に用いたclean checkoutのblobと一致した。
+
+## 11.3 exact110再実行結果
+
+初回の診断実行でC09/C10が`OWNER_VERIFIER_DISAGREEMENT_STOP`となったのは、
+診断用Python importが生成した未追跡`__pycache__`をlive clean-source検証が検出したためである。
+生成物をrepository外へ隔離し、`PYTHONDONTWRITEBYTECODE=1`、
+`PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`、`-p no:cacheprovider`で再実行した。
+
+```text
+historical exact46 + targeted C09/C10:
+48 passed, 1 warning in 44.63s
+
+historical exact46 + current exact64 = exact110:
+110 passed, 1 warning in 186.52s
+```
+
+exact110には、artifact content/bytes、raw/git-blob/logical hash、schema、body-free、
+causal succession、terminal lineage、owner graph、owner/independent disagreement、
+approved path scope、target postverificationのnegative検証が残っている。
+transport固有条件だけを外し、非transportのfail-closed検証は緩和していない。
+
+## 11.4 current判定
+
+```text
+STALE_LOCAL_RESIDUAL_CLASSIFICATION_RETRACTED
+CURRENT_MAIN_TWO_REPORTED_RESIDUALS_ALREADY_RESOLVED
+CONTENT_HASH_SCHEMA_CAUSALITY_OWNER_GRAPH_NEGATIVES_PRESERVED
+EXACT110_GREEN
+NO_ADDITIONAL_MASHOS_API_DELTA_REQUIRED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+この訂正はWork Unit Aの実装evidenceを再確認するものであり、過去receipt、欠落S1 JSONの
+bytes/hash/schema/因果、または既存closureを改変しない。S2、P1、candidate、Event1、
+formal exact134、Event2、P2、Cycle001 acceptanceを開始・承認しない。
