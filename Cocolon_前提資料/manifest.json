@@ -8,10 +8,10 @@
   "canonical_current_authority": "07_latest_snapshot_diff.md",
   "authority_resolution": {
     "Cocolon_ref": "MassyuRed/Cocolon:main",
-    "Cocolon_last_reflected_task_head": "7533587673f1e895ea056b18562deaa6059f0aba",
     "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
-    "mashos-api": "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf",
-    "verified_at": "2026-07-21 JST"
+    "mashos-api": "MassyuRed/mashos-api:main@05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
+    "verified_at": "2026-07-27 JST",
+    "current_authority": "07_latest_snapshot_diff.md + 11_cocolon_github_transport_and_session_continuity.md CURRENT_NORMATIVE_CONTRACT"
   },
   "update_policy": {
     "current_authority": "after_each_completed_github_reflection_and_post_write_verification",
@@ -1497,7 +1497,7 @@
   "docs": [
     {
       "path": "00_karen_read_first.md",
-      "purpose": "華恋用READ FIRST。currentは07を単一authorityとして読み、rc0031 P3 prerequisite RED / Product grammar unresolved / production STOPを確認する。"
+      "purpose": "華恋用READ FIRST。07 current authority、11の唯一のGitHub反映契約、単独writerのactual environment、current NLS authority stopを最初に確認する。"
     },
     {
       "path": "01A_cocolon_overall_structure_app_foundation_home.md",
@@ -1537,7 +1537,7 @@
     },
     {
       "path": "05_cocolon_rule_file_index.md",
-      "purpose": "rule / policy / guard / test索引。07 current authority、最新P3 addendum / receipt、前提資料更新運用、GitHub-first delivery ruleを索引化する。"
+      "purpose": "rule / policy / guard / test索引。07 current authority、11の唯一のGitHub反映契約、HISTORICAL_NON_NORMATIVE分類、現行作業ルールを索引化する。"
     },
     {
       "path": "06_cocolon_filename_change_hold_ledger.md",
@@ -1545,7 +1545,7 @@
     },
     {
       "path": "07_latest_snapshot_diff.md",
-      "purpose": "canonical current authority。作業完了ごとのexact heads、最新差分、rc0031 state / STOP / next authorityを小差分更新する。"
+      "purpose": "canonical current authority。GitHub実測head、Work Unit A/Bの状態、write commit scope、target postverification、次authorityを小差分更新する。"
     },
     {
       "path": "eai714_diff.csv",
@@ -1732,11 +1732,11 @@
     },
     {
       "path": "11_cocolon_github_transport_and_session_continuity.md",
-      "purpose": "Cocolon formal GitHub transportの登録identity、session continuity、Replacement 02 bootstrap / maintenance / fallback exact lease owner。秘密情報は記録しない。"
+      "purpose": "Cocolon / mashos-api GitHub反映方法と完了判定の唯一のcurrent契約、および旧key/SSH/Guardian transportのHISTORICAL_NON_NORMATIVE記録。"
     },
     {
       "path": "12_cocolon_github_actions_publication_guard.md",
-      "purpose": "GitHub Actions publication guardianのstate、strict request、actor、candidate非実行、exact lease、postverification、5試験、activation、SSH fallback owner。"
+      "purpose": "HISTORICAL_NON_NORMATIVE。RETIRED_DISABLEDのGitHub Actions publication guardian記録でありcurrent execution authorityではない。"
     }
   ],
   "excluded_files": [
@@ -3577,20 +3577,11 @@
     }
   },
   "current_source_snapshot": {
-    "source_mode": "github_pinned_commits_with_local_materialization",
-    "Cocolon": "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748",
-    "mashos-api": "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed",
-    "verified_at": "2026-07-20 JST",
-    "historical_local_premise": "Cocolon_前提資料(340).zip",
-    "historical_local_premise_sha256": "c2c2f3d4d71127b5ee7e029f3240dfb2b8f33c3e34b1c0b47c28c20ec73d4d5b",
-    "count_rule": "do not mix historical ZIP physical count with Git tracked blob count",
-    "local_materialization_rule": "same pinned commit/path/hash means same implementation; location alone creates no fork",
-    "latest_diff_csv": "eai720_diff.csv",
-    "latest_diff_csvs": [
-      "eai714_diff.csv",
-      "eai720_diff.csv"
-    ],
-    "latest_reflected_scope": "NLS v3 Step 11 Cycle 001 through rc0030 E3 Product Read STOP and rc0031 impact-scope definition; rc0031 implementation not started"
+    "source_mode": "github_current_contract_checkpoint",
+    "Cocolon": "MassyuRed/Cocolon:main@resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
+    "mashos-api": "MassyuRed/mashos-api:main@05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
+    "verified_at": "2026-07-27 JST",
+    "latest_reflected_scope": "NLS v3 Step11 Cycle001 Recovery Epoch002 Work Unit A GitHub reflection contract correction; S1 missing JSON publication remains separate Work Unit B"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -16219,5 +16210,165 @@
     "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
     "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
     "work_attitude_rules_for_karen/manifest.json"
-  ]
+  ],
+  "github_reflection_contract_replacement_2026_07_27": {
+    "normative_status": "CURRENT",
+    "authority": "Mash explicit approval in the 2026-07-27 contract replacement and downstream correction instruction",
+    "decision_owner": "Mash",
+    "canonical_owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "canonical_section": "CURRENT_NORMATIVE_CONTRACT",
+    "current_downstream_design": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_GitHubReflectionContractCorrection_20260727.md",
+    "execution_plan": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+    "applies_to": [
+      "MassyuRed/Cocolon",
+      "MassyuRed/mashos-api"
+    ],
+    "writer": "Karen",
+    "approved_scope_only": true,
+    "available_github_function_allowed": true,
+    "specific_key_transport_or_command_required": false,
+    "expected_old_ref_cas_required": false,
+    "direct_child_required": false,
+    "single_commit_required": false,
+    "whole_repository_or_all_unchanged_paths_verification_required": false,
+    "full_recursive_postfetch_required": false,
+    "durable_store_as_github_reflection_prerequisite": false,
+    "head_advance_without_target_conflict_is_stop": false,
+    "postverification": [
+      "target exists",
+      "target content equals prepared artifact",
+      "Karen write commits contain no unapproved paths",
+      "current latest contains all approved artifacts"
+    ],
+    "historical_non_normative_top_level_key_prefixes": [
+      "github_transport_session_continuity_",
+      "github_actions_publication_guardian_"
+    ],
+    "historical_route_fields_do_not_define_current_reflection": true,
+    "guardian_state": "RETIRED_DISABLED",
+    "downstream_transport_conditions_superseded": [
+      "specific private key or SSH route",
+      "expected-old ref CAS",
+      "direct-child requirement",
+      "single-tree or single-commit requirement",
+      "whole repository or all unchanged paths verification",
+      "full recursive post-fetch",
+      "durable store as a GitHub reflection prerequisite"
+    ],
+    "non_transport_contracts_retained": [
+      "artifact content",
+      "hash",
+      "schema",
+      "causal relation",
+      "owner graph"
+    ],
+    "contract_change_authority": "Mash explicit separate approval identifying clause and replacement text",
+    "result_commit": "resolve_from_github_revision_containing_this_checkpoint",
+    "exact_changed_paths": [
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "Cocolon_前提資料/manifest.json",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/08_artifact_delivery_rules.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_GitHubReflectionContractCorrection_20260727.md"
+    ],
+    "mashos_correction_local_review_commit": "fa856de824610fb51bd9e9b417ba90fbe04f60a",
+    "mashos_correction_head": "05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
+    "mashos_write_commits": [
+      {
+        "commit_sha1": "298665c10f27cfee48038ada615c63a2a99f4c00",
+        "changed_paths": [
+          "ai/services/ai_inference/emlis_ai_recovery_epoch002_accepted_test_run_receipt_v3.py"
+        ],
+        "blob_sha1": "95a96d26a667ae2af4c06f96fa5d4deded38dc1a"
+      },
+      {
+        "commit_sha1": "1826f723804c6ab8ae78eb0c41b2d993d45d4fe4",
+        "changed_paths": [
+          "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py"
+        ],
+        "blob_sha1": "933d8bcbbb50e997c119b33f554e68bb3599cb36"
+      },
+      {
+        "commit_sha1": "ce635d27b0fbd0c1c6cd65ac7866bdd7090e1f06",
+        "changed_paths": [
+          "ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py"
+        ],
+        "blob_sha1": "a57e7e4b20acf28b6b997a2317a4d16f9bcbaa0a"
+      },
+      {
+        "commit_sha1": "80cc2939360df853f9d070df8c09dc0564b73666",
+        "changed_paths": [
+          "ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py"
+        ],
+        "blob_sha1": "0ff7d11191d1232d979754c59bf5356d7f048331"
+      },
+      {
+        "commit_sha1": "e9449a2c7367ad80c642ebcfe12095fc9ad2ebed",
+        "changed_paths": [
+          "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py"
+        ],
+        "blob_sha1": "3015e656b0ded5cfa3a392a16925050a51236bbb"
+      },
+      {
+        "commit_sha1": "52e781f348578637ffd56ce52a1bd0163011cb07",
+        "changed_paths": [
+          "ai/tools/emlis_nls_v3_recovery_epoch002_current_step_proof_run.py"
+        ],
+        "blob_sha1": "605a8dd46e1fd55450b8959875bdad0685c1a5ca"
+      },
+      {
+        "commit_sha1": "ee89220f6c0421c067eb9dca2bd3d807574623d1",
+        "changed_paths": [
+          "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py"
+        ],
+        "blob_sha1": "811c039fd238166b5e498960525417e236c9d15c"
+      },
+      {
+        "commit_sha1": "05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
+        "changed_paths": [
+          "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_evidence_v3.py"
+        ],
+        "blob_sha1": "1f23704026ef8ad18db309488710eb9fd6e0906d"
+      }
+    ],
+    "verification": {
+      "targeted": "2 passed in 100.41s",
+      "subagent_exact110": "110 passed in 455.41s",
+      "karen_independent_exact110": "110 passed, 1 warning in 456.65s",
+      "semantic_audit_blockers": 0
+    }
+  },
+  "historical_current_source_snapshot_before_2026_07_27": {
+    "source_mode": "github_pinned_commits_with_local_materialization",
+    "Cocolon": "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748",
+    "mashos-api": "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed",
+    "verified_at": "2026-07-20 JST",
+    "historical_local_premise": "Cocolon_前提資料(340).zip",
+    "historical_local_premise_sha256": "c2c2f3d4d71127b5ee7e029f3240dfb2b8f33c3e34b1c0b47c28c20ec73d4d5b",
+    "count_rule": "do not mix historical ZIP physical count with Git tracked blob count",
+    "local_materialization_rule": "same pinned commit/path/hash means same implementation; location alone creates no fork",
+    "latest_diff_csv": "eai720_diff.csv",
+    "latest_diff_csvs": [
+      "eai714_diff.csv",
+      "eai720_diff.csv"
+    ],
+    "latest_reflected_scope": "NLS v3 Step 11 Cycle 001 through rc0030 E3 Product Read STOP and rc0031 impact-scope definition; rc0031 implementation not started"
+  },
+  "historical_authority_resolution_before_2026_07_27": {
+    "Cocolon_ref": "MassyuRed/Cocolon:main",
+    "Cocolon_last_reflected_task_head": "7533587673f1e895ea056b18562deaa6059f0aba",
+    "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
+    "mashos-api": "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf",
+    "verified_at": "2026-07-21 JST"
+  }
 }
