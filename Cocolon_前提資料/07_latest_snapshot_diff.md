@@ -22690,3 +22690,173 @@ AUTHORITY_STOP
 このcheckpointはobject member-order reconciliationとtargeted GREENだけを閉じる。
 source closure exact20、combined-GREEN exact16 publication、completion exact13 issuance、
 P1、Product Read、Cycle001正式受入へ自動進行しない。
+
+
+## 2026-07-28 current authority — Recovery Epoch002 post-D2 successor exact20 semantic calculation / exact16 + exact13 issuance and postverification
+
+### Authority and entry
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_CLOSURE_EXACT20_SEMANTIC_CALCULATION_SUCCESSOR_COMBINED_GREEN_EXACT16_AND_COMPLETION_RECEIPT_EXACT13_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+
+Cocolon entry before exact16 publication:
+0ae51584c8f8b44959e2b7390ebe3d98907c13aa
+
+mashos-api canonical source commit:
+0205f81a4719a578f0e188bcfbd164cb9e2abb08
+
+mashos-api canonical source tree:
+677e9c0c4cdfcaf254aa9eb8089cdf3b02a85727
+
+mashos-api changed paths:
+exact0
+```
+
+This authority was limited to calculating the exact20 semantic closure from the
+final source, publishing and postverifying combined-GREEN exact16, issuing and
+postverifying completion exact13, and recording this minimal current pointer.
+It did not authorize a standalone exact20 file or any P1/later progression.
+
+### Final-source verification and semantic closure
+
+The canonical source was materialized cleanly at the exact remote commit/tree.
+Repository bytecode and pytest cache creation were disabled.
+
+```text
+targeted C09:
+1 passed / 1 warning
+
+successor exact64:
+64 passed / 1 warning
+
+historical exact46 + successor exact64 = exact110:
+110 passed / 1 warning
+
+warning:
+existing Pydantic V1 root_validator deprecation only
+
+source_closure exact20 semantic SHA-256:
+d4156b14eddf5e1f6a13411017bd522784b26e3e67d780203a727cc7cc1aa97f
+
+success-contract test manifest SHA-256:
+76f4115ce992f1718448aae4e0d2ce6c733c7f2902ffa50776e13833e6163f3c
+
+exact20 standalone publication:
+exact0
+```
+
+The exact110 ordered `test_node_ids` and identical ordered
+`executed_node_ids` were preserved. `outcome_states` was validated by exact
+key/value equality after canonical JSON round-trip without treating object
+member order as the ordered-node contract.
+
+### Combined-GREEN exact16 publication
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_Successor_GREEN_Result_20260726.json
+
+publication commit:
+ed03af56edefb378f74a0f5a20b08b6ab11abfd8
+
+Git blob:
+7d6763d9a2c38b8b3fc40c0e5b15e6328948d75a
+
+raw SHA-256:
+7beb737ba6962391df8d3549db0c5a483024d32a4abc52e059f99f89f91267c7
+
+logical receipt SHA-256:
+2cca7b1f1ce4586448352cf1041e990cde930d20dba3f2a0b72f09aec9f0414c
+
+external identity SHA-256:
+022e1f4014c055325e192f415601f31d890272cf24cbd837faac9dad8f8660d7
+
+state:
+SUCCESSOR_TARGETED_GREEN_COMPLETED
+```
+
+The publication commit changed only the fixed exact16 path. Refetch at the
+publication commit and current main matched the generated canonical bytes and
+Git blob exactly.
+
+### Successor completion exact13 issuance
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2SourceBaselineEligibilitySuccessorCompletion_BodyFree_Receipt_20260726.json
+
+publication commit:
+d1629e0e0fe3f04d715caa242aab751c5e62e30b
+
+Git blob:
+6dba9d00660f6dbac2013df331f77375a24e4648
+
+raw SHA-256:
+f29007bff71e8cc647b3ee18e8e8aaf8a59df841f6dd8ae739eb8544a6b4c98b
+
+logical receipt SHA-256:
+7b726c5fd6c7b87546962065a1bea48bdc20ed82a335e068debe828a9237e124
+
+external identity SHA-256:
+9213577db07d55c6901494ac2e30b69335c1e5b274079e491ca451aa3281b643
+
+state:
+SUCCESSOR_SOURCE_BASELINE_ELIGIBILITY_PROVED
+```
+
+The publication commit changed only the fixed exact13 path. Refetch at the
+publication commit and current main matched the generated canonical bytes and
+Git blob exactly.
+
+### Owner / independent postverification and stop
+
+The actual GitHub publication commit/blob/raw/logical identities for exact16
+and exact13 were substituted into the owner succession state. The exact13
+standalone owner validator, full owner succession validator, and independent
+success-contract replay returned:
+
+```text
+owner issue codes:
+exact0
+
+independent issue codes:
+exact0
+```
+
+The downstream graph used by the independent replay was semantic validation
+input only. No P1 admission, candidate, Event1, readiness, reservation,
+formal exact134, terminal, accepted, Step00..10, all11, Event2, P2, Product
+Read, Cycle acceptance, or actual-device operation was published or started.
+
+### GitHub reflection and current result
+
+```text
+exact16 write changed paths:
+exact1 / fixed exact16 path only
+
+exact13 write changed paths:
+exact1 / fixed exact13 path only
+
+Cocolon head before this 07 write:
+d1629e0e0fe3f04d715caa242aab751c5e62e30b
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+SUCCESSOR_SOURCE_CLOSURE_EXACT20_SEMANTIC_CALCULATED
+SUCCESSOR_COMBINED_GREEN_EXACT16_PUBLISHED_AND_POSTVERIFIED
+SUCCESSOR_COMPLETION_EXACT13_ISSUED_AND_POSTVERIFIED
+OWNER_ISSUE_CODES_EXACT0
+INDEPENDENT_ISSUE_CODES_EXACT0
+MASHOS_API_WRITE_EXACT0
+P1_NOT_STARTED
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+This checkpoint closes only the approved successor closure / combined-GREEN /
+completion-receipt issuance and postverification boundary. It does not
+authorize automatic progression beyond this authority.
