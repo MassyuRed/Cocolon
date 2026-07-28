@@ -6281,3 +6281,197 @@ runtime/candidate/Event1/readiness/reservation/exact134 effect.
 RECOVERY_EPOCH002_INVALIDATED_RECOVERY_EPOCH003_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 12.51 2026-07-29 Recovery Epoch003 D1 bootstrap/source/runtime causal RED freeze
+
+Approved and completed authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D1_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_RED_FREEZE_ONLY
+```
+
+Fixed entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+325bc7f7260803b2842b1dc1212833f5027768ac
+
+mashos-api:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+mashos-api tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+Recovery Epoch003 P0 external identity:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+```
+
+Exactly one mashos-api test path was added:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py
+```
+
+Publication:
+
+```text
+parent commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+commit:
+bcf164ce208fc8ebbf6c24bbfea42e3bd1a6ca98
+
+tree:
+ac813f00af0d4e4b587d916daf4513782c50918f
+
+Git blob:
+a469f4a71a69972f278b3a2cc1f6802c2f1bfa97
+
+raw SHA-256:
+3274af7cce8ad2d6cbbacee33aac28eddff1fc4ed90274d7fa190d54763c72df
+
+lines / bytes / trailing LF:
+2148 / 78447 / exact1
+
+compare:
+ahead 1 / behind 0 / total commits 1
+
+changed test / production paths:
+exact1 / exact0
+```
+
+The test freezes exact30 ordered nodes across exact7 oracle families:
+
+```text
+schema-pair dispatch:                 4
+expected/observed runtime separation: 6
+Event1/placeholder/noninheritance:    4
+independent projection:               3
+stable failure receipts:              5
+phase and zero-effect gates:          4
+artifact/path/publication scope:      4
+```
+
+Full node-array SHA-256:
+
+```text
+0bef6ece47573ce982f8beb57c0c711fa907b927f310760b286f6dd2a594bb0a
+```
+
+Static syntax, P0 identity, embedded contract, and exact30 collection gates
+passed. One isolated targeted execution then returned:
+
+```text
+30 collected
+0 passed
+30 causal failed
+0 errors
+0 skipped / xfailed / xpassed / deselected
+0 unexpected
+exit 1
+0.50s
+```
+
+Every node stopped at its unique frozen
+`RECOVERY_EPOCH003_BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_NOT_IMPLEMENTED`
+signature. The signature-array SHA-256 is:
+
+```text
+ecdc0031b2e93255b0e1a6384502843a0307c3791558d08d94dd77f79cccc852
+```
+
+The exact7 future D2 production owners remained byte-identical and contained
+zero Epoch003 symbols. Their canonical manifest SHA-256 is:
+
+```text
+6cc92b69bf85b1ad903cfcccb7860e324f84823d8f3c23f4a97b6831f182f1d3
+```
+
+Therefore this is causal RED for the absent additive Epoch003 contract, not
+a syntax, import, fixture, plugin, assertion-oracle, or repository-drift
+failure.
+
+Cocolon evidence:
+
+```text
+result commit / blob / raw:
+015930f3a8066017e02c50c61c41e4b4bcb6cd39
+492d123b0ae3a8e5427a8a3b7fa8e7a2c88d2449
+b8cc53a2aa3b703c8ccb6dc06851b66db65da12a4846739158a6244b2c7c9717
+
+receipt commit / blob / raw:
+ae9cc91f75cf753db4e10151b4f5a2117b4d0bd0
+18edfdb892cf20ab6e0a36d479cefe68182506e2
+3c29ac5c08d981b894d2f7b249a5a0d1abae60ae323bd0216cef9de397335928
+
+receipt logical SHA-256:
+442f1c7c59de1058a1baa09ee71aee318a0acac924a820e5b7fdbe22fa1b9c83
+
+receipt external identity SHA-256:
+e4ae6128eed6e20f2efdb9e302345ecaeec93a3cc395453b64d7faeb1454c777
+
+handoff commit / blob / raw:
+8c53f021aeb7404166f1ccf90b35d99d73920c6e
+8a89b5641ff81b093592c9ebee5c1b46dff7825b
+15b1f68c6fca26053035b495c8a55de812e984953617eec0af8808ca6572b259
+```
+
+Three read-only subagent lanes checked rules/scope, design completeness, and
+independent causality. Their edits, test runs, commits, and GitHub writes
+were exact0. Karen performed the final reconciliation, targeted execution,
+publication, and postfetch verification.
+
+Confirmed state:
+
+```text
+RECOVERY_EPOCH002:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH003:
+D1_CAUSAL_RED_FROZEN
+
+SOURCE_BASELINE:
+UNLOCKED
+
+CANDIDATE / EVENT1 / READINESS:
+UNALLOCATED / NOT_CREATED / NOT_CREATED
+
+RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0
+
+P2 / PRODUCT READ / CYCLE001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+Inference:
+
+The exact30 failure surface shows one cross-owner architectural absence:
+version-aware Epoch003 schema-pair dispatch plus separate expected reference
+and observed operational runtime proof. Relabeling or partially reusing
+Epoch002 evidence cannot satisfy the frozen matrix.
+
+Karen's opinion:
+
+D1 should stop here. The test bytes now make the repair obligation explicit
+without materializing runtime state or consuming one-shot authority. A later
+D2 must preserve the test and touch only the exact7 production owner set.
+
+Exactly one next logical authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+It is not approved by D1. Separate explicit approval is required. Do not
+progress automatically.
+
+```text
+RECOVERY_EPOCH003_D1_CAUSAL_RED_FROZEN_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
