@@ -1,0 +1,23 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch002.bootstrap_source_runtime_baseline_disposition_contract_reconciliation_design_frozen_receipt.v1",
+  "authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_UNREACHABLE_EVENT1_V2_BOOTSTRAP_SOURCE_CLOSURE_OPERATIONAL_RUNTIME_IDENTITY_AND_SOURCE_BASELINE_DISPOSITION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY",
+  "bound_design_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightUnreachable_BootstrapSourceClosureRuntimeIdentityBaselineDisposition_ContractReconciliation_Design_ReadOnly_20260728.md",
+  "bound_design_raw_sha256": "39650bba3930178cd96a19394a7bfe11868ef04fb30af6cf298c503c23f34eb9",
+  "cocolon_entry_commit_sha1": "f7bc287451001f9121f0e5cbe9836242304449df",
+  "mashos_api_source_commit_sha1": "a70d3c12be235381b4c63fd2f54b5319c1fd1931",
+  "mashos_api_source_tree_sha1": "ccddcf1901d2ea3cecddddc037c9c455e35cb36d",
+  "event1_external_identity_sha256": "dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682",
+  "event1_source_closure_sha256": "e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88",
+  "event1_bootstrap_closure_sha256": "75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe",
+  "formal_parent_phase_result_sha256": "4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3",
+  "stop_code": "PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP",
+  "selected_disposition": "PREFLIGHT_FAILURE_RECEIPT_REQUIRED_THEN_EPOCH002_INVALIDATION_BEFORE_SOURCE_REPAIR_AND_RECOVERY_EPOCH003_PARENT_DESIGN_REQUIRED",
+  "next_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_CLOSURE_RECEIPT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+  "preflight_failure_receipt_state": "REQUIRED_NOT_ISSUED",
+  "epoch002_invalidation_state": "REQUIRED_NOT_ISSUED",
+  "recovery_epoch003_state": "NOT_YET_DEFINED",
+  "state": "BOOTSTRAP_SOURCE_RUNTIME_BASELINE_DISPOSITION_CONTRACT_RECONCILIATION_DESIGN_FROZEN",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256": "9f45578357420d79700439319fc410bb2d490fbb4be2c1de515cfb3f9cc52060"
+}
