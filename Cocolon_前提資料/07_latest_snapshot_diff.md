@@ -22477,3 +22477,104 @@ exact110 GREEN negativeを既存C09内でfreezeする。production、combined-GR
 exact16、source closure exact20、completion exact13、P1以降は変更・発行せず、
 causal RED記録後にautomatic progression falseでauthority STOPする。
 
+
+## 2026-07-28 canonical GREEN publication round-trip object member-order RED freeze
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_COMBINED_GREEN_EXACT16_CANONICAL_JSON_PUBLICATION_ROUNDTRIP_OUTCOME_STATES_OBJECT_MEMBER_ORDER_INDEPENDENCE_AND_EXACT110_ORDERED_NODE_LIST_PRESERVATION_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+### 確認した事実
+
+- successor combined-GREEN exact16は、in-memory semantic objectではowner / independentの両方が受理する。
+- canonical JSONはnested object keyをsortするため、serialize→parse後の`outcome_states` object member順はordered exact110 `test_node_ids`と異なる。
+- round-trip後もartifact全体のsemantic equality、`test_node_ids`順、`executed_node_ids`順、exact110 key/value mapping、receipt hashは保持される。
+- owner verifierはround-trip後も受理する。
+- independent verifierだけがobject member iteration orderをordered node listへ一致させる条件により`SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID`を返す。
+- JSON object member順はartifactの意味契約ではなく、ordered exact110は`test_node_ids` / `executed_node_ids`で保持されるべきである。
+
+### RED freeze scope
+
+```text
+mashos-api predecessor:
+84ea26498920cbfdcfa49ad4597b22f16d65b771
+
+mashos-api RED write commit:
+4bac19bb4c54e77678cce22b16391dfe76e7a013
+
+changed path exact1:
+ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+
+Git blob SHA-1:
+36dbb498c4e32bd95364de6697728cfb1e5e67db
+
+raw SHA-256:
+e3968bc35f7a1aaa3fdf4f335044b1846e595b3e4c68f20f0f8a7a4ae5aa7b7c
+
+success-contract manifest SHA-256:
+76f4115ce992f1718448aae4e0d2ce6c733c7f2902ffa50776e13833e6163f3c
+```
+
+既存C09内へcanonical JSON publication round-trip positive caseだけを追加した。
+new top-level testは0件で、successor exact64とcombined exact110のnode数・順序は不変である。
+
+```text
+targeted C09:
+1 failed / owner () / independent SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID
+
+successor exact64:
+63 passed / 1 failed / 1 warning
+
+historical exact46 + successor exact64 = exact110:
+109 passed / 1 failed / 1 warning
+```
+
+失敗は追加したcanonical publication round-trip positive caseだけである。
+既存109 nodes、historical actual S1 positive、current identity substitution negative、non-manifest exact110 negativeは維持された。
+
+### GitHub reflection
+
+```text
+mashos-api write changed paths:
+exact1 / approved test only
+
+mashos-api postfetch:
+target blob and full content exact match
+
+Cocolon head before this 07 write:
+1e0a93be567c7293835519dea37b37847ed9f8be
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+```
+
+production owner / independent verifier、canonical serializer、schema、combined-GREEN exact16、completion exact13、P1以降は変更・発行していない。
+
+### Current result
+
+```text
+CANONICAL_GREEN_PUBLICATION_ROUNDTRIP_RED_FROZEN
+OUTCOME_STATES_OBJECT_MEMBER_ORDER_DEPENDENCY_REPRODUCED
+EXACT110_ORDERED_NODE_LIST_PRESERVED
+TARGETED_C09_EXACT1_RED
+EXACT64_63_PASS_1_RED
+EXACT110_109_PASS_1_RED
+PRODUCTION_CHANGE_COUNT_0
+COMBINED_GREEN_NOT_PUBLISHED
+SUCCESSOR_COMPLETION_NOT_PUBLISHED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_COMBINED_GREEN_EXACT16_CANONICAL_JSON_PUBLICATION_ROUNDTRIP_OUTCOME_STATES_OBJECT_MEMBER_ORDER_INDEPENDENCE_AND_EXACT110_ORDERED_NODE_LIST_PRESERVATION_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+次authorityはindependent verifier production exact1だけを変更する。
+`_success_completion_valid`からobject member iteration order比較だけを除き、直後のdict exact equalityでexact key/value parityを維持する。
+owner、canonical serializer、artifact schema、`test_node_ids` / `executed_node_ids`順序、production他file、exact16 / exact13は変更しない。
+C09、exact64、exact110のtargeted GREEN後にautomatic progression falseで停止する。
