@@ -22988,3 +22988,169 @@ Event1 until a separate recovery decision defines the replacement closure and
 immutable publication lineage. No such source change or recovery decision was
 authorized here.
 
+## 2026-07-28 — Recovery Epoch002 Event1-v2 operational owner-contract reconciliation RED freeze
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_P1_EVENT1_V2_PUBLICATION_INDEPENDENT_VERIFICATION_FORMAL_PARENT_AND_PREFLIGHT_OWNER_CONTRACT_INCONSISTENCY_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+### Confirmed entry and change scope
+
+```text
+Cocolon head before this 07 write:
+838c91e61c531ca7706b67f92cc1326f7af745a5
+
+mashos-api predecessor:
+0205f81a4719a578f0e188bcfbd164cb9e2abb08
+
+mashos-api RED write commit:
+cde73d7bfb0d5df95dcf47599858ced58ee008a6
+
+mashos-api RED source tree:
+898d8a3aff1c09d31f0448a754ad28e7df762a77
+
+changed path exact1:
+ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+
+result Git blob SHA-1:
+e2d514973586a07039440d788f7f9ac6c0a4f712
+
+result raw SHA-256:
+744547310b9923a2582c10e43a539dc02ad7894d4cf395dcbdde68527c5e7858
+
+success-contract test manifest SHA-256:
+9a7622d96eef9a86fd6724acbc0e94afdaa63d95b61ae2671bc18df8c4ffcc58
+```
+
+The existing C10 node was extended in place. No top-level test node was
+added, removed, renamed, or reordered. Successor exact64 and the combined
+historical46 + successor64 ordered exact110 node list are unchanged.
+
+No production owner, verifier, formal parent, preflight source, schema,
+configuration, dependency lock, Parent Addendum, Execution Plan, or published
+artifact was changed by this RED checkpoint.
+
+### Causal RED observation
+
+The canonical current `sequence_event.v2` Event1 was accepted by the sequence
+owner and by the full success-contract independent replay with issue codes
+exact0. The same Event1 was then evaluated through all four operational owner
+routes before one aggregate expectation was asserted.
+
+```text
+atomic publication candidate owner:
+PUBLICATION_ARTIFACT_INVALID
+
+public independent published-artifact verifier:
+PUBLISHED_ARTIFACT_IDENTITY_MISMATCH
+
+preflight Event1 publication binding:
+READINESS_FORBIDDEN
+
+formal parent requested phase:
+EVENT1_PUBLISHED_AND_POSTVERIFIED
+
+formal parent completed phase:
+none
+
+formal parent validation issue:
+SOURCE_BASELINE_EVENT_NOT_PUBLISHED_STOP
+
+formal parent observed stop:
+STOP_EVENT1_NOT_POSTVERIFIED
+
+formal parent required success stop:
+AUTHORITY_STOP_EVENT1_POSTVERIFIED
+
+observe_event1_publication port calls:
+exact1
+
+all six later port calls:
+exact0
+
+automatic progression:
+false
+```
+
+The fixture retains the current reflection contract: transport/durable
+capabilities and Event1 transaction/ref-update metadata remain optional and
+absent. The RED does not revive expected-old, direct-child, full-tree, or
+full-unchanged-path transport gates.
+
+### Verification
+
+The test tree used for execution is exactly the GitHub RED source tree above.
+Repository bytecode and pytest cache creation were disabled.
+
+```text
+targeted C10:
+1 failed / 1 warning
+
+successor exact64:
+63 passed / 1 failed / 1 warning
+
+historical exact46 + successor exact64 = exact110:
+109 passed / 1 failed / 1 warning
+
+intentional failing node:
+test_c10_allocation_event1_owner_authority_and_current_reflection_contract
+
+warning:
+existing Pydantic V1 root_validator deprecation only
+```
+
+The sole RED is the aggregate Event1-v2 owner-route expectation. Existing
+historical and successor controls remained green.
+
+### GitHub reflection and current stop
+
+```text
+mashos-api write changed paths:
+exact1 / approved existing C10 test only
+
+mashos-api postfetch:
+target blob/content exact match
+write commit changed path exact1
+current main contains result tree
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+RECOVERY_EPOCH002_P1_EVENT1_V2_PUBLICATION_INDEPENDENT_FORMAL_PARENT_PREFLIGHT_OWNER_CONTRACT_INCONSISTENCY_RED_FROZEN_AUTHORITY_STOP
+PRODUCTION_CHANGE_COUNT_0
+P1_OPERATIONAL_ADMISSION_NOT_CREATED
+P1_OPERATIONAL_ADMISSION_NOT_PUBLISHED
+CANDIDATE_VERSION_UNALLOCATED
+EVENT1_NOT_CREATED
+EVENT1_NOT_PUBLISHED
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+The prior exact20 semantic closure, combined-GREEN exact16, and completion
+exact13 remain immutable historical evidence. Because the active test identity
+and mashos-api source commit/tree changed, they are not eligible predecessors
+for a new P1 admission. No replacement closure or publication was issued in
+this checkpoint.
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_P1_EVENT1_V2_PUBLICATION_INDEPENDENT_VERIFICATION_FORMAL_PARENT_AND_PREFLIGHT_OWNER_CONTRACT_INCONSISTENCY_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+The next authority should reconcile the current-v2 route at the atomic
+publication owner and public independent verifier, then prove the unchanged
+formal-parent and preflight consumers through C10, exact64, and exact110. It
+must not issue admission/candidate/Event1 or rebuild exact20/exact16/exact13,
+and must stop with automatic progression false after targeted GREEN.
+
