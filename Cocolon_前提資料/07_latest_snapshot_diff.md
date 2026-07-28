@@ -25768,3 +25768,200 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POST
 だけのterminal resultであり、旧issuance authorityを再開/書換え/遡及完了しない。
 
 自動進行しない。
+
+
+## 2026-07-29 — Recovery Epoch002 Lineage02 failure receipt corrected postverification and authority stop without reservation
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_CLOSURE_RECEIPT_CORRECTED_EXTERNAL_IDENTITY_AND_PREFLIGHT_CHALLENGE_PROVENANCE_POSTVERIFICATION_AND_AUTHORITY_STOP_WITHOUT_RESERVATION_ONLY
+```
+
+### 確認した事実
+
+Correction Design / Design receipt / Handoff、immutable failure receipt、
+current Event1、current mashos-api ownerを再取得し、今回のauthorityだけを実行した。
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry:
+1cbd2e03c7eb78250e03cfea071eb1c451f536c7
+
+mashos-api source commit/tree:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+```
+
+failure receiptをpublication commitとcurrent Cocolon refの双方からfresh
+postfetchした。両refのexact pathは同じblob、strict exact30、diagnostics
+exact4、exact1 trailing LFであり、raw/logical hashを二方式で再計算した。
+
+```text
+publication commit:
+cbfb9e1e939b4d1dde7b4c1df4a59d9d7320e7ab
+
+Git blob:
+11dd115e9dffc5117f8a022000bd1d36866b1959
+
+raw SHA-256:
+96b56a3685230174e6b9a08b6c2067cf09eed09557f8fa544eecff75876067b0
+
+logical receipt SHA-256:
+d7606768178abf9cad8bb3cf17b95a586654d91fb51bfc38d395669846097c27
+
+keys / diagnostics keys / lines / bytes / trailing LF:
+exact30 / exact4 / 41 / 2646 / exact1
+```
+
+Correction Designが固定したstrict exact10 objectとexact9 no-LF preimageを
+独立二方式で照合した。
+
+```text
+artifact role:
+FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_RECEIPT
+
+failure receipt external identity SHA-256:
+c38516c355aa450aecce332b7ad50d3db9daad13ce6f27ebdd942dc0f239a856
+
+postverification issues:
+exact0
+```
+
+challenge provenanceは次の三つを混同せず適用した。
+
+```text
+5d58979338cbc30ce603df884d466981895e05198196925e209424a129c4b0f9:
+DESIGN_DECLARED_PREFLIGHT_CHALLENGE_ID_WITH_UNPROVED_EXECUTION_PROVENANCE
+
+6c315203ce98f635feb80b04f27ab7dcb43545f2883b8a6fcca36c8c1cb7acf4:
+CURRENT_SCRATCH_SCRIPT_EXACT4_PREIMAGE_RECOMPUTED_PREFLIGHT_CHALLENGE_ID
+
+actual executed challenge:
+UNRESOLVED_NOT_REPLACEABLE_BY_INFERENCE
+
+challenge execution provenance:
+UNRESOLVED_CURRENT_SCRIPT_RECOMPUTATION_MISMATCH
+```
+
+両candidateはlowercase SHA-256としてvalidでEvent1 challengeとdistinctである。
+current ownerはsuccessor-v2 bootstrapをvalidとする一方、generic-v1 bootstrapを
+`READINESS_FORBIDDEN`、successor exact20 source closureをlegacy exact15 validatorで
+`SOURCE_CLOSURE_INVALID`とする。challenge-specific acceptanceより前にこの
+bootstrap/source contract incompatibilityで閉じるため、failure classと
+pre-reservation stopはchallenge scalarに依存しない。
+
+```text
+failure closure semantic state:
+VALID_WITH_CHALLENGE_PROVENANCE_QUALIFICATION
+
+failure class:
+BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE
+
+stop code:
+PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP
+
+formal-parent phase-result SHA-256 / validation issues:
+4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3 / exact0
+
+challenge provenance affects failure class:
+false
+
+challenge provenance affects downstream execution-identity claims:
+true
+```
+
+Event1はcurrent refでも同じblobを保持し、source baselineは変更していない。
+
+```text
+Event1 Git blob:
+e41089d2df5f34c0db7a65f10edcf29a9582d98c
+
+Event1 raw / logical SHA-256:
+1d6b4223cf7ff8e6e9e40abbfbac641ca16fe6a00770cff09a10e1fd4e9e7b4e
+75f96a270fc4b1b44cf696615b814ca91ad26752d3bac90d03cb05e9f04b9391
+
+Event1 external identity SHA-256:
+dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682
+```
+
+### 完了状態
+
+既存failure receiptとEvent1をbyte-for-byte保持し、receiptのmutation / rename /
+reissuance、preflight rerun、runtime materialization、readiness、attestation、
+reservation、attempt、formal exact134を行っていない。mashos-api、tracked
+Execution and Closure Plan、他のCocolon documentも変更していない。
+
+```text
+FAILURE_RECEIPT_EXTERNAL_IDENTITY:
+CORRECTED_EXACT10_POSTVERIFIED
+
+EXISTING_FAILURE_RECEIPT:
+BYTE_IMMUTABLE_NO_REISSUANCE
+
+EARLIER_ISSUANCE_AUTHORITY:
+NOT_RESUMED_NOT_REWRITTEN_NOT_RETROACTIVELY_COMPLETED
+
+EVENT1:
+PUBLISHED_POSTVERIFIED_IMMUTABLE_SOURCE_BASELINE_LOCKED
+
+RUNTIME / READINESS / ATTESTATION / RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0 / 0 / 0 / 0
+
+MASHOS_API_WRITE / TEST_EXECUTION:
+0 / 0
+
+EPOCH002_INVALIDATION / EPOCH003:
+NOT_ISSUED / NOT_DEFINED
+
+P2 / PRODUCT_READ / CYCLE001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+
+AUTHORITY_STOP_WITHOUT_RESERVATION
+```
+
+`AUTHORITY_STOP_WITHOUT_RESERVATION`は今回のcorrected-postverification authority
+だけのterminal resultである。旧issuance authorityの遡及完了を意味しない。
+
+### GitHub reflection
+
+今回の承認scopeで変更するexact pathは次の一つだけである。
+
+```text
+Cocolon_前提資料/07_latest_snapshot_diff.md
+```
+
+```text
+predecessor Git blob:
+3f540deb2e2db2b2c77347cfdb56012b1dbe2822
+
+this append commit:
+resolve_from_github_revision_containing_this_section
+```
+
+### 推測
+
+failure closureがchallenge-independentであるため、actual challengeを不明のまま
+保持しても今回のfailure/stopの真実性は失われない。一方、その不明値を将来の
+readiness/formal-run identityへ継承するとfalse lineageになると推測する。
+
+### 華恋の意見
+
+receiptを修正して見かけ上の整合を作るより、成立したfailure closureと未立証の
+challenge provenanceを分離したまま閉じることが必要である。これにより過去の
+failureを消さず、将来のRecovery Epochへ未立証identityを渡さない。
+
+成功したcorrected postverificationにより、以前から凍結されていた次の
+parent-design authorityだけが別承認候補になった。Epoch002 invalidation自体は
+今回発行しておらず、Recovery Epoch003もまだ定義していない。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_SOURCE_BASELINE_INVALIDATION_AND_RECOVERY_EPOCH003_P0_PARENT_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+自動進行しない。
