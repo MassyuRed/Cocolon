@@ -1,0 +1,223 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch003.parent_design.body_free_receipt.v1",
+  "approved_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_SOURCE_BASELINE_INVALIDATION_AND_RECOVERY_EPOCH003_P0_PARENT_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "source_entries": {
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon_entry_commit_sha1": "1b3dee071cf71c5524cf83f412fb5bc043cefbcf",
+    "mashos_api_commit_sha1": "a70d3c12be235381b4c63fd2f54b5319c1fd1931",
+    "mashos_api_tree_sha1": "ccddcf1901d2ea3cecddddc037c9c455e35cb36d"
+  },
+  "parent_design_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_20260729.md",
+  "parent_design_raw_sha256": "5fe64c022d8e21886c5531e102f673586c15b56d176072a556a4803a79681d4a",
+  "epoch002_invalidation": {
+    "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_002",
+    "state": "EPOCH_INVALIDATED",
+    "reason_codes": [
+      "BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE",
+      "SAME_EPOCH_REPAIR_FORBIDDEN_BY_ONE_EVENT1_PER_EPOCH",
+      "SOURCE_BASELINE_LOCKED_PREFLIGHT_CONTRACT_UNREACHABLE"
+    ],
+    "candidate_state": "nls_v3_rc_epoch002_success_0001_HISTORICAL_NOT_REUSABLE",
+    "event1_state": "PUBLISHED_POSTVERIFIED_IMMUTABLE_HISTORICAL_NOT_REUSABLE",
+    "failure_receipt_state": "CORRECTED_EXACT10_POSTVERIFIED_IMMUTABLE_HISTORICAL",
+    "readiness_state": "NOT_CREATED",
+    "reservation_state": "NOT_CREATED",
+    "attempt_state": "NOT_CREATED_NO_CONSUMPTION_DISPOSITION_REQUIRED",
+    "formal_exact134_invocation_count": 0,
+    "source_repair_executed": false,
+    "history_rewrite_or_deletion_allowed": false
+  },
+  "epoch002_event1_external_identity": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_SequenceEvent01_SourceBaselineLocked_BodyFree_Event_20260726.json",
+    "publication_commit_sha1": "c0fea517d63d71651fa32ddf541767b64d8f8540",
+    "git_blob_sha1": "e41089d2df5f34c0db7a65f10edcf29a9582d98c",
+    "raw_sha256": "1d6b4223cf7ff8e6e9e40abbfbac641ca16fe6a00770cff09a10e1fd4e9e7b4e",
+    "logical_event_sha256": "75f96a270fc4b1b44cf696615b814ca91ad26752d3bac90d03cb05e9f04b9391",
+    "identity_sha256": "dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682"
+  },
+  "epoch002_failure_receipt_external_identity": {
+    "artifact_role": "FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_RECEIPT",
+    "body_free": true,
+    "git_blob_sha1": "11dd115e9dffc5117f8a022000bd1d36866b1959",
+    "identity_sha256": "c38516c355aa450aecce332b7ad50d3db9daad13ce6f27ebdd942dc0f239a856",
+    "logical_artifact_sha256": "d7606768178abf9cad8bb3cf17b95a586654d91fb51bfc38d395669846097c27",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_Failure_BodyFree_Receipt_20260728.json",
+    "publication_commit_sha1": "cbfb9e1e939b4d1dde7b4c1df4a59d9d7320e7ab",
+    "raw_sha256": "96b56a3685230174e6b9a08b6c2067cf09eed09557f8fa544eecff75876067b0",
+    "repository_full_name": "MassyuRed/Cocolon",
+    "schema_version": "cocolon.emlis.nls_v3.recovery_epoch002.formal_worker_bootstrap_preflight_contract_unreachable_failure_receipt.v1"
+  },
+  "challenge_provenance": {
+    "design_declared_preflight_challenge_id": "5d58979338cbc30ce603df884d466981895e05198196925e209424a129c4b0f9",
+    "current_script_recomputed_preflight_challenge_id": "6c315203ce98f635feb80b04f27ab7dcb43545f2883b8a6fcca36c8c1cb7acf4",
+    "actual_executed_challenge_state": "UNRESOLVED_NOT_REPLACEABLE_BY_INFERENCE",
+    "execution_provenance_state": "UNRESOLVED_CURRENT_SCRIPT_RECOMPUTATION_MISMATCH",
+    "affects_failure_class": false,
+    "affects_downstream_execution_identity_claim": true
+  },
+  "immutable_evidence_disposition": {
+    "event1": "PRESERVED_BYTE_IMMUTABLE",
+    "candidate": "PRESERVED_HISTORICAL_NOT_REUSABLE",
+    "failure_receipt": "PRESERVED_BYTE_IMMUTABLE_NO_REISSUANCE",
+    "correction_chain": "PRESERVED_POSTVERIFIED_HISTORY",
+    "history_rewrite_or_deletion_allowed": false,
+    "second_event1_in_epoch002_allowed": false,
+    "same_epoch_source_repair_allowed": false,
+    "source_drift_claimed": false
+  },
+  "epoch003_definition": {
+    "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_003",
+    "state": "DEFINED_NOT_STARTED",
+    "source_baseline_state": "UNLOCKED",
+    "candidate_state": "UNALLOCATED_DISTINCT_FROM_nls_v3_rc_epoch002_success_0001",
+    "d1_state": "NOT_STARTED",
+    "d2_state": "NOT_STARTED",
+    "event1_state": "NOT_CREATED",
+    "readiness_state": "NOT_CREATED",
+    "reservation_state": "NOT_CREATED",
+    "attempt_state": "NOT_CREATED",
+    "formal_exact134_invocation_count": 0,
+    "cycle001_state": "NOT_ACCEPTED"
+  },
+  "epoch003_p0_contract": {
+    "p0_external_identity_schema": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch003.p0_external_identity.v1",
+    "parent_design_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_20260729.md",
+    "parent_receipt_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_BodyFree_Receipt_20260729.json",
+    "parent_receipt_top_level_key_count": 24,
+    "artifact_contract_count": 7,
+    "standalone_artifact_path_count": 5,
+    "artifact_top_level_key_counts": {
+      "reference_runtime_observation": 21,
+      "bootstrap_closure": 33,
+      "source_closure": 20,
+      "event1": 23,
+      "operational_runtime_observation": 41,
+      "readiness": 24,
+      "failure": 29
+    },
+    "common_nested_contract_key_counts": {
+      "external_identity": 10,
+      "python_runtime_identity": 4,
+      "installed_distribution_row": 4,
+      "dependency_lock_identity": 3,
+      "wheel_bundle_row": 3,
+      "runtime_materialization": 10,
+      "environment_policy": 5,
+      "environment_fixed": 2,
+      "owner_artifact_row": 4,
+      "formal_test_manifest_row": 3,
+      "import_manifest_row": 4,
+      "operational_projection": 14,
+      "event1_authority": 4,
+      "event1_candidate_allocation": 9,
+      "event1_publication": 9
+    },
+    "artifact_contract_schemas": {
+      "reference_runtime_observation": "cocolon.emlis.nls_v3.recovery_epoch003.reference_runtime_observation.v1",
+      "bootstrap_closure": "cocolon.emlis.nls_v3.recovery_epoch003.formal_worker_bootstrap_manifest.v1",
+      "source_closure": "cocolon.emlis.nls_v3.recovery_epoch003.source_baseline_eligibility_closure.v1",
+      "event1": "cocolon.emlis.nls_v3.recovery_epoch003.sequence_event.v1",
+      "operational_runtime_observation": "cocolon.emlis.nls_v3.recovery_epoch003.operational_runtime_observation.v1",
+      "readiness": "cocolon.emlis.nls_v3.recovery_epoch003.bootstrap_readiness_receipt.v1",
+      "failure": "cocolon.emlis.nls_v3.recovery_epoch003.formal_worker_bootstrap_preflight_failure_receipt.v1"
+    },
+    "artifact_paths": {
+      "reference_runtime_observation": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PreEvent1_ReferenceRuntimeObservation_BodyFree_Receipt.json",
+      "event1": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_SequenceEvent01_SourceBaselineLocked_BodyFree_Event.json",
+      "operational_runtime_observation": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostEvent1_OperationalRuntimeObservation_BodyFree_Receipt.json",
+      "readiness": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostEvent1_BootstrapReadiness_BodyFree_Receipt.json",
+      "failure": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostEvent1_BootstrapPreflightFailure_BodyFree_Receipt.json"
+    },
+    "nested_contract_locations": {
+      "bootstrap_closure": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_SequenceEvent01_SourceBaselineLocked_BodyFree_Event.json#/bootstrap_closure",
+      "source_closure": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_SequenceEvent01_SourceBaselineLocked_BodyFree_Event.json#/source_closure"
+    },
+    "production_owner_surface_paths": [
+      "ai/services/ai_inference/emlis_ai_recovery_epoch002_canonical_current_closure_v3.py",
+      "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_current_step_proof_run.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py"
+    ],
+    "production_owner_surface_path_count": 7,
+    "d1_test_path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py"
+  },
+  "predecessor_linkage": {
+    "governing_reconciliation_receipt_external_identity_sha256": "70d81a5bf53cc4e4406be4488c641ac1e1fc7f48e063a8bcbbbb20e7efe0333a",
+    "challenge_provenance_correction_design_receipt_external_identity_sha256": "d419334194d4dbc37c6c0da725b1d166005253f22178ae4ddc0367c4e6c481b7",
+    "event1_external_identity_sha256": "dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682",
+    "event1_source_closure_sha256": "e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88",
+    "event1_bootstrap_closure_sha256": "75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe",
+    "failure_receipt_external_identity_sha256": "c38516c355aa450aecce332b7ad50d3db9daad13ce6f27ebdd942dc0f239a856",
+    "formal_parent_phase_result_sha256": "4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3",
+    "predecessor_set_sha256": "44ef0cf922e8fb6503ae4a96f458a60abc8fbae2e48aa11863269ff783d7343d"
+  },
+  "historical_credit_boundary": {
+    "retained_process_risk_evidence": [
+      "EVENT1_BASELINE_WAS_PUBLISHED_AND_IMMUTABLE",
+      "EXPECTED_AND_OBSERVED_RUNTIME_CONFLATION_IS_UNREACHABLE",
+      "FAILURE_RECEIPT_IS_VALID_WITH_CHALLENGE_PROVENANCE_QUALIFICATION",
+      "ONE_EVENT1_PER_EPOCH_AND_ONE_SHOT_AUTHORITY_BOUNDARIES"
+    ],
+    "non_inherited_active_credit": [
+      "CANDIDATE",
+      "EVENT1",
+      "SOURCE_OR_BOOTSTRAP_CLOSURE",
+      "CHALLENGE",
+      "D1_OR_D2",
+      "REFERENCE_OR_OPERATIONAL_RUNTIME_OBSERVATION",
+      "READINESS_OR_RESERVATION_OR_ATTEMPT_OR_TERMINAL",
+      "ACCEPTED_OR_STEP00_THROUGH_10_OR_ALL11_OR_EVENT2",
+      "P2_OR_PRODUCT_READ_OR_CYCLE_ACCEPTANCE",
+      "BATCH_OR_DISTRIBUTION_OR_DEPTH_OR_SURFACE_OR_PERFORMANCE"
+    ],
+    "epoch002_candidate_reusable": false,
+    "epoch002_challenge_reusable": false
+  },
+  "future_gate_order": [
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D1_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_RED_FREEZE_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIME_CLOSURE_AND_OPERATIONAL_ADMISSION_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_DISTINCT_CANDIDATE_ALLOCATION_AND_SEQUENCE_EVENT1_SOURCE_BASELINE_LOCK_PUBLICATION_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_EVENT1_LOCKED_RUNTIME_MATERIALIZATION_OPERATIONAL_RUNTIME_OBSERVATION_READINESS_OR_FAILURE_CANDIDATE_AND_INDEPENDENT_PREFLIGHT_VERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_EVENT1_OPERATIONAL_RUNTIME_OBSERVATION_AND_MATCHING_BOOTSTRAP_READINESS_OR_FAILURE_BODY_FREE_RECEIPT_PUBLICATION_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PREFLIGHT_READY_FORMAL_ATTEMPT_ONE_SHOT_RESERVATION_PUBLICATION_AND_POSTVERIFICATION_ONLY"
+  ],
+  "repository_scope": {
+    "cocolon_parent_design_change_count": 1,
+    "cocolon_receipt_change_count": 1,
+    "cocolon_handoff_change_count": 1,
+    "cocolon_tracked_plan_change_count": 1,
+    "cocolon_latest_snapshot_change_count": 1,
+    "mashos_api_change_count": 0,
+    "test_execution_count": 0,
+    "preflight_execution_count": 0,
+    "runtime_materialization_count": 0,
+    "new_candidate_count": 0,
+    "new_event1_count": 0,
+    "new_readiness_count": 0,
+    "new_reservation_count": 0,
+    "formal_exact134_invocation_count": 0
+  },
+  "independent_verification": {
+    "rules_scope_issue_count": 0,
+    "design_causality_issue_count": 0,
+    "identity_state_issue_count": 0,
+    "event1_bytes_raw_logical_recomputed": true,
+    "event1_external_identity_preimage_recomputed": false,
+    "failure_receipt_exact30_exact4_recomputed": true,
+    "failure_receipt_external_identity_recomputed": true,
+    "mashos_api_tree_object_independently_traversed": false,
+    "body_free_issue_count": 0,
+    "blocker_count": 0
+  },
+  "decision_effective_when": "PARENT_DESIGN_AND_RECEIPT_REACHABLE_ON_COCOLON_MAIN_AND_TARGET_CONTENT_POSTFETCH_VERIFIED",
+  "next_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D1_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_RED_FREEZE_ONLY",
+  "state": "RECOVERY_EPOCH002_INVALIDATED_RECOVERY_EPOCH003_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_AUTHORITY_STOP",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256": "904baff49d3efd09a4a1486298962646d7c56a7f90e3ce8191d7e26072cf66db"
+}
