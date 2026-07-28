@@ -25272,3 +25272,206 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POST
 ```
 
 このauthorityは別承認が必要であり、自動実行しない。
+
+
+## 2026-07-29 — Recovery Epoch002 Lineage02 bootstrap-preflight contract-unreachable failure receipt partial issuance and external-identity STOP
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_CLOSURE_RECEIPT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+### 確認した事実
+
+Karen-Diary、Cocolon mandatory premise / work-attitude rules / current
+reflection contract、governing contract-reconciliation design、current Event1、
+formal-preflight stop evidence、current mashos-api sourceを再確認した。
+
+```text
+Cocolon entry:
+6996f068f95ef04d56f14915ad3e8b7310bf9ee4
+
+mashos-api source commit/tree:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+mashos-api worktree:
+clean
+
+Event1 Git blob:
+e41089d2df5f34c0db7a65f10edcf29a9582d98c
+
+Event1 external identity SHA-256:
+dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682
+
+source closure SHA-256:
+e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88
+
+bootstrap closure SHA-256:
+75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe
+
+formal-parent phase-result SHA-256:
+4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3
+```
+
+governing design section 7.6のexact30 top-level keyset、diagnostics exact4、
+固定値、body-free境界を照合し、receiptのlogical hashを華恋と独立監査の
+二系統で再計算した。
+
+```text
+canonical exact29 preimage bytes:
+2389
+
+receipt SHA-256:
+d7606768178abf9cad8bb3cf17b95a586654d91fb51bfc38d395669846097c27
+
+owner fixed-binding validation:
+issue exact0
+
+independent exact30/hash validation:
+issue exact0
+```
+
+receipt pathはwrite直前のCocolon mainでabsentだった。次のexact pathへ一度だけ
+新規発行し、publication commitのchanged pathは同path exact1だった。
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_Failure_BodyFree_Receipt_20260728.json
+
+schema:
+cocolon.emlis.nls_v3.recovery_epoch002.formal_worker_bootstrap_preflight_contract_unreachable_failure_receipt.v1
+
+publication commit:
+cbfb9e1e939b4d1dde7b4c1df4a59d9d7320e7ab
+
+Git blob:
+11dd115e9dffc5117f8a022000bd1d36866b1959
+
+raw SHA-256:
+96b56a3685230174e6b9a08b6c2067cf09eed09557f8fa544eecff75876067b0
+
+logical receipt SHA-256:
+d7606768178abf9cad8bb3cf17b95a586654d91fb51bfc38d395669846097c27
+
+keys / diagnostics keys / lines / bytes / trailing LF:
+30 / 4 / 41 / 2646 / exact1
+```
+
+publication commitとcurrent mainの双方からrefetchし、path、bytes、Git blob、
+raw hash、logical hashを生成候補とexact-matchした。
+
+### Postpublication contract ambiguity
+
+governing design section 7.6はreceiptのpath/schema/exact30/fixed values/logical
+hashを固定し、section 11はpostpublication exact external identityの検証を要求する。
+しかしfailure receipt用external identityの`artifact_role`は固定していない。
+同じdesignのdesign receiptについてはsection 10.1でroleを明示しているため、
+failure receipt側だけが未定義である。
+
+current precedent
+`NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2ParentAddendumExternalIdentitySourceClosureCompletionAndEvent1BindingContractCorrection_Design_ReadOnly_20260727.md`
+は、external identityのtarget/role/exact tuple/hash ruleが未凍結の場合、
+materially different meaningを生むambiguityとして別correction前の完了を禁止する。
+
+さらに、governing design/handoffが固定するpreflight challengeは次である。
+
+```text
+design-fixed preflight challenge:
+5d58979338cbc30ce603df884d466981895e05198196925e209424a129c4b0f9
+```
+
+一方、実行に使ったlocal scratch scriptが現在明示するexact4 preimage
+（authority token、Event1 challenge、Event1 external identity、source closure）を、
+current `artifact_sha256` semanticsで華恋と独立監査が再計算すると次になった。
+
+```text
+current-script recomputation:
+6c315203ce98f635feb80b04f27ab7dcb43545f2883b8a6fcca36c8c1cb7acf4
+```
+
+formal-parent resultと既存07にはpreflight challenge scalarが含まれず、
+`5d589...`を実行時preimageから独立立証できるpublished primary artifactは
+確認できなかった。receiptは凍結設計へのexact準拠として`5d589...`を保持するが、
+そのexecution provenanceは独立検証済みと扱わない。
+
+独立reflection監査のこの結論はreceipt publication後に統合された。従って現在は、
+receipt自体の発行とpath/blob/raw/logical postfetchまでは成立しているが、
+推測したroleを採用してexact10 `identity_sha256`を作ることはしていない。
+
+```text
+failure receipt:
+PUBLISHED_PATH_BLOB_RAW_LOGICAL_POSTFETCHED
+
+failure receipt external identity artifact_role:
+NOT_FROZEN
+
+failure receipt exact10 external identity:
+NOT_ISSUED
+
+external identity postverification:
+INCOMPLETE
+
+design-fixed preflight challenge binding:
+PRESENT_IN_RECEIPT
+
+preflight challenge execution provenance:
+INDEPENDENT_RECOMPUTATION_MISMATCH_UNRESOLVED
+
+authority completion:
+NOT_CLAIMED
+```
+
+既発行receiptを削除、上書き、rename、reissueしない。別承認のcontract correctionが
+roleとexact10 objectを固定した後、同じimmutable receipt publicationを対象に
+external identity postverificationを完了する。
+
+### 推測
+
+schema/pathから導ける自然なrole候補は存在するが、複数の短縮名を排除する
+frozen ruleがないため、一つをcurrent factとして選ぶことはできないと推測する。
+また`5d589...`は設計固定値としては明確だが、current scratch scriptのpreimageと
+一致しないため、実行時challenge生成経路が設計時に別preimageだったか、記録時に
+scalar/preimageのいずれかがずれた可能性がある。published primary evidenceがない
+ため、どちらを原因と断定しない。
+
+### 華恋の意見と停止判断
+
+receipt exact30の事実とexternal identityの未凍結を分離する。receiptが正しいことを
+理由に未定義roleまで正しいと推定すると、後続Epoch002 invalidation /
+Epoch003 parent designが異なるidentityをbindする余地を残す。ここでは部分成立を
+正確に記録し、contract correction前に完了扱いしないことが必要である。
+
+```text
+PREFLIGHT_FAILURE_RECEIPT_EXACT30_PUBLISHED
+PREFLIGHT_FAILURE_RECEIPT_PATH_BLOB_RAW_LOGICAL_POSTFETCHED
+PREFLIGHT_FAILURE_RECEIPT_EXTERNAL_IDENTITY_NOT_FROZEN
+PREFLIGHT_CHALLENGE_EXECUTION_PROVENANCE_MISMATCH_UNRESOLVED
+POSTVERIFICATION_INCOMPLETE_STOP
+AUTHORITY_STOP_WITHOUT_RESERVATION_NOT_YET_CLAIMED
+EVENT1_PUBLISHED_POSTVERIFIED_IMMUTABLE
+SOURCE_BASELINE_LOCKED
+EPOCH002_INVALIDATION_NOT_ISSUED
+RECOVERY_EPOCH003_NOT_YET_DEFINED
+MASHOS_API_WRITE_EXACT0
+PRODUCTION_TEST_SCHEMA_CONFIG_DEPENDENCY_WRITE_EXACT0
+TEST_EXECUTION_EXACT0
+RUNTIME_MATERIALIZATION_EXACT0
+READINESS_EXACT0
+RESERVATION_EXACT0
+ATTEMPT_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+P2_NOT_STARTED
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+次に必要なのは、failure receiptのexact external identity target、`artifact_role`、
+strict exact10 tuple、canonical hash rule、postverification predicate、および
+design-fixed preflight challengeのexecution-provenance dispositionを固定する
+別承認のread-only contract correctionである。元の設計が予定したEpoch002
+invalidation / Epoch003 P0 parent designは、このcorrectionとexternal identity
+postverificationが完了するまでeligibleではない。
