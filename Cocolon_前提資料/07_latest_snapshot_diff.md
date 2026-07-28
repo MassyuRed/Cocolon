@@ -23154,3 +23154,267 @@ formal-parent and preflight consumers through C10, exact64, and exact110. It
 must not issue admission/candidate/Event1 or rebuild exact20/exact16/exact13,
 and must stop with automatic progression false after targeted GREEN.
 
+
+## 2026-07-28 — Recovery Epoch002 Event1-v2 owner-contract reconciliation implementation and targeted GREEN
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_P1_EVENT1_V2_PUBLICATION_INDEPENDENT_VERIFICATION_FORMAL_PARENT_AND_PREFLIGHT_OWNER_CONTRACT_INCONSISTENCY_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+### 確認した事実
+
+```text
+Cocolon entry head:
+a2b08e599b413f01990c4417edd735b42e0ad82f
+
+Cocolon 07 predecessor Git blob:
+dd08eea48a425314840ea1eb6ccefbb140e69172
+
+mashos-api predecessor:
+cde73d7bfb0d5df95dcf47599858ced58ee008a6
+
+mashos-api predecessor tree:
+898d8a3aff1c09d31f0448a754ad28e7df762a77
+
+mashos-api write commit:
+c5686aa217c8b2637172ddb76de414bdf837d107
+
+mashos-api result tree:
+c551f78f8a13703cad343a123a65a18cb03da972
+
+changed production paths:
+exact4
+```
+
+変更したproduction pathと前後identityは次のexact4である。
+
+```text
+1.
+path:
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+predecessor Git blob SHA-1:
+cf5a4a13e197f1e6b4ffd394cf2028b1f8f10767
+result Git blob SHA-1:
+03e254d1f6e5edfc412302387094da5ff52b28fe
+predecessor raw SHA-256:
+85008c97f3edf5e26647ff50114922cb666fa105d5a0a59e32ffa426ee1c120b
+result raw SHA-256:
+60d7becb83c27f7b0749237f8240e2285f8711f40e7ee8509b0ffddca5c8dd9c
+
+2.
+path:
+ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py
+predecessor Git blob SHA-1:
+0ff7d11191d1232d979754c59bf5356d7f048331
+result Git blob SHA-1:
+0ad51cc88cf7a4cedf94c0f3bc9fada63b47749d
+predecessor raw SHA-256:
+cfde43abb596040e1c56e65f430303db6017bcae8c73389637924ca8996745c3
+result raw SHA-256:
+1308c889d849744adf0de74ae5b33e61ef0c0ffdfc9147789b9d61e19fe96d52
+
+3.
+path:
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+predecessor Git blob SHA-1:
+0c34d1311ad03c72faa1794044e7677c0d765734
+result Git blob SHA-1:
+d344d296c8b12e8477ec1ef0431e416d12a9f5c3
+predecessor raw SHA-256:
+6b54b0657c3381777bbec74f7d1adb8bacac87f4cc3d13b34ce58db31e62e0e5
+result raw SHA-256:
+27b4303cf1f3f32db2e24bc1165ee39e05d80bb8d0343ad0be3d421310b98481
+
+4.
+path:
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+predecessor Git blob SHA-1:
+811c039fd238166b5e498960525417e236c9d15c
+result Git blob SHA-1:
+4b2d8acced91a63e53c7efa94919f5e79a2d3af1
+predecessor raw SHA-256:
+00ae89775cad378001c854b9eeb8f29fe4d6d170ae19b4544b1332e052fe703a
+result raw SHA-256:
+a7c832cb0b8f6380bd82739dac39769c54c6681b250e59600a96ded57f0ad115
+```
+
+sequence ownerでは、公開Event1 validatorをhistorical v1とcurrent v2の
+strict dispatcherへ変更した。v1 validator本体は保持し、v2はschema/self-hashだけで
+acceptせず、exact23 Event1、source closure、candidate allocation、
+completion identity、bootstrap、P0、authority、publicationの相互bindingを
+artifact単体で検証する。
+
+atomic publication ownerではSOURCE_BASELINE_EVENTだけにv1/v2 exact schema
+predicateを設け、candidate build、candidate validation、artifact identity
+validationの3経路へ同じ判定を適用した。他roleのschema契約は変更していない。
+
+public independent verifierではowner moduleを新規importせず、ローカルの
+SOURCE_BASELINE_EVENT / EVENT1 identity schema判定だけをv1/v2 exactへ拡張した。
+共有primitive allowlist exact2 `canonical_json_bytes` / `artifact_sha256` は不変である。
+
+formal parentではhistorical/current両形を受けるallowed exact23を維持し、
+current-v2 publication observationのrequired exact18と、旧transport/body metadata
+optional exact5を分離した。unknown extra key、forbidden key、artifact/identity、
+public independent verifier検証は維持し、`automatic_progression` / `body_free`は
+存在時だけstrict値を検証する。
+
+preflight sourceと永久保護lockは変更していない。sequence ownerの公開validatorが
+current v2を正しく受理することで、同じcanonical Event1 v2に対するpreflight結果は
+issue exact0になった。
+
+### RED時点の位置づけに対する訂正
+
+上流3 pathをclean commitとして検証した時点で、formal parentだけが
+current exact18 publication observationをlegacy exact23固定で拒否し、
+`SOURCE_BASELINE_EVENT_NOT_PUBLISHED_STOP`を返す第二の直接原因が顕在化した。
+
+したがって「formal parentは上流結果を伝播するだけでsource変更不要」という
+RED時点の見立ては事実と一致せず、必要最小production scopeはexact3ではなく
+exact4だった。これは承認authorityが明示するformal parent contractの内部整合であり、
+Parent Addendumの許可済みproduction surface内である。preflightを直接変更する
+必要はなかった。
+
+### Targeted verification
+
+repository内へbytecode / pytest cacheを生成しないclean-source条件で実行した。
+検証treeはGitHubへ反映したmashos-api result treeとexact一致する。
+
+```text
+focused C10 + B10 transport non-normative + I01 verifier import split:
+3 passed / 1 warning
+
+successor exact64:
+64 passed / 1 warning
+
+historical exact46:
+46 passed / 1 warning
+
+historical exact46 + successor exact64 ordered exact110:
+110 passed / 1 warning
+
+ordered node count / unique count:
+110 / 110
+
+ordered exact110 node-list SHA-256:
+da8db0f75db162ca3f4dafc0e60c1348c63c3bbd5cbb5dfc155788eb2c46ac83
+
+success-contract test manifest SHA-256:
+9a7622d96eef9a86fd6724acbc0e94afdaa63d95b61ae2671bc18df8c4ffcc58
+
+warning:
+existing Pydantic V1 root_validator deprecation only
+```
+
+C10で確認したcanonical Event1-v2の4 owner結果は次のとおりである。
+
+```text
+atomic publication owner issue codes:
+exact0
+
+public independent verifier issue codes:
+exact0
+
+preflight owner issue codes:
+exact0
+
+formal parent completed phase:
+EVENT1_PUBLISHED_AND_POSTVERIFIED
+
+formal parent validation issues:
+exact0
+
+formal parent stop code:
+AUTHORITY_STOP_EVENT1_POSTVERIFIED
+
+observe_event1_publication calls:
+exact1
+
+all six later port calls:
+exact0
+
+automatic progression:
+false
+```
+
+canonical v2 positiveに加え、self-hashを再計算したauthority、candidate allocation、
+publication、source closureのnested mutation exact4はすべて
+`SOURCE_BASELINE_EVENT_INVALID`で拒否された。
+
+既存RED testは変更していない。
+
+```text
+RED test Git blob SHA-1:
+e2d514973586a07039440d788f7f9ac6c0a4f712
+
+RED test raw SHA-256:
+744547310b9923a2582c10e43a539dc02ad7894d4cf395dcbdde68527c5e7858
+```
+
+### GitHub reflection and current result
+
+```text
+mashos-api write changed paths:
+exact4 / approved owner-contract production paths only
+
+mashos-api postfetch:
+all exact4 target blobs and full contents exact match
+write commit changed path exact4
+current main equals result commit
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+EVENT1_V2_PUBLICATION_OWNER_RECONCILED
+EVENT1_V2_PUBLIC_INDEPENDENT_VERIFIER_RECONCILED
+EVENT1_V2_FORMAL_PARENT_RECONCILED
+EVENT1_V2_PREFLIGHT_CONSUMER_PROVED_UNCHANGED
+TARGETED_C10_GREEN
+SUCCESSOR_EXACT64_GREEN
+HISTORICAL_EXACT46_GREEN
+ORDERED_EXACT110_GREEN
+P1_OPERATIONAL_ADMISSION_NOT_CREATED
+P1_OPERATIONAL_ADMISSION_NOT_PUBLISHED
+CANDIDATE_VERSION_UNALLOCATED
+EVENT1_NOT_CREATED
+EVENT1_NOT_PUBLISHED
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+### 推測
+
+今回のexact4 source変更後もvalidator上のsemantic relationはGREENだが、
+先行exact20、combined-GREEN exact16、completion exact13が固定したsource/test
+identityは新しいmashos-api commit/treeを表さない。したがって、それらを新P1の
+current predecessorとして再利用することはできないと推測する。
+
+### 華恋の意見と停止判断
+
+このauthorityで必要だったのは、1つのcanonical Event1 v2が4 ownerで同じ意味を
+持つことの実装とtargeted証明までである。P1 admission/candidate/Event1を発行したり、
+exact20/exact16/exact13を暗黙に再構築したりすると、承認範囲とimmutable lineageを
+越えるため、ここで停止するのが妥当である。
+
+次は新source identityと既存immutable publication lineageの扱いを先に設計判断し、
+replacement exact20/exact16/exact13の要否・順序・参照関係を確定してからP1へ戻る。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_P1_EVENT1_V2_OWNER_CONTRACT_RECONCILIATION_POSTIMPLEMENTATION_SOURCE_IDENTITY_SUCCESSION_IMMUTABLE_EXACT20_EXACT16_EXACT13_LINEAGE_RECOVERY_DECISION_DESIGN_READ_ONLY
+```
+
+次authorityはread-onlyに限定し、新mashos-api source commit/tree、unchanged
+ordered exact110、既存exact20/exact16/exact13のimmutable historical identityを
+分離して、replacement source closure / publication lineageの必要条件だけを設計する。
+P1 admission、candidate allocation、Event1、readiness、reservation、formal exact134、
+accepted chain、Event2、P2、Product Read、Cycle acceptanceを発行・開始しない。
