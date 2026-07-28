@@ -25965,3 +25965,368 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POST
 ```
 
 自動進行しない。
+
+
+## 2026-07-29 — Recovery Epoch002 invalidation and Recovery Epoch003 P0 parent-design issuance
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_SOURCE_BASELINE_INVALIDATION_AND_RECOVERY_EPOCH003_P0_PARENT_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+### 確認した事実
+
+Karen-Diary、Cocolon mandatory premise / 華恋用作業ルール / current GitHub
+reflection contract、添付されたlong-term roadmap / Revised Cycle Detailed
+Design / historical Execution and Closure Plan、current tracked plan、
+governing reconciliation Design / receipt / handoff、immutable Event1、
+failure receipt / correction / corrected postverification、current
+mashos-api ownersを横断確認した。
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry:
+1b3dee071cf71c5524cf83f412fb5bc043cefbcf
+
+mashos-api commit/tree:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+```
+
+添付3資料は記録済みSHA-256へ一致した。
+
+```text
+Revised Cycle Detailed Design:
+6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc
+
+long-term roadmap:
+04fb9e4e11af2b1530d03d95d8e959ba644503722f72094a289bde1d4368ce5b
+
+historical local Execution and Closure Plan:
+31682e71ac047ac5f2f329d62ebc51b471bdcb00430a6ab35bcfb934c1438ca7
+```
+
+Event1はpublication/currentで同じbytesを保持する。
+
+```text
+publication commit:
+c0fea517d63d71651fa32ddf541767b64d8f8540
+
+Git blob:
+e41089d2df5f34c0db7a65f10edcf29a9582d98c
+
+raw / logical SHA-256:
+1d6b4223cf7ff8e6e9e40abbfbac641ca16fe6a00770cff09a10e1fd4e9e7b4e
+75f96a270fc4b1b44cf696615b814ca91ad26752d3bac90d03cb05e9f04b9391
+
+historical postverified external identity:
+dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682
+
+source / bootstrap closure:
+e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88
+75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe
+```
+
+Event1 bytes/raw/logicalは独立再計算した。既存external identityは
+postverified historical authorityとして参照し、そのexact preimageを今回
+再構成したとは主張しない。
+
+corrected failure receiptは次を保持する。
+
+```text
+Git blob:
+11dd115e9dffc5117f8a022000bd1d36866b1959
+
+raw / logical SHA-256:
+96b56a3685230174e6b9a08b6c2067cf09eed09557f8fa544eecff75876067b0
+d7606768178abf9cad8bb3cf17b95a586654d91fb51bfc38d395669846097c27
+
+corrected exact10 external identity:
+c38516c355aa450aecce332b7ad50d3db9daad13ce6f27ebdd942dc0f239a856
+
+failure class:
+BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE
+
+semantic state:
+VALID_WITH_CHALLENGE_PROVENANCE_QUALIFICATION
+
+actual executed challenge:
+UNRESOLVED_NOT_REPLACEABLE_BY_INFERENCE
+```
+
+exact30 / diagnostics exact4 / raw / logical / corrected exact10を独立再計算し、
+issue exact0だった。corrected roleはdocumentation/postfetch correctionの
+identityであり、current production publication-role allowlist acceptanceを
+根拠にしていない。
+
+### Administrative transition
+
+Event1がlockしたsource/proof/bootstrap-owner bytesの修正が必要であり、
+one Event1 per epochのためEpoch002内source repairと第2 Event1はできない。
+failure receipt corrected postverificationが先に完了したため、支配Designが
+要求したappend-only transitionを実行した。
+
+```text
+RECOVERY_EPOCH002:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002_EVENT1:
+PUBLISHED_POSTVERIFIED_IMMUTABLE_HISTORICAL_NOT_REUSABLE
+
+RECOVERY_EPOCH002_CANDIDATE:
+nls_v3_rc_epoch002_success_0001
+HISTORICAL_NOT_REUSABLE
+
+RECOVERY_EPOCH003:
+DEFINED_NOT_STARTED
+
+RECOVERY_EPOCH003_SOURCE_BASELINE:
+UNLOCKED
+
+RECOVERY_EPOCH003_CANDIDATE:
+UNALLOCATED
+
+RECOVERY_EPOCH003_D1 / D2:
+NOT_STARTED / NOT_STARTED
+
+EVENT1 / READINESS / ATTESTATION / RESERVATION / ATTEMPT:
+NOT_CREATED / NOT_CREATED / NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+FORMAL EXACT134:
+0
+
+CYCLE001:
+NOT_ACCEPTED
+```
+
+invalidation reason exact3:
+
+```text
+BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE
+SAME_EPOCH_REPAIR_FORBIDDEN_BY_ONE_EVENT1_PER_EPOCH
+SOURCE_BASELINE_LOCKED_PREFLIGHT_CONTRACT_UNREACHABLE
+```
+
+これはEvent1がfalseだったという判断ではない。Event1とfailure evidenceの
+真正性・過去のpostverificationを保持し、active baselineとしての再利用資格だけを
+閉じる。source driftを主張せず、source repairは行っていない。
+
+### Parent Design / receipt / P0 identity
+
+Parent Design:
+
+```text
+commit:
+75add120f099b3775c837d918662926230ddbc99
+
+Git blob:
+faec07d12a277f4746e3aebd1db3778a12b67579
+
+raw SHA-256:
+5fe64c022d8e21886c5531e102f673586c15b56d176072a556a4803a79681d4a
+
+lines / bytes / trailing LF:
+1670 / 46431 / exact1
+```
+
+Body-free receipt:
+
+```text
+commit:
+a4bdbc9fe144932fb445afcba81096f666d99d69
+
+Git blob:
+7139227bbb5cb67102024786059c13a069dfb3f8
+
+raw SHA-256:
+dd4af55855eb82fc1de5725a6c10873967def2a0e8e56d4ebc293be4258bd045
+
+logical SHA-256:
+904baff49d3efd09a4a1486298962646d7c56a7f90e3ce8191d7e26072cf66db
+
+top-level keys / lines / bytes / trailing LF:
+exact24 / 223 / 14291 / exact1
+```
+
+P0 external identity:
+
+```text
+schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch003.p0_external_identity.v1
+
+canonical exact5 preimage bytes:
+1199
+
+SHA-256:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+
+independent two-method issues:
+0
+```
+
+Parent DesignとreceiptだけがP0 anchor pairである。future Epoch003 Event1は
+このidentityをbindする。Handoff / plan / 07はreflection recordである。
+
+### Frozen Epoch003 contract
+
+P0は次をexactにfreezeした。
+
+- artifact contract exact7。
+- standalone document path exact5、Event1 nested closure location exact2。
+- top-level / nested strict keysetとcanonical hash。
+- installed distribution / RECORD、dependency lock、wheel bundle、
+  environment policy、runtime materialization、external identity。
+- pre-Event1 reference expected runtime observation。
+- distinct fresh post-Event1 operational observed runtime observation。
+- owner/independent exact14 operational projection。
+- complete schema-pair version dispatchとmixed/unknown fail-close。
+- placeholder executable/build/PATH identity rejection。
+- Event1 byte immutability。
+- failure-class別required/null evidence mapping。
+- future D2 production owner path exact7。
+- D1 new test path exact1。
+- D1 -> D2 -> final closure/admission -> candidate/Event1 -> preflight ->
+  operational observation + matching readiness/failure publication ->
+  reservationのseparate authority順。
+
+Epoch003へ継承するのはimmutable predecessor/process-risk evidenceだけである。
+Epoch002 candidate、active Event1/source/bootstrap、challenge、D1/D2、
+runtime、readiness、reservation、attempt、terminal、accepted、Step00..10、
+all11、Event2、P2、Product Read、batch/performance/Cycle acceptance creditは
+継承しない。
+
+### GitHub reflection
+
+```text
+Parent Design commit:
+75add120f099b3775c837d918662926230ddbc99
+
+Receipt commit:
+a4bdbc9fe144932fb445afcba81096f666d99d69
+
+Handoff commit / blob / raw:
+f7835f7659248e02c79fc74b3ec95c0bf9a78a64
+37d041e8cd089e61036d1faf766da395ec2734ce
+93c7b90c8de6b605b8995db5e5c54529481b6d8e0721e5d7bad180ba27057c86
+
+Tracked plan append commit / blob:
+1013e39a61d456a10ad13992c11cde9fea23054f
+2d39cfc66866dd93383c1213deabc6d02a1e6b23
+
+Latest snapshot predecessor blob:
+3494ded1808acf6ab9fdcb09a46d2834b725c2b7
+
+Latest snapshot append commit:
+resolve_from_github_revision_containing_this_section
+```
+
+entry-to-final approved changed path setはexact5:
+
+```text
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_20260729.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_BodyFree_Receipt_20260729.json
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_Handoff_20260729.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いた。historical SSH/key /
+expected-old lease / direct-child / single-commit / whole-tree /
+all-unchanged-path / full-recursive postfetch / durable-store transport条件を
+復活させていない。
+
+### Independent verification
+
+rules/scope、design causality/completeness、identity/stateの三系統を
+read-onlyで独立監査し、華恋が原典とtarget contentを最終照合した。
+
+```text
+rules/scope issues:
+exact0
+
+design causality/completeness blockers:
+exact0
+
+identity/state issues:
+exact0
+
+Design postfetch issues:
+exact0
+
+receipt keyset/hash postfetch issues:
+exact0
+
+Handoff postfetch issues:
+exact0
+
+tracked plan append postfetch issues:
+exact0
+
+body-free issues:
+exact0
+```
+
+### Zero effects and current stop
+
+```text
+MASHOS_API_WRITE:
+0
+
+TEST / PYTEST / PREFLIGHT EXECUTION:
+0
+
+REFERENCE / OPERATIONAL RUNTIME MATERIALIZATION:
+0 / 0
+
+NEW CANDIDATE / EVENT1 / READINESS / ATTESTATION:
+0 / 0 / 0 / 0
+
+RESERVATION / ATTEMPT / EXACT134:
+0 / 0 / 0
+
+PRIVATE BODY:
+0
+
+P2 / PRODUCT READ / CYCLE001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+### 推測
+
+今回のtransitionは「過去Event1の取り消し」ではなく「trueな過去baselineの
+active eligibility終了」である。expected runtimeとobserved runtimeを別artifactに
+分離し、同じfrozen lockからdistinct fresh rootへ二回materializeして比較することが、
+Event1 immutabilityとactual-environment proofを同時に守る最小修復だと推測する。
+
+### 華恋の意見
+
+Epoch002の証拠を消さず、続行権限だけを閉じることが必要である。candidateや
+challenge、readiness creditを再利用すると、到達不能だったpathを成功したように
+見せてしまう。
+
+Epoch003はまだ始めない。P0でexact contractをfreezeし、次はunchanged productionに
+対するcausal REDだけを別承認で作る。この順序なら、失敗理由をtestで固定してから
+必要なsourceだけを修正できる。
+
+Exactly one next authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D1_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_RED_FREEZE_ONLY
+```
+
+このnext authorityは別承認が必要であり、D1 test exact1とcausal RED freezeだけを
+許可する。production source、runtime materialization、candidate、Event1、
+readiness、reservation、attempt、exact134へ自動進行しない。
+
+```text
+RECOVERY_EPOCH002_INVALIDATED_RECOVERY_EPOCH003_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_AUTHORITY_STOP
+AUTHORITY_STOP
+```
