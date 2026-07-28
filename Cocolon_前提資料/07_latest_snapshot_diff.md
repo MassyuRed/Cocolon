@@ -26330,3 +26330,321 @@ readiness、reservation、attempt、exact134へ自動進行しない。
 RECOVERY_EPOCH002_INVALIDATED_RECOVERY_EPOCH003_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_AUTHORITY_STOP
 AUTHORITY_STOP
 ```
+
+## 2026-07-29 Recovery Epoch003 D1 bootstrap/source/runtime causal RED freeze
+
+### 確認済み事実
+
+Mashが明示承認したauthority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D1_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_RED_FREEZE_ONLY
+```
+
+entry:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+325bc7f7260803b2842b1dc1212833f5027768ac
+
+mashos-api:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+mashos-api tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+Recovery Epoch003 P0 external identity:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+```
+
+mashos-apiにexact1 test pathを追加した。
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py
+```
+
+publication:
+
+```text
+parent commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+commit:
+bcf164ce208fc8ebbf6c24bbfea42e3bd1a6ca98
+
+tree:
+ac813f00af0d4e4b587d916daf4513782c50918f
+
+Git blob:
+a469f4a71a69972f278b3a2cc1f6802c2f1bfa97
+
+raw SHA-256:
+3274af7cce8ad2d6cbbacee33aac28eddff1fc4ed90274d7fa190d54763c72df
+
+lines / bytes / trailing LF:
+2148 / 78447 / exact1
+
+compare:
+ahead 1 / behind 0 / total commits 1
+
+changed test / production paths:
+exact1 / exact0
+```
+
+postfetch contentは実行済みlocal bytesと一致し、Git blobも一致した。
+
+D1がfreezeしたordered denominatorはexact30:
+
+```text
+schema pair dispatch:
+exact4
+
+expected/observed runtime separation:
+exact6
+
+Event1 exclusion / placeholder / immutability / noninheritance:
+exact4
+
+owner-independent operational projection:
+exact3
+
+stable failure receipt:
+exact5
+
+phase / zero-effect / execution gate:
+exact4
+
+artifact path / role / publication scope:
+exact4
+```
+
+full node array SHA-256:
+
+```text
+0bef6ece47573ce982f8beb57c0c711fa907b927f310760b286f6dd2a594bb0a
+```
+
+Python syntax、P0 identity recomputation、embedded strict contract、
+exact30 collectionを先に確認し、final REDをexact1回だけ実行した。
+
+```text
+collected:
+30
+
+passed:
+0
+
+causal failed:
+30
+
+errors:
+0
+
+skipped / xfailed / xpassed / deselected:
+0 / 0 / 0 / 0
+
+unexpected:
+0
+
+exit:
+1
+
+elapsed:
+0.50s
+```
+
+全nodeはuniqueなcase IDと次のmissing-contract signatureで停止した。
+
+```text
+RECOVERY_EPOCH003_BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_NOT_IMPLEMENTED
+```
+
+ordered signature array SHA-256:
+
+```text
+ecdc0031b2e93255b0e1a6384502843a0307c3791558d08d94dd77f79cccc852
+```
+
+exact7 production ownerはentry/publication間でbyte-identicalで、
+case-sensitive scanのEpoch003 symbol countは0。canonical manifest
+SHA-256は:
+
+```text
+6cc92b69bf85b1ad903cfcccb7860e324f84823d8f3c23f4a97b6831f182f1d3
+```
+
+syntax/import/collection/fixture/plugin/assertion-oracle issueはexact0。
+このためRED causeはcurrent exact7 surfaceにadditive Epoch003 contractが
+存在しないことへ局在する。
+
+### Cocolon evidence
+
+Result:
+
+```text
+commit:
+015930f3a8066017e02c50c61c41e4b4bcb6cd39
+
+Git blob:
+492d123b0ae3a8e5427a8a3b7fa8e7a2c88d2449
+
+raw SHA-256:
+b8cc53a2aa3b703c8ccb6dc06851b66db65da12a4846739158a6244b2c7c9717
+```
+
+Body-free receipt:
+
+```text
+commit:
+ae9cc91f75cf753db4e10151b4f5a2117b4d0bd0
+
+Git blob:
+18edfdb892cf20ab6e0a36d479cefe68182506e2
+
+raw SHA-256:
+3c29ac5c08d981b894d2f7b249a5a0d1abae60ae323bd0216cef9de397335928
+
+logical SHA-256:
+442f1c7c59de1058a1baa09ee71aee318a0acac924a820e5b7fdbe22fa1b9c83
+
+external identity SHA-256:
+e4ae6128eed6e20f2efdb9e302345ecaeec93a3cc395453b64d7faeb1454c777
+
+top-level / logical preimage:
+exact27 / exact26
+```
+
+Handoff:
+
+```text
+commit:
+8c53f021aeb7404166f1ccf90b35d99d73920c6e
+
+Git blob:
+8a89b5641ff81b093592c9ebee5c1b46dff7825b
+
+raw SHA-256:
+15b1f68c6fca26053035b495c8a55de812e984953617eec0af8808ca6572b259
+```
+
+Tracked plan:
+
+```text
+commit:
+0756fbb5dca691f563a51c798fdd789d94213a6f
+
+predecessor blob:
+2d39cfc66866dd93383c1213deabc6d02a1e6b23
+
+result blob:
+4ad7e2e470afb8fcf7ba4714b1828fc42ad8f303
+
+raw SHA-256:
+32271e0020893b23b0cd529c82a94ff25d5ef42cb444f6b656f036270ab205c7
+```
+
+Latest snapshot:
+
+```text
+predecessor blob:
+03b5dfd941eb214eddb2d03907d5d8734cbef9c6
+
+append commit:
+resolve_from_github_revision_containing_this_section
+```
+
+Cocolon entry-to-final approved changed path setはexact5:
+
+```text
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D1_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_RED_FreezeOnly_Result_20260729.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D1_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_RED_FreezeOnly_BodyFree_Receipt_20260729.json
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D1_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_RED_FreezeOnly_Handoff_20260729.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+```
+
+rules/scope、design completeness、independent causalityをread-onlyの
+subagent exact3 laneで確認した。subagent edit / test / commit / GitHub write
+はexact0。華恋が原典との最終照合、final execution、publication、
+postfetch verificationを行った。
+
+### Zero effects
+
+```text
+mashos-api production / existing test / fixture / config / schema /
+dependency / lock changes:
+0
+
+reference / operational runtime materialization:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / exact134:
+0 / 0 / 0
+
+private body:
+0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+### 推測
+
+exact30のすべてが意図したmissing-contract boundaryへ到達し、exact7 owner
+bytesに変化がないため、これは単一のcross-owner architecture gapを複数角度で
+観測したものと推測する。Epoch002 objectのrelabelや一部validatorだけの修正では、
+schema-pair dispatch、expected/observed separation、independent projection、
+Event1 immutabilityの全てを同時には満たせない。
+
+### 華恋の意見
+
+D1はここで止めるべきである。runtime factsを発明せず、one-shot authorityを
+消費せずに、D2の修復義務をimmutable test bytesとして固定できた。
+次は別承認のD2で、testを変更せずexact7 production ownerだけを実装する。
+
+Current state:
+
+```text
+RECOVERY_EPOCH002:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH003:
+D1_CAUSAL_RED_FROZEN
+
+CANDIDATE / EVENT1 / READINESS / RESERVATION / ATTEMPT:
+UNALLOCATED / NOT_CREATED / NOT_CREATED / NOT_CREATED / NOT_CREATED
+
+FORMAL EXACT134:
+0
+
+CYCLE001:
+NOT_ACCEPTED
+
+AUTOMATIC_PROGRESSION:
+false
+```
+
+Exactly one next logical authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+このnext authorityは未承認。別の明示承認が必要であり、自動進行しない。
+
+```text
+RECOVERY_EPOCH003_D1_CAUSAL_RED_FROZEN_AUTHORITY_STOP
+AUTHORITY_STOP
+```
