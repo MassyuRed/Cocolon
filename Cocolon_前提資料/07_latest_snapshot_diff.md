@@ -25054,3 +25054,221 @@ Event1 dispositionを一つの因果として決めるread-only contract reconci
 必要である。
 
 このcheckpointから後続phaseを自動実行しない。
+
+
+## 2026-07-28 — Recovery Epoch002 Lineage02 Event1-v2 bootstrap/source-runtime and source-baseline disposition contract reconciliation
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_UNREACHABLE_EVENT1_V2_BOOTSTRAP_SOURCE_CLOSURE_OPERATIONAL_RUNTIME_IDENTITY_AND_SOURCE_BASELINE_DISPOSITION_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+### 確認した事実
+
+Karen-Diary、Cocolon mandatory premise / work-attitude rules / current
+reflection contract、EmlisAI実装済み資料、添付されたlong-term roadmap、Revised
+Cycle Detailed Design、historical Execution and Closure Plan、current
+Event1、current mashos-api source/preflight/formal-worker/independent verifier
+を横断確認した。
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry:
+f7bc287451001f9121f0e5cbe9836242304449df
+
+mashos-api source commit/tree:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+mashos-api worktree:
+clean
+```
+
+current Event1はvalid、postverified、immutableであり、Recovery Epoch002の
+source baselineをlockしたままである。
+
+```text
+Event1 external identity SHA-256:
+dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682
+
+source closure SHA-256:
+e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88
+
+bootstrap closure SHA-256:
+75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe
+```
+
+preflight実行は`PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP`で閉じ、
+readiness/reservation/formal exact134へ進んでいない。
+
+```text
+formal-parent phase-result SHA-256:
+4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3
+
+successor-v2 bootstrap validator:
+issue exact0
+
+historical generic bootstrap validator:
+READINESS_FORBIDDEN
+
+historical source-closure validator:
+SOURCE_CLOSURE_INVALID
+
+locked runtime / readiness / attestation:
+NOT_STARTED / exact0 / exact0
+
+reservation / attempt / formal exact134:
+exact0 / exact0 / invocation count 0
+```
+
+Parent Designは、preflight failure receiptをpublish/postverifyしてから
+reservationなしのauthority stopをdurableに閉じるよう要求する。専用failure
+receiptはまだ存在せず、既存07 appendはその代替ではない。
+
+Parent DesignはEvent1後のsource/proof/registry/bootstrap driftでEvent1再利用を
+禁止し、one Event1 per recovery epochを維持する。従ってpreflight owner、
+validator、formal worker、independent verifierを修正した後もcurrent Event1を
+active baselineとして扱うこと、またはEpoch002で第二Event1を出すことはできない。
+
+### 設計判断
+
+current authorityはEpoch002をinvalidateせず、Epoch003も定義しない。次の順序を
+固定した。
+
+```text
+current reconciliation design reflection
+-> dedicated preflight-contract-unreachable failure receipt
+-> authority stop without reservation
+-> separate Epoch002 invalidation / Epoch003 P0 parent design
+-> separate D1 causal RED
+-> separate D2 implementation / targeted GREEN
+-> final source/bootstrap/reference-runtime closure and admission
+-> one new-epoch candidate/Event1
+-> post-Event1 fresh-runtime preflight
+-> readiness or failure receipt publication
+-> separate later phases
+```
+
+future contractでは、Event1のimmutable source/bootstrap baselineと、
+preflightで実観測するoperational runtime/materializationを分離する。
+Event1 expected runtimeはpre-Event1 reference materializationで観測し、
+post-Event1 preflightはdistinct fresh runtime rootへexact same lock/wheel bundle
+から再materializeする。root identityは異なり、Python/pytest/installed RECORD/
+dependency lock/environment policy/PATH digestはexact-matchしなければならない。
+post-Event1 materializationをEvent1へ書き戻すことは禁止する。
+
+### GitHub reflection
+
+Design:
+
+```text
+commit:
+a630d24f097cdb11d08e551b0cc237169bd3c03b
+
+Git blob:
+d19258da18d3b2c8f2071b3b294b110da232d7b7
+
+raw SHA-256:
+39650bba3930178cd96a19394a7bfe11868ef04fb30af6cf298c503c23f34eb9
+```
+
+Design receipt:
+
+```text
+commit:
+132662a72aa3f97bea63f405fdb1ca3b5a7fc047
+
+Git blob:
+9e943c3de9ab38088511cafc4386e35cbb4aa977
+
+raw SHA-256:
+15e732e7f10ee3af3df021d17dc45567207cc8fddaa46efda0894d8c1ac7c4cc
+
+logical SHA-256:
+9f45578357420d79700439319fc410bb2d490fbb4be2c1de515cfb3f9cc52060
+
+external identity SHA-256:
+70d81a5bf53cc4e4406be4488c641ac1e1fc7f48e063a8bcbbbb20e7efe0333a
+```
+
+Handoff:
+
+```text
+commit:
+9d084f8e777e6949f34286c2fedd14c84e23af23
+
+Git blob:
+83bb74e9199550f0ce302506d11fa7f46e65bcd3
+
+raw SHA-256:
+d2417da5bf42634ad02ecb854184a27470464c2701eb19267187bf89304e234a
+```
+
+Latest snapshot:
+
+```text
+predecessor Git blob:
+c5741ad3877b4c4c7863190cdd497f56f06ab1e6
+
+this append commit:
+resolve_from_github_revision_containing_this_section
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いる。tracked Execution and Closure
+Planは、まだepoch transitionを実行していないため変更しない。
+
+### 書かれていないこと
+
+- failure receiptの将来publication commit/blob/raw/logical/external identity
+- Epoch002 invalidation / Epoch003 P0のpublication identities
+- Epoch003 exact schema/path/keyset/owner surface
+- future actual runtime/materialization identities
+- D1 denominator/oracle mappingとD2 production exact surface
+- new source closure/candidate/Event1/readiness/reservation以降のidentity/result
+
+### 推測
+
+current Event1はfalse historyではない。source修復が必要で、修復後sourceを
+current Event1のbaselineとして再利用できないため、missing failure receiptを
+閉じた後にEpoch002 invalidationが必要であると推測する。Recovery Epoch003は
+natural next identifierだが、次のparent-design authority成立前にはcurrent
+stateと扱わない。
+
+### 華恋の意見と停止判断
+
+Event1の書換え、v2からv1へのsilent conversion、fixture runtime hashのactual
+扱い、missing failure receiptを飛ばしたepoch transitionは、いずれも証拠の役割を
+混同する。まず実際に起きたpre-materialization contract failureをbody-free
+receiptで閉じるのが最小で安全である。
+
+```text
+CONTRACT_RECONCILIATION_DESIGN_FROZEN
+PREFLIGHT_FAILURE_CLOSURE_RECEIPT_REQUIRED_NOT_ISSUED
+EPOCH002_INVALIDATION_REQUIRED_NOT_ISSUED
+RECOVERY_EPOCH003_NOT_YET_DEFINED
+MASHOS_API_WRITE_EXACT0
+PRODUCTION_TEST_SCHEMA_CONFIG_DEPENDENCY_WRITE_EXACT0
+TEST_EXECUTION_EXACT0
+RUNTIME_MATERIALIZATION_EXACT0
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+P2_NOT_STARTED
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+Exactly one next authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_CLOSURE_RECEIPT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+このauthorityは別承認が必要であり、自動実行しない。
