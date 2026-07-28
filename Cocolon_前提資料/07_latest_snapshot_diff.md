@@ -24226,3 +24226,296 @@ external identity、postfetch bytes、owner / independent issue exact0を確認�
 historical exact20/exact16/exact13の変更・上書き、production/test変更、P1 admission、
 candidate allocation、Event1、readiness、reservation、formal exact134、accepted chain、
 Event2、P2、Product Read、Cycle acceptanceへは進まない。
+
+
+## 2026-07-28 — Recovery Epoch002 source-identity Lineage02 exact20 semantic calculation / exact16 + completion-v2 exact14 issuance and postverification
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEAGE02_EXACT20_SEMANTIC_CALCULATION_SUCCESSOR_COMBINED_GREEN_EXACT16_AND_COMPLETION_V2_EXACT14_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+### 確認した事実
+
+Karen-Diary、Cocolonのmandatory premise / work-attitude rules / current
+authority、EmlisAI実装済み資料、添付されたlong-term roadmap、NLS v3 revised
+detailed design、Cycle001 Execution and Closure Plan、current mashos-api
+source/testを横断確認した。
+
+このcheckpointは、Step 11 Cycle001を完了・受入済みにするものではない。final
+sourceからLineage02 predecessor evidenceを発行してpostverifyし、P1へ進まずに
+停止するadministrative / causal boundaryである。EmlisAIのpublic surface、
+ユーザー辞書、DB、API、RN、Product Read、実機挙動は変更しない。
+
+```text
+Karen-Diary current:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry before exact16 publication:
+46790ef214304903b9762db33cc51513c5db3b37
+
+Cocolon 07 predecessor Git blob:
+4de3b074487ed5afe47809c96535ae16e775f21a
+
+mashos-api final source commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+mashos-api final source tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+mashos-api changed paths under this authority:
+exact0
+
+mashos-api worktree:
+clean
+```
+
+### 根拠と必要性
+
+historical semantic exact20 / exact16 / exact13はvalid immutable historyだが、
+Event1-v2 owner-contract production変更後のfinal source
+`a70d3c12... / ccddcf...`を表さず、current P1 predecessorには不適格である。
+historical pathの上書きやold/new lineageの混在は、履歴とcurrent eligibilityを
+同一視するため禁止されている。
+
+したがって必要だったのは、final sourceから全derived rootを再構成したcurrent
+semantic exact20を用い、distinct Lineage02 pathへexact16を発行し、そのlogical
+identityとpublished recovery-decision external identityをcompletion-v2 exact14へ
+結合して、owner / independent / publisherの全経路で再検証することだった。
+
+exact20はsemantic objectであり、独立したCocolon fileではない。historical
+exact20のcommit/treeだけを差し替えず、canonical current closure、bootstrap、
+owner graph、test manifest、proof sourceをcurrent sourceから再計算した。
+
+### Final-source verification and semantic exact20
+
+GitHub current mainと同一のclean sourceで、repository内bytecodeとpytest cacheを
+生成しない条件で実行した。
+
+```text
+targeted C09:
+1 passed
+
+historical exact46 + successor exact64 ordered exact110:
+110 passed / 1 existing Pydantic deprecation warning
+
+independent read-only rerun:
+targeted C09 1 passed
+ordered exact110 110 passed
+
+ordered node count / unique count:
+110 / 110
+
+ordered exact110 node-list SHA-256:
+da8db0f75db162ca3f4dafc0e60c1348c63c3bbd5cbb5dfc155788eb2c46ac83
+
+success-contract test manifest SHA-256:
+65d74c00dc2406b39d7ba363a1fe68ac972c2f0f37b364076913556562556ecf
+```
+
+再構成したstrict exact20は次である。
+
+```text
+schema:
+cocolon.emlis.nls_v3.recovery_epoch002.post_d2_source_baseline_eligibility_successor_closure.v1
+
+source closure logical SHA-256:
+e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88
+
+canonical current closure SHA-256:
+692db1762d5397935d141b7b8fed2a44b40af57e1ecac0c969d1f7b41beadae3
+
+bootstrap closure SHA-256:
+75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe
+
+success owner graph SHA-256:
+174506fd806a2c5c1fbca9dd0901dff34061666e3397bd428388253a39188aa4
+
+source dependency closure SHA-256:
+594f8105b29b516b1d1eb8eb3ed9f434bd69a88c7851674c596b09d2328a5b67
+
+proof source closure SHA-256:
+93f1032fe17b265a6a268688e7ecd3a2e53cb3f68bac5b3ecf9e8345aa0c8a43
+
+standalone exact20 publication:
+exact0
+```
+
+### Lineage02 combined-GREEN exact16 publication
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_SourceIdentityLineage02_Successor_GREEN_Result_20260728.json
+
+schema:
+cocolon.emlis.nls_v3.recovery_epoch002.post_d2_successor_targeted_green_result.v1
+
+publication commit:
+51600152b015efe7f03d1575e87dcec687e6ed9c
+
+Git blob:
+fc2805b5e7555f981405105f9ce646752f980f4e
+
+raw SHA-256:
+dd4e753b701fa3e277d617aac56f2f1a3936d5dbaa6cd9f43c5a51e71b790e29
+
+logical receipt SHA-256:
+bc25ef3146c663d96768bc74de4e52a36721a9a60381114fea19f676ed68a78a
+
+external identity SHA-256:
+7fd5603abd2f63e0a6a2a843cb2c95d5b19cd145bab26d3c926efa28afb75b00
+
+canonical bytes:
+54489 / trailing LF exact1
+
+counts:
+collected 110 / executed 110 / passed 110 / all other outcomes 0
+
+owner issue codes:
+exact0
+
+independent issue codes:
+exact0
+
+state:
+SUCCESSOR_TARGETED_GREEN_COMPLETED
+```
+
+targetはprewriteでABSENTだった。publication commitのchanged pathは上記exact1だけ
+である。publication commitとcurrent mainの双方からrefetchしたcontent / Git blobは
+生成したcanonical bytesとexact-matchした。
+
+### Lineage02 completion-v2 exact14 issuance
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2SourceIdentityLineage02_SourceBaselineEligibilitySuccessorCompletion_BodyFree_Receipt_20260728.json
+
+schema:
+cocolon.emlis.nls_v3.recovery_epoch002.post_d2_source_baseline_eligibility_successor_completion_receipt.v2
+
+publication commit:
+4a3204b04d6e0d907777990f4442d0090b79276a
+
+Git blob:
+5950b2047a23ca7e53975bab774da7be105c6faf
+
+raw SHA-256:
+83673c93ecb030698b837e1355fe4b78ef5469bdd5c9d81719d41da5cdf8c215
+
+logical receipt SHA-256:
+51e5c89425ce76b42207ccb476a8911b2ebb54edeecccbf9d4c04731b2724899
+
+external identity SHA-256:
+b8124732e90987bc72c0d5a6d56f40c45fcd117b8125293c7e34c0a4d4327aff
+
+lineage recovery-decision external identity SHA-256:
+9602c7cf4092594950d988c05a886c0780c32ff1eebc9fa9409d00959becad13
+
+canonical bytes:
+1158 / trailing LF exact1
+
+state:
+SUCCESSOR_SOURCE_BASELINE_ELIGIBILITY_PROVED
+```
+
+completionはstrict exact14で、current semantic exact20、actual S1 causal RED
+logical identity `7b3b6d0890038642d69feb18e46630fbf97a5918fe0e95db766b8c8175e2d179`、
+postverified Lineage02 exact16 logical identity、recovery-decision exact10 external
+identityをexact-matchする。
+
+targetはprewriteでABSENTだった。publication commitのchanged pathは上記exact1だけ
+である。publication commitとcurrent mainの双方からrefetchしたcontent / Git blobは
+生成したcanonical bytesとexact-matchした。
+
+### Owner / independent / publisher postverification
+
+actual GitHub publication commit / blob / raw / logical identitiesをowner succession
+stateへ置換し、current sourceの実ownerとpublic independent replayを再実行した。
+
+```text
+sequence owner issue codes:
+exact0
+
+public independent verification issue codes:
+exact0
+
+atomic single-publication owner issue codes:
+exact0
+```
+
+同じfrozen oracleは、historical current-use、current exact20とhistorical exact16の
+混在、Lineage02 exact16とhistorical exact13の混在、historical path上書き、new
+completion pathでのv1 exact13、bare design hash、nonmanifest exact110を
+`SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID`でfail-closedする。
+
+### GitHub reflection and current stop
+
+```text
+exact16 write changed paths:
+exact1 / approved new Lineage02 GREEN path only
+
+exact14 write changed paths:
+exact1 / approved new Lineage02 completion path only
+
+Cocolon head before this 07 write:
+4a3204b04d6e0d907777990f4442d0090b79276a
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+SOURCE_IDENTITY_LINEAGE_02_EXACT20_SEMANTIC_CALCULATED
+SOURCE_IDENTITY_LINEAGE_02_COMBINED_GREEN_EXACT16_PUBLISHED_AND_POSTVERIFIED
+SOURCE_IDENTITY_LINEAGE_02_COMPLETION_V2_EXACT14_ISSUED_AND_POSTVERIFIED
+RECOVERY_DECISION_EXTERNAL_IDENTITY_BOUND
+OWNER_ISSUE_CODES_EXACT0
+INDEPENDENT_ISSUE_CODES_EXACT0
+PUBLISHER_ISSUE_CODES_EXACT0
+HISTORICAL_EXACT20_EXACT16_EXACT13_IMMUTABLE
+HISTORICAL_EXACT20_EXACT16_EXACT13_CURRENT_P1_INELIGIBLE
+MASHOS_API_WRITE_EXACT0
+PRODUCTION_TEST_SCHEMA_CONFIG_DEPENDENCY_WRITE_EXACT0
+P1_OPERATIONAL_ADMISSION_EXACT0
+CANDIDATE_VERSION_UNALLOCATED
+EVENT1_EXACT0
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+P2_NOT_STARTED
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いた。承認外path、削除、history rewrite、
+retired transport条件の復活はexact0である。
+
+### 推測
+
+current exact20 -> Lineage02 exact16 -> completion-v2 exact14はowner /
+independent / publisherの全経路でissue exact0となったため、current P1のimmutable
+predecessor evidenceとして整合していると推測する。
+
+ただし、この推測はP1 admission、candidate allocation、Event1、readiness、
+reservation、formal exact134、accepted chain、Event2、P2、Product Read、
+Cycle001 acceptanceの実行authorityではない。
+
+### 華恋の意見と停止判断
+
+historical chainを壊さず、final sourceから再構成したsemantic exact20と
+decision-bound completion-v2だけをappend-onlyに発行したことで、過去のvalidityと
+current eligibilityを最小exact2 artifactで分離できた。exact110の再実行、
+subagentによる独立再計算、actual publication identityを用いた三owner検証まで
+一致したため、今回の発行とpostverificationには華恋が責任を持てる。
+
+一方、Cocolonの商品価値は証跡数ではなく、ユーザー入力を雑に処理せず、
+実際のProduct ReadとCycle受入へつなげることにある。今回の証跡を理由にP1以降を
+自動開始せず、次の実作業はMash様のseparate explicit authorityを受けてから行う。
+
+このcheckpointから自動発行されるnext authorityはない。
