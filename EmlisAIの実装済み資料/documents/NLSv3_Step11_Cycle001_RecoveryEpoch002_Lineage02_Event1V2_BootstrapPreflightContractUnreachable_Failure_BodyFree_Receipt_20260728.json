@@ -1,0 +1,41 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch002.formal_worker_bootstrap_preflight_contract_unreachable_failure_receipt.v1",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_002",
+  "candidate_version_id": "nls_v3_rc_epoch002_success_0001",
+  "preflight_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_LOCKED_RUNTIME_MATERIALIZATION_BOOTSTRAP_READINESS_RECEIPT_AND_OPERATIONAL_PREFLIGHT_ATTESTATION_GENERATION_INDEPENDENT_VERIFICATION_AND_PREFLIGHT_READY_STOP_ONLY",
+  "issuance_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_FAILURE_CLOSURE_RECEIPT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+  "event1_challenge_id": "2e581607f9aff5ea6a38f509f6dc7ea3626aebdcdf9f612c9646418e25b5cb2b",
+  "preflight_challenge_id": "5d58979338cbc30ce603df884d466981895e05198196925e209424a129c4b0f9",
+  "source_baseline_event_identity_sha256": "dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682",
+  "source_closure_sha256": "e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88",
+  "bootstrap_closure_sha256": "75e9ca12c84c2f17d5c6f1cb0609a83a7413851dea4612b82b28ccd44c8383fe",
+  "formal_parent_phase_result_sha256": "4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3",
+  "formal_parent_result_validation_issue_codes": [],
+  "requested_phase": "FORMAL_WORKER_BOOTSTRAP_PREFLIGHT",
+  "diagnostics": {
+    "successor_bootstrap_validator_issue_codes": [],
+    "generic_bootstrap_validator_issue_codes": [
+      "READINESS_FORBIDDEN"
+    ],
+    "legacy_source_closure_validator_issue_codes": [
+      "SOURCE_CLOSURE_INVALID"
+    ],
+    "readiness_builder_error": "READINESS_FORBIDDEN"
+  },
+  "failure_class": "BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE",
+  "stop_code": "PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP",
+  "locked_runtime_materialization_state": "NOT_STARTED",
+  "readiness_artifact_state": "NOT_CREATED",
+  "operational_preflight_attestation_state": "NOT_CREATED",
+  "reservation_count_delta": 0,
+  "attempt_id": null,
+  "formal_exact134_invocation_count": 0,
+  "owner_validation_state": "FAILED_CLOSED_BEFORE_MATERIALIZATION",
+  "independent_verification_state": "FAILURE_REPRODUCED_AND_PARENT_RESULT_VALID",
+  "same_authority_preflight_rerun_allowed": false,
+  "automatic_retry": false,
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256": "d7606768178abf9cad8bb3cf17b95a586654d91fb51bfc38d395669846097c27"
+}
