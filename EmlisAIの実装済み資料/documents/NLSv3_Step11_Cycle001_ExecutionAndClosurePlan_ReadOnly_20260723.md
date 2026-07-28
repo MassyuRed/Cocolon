@@ -6013,3 +6013,271 @@ false
 P1 / Event1 / exact134 / Event2 / P2:
 NOT_STARTED_BY_THIS_CORRECTION
 ```
+
+
+## 12.50 2026-07-29 Recovery Epoch002 invalidation and Recovery Epoch003 P0 parent design
+
+### authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_BOOTSTRAP_PREFLIGHT_CONTRACT_UNREACHABLE_SOURCE_BASELINE_INVALIDATION_AND_RECOVERY_EPOCH003_P0_PARENT_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+This is a design-only, append-only administrative recovery-epoch
+transition. It performs no source repair or execution.
+
+### fixed entry and prerequisite
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry:
+1b3dee071cf71c5524cf83f412fb5bc043cefbcf
+
+mashos-api commit/tree:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+```
+
+The prerequisite corrected failure-receipt postverification completed with:
+
+```text
+failure receipt corrected exact10 identity:
+c38516c355aa450aecce332b7ad50d3db9daad13ce6f27ebdd942dc0f239a856
+
+failure class:
+BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE
+
+semantic state:
+VALID_WITH_CHALLENGE_PROVENANCE_QUALIFICATION
+
+actual executed challenge:
+UNRESOLVED_NOT_REPLACEABLE_BY_INFERENCE
+
+stop:
+AUTHORITY_STOP_WITHOUT_RESERVATION
+```
+
+### append-only disposition
+
+The immutable Event1 truthfully records the source/bootstrap baseline that
+was published and postverified. That baseline cannot reach the current
+pre-reservation readiness contract. Repair changes Event1-protected
+source/proof/bootstrap-owner bytes, while a second Event1 in the same epoch
+is forbidden.
+
+Therefore:
+
+```text
+RECOVERY_EPOCH002:
+EPOCH_INVALIDATED
+
+RECOVERY_EPOCH002_EVENT1:
+PUBLISHED_POSTVERIFIED_IMMUTABLE_HISTORICAL_NOT_REUSABLE
+
+RECOVERY_EPOCH002_CANDIDATE:
+nls_v3_rc_epoch002_success_0001
+HISTORICAL_NOT_REUSABLE
+
+RECOVERY_EPOCH003:
+DEFINED_NOT_STARTED
+
+RECOVERY_EPOCH003_SOURCE_BASELINE:
+UNLOCKED
+
+RECOVERY_EPOCH003_CANDIDATE:
+UNALLOCATED
+
+CYCLE001:
+NOT_ACCEPTED
+```
+
+Invalidation reasons are strict sorted exact3:
+
+```text
+BOOTSTRAP_SOURCE_RUNTIME_CONTRACT_UNREACHABLE
+SAME_EPOCH_REPAIR_FORBIDDEN_BY_ONE_EVENT1_PER_EPOCH
+SOURCE_BASELINE_LOCKED_PREFLIGHT_CONTRACT_UNREACHABLE
+```
+
+This does not invalidate or rewrite historical evidence. No source drift is
+claimed and no source repair occurred.
+
+### Parent Design and receipt
+
+Parent Design:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_20260729.md
+
+publication commit:
+75add120f099b3775c837d918662926230ddbc99
+
+Git blob:
+faec07d12a277f4746e3aebd1db3778a12b67579
+
+raw SHA-256:
+5fe64c022d8e21886c5531e102f673586c15b56d176072a556a4803a79681d4a
+```
+
+Body-free receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_BodyFree_Receipt_20260729.json
+
+publication commit:
+a4bdbc9fe144932fb445afcba81096f666d99d69
+
+Git blob:
+7139227bbb5cb67102024786059c13a069dfb3f8
+
+raw SHA-256:
+dd4af55855eb82fc1de5725a6c10873967def2a0e8e56d4ebc293be4258bd045
+
+logical receipt SHA-256:
+904baff49d3efd09a4a1486298962646d7c56a7f90e3ce8191d7e26072cf66db
+
+top-level keys:
+exact24
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_Handoff_20260729.md
+
+publication commit:
+f7835f7659248e02c79fc74b3ec95c0bf9a78a64
+
+Git blob:
+37d041e8cd089e61036d1faf766da395ec2734ce
+
+raw SHA-256:
+93c7b90c8de6b605b8995db5e5c54529481b6d8e0721e5d7bad180ba27057c86
+```
+
+The Parent Design and receipt are the P0 anchor pair. Handoff, this plan
+append, and latest-snapshot append are reflection records.
+
+### Recovery Epoch003 P0 external identity
+
+```text
+schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch003.p0_external_identity.v1
+
+canonical exact5 preimage bytes:
+1199
+
+P0 external identity SHA-256:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+
+independent derivation issues:
+0
+```
+
+A future Epoch003 Event1 must bind this identity.
+
+### frozen Epoch003 correction surface
+
+P0 freezes:
+
+- seven artifact contracts;
+- five standalone document paths and two Event1-embedded closure locations;
+- strict top-level and nested keysets and canonical hashes;
+- expected runtime facts from a real pre-Event1 reference materialization;
+- actual runtime facts from a distinct post-Event1 materialization;
+- exact14 owner and independent expected/observed projection parity;
+- installed-distribution/RECORD, lock, wheel-bundle, source, owner, test,
+  import, plugin, argv, environment, Python, and pytest parity;
+- distinct reference and operational runtime-root identities;
+- version-aware complete schema-pair dispatch;
+- placeholder identity rejection;
+- Event1 byte immutability;
+- failure-class-specific evidence bindings;
+- exact7 future production-owner path set; and
+- exact one-file D1 RED write surface.
+
+Epoch003 retains only immutable predecessor/process-risk evidence. It does
+not inherit the Epoch002 candidate, active Event1/source/bootstrap closure,
+challenge, D1/D2, runtime, readiness, reservation, attempt, terminal,
+accepted, Step00..10, all11, Event2, P2, Product Read, batch, performance, or
+Cycle acceptance credit.
+
+### independent verification
+
+```text
+rules/scope issues:
+0
+
+design causality/completeness blockers:
+0
+
+identity/state issues:
+0
+
+Design target-content postfetch issues:
+0
+
+receipt strict-key/hash postfetch issues:
+0
+
+handoff target-content postfetch issues:
+0
+
+body-free issues:
+0
+```
+
+Event1 bytes/raw/logical and the failure receipt exact30/exact4/raw/logical/
+corrected exact10 were independently recomputed. The existing Event1
+external identity is retained as postverified historical authority without
+claiming reconstruction of its unavailable exact preimage. The recorded
+mashos-api tree was cross-checked between Event1 and governing records
+without claiming an independent tree-object traversal.
+
+### exact scope and zero effects
+
+The full authority changes exactly five Cocolon paths: Parent Design,
+receipt, handoff, this tracked plan, and latest snapshot.
+
+```text
+mashos-api write:
+0
+
+test / pytest / preflight execution:
+0
+
+reference or operational runtime materialization:
+0
+
+candidate / Event1 / readiness / attestation:
+0 / 0 / 0 / 0
+
+reservation / attempt / exact134:
+0 / 0 / 0
+
+private body:
+0
+
+P2 / Product Read / Cycle acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+```
+
+### exact next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D1_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_RED_FREEZE_ONLY
+```
+
+Separate explicit approval is required. It permits the exact D1 test path
+and causal RED freeze only. It does not permit production changes or any
+runtime/candidate/Event1/readiness/reservation/exact134 effect.
+
+```text
+RECOVERY_EPOCH002_INVALIDATED_RECOVERY_EPOCH003_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
