@@ -23935,3 +23935,294 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEA
 existing C09、successor exact64、historical exact46、ordered exact110をGREENへする。
 formal parent/preflight、final exact20 calculation、Lineage02 exact16/exact14 publication、
 P1 admission、candidate、Event1以降へは進まない。
+
+
+## 2026-07-28 — Recovery Epoch002 source-identity Lineage02 immutable predecessor binding implementation and targeted GREEN
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEAGE02_EXACT20_EXACT16_AND_COMPLETION_V2_EXACT14_IMMUTABLE_PREDECESSOR_BINDING_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+### 確認した事実
+
+```text
+Karen-Diary operating-principles Git blob:
+d0979181a3e1514d816838f183b2a68ba6a98465
+
+Cocolon entry head:
+7d618066d99b9bee31225cda7dc3b6379309071d
+
+Cocolon 07 predecessor Git blob:
+9db793525df60a25e9b20f34d3f052e154df9ad4
+
+mashos-api predecessor:
+38d46bb381e1440e88b165c13618f7c7c3a0a4e7
+
+mashos-api predecessor tree:
+0554f8eca49bc10ed041506ff31206e59b2207ab
+
+mashos-api implementation write commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+mashos-api implementation result tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+changed paths:
+exact3 / approved production owners only
+```
+
+変更したmashos-api pathは次のexact3だけである。
+
+```text
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+```
+
+各result identityは次である。
+
+```text
+sequence ledger Git blob / raw SHA-256 / lines / bytes:
+e64a0a4c1fac951c1ca7b2d833dcae797f0da15c
+d9ad8e51f98ba9fdcf3d508ce88ab3ebb97b86676ac4546a5783d5bb38e3dde1
+2860 / 108432
+
+atomic publication owner Git blob / raw SHA-256 / lines / bytes:
+66433d05b43b5306cb72afc26c0607da6bc6c8ac
+b1c825fdac3d30241a93ecbdb9c9bc25d6bccca300684ae11c81adf847b580f6
+1571 / 56651
+
+public independent verifier Git blob / raw SHA-256 / lines / bytes:
+4fd5d0ade83b235ab06a3a1e45681f15b839835f
+908f690f5ec2cb822c1902f9ea428442b4d8399a1ef2fba7b8267c3b34032385
+5319 / 201684
+```
+
+existing successor testとhistorical testは変更していない。
+
+```text
+successor test Git blob / raw SHA-256:
+07622a457a9927917148d58273d1b38e8d89d130
+cf07341e67cbcb63f8ef728f085f45542fb3bc04d2bc7f68507be20ac02d0edb
+
+historical test Git blob / raw SHA-256:
+6e1f904d91c0e6852b8af66500a0563e20648026
+70d6db7fe3e9f42c59a01fdba5e73752ba6aa1e7c2c4e6d7bf2581dbd5090ce5
+
+test-files SHA-256:
+244a8a38de2dea06e2761de83c56b339020da16e29e598e8dce6749b52f54773
+
+success-contract test manifest SHA-256:
+65d74c00dc2406b39d7ba363a1fe68ac972c2f0f37b364076913556562556ecf
+
+ordered exact110 node-list SHA-256:
+da8db0f75db162ca3f4dafc0e60c1348c63c3bbd5cbb5dfc155788eb2c46ac83
+```
+
+sequence ownerはcompletion receiptをstrict dual-modeで扱う。
+
+```text
+legacy regression mode:
+completion v1 exact13
++ historical GREEN path
++ historical completion path
+
+Lineage02 mode:
+completion v2 exact14
++ Lineage02 GREEN path
++ Lineage02 completion path
++ recovery-decision external identity exact-match
+```
+
+schema、keyset、GREEN path、completion path、decision identityはmode単位で選択し、
+old/newの独立allowlistにはしていない。既知historical semantic exact20
+`d4156b14...1aa97f`はvalid immutable historyとして残す一方、current succession
+sourceとしてはsequence ownerでも明示拒否する。
+
+completion external identityは、sequence ownerのEvent1-v2、P1 operational
+admission、Event2 candidate allocationで同じexact `(schema, path)` pair helperを
+使う。したがってv1/new path、v2/old path、Lineage01/Lineage02混在を下流で再受理
+しない。
+
+atomic publication ownerはcompletionだけをv1/v2 schema exact2へ拡張し、
+candidate、result path、external identity、exact1 postfetch、single-publication
+stateでschema/path pairとartifact semantic validationを行う。single-publication
+stateはcallerのpath mapではなくcompletion artifact schemaからexpected pathを
+導出する。Lineage02 v2をoccupied historical completion pathへ再発行するstateは
+拒否する。新しいGREEN publication roleは追加していない。
+
+public independent verifierはsequence/atomic ownerをimportせず、private literalと
+private helperで同じstrict dual-modeを独立再生する。shared primitive allowlist、
+owner import split、public APIは変更していない。
+
+read-only subagent exact3監査のうちatomic監査が、非string `schema_version`
+（list/dict）でset membership / map lookupが`TypeError`になり得る境界を検出した。
+華恋がGitHub反映前にdirect equalityへ修正し、candidate build/validate、artifact
+identity、single-publicationのlist/dict exact8 probeがすべて所定issue code /
+`ValueError`でfail-closedすることを確認した。修正後のexact3を華恋が再監査し、
+subagent exact3再監査もblocker exact0だった。
+
+formal parent、preflight、existing test、configuration、dependency、lock、
+schema fileの変更はexact0である。
+
+### 直接原因と必要性
+
+REDで固定したcoherent Lineage02 positiveは、current productionがcompletion v1と
+historical pathだけを受理していたためowner / independent / publisherのexact3で
+`SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID`だった。
+
+historical chainを単純に許可したままnew pathだけを追加すると、published recovery
+decisionを持たないv1 exact13やold/new mixed lineageを受理し得る。反対に既存v1を
+新v2へ単純置換すると、valid historical contractと既存exact64 regressionを壊す。
+
+したがって必要最小修正は、historical v1 contractを保持しつつ、
+Lineage02 v2 exact14をdecision-boundな別modeとして追加し、historical exact20の
+current-useとschema/path cross-pairを閉じるproduction exact3だった。
+
+### Targeted verification
+
+repository内へbytecode / pytest cacheを生成しないclean-source条件で実行した。
+まずimplementation result treeとexact一致するlocal clean commitで確認し、
+GitHub反映後はfresh cloneしたcurrent mainでpostreflection確認した。
+
+```text
+targeted C09:
+1 passed
+
+successor exact64:
+64 passed
+
+historical exact46:
+46 passed
+
+historical exact46 + successor exact64 ordered exact110:
+110 passed
+
+malformed list/dict schema fail-closed probe:
+4 public boundaries x 2 values passed
+
+ordered node count / unique count:
+110 / 110
+
+postreflection targeted C09:
+1 passed
+
+postreflection ordered exact110:
+110 passed
+```
+
+GitHub current mainのfresh cloneで再構成したcurrent source factsは次である。
+
+```text
+source commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+source tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+success owner graph SHA-256:
+174506fd806a2c5c1fbca9dd0901dff34061666e3397bd428388253a39188aa4
+
+source dependency closure SHA-256:
+594f8105b29b516b1d1eb8eb3ed9f434bd69a88c7851674c596b09d2328a5b67
+
+worktree clean:
+true
+```
+
+targeted test中にlive current-source closureは動的再構成しているが、このauthority
+ではLineage02 final exact20 artifactを計算結果としてfreeze・発行・公開していない。
+
+### GitHub reflection and current stop
+
+```text
+mashos-api write changed paths:
+exact3 / approved production owners only
+
+mashos-api compare:
+ahead exact1 / behind exact0 / total commits exact1
+
+mashos-api postfetch:
+all exact3 target blobs and full contents exact match
+write commit changed paths exact3
+current main equals implementation write commit
+
+Lineage02 exact16 target:
+ABSENT / NOT PUBLISHED
+
+Lineage02 completion v2 exact14 target:
+ABSENT / NOT PUBLISHED
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+SOURCE_IDENTITY_LINEAGE_02_IMMUTABLE_PREDECESSOR_BINDING_IMPLEMENTED
+HISTORICAL_EXACT20_EXACT16_EXACT13_IMMUTABLE
+HISTORICAL_EXACT20_EXACT16_EXACT13_CURRENT_P1_INELIGIBLE
+COHERENT_LINEAGE02_POSITIVE_GREEN
+HISTORICAL_CURRENT_USE_SEQUENCE_OWNER_GAP_CLOSED
+TARGETED_C09_GREEN
+SUCCESSOR_EXACT64_GREEN
+HISTORICAL_EXACT46_GREEN
+ORDERED_EXACT110_GREEN
+ORDERED_NODE_LIST_EXACT110_UNCHANGED
+LINEAGE02_FINAL_EXACT20_NOT_FROZEN
+LINEAGE02_EXACT16_NOT_PUBLISHED
+LINEAGE02_COMPLETION_V2_EXACT14_NOT_PUBLISHED
+P1_OPERATIONAL_ADMISSION_EXACT0
+CANDIDATE_VERSION_UNALLOCATED
+EVENT1_EXACT0
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いた。承認外path、削除、history rewrite、
+不可逆操作、retired transport条件の復活はexact0である。
+
+### 推測
+
+production exact3反映後のmashos-api current mainはstableで、test bytes、ordered
+exact110、test manifestも不変である。したがって次authorityでは、このcurrent
+commit/treeをsourceとしてLineage02 exact20 semantic artifactを一意に再構成し、
+新pathのexact16とcompletion v2 exact14へ進めると推測する。
+
+ただし、これはartifact発行、P1 admission、candidate、Event1開始の自動authority
+ではない。
+
+### 華恋の意見と停止判断
+
+歴史的v1を消さず、Lineage02だけをdecision-bound v2として追加し、全consumerを
+同じschema/path pairへ揃えたことで、immutable historyとcurrent eligibilityを
+最小exact3で分離できた。
+
+最終監査で見つかった非string schemaの例外境界もGitHub反映前に閉じ、修正後の
+全対象と反映後fresh cloneを華恋自身が再実行した。ここまでで今回authorityの
+実装とtargeted GREENには責任を持てる。
+
+一方、final exact20、Lineage02 exact16、completion v2 exact14はまだimmutable
+artifactとして発行していない。P1へ進む前にそれらをcurrent sourceへ結合して
+postverifyする必要があるため、今回authorityはここで停止する。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEAGE02_EXACT20_SEMANTIC_CALCULATION_SUCCESSOR_COMBINED_GREEN_EXACT16_AND_COMPLETION_V2_EXACT14_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+次authorityはcurrent mashos-api commit/treeからLineage02 exact20 semantic artifactを
+計算し、new targetのcombined GREEN exact16とcompletion v2 exact14を順に発行して、
+external identity、postfetch bytes、owner / independent issue exact0を確認する。
+historical exact20/exact16/exact13の変更・上書き、production/test変更、P1 admission、
+candidate allocation、Event1、readiness、reservation、formal exact134、accepted chain、
+Event2、P2、Product Read、Cycle acceptanceへは進まない。
