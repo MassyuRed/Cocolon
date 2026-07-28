@@ -22578,3 +22578,115 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_COMBINED_GREEN_EXACT1
 `_success_completion_valid`からobject member iteration order比較だけを除き、直後のdict exact equalityでexact key/value parityを維持する。
 owner、canonical serializer、artifact schema、`test_node_ids` / `executed_node_ids`順序、production他file、exact16 / exact13は変更しない。
 C09、exact64、exact110のtargeted GREEN後にautomatic progression falseで停止する。
+
+## 2026-07-28 canonical GREEN publication round-trip object member-order independence implementation and targeted GREEN
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_COMBINED_GREEN_EXACT16_CANONICAL_JSON_PUBLICATION_ROUNDTRIP_OUTCOME_STATES_OBJECT_MEMBER_ORDER_INDEPENDENCE_AND_EXACT110_ORDERED_NODE_LIST_PRESERVATION_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+### 確認した事実と必要性
+
+- canonical JSON round-trip後もcombined-GREENのsemantic object、receipt hash、
+  ordered exact110 `test_node_ids` / `executed_node_ids`、全nodeの
+  `PASSED` key/value mappingは保持される。
+- REDの直接原因はindependent verifier `_success_completion_valid`の
+  `list(green_states) != green_nodes`だけだった。
+- JSON object member順は意味契約ではないため、この比較を残すと正規化済みの同一artifactを
+  独立verifierだけが拒否する。順序契約はarray側で既にexactに保持されている。
+
+### Implementation scope
+
+```text
+Cocolon entry head:
+f1344eb418354bf9fd8aec2ad5a505bf01ebba40
+
+mashos-api predecessor:
+4bac19bb4c54e77678cce22b16391dfe76e7a013
+
+mashos-api write commit:
+0205f81a4719a578f0e188bcfbd164cb9e2abb08
+
+changed path exact1:
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+
+predecessor Git blob SHA-1:
+41a72823a8186b42080be1274045af6c5c71abac
+
+result Git blob SHA-1:
+0c34d1311ad03c72faa1794044e7677c0d765734
+
+predecessor raw SHA-256:
+15d34af6c06c0f4f40fe163dd8637b308d40805db409df814cca3f00ed41a454
+
+result raw SHA-256:
+6b54b0657c3381777bbec74f7d1adb8bacac87f4cc3d13b34ce58db31e62e0e5
+
+result source tree SHA-1:
+677e9c0c4cdfcaf254aa9eb8089cdf3b02a85727
+```
+
+変更は上記object member iteration order比較の1行削除だけである。直後の
+`green_states == {node: "PASSED" for node in green_nodes}`、
+independent manifestとのordered `test_node_ids` exact110一致、exact110件・重複なし、
+`executed_node_ids == test_node_ids`、counts、schema、causal RED/GREEN hash binding、
+receipt hash、owner/independent issue code条件は維持した。
+
+owner verifier、canonical serializer、artifact schema、test file、その他production file、
+combined-GREEN exact16、successor completion exact13は変更・発行していない。
+
+### Targeted verification
+
+repository内へbytecodeを生成しないclean-source条件で実行した。検証treeはGitHub上の
+mashos-api write commitのtreeとexact一致した。
+
+```text
+targeted C09:
+1 passed / 1 warning
+
+successor exact64:
+64 passed / 1 warning
+
+historical exact46 + successor exact64 = exact110:
+110 passed / 1 warning
+
+warning:
+existing Pydantic V1 root_validator deprecation only
+```
+
+canonical round-trip positive、historical actual S1 positive、current identity substitution
+negative、non-manifest exact110 negativeを含む既存node集合と順序は維持された。
+
+### GitHub reflection and current result
+
+```text
+mashos-api write changed paths:
+exact1 / approved independent verifier only
+
+mashos-api postfetch:
+target blob and full content exact match
+write commit changed path exact1
+current main contains result tree
+
+Cocolon head before this 07 write:
+f1344eb418354bf9fd8aec2ad5a505bf01ebba40
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+OUTCOME_STATES_OBJECT_MEMBER_ORDER_INDEPENDENCE_IMPLEMENTED
+EXACT110_ORDERED_NODE_LIST_PRESERVED
+TARGETED_C09_GREEN
+SUCCESSOR_EXACT64_GREEN
+COMBINED_EXACT110_GREEN
+COMBINED_GREEN_NOT_PUBLISHED
+SUCCESSOR_COMPLETION_NOT_PUBLISHED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+このcheckpointはobject member-order reconciliationとtargeted GREENだけを閉じる。
+source closure exact20、combined-GREEN exact16 publication、completion exact13 issuance、
+P1、Product Read、Cycle001正式受入へ自動進行しない。
