@@ -24519,3 +24519,302 @@ subagentによる独立再計算、actual publication identityを用いた三own
 自動開始せず、次の実作業はMash様のseparate explicit authorityを受けてから行う。
 
 このcheckpointから自動発行されるnext authorityはない。
+
+
+## 2026-07-28 — Recovery Epoch002 Lineage02 P1 re-entry operational admission / candidate allocation / source-baseline Event1-v2 issuance and postverification
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEAGE02_P1_REENTRY_OPERATIONAL_ADMISSION_CANDIDATE_ALLOCATION_AND_SOURCE_BASELINE_EVENT1_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+### 確認した事実
+
+Karen-Diary、Cocolonのmandatory premise / work-attitude rules / current
+reflection contract、EmlisAI実装済み資料、添付されたlong-term roadmap、NLS v3
+revised detailed design、Cycle001 Execution and Closure Plan、current mashos-api
+source / owner / independent verifier / formal parentを横断確認した。
+
+このcheckpointは、Lineage02 completion-v2をimmutable predecessorとしてP1へ
+re-entryし、operational admissionをexact1発行・postverifyした後にcandidateを
+Event1へ内包し、Event1-v2をexact1発行・postverifyして停止する境界である。
+readiness以降、Product Read、Cycle001受入へ進むauthorityではない。
+
+```text
+Karen-Diary current:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry before P1 admission:
+fe7ef33ed3a4b4572616e3436c7b447d69551b9a
+
+Cocolon 07 predecessor Git blob:
+d0b615c80af6854ddac61773f00bf5844d838cf4
+
+mashos-api source commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+mashos-api source tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+mashos-api changed paths under this authority:
+exact0
+
+mashos-api worktree:
+clean
+
+Lineage02 successor source closure SHA-256:
+e6d27de726f71e4f757c597862f4adcb68d2587a9ddaf619cf1dff53d06edf88
+
+Lineage02 completion-v2 external identity SHA-256:
+b8124732e90987bc72c0d5a6d56f40c45fcd117b8125293c7e34c0a4d4327aff
+```
+
+固定環境かつrepository内へbytecode / pytest cacheを生成しない条件で、
+historical exact46 + successor exact64のordered exact110を再実行した。
+
+```text
+ordered exact110:
+110 passed / 1 existing Pydantic deprecation warning
+
+ordered exact110 node-list SHA-256:
+da8db0f75db162ca3f4dafc0e60c1348c63c3bbd5cbb5dfc155788eb2c46ac83
+
+targeted C09 + C10:
+2 passed
+```
+
+read-only subagentの初回検証差異は、監査checkoutへpytestが生成したuntracked
+`__pycache__`により`worktree_clean=false`となったfail-closed結果だった。
+同一checkout・同一venv・`PYTHONDONTWRITEBYTECODE=1`で再実行し、C10 exact1と
+C09 + C10 exact2がGREEN、worktree cleanを確認した。実装不整合ではない。
+
+### 根拠と必要性
+
+Lineage02 exact20 -> combined GREEN exact16 -> completion-v2 exact14は
+owner / independent / publisherでpostverify済みだったが、それ自体はP1の
+operational authority、candidate allocation、Event1 publicationを発生させない。
+今回のseparate explicit authorityをbody-free admissionへ固定し、その実GitHub
+external identityをEvent1 authorityへ結合する必要があった。
+
+admissionより前にcandidateを割り当てたり、未発行admissionのsynthetic identityを
+Event1へ入れると、P1 re-entryの因果順序とpublication identityが失われる。
+したがって、admission exact1 publication -> actual postfetch identity確定 ->
+candidate allocation -> Event1 exact1 publicationの順で実行した。
+
+admission scopeの`operation_set`はfrozen technical capability setであり、
+このauthorityによるreadiness以降の実行許可ではない。
+
+### P1 operational admission issuance
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_P1OperationalAdmission_BodyFree_Receipt_20260726.json
+
+schema:
+cocolon.emlis.nls_v3.recovery_epoch002.p1_operational_admission_receipt.v1
+
+base commit:
+fe7ef33ed3a4b4572616e3436c7b447d69551b9a
+
+publication commit:
+71b31ce5de2aa1cb86c31d556cab3617dda1900b
+
+Git blob:
+a99d142a10e4edc8e3299013f95142baa783a89a
+
+raw SHA-256:
+c540cd75131d56c258a5cec9040b29f0ef5085ca2cb344ae243db60fe55f6761
+
+logical admission SHA-256:
+d54c572d36940ee24e5fc85b955b62bb52756778b3ee2d1770bc36310d881b58
+
+external identity SHA-256:
+d44e0bc7ca72d0b7d1802d3176b41a2e10954690741a6a3afffa9706f4e4c568
+
+issued / expires UTC:
+2026-07-28T09:46:43Z / 2026-07-28T11:46:43Z
+
+state:
+P1_OPERATIONAL_ADMISSION_PROVED
+
+automatic progression:
+false
+```
+
+targetはprewriteでABSENTだった。publication commitのchanged pathは上記exact1
+のみである。publication commitとcurrent mainからrefetchしたcanonical content /
+Git blobは生成値とexact-matchした。
+
+### Candidate allocation and Event1-v2 issuance
+
+candidate allocationはstandalone fileとして発行せず、Event1-v2内のstrict exact10
+objectとしてのみ固定した。
+
+```text
+candidate version id:
+nls_v3_rc_epoch002_success_0001
+
+candidate allocation SHA-256:
+5c6283a0d06f32a8b5812be00779004860328512bd0e86c078bfec5bc9b21f33
+
+allocated at UTC:
+2026-07-28T09:49:56Z
+
+standalone candidate publication:
+exact0
+```
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_SequenceEvent01_SourceBaselineLocked_BodyFree_Event_20260726.json
+
+schema:
+cocolon.emlis.nls_v3.recovery_epoch002.sequence_event.v2
+
+event / state / ordinal:
+SOURCE_BASELINE_LOCKED / SOURCE_BASELINE_LOCKED / 1
+
+publication base commit:
+71b31ce5de2aa1cb86c31d556cab3617dda1900b
+
+publication commit:
+c0fea517d63d71651fa32ddf541767b64d8f8540
+
+Git blob:
+e41089d2df5f34c0db7a65f10edcf29a9582d98c
+
+raw SHA-256:
+1d6b4223cf7ff8e6e9e40abbfbac641ca16fe6a00770cff09a10e1fd4e9e7b4e
+
+logical event SHA-256:
+75f96a270fc4b1b44cf696615b814ca91ad26752d3bac90d03cb05e9f04b9391
+
+external identity SHA-256:
+dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682
+
+event timestamp UTC:
+2026-07-28T09:49:57Z
+
+automatic progression:
+false
+```
+
+時刻順序は
+`admission.issued_at < allocation.allocated_at < event.timestamp <
+admission.expires_at`をstrictに満たす。Event1 authorityはactual admission
+external identity `d44e0bc7...`と同じexplicit authority tokenへexact-bindする。
+
+targetはprewriteでABSENTだった。publication commitのchanged pathは上記exact1
+のみである。current mainからrefetchしたcanonical content / Git blobは生成値と
+exact-matchした。
+
+### Owner / independent / formal-parent postverification
+
+actual GitHub commit / blob / raw / logical identityをLineage02 succession stateへ
+入れ、current production owner、independent completion / operational succession
+replay、public published-artifact verifier、publication candidate owner、
+formal parentを華恋が再検証した。
+
+```text
+admission intrinsic issue codes:
+exact0
+
+Event1 intrinsic issue codes:
+exact0
+
+publication candidate issue codes:
+admission exact0 / Event1 exact0
+
+sequence owner issue codes:
+exact0
+
+independent completion / operational succession issue codes:
+exact0
+
+public independent Event1 issue codes:
+exact0
+
+formal parent completed phase:
+EVENT1_PUBLISHED_AND_POSTVERIFIED
+
+formal parent validation issues:
+exact0
+
+formal parent stop:
+AUTHORITY_STOP_EVENT1_POSTVERIFIED
+
+formal parent port calls:
+observe_event1_publication exact1 / all six later ports exact0
+
+automatic progression:
+false
+```
+
+### GitHub reflection and current stop
+
+```text
+P1 admission write changed paths:
+exact1 / approved new admission path only
+
+Event1 write changed paths:
+exact1 / approved new Event1 path only
+
+Cocolon head before this 07 write:
+c0fea517d63d71651fa32ddf541767b64d8f8540
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+LINEAGE02_P1_OPERATIONAL_ADMISSION_PUBLISHED_AND_POSTVERIFIED
+CANDIDATE_ALLOCATION_V2_EMBEDDED_EXACT1
+CANDIDATE_STANDALONE_PUBLICATION_EXACT0
+SOURCE_BASELINE_EVENT1_V2_PUBLISHED_AND_POSTVERIFIED
+SOURCE_BASELINE_LOCKED
+OWNER_ISSUE_CODES_EXACT0
+INDEPENDENT_SUCCESSION_ISSUE_CODES_EXACT0
+PUBLIC_INDEPENDENT_EVENT1_ISSUE_CODES_EXACT0
+PUBLICATION_CANDIDATE_ISSUE_CODES_EXACT0
+FORMAL_PARENT_EVENT1_OBSERVATION_EXACT1
+AUTHORITY_STOP_EVENT1_POSTVERIFIED
+MASHOS_API_WRITE_EXACT0
+PRODUCTION_TEST_SCHEMA_CONFIG_DEPENDENCY_WRITE_EXACT0
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+P2_NOT_STARTED
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いた。承認外path、削除、history rewrite、
+retired transport条件の復活はexact0である。
+
+### 推測
+
+actual admission identityを内包するEvent1-v2がowner / independent / formal parentの
+全current boundaryでissue exact0となったため、Recovery Epoch002は
+`SOURCE_BASELINE_LOCKED`のpostverified checkpointへ整合して到達したと推測する。
+
+ただし、これはreadiness、reservation、formal exact134、terminal、accepted
+Step00..10 / all11 / manifest / Event2、P2、Product Read、Cycle001 acceptanceを
+実行・完了したという推測ではない。
+
+### 華恋の意見と停止判断
+
+admissionを先にGitHubへ発行して実external identityを確定し、その後だけcandidateを
+Event1へ埋め込んだため、syntheticな自己申告ではなく実publication lineageとして
+P1 re-entryを閉じられた。ordered exact110、独立監査の環境差切分け、actual
+postfetch bytes / hashes、owner / independent / formal parentを華恋自身が最終確認
+したため、今回のP1 admissionとEvent1-v2発行には華恋が責任を持てる。
+
+一方、`SOURCE_BASELINE_LOCKED`は次工程の準備条件であって、次工程のauthorityでは
+ない。scopeに後続operation名が含まれていても自動進行せず、承認どおり
+`AUTHORITY_STOP_EVENT1_POSTVERIFIED`で停止する。
+
+このcheckpointから自動発行されるnext authorityはない。
