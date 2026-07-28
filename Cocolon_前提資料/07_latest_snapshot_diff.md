@@ -24818,3 +24818,239 @@ postfetch bytes / hashes、owner / independent / formal parentを華恋自身が
 `AUTHORITY_STOP_EVENT1_POSTVERIFIED`で停止する。
 
 このcheckpointから自動発行されるnext authorityはない。
+
+
+## 2026-07-28 — Recovery Epoch002 Lineage02 Event1-postverified formal-worker bootstrap preflight execution and fail-closed stop
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_LINEAGE02_EVENT1_POSTVERIFIED_FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_LOCKED_RUNTIME_MATERIALIZATION_BOOTSTRAP_READINESS_RECEIPT_AND_OPERATIONAL_PREFLIGHT_ATTESTATION_GENERATION_INDEPENDENT_VERIFICATION_AND_PREFLIGHT_READY_STOP_ONLY
+```
+
+### 確認した事実
+
+Karen-Diary、Cocolonのmandatory premise / work-attitude rules / current
+reflection contract、EmlisAI実装済み資料、添付されたlong-term roadmap、NLS v3
+revised detailed design、Cycle001 Execution and Closure Plan、current GitHub
+Event1、current mashos-api source / preflight owner / independent verifier /
+formal parentを横断確認した。
+
+このcheckpointは、postverified Event1から
+`FORMAL_WORKER_BOOTSTRAP_PREFLIGHT`をexact1回だけ要求し、locked runtime、
+body-free readiness receipt、operational preflight attestationを検証して、
+成功時は`AUTHORITY_STOP_BOOTSTRAP_PREFLIGHT_READY`で停止する境界だった。
+readiness publication、reservation、formal exact134、terminal、accepted chain、
+Event2、P2、Product Read、Cycle001 acceptanceへ進むauthorityではない。
+
+```text
+Karen-Diary current:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry before this 07 write:
+ceb54316a696aa3a43b5851d03dee6996926a748
+
+Cocolon 07 predecessor Git blob:
+5e6efd5a41b52d07654d79d6e1b600cfecbf0e8e
+
+mashos-api source commit:
+a70d3c12be235381b4c63fd2f54b5319c1fd1931
+
+mashos-api source tree:
+ccddcf1901d2ea3cecddddc037c9c455e35cb36d
+
+mashos-api worktree:
+clean
+
+Event1 Git blob:
+e41089d2df5f34c0db7a65f10edcf29a9582d98c
+
+Event1 raw SHA-256:
+1d6b4223cf7ff8e6e9e40abbfbac641ca16fe6a00770cff09a10e1fd4e9e7b4e
+
+Event1 logical SHA-256:
+75f96a270fc4b1b44cf696615b814ca91ad26752d3bac90d03cb05e9f04b9391
+
+Event1 external identity SHA-256:
+dcb1d29ec5e0546b096111a8f84f6521b7862bc610e30f408cf0c56a29610682
+```
+
+current mainからrefetchしたEvent1 bytes / Git blob / raw / logical /
+external identityは前checkpointとexact-matchした。Event1 intrinsic、
+external-identity、published-artifact verificationはすべてissue exact0であり、
+formal parentはEvent1 gateを通過して`run_bootstrap_preflight`をexact1回呼んだ。
+
+### Formal preflight execution result
+
+実行結果はGREENではなく、current contractが定義するfail-closed stopだった。
+
+```text
+requested phase:
+FORMAL_WORKER_BOOTSTRAP_PREFLIGHT
+
+completed phase:
+null
+
+phase output:
+null
+
+validation issues:
+PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP
+
+stop code:
+PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP
+
+run_bootstrap_preflight port calls:
+exact1
+
+all other external port calls:
+exact0
+
+formal exact134 invocation count:
+0
+
+automatic progression:
+false
+
+formal parent phase result SHA-256:
+4bf8736052e7acd4d7638593f282c8ae0282a7cb94c81590bf222e79879dc6a3
+
+formal parent result validation issues:
+exact0
+```
+
+formal test collection、formal test execution、`pytest.main`は開始していない。
+locked runtime materialization、readiness receipt生成、operational preflight
+attestation生成も開始前の契約拒否で停止した。
+
+### 根拠と必要性
+
+current Event1はintrinsic validな`sequence_event.v2`であり、内包する
+bootstrap closureは次のcurrent successor schemaである。
+
+```text
+cocolon.emlis.nls_v3.recovery_epoch002.formal_worker_bootstrap_manifest.v2
+```
+
+同じobjectはcurrent successor-v2 validatorでissue exact0となる。一方、current
+preflight ownerのbootstrap-state / readiness-binding経路が呼ぶgeneric bootstrap
+validatorは、次の旧schemaだけをstrictに許可する。
+
+```text
+cocolon.emlis.nls_v3.recovery_epoch002.formal_worker_bootstrap_manifest.v1
+```
+
+そのため同じcurrent Event1 bootstrapは、preflight経路で
+`READINESS_FORBIDDEN`となり、readiness builderも同codeで停止した。
+
+さらにpreflight ownerはreadinessの`bootstrap_closure`をEvent1内包objectと
+exact-equalにする一方、readiness sourceを旧source-closure validatorへ渡す。
+current successor exact20 source closureは旧validatorで
+`SOURCE_CLOSURE_INVALID`となる。v1へ読み替えた別objectはEvent1 bindingを満たさず、
+current objectを保持すれば旧validatorを満たさないため、単純retryでは解消しない。
+
+current Event1 bootstrapはsuccessor側で明示されたfrozen-fixture identityを持ち、
+`python_runtime_identity`のexecutable / build SHA-256はそれぞれ
+`3`の64桁 / `4`の64桁である。またEvent1の`environment_profile`には、
+operational gateが要求する`locked_runtime_materialization`と
+`attempt_registry_root_identity_sha256`がない。したがって旧schema呼出しだけを
+読み替えても、actual locked runtimeとのidentity parityは成立しない。
+
+これはwheel取得、local環境、GitHub transportの偶発失敗ではなく、current
+Event1-v2 / successor source closure / preflight-v1 / operational runtime binding
+間の契約不整合である。
+
+### Independent verification
+
+同一commit/treeの独立checkout、read-only subagent二系統、華恋のdirect
+production-function replayで次が一致した。
+
+```text
+Event1 intrinsic issues:
+exact0
+
+Event1 external identity issues:
+exact0
+
+Event1 publication issues:
+exact0
+
+successor-v2 bootstrap validator issues:
+exact0
+
+generic v1 bootstrap validator issues:
+READINESS_FORBIDDEN
+
+legacy source-closure validator issues:
+SOURCE_CLOSURE_INVALID
+
+readiness builder:
+ValueError READINESS_FORBIDDEN
+
+formal parent result validator issues:
+exact0
+```
+
+repository内bytecode、pytest cache、formal collection、formal executionは
+生成・開始していない。mashos-apiのworktreeは検証後もcleanである。
+
+### GitHub reflection and current stop
+
+```text
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_PORT_CALL_EXACT1
+EVENT1_POSTVERIFIED_PRESERVED
+EVENT1_V2_BOOTSTRAP_SUCCESSOR_VALIDATOR_ISSUE_CODES_EXACT0
+PREFLIGHT_V1_BOOTSTRAP_VALIDATOR_READINESS_FORBIDDEN
+LEGACY_SOURCE_CLOSURE_VALIDATOR_SOURCE_CLOSURE_INVALID
+PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP
+FORMAL_PARENT_RESULT_VALIDATION_ISSUE_CODES_EXACT0
+LOCKED_RUNTIME_MATERIALIZATION_NOT_STARTED
+READINESS_GENERATION_EXACT0
+OPERATIONAL_PREFLIGHT_ATTESTATION_EXACT0
+READINESS_PUBLICATION_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+MASHOS_API_WRITE_EXACT0
+PRODUCTION_TEST_SCHEMA_CONFIG_DEPENDENCY_WRITE_EXACT0
+P2_NOT_STARTED
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いる。承認外path、削除、history rewrite、
+retired transport条件の復活はexact0である。
+
+### 推測
+
+current Event1-v2はsource-baseline Event1としてvalidかつpostverifiedのままだが、
+その内包bootstrapをcurrent preflight ownerへ渡してPREFLIGHT_READYへ到達する経路は、
+現行contractのままでは存在しないと推測する。
+
+ただし、既存Event1を改変すべき、preflightだけを緩和すべき、新しいsource
+succession / Event1 lineageを発行すべき、またはRecovery Epochを切り替えるべきとは
+まだ推測しない。source変更はEvent1が固定する
+`a70d3c12be235381b4c63fd2f54b5319c1fd1931`をcurrent source baselineでは
+なくすため、設計判断なしに実装へ進めない。
+
+### 華恋の意見と停止判断
+
+実Event1を拒否しているのにreadinessを手作業で発行すること、placeholder runtime
+identityをactual観測として扱うこと、v2をv1へsilent変換することは、いずれも
+source lineageとoperational proofを壊す。今回のauthorityでは実装・schema変更を
+行わず、formal parentが定める
+`PRE_RESERVATION_FORMAL_WORKER_BOOTSTRAP_STOP`で停止するのが正しい。
+
+次は単純retryやreadiness publicationではない。Event1-v2、successor source
+closure、preflight validator、actual locked runtime identity、source変更後の
+Event1 dispositionを一つの因果として決めるread-only contract reconciliationが
+必要である。
+
+このcheckpointから後続phaseを自動実行しない。
