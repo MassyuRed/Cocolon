@@ -23675,3 +23675,263 @@ historical immutable chain、Lineage02 target/decision identity、coherent posit
 old-path overwrite、historical current-use、old/new mixed-lineage rejectionをREDとして
 freezeする。new top-level node、production変更、final exact20計算、Lineage02
 exact16/exact14 publication、P1/Event1開始は禁止し、authority STOPで終える。
+
+
+## 2026-07-28 — Recovery Epoch002 source-identity Lineage02 immutable predecessor binding reconciliation RED freeze
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEAGE02_EXACT20_EXACT16_AND_COMPLETION_V2_EXACT14_IMMUTABLE_PREDECESSOR_BINDING_RECONCILIATION_RED_FREEZE_ONLY
+```
+
+### 確認した事実
+
+```text
+Karen-Diary current:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon entry head:
+2bd354223ded4fe05871a2d2b2a7915bd2cf2d76
+
+Cocolon 07 predecessor Git blob:
+5fab7180240f83927a724e5fa0911657efd0022c
+
+mashos-api predecessor:
+c5686aa217c8b2637172ddb76de414bdf837d107
+
+mashos-api predecessor tree:
+c551f78f8a13703cad343a123a65a18cb03da972
+
+mashos-api RED write commit:
+38d46bb381e1440e88b165c13618f7c7c3a0a4e7
+
+mashos-api RED result tree:
+0554f8eca49bc10ed041506ff31206e59b2207ab
+
+changed path:
+exact1
+```
+
+今回変更したmashos-api pathは次のexact1だけである。
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py
+```
+
+既存top-level `test_c09_completion_receipt_red_green_bound`だけをin-place拡張した。
+top-level test nodeの追加・削除・rename・順序変更はexact0である。production、fixture
+file、schema file、configuration、dependency、lockの変更もexact0である。
+
+test identityは次へ更新された。
+
+```text
+predecessor Git blob SHA-1:
+e2d514973586a07039440d788f7f9ac6c0a4f712
+
+predecessor raw SHA-256:
+744547310b9923a2582c10e43a539dc02ad7894d4cf395dcbdde68527c5e7858
+
+result Git blob SHA-1:
+07622a457a9927917148d58273d1b38e8d89d130
+
+result raw SHA-256:
+cf07341e67cbcb63f8ef728f085f45542fb3bc04d2bc7f68507be20ac02d0edb
+
+result lines / bytes / trailing LF:
+10975 / 399268 / exact1
+```
+
+C09内で、historical semantic exact20のfull exact20 object、historical combined
+GREEN exact16のfull external identity、historical completion exact13のfull
+external identityをself-hashから再構成して固定した。
+
+```text
+historical exact20 source closure:
+d4156b14eddf5e1f6a13411017bd522784b26e3e67d780203a727cc7cc1aa97f
+
+historical exact16 logical / external:
+2cca7b1f1ce4586448352cf1041e990cde930d20dba3f2a0b72f09aec9f0414c
+022e1f4014c055325e192f415601f31d890272cf24cbd837faac9dad8f8660d7
+
+historical exact13 logical / external:
+7b726c5fd6c7b87546962065a1bea48bdc20ed82a335e068debe828a9237e124
+9213577db07d55c6901494ac2e30b69335c1e5b274079e491ca451aa3281b643
+
+Lineage02 recovery-decision external identity:
+9602c7cf4092594950d988c05a886c0780c32ff1eebc9fa9409d00959becad13
+```
+
+historical exact20/exact16/exact13はvalid immutable historyとして保持し、current
+P1 predecessorにはしない。C09は、dynamic current-source exact20 v1から、
+distinct Lineage02 exact16 v1 path、completion v2 exact14 pathへ進み、completionが
+published recovery-decision exact10 external identityをexact-matchするcoherent
+positiveを固定した。
+
+また、次のnegativeを同じC09内で固定した。
+
+- historical exact20/exact16/exact13のcurrent-use
+- Lineage02 exact16のhistorical GREEN path上書き
+- Lineage02 exact14のhistorical completion path上書き
+- current exact20とhistorical exact16の混在
+- Lineage02 exact16とhistorical exact13の混在
+- new completion pathでのv1 exact13再利用
+- recovery-decision external identityの代わりにbare design hashを使う混在
+- atomic publisherによるoccupied historical completion pathへの再発行
+
+### 直接原因と必要性
+
+coherent Lineage02 positiveに対するcurrent production exact3の観測は次だった。
+
+```text
+sequence owner:
+SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID
+
+public independent verifier:
+SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID
+
+atomic single-publication owner:
+SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID
+```
+
+current productionはhistorical GREEN/completion pathとcompletion v1 exact13を
+固定しているため、新しいdecision-bound Lineage02を受理できない。
+
+さらに、full historical exact20/exact16/exact13をcurrent succession stateとして
+提示したnegativeでは、public independent verifierはclosed codeを返した一方、
+sequence ownerはissue exact0だった。したがって後続実装では、historical chainを
+valid historyとして保持することと、current P1 predecessorとして拒否することを
+sequence ownerでも分離する必要がある。
+
+その他のold/new path、closure、GREEN、completion、decisionのmixed negativeは、
+owner / independentの対象経路で
+`SUCCESSOR_COMPLETION_EVIDENCE_BINDING_INVALID`に閉じた。
+
+このREDは、Lineage02を受理するだけでなく、Lineage01を壊さずcurrent-useだけを
+拒否するために必要である。productionを先に変更すると、この因果差分を失うため、
+existing C09 exact1だけを先にfreezeした。
+
+### RED verification
+
+repository内へ新しいbytecode / pytest cacheを生成しない条件で、GitHub reflectionと
+同一treeのclean materializationから実行した。
+
+```text
+targeted C09:
+1 failed
+
+successor exact64:
+63 passed / 1 failed
+
+historical exact46:
+46 passed
+
+historical exact46 + successor exact64 ordered exact110:
+109 passed / 1 failed
+
+sole failed node:
+ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py::test_c09_completion_receipt_red_green_bound
+
+ordered node count / unique count:
+110 / 110
+
+ordered exact110 node-list SHA-256:
+da8db0f75db162ca3f4dafc0e60c1348c63c3bbd5cbb5dfc155788eb2c46ac83
+
+test-files SHA-256:
+244a8a38de2dea06e2761de83c56b339020da16e29e598e8dce6749b52f54773
+
+recomputed success-contract test manifest SHA-256:
+65d74c00dc2406b39d7ba363a1fe68ac972c2f0f37b364076913556562556ecf
+```
+
+旧manifest `9a7622d96eef9a86fd6724acbc0e94afdaa63d95b61ae2671bc18df8c4ffcc58`
+はtest bytes変更前のidentityであり、future Lineage02値として再利用しない。
+
+### GitHub reflection and current stop
+
+```text
+mashos-api write changed paths:
+exact1 / approved existing successor test only
+
+mashos-api postfetch:
+target blob and full content exact match at write commit and current main
+write commit changed path exact1
+current main equals RED write commit
+
+Lineage02 exact16 target:
+ABSENT
+
+Lineage02 completion v2 exact14 target:
+ABSENT
+
+this 07 write commit:
+resolve_from_github_revision_containing_this_section
+
+SOURCE_IDENTITY_LINEAGE_02_IMMUTABLE_PREDECESSOR_BINDING_RED_FROZEN
+HISTORICAL_EXACT20_EXACT16_EXACT13_IMMUTABLE
+HISTORICAL_EXACT20_EXACT16_EXACT13_CURRENT_P1_INELIGIBLE
+COHERENT_LINEAGE02_POSITIVE_CURRENTLY_RED
+HISTORICAL_CURRENT_USE_SEQUENCE_OWNER_GAP_RED
+TARGETED_C09_FAILED_EXACT1
+SUCCESSOR_EXACT64_PASSED_EXACT63_FAILED_EXACT1
+HISTORICAL_EXACT46_GREEN
+ORDERED_EXACT110_PASSED_EXACT109_FAILED_EXACT1
+LINEAGE02_EXACT20_NOT_CALCULATED
+LINEAGE02_EXACT16_NOT_PUBLISHED
+LINEAGE02_COMPLETION_V2_EXACT14_NOT_PUBLISHED
+PRODUCTION_WRITE_EXACT0
+P1_OPERATIONAL_ADMISSION_EXACT0
+CANDIDATE_VERSION_UNALLOCATED
+EVENT1_EXACT0
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+current GitHub reflectionは
+`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`
+`# CURRENT_NORMATIVE_CONTRACT`だけを用いた。承認外path、削除、history rewrite、
+不可逆操作、retired transport条件の復活はexact0である。
+
+### 推測
+
+test bytes変更後のmashos-api sourceは新しいcommit/treeになったが、Lineage02
+exact20はまだfinalではない。後続production exact3がsequence owner、atomic
+publication owner、public independent verifierを変更し、source identityをさらに
+更新するためである。
+
+したがってfinal Lineage02 exact20は、後続implementationとtargeted GREENが完了し、
+sourceが安定した後にだけsemantic exact20として再構築する必要がある。このREDで
+current exact20 hashをliteral publication identityとして固定していない。
+
+### 華恋の意見と停止判断
+
+今回のREDは、単なるnew path許可ではなく、historical identityの保持、current-use
+拒否、decision-bound exact14、mixed-lineage拒否を一つのC09で同時に証明する形が
+妥当である。新top-level nodeを増やさなかったため、Step 11のordered exact110を
+壊さず、test bytesによるmanifest変更だけを明示できた。
+
+production exact3へ進めばこのREDをGREENへできるが、それは別authorityである。
+final exact20計算、Lineage02 exact16/exact14 publication、P1/Event1開始まで同時に
+進めるとsource-stability順序と承認境界を壊すため、ここで停止する。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_SOURCE_IDENTITY_LINEAGE02_EXACT20_EXACT16_AND_COMPLETION_V2_EXACT14_IMMUTABLE_PREDECESSOR_BINDING_RECONCILIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+次authorityはproduction exact3
+`emlis_ai_recovery_epoch002_sequence_ledger_v3.py`、
+`emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py`、
+`emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py`だけを必要最小に変更し、
+existing C09、successor exact64、historical exact46、ordered exact110をGREENへする。
+formal parent/preflight、final exact20 calculation、Lineage02 exact16/exact14 publication、
+P1 admission、candidate、Event1以降へは進まない。
