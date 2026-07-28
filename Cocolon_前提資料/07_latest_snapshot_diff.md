@@ -22860,3 +22860,131 @@ AUTHORITY_STOP
 This checkpoint closes only the approved successor closure / combined-GREEN /
 completion-receipt issuance and postverification boundary. It does not
 authorize automatic progression beyond this authority.
+
+## 2026-07-28 — Recovery Epoch002 P1 pre-issuance owner-route incompatibility STOP
+
+### Approved authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH002_POST_D2_SUCCESSOR_P1_OPERATIONAL_ADMISSION_CANDIDATE_ALLOCATION_AND_SOURCE_BASELINE_EVENT1_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+### Confirmed pre-issuance state
+
+```text
+Cocolon entry head:
+8cde98fb3b78610fcf999fb744576e2680843d7f
+
+mashos-api source commit:
+0205f81a4719a578f0e188bcfbd164cb9e2abb08
+
+mashos-api source tree:
+677e9c0c4cdfcaf254aa9eb8089cdf3b02a85727
+
+P1 operational-admission target:
+ABSENT
+
+successor Event1 target:
+ABSENT
+
+candidate allocation:
+UNALLOCATED
+```
+
+The current sequence owner requires and accepts successor
+`sequence_event.v2`; the canonical C10 owner state returned issue codes
+exact0. Targeted C10 also passed:
+
+```text
+test_c10_allocation_event1_owner_authority_and_current_reflection_contract:
+1 passed / 1 warning
+```
+
+The following production owner-route mismatch was then independently
+reproduced before freezing candidate/admission/Event1 bytes:
+
+```text
+sequence owner Event1 schema:
+cocolon.emlis.nls_v3.recovery_epoch002.sequence_event.v2
+
+atomic exact1 publication-owner SOURCE_BASELINE_EVENT schema:
+cocolon.emlis.nls_v3.recovery_epoch002.sequence_event.v1
+
+publication candidate result for the canonical v2 Event1:
+ValueError / PUBLICATION_ARTIFACT_INVALID
+
+public independent published-artifact SOURCE_BASELINE_EVENT schema:
+cocolon.emlis.nls_v3.recovery_epoch002.sequence_event.v1
+
+historical public Event1 validator result for the canonical v2 Event1:
+SOURCE_BASELINE_EVENT_INVALID
+```
+
+The actual formal-parent phase boundary was also replayed with the canonical
+v2 Event1, matching external identity, and a fresh target-scoped postfetch
+observation:
+
+```text
+requested phase:
+EVENT1_PUBLISHED_AND_POSTVERIFIED
+
+called port:
+observe_event1_publication exact1
+
+completed phase:
+none
+
+validation issues:
+SOURCE_BASELINE_EVENT_NOT_PUBLISHED_STOP
+
+observed stop:
+STOP_EVENT1_NOT_POSTVERIFIED
+
+required success stop:
+AUTHORITY_STOP_EVENT1_POSTVERIFIED
+
+all later port calls:
+exact0
+```
+
+C10 proves the successor sequence-owner state and the independent success
+graph, but it does not execute the public Event1-v2 publication-candidate,
+published-artifact verifier, or formal-parent observation route. The Parent
+Addendum assigns Event1 exact1 responsibility to the atomic publication owner,
+independent verifier, and the first explicit formal-parent phase. Therefore a
+direct connector write was not used to bypass the observed production-owner
+disagreement.
+
+### Current result and safety boundary
+
+```text
+RECOVERY_EPOCH002_P1_PREISSUANCE_EVENT1_V2_OWNER_ROUTE_INCOMPATIBILITY_STOP
+P1_OPERATIONAL_ADMISSION_NOT_CREATED
+P1_OPERATIONAL_ADMISSION_NOT_PUBLISHED
+CANDIDATE_VERSION_UNALLOCATED
+EVENT1_NOT_CREATED
+EVENT1_NOT_PUBLISHED
+READINESS_EXACT0
+RESERVATION_EXACT0
+FORMAL_EXACT134_INVOCATION_COUNT_0
+TERMINAL_EXACT0
+ACCEPTED_STEP00_10_ALL11_MANIFEST_EVENT2_EXACT0
+MASHOS_API_WRITE_EXACT0
+PRODUCT_READ_NOT_STARTED
+CYCLE001_NOT_ACCEPTED
+AUTOMATIC_PROGRESSION_FALSE
+AUTHORITY_STOP
+```
+
+Publishing the admission alone would create an irreversible, time-bounded
+predecessor while the required Event1 postverification endpoint is known to
+reject the successor schema. It was therefore withheld.
+
+The publication owner, public independent verifier, formal parent, and
+preflight owner are source-bound roles in the successor exact20 closure.
+Repairing their v1-to-v2 route changes the mashos-api source commit/tree and
+makes the existing successor exact20/exact16/exact13 ineligible for a new
+Event1 until a separate recovery decision defines the replacement closure and
+immutable publication lineage. No such source change or recovery decision was
+authorized here.
+
