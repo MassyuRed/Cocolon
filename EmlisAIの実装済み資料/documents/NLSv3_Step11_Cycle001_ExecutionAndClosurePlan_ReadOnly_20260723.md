@@ -7266,3 +7266,103 @@ Separate explicit approval is required.
 RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_D1_CAUSAL_RED_FROZEN_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+
+## 2026-07-29 Recovery Epoch003 post-P0 Parent Addendum D2 OperationalAdmission targeted GREEN
+
+### 確認済み事実
+
+Mashの再承認に基づき、華恋がParent Addendum D2 exact6実装、
+凍結exact3最終再実行、3系統独立監査、mashos-api/Cocolon反映、
+postfetch確認を完了した。
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D2_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+
+mashos-api publication commit / tree:
+32efb22cd1843d2d2103f0a981fd3e4be9623dc2
+077b9150057f7562f700b6825b23d978276b42a0
+
+changed paths:
+production exact6
+
+final frozen exact3:
+44 / 44
+30 / 30
+46 / 46
+total 120 / 120
+
+syntax / diff-check / D2 audit blockers:
+PASS / PASS / 0
+```
+
+許可外だった
+`ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py`
+の64 failuresは非クレジット逸脱として保持し、再承認後の再実行0、
+D2 GREEN credit 0、operational credit 0。隠蔽・test rewriteも0。
+
+D2 result/receipt/handoffを公開し、receipt外部identityは:
+
+```text
+85dc3b8d64a12fa62f390e1c9ba654162c3f404122d0eb92f949647d6fcb3e30
+```
+
+本D2の効果境界:
+
+```text
+reference / operational runtime materialization:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / formal exact134:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+```
+
+actual source scannerはreachable unclassified exact3
+`models / models_updated / self_structure_engine.rules`でfail-closed。
+従ってactual source/bootstrap、OperationalAdmission、operational readinessは
+未成立。current-strict preflight接続も後続versioned authorityの課題。
+
+### 推測
+
+exact6-only publication、immutable test/proof bytes、final 120/120、
+独立監査blocker 0から、D2 contract implementation/targeted GREENは
+完了した可能性が高い。ただしactual operational successを意味しない。
+
+### 華恋の意見
+
+D2はここで凍結し、actual creditは付与しない。final issuance承認前に、
+unclassified exact3のexact6外remediation/binding decisionとversioned
+strict-preflight接続を別承認すべき。
+
+```text
+state:
+RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_D2_TARGETED_GREEN_AUTHORITY_STOP
+
+design-prescribed next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+
+eligibility:
+BLOCKED_BY_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_STRICT_PREFLIGHT_CONNECTION
+
+separate remediation approval required:
+true
+
+separate final-issuance approval required:
+true
+
+automatic progression:
+false
+```
