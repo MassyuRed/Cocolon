@@ -6857,3 +6857,188 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIM
 
 It requires a new separate approval. This D2 checkpoint does not grant it.
 
+
+## 12.54 Recovery Epoch003 operational-admission contract-unreachable P0 Parent Addendum Design
+
+Mash separately approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIME_CLOSURE_AND_OPERATIONAL_ADMISSION_CONTRACT_UNREACHABLE_P0_PARENT_ADDENDUM_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+### confirmed facts and position change
+
+The previously approved final issuance stopped with no operational writes.
+Direct inspection established that the P0 required pre-Event1
+source/bootstrap publication while providing neither a reachable
+full-object carrier nor an OperationalAdmission body contract.
+
+Entry remained:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+9a15b41d30af232c444ad99d1c04bb26eff4e32e
+
+mashos-api commit / tree:
+cc8d2962ac30e3e6ebdae3c22dde2794471157d1
+1ddc22da0ac80cdd53a67acfd604949bf99e369a
+
+P0 external identity:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+
+corrected D1 receipt external identity:
+d9164d82715abb519b549a7581737a37ebd3bf153b53284697cbe4573a8edb9e
+
+D2 receipt external identity:
+cbd665b12b3af16b251a66073222d12823fb8776207922616718290e4bddc738
+```
+
+The append-only Addendum freezes OperationalAdmission as the sole
+pre-Event1 source/bootstrap full-object carrier. Source exact20 and
+bootstrap exact33 keep zero individual standalone paths and are embedded
+deep-exact-equal in OperationalAdmission and later Event1.
+
+The frozen prospective correction includes:
+
+- OperationalAdmission exact16 and closed nested contracts;
+- Addendum/reference/remediation predecessor identities;
+- reference-before-admission publication causality;
+- identity-stable, single-Event1 freshness;
+- role/path counts exact7/exact6;
+- Event1 admission primary evidence, Admission-to-Reference supporting
+  exact2, changed-path exact1, and one compound Event1 authority;
+- parent phase exact6 with full body/publication/postfetch evidence;
+- production API collections exact7;
+- reference materialization request/result/policy/root-preimage contracts
+  exact9/exact4/exact5/exact11;
+- future D1 exact1 and D2 production exact6;
+- D2 pytest selections exactN/exact30/exact46; and
+- invalidated or indeterminate STOP with no same-epoch retry after any
+  post-reference/pre-admission-postverification failure.
+
+### published Design and receipt
+
+```text
+Design path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_20260729.md
+
+Design commit / blob / raw:
+4933de4d37de977438f9b2ebb1756aa210201bb2
+f3d877dc900b10d9e6f521af8d1d378d7d47a605
+81e07a022ab6d97e4ef845df9aa12b6b41a7110bf986ab638eac61a480317d3b
+
+receipt path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_BodyFree_Receipt_20260729.json
+
+receipt commit / blob / raw / logical:
+1ed317111f64075d08e4a91d467dff7b9ebc3841
+15f35643c01be32ae4e56e9312c1e67b32075623
+fe4804fedae2f67e0fdd12199c0cc07439888103afc6e4b3738736b71d97eb69
+de707a6947537c6c2335586f7a5990850dbbbcd62c89e7fe6e3427d42635f404
+
+receipt external identity:
+e8cc49a4983bb1c7e46948fb92ea605ce8fde7aa3a07926fbf047725e14bbf43
+
+handoff commit / blob / raw:
+0a3c3a30c07eae79d75014cf8aec39cf49cf4651
+403a5a21f5456e2092d65383f6e8787326ca7582
+a33004f58a17f77e64a33553f25bc514a77f0d6cf7987de4193e69a247c90c6d
+```
+
+All three target postfetches were byte-exact.
+
+### independent verification
+
+Three read-only lanes ended with:
+
+```text
+admission contract / identity blockers:
+0
+
+runtime / materializer / implementation-surface blockers:
+0
+
+scope / authority / count blockers:
+0
+```
+
+The final receipt checks passed:
+
+```text
+top-level:
+exact27
+
+OperationalAdmission / materializer / phase4 summaries:
+exact29 / exact47 / exact8
+
+UTF-8 / NFC:
+PASS / PASS
+
+duplicate keys:
+0
+```
+
+Subagent edits, tests, commits, and GitHub writes were exact0. Karen
+performed final reconciliation and every GitHub write.
+
+### exact scope and zero effects
+
+This authority changes exact5 Cocolon Design/reflection paths:
+new exact3 and modified exact2. It changes no structural premise file.
+
+```text
+mashos-api writes:
+0
+
+test / pytest / preflight execution:
+0
+
+reference / operational runtime materialization:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / formal exact134 invocation:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+### inference
+
+OperationalAdmission is the smallest complete full-object carrier. A
+separate final-closure artifact would duplicate the same identity chain
+without creating a new trusted fact.
+
+### Karen's opinion
+
+Design must stop here. The new contract now has an implementable and
+independently verifiable causal surface, but its D1 RED does not yet exist.
+The exact46 wheelhouse is not needed before D1 and D2 and therefore no Mash
+operation is requested now.
+
+Exactly one next logical authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D1_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_CAUSAL_RED_FREEZE_ONLY
+```
+
+Separate explicit approval is required. It permits the frozen exact1 D1
+test and causal RED checkpoint only; it does not permit production or
+runtime/Event1/readiness/reservation/formal effects.
+
+```text
+RECOVERY_EPOCH003_PRE_EVENT1_OPERATIONAL_ADMISSION_CONTRACT_PARENT_ADDENDUM_DESIGN_FROZEN_D1_NOT_STARTED_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
