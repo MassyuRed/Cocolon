@@ -27034,3 +27034,148 @@ automatic progression:
 false
 ```
 
+
+## 2026-07-29 Recovery Epoch003 OperationalAdmission P0 Parent Addendum Design
+
+### 確認した事実
+
+Mashが次のDesign-only別承認を行い、華恋が契約補正、独立監査、
+GitHub反映、postfetch確認を行った。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIME_CLOSURE_AND_OPERATIONAL_ADMISSION_CONTRACT_UNREACHABLE_P0_PARENT_ADDENDUM_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+開始時の正本:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+9a15b41d30af232c444ad99d1c04bb26eff4e32e
+
+mashos-api commit / tree:
+cc8d2962ac30e3e6ebdae3c22dde2794471157d1
+1ddc22da0ac80cdd53a67acfd604949bf99e369a
+```
+
+先のfinal issuanceは、P0がpre-Event1のsource/bootstrap full-object
+carrierとOperationalAdmission bodyを定義していなかったため、運用
+artifact exact0のまま停止した。
+
+今回のappend-only Addendumで、OperationalAdmissionを唯一の
+pre-Event1 source/bootstrap full-object carrierとして固定した。
+source exact20 / bootstrap exact33の個別standalone pathはexact0の
+まま、OperationalAdmissionと後続Event1へdeep-exact-equalで内包する。
+
+併せて、次を固定した。
+
+- OperationalAdmission exact16と全nested contract
+- reference公開からadmission公開までの因果・freshness・failure STOP
+- publication role/path exact7/exact6
+- Event1 primary admission、supporting exact2 O→R、changed path exact1
+- parent phase exact6とfull body/publication/postfetch evidence
+- production API name/owner/input/failure exact7
+- materialization request/result/policy/root preimage exact9/4/5/11
+- future D1 exact1、D2 production exact6、pytest exactN/30/46
+
+GitHub evidence:
+
+```text
+Design commit / blob / raw:
+4933de4d37de977438f9b2ebb1756aa210201bb2
+f3d877dc900b10d9e6f521af8d1d378d7d47a605
+81e07a022ab6d97e4ef845df9aa12b6b41a7110bf986ab638eac61a480317d3b
+
+receipt commit / blob / raw / logical:
+1ed317111f64075d08e4a91d467dff7b9ebc3841
+15f35643c01be32ae4e56e9312c1e67b32075623
+fe4804fedae2f67e0fdd12199c0cc07439888103afc6e4b3738736b71d97eb69
+de707a6947537c6c2335586f7a5990850dbbbcd62c89e7fe6e3427d42635f404
+
+receipt external identity:
+e8cc49a4983bb1c7e46948fb92ea605ce8fde7aa3a07926fbf047725e14bbf43
+
+handoff commit / blob / raw:
+0a3c3a30c07eae79d75014cf8aec39cf49cf4651
+403a5a21f5456e2092d65383f6e8787326ca7582
+a33004f58a17f77e64a33553f25bc514a77f0d6cf7987de4193e69a247c90c6d
+
+tracked plan commit / blob:
+4b5713d02afac8472c648acc31686dd167553e34
+1a995978d4ecc4e9b768148ccc674415a7aeb388
+```
+
+独立監査:
+
+```text
+admission contract / identity blockers:
+0
+
+runtime / materializer / implementation-surface blockers:
+0
+
+scope / authority / count blockers:
+0
+
+receipt:
+top exact27 / OA exact29 / materializer exact47 / phase4 exact8
+
+UTF-8 / NFC / duplicate key:
+PASS / PASS / 0
+```
+
+subagentのedit/test/commit/GitHub writeはexact0。最終判断と全GitHub
+writeは華恋が行った。
+
+本authorityの運用effect:
+
+```text
+mashos-api write:
+0
+
+test / pytest / preflight:
+0
+
+reference / operational runtime materialization:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / formal exact134:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+```
+
+### 推測
+
+OperationalAdmission自身をfull-object carrierにする補正が最小である。
+別のfinal-closure artifactを増やしても、同じsource/bootstrap/reference
+identity chainを重複させるだけで、新しい信頼事実は増えない。
+
+### 華恋の意見
+
+今はDesignで停止すべき。実装可能性と独立検証可能性は閉じたが、新しい
+surfaceの因果REDはまだ存在しない。exact46 wheelhouseもD1/D2前には
+不要なので、現時点でMash側作業は求めない。
+
+```text
+state:
+RECOVERY_EPOCH003_PRE_EVENT1_OPERATIONAL_ADMISSION_CONTRACT_PARENT_ADDENDUM_DESIGN_FROZEN_D1_NOT_STARTED_AUTHORITY_STOP
+
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D1_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_CAUSAL_RED_FREEZE_ONLY
+
+separate approval required:
+true
+
+automatic progression:
+false
+```
