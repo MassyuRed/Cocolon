@@ -6730,3 +6730,130 @@ It requires new explicit approval after this correction checkpoint.
 RECOVERY_EPOCH003_D1_ORACLE_CORRECTED_CAUSAL_RED_REFROZEN_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 12.53 Recovery Epoch003 D2 bootstrap source/runtime targeted GREEN
+
+Mash separately approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+Karen implemented the additive Epoch003 contract in the production authority
+exact7 and published:
+
+```text
+MassyuRed/mashos-api
+
+entry:
+a9f0a89b89afd6b9270034b5e44aa53aca7bf1ef
+
+publication commit:
+cc8d2962ac30e3e6ebdae3c22dde2794471157d1
+
+publication tree:
+1ddc22da0ac80cdd53a67acfd604949bf99e369a
+
+changed paths:
+production exact7
+
+compare:
+ahead 1 / behind 0 / total 1
+
+force update:
+false
+```
+
+The corrected D1 oracle remained immutable:
+
+```text
+Git blob:
+dda02f15be90387dd045ef117a5961961e2cae2b
+
+raw SHA-256:
+8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5
+```
+
+Targeted verification closed:
+
+```text
+corrected D1 exact30:
+30 / 30 GREEN
+
+related historical bootstrap reconciliation:
+46 / 46 GREEN
+
+exact7 py_compile:
+PASS
+
+git diff --check:
+PASS
+
+independent scope / semantic blockers:
+0 / 0
+```
+
+The D2 result, receipt, and handoff are:
+
+```text
+result:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D2_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_ImplementationAndTargetedGREEN_Result_20260729.md
+
+result publication commit / blob / raw:
+13beef68e37e79f7f3f550dbd96ca6032014d80a
+f0bf8f65e6b7fe6784ab2d3ae1a9e34eddd66af4
+900b0301e693652880c92c237e73bbb06986d3454deb70bf3f2340fa150aa5c6
+
+receipt:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D2_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_ImplementationAndTargetedGREEN_BodyFree_Receipt_20260729.json
+
+receipt publication commit / blob / raw / logical:
+1da49a13ee8a0a16d9c856861af55a3deb7468e4
+fd2396953e1a3fe6d8e2172f1cdf30a197406b0a
+a24184570ce97d46d4e13652c2417e77b41f730832861aa0cbddb9a9b3e5d6dd
+39ffbe4a791624c550eeb5d70d5326a26c88fee9e0a3880ae93e53066db570db
+
+handoff:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D2_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_ImplementationAndTargetedGREEN_Handoff_20260729.md
+
+handoff publication commit / blob / raw:
+f0fd9ca6b07835057ac399919eb19d6392a74dc2
+8d1906eccabe97077d791b2e1fb15dbd8b3ee67b
+34d76eaf34573f273a119cb1212b2fc438914698495a5d4141af167a002d7830
+```
+
+This authority did not materialize either runtime, allocate a candidate,
+publish Event1/readiness, reserve or attempt formal execution, invoke formal
+exact134, start P2/Product Read, or accept Cycle001.
+
+```text
+reference / operational runtime materialization:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / formal exact134 invocation:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+state:
+RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_TARGETED_GREEN_AUTHORITY_STOP
+
+automatic progression:
+false
+```
+
+The next possible authority is:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIME_CLOSURE_AND_OPERATIONAL_ADMISSION_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+It requires a new separate approval. This D2 checkpoint does not grant it.
+
