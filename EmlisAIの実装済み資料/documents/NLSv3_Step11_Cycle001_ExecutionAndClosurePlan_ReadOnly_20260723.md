@@ -7366,3 +7366,200 @@ true
 automatic progression:
 false
 ```
+
+## 2026-07-29 Recovery Epoch003 post-D2 remediation D1 actual-import/current-strict causal RED freeze
+
+### 確認済み事実
+
+Mashの明示承認に基づき、華恋が次のauthorityだけを実施した。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_POST_D2_REMEDIATION_D1_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_CURRENT_STRICT_PREFLIGHT_CONNECTION_CAUSAL_RED_FREEZE_ONLY
+```
+
+固定入口:
+
+```text
+Cocolon:
+3267a4028e116d071f729126428cdc2309393dcb
+
+mashos-api commit / tree:
+32efb22cd1843d2d2103f0a981fd3e4be9623dc2
+077b9150057f7562f700b6825b23d978276b42a0
+```
+
+mashos-apiには新規causal-RED test exact1だけを反映した。
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py
+
+publication commit / tree:
+1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b
+4b682b8b5c55d3ad3b82db7da45cf2a971372355
+
+blob / raw:
+f705b5296088c15accc76eb629bac637d16c714a
+cda6119f9dc85fd386eb2447f1c85d8e250b973388866dad2fff6855d342311a
+
+exact8 ordered node-list hash:
+22c217b28ae1916ac7817dcfa091ea107a85e483ce5959241e44200c6c9a79de
+
+pre-execution freeze hash:
+5e760d55daf0e034387344a97de0188424780e69a91e5e16ec260526889441e8
+```
+
+authoritative pytestは新規exact1 pathのcollect-onlyと実行の2回だけ。
+
+```text
+collect-only:
+8 collected / exit 0
+collection / import / unexpected errors:
+0 / 0 / 0
+
+execution:
+8 collected / 8 executed
+2 passed / 6 causal failed
+errors / collection errors / unexpected errors:
+0 / 0 / 0
+exit:
+INTENDED_CAUSAL_RED
+
+causal codes:
+M01 / M02 / M04 / P01 / P02 / Z01
+```
+
+M03 owner-path確認とF01 fail-closed確認はPASS。既存凍結exact3は
+byte/hash不変を確認し、実行0。その他pytest selectionも0。
+
+actual HEADのownerとindependent scannerは、unmodified lockで別々に
+`UNCLASSIFIED_IMPORT / models`へfail-closedした。非クレジット診断で
+確認したactual reachable exact3とowner pathは:
+
+```text
+models:
+ai/services/analysis_engine/self_structure_engine/rules.py
+
+models_updated:
+ai/services/analysis_engine/self_structure_engine/rules.py
+
+self_structure_engine.rules:
+ai/services/ai_inference/astor_self_structure_report.py
+```
+
+allowlist、hard-code、in-memory mapping、mock、search-root捏造のcreditは0。
+future GREEN条件はowner/independent manifest exact一致、unclassified
+exact0、unresolved dynamic import exact0。
+
+public/versioned current-strict API:
+
+```text
+verify_recovery_epoch003_bootstrap_source_runtime_contract_current
+execute_recovery_epoch003_current_strict_preflight_v1
+execute_recovery_epoch003_current_strict_parent_phase_v1
+```
+
+はいずれも未実装で、historical/current分離、payload downgrade拒否、
+historical fallback拒否、fixture-only current credit拒否、parent
+phase-evidence接続はcausal RED。
+
+RED後のactual reachability/call graphから、編集未承認のcandidate exact5を
+固定した:
+
+```text
+ai/services/analysis_engine/self_structure_engine/rules.py
+ai/services/ai_inference/astor_self_structure_report.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py
+
+ordered path hash:
+2254777eaaa0b5b444d2cc99b377298542b77d5f8c8022f8f5e74d7c92490f77
+```
+
+Cocolon body-free evidence:
+
+```text
+result commit / blob / raw:
+73c81e26dc6ccb7d6612f4231a291bb16191f620
+b483946c2c148c1b8f19d156fe8cfa5941aa5a88
+07d0a21d2d8f76ebc4fdb0c796c2efdbf7afc0ac3d302d62fad3af03738ee35a
+
+receipt commit / blob / raw / logical:
+2949d4699d8be51a9e756df4f57b9252e8053a22
+ffa42794c307eda720cc8c77a84364e3ac3a9846
+55f7d599e87145c50bafa46a5d75162ae62574c890d0cac7fda53873f70ab775
+fa11e28694c06a377c4d962a92aa29fe1d46bccfd1fef1de63e410e5bd655e14
+
+receipt external identity:
+1762cddde060de13ab664e803a7d8c163931822a1a21f65b8d36e8effb5bb391
+
+handoff commit / blob / raw:
+61bbf6caf5fb85b514454859b21da913f8527f04
+5c4305ad1ddae6ec0205ee91c3aad9a3c0f75562
+8300b1e83b08da1c9e797fd71f725810379ae498c1b035b4da0cfebb2d200661
+```
+
+以前の許可外selectionの64 failuresは非クレジット逸脱のまま保持。
+本D1でrerun 0、concealment/test rewrite 0、全credit 0。
+
+本authorityのeffect:
+
+```text
+production changes:
+0
+
+reference / operational runtime materialization:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+runtime / Candidate / Event1:
+0 / 0 / 0
+
+Readiness / Failure:
+0 / 0
+
+Reservation / Attempt / formal exact134:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+### 推測
+
+owner/independentの別導出が同じexact3へ到達し、M03がowner pathを固定した
+ため、blockerはfixture上の見かけではなくactual reachability/classification
+gapである可能性が高い。P01/P02/Z01はhistorical APIを変質させずに
+versioned current-strict pathを追加する必要性を支持する。
+
+candidate exact5は現時点の最小仮説であり、実装許可でも十分性の断定でもない。
+
+### 華恋の意見
+
+このD1はcausal REDとして凍結し、GREEN・operational creditを付けない。
+名前特例、historical fallback、fixture-only creditで見かけ上解消することは
+Cocolonの目的に反する。
+
+remediation implementation and targeted GREENはMashの別明示承認を必要とする。
+GREEN後も再度STOPし、postverified結果を確認してからfinal issuanceをさらに
+別承認とする。
+
+```text
+state:
+RECOVERY_EPOCH003_POST_D2_REMEDIATION_D1_CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_AUTHORITY_STOP
+
+remediation implementation / targeted GREEN / final issuance:
+NOT_AUTHORIZED / NOT_AUTHORIZED / NOT_AUTHORIZED
+
+automatic progression:
+false
+```
