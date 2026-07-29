@@ -7777,3 +7777,35 @@ RECOVERY_EPOCH003_POST_D2_REMEDIATION_D2_TARGETED_GREEN_POSTVERIFIED_FINAL_ISSUA
 The next possible class is `FINAL_ISSUANCE_ONLY`, but it requires a new,
 separate, explicit approval from Mash. This plan does not issue or imply
 that approval.
+
+### GitHub transport recovery record
+
+The initial connector full-fetch of the large
+`Cocolon_前提資料/07_latest_snapshot_diff.md` returned an empty body.
+Commit `d8143ff72e7a171ecb3e9c91b0e3cae8c56e060f` therefore transiently
+omitted the historical snapshot prefix.
+
+This was detected by the fixed-entry postfetch compare before closure.
+That transient commit receives credit zero. The fixed-entry blob
+`071a529f3710e1682adda51c9a3a213b5ad780fc` was fetched through the Git
+blob API, restored byte-for-byte, and the D2 appendix was reapplied in
+`e401d42bff0c890c8f9e7de014a0e4d80c52151b`.
+
+Recovery compare:
+
+```text
+repository changed paths:
+exact5
+
+07_latest_snapshot_diff.md:
+additions 107 / deletions 0
+
+historical prefix loss accepted:
+false
+
+transient transport credit:
+0
+```
+
+This transport recovery changes no targeted GREEN result, runtime effect,
+or authority boundary.
