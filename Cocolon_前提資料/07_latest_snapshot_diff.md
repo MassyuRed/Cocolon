@@ -27560,3 +27560,133 @@ e43faaf5116eb04ba191f307afaf766b40946aae
 final requirement:
 RECOVERED_PREFIX_BYTE_EXACT_PLUS_D2_APPENDIX_POSTFETCH_EQUAL
 ```
+
+## 2026-07-29 Recovery Epoch003 post-D2 remediation D1 causal RED freeze
+
+### 確認した事実
+
+Mashが次のfreeze-only authorityを明示承認し、華恋が限定実施した。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_POST_D2_REMEDIATION_D1_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_CURRENT_STRICT_PREFLIGHT_CONNECTION_CAUSAL_RED_FREEZE_ONLY
+```
+
+入口とmashos-api反映:
+
+```text
+Cocolon entry:
+3267a4028e116d071f729126428cdc2309393dcb
+
+mashos-api entry commit / tree:
+32efb22cd1843d2d2103f0a981fd3e4be9623dc2
+077b9150057f7562f700b6825b23d978276b42a0
+
+new exact1 publication commit / tree:
+1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b
+4b682b8b5c55d3ad3b82db7da45cf2a971372355
+
+test blob / raw:
+f705b5296088c15accc76eb629bac637d16c714a
+cda6119f9dc85fd386eb2447f1c85d8e250b973388866dad2fff6855d342311a
+
+production change count:
+0
+```
+
+実行前にexact8全node、ordered node-list hash、test blob/raw、commandを凍結。
+authoritative pytestは新規exact1のcollect-onlyと同path実行だけ。
+
+```text
+collect-only:
+8 collected / exit 0 / collection error 0 / unexpected error 0
+
+execution:
+2 passed / 6 causal failed / error 0 / unexpected error 0
+INTENDED_CAUSAL_RED
+
+causal codes:
+M01 / M02 / M04 / P01 / P02 / Z01
+
+other selection / existing exact3 execution:
+0 / 0
+```
+
+actual HEADをowner/independentが別々に導出し、unmodified lockでは双方:
+
+```text
+UNCLASSIFIED_IMPORT / models
+```
+
+非クレジット診断で確認したactual reachable exact3:
+
+```text
+models
+models_updated
+self_structure_engine.rules
+```
+
+owner pathは`rules.py`と`astor_self_structure_report.py`のexact2。
+allowlist、hard-code、in-memory mapping、mock、search-root捏造creditは0。
+GREEN条件はowner/independent manifest一致、unclassified exact0、
+unresolved dynamic import exact0。
+
+versioned current-strict public verifier、preflight v1、parent v1は未実装。
+historical/current分離、downgrade/fallback/fixture-only拒否、parent
+phase-evidence接続、全branch zero-effect contractはcausal RED。
+
+RED後にactual reachability/call graphから候補exact5を固定したが、production
+編集は未承認。
+
+Cocolon evidence:
+
+```text
+result commit / blob / raw:
+73c81e26dc6ccb7d6612f4231a291bb16191f620
+b483946c2c148c1b8f19d156fe8cfa5941aa5a88
+07d0a21d2d8f76ebc4fdb0c796c2efdbf7afc0ac3d302d62fad3af03738ee35a
+
+receipt commit / blob / raw / logical:
+2949d4699d8be51a9e756df4f57b9252e8053a22
+ffa42794c307eda720cc8c77a84364e3ac3a9846
+55f7d599e87145c50bafa46a5d75162ae62574c890d0cac7fda53873f70ab775
+fa11e28694c06a377c4d962a92aa29fe1d46bccfd1fef1de63e410e5bd655e14
+
+receipt external identity:
+1762cddde060de13ab664e803a7d8c163931822a1a21f65b8d36e8effb5bb391
+
+handoff commit / blob / raw:
+61bbf6caf5fb85b514454859b21da913f8527f04
+5c4305ad1ddae6ec0205ee91c3aad9a3c0f75562
+8300b1e83b08da1c9e797fd71f725810379ae498c1b035b4da0cfebb2d200661
+```
+
+旧許可外selectionの64 failuresは非クレジットのまま保持し、rerun、
+concealment、全creditは0。read-only subagent 3系統の
+edit/test/commit/GitHub writeも0。
+
+本authorityのruntime publication、Candidate、Event1、Readiness、
+Failure、Reservation、Attempt、formal exact134は全て0。source baselineは
+UNLOCKED。P2/Product Read/Cycle001 acceptanceは未開始・未承認。
+
+### 推測
+
+owner/independentの一致したnon-credit診断とM03 PASSから、actual exact3は
+実到達可能なclassification gapである可能性が高い。P01/P02/Z01から、
+historical APIを維持したversioned current-strict接続が必要と推測する。
+
+### 華恋の意見
+
+この結果をcausal REDとして凍結し、実装やGREENへ自動移行しない。
+次はremediation implementation and targeted GREENの別明示承認だけを受け、
+GREEN後も再STOPする。final issuanceはそのpostverified結果後のさらに別承認。
+
+```text
+state:
+RECOVERY_EPOCH003_POST_D2_REMEDIATION_D1_CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_AUTHORITY_STOP
+
+remediation implementation / targeted GREEN / final issuance:
+NOT_AUTHORIZED / NOT_AUTHORIZED / NOT_AUTHORIZED
+
+automatic progression:
+false
+```
