@@ -27957,3 +27957,170 @@ PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION
 ```
 
 No concrete next token is issued. Candidate/Event1 remains unauthorized.
+
+## 2026-07-30 Recovery Epoch003 prestart predecessor canonical-bytes remediation Design snapshot
+
+### Confirmed facts
+
+Authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_ACTUAL_GIT_BYTES_EXACT6_ADDITIVE_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_ROUTE_DECISION_DESIGN_READ_ONLY
+```
+
+Fixed entries:
+
+```text
+Cocolon commit / tree:
+7795950eefc4a925d18e44ac1dbc94fbd90033d0
+e7226b8a39860b7b57577c877898b317e02d6ebd
+
+mashos-api commit / tree:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+1be763a89c82a40a97e0696e1639a3474c45d806
+
+failure receipt external identity:
+7905659fd5ef68f795204792dddd7507e828540dcd0d9d75e75d37911afd4247
+```
+
+Owner and independent read-only derivations reproduced the same actual Git
+exact6.  Original paths, publication commits, blobs, raw hashes, logical
+hashes, and container identities all remained valid.  The actual historical
+receipt bytes were strict JSON and logically self-hash-valid but were not
+compact canonical JSON plus exact1 LF.
+
+```text
+active loader result:
+CANONICAL_BYTES_MISMATCH exact6
+
+actual / canonical+LF byte counts:
+14291 / 12971
+18822 / 17010
+7788 / 6845
+6747 / 5887
+7963 / 6959
+10219 / 8820
+
+historical predecessor seed SHA-256:
+3a08461e6f06c820038a29c5c547476842560f41865929e4c05454b220afaa00
+```
+
+Selected exact1 route:
+
+```text
+OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_DERIVATION
+```
+
+OperationalAdmission v2 retains exact16/exact8 and dispatches a closed
+identity-first historical derivation by schema.  Original identities remain
+primary; canonical projection is transient and cannot substitute for them.
+OperationalAdmission v1, historical APIs, the active canonical loader, and
+reference schema v1 exact21 remain unchanged.
+
+The reference v2 path is separated by the exact pair of reference schema v1
+and the inactive v2 final identifier.  Owner and independent verifier
+derive actual exact6 separately.  Formal parent v2 re-executes independent
+reference verification at phase 1 and both reference and
+OperationalAdmission verification at phase 2.  Event1 remains absent and
+unconnected.
+
+Candidate production exact5 ordered-path SHA-256:
+
+```text
+41d9979825bb3b2d3577196f983089197e8535c9c568733f9c3b8e0e624169e7
+```
+
+Candidate CAUSAL RED oracle:
+
+```text
+exact11
+```
+
+No test was created, collected, or executed.  No production path changed.
+
+Published evidence:
+
+```text
+Design commit / blob / raw:
+e5981b1305c4cfe8bb30e289f9fc649c4175d196
+f32a21a7789b01f7ac46a6df05350dd097752d47
+00d1b01565aa071a2b1c84f3af5c2792dd3ffab04149ae24ba591e5a297321a2
+
+Receipt commit / blob / raw / logical:
+16d06833e0272a3a40c85d4feb0f8b8fd2ea5669
+8b78de3045159a53909afd7376f1b3faef883f46
+c9b1292f70cd352cd8571ab75d4b64b4f10f047c3109e017652f2903da6fbc38
+5cc1b15508f95cbf1d72c19fcc0e72df2e585d3791b771f4b9fc15d1561b7ea3
+
+Receipt external identity:
+a180071ae2cabd664d35bfc2537d3613ce9280542434ea82c95880c8ff4b124d
+
+Handoff commit / blob / raw:
+dd00c7e702075c140abf5ef5824a294e5a5e27d7
+fa4c63b82f00f3efd16196e2a74c75e0338f721c
+69d2ade072e4354761786717cb1a9f7a2e4a7b2f1537529aaed2fa8ab2f29ba7
+```
+
+All three postfetch byte comparisons were exact-equal.  Three independent
+read-only audits returned blocker exact0.  Subagent edits, tests, commits,
+and GitHub writes were exact0.
+
+### Inference
+
+The selected route is the minimum additive route that preserves both actual
+history and current strictness.  v1 overload, canonical-loader relaxation,
+inline projection, and compatibility-carrier routes were rejected because
+they introduce ambiguous semantics, weaker validation, or unnecessary
+artifact lifecycle.
+
+This is Design evidence only.
+
+### Karen's opinion
+
+Historical bytes must remain visible as they were published.  A versioned,
+identity-bound v2 interpretation is more faithful than rewriting them or
+weakening current validation.  Independent phase revalidation and the STOP
+before Event1 are necessary parts of the repair, not optional safeguards.
+
+### Zero effects and current stop
+
+```text
+historical receipt rewrite / replacement / reissue:
+0 / 0 / 0
+
+mashos-api production / test changes:
+0 / 0
+
+test collect / execution / pytest.main:
+0 / 0 / false
+
+reference materialization start / success:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+operational runtime / Candidate / Event1:
+0 / 0 / 0
+
+Readiness / Failure / Reservation / Attempt:
+0 / 0 / 0 / 0
+
+formal exact134:
+0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+state:
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_ROUTE_SELECTED_DESIGN_FROZEN_CAUSAL_RED_NOT_AUTHORIZED_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+
+automatic progression:
+false
+```
+
+The next possible authority class is `CAUSAL RED FREEZE`.  No concrete
+authority token is issued.  Separate explicit Mash approval is required.
