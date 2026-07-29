@@ -27179,3 +27179,184 @@ true
 automatic progression:
 false
 ```
+
+
+## 2026-07-29 Recovery Epoch003 post-P0 Parent Addendum D1 OperationalAdmission causal RED
+
+### 確認した事実
+
+Mashが次の別承認を行い、華恋がexact1 D1 test、pre-execution
+exact44 oracle freeze、targeted causal RED、独立確認、GitHub反映、
+postfetch確認を完了した。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D1_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_CAUSAL_RED_FREEZE_ONLY
+```
+
+開始時の正本:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+dc592447cdb92d32fb5b302ca62d716ecccdd85f
+
+mashos-api commit / tree:
+cc8d2962ac30e3e6ebdae3c22dde2794471157d1
+1ddc22da0ac80cdd53a67acfd604949bf99e369a
+
+P0 external identity:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+
+Parent Addendum receipt external identity:
+e8cc49a4983bb1c7e46948fb92ea605ce8fde7aa3a07926fbf047725e14bbf43
+```
+
+mashos-api exact1:
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch003_operational_admission_contract_red.py
+
+publication commit / tree:
+8efb9edeca66f77024c21b59e2d5a6d1dde2018e
+b7ba765ad09ce283841a6cb1298c4400b0b7830c
+
+Git blob / raw SHA-256:
+cd79f1be2f2321c90deb817c93e75e848ba7d3fe
+9af99873afd7d77f151e4b6b0a75f350bfc96a1aea781e047f162d1e5379560d
+
+lines / bytes / trailing LF:
+1724 / 62177 / exact1
+
+entry compare:
+ahead 1 / behind 0 / total 1 / changed paths exact1
+
+production changes:
+exact0
+```
+
+pre-execution exact44:
+
+```text
+node count / unique count:
+44 / 44
+
+ordered node-array SHA-256:
+ad249356b9b4def772b65af57a85bf7a4c748629c12dfaf1314444cbb9179e5e
+
+group counts:
+S=7 / M=6 / R=5 / C=4 / O=8 / P=3 / E=6 / H=5
+
+freeze-record raw SHA-256:
+2958fb59b524ec66e8dccbd6876013c59e8617eacf7ac55008c735d0c27424b5
+```
+
+authoritative targeted RED:
+
+```text
+44 collected / 0 passed / 44 causal failed
+errors 0 / skipped 0 / xfailed 0 / xpassed 0 / deselected 0
+warnings 0 / unexpected failures 0
+exit 1 / elapsed 0.59s
+
+missing contract:
+RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_NOT_IMPLEMENTED
+
+ordered failure-signature SHA-256:
+93887bb568779166445c2ddfc0b243c136b230a47d302477bb9e5117a8a9a28b
+```
+
+syntax、static-contract、import、collection、fixture-construction、
+diff-checkのblockerはすべて0。補正済み先行D1はblob/raw
+`dda02f15be90387dd045ef117a5961961e2cae2b` /
+`8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5`
+のまま変更なし。将来D2 production exact6 manifestも
+`179a54e52cd0bf0abf6775476c9188895dfff74bad85a9fd7497eed7556c65d8`
+のまま一致した。
+
+Cocolon evidence:
+
+```text
+result commit / blob / raw:
+89e2b9fde46e3fe73e774650076cec40b75db01a
+3f53515f53102f2d5100441a9d277a5b1c80d53c
+9ed3a9b5e319f854f30a290656aeea7d9d0bfde6228ea0144550a5d3d6749322
+
+receipt commit / blob / raw / logical:
+7204220e366227182c78b44d254854c33e738147
+96cd768000f39738e95402b12aea0ca22dfbef50
+b859e4d6c89ca2912c4459d5d4a1844b2fd439b8fad71a4242d84b062d69bccd
+5a085d47b04fc75d5c4191261f1c9b8c00655932ac7e32bfe2096c43bd7e6650
+
+receipt external identity:
+d1897d23f89d8df0fce8fd5591b77aeb3e2832197d1474aa8827b810805c174b
+
+handoff commit / blob / raw:
+14526c0d02915622789645c75d985f2594c42dfe
+cc80ca1523ffb946ab2c2c8d809eb767a958df51
+148f885253f061f9e40e7fd9e61534ca8c901428959cd8aa2085825a47f92dfa
+
+tracked plan commit / blob:
+a116bdc35246ae921bfe2eac9228435dba3ccfa0
+20b06b70043e1e16f78cd3c74045f86ec4d42bdd
+```
+
+requested read-only subagent laneはagent-thread slot unavailableのため
+開始0で、edit/test/commit/GitHub writeも0。華恋が契約/count、
+因果failure localization、scope/immutability/postfetchの3独立passを
+行い、blockerはいずれも0だった。
+
+本authorityの運用effect:
+
+```text
+reference / operational runtime materialization:
+0 / 0
+
+reference observation / OperationalAdmission publication:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / formal exact134:
+0 / 0 / 0
+
+private body artifact:
+0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+```
+
+### 推測
+
+exact44は全て固有case signatureへ到達後、同じ新規API欠落だけで停止し、
+production bytesと先行D1は不変だった。従って、これはfixtureやimportの
+破損ではなく、Addendumで定義したcross-owner契約の未実装を因果的に
+固定したREDである可能性が高い。
+
+### 華恋の意見
+
+D1はこのREDで止めるべき。次のD2では両D1 testを不変に保ち、
+Addendum exact6 production ownerだけを実装して、凍結済みtargeted
+GREENだけを実行する。runtime materialization、Event1、readiness、
+reservation、formal executionは後続authorityへ分離する。
+
+```text
+state:
+RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_D1_CAUSAL_RED_FROZEN_AUTHORITY_STOP
+
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D2_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+
+separate approval required:
+true
+
+automatic progression:
+false
+```
