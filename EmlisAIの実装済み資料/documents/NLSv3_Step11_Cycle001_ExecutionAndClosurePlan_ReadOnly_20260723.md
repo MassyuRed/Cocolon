@@ -7563,3 +7563,217 @@ NOT_AUTHORIZED / NOT_AUTHORIZED / NOT_AUTHORIZED
 automatic progression:
 false
 ```
+
+## 2026-07-29 Recovery Epoch003 post-D2 remediation D2 implementation and targeted GREEN closure
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_POST_D2_REMEDIATION_D2_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_CURRENT_STRICT_PREFLIGHT_CONNECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+Fixed entry:
+
+```text
+Cocolon:
+2bf173c50f72a533a3e635c307f3127cdb2d8059
+
+mashos-api:
+1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b
+4b682b8b5c55d3ad3b82db7da45cf2a971372355
+
+D1 receipt external identity:
+1762cddde060de13ab664e803a7d8c163931822a1a21f65b8d36e8effb5bb391
+```
+
+### Completed scope
+
+The actual reachability/call-graph-derived exact5 was implemented:
+
+```text
+ai/services/analysis_engine/self_structure_engine/rules.py
+ai/services/ai_inference/astor_self_structure_report.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py
+```
+
+Ordered path SHA-256:
+
+```text
+2254777eaaa0b5b444d2cc99b377298542b77d5f8c8022f8f5e74d7c92490f77
+```
+
+Implementation result:
+
+1. actual import fallback handlers were narrowed to `ImportError`;
+2. owner and independent actual-HEAD manifests became exactly equal;
+3. reachable unclassified import exact0;
+4. unresolved dynamic import exact0;
+5. public current verifier added without changing historical verifier;
+6. versioned current-strict preflight added;
+7. versioned current-strict parent added;
+8. profile downgrade, historical fallback, and fixture-only current credit
+   rejected;
+9. parent evidence exact-bound to the same Event1 as preflight state; and
+10. all success/failure results remain body-free, unlocked, non-advancing,
+    and exact14 zero-effect.
+
+No scanner, lock, mapping, allowlist, mock, fabricated root, test, fixture,
+proof, registry, or dependency change was made.
+
+### Historical preservation
+
+```text
+historical verifier source SHA-256:
+6479a4d409d2d4971c78caf60067c769fc6308dde87ec60149d13e610a5e100f
+
+historical preflight source SHA-256:
+2aa5bc3704ec806046ae817512e5db1171b369b0fa49e395fdc9b28b6ea20109
+```
+
+Both remained unchanged.
+
+### Frozen exact1 and targeted GREEN
+
+```text
+test blob:
+f705b5296088c15accc76eb629bac637d16c714a
+
+test raw SHA-256:
+cda6119f9dc85fd386eb2447f1c85d8e250b973388866dad2fff6855d342311a
+
+ordered exact8 node-list SHA-256:
+22c217b28ae1916ac7817dcfa091ea107a85e483ce5959241e44200c6c9a79de
+```
+
+Authorized collect-only:
+
+```text
+8 collected
+collection error 0
+exit 0
+```
+
+Authorized execution:
+
+```text
+8 passed
+failed 0
+error 0
+unexpected pytest error 0
+exit 0
+31.67s
+```
+
+One earlier same-path invocation lost its continuation handle after seven
+progress markers and has terminal-outcome credit zero. The unchanged exact
+path was rerun under the same authorized command. No other pytest
+selection occurred, and existing frozen exact3 execution remained zero.
+
+### GitHub publication
+
+mashos-api:
+
+```text
+parent:
+1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b
+
+publication commit:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+
+publication tree:
+1be763a89c82a40a97e0696e1639a3474c45d806
+
+compare:
+ahead 1 / behind 0
+
+force update:
+false
+```
+
+Cocolon result:
+
+```text
+commit:
+e1a2079f038a0071b89eeb49896f5831c406fa8a
+
+blob:
+2d16ba7790901be65d72e20f3e28736c33440eae
+
+raw:
+2d41f05a51e2284b72c777b3acb07369f3c69f472bb672372979f960e1574171
+```
+
+Cocolon body-free receipt:
+
+```text
+commit:
+0e0f08dd391fbc23f55051b1d82abbcaf6d26647
+
+blob:
+790b425c8f076144b88bd0b04f5280cab8b0b8de
+
+raw:
+e01d53ace7f71eafa42b7ac7e663fec140cff3eb10c3dfffde97bcf8e7351bbb
+
+logical:
+79bfdc4221ee1352e8d3b44578696fb8a04b78bd6bb395ad3bae11c84f2b87b0
+
+external identity:
+cf4d707e9e2cb0c89a4775ce72be99fd901c4842033cb9ca00b20d2f29ae58f9
+```
+
+Cocolon handoff:
+
+```text
+commit:
+9a36acbe9673ebcdea8a7b679802685a842377aa
+
+blob:
+675d0c217adeae5f563c2ce6942af9915a7539d9
+
+raw:
+a9e89dcef1dd549987e70e3e8f4c6a3f612013765a1efede66e10464b417cebe
+```
+
+### Zero-effect boundary
+
+```text
+runtime materialization / publication:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+Candidate / Event1 / Readiness / Failure:
+0 / 0 / 0 / 0
+
+Reservation / Attempt / formal exact134:
+0 / 0 / 0
+
+formal collection / formal execution:
+0 / 0
+
+source-baseline state:
+UNLOCKED
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+final issuance:
+NOT_AUTHORIZED
+
+automatic progression:
+false
+```
+
+### Closure state
+
+```text
+RECOVERY_EPOCH003_POST_D2_REMEDIATION_D2_TARGETED_GREEN_POSTVERIFIED_FINAL_ISSUANCE_NOT_AUTHORIZED_AUTHORITY_STOP
+```
+
+The next possible class is `FINAL_ISSUANCE_ONLY`, but it requires a new,
+separate, explicit approval from Mash. This plan does not issue or imply
+that approval.
