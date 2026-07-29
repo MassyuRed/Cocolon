@@ -1,0 +1,140 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.d2_bootstrap_source_runtime_targeted_green_receipt.v1",
+  "approved_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_EXPECTED_OBSERVED_SEPARATION_SCHEMA_PAIR_DISPATCH_EVENT1_IMMUTABILITY_AND_INDEPENDENT_OPERATIONAL_PROJECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+  "recorded_on_jst": "2026-07-29",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_003",
+  "p0_external_identity_sha256": "74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36",
+  "source_entries": {
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon_entry_commit_sha1": "9d6f0405bc73d0223014f693967ec652602ad5a8",
+    "mashos_api_entry_commit_sha1": "a9f0a89b89afd6b9270034b5e44aa53aca7bf1ef"
+  },
+  "result_evidence": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D2_BootstrapSourceRuntimeExpectedObservedSeparationSchemaPairDispatchEvent1ImmutabilityAndIndependentOperationalProjection_ImplementationAndTargetedGREEN_Result_20260729.md",
+    "publication_commit_sha1": "13beef68e37e79f7f3f550dbd96ca6032014d80a",
+    "git_blob_sha1": "f0bf8f65e6b7fe6784ab2d3ae1a9e34eddd66af4",
+    "raw_sha256": "900b0301e693652880c92c237e73bbb06986d3454deb70bf3f2340fa150aa5c6"
+  },
+  "corrected_d1_test_identity": {
+    "repository_full_name": "MassyuRed/mashos-api",
+    "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py",
+    "git_blob_sha1": "dda02f15be90387dd045ef117a5961961e2cae2b",
+    "raw_sha256": "8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5",
+    "line_count": 2222,
+    "byte_count": 80981,
+    "unchanged": true
+  },
+  "implementation_publication": {
+    "repository_full_name": "MassyuRed/mashos-api",
+    "parent_commit_sha1": "a9f0a89b89afd6b9270034b5e44aa53aca7bf1ef",
+    "publication_commit_sha1": "cc8d2962ac30e3e6ebdae3c22dde2794471157d1",
+    "publication_tree_sha1": "1ddc22da0ac80cdd53a67acfd604949bf99e369a",
+    "changed_path_count": 7,
+    "additions": 4369,
+    "deletions": 1,
+    "ahead_by": 1,
+    "behind_by": 0,
+    "total_commits": 1,
+    "force_ref_update": false,
+    "postfetch_content_equal": true,
+    "owner_artifacts": [
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_canonical_current_closure_v3.py",
+        "git_blob_sha1": "dba4feda194382aa3e32fd59e587853230ac6e6f",
+        "raw_sha256": "3a9f078124ba89cc71b5cca848bd7ce7fb56e534070afc2d1d1c6c5d4ef16d17"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+        "git_blob_sha1": "462d45c56cd16326feebfefd3005a2ab1ca38a40",
+        "raw_sha256": "6a16fac80e3b0f90ec22a6e6dc336dc025488dea62e827b5f1fc9e17e0e6e69c"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py",
+        "git_blob_sha1": "6527c88716bf07f31de62031eb566cff4888c4d0",
+        "raw_sha256": "7143e65c35afe2fe4a9a1ed9d5cfcbfe732abe72658754d2136ec1bd1ac6b34f"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+        "git_blob_sha1": "70855a9f4c2e2b9e0b5aac961b966992c4366243",
+        "raw_sha256": "600981d35f184734d0fc8c763398d7a9bbdd0c515b5d219988c4a0e11c4bfd49"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_current_step_proof_run.py",
+        "git_blob_sha1": "ad9e206c0d69b953579dfffea64dbe059ae154bb",
+        "raw_sha256": "6eaece6aa91d4e19b8f30df4c9cc489788e283ce93553e35342e603a2401c261"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+        "git_blob_sha1": "4a26c58c80787a0f78989909d4a39b1d8dc152e4",
+        "raw_sha256": "cfd4c228b69e3bb5595fc36374e05e1d497ec7848854b6c57545d3dcf5bad26c"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py",
+        "git_blob_sha1": "3f75ec1803fc7bd2394608b77904bef0d9d5e8f4",
+        "raw_sha256": "80f2b8713feb95472053447c2cd6278ee4218183754d40d1e456063319a5c9e4"
+      }
+    ]
+  },
+  "targeted_green_execution": {
+    "oracle_node_count": 30,
+    "collected": 30,
+    "passed": 30,
+    "failed": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "elapsed_seconds": "0.91",
+    "historical_related_collected": 46,
+    "historical_related_passed": 46,
+    "python_compile_issue_count": 0,
+    "diff_check_issue_count": 0
+  },
+  "independent_verification": {
+    "semantic_blocker_count": 0,
+    "scope_blocker_count": 0,
+    "preexisting_top_level_definition_count": 629,
+    "preexisting_definition_drift_count": 0,
+    "old_export_order_preserved": true,
+    "independent_owner_import_count": 0,
+    "new_effectful_call_count": 0,
+    "subagent_edit_count": 0,
+    "subagent_test_run_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0
+  },
+  "repository_scope": {
+    "mashos_api_production_change_count": 7,
+    "mashos_api_test_change_count": 0,
+    "mashos_api_external_fixture_config_schema_dependency_lock_change_count": 0,
+    "cocolon_result_change_count": 1,
+    "cocolon_receipt_change_count": 1,
+    "cocolon_handoff_change_count": 1,
+    "cocolon_tracked_plan_change_count": 1,
+    "cocolon_latest_snapshot_change_count": 1,
+    "deleted_path_count": 0,
+    "history_rewrite": false
+  },
+  "zero_effects": {
+    "reference_runtime_materialization_count": 0,
+    "operational_runtime_materialization_count": 0,
+    "candidate_allocation_count": 0,
+    "sequence_event1_count": 0,
+    "readiness_artifact_count": 0,
+    "formal_reservation_count": 0,
+    "formal_attempt_count": 0,
+    "formal_exact134_invocation_count": 0,
+    "private_body_artifact_count": 0,
+    "source_baseline_state": "UNLOCKED",
+    "p2_state": "NOT_STARTED",
+    "product_read_state": "NOT_STARTED",
+    "cycle001_state": "NOT_ACCEPTED"
+  },
+  "decision_effective_when": "D2_IMPLEMENTATION_RESULT_AND_RECEIPT_REACHABLE_ON_DEFAULT_BRANCHES_AND_TARGET_CONTENT_POSTFETCH_VERIFIED",
+  "next_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIME_CLOSURE_AND_OPERATIONAL_ADMISSION_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+  "state": "RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_TARGETED_GREEN_AUTHORITY_STOP",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256_preimage_rule": "SHA256_OF_UTF8_COMPACT_SORTED_KEY_JSON_AFTER_DELETING_RECEIPT_SHA256_WITH_NO_TRAILING_LF",
+  "receipt_sha256": "39ffbe4a791624c550eeb5d70d5326a26c88fee9e0a3880ae93e53066db570db"
+}
