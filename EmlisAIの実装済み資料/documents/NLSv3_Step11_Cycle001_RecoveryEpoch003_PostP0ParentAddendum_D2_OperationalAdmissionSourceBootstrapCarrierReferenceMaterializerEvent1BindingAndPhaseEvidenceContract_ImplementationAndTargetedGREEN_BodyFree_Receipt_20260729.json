@@ -1,0 +1,217 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.operational_admission_contract_targeted_green_receipt.v1",
+  "approved_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D2_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+  "recorded_on_jst": "2026-07-29",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_003",
+  "governing_p0_external_identity_sha256": "74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36",
+  "parent_addendum_receipt_external_identity_sha256": "e8cc49a4983bb1c7e46948fb92ea605ce8fde7aa3a07926fbf047725e14bbf43",
+  "d1_red_receipt_external_identity_sha256": "d1897d23f89d8df0fce8fd5591b77aeb3e2832197d1474aa8827b810805c174b",
+  "source_entries": {
+    "cocolon_entry_commit_sha1": "25506c75077ab86cdda3e537ed271343d7930224",
+    "mashos_api_entry_commit_sha1": "8efb9edeca66f77024c21b59e2d5a6d1dde2018e",
+    "mashos_api_entry_tree_sha1": "b7ba765ad09ce283841a6cb1298c4400b0b7830c"
+  },
+  "result_evidence": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostP0ParentAddendum_D2_OperationalAdmissionSourceBootstrapCarrierReferenceMaterializerEvent1BindingAndPhaseEvidenceContract_ImplementationAndTargetedGREEN_Result_20260729.md",
+    "publication_commit_sha1": "6a5bff6b2d2776d6f08b2e6c586879c688005a90",
+    "git_blob_sha1": "d94404c831516824fc175e199f3fbc686e085e68",
+    "raw_sha256": "a44c2582190b1c316dcdb5dd5e1aa2e4ed359c62e058f847fface5fd1ef2a649"
+  },
+  "implementation_publication": {
+    "repository_full_name": "MassyuRed/mashos-api",
+    "parent_commit_sha1": "8efb9edeca66f77024c21b59e2d5a6d1dde2018e",
+    "publication_commit_sha1": "32efb22cd1843d2d2103f0a981fd3e4be9623dc2",
+    "publication_tree_sha1": "077b9150057f7562f700b6825b23d978276b42a0",
+    "changed_path_count": 6,
+    "additions": 10310,
+    "deletions": 49,
+    "ahead_by": 1,
+    "behind_by": 0,
+    "total_commits": 1,
+    "force_ref_update": false,
+    "postfetch_content_equal": true,
+    "owner_artifact_manifest_sha256": "9d12cd9b3497f72c0860c3b08035fd387caee6e8762b4e14ce4cd9060f19b21a",
+    "owner_artifacts": [
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_canonical_current_closure_v3.py",
+        "git_blob_sha1": "bfc42250d4ac0c065d8dd3b5131766411ec6fb67",
+        "raw_sha256": "b68a50c0cb194f979b56e20ca20d1c878dbf366366a537171aa8eda3683f25ee"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+        "git_blob_sha1": "a8f84e71990e36606c1316b51fe45e7591758f14",
+        "raw_sha256": "16ef4ff0e4ac2c3e06f6d07723890a716c766c73374dec93d62a09691e70e7bd"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py",
+        "git_blob_sha1": "a7e0de1b7e048a647b95eccfbd03cdd7e198500b",
+        "raw_sha256": "f2625be00933f2c72b1094a9546e08e3c0de7c6bd28b56e01d4c67f625af023d"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+        "git_blob_sha1": "ec678b181d8e3d6743f897491f8084e7b0d6aee6",
+        "raw_sha256": "24a3e0f31911b37dcc23758897d9d6ccd23c1f6ebcf21d8b0e16516f85f291ec"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+        "git_blob_sha1": "7cd2b2077c831b8cda6fb5992c1771b0fbcdbfa8",
+        "raw_sha256": "7262993f502b16960366248b0a8095d4e20be095ef1a7845c415412d75992e31"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py",
+        "git_blob_sha1": "79a60afc525bbbdad150ddcc2c4aaa0036b75f26",
+        "raw_sha256": "1ee4112c67b5e0dcae6ab8b46d1df92cb285c27eacfc3aa13cc393b8c0dd031b"
+      }
+    ]
+  },
+  "immutable_inputs": {
+    "d1_operational_admission_test_raw_sha256": "9af99873afd7d77f151e4b6b0a75f350bfc96a1aea781e047f162d1e5379560d",
+    "corrected_d1_bootstrap_test_raw_sha256": "8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5",
+    "historical_exact46_test_raw_sha256": "70d6db7fe3e9f42c59a01fdba5e73752ba6aa1e7c2c4e6d7bf2581dbd5090ce5",
+    "current_step_proof_raw_sha256": "6eaece6aa91d4e19b8f30df4c9cc489788e283ce93553e35342e603a2401c261",
+    "all_unchanged": true
+  },
+  "targeted_green_selection_set": {
+    "selection_count": 3,
+    "final_authoritative_execution_count": 3,
+    "command_argv_prefix": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "--tb=short",
+      "--disable-warnings",
+      "--noconftest",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "selections": [
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_operational_admission_contract_red.py",
+        "raw_sha256": "9af99873afd7d77f151e4b6b0a75f350bfc96a1aea781e047f162d1e5379560d",
+        "denominator": 44,
+        "collected": 44,
+        "passed": 44,
+        "failed": 0,
+        "errors": 0,
+        "elapsed_seconds": "0.97"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py",
+        "raw_sha256": "8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5",
+        "denominator": 30,
+        "collected": 30,
+        "passed": 30,
+        "failed": 0,
+        "errors": 0,
+        "elapsed_seconds": "0.96"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch002_retry_lineage_and_formal_worker_bootstrap_reconciliation_red.py",
+        "raw_sha256": "70d6db7fe3e9f42c59a01fdba5e73752ba6aa1e7c2c4e6d7bf2581dbd5090ce5",
+        "denominator": 46,
+        "collected": 46,
+        "passed": 46,
+        "failed": 0,
+        "errors": 0,
+        "elapsed_seconds": "1.23"
+      }
+    ],
+    "total_collected": 120,
+    "total_passed": 120,
+    "total_failed": 0,
+    "total_errors": 0,
+    "python_compile_issue_count": 0,
+    "diff_check_issue_count": 0
+  },
+  "deviation_record": {
+    "path": "ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py",
+    "selection_authorized": false,
+    "observed_failed_count": 64,
+    "cause_class": "HISTORICAL_FROZEN_OWNER_BYTE_IDENTITY_STALE_AFTER_SEPARATELY_AUTHORIZED_D2_SOURCE_CHANGE",
+    "authorized_selection_credit_count": 0,
+    "targeted_green_credit_count": 0,
+    "operational_credit_count": 0,
+    "rerun_after_renewed_approval_count": 0,
+    "concealment_or_test_rewrite_count": 0,
+    "retained_as_non_credit_fact": true
+  },
+  "authorized_diagnostic_history": {
+    "selection_path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py",
+    "intermediate_result": "27_PASSED_3_FAILED",
+    "cause": "HISTORICAL_API_TEMPORARILY_ROUTED_TO_CURRENT_STRICT_PROFILE",
+    "resolution": "RESTORE_HISTORICAL_API_AND_KEEP_CURRENT_STRICT_PROFILE_SEPARATELY_VERSIONABLE",
+    "final_result": "30_PASSED_0_FAILED",
+    "final_green_credit_uses_only_final_result": true
+  },
+  "independent_verification": {
+    "subagent_lane_count": 3,
+    "subagent_edit_count": 0,
+    "subagent_pytest_execution_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "karen_final_reconciliation_completed": true,
+    "canonical_scanner_blocker_count": 0,
+    "parent_phase_blocker_count": 0,
+    "independent_verifier_blocker_count": 0,
+    "scope_immutability_postfetch_blocker_count": 0
+  },
+  "actual_operational_stop": {
+    "unclassified_reachable_imports": [
+      "models",
+      "models_updated",
+      "self_structure_engine.rules"
+    ],
+    "unclassified_import_count": 3,
+    "in_memory_mapping_credit_count": 0,
+    "actual_source_bootstrap_success": false,
+    "actual_operational_admission_created": false,
+    "actual_operational_readiness_established": false,
+    "current_strict_preflight_execution_path_connected": false,
+    "requires_exact6_external_change_or_separate_contract_decision": true
+  },
+  "repository_scope": {
+    "mashos_api_production_change_count": 6,
+    "mashos_api_test_change_count": 0,
+    "mashos_api_external_fixture_config_schema_dependency_lock_change_count": 0,
+    "cocolon_result_change_count": 1,
+    "cocolon_receipt_change_count": 1,
+    "cocolon_handoff_change_count": 1,
+    "cocolon_tracked_plan_change_count": 1,
+    "cocolon_latest_snapshot_change_count": 1,
+    "deleted_path_count": 0,
+    "history_rewrite": false
+  },
+  "zero_effects": {
+    "reference_runtime_materialization_count": 0,
+    "operational_runtime_materialization_count": 0,
+    "reference_runtime_observation_publication_count": 0,
+    "operational_admission_publication_count": 0,
+    "candidate_allocation_count": 0,
+    "sequence_event1_count": 0,
+    "readiness_artifact_count": 0,
+    "formal_reservation_count": 0,
+    "formal_attempt_count": 0,
+    "formal_exact134_invocation_count": 0,
+    "private_body_artifact_count": 0,
+    "source_baseline_state": "UNLOCKED",
+    "p2_state": "NOT_STARTED",
+    "product_read_state": "NOT_STARTED",
+    "cycle001_state": "NOT_ACCEPTED"
+  },
+  "decision_effective_when": "D2_IMPLEMENTATION_RESULT_AND_RECEIPT_REACHABLE_ON_DEFAULT_BRANCHES_AND_TARGET_CONTENT_POSTFETCH_VERIFIED",
+  "next_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+  "next_authority_eligibility": "BLOCKED_BY_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_STRICT_PREFLIGHT_CONNECTION",
+  "separate_remediation_approval_required": true,
+  "state": "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_D2_TARGETED_GREEN_AUTHORITY_STOP",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256_preimage_rule": "SHA256_OF_UTF8_COMPACT_SORTED_KEY_JSON_AFTER_DELETING_RECEIPT_SHA256_WITH_NO_TRAILING_LF",
+  "receipt_sha256": "922af50cc7475247cc95cb4199a54fd76c3649b87f8bf36e9b723326a9df9b61"
+}
