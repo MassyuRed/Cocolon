@@ -1,0 +1,263 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.post_d2_remediation_d2_actual_import_and_current_strict_implementation_targeted_green_receipt.v1",
+  "approved_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_POST_D2_REMEDIATION_D2_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_CURRENT_STRICT_PREFLIGHT_CONNECTION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+  "recorded_on_jst": "2026-07-29",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_003",
+  "predecessor_bindings": {
+    "d1_receipt_external_identity_sha256": "1762cddde060de13ab664e803a7d8c163931822a1a21f65b8d36e8effb5bb391",
+    "entry_state": "RECOVERY_EPOCH003_POST_D2_REMEDIATION_D1_CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_AUTHORITY_STOP",
+    "entry_blocker": "BLOCKED_BY_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_STRICT_PREFLIGHT_CONNECTION"
+  },
+  "source_entries": {
+    "cocolon_entry_commit_sha1": "2bf173c50f72a533a3e635c307f3127cdb2d8059",
+    "mashos_api_entry_commit_sha1": "1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b",
+    "mashos_api_entry_tree_sha1": "4b682b8b5c55d3ad3b82db7da45cf2a971372355",
+    "entry_drift_accepted": false
+  },
+  "result_evidence": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D2_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_ImplementationAndTargetedGREENOnly_Result_20260729.md",
+    "publication_commit_sha1": "e1a2079f038a0071b89eeb49896f5831c406fa8a",
+    "git_blob_sha1": "2d16ba7790901be65d72e20f3e28736c33440eae",
+    "raw_sha256": "2d41f05a51e2284b72c777b3acb07369f3c69f472bb672372979f960e1574171",
+    "byte_count": 13496,
+    "postfetch_content_equal": true
+  },
+  "implementation_publication": {
+    "repository_full_name": "MassyuRed/mashos-api",
+    "parent_commit_sha1": "1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b",
+    "publication_commit_sha1": "1c3bdd73df68699cbc14b3ccc41c94149f0b6255",
+    "publication_tree_sha1": "1be763a89c82a40a97e0696e1639a3474c45d806",
+    "local_verification_commit_sha1": "98af19eeda25fc93050c79a0e68f51d5e479200b",
+    "local_verification_tree_sha1": "1be763a89c82a40a97e0696e1639a3474c45d806",
+    "changed_path_count": 5,
+    "force_ref_update": false,
+    "compare_ahead_by": 1,
+    "compare_behind_by": 0,
+    "postfetch_content_equal": true
+  },
+  "implementation_scope": {
+    "derivation": "D1_POST_RED_ACTUAL_REACHABILITY_AND_CALL_GRAPH",
+    "ordered_paths": [
+      "ai/services/analysis_engine/self_structure_engine/rules.py",
+      "ai/services/ai_inference/astor_self_structure_report.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py"
+    ],
+    "exact_n": 5,
+    "ordered_paths_sha256": "2254777eaaa0b5b444d2cc99b377298542b77d5f8c8022f8f5e74d7c92490f77",
+    "outside_exact5_change_count": 0,
+    "guessed_or_extra_path_count": 0
+  },
+  "implementation_identities": [
+    {
+      "path": "ai/services/analysis_engine/self_structure_engine/rules.py",
+      "entry_git_blob_sha1": "dbc8c93c8fb9c41aae6db330ad9eba81b18a9bc4",
+      "entry_raw_sha256": "94aa10be7e4ec169f39bcc26bc8c58280d37b0cc3e7e40ec5032d1a6e2b1dd85",
+      "publication_git_blob_sha1": "37412077ef942750779d5dc57cf0d9c7a713bc8d",
+      "publication_raw_sha256": "a5338ae91219b1e9c436249500c83b98416b0da0a5f0836cfeaa9b43b7c268ea"
+    },
+    {
+      "path": "ai/services/ai_inference/astor_self_structure_report.py",
+      "entry_git_blob_sha1": "b3d0e29ef2a04ee8ace406a27de157a6ac70c1da",
+      "entry_raw_sha256": "7f2bd21e454d8bb0fe54f5af31ff14dfd3141d51c858dfc34dd8d0586780160b",
+      "publication_git_blob_sha1": "cd53b78f402f3565af0eeed29bb543eea1e8ae03",
+      "publication_raw_sha256": "954c5e118512d4b7497c4f795f2fd4c85c8690779baefa9cffcd288c31a02567"
+    },
+    {
+      "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "entry_git_blob_sha1": "ec678b181d8e3d6743f897491f8084e7b0d6aee6",
+      "entry_raw_sha256": "24a3e0f31911b37dcc23758897d9d6ccd23c1f6ebcf21d8b0e16516f85f291ec",
+      "publication_git_blob_sha1": "c90ebf00f11390a274ecdd4a71f6c0a95b68fc89",
+      "publication_raw_sha256": "3b0d861c8f25807bbff890364585b48a5cd2a3419e8fa0e29070d7b71a93839a"
+    },
+    {
+      "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+      "entry_git_blob_sha1": "7cd2b2077c831b8cda6fb5992c1771b0fbcdbfa8",
+      "entry_raw_sha256": "7262993f502b16960366248b0a8095d4e20be095ef1a7845c415412d75992e31",
+      "publication_git_blob_sha1": "f2e08df3f251f22531909d80fc6499751bc599a6",
+      "publication_raw_sha256": "2ef1f9721d3a84458cbf6727df1f6d0d16214cdd3252299dde1d16cab9ba25e5"
+    },
+    {
+      "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py",
+      "entry_git_blob_sha1": "79a60afc525bbbdad150ddcc2c4aaa0036b75f26",
+      "entry_raw_sha256": "1ee4112c67b5e0dcae6ab8b46d1df92cb285c27eacfc3aa13cc393b8c0dd031b",
+      "publication_git_blob_sha1": "da9f786015a6a56c574efd4b2901610da62bc5ea",
+      "publication_raw_sha256": "1658386bf0c5b67834880853a5a045c192a04c98d68a87e93195298224684f1d"
+    }
+  ],
+  "frozen_test_identity": {
+    "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py",
+    "git_blob_sha1": "f705b5296088c15accc76eb629bac637d16c714a",
+    "raw_sha256": "cda6119f9dc85fd386eb2447f1c85d8e250b973388866dad2fff6855d342311a",
+    "byte_count": 32310,
+    "lf_line_count": 962,
+    "trailing_lf": true
+  },
+  "oracle_denominator": {
+    "exact_n": 8,
+    "unique_node_count": 8,
+    "ordered_node_ids": [
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m01_owner_actual_head_unclassified_exact3_noncredit_diagnostic",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m02_independent_actual_head_unclassified_exact3_noncredit_diagnostic",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m03_actual_reachable_import_owner_paths_exact2",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m04_green_requires_unmodified_lock_manifest_parity_and_zero_unresolved",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_p01_versioned_current_strict_api_separated_from_historical",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_p02_current_preflight_rejects_downgrade_fallback_and_fixture_credit",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_f01_source_syntax_import_and_identity_drift_fail_closed",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_z01_all_success_and_failure_branches_keep_effects_zero"
+    ],
+    "ordered_node_ids_sha256": "22c217b28ae1916ac7817dcfa091ea107a85e483ce5959241e44200c6c9a79de"
+  },
+  "authorized_pytest_selection": {
+    "selection_path_count": 1,
+    "other_selection_count": 0,
+    "existing_frozen_exact3_execution_count": 0,
+    "collect_only_argv_sha256": "51bf771a1cb4709cce5d89e4b1f07bed722f612889e404dca93aa41e9ae6672d",
+    "execution_argv_sha256": "0868d11bfb575c46e43017ff3bb9ff10970dec0822d1170f12915e11124cf28a",
+    "collect_only_terminal_execution_count": 1,
+    "execution_attempt_count": 2,
+    "terminal_execution_count": 1,
+    "nonterminal_capture_count": 1,
+    "nonterminal_capture_progress_marker_count": 7,
+    "nonterminal_capture_outcome_credit_count": 0,
+    "same_path_rerun_recorded_and_authorized": true
+  },
+  "targeted_green_outcome": {
+    "collect_only_exit_code": 0,
+    "collected_count": 8,
+    "credited_execution_exit_code": 0,
+    "passed_count": 8,
+    "failed_count": 0,
+    "error_count": 0,
+    "unexpected_pytest_error_count": 0,
+    "credited_execution_duration_seconds": 31.67,
+    "targeted_green": true
+  },
+  "actual_import_outcome": {
+    "owner_manifest_derived_from_actual_head_and_unmodified_lock": true,
+    "independent_manifest_derived_from_actual_head_and_unmodified_lock": true,
+    "owner_independent_manifest_exact_equal": true,
+    "reachable_unclassified_import_count": 0,
+    "unresolved_dynamic_import_count": 0,
+    "allowlist_credit_count": 0,
+    "hard_code_credit_count": 0,
+    "in_memory_mapping_credit_count": 0,
+    "mock_credit_count": 0,
+    "fabricated_search_root_credit_count": 0,
+    "scanner_change_count": 0,
+    "lock_mapping_change_count": 0
+  },
+  "current_strict_outcome": {
+    "public_current_verifier_api": "verify_recovery_epoch003_bootstrap_source_runtime_contract_current",
+    "versioned_current_preflight_api": "execute_recovery_epoch003_current_strict_preflight_v1",
+    "versioned_current_parent_api": "execute_recovery_epoch003_current_strict_parent_phase_v1",
+    "all_signatures_exact_state_only": true,
+    "all_public_exports_present": true,
+    "current_preflight_public_current_verifier_call_count": 1,
+    "current_parent_current_preflight_call_count": 1,
+    "current_parent_phase_evidence_validator_call_count": 1,
+    "historical_api_call_count_from_current_surface": 0,
+    "profile_override_rejected": true,
+    "historical_fallback_rejected": true,
+    "fixture_only_current_credit_rejected": true,
+    "parent_event1_body_postfetch_identity_cross_binding": true,
+    "neutral_body_free_result_only": true
+  },
+  "historical_preservation": {
+    "historical_verifier_source_sha256": "6479a4d409d2d4971c78caf60067c769fc6308dde87ec60149d13e610a5e100f",
+    "historical_preflight_source_sha256": "2aa5bc3704ec806046ae817512e5db1171b369b0fa49e395fdc9b28b6ea20109",
+    "historical_hash_drift": false,
+    "historical_semantics_rewritten_for_green": false
+  },
+  "immutable_inputs": {
+    "dependency_lock_path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+    "dependency_lock_git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+    "dependency_lock_raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+    "frozen_test_changed": false,
+    "existing_test_changed": false,
+    "fixture_changed": false,
+    "proof_changed": false,
+    "lock_changed": false,
+    "registry_changed": false,
+    "dependency_changed": false
+  },
+  "deviation_record": {
+    "path": "ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py",
+    "selection_authorized": false,
+    "observed_failed_count": 64,
+    "authorized_selection_credit_count": 0,
+    "d2_green_credit_count": 0,
+    "operational_credit_count": 0,
+    "rerun_in_this_d2_count": 0,
+    "concealment_or_test_rewrite_count": 0,
+    "retained_as_non_credit_fact": true
+  },
+  "independent_verification": {
+    "read_only_subagent_lane_count": 3,
+    "subagent_edit_count": 0,
+    "subagent_pytest_execution_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "preimplementation_findings_reconciled": true,
+    "postimplementation_findings_reconciled": true,
+    "final_blocker_count": 0,
+    "karen_final_reconciliation_completed": true
+  },
+  "repository_scope": {
+    "mashos_api_changed_paths": [
+      "ai/services/analysis_engine/self_structure_engine/rules.py",
+      "ai/services/ai_inference/astor_self_structure_report.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py"
+    ],
+    "mashos_api_changed_path_count": 5,
+    "mashos_api_frozen_test_change_count": 0,
+    "mashos_api_fixture_proof_lock_registry_dependency_change_count": 0,
+    "cocolon_changed_paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D2_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_ImplementationAndTargetedGREENOnly_Result_20260729.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D2_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_ImplementationAndTargetedGREENOnly_BodyFree_Receipt_20260729.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D2_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_ImplementationAndTargetedGREENOnly_Handoff_20260729.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md"
+    ],
+    "cocolon_changed_path_count": 5,
+    "deleted_path_count": 0,
+    "history_rewrite": false
+  },
+  "zero_effects": {
+    "reference_runtime_materialization_count": 0,
+    "operational_runtime_materialization_count": 0,
+    "reference_observation_publication_count": 0,
+    "operational_admission_publication_count": 0,
+    "runtime_publication_count": 0,
+    "candidate_publication_count": 0,
+    "event1_publication_count": 0,
+    "readiness_publication_count": 0,
+    "failure_publication_count": 0,
+    "reservation_count": 0,
+    "attempt_count": 0,
+    "formal_exact134_invocation_count": 0,
+    "formal_collection_count": 0,
+    "formal_execution_count": 0,
+    "pytest_main_called": false,
+    "source_baseline_state": "UNLOCKED",
+    "p2_state": "NOT_STARTED",
+    "product_read_state": "NOT_STARTED",
+    "cycle001_acceptance_state": "NOT_ACCEPTED",
+    "final_issuance_state": "NOT_AUTHORIZED",
+    "automatic_progression": false
+  },
+  "decision_effective_when": "MASHOS_API_EXACT5_AND_COCOLON_EXACT5_REACHABLE_ON_DEFAULT_BRANCHES_AND_ALL_TARGET_CONTENT_POSTFETCH_VERIFIED",
+  "next_authority_token": null,
+  "next_authority_class": "FINAL_ISSUANCE_ONLY",
+  "next_authority_eligibility": "REQUIRES_SEPARATE_EXPLICIT_MASH_APPROVAL_AFTER_D2_TARGETED_GREEN_POSTVERIFICATION",
+  "state": "RECOVERY_EPOCH003_POST_D2_REMEDIATION_D2_TARGETED_GREEN_POSTVERIFIED_FINAL_ISSUANCE_NOT_AUTHORIZED_AUTHORITY_STOP",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256_preimage_rule": "SHA256_OF_UTF8_COMPACT_SORTED_KEY_JSON_AFTER_DELETING_RECEIPT_SHA256_WITH_NO_TRAILING_LF",
+  "receipt_sha256": "79bfdc4221ee1352e8d3b44578696fb8a04b78bd6bb395ad3bae11c84f2b87b0"
+}
