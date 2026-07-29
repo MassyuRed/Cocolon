@@ -1,0 +1,302 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.operational_admission_parent_addendum_design_frozen_receipt.v1",
+  "approved_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_SOURCE_BOOTSTRAP_REFERENCE_RUNTIME_CLOSURE_AND_OPERATIONAL_ADMISSION_CONTRACT_UNREACHABLE_P0_PARENT_ADDENDUM_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_003",
+  "source_entries": {
+    "karen_diary_commit_sha1": "700f749f5149cac1f8bd4bab8a364d524a56985b",
+    "cocolon_entry_commit_sha1": "9a15b41d30af232c444ad99d1c04bb26eff4e32e",
+    "mashos_api_commit_sha1": "cc8d2962ac30e3e6ebdae3c22dde2794471157d1",
+    "mashos_api_tree_sha1": "1ddc22da0ac80cdd53a67acfd604949bf99e369a"
+  },
+  "governing_p0_external_identity_sha256": "74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36",
+  "corrected_d1_receipt_external_identity_sha256": "d9164d82715abb519b549a7581737a37ebd3bf153b53284697cbe4573a8edb9e",
+  "d2_green_receipt_external_identity_sha256": "cbd665b12b3af16b251a66073222d12823fb8776207922616718290e4bddc738",
+  "parent_addendum_design_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_20260729.md",
+  "parent_addendum_design_raw_sha256": "81e07a022ab6d97e4ef845df9aa12b6b41a7110bf986ab638eac61a480317d3b",
+  "position_change": {
+    "prior_position": "RECOVERY_EPOCH003_D2_BOOTSTRAP_SOURCE_RUNTIME_TARGETED_GREEN_FINAL_ISSUANCE_ELIGIBLE",
+    "change_basis": "DIRECT_CURRENT_P0_D1_D2_RUNTIME_OWNER_AND_ABSENT_ARTIFACT_INSPECTION",
+    "correction": "ORIGINAL_FINAL_ISSUANCE_STOPPED_WITH_ZERO_WRITES_AND_REQUIRES_PARENT_ADDENDUM_D1_D2_REMEDIATION",
+    "proposed_position": "RECOVERY_EPOCH003_PRE_EVENT1_OPERATIONAL_ADMISSION_CONTRACT_PARENT_ADDENDUM_DESIGN_FROZEN_D1_NOT_STARTED"
+  },
+  "confirmed_contract_gap": {
+    "pre_event1_source_bootstrap_carrier_state": "MISSING",
+    "operational_admission_body_contract_state": "MISSING",
+    "operational_admission_publication_role_state": "MISSING",
+    "event1_operational_admission_schema_path_binding_state": "GENERIC_NOT_EXACT",
+    "event1_primary_evidence_state": "FIXTURE_ROLE_NOT_ACTUAL_ARTIFACT",
+    "event1_changed_path_semantics_state": "INCOMPATIBLE_WITH_EXACT1_PUBLICATION",
+    "parent_phase_evidence_state": "CURSOR_ONLY",
+    "reference_runtime_materializer_state": "NOT_IMPLEMENTED",
+    "operational_artifact_issuance_count": 0
+  },
+  "precedence": {
+    "supersedes_only": [
+      "P0_EVENT1_NESTED_ONLY_SOURCE_BOOTSTRAP_CARRIER_STATEMENT",
+      "P0_UNDEFINED_OPERATIONAL_ADMISSION_BODY",
+      "P0_ARTIFACT_AND_STANDALONE_PATH_COUNTS",
+      "P0_EVENT1_ADMISSION_PRIMARY_SUPPORT_CHANGED_PATH_AND_AUTHORITY_TOKEN_SEMANTICS",
+      "P0_CANDIDATE_EVENT1_PHASE_SPLIT",
+      "P0_MISSING_REFERENCE_MATERIALIZER_AND_PHASE_EVIDENCE"
+    ],
+    "preserves": [
+      "P0_UNRELATED_SCHEMA_KEYSET_PATH_AND_HASH_CONTRACTS",
+      "CORRECTED_D1_EXACT30_BYTES_AND_RESULT",
+      "D2_TARGETED_GREEN_HISTORICAL_RESULT",
+      "EPOCH002_APPEND_ONLY_HISTORY",
+      "SOURCE_BASELINE_UNLOCKED",
+      "NO_AUTOMATIC_PROGRESSION"
+    ],
+    "original_p0_artifacts_immutable": true,
+    "historical_d1_d2_artifacts_immutable": true
+  },
+  "operational_admission_contract": {
+    "artifact_role": "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION",
+    "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.operational_admission.v1",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_OperationalAdmission_BodyFree_Receipt.json",
+    "top_level_key_count": 16,
+    "top_level_keys": [
+      "schema_version",
+      "logical_cycle_id",
+      "recovery_epoch_id",
+      "predecessor_bindings",
+      "source_closure",
+      "bootstrap_closure",
+      "authority",
+      "scope",
+      "freshness",
+      "effect_boundary",
+      "owner_validation_state",
+      "independent_verification_state",
+      "state",
+      "automatic_progression",
+      "body_free",
+      "operational_admission_sha256"
+    ],
+    "predecessor_binding_key_count": 8,
+    "authority_key_count": 4,
+    "scope_key_count": 12,
+    "freshness_key_count": 11,
+    "effect_boundary_key_count": 15,
+    "source_closure_key_count": 20,
+    "bootstrap_closure_key_count": 33,
+    "carrier_rule": "FULL_SOURCE_EXACT20_AND_BOOTSTRAP_EXACT33_EMBEDDED_AND_LATER_EVENT1_DEEP_EXACT_EQUAL",
+    "reference_before_admission_postpublication_causal_proof_required": true,
+    "admission_final_head_reachability_alone_sufficient": false,
+    "source_drift_after_reference_disposition": "REFERENCE_IMMUTABLE_HISTORICAL_EPOCH003_INVALIDATED_NO_SAME_EPOCH_RETRY_NEW_EPOCH_AUTHORITY_REQUIRED",
+    "any_post_reference_pre_admission_postverification_failure_disposition": "REFERENCE_IMMUTABLE_HISTORICAL_EPOCH003_INVALIDATED_OR_INDETERMINATE_STOP_NO_SAME_EPOCH_RETRY",
+    "future_receipt_logical_identity_rule": "EXTERNAL_LOGICAL_ARTIFACT_SHA256_EXACT_EQUALS_BODY_RECEIPT_SHA256",
+    "future_d1_receipt_binding": {
+      "artifact_role": "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_CAUSAL_RED_RECEIPT",
+      "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.operational_admission_contract_causal_red_receipt.v1",
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostP0ParentAddendum_D1_OperationalAdmissionSourceBootstrapCarrierReferenceMaterializerEvent1BindingAndPhaseEvidenceContract_CausalRED_FreezeOnly_BodyFree_Receipt_20260729.json",
+      "logical_hash_field": "receipt_sha256",
+      "external_identity_logical_rule": "logical_artifact_sha256 == receipt_sha256"
+    },
+    "future_d2_receipt_binding": {
+      "artifact_role": "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_TARGETED_GREEN_RECEIPT",
+      "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.operational_admission_contract_targeted_green_receipt.v1",
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostP0ParentAddendum_D2_OperationalAdmissionSourceBootstrapCarrierReferenceMaterializerEvent1BindingAndPhaseEvidenceContract_ImplementationAndTargetedGREEN_BodyFree_Receipt_20260729.json",
+      "logical_hash_field": "receipt_sha256",
+      "external_identity_logical_rule": "logical_artifact_sha256 == receipt_sha256"
+    },
+    "logical_hash_rule": "SHA256_OF_UTF8_CANONICAL_SORTED_COMPACT_EXACT15_AFTER_DELETING_OPERATIONAL_ADMISSION_SHA256_WITH_NO_TRAILING_LF",
+    "freshness_mode": "IDENTITY_STABLE_SINGLE_EVENT1_CONSUMPTION",
+    "freshness_policy_input_key_count": 9,
+    "freshness_issued_at_owner_observed": true,
+    "freshness_self_hash_owner_derived": true,
+    "issued_at_utc_format": "CANONICAL_RFC3339_UTC_SECOND_YYYY-MM-DDTHH:MM:SSZ",
+    "wall_clock_expiry": null,
+    "automatic_progression": false,
+    "body_free": true
+  },
+  "reference_materializer_contract": {
+    "lock_path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+    "lock_git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+    "lock_raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+    "lock_logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+    "wheel_distribution_count": 46,
+    "wheel_bundle_manifest_sha256": "63f3915ccf57845dc0c4b5d14762207d23d1cb7a435a9de8411add8491ba6fc8",
+    "installed_distribution_array_sha256": "0e2e4b5ec3f3b1aef7fad4474af28d8eeea8fa7bec1a57a9cb7180fc81b80e42",
+    "target": "CPython_3.12.13_Linux_x86_64_pip_26.0.1",
+    "required_api_names": [
+      "materialize_recovery_epoch003_reference_runtime",
+      "build_recovery_epoch003_reference_runtime_observation",
+      "verify_recovery_epoch003_reference_runtime_observation",
+      "build_recovery_epoch003_source_bootstrap_closure",
+      "build_recovery_epoch003_operational_admission",
+      "verify_recovery_epoch003_operational_admission_contract",
+      "validate_recovery_epoch003_parent_phase_evidence_state"
+    ],
+    "required_api_owner_map": {
+      "materialize_recovery_epoch003_reference_runtime": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py",
+      "build_recovery_epoch003_reference_runtime_observation": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py",
+      "verify_recovery_epoch003_reference_runtime_observation": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "build_recovery_epoch003_source_bootstrap_closure": "ai/services/ai_inference/emlis_ai_recovery_epoch002_canonical_current_closure_v3.py",
+      "build_recovery_epoch003_operational_admission": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+      "verify_recovery_epoch003_operational_admission_contract": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "validate_recovery_epoch003_parent_phase_evidence_state": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py"
+    },
+    "required_api_input_key_counts": {
+      "materialize_recovery_epoch003_reference_runtime": 9,
+      "build_recovery_epoch003_reference_runtime_observation": 2,
+      "verify_recovery_epoch003_reference_runtime_observation": 6,
+      "build_recovery_epoch003_source_bootstrap_closure": 5,
+      "build_recovery_epoch003_operational_admission": 8,
+      "verify_recovery_epoch003_operational_admission_contract": 7,
+      "validate_recovery_epoch003_parent_phase_evidence_state": 9
+    },
+    "required_api_failure_codes": [
+      "RECOVERY_EPOCH003_REFERENCE_RUNTIME_MATERIALIZATION_INVALID",
+      "RECOVERY_EPOCH003_REFERENCE_RUNTIME_OBSERVATION_INVALID",
+      "RECOVERY_EPOCH003_REFERENCE_RUNTIME_OBSERVATION_VERIFICATION_INVALID",
+      "RECOVERY_EPOCH003_SOURCE_BOOTSTRAP_BUILD_INVALID",
+      "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_BUILD_INVALID",
+      "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_VERIFICATION_INVALID",
+      "RECOVERY_EPOCH003_PARENT_PHASE_EVIDENCE_INVALID"
+    ],
+    "reference_observation_authority_token_rule": "EXACT_EQUAL_TO_FINAL_PRE_EVENT1_ISSUANCE_TOKEN_AND_BOTH_OPERATIONAL_ADMISSION_AUTHORITY_TOKENS",
+    "reference_pipeline_input_authority_rule": "MATERIALIZE_BUILD_REFERENCE_AND_BOTH_VERIFY_REFERENCE_MODES_EXACT_EQUAL_FINAL_PRE_EVENT1_ISSUANCE_TOKEN",
+    "reference_observation_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "reference_publication_state_key_count": 7,
+    "source_repository_observation_key_count": 4,
+    "materialization_success_wrapper_key_count": 4,
+    "runtime_root_identity_preimage_key_count": 11,
+    "effective_environment_policy_key_count": 5,
+    "effective_environment_policy_bound_to_runtime_root_identity": true,
+    "reference_builder_and_verifier_reuse_same_materialization_request": true,
+    "operational_admission_builder_fresh_source_observation_required": true,
+    "parent_phase_state_key_count": 9,
+    "parent_phase_evidence_row_key_count": 6,
+    "parent_phase_artifact_record_key_count": 5,
+    "parent_phase_runtime_evidence_row_key_count": 4,
+    "phase4_runtime_record_contract": {
+      "record_count": 2,
+      "required_operational_role": "OPERATIONAL_RUNTIME_OBSERVATION_CANDIDATE",
+      "required_operational_body_key_count": 41,
+      "runtime_materialization_nested_key_count": 10,
+      "alternative_second_roles": [
+        "BOOTSTRAP_READINESS_CANDIDATE",
+        "FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_FAILURE_CANDIDATE"
+      ],
+      "readiness_body_key_count": 24,
+      "failure_body_key_count": 29,
+      "sort_key": "evidence_role/logical_sha256"
+    },
+    "materialization_state": "VERIFIED_LOCKED_REFERENCE_RUNTIME",
+    "network_or_index_fallback_during_materialization": false,
+    "immutable_snapshot_directory_entry_count": 46,
+    "pip_find_links_scope": "IMMUTABLE_EXACT46_SNAPSHOT_ONLY",
+    "pip_no_cache_dir": true,
+    "installer_pip_exact_version": "26.0.1",
+    "runtime_probe_exact_target_required": true,
+    "destination_and_snapshot_roots_mutually_disjoint_and_outside_artifact_source_input_wheelhouse": true,
+    "runtime_root_identity_derived_from_root_local_nonce_and_observed_exact11_preimage": true,
+    "fixture_or_unit_green_operational_credit": false,
+    "maximum_materialization_starts_per_final_issuance": 1,
+    "failed_partial_root_reusable": false,
+    "future_d2_pytest_selection_count": 3,
+    "future_d2_fixed_historical_denominators": [
+      30,
+      46
+    ],
+    "future_d2_new_denominator_source": "POSTVERIFIED_D1_RECEIPT_EXACT_N_AND_ORDERED_NODE_HASH",
+    "fresh_root_required": true,
+    "formal_test_collection_count": 0,
+    "test_execution_count": 0,
+    "formal_exact134_invocation_count": 0
+  },
+  "publication_contract": {
+    "artifact_contract_count": 8,
+    "standalone_path_count": 6,
+    "publication_role_count": 7,
+    "publication_roles": [
+      "RECOVERY_EPOCH003_REFERENCE_RUNTIME_OBSERVATION",
+      "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION",
+      "RECOVERY_EPOCH003_SOURCE_BASELINE_EVENT",
+      "RECOVERY_EPOCH003_OPERATIONAL_RUNTIME_OBSERVATION",
+      "RECOVERY_EPOCH003_OPERATIONAL_RUNTIME_OBSERVATION_FAILURE_EVIDENCE",
+      "RECOVERY_EPOCH003_BOOTSTRAP_READINESS",
+      "RECOVERY_EPOCH003_FORMAL_WORKER_BOOTSTRAP_PREFLIGHT_FAILURE"
+    ],
+    "each_publication_changed_path_count": 1,
+    "source_and_bootstrap_individual_standalone_paths": 0,
+    "automatic_progression": false
+  },
+  "event1_binding_contract": {
+    "event1_key_count": 23,
+    "candidate_allocation_key_count": 9,
+    "primary_evidence_role": "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION",
+    "authority_operational_admission_equals_primary_evidence": true,
+    "source_closure_deep_exact_equal_to_admission": true,
+    "bootstrap_closure_deep_exact_equal_to_admission": true,
+    "supporting_artifact_count": 2,
+    "supporting_artifact_roles": [
+      "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION",
+      "RECOVERY_EPOCH003_REFERENCE_RUNTIME_OBSERVATION"
+    ],
+    "supporting_artifact_sort_key": "artifact_role/path/identity_sha256",
+    "expected_changed_path_count": 1,
+    "approval_kind": "EXPLICIT_SEPARATE_APPROVAL",
+    "publication_and_transition_authority_tokens_equal_single_event1_token": true,
+    "transition_authority_semantics": "SAME_EVENT1_SOURCE_BASELINE_LOCKED_TRANSITION_NOT_POST_EVENT1_STAGE",
+    "candidate_phase_standalone_completion_allowed": false
+  },
+  "phase_order": [
+    "REFERENCE_RUNTIME_OBSERVATION_PUBLISHED_AND_POSTVERIFIED",
+    "SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_PUBLISHED_AND_POSTVERIFIED",
+    "CANDIDATE_ALLOCATED_WITH_EVENT1_PUBLISHED_AND_POSTVERIFIED",
+    "OPERATIONAL_RUNTIME_MATERIALIZATION_AND_PREFLIGHT",
+    "READINESS_OR_FAILURE_PUBLISHED_AND_POSTVERIFIED",
+    "FORMAL_RESERVATION_PUBLISHED_AND_POSTVERIFIED"
+  ],
+  "future_gate_order": [
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D1_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_CAUSAL_RED_FREEZE_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D2_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_DISTINCT_CANDIDATE_ALLOCATION_AND_SEQUENCE_EVENT1_SOURCE_BASELINE_LOCK_PUBLICATION_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_EVENT1_LOCKED_RUNTIME_MATERIALIZATION_OPERATIONAL_RUNTIME_OBSERVATION_READINESS_OR_FAILURE_CANDIDATE_AND_INDEPENDENT_PREFLIGHT_VERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_EVENT1_OPERATIONAL_RUNTIME_OBSERVATION_AND_MATCHING_BOOTSTRAP_READINESS_OR_FAILURE_BODY_FREE_RECEIPT_PUBLICATION_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY",
+    "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PREFLIGHT_READY_FORMAL_ATTEMPT_ONE_SHOT_RESERVATION_PUBLICATION_AND_POSTVERIFICATION_ONLY"
+  ],
+  "repository_scope": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "changed_path_count": 5,
+    "new_paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_20260729.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_BodyFree_Receipt_20260729.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_Handoff_20260729.md"
+    ],
+    "modified_paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md"
+    ],
+    "mashos_api_write_count": 0,
+    "test_execution_count": 0,
+    "reference_runtime_materialization_count": 0,
+    "operational_runtime_materialization_count": 0,
+    "candidate_count": 0,
+    "event1_count": 0,
+    "readiness_count": 0,
+    "reservation_count": 0,
+    "attempt_count": 0,
+    "formal_exact134_invocation_count": 0,
+    "source_baseline_state": "UNLOCKED",
+    "cycle001_state": "NOT_ACCEPTED"
+  },
+  "independent_verification": {
+    "rules_and_scope_lane_state": "PROVED",
+    "admission_contract_lane_state": "PROVED",
+    "runtime_materializer_lane_state": "PROVED",
+    "stage_order_lane_state": "PROVED",
+    "subagent_edit_test_commit_github_write_count": 0,
+    "karen_final_reconciliation_required": true
+  },
+  "decision_effective_when": "PARENT_ADDENDUM_DESIGN_AND_RECEIPT_REACHABLE_ON_COCOLON_MAIN_AND_TARGET_CONTENT_POSTFETCH_VERIFIED",
+  "next_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D1_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_CAUSAL_RED_FREEZE_ONLY",
+  "state": "RECOVERY_EPOCH003_PRE_EVENT1_OPERATIONAL_ADMISSION_CONTRACT_PARENT_ADDENDUM_DESIGN_FROZEN_D1_NOT_STARTED_AUTHORITY_STOP",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256": "de707a6947537c6c2335586f7a5990850dbbbcd62c89e7fe6e3427d42635f404"
+}
