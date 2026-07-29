@@ -27767,6 +27767,35 @@ cf4d707e9e2cb0c89a4775ce72be99fd901c4842033cb9ca00b20d2f29ae58f9
 The earlier unauthorized test selection remains a visible non-credit
 deviation and was not rerun, rewritten, or concealed.
 
+### GitHub transport recovery fact
+
+The first connector full-fetch of this file returned an empty body for the
+large historical blob. The resulting transient commit
+`d8143ff72e7a171ecb3e9c91b0e3cae8c56e060f` therefore lacked the
+historical prefix.
+
+Postfetch compare detected the deletion immediately. The transient commit
+receives credit zero. The fixed-entry snapshot blob
+`071a529f3710e1682adda51c9a3a213b5ad780fc` was then read through the Git
+blob API, restored byte-for-byte, and this D2 appendix was reapplied.
+Recovery commit `e401d42bff0c890c8f9e7de014a0e4d80c52151b` compared against the
+fixed entry as exact5 changed paths with this snapshot at additions only
+and deletion zero.
+
+```text
+transient truncated commit credit:
+0
+
+historical prefix loss accepted:
+false
+
+recovery source blob:
+071a529f3710e1682adda51c9a3a213b5ad780fc
+
+recovery commit:
+e401d42bff0c890c8f9e7de014a0e4d80c52151b
+```
+
 ### Inference
 
 The targeted exact8 and postfetch support closure of the actual-import and
