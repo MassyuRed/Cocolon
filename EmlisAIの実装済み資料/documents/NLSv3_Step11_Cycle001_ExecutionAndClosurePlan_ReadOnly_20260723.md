@@ -7042,3 +7042,227 @@ runtime/Event1/readiness/reservation/formal effects.
 RECOVERY_EPOCH003_PRE_EVENT1_OPERATIONAL_ADMISSION_CONTRACT_PARENT_ADDENDUM_DESIGN_FROZEN_D1_NOT_STARTED_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+
+## 12.55 Recovery Epoch003 post-P0 Parent Addendum OperationalAdmission contract D1 causal RED
+
+Mash separately approved:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D1_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_CAUSAL_RED_FREEZE_ONLY
+```
+
+### confirmed facts and position change
+
+The Parent Addendum made the pre-Event1 source/bootstrap carrier contract
+reachable in design and authorized a future exact1 causal test. This D1
+checkpoint added that one test without implementing any production
+surface or creating any runtime/publication fact.
+
+Entry identities were:
+
+```text
+Karen-Diary:
+700f749f5149cac1f8bd4bab8a364d524a56985b
+
+Cocolon:
+dc592447cdb92d32fb5b302ca62d716ecccdd85f
+
+mashos-api commit / tree:
+cc8d2962ac30e3e6ebdae3c22dde2794471157d1
+1ddc22da0ac80cdd53a67acfd604949bf99e369a
+
+P0 external identity:
+74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36
+
+Parent Addendum receipt external identity:
+e8cc49a4983bb1c7e46948fb92ea605ce8fde7aa3a07926fbf047725e14bbf43
+```
+
+### exact1 test and pre-execution freeze
+
+```text
+test path:
+ai/tests/test_emlis_nls_v3_recovery_epoch003_operational_admission_contract_red.py
+
+publication commit / tree:
+8efb9edeca66f77024c21b59e2d5a6d1dde2018e
+b7ba765ad09ce283841a6cb1298c4400b0b7830c
+
+Git blob / raw SHA-256:
+cd79f1be2f2321c90deb817c93e75e848ba7d3fe
+9af99873afd7d77f151e4b6b0a75f350bfc96a1aea781e047f162d1e5379560d
+
+lines / bytes / trailing LF:
+1724 / 62177 / exact1
+
+entry compare:
+ahead 1 / behind 0 / commits 1 / changed paths exact1
+
+production changes:
+exact0
+```
+
+The full ordered exact44 node array was frozen before pytest:
+
+```text
+node count / unique count:
+44 / 44
+
+ordered node-array SHA-256:
+ad249356b9b4def772b65af57a85bf7a4c748629c12dfaf1314444cbb9179e5e
+
+group counts:
+S=7 / M=6 / R=5 / C=4 / O=8 / P=3 / E=6 / H=5
+
+pre-execution freeze-record raw SHA-256:
+2958fb59b524ec66e8dccbd6876013c59e8617eacf7ac55008c735d0c27424b5
+```
+
+The corrected predecessor D1 remained immutable at blob/raw:
+
+```text
+dda02f15be90387dd045ef117a5961961e2cae2b
+8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5
+```
+
+### authoritative targeted causal RED
+
+Exactly one targeted pytest execution produced:
+
+```text
+collected / passed / causal failed:
+44 / 0 / 44
+
+errors / skipped / xfailed / xpassed / deselected:
+0 / 0 / 0 / 0 / 0
+
+warnings / unexpected failures:
+0 / 0
+
+exit code / elapsed:
+1 / 0.59s
+
+missing-contract suffix:
+RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_NOT_IMPLEMENTED
+
+ordered failure-signature SHA-256:
+93887bb568779166445c2ddfc0b243c136b230a47d302477bb9e5117a8a9a28b
+```
+
+Syntax, embedded static-contract, import, collection,
+fixture-construction, and diff-check blockers were exact0. The future D2
+production exact6 canonical manifest remained:
+
+```text
+179a54e52cd0bf0abf6775476c9188895dfff74bad85a9fd7497eed7556c65d8
+```
+
+### published evidence
+
+```text
+result path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostP0ParentAddendum_D1_OperationalAdmissionSourceBootstrapCarrierReferenceMaterializerEvent1BindingAndPhaseEvidenceContract_CausalRED_FreezeOnly_Result_20260729.md
+
+result commit / blob / raw:
+89e2b9fde46e3fe73e774650076cec40b75db01a
+3f53515f53102f2d5100441a9d277a5b1c80d53c
+9ed3a9b5e319f854f30a290656aeea7d9d0bfde6228ea0144550a5d3d6749322
+
+receipt path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostP0ParentAddendum_D1_OperationalAdmissionSourceBootstrapCarrierReferenceMaterializerEvent1BindingAndPhaseEvidenceContract_CausalRED_FreezeOnly_BodyFree_Receipt_20260729.json
+
+receipt commit / blob / raw / logical:
+7204220e366227182c78b44d254854c33e738147
+96cd768000f39738e95402b12aea0ca22dfbef50
+b859e4d6c89ca2912c4459d5d4a1844b2fd439b8fad71a4242d84b062d69bccd
+5a085d47b04fc75d5c4191261f1c9b8c00655932ac7e32bfe2096c43bd7e6650
+
+receipt external identity:
+d1897d23f89d8df0fce8fd5591b77aeb3e2832197d1474aa8827b810805c174b
+
+handoff path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostP0ParentAddendum_D1_OperationalAdmissionSourceBootstrapCarrierReferenceMaterializerEvent1BindingAndPhaseEvidenceContract_CausalRED_FreezeOnly_Handoff_20260729.md
+
+handoff commit / blob / raw:
+14526c0d02915622789645c75d985f2594c42dfe
+cc80ca1523ffb946ab2c2c8d809eb767a958df51
+148f885253f061f9e40e7fd9e61534ca8c901428959cd8aa2085825a47f92dfa
+```
+
+All exact1 mashos-api and exact3 new Cocolon target postfetches were
+byte-exact.
+
+### independent verification
+
+The requested read-only subagent lane was unavailable because the
+agent-thread slot could not start. It performed zero edits, tests,
+commits, or GitHub writes. Karen performed three separate final passes:
+
+```text
+contract / exact-count blocker:
+0
+
+causality / failure-localization blocker:
+0
+
+scope / immutability / postfetch blocker:
+0
+```
+
+### exact scope and zero effects
+
+This authority changes exact1 mashos-api test path and exact5 Cocolon
+evidence/reflection paths: new exact3 and modified exact2. It changes
+exact0 production, premise, fixture, config, schema, dependency, or lock
+paths.
+
+```text
+reference / operational runtime materialization:
+0 / 0
+
+reference observation / OperationalAdmission publication:
+0 / 0
+
+candidate / Event1 / readiness:
+0 / 0 / 0
+
+reservation / attempt / formal exact134 invocation:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+### inference
+
+Exact44 unique case signatures all reached the same absent new API
+boundary while production bytes and the corrected prior D1 remained
+immutable. The RED therefore localizes an additive cross-owner contract
+gap rather than an unrelated regression.
+
+### Karen's opinion
+
+D1 must stop at this causal RED. D2 should keep both D1 tests immutable,
+modify only the Addendum exact6 production owners, and execute only the
+frozen targeted GREEN selections. Runtime materialization, Event1,
+readiness, reservation, and formal execution remain later authorities.
+
+Exactly one next logical authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_D2_OPERATIONAL_ADMISSION_SOURCE_BOOTSTRAP_CARRIER_REFERENCE_MATERIALIZER_EVENT1_BINDING_AND_PHASE_EVIDENCE_CONTRACT_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+Separate explicit approval is required.
+
+```text
+RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_D1_CAUSAL_RED_FROZEN_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
