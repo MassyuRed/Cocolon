@@ -27826,3 +27826,134 @@ P2 / Product Read / Cycle001 acceptance
 final issuance
 automatic progression
 ```
+
+## 2026-07-30 Recovery Epoch003 final issuance pre-start blocker snapshot
+
+### Confirmed facts
+
+Authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+```
+
+Fixed entry:
+
+```text
+Cocolon:
+4237717a9c22f29dc76823106091cde8e23f364e
+
+mashos-api commit / tree:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+1be763a89c82a40a97e0696e1639a3474c45d806
+```
+
+Anonymous HTTPS returned the fixed Cocolon `main` HEAD with credentials and
+prompting disabled. A new clean clone was used; failed clones and synthetic
+repositories were not used.
+
+The lock, exact46 wheelhouse, source identity, and absent target paths were
+available. Before the exact1 materialization call, the full predecessor
+inspection found that the P0 receipt and five OperationalAdmission
+predecessor receipts have fixed pretty-printed Git bytes while production
+requires compact canonical JSON plus exact1 LF.
+
+```text
+production loader:
+CANONICAL_BYTES_MISMATCH exact6
+
+actual / canonical+LF byte counts:
+14291/12971
+18822/17010
+7788/6845
+6747/5887
+7963/6959
+10219/8820
+```
+
+The fixed external identity values and raw hashes remain exact. The
+byte-format predicate, not identity lookup, is the blocker. Both owner and
+independent paths reject the actual bytes.
+
+This authority prohibits predecessor overwrite, production change,
+verifier weakening, and same-epoch retry. Materialization was therefore
+not started.
+
+Failure evidence:
+
+```text
+Result:
+ddaf77fd0bef551103a53c2cf610c9113051dd95
+3ac11d91a967951ed2b3b7d500ead427b7b2a4b8
+cde882c215284aaaf28f4e8370a1afd50f83a9d1b3142057b67c688140482281
+
+Receipt:
+c1dbb00cb3b4cfb91709ca70129d0eb6a9093521
+2a554644c50ba2b5791137cbf858dfbfc035c1f4
+cc786d2aa55c7075896959236af9dd9c6c9eacddbadedd28521eb9480e5a14a0
+a324b59c8fa9b983c03b4ddf9fd127a4f7cacfada76b347e261b327dbfe719e4
+
+Receipt external identity:
+7905659fd5ef68f795204792dddd7507e828540dcd0d9d75e75d37911afd4247
+
+Handoff:
+d3193c86fc1ee73d804a3022839cfabb477c6aa4
+56b208e438f85d4ac739c8fa6860937290671423
+283e5dcaf2a95c25a3a72f9be067fd6c9e5cdd542cb375ba8c5070b130963b29
+```
+
+### Zero effects
+
+```text
+materialization start / success:
+0 / 0
+
+reference / OperationalAdmission:
+0 / 0
+
+operational runtime / Candidate / Event1:
+0 / 0 / 0
+
+Readiness / Failure / Reservation / Attempt:
+0 / 0 / 0 / 0
+
+formal exact134 / collection / execution / pytest.main:
+0 / 0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+Reference and OperationalAdmission paths remain absent. No placeholder or
+partial runtime root exists.
+
+### Inference
+
+Starting the one-shot now would create execution without a contract-valid
+admission path. The predecessor byte-format gap must be resolved first.
+
+### Karen's opinion
+
+Do not rewrite historical receipts or weaken the verifier. Freeze the
+actual-Git-byte gap under a separate causal remediation authority, then
+select an additive repair from that evidence.
+
+### Current stop
+
+```text
+RECOVERY_EPOCH003_FINAL_ISSUANCE_PRESTART_PREDECESSOR_CANONICAL_BYTES_MISMATCH_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+```
+
+Next authority class:
+
+```text
+PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION
+```
+
+No concrete next token is issued. Candidate/Event1 remains unauthorized.

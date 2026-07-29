@@ -7809,3 +7809,138 @@ transient transport credit:
 
 This transport recovery changes no targeted GREEN result, runtime effect,
 or authority boundary.
+
+## 2026-07-30 Recovery Epoch003 final issuance pre-start failure record
+
+### Authority and fixed entry
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_SOURCE_BOOTSTRAP_OPERATIONAL_ADMISSION_CARRIER_ISSUANCE_INDEPENDENT_VERIFICATION_AND_POSTVERIFICATION_ONLY
+
+Cocolon:
+4237717a9c22f29dc76823106091cde8e23f364e
+
+mashos-api commit / tree:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+1be763a89c82a40a97e0696e1639a3474c45d806
+```
+
+### Confirmed facts
+
+`MassyuRed/Cocolon` was anonymously reachable over HTTPS with credentials
+and prompting disabled. A new clean single-branch clone of `main` was
+obtained at the fixed HEAD; failed clones and synthetic repositories were
+not used.
+
+The source commit/tree/clean state, lock, exact46 wheelhouse, runtime
+target, and target-path absence were available. The one-shot
+materialization function was not called.
+
+The fixed identity scalars and Git/raw/logical bindings reproduced, but
+the actual Git bytes of the P0 receipt and the five receipts required by
+the OperationalAdmission predecessor exact8 did not pass the production
+canonical loader:
+
+| Receipt | Actual bytes | Canonical bytes + LF | Result |
+|---|---:|---:|---|
+| P0 | 14291 | 12971 | `CANONICAL_BYTES_MISMATCH` |
+| Parent Addendum | 18822 | 17010 | `CANONICAL_BYTES_MISMATCH` |
+| bootstrap corrected D1 | 7788 | 6845 | `CANONICAL_BYTES_MISMATCH` |
+| bootstrap D2 | 6747 | 5887 | `CANONICAL_BYTES_MISMATCH` |
+| OperationalAdmission D1 | 7963 | 6959 | `CANONICAL_BYTES_MISMATCH` |
+| OperationalAdmission D2 | 10219 | 8820 | `CANONICAL_BYTES_MISMATCH` |
+
+Both the owner builder and independent verifier require these repository
+bytes to be compact canonical JSON plus exact1 LF. The pre-start full
+predecessor-object predicate is therefore false at the fixed entry.
+
+This authority cannot repair the mismatch because predecessor overwrite,
+production change, verifier weakening, and same-epoch automatic recovery
+are prohibited.
+
+Failure evidence:
+
+```text
+Result commit / blob / raw:
+ddaf77fd0bef551103a53c2cf610c9113051dd95
+3ac11d91a967951ed2b3b7d500ead427b7b2a4b8
+cde882c215284aaaf28f4e8370a1afd50f83a9d1b3142057b67c688140482281
+
+Receipt commit / blob / raw / logical:
+c1dbb00cb3b4cfb91709ca70129d0eb6a9093521
+2a554644c50ba2b5791137cbf858dfbfc035c1f4
+cc786d2aa55c7075896959236af9dd9c6c9eacddbadedd28521eb9480e5a14a0
+a324b59c8fa9b983c03b4ddf9fd127a4f7cacfada76b347e261b327dbfe719e4
+
+Receipt external identity:
+7905659fd5ef68f795204792dddd7507e828540dcd0d9d75e75d37911afd4247
+
+Handoff commit / blob / raw:
+d3193c86fc1ee73d804a3022839cfabb477c6aa4
+56b208e438f85d4ac739c8fa6860937290671423
+283e5dcaf2a95c25a3a72f9be067fd6c9e5cdd542cb375ba8c5070b130963b29
+```
+
+The new failure receipt itself was issued as compact sorted canonical JSON
+plus exact1 LF and independently passed the production canonical loader.
+
+### Zero-effect boundary
+
+```text
+reference materialization start / success:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+operational runtime / Candidate / Event1:
+0 / 0 / 0
+
+Readiness / Failure / Reservation / Attempt:
+0 / 0 / 0 / 0
+
+formal exact134 / collection / execution / pytest.main:
+0 / 0 / 0 / 0
+
+source-baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+Reference and OperationalAdmission paths remain absent. No placeholder,
+runtime root, or partial wheel-snapshot root was created.
+
+### Inference
+
+Starting the exact1 materialization despite this known blocker would spend
+the one-shot without a valid path to OperationalAdmission. Publishing the
+reference first would worsen the failure disposition without fixing the
+historical predecessor bytes.
+
+### Karen's opinion
+
+The historical bytes and identities must remain visible and immutable.
+The next work should be a separately approved causal remediation based on
+the actual Git bytes. No implementation path or concrete authority token
+is selected by this plan.
+
+### Current stop
+
+```text
+RECOVERY_EPOCH003_FINAL_ISSUANCE_PRESTART_PREDECESSOR_CANONICAL_BYTES_MISMATCH_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+```
+
+Required next authority class:
+
+```text
+PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION
+```
+
+Candidate/Event1 remains unauthorized and automatic progression remains
+false.
