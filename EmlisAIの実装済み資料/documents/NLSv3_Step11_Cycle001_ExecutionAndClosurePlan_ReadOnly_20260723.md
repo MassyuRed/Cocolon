@@ -7944,3 +7944,255 @@ PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION
 
 Candidate/Event1 remains unauthorized and automatic progression remains
 false.
+
+## 2026-07-30 Recovery Epoch003 prestart predecessor canonical-bytes remediation Design closure
+
+### Authority and fixed entry
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_ACTUAL_GIT_BYTES_EXACT6_ADDITIVE_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_ROUTE_DECISION_DESIGN_READ_ONLY
+
+Cocolon commit / tree:
+7795950eefc4a925d18e44ac1dbc94fbd90033d0
+e7226b8a39860b7b57577c877898b317e02d6ebd
+
+mashos-api commit / tree:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+1be763a89c82a40a97e0696e1639a3474c45d806
+
+failure receipt external identity:
+7905659fd5ef68f795204792dddd7507e828540dcd0d9d75e75d37911afd4247
+```
+
+### Confirmed facts
+
+Both fixed repositories were clean.  Fixed Cocolon HEAD and GitHub `main`
+were identical before reflection.
+
+Owner and independent read-only derivations reproduced the same actual Git
+exact6.  Each historical receipt retained its original publication commit,
+blob, raw hash, logical hash, and container identity.  Each body was strict
+JSON, NFC-stable, body-free, and logically self-hash-valid, but was not
+compact sorted canonical JSON plus exact1 LF.
+
+| Binding | Actual bytes | Canonical + LF bytes | Canonical + LF SHA-256 |
+|---|---:|---:|---|
+| P0 | 14291 | 12971 | `4a44a527d8072676d6db076b04e3fdbe2f0b30b7b556e76335598eb7f01b6a14` |
+| Parent Addendum | 18822 | 17010 | `44a233452f612a8ba4518752b68e1c1b0f85d6107a5e99d94eaad420f2d6ff33` |
+| bootstrap D1 | 7788 | 6845 | `83070db351bc17b509f96c1ef1fa85c57ab89fdf91fb8139a77e73c6df897e4b` |
+| bootstrap D2 | 6747 | 5887 | `49ff4dfe7a57d9fcad12063f3f19074e3fd526b354e541d4d0e296cd1596d5cd` |
+| OperationalAdmission D1 | 7963 | 6959 | `6a334b730afd263423b34ec12c3fa06742c25ee823c527cb418f1077e4242fd7` |
+| OperationalAdmission D2 | 10219 | 8820 | `739c3bb9de53e6b51518de55c9e0291c0f3d6d8402344f6b9e6243a1ba3cc734` |
+
+The active loader result was `CANONICAL_BYTES_MISMATCH exact6`.  The cause
+was the actual serialization byte form, not a logical self-hash or identity
+failure.
+
+The historical predecessor seed self-hash is:
+
+```text
+3a08461e6f06c820038a29c5c547476842560f41865929e4c05454b220afaa00
+```
+
+Actual call-graph inspection confirmed:
+
+- owner v1 reaches actual exact6 and the strict canonical loader;
+- independent v1 prepublication is shape-only and gives no actual-Git
+  predecessor credit;
+- independent v1 postfetch reaches the same actual exact6 strict-loader
+  failure;
+- formal parent v1 reaches the independent v1 postfetch path;
+- reference materializer/observation/closure and Event1 pin the historical
+  final token; and
+- a versioned v2 route must be additive and must stop before Event1.
+
+### Selected exact1 route
+
+```text
+OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_DERIVATION
+```
+
+OperationalAdmission v2 retains top-level exact16 and predecessor exact8.
+The v2 schema is the durable dispatch key for a closed, identity-first
+historical byte-form derivation.  Original raw/logical/container identities
+remain primary; canonical projection is transient diagnostic evidence only.
+
+The reference observation remains schema v1 strict exact21.  The exact pair
+of reference schema v1 and the inactive v2 final identifier separates the
+new path from the historical path.  Neither path accepts the other's token.
+
+Owner and independent verifier derive from actual Git separately.  No
+profile selector, filename/role/exact6 allowlist, precomputed mapping,
+owner result, forwarded validation result, mock, hidden repository lookup,
+implicit manifest, or historical fallback is accepted.
+
+Prestart and post-reference lanes must reproduce the same historical core.
+The v2 parent re-executes independent reference postfetch verification at
+phase 1.  At phase 2 it repeats reference verification and separately
+executes OperationalAdmission v2 strict postfetch verification.  Event1 is
+not connected.
+
+Candidate production exact5:
+
+```text
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ai/services/ai_inference/emlis_ai_recovery_epoch002_canonical_current_closure_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py
+```
+
+Ordered-path SHA-256:
+
+```text
+41d9979825bb3b2d3577196f983089197e8535c9c568733f9c3b8e0e624169e7
+```
+
+The candidate CAUSAL RED path is exact1 and the candidate ordered oracle is
+exact11.  Neither is created, collected, or executed by this authority.
+
+### Published evidence
+
+Design:
+
+```text
+commit:
+e5981b1305c4cfe8bb30e289f9fc649c4175d196
+
+blob:
+f32a21a7789b01f7ac46a6df05350dd097752d47
+
+raw:
+00d1b01565aa071a2b1c84f3af5c2792dd3ffab04149ae24ba591e5a297321a2
+
+bytes:
+46902
+```
+
+Body-free receipt:
+
+```text
+commit:
+16d06833e0272a3a40c85d4feb0f8b8fd2ea5669
+
+blob:
+8b78de3045159a53909afd7376f1b3faef883f46
+
+raw:
+c9b1292f70cd352cd8571ab75d4b64b4f10f047c3109e017652f2903da6fbc38
+
+logical:
+5cc1b15508f95cbf1d72c19fcc0e72df2e585d3791b771f4b9fc15d1561b7ea3
+
+external identity:
+a180071ae2cabd664d35bfc2537d3613ce9280542434ea82c95880c8ff4b124d
+```
+
+Handoff:
+
+```text
+commit:
+dd00c7e702075c140abf5ef5824a294e5a5e27d7
+
+blob:
+fa4c63b82f00f3efd16196e2a74c75e0338f721c
+
+raw:
+69d2ade072e4354761786717cb1a9f7a2e4a7b2f1537529aaed2fa8ab2f29ba7
+```
+
+Design, receipt, and handoff postfetch bytes were exact-equal to their
+locally verified source bytes.  The receipt is sorted compact canonical
+JSON plus exact1 LF and its logical exact17 and external-identity exact9
+preimages reproduce the recorded hashes.
+
+### Independent verification
+
+Three read-only lanes independently returned blocker exact0:
+
+```text
+additive contract:
+APPROVE
+
+historical / identity / Event1 boundary:
+APPROVE
+
+authority / call graph / counts:
+APPROVE
+```
+
+Subagent edit, test, commit, and GitHub-write counts were all zero.  Karen
+made the route selection, final verification, and exact5 GitHub writes.
+
+### Zero-effect boundary
+
+```text
+mashos-api production changes:
+0
+
+test / fixture / proof / lock / registry / dependency changes:
+0 / 0 / 0 / 0 / 0 / 0
+
+test collect / execution / pytest.main:
+0 / 0 / false
+
+historical receipt rewrite / replacement / reissue:
+0 / 0 / 0
+
+compatibility artifact / successor receipt / manifest issuance:
+0 / 0 / 0
+
+reference materialization start / success:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+operational runtime materialization / publication:
+0 / 0
+
+Candidate / Event1 / Readiness / Failure:
+0 / 0 / 0 / 0
+
+Reservation / Attempt / formal exact134:
+0 / 0 / 0
+
+source baseline:
+UNLOCKED
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+### Inference
+
+The v2 exact16 route is the only compared route that preserves both the
+actual historical identities and current strict canonical semantics without
+adding an artifact or field.  Reusing v1 would overload an existing
+identity; adding a carrier or projection field would duplicate identity-
+bound facts and increase publication and maintenance cost.
+
+This is a Design conclusion, not RED, implementation, GREEN, or
+final-issuance evidence.
+
+### Karen's opinion
+
+The correct repair is to make the historical exception explicit,
+identity-bound, versioned, and independently rederived.  Rewriting history
+or weakening the current loader would make the record easier to pass but
+less truthful.  The v2 route keeps both history and the current contract
+intact, and the required STOP before Event1 preserves Mash's authority.
+
+### Closure state
+
+```text
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_ROUTE_SELECTED_DESIGN_FROZEN_CAUSAL_RED_NOT_AUTHORIZED_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+```
+
+The next possible class is `CAUSAL RED FREEZE`.  No concrete next token is
+issued.  A new separate explicit Mash approval is required; no automatic
+transition is permitted.
