@@ -1,0 +1,438 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.recovery_epoch003.post_d2_remediation_d1_actual_import_and_current_strict_connection_causal_red_freeze_receipt.v1",
+  "approved_authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POST_P0_PARENT_ADDENDUM_POST_D2_REMEDIATION_D1_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_CURRENT_STRICT_PREFLIGHT_CONNECTION_CAUSAL_RED_FREEZE_ONLY",
+  "recorded_on_jst": "2026-07-29",
+  "logical_cycle_id": "NLS_V3_CYCLE_001",
+  "recovery_epoch_id": "NLS_V3_CYCLE001_RECOVERY_EPOCH_003",
+  "predecessor_bindings": {
+    "governing_p0_external_identity_sha256": "74286b862eeee1663d2758ee18d1e848316da6fc27b12fef38c149c5a2b52f36",
+    "parent_addendum_receipt_external_identity_sha256": "e8cc49a4983bb1c7e46948fb92ea605ce8fde7aa3a07926fbf047725e14bbf43",
+    "prior_d1_red_receipt_external_identity_sha256": "d1897d23f89d8df0fce8fd5591b77aeb3e2832197d1474aa8827b810805c174b",
+    "d2_targeted_green_receipt_external_identity_sha256": "85dc3b8d64a12fa62f390e1c9ba654162c3f404122d0eb92f949647d6fcb3e30",
+    "d2_targeted_green_receipt_logical_sha256": "922af50cc7475247cc95cb4199a54fd76c3649b87f8bf36e9b723326a9df9b61",
+    "entry_state": "RECOVERY_EPOCH003_OPERATIONAL_ADMISSION_CONTRACT_D2_TARGETED_GREEN_AUTHORITY_STOP",
+    "entry_blocker": "BLOCKED_BY_ACTUAL_UNCLASSIFIED_IMPORT_EXACT3_AND_VERSIONED_STRICT_PREFLIGHT_CONNECTION"
+  },
+  "source_entries": {
+    "cocolon_entry_commit_sha1": "3267a4028e116d071f729126428cdc2309393dcb",
+    "mashos_api_entry_commit_sha1": "32efb22cd1843d2d2103f0a981fd3e4be9623dc2",
+    "mashos_api_entry_tree_sha1": "077b9150057f7562f700b6825b23d978276b42a0",
+    "entry_drift_accepted": false
+  },
+  "result_evidence": {
+    "repository_full_name": "MassyuRed/Cocolon",
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D1_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_CausalRED_FreezeOnly_Result_20260729.md",
+    "publication_commit_sha1": "73c81e26dc6ccb7d6612f4231a291bb16191f620",
+    "git_blob_sha1": "b483946c2c148c1b8f19d156fe8cfa5941aa5a88",
+    "raw_sha256": "07d0a21d2d8f76ebc4fdb0c796c2efdbf7afc0ac3d302d62fad3af03738ee35a",
+    "postfetch_content_equal": true
+  },
+  "d1_test_publication": {
+    "repository_full_name": "MassyuRed/mashos-api",
+    "parent_commit_sha1": "32efb22cd1843d2d2103f0a981fd3e4be9623dc2",
+    "publication_commit_sha1": "1bcadf0b02e79ba935b01dc4d65c85e0cdd77d2b",
+    "publication_tree_sha1": "4b682b8b5c55d3ad3b82db7da45cf2a971372355",
+    "changed_path_count": 1,
+    "additions": 962,
+    "deletions": 0,
+    "force_ref_update": false,
+    "postfetch_content_equal": true
+  },
+  "d1_test_identity": {
+    "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py",
+    "git_blob_sha1": "f705b5296088c15accc76eb629bac637d16c714a",
+    "raw_sha256": "cda6119f9dc85fd386eb2447f1c85d8e250b973388866dad2fff6855d342311a",
+    "byte_count": 32310,
+    "lf_line_count": 962,
+    "trailing_lf": true
+  },
+  "oracle_denominator": {
+    "exact_n": 8,
+    "unique_node_count": 8,
+    "ordered_node_ids": [
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m01_owner_actual_head_unclassified_exact3_noncredit_diagnostic",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m02_independent_actual_head_unclassified_exact3_noncredit_diagnostic",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m03_actual_reachable_import_owner_paths_exact2",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_m04_green_requires_unmodified_lock_manifest_parity_and_zero_unresolved",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_p01_versioned_current_strict_api_separated_from_historical",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_p02_current_preflight_rejects_downgrade_fallback_and_fixture_credit",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_f01_source_syntax_import_and_identity_drift_fail_closed",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py::test_z01_all_success_and_failure_branches_keep_effects_zero"
+    ],
+    "ordered_node_ids_sha256": "22c217b28ae1916ac7817dcfa091ea107a85e483ce5959241e44200c6c9a79de"
+  },
+  "pre_execution_freeze": {
+    "recorded_at_jst": "2026-07-29T18:48:41+09:00",
+    "freeze_record_sha256": "5e760d55daf0e034387344a97de0188424780e69a91e5e16ec260526889441e8",
+    "completed_before_collect_only": true,
+    "completed_before_execution": true,
+    "completed_before_production_change": true,
+    "expected_initial_passed": 2,
+    "expected_initial_causal_failed": 6,
+    "expected_collection_error_count": 0,
+    "expected_unexpected_error_count": 0
+  },
+  "authorized_pytest_selection": {
+    "selection_path_count": 1,
+    "other_selection_count": 0,
+    "existing_frozen_exact3_execution_count": 0,
+    "runtime_materialized_in_this_d1": false,
+    "interpreter_path": "/tmp/nlsv3_d1_pytest_runner/bin/python",
+    "python_version": "3.12.13",
+    "pytest_version": "8.4.1",
+    "collect_only_argv": [
+      "env",
+      "-u",
+      "PYTEST_ADDOPTS",
+      "-u",
+      "PYTEST_PLUGINS",
+      "-u",
+      "PYTHONPATH",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+      "LANG=C.UTF-8",
+      "LC_ALL=C.UTF-8",
+      "/tmp/nlsv3_d1_pytest_runner/bin/python",
+      "-m",
+      "pytest",
+      "--noconftest",
+      "-p",
+      "no:cacheprovider",
+      "--collect-only",
+      "-q",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py"
+    ],
+    "collect_only_argv_sha256": "51bf771a1cb4709cce5d89e4b1f07bed722f612889e404dca93aa41e9ae6672d",
+    "execution_argv": [
+      "env",
+      "-u",
+      "PYTEST_ADDOPTS",
+      "-u",
+      "PYTEST_PLUGINS",
+      "-u",
+      "PYTHONPATH",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+      "LANG=C.UTF-8",
+      "LC_ALL=C.UTF-8",
+      "/tmp/nlsv3_d1_pytest_runner/bin/python",
+      "-m",
+      "pytest",
+      "--noconftest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py"
+    ],
+    "execution_argv_sha256": "0868d11bfb575c46e43017ff3bb9ff10970dec0822d1170f12915e11124cf28a"
+  },
+  "collect_only_execution": {
+    "invocation_count": 1,
+    "exit_code": 0,
+    "collected": 8,
+    "ordered_node_ids_match": true,
+    "collection_error_count": 0,
+    "import_error_count": 0,
+    "unexpected_error_count": 0,
+    "elapsed_seconds": 0.37
+  },
+  "red_execution": {
+    "recorded_at_jst": "2026-07-29T18:52:27+09:00",
+    "invocation_count": 1,
+    "exit_code": 1,
+    "exit_class": "INTENDED_CAUSAL_RED",
+    "collected": 8,
+    "executed": 8,
+    "passed": 2,
+    "causal_failed": 6,
+    "failed": 6,
+    "error_count": 0,
+    "collection_error_count": 0,
+    "unexpected_error_count": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "xpassed": 0,
+    "deselected": 0,
+    "elapsed_seconds": 70.5,
+    "ordered_outcomes": [
+      {
+        "node_suffix": "test_m01_owner_actual_head_unclassified_exact3_noncredit_diagnostic",
+        "result": "CAUSAL_FAILED",
+        "causal_code": "M01_CAUSAL_RED"
+      },
+      {
+        "node_suffix": "test_m02_independent_actual_head_unclassified_exact3_noncredit_diagnostic",
+        "result": "CAUSAL_FAILED",
+        "causal_code": "M02_CAUSAL_RED"
+      },
+      {
+        "node_suffix": "test_m03_actual_reachable_import_owner_paths_exact2",
+        "result": "PASSED",
+        "causal_code": null
+      },
+      {
+        "node_suffix": "test_m04_green_requires_unmodified_lock_manifest_parity_and_zero_unresolved",
+        "result": "CAUSAL_FAILED",
+        "causal_code": "M04_CAUSAL_RED"
+      },
+      {
+        "node_suffix": "test_p01_versioned_current_strict_api_separated_from_historical",
+        "result": "CAUSAL_FAILED",
+        "causal_code": "P01_CAUSAL_RED"
+      },
+      {
+        "node_suffix": "test_p02_current_preflight_rejects_downgrade_fallback_and_fixture_credit",
+        "result": "CAUSAL_FAILED",
+        "causal_code": "P02_CAUSAL_RED"
+      },
+      {
+        "node_suffix": "test_f01_source_syntax_import_and_identity_drift_fail_closed",
+        "result": "PASSED",
+        "causal_code": null
+      },
+      {
+        "node_suffix": "test_z01_all_success_and_failure_branches_keep_effects_zero",
+        "result": "CAUSAL_FAILED",
+        "causal_code": "Z01_CAUSAL_RED"
+      }
+    ],
+    "ordered_outcomes_sha256": "c4cee383301a36212c6148b82ff1d865ad1ff8502c1fb0e7f680308e5654ee76",
+    "ordered_causal_codes_sha256": "a07e73f611b1675654fe007cf1c527c0e69eb9b577e56506904cebbdfd43a164"
+  },
+  "actual_import_observation": {
+    "owner_symbol": "_recovery_epoch003_import_manifest",
+    "independent_symbol": "_recovery_epoch003_independent_import_manifest",
+    "untouched_lock_owner_first_stop": [
+      "UNCLASSIFIED_IMPORT",
+      "models"
+    ],
+    "untouched_lock_independent_first_stop": [
+      "UNCLASSIFIED_IMPORT",
+      "models"
+    ],
+    "noncredit_progressive_diagnostic_count": 2,
+    "noncredit_progressive_diagnostic_credit_count": 0,
+    "unclassified_imports": [
+      "models",
+      "models_updated",
+      "self_structure_engine.rules"
+    ],
+    "unclassified_exact_n": 3,
+    "unclassified_imports_sha256": "5c9eb809ff8d0fd5760238d706428d94fbafe7ea715669ab151b61f988314a25",
+    "reachable_owner_paths": {
+      "models": [
+        "ai/services/analysis_engine/self_structure_engine/rules.py"
+      ],
+      "models_updated": [
+        "ai/services/analysis_engine/self_structure_engine/rules.py"
+      ],
+      "self_structure_engine.rules": [
+        "ai/services/ai_inference/astor_self_structure_report.py"
+      ]
+    },
+    "reachable_owner_paths_sha256": "9d9ae9545f22fa2a91d0d686d807afff250a81fdf18dd75349369b12af585c1f",
+    "owner_manifest_derived_with_untouched_lock": false,
+    "independent_manifest_derived_with_untouched_lock": false,
+    "owner_independent_manifest_equal_for_credit": false,
+    "unclassified_exact0_met": false,
+    "unresolved_dynamic_exact0_credited": false,
+    "allowlist_credit_count": 0,
+    "hard_code_credit_count": 0,
+    "in_memory_mapping_credit_count": 0,
+    "mock_credit_count": 0,
+    "fabricated_search_root_credit_count": 0,
+    "original_lock_changed": false
+  },
+  "frozen_green_contract": {
+    "owner_manifest_derived_from_actual_head_with_unmodified_lock": true,
+    "independent_manifest_separately_derived_from_actual_head_with_unmodified_lock": true,
+    "owner_independent_manifest_exact_equal": true,
+    "reachable_unclassified_import_exact_n": 0,
+    "unresolved_dynamic_import_exact_n": 0,
+    "allowlist_or_name_exception_credit_count": 0,
+    "hard_code_credit_count": 0,
+    "in_memory_mapping_credit_count": 0,
+    "mock_credit_count": 0,
+    "fabricated_search_root_credit_count": 0,
+    "met_in_this_d1": false
+  },
+  "strict_preflight_observation": {
+    "historical_verifier_api": "verify_recovery_epoch003_bootstrap_source_runtime_contract",
+    "private_current_strict_verifier_api": "_verify_recovery_epoch003_bootstrap_source_runtime_contract_current",
+    "public_current_strict_verifier_api": "verify_recovery_epoch003_bootstrap_source_runtime_contract_current",
+    "versioned_current_strict_preflight_api": "execute_recovery_epoch003_current_strict_preflight_v1",
+    "versioned_current_strict_parent_api": "execute_recovery_epoch003_current_strict_parent_phase_v1",
+    "historical_verifier_present": true,
+    "private_current_strict_verifier_present": true,
+    "public_current_strict_verifier_present": false,
+    "versioned_current_strict_preflight_present": false,
+    "versioned_current_strict_parent_present": false,
+    "historical_current_separation_connected": false,
+    "historical_verifier_source_sha256": "6479a4d409d2d4971c78caf60067c769fc6308dde87ec60149d13e610a5e100f",
+    "historical_preflight_source_sha256": "2aa5bc3704ec806046ae817512e5db1171b369b0fa49e395fdc9b28b6ea20109",
+    "payload_profile_downgrade_credit_count": 0,
+    "historical_fallback_credit_count": 0,
+    "fixture_only_current_credit_count": 0
+  },
+  "fail_closed_contract": {
+    "syntax_error_fail_closed_required": true,
+    "unclassified_import_fail_closed_required": true,
+    "unresolved_dynamic_import_fail_closed_required": true,
+    "head_drift_fail_closed_required": true,
+    "tree_drift_fail_closed_required": true,
+    "clean_state_drift_fail_closed_required": true,
+    "exception_swallow_credit_count": 0,
+    "f01_result": "PASSED",
+    "complete_success_failure_zero_effect_branch_contract_result": "CAUSAL_RED_UNREACHABLE_UNTIL_VERSIONED_APIS_EXIST"
+  },
+  "implementation_candidate_scope": {
+    "derivation": "POST_RED_ACTUAL_REACHABILITY_AND_CALL_GRAPH",
+    "paths": [
+      "ai/services/analysis_engine/self_structure_engine/rules.py",
+      "ai/services/ai_inference/astor_self_structure_report.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+      "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py"
+    ],
+    "exact_n": 5,
+    "ordered_paths_sha256": "2254777eaaa0b5b444d2cc99b377298542b77d5f8c8022f8f5e74d7c92490f77",
+    "production_changed_count": 0,
+    "guessed_or_extra_path_count": 0,
+    "edit_authorized": false
+  },
+  "immutable_inputs": {
+    "existing_frozen_exact3": [
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_operational_admission_contract_red.py",
+        "git_blob_sha1": "cd79f1be2f2321c90deb817c93e75e848ba7d3fe",
+        "raw_sha256": "9af99873afd7d77f151e4b6b0a75f350bfc96a1aea781e047f162d1e5379560d",
+        "execution_count": 0
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch003_bootstrap_source_runtime_expected_observed_contract_red.py",
+        "git_blob_sha1": "dda02f15be90387dd045ef117a5961961e2cae2b",
+        "raw_sha256": "8c8fcaf5211064ca59127a8081dc41ae8b9207472f070746c84a8e4b591a07e5",
+        "execution_count": 0
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch002_retry_lineage_and_formal_worker_bootstrap_reconciliation_red.py",
+        "git_blob_sha1": "6e1f904d91c0e6852b8af66500a0563e20648026",
+        "raw_sha256": "70d6db7fe3e9f42c59a01fdba5e73752ba6aa1e7c2c4e6d7bf2581dbd5090ce5",
+        "execution_count": 0
+      }
+    ],
+    "current_step_proof": {
+      "path": "ai/tools/emlis_nls_v3_recovery_epoch002_current_step_proof_run.py",
+      "git_blob_sha1": "ad9e206c0d69b953579dfffea64dbe059ae154bb",
+      "raw_sha256": "6eaece6aa91d4e19b8f30df4c9cc489788e283ce93553e35342e603a2401c261",
+      "execution_count": 0
+    },
+    "d2_exact6": [
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_canonical_current_closure_v3.py",
+        "git_blob_sha1": "bfc42250d4ac0c065d8dd3b5131766411ec6fb67",
+        "raw_sha256": "b68a50c0cb194f979b56e20ca20d1c878dbf366366a537171aa8eda3683f25ee"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+        "git_blob_sha1": "a8f84e71990e36606c1316b51fe45e7591758f14",
+        "raw_sha256": "16ef4ff0e4ac2c3e06f6d07723890a716c766c73374dec93d62a09691e70e7bd"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_atomic_publication_bundle_v3.py",
+        "git_blob_sha1": "a7e0de1b7e048a647b95eccfbd03cdd7e198500b",
+        "raw_sha256": "f2625be00933f2c72b1094a9546e08e3c0de7c6bd28b56e01d4c67f625af023d"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+        "git_blob_sha1": "ec678b181d8e3d6743f897491f8084e7b0d6aee6",
+        "raw_sha256": "24a3e0f31911b37dcc23758897d9d6ccd23c1f6ebcf21d8b0e16516f85f291ec"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+        "git_blob_sha1": "7cd2b2077c831b8cda6fb5992c1771b0fbcdbfa8",
+        "raw_sha256": "7262993f502b16960366248b0a8095d4e20be095ef1a7845c415412d75992e31"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py",
+        "git_blob_sha1": "79a60afc525bbbdad150ddcc2c4aaa0036b75f26",
+        "raw_sha256": "1ee4112c67b5e0dcae6ab8b46d1df92cb285c27eacfc3aa13cc393b8c0dd031b"
+      }
+    ],
+    "d2_exact6_path_raw_manifest_sha256": "9d12cd9b3497f72c0860c3b08035fd387caee6e8762b4e14ce4cd9060f19b21a",
+    "all_bytes_unchanged": true
+  },
+  "deviation_record": {
+    "path": "ai/tests/test_emlis_nls_v3_recovery_epoch002_post_d2_success_owner_graph_and_formal_parent_continuation_red.py",
+    "selection_authorized": false,
+    "observed_failed_count": 64,
+    "authorized_selection_credit_count": 0,
+    "d2_green_credit_count": 0,
+    "operational_credit_count": 0,
+    "rerun_in_this_d1_count": 0,
+    "concealment_or_test_rewrite_count": 0,
+    "retained_as_non_credit_fact": true
+  },
+  "independent_verification": {
+    "read_only_subagent_lane_count": 3,
+    "subagent_edit_count": 0,
+    "subagent_pytest_execution_count": 0,
+    "subagent_commit_count": 0,
+    "subagent_github_write_count": 0,
+    "karen_final_reconciliation_completed": true,
+    "actual_import_findings_reconciled": true,
+    "strict_preflight_findings_reconciled": true,
+    "artifact_schema_findings_reconciled": true
+  },
+  "repository_scope": {
+    "mashos_api_changed_paths": [
+      "ai/tests/test_emlis_nls_v3_recovery_epoch003_actual_unclassified_import_exact3_and_versioned_current_strict_preflight_connection_red.py"
+    ],
+    "mashos_api_changed_path_count": 1,
+    "mashos_api_production_change_count": 0,
+    "mashos_api_existing_test_change_count": 0,
+    "mashos_api_fixture_proof_lock_registry_change_count": 0,
+    "cocolon_changed_paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D1_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_CausalRED_FreezeOnly_Result_20260729.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D1_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_CausalRED_FreezeOnly_BodyFree_Receipt_20260729.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PostD2Remediation_D1_ActualUnclassifiedImportExact3AndVersionedCurrentStrictPreflightConnection_CausalRED_FreezeOnly_Handoff_20260729.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md"
+    ],
+    "cocolon_changed_path_count": 5,
+    "deleted_path_count": 0,
+    "history_rewrite": false
+  },
+  "zero_effects": {
+    "reference_runtime_materialization_count": 0,
+    "operational_runtime_materialization_count": 0,
+    "reference_observation_publication_count": 0,
+    "operational_admission_publication_count": 0,
+    "runtime_publication_count": 0,
+    "candidate_publication_count": 0,
+    "event1_publication_count": 0,
+    "readiness_publication_count": 0,
+    "failure_publication_count": 0,
+    "reservation_count": 0,
+    "attempt_count": 0,
+    "formal_exact134_invocation_count": 0,
+    "formal_collection_count": 0,
+    "formal_execution_count": 0,
+    "pytest_main_called": false,
+    "source_baseline_state": "UNLOCKED",
+    "p2_state": "NOT_STARTED",
+    "product_read_state": "NOT_STARTED",
+    "cycle001_acceptance_state": "NOT_ACCEPTED",
+    "automatic_progression": false
+  },
+  "decision_effective_when": "MASHOS_API_EXACT1_AND_COCOLON_EXACT5_REACHABLE_ON_DEFAULT_BRANCHES_AND_ALL_TARGET_CONTENT_POSTFETCH_VERIFIED",
+  "next_authority_token": null,
+  "next_authority_class": "REMEDIATION_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY",
+  "next_authority_eligibility": "REQUIRES_SEPARATE_EXPLICIT_MASH_APPROVAL_AFTER_D1_POSTVERIFIED_CAUSAL_RED",
+  "final_issuance_eligibility": "REQUIRES_SEPARATE_EXPLICIT_MASH_APPROVAL_AFTER_REMEDIATION_TARGETED_GREEN_POSTVERIFICATION_AND_SECOND_STOP",
+  "state": "RECOVERY_EPOCH003_POST_D2_REMEDIATION_D1_CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_AUTHORITY_STOP",
+  "automatic_progression": false,
+  "body_free": true,
+  "receipt_sha256_preimage_rule": "SHA256_OF_UTF8_COMPACT_SORTED_KEY_JSON_AFTER_DELETING_RECEIPT_SHA256_WITH_NO_TRAILING_LF",
+  "receipt_sha256": "fa11e28694c06a377c4d962a92aa29fe1d46bccfd1fef1de63e410e5bd655e14"
+}
