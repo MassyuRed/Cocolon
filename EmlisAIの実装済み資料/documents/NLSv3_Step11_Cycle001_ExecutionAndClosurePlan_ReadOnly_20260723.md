@@ -9005,15 +9005,23 @@ Receipt:
 
 ```text
 commit / tree:
-d2062da3b003a9db82dbefbf2f160b1c737e676a
-226ab5151c044266afd8675b264648d54045f24c
+e4357895f92cd9e2085c80d2ea8a211f465a62b5
+07a792e3dcd3fd9e94efd42bdd05578eb198bf09
 
 blob / raw / logical / external:
-6c9c3aea971280e4ef7832239bb9858f5ca4d159
-75a3ce59c9a94ec8dae84e705dae4f96b45912073d5ec220d08a834d7afe0674
-c14fe8593832499511d1930b8d04adab6fce1c7f24c829db0e7469db5b137e35
-e4824473b41a04cace6b988271c03e3c8d3cde1b71b6dfef0699c4514a35523b
+740b4e85cced7a276682d4655bec7be6816e8fa8
+b23479d3f01acd17a08e316a09a94056e7a834b3fd8dd6ab126e5f3345446c51
+5376489c7cb905187eacfcd05022040bc9956f5d1ae074275c96c35270b4e843
+2931b88a4c62a0bd12ffa5ec5043dc740b821750635d5bfa0377bd80e80ee173
 ```
+
+Initial receipt commit `d2062da3b003a9db82dbefbf2f160b1c737e676a`
+was non-credit: its logical hash included the serializer trailing LF even
+though the frozen preimage excludes LF.  Postfetch detected the mismatch.
+Commit `e4357895f92cd9e2085c80d2ea8a211f465a62b5` corrected the receipt
+self-hash and consequent byte/external identities only.  The Design
+conclusion, source evidence, effect boundary, and changed-path exact5 did
+not change.
 
 ### Facts, inference, and Karen's opinion
 
