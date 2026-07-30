@@ -28597,3 +28597,51 @@ false
 
 No Event1 token was issued.  A v2 Event1 connection requires a separate
 design and explicit Mash authority.
+
+### GitHub reflection correction record
+
+Confirmed observable effect:
+
+- commit `f7c38c57d61d92b50932fcb55a307dc1f778728c` wrote only the
+  intended snapshot appendix because the connector returned empty content
+  for the existing large file;
+- commit `db92507495f37e79bd0493f339e4ee87d06a08f6` attempted an
+  additive restoration, but postfetch showed that a middle-truncated tool
+  projection had omitted existing lines;
+- both commits are retained as non-credit transport history;
+- neither commit changed production source, runtime artifacts, Reference,
+  OA, mashos-api, or any Event1/later artifact.
+
+Change basis:
+
+```text
+expected original snapshot bytes:
+1489912
+
+expected original snapshot raw SHA-256:
+ee32a6103773a5b8d319d568b587a34dca1280783846d49760663a2a0e57c96a
+
+expected original plus issuance appendix bytes:
+1495179
+
+expected original plus issuance appendix raw SHA-256:
+9e979f79cb39d6bc06659969f6709d50d3af9105992804bcda646cbf286c47ad
+```
+
+Correction:
+
+commit `34a6b35fe9323145d0d5d93a3065661562fa3d2d` reconstructed the
+prior blob in exact line-bounded chunks, verified UTF-8 byte count before
+publication, and restored the complete original history plus the intended
+appendix.  Postfetch matched the expected blob
+`e664ac632af84f937d6553488edbd9f424b31997`, byte count, and raw SHA-256
+above.  This descendant note records that observable correction; it does
+not alter the issuance conclusion or authorize progression.
+
+```text
+Event1 and later effect delta:
+exact0
+
+current authority stop:
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATED_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_OPERATIONAL_ADMISSION_V2_ISSUED_POSTVERIFIED_EVENT1_CONNECTION_NOT_AUTHORIZED_AUTHORITY_STOP
+```
