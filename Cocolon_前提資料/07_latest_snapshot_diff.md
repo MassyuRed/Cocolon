@@ -28281,3 +28281,149 @@ false
 Mash must separately approve remediation implementation and targeted GREEN.
 Materialization and final issuance remain unauthorized.  No automatic
 progression is permitted.
+
+## 2026-07-30 Recovery Epoch003 prestart actual Git bytes exact6 D2 targeted GREEN snapshot
+
+### Confirmed facts
+
+Approved authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D2_ACTUAL_GIT_BYTES_EXACT6_OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+The D1 causal-RED receipt external identity was:
+
+```text
+8b7acbe166cc821a4575c6a5f8ca90fc7c86ad8aef63f6dc7b7e092552854d12
+```
+
+mashos-api implementation:
+
+```text
+parent commit / tree:
+4c53946e6d3cb5281d2d1a31a5d2dbdb451b9a47
+1e3dbc1cc7b489838ccfda9850b21b5ef6946ec8
+
+implementation commit / tree:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+
+changed paths:
+production exact5 only
+
+insertions / deletions:
+4784 / 0
+
+diff SHA-256:
+cbb3a68c3ebb220cdbfe3b9b555ce7d80fcfde8326252672f1647363aaec3cac
+```
+
+The additive implementation independently derives actual-Git historical
+exact6, requires PRESTART/POST_REFERENCE core equality, binds the current
+schema pair to the v2 identifier, and reexecutes independent strict
+reference/admission validation from the parent phases.  No name-only
+shortcut, historical fallback, or materializer call exists in the
+validation graphs.
+
+Frozen invariants:
+
+```text
+historical exact6 core:
+519359777b7efc56b79d9422ba6f312913f97a490dc290c20c18ab42dfbd8ef5
+
+canonical loader blob / raw:
+953d062fa858870e65d96cf03694d68c99003594
+c20b262495276c9b549b257380e1a7c28069c316a7aca4b6e00a49de03d1512b
+
+test blob / raw / bytes:
+b61913a784512d65d712ee9bc6f15736b4ae91d2
+ac136e06c8eaa0bb9d7342b8cbe5669f974865e89d4fecbb0c24257893d6bb1a
+66797
+
+ordered node-list / oracle-list:
+8e4fd061ea71338fd4e254881af8d19b27961d4f0e563cac4958f74df34e2ad4
+cce4bafb92cee323000baaf201f79b359053683ed5768293407e6845edec6ad0
+```
+
+Only the frozen exact1 path was collected and executed:
+
+```text
+collect-only:
+exit 0 / exact11
+
+targeted GREEN:
+exit 0 / exact11 executed / exact11 passed
+
+all failure, error, skip, xfail, xpass, and deselection counts:
+0
+```
+
+Cocolon evidence:
+
+```text
+Result commit / tree / blob / raw:
+d43df1d94b196daa810a52e3d233c8656b8ad84d
+6888c6a2c1051f9ba5ef24379d458e591df045be
+02442738900bc0ed355e3757f08bdb4ed202bc02
+f11888de4ab11de62e72342246ae51d486d2b9086f4af42dd583ae81842f7678
+
+Receipt commit / tree / blob / raw:
+15b38f2db38359bd88ecd3e0a8d8c3ed36a16156
+b47fc75be54e9649f2b12f4e45a5b2590b34e584
+119b79321c1ad0420d4b1aea79ed10c70c399ed1
+e0cbd49b6c1e041608a7dcc9a7ddbb4cf7111e57361af0bf9053ff370b70a7ac
+
+Receipt logical / external identity:
+0160be7034f29ae3dcc3d0ddd6d3d92741a0bfa984e98417ca324d078ba70118
+97f62f881ac8035bb8fcba15d153ca38637bc659196a74f5f0f0e4849a4686c6
+```
+
+Three read-only independent audits returned blocker exact0.  Karen retained
+all edits, authoritative pytest, publication, postfetch, and final
+judgment.
+
+### Inference
+
+The exact11 outcome change, with all frozen inputs preserved, identifies
+the exact5 additive implementation as the remediation.  It does not
+establish positive operational publication because no runtime
+materialization or issuance was performed.
+
+### Karen's opinion
+
+Historical bytes and identities remain primary, while current semantics
+are made explicit through v2.  That is preferable to rewriting history or
+weakening the canonical loader.  The GREEN result is a precondition for a
+later authorized issuance, not issuance itself.
+
+### Zero effects and current stop
+
+```text
+historical exact6 rewrite / replacement / reissue:
+0 / 0 / 0
+
+reference / operational runtime materialization:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+Candidate / Event1 / Readiness / Failure:
+0 / 0 / 0 / 0
+
+source-baseline lock / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+state:
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D2_TARGETED_GREEN_POSTVERIFIED_FINAL_ISSUANCE_NOT_AUTHORIZED_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+
+automatic progression:
+false
+```
+
+Mash must separately authorize reference runtime materialization and final
+issuance.  No automatic progression is permitted.

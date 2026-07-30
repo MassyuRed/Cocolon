@@ -8411,3 +8411,174 @@ RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D1_CAUSAL_RED
 Mash must separately review the postverified RED and explicitly authorize
 remediation implementation and targeted GREEN.  No implementation or
 final-issuance token is issued, and no automatic transition is permitted.
+
+## 2026-07-30 Recovery Epoch003 prestart actual Git bytes exact6 D2 implementation and targeted GREEN closure
+
+### Authority
+
+Mash approved only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D2_ACTUAL_GIT_BYTES_EXACT6_OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_IMPLEMENTATION_AND_TARGETED_GREEN_ONLY
+```
+
+The D1 causal-RED receipt external identity was:
+
+```text
+8b7acbe166cc821a4575c6a5f8ca90fc7c86ad8aef63f6dc7b7e092552854d12
+```
+
+### Confirmed facts
+
+The remediation was implemented additively in the already-derived
+production exact5:
+
+```text
+mashos-api parent commit / tree:
+4c53946e6d3cb5281d2d1a31a5d2dbdb451b9a47
+1e3dbc1cc7b489838ccfda9850b21b5ef6946ec8
+
+implementation commit / tree:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+
+changed paths:
+exact5
+
+insertions / deletions:
+4784 / 0
+
+implementation diff SHA-256:
+cbb3a68c3ebb220cdbfe3b9b555ce7d80fcfde8326252672f1647363aaec3cac
+```
+
+The implementation adds separate owner/independent actual-Git historical
+derivation, typed exact8-to-exact6 projection, real PRESTART and
+POST_REFERENCE core equality, v2 identifier and current schema-pair
+dispatch, strict reference/admission verification, and parent phase 1/2
+reexecution.  Historical fallback and name-only credit are rejected.
+Parent and verifier graphs do not call the one-shot materializer.
+
+Historical exact6, the current canonical loader, all frozen v1
+function-level source hashes, and exact16/exact8 keysets remained
+unchanged:
+
+```text
+historical core:
+519359777b7efc56b79d9422ba6f312913f97a490dc290c20c18ab42dfbd8ef5
+
+canonical loader blob / raw:
+953d062fa858870e65d96cf03694d68c99003594
+c20b262495276c9b549b257380e1a7c28069c316a7aca4b6e00a49de03d1512b
+
+v1 exact16 / predecessor exact8 keyset SHA-256:
+965d297c7413c243cdebbc744f15334ca5eb0972801fd4254d443369f9caf66b
+ea2dfb2bf3289209bf272ec460173fd5b9ae0429e4adc7c6f900ced4b44458d8
+```
+
+The frozen D1 test remained byte-identical:
+
+```text
+Git blob / raw / bytes:
+b61913a784512d65d712ee9bc6f15736b4ae91d2
+ac136e06c8eaa0bb9d7342b8cbe5669f974865e89d4fecbb0c24257893d6bb1a
+66797
+
+ordered node-list / oracle-list SHA-256:
+8e4fd061ea71338fd4e254881af8d19b27961d4f0e563cac4958f74df34e2ad4
+cce4bafb92cee323000baaf201f79b359053683ed5768293407e6845edec6ad0
+```
+
+Only its exact1 collect-only and exact1 full-path execution were run:
+
+```text
+collect-only:
+exit 0 / exact11 collected
+
+targeted GREEN:
+exit 0 / exact11 executed / exact11 passed
+
+failed / errors / collection errors / import errors:
+0 / 0 / 0 / 0
+
+skipped / xfailed / xpassed / deselected:
+0 / 0 / 0 / 0
+```
+
+The pre-execution freeze raw SHA-256 was:
+
+```text
+85a9fccd29d60bac71a6de26c239042bbcbedf9f0c6d2ce3bed31bf796fa7c0f
+```
+
+Cocolon evidence published before this closure update:
+
+```text
+Result commit / tree / blob / raw:
+d43df1d94b196daa810a52e3d233c8656b8ad84d
+6888c6a2c1051f9ba5ef24379d458e591df045be
+02442738900bc0ed355e3757f08bdb4ed202bc02
+f11888de4ab11de62e72342246ae51d486d2b9086f4af42dd583ae81842f7678
+
+Receipt commit / tree / blob / raw:
+15b38f2db38359bd88ecd3e0a8d8c3ed36a16156
+b47fc75be54e9649f2b12f4e45a5b2590b34e584
+119b79321c1ad0420d4b1aea79ed10c70c399ed1
+e0cbd49b6c1e041608a7dcc9a7ddbb4cf7111e57361af0bf9053ff370b70a7ac
+
+Receipt logical / external identity:
+0160be7034f29ae3dcc3d0ddd6d3d92741a0bfa984e98417ca324d078ba70118
+97f62f881ac8035bb8fcba15d153ca38637bc659196a74f5f0f0e4849a4686c6
+```
+
+### Zero-effect boundary
+
+```text
+historical exact6 rewrite / replacement / reissue:
+0 / 0 / 0
+
+reference / operational runtime materialization:
+0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+Candidate / Event1 / Readiness / Failure:
+0 / 0 / 0 / 0
+
+source-baseline lock / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+source baseline:
+UNLOCKED
+
+automatic progression:
+false
+```
+
+### Inference
+
+Because the frozen exact11 changed from the D1 causal RED to exact11 pass
+while test bytes, runner, repositories, historical identities, loader, and
+v1 source hashes remained fixed, the additive exact5 implementation is the
+causal remediation.  This does not prove positive runtime publication,
+which was not executed.
+
+### Karen's opinion
+
+The implementation preserves historical truth and adds a current,
+versioned interpretation instead of rewriting the record or weakening
+validation.  GREEN should not be converted into unobserved runtime facts;
+the correct boundary is to stop before materialization and final issuance.
+
+### Closure state
+
+```text
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D2_TARGETED_GREEN_POSTVERIFIED_FINAL_ISSUANCE_NOT_AUTHORIZED_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+```
+
+Mash must separately authorize reference runtime materialization and final
+issuance.  No automatic transition is permitted.
