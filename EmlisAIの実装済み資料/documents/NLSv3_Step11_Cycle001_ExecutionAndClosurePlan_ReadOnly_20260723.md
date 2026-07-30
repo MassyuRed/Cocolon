@@ -8848,3 +8848,228 @@ exact0
 current authority stop:
 RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATED_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_OPERATIONAL_ADMISSION_V2_ISSUED_POSTVERIFIED_EVENT1_CONNECTION_NOT_AUTHORIZED_AUTHORITY_STOP
 ```
+
+## 2026-07-30 Recovery Epoch003 OA v2 direct Event1 source-identity reconciliation
+
+### Authority
+
+Mash approved only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POSTVERIFIED_OPERATIONAL_ADMISSION_V2_TO_DISTINCT_CANDIDATE_ALLOCATION_AND_SEQUENCE_EVENT1_SOURCE_BASELINE_LOCK_CONNECTION_AUTHORITY_SCHEMA_DISPATCH_AND_PARENT_PHASE3_EVIDENCE_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+Fixed entry:
+
+```text
+Cocolon commit / tree:
+6f87ede3a2d56c8eb1297d00b79680072f0beb74
+13be1ca9314f34482264961bba34f898a5b61161
+
+mashos-api commit / tree:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+```
+
+Both repositories were clean and matched `origin/main`.  The Event1 path
+was absent, Candidate exact0, and source baseline `UNLOCKED`.
+
+### Current evidence and source gap
+
+The postverified evidence remains:
+
+```text
+Reference external identity:
+190cb3cf0749cf8fcdd9ddc9fdfdd8e47dffb03e35a74c74472e788bab204864
+
+OperationalAdmission v2 external identity:
+80af08a59a37eacdcb38e2c1004e01dcf85e26fac11f75a56e8adb79d92abcd8
+
+final-issuance receipt external identity:
+2c52bb50256bdf4c9bf456f33925f4bc868ecbef3001032f08290853f2f73c94
+```
+
+OA v2 binds mashos-api `97e8dd4d... / cd3fc3da...`, source closure
+`80e18e...`, bootstrap closure `a6c19b...`, and formal-owner exact7 hash
+`43e641...`.  Its scope has `next_authority_token=null` and
+`operation_set=["OPERATIONAL_ADMISSION_PUBLICATION"]`.  Its invalidation
+exact5 includes:
+
+```text
+SOURCE_COMMIT_OR_TREE_DRIFTED_OR_WORKTREE_NOT_CLEAN
+```
+
+Actual source inspection found:
+
+- current Event1 owner validation is OA v1-specific;
+- independent nested Event1 validation is OA v1-specific;
+- `_RECOVERY_EPOCH003_V2_EVENT1_AUTHORITY` is `None`;
+- v2 parent accepts completed phases exact1/2 only; and
+- v2 parent phase3 is not implemented.
+
+The minimum hypothetical production exact3 are:
+
+```text
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+```
+
+Ordered-path SHA-256:
+
+```text
+e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248
+```
+
+All exact3 are members of the OA-bound formal-owner exact7.  D1 test
+publication alone would also advance the fixed source commit/tree.
+
+### Source-identity paradox
+
+```text
+OA v2 binds source S0
+→ Event1 v2 connection is absent from S0
+→ D1 or D2 produces source S1
+→ S1 differs from S0
+→ OA v2 source-drift invalidation becomes true
+→ OA v2 cannot grant Event1 credit to S1
+```
+
+The Event1 exact23 binds one source/bootstrap closure, including its
+formal-owner identities.  It has no second provenance lane that can retain
+S0 as the Event1 subject and separately bind an S1 validator executor.
+Dual-root execution is therefore diagnostic-only and grants no current
+credit.
+
+The explicit owner/independent roots require matching HEAD/tree, fresh
+`origin/main`, clean state, and anonymous HTTPS origin.  Stale
+remote-tracking refs, local ref repoint, detached old checkout, synthetic
+repository, or hidden fallback cannot satisfy the current evidence
+boundary.
+
+The Epoch003 P0 Parent Addendum section 5.7 requires Event1-time freshness
+revalidation and forbids a stale admission from being overwritten,
+reissued under the same epoch, or reused.  Recovery requires explicit
+invalidation/new-epoch authority.
+
+### Reconciled route
+
+```text
+direct same-OA v2 Event1 connection:
+UNREACHABLE_UNDER_CURRENT_SOURCE_IDENTITY_AND_FRESHNESS_CONTRACT
+
+current OA v2:
+RETAINED_IMMUTABLE_UNCONSUMED
+
+same-Epoch003 successor/retry:
+NOT_ALLOWED
+
+required next authority class:
+RECOVERY_EPOCH003_INVALIDATION_AND_RECOVERY_EPOCH004_P0_PARENT_DESIGN_READ_ONLY
+```
+
+Recovery Epoch004 is not started.  A future parent design must place the
+Event1 schema-dispatch and parent-phase3 implementation before issuing a
+new Reference and admission that bind the new source.  Epoch003 Reference,
+OA v2, and their identities remain immutable historical evidence.
+
+The intended future semantic boundary remains:
+
+- Candidate nested exact9, standalone publication exact0;
+- Event1 body-free exact23 unless a future design proves a versioned
+  change necessary;
+- one source/bootstrap closure whose owner and independent validators
+  execute from the same bound source;
+- Reference plus admission supporting exact2;
+- Event1 changed path exact1;
+- source lock only after Event1 postfetch verification;
+- parent phase3 artifact exact1, runtime record exact0; and
+- no automatic move to runtime/preflight.
+
+### Published Design evidence
+
+Design:
+
+```text
+commit / tree:
+794a8e2605e9627de0065ca2835270ebdcc1dfc7
+d2eb5ae74d8ef88cfb39dd658eba8e66b9e19fa1
+
+blob / raw / bytes:
+d2da870c669dbd1d1050e81a032e213a318f82bd
+d6cac997800a3ee59a8d42950d1ba3583ea1f227dbc00f1e7b7a57c74e141829
+26712
+```
+
+Receipt:
+
+```text
+commit / tree:
+d2062da3b003a9db82dbefbf2f160b1c737e676a
+226ab5151c044266afd8675b264648d54045f24c
+
+blob / raw / logical / external:
+6c9c3aea971280e4ef7832239bb9858f5ca4d159
+75a3ce59c9a94ec8dae84e705dae4f96b45912073d5ec220d08a834d7afe0674
+c14fe8593832499511d1930b8d04adab6fce1c7f24c829db0e7469db5b137e35
+e4824473b41a04cace6b988271c03e3c8d3cde1b71b6dfef0699c4514a35523b
+```
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: OA v2 still matches the fixed source at this Design entry;
+the source has not already drifted.  The v2 Event1 connection is absent,
+and implementing or freezing it in mashos-api would move that bound
+source.
+
+Inference: direct Event1 progression is structurally unreachable because
+the necessary implementation invalidates its own admission input.
+
+Karen's opinion: preserving the issued evidence is more important than
+making selected validators pass via a split execution provenance.  The
+correct route is to retain Epoch003 as immutable pre-Event1 history and
+design Recovery Epoch004 around a source that already contains the needed
+connection.
+
+### Effect boundary and stop
+
+```text
+mashos-api production / test changes:
+0 / 0
+
+test collect / execution / pytest.main:
+0 / 0 / false
+
+Reference / OA rewrite, reissue, new publication:
+0 / 0 / 0
+
+Candidate / Event1:
+0 / 0
+
+source baseline:
+UNLOCKED
+
+operational runtime / Readiness / Failure:
+0 / 0 / 0
+
+Reservation / Attempt / formal exact134:
+0 / 0 / 0
+
+Recovery Epoch003 invalidation issued:
+false
+
+Recovery Epoch004 started:
+false
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH003_POSTVERIFIED_OPERATIONAL_ADMISSION_V2_DIRECT_EVENT1_CONNECTION_SOURCE_IDENTITY_UNREACHABLE_CURRENT_OA_V2_RETAINED_IMMUTABLE_RECOVERY_EPOCH004_PARENT_DESIGN_REQUIRED_CAUSAL_RED_NOT_AUTHORIZED_CANDIDATE_EVENT1_NOT_ISSUED_SOURCE_BASELINE_UNLOCKED_AUTHORITY_STOP
+```
+
+No D1, implementation, Event1, invalidation, or Recovery Epoch004 token
+was issued.  The next step requires separate Mash approval.
