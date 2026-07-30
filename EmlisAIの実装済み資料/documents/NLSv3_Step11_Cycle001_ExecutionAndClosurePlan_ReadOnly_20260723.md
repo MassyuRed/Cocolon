@@ -9081,3 +9081,221 @@ RECOVERY_EPOCH003_POSTVERIFIED_OPERATIONAL_ADMISSION_V2_DIRECT_EVENT1_CONNECTION
 
 No D1, implementation, Event1, invalidation, or Recovery Epoch004 token
 was issued.  The next step requires separate Mash approval.
+
+## 2026-07-30 Recovery Epoch003 prestart D2 identity-preimage and partial Epoch004 P0 disposition reconciliation
+
+### Authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_SELF_HASH_AND_EXTERNAL_IDENTITY_PREIMAGE_CONTRACT_MISMATCH_DOWNSTREAM_ACTIVE_CREDIT_IMPACT_AND_PARTIAL_RECOVERY_EPOCH004_P0_PUBLICATION_DISPOSITION_CONTRACT_RECONCILIATION_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+This authority was design-only.  It did not change mashos-api, run or
+collect pytest, materialize a runtime, rewrite an existing artifact,
+allocate Candidate/Event1, lock the baseline, create
+Readiness/Failure/Reservation/Attempt, invoke formal exact134, or enter a
+later gate.
+
+### Confirmed current entry
+
+```text
+Cocolon clean local HEAD / tree:
+1942156b9f14967a1c7eb3ab9eff14960a08bb0d
+88dd394fa71e64ea353cb25e97c234353d445b6e
+
+connected GitHub app observed Cocolon main:
+1942156b9f14967a1c7eb3ab9eff14960a08bb0d
+
+mashos-api fixed clean HEAD / tree / origin-main:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+
+Epoch003 Event1:
+ABSENT
+
+Candidate / source baseline:
+exact0 / UNLOCKED
+```
+
+The Cocolon materialization's stale remote-tracking `origin/main` was not
+used for current credit.  Current GitHub main was observed through the
+connected app and matched the clean local HEAD/tree.
+
+### D2 self-preimage mismatch
+
+Prestart D2 receipt actual publication:
+
+```text
+commit / tree / blob:
+15b38f2db38359bd88ecd3e0a8d8c3ed36a16156
+b47fc75be54e9649f2b12f4e45a5b2590b34e584
+119b79321c1ad0420d4b1aea79ed10c70c399ed1
+
+raw SHA-256 / bytes:
+e0cbd49b6c1e041608a7dcc9a7ddbb4cf7111e57361af0bf9053ff370b70a7ac
+4139
+```
+
+The bytes are canonical sorted compact JSON plus exactly one LF.  The
+declared identities reproduce only when the self field is retained with
+an empty string:
+
+```text
+declared / empty-self logical:
+0160be7034f29ae3dcc3d0ddd6d3d92741a0bfa984e98417ca324d078ba70118
+
+declared / empty-self external:
+97f62f881ac8035bb8fcba15d153ca38637bc659196a74f5f0f0e4849a4686c6
+```
+
+Frozen design and actual source delete the self field before hashing.
+Independent delete-self diagnostics are:
+
+```text
+receipt logical:
+b93940c6c8d98f9627f366b4ae957a8b0953d30ff2d9f44c8209560cc72d4f00
+
+published exact10 with the published logical value:
+8cd628fdd881803def2699edad56806b91357897779623f44c6721c69e3165e3
+```
+
+The diagnostics are not new identities.  Existing bytes remain immutable
+history; declared logical/external identities and D2 contract credit are
+non-credit.
+
+### Downstream active-credit impact
+
+The final-issuance fixed entry directly binds `97f62f...`.  Its own
+receipt self/external identity remains mathematically reproducible, but
+contract-valid causal issuance credit is not established.
+
+Reference and OA v2 do not directly contain `97f62f...`; OA predecessor
+exact8 also excludes the prestart D2 receipt.  Their body/logical/external
+identity mathematics remain valid.  They are not declared false or
+revoked.  Their active Reference/admission credit is nevertheless not
+established through the broken final-issuance prerequisite.
+
+```text
+final issuance:
+2c52bb50256bdf4c9bf456f33925f4bc868ecbef3001032f08290853f2f73c94
+IMMUTABLE_HISTORICAL_CAUSAL_ISSUANCE_CREDIT_NOT_ESTABLISHED
+
+Reference:
+190cb3cf0749cf8fcdd9ddc9fdfdd8e47dffb03e35a74c74472e788bab204864
+IMMUTABLE_HISTORICAL_ACTIVE_REFERENCE_CREDIT_NOT_ESTABLISHED
+
+OperationalAdmission v2:
+80af08a59a37eacdcb38e2c1004e01dcf85e26fac11f75a56e8adb79d92abcd8
+IMMUTABLE_HISTORICAL_ACTIVE_ADMISSION_CREDIT_NOT_ESTABLISHED
+
+source reconciliation:
+2931b88a4c62a0bd12ffa5ec5043dc740b821750635d5bfa0377bd80e80ee173
+IMMUTABLE_HISTORICAL_ACTIVE_RECONCILIATION_CREDIT_NOT_ESTABLISHED
+```
+
+### Partial Recovery Epoch004 P0
+
+The old authority published only its Parent Design, receipt, and Handoff.
+Aggregate changed-path count was exact3; its own effectiveness rule
+required exact5 including this Plan and the latest snapshot.
+
+The partial receipt self-hash `dc553491...` and mathematical exact2 P0
+identity `e6659e9366b2c03b0ceef16bf2e0f8604d5e11226bbfd3fb1b070f9ab8bcac6a`
+reproduce.  The exact16 row's literal disposition is
+`IMMUTABLE_HISTORICAL_NOT_ACTIVE_EXECUTION_CREDIT`, but the receipt treats
+the D2 `0160be... / 97f62f...` values as verified and reports
+`identity_state_issue_count=0` and `blocker_count=0`.
+
+Correct disposition:
+
+```text
+partial exact3:
+IMMUTABLE_PUBLISHED_PARTIAL_INCOMPLETE_NON_CREDIT
+
+e6659e...:
+MATHEMATICAL_HISTORICAL_OBJECT_NOT_CURRENT_P0_IDENTITY
+
+Recovery Epoch004 P0:
+NOT_ESTABLISHED
+
+Recovery Epoch004:
+NOT_STARTED
+
+old embedded D1 token:
+HISTORICAL_LITERAL_NON_CREDIT_NOT_ISSUED_NOT_CURRENT_NEXT_AUTHORITY
+```
+
+The partial exact3 is not modified or retroactively completed.
+
+### Reconciliation Design and receipt
+
+Publication anchor:
+
+```text
+commit / tree / parent:
+ae3a90d50d2411cc548008c58a21b345ebfc9a29
+f766faac8163b410c7d5270745dbca75ec2b8aa5
+1942156b9f14967a1c7eb3ab9eff14960a08bb0d
+```
+
+Design:
+
+```text
+blob / raw / bytes:
+00fcf95d97cb1e994d2a98c4acdf15f2c9790d7d
+bc0bdd6e134517e90f82a9012de418f6d6c06498a3b29cf94dab7347fe02f985
+29159
+```
+
+Receipt:
+
+```text
+blob / raw / logical / external:
+71798663e56d77e4b092dd5efd6d8999fb9fd81e
+8ee1149049dc3f37d974baf707fff784848c6105de0ab7557853bc09b327716a
+b8a8789988b57961ccfc8edb84e8612ed38b5205153da651fc3886e4ca5ebf24
+c9eb76e54e6d956e9f082f46fdaf71abe6068a33a379fcb3c4b6c3c267542649
+```
+
+The receipt uses delete-self canonical JSON with no LF for both its
+logical and strict exact10 external identities.
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: D2 declared hashes are empty-self hashes while the
+normative and actual-source contract is delete-self.  final issuance
+directly binds the affected D2 external identity.  Reference/OA intrinsic
+identities remain mathematically valid.  The old P0 publication is exact3,
+not its required exact5.
+
+Actual-source-derived inference: downstream self-consistency cannot cure
+an invalid authority predecessor.  Therefore active final-issuance,
+Reference/OA, reconciliation, and successor-P0 credit is not established
+even though their exact historical bytes remain identifiable.
+
+Karen's opinion: keep every historical byte and identity claim visible,
+but do not reinterpret diagnostics as corrected identities and do not
+complete the partial P0 after the fact.  A distinct additive corrective
+P0 must incorporate this disposition from its first complete
+publication.
+
+### Exactly one next authority and stop
+
+```text
+next authority token:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_ADDITIVE_CORRECTIVE_P0_PARENT_DESIGN_AFTER_EPOCH003_PRESTART_D2_RECEIPT_IDENTITY_PREIMAGE_CONTRACT_MISMATCH_AND_PARTIAL_P0_NON_CREDIT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+No use is allowed without separate Mash approval.
+
+```text
+current authority stop:
+RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_DELETE_SELF_CONTRACT_MISMATCH_RECORDED_DECLARED_EMPTY_SELF_IDENTITIES_IMMUTABLE_NON_CREDIT_FINAL_ISSUANCE_REFERENCE_OPERATIONAL_ADMISSION_V2_AND_RECONCILIATION_IMMUTABLE_HISTORICAL_ACTIVE_EXECUTION_CREDIT_NOT_ESTABLISHED_RECOVERY_EPOCH004_PARTIAL_P0_EXACT3_IMMUTABLE_NON_CREDIT_P0_NOT_ESTABLISHED_NOT_STARTED_SOURCE_BASELINE_UNLOCKED_CANDIDATE_UNALLOCATED_EVENT1_NOT_CREATED_CORRECTIVE_P0_NOT_AUTHORIZED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
