@@ -28645,3 +28645,186 @@ exact0
 current authority stop:
 RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATED_FINAL_PRE_EVENT1_REFERENCE_RUNTIME_OBSERVATION_AND_OPERATIONAL_ADMISSION_V2_ISSUED_POSTVERIFIED_EVENT1_CONNECTION_NOT_AUTHORIZED_AUTHORITY_STOP
 ```
+
+## 2026-07-30 Recovery Epoch003 OA v2 direct Event1 source-identity reconciliation
+
+### Authority and fixed entry
+
+```text
+approved authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_POSTVERIFIED_OPERATIONAL_ADMISSION_V2_TO_DISTINCT_CANDIDATE_ALLOCATION_AND_SEQUENCE_EVENT1_SOURCE_BASELINE_LOCK_CONNECTION_AUTHORITY_SCHEMA_DISPATCH_AND_PARENT_PHASE3_EVIDENCE_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+
+Cocolon commit / tree:
+6f87ede3a2d56c8eb1297d00b79680072f0beb74
+13be1ca9314f34482264961bba34f898a5b61161
+
+mashos-api commit / tree:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+```
+
+Both fixed repositories were clean and equal to `origin/main`.  The
+Event1 path was absent.  Candidate exact0 and source baseline `UNLOCKED`
+were preserved.
+
+### Confirmed identities
+
+```text
+Reference external identity:
+190cb3cf0749cf8fcdd9ddc9fdfdd8e47dffb03e35a74c74472e788bab204864
+
+OperationalAdmission v2 external identity:
+80af08a59a37eacdcb38e2c1004e01dcf85e26fac11f75a56e8adb79d92abcd8
+
+final-issuance receipt external identity:
+2c52bb50256bdf4c9bf456f33925f4bc868ecbef3001032f08290853f2f73c94
+
+source / bootstrap closure:
+80e18e75604c72c78701384f127839aee1ef152a7788622d2824e8678137fe97
+a6c19b645fede8d9a508235e63babd7299d96194d88b5f7aeb3b7a7feedae571
+
+formal-owner exact7:
+43e6414e81cdc74fbfad73bb4992988f982c6114d6807150dd13c8f338833ffe
+```
+
+OA v2 binds mashos-api `97e8dd4d... / cd3fc3da...`, has
+`next_authority_token=null`, limits its operation set to its own
+publication, and invalidates on source commit/tree drift.
+
+### Actual source result
+
+The current source contains the v2 OperationalAdmission builder/verifier
+but not a v2 Event1 connection:
+
+- Event1 owner authority validation remains OA v1-specific;
+- independent nested Event1 validation remains OA v1-specific;
+- `_RECOVERY_EPOCH003_V2_EVENT1_AUTHORITY` is `None`; and
+- v2 parent phase evidence accepts phase exact1/2 only.
+
+The minimum hypothetical production exact3 are:
+
+```text
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+```
+
+All exact3 are members of the admission-bound formal-owner exact7.
+Publishing a D1 test would also advance the fixed source commit/tree.
+
+### Design conclusion
+
+```text
+OA v2 binds S0
+→ v2 Event1 connection is absent from S0
+→ D1 or D2 creates S1
+→ S1 differs from S0
+→ OA v2 source-drift invalidation becomes true
+→ OA v2 cannot grant Event1 credit to S1
+```
+
+The Event1 exact23 binds one source/bootstrap closure and the
+formal-owner identities inside it.  It cannot simultaneously keep S0 as
+the subject and bind a distinct S1 validator executor.  Dual-root
+execution, stale `origin/main`, local ref repoint, detached historical
+checkout, synthetic repository, OA rewrite/reissue, or freshness weakening
+is non-credit.
+
+The Epoch003 P0 Parent Addendum requires Event1-time freshness checks and
+forbids stale admission overwrite, same-epoch reissue, or reuse.  Recovery
+requires explicit invalidation/new-epoch authority.
+
+The reconciled result is:
+
+```text
+direct same-OA v2 Event1 connection:
+UNREACHABLE_UNDER_CURRENT_SOURCE_IDENTITY_AND_FRESHNESS_CONTRACT
+
+current OA v2:
+RETAINED_IMMUTABLE_UNCONSUMED
+
+same-Epoch003 retry/successor:
+NOT_ALLOWED
+
+required next authority class:
+RECOVERY_EPOCH003_INVALIDATION_AND_RECOVERY_EPOCH004_P0_PARENT_DESIGN_READ_ONLY
+```
+
+This Design did not claim current source drift and did not issue
+invalidation.  Recovery Epoch004 has not started.
+
+### Published Design and receipt
+
+```text
+Design commit / tree:
+794a8e2605e9627de0065ca2835270ebdcc1dfc7
+d2eb5ae74d8ef88cfb39dd658eba8e66b9e19fa1
+
+Design blob / raw / bytes:
+d2da870c669dbd1d1050e81a032e213a318f82bd
+d6cac997800a3ee59a8d42950d1ba3583ea1f227dbc00f1e7b7a57c74e141829
+26712
+
+Receipt commit / tree:
+d2062da3b003a9db82dbefbf2f160b1c737e676a
+226ab5151c044266afd8675b264648d54045f24c
+
+Receipt blob / raw / logical / external:
+6c9c3aea971280e4ef7832239bb9858f5ca4d159
+75a3ce59c9a94ec8dae84e705dae4f96b45912073d5ec220d08a834d7afe0674
+c14fe8593832499511d1930b8d04adab6fce1c7f24c829db0e7469db5b137e35
+e4824473b41a04cace6b988271c03e3c8d3cde1b71b6dfef0699c4514a35523b
+```
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: the source still matched OA v2 at entry, while the v2
+Event1 connection was absent and required changes inside the bound source.
+
+Inference: implementing that connection would invalidate its own admission
+input before Event1, so the direct route is structurally unreachable.
+
+Karen's opinion: the issued Epoch003 evidence should remain immutable
+pre-Event1 history.  The safe route is a new recovery epoch whose source
+already includes the connection before its new Reference and admission are
+issued.
+
+### Effect and stop
+
+```text
+mashos-api production / test changes:
+0 / 0
+
+test collect / execution / pytest.main:
+0 / 0 / false
+
+Reference / OA rewrite or reissue:
+0 / 0
+
+Candidate / Event1:
+0 / 0
+
+source baseline:
+UNLOCKED
+
+runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0 / 0 / 0
+
+Recovery Epoch003 invalidation issued:
+false
+
+Recovery Epoch004 started:
+false
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH003_POSTVERIFIED_OPERATIONAL_ADMISSION_V2_DIRECT_EVENT1_CONNECTION_SOURCE_IDENTITY_UNREACHABLE_CURRENT_OA_V2_RETAINED_IMMUTABLE_RECOVERY_EPOCH004_PARENT_DESIGN_REQUIRED_CAUSAL_RED_NOT_AUTHORIZED_CANDIDATE_EVENT1_NOT_ISSUED_SOURCE_BASELINE_UNLOCKED_AUTHORITY_STOP
+```
+
+No D1, implementation, Event1, invalidation, or Recovery Epoch004 token
+was issued.
