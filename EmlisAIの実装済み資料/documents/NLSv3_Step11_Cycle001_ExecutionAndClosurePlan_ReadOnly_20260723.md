@@ -9299,3 +9299,302 @@ No use is allowed without separate Mash approval.
 current authority stop:
 RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_DELETE_SELF_CONTRACT_MISMATCH_RECORDED_DECLARED_EMPTY_SELF_IDENTITIES_IMMUTABLE_NON_CREDIT_FINAL_ISSUANCE_REFERENCE_OPERATIONAL_ADMISSION_V2_AND_RECONCILIATION_IMMUTABLE_HISTORICAL_ACTIVE_EXECUTION_CREDIT_NOT_ESTABLISHED_RECOVERY_EPOCH004_PARTIAL_P0_EXACT3_IMMUTABLE_NON_CREDIT_P0_NOT_ESTABLISHED_NOT_STARTED_SOURCE_BASELINE_UNLOCKED_CANDIDATE_UNALLOCATED_EVENT1_NOT_CREATED_CORRECTIVE_P0_NOT_AUTHORIZED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
 ```
+
+## 2026-07-30 Recovery Epoch004 additive corrective P0 Parent Design
+
+### Authority and complete-publication condition
+
+Mash approved only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_ADDITIVE_CORRECTIVE_P0_PARENT_DESIGN_AFTER_EPOCH003_PRESTART_D2_RECEIPT_IDENTITY_PREIMAGE_CONTRACT_MISMATCH_AND_PARTIAL_P0_NON_CREDIT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+This is a distinct additive corrective P0.  It does not alter or complete
+the old partial exact3.  It becomes effective only when the approved NEW
+exact3 and MODIFY exact2 are all reachable on Cocolon main, exact-byte
+postfetch verified, Karen's aggregate unique changed-path set is exact5,
+and GitHub latest contains all five results.
+
+P0 defines only the future execution contract and source boundary.  This
+authority performs no D1/D2 test or implementation, no final
+Reference/OperationalAdmission issuance, no Candidate/Event1, no runtime,
+no baseline lock, and no later evidence.
+
+### Fresh fixed entries
+
+```text
+Cocolon anchor commit / tree:
+ef26b94bdfc365138a3501f169746e7d618b0c4d
+9e4fb43d4ea814cd1421426bccba395743ba9d61
+
+mashos-api fixed commit / tree:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+
+entry origin-main equality / clean:
+true / true
+```
+
+The current reconciliation exact5 and all immutable predecessor paths
+matched their publication bytes.  All corrective NEW paths were absent;
+the Plan and snapshot MODIFY baselines were unchanged.  Candidate,
+Event1, source lock, runtime, Readiness, Failure, Reservation, Attempt,
+and formal exact134 evidence remained absent.  No listed stop condition
+was observed.
+
+### D2 and historical disposition
+
+Prestart D2 actual Git evidence:
+
+```text
+commit / tree / blob / raw:
+15b38f2db38359bd88ecd3e0a8d8c3ed36a16156
+b47fc75be54e9649f2b12f4e45a5b2590b34e584
+119b79321c1ad0420d4b1aea79ed10c70c399ed1
+e0cbd49b6c1e041608a7dcc9a7ddbb4cf7111e57361af0bf9053ff370b70a7ac
+
+bytes / CR / trailing LF:
+4139 / 0 / exact1
+```
+
+Its complete bytes are canonical sorted compact JSON plus one LF.  The
+declared identities reproduce only by retaining the self field as an
+empty string:
+
+```text
+declared empty-self logical / external:
+0160be7034f29ae3dcc3d0ddd6d3d92741a0bfa984e98417ca324d078ba70118
+97f62f881ac8035bb8fcba15d153ca38637bc659196a74f5f0f0e4849a4686c6
+
+normative delete-self diagnostics:
+b93940c6c8d98f9627f366b4ae957a8b0953d30ff2d9f44c8209560cc72d4f00
+8cd628fdd881803def2699edad56806b91357897779623f44c6721c69e3165e3
+```
+
+The bytes remain immutable historical; declared values are non-credit;
+diagnostics are not promoted.
+
+Historical downstream identities remain:
+
+```text
+final issuance:
+2c52bb50256bdf4c9bf456f33925f4bc868ecbef3001032f08290853f2f73c94
+
+Reference:
+190cb3cf0749cf8fcdd9ddc9fdfdd8e47dffb03e35a74c74472e788bab204864
+
+OperationalAdmission v2:
+80af08a59a37eacdcb38e2c1004e01dcf85e26fac11f75a56e8adb79d92abcd8
+
+source-identity reconciliation:
+2931b88a4c62a0bd12ffa5ec5043dc740b821750635d5bfa0377bd80e80ee173
+```
+
+Their exact bytes remain historical evidence, but active credit is not
+established through the non-credit D2 predecessor.  Reference/OA are not
+declared false, mashos-api is not declared drifted, and OA is not declared
+consumed.
+
+Independent recomputation clarified that source reconciliation
+`2931b8...` is the historical delete-self exact9 plus one LF external
+preimage object.  The current generic no-LF diagnostic is
+`da16062868effa4ec8c3325cd8d096cdf486eda266b3e707eeafc9a372630967`;
+it is not promoted.  Historical bytes and identity are unchanged.
+
+### Current corrective predecessor and old partial P0
+
+Current corrective disposition:
+
+```text
+reconciliation receipt blob / raw / logical / external:
+71798663e56d77e4b092dd5efd6d8999fb9fd81e
+8ee1149049dc3f37d974baf707fff784848c6105de0ab7557853bc09b327716a
+b8a8789988b57961ccfc8edb84e8612ed38b5205153da651fc3886e4ca5ebf24
+c9eb76e54e6d956e9f082f46fdaf71abe6068a33a379fcb3c4b6c3c267542649
+```
+
+`c9eb76...` is the typed predecessor of the additive corrective P0.
+
+Old partial P0:
+
+```text
+published changed paths:
+exact3
+
+frozen required paths:
+exact5
+
+mathematical historical object:
+e6659e9366b2c03b0ceef16bf2e0f8604d5e11226bbfd3fb1b070f9ab8bcac6a
+
+disposition:
+IMMUTABLE_PUBLISHED_PARTIAL_INCOMPLETE_NON_CREDIT
+```
+
+The exact3 and its embedded D1 literal were not changed, completed, or
+used.
+
+### Actual source and Event1 v2 gap
+
+mashos-api formal-owner exact7 remains:
+
+```text
+43e6414e81cdc74fbfad73bb4992988f982c6114d6807150dd13c8f338833ffe
+```
+
+Mandatory direct exact3:
+
+```text
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+```
+
+Owner and independent Event1 validation remain OA v1-specific.
+`_RECOVERY_EPOCH003_V2_EVENT1_AUTHORITY` is `None`; v2 parent evidence
+accepts phase exact1/2 only; parent phase3 is absent.  Current Event1 is
+exact23, Candidate is nested exact9, and the future D1 exact1 path is
+absent.  The independent verifier does not import/forward the owner
+validator.
+
+v1 OA exact16 and predecessor exact8 remain frozen:
+
+```text
+exact16 ordered-key SHA-256:
+965d297c7413c243cdebbc744f15334ca5eb0972801fd4254d443369f9caf66b
+
+exact8 ordered-key SHA-256:
+ea2dfb2bf3289209bf272ec460173fd5b9ae0429e4adc7c6f900ced4b44458d8
+```
+
+### Additive corrective P0 identities
+
+Parent Design:
+
+```text
+commit / tree / blob / raw:
+501d49daa93a1d0856aaecca30ad3cfda668fad4
+cc7cdd7d7bd1d72e7e907543dfd32f1cfd07e004
+e154e6556219be1d465ca06800cdc9655d69f89b
+5a053db1fd0707571dc492c124d01eba1382ac3a49929723f94f0a20aee59268
+```
+
+Body-free receipt:
+
+```text
+commit / tree / blob / raw:
+aaf94138088c8c67c2f8502c5da8e55bff783483
+afd062e12cead5407b097b663021c3f18e8bd982
+4c04d66c45e461be9d3d3351c9cb4ba39d337963
+ea8f2821285cde598252e35d5a2c88227069706502ec3a212a4c6a8f5d7c7e35
+
+delete-self logical:
+49d2ff073f75af360202685060f35c7bc01b2d0289e3c9856d7444d60b78eda4
+
+strict exact10 external:
+7c65c353a46c262cf00c224bceed4c6d162aba2a8994a59c3aeffe3cc3cf28e0
+```
+
+The receipt logical preimage deletes `receipt_sha256`; its publication
+external preimage deletes `identity_sha256`.  Both are canonical sorted
+compact UTF-8 with no LF.  Empty-self compatibility is forbidden.
+
+Strict exact6 P0:
+
+```json
+{"logical_cycle_id":"NLS_V3_CYCLE_001","p0_external_identity_sha256":"aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046","parent_design":{"git_blob_sha1":"e154e6556219be1d465ca06800cdc9655d69f89b","path":"EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_AdditiveCorrectiveP0_AfterEpoch003PrestartD2ReceiptIdentityPreimageContractMismatchAndPartialP0NonCredit_ParentDesign_ReadOnly_20260730.md","publication_commit_sha1":"501d49daa93a1d0856aaecca30ad3cfda668fad4","raw_sha256":"5a053db1fd0707571dc492c124d01eba1382ac3a49929723f94f0a20aee59268"},"receipt":{"git_blob_sha1":"4c04d66c45e461be9d3d3351c9cb4ba39d337963","logical_receipt_sha256":"49d2ff073f75af360202685060f35c7bc01b2d0289e3c9856d7444d60b78eda4","path":"EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_AdditiveCorrectiveP0_AfterEpoch003PrestartD2ReceiptIdentityPreimageContractMismatchAndPartialP0NonCredit_ParentDesign_ReadOnly_BodyFree_Receipt_20260730.json","publication_commit_sha1":"aaf94138088c8c67c2f8502c5da8e55bff783483","raw_sha256":"ea8f2821285cde598252e35d5a2c88227069706502ec3a212a4c6a8f5d7c7e35"},"recovery_epoch_id":"NLS_V3_CYCLE001_RECOVERY_EPOCH_004","schema_version":"cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.additive_corrective_p0_external_identity.v1"}
+```
+
+P0 external identity:
+
+```text
+aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046
+```
+
+It is distinct from `e6659e...`.
+
+### Frozen future order and roles
+
+```text
+corrective Recovery Epoch004 P0
+-> separate D1 causal RED
+-> separate D2 implementation and targeted GREEN
+-> final D2-complete-source-bound Reference / OperationalAdmission
+-> distinct Candidate nested in Event1 / Event1 postverification
+-> post-Event1 operational runtime and preflight
+-> observation plus exactly one matching Readiness or Failure
+-> one-shot Reservation after Readiness only
+-> runner-owned Attempt / formal exact134 at most once
+-> later terminal and acceptance gates under further authorities
+```
+
+P0 defines the future boundary only.  D1 freezes RED; D2 implements only
+that contract.  Reference/OA bind the D2-complete final source.  Candidate
+is distinct and nested in Event1; Event1 consumes OA exactly once.
+Baseline locks after independent Event1 postfetch only.  Parent phase3
+reconstructs actual evidence and fails closed.  Runtime follows Event1;
+Readiness/Failure is exactly one; Reservation follows Readiness only;
+Attempt is runner-owned; formal exact134 is at most once.
+
+Event1 v2 must dispatch owner and independent schemas versionedly, reject
+unknown/mixed/v2-to-v1 fallback, bind source subject and both executors to
+the same actual Git root/HEAD/tree and module/blob/raw identities, and
+forbid the independent lane from trusting the owner validator.
+
+Future D1 exact1:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py
+```
+
+It was not created, collected, or executed.
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: D2 declared hashes are empty-self hashes; the normative
+source uses delete-self.  final issuance directly binds the affected
+external identity.  Old P0 is exact3.  Source remains fixed, and Event1 v2
+connection and all post-P0 evidence remain absent.
+
+Actual-source-derived inference: downstream self-consistency cannot repair
+the broken predecessor; the old exact3 cannot be completed after the fact.
+A distinct complete P0 that binds current `c9eb76...` is required.
+
+Karen's opinion: preserve all historical bytes and make the failed causal
+edge visible.  The corrective P0 is a source boundary, not execution
+progress.  D1 should remain inactive until Mash separately approves it.
+
+### State, next authority, and stop
+
+```text
+Recovery Epoch003 active execution credit:
+NOT_ESTABLISHED
+
+Recovery Epoch004:
+DEFINED_NOT_STARTED
+
+source baseline:
+UNLOCKED
+
+Candidate / Event1:
+UNALLOCATED_DISTINCT_FROM_ALL_PRIOR_CANDIDATES / NOT_CREATED
+
+runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0 / 0 / 0
+
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_ADDITIVE_CORRECTIVE_P0_POSTVERIFIED_D1_OPERATIONAL_ADMISSION_V2_EVENT1_CONNECTION_OWNER_INDEPENDENT_SCHEMA_DISPATCH_ACTUAL_GIT_SOURCE_SUBJECT_OWNER_EXECUTOR_INDEPENDENT_EXECUTOR_IDENTITY_PARENT_PHASE3_EVIDENCE_AND_V1_EXACT16_EXACT8_INVARIANCE_CAUSAL_RED_FREEZE_ONLY
+
+next authority state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_DELETE_SELF_CONTRACT_MISMATCH_RECORDED_DECLARED_EMPTY_SELF_IDENTITIES_IMMUTABLE_NON_CREDIT_FINAL_ISSUANCE_REFERENCE_OPERATIONAL_ADMISSION_V2_AND_RECONCILIATION_IMMUTABLE_HISTORICAL_ACTIVE_EXECUTION_CREDIT_NOT_ESTABLISHED_RECOVERY_EPOCH004_PARTIAL_P0_EXACT3_IMMUTABLE_NON_CREDIT_ADDITIVE_CORRECTIVE_P0_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_SOURCE_BASELINE_UNLOCKED_CANDIDATE_UNALLOCATED_EVENT1_NOT_CREATED_D1_CAUSAL_RED_NOT_AUTHORIZED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No D1, D2, final issuance, Candidate/Event1, runtime, or later authority
+was executed.

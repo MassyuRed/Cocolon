@@ -29017,3 +29017,326 @@ RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_DELETE_SELF_CONTRACT_MISMATCH_RECORDED_DEC
 
 No corrective P0, D1, D2, final issuance, Candidate/Event1, runtime, or
 later authority was executed.
+
+## 2026-07-30 Recovery Epoch004 additive corrective P0 Parent Design
+
+### Approved boundary
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_ADDITIVE_CORRECTIVE_P0_PARENT_DESIGN_AFTER_EPOCH003_PRESTART_D2_RECEIPT_IDENTITY_PREIMAGE_CONTRACT_MISMATCH_AND_PARTIAL_P0_NON_CREDIT_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+
+authorized Cocolon scope:
+NEW exact3 / MODIFY exact2
+
+mashos-api change:
+exact0
+
+pytest collect / execution / pytest.main:
+exact0 / exact0 / false
+
+automatic progression:
+false
+```
+
+The complete checkpoint requires all approved exact5 on Cocolon main,
+exact-byte postfetch verification, aggregate unique changed-path exact5
+for Karen's write commits, and latest containment.  Partial publication
+has no credit.  The old partial P0 exact3 is not completed or modified.
+
+GitHub transport follows only
+`11_cocolon_github_transport_and_session_continuity.md` section
+`CURRENT_NORMATIVE_CONTRACT`.
+
+### Fresh entry and stop checks
+
+```text
+Cocolon anchor commit / tree:
+ef26b94bdfc365138a3501f169746e7d618b0c4d
+9e4fb43d4ea814cd1421426bccba395743ba9d61
+
+mashos-api fixed commit / tree:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+
+origin-main equality / clean:
+true / true
+```
+
+The current reconciliation exact5, immutable predecessors, and old exact3
+matched their publication bytes.  Corrective NEW exact3 were absent and
+MODIFY exact2 matched current blobs.  Candidate, Event1, source lock,
+runtime, Readiness, Failure, Reservation, Attempt, and formal exact134
+were absent.  No listed stop condition was found.
+
+Three read-only subagent lanes checked governance, Cocolon
+artifact/history/identity, and mashos-api source/AST/import/call graph.
+They performed no edit, pytest, commit, or GitHub write.  Karen rechecked
+the primary evidence and retained final judgment and every write.
+
+### D2 identity-preimage fact
+
+Actual D2 receipt:
+
+```text
+publication commit / tree / blob / raw:
+15b38f2db38359bd88ecd3e0a8d8c3ed36a16156
+b47fc75be54e9649f2b12f4e45a5b2590b34e584
+119b79321c1ad0420d4b1aea79ed10c70c399ed1
+e0cbd49b6c1e041608a7dcc9a7ddbb4cf7111e57361af0bf9053ff370b70a7ac
+
+bytes / CR / trailing LF:
+4139 / 0 / exact1
+```
+
+The bytes are canonical sorted compact JSON plus one publication LF.
+Declared identities reproduce only with empty-self:
+
+```text
+declared logical / external:
+0160be7034f29ae3dcc3d0ddd6d3d92741a0bfa984e98417ca324d078ba70118
+97f62f881ac8035bb8fcba15d153ca38637bc659196a74f5f0f0e4849a4686c6
+
+delete-self diagnostics:
+b93940c6c8d98f9627f366b4ae957a8b0953d30ff2d9f44c8209560cc72d4f00
+8cd628fdd881803def2699edad56806b91357897779623f44c6721c69e3165e3
+```
+
+The actual source contract deletes the self field and contains no
+empty-self compatibility lane.  D2 bytes are immutable historical,
+declared values are non-credit, and diagnostics are not promoted.
+
+### Downstream and old P0 disposition
+
+```text
+final issuance:
+2c52bb50256bdf4c9bf456f33925f4bc868ecbef3001032f08290853f2f73c94
+
+Reference:
+190cb3cf0749cf8fcdd9ddc9fdfdd8e47dffb03e35a74c74472e788bab204864
+
+OperationalAdmission v2:
+80af08a59a37eacdcb38e2c1004e01dcf85e26fac11f75a56e8adb79d92abcd8
+
+source-identity reconciliation:
+2931b88a4c62a0bd12ffa5ec5043dc740b821750635d5bfa0377bd80e80ee173
+```
+
+Each retains immutable historical bytes and mathematical identity.
+Active credit through final issuance is not established.  Reference/OA
+bytes are not declared false, mashos-api is not declared drifted, and OA
+is not declared consumed.
+
+Source reconciliation `2931...` is specifically the historical
+delete-self exact9 plus exact1 LF preimage value.  Its current generic
+no-LF diagnostic is
+`da16062868effa4ec8c3325cd8d096cdf486eda266b3e707eeafc9a372630967`;
+the diagnostic is not promoted and no historical value is changed.
+
+Old partial P0:
+
+```text
+actual aggregate paths / required paths:
+exact3 / exact5
+
+mathematical historical object:
+e6659e9366b2c03b0ceef16bf2e0f8604d5e11226bbfd3fb1b070f9ab8bcac6a
+
+disposition:
+IMMUTABLE_PUBLISHED_PARTIAL_INCOMPLETE_NON_CREDIT
+
+administrative transition:
+NOT_ESTABLISHED
+```
+
+### Current corrective predecessor
+
+```text
+current reconciliation receipt blob / raw:
+71798663e56d77e4b092dd5efd6d8999fb9fd81e
+8ee1149049dc3f37d974baf707fff784848c6105de0ab7557853bc09b327716a
+
+logical / external:
+b8a8789988b57961ccfc8edb84e8612ed38b5205153da651fc3886e4ca5ebf24
+c9eb76e54e6d956e9f082f46fdaf71abe6068a33a379fcb3c4b6c3c267542649
+```
+
+Both current reconciliation preimages use delete-self canonical sorted
+compact UTF-8 without LF.  `c9eb76...` is the typed corrective
+disposition evidence bound by the new P0.
+
+### Actual source boundary
+
+```text
+mashos-api fixed source:
+97e8dd4d7021b8a1781d534aaa603f71dffa41b9
+cd3fc3da0976bbbcb708319e4bc8cbbb6a73ec19
+
+formal-owner exact7:
+43e6414e81cdc74fbfad73bb4992988f982c6114d6807150dd13c8f338833ffe
+```
+
+Mandatory direct exact3:
+
+```text
+ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py
+ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py
+ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py
+```
+
+Owner and independent Event1 validators remain OA v1-specific;
+`_RECOVERY_EPOCH003_V2_EVENT1_AUTHORITY` is `None`; the v2 parent accepts
+phase exact1/2 only and has no phase3.  Current Event1 is exact23 and
+Candidate nested exact9.  The independent lane does not import or forward
+the owner validator.
+
+v1 OA exact16 / predecessor exact8 keyset hashes:
+
+```text
+965d297c7413c243cdebbc744f15334ca5eb0972801fd4254d443369f9caf66b
+ea2dfb2bf3289209bf272ec460173fd5b9ae0429e4adc7c6f900ced4b44458d8
+```
+
+Event1 v2 connection and future D1 path are absent.
+
+### New additive corrective P0 evidence
+
+Parent Design:
+
+```text
+commit / tree:
+501d49daa93a1d0856aaecca30ad3cfda668fad4
+cc7cdd7d7bd1d72e7e907543dfd32f1cfd07e004
+
+blob / raw / bytes:
+e154e6556219be1d465ca06800cdc9655d69f89b
+5a053db1fd0707571dc492c124d01eba1382ac3a49929723f94f0a20aee59268
+27013
+```
+
+Body-free receipt:
+
+```text
+commit / tree:
+aaf94138088c8c67c2f8502c5da8e55bff783483
+afd062e12cead5407b097b663021c3f18e8bd982
+
+blob / raw / bytes:
+4c04d66c45e461be9d3d3351c9cb4ba39d337963
+ea8f2821285cde598252e35d5a2c88227069706502ec3a212a4c6a8f5d7c7e35
+15996
+
+delete-self logical:
+49d2ff073f75af360202685060f35c7bc01b2d0289e3c9856d7444d60b78eda4
+
+strict exact10 external:
+7c65c353a46c262cf00c224bceed4c6d162aba2a8994a59c3aeffe3cc3cf28e0
+```
+
+Strict exact6 P0:
+
+```json
+{"logical_cycle_id":"NLS_V3_CYCLE_001","p0_external_identity_sha256":"aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046","parent_design":{"git_blob_sha1":"e154e6556219be1d465ca06800cdc9655d69f89b","path":"EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_AdditiveCorrectiveP0_AfterEpoch003PrestartD2ReceiptIdentityPreimageContractMismatchAndPartialP0NonCredit_ParentDesign_ReadOnly_20260730.md","publication_commit_sha1":"501d49daa93a1d0856aaecca30ad3cfda668fad4","raw_sha256":"5a053db1fd0707571dc492c124d01eba1382ac3a49929723f94f0a20aee59268"},"receipt":{"git_blob_sha1":"4c04d66c45e461be9d3d3351c9cb4ba39d337963","logical_receipt_sha256":"49d2ff073f75af360202685060f35c7bc01b2d0289e3c9856d7444d60b78eda4","path":"EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_AdditiveCorrectiveP0_AfterEpoch003PrestartD2ReceiptIdentityPreimageContractMismatchAndPartialP0NonCredit_ParentDesign_ReadOnly_BodyFree_Receipt_20260730.json","publication_commit_sha1":"aaf94138088c8c67c2f8502c5da8e55bff783483","raw_sha256":"ea8f2821285cde598252e35d5a2c88227069706502ec3a212a4c6a8f5d7c7e35"},"recovery_epoch_id":"NLS_V3_CYCLE001_RECOVERY_EPOCH_004","schema_version":"cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.additive_corrective_p0_external_identity.v1"}
+```
+
+```text
+additive corrective P0 external identity:
+aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046
+
+distinct from old e6659e...:
+true
+```
+
+Receipt logical, receipt external, and P0 external identities all use
+delete-self canonical sorted compact UTF-8 without LF.  Empty-self
+compatibility is forbidden.
+
+### Frozen roles and future order
+
+```text
+corrective Recovery Epoch004 P0
+-> separate D1 causal RED
+-> separate D2 implementation and targeted GREEN
+-> final D2-complete-source-bound Reference / OperationalAdmission
+-> distinct Candidate nested in Event1 / Event1 postverification
+-> post-Event1 operational runtime and preflight
+-> observation plus exactly one matching Readiness or Failure
+-> one-shot Reservation after Readiness only
+-> runner-owned Attempt / formal exact134 at most once
+-> later terminal and acceptance gates under further authorities
+```
+
+P0 defines only the future contract/source boundary.  D1 freezes RED and
+D2 implements only that contract.  Reference/OA bind final D2 source.
+Event1 consumes OA exactly once; source lock follows independent Event1
+postfetch.  Parent phase3 reconstructs actual evidence and fails closed.
+Runtime follows Event1; Readiness/Failure is exactly one; Reservation
+follows Readiness; Attempt is runner-owned; formal exact134 is at most
+once.
+
+Event1 v2 must use owner/independent versioned dispatch, reject
+unknown/mixed/v2-to-v1 fallback, bind source subject and both executors to
+the same actual Git root/HEAD/tree and module/blob/raw identities, and
+prohibit independent trust in the owner validator.
+
+Future D1 exact1:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py
+```
+
+It was not created, collected, or executed.
+
+### 確認した事実・推測・華恋の意見
+
+確認した事実: D2の宣言値はempty-self、正規source契約はdelete-selfであり、
+final issuanceは影響を受けるexternal identityを直接束縛しています。旧P0は
+exact3、sourceは固定のまま、Event1 v2接続と全後続evidenceは未生成です。
+
+actual sourceからの推測: downstream自身のhash一致では壊れたcausal predecessorを
+修復できず、旧exact3も後付け完成できません。current `c9eb76...`を最初から
+束縛するdistinct complete P0が必要です。
+
+華恋の意見: historical bytesと失敗した因果を両方残すべきです。今回のP0は
+実行進捗ではなく、誤ったcreditでD1以降を始めないためのsource boundaryです。
+D1はMash様の別承認までinactiveで停止するべきです。
+
+### Current state and exactly one next authority
+
+```text
+Recovery Epoch003 active execution credit:
+NOT_ESTABLISHED
+
+Recovery Epoch004:
+DEFINED_NOT_STARTED
+
+source baseline:
+UNLOCKED
+
+Candidate:
+UNALLOCATED_DISTINCT_FROM_ALL_PRIOR_CANDIDATES
+
+Event1:
+NOT_CREATED
+
+runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0 / 0 / 0
+
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_ADDITIVE_CORRECTIVE_P0_POSTVERIFIED_D1_OPERATIONAL_ADMISSION_V2_EVENT1_CONNECTION_OWNER_INDEPENDENT_SCHEMA_DISPATCH_ACTUAL_GIT_SOURCE_SUBJECT_OWNER_EXECUTOR_INDEPENDENT_EXECUTOR_IDENTITY_PARENT_PHASE3_EVIDENCE_AND_V1_EXACT16_EXACT8_INVARIANCE_CAUSAL_RED_FREEZE_ONLY
+
+next authority state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete token count:
+exact1
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_DELETE_SELF_CONTRACT_MISMATCH_RECORDED_DECLARED_EMPTY_SELF_IDENTITIES_IMMUTABLE_NON_CREDIT_FINAL_ISSUANCE_REFERENCE_OPERATIONAL_ADMISSION_V2_AND_RECONCILIATION_IMMUTABLE_HISTORICAL_ACTIVE_EXECUTION_CREDIT_NOT_ESTABLISHED_RECOVERY_EPOCH004_PARTIAL_P0_EXACT3_IMMUTABLE_NON_CREDIT_ADDITIVE_CORRECTIVE_P0_PARENT_DESIGN_FROZEN_DEFINED_NOT_STARTED_SOURCE_BASELINE_UNLOCKED_CANDIDATE_UNALLOCATED_EVENT1_NOT_CREATED_D1_CAUSAL_RED_NOT_AUTHORIZED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No D1, D2, Reference/OA issuance, Candidate/Event1, runtime, or later
+authority was executed.
