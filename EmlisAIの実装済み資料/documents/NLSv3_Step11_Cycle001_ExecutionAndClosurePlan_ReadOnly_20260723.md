@@ -8196,3 +8196,218 @@ RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_ROUTE_SELECTE
 The next possible class is `CAUSAL RED FREEZE`.  No concrete next token is
 issued.  A new separate explicit Mash approval is required; no automatic
 transition is permitted.
+
+## 2026-07-30 Recovery Epoch003 prestart actual Git bytes exact6 D1 causal RED closure
+
+### Authority and fixed entry
+
+Mash authorized only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D1_ACTUAL_GIT_BYTES_EXACT6_OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_CAUSAL_RED_FREEZE_ONLY
+```
+
+The work started from fresh anonymous-HTTPS, clean checkouts at:
+
+```text
+Cocolon commit / tree:
+e3daba6689acbac43072364aa1e76bc27f76fd0c
+46da038dc27bd3cbd70fa495144076016d9c6796
+
+Cocolon historical anchor commit / tree:
+7795950eefc4a925d18e44ac1dbc94fbd90033d0
+e7226b8a39860b7b57577c877898b317e02d6ebd
+
+mashos-api commit / tree:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+1be763a89c82a40a97e0696e1639a3474c45d806
+```
+
+The selected route remained:
+
+```text
+OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_DERIVATION
+```
+
+The historical seed, failure-receipt external identity, and Design-receipt
+external identity remained:
+
+```text
+3a08461e6f06c820038a29c5c547476842560f41865929e4c05454b220afaa00
+7905659fd5ef68f795204792dddd7507e828540dcd0d9d75e75d37911afd4247
+a180071ae2cabd664d35bfc2537d3613ce9280542434ea82c95880c8ff4b124d
+```
+
+### Confirmed facts
+
+Actual source, AST, import graph, and call graph independently rederived the
+candidate production exact5.  Its ordered-path SHA-256 is:
+
+```text
+41d9979825bb3b2d3577196f983089197e8535c9c568733f9c3b8e0e624169e7
+```
+
+The candidate boundary was reachable and complete for this D1, so no new
+path-boundary authority was required.  Exact5 blob/raw identities were
+frozen as RED-entry evidence, not as whole-file implementation invariants.
+
+The only mashos-api addition was:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch003_prestart_predecessor_actual_git_bytes_exact6_operational_admission_v2_schema_dispatch_red.py
+```
+
+Its frozen identities are:
+
+```text
+Git blob SHA-1:
+b61913a784512d65d712ee9bc6f15736b4ae91d2
+
+raw SHA-256:
+ac136e06c8eaa0bb9d7342b8cbe5669f974865e89d4fecbb0c24257893d6bb1a
+
+bytes / LF lines:
+66797 / 1957
+
+ordered node-list SHA-256:
+8e4fd061ea71338fd4e254881af8d19b27961d4f0e563cac4958f74df34e2ad4
+
+ordered oracle-list SHA-256:
+cce4bafb92cee323000baaf201f79b359053683ed5768293407e6845edec6ad0
+```
+
+After the pre-execution freeze, Karen ran only the authorized exact1
+collect-only selection and the same exact1 full-path execution.  The result
+matched the frozen denominator:
+
+```text
+collect-only:
+exit 0
+11 collected
+
+execution:
+exit 1, INTENDED_CAUSAL_RED
+11 collected / 11 executed
+1 passed: O10
+10 intended causal failed: O01..O09, O11
+
+collection error / import error / error / unexpected error:
+0 / 0 / 0 / 0
+
+skipped / xfailed / xpassed / deselected:
+0 / 0 / 0 / 0
+```
+
+O10 preserved the current canonical loader and existing v1 APIs, including
+their exact16/exact8 keysets.  O01..O09 and O11 failed only with their
+predeclared missing-seam causal signatures.  Test bytes, nodes, commands,
+runner identity, repository identities, and expected outcomes did not
+change after the freeze.
+
+### Published evidence
+
+mashos-api published changed-path exact1:
+
+```text
+commit / tree:
+4c53946e6d3cb5281d2d1a31a5d2dbdb451b9a47
+1e3dbc1cc7b489838ccfda9850b21b5ef6946ec8
+
+force update:
+false
+
+postfetch:
+ancestor true / changed path exact1 / frozen test bytes equal
+```
+
+Cocolon published the Result and body-free receipt before this closure
+update:
+
+```text
+Result commit / tree / blob / raw:
+6038740cffd0d573ab11e62db82d8e454dd03f92
+804e7d302ee94cf97a21e9339d21b91bb7da178e
+3fc28616926bfc63973ee12a68c943f72074a4e5
+e17fa137f6ca3744331544675fd0087af51a4936317d6397bab20d7a169ca237
+
+Receipt commit / tree / blob / raw:
+c6438ae3af016d1c759fbd0bf82abb76b4e3a764
+a6e249d48684f06b128b8fe59ff804bdd6993fc8
+65a1519dd11d454445bda2f00e2a4e442278c7b3
+ea801d94ebdff03c7b9ae463e14c14ed7cdae0667ea2f9165d41cf43121fc201
+
+Receipt logical / external identity:
+3b9484465b17f12382782eb8fd55791bcbde241839f90ab9914d88cb9be8723d
+8b7acbe166cc821a4575c6a5f8ca90fc7c86ad8aef63f6dc7b7e092552854d12
+```
+
+The matching handoff is:
+
+```text
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PrestartPredecessorActualGitBytesExact6_OperationalAdmissionV2SchemaDispatchTransientIdentityBoundHistoricalReceiptByteForm_D1_CausalRED_FreezeOnly_Handoff_20260730.md
+```
+
+### Zero-effect boundary
+
+```text
+mashos-api production changes:
+0
+
+existing test / fixture / proof / lock / registry / dependency changes:
+0 / 0 / 0 / 0 / 0 / 0
+
+historical exact6 rewrite / replacement / reissue:
+0 / 0 / 0
+
+reference / operational runtime materialization:
+0 / 0
+
+compatibility artifact / successor receipt / manifest issuance:
+0 / 0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+Candidate / Event1 / Readiness / Failure:
+0 / 0 / 0 / 0
+
+source-baseline lock / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+source baseline:
+UNLOCKED
+
+automatic progression:
+false
+```
+
+### Inference
+
+Because O10 passed and all ten failures matched their frozen causal
+signatures, the RED is attributable to absent additive v2
+derivation/schema-dispatch/parent/effect seams rather than collection,
+runner, import, or current-loader drift.  Candidate exact5 remains an
+implementation hypothesis; this D1 does not prove that every candidate
+file must change.
+
+### Karen's opinion
+
+Historical receipt bytes and original identities should remain primary.
+The repair should add an explicit, identity-bound v2 interpretation without
+weakening the current canonical loader or changing v1 semantics.  Stopping
+after causal-RED publication is necessary because implementation, targeted
+GREEN, runtime materialization, and final issuance each require authority
+not present in this D1.
+
+### Closure state
+
+```text
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D1_CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+```
+
+Mash must separately review the postverified RED and explicitly authorize
+remediation implementation and targeted GREEN.  No implementation or
+final-issuance token is issued, and no automatic transition is permitted.

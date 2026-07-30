@@ -28124,3 +28124,160 @@ false
 
 The next possible authority class is `CAUSAL RED FREEZE`.  No concrete
 authority token is issued.  Separate explicit Mash approval is required.
+
+## 2026-07-30 Recovery Epoch003 prestart actual Git bytes exact6 D1 causal RED snapshot
+
+### Confirmed facts
+
+Mash authorized only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D1_ACTUAL_GIT_BYTES_EXACT6_OPERATIONAL_ADMISSION_V2_EXACT16_SCHEMA_DISPATCH_WITH_TRANSIENT_IDENTITY_BOUND_HISTORICAL_RECEIPT_BYTE_FORM_CAUSAL_RED_FREEZE_ONLY
+```
+
+Fresh anonymous-HTTPS, clean fixed entry:
+
+```text
+Cocolon commit / tree:
+e3daba6689acbac43072364aa1e76bc27f76fd0c
+46da038dc27bd3cbd70fa495144076016d9c6796
+
+mashos-api commit / tree:
+1c3bdd73df68699cbc14b3ccc41c94149f0b6255
+1be763a89c82a40a97e0696e1639a3474c45d806
+
+historical exact6 anchor commit / tree:
+7795950eefc4a925d18e44ac1dbc94fbd90033d0
+e7226b8a39860b7b57577c877898b317e02d6ebd
+```
+
+Actual source, AST, import graph, and call graph rederived reachable
+candidate production exact5:
+
+```text
+ordered-path SHA-256:
+41d9979825bb3b2d3577196f983089197e8535c9c568733f9c3b8e0e624169e7
+```
+
+The only mashos-api addition was one frozen test path:
+
+```text
+ai/tests/test_emlis_nls_v3_recovery_epoch003_prestart_predecessor_actual_git_bytes_exact6_operational_admission_v2_schema_dispatch_red.py
+
+Git blob / raw / bytes:
+b61913a784512d65d712ee9bc6f15736b4ae91d2
+ac136e06c8eaa0bb9d7342b8cbe5669f974865e89d4fecbb0c24257893d6bb1a
+66797
+
+ordered node-list / oracle-list SHA-256:
+8e4fd061ea71338fd4e254881af8d19b27961d4f0e563cac4958f74df34e2ad4
+cce4bafb92cee323000baaf201f79b359053683ed5768293407e6845edec6ad0
+```
+
+Only the test exact1 collect-only and full-path selections were run:
+
+```text
+collect-only:
+exit 0 / collected exact11
+
+execution:
+exit 1 / executed exact11
+passed exact1: O10
+intended causal failed exact10: O01..O09, O11
+
+collection error / import error / error / unexpected error:
+0 / 0 / 0 / 0
+
+skipped / xfailed / xpassed / deselected:
+0 / 0 / 0 / 0
+```
+
+O10 verified that the current canonical loader, v1 APIs, and
+exact16/exact8 keysets remained unchanged.  Every intended failure matched
+its pre-frozen missing-seam signature.
+
+mashos-api publication:
+
+```text
+commit / tree:
+4c53946e6d3cb5281d2d1a31a5d2dbdb451b9a47
+1e3dbc1cc7b489838ccfda9850b21b5ef6946ec8
+
+changed path:
+exact1
+
+postfetch:
+ancestor true / blob-byte equal / clean
+```
+
+Cocolon evidence:
+
+```text
+Result commit / tree / blob / raw:
+6038740cffd0d573ab11e62db82d8e454dd03f92
+804e7d302ee94cf97a21e9339d21b91bb7da178e
+3fc28616926bfc63973ee12a68c943f72074a4e5
+e17fa137f6ca3744331544675fd0087af51a4936317d6397bab20d7a169ca237
+
+Receipt commit / tree / blob / raw:
+c6438ae3af016d1c759fbd0bf82abb76b4e3a764
+a6e249d48684f06b128b8fe59ff804bdd6993fc8
+65a1519dd11d454445bda2f00e2a4e442278c7b3
+ea801d94ebdff03c7b9ae463e14c14ed7cdae0667ea2f9165d41cf43121fc201
+
+Receipt logical / external identity:
+3b9484465b17f12382782eb8fd55791bcbde241839f90ab9914d88cb9be8723d
+8b7acbe166cc821a4575c6a5f8ca90fc7c86ad8aef63f6dc7b7e092552854d12
+```
+
+### Inference
+
+The exact outcome match identifies missing additive v2 derivation,
+schema-dispatch, parent-reexecution, and effect-result seams as the causal
+RED boundary.  Candidate exact5 is the current minimum implementation
+hypothesis, not proof that all five whole files must change.
+
+### Karen's opinion
+
+Original historical bytes and identities must remain primary.  A later
+repair should add a versioned, transient, identity-bound v2 interpretation
+without weakening the current loader or changing v1.  This evidence is a
+prerequisite for product work, not Product Read or Cycle001 acceptance.
+
+### Zero effects and current stop
+
+```text
+mashos-api production changes:
+0
+
+historical exact6 rewrite / replacement / reissue:
+0 / 0 / 0
+
+reference / operational runtime materialization:
+0 / 0
+
+compatibility artifact / successor receipt / manifest:
+0 / 0 / 0
+
+reference observation / OperationalAdmission:
+0 / 0
+
+Candidate / Event1 / Readiness / Failure:
+0 / 0 / 0 / 0
+
+source-baseline lock / Reservation / Attempt / formal exact134:
+0 / 0 / 0 / 0
+
+P2 / Product Read / Cycle001 acceptance:
+NOT_STARTED / NOT_STARTED / NOT_ACCEPTED
+
+state:
+RECOVERY_EPOCH003_PRESTART_PREDECESSOR_CANONICAL_BYTES_REMEDIATION_D1_CAUSAL_RED_FROZEN_IMPLEMENTATION_NOT_AUTHORIZED_MATERIALIZATION_NOT_STARTED_AUTHORITY_STOP
+
+automatic progression:
+false
+```
+
+Mash must separately approve remediation implementation and targeted GREEN.
+Materialization and final issuance remain unauthorized.  No automatic
+progression is permitted.
