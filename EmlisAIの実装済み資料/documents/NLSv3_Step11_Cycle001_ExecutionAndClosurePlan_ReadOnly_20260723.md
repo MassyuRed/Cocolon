@@ -11493,3 +11493,257 @@ false
 No schema-v2 one-shot, corrected D2, stability run, Reference/OA,
 Candidate/Event1, source lock, runtime product, or later authority was
 executed.
+
+## 2026-08-01 R1 schema-v2 projection/mapping and causal launch-admission reconciliation Design-only append
+
+### Approved authority and predecessor closure
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_PRELAUNCH_STAGE_PROJECTION_TYPED_TERMINAL_MAPPING_UNDEFINED_AND_GATE_EVIDENCE_TO_LAUNCH_ADMISSION_CONSUMPTION_UNPROVEN_PYTEST_INVOCATION_CHALLENGE_REMOTE_O01_O08_EXACT0_CURRENT_AUTHORITY_CONSUMPTION_BOUNDARY_SCHEMA_V2_KEYSET_VALUE_AND_STAGE_PROJECTION_FAILURES_TO_EXISTING_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_EXACT12_PRESERVED_IMPLEMENTATION_NEUTRAL_DISTINCT_SUCCESSOR_ONE_SHOT_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+authority kind:
+DESIGN_ONLY
+
+predecessor execution disposition:
+R1_SCHEMA_V2_ONE_SHOT_PRELAUNCH_STAGE_PROJECTION_TYPED_TERMINAL_MAPPING_UNDEFINED_AND_GATE_EVIDENCE_TO_LAUNCH_ADMISSION_CONSUMPTION_UNPROVEN_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_NO_PYTEST_NO_RERUN
+
+automatic progression:
+false
+```
+
+The schema-v2 execution authority was approved and entered prelaunch, but
+static review found that its failure projection and evidence-consumption
+contract were not total. Its one-shot token is closed and cannot be reused.
+The unused process budget is not transferable.
+
+```text
+approval / prelaunch / close:
+exact1 / exact1 / exact1
+
+pytest / framework / import / collection:
+exact0 / exact0 / exact0 / exact0
+
+challenge / eligible remote / O01--O08 / closure:
+exact0 / exact0 / exact0 / exact0
+
+execution Result / Receipt:
+exact0 / exact0
+
+same-token reuse:
+false
+```
+
+### Position correction
+
+```text
+prior:
+UNMAPPED_SCHEMA_FAILURE_WAS_TREATED_AS_UNCONDITIONAL_LAUNCH_BLOCKER_EVEN_AFTER_ALL_STAGE_PROJECTIONS_PASS
+
+corrected:
+A_PROVED_PASS_MAKES_THAT_FAILURE_BRANCH_UNREACHED_BUT_PROCESS_START_STILL_REQUIRES_CAUSAL_GATE_EVIDENCE_CONSUMPTION
+
+basis:
+PREDECESSOR_SECTION_7_PERMITS_SCHEMA_OR_EVIDENCE_INCOMPLETE_PUBLICATIONLESS_NO_RETRY_STOP
+```
+
+This changes the Design position only. It does not claim any runtime
+observation.
+
+### Schema-v2 typed mapping
+
+```text
+execution Receipt schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.d1_v5.r1_rootdir_corrected_exact8_one_shot_receipt.v2
+
+top / execution_observation / exact8:
+exact16 / exact11 / exact7
+
+existing runtime result classes:
+exact12 unchanged
+
+schema/projection trigger count / mapping SHA-256:
+exact9 / 0689587c68fc899997f77069bca1b7bf0334e3ad19e8116ff6fb7f560d09ece3
+
+admission/consumption trigger count / mapping SHA-256:
+exact12 / e8e53fe51593c0f968312400f3b374e9f946486ff3cd6559a95c207013c48042
+
+mapping bundle SHA-256:
+940fef4111a173042cb63070cd691fcd98842b8d303496d8b6732662239deae0
+
+common existing typed terminal:
+R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP
+
+observation / failure:
+PRELAUNCH_LAUNCHER_CHECK / PRELAUNCH_LAUNCHER-IDENTITY-LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID
+```
+
+Terminal-record canonicalization unavailability remains a publicationless
+no-retry stop; it does not expand the existing exact12.
+
+### Causal launch-admission contracts
+
+```text
+stage-projection contract bytes / SHA-256:
+511 / b24454e4c685823bf399aa7cb7f205246c77a05a8ceb223f3d3ad2e0c14ba766
+
+admission schema keys / contract bytes / SHA-256:
+exact27 / 1380 / 57fc9311c2350b61ade77c750688a584cfec0fe6ac6072bccd7a5c04f1913cab
+
+role-validation keys / contract bytes / SHA-256:
+exact19 / 935 / 3e701429b0c71c7906fd520fce04387726cf84cce7a632b403e276c96151e2ae
+
+consumption schema keys / contract bytes / SHA-256:
+exact10 / 658 / 8a8deb9a59c8bf9f8142a6fb22d18d3e8d18be19bc512cfaba00ee8e89013f
+```
+
+The immutable admission record contains authorization maxima, not observed
+post-consumption counts. OWNER and INDEPENDENT_VERIFIER each bind a role-tagged
+validation hash. The launcher validates and consumes one ADMIT, creates a
+single-use exact10 consumption record, and only then issues one process budget.
+The future Result records actual counts. Earlier incomplete gates create no
+admission record and retain their existing typed prelaunch stop.
+
+### Full identity composites
+
+```text
+fixed-source bytes / SHA-256:
+1039 / 8ea0ccc92dac230e487873284614b8bf39e0a55fd8efc8f866d78a8a50a96e7d
+
+retained-runtime bytes / SHA-256:
+976 / 2028b19e152e1330618b9b14595a522734c405e860ed2971aa14faa74585ba3c
+
+rootdir-binding bytes / SHA-256:
+601 / c8a56dfaa93db8b31b4908baa0e8b7a9a4bcc6f38d18a83e5f6a6d4635da2aef
+
+launcher bytes / SHA-256:
+993 / 2009b21584505eb3e05137335d0071f45c79869086166791c01822241514393f
+```
+
+Fixed source includes clean state, source commit/tree, D1, dependency lock,
+and rootdir. Runtime includes exact7, executable, and closure counts. Launcher
+includes argv/environment/rootdir/node/vector plus empty non-repository cwd,
+deadline 1200, no shell or PATH lookup, and zero prefix-rewrite/probe/
+collect-only/dry-run boundaries.
+
+### Fixed source
+
+```text
+mashos-api commit / tree / clean:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+true
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+### Published Design exact3
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+fc7012a38aeebbc189cf7bd76983b93ca74ad0dd
+7629ecd83ea2970295b8ec0f530b121e052d47d7
+c25d979c3f3af297e272a9ce1f24c44418de4ea2
+27b4f11517d5090544cb260a876f540cb4dc8ec654bcddc3566597453fcbd825
+56756 / 1344
+
+credited Design checkpoint SHA-256:
+13bbcd2dc439e4d05722c8182c62d4600e3321da597e702ed592971c0256fb79
+```
+
+Body-free Design Receipt:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+203ba86ce2f00289b50a534d87422098b4a2691d
+b43ad93e3ae3b37d3bea7d8299d53f2e1bf1ee7d
+da86db196af47b41241ed97e0673eb4c1bf9ae78
+ec02cc2ff410e3334e89a154a21d8e86ce04c52b6bda3b468ba383975f412493
+12751 / 1
+
+delete-self logical SHA-256:
+f19b6e3c4f70fa58fee773dc03dc1b9990262a55c4d3eef77186410b753de7e6
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+54695ec5e623c937a3426243f8daa9d84f59b3ab
+d1adf0aeaf21984dcfb00839713c959383d468ed
+89dfc07a3731eb0e0d583c52056f6e9ad9134247
+738dac343d26002a8a25691a8ae970f94f9f98118eb9c7ab988a26da3b1551c9
+13747 / 339
+```
+
+All exact3 target contents are postfetch exact equal. The observed publication
+commits each introduced one approved path, but that observed shape is not a
+formal validity requirement under the current normative transport contract.
+Three independent read-only audit lanes ended blocker exact0 / advisory exact0.
+
+### Current Design exact5 scope
+
+```text
+Cocolon entry commit / tree:
+fc3471aefb6f3335933b6e61f3b106d60f6df65a
+f78723bcd518870de56095157c905e2044c6309f
+
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed paths:
+exact0
+
+production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+pytest / framework / import / collection / challenge / remote / O01--O08:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+product runtime effect / automatic transition:
+exact0 / exact0
+```
+
+This Plan append preserves its exact entry prefix:
+
+```text
+blob / raw / bytes / lines:
+763dc99fede44c0284b28cc7c44968f440aaa8c6
+b6f26e5a64701082daf3a8a03314773d3a608caf6a499fa5e173d7a426a09760
+396034 / 11495
+```
+
+After this append is published and postfetched, the latest snapshot remains
+the final target. Reference/OA, corrected D2, stability, Candidate/Event1,
+source lock, and runtime product remain blocked or unchanged.
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_PRELAUNCH_STAGE_PROJECTION_MAPPING_GAP_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_PYTEST_EXACT0_EXACT12_PRESERVED_SCHEMA_V2_KEYSET_VALUE_AND_STAGE_PROJECTION_FAILURES_MAPPED_TO_EXISTING_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_PRELAUNCH_LAUNCHER_IDENTITY_SAFE_CODE_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_IMPLEMENTATION_NEUTRAL_OWNER_INDEPENDENT_PRELAUNCH_ADMISSION_RECORD_EXACT1_AND_GATE_EVIDENCE_CONSUMPTION_EXACT1_WHEN_REACHED_DISTINCT_ONE_SHOT_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_EMPTY_NONREPO_CWD_EXPLICIT_FIXED_SOURCE_ROOTDIR_ABSOLUTE_D1_PATH_NATIVE_REPOSITORY_RELATIVE_ORDERED_NODE_IDS_FULL_EXACT8_PYTEST_INVOCATION_EXACT1_FRESH_CHALLENGE_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor unique token value count:
+exact1
+
+execution under this Design authority:
+exact0
+
+automatic progression:
+false
+```
+
+No successor one-shot, corrected D2, stability run, Reference/OA,
+Candidate/Event1, source lock, runtime product, or later authority was
+executed.
