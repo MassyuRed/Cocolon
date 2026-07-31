@@ -32048,3 +32048,243 @@ RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_PRELAUNCH_PROJECTION_MAPPING_GAP_CURRENT_AU
 No successor one-shot, corrected D2, stability run, Reference/OA,
 Candidate/Event1, source lock, runtime product, or later authority was
 executed.
+
+## 2026-08-01 latest — R1 schema-v2 distinct one-shot closed at Result Unknown
+
+### Current position
+
+```text
+approved authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_PRELAUNCH_STAGE_PROJECTION_MAPPING_GAP_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_PYTEST_EXACT0_EXACT12_PRESERVED_SCHEMA_V2_KEYSET_VALUE_AND_STAGE_PROJECTION_FAILURES_MAPPED_TO_EXISTING_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_PRELAUNCH_LAUNCHER_IDENTITY_SAFE_CODE_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_IMPLEMENTATION_NEUTRAL_OWNER_INDEPENDENT_PRELAUNCH_ADMISSION_RECORD_EXACT1_AND_GATE_EVIDENCE_CONSUMPTION_EXACT1_WHEN_REACHED_DISTINCT_ONE_SHOT_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_EMPTY_NONREPO_CWD_EXPLICIT_FIXED_SOURCE_ROOTDIR_ABSOLUTE_D1_PATH_NATIVE_REPOSITORY_RELATIVE_ORDERED_NODE_IDS_FULL_EXACT8_PYTEST_INVOCATION_EXACT1_FRESH_CHALLENGE_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+authority:
+CLOSED_CONSUMED
+
+admission / consumption / pytest invocation:
+exact1 / exact1 / exact1
+
+process:
+started=true / completed=true / timeout=false / exit=1
+
+terminal:
+R1_RESULT_UNKNOWN_STOP
+
+failure:
+RESULT / RESULT_UNKNOWN / RESULT_UNKNOWN
+
+R1 exact8 / O01--O08 / challenge / remote / closure credit:
+NOT_ESTABLISHED
+
+same-authority retry:
+forbidden
+
+automatic progression:
+false
+```
+
+### Fixed source and one-shot evidence
+
+```text
+mashos-api commit / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+
+D1 path:
+ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py
+
+D1 blob / raw SHA-256:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+retained runtime / interpreter SHA-256:
+2028b19e152e1330618b9b14595a522734c405e860ed2971aa14faa74585ba3c
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+
+admission / consumption SHA-256:
+9abd83e3fb5bcfb9b03195fdcafd0eaeb7bf8bd71b8d7c5b19d0bf940b5751bf
+c569b6ba33cee56617e49c6b464cb2dfc6136d5c8d68b1ae13a40e60b58321ce
+
+stdout:
+3141 bytes
+c6e9b0e6573e722ac2d66dfa20eaf0c5e2af69518cb1bbdcd2a6a768da5d62c4
+
+stderr:
+0 bytes
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+```
+
+Source/runtime/rootdir/launcher identities were valid before launch.
+Postrun identity remained all equal and the source remained clean.  The
+empty non-repository cwd remained empty, the process group was reaped,
+and artifact persistence committed.
+
+### Published exact4 before this snapshot
+
+Result:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1RootdirCorrected_SchemaV2_DistinctOneShot_SameRetainedRuntime_FreshChallenge_Exact8OneShot_Result_20260731.md
+
+commit / tree / blob / raw / bytes:
+28a3b4d213959d4560df62d6b2fc81ac3448a958
+a571c315aae9e372e8c76088058e3ea01c7fddae
+0e38f3b5740f4828730f5853c201451301c60b24
+9bb15e9e25fdcab0ceb8f4c82680028be98543d584d993c53550b38deffdf98b
+8947
+```
+
+Body-free Receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1RootdirCorrected_SchemaV2_DistinctOneShot_SameRetainedRuntime_FreshChallenge_Exact8OneShot_BodyFree_Receipt_20260731.json
+
+commit / tree / blob / raw / bytes:
+0b629675017dc044614d092c168bd0a2f1de1369
+b461a76cbcc75bd91bfaec6d63097ef63abac36a
+f1860af5e305e3ae33c777c14bc942a2369da9c4
+c405f4ab55be0939bf8171151ee31dc8bc0d5471f99cd4917acdbe6e7e0c5dcc
+11850
+
+execution observation / Receipt logical SHA-256:
+59e2c95705f482720225f931e0acd8a9071461b47a45ca529d18744a00b539e2
+8d6582c385a803bb7acdca38f542bff32697289c24d5c82bb19223e9e0819f61
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1RootdirCorrected_SchemaV2_DistinctOneShot_SameRetainedRuntime_FreshChallenge_Exact8OneShot_Handoff_20260731.md
+
+commit / tree / blob / raw / bytes:
+c26c143884f85ebfb20877190aee0ca95895b00f
+cfb5b8f5c3174414f5e4ee40616867cd00986652
+e1ffa2effaf88b121615aaa8532fd794fdd23964
+cf62a449cf8f995fbf5f81e78f7febd2328b98ace7d97b8df9149ff0441d2b5c
+7291
+```
+
+Tracked Plan:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+
+commit / tree / blob / raw / bytes / lines:
+53ea3feb5dd901345b8ea68e664dc4f2ddf9be40
+0c424efb869e9e7aafb7ce4110c518471d438870
+2b55ef2e26bee2c7681e0ad37c12671fae9f90b3
+a3e66558818227eb10455dbebef06cabd7554e2467396fea20b80d94db55757f
+413070 / 11945
+```
+
+All exact4 final contents above are postfetch exact equal.
+
+### Safe observation boundary
+
+The canonical schema-v2 Receipt preserves:
+
+```text
+top / observation / exact8 keys:
+exact16 / exact11 / exact7
+
+stage:
+RESULT_PARSE
+
+exact8 collected / executed / failed / passed / error:
+0 / 0 / 0 / 0 / 0
+
+ordered rows:
+[]
+
+meaning:
+SAFE_OBSERVATION_NOT_ESTABLISHED
+```
+
+The zero projection is epistemic and does not claim that pytest executed
+zero tests.  Diagnostic-only inspection of the preserved stdout found a
+seven-failure/one-pass display and seven O01--O07 signature strings, but
+the frozen parser did not establish the canonical native node-ID,
+summary, and signature binding.  No prefix rewrite or credit promotion
+is allowed.
+
+### Scope, effects, and prefix preservation
+
+```text
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+approved unique content path set:
+exact5
+
+mashos-api changes:
+exact0
+
+production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+retry / fallback / prior-run reuse / rematerialization / interpreter switch:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+D2 / stability / Reference / OperationalAdmission:
+exact0 / exact0 / exact0 / exact0
+
+Candidate / Event1 / source lock / Product Read:
+exact0 / exact0 / exact0 / exact0
+```
+
+This latest snapshot append preserves its exact entry prefix:
+
+```text
+blob / raw / bytes / lines:
+3772a9affb3383dce1a154cadad3a2136ad67b93
+d9cb171c48fc722b31483cbee505feeb367cc6e5f51d6cac27b55b9d94ea5009
+1611180 / 32050
+```
+
+### 確認した事実
+
+- the approved one-shot admission, consumption, and pytest invocation
+  each occurred exactly once;
+- the process completed with exit 1, empty stderr, retained source/runtime
+  identity, and durable body-free evidence;
+- the strict parser returned `R1_RESULT_UNKNOWN_STOP`;
+- exact8, O01--O08, challenge, remote, source-cut, observation, and
+  closure credit were not established;
+- Result, Receipt, Handoff, and Plan were published with final
+  postfetch-equal content; and
+- no mashos-api or product effect occurred.
+
+### 推測
+
+The observed display differences are the most likely reason the strict
+grammar could not classify the result.  They do not prove the intended
+causal RED or O08 invariance.
+
+### 華恋の意見
+
+現authorityをunknownのまま閉じることが、一回性と証拠境界を守る唯一の扱いです。
+保存済みstdoutを後から都合よく正規化せず、次はpresentation grammarだけを
+独立したDesignとして定義し、実行権限とは分離すべきです。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_R1_RESULT_UNKNOWN_POSTVERIFIED_CURRENT_AUTHORITY_CLOSED_CONSUMED_ADMISSION_EXACT1_CONSUMPTION_EXACT1_PYTEST_INVOCATION_EXACT1_EXIT1_STDERR_EMPTY_STDOUT_C6E9B0E6573E722AC2D66DFA20EAF0C5E2AF69518CB1BBCD2A6A768DA5D62C4_BODY_FREE_EXACT8_O01_O08_CHALLENGE_REMOTE_CLOSURE_CREDIT_NOT_ESTABLISHED_NO_PREFIX_REWRITE_NO_RETRY_OBSERVED_PYTEST_NODE_ID_DISPLAY_CAUSAL_SIGNATURE_PLACEMENT_AND_FINAL_DURATION_SUFFIX_TERMINAL_GRAMMAR_RECONCILIATION_DISTINCT_SUCCESSOR_BOUNDARY_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor unique token value count:
+exact1
+
+automatic progression:
+false
+```
+
+The next authority is Design-only.  Until separately approved it permits
+no pytest, network execution, mashos-api change, retry, D2, stability,
+Reference/OA, Candidate/Event1, source lock, Product Read, or later
+effect.
