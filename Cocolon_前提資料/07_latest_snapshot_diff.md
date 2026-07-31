@@ -29613,3 +29613,58 @@ RECOVERY_EPOCH004_D2_PUBLISHED_TARGETED_GREEN_RETAINED_POSTPUBLICATION_FULL_EXAC
 
 No corrected D1, corrected D2, stability matrix, Reference/OA,
 Candidate/Event1, source lock, runtime, or later authority was executed.
+
+### GitHub reflection correction for this checkpoint
+
+The first write of this final snapshot target was not credited:
+
+```text
+commit / tree / parent:
+84dbd7a57c95d26fff28c8da44c9a805e9b6fe50
+fb8c721ae8c9cff6db0b3cde84ac20dd0e55da7e
+307c169e2cf218c1490fbe03a33a20580322f17a
+
+blob / raw / bytes:
+7b723868b79381af44e8ffe6687c2d2dc18766c8
+8c7b47ed17f8db076e10fac67beb1d6c0319a5372c232cea659e7d9969e5054a
+1048606
+
+changed path:
+Cocolon_前提資料/07_latest_snapshot_diff.md exact1
+
+disposition:
+TRANSIENT_TRUNCATED_INPUT_NON_CREDIT
+```
+
+Karen detected the mismatch before granting exact5 credit: the remote
+blob differed from the intended local blob and the commit showed 8382
+unintended deleted lines.  The cause was the local read-output cap used to
+compose the connector request, not a competing GitHub change.
+
+The same approved path was restored from six bounded complete line
+segments:
+
+```text
+restoration commit / tree / parent:
+ce3b851929b0106f977c151f7bdeeec5670ab30a
+0ec118d8968cc9a4526bb69edbd8820a35f41a0f
+84dbd7a57c95d26fff28c8da44c9a805e9b6fe50
+
+restored pre-note blob / raw / bytes:
+3f25f340766f764f212503f33057463b675b97ec
+c37968e3bb87b92aa5c0ebe98daa1fc61ca731180bbf55e372827ecaa6b1556e
+1529890
+
+local/remote exact byte comparison:
+true
+
+restoration changed path:
+Cocolon_前提資料/07_latest_snapshot_diff.md exact1
+```
+
+The truncated intermediate commit remains visible historical evidence but
+has no checkpoint credit.  Both writes stayed within the approved
+snapshot path, so Karen's aggregate unique changed-path set remains the
+approved exact5.  This correction creates no new authority or domain
+effect; final credit still requires postfetch equality of the snapshot
+including this correction note and latest containment.
