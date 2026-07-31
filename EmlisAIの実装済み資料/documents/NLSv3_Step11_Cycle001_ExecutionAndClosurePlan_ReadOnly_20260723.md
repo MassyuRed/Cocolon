@@ -11295,3 +11295,201 @@ RECOVERY_EPOCH004_D1_V5_R1_PRIOR_NODEID_PREFIX_NONCREDIT_CLOSED_EXPLICIT_FIXED_S
 No corrected R1 launcher, corrected D2, stability, Reference/OA,
 Candidate/Event1, source lock, runtime product, or later authority was
 executed.
+
+## 2026-07-31 R1 prelaunch Receipt-schema contradiction reconciliation Design-only append
+
+### Approved authority and closure
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_ROOTDIR_CORRECTED_ONE_SHOT_PRELAUNCH_RECEIPT_SCHEMA_CONTRACT_UNSATISFIABLE_ORDERED_NODE_LIST_SHA256_MANDATORY_BUT_UNALLOCATED_TOP_EXACT16_EXECUTION_OBSERVATION_EXACT11_EXACT8_EXACT6_KEYSET_CONTRADICTION_PYTEST_INVOCATION_CHALLENGE_REMOTE_O01_O08_EXACT0_CURRENT_AUTHORITY_CONSUMPTION_BOUNDARY_AND_DISTINCT_SUCCESSOR_ONE_SHOT_RECEIPT_SCHEMA_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+authority kind:
+DESIGN_ONLY
+
+predecessor execution disposition:
+R1_SCHEMA_V1_PRELAUNCH_RECEIPT_CONTRACT_UNSATISFIABLE_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_NO_PYTEST_NO_RERUN
+
+automatic progression:
+false
+```
+
+The predecessor future Receipt required a direct ordered-node hash but froze
+top exact16, `execution_observation` exact11, and `exact8` exact6 with no such
+field.  Adding the field broke the keyset; omitting it broke the mandatory
+record.  Credited v1 construction was therefore exact0, and the approved
+execution authority stopped before process start.
+
+```text
+authority approval / prelaunch / close:
+exact1 / exact1 / exact1
+
+authority token reusable:
+false
+
+pytest invocation / process budget consumed:
+exact0 / exact0
+
+predecessor execution Result / Receipt publication:
+exact0 / exact0
+
+challenge / live remote / O01--O08 / closure:
+exact0 / exact0 / exact0 / exact0
+```
+
+The process budget is not transferable to a modified contract.  No old result
+class or v1 execution Receipt was fabricated.
+
+### Minimal schema-v2 correction
+
+```text
+old schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.d1_v5.r1_rootdir_corrected_exact8_one_shot_receipt.v1
+credit eligible: false
+
+corrected schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.d1_v5.r1_rootdir_corrected_exact8_one_shot_receipt.v2
+
+top / execution_observation:
+exact16 unchanged / exact11 unchanged
+
+exact8:
+exact6 -> exact7
+
+direct field:
+ordered_node_list_sha256 = e2661d946c060efc44ce7da06f8c55f51d10dfad2af4f5f0526bd38109c340bc
+
+all other keysets, enums, and exact12 result classes:
+unchanged
+```
+
+The direct field is present in every stage projection, including prelaunch,
+while all observed counts/rows remain observation-only.  OWNER and
+INDEPENDENT_VERIFIER must independently derive the fixed value before launch.
+The successor top projections bind the new authority token, this final Design
+checkpoint, the new schema-v2 Result, and the new execution exact5.
+
+### Runtime and source boundary
+
+```text
+mashos-api commit / tree / clean:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+true
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+Retained runtime evidence remains past evidence.  Any separately approved
+successor must freshly rederive the exact7 runtime hashes, executable, source,
+rootdir, argv, environment, ordered-node, expected-vector, and schema-v2 stage
+projections.  Drift or ambiguity stops before pytest; repair,
+rematerialization, generic interpreter lookup, and switch remain exact0.
+
+### Published Design exact3
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+00f10abea3ed68dc9ba2b75b74760236503328da
+bd25f32dabd0e26d7ba3618f389c0b639ea26bdb
+da7815e5089143db6f39534dcfb78bf004f20c73
+4e9287b62bafd2df584d325d562fbbbeefcbe3fcb5ee56cc6e856fe75f97b9ed
+38988 / 1048
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+428243f00c544c09b558279389c78372dc4b669f
+02d1cb9e70b78123b13c4cf9a0cbbc2f533b7ec4
+f6c9505338721b82b72006cb745e3206a9c2f5e9
+ac6981a2ef0576195c725a81047692ff73d534cbb7972c84696f631d3f46c6d9
+11401 / 1
+
+delete-self logical SHA-256:
+bcaf0efaf6ca3196dbf605b54296b724d40b41649b775375c5049057fa1327b6
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+b067e1bf59f2e13e65628f9c33e6b68bca0bf700
+ddb81f25a0e5bd892830ab694293d8e6e48a55fa
+7679a5c98d43dcf7773d6c27885a36fad588fc2c
+78ce996c1f268642c271b595f7548cdfd41eac8309fa2ac22eece9c3111537a4
+11707 / 345
+```
+
+All exact3 are single-path publications and exact-content postfetch equal.
+Three independent read-only audit lanes ended blocker exact0 / advisory exact0;
+subagent edits, GitHub writes, and pytest/import/collection/execution were
+exact0.
+
+### Current Design exact5 scope
+
+```text
+entry Cocolon commit / tree:
+49dbcb48e540344d292a14da47c80d424c94ca28
+c30e2c7459c0ddb1618c074cc97254b925c54119
+
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed paths:
+exact0
+
+production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+pytest / framework / import / collection / challenge / remote / O01--O08:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+product runtime effect / automatic transition:
+exact0 / exact0
+```
+
+This Plan append preserves its entry prefix exactly:
+
+```text
+blob / raw / bytes / lines:
+e44c1343fb2939713f2e3ba253c0638d7ab8f815
+58ce149ba11566c32665fd2a9070b1292cde896803ef659fe9ca2b3791e2a4ca
+389335 / 11297
+```
+
+After this append is published and postfetched, the latest snapshot remains
+the final target.  Reference/OA, corrected D2, stability, Candidate/Event1,
+source lock, and product runtime remain blocked or unchanged.
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_ROOTDIR_CORRECTED_SCHEMA_V1_PRELAUNCH_CONTRACT_UNSATISFIABLE_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_PYTEST_EXACT0_DISTINCT_SCHEMA_V2_ONE_SHOT_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_EMPTY_NONREPO_CWD_EXPLICIT_FIXED_SOURCE_ROOTDIR_REPOSITORY_RELATIVE_ORDERED_NODE_LIST_SHA256_DIRECT_RECEIPT_FIELD_FULL_EXACT8_PYTEST_INVOCATION_EXACT1_FRESH_CHALLENGE_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor unique token value count:
+exact1
+
+execution under this Design authority:
+exact0
+
+automatic progression:
+false
+```
+
+No schema-v2 one-shot, corrected D2, stability run, Reference/OA,
+Candidate/Event1, source lock, runtime product, or later authority was
+executed.
