@@ -357,6 +357,25 @@ receipt_sha256_preimage_rule
 receipt_sha256
 ```
 
+The frozen constants are:
+
+```text
+schema_version:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.d1_v5.test_runner_runtime_readiness_receipt.v1
+
+body_free:
+true
+
+automatic_progression:
+false
+
+receipt_sha256_preimage_rule:
+SHA256_OF_UTF8_COMPACT_SORTED_KEY_JSON_AFTER_DELETING_RECEIPT_SHA256_WITH_NO_TRAILING_LF
+
+publication byte form:
+UTF8_COMPACT_SORTED_KEY_JSON_PLUS_EXACT1_LF
+```
+
 `readiness_observation` has exact10 nested objects:
 
 ```text
@@ -380,20 +399,76 @@ The nested keysets are frozen as follows:
 | `lock_identity` | `path`, `git_blob_sha1`, `raw_sha256`, `logical_sha256`, `runner_projection_sha256`, `runner_distribution_count` |
 | `runner_projection` | `ordered_distribution_names`, `ordered_distribution_versions`, `canonical_rows_sha256`, `installer_version` |
 | `input_identity` | `acquisition_state`, `accepted_wheel_count`, `accepted_wheel_manifest_sha256`, `configured_route_access_count`, `rejected_candidate_count`, `sdist_count`, `build_count`, `unconfigured_source_count` |
-| `materialization_identity` | `state`, `materialization_count`, `runtime_root_identity_sha256`, `distribution_count`, `distribution_closure_sha256`, `record_closure_match_count`, `post_acceptance_package_index_access_count` |
+| `materialization_identity` | `state`, `materialization_count`, `runtime_root_identity_sha256`, `full_runtime_root_manifest_sha256`, `distribution_count`, `distribution_closure_sha256`, `installed_file_manifest_sha256`, `record_closure_match_count`, `unowned_importable_file_count`, `unexpected_entry_count`, `post_acceptance_package_index_access_count` |
 | `interpreter_identity` | `implementation`, `version`, `platform`, `executable_sha256`, `pytest_version` |
 | `environment_policy` | `fixed`, `removed`, `working_directory_class`, `policy_sha256` |
 | `probe_cardinalities` | `pytest_invocation_count`, `role_smoke_process_count`, `role_module_load_count`, `d1_target_import_count`, `collection_count`, `execution_count`, `preflight_count`, `challenge_count`, `live_remote_attempt_count` |
 | `pytest_probe` | `argv_sha256`, `invocation_count`, `exit_code`, `reported_version`, `result` |
-| `role_smoke_probe` | `argv_sha256`, `invocation_count`, `ordered_role_paths_sha256`, `role_count`, `public_api_call_count`, `effect_count`, `result` |
+| `role_smoke_probe` | `argv_sha256`, `probe_program_sha256`, `invocation_count`, `ordered_role_paths_sha256`, `role_count`, `public_api_call_count`, `effect_count`, `result` |
 
-`accepted_wheel_manifest_sha256` hashes compact key-sorted UTF-8 JSON with no
-LF over the ordered exact5 `{wheel_filename, wheel_sha256}` rows actually
-accepted.  `distribution_closure_sha256` uses the same rule over installed
-name/version/RECORD-closure rows.  `runtime_root_identity_sha256` excludes its
-absolute location.  `environment_policy.fixed` contains only the exact2 safe
-name/value pins; `removed` contains only the exact3 names, not inherited
-values.
+All hashes below use compact key-sorted UTF-8 JSON with no trailing LF unless
+raw bytes are explicitly stated:
+
+- `accepted_wheel_manifest_sha256`: array order is `iniconfig`, `packaging`,
+  `pluggy`, `pygments`, `pytest`; every row is exact2 `wheel_filename` and
+  `wheel_sha256`;
+- `distribution_closure_sha256`: the same distribution order; every row is
+  exact3 `normalized_distribution_name`, `distribution_version`, and
+  `installed_record_closure_sha256`;
+- `installed_file_manifest_sha256`: array rows are ordered first by the same
+  distribution order, then Unicode-codepoint order of POSIX relative path;
+  every row is exact4 `normalized_distribution_name`, `relative_path`,
+  `byte_count`, and `raw_sha256`, and contains exactly the regular installed
+  files counted by that distribution's frozen RECORD-closure rule;
+- `full_runtime_root_manifest_sha256`: array over every retained runtime-root
+  entry, ordered by Unicode-codepoint order of POSIX relative path; every row
+  is exact6 `relative_path`, `entry_kind`, `unix_mode`, `byte_count`,
+  `raw_sha256`, and `link_target_identity`.  `entry_kind` is `DIRECTORY`,
+  `REGULAR_FILE`, or `SYMLINK`.  Directories use null byte/hash/link fields;
+  regular files use integer byte count/raw hash and null link identity;
+  symlinks use null byte/raw fields and either `IN_ROOT:<relative POSIX path>`
+  or `EXTERNAL_EXECUTABLE_SHA256:<observed sha256>`, never an absolute target.
+  The runtime-root directory itself is excluded.  Every other path is its
+  lexical runtime-root-relative POSIX path with no empty, `.`, or `..`
+  segment.  `unix_mode` is the JSON integer
+  `stat.S_IMODE(os.lstat(path).st_mode)`.  An `IN_ROOT:` target is the lexical
+  root-relative normalization of the link text from the link's parent,
+  without following the link; a target escaping the root is not `IN_ROOT`.
+  Sockets, devices, FIFOs, and every unsupported entry kind are invalid and
+  increment `unexpected_entry_count`.
+  The manifest includes `pyvenv.cfg` when present and the executable
+  link/copy surface.  No cache path is excluded: `__pycache__`,
+  `.pyc`, `.pytest_cache`, and any other added entry would change the hash;
+- `runtime_root_identity_sha256`: exact6 object `schema_version` =
+  `cocolon.emlis.nls_v3.recovery_epoch004.test_runner_runtime_root.v1`,
+  `runner_projection_sha256`, `interpreter_executable_sha256`,
+  `distribution_closure_sha256`, and `installed_file_manifest_sha256`; no
+  absolute root/path is included; the sixth key is
+  `full_runtime_root_manifest_sha256`;
+- `environment_policy.policy_sha256`: exact3 object `fixed`, `removed`, and
+  `working_directory_class`; `fixed` is exact2
+  `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`, `PYTHONDONTWRITEBYTECODE=1`; `removed`
+  is the ordered exact3 array `PYTEST_ADDOPTS`, `PYTEST_PLUGINS`,
+  `PYTHONPATH`; working-directory class is
+  `EMPTY_NON_REPOSITORY_DIRECTORY`;
+- `pytest_probe.argv_sha256`: ordered logical argv array
+  `[EXECUTABLE_SHA256=<observed sha256>, -I, -B, -m, pytest, --version, -p,
+  no:cacheprovider]`; the bracketed items denote exact UTF-8 token strings,
+  not shell parsing;
+- `role_smoke_probe.probe_program_sha256`: raw SHA-256 of the exact transient
+  probe-program UTF-8 bytes verified by both roles before execution;
+- `role_smoke_probe.ordered_role_paths_sha256`: SHA-256
+  `e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248`
+  over the compact JSON array of the exact3 paths in owner, independent,
+  parent order from section 5.2; and
+- `role_smoke_probe.argv_sha256`: ordered logical argv array
+  `[EXECUTABLE_SHA256=<observed sha256>, -I, -B, -c,
+  PROBE_PROGRAM_SHA256=<observed sha256>]`.
+
+The logical argv hashes deliberately replace the operational executable path
+and transient program body with their observed raw hashes.  Owner and
+independent verifier also compare those source bytes directly before the
+probe.  Shell command strings are not used as a preimage.
 
 The finite enums are:
 
@@ -415,6 +490,53 @@ receipt state:
 RUNTIME_READY / RUNTIME_NOT_READY
 ```
 
+Field types are JSON string, integer, boolean, array, object, or `null` as
+fixed by the key descriptions.  Hash/version/path/exit-code fields whose
+stage did not start are `null`, never an empty string or synthetic hash.
+Counts for an unstarted stage are integer `0`; its state/result is
+`NOT_STARTED`.
+
+Terminal projections are deterministic:
+
+- `INPUT_UNAVAILABLE` or `INPUT_INVALID`: accepted-wheel count `0`, accepted
+  manifest `null`, materialization `NOT_STARTED`/count `0`, all
+  materialization hashes `null`, all probes `NOT_STARTED`/count `0`, probe
+  argv/program/path hashes, exit code, and reported version `null`;
+- materialization failure: accepted input fields are complete,
+  materialization is `FAILED`/count `1`, root/distribution/file-manifest hashes
+  including full-root-manifest hash are `null`, unowned/unexpected counts are
+  `0`, and both probes are `NOT_STARTED` as above;
+- pytest-probe failure: materialization fields are complete and verified,
+  pytest invocation count is `1`, logical argv hash and integer exit code are
+  present, reported version is string only if safely parsed otherwise `null`,
+  pytest result is `INVALID`, and role smoke remains `NOT_STARTED`;
+- role-smoke failure: all earlier fields are complete; its invocation count is
+  `1`, program/argv/path hashes are present, actual role/public-API/effect
+  counts are integers, and result is `INVALID`; and
+- ready: accepted count `5`, materialization count `1`, distribution count and
+  RECORD match count `5`, pytest/role-smoke invocation count `1` each, role
+  count `3`, unowned importable/unexpected entry counts `0`,
+  public-API/effect/target-import/collection/execution/preflight/challenge/
+  live-remote counts all `0`, and both probes are `VALID`.
+
+At initial readiness, every non-directory entry must be either owned by the
+exact5 RECORD/file manifest or one of the exact Linux runner-control paths
+`pyvenv.cfg`, `bin/python`, `bin/python3`, and `bin/python3.12`.  A control
+path may be absent when the selected materialization form does not require it;
+any other unowned importable regular file, `.pth`, `sitecustomize.py`,
+`usercustomize.py`, executable shim, or external symlink makes
+`unowned_importable_file_count` or `unexpected_entry_count` positive and R0
+invalid.  Owner and independent verifier enumerate the filesystem without
+following symlinks and separately rebuild both manifests.
+
+For every other typed failure, stages strictly precede each other in this
+order: source/lock preflight, acquisition/input verification, materialization,
+interpreter/environment verification, pytest probe, role smoke, source
+postcheck, owner/independent verdict.  Earlier fields contain their actual
+safe typed values; the failing stage contains only its defined safe fields;
+every later stage uses the `null`/integer-`0`/`NOT_STARTED` rule above.  No
+partial hash is promoted to a completed identity.
+
 `failure` has exact3 `class`, `stage`, and `safe_code`.  `class` is one of:
 
 ```text
@@ -431,12 +553,11 @@ PYTEST_PROBE_FAILURE
 ROLE_SMOKE_PROBE_FAILURE
 POSTPROBE_SOURCE_DRIFT
 OWNER_INDEPENDENT_DISAGREEMENT
-PUBLICATION_POSTFETCH_FAILURE
 ```
 
 `stage` is `NONE`, `ACQUISITION`, `INPUT_VERIFICATION`, `SOURCE_PREFLIGHT`,
 `MATERIALIZATION`, `INTERPRETER`, `PYTEST_PROBE`, `ROLE_SMOKE`,
-`SOURCE_POSTCHECK`, `OWNER_INDEPENDENT`, or `PUBLICATION`.  `safe_code` is
+`SOURCE_POSTCHECK`, or `OWNER_INDEPENDENT`.  `safe_code` is
 `NONE` or the selected failure-class token; raw exception/output text is not
 allowed.
 
@@ -452,7 +573,8 @@ equal it.  `RUNTIME_READY` exists only if failure is `NONE`, all required
 counters/identities equal, and both verdicts are `VALID` with
 `ALL_CHECKS_EQUAL`.  Every other complete outcome is `RUNTIME_NOT_READY`.
 
-`result_publication` has exact8 `repository_full_name`, `path`,
+`result_publication` binds only the R0 Result Markdown path named in section 7
+and has exact8 `repository_full_name`, `path`,
 `publication_commit_sha1`, `publication_tree_sha1`, `git_blob_sha1`,
 `raw_sha256`, `byte_count`, and `postfetch_exact_equal`.
 `repository_scope` has exact5 `cocolon_new_path_count`,
@@ -470,7 +592,8 @@ The receipt contains enums, counts, immutable hashes, and derived verdicts
 only.  It excludes raw stdout/stderr, raw environment, absolute paths,
 package/test/exception bodies, and secrets.  `receipt_sha256` is SHA-256 of
 compact key-sorted UTF-8 JSON with no trailing LF after deleting only
-`receipt_sha256`.
+`receipt_sha256`.  The Receipt never contains its own publication commit,
+tree, blob, raw hash, byte count, or postfetch verdict.
 
 ## 5.4 R0 terminals and retention
 
@@ -487,8 +610,11 @@ Both terminals stop.  R0 does not automatically repair, substitute an index,
 reuse a prior runtime, create a challenge, observe O01–O08, or proceed to R1.
 
 `RUNTIME_READY` remains eligible for R1 only while the same session-local
-runtime root and chosen executable are available and rehash equal.  Loss,
-mutation, or rematerialization expires readiness and requires a new authority.
+runtime root and chosen executable are available and the full-root manifest,
+installed-file manifest, distribution closure, runtime-root identity, and
+executable raw hash all rederive equal.  Loss, mutation, added entry, control
+metadata change, or rematerialization expires readiness and requires a new
+authority.
 
 # 6. R1 frozen but unissued one-shot boundary
 
@@ -519,9 +645,12 @@ runtime rematerialization / interpreter switch:
 exact0 / exact0
 ```
 
-Immediately before R1, the operational executable path retained by R0 must
-resolve to the credited executable hash.  The path is used for execution but
-is omitted from body-free evidence.  Generic `python`/PATH resolution is
+Immediately before R1, owner and independent verifier must separately
+rederive the full-root manifest, installed-file manifest, distribution
+closure, runtime-root identity, and executable raw hash, with unowned and
+unexpected counts exact0.  The operational executable path retained by R0
+must resolve to the credited executable hash.  The path is used for execution
+but is omitted from body-free evidence.  Generic `python`/PATH resolution is
 forbidden.  R1 freezes a new command budget and fresh challenge.  Its argv is:
 
 ```text
@@ -566,6 +695,43 @@ exact0 / exact0 / exact0 / exact0 / exact0 / exact0
 
 The test runner is not a Cocolon runtime product artifact.  A future R1 must
 separately name its result-reflection exact5.
+
+## 7.1 Current Design publication sequence
+
+```text
+1. final Design -> postfetch exact equal
+2. Design Body-free Receipt carrying final Design identity
+3. Handoff carrying final Design + Receipt identities
+4. Plan append carrying the published exact3 identities
+5. latest snapshot append carrying the prior exact4 identities
+```
+
+Before step 2, a corrective write to the Design path is a non-credit
+intermediate; only the final postfetch-equal Design commit/blob/raw bytes are
+the Receipt input.  After step 2, the Design is immutable.  The Receipt never
+contains its own publication identity; Handoff and later append targets carry
+it after publication.
+
+Every write commit changes exactly one approved path.  Karen's aggregate
+unique changed-path set is exact5, every final target is exact-content
+postfetch equal, and Plan/snapshot append operations preserve all entry-prefix
+bytes exactly.
+
+## 7.2 Future R0 publication sequence
+
+```text
+1. R0 Result -> postfetch exact equal
+2. R0 Body-free Receipt carrying Result identity
+3. R0 Handoff carrying Result + Receipt identities
+4. Plan append carrying the published exact3 identities
+5. latest snapshot append carrying the prior exact4 identities
+```
+
+The same one-path-per-write, aggregate-unique-exact5, postfetch-equality, and
+append-prefix rules apply.  Failure to publish or postfetch any required path
+is a non-credit checkpoint stop outside both credited `RUNTIME_READY` and
+credited `RUNTIME_NOT_READY`; it is never represented circularly as the
+Receipt's own publication verdict.
 
 # 8. Completion order and blocked stages
 
