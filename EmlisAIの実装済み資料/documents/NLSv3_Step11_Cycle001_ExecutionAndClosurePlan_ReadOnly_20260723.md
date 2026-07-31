@@ -9598,3 +9598,267 @@ RECOVERY_EPOCH003_PRESTART_D2_RECEIPT_DELETE_SELF_CONTRACT_MISMATCH_RECORDED_DEC
 
 No D1, D2, final issuance, Candidate/Event1, runtime, or later authority
 was executed.
+
+## 2026-07-31 Recovery Epoch004 post-D2 actual-Git reproducibility and stability contract reconciliation
+
+### Authority and decision
+
+Mash approved only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D2_POSTPUBLICATION_DIAGNOSTIC_FULL_EXACT8_GREEN_NONCREDIT_PRIOR_MIGRATING_O02_O06_FAILURES_NONREPRODUCED_LIVE_REMOTE_EXACT45_MULTICALL_OBSERVATION_LATENCY_ACTUAL_GIT_IDENTITY_REPRODUCIBILITY_AND_STABILITY_CONTRACT_RECONCILIATION_DESIGN_READ_ONLY
+```
+
+```text
+published D2:
+RETAINED_IMMUTABLE_TARGETED_GREEN_SOURCE
+
+stable postverified credit:
+NOT_ESTABLISHED
+
+diagnostic full exact8:
+VALID_GREEN_NON_CREDIT
+
+historical O02 / O06 direct cause:
+NOT_PROVEN
+
+Reference / OperationalAdmission:
+BLOCKED
+
+automatic progression:
+false
+```
+
+This authority changed Cocolon documentation only.  It changed no
+mashos-api source/test/fixture/dependency/configuration/lock, collected or
+ran no pytest, and created no Reference/OA, Candidate/Event1, source lock,
+runtime, or later effect.
+
+### Fixed source and diagnostic facts
+
+```text
+Cocolon entry commit / tree:
+d3b4c4a63aa2e00fe09251dbbc2d33c9a91dc2fe
+73a349ca167bf6fba81a8786ad6e85013240ad5d
+
+mashos-api commit / tree:
+735b1a59e525b6b314fd7139deb653543a74c389
+eab4977649d8b31258c12e7ea49e1879c5e4a223
+
+P0 external identity:
+aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046
+```
+
+D1 v4 exact1 blob/raw remain:
+
+```text
+b7072620c31cd615ab221647c7145947255294e1
+e67a26cd72cd8007c58e71a8c4258c0ab3244718717b305289f3ee346eaeb9dc
+```
+
+D2 mandatory direct exact3 remain:
+
+| Role | Blob | Raw |
+|---|---|---|
+| owner | `044287009b1fd155689bded46628b8fc91b73c06` | `13aa675be1356ab524a69066f861c2d27a8d8e32f0d690811b2b3308f199057d` |
+| independent | `0fae71a29f8fe44d31c18af42aaf53cc34beac6c` | `634ddb104e0b7630c695e032bb54726912fcfc9ad4351ab0eb6da7901671fc2b` |
+| parent | `fdea3dc18d81ca9ce1e3a842e802d21d0019a8c5` | `14fedde39823d90253a6adec6fc05ccde29f05a659edbac7edc007b28eab5793` |
+
+Canonical uninstrumented history:
+
+```text
+run A:
+O06 failed / other exact7 passed / immediate O06-only passed
+
+run B:
+O02 failed / other exact7 passed / immediate O02-only passed
+```
+
+The failed predicate's exact return code, stderr, exception class, and
+remote state were not captured.  Direct root cause is not proved.
+
+Instrumented diagnostic:
+
+```text
+result:
+8 passed / 1 warning / 571.48 seconds
+
+Git calls / live ls-remote:
+7040 / exact45
+
+exception / nonzero / nonempty stderr:
+0 / 0 / 0
+
+distinct observed remote OID:
+exact1 / 735b1a59e525b6b314fd7139deb653543a74c389
+
+live remote duration:
+280.701 seconds total
+
+log / pytest output raw SHA-256:
+4a22e0f1e0ce7731c6c75b244598a1ac09da6da8b8743a59e8fb51e8bbd5d6f7
+92b42bee155c093dca92ebc017d0ae37445428a4d4c5d9c7fda6aeb9e111c939
+```
+
+The later GREEN is non-credit and does not replace either failed full
+run.
+
+### Position change and reconciled contract
+
+Prior order:
+
+```text
+published D1 v4 causal RED
+-> published D2 targeted GREEN
+-> final Reference / OperationalAdmission
+```
+
+Reconciled order:
+
+```text
+published D1 v4 / D2 retained
+-> corrected D1 v5 causal RED refreeze
+-> later corrected D2 targeted GREEN
+-> separately authorized two-run stability matrix
+-> final corrected-source-bound Reference / OperationalAdmission
+```
+
+One canonical run/challenge now requires:
+
+```text
+local deterministic preflight / live query:
+exact0
+
+eligible actual-Git remote-main attempt:
+exact1
+
+owner / independent / parent / harness additional query:
+exact0
+
+retry / fallback / prior-run reuse:
+exact0 / exact0 / exact0
+```
+
+The actual-Git profile freezes the resolved Git executable,
+`ls-remote --exit-code origin refs/heads/main`, allowed normalized host
+exact4, exact20-second timeout, safe environment, strict UTF-8, exact1
+row, empty stderr, and OID equality with the preflight-frozen local
+`origin/main`.
+
+```text
+preflight / observation / terminal projection / closure:
+exact13 / exact17 / exact16 / exact10
+
+closure per eligible run:
+exact1
+```
+
+Owner, independent, parent, and harness consume the same immutable
+observation identity and pure-local before/after cut.  Owner and
+independent semantic verdicts remain separate.
+
+Corrected D1 v5 is test-only exact1.  Its frozen vector is O01–O07
+node-specific causal RED and O08 GREEN.  The run terminal is separate
+from expected violations.  Unavailable/malformed acquisition, unexpected
+signature, or another node distribution is not the refreeze and cannot be
+retried in the same authority.
+
+The later stability matrix preauthorizes two ordered distinct challenges
+A/B.  B runs only after A is fully evaluable and GREEN and is not a
+compensating retry.
+
+### Publication evidence
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes:
+6b104ed52b1821912b6dcff638809ff1ff1b4926
+ddd995726905cbd91d00f2ecbc97d89fba485dc0
+9985eee5c0e4379b916aed4321eacf60cb1e7adf
+79d7d677466c6d3d1379bd5377e60ce31fa79abca5bd84790dcdcec535b9b4b8
+51222
+```
+
+Receipt:
+
+```text
+commit / tree / blob / raw / bytes:
+0df0a41b5b8b89e48f7e9331fad900280c0306e4
+928484eaf52b5f83fdf4c07a66d6dcad65a55fd3
+1d1b4dcf657bc80ce254bfaf96ca1e89272be382
+2936e1c29924d026d3ad8dd586136f2ec4bd51eff71ca3d0b5e7dfb2913718fc
+7564
+
+delete-self logical:
+7c272c084e4400be8ca06628f259ebe2c0a17f75221e46f7fa04d4fc2613ef6e
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes:
+e430407db1dd556f9d023020dbad069b300b1ea6
+3710ab031560d2ca0010bba47c24eeb5d2b6912f
+d5ebaa865720a00a6d435edfde8d31c1e383ba6f
+632cbd5c2b2eb4394cd73763666c720f5cacc27f0b5137a461ea2cd873fc4e7a
+11485
+```
+
+All three were exact-content postfetch verified.  Three independent
+read-only audit lanes ended blocker exact0.  They made no edit, commit,
+GitHub write, pytest collection, or execution.  Karen retained and
+performed every final judgment and write.
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: two full runs failed at different nodes, their immediate
+selected reruns passed, and a later instrumented full run passed
+non-credit with exact45 identical live observations.  Current source
+identities are fixed and Reference/OA remain blocked.
+
+Inference: repeated slow external observation is a reproducibility risk
+surface and major latency source.  It is not proved to be the direct cause
+of either historical failure.
+
+Karen's opinion: keep actual-Git proof strong, but acquire the external
+fact once per run/challenge and let every role independently judge the
+same immutable fact.  Do not rerun until a favorable GREEN appears.
+Published D2 targeted GREEN remains history; stable postverification is a
+distinct unmet boundary.
+
+### Exactly one next authority and stop
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D2_POSTPUBLICATION_DIAGNOSTIC_FULL_EXACT8_GREEN_NONCREDIT_PRIOR_MIGRATING_O02_O06_FAILURES_NONREPRODUCED_LIVE_REMOTE_EXACT45_MULTICALL_OBSERVATION_LATENCY_ACTUAL_GIT_IDENTITY_REPRODUCIBILITY_AND_STABILITY_CONTRACT_RECONCILED_RUN_CHALLENGE_SCOPED_REMOTE_MAIN_ACQUISITION_ATTEMPT_EXACT1_OWNER_INDEPENDENT_PARENT_HARNESS_SAME_IMMUTABLE_OBSERVATION_IDENTITY_ADDITIONAL_LIVE_QUERY_RETRY_AND_PRIOR_RUN_REUSE_EXACT0_DISTINCT_CORRECTED_D1_V5_CAUSAL_RED_REFREEZE_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete token count:
+exact1
+
+automatic progression:
+false
+```
+
+```text
+Cocolon documentation:
+NEW exact3 / MODIFY exact2
+
+mashos-api / pytest:
+changed path exact0 / collect exact0 / execution exact0
+
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+
+runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+current authority stop:
+RECOVERY_EPOCH004_D2_PUBLISHED_TARGETED_GREEN_RETAINED_POSTPUBLICATION_FULL_EXACT8_MIGRATING_O06_O02_FAILURES_SELECTED_RERUNS_GREEN_DIAGNOSTIC_INSTRUMENTED_FULL_EXACT8_GREEN_NONCREDIT_DIRECT_CAUSE_NOT_PROVEN_LIVE_REMOTE_EXACT45_MULTICALL_REPRODUCIBILITY_RISK_RECONCILED_RUN_CHALLENGE_SCOPED_REMOTE_MAIN_ACQUISITION_ATTEMPT_EXACT1_ADDITIONAL_QUERY_RETRY_PRIOR_RUN_REUSE_EXACT0_STABLE_POSTVERIFIED_CREDIT_NOT_ESTABLISHED_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_CORRECTED_D1_V5_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No corrected D1, corrected D2, stability matrix, Reference/OA,
+Candidate/Event1, runtime, or later authority was executed.
