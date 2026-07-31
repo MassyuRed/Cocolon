@@ -29668,3 +29668,306 @@ snapshot path, so Karen's aggregate unique changed-path set remains the
 approved exact5.  This correction creates no new authority or domain
 effect; final credit still requires postfetch equality of the snapshot
 including this correction note and latest containment.
+
+## 2026-07-31 Recovery Epoch004 D1 v5 static-contract gap reconciliation
+
+### Approved boundary and current state
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PREFREEZE_STATIC_CONTRACT_GAP_IMPLEMENTATION_NEUTRAL_ROLE_OBSERVATION_CONSUMPTION_EVIDENCE_BOUNDARY_POSTACQUISITION_LOCAL_INTROSPECTION_TYPED_ABORT_AND_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+Cocolon:
+NEW exact3 / MODIFY exact2
+
+mashos-api:
+changed path exact0
+
+pytest collect / execution:
+exact0 / exact0
+
+live remote-main acquisition:
+exact0
+
+automatic progression:
+false
+```
+
+The checkpoint becomes effective only when all exact5 targets are
+reachable on Cocolon main, exact-content postfetch equal, Karen's
+write-commit aggregate unique changed-path set is exact5, and this latest
+snapshot contains all results.  Partial publication is non-credit.
+
+```text
+published D2:
+RETAINED_IMMUTABLE_TARGETED_GREEN_SOURCE
+
+stable postverified credit:
+NOT_ESTABLISHED
+
+prior corrected D1 v5:
+HALTED_BEFORE_PUBLICATION_AND_EXACT8_STATIC_CONTRACT_GAP_NON_CREDIT
+
+prior one-shot:
+UNCONSUMED
+
+replacement corrected D1 v5:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+Reference / OperationalAdmission:
+BLOCKED
+```
+
+### Fixed GitHub source
+
+```text
+Cocolon entry commit / tree:
+9c3a9dc29fff65eed842ff13affad72b79e34209
+58af8a967d9b2a63403b9bce00001c4bc63ff594
+
+mashos-api commit / tree:
+735b1a59e525b6b314fd7139deb653543a74c389
+eab4977649d8b31258c12e7ea49e1879c5e4a223
+
+P0 external identity:
+aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046
+```
+
+Current D1 exact1 remains:
+
+```text
+blob / raw:
+b7072620c31cd615ab221647c7145947255294e1
+e67a26cd72cd8007c58e71a8c4258c0ab3244718717b305289f3ee346eaeb9dc
+```
+
+Current mandatory direct exact3 remain:
+
+```text
+owner blob / raw:
+044287009b1fd155689bded46628b8fc91b73c06
+13aa675be1356ab524a69066f861c2d27a8d8e32f0d690811b2b3308f199057d
+
+independent blob / raw:
+0fae71a29f8fe44d31c18af42aaf53cc34beac6c
+634ddb104e0b7630c695e032bb54726912fcfc9ad4351ab0eb6da7901671fc2b
+
+parent blob / raw:
+fdea3dc18d81ca9ce1e3a842e802d21d0019a8c5
+14fedde39823d90253a6adec6fc05ccde29f05a659edbac7edc007b28eab5793
+```
+
+The prior local D1 draft remains unpublished diagnostic work and is not
+a future canonical input.
+
+### Reconciled exact2 gaps
+
+Static review before publication and pytest found:
+
+1. no implementation-neutral, test-observable, semantically refutable
+   proof that owner, independent, and parent consume the same exact17;
+2. no honest terminal after attempt exact1 when post-acquisition local
+   identity cannot be completely formed.
+
+The first gap is closed at the observable boundary:
+
+```text
+private consumer port:
+_RECOVERY_EPOCH004_ACTUAL_GIT_OBSERVATION_CONSUMER_PORT_V1
+
+current exact3:
+all absent
+
+future corrected D2 exact3:
+all present
+
+mixed:
+invalid
+
+body-free consumption event:
+cocolon.emlis.nls_v3.recovery_epoch004.actual_git_observation_consumed.v1
+
+event / verdict preimage:
+exact11 / exact5
+```
+
+The event is matched to the actual public API return window.  The verdict
+hash is independently rebuilt from the existing ordered issue-code
+tuple.  O02 fresh independent execution uses its own port and event
+without owner or primary-module trust.
+
+Semantic consumption requires live-query-exact0 counterfactual proof:
+
+```text
+A AVAILABLE_MATCH / same_cut true:
+success + event exact1
+
+B internally valid REMOTE_MAIN_OID_MISMATCH:
+failure + event exact1
+
+C internally valid changed after / same_cut false:
+failure + event exact1
+
+D integrity invalid:
+port rejection + event exact0
+```
+
+Only A is the canonical run observation.  B through D are transient
+negative probes, not acquisitions, persisted observations,
+closure/projection sources, or independently creditable run outcomes.
+
+Current causal RED and future GREEN use separate request/execution
+ledgers:
+
+```text
+neutral request / execution:
+exact1 / exact1
+
+current additional request:
+positive in the role/lane named by the frozen node-specific signature
+
+current additional process/network execution:
+exact0
+
+numeric current additional-request count:
+diagnostic-only / not a credit acceptance field
+
+future D2 additional request / execution:
+exact0 / exact0
+```
+
+The second gap is closed by the distinct body-free typed abort:
+
+```text
+abort top-level:
+exact22
+
+remote observation / diagnostic:
+exact12 / exact4
+
+consumer/run violation enum:
+exact12
+```
+
+It retains the already-consumed remote attempt and safe diagnostic, but
+never invents an unavailable after identity.
+
+```text
+preflight rejected:
+exact13 only
+
+valid exact17:
+projection exact16 exact1;
+matching closure exact10 required for credit, existing closure-invalid
+diagnostic projection route preserved
+
+post-acquisition identity unformable:
+typed abort exact22 only
+```
+
+The abort branch has exact17/port/role/event/oracle/closure/projection
+exact0 and no same-authority retry.
+
+### Published exact4 before this final snapshot target
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes:
+f26372aa40239f83857cfcc44045ac0a03e184ab
+490d548e9dc36a925a34c881f7dce2a0482200f9
+342b78e56a3c454cf80bf6366bf875f73229462b
+e0ccd2a394dca4e37c148b13e6bfb37ec6b79c72f3cce33560e160d7b0452995
+37945
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes:
+65c265f987228fafd55fcfbd120a15fde18c637e
+efb8e1890895fb0dbf601de03b049ef876480271
+c45dbc4ce3ae92920f96e4962b324181a95cf16b
+3f3a8b42ecf0c66e85ac9d90672cc8cbf2ef8eb72e1b7fd558ff9faa13217a60
+8095
+
+delete-self logical:
+fd9df9657e5bb017bcdb2969452d04812dfcc90669941bc53875e87b296a0030
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes:
+a05184da943fcbcb15a2209efbd0a9e8f4d024b8
+7379c4b8235c4d85afd0176cc3f531e05c207a0e
+05cb8a644f93fe246a663614f8bee85c764b0c9d
+da732ad1b3dc8149408a740197ed3d2955771271c9c8e269577ea3cf5200d0ef
+14228
+```
+
+Execution and Closure Plan:
+
+```text
+commit / tree / blob / raw / bytes:
+d8e8314f0e80efc306c4b0a6402779681339fd58
+5a2da7fe62d6971c6b749d1b76c327f419ce258f
+308079b15b12644f8f19356fda56723c74361c01
+43a9a43f8960117c8bfd0491c94e25e2601d87e0d74b79e3c887675e09b5705d
+347737
+```
+
+Every exact4 target above is exact-content postfetch equal and each write
+commit changed only its approved path.  This snapshot is the fifth and
+final target; its own exact-content postfetch and latest-containment
+checks complete the checkpoint.
+
+Three independent read-only audit lanes ended blocker/advisory exact0.
+They made no edit, commit, GitHub write, pytest collection, or execution.
+Karen performed every final judgment, correction, and write.
+
+### 確認した事実・推測・華恋の意見
+
+確認した事実: prior D1 authorityはGitHub反映前・pytest前に停止し、one-shotは
+未消費です。current exact3 portは全て不在です。complete exact17には
+post-acquisition identityの完全形成が必要で、Reference/OAはBLOCKEDのままです。
+
+推測: 問題はpytestで証明されたcurrent production defectではなく、将来もD1 bytesを
+変えない契約と、未固定のevidence seamの静的な不整合でした。private portと
+counterfactual role verdictを固定すれば、production storageを決めずにsemantic
+consumptionを反証可能にできます。
+
+華恋の意見: 内部carrierを先に選ばず、D1から検証できる境界だけを固定します。
+eventの自己申告ではなく、意味が変わるcounterfactualで各roleの判定も変わることを
+要求します。また、取得済みattemptを消さず、存在しないafterも作らないため、
+exact17とは別のtyped abortを残します。
+
+### Current state and exactly one next authority
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PREFREEZE_STATIC_CONTRACT_GAP_IMPLEMENTATION_NEUTRAL_ROLE_OBSERVATION_CONSUMPTION_EVIDENCE_BOUNDARY_POSTACQUISITION_LOCAL_INTROSPECTION_TYPED_ABORT_AND_AUTHORITY_BOUNDARY_RECONCILED_DISTINCT_CORRECTED_D1_V5_CAUSAL_RED_REFREEZE_AND_POSTVERIFICATION_ONLY
+
+next authority state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete token count:
+exact1
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH004_D2_PUBLISHED_TARGETED_GREEN_RETAINED_STABLE_POSTVERIFIED_CREDIT_NOT_ESTABLISHED_PRIOR_CORRECTED_D1_V5_HALTED_BEFORE_PUBLICATION_AND_EXACT8_STATIC_CONTRACT_GAP_NONCREDIT_ONE_SHOT_UNCONSUMED_IMPLEMENTATION_NEUTRAL_ROLE_OBSERVATION_CONSUMER_PORT_AND_BODY_FREE_CONSUMPTION_EVIDENCE_BOUNDARY_FROZEN_POSTACQUISITION_LOCAL_INTROSPECTION_TYPED_ABORT_EXACT22_FROZEN_REPLACEMENT_CORRECTED_D1_V5_DEFINED_INACTIVE_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+```text
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+
+runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+```
+
+No replacement D1, corrected D2, stability matrix, Reference/OA,
+Candidate/Event1, source lock, runtime, or later authority was executed.
