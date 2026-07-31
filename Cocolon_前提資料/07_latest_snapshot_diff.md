@@ -31466,3 +31466,301 @@ RECOVERY_EPOCH004_D1_V5_R1_PRIOR_NODEID_PREFIX_NONCREDIT_CLOSED_EXPLICIT_FIXED_S
 No corrected R1 launcher, corrected D2, stability, Reference/OA,
 Candidate/Event1, source lock, runtime product, or later authority was
 executed.
+
+## 2026-07-31 snapshot — R1 prelaunch Receipt-schema contradiction / v2 direct-field reconciliation Design
+
+### Authority, decision, and final-target boundary
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_ROOTDIR_CORRECTED_ONE_SHOT_PRELAUNCH_RECEIPT_SCHEMA_CONTRACT_UNSATISFIABLE_ORDERED_NODE_LIST_SHA256_MANDATORY_BUT_UNALLOCATED_TOP_EXACT16_EXECUTION_OBSERVATION_EXACT11_EXACT8_EXACT6_KEYSET_CONTRADICTION_PYTEST_INVOCATION_CHALLENGE_REMOTE_O01_O08_EXACT0_CURRENT_AUTHORITY_CONSUMPTION_BOUNDARY_AND_DISTINCT_SUCCESSOR_ONE_SHOT_RECEIPT_SCHEMA_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+authority kind:
+DESIGN_ONLY
+
+predecessor execution authority:
+CLOSED_CONSUMED_UNEXECUTED_NO_PYTEST_NO_RERUN
+
+schema v1 / v2:
+NONCREDIT_UNSATISFIABLE / RECONCILED_NOT_EXECUTED
+
+distinct successor:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+This snapshot is the final target of the approved Cocolon exact5.  The Design
+state becomes credited only after this path is exact-content postfetch equal,
+all final paths are reachable from main, every publication commit is
+single-path, the aggregate unique changed-path set from entry commit
+`49dbcb48...` is exact5, and both append-only prefixes remain byte-equal.
+
+### Confirmed contradiction and authority consumption
+
+The predecessor Design required its future Result and Receipt to directly
+record:
+
+```text
+ordered_node_list_sha256:
+e2661d946c060efc44ce7da06f8c55f51d10dfad2af4f5f0526bd38109c340bc
+```
+
+It simultaneously froze Receipt top exact16, execution observation exact11,
+and `exact8` exact6 with only collected/executed/failed/passed/error counts and
+ordered results.  No frozen key allocated the mandatory direct field.
+
+```text
+add field under v1:
+frozen keyset violation
+
+omit field under v1:
+mandatory direct-record violation
+
+credited v1 Receipt construction:
+exact0
+
+blocker discovery:
+PRELAUNCH_BEFORE_PYTEST_PROCESS_START
+```
+
+The predecessor execution token was approved and prelaunch began, so its
+authority identity is consumed and closed.  It cannot be reopened with a
+different schema.  Its pytest process budget was never used but is not
+transferable or reusable.
+
+```text
+approval / prelaunch / close:
+exact1 / exact1 / exact1
+
+authority token reusable:
+false
+
+pytest invocation / process budget consumed:
+exact0 / exact0
+
+execution Result / Receipt publication:
+exact0 / exact0
+
+challenge / remote / O01--O08 / closure:
+exact0 / exact0 / exact0 / exact0
+```
+
+The terminal design disposition is:
+
+```text
+R1_SCHEMA_V1_PRELAUNCH_RECEIPT_CONTRACT_UNSATISFIABLE_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_NO_PYTEST_NO_RERUN
+```
+
+No old runtime result class or execution Receipt was fabricated.
+
+### Minimal v2 reconciliation
+
+```text
+corrected schema:
+cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.d1_v5.r1_rootdir_corrected_exact8_one_shot_receipt.v2
+
+top level / execution_observation:
+exact16 unchanged / exact11 unchanged
+
+exact8:
+exact6 -> exact7
+
+added direct field:
+ordered_node_list_sha256 = e2661d946c060efc44ce7da06f8c55f51d10dfad2af4f5f0526bd38109c340bc
+
+other nested keysets / enums / exact12 result classes:
+unchanged
+```
+
+The direct field is present in every stage.  It is expected contract identity,
+not a substitute for observed counts/rows or prior node-id evidence.  OWNER and
+INDEPENDENT_VERIFIER must derive it independently before launch.  The v2
+Receipt also rebinds the successor token, this final Design checkpoint, the
+schema-v2 Result, and its new execution exact5 rather than inheriting old
+identity projections.
+
+### Runtime-readiness and fixed source
+
+```text
+mashos-api commit / tree / clean:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+true
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+The retained runtime's exact7 hashes, executable, rootdir, argv, environment,
+ordered-node, and expected-vector identities matched their prior verified
+values during prelaunch static/local checks.  They remain past evidence only.
+The separately approved successor must re-fetch its source cut and freshly,
+independently rederive every identity and the v2 stage projections.  Any drift
+or ambiguity stops before pytest, with no repair, rematerialization, generic
+interpreter lookup, or switch.
+
+### Published exact4 before this snapshot target
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+00f10abea3ed68dc9ba2b75b74760236503328da
+bd25f32dabd0e26d7ba3618f389c0b639ea26bdb
+da7815e5089143db6f39534dcfb78bf004f20c73
+4e9287b62bafd2df584d325d562fbbbeefcbe3fcb5ee56cc6e856fe75f97b9ed
+38988 / 1048
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+428243f00c544c09b558279389c78372dc4b669f
+02d1cb9e70b78123b13c4cf9a0cbbc2f533b7ec4
+f6c9505338721b82b72006cb745e3206a9c2f5e9
+ac6981a2ef0576195c725a81047692ff73d534cbb7972c84696f631d3f46c6d9
+11401 / 1
+
+delete-self logical SHA-256:
+bcaf0efaf6ca3196dbf605b54296b724d40b41649b775375c5049057fa1327b6
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+b067e1bf59f2e13e65628f9c33e6b68bca0bf700
+ddb81f25a0e5bd892830ab694293d8e6e48a55fa
+7679a5c98d43dcf7773d6c27885a36fad588fc2c
+78ce996c1f268642c271b595f7548cdfd41eac8309fa2ac22eece9c3111537a4
+11707 / 345
+```
+
+Execution and Closure Plan:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+b13271e75c0dc7bedb2b84927c1dbe1018a0255c
+2ebd841d9f18d9d08760cf162ab36f787c7b60cc
+763dc99fede44c0284b28cc7c44968f440aaa8c6
+b6f26e5a64701082daf3a8a03314773d3a608caf6a499fa5e173d7a426a09760
+396034 / 11495
+```
+
+All exact4 are single-path publications and exact-content postfetch equal.
+The Plan preserved its entry prefix:
+
+```text
+blob / raw / bytes / lines:
+e44c1343fb2939713f2e3ba253c0638d7ab8f815
+58ce149ba11566c32665fd2a9070b1292cde896803ef659fe9ca2b3791e2a4ca
+389335 / 11297
+```
+
+This latest snapshot preserves its own entry prefix:
+
+```text
+blob / raw / bytes / lines:
+78b27c65aa9613d9d570be9797de9c90a1c74f43
+b9d72272cf06b265dc361c0b07c305b97a4971c66e1a336e32a98a6d37254bbf
+1591104 / 31468
+```
+
+### Scope and effects
+
+```text
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed paths:
+exact0
+
+production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+pytest / framework / import / collection / challenge / live remote:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+O01--O08 / closure / schema-v2 successor invocation:
+exact0 / exact0 / exact0
+
+product runtime effect / automatic transition:
+exact0 / exact0
+
+corrected D1 causal RED credit:
+NOT_ESTABLISHED
+
+corrected D2 / stability:
+NOT_APPROVED exact0 / NOT_APPROVED exact0
+
+Reference / OperationalAdmission:
+BLOCKED / BLOCKED
+
+Candidate / Event1 / source lock:
+exact0 / exact0 / false
+```
+
+Independent read-only schema, authority, runtime, Receipt, Handoff, and Plan
+audits ended blocker exact0 / advisory exact0.  Subagents changed no file,
+wrote no GitHub object, and ran no import, collection, or pytest process.
+
+### 確認した事実
+
+- GitHub fixed source and predecessor Design identities were re-fetched equal;
+- v1 has no direct field and cannot satisfy both mandatory rules;
+- the old authority is closed while pytest/challenge/remote/O01--O08 are
+  exact0;
+- v2 keeps top exact16/observation exact11 and changes only exact8 to exact7;
+- Design, Receipt, Handoff, and Plan are published exact4, single-path, and
+  postfetch equal; and
+- this authority has no production, test, remote-run, or downstream effect.
+
+### 推測
+
+The v2 schema is now constructible, but that does not predict pytest
+collection, external observation availability, causal RED, O08 invariance, or
+closure.  The retained runtime is likely reusable only if fresh rederivation
+continues to match.
+
+### 華恋の意見
+
+旧tokenを「pytest未起動」という理由で再利用せず、修正契約を別tokenとして
+再承認いただくのが妥当です。D1の厳密さ、actual-Git remote exact1、role独立
+評価、no-retryは維持し、次はv2 schema readinessを含む全prelaunch gate後に
+一回だけ実行すべきです。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_ROOTDIR_CORRECTED_SCHEMA_V1_PRELAUNCH_CONTRACT_UNSATISFIABLE_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_PYTEST_EXACT0_DISTINCT_SCHEMA_V2_ONE_SHOT_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_EMPTY_NONREPO_CWD_EXPLICIT_FIXED_SOURCE_ROOTDIR_REPOSITORY_RELATIVE_ORDERED_NODE_LIST_SHA256_DIRECT_RECEIPT_FIELD_FULL_EXACT8_PYTEST_INVOCATION_EXACT1_FRESH_CHALLENGE_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor unique token value count:
+exact1
+
+successor execution under this Design:
+exact0
+
+automatic progression:
+false
+```
+
+```text
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_R1_ROOTDIR_CORRECTED_SCHEMA_V1_PRELAUNCH_RECEIPT_CONTRACT_UNSATISFIABLE_CURRENT_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_PYTEST_CHALLENGE_REMOTE_O01_O08_EXACT0_SCHEMA_V2_RECONCILED_DISTINCT_ONE_SHOT_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No schema-v2 one-shot, corrected D2, stability run, Reference/OA,
+Candidate/Event1, source lock, runtime product, or later authority was
+executed.
