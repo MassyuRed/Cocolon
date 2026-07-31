@@ -11943,3 +11943,183 @@ This next token is Design-only.  Until separately approved it authorizes
 no pytest, network execution, source change, retry, D2, stability,
 Reference/OA, Candidate/Event1, source lock, Product Read, or later
 effect.
+
+## 2026-08-01 R1 result-unknown terminal grammar reconciliation Design append
+
+### Authority and immutable current terminal
+
+Mash explicitly approved this Design-only authority:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_R1_RESULT_UNKNOWN_POSTVERIFIED_CURRENT_AUTHORITY_CLOSED_CONSUMED_ADMISSION_EXACT1_CONSUMPTION_EXACT1_PYTEST_INVOCATION_EXACT1_EXIT1_STDERR_EMPTY_STDOUT_C6E9B0E6573E722AC2D66DFA20EAF0C5E2AF69518CB1BBCD2A6A768DA5D62C4_BODY_FREE_EXACT8_O01_O08_CHALLENGE_REMOTE_CLOSURE_CREDIT_NOT_ESTABLISHED_NO_PREFIX_REWRITE_NO_RETRY_OBSERVED_PYTEST_NODE_ID_DISPLAY_CAUSAL_SIGNATURE_PLACEMENT_AND_FINAL_DURATION_SUFFIX_TERMINAL_GRAMMAR_RECONCILIATION_DISTINCT_SUCCESSOR_BOUNDARY_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+```
+
+```text
+authority kind:                    DESIGN_ONLY
+current R1 terminal:               R1_RESULT_UNKNOWN_STOP
+current authority:                 CLOSED_CONSUMED
+same-authority reparse / rerun:     exact0 / exact0
+reclassification / credit promote: exact0 / exact0
+pytest / import / collection:       exact0 / exact0 / exact0
+challenge / remote / network:       exact0 / exact0 / exact0
+mashos-api changed paths:           exact0
+automatic progression:              false
+```
+
+The consumed one-shot evidence is preserved byte-for-byte. Admission and
+consumption remain exact1, pytest invocation exact1, exit 1, stderr exact0,
+and stdout SHA-256
+`c6e9b0e6573e722ac2d66dfa20eaf0c5e2af69518cb1bbdcd2a6a768da5d62c4`.
+Exact8/O01--O08/challenge/remote/closure credit remains `NOT_ESTABLISHED`.
+
+### Diagnosis and prospective credit boundary
+
+Read-only inspection separated three presentation mismatches: empty-cwd-
+relative displayed node IDs, causal signatures as standalone enum lines in
+node-bounded failure bodies, and a duration suffix on the final count summary.
+The presentation is diagnostic/noncredit; no arbitrary prefix rewrite or
+retroactive compatibility promotion is allowed.
+
+Future credit must not depend on human pytest text alone. It is divided into:
+
+```text
+child pytest lifecycle + D1 body-free projection
+-> semantic ledger closed before child exit
+-> outer launcher final communicate / reap / postrun identity
+-> final capture envelope
+-> later Receipt binds both artifacts
+```
+
+The challenge is generated in the child after launch and bound byte-exact
+across projection, ledger, and envelope. Prebinding, injection, and a second
+hash are forbidden. The outer exact31 envelope binds the required process
+vector, final stdout/stderr counts and hashes, semantic-ledger logical/raw/byte
+identities, and equal child session exit.
+
+### Published Design exact3 before this append
+
+Design:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_NodeIdDisplayCausalSignaturePlacementAndFinalDurationSuffix_TerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_20260801.md
+
+commit / tree / blob / raw / bytes / lines:
+44dab205580c5e0f76f9e91032cf4439648cd21b
+918f7dc64b8e52f1559b01f21b84841c70a541da
+7fe61a18a2b5f6a2d3231aa231c4c2956b8de45a
+b89576e86d4e2b981388fa7299af8b850e14e2b9ea8ef46ea6e3369e8d437b13
+66332 / 1523
+```
+
+Body-free Design Receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_NodeIdDisplayCausalSignaturePlacementAndFinalDurationSuffix_TerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_BodyFree_Receipt_20260801.json
+
+commit / tree / blob / raw / logical / bytes / lines:
+aa66070e2e699f8e53d190e9e922d66d355a41c6
+98bc6de986a7c9fe0113baf8620fc6a82c18a293
+66f37b193becb14484c7368321d6d82f1cb96c2a
+95c10235a5cbc87d3ca8922cabdef2cf93485f8ca054623acf08ad9c3ba83826
+1d447c157846ea006d9ae163a206ea530136217cedb176b7506621ba33f1eb6f
+13915 / 1
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_NodeIdDisplayCausalSignaturePlacementAndFinalDurationSuffix_TerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_Handoff_20260801.md
+
+commit / tree / blob / raw / bytes / lines:
+ef9674d5cb535967aec4bf15d133181dfffadd57
+88106f5ed2f7e2582808d9c03894e53f544bc95d
+525a8688f82a50106084ca007205954de7f22d09
+218ccdfcaf5f6be7afe68adf13d6fdc3cb2e2c3e9032dd7638b055ac569578b6
+12513 / 322
+```
+
+All exact3 contents were postfetched byte-exact before this append.
+
+### Frozen prospective contracts
+
+```text
+display / failure-signature / duration / diagnostic SHA-256:
+9a06305616832b6d987c03f090c80543975593993f03e0f3015c25c888b66229
+0c7bda846aed35aabab43392ba722bf84ae4ea64152825f4eb86601e7b8d385b
+aea0617cb866ed6951f6bd6fa119dd303fbad877b80cdb4c4293881b76fd178e
+e40ef425ce7b6ea0d32751a7cc6afe410edfd2d5d6d5dad8aa8251539694e93c
+
+semantic ledger / outer envelope / stage / bundle SHA-256:
+b1bf83c8f6d343e4bcea9afa4d89b3b1af439ee2d30e6f472fc3a50dfca1d123
+ae7d1aac425b84eac88c6eeb0c90ab37f0aed3fafa166d332c37ce1eabc71db5
+00bb9c5d15c753fd98808278ac628212ded2a35eac94f6f54556ffefca5b8a8b
+97df7f9908d675d66b9ad3af830ebfef9a1d895cff625f52da0c3d647e6d09d3
+```
+
+The distinct RED requires owner contract test NEW exact1, synthetic valid
+ledger/envelope pair exact1, semantic negatives exact24, outer negatives
+exact8, combined negatives exact32, leaf mutation assertions at-least64, and
+targeted RED pytest invocation exact1. Production implementation, existing D1
+change, full exact8 execution, challenge, remote, and network remain exact0.
+
+### Scope and entry-prefix preservation
+
+```text
+Cocolon NEW / MODIFY append-only:
+exact3 / exact2
+
+approved changed path set:
+exact5
+
+mashos-api / production / test / fixture changed paths:
+exact0 / exact0 / exact0 / exact0
+
+Plan exact entry prefix blob / raw / bytes / lines:
+2b55ef2e26bee2c7681e0ad37c12671fae9f90b3
+a3e66558818227eb10455dbebef06cabd7554e2467396fea20b80d94db55757f
+413070 / 11945
+```
+
+### 確認した事実
+
+- the current R1 remains closed consumed at `R1_RESULT_UNKNOWN_STOP`;
+- no retry, reparse, prefix rewrite, or retroactive credit was performed;
+- the diagnostic mismatch and future credit-bearing ledger/envelope contract
+  are distinct layers;
+- Design, Receipt, and Handoff are published and postfetch byte-equal;
+- three independent read-only lanes ended blocker/advisory exact0; and
+- no mashos-api or product source was changed or executed.
+
+### 推測
+
+The seven observed failures may be human-presentation mismatches rather than a
+failure of D1's internal projection. The consumed run lacks the new structured
+ledger/envelope pair, so this remains an inference and receives no credit.
+
+### 華恋の意見
+
+現R1を後から成功へ読み替えず、RESULT_UNKNOWNとsafe zeroを保存するのが正しい
+です。同時に、将来のcreditは人間向け表示から分離し、子processの意味論と親
+launcherの最終観測を因果順に束縛すべきです。次はproduction実装を混ぜず、
+contract test exact1のREDだけを凍結して停止します。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_RESULT_UNKNOWN_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_POSTVERIFIED_CURRENT_CONSUMED_R1_IMMUTABLE_NO_RETROACTIVE_REPARSE_OR_CREDIT_HUMAN_PYTEST_PRESENTATION_DIAGNOSTIC_ONLY_BODY_FREE_CHILD_GENERATED_FRESH_CHALLENGE_POSTLAUNCH_PROJECTION_SEMANTIC_LEDGER_AND_OUTER_FINAL_CAPTURE_ENVELOPE_BINDING_REQUIRED_PROCESS_VECTOR_OWNER_CONTRACT_NEW_RED_TEST_EXACT1_PRODUCTION_OWNER_IMPLEMENTATION_EXACT0_EXISTING_D1_CHANGE_EXACT0_SYNTHETIC_VALID_LEDGER_ENVELOPE_PAIR_EXACT1_SEMANTIC_NEGATIVE_CASES_EXACT24_OUTER_NEGATIVE_CASES_EXACT8_COMBINED_NEGATIVE_CASES_EXACT32_LEAF_MUTATION_ASSERTIONS_GTE64_TARGETED_RED_PYTEST_INVOCATION_EXACT1_D1_FULL_EXACT8_PYTEST_INVOCATION_EXACT0_CHALLENGE_REMOTE_NETWORK_EXECUTION_EXACT0_RED_FREEZE_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete unique token value count:
+exact1
+
+automatic progression:
+false
+```
+
+This next authority is inactive until separate Mash approval. No automatic
+transition or successor execution is permitted.
