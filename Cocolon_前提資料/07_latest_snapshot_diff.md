@@ -30903,3 +30903,271 @@ exact0 / exact0 / exact0 / exact0 / false
 
 No R1 exact8, corrected D2, stability, Reference/OA, Candidate/Event1,
 source lock, runtime product, or later authority was executed.
+
+## 2026-07-31 snapshot — R1 one-shot collected exact8 but stopped at fixture setup non-credit
+
+### Authority, terminal, and no-rerun boundary
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R0_RUNTIME_READY_CREDITED_POSTVERIFIED_R1_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_FRESH_CHALLENGE_FULL_EXACT8_ONE_SHOT_PYTEST_INVOCATION_EXACT1_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+result / failure safe code:
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP /
+PYTEST_LAUNCH_OR_COLLECTION_INVALID
+
+pytest invocation / same-authority rerun:
+exact1 / exact0
+
+D1 causal-RED refreeze:
+NOT_ESTABLISHED
+
+automatic progression:
+false
+```
+
+This is the final target of the approved Cocolon exact5.  Its state becomes
+effective only after this snapshot is postfetch exact-equal, the aggregate
+unique changed-path set from the credited Design checkpoint is exact5, all
+five final paths are reachable on main, and the Plan/latest prefixes remain
+byte-identical.
+
+### Fixed source and retained runtime
+
+```text
+mashos-api commit / tree / clean:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+true
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+Owner and independent verifier rederived the same retained-runtime exact7
+hashes as `VALID`.  Full-root remained exact527, installed rows exact482,
+distributions/RECORD matches exact5/exact5, and unowned/unexpected
+exact0/exact0.  Runtime repair, rematerialization, and interpreter switch were
+exact0.
+
+### One-shot safe observation
+
+```text
+logical argv / environment-policy SHA-256:
+8797754f541bd6bbd97734f0e80329cb597f2e37605755d33588fbef7d58f99c
+6393dea280af670e3b0ed902014c86fc65a6666e973fe8e7ee50318ff1a11591
+
+working-directory class:
+EMPTY_NON_REPOSITORY_DIRECTORY
+
+process started / completed / timed out / exit:
+true / true / false / 1
+
+stdout bytes / SHA-256:
+12856 /
+18128e97df97e2496f7e7054c604448eb898196ce57519b05dc97e09f9f45001
+
+stderr bytes / SHA-256:
+0 /
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+```
+
+```text
+collected / phase-normalized executed:
+exact8 / exact8
+
+failed / passed / error:
+exact0 / exact0 / exact8
+
+ordered oracle outcomes / O01–O08 test bodies:
+exact0 / exact0
+
+challenge / preflight / neutral remote request / execution:
+exact0 / exact0 / exact0 / exact0
+
+additional remote execution / retry / fallback / prior-run reuse:
+exact0 / exact0 / exact0 / exact0
+
+observation identity / closure:
+exact0 / exact0
+```
+
+Every safely observed node id contained the checkout-directory prefix, while
+the fixed D1 vector requires the repository-relative path beginning at
+`ai/tests/`.  The module fixture failed its exact ordered-node comparison
+before `_acquire_run_observation()`.  No expected causal signature, violation,
+O08 GREEN, source equality, or closure value was promoted into observation.
+
+### Body-free Result and Receipt
+
+```text
+state:
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP
+
+execution observation SHA-256:
+7b10c9e9c55c4fa31e4e31908c78be358e16e42f00d61161d729fd34f785808a
+
+Receipt delete-self SHA-256:
+ed31017aa72da31c9a2618b647426546dd3ecc0f521ef048dfe934d8dc0ffb07
+
+owner / independent verdict:
+INVALID / INVALID
+
+reason code:
+PYTEST_LAUNCH_OR_COLLECTION_INVALID
+```
+
+Raw stdout/stderr, exception bodies, absolute paths, environment bodies, and
+challenge input bytes are absent from publication.
+
+### Published exact4 before this snapshot target
+
+Result:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+242d85d6474b0058816c804520d7c8d2f5bc19da
+61b6eaeadac847e19145d76086207d0594ffe21e
+2a098fb57517b8ce4e517c0bbfdc8c7a4fee5d5c
+c8a1971fccf66e12bfe007d590170857b18c5b67898c762b070533db85981b63
+7205 / 246
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+af81ceea7022b107304fea966204063441798ffe
+1c8db1d5e4a350df8418cbf07ceb3370bf73deb0
+49d04991899b5a4bc55d4ffd5e358004e65b80e7
+dade13cf7fb02fb4d9df777b1288f66d18327039c33eb12e6e52e76f58b4ef4e
+9187 / 1
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+617282a2b3dddf4185621be386fb8b8b41c6998e
+628ae9b6d04ad4d588c356cabe159aedf7fd830e
+29e98da67efa84cfefc0619c51380ba373710c1b
+126f11274f43505ac3bdc4eeab424a30f792f8ffc1d447a874cc3ff98b4a849e
+9875 / 274
+```
+
+Execution and Closure Plan:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+973c2fdeaf6f7c922c18eca0ef7713c6b58e49eb
+dd3cdce4a128455184f0bb4518d32ca1136160a2
+57e7374470016a44953354f122318f6a2ff876c3
+19618da45a123b939447bc76bb545b03dae98546ad6fcebcafe5f5384cc68f71
+380650 / 11068
+```
+
+All exact4 are postfetch exact-equal, and each publication commit changed
+only its approved exact1 path.  The Plan prefix is byte-identical to:
+
+```text
+blob / raw / bytes:
+c2b68701cb99b08af22262ae7a4b6cfaba5ff238
+3356e78679fd06702d7eff3871ac7028440070a35c5ec5c077c6b8f9a955fbf0
+373973
+```
+
+This latest snapshot preserves its pre-append prefix exactly:
+
+```text
+blob / raw / bytes:
+8a5a1406fed69843f3873284da5f1b13aaac854d
+9f31595d631d63ae98b3cb49e84f65d24189767f72962edab1dd1d141e16af2c
+1571884
+```
+
+### Scope and effects
+
+```text
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed paths:
+exact0
+
+production / test / fixture / dependency / config / lock change:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+product runtime effect:
+exact0
+
+Reference / OperationalAdmission / Candidate / Event1 / source lock:
+BLOCKED / BLOCKED / exact0 / exact0 / false
+
+corrected D2 invocation / stability run / automatic transition:
+exact0 / exact0 / exact0
+```
+
+### 確認した事実
+
+- fixed source and both retained-runtime rederivations passed before launch;
+- pytest was invoked once and collected eight nodes;
+- fixture setup reported eight errors because the exact node-id vector did
+  not equal the frozen repository-relative vector;
+- challenge, preflight, remote observation, O01–O08 bodies, and closure were
+  never reached; and
+- no rerun, source/runtime mutation, or downstream effect occurred.
+
+### 推測
+
+The observed prefix is consistent with pytest using a rootpath outside the
+fixed source repository.  A fixed `--rootdir` is therefore a plausible
+command-only reconciliation, but it remains unexecuted and unapproved.
+
+### 華恋の意見
+
+collection exact8をsemantic exact8として扱わず、non-creditで止めた判断が妥当です。
+次はDesign-onlyでrootdir bindingとlogical argvを固定し、空cwd隔離と既存D1の
+repository-relative node-id identityを同時に満たす契約を確認します。そのDesignが
+GitHub上でcredit/postverifyされても、新しいone-shotは別承認まで実行しません。
+
+### Exactly one next authority
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_PYTEST_INVOCATION_EXACT1_COLLECTION_EXACT8_MODULE_FIXTURE_SETUP_ERROR_EXACT8_BEFORE_PREFLIGHT_CHALLENGE_REMOTE_AND_O01_O08_NONCREDIT_EMPTY_NONREPO_CWD_ABSOLUTE_D1_PYTEST_ROOTDIR_CHECKOUT_PREFIX_NODEID_MISMATCH_EXPLICIT_FIXED_SOURCE_ROOTDIR_REPOSITORY_RELATIVE_ORDERED_NODEID_LAUNCHER_CANONICALIZATION_AND_DISTINCT_NEW_ONE_SHOT_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+authority kind:
+DESIGN_ONLY
+
+concrete successor token count:
+exact1
+
+new one-shot execution authority token count:
+exact0
+
+future Design Cocolon scope:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api change / pytest / challenge / remote / O01–O08:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+automatic progression:
+false
+```
+
+```text
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_R1_PYTEST_EXACT1_COLLECTION_EXACT8_NODEID_PREFIX_MISMATCH_FIXTURE_SETUP_ERROR_EXACT8_PRECHALLENGE_PREFLIGHT_REMOTE_ORACLE_CLOSURE_EXACT0_NONCREDIT_NO_RERUN_CORRECTED_D2_STABILITY_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No new one-shot, corrected D2, stability, Reference/OA, Candidate/Event1,
+source lock, runtime product, or later authority was executed.
