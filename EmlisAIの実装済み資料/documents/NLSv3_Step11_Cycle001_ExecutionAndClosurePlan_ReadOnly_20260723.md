@@ -10366,3 +10366,275 @@ exact0 / exact0 / exact0 / exact0 / exact0 / exact0
 
 No R0, R1, corrected D2, stability, Reference/OA, Candidate/Event1, source
 lock, runtime product, or later authority was executed.
+
+## 2026-07-31 append — D1 v5 lock-derived exact5 test-runner runtime readiness
+
+### Authority and terminal
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PUBLISHED_EXACT1_POSTFETCHED_PYTEST_MODULE_UNAVAILABLE_BEFORE_FRAMEWORK_ENTRY_PRECOLLECTION_NONCREDIT_CONFIGURED_ROUTE_HASH_VERIFIED_LOCK_DERIVED_EXACT5_ARTIFACT_ACQUISITION_TEST_RUNNER_MATERIALIZATION_PYTEST_AND_ROLE_IMPORT_PROBES_INDEPENDENT_RUNTIME_READINESS_VERIFICATION_READY_OR_NOT_READY_STOP_ONLY
+
+terminal:
+RUNTIME_READY
+
+automatic progression:
+false
+```
+
+The R0 Result, Body-free Receipt, and Handoff are published and exact-content
+postfetch equal.  This Plan append is target four.  The latest snapshot append
+remains target five and must bind the published exact4 before the checkpoint
+receives credit.  Partial publication remains non-credit.
+
+```text
+Cocolon documentation:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed path:
+exact0
+
+D1 target import / collection / execution:
+exact0 / exact0 / exact0
+
+challenge / eligible live remote-main acquisition / O01–O08:
+exact0 / exact0 / exact0
+```
+
+`RUNTIME_READY` establishes only that the retained runner can enter pytest and
+load the exact three current roles under the frozen environment.  It does not
+establish D1 causal RED and does not issue or execute R1.
+
+### Fixed source and lock
+
+```text
+mashos-api commit / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+The checkout remained clean at the fixed commit/tree before and after both
+probes.  D1 and lock bytes remained equal, and the D1 test module was never
+imported.
+
+### Input and materialization
+
+The ordered lock-derived exact5 is `iniconfig 2.3.0`, `packaging 26.2`,
+`pluggy 1.6.0`, `pygments 2.20.0`, and `pytest 8.4.1`.
+
+```text
+projection SHA-256:
+f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e
+
+acquisition state:
+ACQUIRED_CONFIGURED_ROUTE
+
+configured-route access / accepted / rejected:
+exact1 / exact5 / exact0
+
+sdist / build / unconfigured source:
+exact0 / exact0 / exact0
+
+accepted-wheel manifest SHA-256:
+00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d
+```
+
+Each filename, wheel raw hash, wheel RECORD hash, distribution name, and
+version equalled the frozen projection before acceptance.  No credential was
+extracted or requested.  Package-index access after acceptance was exact0.
+
+The fresh target was materialized exact1 using pip 26.0.1 outside the target,
+hashes-required, wheel-only, no-index, no-dependency, and no-compile.
+
+```text
+materialization state:
+VERIFIED
+
+distribution / RECORD closure match:
+exact5 / exact5
+
+unowned importable / unexpected entry:
+exact0 / exact0
+
+distribution closure SHA-256:
+4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c
+
+installed-file manifest SHA-256:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+
+full runtime-root manifest SHA-256:
+55e12965e1be85424b39aa38dd6ae454b6ee9aef9d86e0c42c565a9a494a578d
+
+runtime-root identity SHA-256:
+e0b4750c02c676e1fa717cd4fe1f216fb1af4babcfa297abd7b3508995bcf19f
+
+interpreter executable raw SHA-256:
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+```
+
+Owner and independent verification rebuilt the installed-file and full-root
+manifests before and after the probes and obtained the same identities.
+
+### Environment, probes, and verdict
+
+The empty non-repository working-directory policy fixed
+`PYTEST_DISABLE_PLUGIN_AUTOLOAD=1` and `PYTHONDONTWRITEBYTECODE=1`, and removed
+`PYTEST_ADDOPTS`, `PYTEST_PLUGINS`, and `PYTHONPATH`.
+
+```text
+environment policy SHA-256:
+8a43751b49a8db1d024063608405f9b169e829f3c0be3488433b31800d44b1a4
+
+pytest probe invocation / exit / version / result:
+exact1 / 0 / 8.4.1 / VALID
+
+pytest logical argv SHA-256:
+4ff50356d7f0cd49b431df2f480e71aabaf2ff07bd476a90fa29ef4a2eb52cb9
+
+role-smoke process / direct load / public API call / effect / result:
+exact1 / exact3 / exact0 / exact0 / VALID
+
+role-smoke program raw SHA-256:
+905d0a01bea1549228074c9401d95d39638820a9853cbbfebdcbe2227d95ef6e
+
+role-smoke logical argv SHA-256:
+54de47a143deac47aab621c5d79314312ccaf149ad3a23ed4ab60a4cf7638a7b
+```
+
+The required public callables were introspected only and never called.  Raw
+stdout/stderr, exception bodies, package bodies, absolute runtime paths, and
+secrets are excluded.
+
+```text
+readiness observation SHA-256:
+c74148950138ac2a4c3897d9d93bc071f3a01f764b6e16d3885f21eeee3d1a45
+
+owner / independent verdict:
+VALID / VALID
+
+reason:
+ALL_CHECKS_EQUAL
+
+failure:
+NONE / NONE / NONE
+
+state:
+RUNTIME_READY
+```
+
+### Published exact3 before this Plan append
+
+Result:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+886fc2074962e591f3f8c85492f0f8abe463c30a
+58aacfe760bb0e3eb5e80e1b227d5e99612c174a
+016e8eb969c336166eeff4d47219e7ec1370378b
+adabfcb10d99f793f4ca40b92620f5d1d2e1986f5c17f9bd7b6b9fa70375c993
+11256 / 342
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes:
+87dff10e3ff95279aa840bdee287c1e6f06866de
+869a1a127e338a0aeaffdc18054cae40d5875391
+871830720cdd387f60aca67b638b77b5ee32d52a
+655be3c6be3f240218b1cdc6084f5847c6cf7ff246c4359fcf08e3eefec3b265
+6535
+
+delete-self logical:
+89d463cf7600170f912b194db687faa9e1a6569b2c913f51c1f0e452087040f4
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+9b81eac0efd4c4cd3f07a4c88efa88b5f4b8776c
+85f21c53a6c7901fec79c2e89aad10ce5796563c
+020cb6fae8bd5469b3a4009efbafc26e1764426e
+2d81e49a0608d8d0a0897508003eb7b576559ef824022f162a90d1175fcb9ba1
+11384 / 365
+```
+
+All exact3 are exact-content postfetch equal, and each write commit changed
+only its approved exact path.  The Receipt does not carry its own publication
+identity.
+
+Three read-only audit lanes inspected the receipt/document contract,
+materialization algorithm, and role-smoke boundary.  They made no edit,
+commit, GitHub write, package acquisition, probe, pytest invocation, or
+repository-module import.  Karen retained every final judgment and made every
+write.
+
+### Retention and later-stage boundary
+
+The session-local runtime is a test tool, not a product artifact.  R1
+eligibility exists only while the same root and operational executable remain
+available and the full-root, installed-file, distribution-closure,
+runtime-root, and executable identities rederive equal.  Loss, mutation,
+added entries, control metadata change, rematerialization, or interpreter
+switch expires eligibility.
+
+```text
+mashos-api production / test / fixture / dependency / config / lock change:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+product runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+```
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: exact5 input, materialization, pytest probe, three-role smoke,
+and independent postprobe identity checks all matched.  D1 execution and all
+semantic/product effects remained exact0.
+
+Inference: the known launcher uncertainty is closed for the retained runtime,
+but no D1 semantic result follows from readiness.
+
+Karen's opinion: bind the credited Receipt and identical retained runtime in
+a distinct Design before issuing the exact8 authority.  The semantic result
+must come only from the separately approved fresh-challenge one-shot.
+
+### Exactly one next authority and stop
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_TEST_RUNNER_RUNTIME_READY_CREDITED_POSTVERIFIED_SAME_RETAINED_RUNTIME_ROOT_IDENTITY_AND_EXECUTABLE_HASH_REDERIVATION_FRESH_CHALLENGE_FULL_EXACT8_ONE_SHOT_LIVE_REMOTE_MAIN_ACQUISITION_EXACT1_ADDITIONAL_QUERY_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_DISTINCT_R1_AUTHORITY_BINDING_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor token count:
+exact1
+
+R1 execution authority token count:
+exact0
+
+automatic progression:
+false
+```
+
+```text
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_PUBLISHED_RETAINED_R0_LOCK_DERIVED_EXACT5_INPUT_HASH_VERIFIED_MATERIALIZATION_EXACT1_PYTEST_PROBE_EXACT1_VALID_ROLE_SMOKE_EXACT1_DIRECT_ROLE_LOAD_EXACT3_VALID_OWNER_INDEPENDENT_RUNTIME_IDENTITY_EQUAL_RUNTIME_READY_D1_TARGET_IMPORT_COLLECTION_EXECUTION_CHALLENGE_LIVE_REMOTE_O01_O08_EXACT0_R1_EXECUTION_UNISSUED_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No R1 exact8, corrected D2, stability, Reference/OA, Candidate/Event1,
+source lock, runtime product, or later authority was executed.
