@@ -10876,3 +10876,193 @@ RECOVERY_EPOCH004_D1_V5_R0_RUNTIME_READY_CREDITED_POSTVERIFIED_SAME_RETAINED_RUN
 
 No R1 exact8, corrected D2, stability, Reference/OA, Candidate/Event1,
 source lock, runtime product, or later authority was executed.
+
+## 2026-07-31 append — D1 v5 R1 one-shot fixture-setup non-credit closure
+
+### Approved authority and finite result
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R0_RUNTIME_READY_CREDITED_POSTVERIFIED_R1_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_FRESH_CHALLENGE_FULL_EXACT8_ONE_SHOT_PYTEST_INVOCATION_EXACT1_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+result:
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP
+
+failure:
+PYTEST / EXECUTION / PYTEST_LAUNCH_OR_COLLECTION_INVALID
+
+pytest invocation / same-authority rerun:
+exact1 / exact0
+
+automatic progression:
+false
+```
+
+The authority is closed.  D1 causal-RED refreeze credit is not established,
+and no corrected D2, stability run, or governance stage is activated.
+
+### Pre-launch and process evidence
+
+Fixed mashos-api commit/tree, D1, and lock remained equal and clean.  Owner
+and independent verifier rederived all retained-runtime exact7 hashes equal,
+with full-root exact527, installed rows exact482, distributions/RECORD matches
+exact5/exact5, and unowned/unexpected exact0/exact0.
+
+```text
+logical argv / environment-policy SHA-256:
+8797754f541bd6bbd97734f0e80329cb597f2e37605755d33588fbef7d58f99c
+6393dea280af670e3b0ed902014c86fc65a6666e973fe8e7ee50318ff1a11591
+
+process started / completed / timed out / exit:
+true / true / false / 1
+
+stdout captured bytes / SHA-256:
+12856 /
+18128e97df97e2496f7e7054c604448eb898196ce57519b05dc97e09f9f45001
+
+stderr captured bytes / SHA-256:
+0 /
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+```
+
+```text
+collected / phase-normalized executed:
+exact8 / exact8
+
+failed / passed / error:
+exact0 / exact0 / exact8
+
+ordered semantic oracle rows / O01–O08 bodies:
+exact0 / exact0
+
+challenge / preflight / neutral remote request / execution:
+exact0 / exact0 / exact0 / exact0
+
+observation identity / closure:
+exact0 / exact0
+```
+
+The fixture's ordered-node identity assertion stopped in setup.  The safely
+observed node ids carried a checkout-directory prefix while the frozen D1
+vector begins with the repository-relative `ai/tests/` path.  The expected
+semantic vector was not used to fill unobserved values.
+
+### Scope and effects
+
+```text
+mashos-api production / test / fixture / dependency / config / lock change:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+retry / fallback / prior-run reuse / rematerialization / interpreter switch:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+product runtime effect:
+exact0
+
+Reference / OperationalAdmission / Candidate / Event1 / source lock:
+BLOCKED / BLOCKED / exact0 / exact0 / false
+```
+
+### Published exact3 before this append
+
+Result:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+242d85d6474b0058816c804520d7c8d2f5bc19da
+61b6eaeadac847e19145d76086207d0594ffe21e
+2a098fb57517b8ce4e517c0bbfdc8c7a4fee5d5c
+c8a1971fccf66e12bfe007d590170857b18c5b67898c762b070533db85981b63
+7205 / 246
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+af81ceea7022b107304fea966204063441798ffe
+1c8db1d5e4a350df8418cbf07ceb3370bf73deb0
+49d04991899b5a4bc55d4ffd5e358004e65b80e7
+dade13cf7fb02fb4d9df777b1288f66d18327039c33eb12e6e52e76f58b4ef4e
+9187 / 1
+
+execution observation / delete-self SHA-256:
+7b10c9e9c55c4fa31e4e31908c78be358e16e42f00d61161d729fd34f785808a
+ed31017aa72da31c9a2618b647426546dd3ecc0f521ef048dfe934d8dc0ffb07
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+617282a2b3dddf4185621be386fb8b8b41c6998e
+628ae9b6d04ad4d588c356cabe159aedf7fd830e
+29e98da67efa84cfefc0619c51380ba373710c1b
+126f11274f43505ac3bdc4eeab424a30f792f8ffc1d447a874cc3ff98b4a849e
+9875 / 274
+```
+
+All exact3 are required to be postfetch exact-equal, each single-path
+publication commit must change only its approved path, and this Plan append is
+target four.  The latest snapshot append remains target five; until its own
+postfetch, aggregate unique-path exact5, final-HEAD containment, and both
+append-only prefix checks complete, this checkpoint remains partial and
+non-credit.  The pre-append Plan prefix is byte-identical to:
+
+```text
+blob / raw / bytes:
+c2b68701cb99b08af22262ae7a4b6cfaba5ff238
+3356e78679fd06702d7eff3871ac7028440070a35c5ec5c077c6b8f9a955fbf0
+373973
+```
+
+### 確認した事実
+
+- pre-launch source/runtime gates were equal;
+- pytest ran once and produced collected exact8 but setup error exact8;
+- challenge, preflight, remote acquisition, oracle bodies, and closure were
+  not reached; and
+- the authority stopped without rerun or downstream effects.
+
+### 推測
+
+The prefix is consistent with pytest deriving file node ids from a rootpath
+outside the fixed source repository.  This supports a Design investigation;
+it does not itself authorize `--rootdir`, another launcher, or a D1 change.
+
+### 華恋の意見
+
+次はDesign-onlyで、固定source rootをpytest rootdirとして明示するcommand-only
+契約が、空の非repository cwdとD1のrepository-relative ordered node-id identityを
+両立するかを閉じるべきです。同じauthorityの再実行やcollect-only probeは行わず、
+新しいone-shotはDesign確定後にも別承認とします。
+
+### Exactly one next authority and stop
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_PYTEST_INVOCATION_EXACT1_COLLECTION_EXACT8_MODULE_FIXTURE_SETUP_ERROR_EXACT8_BEFORE_PREFLIGHT_CHALLENGE_REMOTE_AND_O01_O08_NONCREDIT_EMPTY_NONREPO_CWD_ABSOLUTE_D1_PYTEST_ROOTDIR_CHECKOUT_PREFIX_NODEID_MISMATCH_EXPLICIT_FIXED_SOURCE_ROOTDIR_REPOSITORY_RELATIVE_ORDERED_NODEID_LAUNCHER_CANONICALIZATION_AND_DISTINCT_NEW_ONE_SHOT_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+authority kind:
+DESIGN_ONLY
+
+future Design scope:
+Cocolon NEW exact3 / MODIFY append-only exact2
+
+mashos-api change / pytest / challenge / live remote / O01–O08:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+automatic progression:
+false
+```
+
+```text
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_R1_PYTEST_EXACT1_COLLECTION_EXACT8_NODEID_PREFIX_MISMATCH_FIXTURE_SETUP_ERROR_EXACT8_PRECHALLENGE_PREFLIGHT_REMOTE_ORACLE_CLOSURE_EXACT0_NONCREDIT_NO_RERUN_CORRECTED_D2_STABILITY_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No new one-shot, corrected D2, stability, Reference/OA, Candidate/Event1,
+source lock, runtime product, or later authority was executed.
