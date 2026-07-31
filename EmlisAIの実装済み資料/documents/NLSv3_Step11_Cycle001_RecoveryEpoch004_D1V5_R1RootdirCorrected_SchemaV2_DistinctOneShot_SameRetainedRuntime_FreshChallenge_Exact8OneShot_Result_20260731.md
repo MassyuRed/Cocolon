@@ -42,7 +42,7 @@ Cycle001 acceptance.
 | Cocolon credited checkpoint commit / tree | `636beb70ece27d9470bf0e12ee0adc662d4fdfdd` / `016764f21b1aa56d9c8c7ecd079b8e2da09bc58a` |
 | mashos-api source commit / tree | `37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f` / `3891b84164ba0063136e47beb93d36798587a568` |
 | D1 path | `ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py` |
-| D1 blob / raw SHA-256 | `c0eb936690a3423ac4615a9aabb37c40cc257324` / `3536b8a838ffe2ccbe29b69e9c5400c719de8e63ddf83da9ea0f83b94f17d14` |
+| D1 blob / raw SHA-256 | `c0eb936690a3423ac4615a9aabb37c40cc257324` / `3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14` |
 | fixed-source identity SHA-256 | `8ea0ccc92dac230e487873284614b8bf39e0a55fd8efc8f866d78a8a50a96e7d` |
 | retained-runtime identity SHA-256 | `2028b19e152e1330618b9b14595a522734c405e860ed2971aa14faa74585ba3c` |
 | interpreter executable SHA-256 | `9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488` |
@@ -179,4 +179,3 @@ corrected D2 / stability:       BLOCKED
 Reference / OperationalAdmission: BLOCKED
 automatic progression:          false
 ```
-
