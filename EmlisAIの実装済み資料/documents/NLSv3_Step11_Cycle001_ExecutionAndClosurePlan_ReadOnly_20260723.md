@@ -10139,3 +10139,230 @@ RECOVERY_EPOCH004_D2_PUBLISHED_TARGETED_GREEN_RETAINED_STABLE_POSTVERIFIED_CREDI
 
 No replacement D1, corrected D2, stability matrix, Reference/OA,
 Candidate/Event1, source lock, runtime, or later authority was executed.
+
+## 2026-07-31 append — D1 v5 pytest-unavailable non-credit and test-runner readiness boundary reconciliation
+
+### Authority and result
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_POSTPUBLICATION_RUNNER_COMMAND_EXACT1_PYTEST_MODULE_UNAVAILABLE_FRAMEWORK_ENTRY_COLLECTION_EXECUTION_RUN_CHALLENGE_LIVE_REMOTE_EXACT0_NONCREDIT_TEST_RUNNER_RUNTIME_READINESS_AND_DISTINCT_ONE_SHOT_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed path:
+exact0
+
+package acquisition / runtime materialization:
+exact0 / exact0
+
+pytest framework entry / target import / collection / execution:
+exact0 / exact0 / exact0 / exact0
+
+live remote-main acquisition:
+exact0
+
+automatic progression:
+false
+```
+
+The published D1 v5 source remains retained.  Its approved runner command was
+invoked exact1, but the selected interpreter reached the typed terminal
+`PYTEST_MODULE_UNAVAILABLE_FOR_SELECTED_INTERPRETER_BEFORE_FRAMEWORK_ENTRY`.
+Framework entry, target import, collection, exact8, D1 preflight, and eligible
+live remote acquisition remained exact0; challenge and O01–O08 were not
+observed.  The prior execution permission is closed and same-authority rerun
+is forbidden.
+
+This Design-only authority is complete only when final Design, Receipt,
+Handoff, this Plan append, and latest snapshot append are all reachable on
+main, exact-content postfetch equal, aggregate unique changed paths are
+exact5, and both append prefixes are byte-identical.  Partial publication is
+non-credit.
+
+### Fixed source
+
+```text
+Cocolon entry commit / tree:
+c847e9a2508cd34210d9c76db152ca502a53c2a8
+05ca6b93829711f7e08977d5fbd86c6433906848
+
+mashos-api commit / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+```
+
+The immutable formal lock remains:
+
+```text
+blob:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+
+raw / logical:
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+
+target / full closure:
+CPython 3.12.13 / Linux x86_64 / pip 26.0.1 / exact46
+```
+
+### Reconciled runner readiness
+
+The target D1 plus owner/independent/parent static import graph needs the
+lock-derived pytest-runner exact5 rather than unrelated exact41.  Its ordered
+names are `iniconfig`, `packaging`, `pluggy`, `pygments`, `pytest`, and its
+canonical projection SHA-256 is:
+
+```text
+f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e
+```
+
+The exactly-one successor R0 is readiness-only.  It may inspect only
+already-configured package routes and accept candidate wheels only after
+filename/raw-hash equality.  Acquisition is non-credit preparation;
+unconfigured sources, credential extraction/request, sdists, builds, and
+dependency substitution are forbidden.  After input acceptance, package
+index access is zero and materialization is hashes-required, wheel-only, and
+no-index.
+
+R0 verifies a fresh exact5 root, isolated pytest-version probe exact1, role
+smoke process exact1 over owner/independent/parent without public API calls,
+source cleanliness, and independent rederivation.  D1 target import,
+collection, execution, challenge, live remote, and O01–O08 remain exact0.
+
+The strict body-free R0 receipt freezes canonical nested keysets, all hash
+preimages, typed null/0/`NOT_STARTED` failure projections, and owner and
+independent verdicts over one exact10 observation.  Runtime identity includes
+the executable, distribution/RECORD closure, exact5 files, complete retained
+root entries and modes, control bytes, symlink identity, and unexpected-entry
+counts.  Unowned importable and unexpected counts must both be zero.
+
+R0 terminal is `RUNTIME_READY` or `RUNTIME_NOT_READY`; both stop and neither
+automatically enters the D1 one-shot.  Publication/postfetch failure is
+outside both credited terminals.
+
+### Later one-shot boundary
+
+R1 concrete authority token count remains exact0.  Only credited
+`RUNTIME_READY` with the same retained runtime may permit a separate R1
+Design and Mash approval.  Immediately before R1, owner and independent
+verifier must rederive all runtime manifests and the executable hash.
+
+R1 will use the retained executable directly, generic PATH resolution exact0,
+rematerialization/interpreter switch exact0, a new command budget and fresh
+challenge, targeted exact8 launcher exact1, eligible live remote-main
+acquisition exact1, and additional role/harness live queries exact0.  Expected
+credit remains O01–O07 `CAUSAL_RED`, O08 `GREEN_V1_INVARIANCE`, closure
+exact1; retry/fallback/prior-run reuse remain exact0.
+
+### Published exact3 before this Plan append
+
+The first Design publication was corrected before Receipt.  It is an
+explicit non-credit intermediate:
+
+```text
+intermediate Design commit / tree / blob / raw:
+90bad3d885d5d49c3b04928348e1398b3657a10a
+94b11258bff6b4248107d6370daf5df24db0b29e
+cef8b81ff2e9078e4bea094081b2c4e245ce51f0
+59e005b0bc7dc627b3757d4e2e6cb1116f5cf81b7e13b469daa7767e798e0715
+```
+
+Final Design:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+5b198cdb61c9d6f2bf95f263084d76d88246d1f3
+ce29b29dfcc80513872c6f8bb418bc873aa5ff23
+94fda6f067e5b63f09476fc895d7906958a55202
+775ab3df619d196fef1626f7baa48147cc40deeee52457e341ff3560ff15e28e
+36320 / 827
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes:
+c3dabbd54a7fd7e57db2d81a8f2d218a99d10a0c
+11f3765c8983462d04a087039caa17ddbf217147
+c4d47ee4cfbb044a1d8ca2f6b850c13f3f7e120d
+a6b6340b1f8878492c0b6436b3a8d0531d58521a952342d5f1108e8595de8fdf
+7662
+
+delete-self logical:
+403e3e5e8247f9cec419f007799efc6300a691e37baf2567a1572868d6076133
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes:
+d8cdd00cd244fafa66f6c81664a928d7abdddf64
+07ec340260e8c6a9c2e83e137ff25ffd6b4bb39f
+f5afcac056632ddcee9153cf10223b02c02833b4
+26984e421e676ab694fb904a64fcd03be64f504503bad11e15757dc1749c009d
+13250
+```
+
+All final exact3 are exact-content postfetch equal.  Each publication commit
+changed only its approved path.  This Plan append is target four; latest
+snapshot append remains the final target.
+
+Three read-only subagent lanes ended blocker/advisory exact0 after correction.
+They made no edit, commit, GitHub write, pytest collection/execution,
+repo-module import, package acquisition, or live remote observation.  Karen
+retained all final judgment and performed all final writes.
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: D1 publication is valid; runner invocation exact1 did not
+enter pytest; the exact5 projection is derived field-for-field from the
+existing lock; no eligible wheel was found in this Design authority;
+corrected D2 and all later product effects remain blocked.
+
+Inference: the direct gap is interpreter/runner selection, not a test-proved
+D1 source defect.  Exact5 is likely sufficient for the targeted test surface,
+but only R0 can establish runtime readiness and it cannot predict O01–O08.
+
+Karen's opinion: prove and retain the exact execution root before risking the
+next exact8.  Use only the necessary exact5, keep readiness failures outside
+the D1 oracle, and accept causal evidence only from the separately approved
+fresh-challenge one-shot.
+
+### Exactly one next authority and stop
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PUBLISHED_EXACT1_POSTFETCHED_PYTEST_MODULE_UNAVAILABLE_BEFORE_FRAMEWORK_ENTRY_PRECOLLECTION_NONCREDIT_CONFIGURED_ROUTE_HASH_VERIFIED_LOCK_DERIVED_EXACT5_ARTIFACT_ACQUISITION_TEST_RUNNER_MATERIALIZATION_PYTEST_AND_ROLE_IMPORT_PROBES_INDEPENDENT_RUNTIME_READINESS_VERIFICATION_READY_OR_NOT_READY_STOP_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete token count:
+exact1
+
+R1 concrete token count:
+exact0
+
+automatic progression:
+false
+```
+
+```text
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_PUBLISHED_EXACT1_POSTFETCH_VERIFIED_RUNNER_COMMAND_EXACT1_PYTEST_MODULE_UNAVAILABLE_BEFORE_FRAMEWORK_ENTRY_NONCREDIT_FRAMEWORK_ENTRY_TARGET_IMPORT_COLLECTION_EXECUTION_LIVE_REMOTE_EXACT0_O01_O08_NOT_OBSERVED_PRIOR_EXECUTION_PERMISSION_CLOSED_TEST_RUNNER_EXACT5_READINESS_SUCCESSOR_DEFINED_INACTIVE_R1_UNISSUED_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+
+runtime product / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+```
+
+No R0, R1, corrected D2, stability, Reference/OA, Candidate/Event1, source
+lock, runtime product, or later authority was executed.
