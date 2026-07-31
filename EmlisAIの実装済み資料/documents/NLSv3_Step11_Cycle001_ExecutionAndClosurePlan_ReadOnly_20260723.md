@@ -9862,3 +9862,280 @@ RECOVERY_EPOCH004_D2_PUBLISHED_TARGETED_GREEN_RETAINED_POSTPUBLICATION_FULL_EXAC
 
 No corrected D1, corrected D2, stability matrix, Reference/OA,
 Candidate/Event1, runtime, or later authority was executed.
+
+## 2026-07-31 Recovery Epoch004 D1 v5 static-contract gap reconciliation
+
+### Authority and decision
+
+Mash approved only:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PREFREEZE_STATIC_CONTRACT_GAP_IMPLEMENTATION_NEUTRAL_ROLE_OBSERVATION_CONSUMPTION_EVIDENCE_BOUNDARY_POSTACQUISITION_LOCAL_INTROSPECTION_TYPED_ABORT_AND_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+```
+
+```text
+prior corrected D1 v5:
+HALTED_BEFORE_PUBLICATION_AND_EXACT8_STATIC_CONTRACT_GAP_NON_CREDIT
+
+prior one-shot:
+UNCONSUMED
+
+prior pytest:
+collect exact0 / execution exact0
+
+replacement corrected D1 v5:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+This authority changes Cocolon documentation only.  It changes no
+mashos-api source/test/fixture/dependency/configuration/lock, collects or
+runs no pytest, performs no live remote-main acquisition, and creates no
+Reference/OA, Candidate/Event1, source lock, runtime, or later effect.
+
+The checkpoint is effective only when approved Cocolon NEW exact3 and
+MODIFY exact2 are all reachable on main, every target is exact-content
+postfetch equal, Karen's write-commit aggregate unique changed-path set
+is exact5, and latest contains all results.  Partial publication is
+non-credit.
+
+### Fixed source and static-audit facts
+
+```text
+Cocolon entry commit / tree:
+9c3a9dc29fff65eed842ff13affad72b79e34209
+58af8a967d9b2a63403b9bce00001c4bc63ff594
+
+mashos-api commit / tree:
+735b1a59e525b6b314fd7139deb653543a74c389
+eab4977649d8b31258c12e7ea49e1879c5e4a223
+
+P0 external identity:
+aa602f6c7c39ea1ad0ece9ed6974c76b7dc8f3a4207540a290e3bb3eb06fe046
+```
+
+Current D1 exact1:
+
+```text
+blob / raw:
+b7072620c31cd615ab221647c7145947255294e1
+e67a26cd72cd8007c58e71a8c4258c0ab3244718717b305289f3ee346eaeb9dc
+```
+
+Current mandatory direct exact3:
+
+| Role | Blob | Raw |
+|---|---|---|
+| owner | `044287009b1fd155689bded46628b8fc91b73c06` | `13aa675be1356ab524a69066f861c2d27a8d8e32f0d690811b2b3308f199057d` |
+| independent | `0fae71a29f8fe44d31c18af42aaf53cc34beac6c` | `634ddb104e0b7630c695e032bb54726912fcfc9ad4351ab0eb6da7901671fc2b` |
+| parent | `fdea3dc18d81ca9ce1e3a842e802d21d0019a8c5` | `14fedde39823d90253a6adec6fc05ccde29f05a659edbac7edc007b28eab5793` |
+
+Pre-publication static review found exact2 gaps:
+
+1. no implementation-neutral, test-observable, semantically refutable
+   proof that owner, independent, and parent consume the same exact17;
+2. no honest terminal after attempt exact1 when post-acquisition local
+   identity cannot be completely formed.
+
+The stopped local D1 draft remains unpublished diagnostic work and is not
+a canonical input.
+
+### Reconciled role-observation boundary
+
+Current exact3 have the private consumer port absent:
+
+```text
+_RECOVERY_EPOCH004_ACTUAL_GIT_OBSERVATION_CONSUMER_PORT_V1
+```
+
+Later corrected D2 must add it to all exact3; mixed presence is invalid.
+The port is a synchronous context manager over canonical exact17 bytes,
+performs Git exact0, binds one immutable role-local copy, and invalidates
+it on exit without changing public validator signatures.
+
+The body-free role event:
+
+```text
+cocolon.emlis.nls_v3.recovery_epoch004.actual_git_observation_consumed.v1
+```
+
+uses canonical exact11.  Its semantic verdict hash is independently
+rederived from a canonical exact5 projection of the actual existing
+public `tuple[str, ...]` return.
+
+Semantic causality requires:
+
+```text
+A actual AVAILABLE_MATCH / same_cut true:
+success + event exact1
+
+B valid-hash REMOTE_MAIN_OID_MISMATCH:
+role failure + event exact1
+
+C valid-hash changed after / same_cut false:
+role failure + event exact1
+
+D integrity-invalid:
+port rejection + event exact0
+```
+
+B through D use live query exact0, persist nothing, and are not
+independently creditable run outcomes.  O02's fresh independent module
+must enter its own port and emit its own event without owner or
+primary-module trust.
+
+The D1 process guard keeps these ledgers distinct:
+
+```text
+neutral acquisition request / execution:
+exact1 / exact1
+
+current-source additional request:
+positive in the role/lane named by the frozen node-specific signature
+
+current-source additional process/network execution:
+exact0
+
+numeric additional-request count:
+diagnostic-only / not a credit acceptance field
+```
+
+The future all-port-present path requires additional request/execution
+`0 / 0`.  A blocked request proves causal RED only with the full existing
+node-specific vector and does not make current source an observation
+consumer.
+
+### Typed post-acquisition abort
+
+The new abort is body-free exact22:
+
+```text
+remote observation:
+exact12
+
+remote diagnostic:
+exact4
+
+consumer/run violation enum:
+exact12
+```
+
+It retains the consumed remote attempt and safe diagnostic without
+inventing missing after identities.  The branches are exclusive:
+
+```text
+preflight rejected:
+exact13 only
+
+valid exact17:
+projection exact16 exact1;
+matching closure exact10 for credit, existing closure-invalid diagnostic
+projection route preserved
+
+post-acquisition identity unformable:
+typed abort exact22 only
+```
+
+The abort branch has exact17/port/role/event/oracle/closure/projection
+exact0 and no same-authority retry.
+
+### Publication evidence
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes:
+f26372aa40239f83857cfcc44045ac0a03e184ab
+490d548e9dc36a925a34c881f7dce2a0482200f9
+342b78e56a3c454cf80bf6366bf875f73229462b
+e0ccd2a394dca4e37c148b13e6bfb37ec6b79c72f3cce33560e160d7b0452995
+37945
+```
+
+Receipt:
+
+```text
+commit / tree / blob / raw / bytes:
+65c265f987228fafd55fcfbd120a15fde18c637e
+efb8e1890895fb0dbf601de03b049ef876480271
+c45dbc4ce3ae92920f96e4962b324181a95cf16b
+3f3a8b42ecf0c66e85ac9d90672cc8cbf2ef8eb72e1b7fd558ff9faa13217a60
+8095
+
+delete-self logical:
+fd9df9657e5bb017bcdb2969452d04812dfcc90669941bc53875e87b296a0030
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes:
+a05184da943fcbcb15a2209efbd0a9e8f4d024b8
+7379c4b8235c4d85afd0176cc3f531e05c207a0e
+05cb8a644f93fe246a663614f8bee85c764b0c9d
+da732ad1b3dc8149408a740197ed3d2955771271c9c8e269577ea3cf5200d0ef
+14228
+```
+
+All three are exact-content postfetch equal.  The Receipt is canonical
+sorted compact UTF-8 JSON plus LF exact1; its logical self-hash deletes
+`receipt_sha256`.  No strict external identity is created.
+
+Three independent read-only lanes ended blocker/advisory exact0.  They
+made no edit, commit, GitHub write, pytest collection, or execution.
+Karen retained every final judgment and performed every final write.
+
+### Facts, inference, and Karen's opinion
+
+Confirmed fact: the prior D1 authority made no GitHub change, ran no
+pytest, and did not consume its one-shot.  Current exact3 ports are
+absent.  Exact17 requires complete post-acquisition identities.
+Reference/OA remain blocked.
+
+Inference: the gap was between future D1 immutability and an unconstrained
+evidence seam, not a production defect proved by pytest.  A fixed private
+port plus role-return counterfactual evidence is narrower than choosing
+production storage and makes semantic consumption falsifiable.
+
+Karen's opinion: freeze only the test-visible boundary, not the internal
+carrier.  Require each role's verdict to change under coherent semantic
+counterfactuals instead of trusting event self-report.  Preserve a
+distinct typed abort rather than inventing missing after evidence.
+
+### Exactly one next authority and stop
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PREFREEZE_STATIC_CONTRACT_GAP_IMPLEMENTATION_NEUTRAL_ROLE_OBSERVATION_CONSUMPTION_EVIDENCE_BOUNDARY_POSTACQUISITION_LOCAL_INTROSPECTION_TYPED_ABORT_AND_AUTHORITY_BOUNDARY_RECONCILED_DISTINCT_CORRECTED_D1_V5_CAUSAL_RED_REFREEZE_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete token count:
+exact1
+
+automatic progression:
+false
+```
+
+```text
+Cocolon documentation:
+NEW exact3 / MODIFY exact2
+
+mashos-api / pytest:
+changed path exact0 / collect exact0 / execution exact0
+
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+
+runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+current authority stop:
+RECOVERY_EPOCH004_D2_PUBLISHED_TARGETED_GREEN_RETAINED_STABLE_POSTVERIFIED_CREDIT_NOT_ESTABLISHED_PRIOR_CORRECTED_D1_V5_HALTED_BEFORE_PUBLICATION_AND_EXACT8_STATIC_CONTRACT_GAP_NONCREDIT_ONE_SHOT_UNCONSUMED_IMPLEMENTATION_NEUTRAL_ROLE_OBSERVATION_CONSUMER_PORT_AND_BODY_FREE_CONSUMPTION_EVIDENCE_BOUNDARY_FROZEN_POSTACQUISITION_LOCAL_INTROSPECTION_TYPED_ABORT_EXACT22_FROZEN_REPLACEMENT_CORRECTED_D1_V5_DEFINED_INACTIVE_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No replacement D1, corrected D2, stability matrix, Reference/OA,
+Candidate/Event1, source lock, runtime, or later authority was executed.
