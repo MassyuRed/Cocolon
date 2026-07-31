@@ -30602,3 +30602,304 @@ RECOVERY_EPOCH004_D1_V5_PUBLISHED_RETAINED_R0_LOCK_DERIVED_EXACT5_INPUT_HASH_VER
 
 No R1 exact8, corrected D2, stability, Reference/OA, Candidate/Event1,
 source lock, runtime product, or later authority was executed.
+
+## 2026-07-31 snapshot — R1 one-shot authority binding is Design-frozen and inactive
+
+### Approved boundary and current state
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_TEST_RUNNER_RUNTIME_READY_CREDITED_POSTVERIFIED_SAME_RETAINED_RUNTIME_ROOT_IDENTITY_AND_EXECUTABLE_HASH_REDERIVATION_FRESH_CHALLENGE_FULL_EXACT8_ONE_SHOT_LIVE_REMOTE_MAIN_ACQUISITION_EXACT1_ADDITIONAL_QUERY_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_DISTINCT_R1_AUTHORITY_BINDING_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+credited R0 RUNTIME_READY:
+BOUND_WITHOUT_MUTATION
+
+same retained runtime identity:
+REDERIVED_EQUAL
+
+concrete R1 authority:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+Cocolon documentation:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed path:
+exact0
+
+automatic progression:
+false
+```
+
+```text
+package acquisition / runtime materialization:
+exact0 / exact0
+
+pytest invocation / framework entry / D1 target import / collection / execution:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+challenge / eligible live remote-main acquisition / O01–O08:
+exact0 / exact0 / exact0
+
+Reference / OperationalAdmission / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+```
+
+The Design, Body-free Receipt, Handoff, and Plan append are published and
+exact-content postfetch equal.  This latest snapshot is target five.  Its own
+postfetch equality, aggregate unique changed-path exact5, final HEAD
+containment, and byte-identical Plan/latest prefixes complete the Design-only
+checkpoint.  Publication does not activate R1.
+
+### Fixed source and credited R0 anchor
+
+```text
+credited R0 Cocolon commit / tree:
+ebc9307a01f55c8c99f0928e146fa1f8e86338ca
+a9ca16f9c9daf8ce456bd6e7696270a251b6b9c1
+
+R0 state:
+RUNTIME_READY
+
+R0 Receipt delete-self logical SHA-256:
+89d463cf7600170f912b194db687faa9e1a6569b2c913f51c1f0e452087040f4
+
+R0 readiness observation SHA-256:
+c74148950138ac2a4c3897d9d93bc071f3a01f764b6e16d3885f21eeee3d1a45
+```
+
+```text
+mashos-api commit / tree / clean main:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+true
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+GitHub source identities were re-fetched before the contract was fixed.  The
+Design does not substitute a local copy for GitHub HEAD.
+
+### Same retained runtime
+
+Owner and independent verifier both returned `VALID` after independently
+rederiving the same retained root:
+
+```text
+runner projection SHA-256:
+f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e
+
+accepted-wheel manifest SHA-256:
+00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d
+
+distribution closure SHA-256:
+4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c
+
+installed-file manifest SHA-256:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+
+full runtime-root manifest SHA-256:
+55e12965e1be85424b39aa38dd6ae454b6ee9aef9d86e0c42c565a9a494a578d
+
+runtime-root identity SHA-256:
+e0b4750c02c676e1fa717cd4fe1f216fb1af4babcfa297abd7b3508995bcf19f
+
+executable raw SHA-256:
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+```
+
+```text
+full entries:
+exact527 = directory exact33 + regular file exact491 + symlink exact3
+
+installed rows / distributions / RECORD matches:
+exact482 / exact5 / exact5
+
+unowned importable / unexpected entry:
+exact0 / exact0
+```
+
+No acquisition, repair, mutation, rematerialization, or interpreter switch
+occurred.  The absolute root and executable paths are not published.  All
+identities must be rederived again immediately before a separately approved
+R1; any mismatch is a typed non-credit stop before the launcher.
+
+### Defined future R1 contract
+
+```text
+logical argv SHA-256:
+8797754f541bd6bbd97734f0e80329cb597f2e37605755d33588fbef7d58f99c
+
+environment-policy SHA-256:
+6393dea280af670e3b0ed902014c86fc65a6666e973fe8e7ee50318ff1a11591
+
+ordered node-list SHA-256:
+e2661d946c060efc44ce7da06f8c55f51d10dfad2af4f5f0526bd38109c340bc
+
+expected-vector SHA-256:
+da9d266a254a12a655d4dd9388ccd3e866a57455ff98254e119571f8b824055b
+
+execution deadline:
+1200 seconds
+```
+
+Only the separately approved R1 may use pytest exact1, fresh challenge exact1,
+and eligible neutral actual-Git remote-main request/process execution
+exact1/exact1.  Generic PATH resolution, additional owner/independent/parent/
+harness process-network execution, retry, fallback, prior-run reuse,
+rematerialization, and interpreter switch are exact0.
+
+The future expected vector is O01–O07 `CAUSAL_RED` with the frozen per-node
+signature and violation class, O08 `GREEN_V1_INVARIANCE`, and internal closure
+exact1.  The D1's guarded detection of an additional query request is not an
+additional process/network execution.  Any different result is non-credit and
+stops without rerun.
+
+### Published exact4 before this final snapshot target
+
+Design:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_RuntimeReadyCredited_R1OneShotAuthorityBinding_Design_ReadOnly_20260731.md
+
+commit / tree / blob / raw / bytes / lines:
+34aa0ea0de5be6bd2d7460fd7ea6c70e021575ec
+1430b5e9106e0274b33935ad45a3348174c052da
+ce2b5f700c38182de42e17a1c4ea31f415820d46
+8966c13ccc7259fc51301ca5a97cd937fc83040c8fdc3b46261569b69baafed3
+42882 / 1145
+```
+
+Body-free Receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_RuntimeReadyCredited_R1OneShotAuthorityBinding_Design_ReadOnly_BodyFree_Receipt_20260731.json
+
+commit / tree / blob / raw / bytes / lines:
+8f7712ecf25c801e1c5740f841f93e231917a102
+e3e09a4d275858ab502c421fb03f3f180541af36
+e03578fb656e87fa600b0fa34953ba19e3e85c75
+645b002727a9dfd8e96ff125614349dfbdec441b0dc622a8ffe8f060ae0035f5
+11016 / 1
+
+delete-self logical SHA-256:
+c2001045328e29f6eaadda2ac115a27acae1bc7887aa937fabb2b4d63b3c6882
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_RuntimeReadyCredited_R1OneShotAuthorityBinding_Design_ReadOnly_Handoff_20260731.md
+
+commit / tree / blob / raw / bytes / lines:
+9ec71f3409c33c14db81dbe29b1a24105e49c6a1
+2231f9d154c608e9a0752c9827613f232a405ba5
+d6124d13dd97197853bc3f80754d89e6debdb9c1
+012e0d523ef9e418c314571692a369d0da9e62e4e357a526a4d21dd22ea0a744
+11906 / 358
+```
+
+Execution and Closure Plan:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+
+commit / tree / blob / raw / bytes / lines:
+a4c97c227506af3711a8df7774559cc5f59af6a8
+c393be7d369e0fc59349c3feeed520c38db581ce
+c2b68701cb99b08af22262ae7a4b6cfaba5ff238
+3356e78679fd06702d7eff3871ac7028440070a35c5ec5c077c6b8f9a955fbf0
+373973 / 10878
+```
+
+All exact4 are exact-content postfetch equal, and every publication commit
+changed only its approved exact1 path.  The Plan preserved its original
+prefix exactly:
+
+```text
+Plan entry blob / raw / bytes:
+810d34be3d3542d42f36cca550845414e196a2c3
+d0afd2fa09d26f778dc92b1875f4b2f1c9ea1120f49bdc8ef04791633cfef7d5
+365347
+```
+
+This latest snapshot must preserve its own original prefix:
+
+```text
+latest snapshot entry blob / raw / bytes:
+67a771d08740c895722a360e278c0f676b61dbb0
+a2f0d78340a95a84e1e27d2c2e86df0e5c3fd89b118041ff746254af294bcc49
+1561399
+```
+
+Final postverification checks the exact5 paths, their final blobs and bytes,
+the five single-path publication commits, both prefixes, and final HEAD
+containment.  Three read-only audit lanes ended blocker/advisory exact0/exact0
+after correction.  Karen retained final judgment and made every GitHub write.
+
+### 確認した事実
+
+- credited R0 remains `RUNTIME_READY` and is bound without mutation;
+- current mashos-api, D1, and lock identities equal the fixed source cut;
+- owner and independent verifier reproduced all retained-runtime identities
+  with unowned/unexpected exact0;
+- Design, Receipt, Handoff, and Plan are published exact4, postfetch equal,
+  and each changed only its approved path; and
+- this authority ran no pytest, challenge, live remote acquisition, O01–O08,
+  mashos-api change, or product/governance effect.
+
+### 推測
+
+The retained runtime is eligible at this checkpoint, so the concrete R1 can
+be presented for separate approval.  No future remote availability or exact8
+result follows from this Design-only evidence.
+
+### 華恋の意見
+
+次は実行直前にも全runtime identityを再導出し、fresh challengeの後にactual-Gitを
+一度だけ取得して、全exact8を同じimmutable observationから閉じるべきです。
+追加query要求の検出とprocess/network実行を分離し、有利な結果が出るまでの再実行は
+行いません。
+
+### Current state and exactly one next authority
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R0_RUNTIME_READY_CREDITED_POSTVERIFIED_R1_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_FRESH_CHALLENGE_FULL_EXACT8_ONE_SHOT_PYTEST_INVOCATION_EXACT1_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+next authority state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor token count:
+exact1
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_R0_RUNTIME_READY_CREDITED_POSTVERIFIED_SAME_RETAINED_RUNTIME_REDERIVED_EQUAL_R1_CONCRETE_AUTHORITY_DEFINED_INACTIVE_PYTEST_CHALLENGE_LIVE_REMOTE_O01_O08_EXACT0_CORRECTED_D2_STABILITY_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+```text
+mashos-api production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+product runtime / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+```
+
+No R1 exact8, corrected D2, stability, Reference/OA, Candidate/Event1,
+source lock, runtime product, or later authority was executed.
