@@ -11747,3 +11747,199 @@ false
 No successor one-shot, corrected D2, stability run, Reference/OA,
 Candidate/Event1, source lock, runtime product, or later authority was
 executed.
+
+## 2026-08-01 R1 schema-v2 distinct one-shot result-unknown closure append
+
+### Authority, execution, and terminal
+
+Mash explicitly approved and the launcher consumed:
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_PRELAUNCH_STAGE_PROJECTION_MAPPING_GAP_AUTHORITY_CLOSED_CONSUMED_UNEXECUTED_PYTEST_EXACT0_EXACT12_PRESERVED_SCHEMA_V2_KEYSET_VALUE_AND_STAGE_PROJECTION_FAILURES_MAPPED_TO_EXISTING_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_PRELAUNCH_LAUNCHER_IDENTITY_SAFE_CODE_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_IMPLEMENTATION_NEUTRAL_OWNER_INDEPENDENT_PRELAUNCH_ADMISSION_RECORD_EXACT1_AND_GATE_EVIDENCE_CONSUMPTION_EXACT1_WHEN_REACHED_DISTINCT_ONE_SHOT_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_EMPTY_NONREPO_CWD_EXPLICIT_FIXED_SOURCE_ROOTDIR_ABSOLUTE_D1_PATH_NATIVE_REPOSITORY_RELATIVE_ORDERED_NODE_IDS_FULL_EXACT8_PYTEST_INVOCATION_EXACT1_FRESH_CHALLENGE_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+```
+
+```text
+authority:                       CLOSED_CONSUMED
+admission / consumption:         exact1 / exact1
+pytest process invocation:       exact1
+started / completed / timeout:   true / true / false
+exit / stderr bytes:             1 / 0
+terminal:
+R1_RESULT_UNKNOWN_STOP
+failure:
+RESULT / RESULT_UNKNOWN / RESULT_UNKNOWN
+automatic progression:
+false
+```
+
+The authority is closed.  Its process budget and single-use gate are not
+reusable, and no same-authority retry is permitted.
+
+### Fixed source, runtime, and saved process evidence
+
+```text
+mashos-api commit / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+
+D1 blob / raw SHA-256:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+retained-runtime identity / interpreter executable SHA-256:
+2028b19e152e1330618b9b14595a522734c405e860ed2971aa14faa74585ba3c
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+
+admission / consumption SHA-256:
+9abd83e3fb5bcfb9b03195fdcafd0eaeb7bf8bd71b8d7c5b19d0bf940b5751bf
+c569b6ba33cee56617e49c6b464cb2dfc6136d5c8d68b1ae13a40e60b58321ce
+
+stdout bytes / SHA-256:
+3141
+c6e9b0e6573e722ac2d66dfa20eaf0c5e2af69518cb1bbdcd2a6a768da5d62c4
+
+stderr bytes / SHA-256:
+0
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+```
+
+Postrun repository identity is all equal and the source is clean.  The
+process group was reaped and the body-free artifacts were durably
+committed.  Retry, fallback, prior-run/stdout/node/challenge/observation
+reuse, rematerialization, interpreter switch, and prefix rewrite are all
+exact0.  mashos-api changed paths remain exact0.
+
+### Published execution exact3 before this append
+
+Result:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1RootdirCorrected_SchemaV2_DistinctOneShot_SameRetainedRuntime_FreshChallenge_Exact8OneShot_Result_20260731.md
+
+final commit / tree / blob / raw / bytes:
+28a3b4d213959d4560df62d6b2fc81ac3448a958
+a571c315aae9e372e8c76088058e3ea01c7fddae
+0e38f3b5740f4828730f5853c201451301c60b24
+9bb15e9e25fdcab0ceb8f4c82680028be98543d584d993c53550b38deffdf98b
+8947
+```
+
+Body-free Receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1RootdirCorrected_SchemaV2_DistinctOneShot_SameRetainedRuntime_FreshChallenge_Exact8OneShot_BodyFree_Receipt_20260731.json
+
+commit / tree / blob / raw / bytes:
+0b629675017dc044614d092c168bd0a2f1de1369
+b461a76cbcc75bd91bfaec6d63097ef63abac36a
+f1860af5e305e3ae33c777c14bc942a2369da9c4
+c405f4ab55be0939bf8171151ee31dc8bc0d5471f99cd4917acdbe6e7e0c5dcc
+11850
+
+execution observation / delete-self Receipt SHA-256:
+59e2c95705f482720225f931e0acd8a9071461b47a45ca529d18744a00b539e2
+8d6582c385a803bb7acdca38f542bff32697289c24d5c82bb19223e9e0819f61
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1RootdirCorrected_SchemaV2_DistinctOneShot_SameRetainedRuntime_FreshChallenge_Exact8OneShot_Handoff_20260731.md
+
+commit / tree / blob / raw / bytes:
+c26c143884f85ebfb20877190aee0ca95895b00f
+cfb5b8f5c3174414f5e4ee40616867cd00986652
+e1ffa2effaf88b121615aaa8532fd794fdd23964
+cf62a449cf8f995fbf5f81e78f7febd2328b98ace7d97b8df9149ff0441d2b5c
+7291
+```
+
+All three final contents are postfetch exact equal.
+
+### Safe exact8 interpretation
+
+The Receipt retains exact8 counts `0/0/0/0/0` and ordered rows
+`[]` as the frozen safe projection: canonical exact8 observation was
+not established.  It does not assert zero pytest execution.  O01--O08,
+fresh challenge, remote acquisition, observation identity, source-cut
+equality, and closure credit remain not established.
+
+Diagnostic-only inspection of the saved stdout found seven failure
+signatures and a seven-failure/one-pass display, but pytest rendered
+failure node IDs with an empty-cwd-relative prefix, placed causal
+signatures in failure-body lines, and added duration text to the final
+summary.  These facts are not retroactively normalized or promoted.
+
+### Scope and entry-prefix preservation
+
+```text
+Cocolon:
+NEW exact3 / MODIFY append-only exact2
+
+approved unique content path set:
+exact5
+
+mashos-api changed paths:
+exact0
+
+production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+corrected D2 / stability / Reference / OperationalAdmission:
+exact0 / exact0 / exact0 / exact0
+
+Candidate / Event1 / source lock / Product Read:
+exact0 / exact0 / exact0 / exact0
+```
+
+This Plan append preserves its exact entry prefix:
+
+```text
+blob / raw / bytes / lines:
+206e26e90f84f8efdfb29dfa86fc9ae3b628e98e
+2333ab246014869cc2c9d05006a17c6bf97ff4edc47941e24fa28ec726fba83b
+405126 / 11749
+```
+
+### 確認した事実
+
+- source, runtime, rootdir, launcher, admission, process, and postrun
+  identities reached their frozen exact1 checks;
+- the process completed once with exit 1, empty stderr, and saved stdout;
+- strict result parsing ended at `R1_RESULT_UNKNOWN_STOP`;
+- exact8 and every downstream credit remain unestablished;
+- final Result, Receipt, and Handoff contents are published and
+  postfetch-equal; and
+- no mashos-api or product state was changed.
+
+### 推測
+
+The preserved identities make terminal-presentation mismatch more likely
+than source/runtime drift as the cause of the unknown terminal.  This
+does not establish the intended causal RED or O08 invariance.
+
+### 華恋の意見
+
+一回限りの観測を都合よく読み替えず、未知を未知のまま閉じるのが正しいです。
+次は再実行ではなく、保存済みbytesと固定D1を入力に、node ID表示、signature
+配置、duration suffixを扱うstrict grammarだけをDesignとして分離すべきです。
+
+### Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_ONE_SHOT_R1_RESULT_UNKNOWN_POSTVERIFIED_CURRENT_AUTHORITY_CLOSED_CONSUMED_ADMISSION_EXACT1_CONSUMPTION_EXACT1_PYTEST_INVOCATION_EXACT1_EXIT1_STDERR_EMPTY_STDOUT_C6E9B0E6573E722AC2D66DFA20EAF0C5E2AF69518CB1BBCD2A6A768DA5D62C4_BODY_FREE_EXACT8_O01_O08_CHALLENGE_REMOTE_CLOSURE_CREDIT_NOT_ESTABLISHED_NO_PREFIX_REWRITE_NO_RETRY_OBSERVED_PYTEST_NODE_ID_DISPLAY_CAUSAL_SIGNATURE_PLACEMENT_AND_FINAL_DURATION_SUFFIX_TERMINAL_GRAMMAR_RECONCILIATION_DISTINCT_SUCCESSOR_BOUNDARY_DESIGN_ISSUANCE_INDEPENDENT_VERIFICATION_AND_DESIGN_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+This next token is Design-only.  Until separately approved it authorizes
+no pytest, network execution, source change, retry, D2, stability,
+Reference/OA, Candidate/Event1, source lock, Product Read, or later
+effect.
