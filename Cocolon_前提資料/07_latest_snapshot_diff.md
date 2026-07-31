@@ -29971,3 +29971,313 @@ exact0 / exact0 / exact0 / exact0 / exact0 / exact0
 
 No replacement D1, corrected D2, stability matrix, Reference/OA,
 Candidate/Event1, source lock, runtime, or later authority was executed.
+
+## 2026-07-31 snapshot — D1 v5 pytest-unavailable non-credit reconciled to test-runner readiness-only
+
+### Approved boundary and current state
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_POSTPUBLICATION_RUNNER_COMMAND_EXACT1_PYTEST_MODULE_UNAVAILABLE_FRAMEWORK_ENTRY_COLLECTION_EXECUTION_RUN_CHALLENGE_LIVE_REMOTE_EXACT0_NONCREDIT_TEST_RUNNER_RUNTIME_READINESS_AND_DISTINCT_ONE_SHOT_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+Cocolon final tree delta from entry:
+NEW exact3 / MODIFY append-only exact2
+
+mashos-api changed path:
+exact0
+
+package acquisition / runtime materialization:
+exact0 / exact0
+
+pytest framework entry / target import / collection / execution:
+exact0 / exact0 / exact0 / exact0
+
+eligible live remote-main acquisition:
+exact0
+
+automatic progression:
+false
+```
+
+```text
+published D1 v5:
+RETAINED_IMMUTABLE_CURRENT_SOURCE
+
+runner command invocation:
+exact1
+
+typed terminal:
+PYTEST_MODULE_UNAVAILABLE_FOR_SELECTED_INTERPRETER_BEFORE_FRAMEWORK_ENTRY
+
+run challenge:
+NOT_OBSERVED
+
+O01–O08:
+all NOT_OBSERVED
+
+prior execution permission:
+CLOSED
+
+corrected D1 v5 causal RED credit:
+NOT_ESTABLISHED
+
+test-runner readiness successor:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+later D1 one-shot:
+UNISSUED_CONDITIONAL_ON_CREDITED_RUNTIME_READY
+
+Reference / OperationalAdmission:
+BLOCKED
+```
+
+This Design-only checkpoint changes no source/runtime product behavior.  It
+becomes complete only after this fifth target is exact-content postfetch equal,
+the final exact5 are all reachable on main, the aggregate unique changed-path
+set is exact5, and the Plan/latest entry prefixes are byte-identical.  Partial
+publication is non-credit.
+
+### Fixed GitHub source
+
+```text
+Cocolon entry commit / tree:
+c847e9a2508cd34210d9c76db152ca502a53c2a8
+05ca6b93829711f7e08977d5fbd86c6433906848
+
+mashos-api commit / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+```
+
+Published D1 v5 remains:
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py
+
+blob / raw / bytes / lines:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+416501 / 12005
+```
+
+Formal lock remains byte-identical:
+
+```text
+path:
+ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json
+
+blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+
+target / full distribution count:
+CPython 3.12.13 / Linux x86_64 / pip 26.0.1 / exact46
+```
+
+### Meaning of the non-credit branch
+
+The selected historical interpreter binary was CPython 3.12.13 with raw
+SHA-256
+`9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488`.
+It could not enter pytest.  This hash describes the failed run only; it is not
+a required future binary.
+
+No D1 target byte was imported or collected.  No challenge, live remote
+observation, or oracle outcome exists.  Therefore this branch proves only an
+execution-environment selection gap for that interpreter.  It does not prove
+a D1 source defect or a causal RED result.  The published D1 remains current
+and the closed authority cannot be retried.
+
+### Reconciled R0 readiness-only boundary
+
+The existing lock derives the targeted pytest-runner projection exact5 in
+this order:
+
+```text
+iniconfig 2.3.0
+packaging 26.2
+pluggy 1.6.0
+pygments 2.20.0
+pytest 8.4.1
+
+canonical projection SHA-256:
+f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e
+```
+
+No eligible wheel byte was found during this Design authority.  This does not
+prove that a configured route is unavailable or that Mash holds the prior
+bundle.
+
+The exactly-one successor R0 may inspect only already-configured package
+routes and accept candidate wheels only after frozen filename/raw-hash
+equality.  This is non-credit input preparation.  Credential extraction or
+request, unconfigured source, sdist, build, and dependency substitution are
+forbidden.  After accepted input is frozen, package-index access is exact0 and
+fresh materialization is hashes-required, wheel-only, and no-index.
+
+R0 may perform a pytest-version probe exact1 and an owner/independent/parent
+smoke process exact1 with public API effect exact0.  Target D1 import,
+collection, execution, challenge, live remote, and O01–O08 remain exact0.
+
+The body-free readiness receipt freezes canonical exact10 observation bytes,
+all nested keysets and hash preimages, deterministic typed failure
+null/0/`NOT_STARTED` fields, and owner and independent verdicts over one
+observation identity.  Complete retained runtime identity includes the
+executable, exact5 distribution/RECORD/files, all runtime-root entries, modes,
+control bytes, symlink identity, and added/unowned entry detection.
+
+```text
+R0 terminal:
+RUNTIME_READY or RUNTIME_NOT_READY
+
+both:
+STOP
+
+automatic transition to D1 exact8:
+false
+```
+
+Publication/postfetch failure is outside both credited terminals and stops
+the checkpoint non-credit.
+
+### Frozen but unissued R1 boundary
+
+R1 concrete token count is exact0.  Only credited R0 `RUNTIME_READY` and the
+same retained runtime can permit a separate Design and Mash approval.
+
+Immediately before a future R1, owner and independent verifier must rederive
+the complete runtime manifests/root identity and executable hash.  Generic
+`python`/PATH resolution, interpreter switch, rematerialization, retry,
+fallback, and prior-run reuse remain exact0.
+
+The future boundary keeps a new command budget, fresh challenge, exact8
+launcher exact1, eligible live remote-main acquisition exact1, and additional
+owner/independent/parent/harness live queries exact0.  Expected credit remains
+O01–O07 `CAUSAL_RED`, O08 `GREEN_V1_INVARIANCE`, closure exact1; every other
+result stops non-credit.
+
+### Published exact4 before this final snapshot target
+
+One Design correction occurred before Receipt.  Its first commit is retained
+as a transparent non-credit intermediate:
+
+```text
+intermediate Design commit / tree / blob / raw:
+90bad3d885d5d49c3b04928348e1398b3657a10a
+94b11258bff6b4248107d6370daf5df24db0b29e
+cef8b81ff2e9078e4bea094081b2c4e245ce51f0
+59e005b0bc7dc627b3757d4e2e6cb1116f5cf81b7e13b469daa7767e798e0715
+```
+
+Final Design:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+5b198cdb61c9d6f2bf95f263084d76d88246d1f3
+ce29b29dfcc80513872c6f8bb418bc873aa5ff23
+94fda6f067e5b63f09476fc895d7906958a55202
+775ab3df619d196fef1626f7baa48147cc40deeee52457e341ff3560ff15e28e
+36320 / 827
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes:
+c3dabbd54a7fd7e57db2d81a8f2d218a99d10a0c
+11f3765c8983462d04a087039caa17ddbf217147
+c4d47ee4cfbb044a1d8ca2f6b850c13f3f7e120d
+a6b6340b1f8878492c0b6436b3a8d0531d58521a952342d5f1108e8595de8fdf
+7662
+
+delete-self logical:
+403e3e5e8247f9cec419f007799efc6300a691e37baf2567a1572868d6076133
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes:
+d8cdd00cd244fafa66f6c81664a928d7abdddf64
+07ec340260e8c6a9c2e83e137ff25ffd6b4bb39f
+f5afcac056632ddcee9153cf10223b02c02833b4
+26984e421e676ab694fb904a64fcd03be64f504503bad11e15757dc1749c009d
+13250
+```
+
+Execution and Closure Plan:
+
+```text
+commit / tree / blob / raw / bytes:
+69ffbba0416de751414c289f525561f568a3e970
+8d714b867efc7d8970ca915a7da935470abd9704
+f8781d9c9fbcd26911c1dcb79c8330b45f5b9e5e
+e957e2b6cf6551c6de55d30e9114b58b6dd9d1bc60eb561d0b8ef3df34218628
+356443
+```
+
+Every final exact4 is exact-content postfetch equal.  Every write commit
+changed one approved path.  The publication sequence contains six write
+commits because the pre-Receipt Design correction is transparent, while the
+aggregate unique changed-path set remains the approved exact5.  This latest
+snapshot is the fifth and final path; its own postfetch and final compare
+complete the checkpoint.
+
+Three independent read-only lanes ended final blocker/advisory exact0.  They
+made no edit, commit, GitHub write, pytest collection/execution, repo-module
+import, package acquisition, or live remote observation.  Karen retained all
+final judgment and performed all final writes.
+
+### 確認した事実・推測・華恋の意見
+
+確認した事実: D1 v5 exact1のGitHub publicationは有効です。runner invocationは
+exact1ですが、pytest framework以降はexact0です。exact5 projectionは既存lockの
+fieldsから再導出され、今回そのwheel実体は未取得です。prior authorityは閉じ、
+corrected D2以降はBLOCKEDです。直接証明されたのは、選択interpreterがpytestを
+解決できなかったことまでです。D1 source defectは証明されていません。
+
+推測: 直接のgapは、選択interpreterとrunnerの不整合だと考えます。
+lock-derived exact5で既知のlauncher/import uncertaintyを閉じられる可能性は
+高いですが、R0が証明するまでは未成立で、O01–O08も予測しません。
+
+華恋の意見: 次のexact8を消費する前に、同じ実行rootを作り、独立に検証し、保持
+します。formal exact46全体ではなく必要なexact5だけに限定し、readiness failureを
+D1 oracleへ混ぜず、因果証拠はfresh challengeを持つ別one-shotからだけ受け取ります。
+
+### Current state and exactly one next authority
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_PUBLISHED_EXACT1_POSTFETCHED_PYTEST_MODULE_UNAVAILABLE_BEFORE_FRAMEWORK_ENTRY_PRECOLLECTION_NONCREDIT_CONFIGURED_ROUTE_HASH_VERIFIED_LOCK_DERIVED_EXACT5_ARTIFACT_ACQUISITION_TEST_RUNNER_MATERIALIZATION_PYTEST_AND_ROLE_IMPORT_PROBES_INDEPENDENT_RUNTIME_READINESS_VERIFICATION_READY_OR_NOT_READY_STOP_ONLY
+
+next authority state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete token count:
+exact1
+
+R1 concrete token count:
+exact0
+
+automatic progression:
+false
+
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_PUBLISHED_EXACT1_POSTFETCH_VERIFIED_RUNNER_COMMAND_EXACT1_PYTEST_MODULE_UNAVAILABLE_BEFORE_FRAMEWORK_ENTRY_NONCREDIT_FRAMEWORK_ENTRY_TARGET_IMPORT_COLLECTION_EXECUTION_LIVE_REMOTE_EXACT0_O01_O08_NOT_OBSERVED_PRIOR_EXECUTION_PERMISSION_CLOSED_TEST_RUNNER_EXACT5_READINESS_SUCCESSOR_DEFINED_INACTIVE_R1_UNISSUED_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+```text
+mashos-api production / test / fixture / dependency / config / lock:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+Reference / OA / Candidate / Event1 / source lock:
+exact0 / exact0 / exact0 / exact0 / false
+
+runtime product / Readiness / Failure / Reservation / Attempt / formal exact134:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+```
+
+No R0, R1, corrected D2, stability, Reference/OA, Candidate/Event1, source
+lock, runtime product, or later authority was executed.
