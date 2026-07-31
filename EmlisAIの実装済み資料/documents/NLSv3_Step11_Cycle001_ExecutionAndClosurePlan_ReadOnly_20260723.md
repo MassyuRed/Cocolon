@@ -11066,3 +11066,232 @@ RECOVERY_EPOCH004_D1_V5_R1_PYTEST_EXACT1_COLLECTION_EXACT8_NODEID_PREFIX_MISMATC
 
 No new one-shot, corrected D2, stability, Reference/OA, Candidate/Event1,
 source lock, runtime product, or later authority was executed.
+
+## 2026-07-31 append — R1 node-id-prefix non-credit rootdir/launcher reconciliation Design
+
+### Authority, decision, and zero-execution boundary
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_PYTEST_INVOCATION_EXACT1_COLLECTION_EXACT8_MODULE_FIXTURE_SETUP_ERROR_EXACT8_BEFORE_PREFLIGHT_CHALLENGE_REMOTE_AND_O01_O08_NONCREDIT_EMPTY_NONREPO_CWD_ABSOLUTE_D1_PYTEST_ROOTDIR_CHECKOUT_PREFIX_NODEID_MISMATCH_EXPLICIT_FIXED_SOURCE_ROOTDIR_REPOSITORY_RELATIVE_ORDERED_NODEID_LAUNCHER_CANONICALIZATION_AND_DISTINCT_NEW_ONE_SHOT_AUTHORITY_BOUNDARY_RECONCILIATION_DESIGN_READ_ONLY_AND_POSTVERIFICATION_ONLY
+
+prior R1 authority / result:
+CLOSED_CONSUMED_NO_RERUN /
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP
+
+fixed-rootdir launcher contract:
+STATICALLY_RECONCILED_NOT_EXECUTED
+
+distinct corrected one-shot:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+The Design, Body-free Receipt, and Handoff are published and exact-content
+postfetch equal.  This append is target four.  The latest snapshot append is
+still target five; aggregate exact5 credit is not established until it is
+published and the complete checkpoint is postverified.
+
+```text
+pytest invocation / Python-or-pytest import / framework entry / collection:
+exact0 / exact0 / exact0 / exact0
+
+collect-only / dry-run / launcher probe:
+exact0 / exact0 / exact0
+
+challenge / eligible live remote / O01–O08 / closure:
+exact0 / exact0 / exact0 / exact0
+
+mashos-api change / product runtime effect:
+exact0 / exact0
+
+Reference / OperationalAdmission / Candidate / Event1 / source lock:
+BLOCKED / BLOCKED / exact0 / exact0 / false
+```
+
+### Predecessor and fixed source
+
+```text
+Cocolon entry commit / tree:
+b8ac15d3d158807e3478b09b66db670eee14b023
+71de24be78dbe9dfc43502d192ef0f2918879f85
+
+prior execution observation / Receipt delete-self SHA-256:
+7b10c9e9c55c4fa31e4e31908c78be358e16e42f00d61161d729fd34f785808a
+ed31017aa72da31c9a2618b647426546dd3ecc0f521ef048dfe934d8dc0ffb07
+```
+
+```text
+mashos-api commit / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+
+D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+lock blob / raw / logical:
+0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+```
+
+The fixed GitHub main, D1, and lock were re-fetched equal.  Prior
+owner/independent retained-runtime `VALID` is kept as past evidence only; all
+exact7 identities and the executable must be independently rederived before
+the separately approved successor.
+
+### Static rootdir and launcher contract
+
+Read-only inspection of retained pytest 8.4.1 established the explicit
+`--rootdir` to `config.rootpath` to repository-relative filesystem-node-id
+path.  No import, collection, or probe was performed.
+
+```text
+rootdir binding class / bytes / SHA-256:
+FIXED_SOURCE_REPOSITORY_ROOT /
+601 /
+c8a56dfaa93db8b31b4908baa0e8b7a9a4bcc6f38d18a83e5f6a6d4635da2aef
+
+corrected logical argv bytes / SHA-256:
+319 /
+45d1b95d0327423969e6383335795dac8911656717025f0d5f9a9151c1dc2e4e
+
+historical non-credit argv / reuse:
+8797754f541bd6bbd97734f0e80329cb597f2e37605755d33588fbef7d58f99c /
+exact0
+
+environment-policy SHA-256:
+6393dea280af670e3b0ed902014c86fc65a6666e973fe8e7ee50318ff1a11591
+
+ordered node / expected vector SHA-256:
+e2661d946c060efc44ce7da06f8c55f51d10dfad2af4f5f0526bd38109c340bc
+da9d266a254a12a655d4dd9388ccd3e866a57455ff98254e119571f8b824055b
+```
+
+The operational rootdir, source environment root, and D1 base are one
+absolute no-symlink fixed root.  `$` is forbidden in the rendered rootdir
+argument, and pytest-equivalent expansion/absolute normalization must remain
+equal.  The corrected argv inserts only the body-free rootdir identity token;
+all other logical tokens, empty non-repository cwd, environment, and
+1200-second deadline remain unchanged.  Prefix stripping, suffix matching,
+output rewriting, and test/config/lock changes remain exact0.
+
+### Frozen successor evidence and result boundary
+
+The future execution Receipt is fixed before observation: exact16 top-level,
+execution observation exact11 with rootdir exact14, environment exact5,
+command exact12, run contract exact14, deterministic stage projections, and
+exact12 finite result classes.  The prior exact10 vocabulary is preserved and
+only rootdir-binding-invalid and launcher/environment-invalid pre-launch
+classes are added.
+
+Pre-launch failure keeps pytest exact0.  The eligible path may invoke pytest
+exact1 only, with same-authority rerun exact0.  Challenge and neutral remote
+request/execution become exact1 only if reached.  Frozen-lane additional query
+requests may be positively detected, while additional role/harness
+process-network execution remains exact0.
+
+Only the full O01–O07 causal-RED vector, O08 `GREEN_V1_INVARIANCE`, same
+immutable observation, and closure exact1 are credit.  Every other result is
+typed non-credit or unknown and cannot auto-advance corrected D2.
+
+### Published exact3 before this append
+
+Design:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+0ff73908d1644e1475797d6743ba733483bce352
+68faf72c9292188fa2491d77bd17e090dfed762b
+8e667880adb27a831e0af98b199a7b77c33d779d
+c720b1bb5c7f5868e2e24af13159ec3020de61fb118119c526dbe90cf57f0f6e
+54558 / 1446
+```
+
+Body-free Receipt:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+8438839b5b2eeb289ccfc1d2d5f5d4066c1074f2
+8308bfcc305c8054504b4f46040fbbc57452c4eb
+c357ad159a185b086034ab18909c8fe6759c5150
+bd401ed633221f5aa5dd0b0059515867124eb371d564223ab1a0618a4d91502f
+11875 / 1
+
+delete-self logical SHA-256:
+2dcc424b08c4f77f80d87e9ea495fb6c45ce0139ed12ffa2043542a0607bd6a2
+```
+
+Handoff:
+
+```text
+commit / tree / blob / raw / bytes / lines:
+befe87ec4b8cea87e3dd0eb941622111618f6707
+f7b7739118221a0a6d3283c20c7a3168da41481f
+bea63aeeff75fb87f20ac00717f3239a8430d172
+e62ac5b126d246d088fbbf255ff73fc858fd42a7e43cb77d964f1c8ebb7fc48a
+12096 / 329
+```
+
+All exact3 are postfetch exact-equal, and each publication commit changed only
+its approved exact1 path.  The pre-append Plan prefix remains byte-identical:
+
+```text
+blob / raw / bytes:
+57e7374470016a44953354f122318f6a2ff876c3
+19618da45a123b939447bc76bb545b03dae98546ad6fcebcafe5f5384cc68f71
+380650
+```
+
+### 確認した事実
+
+- prior R1 is closed fixture-setup non-credit with no rerun;
+- fixed GitHub source identities remain equal;
+- pytest 8.4.1's static path supports the explicit-rootdir command-only
+  reconciliation;
+- Design, Receipt, and Handoff are published exact3 and postfetch equal; and
+- this authority executed no successor, changed no mashos-api file, and
+  produced no D1 semantic or downstream credit.
+
+### 推測
+
+The command-only correction is statically sufficient for native
+repository-relative node-id formation, but corrected collection and exact8
+semantic results are still unobserved.
+
+### 華恋の意見
+
+D1を観測結果へ合わせて緩めず、pytest rootdirを固定sourceへ束縛する設計が妥当です。
+次はsource/runtime/rootdir/launcherを実行直前に再導出し、別承認された一回だけを
+実行します。不利な結果や外部失敗でも再試行しません。
+
+### Exactly one next authority and stop
+
+```text
+next authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_ROOTDIR_CORRECTED_DISTINCT_ONE_SHOT_PRIOR_R1_NODEID_SETUP_NONCREDIT_CLOSED_SAME_RETAINED_RUNTIME_IDENTITY_AND_EXECUTABLE_HASH_REDERIVED_EMPTY_NONREPO_CWD_EXPLICIT_FIXED_SOURCE_ROOTDIR_REPOSITORY_RELATIVE_ORDERED_NODEID_FULL_EXACT8_PYTEST_INVOCATION_EXACT1_FRESH_CHALLENGE_ELIGIBLE_ACTUAL_GIT_REMOTE_MAIN_ACQUISITION_EXACT1_GUARDED_ADDITIONAL_ROLE_HARNESS_QUERY_REQUEST_DETECTION_POSITIVE_PROCESS_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_PRIOR_RUN_REUSE_REMATERIALIZATION_INTERPRETER_SWITCH_EXACT0_O01_O07_CAUSAL_RED_O08_GREEN_V1_INVARIANCE_CLOSURE_EXACT1_OR_TYPED_NONCREDIT_STOP_AND_POSTVERIFICATION_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+concrete successor unique token value count:
+exact1
+
+successor execution under this Design:
+exact0
+
+automatic progression:
+false
+```
+
+```text
+current authority stop:
+RECOVERY_EPOCH004_D1_V5_R1_PRIOR_NODEID_PREFIX_NONCREDIT_CLOSED_EXPLICIT_FIXED_SOURCE_ROOTDIR_STATIC_CONTRACT_RECONCILED_DISTINCT_ROOTDIR_CORRECTED_ONE_SHOT_DEFINED_INACTIVE_PYTEST_CHALLENGE_REMOTE_O01_O08_EXACT0_CORRECTED_D2_STABILITY_REFERENCE_OPERATIONAL_ADMISSION_BLOCKED_AUTOMATIC_PROGRESSION_FALSE_AUTHORITY_STOP
+```
+
+No corrected R1 launcher, corrected D2, stability, Reference/OA,
+Candidate/Event1, source lock, runtime product, or later authority was
+executed.
