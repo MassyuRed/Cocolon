@@ -12551,3 +12551,197 @@ f7ba995db4c0913e1aaf1b02f51adc148d9d7fb6
 831d9fde6f1c0e8b36409416f60df9deb66fa31d31477c9fae33d90ff07cdc8a
 430326 / 12380
 ```
+
+# 2026-08-01 R1 owner-contract one-shot observer-v1 noncredit closure append
+
+## Authority and immutable terminal
+
+Mash様が承認したfresh runtime one-shotは、Gate C VALID後にadmission、gate evidence
+consumption、authority consumption、targeted pytestを各exact1で消費しました。
+
+```text
+controller terminal:
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP
+
+authority state:
+CLOSED_CONSUMED_NONCREDIT
+
+causal RED credit:
+NOT_ESTABLISHED
+
+current full R1:
+R1_RESULT_UNKNOWN_STOP
+
+automatic progression:
+false
+```
+
+このterminalは、actual pytestがcollectionへ未到達だったことを意味しません。
+structured child evidenceはsession start、single node collection、setup、call、teardown、
+session finishへ到達しました。observer v1が`report.nodeid == TARGET_RELATIVE_PATH`に
+一致するreportだけを保存する追加predicate exact1がfalseだったため、frozen classifierが
+noncreditを返しました。全module collect-reportの有無は観測していません。既存resultを
+後からobserver v2で再parse / reclassify / creditしません。
+
+## Structured observation and classifier trigger
+
+```text
+pytest invocation / session start / collection finish:
+exact1 / exact1 / exact1
+
+collected node:
+exactly admitted single node
+
+setup / call / teardown:
+passed exact1 / failed exact1 / passed exact1
+
+call direct exception / signature:
+Failed
+R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED exact1
+
+session finish / pytest exit / process exit:
+exact1 / 1 / 1
+
+observer-v1 exact-nodeid predicate-matching target module collect report:
+exact0
+
+classifier false predicate:
+TARGET_MODULE_COLLECT_REPORT_EXACT1_PASSED
+```
+
+## Gate C and zero effects
+
+```text
+same runtime instance prelaunch rederivation:
+VALID
+
+required source exact6 / owner state:
+MATCH / ABSENT
+
+prelaunch static git process / target OS child:
+exact1 / exact1
+
+network / challenge / remote:
+exact0 / exact0 / exact0
+
+existing D1 raw-byte read / raw-and-blob identity validation:
+exact1 / PASS
+
+D1 import / Python execution / D1 full exact8:
+exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+dependency install / runtime repair / rematerialization:
+exact0 / exact0 / exact0
+
+production / published RED test / existing D1 change:
+exact0 / exact0 / exact0
+```
+
+GitHub reflection transportはexecution network countと別namespaceです。
+
+## Canonical Result exact3 before Plan append
+
+Result:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV1_ModuleCollectPredicateFalse_NonCredit_Result_20260801.md
+
+blob / raw / bytes / lines:
+55884a07eeacca9bc2b055e134e009bc664e2a51
+0c23b7551d8c473fffb09e28727c419ab7e0333331878b95adc10dddd21bbccd
+13983 / 284
+```
+
+Body-free Receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV1_ModuleCollectPredicateFalse_NonCredit_BodyFree_Receipt_20260801.json
+
+blob / raw / logical / bytes / lines:
+08c6417b77c323ca6a594f88c63ed81c376886f4
+f8cc0905cfcb2e4123809432a8b4ae5ccc534a89d0b2423075d4cc6d0c782675
+217dae66987af38b8558d58ecb71b7e1358d5ed6731dc45b9b287f4b19f07794
+12373 / 182
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV1_ModuleCollectPredicateFalse_NonCredit_Handoff_20260801.md
+
+blob / raw / bytes / lines:
+60227dc1c6a8366a57ea6b7caa23e9849b48fac5
+cbcf8c171b5939d0c124587cb02c09b28c6f29422d9cc1b4d2d56e353883d1e0
+8449 / 222
+```
+
+Approved reflection is NEW exact3 above plus append-only MODIFY exact2 (this Plan and
+`Cocolon_前提資料/07_latest_snapshot_diff.md`) only. mashos-api change is exact0.
+
+## Private body-free evidence commitment
+
+```text
+admission record ID:
+e42a2eec1a8795f7810c5e6ee7e33fcdd4c66b9ed05427c273f26aaa98c8ab63
+
+admission / consumption / child / controller raw SHA-256:
+0f8fe5aaf03924711f0288244f523b1fc8c5429a6b24d18019eaa0c474755fca
+0dcf5cfcd9eaaa6d6485d9c1b0e3ee58309dd3f2f69d1fbe2f8dd889d40c974b
+cd4f6874e5fd0765b05e20ea3e745441eb158c2d1ec437ece40900b6f3440e75
+a3841b598439e88de9202df97cfaa0d24ebee3dd833da140b6033b2637f2983a
+```
+
+## 確認した事実、推測、華恋の意見
+
+### 確認した事実
+
+- same runtime/source Gate Cとsingle-use admission/consumptionは成立しました。
+- expected setup/call/teardownとsignatureはchild structured evidenceへ存在します。
+- observer-v1 exact-nodeid predicate-matching module collect-report exact0により、frozen controller resultはnoncreditです。
+- existing D1はraw bytesをexact1読んでraw/blob identityを検証しましたが、import / Python execution / full exact8は0です。
+- retry、runtime change、mashos-api production/published RED/existing D1 change、challenge、remote、execution networkは0です。
+
+### 推測
+
+single admitted nodeがcollectionされcall/teardownへ進んでいるため、observer v1の
+exact-nodeid predicate-matching list exact0はactual collection failureではなく、nodeid
+predicateとの差である可能性が高いです。actual module collect-report自体が0だったとは
+確定しません。これはdiagnosticでありcreditではありません。
+
+### 華恋の意見
+
+今回の直接原因はruntimeではなく、華恋がobserver v1へ入れた過剰なmodule report
+条件です。旧one-shotを後から成功へ変えず、v2ではcollection admissionをsession start、
+collection finish、ordered collected node IDs exact singleだけで定義すべきです。
+
+## Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_CURRENT_ONE_SHOT_AUTHORITY_CLOSED_CONSUMED_TERMINAL_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_CURRENT_RESULT_IMMUTABLE_NONCREDIT_FULL_R1_RESULT_UNKNOWN_PRESERVED_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_CHILD_STRUCTURED_EVIDENCE_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_COLLECTED_NODE_IDS_EXACT_SINGLE_ADMITTED_NODE_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_SESSIONFINISH_EXACT1_EXIT1_PRIOR_OBSERVER_V1_EXACT_NODEID_PREDICATE_MATCHING_TARGET_MODULE_COLLECT_REPORTS_EMPTY_PRESERVED_AS_DIAGNOSTIC_FACT_ONLY_DISTINCT_OBSERVER_V2_AND_CONTROLLER_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_ONLY_COLLECTION_ADMISSION_V2_DEFINED_BY_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_AND_COLLECTED_NODE_IDS_EXACTLY_EQUAL_ORDERED_SINGLE_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_TARGET_MODULE_COLLECT_REPORTS_EXCLUDED_FROM_OBSERVER_V2_REQUIRED_SCHEMA_KEYSET_AND_ALL_ADMISSION_CREDIT_AND_TERMINAL_CLASSIFICATION_PREDICATES_PYTEST_COLLECTREPORT_HOOK_NOT_REQUIRED_OBSERVER_V2_BODY_FREE_SCHEMA_KEYSET_EVENT_COUNTS_PHASE_SIGNATURE_EXIT_AND_THREE_WAY_TERMINAL_MAPPING_FROZEN_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_PRODUCTION_CODE_ANY_TEST_EXISTING_D1_CHANGE_EXACT0_TARGETED_OR_OTHER_PYTEST_INVOCATION_FRAMEWORK_ENTRY_IMPORT_COLLECTION_NODE_CALL_EXACT0_RUNTIME_DISCOVERY_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_OR_CHANGE_EXACT0_NETWORK_CHALLENGE_REMOTE_EXECUTION_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_EXACT0_BODY_FREE_DESIGN_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_AFTER_DESIGN_DISTINCT_LATER_ONE_SHOT_OBSERVER_V2_EXECUTION_SUCCESSOR_TOKEN_ISSUANCE_EXACT1_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE
+```
+
+```text
+scope:
+DESIGN_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+### Entry-prefix preservation
+
+```text
+Plan entry prefix blob / raw / bytes / lines:
+5dab97a3e2f8128d266bf2468a0aba13ec84a63e
+7874394c1e786abddd2bbcba8235bde18442652bd0757adde9645f5da94338d8
+439421 / 12553
+```

@@ -1,0 +1,182 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.r1_owner_contract_observer_v1_module_collect_predicate_false_noncredit_receipt.v1",
+  "observed_at_date": "2026-08-01",
+  "repository_scope": {
+    "design_and_evidence": "MassyuRed/Cocolon",
+    "target_source": "MassyuRed/mashos-api"
+  },
+  "body_free": true,
+  "private_absolute_locator_published": false,
+  "authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_WORK_TEST_RUNNER_FRESH_REMATERIALIZED_NEW_INSTANCE_RUNTIME_READY_CURRENT_SESSION_POSTVERIFIED_READINESS_OBSERVATION_8138978339A65C5EC2D32299A326EE8525F470572526F053FD9866F532203E69_SAME_RUNTIME_INSTANCE_ROOT_AND_EXECUTABLE_IDENTITY_REDERIVED_PRIOR_FULL_R1_RESULT_UNKNOWN_AND_PRIOR_STRUCTURED_TERMINAL_OWNER_RED_LAUNCHER_ENVIRONMENT_INVALID_NONCREDIT_AUTHORITIES_CLOSED_CONSUMED_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_NO_PRIOR_AUTHORITY_ADMISSION_CONSUMPTION_PROCESS_STDOUT_CHALLENGE_OR_RUNTIME_REUSE_DISTINCT_SUCCESSOR_BASE_37EEE88C_TREE_3891B841_PLUS_REMOTE_315813C7_TREE_A641510E_POSTFETCH_VERIFIED_OVERLAY_EXACT1_NOT_CLAIMED_CLEAN_MAIN_REQUIRED_SOURCE_EXACT6_REDERIVED_PUBLISHED_RED_TEST_BLOB_9A1CF8A0343D6A391CE6D520CA686F7310EF22D0_RAW_EA8498B79FD9AA028FF913FB4D99BEB205D2736A3D0AE783A435CBCCF32575CC_UNCHANGED_PRODUCTION_OWNER_PATH_ABSENT_EXISTING_D1_UNCHANGED_EXACT_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_SHA256_12C11C21C0B7B5E7818A1A1050002E126A5D2FABA2ECC213AEAAC4C4FDF9B1D0_EXACT1_DIRECT_ADMITTED_ABSOLUTE_EXECUTABLE_PRELAUNCH_RUNTIME_ROOT_ENTRYPOINT_CONTROL_MANIFEST_EXECUTABLE_PYTEST_SOURCE_AND_NODE_IDENTITY_REDERIVATION_VALID_OR_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_TARGET_INVOCATION_EXACT0_FRESH_SINGLE_USE_PRELAUNCH_ADMISSION_RECORD_EXACT1_GATE_EVIDENCE_CONSUMPTION_EXACT1_TARGETED_PYTEST_INVOCATION_EXACT1_WHEN_REACHED_PYTEST_START_COLLECTION_ADMITTED_NODE_AND_TEST_CALL_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_EXIT1_OWNER_CONTRACT_CAUSAL_RED_ESTABLISHED_STOP_OR_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_OR_R1_STRUCTURED_TERMINAL_OWNER_CONTRACT_CAUSAL_RED_NOT_ESTABLISHED_NONCREDIT_STOP_NETWORK_CHALLENGE_REMOTE_D1_IMPORT_D1_FULL_EXACT8_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_RUNTIME_REPAIR_REMATERIALIZATION_POSTADMISSION_VERSION_PROBE_ROLE_SMOKE_EXACT0_PRODUCTION_OWNER_PUBLISHED_RED_TEST_EXISTING_D1_CHANGE_EXACT0_HUMAN_PYTEST_PRESENTATION_DIAGNOSTIC_ONLY_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_RED_RECOVERY_EXECUTION_ONLY_AUTOMATIC_PROGRESSION_FALSE",
+    "token_sha256": "29f73b277daadeb3468db95b77fdb6fa7d41f5ec06b616421d967c83aefcae7d",
+    "admission_count": 1,
+    "gate_evidence_consumption_count": 1,
+    "authority_consumption_count": 1,
+    "state": "CLOSED_CONSUMED_NONCREDIT"
+  },
+  "terminal": {
+    "controller_terminal": "R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP",
+    "classifier_predicate_false": "TARGET_MODULE_COLLECT_REPORT_EXACT1_PASSED",
+    "causal_red_established": false,
+    "credit": "NOT_ESTABLISHED",
+    "automatic_progression": false
+  },
+  "historical_boundary": {
+    "current_full_r1": "R1_RESULT_UNKNOWN_STOP",
+    "prior_full_r1_authority": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+    "prior_structured_owner_red_authority": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+    "historical_result_reparse_count": 0,
+    "retroactive_reclassification_count": 0,
+    "credit_promotion_count": 0
+  },
+  "readiness_binding": {
+    "readiness_observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+    "runtime_readiness_observation_id": "794631c1430f3b936d59f56368bc3b707bd6f19706fc146754de07931555af38",
+    "runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+    "runtime_root_identity_sha256": "a63b7d0715700e52568cc8b382d4cfc22cc648269e59d98edcd15221d20849cf",
+    "entrypoint_control_identity_sha256": "f31728f896de598a7a6b392c6ce155d2223372d53ead264c1d6ea932bd276a5d",
+    "resolved_interpreter_executable_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+    "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+    "full_runtime_root_manifest_sha256": "e6fb3c42d88897cb5117d993449debe7efef3722f11e6c7e3aff541513120042",
+    "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+    "prelaunch_rederivation": "VALID_SAME_RUNTIME_INSTANCE"
+  },
+  "source_binding": {
+    "base_commit_sha1": "37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f",
+    "base_tree_sha1": "3891b84164ba0063136e47beb93d36798587a568",
+    "remote_commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+    "remote_tree_sha1": "a641510e107d52bb910073f36604c85bd57af150",
+    "projection_class": "BASE_PLUS_EXACT1_VERIFIED_OVERLAY_NOT_CLAIMED_CLEAN_MAIN",
+    "required_source_match_count": 6,
+    "source_status_sha256": "7ec53335a645eed6bfa54d4994d9e63d49847bce790da89c1d7f6d86a261bbbe",
+    "target_path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py",
+    "target_blob_sha1": "9a1cf8a0343d6a391ce6d520ca686f7310ef22d0",
+    "target_raw_sha256": "ea8498b79fd9aa028ff913fb4d99beb205d2736a3d0ae783a435cbccf32575cc",
+    "target_node_id": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py::test_r1_structured_terminal_event_owner_contract_or_red",
+    "target_node_id_sha256": "12c11c21c0b7b5e7818a1a1050002e126a5d2faba2ecc213aeaac4c4fdf9b1d0",
+    "production_owner_state": "ABSENT",
+    "existing_d1_change_count": 0
+  },
+  "launcher_binding": {
+    "controller_raw_sha256": "54086ff68b686508dd8ce428fad26caded6d52409e36e3745f9e3523dbc6a536",
+    "observer_runner_raw_sha256": "bba5ca91ea32ae6a752b23fc36f34c63fbd94b4946f0043c7f91c48eda7591f7",
+    "logical_launch_argv_sha256": "513371391e1fe16f257677296934bcdbf8bfa18b28d3c14ed298b590fa5e3606",
+    "logical_pytest_argv_sha256": "9200bdd6a1a08db5de7a41c9a1783ca239724f1990287f9755ea4b2cf484836a",
+    "direct_admitted_absolute_executable": true,
+    "generic_interpreter_or_path_search": false,
+    "observer_registration": "PYTEST_MAIN_EXPLICIT_PLUGIN_OBJECT_EXACT1_SAME_CHILD_PROCESS"
+  },
+  "private_evidence": {
+    "admission": {
+      "bytes": 4039,
+      "lines": 1,
+      "record_id": "e42a2eec1a8795f7810c5e6ee7e33fcdd4c66b9ed05427c273f26aaa98c8ab63",
+      "raw_sha256": "0f8fe5aaf03924711f0288244f523b1fc8c5429a6b24d18019eaa0c474755fca"
+    },
+    "consumption": {
+      "bytes": 588,
+      "lines": 1,
+      "raw_sha256": "0dcf5cfcd9eaaa6d6485d9c1b0e3ee58309dd3f2f69d1fbe2f8dd889d40c974b"
+    },
+    "child_observation": {
+      "bytes": 2109,
+      "lines": 1,
+      "raw_sha256": "cd4f6874e5fd0765b05e20ea3e745441eb158c2d1ec437ece40900b6f3440e75"
+    },
+    "controller_result": {
+      "bytes": 2090,
+      "lines": 1,
+      "raw_sha256": "a3841b598439e88de9202df97cfaa0d24ebee3dd833da140b6033b2637f2983a"
+    },
+    "linkage": "ADMISSION_TO_CONSUMPTION_TO_CHILD_TO_CONTROLLER_VALID"
+  },
+  "structured_child_observation": {
+    "pytest_invocation_count": 1,
+    "pytest_sessionstart_count": 1,
+    "pytest_collection_finish_count": 1,
+    "collected_node_count": 1,
+    "collected_node_ids_exactly_admitted_single": true,
+    "observer_v1_exact_nodeid_predicate_matching_target_module_collect_report_count": 0,
+    "runtest_call_hook_entry_count": 1,
+    "phase_reports": [
+      {
+        "phase": "setup",
+        "outcome": "passed",
+        "count": 1,
+        "exception_present": false
+      },
+      {
+        "phase": "call",
+        "outcome": "failed",
+        "count": 1,
+        "exception_type": "Failed",
+        "signature": "R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED",
+        "signature_sha256": "9611720beabaf4b9bdb191ec76efff91139c607bd3d9a9c792acfbee43e9b649",
+        "signature_exact_match_count": 1,
+        "was_xfail": false
+      },
+      {
+        "phase": "teardown",
+        "outcome": "passed",
+        "count": 1,
+        "exception_present": false
+      }
+    ],
+    "pytest_sessionfinish_count": 1,
+    "pytest_exit_code": 1,
+    "process_exit_code": 1,
+    "runner_failure": "NONE",
+    "final_observed_stage": "SESSION_FINISH_AFTER_TEARDOWN_PASSED_AFTER_EXPECTED_CALL_FAILURE"
+  },
+  "classifier_reconciliation": {
+    "required_v1_predicate": "TARGET_MODULE_COLLECT_REPORT_EXACT1_PASSED",
+    "observer_collection_scope": "ONLY_COLLECTREPORTS_WITH_NODEID_EXACTLY_EQUAL_TARGET_RELATIVE_PATH",
+    "all_module_collect_report_count_observed": false,
+    "observed_v1_predicate_count": 0,
+    "controller_failure_class": "NONE",
+    "result": "PREDICATE_FALSE_NONCREDIT",
+    "diagnostic_lifecycle_may_be_preserved": true,
+    "retroactive_credit_allowed": false
+  },
+  "execution_cardinalities": {
+    "prelaunch_static_git_process_count": 1,
+    "os_child_start_count": 1,
+    "targeted_pytest_invocation_count": 1,
+    "existing_d1_raw_byte_read_count": 1,
+    "existing_d1_raw_sha256_validation_pass_count": 1,
+    "existing_d1_git_blob_sha1_validation_pass_count": 1,
+    "d1_import_count": 0,
+    "d1_python_execution_count": 0,
+    "d1_full_exact8_pytest_invocation_count": 0,
+    "network_execution_count": 0,
+    "challenge_count": 0,
+    "remote_observation_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "dependency_install_count": 0,
+    "runtime_repair_count": 0,
+    "rematerialization_count": 0,
+    "postadmission_pytest_version_probe_count": 0,
+    "postadmission_role_smoke_count": 0,
+    "production_change_count": 0,
+    "published_red_test_change_count": 0,
+    "existing_d1_change_count": 0
+  },
+  "diagnostic_only_process_output": {
+    "stdout_byte_count": 802,
+    "stdout_sha256": "2d3014fb697a4cf1bac28c1e42cbb454d850bef6b6443cdecdc4b3ad71252871",
+    "stderr_byte_count": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw_output_published": false,
+    "human_pytest_presentation_used_for_credit": false
+  },
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_CURRENT_ONE_SHOT_AUTHORITY_CLOSED_CONSUMED_TERMINAL_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_CURRENT_RESULT_IMMUTABLE_NONCREDIT_FULL_R1_RESULT_UNKNOWN_PRESERVED_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_CHILD_STRUCTURED_EVIDENCE_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_COLLECTED_NODE_IDS_EXACT_SINGLE_ADMITTED_NODE_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_SESSIONFINISH_EXACT1_EXIT1_PRIOR_OBSERVER_V1_EXACT_NODEID_PREDICATE_MATCHING_TARGET_MODULE_COLLECT_REPORTS_EMPTY_PRESERVED_AS_DIAGNOSTIC_FACT_ONLY_DISTINCT_OBSERVER_V2_AND_CONTROLLER_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_ONLY_COLLECTION_ADMISSION_V2_DEFINED_BY_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_AND_COLLECTED_NODE_IDS_EXACTLY_EQUAL_ORDERED_SINGLE_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_TARGET_MODULE_COLLECT_REPORTS_EXCLUDED_FROM_OBSERVER_V2_REQUIRED_SCHEMA_KEYSET_AND_ALL_ADMISSION_CREDIT_AND_TERMINAL_CLASSIFICATION_PREDICATES_PYTEST_COLLECTREPORT_HOOK_NOT_REQUIRED_OBSERVER_V2_BODY_FREE_SCHEMA_KEYSET_EVENT_COUNTS_PHASE_SIGNATURE_EXIT_AND_THREE_WAY_TERMINAL_MAPPING_FROZEN_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_PRODUCTION_CODE_ANY_TEST_EXISTING_D1_CHANGE_EXACT0_TARGETED_OR_OTHER_PYTEST_INVOCATION_FRAMEWORK_ENTRY_IMPORT_COLLECTION_NODE_CALL_EXACT0_RUNTIME_DISCOVERY_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_OR_CHANGE_EXACT0_NETWORK_CHALLENGE_REMOTE_EXECUTION_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_EXACT0_BODY_FREE_DESIGN_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_AFTER_DESIGN_DISTINCT_LATER_ONE_SHOT_OBSERVER_V2_EXECUTION_SUCCESSOR_TOKEN_ISSUANCE_EXACT1_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "automatic_progression": false
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_CANONICAL_JSON_SORT_KEYS_COMPACT_OF_DOCUMENT_WITH_receipt_logical_sha256_REMOVED",
+  "receipt_logical_sha256": "217dae66987af38b8558d58ecb71b7e1358d5ed6731dc45b9b287f4b19f07794"
+}

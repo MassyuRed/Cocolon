@@ -1,0 +1,284 @@
+# NLS v3 Step 11 Cycle001 Recovery Epoch004
+
+## R1 owner-contract one-shot / observer v1 module-collect predicate false / noncredit Result
+
+Date: 2026-08-01  
+Repository scope: `MassyuRed/Cocolon`, `MassyuRed/mashos-api`  
+Automatic progression: `false`
+
+---
+
+## 0. Approved authority and terminal
+
+Mash様は次のdistinct one-shot authorityを承認しました。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_WORK_TEST_RUNNER_FRESH_REMATERIALIZED_NEW_INSTANCE_RUNTIME_READY_CURRENT_SESSION_POSTVERIFIED_READINESS_OBSERVATION_8138978339A65C5EC2D32299A326EE8525F470572526F053FD9866F532203E69_SAME_RUNTIME_INSTANCE_ROOT_AND_EXECUTABLE_IDENTITY_REDERIVED_PRIOR_FULL_R1_RESULT_UNKNOWN_AND_PRIOR_STRUCTURED_TERMINAL_OWNER_RED_LAUNCHER_ENVIRONMENT_INVALID_NONCREDIT_AUTHORITIES_CLOSED_CONSUMED_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_NO_PRIOR_AUTHORITY_ADMISSION_CONSUMPTION_PROCESS_STDOUT_CHALLENGE_OR_RUNTIME_REUSE_DISTINCT_SUCCESSOR_BASE_37EEE88C_TREE_3891B841_PLUS_REMOTE_315813C7_TREE_A641510E_POSTFETCH_VERIFIED_OVERLAY_EXACT1_NOT_CLAIMED_CLEAN_MAIN_REQUIRED_SOURCE_EXACT6_REDERIVED_PUBLISHED_RED_TEST_BLOB_9A1CF8A0343D6A391CE6D520CA686F7310EF22D0_RAW_EA8498B79FD9AA028FF913FB4D99BEB205D2736A3D0AE783A435CBCCF32575CC_UNCHANGED_PRODUCTION_OWNER_PATH_ABSENT_EXISTING_D1_UNCHANGED_EXACT_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_SHA256_12C11C21C0B7B5E7818A1A1050002E126A5D2FABA2ECC213AEAAC4C4FDF9B1D0_EXACT1_DIRECT_ADMITTED_ABSOLUTE_EXECUTABLE_PRELAUNCH_RUNTIME_ROOT_ENTRYPOINT_CONTROL_MANIFEST_EXECUTABLE_PYTEST_SOURCE_AND_NODE_IDENTITY_REDERIVATION_VALID_OR_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_TARGET_INVOCATION_EXACT0_FRESH_SINGLE_USE_PRELAUNCH_ADMISSION_RECORD_EXACT1_GATE_EVIDENCE_CONSUMPTION_EXACT1_TARGETED_PYTEST_INVOCATION_EXACT1_WHEN_REACHED_PYTEST_START_COLLECTION_ADMITTED_NODE_AND_TEST_CALL_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_EXIT1_OWNER_CONTRACT_CAUSAL_RED_ESTABLISHED_STOP_OR_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_OR_R1_STRUCTURED_TERMINAL_OWNER_CONTRACT_CAUSAL_RED_NOT_ESTABLISHED_NONCREDIT_STOP_NETWORK_CHALLENGE_REMOTE_D1_IMPORT_D1_FULL_EXACT8_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_RUNTIME_REPAIR_REMATERIALIZATION_POSTADMISSION_VERSION_PROBE_ROLE_SMOKE_EXACT0_PRODUCTION_OWNER_PUBLISHED_RED_TEST_EXISTING_D1_CHANGE_EXACT0_HUMAN_PYTEST_PRESENTATION_DIAGNOSTIC_ONLY_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_RED_RECOVERY_EXECUTION_ONLY_AUTOMATIC_PROGRESSION_FALSE
+```
+
+```text
+authority token SHA-256:
+29f73b277daadeb3468db95b77fdb6fa7d41f5ec06b616421d967c83aefcae7d
+
+admission / gate evidence consumption / authority consumption:
+exact1 / exact1 / exact1
+
+targeted pytest invocation / process exit:
+exact1 / 1
+
+controller terminal:
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP
+
+causal RED credit:
+NOT_ESTABLISHED
+
+current full R1:
+R1_RESULT_UNKNOWN_STOP
+```
+
+このterminalは、実processがcollectionへ未到達だったという意味ではありません。
+observer v1が`report.nodeid == TARGET_RELATIVE_PATH`のexact-nodeid predicateで保存する
+target module collect-report exact1が観測されず、frozen classifier predicateがfalseに
+なったためのnoncredit terminalです。全module collect-reportの有無を観測したという意味
+ではありません。既存runを後から別classifierで再評価せず、この結果をそのまま保持します。
+
+## 1. Gate C prelaunch result
+
+same fresh runtime instanceをdirect launchする前に、runtime root、entrypoint、control、
+installed/full-root manifest、resolved interpreter、pytest-bearing exact5 closure、source
+exact6、production owner absence、exact nodeを静的に再導出しました。
+
+```text
+readiness observation:
+8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69
+
+runtime instance observation:
+695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80
+
+runtime root identity:
+a63b7d0715700e52568cc8b382d4cfc22cc648269e59d98edcd15221d20849cf
+
+entrypoint control identity:
+f31728f896de598a7a6b392c6ce155d2223372d53ead264c1d6ea932bd276a5d
+
+resolved interpreter executable SHA-256:
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+
+installed / full-root manifest:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+e6fb3c42d88897cb5117d993449debe7efef3722f11e6c7e3aff541513120042
+
+source base / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+
+remote / tree:
+315813c7bd3372462de926ddad74df567254a6b5
+a641510e107d52bb910073f36604c85bd57af150
+
+source projection:
+BASE_PLUS_EXACT1_VERIFIED_OVERLAY_NOT_CLAIMED_CLEAN_MAIN
+
+required source match / production owner:
+exact6 / ABSENT
+```
+
+PrelaunchはVALIDでした。absolute runtime locator、absolute source root、helper body、
+raw environment、credentialは公開しません。
+
+## 2. Why a local observer was necessary
+
+承認authorityはsetup / call / teardownのstructured phaseとsignature exact countを要求し、
+human pytest presentationをdiagnostic-onlyとしています。terminal文字列だけではこの
+phase境界を証明できないため、華恋はproduction/test/D1へ混ぜないauthority-bound local
+observerを同じpytest processへ明示登録しました。
+
+```text
+controller raw SHA-256:
+54086ff68b686508dd8ce428fad26caded6d52409e36e3745f9e3523dbc6a536
+
+observer runner raw SHA-256:
+bba5ca91ea32ae6a752b23fc36f34c63fbd94b4946f0043c7f91c48eda7591f7
+
+logical launch argv SHA-256:
+513371391e1fe16f257677296934bcdbf8bfa18b28d3c14ed298b590fa5e3606
+
+logical pytest argv SHA-256:
+9200bdd6a1a08db5de7a41c9a1783ca239724f1990287f9755ea4b2cf484836a
+```
+
+observerはautoload、conftest、raw stdout/stderr、longreprをcredit根拠にしていません。
+ただしv1 classifierへ、pytest 8.4.1の当該runで得られなかったmodule collectorの
+repository-relative nodeid report exact1まで必須条件として入れたことが今回の停止原因です。
+
+## 3. Private exact4 evidence integrity
+
+body-free private evidenceは次のexact4です。absolute locatorとraw outputを含みません。
+
+```text
+admission record:
+bytes 4039 / lines 1
+record ID e42a2eec1a8795f7810c5e6ee7e33fcdd4c66b9ed05427c273f26aaa98c8ab63
+raw 0f8fe5aaf03924711f0288244f523b1fc8c5429a6b24d18019eaa0c474755fca
+
+consumption record:
+bytes 588 / lines 1
+raw 0dcf5cfcd9eaaa6d6485d9c1b0e3ee58309dd3f2f69d1fbe2f8dd889d40c974b
+
+child observation:
+bytes 2109 / lines 1
+raw cd4f6874e5fd0765b05e20ea3e745441eb158c2d1ec437ece40900b6f3440e75
+
+controller result:
+bytes 2090 / lines 1
+raw a3841b598439e88de9202df97cfaa0d24ebee3dd833da140b6033b2637f2983a
+
+linkage:
+ADMISSION_TO_CONSUMPTION_TO_CHILD_TO_CONTROLLER_VALID
+```
+
+## 4. Structured child observation and frozen classifier
+
+child observationが直接記録した事実は次です。
+
+```text
+pytest invocation / session start / collection finish:
+exact1 / exact1 / exact1
+
+collected node IDs:
+exactly the admitted single node
+
+runtest call hook entry:
+exact1
+
+setup / call / teardown:
+passed exact1 / failed exact1 / passed exact1
+
+call exception type / xfail:
+Failed / false
+
+signature / hash / exact count:
+R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED
+9611720beabaf4b9bdb191ec76efff91139c607bd3d9a9c792acfbee43e9b649
+exact1
+
+session finish / pytest exit / process exit:
+exact1 / 1 / 1
+
+runner failure:
+NONE
+
+observer-v1 exact-nodeid predicate-matching target module collect report:
+exact0
+```
+
+observer v1は全module reportを保存せず、`report.nodeid == TARGET_RELATIVE_PATH`に一致
+したreportだけを保存しました。v1 classifierはこの保存対象について`passed exact1`を
+collection-successとcreditの両方へ必須にしていました。この一項だけがfalseとなり、controllerは
+`causal_red_established=false`としました。
+
+setup / call / teardown、direct `Failed` exception、signature、exitは診断事実として
+保持します。ただし、消費済みauthorityをobserver v2で再parseしてcausal REDへ昇格
+させません。retryも行いません。
+
+## 5. Process output and zero effects
+
+```text
+stdout bytes / SHA-256:
+802 / 2d3014fb697a4cf1bac28c1e42cbb454d850bef6b6443cdecdc4b3ad71252871
+
+stderr bytes / SHA-256:
+0 / e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+raw stdout / stderr published:
+false / false
+
+prelaunch static git process / target OS child:
+exact1 / exact1
+
+network / challenge / remote observation:
+exact0 / exact0 / exact0
+
+existing D1 raw-byte read / raw-and-blob identity validation:
+exact1 / PASS
+
+D1 import / Python execution / D1 full exact8 pytest:
+exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+dependency install / runtime repair / rematerialization:
+exact0 / exact0 / exact0
+
+postadmission version probe / role smoke:
+exact0 / exact0
+
+production / published RED test / existing D1 change:
+exact0 / exact0 / exact0
+```
+
+GitHub head確認と後続のCocolon反映通信は、target execution network countとは別の
+GitHub transport namespaceです。
+
+## 6. Historical immutability
+
+- prior full R1とprior structured-owner RED environment-invalid authorityはclosed consumed
+  noncreditのままです。
+- current authorityもclosed consumed noncreditです。
+- current full R1は`R1_RESULT_UNKNOWN_STOP`です。
+- current child observationを後からowner-contract causal RED creditへ変更しません。
+- production owner absence、published RED test、existing D1 bytesは不変です。
+
+## 7. Exactly one next authority
+
+次はtargetを再実行するauthorityではありません。observer v2とcontroller terminal
+grammarをdesign-onlyで固定し、旧v1結果へ遡及適用せずSTOPします。
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_CURRENT_ONE_SHOT_AUTHORITY_CLOSED_CONSUMED_TERMINAL_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_CURRENT_RESULT_IMMUTABLE_NONCREDIT_FULL_R1_RESULT_UNKNOWN_PRESERVED_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_CHILD_STRUCTURED_EVIDENCE_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_COLLECTED_NODE_IDS_EXACT_SINGLE_ADMITTED_NODE_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_SESSIONFINISH_EXACT1_EXIT1_PRIOR_OBSERVER_V1_EXACT_NODEID_PREDICATE_MATCHING_TARGET_MODULE_COLLECT_REPORTS_EMPTY_PRESERVED_AS_DIAGNOSTIC_FACT_ONLY_DISTINCT_OBSERVER_V2_AND_CONTROLLER_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_ONLY_COLLECTION_ADMISSION_V2_DEFINED_BY_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_AND_COLLECTED_NODE_IDS_EXACTLY_EQUAL_ORDERED_SINGLE_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_TARGET_MODULE_COLLECT_REPORTS_EXCLUDED_FROM_OBSERVER_V2_REQUIRED_SCHEMA_KEYSET_AND_ALL_ADMISSION_CREDIT_AND_TERMINAL_CLASSIFICATION_PREDICATES_PYTEST_COLLECTREPORT_HOOK_NOT_REQUIRED_OBSERVER_V2_BODY_FREE_SCHEMA_KEYSET_EVENT_COUNTS_PHASE_SIGNATURE_EXIT_AND_THREE_WAY_TERMINAL_MAPPING_FROZEN_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_PRODUCTION_CODE_ANY_TEST_EXISTING_D1_CHANGE_EXACT0_TARGETED_OR_OTHER_PYTEST_INVOCATION_FRAMEWORK_ENTRY_IMPORT_COLLECTION_NODE_CALL_EXACT0_RUNTIME_DISCOVERY_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_OR_CHANGE_EXACT0_NETWORK_CHALLENGE_REMOTE_EXECUTION_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_EXACT0_BODY_FREE_DESIGN_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_AFTER_DESIGN_DISTINCT_LATER_ONE_SHOT_OBSERVER_V2_EXECUTION_SUCCESSOR_TOKEN_ISSUANCE_EXACT1_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE
+```
+
+```text
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+## 8. 確認した事実、推測、華恋の意見
+
+### 8.1 確認した事実
+
+- Gate C identityはVALIDで、admission / consumption / targeted invocationは各exact1です。
+- pytestはsingle admitted nodeをcollectionし、setup pass、call fail、teardown pass、
+  expected signature exact1、exit1をstructured evidenceへ残しました。
+- observer v1のexact-nodeid predicate-matching module collect-reportだけがexact0で、frozen terminalはnoncreditです。
+- existing D1はraw bytesをexact1読んでraw/blob identityを検証しましたが、import / Python execution / full exact8は0です。
+- retry、runtime変更、mashos-api production/published RED/existing D1変更、challenge、remote、execution networkは0です。
+
+### 8.2 推測
+
+observer v1のexact-nodeid predicate-matching listが空だったことは、pytestがtarget nodeを
+collectionしなかったことも、actual module collect-report自体が0だったことも意味しません。
+exact nodeとphase reportsが存在するため、collector nodeid表示を必須にしたobserver v1側の
+過剰条件だった可能性が高いです。ただし、これを旧runのcreditへは使いません。
+
+### 8.3 華恋の意見
+
+今回の停止はruntime path問題の再発ではありません。華恋がstructured evidenceを厳密に
+しようとして、pytest 8.4.1で保証されないmodule collect-report表現まで必須化したことが
+直接原因です。期待するcall failureを観測できていても、一回限りの判定を後から都合よく
+成功へ変えてはいけません。
+
+次はcollection admissionを`sessionstart exact1 + collection_finish exact1 + ordered
+collected node IDs exact single`に限定し、module collect-reportをrequired schemaとterminal
+predicateから外すdesign-onlyにします。その設計をowner / independent static verification
+で閉じてから、さらに別承認のfresh one-shotへ進むのが必要です。
+
+## 9. Stop
+
+```text
+R1_OWNER_CONTRACT_OBSERVER_V1_MODULE_COLLECT_PREDICATE_FALSE_NONCREDIT_RESULT_FIXED_NO_RETRY_NO_RETROACTIVE_CREDIT_NEXT_OBSERVER_V2_DESIGN_AUTHORITY_DEFINED_INACTIVE_STOP
+```

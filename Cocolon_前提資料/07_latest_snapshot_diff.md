@@ -32976,3 +32976,213 @@ f4d9a0d2a68cfb93bb13d4053d64f36dd47988d4
 2f1354a149e56847dca7b3bc333f1bbdd6bf4ccd2f24b6553e4283ec6a09af56
 1640218 / 32825
 ```
+
+# 2026-08-01 latest — R1 owner-contract one-shot closed noncredit by observer-v1 predicate
+
+## Current authority result
+
+Mash様が承認したfresh runtime one-shotは、same runtime/source Gate C VALID後に一度だけ
+実行されました。
+
+```text
+admission / gate evidence consumption / authority consumption:
+exact1 / exact1 / exact1
+
+targeted pytest invocation / OS child:
+exact1 / exact1
+
+controller terminal:
+R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP
+
+authority state:
+CLOSED_CONSUMED_NONCREDIT
+
+causal RED credit:
+NOT_ESTABLISHED
+
+current full R1:
+R1_RESULT_UNKNOWN_STOP
+
+automatic progression:
+false
+```
+
+## Structured diagnostic facts and classifier mismatch
+
+```text
+pytest session start / collection finish / admitted node:
+exact1 / exact1 / exact1
+
+setup / call / teardown:
+passed exact1 / failed exact1 / passed exact1
+
+call direct exception / signature:
+Failed
+R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED exact1
+
+session finish / pytest exit / process exit:
+exact1 / 1 / 1
+
+observer-v1 exact-nodeid predicate-matching target module collect report:
+exact0
+
+frozen false predicate:
+TARGET_MODULE_COLLECT_REPORT_EXACT1_PASSED
+```
+
+actual node collectionとphase lifecycleは観測済みですが、observer v1 classifierが
+`report.nodeid == TARGET_RELATIVE_PATH`に一致するreport exact1を必須にしたためnoncreditに
+なりました。全module collect-reportの有無は観測していません。旧resultをobserver v2で
+retroactive reparse / reclassification / creditしません。同authority retryは0です。
+
+## Gate C and body-free identity
+
+```text
+readiness observation:
+8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69
+
+runtime instance / root / entrypoint control / resolved executable:
+695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80
+a63b7d0715700e52568cc8b382d4cfc22cc648269e59d98edcd15221d20849cf
+f31728f896de598a7a6b392c6ce155d2223372d53ead264c1d6ea932bd276a5d
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+
+source base / tree / remote / tree:
+37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f
+3891b84164ba0063136e47beb93d36798587a568
+315813c7bd3372462de926ddad74df567254a6b5
+a641510e107d52bb910073f36604c85bd57af150
+
+required source / owner:
+exact6 MATCH / ABSENT
+
+admission record ID:
+e42a2eec1a8795f7810c5e6ee7e33fcdd4c66b9ed05427c273f26aaa98c8ab63
+
+admission / consumption / child / controller raw:
+0f8fe5aaf03924711f0288244f523b1fc8c5429a6b24d18019eaa0c474755fca
+0dcf5cfcd9eaaa6d6485d9c1b0e3ee58309dd3f2f69d1fbe2f8dd889d40c974b
+cd4f6874e5fd0765b05e20ea3e745441eb158c2d1ec437ece40900b6f3440e75
+a3841b598439e88de9202df97cfaa0d24ebee3dd833da140b6033b2637f2983a
+```
+
+absolute locator、helper body、raw stdout/stderrは公開していません。
+
+## Current canonical exact4 before this snapshot append
+
+Result:
+
+```text
+path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV1_ModuleCollectPredicateFalse_NonCredit_Result_20260801.md
+55884a07eeacca9bc2b055e134e009bc664e2a51
+0c23b7551d8c473fffb09e28727c419ab7e0333331878b95adc10dddd21bbccd
+13983 / 284
+```
+
+Body-free Receipt:
+
+```text
+path / blob / raw / logical / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV1_ModuleCollectPredicateFalse_NonCredit_BodyFree_Receipt_20260801.json
+08c6417b77c323ca6a594f88c63ed81c376886f4
+f8cc0905cfcb2e4123809432a8b4ae5ccc534a89d0b2423075d4cc6d0c782675
+217dae66987af38b8558d58ecb71b7e1358d5ed6731dc45b9b287f4b19f07794
+12373 / 182
+```
+
+Handoff:
+
+```text
+path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV1_ModuleCollectPredicateFalse_NonCredit_Handoff_20260801.md
+60227dc1c6a8366a57ea6b7caa23e9849b48fac5
+cbcf8c171b5939d0c124587cb02c09b28c6f29422d9cc1b4d2d56e353883d1e0
+8449 / 222
+```
+
+Tracked Plan:
+
+```text
+path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+46346e639e7686c5c9aa44250b91a5f4de54ad7e
+129ff72cb4f0a51de163dca87956990d1c78f3f60f0e92e6cc7ce16e3997e997
+447233 / 12747
+```
+
+Approved changed paths are NEW exact3 and MODIFY exact2 (Plan plus this snapshot) only.
+mashos-api change is exact0. Formal completion requires current Cocolon main containment、all
+exact5 byte equality、current write commit changed-path set exact5 no extrasです。
+
+## Zero effects
+
+```text
+network / challenge / remote observation:
+exact0 / exact0 / exact0
+
+existing D1 raw-byte read / raw-and-blob identity validation:
+exact1 / PASS
+
+D1 import / Python execution / D1 full exact8:
+exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+dependency install / runtime repair / rematerialization:
+exact0 / exact0 / exact0
+
+production / published RED test / existing D1 change:
+exact0 / exact0 / exact0
+```
+
+GitHub reflection transport is a separate namespace from target execution network.
+
+## 確認した事実、推測、華恋の意見
+
+### 確認した事実
+
+- same runtime/source Gate CはVALIDです。
+- target childはsingle node collection、expected call failure、teardownまで到達しました。
+- observer-v1 exact-nodeid predicate-matching module collect-reportだけがexact0で、current resultはnoncreditです。
+- existing D1はraw bytesをexact1読んでraw/blob identityを検証しましたが、import / Python execution / full exact8は0です。
+- retry、runtime change、mashos-api production/published RED/existing D1 change、challenge、remote、execution networkは0です。
+
+### 推測
+
+observer v1のexact-nodeid predicate-matching list exact0はactual collection failureではなく、
+期待したcollector nodeid representationとの差である可能性が高いです。actual module
+collect-report自体が0だったとは確定しません。これはcreditではありません。
+
+### 華恋の意見
+
+runtime readinessではなくobserver v1の過剰条件が直接原因です。旧runを後から成功へ
+変えず、v2ではcollection admissionをsession start、collection finish、ordered single
+node listに限定してから、さらに別のfresh one-shot authorityを出すべきです。
+
+## Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_CURRENT_ONE_SHOT_AUTHORITY_CLOSED_CONSUMED_TERMINAL_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_CURRENT_RESULT_IMMUTABLE_NONCREDIT_FULL_R1_RESULT_UNKNOWN_PRESERVED_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_CHILD_STRUCTURED_EVIDENCE_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_COLLECTED_NODE_IDS_EXACT_SINGLE_ADMITTED_NODE_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_SESSIONFINISH_EXACT1_EXIT1_PRIOR_OBSERVER_V1_EXACT_NODEID_PREDICATE_MATCHING_TARGET_MODULE_COLLECT_REPORTS_EMPTY_PRESERVED_AS_DIAGNOSTIC_FACT_ONLY_DISTINCT_OBSERVER_V2_AND_CONTROLLER_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_ONLY_COLLECTION_ADMISSION_V2_DEFINED_BY_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_AND_COLLECTED_NODE_IDS_EXACTLY_EQUAL_ORDERED_SINGLE_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_TARGET_MODULE_COLLECT_REPORTS_EXCLUDED_FROM_OBSERVER_V2_REQUIRED_SCHEMA_KEYSET_AND_ALL_ADMISSION_CREDIT_AND_TERMINAL_CLASSIFICATION_PREDICATES_PYTEST_COLLECTREPORT_HOOK_NOT_REQUIRED_OBSERVER_V2_BODY_FREE_SCHEMA_KEYSET_EVENT_COUNTS_PHASE_SIGNATURE_EXIT_AND_THREE_WAY_TERMINAL_MAPPING_FROZEN_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_PRODUCTION_CODE_ANY_TEST_EXISTING_D1_CHANGE_EXACT0_TARGETED_OR_OTHER_PYTEST_INVOCATION_FRAMEWORK_ENTRY_IMPORT_COLLECTION_NODE_CALL_EXACT0_RUNTIME_DISCOVERY_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_OR_CHANGE_EXACT0_NETWORK_CHALLENGE_REMOTE_EXECUTION_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_EXACT0_BODY_FREE_DESIGN_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_AFTER_DESIGN_DISTINCT_LATER_ONE_SHOT_OBSERVER_V2_EXECUTION_SUCCESSOR_TOKEN_ISSUANCE_EXACT1_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE
+```
+
+```text
+scope:
+DESIGN_ONLY
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+### Entry-prefix preservation
+
+```text
+snapshot entry prefix blob / raw / bytes / lines:
+30af8de5c18706f039a1556d944081d837c5a0e1
+c42127923ca73df0baca07ef648ab33f51c87e01eb4cbedc244a212b9112b543
+1648162 / 32978
+```
