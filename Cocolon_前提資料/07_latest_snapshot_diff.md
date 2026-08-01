@@ -32486,3 +32486,222 @@ false
 ```
 
 No automatic transition is permitted.
+
+## 2026-08-01 latest — R1 structured terminal owner-contract RED stopped by environment
+
+### Current position
+
+```text
+approved authority:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_RESULT_UNKNOWN_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_POSTVERIFIED_CURRENT_CONSUMED_R1_IMMUTABLE_NO_RETROACTIVE_REPARSE_OR_CREDIT_HUMAN_PYTEST_PRESENTATION_DIAGNOSTIC_ONLY_BODY_FREE_CHILD_GENERATED_FRESH_CHALLENGE_POSTLAUNCH_PROJECTION_SEMANTIC_LEDGER_AND_OUTER_FINAL_CAPTURE_ENVELOPE_BINDING_REQUIRED_PROCESS_VECTOR_OWNER_CONTRACT_NEW_RED_TEST_EXACT1_PRODUCTION_OWNER_IMPLEMENTATION_EXACT0_EXISTING_D1_CHANGE_EXACT0_SYNTHETIC_VALID_LEDGER_ENVELOPE_PAIR_EXACT1_SEMANTIC_NEGATIVE_CASES_EXACT24_OUTER_NEGATIVE_CASES_EXACT8_COMBINED_NEGATIVE_CASES_EXACT32_LEAF_MUTATION_ASSERTIONS_GTE64_TARGETED_RED_PYTEST_INVOCATION_EXACT1_D1_FULL_EXACT8_PYTEST_INVOCATION_EXACT0_CHALLENGE_REMOTE_NETWORK_EXECUTION_EXACT0_RED_FREEZE_ONLY
+
+result:
+R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP
+
+current R1:
+R1_RESULT_UNKNOWN_STOP
+
+expected owner-absent causal RED:
+NOT_ESTABLISHED
+
+automatic progression:
+false
+```
+
+### Consumed launch boundary
+
+The sole targeted launch request selected Python 3.12.13 at
+`/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12`.
+That interpreter lacked the pytest module and exited 1 before framework
+startup.
+
+```text
+launch request / pytest start / collection / test call:
+1 / 0 / 0 / 0
+
+owner-absent signature count:
+0
+
+retry / fallback / interpreter switch:
+0 / 0 / 0
+
+dependency installation / network:
+0 / 0
+
+diagnostic:
+PYTEST_MODULE_NOT_FOUND
+```
+
+No result-body reconstruction or retry is credited.
+
+### Published static contract
+
+The launch candidate was never imported by pytest:
+
+```text
+attempted local blob / raw / lines / bytes:
+aef29c7c0a6c884429f64fc145b9b70dab1b6301
+42dc2bb0fdd2a59a6b698660ca45871520a5df83155aee7704731ee261dff7f9
+2477 / 77176
+```
+
+Independent static review then closed the adapter lifecycle rejection gap
+without a second pytest invocation.  Final published identity:
+
+```text
+path:
+ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py
+
+commit / tree / blob / raw / lines / bytes:
+315813c7bd3372462de926ddad74df567254a6b5
+a641510e107d52bb910073f36604c85bd57af150
+9a1cf8a0343d6a391ce6d520ca686f7310ef22d0
+ea8498b79fd9aa028ff913fb4d99beb205d2736a3d0ae783a435cbccf32575cc
+2618 / 82457
+
+postfetch:
+byte-exact
+
+behavioral pytest state:
+UNEXECUTED_ENVIRONMENT_INVALID_NONCREDIT
+```
+
+The static contract freezes one positive pair, semantic/outer/combined
+numbered cases 24/8/32, leaf mutations 137/63/200, and plugin lifecycle
+negative sequences exact9.  Static material blocker count is zero.
+
+### Existing D1 and zero effects
+
+```text
+existing D1 blob / raw:
+c0eb936690a3423ac4615a9aabb37c40cc257324
+3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14
+
+existing D1 change / exact8 invocation:
+0 / 0
+
+production owner implementation:
+absent, change exact0
+
+challenge / remote / network:
+0 / 0 / 0
+
+credit promotion / retroactive reparse:
+0 / 0
+```
+
+### Published exact4 before this snapshot
+
+Result:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_StructuredTerminalEventLedgerAndOuterCaptureEnvelope_OwnerContract_RED_FreezeOnly_LauncherEnvironmentInvalid_NonCredit_Result_20260801.md
+
+commit / blob / raw / bytes / lines:
+960a70aa40426d30ec9f8d5654040fa4f2d82ac3
+b8726e7f31c171e107a241ad76b49cdfdc5aa1c7
+3be14c0d827a7905786e5b1944b67831d0acbf758858a3daa4c6b668ffba5e51
+9393 / 301
+```
+
+Body-free Receipt:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_StructuredTerminalEventLedgerAndOuterCaptureEnvelope_OwnerContract_RED_FreezeOnly_LauncherEnvironmentInvalid_NonCredit_BodyFree_Receipt_20260801.json
+
+commit / blob / raw / logical / bytes / lines:
+7a4ab5510cae00fc35e7f36892e72f0fd5fb4b7a
+c92c7566a7bca481cc9c42f5cc518b6b9d61593a
+3cae33eb9b7a3c745338e1d9f67fdd0b2f761f752f2293b35cd71efe9170d73e
+55f90b942afad7e88fddae8d4cc9c27f92405a21d120f71486037aa397573eab
+8031 / 145
+
+external identity:
+f1bc9e1407140fe5ba05ca1dacc34877f36f8b05159dba2e492be70ef533731b
+```
+
+Handoff:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_StructuredTerminalEventLedgerAndOuterCaptureEnvelope_OwnerContract_RED_FreezeOnly_LauncherEnvironmentInvalid_NonCredit_Handoff_20260801.md
+
+commit / blob / raw / bytes / lines:
+984c567725dc255d29599e9a438961c50bb6b517
+902d779bb4a23fe058145a2ffeba7d8210569b07
+af36a94b4aeb0b55b512da79f24cf8162b74cb887e2834582189339bb7992aea
+6512 / 231
+```
+
+Tracked Plan:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+
+commit / tree / blob / raw / bytes / lines:
+bc9c02ae00c247c1694569f4ac0dc19688249d11
+d3c7d70f1e2371515a27527eb5f8402fff032efd
+a58845752f267ba8280232250322e9daaa062522
+b0096a54ccac653bad2c15a0329a09f9dbdaf9a4ea3d68c5aacc5aec8c9a706f
+427867 / 12305
+```
+
+All exact4 contents were postfetched or identity-checked before this snapshot
+append.  Final exact5 postfetch remains mandatory.
+
+### Entry-prefix preservation
+
+```text
+snapshot entry prefix blob / raw / bytes / lines:
+e4270ef9b85a8e514a7431752cc5d698793deed6
+4964eead635fb45156698863d77a25c4711621e96e4a5f56deb6e702d298443d
+1627897 / 32488
+```
+
+### 確認した事実
+
+- the targeted request exact1 ended before pytest startup because the module
+  was absent;
+- the expected causal RED, matrix behavioral validation, and GREEN remain
+  unestablished;
+- the final static test is published at one new mashos-api path and production
+  plus existing D1 remain unchanged;
+- Result, Receipt, Handoff, and Plan are reachable with body-free identities;
+  and
+- retry, fallback, dependency installation, interpreter switch, challenge,
+  remote, network, and automatic progression are all zero.
+
+### 推測
+
+The environment failure is independent of the owner-contract semantics because
+the framework did not load.  The published static test should reach the
+intended owner-absent call failure under a valid runtime, but that has not been
+observed.
+
+### 華恋の意見
+
+環境failureをcausal REDへ昇格させないことが最優先です。pytest 8.4.1を含む
+runtimeをMashから提供してもらい、そのidentityをprelaunchで固定してから、公開
+testを変更せず一度だけ実行します。Implementation/GREENはその後の別承認です。
+
+### Required user work and exactly one next authority
+
+```text
+required user work:
+MAKE_A_PYTEST_8_4_1_CAPABLE_PYTHON_RUNTIME_AVAILABLE_TO_KAREN
+
+next authority after required user work:
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_D1_V5_R1_SCHEMA_V2_RESULT_UNKNOWN_TERMINAL_GRAMMAR_RECONCILIATION_STATIC_OWNER_CONTRACT_TEST_POSTVERIFIED_PUBLISHED_UNEXECUTED_CURRENT_R1_IMMUTABLE_NO_RETROACTIVE_REPARSE_OR_CREDIT_PRIOR_TARGETED_LAUNCH_REQUEST_CONSUMED_NONCREDIT_PYTEST_MODULE_ABSENT_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_USER_PROVIDED_PYTEST_8_4_1_RUNTIME_REQUIRED_PRELAUNCH_INTERPRETER_AND_PYTEST_IDENTITY_REFREEZE_PUBLISHED_RED_TEST_CHANGE_EXACT0_PRODUCTION_OWNER_IMPLEMENTATION_EXACT0_EXISTING_D1_CHANGE_EXACT0_TARGETED_RED_PYTEST_INVOCATION_EXACT1_COLLECTION_EXACT1_TEST_EXECUTION_EXACT1_OWNER_IMPLEMENTATION_ABSENT_CAUSAL_RED_EXACT1_D1_FULL_EXACT8_PYTEST_INVOCATION_EXACT0_CHALLENGE_REMOTE_NETWORK_EXECUTION_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_AFTER_ADMISSION_EXACT0_RECOVERY_RED_EXECUTION_ONLY
+
+state:
+DEFINED_INACTIVE_REQUIRED_USER_RUNTIME_AND_SEPARATE_MASH_APPROVAL
+
+separate Mash approval required:
+true
+
+automatic progression:
+false
+```
