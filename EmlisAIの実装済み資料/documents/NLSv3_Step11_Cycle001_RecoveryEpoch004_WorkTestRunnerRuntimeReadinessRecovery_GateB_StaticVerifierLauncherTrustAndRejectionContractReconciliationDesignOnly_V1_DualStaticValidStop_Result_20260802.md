@@ -1,0 +1,201 @@
+---
+doc_id: nls_v3_step11_cycle001_recovery_epoch004_gate_b_static_verifier_launcher_trust_and_rejection_contract_v1_dual_static_valid_stop_result
+title: "NLS v3 Step 11 Cycle001 Recovery Epoch004 Gate B static-verifier launcher trust and rejection contract v1 dual-static-valid stop Result"
+date: "2026-08-02"
+status: "POSTVERIFIED_CURRENT"
+body_free: true
+automatic_progression: false
+---
+
+# Gate B static-verifier launcher trust and rejection contract v1 dual-static-valid stop Result
+
+## Outcome
+
+Approved authority SHA-256
+`a9f3c6eba3e3f1025ca20fdd981eb6c45e79fd6bf620ca79c961ae51823d1d15` was activated and
+closed-consumed exact1. The current body-free launcher-discovery Receipt was consumed exact1 and one
+publicable body-free launcher trust and rejection contract v1 candidate was created.
+
+One owner and one independent static design verification were performed from separate state. Both
+returned `VALID`; their independently generated domain-free projection SHA-256 values match. The
+terminal is:
+
+```text
+RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP
+```
+
+This is a design-valid stop. It does not reclassify the prior rejected private candidate, read a
+PATH snapshot, acquire or execute a launcher, run a verifier, enter Gate B, or change Full R1.
+Runtime readiness remains false and Full R1 remains `UNKNOWN_PRESERVED`.
+
+## Confirmed facts
+
+### Repository and source-receipt boundary
+
+- The authority-declared Cocolon prewrite base remains
+  `1a05a9371b1a0475a9e8a840e60c41d564900a38` / tree
+  `565386975bc65e2f767aac7566a42e694e3d2c71`.
+- The source discovery's verified Cocolon pre-observation predecessor remains
+  `b99707f6f058e38793d142d13df493b67b506cd7` / tree
+  `811b3a3f393d3f813d99c2b2858be8ddb0a57572`.
+- The current contract public-write predecessor is
+  `56bd42f7d55f4ff12f143778651186038dddcca1` / tree
+  `d6f7d4c8df6859bc3a7a58d9aae85b0fc87c8350`.
+- mashos-api remains `315813c7bd3372462de926ddad74df567254a6b5` / tree
+  `a641510e107d52bb910073f36604c85bd57af150`.
+- The consumed source Receipt observation SHA-256 is
+  `dd10e06f0f1f0db799b3d7de098401ac6af2b146f64d1e5836fc432dc17ea82a`.
+
+### Contract v1 identity and closed grammar
+
+```text
+contract candidate creation:
+exact1
+
+contract canonical raw SHA-256 / canonical bytes:
+a36a2c6c12a81d08f050094e7ff05c978213bdecf7f418750ffb4d842fae0a4d / 17887
+
+PATH-entry rejection enum / candidate rejection enum:
+closed exact7 / closed exact15
+
+excluded ancestry classes:
+CURRENT_TASK_ROOT / UPLOAD / COCOLON / MASHOS_API / RUNTIME / PRIVATE / PRIOR_HELPER
+
+maximum symlink hops / implicit uninspected symlink following:
+40 / false
+
+stable fields:
+size / mtime / inode / mode / uid
+```
+
+The contract freezes raw PATH byte splitting and PATH-entry canonicalization. Duplicate PATH entries
+are typed PATH-entry rejections; aliases accepted to the same final identity are collapsed and are
+not candidate rejections. All locator components and the final target are resolved through a
+componentwise nofollow abstraction. Relative symlink targets, root escape, excluded ancestry,
+broken or unreadable targets, cycles, hop overflow, final-target predicates, executable raw-hash
+failure, postcheck failure and pre/post instability have closed fail-closed outcomes.
+
+The trusted-owner set is the canonical numeric deduplication of root UID 0 and the
+authority-prebound controller UID. The final target must be regular, have at least one executable
+mode bit, be owned by that set, be neither group- nor world-writable, and have positive nlink and
+size. The exact five stable fields are size, mtime, inode, mode and uid; undeclared acceptance-field
+count is zero.
+
+### Canonical identity and observer projection closure
+
+The contract defines distinct domain-separated preimages for:
+
+- canonical final-locator logical SHA-256;
+- symlink-chain logical SHA-256;
+- stable-stat SHA-256;
+- final-identity SHA-256;
+- owner classifier evidence; and
+- independent classifier evidence.
+
+The runtime-observer domain-free projection fixes all keys, types, null rules, typed-reason count
+maps, selected-identity hash fields and count invariants. Owner and independent observers may share
+only five immutable authority inputs. Candidate-set, chain, stat, hash, reason-count and all other
+derived state reuse is forbidden.
+
+### Owner and independent static design verification
+
+```text
+owner static design verification / verdict:
+exact1 / VALID
+
+independent static design verification / verdict:
+exact1 / VALID
+
+owner / independent domain-free projection SHA-256:
+0b7df8c49ad0885457e3b5220c761d22ecd92b64c1de86d9560027429aacce7c
+0b7df8c49ad0885457e3b5220c761d22ecd92b64c1de86d9560027429aacce7c
+
+owner / independent domain-specific evidence SHA-256:
+1d280e95d7288b317af60f096ad38c7a51bcb06d8e2648e950e84a58ef263d34
+804516262df4ea5b772644ea247ebe16c6c429c181bc3771531361eca0b8772d
+
+projection comparison / match / state reuse:
+exact1 / true / exact0
+
+static design terminal mapping:
+INVALID / DIVERGENCE / DUAL_MATCH_DESIGN_VALID
+```
+
+The three-way mapping is total and exclusive. Either invalid static verdict takes the typed INVALID
+design-blocker stop. Two valid but unequal domain-free projections take the typed DIVERGENCE stop.
+Two valid matching projections take the current design-valid stop. No branch progresses
+automatically.
+
+### Zero-effect and historical preservation
+
+```text
+private PATH snapshot value / raw SHA-256 / PATH entry / locator / symlink target:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+raw stat / rejection detail / private-body read / private-body publication:
+exact0 / exact0 / exact0 / exact0
+
+PATH snapshot read / locator discovery / node probe or execution:
+exact0 / exact0 / exact0
+
+verifier or helper read / execution / Gate B:
+exact0 / exact0 / exact0
+
+runtime acquisition / network materialization / pytest / target execution:
+exact0 / exact0 / exact0 / exact0
+
+rejection classifier / launcher acquisition / target authority or execution:
+exact0 / exact0 / exact0
+
+Cocolon production source / published RED / existing D1 / mashos-api change:
+exact0 / exact0 / exact0 / exact0
+```
+
+Prior verifier, helper, schema and observation edit, reuse, execution, reclassification and credit
+counts are exact0. The prior literal-only owner INVALID, Observer V1, Observer V2 and closed
+launcher-discovery evidence remain immutable and noncredit.
+
+## Inference
+
+The prior aggregate INVALID no longer lacks a public decision grammar: a fresh observation can now
+classify each PATH entry and candidate under one total contract and compare owner and independent
+domain-free projections. It still cannot tell us why the old private candidate was rejected, because
+the old observation was deliberately not reparsed or reclassified.
+
+## Karen's opinion
+
+This contract is necessary because launcher trust is part of the evidence chain, not a convenience
+check before “real” verification. The design now makes security-sensitive rejection, alias collapse
+and observer disagreement reproducible without exposing private locators. The next useful unit is a
+fresh contract-bound classifier observation; executing `node` or the verifier before that result
+would skip the boundary we just made auditable.
+
+## Body-free Receipt identities
+
+```text
+Receipt blob SHA-1:
+040176c3e658fdcaa4c066467fb5b4a9612d6239
+
+Receipt raw SHA-256:
+d790b613f4dde4342662ca6d58219d0283c8aaba5fcdbdea8b42893806ac306d
+
+Receipt logical SHA-256:
+535d5be54d8017c0d5f9fcf2b28e5ef77909f286440aecef1d8c78787b9f78a1
+
+terminal observation SHA-256:
+5a724bb381426552b29404356770b9e498adc44b001bdb1a6240bed05b390cc0
+```
+
+## Exactly one next authority
+
+Token SHA-256:
+
+`9a7a66d1b0ffd09385d73318a2be5733d4d5d8ff2e8deb390ab8dcfaf01c97f2`
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_STATIC_VERIFIER_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_V1_DUAL_STATIC_VALID_POSTVERIFIED_OBSERVATION_SHA256_5A724BB381426552B29404356770B9E498ADC44B001BDB1A6240BED05B390CC0_CURRENT_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_AUTHORITY_SHA256_A9F3C6EBA3E3F1025CA20FDD981EB6C45E79FD6BF620CA79C961AE51823D1D15_ACTIVATED_EXACT1_CLOSED_CONSUMED_DESIGN_VALID_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_SOURCE_LAUNCHER_IDENTITY_DISCOVERY_OBSERVATION_SHA256_DD10E06F0F1F0DB799B3D7DE098401AC6AF2B146F64D1E5836FC432DC17EA82A_IMMUTABLE_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREWRITE_BASE_1A05A937_TREE_56538697_SOURCE_VERIFIED_COCOLON_PREOBSERVATION_PREDECESSOR_B99707F6_TREE_811B3A3F_CURRENT_CONTRACT_PUBLIC_WRITE_PREDECESSOR_56BD42F7_TREE_D6F7D4C8_MASHOS_API_315813C7_TREE_A641510E_CURRENT_BODY_FREE_RECEIPT_CONSUMPTION_EXACT1_PUBLICABLE_BODY_FREE_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_V1_CREATED_EXACT1_RAW_A36A2C6C12A81D08F050094E7FF05C978213BDECF7F418750FFB4D842FAE0A4D_CANONICAL_BYTES_17887_PATH_SNAPSHOT_AND_ENTRY_BYTE_CANONICALIZATION_TOTAL_EXACT1_PATH_ENTRY_REJECTION_CLOSED_TYPED_ENUM_EXACT7_CANDIDATE_REJECTION_CLOSED_TYPED_ENUM_EXACT15_DUPLICATE_PATH_ENTRY_REJECTION_AND_SAME_FINAL_IDENTITY_ALIAS_COLLAPSE_SEPARATED_EXACT1_COMPONENTWISE_NOFOLLOW_ALL_LOCATOR_COMPONENT_AND_FINAL_TARGET_SYMLINK_MAX40_CYCLE_BROKEN_RELATIVE_TARGET_ROOT_ESCAPE_AND_EXCLUDED_ANCESTRY_TOTAL_EXACT1_EXCLUDED_ANCESTRY_CURRENT_TASK_ROOT_UPLOAD_COCOLON_MASHOS_API_RUNTIME_PRIVATE_PRIOR_HELPER_EXACT7_TRUSTED_OWNER_ROOT_OR_AUTHORITY_PREBOUND_CONTROLLER_UID_CANONICALLY_DEDUPLICATED_EXACT1_FINAL_REGULAR_EXECUTABLE_NOT_GROUP_OR_WORLD_WRITABLE_NLINK_POSITIVE_SIZE_POSITIVE_EXACT1_STABLE_FIELDS_SIZE_MTIME_INODE_MODE_UID_EXACT5_UNDECLARED_ACCEPTANCE_FIELD_EXACT0_REJECTION_PRECEDENCE_TOTAL_EXCLUSIVE_EXACT1_FINAL_LOCATOR_SYMLINK_CHAIN_STABLE_STAT_FINAL_IDENTITY_AND_OBSERVER_CANONICAL_PREIMAGE_SCHEMA_DOMAIN_SEPARATION_TOTAL_EXACT1_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_DOMAIN_FREE_PROJECTION_SHA256_0B7DF8C49AD0885457E3B5220C761D22ECD92B64C1DE86D9560027429AACCE7C_EVIDENCE_SHA256_1D280E95D7288B317AF60F096AD38C7A51BCB06D8E2648E950E84A58EF263D34_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_DOMAIN_FREE_PROJECTION_SHA256_0B7DF8C49AD0885457E3B5220C761D22ECD92B64C1DE86D9560027429AACCE7C_EVIDENCE_SHA256_804516262DF4EA5B772644EA247EBE16C6C429C181BC3771531361ECA0B8772D_OWNER_INDEPENDENT_PROJECTION_MATCH_EXACT1_STATE_REUSE_EXACT0_INVALID_DIVERGENCE_DUAL_MATCH_DESIGN_VALID_THREE_WAY_TERMINAL_MAPPING_TOTAL_EXACT1_TERMINAL_RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP_PRIVATE_PATH_SNAPSHOT_VALUE_RAW_SHA256_PATH_ENTRY_LOCATOR_SYMLINK_TARGET_RAW_STAT_REJECTION_DETAIL_PRIVATE_BODY_READ_AND_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PRIOR_VERIFIER_HELPER_SCHEMA_OBSERVATION_EDIT_REUSE_EXECUTION_RECLASSIFICATION_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PATH_SNAPSHOT_READ_LOCATOR_DISCOVERY_NODE_PROBE_OR_EXECUTION_VERIFIER_OR_HELPER_READ_EXECUTION_GATE_B_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PYTEST_TARGET_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_CONTRACT_V1_BOUND_FRESH_STATIC_VERIFIER_LAUNCHER_CLASSIFIER_OBSERVATION_AUTHORITY_CURRENT_BODY_FREE_CONTRACT_RECEIPT_CONSUMPTION_EXACT1_FRESH_CURRENT_WORK_SESSION_CONTROLLER_PATH_SNAPSHOT_READ_AND_RAW_SHA256_DERIVATION_EXACT1_EXACT1_PATH_VALUE_AND_RAW_SHA256_PUBLICATION_EXACT0_EXACT0_COMMAND_NAME_NODE_EXACT1_AUTHORITY_PREBOUND_CONTROLLER_UID_BINDING_EXACT1_VALUE_PUBLICATION_EXACT0_CONTRACT_V1_RAW_SHA256_BINDING_EXACT1_OWNER_CLASSIFIER_OBSERVATION_EXACT1_INDEPENDENT_CLASSIFIER_OBSERVATION_EXACT1_SHARED_IMMUTABLE_PATH_SNAPSHOT_INPUT_WITH_OWNER_AND_INDEPENDENT_PATH_ENTRY_CANDIDATE_CHAIN_STAT_HASH_AND_REASON_COUNT_STATE_SEPARATE_NO_REUSE_EXACT1_PATH_ENTRY_AND_CANDIDATE_REJECTION_CLASSIFICATION_BY_CLOSED_ENUM_AND_TOTAL_EXCLUSIVE_PRECEDENCE_EXACT1_DUPLICATE_REJECTION_AND_SAME_FINAL_IDENTITY_ALIAS_COLLAPSE_EXACT1_COMPONENTWISE_NOFOLLOW_SYMLINK_MAX40_AND_EXCLUDED_ANCESTRY_ENFORCEMENT_EXACT1_TRUSTED_OWNER_FINAL_ACCEPTANCE_PREPOST_STABILITY_AND_IDENTITY_HASH_DERIVATION_EXACT1_EXECUTABLE_RAW_READ_AND_SHA256_DERIVATION_ONLY_AFTER_PRE_HASH_ACCEPTANCE_AND_BOUND_TO_EACH_ACCEPTED_PRECHECK_CANDIDATE_WITH_TOTAL_COUNTS_REPORTED_EXACT1_RAW_EXECUTABLE_BODY_PUBLICATION_EXACT0_OWNER_AND_INDEPENDENT_DOMAIN_FREE_BODY_FREE_PROJECTION_CREATION_EXACT1_EXACT1_DOMAIN_SPECIFIC_EVIDENCE_HASH_CREATION_EXACT1_EXACT1_PROJECTION_COMPARISON_EXACT1_TYPED_REASON_AND_REASON_COUNT_PUBLICATION_ALLOWED_RAW_REJECTION_DETAIL_PUBLICATION_EXACT0_INVALID_NO_ACCEPTED_IDENTITY_STOP_OR_DIVERGENCE_STOP_OR_DUAL_MATCH_IDENTITY_SELECTED_STOP_THREE_WAY_OBSERVATION_TERMINAL_TOTAL_EXACT1_NO_GLOBAL_NODE_ABSENCE_CLAIM_EXACT1_PRIOR_CLOSED_DISCOVERY_REPARSE_RECLASSIFICATION_OR_CREDIT_EXACT0_EXACT0_EXACT0_PRIVATE_PATH_VALUE_RAW_SHA256_ENTRY_LOCATOR_SYMLINK_TARGET_RAW_STAT_CONTROLLER_UID_AND_EXECUTABLE_BODY_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_NODE_VERSION_PROBE_ENGINE_EXECUTION_VERIFIER_OR_HELPER_READ_OR_EXECUTION_GATE_B_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_TARGET_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_CLASSIFIER_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_NODE_VERIFIER_HELPER_GATE_B_RUNTIME_PYTEST_OR_TARGET_EXECUTION_NO_AUTOMATIC_PROGRESSION
+```
+
+State: `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`.
+
+Automatic progression: `false`.
