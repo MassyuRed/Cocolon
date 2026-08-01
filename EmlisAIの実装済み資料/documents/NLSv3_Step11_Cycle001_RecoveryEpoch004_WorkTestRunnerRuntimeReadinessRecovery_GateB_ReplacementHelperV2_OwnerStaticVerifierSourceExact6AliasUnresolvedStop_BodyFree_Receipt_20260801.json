@@ -1,0 +1,163 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.replacement_helper_v2_owner_static_verifier_source_exact6_alias_unresolved_stop_receipt.v1",
+  "receipt_id": "nls_v3_step11_cycle001_recovery_epoch004_gate_b_replacement_helper_v2_owner_static_verifier_source_exact6_alias_unresolved_stop",
+  "observed_at_date": "2026-08-01",
+  "body_free": true,
+  "automatic_progression": false,
+  "observation": {
+    "authority": {
+      "token_sha256": "8fe15e89933a580a9324513b5d9e610938e77be1c76c5e4359f5611aeb029a3a",
+      "activation_count": 1,
+      "consumption_count": 1,
+      "state": "CLOSED_CONSUMED_TYPED_STATIC_VERIFIER_BLOCKER_STOP"
+    },
+    "repository_identity": {
+      "authority_declared_cocolon_public_write_predecessor": {
+        "commit_sha1": "5f91f8896cdfd0bc3a992d30dffc7c6b6a87d9f3",
+        "tree_sha1": "0249fd9de248a967711a836da8da72a1dc8d776a"
+      },
+      "actual_cocolon_public_write_predecessor": {
+        "commit_sha1": "75e19e824ef1f957147933774bbd8c9b7df90822",
+        "tree_sha1": "1652c8228773aa8b9b5aedbf1be43490139aa679"
+      },
+      "mashos_api": {
+        "commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+        "tree_sha1": "a641510e107d52bb910073f36604c85bd57af150"
+      }
+    },
+    "sealed_contract_bindings": {
+      "external_bootstrap_v2": {
+        "read_only_consumption_count": 1,
+        "raw_sha256": "1123f4e9ae9b177f66d04317035f99e0d103a955b7c82936edf0ca184a23aa77",
+        "byte_count": 4518,
+        "canonical_compact_sorted_utf8_no_lf": true
+      },
+      "registry_v4": {
+        "read_only_consumption_count": 1,
+        "raw_sha256": "a77157fceffaacddf28ad3c2a7fcfa03c6edd53de49a7cd0e523cdc8c758a508",
+        "byte_count": 118055,
+        "canonical_compact_sorted_utf8_no_lf": true
+      },
+      "frozen_source_lock_projection_and_procedure": {
+        "validation_count": 1,
+        "verdict": "VALID",
+        "required_source_count": 6,
+        "lock_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+        "lock_raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+        "lock_logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+        "projection_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+        "tracked_procedure_blob_sha1": "40746bcd8926a34991f160f2e5bff52db4688add",
+        "tracked_procedure_raw_sha256": "3cd3e455a08c3e490545f1b98cdbb47d68d0f01709c05a1c51a64f515946ef8f",
+        "tracked_procedure_section": "7.1"
+      }
+    },
+    "required_source_exact6": [
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py",
+        "blob_sha1": "9a1cf8a0343d6a391ce6d520ca686f7310ef22d0",
+        "raw_sha256": "ea8498b79fd9aa028ff913fb4d99beb205d2736a3d0ae783a435cbccf32575cc"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py",
+        "blob_sha1": "c0eb936690a3423ac4615a9aabb37c40cc257324",
+        "raw_sha256": "3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14"
+      },
+      {
+        "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+        "blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+        "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+        "blob_sha1": "044287009b1fd155689bded46628b8fc91b73c06",
+        "raw_sha256": "13aa675be1356ab524a69066f861c2d27a8d8e32f0d690811b2b3308f199057d"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+        "blob_sha1": "0fae71a29f8fe44d31c18af42aaf53cc34beac6c",
+        "raw_sha256": "634ddb104e0b7630c695e032bb54726912fcfc9ad4351ab0eb6da7901671fc2b"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+        "blob_sha1": "fdea3dc18d81ca9ce1e3a842e802d21d0019a8c5",
+        "raw_sha256": "14fedde39823d90253a6adec6fc05ccde29f05a659edbac7edc007b28eab5793"
+      }
+    ],
+    "helper_v2_artifacts": {
+      "materializer": {
+        "creation_count": 1,
+        "raw_sha256": "7bc0aecb713831b8567987bae9ca599f67672a0cb3a85758892ac194fd13ca96",
+        "byte_count": 46345,
+        "line_count": 1099,
+        "private": true,
+        "body_publication_count": 0,
+        "edit_reuse_execution_import_compile_count": [0, 0, 0, 0, 0]
+      },
+      "independent_verifier": {
+        "creation_count": 1,
+        "raw_sha256": "5d2cc38a382c09156d3e8f9f09e70df1ee1d4e03b36bf7097dae154fda44406b",
+        "byte_count": 55818,
+        "line_count": 1096,
+        "private": true,
+        "body_publication_count": 0,
+        "edit_reuse_execution_import_compile_count": [0, 0, 0, 0, 0]
+      }
+    },
+    "owner_static_verification": {
+      "verification_count": 1,
+      "check_count": 100,
+      "pass_count": 98,
+      "failure_count": 2,
+      "verdict": "INVALID",
+      "failure_class": "SOURCE_EXACT6_CONSTANT_ALIAS_UNRESOLVED",
+      "failures": [
+        {
+          "helper_role": "INDEPENDENT_VERIFIER_V2",
+          "check_id": "independent.source_exact6",
+          "literal_path_row_count": 5,
+          "declared_source_tuple_count": 6,
+          "constant_alias_row_count": 1,
+          "alias_symbol": "FROZEN_LOCK_PATH"
+        },
+        {
+          "helper_role": "MATERIALIZER_V2",
+          "check_id": "materializer.source_exact6",
+          "literal_path_row_count": 5,
+          "declared_source_tuple_count": 6,
+          "constant_alias_row_count": 1,
+          "alias_symbol": "FROZEN_LOCK_PATH"
+        }
+      ],
+      "failure_list_order": "SORTED_UNIQUE_BY_check_id",
+      "blocking_issue_manifest_count": 1,
+      "blocking_issue_manifest_sha256": "54733f8b45dfa038842dcb6109b421cfb3d3a2efa19411a2bf7607dd262faf2c",
+      "blocking_issue": "OWNER_STATIC_VERIFIER_SOURCE_EXACT6_CONSTANT_ALIAS_UNRESOLVED"
+    },
+    "independent_static_verification": {
+      "verification_count": 0,
+      "verdict": "NOT_REACHED_OWNER_INVALID_FAIL_CLOSED"
+    },
+    "effects": {
+      "helper_edit_reuse_execution_import_compile_publication_count": [0, 0, 0, 0, 0, 0],
+      "runtime_acquisition_network_staging_materialization_probe_role_import_pytest_count": [0, 0, 0, 0, 0, 0, 0, 0],
+      "target_authority_issuance_activation_admission_consumption_count": [0, 0, 0, 0],
+      "os_child_target_import_collection_call_targeted_pytest_count": [0, 0, 0, 0, 0],
+      "retry_fallback_interpreter_switch_count": [0, 0, 0],
+      "cocolon_production_published_red_existing_d1_mashos_api_change_count": [0, 0, 0, 0]
+    },
+    "terminal": "RUNTIME_NOT_READY_HELPER_V2_OWNER_STATIC_VERIFIER_SOURCE_EXACT6_ALIAS_UNRESOLVED_STOP",
+    "runtime_ready": false,
+    "full_r1_result": "UNKNOWN_PRESERVED",
+    "automatic_progression": false
+  },
+  "observation_sha256": "dfe77330480071708ea871e6c614a4f4cd99b809bbaafe12fe23568272d59caa",
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_REPLACEMENT_HELPER_V2_OWNER_STATIC_VERIFIER_SOURCE_EXACT6_ALIAS_UNRESOLVED_POSTVERIFIED_OBSERVATION_SHA256_DFE77330480071708EA871E6C614A4F4CD99B809BBAAFE12FE23568272D59CAA_CURRENT_HELPER_V2_DESIGN_AUTHORITY_SHA256_8FE15E89933A580A9324513B5D9E610938E77BE1C76C5E4359F5611AEB029A3A_ACTIVATED_EXACT1_CLOSED_CONSUMED_TYPED_STATIC_VERIFIER_BLOCKER_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREDECESSOR_5F91F889_TREE_0249FD9D_ACTUAL_PUBLIC_WRITE_PREDECESSOR_75E19E82_TREE_1652C822_MASHOS_API_315813C7_TREE_A641510E_EXTERNAL_BOOTSTRAP_V2_AND_REGISTRY_V4_READ_ONLY_CONSUMPTION_EXACT1_EXACT1_RAW_1123F4E9AE9B177F66D04317035F99E0D103A955B7C82936EDF0CA184A23AA77_A77157FCEFFAACDDF28AD3C2A7FCFA03C6EDD53DE49A7CD0E523CDC8C758A508_FROZEN_SOURCE_LOCK_PROJECTION_TRACKED_PROCEDURE_VALIDATION_EXACT1_VALID_REQUIRED_SOURCE_EXACT6_MATCH_MATERIALIZER_V2_CREATED_EXACT1_RAW_7BC0AECB713831B8567987BAE9CA599F67672A0CB3A85758892AC194FD13CA96_BYTES_46345_LINES_1099_INDEPENDENT_VERIFIER_V2_CREATED_EXACT1_RAW_5D2CC38A382C09156D3E8F9F09E70DF1EE1D4E03B36BF7097DAE154FDA44406B_BYTES_55818_LINES_1096_PRIVATE_UNPUBLISHED_SEALED_UNEDITED_UNREUSED_UNEXECUTED_UNIMPORTED_UNCOMPILED_OWNER_STATIC_VERIFICATION_EXACT1_INVALID_CHECK_EXACT100_PASS_EXACT98_FAIL_EXACT2_MATERIALIZER_SOURCE_EXACT6_LITERAL_PATH_ROW_EXACT5_DECLARED_TUPLE_EXACT6_CONSTANT_ALIAS_EXACT1_INDEPENDENT_SOURCE_EXACT6_LITERAL_PATH_ROW_EXACT5_DECLARED_TUPLE_EXACT6_CONSTANT_ALIAS_EXACT1_ALIAS_SYMBOL_FROZEN_LOCK_PATH_OWNER_STATIC_VERIFIER_SOURCE_EXACT6_CONSTANT_ALIAS_UNRESOLVED_BLOCKER_EXACT1_INDEPENDENT_STATIC_VERIFICATION_EXACT0_NOT_REACHED_FAIL_CLOSED_PRIOR_LITERAL_ONLY_OBSERVATION_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_CREDIT_OR_RESULT_CHANGE_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_OWNER_STATIC_VERIFIER_V2_ALIAS_RESOLUTION_RECONCILIATION_DESIGN_ONLY_AUTHORITY_OWNER_ALIAS_AWARE_STATIC_VERIFIER_V2_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_INDEPENDENT_ALIAS_AWARE_STATIC_VERIFIER_V2_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_RUNTIME_AND_REPLACEMENT_HELPERS_UNPUBLISHED_OWNER_SEALED_HELPER_RAW_READ_EXACT1_EXACT1_INDEPENDENT_SEALED_HELPER_RAW_READ_EXACT1_EXACT1_PREPOST_FSTAT_REGULAR_SINGLE_LINK_OWNER_PRIVATE_MODE_SIZE_MTIME_INODE_STABLE_SYMLINK_FREE_VALIDATION_EXACT1_OR_TYPED_INPUT_INVALID_STOP_OWNER_AND_INDEPENDENT_VERIFIER_RAW_GRAMMAR_MANIFEST_EXPECTED_SOURCE_EXACT6_AND_HELPER_RAW_PREBOUND_EXACT1_CLOSED_ALIAS_GRAMMAR_MODULE_SCOPE_UNIQUE_SIMPLE_STRING_ASSIGNMENT_REFERENCE_BEFORE_USE_EXACT1_CALL_ATTRIBUTE_SUBSCRIPT_CONCATENATION_FSTRING_FORMAT_ENV_IMPORT_COMPREHENSION_STAR_CONDITIONAL_MULTIPLE_ASSIGNMENT_REBIND_DELETE_CYCLE_UNDEFINED_COMMENT_DOCSTRING_OR_NESTED_SCOPE_DECOY_ACCEPTANCE_EXACT0_SOURCE_EXACT6_ASSIGNMENT_EXACT1_SYNTACTIC_SLOT_EXACT6_LITERAL_SLOT_EXACT5_ALIAS_SLOT_EXACT1_FROZEN_LOCK_PATH_DEFINITION_EXACT1_RESOLVED_SLOT_EXACT6_UNRESOLVED_AMBIGUOUS_DYNAMIC_CYCLE_DUPLICATE_ORDERED_EXPECTED_VALUE_MISMATCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_LOCK_PATH_BLOB_RAW_LOGICAL_BINDING_VALID_EXACT1_OWNER_FULL_STATIC_CHECK_REDERIVATION_EXACT100_NO_PRIOR_PASS_CREDIT_OWNER_VALID_IFF_PASS_EXACT100_AND_BLOCKER_EXACT0_OR_TYPED_STATIC_VERIFIER_UNABLE_TO_DECIDE_OR_HELPER_STATIC_CONTRACT_INVALID_STOP_WHEN_OWNER_VALID_INDEPENDENT_FULL_STATIC_CHECK_REDERIVATION_EXACT100_WITHOUT_OWNER_ALIAS_MAP_RESOLVED_TUPLE_SCORE_OR_AGGREGATE_REUSE_VALID_IFF_PASS_EXACT100_AND_BLOCKER_EXACT0_OR_TYPED_STATIC_VERIFIER_UNABLE_TO_DECIDE_OR_HELPER_STATIC_CONTRACT_INVALID_STOP_PRIOR_HELPER_EDIT_REUSE_EXECUTION_IMPORT_COMPILE_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_ALIAS_AWARE_STATIC_VERIFIER_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NEW_ALIAS_AWARE_STATIC_VALID_DESIGN_STOP_WHEN_DUAL_VALID_NO_GATE_B_EXECUTION_TARGET_AUTHORITY_ISSUANCE_OR_AUTOMATIC_PROGRESSION",
+    "token_sha256": "975ab247f6d868a783bb6eef05d324af33bad9aa56a0d13e1f93dd505a591a70",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_SORTED_COMPACT_JSON_NO_LF_AFTER_DELETING_receipt_logical_sha256",
+  "receipt_logical_sha256": "6401ccbf2537da1609094dfb51c2014aeb0732c440b775f8164bd561edfb0f72"
+}

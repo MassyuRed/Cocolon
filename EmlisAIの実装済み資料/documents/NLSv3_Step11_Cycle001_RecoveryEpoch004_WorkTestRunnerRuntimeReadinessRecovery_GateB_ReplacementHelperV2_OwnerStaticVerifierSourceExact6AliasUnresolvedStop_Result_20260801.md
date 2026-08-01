@@ -1,0 +1,157 @@
+---
+doc_id: nls_v3_step11_cycle001_recovery_epoch004_gate_b_replacement_helper_v2_owner_static_verifier_source_exact6_alias_unresolved_stop_result
+title: "NLS v3 Step 11 Cycle001 Recovery Epoch004 Gate B replacement helper v2 owner-static-verifier source-exact6 alias-unresolved stop Result"
+date: "2026-08-01"
+status: "POSTVERIFIED_CURRENT"
+body_free: true
+automatic_progression: false
+---
+
+# Gate B replacement helper v2 owner-static-verifier source-exact6 alias-unresolved stop Result
+
+## Outcome
+
+Approved helper-v2 design authority SHA-256
+`8fe15e89933a580a9324513b5d9e610938e77be1c76c5e4359f5611aeb029a3a` was activated and
+consumed exact1. The authority stopped at:
+
+```text
+RUNTIME_NOT_READY_HELPER_V2_OWNER_STATIC_VERIFIER_SOURCE_EXACT6_ALIAS_UNRESOLVED_STOP
+```
+
+One private replacement materializer v2 and one private replacement independent verifier v2 were
+created and sealed. Owner static verification ran exact1 and returned INVALID at 98/100. The two
+failed checks were the source-exact6 checks: each helper declares six tuple slots, but the
+literal-only verifier counted five literal path rows and did not resolve the one
+`FROZEN_LOCK_PATH` constant-alias row. The authority failed closed before independent static
+verification; its verification count is exact0.
+
+This is a typed static-verifier blocker stop. It is not runtime credit, and it does not establish a
+helper-body semantic mismatch. Runtime readiness remains false and Full R1 remains
+`UNKNOWN_PRESERVED`.
+
+## Confirmed facts
+
+### Repository and sealed-contract boundary
+
+- The authority-declared Cocolon public-write predecessor is
+  `5f91f8896cdfd0bc3a992d30dffc7c6b6a87d9f3` / tree
+  `0249fd9de248a967711a836da8da72a1dc8d776a`.
+- The connector-confirmed actual public-write predecessor used for this record is
+  `75e19e824ef1f957147933774bbd8c9b7df90822` / tree
+  `1652c8228773aa8b9b5aedbf1be43490139aa679`.
+- mashos-api remains `315813c7bd3372462de926ddad74df567254a6b5` / tree
+  `a641510e107d52bb910073f36604c85bd57af150`.
+- External bootstrap v2 and registry v4 read-only consumption counts are exact1 / exact1. Their
+  sealed raw SHA-256 values remain
+  `1123f4e9ae9b177f66d04317035f99e0d103a955b7c82936edf0ca184a23aa77` and
+  `a77157fceffaacddf28ad3c2a7fcfa03c6edd53de49a7cd0e523cdc8c758a508`.
+- Frozen source exact6, lock raw/logical, exact5 projection and tracked procedure section 7.1 were
+  validated exact1 VALID. All public source blob/raw pairs are 6/6 matched.
+
+### Private replacement-helper identities
+
+```text
+materializer v2 creation / raw / bytes / lines:
+exact1 / 7bc0aecb713831b8567987bae9ca599f67672a0cb3a85758892ac194fd13ca96 / 46345 / 1099
+
+independent verifier v2 creation / raw / bytes / lines:
+exact1 / 5d2cc38a382c09156d3e8f9f09e70df1ee1d4e03b36bf7097dae154fda44406b / 55818 / 1096
+
+private / body publication:
+true / exact0 for both
+
+edit / reuse / execution / import / compile:
+all exact0 for both
+```
+
+No absolute private locator or private body is included in this public record.
+
+### Owner static-verifier blocker
+
+```text
+owner verification / total checks / pass / fail / verdict:
+exact1 / 100 / 98 / 2 / INVALID
+
+independent verification / state:
+exact0 / NOT_REACHED_OWNER_INVALID_FAIL_CLOSED
+
+root blocker:
+OWNER_STATIC_VERIFIER_SOURCE_EXACT6_CONSTANT_ALIAS_UNRESOLVED
+
+blocking issue manifest SHA-256:
+54733f8b45dfa038842dcb6109b421cfb3d3a2efa19411a2bf7607dd262faf2c
+```
+
+The sorted-unique failed checks are `independent.source_exact6` and
+`materializer.source_exact6`. Each diagnostic records literal-path-row exact5,
+declared-source-tuple exact6, constant-alias-row exact1 and alias symbol `FROZEN_LOCK_PATH`.
+Root blocker count exact1 and failed-check count exact2 are separate counts.
+
+The prior literal-only INVALID observation remains immutable. No retroactive reparse,
+reclassification, credit or result change occurred.
+
+### Zero-effect preservation
+
+```text
+helper edit / reuse / execution / import / compile / publication:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+runtime / acquisition / network / staging / materialization / probe / role import / pytest:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+target authority issuance / activation / admission / consumption:
+exact0 / exact0 / exact0 / exact0
+
+OS child / target import / collection / call / targeted pytest:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+Cocolon production / published RED / existing D1 / mashos-api change:
+exact0 / exact0 / exact0 / exact0
+```
+
+## Inference
+
+The two failures do not show that source exact6 is absent or that the frozen source identities
+mismatch. They show that the one-shot owner verifier's accepted syntax was narrower than the sealed
+helper declaration syntax. A distinct observation can resolve this only by freezing a minimal
+constant-alias grammar and rederiving all 100 checks from the unchanged sealed bytes; adding two
+points to the prior 98 is not acceptable.
+
+## Karen's opinion
+
+The correct next unit is an alias-aware static-verifier reconciliation, not a helper rewrite and not
+Gate B execution. Both helpers should remain sealed. Two independent private static verifiers should
+resolve only the explicitly allowed constant form, rederive the full manifest, and return either a
+new dual-static-valid design stop or a typed blocker. The prior INVALID must remain historically
+true under its own literal-only criteria.
+
+## Body-free receipt identities
+
+```text
+Receipt raw SHA-256:
+2ba344fc482f5d9079e6715ce830d1d01c181a332bd025c1833fbee0436c2964
+
+Receipt logical SHA-256:
+6401ccbf2537da1609094dfb51c2014aeb0732c440b775f8164bd561edfb0f72
+
+terminal observation SHA-256:
+dfe77330480071708ea871e6c614a4f4cd99b809bbaafe12fe23568272d59caa
+```
+
+## Exactly one next authority
+
+Token SHA-256:
+
+`975ab247f6d868a783bb6eef05d324af33bad9aa56a0d13e1f93dd505a591a70`
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_REPLACEMENT_HELPER_V2_OWNER_STATIC_VERIFIER_SOURCE_EXACT6_ALIAS_UNRESOLVED_POSTVERIFIED_OBSERVATION_SHA256_DFE77330480071708EA871E6C614A4F4CD99B809BBAAFE12FE23568272D59CAA_CURRENT_HELPER_V2_DESIGN_AUTHORITY_SHA256_8FE15E89933A580A9324513B5D9E610938E77BE1C76C5E4359F5611AEB029A3A_ACTIVATED_EXACT1_CLOSED_CONSUMED_TYPED_STATIC_VERIFIER_BLOCKER_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREDECESSOR_5F91F889_TREE_0249FD9D_ACTUAL_PUBLIC_WRITE_PREDECESSOR_75E19E82_TREE_1652C822_MASHOS_API_315813C7_TREE_A641510E_EXTERNAL_BOOTSTRAP_V2_AND_REGISTRY_V4_READ_ONLY_CONSUMPTION_EXACT1_EXACT1_RAW_1123F4E9AE9B177F66D04317035F99E0D103A955B7C82936EDF0CA184A23AA77_A77157FCEFFAACDDF28AD3C2A7FCFA03C6EDD53DE49A7CD0E523CDC8C758A508_FROZEN_SOURCE_LOCK_PROJECTION_TRACKED_PROCEDURE_VALIDATION_EXACT1_VALID_REQUIRED_SOURCE_EXACT6_MATCH_MATERIALIZER_V2_CREATED_EXACT1_RAW_7BC0AECB713831B8567987BAE9CA599F67672A0CB3A85758892AC194FD13CA96_BYTES_46345_LINES_1099_INDEPENDENT_VERIFIER_V2_CREATED_EXACT1_RAW_5D2CC38A382C09156D3E8F9F09E70DF1EE1D4E03B36BF7097DAE154FDA44406B_BYTES_55818_LINES_1096_PRIVATE_UNPUBLISHED_SEALED_UNEDITED_UNREUSED_UNEXECUTED_UNIMPORTED_UNCOMPILED_OWNER_STATIC_VERIFICATION_EXACT1_INVALID_CHECK_EXACT100_PASS_EXACT98_FAIL_EXACT2_MATERIALIZER_SOURCE_EXACT6_LITERAL_PATH_ROW_EXACT5_DECLARED_TUPLE_EXACT6_CONSTANT_ALIAS_EXACT1_INDEPENDENT_SOURCE_EXACT6_LITERAL_PATH_ROW_EXACT5_DECLARED_TUPLE_EXACT6_CONSTANT_ALIAS_EXACT1_ALIAS_SYMBOL_FROZEN_LOCK_PATH_OWNER_STATIC_VERIFIER_SOURCE_EXACT6_CONSTANT_ALIAS_UNRESOLVED_BLOCKER_EXACT1_INDEPENDENT_STATIC_VERIFICATION_EXACT0_NOT_REACHED_FAIL_CLOSED_PRIOR_LITERAL_ONLY_OBSERVATION_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_CREDIT_OR_RESULT_CHANGE_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_OWNER_STATIC_VERIFIER_V2_ALIAS_RESOLUTION_RECONCILIATION_DESIGN_ONLY_AUTHORITY_OWNER_ALIAS_AWARE_STATIC_VERIFIER_V2_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_INDEPENDENT_ALIAS_AWARE_STATIC_VERIFIER_V2_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_RUNTIME_AND_REPLACEMENT_HELPERS_UNPUBLISHED_OWNER_SEALED_HELPER_RAW_READ_EXACT1_EXACT1_INDEPENDENT_SEALED_HELPER_RAW_READ_EXACT1_EXACT1_PREPOST_FSTAT_REGULAR_SINGLE_LINK_OWNER_PRIVATE_MODE_SIZE_MTIME_INODE_STABLE_SYMLINK_FREE_VALIDATION_EXACT1_OR_TYPED_INPUT_INVALID_STOP_OWNER_AND_INDEPENDENT_VERIFIER_RAW_GRAMMAR_MANIFEST_EXPECTED_SOURCE_EXACT6_AND_HELPER_RAW_PREBOUND_EXACT1_CLOSED_ALIAS_GRAMMAR_MODULE_SCOPE_UNIQUE_SIMPLE_STRING_ASSIGNMENT_REFERENCE_BEFORE_USE_EXACT1_CALL_ATTRIBUTE_SUBSCRIPT_CONCATENATION_FSTRING_FORMAT_ENV_IMPORT_COMPREHENSION_STAR_CONDITIONAL_MULTIPLE_ASSIGNMENT_REBIND_DELETE_CYCLE_UNDEFINED_COMMENT_DOCSTRING_OR_NESTED_SCOPE_DECOY_ACCEPTANCE_EXACT0_SOURCE_EXACT6_ASSIGNMENT_EXACT1_SYNTACTIC_SLOT_EXACT6_LITERAL_SLOT_EXACT5_ALIAS_SLOT_EXACT1_FROZEN_LOCK_PATH_DEFINITION_EXACT1_RESOLVED_SLOT_EXACT6_UNRESOLVED_AMBIGUOUS_DYNAMIC_CYCLE_DUPLICATE_ORDERED_EXPECTED_VALUE_MISMATCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_LOCK_PATH_BLOB_RAW_LOGICAL_BINDING_VALID_EXACT1_OWNER_FULL_STATIC_CHECK_REDERIVATION_EXACT100_NO_PRIOR_PASS_CREDIT_OWNER_VALID_IFF_PASS_EXACT100_AND_BLOCKER_EXACT0_OR_TYPED_STATIC_VERIFIER_UNABLE_TO_DECIDE_OR_HELPER_STATIC_CONTRACT_INVALID_STOP_WHEN_OWNER_VALID_INDEPENDENT_FULL_STATIC_CHECK_REDERIVATION_EXACT100_WITHOUT_OWNER_ALIAS_MAP_RESOLVED_TUPLE_SCORE_OR_AGGREGATE_REUSE_VALID_IFF_PASS_EXACT100_AND_BLOCKER_EXACT0_OR_TYPED_STATIC_VERIFIER_UNABLE_TO_DECIDE_OR_HELPER_STATIC_CONTRACT_INVALID_STOP_PRIOR_HELPER_EDIT_REUSE_EXECUTION_IMPORT_COMPILE_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_ALIAS_AWARE_STATIC_VERIFIER_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NEW_ALIAS_AWARE_STATIC_VALID_DESIGN_STOP_WHEN_DUAL_VALID_NO_GATE_B_EXECUTION_TARGET_AUTHORITY_ISSUANCE_OR_AUTOMATIC_PROGRESSION
+```
+
+State: `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`.
+
+Automatic progression: `false`.
