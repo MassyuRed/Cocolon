@@ -1,0 +1,233 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.r1_owner_contract_observer_v2_terminal_grammar_reconciliation_design_receipt.v1",
+  "observed_at_date": "2026-08-01",
+  "repository_scope": {
+    "design_and_evidence": "MassyuRed/Cocolon",
+    "target_source": "MassyuRed/mashos-api"
+  },
+  "body_free": true,
+  "private_absolute_locator_published": false,
+  "authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_CURRENT_ONE_SHOT_AUTHORITY_CLOSED_CONSUMED_TERMINAL_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_CURRENT_RESULT_IMMUTABLE_NONCREDIT_FULL_R1_RESULT_UNKNOWN_PRESERVED_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_CHILD_STRUCTURED_EVIDENCE_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_COLLECTED_NODE_IDS_EXACT_SINGLE_ADMITTED_NODE_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_SESSIONFINISH_EXACT1_EXIT1_PRIOR_OBSERVER_V1_EXACT_NODEID_PREDICATE_MATCHING_TARGET_MODULE_COLLECT_REPORTS_EMPTY_PRESERVED_AS_DIAGNOSTIC_FACT_ONLY_DISTINCT_OBSERVER_V2_AND_CONTROLLER_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_ONLY_COLLECTION_ADMISSION_V2_DEFINED_BY_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_AND_COLLECTED_NODE_IDS_EXACTLY_EQUAL_ORDERED_SINGLE_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_TARGET_MODULE_COLLECT_REPORTS_EXCLUDED_FROM_OBSERVER_V2_REQUIRED_SCHEMA_KEYSET_AND_ALL_ADMISSION_CREDIT_AND_TERMINAL_CLASSIFICATION_PREDICATES_PYTEST_COLLECTREPORT_HOOK_NOT_REQUIRED_OBSERVER_V2_BODY_FREE_SCHEMA_KEYSET_EVENT_COUNTS_PHASE_SIGNATURE_EXIT_AND_THREE_WAY_TERMINAL_MAPPING_FROZEN_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_PRODUCTION_CODE_ANY_TEST_EXISTING_D1_CHANGE_EXACT0_TARGETED_OR_OTHER_PYTEST_INVOCATION_FRAMEWORK_ENTRY_IMPORT_COLLECTION_NODE_CALL_EXACT0_RUNTIME_DISCOVERY_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_OR_CHANGE_EXACT0_NETWORK_CHALLENGE_REMOTE_EXECUTION_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_EXACT0_BODY_FREE_DESIGN_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_AFTER_DESIGN_DISTINCT_LATER_ONE_SHOT_OBSERVER_V2_EXECUTION_SUCCESSOR_TOKEN_ISSUANCE_EXACT1_DEFINED_INACTIVE_AUTOMATIC_PROGRESSION_FALSE",
+    "token_sha256": "25a10d1601956c8b15c7b066f7ed5cfe2cbbd1f66f22f1b73446a5531f981dcb",
+    "scope": "DESIGN_ONLY",
+    "consumption_count": 1,
+    "state": "CLOSED_CONSUMED_DESIGN_ONLY",
+    "automatic_progression": false
+  },
+  "historical_boundary": {
+    "observer_v1_authority": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+    "observer_v1_terminal": "R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP",
+    "current_full_r1": "R1_RESULT_UNKNOWN_STOP",
+    "causal_red_credit": "NOT_ESTABLISHED",
+    "historical_result_reparse_count": 0,
+    "retroactive_reclassification_count": 0,
+    "credit_promotion_count": 0
+  },
+  "observer_v2_contract": {
+    "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.r1_owner_contract_private_pytest_event_observation.v2",
+    "top_level_key_count": 15,
+    "top_level_keys": [
+      "collected_node_ids",
+      "expected_signature",
+      "expected_signature_exact_match_count",
+      "logical_pytest_argv_sha256",
+      "phase_reports",
+      "pytest_collection_finish_count",
+      "pytest_invocation_count",
+      "pytest_return_code",
+      "pytest_sessionfinish_count",
+      "pytest_sessionstart_count",
+      "runner_failure",
+      "runtest_call_hook_count",
+      "schema_version",
+      "session_exit_status",
+      "target_node_id"
+    ],
+    "phase_row_key_count": 8,
+    "phase_row_keys": [
+      "exception_message_sha256",
+      "exception_present",
+      "exception_type",
+      "expected_signature_exact_match",
+      "node_id",
+      "outcome",
+      "phase",
+      "was_xfail"
+    ],
+    "runner_failure_key_count": 3,
+    "runner_failure_keys": [
+      "class",
+      "safe_code",
+      "stage"
+    ],
+    "normative_hook_count": 6,
+    "normative_hooks": [
+      "pytest_sessionstart",
+      "pytest_collection_finish",
+      "pytest_runtest_call",
+      "pytest_runtest_makereport",
+      "pytest_runtest_logreport",
+      "pytest_sessionfinish"
+    ],
+    "pytest_collectreport_hook_count": 0,
+    "target_module_collect_reports_field_count": 0,
+    "json_boolean_accepted_as_integer": false
+  },
+  "frozen_bindings": {
+    "target_node_id": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py::test_r1_structured_terminal_event_owner_contract_or_red",
+    "target_node_id_sha256": "12c11c21c0b7b5e7818a1a1050002e126a5d2faba2ecc213aeaac4c4fdf9b1d0",
+    "expected_signature": "R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED",
+    "expected_signature_sha256": "9611720beabaf4b9bdb191ec76efff91139c607bd3d9a9c792acfbee43e9b649",
+    "logical_pytest_argv_sha256": "9200bdd6a1a08db5de7a41c9a1783ca239724f1990287f9755ea4b2cf484836a"
+  },
+  "collection_admission_v2": {
+    "predicate_count": 3,
+    "pytest_sessionstart_count": "TYPED_JSON_INTEGER_EXACT1",
+    "pytest_collection_finish_count": "TYPED_JSON_INTEGER_EXACT1",
+    "collected_node_ids": "ORDERED_EXACT_SINGLE_AUTHORITY_BOUND_TARGET_NODE_ID",
+    "prefix_or_suffix_rewrite_allowed": false,
+    "module_collect_report_used": false,
+    "human_pytest_presentation_used": false
+  },
+  "causal_red_predicate": {
+    "requires_collection_admission_v2": true,
+    "schema_keyset_and_constant_binding": "EXACT",
+    "pytest_invocation_count": 1,
+    "runtest_call_hook_count": 1,
+    "pytest_sessionfinish_count": 1,
+    "phase_order": [
+      "setup",
+      "call",
+      "teardown"
+    ],
+    "phase_outcomes": [
+      "passed",
+      "failed",
+      "passed"
+    ],
+    "call_exception_type": "Failed",
+    "call_expected_signature_exact_match": true,
+    "expected_signature_exact_match_count": 1,
+    "runner_failure": {
+      "class": "NONE",
+      "safe_code": "NONE",
+      "stage": "NONE"
+    },
+    "pytest_return_code": 1,
+    "session_exit_status": 1,
+    "outer_process_exit_code": 1,
+    "outer_launch_failure": "NONE",
+    "static_invariant": "R_IMPLIES_O_AND_C"
+  },
+  "controller_v2_contract": {
+    "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.r1_owner_contract_gate_c_private_controller_result.v2",
+    "postlaunch_top_level_key_count": 16,
+    "counter_key_count": 26,
+    "counter_keys": [
+      "admitted_node_count",
+      "call_fail_count",
+      "challenge_count",
+      "collection_count",
+      "d1_full_exact8_pytest_invocation_count",
+      "d1_import_count",
+      "dependency_install_count",
+      "fallback_count",
+      "gate_evidence_consumption_count",
+      "interpreter_switch_count",
+      "network_execution_count",
+      "os_child_start_count",
+      "postadmission_pytest_version_probe_count",
+      "postadmission_role_smoke_count",
+      "production_change_count",
+      "published_red_test_change_count",
+      "pytest_start_count",
+      "rematerialization_count",
+      "remote_observation_count",
+      "retry_count",
+      "runtime_repair_count",
+      "setup_pass_count",
+      "signature_exact_match_count",
+      "targeted_pytest_invocation_count",
+      "teardown_pass_count",
+      "test_call_count"
+    ],
+    "typed_safe_total_classifier": true,
+    "uncaught_classifier_exception_allowed": false,
+    "observation_domain_o": "READABLE_JSON_OBJECT_AND_OUTER_PROCESS_EXIT_TYPED_JSON_INTEGER_BOOLEAN_REJECTED",
+    "prelaunch_terminal": "R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP",
+    "postlaunch_mapping": [
+      {
+        "predicate": "NOT_O_OR_NOT_C",
+        "terminal": "R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP",
+        "causal_red_established": false
+      },
+      {
+        "predicate": "O_AND_C_AND_R",
+        "terminal": "OWNER_CONTRACT_CAUSAL_RED_ESTABLISHED_STOP",
+        "causal_red_established": true
+      },
+      {
+        "predicate": "O_AND_C_AND_NOT_R",
+        "terminal": "R1_STRUCTURED_TERMINAL_OWNER_CONTRACT_CAUSAL_RED_NOT_ESTABLISHED_NONCREDIT_STOP",
+        "causal_red_established": false
+      }
+    ],
+    "mapping_mutually_exclusive": true,
+    "mapping_exhaustive": true,
+    "prelaunch_stage_cardinalities": {
+      "gate_c_identity_invalid_before_admission": "ADMISSION_0_CONSUMPTION_0_AUTHORITY_CONSUMPTION_0_OS_CHILD_0_TARGETED_PYTEST_0",
+      "admission_readback_identity_invalid": "ADMISSION_1_CONSUMPTION_0_AUTHORITY_CONSUMPTION_0_OS_CHILD_0_TARGETED_PYTEST_0"
+    },
+    "postconsumption_failure_returns_to_prelaunch_terminal": false
+  },
+  "verification": {
+    "owner_static_design_verification_count": 1,
+    "owner_verdict": "VALID",
+    "independent_static_design_verification_count": 1,
+    "independent_verdict": "VALID",
+    "blocker_count": 0,
+    "observer_v2_helper_creation_count": 0,
+    "controller_v2_helper_creation_count": 0,
+    "observer_v2_or_controller_v2_execution_count": 0
+  },
+  "execution_cardinalities": {
+    "targeted_or_other_pytest_invocation_count": 0,
+    "framework_entry_count": 0,
+    "import_count": 0,
+    "collection_count": 0,
+    "node_call_count": 0,
+    "runtime_discovery_count": 0,
+    "runtime_probe_count": 0,
+    "role_smoke_count": 0,
+    "runtime_repair_count": 0,
+    "rematerialization_count": 0,
+    "runtime_change_count": 0,
+    "network_execution_count": 0,
+    "challenge_count": 0,
+    "remote_observation_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "dependency_install_count": 0,
+    "production_change_count": 0,
+    "any_test_change_count": 0,
+    "existing_d1_change_count": 0,
+    "mashos_api_change_count": 0
+  },
+  "design_result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CollectionAdmissionAndThreeWayTerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_20260801.md",
+    "blob_sha1": "0b48a595bc19f0b53162285fcbe49f373c0ba7c9",
+    "raw_sha256": "1a344bc4ecc94dc89de37f658e404204e56d7fb7de08e07f3dd73350b1079609",
+    "bytes": 20117,
+    "lines": 446
+  },
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_TERMINAL_GRAMMAR_RECONCILIATION_DESIGN_POSTVERIFIED_CURRENT_DESIGN_AUTHORITY_CLOSED_CONSUMED_DESIGN_ONLY_OWNER_STATIC_VALID_EXACT1_INDEPENDENT_STATIC_VALID_EXACT1_CHILD_SCHEMA_V2_KEYSET_EXACT15_PHASE_KEYSET_EXACT8_RUNNER_FAILURE_KEYSET_EXACT3_CONTROLLER_SCHEMA_V2_POSTLAUNCH_KEYSET_EXACT16_COUNTER_KEYSET_EXACT26_COLLECTION_ADMISSION_TYPED_EXACT3_PHASE_SIGNATURE_EXIT_AND_TOTAL_THREE_WAY_TERMINAL_MAPPING_FROZEN_PRIOR_OBSERVER_V1_ONE_SHOT_CLOSED_CONSUMED_TERMINAL_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_IMMUTABLE_NONCREDIT_FULL_R1_RESULT_UNKNOWN_PRESERVED_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_DISTINCT_LATER_OBSERVER_V2_ONE_SHOT_EXECUTION_LOCAL_PRIVATE_AUTHORITY_BOUND_OBSERVER_V2_HELPER_CREATION_EXACT1_CONTROLLER_V2_HELPER_CREATION_EXACT1_OUTSIDE_COCOLON_MASHOS_API_AND_RETAINED_RUNTIME_PYTEST_COLLECTREPORT_HOOK_EXACT0_TARGET_MODULE_COLLECT_REPORTS_FIELD_EXACT0_RAW_IDENTITIES_AND_FROZEN_DESIGN_CONFORMANCE_OWNER_AND_INDEPENDENT_STATIC_VALID_EXACT1_EXACT1_BEFORE_ADMISSION_PRELAUNCH_SAME_READINESS_OBSERVATION_SHA256_8138978339A65C5EC2D32299A326EE8525F470572526F053FD9866F532203E69_SAME_RUNTIME_INSTANCE_OBSERVATION_ID_695A5ADF4134966C741491312D0B05887EE2F1DA4571132DC06107010DA55D80_BASE_37EEE88C_TREE_3891B841_PLUS_REMOTE_315813C7_TREE_A641510E_POSTFETCH_VERIFIED_OVERLAY_EXACT1_NOT_CLAIMED_CLEAN_MAIN_REQUIRED_SOURCE_EXACT6_PRODUCTION_OWNER_ABSENT_PUBLISHED_RED_TEST_BLOB_9A1CF8A0343D6A391CE6D520CA686F7310EF22D0_RAW_EA8498B79FD9AA028FF913FB4D99BEB205D2736A3D0AE783A435CBCCF32575CC_UNCHANGED_EXISTING_D1_UNCHANGED_TARGET_NODE_ID_SHA256_12C11C21C0B7B5E7818A1A1050002E126A5D2FABA2ECC213AEAAC4C4FDF9B1D0_REDERIVED_VALID_OR_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_ADMISSION_GATE_EVIDENCE_CONSUMPTION_AUTHORITY_CONSUMPTION_TARGET_OS_CHILD_TARGETED_PYTEST_INVOCATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_WHEN_GATE_C_IDENTITY_INVALID_BEFORE_ADMISSION_OR_ADMISSION_EXACT1_GATE_EVIDENCE_CONSUMPTION_AUTHORITY_CONSUMPTION_TARGET_OS_CHILD_TARGETED_PYTEST_INVOCATION_EXACT0_EXACT0_EXACT0_EXACT0_WHEN_ADMISSION_READBACK_INVALID_FRESH_EXCLUSIVE_SINGLE_USE_PRELAUNCH_ADMISSION_RECORD_EXACT1_GATE_EVIDENCE_CONSUMPTION_EXACT1_AUTHORITY_CONSUMPTION_EXACT1_WRITE_BEFORE_LAUNCH_NO_ROLLBACK_WHEN_VALID_PRELAUNCH_STATIC_LOCAL_GIT_STATUS_PROCESS_EXACT1_DIRECT_ADMITTED_ABSOLUTE_EXECUTABLE_EMPTY_NONREPOSITORY_CWD_SHELL_PATH_SEARCH_GENERIC_INTERPRETER_EXACT0_TARGET_OS_CHILD_AND_PYTEST_MAIN_AND_TARGETED_PYTEST_INVOCATION_EXACT1_EXACT1_EXACT1_WHEN_REACHED_EXPLICIT_OBSERVER_V2_PLUGIN_SAME_CHILD_ONLY_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_EXACT1_OTHER_PYTEST_INVOCATION_EXACT0_COLLECTION_ADMISSION_TYPED_SESSIONSTART_EXACT1_COLLECTION_FINISH_EXACT1_COLLECTED_NODE_IDS_EXACTLY_ORDERED_SINGLE_ADMITTED_NODE_FULL_CAUSAL_RED_TYPED_PHASE_SIGNATURE_RUNNER_AND_EXIT_PREDICATE_EXACT1_OR_POSTCONSUMPTION_OBSERVATION_O_FALSE_OR_COLLECTION_ADMISSION_C_FALSE_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_OR_OBSERVATION_O_TRUE_AND_COLLECTION_ADMISSION_C_TRUE_AND_FULL_CAUSAL_RED_R_FALSE_R1_STRUCTURED_TERMINAL_OWNER_CONTRACT_CAUSAL_RED_NOT_ESTABLISHED_NONCREDIT_STOP_OR_OBSERVATION_O_TRUE_AND_COLLECTION_ADMISSION_C_TRUE_AND_FULL_CAUSAL_RED_R_TRUE_OWNER_CONTRACT_CAUSAL_RED_ESTABLISHED_STOP_TYPED_SAFE_TOTAL_CLASSIFIER_NO_UNCAUGHT_EXCEPTION_PYTEST_COLLECTREPORT_AND_TARGET_MODULE_COLLECT_REPORTS_EXCLUDED_FROM_SCHEMA_ADMISSION_CREDIT_AND_TERMINAL_PREDICATES_EXISTING_D1_RAW_BYTE_READ_EXACT1_RAW_SHA256_AND_GIT_BLOB_SHA1_VALIDATION_PASS_EXACT1_EXACT1_D1_IMPORT_PYTHON_EXECUTION_AND_D1_FULL_EXACT8_PYTEST_EXACT0_NETWORK_CHALLENGE_REMOTE_OBSERVATION_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_RUNTIME_DISCOVERY_VERSION_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_OR_CHANGE_EXACT0_PRODUCTION_PUBLISHED_RED_TEST_EXISTING_D1_AND_ANY_MASHOS_API_SOURCE_CHANGE_EXACT0_HUMAN_PYTEST_PRESENTATION_DIAGNOSTIC_ONLY_RAW_OUTPUT_ABSOLUTE_LOCATOR_AND_HELPER_BODY_UNPUBLISHED_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_EXECUTION_AUTHORITY_CLOSED_CONSUMED_WHEN_GATE_EVIDENCE_CONSUMPTION_REACHED_NO_RETRY_NO_AUTOMATIC_SUCCESSOR_EXECUTION_AUTOMATIC_PROGRESSION_FALSE",
+    "token_sha256": "fbbfee54de6890bd8b4706629786ea2a6a7e759f680fbda2f858f6acc558c2c3",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "automatic_progression": false
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_CANONICAL_JSON_SORT_KEYS_COMPACT_OF_DOCUMENT_WITH_receipt_logical_sha256_REMOVED",
+  "receipt_logical_sha256": "a4adb2412593e80a34efaeb0df0bee4ec9208d5d8f0b82b668497c4cab43aa7d"
+}
