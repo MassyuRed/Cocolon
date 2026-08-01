@@ -1,0 +1,359 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.work_test_runner_runtime_rematerialization_and_fresh_readiness_receipt.v2",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_WORK_TEST_RUNNER_RUNTIME_REMATERIALIZATION_AND_FRESH_READINESS",
+  "observed_at_date": "2026-08-01",
+  "authority_token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_WORK_TEST_RUNNER_RUNTIME_CONTINUITY_RULE_POSTVERIFIED_CURRENT_R1_IMMUTABLE_PRIOR_SESSION_LOCAL_EXACT5_RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS_ALTERNATE_LOCATOR_SCAN_NOT_ESTABLISHED_KAREN_WORK_OWNED_FROZEN_LOCK_IDENTITY_EXACT1_LOCK_DERIVED_EXACT5_PROJECTION_EXACT1_TRACKED_PROCEDURE_IDENTITY_EXACT1_AUTHORITY_BOUND_LOCAL_MATERIALIZER_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_INDEPENDENT_VERIFIER_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_OR_TYPED_PREACQUISITION_STOP_CONFIGURED_ROUTE_ACQUISITION_NETWORK_PROCESS_EXACT1_ACCEPTED_EXACT5_REJECTED_EXACT0_OR_TYPED_ACQUISITION_STOP_SDIST_BUILD_UNCONFIGURED_SOURCE_POSTACCEPT_PACKAGE_INDEX_EXACT0_FRESH_ISOLATED_REMATERIALIZATION_EXACT1_WHEN_REACHED_PRIOR_RUNTIME_REUSE_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_FRESH_RUNTIME_IDENTITY_DERIVATION_OWNER_AND_INDEPENDENT_VERDICT_EXACT1_EXACT1_PYTEST_8_4_1_VERSION_PROBE_EXACT1_REQUIRED_ROLE_SMOKE_PROCESS_EXACT1_DIRECT_LOAD_EXACT3_PUBLIC_API_CALL_EFFECT_EXACT0_EXACT0_WHEN_READINESS_REACHED_TARGET_IMPORT_COLLECTION_CALL_EXACT0_TARGETED_PYTEST_INVOCATION_EXACT0_CHALLENGE_REMOTE_OBSERVATION_EXACT0_PRODUCTION_PUBLISHED_RED_TEST_EXISTING_D1_CHANGE_EXACT0_RUNTIME_READY_CURRENT_SESSION_OR_TYPED_RUNTIME_NOT_READY_STOP_BODY_FREE_READINESS_RECEIPT_AUTOMATIC_PROGRESSION_FALSE",
+  "authority_token_sha256": "aae2e92528f27826709bef5dce1af02434d4057c92e30737cc1d37a29b2bf1c6",
+  "authority_consumption_count": 1,
+  "body_free": true,
+  "historical_result_reparse": false,
+  "credit_change": false,
+  "automatic_progression": false,
+  "result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_Result_20260801.md",
+    "git_blob_sha1": "70560281cab822fba22a980cd3220393f39c4625",
+    "raw_sha256": "9b4a27fba233fc36b374db04f1882f467203d315eb2602bb7baf5365fff635dd",
+    "bytes": 13204,
+    "lines": 396
+  },
+  "readiness_observation": {
+    "accepted_wheel_manifest_sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d",
+    "environment_policy": {
+      "fixed": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "policy_sha256": "8a43751b49a8db1d024063608405f9b169e829f3c0be3488433b31800d44b1a4",
+      "removed": [
+        "PYTEST_ADDOPTS",
+        "PYTEST_PLUGINS",
+        "PYTHONPATH"
+      ],
+      "working_directory_class": "EMPTY_NON_REPOSITORY_DIRECTORY"
+    },
+    "pytest_probe": {
+      "argv_sha256": "4ff50356d7f0cd49b431df2f480e71aabaf2ff07bd476a90fa29ef4a2eb52cb9",
+      "exit_code": 0,
+      "reported_version": "8.4.1",
+      "result": "VALID",
+      "stderr_byte_count": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_byte_count": 13,
+      "stdout_sha256": "b2e1053958c9395fa5cc8f621e613449d36f3cdddc21c7bbba2364493e225064"
+    },
+    "role_smoke_probe": {
+      "argv_sha256": "816e46a9604d54ab93019bfb5d2d92b26931959b18e85452c0bd5b68949ec3d5",
+      "exit_code": 0,
+      "ordered_role_paths_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+      "probe_program_sha256": "5fb2a5ad10778b512f8b6a0ae66100bc9901b18e29603827239bc1fe86f62560",
+      "result": "VALID",
+      "stderr_byte_count": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_byte_count": 162,
+      "stdout_sha256": "7b3a0cb884180eef812abc4048e7fe38bcda85a1928a1677e7ef4a4774168d37"
+    },
+    "runtime_identity": {
+      "admitted_executable_relative_path": "bin/python",
+      "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+      "distribution_count": 5,
+      "entrypoint_control_identity_sha256": "f31728f896de598a7a6b392c6ce155d2223372d53ead264c1d6ea932bd276a5d",
+      "event_entropy_commitment": "46523f4d7be564ecf320be229e7a0c4a81156f8ac3eeaf1ba0bd5e28dcc59c36",
+      "full_runtime_root_manifest_sha256": "e6fb3c42d88897cb5117d993449debe7efef3722f11e6c7e3aff541513120042",
+      "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+      "logical_runtime_id": "e13ba244ed2769da25be865f619026e98514c9d88e0efe579f920ed4a092bb9a",
+      "materialization_event_id": "2cc41bd9d330bd8977e8bb95dbc03173a7b33e13030394fd6c974e8545a47c6b",
+      "record_closure_match_count": 5,
+      "resolved_interpreter_executable_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+      "runtime_content_identity": "549da432b1a46b111251fea0d2a822aa5c682012735b782847e22f8a3255ffbc",
+      "runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+      "runtime_root_identity_sha256": "a63b7d0715700e52568cc8b382d4cfc22cc648269e59d98edcd15221d20849cf",
+      "unexpected_entry_count": 0,
+      "unowned_importable_file_count": 0
+    },
+    "static_identity": {
+      "authority_token_sha256": "aae2e92528f27826709bef5dce1af02434d4057c92e30737cc1d37a29b2bf1c6",
+      "helpers": {
+        "independent_verifier": {
+          "creation_count": 1,
+          "planned_execution_count": 1,
+          "raw_sha256": "144692340a1c85be282dd02db3c3b919be1987bdb32e9e583b753dc601572617"
+        },
+        "materializer": {
+          "creation_count": 1,
+          "execution_count": 1,
+          "raw_sha256": "8cf5f90bcb56b15da9de5569f21b53ae13c74821c372125895a710e9793a6f14"
+        }
+      },
+      "lock_identity": {
+        "git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+        "logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+        "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+        "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787"
+      },
+      "procedure_identity": {
+        "git_blob_sha1": "40746bcd8926a34991f160f2e5bff52db4688add",
+        "path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+        "raw_sha256": "3cd3e455a08c3e490545f1b98cdbb47d68d0f01709c05a1c51a64f515946ef8f",
+        "section": "7.1"
+      },
+      "projection_identity": {
+        "distribution_count": 5,
+        "ordered_distribution_names": [
+          "iniconfig",
+          "packaging",
+          "pluggy",
+          "pygments",
+          "pytest"
+        ],
+        "ordered_distribution_versions": [
+          "2.3.0",
+          "26.2",
+          "1.6.0",
+          "2.20.0",
+          "8.4.1"
+        ],
+        "sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e"
+      },
+      "source_identity": {
+        "base_commit_sha1": "37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f",
+        "base_tree_sha1": "3891b84164ba0063136e47beb93d36798587a568",
+        "current_remote_commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+        "current_remote_tree_sha1": "a641510e107d52bb910073f36604c85bd57af150",
+        "local_projection_class": "BASE_PLUS_EXACT1_VERIFIED_OVERLAY_NOT_CLAIMED_CLEAN_MAIN",
+        "overlay_blob_sha1": "9a1cf8a0343d6a391ce6d520ca686f7310ef22d0",
+        "overlay_path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py",
+        "repository_full_name": "MassyuRed/mashos-api",
+        "required_blob_match_count": 6,
+        "required_files": [
+          {
+            "git_blob_sha1": "9a1cf8a0343d6a391ce6d520ca686f7310ef22d0",
+            "path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py",
+            "raw_sha256": "ea8498b79fd9aa028ff913fb4d99beb205d2736a3d0ae783a435cbccf32575cc"
+          },
+          {
+            "git_blob_sha1": "c0eb936690a3423ac4615a9aabb37c40cc257324",
+            "path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_operational_admission_v2_event1_connection_actual_git_identity_parent_phase3_red.py",
+            "raw_sha256": "3536b8a838ffe2ccbe29db69e9c5400c719de8e63ddf83da9ea0f83b94f17d14"
+          },
+          {
+            "git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+            "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+            "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787"
+          },
+          {
+            "git_blob_sha1": "044287009b1fd155689bded46628b8fc91b73c06",
+            "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+            "raw_sha256": "13aa675be1356ab524a69066f861c2d27a8d8e32f0d690811b2b3308f199057d"
+          },
+          {
+            "git_blob_sha1": "0fae71a29f8fe44d31c18af42aaf53cc34beac6c",
+            "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+            "raw_sha256": "634ddb104e0b7630c695e032bb54726912fcfc9ad4351ab0eb6da7901671fc2b"
+          },
+          {
+            "git_blob_sha1": "fdea3dc18d81ca9ce1e3a842e802d21d0019a8c5",
+            "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+            "raw_sha256": "14fedde39823d90253a6adec6fc05ccde29f05a659edbac7edc007b28eab5793"
+          }
+        ]
+      }
+    }
+  },
+  "readiness_observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+  "execution_cardinalities": {
+    "accepted_wheel_count": 5,
+    "acquisition_network_process_count": 1,
+    "build_count": 0,
+    "challenge_count": 0,
+    "configured_route_acquisition_count": 1,
+    "direct_role_load_count": 3,
+    "existing_d1_change_count": 0,
+    "fallback_count": 0,
+    "fresh_isolated_rematerialization_count": 1,
+    "interpreter_switch_count": 0,
+    "post_acceptance_package_index_access_count": 0,
+    "prior_runtime_reuse_count": 0,
+    "production_change_count": 0,
+    "public_api_call_count": 0,
+    "published_red_test_change_count": 0,
+    "readiness_pytest_version_probe_count": 1,
+    "rejected_candidate_count": 0,
+    "remote_observation_count": 0,
+    "required_role_smoke_process_count": 1,
+    "retry_count": 0,
+    "role_effect_count": 0,
+    "sdist_count": 0,
+    "target_collection_count": 0,
+    "target_import_count": 0,
+    "target_test_call_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "unconfigured_source_count": 0,
+    "materializer_helper_creation_count": 1,
+    "materializer_helper_execution_count": 1,
+    "independent_verifier_helper_creation_count": 1,
+    "independent_verifier_helper_execution_count": 1,
+    "owner_verdict_count": 1,
+    "independent_verdict_count": 1
+  },
+  "runtime_readiness_identity": {
+    "preimage_rule": "SHA256_UTF8_RFC8785_CANONICAL_JSON_OF_preimage",
+    "preimage": {
+      "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.runtime_readiness_identity.v1",
+      "runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+      "pytest_probe": {
+        "argv_sha256": "4ff50356d7f0cd49b431df2f480e71aabaf2ff07bd476a90fa29ef4a2eb52cb9",
+        "exit_code": 0,
+        "reported_version": "8.4.1",
+        "result": "VALID",
+        "stderr_byte_count": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_byte_count": 13,
+        "stdout_sha256": "b2e1053958c9395fa5cc8f621e613449d36f3cdddc21c7bbba2364493e225064"
+      },
+      "role_smoke_probe": {
+        "argv_sha256": "816e46a9604d54ab93019bfb5d2d92b26931959b18e85452c0bd5b68949ec3d5",
+        "exit_code": 0,
+        "ordered_role_paths_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+        "probe_program_sha256": "5fb2a5ad10778b512f8b6a0ae66100bc9901b18e29603827239bc1fe86f62560",
+        "result": "VALID",
+        "stderr_byte_count": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_byte_count": 162,
+        "stdout_sha256": "7b3a0cb884180eef812abc4048e7fe38bcda85a1928a1677e7ef4a4774168d37"
+      },
+      "owner_verdict": {
+        "observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+        "reason_code": "ALL_CHECKS_EQUAL",
+        "role": "KAREN_RUNTIME_OWNER",
+        "verdict": "VALID"
+      },
+      "independent_verdict": {
+        "observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+        "reason_code": "ALL_CHECKS_EQUAL",
+        "role": "INDEPENDENT_RUNTIME_VERIFIER",
+        "verdict": "VALID"
+      }
+    },
+    "runtime_readiness_observation_id": "794631c1430f3b936d59f56368bc3b707bd6f19706fc146754de07931555af38"
+  },
+  "continuity": {
+    "preimage_rule": "SHA256_UTF8_RFC8785_CANONICAL_JSON_OF_preimage",
+    "preimage": {
+      "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.runtime_continuity_chain.v1",
+      "prior": {
+        "correction_receipt_schema": "nls_v3_step11_cycle001_recovery_epoch004_work_test_runner_runtime_continuity_current_authority_correction_receipt_v1",
+        "correction_receipt_logical_sha256": "ecfe452ba32d0bea73dcdf400c7fc5c2f5eff9cc40b84386ab2a1af166980273",
+        "state": "RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS",
+        "readiness": "HISTORICALLY_VALID_AT_2026_07_31",
+        "historical_readiness_receipt_logical_sha256": "89d463cf7600170f912b194db687faa9e1a6569b2c913f51c1f0e452087040f4"
+      },
+      "transition": {
+        "event_class": "REMATERIALIZATION",
+        "rematerialization_count": 1,
+        "prior_runtime_reuse_count": 0,
+        "materialization_event_id": "2cc41bd9d330bd8977e8bb95dbc03173a7b33e13030394fd6c974e8545a47c6b"
+      },
+      "current": {
+        "state": "RUNTIME_READY_CURRENT_SESSION",
+        "runtime_instance_class": "REMATERIALIZED_NEW_INSTANCE",
+        "logical_runtime_id": "e13ba244ed2769da25be865f619026e98514c9d88e0efe579f920ed4a092bb9a",
+        "runtime_content_identity": "549da432b1a46b111251fea0d2a822aa5c682012735b782847e22f8a3255ffbc",
+        "runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+        "readiness_observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+        "runtime_readiness_observation_id": "794631c1430f3b936d59f56368bc3b707bd6f19706fc146754de07931555af38",
+        "persistence_class": "SESSION_LOCAL",
+        "recovery_class": "REMATERIALIZABLE_FROM_FROZEN_LOCK",
+        "locator_strategy": "CURRENT_AUTHORITY_PRIVATE_ROOT_PLUS_BIN_PYTHON",
+        "artifact_availability_class": "CONFIGURED_ROUTE_EXACT5_ACQUIRED_CURRENT_AUTHORITY_OBSERVATION_ONLY",
+        "lock_logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+        "runner_projection_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+        "tracked_procedure_raw_sha256": "3cd3e455a08c3e490545f1b98cdbb47d68d0f01709c05a1c51a64f515946ef8f"
+      }
+    },
+    "continuity_chain_sha256": "4d0b73a8f8c2779f53796db608f87208988d2baed0a015b08ddba46ab3f37fb9"
+  },
+  "runtime_lifecycle": {
+    "persistence_class": "SESSION_LOCAL",
+    "recovery_class": "REMATERIALIZABLE_FROM_FROZEN_LOCK",
+    "locator_strategy": "CURRENT_AUTHORITY_PRIVATE_ROOT_PLUS_BIN_PYTHON",
+    "artifact_availability_class": "CONFIGURED_ROUTE_EXACT5_ACQUIRED_CURRENT_AUTHORITY_OBSERVATION_ONLY",
+    "absolute_runtime_root_published": false,
+    "absolute_executable_path_published": false,
+    "helper_body_published": false,
+    "expiry_triggers": [
+      "SESSION_BOUNDARY",
+      "LOCATOR_LOSS",
+      "RUNTIME_ROOT_OR_ENTRYPOINT_ABSENT",
+      "RUNTIME_IDENTITY_DRIFT",
+      "ENTRYPOINT_CONTROL_IDENTITY_DRIFT",
+      "INTERPRETER_EXECUTABLE_HASH_DRIFT",
+      "LOCK_IDENTITY_CHANGE",
+      "REQUIRED_ROLE_SOURCE_CHANGE",
+      "PYTEST_8_4_1_PROBE_NOT_VALID"
+    ]
+  },
+  "owner_verdict": {
+    "observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+    "reason_code": "ALL_CHECKS_EQUAL",
+    "role": "KAREN_RUNTIME_OWNER",
+    "verdict": "VALID"
+  },
+  "independent_verdict": {
+    "observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+    "reason_code": "ALL_CHECKS_EQUAL",
+    "role": "INDEPENDENT_RUNTIME_VERIFIER",
+    "verdict": "VALID",
+    "execution_count": 1
+  },
+  "failure": {
+    "class": "NONE",
+    "safe_code": "NONE",
+    "stage": "NONE"
+  },
+  "state": "RUNTIME_READY_CURRENT_SESSION",
+  "historical_r1": {
+    "prior_full_r1_state": "R1_RESULT_UNKNOWN_STOP",
+    "prior_full_r1_authority_state": "CLOSED_CONSUMED_NONCREDIT",
+    "prior_structured_owner_red_authority_state": "CLOSED_CONSUMED_NONCREDIT",
+    "retroactive_reparse_count": 0,
+    "reclassification_count": 0,
+    "credit_promotion_count": 0,
+    "owner_absent_causal_red": "NOT_ESTABLISHED",
+    "green": "NOT_ESTABLISHED",
+    "credit": "NOT_ESTABLISHED"
+  },
+  "repository_scope": {
+    "cocolon_new_path_count": 3,
+    "cocolon_modified_path_count": 2,
+    "cocolon_paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_Result_20260801.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_BodyFree_Receipt_20260801.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_Handoff_20260801.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md"
+    ],
+    "mashos_api_changed_path_count": 0
+  },
+  "zero_effects": {
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_test_call_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "challenge_count": 0,
+    "remote_observation_count": 0,
+    "production_change_count": 0,
+    "published_red_test_change_count": 0,
+    "existing_d1_change_count": 0,
+    "existing_d1_exact8_pytest_invocation_count": 0
+  },
+  "next_targeted_authority": {
+    "state_before_readiness_exact5_postverification": "DEFINED_INACTIVE_CONDITIONAL_ON_FRESH_READINESS_EXACT5_POSTVERIFICATION",
+    "state_after_readiness_exact5_postverification": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "admission_count": 0,
+    "consumption_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "separate_mash_approval_required": true
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_RFC8785_CANONICAL_JSON_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "95b1c4bef6e1d58f6b5e218a8aa5910900db8a2dd2622f5fbbce9152ba43d818"
+}

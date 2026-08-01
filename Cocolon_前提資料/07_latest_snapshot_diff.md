@@ -32823,3 +32823,156 @@ automatic progression: false
 次のseparate authority classは、既存frozen lock-derived exact5を使うWork-owned
 rematerialization / identity derivation / fresh readiness onlyです。Mash様による
 absolute path、venv、wheel、pytest installationの提供は不要です。
+
+# 2026-08-01 latest — Work-owned exact5 runtime rematerialized and fresh readiness VALID
+
+## Current authority result
+
+Mash様が承認したWork-owned runtime recovery authorityは、frozen lock-derived
+exact5からfresh isolated runtime exact1を再構築し、ownerとindependent verifierの
+両方でfresh readinessをVALIDにしました。
+
+```text
+terminal / instance:
+RUNTIME_READY_CURRENT_SESSION / REMATERIALIZED_NEW_INSTANCE
+
+configured route / acquisition network / accepted / rejected:
+exact1 / exact1 / exact5 / exact0
+
+fresh rematerialization / prior runtime reuse / retry / fallback / interpreter switch:
+exact1 / exact0 / exact0 / exact0 / exact0
+
+pytest 8.4.1 version probe / role smoke / direct role load:
+exact1 VALID / exact1 VALID / exact3
+
+public API call / effect:
+exact0 / exact0
+
+target import / collection / call / targeted pytest:
+exact0 / exact0 / exact0 / exact0
+
+challenge / remote observation / D1 full exact8:
+exact0 / exact0 / exact0
+
+production / published RED test / existing D1 change:
+exact0 / exact0 / exact0
+
+automatic progression:
+false
+```
+
+## Current body-free identity
+
+```text
+materialization event ID:
+2cc41bd9d330bd8977e8bb95dbc03173a7b33e13030394fd6c974e8545a47c6b
+
+runtime instance observation ID:
+695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80
+
+runtime root / entrypoint control / executable SHA-256:
+a63b7d0715700e52568cc8b382d4cfc22cc648269e59d98edcd15221d20849cf
+f31728f896de598a7a6b392c6ce155d2223372d53ead264c1d6ea932bd276a5d
+9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488
+
+readiness observation / runtime readiness observation ID:
+8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69
+794631c1430f3b936d59f56368bc3b707bd6f19706fc146754de07931555af38
+
+continuity chain SHA-256:
+4d0b73a8f8c2779f53796db608f87208988d2baed0a015b08ddba46ab3f37fb9
+```
+
+Lifecycle is `SESSION_LOCAL`; recovery is
+`REMATERIALIZABLE_FROM_FROZEN_LOCK`; absolute locator is not published.
+session boundaryまたはidentity/locator/source/lock driftでeligibilityは失効し、別
+authorityでtracked procedureから再構築します。
+
+## Runtime readiness exact4 identity before this snapshot append
+
+```text
+Result path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_Result_20260801.md
+70560281cab822fba22a980cd3220393f39c4625
+9b4a27fba233fc36b374db04f1882f467203d315eb2602bb7baf5365fff635dd
+13204 / 396
+
+Receipt path / blob / raw / logical / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_BodyFree_Receipt_20260801.json
+ce6cfe0217f3e28c88643f4a4f543e069a6b21c6
+b80acc68e1d38c734c243031c7d4a13024057eac73f34ed5fe09db7ab945ebe2
+95b1c4bef6e1d58f6b5e218a8aa5910900db8a2dd2622f5fbbce9152ba43d818
+19037 / 359
+
+Handoff path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_Handoff_20260801.md
+ce98b142cd279b106c81ae9455748f5aa193bbe5
+f59b7d9c89aa32d4a6391f9cc01e241243d400a83500d2d9f89d6c32d24b9c58
+11036 / 288
+
+Plan path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+5dab97a3e2f8128d266bf2468a0aba13ec84a63e
+7874394c1e786abddd2bbcba8235bde18442652bd0757adde9645f5da94338d8
+439421 / 12553
+```
+
+Approved unique changed paths are NEW exact3 and MODIFY exact2 (Plan plus this
+snapshot) only. Formal completion requires current GitHub main containment、all
+exact5 bytesのpostfetch一致、今回write commit changed-path set exact5 no extrasです。
+
+## Historical immutability
+
+- prior full R1とprior structured-owner RED environment-invalid authorityは
+  `CLOSED_CONSUMED_NONCREDIT`のままです。
+- `R1_RESULT_UNKNOWN_STOP`、causal RED未成立、GREEN未成立、credit未成立は不変です。
+- current READYをprior failed launchへ遡及適用しません。
+- runtime pathをMash様へ要求するfuture directionはsuperseded inactiveのままです。
+
+## 確認した事実、推測、華恋の意見
+
+### 確認した事実
+
+- exact5 input、fresh materialization、pytest probe、role smoke、owner/independent
+  identity closureはすべて承認cardinalityで成立しました。
+- published owner-contract testはbyte不変・behaviorally unexecutedです。
+- target、D1、challenge、remote runtime observation、post-acceptance package-index
+  access、productionは今回0です。configured-route acquisition network processは
+  承認どおりexact1です。
+
+### 推測
+
+同じfresh instanceをGate Cで再確認できれば、published exact nodeは期待する
+call-phase owner-absent REDへ到達する可能性が高いです。未実行なので未確認です。
+
+### 華恋の意見
+
+次は同じfresh runtimeをrepairせず再導出し、published exact node 1件だけをfresh
+admission / consumptionで一度実行します。human pytest表示ではなくstructured
+phase/signature/count/exitを判定し、expected REDまたはtyped noncredit STOPで止めます。
+
+## Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_WORK_TEST_RUNNER_FRESH_REMATERIALIZED_NEW_INSTANCE_RUNTIME_READY_CURRENT_SESSION_POSTVERIFIED_READINESS_OBSERVATION_8138978339A65C5EC2D32299A326EE8525F470572526F053FD9866F532203E69_SAME_RUNTIME_INSTANCE_ROOT_AND_EXECUTABLE_IDENTITY_REDERIVED_PRIOR_FULL_R1_RESULT_UNKNOWN_AND_PRIOR_STRUCTURED_TERMINAL_OWNER_RED_LAUNCHER_ENVIRONMENT_INVALID_NONCREDIT_AUTHORITIES_CLOSED_CONSUMED_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_NO_PRIOR_AUTHORITY_ADMISSION_CONSUMPTION_PROCESS_STDOUT_CHALLENGE_OR_RUNTIME_REUSE_DISTINCT_SUCCESSOR_BASE_37EEE88C_TREE_3891B841_PLUS_REMOTE_315813C7_TREE_A641510E_POSTFETCH_VERIFIED_OVERLAY_EXACT1_NOT_CLAIMED_CLEAN_MAIN_REQUIRED_SOURCE_EXACT6_REDERIVED_PUBLISHED_RED_TEST_BLOB_9A1CF8A0343D6A391CE6D520CA686F7310EF22D0_RAW_EA8498B79FD9AA028FF913FB4D99BEB205D2736A3D0AE783A435CBCCF32575CC_UNCHANGED_PRODUCTION_OWNER_PATH_ABSENT_EXISTING_D1_UNCHANGED_EXACT_ADMITTED_NATIVE_REPOSITORY_RELATIVE_NODE_ID_SHA256_12C11C21C0B7B5E7818A1A1050002E126A5D2FABA2ECC213AEAAC4C4FDF9B1D0_EXACT1_DIRECT_ADMITTED_ABSOLUTE_EXECUTABLE_PRELAUNCH_RUNTIME_ROOT_ENTRYPOINT_CONTROL_MANIFEST_EXECUTABLE_PYTEST_SOURCE_AND_NODE_IDENTITY_REDERIVATION_VALID_OR_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_TARGET_INVOCATION_EXACT0_FRESH_SINGLE_USE_PRELAUNCH_ADMISSION_RECORD_EXACT1_GATE_EVIDENCE_CONSUMPTION_EXACT1_TARGETED_PYTEST_INVOCATION_EXACT1_WHEN_REACHED_PYTEST_START_COLLECTION_ADMITTED_NODE_AND_TEST_CALL_EXACT1_SETUP_PASS_CALL_FAIL_TEARDOWN_PASS_EXACT1_EXACT1_EXACT1_CALL_PHASE_R1_STRUCTURED_TERMINAL_EVENT_OWNER_IMPLEMENTATION_ABSENT_RED_SIGNATURE_EXACT1_EXIT1_OWNER_CONTRACT_CAUSAL_RED_ESTABLISHED_STOP_OR_R1_PYTEST_LAUNCH_OR_COLLECTION_NONCREDIT_STOP_OR_R1_STRUCTURED_TERMINAL_OWNER_CONTRACT_CAUSAL_RED_NOT_ESTABLISHED_NONCREDIT_STOP_NETWORK_CHALLENGE_REMOTE_D1_IMPORT_D1_FULL_EXACT8_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_DEPENDENCY_INSTALL_RUNTIME_REPAIR_REMATERIALIZATION_POSTADMISSION_VERSION_PROBE_ROLE_SMOKE_EXACT0_PRODUCTION_OWNER_PUBLISHED_RED_TEST_EXISTING_D1_CHANGE_EXACT0_HUMAN_PYTEST_PRESENTATION_DIAGNOSTIC_ONLY_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_RED_RECOVERY_EXECUTION_ONLY_AUTOMATIC_PROGRESSION_FALSE
+```
+
+```text
+state before this exact5 postverification:
+DEFINED_INACTIVE_CONDITIONAL_ON_FRESH_READINESS_EXACT5_POSTVERIFICATION
+
+state after this exact5 postverification:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+### Entry-prefix preservation
+
+```text
+snapshot entry prefix blob / raw / bytes / lines:
+f4d9a0d2a68cfb93bb13d4053d64f36dd47988d4
+2f1354a149e56847dca7b3bc333f1bbdd6bf4ccd2f24b6553e4283ec6a09af56
+1640218 / 32825
+```
