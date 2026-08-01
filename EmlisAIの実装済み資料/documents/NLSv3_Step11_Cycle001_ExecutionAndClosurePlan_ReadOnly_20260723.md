@@ -13555,3 +13555,161 @@ Plan entry prefix blob / raw / bytes / lines:
 f62b4f92ef979995ed1ed8ab3f228c960e449bfaa37fa672332f25b6ce5c1b8f
 484016 / 13399
 ```
+
+# 2026-08-01 addendum — Gate B schema-semantic closure v3 independent INVALID STOP
+
+## Outcome and authority boundary
+
+Approved design authority SHA-256
+`3b5c091f09c32154c0c017b7a6dc38467441af522de1b56779912db154883e36` was activated and
+consumed exact1. External bootstrap exact1 and a distinct registry v3 candidate exact1 were created
+in private scope and sealed as canonical compact sorted UTF-8 JSON with no trailing LF.
+
+Owner accepted static verdict exact1 was VALID. Independent static verification exact1, performed
+from sealed raw bytes without using owner output as an oracle, was INVALID. The authority therefore
+took its typed design-blocker branch and stopped at:
+
+```text
+RUNTIME_NOT_READY_SCHEMA_SEMANTIC_CLOSURE_V3_INDEPENDENT_STATIC_INVALID_DESIGN_BLOCKER_STOP
+```
+
+Registry v3 is immutable rejected evidence. No candidate edit/reverification, helper creation,
+runtime work, pytest, target authority issuance or automatic progression occurred. Full R1 remains
+unknown.
+
+## Private identities and observed cardinalities
+
+```text
+external bootstrap raw / bytes / top-level exact keys:
+9e7c6c314897a9a8c8a0f4d98601378b996473a9b6b75ea260dfb32d1e080454
+8434 / 9
+
+registry v3 raw / bytes:
+d6c4307ef4ec15a73d7b4f4b9f3d893500919c4c26cb0e6b13d7b382841a42f6
+95881
+
+schema rows / field resolutions / field rules / enums / relations:
+40 / 356 / 103 / 16 / 37
+
+state matrices / direct hash bindings / credit edges:
+3 / 7 / 36
+
+canonical raw:
+VALID
+
+owner / independent static verdict:
+exact1 VALID / exact1 INVALID
+
+semantic closure / publicable / body publication:
+INVALID / false / exact0
+```
+
+Blocking manifest exact4 SHA-256:
+
+`47be23171e9a8deb444441a1d785195b53a39826d1f3a72f442d3dc939b9f81c`
+
+The exact4 keys are typed field-reference universe not closed, relation participant schema/path
+binding not closed, relation target-schema application mismatch exact9, and unresolved relation
+field reference exact16. The 9 affected relation/schema applications are recorded in the body-free
+Receipt. Stop observation SHA-256 is
+`20433f4f0622b873c44ee1acc176b76712d4dbcf15aeb8d5b8865d4eca3f097c`.
+
+## Zero-effect preservation
+
+```text
+prior helper edit / reuse / execution:
+exact0 / exact0 / exact0
+
+replacement materializer creation / edit / reuse / execution:
+exact0 / exact0 / exact0 / exact0
+
+replacement independent verifier creation / edit / reuse / execution:
+exact0 / exact0 / exact0 / exact0
+
+acquisition / network / materialization / probe / role import / pytest:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+target authority issuance / activation / admission / consumption:
+exact0 / exact0 / exact0 / exact0
+
+OS child / target import / collection / call / targeted pytest:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+production / published RED / existing D1 / mashos-api change:
+exact0 / exact0 / exact0 / exact0
+```
+
+## New exact3 before this Plan append
+
+```text
+Result path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_SchemaSemanticClosureV3_IndependentStaticInvalidStop_Result_20260801.md
+0d32552d149b2b91a68905d3a93dba7739ea2236
+c0cf9605ec388d854f9e1c4b1a28ec6d648e381e468538b14c25f2937b587ff2
+12600 / 184
+
+Receipt path / blob / raw / logical / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_SchemaSemanticClosureV3_IndependentStaticInvalidStop_BodyFree_Receipt_20260801.json
+9a6176d0c8b11d4b2669184f0efab7d1e8fdcab9
+a892224a9099a56fdf53b1d40d3f0045156cd6592f3046ccf11238303630b642
+06e5c9a6607aa904323565bd6fa4bb5b511b7b7be386497924ac549fc424eda5
+14673 / 277
+
+Handoff path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_SchemaSemanticClosureV3_IndependentStaticInvalidStop_Handoff_20260801.md
+8845a8c03e57ccd7b0af81149c07595f8f4917bb
+d0862ec436b4c9c7a7a2272393aae71df74e4e1cf01268890bc4fb5745918790
+6745 / 73
+```
+
+Approved public scope remains NEW exact3 plus append-only MODIFY exact2 (this Plan and
+`Cocolon_前提資料/07_latest_snapshot_diff.md`). Private bootstrap/registry bodies and helper bodies
+are not published. mashos-api changed-path count remains exact0.
+
+## Confirmed facts, inference, and Karen's opinion
+
+### Confirmed facts
+
+Both raw artifacts are canonical, but dual static acceptance failed because independent exact1 found
+9 invalid relation applications containing 16 unresolved references. Runtime and production effects
+remain zero.
+
+### Inference
+
+A distinct bootstrap v2 and registry v4 with typed field references and explicit participant paths
+may close this gap, but the current partial PASS evidence does not establish that future result.
+
+### Karen's opinion
+
+The independent disagreement is the safety function of the dual-verdict contract. Registry v3 must
+remain rejected; the next bounded work should redesign relation semantics before any helper body is
+created.
+
+## Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_SCHEMA_SEMANTIC_CLOSURE_V3_INDEPENDENT_STATIC_INVALID_POSTVERIFIED_OBSERVATION_SHA256_20433F4F0622B873C44EE1ACC176B76712D4DBCF15AEB8D5B8865D4ECA3F097C_CURRENT_DESIGN_AUTHORITY_SHA256_3B5C091F09C32154C0C017B7A6DC38467441AF522DE1B56779912DB154883E36_ACTIVATED_EXACT1_CLOSED_CONSUMED_TYPED_DESIGN_BLOCKER_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_HISTORICAL_COCOLON_PREDECESSOR_A489D7C0_TREE_2492B02D_CURRENT_COCOLON_PREWRITE_BASE_7F454C28_TREE_275B24F7_MASHOS_API_315813C7_TREE_A641510E_PRIOR_GATE_B_HELPERS_D86DDE0B_AA2D31EF_IMMUTABLE_UNEDITED_UNREUSED_UNEXECUTED_PRIOR_REJECTED_REGISTRY_A67D89EA_IMMUTABLE_UNEDITED_UNREUSED_UNPUBLISHED_EXTERNAL_BOOTSTRAP_V1_CREATED_EXACT1_RAW_9E7C6C314897A9A8C8A0F4D98601378B996473A9B6B75EA260DFB32D1E080454_BYTES_8434_CANONICAL_VALID_PRIVATE_UNPUBLISHED_REGISTRY_V3_CREATED_EXACT1_RAW_D6C4307EF4EC15A73D7B4F4B9F3D893500919C4C26CB0E6B13D7B382841A42F6_BYTES_95881_SCHEMA_ROW_EXACT40_FIELD_RESOLUTION_EXACT356_RULE_EXACT103_ENUM_EXACT16_RELATION_EXACT37_STATE_MATRIX_EXACT3_HASH_BINDING_EXACT7_CREDIT_EDGE_EXACT36_CANONICAL_VALID_BUT_SEMANTIC_CLOSURE_INVALID_PRIVATE_UNPUBLISHED_IMMUTABLE_NO_EDIT_REUSE_OR_PUBLICATION_OWNER_STATIC_VERIFICATION_EXACT1_VALID_INDEPENDENT_STATIC_VERIFICATION_EXACT1_INVALID_BLOCKING_MANIFEST_SHA256_47BE23171E9A8DEB444441A1D785195B53A39826D1F3A72F442D3DC939B9F81C_EXACT4_RELATION_PARAMETER_TYPED_FIELD_REFERENCE_UNIVERSE_NOT_CLOSED_RELATION_PARTICIPANT_SCHEMA_PATH_BINDING_NOT_CLOSED_RELATION_APPLICATION_TARGET_SCHEMA_MISMATCH_EXACT9_RELATION_FIELD_REFERENCE_UNRESOLVED_EXACT16_REPLACEMENT_MATERIALIZER_V2_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_REPLACEMENT_INDEPENDENT_VERIFIER_V2_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_GITHUB_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_EXTERNAL_BOOTSTRAP_V2_AND_PREIMAGE_SCHEMA_REGISTRY_V4_RELATION_SEMANTIC_CLOSURE_DESIGN_ONLY_AUTHORITY_EXTERNAL_BOOTSTRAP_V2_CREATION_EXACT1_REGISTRY_V4_PRIVATE_CANDIDATE_CREATION_EXACT1_TYPED_FIELD_REFERENCE_OBJECT_SCHEMA_EXACT1_RELATION_PARTICIPANT_SCHEMA_AND_FIELD_PATH_BINDING_EXACT1_RELATION_LITERAL_PARAMETER_EXPLICIT_TAGGING_EXACT1_EVERY_RELATION_PARAMETER_RESOLVES_TO_DECLARED_FIELD_OR_EXPLICIT_LITERAL_EXACT1_EVERY_RELATION_APPLICATION_TARGET_SCHEMA_COMPATIBLE_EXACT1_APPLICATION_MISMATCH_EXACT0_UNRESOLVED_FIELD_REFERENCE_EXACT0_ALL_NONRELATION_SCHEMA_RULE_ENUM_STATE_HASH_CREDIT_AND_CAUSAL_CLOSURE_REDERIVED_EXACT1_OWNER_STATIC_CONTRACT_VERIFICATION_EXACT1_VALID_AND_INDEPENDENT_STATIC_CONTRACT_VERIFICATION_EXACT1_VALID_OR_TYPED_DESIGN_BLOCKER_STOP_PRIOR_BOOTSTRAP_V1_REGISTRY_V3_AND_HELPERS_EDIT_REUSE_EXECUTION_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_REPLACEMENT_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_GITHUB_PRODUCTION_SOURCE_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_RELATION_SEMANTIC_CLOSURE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_HELPER_CREATION_GATE_B_EXECUTION_OR_TARGET_AUTHORITY_ISSUANCE_NO_AUTOMATIC_PROGRESSION
+```
+
+```text
+successor token SHA-256:
+12c03f3bd8a88050ac72720f6bdd39ffc406e8202beefe1152abbdffbf5faba4
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+### Entry-prefix preservation
+
+```text
+Plan entry prefix blob / raw / bytes / lines:
+faad0751da58885885d8f6f1d8fcb69b07312b74
+1e6209da6e4b1e34f7360dc4c7ca6879b80d0176881db9c0dde64cd2038944af
+493497 / 13557
+```

@@ -1,0 +1,277 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.schema_semantic_closure_v3_independent_static_invalid_stop_receipt.v1",
+  "receipt_id": "nls_v3_step11_cycle001_recovery_epoch004_gate_b_schema_semantic_closure_v3_independent_static_invalid_stop",
+  "observed_at_date": "2026-08-01",
+  "body_free": true,
+  "automatic_progression": false,
+  "authority": {
+    "token_sha256": "3b5c091f09c32154c0c017b7a6dc38467441af522de1b56779912db154883e36",
+    "activation_count": 1,
+    "consumption_count": 1,
+    "state": "CLOSED_CONSUMED_TYPED_DESIGN_BLOCKER_STOP"
+  },
+  "repository_identity": {
+    "historical_semantic_stop_predecessor": {
+      "cocolon_commit_sha1": "a489d7c0c6cc18eea8b63661cdfd1c982ac3716a",
+      "cocolon_tree_sha1": "2492b02df5aa99356372b27ffdf22f0d19c63371"
+    },
+    "current_design_prewrite_base": {
+      "cocolon_commit_sha1": "7f454c28be5f1fe6a4e1e92469f7a956212e7aac",
+      "cocolon_tree_sha1": "275b24f77d7cd78a45ec3aa6bcdb1a6a37f526ce"
+    },
+    "mashos_api": {
+      "commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+      "tree_sha1": "a641510e107d52bb910073f36604c85bd57af150"
+    }
+  },
+  "external_bootstrap": {
+    "creation_count": 1,
+    "raw_sha256": "9e7c6c314897a9a8c8a0f4d98601378b996473a9b6b75ea260dfb32d1e080454",
+    "byte_count": 8434,
+    "top_level_exact_key_count": 9,
+    "canonical_compact_sorted_utf8_no_lf": true,
+    "nonrecursive": true,
+    "body_publication_count": 0
+  },
+  "registry_v3_candidate": {
+    "creation_count": 1,
+    "raw_sha256": "d6c4307ef4ec15a73d7b4f4b9f3d893500919c4c26cb0e6b13d7b382841a42f6",
+    "byte_count": 95881,
+    "canonical_compact_sorted_utf8_no_lf": true,
+    "schema_row_count": 40,
+    "field_resolution_count": 356,
+    "field_rule_count": 103,
+    "closed_enum_count": 16,
+    "relation_rule_count": 37,
+    "state_matrix_count": 3,
+    "direct_hash_binding_count": 7,
+    "credit_edge_count": 36,
+    "prior_rejected_candidate_raw_sha256": "a67d89ea9c82646ed4a835761de274d1c76127e62187f4c0120d362c7bcd525c",
+    "distinct_from_prior_rejected_candidate": true,
+    "semantic_closure_verdict": "INVALID",
+    "publicable": false,
+    "body_publication_count": 0,
+    "post_verdict_edit_count": 0,
+    "post_verdict_reuse_count": 0,
+    "post_verdict_reverification_count": 0
+  },
+  "static_contract_verification": {
+    "owner": {
+      "accepted_verdict_count": 1,
+      "verdict": "VALID",
+      "pre_verdict_harness_self_check_error_count": 1,
+      "pre_verdict_harness_output_accepted_count": 0,
+      "candidate_byte_change_count": 0
+    },
+    "independent": {
+      "count": 1,
+      "verdict": "INVALID",
+      "owner_intermediate_output_used_as_oracle": false,
+      "candidate_byte_change_count": 0
+    },
+    "blocking_manifest": {
+      "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.schema_semantic_closure_v3.relation_semantic_blocker_manifest.v1",
+      "registry_v3_raw_sha256": "d6c4307ef4ec15a73d7b4f4b9f3d893500919c4c26cb0e6b13d7b382841a42f6",
+      "owner_verification_count": 1,
+      "owner_verdict": "VALID",
+      "independent_verification_count": 1,
+      "independent_verdict": "INVALID",
+      "blocking_issue_count": 4,
+      "blocking_issue_keys": [
+        "RELATION_PARAMETER_TYPED_FIELD_REFERENCE_UNIVERSE_NOT_CLOSED",
+        "RELATION_PARTICIPANT_SCHEMA_PATH_BINDING_NOT_CLOSED",
+        "RELATION_APPLICATION_TARGET_SCHEMA_MISMATCH_EXACT9",
+        "RELATION_FIELD_REFERENCE_UNRESOLVED_EXACT16"
+      ],
+      "application_mismatch_count": 9,
+      "unresolved_field_reference_count": 16,
+      "applications": [
+        {
+          "relation_id": "rel.authority.causal",
+          "schema_id": "controller_contract",
+          "unresolved_references": ["reservation_ref", "state"]
+        },
+        {
+          "relation_id": "rel.controller.postcommit",
+          "schema_id": "controller_postcommit_envelope",
+          "unresolved_references": ["full_length_verified", "file_fsync_state", "directory_fsync_state", "write_attempt_event_ref", "write_completion_event_ref"]
+        },
+        {
+          "relation_id": "rel.counter.event_chain",
+          "schema_id": "counter_event",
+          "unresolved_references": ["event_chain"]
+        },
+        {
+          "relation_id": "rel.verdict.pair",
+          "schema_id": "final_readiness_preimage",
+          "unresolved_references": ["owner_identity_pair", "independent_identity_pair"]
+        },
+        {
+          "relation_id": "rel.verdict.pair",
+          "schema_id": "independent_receipt",
+          "unresolved_references": ["independent_identity_pair", "independent_verdict"]
+        },
+        {
+          "relation_id": "rel.counter.controller",
+          "schema_id": "role_counter_manifest",
+          "unresolved_references": ["CONTROLLER"]
+        },
+        {
+          "relation_id": "rel.counter.independent",
+          "schema_id": "role_counter_manifest",
+          "unresolved_references": ["INDEPENDENT_VERIFIER"]
+        },
+        {
+          "relation_id": "rel.counter.materializer",
+          "schema_id": "role_counter_manifest",
+          "unresolved_references": ["MATERIALIZER"]
+        },
+        {
+          "relation_id": "rel.counter.event_chain",
+          "schema_id": "counter_ledger",
+          "unresolved_references": ["ROW_ROLE"]
+        }
+      ],
+      "manifest_sha256": "47be23171e9a8deb444441a1d785195b53a39826d1f3a72f442d3dc939b9f81c"
+    }
+  },
+  "helper_boundary": {
+    "prior_materializer_raw_sha256": "d86dde0ba36f01349934197a711b7b618f3e8a163c7b73b34d972207df871db3",
+    "prior_independent_verifier_raw_sha256": "aa2d31efc3df7955bda0005ba09e82f39caf6c196b99dcbcd0903d10a591ec8b",
+    "prior_helper_edit_count": 0,
+    "prior_helper_reuse_count": 0,
+    "prior_helper_execution_count": 0,
+    "replacement_materializer_creation_count": 0,
+    "replacement_materializer_edit_count": 0,
+    "replacement_materializer_reuse_count": 0,
+    "replacement_materializer_execution_count": 0,
+    "replacement_independent_verifier_creation_count": 0,
+    "replacement_independent_verifier_edit_count": 0,
+    "replacement_independent_verifier_reuse_count": 0,
+    "replacement_independent_verifier_execution_count": 0
+  },
+  "execution_cardinalities": {
+    "acquisition_count": 0,
+    "network_count": 0,
+    "materialization_count": 0,
+    "probe_count": 0,
+    "role_import_count": 0,
+    "pytest_count": 0,
+    "target_authority_issuance_count": 0,
+    "target_authority_activation_count": 0,
+    "target_admission_count": 0,
+    "target_authority_consumption_count": 0,
+    "os_child_count": 0,
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_call_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0
+  },
+  "repository_scope": {
+    "cocolon_new_document_count": 3,
+    "cocolon_modified_document_count": 2,
+    "cocolon_production_source_change_count": 0,
+    "published_red_test_change_count": 0,
+    "existing_d1_change_count": 0,
+    "mashos_api_change_count": 0
+  },
+  "historical_state": {
+    "full_r1_result": "UNKNOWN_PRESERVED",
+    "historical_result_reparse_count": 0,
+    "reclassification_count": 0,
+    "credit_change_count": 0
+  },
+  "terminal": {
+    "state": "RUNTIME_NOT_READY_SCHEMA_SEMANTIC_CLOSURE_V3_INDEPENDENT_STATIC_INVALID_DESIGN_BLOCKER_STOP",
+    "runtime_ready_current_session": false,
+    "target_authority_issued": false
+  },
+  "stop_observation": {
+    "preimage_rule": "SHA256_UTF8_SORTED_COMPACT_JSON_NO_LF_OF_preimage",
+    "preimage": {
+      "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.schema_semantic_closure_v3_independent_static_invalid_observation.v1",
+      "authority_sha256": "3b5c091f09c32154c0c017b7a6dc38467441af522de1b56779912db154883e36",
+      "historical_predecessor": {
+        "cocolon_commit_sha1": "a489d7c0c6cc18eea8b63661cdfd1c982ac3716a",
+        "cocolon_tree_sha1": "2492b02df5aa99356372b27ffdf22f0d19c63371"
+      },
+      "current_design_prewrite_base": {
+        "cocolon_commit_sha1": "7f454c28be5f1fe6a4e1e92469f7a956212e7aac",
+        "cocolon_tree_sha1": "275b24f77d7cd78a45ec3aa6bcdb1a6a37f526ce"
+      },
+      "mashos_api": {
+        "commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+        "tree_sha1": "a641510e107d52bb910073f36604c85bd57af150"
+      },
+      "external_bootstrap": {
+        "creation_count": 1,
+        "raw_sha256": "9e7c6c314897a9a8c8a0f4d98601378b996473a9b6b75ea260dfb32d1e080454",
+        "byte_count": 8434,
+        "canonical_compact_utf8_no_lf": true,
+        "body_publication_count": 0
+      },
+      "registry_v3": {
+        "creation_count": 1,
+        "raw_sha256": "d6c4307ef4ec15a73d7b4f4b9f3d893500919c4c26cb0e6b13d7b382841a42f6",
+        "byte_count": 95881,
+        "schema_row_count": 40,
+        "field_resolution_count": 356,
+        "field_rule_count": 103,
+        "enum_count": 16,
+        "relation_count": 37,
+        "state_matrix_count": 3,
+        "hash_binding_count": 7,
+        "credit_edge_count": 36,
+        "canonical_compact_utf8_no_lf": true,
+        "publicable": false,
+        "body_publication_count": 0
+      },
+      "static_contract_verification": {
+        "owner_count": 1,
+        "owner_verdict": "VALID",
+        "independent_count": 1,
+        "independent_verdict": "INVALID",
+        "blocking_manifest_sha256": "47be23171e9a8deb444441a1d785195b53a39826d1f3a72f442d3dc939b9f81c",
+        "application_mismatch_count": 9,
+        "unresolved_field_reference_count": 16
+      },
+      "replacement_helper_effects": {
+        "materializer_creation_count": 0,
+        "materializer_execution_count": 0,
+        "independent_verifier_creation_count": 0,
+        "independent_verifier_execution_count": 0
+      },
+      "runtime_effects": {
+        "acquisition_count": 0,
+        "network_count": 0,
+        "materialization_count": 0,
+        "probe_count": 0,
+        "role_import_count": 0,
+        "pytest_count": 0,
+        "target_execution_count": 0
+      },
+      "repository_effects": {
+        "cocolon_production_source_change_count": 0,
+        "published_red_test_change_count": 0,
+        "existing_d1_change_count": 0,
+        "mashos_api_change_count": 0
+      },
+      "terminal": "RUNTIME_NOT_READY_SCHEMA_SEMANTIC_CLOSURE_V3_INDEPENDENT_STATIC_INVALID_DESIGN_BLOCKER_STOP",
+      "full_r1_result": "UNKNOWN_PRESERVED",
+      "automatic_progression": false
+    },
+    "observation_sha256": "20433f4f0622b873c44ee1acc176b76712d4dbcf15aeb8d5b8865d4eca3f097c"
+  },
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_SCHEMA_SEMANTIC_CLOSURE_V3_INDEPENDENT_STATIC_INVALID_POSTVERIFIED_OBSERVATION_SHA256_20433F4F0622B873C44EE1ACC176B76712D4DBCF15AEB8D5B8865D4ECA3F097C_CURRENT_DESIGN_AUTHORITY_SHA256_3B5C091F09C32154C0C017B7A6DC38467441AF522DE1B56779912DB154883E36_ACTIVATED_EXACT1_CLOSED_CONSUMED_TYPED_DESIGN_BLOCKER_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_HISTORICAL_COCOLON_PREDECESSOR_A489D7C0_TREE_2492B02D_CURRENT_COCOLON_PREWRITE_BASE_7F454C28_TREE_275B24F7_MASHOS_API_315813C7_TREE_A641510E_PRIOR_GATE_B_HELPERS_D86DDE0B_AA2D31EF_IMMUTABLE_UNEDITED_UNREUSED_UNEXECUTED_PRIOR_REJECTED_REGISTRY_A67D89EA_IMMUTABLE_UNEDITED_UNREUSED_UNPUBLISHED_EXTERNAL_BOOTSTRAP_V1_CREATED_EXACT1_RAW_9E7C6C314897A9A8C8A0F4D98601378B996473A9B6B75EA260DFB32D1E080454_BYTES_8434_CANONICAL_VALID_PRIVATE_UNPUBLISHED_REGISTRY_V3_CREATED_EXACT1_RAW_D6C4307EF4EC15A73D7B4F4B9F3D893500919C4C26CB0E6B13D7B382841A42F6_BYTES_95881_SCHEMA_ROW_EXACT40_FIELD_RESOLUTION_EXACT356_RULE_EXACT103_ENUM_EXACT16_RELATION_EXACT37_STATE_MATRIX_EXACT3_HASH_BINDING_EXACT7_CREDIT_EDGE_EXACT36_CANONICAL_VALID_BUT_SEMANTIC_CLOSURE_INVALID_PRIVATE_UNPUBLISHED_IMMUTABLE_NO_EDIT_REUSE_OR_PUBLICATION_OWNER_STATIC_VERIFICATION_EXACT1_VALID_INDEPENDENT_STATIC_VERIFICATION_EXACT1_INVALID_BLOCKING_MANIFEST_SHA256_47BE23171E9A8DEB444441A1D785195B53A39826D1F3A72F442D3DC939B9F81C_EXACT4_RELATION_PARAMETER_TYPED_FIELD_REFERENCE_UNIVERSE_NOT_CLOSED_RELATION_PARTICIPANT_SCHEMA_PATH_BINDING_NOT_CLOSED_RELATION_APPLICATION_TARGET_SCHEMA_MISMATCH_EXACT9_RELATION_FIELD_REFERENCE_UNRESOLVED_EXACT16_REPLACEMENT_MATERIALIZER_V2_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_REPLACEMENT_INDEPENDENT_VERIFIER_V2_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_GITHUB_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_EXTERNAL_BOOTSTRAP_V2_AND_PREIMAGE_SCHEMA_REGISTRY_V4_RELATION_SEMANTIC_CLOSURE_DESIGN_ONLY_AUTHORITY_EXTERNAL_BOOTSTRAP_V2_CREATION_EXACT1_REGISTRY_V4_PRIVATE_CANDIDATE_CREATION_EXACT1_TYPED_FIELD_REFERENCE_OBJECT_SCHEMA_EXACT1_RELATION_PARTICIPANT_SCHEMA_AND_FIELD_PATH_BINDING_EXACT1_RELATION_LITERAL_PARAMETER_EXPLICIT_TAGGING_EXACT1_EVERY_RELATION_PARAMETER_RESOLVES_TO_DECLARED_FIELD_OR_EXPLICIT_LITERAL_EXACT1_EVERY_RELATION_APPLICATION_TARGET_SCHEMA_COMPATIBLE_EXACT1_APPLICATION_MISMATCH_EXACT0_UNRESOLVED_FIELD_REFERENCE_EXACT0_ALL_NONRELATION_SCHEMA_RULE_ENUM_STATE_HASH_CREDIT_AND_CAUSAL_CLOSURE_REDERIVED_EXACT1_OWNER_STATIC_CONTRACT_VERIFICATION_EXACT1_VALID_AND_INDEPENDENT_STATIC_CONTRACT_VERIFICATION_EXACT1_VALID_OR_TYPED_DESIGN_BLOCKER_STOP_PRIOR_BOOTSTRAP_V1_REGISTRY_V3_AND_HELPERS_EDIT_REUSE_EXECUTION_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_REPLACEMENT_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_GITHUB_PRODUCTION_SOURCE_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_RELATION_SEMANTIC_CLOSURE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_HELPER_CREATION_GATE_B_EXECUTION_OR_TARGET_AUTHORITY_ISSUANCE_NO_AUTOMATIC_PROGRESSION",
+    "token_sha256": "12c03f3bd8a88050ac72720f6bdd39ffc406e8202beefe1152abbdffbf5faba4",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_SORTED_COMPACT_JSON_NO_LF_AFTER_DELETING_receipt_logical_sha256",
+  "receipt_logical_sha256": "06e5c9a6607aa904323565bd6fa4bb5b511b7b7be386497924ac549fc424eda5"
+}
