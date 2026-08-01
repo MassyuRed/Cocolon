@@ -1,0 +1,500 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.launcher_availability_recovery_route_decision_contract_v1.dual_static_valid_environment_provider_blocker_stop.receipt.v1",
+  "receipt_id": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP_20260802",
+  "observed_at_date": "2026-08-02",
+  "body_free": true,
+  "observation": {
+    "authority": {
+      "token_sha256": "e6676ce3c7e4abea698d98a1218a4cb7db542e0b97ec71ceeca25082c7cbefbe",
+      "token_recomputation_match": true,
+      "activation_count": 1,
+      "consumption_count": 1,
+      "state": "CLOSED_CONSUMED_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP"
+    },
+    "repository_identity": {
+      "authority_declared_cocolon_prewrite_base": {
+        "commit_sha1": "1a05a9371b1a0475a9e8a840e60c41d564900a38",
+        "tree_sha1": "565386975bc65e2f767aac7566a42e694e3d2c71"
+      },
+      "source_verified_cocolon_preobservation_predecessor": {
+        "commit_sha1": "b99707f6f058e38793d142d13df493b67b506cd7",
+        "tree_sha1": "811b3a3f393d3f813d99c2b2858be8ddb0a57572"
+      },
+      "contract_public_write_predecessor": {
+        "commit_sha1": "56bd42f7d55f4ff12f143778651186038dddcca1",
+        "tree_sha1": "d6f7d4c8df6859bc3a7a58d9aae85b0fc87c8350"
+      },
+      "classifier_prewrite_base": {
+        "commit_sha1": "4c0a984c3f82f7f4d7ee28e1ace82949ff9906ba",
+        "tree_sha1": "6faac6eb2287bc323a108db17fa41904b29e30a8"
+      },
+      "current_route_decision_prewrite_base": {
+        "commit_sha1": "01dd0f3eaf2b43323587c9043e7176f66f9f97a0",
+        "tree_sha1": "bba6a3750259d7c60ff083856a8917e74f921718"
+      },
+      "mashos_api": {
+        "commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+        "tree_sha1": "a641510e107d52bb910073f36604c85bd57af150"
+      }
+    },
+    "source_classifier_receipt": {
+      "consumption_count": 1,
+      "blob_sha1": "df70977bd9500740e7c4dd7f244928a991f636e8",
+      "raw_sha256": "830108b07264f7e3b6656e9b2e8dc89affe6b47051cd7d3433911c6868abd2c9",
+      "logical_sha256": "39b28245f7cd920449305eb7843ef1359277046c657d1bd161e8ab40c90a00d4",
+      "observation_sha256": "9c7e0601751d81387720e963bbb07b0cd69cfaa17946722ec7ab82530957b606",
+      "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_CLASSIFIER_CONTRACT_V1_DUAL_MATCH_INVALID_NO_ACCEPTED_IDENTITY_STOP",
+      "typed_verdict": "INVALID",
+      "typed_reason": "NO_ACCEPTED_IDENTITY",
+      "domain_free_projection_sha256": "741f9aa897d7745720e4e4b67ee879b3b2a344292548cac20a7e2e891956c716",
+      "blocking_manifest_sha256": "a930477a59ba72b9c50e97702a0d7a70b5a41198d25d9cc52d4e10142cdf0eea",
+      "path_entry_total": 13,
+      "candidate_locator_total": 13,
+      "candidate_rejected_total": 13,
+      "accepted_alias_total": 0,
+      "selected_identity_total": 0,
+      "private_body_read_count": 0,
+      "reparse_count": 0,
+      "reclassification_count": 0,
+      "credit_count": 0
+    },
+    "source_launcher_trust_contract": {
+      "receipt_consumption_count": 0,
+      "contract_id": "COCOLON_NLS_V3_STEP11_GATE_B_STATIC_VERIFIER_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_V1",
+      "contract_raw_sha256": "a36a2c6c12a81d08f050094e7ff05c978213bdecf7f418750ffb4d842fae0a4d",
+      "contract_canonical_byte_count": 17887,
+      "immutable": true,
+      "mutation_count": 0,
+      "weakening_count": 0
+    },
+    "route_decision_contract_candidate": {
+      "contract_id": "COCOLON_NLS_V3_STEP11_GATE_B_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1",
+      "contract_version": 1,
+      "body_free": true,
+      "publicable": true,
+      "purpose": "SELECT_EXACTLY_ONE_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_FROM_CURRENT_PUBLIC_EVIDENCE_WITHOUT_RUNTIME_ACTIVITY",
+      "canonicalization": {
+        "object_encoding": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+        "string_encoding": "UTF8",
+        "string_order": "UNSIGNED_UTF8_BYTEWISE",
+        "integer_encoding": "BASE10_NO_LEADING_ZERO",
+        "boolean_encoding": "JSON_TRUE_OR_FALSE",
+        "null_encoding": "JSON_NULL",
+        "enum_order_is_normative": true
+      },
+      "decision_scope": {
+        "scope_id": "CURRENT_PUBLIC_CLASSIFIER_RECEIPT_AND_LAUNCHER_TRUST_CONTRACT_V1_ONLY",
+        "classifier_receipt_consumption_count": 1,
+        "launcher_trust_contract_raw_sha256_binding_count": 1,
+        "current_public_evidence_only": true,
+        "private_path_or_locator_input_allowed": false,
+        "host_wide_capability_claim_allowed": false,
+        "future_provider_capability_claim_allowed": false,
+        "unbounded_filesystem_search_allowed": false,
+        "runtime_probe_allowed": false
+      },
+      "route_enum": {
+        "enum_name": "LauncherAvailabilityRecoveryRouteV1",
+        "closed": true,
+        "member_count": 3,
+        "members_in_precedence_order": [
+          "BOUNDED_DECLARED_SCOPE_SUCCESSOR",
+          "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION",
+          "ENVIRONMENT_PROVIDER_BLOCKER_STOP"
+        ]
+      },
+      "route_prerequisite_contracts": {
+        "BOUNDED_DECLARED_SCOPE_SUCCESSOR": {
+          "required_public_evidence_count": 1,
+          "required_evidence_type": "AUTHORITY_PREBOUND_NONRECURSIVE_LOCATOR_CONTRACT_RECEIPT",
+          "required_properties": [
+            "LOCATOR_SET_BOUND_BEFORE_ANY_READ",
+            "FINITE_LOCATOR_COUNT_DECLARED",
+            "NO_RECURSIVE_OR_UNBOUNDED_FILESYSTEM_SEARCH",
+            "CONTRACT_V1_EXCLUDED_ANCESTRY_AND_TRUST_RULES_PRESERVED",
+            "PRIVATE_LOCATOR_VALUE_PUBLICATION_FORBIDDEN",
+            "BODY_FREE_RESULT_RECEIPT_AND_STOP_SCHEMA_FIXED"
+          ],
+          "missing_or_invalid_action": "ROUTE_INELIGIBLE"
+        },
+        "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION": {
+          "required_public_evidence_count": 1,
+          "required_evidence_type": "FROZEN_NODE_LAUNCHER_SOURCE_LOCK_ARTIFACT_AND_TRUST_CONTRACT_RECEIPT",
+          "required_properties": [
+            "SOURCE_PROVIDER_AND_LOGICAL_SOURCE_ID_FROZEN",
+            "EXACT_NODE_VERSION_PLATFORM_AND_ARCHITECTURE_FROZEN",
+            "ARTIFACT_FORMAT_AND_EXPECTED_RAW_SHA256_FROZEN",
+            "CHECKSUM_OR_SIGNATURE_PROVENANCE_FROZEN",
+            "TRUSTED_OWNER_MODE_SYMLINK_AND_EXCLUDED_ANCESTRY_RULES_PRESERVED",
+            "BODY_FREE_ACQUISITION_RESULT_RECEIPT_AND_STOP_SCHEMA_FIXED",
+            "NETWORK_AND_ARTIFACT_ACQUISITION_REQUIRE_LATER_SEPARATE_AUTHORITY"
+          ],
+          "missing_or_invalid_action": "ROUTE_INELIGIBLE"
+        },
+        "ENVIRONMENT_PROVIDER_BLOCKER_STOP": {
+          "required_public_evidence_count": 0,
+          "selection_condition": "BOTH_PRIOR_ROUTES_INELIGIBLE_AT_CURRENT_DECLARED_SCOPE",
+          "semantic_limit": "NO_CURRENT_DESIGN_VALID_CAPABILITY_BINDING_IN_THE_CONSUMED_PUBLIC_EVIDENCE_SET",
+          "does_not_mean": [
+            "GLOBAL_NODE_ABSENCE",
+            "ENVIRONMENT_OR_PROVIDER_PERMANENT_INCAPABILITY",
+            "BOUNDED_SUCCESSOR_FUTURE_IMPOSSIBILITY",
+            "CONTROLLED_ACQUISITION_FUTURE_IMPOSSIBILITY"
+          ],
+          "automatic_progression": false
+        }
+      },
+      "route_selection_precedence": {
+        "rule_count": 3,
+        "rules": [
+          {
+            "rank": 1,
+            "route": "BOUNDED_DECLARED_SCOPE_SUCCESSOR",
+            "predicate": "CURRENT_PUBLIC_EVIDENCE_CONTAINS_EXACT1_VALID_AUTHORITY_PREBOUND_NONRECURSIVE_LOCATOR_CONTRACT_RECEIPT"
+          },
+          {
+            "rank": 2,
+            "route": "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION",
+            "predicate": "RANK1_FALSE_AND_CURRENT_PUBLIC_EVIDENCE_CONTAINS_EXACT1_VALID_FROZEN_NODE_LAUNCHER_SOURCE_LOCK_ARTIFACT_AND_TRUST_CONTRACT_RECEIPT"
+          },
+          {
+            "rank": 3,
+            "route": "ENVIRONMENT_PROVIDER_BLOCKER_STOP",
+            "predicate": "RANK1_FALSE_AND_RANK2_FALSE"
+          }
+        ],
+        "selection_rule": "FIRST_TRUE_PREDICATE_ONLY",
+        "selected_route_cardinality": 1,
+        "unknown_malformed_or_extra_route_action": "TYPED_DESIGN_INVALID_STOP",
+        "total": true,
+        "exclusive": true
+      },
+      "current_evidence_evaluation": {
+        "BOUNDED_DECLARED_SCOPE_SUCCESSOR": {
+          "eligible": false,
+          "matching_public_receipt_count": 0,
+          "reason": "AUTHORITY_PREBOUND_NONRECURSIVE_LOCATOR_CONTRACT_RECEIPT_ABSENT"
+        },
+        "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION": {
+          "eligible": false,
+          "matching_public_receipt_count": 0,
+          "reason": "FROZEN_NODE_LAUNCHER_SOURCE_LOCK_ARTIFACT_AND_TRUST_CONTRACT_RECEIPT_ABSENT"
+        },
+        "ENVIRONMENT_PROVIDER_BLOCKER_STOP": {
+          "eligible": true,
+          "reason": "BOTH_CAPABILITY_BINDING_ROUTES_INELIGIBLE_AT_CURRENT_DECLARED_SCOPE"
+        }
+      },
+      "selected_route": {
+        "route": "ENVIRONMENT_PROVIDER_BLOCKER_STOP",
+        "selected_count": 1,
+        "reason": "NO_CURRENT_DESIGN_VALID_CAPABILITY_BINDING_IN_THE_CONSUMED_PUBLIC_EVIDENCE_SET",
+        "global_node_absence_claim": false,
+        "environment_or_provider_permanent_incapability_claim": false,
+        "bounded_successor_future_impossibility_claim": false,
+        "controlled_acquisition_future_impossibility_claim": false
+      },
+      "observer_contract": {
+        "domain_free_projection_schema_version": "COCOLON_NLS_V3_STEP11_LAUNCHER_AVAILABILITY_ROUTE_DECISION_DOMAIN_FREE_PROJECTION_V1",
+        "domain_free_projection_exact_keys": [
+          "schema_version",
+          "route_decision_contract_raw_sha256",
+          "source_classifier_observation_sha256",
+          "source_classifier_projection_sha256",
+          "source_blocking_manifest_sha256",
+          "source_launcher_trust_contract_raw_sha256",
+          "decision_scope",
+          "route_order",
+          "route_eligibility",
+          "route_reason",
+          "selected_route",
+          "selected_route_reason",
+          "global_node_absence_claim",
+          "environment_or_provider_permanent_incapability_claim",
+          "bounded_successor_future_impossibility_claim",
+          "controlled_acquisition_future_impossibility_claim",
+          "launcher_trust_contract_mutation_count",
+          "forbidden_effect_occurrence_count",
+          "check_vector",
+          "verdict",
+          "invalid_check_count",
+          "automatic_progression"
+        ],
+        "projection_encoding": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+        "owner_domain": "COCOLON_NLS_V3_STEP11_LAUNCHER_AVAILABILITY_ROUTE_DECISION_OWNER_V1",
+        "independent_domain": "COCOLON_NLS_V3_STEP11_LAUNCHER_AVAILABILITY_ROUTE_DECISION_INDEPENDENT_V1",
+        "evidence_preimage": "DOMAIN_UTF8_THEN_NUL_THEN_DOMAIN_FREE_PROJECTION_CANONICAL_BYTES",
+        "digest": "SHA256_LOWERCASE_HEX64",
+        "check_vector_contract": {
+          "type": "CLOSED_EXACT_KEY_BOOLEAN_OBJECT",
+          "exact_key_count": 12,
+          "exact_keys": [
+            "source_receipt_binding_exact",
+            "launcher_trust_contract_immutable",
+            "route_enum_closed_exact3",
+            "route_prerequisites_total",
+            "selection_precedence_total",
+            "selection_precedence_exclusive",
+            "selected_route_cardinality_exact1",
+            "selected_route_semantic_limit_enforced",
+            "overclaim_guard_all_false",
+            "terminal_mapping_total_exclusive",
+            "derived_state_reuse_exact0",
+            "forbidden_effects_exact0"
+          ],
+          "value_type": "JSON_BOOLEAN",
+          "true_meaning": "NAMED_PREDICATE_VALID",
+          "invalid_check_count_rule": "COUNT_FALSE_VALUES_IN_CHECK_VECTOR_OBJECT",
+          "verdict_rule": "VALID_IFF_INVALID_CHECK_COUNT_EQUALS_ZERO_ELSE_INVALID",
+          "missing_extra_or_nonboolean_action": "TYPED_DESIGN_INVALID_STOP"
+        },
+        "projection_comparison": "EXACT_DOMAIN_FREE_PROJECTION_SHA256_EQUALITY",
+        "derived_state_reuse_allowed": false
+      },
+      "terminal_mapping": {
+        "branch_count": 3,
+        "branches": [
+          {
+            "predicate": "OWNER_OR_INDEPENDENT_STATIC_DESIGN_VERDICT_INVALID",
+            "terminal": "RUNTIME_NOT_READY_LAUNCHER_AVAILABILITY_ROUTE_DECISION_CONTRACT_V1_TYPED_DESIGN_INVALID_STOP"
+          },
+          {
+            "predicate": "BOTH_VALID_AND_DOMAIN_FREE_PROJECTIONS_DIVERGE",
+            "terminal": "RUNTIME_NOT_READY_LAUNCHER_AVAILABILITY_ROUTE_DECISION_CONTRACT_V1_STATIC_DESIGN_DIVERGENCE_STOP"
+          },
+          {
+            "predicate": "BOTH_VALID_AND_DOMAIN_FREE_PROJECTIONS_MATCH",
+            "terminal_selection_rule": "LOOKUP_EXACT_SELECTED_ROUTE_ENUM_MEMBER_IN_SELECTED_ROUTE_TERMINALS"
+          }
+        ],
+        "selected_route_terminals": {
+          "BOUNDED_DECLARED_SCOPE_SUCCESSOR": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_BOUNDED_DECLARED_SCOPE_SUCCESSOR_STOP",
+          "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION_STOP",
+          "ENVIRONMENT_PROVIDER_BLOCKER_STOP": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP"
+        },
+        "selected_route_terminal_key_count": 3,
+        "missing_extra_or_nonenum_selected_route_action": "TYPED_DESIGN_INVALID_STOP",
+        "total": true,
+        "exclusive": true,
+        "automatic_progression": false
+      },
+      "forbidden_effects": [
+        "PATH_SNAPSHOT_REREAD",
+        "CLASSIFIER_REPARSE_OR_RECLASSIFICATION",
+        "RETRY",
+        "UNBOUNDED_FILESYSTEM_SEARCH",
+        "NODE_ACQUISITION_OR_EXECUTION",
+        "NETWORK_OR_STAGING_OR_MATERIALIZATION",
+        "VERSION_PROBE_OR_ENGINE_EXECUTION",
+        "VERIFIER_OR_HELPER_READ_OR_EXECUTION",
+        "GATE_B_OR_RUNTIME_OR_PYTEST",
+        "TARGET_AUTHORITY_OR_TARGET_EXECUTION",
+        "COCOLON_PRODUCTION_SOURCE_OR_PUBLISHED_RED_OR_EXISTING_D1_CHANGE",
+        "MASHOS_API_CHANGE"
+      ],
+      "forbidden_effect_type_count": 12
+    },
+    "route_decision_contract_identity": {
+      "canonicalization": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+      "json_pointer": "/observation/route_decision_contract_candidate",
+      "route_decision_contract_raw_sha256": "7b2a06a25c49591a8e2226b6d15abf69e09fa321fbff8e5759faaa69f6d3939e",
+      "route_decision_contract_canonical_byte_count": 8298
+    },
+    "owner_static_design_verification": {
+      "execution_count": 1,
+      "state_origin": "FRESH_OWNER_STATIC_DESIGN_STATE",
+      "shared_derived_state_reuse_count": 0,
+      "domain_free_projection": {
+        "schema_version": "COCOLON_NLS_V3_STEP11_LAUNCHER_AVAILABILITY_ROUTE_DECISION_DOMAIN_FREE_PROJECTION_V1",
+        "route_decision_contract_raw_sha256": "7b2a06a25c49591a8e2226b6d15abf69e09fa321fbff8e5759faaa69f6d3939e",
+        "source_classifier_observation_sha256": "9c7e0601751d81387720e963bbb07b0cd69cfaa17946722ec7ab82530957b606",
+        "source_classifier_projection_sha256": "741f9aa897d7745720e4e4b67ee879b3b2a344292548cac20a7e2e891956c716",
+        "source_blocking_manifest_sha256": "a930477a59ba72b9c50e97702a0d7a70b5a41198d25d9cc52d4e10142cdf0eea",
+        "source_launcher_trust_contract_raw_sha256": "a36a2c6c12a81d08f050094e7ff05c978213bdecf7f418750ffb4d842fae0a4d",
+        "decision_scope": "CURRENT_PUBLIC_CLASSIFIER_RECEIPT_AND_LAUNCHER_TRUST_CONTRACT_V1_ONLY",
+        "route_order": [
+          "BOUNDED_DECLARED_SCOPE_SUCCESSOR",
+          "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION",
+          "ENVIRONMENT_PROVIDER_BLOCKER_STOP"
+        ],
+        "route_eligibility": [false, false, true],
+        "route_reason": [
+          "AUTHORITY_PREBOUND_NONRECURSIVE_LOCATOR_CONTRACT_RECEIPT_ABSENT",
+          "FROZEN_NODE_LAUNCHER_SOURCE_LOCK_ARTIFACT_AND_TRUST_CONTRACT_RECEIPT_ABSENT",
+          "BOTH_CAPABILITY_BINDING_ROUTES_INELIGIBLE_AT_CURRENT_DECLARED_SCOPE"
+        ],
+        "selected_route": "ENVIRONMENT_PROVIDER_BLOCKER_STOP",
+        "selected_route_reason": "NO_CURRENT_DESIGN_VALID_CAPABILITY_BINDING_IN_THE_CONSUMED_PUBLIC_EVIDENCE_SET",
+        "global_node_absence_claim": false,
+        "environment_or_provider_permanent_incapability_claim": false,
+        "bounded_successor_future_impossibility_claim": false,
+        "controlled_acquisition_future_impossibility_claim": false,
+        "launcher_trust_contract_mutation_count": 0,
+        "forbidden_effect_occurrence_count": 0,
+        "check_vector": {
+          "source_receipt_binding_exact": true,
+          "launcher_trust_contract_immutable": true,
+          "route_enum_closed_exact3": true,
+          "route_prerequisites_total": true,
+          "selection_precedence_total": true,
+          "selection_precedence_exclusive": true,
+          "selected_route_cardinality_exact1": true,
+          "selected_route_semantic_limit_enforced": true,
+          "overclaim_guard_all_false": true,
+          "terminal_mapping_total_exclusive": true,
+          "derived_state_reuse_exact0": true,
+          "forbidden_effects_exact0": true
+        },
+        "verdict": "VALID",
+        "invalid_check_count": 0,
+        "automatic_progression": false
+      },
+      "domain_free_projection_sha256": "cdbe329fa64b7302d06d38f6008a137e01e7c4607f97413bc7938403de519696",
+      "domain_specific_evidence_sha256": "08746578a4b954aad6ddef6fd421a3c76233538db56fb7c5b52c5c69df202e3c",
+      "verdict": "VALID",
+      "invalid_check_count": 0
+    },
+    "independent_static_design_verification": {
+      "execution_count": 1,
+      "state_origin": "FRESH_INDEPENDENT_STATIC_DESIGN_STATE",
+      "shared_derived_state_reuse_count": 0,
+      "domain_free_projection": {
+        "schema_version": "COCOLON_NLS_V3_STEP11_LAUNCHER_AVAILABILITY_ROUTE_DECISION_DOMAIN_FREE_PROJECTION_V1",
+        "route_decision_contract_raw_sha256": "7b2a06a25c49591a8e2226b6d15abf69e09fa321fbff8e5759faaa69f6d3939e",
+        "source_classifier_observation_sha256": "9c7e0601751d81387720e963bbb07b0cd69cfaa17946722ec7ab82530957b606",
+        "source_classifier_projection_sha256": "741f9aa897d7745720e4e4b67ee879b3b2a344292548cac20a7e2e891956c716",
+        "source_blocking_manifest_sha256": "a930477a59ba72b9c50e97702a0d7a70b5a41198d25d9cc52d4e10142cdf0eea",
+        "source_launcher_trust_contract_raw_sha256": "a36a2c6c12a81d08f050094e7ff05c978213bdecf7f418750ffb4d842fae0a4d",
+        "decision_scope": "CURRENT_PUBLIC_CLASSIFIER_RECEIPT_AND_LAUNCHER_TRUST_CONTRACT_V1_ONLY",
+        "route_order": [
+          "BOUNDED_DECLARED_SCOPE_SUCCESSOR",
+          "CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION",
+          "ENVIRONMENT_PROVIDER_BLOCKER_STOP"
+        ],
+        "route_eligibility": [false, false, true],
+        "route_reason": [
+          "AUTHORITY_PREBOUND_NONRECURSIVE_LOCATOR_CONTRACT_RECEIPT_ABSENT",
+          "FROZEN_NODE_LAUNCHER_SOURCE_LOCK_ARTIFACT_AND_TRUST_CONTRACT_RECEIPT_ABSENT",
+          "BOTH_CAPABILITY_BINDING_ROUTES_INELIGIBLE_AT_CURRENT_DECLARED_SCOPE"
+        ],
+        "selected_route": "ENVIRONMENT_PROVIDER_BLOCKER_STOP",
+        "selected_route_reason": "NO_CURRENT_DESIGN_VALID_CAPABILITY_BINDING_IN_THE_CONSUMED_PUBLIC_EVIDENCE_SET",
+        "global_node_absence_claim": false,
+        "environment_or_provider_permanent_incapability_claim": false,
+        "bounded_successor_future_impossibility_claim": false,
+        "controlled_acquisition_future_impossibility_claim": false,
+        "launcher_trust_contract_mutation_count": 0,
+        "forbidden_effect_occurrence_count": 0,
+        "check_vector": {
+          "source_receipt_binding_exact": true,
+          "launcher_trust_contract_immutable": true,
+          "route_enum_closed_exact3": true,
+          "route_prerequisites_total": true,
+          "selection_precedence_total": true,
+          "selection_precedence_exclusive": true,
+          "selected_route_cardinality_exact1": true,
+          "selected_route_semantic_limit_enforced": true,
+          "overclaim_guard_all_false": true,
+          "terminal_mapping_total_exclusive": true,
+          "derived_state_reuse_exact0": true,
+          "forbidden_effects_exact0": true
+        },
+        "verdict": "VALID",
+        "invalid_check_count": 0,
+        "automatic_progression": false
+      },
+      "domain_free_projection_sha256": "cdbe329fa64b7302d06d38f6008a137e01e7c4607f97413bc7938403de519696",
+      "domain_specific_evidence_sha256": "2cad0e50baf838f429b07466915501d74e769d924b5605187b21febc4a37017b",
+      "verdict": "VALID",
+      "invalid_check_count": 0
+    },
+    "comparison": {
+      "owner_independent_projection_comparison_count": 1,
+      "owner_projection_sha256": "cdbe329fa64b7302d06d38f6008a137e01e7c4607f97413bc7938403de519696",
+      "independent_projection_sha256": "cdbe329fa64b7302d06d38f6008a137e01e7c4607f97413bc7938403de519696",
+      "match": true,
+      "state_reuse_count": 0,
+      "selected_route": "ENVIRONMENT_PROVIDER_BLOCKER_STOP"
+    },
+    "terminal_mapping": {
+      "invalid_branch_count": 0,
+      "divergence_branch_count": 0,
+      "dual_match_selected_route_branch_count": 1,
+      "total_and_exclusive": true
+    },
+    "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP",
+    "runtime_ready": false,
+    "full_r1_result": "UNKNOWN_PRESERVED",
+    "historical_preservation": {
+      "prior_observer_v1": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+      "prior_observer_v2_execution_authority": "CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_IMMUTABLE",
+      "source_launcher_identity_discovery_observation_sha256": "dd10e06f0f1f0db799b3d7de098401ac6af2b146f64d1e5836fc432dc17ea82a",
+      "source_discovery_reparse_count": 0,
+      "source_discovery_reclassification_count": 0,
+      "source_classifier_reparse_count": 0,
+      "source_classifier_reclassification_count": 0,
+      "retroactive_credit_count": 0
+    },
+    "position_consistency": {
+      "prior_position": "UNDETERMINED_WITHOUT_ROUTE_DECISION_CONTRACT",
+      "current_position": "ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE",
+      "change_basis": "NEWLY_ACTIVATED_AUTHORITY_E6676CE3_SUPPLIED_TOTAL_AND_EXCLUSIVE_ROUTE_PRECEDENCE",
+      "historical_correction": false,
+      "prior_inference_remains_historically_true": true
+    },
+    "effects": {
+      "path_snapshot_reread_count": 0,
+      "classifier_reparse_count": 0,
+      "classifier_reclassification_count": 0,
+      "retry_count": 0,
+      "unbounded_filesystem_search_count": 0,
+      "node_acquisition_count": 0,
+      "node_execution_count": 0,
+      "network_count": 0,
+      "staging_count": 0,
+      "materialization_count": 0,
+      "version_probe_count": 0,
+      "engine_execution_count": 0,
+      "verifier_read_count": 0,
+      "verifier_execution_count": 0,
+      "helper_read_count": 0,
+      "helper_execution_count": 0,
+      "gate_b_execution_count": 0,
+      "runtime_acquisition_count": 0,
+      "pytest_count": 0,
+      "target_authority_issuance_count": 0,
+      "target_authority_activation_count": 0,
+      "target_execution_count": 0,
+      "private_path_value_publication_count": 0,
+      "private_path_raw_sha256_publication_count": 0,
+      "path_entry_publication_count": 0,
+      "locator_publication_count": 0,
+      "symlink_target_publication_count": 0,
+      "raw_stat_publication_count": 0,
+      "controller_uid_publication_count": 0,
+      "executable_body_read_count": 0,
+      "executable_body_publication_count": 0,
+      "raw_rejection_detail_publication_count": 0,
+      "cocolon_production_source_change_count": 0,
+      "published_red_change_count": 0,
+      "existing_d1_change_count": 0,
+      "mashos_api_change_count": 0
+    },
+    "automatic_progression": false
+  },
+  "observation_sha256": "1a1d3a9de6d0cb2b0ad29d5dd8bf3aabfe7c388d6a77fdcf03e2040f2566a73a",
+  "receipt_self_hash_schema": {
+    "canonicalization": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+    "excluded_json_pointer": "/receipt_logical_sha256",
+    "digest": "SHA256_LOWERCASE_HEX64"
+  },
+  "receipt_logical_sha256": "92080cff7428de518111b6ec9cadd453b7950b09c44372fe101d16eaa4f2faaf",
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP_POSTVERIFIED_OBSERVATION_SHA256_1A1D3A9DE6D0CB2B0AD29D5DD8BF3AABFE7C388D6A77FDCF03E2040F2566A73A_CURRENT_ROUTE_DECISION_AUTHORITY_SHA256_E6676CE3C7E4ABEA698D98A1218A4CB7DB542E0B97EC71CEECA25082C7CBEFBE_ACTIVATED_EXACT1_CLOSED_CONSUMED_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_SOURCE_CLASSIFIER_OBSERVATION_SHA256_9C7E0601751D81387720E963BBB07B0CD69CFAA17946722EC7AB82530957B606_IMMUTABLE_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREWRITE_BASE_1A05A937_TREE_56538697_SOURCE_VERIFIED_COCOLON_PREOBSERVATION_PREDECESSOR_B99707F6_TREE_811B3A3F_CONTRACT_PUBLIC_WRITE_PREDECESSOR_56BD42F7_TREE_D6F7D4C8_CLASSIFIER_PREWRITE_BASE_4C0A984C_TREE_6FAAC6EB_CURRENT_ROUTE_DECISION_PREWRITE_BASE_01DD0F3E_TREE_BBA6A375_MASHOS_API_315813C7_TREE_A641510E_CURRENT_BODY_FREE_CLASSIFIER_RECEIPT_CONSUMPTION_EXACT1_LAUNCHER_TRUST_AND_REJECTION_CONTRACT_V1_IMMUTABLE_NO_WEAKENING_EXACT1_RAW_A36A2C6C12A81D08F050094E7FF05C978213BDECF7F418750FFB4D842FAE0A4D_CANONICAL_BYTES_17887_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_CREATED_EXACT1_RAW_7B2A06A25C49591A8E2226B6D15ABF69E09FA321FBFF8E5759FAAA69F6D3939E_CANONICAL_BYTES_8298_ROUTE_ENUM_CLOSED_EXACT3_BOUNDED_DECLARED_SCOPE_SUCCESSOR_CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION_ENVIRONMENT_PROVIDER_BLOCKER_STOP_PRECEDENCE_TOTAL_EXCLUSIVE_EXACT1_BOUNDED_DECLARED_SCOPE_SUCCESSOR_ELIGIBLE_FALSE_MATCHING_PUBLIC_RECEIPT0_CONTROLLED_TRUSTED_LAUNCHER_ACQUISITION_ELIGIBLE_FALSE_MATCHING_PUBLIC_RECEIPT0_ENVIRONMENT_PROVIDER_BLOCKER_STOP_ELIGIBLE_TRUE_SELECTED_EXACT1_REASON_NO_CURRENT_DESIGN_VALID_CAPABILITY_BINDING_IN_THE_CONSUMED_PUBLIC_EVIDENCE_SET_GLOBAL_NODE_ABSENCE_ENVIRONMENT_OR_PROVIDER_PERMANENT_INCAPABILITY_BOUNDED_SUCCESSOR_FUTURE_IMPOSSIBILITY_CONTROLLED_ACQUISITION_FUTURE_IMPOSSIBILITY_CLAIM_FALSE_FALSE_FALSE_FALSE_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_DOMAIN_FREE_PROJECTION_SHA256_CDBE329FA64B7302D06D38F6008A137E01E7C4607F97413BC7938403DE519696_EVIDENCE_SHA256_08746578A4B954AAD6DDEF6FD421A3C76233538DB56FB7C5B52C5C69DF202E3C_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_DOMAIN_FREE_PROJECTION_SHA256_CDBE329FA64B7302D06D38F6008A137E01E7C4607F97413BC7938403DE519696_EVIDENCE_SHA256_2CAD0E50BAF838F429B07466915501D74E769D924B5605187B21FEBC4A37017B_OWNER_INDEPENDENT_PROJECTION_MATCH_EXACT1_STATE_REUSE_EXACT0_INVALID_DIVERGENCE_DUAL_MATCH_SELECTED_ROUTE_THREE_WAY_TERMINAL_MAPPING_TOTAL_EXACT1_TERMINAL_RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_AVAILABILITY_RECOVERY_ROUTE_DECISION_CONTRACT_V1_DUAL_STATIC_VALID_ENVIRONMENT_PROVIDER_BLOCKER_STOP_PATH_SNAPSHOT_REREAD_CLASSIFIER_REPARSE_RECLASSIFICATION_RETRY_UNBOUNDED_SEARCH_NODE_ACQUISITION_EXECUTION_NETWORK_STAGING_MATERIALIZATION_VERSION_PROBE_ENGINE_VERIFIER_HELPER_GATE_B_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_STATIC_VERIFIER_LAUNCHER_PROVIDER_METADATA_SOURCE_LOCK_AND_ARTIFACT_IDENTITY_OBSERVATION_CONTRACT_V1_RECONCILIATION_DESIGN_ONLY_AUTHORITY_CURRENT_BODY_FREE_ROUTE_DECISION_RECEIPT_CONSUMPTION_EXACT1_ROUTE_DECISION_CONTRACT_V1_AND_LAUNCHER_TRUST_CONTRACT_V1_IMMUTABLE_NO_WEAKENING_EXACT1_EXACT1_PUBLICABLE_BODY_FREE_PROVIDER_METADATA_SOURCE_LOCK_AND_ARTIFACT_IDENTITY_OBSERVATION_CONTRACT_V1_CANDIDATE_CREATION_EXACT1_AUTHORITY_PREBOUND_FINITE_PROVIDER_SOURCE_SET_AND_NONRECURSIVE_METADATA_ENDPOINT_SCOPE_EXACT1_SOURCE_PROVIDER_ID_LOGICAL_SOURCE_ID_EXACT_NODE_VERSION_PLATFORM_ARCHITECTURE_ARTIFACT_FORMAT_EXPECTED_BYTE_COUNT_EXPECTED_RAW_SHA256_CHECKSUM_OR_SIGNATURE_PROVENANCE_EXACT_FIELDS_TOTAL_EXACT1_NO_PRIVATE_SOURCE_URI_CREDENTIAL_TOKEN_OR_ARTIFACT_BODY_PUBLICATION_EXACT1_PROVIDER_CANDIDATE_REJECTION_CLOSED_TYPED_ENUM_AND_PRECEDENCE_TOTAL_EXCLUSIVE_EXACT1_METADATA_OBSERVATION_TERMINAL_INVALID_NO_DESIGN_VALID_SOURCE_OR_DIVERGENCE_OR_DUAL_MATCH_SOURCE_LOCKED_STOP_THREE_WAY_TOTAL_EXACT1_BODY_FREE_RESULT_RECEIPT_HANDOFF_SCHEMA_AND_SOURCE_LOCK_IDENTITY_CANONICAL_PREIMAGE_DOMAIN_SEPARATION_TOTAL_EXACT1_NETWORK_AND_METADATA_OBSERVATION_ARTIFACT_ACQUISITION_STAGING_MATERIALIZATION_HASH_VERIFICATION_INSTALLATION_NODE_EXECUTION_VERSION_PROBE_ENGINE_VERIFIER_HELPER_GATE_B_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_REQUIRE_LATER_SEPARATE_AUTHORITY_EXACT1_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_OR_TYPED_DESIGN_BLOCKER_STOP_OWNER_INDEPENDENT_DOMAIN_FREE_PROJECTION_COMPARISON_EXACT1_STATE_REUSE_EXACT0_PATH_SNAPSHOT_READ_LOCATOR_DISCOVERY_CLASSIFIER_REPARSE_RECLASSIFICATION_UNBOUNDED_SEARCH_NODE_ACQUISITION_OR_EXECUTION_NETWORK_METADATA_OBSERVATION_ARTIFACT_DOWNLOAD_STAGING_MATERIALIZATION_VERSION_PROBE_ENGINE_VERIFIER_HELPER_GATE_B_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PRIOR_ROUTE_DECISION_REPARSE_RECLASSIFICATION_OR_CREDIT_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_PROVIDER_METADATA_SOURCE_LOCK_CONTRACT_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_METADATA_OBSERVATION_NETWORK_ARTIFACT_ACQUISITION_NODE_VERIFIER_GATE_B_RUNTIME_PYTEST_OR_TARGET_EXECUTION_NO_AUTOMATIC_PROGRESSION",
+    "token_sha256": "63d43bd59dda7dc2f50ea03ed4b908f6fddb2adda163966ffd0e5a7ffd0383a8",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "automatic_progression": false
+}
