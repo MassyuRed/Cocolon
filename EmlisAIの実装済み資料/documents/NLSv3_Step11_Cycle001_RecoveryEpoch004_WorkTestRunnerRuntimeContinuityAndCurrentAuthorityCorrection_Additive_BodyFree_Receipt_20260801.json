@@ -1,0 +1,104 @@
+{
+  "schema_version": "nls_v3_step11_cycle001_recovery_epoch004_work_test_runner_runtime_continuity_current_authority_correction_receipt_v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_WORK_TEST_RUNNER_RUNTIME_CONTINUITY_AND_CURRENT_AUTHORITY_CORRECTION_ADDITIVE",
+  "observed_at_date": "2026-08-01",
+  "body_free": true,
+  "historical_result_reparse": false,
+  "credit_change": false,
+  "automatic_progression": false,
+  "authority_source": "Mash explicit approval on 2026-08-01 to create and reflect Karen's reviewed runtime continuity prevention design",
+  "result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Result_20260801.md",
+    "git_blob_sha1": "a2ca377b433412c78707f50e03cb10850b8069ea",
+    "raw_sha256": "638ace7881b7c5767b73435cb2e43b3517d8922787380c3518acc29a13cfe1ce",
+    "bytes": 8454,
+    "lines": 229
+  },
+  "historical_artifacts_containing_superseded_future_directives": [
+    {
+      "role": "FAILED_RESULT",
+      "git_blob_sha1": "b8726e7f31c171e107a241ad76b49cdfdc5aa1c7",
+      "raw_sha256": "3be14c0d827a7905786e5b1944b67831d0acbf758858a3daa4c6b668ffba5e51",
+      "mutation_count": 0
+    },
+    {
+      "role": "FAILED_BODY_FREE_RECEIPT",
+      "git_blob_sha1": "c92c7566a7bca481cc9c42f5cc518b6b9d61593a",
+      "raw_sha256": "3cae33eb9b7a3c745338e1d9f67fdd0b2f761f752f2293b35cd71efe9170d73e",
+      "mutation_count": 0
+    },
+    {
+      "role": "FAILED_HANDOFF",
+      "git_blob_sha1": "902d779bb4a23fe058145a2ffeba7d8210569b07",
+      "raw_sha256": "af36a94b4aeb0b55b512da79f24cf8162b74cb887e2834582189339bb7992aea",
+      "mutation_count": 0
+    }
+  ],
+  "superseded_future_directives": {
+    "count": 2,
+    "prior_required_user_work": "MAKE_A_PYTEST_8_4_1_CAPABLE_PYTHON_RUNTIME_AVAILABLE_TO_KAREN",
+    "prior_next_authority_condition": "USER_PROVIDED_PYTEST_8_4_1_RUNTIME_REQUIRED",
+    "current_status": "HISTORICAL_SUPERSEDED_INACTIVE"
+  },
+  "historical_failed_checkpoint": {
+    "authority_state": "CLOSED_CONSUMED_NONCREDIT",
+    "targeted_launch_request_count": 1,
+    "pytest_start_count": 0,
+    "collection_count": 0,
+    "test_call_count": 0,
+    "r1_state": "R1_RESULT_UNKNOWN_STOP",
+    "credit": "NOT_ESTABLISHED"
+  },
+  "future_successor_target_authority": {
+    "authority_state": "UNISSUED_INACTIVE",
+    "admission_count": 0,
+    "consumption_count": 0,
+    "targeted_launch_request_count": 0,
+    "targeted_pytest_invocation_count": 0
+  },
+  "current_correction_checkpoint": {
+    "targeted_pytest_invocation_count": 0,
+    "runtime_materialization_count": 0,
+    "runtime_rematerialization_count": 0,
+    "readiness_pytest_version_probe_count": 0,
+    "role_import_probe_count": 0,
+    "production_change_count": 0,
+    "published_red_test_change_count": 0,
+    "existing_d1_change_count": 0,
+    "existing_d1_exact8_pytest_invocation_count": 0,
+    "challenge_count": 0,
+    "remote_runtime_observation_count": 0,
+    "work_side_artifact_acquisition_network_count": 0,
+    "historical_artifact_mutation_count": 0,
+    "historical_result_reparse_count": 0,
+    "credit_promotion_count": 0
+  },
+  "runtime_continuity": {
+    "prior_readiness": "HISTORICALLY_VALID_AT_2026_07_31",
+    "old_session_local_runtime_found_within_discovery_scope": false,
+    "candidate_discovery_scope": "KNOWN_PRIOR_RUNTIME_ROOT_AND_CURRENT_CHECKPOINT_DECLARED_LOCATOR_SET",
+    "candidate_count_within_discovery_scope": 0,
+    "alternate_locator_scan": "NOT_ESTABLISHED",
+    "current_state": "RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS",
+    "current_targeted_execution_eligible": false,
+    "runtime_preparation_owner": "KAREN",
+    "execution_location": "CURRENT_WORK_ENVIRONMENT",
+    "mash_runtime_path_or_environment_provider": false
+  },
+  "cause_separation": {
+    "direct_observed_launch_cause": "GENERIC_BASE_INTERPRETER_SELECTED_AND_PYTEST_MODULE_ABSENT",
+    "background_lifecycle_gap": "SESSION_LOCAL_RUNTIME_CONTINUITY_NOT_MANDATORY_BEFORE_TARGET_ADMISSION",
+    "current_observation": "PRIOR_SESSION_LOCAL_RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS",
+    "old_runtime_absent_at_failed_launch_proved": false
+  },
+  "normative_owners": {
+    "technical": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+    "behavioral": "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+    "github_reflection": "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT"
+  },
+  "required_user_runtime_resource_or_environment_work": "NONE",
+  "separate_mash_approval_required": true,
+  "next_authority_class": "WORK_OWNED_LOCK_DERIVED_EXACT5_REMATERIALIZATION_AND_FRESH_READINESS_ONLY",
+  "receipt_self_hash_schema": "SHA256_UTF8_RFC8785_CANONICAL_JSON_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "ecfe452ba32d0bea73dcdf400c7fc5c2f5eff9cc40b84386ab2a1af166980273"
+}

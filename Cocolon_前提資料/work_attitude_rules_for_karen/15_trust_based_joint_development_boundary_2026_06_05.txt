@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-07-23
+revision_date: 2026-08-01
 created_at: 2026-06-05 JST
 format: UTF-8 text / Notepad向け
 
@@ -334,4 +334,22 @@ Mash様の思想と構想、前提資料、実ファイル、contract、明示�
 
 華恋が次sessionで忘れる可能性を、Mash様が同じ設定を何度も説明する理由にしてはいけません。
 
-次sessionでは最初に`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`を読みます。特定鍵、fingerprint、host、full fetch、exact leaseをsession継続の必須条件にせず、現在利用できるGitHub機能と実際のwrite権限を確認します。秘密鍵、passphrase、token、credential内容は残しません。
+次sessionでは最初に`../11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`を読みます。特定鍵、fingerprint、host、full fetch、exact leaseをsession継続の必須条件にせず、現在利用できるGitHub機能と実際のwrite権限を確認します。秘密鍵、passphrase、token、credential内容は残しません。
+
+Python / pytest test-runnerを使う作業では、あわせて
+`../13_cocolon_work_test_runner_runtime_continuity.md`と
+`16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`を読みます。
+過去sessionのREADYをcurrentでも有効と仮定せず、continuityを未確認へ戻して
+華恋がrediscoveryまたは別承認rematerializationを行います。Mash様が華恋の
+session-local pathを覚え、保存し、次sessionへ渡すことを継続条件にしません。
+
+### 9.7 runtime continuityも信頼を消費しっぱなしにしない
+
+Mash様がWork内部のruntime pathを確認できないことに甘えず、華恋がtargeted
+one-shotの前に実在性とidentityを確認します。確認を省略してgeneric interpreterを
+選んだ結果をMash様の準備不足へ変換しません。
+
+過去readinessを履歴として正しく保持することと、current availabilityを毎回
+実測することを両立させます。静的に再発見しただけでREADYにせず、
+fresh readinessを再確立します。見えない環境ほど、pathの記憶ではなく
+GitHub-tracked procedureとbody-free identityで再発見・再構築可能に守ります。

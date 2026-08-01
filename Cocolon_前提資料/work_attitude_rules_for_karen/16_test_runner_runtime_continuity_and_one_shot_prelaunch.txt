@@ -1,0 +1,64 @@
+# Work test-runner runtime continuity / one-shot prelaunch
+
+## 正本
+
+技術定義のcurrent正本は
+`../13_cocolon_work_test_runner_runtime_continuity.md`です。
+
+このfileは、華恋が毎session・毎targeted pytest authorityで行う強制checkだけを
+固定します。GitHub反映契約`../11_cocolon_github_transport_and_session_continuity.md`
+またはproduct runtimeを変更しません。
+
+## 華恋が必ず行うこと
+
+1. Python / pytest test-runnerの発見、materialization、verification、
+   rediscovery、rematerializationの実行ownerは華恋とする。
+2. session、workspace root、Work environmentが変わったら、過去のREADYをcurrentでも
+   有効と仮定せず、`CURRENT_CONTINUITY_UNVERIFIED`へ戻す。過去readiness自体は
+   履歴として保持する。
+3. pytestを必要とするtargeted authorityを出す前に、Gate Aのread-only discoveryで
+   candidate discovery scope、root、entrypoint、symlink/control、manifest、
+   lock / projection identityを確認する。
+4. candidateがなければ`RUNTIME_NOT_FOUND_AT_DECLARED_DISCOVERY_SCOPE`、
+   不一致なら`RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE`として、
+   scopeを明記し、targeted invocation 0のままSTOPする。
+5. cross-session candidateの静的identityが一致しても
+   `CROSS_SESSION_REDISCOVERED_PENDING_READINESS`とし、Gate Bのexact version
+   probe、required role smoke、fresh identity再導出がVALIDになるまでREADYにしない。
+6. runtime未発見をMash様のabsolute path、venv、wheel、pytest installation、
+   runtime directory提供作業へ変換しない。
+7. rematerializationはfrozen lockとGitHub-tracked procedureから行う別authority
+   候補として華恋が整理し、tracked helperがない場合はauthority-bound
+   local helperのraw hash / countとprocedure identityを固定する。新instanceの
+   readinessを再確立してSTOPする。
+8. `python -m pytest --version`もpytest process invocationとして数え、
+   targeted invocationとは別のreadiness authority / counterにする。
+9. role import probeもrepository code executionとして別counterにする。
+10. targeted authorityのactivation / admission / consumption直前に、同じruntimeの
+    static identityを再導出する。
+11. targetは確認済みabsolute entrypointを直接launchする。generic `python`、
+    `python3`、`py`、`/usr/bin/env python`、PATH search、`which`、`command -v`、
+    default interpreter、fallback、interpreter switch、hidden installation、
+    admission後のversion probeを行わない。
+12. exact admitted absolute executableのlaunch requestをOSへ渡した時点で
+    authority consumption exact1とする。OS rejectやpytest-start exact0でも巻き戻さず、
+    retry / fallback / 別interpreter launchを0にする。
+13. prelaunch不成立時はtargeted invocation 0のままGate Aまたは別Gate Bへ戻す。
+14. historical Result / Receipt / Handoffを遡及変更・再parse・再creditせず、
+    誤ったfuture directionはadditive correctionで非current化する。
+
+## GitHubへ残すもの / 残さないもの
+
+GitHubへ残すのは、lock、body-free identities、path-free locator contract、
+relative executable path、persistence class、expiry trigger、tracked materialization /
+verification procedure identity、tracked helperまたはauthority-bound local helper identity、
+rematerialization手順です。
+
+absolute Work path、scratch / session identifier、runtime / venv本体、wheel body、
+cache、credential、configured route、raw acquisition outputは残しません。
+
+## STOPの意味
+
+STOP自体を失敗と扱いません。runtime問題をtargeted one-shot消費前に検出し、
+Work側recoveryへ戻すことが正しいSTOPです。targetを消費した後でMash様へ
+environment準備を求める状態を繰り返しません。

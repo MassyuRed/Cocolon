@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-07-27",
+  "revision_date": "2026-08-01",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -10,8 +10,8 @@
     "Cocolon_ref": "MassyuRed/Cocolon:main",
     "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
     "mashos-api": "MassyuRed/mashos-api:main@05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
-    "verified_at": "2026-07-27 JST",
-    "current_authority": "07_latest_snapshot_diff.md + 11_cocolon_github_transport_and_session_continuity.md CURRENT_NORMATIVE_CONTRACT"
+    "verified_at": "2026-08-01 JST",
+    "current_authority": "07_latest_snapshot_diff.md + 11_cocolon_github_transport_and_session_continuity.md CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13_cocolon_work_test_runner_runtime_continuity.md CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime"
   },
   "update_policy": {
     "current_authority": "after_each_completed_github_reflection_and_post_write_verification",
@@ -1737,6 +1737,10 @@
     {
       "path": "12_cocolon_github_actions_publication_guard.md",
       "purpose": "HISTORICAL_NON_NORMATIVE。RETIRED_DISABLEDのGitHub Actions publication guardian記録でありcurrent execution authorityではない。"
+    },
+    {
+      "path": "13_cocolon_work_test_runner_runtime_continuity.md",
+      "purpose": "CURRENT。Work-local Python / pytest test-runnerのsession continuity、identity、discovery、readiness recovery、target admission、body-free記録、Work-owned rematerializationの技術正本。GitHub反映方法は変更しない。"
     }
   ],
   "excluded_files": [
@@ -16375,5 +16379,88 @@
     "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
     "mashos-api": "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf",
     "verified_at": "2026-07-21 JST"
-  }
+  },
+  "work_test_runner_runtime_continuity_2026_08_01": {
+    "normative_status": "CURRENT",
+    "decision_owner": "Mash",
+    "operational_owner": "Karen",
+    "execution_substrate": "current Work environment",
+    "canonical_owner": "13_cocolon_work_test_runner_runtime_continuity.md",
+    "behavioral_owner": "work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+    "github_reflection_owner": "11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT",
+    "github_reflection_contract_changed": false,
+    "scope": "Work-local Python / pytest test-runner only",
+    "mash_runtime_path_or_environment_request_forbidden": true,
+    "generic_python_or_path_resolution_for_target_forbidden": true,
+    "session_boundary_requires_current_continuity_revalidation": true,
+    "target_activation_requires_current_runtime_admission": true,
+    "runtime_bytes_or_absolute_path_committed": false,
+    "historical_result_reparse": false,
+    "current_old_session_local_runtime_state": "RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS",
+    "candidate_discovery_scope": "KNOWN_PRIOR_RUNTIME_ROOT_AND_CURRENT_CHECKPOINT_DECLARED_LOCATOR_SET",
+    "alternate_locator_scan": "NOT_ESTABLISHED",
+    "prior_readiness": "HISTORICALLY_VALID_AT_2026_07_31",
+    "current_required_mash_runtime_resource_or_environment_work": "NONE",
+    "next_separate_authority_approval": "MASH_APPROVAL_REQUIRED",
+    "prior_user_runtime_directive": "HISTORICAL_SUPERSEDED_INACTIVE",
+    "next_authority_class": "WORK_OWNED_LOCK_DERIVED_EXACT5_REMATERIALIZATION_AND_FRESH_READINESS_ONLY",
+    "automatic_progression": false,
+    "changed_paths": [
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+      "Cocolon_前提資料/manifest.json",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Result_20260801.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_BodyFree_Receipt_20260801.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Handoff_20260801.md"
+    ],
+    "correction_exact3": {
+      "result_path": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Result_20260801.md",
+      "result_git_blob_sha1": "a2ca377b433412c78707f50e03cb10850b8069ea",
+      "result_raw_sha256": "638ace7881b7c5767b73435cb2e43b3517d8922787380c3518acc29a13cfe1ce",
+      "receipt_path": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_BodyFree_Receipt_20260801.json",
+      "receipt_git_blob_sha1": "4af86460cf78aba2d1342a54956653ac66c4ec5b",
+      "receipt_raw_sha256": "e49c6d41f471a079d06819826febed01500f27b9178cf39651f16ee7d1620231",
+      "receipt_logical_sha256": "ecfe452ba32d0bea73dcdf400c7fc5c2f5eff9cc40b84386ab2a1af166980273",
+      "handoff_path": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Handoff_20260801.md",
+      "handoff_git_blob_sha1": "5fe50994d8b3118a7a56769c1c799bd26cbffca7",
+      "handoff_raw_sha256": "6576255a48db62ddc93e21bd96d67a375b08a1bc57768c845749933d0c189962"
+    },
+    "zero_effects": {
+      "targeted_pytest_invocation_count": 0,
+      "runtime_rematerialization_count": 0,
+      "production_change_count": 0,
+      "published_red_test_change_count": 0,
+      "existing_d1_change_count": 0,
+      "work_side_artifact_acquisition_network_count": 0,
+      "credit_promotion_count": 0
+    }
+  },
+  "latest_modified_premise_files_2026_08_01_work_test_runner_runtime_continuity": [
+    "00_karen_read_first.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "13_cocolon_work_test_runner_runtime_continuity.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/00_read_first.txt",
+    "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+    "work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt",
+    "work_attitude_rules_for_karen/09_work_start_checklist.txt",
+    "work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt",
+    "work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
+    "work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+    "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+    "work_attitude_rules_for_karen/manifest.json"
+  ]
 }

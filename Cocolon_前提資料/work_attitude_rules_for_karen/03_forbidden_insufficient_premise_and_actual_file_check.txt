@@ -18,6 +18,7 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 - `05_cocolon_rule_file_index.md`
 - `07_latest_snapshot_diff.md`
 - GitHub反映では`11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`
+- Work-local Python / pytest test-runnerを扱う場合は`../13_cocolon_work_test_runner_runtime_continuity.md`と`16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`
 - GitHub上の`Cocolon` / `mashos-api` current head、承認対象exact path、対象実ファイル。設計・実装sourceに指定predecessorがある場合は、そのsource identityも分離して確認する
 - local checkout / ZIP / copyを使う場合、そのpath / blob / hashが固定GitHub commitと一致すること
 - 必要なログ / スクリーンショット / テスト結果
@@ -117,3 +118,21 @@ trigger成立だけで自動再開せず、Mash様の新しい明示承認を必
 
 中止時は、完成させてから捨てるのではなく、safe disable、
 historical preservation、current authorityの更新だけを行う。
+
+## 2026-08-01 差分追記: session-local test-runnerのactual environment確認
+
+Work-local test-runnerは、過去にREADYだったという記録だけでcurrent実体を
+仮定しない。sessionが変わった場合はcurrent continuityを未確認へ戻し、
+targeted authorityを提示する前にroot、entrypoint、symlink/control、manifest、
+lock / projection identityをread-onlyで確認する。
+
+session境界だけで物理的消失を断定しない。探索scopeを先に固定し、
+candidate不在はそのscope内だけの結果として記録する。同一instanceの静的
+identityが一致してもREADYとせず、別Gate Bでfresh version probe、role smoke、
+identity再導出がVALIDになった後だけ再利用する。candidate不在または
+不一致ならtargetを実行せず、華恋側の別rematerialization authorityへ分類する。
+
+absolute pathまたはresolved interpreter hash単独をruntime identityとしない。
+generic `python`、`python3`、`py`、`/usr/bin/env python`、PATH探索、`which`、
+`command -v`、base interpreterの存在をpytest-bearing runtimeの
+実在証明へ置き換えない。

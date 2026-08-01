@@ -305,3 +305,29 @@ gate failureを含むdraftは無効であり、作業依頼、contract変更案�
 違反後は、抵触rule、observable effect、最後に確認できたauthority、
 不足evidence / authorityだけを示し、remote stateを保持して停止する。
 同じ回復出力へ新しい技術案、user作業要求、代替contractを混ぜない。ただし、Mash様が同じ指示で次作業の確定を明示した場合は、回復節と分離し、このgateを独立して通過した次作業だけを示せる。
+
+## S. Work test-runner runtime continuity / one-shot prelaunch check
+
+Python / pytest test-runnerを使う場合だけ、次をtargeted authority提示前に確認する。
+
+- [ ] `../13_cocolon_work_test_runner_runtime_continuity.md`と`16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`を読んだか
+- [ ] current sessionと過去readinessのsession scopeを区別したか
+- [ ] session境界後のstateを`CURRENT_CONTINUITY_UNVERIFIED`へ戻したか
+- [ ] candidate discovery scopeを先に固定し、candidate countと同じreceiptに残すか
+- [ ] root、entrypoint、symlink/control、manifest、lock / projection identityをread-onlyで再導出したか
+- [ ] absolute pathとinterpreter executable hashだけをidentityへ使っていないか
+- [ ] rediscovered candidateをGate AだけでREADYにせず、Gate B fresh readinessを通すか
+- [ ] pytest version probeをtargeted invocationとは別のreadiness counterへ置いたか
+- [ ] role import probeをrepository code executionとして別counterへ置いたか
+- [ ] rematerializationにtracked procedureとtracked helperまたはauthority-bound local helper identityがあるか
+- [ ] current-session readinessがVALIDになる前にtargeted authorityを提示していないか
+- [ ] activation / admission / consumption直前に同じruntime identityを静的再確認したか
+- [ ] target launchが確認済みabsolute entrypointの直接指定か
+- [ ] generic `python`、`python3`、`py`、`/usr/bin/env python`、PATH search、`which`、`command -v`、default interpreter、fallback、interpreter switchが0か
+- [ ] prelaunch不成立時にtargeted invocation 0のままSTOPするか
+- [ ] exact admitted executableのlaunch request issuanceでconsumptionを数え、OS rejectでも巻き戻さないか
+- [ ] runtime未発見をMash様のpath / venv / pytest提供要求へ変換していないか
+- [ ] rematerializationをfrozen lockからの別authorityとして分離したか
+- [ ] historical resultを遡及変更・再parse・再creditしていないか
+
+一つでも満たせなければtargeted authorityを提示せず、Gate Aまたは別Gate Bへ戻る。

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-07-25"
+revision_date: "2026-08-01"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -3214,3 +3214,40 @@ work attitude owner:
   Mash様が変更条文と変更後内容を別作業として明示承認した場合だけ。
 
 旧transport条件だけで失敗するactive testは、作業停止理由ではなくtest不具合とする。
+
+# 2026-08-01 CURRENT Work test-runner runtime continuity index
+
+| owner / rule | current responsibility |
+|---|---|
+| `13_cocolon_work_test_runner_runtime_continuity.md` | Work-local Python / pytest test-runnerのsession continuity、identity、discovery、readiness recovery、target admissionの技術正本 |
+| `work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt` | 華恋の毎session・毎targeted pytest authorityの強制実行規則 |
+| `work_attitude_rules_for_karen/00_read_first.txt` | pytest依存作業で13 / 16を必読化 |
+| `work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt` | 過去READYではなくcurrent runtime実体とidentityを確認 |
+| `work_attitude_rules_for_karen/07_forbidden_shifting_burden_to_user.txt` | Work-local runtime不足をMash様へのpath / venv / pytest要求へ変換しない |
+| `work_attitude_rules_for_karen/09_work_start_checklist.txt` §S | target authority前のcontinuity / readiness / exact entrypoint check |
+| `work_attitude_rules_for_karen/10_stop_judgment_and_unwritten_rules.txt` | prelaunch不成立をtargeted invocation 0のSTOPへ分類し、Work recoveryへ戻す |
+| `work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt` | sessionを跨ぐ忘却をMash様のpath保持負担にしない |
+| `work_attitude_rules_for_karen/99_integrated_paste_each_time.txt` | 毎回読む統合ruleのruntime continuity要約 |
+| `11_cocolon_github_transport_and_session_continuity.md` | GitHub反映方法と完了判定のみ。runtime technical ownerではなく、本更新で変更しない |
+
+read order:
+
+```text
+pytest-dependent work
+  -> 07 current authority
+  -> 13 runtime continuity technical contract
+  -> 16 Karen behavioral rule
+  -> 09 checklist §S
+  -> active runtime-specific frozen authority / lock
+  -> actual Work runtime candidate
+```
+
+absolute pathはcurrent-session private locatorであり、identityまたはpersistence証明
+ではありません。interpreter executable SHA-256単独も、pytest-bearing
+runtime-root / site contextを証明しません。
+
+session boundary後は過去READYをcurrent continuity未確認へ戻し、candidate探索scopeを
+固定して静的再発見します。static identityが一致してもそれだけでREADYとせず、
+Gate B fresh readinessまで成立した場合だけ再利用します。見つからない場合はMash様の
+作業へ変換せず、GitHub-tracked procedureにfrozen lock-derived rematerializationの
+別authorityへ戻ります。

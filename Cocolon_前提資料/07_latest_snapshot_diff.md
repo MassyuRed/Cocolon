@@ -32705,3 +32705,121 @@ true
 automatic progression:
 false
 ```
+
+# 2026-08-01 CURRENT ADDITIVE CORRECTION: Work test-runner runtime continuity
+
+## Authority and scope
+
+Mash様は2026-08-01、華恋が監査したruntime continuity再発防止設計の作成と
+GitHub反映を明示承認しました。
+
+このcheckpointは前提contract、華恋用rule、active-lookingなfuture directionの
+additive correctionだけです。runtime rematerialization、readiness probe、targeted
+pytest、production、published RED test、既存D1を変更または実行しません。
+
+current correction exact3:
+
+```text
+Result:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Result_20260801.md
+blob / raw: a2ca377b433412c78707f50e03cb10850b8069ea / 638ace7881b7c5767b73435cb2e43b3517d8922787380c3518acc29a13cfe1ce
+
+Body-free Receipt:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_BodyFree_Receipt_20260801.json
+blob / raw / logical: 4af86460cf78aba2d1342a54956653ac66c4ec5b / e49c6d41f471a079d06819826febed01500f27b9178cf39651f16ee7d1620231 / ecfe452ba32d0bea73dcdf400c7fc5c2f5eff9cc40b84386ab2a1af166980273
+
+Handoff:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Handoff_20260801.md
+blob / raw: 5fe50994d8b3118a7a56769c1c799bd26cbffca7 / 6576255a48db62ddc93e21bd96d67a375b08a1bc57768c845749933d0c189962
+```
+
+current normative owners:
+
+```text
+technical:
+13_cocolon_work_test_runner_runtime_continuity.md
+
+Karen execution:
+work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt
+
+GitHub reflection:
+11_cocolon_github_transport_and_session_continuity.md
+CURRENT_NORMATIVE_CONTRACT
+```
+
+`11`は変更していません。runtime readinessをGitHub反映条件へ変換しません。
+
+## Preserved historical facts
+
+- failed targeted launch request exact1、exit 1、pytest-start / collection / call
+  exact0はimmutableです。
+- Result / Receipt / Handoffのhistorical bytesとnon-credit分類は不変です。
+- current R1は`R1_RESULT_UNKNOWN_STOP`です。
+- owner-absent causal RED、GREEN、creditは成立していません。
+- published RED test、existing D1、production ownerは不変です。
+
+## Corrected current direction
+
+```text
+prior required user work:
+MAKE_A_PYTEST_8_4_1_CAPABLE_PYTHON_RUNTIME_AVAILABLE_TO_KAREN
+
+prior next authority condition:
+USER_PROVIDED_PYTEST_8_4_1_RUNTIME_REQUIRED
+
+prior future directive status:
+HISTORICAL_SUPERSEDED_INACTIVE
+
+current required Mash runtime resource / environment work:
+NONE
+
+next separate authority approval:
+MASH_APPROVAL_REQUIRED
+
+runtime discovery / recovery owner:
+KAREN
+
+current old session-local runtime state:
+RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS
+
+discovery scope / alternate locator scan:
+KNOWN_PRIOR_RUNTIME_ROOT_AND_CURRENT_CHECKPOINT_DECLARED_LOCATOR_SET / NOT_ESTABLISHED
+
+prior readiness:
+HISTORICALLY_VALID_AT_2026_07_31
+
+current targeted execution eligibility:
+false
+```
+
+failed launchの直接観測原因は、exact admitted runtime entrypointではなくgeneric
+base interpreterが選ばれ、そのenvironmentでpytest moduleを解決できなかった
+ことです。旧session-local runtimeがfailed launchの瞬間に既に消失していたとは
+証明されていません。
+
+一方、current read-only observationでは、上記discovery scope内に旧runtime rootと
+同一candidateは発見されていません。alternate locator全体の不在は未確認です。
+過去readinessを否定せず、current eligibilityも仮定しません。
+
+resolved interpreter executable hash単独では、pytest-bearing runtime-root、
+entrypoint、symlink/control、exact dependency projectionを証明できません。
+
+## Current zero effects and next boundary
+
+```text
+targeted pytest invocation: 0
+runtime materialization / rematerialization: 0 / 0
+readiness pytest version probe: 0
+role import probe: 0
+production change: 0
+published RED test change: 0
+existing D1 change / exact8 invocation: 0 / 0
+challenge / remote runtime observation: 0 / 0
+Work-side artifact acquisition network: 0
+historical result reparse / credit promotion: 0 / 0
+automatic progression: false
+```
+
+次のseparate authority classは、既存frozen lock-derived exact5を使うWork-owned
+rematerialization / identity derivation / fresh readiness onlyです。Mash様による
+absolute path、venv、wheel、pytest installationの提供は不要です。

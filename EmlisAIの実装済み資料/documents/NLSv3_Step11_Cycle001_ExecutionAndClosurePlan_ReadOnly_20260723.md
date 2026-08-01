@@ -12303,3 +12303,78 @@ DEFINED_INACTIVE_REQUIRED_USER_RUNTIME_AND_SEPARATE_MASH_APPROVAL
 automatic progression:
 false
 ```
+
+# 2026-08-01 ADDITIVE SUPERSEDING CORRECTION: Work test-runner runtime continuity
+
+This section is later than, and supersedes only the future-direction fields in,
+the preceding launcher / environment invalid non-credit append.
+
+It does not alter the historical targeted launch request exact1, exit 1,
+pytest-start exact0, Result / Receipt / Handoff bytes, non-credit classification,
+or `R1_RESULT_UNKNOWN_STOP`.
+
+Canonical correction Result:
+
+```text
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuityAndCurrentAuthorityCorrection_Additive_Result_20260801.md
+```
+
+Current runtime continuity contracts:
+
+```text
+Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md
+Cocolon_前提資料/work_attitude_rules_for_karen/
+16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt
+```
+
+## Corrected current position
+
+```text
+prior required user work:
+MAKE_A_PYTEST_8_4_1_CAPABLE_PYTHON_RUNTIME_AVAILABLE_TO_KAREN
+
+prior user-provided-runtime authority:
+HISTORICAL_SUPERSEDED_INACTIVE
+
+current required Mash runtime resource / environment work:
+NONE
+
+next separate authority approval:
+MASH_APPROVAL_REQUIRED
+
+runtime continuity / recovery owner:
+KAREN
+
+current old session-local runtime:
+RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS
+
+discovery scope / alternate locator scan:
+KNOWN_PRIOR_RUNTIME_ROOT_AND_CURRENT_CHECKPOINT_DECLARED_LOCATOR_SET / NOT_ESTABLISHED
+
+prior readiness:
+HISTORICALLY_VALID_AT_2026_07_31
+
+current targeted execution eligibility:
+false
+```
+
+The failed launch directly established generic base interpreter selection and
+pytest module absence. It did not establish that the old session-local runtime
+was already absent at the launch instant. The scope-bounded current absence and
+the earlier launch cause remain separate facts; alternate-locator absence is not
+established.
+
+The next work class is Work-owned lock-derived exact5 rematerialization and fresh
+readiness only. It requires a separate Mash approval. It does not require Mash to
+provide an absolute path, venv, wheel, Python environment, or pytest installation.
+
+```text
+this correction targeted pytest invocation: 0
+runtime rematerialization: 0
+production change: 0
+published RED test change: 0
+existing D1 change / exact8 invocation: 0 / 0
+challenge / remote runtime observation / Work-side artifact network: 0 / 0 / 0
+historical result reparse / credit promotion: 0 / 0
+automatic progression: false
+```

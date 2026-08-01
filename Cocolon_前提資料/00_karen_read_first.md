@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-07-25"
+revision_date: "2026-08-01"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -7741,3 +7741,45 @@ GitHub反映方法と完了判定の唯一のcurrent正本は
 特定鍵、SSH、expected-old CAS、direct-child、single commit、whole repository / all unchanged paths、full recursive postfetch、future-scale proof、durable storeをGitHub反映の必須条件にしません。
 
 HEADが進んだだけでは停止せず、targetに衝突がなければ最新版を読み直して続行します。この契約を華恋、設計書、test、receipt、後続資料は厳しく変更できません。変更できるのは、Mash様が変更条文と変更後内容を別作業として明示承認した場合だけです。
+
+# 2026-08-01 CURRENT Work test-runner runtime continuity
+
+Work-local Python / pytest test-runnerを使用する作業では、次を追加で必読とします。
+
+1. `13_cocolon_work_test_runner_runtime_continuity.md`
+2. `work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`
+3. `work_attitude_rules_for_karen/09_work_start_checklist.txt` §S
+
+技術正本は`13`、華恋の実行checkは`16`です。GitHub反映方法と完了判定は
+引き続き`11`だけが正本であり、runtime readinessをGitHub反映開始条件へ
+変換しません。
+
+固定するcurrent境界:
+
+- test-runner runtimeの発見、materialization、verification、rediscovery、
+  rematerializationは華恋の作業。
+- current Work environmentは実行場所でありownerではない。
+- session境界では過去READYを`CURRENT_CONTINUITY_UNVERIFIED`へ戻し、
+  declared discovery scope内のcurrent実在性と静的identityを再確認する。
+- 過去readinessは当時の歴史的事実として保持し、current availabilityとは分ける。
+- static rediscoveryだけでREADYにせず、targeted authorityはGate B fresh
+  current-session readiness成立後だけ提示する。
+- targetは確認済みabsolute entrypointを直接使い、generic `python`、`python3`、
+  `py`、`/usr/bin/env python`、PATH、`which`、`command -v`、default interpreter、
+  fallback、interpreter switchを使用しない。
+- pytest version probe、role import probe、targeted invocationを別counterにする。
+- runtime不在・identity不一致はtargeted invocation 0のままWork側recoveryへ戻す。
+- Mash様へabsolute path、venv、wheel、pytest installationを要求しない。
+- absolute path、runtime本体、session identifierをGitHubへ保存しない。
+- rematerializationはGitHub-tracked procedureとhelper identityにbindし、session-local
+  helper pathだけを再構築ownerにしない。
+- historical Result / Receipt / Handoffを遡及変更・再parse・再creditしない。
+
+2026-08-01のRecovery Epoch004 current checkpointでは、旧session-local exact5
+runtimeは既知prior locatorとcurrent checkpoint declared locator setに存在せず、
+current stateは`RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS`です。未探索の
+alternate locatorに同一instanceがないことまで断定しません。
+過去readinessはhistorically validですが、current targeted execution eligibilityは
+ありません。次に必要なのはMash様からのruntime提供ではなく、既存frozen
+lock-derived exact5を使う華恋側rematerialization / readinessの別authorityです。
+この前提更新だけではrematerialization、probe、targeted pytestを開始しません。

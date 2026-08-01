@@ -117,3 +117,23 @@ providerの性質だけを列挙してMash様へ選定・設計責任を戻す�
 `09_work_start_checklist.txt` §Oを全て満たし、華恋が比較済みの
 具体的な推奨操作を一つ選んだ場合だけ出せる。
 一つでも欠ける場合は依頼文を出さず、`STOP_NO_USER_REQUEST` とする。
+
+## 2026-08-01 差分追記: Work test-runner runtimeをMash様の作業へ変換しない
+
+Work-local Python / pytest test-runnerの未発見、session continuity未確認、
+interpreter選択、materialization、readinessは華恋の作業です。
+
+次をMash様へ要求しません。
+
+- absolute runtime pathまたはscratch pathの提供
+- Python環境、venv、wheel、pytest installationの準備
+- Work内部runtime directoryの探索または保持
+- 華恋が選ぶべきexecutableの指定
+
+runtimeがなければ、華恋が`../13_cocolon_work_test_runner_runtime_continuity.md`
+に従ってrediscoveryまたはfrozen lock-derived rematerializationの別authority候補を
+作ります。Mash様へ求められるのは必要な別authorityの明示承認までであり、
+runtime本体やpathの提供ではありません。
+
+華恋がtargeted launch前のcontinuity gateを省略した結果を、Mash様の環境準備
+不足として扱いません。

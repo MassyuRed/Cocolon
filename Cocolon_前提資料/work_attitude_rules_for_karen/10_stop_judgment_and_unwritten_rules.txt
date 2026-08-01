@@ -121,3 +121,25 @@ remote stateも変更しない。次の順で一度だけ回復する。
 回復出力へ新しいuser作業要求、代替contract、別の次authorityを混ぜない。ただし、Mash様が同じ指示で次作業の確定を明示した場合は、回復節と分離し、このgateを独立して通過した次作業だけを示せる。
 この停止処理も事実に基づいて構成できない場合は、
 Cocolonの作業判断、依頼、変更案、writeを出力しない。
+
+## 2026-08-01 current: Work test-runner runtime continuityの停止条件
+
+pytestを必要とするtargeted authorityの前に、次のいずれかを確認した場合は
+targeted invocation 0のままSTOPする。
+
+- 明示したcandidate discovery scope内にruntime candidateが存在しない。
+- entrypoint、symlink/control、runtime-root、lock / projection identityが一致しない。
+- absolute pathまたはinterpreter hash以外のrequired identityを再導出できない。
+- cross-sessionの静的identity一致だけでcurrent READYとしようとしている。
+- readiness probeとtargeted invocationのcounterが分離されていない。
+- exact admitted entrypointではなくgeneric `python`、`python3`、`py`、
+  `/usr/bin/env python`、PATH、`which`、`command -v`、default interpreterを使う必要がある。
+- target authority内でinstallation、repair、rematerialization、fallbackが必要である。
+
+停止後は`../13_cocolon_work_test_runner_runtime_continuity.md`のGate Aまたは別Gate Bへ
+戻る。Mash様へruntime path、venv、pytest installationを要求しない。
+
+exact admitted executableのlaunch requestをOSへ渡した後にenvironment failureを
+観測した場合、authority消費を巻き戻さずretryしない。
+non-credit STOPを保持し、直接観測したlauncher causeとsession continuity上の
+背景を分離して記録する。

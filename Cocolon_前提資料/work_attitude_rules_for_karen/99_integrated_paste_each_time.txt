@@ -98,6 +98,20 @@ Cocolon作業前に必ず読むルール（統合版）
 86. 違反出力は無効でremote stateを変えない。抵触ruleとobservable effectを特定し、最後に確認できたauthorityへ戻り、同じ回復出力へ新しいuser作業要求・代替contract・次authorityを混ぜない。Mash様が同じ指示で次作業の確定を明示した場合だけ、回復節と分離し、このgateを独立して通過した次作業を示せる。
 87. このgateを通せなければ、Cocolonの作業判断、依頼、contract変更案、次authority、GitHub writeを出さない。確認済み事実だけのSTOPも作れない場合はCocolonについて出力しない。
 
+88. Work-local Python / pytest test-runnerを使う場合、`../13_cocolon_work_test_runner_runtime_continuity.md`と`16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`を読む。
+89. test-runnerの発見、materialization、verification、rediscovery、rematerializationの実行ownerは華恋。Mash様へabsolute path、venv、wheel、pytest installationを要求しない。
+90. session境界では過去READYをcurrent continuity未確認へ戻す。過去readinessは履歴として保持し、物理的消失を推測で断定しない。
+91. targeted authority前にcandidate discovery scopeを固定し、root、entrypoint、symlink/control、manifest、lock / projection identityをread-onlyで確認する。candidate不在は当該scope内だけの結果として記録する。
+92. absolute pathまたはinterpreter hash単独をruntime identityにしない。
+93. pytest version probeとrole import probeをtargeted invocationとは別authority / counterにする。
+94. cross-session candidateの静的identity一致だけでREADYにせず、Gate B fresh readiness成立前にtargeted authorityを提示・activation・admission・consumptionしない。
+95. targetは確認済みabsolute entrypointを直接使用し、generic `python`、`python3`、`py`、`/usr/bin/env python`、PATH、`which`、`command -v`、default interpreter、fallback、interpreter switchを使わない。
+96. prelaunch不成立ならtargeted invocation 0のままSTOPし、華恋側rediscoveryまたは別承認rematerializationへ戻る。
+97. target authority内でdependency installation、runtime repair、rematerialization、hidden probeを行わない。
+98. historical Result / Receipt / Handoffは書き換えず、誤ったfuture directionをadditive correctionで非current化する。
+99. rematerializationはGitHub-tracked procedureと、tracked helperまたはauthority-bound local helper identityにbindし、session-local helper pathだけを再構築ownerにしない。
+100. exact admitted executableのlaunch requestをOSへ渡した時点でauthority消費をexact1とし、OS rejectやpytest-start exact0でも巻き戻さずretryしない。
+
 出力前テンプレ:
 
 確認済み:
