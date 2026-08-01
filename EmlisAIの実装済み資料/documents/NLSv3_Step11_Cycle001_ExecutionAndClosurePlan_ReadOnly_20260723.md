@@ -13713,3 +13713,182 @@ faad0751da58885885d8f6f1d8fcb69b07312b74
 1e6209da6e4b1e34f7360dc4c7ca6879b80d0176881db9c0dde64cd2038944af
 493497 / 13557
 ```
+
+# 2026-08-01 addendum — Gate B relation-semantic closure v4 dual-static VALID STOP
+
+## Outcome and authority boundary
+
+Approved authority SHA-256
+`12c03f3bd8a88050ac72720f6bdd39ffc406e8202beefe1152abbdffbf5faba4` was activated and
+consumed exact1. External bootstrap v2 exact1 and distinct registry v4 exact1 were created and sealed
+in private scope. Owner and independent static verification exact1 each returned VALID from sealed
+raw bytes.
+
+The authority stopped at
+`RUNTIME_NOT_READY_RELATION_SEMANTIC_CLOSURE_V4_DUAL_STATIC_VALID_DESIGN_STOP`. This creates
+design credit only. Runtime readiness remains false, target authority remains absent, and Full R1
+remains `UNKNOWN_PRESERVED`.
+
+## Private identities and actual cardinalities
+
+```text
+external bootstrap v2 raw / bytes:
+1123f4e9ae9b177f66d04317035f99e0d103a955b7c82936edf0ca184a23aa77 / 4518
+
+registry v4 raw / bytes:
+a77157fceffaacddf28ad3c2a7fcfa03c6edd53de49a7cd0e523cdc8c758a508 / 118055
+
+schema / resolution / rule / enum:
+44 / 323 / 73 / 17
+
+relation rule / application / field reference / literal:
+13 / 13 / 28 / 6
+
+state matrix / hash binding / credit node / credit edge / causal rule:
+5 / 7 / 44 / 14 / 5
+
+owner / independent verdict:
+exact1 VALID / exact1 VALID
+
+application mismatch / unresolved field reference:
+exact0 / exact0
+
+canonical / nonrecursive / private body publication:
+VALID / VALID / exact0
+```
+
+The independent presentation count was reconciled to field-reference exact28 and literal exact6
+without changing its formal verdict or closure vectors.
+
+## Rederived closure vector
+
+```text
+canonical raw:
+VALID
+
+bootstrap external and nonrecursive:
+VALID
+
+schema exact-key, resolution exact1, rule and enum:
+VALID
+
+state/nullability:
+VALID
+
+hash preimage and domain:
+VALID
+
+credit DAG, root reachability and legacy exclusion:
+VALID
+
+causal required-field and ordering:
+VALID
+
+typed relation target, field path, terminal type and literal:
+VALID
+```
+
+The prior registry v3 owner partial PASS was not inherited. All values above were rederived from the
+new v4 bytes.
+
+## Zero-effect preservation
+
+```text
+prior artifact edit / reuse / execution / publication:
+exact0 / exact0 / exact0 / exact0
+
+replacement materializer creation / edit / reuse / execution:
+exact0 / exact0 / exact0 / exact0
+
+replacement independent verifier creation / edit / reuse / execution:
+exact0 / exact0 / exact0 / exact0
+
+acquisition / network / materialization / probe / role import / pytest:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+target authority issuance / activation / admission / consumption:
+exact0 / exact0 / exact0 / exact0
+
+OS child / target import / collection / call / targeted pytest:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+production / published RED / existing D1 / mashos-api change:
+exact0 / exact0 / exact0 / exact0
+```
+
+Historical noncredit terminals remain immutable. No retroactive reparse, reclassification or credit
+occurred.
+
+## New exact3 before this Plan append
+
+```text
+Result path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_RelationSemanticClosureV4_DualStaticValidStop_Result_20260801.md
+677bc81566eaa90f1b0c19ac8cf1f1565c175243
+4427755e394c23e19c451b7bd7b491a01cb7dc3e7de0102a0e47197f70c901d0
+10094 / 177
+
+Receipt path / blob / raw / logical / observation / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_RelationSemanticClosureV4_DualStaticValidStop_BodyFree_Receipt_20260801.json
+7388d85581b472c6bd8e7fa684e5bb0407b4b40a
+47f780a7e353f0bc1c2fc95bb58a68c89202853cb9e76bc5b543c98e2db47c27
+ddb02a68fc3d908d3c166c7cd495e1d16ffb1b06e614d9be4929b35cade7f931
+5724776c55dbc68cae47dfed3500bacc444f3ef24d7f9fa97199b715b945643f
+8914 / 158
+
+Handoff path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_RelationSemanticClosureV4_DualStaticValidStop_Handoff_20260801.md
+baa54df9d380a16b76b65a5dcf3922e9f9790caf
+e8a7f410026deb168b1e2f880cab5246c10db9eceb463211d88402f108949c94
+6945 / 69
+```
+
+Public scope remains NEW exact3 plus append-only MODIFY exact2. The private bodies are not published;
+Cocolon production and mashos-api changed-path counts remain exact0.
+
+## Confirmed facts, inference, and Karen's opinion
+
+### Confirmed facts
+
+Both required static verdicts are VALID; all 28 typed field references resolve exactly once, all 6
+literals are explicit, and the full nonrelation vector is closed. No runtime or helper effect was
+performed.
+
+### Inference
+
+Registry v4 can serve as the stable read-only contract for a separate helper-body design authority.
+It does not predict whether either helper body will satisfy that contract.
+
+### Karen's opinion
+
+The next safe unit is creation and static rejection-or-acceptance of both replacement helper bodies.
+Execution must remain a separately approved future unit even if both bodies pass.
+
+## Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_RELATION_SEMANTIC_CLOSURE_V4_DUAL_STATIC_VALID_POSTVERIFIED_OBSERVATION_SHA256_5724776C55DBC68CAE47DFED3500BACC444F3EF24D7F9FA97199B715B945643F_CURRENT_DESIGN_AUTHORITY_SHA256_12C03F3BD8A88050AC72720F6BDD39FFC406E8202BEEFE1152ABBDFFBF5FABA4_ACTIVATED_EXACT1_CLOSED_CONSUMED_DESIGN_VALID_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_HISTORICAL_AUTHORITY_DECLARED_COCOLON_PREWRITE_BASE_7F454C28_TREE_275B24F7_CURRENT_COCOLON_PUBLIC_WRITE_PREDECESSOR_5F91F889_TREE_0249FD9D_MASHOS_API_315813C7_TREE_A641510E_PRIOR_BOOTSTRAP_V1_REGISTRY_V3_AND_GATE_B_HELPERS_IMMUTABLE_UNEDITED_UNREUSED_UNEXECUTED_UNPUBLISHED_EXTERNAL_BOOTSTRAP_V2_CREATED_EXACT1_RAW_1123F4E9AE9B177F66D04317035F99E0D103A955B7C82936EDF0CA184A23AA77_BYTES_4518_CANONICAL_NONRECURSIVE_PRIVATE_UNPUBLISHED_REGISTRY_V4_CREATED_EXACT1_RAW_A77157FCEFFAACDDF28AD3C2A7FCFA03C6EDD53DE49A7CD0E523CDC8C758A508_BYTES_118055_SCHEMA_ROW_EXACT44_FIELD_RESOLUTION_EXACT323_RULE_EXACT73_ENUM_EXACT17_RELATION_RULE_EXACT13_RELATION_APPLICATION_EXACT13_TYPED_FIELD_REFERENCE_EXACT28_EXPLICIT_LITERAL_EXACT6_STATE_MATRIX_EXACT5_HASH_BINDING_EXACT7_CREDIT_NODE_EXACT44_CREDIT_EDGE_EXACT14_CAUSAL_RULE_EXACT5_CANONICAL_RELATION_AND_NONRELATION_SEMANTIC_CLOSURE_VALID_PRIVATE_PUBLICABLE_UNPUBLISHED_OWNER_STATIC_VERIFICATION_EXACT1_VALID_INDEPENDENT_STATIC_VERIFICATION_EXACT1_VALID_APPLICATION_MISMATCH_EXACT0_UNRESOLVED_FIELD_REFERENCE_EXACT0_PRIOR_AND_REPLACEMENT_HELPER_CREATION_EDIT_REUSE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_GATE_B_REPLACEMENT_HELPER_V2_STATIC_CONTRACT_DESIGN_ONLY_AUTHORITY_BOOTSTRAP_V2_AND_REGISTRY_V4_READ_ONLY_BINDING_CONSUMPTION_EXACT1_EXACT1_FROZEN_SOURCE_LOCK_PROJECTION_AND_TRACKED_PROCEDURE_BINDING_VALIDATION_EXACT1_REPLACEMENT_MATERIALIZER_V2_HELPER_CREATION_EXACT1_REPLACEMENT_INDEPENDENT_VERIFIER_V2_HELPER_CREATION_EXACT1_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_RUNTIME_UNPUBLISHED_AUTHORITY_GLOBAL_SINGLE_USE_AND_RESERVATION_PREBOUND_EXACT1_PRIVATE_ROOT_PATH_OBJECT_PAIRWISE_DISJOINT_SYMLINK_FREE_REPOSITORY_ANCESTOR_ABSENT_PROBE_CWD_PREPOST_LIFECYCLE_CONTRACT_EXACT1_ROLE_EXACT_COUNTER_EVENT_ATTEMPT_BEFORE_EFFECT_COMPLETION_AFTER_EFFECT_EXACT1_GENERIC_RECEIPT_EXACT4_MATERIALIZER_RECEIPT_EXACT25_INDEPENDENT_RECEIPT_EXACT29_CONTROLLER_POSTCOMMIT_PREIMAGE_EXACT17_ENVELOPE_EXACT10_READINESS_PREIMAGE_EXACT20_FINAL_READY_COMMIT_EXACT11_CONTRACT_EXACT1_FIXED_PROBE_ENVIRONMENT_EXACT6_REMOVED_KEYS_EXACT3_PARTIAL_PROCESS_STATE_TOTALITY_EXACT1_LEGACY_NONCREDIT_AND_REGISTRY_BOUND_CREDIT_CLOSURE_SEPARATION_EXACT1_DUAL_VERDICT_AND_IDENTITY_BINDING_EXACT1_TYPED_FAILURE_AND_CONTROLLER_POSTCOMMIT_TOTALITY_EXACT1_OWNER_HELPER_STATIC_CONTRACT_VERIFICATION_EXACT1_VALID_AND_INDEPENDENT_HELPER_STATIC_CONTRACT_VERIFICATION_EXACT1_VALID_OR_TYPED_HELPER_STATIC_CONTRACT_BLOCKER_STOP_PRIOR_ARTIFACT_EDIT_REUSE_EXECUTION_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_NEW_HELPER_EDIT_REUSE_EXECUTION_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_AND_GITHUB_PRODUCTION_SOURCE_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_HELPER_STATIC_CONTRACT_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_GATE_B_EXECUTION_TARGET_AUTHORITY_ISSUANCE_OR_AUTOMATIC_PROGRESSION
+```
+
+```text
+successor token SHA-256:
+8fe15e89933a580a9324513b5d9e610938e77be1c76c5e4359f5611aeb029a3a
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+### Entry-prefix preservation
+
+```text
+Plan entry prefix blob / raw / bytes / lines:
+ce7d64edcc3a0bee1d3e03c4450e492ada760dbc
+5c6224df635d5483ec59f9fefa165563b3a469e4a043bd1faa696f774695fb22
+502752 / 13715
+```
