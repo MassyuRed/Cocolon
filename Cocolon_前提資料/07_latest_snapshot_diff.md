@@ -33359,3 +33359,192 @@ snapshot entry prefix blob / raw / bytes / lines:
 e947025e316dc7e950538b97be7309d524456841bcc4906d6f0be84d3174b5b2
 1656707 / 33188
 ```
+
+# 2026-08-01 observer-v2 current-session Gate C identity-invalid prelaunch noncredit snapshot
+
+## Current state
+
+```text
+observer-v2 execution authority:
+ACTIVATED_EXACT1_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT
+
+terminal:
+R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP
+
+safe reason:
+CURRENT_SESSION_BOUNDARY_PRIOR_SESSION_LOCAL_READINESS_EXPIRED
+
+current continuity:
+CURRENT_CONTINUITY_UNVERIFIED
+
+current full R1:
+R1_RESULT_UNKNOWN_STOP
+
+automatic progression:
+false
+```
+
+Prior readiness observation `8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69`
+and runtime instance `695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80`
+remain historical. Their persistence class is `SESSION_LOCAL`; the current session boundary expired
+their execution eligibility. The current authority forbids discovery and rematerialization, so
+Gate C stopped before admission.
+
+## Private helper and static conformance
+
+```text
+observer-v2 helper creation / execution / raw:
+exact1 / exact0
+635e4fb5a9a56ca126b4d5a9a35cc0431774049d96761c1b5ef0042d92c27ec3
+
+controller-v2 helper creation / execution / raw:
+exact1 / exact0
+bcbbaa6b3af92b59558c7113ddd8d2aa9e6fe1f84b7d95e7e9ba4ffda2a7f51f
+
+owner / independent final static conformance:
+VALID exact1 / VALID exact1
+
+child / phase / runner keysets:
+exact15 / exact8 / exact3
+
+observer hooks / controller / counters:
+exact6 / exact16 / exact26
+
+pytest_collectreport / target_module_collect_reports:
+exact0 / exact0
+```
+
+The helper bodies and absolute locators remain unpublished. The final controller binds the exact
+authority hash, current readiness, base/tree, remote/tree, source exact6, helper identities and
+target node; preserves admission-consumption-launch ordering; and total-maps post-consumption
+launch failure without retry.
+
+## Gate C and zero execution
+
+```text
+Gate C evaluation:
+exact1
+
+admission / gate evidence consumption / authority consumption:
+exact0 / exact0 / exact0
+
+target OS child / pytest.main / targeted pytest:
+exact0 / exact0 / exact0
+
+target framework / import / collection / call:
+exact0 / exact0 / exact0 / exact0
+
+target-prelaunch static local git-status process:
+exact0
+
+runtime discovery / version probe / role smoke / repair / rematerialization:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+network / challenge / remote observation:
+exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch / dependency install:
+exact0 / exact0 / exact0 / exact0
+
+production / published RED / existing D1 / mashos-api change:
+exact0 / exact0 / exact0 / exact0
+```
+
+Existing D1 raw bytes were read exact1 and raw/Git-blob validation passed. D1 import, Python
+execution and D1 full exact8 pytest are exact0. Public source exact6 matched for orientation, but
+that does not restore current private runtime readiness.
+
+## Current canonical exact4 before this snapshot append
+
+Result:
+
+```text
+path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_Result_20260801.md
+8609edb10621d914c6b7a48c60eaf4cf5d466b75
+6b25a52621f24358ef7a9aad9012e1bbfe07e87a4853aade915d15adb4635a75
+10377 / 266
+```
+
+Body-free Receipt:
+
+```text
+path / blob / raw / logical / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_BodyFree_Receipt_20260801.json
+f3abf5c2bac7217b4905b3d877b57c67bdec3ba6
+6c8f5cd8c58758519ce9c3f2cee3a12dd1275fc37c5ee381090cacbabf2782f5
+a0b4e0bbcf52144a7ca099068940ac3b1e18fa1ccde0ad7b9a1226d9562163d1
+9557 / 165
+```
+
+Handoff:
+
+```text
+path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_Handoff_20260801.md
+8a3296ccbf9698331842975a3366f14201d31a2b
+6c5ca7933e1aca1bd2f0ad4aaf843f7aa5be9e301c321d557123dde2a50bfa2b
+5922 / 131
+```
+
+Tracked Plan:
+
+```text
+path / blob / raw / bytes / lines:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+b5928faa75b7fb6f5fbb1719e5a86c23c2aba09c
+df4b9ac744fea36859a8a9e352620671d70b8d785174b0f1fb83c24df8cc600e
+465126 / 13089
+```
+
+Approved changed paths are NEW exact3 and MODIFY exact2 (Plan plus this snapshot) only.
+`mashos-api` change is exact0. Formal completion requires current Cocolon main containment, all
+exact5 byte equality and current write changed-path set exact5 no extras.
+
+## Confirmed facts, inference, and Karen's opinion
+
+### Confirmed facts
+
+- The private helper pair is final, outside the repositories/runtime, unpublished and statically
+  VALID exact1/exact1.
+- Current-session readiness is absent after the `SESSION_LOCAL` expiry boundary.
+- Gate C stopped before every admission-to-target action.
+- Observer-v1 noncredit and full R1 unknown remain immutable.
+
+### Inference
+
+No global runtime absence is claimed; the previous instance may exist outside the next declared
+scope.
+
+### Karen's opinion
+
+The correct response to an expired session-local readiness is not a target retry and not another
+observer design. It is a bounded read-only Gate A discovery. Even a static identity match stops at
+`CROSS_SESSION_REDISCOVERED_PENDING_READINESS`; Gate B and target execution remain separate
+authorities.
+
+## Exactly one next authority
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_ONE_SHOT_CURRENT_SESSION_BOUNDARY_PRIOR_SESSION_LOCAL_READINESS_EXPIRED_GATE_C_IDENTITY_INVALID_BEFORE_ADMISSION_TERMINAL_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_CURRENT_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NO_RETRY_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_OBSERVER_V2_HELPER_CREATED_EXACT1_CONTROLLER_V2_HELPER_CREATED_EXACT1_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_AND_RUNTIME_UNPUBLISHED_FINAL_RAW_IDENTITIES_BOUND_STATIC_CONFORMANCE_OWNER_VALID_EXACT1_INDEPENDENT_VALID_EXACT1_PYTEST_COLLECTREPORT_AND_TARGET_MODULE_COLLECT_REPORTS_EXACT0_ADMISSION_GATE_EVIDENCE_CONSUMPTION_AUTHORITY_CONSUMPTION_OS_CHILD_PYTEST_MAIN_TARGETED_PYTEST_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_STATIC_LOCAL_GIT_STATUS_PROCESS_EXACT0_EXISTING_D1_RAW_READ_EXACT1_RAW_AND_BLOB_VALIDATION_PASS_D1_IMPORT_PYTHON_EXECUTION_D1_FULL_EXACT8_EXACT0_EXACT0_EXACT0_RUNTIME_DISCOVERY_VERSION_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_CHANGE_EXACT0_PRODUCTION_PUBLISHED_RED_TEST_EXISTING_D1_MASHOS_API_CHANGE_EXACT0_CURRENT_CONTINUITY_UNVERIFIED_DISTINCT_WORK_TEST_RUNNER_RUNTIME_CONTINUITY_GATE_A_READ_ONLY_DISCOVERY_ONLY_DECLARED_BODY_FREE_SCOPE_CURRENT_WORK_SESSION_TASK_ROOT_DIRECT_CHILD_RUNTIME_CANDIDATES_EXCLUDING_UPLOAD_REPOSITORIES_AND_PRIVATE_HELPERS_CANDIDATE_LOCATOR_SEARCH_AND_ROOT_ENTRYPOINT_FILETYPE_PERMISSION_STAT_RELATIVE_LOCATOR_READLINK_SYMLINK_CONTROL_MANIFEST_LOCK_PROJECTION_STATIC_IDENTITY_ONLY_STATIC_CONTINUITY_VERIFIER_PROCESS_EXACT0_PYTEST_PROCESS_TARGET_OR_REQUIRED_ROLE_IMPORT_EXECUTION_TARGET_IMPORT_COLLECTION_CALL_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_MUTATION_INSTALL_REPAIR_REMATERIALIZATION_ACQUISITION_NETWORK_CHALLENGE_REMOTE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_CANDIDATE_ABSENT_RUNTIME_NOT_FOUND_AT_DECLARED_DISCOVERY_SCOPE_OR_IDENTITY_MISMATCH_RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE_OR_STATIC_MATCH_CROSS_SESSION_REDISCOVERED_PENDING_READINESS_NEVER_READY_IN_GATE_A_NO_GATE_B_NO_TARGET_AUTHORITY_ACTIVATION_ADMISSION_CONSUMPTION_OR_EXECUTION_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_AUTOMATIC_PROGRESSION
+```
+
+```text
+successor token SHA-256:
+f815f23512cdfbae771c1290eba52f27bdd60f48ac183b9da445228adda386f8
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+### Entry-prefix preservation
+
+```text
+snapshot entry prefix blob / raw / bytes / lines:
+0cf63cd6c3c05b18ce370639a75a555fffa06bfb
+6510c51665b5d9e8a5ae0bd2219ed4d77c7999cb0d8b99ca1b0d42d3f872a553
+1666661 / 33361
+```

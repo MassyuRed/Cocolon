@@ -1,0 +1,165 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.r1_owner_contract_observer_v2_current_session_gate_c_identity_invalid_prelaunch_noncredit_receipt.v1",
+  "observed_at_date": "2026-08-01",
+  "repository_scope": {
+    "design_and_evidence": "MassyuRed/Cocolon",
+    "target_source": "MassyuRed/mashos-api"
+  },
+  "body_free": true,
+  "private_absolute_locator_published": false,
+  "helper_body_published": false,
+  "authority": {
+    "activation_count": 1,
+    "token_owner_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CollectionAdmissionAndThreeWayTerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_BodyFree_Receipt_20260801.json",
+    "token_sha256": "fbbfee54de6890bd8b4706629786ea2a6a7e759f680fbda2f858f6acc558c2c3",
+    "admission_count": 0,
+    "gate_evidence_consumption_count": 0,
+    "authority_consumption_count": 0,
+    "state": "CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT",
+    "retry_allowed": false
+  },
+  "terminal": {
+    "controller_terminal": "R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP",
+    "safe_reason": "CURRENT_SESSION_BOUNDARY_PRIOR_SESSION_LOCAL_READINESS_EXPIRED",
+    "causal_red_established": false,
+    "credit": "NOT_ESTABLISHED",
+    "automatic_progression": false
+  },
+  "orientation": {
+    "karen_diary_commit_sha1": "35e359d9045183e7c99065d680101d1ec3354d28",
+    "cocolon_entry_commit_sha1": "bf058faa2b04c59eb64ba96f80ff0c1ae01c1e6b",
+    "cocolon_entry_tree_sha1": "9a1d221a434db9ab7c3160a66aec7a127ffc34a8",
+    "mashos_api_commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+    "mashos_api_tree_sha1": "a641510e107d52bb910073f36604c85bd57af150"
+  },
+  "session_boundary": {
+    "prior_readiness_observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+    "prior_runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+    "prior_persistence_class": "SESSION_LOCAL",
+    "reached_expiry_trigger": "SESSION_BOUNDARY",
+    "current_continuity_state": "CURRENT_CONTINUITY_UNVERIFIED",
+    "historical_readiness_reused_for_credit": false
+  },
+  "private_helpers": {
+    "observer_v2": {
+      "creation_count": 1,
+      "execution_count": 0,
+      "raw_sha256": "635e4fb5a9a56ca126b4d5a9a35cc0431774049d96761c1b5ef0042d92c27ec3",
+      "byte_count": 7102,
+      "line_count": 219
+    },
+    "controller_v2": {
+      "creation_count": 1,
+      "execution_count": 0,
+      "raw_sha256": "bcbbaa6b3af92b59558c7113ddd8d2aa9e6fe1f84b7d95e7e9ba4ffda2a7f51f",
+      "byte_count": 29996,
+      "line_count": 871
+    },
+    "outside_cocolon_mashos_api_and_runtime": true
+  },
+  "static_conformance": {
+    "owner_valid_count": 1,
+    "owner_verdict": "VALID",
+    "independent_valid_count": 1,
+    "independent_verdict": "VALID",
+    "blocker_count": 0,
+    "child_top_level_key_count": 15,
+    "phase_key_count": 8,
+    "runner_failure_key_count": 3,
+    "observer_hook_count": 6,
+    "controller_postlaunch_key_count": 16,
+    "counter_key_count": 26,
+    "pytest_collectreport_hook_count": 0,
+    "target_module_collect_reports_field_count": 0,
+    "typed_safe_total_classifier": true
+  },
+  "gate_c": {
+    "evaluation_count": 1,
+    "prelaunch_identity_valid": false,
+    "failure_precedence": "BEFORE_ADMISSION",
+    "admission_record_creation_count": 0,
+    "gate_evidence_consumption_count": 0,
+    "authority_consumption_count": 0,
+    "target_os_child_start_count": 0,
+    "pytest_main_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "other_pytest_invocation_count": 0,
+    "target_prelaunch_static_git_status_process_count": 0,
+    "controller_helper_execution_count": 0
+  },
+  "source_binding": {
+    "base_commit_sha1": "37eee88c431d1af3f8d2e96f9b0dd8b3d3bc327f",
+    "base_tree_sha1": "3891b84164ba0063136e47beb93d36798587a568",
+    "remote_commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+    "remote_tree_sha1": "a641510e107d52bb910073f36604c85bd57af150",
+    "projection_class": "BASE_PLUS_EXACT1_VERIFIED_OVERLAY_NOT_CLAIMED_CLEAN_MAIN",
+    "public_required_source_match_count": 6,
+    "public_source_check_credit_class": "ORIENTATION_ONLY_NOT_CURRENT_RUNTIME_READINESS",
+    "target_path": "ai/tests/test_emlis_nls_v3_recovery_epoch004_r1_structured_terminal_event_ledger_contract_red.py",
+    "target_blob_sha1": "9a1cf8a0343d6a391ce6d520ca686f7310ef22d0",
+    "target_raw_sha256": "ea8498b79fd9aa028ff913fb4d99beb205d2736a3d0ae783a435cbccf32575cc",
+    "target_node_id_sha256": "12c11c21c0b7b5e7818a1a1050002e126a5d2faba2ecc213aeaac4c4fdf9b1d0",
+    "production_owner_state": "ABSENT",
+    "existing_d1_raw_read_count": 1,
+    "existing_d1_raw_sha256_validation": "PASS",
+    "existing_d1_git_blob_sha1_validation": "PASS"
+  },
+  "historical_boundary": {
+    "current_full_r1": "R1_RESULT_UNKNOWN_STOP",
+    "observer_v1_authority": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+    "historical_result_reparse_count": 0,
+    "retroactive_reclassification_count": 0,
+    "credit_promotion_count": 0
+  },
+  "zero_execution_and_effects": {
+    "target_framework_entry_count": 0,
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_call_count": 0,
+    "d1_import_count": 0,
+    "python_execution_count": 0,
+    "d1_full_exact8_pytest_invocation_count": 0,
+    "runtime_discovery_count": 0,
+    "version_probe_count": 0,
+    "role_smoke_count": 0,
+    "runtime_repair_count": 0,
+    "rematerialization_count": 0,
+    "runtime_change_count": 0,
+    "network_execution_count": 0,
+    "challenge_count": 0,
+    "remote_observation_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "dependency_install_count": 0,
+    "production_change_count": 0,
+    "published_red_test_change_count": 0,
+    "existing_d1_change_count": 0,
+    "mashos_api_source_change_count": 0
+  },
+  "result_artifact": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_Result_20260801.md",
+    "git_blob_sha1": "8609edb10621d914c6b7a48c60eaf4cf5d466b75",
+    "raw_sha256": "6b25a52621f24358ef7a9aad9012e1bbfe07e87a4853aade915d15adb4635a75",
+    "byte_count": 10377,
+    "line_count": 266
+  },
+  "source_entries": {
+    "execution_plan_entry_git_blob_sha1": "95a7a2e82ad132547332d46ecc983bcb36d51227",
+    "execution_plan_entry_raw_sha256": "947147862838a100bee293883cc0771ed8e937b436c0645380d3a081c061c4aa",
+    "execution_plan_entry_byte_count": 457810,
+    "execution_plan_entry_line_count": 12938,
+    "latest_snapshot_entry_git_blob_sha1": "0cf63cd6c3c05b18ce370639a75a555fffa06bfb",
+    "latest_snapshot_entry_raw_sha256": "6510c51665b5d9e8a5ae0bd2219ed4d77c7999cb0d8b99ca1b0d42d3f872a553",
+    "latest_snapshot_entry_byte_count": 1666661,
+    "latest_snapshot_entry_line_count": 33361
+  },
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_ONE_SHOT_CURRENT_SESSION_BOUNDARY_PRIOR_SESSION_LOCAL_READINESS_EXPIRED_GATE_C_IDENTITY_INVALID_BEFORE_ADMISSION_TERMINAL_R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP_CURRENT_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NO_RETRY_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_IMMUTABLE_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_OBSERVER_V2_HELPER_CREATED_EXACT1_CONTROLLER_V2_HELPER_CREATED_EXACT1_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_AND_RUNTIME_UNPUBLISHED_FINAL_RAW_IDENTITIES_BOUND_STATIC_CONFORMANCE_OWNER_VALID_EXACT1_INDEPENDENT_VALID_EXACT1_PYTEST_COLLECTREPORT_AND_TARGET_MODULE_COLLECT_REPORTS_EXACT0_ADMISSION_GATE_EVIDENCE_CONSUMPTION_AUTHORITY_CONSUMPTION_OS_CHILD_PYTEST_MAIN_TARGETED_PYTEST_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_STATIC_LOCAL_GIT_STATUS_PROCESS_EXACT0_EXISTING_D1_RAW_READ_EXACT1_RAW_AND_BLOB_VALIDATION_PASS_D1_IMPORT_PYTHON_EXECUTION_D1_FULL_EXACT8_EXACT0_EXACT0_EXACT0_RUNTIME_DISCOVERY_VERSION_PROBE_ROLE_SMOKE_REPAIR_REMATERIALIZATION_CHANGE_EXACT0_PRODUCTION_PUBLISHED_RED_TEST_EXISTING_D1_MASHOS_API_CHANGE_EXACT0_CURRENT_CONTINUITY_UNVERIFIED_DISTINCT_WORK_TEST_RUNNER_RUNTIME_CONTINUITY_GATE_A_READ_ONLY_DISCOVERY_ONLY_DECLARED_BODY_FREE_SCOPE_CURRENT_WORK_SESSION_TASK_ROOT_DIRECT_CHILD_RUNTIME_CANDIDATES_EXCLUDING_UPLOAD_REPOSITORIES_AND_PRIVATE_HELPERS_CANDIDATE_LOCATOR_SEARCH_AND_ROOT_ENTRYPOINT_FILETYPE_PERMISSION_STAT_RELATIVE_LOCATOR_READLINK_SYMLINK_CONTROL_MANIFEST_LOCK_PROJECTION_STATIC_IDENTITY_ONLY_STATIC_CONTINUITY_VERIFIER_PROCESS_EXACT0_PYTEST_PROCESS_TARGET_OR_REQUIRED_ROLE_IMPORT_EXECUTION_TARGET_IMPORT_COLLECTION_CALL_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_MUTATION_INSTALL_REPAIR_REMATERIALIZATION_ACQUISITION_NETWORK_CHALLENGE_REMOTE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_CANDIDATE_ABSENT_RUNTIME_NOT_FOUND_AT_DECLARED_DISCOVERY_SCOPE_OR_IDENTITY_MISMATCH_RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE_OR_STATIC_MATCH_CROSS_SESSION_REDISCOVERED_PENDING_READINESS_NEVER_READY_IN_GATE_A_NO_GATE_B_NO_TARGET_AUTHORITY_ACTIVATION_ADMISSION_CONSUMPTION_OR_EXECUTION_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_AUTOMATIC_PROGRESSION",
+    "token_sha256": "f815f23512cdfbae771c1290eba52f27bdd60f48ac183b9da445228adda386f8",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "receipt_sha256": "a0b4e0bbcf52144a7ca099068940ac3b1e18fa1ccde0ad7b9a1226d9562163d1"
+}
