@@ -1,0 +1,168 @@
+---
+doc_id: nls_v3_step11_cycle001_recovery_epoch004_gate_b_alias_aware_static_verifier_v2_absolute_executable_not_executable_preexecution_stop_result
+title: "NLS v3 Step 11 Cycle001 Recovery Epoch004 Gate B alias-aware static-verifier v2 absolute-executable-not-executable preexecution stop Result"
+date: "2026-08-02"
+status: "POSTVERIFIED_CURRENT"
+body_free: true
+automatic_progression: false
+---
+
+# Gate B alias-aware static-verifier v2 absolute-executable-not-executable preexecution stop Result
+
+## Outcome
+
+Approved authority SHA-256
+`975ab247f6d868a783bb6eef05d324af33bad9aa56a0d13e1f93dd505a591a70` was activated and
+closed-consumed exact1 at the controller admission boundary. The terminal is:
+
+```text
+RUNTIME_NOT_READY_ALIAS_AWARE_STATIC_VERIFIER_V2_ABSOLUTE_EXECUTABLE_NOT_EXECUTABLE_PREEXECUTION_STOP
+```
+
+One private owner alias-aware static verifier v2 and one private independent alias-aware static
+verifier v2 were created exact1 each and sealed. Before the owner verifier was launched, the
+declared absolute engine candidate failed the executable predicate. Locator discovery, version
+probe, engine process and both verifier executions therefore remain exact0. No alternative lookup,
+retry, fallback or interpreter switch was performed.
+
+This is a typed controller-input-invalid preexecution stop. It is not a static helper verdict and
+does not revise the prior literal-only owner INVALID at 98/100. Runtime readiness remains false and
+Full R1 remains `UNKNOWN_PRESERVED`.
+
+## Confirmed facts
+
+### Repository boundary
+
+- The authority embedded Cocolon predecessor is
+  `75e19e824ef1f957147933774bbd8c9b7df90822` / tree
+  `1652c8228773aa8b9b5aedbf1be43490139aa679`.
+- The connector-confirmed current Cocolon preexecution predecessor is
+  `1a05a9371b1a0475a9e8a840e60c41d564900a38` / tree
+  `565386975bc65e2f767aac7566a42e694e3d2c71`.
+- mashos-api remains `315813c7bd3372462de926ddad74df567254a6b5` / tree
+  `a641510e107d52bb910073f36604c85bd57af150`.
+
+### Sealed private identities
+
+```text
+replacement materializer v2 raw / bytes / lines:
+7bc0aecb713831b8567987bae9ca599f67672a0cb3a85758892ac194fd13ca96 / 46345 / 1099
+
+replacement independent verifier v2 raw / bytes / lines:
+5d2cc38a382c09156d3e8f9f09e70df1ee1d4e03b36bf7097dae154fda44406b / 55818 / 1096
+
+owner alias-aware static verifier v2 creation / raw / bytes / lines:
+exact1 / 52d3f2fc02117240e2ad4a1fdaa498b9b3415d22f944f564fe2bbec664acddca / 20572 / 488
+
+independent alias-aware static verifier v2 creation / raw / bytes / lines:
+exact1 / fe0c3b563a40f0851a513fdc5fb2c252dfa2e89620246151df51baa9df0f6e47 / 21055 / 529
+
+new verifier mode / regular / single-link / directory entries:
+0400 / true / true / exact2
+
+absolute private locator publication / body publication:
+exact0 / exact0
+```
+
+All four private bodies remain unpublished. The replacement helper v2 bodies remain unedited,
+unreused, unexecuted, unimported and uncompiled.
+
+### Typed launcher-admission blocker
+
+```text
+declared absolute engine admission check:
+exact1
+
+executable predicate:
+false
+
+locator existence:
+UNKNOWN_PRESERVED
+
+locator discovery / version probe / engine process:
+exact0 / exact0 / exact0
+
+owner verifier execution / independent verifier execution:
+exact0 / exact0
+
+blocking issue:
+DECLARED_ABSOLUTE_STATIC_VERIFIER_EXECUTABLE_NOT_EXECUTABLE
+
+blocking-issue manifest SHA-256:
+e9fb3fe09916dca1bd02ff21b41a3214ab248bdb695b3f77e8a3e1aca404f0e5
+```
+
+The executable predicate alone was observed false. Existence, file type, content identity and
+version were not probed and remain unknown. The result therefore makes no stronger absence claim.
+
+### Static and runtime zero-effect preservation
+
+```text
+owner helper raw reads / independent helper raw reads:
+exact0+exact0 / exact0+exact0
+
+helper pre/post fstat / alias grammar evaluation / full-100 rederivation:
+exact0 / exact0 / exact0
+
+retry / fallback / interpreter switch:
+exact0 / exact0 / exact0
+
+runtime / acquisition / network / staging / materialization / probe / role import / pytest:
+exact0 / exact0 / exact0 / exact0 / exact0 / exact0 / exact0 / exact0
+
+target authority issuance / activation / admission / consumption:
+exact0 / exact0 / exact0 / exact0
+
+OS child / target import / collection / call / targeted pytest:
+exact0 / exact0 / exact0 / exact0 / exact0
+
+Cocolon production / published RED / existing D1 / mashos-api change:
+exact0 / exact0 / exact0 / exact0
+```
+
+The prior literal-only INVALID remains immutable. Retroactive reparse, reclassification, credit and
+result change counts are all exact0.
+
+## Inference
+
+The sealed alias-aware verifier bodies were not reached, so this observation says nothing about
+their 100-check verdicts. A separate read-only locator authority can determine whether one trusted
+`node` engine identity is available in the current controller environment without running that
+engine or reading either replacement helper.
+
+## Karen's opinion
+
+The next safe unit is launcher identity discovery only. Guessing a second executable path under the
+consumed authority would be a fallback and would weaken the one-shot boundary. Owner and
+independent locator observations should instead rederive one identity from the same sealed PATH
+snapshot, publish hashes only, and stop before any version probe or verifier execution.
+
+## Body-free receipt identities
+
+```text
+Receipt blob SHA-1:
+a3429120ec8a21d405429767bb2fc8522e19b6eb
+
+Receipt raw SHA-256:
+bb540728669b958804190a259c3c92f95f77f5396403fdaf94a0a065d1d0fd43
+
+Receipt logical SHA-256:
+0ba90c89812b0b8ed5fbf45f59ee7629859b1e1888cf7612e582492e38f9eed4
+
+terminal observation SHA-256:
+cf2e71ed56c028bb69620777a6af9fe9ad66352d02b08f8cf2afec4c46e3d670
+```
+
+## Exactly one next authority
+
+Token SHA-256:
+
+`3e57889ef1bf28bddaeef92aa0e3d0017a1f6e5abb954d37675dd5a4555451f0`
+
+```text
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_ALIAS_AWARE_STATIC_VERIFIER_V2_ABSOLUTE_EXECUTABLE_NOT_EXECUTABLE_PREEXECUTION_STOP_POSTVERIFIED_OBSERVATION_SHA256_CF2E71ED56C028BB69620777A6AF9FE9AD66352D02B08F8CF2AFEC4C46E3D670_CURRENT_ALIAS_AWARE_STATIC_VERIFIER_V2_AUTHORITY_SHA256_975AB247F6D868A783BB6EEF05D324AF33BAD9AA56A0D13E1F93DD505A591A70_ACTIVATED_EXACT1_CLOSED_CONSUMED_TYPED_CONTROLLER_INPUT_INVALID_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_AUTHORITY_EMBEDDED_COCOLON_PREDECESSOR_75E19E82_TREE_1652C822_VERIFIED_CURRENT_COCOLON_PREWRITE_BASE_1A05A937_TREE_56538697_MASHOS_API_315813C7_TREE_A641510E_REPLACEMENT_MATERIALIZER_V2_RAW_7BC0AECB713831B8567987BAE9CA599F67672A0CB3A85758892AC194FD13CA96_BYTES_46345_LINES_1099_INDEPENDENT_VERIFIER_V2_RAW_5D2CC38A382C09156D3E8F9F09E70DF1EE1D4E03B36BF7097DAE154FDA44406B_BYTES_55818_LINES_1096_PRIVATE_SEALED_UNEDITED_UNREUSED_UNEXECUTED_UNIMPORTED_UNCOMPILED_UNPUBLISHED_OWNER_ALIAS_AWARE_STATIC_VERIFIER_V2_CREATED_EXACT1_RAW_52D3F2FC02117240E2AD4A1FDAA498B9B3415D22F944F564FE2BBEC664ACDDCA_BYTES_20572_LINES_488_INDEPENDENT_ALIAS_AWARE_STATIC_VERIFIER_V2_CREATED_EXACT1_RAW_FE0C3B563A40F0851A513FDC5FB2C252DFA2E89620246151DF51BAA9DF0F6E47_BYTES_21055_LINES_529_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_RUNTIME_AND_REPLACEMENT_HELPERS_UNPUBLISHED_SEALED_MODE0400_REGULAR_SINGLE_LINK_DIRECTORY_ENTRY_EXACT2_ABSOLUTE_LOCATOR_AND_BODY_PUBLICATION_EXACT0_EXACT0_DECLARED_ABSOLUTE_STATIC_VERIFIER_EXECUTABLE_ADMISSION_CHECK_EXACT1_EXECUTABLE_FALSE_EXISTENCE_UNKNOWN_PRESERVED_LOCATOR_DISCOVERY_VERSION_PROBE_ENGINE_PROCESS_EXACT0_EXACT0_EXACT0_OWNER_VERIFIER_EXECUTION_INDEPENDENT_VERIFIER_EXECUTION_EXACT0_EXACT0_OWNER_MATERIALIZER_AND_INDEPENDENT_HELPER_RAW_READ_EXACT0_EXACT0_INDEPENDENT_MATERIALIZER_AND_INDEPENDENT_HELPER_RAW_READ_EXACT0_EXACT0_HELPER_PREPOST_FSTAT_ALIAS_GRAMMAR_EVALUATION_FULL_STATIC_CHECK_REDERIVATION_EXACT0_EXACT0_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_CHALLENGE_REMOTE_OBSERVATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_STATIC_VERIFIER_LAUNCHER_IDENTITY_DISCOVERY_DESIGN_ONLY_AUTHORITY_CURRENT_WORK_SESSION_CONTROL_ENVIRONMENT_PATH_SNAPSHOT_READ_EXACT1_RAW_SHA256_PREBOUND_VALUE_UNPUBLISHED_COMMAND_NAME_NODE_EXACT1_OWNER_STATIC_LOCATOR_OBSERVATION_EXACT1_INDEPENDENT_STATIC_LOCATOR_OBSERVATION_EXACT1_OWNER_AND_INDEPENDENT_SEPARATE_STATE_NO_LOCATOR_CANDIDATE_SET_RESOLVED_CHAIN_STAT_OR_HASH_REUSE_EXACT1_CURRENT_PATH_ORDER_PRESERVED_DIRECT_ENTRY_PLUS_COMMAND_NAME_ONLY_EMPTY_RELATIVE_DOT_DOT_ESCAPE_DUPLICATE_UNREADABLE_OR_NONEXECUTABLE_ENTRY_REJECTED_CURRENT_TASK_ROOT_UPLOAD_COCOLON_MASHOS_API_RUNTIME_PRIVATE_AND_PRIOR_HELPER_ANCESTRY_CANDIDATE_EXCLUDED_EXACT1_CANDIDATE_ABSENT_OR_AMBIGUOUS_OR_UNTRUSTED_TYPED_LAUNCHER_IDENTITY_INVALID_STOP_OR_IDENTITY_COLLAPSED_SELECTED_CANDIDATE_EXACT1_SYMLINK_CHAIN_MAX40_CYCLE_ESCAPE_AND_BROKEN_REJECTED_FINAL_REGULAR_EXECUTABLE_OWNER_TRUSTED_NOT_GROUP_OR_WORLD_WRITABLE_NLINK_POSITIVE_SIZE_POSITIVE_PREPOST_LSTAT_FSTAT_SIZE_MTIME_INODE_MODE_UID_STABLE_EXACT1_EXECUTABLE_RAW_SHA256_AND_SYMLINK_CHAIN_LOGICAL_SHA256_DERIVATION_EXACT1_OWNER_AND_INDEPENDENT_SELECTED_ABSOLUTE_LOCATOR_CHAIN_RAW_STAT_AND_VERDICT_MATCH_EXACT1_OR_TYPED_LAUNCHER_IDENTITY_DIVERGENCE_STOP_WHEN_DUAL_MATCH_STATIC_LAUNCHER_IDENTITY_REDISCOVERED_DESIGN_VALID_STOP_LOCATOR_VALUE_PRIVATE_UNPUBLISHED_HASH_AND_BODY_FREE_IDENTITY_ONLY_PUBLICABLE_NODE_VERSION_PROBE_OR_ENGINE_EXECUTION_ALIAS_AWARE_VERIFIER_EXECUTION_OR_READ_IMPORT_COMPILE_REUSE_EDIT_HELPER_RAW_READ_GATE_B_RUNTIME_ACQUISITION_NETWORK_STAGING_MATERIALIZATION_PROBE_ROLE_IMPORT_PYTEST_TARGET_EXECUTION_TARGET_AUTHORITY_ISSUANCE_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_RETRY_FALLBACK_INTERPRETER_SWITCH_CHALLENGE_REMOTE_OBSERVATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_LAUNCHER_IDENTITY_DISCOVERY_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_VERIFIER_OR_GATE_B_EXECUTION_TARGET_AUTHORITY_ISSUANCE_OR_AUTOMATIC_PROGRESSION
+```
+
+State: `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`.
+
+Automatic progression: `false`.
