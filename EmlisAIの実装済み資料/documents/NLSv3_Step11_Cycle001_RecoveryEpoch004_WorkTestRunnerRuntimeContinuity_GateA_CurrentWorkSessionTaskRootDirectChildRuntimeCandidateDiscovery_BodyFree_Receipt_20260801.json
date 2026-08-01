@@ -1,0 +1,195 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.work_test_runner_runtime_continuity_gate_a_direct_child_discovery_receipt.v1",
+  "observed_at_date": "2026-08-01",
+  "repository_scope": {
+    "design_and_evidence": "MassyuRed/Cocolon",
+    "target_source": "MassyuRed/mashos-api"
+  },
+  "body_free": true,
+  "absolute_task_root_published": false,
+  "absolute_runtime_locator_published": false,
+  "raw_directory_listing_published": false,
+  "private_helper_locator_or_body_published": false,
+  "configured_route_or_credential_published": false,
+  "authority": {
+    "token_owner_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_BodyFree_Receipt_20260801.json",
+    "token_sha256": "f815f23512cdfbae771c1290eba52f27bdd60f48ac183b9da445228adda386f8",
+    "token_hash_validation": "PASS",
+    "activation_count": 1,
+    "scope_freeze_count": 1,
+    "discovery_pass_count": 1,
+    "typed_classification_count": 1,
+    "retry_count": 0,
+    "state": "CLOSED_CONSUMED_NOT_FOUND_STOP",
+    "automatic_progression": false
+  },
+  "orientation": {
+    "karen_diary_commit_sha1": "35e359d9045183e7c99065d680101d1ec3354d28",
+    "cocolon_entry_commit_sha1": "a9d42692c5bf29abe26f67ef90303c8f806eb091",
+    "cocolon_entry_tree_sha1": "7baddb3c2410a5f7fd271d877c009dd4425cb7d6",
+    "mashos_api_commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+    "mashos_api_tree_sha1": "a641510e107d52bb910073f36604c85bd57af150"
+  },
+  "predecessor_gate_c": {
+    "result_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_Result_20260801.md",
+    "result_git_blob_sha1": "8609edb10621d914c6b7a48c60eaf4cf5d466b75",
+    "receipt_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CurrentSessionBoundaryGateCIdentityInvalid_PrelaunchNonCredit_BodyFree_Receipt_20260801.json",
+    "receipt_git_blob_sha1": "f3abf5c2bac7217b4905b3d877b57c67bdec3ba6",
+    "receipt_logical_sha256": "a0b4e0bbcf52144a7ca099068940ac3b1e18fa1ccde0ad7b9a1226d9562163d1",
+    "handoff_git_blob_sha1": "8a3296ccbf9698331842975a3366f14201d31a2b",
+    "terminal": "R1_LAUNCHER_OR_ENVIRONMENT_IDENTITY_INVALID_NONCREDIT_STOP",
+    "authority_state": "CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT",
+    "prior_readiness_observation_sha256": "8138978339a65c5ec2d32299a326ee8525f470572526f053fd9866f532203e69",
+    "prior_runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+    "persistence_class": "SESSION_LOCAL",
+    "expiry_trigger": "SESSION_BOUNDARY",
+    "current_continuity_before_gate_a": "CURRENT_CONTINUITY_UNVERIFIED"
+  },
+  "discovery_scope": {
+    "root_class": "CURRENT_WORK_SESSION_TASK_ROOT",
+    "depth": "DIRECT_CHILD",
+    "candidate_class": "RUNTIME_CANDIDATE",
+    "explicit_exclusions": [
+      "UPLOAD",
+      "REPOSITORY_CLONE",
+      "PRIVATE_HELPER_DIRECTORY"
+    ],
+    "non_runtime_workspace_control_metadata_class": "NOT_A_RUNTIME_CANDIDATE",
+    "scope_sha256": "7c4549353b40a8508f88d7984c69895b897d5a66e101508ff8ecd064d69c05b0",
+    "scope_preimage_rule": "SHA256_UTF8_NO_TRAILING_LF_OF_ORDERED_BODY_FREE_SCOPE_FIELDS",
+    "global_absence_claimed": false
+  },
+  "observation": {
+    "direct_child_locator_entry_count": 6,
+    "excluded_upload_entry_count": 1,
+    "excluded_repository_clone_entry_count": 1,
+    "excluded_private_helper_entry_count": 1,
+    "non_runtime_workspace_control_metadata_entry_count": 3,
+    "runtime_candidate_count": 0,
+    "selected_candidate_count": 0,
+    "candidate_inspection_count": 0,
+    "direct_child_filetype_permission_metadata_projection_count": 6,
+    "direct_child_symlink_target_present_count": 0,
+    "candidate_ambiguity_count": 0,
+    "static_match_count": 0,
+    "static_mismatch_count": 0,
+    "locator_pass_tool_or_permission_failure_count": 0,
+    "typed_result": "RUNTIME_NOT_FOUND_AT_DECLARED_DISCOVERY_SCOPE",
+    "observation_sha256": "15b2f5c1d878dd362f08d2d91d65ef6a78ab6e1d7df04110803712f50c69890c",
+    "observation_preimage_rule": "SHA256_UTF8_NO_TRAILING_LF_OF_AUTHORITY_SCOPE_COUNTS_AND_TYPED_RESULT"
+  },
+  "candidate_dependent_checks": {
+    "not_applicable_reason": "RUNTIME_CANDIDATE_COUNT_EXACT0",
+    "root_existence_attempted_count": 0,
+    "root_existence_completed_count": 0,
+    "entrypoint_existence_attempted_count": 0,
+    "entrypoint_existence_completed_count": 0,
+    "filetype_permission_stat_attempted_count": 0,
+    "filetype_permission_stat_completed_count": 0,
+    "relative_locator_readlink_symlink_attempted_count": 0,
+    "relative_locator_readlink_symlink_completed_count": 0,
+    "control_entrypoint_identity_attempted_count": 0,
+    "control_entrypoint_identity_completed_count": 0,
+    "manifest_identity_attempted_count": 0,
+    "manifest_identity_completed_count": 0,
+    "lock_projection_identity_attempted_count": 0,
+    "lock_projection_identity_completed_count": 0,
+    "authority_defined_static_continuity_verifier_process_count": 0
+  },
+  "gate_and_target_zero_counts": {
+    "gate_b_activation_count": 0,
+    "target_authority_activation_count": 0,
+    "target_admission_count": 0,
+    "target_authority_consumption_count": 0,
+    "target_os_child_start_count": 0,
+    "pytest_main_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "other_pytest_process_count": 0,
+    "target_or_required_role_repository_import_execution_count": 0,
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_call_count": 0
+  },
+  "zero_mutation_and_effects": {
+    "runtime_mutation_count": 0,
+    "runtime_install_count": 0,
+    "runtime_repair_count": 0,
+    "runtime_rematerialization_count": 0,
+    "runtime_artifact_acquisition_count": 0,
+    "runtime_acquisition_network_process_count": 0,
+    "challenge_count": 0,
+    "runtime_remote_observation_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "production_change_count": 0,
+    "published_red_test_change_count": 0,
+    "existing_d1_change_count": 0,
+    "mashos_api_source_change_count": 0,
+    "historical_result_reparse_count": 0,
+    "retroactive_reclassification_count": 0,
+    "credit_promotion_count": 0
+  },
+  "historical_boundary": {
+    "current_full_r1": "R1_RESULT_UNKNOWN_STOP",
+    "observer_v1_authority": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+    "observer_v2_execution_authority": "CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT",
+    "observer_v2_helper_creation_count": 1,
+    "observer_v2_helper_execution_count": 0,
+    "controller_v2_helper_creation_count": 1,
+    "controller_v2_helper_execution_count": 0,
+    "historical_noncredit_preserved": true
+  },
+  "runtime_recovery_contract": {
+    "recovery_class": "REMATERIALIZABLE_FROM_FROZEN_LOCK",
+    "frozen_lock_path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+    "frozen_lock_git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+    "frozen_lock_raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+    "frozen_lock_logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+    "lock_derived_exact5_projection_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+    "tracked_procedure_path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+    "tracked_procedure_section": "7.1",
+    "tracked_procedure_git_blob_sha1": "40746bcd8926a34991f160f2e5bff52db4688add",
+    "tracked_procedure_raw_sha256": "3cd3e455a08c3e490545f1b98cdbb47d68d0f01709c05a1c51a64f515946ef8f",
+    "required_source_match_count": 6,
+    "mash_runtime_resource_or_absolute_path_required": false
+  },
+  "result_artifact": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeContinuity_GateA_CurrentWorkSessionTaskRootDirectChildRuntimeCandidateDiscovery_Result_20260801.md",
+    "git_blob_sha1": "2d463ac568405417b47d6cdb7d0e90c4a90017f8",
+    "raw_sha256": "d494b8b88293485c14864dde35869b9d7e1c1cc7e9c66bee9c069774952d8aea",
+    "byte_count": 12921,
+    "line_count": 323
+  },
+  "source_entries": {
+    "execution_plan_entry_git_blob_sha1": "b5928faa75b7fb6f5fbb1719e5a86c23c2aba09c",
+    "execution_plan_entry_raw_sha256": "df4b9ac744fea36859a8a9e352620671d70b8d785174b0f1fb83c24df8cc600e",
+    "execution_plan_entry_byte_count": 465126,
+    "execution_plan_entry_line_count": 13089,
+    "latest_snapshot_entry_git_blob_sha1": "0c837c3e3503b893add7bf68e00967e6e33102b2",
+    "latest_snapshot_entry_raw_sha256": "1e08a60b7d1fb08c574f14682cbf25548fb38d7163066e9a34403664dabb926a",
+    "latest_snapshot_entry_byte_count": 1674787,
+    "latest_snapshot_entry_line_count": 33550
+  },
+  "narrative_separation": {
+    "confirmed_facts": [
+      "DECLARED_SCOPE_DISCOVERY_COMPLETED_EXACT1",
+      "RUNTIME_CANDIDATE_EXACT0",
+      "RUNTIME_NOT_FOUND_AT_DECLARED_DISCOVERY_SCOPE",
+      "GATE_B_AND_TARGET_EXECUTION_EXACT0"
+    ],
+    "inference": [
+      "PRIOR_RUNTIME_MAY_EXIST_OUTSIDE_DECLARED_SCOPE_OR_MAY_HAVE_BEEN_REMOVED_NEITHER_OBSERVED"
+    ],
+    "karen_opinion": [
+      "DISTINCT_FROZEN_LOCK_BOUND_GATE_B_REMATERIALIZATION_AND_FRESH_READINESS_IS_NECESSARY_NEXT"
+    ]
+  },
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_A_POSTVERIFIED_AUTHORITY_SHA256_F815F23512CDFBAE771C1290EBA52F27BDD60F48AC183B9DA445228ADDA386F8_ACTIVATED_EXACT1_CLOSED_CONSUMED_READ_ONLY_DISCOVERY_EXACT1_DECLARED_SCOPE_SHA256_7C4549353B40A8508F88D7984C69895B897D5A66E101508FF8ECD064D69C05B0_CURRENT_WORK_SESSION_TASK_ROOT_DIRECT_CHILD_RUNTIME_CANDIDATES_ONLY_UPLOAD_REPOSITORY_CLONE_PRIVATE_HELPER_EXCLUDED_NONRUNTIME_WORKSPACE_CONTROL_METADATA_EXCLUDED_DIRECT_CHILD_LOCATOR_ENTRY_EXACT6_RUNTIME_CANDIDATE_EXACT0_SELECTED_CANDIDATE_EXACT0_SYMLINK_EXACT0_CANDIDATE_ROOT_ENTRYPOINT_CONTROL_MANIFEST_LOCK_PROJECTION_IDENTITY_INSPECTION_EXACT0_STATIC_CONTINUITY_VERIFIER_PROCESS_EXACT0_TERMINAL_RUNTIME_NOT_FOUND_AT_DECLARED_DISCOVERY_SCOPE_NO_GLOBAL_ABSENCE_CLAIM_GATE_B_ACTIVATION_EXACT0_TARGET_AUTHORITY_ACTIVATION_ADMISSION_CONSUMPTION_OS_CHILD_PYTEST_MAIN_TARGETED_PYTEST_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PYTEST_PROCESS_TARGET_OR_REQUIRED_ROLE_IMPORT_EXECUTION_TARGET_IMPORT_COLLECTION_CALL_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RUNTIME_MUTATION_INSTALL_REPAIR_REMATERIALIZATION_ACQUISITION_NETWORK_CHALLENGE_REMOTE_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_PRODUCTION_PUBLISHED_RED_TEST_EXISTING_D1_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_OR_CREDIT_DISTINCT_WORK_TEST_RUNNER_RUNTIME_READINESS_RECOVERY_GATE_B_COCOLON_ENTRY_A9D42692_MASHOS_API_315813C7_TREE_A641510E_REQUIRED_SOURCE_EXACT6_FROZEN_LOCK_BLOB_0822FCB010985CD0D384F250A9E8A1FE16DC8FD4_RAW_9BB2875541A6D959C1DCA47CB5B96DE5B0041CCF5288E849C469C15A8B310787_LOGICAL_801BA54EFC0F6655238D14E7C153FB70B555801489AA8BA028515FC64D9C05F4_LOCK_DERIVED_EXACT5_PROJECTION_SHA256_F501025C1DCCEF68C47C0A3E52F3EF74D01233F371B16F2B1A0BDFB21089E57E_TRACKED_PROCEDURE_PATH_COCOLON_PREMISE_13_SECTION_7_1_BLOB_40746BCD8926A34991F160F2E5BFF52DB4688ADD_RAW_3CD3E455A08C3E490545F1B98CDBB47D68D0F01709C05A1C51A64F515946EF8F_PREACQUISITION_STATIC_SOURCE_LOCK_PROJECTION_VALIDATION_EXACT1_OR_TYPED_PREACQUISITION_STOP_WHEN_VALID_AUTHORITY_BOUND_LOCAL_MATERIALIZER_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_INDEPENDENT_VERIFIER_HELPER_CREATION_EXECUTION_EXACT1_EXACT1_PRIVATE_OUTSIDE_COCOLON_MASHOS_API_AND_RUNTIME_UNPUBLISHED_CONFIGURED_ROUTE_ACQUISITION_NETWORK_PROCESS_EXACT1_EXACT1_ACCEPTED_EXACT5_REJECTED_EXACT0_OR_TYPED_ACQUISITION_STOP_SDIST_BUILD_UNCONFIGURED_SOURCE_POSTACCEPTANCE_PACKAGE_INDEX_EXACT0_EXACT0_EXACT0_EXACT0_WHEN_ACCEPTED_FRESH_PRIVATE_EMPTY_STAGING_ROOT_ALLOCATION_EXACT1_MATERIALIZATION_COUNT_EXACT0_THEN_FRESH_ISOLATED_REMATERIALIZATION_EXACT1_WHEN_REACHED_PRIOR_RUNTIME_REUSE_RETRY_FALLBACK_INTERPRETER_SWITCH_EXACT0_EXACT0_EXACT0_EXACT0_FRESH_RUNTIME_IDENTITY_DERIVATION_OWNER_AND_INDEPENDENT_EXACT1_EXACT1_OWNER_AND_INDEPENDENT_VERDICT_EXACT1_EXACT1_PYTEST_8_4_1_VERSION_PROBE_EXACT1_REQUIRED_ROLE_SMOKE_PROCESS_EXACT1_DIRECT_ROLE_LOAD_EXACT3_PUBLIC_API_CALL_EFFECT_EXACT0_EXACT0_WHEN_READINESS_REACHED_RUNTIME_READY_CURRENT_SESSION_STOP_OR_TYPED_RUNTIME_NOT_READY_STOP_TARGET_IMPORT_COLLECTION_CALL_TARGETED_PYTEST_INVOCATION_EXACT0_EXACT0_EXACT0_EXACT0_CHALLENGE_REMOTE_OBSERVATION_EXACT0_EXACT0_PRODUCTION_PUBLISHED_RED_TEST_EXISTING_D1_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_NO_TARGET_AUTHORITY_ISSUANCE_OR_EXECUTION_AUTOMATIC_PROGRESSION_FALSE",
+    "token_sha256": "2832b3008772c537ce7011b7df8f6b9719b6dd3e0ecb861d35cb545039f2bf61",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "receipt_sha256": "6d8f8c4577f532e9942d2ecbd8713349602e1db2cbac90a577c77c654c78b6a2"
+}
