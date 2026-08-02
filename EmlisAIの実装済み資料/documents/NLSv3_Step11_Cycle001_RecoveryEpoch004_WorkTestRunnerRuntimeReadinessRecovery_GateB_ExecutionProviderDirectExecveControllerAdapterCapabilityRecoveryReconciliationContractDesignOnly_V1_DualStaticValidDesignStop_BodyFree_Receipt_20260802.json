@@ -1,0 +1,800 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.execution_provider_direct_execve_controller_adapter_capability_recovery.reconciliation_contract_design_only.v1.dual_static_valid.current_interface_feasible.receipt.v1",
+  "receipt_id": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_20260802",
+  "body_free": true,
+  "observed_at_date": "2026-08-02",
+  "observation": {
+    "authority": {
+      "token_sha256": "0f440346a8955465a159ec9641dd369dae7ede90b2504305d98a7ec9914387f0",
+      "token_ascii_byte_count": 6556,
+      "token_recomputation_match": true,
+      "activation_count": 1,
+      "consumption_count": 1,
+      "state": "CLOSED_CONSUMED_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP"
+    },
+    "full_r1_result": "UNKNOWN_PRESERVED",
+    "repository_identity": {
+      "cocolon_prewrite_commit_sha1": "6d6ac59777edb5ac5708910a0e972985a54c6c9f",
+      "cocolon_prewrite_tree_sha1": "a5c797aa7a5cfc603d63655ad615ffb9a9eaa73a",
+      "authority_declared_catalogue_v3_prewrite_commit_sha1": "aef68f18e1b9a982a59cfa73475e89670bb2816e",
+      "authority_declared_catalogue_v3_prewrite_tree_sha1": "b9fae839f12298ed7bc58ed32667e32c6c26ffde",
+      "mashos_api_source_commit_sha1": "315813c7bd3372462de926ddad74df567254a6b5",
+      "mashos_api_source_tree_sha1": "a641510e107d52bb910073f36604c85bd57af150",
+      "mashos_api_change_count": 0
+    },
+    "source_receipts_and_contracts": {
+      "catalogue_observation_v3_receipt_blob_sha1": "579e9a48acc1556f52a90c5daf1a3c1f02d6553b",
+      "catalogue_observation_v3_receipt_raw_sha256": "46f53cde9a8fac5a6c9ebaff1ba3d06425df0f04791a94dcaf0e70567e545dc2",
+      "catalogue_observation_v3_receipt_logical_sha256": "52efed65161fccb8cf2504f3dff66fbe925cffb059b2fe0c0419d9a545a40f2e",
+      "catalogue_observation_v3_sha256": "42ac9f2c8cd72172216969a8b797b444b21a8dd118d0b3b00ccdf5c98fb8dc05",
+      "catalogue_observation_v3_receipt_consumption_count": 1,
+      "reconciliation_contract_raw_sha256": "837ec841834b691a656bbd055c1589276b11db0deb67ddd933226900882204c4",
+      "reconciliation_contract_observation_sha256": "8d076f9c2c1fc07c0a62c5e4a46e6c18c4dfe28192a9b2ee9d179039c92d12eb",
+      "reconciliation_receipt_historical_consumption_count": 1,
+      "selection_policy_contract_raw_sha256": "5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2",
+      "selection_policy_receipt_blob_sha1": "2f5eace6de56699519319600d90f12407b6c4e83",
+      "selection_policy_receipt_raw_sha256": "437b319f395f4bb57c0c61a90c3ff234c27ad8936408886b138fd4d9ec5c02fc",
+      "selection_policy_receipt_logical_sha256": "0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a",
+      "selection_policy_receipt_observation_sha256": "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+      "selection_policy_receipt_consumption_count": 0,
+      "activation_binding_evaluator_contract_raw_sha256": "ddbac38ea0ad569335da5a1a6f52e6a7a49d7926f813d536b561f2447dcba989",
+      "activation_binding_evaluator_observation_sha256": "01b2eb0023bfdce079f6158fa796d7bf87ad3d39f8703c3d7e3ffbcdb034ef1e",
+      "activation_binding_evaluator_historical_consumption_count": 1,
+      "provider_metadata_source_lock_contract_raw_sha256": "20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479",
+      "provider_metadata_source_lock_observation_sha256": "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+      "source_contract_mutation_or_weakening_count": 0
+    },
+    "historical_preservation": {
+      "catalogue_observation_v3": "CLOSED_CONSUMED_IMMUTABLE",
+      "failed_catalogue_observation_v2_sha256": "ee403e258450ed4cbe212bd3304e710d2338ebdd03381f62df415f8b52b873ad",
+      "failed_catalogue_observation_v2_and_old_manifest": "IMMUTABLE_NONCREDIT",
+      "reparse_count": 0,
+      "rebind_count": 0,
+      "reclassification_count": 0,
+      "route_reselection_count": 0,
+      "gate_reevaluation_count": 0,
+      "retry_count": 0,
+      "retroactive_credit_count": 0
+    },
+    "current_interface_descriptor": {
+      "reread_count": 1,
+      "recanonicalization_count": 1,
+      "rehash_count": 1,
+      "component_count": 2,
+      "component_order": [
+        "EXEC_COMMAND",
+        "WRITE_STDIN"
+      ],
+      "descriptor_canonical_byte_count": 3189,
+      "descriptor_raw_sha256": "bd97827a58e0445bd6f254704584ce5101292be7836497c7357f72130a00c31f",
+      "descriptor_identity_sha256": "b1f176e431b0a31d20ed22ccf832c2569c9e7810c37e6c358cbda1bafaa85f73",
+      "exec_command_direct_execve_interface_count": 0,
+      "write_stdin_bound_private_ascii_ingress_channel_count": 1
+    },
+    "adapter_reconciliation_contract_candidate": {
+      "contract_id": "COCOLON_NLS_V3_STEP11_GATE_B_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1",
+      "contract_version": 1,
+      "publicable": true,
+      "body_free": true,
+      "purpose": "RECONCILE_THE_CURRENT_UNIFIED_COMMAND_SESSION_INTERFACE_WITH_A_CLOSED_AUTHORITY_BOUND_CONTROLLER_ADAPTER_THAT_ACCEPTS_PRIVATE_INPUT_WITHOUT_SHELL_INTERPRETATION_AND_ALONE_DIRECT_EXECVES_THE_FUTURE_NETWORK_CHILD_WITH_BOUNDED_RAW_CAPTURE_AND_AN_ATOMIC_PRIVATE_RECEIPT",
+      "source_contract_binding": {
+        "current_authority_token_sha256": "0f440346a8955465a159ec9641dd369dae7ede90b2504305d98a7ec9914387f0",
+        "current_authority_token_ascii_byte_count": 6556,
+        "cocolon_actual_prewrite_commit": "6d6ac59777edb5ac5708910a0e972985a54c6c9f",
+        "cocolon_actual_prewrite_tree": "a5c797aa7a5cfc603d63655ad615ffb9a9eaa73a",
+        "authority_declared_catalogue_v3_prewrite_commit": "aef68f18e1b9a982a59cfa73475e89670bb2816e",
+        "authority_declared_catalogue_v3_prewrite_tree": "b9fae839f12298ed7bc58ed32667e32c6c26ffde",
+        "mashos_api_source_commit": "315813c7bd3372462de926ddad74df567254a6b5",
+        "mashos_api_source_tree": "a641510e107d52bb910073f36604c85bd57af150",
+        "source_catalogue_observation_v3_receipt_blob_sha1": "579e9a48acc1556f52a90c5daf1a3c1f02d6553b",
+        "source_catalogue_observation_v3_receipt_raw_sha256": "46f53cde9a8fac5a6c9ebaff1ba3d06425df0f04791a94dcaf0e70567e545dc2",
+        "source_catalogue_observation_v3_receipt_logical_sha256": "52efed65161fccb8cf2504f3dff66fbe925cffb059b2fe0c0419d9a545a40f2e",
+        "source_catalogue_observation_v3_sha256": "42ac9f2c8cd72172216969a8b797b444b21a8dd118d0b3b00ccdf5c98fb8dc05",
+        "source_catalogue_observation_v3_receipt_consumption_count": 1,
+        "reconciliation_contract_raw_sha256": "837ec841834b691a656bbd055c1589276b11db0deb67ddd933226900882204c4",
+        "reconciliation_contract_receipt_observation_sha256": "8d076f9c2c1fc07c0a62c5e4a46e6c18c4dfe28192a9b2ee9d179039c92d12eb",
+        "reconciliation_contract_receipt_historical_consumption_count": 1,
+        "selection_policy_contract_raw_sha256": "5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2",
+        "selection_policy_contract_receipt_blob_sha1": "2f5eace6de56699519319600d90f12407b6c4e83",
+        "selection_policy_contract_receipt_raw_sha256": "437b319f395f4bb57c0c61a90c3ff234c27ad8936408886b138fd4d9ec5c02fc",
+        "selection_policy_contract_receipt_logical_sha256": "0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a",
+        "selection_policy_contract_receipt_observation_sha256": "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+        "selection_policy_contract_receipt_consumption_count": 0,
+        "source_contract_mutation_or_weakening_count": 0
+      },
+      "canonicalization": {
+        "json": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+        "digest": "SHA256_LOWERCASE_HEX64",
+        "domain_preimage": "DOMAIN_UTF8_THEN_TRUE_NUL_0X00_THEN_CLOSED_CANONICAL_VALUE_BYTES_NO_LF",
+        "pretty_file_formatter": "UTF8_JSON_INDENT2_LF_WITH_ONE_FINAL_LF",
+        "observation_hash_preimage": "OBSERVATION_CANONICAL_BYTES_ONLY_NO_DOMAIN_NO_LF",
+        "receipt_logical_hash_preimage": "ENTIRE_RECEIPT_WITH_JSON_POINTER_RECEIPT_LOGICAL_SHA256_DELETED_CANONICAL_BYTES_NO_LF"
+      },
+      "identity_domain_registry": {
+        "closed": true,
+        "domain_count": 4,
+        "domains": {
+          "interface_descriptor": "COCOLON_NLS_V3_STEP11_GATE_B_UNIFIED_COMMAND_SESSION_INTERFACE_DESCRIPTOR_V1",
+          "adapter_contract": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_CONTRACT_V1",
+          "owner_evidence": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_OWNER_STATIC_DESIGN_V1",
+          "independent_evidence": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_INDEPENDENT_STATIC_DESIGN_V1"
+        },
+        "unknown_domain_action": "TYPED_DESIGN_INVALID_STOP"
+      },
+      "current_interface_descriptor_contract": {
+        "reread_count": 1,
+        "recanonicalization_count": 1,
+        "rehash_count": 1,
+        "descriptor_value": {
+          "schema_version": "COCOLON_NLS_V3_STEP11_GATE_B_UNIFIED_COMMAND_SESSION_INTERFACE_DESCRIPTOR_V1",
+          "component_count": 2,
+          "component_order": [
+            "EXEC_COMMAND",
+            "WRITE_STDIN"
+          ],
+          "components": [
+            {
+              "component_id": "EXEC_COMMAND",
+              "operation": "LAUNCH_ONE_OUTER_SHELL_COMMAND_PROCESS_AND_RETURN_OUTPUT_OR_A_UNIFIED_SESSION_HANDLE",
+              "relevant_request_field_count": 7,
+              "relevant_request_fields": [
+                {
+                  "name": "cmd",
+                  "type": "STRING",
+                  "required": true,
+                  "semantics": "ONE_SHELL_COMMAND_STRING"
+                },
+                {
+                  "name": "shell",
+                  "type": "OPTIONAL_STRING",
+                  "required": false,
+                  "semantics": "SHELL_BINARY_DEFAULTING_TO_THE_USER_DEFAULT_SHELL"
+                },
+                {
+                  "name": "login",
+                  "type": "OPTIONAL_BOOLEAN",
+                  "required": false,
+                  "semantics": "SHELL_LOGIN_OR_INTERACTIVE_SEMANTICS_CONTROL_DEFAULT_TRUE"
+                },
+                {
+                  "name": "tty",
+                  "type": "OPTIONAL_BOOLEAN",
+                  "required": false,
+                  "semantics": "PTY_IF_TRUE_PLAIN_PIPES_IF_FALSE_OR_OMITTED"
+                },
+                {
+                  "name": "workdir",
+                  "type": "OPTIONAL_STRING",
+                  "required": false,
+                  "semantics": "OUTER_COMMAND_WORKING_DIRECTORY"
+                },
+                {
+                  "name": "max_output_tokens",
+                  "type": "OPTIONAL_INTEGER",
+                  "required": false,
+                  "semantics": "RETURNED_TEXT_TOKEN_BUDGET_NOT_A_RAW_CHILD_STDOUT_BYTE_CAPTURE_BOUND"
+                },
+                {
+                  "name": "yield_time_ms",
+                  "type": "OPTIONAL_INTEGER",
+                  "required": false,
+                  "semantics": "OUTER_WAIT_BEFORE_YIELD"
+                }
+              ],
+              "relevant_response_field_count": 6,
+              "relevant_response_fields": [
+                "chunk_id",
+                "exit_code",
+                "original_token_count",
+                "output",
+                "session_id",
+                "wall_time_seconds"
+              ],
+              "output_field_semantics": "TEXT_POSSIBLY_TRUNCATED_AND_NOT_CREDITABLE_AS_RAW_CHILD_STDOUT_BYTES",
+              "running_session_handle_semantics": "OPTIONAL_INTEGER_SESSION_ID_FOR_THE_EXISTING_UNIFIED_EXEC_SESSION"
+            },
+            {
+              "component_id": "WRITE_STDIN",
+              "operation": "WRITE_CHARACTERS_TO_ONE_EXISTING_UNIFIED_EXEC_SESSION_AND_RETURN_RECENT_TEXT_OUTPUT",
+              "relevant_request_field_count": 4,
+              "relevant_request_fields": [
+                {
+                  "name": "session_id",
+                  "type": "INTEGER",
+                  "required": true,
+                  "semantics": "EXACT_EXISTING_UNIFIED_EXEC_SESSION_HANDLE"
+                },
+                {
+                  "name": "chars",
+                  "type": "OPTIONAL_STRING",
+                  "required": false,
+                  "semantics": "CHARACTERS_WRITTEN_TO_THE_EXISTING_SESSION_STDIN_EMPTY_OR_OMITTED_MEANS_POLL"
+                },
+                {
+                  "name": "max_output_tokens",
+                  "type": "OPTIONAL_INTEGER",
+                  "required": false,
+                  "semantics": "RETURNED_TEXT_TOKEN_BUDGET_NOT_AN_INPUT_OR_RAW_CAPTURE_BOUND"
+                },
+                {
+                  "name": "yield_time_ms",
+                  "type": "OPTIONAL_INTEGER",
+                  "required": false,
+                  "semantics": "WAIT_BEFORE_YIELD"
+                }
+              ],
+              "relevant_response_field_count": 6,
+              "relevant_response_fields": [
+                "chunk_id",
+                "exit_code",
+                "original_token_count",
+                "output",
+                "session_id",
+                "wall_time_seconds"
+              ],
+              "output_field_semantics": "TEXT_POSSIBLY_TRUNCATED_AND_NOT_CREDITABLE_AS_RAW_CHILD_STDOUT_BYTES"
+            }
+          ],
+          "unified_session_link": {
+            "producer": "EXEC_COMMAND_RESPONSE_SESSION_ID",
+            "consumer": "WRITE_STDIN_REQUEST_SESSION_ID",
+            "link_cardinality": "ONE_EXISTING_SESSION_TO_ONE_OR_MORE_SEQUENTIAL_WRITES_OR_POLLS",
+            "private_handle_publication_allowed": false
+          },
+          "single_command_string_field_count": 1,
+          "optional_shell_binary_field_count": 1,
+          "separate_network_child_absolute_executable_field_count": 0,
+          "separate_network_child_ordered_argv_field_count": 0,
+          "separate_network_child_ordered_envp_field_count": 0,
+          "bounded_raw_child_stdout_byte_capture_field_count": 0,
+          "atomic_network_child_launch_receipt_field_count": 0,
+          "declared_network_child_direct_execve_interface_count": 0,
+          "separate_session_stdin_character_channel_count": 1
+        },
+        "descriptor_canonical_byte_count": 3189,
+        "descriptor_raw_sha256": "bd97827a58e0445bd6f254704584ce5101292be7836497c7357f72130a00c31f",
+        "descriptor_identity_domain": "COCOLON_NLS_V3_STEP11_GATE_B_UNIFIED_COMMAND_SESSION_INTERFACE_DESCRIPTOR_V1",
+        "descriptor_identity_sha256": "b1f176e431b0a31d20ed22ccf832c2569c9e7810c37e6c358cbda1bafaa85f73",
+        "descriptor_value_private": false
+      },
+      "outer_command_process_launch_contract": {
+        "outer_launch_kind": "FIXED_AUTHORITY_BOUND_LOCAL_CONTROLLER_ADAPTER_START",
+        "outer_command_string_rule": "EXACT_FIXED_LITERAL_DERIVED_ONLY_FROM_PREBOUND_ADAPTER_CONTROL_VALUES_WITH_NO_AUTHORITY_VARIABLE_REQUEST_URI_HEADER_ARGV_ENVP_BODY_TRUST_PROXY_DNS_OR_CAPTURE_VALUE",
+        "outer_shell_rule": "ONE_PREBOUND_ABSOLUTE_SHELL_BINARY_LOGIN_FALSE_TTY_FALSE_WITH_THE_FIXED_COMMAND_REPLACING_THE_SHELL_BY_THE_ADAPTER",
+        "adapter_start_command_rule": "FIXED_EXEC_LITERAL_PLUS_CANONICALLY_QUOTED_PREBOUND_ADAPTER_EXECUTABLE_AND_FIXED_CONTROL_ARGUMENTS_ONLY",
+        "authority_variable_private_request_value_shell_interpretation_allowed": false,
+        "shell_expansion_redirection_command_substitution_or_environment_interpolation_of_private_request_values_allowed": false,
+        "outer_launch_network_dispatch_count": 0,
+        "outer_launch_policy_receipt_consumption_count": 0,
+        "outer_launch_final_policy_executor_link_consumption_count": 0,
+        "outer_launch_failure_action": "PRIVATE_PRELAUNCH_REJECTION_NO_NETWORK_NO_POLICY_OR_LINK_CONSUMPTION_NO_RETRY"
+      },
+      "adapter_ingress_contract": {
+        "ingress_component": "WRITE_STDIN_BOUND_TO_THE_EXEC_COMMAND_UNIFIED_SESSION_ID",
+        "nonempty_ingress_write_count": 1,
+        "ingress_encoding": "ASCII_BASE64URL_NO_PADDING_OF_UTF8_SORTED_COMPACT_PRIVATE_ENVELOPE_JSON_NO_LF_FOLLOWED_BY_ONE_ASCII_LF_TRANSPORT_TERMINATOR",
+        "transport_terminator": "ONE_ASCII_LF_AFTER_THE_BASE64URL_FRAME_AND_NO_OTHER_TRAILING_BYTE",
+        "bounded_read_rule": "READ_UNTIL_THE_SINGLE_ASCII_LF_OR_THE_PREBOUND_FRAME_BYTE_LIMIT_WHICHEVER_OCCURS_FIRST_WITHOUT_RELYING_ON_PIPE_WRITE_OR_READ_BOUNDARIES_OR_STDIN_CLOSE",
+        "frame_exact_key_count": 6,
+        "frame_exact_keys": [
+          "schema_version",
+          "decoded_byte_count",
+          "decoded_sha256",
+          "authority_token_sha256",
+          "snapshot_identity_sha256",
+          "base64url_payload"
+        ],
+        "frame_byte_limit_rule": "PREBOUND_POSITIVE_LIMIT_COVERS_THE_BASE64URL_FRAME_AND_SINGLE_LF_TERMINATOR_AND_IS_CHECKED_BEFORE_ACCEPTANCE",
+        "session_id_rule": "EXACT_PRIVATE_SESSION_ID_RETURNED_BY_THE_SINGLE_OUTER_ADAPTER_LAUNCH",
+        "shell_interpretation_count": 0,
+        "complete_frame_validation_rule": "SINGLE_LF_TERMINATOR_SCHEMA_LENGTH_HASH_AUTHORITY_SNAPSHOT_BASE64_ALPHABET_CANONICAL_JSON_CLOSED_KEYS_AND_NO_OTHER_TRAILING_BYTES_ALL_VALIDATE_BEFORE_ANY_POLICY_LINK_OR_CHILD_EFFECT",
+        "invalid_incomplete_missing_or_extra_terminator_hash_mismatch_or_closed_session_action": "PRIVATE_PRELAUNCH_REJECTION_WITH_POLICY_LINK_NETWORK_CHILD_AND_ACTUAL_LAUNCH_RECEIPT_EXACT0_NO_RETRY",
+        "private_session_or_frame_publication_allowed": false
+      },
+      "adapter_executable_body_binding_contract": {
+        "adapter_kind": "AUTHORITY_BOUND_LOCAL_CONTROLLER_ADAPTER",
+        "absolute_executable_path_rule": "ONE_PRIVATE_ABSOLUTE_REGULAR_TRUSTED_EXECUTABLE_PATH_FROZEN_BEFORE_OUTER_LAUNCH",
+        "executable_body_raw_sha256_rule": "ONE_PRIVATE_LOWERCASE_HEX64_REDERIVED_BEFORE_OUTER_LAUNCH_AND_EQUAL_TO_THE_FROZEN_ADAPTER_BODY_BINDING",
+        "source_or_binary_body_rule": "ONE_LATER_SEPARATE_AUTHORITY_MATERIALIZED_BODY_CONFORMING_TO_THIS_PUBLIC_CONTRACT",
+        "request_semantic_input_rule": "ONLY_THE_SINGLE_VALIDATED_PRIVATE_INGRESS_ENVELOPE_AND_FROZEN_ADAPTER_CONTROL_BINDINGS",
+        "parent_environment_semantic_input_allowed": false,
+        "unbound_file_config_home_path_or_environment_semantic_input_allowed": false,
+        "current_adapter_source_creation_count": 0,
+        "current_adapter_binary_creation_count": 0,
+        "current_compilation_count": 0,
+        "current_adapter_execution_count": 0
+      },
+      "network_child_direct_execve_contract": {
+        "dispatch_owner": "AUTHORITY_BOUND_LOCAL_CONTROLLER_ADAPTER_ONLY",
+        "launch_primitive": "DIRECT_EXECVE_WITH_SEPARATE_ABSOLUTE_EXECUTABLE_ORDERED_ARGV_AND_ORDERED_ENVP_PARAMETERS_AND_NO_SHELL_NO_EQUIVALENT_OR_SUBSTITUTE_PRIMITIVE_ALLOWED",
+        "supervision_model": "ADAPTER_SUPERVISOR_ARMS_STDOUT_AND_CLOEXEC_ERROR_PIPES_BEFORE_FORK_ONE_CHILD_STUB_AND_ONLY_THAT_CHILD_STUB_ISSUES_THE_EXACT_DIRECT_EXECVE_WHILE_THE_SUPERVISOR_REMAINS_TO_CAPTURE_AND_FINALIZE_THE_PRIVATE_RECEIPT",
+        "execve_acceptance_detection_rule": "CLOSE_ON_EXEC_ERROR_PIPE_EOF_MEANS_THE_OS_ACCEPTED_EXECVE_AND_A_COMPLETE_BOUNDED_ERRNO_RECORD_MEANS_EXECVE_REJECTION",
+        "execve_rejection_reporting_rule": "CHILD_STUB_WRITES_ONLY_ONE_BOUNDED_TYPED_ERRNO_RECORD_TO_THE_PRIVATE_CLOEXEC_ERROR_PIPE_THEN_EXITS_WITHOUT_RETRY",
+        "absolute_executable_rule": "EXACT_PREBOUND_PRIVATE_ABSOLUTE_REGULAR_TRUSTED_EXECUTABLE_PATH_WITH_BODY_RAW_SHA256_MATCH",
+        "ordered_argv_rule": "EXACT_PRIVATE_NUL_FREE_BYTE_SEQUENCE_ARRAY_PASSED_ELEMENT_FOR_ELEMENT_IN_ORDER",
+        "ordered_envp_rule": "EXACT_PRIVATE_NUL_FREE_NAME_EQUALS_VALUE_BYTE_SEQUENCE_ARRAY_PASSED_ELEMENT_FOR_ELEMENT_IN_ORDER",
+        "shell_allowed": false,
+        "path_search_allowed": false,
+        "parent_environment_inheritance_allowed": false,
+        "unbound_environment_entry_count": 0,
+        "request_value_source": "THE_SINGLE_VALIDATED_FROZEN_PRIVATE_INGRESS_ENVELOPE_ONLY",
+        "outer_command_process_credited_as_network_child": false
+      },
+      "bounded_raw_stdout_capture_contract": {
+        "capture_count": 1,
+        "stream": "NETWORK_CHILD_STDOUT_RAW_BYTES",
+        "capture_arm_time": "BEFORE_NETWORK_CHILD_CREATION_OR_EXECVE_REQUEST_ISSUANCE",
+        "capture_owner": "THE_REMAINING_ADAPTER_SUPERVISOR_PROCESS_ONLY",
+        "byte_limit_rule": "EXACT_POSITIVE_PRIVATE_LIMIT_EQUAL_TO_THE_FROZEN_CAPABILITY_AND_EXECUTOR_CORE_RESPONSE_LIMIT",
+        "stderr_mixing_allowed": false,
+        "outer_text_output_credited_as_raw_capture": false,
+        "adapter_to_controller_encoding": "ASCII_BASE64URL_NO_PADDING_WITH_DECODED_LENGTH_SHA256_TERMINAL_STATUS_AND_END_MARKER",
+        "outer_output_completion_rule": "SUCCESS_ONLY_IF_THE_COMPLETE_FRAME_END_MARKER_DECODED_LENGTH_AND_SHA256_VALIDATE",
+        "text_truncation_missing_frame_extra_bytes_hash_mismatch_or_limit_breach_action": "PRIVATE_TYPED_CAPTURE_FAILURE_NO_RETRY_NO_RAW_DETAIL_PUBLICATION",
+        "capture_limit_breach_child_action": "ONE_PREBOUND_DETERMINISTIC_TERMINATION_AND_WAIT_SEQUENCE_WITH_NO_RETRY_AND_PRIVATE_TYPED_CAPTURE_FAILURE",
+        "raw_capture_or_frame_publication_allowed": false
+      },
+      "adapter_receipt_lifecycle_contract": {
+        "contract_id": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_PRIVATE_ATOMIC_LAUNCH_RECEIPT_V1",
+        "publicable": false,
+        "lifecycle_event_enum_closed": true,
+        "lifecycle_event_count": 5,
+        "lifecycle_events": [
+          "PRELAUNCH_REJECTED_NO_CHILD",
+          "EXECVE_REJECTED_NO_TARGET_CHILD",
+          "CHILD_STARTED_CAPTURE_ARMED",
+          "CAPTURE_SUCCEEDED",
+          "CAPTURE_TYPED_FAILURE"
+        ],
+        "terminal_sequence_count": 4,
+        "terminal_sequences": [
+          [
+            "PRELAUNCH_REJECTED_NO_CHILD"
+          ],
+          [
+            "EXECVE_REJECTED_NO_TARGET_CHILD"
+          ],
+          [
+            "CHILD_STARTED_CAPTURE_ARMED",
+            "CAPTURE_SUCCEEDED"
+          ],
+          [
+            "CHILD_STARTED_CAPTURE_ARMED",
+            "CAPTURE_TYPED_FAILURE"
+          ]
+        ],
+        "prelaunch_rejection_rule": "NESTED_ACTUAL_LAUNCH_RECEIPT_ABSENT_POLICY_LINK_DISPATCH_AND_NETWORK_EXACT0",
+        "execve_request_rule": "AT_THE_NETWORK_CHILD_EXECVE_REQUEST_POLICY_LINK_DISPATCH_AND_NESTED_PRIVATE_ATOMIC_LAUNCH_RECEIPT_BECOME_EXACT1_AND_NEVER_ROLL_BACK",
+        "execve_rejection_rule": "NESTED_RECEIPT_STATE_EXECVE_REJECTED_NO_TARGET_CHILD_WITH_CONSUMPTION_PRESERVED_AND_NO_RETRY",
+        "child_started_rule": "CHILD_STARTED_IS_RECORDED_ONLY_AFTER_OS_ACCEPTANCE_AND_ONLY_WITH_CAPTURE_ALREADY_ARMED",
+        "capture_terminal_rule": "EXACTLY_ONE_OF_CAPTURE_SUCCEEDED_OR_CAPTURE_TYPED_FAILURE_FOLLOWS_CHILD_STARTED",
+        "total": true,
+        "exclusive": true,
+        "retry_count": 0,
+        "current_private_receipt_instance_count": 0,
+        "private_receipt_value_or_identity_publication_allowed": false
+      },
+      "final_policy_executor_link_consumption_contract": {
+        "outer_adapter_launch_consumption_count": 0,
+        "adapter_ingress_consumption_count": 0,
+        "prelaunch_validation_consumption_count": 0,
+        "actual_network_child_execve_request_consumption_count": 1,
+        "consumption_boundary": "THE_SINGLE_OS_NETWORK_CHILD_EXECVE_REQUEST_ISSUANCE_AFTER_ALL_FROZEN_BINDINGS_VALIDATE",
+        "policy_receipt_consumption_boundary_equal": true,
+        "execve_rejection_rolls_back_consumption": false,
+        "retry_after_consumption_allowed": false,
+        "receipt_final_link_identity_rule": "THE_NESTED_PRIVATE_RECEIPT_BINDS_THE_EXACT_SAME_FINAL_LINK_IDENTITY_CONSUMED_AT_EXECVE_REQUEST_ISSUANCE"
+      },
+      "current_interface_feasibility_contract": {
+        "scope": "CURRENT_DECLARED_EXEC_COMMAND_AND_WRITE_STDIN_UNIFIED_SESSION_INTERFACE_PLUS_THIS_PUBLIC_ADAPTER_CONTRACT_ONLY",
+        "check_count": 12,
+        "check_order": [
+          "fixed_outer_adapter_command_is_expressible",
+          "outer_launch_and_network_child_dispatch_are_distinct",
+          "unified_session_handle_link_is_declared",
+          "separate_stdin_character_channel_is_declared",
+          "bounded_ascii_frame_can_avoid_request_value_shell_interpretation",
+          "complete_frame_validation_precedes_any_network_child_launch",
+          "adapter_executable_body_binding_contract_is_total",
+          "network_child_direct_execve_contract_is_total",
+          "single_bounded_raw_stdout_capture_contract_is_total",
+          "private_atomic_receipt_lifecycle_is_total_and_exclusive",
+          "final_link_consumption_is_limited_to_actual_network_child_launch",
+          "outer_text_output_truncation_is_detectable_as_typed_capture_failure"
+        ],
+        "check_vector": {
+          "fixed_outer_adapter_command_is_expressible": true,
+          "outer_launch_and_network_child_dispatch_are_distinct": true,
+          "unified_session_handle_link_is_declared": true,
+          "separate_stdin_character_channel_is_declared": true,
+          "bounded_ascii_frame_can_avoid_request_value_shell_interpretation": true,
+          "complete_frame_validation_precedes_any_network_child_launch": true,
+          "adapter_executable_body_binding_contract_is_total": true,
+          "network_child_direct_execve_contract_is_total": true,
+          "single_bounded_raw_stdout_capture_contract_is_total": true,
+          "private_atomic_receipt_lifecycle_is_total_and_exclusive": true,
+          "final_link_consumption_is_limited_to_actual_network_child_launch": true,
+          "outer_text_output_truncation_is_detectable_as_typed_capture_failure": true
+        },
+        "true_check_count": 12,
+        "false_check_count": 0,
+        "result_enum_closed": true,
+        "result_count": 2,
+        "result_enum": [
+          "CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_DESIGN_FEASIBLE",
+          "CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_TYPED_DESIGN_BLOCKER"
+        ],
+        "selection_rule": "ALL_ORDERED_CHECKS_TRUE_SELECTS_FEASIBLE_OTHERWISE_FIRST_FALSE_CHECK_SELECTS_THE_EXACT_MAPPED_TYPED_DESIGN_BLOCKER_REASON",
+        "selected_result": "CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_DESIGN_FEASIBLE",
+        "typed_design_blocker_reason_or_null": null,
+        "current_actual_adapter_capability_created_or_proven": false,
+        "direct_execve_interface_declared_by_exec_command_itself": false,
+        "scope_limit": "DESIGN_FEASIBILITY_ONLY_NOT_ADAPTER_BODY_EXISTENCE_RUNTIME_AVAILABILITY_NETWORK_AVAILABILITY_OR_FUTURE_GATE_VALIDITY",
+        "global_provider_network_executor_permanent_incapacity_claim": false,
+        "future_impossibility_claim": false
+      },
+      "typed_design_blocker_contract": {
+        "closed": true,
+        "check_count": 12,
+        "check_order": [
+          "fixed_outer_adapter_command_is_expressible",
+          "outer_launch_and_network_child_dispatch_are_distinct",
+          "unified_session_handle_link_is_declared",
+          "separate_stdin_character_channel_is_declared",
+          "bounded_ascii_frame_can_avoid_request_value_shell_interpretation",
+          "complete_frame_validation_precedes_any_network_child_launch",
+          "adapter_executable_body_binding_contract_is_total",
+          "network_child_direct_execve_contract_is_total",
+          "single_bounded_raw_stdout_capture_contract_is_total",
+          "private_atomic_receipt_lifecycle_is_total_and_exclusive",
+          "final_link_consumption_is_limited_to_actual_network_child_launch",
+          "outer_text_output_truncation_is_detectable_as_typed_capture_failure"
+        ],
+        "reason_count": 12,
+        "reasons_in_precedence_order": [
+          "FIXED_OUTER_ADAPTER_COMMAND_UNEXPRESSIBLE",
+          "OUTER_AND_NETWORK_CHILD_SEMANTICS_NOT_DISTINCT",
+          "UNIFIED_SESSION_HANDLE_LINK_UNAVAILABLE_OR_UNPROVABLE",
+          "SESSION_STDIN_CHANNEL_UNAVAILABLE_OR_UNPROVABLE",
+          "AUTHORITY_BOUND_NON_SHELL_ADAPTER_INGRESS_UNAVAILABLE_OR_UNPROVABLE",
+          "COMPLETE_PRELAUNCH_FRAME_VALIDATION_UNPROVABLE",
+          "ADAPTER_EXECUTABLE_BODY_BINDING_UNPROVABLE",
+          "NETWORK_CHILD_DIRECT_EXECVE_BINDING_UNPROVABLE",
+          "SINGLE_BOUNDED_RAW_STDOUT_CAPTURE_UNPROVABLE",
+          "PRIVATE_ATOMIC_RECEIPT_LIFECYCLE_UNPROVABLE",
+          "FINAL_POLICY_EXECUTOR_LINK_ACTUAL_LAUNCH_CONSUMPTION_UNPROVABLE",
+          "OUTER_TEXT_FRAME_COMPLETENESS_UNPROVABLE"
+        ],
+        "false_reason_by_check": {
+          "fixed_outer_adapter_command_is_expressible": "FIXED_OUTER_ADAPTER_COMMAND_UNEXPRESSIBLE",
+          "outer_launch_and_network_child_dispatch_are_distinct": "OUTER_AND_NETWORK_CHILD_SEMANTICS_NOT_DISTINCT",
+          "unified_session_handle_link_is_declared": "UNIFIED_SESSION_HANDLE_LINK_UNAVAILABLE_OR_UNPROVABLE",
+          "separate_stdin_character_channel_is_declared": "SESSION_STDIN_CHANNEL_UNAVAILABLE_OR_UNPROVABLE",
+          "bounded_ascii_frame_can_avoid_request_value_shell_interpretation": "AUTHORITY_BOUND_NON_SHELL_ADAPTER_INGRESS_UNAVAILABLE_OR_UNPROVABLE",
+          "complete_frame_validation_precedes_any_network_child_launch": "COMPLETE_PRELAUNCH_FRAME_VALIDATION_UNPROVABLE",
+          "adapter_executable_body_binding_contract_is_total": "ADAPTER_EXECUTABLE_BODY_BINDING_UNPROVABLE",
+          "network_child_direct_execve_contract_is_total": "NETWORK_CHILD_DIRECT_EXECVE_BINDING_UNPROVABLE",
+          "single_bounded_raw_stdout_capture_contract_is_total": "SINGLE_BOUNDED_RAW_STDOUT_CAPTURE_UNPROVABLE",
+          "private_atomic_receipt_lifecycle_is_total_and_exclusive": "PRIVATE_ATOMIC_RECEIPT_LIFECYCLE_UNPROVABLE",
+          "final_link_consumption_is_limited_to_actual_network_child_launch": "FINAL_POLICY_EXECUTOR_LINK_ACTUAL_LAUNCH_CONSUMPTION_UNPROVABLE",
+          "outer_text_output_truncation_is_detectable_as_typed_capture_failure": "OUTER_TEXT_FRAME_COMPLETENESS_UNPROVABLE"
+        },
+        "mapping_count": 12,
+        "mapping_total": true,
+        "mapping_one_to_one": true,
+        "selection_rule": "EVALUATE_EXPLICIT_CHECK_ORDER_AND_SELECT_THE_FALSE_REASON_BY_CHECK_VALUE_FOR_THE_FIRST_FALSE_OR_NULL_WHEN_ALL_TRUE",
+        "selected_reason_or_null": null,
+        "reason_scope": "CURRENT_DECLARED_INTERFACE_AND_CURRENT_PUBLIC_DESIGN_EVIDENCE_ONLY",
+        "global_permanent_incapacity_or_future_impossibility_claim_allowed": false
+      },
+      "static_design_observer_contract": {
+        "owner_execution_count": 1,
+        "independent_execution_count": 1,
+        "shared_derived_state_reuse_count": 0,
+        "domain_free_projection_comparison_count": 1,
+        "projection_encoding": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+        "owner_evidence_domain": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_OWNER_STATIC_DESIGN_V1",
+        "independent_evidence_domain": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_INDEPENDENT_STATIC_DESIGN_V1",
+        "evidence_preimage": "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_DOMAIN_FREE_PROJECTION_CANONICAL_BYTES",
+        "observer_valid_condition": "EVERY_CLOSED_STATIC_DESIGN_CHECK_TRUE_INCLUDING_A_TOTAL_TYPED_FEASIBILITY_EVALUATION_WITHOUT_REQUIRING_EVERY_FEASIBILITY_RESULT_TRUE",
+        "observer_invalid_condition": "ANY_CLOSED_STATIC_DESIGN_CHECK_FALSE_OR_MISSING_EXTRA_NONBOOLEAN_FIELD",
+        "projection_divergence_condition": "BOTH_VALID_AND_DOMAIN_FREE_PROJECTION_SHA256_VALUES_DIFFER"
+      },
+      "terminal_mapping": {
+        "branch_count": 4,
+        "branches": [
+          "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_CONTROLLER_ADAPTER_RECONCILIATION_CONTRACT_V1_STATIC_INVALID_STOP",
+          "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_CONTROLLER_ADAPTER_RECONCILIATION_CONTRACT_V1_PROJECTION_DIVERGENCE_STOP",
+          "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP",
+          "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_TYPED_DESIGN_BLOCKER_STOP"
+        ],
+        "selection_rule": "STATIC_INVALID_IF_EITHER_OBSERVER_INVALID_ELSE_DIVERGENCE_IF_VALID_PROJECTIONS_DIFFER_ELSE_FEASIBLE_IF_SELECTED_RESULT_FEASIBLE_ELSE_TYPED_DESIGN_BLOCKER_IF_SELECTED_RESULT_TYPED_BLOCKER_WITH_ONE_MAPPED_REASON",
+        "static_invalid_branch_condition": "OWNER_OR_INDEPENDENT_STATIC_DESIGN_VERDICT_INVALID",
+        "projection_divergence_branch_condition": "BOTH_STATIC_DESIGN_VERDICTS_VALID_AND_PROJECTION_SHA256_VALUES_DIFFER",
+        "current_interface_feasible_branch_condition": "BOTH_STATIC_DESIGN_VERDICTS_VALID_PROJECTIONS_MATCH_AND_FEASIBILITY_SELECTED_RESULT_IS_FEASIBLE",
+        "typed_design_blocker_branch_condition": "BOTH_STATIC_DESIGN_VERDICTS_VALID_PROJECTIONS_MATCH_AND_FEASIBILITY_SELECTED_RESULT_IS_TYPED_DESIGN_BLOCKER_WITH_ONE_NON_NULL_MAPPED_REASON",
+        "total": true,
+        "exclusive": true,
+        "automatic_progression": false
+      },
+      "privacy_boundary": {
+        "public_contract_semantics_and_current_public_interface_descriptor_only": true,
+        "private_session_id_path_request_uri_header_body_trust_proxy_dns_argv_envp_capture_receipt_or_raw_detail_publication_count": 0,
+        "private_adapter_or_network_child_executable_body_hash_or_component_identity_publication_count": 0,
+        "public_descriptor_and_contract_identity_publication_allowed": true
+      },
+      "historical_preservation": {
+        "catalogue_observation_v3_immutable": true,
+        "failed_catalogue_observation_v2_and_old_manifest_immutable_noncredit": true,
+        "reparse_count": 0,
+        "rebind_count": 0,
+        "reclassification_count": 0,
+        "route_reselection_count": 0,
+        "gate_reevaluation_count": 0,
+        "retry_count": 0,
+        "retroactive_credit_count": 0,
+        "full_r1_result": "UNKNOWN_PRESERVED"
+      },
+      "current_design_forbidden_effects": {
+        "private_value_or_path_read_count": 0,
+        "helper_source_creation_count": 0,
+        "helper_binary_creation_count": 0,
+        "compilation_count": 0,
+        "helper_execution_count": 0,
+        "network_count": 0,
+        "catalogue_read_or_capture_count": 0,
+        "selection_policy_receipt_consumption_count": 0,
+        "artifact_acquisition_count": 0,
+        "node_or_version_probe_count": 0,
+        "engine_or_verifier_execution_count": 0,
+        "gate_b_runtime_execution_count": 0,
+        "pytest_count": 0,
+        "target_authority_or_execution_count": 0,
+        "private_value_or_identity_publication_count": 0,
+        "cocolon_production_source_change_count": 0,
+        "published_red_change_count": 0,
+        "existing_d1_change_count": 0,
+        "mashos_api_change_count": 0
+      },
+      "future_authority_boundary": {
+        "distinct_separate_mash_authority_required": true,
+        "next_objective": "AUTHORITY_BOUND_LOCAL_PYTHON_CONTROLLER_ADAPTER_SOURCE_V1_MATERIALIZATION_AND_NONNETWORK_CAPABILITY_PROOF",
+        "current_actual_helper_or_capability_creation_count": 0,
+        "current_network_or_policy_consumption_count": 0,
+        "automatic_progression": false
+      },
+      "automatic_progression": false
+    },
+    "contract_identity": {
+      "canonicalization": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+      "json_pointer": "/observation/adapter_reconciliation_contract_candidate",
+      "adapter_reconciliation_contract_raw_sha256": "55f08c24d7cd62c5afac8492a4f73274feeef69e89b68f9a85be343b1534b823",
+      "adapter_reconciliation_contract_canonical_byte_count": 24791,
+      "contract_top_level_exact_key_count": 25,
+      "contract_top_level_exact_keys": [
+        "contract_id",
+        "contract_version",
+        "publicable",
+        "body_free",
+        "purpose",
+        "source_contract_binding",
+        "canonicalization",
+        "identity_domain_registry",
+        "current_interface_descriptor_contract",
+        "outer_command_process_launch_contract",
+        "adapter_ingress_contract",
+        "adapter_executable_body_binding_contract",
+        "network_child_direct_execve_contract",
+        "bounded_raw_stdout_capture_contract",
+        "adapter_receipt_lifecycle_contract",
+        "final_policy_executor_link_consumption_contract",
+        "current_interface_feasibility_contract",
+        "typed_design_blocker_contract",
+        "static_design_observer_contract",
+        "terminal_mapping",
+        "privacy_boundary",
+        "historical_preservation",
+        "current_design_forbidden_effects",
+        "future_authority_boundary",
+        "automatic_progression"
+      ]
+    },
+    "owner_static_design_observation": {
+      "execution_count": 1,
+      "state_origin": "FRESH_OWNER_STATIC_DESIGN_STATE",
+      "shared_derived_state_reuse_count": 0,
+      "domain_free_projection": {
+        "schema_version": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_DOMAIN_FREE_PROJECTION_V1",
+        "adapter_reconciliation_contract_raw_sha256": "55f08c24d7cd62c5afac8492a4f73274feeef69e89b68f9a85be343b1534b823",
+        "source_catalogue_observation_v3_sha256": "42ac9f2c8cd72172216969a8b797b444b21a8dd118d0b3b00ccdf5c98fb8dc05",
+        "source_catalogue_observation_v3_receipt_raw_sha256": "46f53cde9a8fac5a6c9ebaff1ba3d06425df0f04791a94dcaf0e70567e545dc2",
+        "source_catalogue_observation_v3_receipt_consumption_count": 1,
+        "selection_policy_receipt_consumption_count": 0,
+        "current_interface_descriptor_raw_sha256": "bd97827a58e0445bd6f254704584ce5101292be7836497c7357f72130a00c31f",
+        "current_interface_descriptor_identity_sha256": "b1f176e431b0a31d20ed22ccf832c2569c9e7810c37e6c358cbda1bafaa85f73",
+        "interface_component_order": [
+          "EXEC_COMMAND",
+          "WRITE_STDIN"
+        ],
+        "outer_launch_network_dispatch_count": 0,
+        "outer_launch_policy_or_final_link_consumption_count": 0,
+        "authority_variable_private_request_value_shell_interpretation_count": 0,
+        "bounded_ascii_framed_stdin_ingress": true,
+        "network_child_direct_execve_required": true,
+        "network_child_no_shell_no_path_search_no_parent_environment": true,
+        "single_bounded_raw_stdout_capture_armed_before_child": true,
+        "private_atomic_receipt_lifecycle_total_and_exclusive": true,
+        "final_link_consumed_only_at_actual_network_child_launch": true,
+        "current_interface_feasibility_result": "CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_DESIGN_FEASIBLE",
+        "typed_design_blocker_reason_or_null": null,
+        "current_actual_adapter_capability_creation_count": 0,
+        "global_permanent_incapacity_or_future_impossibility_claim_count": 0,
+        "forbidden_effect_occurrence_count": 0,
+        "check_vector": {
+          "source_catalogue_observation_v3_receipt_binding_and_consumption_exact": true,
+          "selection_policy_contract_and_receipt_immutable_unconsumed": true,
+          "current_unified_session_descriptor_closed_canonical_and_rehashed": true,
+          "outer_launch_and_network_child_dispatch_semantics_distinct": true,
+          "outer_launch_contains_no_authority_variable_private_request_value": true,
+          "adapter_ingress_bounded_framed_non_shell_and_prelaunch_total": true,
+          "adapter_executable_body_binding_contract_closed": true,
+          "network_child_direct_execve_path_argv_envp_and_environment_contract_closed": true,
+          "single_bounded_raw_stdout_capture_armed_before_child": true,
+          "private_atomic_receipt_lifecycle_total_exclusive_and_no_retry": true,
+          "final_link_and_policy_consumed_only_at_actual_network_child_launch": true,
+          "outer_text_output_not_credited_and_truncation_detectable": true,
+          "current_interface_feasibility_evaluation_total_typed_and_blocker_reachable": true,
+          "current_actual_helper_or_capability_creation_exact0": true,
+          "no_global_permanent_incapacity_or_future_impossibility_claim": true,
+          "terminal_mapping_total_and_exclusive": true,
+          "shared_derived_state_reuse_exact0": true,
+          "current_forbidden_effects_exact0": true
+        },
+        "verdict": "VALID",
+        "invalid_check_count": 0,
+        "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP",
+        "automatic_progression": false
+      },
+      "domain_free_projection_sha256": "84746fe926c458540ce72c66be4cc4b675adb08951767d191b4aa38612011b99",
+      "domain_specific_evidence_sha256": "68f688d522be2cc862db7ec1be44b338097c414b9750e709aa8304737f6dc909",
+      "verdict": "VALID",
+      "invalid_check_count": 0
+    },
+    "independent_static_design_observation": {
+      "execution_count": 1,
+      "state_origin": "FRESH_INDEPENDENT_STATIC_DESIGN_STATE",
+      "shared_derived_state_reuse_count": 0,
+      "domain_free_projection": {
+        "schema_version": "COCOLON_NLS_V3_STEP11_GATE_B_CONTROLLER_ADAPTER_RECONCILIATION_DOMAIN_FREE_PROJECTION_V1",
+        "adapter_reconciliation_contract_raw_sha256": "55f08c24d7cd62c5afac8492a4f73274feeef69e89b68f9a85be343b1534b823",
+        "source_catalogue_observation_v3_sha256": "42ac9f2c8cd72172216969a8b797b444b21a8dd118d0b3b00ccdf5c98fb8dc05",
+        "source_catalogue_observation_v3_receipt_raw_sha256": "46f53cde9a8fac5a6c9ebaff1ba3d06425df0f04791a94dcaf0e70567e545dc2",
+        "source_catalogue_observation_v3_receipt_consumption_count": 1,
+        "selection_policy_receipt_consumption_count": 0,
+        "current_interface_descriptor_raw_sha256": "bd97827a58e0445bd6f254704584ce5101292be7836497c7357f72130a00c31f",
+        "current_interface_descriptor_identity_sha256": "b1f176e431b0a31d20ed22ccf832c2569c9e7810c37e6c358cbda1bafaa85f73",
+        "interface_component_order": [
+          "EXEC_COMMAND",
+          "WRITE_STDIN"
+        ],
+        "outer_launch_network_dispatch_count": 0,
+        "outer_launch_policy_or_final_link_consumption_count": 0,
+        "authority_variable_private_request_value_shell_interpretation_count": 0,
+        "bounded_ascii_framed_stdin_ingress": true,
+        "network_child_direct_execve_required": true,
+        "network_child_no_shell_no_path_search_no_parent_environment": true,
+        "single_bounded_raw_stdout_capture_armed_before_child": true,
+        "private_atomic_receipt_lifecycle_total_and_exclusive": true,
+        "final_link_consumed_only_at_actual_network_child_launch": true,
+        "current_interface_feasibility_result": "CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_DESIGN_FEASIBLE",
+        "typed_design_blocker_reason_or_null": null,
+        "current_actual_adapter_capability_creation_count": 0,
+        "global_permanent_incapacity_or_future_impossibility_claim_count": 0,
+        "forbidden_effect_occurrence_count": 0,
+        "check_vector": {
+          "source_catalogue_observation_v3_receipt_binding_and_consumption_exact": true,
+          "selection_policy_contract_and_receipt_immutable_unconsumed": true,
+          "current_unified_session_descriptor_closed_canonical_and_rehashed": true,
+          "outer_launch_and_network_child_dispatch_semantics_distinct": true,
+          "outer_launch_contains_no_authority_variable_private_request_value": true,
+          "adapter_ingress_bounded_framed_non_shell_and_prelaunch_total": true,
+          "adapter_executable_body_binding_contract_closed": true,
+          "network_child_direct_execve_path_argv_envp_and_environment_contract_closed": true,
+          "single_bounded_raw_stdout_capture_armed_before_child": true,
+          "private_atomic_receipt_lifecycle_total_exclusive_and_no_retry": true,
+          "final_link_and_policy_consumed_only_at_actual_network_child_launch": true,
+          "outer_text_output_not_credited_and_truncation_detectable": true,
+          "current_interface_feasibility_evaluation_total_typed_and_blocker_reachable": true,
+          "current_actual_helper_or_capability_creation_exact0": true,
+          "no_global_permanent_incapacity_or_future_impossibility_claim": true,
+          "terminal_mapping_total_and_exclusive": true,
+          "shared_derived_state_reuse_exact0": true,
+          "current_forbidden_effects_exact0": true
+        },
+        "verdict": "VALID",
+        "invalid_check_count": 0,
+        "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP",
+        "automatic_progression": false
+      },
+      "domain_free_projection_sha256": "84746fe926c458540ce72c66be4cc4b675adb08951767d191b4aa38612011b99",
+      "domain_specific_evidence_sha256": "2d052724b9f77e2f46f5cf5e6d815432e025b79200e3245e7446997b8814ee77",
+      "verdict": "VALID",
+      "invalid_check_count": 0
+    },
+    "comparison": {
+      "owner_independent_projection_comparison_count": 1,
+      "owner_projection_sha256": "84746fe926c458540ce72c66be4cc4b675adb08951767d191b4aa38612011b99",
+      "independent_projection_sha256": "84746fe926c458540ce72c66be4cc4b675adb08951767d191b4aa38612011b99",
+      "match": true,
+      "state_reuse_count": 0,
+      "selected_feasibility_result": "CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_DESIGN_FEASIBLE"
+    },
+    "position_consistency": {
+      "position_change_effect": true,
+      "prior_position": "EXEC_COMMAND_ITSELF_HAS_NO_DECLARED_DIRECT_EXECVE_INTERFACE_AND_CONTROLLER_ADAPTER_FEASIBILITY_WAS_UNPROVED",
+      "proposed_position": "THE_PAIRED_UNIFIED_SESSION_INTERFACE_SUPPORTS_A_STATICALLY_VALID_NON_SHELL_PRIVATE_INGRESS_CONTROLLER_ADAPTER_DESIGN_WHILE_ACTUAL_ADAPTER_CAPABILITY_REMAINS_UNCREATED",
+      "change_basis": "FRESH_CURRENT_INTERFACE_DESCRIPTOR_REREAD_CONFIRMED_WRITE_STDIN_BOUND_TO_EXEC_COMMAND_SESSION_ID",
+      "correction": "NO_CORRECTION_TO_THE_IMMUTABLE_V3_DIRECT_INTERFACE_FACT_OR_STOP_THE_NEW_FACT_CLOSES_ONLY_THE_ADAPTER_DESIGN_FEASIBILITY_QUESTION"
+    },
+    "effects": {
+      "catalogue_observation_v3_receipt_consumption_count": 1,
+      "current_interface_descriptor_reread_count": 1,
+      "current_interface_descriptor_recanonicalization_count": 1,
+      "current_interface_descriptor_rehash_count": 1,
+      "adapter_reconciliation_contract_candidate_creation_count": 1,
+      "owner_static_design_verification_count": 1,
+      "independent_static_design_verification_count": 1,
+      "domain_free_projection_comparison_count": 1,
+      "current_private_value_or_path_read_count": 0,
+      "helper_source_creation_count": 0,
+      "helper_binary_creation_count": 0,
+      "compilation_count": 0,
+      "helper_execution_count": 0,
+      "policy_receipt_consumption_count": 0,
+      "network_count": 0,
+      "catalogue_read_or_capture_count": 0,
+      "artifact_acquisition_count": 0,
+      "node_execution_count": 0,
+      "node_version_probe_count": 0,
+      "engine_execution_count": 0,
+      "verifier_execution_count": 0,
+      "gate_b_runtime_execution_count": 0,
+      "pytest_count": 0,
+      "target_authority_issuance_or_execution_count": 0,
+      "private_value_or_identity_publication_count": 0,
+      "cocolon_production_source_change_count": 0,
+      "published_red_change_count": 0,
+      "existing_d1_change_count": 0,
+      "mashos_api_change_count": 0,
+      "automatic_progression_count": 0
+    },
+    "runtime_ready": false,
+    "launcher_availability_route_position": "ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE",
+    "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP",
+    "terminal_mapping": {
+      "branch_count": 4,
+      "selected_branch": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP",
+      "selection_basis": "OWNER_AND_INDEPENDENT_VALID_PROJECTIONS_MATCH_AND_CURRENT_FEASIBILITY_SELECTED_RESULT_IS_FEASIBLE",
+      "typed_design_blocker_branch_reachable_if_any_ordered_feasibility_check_is_false": true,
+      "total": true,
+      "exclusive": true
+    },
+    "automatic_progression": false
+  },
+  "observation_sha256": "b3565dbfde5128df51228d72e4b598f074ee97a089e675712fafa99d167da8e9",
+  "receipt_self_hash_schema": {
+    "canonicalization": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+    "excluded_json_pointer": "/receipt_logical_sha256",
+    "digest": "SHA256_LOWERCASE_HEX64"
+  },
+  "receipt_logical_sha256": "89e47b7730d0e8053d3b9bffb06f96db6a70c6c3894ec45e4c136c464210f184",
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_EXECUTION_PROVIDER_DIRECT_EXECVE_CONTROLLER_ADAPTER_CAPABILITY_RECOVERY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP_POSTVERIFIED_OBSERVATION_SHA256_B3565DBFDE5128DF51228D72E4B598F074EE97A089E675712FAFA99D167DA8E9_CURRENT_ADAPTER_RECONCILIATION_AUTHORITY_SHA256_0F440346A8955465A159EC9641DD369DAE7EDE90B2504305D98A7EC9914387F0_ACTIVATED_EXACT1_CLOSED_CONSUMED_DUAL_STATIC_VALID_CURRENT_INTERFACE_FEASIBLE_DESIGN_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_COCOLON_CURRENT_PREWRITE_BASE_6D6AC597_TREE_A5C797AA_AUTHORITY_DECLARED_CATALOGUE_V3_PREWRITE_BASE_AEF68F18_TREE_B9FAE839_MASHOS_API_SOURCE_315813C7_TREE_A641510E_CHANGE_EXACT0_SOURCE_CATALOGUE_OBSERVATION_V3_RECEIPT_CONSUMPTION_EXACT1_BLOB_579E9A48_RAW_46F53CDE_LOGICAL_52EFED65_OBSERVATION_42AC9F2C_RECONCILIATION_CONTRACT_IMMUTABLE_RAW_837EC841_OBSERVATION_8D076F9C_RECEIPT_HISTORICAL_CONSUMPTION_EXACT1_CURRENT_NEW_CONSUMPTION_EXACT0_POLICY_RECEIPT_REMAINS_CLOSED_UNCONSUMED_IMMUTABLE_CONSUMPTION_EXACT0_BLOB_2F5EACE6_RAW_437B319F_LOGICAL_0F0B30AE_OBSERVATION_618E4A9B_POLICY_CONTRACT_V1_IMMUTABLE_NO_WEAKENING_EXACT1_RAW_5333E2EFCA9890C545B28EF76439693C0898F7FADA886E235D550FE0BE90AEB2_EVALUATOR_CONTRACT_V1_IMMUTABLE_NO_WEAKENING_EXACT1_RAW_DDBAC38EA0AD569335DA5A1A6F52E6A7A49D7926F813D536B561F2447DCBA989_HISTORICAL_RECEIPT_CONSUMPTION_EXACT1_OBSERVATION_01B2EB00_PROVIDER_METADATA_SOURCE_LOCK_CONTRACT_IMMUTABLE_NO_EFFECT_EXACT1_RAW_20226CB7_OBSERVATION_D47D894A_FAILED_CATALOGUE_OBSERVATION_V2_AND_OLD_MANIFEST_IMMUTABLE_NONCREDIT_NO_REPARSE_REBIND_RECLASSIFICATION_ROUTE_RESELECTION_GATE_REEVALUATION_RETRY_OR_RETROACTIVE_CREDIT_EXACT1_OBSERVATION_EE403E25_CURRENT_UNIFIED_COMMAND_SESSION_INTERFACE_DESCRIPTOR_REREAD_RECANONICALIZATION_AND_REHASH_EXACT1_COMPONENTS_EXACT2_EXEC_COMMAND_AND_WRITE_STDIN_CANONICAL_BYTES_3189_RAW_BD97827A58E0445BD6F254704584CE5101292BE7836497C7357F72130A00C31F_IDENTITY_B1F176E431B0A31D20ED22CCF832C2569C9E7810C37E6C358CBDA1BAFAA85F73_EXEC_COMMAND_SINGLE_COMMAND_STRING_OPTIONAL_SHELL_BINARY_DECLARED_DIRECT_EXECVE_INTERFACE_EXACT0_WRITE_STDIN_EXISTING_SESSION_ID_BOUND_CHARACTER_INGRESS_INTERFACE_EXACT1_PUBLICABLE_BODY_FREE_ADAPTER_RECONCILIATION_CONTRACT_V1_CREATED_EXACT1_RAW_55F08C24D7CD62C5AFAC8492A4F73274FEEEF69E89B68F9A85BE343B1534B823_CANONICAL_BYTES_24791_TOP_LEVEL_EXACT25_CURRENT_OUTER_COMMAND_PROCESS_LAUNCH_AND_FUTURE_NETWORK_CHILD_DISPATCH_SEMANTICS_DISTINCT_EXACT1_OUTER_LAUNCH_NETWORK_DISPATCH_POLICY_RECEIPT_AND_FINAL_LINK_CONSUMPTION_EXACT0_EXACT0_EXACT0_FIXED_OUTER_ADAPTER_COMMAND_NO_AUTHORITY_VARIABLE_PRIVATE_REQUEST_VALUE_SHELL_INTERPRETATION_EXACT1_AUTHORITY_BOUND_PRIVATE_ASCII_BASE64URL_LENGTH_HASH_AUTHORITY_SNAPSHOT_FRAMED_WRITE_STDIN_INGRESS_WITH_SINGLE_LF_TRANSPORT_TERMINATOR_EXACT1_COMPLETE_FRAME_VALIDATION_BEFORE_CHILD_AND_INVALID_INCOMPLETE_EXTRA_HASH_MISMATCH_OR_SESSION_CLOSED_PRELAUNCH_REJECTION_NO_RETRY_EXACT1_NETWORK_CHILD_SUPERVISOR_FORK_CLOEXEC_ERROR_PIPE_AND_EXACT_DIRECT_EXECVE_PREBOUND_ABSOLUTE_EXECUTABLE_EXACT_ORDERED_ARGV_EXACT_ORDERED_ENVP_NO_SHELL_NO_PATH_SEARCH_NO_PARENT_ENVIRONMENT_EXACT1_SINGLE_BOUNDED_RAW_CHILD_STDOUT_CAPTURE_ARMED_BEFORE_CHILD_START_AND_OUTER_TEXT_NOT_CREDITED_EXACT1_ADAPTER_TO_CONTROLLER_BASE64URL_LENGTH_HASH_END_MARKER_FRAME_TRUNCATION_DETECTABLE_TYPED_CAPTURE_FAILURE_NO_RETRY_EXACT1_PRIVATE_ATOMIC_LAUNCH_RECEIPT_LIFECYCLE_CLOSED_EVENTS_EXACT5_TERMINAL_SEQUENCES_EXACT4_TOTAL_EXCLUSIVE_EXACT1_PRELAUNCH_REJECTION_NESTED_RECEIPT_POLICY_LINK_AND_DISPATCH_EXACT0_EXECVE_REQUEST_NESTED_RECEIPT_POLICY_LINK_AND_DISPATCH_EXACT1_OS_REJECTION_NO_ROLLBACK_NO_RETRY_EXACT1_CHILD_STARTED_ONLY_WITH_CAPTURE_ARMED_THEN_CAPTURE_SUCCESS_OR_TYPED_FAILURE_EXCLUSIVE_EXACT1_FINAL_POLICY_EXECUTOR_LINK_CONSUMED_ONLY_BY_ACTUAL_NETWORK_CHILD_EXECVE_REQUEST_EXACT1_CURRENT_INTERFACE_FEASIBILITY_CHECK_VECTOR_CLOSED_EXACT12_TRUE12_FALSE0_SELECTED_CURRENT_UNIFIED_COMMAND_SESSION_CONTROLLER_ADAPTER_BOUNDARY_DESIGN_FEASIBLE_EXACT1_TYPED_DESIGN_BLOCKER_CHECK_REASON_MAPPING_CLOSED_EXACT12_ONE_TO_ONE_ORDERED_TOTAL_EXCLUSIVE_AND_REACHABLE_IF_ANY_FALSE_EXACT1_CURRENT_DIRECT_EXECVE_INTERFACE_STILL_UNDECLARED_AND_ACTUAL_ADAPTER_SOURCE_BINARY_CAPABILITY_CREATION_OR_PROOF_EXACT0_EXACT0_EXACT0_EXACT0_NO_GLOBAL_PROVIDER_NETWORK_EXECUTOR_PERMANENT_INCAPACITY_OR_FUTURE_IMPOSSIBILITY_CLAIM_EXACT1_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_PROJECTION_SHA256_84746FE926C458540CE72C66BE4CC4B675ADB08951767D191B4AA38612011B99_EVIDENCE_SHA256_68F688D522BE2CC862DB7EC1BE44B338097C414B9750E709AA8304737F6DC909_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_PROJECTION_SHA256_84746FE926C458540CE72C66BE4CC4B675ADB08951767D191B4AA38612011B99_EVIDENCE_SHA256_2D052724B9F77E2F46F5CF5E6D815432E025B79200E3245E7446997B8814EE77_OWNER_INDEPENDENT_DOMAIN_FREE_PROJECTION_MATCH_EXACT1_STATE_REUSE_EXACT0_CURRENT_PRIVATE_VALUE_OR_PATH_READ_HELPER_SOURCE_OR_BINARY_CREATION_COMPILATION_HELPER_EXECUTION_NETWORK_CATALOGUE_POLICY_RECEIPT_CONSUMPTION_ARTIFACT_NODE_VERSION_ENGINE_VERIFIER_GATE_B_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PRIVATE_VALUE_PATH_SESSION_REQUEST_ARGV_ENVP_CAPTURE_RECEIPT_RAW_DETAIL_OR_COMPONENT_IDENTITY_PUBLICATION_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_AUTHORITY_BOUND_LOCAL_PYTHON_CONTROLLER_ADAPTER_SOURCE_V1_MATERIALIZATION_AND_NONNETWORK_CAPABILITY_PROOF_AUTHORITY_CURRENT_BODY_FREE_ADAPTER_RECONCILIATION_RECEIPT_CONSUMPTION_EXACT1_CURRENT_POLICY_RECEIPT_REMAINS_CLOSED_UNCONSUMED_IMMUTABLE_CONSUMPTION_EXACT0_ADAPTER_RECONCILIATION_CONTRACT_RAW_55F08C24D7CD62C5AFAC8492A4F73274FEEEF69E89B68F9A85BE343B1534B823_AND_OBSERVATION_B3565DBFDE5128DF51228D72E4B598F074EE97A089E675712FAFA99D167DA8E9_BINDING_EXACT1_CURRENT_UNIFIED_SESSION_INTERFACE_DESCRIPTOR_RAW_BD97827A58E0445BD6F254704584CE5101292BE7836497C7357F72130A00C31F_IDENTITY_B1F176E431B0A31D20ED22CCF832C2569C9E7810C37E6C358CBDA1BAFAA85F73_IMMUTABLE_BINDING_EXACT1_FRESH_PRIVATE_CURRENT_EXECUTION_PROVIDER_ABSOLUTE_PYTHON_ADAPTER_RUNTIME_AND_NONNETWORK_SURROGATE_CHILD_LOCATOR_BODY_IDENTITY_DISCOVERY_CLOSED_BOUNDED_EXACT1_AUTHORITY_BOUND_PRIVATE_PYTHON_CONTROLLER_ADAPTER_SOURCE_CREATION_EXACT1_WITH_RAW_SHA256_BYTE_COUNT_AND_LINE_COUNT_FREEZE_EXACT1_BINARY_CREATION_AND_COMPILATION_EXACT0_EXACT0_ADAPTER_OUTER_FIXED_COMMAND_STDIN_FRAME_DIRECT_EXECVE_ORDERED_ARGV_ORDERED_ENVP_EMPTY_OR_EXACT_ENVP_CAPTURE_AND_RECEIPT_STATIC_VERIFICATION_EXACT1_NONNETWORK_SURROGATE_CHILD_CAPABILITY_PROOF_EXECUTION_EXACT1_SURROGATE_NOT_CREDITED_AS_NETWORK_DISPATCH_POLICY_RECEIPT_OR_FINAL_LINK_CONSUMPTION_EXACT1_NETWORK_EXACT0_OWNER_AND_INDEPENDENT_PROJECTION_COMPARISON_EXACT1_STATE_REUSE_EXACT0_IF_PROVIDER_LOCATOR_BODY_OR_IMPLEMENTATION_MATERIALIZATION_UNAVAILABLE_TYPED_CAPABILITY_BLOCKER_STOP_NO_GLOBAL_OR_PERMANENT_CLAIM_EXACT1_POLICY_RECEIPT_CONSUMPTION_CATALOGUE_REQUEST_ARTIFACT_ACQUISITION_NODE_VERSION_GATE_B_RUNTIME_PYTEST_TARGET_AND_PRODUCT_EFFECT_EXACT0_BODY_FREE_LOCAL_ADAPTER_MATERIALIZATION_AND_NONNETWORK_CAPABILITY_PROOF_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_NETWORK_OR_AUTOMATIC_PROGRESSION",
+    "token_ascii_byte_count": 7271,
+    "token_sha256": "2d86392f4f5311e65191eb4a9dfd92646907728e8d16a3bdc8bae1ce2b70a0b6",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "automatic_progression": false
+}
