@@ -1,0 +1,1568 @@
+{
+   "automatic_progression" : false,
+   "body_free" : true,
+   "next_authority" : {
+      "automatic_transition" : false,
+      "separate_explicit_mash_approval_required" : true,
+      "state" : "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+      "token" : "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP_POSTVERIFIED_OBSERVATION_SHA256_618E4A9B30626C5768E40DA339B04B41414618967C5D930D87D7928CC2DCB46D_CURRENT_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_AUTHORITY_SHA256_99C0C1537FA40B6AB1B41F6337DAE44AE7C6981CD40F84531535546DC49CC654_ACTIVATED_EXACT1_CLOSED_CONSUMED_DUAL_STATIC_VALID_DESIGN_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_SOURCE_LAUNCHER_IDENTITY_DISCOVERY_OBSERVATION_SHA256_DD10E06F0F1F0DB799B3D7DE098401AC6AF2B146F64D1E5836FC432DC17EA82A_SOURCE_CLASSIFIER_OBSERVATION_SHA256_9C7E0601751D81387720E963BBB07B0CD69CFAA17946722EC7AB82530957B606_SOURCE_ROUTE_DECISION_OBSERVATION_SHA256_1A1D3A9DE6D0CB2B0AD29D5DD8BF3AABFE7C388D6A77FDCF03E2040F2566A73A_SOURCE_PROVIDER_METADATA_CONTRACT_OBSERVATION_SHA256_D47D894A5BA551F10D983D4A3064BAF25E6FBDEC817FFD615E3899EE73D39AF4_IMMUTABLE_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_ROUTE_RESELECTION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREWRITE_BASE_1A05A937_TREE_56538697_SOURCE_VERIFIED_COCOLON_PREOBSERVATION_PREDECESSOR_B99707F6_TREE_811B3A3F_CONTRACT_PUBLIC_WRITE_PREDECESSOR_56BD42F7_TREE_D6F7D4C8_CLASSIFIER_PREWRITE_BASE_4C0A984C_TREE_6FAAC6EB_ROUTE_DECISION_PREWRITE_BASE_01DD0F3E_TREE_BBA6A375_PROVIDER_CONTRACT_PREWRITE_BASE_80494243_TREE_44D907C4_CURRENT_VERSION_POLICY_PREWRITE_BASE_EA6901D6_TREE_B91DEE2C_MASHOS_API_315813C7_TREE_A641510E_CURRENT_BODY_FREE_PROVIDER_CONTRACT_RECEIPT_CONSUMPTION_EXACT1_BLOB_3384B2CE_RAW_FF91904E_LOGICAL_BE518CEF_OBSERVATION_D47D894A_PROVIDER_METADATA_SOURCE_LOCK_CONTRACT_V1_IMMUTABLE_NO_WEAKENING_EXACT1_RAW_20226CB7ABC00D7B4BA7A25C53D01B070DF6FE5CF31C5BEC9B9FD7D321B5E479_CANONICAL_BYTES_71903_PUBLICABLE_BODY_FREE_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_CREATED_EXACT1_RAW_5333E2EFCA9890C545B28EF76439693C0898F7FADA886E235D550FE0BE90AEB2_CANONICAL_BYTES_60028_CONTRACT_TOP_LEVEL_EXACT35_SELECTION_BASIS_SOURCE_ENUM_EXACT2_AUTHORITY_PREBOUND_EXACT_MAJOR_REQUIREMENT_AUTHORITY_PREBOUND_EXACT_MAJOR_MINOR_REQUIREMENT_FUTURE_REQUIREMENT_BINDING_CLOSED_EXACT8_CI_HINT_REQUIREMENT_ONLY_NO_PATCH_IMPLICATION_FUTURE_CATALOGUE_SOURCE_COUNT_EXACT1_PUBLIC_DESCRIPTOR_EXACT8_PRIVATE_BINDING_EXACT9_PRIVATE_ABSOLUTE_HTTPS_GET_NO_AUTH_REQUEST_EXACT7_TRANSPORT_POLICY_EXACT7_PRENETWORK_ATOMIC_BINDING_PRIVATE_TRANSPORT_AND_SOURCE_RECORD_SELECTION_SEMANTICS_LITERAL_IDENTITY_DOMAINS_TRUE_NUL_CANONICAL_PREIMAGES_AND_SHA256_DIGESTS_BOUND_EXACT1_CATALOGUE_PROJECTION_CONTRACT_RAW_4C709BA3F3E1E8A1B99A5B08934E4C7E9256CCB668F116702F14437705C524DB_PARSER_GRAMMAR_RAW_29D9E454C63AC5BD5C1F9F165A1EA0484B3AB7C1F024C4DB2A16D553A7FC9AD0_SOURCE_RECORD_CANONICALIZATION_CONTRACT_RAW_BD21FD7FD529247D0A655D2AE5BB3D09E110398F153EEB7F1E69DDE8055E0B54_CLOSED_EXACT8_LOSSLESS_INTEGER_LEXEME_NO_MACHINE_NUMBER_CONVERSION_PROJECTED_RECORD_CLOSED_EXACT7_CANONICAL_LOWERCASE_V_MAJOR_MINOR_PATCH_STABLE_ONLY_VERSION_TOKEN_KIND_CLASSIFICATION_CLOSED_EXACT4_SELECTOR_FORMS_CLOSED_EXACT6_PRERELEASE_BUILD_SUFFIX_CANONICAL_CORE_AND_OTHER_INVALID_FIRST_TRUE_TOTAL_EXCLUSIVE_DECIMAL_COMPONENT_MAX32DIGIT_NUMERIC_LENGTH_THEN_ASCII_COMPARISON_NO_MACHINE_INTEGER_OR_LOCALE_OBSERVATION_FAILURE_ENUM_CLOSED_EXACT8_CANDIDATE_REJECTION_ENUM_CLOSED_EXACT9_FIRST_TRUE_TOTAL_EXCLUSIVE_IDENTICAL_DUPLICATE_FIRST_OCCURRENCE_ALIAS_COLLAPSE_AND_SAME_VERSION_DIFFERENT_SEMANTICS_WHOLE_OBSERVATION_AMBIGUOUS_INVALID_NO_LOWER_FALLBACK_SELECTION_FILTER_EXACT_MAJOR_OR_MAJOR_MINOR_THEN_NUMERIC_MAJOR_MINOR_PATCH_DESCENDING_HIGHEST_EXACT1_OR_NONE_FUTURE_ACTIVATION_GATE_CLOSED_EXACT12_ALL_TRUE_POLICY_RECEIPT_CONSUMPTION_EXACT1_PRENETWORK_OTHERWISE_EXACT0_NETWORK_EXACT0_FUTURE_OBSERVATION_PROJECTION_CLOSED_EXACT31_CHECK_VECTOR_CLOSED_EXACT29_FUTURE_BODY_FREE_RECEIPT_TOP_LEVEL_EXACT10_OBSERVATION_EXACT18_EFFECTS_EXACT23_CONTROLLER_PRECAPTURE_TYPED_FAILURE_RECORD_CLOSED_EXACT4_RANKS1_2_3_8_WITH_NULL_OBSERVER_WRAPPERS_AND_OBSERVER_FAILURE_RANKS4_5_6_7_ONLY_WITH_RESPONSE_CAPTURE_EXACT1_TOTAL_FUTURE_INVALID_NO_DESIGN_VALID_EXACT_VERSION_DIVERGENCE_DUAL_MATCH_EXACT_VERSION_SELECTED_THREE_WAY_TERMINAL_TOTAL_EXCLUSIVE_FUTURE_SELECTION_RECEIPT_CLOSED_UNCONSUMED_AND_LATER_PROVIDER_SOURCE_LOCK_ALL_EXACT12_VALID_ATOMIC_CONSUMPTION_EXACT1_OTHERWISE_EXACT0_CURRENT_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_PROJECTION_EXACT36_CHECK_VECTOR_EXACT32_ALL_TRUE_PROJECTION_SHA256_92232F44709023D4368268595F1014F20BBC86AB9BB7F6B40444CC4F627518E5_EVIDENCE_SHA256_0CF692FA39F5F53FDDA3C3153A4547CAC7EDE8B38C82EABD255DEFBF36A8F48C_CURRENT_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_PROJECTION_EXACT36_CHECK_VECTOR_EXACT32_ALL_TRUE_PROJECTION_SHA256_92232F44709023D4368268595F1014F20BBC86AB9BB7F6B40444CC4F627518E5_EVIDENCE_SHA256_AFB4785363460299CC156C7C756484A73797ED6C36F8D63994026FEB02D10E25_OWNER_INDEPENDENT_PROJECTION_MATCH_EXACT1_STATE_REUSE_EXACT0_STATIC_INVALID_DIVERGENCE_DUAL_STATIC_VALID_THREE_WAY_TERMINAL_TOTAL_EXCLUSIVE_CURRENT_TERMINAL_RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP_LAUNCHER_AVAILABILITY_ROUTE_POSITION_ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE_PRESERVED_EXACT1_CURRENT_CI_WORKFLOW_READ_CATALOGUE_OBSERVATION_NETWORK_EXACT_VERSION_SELECTION_PROVIDER_SOURCE_LOCK_CONTRACT_EXECUTION_ACTIVATION_ADMISSION_CONSUMPTION_ARTIFACT_NODE_RUNTIME_PYTEST_TARGET_EXECUTION_EXACT0_PRIVATE_CATALOGUE_URI_ENDPOINT_HASH_REQUEST_TRANSPORT_CREDENTIAL_TOKEN_RAW_BODY_SOURCE_RECORD_SEMANTICS_HASH_OR_REJECTION_DETAIL_PUBLICATION_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_CONTRACT_V1_BOUND_FRESH_EXACT_NODE_VERSION_SELECTION_CATALOGUE_OBSERVATION_AUTHORITY_POLICY_CONTRACT_RECEIPT_INITIAL_STATE_CLOSED_UNCONSUMED_CONSUMPTION_EXACT0_UNTIL_ALL_EXACT12_TRUE_THEN_ATOMIC_EXACT1_OTHERWISE_EXACT0_CURRENT_POLICY_RAW_5333E2EFCA9890C545B28EF76439693C0898F7FADA886E235D550FE0BE90AEB2_AND_OBSERVATION_618E4A9B30626C5768E40DA339B04B41414618967C5D930D87D7928CC2DCB46D_BINDING_EXACT1_IMMUTABLE_NO_WEAKENING_EXACT1_SELECTION_REQUIREMENT_AUTHORITY_PREBOUND_EXACT_MAJOR_VALUE18_EXACT1_SOURCE_EXISTING_PUBLIC_PROVIDER_CONTRACT_RESULT_BLOB_9E35D14771EFD476CAC4AF7A4851C7F9A743EB12_RAW_921A3105196CFCB765F6E1E86D1CB609CF9E51603270B15C8464EEEA0DD3AE37_CURRENT_WORKFLOW_REREAD_EXACT0_PUBLIC_CATALOGUE_SOURCE_PROVIDER_ID_NODEJS_OFFICIAL_LOGICAL_SOURCE_ID_NODE_RELEASE_INDEX_V1_COUNT_EXACT1_PRIVATE_REQUEST_RESPONSE_LIMIT_TRANSPORT_TRUST_AND_INTERFACE_BINDING_AT_ACTIVATION_PRENETWORK_EXACT1_OR_TYPED_BINDING_INVALID_PRENETWORK_STOP_OWNER_AND_INDEPENDENT_SHARE_ONE_IMMUTABLE_CAPTURE_ONLY_WITH_FRESH_PARSE_DEDUP_CONFLICT_FILTER_NUMERIC_MAX_REASON_AND_IDENTITY_STATE_NO_REUSE_EXACT1_CONTROLLER_CATALOGUE_CAPTURE_SEQUENCE_NETWORK_REQUEST_AND_RESPONSE_CAPTURE_COUNT_EACH_ZERO_OR_ONE_TOTAL_RAW_PRIVATE_BINDING_URI_TRANSPORT_BODY_RECORD_OR_REJECTION_DETAIL_PUBLICATION_EXACT0_PROVIDER_METADATA_SOURCE_LOCK_CONTRACT_EXECUTION_ACTIVATION_ADMISSION_CONSUMPTION_EXACT0_EXACT0_EXACT0_EXACT0_ARTIFACT_ACQUISITION_DOWNLOAD_STAGING_MATERIALIZATION_INSTALLATION_HASH_SIGNATURE_NODE_VERSION_ENGINE_VERIFIER_HELPER_GATE_B_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_EXACT0_BODY_FREE_EXACT_VERSION_SELECTION_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_PROVIDER_SOURCE_LOCK_OBSERVATION_ARTIFACT_ACQUISITION_RUNTIME_OR_AUTOMATIC_PROGRESSION",
+      "token_sha256" : "bb25f10fb1c96a4985e646b9b669efb7d20aaaa1224323efb69d80f049674f04"
+   },
+   "observation" : {
+      "authority" : {
+         "activation_count" : 1,
+         "consumption_count" : 1,
+         "state" : "CLOSED_CONSUMED_DUAL_STATIC_VALID_DESIGN_STOP",
+         "token_recomputation_match" : true,
+         "token_sha256" : "99c0c1537fa40b6ab1b41f6337dae44ae7c6981cd40f84531535546dc49cc654"
+      },
+      "automatic_progression" : false,
+      "comparison" : {
+         "independent_projection_sha256" : "92232f44709023d4368268595f1014f20bbc86ab9bb7f6b40444cc4f627518e5",
+         "match" : true,
+         "owner_independent_projection_comparison_count" : 1,
+         "owner_projection_sha256" : "92232f44709023d4368268595f1014f20bbc86ab9bb7f6b40444cc4f627518e5",
+         "state_reuse_count" : 0
+      },
+      "effects" : {
+         "artifact_acquisition_count" : 0,
+         "artifact_body_publication_count" : 0,
+         "artifact_body_read_count" : 0,
+         "artifact_download_count" : 0,
+         "artifact_hash_verification_count" : 0,
+         "catalogue_metadata_observation_count" : 0,
+         "ci_workflow_read_count" : 0,
+         "classifier_reclassification_count" : 0,
+         "classifier_reparse_count" : 0,
+         "cocolon_production_source_change_count" : 0,
+         "credential_or_token_publication_count" : 0,
+         "engine_execution_count" : 0,
+         "exact_version_selection_observation_count" : 0,
+         "existing_d1_change_count" : 0,
+         "gate_b_execution_count" : 0,
+         "helper_execution_count" : 0,
+         "helper_read_count" : 0,
+         "installation_count" : 0,
+         "locator_discovery_count" : 0,
+         "mashos_api_change_count" : 0,
+         "materialization_count" : 0,
+         "metadata_observation_count" : 0,
+         "network_count" : 0,
+         "node_execution_count" : 0,
+         "path_snapshot_read_count" : 0,
+         "private_credential_header_transport_binding_identity_hash_publication_count" : 0,
+         "private_endpoint_hash_publication_count" : 0,
+         "private_request_binding_identity_hash_publication_count" : 0,
+         "private_source_uri_publication_count" : 0,
+         "provider_binding_value_observation_count" : 0,
+         "provider_metadata_source_lock_observation_contract_activation_count" : 0,
+         "provider_metadata_source_lock_observation_contract_admission_count" : 0,
+         "provider_metadata_source_lock_observation_contract_consumption_count" : 0,
+         "provider_metadata_source_lock_observation_contract_execution_count" : 0,
+         "published_red_change_count" : 0,
+         "pytest_count" : 0,
+         "raw_metadata_body_publication_count" : 0,
+         "raw_provenance_body_publication_count" : 0,
+         "raw_rejection_detail_publication_count" : 0,
+         "route_decision_reclassification_count" : 0,
+         "route_decision_reparse_count" : 0,
+         "runtime_acquisition_count" : 0,
+         "signature_verification_count" : 0,
+         "staging_count" : 0,
+         "target_authority_activation_count" : 0,
+         "target_authority_issuance_count" : 0,
+         "target_execution_count" : 0,
+         "unbounded_search_count" : 0,
+         "verifier_execution_count" : 0,
+         "verifier_read_count" : 0,
+         "version_probe_count" : 0
+      },
+      "exact_node_version_selection_policy_contract_candidate" : {
+         "body_free" : true,
+         "canonicalization" : {
+            "array_order" : "DECLARED_ORDER_IS_NORMATIVE",
+            "boolean_encoding" : "JSON_TRUE_OR_FALSE",
+            "decimal_component_encoding" : "ASCII_NONNEGATIVE_DECIMAL_STRING_MAX32_DIGITS_NO_LEADING_ZERO_EXCEPT_ZERO",
+            "identity_preimage_separator" : "TRUE_NUL_BYTE_0X00",
+            "integer_encoding" : "JSON_NONNEGATIVE_BASE10_INTEGER_WITHOUT_LEADING_ZERO_EXCEPT_ZERO",
+            "null_encoding" : "JSON_NULL_ONLY_WHERE_EXPLICITLY_DECLARED",
+            "object_encoding" : "UTF8_SORTED_COMPACT_JSON_NO_LF",
+            "string_encoding" : "UTF8_WITH_ASCII_ONLY_FOR_IDENTIFIERS_VERSION_COMPONENTS_ENUMS_AND_HASHES",
+            "unknown_or_extra_field_action" : "TYPED_INVALID_STOP"
+         },
+         "catalogue_observation_failure" : {
+            "closed" : true,
+            "enum_name" : "EXACT_NODE_VERSION_CATALOGUE_OBSERVATION_FAILURE_REASON_V1",
+            "exclusive" : true,
+            "member_count" : 8,
+            "members_in_precedence_order" : [
+               "ACTIVATION_BINDING_INVALID",
+               "RESPONSE_BYTE_LIMIT_EXCEEDED",
+               "RESPONSE_HASH_DERIVATION_FAILED",
+               "JSON_PARSE_INVALID",
+               "ROOT_NOT_ORDERED_FINITE_ARRAY",
+               "RECORD_NOT_JSON_OBJECT",
+               "PARSER_OR_PROJECTION_INTERFACE_MISMATCH",
+               "CATALOGUE_CAPTURE_UNAVAILABLE"
+            ],
+            "precedence" : "FIRST_TRUE_REASON_ONLY",
+            "precedence_entries" : [
+               {
+                  "predicate" : "ANY_CLOSED_EXACT12_ACTIVATION_BINDING_CHECK_IS_FALSE",
+                  "rank" : 1,
+                  "reason" : "ACTIVATION_BINDING_INVALID"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_CONTROLLER_DETECTS_RESPONSE_BYTES_GREATER_THAN_THE_PREBOUND_LIMIT",
+                  "rank" : 2,
+                  "reason" : "RESPONSE_BYTE_LIMIT_EXCEEDED"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_BOUNDED_RESPONSE_BYTES_EXIST_BUT_RAW_SHA256_CANNOT_BE_DERIVED",
+                  "rank" : 3,
+                  "reason" : "RESPONSE_HASH_DERIVATION_FAILED"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_CAPTURE_EXISTS_AND_THE_BOUND_GRAMMAR_REJECTS_UTF8_OR_JSON",
+                  "rank" : 4,
+                  "reason" : "JSON_PARSE_INVALID"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_PARSE_SUCCEEDS_BUT_THE_ROOT_IS_NOT_AN_ARRAY_OR_EXCEEDS_THE_PREBOUND_RECORD_LIMIT",
+                  "rank" : 5,
+                  "reason" : "ROOT_NOT_ORDERED_FINITE_ARRAY"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_ROOT_IS_VALID_AND_AT_LEAST_ONE_ARRAY_MEMBER_IS_NOT_A_JSON_OBJECT",
+                  "rank" : 6,
+                  "reason" : "RECORD_NOT_JSON_OBJECT"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_CAPTURE_EXISTS_AND_AN_OBSERVER_DETECTS_OUTPUT_KEY_OR_PARSER_INVARIANT_MISMATCH_DESPITE_THE_PREBOUND_INTERFACE_SCHEMA_IDS_AND_RAW_HASHES_MATCHING",
+                  "rank" : 7,
+                  "reason" : "PARSER_OR_PROJECTION_INTERFACE_MISMATCH"
+               },
+               {
+                  "predicate" : "GATE_VALID_AND_NO_RESPONSE_CAPTURE_EXISTS_AND_NONE_OF_RANKS2_THROUGH7_HAS_A_MORE_SPECIFIC_TYPED_FAILURE",
+                  "rank" : 8,
+                  "reason" : "CATALOGUE_CAPTURE_UNAVAILABLE"
+               }
+            ],
+            "precedence_entry_exact_key_count" : 3,
+            "precedence_entry_exact_keys" : [
+               "rank",
+               "reason",
+               "predicate"
+            ],
+            "precedence_entry_invariants" : "RANKS_ARE_CONTIGUOUS_1_THROUGH8_REASONS_EQUAL_MEMBERS_IN_THE_SAME_ORDER_AND_EACH_PREDICATE_IS_CLOSED",
+            "publication_partition" : "RANKS1_2_3_AND8_ARE_PUBLISHED_IN_THE_CONTROLLER_OBSERVATION_FAILURE_EXACT4_RECORD_WITH_NULL_OBSERVER_WRAPPERS_RANKS4_THROUGH7_ARE_PUBLISHED_IN_EACH_PRESENT_OBSERVER_DOMAIN_FREE_PROJECTION",
+            "raw_detail_publication_allowed" : false,
+            "total" : true
+         },
+         "contract_id" : "COCOLON_NLS_V3_STEP11_GATE_B_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1",
+         "contract_version" : 1,
+         "current_design_forbidden_effect_type_count" : 19,
+         "current_design_forbidden_effects" : [
+            "CURRENT_CI_WORKFLOW_READ",
+            "CATALOGUE_METADATA_OBSERVATION",
+            "NETWORK",
+            "ARTIFACT_METADATA_OR_BODY_ACQUISITION",
+            "ARTIFACT_DOWNLOAD",
+            "STAGING",
+            "MATERIALIZATION",
+            "INSTALLATION",
+            "HASH_OR_SIGNATURE_VERIFICATION",
+            "NODE_EXECUTION",
+            "VERSION_PROBE",
+            "ENGINE_EXECUTION",
+            "VERIFIER_READ_OR_EXECUTION",
+            "HELPER_READ_OR_EXECUTION",
+            "GATE_B_RUNTIME",
+            "PYTEST",
+            "TARGET_AUTHORITY_ISSUANCE_OR_ACTIVATION",
+            "TARGET_EXECUTION",
+            "PROVIDER_SOURCE_LOCK_CONTRACT_EXECUTION_ACTIVATION_ADMISSION_OR_CONSUMPTION"
+         ],
+         "current_design_scope" : {
+            "artifact_or_runtime_effect_allowed" : false,
+            "automatic_progression" : false,
+            "catalogue_observation_allowed" : false,
+            "ci_workflow_read_allowed" : false,
+            "exact_version_selection_allowed" : false,
+            "network_allowed" : false,
+            "policy_contract_candidate_creation_count" : 1,
+            "provider_source_lock_contract_execution_activation_admission_or_consumption_allowed" : false,
+            "source_contract_receipt_consumption_count" : 1
+         },
+         "current_static_design_observer_contract" : {
+            "check_vector_exact_key_count" : 32,
+            "check_vector_exact_keys" : [
+               "source_provider_contract_receipt_binding_exact",
+               "source_provider_contract_immutable_no_weakening",
+               "current_scope_design_only",
+               "selection_basis_enum_closed_exact2",
+               "selection_requirement_identity_preimage_total",
+               "catalogue_source_count_exact1",
+               "public_catalogue_descriptor_closed_exact8",
+               "private_catalogue_source_binding_closed_exact9",
+               "private_request_binding_closed_exact7",
+               "private_transport_policy_binding_closed_exact7",
+               "private_transport_and_source_record_semantics_identity_domains_total",
+               "catalogue_projection_and_parser_hashes_bound",
+               "source_record_canonicalization_lossless_total",
+               "catalogue_parser_scope_finite_and_deterministic",
+               "projected_record_closed_exact7",
+               "closed_version_token_kind_classification_total",
+               "canonical_stable_version_grammar_total",
+               "numeric_comparator_avoids_machine_integer_and_locale",
+               "identical_duplicate_collapse_total",
+               "same_version_conflict_invalidates_whole_observation",
+               "observation_failure_enum_closed_exact8",
+               "candidate_rejection_enum_closed_exact9",
+               "rejection_precedence_and_reason_counts_total_exclusive",
+               "activation_gate_closed_exact12_atomic_prenetwork",
+               "future_owner_and_independent_state_fresh_separate",
+               "selected_exact_version_identity_preimage_total",
+               "future_body_free_result_receipt_handoff_schema_total",
+               "future_terminal_mapping_three_way_total_exclusive",
+               "later_source_lock_atomic_selection_receipt_consumption_total",
+               "privacy_boundary_preserved",
+               "current_design_effects_exact0",
+               "automatic_progression_false"
+            ],
+            "comparison_exact_key_count" : 5,
+            "derived_state_reuse_allowed" : false,
+            "digest" : "SHA256_LOWERCASE_HEX64",
+            "domain_free_projection_exact_key_count" : 36,
+            "domain_free_projection_exact_keys" : [
+               "schema_version",
+               "contract_raw_sha256",
+               "source_provider_contract_receipt_observation_sha256",
+               "source_provider_contract_raw_sha256",
+               "source_provider_contract_receipt_consumption_count",
+               "selection_basis_enum_member_count",
+               "catalogue_source_count_rule",
+               "public_catalogue_descriptor_exact_key_count",
+               "private_catalogue_source_binding_exact_key_count",
+               "private_request_binding_exact_key_count",
+               "private_transport_policy_binding_exact_key_count",
+               "catalogue_projection_contract_raw_sha256",
+               "catalogue_parser_grammar_raw_sha256",
+               "projected_record_exact_key_count",
+               "observation_failure_reason_count",
+               "candidate_rejection_reason_count",
+               "activation_binding_check_count",
+               "future_observation_projection_exact_key_count",
+               "future_observation_check_count",
+               "future_receipt_top_level_exact_key_count",
+               "future_receipt_observation_exact_key_count",
+               "future_receipt_effect_exact_key_count",
+               "future_terminal_branch_count",
+               "later_source_lock_selection_receipt_atomic_consumption_rule",
+               "current_provider_contract_mutation_count",
+               "current_provider_source_lock_contract_execution_count",
+               "current_provider_source_lock_contract_activation_count",
+               "current_provider_source_lock_contract_admission_count",
+               "current_provider_source_lock_contract_consumption_count",
+               "current_design_forbidden_effect_occurrence_count",
+               "privacy_boundary_preserved",
+               "shared_derived_state_reuse_count",
+               "check_vector",
+               "verdict",
+               "invalid_check_count",
+               "automatic_progression"
+            ],
+            "domain_free_projection_schema_version" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_STATIC_DESIGN_PROJECTION_V1",
+            "evidence_preimage" : "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_DOMAIN_FREE_PROJECTION_CANONICAL_BYTES",
+            "independent_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_STATIC_DESIGN_INDEPENDENT_V1",
+            "observer_wrapper_exact_key_count" : 8,
+            "owner_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_STATIC_DESIGN_OWNER_V1",
+            "projection_comparison" : "EXACT_DOMAIN_FREE_PROJECTION_SHA256_EQUALITY",
+            "projection_encoding" : "UTF8_SORTED_COMPACT_JSON_NO_LF"
+         },
+         "current_static_design_terminal_mapping" : {
+            "automatic_progression" : false,
+            "branch_count" : 3,
+            "branches" : [
+               "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_TYPED_DESIGN_INVALID_STOP",
+               "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_STATIC_DIVERGENCE_STOP",
+               "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP"
+            ],
+            "divergence_rule" : "BOTH_VALID_AND_DOMAIN_FREE_PROJECTION_HASHES_DIFFER",
+            "dual_static_valid_rule" : "BOTH_VALID_AND_DOMAIN_FREE_PROJECTION_HASHES_MATCH",
+            "exclusive" : true,
+            "invalid_rule" : "OWNER_OR_INDEPENDENT_VERDICT_INVALID",
+            "total" : true
+         },
+         "deterministic_selection" : {
+            "candidate_partition_rule" : "CANDIDATE_RECORD_TOTAL_EQUALS_CANDIDATE_REJECTED_TOTAL_PLUS_CANDIDATE_ALIAS_COLLAPSED_TOTAL_PLUS_CANDIDATE_ACCEPTED_TOTAL_WITH_A_CLOSED_EXACT7_PROJECTED_RECORD_CREATED_ONLY_WHEN_ALL_SEVEN_FIELDS_INCLUDING_BOUNDED_COMPONENTS_AND_PRIVATE_SELECTION_SEMANTICS_SHA256_ARE_VALID_WHILE_TYPED_REJECTION_MAY_OCCUR_BEFORE_OR_AFTER_PROJECTION",
+            "lexical_whole_version_comparison_allowed" : false,
+            "locale_sensitive_comparison_allowed" : false,
+            "machine_integer_conversion_allowed" : false,
+            "numeric_comparator" : "COMPARE_COMPONENT_DECIMAL_STRING_LENGTH_THEN_UNSIGNED_ASCII_LEXICOGRAPHIC_WITHOUT_MACHINE_INTEGER_OR_LOCALE_CONVERSION",
+            "rejection_reason_count_rule" : "ALL_EXACT9_KEYS_PRESENT_INCLUDING_ZERO_AND_SUM_EQUALS_CANDIDATE_REJECTED_TOTAL",
+            "selected_count_rule" : "SELECTED_EXACT_VERSION_COUNT_EXACT1_IFF_SAME_VERSION_CONFLICT_GROUP_COUNT_EXACT0_AND_CANDIDATE_ACCEPTED_TOTAL_POSITIVE_ELSE_EXACT0",
+            "selection_rule" : "IF_SAME_VERSION_CONFLICT_GROUP_COUNT_EXACT0_AND_CANDIDATE_ACCEPTED_TOTAL_POSITIVE_SELECT_EXACTLY_ONE_NUMERIC_MAXIMUM_MAJOR_MINOR_PATCH_ELSE_SELECT_NONE",
+            "stage_order" : [
+               "STRUCTURAL_VALIDATION",
+               "VERSION_TOKEN_CLASSIFICATION",
+               "CANONICAL_STABLE_FILTER",
+               "COMPONENT_POLICY_BOUND_CHECK",
+               "EXACT_MAJOR_OR_MAJOR_MINOR_REQUIREMENT_FILTER",
+               "PRIVATE_SOURCE_RECORD_SEMANTICS_IDENTITY_DERIVATION_AND_BINDING",
+               "IDENTICAL_DUPLICATE_COLLAPSE",
+               "SAME_VERSION_CONFLICT_CHECK",
+               "NUMERIC_TUPLE_MAXIMUM",
+               "SELECTED_EXACT_VERSION_IDENTITY_DERIVATION"
+            ]
+         },
+         "duplicate_alias_and_conflict_handling" : {
+            "array_order_effect_on_selection_allowed" : false,
+            "conflict_action" : "REJECT_EVERY_MEMBER_OF_EACH_CONFLICT_GROUP_AS_SAME_EXACT_VERSION_CONFLICT_AMBIGUOUS_AND_INVALIDATE_THE_WHOLE_OBSERVATION",
+            "identical_duplicate_action" : "KEEP_FIRST_OCCURRENCE_AND_INCREMENT_ALIAS_COLLAPSED_COUNT_WITHOUT_REJECTION",
+            "identical_record_equality_rule" : "EXACT_CANONICAL_COMPLETE_SOURCE_RECORD_BYTE_EQUALITY",
+            "lower_version_fallback_after_conflict_allowed" : false,
+            "same_version_conflict_rule" : "AFTER_STABLE_AND_REQUIREMENT_FILTER_ANY_TWO_NONIDENTICAL_CANONICAL_SOURCE_RECORDS_WITH_THE_SAME_CANONICAL_EXACT_VERSION_FORM_ONE_CONFLICT_GROUP"
+         },
+         "future_activation_binding_gate" : {
+            "all_true_action" : "ATOMICALLY_COMMIT_STAGED_BINDING_POLICY_RECEIPT_CONSUMPTION_EXACT1_CAPTURE_SEQUENCE_EXACT1_AND_NETWORK_REQUEST_EXACT1_WITH_RESPONSE_CAPTURE_ZERO_OR_ONE_AND_EACH_OBSERVER_PARSE_CLASSIFY_SELECT_BATCH_COUNT_EQUAL_RESPONSE_CAPTURE_COUNT",
+            "any_false_action" : "DISCARD_STAGED_BINDING_WITH_POLICY_RECEIPT_CONSUMPTION_CAPTURE_SEQUENCE_NETWORK_RESPONSE_CAPTURE_OWNER_AND_INDEPENDENT_PARSE_CLASSIFY_SELECT_COUNTS_ALL_EXACT0_AND_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP",
+            "automatic_progression" : false,
+            "check_vector_exact_key_count" : 12,
+            "check_vector_exact_keys" : [
+               "policy_contract_receipt_binding_exact",
+               "source_provider_metadata_contract_identity_exact_and_immutable",
+               "route_position_and_historical_state_preserved",
+               "selection_requirement_closed_exact8_semantically_valid",
+               "catalogue_source_count_exact1_and_public_descriptor_closed_exact8",
+               "public_private_source_identity_mapping_and_private_binding_closed_exact9",
+               "private_request_closed_exact7_absolute_https_get_no_auth_bounded",
+               "private_transport_closed_exact7_and_manifest_resolution_valid",
+               "projection_and_parser_interface_hashes_exact",
+               "endpoint_scope_nonrecursive_bounded_no_redirect_retry_pagination_template_mirror_or_expansion",
+               "canonical_identity_domains_and_privacy_boundary_bound",
+               "no_unknown_extra_late_mutation_or_unbound_authority_field"
+            ],
+            "check_vector_type" : "CLOSED_EXACT12_BOOLEAN_OBJECT",
+            "exclusive" : true,
+            "execution_count" : 1,
+            "execution_time" : "AFTER_AUTHORITY_ACTIVATION_AND_BEFORE_POLICY_RECEIPT_CONSUMPTION_OR_NETWORK",
+            "late_rebinding_or_retry_allowed" : false,
+            "total" : true
+         },
+         "future_body_free_result_receipt_handoff_schema" : {
+            "activation_gate_receipt_exact_key_count" : 7,
+            "activation_gate_receipt_exact_keys" : [
+               "execution_count",
+               "check_vector",
+               "verdict",
+               "invalid_check_count",
+               "policy_contract_receipt_consumption_count",
+               "network_admitted",
+               "typed_binding_invalid_reason_or_null"
+            ],
+            "activation_gate_receipt_value_rules" : "EXECUTION_EXACT1_CHECK_VECTOR_CLOSED_EXACT12_INVALID_COUNT_EQUALS_FALSE_COUNT_VERDICT_VALID_IFF_COUNT_ZERO_CONSUMPTION_AND_NETWORK_ADMITTED_TRUE_IFF_VALID_AND_TYPED_REASON_NULL_IFF_VALID_ELSE_FIRST_FALSE_CHECK_NAME",
+            "authority_exact_key_count" : 5,
+            "authority_exact_keys" : [
+               "token_sha256",
+               "token_recomputation_match",
+               "activation_count",
+               "consumption_count",
+               "state"
+            ],
+            "authority_value_rules" : "TOKEN_SHA256_EQUALS_SHA256_OF_THE_ACTIVATED_FUTURE_AUTHORITY_TOKEN_UTF8_BYTES_RECOMPUTATION_MATCH_TRUE_ACTIVATION_AND_AUTHORITY_CONSUMPTION_EXACT1_AND_STATE_EQUALS_CLOSED_CONSUMED_PLUS_THE_SELECTED_TERMINAL_LITERAL",
+            "automatic_progression" : false,
+            "canonical_identity_rules" : {
+               "next_authority_token_sha256" : "SHA256_OF_EXACT_TOKEN_UTF8_BYTES_WITHOUT_LINE_FEED",
+               "observation_sha256" : "SHA256_OF_UTF8_SORTED_COMPACT_JSON_NO_LF_OBSERVATION_CLOSED_EXACT18_BYTES",
+               "receipt_blob_sha1" : "GIT_BLOB_SHA1_OF_PUBLISHED_RECEIPT_FILE_BYTES",
+               "receipt_logical_sha256" : "SHA256_OF_UTF8_SORTED_COMPACT_JSON_NO_LF_TOP_LEVEL_RECEIPT_WITH_RECEIPT_LOGICAL_SHA256_FIELD_REMOVED",
+               "receipt_raw_sha256" : "SHA256_OF_PUBLISHED_PRETTY_UTF8_RECEIPT_FILE_BYTES"
+            },
+            "catalogue_source_public_binding_evidence_exact_key_count" : 4,
+            "catalogue_source_public_binding_evidence_exact_keys" : [
+               "source_count",
+               "source_provider_id_or_null",
+               "logical_catalogue_source_id_or_null",
+               "catalogue_public_source_binding_sha256_or_null"
+            ],
+            "catalogue_source_public_binding_evidence_value_rules" : "SOURCE_COUNT_EXACT1_AND_ALL_OTHER_VALUES_NON_NULL_IFF_PUBLIC_AND_PRIVATE_SINGLETON_BINDING_VALID_ELSE_SOURCE_COUNT_EXACT0_AND_ALL_OTHER_VALUES_JSON_NULL",
+            "comparison_exact_key_count" : 5,
+            "comparison_exact_keys" : [
+               "owner_independent_projection_comparison_count",
+               "owner_projection_sha256",
+               "independent_projection_sha256",
+               "match",
+               "state_reuse_count"
+            ],
+            "comparison_value_rules" : "COUNT_EXACT0_HASHES_AND_MATCH_JSON_NULL_IFF_WRAPPERS_NULL_ELSE_COUNT_EXACT1_HASHES_EQUAL_WRAPPER_HASHES_MATCH_DERIVED_BY_EXACT_EQUALITY_AND_STATE_REUSE_EXACT0",
+            "controller_capture_effects_exact_key_count" : 3,
+            "controller_capture_effects_exact_keys" : [
+               "catalogue_capture_sequence_count",
+               "catalogue_network_request_count",
+               "catalogue_response_capture_count"
+            ],
+            "controller_capture_effects_value_rules" : "ALL_THREE_VALUES_EXACTLY_EQUAL_THE_SAME_NAMED_VALUES_IN_EFFECTS_CAPTURE_AND_NETWORK_ARE_EXACT1_IFF_GATE_VALID_RESPONSE_CAPTURE_IS_ZERO_OR_ONE_ONLY_IF_GATE_VALID_AND_ALL_ARE_EXACT0_IF_GATE_INVALID",
+            "controller_observation_failure_exact_key_count" : 4,
+            "controller_observation_failure_exact_keys" : [
+               "failure_count",
+               "reason_or_null",
+               "precedence_rank_or_null",
+               "raw_detail_publication_count"
+            ],
+            "controller_observation_failure_partition_rule" : "RANKS1_2_3_AND8_ARE_CONTROLLER_LEVEL_AND_FORCE_RESPONSE_CAPTURE_EXACT0_AND_NULL_OBSERVER_WRAPPERS_RANKS4_THROUGH7_ARE_OBSERVER_PROJECTION_FAILURES_ONLY_WHEN_RESPONSE_CAPTURE_EXACT1",
+            "controller_observation_failure_value_rules" : "FAILURE_COUNT_EXACT1_REASON_IS_THE_FIRST_TRUE_CLOSED_EXACT8_MEMBER_AND_RANK_IS_1_2_3_OR_8_IFF_GATE_INVALID_OR_NO_HASH_BOUND_RESPONSE_CAPTURE_EXISTS_ELSE_COUNT_EXACT0_REASON_AND_RANK_JSON_NULL_RAW_DETAIL_PUBLICATION_EXACT0_ALWAYS",
+            "effects_exact_key_count" : 23,
+            "effects_exact_keys" : [
+               "activation_binding_gate_execution_count",
+               "policy_contract_receipt_consumption_count",
+               "catalogue_capture_sequence_count",
+               "catalogue_network_request_count",
+               "catalogue_response_capture_count",
+               "owner_catalogue_projection_invocation_count",
+               "independent_catalogue_projection_invocation_count",
+               "owner_candidate_classification_count",
+               "independent_candidate_classification_count",
+               "owner_exact_version_selection_count",
+               "independent_exact_version_selection_count",
+               "provider_source_lock_contract_execution_count",
+               "provider_source_lock_contract_activation_count",
+               "provider_source_lock_contract_admission_count",
+               "provider_source_lock_contract_consumption_count",
+               "artifact_acquisition_count",
+               "node_execution_count",
+               "future_forbidden_effect_occurrence_count",
+               "private_value_publication_count",
+               "cocolon_production_source_change_count",
+               "published_red_change_count",
+               "existing_d1_change_count",
+               "mashos_api_change_count"
+            ],
+            "effects_value_and_correlation_rules" : [
+               "ACTIVATION_GATE_EXECUTION_COUNT_EXACT1_ALWAYS",
+               "IF_ANY_ACTIVATION_CHECK_FALSE_THEN_POLICY_RECEIPT_CONSUMPTION_CAPTURE_SEQUENCE_NETWORK_RESPONSE_CAPTURE_OWNER_AND_INDEPENDENT_PROJECTION_CLASSIFICATION_AND_SELECTION_COUNTS_ALL_EXACT0",
+               "IF_ALL_ACTIVATION_CHECKS_TRUE_THEN_POLICY_RECEIPT_CONSUMPTION_CAPTURE_SEQUENCE_AND_NETWORK_COUNTS_EXACT1_RESPONSE_CAPTURE_ZERO_OR_ONE_AND_EACH_OWNER_AND_INDEPENDENT_PROJECTION_INVOCATION_COUNT_EQUALS_RESPONSE_CAPTURE_COUNT",
+               "FOR_EACH_OBSERVER_CANDIDATE_CLASSIFICATION_COUNT_EXACT1_IFF_WRAPPER_PRESENT_AND_OBSERVATION_FAILURE_REASON_JSON_NULL_ELSE_EXACT0",
+               "FOR_EACH_OBSERVER_EXACT_VERSION_SELECTION_COUNT_EXACT1_IFF_CLASSIFICATION_COUNT_EXACT1_AND_SAME_VERSION_CONFLICT_GROUP_COUNT_EXACT0_ELSE_EXACT0",
+               "PROVIDER_SOURCE_LOCK_EXECUTION_ACTIVATION_ADMISSION_AND_CONSUMPTION_COUNTS_ALL_EXACT0",
+               "ARTIFACT_ACQUISITION_NODE_EXECUTION_PRIVATE_VALUE_PUBLICATION_AND_FUTURE_FORBIDDEN_EFFECT_OCCURRENCE_COUNTS_ALL_EXACT0",
+               "FUTURE_FORBIDDEN_EFFECT_OCCURRENCE_COUNT_AGGREGATES_ALL_CLOSED_EXACT14_FORBIDDEN_CATEGORIES_AND_WHEN_WRAPPERS_PRESENT_EQUALS_EACH_OWNER_AND_INDEPENDENT_PROJECTION_FORBIDDEN_EFFECT_COUNT_WHILE_WHEN_WRAPPERS_NULL_IT_IS_EXACT0_WITH_NO_NESTED_EQUALITY",
+               "COCOLON_PRODUCTION_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_COUNTS_ALL_EXACT0"
+            ],
+            "handoff_required_sections" : [
+               "CURRENT_TERMINAL",
+               "PUBLIC_EVIDENCE",
+               "PRESERVED_BOUNDARIES",
+               "ARTIFACT_IDENTITIES",
+               "REQUIRED_NEXT_WORK",
+               "MASH_REQUEST",
+               "EXACTLY_ONE_NEXT_AUTHORITY"
+            ],
+            "historical_preservation_exact_key_count" : 6,
+            "historical_preservation_exact_keys" : [
+               "prior_observer_v1",
+               "prior_observer_v2_execution_authority",
+               "source_launcher_identity_discovery_observation_sha256",
+               "source_classifier_observation_sha256",
+               "source_route_decision_observation_sha256",
+               "source_provider_contract_observation_sha256"
+            ],
+            "historical_preservation_value_rules" : "PRIOR_OBSERVER_V1_EXACT_LITERAL_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_EXACT_LITERAL_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_IMMUTABLE_AND_SOURCE_HASHES_EXACTLY_EQUAL_DD10E06F0F1F0DB799B3D7DE098401AC6AF2B146F64D1E5836FC432DC17EA82A_9C7E0601751D81387720E963BBB07B0CD69CFAA17946722EC7AB82530957B606_1A1D3A9DE6D0CB2B0AD29D5DD8BF3AABFE7C388D6A77FDCF03E2040F2566A73A_D47D894A5BA551F10D983D4A3064BAF25E6FBDEC817FFD615E3899EE73D39AF4",
+            "next_authority_exact_key_count" : 5,
+            "next_authority_exact_keys" : [
+               "token",
+               "token_sha256",
+               "state",
+               "separate_explicit_mash_approval_required",
+               "automatic_transition"
+            ],
+            "next_authority_value_rules" : "EXACTLY_ONE_BODY_FREE_SUCCESSOR_TOKEN_SHA_RECOMPUTES_STATE_DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED_SEPARATE_APPROVAL_TRUE_AND_AUTOMATIC_TRANSITION_FALSE",
+            "observation_scalar_value_rules" : "TERMINAL_IS_EXACTLY_ONE_OF_THE_CLOSED_EXACT3_BRANCH_LITERALS_LAUNCHER_AVAILABILITY_ROUTE_POSITION_EXACT_LITERAL_ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE_RUNTIME_READY_FALSE_FULL_R1_RESULT_EXACT_LITERAL_UNKNOWN_PRESERVED_AND_AUTOMATIC_PROGRESSION_FALSE",
+            "observer_wrapper_exact_key_count" : 8,
+            "observer_wrapper_exact_keys" : [
+               "execution_count",
+               "state_origin",
+               "shared_derived_state_reuse_count",
+               "domain_free_projection",
+               "domain_free_projection_sha256",
+               "domain_specific_evidence_sha256",
+               "verdict",
+               "invalid_check_count"
+            ],
+            "observer_wrapper_value_rules" : "OBSERVATION_VALUE_JSON_NULL_IFF_RESPONSE_CAPTURE_EXACT0_ELSE_EXECUTION_EXACT1_ROLE_SPECIFIC_FRESH_STATE_REUSE_EXACT0_CLOSED_EXACT31_PROJECTION_RECOMPUTED_PROJECTION_AND_DOMAIN_EVIDENCE_HASHES_AND_WRAPPER_VERDICT_AND_INVALID_CHECK_COUNT_EXACTLY_EQUAL_THE_NESTED_PROJECTION_VALUES",
+            "outer_binding_and_observation_invariants" : [
+               "TOP_LEVEL_KEYS_AND_OBSERVATION_KEYS_EXACTLY_EQUAL_THE_DECLARED_CLOSED_SETS",
+               "POLICY_RECEIPT_CONSUMPTION_EQUALS_ONE_IFF_ACTIVATION_GATE_ALL_EXACT12_TRUE_ELSE_ZERO",
+               "EFFECTS_OWNER_AND_INDEPENDENT_PROJECTION_INVOCATION_COUNTS_EQUAL_RESPONSE_CAPTURE_COUNT_AND_EACH_PRESENT_WRAPPER_EXECUTION_COUNT_EXACT1_WHILE_NULL_WRAPPERS_HAVE_NO_SERIALIZED_EXECUTION_COUNT",
+               "OWNER_AND_INDEPENDENT_SHARE_NO_DERIVED_STATE_AND_COMPARISON_COUNT_EQUALS_RESPONSE_CAPTURE_COUNT",
+               "CONTROLLER_FAILURE_COUNT_PLUS_RESPONSE_CAPTURE_COUNT_IS_EXACT1_AND_CONTROLLER_FAILURE_RANK_PARTITIONS_PRECAPTURE_FROM_OBSERVER_FAILURES",
+               "CONTROLLER_CAPTURE_EFFECTS_EQUAL_THE_SAME_NAMED_EFFECT_VALUES",
+               "TERMINAL_MAPPING_SELECTED_BRANCH_EQUALS_TERMINAL_AND_EXACTLY_ONE_BRANCH_PREDICATE_IS_TRUE",
+               "FOR_EACH_PRESENT_PROJECTION_SELECTED_VERSION_AND_IDENTITY_ARE_NON_NULL_IFF_SELECTED_COUNT_EXACT1_WHILE_NULL_WRAPPERS_HAVE_NO_NESTED_SELECTED_FIELDS",
+               "ALL_EFFECT_KEYS_ARE_PRESENT_AND_ALL_FUTURE_FORBIDDEN_EFFECTS_EQUAL_ZERO",
+               "OBSERVATION_SHA_LOGICAL_RECEIPT_SHA_TOKEN_SHA_AND_RAW_RECEIPT_SHA_ARE_INDEPENDENTLY_RECOMPUTABLE"
+            ],
+            "raw_private_value_or_catalogue_body_publication_allowed" : false,
+            "receipt_observation_exact_key_count" : 18,
+            "receipt_observation_exact_keys" : [
+               "authority",
+               "source_contracts",
+               "selection_requirement",
+               "catalogue_source_public_binding",
+               "activation_gate",
+               "controller_capture_effects",
+               "controller_observation_failure",
+               "owner_observation",
+               "independent_observation",
+               "comparison",
+               "terminal_mapping",
+               "terminal",
+               "launcher_availability_route_position",
+               "runtime_ready",
+               "full_r1_result",
+               "historical_preservation",
+               "effects",
+               "automatic_progression"
+            ],
+            "receipt_self_hash_schema_exact_key_count" : 3,
+            "receipt_self_hash_schema_exact_keys" : [
+               "canonicalization",
+               "excluded_json_pointer",
+               "digest"
+            ],
+            "receipt_self_hash_schema_value_rules" : "EXACT_ESTABLISHED_UTF8_SORTED_COMPACT_JSON_NO_LF_EXCLUDING_ONLY_RECEIPT_LOGICAL_SHA256_AND_SHA256_LOWERCASE_HEX64",
+            "receipt_top_level_exact_key_count" : 10,
+            "receipt_top_level_exact_keys" : [
+               "schema_version",
+               "receipt_id",
+               "body_free",
+               "observed_at_date",
+               "observation",
+               "observation_sha256",
+               "receipt_logical_sha256",
+               "receipt_self_hash_schema",
+               "automatic_progression",
+               "next_authority"
+            ],
+            "receipt_top_level_value_rules" : "SCHEMA_AND_RECEIPT_ID_ARE_NONEMPTY_PUBLIC_IDENTIFIERS_BODY_FREE_TRUE_OBSERVED_DATE_IS_PUBLIC_ISO8601_DATE_OBSERVATION_IS_CLOSED_EXACT18_OBSERVATION_SHA_RECOMPUTES_RECEIPT_LOGICAL_SHA_RECOMPUTES_SELF_HASH_SCHEMA_IS_CLOSED_EXACT3_AUTOMATIC_PROGRESSION_FALSE_AND_NEXT_AUTHORITY_IS_CLOSED_EXACT5",
+            "result_required_sections" : [
+               "CURRENT_TERMINAL",
+               "CONFIRMED_FACTS",
+               "BASIS_AND_NECESSITY",
+               "INFERENCE",
+               "KAREN_OPINION",
+               "BODY_FREE_RECEIPT_IDENTITIES",
+               "EXACTLY_ONE_NEXT_AUTHORITY"
+            ],
+            "selection_requirement_public_evidence_exact_key_count" : 4,
+            "selection_requirement_public_evidence_exact_keys" : [
+               "basis_source",
+               "required_major_decimal",
+               "required_minor_decimal_or_null",
+               "selection_requirement_identity_sha256"
+            ],
+            "selection_requirement_public_evidence_value_rules" : "NON_NULL_AND_EXACTLY_EQUALS_THE_STAGED_CLOSED_EXACT8_REQUIREMENT_PROJECTION_IFF_REQUIREMENT_BINDING_VALID_ELSE_ALL_VALUES_JSON_NULL_WITH_TYPED_GATE_FAILURE",
+            "source_contracts_exact_key_count" : 10,
+            "source_contracts_exact_keys" : [
+               "selection_policy_contract_raw_sha256",
+               "selection_policy_contract_receipt_blob_sha1",
+               "selection_policy_contract_receipt_raw_sha256",
+               "selection_policy_contract_receipt_logical_sha256",
+               "selection_policy_contract_receipt_observation_sha256",
+               "selection_policy_contract_receipt_consumption_count",
+               "provider_metadata_source_lock_contract_raw_sha256",
+               "provider_metadata_source_lock_contract_receipt_observation_sha256",
+               "source_contracts_immutable",
+               "source_contract_mutation_count"
+            ],
+            "source_contracts_value_rules" : "POLICY_IDENTITIES_EQUAL_THE_REFERENCED_IMMUTABLE_POLICY_RECEIPT_PROVIDER_IDENTITIES_EQUAL_THE_IMMUTABLE_SOURCE_RECEIPT_POLICY_RECEIPT_CONSUMPTION_IS_EXACT1_IFF_GATE_VALID_ELSE_EXACT0_AND_MUTATION_COUNT_EXACT0_ALWAYS",
+            "terminal_mapping_receipt_exact_key_count" : 4,
+            "terminal_mapping_receipt_exact_keys" : [
+               "branch_count",
+               "selected_branch",
+               "total",
+               "exclusive"
+            ],
+            "terminal_mapping_receipt_value_rules" : "BRANCH_COUNT_EXACT3_TOTAL_AND_EXCLUSIVE_TRUE_AND_SELECTED_BRANCH_EXACTLY_EQUALS_TERMINAL_WITH_INVALID_DIVERGENCE_OR_DUAL_MATCH_PREDICATE_EXACTLY_ONE_TRUE"
+         },
+         "future_catalogue_projection_binding" : {
+            "endpoint_role_literal" : "CATALOGUE",
+            "interface_binding_exact_key_count" : 5,
+            "interface_binding_exact_keys" : [
+               "endpoint_role",
+               "projection_schema_id",
+               "projection_contract_raw_sha256",
+               "parser_grammar_id",
+               "parser_grammar_raw_sha256"
+            ],
+            "owner_and_independent_binding_rule" : "SAME_IMMUTABLE_CAPTURE_AND_INTERFACE_HASHES_WITH_FRESH_SEPARATE_PARSER_STATE",
+            "parser_grammar" : {
+               "canonical_exact_version_grammar" : "LOWERCASE_v_WITH_EXACTLY_THREE_DOT_SEPARATED_COMPONENTS_EACH_ASCII_0_OR_ASCII_[1-9][0-9]*",
+               "canonical_raw_digest" : "SHA256_LOWERCASE_HEX64",
+               "canonicalization" : "UTF8_SORTED_COMPACT_JSON_NO_LF",
+               "component_policy_bound_rule" : "AFTER_SYNTACTIC_GRAMMAR_ACCEPTANCE_EACH_COMPONENT_MUST_HAVE_AT_MOST_32_ASCII_DIGITS_ELSE_RANK5_VERSION_COMPONENT_OUT_OF_POLICY_BOUNDS",
+               "disallowed_version_forms" : [
+                  "UPPERCASE_V",
+                  "LEADING_OR_TRAILING_WHITESPACE",
+                  "MISSING_COMPONENT",
+                  "ANY_MULTI_DIGIT_COMPONENT_WITH_LEADING_ZERO",
+                  "PRERELEASE",
+                  "BUILD_METADATA",
+                  "LATEST",
+                  "LTS",
+                  "TAG",
+                  "ALIAS",
+                  "RANGE",
+                  "WILDCARD"
+               ],
+               "grammar_id" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_JSON_PARSER_GRAMMAR_V1",
+               "grammar_version" : 1,
+               "input_encoding" : "UTF8_ONLY_NO_BOM",
+               "json_rule" : "RFC8259_SUBSET_DUPLICATE_DECODED_OBJECT_KEYS_REJECTED_ALL_NUMBERS_MUST_BE_CANONICAL_BASE10_INTEGER_LEXEMES_AND_EVERY_INTEGER_LEXEME_IS_RETAINED_LOSSLESSLY_WITHOUT_MACHINE_NUMBER_CONVERSION",
+               "numeric_comparator" : "COMPARE_COMPONENT_DECIMAL_STRING_LENGTH_THEN_UNSIGNED_ASCII_LEXICOGRAPHIC_WITHOUT_MACHINE_INTEGER_OR_LOCALE_CONVERSION",
+               "parse_error_action" : "TYPED_OBSERVATION_INVARIANT_INVALID_STOP",
+               "parser_invocation_rule" : "EXACTLY_ONCE_PER_OBSERVER_IFF_ONE_CONTROLLER_CAPTURE_EXISTS_AND_ACTIVATION_GATE_IS_VALID",
+               "parser_state_rule" : "OWNER_AND_INDEPENDENT_FRESH_SEPARATE_STATE_WITH_ONLY_RAW_CAPTURE_SHARED_IMMUTABLY",
+               "prerelease_or_build_suffix_grammar" : "CANONICAL_UNBOUNDED_THREE_COMPONENT_CORE_THEN_MINUS_AND_ONE_OR_MORE_DOT_SEPARATED_NONEMPTY_ASCII_[0-9A-Za-z-]+_IDENTIFIERS_WITH_OPTIONAL_PLUS_AND_ONE_OR_MORE_DOT_SEPARATED_NONEMPTY_ASCII_[0-9A-Za-z-]+_IDENTIFIERS_OR_CORE_THEN_PLUS_AND_ONE_OR_MORE_SUCH_BUILD_IDENTIFIERS",
+               "record_rule" : "EACH_ARRAY_MEMBER_MUST_BE_JSON_OBJECT_AND_VERSION_MEMBER_MUST_EXIST_FOR_CANDIDATE_CLASSIFICATION",
+               "response_byte_rule" : "POSITIVE_PREBOUND_LIMIT_ENFORCED_BEFORE_COMPLETE_BODY_ACCEPTANCE",
+               "root_rule" : "ORDERED_ARRAY_LENGTH_NOT_GREATER_THAN_PREBOUND_PROJECTED_RECORD_COUNT_LIMIT",
+               "selector_form_count" : 6,
+               "selector_form_entry_exact_key_count" : 3,
+               "selector_form_entry_exact_keys" : [
+                  "rank",
+                  "form",
+                  "predicate"
+               ],
+               "selector_forms_in_first_match_order" : [
+                  {
+                     "form" : "CHANNEL_LITERAL",
+                     "predicate" : "EXACT_CASE_SENSITIVE_ASCII_BYTES_latest_OR_lts",
+                     "rank" : 1
+                  },
+                  {
+                     "form" : "WHOLE_WILDCARD_LITERAL",
+                     "predicate" : "EXACT_ASCII_BYTES_*_OR_x_OR_X",
+                     "rank" : 2
+                  },
+                  {
+                     "form" : "PREFIXED_TAG_OR_ALIAS",
+                     "predicate" : "EXACT_ASCII_PREFIX_tag:_OR_alias:_FOLLOWED_BY_1_THROUGH64_BYTES_FIRST_[A-Za-z0-9]_AND_REST_[A-Za-z0-9._-]_WITH_NO_CONSECUTIVE_DOTS",
+                     "rank" : 3
+                  },
+                  {
+                     "form" : "COMPARATOR_RANGE",
+                     "predicate" : "FIRST_ASCII_BYTE_ONE_OF_<_>_=_~_^_FOLLOWED_BY_1_THROUGH256_PRINTABLE_ASCII_BYTES_WITH_NO_CONTROL_BYTES",
+                     "rank" : 4
+                  },
+                  {
+                     "form" : "DELIMITED_RANGE",
+                     "predicate" : "TOTAL_UTF8_BYTE_COUNT_NOT_GREATER_THAN1024_AND_CONTAINS_EXACT_ASCII_DELIMITER_SPACE_DOUBLE_PIPE_SPACE_OR_SPACE_HYPHEN_SPACE_WITH_NONEMPTY_PRINTABLE_ASCII_SIDES",
+                     "rank" : 5
+                  },
+                  {
+                     "form" : "COMPONENT_WILDCARD",
+                     "predicate" : "EXACTLY_ONE_OF_OPTIONAL_LOWERCASE_v_PLUS_DECIMAL_DOT_WILDCARD_OR_OPTIONAL_LOWERCASE_v_PLUS_DECIMAL_DOT_DECIMAL_DOT_WILDCARD_OR_OPTIONAL_LOWERCASE_v_PLUS_DECIMAL_DOT_WILDCARD_DOT_WILDCARD_WHERE_DECIMAL_IS_ASCII_0_OR_[1-9][0-9]*_AND_WILDCARD_IS_x_X_OR_*",
+                     "rank" : 6
+                  }
+               ],
+               "source_record_canonicalization_contract_raw_sha256" : "bd21fd7fd529247d0a655d2ae5bb3d09e110398f153eeb7f1e69dde8055e0b54",
+               "source_record_canonicalization_rule" : "EXACTLY_THE_BOUND_CLOSED_EXACT8_LOSSLESS_CANONICAL_COMPLETE_JSON_SOURCE_RECORD_CONTRACT_WITH_ARBITRARY_LENGTH_INTEGER_LEXEME_RETENTION_AND_NO_MACHINE_NUMBER_CONVERSION",
+               "token_kind_classification_entries_in_first_match_order" : [
+                  {
+                     "kind" : "RANGE_TAG_ALIAS_OR_WILDCARD",
+                     "predicate" : "VERSION_UTF8_BYTE_COUNT_AT_MOST1024_AND_ANY_CLOSED_EXACT6_SELECTOR_FORM_PREDICATE_TRUE",
+                     "rank" : 1
+                  },
+                  {
+                     "kind" : "PRERELEASE_OR_BUILD",
+                     "predicate" : "RANK1_FALSE_AND_VERSION_UTF8_BYTE_COUNT_AT_MOST1024_AND_CANONICAL_UNBOUNDED_THREE_COMPONENT_CORE_FOLLOWED_BY_THE_CLOSED_PRERELEASE_OR_BUILD_SUFFIX_GRAMMAR",
+                     "rank" : 2
+                  },
+                  {
+                     "kind" : "CANONICAL_EXACT",
+                     "predicate" : "RANKS1_AND2_FALSE_AND_VERSION_UTF8_BYTE_COUNT_AT_MOST1024_AND_VERSION_MATCHES_THE_CLOSED_CANONICAL_UNBOUNDED_THREE_COMPONENT_CORE_GRAMMAR",
+                     "rank" : 3
+                  },
+                  {
+                     "kind" : "OTHER_INVALID",
+                     "predicate" : "RANKS1_THROUGH3_FALSE_INCLUDING_NON_ASCII_OR_UTF8_BYTE_COUNT_GREATER_THAN1024",
+                     "rank" : 4
+                  }
+               ],
+               "token_kind_classification_entry_count" : 4,
+               "token_kind_classification_entry_exact_key_count" : 3,
+               "token_kind_classification_entry_exact_keys" : [
+                  "rank",
+                  "kind",
+                  "predicate"
+               ],
+               "token_kind_classification_invariants" : "RANKS_CONTIGUOUS1_THROUGH4_KINDS_EQUAL_THE_CLOSED_EXACT4_ENUM_IN_CLASSIFICATION_ORDER_FIRST_TRUE_ONLY_TOTAL_EXCLUSIVE_AND_UNKNOWN_CLASSIFICATION_FORBIDDEN",
+               "version_string_utf8_byte_limit" : 1024,
+               "version_token_kind_enum" : [
+                  "RANGE_TAG_ALIAS_OR_WILDCARD",
+                  "PRERELEASE_OR_BUILD",
+                  "CANONICAL_EXACT",
+                  "OTHER_INVALID"
+               ]
+            },
+            "parser_grammar_id" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_JSON_PARSER_GRAMMAR_V1",
+            "parser_grammar_raw_sha256" : "29d9e454c63ac5bd5c1f9f165a1ea0484b3ab7c1f024c4db2a16d553a7fc9ad0",
+            "projection_contract" : {
+               "canonical_raw_digest" : "SHA256_LOWERCASE_HEX64",
+               "canonicalization" : "UTF8_SORTED_COMPACT_JSON_NO_LF",
+               "contract_version" : 1,
+               "input_contract" : "ONE_IMMUTABLE_BOUNDED_UTF8_JSON_CAPTURE_WITH_DUPLICATE_OBJECT_KEYS_REJECTED",
+               "noncanonical_or_nonstable_record_action" : "TYPED_CANDIDATE_REJECTION_BY_FIRST_TRUE_PRECEDENCE",
+               "private_source_record_selection_semantics_identity_digest" : "SHA256_LOWERCASE_HEX64",
+               "private_source_record_selection_semantics_identity_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_PRIVATE_SOURCE_RECORD_SELECTION_SEMANTICS_V1",
+               "private_source_record_selection_semantics_identity_preimage" : "LITERAL_DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CANONICAL_COMPLETE_SOURCE_RECORD_BYTES",
+               "projected_record_exact_key_count" : 7,
+               "projected_record_exact_keys" : [
+                  "schema_version",
+                  "exact_node_version",
+                  "major_decimal",
+                  "minor_decimal",
+                  "patch_decimal",
+                  "release_kind",
+                  "private_source_record_selection_semantics_sha256"
+               ],
+               "projected_record_field_rules" : {
+                  "exact_node_version" : "CANONICAL_LOWERCASE_V_PLUS_THREE_CANONICAL_DECIMAL_COMPONENTS",
+                  "major_decimal" : "ASCII_CANONICAL_NONNEGATIVE_DECIMAL_STRING_MAX32_DIGITS",
+                  "minor_decimal" : "ASCII_CANONICAL_NONNEGATIVE_DECIMAL_STRING_MAX32_DIGITS",
+                  "patch_decimal" : "ASCII_CANONICAL_NONNEGATIVE_DECIMAL_STRING_MAX32_DIGITS",
+                  "private_source_record_selection_semantics_sha256" : "SHA256_OF_LITERAL_DOMAIN_UTF8_TRUE_NUL_AND_BYTES_FROM_THE_BOUND_LOSSLESS_SOURCE_RECORD_CANONICALIZATION_CONTRACT_PRIVATE_NOT_PUBLICABLE",
+                  "release_kind" : "EXACT_LITERAL_STABLE",
+                  "schema_version" : "EXACT_LITERAL_COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_PROJECTED_RECORD_V1"
+               },
+               "raw_record_or_private_semantics_hash_publication_allowed" : false,
+               "root_shape" : "ORDERED_FINITE_JSON_ARRAY",
+               "schema_id" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_PROJECTION_V1",
+               "source_record_canonicalization_contract" : {
+                  "accepted_json_number_lexeme_rule" : "ONLY_INTEGER_LEXEMES_MATCHING_ASCII_0_OR_OPTIONAL_MINUS_THEN_ASCII_[1-9][0-9]*_NO_PLUS_DECIMAL_POINT_EXPONENT_LEADING_ZERO_OR_NEGATIVE_ZERO",
+                  "array_rule" : "PRESERVE_INPUT_ELEMENT_ORDER_EXACTLY",
+                  "integer_rule" : "PRESERVE_THE_EXACT_ALREADY_CANONICAL_ASCII_INTEGER_LEXEME_WITH_ARBITRARY_DIGIT_LENGTH_BOUNDED_ONLY_BY_THE_PREBOUND_RESPONSE_BYTE_LIMIT_AND_FORBID_MACHINE_INTEGER_FLOAT_DECIMAL_OR_LOCALE_CONVERSION",
+                  "literal_rule" : "EMIT_EXACT_LOWERCASE_ASCII_true_false_or_null",
+                  "object_member_rule" : "DECODE_MEMBER_NAMES_TO_UNICODE_SCALAR_VALUES_REJECT_LONE_SURROGATES_REJECT_DUPLICATE_DECODED_NAMES_APPLY_NO_UNICODE_NORMALIZATION_AND_SORT_BY_UNSIGNED_LEXICOGRAPHIC_UTF8_BYTES_OF_THE_DECODED_NAMES",
+                  "output_rule" : "RECURSIVE_COMPACT_JSON_WITH_COMMA_AND_COLON_NO_INSIGNIFICANT_WHITESPACE_NO_LINE_FEED_AND_THE_DECLARED_OBJECT_ARRAY_STRING_INTEGER_AND_LITERAL_RULES",
+                  "schema_version" : "COCOLON_NLS_V3_STEP11_GATE_B_LOSSLESS_CANONICAL_COMPLETE_JSON_SOURCE_RECORD_V1",
+                  "string_rule" : "DECODE_JSON_ESCAPES_TO_UNICODE_SCALAR_VALUES_REJECT_LONE_SURROGATES_APPLY_NO_UNICODE_NORMALIZATION_EMIT_QUOTE_AND_BACKSLASH_ESCAPED_AND_EACH_C0_CONTROL_AS_LOWERCASE_BACKSLASH_u00xx_WITH_ALL_OTHER_SCALARS_AS_UTF8"
+               },
+               "source_record_canonicalization_contract_raw_sha256" : "bd21fd7fd529247d0a655d2ae5bb3d09e110398f153eeb7f1e69dde8055e0b54",
+               "source_record_canonicalization_exact_key_count" : 8,
+               "source_record_canonicalization_exact_keys" : [
+                  "schema_version",
+                  "accepted_json_number_lexeme_rule",
+                  "object_member_rule",
+                  "array_rule",
+                  "string_rule",
+                  "integer_rule",
+                  "literal_rule",
+                  "output_rule"
+               ],
+               "source_record_semantics_rule" : "LOSSLESS_CANONICAL_COMPLETE_SOURCE_RECORD_BYTES_UNDER_THE_BOUND_CANONICALIZATION_RAW_DETERMINE_PRIVATE_SEMANTICS_IDENTITY_SO_SAME_VERSION_WITH_ANY_DIFFERENT_CANONICAL_SOURCE_RECORD_BYTES_IS_CONFLICTING",
+               "source_record_shape" : "JSON_OBJECT_WITH_REQUIRED_VERSION_STRING_AND_ALL_OTHER_FIELDS_ALLOWED_ONLY_AS_PRIVATE_SELECTION_SEMANTICS_INPUT",
+               "source_version_json_pointer" : "/version",
+               "unknown_projection_output_field_action" : "OBSERVATION_INVARIANT_INVALID_STOP",
+               "whole_response_structural_failure_action" : "OBSERVATION_INVARIANT_INVALID_NOT_FABRICATED_AS_A_CANDIDATE_REASON"
+            },
+            "projection_contract_raw_sha256" : "4c709ba3f3e1e8a1b99a5b08934e4c7e9256ccb668f116702f14437705c524db",
+            "projection_schema_id" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_PROJECTION_V1"
+         },
+         "future_catalogue_response_scope" : {
+            "catalogue_expansion_allowed" : false,
+            "early_stop_second_read_allowed" : false,
+            "mirror_fallback_allowed" : false,
+            "nonrecursive" : true,
+            "pagination_allowed" : false,
+            "raw_uri_request_transport_or_body_publication_allowed" : false,
+            "redirect_follow_allowed" : false,
+            "request_count_bound" : "ZERO_IF_ACTIVATION_BINDING_INVALID_ELSE_EXACTLY_ONE",
+            "response_capture_count_bound" : "ZERO_OR_ONE",
+            "retry_allowed" : false,
+            "uri_template_expansion_allowed" : false
+         },
+         "future_catalogue_source_set_binding" : {
+            "binding_time" : "AFTER_FUTURE_OBSERVATION_AUTHORITY_ACTIVATION_AND_BEFORE_ANY_NETWORK_READ_AS_ONE_IMMUTABLE_STAGED_BINDING",
+            "private_binding_publication_allowed" : false,
+            "private_internal_equality_rule" : "PRIVATE_REQUEST_AND_TRANSPORT_IDENTITIES_EQUAL_THE_RESOLVED_EXACT7_BINDINGS_AND_RESPONSE_LIMIT_EQUALS_THE_REQUEST_FIELD_WITH_NO_DUPLICATE_OR_LATE_VALUE",
+            "private_source_binding_exact_key_count" : 9,
+            "private_source_binding_exact_keys" : [
+               "schema_version",
+               "source_provider_id",
+               "logical_catalogue_source_id",
+               "private_request_binding_identity_sha256",
+               "private_transport_policy_binding_identity_sha256",
+               "response_byte_limit",
+               "projected_record_count_limit",
+               "catalogue_projection_contract_raw_sha256",
+               "parser_grammar_raw_sha256"
+            ],
+            "private_source_binding_field_rules" : {
+               "catalogue_projection_contract_raw_sha256" : "EXACTLY_EQUALS_THE_PUBLIC_DESCRIPTOR_AND_EMBEDDED_PROJECTION_CONTRACT_RAW_SHA256",
+               "logical_catalogue_source_id" : "EXACTLY_EQUALS_THE_PUBLIC_DESCRIPTOR_LOGICAL_CATALOGUE_SOURCE_ID",
+               "parser_grammar_raw_sha256" : "EXACTLY_EQUALS_THE_PUBLIC_DESCRIPTOR_AND_EMBEDDED_PARSER_GRAMMAR_RAW_SHA256",
+               "private_request_binding_identity_sha256" : "EXACTLY_EQUALS_THE_DOMAIN_SEPARATED_HASH_OF_THE_SAME_RESOLVED_CLOSED_EXACT7_PRIVATE_REQUEST",
+               "private_transport_policy_binding_identity_sha256" : "EXACTLY_EQUALS_THE_DOMAIN_SEPARATED_HASH_OF_THE_SAME_RESOLVED_CLOSED_EXACT7_PRIVATE_TRANSPORT_POLICY",
+               "projected_record_count_limit" : "POSITIVE_JSON_INTEGER_PREBOUND_BEFORE_READ_AND_NOT_GREATER_THAN_100000",
+               "response_byte_limit" : "POSITIVE_JSON_INTEGER_EQUALS_THE_PRIVATE_REQUEST_RESPONSE_BYTE_LIMIT_AND_IS_NOT_GREATER_THAN_16777216",
+               "schema_version" : "EXACT_LITERAL_COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_PRIVATE_SOURCE_BINDING_V1",
+               "source_provider_id" : "EXACTLY_EQUALS_THE_PUBLIC_DESCRIPTOR_SOURCE_PROVIDER_ID"
+            },
+            "public_binding_digest" : "SHA256_LOWERCASE_HEX64",
+            "public_binding_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_SOURCE_PUBLIC_BINDING_V1",
+            "public_binding_preimage" : "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CLOSED_EXACT8_PUBLIC_DESCRIPTOR_CANONICAL_BYTES",
+            "public_descriptor_exact_key_count" : 8,
+            "public_descriptor_exact_keys" : [
+               "schema_version",
+               "source_provider_id",
+               "logical_catalogue_source_id",
+               "catalogue_projection_schema_id",
+               "catalogue_projection_contract_raw_sha256",
+               "parser_grammar_id",
+               "parser_grammar_raw_sha256",
+               "selection_policy_contract_raw_sha256"
+            ],
+            "public_descriptor_field_rules" : {
+               "catalogue_projection_contract_raw_sha256" : "EXACTLY_EQUALS_THE_EMBEDDED_PROJECTION_CONTRACT_CANONICAL_RAW_SHA256",
+               "catalogue_projection_schema_id" : "EXACTLY_EQUALS_THE_EMBEDDED_PROJECTION_CONTRACT_SCHEMA_ID",
+               "logical_catalogue_source_id" : "NONEMPTY_PUBLIC_ASCII_UPPER_SNAKE_IDENTIFIER",
+               "parser_grammar_id" : "EXACTLY_EQUALS_THE_EMBEDDED_PARSER_GRAMMAR_ID",
+               "parser_grammar_raw_sha256" : "EXACTLY_EQUALS_THE_EMBEDDED_PARSER_GRAMMAR_CANONICAL_RAW_SHA256",
+               "schema_version" : "EXACT_LITERAL_COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_PUBLIC_SOURCE_DESCRIPTOR_V1",
+               "selection_policy_contract_raw_sha256" : "EXACTLY_EQUALS_THE_CONSUMED_POLICY_CONTRACT_RAW_SHA256",
+               "source_provider_id" : "NONEMPTY_PUBLIC_ASCII_UPPER_SNAKE_IDENTIFIER"
+            },
+            "public_private_identity_equality_rule" : "SOURCE_PROVIDER_ID_LOGICAL_SOURCE_ID_PROJECTION_RAW_AND_PARSER_RAW_MUST_MATCH_EXACTLY",
+            "source_count_rule" : "EXACTLY_ONE_AUTHORITY_PREBOUND_SOURCE",
+            "source_order" : "AUTHORITY_DECLARED_SINGLETON",
+            "source_set_expansion_allowed" : false,
+            "unbounded_discovery_allowed" : false
+         },
+         "future_observation_authorized_effects" : {
+            "activation_gate_execution_count_rule" : "EXACT1",
+            "artifact_or_runtime_effect_count" : 0,
+            "catalogue_capture_sequence_count_rule" : "EXACT1_IFF_ALL_EXACT12_CHECKS_TRUE_ELSE_EXACT0",
+            "catalogue_network_request_count_rule" : "EXACT1_IFF_ALL_EXACT12_CHECKS_TRUE_ELSE_EXACT0",
+            "catalogue_response_capture_count_rule" : "EXACT0_IF_ANY_ACTIVATION_CHECK_FALSE_ELSE_ZERO_OR_ONE_AFTER_EXACTLY_ONE_REQUEST",
+            "future_forbidden_effect_occurrence_count_rule" : "EXACT0_AND_AGGREGATES_ALL_CLOSED_EXACT14_FUTURE_FORBIDDEN_CATEGORIES_WITH_NESTED_PROJECTION_EQUALITY_ONLY_WHEN_WRAPPERS_PRESENT_AND_NO_NESTED_EQUALITY_WHEN_WRAPPERS_NULL",
+            "owner_and_independent_classification_count_rule" : "FOR_EACH_OBSERVER_EXACT1_IFF_WRAPPER_PRESENT_AND_OBSERVATION_FAILURE_REASON_JSON_NULL_ELSE_EXACT0",
+            "owner_and_independent_projection_count_rule" : "EACH_EQUALS_RESPONSE_CAPTURE_COUNT_AND_IS_EXACT0_ON_BINDING_INVALID",
+            "owner_and_independent_selection_count_rule" : "FOR_EACH_OBSERVER_EXACT1_IFF_CLASSIFICATION_COUNT_EXACT1_AND_SAME_VERSION_CONFLICT_GROUP_COUNT_EXACT0_ELSE_EXACT0",
+            "policy_contract_receipt_consumption_count_rule" : "EXACT1_IFF_ALL_EXACT12_CHECKS_TRUE_ELSE_EXACT0",
+            "production_red_d1_and_mashos_change_count_rule" : "ALL_EXACT0",
+            "provider_source_lock_contract_effect_count" : 0,
+            "raw_private_value_publication_count" : 0
+         },
+         "future_observation_forbidden_effect_type_count" : 14,
+         "future_observation_forbidden_effects" : [
+            "PROVIDER_SOURCE_LOCK_CONTRACT_EXECUTION_ACTIVATION_ADMISSION_OR_CONSUMPTION",
+            "ARTIFACT_METADATA_OR_BODY_ACQUISITION",
+            "ARTIFACT_DOWNLOAD",
+            "STAGING",
+            "MATERIALIZATION",
+            "INSTALLATION",
+            "ARTIFACT_HASH_OR_SIGNATURE_VERIFICATION",
+            "NODE_EXECUTION",
+            "VERSION_PROBE",
+            "ENGINE_VERIFIER_HELPER_OR_GATE_B_EXECUTION",
+            "RUNTIME_PYTEST_OR_TARGET_EXECUTION",
+            "TARGET_AUTHORITY_ISSUANCE_OR_ACTIVATION",
+            "CI_WORKFLOW_REREAD",
+            "PRIVATE_URI_ENDPOINT_HASH_REQUEST_TRANSPORT_CREDENTIAL_BODY_OR_RAW_REJECTION_DETAIL_PUBLICATION"
+         ],
+         "future_observation_projection" : {
+            "check_vector_exact_key_count" : 29,
+            "check_vector_exact_keys" : [
+               "policy_contract_receipt_binding_exact",
+               "source_provider_contract_identity_exact_and_immutable",
+               "route_position_and_history_preserved",
+               "selection_requirement_closed_and_semantically_valid",
+               "catalogue_source_prebound_exact1",
+               "public_private_source_identity_mapping_total",
+               "private_request_absolute_https_get_no_auth_bounded",
+               "private_transport_policy_binding_total",
+               "projection_and_parser_interface_binding_total",
+               "catalogue_scope_nonrecursive_and_bounded",
+               "same_immutable_capture_with_fresh_separate_observer_state",
+               "projected_record_closed_exact7",
+               "source_record_canonicalization_lossless_total",
+               "version_token_kind_classification_total",
+               "canonical_exact_version_grammar_total",
+               "stable_only_rule_total",
+               "exact_major_or_major_minor_requirement_filter_total",
+               "identical_duplicate_first_occurrence_collapse_total",
+               "same_version_conflict_whole_observation_invalid_total",
+               "candidate_rejection_enum_closed_exact9",
+               "candidate_rejection_precedence_total_exclusive",
+               "candidate_partition_and_reason_count_invariants_total",
+               "numeric_highest_selection_without_machine_integer_total",
+               "selected_version_identity_preimage_total",
+               "body_free_result_receipt_handoff_schema_total",
+               "privacy_boundary_preserved",
+               "provider_source_lock_contract_untouched",
+               "authorized_effect_bounds_and_forbidden_effects_exact0",
+               "automatic_progression_false"
+            ],
+            "comparison_count" : "EXACT1_IFF_RESPONSE_CAPTURE_EXACT1_ELSE_EXACT0",
+            "digest" : "SHA256_LOWERCASE_HEX64",
+            "evidence_preimage" : "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_DOMAIN_FREE_PROJECTION_CANONICAL_BYTES",
+            "exact_key_count" : 31,
+            "exact_keys" : [
+               "schema_version",
+               "policy_contract_raw_sha256",
+               "policy_contract_receipt_observation_sha256",
+               "source_provider_contract_raw_sha256",
+               "source_provider_contract_receipt_observation_sha256",
+               "selection_requirement",
+               "selection_requirement_identity_sha256",
+               "catalogue_source_public_binding_sha256",
+               "catalogue_source_count",
+               "activation_gate_verdict",
+               "observation_failure_reason",
+               "controller_capture_sequence_count",
+               "catalogue_network_request_count",
+               "catalogue_response_capture_count",
+               "catalogue_projection_invocation_count",
+               "candidate_record_total",
+               "candidate_rejected_total",
+               "candidate_alias_collapsed_total",
+               "candidate_accepted_total",
+               "rejection_reason_counts",
+               "same_version_conflict_group_count",
+               "selected_exact_version_count",
+               "selected_exact_version_or_null",
+               "selected_exact_version_identity_sha256_or_null",
+               "private_value_publication_count",
+               "forbidden_effect_occurrence_count",
+               "check_vector",
+               "verdict",
+               "reason",
+               "invalid_check_count",
+               "automatic_progression"
+            ],
+            "independent_evidence_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INDEPENDENT_V1",
+            "invalid_check_count_rule" : "COUNT_FALSE_VALUES_IN_THE_CLOSED_EXACT29_CHECK_VECTOR",
+            "observation_failure_reason_rule" : "FOR_EACH_PRESENT_WRAPPER_JSON_NULL_IFF_PARSER_AND_PROJECTION_INVARIANTS_VALID_ELSE_THE_FIRST_TRUE_MEMBER_OF_RANKS4_THROUGH7_OF_THE_CLOSED_EXACT8_FAILURE_PRECEDENCE_CONTROLLER_RANKS1_2_3_AND8_ARE_NOT_FABRICATED_IN_AN_ABSENT_WRAPPER",
+            "owner_evidence_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_OBSERVATION_OWNER_V1",
+            "projection_encoding" : "UTF8_SORTED_COMPACT_JSON_NO_LF",
+            "reason_enum" : [
+               "EXACT_VERSION_SELECTED",
+               "NO_DESIGN_VALID_EXACT_VERSION",
+               "OBSERVATION_CONTRACT_INVARIANT_INVALID"
+            ],
+            "schema_version" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_OBSERVATION_PROJECTION_V1",
+            "selected_value_identity_equality_rule" : "WHEN_NON_NULL_EXACT_VERSION_IS_CANONICAL_AND_SELECTED_IDENTITY_RECOMPUTES_FROM_THE_CLOSED_EXACT9_PREIMAGE_USING_THE_BOUND_REQUIREMENT_SOURCE_AND_POLICY_IDENTITIES",
+            "selected_value_nullability" : "SELECTED_EXACT_VERSION_AND_SELECTED_IDENTITY_ARE_BOTH_NON_NULL_IFF_SELECTED_COUNT_EXACT1_ELSE_BOTH_JSON_NULL",
+            "state_reuse_count" : 0,
+            "verdict_and_reason_derivation" : "FOR_EACH_PRESENT_WRAPPER_INVALID_AND_OBSERVATION_CONTRACT_INVARIANT_INVALID_IFF_INVALID_CHECK_COUNT_POSITIVE_OR_OBSERVATION_FAILURE_REASON_NON_NULL_OR_SAME_VERSION_CONFLICT_GROUP_COUNT_POSITIVE_ELSE_VALID_AND_EXACT_VERSION_SELECTED_IFF_SELECTED_COUNT_EXACT1_ELSE_VALID_AND_NO_DESIGN_VALID_EXACT_VERSION",
+            "verdict_enum" : [
+               "VALID",
+               "INVALID"
+            ]
+         },
+         "future_observation_terminal_mapping" : {
+            "all_branches_stop" : true,
+            "automatic_progression" : false,
+            "branch_count" : 3,
+            "branches" : [
+               "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP",
+               "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_DIVERGENCE_STOP",
+               "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_DUAL_MATCH_EXACT_VERSION_SELECTED_STOP"
+            ],
+            "divergence_rule" : "ACTIVATION_GATE_VALID_RESPONSE_CAPTURE_EXACT1_OBSERVATION_FAILURE_REASON_JSON_NULL_BOTH_OBSERVERS_VALID_AND_DOMAIN_FREE_PROJECTION_HASHES_DIFFER",
+            "dual_match_rule" : "ACTIVATION_GATE_VALID_RESPONSE_CAPTURE_EXACT1_OBSERVATION_FAILURE_REASON_JSON_NULL_BOTH_OBSERVERS_VALID_AND_PROJECTIONS_MATCH_AND_SELECTED_COUNT_EXACT1_AND_IDENTITIES_MATCH",
+            "exclusive" : true,
+            "invalid_rule" : "CONTROLLER_OBSERVATION_FAILURE_COUNT_EXACT1_OR_RESPONSE_CAPTURE_EXACT0_OR_EITHER_PRESENT_OBSERVER_FAILURE_REASON_NON_NULL_OR_EITHER_PRESENT_OBSERVER_INVALID_OR_BOTH_PRESENT_VALID_MATCH_WITH_SELECTED_COUNT_ZERO_OR_ANY_CONFLICT_GROUP_POSITIVE",
+            "total" : true
+         },
+         "future_observer_execution_contract" : {
+            "comparison_nullability_rule" : "IF_BOTH_WRAPPERS_NULL_COMPARISON_COUNT_EXACT0_HASHES_AND_MATCH_JSON_NULL_STATE_REUSE_EXACT0_ELSE_COMPARISON_COUNT_EXACT1_HASHES_NON_NULL_MATCH_BOOLEAN_STATE_REUSE_EXACT0",
+            "comparison_rule" : "EXACT_CANONICAL_DOMAIN_FREE_PROJECTION_SHA256_EQUALITY",
+            "independent_state" : "FRESH_INDEPENDENT_PARSE_DEDUP_CONFLICT_FILTER_COMPARE_SELECT_IDENTITY_STATE",
+            "owner_state" : "FRESH_OWNER_PARSE_DEDUP_CONFLICT_FILTER_COMPARE_SELECT_IDENTITY_STATE",
+            "parser_invocation_rule" : "EACH_OBSERVER_EXACT1_IFF_ACTIVATION_GATE_VALID_AND_CAPTURE_EXACT1_ELSE_EXACT0",
+            "raw_capture_publication_allowed" : false,
+            "shared_derived_state_reuse_allowed" : false,
+            "shared_input" : "ONE_IMMUTABLE_CONTROLLER_CAPTURE_BYTES_AND_THE_SAME_PUBLIC_AND_PRIVATE_BINDING_IDENTITIES",
+            "wrapper_nullability_rule" : "OWNER_AND_INDEPENDENT_OBSERVATION_VALUES_ARE_JSON_NULL_IFF_RESPONSE_CAPTURE_COUNT_EXACT0_ELSE_CLOSED_EXACT8_WRAPPERS"
+         },
+         "future_private_catalogue_request_binding" : {
+            "credential_and_header_rule" : "BOTH_JSON_NULL_AND_NO_AUTHORITY_VARIABLE_HEADER",
+            "endpoint_rule" : "ONE_ABSOLUTE_HTTPS_URI_WITHOUT_FRAGMENT_TEMPLATE_OR_CREDENTIAL",
+            "exact_key_count" : 7,
+            "exact_keys" : [
+               "schema_version",
+               "absolute_https_uri",
+               "request_method",
+               "credential_binding_identity_sha256_or_null",
+               "request_header_profile_binding_identity_sha256_or_null",
+               "request_body_raw_sha256_or_null",
+               "response_byte_limit"
+            ],
+            "field_rules" : {
+               "absolute_https_uri" : "ONE_PRIVATE_ABSOLUTE_HTTPS_URI_WITHOUT_FRAGMENT_USERINFO_OR_TEMPLATE",
+               "credential_binding_identity_sha256_or_null" : "EXACT_JSON_NULL",
+               "request_body_raw_sha256_or_null" : "EXACT_JSON_NULL",
+               "request_header_profile_binding_identity_sha256_or_null" : "EXACT_JSON_NULL",
+               "request_method" : "EXACT_LITERAL_GET",
+               "response_byte_limit" : "POSITIVE_JSON_INTEGER_EQUALS_PRIVATE_SOURCE_BINDING_RESPONSE_BYTE_LIMIT_AND_NOT_GREATER_THAN_16777216",
+               "schema_version" : "EXACT_LITERAL_COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_PRIVATE_REQUEST_BINDING_V1"
+            },
+            "identity_digest" : "SHA256_LOWERCASE_HEX64",
+            "identity_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_REQUEST_BINDING_V1",
+            "identity_preimage" : "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CLOSED_EXACT7_PRIVATE_REQUEST_CANONICAL_BYTES",
+            "late_mutation_retry_or_fallback_allowed" : false,
+            "raw_value_or_identity_hash_publication_allowed" : false,
+            "request_body_rule" : "JSON_NULL_AND_NO_REQUEST_BODY",
+            "request_method_rule" : "EXACT_LITERAL_GET",
+            "response_byte_limit_rule" : "POSITIVE_AUTHORITY_PREBOUND_INTEGER_NOT_GREATER_THAN_16777216_ENFORCED_BEFORE_BODY_ACCEPTANCE"
+         },
+         "future_private_transport_policy_binding" : {
+            "dns_policy_binding_required" : true,
+            "exact_key_count" : 7,
+            "exact_keys" : [
+               "schema_version",
+               "tls_version",
+               "hostname_verification",
+               "trust_store_identity_sha256",
+               "proxy_binding_identity_sha256_or_null",
+               "dns_policy_binding_identity_sha256",
+               "transport_executor_contract_identity_sha256"
+            ],
+            "field_rules" : {
+               "dns_policy_binding_identity_sha256" : "LOWERCASE_HEX64_RESOLVING_EXACTLY_ONCE",
+               "hostname_verification" : "JSON_TRUE",
+               "proxy_binding_identity_sha256_or_null" : "JSON_NULL_OR_LOWERCASE_HEX64_RESOLVING_EXACTLY_ONCE",
+               "schema_version" : "EXACT_LITERAL_COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_PRIVATE_TRANSPORT_POLICY_BINDING_V1",
+               "tls_version" : "ONE_PREBOUND_MEMBER_OF_TLS_1_3_OR_TLS_1_2",
+               "transport_executor_contract_identity_sha256" : "LOWERCASE_HEX64_RESOLVING_EXACTLY_ONCE",
+               "trust_store_identity_sha256" : "LOWERCASE_HEX64_RESOLVING_EXACTLY_ONCE_IN_THE_PRIVATE_MANIFEST"
+            },
+            "hostname_verification_required" : true,
+            "identity_digest" : "SHA256_LOWERCASE_HEX64",
+            "identity_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_TRANSPORT_POLICY_BINDING_V1",
+            "identity_preimage" : "LITERAL_DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CLOSED_EXACT7_PRIVATE_TRANSPORT_POLICY_CANONICAL_BYTES",
+            "late_resolution_or_mutation_allowed" : false,
+            "manifest_entry_exact_key_count" : 2,
+            "manifest_entry_exact_keys" : [
+               "transport_policy_binding_identity_sha256",
+               "transport_policy_binding"
+            ],
+            "manifest_entry_field_rules" : {
+               "transport_policy_binding" : "ONE_CLOSED_EXACT7_PRIVATE_TRANSPORT_POLICY_VALUE_EQUAL_TO_THE_HASH_PREIMAGE_VALUE",
+               "transport_policy_binding_identity_sha256" : "EXACTLY_EQUALS_SHA256_OF_THE_DECLARED_LITERAL_TRANSPORT_IDENTITY_DOMAIN_TRUE_NUL_AND_THE_SAME_CLOSED_EXACT7_PRIVATE_TRANSPORT_POLICY_CANONICAL_BYTES"
+            },
+            "proxy_binding_field_required_with_json_null_allowed" : true,
+            "raw_value_or_identity_hash_publication_allowed" : false,
+            "reference_resolution_rule" : "EVERY_PRIVATE_SOURCE_TRANSPORT_IDENTITY_RESOLVES_TO_EXACTLY_ONE_MANIFEST_ENTRY_EVERY_ENTRY_IS_REFERENCED_AT_LEAST_ONCE_AND_DUPLICATE_MISSING_AMBIGUOUS_OR_HASH_MISMATCH_IS_ACTIVATION_BINDING_INVALID_PRENETWORK",
+            "tls_preference" : "TLS_1_3_THEN_TLS_1_2_ONLY_IF_PREBOUND",
+            "tls_version_enum" : [
+               "TLS_1_3",
+               "TLS_1_2"
+            ],
+            "transport_executor_contract_identity_required" : true,
+            "trust_store_identity_required" : true
+         },
+         "future_version_candidate_record_projection" : {
+            "canonical_exact_version_grammar" : "LOWERCASE_v_WITH_EXACTLY_THREE_DOT_SEPARATED_COMPONENTS_EACH_ASCII_0_OR_ASCII_[1-9][0-9]*",
+            "component_comparison_rule" : "COMPARE_COMPONENT_DECIMAL_STRING_LENGTH_THEN_UNSIGNED_ASCII_LEXICOGRAPHIC_WITHOUT_MACHINE_INTEGER_OR_LOCALE_CONVERSION",
+            "component_policy_bound_rule" : "AFTER_SYNTACTIC_GRAMMAR_ACCEPTANCE_EACH_COMPONENT_MUST_HAVE_AT_MOST_32_ASCII_DIGITS_ELSE_RANK5_VERSION_COMPONENT_OUT_OF_POLICY_BOUNDS",
+            "exact_key_count" : 7,
+            "exact_keys" : [
+               "schema_version",
+               "exact_node_version",
+               "major_decimal",
+               "minor_decimal",
+               "patch_decimal",
+               "release_kind",
+               "private_source_record_selection_semantics_sha256"
+            ],
+            "private_semantics_identity_digest" : "SHA256_LOWERCASE_HEX64",
+            "private_semantics_identity_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_NODE_RELEASE_CATALOGUE_PRIVATE_SOURCE_RECORD_SELECTION_SEMANTICS_V1",
+            "private_semantics_identity_preimage" : "LITERAL_DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CANONICAL_COMPLETE_SOURCE_RECORD_BYTES",
+            "raw_record_or_private_semantics_hash_publication_allowed" : false,
+            "stable_rule" : "ONLY_CANONICAL_EXACT_WITHOUT_PRERELEASE_OR_BUILD_IS_STABLE",
+            "token_kind_classification_entry_count" : 4,
+            "token_kind_classification_rule" : "FIRST_TRUE_TOTAL_EXCLUSIVE_CLOSED_EXACT4_CLASSIFICATION_USING_THE_BOUND_PARSER_GRAMMAR_EXACT6_SELECTOR_FORMS_SUFFIX_GRAMMAR_CANONICAL_CORE_GRAMMAR_AND_OTHER_INVALID_CATCH_ALL",
+            "token_kind_member_count" : 4,
+            "token_kind_members" : [
+               "RANGE_TAG_ALIAS_OR_WILDCARD",
+               "PRERELEASE_OR_BUILD",
+               "CANONICAL_EXACT",
+               "OTHER_INVALID"
+            ]
+         },
+         "later_source_lock_handoff" : {
+            "automatic_progression" : false,
+            "current_or_future_selection_observation_provider_source_lock_contract_execution_activation_admission_or_consumption_count" : 0,
+            "invalid_action" : "SELECTION_RECEIPT_CONSUMPTION_EXACT0_NETWORK_EXACT0_AND_SOURCE_LOCK_EXACT0",
+            "later_activation_binding_rule" : "PREBIND_POLICY_RAW_AND_DUAL_MATCH_SELECTION_RECEIPT_OBSERVATION_WITH_TARGET_SELECTOR_AND_ALL_PRIVATE_PROVIDER_SOURCE_EXACT_VERSIONS_EQUAL",
+            "later_authority_requirement" : "SEPARATELY_APPROVED_PROVIDER_METADATA_SOURCE_LOCK_OBSERVATION_ONLY",
+            "selection_receipt_initial_state" : "CLOSED_UNCONSUMED_BODY_FREE",
+            "selection_receipt_public_binding" : "POLICY_RAW_POLICY_RECEIPT_OBSERVATION_SELECTED_EXACT_VERSION_SELECTED_IDENTITY_AND_PUBLIC_SOURCE_IDS",
+            "valid_action" : "ONLY_THE_EXISTING_ALL_EXACT12_TRUE_PROVIDER_SOURCE_LOCK_ACTIVATION_GATE_ATOMICALLY_CONSUMES_SELECTION_RECEIPT_EXACT1_PRENETWORK"
+         },
+         "privacy_boundary" : {
+            "not_publicable" : [
+               "PRIVATE_CATALOGUE_URI",
+               "PRIVATE_ENDPOINT_HASH",
+               "PRIVATE_REQUEST_BINDING_VALUE_OR_IDENTITY_HASH",
+               "PRIVATE_TRANSPORT_BINDING_VALUE_OR_IDENTITY_HASH",
+               "CREDENTIAL_OR_TOKEN",
+               "RAW_CATALOGUE_BODY",
+               "RAW_SOURCE_RECORD",
+               "PRIVATE_SOURCE_RECORD_SEMANTICS_HASH",
+               "RAW_REJECTION_DETAIL"
+            ],
+            "publicable" : [
+               "CONTRACT_GRAMMAR",
+               "PUBLIC_SOURCE_IDS",
+               "PUBLIC_INTERFACE_IDS_AND_HASHES",
+               "SELECTION_REQUIREMENT",
+               "SELECTED_EXACT_VERSION",
+               "TYPED_AGGREGATE_COUNTS",
+               "CANONICAL_PROJECTION_EVIDENCE_AND_SELECTION_IDENTITY_HASHES"
+            ]
+         },
+         "publicable" : true,
+         "purpose" : "BOUND_A_FUTURE_SINGLE_CATALOGUE_OBSERVATION_TO_AN_AUTHORITY_PREBOUND_MAJOR_OR_MAJOR_MINOR_REQUIREMENT_AND_DETERMINISTICALLY_SELECT_AT_MOST_ONE_CANONICAL_STABLE_EXACT_NODE_VERSION",
+         "reason_count_projection" : {
+            "exact_key_count" : 9,
+            "exact_keys" : [
+               "VERSION_FIELD_MISSING_OR_NONSTRING",
+               "RANGE_TAG_LATEST_LTS_ALIAS_OR_WILDCARD_DISALLOWED",
+               "PRERELEASE_OR_BUILD_METADATA_PRESENT",
+               "EXACT_VERSION_CANONICAL_GRAMMAR_INVALID",
+               "VERSION_COMPONENT_OUT_OF_POLICY_BOUNDS",
+               "REQUIRED_MAJOR_MISMATCH",
+               "REQUIRED_MINOR_MISMATCH",
+               "SELECTION_SEMANTICS_BINDING_INVALID",
+               "SAME_EXACT_VERSION_CONFLICT_AMBIGUOUS"
+            ],
+            "raw_rejection_detail_publication_allowed" : false,
+            "sum_rule" : "SUM_ALL_EXACT9_VALUES_EQUALS_CANDIDATE_REJECTED_TOTAL",
+            "value_rule" : "JSON_NONNEGATIVE_INTEGER",
+            "zero_key_omission_allowed" : false
+         },
+         "selected_exact_version_identity" : {
+            "digest" : "SHA256_LOWERCASE_HEX64",
+            "domain" : "COCOLON_NLS_V3_STEP11_GATE_B_SELECTED_EXACT_NODE_VERSION_IDENTITY_V1",
+            "preimage" : "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CLOSED_EXACT9_CANONICAL_BYTES",
+            "preimage_exact_key_count" : 9,
+            "preimage_exact_keys" : [
+               "schema_version",
+               "selection_policy_contract_raw_sha256",
+               "selection_policy_contract_receipt_observation_sha256",
+               "source_provider_metadata_contract_raw_sha256",
+               "source_provider_metadata_contract_receipt_observation_sha256",
+               "selection_requirement_identity_sha256",
+               "catalogue_public_source_binding_sha256",
+               "exact_node_version",
+               "catalogue_projection_contract_raw_sha256"
+            ],
+            "raw_catalogue_body_in_preimage_allowed" : false,
+            "schema_version" : "COCOLON_NLS_V3_STEP11_GATE_B_SELECTED_EXACT_NODE_VERSION_IDENTITY_V1",
+            "selected_value_rule" : "CANONICAL_EXACT_NODE_VERSION_AND_SELECTED_COUNT_EXACT1"
+         },
+         "selection_basis_contract" : {
+            "ci_hint_rule" : "AN_EXISTING_PUBLIC_CI_MAJOR_OR_MAJOR_MINOR_HINT_MAY_ONLY_SUPPORT_THE_REQUIREMENT_AND_NEVER_SUPPLIES_OR_IMPLIES_AN_EXACT_PATCH_VERSION",
+            "closed" : true,
+            "component_rule" : "ASCII_CANONICAL_NONNEGATIVE_DECIMAL_STRING_MAX32_DIGITS_NO_MACHINE_INTEGER_CONVERSION",
+            "digest" : "SHA256_LOWERCASE_HEX64",
+            "enum_name" : "EXACT_NODE_VERSION_SELECTION_BASIS_SOURCE_V1",
+            "forbidden_requirement_expansion" : [
+               "IMPLICIT_MINOR_ZERO",
+               "IMPLICIT_PATCH_ZERO",
+               "LATEST",
+               "LTS",
+               "TAG",
+               "ALIAS",
+               "RANGE",
+               "WILDCARD",
+               "PRERELEASE",
+               "BUILD_METADATA"
+            ],
+            "future_requirement_binding_exact_key_count" : 8,
+            "future_requirement_binding_exact_keys" : [
+               "schema_version",
+               "basis_source",
+               "requirement_source_public_identity",
+               "required_major_decimal",
+               "required_minor_decimal_or_null",
+               "selection_policy_contract_raw_sha256",
+               "catalogue_public_source_binding_sha256",
+               "activation_authority_token_sha256"
+            ],
+            "future_requirement_binding_field_rules" : {
+               "activation_authority_token_sha256" : "EXACTLY_EQUALS_SHA256_OF_THE_CURRENT_FUTURE_OBSERVATION_AUTHORITY_TOKEN_UTF8_BYTES",
+               "basis_source" : "EXACTLY_ONE_MEMBER_OF_THE_CLOSED_EXACT2_BASIS_ENUM",
+               "catalogue_public_source_binding_sha256" : "EXACTLY_EQUALS_THE_DOMAIN_SEPARATED_HASH_OF_THE_SAME_STAGED_CLOSED_EXACT8_PUBLIC_SOURCE_DESCRIPTOR",
+               "required_major_decimal" : "NON_NULL_ASCII_CANONICAL_NONNEGATIVE_DECIMAL_STRING_MAX32_DIGITS",
+               "required_minor_decimal_or_null" : "JSON_NULL_FOR_EXACT_MAJOR_OR_CANONICAL_MAX32_DIGIT_DECIMAL_STRING_FOR_EXACT_MAJOR_MINOR",
+               "requirement_source_public_identity" : "NONEMPTY_PUBLIC_ASCII_IDENTIFIER_BOUND_BY_THE_FUTURE_OBSERVATION_AUTHORITY",
+               "schema_version" : "EXACT_LITERAL_COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_REQUIREMENT_BINDING_V1",
+               "selection_policy_contract_raw_sha256" : "EXACTLY_EQUALS_THE_CONSUMED_POLICY_CONTRACT_RECEIPT_CONTRACT_RAW_SHA256"
+            },
+            "identity_domain" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_REQUIREMENT_V1",
+            "identity_preimage" : "DOMAIN_UTF8_THEN_TRUE_NUL_THEN_CLOSED_EXACT8_REQUIREMENT_CANONICAL_BYTES",
+            "major_minor_rule" : "REQUIRED_MAJOR_AND_REQUIRED_MINOR_ARE_NON_NULL_CANONICAL_DECIMAL_STRINGS",
+            "major_only_rule" : "REQUIRED_MAJOR_DECIMAL_NON_NULL_AND_REQUIRED_MINOR_DECIMAL_OR_NULL_IS_JSON_NULL",
+            "member_count" : 2,
+            "members_in_precedence_order" : [
+               "AUTHORITY_PREBOUND_EXACT_MAJOR_REQUIREMENT",
+               "AUTHORITY_PREBOUND_EXACT_MAJOR_MINOR_REQUIREMENT"
+            ],
+            "unknown_or_inconsistent_action" : "ACTIVATION_BINDING_INVALID_PRENETWORK_STOP"
+         },
+         "source_contract_binding" : {
+            "source_provider_contract_canonical_byte_count" : 71903,
+            "source_provider_contract_mutation_or_weakening_count" : 0,
+            "source_provider_contract_raw_sha256" : "20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479",
+            "source_receipt_blob_sha1" : "3384b2ce1dbb36417829350fab768eac8cc2b9d0",
+            "source_receipt_consumption_count" : 1,
+            "source_receipt_logical_sha256" : "be518ceff3273772f9052149f8227a246cc7c00a79faec25e14869363abd1ddc",
+            "source_receipt_observation_sha256" : "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+            "source_receipt_raw_sha256" : "ff91904e320cbaa9e24f95362c3869af5bf92ed12c04f0bb27d38c8924aa48ad"
+         },
+         "version_candidate_rejection" : {
+            "closed" : true,
+            "enum_name" : "EXACT_NODE_VERSION_CANDIDATE_REJECTION_REASON_V1",
+            "exclusive" : true,
+            "member_count" : 9,
+            "members_in_precedence_order" : [
+               "VERSION_FIELD_MISSING_OR_NONSTRING",
+               "RANGE_TAG_LATEST_LTS_ALIAS_OR_WILDCARD_DISALLOWED",
+               "PRERELEASE_OR_BUILD_METADATA_PRESENT",
+               "EXACT_VERSION_CANONICAL_GRAMMAR_INVALID",
+               "VERSION_COMPONENT_OUT_OF_POLICY_BOUNDS",
+               "REQUIRED_MAJOR_MISMATCH",
+               "REQUIRED_MINOR_MISMATCH",
+               "SELECTION_SEMANTICS_BINDING_INVALID",
+               "SAME_EXACT_VERSION_CONFLICT_AMBIGUOUS"
+            ],
+            "precedence" : "FIRST_TRUE_REASON_ONLY",
+            "precedence_entries" : [
+               {
+                  "predicate" : "SOURCE_RECORD_HAS_NO_version_MEMBER_OR_version_VALUE_IS_NOT_A_JSON_STRING",
+                  "rank" : 1,
+                  "reason" : "VERSION_FIELD_MISSING_OR_NONSTRING"
+               },
+               {
+                  "predicate" : "CLOSED_EXACT4_TOKEN_KIND_CLASSIFICATION_EQUALS_RANGE_TAG_ALIAS_OR_WILDCARD",
+                  "rank" : 2,
+                  "reason" : "RANGE_TAG_LATEST_LTS_ALIAS_OR_WILDCARD_DISALLOWED"
+               },
+               {
+                  "predicate" : "CLOSED_EXACT4_TOKEN_KIND_CLASSIFICATION_EQUALS_PRERELEASE_OR_BUILD",
+                  "rank" : 3,
+                  "reason" : "PRERELEASE_OR_BUILD_METADATA_PRESENT"
+               },
+               {
+                  "predicate" : "CLOSED_EXACT4_TOKEN_KIND_CLASSIFICATION_EQUALS_OTHER_INVALID",
+                  "rank" : 4,
+                  "reason" : "EXACT_VERSION_CANONICAL_GRAMMAR_INVALID"
+               },
+               {
+                  "predicate" : "SYNTACTIC_CORE_IS_CANONICAL_BUT_ANY_COMPONENT_HAS_MORE_THAN_32_ASCII_DIGITS",
+                  "rank" : 5,
+                  "reason" : "VERSION_COMPONENT_OUT_OF_POLICY_BOUNDS"
+               },
+               {
+                  "predicate" : "CANONICAL_BOUNDED_MAJOR_DECIMAL_DIFFERS_FROM_THE_PREBOUND_REQUIRED_MAJOR",
+                  "rank" : 6,
+                  "reason" : "REQUIRED_MAJOR_MISMATCH"
+               },
+               {
+                  "predicate" : "BASIS_IS_EXACT_MAJOR_MINOR_AND_CANONICAL_BOUNDED_MINOR_DIFFERS_FROM_REQUIRED_MINOR_WITH_PREDICATE_FALSE_FOR_EXACT_MAJOR_BASIS",
+                  "rank" : 7,
+                  "reason" : "REQUIRED_MINOR_MISMATCH"
+               },
+               {
+                  "predicate" : "PRIVATE_CANONICAL_COMPLETE_SOURCE_RECORD_SELECTION_SEMANTICS_SHA256_CANNOT_BE_DERIVED_OR_BOUND",
+                  "rank" : 8,
+                  "reason" : "SELECTION_SEMANTICS_BINDING_INVALID"
+               },
+               {
+                  "predicate" : "EARLIER_RANKS_FALSE_AND_THE_MATCHING_VERSION_GROUP_CONTAINS_MORE_THAN_ONE_DISTINCT_CANONICAL_COMPLETE_SOURCE_RECORD_BYTE_STRING_AFTER_IDENTICAL_DUPLICATE_COLLAPSE_WITH_EACH_PRIVATE_SELECTION_SEMANTICS_SHA256_RECOMPUTED_AND_BOUND",
+                  "rank" : 9,
+                  "reason" : "SAME_EXACT_VERSION_CONFLICT_AMBIGUOUS"
+               }
+            ],
+            "precedence_entry_exact_key_count" : 3,
+            "precedence_entry_exact_keys" : [
+               "rank",
+               "reason",
+               "predicate"
+            ],
+            "precedence_entry_invariants" : "RANKS_ARE_CONTIGUOUS_1_THROUGH9_REASONS_EQUAL_MEMBERS_IN_THE_SAME_ORDER_AND_EACH_PREDICATE_IS_CLOSED",
+            "reason_cardinality_per_rejected_candidate" : 1,
+            "total" : true,
+            "unknown_condition_action" : "OBSERVATION_INVARIANT_INVALID_STOP"
+         }
+      },
+      "exact_node_version_selection_policy_contract_identity" : {
+         "canonicalization" : "UTF8_SORTED_COMPACT_JSON_NO_LF",
+         "catalogue_parser_grammar_raw_sha256" : "29d9e454c63ac5bd5c1f9f165a1ea0484b3ab7c1f024c4db2a16d553a7fc9ad0",
+         "catalogue_projection_contract_raw_sha256" : "4c709ba3f3e1e8a1b99a5b08934e4c7e9256ccb668f116702f14437705c524db",
+         "contract_canonical_byte_count" : 60028,
+         "contract_raw_sha256" : "5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2",
+         "contract_top_level_exact_key_count" : 35,
+         "json_pointer" : "/observation/exact_node_version_selection_policy_contract_candidate",
+         "source_record_canonicalization_contract_raw_sha256" : "bd21fd7fd529247d0a655d2ae5bb3d09e110398f153eeb7f1e69dde8055e0b54"
+      },
+      "full_r1_result" : "UNKNOWN_PRESERVED",
+      "historical_preservation" : {
+         "historical_reparse_reclassification_route_reselection_or_credit_count" : 0,
+         "prior_observer_v1" : "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+         "prior_observer_v2_execution_authority" : "CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_IMMUTABLE",
+         "source_classifier_observation_sha256" : "9c7e0601751d81387720e963bbb07b0cd69cfaa17946722ec7ab82530957b606",
+         "source_launcher_identity_discovery_observation_sha256" : "dd10e06f0f1f0db799b3d7de098401ac6af2b146f64d1e5836fc432dc17ea82a",
+         "source_provider_contract_observation_sha256" : "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+         "source_route_decision_observation_sha256" : "1a1d3a9de6d0cb2b0ad29d5dd8bf3aabfe7c388d6a77fdcf03e2040f2566a73a"
+      },
+      "independent_static_design_verification" : {
+         "domain_free_projection" : {
+            "activation_binding_check_count" : 12,
+            "automatic_progression" : false,
+            "candidate_rejection_reason_count" : 9,
+            "catalogue_parser_grammar_raw_sha256" : "29d9e454c63ac5bd5c1f9f165a1ea0484b3ab7c1f024c4db2a16d553a7fc9ad0",
+            "catalogue_projection_contract_raw_sha256" : "4c709ba3f3e1e8a1b99a5b08934e4c7e9256ccb668f116702f14437705c524db",
+            "catalogue_source_count_rule" : "EXACT1",
+            "check_vector" : {
+               "activation_gate_closed_exact12_atomic_prenetwork" : true,
+               "automatic_progression_false" : true,
+               "candidate_rejection_enum_closed_exact9" : true,
+               "canonical_stable_version_grammar_total" : true,
+               "catalogue_parser_scope_finite_and_deterministic" : true,
+               "catalogue_projection_and_parser_hashes_bound" : true,
+               "catalogue_source_count_exact1" : true,
+               "closed_version_token_kind_classification_total" : true,
+               "current_design_effects_exact0" : true,
+               "current_scope_design_only" : true,
+               "future_body_free_result_receipt_handoff_schema_total" : true,
+               "future_owner_and_independent_state_fresh_separate" : true,
+               "future_terminal_mapping_three_way_total_exclusive" : true,
+               "identical_duplicate_collapse_total" : true,
+               "later_source_lock_atomic_selection_receipt_consumption_total" : true,
+               "numeric_comparator_avoids_machine_integer_and_locale" : true,
+               "observation_failure_enum_closed_exact8" : true,
+               "privacy_boundary_preserved" : true,
+               "private_catalogue_source_binding_closed_exact9" : true,
+               "private_request_binding_closed_exact7" : true,
+               "private_transport_and_source_record_semantics_identity_domains_total" : true,
+               "private_transport_policy_binding_closed_exact7" : true,
+               "projected_record_closed_exact7" : true,
+               "public_catalogue_descriptor_closed_exact8" : true,
+               "rejection_precedence_and_reason_counts_total_exclusive" : true,
+               "same_version_conflict_invalidates_whole_observation" : true,
+               "selected_exact_version_identity_preimage_total" : true,
+               "selection_basis_enum_closed_exact2" : true,
+               "selection_requirement_identity_preimage_total" : true,
+               "source_provider_contract_immutable_no_weakening" : true,
+               "source_provider_contract_receipt_binding_exact" : true,
+               "source_record_canonicalization_lossless_total" : true
+            },
+            "contract_raw_sha256" : "5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2",
+            "current_design_forbidden_effect_occurrence_count" : 0,
+            "current_provider_contract_mutation_count" : 0,
+            "current_provider_source_lock_contract_activation_count" : 0,
+            "current_provider_source_lock_contract_admission_count" : 0,
+            "current_provider_source_lock_contract_consumption_count" : 0,
+            "current_provider_source_lock_contract_execution_count" : 0,
+            "future_observation_check_count" : 29,
+            "future_observation_projection_exact_key_count" : 31,
+            "future_receipt_effect_exact_key_count" : 23,
+            "future_receipt_observation_exact_key_count" : 18,
+            "future_receipt_top_level_exact_key_count" : 10,
+            "future_terminal_branch_count" : 3,
+            "invalid_check_count" : 0,
+            "later_source_lock_selection_receipt_atomic_consumption_rule" : "EXACT1_ONLY_IF_LATER_PROVIDER_SOURCE_LOCK_ALL_EXACT12_ACTIVATION_CHECKS_TRUE_ELSE_EXACT0",
+            "observation_failure_reason_count" : 8,
+            "privacy_boundary_preserved" : true,
+            "private_catalogue_source_binding_exact_key_count" : 9,
+            "private_request_binding_exact_key_count" : 7,
+            "private_transport_policy_binding_exact_key_count" : 7,
+            "projected_record_exact_key_count" : 7,
+            "public_catalogue_descriptor_exact_key_count" : 8,
+            "schema_version" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_STATIC_DESIGN_PROJECTION_V1",
+            "selection_basis_enum_member_count" : 2,
+            "shared_derived_state_reuse_count" : 0,
+            "source_provider_contract_raw_sha256" : "20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479",
+            "source_provider_contract_receipt_consumption_count" : 1,
+            "source_provider_contract_receipt_observation_sha256" : "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+            "verdict" : "VALID"
+         },
+         "domain_free_projection_sha256" : "92232f44709023d4368268595f1014f20bbc86ab9bb7f6b40444cc4f627518e5",
+         "domain_specific_evidence_sha256" : "afb4785363460299cc156c7c756484a73797ed6c36f8d63994026feb02d10e25",
+         "execution_count" : 1,
+         "invalid_check_count" : 0,
+         "shared_derived_state_reuse_count" : 0,
+         "state_origin" : "FRESH_INDEPENDENT_STATIC_DESIGN_STATE",
+         "verdict" : "VALID"
+      },
+      "launcher_availability_route_position" : "ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE",
+      "owner_static_design_verification" : {
+         "domain_free_projection" : {
+            "activation_binding_check_count" : 12,
+            "automatic_progression" : false,
+            "candidate_rejection_reason_count" : 9,
+            "catalogue_parser_grammar_raw_sha256" : "29d9e454c63ac5bd5c1f9f165a1ea0484b3ab7c1f024c4db2a16d553a7fc9ad0",
+            "catalogue_projection_contract_raw_sha256" : "4c709ba3f3e1e8a1b99a5b08934e4c7e9256ccb668f116702f14437705c524db",
+            "catalogue_source_count_rule" : "EXACT1",
+            "check_vector" : {
+               "activation_gate_closed_exact12_atomic_prenetwork" : true,
+               "automatic_progression_false" : true,
+               "candidate_rejection_enum_closed_exact9" : true,
+               "canonical_stable_version_grammar_total" : true,
+               "catalogue_parser_scope_finite_and_deterministic" : true,
+               "catalogue_projection_and_parser_hashes_bound" : true,
+               "catalogue_source_count_exact1" : true,
+               "closed_version_token_kind_classification_total" : true,
+               "current_design_effects_exact0" : true,
+               "current_scope_design_only" : true,
+               "future_body_free_result_receipt_handoff_schema_total" : true,
+               "future_owner_and_independent_state_fresh_separate" : true,
+               "future_terminal_mapping_three_way_total_exclusive" : true,
+               "identical_duplicate_collapse_total" : true,
+               "later_source_lock_atomic_selection_receipt_consumption_total" : true,
+               "numeric_comparator_avoids_machine_integer_and_locale" : true,
+               "observation_failure_enum_closed_exact8" : true,
+               "privacy_boundary_preserved" : true,
+               "private_catalogue_source_binding_closed_exact9" : true,
+               "private_request_binding_closed_exact7" : true,
+               "private_transport_and_source_record_semantics_identity_domains_total" : true,
+               "private_transport_policy_binding_closed_exact7" : true,
+               "projected_record_closed_exact7" : true,
+               "public_catalogue_descriptor_closed_exact8" : true,
+               "rejection_precedence_and_reason_counts_total_exclusive" : true,
+               "same_version_conflict_invalidates_whole_observation" : true,
+               "selected_exact_version_identity_preimage_total" : true,
+               "selection_basis_enum_closed_exact2" : true,
+               "selection_requirement_identity_preimage_total" : true,
+               "source_provider_contract_immutable_no_weakening" : true,
+               "source_provider_contract_receipt_binding_exact" : true,
+               "source_record_canonicalization_lossless_total" : true
+            },
+            "contract_raw_sha256" : "5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2",
+            "current_design_forbidden_effect_occurrence_count" : 0,
+            "current_provider_contract_mutation_count" : 0,
+            "current_provider_source_lock_contract_activation_count" : 0,
+            "current_provider_source_lock_contract_admission_count" : 0,
+            "current_provider_source_lock_contract_consumption_count" : 0,
+            "current_provider_source_lock_contract_execution_count" : 0,
+            "future_observation_check_count" : 29,
+            "future_observation_projection_exact_key_count" : 31,
+            "future_receipt_effect_exact_key_count" : 23,
+            "future_receipt_observation_exact_key_count" : 18,
+            "future_receipt_top_level_exact_key_count" : 10,
+            "future_terminal_branch_count" : 3,
+            "invalid_check_count" : 0,
+            "later_source_lock_selection_receipt_atomic_consumption_rule" : "EXACT1_ONLY_IF_LATER_PROVIDER_SOURCE_LOCK_ALL_EXACT12_ACTIVATION_CHECKS_TRUE_ELSE_EXACT0",
+            "observation_failure_reason_count" : 8,
+            "privacy_boundary_preserved" : true,
+            "private_catalogue_source_binding_exact_key_count" : 9,
+            "private_request_binding_exact_key_count" : 7,
+            "private_transport_policy_binding_exact_key_count" : 7,
+            "projected_record_exact_key_count" : 7,
+            "public_catalogue_descriptor_exact_key_count" : 8,
+            "schema_version" : "COCOLON_NLS_V3_STEP11_GATE_B_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_STATIC_DESIGN_PROJECTION_V1",
+            "selection_basis_enum_member_count" : 2,
+            "shared_derived_state_reuse_count" : 0,
+            "source_provider_contract_raw_sha256" : "20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479",
+            "source_provider_contract_receipt_consumption_count" : 1,
+            "source_provider_contract_receipt_observation_sha256" : "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+            "verdict" : "VALID"
+         },
+         "domain_free_projection_sha256" : "92232f44709023d4368268595f1014f20bbc86ab9bb7f6b40444cc4f627518e5",
+         "domain_specific_evidence_sha256" : "0cf692fa39f5f53fdda3c3153a4547cac7ede8b38c82eabd255defbf36a8f48c",
+         "execution_count" : 1,
+         "invalid_check_count" : 0,
+         "shared_derived_state_reuse_count" : 0,
+         "state_origin" : "FRESH_OWNER_STATIC_DESIGN_STATE",
+         "verdict" : "VALID"
+      },
+      "position_consistency" : {
+         "change_basis" : "NEW_POLICY_GRAMMAR_ONLY_WITHOUT_CATALOGUE_PROVIDER_OR_RUNTIME_EVIDENCE",
+         "current_position" : "ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE_WITH_PROVIDER_AND_EXACT_VERSION_POLICY_CONTRACTS_BUT_NO_OBSERVATION",
+         "historical_correction" : false,
+         "prior_position" : "ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE_WITH_A_SEPARATE_DUAL_STATIC_VALID_FUTURE_OBSERVATION_CONTRACT",
+         "route_reselection_count" : 0
+      },
+      "repository_identity" : {
+         "authority_declared_cocolon_prewrite_base" : {
+            "commit_sha1" : "1a05a9371b1a0475a9e8a840e60c41d564900a38",
+            "tree_sha1" : "565386975bc65e2f767aac7566a42e694e3d2c71"
+         },
+         "classifier_prewrite_base" : {
+            "commit_sha1" : "4c0a984c3f82f7f4d7ee28e1ace82949ff9906ba",
+            "tree_sha1" : "6faac6eb2287bc323a108db17fa41904b29e30a8"
+         },
+         "contract_public_write_predecessor" : {
+            "commit_sha1" : "56bd42f7d55f4ff12f143778651186038dddcca1",
+            "tree_sha1" : "d6f7d4c8df6859bc3a7a58d9aae85b0fc87c8350"
+         },
+         "current_version_policy_prewrite_base" : {
+            "commit_sha1" : "ea6901d67033c26ba5ee968e437302357dc27d6c",
+            "tree_sha1" : "b91dee2c136c16b2bd7ccbb125fdf3b6c2cd15c7"
+         },
+         "mashos_api" : {
+            "commit_sha1" : "315813c7bd3372462de926ddad74df567254a6b5",
+            "tree_sha1" : "a641510e107d52bb910073f36604c85bd57af150"
+         },
+         "provider_contract_prewrite_base" : {
+            "commit_sha1" : "80494243cabdb27e7c7e44515ad043cca32f9645",
+            "tree_sha1" : "44d907c47a42f579750c2a233f6726affa5569a6"
+         },
+         "route_decision_prewrite_base" : {
+            "commit_sha1" : "01dd0f3eaf2b43323587c9043e7176f66f9f97a0",
+            "tree_sha1" : "bba6a3750259d7c60ff083856a8917e74f921718"
+         },
+         "source_verified_cocolon_preobservation_predecessor" : {
+            "commit_sha1" : "b99707f6f058e38793d142d13df493b67b506cd7",
+            "tree_sha1" : "811b3a3f393d3f813d99c2b2858be8ddb0a57572"
+         }
+      },
+      "runtime_ready" : false,
+      "source_provider_contract_identity" : {
+         "contract_canonical_byte_count" : 71903,
+         "contract_raw_sha256" : "20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479",
+         "immutable" : true,
+         "mutation_or_weakening_count" : 0
+      },
+      "source_provider_contract_receipt" : {
+         "blob_sha1" : "3384b2ce1dbb36417829350fab768eac8cc2b9d0",
+         "body_free" : true,
+         "consumption_count" : 1,
+         "logical_sha256" : "be518ceff3273772f9052149f8227a246cc7c00a79faec25e14869363abd1ddc",
+         "observation_sha256" : "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+         "raw_sha256" : "ff91904e320cbaa9e24f95362c3869af5bf92ed12c04f0bb27d38c8924aa48ad"
+      },
+      "terminal" : "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP",
+      "terminal_mapping" : {
+         "automatic_progression" : false,
+         "branch_count" : 3,
+         "branches" : [
+            "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_TYPED_DESIGN_INVALID_STOP",
+            "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_STATIC_DIVERGENCE_STOP",
+            "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP"
+         ],
+         "divergence_rule" : "BOTH_VALID_AND_DOMAIN_FREE_PROJECTION_HASHES_DIFFER",
+         "dual_static_valid_rule" : "BOTH_VALID_AND_DOMAIN_FREE_PROJECTION_HASHES_MATCH",
+         "exclusive" : true,
+         "invalid_rule" : "OWNER_OR_INDEPENDENT_VERDICT_INVALID",
+         "total" : true
+      }
+   },
+   "observation_sha256" : "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+   "observed_at_date" : "2026-08-02",
+   "receipt_id" : "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP_20260802",
+   "receipt_logical_sha256" : "0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a",
+   "receipt_self_hash_schema" : {
+      "canonicalization" : "UTF8_SORTED_COMPACT_JSON_NO_LF",
+      "digest" : "SHA256_LOWERCASE_HEX64",
+      "excluded_json_pointer" : "/receipt_logical_sha256"
+   },
+   "schema_version" : "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.static_verifier_launcher_exact_node_version_selection_policy_contract_v1.dual_static_valid_design_stop.receipt.v1"
+}

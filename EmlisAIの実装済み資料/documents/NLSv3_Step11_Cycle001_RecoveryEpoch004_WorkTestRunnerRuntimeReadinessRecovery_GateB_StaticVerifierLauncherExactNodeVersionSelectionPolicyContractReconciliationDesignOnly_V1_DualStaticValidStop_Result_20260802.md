@@ -1,0 +1,191 @@
+---
+doc_id: nls_v3_step11_cycle001_recovery_epoch004_gate_b_static_verifier_launcher_exact_node_version_selection_policy_contract_v1_dual_static_valid_design_stop_result
+title: "NLS v3 Step 11 Cycle001 Recovery Epoch004 Gate B exact Node version selection Policy Contract V1 dual-static-valid design stop Result"
+date: "2026-08-02"
+status: "POSTVERIFIED_CURRENT"
+body_free: true
+automatic_progression: false
+---
+
+# Gate B exact Node version selection Policy Contract V1 dual-static-valid design stop Result
+
+## Current terminal
+
+RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP
+
+Approved authority SHA-256
+99c0c1537fa40b6ab1b41f6337dae44ae7c6981cd40f84531535546dc49cc654 was activated exact1,
+consumed exact1 and closed. It consumed the current provider-metadata/source-lock Contract body-free
+Receipt exact1, preserved that Contract without mutation or weakening, created one publicable
+body-free Exact Node Version Selection Policy Contract V1 candidate, and stopped after fresh owner
+and independent static design verification both returned VALID.
+
+Runtime readiness remains false and Full R1 remains UNKNOWN_PRESERVED. The route position remains
+ENVIRONMENT_PROVIDER_BLOCKER_STOP at current declared public-evidence scope. This authority designed
+selection rules only. It did not reread the CI workflow, bind or observe a catalogue endpoint, use
+network, select a Node version, execute the provider source-lock Contract, acquire an artifact, or
+execute Node/runtime/pytest/target work.
+
+## Confirmed facts
+
+### Bound current evidence
+
+- Cocolon prewrite base: ea6901d67033c26ba5ee968e437302357dc27d6c / tree
+  b91dee2c136c16b2bd7ccbb125fdf3b6c2cd15c7.
+- mashos-api: 315813c7bd3372462de926ddad74df567254a6b5 / tree
+  a641510e107d52bb910073f36604c85bd57af150; changed-path count exact0.
+- Consumed provider Contract Receipt blob / raw / logical / observation:
+  3384b2ce1dbb36417829350fab768eac8cc2b9d0 /
+  ff91904e320cbaa9e24f95362c3869af5bf92ed12c04f0bb27d38c8924aa48ad /
+  be518ceff3273772f9052149f8227a246cc7c00a79faec25e14869363abd1ddc /
+  d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4.
+- Immutable provider-metadata/source-lock Contract raw / canonical bytes:
+  20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479 / 71903.
+- Existing public Provider Contract Result blob/raw
+  9e35d14771efd476cac4af7a4851c7f9a743eb12 /
+  921a3105196cfcb765f6e1e86d1cb609cf9e51603270b15c8464eeea0dd3ae37 records an iOS workflow
+  major-only `node-version: 18` hint. This authority did not reread that workflow. The hint remains
+  a major requirement only and is not an exact patch identity.
+
+### Policy Contract V1 closure
+
+Policy Contract V1 raw SHA-256 / canonical bytes / top-level keys:
+
+5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2 / 60028 / exact35
+
+The future selection requirement is a closed exact8 binding. Its basis enum is exact2:
+AUTHORITY_PREBOUND_EXACT_MAJOR_REQUIREMENT or AUTHORITY_PREBOUND_EXACT_MAJOR_MINOR_REQUIREMENT.
+Version components are ASCII canonical nonnegative decimal strings of at most 32 digits. Major-only
+requires JSON-null minor; major/minor requires both values. Neither form supplies a patch. No
+implicit zero, latest, LTS, tag, alias, range, wildcard, prerelease or build expansion is allowed.
+
+The future catalogue scope contains exactly one authority-prebound source. Its public descriptor is
+closed exact8; its private source binding is closed
+exact9. The private request is closed exact7 absolute HTTPS GET,
+no body, no credential/auth or variable header, and a positive bounded response limit. The private
+transport policy is closed exact7 and must resolve through an exact2 manifest entry before network.
+Redirect, pagination, template/catalogue expansion, mirror fallback, retry and second-read early
+stop are forbidden. Private endpoint, request/transport identities and raw body stay unpublished.
+
+The embedded catalogue projection and parser grammar raw hashes are:
+
+4c709ba3f3e1e8a1b99a5b08934e4c7e9256ccb668f116702f14437705c524db
+29d9e454c63ac5bd5c1f9f165a1ea0484b3ab7c1f024c4db2a16d553a7fc9ad0
+
+The closed exact8 lossless complete-source-record
+canonicalization Contract raw hash is bd21fd7fd529247d0a655d2ae5bb3d09e110398f153eeb7f1e69dde8055e0b54. It preserves every
+canonical JSON integer lexeme at arbitrary digit length within the response bound and forbids
+machine-number conversion before private semantics hashing and duplicate/conflict comparison.
+
+The parser consumes one immutable bounded UTF-8 JSON array, rejects duplicate object keys and uses
+fresh state per observer. Each projected record is closed exact7. Accepted versions are only
+lowercase `v` plus exactly three canonical decimal components with no prerelease/build metadata.
+Numeric order compares component digit length and then unsigned ASCII bytes; it never converts to a
+machine integer, uses locale ordering or compares the whole version lexically.
+
+Token-kind classification is closed exact4, first-true, total and exclusive. A closed exact6
+selector grammar separates range/tag/alias/wildcard forms; a closed ASCII prerelease/build suffix
+grammar separates those forms; the canonical core grammar and an OTHER_INVALID catch-all close the
+remaining branches before rejection precedence is applied.
+
+Candidate rejection is closed exact9 in first-true total/exclusive
+precedence. Every reason-count key, including zero, is present and their sum equals rejected total.
+Canonical byte-identical duplicate records collapse to the first occurrence and increment a
+separate alias count. Any nonidentical record sharing the same matching exact version forms an
+ambiguous conflict, invalidates the whole observation and forbids fallback to a lower version. If
+no conflict remains, selection returns the single numeric maximum or none.
+
+The future activation gate is closed exact12. Any false check leaves
+the Policy Receipt unconsumed and network exact0. All true atomically commits the staged binding
+and consumes the Policy Receipt exact1 before exactly one request. Owner and independent observers
+share only the immutable capture; parsing, duplicate maps, conflict groups, filtering, comparison,
+reason counts and identity derivation are fresh and separate.
+
+The future projection/check vector is closed
+exact31/exact29. The future Receipt
+top-level/observation/effects shapes are
+exact10/exact18/
+exact23. Pre-capture failures at closed precedence ranks
+1, 2, 3 and 8 are retained in a controller-level closed exact4 typed record while both observer
+wrappers are null; parser/projection failures at ranks 4 through 7 remain in each present fresh
+observer projection. Capture counts, effects and the selected terminal are equality-bound. Its three
+total and exclusive terminals are invalid
+or no design-valid exact version, divergence, and dual-match exact version selected. Every branch
+stops and keeps the provider source-lock Contract unexecuted.
+
+A dual-match selection Receipt is created CLOSED_UNCONSUMED. A separately approved later provider
+source-lock observation must bind this Policy raw hash and selection Receipt observation. Only its
+existing all-exact12-valid pre-network gate may atomically consume the selection Receipt exact1;
+any invalid check leaves consumption and source-lock network exact0.
+
+### Current dual-static result
+
+- Owner / independent projection schema: exact36; check vector:
+  closed exact32, all true.
+- Owner / independent projection SHA-256: 92232f44709023d4368268595f1014f20bbc86ab9bb7f6b40444cc4f627518e5 / 92232f44709023d4368268595f1014f20bbc86ab9bb7f6b40444cc4f627518e5.
+- Owner evidence SHA-256: 0cf692fa39f5f53fdda3c3153a4547cac7ede8b38c82eabd255defbf36a8f48c.
+- Independent evidence SHA-256: afb4785363460299cc156c7c756484a73797ed6c36f8d63994026feb02d10e25.
+- Comparison / match / shared-derived-state reuse: exact1 / true / exact0.
+- Current terminal mapping is typed design invalid, static divergence, or dual-static-valid design
+  stop; total and exclusive.
+
+### Zero-effect and historical preservation
+
+All 51 current effects are exact0. This includes current CI workflow read; catalogue observation;
+network; exact-version selection; provider source-lock Contract execution, activation, admission or
+consumption; artifact work; Node/version/engine; verifier/helper; Gate B/runtime/pytest; target
+authority/execution; and private value/body/detail publication.
+
+Cocolon production source, published RED, existing D1 and mashos-api changes are exact0. Prior
+discovery, classifier, route decision, provider Contract, Observer V1/V2 and Full R1 evidence remain
+immutable and noncredit. No provider reachability, catalogue content, exact patch availability,
+launcher availability or runtime readiness claim is made.
+
+## Basis and necessity
+
+The provider source-lock Contract requires an exact-version Policy raw hash and a dual-match exact
+version Receipt before its activation gate can be valid. The current public CI evidence fixes only a
+major requirement. Selecting a patch without a bounded catalogue grammar would fabricate launcher
+identity; reading a catalogue without finite source, transport, parser, conflict and privacy rules
+would make the result non-reproducible. This unit was therefore necessary to close those rules
+without crossing into observation or runtime effects.
+
+## Inference
+
+A later bounded catalogue observation may select one design-valid exact Node version. This Contract
+does not establish that the source can be bound or reached, that its response is valid, that a
+matching v18 release exists, or that any later artifact will be available or executable.
+
+## Karen's opinion
+
+The design is safe to close as VALID. The important choice is to treat a same-version semantic
+conflict as an invalid observation rather than falling back to a lower patch; that prevents an
+ambiguous high record from silently changing the selected launcher. Separating the Policy Receipt,
+the later selection Receipt and the still-later provider source lock also keeps each approval from
+secretly performing the next stage.
+
+## Body-free Receipt identities
+
+- Receipt blob SHA-1: 2f5eace6de56699519319600d90f12407b6c4e83
+- Receipt raw SHA-256: 437b319f395f4bb57c0c61a90c3ff234c27ad8936408886b138fd4d9ec5c02fc
+- Receipt logical SHA-256: 0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a
+- Terminal observation SHA-256: 618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d
+
+## Exactly one next authority
+
+The next unit is a distinct, bounded catalogue observation. It consumes this Policy Contract
+Receipt exact1 only if its exact12 staged binding is valid. It prebinds the already-established
+major-18 requirement, one public Node release-catalogue source, one private absolute-HTTPS request,
+response limit, transport trust and the embedded parser/projection identities before network. A
+binding-invalid branch stops pre-network. Otherwise one capture is independently parsed and
+classified twice. It does not execute the provider source-lock Contract, acquire an artifact or run
+Node/runtime work.
+
+Mash様に必要な作業は下記tokenの明示承認だけです。catalogue URI、credential、artifact body
+またはruntime操作の提示は求めません。
+
+Token SHA-256:
+
+bb25f10fb1c96a4985e646b9b669efb7d20aaaa1224323efb69d80f049674f04
+
+NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP_POSTVERIFIED_OBSERVATION_SHA256_618E4A9B30626C5768E40DA339B04B41414618967C5D930D87D7928CC2DCB46D_CURRENT_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_AUTHORITY_SHA256_99C0C1537FA40B6AB1B41F6337DAE44AE7C6981CD40F84531535546DC49CC654_ACTIVATED_EXACT1_CLOSED_CONSUMED_DUAL_STATIC_VALID_DESIGN_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_SOURCE_LAUNCHER_IDENTITY_DISCOVERY_OBSERVATION_SHA256_DD10E06F0F1F0DB799B3D7DE098401AC6AF2B146F64D1E5836FC432DC17EA82A_SOURCE_CLASSIFIER_OBSERVATION_SHA256_9C7E0601751D81387720E963BBB07B0CD69CFAA17946722EC7AB82530957B606_SOURCE_ROUTE_DECISION_OBSERVATION_SHA256_1A1D3A9DE6D0CB2B0AD29D5DD8BF3AABFE7C388D6A77FDCF03E2040F2566A73A_SOURCE_PROVIDER_METADATA_CONTRACT_OBSERVATION_SHA256_D47D894A5BA551F10D983D4A3064BAF25E6FBDEC817FFD615E3899EE73D39AF4_IMMUTABLE_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_ROUTE_RESELECTION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREWRITE_BASE_1A05A937_TREE_56538697_SOURCE_VERIFIED_COCOLON_PREOBSERVATION_PREDECESSOR_B99707F6_TREE_811B3A3F_CONTRACT_PUBLIC_WRITE_PREDECESSOR_56BD42F7_TREE_D6F7D4C8_CLASSIFIER_PREWRITE_BASE_4C0A984C_TREE_6FAAC6EB_ROUTE_DECISION_PREWRITE_BASE_01DD0F3E_TREE_BBA6A375_PROVIDER_CONTRACT_PREWRITE_BASE_80494243_TREE_44D907C4_CURRENT_VERSION_POLICY_PREWRITE_BASE_EA6901D6_TREE_B91DEE2C_MASHOS_API_315813C7_TREE_A641510E_CURRENT_BODY_FREE_PROVIDER_CONTRACT_RECEIPT_CONSUMPTION_EXACT1_BLOB_3384B2CE_RAW_FF91904E_LOGICAL_BE518CEF_OBSERVATION_D47D894A_PROVIDER_METADATA_SOURCE_LOCK_CONTRACT_V1_IMMUTABLE_NO_WEAKENING_EXACT1_RAW_20226CB7ABC00D7B4BA7A25C53D01B070DF6FE5CF31C5BEC9B9FD7D321B5E479_CANONICAL_BYTES_71903_PUBLICABLE_BODY_FREE_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_CREATED_EXACT1_RAW_5333E2EFCA9890C545B28EF76439693C0898F7FADA886E235D550FE0BE90AEB2_CANONICAL_BYTES_60028_CONTRACT_TOP_LEVEL_EXACT35_SELECTION_BASIS_SOURCE_ENUM_EXACT2_AUTHORITY_PREBOUND_EXACT_MAJOR_REQUIREMENT_AUTHORITY_PREBOUND_EXACT_MAJOR_MINOR_REQUIREMENT_FUTURE_REQUIREMENT_BINDING_CLOSED_EXACT8_CI_HINT_REQUIREMENT_ONLY_NO_PATCH_IMPLICATION_FUTURE_CATALOGUE_SOURCE_COUNT_EXACT1_PUBLIC_DESCRIPTOR_EXACT8_PRIVATE_BINDING_EXACT9_PRIVATE_ABSOLUTE_HTTPS_GET_NO_AUTH_REQUEST_EXACT7_TRANSPORT_POLICY_EXACT7_PRENETWORK_ATOMIC_BINDING_PRIVATE_TRANSPORT_AND_SOURCE_RECORD_SELECTION_SEMANTICS_LITERAL_IDENTITY_DOMAINS_TRUE_NUL_CANONICAL_PREIMAGES_AND_SHA256_DIGESTS_BOUND_EXACT1_CATALOGUE_PROJECTION_CONTRACT_RAW_4C709BA3F3E1E8A1B99A5B08934E4C7E9256CCB668F116702F14437705C524DB_PARSER_GRAMMAR_RAW_29D9E454C63AC5BD5C1F9F165A1EA0484B3AB7C1F024C4DB2A16D553A7FC9AD0_SOURCE_RECORD_CANONICALIZATION_CONTRACT_RAW_BD21FD7FD529247D0A655D2AE5BB3D09E110398F153EEB7F1E69DDE8055E0B54_CLOSED_EXACT8_LOSSLESS_INTEGER_LEXEME_NO_MACHINE_NUMBER_CONVERSION_PROJECTED_RECORD_CLOSED_EXACT7_CANONICAL_LOWERCASE_V_MAJOR_MINOR_PATCH_STABLE_ONLY_VERSION_TOKEN_KIND_CLASSIFICATION_CLOSED_EXACT4_SELECTOR_FORMS_CLOSED_EXACT6_PRERELEASE_BUILD_SUFFIX_CANONICAL_CORE_AND_OTHER_INVALID_FIRST_TRUE_TOTAL_EXCLUSIVE_DECIMAL_COMPONENT_MAX32DIGIT_NUMERIC_LENGTH_THEN_ASCII_COMPARISON_NO_MACHINE_INTEGER_OR_LOCALE_OBSERVATION_FAILURE_ENUM_CLOSED_EXACT8_CANDIDATE_REJECTION_ENUM_CLOSED_EXACT9_FIRST_TRUE_TOTAL_EXCLUSIVE_IDENTICAL_DUPLICATE_FIRST_OCCURRENCE_ALIAS_COLLAPSE_AND_SAME_VERSION_DIFFERENT_SEMANTICS_WHOLE_OBSERVATION_AMBIGUOUS_INVALID_NO_LOWER_FALLBACK_SELECTION_FILTER_EXACT_MAJOR_OR_MAJOR_MINOR_THEN_NUMERIC_MAJOR_MINOR_PATCH_DESCENDING_HIGHEST_EXACT1_OR_NONE_FUTURE_ACTIVATION_GATE_CLOSED_EXACT12_ALL_TRUE_POLICY_RECEIPT_CONSUMPTION_EXACT1_PRENETWORK_OTHERWISE_EXACT0_NETWORK_EXACT0_FUTURE_OBSERVATION_PROJECTION_CLOSED_EXACT31_CHECK_VECTOR_CLOSED_EXACT29_FUTURE_BODY_FREE_RECEIPT_TOP_LEVEL_EXACT10_OBSERVATION_EXACT18_EFFECTS_EXACT23_CONTROLLER_PRECAPTURE_TYPED_FAILURE_RECORD_CLOSED_EXACT4_RANKS1_2_3_8_WITH_NULL_OBSERVER_WRAPPERS_AND_OBSERVER_FAILURE_RANKS4_5_6_7_ONLY_WITH_RESPONSE_CAPTURE_EXACT1_TOTAL_FUTURE_INVALID_NO_DESIGN_VALID_EXACT_VERSION_DIVERGENCE_DUAL_MATCH_EXACT_VERSION_SELECTED_THREE_WAY_TERMINAL_TOTAL_EXCLUSIVE_FUTURE_SELECTION_RECEIPT_CLOSED_UNCONSUMED_AND_LATER_PROVIDER_SOURCE_LOCK_ALL_EXACT12_VALID_ATOMIC_CONSUMPTION_EXACT1_OTHERWISE_EXACT0_CURRENT_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_PROJECTION_EXACT36_CHECK_VECTOR_EXACT32_ALL_TRUE_PROJECTION_SHA256_92232F44709023D4368268595F1014F20BBC86AB9BB7F6B40444CC4F627518E5_EVIDENCE_SHA256_0CF692FA39F5F53FDDA3C3153A4547CAC7EDE8B38C82EABD255DEFBF36A8F48C_CURRENT_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_PROJECTION_EXACT36_CHECK_VECTOR_EXACT32_ALL_TRUE_PROJECTION_SHA256_92232F44709023D4368268595F1014F20BBC86AB9BB7F6B40444CC4F627518E5_EVIDENCE_SHA256_AFB4785363460299CC156C7C756484A73797ED6C36F8D63994026FEB02D10E25_OWNER_INDEPENDENT_PROJECTION_MATCH_EXACT1_STATE_REUSE_EXACT0_STATIC_INVALID_DIVERGENCE_DUAL_STATIC_VALID_THREE_WAY_TERMINAL_TOTAL_EXCLUSIVE_CURRENT_TERMINAL_RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_POLICY_CONTRACT_V1_DUAL_STATIC_VALID_DESIGN_STOP_LAUNCHER_AVAILABILITY_ROUTE_POSITION_ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE_PRESERVED_EXACT1_CURRENT_CI_WORKFLOW_READ_CATALOGUE_OBSERVATION_NETWORK_EXACT_VERSION_SELECTION_PROVIDER_SOURCE_LOCK_CONTRACT_EXECUTION_ACTIVATION_ADMISSION_CONSUMPTION_ARTIFACT_NODE_RUNTIME_PYTEST_TARGET_EXECUTION_EXACT0_PRIVATE_CATALOGUE_URI_ENDPOINT_HASH_REQUEST_TRANSPORT_CREDENTIAL_TOKEN_RAW_BODY_SOURCE_RECORD_SEMANTICS_HASH_OR_REJECTION_DETAIL_PUBLICATION_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_CONTRACT_V1_BOUND_FRESH_EXACT_NODE_VERSION_SELECTION_CATALOGUE_OBSERVATION_AUTHORITY_POLICY_CONTRACT_RECEIPT_INITIAL_STATE_CLOSED_UNCONSUMED_CONSUMPTION_EXACT0_UNTIL_ALL_EXACT12_TRUE_THEN_ATOMIC_EXACT1_OTHERWISE_EXACT0_CURRENT_POLICY_RAW_5333E2EFCA9890C545B28EF76439693C0898F7FADA886E235D550FE0BE90AEB2_AND_OBSERVATION_618E4A9B30626C5768E40DA339B04B41414618967C5D930D87D7928CC2DCB46D_BINDING_EXACT1_IMMUTABLE_NO_WEAKENING_EXACT1_SELECTION_REQUIREMENT_AUTHORITY_PREBOUND_EXACT_MAJOR_VALUE18_EXACT1_SOURCE_EXISTING_PUBLIC_PROVIDER_CONTRACT_RESULT_BLOB_9E35D14771EFD476CAC4AF7A4851C7F9A743EB12_RAW_921A3105196CFCB765F6E1E86D1CB609CF9E51603270B15C8464EEEA0DD3AE37_CURRENT_WORKFLOW_REREAD_EXACT0_PUBLIC_CATALOGUE_SOURCE_PROVIDER_ID_NODEJS_OFFICIAL_LOGICAL_SOURCE_ID_NODE_RELEASE_INDEX_V1_COUNT_EXACT1_PRIVATE_REQUEST_RESPONSE_LIMIT_TRANSPORT_TRUST_AND_INTERFACE_BINDING_AT_ACTIVATION_PRENETWORK_EXACT1_OR_TYPED_BINDING_INVALID_PRENETWORK_STOP_OWNER_AND_INDEPENDENT_SHARE_ONE_IMMUTABLE_CAPTURE_ONLY_WITH_FRESH_PARSE_DEDUP_CONFLICT_FILTER_NUMERIC_MAX_REASON_AND_IDENTITY_STATE_NO_REUSE_EXACT1_CONTROLLER_CATALOGUE_CAPTURE_SEQUENCE_NETWORK_REQUEST_AND_RESPONSE_CAPTURE_COUNT_EACH_ZERO_OR_ONE_TOTAL_RAW_PRIVATE_BINDING_URI_TRANSPORT_BODY_RECORD_OR_REJECTION_DETAIL_PUBLICATION_EXACT0_PROVIDER_METADATA_SOURCE_LOCK_CONTRACT_EXECUTION_ACTIVATION_ADMISSION_CONSUMPTION_EXACT0_EXACT0_EXACT0_EXACT0_ARTIFACT_ACQUISITION_DOWNLOAD_STAGING_MATERIALIZATION_INSTALLATION_HASH_SIGNATURE_NODE_VERSION_ENGINE_VERIFIER_HELPER_GATE_B_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_EXACT0_BODY_FREE_EXACT_VERSION_SELECTION_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_PROVIDER_SOURCE_LOCK_OBSERVATION_ARTIFACT_ACQUISITION_RUNTIME_OR_AUTOMATIC_PROGRESSION
