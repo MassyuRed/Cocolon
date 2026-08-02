@@ -1,0 +1,140 @@
+{
+   "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.recovery_epoch004.gate_b.static_verifier_launcher_exact_node_version_selection_observation.activation_binding_invalid.receipt.v1",
+   "receipt_id": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_ACTIVATION_BINDING_INVALID_20260802",
+   "body_free": true,
+   "observed_at_date": "2026-08-02",
+   "observation": {
+      "authority": {
+         "token_sha256": "bb25f10fb1c96a4985e646b9b669efb7d20aaaa1224323efb69d80f049674f04",
+         "token_recomputation_match": true,
+         "activation_count": 1,
+         "consumption_count": 1,
+         "state": "CLOSED_CONSUMED_RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP"
+      },
+      "source_contracts": {
+         "selection_policy_contract_raw_sha256": "5333e2efca9890c545b28ef76439693c0898f7fada886e235d550fe0be90aeb2",
+         "selection_policy_contract_receipt_blob_sha1": "2f5eace6de56699519319600d90f12407b6c4e83",
+         "selection_policy_contract_receipt_raw_sha256": "437b319f395f4bb57c0c61a90c3ff234c27ad8936408886b138fd4d9ec5c02fc",
+         "selection_policy_contract_receipt_logical_sha256": "0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a",
+         "selection_policy_contract_receipt_observation_sha256": "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+         "selection_policy_contract_receipt_consumption_count": 0,
+         "provider_metadata_source_lock_contract_raw_sha256": "20226cb7abc00d7b4ba7a25c53d01b070df6fe5cf31c5bec9b9fd7d321b5e479",
+         "provider_metadata_source_lock_contract_receipt_observation_sha256": "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4",
+         "source_contracts_immutable": true,
+         "source_contract_mutation_count": 0
+      },
+      "selection_requirement": {
+         "basis_source": null,
+         "required_major_decimal": null,
+         "required_minor_decimal_or_null": null,
+         "selection_requirement_identity_sha256": null
+      },
+      "catalogue_source_public_binding": {
+         "source_count": 0,
+         "source_provider_id_or_null": null,
+         "logical_catalogue_source_id_or_null": null,
+         "catalogue_public_source_binding_sha256_or_null": null
+      },
+      "activation_gate": {
+         "execution_count": 1,
+         "check_vector": {
+            "policy_contract_receipt_binding_exact": false,
+            "source_provider_metadata_contract_identity_exact_and_immutable": true,
+            "route_position_and_historical_state_preserved": true,
+            "selection_requirement_closed_exact8_semantically_valid": false,
+            "catalogue_source_count_exact1_and_public_descriptor_closed_exact8": false,
+            "public_private_source_identity_mapping_and_private_binding_closed_exact9": true,
+            "private_request_closed_exact7_absolute_https_get_no_auth_bounded": true,
+            "private_transport_closed_exact7_and_manifest_resolution_valid": true,
+            "projection_and_parser_interface_hashes_exact": true,
+            "endpoint_scope_nonrecursive_bounded_no_redirect_retry_pagination_template_mirror_or_expansion": true,
+            "canonical_identity_domains_and_privacy_boundary_bound": false,
+            "no_unknown_extra_late_mutation_or_unbound_authority_field": false
+         },
+         "verdict": "INVALID",
+         "invalid_check_count": 5,
+         "policy_contract_receipt_consumption_count": 0,
+         "network_admitted": false,
+         "typed_binding_invalid_reason_or_null": "policy_contract_receipt_binding_exact"
+      },
+      "controller_capture_effects": {
+         "catalogue_capture_sequence_count": 0,
+         "catalogue_network_request_count": 0,
+         "catalogue_response_capture_count": 0
+      },
+      "controller_observation_failure": {
+         "failure_count": 1,
+         "reason_or_null": "ACTIVATION_BINDING_INVALID",
+         "precedence_rank_or_null": 1,
+         "raw_detail_publication_count": 0
+      },
+      "owner_observation": null,
+      "independent_observation": null,
+      "comparison": {
+         "owner_independent_projection_comparison_count": 0,
+         "owner_projection_sha256": null,
+         "independent_projection_sha256": null,
+         "match": null,
+         "state_reuse_count": 0
+      },
+      "terminal_mapping": {
+         "branch_count": 3,
+         "selected_branch": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP",
+         "total": true,
+         "exclusive": true
+      },
+      "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP",
+      "launcher_availability_route_position": "ENVIRONMENT_PROVIDER_BLOCKER_STOP_AT_CURRENT_DECLARED_PUBLIC_EVIDENCE_SCOPE",
+      "runtime_ready": false,
+      "full_r1_result": "UNKNOWN_PRESERVED",
+      "historical_preservation": {
+         "prior_observer_v1": "CLOSED_CONSUMED_NONCREDIT_IMMUTABLE",
+         "prior_observer_v2_execution_authority": "CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_IMMUTABLE",
+         "source_launcher_identity_discovery_observation_sha256": "dd10e06f0f1f0db799b3d7de098401ac6af2b146f64d1e5836fc432dc17ea82a",
+         "source_classifier_observation_sha256": "9c7e0601751d81387720e963bbb07b0cd69cfaa17946722ec7ab82530957b606",
+         "source_route_decision_observation_sha256": "1a1d3a9de6d0cb2b0ad29d5dd8bf3aabfe7c388d6a77fdcf03e2040f2566a73a",
+         "source_provider_contract_observation_sha256": "d47d894a5ba551f10d983d4a3064baf25e6fbdec817ffd615e3899ee73d39af4"
+      },
+      "effects": {
+         "activation_binding_gate_execution_count": 1,
+         "policy_contract_receipt_consumption_count": 0,
+         "catalogue_capture_sequence_count": 0,
+         "catalogue_network_request_count": 0,
+         "catalogue_response_capture_count": 0,
+         "owner_catalogue_projection_invocation_count": 0,
+         "independent_catalogue_projection_invocation_count": 0,
+         "owner_candidate_classification_count": 0,
+         "independent_candidate_classification_count": 0,
+         "owner_exact_version_selection_count": 0,
+         "independent_exact_version_selection_count": 0,
+         "provider_source_lock_contract_execution_count": 0,
+         "provider_source_lock_contract_activation_count": 0,
+         "provider_source_lock_contract_admission_count": 0,
+         "provider_source_lock_contract_consumption_count": 0,
+         "artifact_acquisition_count": 0,
+         "node_execution_count": 0,
+         "future_forbidden_effect_occurrence_count": 0,
+         "private_value_publication_count": 0,
+         "cocolon_production_source_change_count": 0,
+         "published_red_change_count": 0,
+         "existing_d1_change_count": 0,
+         "mashos_api_change_count": 0
+      },
+      "automatic_progression": false
+   },
+   "observation_sha256": "9e3ff18c24de9c1cd20bbe7e9aded8aa3f83dbcf560fcd1e082de2b767cde508",
+   "receipt_logical_sha256": "8db9ee21bf8ff02525c9f555a1d515ec9799f6b5c06edb1affb611d7985b4b5d",
+   "receipt_self_hash_schema": {
+      "canonicalization": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+      "excluded_json_pointer": "/receipt_logical_sha256",
+      "digest": "SHA256_LOWERCASE_HEX64"
+   },
+   "automatic_progression": false,
+   "next_authority": {
+      "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_EXACT_NODE_VERSION_SELECTION_OBSERVATION_ACTIVATION_BINDING_INVALID_POSTVERIFIED_OBSERVATION_SHA256_9E3FF18C24DE9C1CD20BBE7E9ADED8AA3F83DBCF560FCD1E082DE2B767CDE508_CURRENT_CATALOGUE_OBSERVATION_AUTHORITY_SHA256_BB25F10FB1C96A4985E646B9B669EFB7D20AAAA1224323EFB69D80F049674F04_ACTIVATED_EXACT1_CLOSED_CONSUMED_ACTIVATION_BINDING_INVALID_STOP_FULL_R1_RESULT_UNKNOWN_PRESERVED_PRIOR_OBSERVER_V1_CLOSED_CONSUMED_NONCREDIT_IMMUTABLE_PRIOR_OBSERVER_V2_EXECUTION_AUTHORITY_CLOSED_UNCONSUMED_PRELAUNCH_NONCREDIT_SOURCE_LAUNCHER_IDENTITY_DISCOVERY_OBSERVATION_SHA256_DD10E06F0F1F0DB799B3D7DE098401AC6AF2B146F64D1E5836FC432DC17EA82A_SOURCE_CLASSIFIER_OBSERVATION_SHA256_9C7E0601751D81387720E963BBB07B0CD69CFAA17946722EC7AB82530957B606_SOURCE_ROUTE_DECISION_OBSERVATION_SHA256_1A1D3A9DE6D0CB2B0AD29D5DD8BF3AABFE7C388D6A77FDCF03E2040F2566A73A_SOURCE_PROVIDER_METADATA_CONTRACT_OBSERVATION_SHA256_D47D894A5BA551F10D983D4A3064BAF25E6FBDEC817FFD615E3899EE73D39AF4_SOURCE_EXACT_NODE_VERSION_SELECTION_POLICY_OBSERVATION_SHA256_618E4A9B30626C5768E40DA339B04B41414618967C5D930D87D7928CC2DCB46D_IMMUTABLE_NONCREDIT_NO_RETROACTIVE_REPARSE_RECLASSIFICATION_ROUTE_RESELECTION_GATE_REEVALUATION_OR_CREDIT_AUTHORITY_DECLARED_COCOLON_PREWRITE_BASE_1A05A937_TREE_56538697_SOURCE_VERIFIED_COCOLON_PREOBSERVATION_PREDECESSOR_B99707F6_TREE_811B3A3F_CONTRACT_PUBLIC_WRITE_PREDECESSOR_56BD42F7_TREE_D6F7D4C8_CLASSIFIER_PREWRITE_BASE_4C0A984C_TREE_6FAAC6EB_ROUTE_DECISION_PREWRITE_BASE_01DD0F3E_TREE_BBA6A375_PROVIDER_CONTRACT_PREWRITE_BASE_80494243_TREE_44D907C4_VERSION_POLICY_PREWRITE_BASE_EA6901D6_TREE_B91DEE2C_CURRENT_CATALOGUE_OBSERVATION_PREWRITE_BASE_EE540611_TREE_9806B6F0_MASHOS_API_315813C7_TREE_A641510E_CURRENT_POLICY_RECEIPT_RAW_437B319F395F4BB57C0C61A90C3FF234C27AD8936408886B138FD4D9EC5C02FC_LOGICAL_0F0B30AE139D4EA1A4373F105679D680A246713E42695FD882138189E37D771A_OBSERVATION_618E4A9B30626C5768E40DA339B04B41414618967C5D930D87D7928CC2DCB46D_REMAINS_CLOSED_UNCONSUMED_IMMUTABLE_CONSUMPTION_EXACT0_ACTIVATION_GATE_EXECUTION_EXACT1_CHECK_VECTOR_CLOSED_EXACT12_FALSE_EXACT5_FIRST_FALSE_POLICY_CONTRACT_RECEIPT_BINDING_EXACT_VERDICT_INVALID_NETWORK_ADMITTED_FALSE_CONTROLLER_FAILURE_ACTIVATION_BINDING_INVALID_PRECEDENCE_RANK1_EXACT1_OWNER_AND_INDEPENDENT_WRAPPER_NULL_EXACT1_EXACT1_COMPARISON_EXACT0_STATE_REUSE_EXACT0_SELECTION_REQUIREMENT_PUBLIC_EVIDENCE_NULL_EXACT1_CATALOGUE_SOURCE_PUBLIC_EVIDENCE_COUNT0_AND_NULL_EXACT1_CATALOGUE_CAPTURE_SEQUENCE_NETWORK_REQUEST_RESPONSE_CAPTURE_OWNER_INDEPENDENT_PROJECTION_CLASSIFICATION_AND_SELECTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PROVIDER_SOURCE_LOCK_EXECUTION_ACTIVATION_ADMISSION_CONSUMPTION_ARTIFACT_AND_NODE_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PRIVATE_VALUE_PUBLICATION_AND_FUTURE_FORBIDDEN_EFFECT_OCCURRENCE_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_NO_GLOBAL_NODE_SOURCE_OR_PROVIDER_ABSENCE_REACHABILITY_PERMANENT_INCAPABILITY_OR_FUTURE_IMPOSSIBILITY_CLAIM_EXACT1_DISTINCT_STATIC_VERIFIER_EXACT_NODE_VERSION_SELECTION_ACTIVATION_BINDING_EVALUATOR_RECONCILIATION_CONTRACT_V1_RECONCILIATION_DESIGN_ONLY_AUTHORITY_CURRENT_BODY_FREE_INVALID_OBSERVATION_RECEIPT_CONSUMPTION_EXACT1_POLICY_RECEIPT_CONSUMPTION_EXACT0_AND_IMMUTABLE_NO_WEAKENING_EXACT1_PUBLICABLE_BODY_FREE_ACTIVATION_BINDING_EVALUATOR_RECONCILIATION_CONTRACT_V1_CANDIDATE_CREATION_EXACT1_EVALUATOR_INPUT_SCHEMA_CLOSED_AND_AUTHORITY_PREBOUND_EXACT1_CANONICAL_JSON_UTF8_SORTED_COMPACT_NO_LF_BYTE_DERIVATION_EXACT1_OBSERVATION_AND_RECEIPT_LOGICAL_HASH_PREIMAGE_NO_TRAILING_LF_EXACT1_PUBLIC_SOURCE_BINDING_DOMAIN_LITERAL_EXACT_COCOLON_NLS_V3_STEP11_GATE_B_NODE_VERSION_CATALOGUE_SOURCE_PUBLIC_BINDING_V1_WITH_TRUE_NUL_EXACT1_REQUIREMENT_REQUEST_TRANSPORT_SELECTED_IDENTITY_AND_EVIDENCE_DOMAIN_LITERALS_BYTE_EXACT_WITH_TRUE_NUL_EXACT1_ACTIVATION_CHECKS_CLOSED_EXACT12_SEMANTICALLY_INDEPENDENT_NO_UPSTREAM_BOOLEAN_FANOUT_EXACT1_FIRST_FALSE_INVALID_COUNT_AND_TYPED_REASON_DERIVATION_TOTAL_EXCLUSIVE_EXACT1_POLICY_RECEIPT_CONSUMPTION_AND_NETWORK_ATOMIC_ALL_TRUE_ONLY_EXACT1_PRIOR_FAILED_GATE_NO_REEVALUATION_RETRY_REBINDING_RECLASSIFICATION_OR_CREDIT_EXACT1_FUTURE_FRESH_OBSERVATION_REQUIRES_DISTINCT_SEPARATE_EXECUTION_AUTHORITY_EXACT1_OWNER_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_INDEPENDENT_STATIC_DESIGN_VERIFICATION_EXACT1_VALID_OR_TYPED_DESIGN_BLOCKER_STOP_OWNER_INDEPENDENT_DOMAIN_FREE_PROJECTION_COMPARISON_EXACT1_STATE_REUSE_EXACT0_CURRENT_PATH_SNAPSHOT_CATALOGUE_NETWORK_RESPONSE_CAPTURE_PARSE_CLASSIFICATION_SELECTION_PROVIDER_SOURCE_LOCK_ARTIFACT_NODE_RUNTIME_PYTEST_TARGET_AUTHORITY_OR_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_PRIVATE_PATH_URI_ENDPOINT_REQUEST_TRANSPORT_CREDENTIAL_TOKEN_RAW_BODY_RECORD_SEMANTICS_HASH_OR_REJECTION_DETAIL_PUBLICATION_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_RECONCILIATION_CONTRACT_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_GATE_REEXECUTION_NETWORK_CATALOGUE_PROVIDER_SOURCE_LOCK_ARTIFACT_RUNTIME_OR_AUTOMATIC_PROGRESSION",
+      "token_sha256": "df3e10855f805fa9fca59cbd72850e0486a6c95ca672aa13ea6d737ee8500a8e",
+      "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+      "separate_explicit_mash_approval_required": true,
+      "automatic_transition": false
+   }
+}
