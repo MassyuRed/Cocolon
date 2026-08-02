@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-08-01",
+  "revision_date": "2026-08-02",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -9,9 +9,11 @@
   "authority_resolution": {
     "Cocolon_ref": "MassyuRed/Cocolon:main",
     "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
-    "mashos-api": "MassyuRed/mashos-api:main@05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
-    "verified_at": "2026-08-01 JST",
-    "current_authority": "07_latest_snapshot_diff.md + 11_cocolon_github_transport_and_session_continuity.md CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13_cocolon_work_test_runner_runtime_continuity.md CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime"
+    "Cocolon_full_audit_prewrite": "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
+    "Cocolon_postwrite": "resolve_from_github_revision_containing_the_2026_08_02_full_premise_audit_checkpoint",
+    "mashos-api": "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5",
+    "verified_at": "2026-08-02 JST",
+    "current_authority": "last complete EOF latest/current section of 07_latest_snapshot_diff.md + tracked ExecutionAndClosurePlan + 11 CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13 CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime"
   },
   "update_policy": {
     "current_authority": "after_each_completed_github_reflection_and_post_write_verification",
@@ -20,9 +22,10 @@
     "zip_delivery": "only_when_github_reflection_fails; changed_and_new_files_only"
   },
   "last_full_audit_source_policy": {
-    "Cocolon": "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba",
-    "mashos-api": "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf",
-    "verified_at": "2026-07-21 JST",
+    "Cocolon": "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
+    "Cocolon_postwrite_correction": "resolve_from_github_revision_containing_the_2026_08_02_full_premise_audit_checkpoint",
+    "mashos-api": "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5",
+    "verified_at": "2026-08-02 JST",
     "identity_rule": "repository + branch + pinned commit + path + blob/hash",
     "local_materialization_rule": "same commit/path/hash means the same implementation file; local/cloud location is not a specification or authority fork",
     "main_advance_rule": "do not silently follow a moving main after predecessor freeze",
@@ -1509,11 +1512,11 @@
     },
     {
       "path": "01C_cocolon_overall_structure_account_subscription_backend_support.md",
-      "purpose": "Account / subscription / backend support / EmlisAI Observation Reply / public input_feedback arrival contract test boundary"
+      "purpose": "Account / subscription / backend support / EmlisAI reply boundary。Step11 Recovery control planeとlive public/API/DB/RN非接続を分離する。"
     },
     {
       "path": "01_cocolon_overall_structure.md",
-      "purpose": "Cocolon全体構造。rc0031 Catalog / P2 experiment forward owner / P3 test branchと、Product Surface successor・runtime未接続を分離して記録する。"
+      "purpose": "Cocolon全体構造。Recovery Epoch001-004 source/tool/test/document control plane、operational owner、live API/DB/RN非接続を記録する。"
     },
     {
       "path": "02A_cocolon_national_system_input_save_dispatch.md",
@@ -1521,23 +1524,23 @@
     },
     {
       "path": "02C_cocolon_contract_boundary_validation.md",
-      "purpose": "契約・境界・検証系。rc0031 P1 / P2 / verified reuse / P3 exact result、historical path-scope RED、Product grammar STOPを記録する。"
+      "purpose": "契約・境界・検証系。Recovery Epoch001-004のclosure/receipt/sequence/admission/structured-terminal境界とcurrent pre-network STOPを記録する。"
     },
     {
       "path": "02_cocolon_national_system.md",
-      "purpose": "Cocolon国家システム。rc0031 source-tree前進と、既存public production flow / API / DB / RN非変更を分離して記録する。"
+      "purpose": "Cocolon国家システム。Step11 Recovery formal control planeと既存live Input/Save/reply/API/DB/RN非変更を分離する。"
     },
     {
       "path": "03_cocolon_naming_system.md",
-      "purpose": "表示名 / route / DB / runtime owner / EmlisAI public input_feedback arrival internal naming境界"
+      "purpose": "表示名 / route / DB / runtime owner / Step11 Recovery evidence・authority internal naming境界"
     },
     {
       "path": "04_cocolon_change_theme_checklist.md",
-      "purpose": "変更テーマ別チェックリスト。07 current authorityを入口に、rc0031 Product Surface grammar design-only / production STOPを確認する。"
+      "purpose": "変更テーマ別チェックリスト。07 EOF current解決、Recovery、GitHub reflection、retired Guardian、Work runtimeの読む順を確認する。"
     },
     {
       "path": "05_cocolon_rule_file_index.md",
-      "purpose": "rule / policy / guard / test索引。07 current authority、11の唯一のGitHub反映契約、HISTORICAL_NON_NORMATIVE分類、現行作業ルールを索引化する。"
+      "purpose": "rule / policy / guard / test索引。07 EOF current、Recovery owner、11/12/13の責任分離、現行作業ルールを索引化する。"
     },
     {
       "path": "06_cocolon_filename_change_hold_ledger.md",
@@ -1555,8 +1558,14 @@
       "path": "09_naming_boundary.md",
       "purpose": "名称混在保管。EmlisAI二段受け取り構造 / CompleteComposer実表示接続 / Phase17商品到達fixture補完のpublic契約非変更境界を含む"
     },
-    "02B_cocolon_national_system_snapshot_worker_publish_read.md",
-    "08_cocolon_db_rename_boundary.md",
+    {
+      "path": "02B_cocolon_national_system_snapshot_worker_publish_read.md",
+      "purpose": "Snapshot / Worker / Publish / Read / access policyの構造境界"
+    },
+    {
+      "path": "08_cocolon_db_rename_boundary.md",
+      "purpose": "DB physical name / bridge / write path / rename保留境界。2026-08-02にcontent-identity-preserving case-only filename補正済み。"
+    },
     {
       "path": "cocolon_thought_material_for_karen.md",
       "purpose": "Cocolon思想資料。2026-05-24差分で共同開発境界と華恋思想「人間の言葉を雑に処理しない場所」を追記"
@@ -1585,7 +1594,10 @@
       "path": "cocolon_local_file_inventory_diff_20260608_p0_p1_public_feedback_arrival.csv",
       "purpose": "EmlisAI P0-P1 Public Input Feedback Arrival Contract Repair Step0-10の実ファイル差分inventory"
     },
-    "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv",
+    {
+      "path": "cocolon_local_file_inventory_diff_20260613_p7_red_hold_closure_r0_r12.csv",
+      "purpose": "EmlisAI P7 RED hold closure R0-R12のhistorical実ファイル差分inventory"
+    },
     {
       "path": "cocolon_local_file_inventory_diff_20260614_p7_hold004_positive_public_shape_boundary_r0_r8.csv",
       "purpose": "EmlisAI P7-HOLD-004 Positive Public Shape Boundary R0〜R8の実ファイル差分inventory"
@@ -3581,11 +3593,18 @@
     }
   },
   "current_source_snapshot": {
-    "source_mode": "github_current_contract_checkpoint",
-    "Cocolon": "MassyuRed/Cocolon:main@resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
-    "mashos-api": "MassyuRed/mashos-api:main@05e63ae05bb91f94725b0e6ef37a5bd9a76bcd8b",
-    "verified_at": "2026-07-27 JST",
-    "latest_reflected_scope": "NLS v3 Step11 Cycle001 Recovery Epoch002 Work Unit A GitHub reflection contract correction; S1 missing JSON publication remains separate Work Unit B"
+    "source_mode": "github_full_tracked_tree_audit_plus_bounded_postwrite_corrections",
+    "Cocolon_prewrite": "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
+    "Cocolon_prewrite_tree": "e02362db87973436ab0989982cae000cc9862a74",
+    "Cocolon_postwrite": "resolve_from_github_revision_containing_the_2026_08_02_full_premise_audit_checkpoint",
+    "mashos-api": "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5",
+    "mashos-api_tree": "a641510e107d52bb910073f36604c85bd57af150",
+    "repository_visibility": {
+      "Cocolon": "public",
+      "mashos-api": "public"
+    },
+    "verified_at": "2026-08-02 JST",
+    "latest_reflected_scope": "NLS v3 Step11 Cycle001 Recovery Epoch004 Gate B exact Node Catalogue Observation V2 activation-binding-invalid pre-network STOP; Full R1 UNKNOWN preserved; premise audit consumes no technical authority"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -6914,6 +6933,7 @@
     "07_Cocolon_最新スナップショット差分": "07_latest_snapshot_diff.md",
     "07_禁止事項_ユーザー負担押し付け.txt": "07_forbidden_shifting_burden_to_user.txt",
     "08_Cocolon_DB_rename_boundary.md": "08_cocolon_db_rename_boundary.md",
+    "09_Cocolon_名称混在保管と構造境界_2026-05-10.md": "09_naming_boundary.md",
     "08_成果物提出ルール.txt": "08_artifact_delivery_rules.txt",
     "09_Cocolon_名称混在保管と構造境界.md": "09_naming_boundary.md",
     "09_作業開始チェックリスト.txt": "09_work_start_checklist.txt",
@@ -16461,6 +16481,193 @@
     "work_attitude_rules_for_karen/15_trust_based_joint_development_boundary_2026_06_05.txt",
     "work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
     "work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+    "work_attitude_rules_for_karen/manifest.json"
+  ],
+  "current_actual_environment_2026_08_02": {
+    "normative_status": "CURRENT",
+    "project_owner": "Mash",
+    "code_write_and_final_judgment_owner": "Karen",
+    "subagent_role": "read_only_assistance_when_materially_useful",
+    "repository_visibility": {
+      "Cocolon": "public",
+      "mashos-api": "public"
+    },
+    "visibility_verified_at": "2026-08-02 JST",
+    "public_visibility_changes_write_authority": false,
+    "github_write_requires_explicit_mash_approval": true,
+    "github_reflection_contract": "11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT",
+    "guardian_state": "RETIRED_DISABLED",
+    "guardian_reactivation_requires_new_mash_authority": true,
+    "supersedes_current_interpretation_only": "actual_environment_first_and_guardian_retirement_2026_07_26.actual_environment.repository_visibility",
+    "historical_2026_07_26_private_observation_preserved": true
+  },
+  "full_premise_audit_2026_08_02": {
+    "authority": "COCOLON_CURRENT_HEADS_FULL_PREMISE_AUDIT_AND_NECESSARY_CORRECTIONS_ONLY",
+    "decision_owner": "Mash",
+    "audit_owner": "Karen",
+    "automatic_technical_progression": false,
+    "audit_basis": {
+      "Cocolon_prewrite_commit": "c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
+      "Cocolon_prewrite_tree": "e02362db87973436ab0989982cae000cc9862a74",
+      "mashos-api_commit": "315813c7bd3372462de926ddad74df567254a6b5",
+      "mashos-api_tree": "a641510e107d52bb910073f36604c85bd57af150",
+      "Cocolon_postwrite_commit": "resolve_from_github_revision_containing_this_checkpoint",
+      "historical_full_audit_Cocolon": "7533587673f1e895ea056b18562deaa6059f0aba",
+      "historical_full_audit_mashos-api": "a904ba192b05ca1445e32006b64fc87e7cda48bf"
+    },
+    "tracked_tree_census": {
+      "Cocolon": 1055,
+      "mashos-api": 2084,
+      "total": 3139
+    },
+    "premise_census": {
+      "tracked_total": 111,
+      "markdown": 27,
+      "csv": 64,
+      "json": 2,
+      "rule_text": 18,
+      "root_manifest_docs": 64,
+      "root_manifest_docs_exact_case_resolved_after_correction": 64,
+      "work_manifest_rules": 18,
+      "work_manifest_rules_existing": 18,
+      "missing_after_correction": 0
+    },
+    "delta_from_2026_07_21_full_audit": {
+      "Cocolon": {
+        "commits_ahead": 560,
+        "changed_paths": 423,
+        "added": 403,
+        "modified": 20,
+        "premise": 23,
+        "implemented_documents": 391,
+        "retired_guardian_github_paths": 6,
+        "misplaced_repository_root_documents": 3,
+        "app_production_api_db_rn_source_changed": 0
+      },
+      "mashos-api": {
+        "commits_ahead": 78,
+        "changed_paths": 69,
+        "added": 51,
+        "modified": 18,
+        "services": 24,
+        "tests": 31,
+        "tools": 13,
+        "configs": 1
+      }
+    },
+    "structural_findings": {
+      "recovery_epoch001_002_role": "body_free_source_baseline_registry_closure_receipt_sequence_proof_and_formal_control_plane",
+      "recovery_epoch003_004_role": "contract_and_operational_admission_red_evidence",
+      "recovery_import_in_app_py": false,
+      "recovery_import_in_emlis_ai_reply_service": false,
+      "live_public_api_db_rn_connection_changed": false,
+      "analysis_existing_owner_nonstructural_delta": "astor self-structure import fallback exact2 narrowed from Exception to ImportError; owner, route, API, DB and RN topology unchanged",
+      "guardian": "HISTORICAL_NON_NORMATIVE_RETIRED_DISABLED",
+      "github_reflection_owner": "11",
+      "work_test_runner_owner": "13_plus_rule_16",
+      "execution_substrate_is_owner": false
+    },
+    "current_step11_preserved": {
+      "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP",
+      "postverified_observation_sha256": "ee403e258450ed4cbe212bd3304e710d2338ebdd03381f62df415f8b52b873ad",
+      "full_r1": "UNKNOWN_PRESERVED",
+      "next_authority_token_sha256": "c98bad9d2ca01d951475a7c839ea7c5f0e6f7d7340cba33eff327da8bddb3539",
+      "next_authority_state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+      "technical_authority_consumed_by_audit": false
+    },
+    "current_authority_inputs": {
+      "latest_prewrite_blob_sha1": "b45d2a56eccb60220e96735725ffe7384fd59dae",
+      "latest_prewrite_raw_sha256": "827842581e5426ddaad13bfe8e1681f81e035519207ae6c95f54164069f86790",
+      "plan_blob_sha1": "11feef5a9a3db271086aa31d428a270adb537c8a",
+      "plan_raw_sha256": "4cd52b4d383faf075abbab7d5c8afa88a74ba2475b80e8935b9e774ce55c8cee",
+      "latest_resolution_rule": "last_complete_EOF_latest_or_current_top_level_section_only"
+    },
+    "content_identity_preserving_moves": [
+      {
+        "from": "08_Cocolon_DB_rename_boundary.md",
+        "to": "08_cocolon_db_rename_boundary.md",
+        "blob_sha1": "7283200a5e2efb78d93a84d917631959d796555a"
+      },
+      {
+        "from": "../NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Addendum_20260723.md",
+        "to": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Addendum_20260723.md",
+        "blob_sha1": "43d3b640cc6f6ff6bd1f1e7f44c439c628e51922",
+        "raw_sha256": "045edccb424a65d755b2cca36e2cef5286e0c74bb343a5150dd73677f6847385"
+      },
+      {
+        "from": "../NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json",
+        "to": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json",
+        "blob_sha1": "e78d528600fef27ce3de52ef91c1118d6866d2ed",
+        "raw_sha256": "7cf815779d28e69c5cf3aa6613f19b120ee4a3deb4d8d565faeef85a7b6ae563"
+      },
+      {
+        "from": "../NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md",
+        "to": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md",
+        "blob_sha1": "2ece0677c9a16b10df05f3715cf995c6f342e1c9",
+        "raw_sha256": "a8d335ecc2cbc5720fa3b116029d22fa75ef63779ad93461d2fa544dc1d37b9a"
+      }
+    ],
+    "historical_preserved": [
+      "all_inventory_and_diff_csv_bytes",
+      "all_prior_Result_Receipt_Handoff_bytes",
+      "07_front_matter_and_prior_current_sections",
+      "2026_07_26_private_visibility_observation",
+      "2026_08_01_runtime_not_found_application_snapshot",
+      "all_prior_credit_and_noncredit_dispositions"
+    ],
+    "forbidden_effects": {
+      "mashos-api_change": 0,
+      "Cocolon_app_production_change": 0,
+      "network_or_metadata_observation": 0,
+      "runtime_or_pytest_or_target_execution": 0,
+      "technical_authority_activation_or_consumption": 0,
+      "historical_reparse_reclassification_or_credit": 0,
+      "automatic_progression": 0
+    },
+    "exact_changed_paths": [
+      "Cocolon_前提資料/00_karen_read_first.md",
+      "Cocolon_前提資料/01_cocolon_overall_structure.md",
+      "Cocolon_前提資料/01C_cocolon_overall_structure_account_subscription_backend_support.md",
+      "Cocolon_前提資料/02_cocolon_national_system.md",
+      "Cocolon_前提資料/02C_cocolon_contract_boundary_validation.md",
+      "Cocolon_前提資料/03_cocolon_naming_system.md",
+      "Cocolon_前提資料/04_cocolon_change_theme_checklist.md",
+      "Cocolon_前提資料/05_cocolon_rule_file_index.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/08_Cocolon_DB_rename_boundary.md",
+      "Cocolon_前提資料/08_cocolon_db_rename_boundary.md",
+      "Cocolon_前提資料/09_naming_boundary.md",
+      "Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md",
+      "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+      "Cocolon_前提資料/cocolon_thought_material_for_karen.md",
+      "Cocolon_前提資料/manifest.json",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json",
+      "NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Addendum_20260723.md",
+      "NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json",
+      "NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Addendum_20260723.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md"
+    ]
+  },
+  "latest_modified_premise_files_2026_08_02_full_audit_and_corrections": [
+    "00_karen_read_first.md",
+    "01_cocolon_overall_structure.md",
+    "01C_cocolon_overall_structure_account_subscription_backend_support.md",
+    "02_cocolon_national_system.md",
+    "02C_cocolon_contract_boundary_validation.md",
+    "03_cocolon_naming_system.md",
+    "04_cocolon_change_theme_checklist.md",
+    "05_cocolon_rule_file_index.md",
+    "07_latest_snapshot_diff.md",
+    "08_Cocolon_DB_rename_boundary.md -> 08_cocolon_db_rename_boundary.md",
+    "09_naming_boundary.md",
+    "12_cocolon_github_actions_publication_guard.md",
+    "13_cocolon_work_test_runner_runtime_continuity.md",
+    "cocolon_thought_material_for_karen.md",
+    "manifest.json",
+    "work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt",
     "work_attitude_rules_for_karen/manifest.json"
   ]
 }

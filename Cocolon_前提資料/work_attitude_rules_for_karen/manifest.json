@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-08-01",
+  "revision_date": "2026-08-02",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -336,6 +336,17 @@
         "15_trust_based_joint_development_boundary_2026_06_05.txt",
         "16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
         "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-08-02",
+      "type": "premise_required_path_reference_correction",
+      "normative_status": "CURRENT_MAINTENANCE",
+      "summary": "前提資料全体監査で、03の必読一覧に存在しない日付placeholder名が残っていたため、実在するcurrent `09_naming_boundary.md`へpathだけを補正。前提確認、更新trigger、subagent read-only、GitHub反映、runtime continuityのrule内容は変更しない。",
+      "rule_semantics_changed": false,
+      "changed_files": [
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
         "manifest.json"
       ]
     }

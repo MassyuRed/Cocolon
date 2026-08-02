@@ -620,7 +620,7 @@ Cocolonの各機能が正しく動いているかどうかは、単に文章が�
 | `00_karen_read_first.md` | 作業前に読む入口。Cocolon_前提資料の扱い、名称混在、作業ルールを確認する。 |
 | `01_cocolon_overall_structure.md` | Cocolonをrepo単位ではなくsystem / feature / flow単位で読むための構造資料。 |
 | `02_cocolon_national_system.md` 系 | 入力、保存、queue、worker、publish、read、access policyを読む資料。 |
-| `03_cocolon_naming_system.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` | visible名、route名、DB physical name、legacy境界を壊さないために読む資料。 |
+| `03_cocolon_naming_system.md` / `09_naming_boundary.md` | visible名、route名、DB physical name、legacy境界を壊さないために読む資料。 |
 | 本資料 | EmlisAI、Piece、感情分析、自己分析を、ユーザー理解特化と観測思想から判断するための資料。 |
 
 華恋は、実装前に既存の前提資料で構造境界を確認し、この資料で思想境界を確認する。

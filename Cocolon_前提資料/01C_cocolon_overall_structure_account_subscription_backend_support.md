@@ -1,6 +1,6 @@
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
-revision_date: "2026-06-07"
+revision_date: "2026-08-02"
 ---
 
 # 01C. Account / Subscription / Backend支援系
@@ -4728,3 +4728,15 @@ Account / Subscription / DB支援領域から見る禁止事項:
 - raw input / comment_text body / candidate bodyをpublic metaやUser Label Connection public summaryへ出さない。
 - safe recovery表示可をtrue unavailable / safety表示可へ広げない。
 ```
+
+# 2026-08-02 backend support delta: NLS v3 Step 11 Recovery control plane
+
+current mashos-api full-audit deltaはservices 24、tests 31、tools 13、config 1です。
+このうちRecovery Epoch001 / 002のclosure、receipt、registry、ledger、proof / orchestration
+toolとEpoch002 bootstrap lockはbackend内部のformal control planeとして読みます。
+Epoch003 / 004はcontract RED / operational-admission evidenceであり、Account、Subscription、
+entitlement、public route、DB schema、RN ownerではありません。
+
+`mashos-api/ai/services/ai_inference/app.py` / `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`からRecovery familyへのimportはなく、Recovery artifactを
+Cycle001 accepted、production connected、public response追加と読みません。current technical
+checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上の非接続境界だけを保持します。

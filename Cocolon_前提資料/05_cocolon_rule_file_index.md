@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-08-01"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_structural_audit"
 current_authority: "07_latest_snapshot_diff.md"
 last_structural_audit_source:
-  Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
-  mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
+  mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
 purpose: "見落とすと構造誤読や contract 破壊を起こしやすい rule / policy / guard / test を索引化する"
 ---
 
@@ -3251,3 +3251,43 @@ session boundary後は過去READYをcurrent continuity未確認へ戻し、candi
 Gate B fresh readinessまで成立した場合だけ再利用します。見つからない場合はMash様の
 作業へ変換せず、GitHub-tracked procedureにfrozen lock-derived rematerializationの
 別authorityへ戻ります。
+
+# 2026-08-02 CURRENT Step11 Recovery / current-resolution owner index
+
+## current resolution rule
+
+`07_latest_snapshot_diff.md`はappend-onlyです。EOF側の最後の完全なlatest/current top-level
+sectionだけをcurrentとして解決し、front matterとそれ以前の`current authority`見出しは
+successorによりhistoricalとします。current Step11 read orderは次です。
+
+```text
+07 latest complete EOF section
+  -> tracked ExecutionAndClosurePlan
+  -> latest Result / Receipt / Handoff
+  -> pytest-dependent: 13 -> rule 16 -> rule 09 §S
+  -> GitHub reflection: 11 CURRENT_NORMATIVE_CONTRACT
+```
+
+## Recovery owner families
+
+| family | owner role |
+|---|---|
+| Epoch001 / 002 service modules | baseline / registry / closure / receipt / sequence control plane |
+| Epoch001 / 002 tools + Epoch002 bootstrap lock | proof、issue / verify、publication、formal orchestration、preflight |
+| Epoch001-004 tests | prerequisite / closure / admission / structured-terminal contract RED evidence |
+| Cocolon documents | body-free authority lineage。canonical保存先は`EmlisAIの実装済み資料/documents/` |
+
+`RecoveryEpoch`はproduct/runtime/public API名ではありません。live app / reply / DB / RNとは
+非接続です。current terminalはexact Node catalogue observation V2 activation-binding-invalid
+pre-network STOP、Full R1は`UNKNOWN_PRESERVED`です。次authority tokenの詳細は07だけを正本にし、
+この索引から自動進行しません。
+
+## operational owner separation
+
+- `11`: current GitHub reflection。
+- `12`: Guardian historical record / `RETIRED_DISABLED`。
+- `13` + rule `16`: Work test-runner technical / behavioral boundary。
+- 華恋: final judgment / approved write / postverification。
+- Work environment: execution substrate only。
+
+Cocolon / mashos-apiはcurrent `public`ですが、write ownerと承認scopeは変わりません。

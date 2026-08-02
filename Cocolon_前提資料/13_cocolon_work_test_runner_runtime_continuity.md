@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_work_test_runner_runtime_continuity
 title: "Cocolon Work test-runner runtime continuity contract"
-revision_date: "2026-08-01"
+revision_date: "2026-08-02"
 status: "CURRENT_NORMATIVE_CONTRACT"
 scope: "WORK_LOCAL_PYTHON_PYTEST_TEST_RUNNER_ONLY"
 decision_owner: "Mash"
@@ -397,3 +397,21 @@ current execution eligibilityがないことを意味します。
 current target test、production、既存D1、published RED testは、このrule反映だけで
 変更または実行しません。次のrematerializationは別のMash様承認を必要とし、
 自動進行しません。
+
+## 12. 2026-08-02 current application correction
+
+§11は2026-08-01時点のhistorical application snapshotです。本書§0-10のnormative runtime
+continuity contractは変更しません。その後の別authority lineageは進み、current technical
+terminalは次です。
+
+```text
+RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP
+```
+
+catalogue observation V2はactivation binding invalidによりpre-network STOPしました。これは
+旧runtime不在checkpointの再評価ではありません。current authorityでnetwork、Node/version
+probe、engine、verifier/helper、Gate B runtime、pytest、target executionはexact0、Full R1は
+`UNKNOWN_PRESERVED`です。
+
+最新状態と次のdesign-only authorityは07 / tracked Planを正本とします。no retry、no fallback、
+no historical recredit、Mash様へのruntime path / venv / pytest要求禁止は維持します。

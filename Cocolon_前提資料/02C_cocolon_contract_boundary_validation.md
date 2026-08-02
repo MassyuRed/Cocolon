@@ -1,14 +1,14 @@
 ---
 title: "02C_Cocolon_国家システム資料_契約_境界_検証系"
-revision_date: "2026-07-21"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_structural_audit"
 current_authority: "07_latest_snapshot_diff.md"
 last_structural_audit_source:
-  Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
-  mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
+  mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
 ---
 
 # 02C. 契約 / 境界 / 検証系
@@ -6233,3 +6233,28 @@ contract境界:
 
 1. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_Design20_3_Addendum_RED_Handoff_20260721.md`
 2. `NLSv3_Step11_rc0031_P3_PrerequisiteConsistency_RED_BodyFree_Receipt_20260721.json`
+
+# 2026-08-02 contract / validation delta: Recovery Epoch001-004
+
+| family | contract role | current boundary |
+|---|---|---|
+| Recovery Epoch001 | source baseline、current-step registry、canonical closure、step / accepted receipts、sequence ledger、proof / publication tools | candidate / body-free proof control plane |
+| Recovery Epoch002 | retry lineage、closure / receipt / ledger successors、bootstrap lock / preflight、formal worker / parent tools | Epoch001 historyを再creditせずfresh lineageを固定 |
+| Recovery Epoch003 | bootstrap source / observed identity、strict preflight、operational admission RED | contract evidence。production admissionではない |
+| Recovery Epoch004 | operational admission V2 / structured R1 terminal REDとGate B design/observation documents | current Full R1を`UNKNOWN_PRESERVED`のまま保持 |
+
+current catalogue observation V2はexact12 activation gateでrank8 / rank10がfalseとなり、
+`ACTIVATION_BINDING_INVALID`でpre-network STOPしました。Evaluator reconciliation Receiptは
+consumed exact1、Policy Receiptはclosed-unconsumed immutable / consumption exact0です。
+過去observer、discovery、classifier、route、provider、policy、failed observationを再parse、
+reclassify、retry、creditしません。
+
+validation ownerの分離:
+
+- `11`: current GitHub reflection contract。
+- `12`: historical Guardian record。`RETIRED_DISABLED`で実行authorityではない。
+- `13` + rule `16`: Work test-runner continuity。current technical checkpointの結果ownerではない。
+- 07 / Plan / latest Result・Receipt・Handoff: authority固有SHA、counter、consumption、terminal。
+
+R1 structured terminal production ownerはcurrent sourceに成立済みとして昇格しません。current
+production / API / DB / RN / runtime / pytest / target effectはexact0です。

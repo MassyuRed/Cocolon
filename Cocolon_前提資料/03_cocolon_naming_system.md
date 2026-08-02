@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_naming_lexicon
 title: "Cocolon 命名体系"
-revision_date: "2026-06-11"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -873,3 +873,11 @@ ratings-only QA passをrelease_allowedへ変換しない。
 P6 readyをP6実装済みやP6 public releaseと読まない。
 history-line support sectionを診断名・人格分類名・未来予測名へ寄せない。
 ```
+
+# 2026-08-02 current internal naming boundary: Recovery Epoch001-004
+
+`RecoveryEpoch001-004`、`source_baseline`、`current_step_registry`、`sequence_ledger`、
+`receipt`、`formal_worker`、`Gate B`、`provider`、`catalogue`、`source_lock`は、Step11の
+backend / test / evidence / authority lineageを表すinternal名です。visible product名、public
+API route / response key、DB physical name、RN表示名、Nodeやproviderのavailability claimでは
+ありません。これらを理由に既存public contractをrenameまたは追加しません。

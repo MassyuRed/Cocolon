@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_name_mixing_structure_boundary
 title: "Cocolon 名称混在保管と構造境界"
-revision_date: "2026-06-04"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -110,7 +110,7 @@ DB physical rename / drop は、この資料では判断しません。
 
 1. `00_karen_read_first.md`
 2. `03_cocolon_naming_system.md`
-3. 本資料 `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+3. 本資料 `09_naming_boundary.md`
 4. 作業対象に応じて `01A / 01B / 01C`
 5. 国家システムに関係する場合は `02 / 02A / 02C`
 6. DBに触れるdestructive変更は今回扱わない。名称読み分けは `03` / `06` / `09` を確認する

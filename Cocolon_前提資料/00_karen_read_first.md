@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-08-01"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -11,8 +11,8 @@ source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  last_full_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
-  last_full_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  last_full_audit_Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
+  last_full_audit_mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copyであり、別実装ではない"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -2092,7 +2092,7 @@ Phase18では、Phase17の5件fixture商品到達を維持したまま、商品�
 1. `00_karen_read_first.md`
 2. `07_latest_snapshot_diff.md`
 3. `03_cocolon_naming_system.md`
-4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+4. `09_naming_boundary.md`
 
 この3つで、華恋は「見えている名前」と「実際に動いているファイル名・API名・DB名」が違う可能性を先に固定します。
 
@@ -2131,7 +2131,7 @@ Phase18では、Phase17の5件fixture商品到達を維持したまま、商品�
 1. `05_cocolon_rule_file_index.md`
 2. `06_cocolon_filename_change_hold_ledger.md`
 3. `07_latest_snapshot_diff.md`
-4. `03_cocolon_naming_system.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+4. `03_cocolon_naming_system.md` / `09_naming_boundary.md`
 
 `05` は contract / policy / guard、`06` はファイル名・旧名称の保管、`07` は最新zipとの差分確認、`08` はDB physical name / bridge / rename境界、`03` / `09` は名称混在・DB物理名の読み分けを補助する資料です。`08_cocolon_db_rename_boundary.md` は存在しますが、DB physical rename / drop / write path変更はMash様が明示した場合だけ扱います。
 
@@ -7783,3 +7783,86 @@ alternate locatorに同一instanceがないことまで断定しません。
 ありません。次に必要なのはMash様からのruntime提供ではなく、既存frozen
 lock-derived exact5を使う華恋側rematerialization / readinessの別authorityです。
 この前提更新だけではrematerialization、probe、targeted pytestを開始しません。
+
+# 2026-08-02 CURRENT 前提資料全体監査 / actual environment / Step 11 authority補正
+
+この節が本資料内のcurrent補正です。過去のsnapshot、Result、Receipt、Handoff、
+`current authority`見出しを遡及変更しません。`07_latest_snapshot_diff.md`はappend-only
+ledgerであるため、**EOF側の最後の完全なlatest/current top-level sectionだけ**を
+currentとして解決し、それ以前のfront matterと同名見出しはsuccessorによりhistoricalに
+なったものとして読みます。
+
+## 監査基準と実測
+
+| item | current audit basis |
+|---|---|
+| Cocolon prewrite | `c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3` / tree `e02362db87973436ab0989982cae000cc9862a74` |
+| mashos-api | `315813c7bd3372462de926ddad74df567254a6b5` / tree `a641510e107d52bb910073f36604c85bd57af150` |
+| repository visibility | Cocolon / mashos-apiともに`public` |
+| Git tracked census | Cocolon 1055 / mashos-api 2084 / total 3139 |
+| premise census | exact111: Markdown 27 / CSV 64 / JSON 2 / rule text 18 |
+| root manifest docs | exact64。case-only filename補正後は64 / 64がexact pathで実在 |
+| work rule manifest | 登録exact18 / 実在exact18 / missing exact0 / unindexed exact0 |
+
+Cocolonのpostwrite authority record commitは、この監査checkpointを含むGitHub revisionから
+解決します。public化はread visibilityの実測変更であり、project owner、華恋only write、
+Mash様の明示承認scope、`11`のGitHub反映契約、secret非掲載境界を変更しません。
+2026-07-26節の`repositoryはprivate`と2026-08-01節の
+`RUNTIME_NOT_FOUND_AT_KNOWN_PRIOR_LOCATORS` / rematerialization nextは、それぞれ当時の
+historical checkpointです。
+
+## current Step 11 state
+
+```text
+terminal:
+RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP
+
+postverified observation SHA-256:
+ee403e258450ed4cbe212bd3304e710d2338ebdd03381f62df415f8b52b873ad
+
+Full R1:
+UNKNOWN_PRESERVED
+
+next authority token SHA-256:
+c98bad9d2ca01d951475a7c839ea7c5f0e6f7d7340cba33eff327da8bddb3539
+```
+
+今回の前提資料監査は上記technical authorityを消費・再実行・再分類しません。次tokenは
+`DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`のままです。
+
+## current読む順とpath解決
+
+1. `07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent section
+2. `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md`
+3. そのsectionが列挙するlatest Result / Receipt / Handoff
+4. pytest依存作業なら`13` → `work_attitude_rules_for_karen/16` → 同`09` §S
+5. GitHub反映なら`11`の`CURRENT_NORMATIVE_CONTRACT`
+6. current GitHub headsと承認対象exact paths
+
+current filenameは`09_naming_boundary.md`および
+`08_cocolon_db_rename_boundary.md`です。旧09名はhistorical aliasとしてのみ扱います。
+repository rootに誤配置されていたRecovery Epoch001 RED Freeze exact3は、本文bytesと
+Git blob / raw SHA-256を変えず、canonical
+`EmlisAIの実装済み資料/documents/`へ移しました。これはauthority内容の変更ではなく、
+receipt内の相対pathとrepository mappingを一致させる配置補正です。
+
+## 確認済み事実 / 推測 / 華恋の意見
+
+### 確認済み事実
+
+- 前提資料更新ルールは既にroot manifest、作業rule `03` / `09`、本資料に存在します。
+- ルールの欠如ではなく、2026-07-21以降の構造資料全体反映、case-sensitive path、
+  current visibility / manifest pinの確認不足が今回の不整合原因でした。
+- Recovery Epoch001 / 002はbody-free closure / receipt / sequence / proof control planeを持ち、
+  Epoch003 / 004はcontract RED群を持ちます。live API / DB / RNへRecovery importはありません。
+
+### 推測
+
+current STOPのschema-level binding不成立が解消できるかは、次のdesign-only authorityを
+実施するまで未確定です。今回の監査からruntime、Node、providerの不存在は推定しません。
+
+### 華恋の意見
+
+華恋の意見として、前提資料はcheckpoint ledgerの複製ではなく、stable owner、構造、
+contract境界、読む順をcurrentに保つ地図であるべきです。今後も07は毎checkpoint、
+構造資料は実際にその境界が変わった時だけ更新し、節目では今回と同じ全体監査を行います。

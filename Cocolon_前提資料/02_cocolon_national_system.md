@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_national_system_full_coverage
 title: "Cocolon 国家システム資料"
-revision_date: "2026-07-21"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -11,8 +11,8 @@ source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  last_structural_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
-  last_structural_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  last_structural_audit_Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
+  last_structural_audit_mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copy"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -5640,3 +5640,27 @@ rc0031 Catalog / P2 forward owner / P3 tests
 - rc0031 symbolはNatural Surface、Catalog、P1 / P2 / P3 testに閉じ、runtime adapter、dependency manifest、API、DB、RN、Parser、Matcher、Gateからのimport接続はありません。
 - public production owner、response shape、DB physical name / write path、RN表示条件、Safety、question ownerは変更していません。
 - P3 Product Surface grammarは未解決で、production接続判断はSTOPです。
+
+# 2026-08-02 national-system boundary delta: Recovery control plane versus live path
+
+```text
+live national path
+Input -> Save -> Dispatch -> reply/public read -> existing RN display
+
+formal Recovery branch
+Epoch001/002 closure + receipt + sequence + proof tools
+  -> Epoch003/004 contract RED evidence
+  -> Cocolon body-free authority ledger
+  -X-> live national path / API / DB / RN / shared production runtime
+```
+
+全tree監査で、Recovery Epoch familyのimportは
+`mashos-api/ai/services/ai_inference/app.py`および
+`mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`にありません。Cocolon app production sourceにも今回差分はありません。
+したがって、Recovery ownerの増加は国家システムのlive routing、public response shape、DB
+physical/write path、RN表示条件、Safety、question ownerの変更を意味しません。
+
+current checkpointはcatalogue observation V2のactivation-binding-invalid pre-network STOPです。
+Policy Receipt consumption、network、provider source-lock、artifact、Node/runtime、pytest、target
+executionはexact0で、Full R1は`UNKNOWN_PRESERVED`です。Step11 candidateやbody-free receiptを
+Cycle001 accepted / releasedまたはproduction replyとして扱いません。

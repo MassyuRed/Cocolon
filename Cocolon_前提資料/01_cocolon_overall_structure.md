@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
-revision_date: "2026-07-21"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -11,8 +11,8 @@ source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
   historical_mashos-api: "mashos-api_10(51).zip"
-  last_structural_audit_Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
-  last_structural_audit_mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  last_structural_audit_Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
+  last_structural_audit_mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
   materialization_policy: "同じcommit/path/hashのlocal checkout・ZIP・copyはGitHub実ファイルのmaterialized copy"
 file_counts:
   count_basis: "historical local ZIP snapshot 2026-07-14; Git tracked blob countと混在比較しない"
@@ -6649,3 +6649,55 @@ typed semantic authority
 | `ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py` | P3 exact24 independence / prerequisite boundary | added |
 
 P2 forward ownerは実装済みですが、P3 Product Surface successorではありません。P3 Product Surface grammar、dimension append、Body-only Parser、Independent Matcher、P4、runtime adapter、dependency manifest、E2以降は未開始です。Cocolon RN / app source差分はありません。
+
+# 2026-08-02 verified structural delta: Step 11 Recovery control plane
+
+## full-audit delta
+
+2026-07-21 structural auditからcurrent audit basisまでの全path差分は次です。
+
+| repository | audited delta |
+|---|---|
+| Cocolon | 560 commits / 423 paths: added 403 / modified 20。前提資料23、実装済み資料391、retired Guardian `.github` 6、repository root誤配置3 |
+| mashos-api | 78 commits / 69 paths: added 51 / modified 18。services 24、tests 31、tools 13、config 1 |
+
+Cocolon側の423 pathにはapp production / API / DB / RN source変更はありません。
+repository root誤配置exact3は、同じblob bytesのままcanonical `documents/`へ移しました。
+
+## Recovery topology
+
+```text
+07 current authority + tracked ExecutionAndClosurePlan
+  -> Recovery Epoch001 / 002 source owners
+     source baseline / current-step registry / canonical closure
+     step-completion receipt / accepted-test receipt / sequence ledger
+  -> Recovery Epoch001 / 002 tools
+     proof run / receipt issue+verify / atomic publication / formal orchestration
+  -> Epoch002 bootstrap lock + preflight
+  -> Recovery Epoch001-004 contract / RED tests
+  -> body-free Result / Receipt / Handoff ledger in Cocolon documents
+  -X-> Cocolon RN / public API / DB / shared production runtime
+```
+
+Epoch001 / 002のsource familyはformal proof / closure / receipt / sequence control planeです。
+Epoch003 / 004はcurrent treeでは主にcontract RED ownerであり、Cycle001 acceptanceまたは
+release ownerではありません。`mashos-api/ai/services/ai_inference/app.py`と
+`mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`にRecovery Epoch importはなく、live reply経路への接続は
+確認されていません。
+
+## stable owner map
+
+| owner | responsibility |
+|---|---|
+| `07_latest_snapshot_diff.md` | EOF側最後の完全なsectionによるcurrent authority |
+| tracked `ExecutionAndClosurePlan` | Step11 lineage / state machine / checkpoint closure |
+| `11_cocolon_github_transport_and_session_continuity.md` | current GitHub reflection contract |
+| `12_cocolon_github_actions_publication_guard.md` | `HISTORICAL_NON_NORMATIVE / RETIRED_DISABLED` guardian record |
+| `13_cocolon_work_test_runner_runtime_continuity.md` + rule `16` | Work test-runner technical / behavioral boundary |
+| 華恋 | final judgment、approved write、postverification |
+| current Work environment | execution substrate only; ownerではない |
+
+authority固有のSHA、counter、receipt consumption、exact Gate checkはここへ複製せず、07、
+Plan、latest Result / Receipt / Handoffを正本にします。current terminalはexact Node catalogue
+observation V2のactivation-binding-invalid pre-network STOP、Full R1は
+`UNKNOWN_PRESERVED`です。

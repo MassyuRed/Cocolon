@@ -1,11 +1,27 @@
 ---
 doc_id: cocolon_github_actions_publication_guard
 title: "Cocolon GitHub Actions formal publication guardian owner"
-revision_date: "2026-07-26"
+revision_date: "2026-08-02"
 repository_scope: "MassyuRed/Cocolon"
 repository_id: 1163713768
 secret_material_allowed: false
+status: "HISTORICAL_NON_NORMATIVE"
+final_state: "RETIRED_DISABLED"
+current_execution_authority: false
+superseding_current_contract: "11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT"
 ---
+
+# CURRENT STATUS
+
+```text
+HISTORICAL_NON_NORMATIVE
+RETIRED_DISABLED
+CURRENT_EXECUTION_AUTHORITY_FALSE
+```
+
+本資料の実装・試験記録は履歴として保持します。current GitHub反映方法と完了判定は
+`11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT`だけを
+正本とし、本Guardianを実行・再開しません。
 
 # 目的
 

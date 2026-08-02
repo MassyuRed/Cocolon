@@ -36174,3 +36174,145 @@ Snapshot entry prefix blob / raw / bytes / lines:
 ce693b4274234283c8add25c6f971bb3748c9b30ad65ba86643368b7a42cb33a
 1846121 / 36003
 ```
+
+# 2026-08-02 latest snapshot — 前提資料全体監査＋必要箇所だけの補正
+
+## authority and audit basis
+
+Mash様の明示承認により、次の技術authorityへ進む前の独立作業として、current headsを
+基準に前提資料全体監査と必要箇所だけの補正を行いました。
+
+```text
+Cocolon prewrite
+c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3
+tree e02362db87973436ab0989982cae000cc9862a74
+
+mashos-api
+315813c7bd3372462de926ddad74df567254a6b5
+tree a641510e107d52bb910073f36604c85bd57af150
+
+tracked tree census
+Cocolon 1055 / mashos-api 2084 / total 3139
+
+premise census
+exact111 = Markdown 27 / CSV 64 / JSON 2 / rule text 18
+```
+
+Cocolonの2026-07-21 audit basisからの全差分は560 commits / 423 paths（added 403 / modified 20）、
+mashos-apiは78 commits / 69 paths（added 51 / modified 18）です。Cocolon差分は前提資料23、
+実装済み資料391、retired Guardian `.github` 6、repository root誤配置3で、app production /
+API / DB / RN source差分はexact0です。mashos-api差分はservices 24、tests 31、tools 13、
+config 1です。
+
+## confirmed corrections
+
+1. current repository visibilityをCocolon / mashos-apiとも`public`へ補正しました。2026-07-26
+   のprivate観測はhistorical bytesとして保持し、write owner / approval scopeは変更していません。
+2. root manifestのcurrent mashos-api pin、full-audit source、current source snapshot、owner / terminal
+   pointerをcurrentへ補正しました。
+3. manifest docs exact64を同一object shapeへ正規化し、content-identity-preserving case-only rename
+   `08_Cocolon_DB_rename_boundary.md -> 08_cocolon_db_rename_boundary.md`により64 / 64の
+   exact-case実在を成立させました。
+4. operational read orderに残っていた旧09名 / placeholderを`09_naming_boundary.md`へ補正し、
+   historical記述はaliasで解決して本文を保持しました。
+5. `12`の冒頭へ`HISTORICAL_NON_NORMATIVE / RETIRED_DISABLED`を表示しました。Guardianは
+   current execution authorityへ戻していません。
+6. Recovery Epoch001-004のstable source / tool / test / document topology、owner、contract、
+   national live path非接続、current read orderを01 / 01C / 02 / 02C / 03 / 04 / 05 / 13へ
+   必要範囲だけ追記しました。
+7. repository rootに誤配置されていたRecovery Epoch001 RED Freeze exact3を、blob / raw
+   SHA-256不変のままcanonical `EmlisAIの実装済み資料/documents/`へ移しました。
+
+07はappend-onlyのためprefix / front matter / prior current見出しを変更していません。このEOF側
+最後の完全なtop-level sectionだけをcurrentとし、以前の同名authorityはhistorical-by-succession
+として解決します。
+
+## exact changed paths
+
+```text
+Cocolon_前提資料/00_karen_read_first.md
+Cocolon_前提資料/01_cocolon_overall_structure.md
+Cocolon_前提資料/01C_cocolon_overall_structure_account_subscription_backend_support.md
+Cocolon_前提資料/02_cocolon_national_system.md
+Cocolon_前提資料/02C_cocolon_contract_boundary_validation.md
+Cocolon_前提資料/03_cocolon_naming_system.md
+Cocolon_前提資料/04_cocolon_change_theme_checklist.md
+Cocolon_前提資料/05_cocolon_rule_file_index.md
+Cocolon_前提資料/07_latest_snapshot_diff.md
+Cocolon_前提資料/08_Cocolon_DB_rename_boundary.md
+Cocolon_前提資料/08_cocolon_db_rename_boundary.md
+Cocolon_前提資料/09_naming_boundary.md
+Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md
+Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md
+Cocolon_前提資料/cocolon_thought_material_for_karen.md
+Cocolon_前提資料/manifest.json
+Cocolon_前提資料/work_attitude_rules_for_karen/03_forbidden_insufficient_premise_and_actual_file_check.txt
+Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json
+NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Addendum_20260723.md
+NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json
+NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Addendum_20260723.md
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md
+```
+
+## current technical state preserved
+
+```text
+terminal
+RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP
+
+postverified observation SHA-256
+ee403e258450ed4cbe212bd3304e710d2338ebdd03381f62df415f8b52b873ad
+
+Full R1
+UNKNOWN_PRESERVED
+
+next authority token SHA-256
+c98bad9d2ca01d951475a7c839ea7c5f0e6f7d7340cba33eff327da8bddb3539
+```
+
+前提資料監査によるtechnical authority activation / consumption、Policy Receipt consumption、
+network / metadata observation、runtime / pytest / target execution、mashos-api change、Cocolon
+production change、historical reparse / reclassification / creditはすべてexact0です。
+
+## confirmed facts, inference, and Karen's opinion
+
+### Confirmed facts
+
+更新triggerのruleは既に存在し、work rule manifest exact18も完全でした。不足していたのは
+ruleそのものではなく、節目の全体監査実施と、current structure / path / visibility / manifest
+への反映です。Recovery control planeはlive app / reply / API / DB / RNへ接続されていません。
+
+### Inference
+
+次のdesign-only reconciliationでidentity graphとdirect-execve capability bindingを有効にできるかは
+未観測です。今回の監査はNode、provider、network、runtimeの不存在または将来不可能性を示しません。
+
+### Karen's opinion
+
+華恋の意見として、今回の補正はhistorical bytesを直すのではなく、currentの読み方とstable
+structureを回復する最小scopeです。機械validatorは有用な別候補ですが、新subsystemなので
+この承認scopeへ混ぜていません。
+
+## Exactly one next authority
+
+次は直前current sectionと同一の、body-free static reconciliation Contract V1 design-onlyです。
+invalid V2 Receiptをconsumed exact1とし、Policy Receiptをunconsumedのまま保持し、acyclic identity /
+link graphとclosed direct-execve capability bindingをdual static verificationしてSTOPします。
+exact token bytesは直前current sectionのtoken blockを継承し、token SHA-256は
+`c98bad9d2ca01d951475a7c839ea7c5f0e6f7d7340cba33eff327da8bddb3539`のままです。
+State: `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`。Automatic progression: false。
+
+### Entry-prefix preservation
+
+```text
+Snapshot prefix blob
+b45d2a56eccb60220e96735725ffe7384fd59dae
+
+Snapshot prefix raw SHA-256
+827842581e5426ddaad13bfe8e1681f81e035519207ae6c95f54164069f86790
+
+Snapshot prefix bytes / lines
+1860065 / 36176
+```

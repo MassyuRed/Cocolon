@@ -1,15 +1,15 @@
 ---
 doc_id: cocolon_change_theme_checklists
 title: "Cocolon 変更テーマ別チェックリスト"
-revision_date: "2026-07-21"
+revision_date: "2026-08-02"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_structural_audit"
 current_authority: "07_latest_snapshot_diff.md"
 last_structural_audit_source:
-  Cocolon: "MassyuRed/Cocolon:main@7533587673f1e895ea056b18562deaa6059f0aba"
-  mashos-api: "MassyuRed/mashos-api:main@a904ba192b05ca1445e32006b64fc87e7cda48bf"
+  Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
+  mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
 purpose: "変更テーマから、華恋が読むべき構造資料を逆引きする"
 ---
 
@@ -23,7 +23,7 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 1. `00_karen_read_first.md`
 2. `07_latest_snapshot_diff.md`
 3. `03_cocolon_naming_system.md`
-4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+4. `09_naming_boundary.md`
 5. 作業テーマに応じた `01` 系
 6. 国家システムに関係する場合は `02` 系
 7. contract / policy / guard に関係する場合は `05`
@@ -64,7 +64,7 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 2. `02_cocolon_national_system.md`
 3. `02C_cocolon_contract_boundary_validation.md`
 4. `05_cocolon_rule_file_index.md`
-5. `03_cocolon_naming_system.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`（DB名が関わる場合は `08` も読む）
+5. `03_cocolon_naming_system.md` / `09_naming_boundary.md`（DB名が関わる場合は `08` も読む）
 
 ## 2-4. Piece / Nexus / generated reflection / qna
 
@@ -73,7 +73,7 @@ Mash様から変更指示を受けた時に、華恋がどの構造資料を読�
 3. `02_cocolon_national_system.md`
 4. `02C_cocolon_contract_boundary_validation.md`
 5. `05_cocolon_rule_file_index.md`
-6. `03_cocolon_naming_system.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`（DB名が関わる場合は `08` も読む）
+6. `03_cocolon_naming_system.md` / `09_naming_boundary.md`（DB名が関わる場合は `08` も読む）
 
 Piece関係は、Mash様が明示した時だけPiece専用工程として扱います。
 
@@ -90,7 +90,7 @@ Piece関係は、Mash様が明示した時だけPiece専用工程として扱い
 2. `02_cocolon_national_system.md`
 3. `02C_cocolon_contract_boundary_validation.md`
 4. `05_cocolon_rule_file_index.md`
-5. `03_cocolon_naming_system.md` / `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`（DB削除範囲が関わる場合。実削除は今回対象外）
+5. `03_cocolon_naming_system.md` / `09_naming_boundary.md`（DB削除範囲が関わる場合。実削除は今回対象外）
 
 主な同時確認ファイル:
 
@@ -128,7 +128,7 @@ Piece関係は、Mash様が明示した時だけPiece専用工程として扱い
 
 1. `03_cocolon_naming_system.md`
 2. `06_cocolon_filename_change_hold_ledger.md`
-3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md`
+3. `09_naming_boundary.md`
 4. `01` 系の該当feature
 5. `02` 系の該当国家システム
 6. `05_cocolon_rule_file_index.md`
@@ -254,7 +254,7 @@ Mash様から「三大中核構造」「EmlisAI強化」「Pieceが短く潰れ�
 1. `00_karen_read_first.md` の共通基盤境界。
 2. `03_cocolon_naming_system.md` の visible名 / route名 / DB名 / adapter名の分離。
 3. `05_cocolon_rule_file_index.md` の共通Core rule / guard / test。
-4. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の名称混在境界。
+4. `09_naming_boundary.md` の名称混在境界。
 5. 変更対象中核ごとに、Emlisはpassed-only、Pieceはpreview/publish同一性、Analysisは非診断・素材domain分離を確認する。
 
 # 2026-05-13 差分追記: こころ天気の旧感情分析非表示を触る時
@@ -301,7 +301,7 @@ EmlisAIの限定Composer拡張、SentenceBinding、relation taxonomy、binding-a
 
 1. `00_karen_read_first.md` の最新基準面と限定Composer拡張境界
 2. `03_cocolon_naming_system.md` の限定Composer / 完全Composer / 完全Composer商品品質版の読み分け
-3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の名称混在境界
+3. `09_naming_boundary.md` の名称混在境界
 4. `01A_cocolon_overall_structure_app_foundation_home.md` の runtime map
 5. `02C_cocolon_contract_boundary_validation.md` の contract / verification
 6. `05_cocolon_rule_file_index.md` の Guard / test 索引
@@ -332,7 +332,7 @@ EmlisAIのbinding contract、coverage、Grounding、Surface variation、Self-Rep
 
 1. `00_karen_read_first.md` の最新基準面と商品品質版接続境界。
 2. `03_cocolon_naming_system.md` の完全Composer初期版 / 商品品質版接続 / Product Gate の読み分け。
-3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` の internal meta / public契約境界。
+3. `09_naming_boundary.md` の internal meta / public契約境界。
 4. `01A_cocolon_overall_structure_app_foundation_home.md` のEmlisAI runtime map。
 5. `02A_cocolon_national_system_input_save_dispatch.md` のInput -> immediate reply flow。
 6. `02C_cocolon_contract_boundary_validation.md` のcontract / regression。
@@ -445,7 +445,7 @@ EmlisAIのRuntime Surface Quality、source lock、surface signature、scorecard 
 6. `02A_cocolon_national_system_input_save_dispatch.md` の保存API非変更境界。
 7. `02C_cocolon_contract_boundary_validation.md` のcontract / verification boundary。
 8. `05_cocolon_rule_file_index.md` のRuntime Surface Quality rule / test index。
-9. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` のinternal名保管境界。
+9. `09_naming_boundary.md` のinternal名保管境界。
 10. 最新実ファイルzip上の対象file。
 
 禁止: RN passed-only contractを緩める、`/emotion/submit` routeやresponse keyをrenameする、DB physical nameを変える、Gateを緩める、raw入力本文やpublic `comment_text` 本文をmetricへ入れる、Step12 Exit GateをProduct Gate達成扱いにする。
@@ -456,7 +456,7 @@ EmlisAIの観測返答、eligible / low_information routing、ユーザー辞書
 
 1. `00_karen_read_first.md` の最新基準面とObservation Reply Step0-14境界。
 2. `03_cocolon_naming_system.md` の `observation_reply_kind` / `low_information_observation` / public statusの読み分け。
-3. `09_Cocolon_名称混在保管と構造境界_2026-05-10.md` のObservation Reply internal名保管境界。
+3. `09_naming_boundary.md` のObservation Reply internal名保管境界。
 4. `01_cocolon_overall_structure.md` のObservation Reply Step0-14 overall structure。
 5. `01A_cocolon_overall_structure_app_foundation_home.md` のRN optional meta境界。
 6. `01C_cocolon_overall_structure_account_subscription_backend_support.md` のbackend service / test map。
@@ -728,3 +728,29 @@ test-local fixed-slot prefixを商品文法へ昇格する。
 historical P2 path-scope REDをsemantic regressionとして修復する。
 disconnected source-tree ownerの存在をpublic runtime接続済みと読む。
 ```
+
+# 2026-08-02 current checklist: Step11 Recovery / GitHub / Work runtime
+
+## NLS v3 Step11 Cycle001 Recovery Epoch001-004
+
+- [ ] 07のEOF側最後の完全なcurrent sectionを解決したか
+- [ ] tracked Planとlatest Result / Receipt / Handoffを読んだか
+- [ ] rc0031節をhistorical predecessorとして扱い、current next authorityにしていないか
+- [ ] Recovery source / tool / test / documentをlive API / DB / RN / production runtimeと分けたか
+- [ ] prior epoch / observer / receiptを再parse、reclassify、retry、creditしていないか
+- [ ] current terminal、Full R1、inactive next tokenを07 / Planと照合したか
+
+## GitHub reflection / repository visibility / retired Guardian
+
+- [ ] current visibilityをGitHub実測し、historical private記述をcurrentへ持ち上げていないか
+- [ ] public visibilityと、Mash承認scope・華恋only writeを混同していないか
+- [ ] GitHub反映は`11`の`CURRENT_NORMATIVE_CONTRACT`だけを正本にしたか
+- [ ] `12`を`HISTORICAL_NON_NORMATIVE / RETIRED_DISABLED`として読み、Guardianを再起動していないか
+- [ ] source参照、相互path、case、manifest entry、current/historical表示を全体監査したか
+
+## Work test-runner continuity / targeted pytest
+
+- [ ] pytest依存なら`13` → rule `16` → rule `09` §Sの順で読んだか
+- [ ] historical READY / runtime-not-found断面とcurrent Gate B terminalを分けたか
+- [ ] runtime / Gate B / pytest / target invocation counterを混同していないか
+- [ ] current authorityが許可しないnetwork、runtime acquisition、fallback、retry、target実行を行っていないか

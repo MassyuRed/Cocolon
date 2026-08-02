@@ -12,7 +12,7 @@ Cocolon作業では、Cocolon_前提資料を読まずに出力してはいけ�
 
 - `Cocolon_前提資料/00_karen_read_first.md`
 - `03_cocolon_naming_system.md`
-- `09_Cocolon_名称混在保管と構造境界_YYYY-MM-DD.md`
+- `09_naming_boundary.md`
 - `01_cocolon_overall_structure.md` 系
 - `02_cocolon_national_system.md` 系
 - `05_cocolon_rule_file_index.md`
