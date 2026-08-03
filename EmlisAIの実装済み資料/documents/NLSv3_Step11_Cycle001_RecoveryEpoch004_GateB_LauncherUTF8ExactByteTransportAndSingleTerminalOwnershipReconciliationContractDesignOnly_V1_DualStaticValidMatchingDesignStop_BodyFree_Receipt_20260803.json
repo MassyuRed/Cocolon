@@ -1,0 +1,1372 @@
+{
+  "schema_version": "COCOLON_BODY_FREE_RECEIPT_V1",
+  "receipt_id": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SINGLE_TERMINAL_OWNERSHIP_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP_20260803",
+  "observed_at_date": "2026-08-03",
+  "body_free": true,
+  "automatic_progression": false,
+  "observation": {
+    "authority": {
+      "token_ascii_byte_count": 8043,
+      "token_sha256": "427cfe1d5fae77e5383bef9345ed120ac01f0ce0ada8ba8fb23bd1b9f935afdd",
+      "token_recompute_match": true,
+      "activation_count": 1,
+      "activation_basis": "MASH_EXPLICIT_APPROVAL",
+      "current_launcher_blocker_receipt_consumption_count": 1,
+      "prior_authority_or_prior_blocker_receipt_reconsumption_count": 0,
+      "current_policy_receipt_consumption_count": 0,
+      "automatic_progression": false
+    },
+    "repository_identity": {
+      "cocolon_actual_prewrite_commit": "4e412f6672fbb50911e346b5ccd1ccb71f1505ae",
+      "cocolon_actual_prewrite_tree": "e198a62b1c7205bf22abbcf9ea5059a443bd18bc",
+      "cocolon_actual_prewrite_parent_commit": "803202c7ce296b34ba31cedc849138ccb8ad1109",
+      "cocolon_actual_prewrite_parent_tree": "5bb2b6bdd75c0dfce701d24971677dcaf57a9a39",
+      "authority_carried_prewrite_base_commit": "803202c7ce296b34ba31cedc849138ccb8ad1109",
+      "authority_carried_prewrite_base_tree": "5bb2b6bdd75c0dfce701d24971677dcaf57a9a39",
+      "authority_carried_predecessor_commit": "dddd1abb7866210abf622ea83870bd5551ad50d3",
+      "authority_carried_predecessor_tree": "485f1569f57eaafb421160b6cd1a9262167c9cb0",
+      "authority_carried_predecessor_predecessor_commit": "ab36e514cf709c9ab87e971b78c81c15632025ca",
+      "authority_carried_predecessor_predecessor_tree": "4ea0885503b09e45ac4dfc88d1723746f5cd9f2f",
+      "mashos_api_commit": "315813c7bd3372462de926ddad74df567254a6b5",
+      "mashos_api_tree": "a641510e107d52bb910073f36604c85bd57af150",
+      "mashos_api_change_count": 0
+    },
+    "source_receipts_and_contracts": {
+      "current_launcher_blocker_receipt": {
+        "blob_sha1": "1979ba7483f925b88f1e8185b67c24d1959f25cc",
+        "raw_sha256": "1b0fa48b7bec01bb39537cddc1c9a01ac4653d82da72724d696b83e0d68b7f0f",
+        "logical_sha256": "6df0e7e49c50703cf60321e86b202a7dbc1b57b8f8322730d81ee5652f57578c",
+        "observation_sha256": "b3bebafcad6c0b2eb64dd46ed522ced7a1be75006abe01e4de3d0963d81d60a9"
+      },
+      "current_launcher_blocker_receipt_closed_consumed": true,
+      "contract_v2_receipt": {
+        "blob_sha1": "1c61daa8333c6caa5f9b9a1c1d56bc095ce232ca",
+        "raw_sha256": "6200cbdeb44d6298fd3e69aa995b5ba9a9fae0fadd4642cac3b57cd6d18a66f9",
+        "logical_sha256": "d6fccc1eb19be15d364238ed168a18ba8301fc767a7ba5edd8b6ace8060fe8f4",
+        "observation_sha256": "563c80821a36d6a43e1ef93f5cfa51d046364af4d217c40b3e6971c9e7120df1"
+      },
+      "contract_v2_candidate_canonical_byte_count": 19031,
+      "contract_v2_candidate_canonical_sha256": "61e8c8c42a120bd6dbe1038f7b1fdfb250c1ea6edca3cd49b5713aa0718b8f3e",
+      "contract_v2_mutation_or_weakening_count": 0,
+      "required_design_identities_closed_exact3": [
+        {
+          "role": "CONTRACT_V2_CANONICAL_CANDIDATE",
+          "sha256": "61e8c8c42a120bd6dbe1038f7b1fdfb250c1ea6edca3cd49b5713aa0718b8f3e",
+          "canonical_byte_count": 19031
+        },
+        {
+          "role": "CONTRACT_V2_OWNER_STATIC_DESIGN",
+          "projection_sha256": "8b3c38140fd9bb1c3245f4fa50a5a8652a48b4245bfe30b58c366170738c5b13",
+          "evidence_sha256": "a9fff39d721e98b78f3d51a3e68fad2b6f52193b15ee9ada783015cac9687bec"
+        },
+        {
+          "role": "CONTRACT_V2_INDEPENDENT_STATIC_DESIGN",
+          "projection_sha256": "8b3c38140fd9bb1c3245f4fa50a5a8652a48b4245bfe30b58c366170738c5b13",
+          "evidence_sha256": "ce5fdebcb178290e7161f7c0073f488bbf295f736c3e8e6b75c74ecdf3e971c1"
+        }
+      ],
+      "policy_receipt": {
+        "blob_sha1": "2f5eace6de56699519319600d90f12407b6c4e83",
+        "raw_sha256": "437b319f395f4bb57c0c61a90c3ff234c27ad8936408886b138fd4d9ec5c02fc",
+        "logical_sha256": "0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a",
+        "observation_sha256": "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+        "state": "CLOSED_UNCONSUMED_IMMUTABLE",
+        "consumption_count": 0
+      }
+    },
+    "historical_preservation": {
+      "failed_launcher_path_body_state_output_or_caught_termination_control_read_count": 0,
+      "failed_launcher_reuse_repair_mutation_reexecution_retry_rebind_or_retroactive_credit_count": 0,
+      "prior_controller_or_verifier_private_path_body_identity_or_derived_state_read_count": 0,
+      "prior_controller_or_verifier_execution_credit_count": 0,
+      "prior_source_v3_or_source_v4_private_state_read_or_reuse_count": 0,
+      "full_r1_result": "UNKNOWN_PRESERVED"
+    },
+    "public_source_reread_and_binding": {
+      "fresh_public_input_binding_count": 1,
+      "current_launcher_blocker_receipt_fresh_reread_recanonicalization_rehash_and_match_count": 1,
+      "contract_v2_fresh_reread_recanonicalization_rehash_and_match_count": 1,
+      "required_design_identity_match_count": 3,
+      "required_design_identity_mismatch_count": 0,
+      "public_input_check_count": 19,
+      "public_input_failed_check_count": 0,
+      "private_failed_launcher_controller_verifier_or_source_state_read_count": 0
+    },
+    "launcher_utf8_exact_byte_transport_and_single_terminal_ownership_reconciliation_contract_v1_candidate": {
+      "contract_id": "COCOLON_NLS_V3_STEP11_GATE_B_LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_AND_SINGLE_TERMINAL_OWNERSHIP_RECONCILIATION_CONTRACT_V1",
+      "contract_version": 1,
+      "publicable": true,
+      "body_free": true,
+      "purpose": "Freeze a design-only, body-free contract for exact UTF-8 byte transport, immutable identity binding, private Controller capture, and exactly-one public terminal dispatch before any corrected implementation or runtime execution.",
+      "source_binding_contract": {
+        "successor_authority": {
+          "ascii_byte_count": 8043,
+          "sha256": "427cfe1d5fae77e5383bef9345ed120ac01f0ce0ada8ba8fb23bd1b9f935afdd",
+          "activation_required_exactly_once": true
+        },
+        "current_launcher_blocker_receipt": {
+          "blob_sha1": "1979ba7483f925b88f1e8185b67c24d1959f25cc",
+          "raw_sha256": "1b0fa48b7bec01bb39537cddc1c9a01ac4653d82da72724d696b83e0d68b7f0f",
+          "logical_sha256": "6df0e7e49c50703cf60321e86b202a7dbc1b57b8f8322730d81ee5652f57578c",
+          "observation_sha256": "b3bebafcad6c0b2eb64dd46ed522ced7a1be75006abe01e4de3d0963d81d60a9",
+          "fresh_reread_recanonicalization_rehash_match_and_consumption_required_exactly_once": true
+        },
+        "prior_authority_or_prior_blocker_receipt_reconsumption_count": 0,
+        "contract_v2_receipt": {
+          "blob_sha1": "1c61daa8333c6caa5f9b9a1c1d56bc095ce232ca",
+          "raw_sha256": "6200cbdeb44d6298fd3e69aa995b5ba9a9fae0fadd4642cac3b57cd6d18a66f9",
+          "logical_sha256": "d6fccc1eb19be15d364238ed168a18ba8301fc767a7ba5edd8b6ace8060fe8f4",
+          "observation_sha256": "563c80821a36d6a43e1ef93f5cfa51d046364af4d217c40b3e6971c9e7120df1",
+          "candidate_canonical_byte_count": 19031,
+          "candidate_canonical_sha256": "61e8c8c42a120bd6dbe1038f7b1fdfb250c1ea6edca3cd49b5713aa0718b8f3e",
+          "immutable_no_weakening": true
+        },
+        "required_design_identities": {
+          "closed_exact_count": 3,
+          "identities": [
+            {
+              "role": "CONTRACT_V2_CANONICAL_CANDIDATE",
+              "canonical_byte_count": 19031,
+              "sha256": "61e8c8c42a120bd6dbe1038f7b1fdfb250c1ea6edca3cd49b5713aa0718b8f3e"
+            },
+            {
+              "role": "CONTRACT_V2_OWNER_STATIC_DESIGN",
+              "projection_sha256": "8b3c38140fd9bb1c3245f4fa50a5a8652a48b4245bfe30b58c366170738c5b13",
+              "evidence_sha256": "a9fff39d721e98b78f3d51a3e68fad2b6f52193b15ee9ada783015cac9687bec"
+            },
+            {
+              "role": "CONTRACT_V2_INDEPENDENT_STATIC_DESIGN",
+              "projection_sha256": "8b3c38140fd9bb1c3245f4fa50a5a8652a48b4245bfe30b58c366170738c5b13",
+              "evidence_sha256": "ce5fdebcb178290e7161f7c0073f488bbf295f736c3e8e6b75c74ecdf3e971c1"
+            }
+          ],
+          "fresh_public_reread_recanonicalization_rehash_and_match_required_exactly_once": true
+        },
+        "policy_receipt": {
+          "observation_sha256": "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+          "closed_unconsumed_immutable": true,
+          "consumption_count": 0
+        }
+      },
+      "canonicalization": {
+        "value": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+        "json_pointer": "/observation/launcher_utf8_exact_byte_transport_and_single_terminal_ownership_reconciliation_contract_v1_candidate",
+        "contract_creation_count_required": 1,
+        "contract_identity_freeze_count_required": 1,
+        "unicode_normalization": "NONE",
+        "private_path_body_or_component_identity_included": false
+      },
+      "utf8_exact_byte_transport_contract": {
+        "readback_envelope_acquisition": {
+          "carrier": "PRIVATE_RAW_UTF8_BASE64_ENVELOPE_TEXT",
+          "decode_attempt_count": 0,
+          "frozen_expected_frame_fields": [
+            "ENVELOPE_VERSION",
+            "BASE64_CHARACTER_COUNT",
+            "TERMINAL_END_MARKER"
+          ],
+          "field_count": 3,
+          "private_expected_frame_value_freeze_count_required": 1,
+          "private_expected_frame_values_bound_to_frozen_source_identity": true,
+          "exact_character_count_checked_before_base64_loader": true,
+          "terminal_end_marker_required_exactly_once_at_exact_end": true,
+          "truncated_or_extra_text_classification": "READBACK_TRUNCATED_OR_EXTRA",
+          "same_length_payload_mutation_is_not_frame_divergence_and_flows_to_loader_utf8_identity_or_disk_identity_checks": true,
+          "frame_validation_precedes_base64_byte_acquisition": true
+        },
+        "transport_input": {
+          "carrier": "STRICT_RFC4648_CANONICAL_BASE64_TEXT",
+          "whitespace_allowed": false,
+          "length_multiple_of_four_required": true,
+          "padding_allowed_only_at_end_exact_zero_one_or_two": true,
+          "decode_then_base64_reencode_must_equal_original": true,
+          "decoded_byte_buffer_private": true,
+          "acquisition_count_required": 1
+        },
+        "ordered_pipeline": {
+          "closed_stage_count": 6,
+          "stages": [
+            {
+              "rank": 1,
+              "stage": "BASE64_BYTE_ACQUISITION",
+              "success_output": "PRIVATE_ORIGINAL_BYTE_BUFFER",
+              "failure_class": "LOADER_REJECT_OR_THROW"
+            },
+            {
+              "rank": 2,
+              "stage": "FATAL_UTF8_DECODE",
+              "decoder": "UTF8_FATAL_BOM_PRESERVED_NO_REPLACEMENT",
+              "success_output": "PRIVATE_EVALUATED_STRING_CANDIDATE",
+              "failure_class": "INVALID_UTF8"
+            },
+            {
+              "rank": 3,
+              "stage": "UTF8_REENCODE",
+              "encoder": "CANONICAL_UTF8_NO_NORMALIZATION",
+              "success_output": "PRIVATE_REENCODED_BYTE_BUFFER",
+              "failure_class": "INVALID_UTF8"
+            },
+            {
+              "rank": 4,
+              "stage": "ORIGINAL_AND_REENCODED_BYTE_FOR_BYTE_EQUALITY",
+              "comparison": "EXACT_BYTE_SEQUENCE_EQUALITY",
+              "failure_class": "INVALID_UTF8"
+            },
+            {
+              "rank": 5,
+              "stage": "DISK_IDENTITY_BINDING",
+              "identities": [
+                "SHA256_OF_PRIVATE_ORIGINAL_BYTES",
+                "BYTE_COUNT_OF_PRIVATE_ORIGINAL_BYTES",
+                "LF_BYTE_COUNT_EQUIVALENT_TO_WC_L"
+              ],
+              "failure_classes": [
+                "SHA_MISMATCH",
+                "BYTE_COUNT_MISMATCH",
+                "LINE_COUNT_MISMATCH"
+              ]
+            },
+            {
+              "rank": 6,
+              "stage": "EVALUATED_STRING_IDENTITY_BINDING",
+              "binding": "EVALUATOR_INPUT_IS_EXACT_FATAL_DECODE_RESULT_WHOSE_REENCODED_BYTES_EQUAL_ORIGINAL_BYTES",
+              "success_output": "IMMUTABLY_BOUND_PRIVATE_EVALUATED_STRING",
+              "failure_class": "INVALID_UTF8"
+            }
+          ]
+        },
+        "readback_frame_contract": {
+          "complete_base64_envelope_required_before_loader_or_decode": true,
+          "truncated_or_extra_frame_rejected": true,
+          "frame_failure_precedes_loader_and_content_identity_checks": true,
+          "failure_class": "READBACK_TRUNCATED_OR_EXTRA"
+        },
+        "identity_prohibitions": {
+          "ascii_only_gate_count": 0,
+          "utf16_code_unit_count_as_byte_identity_count": 0,
+          "javascript_string_length_as_byte_count_count": 0,
+          "hash_over_base64_or_decoded_text_as_source_byte_identity_count": 0,
+          "trim_normalize_or_bom_drop_count": 0
+        },
+        "line_count_semantics": "COUNT_BYTE_0A_OCCURRENCES_EQUIVALENT_TO_WC_L",
+        "multibyte_utf8_is_admissible": true,
+        "private_source_path_body_or_identity_publication_count": 0
+      },
+      "runtime_failure_precedence_contract": {
+        "vector_order_is_not_runtime_branch_order": true,
+        "selection": "FIRST_FAILED_STAGE_FROM_ONE_IMMUTABLY_FROZEN_STATE",
+        "all_later_branches_require_every_prior_stage_success": true,
+        "closed_leaf_count": 12,
+        "frozen_state_schema": {
+          "closed_field_count": 9,
+          "ordered_fields": [
+            {
+              "rank": 1,
+              "name": "readback_frame",
+              "enum": [
+                "VALID",
+                "TRUNCATED_OR_EXTRA"
+              ],
+              "success_value": "VALID"
+            },
+            {
+              "rank": 2,
+              "name": "loader_outcome",
+              "enum": [
+                "SUCCESS",
+                "REJECT_OR_THROW"
+              ],
+              "success_value": "SUCCESS"
+            },
+            {
+              "rank": 3,
+              "name": "utf8_identity",
+              "enum": [
+                "VALID",
+                "INVALID_FATAL_DECODE_OR_REENCODE"
+              ],
+              "success_value": "VALID"
+            },
+            {
+              "rank": 4,
+              "name": "sha256_identity",
+              "enum": [
+                "MATCH",
+                "MISMATCH"
+              ],
+              "success_value": "MATCH"
+            },
+            {
+              "rank": 5,
+              "name": "byte_count_identity",
+              "enum": [
+                "MATCH",
+                "MISMATCH"
+              ],
+              "success_value": "MATCH"
+            },
+            {
+              "rank": 6,
+              "name": "line_count_identity",
+              "enum": [
+                "MATCH",
+                "MISMATCH"
+              ],
+              "success_value": "MATCH"
+            },
+            {
+              "rank": 7,
+              "name": "prevalidation_outcome",
+              "enum": [
+                "SUCCESS",
+                "PRIVATE_EXIT_CAUGHT"
+              ],
+              "success_value": "SUCCESS"
+            },
+            {
+              "rank": 8,
+              "name": "evaluator_outcome",
+              "enum": [
+                "SUCCESS",
+                "CONSTRUCTION_FAILURE"
+              ],
+              "success_value": "SUCCESS"
+            },
+            {
+              "rank": 9,
+              "name": "controller_outcome",
+              "enum": [
+                "THROW_OR_REJECT",
+                "ZERO_RECORDS",
+                "MULTIPLE_OR_MALFORMED_RECORDS",
+                "SINGLE_VALID_RECORD"
+              ],
+              "success_value": "SINGLE_VALID_RECORD"
+            }
+          ],
+          "extra_missing_unknown_or_nonexclusive_value_action": "LAUNCHER_CONTRACT_VERIFIER_PREMATERIALIZATION_INPUT_SCHEMA_INVALID_TYPED_DESIGN_BLOCKER_STOP_NO_RUNTIME_TERMINAL_CREDIT",
+          "invalid_state_is_outside_runtime_closed_semantic_domain": true,
+          "invalid_state_runtime_dispatch_count": 0,
+          "invalid_state_corrected_implementation_or_execution_count": 0
+        },
+        "ordered_leaves": [
+          {
+            "rank": 1,
+            "leaf": "READBACK_TRUNCATED_OR_EXTRA",
+            "typed_reason": "LAUNCHER_READBACK_TRUNCATED_OR_EXTRA",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 2,
+            "leaf": "LOADER_REJECT_OR_THROW",
+            "typed_reason": "LAUNCHER_LOADER_REJECT_OR_THROW",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 3,
+            "leaf": "INVALID_UTF8_OR_REENCODE_IDENTITY",
+            "typed_reason": "LAUNCHER_UTF8_IDENTITY_INVALID",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 4,
+            "leaf": "SHA_MISMATCH",
+            "typed_reason": "LAUNCHER_SOURCE_SHA256_MISMATCH",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 5,
+            "leaf": "BYTE_COUNT_MISMATCH",
+            "typed_reason": "LAUNCHER_SOURCE_BYTE_COUNT_MISMATCH",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 6,
+            "leaf": "LINE_COUNT_MISMATCH",
+            "typed_reason": "LAUNCHER_SOURCE_LINE_COUNT_MISMATCH",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 7,
+            "leaf": "PREVALIDATION_FAILURE_EXIT_CATCHABLE",
+            "typed_reason": "LAUNCHER_PREVALIDATION_PRIVATE_EXIT_CAUGHT",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 8,
+            "leaf": "EVALUATOR_CONSTRUCTION_FAILURE",
+            "typed_reason": "LAUNCHER_EVALUATOR_CONSTRUCTION_FAILED",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 9,
+            "leaf": "CONTROLLER_THROW_OR_REJECT_BEFORE_VALID_PUBLICATION",
+            "typed_reason": "LAUNCHER_CONTROLLER_THROW_OR_REJECT_BEFORE_VALID_PUBLICATION",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 10,
+            "leaf": "CONTROLLER_ZERO_PUBLICATION",
+            "typed_reason": "LAUNCHER_CONTROLLER_ZERO_PUBLICATION",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 11,
+            "leaf": "CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS",
+            "typed_reason": "LAUNCHER_CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS",
+            "logical_terminal_owner": "LAUNCHER"
+          },
+          {
+            "rank": 12,
+            "leaf": "CONTROLLER_SINGLE_VALID_BODY_FREE_JSON",
+            "typed_reason": "CONTROLLER_SINGLE_BODY_FREE_JSON_PUBLICATION_VALID",
+            "logical_terminal_owner": "CONTROLLER"
+          }
+        ],
+        "partition_coverage_proof": {
+          "guard_construction": "SELECT_FIRST_NON_SUCCESS_FIELD_IN_FROZEN_STATE_SCHEMA; IF_FIELDS_1_TO_8_SUCCESS_SELECT_EXACTLY_ONE_CONTROLLER_OUTCOME_ENUM",
+          "coverage_row_count": 12,
+          "selected_rank_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "each_row_true_branch_count_exactly_one": true,
+          "zero_true_row_count": 0,
+          "multiple_true_row_count": 0,
+          "branch_overlap_count": 0
+        },
+        "simultaneous_fault_resolution_is_total_and_exclusive": true,
+        "unresolved_leaf_count": 0
+      },
+      "single_terminal_ownership_contract": {
+        "protected_region": {
+          "scope": "LOADER_TRANSPORT_PREVALIDATION_EVALUATOR_AND_CONTROLLER_CAPTURE",
+          "public_write_count": 0,
+          "public_exit_or_termination_count": 0,
+          "preparation_failure_action": "RETURN_ONE_PRIVATE_FROZEN_TERMINAL_CANDIDATE_STATE_ONLY",
+          "catch_or_finally_dispatch_count": 0,
+          "state_overwrite_after_freeze_count": 0
+        },
+        "controller_adapter": {
+          "text_sink": "PRIVATE_COMPLETE_TEXT_BUFFER",
+          "external_write_count": 0,
+          "first_record_early_publication_count": 0,
+          "exit_mechanism": "UNFORGEABLE_PRIVATE_EXIT_SENTINEL",
+          "real_process_exit_count": 0,
+          "generic_throw_or_reject_distinct_from_private_exit_sentinel": true,
+          "private_exit_sentinel_classification_precedes_generic_throw_or_reject": true,
+          "completion_boundary": "AWAIT_EXACTLY_ONE_SYNC_OR_PROMISE_SETTLEMENT_THEN_REQUIRE_PRIVATE_NO_REMAINING_WRITE_CAPABILITY_TOKEN_THEN_SEAL_BUFFER",
+          "scheduling_timer_network_process_or_retained_callback_capability_supplied_to_controller": false,
+          "private_no_remaining_write_capability_token_required_before_seal": true,
+          "dispatcher_waits_for_seal_and_no_remaining_write_capability_token": true,
+          "retained_write_capability_detected_before_dispatch_action": "CONTROLLER_THROW_OR_REJECT_BEFORE_VALID_PUBLICATION",
+          "post_seal_late_write_reachable": false,
+          "write_call_count_and_complete_logical_json_record_count_are_distinct": true,
+          "parser_consumes_entire_sealed_buffer_without_ignored_trailing_bytes": true,
+          "zero_record_action": "CONTROLLER_ZERO_PUBLICATION",
+          "multiple_or_malformed_record_action": "CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS",
+          "single_valid_record_action": "CONTROLLER_SINGLE_VALID_BODY_FREE_JSON"
+        },
+        "sealed_private_buffer_grammar": {
+          "chunk_boundaries_have_no_record_semantics": true,
+          "all_chunks_concatenated_in_order_before_classification": true,
+          "zero_publication_bytes": "EXACT_EMPTY_BUFFER_ONLY",
+          "whitespace_only_buffer_classification": "MALFORMED",
+          "single_record_bytes": "EXACT_UTF8_SORTED_COMPACT_JSON_PLUS_SINGLE_LF",
+          "leading_whitespace_allowed": false,
+          "trailing_whitespace_except_exact_single_lf_allowed": false,
+          "embedded_or_second_record_allowed": false,
+          "classification_order": [
+            "EMPTY_BUFFER_IS_ZERO",
+            "PARSE_ENTIRE_NONEMPTY_BUFFER_AS_ONE_JSON_VALUE_AND_REQUIRE_EXACT_CANONICAL_RESERIALIZATION_PLUS_SINGLE_LF",
+            "OTHERWISE_MULTIPLE_OR_MALFORMED"
+          ],
+          "parsed_record_must_match_controller_buffer_allowed_success_tuple_exact1": true,
+          "controller_buffer_allowed_tuple_count": 1,
+          "controller_buffer_allowed_tuple": {
+            "terminal_class": "ADMIT",
+            "logical_terminal_owner": "CONTROLLER",
+            "typed_reason": "CONTROLLER_SINGLE_BODY_FREE_JSON_PUBLICATION_VALID"
+          },
+          "controller_buffer_launcher_owned_or_controlled_stop_tuple_action": "MALFORMED",
+          "launcher_controlled_stop_tuples_may_only_be_constructed_by_outer_dispatcher": true,
+          "controller_success_tuple_reconstructed_from_validated_semantic_fields_before_outer_dispatch": true,
+          "raw_controller_text_external_forward_count": 0,
+          "private_buffer_seal_count": 1,
+          "reopen_or_append_after_seal_count": 0
+        },
+        "body_free_public_terminal_schema": {
+          "closed": true,
+          "field_count": 7,
+          "ordered_fields": [
+            {
+              "rank": 1,
+              "name": "schema_version",
+              "value": "NLS_V3_GATE_B_LAUNCHER_TERMINAL_V1"
+            },
+            {
+              "rank": 2,
+              "name": "body_free",
+              "type": "BOOLEAN_TRUE"
+            },
+            {
+              "rank": 3,
+              "name": "terminal_class",
+              "enum": [
+                "ADMIT",
+                "CONTROLLED_STOP"
+              ]
+            },
+            {
+              "rank": 4,
+              "name": "logical_terminal_owner",
+              "enum": [
+                "CONTROLLER",
+                "LAUNCHER"
+              ]
+            },
+            {
+              "rank": 5,
+              "name": "typed_reason",
+              "source": "RUNTIME_FAILURE_PRECEDENCE_CONTRACT_CLOSED_LEAF_EXACT12"
+            },
+            {
+              "rank": 6,
+              "name": "runtime_ready",
+              "value": false
+            },
+            {
+              "rank": 7,
+              "name": "automatic_progression",
+              "value": false
+            }
+          ],
+          "extra_missing_or_malformed_field_action": "CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS",
+          "terminal_tuple_correlation_contract": {
+            "closed_allowed_tuple_count": 12,
+            "controller_success_tuple": {
+              "terminal_class": "ADMIT",
+              "logical_terminal_owner": "CONTROLLER",
+              "typed_reason": "CONTROLLER_SINGLE_BODY_FREE_JSON_PUBLICATION_VALID"
+            },
+            "launcher_controlled_stop_reason_count": 11,
+            "launcher_controlled_stop_reasons": [
+              "LAUNCHER_READBACK_TRUNCATED_OR_EXTRA",
+              "LAUNCHER_LOADER_REJECT_OR_THROW",
+              "LAUNCHER_UTF8_IDENTITY_INVALID",
+              "LAUNCHER_SOURCE_SHA256_MISMATCH",
+              "LAUNCHER_SOURCE_BYTE_COUNT_MISMATCH",
+              "LAUNCHER_SOURCE_LINE_COUNT_MISMATCH",
+              "LAUNCHER_PREVALIDATION_PRIVATE_EXIT_CAUGHT",
+              "LAUNCHER_EVALUATOR_CONSTRUCTION_FAILED",
+              "LAUNCHER_CONTROLLER_THROW_OR_REJECT_BEFORE_VALID_PUBLICATION",
+              "LAUNCHER_CONTROLLER_ZERO_PUBLICATION",
+              "LAUNCHER_CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS"
+            ],
+            "launcher_controlled_stop_tuple_rule": "TERMINAL_CLASS_CONTROLLED_STOP_AND_LOGICAL_OWNER_LAUNCHER_AND_REASON_IN_CLOSED_EXACT11",
+            "schema_validity_rule": "EXACT_FIELD_SET_AND_EXACTLY_ONE_ALLOWED_CLASS_OWNER_REASON_TUPLE",
+            "cross_product_combinations_not_listed_are_invalid": true,
+            "runtime_leaf_to_public_tuple_constructor_total_exact12": true,
+            "launcher_leaf_to_launcher_controlled_stop_tuple_count": 11,
+            "controller_success_leaf_to_controller_admit_tuple_count": 1
+          },
+          "private_path_body_value_identity_raw_detail_or_stack_field_count": 0,
+          "serialization": "UTF8_SORTED_COMPACT_JSON_PLUS_SINGLE_LF"
+        },
+        "outer_terminal_dispatcher": {
+          "location": "OUTSIDE_PROTECTED_REGION_AND_OUTSIDE_ITS_CATCH_AND_FINALLY",
+          "input": "ONE_PRIVATE_FROZEN_TERMINAL_CANDIDATE",
+          "physical_external_writer": "LAUNCHER_OUTER_TERMINAL_DISPATCHER",
+          "logical_owner_preserved_from_terminal_candidate": true,
+          "invocation_count_for_every_closed_semantic_path": 1,
+          "public_record_count_for_every_closed_semantic_path": 1,
+          "termination_count_for_every_closed_semantic_path": 1,
+          "reentry_reconstruction_reevaluation_retry_or_partial_publication_counts": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dispatcher_failure_retry_or_redispatch_count": 0,
+          "atomic_total_record_sink_is_future_runtime_capability_precondition_not_current_credit": true
+        },
+        "ownership_distinction": {
+          "controller_logical_owner_only_for_single_valid_body_free_record": true,
+          "launcher_logical_owner_for_every_controlled_stop": true,
+          "launcher_is_only_physical_external_writer": true,
+          "logical_and_physical_owner_fields_are_not_conflated": true
+        }
+      },
+      "public_semantic_preflight_vector_contract": {
+        "closed": true,
+        "case_count": 14,
+        "admit_case_count": 3,
+        "controlled_stop_case_count": 11,
+        "case_ids_unique": true,
+        "case_order_is_authority_order_not_runtime_precedence": true,
+        "all_success_frozen_state": {
+          "readback_frame": "VALID",
+          "loader_outcome": "SUCCESS",
+          "utf8_identity": "VALID",
+          "sha256_identity": "MATCH",
+          "byte_count_identity": "MATCH",
+          "line_count_identity": "MATCH",
+          "prevalidation_outcome": "SUCCESS",
+          "evaluator_outcome": "SUCCESS",
+          "controller_outcome": "SINGLE_VALID_RECORD"
+        },
+        "cases": [
+          {
+            "rank": 1,
+            "case_id": "A01_VALID_ASCII_UTF8_IDENTITY",
+            "expected_class": "ADMIT",
+            "witness": "CANONICAL_BASE64_ASCII_SOURCE_WITH_SHA_BYTE_LF_AND_REENCODE_MATCH_AND_ONE_VALID_CONTROLLER_RECORD",
+            "synthetic_transport_fixture": {
+              "canonical_base64": "QQo=",
+              "decoded_bytes_sha256": "06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0",
+              "decoded_byte_count": 2,
+              "decoded_lf_byte_count": 1,
+              "decoded_utf16_code_unit_count": 2,
+              "utf8_byte_count_equals_utf16_code_unit_count": true,
+              "fatal_utf8_decode_and_exact_reencode_required": true,
+              "synthetic_fixture_not_private_source_or_implementation_body": true
+            },
+            "expected_logical_owner": "CONTROLLER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 12,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "ASCII_VALID",
+                "state_overrides": {}
+              }
+            ]
+          },
+          {
+            "rank": 2,
+            "case_id": "A02_VALID_MULTIBYTE_JAPANESE_UTF8_IDENTITY",
+            "expected_class": "ADMIT",
+            "witness": "CANONICAL_BASE64_JAPANESE_SOURCE_WITH_UTF8_BYTES_NOT_EQUAL_UTF16_CODE_UNITS_BUT_SHA_BYTE_LF_AND_REENCODE_MATCH_AND_ONE_VALID_CONTROLLER_RECORD",
+            "synthetic_transport_fixture": {
+              "canonical_base64": "6I+v5oGLCg==",
+              "decoded_bytes_sha256": "96ab3c1020dba31da3ec427fd5204b03804863eebb8846345956d6d6273c554c",
+              "decoded_byte_count": 7,
+              "decoded_lf_byte_count": 1,
+              "decoded_utf16_code_unit_count": 3,
+              "utf8_byte_count_equals_utf16_code_unit_count": false,
+              "fatal_utf8_decode_and_exact_reencode_required": true,
+              "synthetic_fixture_not_private_source_or_implementation_body": true
+            },
+            "expected_logical_owner": "CONTROLLER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 12,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "JAPANESE_MULTIBYTE_VALID_BYTES_NOT_UTF16_UNITS",
+                "state_overrides": {}
+              }
+            ]
+          },
+          {
+            "rank": 3,
+            "case_id": "A03_VALID_CONTROLLER_SINGLE_BODY_FREE_JSON_PUBLICATION",
+            "expected_class": "ADMIT",
+            "witness": "VALID_TRANSPORT_AND_EXACTLY_ONE_SCHEMA_VALID_CONTROLLER_RECORD_AFTER_COMPLETE_BUFFER_SEAL",
+            "synthetic_controller_record_fixture": {
+              "schema_version": "NLS_V3_GATE_B_LAUNCHER_TERMINAL_V1",
+              "body_free": true,
+              "terminal_class": "ADMIT",
+              "logical_terminal_owner": "CONTROLLER",
+              "typed_reason": "CONTROLLER_SINGLE_BODY_FREE_JSON_PUBLICATION_VALID",
+              "runtime_ready": false,
+              "automatic_progression": false
+            },
+            "expected_logical_owner": "CONTROLLER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 12,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "CONTROLLER_SINGLE_VALID_RECORD",
+                "state_overrides": {}
+              }
+            ]
+          },
+          {
+            "rank": 4,
+            "case_id": "S01_SHA_MISMATCH",
+            "expected_class": "CONTROLLED_STOP",
+            "isolated_fault": "EXPECTED_SHA256_DIFFERS_WHILE_FRAME_BYTE_AND_LF_EXPECTATIONS_MATCH",
+            "expected_typed_reason": "LAUNCHER_SOURCE_SHA256_MISMATCH",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 4,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "SHA_ONLY_MISMATCH",
+                "state_overrides": {
+                  "sha256_identity": "MISMATCH"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 5,
+            "case_id": "S02_BYTE_COUNT_MISMATCH",
+            "expected_class": "CONTROLLED_STOP",
+            "isolated_fault": "EXPECTED_BYTE_COUNT_DIFFERS_WHILE_FRAME_SHA_AND_LF_EXPECTATIONS_MATCH",
+            "expected_typed_reason": "LAUNCHER_SOURCE_BYTE_COUNT_MISMATCH",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 5,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "BYTE_COUNT_ONLY_MISMATCH",
+                "state_overrides": {
+                  "byte_count_identity": "MISMATCH"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 6,
+            "case_id": "S03_LINE_COUNT_MISMATCH",
+            "expected_class": "CONTROLLED_STOP",
+            "isolated_fault": "EXPECTED_LF_BYTE_COUNT_DIFFERS_WHILE_FRAME_SHA_AND_BYTE_EXPECTATIONS_MATCH",
+            "expected_typed_reason": "LAUNCHER_SOURCE_LINE_COUNT_MISMATCH",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 6,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "LINE_COUNT_ONLY_MISMATCH",
+                "state_overrides": {
+                  "line_count_identity": "MISMATCH"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 7,
+            "case_id": "S04_READBACK_TRUNCATED_OR_EXTRA",
+            "expected_class": "CONTROLLED_STOP",
+            "required_subwitnesses": [
+              "TRUNCATED_FRAME",
+              "EXTRA_FRAME"
+            ],
+            "expected_typed_reason": "LAUNCHER_READBACK_TRUNCATED_OR_EXTRA",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 1,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "TRUNCATED_FRAME",
+                "state_overrides": {
+                  "readback_frame": "TRUNCATED_OR_EXTRA"
+                }
+              },
+              {
+                "variant_id": "EXTRA_FRAME",
+                "state_overrides": {
+                  "readback_frame": "TRUNCATED_OR_EXTRA"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 8,
+            "case_id": "S05_INVALID_UTF8",
+            "expected_class": "CONTROLLED_STOP",
+            "required_subwitnesses": [
+              "FATAL_DECODE_REJECTION",
+              "SYNTHETIC_ENCODER_CONTRACT_VIOLATION_REENCODED_BYTES_NOT_EQUAL_ORIGINAL_BYTES"
+            ],
+            "expected_typed_reason": "LAUNCHER_UTF8_IDENTITY_INVALID",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 3,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "FATAL_DECODE_REJECTION",
+                "state_overrides": {
+                  "utf8_identity": "INVALID_FATAL_DECODE_OR_REENCODE"
+                }
+              },
+              {
+                "variant_id": "SYNTHETIC_ENCODER_CONTRACT_VIOLATION_REENCODED_BYTES_NOT_EQUAL_ORIGINAL_BYTES",
+                "state_overrides": {
+                  "utf8_identity": "INVALID_FATAL_DECODE_OR_REENCODE"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 9,
+            "case_id": "S06_LOADER_REJECT_OR_THROW",
+            "expected_class": "CONTROLLED_STOP",
+            "required_subwitnesses": [
+              "STRICT_BASE64_LOADER_REJECT",
+              "LOADER_THROW"
+            ],
+            "expected_typed_reason": "LAUNCHER_LOADER_REJECT_OR_THROW",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 2,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "STRICT_BASE64_LOADER_REJECT",
+                "state_overrides": {
+                  "loader_outcome": "REJECT_OR_THROW"
+                }
+              },
+              {
+                "variant_id": "LOADER_THROW",
+                "state_overrides": {
+                  "loader_outcome": "REJECT_OR_THROW"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 10,
+            "case_id": "S07_PREVALIDATION_FAILURE_EXIT_CATCHABLE",
+            "expected_class": "CONTROLLED_STOP",
+            "isolated_fault": "PREVALIDATION_RETURNS_OR_THROWS_PRIVATE_EXIT_SENTINEL_INSIDE_PROTECTED_REGION",
+            "expected_typed_reason": "LAUNCHER_PREVALIDATION_PRIVATE_EXIT_CAUGHT",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 7,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "PREVALIDATION_PRIVATE_EXIT",
+                "state_overrides": {
+                  "prevalidation_outcome": "PRIVATE_EXIT_CAUGHT"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 11,
+            "case_id": "S08_EVALUATOR_CONSTRUCTION_FAILURE",
+            "expected_class": "CONTROLLED_STOP",
+            "isolated_fault": "EVALUATOR_CONSTRUCTION_FAILS_AFTER_VALID_IMMUTABLE_SOURCE_BINDING",
+            "expected_typed_reason": "LAUNCHER_EVALUATOR_CONSTRUCTION_FAILED",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 8,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "EVALUATOR_CONSTRUCTION_FAILURE",
+                "state_overrides": {
+                  "evaluator_outcome": "CONSTRUCTION_FAILURE"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 12,
+            "case_id": "S09_CONTROLLER_THROW_OR_REJECT_BEFORE_VALID_PUBLICATION",
+            "expected_class": "CONTROLLED_STOP",
+            "required_subwitnesses": [
+              "CONTROLLER_SYNC_THROW",
+              "CONTROLLER_PROMISE_REJECT"
+            ],
+            "expected_typed_reason": "LAUNCHER_CONTROLLER_THROW_OR_REJECT_BEFORE_VALID_PUBLICATION",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 9,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "CONTROLLER_SYNC_THROW",
+                "state_overrides": {
+                  "controller_outcome": "THROW_OR_REJECT"
+                }
+              },
+              {
+                "variant_id": "CONTROLLER_PROMISE_REJECT",
+                "state_overrides": {
+                  "controller_outcome": "THROW_OR_REJECT"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 13,
+            "case_id": "S10_CONTROLLER_ZERO_PUBLICATION",
+            "expected_class": "CONTROLLED_STOP",
+            "isolated_fault": "CONTROLLER_COMPLETES_OR_PRIVATE_EXITS_WITH_ZERO_COMPLETE_RECORDS",
+            "expected_typed_reason": "LAUNCHER_CONTROLLER_ZERO_PUBLICATION",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 10,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "CONTROLLER_ZERO_RECORDS",
+                "state_overrides": {
+                  "controller_outcome": "ZERO_RECORDS"
+                }
+              }
+            ]
+          },
+          {
+            "rank": 14,
+            "case_id": "S11_CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS",
+            "expected_class": "CONTROLLED_STOP",
+            "required_subwitnesses": [
+              "CONTROLLER_MULTIPLE_COMPLETE_RECORDS",
+              "CONTROLLER_ONE_MALFORMED_RECORD",
+              "CONTROLLER_LAUNCHER_OWNED_TUPLE_SPOOF"
+            ],
+            "expected_typed_reason": "LAUNCHER_CONTROLLER_MULTIPLE_OR_MALFORMED_PUBLICATIONS",
+            "expected_logical_owner": "LAUNCHER",
+            "expected_public_terminal_count": 1,
+            "expected_runtime_leaf_rank": 11,
+            "synthetic_state_variants": [
+              {
+                "variant_id": "CONTROLLER_MULTIPLE_COMPLETE_RECORDS",
+                "state_overrides": {
+                  "controller_outcome": "MULTIPLE_OR_MALFORMED_RECORDS"
+                }
+              },
+              {
+                "variant_id": "CONTROLLER_ONE_MALFORMED_RECORD",
+                "state_overrides": {
+                  "controller_outcome": "MULTIPLE_OR_MALFORMED_RECORDS"
+                }
+              },
+              {
+                "variant_id": "CONTROLLER_LAUNCHER_OWNED_TUPLE_SPOOF",
+                "state_overrides": {
+                  "controller_outcome": "MULTIPLE_OR_MALFORMED_RECORDS"
+                }
+              }
+            ],
+            "synthetic_cross_origin_record_fixture": {
+              "schema_version": "NLS_V3_GATE_B_LAUNCHER_TERMINAL_V1",
+              "body_free": true,
+              "terminal_class": "CONTROLLED_STOP",
+              "logical_terminal_owner": "LAUNCHER",
+              "typed_reason": "LAUNCHER_CONTROLLER_ZERO_PUBLICATION",
+              "runtime_ready": false,
+              "automatic_progression": false
+            }
+          }
+        ],
+        "all_cases": {
+          "private_publication_before_outer_dispatch_count": 0,
+          "partial_publication_count": 0,
+          "retry_or_reentry_count": 0,
+          "automatic_progression": false
+        },
+        "admit_witnesses_are_not_mutually_exclusive_runtime_branches": true,
+        "stop_vector_cases_are_not_runtime_priority_rules": true,
+        "synthetic_encoder_contract_violation_is_preflight_only_not_natural_runtime_reachability_claim": true
+      },
+      "verifier_method_separation_contract": {
+        "owner_method": "FRESH_OWNER_FORWARD_TRANSPORT_STATE_REDUCER",
+        "independent_method": "FRESH_INDEPENDENT_BACKWARD_TERMINAL_OWNERSHIP_PARTITION_AND_COVERAGE",
+        "owner_execution_count_required": 1,
+        "independent_execution_count_required": 1,
+        "methods_distinct": true,
+        "shared_public_inputs": [
+          "PUBLIC_CONTRACT_CANDIDATE_IDENTITY",
+          "SUCCESSOR_AUTHORITY_IDENTITY",
+          "CURRENT_BLOCKER_RECEIPT_IDENTITY",
+          "CONTRACT_V2_AND_REQUIRED_DESIGN_IDENTITIES"
+        ],
+        "shared_parser_normalizer_model_boolean_evidence_intermediate_or_derived_state_count": 0,
+        "state_reuse_count": 0
+      },
+      "domain_free_projection_schema_contract": {
+        "closed": true,
+        "field_count": 14,
+        "field_names": [
+          "top_level_closed_exact21",
+          "source_binding_and_body_free_publicability_valid",
+          "strict_base64_fatal_utf8_reencode_byte_equality_closed",
+          "disk_and_evaluated_string_identity_binding_closed",
+          "ascii_utf16_and_text_byte_identity_prohibitions_closed",
+          "runtime_first_failure_partition_total_exclusive_exact12",
+          "protected_region_and_outer_dispatcher_separated",
+          "controller_private_buffer_and_exit_sentinel_closed",
+          "body_free_terminal_schema_closed_exact7",
+          "single_terminal_ownership_total_for_all_closed_paths",
+          "semantic_vector_closed_exact14_admit3_stop11",
+          "semantic_vector_no_partial_reentry_retry_or_automatic_progression",
+          "verifier_methods_distinct_with_no_shared_derived_state",
+          "design_terminal_mapping_and_forbidden_effect_boundary_closed"
+        ],
+        "value_domain": "BOOLEAN_ONLY",
+        "extra_missing_or_nonboolean_field_action": "LAUNCHER_CONTRACT_VERIFIER_PROJECTION_SCHEMA_INVALID_TYPED_DESIGN_BLOCKER_STOP",
+        "private_value_path_body_identity_or_evidence_field_count": 0
+      },
+      "projection_comparison_contract": {
+        "comparison_count_required": 1,
+        "value": "EXACT_DOMAIN_FREE_BOOLEAN_PROJECTION",
+        "all_boolean_true_and_hash_match_required_for_design_valid": true,
+        "shared_derived_state_count": 0,
+        "mismatch_action": "TYPED_DESIGN_DIVERGENCE_BLOCKER_STOP_NO_RETRY"
+      },
+      "design_terminal_mapping": {
+        "closed": true,
+        "input_schema": {
+          "field_count": 3,
+          "fields": [
+            "owner_static_design_valid",
+            "independent_static_design_valid",
+            "projection_match"
+          ],
+          "type": "BOOLEAN_ONLY"
+        },
+        "ordered_branch_count": 4,
+        "ordered_branches": [
+          {
+            "rank": 1,
+            "condition": "NOT_OWNER_STATIC_DESIGN_VALID",
+            "terminal": "LAUNCHER_TRANSPORT_CONTRACT_V1_OWNER_STATIC_INVALID_TYPED_DESIGN_BLOCKER_STOP"
+          },
+          {
+            "rank": 2,
+            "condition": "OWNER_VALID_AND_NOT_INDEPENDENT_STATIC_DESIGN_VALID",
+            "terminal": "LAUNCHER_TRANSPORT_CONTRACT_V1_INDEPENDENT_STATIC_INVALID_TYPED_DESIGN_BLOCKER_STOP"
+          },
+          {
+            "rank": 3,
+            "condition": "OWNER_AND_INDEPENDENT_VALID_AND_NOT_PROJECTION_MATCH",
+            "terminal": "LAUNCHER_TRANSPORT_CONTRACT_V1_DUAL_STATIC_VALID_PROJECTION_DIVERGENCE_TYPED_DESIGN_BLOCKER_STOP"
+          },
+          {
+            "rank": 4,
+            "condition": "OWNER_AND_INDEPENDENT_VALID_AND_PROJECTION_MATCH",
+            "terminal": "LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SINGLE_TERMINAL_OWNERSHIP_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP"
+          }
+        ],
+        "truth_table_row_count": 8,
+        "selected_rank_sequence": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          4
+        ],
+        "each_row_true_branch_count_exactly_one": true,
+        "zero_true_row_count": 0,
+        "multiple_true_row_count": 0,
+        "branch_overlap_count": 0,
+        "total": true,
+        "exclusive": true,
+        "runtime_ready_on_any_branch": false,
+        "automatic_progression": false
+      },
+      "privacy_boundary": {
+        "current_failed_launcher_path_body_state_output_or_caught_termination_control_read_count": 0,
+        "current_private_controller_verifier_path_body_identity_or_derived_state_read_count": 0,
+        "current_private_path_body_value_identity_or_component_publication_count": 0,
+        "public_contract_receipt_and_role_bound_design_identities_only": true,
+        "body_free": true
+      },
+      "historical_preservation": {
+        "current_failed_launcher": "IMMUTABLE_NONCREDIT",
+        "prior_controller_and_verifier": "IMMUTABLE_NONCREDIT_UNEXECUTED_CREDIT_ZERO",
+        "prior_source_v3_and_source_v4_state": "IMMUTABLE_NONCREDIT",
+        "read_reuse_repair_mutation_reexecution_retry_rebind_or_retroactive_credit_count": 0,
+        "full_r1_result": "UNKNOWN_PRESERVED"
+      },
+      "current_design_forbidden_effects": {
+        "corrected_launcher_creation": 0,
+        "corrected_controller_creation": 0,
+        "corrected_verifier_creation": 0,
+        "source_v4_creation": 0,
+        "binary_creation": 0,
+        "compilation": 0,
+        "corrected_implementation_execution": 0,
+        "outer_diagnostic_launch": 0,
+        "session_handle_write_stdin_or_poll": 0,
+        "child_fork_or_direct_execve": 0,
+        "request_capability_proof": 0,
+        "network_or_catalogue": 0,
+        "policy_or_final_link_consumption": 0,
+        "artifact_node_version_engine_or_gate_b_runtime": 0,
+        "pytest_target_or_product": 0,
+        "cocolon_production_source_published_red_or_existing_d1": 0,
+        "mashos_api_change": 0
+      },
+      "future_admission_contract": {
+        "separate_explicit_authority_required": true,
+        "next_stage_may_create_corrected_components_only_if_this_contract_is_dual_static_valid_and_matching": true,
+        "future_corrected_implementation_requires_fresh_identity_freeze_and_distinct_static_semantic_verification": true,
+        "future_formal_execution_requires_later_separate_authority": true,
+        "future_source_v4_or_outer_diagnostic_requires_later_separate_authority": true,
+        "current_contract_validity_is_not_implementation_or_runtime_credit": true
+      },
+      "design_credit_boundary": {
+        "contract_validity_credit_if_owner_independent_all_true_and_projection_match": 1,
+        "contract_validity_credit_otherwise": 0,
+        "implementation_validity_credit": 0,
+        "runtime_readiness_credit": 0,
+        "source_v4_semantic_validity_credit": 0,
+        "outer_launch_credit": 0
+      },
+      "automatic_progression": false
+    },
+    "contract_identity": {
+      "canonicalization": "UTF8_SORTED_COMPACT_JSON_NO_LF",
+      "json_pointer": "/observation/launcher_utf8_exact_byte_transport_and_single_terminal_ownership_reconciliation_contract_v1_candidate",
+      "contract_creation_count": 1,
+      "contract_identity_freeze_count": 1,
+      "contract_canonical_byte_count": 30194,
+      "contract_canonical_sha256": "a444aa84dd7db155ea792f70cc3a1949a03de9e8d9d3cb4b47f3cbce12d2b4e3",
+      "contract_top_level_exact_key_count": 21,
+      "contract_top_level_exact_keys": [
+        "contract_id",
+        "contract_version",
+        "publicable",
+        "body_free",
+        "purpose",
+        "source_binding_contract",
+        "canonicalization",
+        "utf8_exact_byte_transport_contract",
+        "runtime_failure_precedence_contract",
+        "single_terminal_ownership_contract",
+        "public_semantic_preflight_vector_contract",
+        "verifier_method_separation_contract",
+        "domain_free_projection_schema_contract",
+        "projection_comparison_contract",
+        "design_terminal_mapping",
+        "privacy_boundary",
+        "historical_preservation",
+        "current_design_forbidden_effects",
+        "future_admission_contract",
+        "design_credit_boundary",
+        "automatic_progression"
+      ],
+      "publicable": true,
+      "body_free": true,
+      "automatic_progression": false
+    },
+    "semantic_preflight_vector_summary": {
+      "vector_definition_count": 1,
+      "closed_case_count": 14,
+      "admit_case_count": 3,
+      "controlled_stop_case_count": 11,
+      "runtime_partition_leaf_count": 12,
+      "frozen_state_field_count": 9,
+      "owner_exhaustive_closed_state_count": 1024,
+      "independent_exhaustive_closed_state_count": 1024,
+      "owner_selected_leaf_counts": [
+        512,
+        256,
+        128,
+        64,
+        32,
+        16,
+        8,
+        4,
+        1,
+        1,
+        1,
+        1
+      ],
+      "independent_selected_leaf_counts": [
+        512,
+        256,
+        128,
+        64,
+        32,
+        16,
+        8,
+        4,
+        1,
+        1,
+        1,
+        1
+      ],
+      "controller_input_allowed_tuple_count": 1,
+      "controller_input_rejected_tuple_count": 47,
+      "runtime_public_tuple_count": 12,
+      "public_terminal_record_count_for_each_closed_runtime_path": 1,
+      "partial_publication_count": 0
+    },
+    "owner_static_design_observation": {
+      "execution_count": 1,
+      "state_origin": "FRESH_OWNER_FORWARD_STATE",
+      "verification_method": "FRESH_OWNER_FORWARD_TRANSPORT_STATE_REDUCER",
+      "shared_derived_state_reuse_count": 0,
+      "contract_canonical_byte_count": 30194,
+      "contract_canonical_sha256": "a444aa84dd7db155ea792f70cc3a1949a03de9e8d9d3cb4b47f3cbce12d2b4e3",
+      "domain_free_projection": {
+        "top_level_closed_exact21": true,
+        "source_binding_and_body_free_publicability_valid": true,
+        "strict_base64_fatal_utf8_reencode_byte_equality_closed": true,
+        "disk_and_evaluated_string_identity_binding_closed": true,
+        "ascii_utf16_and_text_byte_identity_prohibitions_closed": true,
+        "runtime_first_failure_partition_total_exclusive_exact12": true,
+        "protected_region_and_outer_dispatcher_separated": true,
+        "controller_private_buffer_and_exit_sentinel_closed": true,
+        "body_free_terminal_schema_closed_exact7": true,
+        "single_terminal_ownership_total_for_all_closed_paths": true,
+        "semantic_vector_closed_exact14_admit3_stop11": true,
+        "semantic_vector_no_partial_reentry_retry_or_automatic_progression": true,
+        "verifier_methods_distinct_with_no_shared_derived_state": true,
+        "design_terminal_mapping_and_forbidden_effect_boundary_closed": true
+      },
+      "domain_free_projection_sha256": "492137c9e641a3632d5f6a955e9de8478754b05bd46bac4a3c6fa15bb651644b",
+      "domain_specific_evidence_input_canonical_byte_count": 6224,
+      "domain_specific_evidence_sha256": "14f35ed1bf32cbaf5bf77ea4cb2dccd5f6b757bae89ad4463688986784d04c36",
+      "verdict": "VALID",
+      "true_count": 14,
+      "false_count": 0,
+      "invalid_check_count": 0
+    },
+    "independent_static_design_observation": {
+      "execution_count": 1,
+      "state_origin": "FRESH_INDEPENDENT_BACKWARD_STATE",
+      "verification_method": "FRESH_INDEPENDENT_BACKWARD_TERMINAL_OWNERSHIP_PARTITION_AND_COVERAGE",
+      "shared_derived_state_reuse_count": 0,
+      "contract_canonical_byte_count": 30194,
+      "contract_canonical_sha256": "a444aa84dd7db155ea792f70cc3a1949a03de9e8d9d3cb4b47f3cbce12d2b4e3",
+      "domain_free_projection": {
+        "top_level_closed_exact21": true,
+        "source_binding_and_body_free_publicability_valid": true,
+        "strict_base64_fatal_utf8_reencode_byte_equality_closed": true,
+        "disk_and_evaluated_string_identity_binding_closed": true,
+        "ascii_utf16_and_text_byte_identity_prohibitions_closed": true,
+        "runtime_first_failure_partition_total_exclusive_exact12": true,
+        "protected_region_and_outer_dispatcher_separated": true,
+        "controller_private_buffer_and_exit_sentinel_closed": true,
+        "body_free_terminal_schema_closed_exact7": true,
+        "single_terminal_ownership_total_for_all_closed_paths": true,
+        "semantic_vector_closed_exact14_admit3_stop11": true,
+        "semantic_vector_no_partial_reentry_retry_or_automatic_progression": true,
+        "verifier_methods_distinct_with_no_shared_derived_state": true,
+        "design_terminal_mapping_and_forbidden_effect_boundary_closed": true
+      },
+      "domain_free_projection_sha256": "492137c9e641a3632d5f6a955e9de8478754b05bd46bac4a3c6fa15bb651644b",
+      "domain_specific_evidence_input_canonical_byte_count": 5160,
+      "domain_specific_evidence_sha256": "4b7b671e9555d6cb11ef2a58a1b6640ec8e6ea8cca55ee1b6c7ef0cbb35c5583",
+      "verdict": "VALID",
+      "true_count": 14,
+      "false_count": 0,
+      "invalid_check_count": 0
+    },
+    "comparison": {
+      "owner_independent_domain_free_projection_comparison_count": 1,
+      "owner_projection_sha256": "492137c9e641a3632d5f6a955e9de8478754b05bd46bac4a3c6fa15bb651644b",
+      "independent_projection_sha256": "492137c9e641a3632d5f6a955e9de8478754b05bd46bac4a3c6fa15bb651644b",
+      "match": true,
+      "contract_identity_match": true,
+      "shared_derived_state_count": 0,
+      "state_reuse_count": 0,
+      "owner_all_true": true,
+      "independent_all_true": true,
+      "selected_design_result": "LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SINGLE_TERMINAL_OWNERSHIP_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP"
+    },
+    "design_result": {
+      "owner_static_design_verification_execution_count": 1,
+      "independent_static_design_verification_execution_count": 1,
+      "owner_valid": true,
+      "independent_valid": true,
+      "owner_independent_projection_match": true,
+      "contract_identity_match": true,
+      "shared_parser_normalizer_model_boolean_evidence_intermediate_or_derived_state_count": 0,
+      "contract_validity_credit_count": 1,
+      "corrected_launcher_controller_or_verifier_implementation_validity_credit_count": 0,
+      "corrected_implementation_execution_credit_count": 0,
+      "source_v4_semantic_validity_credit_count": 0,
+      "runtime_readiness_credit_count": 0,
+      "selected_result": "LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SINGLE_TERMINAL_OWNERSHIP_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP"
+    },
+    "terminal_mapping": {
+      "input_boolean_count": 3,
+      "ordered_branch_count": 4,
+      "truth_table_row_count": 8,
+      "selected_rank_sequence": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        4
+      ],
+      "zero_true_row_count": 0,
+      "multiple_true_row_count": 0,
+      "branch_overlap_count": 0,
+      "total": true,
+      "exclusive": true,
+      "selected_branch_rank": 4
+    },
+    "position_consistency": {
+      "confirmed_facts": [
+        "The approved authority was activated exactly once and the current launcher blocker Receipt was consumed exactly once.",
+        "Contract V2 and all three role-bound required design identities matched their frozen public identities.",
+        "The body-free Contract V1 candidate is canonicalized and frozen at one identity.",
+        "Owner forward and independent backward methods each executed once, returned VALID 14/14, and produced one matching Boolean-only projection.",
+        "No corrected implementation, Source V4, outer diagnostic, runtime, pytest, production, RED, D1, or mashos-api effect occurred."
+      ],
+      "inference": "NONE",
+      "karen_opinion": "The next safe step is one distinct authority that creates fresh corrected Launcher, Controller adapter, and Verifier implementations bound to this Contract V1, performs their independent static checks and closed synthetic preflight, and still stops before Source V4 or any outer diagnostic launch."
+    },
+    "effects": {
+      "corrected_launcher_creation_count": 0,
+      "corrected_controller_creation_count": 0,
+      "corrected_verifier_creation_count": 0,
+      "source_v4_creation_count": 0,
+      "binary_creation_count": 0,
+      "compilation_count": 0,
+      "corrected_implementation_execution_count": 0,
+      "outer_diagnostic_launch_count": 0,
+      "session_handle_count": 0,
+      "write_stdin_count": 0,
+      "poll_count": 0,
+      "child_fork_or_direct_execve_request_count": 0,
+      "request_capability_proof_count": 0,
+      "network_or_catalogue_count": 0,
+      "policy_receipt_or_final_link_consumption_count": 0,
+      "artifact_node_version_engine_or_gate_b_runtime_count": 0,
+      "pytest_target_or_product_effect_count": 0,
+      "cocolon_production_source_change_count": 0,
+      "published_red_change_count": 0,
+      "existing_d1_change_count": 0,
+      "mashos_api_change_count": 0
+    },
+    "terminal": {
+      "category": "LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SINGLE_TERMINAL_OWNERSHIP_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP",
+      "body_free": true,
+      "design_only": true,
+      "contract_valid": true,
+      "corrected_implementation_created": false,
+      "corrected_implementation_executed": false,
+      "source_v4_materialized": false,
+      "source_v4_semantic_validity": "UNPROVEN",
+      "runtime_ready": false,
+      "full_r1_result": "UNKNOWN_PRESERVED",
+      "outer_diagnostic_launch_allowed": false,
+      "automatic_progression": false
+    }
+  },
+  "observation_sha256": "4063c0c5e6c69aaed96c1fd83458822b962f406d7b93550eb4afecc40ed01dd1",
+  "receipt_self_hash_schema": "DELETE_JSON_POINTER_/receipt_logical_sha256_THEN_UTF8_SORTED_COMPACT_JSON_NO_LF_THEN_SHA256",
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SINGLE_TERMINAL_OWNERSHIP_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP_POSTVERIFIED_OBSERVATION_SHA256_4063C0C5E6C69AAED96C1FD83458822B962F406D7B93550EB4AFECC40ED01DD1_CURRENT_AUTHORITY_SHA256_427CFE1D5FAE77E5383BEF9345ED120AC01F0CE0ADA8BA8FB23BD1B9F935AFDD_ACTIVATED_EXACT1_CURRENT_LAUNCHER_BLOCKER_RECEIPT_CLOSED_CONSUMED_EXACT1_BLOB_1979BA74_RAW_1B0FA48B_LOGICAL_6DF0E7E4_OBSERVATION_B3BEBAFC_PRIOR_AUTHORITY_OR_PRIOR_BLOCKER_RECEIPT_RECONSUMPTION_EXACT0_CURRENT_POLICY_RECEIPT_REMAINS_CLOSED_UNCONSUMED_IMMUTABLE_CONSUMPTION_EXACT0_BLOB_2F5EACE6_RAW_437B319F_LOGICAL_0F0B30AE_OBSERVATION_618E4A9B_COCOLON_ACTUAL_PREWRITE_BASE_4E412F66_TREE_E198A62B_PREDECESSOR_803202C7_TREE_5BB2B6BD_AUTHORITY_CARRIED_PREDECESSOR_DDDD1ABB_TREE_485F1569_MASHOS_API_SOURCE_315813C7_TREE_A641510E_CHANGE_EXACT0_CONTRACT_V2_RECEIPT_BLOB_1C61DAA8_RAW_6200CBDE_LOGICAL_D6FCCC1E_OBSERVATION_563C8082_CANDIDATE_RAW_61E8C8C42A120BD6DBE1038F7B1FDFB250C1EA6EDCA3CD49B5713AA0718B8F3E_CANONICAL_BYTES_19031_IMMUTABLE_NO_WEAKENING_EXACT1_FRESH_PUBLIC_CURRENT_BLOCKER_RECEIPT_CONTRACT_V2_AND_REQUIRED_DESIGN_IDENTITIES_REREAD_RECANONICALIZATION_REHASH_AND_MATCH_EXACT1_EXACT1_EXACT3_LAUNCHER_TRANSPORT_SINGLE_TERMINAL_CONTRACT_V1_CREATION_AND_IDENTITY_FREEZE_EXACT1_EXACT1_CONTRACT_V1_CANONICAL_RAW_A444AA84DD7DB155EA792F70CC3A1949A03DE9E8D9D3CB4B47F3CBCE12D2B4E3_CANONICAL_BYTES_30194_TOP_LEVEL_CLOSED_EXACT21_PUBLICABLE_BODY_FREE_AUTOMATIC_PROGRESSION_FALSE_STRICT_FRAME_CHARACTER_COUNT_AND_END_MARKER_THEN_STRICT_CANONICAL_BASE64_BYTE_ACQUISITION_FATAL_UTF8_DECODE_UTF8_REENCODE_ORIGINAL_BYTE_EQUALITY_DISK_SHA_BYTE_LF_AND_EVALUATED_STRING_BINDING_EXACT1_ASCII_ONLY_GATE_UTF16_CODE_UNIT_OR_JAVASCRIPT_STRING_LENGTH_AS_BYTE_IDENTITY_AND_BASE64_OR_TEXT_HASH_AS_SOURCE_BYTE_IDENTITY_EXACT0_EXACT0_EXACT0_EXACT0_PROTECTED_REGION_PUBLIC_WRITE_OR_EXIT_EXACT0_PRIVATE_CONTROLLER_BUFFER_AND_UNFORGEABLE_EXIT_SENTINEL_EXACT1_NO_REMAINING_WRITE_CAPABILITY_TOKEN_BEFORE_SEAL_EXACT1_CONTROLLER_INPUT_ALLOWED_SUCCESS_TUPLE_EXACT1_REJECTED_CROSS_ORIGIN_OR_MALFORMED_TUPLE_EXACT47_LAUNCHER_CONTROLLED_STOP_TUPLE_CONSTRUCTORS_EXACT11_OUTER_DISPATCHER_ONLY_PHYSICAL_WRITER_EXACT1_PUBLIC_TERMINAL_TOTAL_EXACT1_FOR_EACH_CLOSED_RUNTIME_PATH_REENTRY_RECONSTRUCTION_REEVALUATION_RETRY_OR_PARTIAL_PUBLICATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_CLOSED_PUBLIC_SYNTHETIC_VECTOR_EXACT14_ADMIT3_CONTROLLED_STOP11_EXACT1_OWNER_FORWARD_TRANSPORT_STATE_REDUCER_STATIC_DESIGN_EXECUTION_EXACT1_VALID_TRUE14_FALSE0_PROJECTION_SHA256_492137C9E641A3632D5F6A955E9DE8478754B05BD46BAC4A3C6FA15BB651644B_EVIDENCE_SHA256_14F35ED1BF32CBAF5BF77EA4CB2DCCD5F6B757BAE89AD4463688986784D04C36_INDEPENDENT_BACKWARD_TERMINAL_OWNERSHIP_PARTITION_STATIC_DESIGN_EXECUTION_EXACT1_VALID_TRUE14_FALSE0_PROJECTION_SHA256_492137C9E641A3632D5F6A955E9DE8478754B05BD46BAC4A3C6FA15BB651644B_EVIDENCE_SHA256_4B7B671E9555D6CB11EF2A58A1B6640EC8E6EA8CCA55EE1B6C7EF0CBB35C5583_OWNER_INDEPENDENT_DOMAIN_FREE_PROJECTION_COMPARISON_EXACT1_MATCH_TRUE_CONTRACT_IDENTITY_MATCH_TRUE_SHARED_DERIVED_STATE_EXACT0_CONTRACT_VALIDITY_CREDIT_EXACT1_CORRECTED_IMPLEMENTATION_SOURCE_V4_RUNTIME_READINESS_OR_OUTER_LAUNCH_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_FULL_R1_RESULT_UNKNOWN_PRESERVED_RUNTIME_READY_FALSE_SOURCE_V4_MATERIALIZED_FALSE_SOURCE_V4_SEMANTIC_VALIDITY_UNPROVEN_CORRECTED_LAUNCHER_CONTROLLER_VERIFIER_SOURCE_OR_COMPONENT_PATH_BODY_IDENTITY_PUBLICATION_EXACT0_OUTER_DIAGNOSTIC_LAUNCH_SESSION_HANDLE_WRITE_STDIN_POLL_CHILD_FORK_DIRECT_EXECVE_REQUEST_CAPABILITY_PROOF_NETWORK_CATALOGUE_POLICY_FINAL_LINK_ARTIFACT_NODE_VERSION_ENGINE_GATE_B_RUNTIME_PYTEST_TARGET_PRODUCT_EFFECT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_AUTHORITY_BOUND_CORRECTED_LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_CONTROLLER_PRIVATE_BUFFER_AND_VERIFIER_V1_IMPLEMENTATION_STATIC_VERIFICATION_AND_CLOSED_SYNTHETIC_PREFLIGHT_ONLY_AUTHORITY_CURRENT_BODY_FREE_CONTRACT_V1_RECEIPT_FRESH_REREAD_RECANONICALIZATION_REHASH_REBIND_AND_CONSUMPTION_EXACT1_CURRENT_LAUNCHER_BLOCKER_RECEIPT_PRIOR_AUTHORITY_PRIOR_FAILED_LAUNCHER_OUTPUT_OR_CAUGHT_TERMINATION_CONTROL_RECONSUMPTION_READ_REUSE_REPAIR_MUTATION_REEXECUTION_RETRY_REBIND_OR_RETROACTIVE_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_CURRENT_POLICY_RECEIPT_CONSUMPTION_EXACT0_CONTRACT_V1_OBSERVATION_4063C0C5E6C69AAED96C1FD83458822B962F406D7B93550EB4AFECC40ED01DD1_CANDIDATE_A444AA84DD7DB155EA792F70CC3A1949A03DE9E8D9D3CB4B47F3CBCE12D2B4E3_OWNER_EVIDENCE_14F35ED1BF32CBAF5BF77EA4CB2DCCD5F6B757BAE89AD4463688986784D04C36_INDEPENDENT_EVIDENCE_4B7B671E9555D6CB11EF2A58A1B6640EC8E6EA8CCA55EE1B6C7EF0CBB35C5583_BINDING_EXACT1_FRESH_PUBLIC_CONTRACT_V1_CANDIDATE_OWNER_INDEPENDENT_OUTPUTS_COMPARISON_AND_TERMINAL_MAPPING_REREAD_RECANONICALIZATION_REHASH_AND_MATCH_EXACT1_PRIOR_PRIVATE_LAUNCHER_CONTROLLER_VERIFIER_PATH_BODY_IDENTITY_PARSER_MODEL_PROJECTION_EVIDENCE_OUTPUT_OR_DERIVED_STATE_READ_OR_REUSE_EXACT0_DISTINCT_CORRECTED_LAUNCHER_UTF8_EXACT_BYTE_TRANSPORT_SOURCE_CREATION_AND_IDENTITY_FREEZE_EXACT1_EXACT1_DISTINCT_CORRECTED_CONTROLLER_PRIVATE_COMPLETE_BUFFER_NO_REMAINING_WRITE_CAPABILITY_AND_EXIT_SENTINEL_ADAPTER_SOURCE_CREATION_AND_IDENTITY_FREEZE_EXACT1_EXACT1_DISTINCT_CORRECTED_CONTRACT_BOUND_VERIFIER_SOURCE_CREATION_AND_IDENTITY_FREEZE_EXACT1_EXACT1_CORRECTED_COMPONENT_SOURCE_PATH_BODY_OR_IDENTITY_PUBLICATION_EXACT0_READ_ONLY_OWNER_FORWARD_IMPLEMENTATION_SEMANTIC_STATIC_VERIFICATION_EXECUTION_EXACT1_READ_ONLY_INDEPENDENT_BACKWARD_TERMINAL_IMPLEMENTATION_SEMANTIC_STATIC_VERIFICATION_EXECUTION_EXACT1_SHARED_PARSER_NORMALIZER_MODEL_BOOLEAN_EVIDENCE_INTERMEDIATE_OR_DERIVED_STATE_EXACT0_IMPLEMENTATION_DOMAIN_FREE_BOOLEAN_PROJECTION_COMPARISON_EXACT1_MATCH_REQUIRED_IMPLEMENTATION_PROJECTION_CLOSED_EXACT14_STRICT_FRAME_BASE64_UTF8_REENCODE_BYTE_IDENTITY_DISK_BINDING_NO_TEXTUAL_BYTE_IDENTITY_PROTECTED_REGION_PRIVATE_BUFFER_EXIT_SENTINEL_NO_RETAINED_WRITE_CAPABILITY_CONTROLLER_SUCCESS_SUBSET_LAUNCHER_STOP_CONSTRUCTORS_SINGLE_OUTER_DISPATCHER_EXACTLY_ONE_TERMINAL_VECTOR14_NO_PARTIAL_OR_RETRY_BODY_FREE_SCHEMA_EFFECT_BOUNDARY_EXACT1_RAW_SUBSTRING_IDENTIFIER_LITERAL_TEXTUAL_SHAPE_OR_UNRESOLVED_TARGET_AS_IMPLEMENTATION_SEMANTIC_VALIDITY_INPUT_EXACT0_RESOLVED_QUALIFIED_CALL_TARGET_BINDING_CONTROL_FLOW_BUFFER_SEAL_TERMINAL_CONSTRUCTOR_AND_DISPATCH_OWNERSHIP_ONLY_EXACT1_UNRESOLVED_TARGET_TYPED_VERIFIER_IMPLEMENTATION_NORMALIZATION_UNRESOLVED_EXACT1_IF_OWNER_OR_INDEPENDENT_STATIC_INVALID_OR_PROJECTION_MISMATCH_ORDERED_TYPED_IMPLEMENTATION_BLOCKER_STOP_NO_REPAIR_REEXECUTION_OR_RETRY_EXACT1_IF_DUAL_STATIC_VALID_AND_MATCH_CLOSED_PUBLIC_SYNTHETIC_PREFLIGHT_VECTOR_FRESH_READ_EXACT1_CASES_EXACT14_ADMIT3_CONTROLLED_STOP11_SYNTHETIC_PREFLIGHT_EXECUTION_ATTEMPT_EXACT14_EACH_CASE_ONCE_NO_CASE_RETRY_EXACT1_PRIVATE_ATOMIC_TERMINAL_SINK_CAPTURE_EXACT14_EACH_CASE_BODY_FREE_RECORD_COUNT_EXACT1_TOTAL_RECORD_COUNT_EXACT14_OWNER_FORWARD_SYNTHETIC_RESULT_PROJECTION_EXECUTION_EXACT1_INDEPENDENT_BACKWARD_SYNTHETIC_RESULT_PROJECTION_EXECUTION_EXACT1_OWNER_INDEPENDENT_SYNTHETIC_PROJECTION_COMPARISON_EXACT1_MATCH_REQUIRED_SHARED_DERIVED_STATE_EXACT0_EXPECTED_CASE_RESULT_MATCH_EXACT14_ADMIT_EXACT3_CONTROLLED_STOP_EXACT11_ZERO_MULTIPLE_MALFORMED_CROSS_ORIGIN_OR_LATE_WRITE_ESCAPE_EXACT0_PUBLIC_EXTERNAL_TERMINAL_PUBLICATION_OUTSIDE_PRIVATE_SYNTHETIC_SINK_EXACT0_IF_ALL_STATIC_AND_SYNTHETIC_EXPECTATIONS_TRUE_AND_PROJECTIONS_MATCH_CORRECTED_IMPLEMENTATION_SYNTHETIC_PREFLIGHT_VALID_PRE_SOURCE_V4_STOP_EXACT1_OTHERWISE_ORDERED_TYPED_IMPLEMENTATION_OR_SYNTHETIC_PREFLIGHT_BLOCKER_STOP_NO_REPAIR_REEXECUTION_RETRY_OR_RETROACTIVE_CREDIT_EXACT1_CORRECTED_COMPONENT_BINARY_CREATION_COMPILATION_FORMAL_CURRENT_CONTROLLER_EXECUTION_SOURCE_V4_PROVIDER_LOCATOR_DISCOVERY_SOURCE_V4_CREATION_IDENTITY_FREEZE_BINARY_COMPILATION_EXECUTION_OR_STATIC_VERIFICATION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_OUTER_DIAGNOSTIC_LAUNCH_SESSION_HANDLE_WRITE_STDIN_POLL_CHILD_FORK_DIRECT_EXECVE_REQUEST_CAPABILITY_PROOF_NETWORK_CATALOGUE_POLICY_FINAL_LINK_ARTIFACT_NODE_VERSION_ENGINE_GATE_B_RUNTIME_PYTEST_TARGET_PRODUCT_AUTHORITY_OR_EXECUTION_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_CORRECTED_IMPLEMENTATION_STATIC_AND_CLOSED_SYNTHETIC_PREFLIGHT_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STOP_NO_SOURCE_V4_OUTER_LAUNCH_RUNTIME_PYTEST_PRODUCT_OR_AUTOMATIC_PROGRESSION",
+    "token_ascii_byte_count": 8796,
+    "token_sha256": "9491dfaba947f63febfa09eb325abcc54d52390c8c29315a79ba909e503925b1",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "separate_explicit_mash_approval_required": true,
+    "automatic_transition": false
+  },
+  "receipt_logical_sha256": "cd6902a6f96a1264477567da6fd5ebb0dbaa4679308e781982aeb6bb93938c0b"
+}
