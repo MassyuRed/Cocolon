@@ -1,0 +1,1694 @@
+{
+  "schema_version": "NLSV3_STEP11_CYCLE001_BODY_FREE_TERMINAL_RECEIPT_V1",
+  "receipt_id": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V6_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_ONLY_STOP",
+  "observed_at_date": "2026-08-04",
+  "receipt_state": "CLOSED_UNCONSUMED",
+  "body_free": true,
+  "automatic_progression": false,
+  "observation": {
+    "schema_version": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V6_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_OBSERVATION_V1",
+    "terminal": "V6_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_ONLY_STOP",
+    "state": "DESIGN_VALID_STOP",
+    "body_free": true,
+    "automatic_progression": false,
+    "authority": {
+      "current_authority_ascii_bytes": 8201,
+      "current_authority_sha256": "fbc4fed33717331f4c6042b89a25503b5c1b966550e609c91a0249dfb80eec4d",
+      "activated_exact": 1,
+      "current_v6_design_blocker_receipt_successor_consumption_exact": 1,
+      "prior_authority_or_prior_blocker_receipt_reconsumption_exact": 0,
+      "current_policy_receipt_consumption_exact": 0
+    },
+    "repository_identity": {
+      "cocolon_actual_reflection_prewrite_base_commit": "8486bb40f96fe949b4fb3c820807697a0f807e17",
+      "cocolon_actual_reflection_prewrite_base_tree": "18beab72ab9eb20a3b70928c4486a43053938387",
+      "authority_carried_technical_prewrite_base_commit": "d70e21c1351a59b722b7c70c2941b3079b7cef37",
+      "authority_carried_technical_prewrite_base_tree": "ca50a4123f491fee080c3de5614b4f395aed3f5f",
+      "authority_carried_historical_prewrite_base_commit": "554c2a562f3c32a80d1966a623a29de052f5392a",
+      "authority_carried_historical_prewrite_base_tree": "4f01ba517446b37633159bbbbacb8b9fa354b4f4",
+      "mashos_api_source_commit": "315813c7bd3372462de926ddad74df567254a6b5",
+      "mashos_api_source_tree": "a641510e107d52bb910073f36604c85bd57af150",
+      "mashos_api_change_exact": 0
+    },
+    "public_input_binding": {
+      "current_v6_design_blocker_receipt": {
+        "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V6ComponentModuleSliceAndCrossComponentEdgeDesign_OwnerForwardEdgeResolutionCardinalityInvalidIndependentValidProjectionMismatch_TypedBlockerStop_BodyFree_Receipt_20260803.json",
+        "blob_sha": "3f5aa32905955c0407befc520bafbb7ca07ca83f",
+        "raw_bytes": 66583,
+        "raw_lf_count": 1276,
+        "raw_sha256": "061b1274a63d36839d87a2b259a04779d908f539596f298126c20035b9477364",
+        "logical_bytes": 49750,
+        "logical_sha256": "af84cffa67c76a6f835f8073e1d999d4ae33a1fd382ff6e794ac0c3e2848f37b",
+        "observation_bytes": 40647,
+        "observation_sha256": "24aed53a1a6a23a577ec87d7551ff5e74792b3219656d0c22354989b0b6f6754",
+        "fresh_reread_recanonicalization_rehash_rebind_match": true,
+        "successor_consumption_exact": 1,
+        "stored_receipt_state": "CLOSED_UNCONSUMED",
+        "stored_receipt_mutation": false
+      },
+      "carried_current_policy_receipt": {
+        "blob_sha": "2f5eace6de56699519319600d90f12407b6c4e83",
+        "raw_sha256": "437b319f395f4bb57c0c61a90c3ff234c27ad8936408886b138fd4d9ec5c02fc",
+        "logical_sha256": "0f0b30ae139d4ea1a4373f105679d680a246713e42695fd882138189e37d771a",
+        "observation_sha256": "618e4a9b30626c5768e40da339b04b41414618967c5d930d87d7928cc2dcb46d",
+        "consumption_exact": 0,
+        "immutable": true
+      },
+      "public_component_module_grammar_candidate": {
+        "canonical_bytes": 3231,
+        "canonical_sha256": "d0967909259a1e4fb6bfd2b521d0ade1ea4ce31a3526ca4a56bfcd5ed5deb61d",
+        "fresh_match": true,
+        "creation_exact": 1,
+        "identity_freeze_exact": 1
+      },
+      "public_component_module_and_cross_component_edge_fixture_set": {
+        "canonical_bytes": 14564,
+        "canonical_sha256": "3c58b37d24c587de49706d5c8f00a5a74586d7b103e01ddb91466173d4dc400f",
+        "cases_exact": 6,
+        "expected_valid": 4,
+        "expected_invalid": 2,
+        "fresh_match": true,
+        "creation_exact": 1,
+        "identity_freeze_exact": 1
+      },
+      "blocked_owner_projection": {
+        "canonical_bytes": 1919,
+        "canonical_sha256": "3bee55b4c50a8c8953115a3843a0159832b22a40dc4f14683b2da2e5eaef255d",
+        "evidence_canonical_bytes": 4291,
+        "evidence_sha256": "7c7090ad3443e2479071297e16dab0d7e54c601523b1b31820383dca836569b6",
+        "fresh_match": true,
+        "valid": false,
+        "true_count": 15,
+        "false_count": 3,
+        "unresolved_count": 0
+      },
+      "blocked_independent_projection": {
+        "canonical_bytes": 1915,
+        "canonical_sha256": "9f9a959f81ff48325be95a8dd13e5e46bc10bfce32d7d00caf1067bb127a627c",
+        "evidence_canonical_bytes": 4196,
+        "evidence_sha256": "c6a320e251201ebe48213fac5dbed7ada888298529584a7acbfc97b0edda1b96",
+        "fresh_match": true,
+        "valid": true,
+        "true_count": 18,
+        "false_count": 0,
+        "unresolved_count": 0
+      },
+      "blocked_mismatch_facts": {
+        "owner_required_edge_exact1_domain": "DIRECT_CALL_OCCURRENCE_CARDINALITY",
+        "independent_required_edge_exact1_domain": "TARGET_BINDING_CARDINALITY",
+        "public_m06_private_freeze_call_occurrences": 2,
+        "public_m06_private_freeze_target_bindings": 1,
+        "value_mismatch_exact": 3,
+        "ordered_terminal_validity_mismatch_exact": 1,
+        "terminal_label_mismatch_exact": 0,
+        "fresh_match": true
+      }
+    },
+    "privacy_and_method_boundary": {
+      "failed_private_v6_component_path_body_identity_identifier_scope_alias_graph_position_call_site_effect_site_analyzer_program_parser_model_projection_evidence_output_intermediate_or_derived_state_read_reuse_inference_repair_mutation_rebind_or_retroactive_credit_exact": 0,
+      "current_owner_or_independent_analyzer_program_path_body_intermediate_or_derived_state_read_reuse_exact": 0,
+      "shared_parser_normalizer_model_boolean_evidence_intermediate_or_derived_state_exact": 0,
+      "owner_independent_public_inputs_only": true
+    },
+    "public_design_candidates": {
+      "projection_domain_aggregation_candidate": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_PROJECTION_DOMAIN_AGGREGATION_CANDIDATE_V1",
+        "state": "FROZEN_DESIGN_CANDIDATE",
+        "body_free": true,
+        "private_v6_dependency": false,
+        "source_identity_binding": {
+          "module_grammar_candidate_sha256": "d0967909259a1e4fb6bfd2b521d0ade1ea4ce31a3526ca4a56bfcd5ed5deb61d",
+          "fixture_set_sha256": "3c58b37d24c587de49706d5c8f00a5a74586d7b103e01ddb91466173d4dc400f"
+        },
+        "domain_fields": [
+          "module_grammar_slice_validity",
+          "target_binding_validity",
+          "semantic_edge_validity",
+          "call_site_occurrence_validity",
+          "per_closed_path_occurrence_validity",
+          "branch_validity",
+          "case_validity",
+          "terminal_code"
+        ],
+        "non_applicable_domain_representation": {
+          "applicable": false,
+          "valid": null
+        },
+        "aggregation_contract": {
+          "domain_value_derived_only_from_own_public_evidence": true,
+          "module_grammar_field_never_cascaded_from_edge_branch_or_case_aggregate": true,
+          "case_validity_is_final_and_of_applicable_validity_domains": true,
+          "terminal_code_selected_and_recorded_separately_from_case_validity": true,
+          "comparison_counts_case_validity_mismatch_and_terminal_label_mismatch_separately": true,
+          "invalid_fixture_expected_pair_match_does_not_make_method_invalid": true,
+          "method_validity_requires_ordered_exact6_expected_case_validity_and_terminal_code_pairs": true
+        },
+        "ordered_expected_terminal_records": [
+          {
+            "case_id": "M01_SINGLE_DIRECT_DECLARATION",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_SINGLE_DIRECT_DECLARATION"
+          },
+          {
+            "case_id": "M02_MULTIPLE_DIRECT_DECLARATIONS_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_MULTIPLE_DECLARATIONS_PER_SLICE"
+          },
+          {
+            "case_id": "M03_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE"
+          },
+          {
+            "case_id": "M04_SECOND_DECLARATION_UNCLOSED",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_SECOND_DECLARATION_UNCLOSED"
+          },
+          {
+            "case_id": "M05_TOP_LEVEL_NONTRIVIA",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_TOP_LEVEL_NONTRIVIA"
+          },
+          {
+            "case_id": "M06_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "semantic_edge_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "call_site_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "branch_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN"
+          }
+        ],
+        "identity_freeze": true
+      },
+      "projection_domain_aggregation_candidate_identity": {
+        "canonical_bytes": 4329,
+        "canonical_sha256": "5ae8caa3a4bdc20af36150558690babd490e85354d1b4565237a4e71d9d241a4"
+      },
+      "projection_domain_aggregation_candidate_creation_exact": 1,
+      "projection_domain_aggregation_candidate_identity_freeze_exact": 1,
+      "edge_resolution_cardinality_domain_candidate": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_EDGE_RESOLUTION_CARDINALITY_DOMAIN_CANDIDATE_V1",
+        "state": "FROZEN_DESIGN_CANDIDATE",
+        "body_free": true,
+        "private_v6_dependency": false,
+        "keys": {
+          "target_binding_key": [
+            "frozen_source_identity",
+            "lexical_scope_id",
+            "exact_identifier_token"
+          ],
+          "semantic_edge_key": [
+            "caller_semantic_role",
+            "callee_semantic_role",
+            "caller_frozen_source_identity",
+            "callee_frozen_source_identity"
+          ],
+          "call_site_occurrence_key": [
+            "caller_target_binding_key",
+            "callee_target_binding_key",
+            "exact_call_token_ordinal_within_caller_declaration"
+          ]
+        },
+        "cardinality_domains": {
+          "target_binding_count_is_distinct_from_semantic_edge_count": true,
+          "semantic_edge_count_is_distinct_from_call_site_occurrence_count": true,
+          "call_site_occurrence_count_is_distinct_from_per_closed_path_occurrence_count": true,
+          "repeated_call_sites_to_same_unique_target_do_not_increase_target_binding_or_semantic_edge_count": true
+        },
+        "m06_frozen_cardinality_table": [
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "LAUNCHER_CONTROLLED_STOP_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "3e670ac7fdc2656084d6b51bfe944afe8110f07528969db07b6de3a58871abb6",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "STOP_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": true
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "CONTROLLER_ADMIT_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": false
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "PRIVATE_TERMINAL_CANDIDATE_FREEZE",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 2,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "STOP_PATH": 1,
+              "total": 2
+            },
+            "distinct_frozen_source_edge": false
+          }
+        ],
+        "branch_contract": {
+          "closed_paths_exact": 2,
+          "paths": [
+            "ADMIT_PATH",
+            "STOP_PATH"
+          ],
+          "mutually_exclusive_normal_completion": true,
+          "allowed_constructor_exact1_per_path": true,
+          "private_freeze_occurrence_exact1_per_path": true,
+          "private_freeze_postdominates_allowed_constructor_per_path": true
+        },
+        "fail_closed": {
+          "target_binding_zero_or_multiple": true,
+          "semantic_edge_zero_or_multiple": true,
+          "unspecified_call_site_occurrence_cardinality": true,
+          "unspecified_per_closed_path_occurrence_cardinality": true,
+          "property_or_substring_match": true,
+          "computed_or_dynamic_alias": true,
+          "unresolved_binding_or_edge": true
+        },
+        "scope_limits": {
+          "static_frozen_identity_proof_only": true,
+          "runtime_module_linkage_validity_credit": false,
+          "exceptional_path_validity_credit": false
+        },
+        "identity_freeze": true
+      },
+      "edge_resolution_cardinality_domain_candidate_identity": {
+        "canonical_bytes": 3114,
+        "canonical_sha256": "448bef86a484c2233f4f85b4e734b57dc2927adc1812a75e7c335b6b1d388db9"
+      },
+      "edge_resolution_cardinality_domain_candidate_creation_exact": 1,
+      "edge_resolution_cardinality_domain_candidate_identity_freeze_exact": 1
+    },
+    "owner_forward_public_design": {
+      "execution_attempt_exact": 1,
+      "execution_completed_exact": 1,
+      "retry_exact": 0,
+      "valid": true,
+      "true_count": 29,
+      "false_count": 0,
+      "unresolved_count": 0,
+      "projection": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_DOMAIN_FREE_PROJECTION_V1",
+        "validity_scope": "PUBLIC_DESIGN_ONLY_NO_IMPLEMENTATION_OR_RUNTIME_CREDIT",
+        "boolean_field_count": 29,
+        "booleans": {
+          "public_input_identities_fresh_match": true,
+          "projection_domain_fields_separated": true,
+          "domain_values_derived_only_from_own_public_evidence": true,
+          "top_level_direct_declaration_sequence_not_cascaded": true,
+          "terminal_record_fields_separated": true,
+          "m06_module_grammar_valid": true,
+          "m06_target_binding_valid": true,
+          "m06_semantic_edge_valid": true,
+          "m06_call_site_occurrence_valid": true,
+          "m06_per_closed_path_occurrence_valid": true,
+          "m06_branch_valid": true,
+          "m06_case_valid": true,
+          "ordered_terminal_label_and_validity_compared_separately": true,
+          "target_binding_key_frozen": true,
+          "semantic_edge_key_frozen": true,
+          "call_site_occurrence_key_frozen": true,
+          "launcher_stop_cardinality_1_1_1": true,
+          "controller_admit_cardinality_1_1_1": true,
+          "private_freeze_cardinality_1_1_2": true,
+          "private_freeze_per_closed_path_1_plus_1": true,
+          "repeated_call_sites_do_not_multiply_target_or_semantic_edge": true,
+          "cross_component_distinct_frozen_source_edge_exact1": true,
+          "zero_multiple_unspecified_or_unresolved_fail_closed": true,
+          "branch_constructor_origin_exact1_per_path": true,
+          "admit_stop_mutually_exclusive": true,
+          "private_freeze_postdominates_constructor_per_path": true,
+          "static_frozen_identity_only_no_runtime_or_exception_credit": true,
+          "methods_distinct_shared_state_exact0": true,
+          "private_v6_and_forbidden_effects_exact0": true
+        },
+        "true_count": 29,
+        "false_count": 0,
+        "unresolved_count": 0,
+        "ordered_terminal_records": [
+          {
+            "case_id": "M01_SINGLE_DIRECT_DECLARATION",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_SINGLE_DIRECT_DECLARATION"
+          },
+          {
+            "case_id": "M02_MULTIPLE_DIRECT_DECLARATIONS_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_MULTIPLE_DECLARATIONS_PER_SLICE"
+          },
+          {
+            "case_id": "M03_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE"
+          },
+          {
+            "case_id": "M04_SECOND_DECLARATION_UNCLOSED",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_SECOND_DECLARATION_UNCLOSED"
+          },
+          {
+            "case_id": "M05_TOP_LEVEL_NONTRIVIA",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_TOP_LEVEL_NONTRIVIA"
+          },
+          {
+            "case_id": "M06_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "semantic_edge_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "call_site_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "branch_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN"
+          }
+        ],
+        "m06_cardinality_table": [
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "LAUNCHER_CONTROLLED_STOP_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "3e670ac7fdc2656084d6b51bfe944afe8110f07528969db07b6de3a58871abb6",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "STOP_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": true
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "CONTROLLER_ADMIT_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": false
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "PRIVATE_TERMINAL_CANDIDATE_FREEZE",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 2,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "STOP_PATH": 1,
+              "total": 2
+            },
+            "distinct_frozen_source_edge": false
+          }
+        ]
+      },
+      "projection_identity": {
+        "canonical_bytes": 6098,
+        "canonical_sha256": "00d6b45aa5c11ac2af1624aa8a92936ac0091a1615c4dabcfeff84223fe87a1b"
+      },
+      "evidence": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_OWNER_FORWARD_PUBLIC_CARDINALITY_DOMAIN_AND_EDGE_TABLE_STATIC_DESIGN_EVIDENCE_V1",
+        "method": "OWNER_FORWARD_MODULE_SLICE_TO_BINDING_TABLE_TO_CALL_OCCURRENCE_TO_SEMANTIC_EDGE_TO_CLOSED_PATH_PROJECTION",
+        "public_inputs": {
+          "grammar_candidate_sha256": "d0967909259a1e4fb6bfd2b521d0ade1ea4ce31a3526ca4a56bfcd5ed5deb61d",
+          "fixture_set_sha256": "3c58b37d24c587de49706d5c8f00a5a74586d7b103e01ddb91466173d4dc400f",
+          "projection_domain_candidate_sha256": "5ae8caa3a4bdc20af36150558690babd490e85354d1b4565237a4e71d9d241a4",
+          "edge_cardinality_candidate_sha256": "448bef86a484c2233f4f85b4e734b57dc2927adc1812a75e7c335b6b1d388db9"
+        },
+        "private_v6_read_or_reuse": false,
+        "independent_state_read_or_reuse": false,
+        "shared_parser_normalizer_model_boolean_evidence_intermediate_or_derived_state": false,
+        "derivation_steps": [
+          "SCAN_TOP_LEVEL_MODULE_SLICES_WITHOUT_CASE_AGGREGATE_CASCADE",
+          "BIND_QUALIFIED_DESCRIPTOR_EXACT8_BY_FROZEN_SOURCE_SCOPE_AND_IDENTIFIER",
+          "BUILD_TARGET_BINDING_TABLE",
+          "ENUMERATE_PUBLIC_EXACT_CALL_TOKEN_OCCURRENCES",
+          "DEDUPLICATE_SEMANTIC_EDGES_BY_FROZEN_ROLE_AND_SOURCE_KEY",
+          "PARTITION_ADMIT_AND_STOP_CLOSED_PATHS",
+          "DERIVE_DOMAIN_SEPARATED_CASE_AND_TERMINAL_RECORDS"
+        ],
+        "ordered_case_evidence": [
+          {
+            "case_id": "M01_SINGLE_DIRECT_DECLARATION",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_SINGLE_DIRECT_DECLARATION"
+          },
+          {
+            "case_id": "M02_MULTIPLE_DIRECT_DECLARATIONS_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_MULTIPLE_DECLARATIONS_PER_SLICE"
+          },
+          {
+            "case_id": "M03_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE"
+          },
+          {
+            "case_id": "M04_SECOND_DECLARATION_UNCLOSED",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_SECOND_DECLARATION_UNCLOSED"
+          },
+          {
+            "case_id": "M05_TOP_LEVEL_NONTRIVIA",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_TOP_LEVEL_NONTRIVIA"
+          },
+          {
+            "case_id": "M06_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "semantic_edge_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "call_site_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "branch_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN"
+          }
+        ],
+        "m06_cardinality_evidence": [
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "LAUNCHER_CONTROLLED_STOP_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "3e670ac7fdc2656084d6b51bfe944afe8110f07528969db07b6de3a58871abb6",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "STOP_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": true
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "CONTROLLER_ADMIT_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": false
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "PRIVATE_TERMINAL_CANDIDATE_FREEZE",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 2,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "STOP_PATH": 1,
+              "total": 2
+            },
+            "distinct_frozen_source_edge": false
+          }
+        ],
+        "m06_module_declaration_counts": [
+          9,
+          9,
+          3
+        ],
+        "expected_case_count": 6,
+        "expected_valid_count": 4,
+        "expected_invalid_count": 2,
+        "ordered_expected_pairs_match": true,
+        "runtime_linkage_credit": false,
+        "exceptional_path_credit": false,
+        "implementation_validity_credit": false
+      },
+      "evidence_identity": {
+        "canonical_bytes": 5963,
+        "canonical_sha256": "ca21da84c7310d3377d0c879c38d2de93c4b77a033c321693fc91bb3a8fc48bc"
+      }
+    },
+    "independent_backward_public_design": {
+      "execution_attempt_exact": 1,
+      "execution_completed_exact": 1,
+      "retry_exact": 0,
+      "valid": true,
+      "true_count": 29,
+      "false_count": 0,
+      "unresolved_count": 0,
+      "projection": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_DOMAIN_FREE_PROJECTION_V1",
+        "validity_scope": "PUBLIC_DESIGN_ONLY_NO_IMPLEMENTATION_OR_RUNTIME_CREDIT",
+        "boolean_field_count": 29,
+        "booleans": {
+          "public_input_identities_fresh_match": true,
+          "projection_domain_fields_separated": true,
+          "domain_values_derived_only_from_own_public_evidence": true,
+          "top_level_direct_declaration_sequence_not_cascaded": true,
+          "terminal_record_fields_separated": true,
+          "m06_module_grammar_valid": true,
+          "m06_target_binding_valid": true,
+          "m06_semantic_edge_valid": true,
+          "m06_call_site_occurrence_valid": true,
+          "m06_per_closed_path_occurrence_valid": true,
+          "m06_branch_valid": true,
+          "m06_case_valid": true,
+          "ordered_terminal_label_and_validity_compared_separately": true,
+          "target_binding_key_frozen": true,
+          "semantic_edge_key_frozen": true,
+          "call_site_occurrence_key_frozen": true,
+          "launcher_stop_cardinality_1_1_1": true,
+          "controller_admit_cardinality_1_1_1": true,
+          "private_freeze_cardinality_1_1_2": true,
+          "private_freeze_per_closed_path_1_plus_1": true,
+          "repeated_call_sites_do_not_multiply_target_or_semantic_edge": true,
+          "cross_component_distinct_frozen_source_edge_exact1": true,
+          "zero_multiple_unspecified_or_unresolved_fail_closed": true,
+          "branch_constructor_origin_exact1_per_path": true,
+          "admit_stop_mutually_exclusive": true,
+          "private_freeze_postdominates_constructor_per_path": true,
+          "static_frozen_identity_only_no_runtime_or_exception_credit": true,
+          "methods_distinct_shared_state_exact0": true,
+          "private_v6_and_forbidden_effects_exact0": true
+        },
+        "true_count": 29,
+        "false_count": 0,
+        "unresolved_count": 0,
+        "ordered_terminal_records": [
+          {
+            "case_id": "M01_SINGLE_DIRECT_DECLARATION",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_SINGLE_DIRECT_DECLARATION"
+          },
+          {
+            "case_id": "M02_MULTIPLE_DIRECT_DECLARATIONS_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_MULTIPLE_DECLARATIONS_PER_SLICE"
+          },
+          {
+            "case_id": "M03_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE"
+          },
+          {
+            "case_id": "M04_SECOND_DECLARATION_UNCLOSED",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_SECOND_DECLARATION_UNCLOSED"
+          },
+          {
+            "case_id": "M05_TOP_LEVEL_NONTRIVIA",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_TOP_LEVEL_NONTRIVIA"
+          },
+          {
+            "case_id": "M06_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "semantic_edge_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "call_site_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "branch_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN"
+          }
+        ],
+        "m06_cardinality_table": [
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "LAUNCHER_CONTROLLED_STOP_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "3e670ac7fdc2656084d6b51bfe944afe8110f07528969db07b6de3a58871abb6",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "STOP_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": true
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "CONTROLLER_ADMIT_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": false
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "PRIVATE_TERMINAL_CANDIDATE_FREEZE",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 2,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "STOP_PATH": 1,
+              "total": 2
+            },
+            "distinct_frozen_source_edge": false
+          }
+        ]
+      },
+      "projection_identity": {
+        "canonical_bytes": 6098,
+        "canonical_sha256": "00d6b45aa5c11ac2af1624aa8a92936ac0091a1615c4dabcfeff84223fe87a1b"
+      },
+      "evidence": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_INDEPENDENT_BACKWARD_PUBLIC_CALL_SITE_TO_SEMANTIC_EDGE_TO_TARGET_BINDING_STATIC_DESIGN_EVIDENCE_V1",
+        "method": "INDEPENDENT_BACKWARD_TERMINAL_AND_REQUIRED_ROLE_PAIR_TO_CALL_SITE_TO_SEMANTIC_EDGE_TO_TARGET_BINDING_REVERSE_DERIVATION",
+        "public_inputs": {
+          "grammar_candidate_sha256": "d0967909259a1e4fb6bfd2b521d0ade1ea4ce31a3526ca4a56bfcd5ed5deb61d",
+          "fixture_set_sha256": "3c58b37d24c587de49706d5c8f00a5a74586d7b103e01ddb91466173d4dc400f",
+          "projection_domain_candidate_sha256": "5ae8caa3a4bdc20af36150558690babd490e85354d1b4565237a4e71d9d241a4",
+          "edge_cardinality_candidate_sha256": "448bef86a484c2233f4f85b4e734b57dc2927adc1812a75e7c335b6b1d388db9"
+        },
+        "private_v6_read_or_reuse": false,
+        "owner_state_read_or_reuse": false,
+        "shared_parser_normalizer_model_boolean_evidence_intermediate_or_derived_state": false,
+        "derivation_steps": [
+          "START_FROM_ORDERED_EXPECTED_TERMINAL_AND_REQUIRED_ROLE_PAIRS",
+          "REVERSE_SLICE_EACH_EXACT_CALL_SITE_TO_CALLER_ROLE",
+          "RESOLVE_CALLEE_TARGET_BINDING_EXACT1_BY_FROZEN_KEY",
+          "DEDUPLICATE_SEMANTIC_EDGE_BY_ROLE_AND_FROZEN_SOURCE_PAIR",
+          "PARTITION_EACH_CONSTRUCTOR_AND_FREEZE_BY_CLOSED_PATH",
+          "REVERSE_CHECK_MODULE_SLICE_VALIDITY_WITHOUT_PARTIAL_DECLARATION_COUNT_PROJECTION",
+          "EMIT_THE_FROZEN_DOMAIN_FREE_PROJECTION_SCHEMA"
+        ],
+        "ordered_case_evidence": [
+          {
+            "case_id": "M01_SINGLE_DIRECT_DECLARATION",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_SINGLE_DIRECT_DECLARATION"
+          },
+          {
+            "case_id": "M02_MULTIPLE_DIRECT_DECLARATIONS_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_MULTIPLE_DECLARATIONS_PER_SLICE"
+          },
+          {
+            "case_id": "M03_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_PROTECTED_OBJECT_BOUNDARIES_PER_SLICE"
+          },
+          {
+            "case_id": "M04_SECOND_DECLARATION_UNCLOSED",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_SECOND_DECLARATION_UNCLOSED"
+          },
+          {
+            "case_id": "M05_TOP_LEVEL_NONTRIVIA",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": false
+            },
+            "target_binding_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "semantic_edge_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "call_site_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "branch_validity": {
+              "applicable": false,
+              "valid": null
+            },
+            "case_validity": false,
+            "terminal_code": "INVALID_TOP_LEVEL_NONTRIVIA"
+          },
+          {
+            "case_id": "M06_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN",
+            "module_grammar_slice_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "target_binding_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "semantic_edge_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "call_site_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "per_closed_path_occurrence_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "branch_validity": {
+              "applicable": true,
+              "valid": true
+            },
+            "case_validity": true,
+            "terminal_code": "VALID_CROSS_COMPONENT_EXACT_IDENTIFIER_EDGE_AND_BRANCH_ORIGIN"
+          }
+        ],
+        "m06_cardinality_evidence": [
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "LAUNCHER_CONTROLLED_STOP_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "3e670ac7fdc2656084d6b51bfe944afe8110f07528969db07b6de3a58871abb6",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "STOP_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": true
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "CONTROLLER_ADMIT_CONSTRUCTOR",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 1,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "total": 1
+            },
+            "distinct_frozen_source_edge": false
+          },
+          {
+            "caller_semantic_role": "PROTECTED_REGION",
+            "callee_semantic_role": "PRIVATE_TERMINAL_CANDIDATE_FREEZE",
+            "caller_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "callee_frozen_source_identity": "c34ba93d58740210b9c24c9e3c334be9ff4d5aeb5d34b380cc43f55ae7184950",
+            "target_binding_count": 1,
+            "semantic_edge_count": 1,
+            "call_site_occurrence_count": 2,
+            "per_closed_path_occurrences": {
+              "ADMIT_PATH": 1,
+              "STOP_PATH": 1,
+              "total": 2
+            },
+            "distinct_frozen_source_edge": false
+          }
+        ],
+        "partial_declaration_counts_for_invalid_m04_m05_projected": false,
+        "expected_case_count": 6,
+        "expected_valid_count": 4,
+        "expected_invalid_count": 2,
+        "ordered_expected_pairs_match": true,
+        "runtime_linkage_credit": false,
+        "exceptional_path_credit": false,
+        "implementation_validity_credit": false
+      },
+      "evidence_identity": {
+        "canonical_bytes": 6064,
+        "canonical_sha256": "db799fc81af97fd96a660632901d5711da964db4dcf0b948cb15ac9ebbeef6d8"
+      }
+    },
+    "domain_free_projection_comparison": {
+      "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_COMPARISON_V1",
+      "comparison_attempt_exact": 1,
+      "comparison_available": true,
+      "owner_valid": true,
+      "independent_valid": true,
+      "dual_valid": true,
+      "schema_match": true,
+      "field_set_match": true,
+      "values_match": true,
+      "ordered_case_record_match": true,
+      "ordered_case_validity_match": true,
+      "terminal_label_match": true,
+      "terminal_label_mismatch_exact": 0,
+      "case_validity_mismatch_exact": 0,
+      "projection_canonical_bytes_match": true,
+      "projection_sha256_match": true,
+      "mismatch_exact": 0,
+      "match": true
+    },
+    "reconciliation_contract": {
+      "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_CONTRACT_V1",
+      "creation_exact": 1,
+      "identity_freeze_exact": 1,
+      "design_validity_credit_exact": 1,
+      "design_only_stop_exact": 1,
+      "typed_design_blocker_stop_exact": 0,
+      "candidate": {
+        "schema_version": "NLSV3_STEP11_CYCLE001_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_CONTRACT_V1",
+        "state": "FROZEN_DESIGN_VALID",
+        "identity_freeze": true,
+        "body_free": true,
+        "created_date": "2026-08-04",
+        "authority_binding": {
+          "ascii_bytes": 8201,
+          "sha256": "fbc4fed33717331f4c6042b89a25503b5c1b966550e609c91a0249dfb80eec4d",
+          "activated_exact": 1
+        },
+        "predecessor_receipt_binding": {
+          "blob_sha": "3f5aa32905955c0407befc520bafbb7ca07ca83f",
+          "raw_bytes": 66583,
+          "raw_sha256": "061b1274a63d36839d87a2b259a04779d908f539596f298126c20035b9477364",
+          "logical_bytes": 49750,
+          "logical_sha256": "af84cffa67c76a6f835f8073e1d999d4ae33a1fd382ff6e794ac0c3e2848f37b",
+          "observation_bytes": 40647,
+          "observation_sha256": "24aed53a1a6a23a577ec87d7551ff5e74792b3219656d0c22354989b0b6f6754",
+          "prior_state": "CLOSED_UNCONSUMED",
+          "successor_consumption_exact": 1,
+          "stored_receipt_mutation": false
+        },
+        "public_source_identity_binding": {
+          "component_module_grammar_sha256": "d0967909259a1e4fb6bfd2b521d0ade1ea4ce31a3526ca4a56bfcd5ed5deb61d",
+          "exact6_fixture_set_sha256": "3c58b37d24c587de49706d5c8f00a5a74586d7b103e01ddb91466173d4dc400f",
+          "projection_domain_candidate_sha256": "5ae8caa3a4bdc20af36150558690babd490e85354d1b4565237a4e71d9d241a4",
+          "edge_cardinality_candidate_sha256": "448bef86a484c2233f4f85b4e734b57dc2927adc1812a75e7c335b6b1d388db9"
+        },
+        "owner_forward": {
+          "execution_exact": 1,
+          "valid": true,
+          "true_count": 29,
+          "false_count": 0,
+          "unresolved_count": 0,
+          "projection_canonical_bytes": 6098,
+          "projection_sha256": "00d6b45aa5c11ac2af1624aa8a92936ac0091a1615c4dabcfeff84223fe87a1b",
+          "evidence_canonical_bytes": 5963,
+          "evidence_sha256": "ca21da84c7310d3377d0c879c38d2de93c4b77a033c321693fc91bb3a8fc48bc"
+        },
+        "independent_backward": {
+          "execution_exact": 1,
+          "valid": true,
+          "true_count": 29,
+          "false_count": 0,
+          "unresolved_count": 0,
+          "projection_canonical_bytes": 6098,
+          "projection_sha256": "00d6b45aa5c11ac2af1624aa8a92936ac0091a1615c4dabcfeff84223fe87a1b",
+          "evidence_canonical_bytes": 6064,
+          "evidence_sha256": "db799fc81af97fd96a660632901d5711da964db4dcf0b948cb15ac9ebbeef6d8"
+        },
+        "comparison": {
+          "attempt_exact": 1,
+          "schema_match": true,
+          "field_set_match": true,
+          "values_match": true,
+          "ordered_case_validity_match": true,
+          "terminal_label_match": true,
+          "canonical_projection_match": true,
+          "dual_valid": true,
+          "match": true
+        },
+        "frozen_invariants": {
+          "projection_domains_are_separate": true,
+          "module_grammar_never_cascades_from_edge_or_case": true,
+          "case_validity_and_terminal_code_are_separate": true,
+          "target_binding_semantic_edge_call_occurrence_and_per_path_occurrence_are_distinct": true,
+          "private_freeze_call_occurrences2_target_binding1_semantic_edge1": true,
+          "private_freeze_per_closed_path_exact1_paths2_total2": true,
+          "repeated_call_sites_do_not_multiply_target_binding_or_semantic_edge": true,
+          "zero_multiple_unspecified_dynamic_alias_or_unresolved_fail_closed": true,
+          "admit_stop_paths_mutually_exclusive": true,
+          "freeze_postdominates_constructor_per_normal_closed_path": true,
+          "static_frozen_identity_design_only": true
+        },
+        "design_outcome": {
+          "contract_creation_exact": 1,
+          "identity_freeze_exact": 1,
+          "design_validity_credit_exact": 1,
+          "design_only_stop_exact": 1,
+          "typed_design_blocker_stop_exact": 0,
+          "implementation_validity_credit_exact": 0,
+          "runtime_validity_credit_exact": 0
+        },
+        "scope_limits": {
+          "failed_private_v6_read_reuse_inference_or_mutation": false,
+          "current_analyzer_program_or_derived_state_reuse": false,
+          "v7_analyzer_or_component_source_create_read_execute": false,
+          "repair_reexecution_retry_or_retroactive_credit": false,
+          "synthetic_or_prior_vector_execution_or_reuse": false,
+          "formal_source_v4_create_or_execute": false,
+          "outer_launch_runtime_pytest_product_effect": false,
+          "cocolon_production_red_d1_change": false,
+          "mashos_api_effect": false,
+          "automatic_progression": false
+        }
+      },
+      "candidate_identity": {
+        "canonical_bytes": 3646,
+        "canonical_sha256": "50135a9c633b3c562f6ee808a325f4adbcbf71642481c73a443cc07dffe78bed"
+      }
+    },
+    "terminal_credit": {
+      "design_validity_credit_exact": 1,
+      "implementation_validity_credit_exact": 0,
+      "runtime_validity_credit_exact": 0,
+      "design_only_stop_exact": 1,
+      "typed_design_blocker_stop_exact": 0,
+      "repair_exact": 0,
+      "reexecution_exact": 0,
+      "retry_exact": 0,
+      "retroactive_credit_exact": 0
+    },
+    "effects": {
+      "fresh_v7_analyzer_program_creation_read_execution_exact": 0,
+      "fresh_v7_component_source_creation_read_execution_exact": 0,
+      "component_runtime_execution_exact": 0,
+      "synthetic_preflight_execution_exact": 0,
+      "synthetic_preflight_reexecution_exact": 0,
+      "prior_closed_vector_reuse_exact": 0,
+      "formal_source_v4_creation_exact": 0,
+      "formal_source_v4_execution_exact": 0,
+      "outer_launch_exact": 0,
+      "runtime_exact": 0,
+      "pytest_exact": 0,
+      "product_effect_exact": 0,
+      "cocolon_production_source_change_exact": 0,
+      "published_red_change_exact": 0,
+      "existing_d1_change_exact": 0,
+      "mashos_api_change_exact": 0
+    },
+    "historical_position": {
+      "prior_v6_projection_aggregation_and_cardinality_typed_blocker_remains_closed_unmodified": true,
+      "private_v6_defect_origin": "UNASSIGNED",
+      "public_design_blocker_origin": "RESOLVED_BY_FROZEN_PUBLIC_DOMAIN_SEPARATION_CONTRACT",
+      "full_r1_result": "UNKNOWN_PRESERVED",
+      "runtime_ready": false,
+      "formal_source_v4_materialized": false,
+      "formal_source_v4_semantic_validity": "UNPROVEN",
+      "cycle001_accepted": false
+    },
+    "public_exact5": {
+      "new_exact3": [
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V6PublicDesignProjectionAggregationAndEdgeResolutionCardinalityReconciliationContractV1_DualStaticValidMatching_DesignOnlyStop_Result_20260804.md",
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V6PublicDesignProjectionAggregationAndEdgeResolutionCardinalityReconciliationContractV1_DualStaticValidMatching_DesignOnlyStop_BodyFree_Receipt_20260804.json",
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V6PublicDesignProjectionAggregationAndEdgeResolutionCardinalityReconciliationContractV1_DualStaticValidMatching_DesignOnlyStop_Handoff_20260804.md"
+      ],
+      "modified_append_only_exact2": [
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+        "Cocolon_前提資料/07_latest_snapshot_diff.md"
+      ],
+      "deletions_exact": 0
+    }
+  },
+  "observation_sha256": "c79cb8c04f4e24deb35a36d463498ab645e7edb54a3b4e52cc0d76e86c835ca4",
+  "next_authority": {
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_CONTINUITY_GATE_B_V6_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_CONTRACT_V1_DUAL_STATIC_VALID_MATCHING_DESIGN_STOP_POSTVERIFIED_OBSERVATION_SHA256_C79CB8C04F4E24DEB35A36D463498AB645E7EDB54A3B4E52CC0D76E86C835CA4_CURRENT_AUTHORITY_SHA256_FBC4FED33717331F4C6042B89A25503B5C1B966550E609C91A0249DFB80EEC4D_ACTIVATED_EXACT1_CURRENT_V6_DESIGN_BLOCKER_RECEIPT_CLOSED_CONSUMED_EXACT1_OBSERVATION_24AED53A1A6A23A577EC87D7551FF5E74792B3219656D0C22354989B0B6F6754_PRIOR_AUTHORITY_OR_PRIOR_BLOCKER_RECEIPT_RECONSUMPTION_EXACT0_CURRENT_POLICY_RECEIPT_REMAINS_CLOSED_UNCONSUMED_IMMUTABLE_CONSUMPTION_EXACT0_BLOB_2F5EACE6_RAW_437B319F_LOGICAL_0F0B30AE_OBSERVATION_618E4A9B_COCOLON_ACTUAL_REFLECTION_PREWRITE_BASE_8486BB40_TREE_18BEAB72_AUTHORITY_CARRIED_TECHNICAL_PREWRITE_BASE_D70E21C1_TREE_CA50A412_AUTHORITY_CARRIED_HISTORICAL_PREWRITE_BASE_554C2A56_TREE_4F01BA51_MASHOS_API_SOURCE_315813C7_TREE_A641510E_CHANGE_EXACT0_PUBLIC_CURRENT_V6_DESIGN_BLOCKER_RECEIPT_BLOB_3F5AA329_RAW_061B1274_LOGICAL_AF84CFFA_OBSERVATION_24AED53A_FRESH_REREAD_RECANONICALIZATION_REHASH_REBIND_AND_MATCH_EXACT1_CONSUMPTION_EXACT1_PUBLIC_COMPONENT_MODULE_GRAMMAR_CANDIDATE_D0967909259A1E4FB6BFD2B521D0ADE1EA4CE31A3526CA4A56BFCD5ED5DEB61D_CANONICAL_BYTES_3231_FRESH_MATCH_EXACT1_PUBLIC_COMPONENT_MODULE_AND_CROSS_COMPONENT_EDGE_FIXTURE_SET_3C58B37D24C587DE49706D5C8F00A5A74586D7B103E01DDB91466173D4DC400F_CANONICAL_BYTES_14564_CASES_EXACT6_EXPECTED_VALID4_INVALID2_FRESH_MATCH_EXACT1_BLOCKED_OWNER_PROJECTION_3BEE55B4C50A8C8953115A3843A0159832B22A40DC4F14683B2DA2E5EAEF255D_CANONICAL_BYTES_1919_EVIDENCE_7C7090AD3443E2479071297E16DAB0D7E54C601523B1B31820383DCA836569B6_FRESH_MATCH_EXACT1_BLOCKED_INDEPENDENT_PROJECTION_9F9A959F81FF48325BE95A8DD13E5E46BC10BFCE32D7D00CAF1067BB127A627C_CANONICAL_BYTES_1915_EVIDENCE_C6A320E251201EBE48213FAC5DBED7ADA888298529584A7ACBFC97B0EDDA1B96_FRESH_MATCH_EXACT1_BLOCKED_MISMATCH_FACTS_CALL_OCCURRENCES2_TARGET_BINDINGS1_VALUE_MISMATCH3_ORDERED_VALIDITY_MISMATCH1_TERMINAL_LABEL_MISMATCH0_FRESH_MATCH_EXACT1_PUBLIC_PROJECTION_DOMAIN_AGGREGATION_CANDIDATE_5AE8CAA3A4BDC20AF36150558690BABD490E85354D1B4565237A4E71D9D241A4_CANONICAL_BYTES_4329_CREATION_EXACT1_IDENTITY_FREEZE_EXACT1_MODULE_GRAMMAR_SLICE_TARGET_BINDING_SEMANTIC_EDGE_CALL_SITE_OCCURRENCE_PER_CLOSED_PATH_OCCURRENCE_BRANCH_CASE_VALIDITY_AND_TERMINAL_CODE_SEPARATE_FIELDS_EXACT1_NON_APPLICABLE_DOMAIN_EXPLICIT_NULL_EXACT1_DOMAIN_FIELD_VALUE_DERIVED_ONLY_FROM_OWN_PUBLIC_EVIDENCE_EXACT1_TOP_LEVEL_DIRECT_DECLARATION_SEQUENCE_NOT_CASCADED_FROM_EDGE_BRANCH_OR_CASE_AGGREGATE_EXACT1_CASE_VALIDITY_FINAL_AND_OF_APPLICABLE_VALIDITY_DOMAINS_EXACT1_TERMINAL_CODE_SELECTED_AND_RECORDED_SEPARATELY_EXACT1_INVALID_FIXTURE_EXPECTED_PAIR_MATCH_DOES_NOT_INVALIDATE_METHOD_EXACT1_PUBLIC_EDGE_RESOLUTION_CARDINALITY_DOMAIN_CANDIDATE_448BEF86A484C2233F4F85B4E734B57DC2927ADC1812A75E7C335B6B1D388DB9_CANONICAL_BYTES_3114_CREATION_EXACT1_IDENTITY_FREEZE_EXACT1_TARGET_BINDING_KEY_FROZEN_SOURCE_IDENTITY_LEXICAL_SCOPE_ID_EXACT_IDENTIFIER_TOKEN_EXACT1_SEMANTIC_EDGE_KEY_CALLER_SEMANTIC_ROLE_CALLEE_SEMANTIC_ROLE_CALLER_FROZEN_SOURCE_IDENTITY_CALLEE_FROZEN_SOURCE_IDENTITY_EXACT1_CALL_SITE_OCCURRENCE_KEY_CALLER_TARGET_BINDING_CALLEE_TARGET_BINDING_AND_EXACT_CALL_TOKEN_ORDINAL_EXACT1_TARGET_BINDING_SEMANTIC_EDGE_CALL_SITE_OCCURRENCE_AND_PER_CLOSED_PATH_OCCURRENCE_DISTINCT_DOMAINS_EXACT1_PUBLIC_M06_LAUNCHER_STOP_TARGET_BINDING1_SEMANTIC_EDGE1_CALL_OCCURRENCE1_STOP_PATH1_PUBLIC_M06_CONTROLLER_ADMIT_TARGET_BINDING1_SEMANTIC_EDGE1_CALL_OCCURRENCE1_ADMIT_PATH1_PUBLIC_M06_PRIVATE_FREEZE_TARGET_BINDING1_SEMANTIC_EDGE1_CALL_OCCURRENCE2_ADMIT_PATH1_STOP_PATH1_TOTAL2_REPEATED_CALL_SITES_TO_SAME_UNIQUE_TARGET_DO_NOT_MULTIPLY_TARGET_BINDING_OR_SEMANTIC_EDGE_EXACT1_CROSS_COMPONENT_DISTINCT_FROZEN_SOURCE_EDGE_EXACT1_TARGET_BINDING_OR_SEMANTIC_EDGE_ZERO_OR_MULTIPLE_UNSPECIFIED_OCCURRENCE_PROPERTY_SUBSTRING_COMPUTED_DYNAMIC_ALIAS_OR_UNRESOLVED_FAIL_CLOSED_EXACT1_BRANCH_SPECIFIC_CONSTRUCTOR_ORIGIN_EXACT1_PER_CLOSED_PATH_ADMIT_OR_STOP_MUTUALLY_EXCLUSIVE_NORMAL_COMPLETION_EXACT1_PRIVATE_FREEZE_OCCURRENCE_EXACT1_PER_PATH_AND_POSTDOMINATES_ALLOWED_CONSTRUCTOR_EXACT1_STATIC_FROZEN_IDENTITY_ONLY_RUNTIME_MODULE_LINKAGE_AND_EXCEPTIONAL_PATH_VALIDITY_CREDIT_EXACT0_EXACT0_OWNER_FORWARD_PUBLIC_CARDINALITY_DOMAIN_AND_EDGE_TABLE_STATIC_DESIGN_DERIVATION_ATTEMPT_EXACT1_COMPLETED_EXACT1_VALID_TRUE_TRUE29_FALSE0_UNRESOLVED0_PROJECTION_SHA256_00D6B45AA5C11AC2AF1624AA8A92936AC0091A1615C4DABCFEFF84223FE87A1B_CANONICAL_BYTES_6098_EVIDENCE_SHA256_CA21DA84C7310D3377D0C879C38D2DE93C4B77A033C321693FC91BB3A8FC48BC_INDEPENDENT_BACKWARD_DISTINCT_PUBLIC_CALL_SITE_TO_SEMANTIC_EDGE_TO_TARGET_BINDING_STATIC_DESIGN_DERIVATION_ATTEMPT_EXACT1_COMPLETED_EXACT1_VALID_TRUE_TRUE29_FALSE0_UNRESOLVED0_PROJECTION_SHA256_00D6B45AA5C11AC2AF1624AA8A92936AC0091A1615C4DABCFEFF84223FE87A1B_CANONICAL_BYTES_6098_EVIDENCE_SHA256_DB799FC81AF97FD96A660632901D5711DA964DB4DCF0B948CB15AC9EBBEEF6D8_SHARED_PARSER_NORMALIZER_MODEL_BOOLEAN_EVIDENCE_INTERMEDIATE_OR_DERIVED_STATE_EXACT0_DOMAIN_FREE_PROJECTION_COMPARISON_ATTEMPT_EXACT1_COMPARISON_AVAILABLE_TRUE_OWNER_VALID_TRUE_INDEPENDENT_VALID_TRUE_DUAL_VALID_TRUE_SCHEMA_MATCH_TRUE_FIELD_SET_MATCH_TRUE_VALUES_MATCH_TRUE_ORDERED_CASE_RECORD_MATCH_TRUE_ORDERED_CASE_VALIDITY_MATCH_TRUE_TERMINAL_LABEL_MATCH_TRUE_PROJECTION_CANONICAL_BYTES_MATCH_TRUE_PROJECTION_SHA256_MATCH_TRUE_MISMATCH_EXACT0_PUBLIC_DESIGN_PROJECTION_AGGREGATION_AND_EDGE_RESOLUTION_CARDINALITY_RECONCILIATION_CONTRACT_V1_CANDIDATE_50135A9C633B3C562F6EE808A325F4ADBCBF71642481C73A443CC07DFFE78BED_CANONICAL_BYTES_3646_TOP_LEVEL_KEYS_EXACT14_CREATION_EXACT1_IDENTITY_FREEZE_EXACT1_DESIGN_VALIDITY_CREDIT_EXACT1_DESIGN_ONLY_STOP_EXACT1_IMPLEMENTATION_VALIDITY_CREDIT_EXACT0_RUNTIME_VALIDITY_CREDIT_EXACT0_TYPED_DESIGN_BLOCKER_STOP_EXACT0_PRIOR_V6_PROJECTION_AGGREGATION_AND_CARDINALITY_TYPED_BLOCKER_REMAINS_CLOSED_UNMODIFIED_PUBLIC_DESIGN_BLOCKER_ORIGIN_RESOLVED_PRIVATE_V6_DEFECT_ORIGIN_UNASSIGNED_NO_REPAIR_REEXECUTION_RETRY_OR_RETROACTIVE_CREDIT_FAILED_PRIVATE_V6_COMPONENT_PATH_BODY_IDENTITY_IDENTIFIER_SCOPE_ALIAS_GRAPH_POSITION_CALL_SITE_EFFECT_SITE_ANALYZER_PROGRAM_PARSER_MODEL_PROJECTION_EVIDENCE_OUTPUT_INTERMEDIATE_OR_DERIVED_STATE_READ_REUSE_INFERENCE_REPAIR_MUTATION_REBIND_OR_RETROACTIVE_CREDIT_EXACT0_CURRENT_OWNER_OR_INDEPENDENT_ANALYZER_PROGRAM_PATH_BODY_INTERMEDIATE_OR_DERIVED_STATE_READ_REUSE_EXACT0_FRESH_V7_ANALYZER_PROGRAM_OR_COMPONENT_SOURCE_CREATION_READ_EXECUTION_EXACT0_EXACT0_EXACT0_SYNTHETIC_PREFLIGHT_OR_REEXECUTION_PRIOR_CLOSED_VECTOR_REUSE_FORMAL_SOURCE_V4_CREATION_OR_EXECUTION_OUTER_LAUNCH_RUNTIME_PYTEST_PRODUCT_OR_MASHOS_API_EFFECT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_CHANGE_EXACT0_EXACT0_EXACT0_BODY_FREE_FULL_R1_RESULT_UNKNOWN_PRESERVED_RUNTIME_READY_FALSE_FORMAL_SOURCE_V4_MATERIALIZED_FALSE_FORMAL_SOURCE_V4_SEMANTIC_VALIDITY_UNPROVEN_CYCLE001_NOT_ACCEPTED_PUBLIC_FUNCTION_BOUNDARY_RECONCILIATION_CONTRACT_V1_EAAAB87D505C6DBB4A44DF8F4B2941AC2E0BAE8D6323AA6EBDBEFB5175AA08AB_CANONICAL_BYTES_9548_IMMUTABLE_NO_WEAKENING_EXACT1_PUBLIC_FUNCTION_BOUNDARY_GRAMMAR_D6075F44C49A1BE4F1C3D98FF1B9B533A24426217037C533E2DADD46C314CB3B_CANONICAL_BYTES_3137_PUBLIC_FUNCTION_BOUNDARY_EXACT9_FIXTURE_SET_F4A7FF5715295B753C9813256FB1BF51F9AC8BC98580DCDCBA1858960BF65C91_CANONICAL_BYTES_3233_CASES_EXACT9_EXPECTED_VALID6_INVALID3_G08_LF1_PUBLIC_STATIC_PROOF_RECONCILIATION_CONTRACT_V1_228EC97E17C52F49DB1951A804E7D611831546BF31D4CEB07DAAB5418E94E3BA_CANONICAL_BYTES_19062_IMMUTABLE_NO_WEAKENING_EXACT1_PUBLIC_LAUNCHER_TRANSPORT_RECONCILIATION_CONTRACT_V1_A444AA84DD7DB155EA792F70CC3A1949A03DE9E8D9D3CB4B47F3CBCE12D2B4E3_CANONICAL_BYTES_30194_IMMUTABLE_NO_WEAKENING_EXACT1_DISTINCT_FRESH_V7_FUNCTION_BOUNDARY_COMPONENT_MODULE_AND_CARDINALITY_CONTRACT_BOUND_STATIC_ANALYZER_DUAL_PREFLIGHT_AND_QUALIFIED_TARGET_BOUND_CORRECTED_IMPLEMENTATION_STATIC_ONLY_AUTHORITY_CURRENT_BODY_FREE_CURRENT_RECONCILIATION_RECEIPT_CONSUMPTION_EXACT1_PRIOR_RECEIPT_RECONSUMPTION_EXACT0_CURRENT_POLICY_RECEIPT_CONSUMPTION_EXACT0_CURRENT_PUBLIC_RECONCILIATION_RECEIPT_CONTRACT_CANDIDATES_GRAMMAR_FIXTURE_SET_OWNER_EVIDENCE_INDEPENDENT_EVIDENCE_PROJECTION_AND_COMPARISON_IDENTITIES_FRESH_REREAD_RECANONICALIZATION_REHASH_REBIND_AND_MATCH_EXACT1_FAILED_PRIVATE_V6_COMPONENT_SOURCE_PATH_BODY_IDENTITY_IDENTIFIER_SCOPE_ALIAS_GRAPH_POSITION_CALL_SITE_EFFECT_SITE_ANALYZER_PROGRAM_PARSER_MODEL_PROJECTION_EVIDENCE_OUTPUT_INTERMEDIATE_OR_DERIVED_STATE_READ_REUSE_INFERENCE_REPAIR_MUTATION_REBIND_OR_RETROACTIVE_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_INPUT_IDENTITY_GATE_BEFORE_PRIVATE_V7_ANALYZER_OR_COMPONENT_SOURCE_CREATION_OR_READ_EXACT1_STATIC_TOOLING_PRIMITIVE_PREFLIGHT_BEFORE_PRIVATE_V7_ANALYZER_OR_COMPONENT_SOURCE_CREATION_OR_READ_EXACT1_PUBLIC_ASCII_ABC_BYTES3_SHA256_BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD_CURRENT_AUTHORITY_ASCII_BYTE_COUNT_AND_SHA256_MATCH_EXACT1_TEXT_ENCODER_DEPENDENCY_REQUIRED_EXACT0_VERIFIED_BYTE_VECTOR_SHA256_MECHANISM_REQUIRED_EXACT1_IF_INPUT_IDENTITY_OR_TOOLING_PREFLIGHT_INVALID_V7_ANALYZER_PROGRAM_CREATION_EXACT0_V7_COMPONENT_SOURCE_CREATION_EXACT0_STATIC_EXECUTION_EXACT0_VALIDITY_CREDIT_EXACT0_ORDERED_TYPED_INPUT_OR_TOOLING_PREFLIGHT_BLOCKER_STOP_EXACT1_IF_INPUT_IDENTITY_AND_TOOLING_PREFLIGHT_VALID_DISTINCT_FRESH_OWNER_V7_ANALYZER_PROGRAM_CREATION_AND_IDENTITY_FREEZE_EXACT1_EXACT1_PRIVATE_PATH_BODY_IDENTITY_PUBLICATION_EXACT0_OWNER_ANALYZER_PROGRAM_PARSE_AND_EVALUATION_PREFLIGHT_ON_PUBLIC_FUNCTION_BOUNDARY_EXACT9_AND_COMPONENT_MODULE_EDGE_EXACT6_EACH_CASE_ONCE_NO_RETRY_BEFORE_PRIVATE_V7_COMPONENT_SOURCE_CREATION_EXACT1_EXPECTED_FUNCTION_VALID6_INVALID3_AND_MODULE_VALID4_INVALID2_ORDERED_DOMAIN_SEPARATED_TERMINAL_RECORD_MATCH_REQUIRED_EXACT1_DISTINCT_FRESH_INDEPENDENT_V7_ANALYZER_PROGRAM_CREATION_AND_IDENTITY_FREEZE_EXACT1_EXACT1_PRIVATE_PATH_BODY_IDENTITY_PUBLICATION_EXACT0_INDEPENDENT_ANALYZER_PROGRAM_PARSE_AND_EVALUATION_PREFLIGHT_ON_PUBLIC_FUNCTION_BOUNDARY_EXACT9_AND_COMPONENT_MODULE_EDGE_EXACT6_EACH_CASE_ONCE_NO_RETRY_BEFORE_PRIVATE_V7_COMPONENT_SOURCE_CREATION_EXACT1_EXPECTED_FUNCTION_VALID6_INVALID3_AND_MODULE_VALID4_INVALID2_ORDERED_DOMAIN_SEPARATED_TERMINAL_RECORD_MATCH_REQUIRED_EXACT1_SHARED_ANALYZER_PROGRAM_PARSER_NORMALIZER_MODEL_BOOLEAN_EVIDENCE_INTERMEDIATE_OR_DERIVED_STATE_EXACT0_OWNER_INDEPENDENT_ANALYZER_PREFLIGHT_PROJECTION_COMPARISON_ATTEMPT_EXACT1_IF_OWNER_OR_INDEPENDENT_ANALYZER_PREFLIGHT_INVALID_OR_PROJECTION_MISMATCH_OR_COMPARISON_UNAVAILABLE_PRIVATE_V7_COMPONENT_SOURCE_CREATION_EXACT0_STATIC_EXECUTION_EXACT0_VALIDITY_CREDIT_EXACT0_ORDERED_TYPED_ANALYZER_PREFLIGHT_BLOCKER_STOP_EXACT1_IF_DUAL_ANALYZER_PREFLIGHT_VALID_AND_PROJECTIONS_MATCH_DISTINCT_FRESH_VERSIONED_V7_LAUNCHER_CONTROLLER_AND_CONTRACT_BOUND_VERIFIER_SOURCE_CREATION_EXACT1_EXACT1_EXACT1_IDENTITY_FREEZE_EXACT1_EXACT1_EXACT1_PRIVATE_V7_SOURCE_PATH_BODY_IDENTITY_CONCRETE_IDENTIFIER_BINDING_ANALYZER_PROGRAM_OR_EVIDENCE_PUBLICATION_EXACT0_QUALIFIED_TARGET_DESCRIPTOR_FUNCTION_BOUNDARY_GRAMMAR_COMPONENT_MODULE_GRAMMAR_AND_PROJECTION_CARDINALITY_CONTRACT_BINDING_TO_FRESH_FROZEN_V7_SOURCE_IDENTITY_EXACT1_RESOLUTION_EXACT1_PER_REQUIRED_ROLE_TARGET_BINDING_SEMANTIC_EDGE_CALL_OCCURRENCE_AND_PER_CLOSED_PATH_CARDINALITY_ZERO_MULTIPLE_UNSPECIFIED_DYNAMIC_ALIAS_OR_UNRESOLVED_FAIL_CLOSED_EXACT1_OWNER_FORWARD_FRESH_FROZEN_V7_COMPONENT_SOURCE_READ_LAUNCHER1_CONTROLLER1_VERIFIER1_IMPLEMENTATION_STATIC_EXECUTION_EXACT1_INDEPENDENT_BACKWARD_FRESH_FROZEN_V7_COMPONENT_SOURCE_READ_LAUNCHER1_CONTROLLER1_VERIFIER1_IMPLEMENTATION_STATIC_EXECUTION_EXACT1_SHARED_PARSER_NORMALIZER_MODEL_BOOLEAN_EVIDENCE_INTERMEDIATE_OR_DERIVED_STATE_EXACT0_OWNER_INDEPENDENT_IMPLEMENTATION_STATIC_PROJECTION_COMPARISON_ATTEMPT_EXACT1_IF_DUAL_VALID_AND_MATCH_CORRECTED_IMPLEMENTATION_V7_STATIC_VALIDITY_CREDIT_EXACT1_STATIC_ONLY_STOP_EXACT1_IF_OWNER_INVALID_OR_INDEPENDENT_INVALID_OR_PROJECTION_MISMATCH_OR_COMPARISON_UNAVAILABLE_ORDERED_TYPED_IMPLEMENTATION_STATIC_BLOCKER_STOP_EXACT1_REPAIR_REEXECUTION_RETRY_OR_RETROACTIVE_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_FRESH_V8_ANALYZER_PROGRAM_OR_COMPONENT_SOURCE_CREATION_READ_EXECUTION_EXACT0_EXACT0_EXACT0_COMPONENT_RUNTIME_EXECUTION_SYNTHETIC_PREFLIGHT_EXECUTION_OR_REEXECUTION_PRIOR_CLOSED_VECTOR_REUSE_FORMAL_SOURCE_V4_CREATION_OR_EXECUTION_OUTER_LAUNCH_RUNTIME_PYTEST_PRODUCT_EFFECT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_COCOLON_PRODUCTION_SOURCE_PUBLISHED_RED_EXISTING_D1_AND_MASHOS_API_CHANGE_EXACT0_EXACT0_EXACT0_EXACT0_BODY_FREE_V7_STATIC_RECOVERY_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STATIC_STOP_NO_SYNTHETIC_FORMAL_SOURCE_V4_RUNTIME_OR_AUTOMATIC_PROGRESSION",
+    "ascii_bytes": 12888,
+    "sha256": "3a910606b7504ea6eb228fc1c5e4bf8b24aabc19313370b059cb7addc2033763",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "automatic_progression": false
+  },
+  "receipt_self_hash_schema": {
+    "algorithm": "SHA-256",
+    "canonicalization": "REMOVE_ONLY_ROOT_RECEIPT_LOGICAL_SHA256_THEN_UTF8_SORTED_COMPACT_JSON_NO_LF",
+    "excluded_json_pointer": "/receipt_logical_sha256",
+    "excluded_field_count": 1
+  },
+  "receipt_logical_sha256": "d05a16ee1384ee11e5b8020c3ebfdc2fe36a722f1b71b0b2aee36972782d9488"
+}
