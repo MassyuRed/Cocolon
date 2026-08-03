@@ -30,7 +30,7 @@ Automatic progression: `false`
 ## 推測禁止
 
 - 共通false 2件だけからprivate sourceの具体的欠陥を断定しない。
-- owner-only false 2件だけからsourceまたはverifierの片方を原因と断定しない。
+- owner-only false 3件またはindependent-only false 1件だけからsourceまたはverifierの片方を原因と断定しない。
 - static blockerからNode／provider／network／runtimeの不存在を推定しない。
 
 ## 次に実行すべきこと

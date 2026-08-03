@@ -40,7 +40,7 @@ implementation-static creditには、owner／independentの双方がVALIDで、d
 
 ## 推測
 
-共通false 2件は、private candidate境界、Controller ADMITとLauncher STOPのorigin、outer dispatcherのsingle-write／termination ownershipに関する静的証明が閉じていない可能性を示します。ownerだけがfalseとした3件は、sourceそのものとowner verifierのqualified-target／identifier解釈のどちらが起点か、body-free観測だけでは確定できません。
+共通false 2件は、protected private candidate境界とouter dispatcherのsingle-write／termination ownershipに関する静的証明が閉じていない可能性を示します。independentだけがfalseとした1件はController ADMITとLauncher STOPのconstructor origin、ownerだけがfalseとした3件はtooling／byte identityとController lifecycleに関係しますが、sourceそのものと各verifierの解釈のどちらが起点か、body-free観測だけでは確定できません。
 
 ## 華恋の意見
 
