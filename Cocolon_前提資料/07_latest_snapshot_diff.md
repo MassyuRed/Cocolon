@@ -38515,3 +38515,89 @@ Receipt identities: blob `18a23c5906a519775e64e46544129be2490d8423`, raw 8803 by
 - audit-cadence rule, lint/test/script implementation, and pre-baseline exact8 full semantic audit: outside this authority.
 
 This publication may establish only `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT`. It does not state `REMEDIATION_CLOSED`. Closure requires a separate read-only audit that proves this H1 is complete and uniquely selected, all authority and artifact identities remain unchanged, every approved postwrite matches its prepared payload and changed-path scope, and all historical incidents remain recorded. Only a later separately authorized additive marker may state `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`; closure never authorizes V15.
+
+---
+
+# 2026-08-05 CURRENT REMEDIATION CLOSURE — exact47 incident / historical process violations retained
+
+## Administrative state
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- audit authority: ASCII `4079` bytes / SHA-256 `4220e4e9613a6c660d226f699d5818880ee42bf4968f551b0e7e317793e78bf0`
+- local audit report identity (not a repository path): `Cocolon_ReadOnly_Remediation_Reaudit_20260805.md` / raw SHA-256 `d91e1192016b0f0b02db562ac4b559da69e459612fe5f39d746814e56c91e6fc` / `9991` bytes / LF `107`
+- audited Cocolon base: commit `cde86b649af04a4ee3b2a462f0dfe488bf557b5f` / tree `60dba53c2fcf98806167891da5edf4afca322bf3`
+- audited mashos-api base: commit `315813c7bd3372462de926ddad74df567254a6b5` / tree `a641510e107d52bb910073f36604c85bd57af150` / change `0`
+- audit outcome: `PASS`
+- incident state: `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`
+- remediation state: `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`
+- closure state: `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`
+- historical process fact state: `RETAINED_PERMANENT_NONCOMPLIANT_HISTORY`
+- automatic progression: `false`
+
+This complete EOF-side H1 is the sole canonical Step11 technical-current, incident-status, and remediation-closure owner. The tracked Step11 ExecutionAndClosurePlan contains the supporting closure ledger and is not a second current owner. `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED` is an administrative remediation state, not a technical authority enum. It closes the remediation duty for this exact47 incident only; it does not erase, legalize, or reverse any historical process violation.
+
+## Technical-current continuity
+
+The chronology-intended V14 checkpoint remains the canonical technical current selected by the existing complete-H1 resolver. This closure does not flatten the historical V14 H2, reissue V14, or replay authority.
+
+- V14 terminal: `ANALYZER_PREFLIGHT_BLOCKER_STOP`
+- Full R1: `UNKNOWN_PRESERVED`
+- Cycle001: `NOT_ACCEPTED`
+- original V14 authority activation: exact1, unchanged
+- V13 Receipt consumption by V14: exact1, unchanged
+- V13 rollback / reactivation / reconsumption: `0 / 0 / 0`
+- V14 re-execution / reactivation / readmission / reconsumption: `0 / 0 / 0 / 0`
+- V14 Receipt state: `CLOSED_UNCONSUMED`
+- V15 candidate: ASCII `4623` bytes / SHA-256 `903bb001c0f9989616cba6f0bc30fd63d02bf605a4f9317768e6509944ee3589` / `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`
+- V15 automatic progression: `false`
+- V15 Receipt / execution / activation / admission / consumption: `0 / 0 / 0 / 0 / 0`
+- technical authority activation / admission / consumption by closure: `0 / 0 / 0`
+
+## Closure audit result
+
+The separate read-only re-audit proved:
+
+1. live Cocolon commit/tree/parent and mashos-api identities match the fixed audit bases;
+2. the remediation changed-path union is exact9, all paths are modified, and file deletion/rename are `0 / 0`;
+3. all exact9 post blobs, raw SHA-256 values, byte counts, and LF counts match the approved contract;
+4. each Markdown postimage is the complete prior preimage plus the frozen suffix exactly once;
+5. the manifest is JSON valid, duplicate-key count 0, and contains only the approved allowlist transform with old values retained losslessly as historical;
+6. the new 07 CURRENT H1 is complete, unique, last, and selects V14 without authority replay;
+7. historical V3/V4/V14 Result/Receipt/Handoff exact9 remain byte-identical and outside the remediation changed paths;
+8. Plan gates, 13's stable runtime contract, Detailed Design implementation steps, roadmap phases, runtime, production, and mashos-api did not progress;
+9. every F-01 through F-06 disposition occurs exact1 in 07 and exact1 in Plan;
+10. affirmative remediation-closure claim before this marker was 0.
+
+## F-01–F-06 closure disposition
+
+| finding | closure disposition |
+|---|---|
+| F-01 | current resolver correction verified PASS; remediation duty closed |
+| F-02 | current bytes and postwrite control verified PASS; destructive-publication history remains a permanent noncompliant fact |
+| F-03 | current lineage preservation verified PASS; V3 direct-rewrite history remains a permanent noncompliant fact |
+| F-04 | erroneous-token withdrawal and corrected-token lineage verified PASS; V4 direct-rewrite history remains a permanent noncompliant fact |
+| F-05 | additive traceability/presentation correction verified PASS; historical Result/Handoff bytes remain unchanged |
+| F-06 | six Markdown premise supersession pointers and manifest owner pointer verified PASS; stable structure/runtime contracts and historical values remain preserved |
+
+Closure closes remediation, not history. F-02, F-03, and F-04 remain historical violations and may never be described as if they did not occur or were compliant at publication time.
+
+The six Markdown premise pointer suffixes retain their Step3-publication-time `NOT_CLOSED` statements as non-authoritative historical administrative facts. Each suffix delegates current status resolution to 07, so this complete closure H1 supersedes those publication-time values for current resolution without rewriting them. The manifest's updated `closure_state` leaf is a non-owner administrative mirror of this H1; 07 remains the sole closure owner.
+
+## Stopped first attempt retained
+
+The first Step3 authority, SHA-256 `6f7ac2ef0ab91a8e918b8918cd5baf7e897a8b4891a467cb38e238c8fd7aa4b4`, was consumed and stopped before tree/commit/ref publication after a prepublication content mismatch. Unreferenced blob `38362d2be82c9f205b17c3b137ab2c6e0da83c43` contains exactly the frozen approved Plan-suffix bytes only: raw SHA-256 `6845b9e54c08e8f7f90e2d03b5a7a09cb3fc664d4f3d0551a50b5514df048604` / `22151` bytes / LF `143`. It has current path/tree/ref effect 0 and was not used as the Plan tree entry. The successful retry authority was SHA-256 `65132c27988ad06008fe73f7ddfb970b5fb214afd3ee40ac8f55dac5982fab63`.
+
+The stopped attempt and orphan identity remain operational facts. No destructive orphan deletion is performed or required.
+
+## Residual facts and closure boundary
+
+- private Mash approval events and private analyzer execution remain `UNVERIFIED_PRIVATE`;
+- the pre-baseline exact8 large-drop/restore set remains a bounded same-signature observation, not a full historical semantic audit;
+- an off-repository consumer of renamed manifest keys is not publicly observable; no repository consumer/schema conflict was found;
+- Plan G0–G10, Cycle001 acceptance, B6 technical remediation, Step0–10 readiness, current RC/result, Detailed Design implementation state, and roadmap phase state change: exact0;
+- source / test / fixture / sample / schema / script / `.github` / app / API / DB / RN / Safety, implementation / runtime / pytest / private analyzer / production / mashos-api effect: exact0;
+- deletion / rename / history rewrite / force update: exact0.
+
+This marker closes only the exact47 incident remediation after the read-only PASS. It neither accepts Cycle001 nor authorizes V15. Any future technical action still requires its own separate Mash approval.
+
+Detailed audit evidence and the supporting closure ledger are in the tracked Step11 ExecutionAndClosurePlan. The root manifest remains pointer-only and changes only its current administrative `closure_state` leaf to the same closure state.

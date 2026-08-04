@@ -17775,3 +17775,80 @@ If main advances but every target preimage still matches, the current transport 
 - source / test / fixture / sample / schema / script / `.github` / app / API / DB / RN / Safety owner, implementation / runtime / pytest / private analyzer / production / mashos-api, and additional V14/V15 authority effect: exact0.
 
 Only the complete exact9 checkpoint ending in the verified 07 H1 establishes global `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT / NOT_CLOSED`. A separate read-only audit must prove the new 07 H1 is the unique canonical current, V13/V14 authority counts and public lineage are unchanged, V15 remains inactive/unstarted, immutable exact9 blobs remain byte-identical, all Markdown preimages remain exact prefixes, manifest delta is allowlisted, omission marker0, and the changed-path union is exact9. Only after that PASS may a separately authorized additive marker state `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`. Closure never erases the incidents and never authorizes V15.
+
+---
+
+# 2026-08-05 REMEDIATION CLOSURE LEDGER — exact47 incident / historical process violations retained
+
+## Ledger role and state
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- ledger role: `SUPPORTING_CLOSURE_EVIDENCE_ONLY`
+- canonical current/status/closure owner: `Cocolon_前提資料/07_latest_snapshot_diff.md`
+- audit authority: ASCII `4079` bytes / SHA-256 `4220e4e9613a6c660d226f699d5818880ee42bf4968f551b0e7e317793e78bf0`
+- local audit report identity (not a repository path): `Cocolon_ReadOnly_Remediation_Reaudit_20260805.md` / raw SHA-256 `d91e1192016b0f0b02db562ac4b559da69e459612fe5f39d746814e56c91e6fc` / `9991` bytes / LF `107`
+- audit base: Cocolon commit `cde86b649af04a4ee3b2a462f0dfe488bf557b5f` / tree `60dba53c2fcf98806167891da5edf4afca322bf3`
+- mashos-api: commit `315813c7bd3372462de926ddad74df567254a6b5` / tree `a641510e107d52bb910073f36604c85bd57af150` / change `0`
+- audit outcome: `PASS`
+- remediation closure: `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`
+- automatic progression: `false`
+
+This ledger is additive support for the complete EOF CURRENT H1 in 07. It is not a second current owner, not a §12 progress-ledger update, and not a technical authority. All earlier Plan bytes remain the exact prefix. G0–G10, Cycle001 acceptance, B6 technical remediation, Step0–10 readiness, current RC/result, and every technical gate remain byte- and semantic-unchanged.
+
+## Verified closure evidence
+
+| gate | read-only result |
+|---|---|
+| live Cocolon identity | commit/tree/parent match the fixed base; ahead exact1 |
+| remediation diff | changed paths exact9; all modified; file deletion0; rename0 |
+| exact9 postimages | blob/raw SHA-256/bytes/LF all match the approved contract |
+| Markdown operations | exact8 whole-preimage prefix plus frozen suffix exactly once |
+| manifest operation | JSON valid; duplicate keys0; +14/-3; approved allowlist only; old values losslessly retained |
+| current owner | 07 last complete CURRENT H1 exact1; Plan owner effect0 |
+| historical artifacts | V3/V4/V14 Result/Receipt/Handoff exact9 byte-identical; changed-path intersection0 |
+| F-01–F-06 | each disposition exact1 in 07 and exact1 in this Plan |
+| technical progression | V13/V14 replay0; V15 effect0; Plan gates/runtime/design/roadmap/mashos-api effect0 |
+| prior closure claim | affirmative claim0 before the separately authorized closure marker |
+
+## Finding disposition after PASS
+
+| finding | remediation result | historical fact after closure |
+|---|---|---|
+| F-01 | resolver correction verified and remediation closed | historical V14 H2 remains unchanged; no H2 flattening or reissuance |
+| F-02 | current-byte recovery and postwrite control verified; remediation closed | destructive V14 publication and missing immediate STOP retained permanently |
+| F-03 | current lineage verified; remediation closed | V3 direct rewrite retained permanently; no retroactive legalization |
+| F-04 | erroneous-token withdrawal and corrected-token lineage verified; remediation closed | V4 direct rewrites retained permanently; erroneous token approval/activation/consumption remain0 |
+| F-05 | additive exact5 traceability and readable representation verified; remediation closed | Result line19/Handoff line15 historical bytes unchanged |
+| F-06 | exact six pointer suffixes and manifest owner pointer verified; remediation closed | old snapshots retained losslessly as historical; stable structural/runtime contracts remain current |
+
+The closure state means only that the required current correction, postwrite verification, and separate read-only re-audit passed. It does not mean that F-02/F-03/F-04 did not occur or were compliant.
+
+The six Markdown premise pointer suffixes retain Step3-publication-time `NOT_CLOSED` as a non-authoritative historical administrative fact and delegate current status resolution to 07. The complete 07 closure H1 supersedes those values for current resolution without rewriting the six premise files. The manifest's closure-state leaf is only a non-owner administrative mirror of 07, not a second closure owner.
+
+## First stopped Step3 attempt
+
+The original Step3 authority SHA-256 `6f7ac2ef0ab91a8e918b8918cd5baf7e897a8b4891a467cb38e238c8fd7aa4b4` was consumed and stopped before tree/commit/ref publication when path-based large-file fetch returned the correct Plan metadata but empty content. It created unreferenced Plan-suffix-only blob `38362d2be82c9f205b17c3b137ab2c6e0da83c43`: raw SHA-256 `6845b9e54c08e8f7f90e2d03b5a7a09cb3fc664d4f3d0551a50b5514df048604` / `22151` bytes / LF `143`. Current path/tree/ref use is 0. The retry authority SHA-256 `65132c27988ad06008fe73f7ddfb970b5fb214afd3ee40ac8f55dac5982fab63` used preimage-blob fetch, expected post blobs exact9, one tree, one commit, and one non-force ref update.
+
+The stopped attempt remains a fact and is not erased by closure. No orphan deletion, history rewrite, or force update is authorized.
+
+## Technical and private boundary
+
+- V13 rollback / reactivation / reconsumption: `0 / 0 / 0`
+- V14 re-execution / reactivation / readmission / reconsumption: `0 / 0 / 0 / 0`
+- V14 Receipt: `CLOSED_UNCONSUMED`
+- V15 token: ASCII `4623` bytes / SHA-256 `903bb001c0f9989616cba6f0bc30fd63d02bf605a4f9317768e6509944ee3589` / inactive / separate approval / automatic false
+- V15 Receipt / execution / activation / admission / consumption: `0 / 0 / 0 / 0 / 0`
+- private Mash approval and private analyzer facts: `UNVERIFIED_PRIVATE`
+- pre-baseline exact8: bounded same-signature observation only
+
+Closure does not activate, admit, consume, execute, or approve V15. It does not accept Cycle001 or change implementation, source, test, runtime, production, Detailed Design, roadmap, or mashos-api state.
+
+## Exact closure write boundary
+
+The minimum coherent closure checkpoint is exact3:
+
+1. append the complete closure H1 to 07;
+2. append this supporting closure ledger to Plan;
+3. change only `current_source_snapshot.closure_state` in the root manifest from `NOT_CLOSED` to `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`.
+
+All three must be one atomic visible transition. Historical Result/Receipt/Handoff changes, other premise changes, delete, rename, history rewrite, and force update are0. Immediate postwrite verification must prove exact3 path union, both Markdown prefixes/suffixes, the manifest single-leaf delta, and all technical/historical freeze gates. Any mismatch stops without retry.

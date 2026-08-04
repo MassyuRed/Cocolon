@@ -3611,7 +3611,7 @@
     "current_step11_state_owner": "07_latest_snapshot_diff.md",
     "incident_id": "NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT",
     "remediation_state": "RESOLVE_FROM_CANONICAL_07_NOT_CLAIMED_BY_MANIFEST",
-    "closure_state": "NOT_CLOSED",
+    "closure_state": "REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED",
     "automatic_technical_progression": false,
     "technical_pointer_payload_prepared_at": "2026-08-05 JST"
   },
