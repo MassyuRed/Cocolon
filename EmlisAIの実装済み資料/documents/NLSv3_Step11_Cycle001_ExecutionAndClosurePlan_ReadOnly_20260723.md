@@ -17467,3 +17467,168 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_R1_OWNER_CONTRACT_OBSERVER_V2_RUNTIME_C
 Next authority: ASCII 4623 / SHA-256 903bb001c0f9989616cba6f0bc30fd63d02bf605a4f9317768e6509944ee3589; inactive separate Mash approval required; automatic=false.
 
 `NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V14_DUAL_ANALYZER_PREFLIGHT_PUBLIC_FIXTURE_CONTAINER_LOCATOR_MISMATCH_TYPED_BLOCKER_STOP_POSTVERIFIED_OBSERVATION_SHA256_4B9D156C1DCA7BDCD1E7DDCB9454B75A0E2EF105025A693036E4AB741C72C5EC_CURRENT_AUTHORITY_SHA256_8ACFEF6209023549A6BE9BF9C6CA388F74E220C3CD9467ADBAFB50FBD771031B_ACTIVATED_EXACT1_CURRENT_V13_BLOCKER_RECEIPT_CLOSED_CONSUMED_EXACT1_BLOB_5AF8D6E9_RAW_901B574B_LOGICAL_75CC375C_OBSERVATION_93749946_PRIOR_RECEIPT_RECONSUMPTION_EXACT0_CURRENT_POLICY_RECEIPT_CLOSED_UNCONSUMED_IMMUTABLE_CONSUMPTION_EXACT0_BLOB_2F5EACE6_RAW_437B319F_LOGICAL_0F0B30AE_OBSERVATION_618E4A9B_COCOLON_ACTUAL_PREWRITE_BASE_0D6DFE8E_TREE_D178449F_MASHOS_API_SOURCE_315813C7_TREE_A641510E_CHANGE_EXACT0_CURRENT_V14_BLOCKER_OBSERVATION_FRESH_MATCH_EXACT1_CONSUMPTION_EXACT1_REQUIRED_REGULAR_READABLE_PUBLIC_RECEIPTS_EXACT8_IDENTITY_MATCH_EXACT8_PUBLIC_CONTRACT_OBJECT_IDENTITIES_EXACT14_FRESH_MATCH_TRUE_FAILED_PRIVATE_V14_ANALYZER_PROGRAM_PATH_BODY_IDENTITY_PARSER_TOKENIZER_CLASSIFIER_NORMALIZER_CERTIFICATE_STATE_PROJECTION_EVIDENCE_OUTPUT_INTERMEDIATE_OR_DERIVED_STATE_READ_REUSE_INFERENCE_REPAIR_MUTATION_REBIND_OR_RETROACTIVE_CREDIT_EXACT0_INPUT_IDENTITY_GATE_VALID_TRUE_STATIC_TOOLING_PRIMITIVE_PREFLIGHT_VALID_TRUE_PUBLIC_INPUT_LOCATOR_BINDING_PREFLIGHT_VALID_TRUE_DIRECT_ARGUMENT_VECTOR_INTERPRETER_PROGRAM_PUBLIC_DOCUMENTS_DIRECTORY_EXACT3_PRIVATE_ABSOLUTE_LOCATOR_PUBLICATION_EXACT0_FRESH_V15_PUBLIC_FIXTURE_CONTAINER_BINDING_FUNCTION_EXACT_KEY_OBSERVATION_PUBLIC_FUNCTION_BOUNDARY_DESIGN_PUBLIC_FIXTURE_SET_COMPONENT_EXACT_KEY_OBSERVATION_PUBLIC_DESIGN_CANDIDATES_COMPONENT_MODULE_AND_CROSS_COMPONENT_EDGE_FIXTURE_SET_CALL_EXACT_KEY_OBSERVATION_PUBLIC_DESIGN_CANDIDATES_FIXTURE_SET_EACH_BINDING_EXACT1_BEFORE_ANALYZER_CREATION_EXACT1_DISTINCT_FRESH_OWNER_FORWARD_V15_ANALYZER_CREATE_FREEZE_EXECUTE_EXACT1_EXACT1_EXACT1_RETRY_EXACT0_DISTINCT_FRESH_INDEPENDENT_BACKWARD_V15_ANALYZER_CREATE_FREEZE_EXECUTE_EXACT1_EXACT1_EXACT1_RETRY_EXACT0_PRIVATE_PATH_BODY_IDENTITY_OR_EVIDENCE_PUBLICATION_EXACT0_PUBLIC_C05_RECORD2_PARAMETER_OR_GROUPING_BOUNDARY_EXACT_TOKEN_X_PUBLIC_C16_RECORD3_UNSUPPORTED_OR_AMBIGUOUS_FORM_EXACT_TOKEN_CLOSE_PAREN_OPEN_PAREN_PUBLIC_C06_RECORD5_RETURN_CONTEXT_REGEX_PUBLIC_M05_PREFIX_MIDDLE_SUFFIX_NONTRIVIA_PUBLIC_C20_UNSPECIFIED_SENTINEL_PRECEDENCE_BOUND_EXACT1_OWNER_PUBLIC_FUNCTION_EXACT9_VALID6_INVALID3_COMPONENT_MODULE_EXACT6_VALID4_INVALID2_CALL_EXACT20_VALID12_INVALID8_EACH_CASE_ONCE_NO_RETRY_ORDERED_RECORD_CONSERVATION_COVERAGE_AND_TERMINAL_MATCH_REQUIRED_EXACT1_INDEPENDENT_PUBLIC_FUNCTION_EXACT9_VALID6_INVALID3_COMPONENT_MODULE_EXACT6_VALID4_INVALID2_CALL_EXACT20_VALID12_INVALID8_EACH_CASE_ONCE_NO_RETRY_ORDERED_RECORD_CONSERVATION_COVERAGE_AND_TERMINAL_MATCH_REQUIRED_EXACT1_SHARED_ANALYZER_PARSER_TOKENIZER_CLASSIFIER_NORMALIZER_MODEL_BOOLEAN_EVIDENCE_INTERMEDIATE_OR_DERIVED_STATE_EXACT0_OWNER_STATE_READ_EXACT0_OWNER_INDEPENDENT_PREFLIGHT_PROJECTION_COMPARISON_ATTEMPT_EXACT1_IF_INVALID_MISMATCH_OR_UNAVAILABLE_V15_COMPONENT_SOURCE_CREATION_IMPLEMENTATION_STATIC_EXECUTION_VALIDITY_CREDIT_EXACT0_EXACT0_EXACT0_ORDERED_TYPED_ANALYZER_PREFLIGHT_BLOCKER_STOP_EXACT1_IF_DUAL_VALID_AND_MATCH_FRESH_VERSIONED_V15_LAUNCHER_CONTROLLER_CONTRACT_BOUND_VERIFIER_SOURCE_CREATE_FREEZE_EXACT1_EACH_QUALIFIED_DESCRIPTOR_RECORDS_EXACT21_FIELDS_EXACT8_ROLE_REFERENCES_EXACT22_TARGET_BINDING_RECORDS_EXACT21_SEMANTIC_EDGES_EXACT3_CLOSED_PATHS_EXACT2_COMPONENT_PARTITION_9_9_3_PUBLIC_CONTRACT_OBJECT_RECORDS_EXACT14_NO_DROP_NO_DUPLICATION_EXACT1_SOURCE_COMPLETE_ASCII_OPEN_PAREN_LEDGER_LEXICAL_CATEGORY_EXACT8_CANDIDATE_KEY_EXACT5_BINDING_OUTCOME_EXACT6_RESOLVED_KEY_EXACT2_M06_RESOLVED_SUBSET_EXACT4_CARDINALITY_DOMAINS_SEPARATE_EXACT1_OWNER_FORWARD_AND_INDEPENDENT_BACKWARD_IMPLEMENTATION_STATIC_EXECUTION_EXACT1_EACH_COMPARISON_EXACT1_IF_DUAL_VALID_MATCH_V15_STATIC_VALIDITY_CREDIT_EXACT1_STATIC_ONLY_STOP_EXACT1_OTHERWISE_TYPED_IMPLEMENTATION_STATIC_BLOCKER_STOP_EXACT1_REPAIR_REEXECUTION_RETRY_RETROACTIVE_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_FRESH_V16_ANALYZER_OR_SOURCE_CREATION_READ_EXECUTION_EXACT0_COMPONENT_RUNTIME_SYNTHETIC_PREFLIGHT_CLOSED_VECTOR_REUSE_FORMAL_SOURCE_V4_OUTER_LAUNCH_PYTEST_PRODUCT_COCOLON_PRODUCTION_RED_D1_MASHOS_API_EFFECT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_FULL_R1_UNKNOWN_PRESERVED_RUNTIME_READY_FALSE_FORMAL_SOURCE_V4_MATERIALIZED_FALSE_SEMANTIC_VALIDITY_UNPROVEN_CYCLE001_NOT_ACCEPTED_BODY_FREE_V15_PUBLIC_FIXTURE_CONTAINER_LOCATOR_BOUND_ANALYZER_PREFLIGHT_AND_IMPLEMENTATION_STATIC_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_POSTVERIFICATION_ONLY_STATIC_STOP_NO_RUNTIME_NO_AUTOMATIC_PROGRESSION`
+
+---
+
+# 2026-08-04 OPEN INCIDENT DETAIL LEDGER — exact47 read-only cross-audit / remediation not authorized
+
+## Administrative state
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- incident state: `OPEN_INCIDENT`
+- audit state: `READ_ONLY_AUDIT_COMPLETE`
+- remediation state: `NOT_AUTHORIZED_NOT_STARTED`
+- closure state: `NOT_CLOSED`
+- V15 state: `BLOCKED_UNSTARTED`
+- automatic progression: `false`
+- technical authority activation / admission / consumption by this publication: `0 / 0 / 0`
+- implementation / runtime / pytest / private analyzer execution: `0 / 0 / 0 / 0`
+
+`OPEN_INCIDENT` is an administrative state defined by this record; it is not a
+pre-existing technical authority enum. This complete EOF-side H1 is the detailed
+incident ledger referenced by 07; it is not a second current-status or technical
+authority owner. It does not correct the historical V14 H2 placement, reissue
+V14 as technical authority, supply an unrecorded H2-flattening rule, or authorize
+V15.
+
+## Position change record
+
+| field | position |
+|---|---|
+| prior_position | the exact47 audit was complete outside GitHub, but its findings were not yet recorded as an open repository incident; chronology intended V14 while the canonical technical-current resolver remained failed |
+| proposed_position | record the verified audit findings as an open incident, preserve technical authority and historical bytes, and block V15 until separately approved remediation and closure verification |
+| change_basis | read-only audit of `c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3..2694de5af7e8e6a19134e0086d2d4f004e9b3d57`, exact47 commits / exact181 commit-file transitions, plus bounded pre-baseline same-signature inspection |
+| correction | replace the unrecorded/implicitly-clean status with an explicit open-incident status only; no technical-current correction or historical artifact rewrite is performed here |
+| current_position | incident open; the mechanical last historical technical H1 is V13 without rollback, reactivation, or reconsumption; the chronology-intended V14 is not canonically selectable; the canonical technical-current resolver has failed and usable intended technical-current is unresolved; V15 blocked and unstarted; remediation requires separate Mash approval |
+
+## Fixed audit range
+
+- last full-audit prewrite baseline:
+  Cocolon `c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3`
+  / tree `e02362db87973436ab0989982cae000cc9862a74`
+- first audited outcome commit:
+  `f85905d3658961b84eb7b7f667aa79038e7b0afd`
+  / tree `309bde6c1b3ecb5a6a954cb11566fbc92dd6727e`
+- audited terminal:
+  Cocolon `2694de5af7e8e6a19134e0086d2d4f004e9b3d57`
+  / tree `f6584f580682fb7666e57a2fe5acb02084e30073`
+- mashos-api:
+  `315813c7bd3372462de926ddad74df567254a6b5`
+  / tree `a641510e107d52bb910073f36604c85bd57af150`
+  / audited-window change exact0
+- audited commits: exact47, single-parent exact47, merge exact0
+- audited commit-file transitions: exact181
+- audit-range changed domains: premise/docs only
+- code / app / API / DB / RN / runtime / pytest / script / `.github` effect: exact0
+
+`c5bab4ca..2694de5a` is exact47. The first commit is the prior full-audit
+outcome itself; commits strictly after that outcome are exact46. All requested
+exact47 commits were audited. This incident publication is later than, and is
+not included in, that fixed audit range.
+
+## Audit conclusion
+
+- current Git object / final tree / path integrity: `PASS`
+- public Result / Receipt / Handoff identity and authority-token lineage over
+  technical checkpoints exact30: `PASS_PUBLIC_IDENTITY_AND_LINEAGE`
+- public authority jump / duplicate consumption: exact0
+- canonical technical-current resolver: `FAIL_CURRENT`
+- historical publication process: `FAIL_HISTORICAL_PROCESS`
+- audited-terminal file-content recovery: `RECOVERED_BUT_INCIDENTS_OPEN`
+- private Mash approval events and private analyzer execution facts:
+  `UNVERIFIED_PRIVATE`
+
+The public identity/hash lineage is internally consistent after conditionally
+selecting the chronology-intended V14. Selection itself is not canonical: the
+applicable rule requires the EOF-side last complete top-level current/latest
+section, while V14 was appended as H2 below the V13 H1. V14 therefore cannot
+yet be independently resolved as canonical technical current, and V15 must not
+start.
+
+## Open findings
+
+1. `F-01 FAIL_CURRENT`:
+   V14 is H2 below V13 H1 in 07. Standard Markdown hierarchy leaves V13 as the
+   last technical H1. No unrecorded flattening rule may be supplied.
+2. `F-02 OPEN_PROCESS_INCIDENT`:
+   V14 publication truncated Plan at
+   `ce2a5a05723391f9d9c9e45b4d4cd0e9e288bc19` and 07 at
+   `8cd70f223539edce10dd5ceed5f419249d0b5348`.
+   Result / Receipt / Handoff publication continued before both targets were
+   restored. Plan was restored at
+   `caf7956a4ec37e9d5d7eee954d658fc309040752`, and 07 at the audited terminal.
+   Current bytes were recovered, but the missing immediate stop remains open.
+3. `F-03 OPEN_HISTORICAL_REWRITE`:
+   `edf48e46af4ba8defbad5af1d2f716a9e45977d8` directly rewrote already
+   published A02 Implementation V3 Result / Handoff and existing Plan / 07
+   identity rows instead of using additive correction.
+4. `F-04 OPEN_HISTORICAL_REWRITE`:
+   V4 published a one-character-deficient inactive next token and then directly
+   rewrote published Receipt / Result / Handoff at
+   `4962ef73db3bac95f3a098da32f41888e8c398ec`,
+   `9547b2893e1d1e007f000d3d5153cc5f140233e6`, and
+   `5f58825bc39db4cbb66f601f2ecedad5f12b2a57`. The erroneous token has public
+   approval / activation / consumption
+   exact0; V5 consumed the corrected token only, so current lineage is not
+   double-consumed.
+5. `F-05 OPEN_RECORD_QUALITY`:
+   V14 Plan / 07 omit the prior full exact5 traceability form, and V14 Result /
+   Handoff each contain one malformed inline-code presentation. Identity values
+   remain correct; historical artifacts must not be rewritten.
+6. `F-06 WARN_STALE_CURRENT_LABELS`:
+   older premise summaries retain stale `CURRENT/current` labels. They are not
+   a second formal authority owner, but they increase human ambiguity.
+7. bounded pre-baseline signature observation:
+   eight earlier 07 large-drop/restore sequences were found before
+   `c5bab4ca`. This was a bounded same-signature inspection, not a semantic
+   audit of all prior commits, and must not be represented as one.
+
+## Preserved technical facts
+
+- chronology-intended latest checkpoint: V14
+- audited-terminal Plan:
+  blob `604720c8f21b87e9ea07c57c6d53fc5fad2d20f3`
+  / raw `a435753a71ff7f4e9ad9eb0aaff3f3dc48e97ee635a11615bb05876756d2679e`
+  / bytes `1082844`
+- audited-terminal 07:
+  blob `d88406638ca4bc9513811beb1247fad0d71dde67`
+  / raw `fea56cdd9508a54672273055d490fb3c23d563d06c1f4bb1f6c61a33fef1e5f6`
+  / bytes `2291995`
+- V14 Receipt:
+  blob `18a23c5906a519775e64e46544129be2490d8423`
+  / raw `4391aa7214a3d69cbedb55fd4e27c6c0c8f9f034fd1cc682f0a516fd2db36026`
+  / logical `156212a6df0ea7bd91d4e4396def94737f1d45bb014d486ae81820e5252e92af`
+  / observation `4b9d156c1dca7bdcd1e7ddcb9454b75a0e2ef105025a693036e4ab741c72c5ec`
+- V15 candidate token:
+  ASCII bytes `4623`
+  / SHA-256 `903bb001c0f9989616cba6f0bc30fd63d02bf605a4f9317768e6509944ee3589`
+  / `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`
+  / automatic `false`
+- V15 Receipt / execution / activation / admission / consumption: exact0
+
+These facts do not override `FAIL_CURRENT` and do not authorize V15.
+
+## This publication boundary
+
+- modified append-only paths: exact2
+- Plan: `MODIFY_APPEND_ONLY`
+- `Cocolon_前提資料/07_latest_snapshot_diff.md`: `MODIFY_APPEND_ONLY`
+- historical Result / Receipt / Handoff modification: exact0
+- technical-current correction / implementation / runtime / pytest / mashos-api
+  effect: exact0
+- deletion / rename / history rewrite: exact0
+- V15 progression: exact0
+
+## Future closure boundary
+
+This incident remains open. A later closure marker may be appended only after
+all of the following occur under a separately approved remediation authority:
+
+1. the exact minimal correction scope is fixed;
+2. corrections are additive and historical artifacts remain byte-unchanged;
+3. each write is immediately refetched and blob / bytes / prefix / changed paths
+   are verified, with mismatch causing immediate STOP;
+4. a new read-only audit confirms the corrected technical-current resolver and
+   retained public lineage.
+
+This section records the incident only. It is not remediation or closure.
