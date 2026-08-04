@@ -3604,7 +3604,16 @@
       "mashos-api": "public"
     },
     "verified_at": "2026-08-02 JST",
-    "latest_reflected_scope": "NLS v3 Step11 Cycle001 Recovery Epoch004 Gate B exact Node Catalogue Observation V2 activation-binding-invalid pre-network STOP; Full R1 UNKNOWN preserved; premise audit consumes no technical authority"
+    "snapshot_status": "SOURCE_AUDIT_SNAPSHOT_PRESERVED_TECHNICAL_STATUS_POINTER_ONLY",
+    "historical_latest_reflected_scope_2026_08_02": "NLS v3 Step11 Cycle001 Recovery Epoch004 Gate B exact Node Catalogue Observation V2 activation-binding-invalid pre-network STOP; Full R1 UNKNOWN preserved; premise audit consumes no technical authority",
+    "latest_reflected_scope": "CURRENT_POINTER_ONLY: resolve current Step11 status from canonical_current_authority 07_latest_snapshot_diff.md under latest_resolution_rule; this manifest intentionally duplicates no terminal, observation, next-authority token, Receipt identity, counter, or execution fact",
+    "latest_resolution_rule": "last_complete_EOF_latest_or_current_top_level_section_only",
+    "current_step11_state_owner": "07_latest_snapshot_diff.md",
+    "incident_id": "NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT",
+    "remediation_state": "RESOLVE_FROM_CANONICAL_07_NOT_CLAIMED_BY_MANIFEST",
+    "closure_state": "NOT_CLOSED",
+    "automatic_technical_progression": false,
+    "technical_pointer_payload_prepared_at": "2026-08-05 JST"
   },
   "source_snapshot_2026_05_16_complete_composer_initial_commit1_13": {
     "premise": "Cocolon_前提資料(85).zip",
@@ -16567,7 +16576,8 @@
       "work_test_runner_owner": "13_plus_rule_16",
       "execution_substrate_is_owner": false
     },
-    "current_step11_preserved": {
+    "historical_step11_snapshot_preserved": {
+      "normative_status": "HISTORICAL_SUPERSEDED_NON_CURRENT",
       "terminal": "RUNTIME_NOT_READY_STATIC_VERIFIER_LAUNCHER_EXACT_NODE_VERSION_SELECTION_OBSERVATION_INVALID_NO_DESIGN_VALID_EXACT_VERSION_STOP",
       "postverified_observation_sha256": "ee403e258450ed4cbe212bd3304e710d2338ebdd03381f62df415f8b52b873ad",
       "full_r1": "UNKNOWN_PRESERVED",
@@ -16575,7 +16585,8 @@
       "next_authority_state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
       "technical_authority_consumed_by_audit": false
     },
-    "current_authority_inputs": {
+    "historical_authority_inputs": {
+      "normative_status": "HISTORICAL_SNAPSHOT_INPUTS",
       "latest_prewrite_blob_sha1": "b45d2a56eccb60220e96735725ffe7384fd59dae",
       "latest_prewrite_raw_sha256": "827842581e5426ddaad13bfe8e1681f81e035519207ae6c95f54164069f86790",
       "plan_blob_sha1": "11feef5a9a3db271086aa31d428a270adb537c8a",

@@ -3291,3 +3291,18 @@ pre-network STOP、Full R1は`UNKNOWN_PRESERVED`です。次authority tokenの�
 - Work environment: execution substrate only。
 
 Cocolon / mashos-apiはcurrent `public`ですが、write ownerと承認scopeは変わりません。
+
+# 2026-08-05 CURRENT POINTER CORRECTION — exact47 incident remediation
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- payload role: `STALE_TECHNICAL_SNAPSHOT_SUPERSESSION_POINTER_ONLY`
+- global remediation state: resolve only from canonical 07; this file does not claim remediation applied or closed.
+- closure state: `NOT_CLOSED`
+- superseded scope: this file's 2026-08-02 Step11 technical-state statements that describe exact-Node catalogue observation V2, its terminal, observation identity, next-authority identity, or audit-time Plan / 07 identities as current.
+- prior snapshot status: `HISTORICAL_SUPERSEDED_NON_CURRENT`; the prior bytes and the fact that they were once published are retained.
+- canonical current resolution: read the last complete EOF-side `CURRENT` H1 in `Cocolon_前提資料/07_latest_snapshot_diff.md` under `last_complete_EOF_latest_or_current_top_level_section_only`, then use the tracked Step11 ExecutionAndClosurePlan for detail.
+- preserved scope: every earlier byte in this file and all stable structure, owner, read-order, path-resolution, validation, and boundary rules remain unchanged.
+- non-duplication: this pointer does not restate a terminal, authority token, Receipt identity, counter, or execution fact and is not a second technical-current owner.
+- authority effect: technical activation / admission / consumption `0 / 0 / 0`; this correction cannot start V15.
+- implementation / runtime / pytest / private analyzer / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0`.
+- closure boundary: only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.

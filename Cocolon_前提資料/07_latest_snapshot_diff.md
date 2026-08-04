@@ -38437,3 +38437,81 @@ technical-current resolver remains failed.
 
 This section records the incident and stop state only. It is not remediation or
 closure.
+
+---
+
+# 2026-08-05 CURRENT TECHNICAL-STATE RECONCILIATION — exact47 incident remediation applied / read-only re-audit pending
+
+## Administrative state
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- incident state: `OPEN_INCIDENT`
+- remediation state: `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT`
+- closure state: `NOT_CLOSED`
+- automatic progression: `false`
+- technical authority activation / admission / consumption by this correction: `0 / 0 / 0`
+- V15 Receipt / execution / activation / admission / consumption: `0 / 0 / 0 / 0 / 0`
+
+This complete EOF-side H1 is the sole canonical Step11 technical-current and incident-status owner. The tracked Step11 ExecutionAndClosurePlan contains the detailed correction ledger and is not a second technical-current owner. `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT` is a new administrative record state, not a technical authority enum. This administrative Step 2 / Step 3 naming is unrelated to the Detailed Design implementation-step numbering.
+
+## Canonical current resolution
+
+- resolver: `last_complete_EOF_latest_or_current_top_level_section_only`
+- canonical technical current selected by this additive reconciliation: chronology-intended V14 Gate-B dual public-fixture-container locator blocker.
+- terminal: `ANALYZER_PREFLIGHT_BLOCKER_STOP`; Full R1: `UNKNOWN_PRESERVED`; Cycle001: `NOT_ACCEPTED`.
+- the historical V14 H2 and every preceding byte remain unchanged. No H2-flattening rule is introduced and V14 is not reissued.
+- the prior mechanical last historical technical H1, V13, remains historical without rollback, reactivation, or reconsumption: `0 / 0 / 0`.
+- original V14 authority: ASCII 16201 bytes / SHA-256 `8acfef6209023549a6be9bf9c6ca388f74e220c3cd9467adbafb50fbd771031b` / activation exact1; V13 Receipt consumption exact1.
+- original V14 prewrite: Cocolon `0d6dfe8ef14eac3e303656f8037aaf53aa0dfe9d` / tree `d178449fddbcae695b4701319ad71e3048c3962d`; V14 Receipt state `CLOSED_UNCONSUMED`.
+- V14 re-execution / reactivation / readmission / reconsumption: `0 / 0 / 0 / 0`.
+- V15 candidate token remains byte-exact inactive: ASCII `4623` bytes / SHA-256 `903bb001c0f9989616cba6f0bc30fd63d02bf605a4f9317768e6509944ee3589` / `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED` / automatic `false`.
+- this reconciliation does not approve V15 and does not create, activate, admit, consume, or execute that token.
+- every future technical checkpoint root in 07 must be one complete H1; H2-only checkpoint roots are forbidden. This restates the existing resolver consequence and creates no new lint, test, script, or audit-cadence authority.
+
+## F-01–F-06 non-erasing disposition
+
+| finding | disposition after this correction, before re-audit |
+|---|---|
+| F-01 | `CURRENT_RESOLVER_CORRECTION_APPLIED_PENDING_READ_ONLY_REAUDIT` |
+| F-02 | `HISTORICAL_PROCESS_INCIDENT_RETAINED_CURRENT_BYTES_RECOVERED_POSTWRITE_CONTROL_APPLIED_PENDING_READ_ONLY_REAUDIT` |
+| F-03 | `HISTORICAL_DIRECT_REWRITE_INCIDENT_RETAINED_CURRENT_LINEAGE_PRESERVED_NO_REVERSAL_PENDING_READ_ONLY_REAUDIT` |
+| F-04 | `HISTORICAL_DIRECT_REWRITE_INCIDENT_RETAINED_ERRONEOUS_TOKEN_WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_PENDING_READ_ONLY_REAUDIT` |
+| F-05 | `ADDITIVE_TRACEABILITY_AND_PRESENTATION_CORRECTION_APPLIED_HISTORICAL_ARTIFACTS_UNCHANGED_PENDING_READ_ONLY_REAUDIT` |
+| F-06 | `STALE_CURRENT_TECHNICAL_SNAPSHOTS_SUPERSEDED_BY_CANONICAL_07_POINTER_PENDING_READ_ONLY_REAUDIT` |
+
+F-02's V14 Plan truncation commit `ce2a5a05723391f9d9c9e45b4d4cd0e9e288bc19` and 07 truncation commit `8cd70f223539edce10dd5ceed5f419249d0b5348` remain historical violations. Result / Receipt / Handoff publication continued before both large files were restored. Current bytes were recovered, but the missing immediate STOP is neither erased nor reclassified as compliant.
+
+F-03's `edf48e46af4ba8defbad5af1d2f716a9e45977d8` direct rewrite and F-04's `4962ef73db3bac95f3a098da32f41888e8c398ec`, `9547b2893e1d1e007f000d3d5153cc5f140233e6`, and `5f58825bc39db4cbb66f601f2ecedad5f12b2a57` direct rewrites remain historical violations. The F-04 erroneous token remains 6804 bytes / SHA-256 `f22563efc9ca92dfcaa87bd285c5cee50f9f70889efd1c114bb0ac1817931698`, withdrawn, unapproved, unactivated, and unconsumed. Only the corrected 6805-byte token / SHA-256 `743f7448948248a060b7468253659e13f157d709be77c7278c366ccf056f9b4b` was consumed by V5. Existing additive V4 corrections remain in force.
+
+The six dated Markdown summaries and root manifest now supersede only their stale 2026-08-02 technical-current labels and point here. Their stable structure, owner, validation, read-order, and runtime-continuity rules remain unchanged. No technical state is duplicated into those pointer records.
+
+The eight pre-baseline 07 large-drop/restore sequences remain a bounded same-signature observation, not a full historical semantic audit. Private Mash approval events and private analyzer execution facts remain `UNVERIFIED_PRIVATE`; this public document correction does not infer or certify them.
+
+## V14 historical public exact5 traceability
+
+1. Result: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V14AnalyzerPreflight_DualPublicFixtureContainerLocatorMismatch_TypedBlockerStop_Result_20260804.md`; blob `44a52d8b68a2c4b0c5e978df753ae4557a7f8c31`; raw SHA-256 `2cb3c0a6ee3eab4dd795fa3dea639f787739a4cb113fd1d6fa2ea9a1c0739eab`; 1810 bytes; LF20; added at `e25c20e47b30a39cc0ff090be8e4abf88bec3ff1`.
+2. Body-free Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V14AnalyzerPreflight_DualPublicFixtureContainerLocatorMismatch_TypedBlockerStop_BodyFree_Receipt_20260804.json`; blob `18a23c5906a519775e64e46544129be2490d8423`; raw 8803 bytes / SHA-256 `4391aa7214a3d69cbedb55fd4e27c6c0c8f9f034fd1cc682f0a516fd2db36026`; LF30; logical 8568 bytes / SHA-256 `156212a6df0ea7bd91d4e4396def94737f1d45bb014d486ae81820e5252e92af`; observation 3162 bytes / SHA-256 `4b9d156c1dca7bdcd1e7ddcb9454b75a0e2ef105025a693036e4ab741c72c5ec`; added at `4827745ceedb6fbff70e786c83f25b781ff3849f`.
+3. Handoff: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V14AnalyzerPreflight_DualPublicFixtureContainerLocatorMismatch_TypedBlockerStop_Handoff_20260804.md`; blob `312a775ed699c560d9888e5d599faaae8e6ff6f2`; raw SHA-256 `f878d63cf99e64797720a9cd50ff82ffd2c2d595e24cc0cf3ddf509d7642c9dd`; 5565 bytes; LF22; added at `c0f053d0946ffa7d5e0dd2017f6f4b10ac9e2359`.
+4. tracked Plan historical V14-completion state at `caf7956a4ec37e9d5d7eee954d658fc309040752`: blob `604720c8f21b87e9ea07c57c6d53fc5fad2d20f3`; raw SHA-256 `a435753a71ff7f4e9ad9eb0aaff3f3dc48e97ee635a11615bb05876756d2679e`; 1082844 bytes; LF17469; pre-V14 bytes preserved as prefix plus one 5755-byte / LF20 suffix with SHA-256 `7822e2ddc8da64eab34fa89b62efa2c4bafe2735965e7dda8b0d5e03e11c35de`.
+5. `Cocolon_前提資料/07_latest_snapshot_diff.md` historical V14-completion state at `2694de5af7e8e6a19134e0086d2d4f004e9b3d57`: blob `d88406638ca4bc9513811beb1247fad0d71dde67`; raw SHA-256 `fea56cdd9508a54672273055d490fb3c23d563d06c1f4bb1f6c61a33fef1e5f6`; 2291995 bytes; LF38325; pre-V14 bytes preserved as prefix plus one 5822-byte / LF21 suffix with SHA-256 `2047a56c83cdabb846105b0827024de0f2ae59d2717cbfe2c57e15daede912e4`.
+
+Historical V14 changed-path union was exact5, deletion0, and mashos-api change0. These historical Plan / 07 identities are distinct from the Step1 post-incident preimages used for this correction.
+
+## Additive correction of malformed presentation
+
+V14 Result line19 and Handoff line15 each contain malformed inline-code delimiters. Their identity values are correct and both historical artifacts remain byte-unchanged. The intended readable representation is fixed here without rewriting either artifact:
+
+```text
+Receipt identities: blob `18a23c5906a519775e64e46544129be2490d8423`, raw 8803 bytes / SHA-256 `4391aa7214a3d69cbedb55fd4e27c6c0c8f9f034fd1cc682f0a516fd2db36026`, logical 8568 bytes / SHA-256 `156212a6df0ea7bd91d4e4396def94737f1d45bb014d486ae81820e5252e92af`, observation 3162 bytes / SHA-256 `4b9d156c1dca7bdcd1e7ddcb9454b75a0e2ef105025a693036e4ab741c72c5ec`.
+```
+
+## Hard exclusions and closure boundary
+
+- historical V3 / V4 / V14 Result / Receipt / Handoff modification: exact0; all current identities are frozen in the Plan detail ledger.
+- Plan G0–G10, Cycle001 acceptance, B6 technical remediation, Step0–10 readiness, current RC/result, Detailed Design implementation state, and roadmap phase state change: exact0.
+- source / test / fixture / sample / schema / script / `.github` / app / API / DB / RN / Safety owner change: exact0.
+- implementation / runtime / pytest / private analyzer / production / mashos-api effect: exact0.
+- deletion / rename / history rewrite / force update: exact0.
+- audit-cadence rule, lint/test/script implementation, and pre-baseline exact8 full semantic audit: outside this authority.
+
+This publication may establish only `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT`. It does not state `REMEDIATION_CLOSED`. Closure requires a separate read-only audit that proves this H1 is complete and uniquely selected, all authority and artifact identities remain unchanged, every approved postwrite matches its prepared payload and changed-path scope, and all historical incidents remain recorded. Only a later separately authorized additive marker may state `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`; closure never authorizes V15.

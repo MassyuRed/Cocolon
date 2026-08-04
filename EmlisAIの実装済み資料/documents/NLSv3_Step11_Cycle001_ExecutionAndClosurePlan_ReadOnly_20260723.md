@@ -17632,3 +17632,146 @@ all of the following occur under a separately approved remediation authority:
    retained public lineage.
 
 This section records the incident only. It is not remediation or closure.
+
+---
+
+# 2026-08-05 DOCUMENT-INTEGRITY REMEDIATION LEDGER — exact47 incident / read-only re-audit pending
+
+## Authority and ownership
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- incident state: `OPEN_INCIDENT`
+- payload state: `DOCUMENT_INTEGRITY_REMEDIATION_LEDGER_PUBLISHED`
+- global remediation state: resolved only from canonical 07; this Plan section does not claim remediation applied or closed.
+- closure state: `NOT_CLOSED`
+- current technical-state and incident-status owner: the last complete EOF-side `CURRENT` H1 in `Cocolon_前提資料/07_latest_snapshot_diff.md`
+- this section's role: detailed administrative document-integrity correction ledger; it is not a second technical-current owner.
+
+This append is authorized by the current incident-remediation authority as a bounded historical-incompleteness correction. If the final canonical 07 reconciliation is published, `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT` is its new administrative record state, not a technical authority enum. This Plan section alone does not establish that state. It is not a §12 progress-ledger update: G0–G10, Cycle001 acceptance, B6 technical remediation, Step0–10 readiness, current RC/result, and every technical gate state remain byte- and semantic-unchanged. This administrative Step 2 / Step 3 naming is unrelated to the Detailed Design implementation-step numbering.
+
+## Finding target-disposition matrix after the complete exact9 payload is present
+
+| finding | required correction | disposition after publication, before re-audit |
+|---|---|---|
+| F-01 | append one complete EOF `CURRENT` H1 to 07; select chronology-intended V14 without H2 flattening or authority replay | `CURRENT_RESOLVER_CORRECTION_APPLIED_PENDING_READ_ONLY_REAUDIT` |
+| F-02 | retain destructive V14 publication history and recovered current bytes; apply immediate postwrite verification to this remediation | `HISTORICAL_PROCESS_INCIDENT_RETAINED_CURRENT_BYTES_RECOVERED_POSTWRITE_CONTROL_APPLIED_PENDING_READ_ONLY_REAUDIT` |
+| F-03 | retain V3 direct-rewrite evidence and current lineage; no historical reversal or legalization | `HISTORICAL_DIRECT_REWRITE_INCIDENT_RETAINED_CURRENT_LINEAGE_PRESERVED_NO_REVERSAL_PENDING_READ_ONLY_REAUDIT` |
+| F-04 | retain V4 direct-rewrite and token-transcription evidence; preserve only corrected-token consumption | `HISTORICAL_DIRECT_REWRITE_INCIDENT_RETAINED_ERRONEOUS_TOKEN_WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_PENDING_READ_ONLY_REAUDIT` |
+| F-05 | add full V14 exact5 traceability and readable presentation here and in 07; do not edit Result / Receipt / Handoff | `ADDITIVE_TRACEABILITY_AND_PRESENTATION_CORRECTION_APPLIED_HISTORICAL_ARTIFACTS_UNCHANGED_PENDING_READ_ONLY_REAUDIT` |
+| F-06 | supersede stale 2026-08-02 technical-current labels in exact six Markdown summaries and root manifest with pointer-only resolution to 07 | `STALE_CURRENT_TECHNICAL_SNAPSHOTS_SUPERSEDED_BY_CANONICAL_07_POINTER_PENDING_READ_ONLY_REAUDIT` |
+
+No disposition erases an incident or means that the historical publication was compliant. Step3 may not state `REMEDIATION_CLOSED`.
+
+## F-02 retained V14 destructive-publication evidence
+
+| target/state | commit | blob | raw SHA-256 | bytes | LF / marker |
+|---|---|---|---|---:|---|
+| Plan pre-incident | `0d6dfe8ef14eac3e303656f8037aaf53aa0dfe9d` | `07dcb871a34bdc4a647bf0f9c5392380ec1b57d4` | `b8441aee3a1d2b7b0b65056faa3507e960c5d1099b7da35831b40201bc77a6dc` | 1077089 | LF17449 |
+| Plan destructive state | `ce2a5a05723391f9d9c9e45b4d4cd0e9e288bc19` | `8e4c4e45485c12fd5012082084f566d012f2f9a8` | `3eb5a23541c4477c10ce0f8d825a9147fc28d8df3b7d50302d615fcbe45af1fa` | 1048605 | LF16966; historical display-omission marker declaring 34268 bytes, exact1 |
+| Plan recovered V14 completion | `caf7956a4ec37e9d5d7eee954d658fc309040752` | `604720c8f21b87e9ea07c57c6d53fc5fad2d20f3` | `a435753a71ff7f4e9ad9eb0aaff3f3dc48e97ee635a11615bb05876756d2679e` | 1082844 | LF17469 |
+| 07 pre-incident | `ce2a5a05723391f9d9c9e45b4d4cd0e9e288bc19` | `0f4e844c3b510b294ea6c16e50382847418950b8` | `5bc5994fb1ad2222bd5631b0c0987a6609227e1962bbb9c9da3eb32bd7df631a` | 2286173 | LF38304 |
+| 07 destructive state | `8cd70f223539edce10dd5ceed5f419249d0b5348` | `15cf983acab15d74cc41e9b9e78f91a925343282` | `663f752d6513ce6d34200cbe8834f0d36fa446ddad95050d3ba38c97e176d488` | 1048607 | LF9469; historical display-omission marker declaring 1243419 bytes, exact1 |
+| 07 recovered V14 completion | `2694de5af7e8e6a19134e0086d2d4f004e9b3d57` | `d88406638ca4bc9513811beb1247fad0d71dde67` | `fea56cdd9508a54672273055d490fb3c23d563d06c1f4bb1f6c61a33fef1e5f6` | 2291995 | LF38325 |
+
+Result / Receipt / Handoff were added at `e25c20e47b30a39cc0ff090be8e4abf88bec3ff1`, `4827745ceedb6fbff70e786c83f25b781ff3849f`, and `c0f053d0946ffa7d5e0dd2017f6f4b10ac9e2359` while both large targets remained in destructive states. Current content is recovered; the historical missing immediate STOP remains a process violation.
+
+## F-03 retained V3 direct-rewrite evidence
+
+At `edf48e46af4ba8defbad5af1d2f716a9e45977d8`, already published files were changed in place. Receipt, terminal, and next token remained unchanged, but that does not legalize the direct rewrite.
+
+| target | pre-rewrite blob / raw SHA-256 / bytes / LF | post-rewrite blob / raw SHA-256 / bytes / LF |
+|---|---|---|
+| V3 Result | `fd205c0d171b462963f94e25564039010ea968cf` / `07009ce7b97c813d10c4c4f9b6fcff3f1caa4e53cc231fda81cb5b664c78b804` / 11643 / LF67 | `a96368a83dbfd7bd023cbea6768d96413c4efd7c` / `d51d898d90c00feef25736b456e78c5a9ffe8407a18866b03012e708da09420c` / 11741 / LF67 |
+| V3 Handoff | `959d5182ef898ea89d972edd2b90a82cb433cbf7` / `a89d8ce078a525a33d541bcc8d80d1cac6e9c282a65d278d99dc7f9b564c86bc` / 8444 / LF51 | `15736596ce7d7e9528841b305771bce8d1819e22` / `40fd7962270727972638c57a9110b78157b1d807dec4c1078544e661ab9086da` / 8480 / LF51 |
+| Plan | `3495609e2c33ff23dd13f6f975962d9dff24b5b1` / `9d66d6e581f4f6ab56e89e12f15d5caffdffce4045c733c5af56bdbb5aceb0c1` / 848896 / LF16727 | `577faac930ae9e1170aa6a7171b3556a3b011b3c` / `a54417ec4359d7285a7951a13d5bbf0ef593052e229521adaf02e62f248b5d4d` / 848896 / LF16727 |
+| 07 | `9934258d5b44596a7c2d87dca9ad7a47e2dc739d` / `ab67457fb83edfa06e1737b612cf953271aff97a9dd5edbe0e5213c55ae9ea6a` / 2070012 / LF37653 | `25a29ca1ee2c43cad80cc4179ba2ef98c6cd82df` / `0a0f77686987221e514f97aae665421cc3da050bd06cc6f19480849d108162c7` / 2070012 / LF37653 |
+
+## F-04 retained V4 token and direct-rewrite evidence
+
+| target | initially published blob / raw SHA-256 / bytes / LF | current corrected blob / raw SHA-256 / bytes / LF |
+|---|---|---|
+| V4 Receipt | `eb51eed3c83aceb3cf25a10b1c866cdf35e1b788` / `af2c631298e4754310870bba4c91004e2d30f6e1705baf49e54a295b3ed55746` / 15348 / LF198 | `5564c59e2b6b8627540423bafa0f423a73f9829e` / `9e9f54412d5d29cc53eb6432bd67a1ac42ea01a84240861572af29d3914411ec` / 15349 / LF198 |
+| V4 Result | `5d3b845815dea7c860d2681ab914bb863b0daad2` / `1f1845b17dc9a13889a2a3585e5d96a5c346bf1e97e27804386d1b1092dcafab` / 13342 / LF66 | `4bd52fc0a9e96512dc76e806306f82df18c77780` / `ac7eac853a3b584cac758f2778fd73fc57cbdc730203fef4cba3965038f9950e` / 13343 / LF66 |
+| V4 Handoff | `027f547556d70791e70ae41ca603eb6de1fdc382` / `f33f7c14a8b34b1b2a6ca9aed441c782aaab0a6ad82d095ffa65f907248d8041` / 9322 / LF40 | `2b91fbaba7b616fe4bd291e50515183afe101e59` / `47d91a45f8a8508100c4e070da898ed038f255664273f757a4a3f66ad1c12ef5` / 9323 / LF40 |
+
+The direct rewrites occurred at `4962ef73db3bac95f3a098da32f41888e8c398ec`, `9547b2893e1d1e007f000d3d5153cc5f140233e6`, and `5f58825bc39db4cbb66f601f2ecedad5f12b2a57`. The erroneous one-character-deficient token is 6804 bytes / SHA-256 `f22563efc9ca92dfcaa87bd285c5cee50f9f70889efd1c114bb0ac1817931698` and remains `WITHDRAWN_INACTIVE_UNAPPROVED_TRANSCRIPTION_ERROR`, approval / activation / consumption exact0. The corrected token is 6805 bytes / SHA-256 `743f7448948248a060b7468253659e13f157d709be77c7278c366ccf056f9b4b`; only it was consumed by V5. Existing additive corrections at `c68c6231` and `b2b45136` remain unchanged.
+
+## F-05 V14 historical public exact5 traceability and presentation
+
+1. Result: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V14AnalyzerPreflight_DualPublicFixtureContainerLocatorMismatch_TypedBlockerStop_Result_20260804.md`; blob `44a52d8b68a2c4b0c5e978df753ae4557a7f8c31`; raw SHA-256 `2cb3c0a6ee3eab4dd795fa3dea639f787739a4cb113fd1d6fa2ea9a1c0739eab`; 1810 bytes; LF20.
+2. Body-free Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V14AnalyzerPreflight_DualPublicFixtureContainerLocatorMismatch_TypedBlockerStop_BodyFree_Receipt_20260804.json`; blob `18a23c5906a519775e64e46544129be2490d8423`; raw 8803 bytes / SHA-256 `4391aa7214a3d69cbedb55fd4e27c6c0c8f9f034fd1cc682f0a516fd2db36026`; LF30; logical 8568 bytes / SHA-256 `156212a6df0ea7bd91d4e4396def94737f1d45bb014d486ae81820e5252e92af`; observation 3162 bytes / SHA-256 `4b9d156c1dca7bdcd1e7ddcb9454b75a0e2ef105025a693036e4ab741c72c5ec`.
+3. Handoff: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V14AnalyzerPreflight_DualPublicFixtureContainerLocatorMismatch_TypedBlockerStop_Handoff_20260804.md`; blob `312a775ed699c560d9888e5d599faaae8e6ff6f2`; raw SHA-256 `f878d63cf99e64797720a9cd50ff82ffd2c2d595e24cc0cf3ddf509d7642c9dd`; 5565 bytes; LF22.
+4. tracked Plan historical V14-completion state at `caf7956a4ec37e9d5d7eee954d658fc309040752`: blob `604720c8f21b87e9ea07c57c6d53fc5fad2d20f3`; raw SHA-256 `a435753a71ff7f4e9ad9eb0aaff3f3dc48e97ee635a11615bb05876756d2679e`; 1082844 bytes; LF17469; V14 suffix 5755 bytes / LF20 / SHA-256 `7822e2ddc8da64eab34fa89b62efa2c4bafe2735965e7dda8b0d5e03e11c35de`.
+5. `Cocolon_前提資料/07_latest_snapshot_diff.md` historical V14-completion state at `2694de5af7e8e6a19134e0086d2d4f004e9b3d57`: blob `d88406638ca4bc9513811beb1247fad0d71dde67`; raw SHA-256 `fea56cdd9508a54672273055d490fb3c23d563d06c1f4bb1f6c61a33fef1e5f6`; 2291995 bytes; LF38325; V14 suffix 5822 bytes / LF21 / SHA-256 `2047a56c83cdabb846105b0827024de0f2ae59d2717cbfe2c57e15daede912e4`.
+
+Historical V14 public changed-path union was exact5, deletion0, and mashos-api change0. Result line19 and Handoff line15 contain malformed inline-code delimiters but correct identity values. Both artifacts remain byte-unchanged; the intended readable representation is:
+
+```text
+Receipt identities: blob `18a23c5906a519775e64e46544129be2490d8423`, raw 8803 bytes / SHA-256 `4391aa7214a3d69cbedb55fd4e27c6c0c8f9f034fd1cc682f0a516fd2db36026`, logical 8568 bytes / SHA-256 `156212a6df0ea7bd91d4e4396def94737f1d45bb014d486ae81820e5252e92af`, observation 3162 bytes / SHA-256 `4b9d156c1dca7bdcd1e7ddcb9454b75a0e2ef105025a693036e4ab741c72c5ec`.
+```
+
+## Historical artifact byte-freeze set
+
+All exact9 paths below are outside the remediation changed-path set and must retain these current identities:
+
+| checkpoint / artifact | blob | raw SHA-256 | bytes | LF |
+|---|---|---|---:|---:|
+| V3 Result `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_A02IdentityBoundCorrectedImplementationV3_ToolingPreflightValid_OwnerIndependentStaticInvalidProjectionMismatch_TypedBlockerStop_Result_20260803.md` | `a96368a83dbfd7bd023cbea6768d96413c4efd7c` | `d51d898d90c00feef25736b456e78c5a9ffe8407a18866b03012e708da09420c` | 11741 | 67 |
+| V3 Receipt `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_A02IdentityBoundCorrectedImplementationV3_ToolingPreflightValid_OwnerIndependentStaticInvalidProjectionMismatch_TypedBlockerStop_BodyFree_Receipt_20260803.json` | `39381ccfd04e8998fe1cf7d3dfa805c985bee397` | `2796b9920d8d94fa7135bdafda679e0612c24760d290338cc53a24ed16e2b5a0` | 17938 | 220 |
+| V3 Handoff `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_A02IdentityBoundCorrectedImplementationV3_ToolingPreflightValid_OwnerIndependentStaticInvalidProjectionMismatch_TypedBlockerStop_Handoff_20260803.md` | `15736596ce7d7e9528841b305771bce8d1819e22` | `40fd7962270727972638c57a9110b78157b1d807dec4c1078544e661ab9086da` | 8480 | 51 |
+| V4 Result `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V4QualifiedTargetBoundCorrectedImplementationStaticOnly_OwnerForwardStaticAnalyzerSourceSyntaxInvalid_TypedBlockerStop_Result_20260803.md` | `4bd52fc0a9e96512dc76e806306f82df18c77780` | `ac7eac853a3b584cac758f2778fd73fc57cbdc730203fef4cba3965038f9950e` | 13343 | 66 |
+| V4 Receipt `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V4QualifiedTargetBoundCorrectedImplementationStaticOnly_OwnerForwardStaticAnalyzerSourceSyntaxInvalid_TypedBlockerStop_BodyFree_Receipt_20260803.json` | `5564c59e2b6b8627540423bafa0f423a73f9829e` | `9e9f54412d5d29cc53eb6432bd67a1ac42ea01a84240861572af29d3914411ec` | 15349 | 198 |
+| V4 Handoff `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V4QualifiedTargetBoundCorrectedImplementationStaticOnly_OwnerForwardStaticAnalyzerSourceSyntaxInvalid_TypedBlockerStop_Handoff_20260803.md` | `2b91fbaba7b616fe4bd291e50515183afe101e59` | `47d91a45f8a8508100c4e070da898ed038f255664273f757a4a3f66ad1c12ef5` | 9323 | 40 |
+| V14 Result path listed above | `44a52d8b68a2c4b0c5e978df753ae4557a7f8c31` | `2cb3c0a6ee3eab4dd795fa3dea639f787739a4cb113fd1d6fa2ea9a1c0739eab` | 1810 | 20 |
+| V14 Receipt path listed above | `18a23c5906a519775e64e46544129be2490d8423` | `4391aa7214a3d69cbedb55fd4e27c6c0c8f9f034fd1cc682f0a516fd2db36026` | 8803 | 30 |
+| V14 Handoff path listed above | `312a775ed699c560d9888e5d599faaae8e6ff6f2` | `f878d63cf99e64797720a9cd50ff82ffd2c2d595e24cc0cf3ddf509d7642c9dd` | 5565 | 22 |
+
+The V3 Receipt logical / observation SHA-256 values remain `2dcb09ad0829095feb2801334b71987155dcdc8c5df63ffcb7687d532e455c9c` / `e5a276f15a7024728689f3c1dca13d4b42ca2d8b5a7e88afa7c301486e9d0219`. The V4 Receipt logical / observation values remain `706694627833ebe6a903e7c1dd7caaa3ac7a3c6cd811bf490e2442ad0a3bc649` / `17d5546d6c1538dc1add54670eb35fb83c1d48f1f4eca54a467499853d388c75`. The V14 logical / observation values are listed above.
+
+## F-06 pointer-only correction scope
+
+The exact six Markdown summaries are `Cocolon_前提資料/00_karen_read_first.md`, `01_cocolon_overall_structure.md`, `02_cocolon_national_system.md`, `02C_cocolon_contract_boundary_validation.md`, `05_cocolon_rule_file_index.md`, and `13_cocolon_work_test_runner_runtime_continuity.md`. Each retains its complete preimage as a byte-exact prefix and appends only an approved supersession/pointer suffix. In 13, §§0–10 and `CURRENT_NORMATIVE_CONTRACT` remain current; only §12's dated technical application is superseded.
+
+Root `Cocolon_前提資料/manifest.json` receives only this allowlisted current-field delta:
+
+1. in `current_source_snapshot`, preserve the old `latest_reflected_scope` value byte-for-byte as `historical_latest_reflected_scope_2026_08_02`, label the source-audit snapshot `SOURCE_AUDIT_SNAPSHOT_PRESERVED_TECHNICAL_STATUS_POINTER_ONLY`, and replace only the active `latest_reflected_scope` with a pointer to 07 under the existing resolver;
+2. add pointer/admin leaves in that same object for `latest_resolution_rule`, `current_step11_state_owner`, incident id, global remediation-state ownership by canonical 07, not-closed state, automatic false, and payload-prepared date; add no terminal, token, Receipt, counter, or execution state;
+3. rename `full_premise_audit_2026_08_02.current_step11_preserved` to `historical_step11_snapshot_preserved`, retain every old nested value, and add `normative_status=HISTORICAL_SUPERSEDED_NON_CURRENT`;
+4. rename `full_premise_audit_2026_08_02.current_authority_inputs` to `historical_authority_inputs`, retain every old nested value, and add `normative_status=HISTORICAL_SNAPSHOT_INPUTS`.
+
+No repository reference or consumer of the two renamed manifest keys existed at the Step2 base. If one appears or a schema/consumer conflict is observed before write, stop. The top-level key name `current_source_snapshot` remains present and unchanged; only the allowlisted member deltas above are permitted. `current_actual_environment_2026_08_02.normative_status=CURRENT`, `canonical_current_authority`, all non-target leaves, stable structure/runtime fields, member order outside the exact edits, and formatting remain unchanged. JSON parse must pass with duplicate-key exact0.
+
+## Step2 frozen target-preimage anchor for Step3
+
+- observed Cocolon main: `1a12923490b04d860eb012472044e7b5fece674c` / tree `1d03bbb5125f2758bf06ec19596b9ebe77fc5a6a`.
+- observed mashos-api main: `315813c7bd3372462de926ddad74df567254a6b5` / tree `a641510e107d52bb910073f36604c85bd57af150`; remediation change exact0.
+- all targets were UTF-8, CR0. These identities must still match immediately before object preparation and visible reflection.
+
+| exact target | preimage blob / raw SHA-256 / bytes / LF |
+|---|---|
+| `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` | `82409358952aa6b173f06699569f99696dfc0fd7` / `83cf395e23419629f13f2496d7f4af5e6b1ef9fe04270845a332f573806c72e4` / 1091302 / 17634 |
+| `Cocolon_前提資料/00_karen_read_first.md` | `8046b4fb9b4b4410ce66d024037eac1a4ad04658` / `06a92823fa696762b03f13b7c3ea46ecebf2289a30a3fd2d0c91669e1341b1ff` / 617723 / 7868 |
+| `Cocolon_前提資料/01_cocolon_overall_structure.md` | `3d3bf34022a9c32f786f620afd4e71db20074991` / `7e99aa9686bf56c69a0e743edecb764c46527b024a8a72a59553cdbe55bd8487` / 572604 / 6703 |
+| `Cocolon_前提資料/02_cocolon_national_system.md` | `289f5a9929eb6d39193f92dd4eb5a1164adf70c1` / `c900ba6f867b7828352347b2ff36dc61bc55ca957dda948dbd20114174aeb4ce` / 415808 / 5666 |
+| `Cocolon_前提資料/02C_cocolon_contract_boundary_validation.md` | `59457134d2463931ad3bafb30715744eb204a646` / `2d6899794d9b7695f2a0ab35168d8fc42e3a4718c28e9899e8696f8209b7654f` / 359924 / 6260 |
+| `Cocolon_前提資料/05_cocolon_rule_file_index.md` | `df5a8160619e2bd1f872e48a82ab677c3145ec1f` / `2ea2aa036d3533aa0ff1bb9df30ff824ae8f8d68beaeb63624e6faa20713197b` / 317001 / 3293 |
+| `Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md` | `61f6bec9256cb754e049e79ad9d2d64a7f4dccc9` / `3c3fee4f11a8a1e9fdac7cbf7bd7d246bed5b194bbb7d5f1074d0cb521d0b7fd` / 20438 / 417 |
+| `Cocolon_前提資料/manifest.json` | `b1c54c24325556e9aa48182078675d7872f2dc2a` / `836b3a956424c52d486e1ac06b40d70175622c7005e53e4c24459e99ce637543` / 901364 / 16673 |
+| `Cocolon_前提資料/07_latest_snapshot_diff.md` | `aede2ef35dc2e0e15d9bd156f289612d99f053a3` / `20e10864064a1f42a7d702d89cd3e5ad4d57bb6b2a2f9d5a7cdf4916aedb6cf3` / 2297826 / 38439 |
+
+If main advances but every target preimage still matches, the current transport contract permits rereading and rebuilding the same exact9 result on the new parent. The actual reflection parent/tree and final postimages are recorded by GitHub postverification and the later closure audit. A target conflict changes the prepared payload and stops this authority.
+
+## Step3 write and immediate verification contract
+
+- approved changed-path union: exact9 and only the six Markdown summaries, 07, root manifest, and this Plan.
+- this is one approved reflection checkpoint. The current transport contract permits either one exact9 commit or multiple bounded GitHub operations; a single commit, tree, or transport method is not a formal completion condition.
+- if multiple visible operations are necessary, use Plan, six pointer summaries, manifest, then 07 last. The support records make no global applied claim. Do not publish 07 until the preceding exact8 prepared results and their immediate checks all match; a mid-checkpoint STOP therefore leaves the earlier canonical 07 open incident in force.
+- immediately before each target operation, refetch main and that target. Its blob / raw SHA-256 / bytes / LF must equal the frozen target preimage; a target conflict stops the operation. Nonconflicting HEAD advance is reread and continued, not a stop by itself.
+- for each of the eight Markdown paths, prepared post bytes must equal the whole preimage byte-for-byte as prefix plus the exact approved suffix once. Earlier bytes changed0, omission marker0, UTF-8 valid, CR0.
+- for manifest, apply only the exact allowlisted key/delta object. Verify JSON valid, duplicate keys0, old nested values losslessly retained, and non-target leaf/key changes0.
+- immediately after every bounded operation, refetch the target and generated write commit. Expected prepared raw bytes / blob / size / LF, prefix or manifest leaf-diff allowlist, and that operation's changed paths must match. A mismatch stops before the next operation.
+- after 07, refetch main, the full write-commit group, all exact9 targets, and changed paths. The union changed paths must be exact9; every prepared result must be present; deletion / rename exact0.
+- if any write/ref result is not explicit, refetch the exact target and main: prepared content means success, unchanged preimage means not reflected, any other content or unavailable result means `RESULT_UNKNOWN_STOP`. Never retry the uncertain operation automatically.
+- source / test / fixture / sample / schema / script / `.github` / app / API / DB / RN / Safety owner, implementation / runtime / pytest / private analyzer / production / mashos-api, and additional V14/V15 authority effect: exact0.
+
+Only the complete exact9 checkpoint ending in the verified 07 H1 establishes global `REMEDIATION_APPLIED_PENDING_READ_ONLY_REAUDIT / NOT_CLOSED`. A separate read-only audit must prove the new 07 H1 is the unique canonical current, V13/V14 authority counts and public lineage are unchanged, V15 remains inactive/unstarted, immutable exact9 blobs remain byte-identical, all Markdown preimages remain exact prefixes, manifest delta is allowlisted, omission marker0, and the changed-path union is exact9. Only after that PASS may a separately authorized additive marker state `REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED`. Closure never erases the incidents and never authorizes V15.

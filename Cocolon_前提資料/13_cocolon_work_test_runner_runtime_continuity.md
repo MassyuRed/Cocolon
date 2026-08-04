@@ -415,3 +415,15 @@ probe、engine、verifier/helper、Gate B runtime、pytest、target executionは
 
 最新状態と次のdesign-only authorityは07 / tracked Planを正本とします。no retry、no fallback、
 no historical recredit、Mash様へのruntime path / venv / pytest要求禁止は維持します。
+
+## 13. 2026-08-05 current application pointer correction — exact47 incident remediation
+
+- incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
+- payload role: `STALE_TECHNICAL_SNAPSHOT_SUPERSESSION_POINTER_ONLY`; global remediation state is resolved only from canonical 07 and is not claimed by this file; closure state: `NOT_CLOSED`.
+- §12 is retained byte-for-byte as the 2026-08-02 historical application snapshot. Its exact-Node catalogue observation V2 terminal and related current-state direction are `HISTORICAL_SUPERSEDED_NON_CURRENT`.
+- §§0–10 and the front-matter status `CURRENT_NORMATIVE_CONTRACT` remain current for Work-local test-runner runtime continuity; this correction does not supersede or relax them.
+- Resolve the current Step11 technical state only from the last complete EOF-side `CURRENT` H1 in `Cocolon_前提資料/07_latest_snapshot_diff.md`, then use the tracked Step11 ExecutionAndClosurePlan for detail.
+- This is a pointer only: no terminal, authority token, Receipt identity, counter, or execution fact is duplicated, and this file is not a technical-current owner.
+- technical activation / admission / consumption: `0 / 0 / 0`; V15 start authority: `0`.
+- runtime / pytest / target / private analyzer / implementation / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0 / 0`.
+- Only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.
