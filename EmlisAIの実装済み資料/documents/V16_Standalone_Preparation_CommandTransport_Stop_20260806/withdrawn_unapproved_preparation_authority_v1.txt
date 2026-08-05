@@ -1,0 +1,295 @@
+AUTHORITY_ID=V16_STANDALONE_PREPARATION_NONINTERACTIVE_RETRY_AND_PUBLICATION_AUTHORITY_V1
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+
+PURPOSE
+Return directly from the administrative STOP checkpoint to the material V16
+preparation path.  In one conditional sequence, create and pre-review one
+fixed noninteractive inspector/generator, perform one newly authorized public
+specification-source read, verify the exact C01-C04 table, create and freeze one
+standalone V2-to-V3 verifier/transformer, review it, and publish the preparation
+artifacts.  Do not execute the prepared transformer and do not access or create
+V3.
+
+WHY_THIS_IS_NEEDED
+The prior preparation authority stopped after source identity verification and
+four candidate windows but before exact4 verification.  Its likely transport
+cause remains unproved.  The published STOP checkpoint itself added zero
+Cycle001 technical progress.  This retry removes interactive command transport
+from the inspection path and closes the preparation dependency without a later
+preservation-only authority.
+
+NEW_INFORMATION_ON_PASS
+Whether a frozen public standalone program can encode exactly C01-C04 with
+cardinality one each, nonoverlap, and byte preservation outside those exact
+fragments.
+
+UNCERTAINTY_CLOSED_ON_PASS
+Only exact4 specification and standalone-program static-preparation uncertainty
+is closed.  Operational V2-read correctness, transformer runtime correctness,
+V3 correctness, V16 synthetic success, Full R1, runtime, product, UX, and
+Cycle001 acceptance remain unproved.
+
+PRODUCT_AND_UX_CONNECTION
+This gate prevents an unreviewed byte transformer from becoming an input to
+future natural-language-surface evidence.  It creates no user-facing behavior
+and receives no runtime, product, UX, V16 technical, or Cycle001 acceptance
+credit.
+
+CURRENT_REMOTE_BINDINGS
+COCOLON_REPOSITORY=MassyuRed/Cocolon
+COCOLON_BRANCH=main
+COCOLON_EXPECTED_HEAD=bb3e6770a3e67788ca47a206aa6eff1af627809d
+COCOLON_EXPECTED_TREE=8686790297a65e70e070d01591fc96d7b6481b65
+COCOLON_EXPECTED_PARENT=2c5058b242ec02ce49c77de4bfb9686c8ec536f0
+PUBLISHED_HANDOFF_BLOB=967114dbd3ce673c086fb2858ba0463a5f21df40
+PUBLISHED_HANDOFF_SHA256=a4306edb99ad35bcc1a069faeb15e941a2770da55a714357d0d10ef53ef9e89a
+PUBLISHED_LEDGER_BLOB=c1e3c886e56d3478eb1fecb72963dab1ca823297
+PUBLISHED_LEDGER_SHA256=ed63ae9438ebe6a69d939f82527842a413e6ec058eb2d34f9f68552536500653
+PUBLISHED_PATH_CORRECTION_AUTHORITY_BLOB=cd5f7fe7feb19a4cb3a2acb403a143f8ed6a780c
+PUBLISHED_PATH_CORRECTION_AUTHORITY_SHA256=7a9c384e4a2678860f390a11120e847dfe61f5db26d178b7f22c926613c9fcc6
+PUBLISHED_07_BLOB=e0edbbd022fbac7a8b8efe584a69c06379ab9cf2
+PUBLISHED_07_SHA256=826d9fcd2ad643fe7e126348e1cc900795405b4462db3a0eaf66eebc70e728aa
+PUBLISHED_PLAN_BLOB=bcc5757045ed130ebe514205f6dadc738aad5bce
+PUBLISHED_PLAN_SHA256=bb7df7bfb35c7f71a3211a4bca92c16b270243b38a0c98a757bbc9c58d9f0796
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_BRANCH=main
+MASHOS_API_COMMIT=315813c7bd3372462de926ddad74df567254a6b5
+MASHOS_API_TREE=a641510e107d52bb910073f36604c85bd57af150
+MASHOS_API_ROLE=NO_CHANGE_BASELINE_ONLY
+
+EXACT_SPECIFICATION_SOURCE
+SOURCE_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2.js"
+SOURCE_RELPATH_DECODING=JSON_UNESCAPE_TO_UTF8_EXACT1
+SOURCE_GIT_BLOB=69ca116c3bc8c618792f3da9bd72686a4759fd8d
+SOURCE_SHA256=0d2dcffe2d55c08e97dfcf588e8a13b6b26f8e5c337ee549e3ffcf41c300dcca
+SOURCE_BYTES=41972
+SOURCE_LF=1339
+SOURCE_CR=0
+SOURCE_FINAL_LF=TRUE
+SOURCE_MODE=0644
+
+FRESH_EXECUTION_WORKTREE
+ADMIN_CLONE_ROOT=/workspace/scratch/e97a00d75240/_repos/Cocolon
+WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_standalone_preparation_retry_v1
+WORKTREE_PREIMAGE=LSTAT_ENOENT
+WORKTREE_CREATE=GIT_WORKTREE_ADD_DETACH_EXACT1_AT_COCOLON_EXPECTED_HEAD
+WORKTREE_EXPECTED_HEAD=COCOLON_EXPECTED_HEAD
+WORKTREE_EXPECTED_TREE=COCOLON_EXPECTED_TREE
+WORKTREE_EXPECTED_STATUS=CLEAN_BEFORE_AUTHORIZED_PATCHES
+Do not reset, clean, checkout, or alter the existing administrative clone
+working tree.  The detached worktree creation and its bounded Git metadata are
+administrative effects and receive no credit.
+
+PUBLIC_RELATIVE_PATHS_JSON_ASCII
+AUTHORITY_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/preparation_noninteractive_retry_and_publication_authority_v1.txt"
+INSPECTOR_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/tools/v16_standalone_preparation_noninteractive_inspector_generator_v1.js"
+REPORT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifacts/v16_standalone_preparation_exact4_fragment_table_v1.json"
+TARGET_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2_to_v3_standalone_verifier_transformer_v1.js"
+HANDOFF_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/Handoff.md"
+LEDGER_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifact_ledger.tsv"
+SNAPSHOT_07_RELPATH="Cocolon_\u524d\u63d0\u8cc7\u6599/07_latest_snapshot_diff.md"
+PLAN_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md"
+
+PREIMAGE_GATE
+Reverify remote main, all current blobs above, mashos-api baseline, and the
+exact42 preservation ledger.  This is administrative verification only.
+Require WORKTREE_ROOT lstat ENOENT, create the detached worktree exact1, and
+require its exact head, tree, and clean state.  Decode each JSON-ASCII path
+exactly once.  Require AUTHORITY_RELPATH, INSPECTOR_RELPATH, REPORT_RELPATH, and
+TARGET_RELPATH lstat ENOENT.  Require the four append owners to match their
+bound blobs byte-for-byte.  Any mismatch is STOP before source access.
+
+PATCH_PHASE_ONE
+Use exactly one apply_patch invocation from the fixed session root with the
+fresh-worktree prefix on every tool path.  Add only:
+1. AUTHORITY_RELPATH as the exact approved canonical authority bytes.
+2. INSPECTOR_RELPATH as one fixed Node.js inspector/generator.
+No other file effect is allowed in phase one.  Freeze both files by path, mode,
+bytes, LF, CR, final LF, Git-style blob, and SHA-256.
+
+INSPECTOR_PREEXECUTION_CONTRACT
+Before source access, Karen and three read-only subagents independently review
+the frozen inspector.  All four must PASS.  The inspector must:
+1. accept only the exact direct source path as argv[2];
+2. use only node:fs, node:path, and node:crypto;
+3. use no stdin, interactive transport, node -e, heredoc, write_stdin, env or
+   cwd input, network, child process, eval, dynamic code, search, glob, readdir,
+   opendir, fallback locator, temp file, or file write;
+4. perform lstat, direct realpath equality, open with
+   O_RDONLY|O_NOFOLLOW|O_NONBLOCK, fstat, one positional whole-buffer read, one
+   EOF probe, and close;
+5. require regular non-symlink, mode 0644, size 41972, LF 1339, CR 0, final LF,
+   source Git blob-compatible bytes, and exact SHA-256;
+6. use that same in-memory buffer only to construct and verify the exact old/new
+   C01-C04 table and standalone target bytes;
+7. emit exactly one canonical ASCII JSON object to stdout, final LF included,
+   maximum 262144 bytes, containing source identity, exact4 old/new fragments
+   as base64, occurrence counts, byte ranges, nonoverlap result, outside-byte
+   preservation proof inputs, target bytes as base64, target metrics, and
+   sanitized status;
+8. on failure emit stdout bytes zero, exactly one allowlisted sanitized stderr
+   code, and a nonzero exit; and
+9. never execute, parse as a module, syntax-check, import, or write the target.
+No inspector edit after freeze is allowed.  A failed preexecution review is
+STOP with no repair, replacement, refreeze, or review retry.
+
+NEWLY_AUTHORIZED_SPECIFICATION_READ
+After four inspector PASS results only, invoke the frozen inspector exactly once
+as a noninteractive direct-file command with the exact direct source path as
+the sole data argument.  This is:
+SPECIFICATION_SOURCE_OPEN=1
+SPECIFICATION_SOURCE_WHOLE_BUFFER_READ=1
+SPECIFICATION_SOURCE_EOF_PROBE=1
+SPECIFICATION_SOURCE_CLOSE=1
+SPECIFICATION_SOURCE_READ_RETRY=1
+OPERATIONAL_V2_READ=0
+No prior read or prior window receives credit or may be reused.  No second
+source open, invocation, fallback, interactive input, or output retry is
+authorized.
+
+EXACT4_AND_TARGET_CONTRACT
+The canonical inspector output must prove:
+C01: V2 version and self-path identity become V3.
+C02: backtick text is opaque, $#name is atomic, and regex-versus-division has a
+closed deterministic decision.
+C03: removable whole-RHS outer parentheses require the matching close at the
+RHS final byte and balanced nesting.
+C04: after only allowed balanced outer-parenthesis removal, the marker argument
+is exactly one decoded string equal to the RHS marker.
+Each old fragment must occur exactly once.  The four source ranges must be
+nonoverlapping.  The proposed target reconstruction must preserve every byte
+outside the four ranges.  Any underdetermination, ambiguity, extra candidate,
+noncanonical output, output overflow, identity mismatch, or nonzero exit is
+STOP before phase two.
+
+STANDALONE_TARGET_CONTRACT
+The emitted target program must, only under a later separate authority:
+1. accept only future exact direct arguments;
+2. independently perform one newly authorized operational V2 identity-gated
+   read;
+3. require the same exact four old fragments, cardinality one each,
+   nonoverlap, and byte preservation outside them;
+4. transform only C01-C04 in memory;
+5. require the future V3 preimage to be lstat ENOENT;
+6. emit only one verified canonical Add File apply_patch buffer for V3 and
+   never write V3 directly;
+7. emit stdout bytes zero and one sanitized stderr code on failure; and
+8. use no network, child process, eval, dynamic code, stdin, cwd/env input,
+   search, glob, readdir, opendir, fallback locator, temp file, or direct target
+   write.
+
+PATCH_PHASE_TWO
+From the already verified canonical inspector output only, construct:
+1. REPORT_RELPATH containing the canonical exact4 report without the full
+   source or unrelated bytes;
+2. TARGET_RELPATH containing the exact emitted standalone program;
+3. append-only outcome sections for HANDOFF_RELPATH, LEDGER_RELPATH,
+   SNAPSHOT_07_RELPATH, and PLAN_RELPATH.
+Use exactly one apply_patch invocation from the fixed session root with the
+fresh-worktree prefix on every path.  Add REPORT_RELPATH and TARGET_RELPATH and
+append only to the four owners.  No other path or file effect is allowed.
+Freeze all exact eight publication paths.  Prove all four append-owner prefixes
+are byte-identical to their bound predecessor blobs.  No edit after freeze is
+allowed.
+
+POSTGENERATION_STATIC_REVIEW_EXACT4
+Karen and three read-only subagents independently review the frozen exact4
+report, target, authority, inspector, append suffixes, and exact-eight scope.
+R1=SOURCE_IDENTITY_EXACT4_CARDINALITY_AND_NONOVERLAP
+R2=LEXICAL_STATE_C01_C04_AND_OUTSIDE_BYTE_PRESERVATION
+R3=CANONICAL_ADD_FILE_NO_DIRECT_WRITE_AND_SANITIZED_FAILURE
+R4=AUTHORITY_BOUNDARY_PRODUCT_CONNECTION_AND_WHOLE_SYSTEM
+All four must PASS.  No repair, second phase-two patch, refreeze, replacement,
+or review retry is authorized.
+
+CONDITIONAL_GITHUB_PUBLICATION
+After all preexecution and postgeneration reviews PASS only, use the installed
+GitHub connector, not a PR flow, to create full-content blobs for the exact
+eight paths, one tree based on COCOLON_EXPECTED_TREE, one commit with sole
+parent COCOLON_EXPECTED_HEAD, and one non-force main ref update.  Before the ref
+update, remote main must still equal COCOLON_EXPECTED_HEAD.  Commit message:
+Prepare and preserve V16 standalone V2-to-V3 transformer
+No branch, PR, merge, force update, local git commit, CLI push, or second commit
+is authorized.  Any connector failure is STOP with retry0.
+
+REMOTE_POSTVERIFICATION
+Fetch remote main after the ref update.  Verify one direct child; changed paths
+exactly eight; missing0; extra0; all path-to-blob identities; raw SHA-256,
+bytes, LF, CR, final LF, mode 100644; four append-prefix invariants; exact local
+to remote equality; authority bytes; inspector bytes; report bytes; and target
+bytes.  Any mismatch is STOP.  No repair, amend, force update, retry, second
+publication, or reclassification is authorized.
+
+PASS_COUNTERS
+AUTHORITY_ACTIVATION=1
+ADMIN_WORKTREE_CREATE=1
+PHASE_ONE_APPLY_PATCH=1
+AUTHORITY_CREATE=1
+INSPECTOR_CREATE=1
+INSPECTOR_FREEZE=1
+INSPECTOR_PREEXECUTION_REVIEWS=4
+INSPECTOR_PREEXECUTION_PASS=4
+INSPECTOR_INVOCATION=1
+SPECIFICATION_SOURCE_READ_RETRY=1
+OPERATIONAL_V2_READ=0
+FRAGMENT_WINDOWS=4
+EXACT4_TABLE_VERIFIED=1
+PHASE_TWO_APPLY_PATCH=1
+REPORT_CREATE=1
+TARGET_CREATE=1
+TARGET_FREEZE=1
+HANDOFF_APPEND=1
+LEDGER_APPEND=1
+SNAPSHOT_07_APPEND=1
+PLAN_APPEND=1
+POSTGENERATION_REVIEWS=4
+POSTGENERATION_PASS=4
+GITHUB_BLOB_WRITES=8
+GITHUB_TREE_WRITES=1
+GITHUB_COMMIT_WRITES=1
+GITHUB_REF_UPDATES=1
+REMOTE_CHANGED_PATHS=8
+UNAUTHORIZED_EFFECTS=0
+TRANSFORMER_EXECUTION=0
+V3_ACCESS=0
+V3_CREATE=0
+MASHOS_API_EFFECT=0
+V16_TECHNICAL_CREDIT=0
+
+PASS_CONDITION
+All identities, reviews, counters, exact4 proofs, frozen artifacts, exact-eight
+publication, and remote postverification pass.  Then only:
+PREPARATION_GATE=STATIC_PASS
+PREPARATION_DEPENDENCY_UNCERTAINTY=CLOSED
+No runtime, V16 technical, product, UX, Full R1, Formal Source V4, or Cycle001
+acceptance claim is created.
+
+STOP_CONDITION
+On any mismatch, ambiguity, unexpected output, nonzero exit, review failure,
+unexpected preimage, publication failure, or unauthorized effect, STOP.
+Source reread, inspector retry, repair, replacement, second generation, second
+apply_patch in either phase, refreeze, review retry, second commit, and automatic
+progression are forbidden.
+
+EXPLICITLY_FORBIDDEN
+Operational V2 read; prepared-transformer execution; syntax check; import; V3
+access, creation, or write; BBEB or carrier execution; private V15 access;
+Formal Source V4 work; runtime work; mashos-api modification; product claim;
+UX claim; technical credit; and Cycle001 acceptance.
+
+STATE_ON_PASS_OR_STOP
+V15 remains STATIC_ONLY_STOP.
+V15 Receipt remains CLOSED_UNCONSUMED.
+Full R1 remains UNKNOWN_PRESERVED.
+Runtime-ready remains false.
+Formal Source V4 remains MATERIALIZED_FALSE_AND_UNPROVEN.
+Cycle001 remains NOT_ACCEPTED.
+V16 technical credit remains zero.
+
+NEXT_BOUNDARY_AFTER_PASS
+Propose one current-identity-bound operational authority for a new operational
+V2 read, one execution of the frozen published program, and V3 exact-new
+creation and verification.  Do not insert another preservation-only authority.
+Approval of this authority approves neither that later authority nor execution.

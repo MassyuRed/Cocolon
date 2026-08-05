@@ -117,3 +117,36 @@ The checkpoint must not be counted as a completed technical step in that
 chain.  The next authority returns to item 1.  No further preservation-only
 authority is intended after successful remote postverification of this exact7
 checkpoint.
+
+## 2026-08-06 Stage A — V16 standalone material preparation inputs frozen
+
+### Confirmed facts
+
+- approved and activated single-use authority: `V16_STANDALONE_PREPARATION_NONINTERACTIVE_MATERIAL_AND_DURABLE_RETRY_AUTHORITY_V3`
+- approved authority SHA-256 / bytes / LF / CR / final LF: `ed3534072f145d17e41c3971ae2fde2419061b87628b05860cf5e561eec9e03d / 31112 / 559 / 0 / true`
+- V1 proposal: `WITHDRAWN_UNAPPROVED_UNACTIVATED_EFFECT0`; SHA-256 `84755f839aef68535d9fdfad6434df4cf26df4f000115cba7543dec43cabb6eb`; error `ABSOLUTE_FUTURE_PRESERVATION_BAN`
+- V2 proposal: `WITHDRAWN_UNAPPROVED_UNACTIVATED_EFFECT0`; SHA-256 `3878f8a7994813fa204184ee58123b1fdd81b7dccb7f1850e687d715333106e7`; errors `PATCH_ROOT_AND_IDENTITY_GAPS_PLUS_INCOMPLETE_MATERIAL_BOUNDARY_DURABILITY`
+- Cocolon Stage A base head / tree / parent: `bb3e6770a3e67788ca47a206aa6eff1af627809d / 8686790297a65e70e070d01591fc96d7b6481b65 / 2c5058b242ec02ce49c77de4bfb9686c8ec536f0`
+- mashos-api no-change head / tree: `315813c7bd3372462de926ddad74df567254a6b5 / a641510e107d52bb910073f36604c85bd57af150`
+- current Handoff / ledger / 07 / Plan preimages and both durable-rule identities matched the authority bindings
+- preservation ledger administrative verification: rows `42`; paths `42`; total bytes `599376`; missing / extra / mismatch `0 / 0 / 0`
+- preservation artifact payload open / read: `0 / 0`
+- detached worktree preimage / create / head / tree / prepatch status: `LSTAT_ENOENT / 1 / bb3e6770a3e67788ca47a206aa6eff1af627809d / 8686790297a65e70e070d01591fc96d7b6481b65 / CLEAN`
+- Stage A logical changed paths: exact `6`; exact-new preimage mismatch: `0`
+- inspector status: `FROZEN_UNREVIEWED_NONEXECUTED_NONCREDIT`
+- inspector SHA-256 / Git blob / bytes / LF / CR / final LF / mode: `6d5cfdfa346a7812c3130dea10f49dfb4f40b41a94701008967c55c83e655f8e / ca58518abf9df0b9abd6f3650121a75b3add1e34 / 35152 / 920 / 0 / true / 0644`
+- Stage A local patch invocation / expected path effect / unauthorized effect: `1 / exact6 / 0`
+- inspector reviews / invocation / source lstat / source open / source read / EOF / close / canonical output: `0 / 0 / 0 / 0 / 0 / 0 / 0 / 0`
+- operational V2 read / transformer execution / target create / V3 access / V3 create / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0`
+- V16 technical credit / Cycle001 technical progress: `0 / 0`
+
+The earlier interactive-transport explanation remains an unproved inference.  This
+Stage A freeze is necessary input durability for the material exact4/program
+preparation; it is not technical success.  The immediate next action after
+remote exact6 postverification is the four-part published-inspector static
+review.  Source access remains forbidden until that review is durably PASS4.
+
+Current technical state remains V15 `STATIC_ONLY_STOP`, V15 Receipt
+`CLOSED_UNCONSUMED`, Full R1 `UNKNOWN_PRESERVED`, runtime-ready `false`,
+Formal Source V4 `MATERIALIZED_FALSE_AND_UNPROVEN`, Cycle001 `NOT_ACCEPTED`,
+and V16 technical credit `0`.
