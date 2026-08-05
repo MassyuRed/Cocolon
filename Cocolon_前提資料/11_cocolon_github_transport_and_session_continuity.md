@@ -109,6 +109,22 @@ runtime処理自体に必要なdata durability、hash、schema、因果関係、
 変更できるのは、Mash様が変更する条文と変更後の内容を明示し、別作業として承認した場合だけとする。
 他作業の承認へ契約変更を混ぜてはいけない。
 
+# CURRENT_NORMATIVE_CONTRACT: continuous durable work recording / emergency handoff
+
+normative_status: `CURRENT`
+
+decision_owner: `Mash`
+
+canonical_detail_owner: `14_cocolon_continuous_work_recording_and_emergency_handoff.md`
+
+この節は、強制session切替、context limit、tool failure、scratch消失に備えて、作業中の確認・成果物・STOP・次工程を継続的にdurable化する契約です。Mash様がsession終了を指示することを保存開始条件にしません。
+
+local file、chat、subagent出力、session cache、scratch absolute path、SHA-256だけは永続保存ではありません。後続作業が依存するlocal-only byteが生じた場合は、public-safeな実byteまたはlossless bundle、checksum ledger、authority lifecycle、確認済み事実、未確認、非再利用evidence、STOP理由、次のexact actionを、承認済みのdurable ownerへ作業途中で保存します。秘密・body-full private evidenceはpublic GitHubへ置かず、承認済みprivate durable ownerへ保存し、public側にはbody-free identityとretrieval ownerだけを残します。
+
+checkpointはtechnical execution、authority approval、technical credit、completion、closure、automatic progressionの代替ではありません。invalid/STOP artifactは成功へ昇格させず、immutable historical/noncreditとして保存します。次sessionはlatest verified checkpointをfresh取得・再hashし、`CURRENT_CONTINUITY_UNVERIFIED`から再開します。欠落・不一致・unknownは推測で埋めません。
+
+この節は上のGitHub反映契約§1〜§8を変更しません。durable storeは通常のGitHub反映開始・正式性・完了判定の追加前提ではありません。通常のGitHub反映へ新しい停止条件、single-commit条件、全repository検証条件を追加しません。materialなlocal-only継続依存が存在する時のproject記録義務と、緊急flushのcadenceだけを定めます。
+
 # HISTORICAL_NON_NORMATIVE_TRANSPORT_RECORDS
 
 以下は当時の鍵、SSH、expected-old、Guardian、receipt、run、commitを保存する履歴である。現在のGitHub反映条件、停止条件、成果物正式性条件ではない。

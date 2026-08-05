@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-08-02"
+revision_date: "2026-08-05"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -3306,3 +3306,17 @@ Cocolon / mashos-apiはcurrent `public`ですが、write ownerと承認scopeは�
 - authority effect: technical activation / admission / consumption `0 / 0 / 0`; this correction cannot start V15.
 - implementation / runtime / pytest / private analyzer / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0`.
 - closure boundary: only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.
+
+# 2026-08-05 CURRENT continuous durable checkpoint / handoff owner index
+
+| path | owner role |
+|---|---|
+| `14_cocolon_continuous_work_recording_and_emergency_handoff.md` | 作業途中のdurable checkpoint cadence、復元に必要な最小内容、緊急handoff |
+| `11_cocolon_github_transport_and_session_continuity.md` | §1〜§8はGitHub反映方法と完了判定、新current H1はsession continuityとの非混同境界 |
+| `07_latest_snapshot_diff.md` | EOF側最後の完全なcurrent H1によるtechnical currentとcheckpoint state |
+| `work_attitude_rules_for_karen/17_continuous_durable_work_recording_and_emergency_handoff.txt` | 華恋が毎session実行する行動rule |
+| `work_attitude_rules_for_karen/09_work_start_checklist.txt` §T | 作業開始・継続中のcheckpoint確認 |
+| `EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/Handoff.md` | V16 exact42 preservationのtask handoff |
+| 同directoryの`artifact_ledger.tsv`と`artifacts/` | exact42 checksum ledgerと実bytes |
+
+`13_cocolon_work_test_runner_runtime_continuity.md`はpytest runtime continuity専用であり、一般的な作業記録ownerではありません。durable checkpointは通常のGitHub反映に追加する前提ではなく、local-only継続依存を失わないためのproject記録です。

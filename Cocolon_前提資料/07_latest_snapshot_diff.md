@@ -38692,3 +38692,50 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_PUBLIC_FIXTURE_CONTAINER_LOC
 ```
 
 The V16 token is defined but inactive. This publication does not approve, activate, admit, consume, or execute it. A separate Mash approval and fresh live/input gate are mandatory. Even a successful V16 synthetic comparison must end at `SYNTHETIC_ONLY_STOP`; it cannot create Formal Source V4 or enter runtime automatically.
+
+---
+
+## 2026-08-05 ADMINISTRATIVE PRESERVATION CHECKPOINT — V16 local evidence exact42 / V15 technical current unchanged
+
+### Technical-current continuity
+
+- technical checkpoint: `NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_PUBLIC_FIXTURE_CONTAINER_LOCATOR_BOUND_DUAL_ANALYZER_PREFLIGHT_VALID_MATCHING_IMPLEMENTATION_STATIC_DUAL_VALID_MATCHING_STATIC_ONLY_STOP`
+- analyzer terminal: `V15_IMPLEMENTATION_STATIC_VALID`
+- checkpoint terminal: `STATIC_ONLY_STOP`
+- V15 Receipt stored state: `CLOSED_UNCONSUMED`
+- Full R1: `UNKNOWN_PRESERVED`
+- runtime ready: `false`
+- Formal Source V4: `MATERIALIZED_FALSE / UNPROVEN`
+- Cycle001: `NOT_ACCEPTED`
+- automatic progression: `false`
+- technical authority activation / admission / consumption by preservation: `0 / 0 / 0`
+- technical credit from preservation: `0`
+
+This H2 is an additive administrative checkpoint under the existing V15 H1. It is not a new technical-current owner and does not replace, replay, consume, or advance V15. All V15 implementation-static credit, exact47 closure, historical-process facts, authority lineage, and exclusions in the owning H1 remain in force.
+
+### Durable preservation state
+
+- predecessor Cocolon commit/tree: `a8d6c76fcc88035793e97d5afad815867cea893f` / `db713d4e256756d7e851cf95e200cf84e4b81995`
+- mashos-api unchanged commit/tree: `315813c7bd3372462de926ddad74df567254a6b5` / `a641510e107d52bb910073f36604c85bd57af150`
+- preservation owner: `EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/Handoff.md`
+- ledger: same directory `artifact_ledger.tsv`
+- artifact storage: same directory `artifacts/`
+- preserved files / bytes: exact `42` / `599376`
+- local-only artifact technical status: frozen historical/noncredit; no execution or promotion is inferred
+- secret-pattern review: no private-key header, known PAT/access-key prefix, workspace-root absolute locator, or root-home absolute locator occurrence in exact42
+- continuous recording owner: `14_cocolon_continuous_work_recording_and_emergency_handoff.md`
+
+### Latest local STOP and next boundary
+
+- last administrative inline-wrapper invocation: exact1 / exit1 / `ADMINISTRATIVE_WRAPPER_NONZERO_PREBODY_UNKNOWN_STOP`
+- captured output bytes: `2071`; content read/display/reuse/publication exact0
+- V2 read/stat/hash: exact0
+- intended extractor V3 create/write/freeze/review: exact0 each; V3 artifact absent
+- helper execution / technical source / V4 / private / GitHub technical publication / V16 technical effect: exact0
+- same-authority retry/reactivation/reconsumption: exact0
+
+The next technical action is an exact-new standalone V2-to-V3 verifier/transformer preparation without inline `node -e`, followed only under another separate authority by execution, V2 fresh read, C01-C04 transformation, and extractor V3 exact-new creation/review. This preservation commit does not authorize either step.
+
+### Continuity verification rule
+
+Any next session must fetch the owning V15 H1, this H2, the handoff, ledger, and all exact42 artifact bytes from GitHub and verify their identities before resuming. Until then continuity is `CURRENT_CONTINUITY_UNVERIFIED`. Hashes without stored bytes, chat history, and scratch paths are not sufficient reconstruction evidence.

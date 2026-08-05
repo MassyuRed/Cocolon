@@ -1,7 +1,7 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-08-02",
+  "revision_date": "2026-08-05",
   "created_at": "2026-05-17 18:58:26 JST",
   "format": "UTF-8 text files for Notepad",
   "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
@@ -28,6 +28,7 @@
     "14_cocolon_joint_development_and_karen_thought_boundary.txt",
     "15_trust_based_joint_development_boundary_2026_06_05.txt",
     "16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+    "17_continuous_durable_work_recording_and_emergency_handoff.txt",
     "99_integrated_paste_each_time.txt"
   ],
   "update_notes": [
@@ -347,6 +348,28 @@
       "rule_semantics_changed": false,
       "changed_files": [
         "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "type": "continuous_durable_work_recording_and_emergency_handoff_guard",
+      "normative_status": "CURRENT",
+      "decision_owner": "Mash",
+      "operational_owner": "Karen",
+      "canonical_owner": "../14_cocolon_continuous_work_recording_and_emergency_handoff.md",
+      "behavioral_owner": "17_continuous_durable_work_recording_and_emergency_handoff.txt",
+      "summary": "session終了依頼を待たず、materialなartifact、review blocker、authority lifecycle、execution result、next-action変更ごとにGitHub-backed checkpointを更新する。scratch path・chat・cache・hashだけをpersistenceと扱わず、実bytesまたはlossless bundle、checksum ledger、STOP/noncredit、non-reuse、next exact actionを保存し、remote再読まで完了扱いにしない。",
+      "session_end_request_required": false,
+      "actual_bytes_or_lossless_bundle_required": true,
+      "remote_postread_required": true,
+      "durable_store_as_github_reflection_prerequisite": false,
+      "technical_credit_or_automatic_progression": false,
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "17_continuous_durable_work_recording_and_emergency_handoff.txt",
+        "99_integrated_paste_each_time.txt",
         "manifest.json"
       ]
     }

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-08-02"
+revision_date: "2026-08-05"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -7881,3 +7881,17 @@ contract境界、読む順をcurrentに保つ地図であるべきです。今�
 - authority effect: technical activation / admission / consumption `0 / 0 / 0`; this correction cannot start V15.
 - implementation / runtime / pytest / private analyzer / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0`.
 - closure boundary: only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.
+
+# 2026-08-05 CURRENT durable work-recording / emergency handoff read order
+
+Cocolon作業では、sessionが予定どおり終わることを前提にしません。materialなlocal-only成果物、review blocker、authority lifecycle、execution result、次工程変更が生じた時点で、Mash様からhandoffを求められる前にdurable checkpointを更新します。
+
+作業再開時の必読順へ次を追加します。
+
+1. `07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent H1。
+2. `14_cocolon_continuous_work_recording_and_emergency_handoff.md`。
+3. latest durable task handoffとchecksum ledger、および保存された実artifact bytes。
+4. `11_cocolon_github_transport_and_session_continuity.md`の二つのcurrent contract。
+5. current GitHub headと対象checkpoint fileのfresh identity。
+
+scratch path、session ID、chat履歴、hashだけを引継ぎとは扱いません。GitHub保存されたbyteをfresh取得して一致確認するまでcontinuityは`CURRENT_CONTINUITY_UNVERIFIED`です。保存はtechnical success、credit、approval、automatic progressionを意味しません。

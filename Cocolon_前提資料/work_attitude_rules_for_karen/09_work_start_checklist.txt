@@ -331,3 +331,18 @@ Python / pytest test-runnerを使う場合だけ、次をtargeted authority提�
 - [ ] historical resultを遡及変更・再parse・再creditしていないか
 
 一つでも満たせなければtargeted authorityを提示せず、Gate Aまたは別Gate Bへ戻る。
+
+## T. continuous durable checkpoint / emergency handoff
+
+- [ ] `../14_cocolon_continuous_work_recording_and_emergency_handoff.md`とlatest durable task handoffを読んだか
+- [ ] GitHub上のcheckpoint commit、final head、ledger、保存artifact bytesをfresh取得したか
+- [ ] local-only dependencyをchat、scratch path、session cache、hashだけへ残していないか
+- [ ] current / accepted / invalid historical / superseded / proposed / noncreditを分離したか
+- [ ] authority lifecycle、STOP/PASS、実行済みeffect、exact zero-effect、non-reuse boundary、次のexact actionを記録したか
+- [ ] public-safe bytesとprivate/body-full evidenceのdurable ownerを分離したか
+- [ ] materialなartifact・review・authority・execution・next-action変更のたびにcheckpointを更新したか
+- [ ] context-limitまたはforced-session riskを見た時、新しいtechnical expansionよりcheckpoint flushを先にしたか
+- [ ] remote再読、changed-path set、final headの確認まで保存完了を報告していないか
+- [ ] checkpointをtechnical credit、approval、completion、closure、automatic progressionへ昇格させていないか
+
+一つでも満たせない場合は、失われる可能性のある新作業を増やさず、確認済み事実だけでcheckpointを先に閉じる。これは通常のGitHub反映§1〜§8へ追加する開始条件ではなく、project knowledgeの継続保存義務である。

@@ -111,6 +111,16 @@ Cocolon作業前に必ず読むルール（統合版）
 98. historical Result / Receipt / Handoffは書き換えず、誤ったfuture directionをadditive correctionで非current化する。
 99. rematerializationはGitHub-tracked procedureと、tracked helperまたはauthority-bound local helper identityにbindし、session-local helper pathだけを再構築ownerにしない。
 100. exact admitted executableのlaunch requestをOSへ渡した時点でauthority消費をexact1とし、OS rejectやpytest-start exact0でも巻き戻さずretryしない。
+101. sessionはMash様の意思と無関係にcontext/tool limitで終わり得るため、handoff依頼や予定終了を保存開始条件にしない。
+102. materialなartifact、review blocker、authority lifecycle、execution result、next-action変更ごとにdurable checkpointを作業途中で更新する。
+103. chat、scratch path、session cache、subagent出力、SHA-256だけはpersistenceではない。実bytesまたはlossless bundleとchecksum ledgerを保存する。
+104. checkpointにはrepository identity、last safe public state、authority/terminal、artifact status、performed/zero effects、non-reuse、next exact action、privacy ownerを含める。
+105. STOPとinvalid artifactもimmutable historical/noncredit knowledgeとして保存し、削除または成功へ再分類しない。
+106. public-safe evidenceはCocolon GitHubへ、secret/body-full private evidenceはapproved private durable ownerへ分ける。private subsetを理由にpublic-safe記録まで省略しない。
+107. write応答だけで保存完了にせず、remote bytes、changed paths、final headをfresh確認する。
+108. next sessionはlatest verified checkpointを取得・再hashするまで`CURRENT_CONTINUITY_UNVERIFIED`とする。
+109. context-limitやforced-session riskを見たらtechnical expansionを止め、Mash様に言われる前にcheckpointをflushする。
+110. durable recordingはtechnical execution、approval、credit、completion、closure、automatic progressionの代替ではなく、通常のGitHub反映§1〜§8へ追加する前提でもない。
 
 出力前テンプレ:
 

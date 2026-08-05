@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-01
+revision_date: 2026-08-05
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 
@@ -124,6 +124,10 @@ Cocolonがリリースできて、売れる商品品質に届かなければ、�
 68. historical Result / Receipt / Handoffは書き換えず、誤ったfuture directionだけをadditive correctionで非current化する。
 69. rematerializationはGitHub-tracked procedureとhelper identityにbindし、session-local helper pathだけを再構築ownerにしない。
 70. exact admitted executableのlaunch requestをOSへ渡した時点でauthority consumptionをexact1とし、OS rejectでも巻き戻さない。
+71. materialなlocal-only成果物、review blocker、authority lifecycle、execution result、次工程変更が生じたら、session終了やMash様の指示を待たずdurable checkpointを更新する。
+72. chat、scratch path、session cache、subagent出力、SHA-256だけを保存と扱わず、実bytesまたはlossless bundleとchecksum ledgerをGitHub-backed ownerへ残す。
+73. STOP、invalid artifact、noncredit artifactもproject knowledgeとして保存し、成功やtechnical creditへ再分類しない。
+74. session開始時は`../14_cocolon_continuous_work_recording_and_emergency_handoff.md`とlatest task handoffを読み、remote bytesをfresh確認するまで`CURRENT_CONTINUITY_UNVERIFIED`とする。
 
 
 # 毎回の作業前に華恋が見るべき順序
@@ -133,7 +137,7 @@ Cocolonがリリースできて、売れる商品品質に届かなければ、�
 3. Work-local Python / pytest test-runnerを扱う場合は`16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`
 4. `14_cocolon_joint_development_and_karen_thought_boundary.txt`
 5. `15_trust_based_joint_development_boundary_2026_06_05.txt`
-6. Cocolon_前提資料の READ_FIRST / `../07_latest_snapshot_diff.md` current authority / `../11_cocolon_github_transport_and_session_continuity.md` / test-runner作業では`../13_cocolon_work_test_runner_runtime_continuity.md` / 命名体系 / 名称混在資料 / 思想資料 / 共同開発境界資料
+6. Cocolon_前提資料の READ_FIRST / `../07_latest_snapshot_diff.md` current authority / `../14_cocolon_continuous_work_recording_and_emergency_handoff.md` / latest durable task handoff / `../11_cocolon_github_transport_and_session_continuity.md` / test-runner作業では`../13_cocolon_work_test_runner_runtime_continuity.md` / 命名体系 / 名称混在資料 / 思想資料 / 共同開発境界資料
 7. EmlisAI作業では `emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md`
 8. GitHub上の `Cocolon` / `mashos-api` current headと、設計・handoffが指定するpredecessor commit
 9. 固定commit上の対象実ファイル。local checkout / ZIP / copyを使う場合はpath / blob / hash一致を確認する

@@ -1,0 +1,15 @@
+Cocolon continuous durable work recording / emergency handoff rule
+
+1. Do not wait for Mash to ask for a handoff. A session may end through context or tool limits that Mash cannot control.
+2. Local bytes, chat text, subagent output, container cache, and SHA-256 alone are not durable project accumulation.
+3. After every material artifact, review blocker, authority lifecycle transition, execution result, or next-action change, update a GitHub-backed checkpoint while the confirmed facts are still available.
+4. Preserve the actual bytes or a lossless durable bundle plus a checksum ledger. An ephemeral local path plus hashes is not enough.
+5. Separate current, accepted, invalid historical, superseded, proposed, noncredit, and chat-only facts. Never promote a STOP artifact merely because it was preserved.
+6. Record performed effects and exact zero-effects, evidence that must not be reused, current blockers, and the next safe action.
+7. Public-safe material goes to Cocolon GitHub. Secret/body-full/private evidence stays out of public GitHub and must use an approved durable private owner if reconstruction requires it.
+8. Verify preservation by fetching the remote file bytes, commit changed paths, and final head. A write response alone is not completion.
+9. When a context-limit or forced-session risk appears, stop new technical work and flush the checkpoint immediately without waiting for a Mash instruction.
+10. At the start of every session, read `../14_cocolon_continuous_work_recording_and_emergency_handoff.md` and the latest durable task handoff before resuming.
+11. Correct a durable checkpoint additively: keep the prior checkpoint unchanged and bind the superseding record to its identity and exact error.
+
+This rule is mandatory for all Cocolon design, implementation, audit, authority, and GitHub-reflection work. Automatic progression remains false.

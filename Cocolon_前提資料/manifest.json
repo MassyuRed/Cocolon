@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-08-02",
+  "revision_date": "2026-08-05",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -13,13 +13,14 @@
     "Cocolon_postwrite": "resolve_from_github_revision_containing_the_2026_08_02_full_premise_audit_checkpoint",
     "mashos-api": "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5",
     "verified_at": "2026-08-02 JST",
-    "current_authority": "last complete EOF latest/current section of 07_latest_snapshot_diff.md + tracked ExecutionAndClosurePlan + 11 CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13 CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime"
+    "current_authority": "last complete EOF latest/current section of 07_latest_snapshot_diff.md + tracked ExecutionAndClosurePlan + 11 CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13 CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime + 14 CURRENT continuous durable recording and emergency handoff"
   },
   "update_policy": {
     "current_authority": "after_each_completed_github_reflection_and_post_write_verification",
     "structural_docs": "only_on_structure_owner_contract_read_order_or_naming_boundary_change",
     "full_audit": "phase_rc_release_gate_milestones",
-    "zip_delivery": "only_when_github_reflection_fails; changed_and_new_files_only"
+    "zip_delivery": "only_when_github_reflection_fails; changed_and_new_files_only",
+    "continuous_durable_checkpoint": "during_work_after_material_artifact_review_authority_execution_or_next_action_change; do_not_wait_for_user_or_planned_session_end"
   },
   "last_full_audit_source_policy": {
     "Cocolon": "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
@@ -1744,7 +1745,7 @@
     },
     {
       "path": "11_cocolon_github_transport_and_session_continuity.md",
-      "purpose": "Cocolon / mashos-api GitHub反映方法と完了判定の唯一のcurrent契約、および旧key/SSH/Guardian transportのHISTORICAL_NON_NORMATIVE記録。"
+      "purpose": "Cocolon / mashos-api GitHub反映方法と完了判定の唯一のcurrent契約、continuous durable recordingとの非混同境界、および旧key/SSH/Guardian transportのHISTORICAL_NON_NORMATIVE記録。"
     },
     {
       "path": "12_cocolon_github_actions_publication_guard.md",
@@ -1753,6 +1754,10 @@
     {
       "path": "13_cocolon_work_test_runner_runtime_continuity.md",
       "purpose": "CURRENT。Work-local Python / pytest test-runnerのsession continuity、identity、discovery、readiness recovery、target admission、body-free記録、Work-owned rematerializationの技術正本。GitHub反映方法は変更しない。"
+    },
+    {
+      "path": "14_cocolon_continuous_work_recording_and_emergency_handoff.md",
+      "purpose": "CURRENT。作業途中のdurable checkpoint cadence、session強制終了に備えた復元内容、public/private境界、fresh remote verificationの正本。"
     }
   ],
   "excluded_files": [
@@ -16661,6 +16666,43 @@
       "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_BodyFree_Receipt_20260723.json",
       "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step0_10CanonicalCurrentClosureAndStandaloneCompletionProofNonconformanceRemediation_RED_FreezeOnly_Handoff_20260723.md"
     ]
+  },
+  "work_session_persistent_checkpoint_and_handoff_2026_08_05": {
+    "normative_status": "CURRENT",
+    "decision_owner": "Mash",
+    "operational_owner": "Karen",
+    "canonical_owner": "14_cocolon_continuous_work_recording_and_emergency_handoff.md",
+    "github_method_owner": "11_cocolon_github_transport_and_session_continuity.md",
+    "latest_state_owner": "07_latest_snapshot_diff.md",
+    "task_handoff": "../EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/Handoff.md",
+    "artifact_ledger": "../EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifact_ledger.tsv",
+    "artifact_directory": "../EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/",
+    "artifact_count": 42,
+    "artifact_bytes": 599376,
+    "session_local_path_is_persistence": false,
+    "hash_without_bytes_is_persistence": false,
+    "durable_store_as_github_reflection_prerequisite": false,
+    "private_body_publication": false,
+    "automatic_progression": false,
+    "technical_credit": 0,
+    "continuity_reset": "CURRENT_CONTINUITY_UNVERIFIED_until_fresh_remote_fetch_and_identity_match",
+    "checkpoint_components": [
+      "repository_commit_and_tree",
+      "last_safe_public_technical_state",
+      "authority_lifecycle_and_terminal",
+      "artifact_role_status_bytes_lf_cr_final_lf_mode_sha256",
+      "actual_bytes_or_lossless_bundle",
+      "confirmed_unconfirmed_nonreusable_and_prohibited_inference",
+      "next_exact_action_and_approval_boundary",
+      "privacy_owner",
+      "write_commit_changed_paths_final_head_and_postread"
+    ],
+    "checkpoint_changed_path_groups": {
+      "premise_and_rule_files": 11,
+      "handoff_and_ledger": 2,
+      "artifact_files": 42,
+      "artifact_paths_exact_source": "artifact_ledger.tsv"
+    }
   },
   "latest_modified_premise_files_2026_08_02_full_audit_and_corrections": [
     "00_karen_read_first.md",
