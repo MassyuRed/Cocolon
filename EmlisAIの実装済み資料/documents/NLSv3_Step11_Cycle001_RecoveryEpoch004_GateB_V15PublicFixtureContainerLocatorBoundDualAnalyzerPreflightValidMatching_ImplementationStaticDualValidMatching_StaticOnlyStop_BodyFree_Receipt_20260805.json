@@ -1,0 +1,310 @@
+{
+  "schema_version": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_DUAL_IMPLEMENTATION_STATIC_VALID_BODY_FREE_RECEIPT_V1",
+  "receipt_id": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_PUBLIC_FIXTURE_CONTAINER_LOCATOR_BOUND_DUAL_ANALYZER_PREFLIGHT_VALID_MATCHING_IMPLEMENTATION_STATIC_DUAL_VALID_MATCHING_STATIC_ONLY_STOP",
+  "observed_at_date": "2026-08-05",
+  "receipt_state": "CLOSED_UNCONSUMED",
+  "body_free": true,
+  "automatic_progression": false,
+  "observation": {
+    "schema_version": "NLSV3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_IMPLEMENTATION_STATIC_VALID_BODY_FREE_OBSERVATION_V1",
+    "state": "V15_PUBLIC_FIXTURE_CONTAINER_LOCATOR_BOUND_DUAL_ANALYZER_PREFLIGHT_VALID_MATCHING_IMPLEMENTATION_STATIC_DUAL_VALID_MATCHING_STATIC_ONLY_STOP",
+    "body_free": true,
+    "automatic_progression": false,
+    "repository_identity": {
+      "cocolon_actual_prewrite_commit": "c58faf55ca0928e57ba491c7d596704c326a7ba3",
+      "cocolon_actual_prewrite_tree": "c98374ae0f797a39d606403b2fea50f9cee4d7eb",
+      "mashos_api_commit": "315813c7bd3372462de926ddad74df567254a6b5",
+      "mashos_api_tree": "a641510e107d52bb910073f36604c85bd57af150",
+      "mashos_api_change_exact": 0
+    },
+    "authority_chain": {
+      "root_v15_authority": {
+        "ascii_bytes": 4623,
+        "sha256": "903bb001c0f9989616cba6f0bc30fd63d02bf605a4f9317768e6509944ee3589",
+        "separate_mash_approval_received": true,
+        "activated_exact": 1
+      },
+      "current_v14_receipt": {
+        "stored_state": "CLOSED_UNCONSUMED",
+        "successor_consumption_exact": 1,
+        "stored_receipt_mutation_exact": 0,
+        "prior_receipt_reconsumption_exact": 0
+      },
+      "first_static_continuation": {
+        "ascii_bytes": 7855,
+        "sha256": "7d7448ae6660187d034d36ddf6dc71538f2302cd8abb7f94a7a22597e9b9eae5",
+        "activated_exact": 1,
+        "consumed_exact": 1,
+        "stopped_before_static_execution": true,
+        "owner_execution_exact": 0,
+        "independent_execution_exact": 0,
+        "technical_credit_exact": 0
+      },
+      "cfg_retry_continuation": {
+        "ascii_bytes": 5667,
+        "sha256": "2202ec6ffd21624ef1c23781b57f28c53c980256bbd00ded677bdd2559924490",
+        "activated_exact": 1,
+        "consumed_exact": 1,
+        "owner_execution_exact": 1,
+        "revised_independent_execution_exact": 1,
+        "comparison_exact": 1
+      },
+      "current_policy_receipt_consumption_exact": 0,
+      "automatic_progression": false
+    },
+    "preexecution_gates": {
+      "input_identity_gate_valid": true,
+      "static_tooling_primitive_preflight_valid": true,
+      "public_input_locator_binding_preflight_valid": true,
+      "required_regular_readable_public_receipts_exact": 8,
+      "required_receipt_identity_match_exact": 8,
+      "public_contract_object_identities_exact": 14,
+      "public_contract_object_fresh_match_exact": 14,
+      "public_fixture_container_exact_key_binding_function_exact": 1,
+      "public_fixture_container_exact_key_binding_component_exact": 1,
+      "public_fixture_container_exact_key_binding_call_exact": 1,
+      "fixture_container_bindings_completed_before_analyzer_creation": true
+    },
+    "analyzer_preflight": {
+      "owner_forward": {
+        "program_creation_exact": 1,
+        "identity_freeze_exact": 1,
+        "execution_exact": 1,
+        "retry_exact": 0,
+        "completed": true,
+        "valid": true,
+        "function_cases_exact": 9,
+        "function_valid_exact": 6,
+        "function_invalid_exact": 3,
+        "component_cases_exact": 6,
+        "component_valid_exact": 4,
+        "component_invalid_exact": 2,
+        "call_cases_exact": 20,
+        "call_valid_exact": 12,
+        "call_invalid_exact": 8
+      },
+      "independent_backward": {
+        "program_creation_exact": 1,
+        "identity_freeze_exact": 1,
+        "execution_exact": 1,
+        "retry_exact": 0,
+        "completed": true,
+        "valid": true,
+        "function_cases_exact": 9,
+        "function_valid_exact": 6,
+        "function_invalid_exact": 3,
+        "component_cases_exact": 6,
+        "component_valid_exact": 4,
+        "component_invalid_exact": 2,
+        "call_cases_exact": 20,
+        "call_valid_exact": 12,
+        "call_invalid_exact": 8,
+        "owner_state_read_exact": 0
+      },
+      "sanitized_projection": {
+        "schema_match": true,
+        "canonical_bytes": 22195,
+        "sha256": "e875e52393c4d9a18d72fe448bc7dbc742a5db814dab2884dc29044d83468873",
+        "comparison_attempt_exact": 1,
+        "comparison_available": true,
+        "dual_valid": true,
+        "full_match": true,
+        "mismatch_exact": 0
+      },
+      "shared_parser_tokenizer_classifier_normalizer_model_boolean_evidence_or_derived_state_exact": 0
+    },
+    "component_materialization": {
+      "fresh_versioned_launcher_source_creation_exact": 1,
+      "fresh_versioned_controller_source_creation_exact": 1,
+      "fresh_versioned_contract_bound_verifier_source_creation_exact": 1,
+      "identity_freeze_each_exact": 1,
+      "source_recreation_exact": 0,
+      "source_mutation_exact": 0,
+      "component_runtime_execution_exact": 0,
+      "private_source_path_body_identity_or_record_publication_exact": 0
+    },
+    "static_program_history": {
+      "owner_final_program_retained_unchanged": true,
+      "owner_additional_refinement_recreation_or_refreeze_exact": 0,
+      "rejected_independent_review_failure_exact": 1,
+      "rejected_independent_execution_exact": 0,
+      "rejected_independent_technical_credit_exact": 0,
+      "rejected_independent_mutation_exact": 0,
+      "revised_independent_creation_exact": 1,
+      "revised_independent_identity_freeze_exact": 1,
+      "revised_independent_final_static_review_pass_exact": 1,
+      "private_program_identity_or_body_publication_exact": 0
+    },
+    "implementation_static": {
+      "owner_forward": {
+        "fresh_component_source_read_launcher_exact": 1,
+        "fresh_component_source_read_controller_exact": 1,
+        "fresh_component_source_read_verifier_exact": 1,
+        "fresh_public_document_reads_each_exact": 1,
+        "public_document_count_exact": 10,
+        "execution_exact": 1,
+        "retry_exact": 0,
+        "completed": true,
+        "valid": true,
+        "failure_count": 0,
+        "ordered_sanitized_false_key_count": 0,
+        "sanitized_output_raw_bytes": 3910,
+        "sanitized_output_raw_sha256": "42f710a0989cb5280f186d92cfcdb7aaf8858319d36ae19eba9e329e41372592",
+        "terminal": "V15_IMPLEMENTATION_STATIC_VALID"
+      },
+      "independent_backward": {
+        "fresh_component_source_read_launcher_exact": 1,
+        "fresh_component_source_read_controller_exact": 1,
+        "fresh_component_source_read_verifier_exact": 1,
+        "fresh_public_document_reads_each_exact": 1,
+        "public_document_count_exact": 10,
+        "execution_exact": 1,
+        "retry_exact": 0,
+        "completed": true,
+        "valid": true,
+        "failure_count": 0,
+        "ordered_sanitized_false_key_count": 0,
+        "owner_state_read_exact": 0,
+        "sanitized_output_raw_bytes": 3944,
+        "sanitized_output_raw_sha256": "4a502d5d546a7c1e5ec24f88f1abac9269fa0344a7ae291dc968e10360e648e2",
+        "terminal": "V15_IMPLEMENTATION_STATIC_VALID"
+      },
+      "sanitized_projection": {
+        "schema_version": "NLSV3_GATE_B_V15_SANITIZED_IMPLEMENTATION_STATIC_PROJECTION_V1",
+        "canonical_bytes": 3246,
+        "sha256": "7d70ca7370792d8909e6460e443d97071cafa9519834333e162984aefd28ffbe",
+        "comparison_attempt_exact": 1,
+        "comparison_available": true,
+        "owner_valid": true,
+        "independent_valid": true,
+        "dual_valid": true,
+        "schema_field_value_order_terminal_bytes_sha_match": true,
+        "mismatch_exact": 0
+      },
+      "record_summary": {
+        "qualified_descriptor_records_exact": 21,
+        "fields_per_descriptor_exact": 8,
+        "required_role_references_exact": 22,
+        "required_role_reference_resolution_exact": 22,
+        "target_binding_records_exact": 21,
+        "required_semantic_edge_records_exact": 3,
+        "normal_closed_path_records_exact": 2,
+        "required_public_receipt_records_exact": 8,
+        "public_contract_object_records_exact": 14,
+        "public_contract_application_record_count_claimed_exact": 0,
+        "component_partition": [
+          9,
+          9,
+          3
+        ],
+        "no_drop": true,
+        "no_duplication": true
+      },
+      "source_complete_ledger_summary": {
+        "ascii_open_parentheses_exact": 41,
+        "lexical_category_domain_exact": 8,
+        "direct_declaration_records_exact": 21,
+        "direct_identifier_call_records_exact": 19,
+        "unique_direct_call_relations_exact": 18,
+        "parenthesized_control_flow_records_exact": 1,
+        "candidate_occurrence_key_fields_exact": 5,
+        "binding_outcome_domain_exact": 6,
+        "unique_local_binding_exact": 18,
+        "unique_explicit_contract_bound_cross_component_binding_exact": 1,
+        "failure_outcome_records_exact": 0,
+        "failure_field_domain_exact": 8,
+        "all_failure_counts_zero": true,
+        "m06_resolved_subset_exact": 4,
+        "all_ascii_open_parentheses_classified": true,
+        "no_drop": true,
+        "no_duplication": true
+      },
+      "path_and_contract_summary": {
+        "closed_path_records_exact": 2,
+        "mutually_exclusive_terminal_origin_group_exact": 1,
+        "constructor_before_freeze_each_path": true,
+        "protected_region_public_sink_and_termination_reachability_exact": 0,
+        "outer_dispatcher_sink_then_termination": true,
+        "contract_binding_boolean_count": 12,
+        "contract_binding_all_true": true,
+        "s3_union6_boolean_count": 6,
+        "s3_union6_all_true": true
+      },
+      "program_lifecycle_creation_or_freeze_claim_in_sanitized_outputs_exact": 0,
+      "predecessor_preflight_credit_reawarded_exact": 0,
+      "static_validity_credit_exact": 1,
+      "static_only_stop_exact": 1,
+      "ordered_typed_implementation_static_blocker_stop_exact": 0
+    },
+    "effects": {
+      "repair_exact": 0,
+      "reexecution_exact": 0,
+      "retry_exact": 0,
+      "retroactive_credit_exact": 0,
+      "fresh_v16_analyzer_or_source_creation_read_execution_exact": 0,
+      "synthetic_preflight_execution_exact": 0,
+      "closed_vector_reuse_exact": 0,
+      "formal_source_v4_creation_or_execution_exact": 0,
+      "outer_launch_exact": 0,
+      "runtime_exact": 0,
+      "pytest_exact": 0,
+      "product_exact": 0,
+      "cocolon_production_exact": 0,
+      "published_red_exact": 0,
+      "existing_d1_exact": 0,
+      "mashos_api_effect_exact": 0,
+      "github_write_under_technical_execution_authorities_exact": 0
+    },
+    "terminal_state": {
+      "selected_result": "V15_PUBLIC_FIXTURE_CONTAINER_LOCATOR_BOUND_DUAL_ANALYZER_PREFLIGHT_VALID_MATCHING_IMPLEMENTATION_STATIC_DUAL_VALID_MATCHING_STATIC_ONLY_STOP",
+      "full_r1_result": "UNKNOWN_PRESERVED",
+      "runtime_ready": false,
+      "formal_source_v4_materialized": false,
+      "formal_source_v4_semantic_validity": "UNPROVEN",
+      "cycle001": "NOT_ACCEPTED",
+      "automatic_progression": false
+    },
+    "privacy": {
+      "private_source_or_program_path_body_identity_publication_exact": 0,
+      "private_descriptor_candidate_binding_raw_form_cfg_path_m06_or_graph_ledger_publication_exact": 0,
+      "private_stderr_or_diagnostic_preimage_publication_exact": 0,
+      "shared_analyzer_state_exact": 0,
+      "owner_state_read_by_independent_exact": 0,
+      "private_absolute_locator_publication_exact": 0
+    },
+    "publication": {
+      "public_changed_path_count": 5,
+      "new_artifact_path_count": 3,
+      "append_only_path_count": 2,
+      "deletion_count": 0,
+      "rename_count": 0,
+      "public_changed_paths": [
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V15PublicFixtureContainerLocatorBoundDualAnalyzerPreflightValidMatching_ImplementationStaticDualValidMatching_StaticOnlyStop_Result_20260805.md",
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V15PublicFixtureContainerLocatorBoundDualAnalyzerPreflightValidMatching_ImplementationStaticDualValidMatching_StaticOnlyStop_BodyFree_Receipt_20260805.json",
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V15PublicFixtureContainerLocatorBoundDualAnalyzerPreflightValidMatching_ImplementationStaticDualValidMatching_StaticOnlyStop_Handoff_20260805.md",
+        "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+        "Cocolon_前提資料/07_latest_snapshot_diff.md"
+      ],
+      "body_free": true
+    },
+    "position_consistency": {
+      "facts": [
+        "The exact public fixture-container bindings were fixed before V15 analyzer creation and both preflight methods completed valid with matching sanitized projections.",
+        "The frozen V15 component sources were read once by each distinct implementation-static method; both methods completed valid with zero failures and matching sanitized projections.",
+        "The accepted result is static-only. No synthetic, Formal Source V4, outer launch, runtime, product, production, or mashos-api progression occurred."
+      ],
+      "inference": "The dual-valid matching static proof supports a separately authorized closed synthetic preflight, but does not itself prove runtime, product, or Full R1 validity.",
+      "karen_opinion": "Close V15 as a static-only success. The next technical authority should consume this Receipt once, preserve the V15 static credit without rerunning it, execute the existing closed public exact14 synthetic vector once per case in a body-free private sink, compare two sanitized projections, and stop before Formal Source V4 or runtime."
+    }
+  },
+  "observation_sha256": "3d807ae78217b119eca1ebf8e877b55b38180a167db51eec86c0d86697c359c8",
+  "next_authority": {
+    "ascii_bytes": 7739,
+    "sha256": "e5d0db364c36b4d3bdbad60ebc3660dcf95cc3749061fd2365cfa0f0c0dfa2f3",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "automatic_progression": false,
+    "token": "NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_PUBLIC_FIXTURE_CONTAINER_LOCATOR_BOUND_DUAL_ANALYZER_PREFLIGHT_VALID_MATCHING_IMPLEMENTATION_STATIC_DUAL_VALID_MATCHING_STATIC_ONLY_STOP_POSTVERIFIED_OBSERVATION_SHA256_3D807AE78217B119ECA1EBF8E877B55B38180A167DB51EEC86C0D86697C359C8_ROOT_V15_AUTHORITY_SHA256_903BB001C0F9989616CBA6F0BC30FD63D02BF605A4F9317768E6509944EE3589_ACTIVATED_EXACT1_CURRENT_CFG_RETRY_AUTHORITY_SHA256_2202EC6FFD21624EF1C23781B57F28C53C980256BBD00DED677BDD2559924490_ACTIVATED_EXACT1_CONSUMED_EXACT1_PREDECESSOR_STATIC_CONTINUATION_SHA256_7D7448AE6660187D034D36DDF6DC71538F2302CD8ABB7F94A7A22597E9B9EAE5_CONSUMED_STOPPED_BEFORE_STATIC_EXECUTION_OWNER_EXECUTION_EXACT0_INDEPENDENT_EXECUTION_EXACT0_TECHNICAL_CREDIT_EXACT0_CURRENT_V14_RECEIPT_STORED_STATE_CLOSED_UNCONSUMED_SUCCESSOR_CONSUMPTION_EXACT1_STORED_MUTATION_EXACT0_PRIOR_RECEIPT_RECONSUMPTION_EXACT0_CURRENT_POLICY_RECEIPT_CONSUMPTION_EXACT0_COCOLON_V15_EXECUTION_BASE_C58FAF55CA0928E57BA491C7D596704C326A7BA3_TREE_C98374AE0F797A39D606403B2FEA50F9CEE4D7EB_MASHOS_API_SOURCE_315813C7BD3372462DE926DDAD74DF567254A6B5_TREE_A641510E107D52BB910073F36604C85BD57AF150_CHANGE_EXACT0_REQUIRED_REGULAR_READABLE_PUBLIC_RECEIPTS_EXACT8_IDENTITY_MATCH_EXACT8_PUBLIC_CONTRACT_OBJECT_IDENTITIES_EXACT14_FRESH_MATCH_EXACT14_PUBLIC_FIXTURE_CONTAINER_EXACT_KEY_BINDING_FUNCTION_COMPONENT_CALL_EACH_EXACT1_BEFORE_ANALYZER_CREATION_EXACT1_OWNER_V15_PUBLIC_PREFLIGHT_FUNCTION_EXACT9_VALID6_INVALID3_COMPONENT_EXACT6_VALID4_INVALID2_CALL_EXACT20_VALID12_INVALID8_EXECUTION_EXACT1_RETRY_EXACT0_COMPLETED_TRUE_VALID_TRUE_INDEPENDENT_V15_PUBLIC_PREFLIGHT_FUNCTION_EXACT9_VALID6_INVALID3_COMPONENT_EXACT6_VALID4_INVALID2_CALL_EXACT20_VALID12_INVALID8_EXECUTION_EXACT1_RETRY_EXACT0_COMPLETED_TRUE_VALID_TRUE_OWNER_STATE_READ_EXACT0_PREFLIGHT_PROJECTION_CANONICAL_BYTES_22195_SHA256_E875E52393C4D9A18D72FE448BC7DBC742A5DB814DAB2884DC29044D83468873_COMPARISON_EXACT1_AVAILABLE_TRUE_DUAL_VALID_TRUE_FULL_MATCH_TRUE_MISMATCH_EXACT0_SHARED_PREFLIGHT_STATE_EXACT0_FRESH_VERSIONED_V15_LAUNCHER_CONTROLLER_CONTRACT_BOUND_VERIFIER_SOURCE_CREATION_EXACT1_EACH_IDENTITY_FREEZE_EXACT1_EACH_PRIVATE_SOURCE_PATH_BODY_IDENTITY_DESCRIPTOR_KEY_BINDING_LEDGER_CFG_PATH_M06_GRAPH_OR_EVIDENCE_PUBLICATION_EXACT0_OWNER_FORWARD_V15_IMPLEMENTATION_STATIC_SOURCE_READ_LAUNCHER_CONTROLLER_VERIFIER_EACH_EXACT1_PUBLIC_DOCUMENTS_EACH_EXACT1_COUNT10_EXECUTION_EXACT1_RETRY_EXACT0_COMPLETED_TRUE_VALID_TRUE_FAILURE_COUNT0_FALSE_KEY_COUNT0_INDEPENDENT_BACKWARD_V15_IMPLEMENTATION_STATIC_SOURCE_READ_LAUNCHER_CONTROLLER_VERIFIER_EACH_EXACT1_PUBLIC_DOCUMENTS_EACH_EXACT1_COUNT10_EXECUTION_EXACT1_RETRY_EXACT0_COMPLETED_TRUE_VALID_TRUE_FAILURE_COUNT0_FALSE_KEY_COUNT0_OWNER_STATE_READ_EXACT0_SANITIZED_IMPLEMENTATION_STATIC_PROJECTION_SCHEMA_NLSV3_GATE_B_V15_SANITIZED_IMPLEMENTATION_STATIC_PROJECTION_V1_CANONICAL_BYTES_3246_SHA256_7D70CA7370792D8909E6460E443D97071CAFA9519834333E162984AEFD28FFBE_COMPARISON_EXACT1_AVAILABLE_TRUE_DUAL_VALID_TRUE_SCHEMA_FIELD_VALUE_ORDER_TERMINAL_BYTES_SHA_MATCH_TRUE_MISMATCH_EXACT0_QUALIFIED_DESCRIPTOR_RECORDS_EXACT21_FIELDS_EXACT8_ROLE_REFERENCES_EXACT22_RESOLVED_EXACT22_TARGET_BINDINGS_EXACT21_SEMANTIC_EDGES_EXACT3_CLOSED_PATHS_EXACT2_COMPONENT_PARTITION_9_9_3_PUBLIC_RECEIPTS_EXACT8_PUBLIC_OBJECTS_EXACT14_SOURCE_COMPLETE_ASCII_OPEN_PAREN_RECORDS_EXACT41_DIRECT_DECLARATIONS_EXACT21_DIRECT_IDENTIFIER_CALLS_EXACT19_UNIQUE_CALL_RELATIONS_EXACT18_CONTROL_HEAD_EXACT1_CANDIDATE_KEY_FIELDS_EXACT5_BINDING_OUTCOME_DOMAIN_EXACT6_LOCAL18_EXPLICIT_CROSS1_FAILURE_OUTCOMES0_FAILURE_FIELDS8_ALL_ZERO_M06_SUBSET_EXACT4_NO_DROP_NO_DUPLICATION_EXACT1_MUTUALLY_EXCLUSIVE_TERMINAL_ORIGIN_GROUP_EXACT1_CONSTRUCTOR_BEFORE_FREEZE_EACH_PATH_TRUE_PROTECTED_TO_PUBLIC_SINK_OR_TERMINATION_REACHABILITY_EXACT0_OUTER_DISPATCHER_SINK_THEN_TERMINATION_TRUE_CONTRACT_BINDING_ALL_TRUE_S3_UNION6_ALL_TRUE_V15_STATIC_VALIDITY_CREDIT_EXACT1_STATIC_ONLY_STOP_EXACT1_STATIC_BLOCKER_STOP_EXACT0_REPAIR_REEXECUTION_RETRY_RETROACTIVE_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_DISTINCT_FRESH_V16_CLOSED_SYNTHETIC_PREFLIGHT_AUTHORITY_CURRENT_BODY_FREE_CURRENT_V15_STATIC_VALID_RECEIPT_SUCCESSOR_CONSUMPTION_EXACT1_CURRENT_V15_RECEIPT_STORED_STATE_CLOSED_UNCONSUMED_STORED_MUTATION_EXACT0_PRIOR_RECEIPT_RECONSUMPTION_EXACT0_CURRENT_POLICY_RECEIPT_CONSUMPTION_EXACT0_CURRENT_V15_STATIC_CREDIT_PRESERVED_EXACT1_NOT_REAWARDED_EXACT1_V15_PREFLIGHT_REEXECUTION_EXACT0_V15_IMPLEMENTATION_STATIC_REEXECUTION_EXACT0_V15_STATIC_COMPARISON_REEXECUTION_EXACT0_INPUT_IDENTITY_GATE_BEFORE_V16_PROGRAM_CREATION_OR_V15_SOURCE_READ_EXACT1_STATIC_TOOLING_PRIMITIVE_PREFLIGHT_VALID_REQUIRED_EXACT1_PUBLIC_INPUT_LOCATOR_BINDING_PREFLIGHT_VALID_REQUIRED_EXACT1_COCOLON_WORKTREE_ROOT_AND_REPOSITORY_RELATIVE_DOCUMENTS_DIRECTORY_FRESH_BIND_EXACT1_DIRECT_ARGUMENT_VECTOR_ONLY_PRIVATE_ABSOLUTE_LOCATOR_PUBLICATION_EXACT0_ENVIRONMENT_CWD_DEFAULT_SEARCH_OR_HIDDEN_LOCATOR_EXACT0_PUBLIC_LAUNCHER_TRANSPORT_CONTRACT_V1_CANDIDATE_CANONICAL_BYTES_30194_SHA256_A444AA84DD7DB155EA792F70CC3A1949A03DE9E8D9D3CB4B47F3CBCE12D2B4E3_IMMUTABLE_NO_WEAKENING_EXACT1_PUBLIC_CLOSED_SYNTHETIC_VECTOR_CANONICAL_BYTES_8632_SHA256_FD91E2FCEE052403F8C688DFABE63F9383E9F471E7E9DB2005A72973B1F31D97_CASES_EXACT14_EXPECTED_ADMIT3_CONTROLLED_STOP11_FRESH_REREAD_RECANONICALIZATION_REHASH_REBIND_AND_MATCH_EXACT1_CURRENT_FROZEN_V15_LAUNCHER_CONTROLLER_VERIFIER_SOURCE_FRESH_READ_AND_PRIVATE_IDENTITY_MATCH_EXACT1_EACH_V15_SOURCE_CREATION_REPAIR_MUTATION_RECREATION_EXACT0_EXACT0_EXACT0_EXACT0_COMPONENT_RUNTIME_OR_PRODUCT_USE_EXACT0_EXACT0_DISTINCT_FRESH_OWNER_FORWARD_V16_SYNTHETIC_ANALYZER_PROGRAM_CREATION_IDENTITY_FREEZE_EXECUTION_EXACT1_EXACT1_EXACT1_RETRY_EXACT0_DISTINCT_FRESH_INDEPENDENT_BACKWARD_V16_SYNTHETIC_ANALYZER_PROGRAM_CREATION_IDENTITY_FREEZE_EXECUTION_EXACT1_EXACT1_EXACT1_RETRY_EXACT0_OWNER_STATE_READ_EXACT0_SHARED_PARSER_NORMALIZER_MODEL_BOOLEAN_EVIDENCE_INTERMEDIATE_OR_DERIVED_STATE_EXACT0_CLOSED_SYNTHETIC_COMPONENT_CASE_EXECUTION_EACH_CASE_ONCE_TOTAL_EXACT14_RETRY_EXACT0_PRIVATE_ATOMIC_TERMINAL_SINK_CAPTURE_EXACT14_BODY_FREE_RECORDS_EXACT14_PUBLIC_EXTERNAL_TERMINAL_PUBLICATION_EXACT0_EXPECTED_CASE_MATCH_REQUIRED_EXACT14_ACTUAL_ADMIT_REQUIRED_EXACT3_ACTUAL_CONTROLLED_STOP_REQUIRED_EXACT11_ZERO_MULTIPLE_MALFORMED_CROSS_ORIGIN_OR_LATE_WRITE_ESCAPE_REQUIRED_EXACT0_OWNER_FORWARD_SANITIZED_SYNTHETIC_PROJECTION_EXECUTION_EXACT1_INDEPENDENT_BACKWARD_SANITIZED_SYNTHETIC_PROJECTION_EXECUTION_EXACT1_PROJECTION_COMPARISON_ATTEMPT_EXACT1_IF_BOTH_VALID_AND_FULL_SCHEMA_FIELD_VALUE_ORDER_VALIDITY_TERMINAL_CANONICAL_BYTES_SHA_MATCH_V16_SYNTHETIC_VALIDITY_CREDIT_EXACT1_SYNTHETIC_ONLY_STOP_EXACT1_IF_ANY_INPUT_INVALID_ANALYZER_INVALID_CASE_EXPECTATION_MISMATCH_PROJECTION_MISMATCH_OR_COMPARISON_UNAVAILABLE_SYNTHETIC_VALIDITY_CREDIT_EXACT0_ORDERED_TYPED_SYNTHETIC_PREFLIGHT_BLOCKER_STOP_EXACT1_REPAIR_REEXECUTION_RETRY_OR_RETROACTIVE_CREDIT_EXACT0_EXACT0_EXACT0_EXACT0_PRIVATE_V15_SOURCE_OR_V16_ANALYZER_PATH_BODY_IDENTITY_PRIVATE_SINK_RAW_FRAME_OR_EVIDENCE_PREIMAGE_PUBLICATION_EXACT0_FORMAL_SOURCE_V4_CREATION_READ_EXECUTION_EXACT0_EXACT0_EXACT0_FRESH_V17_ANALYZER_OR_SOURCE_CREATION_READ_EXECUTION_EXACT0_COMPONENT_RUNTIME_OUTER_LAUNCH_RUNTIME_PYTEST_PRODUCT_COCOLON_PRODUCTION_RED_D1_MASHOS_API_EFFECT_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_EXACT0_GITHUB_BLOB_TREE_COMMIT_REF_OR_CONTENT_WRITE_EXACT0_BODY_FREE_V16_CLOSED_SYNTHETIC_PREFLIGHT_RESULT_RECEIPT_HANDOFF_PLAN_LATEST_EXACT5_PAYLOAD_AND_PATH_CONTRACT_PREPARATION_ALLOWED_EXACT1_GITHUB_EXACT5_PUBLICATION_REQUIRES_SEPARATE_MASH_AUTHORITY_V16_AUTHORITY_STATE_DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED_AUTOMATIC_PROGRESSION_FALSE_FULL_R1_UNKNOWN_PRESERVED_RUNTIME_READY_FALSE_FORMAL_SOURCE_V4_MATERIALIZED_FALSE_SEMANTIC_VALIDITY_UNPROVEN_CYCLE001_NOT_ACCEPTED"
+  },
+  "receipt_self_hash_schema": "UTF8_SORTED_COMPACT_JSON_WITH_ROOT_RECEIPT_LOGICAL_SHA256_OMITTED",
+  "receipt_logical_sha256": "6fec245d4d4a493677c1ada63ee5e5985e73d08aa09955b1e402663a5e1b1c72"
+}
