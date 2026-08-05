@@ -1,0 +1,157 @@
+AUTHORITY_ID=V16_STANDALONE_PREPARATION_COMMAND_TRANSPORT_STOP_PUBLIC_PRESERVATION_V1
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+
+PURPOSE
+Durably preserve the failed, consumed preparation attempt before any retry.
+This authority performs administrative public checkpointing only.
+
+PRIOR_POSITION
+The approved V16_STANDALONE_PREPARATION_CORRECTED_AUTHORITY_V1 permitted one
+specification-source read, exact4 table verification, exact-new standalone
+program creation, freeze, and four static reviews, with no automatic progress.
+
+OBSERVED_POSITION
+The authority identity matched and was activated exact1.  Administrative
+checkpoint recovery verification passed 42/42.  The specification source was
+opened and read exact1 with its full identity matched.  Exact source windows
+for C01-C04 were emitted.  The oversized interactive VERIFY command then ended
+the inspection process with COMMAND_PROCESSING_FAILURE before exact4 table
+verification.  The process is closed.  Retry under the consumed authority is
+forbidden.
+
+CHANGE_BASIS
+The failure happened in the inspection-command transport boundary, not in a
+source identity gate and not in transformer execution.  The likely cause is an
+interactive payload transport or line-size limit, but that cause is unproved.
+A local hash or chat transcript is not durable project persistence.
+
+CORRECTION
+Publish an additive administrative STOP checkpoint.  Do not perform another
+source read, exact4 verification, program creation, or technical action.
+
+CURRENT_BINDINGS
+COCOLON_REPOSITORY=MassyuRed/Cocolon
+COCOLON_BRANCH=main
+COCOLON_EXPECTED_HEAD=2c5058b242ec02ce49c77de4bfb9686c8ec536f0
+COCOLON_EXPECTED_TREE=4d64940c52da36a4b50c5d8080197fbae0b84d6d
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_EXPECTED_HEAD=315813c7bd3372462de926ddad74df567254a6b5
+MASHOS_API_EXPECTED_TREE=a641510e107d52bb910073f36604c85bd57af150
+APPROVED_PREPARATION_AUTHORITY_SHA256=27378f825214f0b201547fac439babffdea5097726026ff0a3c8b42058ce92a3
+APPROVED_PREPARATION_AUTHORITY_BYTES=9439
+APPROVED_PREPARATION_AUTHORITY_LF=181
+APPROVED_PREPARATION_AUTHORITY_CR=0
+APPROVED_PREPARATION_AUTHORITY_FINAL_LF=TRUE
+SPECIFICATION_SOURCE_BLOB=69ca116c3bc8c618792f3da9bd72686a4759fd8d
+SPECIFICATION_SOURCE_SHA256=0d2dcffe2d55c08e97dfcf588e8a13b6b26f8e5c337ee549e3ffcf41c300dcca
+SPECIFICATION_SOURCE_BYTES=41972
+SPECIFICATION_SOURCE_LF=1339
+SPECIFICATION_SOURCE_CR=0
+SPECIFICATION_SOURCE_FINAL_LF=TRUE
+SPECIFICATION_SOURCE_MODE=0644
+
+OBSERVED_COUNTERS
+AUTHORITY_IDENTITY_MATCH=TRUE
+AUTHORITY_ACTIVATION=1
+ADMIN_RECOVERY_FILES=42
+ADMIN_RECOVERY_TOTAL_BYTES=599376
+ADMIN_RECOVERY_MISMATCH=0
+SPECIFICATION_SOURCE_OPEN_SESSION=1
+SPECIFICATION_SOURCE_PAYLOAD_READ=1
+SPECIFICATION_SOURCE_EOF_PROBE=1
+SPECIFICATION_SOURCE_IDENTITY_MATCH=TRUE
+OPERATIONAL_V2_READ=0
+EXACT_FRAGMENT_WINDOWS_EMITTED=4
+EXACT4_TABLE_VERIFIED=0
+INSPECTION_TERMINAL=COMMAND_PROCESSING_FAILURE
+TARGET_PARENT_CREATE=0
+TARGET_FILE_CREATE=0
+APPLY_PATCH=0
+FREEZE=0
+STATIC_REVIEW=0
+TRANSFORMER_EXECUTION=0
+SYNTAX_CHECK=0
+IMPORT=0
+V3_ACCESS=0
+V3_CREATE=0
+PRIVATE_V15_ACCESS=0
+MASHOS_API_EFFECT=0
+GITHUB_EFFECT_BEFORE_THIS_AUTHORITY=0
+TECHNICAL_CREDIT=0
+
+AUTHORIZED_GITHUB_EFFECT_EXACT5
+1. Add exact-new file at JSON-unescaped UTF-8 repository path:
+   "EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/approved_authority.txt"
+   Its bytes must be the exact approved preparation authority bytes.
+2. Add exact-new file at JSON-unescaped UTF-8 repository path:
+   "EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/Handoff.md"
+   It must record all CURRENT_BINDINGS and OBSERVED_COUNTERS above, clearly
+   separate confirmed facts from the unproved likely cause, preserve current
+   technical state, and state the next boundary below.
+3. Add exact-new file at JSON-unescaped UTF-8 repository path:
+   "EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifact_ledger.tsv"
+   It must bind approved_authority.txt and Handoff.md by relative path, bytes,
+   LF, CR, final-LF, mode 0644, SHA-256, type, and status.
+4. Append one additive administrative H2 section to the JSON-unescaped UTF-8
+   repository path:
+   "Cocolon_\u524d\u63d0\u8cc7\u6599/07_latest_snapshot_diff.md"
+   Historical text must not be changed.
+5. Append the same administrative outcome, with Plan-appropriate context, to
+   the JSON-unescaped UTF-8 repository path:
+   "EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md"
+   Historical text must not be changed.
+
+PATH_RESOLUTION_BOUNDARY
+Before mutation, JSON-unescape the five fixed ASCII path literals to their
+exact UTF-8 repository paths and print the existing append-owner Git blob
+identities.  No glob, readdir, opendir, repository-wide search, alternate path,
+or fallback is authorized.
+All five target preimages must be verified: exact-new files ENOENT; append-only
+files must match the current bound blobs and raw identities recorded before
+write.  Any mismatch is STOP.
+
+CONTENT_BOUNDARY
+The checkpoint must not claim exact4 verification, program creation, V16
+technical progress, runtime success, product success, or Cycle001 acceptance.
+It must state that the approved preparation authority is CLOSED_CONSUMED_STOP
+and cannot be reactivated, reused, retried, or reclassified.
+The likely transport-limit explanation must remain explicitly UNPROVED.
+The next technical attempt may use only a new separate Mash-approved authority
+with a noninteractive fixed-code inspector.  It must perform a newly authorized
+specification read and must not inherit technical credit from this attempt.
+
+REVIEW_AND_PUBLICATION
+Karen creates the exact5 patch and freezes the three new files plus both
+append-only suffixes.  Three read-only subagents and Karen independently review
+scope, counters, historical preservation, current-state wording, paths, and
+absence of technical-credit inflation.  All four reviews must PASS before
+publication.
+After PASS, create exactly one commit and push main exactly once.  Fetch the
+remote result and postverify remote commit, tree, parent, changed paths exact5,
+file blobs, raw SHA-256, bytes, LF, CR, final-LF, modes, and both append-only
+prefixes.  Any mismatch is STOP.  Do not repair, amend, force-push, retry, or
+publish a second commit under this authority.
+
+EXPLICITLY_FORBIDDEN
+Another specification-source read; operational V2 read; exact4 verification;
+target-parent creation; standalone-program creation; transformer execution;
+syntax check; import; V3 access or creation; BBEB or carrier execution; private
+V15 access; mashos-api modification; runtime work; Formal Source V4 work; and
+any technical credit.
+
+STATE_AFTER_PASS_OR_STOP
+V15 remains STATIC_ONLY_STOP.
+V15 Receipt remains CLOSED_UNCONSUMED.
+Full R1 remains UNKNOWN_PRESERVED.
+Runtime-ready remains false.
+Formal Source V4 remains MATERIALIZED_FALSE_AND_UNPROVEN.
+Cycle001 remains NOT_ACCEPTED.
+V16 technical credit remains zero.
+
+NEXT_BOUNDARY_AFTER_PASS
+Present a separate identity-bound retry authority that replaces interactive
+large-payload transport with one noninteractive fixed-code inspection process.
+Approval of this preservation authority approves neither that retry nor any
+technical execution.

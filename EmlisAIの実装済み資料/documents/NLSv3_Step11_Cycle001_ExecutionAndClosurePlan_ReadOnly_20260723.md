@@ -17940,3 +17940,27 @@ NLS_V3_STEP11_CYCLE001_RECOVERY_EPOCH004_GATE_B_V15_PUBLIC_FIXTURE_CONTAINER_LOC
 ```
 
 The next token is defined but inactive. This exact5 publication does not approve, activate, admit, consume, or execute V16. GitHub publication itself requires a separate exact5 authority bound to the frozen payload and postimages.
+
+## 2026-08-06 administrative checkpoint: V16 preparation STOP chain and path-root correction
+
+### Confirmed outcome
+
+The first V16 standalone preparation authority completed its bound nontechnical specification-source read exact1 and emitted C01-C04 windows, then stopped at `COMMAND_PROCESSING_FAILURE` before exact4 table verification. Its technical credit is0.
+
+The first public-preservation authority matched all repository and content preimages, created only the exact empty checkpoint directory, and then stopped because repository-relative patch paths were resolved from the session root. Patch verification failed before file write. Tracked change, review, commit, remote write, and technical credit were all0.
+
+Both stopped authorities are `CLOSED_CONSUMED_STOP` and cannot be reactivated, reused, retried, or reclassified. Their exact bytes, this path-root correction authority, a combined Handoff, and a ledger are preserved in the exact7 checkpoint.
+
+### Cause separation
+
+The second failure cause is confirmed as a local patch-root binding error. An interactive payload transport or line-size limit is only a likely explanation for the first failure and remains unproved.
+
+### Step11, product, and progress disposition
+
+This administrative checkpoint advances Cycle001 technical acceptance by0. Plan G0-G10, Step0-10 readiness, Full R1, runtime-ready, Formal Source V4, V16 synthetic validity, production behavior, product behavior, UX evidence, and Cycle001 acceptance receive change0.
+
+The dependency back to Cycle001 is: noninteractive specification inspection → exact4 verification and standalone preparation → separately approved V3 creation → V16 synthetic validation → remaining Full R1/runtime/product/UX evidence → Cycle001 acceptance only under the complete acceptance contract.
+
+### Next boundary
+
+After remote exact7 postverification, the next authority must return directly to a noninteractive fixed-code specification inspection with a newly authorized source read. This checkpoint is not a technical step in that chain, and no further preservation-only authority is intended after successful postverification.

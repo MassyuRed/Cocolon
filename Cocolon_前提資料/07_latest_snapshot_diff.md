@@ -38753,3 +38753,34 @@ Any next session must fetch the owning V15 H1, this H2, the handoff, ledger, and
 - receipt commit/final head: resolve from the GitHub revision containing this additive postverification section
 
 This is storage verification, not technical execution, credit, authority consumption, or automatic progression.
+
+## 2026-08-06 V16 preparation STOP chain public preservation and path-root correction
+
+### Confirmed facts
+
+The following single-use authorities were activated and are now preserved with their exact bytes:
+
+1. `V16_STANDALONE_PREPARATION_CORRECTED_AUTHORITY_V1` — SHA-256 `27378f825214f0b201547fac439babffdea5097726026ff0a3c8b42058ce92a3` — `CLOSED_CONSUMED_STOP` at `COMMAND_PROCESSING_FAILURE` before exact4 verification.
+2. `V16_STANDALONE_PREPARATION_COMMAND_TRANSPORT_STOP_PUBLIC_PRESERVATION_V1` — SHA-256 `00c877c0093c4bfcb993b17e5bdf83fe8886ef813975adb3a30a60445925a49b` — `CLOSED_CONSUMED_STOP` at the proved session-root patch-path verification failure before file write.
+3. `V16_STANDALONE_PREPARATION_STOP_PUBLIC_PRESERVATION_PATH_ROOT_CORRECTION_V2` — SHA-256 `7a9c384e4a2678860f390a11120e847dfe61f5db26d178b7f22c926613c9fcc6` — approved exact1 to publish this additive checkpoint with fixed session-root patch paths.
+
+The first attempt completed one identity-gated nontechnical specification read and emitted C01-C04 source windows, but exact4 table verification remained0. The second attempt created only the exact empty checkpoint directory; file effect, tracked diff, review, commit, and GitHub effect were all0.
+
+### Inference, not confirmed fact
+
+An interactive payload transport or line-size limit likely caused the first failure. The root cause is unproved. The second failure cause is proved and limited to patch-root binding.
+
+### State, purpose, and Cycle001 connection
+
+- V15: `STATIC_ONLY_STOP`
+- V15 Receipt: `CLOSED_UNCONSUMED`
+- Full R1: `UNKNOWN_PRESERVED`
+- runtime-ready: `false`
+- Formal Source V4: `MATERIALIZED_FALSE_AND_UNPROVEN`
+- Cycle001: `NOT_ACCEPTED`
+- V16 technical credit: `0`
+- Cycle001 technical progress from this checkpoint: `0`
+
+This exact7 checkpoint exists only to make both STOP histories and the recovery boundary durable. It does not prove exact4 verification, standalone-program creation, V16 synthetic validity, runtime behavior, product behavior, UX quality, or Cycle001 acceptance.
+
+The next technical path is fixed as: noninteractive specification inspection → exact4 verification and program preparation → separately approved V3 creation → V16 synthetic validation → remaining Full R1/runtime/product/UX evidence → Cycle001 acceptance only when the complete acceptance contract passes. The exact authority bytes, full counters, and ledger are stored under the current implemented-materials documents owner in `V16_Standalone_Preparation_CommandTransport_Stop_20260806/`.

@@ -1,0 +1,207 @@
+AUTHORITY_ID=V16_STANDALONE_PREPARATION_STOP_PUBLIC_PRESERVATION_PATH_ROOT_CORRECTION_V2
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+
+PURPOSE
+Publish one durable additive checkpoint for the stopped V16 preparation chain,
+including the failed first preservation attempt.  Correct only the local
+apply_patch root binding.  Perform no technical retry.
+
+PRIOR_POSITION
+V16_STANDALONE_PREPARATION_COMMAND_TRANSPORT_STOP_PUBLIC_PRESERVATION_V1
+authorized exact5 public paths after four reviews, then one commit and one main
+ref update.
+
+OBSERVED_POSITION
+The V1 preservation authority identity matched and was activated exact1.
+All bound repository identities, existing append-owner blobs, raw identities,
+and exact-new file preimages matched.  The local checkpoint content was
+constructed.  The exact checkpoint directory was created once with mode 0755.
+The first apply_patch invocation used repository-relative paths while the patch
+tool resolved them from the session root.  Patch verification therefore failed
+on the absent session-root path before any file write.  No tracked local file,
+review, commit, ref, or remote GitHub effect occurred.  Remote main remains the
+bound predecessor.  V1 is CLOSED_CONSUMED_STOP and cannot be retried.
+
+CHANGE_BASIS
+The tool error named the missing session-root path, proving a local patch-root
+binding error.  This is administrative tooling failure, not source identity,
+exact4, transformer, V3, runtime, or product evidence.  The existing empty
+directory has no Git tree effect but is now an exact local preimage.
+
+CORRECTION
+Bind apply_patch paths to the fixed session root by prefixing every logical
+repository path with _repos/Cocolon/.  Reuse the already-created exact empty
+directory after one explicitly authorized direct emptiness check.  Preserve all
+three approved authority texts, both STOP events, and the unchanged technical
+state in one exact7 Git commit.
+
+CURRENT_BINDINGS
+SESSION_ROOT=/workspace/scratch/e97a00d75240
+LOCAL_REPOSITORY_ROOT=/workspace/scratch/e97a00d75240/_repos/Cocolon
+PATCH_PATH_PREFIX=_repos/Cocolon/
+COCOLON_REPOSITORY=MassyuRed/Cocolon
+COCOLON_BRANCH=main
+COCOLON_EXPECTED_HEAD=2c5058b242ec02ce49c77de4bfb9686c8ec536f0
+COCOLON_EXPECTED_TREE=4d64940c52da36a4b50c5d8080197fbae0b84d6d
+COCOLON_07_EXPECTED_BLOB=3d496f06f5a602747fdc3f7b4d6be0944bdbd603
+COCOLON_07_EXPECTED_SHA256=ccd8c32097d3d49fb79d23caf5f670fe44171fef9ec1e1ad9b1cfccc2a9458e2
+COCOLON_07_EXPECTED_BYTES=2336313
+PLAN_EXPECTED_BLOB=8cca7adbe054f445e16a5d678b3386e308872fa1
+PLAN_EXPECTED_SHA256=4aa63814fee5fa7a1dfce17d2adf9233fb86f727de6543330b721b2e903dee4a
+PLAN_EXPECTED_BYTES=1136748
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_EXPECTED_HEAD=315813c7bd3372462de926ddad74df567254a6b5
+MASHOS_API_EXPECTED_TREE=a641510e107d52bb910073f36604c85bd57af150
+PREPARATION_AUTHORITY_SHA256=27378f825214f0b201547fac439babffdea5097726026ff0a3c8b42058ce92a3
+PREPARATION_AUTHORITY_BYTES=9439
+PREPARATION_AUTHORITY_LF=181
+PREPARATION_AUTHORITY_CR=0
+PREPARATION_AUTHORITY_FINAL_LF=TRUE
+STOP_PRESERVATION_V1_AUTHORITY_SHA256=00c877c0093c4bfcb993b17e5bdf83fe8886ef813975adb3a30a60445925a49b
+STOP_PRESERVATION_V1_AUTHORITY_BYTES=7408
+STOP_PRESERVATION_V1_AUTHORITY_LF=157
+STOP_PRESERVATION_V1_AUTHORITY_CR=0
+STOP_PRESERVATION_V1_AUTHORITY_FINAL_LF=TRUE
+
+PRIOR_STOP_COUNTERS
+PREPARATION_AUTHORITY_ACTIVATION=1
+ADMIN_RECOVERY_FILES=42
+ADMIN_RECOVERY_TOTAL_BYTES=599376
+ADMIN_RECOVERY_MISMATCH=0
+SPECIFICATION_SOURCE_READ=1
+SPECIFICATION_SOURCE_IDENTITY_MATCH=TRUE
+OPERATIONAL_V2_READ=0
+EXACT_FRAGMENT_WINDOWS_EMITTED=4
+EXACT4_TABLE_VERIFIED=0
+PREPARATION_TERMINAL=COMMAND_PROCESSING_FAILURE
+TARGET_PARENT_CREATE=0
+TARGET_FILE_CREATE=0
+TECHNICAL_APPLY_PATCH=0
+PREPARATION_FREEZE=0
+PREPARATION_STATIC_REVIEW=0
+TRANSFORMER_EXECUTION=0
+V3_ACCESS=0
+V3_CREATE=0
+TECHNICAL_CREDIT=0
+
+PRESERVATION_V1_STOP_COUNTERS
+PRESERVATION_V1_AUTHORITY_ACTIVATION=1
+BOUND_IDENTITY_MATCH=TRUE
+NEW_CHECKPOINT_DIRECTORY_CREATE=1
+NEW_CHECKPOINT_DIRECTORY_MODE=0755
+CHECKPOINT_CONTENT_CONSTRUCTED=1
+PRESERVATION_APPLY_PATCH_INVOCATION=1
+PRESERVATION_APPLY_PATCH_VERIFICATION_FAILURE=1
+PRESERVATION_APPLY_PATCH_FILE_EFFECT=0
+LOCAL_TRACKED_FILE_EFFECT=0
+PRESERVATION_STATIC_REVIEW=0
+LOCAL_COMMIT=0
+GITHUB_BLOB_WRITE=0
+GITHUB_TREE_WRITE=0
+GITHUB_COMMIT_WRITE=0
+GITHUB_REF_UPDATE=0
+REMOTE_CHANGED_PATHS=0
+MASHOS_API_EFFECT=0
+TECHNICAL_CREDIT=0
+PRESERVATION_V1_TERMINAL=APPLY_PATCH_SESSION_ROOT_PATH_NOT_FOUND
+PRESERVATION_V1_STATE=CLOSED_CONSUMED_STOP
+
+EXACT_LOCAL_PREIMAGE
+The following JSON-unescaped UTF-8 directory must exist directly under the
+fixed local repository root, be a real directory with mode 0755, and contain
+zero directory entries:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806"
+Exactly one direct emptiness inspection of this known directory is authorized.
+Search, fallback, repository-wide traversal, and alternate directories are
+forbidden.  Each exact-new file below must be lstat ENOENT.  Both append-owner
+files must match all bound preimages.  The worktree and index must otherwise be
+clean.  Any mismatch is STOP.
+
+AUTHORIZED_LOGICAL_GIT_PATHS_EXACT7
+1. Exact-new:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/preparation_authority_v1.txt"
+Exact bytes: PREPARATION_AUTHORITY identity above.
+2. Exact-new:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/stop_preservation_authority_v1.txt"
+Exact bytes: STOP_PRESERVATION_V1_AUTHORITY identity above.
+3. Exact-new:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/path_root_correction_authority_v2.txt"
+Exact bytes: this newly approved V2 authority.
+4. Exact-new:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/Handoff.md"
+Record CURRENT_BINDINGS, both counter groups, confirmed root error, technical
+state, unproved transport-limit inference, and next boundary.
+5. Exact-new:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifact_ledger.tsv"
+Bind exact authority files exact3 and Handoff by path, bytes, LF, CR, final LF,
+mode 0644, SHA-256, type, and status.
+6. Append-only:
+"Cocolon_\u524d\u63d0\u8cc7\u6599/07_latest_snapshot_diff.md"
+7. Append-only:
+"EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md"
+
+LOCAL_PATCH_BOUNDARY
+Use exactly one apply_patch invocation from SESSION_ROOT.  Every patch tool path
+must equal PATCH_PATH_PREFIX plus one logical repository path above.  The patch
+must add exact5 files and append exact2 suffixes, for logical changed paths
+exact7.  No other local file or directory effect is authorized.  Do not claim
+exclusive-open or nofollow behavior for apply_patch.  On patch failure or any
+unexpected path/effect, STOP with retry0 and repair0.
+
+CONTENT_BOUNDARY
+The checkpoint must state both authorities are CLOSED_CONSUMED_STOP and cannot
+be reactivated, reused, retried, or reclassified.  The first STOP is
+COMMAND_PROCESSING_FAILURE before exact4 verification.  The second STOP is the
+proved session-root patch-path error before file write.  The possible
+interactive payload limit remains explicitly UNPROVED.
+No content may claim exact4 verification, standalone-program creation, V16
+technical progress, runtime success, product success, or Cycle001 acceptance.
+
+FREEZE_AND_STATIC_REVIEW_EXACT4
+After the exact patch succeeds, freeze the exact5 new files and exact2 suffixes
+by logical path, bytes, LF, CR, final LF, mode, Git-style blob, and SHA-256.
+Prove both append-owner prefixes are byte-identical to their bound predecessor
+blobs.  Three read-only subagents and Karen independently review scope,
+identities, counters, historical preservation, current-state wording, exact7
+paths, and absence of technical-credit inflation.  All four reviews must PASS.
+No repair, second apply_patch, refreeze, or review retry is authorized.
+
+AUTHORIZED_GITHUB_CONNECTOR_PUBLICATION
+After four PASS results only, use the installed GitHub connector, not a PR flow,
+to create the exact7 full-content blobs, one tree based on COCOLON_EXPECTED_TREE,
+one commit with sole parent COCOLON_EXPECTED_HEAD, and one non-force main ref
+update.  Commit message:
+Preserve V16 preparation STOP and path-root correction
+Before the ref update, remote main must still equal COCOLON_EXPECTED_HEAD.
+No branch creation, PR, merge, force update, second commit, local git commit, or
+CLI push is authorized.  Any connector failure is STOP with retry0.
+
+REMOTE_POSTVERIFICATION
+Fetch remote main after the ref update.  Verify one direct child, changed paths
+exact7, missing0, extra0, all seven remote blobs, raw SHA-256, bytes, LF, CR,
+final LF, mode 100644, both append-prefix invariants, and clean equivalence of
+the local exact7 bytes to remote.  Any mismatch is STOP.  No repair, amend,
+force update, retry, reclassification, or second publication is authorized.
+
+EXPLICITLY_FORBIDDEN
+Another specification-source read; exact4 verification; target-parent creation;
+standalone-program creation; transformer execution; syntax check; import; V3
+access or creation; BBEB or carrier execution; private V15 access; mashos-api
+modification; runtime work; Formal Source V4 work; and technical credit.
+
+STATE_AFTER_PASS_OR_STOP
+V15 remains STATIC_ONLY_STOP.
+V15 Receipt remains CLOSED_UNCONSUMED.
+Full R1 remains UNKNOWN_PRESERVED.
+Runtime-ready remains false.
+Formal Source V4 remains MATERIALIZED_FALSE_AND_UNPROVEN.
+Cycle001 remains NOT_ACCEPTED.
+V16 technical credit remains zero.
+
+NEXT_BOUNDARY_AFTER_PASS
+Present one separate identity-bound technical retry authority using a
+noninteractive fixed-code inspection process and a newly authorized
+specification read.  Approval of this V2 preservation correction approves
+neither that retry nor technical execution.

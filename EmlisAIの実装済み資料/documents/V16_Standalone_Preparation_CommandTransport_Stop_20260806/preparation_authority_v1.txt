@@ -1,0 +1,181 @@
+AUTHORITY_ID=V16_STANDALONE_PREPARATION_CORRECTED_AUTHORITY_V1
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+
+PURPOSE
+Create, freeze, and statically review exactly one standalone V2-to-V3
+verifier/transformer program.  Do not execute that program and do not create V3.
+
+NEW_INFORMATION_ON_PASS
+Whether one frozen, reviewable program can encode the exact C01-C04 byte
+transform while preserving every byte outside those exact four fragments.
+
+UNCERTAINTY_CLOSED_ON_PASS
+Only the preparation-time program-shape uncertainty is closed.
+Runtime correctness, V3 correctness, V16 technical success, Full R1, and
+Cycle001 acceptance remain unproved.
+
+PRODUCT_AND_UX_CONNECTION
+This preparation prevents an unreviewed byte transformer from becoming an
+input to later natural-language-surface evidence.  It creates no user-facing
+behavior and receives no product or technical credit by itself.
+
+PRIOR_POSITION
+The durable Handoff separates standalone-program preparation from the future
+operational V2 fresh read, C01-C04 transform, and V3 exact-new creation.
+
+PROPOSED_POSITION
+Keep the future operational V2 read, transform, and V3 creation separate, while
+classifying one frozen public checkpoint-copy inspection as nontechnical
+specification work needed to make the standalone program statically reviewable.
+
+CHANGE_BASIS
+The durable checkpoint does not publish the exact old bytes needed for C02-C04.
+The previous proposal called the needed preparation inspection a V2 fresh read,
+which conflicted with the Handoff phase boundary.  The former local
+v16_retry2_draft directory and target parent are absent in this workspace.
+
+CORRECTION
+Permit exactly one nontechnical specification-source inspection of the frozen
+public checkpoint copy of V2.  This is a bounded amendment to the preparation
+boundary only.  It is not the future operational V2 read, transform, helper
+execution evidence, public-input credit, or V16 technical evidence.
+Create exactly one new local staging directory because its exact parent is
+currently absent.  No exact42 artifact is restored or modified.
+
+CURRENT_BINDINGS
+COCOLON_REPOSITORY=MassyuRed/Cocolon
+COCOLON_BRANCH=main
+COCOLON_COMMIT=2c5058b242ec02ce49c77de4bfb9686c8ec536f0
+COCOLON_TREE=4d64940c52da36a4b50c5d8080197fbae0b84d6d
+CHECKPOINT_HANDOFF_BLOB=607775caa335cc2c70daeb9285d7049bfc42c012
+CHECKPOINT_HANDOFF_SHA256=56eee112c4c93e937021aad2116ef92ab3088fce20d516e3c28afe6da70885ad
+CHECKPOINT_LEDGER_BLOB=58a2e53355c6192fd3c31c3fff69a400f858f47d
+CHECKPOINT_LEDGER_SHA256=832030b0deefe0e7bb9d9fa55352526ce1906f937a3a1fdfa08432f0c498f4f6
+CHECKPOINT_LEDGER_FILES=42
+CHECKPOINT_LEDGER_TOTAL_BYTES=599376
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_BRANCH=main
+MASHOS_API_COMMIT=315813c7bd3372462de926ddad74df567254a6b5
+MASHOS_API_TREE=a641510e107d52bb910073f36604c85bd57af150
+MASHOS_API_ROLE=NO_CHANGE_BASELINE_ONLY
+
+EXACT_SPECIFICATION_SOURCE
+WORKSPACE_ROOT=/workspace/scratch/e97a00d75240
+COCOLON_CLONE_ROOT=/workspace/scratch/e97a00d75240/_repos/Cocolon
+SOURCE_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2.js"
+SOURCE_RELPATH_DECODING=JSON_UNESCAPE_TO_UTF8_EXACT1
+SOURCE_GIT_BLOB=69ca116c3bc8c618792f3da9bd72686a4759fd8d
+SOURCE_BYTES=41972
+SOURCE_LF=1339
+SOURCE_CR=0
+SOURCE_FINAL_LF=TRUE
+SOURCE_MODE=0644
+SOURCE_SHA256=0d2dcffe2d55c08e97dfcf588e8a13b6b26f8e5c337ee549e3ffcf41c300dcca
+
+EXACT_LOCAL_EFFECTS
+TARGET_PARENT=/workspace/scratch/e97a00d75240/v16_retry2_draft
+TARGET_PARENT_PREIMAGE=LSTAT_ENOENT
+TARGET_PARENT_EFFECT=MKDIR_EXACT1_MODE_0755
+TARGET_PATH=/workspace/scratch/e97a00d75240/v16_retry2_draft/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2_to_v3_standalone_verifier_transformer_v1.js
+TARGET_PREIMAGE=LSTAT_ENOENT_AFTER_PARENT_CREATION
+TARGET_CREATE=APPLY_PATCH_ADD_FILE_EXACT1
+TARGET_EXPECTED_MODE=0644
+OTHER_LOCAL_FILE_EFFECTS=0
+COCOLON_TRACKED_FILE_EFFECTS=0
+MASHOS_API_FILE_EFFECTS=0
+
+AUTHORIZED_SPECIFICATION_INSPECTION
+1. Reverify the bound Cocolon commit, tree, Handoff, ledger, exact42 count,
+   exact42 total bytes, source blob, and clean clone state.  Administrative
+   recovery verification is not preparation or technical credit.
+2. Resolve SOURCE_RELPATH_JSON_ASCII exactly once to UTF-8 under the fixed clone
+   root.  Use the direct locator only.  Search, glob, fallback, cwd-derived
+   input, environment-derived input, readdir, and opendir are forbidden.
+3. Require lstat regular non-symlink, realpath equality to the direct literal
+   path, then open O_RDONLY|O_NOFOLLOW|O_NONBLOCK.  Require fstat regular,
+   mode 0644, size 41972, one positional whole-buffer payload read, one EOF
+   probe, close success, LF 1339, CR 0, final LF, and exact SHA-256 match.
+4. This one source-open session is SPECIFICATION_SOURCE_READ_EXACT1.
+   OPERATIONAL_V2_READ=0 and TECHNICAL_CREDIT=0.
+5. Use that same in-memory buffer only to construct and verify an exact old/new
+   fragment table for C01-C04.  Each old fragment must occur exactly once, the
+   four old ranges must be nonoverlapping, and the proposed new fragments must
+   implement only these changes:
+   C01: V2 version and self-path identity become V3.
+   C02: backtick text is opaque, $#name is atomic, and regex-versus-division
+        handling has a closed deterministic decision.
+   C03: a removable whole-RHS outer parenthesis must have its matching close at
+        the RHS final byte and must be balanced.
+   C04: after only the allowed balanced outer-parenthesis removal, the marker
+        argument must be exactly one decoded string equal to the RHS marker.
+6. The inspection process may emit only the exact fragment table and sanitized
+   failure codes.  It creates no file and is not reusable execution evidence.
+7. If exact fragments remain underdetermined, cardinality is not exactly four,
+   source identity differs, or any read/close check fails, STOP before mkdir.
+
+AUTHORIZED_PROGRAM_PREPARATION
+1. Fresh-lstat TARGET_PARENT and require ENOENT.  Create that exact directory
+   once with mode 0755.  Do not restore the former exact42 local directory.
+2. Fresh-lstat TARGET_PATH and require ENOENT.
+3. Add TARGET_PATH with exactly one apply_patch Add File operation from the
+   fixed WORKSPACE_ROOT.  Do not claim exclusive-open or nofollow properties
+   for apply_patch itself.
+4. The standalone program must, only when separately authorized in the future:
+   a. accept only explicit direct arguments fixed by that future authority;
+   b. independently perform a new operational V2 identity-gated read;
+   c. require the same four nonoverlapping exact old fragments, cardinality one
+      each, and prove all bytes outside those four ranges unchanged;
+   d. transform C01-C04 in memory only;
+   e. require the future V3 target preimage to be lstat ENOENT;
+   f. write no V3 file and instead emit only one verified canonical Add File
+      apply_patch buffer for the exact V3 path;
+   g. on failure emit stdout bytes zero, one sanitized stderr code, and nonzero
+      exit; and
+   h. use no network, child process, eval, dynamic code, cwd/env input, search,
+      glob, readdir, opendir, fallback locator, temp file, or direct file write.
+5. Freeze TARGET_PATH after creation by recording lstat/fstat type and mode,
+   bytes, LF, CR, final-LF state, Git-style blob ID, and SHA-256.  No edit is
+   permitted after freeze under this authority.
+
+STATIC_REVIEW_EXACT4
+Perform four independent read-only static reviews of the frozen target and the
+recorded fragment table.  Do not reread the specification source.
+R1=LEXICAL_STATE_AND_SANITIZED_FAILURE_REVIEW
+R2=EXACT4_CARDINALITY_NONOVERLAP_AND_BYTE_PRESERVATION_REVIEW
+R3=CANONICAL_ADD_FILE_PATCH_AND_NO_DIRECT_WRITE_REVIEW
+R4=AUTHORITY_BOUNDARY_DEPENDENCY_AND_WHOLE_SYSTEM_REVIEW
+Subagents are read-only.  Karen owns the final review and judgment.
+
+PASS_CONDITION
+All four static reviews PASS independently, the frozen target identity remains
+unchanged after review, and every authorized effect counter matches exactly.
+
+STOP_CONDITION
+On any mismatch, ambiguity, review failure, unexpected preimage, or unauthorized
+effect, STOP.  Repair, second apply_patch, refreeze, retry, substitution, and
+automatic progression are forbidden under this authority.
+
+EXPLICITLY_FORBIDDEN
+Transformer execution; syntax check; import; V3 access, creation, or write;
+technical source or harness execution; BBEB reactivation or reuse; corrected
+carrier execution; private V15 access; Formal Source V4 work; GitHub write;
+commit; push; PR; mashos-api modification; and V16 technical execution.
+
+STATE_ON_PASS_OR_STOP
+V15 remains STATIC_ONLY_STOP.
+V15 Receipt remains CLOSED_UNCONSUMED.
+Full R1 remains UNKNOWN_PRESERVED.
+Runtime-ready remains false.
+Formal Source V4 remains MATERIALIZED_FALSE_AND_UNPROVEN.
+Cycle001 remains NOT_ACCEPTED.
+V16 technical credit remains zero.
+
+NEXT_BOUNDARY_AFTER_PASS
+Report the frozen target identity and exact four review results.  Because a
+local hash is not durable persistence, propose a separate exact GitHub public
+preservation authority before any operational execution authority.  Only after
+approved publication and postverification may a newly current-identity-bound
+operational V2-read/transform/V3-create authority be proposed.  Approval of
+this authority approves neither later authority.
