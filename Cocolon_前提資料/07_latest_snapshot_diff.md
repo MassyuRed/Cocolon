@@ -38739,3 +38739,17 @@ The next technical action is an exact-new standalone V2-to-V3 verifier/transform
 ### Continuity verification rule
 
 Any next session must fetch the owning V15 H1, this H2, the handoff, ledger, and all exact42 artifact bytes from GitHub and verify their identities before resuming. Until then continuity is `CURRENT_CONTINUITY_UNVERIFIED`. Hashes without stored bytes, chat history, and scratch paths are not sufficient reconstruction evidence.
+
+### GitHub payload postverification
+
+- payload commit/tree: `e6c5e1ff783e8ff54652f50f585102758bfae40f` / `fd918e159efc025b6d2459f70385655d46a6664c`
+- parent: `a8d6c76fcc88035793e97d5afad815867cea893f`
+- changed paths / expected paths / missing / extra: `55 / 55 / 0 / 0`
+- local full-byte Git blob identity match: `55 / 55`
+- remote path-to-blob identity match: `55 / 55`
+- complete remote base64 length check: `54 / 55`; the one large 07 body was omitted by the file-content response, while its remote blob SHA-1 matched the locally full-byte-verified Git blob
+- relation: direct child / ahead1 / behind0
+- main after payload verification: `e6c5e1ff783e8ff54652f50f585102758bfae40f`
+- receipt commit/final head: resolve from the GitHub revision containing this additive postverification section
+
+This is storage verification, not technical execution, credit, authority consumption, or automatic progression.

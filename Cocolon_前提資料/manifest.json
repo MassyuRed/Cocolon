@@ -16702,6 +16702,23 @@
       "handoff_and_ledger": 2,
       "artifact_files": 42,
       "artifact_paths_exact_source": "artifact_ledger.tsv"
+    },
+    "github_publication_receipt": {
+      "payload_commit": "e6c5e1ff783e8ff54652f50f585102758bfae40f",
+      "payload_tree": "fd918e159efc025b6d2459f70385655d46a6664c",
+      "parent": "a8d6c76fcc88035793e97d5afad815867cea893f",
+      "changed_paths": 55,
+      "expected_paths": 55,
+      "missing_paths": 0,
+      "extra_paths": 0,
+      "local_full_byte_git_blob_identity_match": 55,
+      "remote_path_blob_identity_match": 55,
+      "complete_remote_base64_length_check": 54,
+      "large_file_content_body_omitted_but_blob_identity_matched": 1,
+      "ahead_by": 1,
+      "behind_by": 0,
+      "payload_postverified": true,
+      "receipt_commit_and_final_head": "resolve_from_github_revision_containing_this_receipt"
     }
   },
   "latest_modified_premise_files_2026_08_02_full_audit_and_corrections": [

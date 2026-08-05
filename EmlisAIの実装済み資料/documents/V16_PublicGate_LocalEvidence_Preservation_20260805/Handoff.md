@@ -133,3 +133,21 @@ Then prepare an exact-new standalone V2-to-V3 verifier/transformer without inlin
 ## Session continuity rule
 
 The canonical durable-recording rule is `Cocolon_前提資料/14_cocolon_continuous_work_recording_and_emergency_handoff.md`. From this checkpoint onward, work state must be persisted incrementally during the task; waiting for a user request or a planned end-of-session handoff is forbidden.
+
+## GitHub publication verification
+
+- payload commit: `e6c5e1ff783e8ff54652f50f585102758bfae40f`
+- payload tree: `fd918e159efc025b6d2459f70385655d46a6664c`
+- parent: `a8d6c76fcc88035793e97d5afad815867cea893f`
+- payload changed paths: exact `55`
+- expected checkpoint paths: exact `55`
+- missing / extra paths: `0 / 0`
+- local full-byte Git blob identity match: `55 / 55`
+- remote path-to-blob identity match: `55 / 55`
+- complete remote base64 content returned and length-checked: `54 / 55`
+- large `07_latest_snapshot_diff.md` content body omitted by the file-content response: exact1; its remote blob SHA-1 matched the locally full-byte-verified Git blob identity
+- payload relation: one direct child / ahead `1` / behind `0`
+- main immediately after payload verification: `e6c5e1ff783e8ff54652f50f585102758bfae40f`
+- postverification receipt commit and final head: resolve from the GitHub revision containing this additive section
+
+This verification records storage and changed-path integrity only. Technical credit, execution, approval, V16 progression, and automatic progression remain `0 / 0 / 0 / 0 / false`.
