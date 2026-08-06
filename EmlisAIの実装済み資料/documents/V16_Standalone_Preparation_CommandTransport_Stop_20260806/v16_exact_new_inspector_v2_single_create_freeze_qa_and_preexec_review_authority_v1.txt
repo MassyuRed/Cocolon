@@ -1,0 +1,744 @@
+AUTHORITY_ID=V16_EXACT_NEW_INSPECTOR_V2_SINGLE_CREATE_FREEZE_QA_AND_PREEXEC_REVIEW_AUTHORITY_V1
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+
+PURPOSE
+Create an exact-new inspector V2 and public synthetic harness exactly once,
+freeze and durably publish those unreviewed bytes together with the verified V4
+recovery PASS, then run bounded published-byte syntax/synthetic QA and four
+independent pre-execution reviews and durably publish their terminal result.
+Do not open/read the specification-source payload, invoke V2 against that
+source, produce canonical exact4 output, create or execute a standalone
+transformer, or access/create V3.
+
+WHY_THIS_IS_NEEDED
+Published inspector V1 passed B_R1 but failed B_R2, B_R3, and B_R4.  The exact
+defects are terminal-output admission, C01-C04 construction/identification, and
+the proof that an absolute target and repository-relative Add File header name
+the same object.  V4 durably preserved that STOP.  Cycle001 cannot return to
+the one-read exact4 gate until a corrected exact-new inspector passes the
+pre-execution gate.  This authority performs that material correction; it does
+not repeat the STOP or insert a preservation-only authority.
+
+NEW_INFORMATION_ON_PASS
+1. exact public inspector V2 and synthetic harness bytes exist;
+2. their published bytes pass syntax, public-safety, policy, and fixed
+   synthetic-fixture QA;
+3. four independent reviews pass the corrected B_R1-B_R4 contract; and
+4. the next separate authority can perform one newly authorized
+   specification-source read for exact4/program preparation without repairing
+   or refreezing V2.
+
+UNCERTAINTY_CLOSED_ON_PASS
+Only exact-new inspector implementation and pre-execution admission uncertainty
+is closed.  PASS does not prove real-source recipe match, exact4, a standalone
+program, an operational V2 read, V3, V16 synthetic validity, Full R1, runtime,
+product, UX, or Cycle001 acceptance.
+
+NOT_AN_ALIAS_REPETITION
+V4 preserved failure evidence.  This authority creates new code bytes, tests
+them on fixed public fixtures, and reviews them.  The V4 actual postverification
+receipt is included with the same material Stage A publication; no planned
+preservation-only authority occurs before or after this work.
+
+PRODUCT_AND_UX_CONNECTION
+V2 gates the future model-free natural-language-surface candidate.  Correcting
+it prevents malformed or underconstrained transformation logic from becoming
+false V16 evidence.  No user-facing behavior changes here, and no runtime,
+product, UX, V16-technical, or Cycle001-acceptance credit is granted.
+
+SUPERSEDED_UNAPPROVED_PROPOSAL
+OLD_ID=V16_EXACT_NEW_INSPECTOR_V2_IMPLEMENTATION_FREEZE_AND_PREEXEC_STATIC_REVIEW_AUTHORITY_V1
+OLD_SHA256=f7cd1cfa584b67304a2c0af853278ec07e22bbd0b69ffbb1bd83797ca83dd75d
+OLD_BYTES=36389
+OLD_LF=627
+OLD_CR=0
+OLD_FINAL_LF=TRUE
+OLD_STATE=WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0
+OLD_ERRORS=MUTABLE_QA_CYCLES_NOT_DURABLY_CHECKPOINTED;FINAL_EXACT10_GATE_MISSING;STAGE_B_LOCAL_GATE_MISSING;SOURCE0_CONFLICT_WITH_FULL_WORKTREE_CHECKOUT;INSPECTOR_RUNTIME_ROOT_INTERFACE_UNDEFINED;B_R2_SHORT_WRITE_AMBIGUOUS;C04_ESCAPE_SET_UNBOUND
+CURRENT_OWNER=V16_EXACT_NEW_INSPECTOR_V2_SINGLE_CREATE_FREEZE_QA_AND_PREEXEC_REVIEW_AUTHORITY_V1
+
+CONFIRMED_CURRENT_BASE
+REPOSITORY=MassyuRed/Cocolon
+BRANCH=main
+OBSERVED_MAIN=419ed9dcd2ee00a863f14e4a5186aeb7581d3f61
+OBSERVED_TREE=3ec1c54b7f66b94582a47313f4ce110881ea72dd
+OBSERVED_PARENT=b484a0f84c4bde9dd98a07a5ede89464240a6cdc
+OBSERVED_COMMIT_MESSAGE=Preserve V16 Stage B static-review STOP and patch mismatch
+OBSERVED_CHANGED_PATHS=EXACT7
+OBSERVED_MISSING=0
+OBSERVED_EXTRA=0
+OBSERVED_UNAUTHORIZED=0
+This is a proposal-time preimage, not a required future latest-main identity.
+Unrelated later HEAD advancement alone is not STOP when every authorized target
+preimage is unchanged.
+
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_BRANCH=main
+MASHOS_API_OBSERVED_HEAD=315813c7bd3372462de926ddad74df567254a6b5
+MASHOS_API_OBSERVED_TREE=a641510e107d52bb910073f36604c85bd57af150
+MASHOS_API_ROLE=NO_CHANGE_BASELINE_ONLY
+MASHOS_UNRELATED_HEAD_ADVANCE_ALONE_IS_NOT_STOP=TRUE
+
+CURRENT_RULE_BINDINGS
+RULE11_RELPATH_JSON_ASCII="Cocolon_\u524d\u63d0\u8cc7\u6599/11_cocolon_github_transport_and_session_continuity.md"
+RULE11_BLOB=a8ffd078eac189562004c6e98494156ea6c12582
+RULE11_SHA256=1d9f7b9af68d2da0da40f8c5649b0cb5311d44d6cd2fedbca4f9f3a0a47eb59e
+RULE11_BYTES=44263
+RULE11_LF=892
+RULE11_CR=0
+RULE11_FINAL_LF=TRUE
+RULE11_MODE=0644
+RULE14_RELPATH_JSON_ASCII="Cocolon_\u524d\u63d0\u8cc7\u6599/14_cocolon_continuous_work_recording_and_emergency_handoff.md"
+RULE14_BLOB=e2bf065934a76ab6fd536fbdc8a8aab2122cef41
+RULE14_SHA256=36bfc8ef02a2be4397cfd50d63a7b2a9ab57ee394c1bee7148d8e92be9b6e162
+RULE14_BYTES=5614
+RULE14_LF=85
+RULE14_CR=0
+RULE14_FINAL_LF=TRUE
+RULE14_MODE=0644
+ATTITUDE17_RELPATH_JSON_ASCII="Cocolon_\u524d\u63d0\u8cc7\u6599/work_attitude_rules_for_karen/17_continuous_durable_work_recording_and_emergency_handoff.txt"
+ATTITUDE17_BLOB=b4bf0392028cec42fef39b75bb8a0fbcc1ec046b
+ATTITUDE17_SHA256=73fba30822cea333e085bb67bfab740e68430185b062079b10da42368d6cb251
+ATTITUDE17_BYTES=1876
+ATTITUDE17_LF=15
+ATTITUDE17_CR=0
+ATTITUDE17_FINAL_LF=TRUE
+ATTITUDE17_MODE=0644
+GITHUB_METHOD_AND_COMPLETION_OWNER=RULE11_CURRENT_NORMATIVE_CONTRACT
+CONTINUOUS_RECORDING_OWNERS=RULE14_AND_ATTITUDE17
+
+CURRENT_OWNER_BINDINGS
+HANDOFF_BLOB=b2f04b8c156a423fb36544261cb4c6732c2be804
+HANDOFF_SHA256=a9518c30c43f00cee141651fac3bd73f1dde8172192dc128d39a2ba13c3a657a
+HANDOFF_BYTES=12895
+HANDOFF_LF=213
+HANDOFF_CR=0
+HANDOFF_FINAL_LF=TRUE
+HANDOFF_MODE=0644
+LEDGER_BLOB=9bf55de5d25dd1ac33ea9ed859b22c281f17e579
+LEDGER_SHA256=b2cf04d3fed01fbf5dd162475dc873553a6b824c0e03256e45d62a9ab684716b
+LEDGER_BYTES=2482
+LEDGER_LF=14
+LEDGER_CR=0
+LEDGER_FINAL_LF=TRUE
+LEDGER_MODE=0644
+SNAPSHOT_BLOB=3e9edff714e45de3b3d3ae0e4765ce84d2f402d9
+SNAPSHOT_SHA256=c6b13e8297e48072b456c521354db5575857dc323ef760bc54f7fb2b93561925
+SNAPSHOT_BYTES=2341941
+SNAPSHOT_LF=38806
+SNAPSHOT_CR=0
+SNAPSHOT_FINAL_LF=TRUE
+SNAPSHOT_MODE=0644
+PLAN_BLOB=1cb425e54af1557d57259d0e68ec3777e77f4b40
+PLAN_SHA256=40562a917c589164d66d941aced503f5fd54059814506547faae141bc2dd1b8e
+PLAN_BYTES=1141078
+PLAN_LF=17982
+PLAN_CR=0
+PLAN_FINAL_LF=TRUE
+PLAN_MODE=0644
+
+V4_RECOVERY_PASS_BINDING
+V4_AUTHORITY_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/stage_b_local_patch_postimage_correction_and_publication_authority_v4.txt"
+V4_AUTHORITY_BLOB=e0e66d04944ad69dfa9d958410a9bf4bb1fcc7ea
+V4_AUTHORITY_SHA256=7c2108ba27dd35116f95466984929037a30bfb84c71c218eac9bc83c2f795d77
+V4_AUTHORITY_BYTES=26383
+V4_AUTHORITY_LF=529
+V4_AUTHORITY_CR=0
+V4_AUTHORITY_FINAL_LF=TRUE
+V4_AUTHORITY_MODE=0644
+V4_ACTIVATION=1
+V4_CONSUMPTION=1
+V4_STATE=CLOSED_CONSUMED_PASS
+V4_TERMINAL=RECOVERY_EXACT7_REMOTE_POSTVERIFY_PASS
+V4_WRITE_GROUP_EXACT1=419ed9dcd2ee00a863f14e4a5186aeb7581d3f61
+V4_WRITE_GROUP_CHANGED_PATH_UNION=EXACT7
+V4_WRITE_GROUP_UNAUTHORIZED=0
+V4_REMOTE_POSTVERIFY=PASS
+V4_SOURCE_PAYLOAD_OPEN=0
+V4_SOURCE_PAYLOAD_READ=0
+V4_TECHNICAL_CREDIT=0
+
+PUBLISHED_V1_REVIEW_BINDING
+INSPECTOR_V1_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_noninteractive_inspector_generator_v1.js"
+INSPECTOR_V1_BLOB=ca58518abf9df0b9abd6f3650121a75b3add1e34
+INSPECTOR_V1_SHA256=6d5cfdfa346a7812c3130dea10f49dfb4f40b41a94701008967c55c83e655f8e
+INSPECTOR_V1_BYTES=35152
+INSPECTOR_V1_LF=920
+INSPECTOR_V1_CR=0
+INSPECTOR_V1_FINAL_LF=TRUE
+INSPECTOR_V1_MODE=0644
+INSPECTOR_V1_STATE=FROZEN_REVIEWED_FAIL_REAL_SOURCE_NONEXECUTED_NONCREDIT_IMMUTABLE
+REVIEW_RECEIPT_V1_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/preexecution_inspector_review_receipt_v1.md"
+REVIEW_RECEIPT_V1_BLOB=1e53bb3ce33586714e1c1e94de9886db3f9ff6ef
+REVIEW_RECEIPT_V1_SHA256=924d82ce89bd7de8e046f44500ea7df77b85fb6b33e7a91e193d8a3a9ed095dd
+REVIEW_RECEIPT_V1_BYTES=9420
+REVIEW_RECEIPT_V1_LF=127
+REVIEW_RECEIPT_V1_CR=0
+REVIEW_RECEIPT_V1_FINAL_LF=TRUE
+REVIEW_RECEIPT_V1_MODE=0644
+B_R1_V1=PASS
+B_R2_V1=FAIL
+B_R3_V1=FAIL
+B_R4_V1=FAIL
+B_PASS_V1=1
+B_FAIL_V1=3
+V3_PREPARATION_STATE=CLOSED_CONSUMED_STOP
+V3_PREPARATION_TERMINAL=PREEXEC_STATIC_REVIEW_FAIL
+
+SPECIFICATION_SOURCE_METADATA_ONLY_BINDING
+SPEC_SOURCE_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2.js"
+SPEC_SOURCE_BLOB=69ca116c3bc8c618792f3da9bd72686a4759fd8d
+SPEC_SOURCE_SHA256=0d2dcffe2d55c08e97dfcf588e8a13b6b26f8e5c337ee549e3ffcf41c300dcca
+SPEC_SOURCE_BYTES=41972
+SPEC_SOURCE_LF=1339
+SPEC_SOURCE_CR=0
+SPEC_SOURCE_FINAL_LF=TRUE
+SPEC_SOURCE_MODE=0644
+The metadata is inherited from current public owners.  This authority does not
+fetch, materialize, lstat, open, hash, or read the specification-source path or
+payload and does not access candidate windows.  Historical reads remain
+historical and are not reclassified.
+
+FINITE_PUBLIC_INPUT_ALLOWLIST
+STAGE_A_PUBLIC_FILE_READ_ALLOWLIST_EXACT10=RULE11;RULE14;ATTITUDE17;HANDOFF;LEDGER;SNAPSHOT;PLAN;V4_AUTHORITY;INSPECTOR_V1;REVIEW_RECEIPT_V1
+APPROVED_AUTHORITY_EXTERNAL_INPUT=APPROVED_AUTHORITY_LOCAL_SOURCE_EXACT_EXTERNALLY_APPROVED_IDENTITY
+STAGE_B_PUBLIC_FILE_READ_ALLOWLIST_EXACT14=STAGE_A_NORMAL_EXACT9_AFTER_REMOTE_PASS_PLUS_RULE11_RULE14_ATTITUDE17_INSPECTOR_V1_REVIEW_RECEIPT_V1
+REMOTE_METADATA_ALLOWLIST=Cocolon_current_main_commit_tree_parents_and_exact_target_preimages;mashos_api_current_head_tree
+All other file/content reads in the applicable Stage are0.  In particular:
+specification source,
+candidate windows, private V15 paths, BBEB/carrier execution inputs, mashos
+project files, transitive referenced owners, repository search, glob,
+readdir/opendir, cwd/env fallback, network lookup, and guessed locators are0.
+
+FIXED_LOCAL_PATHS
+SESSION_ROOT=/workspace/scratch/e97a00d75240
+ADMIN_CLONE_ROOT=/workspace/scratch/e97a00d75240/_repos/Cocolon
+APPROVED_AUTHORITY_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_EXACT_NEW_INSPECTOR_V2_SINGLE_CREATE_FREEZE_QA_AND_PREEXEC_REVIEW_AUTHORITY_V1_FINAL.txt
+STAGE_A_WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_inspector_v2_single_create_v1
+STAGE_A_STOP_WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_inspector_v2_stage_a_stop_v1
+STAGE_B_WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_inspector_v2_review_v1
+STAGE_B_STOP_WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_inspector_v2_stage_b_stop_v1
+INSPECTOR_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_SINGLE_CREATE_CANDIDATE.js
+HARNESS_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_SINGLE_CREATE_SYNTHETIC_HARNESS.js
+FREEZE_RECEIPT_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_IMPLEMENTATION_FREEZE_RECEIPT.md
+V4_RECEIPT_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_STAGE_B_RECOVERY_V4_POSTVERIFY_RECEIPT.md
+STAGE_A_FAILURE_BUNDLE_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_SINGLE_CREATE_FAILURE_BUNDLE.json
+STAGE_A_STOP_RECEIPT_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_SINGLE_CREATE_STOP_RECEIPT.md
+STAGE_B_REVIEW_RECEIPT_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_PREEXEC_REVIEW_RECEIPT.md
+STAGE_B_STOP_RECEIPT_LOCAL_SOURCE=/workspace/scratch/e97a00d75240/V16_INSPECTOR_V2_PREEXEC_STOP_RECEIPT.md
+At activation, fresh lstat every pending worktree/file target except
+APPROVED_AUTHORITY_LOCAL_SOURCE and require ENOENT.  Verify the authority source
+regular/non-symlink, direct realpath equality, mode0644, exact externally
+approved bytes/LF/CR/finalLF/SHA-256, whole read/close exact1.  Before each later
+creation, require only that creation's pending targets ENOENT and require every
+already-created/frozen input to retain its exact type/realpath/mode/identity.
+Before Stage A, Stage A STOP, Stage B, or Stage B STOP worktree creation, require
+only its respective root ENOENT.  Require SESSION_ROOT and ADMIN_CLONE_ROOT
+direct realpath equality, expected directory/non-symlink types, and leave the
+admin clone working tree untouched.  Any existing/unreadable/unknown pending
+target or changed frozen input is PREFLIGHT_LOCAL_PREIMAGE_STOP; no overwrite,
+reset, clean, normal checkout, or delete.
+
+PUBLIC_PATHS_JSON_ASCII
+CHECKPOINT_DIR="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806"
+AUTHORITY_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_exact_new_inspector_v2_single_create_freeze_qa_and_preexec_review_authority_v1.txt"
+V4_RECEIPT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/stage_b_recovery_v4_postverification_receipt_v1.md"
+INSPECTOR_V2_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_noninteractive_inspector_generator_v2.js"
+SYNTHETIC_HARNESS_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_inspector_v2_synthetic_harness_v1.js"
+FREEZE_RECEIPT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_inspector_v2_implementation_freeze_receipt_v1.md"
+STAGE_A_FAILURE_BUNDLE_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_inspector_v2_single_create_failure_bundle_v1.json"
+STAGE_A_STOP_RECEIPT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_inspector_v2_single_create_stop_receipt_v1.md"
+STAGE_B_REVIEW_RECEIPT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/preexecution_inspector_review_receipt_v2.md"
+STAGE_B_STOP_RECEIPT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/preexecution_inspector_review_stop_receipt_v2.md"
+HANDOFF_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/Handoff.md"
+LEDGER_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifact_ledger.tsv"
+SNAPSHOT_RELPATH="Cocolon_\u524d\u63d0\u8cc7\u6599/07_latest_snapshot_diff.md"
+PLAN_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md"
+
+AUTHORITY_LIFECYCLE
+External Mash approval binds one exact ASCII authority identity by SHA-256.
+Approval alone has activation0/consumption0.  The first approved project
+preflight read activates and consumes this single-use authority exact1.
+- During exact-one construction the state is ACTIVE_CONSUMED_CREATING_V2.
+- After verified normal Stage A publication the state is
+  ACTIVE_CONSUMED_OPEN_AT_VERIFIED_STAGE_A.
+- After verified Stage B QA PASS4, review PASS4, and final exact10 proof the
+  state is CLOSED_CONSUMED_PASS at INSPECTOR_V2_PREEXEC_QA_AND_REVIEW_PASS.
+- Any construction, freeze, Stage A, QA, review, Stage B, attribution, or
+  postverification failure/unknown closes CLOSED_CONSUMED_STOP at the exact
+  observed terminal whether or not the durable branch succeeds.  Durable
+  recording is a separate axis: VERIFIED when exact remote evidence exists,
+  INCOMPLETE when reflection is unavailable/unknown.  Recording failure never
+  reopens or makes reusable the consumed authority and never becomes PASS.
+Reactivation, second consumption, reuse, candidate/harness repair, replacement,
+refreeze, QA retry, review retry, completed-stage repeat, source retry, and
+automatic successor progression are0.  Session continuation may resume only
+from the latest freshly verified durable stage and may not repeat that stage.
+
+NO_CHECKOUT_WORKTREE_PROTOCOL
+Do not perform a normal/full checkout.  For each Stage worktree, use
+`git worktree add --detach --no-checkout` at the freshly selected remote base,
+initialize non-cone sparse checkout, and materialize only the Stage allowlist.
+Stage A materializes exact4 current owner paths Handoff, ledger, 07, and Plan.
+Stage B materializes exact7: those owner4 plus published inspector, harness, and
+freeze receipt.  A STOP worktree materializes no tracked payload unless an
+exact owner preimage is explicitly required by its branch.  Record
+NORMAL_FULL_CHECKOUT=0, OWNER_MATERIALIZATION=ACTUAL_EXACT4_WHEN_APPLICABLE,
+PUBLISHED_ARTIFACT_MATERIALIZATION=ACTUAL_EXACT3_AT_STAGE_B, and
+SPEC_SOURCE_MATERIALIZATION=0/SPEC_SOURCE_READ=0 separately.  Verify no other
+tracked payload file is materialized, the specification-source path is absent,
+and every allowed materialized file equals its expected identity.  New artifact
+paths must be lstat ENOENT.  Tree/commit metadata reads do not authorize
+blob-content access outside the applicable finite allowlist.
+
+INSPECTOR_V2_RUNTIME_SOURCE_INTERFACE
+1. Active dependencies are literal node:fs, node:path, and node:crypto only.
+   No network, child process, eval, VM, dynamic require/import, search, glob,
+   readdir/opendir, temp file, cwd/env/default/fallback locator, or project write.
+2. CLI is exactly `node INSPECTOR WORKTREE_ROOT`; process.argv.length is3 and
+   argv[2] is one absolute normalized root.  No session-specific absolute source
+   path is embedded in V2.
+3. Derive SOURCE_ABSOLUTE only as join(WORKTREE_ROOT, fixed
+   SPEC_SOURCE_RELPATH).  Require path.relative/join roundtrip and literal
+   equality.  lstat root and every existing parent component and require
+   `isDirectory()===true && isSymbolicLink()===false`; require root/parent direct
+   realpath equality.  Then lstat source regular/non-symlink/mode0644/size41972
+   and direct source realpath equality.
+4. Open source once with O_RDONLY|O_NOFOLLOW|O_NONBLOCK, fstat regular/mode/
+   size and lstat dev+ino equality, positional whole-buffer read exact1 at0,
+   EOF probe exact1 at41972, and close attempt exact1 with retry0.  Validate raw
+   bytes/LF/CR/finalLF/Git blob/SHA-256 before lexical work.  Failure counters
+   distinguish attempt/success and close combinations.
+5. This interface is code-only under this authority.  CLI real-source
+   invocation, source lstat/open/read/EOF/close all remain0.
+
+SINGLE_CREATE_AND_FREEZE
+1. Invoke apply_patch exact1 to create V4_RECEIPT_LOCAL_SOURCE from the already
+   confirmed remote V4 facts.  Reconcile that exact1 path: expected exact bytes
+   are PASS; effect0/partial/different/unreadable/unknown is STOP, patch retry0.
+   Freeze regular/non-symlink, realpath, mode0644, CR0, final LF, bytes/LF/
+   SHA-256/Git blob.  This makes the V4 receipt available to every later branch.
+2. Construct inspector and harness canonical Add File patch content in memory
+   using only the finite allowlist and this authority contract.  Invoke
+   apply_patch exact1 to create INSPECTOR_LOCAL_SOURCE and HARNESS_LOCAL_SOURCE
+   together.  Preimages must be ENOENT.  A returned failure/unknown is reconciled
+   by inspecting those exact2 paths; expected exact2 is success, effect0/
+   partial/different/unreadable/unknown is construction STOP and no repeat.
+3. On exact2 success, lstat regular/non-symlink, realpath literal equality,
+   mode0644, CR0, final LF, and freeze raw bytes/LF/SHA-256/Git blob exact1.
+   Inspector/harness edit, patch, replacement, or refreeze after this point is0.
+4. Invoke apply_patch exact1 to create FREEZE_RECEIPT_LOCAL_SOURCE.  Reconcile
+   its exact1 result as above with retry0.  The freeze receipt records exact2 code
+   identities, construction counters, input allowlist, source0, QA0/review0,
+   and FROZEN_UNREVIEWED_SYNTHETIC_UNRUN_REAL_SOURCE_NONEXECUTED_NONCREDIT.
+   The already frozen V4 receipt records commit/tree/parent, exact7 postimages/
+   modes, identified Karen write-group exact7/unauthorized0, V4
+   CLOSED_CONSUMED_PASS terminal, and technical/source counters0.
+5. No syntax check, import, synthetic execution, or static review occurs before
+   normal Stage A remote postverification.  This makes the first material code
+   bytes durable before any QA result can change the next action.
+
+CORRECTED_B_R2_ADMISSION_CONTRACT
+1. Build and validate the complete bounded ASCII success object in memory
+   before stdout.  Require fixed ordered schema, bytes<=131072, final LF exact1,
+   and no extra bytes.
+2. All computation/pre-emission failures produce stdout0, suppress raw
+   Error/stack/path/source output, and attempt one allowlisted ASCII code plus LF
+   on stderr with nonzero exit.
+3. One top-level terminal owner catches output throw and prevents unhandled Node
+   stack emission.  A bounded write-all advances by every positive short write.
+   Positive short writes followed by complete full-buffer emission are
+   admissible.  Zero/out-of-range return, throw, or final incomplete length is
+   S6_OUTPUT_OR_CHANNEL_STOP; an accepted prefix is never resent.
+4. A future outer controller binds stdout/stderr to fresh regular capture files
+   or an equivalently complete bounded channel.  Success requires exit0,
+   stderr0, complete captured stdout length, canonical parse/schema/identity,
+   no extra/truncated bytes, and final LF.  Partial/throw/incomplete/uncertain
+   output or missing/partial failure stderr is nonauthoritative STOP, is never
+   parsed/published as canonical output, and causes source reread/retry0.
+5. The future transformer follows the same terminal-owner and outer-admission
+   rule.  Static review proves fail-closed admission, not rollback of a prefix
+   already accepted by a broken descriptor.
+
+CORRECTED_B_R3_CONTRACT
+1. Generated source uses fixed ASCII template bytes plus JSON-string or
+   canonical-base64 data only.  Hand-escaped nested dynamic JavaScript lines and
+   raw source-byte interpolation into JavaScript quoting are forbidden.
+2. Use raw Buffer byte offsets.  The lexer has normal, single-quote,
+   double-quote, opaque-backtick, line-comment, block-comment, regex, and
+   regex-class states; escapes and a closed regex/division table are mandatory.
+   `$#` plus identifier is one atomic marker.  Unknown/unterminated grammar
+   fails closed.
+3. C01 exact version declaration token and exact self-path declaration token
+   must be selected by two independent fixed structural recipes converging on
+   the same bounded owner; each intended token change is cardinality1 and all
+   other owner bytes remain equal.  Broad basename/version replace and
+   blank-line owner heuristics are forbidden.
+4. Each C02-C04 range requires exact1 convergence of an independent raw-byte
+   lexer recipe and independent token/signature/call-edge recipe.  Name/keyword
+   scoring, first/widest match, and textual uniqueness alone are forbidden.
+   Zero/multiple/divergent/ambiguous candidates fail closed.
+5. C03 removes an outer pair only when `(` is RHS byte0 and its grammar-aware
+   matching `)` is the RHS final byte.  No trim or trailing whitespace/comment/
+   token is permitted; balance is recomputed at each layer.
+6. C04 inputs must already be strings.  Coercion, eval, trim, partial decode,
+   concat, template, extra argument/token, trailing byte, raw CR/LF/control, and
+   unknown/incomplete escapes are forbidden.  After C03-only removal require
+   exactly one fully consumed quoted literal.  Single-quoted allowed escapes
+   are exactly `\\` and `\'`.  Double-quoted allowed escapes are exactly `\\`,
+   `\"`, `\n`, `\r`, `\t`, `\f`, `\b`, `\a`, `\e`, and `\xHH` with exactly two
+   hexadecimal digits.  Compare decoded value with the already-string marker
+   without coercion.
+7. Require IDs C01-C04 exact, old occurrence1 each, nonempty ordered
+   nonoverlapping ranges, delta equality, and independent extraction from source
+   and candidate of prefix, three inter-fragment gaps, and suffix.  All five
+   corresponding gap Buffers and aggregate outside bytes/hash must equal.
+   Building candidate from source gaps is not itself proof.
+8. The emitted future transformer independently re-extracts exact4 from a new
+   operational read, reproves cardinality/nonoverlap/five gaps/delta/metrics,
+   and emits only one canonical Add File patch buffer.  It never trusts inspector
+   ranges as proof and never directly writes V3.
+
+CORRECTED_B_R4_CONTRACT
+The future transformer receives one explicit absolute worktree root and derives
+fixed V2/V3 absolute paths only by joining fixed normalized repository-relative
+constants.  Require root and every existing parent `isDirectory()===true`,
+non-symlink, direct realpath equality, path.relative/join roundtrip, source
+identity through its separately approved read gate, and target lstat ENOENT.
+The Add File header is generated only from the same fixed V3 relative constant.
+No cwd/env/search/fallback locator exists.  Under this authority transformer
+generation from real bytes, syntax/import/execution, target create, and V3
+access/create are0.
+
+SYNTHETIC_HARNESS_CONTRACT
+The harness imports only guarded pure exports from V2 after syntax and static
+pre-import gates pass.  It has no fs source access, network, child process, eval,
+VM, dynamic code, temp/project write, cwd/env, or real-source locator.  Fixed
+public fixtures cover:
+- B_R2 pre-emission failure, full success, positive-short-then-complete PASS,
+  short-then-zero/throw/incomplete STOP, stderr failure, truncation/extra bytes,
+  raw-stack suppression, and outer complete-capture rejection;
+- C01 exact version/self declarations and unrelated decoys;
+- C02 opaque backtick, atomic marker, regex/division/comments/escapes, dual
+  recipe convergence, and zero/multiple/divergent candidates;
+- C03 final-byte parenthesis, nested balance, and trailing/unknown rejection;
+- C04 every allowed escape plus every forbidden/unknown/incomplete/coercive/
+  concat/template/trailing case;
+- exact4 cardinality/nonoverlap, five-gap independent equality/delta/metrics;
+  and
+- root/relative roundtrip, directory/symlink/realpath/ENOENT rejection, and V3
+  relative constant/Add File header identity.
+Fixture PASS is noncredit and does not predict real-source recipe success.
+
+STAGE_A_NORMAL_LOCAL_PACKAGE
+After exact-one freeze, create STAGE_A_WORKTREE_ROOT with the no-checkout sparse
+protocol at freshly observed main H0.  Require add exact5 preimages absent:
+AUTHORITY_RELPATH, V4_RECEIPT_RELPATH, INSPECTOR_V2_RELPATH,
+SYNTHETIC_HARNESS_RELPATH, FREEZE_RECEIPT_RELPATH.  Require modify exact4 owners
+equal the exact current bindings.  A later unrelated HEAD is allowed only when
+these four target blobs remain byte-identical to those bindings.
+Use one apply_patch invocation from SESSION_ROOT with the exact worktree prefix:
+- add the exact five frozen source files;
+- append one Stage A section to Handoff, ledger, 07, and Plan.
+Logical changed paths are exact9.  Ledger keeps its nine-column header and all
+old bytes and appends exact6 rows in order: authority, V4 receipt, inspector,
+harness, freeze receipt, Handoff postimage.  No ledger/07/Plan self-row.  Require
+full exact9 bytes/modes0644/CR0/finalLF/SHA/Git blobs, owner byte-identical
+prefixes, suffix first-byte LF, ledger rows6 matching artifacts, git diff --check
+clean, missing0/extra0/unauthorized0, and source payload materialization/read0.
+Failure/unknown is reconciled by exact9 inspection; expected exact9 is PASS.
+Effect0/partial/different/unreadable/unknown invokes the distinct Stage A STOP
+branch, never a second normal patch.
+
+STAGE_A_STOP_BRANCHES
+Prepare a public-safe canonical failure receipt from confirmed facts and, when
+public safety is proved, a canonical base64 lossless bundle of every available
+inspector/harness/freeze/V4 receipt byte sequence with exact identities.  Use a
+distinct STOP-record construction; it is not retry of normal paths.
+- PUBLIC_SAFE_FULL_STOP: add exact4 authority, V4 receipt, failure bundle, and
+  failure receipt.  Owners write0/ledger rows0.
+- PUBLIC_SAFETY_UNPROVED_STOP: add exact3 authority, V4 receipt, and sanitized
+  failure receipt; unsafe bytes are omitted and identified as unavailable.
+- EARLY_V4_RECEIPT_STOP, only when the first V4 local receipt creation did not
+  produce expected bytes: add exact2 authority and sanitized failure receipt;
+  record V4 receipt unavailable and bind the already confirmed remote V4 facts.
+For full STOP, require bundle/receipt local preimages ENOENT and use one
+apply_patch invocation exact1 to create both local sources.  For sanitized STOP,
+use one apply_patch invocation exact1 to create only the receipt.  Reconcile the
+selected exact2 or exact1 local result: exact expected bytes are PASS; effect0/
+partial/different/unreadable/unknown closes CLOSED_CONSUMED_STOP with
+DURABLE_RECORD_STATUS=INCOMPLETE and local STOP-record write retry0.  Before
+remote work, freeze every selected local source
+regular/non-symlink, direct-realpath, mode0644, CR0, final LF, bytes/LF/SHA/Git
+blob; for a bundle, decode and re-encode every base64 field and require lossless
+identity equality.
+
+Create STAGE_A_STOP_WORKTREE_ROOT with --no-checkout and tracked payload
+materialization0.  Use one apply_patch invocation to add the frozen exact4,
+exact3, or exact2 public set.  Reconcile only that set; exact expected bytes are local PASS,
+and effect0/partial/different/unreadable/unknown closes CLOSED_CONSUMED_STOP with
+DURABLE_RECORD_STATUS=INCOMPLETE and second STOP-worktree patch0.  The receipt records exact terminal, actual local effects/counters, source0,
+nonreuse, owner update0, omitted-byte reason when applicable, and next action.
+Require new-path preimages absent, remote exact4, exact3, or exact2, and
+identified Karen write-group exact union/unauthorized0.  This closes the applicable
+SINGLE_CREATE_OR_STAGE_A_STOP.  If even the sanitized target paths drift or
+cannot be reflected, authority state remains CLOSED_CONSUMED_STOP and
+DURABLE_RECORD_STATUS=INCOMPLETE; no retry and no durable PASS claim.
+
+STAGE_A_REMOTE_PARTIAL_STOP_BRANCH
+The exact4/exact3/exact2 branches above apply before any normal Stage A GitHub
+attempt or after proved normal-write effect0 with every normal new path still
+absent.  If a normal exact9 write instead leaves a confirmed/unknown partial
+subset, do not resend any attempted or confirmed authority/V4/code/owner path.
+After fresh reconciliation, create/freeze the failure bundle and receipt under
+the same exact local construction gate.  The bundle losslessly embeds every
+normal Stage A add5 byte sequence and intended owner suffix/postimage not already
+confirmed, plus the exact attempted/confirmed/pending subset and Karen subgroup
+evidence.  Publish only the two never-before-attempted failure bundle/receipt
+paths exact2 when public safety is proved, or only sanitized failure receipt
+exact1 otherwise.  Require their preimages absent and an identified Karen STOP-
+write subgroup union exact2/exact1 with unauthorized0.  Record the earlier
+normal partial subgroup separately; do not combine it into the STOP-write union
+or call the normal Stage PASS.  If failure paths drift or reflection is unknown,
+authority state remains CLOSED_CONSUMED_STOP and
+DURABLE_RECORD_STATUS=INCOMPLETE.  Automatic resend/retry remains0.
+
+STAGE_A_GITHUB_AND_POSTVERIFY
+Apply CURRENT_RULE11_REFLECTION_PROTOCOL below to exact9.  Stage A PASS requires
+fresh latest main contains every exact9 postimage and identified Karen Stage A
+write-group union exact9/unauthorized0.  Record the actual heads/trees/commits,
+calls, subgroups, blobs, bytes, modes, and prefix/ledger checks in the next
+Stage B receipt and owner suffix.  Only this remote PASS opens Stage B.
+
+STAGE_B_QA_AND_FOUR_REVIEWS
+Fresh-fetch published inspector, harness, freeze receipt, and Stage A owners and
+reverify exact identities under STAGE_B_PUBLIC_FILE_READ_ALLOWLIST_EXACT14.
+Materialize only the Stage B allowed sparse exact7 into STAGE_B_WORKTREE_ROOT;
+node --check and harness invocation use those exact literal published paths,
+never proposal-session local copies.  Source payload/path and candidate windows
+remain0.
+Run independent QA in this fixed order:
+1. inspector node --check attempt1;
+2. harness node --check attempt1;
+3. static dependency/main-guard/path/public-safety pre-import scan attempt1;
+4. synthetic harness invocation1 only if steps1-3 all PASS; otherwise invocation0.
+Record each attempt/result separately.  There is no prefreeze QA counter and no
+postfreeze QA retry.  Synthetic pure-logic call count is exact actual.
+
+Then Karen plus three independent read-only reviewers complete all four reviews
+even when QA or an earlier review fails:
+B_R1_V2=runtime root interface, exact nofollow one-read/EOF/close/identity gate,
+  counters, and no V1 B_R1 regression;
+B_R2_V2=single terminal owner, positive-short completion semantics, complete-
+  capture admission, allowlisted failure mapping, and no raw stack;
+B_R3_V2=generated-source quoting, fixed dual recipes, lexer/C01-C04/C04 exact
+  escapes, cardinality/nonoverlap, and independent five-gap proof in inspector
+  and future transformer;
+B_R4_V2=root/relative/absolute/header single-object proof, no real-source
+  invocation/target write, and authority/product/credit boundaries.
+Each reviewer records role, exact inspected identities, PASS/FAIL, clauses and
+evidence, source0, real invocation0, edit/refreeze/retry0.  All four results are
+required.  Unavailable/incomplete/unknown is not PASS.  Aggregate terminal PASS
+requires QA PASS4 and review PASS4.  No frozen file is repaired or replaced.
+
+STAGE_B_LOCAL_PACKAGE_GATE
+Use apply_patch exact1 to create STAGE_B_REVIEW_RECEIPT_LOCAL_SOURCE with QA and
+all review results, Stage A postverification, actual counters, facts/inference
+separation, and PASS or typed STOP.  Reconcile its exact1 path; expected bytes
+are PASS, while effect0/partial/different/unreadable/unknown enters the distinct
+Stage B STOP-receipt branch with review-receipt creation retry0.  On PASS freeze
+regular/non-symlink, direct-realpath, mode0644, CR0, final LF, bytes/LF/SHA/Git
+blob.  STAGE_B_WORKTREE_ROOT was created/materialized exact1 before QA.  Reuse
+that already-created Stage B QA worktree; worktree create repeat0 and
+sparse materialization repeat0.  Immediately before the local package patch,
+fresh-fetch remote latest/targets and require the local/remote four owners equal
+exact Stage A postimages, the materialized published artifact3 retain freeze
+identities, Stage A add5 remain exact remote bytes, and public review receipt
+preimage is absent.  Unrelated HEAD advance with unchanged targets permits
+continuation; owner/add5 drift enters the distinct Stage B STOP-receipt branch.
+Use one apply_patch invocation to add the receipt and append Handoff, ledger, 07,
+and Plan: logical exact5.  Ledger preserves all Stage A bytes and appends exact2
+rows in order receipt, Handoff postimage.  Freeze full exact5 postimages before
+GitHub: modes0644/CR0/finalLF/SHA/Git blobs, Stage A owner exact prefixes, suffix
+first-byte LF, ledger rows2 matching artifacts, git diff --check, missing0/
+extra0/unauthorized0.  Failure/unknown is reconciled on exact5; expected is PASS.
+Effect0/partial/different/unreadable/unknown or owner drift enters the distinct
+Stage B STOP-receipt branch; no second normal patch.
+
+STAGE_B_STOP_RECEIPT_BRANCH
+After the exact failure/drift/remote-partial observation, use apply_patch exact1
+to create STAGE_B_STOP_RECEIPT_LOCAL_SOURCE.  It records fresh owner identities,
+review-receipt creation and exact5 attempted subsets/effects, actual local and
+remote partial bytes/counters, source0, nonreuse, and typed terminal.  It binds
+the immutable review-receipt identity and, if that receipt is not remotely
+confirmed, includes its public-safe bytes as canonical lossless base64.  It also
+losslessly embeds any public-safe divergent local owner suffix needed to recover
+the actual partial effect.  Reconcile and freeze this exact1 local source;
+effect0/partial/different/unreadable/unknown closes CLOSED_CONSUMED_STOP with
+DURABLE_RECORD_STATUS=INCOMPLETE, retry0.
+
+Create STAGE_B_STOP_WORKTREE_ROOT with --no-checkout and tracked payload
+materialization0.  For a local receipt-creation/local-exact5/owner-drift STOP
+before any Stage B GitHub attempt, add review receipt plus STOP receipt exact2
+when the review receipt exists, otherwise add STOP receipt exact1 with embedded
+review bytes.  For a Stage B remote partial/unknown STOP, never resend an
+attempted review-receipt or owner subset; add only the new STOP receipt exact1,
+which embeds the review bytes if they are not already confirmed.  Use one
+apply_patch invocation for the selected exact2/exact1 STOP worktree set and
+require exact local bytes, missing0/extra0/unauthorized0; any nonexpected local
+result closes CLOSED_CONSUMED_STOP with DURABLE_RECORD_STATUS=INCOMPLETE and
+second STOP patch0.  Remote PASS for this
+branch requires exact selected bytes plus identified Karen STOP-write subgroup
+union equal to the selected set/unauthorized0.  Failure to prove it is
+CLOSED_CONSUMED_STOP with DURABLE_RECORD_STATUS=INCOMPLETE.  The normal exact10
+PASS path is unaffected.
+
+STAGE_B_GITHUB_AND_POSTVERIFY
+Apply CURRENT_RULE11_REFLECTION_PROTOCOL to exact5.  QA PASS4/review PASS4 plus
+fresh exact5 bytes and identified Karen Stage B write-group union exact5/
+unauthorized0 is provisional Stage B PASS.  Any QA/review FAIL or incomplete is
+CLOSED_CONSUMED_STOP after the same exact5 terminal record is remotely proved.
+Bytes alone without Karen attribution never establish either publication PASS.
+
+AUTHORITY_WIDE_FINAL_POSTVERIFY
+Before final PASS, fresh-fetch latest main and exact10 unique normal-path files:
+Stage A authority, V4 receipt, inspector, harness, freeze receipt; Stage B review
+receipt; and final Handoff, ledger, 07, Plan.  Require every full byte sequence,
+mode100644, Git blob, SHA-256, bytes/LF/CR/finalLF and every owner prefix/ledger
+row relation.  Identify the complete Karen write group across Stage A and B and
+require its unique changed-path union exact10/unauthorized0.  Require latest main
+contains all exact10 and mashos Karen effect0.  This exact10 bytes-plus-
+attribution gate alone closes CLOSED_CONSUMED_PASS.  Do not require one commit,
+one tree, direct-child relation, CAS, or absence of unrelated repository change.
+
+CURRENT_RULE11_REFLECTION_PROTOCOL
+Immediately before each bounded write, fetch latest main and only that Stage's
+exact target paths.  Already-confirmed paths must equal expected bytes; pending
+adds must be absent; pending modifies must equal frozen preimages.  Target drift
+stops, but unrelated HEAD advancement with unchanged targets permits refetch and
+continuation.  Use currently available GitHub functionality.  Connector-only,
+single commit/tree, direct child, update-once, branch, PR, local commit, CLI, or
+whole-repository equality is not required.  Multiple writes are permitted.
+
+Record every attempted subset and Karen-created commit/subgroup.  After a known
+failure or unknown response, refetch attempted paths and subgroup evidence:
+- expected attempted subset, preserved prior expected subsets, untouched pending
+  preimages, identified responsible subgroup, and cumulative union equal to the
+  confirmed subset/unauthorized0 => CONFIRMED_SUBSET_SUCCESS; do not resend it
+  and continue only pending paths;
+- every Stage path expected plus complete Stage write-group exact union => Stage
+  publication PASS;
+- all Stage preimages plus proved Karen effect0 => REMOTE_UNREFLECTED_STOP;
+- preimage after unknown when an earlier subset is confirmed, matching bytes
+  without Karen attribution, other-actor match, different/unauthorized/unreadable
+  path, or unresolved identity/union => REMOTE_DIFFERENT_OR_UNKNOWN_STOP.
+Automatic resend/retry is0.  Never attribute another actor's bytes to Karen.
+
+NORMAL_PASS_COUNTERS
+AUTHORITY_ACTIVATION=1
+AUTHORITY_CONSUMPTION=1
+AUTHORITY_REACTIVATION=0
+AUTHORITY_REUSE=0
+APPROVED_AUTHORITY_WHOLE_READ=1
+APPROVED_AUTHORITY_READ_CLOSE=1
+NORMAL_FULL_CHECKOUT=0
+STAGE_A_OWNER_SPARSE_MATERIALIZATION=EXACT4
+STAGE_B_OWNER_SPARSE_MATERIALIZATION=EXACT4
+STAGE_B_PUBLISHED_ARTIFACT_SPARSE_MATERIALIZATION=EXACT3
+INSPECTOR_CREATE_PATCH=1
+INSPECTOR_CREATE=1
+HARNESS_CREATE=1
+INSPECTOR_FREEZE=1
+HARNESS_FREEZE=1
+POSTFREEZE_INSPECTOR_EDIT=0
+POSTFREEZE_HARNESS_EDIT=0
+REFREEZE=0
+STAGE_A_REMOTE_POSTVERIFY=PASS_EXACT9
+STAGE_B_INSPECTOR_SYNTAX_CHECK_ATTEMPT=1
+STAGE_B_INSPECTOR_SYNTAX_CHECK_PASS=1
+STAGE_B_HARNESS_SYNTAX_CHECK_ATTEMPT=1
+STAGE_B_HARNESS_SYNTAX_CHECK_PASS=1
+STAGE_B_STATIC_PREIMPORT_SCAN_ATTEMPT=1
+STAGE_B_STATIC_PREIMPORT_SCAN_PASS=1
+STAGE_B_SYNTHETIC_HARNESS_INVOCATION=1
+STAGE_B_SYNTHETIC_HARNESS_PASS=1
+STAGE_B_SYNTHETIC_PURE_LOGIC_CALLS=ACTUAL_EXACT
+STAGE_B_QA_RETRY=0
+STAGE_B_REVIEWS_COMPLETED=4
+STAGE_B_REVIEWS_PASS=4
+STAGE_B_REVIEWS_FAIL=0
+STAGE_B_REVIEW_RETRY=0
+STAGE_B_REMOTE_POSTVERIFY=PASS_EXACT5
+AUTHORITY_WIDE_FINAL_POSTVERIFY=PASS_EXACT10
+AUTHORITY_WIDE_UNIQUE_CHANGED_PATH_UNION=EXACT10
+AUTHORITY_WIDE_UNAUTHORIZED_PATHS=0
+SPECIFICATION_SOURCE_PATH_MATERIALIZE=0
+SPECIFICATION_SOURCE_LSTAT=0
+SPECIFICATION_SOURCE_PAYLOAD_OPEN=0
+SPECIFICATION_SOURCE_PAYLOAD_READ=0
+SPECIFICATION_SOURCE_EOF=0
+SPECIFICATION_SOURCE_CLOSE=0
+REAL_SOURCE_INSPECTOR_INVOCATION=0
+NEW_SPECIFICATION_SOURCE_READ=0
+CANONICAL_EXACT4_OUTPUT=0
+EXACT4_VERIFIED=0
+STANDALONE_TARGET_CREATE=0
+STANDALONE_TARGET_EXECUTION=0
+OPERATIONAL_V2_READ=0
+V3_ACCESS=0
+V3_CREATE=0
+PRIVATE_V15_ACCESS=0
+BBEB_OR_CARRIER_EXECUTION=0
+MASHOS_API_EFFECT=0
+V16_TECHNICAL_CREDIT=0
+CYCLE001_TECHNICAL_PROGRESS=0
+AUTHORITY_STATE=CLOSED_CONSUMED_PASS
+AUTHORITY_TERMINAL=INSPECTOR_V2_PREEXEC_QA_AND_REVIEW_PASS
+
+STOP_STATE
+AUTHORITY_ACTIVATION=1
+AUTHORITY_CONSUMPTION=1
+AUTHORITY_REACTIVATION=0
+AUTHORITY_REUSE=0
+AUTHORITY_RETRY=0
+AUTHORITY_STATE=CLOSED_CONSUMED_STOP
+AUTHORITY_REUSE_AFTER_STOP=0
+DURABLE_RECORD_STATUS=ACTUAL_ONE_OF_VERIFIED_OR_INCOMPLETE
+AUTHORITY_TERMINAL=ACTUAL_TYPED_CONSTRUCTION_FREEZE_STAGE_A_QA_REVIEW_STAGE_B_REMOTE_OR_DURABILITY_TERMINAL
+Record only actual reached counters; do not copy later PASS counters into an
+earlier STOP.  Preserve actual public-safe bytes and omission reasons, current
+durable head, local/remote effects, Karen attribution, source0, nonreuse, and
+next material action.  No repair, retry, refreeze, silent discard, or false PASS.
+
+PASS_STATE
+INSPECTOR_V1=FROZEN_REVIEWED_FAIL_REAL_SOURCE_NONEXECUTED_NONCREDIT_IMMUTABLE
+INSPECTOR_V2=FROZEN_QA_PASS_REVIEW_PASS_SYNTHETIC_ONLY_REAL_SOURCE_NONEXECUTED_NONCREDIT
+INSPECTOR_DEPENDENCY_UNCERTAINTY=CLOSED
+NEXT_MATERIAL_BOUNDARY=SEPARATE_IDENTITY_BOUND_ONE_SPECIFICATION_READ_EXACT4_AND_STANDALONE_PROGRAM_PREPARATION_AUTHORITY
+NEXT_AUTHORITY_APPROVED_BY_THIS_AUTHORITY=FALSE
+V15=STATIC_ONLY_STOP
+V15_RECEIPT=CLOSED_UNCONSUMED
+FULL_R1=UNKNOWN_PRESERVED
+RUNTIME_READY=FALSE
+FORMAL_SOURCE_V4=MATERIALIZED_FALSE_AND_UNPROVEN
+CYCLE001=NOT_ACCEPTED
+
+FACTS_AND_INFERENCE
+Confirmed facts are the exact current bindings, V4 PASS, V1 review results, and
+actual counters.  The older interactive transport/line-size explanation remains
+unproved and is not used here.  Synthetic QA proves only fixed-fixture behavior;
+real-source recipe success remains unknown until the next separate authority.
+
+KAREN_JUDGMENT
+This authority is necessary Cycle001 completion work.  I will continue because
+three concrete defects block the exact4 gate.  The code is created once and
+made durable before QA so review findings do not trigger repeated authority or
+preservation loops.  STOP checks remain to prevent false evidence and loss, but
+the objective is material: publish a corrected inspector and pass its gate.  On
+PASS, the next approval will authorize one new specification-source read and
+standalone-program preparation; no planned preservation-only authority will be
+inserted.
+
+END_OF_AUTHORITY
