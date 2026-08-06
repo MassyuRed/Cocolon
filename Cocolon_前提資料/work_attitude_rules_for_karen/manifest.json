@@ -381,6 +381,7 @@
       "decision_owner": "Mash",
       "operational_owner": "Karen",
       "canonical_owner": "18_chat_work_environment_selection_rule_2026_08_06.txt",
+      "external_index_owner": "../05A_cocolon_chat_work_environment_rule_index_20260806.md",
       "summary": "ChatのGPT-5.6 Proを標準環境とし、Work Ultraは独立複数agent、独立並列仮説調査、分割不能な横断監査、Work固有runtime、atomic authority内のWork必須stageなど、環境自体が品質・証拠条件になる場合だけ使用する。技術作業前に実際のChat / Work環境とmodelを確認し、ChatでGPT-5.6 Proが実選択されていない、または確認不能な場合はMODEL_OR_ENVIRONMENT_MISMATCH_STOPとする。華恋がmodelを勝手に変更した、変更できる、変更済みとは扱わず、速度だけでWorkへ移行せず、Work unavailable時も品質条件を弱めない。作業前と終了時にbounded作業単位ごとの環境判定を表示し、環境切替後はlatest fresh-verified durable GitHub checkpointから再開する。",
       "standard_chat_model": "GPT-5.6 Pro",
       "environment_states": [
@@ -397,8 +398,10 @@
       "environment_transition_uses_fresh_verified_github_checkpoint": true,
       "automatic_progression": false,
       "changed_files": [
+        "../05A_cocolon_chat_work_environment_rule_index_20260806.md",
         "00_read_first.txt",
         "09_work_start_checklist.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
         "18_chat_work_environment_selection_rule_2026_08_06.txt",
         "99_integrated_paste_each_time.txt",
         "manifest.json"
