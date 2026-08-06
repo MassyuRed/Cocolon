@@ -6,22 +6,18 @@ normative_status: CURRENT
 Cocolon作業を始める前に、華恋はこのチェックを通します。
 一つでも説明できない項目がある場合、未確認を埋めず、その項目が必要な作業を開始しません。
 
-# A. 実際の環境・モデル確認
+# A. Chat / Work環境判定
 
 - [ ] `18_chat_work_environment_selection_rule_2026_08_06.txt`を読んだか
-- [ ] 現在の実際の環境がChatかWorkか確認したか
-- [ ] Chatの場合、現在の実際のモデルが`GPT-5.6 Pro`であると確認したか
-- [ ] model名または環境を推測で埋めていないか
-- [ ] 華恋がmodelを勝手に変更した、変更できる、変更済みであると扱っていないか
 - [ ] 今回のbounded作業単位を特定したか
-- [ ] `CHAT_5_6_PRO_OK` / `WORK_ULTRA_REQUIRED` / `MODEL_OR_ENVIRONMENT_MISMATCH_STOP`のどれかを判定したか
+- [ ] `CHAT_5_6_PRO_OK` / `WORK_ULTRA_REQUIRED`のどちらかを判定したか
 - [ ] 速度、応答回数、便利さだけを理由にWork Ultraへ移していないか
 - [ ] 独立agent review、並列仮説調査、Work固有runtime、atomic authority内Work stageの有無を確認したか
 - [ ] Work Ultraが必要だが利用できない場合、品質条件を弱めずexact作業単位をpending / STOPとして保持したか
 - [ ] 追加課金、自動補充、credit購入を黙示前提にしていないか
 - [ ] 作業前の環境判定をMash様へ表示したか
 
-Chat作業を`CHAT_5_6_PRO_OK`と扱えるのは、現在の実際のモデルが`GPT-5.6 Pro`であると確認でき、同じ要求品質を維持できる場合だけです。
+Chatで同じ要求品質を維持できる場合は`CHAT_5_6_PRO_OK`、Work Ultraの独立性・並列性・runtimeが成立条件になる場合は`WORK_ULTRA_REQUIRED`です。
 
 # B. 指示の種類と作業単位
 
@@ -101,7 +97,6 @@ Chat作業を`CHAT_5_6_PRO_OK`と扱えるのは、現在の実際のモデル�
 - [ ] fixture green / pytest green / RN contract greenだけを商品成果と呼んでいないか
 - [ ] Mash様へ確認不足や技術選択を押し返していないか
 - [ ] Work Ultra unavailableを理由に品質条件を弱めていないか
-- [ ] 非Pro modelで5.6 Pro作業をしたことにしていないか
 
 # G. 質問回の事前チェック
 
@@ -195,7 +190,6 @@ GitHub反映方法と完了判定は、`../11_cocolon_github_transport_and_sessi
 - [ ] 秘密情報を貼らない等の禁止事項を示したか
 - [ ] 成功表示、error時の伝え方、完了後の短い返答、華恋が引き取る範囲を示したか
 - [ ] 複数案を並べるだけでなく最も簡単な推奨手順を選んだか
-- [ ] model変更が必要な場合、現在model、必要model、理由、停止作業単位だけを明示したか
 
 # O. actual environment / proportionality
 
@@ -237,7 +231,6 @@ GitHub反映方法と完了判定は、`../11_cocolon_github_transport_and_sessi
 - credential、Mash様の画面操作、未承認不可逆操作が必要
 - 同じ方式で失敗を繰り返し方式自体を疑う必要がある
 - 作業量が想定を超え費用対効果が崩れた
-- model / environmentが作業条件と不一致になった
 - independent-agent conditionが後から判明した
 
 # Q. observable effect / position consistency
@@ -280,7 +273,7 @@ Python / pytestを使う場合だけ確認します。
 - [ ] performed effect、zero effect、non-reuse、privacy owner、next exact actionを記録するか
 - [ ] write後にremote bytes、changed paths、final headをfresh確認するか
 - [ ] context / tool limit risk時に新規技術作業を止めcheckpointをflushするか
-- [ ] Chat / Work / model切替時、checkpointを再開正本にするか
+- [ ] Chat / Work切替時、checkpointを再開正本にするか
 
 # T. 出力前の区分
 
@@ -302,6 +295,6 @@ Python / pytestを使う場合だけ確認します。
 - [ ] GitHub reflectionとfresh postverificationが必要な場合に完了したか
 - [ ] durable checkpointを更新したか
 - [ ] 次のexact作業単位を特定したか
-- [ ] 次作業の環境を`CHAT_5_6_PRO_OK` / `WORK_ULTRA_REQUIRED` / `MODEL_OR_ENVIRONMENT_MISMATCH_STOP`で判定したか
+- [ ] 次作業の環境を`CHAT_5_6_PRO_OK` / `WORK_ULTRA_REQUIRED`で判定したか
 - [ ] Work unavailable時に無関係な代替作業を発明していないか
 - [ ] automatic progressionをfalseのまま保持したか
