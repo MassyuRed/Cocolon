@@ -17964,3 +17964,19 @@ The dependency back to Cycle001 is: noninteractive specification inspection → 
 ### Next boundary
 
 After remote exact7 postverification, the next authority must return directly to a noninteractive fixed-code specification inspection with a newly authorized source read. This checkpoint is not a technical step in that chain, and no further preservation-only authority is intended after successful postverification.
+
+## 2026-08-06 V16 Stage B recovery disposition
+
+### Confirmed facts
+
+The frozen inspector at Stage A commit `b484a0f84c4bde9dd98a07a5ede89464240a6cdc` completed all four required static reviews: B_R1 PASS and B_R2/B_R3/B_R4 FAIL. V3 is consumed and closed at `PREEXEC_STATIC_REVIEW_FAIL`; its newly authorized Stage C specification-source and technical counters remain0.
+
+The first Stage B local recording patch produced a different postimage: Handoff, 07, and Plan each omitted one intended leading LF, leaving stale embedded identity values. It was not published. A lossless base-plus-suffix bundle with SHA-256 `50e8b6b3fb630b6a4fb823fa76db9548a37c8b1cc7ee2c94b8861336fe4af521` preserves the exact local effect.
+
+The recovery authority is activated and consumed once at its first approved preflight read. It closes PASS only after fresh exact7 bytes and an identified Karen write-group changed-path union of exact7/unauthorized0; every STOP/unknown closes consumed STOP. Reactivation, reuse, retry, and automatic progression are0.
+
+Recovery proposals V1 `9dc96589764319c6c6191908c3a41b0b1a9215f7127f982db10239eff10e9aeb`, V2 `ee417ece0133773e31dee2fb772e08f0cf4a4b619c1f997542048a00efa394d3`, and V3 `e8605d0e466aba64c8e225b6ad745507d9933a6d067597f8abb0c55ecc29d6cc` are `WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0`. V1 failed source-read scope, current-rule11, and lifecycle review; V2 failed write-group reconciliation, public-head wording, and V1 lifecycle continuity; V3 left confirmed-subset continuation undefined after an unknown multi-operation response. Recovery authority V4 is the current owner.
+
+### Plan connection
+
+This recovery publication adds no V16 or Cycle001 technical credit. It is needed to avoid erasing or falsely classifying the failed review and patch history. The technical path resumes immediately afterward with an exact-new inspector that fixes the bounded-output, exact C01-C04/outside-proof, and target-path identity blockers. That inspector must be frozen and reviewed before a newly authorized specification read. V3 creation, V16 synthetic validation, Full R1/runtime/product/UX evidence, and Cycle001 acceptance remain later gates.

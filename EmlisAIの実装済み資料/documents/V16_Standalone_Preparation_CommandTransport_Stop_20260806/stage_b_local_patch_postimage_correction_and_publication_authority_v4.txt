@@ -1,0 +1,529 @@
+AUTHORITY_ID=V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V4
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+
+PURPOSE
+Recover the exact local Stage B recording-patch result left by the approved and
+consumed V3 authority, preserve that different postimage losslessly, create the
+correct static-review STOP postimages in a fresh detached worktree, and reflect
+the exact7 approved path set through currently available GitHub functionality.  Do not read the specification source,
+execute or repair the failed inspector, prepare a successor inspector, create a
+canonical exact4 output or target, or access/create V3.
+
+WHY_THIS_IS_NEEDED
+The required four-part pre-execution review completed and found one PASS and
+three blocking FAIL results.  That review is material Cycle001 safety work
+because it prevents a malformed and underconstrained transformer from becoming
+false V3/V16 evidence.  The sole V3 Stage B local recording patch then produced
+a different postimage: three append owners omitted one intended leading LF and
+their embedded identity claims became stale.  V3 correctly forbids a second
+write or publication of that different postimage.  Remote main therefore has
+the frozen inspector but not the completed review disposition or the exact
+local patch-error history.  This authority closes only that durable recording
+gap so the next authority can return to an exact-new corrected inspector.
+
+NEW_INFORMATION_ON_PASS
+1. the completed B_R1-B_R4 result is durably bound to the exact published
+   inspector;
+2. the V3 local exact5 effect is losslessly reconstructable from published
+   Stage A bases plus the frozen bundle;
+3. the corrected STOP receipt and current append owners are remotely identical
+   to their frozen postimages; and
+4. the failed inspector is durably closed before any newly authorized V3
+   Stage C specification-source payload open/read.
+
+UNCERTAINTY_CLOSED_ON_PASS
+Only Stage B review-disposition and local patch-effect durability is closed.
+Success does not prove a corrected inspector, exact4, standalone program,
+operational V2 read, V3, V16 synthetic validity, Full R1, runtime, product, UX,
+or Cycle001 acceptance.
+
+NOT_AN_ALIAS_REPETITION
+The prior public checkpoint preserved two earlier command/path STOPs.  Stage A
+published the material inspector.  This authority records a newly completed
+four-part review and a newly observed exact local postimage mismatch.  It does
+not repeat either earlier checkpoint and receives technical credit0.
+
+PRODUCT_AND_UX_CONNECTION
+The review prevents unsafe generated code from being admitted as future
+natural-language-surface evidence.  This recovery adds no user-facing behavior,
+but preserves the evidence needed to correct the inspector without erasing or
+reclassifying failure history.
+
+SUPERSEDED_UNAPPROVED_RECOVERY_PROPOSALS
+V1_ID=V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V1
+V1_SHA256=9dc96589764319c6c6191908c3a41b0b1a9215f7127f982db10239eff10e9aeb
+V1_BYTES=18552
+V1_LF=399
+V1_CR=0
+V1_FINAL_LF=TRUE
+V1_STATE=WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0
+V1_ERRORS=UNSCOPED_ANY_SPECIFICATION_SOURCE_READ;CURRENT_RULE11_SINGLE_COMMIT_DIRECT_CHILD_CONFLICT;RECOVERY_AUTHORITY_LIFECYCLE_UNCLOSED
+V2_ID=V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V2
+V2_SHA256=ee417ece0133773e31dee2fb772e08f0cf4a4b619c1f997542048a00efa394d3
+V2_BYTES=23389
+V2_LF=477
+V2_CR=0
+V2_FINAL_LF=TRUE
+V2_STATE=WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0
+V2_ERRORS=GITHUB_RECONCILIATION_PASS_WITHOUT_KAREN_WRITE_GROUP_UNION_PROOF;LOCAL_EFFECT0_PUBLIC_HEAD_MISBOUND_TO_A_HEAD;SUPERSEDED_V1_LIFECYCLE_NOT_DURABLY_RECORDED
+V3_ID=V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V3
+V3_SHA256=e8605d0e466aba64c8e225b6ad745507d9933a6d067597f8abb0c55ecc29d6cc
+V3_BYTES=25150
+V3_LF=507
+V3_CR=0
+V3_FINAL_LF=TRUE
+V3_STATE=WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0
+V3_ERROR=UNKNOWN_MULTI_OPERATION_CONFIRMED_SUBSET_CONTINUATION_UNDEFINED
+CURRENT_RECOVERY_AUTHORITY_OWNER=V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V4
+
+CONFIRMED_STAGE_A_RECONSTRUCTION_BASE
+REPOSITORY=MassyuRed/Cocolon
+BRANCH=main
+A_HEAD=b484a0f84c4bde9dd98a07a5ede89464240a6cdc
+A_TREE=c7297a008adcc6cddc88e6d7876899add76ac967
+A_PARENT=bb3e6770a3e67788ca47a206aa6eff1af627809d
+A_COMMIT_MESSAGE=Freeze V16 standalone preparation inputs
+A_CHANGED_PATHS=EXACT6
+A_POSTVERIFY=PASS
+A_MISSING=0
+A_EXTRA=0
+A_UNAUTHORIZED=0
+A_LOCAL_REMOTE_EQUAL=TRUE
+
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_BRANCH=main
+MASHOS_API_HEAD=315813c7bd3372462de926ddad74df567254a6b5
+MASHOS_API_TREE=a641510e107d52bb910073f36604c85bd57af150
+MASHOS_API_ROLE=NO_CHANGE_BASELINE_ONLY
+MASHOS_UNRELATED_HEAD_ADVANCE_ALONE_IS_NOT_STOP=TRUE
+
+CURRENT_GITHUB_REFLECTION_OWNER
+RULE11_RELPATH_JSON_ASCII="Cocolon_\u524d\u63d0\u8cc7\u6599/11_cocolon_github_transport_and_session_continuity.md"
+RULE11_BLOB=a8ffd078eac189562004c6e98494156ea6c12582
+RULE11_SHA256=1d9f7b9af68d2da0da40f8c5649b0cb5311d44d6cd2fedbca4f9f3a0a47eb59e
+RULE11_BYTES=44263
+RULE11_LF=892
+RULE11_CR=0
+RULE11_FINAL_LF=TRUE
+RULE11_MODE=0644
+GITHUB_METHOD_AND_COMPLETION_OWNER=RULE11_CURRENT_NORMATIVE_CONTRACT
+
+A_APPEND_OWNER_BINDINGS
+A_HANDOFF_BLOB=a483d9a482aafca2363ab8d1a362861b61ea5243
+A_HANDOFF_SHA256=c69104bdf85a7c239786ee2081543bc77cc4cfbed7f996a91a1f621ceabf9f64
+A_HANDOFF_BYTES=7801
+A_HANDOFF_LF=152
+A_HANDOFF_CR=0
+A_HANDOFF_FINAL_LF=TRUE
+A_HANDOFF_MODE=0644
+A_LEDGER_BLOB=ce8c23357b3c4b0ee3f88b7c0ba0c51330db07dc
+A_LEDGER_SHA256=02bb0f5bad1ba6cb635593806b5d67eb62456093d084ea3c7d60dda6bcb1279c
+A_LEDGER_BYTES=1654
+A_LEDGER_LF=10
+A_LEDGER_CR=0
+A_LEDGER_FINAL_LF=TRUE
+A_LEDGER_MODE=0644
+A_07_BLOB=e0edbbd022fbac7a8b8efe584a69c06379ab9cf2
+A_07_SHA256=826d9fcd2ad643fe7e126348e1cc900795405b4462db3a0eaf66eebc70e728aa
+A_07_BYTES=2338867
+A_07_LF=38786
+A_07_CR=0
+A_07_FINAL_LF=TRUE
+A_07_MODE=0644
+A_PLAN_BLOB=bcc5757045ed130ebe514205f6dadc738aad5bce
+A_PLAN_SHA256=bb7df7bfb35c7f71a3211a4bca92c16b270243b38a0c98a757bbc9c58d9f0796
+A_PLAN_BYTES=1138897
+A_PLAN_LF=17966
+A_PLAN_CR=0
+A_PLAN_FINAL_LF=TRUE
+A_PLAN_MODE=0644
+
+PUBLISHED_INSPECTOR_BINDING
+INSPECTOR_RELPATH_JSON_ASCII="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_noninteractive_inspector_generator_v1.js"
+INSPECTOR_BLOB=ca58518abf9df0b9abd6f3650121a75b3add1e34
+INSPECTOR_SHA256=6d5cfdfa346a7812c3130dea10f49dfb4f40b41a94701008967c55c83e655f8e
+INSPECTOR_BYTES=35152
+INSPECTOR_LF=920
+INSPECTOR_CR=0
+INSPECTOR_FINAL_LF=TRUE
+INSPECTOR_MODE=0644
+INSPECTOR_STATE=FROZEN_REVIEWED_FAIL_NONEXECUTED_NONCREDIT
+
+CONFIRMED_STAGE_B_REVIEW
+V3_AUTHORITY_ID=V16_STANDALONE_PREPARATION_NONINTERACTIVE_MATERIAL_AND_DURABLE_RETRY_AUTHORITY_V3
+V3_AUTHORITY_SHA256=ed3534072f145d17e41c3971ae2fde2419061b87628b05860cf5e561eec9e03d
+V3_AUTHORITY_ACTIVATION=1
+V3_AUTHORITY_CONSUMPTION=1
+V3_STATE=CLOSED_CONSUMED_STOP
+V3_TERMINAL=PREEXEC_STATIC_REVIEW_FAIL
+B_REVIEWS_COMPLETED=4
+B_R1_SOURCE_IDENTITY_AND_READ_GATE=PASS
+B_R2_NONINTERACTIVE_BOUNDED_OUTPUT_AND_FAILURE_CODES=FAIL
+B_R3_C01_C04_CONSTRUCTION_AND_OUTSIDE_BYTE_PROOF=FAIL
+B_R4_AUTHORITY_BOUNDARY_AND_NO_EXECUTION=FAIL
+B_PASS=1
+B_FAIL=3
+INSPECTOR_EDIT=0
+INSPECTOR_REPLACEMENT=0
+INSPECTOR_REFREEZE=0
+INSPECTOR_REVIEW_RETRY=0
+INSPECTOR_EXECUTION=0
+INSPECTOR_SYNTAX_CHECK=0
+INSPECTOR_IMPORT=0
+SPECIFICATION_SOURCE_PAYLOAD_OPEN=0
+SPECIFICATION_SOURCE_PAYLOAD_READ=0
+
+CONFIRMED_V3_LOCAL_PATCH_RESULT
+V3_WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_standalone_preparation_retry_v3
+V3_WORKTREE_HEAD=bb3e6770a3e67788ca47a206aa6eff1af627809d
+V3_WORKTREE_TREE=8686790297a65e70e070d01591fc96d7b6481b65
+V3_WORKTREE_STATUS_ENTRIES=EXACT9
+V3_STAGE_B_APPLY_PATCH_INVOCATION=1
+V3_STAGE_B_APPLY_PATCH_TOOL_RESULT=RETURNED_SUCCESS
+V3_STAGE_B_EXPECTED_PATHS=5
+V3_STAGE_B_ACTUAL_PATHS=5
+V3_STAGE_B_UNAUTHORIZED_PATHS=0
+V3_STAGE_B_SECOND_WRITE=0
+V3_STAGE_B_CONNECTOR_PUBLICATION=0
+V3_STAGE_B_GITHUB_EFFECT=0
+V3_STAGE_B_CLASSIFICATION=DIFFERENT_POSTIMAGES_MISSING_ONE_LEADING_LF_ON_THREE_APPEND_OWNERS_AND_STALE_EMBEDDED_IDENTITIES
+
+V3_ACTUAL_RECEIPT_BYTES=6483
+V3_ACTUAL_RECEIPT_LF=99
+V3_ACTUAL_RECEIPT_SHA256=2022220136bf945d1441977bf13c7c32ebea9a1be006f18a1d21e0393e038676
+V3_ACTUAL_RECEIPT_BLOB=3bc3970530565963f228e3a197052fe4af0b4045
+V3_ACTUAL_HANDOFF_BYTES=11307
+V3_ACTUAL_HANDOFF_LF=211
+V3_ACTUAL_HANDOFF_SHA256=458bc18685785cef64ef6014fd78d953dfb66d1227105adae15ea26e819f5b65
+V3_ACTUAL_HANDOFF_BLOB=e7a21e3eb5a5b1ec84b0f3f808599168d6af99a4
+V3_ACTUAL_LEDGER_BYTES=1985
+V3_ACTUAL_LEDGER_LF=12
+V3_ACTUAL_LEDGER_SHA256=b9a6359a353512de24f8125f685cc261106f81cc8a56d79d2d3e648454f44318
+V3_ACTUAL_LEDGER_BLOB=2b17fa8bea26db2c645d06710986dad781d76af2
+V3_ACTUAL_07_BYTES=2341928
+V3_ACTUAL_07_LF=38809
+V3_ACTUAL_07_SHA256=69aaa21f4f787eac69a48f6cbd7df7978f5e7dc73b4f5ce60c678294b7bb750b
+V3_ACTUAL_07_BLOB=928099f404e4e2ac5c8c3a4f4709fc67870645a3
+V3_ACTUAL_PLAN_BYTES=1140806
+V3_ACTUAL_PLAN_LF=17981
+V3_ACTUAL_PLAN_SHA256=c72d1c61e1477c8837f72615873a4ab255ca75ce246077100035f3802071b193
+V3_ACTUAL_PLAN_BLOB=7bbb33721dbd28762735b3a3ca033e6c5c184663
+All actual files have CR0, final LF true, and mode0644.
+The exact Stage A prefixes of Handoff, ledger, 07, and Plan match.
+
+LOSSLESS_BUNDLE_SOURCE
+BUNDLE_LOCAL_SOURCE_PATH=/workspace/scratch/e97a00d75240/V16_STAGE_B_LOCAL_PATCH_MISMATCH_BUNDLE_V1_CANDIDATE.json
+BUNDLE_REQUIRED_TYPE=REGULAR_NON_SYMLINK
+BUNDLE_REALPATH_EQUAL_LITERAL=TRUE
+BUNDLE_BYTES=25028
+BUNDLE_LF=129
+BUNDLE_CR=0
+BUNDLE_FINAL_LF=TRUE
+BUNDLE_MODE=0644
+BUNDLE_SHA256=50e8b6b3fb630b6a4fb823fa76db9548a37c8b1cc7ee2c94b8861336fe4af521
+BUNDLE_GIT_BLOB=66b24983941b70b05d977239863921b6e6382749
+BUNDLE_LOSSLESS_CHECKS=PASS5
+BUNDLE_ROLE=ADMINISTRATIVE_RECOVERY_NONCREDIT
+
+FIXED_CORRECTED_SOURCE_FILES
+AUTHORITY_LOCAL_SOURCE_PATH=/workspace/scratch/e97a00d75240/V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V4_FINAL.txt
+RECEIPT_LOCAL_SOURCE_PATH=/workspace/scratch/e97a00d75240/V16_STAGE_B_CORRECTED_REVIEW_RECEIPT_V1_CANDIDATE.md
+RECEIPT_BYTES=9420
+RECEIPT_LF=127
+RECEIPT_CR=0
+RECEIPT_FINAL_LF=TRUE
+RECEIPT_MODE=0644
+RECEIPT_SHA256=924d82ce89bd7de8e046f44500ea7df77b85fb6b33e7a91e193d8a3a9ed095dd
+RECEIPT_GIT_BLOB=1e53bb3ce33586714e1c1e94de9886db3f9ff6ef
+
+HANDOFF_POSTIMAGE_LOCAL_SOURCE_PATH=/workspace/scratch/e97a00d75240/V16_STAGE_B_CORRECTED_HANDOFF_POSTIMAGE_V1_CANDIDATE.md
+HANDOFF_POSTIMAGE_BYTES=12895
+HANDOFF_POSTIMAGE_LF=213
+HANDOFF_POSTIMAGE_CR=0
+HANDOFF_POSTIMAGE_FINAL_LF=TRUE
+HANDOFF_POSTIMAGE_MODE=0644
+HANDOFF_POSTIMAGE_SHA256=a9518c30c43f00cee141651fac3bd73f1dde8172192dc128d39a2ba13c3a657a
+HANDOFF_POSTIMAGE_GIT_BLOB=b2f04b8c156a423fb36544261cb4c6732c2be804
+HANDOFF_PREFIX=A_HANDOFF_EXACT_BYTES
+
+SNAPSHOT_SUFFIX_LOCAL_SOURCE_PATH=/workspace/scratch/e97a00d75240/V16_STAGE_B_CORRECTED_07_SUFFIX_V1_CANDIDATE.md
+SNAPSHOT_SUFFIX_BYTES=3074
+SNAPSHOT_SUFFIX_LF=20
+SNAPSHOT_SUFFIX_CR=0
+SNAPSHOT_SUFFIX_FINAL_LF=TRUE
+SNAPSHOT_SUFFIX_MODE=0644
+SNAPSHOT_SUFFIX_SHA256=89ead1cd636612a06e4396812ab9a1f8d1756bd958b26056aaeb327c51821c06
+SNAPSHOT_POSTIMAGE_BYTES=2341941
+SNAPSHOT_POSTIMAGE_LF=38806
+SNAPSHOT_POSTIMAGE_CR=0
+SNAPSHOT_POSTIMAGE_FINAL_LF=TRUE
+SNAPSHOT_POSTIMAGE_SHA256=c6b13e8297e48072b456c521354db5575857dc323ef760bc54f7fb2b93561925
+SNAPSHOT_POSTIMAGE_GIT_BLOB=3e9edff714e45de3b3d3ae0e4765ce84d2f402d9
+SNAPSHOT_PREFIX=A_07_EXACT_BYTES
+
+PLAN_SUFFIX_LOCAL_SOURCE_PATH=/workspace/scratch/e97a00d75240/V16_STAGE_B_CORRECTED_PLAN_SUFFIX_V1_CANDIDATE.md
+PLAN_SUFFIX_BYTES=2181
+PLAN_SUFFIX_LF=16
+PLAN_SUFFIX_CR=0
+PLAN_SUFFIX_FINAL_LF=TRUE
+PLAN_SUFFIX_MODE=0644
+PLAN_SUFFIX_SHA256=ed36e4307cce575bf745c21673af47704266030b286cf60f8fa3411e9be4dfe4
+PLAN_POSTIMAGE_BYTES=1141078
+PLAN_POSTIMAGE_LF=17982
+PLAN_POSTIMAGE_CR=0
+PLAN_POSTIMAGE_FINAL_LF=TRUE
+PLAN_POSTIMAGE_SHA256=40562a917c589164d66d941aced503f5fd54059814506547faae141bc2dd1b8e
+PLAN_POSTIMAGE_GIT_BLOB=1cb425e54af1557d57259d0e68ec3777e77f4b40
+PLAN_PREFIX=A_PLAN_EXACT_BYTES
+
+FIXED_ROOTS
+SESSION_ROOT=/workspace/scratch/e97a00d75240
+ADMIN_CLONE_ROOT=/workspace/scratch/e97a00d75240/_repos/Cocolon
+RECOVERY_WORKTREE_ROOT=/workspace/scratch/e97a00d75240/Cocolon_v16_stage_b_stop_recovery_v1
+RECOVERY_WORKTREE_PREIMAGE=LSTAT_ENOENT
+RECOVERY_WORKTREE_CREATE=GIT_WORKTREE_ADD_DETACH_EXACT1_AT_A_HEAD
+RECOVERY_WORKTREE_EXPECTED_HEAD=A_HEAD
+RECOVERY_WORKTREE_EXPECTED_TREE=A_TREE
+RECOVERY_WORKTREE_EXPECTED_STATUS=CLEAN
+PATCH_TOOL_PATH_PREFIX=Cocolon_v16_stage_b_stop_recovery_v1/
+PATCH_TOOL_PATH_RULE=PREFIX_PLUS_JSON_UNESCAPED_LOGICAL_RELPATH
+Do not reset, clean, checkout, edit, remove, or otherwise alter the V3 recovery
+source worktree or the administrative clone working tree.
+
+PUBLIC_PATHS_JSON_ASCII
+CHECKPOINT_DIR="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806"
+AUTHORITY_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/stage_b_local_patch_postimage_correction_and_publication_authority_v4.txt"
+BUNDLE_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/stage_b_local_patch_mismatch_bundle_v1.json"
+RECEIPT_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/preexecution_inspector_review_receipt_v1.md"
+HANDOFF_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/Handoff.md"
+LEDGER_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifact_ledger.tsv"
+SNAPSHOT_RELPATH="Cocolon_\u524d\u63d0\u8cc7\u6599/07_latest_snapshot_diff.md"
+PLAN_RELPATH="EmlisAI\u306e\u5b9f\u88c5\u6e08\u307f\u8cc7\u6599/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md"
+
+AUTHORITY_LIFECYCLE
+External approval binds one exact ASCII authority identity.  The first approved
+preflight read activates and consumes this single-use authority exact1.
+Approval without that read has activation0/consumption0.  After activation:
+- reactivation, reuse, second consumption, and silent retry are0;
+- fresh exact7 remote bytes plus an identified Karen-created write-group
+  changed-path union of exact7 with unauthorized0 closes CLOSED_CONSUMED_PASS
+  at terminal RECOVERY_EXACT7_REMOTE_POSTVERIFY_PASS;
+- any preflight mismatch closes CLOSED_CONSUMED_STOP at
+  RECOVERY_PREFLIGHT_STOP;
+- any local effect0/different/partial/unreadable/unknown closes
+  CLOSED_CONSUMED_STOP at RECOVERY_LOCAL_POSTIMAGE_STOP;
+- confirmed GitHub unreflected failure closes CLOSED_CONSUMED_STOP at
+  RECOVERY_REMOTE_UNREFLECTED_STOP; and
+- different/unreadable/unknown remote target paths close
+  CLOSED_CONSUMED_STOP at RECOVERY_REMOTE_DIFFERENT_OR_UNKNOWN_STOP.
+The candidate authority/receipt/Handoff/07/Plan state is effective as PASS only
+if fresh GitHub postverification proves both all exact7 bytes and an identified
+Karen-created write-group changed-path union of exact7 with unauthorized0.  Otherwise it is
+noncredit candidate evidence and the actual terminal is the applicable STOP.
+
+PREFLIGHT
+1. Reverify A_HEAD/A_TREE/A_PARENT and the exact Stage A owner/inspector
+   identities as reconstruction facts.  They are not a required current-main
+   value and unrelated current HEAD advancement alone is not STOP.
+2. Fetch current Cocolon main as H0 and inspect the exact seven target paths.
+   Require AUTHORITY_RELPATH, BUNDLE_RELPATH, and RECEIPT_RELPATH absent.
+   Require Handoff, ledger, 07, and Plan byte-equal to their exact A postimages.
+   Target-path drift is STOP.  Differences outside these exact paths are not
+   STOP and do not change the frozen target bytes.
+3. Observe current mashos-api head and confirm Karen performs no mashos write.
+   An unrelated mashos head advance alone is not STOP.
+4. Reverify the V3 source worktree head/tree and exact9 status.  Read only its
+   five Stage B result paths and their Stage A prefixes.  Require every actual
+   full/suffix identity above, missing0, extra0, unauthorized0.  Do not open the
+   specification source or any candidate window.
+5. Reverify AUTHORITY_LOCAL_SOURCE_PATH against the externally approved exact
+   bytes/SHA-256 and reverify BUNDLE_LOCAL_SOURCE_PATH plus every corrected
+   source file with direct literal lstat regular non-symlink, realpath equality,
+   mode0644, exact bytes/LF/CR/finalLF/SHA-256, and one whole read/close each.
+6. Require RECOVERY_WORKTREE_ROOT lstat ENOENT, create it exact1 at A_HEAD, and
+   require exact head/tree/clean.  This local reconstruction base need not equal
+   current remote H0 when H0 differs only outside the exact target paths.
+7. In the fresh worktree require AUTHORITY_RELPATH, BUNDLE_RELPATH, and
+   RECEIPT_RELPATH lstat ENOENT.  Require Handoff, ledger, 07, and Plan equal
+   their exact A postimages.  Any mismatch is RECOVERY_PREFLIGHT_STOP before
+   apply_patch.
+All preflight reads are administrative recovery reads.  The newly authorized
+V3 Stage C specification-source payload open/read remains0.
+
+LEDGER_CONSTRUCTION
+Keep the existing nine-column TSV header and every A ledger byte immutable.
+After external approval freezes this authority, append exactly four rows in
+this exact order:
+1. AUTHORITY_RELPATH basename, authority exact bytes/LF/CR/finalLF/mode0644/
+   externally approved SHA-256, type authority_text, status
+   APPROVED_ACTIVATED_CONSUMED_CLOSED_PASS_IF_EXACT7_BYTES_AND_KAREN_WRITE_GROUP_UNION_EXACT7_UNAUTHORIZED0_SINGLE_USE_STAGE_B_RECOVERY;
+2. BUNDLE_RELPATH basename, exact bound bundle metrics, type recovery_bundle,
+   status FROZEN_NONCREDIT_LOCAL_EFFECT;
+3. RECEIPT_RELPATH basename, exact bound receipt metrics, type review_receipt,
+   status CLOSED_CONSUMED_STOP_PREEXEC_STATIC_REVIEW_FAIL;
+4. Handoff.md, exact bound Handoff postimage metrics, type handoff, status
+   STAGE_B_STATIC_REVIEW_AND_LOCAL_PATCH_RECOVERY.
+Do not add rows for ledger, 07, or Plan.  The authority-bound postimage table
+owns them.  Require exactly four new data rows, no duplicate new artifact path,
+and no header change.
+
+AUTHORIZED_LOCAL_EFFECT
+Use one apply_patch invocation from SESSION_ROOT.  Every path supplied to the
+patch tool must be PATCH_TOOL_PATH_PREFIX plus the decoded logical path.
+1. Add AUTHORITY_RELPATH as the exact externally approved authority bytes.
+2. Add BUNDLE_RELPATH as the exact bundle source bytes.
+3. Add RECEIPT_RELPATH as the exact receipt source bytes.
+4. Replace the A Handoff postimage only by the exact full Handoff source bytes.
+5. Append exactly the constructed four ledger rows to the A ledger.
+6. Append the exact snapshot suffix to the A 07 bytes.
+7. Append the exact Plan suffix to the A Plan bytes.
+No other file effect is allowed.  The logical changed-path set is exact7.
+The V3 recovery source worktree receives write0.
+
+LOCAL_RESULT_GATE
+After the single apply_patch, require exact7 paths, missing0, extra0,
+unauthorized0, mode0644, CR0, final LF, exact source/postimage identities,
+Handoff/ledger/07/Plan prefix preservation, ledger rows4, and git diff --check
+clean.  Require source open/read0, inspector execution0, technical credit0.
+If the tool response fails or is unknown, inspect exact7 only.  Exact expected
+postimages classify local PASS.  On proved effect0, the recovery worktree
+remains at A_HEAD and the durable public head remains the latest verified H0.
+Any partial, different, unreadable, or unresolved effect stops with no second
+write and
+requires separately approved recovery only if reconstruction need remains.
+
+GITHUB_REFLECTION
+Only after LOCAL_RESULT_GATE PASS:
+1. Fetch latest main and exact target paths again immediately before the first
+   write.  Name that observation HWRITE.  If main advanced only outside the
+   exact target paths, continue from the new HWRITE.  If any target path
+   changed, STOP.
+2. Use currently available GitHub functionality.  One connector commit may be
+   preferred when available, but connector-only, direct-child, single-tree,
+   exactly-one-commit, update-once, branch, PR, local-commit, CLI, or a
+   particular transport is not a validity or STOP condition.
+3. Permit the bounded number of GitHub write operations/commits required by the
+   current function to reflect the seven approved postimages.  Before every
+   target-path write, record its exact attempted subset.  Track every
+   Karen-created write commit/subgroup in this activation.  The final
+   changed-path union of that write group must be exact7 with no unauthorized
+   path.
+4. Before each bounded write, already reflected target paths must equal expected
+   postimages and pending new/modified target paths must equal their exact
+   absent/A preimages.  If a known write rejection or pre-write drift is only an
+   unrelated HEAD advance, refetch current main/target paths and continue from
+   the new current state.
+5. Do not delete target/history, force-rewrite history, alter an unauthorized
+   path, or write mashos-api.
+Preferred commit message when the current function exposes commit messages:
+Preserve V16 Stage B static-review STOP and patch mismatch.
+
+REMOTE_POSTVERIFY
+Freshly fetch the latest Cocolon main and the exact seven target paths.  Require:
+- latest main contains all seven expected postimages;
+- every target full byte sequence, Git blob, SHA-256, bytes, LF, CR, final LF,
+  and mode100644 equals the frozen local result;
+- Handoff/ledger/07/Plan preserve their exact A prefixes;
+- ledger appended rows exact4 and every row matches its artifact bytes;
+- the changed-path union of Karen-created write commits in this activation is
+  exact7, with no unauthorized path;
+- no approved target path is missing or different; and
+- Karen-created mashos-api effect0.
+Do not require latest main to equal one particular Karen commit, direct-child
+relation to A_HEAD, a single tree/commit, or absence of unrelated repository
+changes.  Do not fetch or validate every unchanged repository path.
+The verified result defines RECOVERY_LATEST_MAIN and the bounded Karen write
+commit group.  Specification-source payload open/read and all technical effects
+remain0.
+
+GITHUB_RESPONSE_OR_DRIFT_RESULT
+For every failed or unknown target-path write response, refetch latest main,
+the exact seven target paths, and the bounded Karen-created write
+commit/subgroup before deciding:
+- if the exact attempted subset equals its expected postimages, every previously
+  confirmed subset remains expected, every unattempted pending path remains its
+  exact absent/A preimage, the responsible Karen commit/subgroup is identified,
+  and its cumulative changed-path union equals exactly the confirmed subset
+  with unauthorized0, classify that write CONFIRMED_SUBSET_SUCCESS, do not
+  resend that subset, and continue only with pending paths.  This intermediate
+  result is not final PASS;
+- all seven equal expected postimages AND the identified complete Karen
+  write-group changed-path union is exact7 with unauthorized0 => final PASS;
+- all three new paths remain absent, all four modified paths equal A preimages,
+  and total Karen write-call/commit effect is proved0 =>
+  RECOVERY_REMOTE_UNREFLECTED_STOP;
+- an attempted subset remains at preimage after an unknown response while any
+  earlier subset is already confirmed => partial recovery state,
+  RECOVERY_REMOTE_DIFFERENT_OR_UNKNOWN_STOP, no resend;
+- target bytes match but the responsible Karen commit/subgroup identity or
+  union is missing, extra, unavailable, or unresolved =>
+  RECOVERY_REMOTE_DIFFERENT_OR_UNKNOWN_STOP;
+- any target path or Karen write-group effect is different, unauthorized,
+  unreadable, or unresolved => RECOVERY_REMOTE_DIFFERENT_OR_UNKNOWN_STOP.
+Do not attribute another actor's matching bytes to Karen.  Do not automatically
+repeat an unknown write or resend an already confirmed subset.  A known unrelated HEAD advance
+with unchanged target preimages is not failure and permits continuation under
+GITHUB_REFLECTION.  Preserve actual write-call/commit counts; multiplicity does
+not create technical credit.
+
+PASS_STATE
+RECOVERY_AUTHORITY_ACTIVATION=1
+RECOVERY_AUTHORITY_CONSUMPTION=1
+RECOVERY_AUTHORITY_REACTIVATION=0
+RECOVERY_AUTHORITY_REUSE=0
+RECOVERY_AUTHORITY_STATE=CLOSED_CONSUMED_PASS
+RECOVERY_AUTHORITY_TERMINAL=RECOVERY_EXACT7_REMOTE_POSTVERIFY_PASS
+V3_STAGE_B_REVIEW=CLOSED_CONSUMED_STOP_DURABLE
+LOCAL_MISMATCH_BUNDLE=FROZEN_NONCREDIT
+SPECIFICATION_SOURCE_PAYLOAD_OPEN=0
+SPECIFICATION_SOURCE_PAYLOAD_READ=0
+NEW_SPECIFICATION_SOURCE_READ=0
+OPERATIONAL_V2_READ=0
+CANONICAL_EXACT4_OUTPUT=0
+EXACT4_VERIFIED=0
+SUCCESSOR_INSPECTOR_CREATE=0
+TARGET_CREATE=0
+TARGET_EXECUTION=0
+V3_ACCESS=0
+V3_CREATE=0
+MASHOS_API_EFFECT=0
+V16_TECHNICAL_CREDIT=0
+CYCLE001_TECHNICAL_PROGRESS=0
+V15=STATIC_ONLY_STOP
+V15_RECEIPT=CLOSED_UNCONSUMED
+FULL_R1=UNKNOWN_PRESERVED
+RUNTIME_READY=FALSE
+FORMAL_SOURCE_V4=MATERIALIZED_FALSE_AND_UNPROVEN
+CYCLE001=NOT_ACCEPTED
+
+STOP_STATE
+RECOVERY_AUTHORITY_ACTIVATION=1
+RECOVERY_AUTHORITY_CONSUMPTION=1
+RECOVERY_AUTHORITY_REACTIVATION=0
+RECOVERY_AUTHORITY_REUSE=0
+RECOVERY_AUTHORITY_RETRY=0
+RECOVERY_AUTHORITY_STATE=CLOSED_CONSUMED_STOP
+RECOVERY_AUTHORITY_TERMINAL=ACTUAL_ONE_OF_RECOVERY_PREFLIGHT_STOP_OR_RECOVERY_LOCAL_POSTIMAGE_STOP_OR_RECOVERY_REMOTE_UNREFLECTED_STOP_OR_RECOVERY_REMOTE_DIFFERENT_OR_UNKNOWN_STOP
+Preserve actual confirmed counters and the latest verified durable target-path
+state.  Do not claim corrected review durability, technical progress, or PASS
+without exact7 remote bytes and identified Karen write-group union proof.  Do
+not retry, reactivate,
+reuse, or silently discard a material partial/unknown effect.
+
+UNPROVED_INFERENCE
+The older interactive-transport explanation remains unproved and is not used
+to justify this authority or its PASS/STOP classification.
+
+KAREN_JUDGMENT
+This recovery is necessary, bounded work on the Cycle001 completion path.  It
+preserves a completed safety review and my own local recording error instead of
+erasing either, while keeping newly authorized Stage C source access and
+technical credit at0.  On PASS,
+I will not stop at preservation: the next authority must create an exact-new
+versioned inspector that fixes B_R2, B_R3, and B_R4 and returns directly to the
+one-read exact4/program-preparation gate.  That next authority is not approved
+by this one.
+
+END_OF_AUTHORITY

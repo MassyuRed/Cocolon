@@ -150,3 +150,64 @@ Current technical state remains V15 `STATIC_ONLY_STOP`, V15 Receipt
 `CLOSED_UNCONSUMED`, Full R1 `UNKNOWN_PRESERVED`, runtime-ready `false`,
 Formal Source V4 `MATERIALIZED_FALSE_AND_UNPROVEN`, Cycle001 `NOT_ACCEPTED`,
 and V16 technical credit `0`.
+
+## 2026-08-06 Stage B — static review STOP and local postimage mismatch recovery
+
+### Confirmed review facts
+
+- Stage A head / tree / sole parent: `b484a0f84c4bde9dd98a07a5ede89464240a6cdc / c7297a008adcc6cddc88e6d7876899add76ac967 / bb3e6770a3e67788ca47a206aa6eff1af627809d`
+- Stage A exact6 postverification: `PASS`
+- reviewed inspector blob / SHA-256: `ca58518abf9df0b9abd6f3650121a75b3add1e34 / 6d5cfdfa346a7812c3130dea10f49dfb4f40b41a94701008967c55c83e655f8e`
+- B_R1 / B_R2 / B_R3 / B_R4: `PASS / FAIL / FAIL / FAIL`
+- reviews completed / PASS / FAIL: `4 / 1 / 3`
+- terminal / state: `PREEXEC_STATIC_REVIEW_FAIL / CLOSED_CONSUMED_STOP`
+- inspector edit / replacement / refreeze / review retry: `0 / 0 / 0 / 0`
+- inspector execution / syntax check / import / write: `0 / 0 / 0 / 0`
+- specification-source payload open / read: `0 / 0`
+
+B_R2 found unprotected or incomplete terminal-output failure paths. B_R3 found
+malformed generated quote composition and underconstrained C01-C04,
+final-byte, decoding, outside-byte, and future-target proofs. B_R4 found that
+the absolute target preimage and repository-relative Add File path were not
+proven to name the same worktree object.
+
+### Confirmed local patch-result facts
+
+- V3 Stage B apply_patch invocation / tool result: `1 / RETURNED_SUCCESS`
+- expected logical paths / actual logical paths / unauthorized paths: `5 / 5 / 0`
+- receipt expected equality / ledger expected equality: `true / true`
+- Handoff expected equality / 07 expected equality / Plan expected equality: `false / false / false`
+- mismatch: one intended leading LF was absent at each of the three append boundaries; embedded Handoff/07/Plan identity claims consequently did not match actual bytes
+- local result classification: `DIFFERENT_POSTIMAGES_MISSING_ONE_LEADING_LF_ON_THREE_APPEND_OWNERS_AND_STALE_EMBEDDED_IDENTITIES`
+- second local write / Stage B connector publication / GitHub effect: `0 / 0 / 0`
+- lossless mismatch bundle SHA-256 / bytes / LF / CR / final LF: `50e8b6b3fb630b6a4fb823fa76db9548a37c8b1cc7ee2c94b8861336fe4af521 / 25028 / 129 / 0 / true`
+- recovery authority: `V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V4`
+- recovery authority activation / consumption: exact `1 / 1` at the first approved preflight read
+- recovery authority lifecycle: `CLOSED_CONSUMED_PASS` if and only if all exact7 bytes pass fresh GitHub postverification and the identified Karen write-group changed-path union is exact7 with unauthorized0; every preflight/local/remote STOP or unknown closes `CLOSED_CONSUMED_STOP`
+- recovery authority reactivation / reuse / retry / automatic progression: `0 / 0 / 0 / 0`
+- superseded recovery proposal V1: SHA-256 `9dc96589764319c6c6191908c3a41b0b1a9215f7127f982db10239eff10e9aeb`, bytes/LF/CR/final LF `18552/399/0/true`, state `WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0`, errors `UNSCOPED_ANY_SPECIFICATION_SOURCE_READ; CURRENT_RULE11_SINGLE_COMMIT_DIRECT_CHILD_CONFLICT; RECOVERY_AUTHORITY_LIFECYCLE_UNCLOSED`
+- superseded recovery proposal V2: SHA-256 `ee417ece0133773e31dee2fb772e08f0cf4a4b619c1f997542048a00efa394d3`, bytes/LF/CR/final LF `23389/477/0/true`, state `WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0`, errors `GITHUB_RECONCILIATION_PASS_WITHOUT_KAREN_WRITE_GROUP_UNION_PROOF; LOCAL_EFFECT0_PUBLIC_HEAD_MISBOUND_TO_A_HEAD; SUPERSEDED_V1_LIFECYCLE_NOT_DURABLY_RECORDED`
+- superseded recovery proposal V3: SHA-256 `e8605d0e466aba64c8e225b6ad745507d9933a6d067597f8abb0c55ecc29d6cc`, bytes/LF/CR/final LF `25150/507/0/true`, state `WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0`, error `UNKNOWN_MULTI_OPERATION_CONFIRMED_SUBSET_CONTINUATION_UNDEFINED`
+- current recovery authority owner: `V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V4`
+
+The mismatch bundle stores the full receipt and the exact Handoff, ledger, 07,
+and Plan suffix bytes against their published Stage A bases. It is
+administrative recovery evidence only and receives technical credit0.
+
+### Counters and Cycle001 connection
+
+- inspector invocation / source lstat/open/read/EOF/close: `0 / 0 / 0 / 0 / 0 / 0`
+- new specification read / operational V2 read / canonical output / exact4 verification: `0 / 0 / 0 / 0`
+- target create/execute / V3 access/create / mashos-api effect: `0 / 0 / 0 / 0 / 0`
+- V16 technical credit / Cycle001 technical progress: `0 / 0`
+- V15 / V15 Receipt / Full R1: `STATIC_ONLY_STOP / CLOSED_UNCONSUMED / UNKNOWN_PRESERVED`
+- runtime-ready / Formal Source V4 / Cycle001: `false / MATERIALIZED_FALSE_AND_UNPROVEN / NOT_ACCEPTED`
+
+This STOP remains necessary because it prevents unsafe code from becoming
+false V3/V16 evidence. The recovery publication preserves the failure evidence
+and corrects its durable identities; it does not replace material work. After
+verified recovery publication, the next useful technical boundary is an
+exact-new versioned inspector that fixes B_R2/B_R3/B_R4 and returns directly to
+the one-read exact4/program-preparation gate. No newly authorized
+specification-source access or automatic
+progression is authorized here.

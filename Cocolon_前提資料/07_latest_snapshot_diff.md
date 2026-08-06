@@ -38784,3 +38784,23 @@ An interactive payload transport or line-size limit likely caused the first fail
 This exact7 checkpoint exists only to make both STOP histories and the recovery boundary durable. It does not prove exact4 verification, standalone-program creation, V16 synthetic validity, runtime behavior, product behavior, UX quality, or Cycle001 acceptance.
 
 The next technical path is fixed as: noninteractive specification inspection → exact4 verification and program preparation → separately approved V3 creation → V16 synthetic validation → remaining Full R1/runtime/product/UX evidence → Cycle001 acceptance only when the complete acceptance contract passes. The exact authority bytes, full counters, and ledger are stored under the current implemented-materials documents owner in `V16_Standalone_Preparation_CommandTransport_Stop_20260806/`.
+
+## 2026-08-06 V16 Stage B static-review STOP and local postimage recovery
+
+### Confirmed facts
+
+Stage A was published and postverified at commit `b484a0f84c4bde9dd98a07a5ede89464240a6cdc`, tree `c7297a008adcc6cddc88e6d7876899add76ac967`. The exact published inspector received B_R1 PASS, B_R2 FAIL, B_R3 FAIL, and B_R4 FAIL. Aggregate review was PASS1/FAIL3, so V3 terminated `CLOSED_CONSUMED_STOP` before its newly authorized Stage C specification-source access.
+
+The sole V3 Stage B local patch invocation returned success and produced all five logical paths with unauthorized0. Receipt and ledger matched their intended bytes, but Handoff, 07, and Plan each lacked one intended leading LF at the append boundary. Their actual bytes and embedded identity claims therefore differed. No second patch or GitHub publication was performed under V3.
+
+The exact local result is preserved losslessly by bundle SHA-256 `50e8b6b3fb630b6a4fb823fa76db9548a37c8b1cc7ee2c94b8861336fe4af521`, 25028 bytes, 129 LF, CR0, final LF. This recovery record does not reclassify the failed candidate as success.
+
+Recovery authority `V16_STAGE_B_LOCAL_PATCH_POSTIMAGE_CORRECTION_AND_PUBLICATION_AUTHORITY_V4` activates and is consumed exact1 at its first approved preflight read. Fresh exact7 bytes plus an identified Karen write-group changed-path union of exact7/unauthorized0 alone close `CLOSED_CONSUMED_PASS`; every STOP/unknown branch closes `CLOSED_CONSUMED_STOP`. Reactivation, reuse, retry, and automatic progression are0.
+
+Recovery proposal V1 `9dc96589764319c6c6191908c3a41b0b1a9215f7127f982db10239eff10e9aeb` is `WITHDRAWN_UNAPPROVED_UNACTIVATED_UNCONSUMED_EFFECT0` for unscoped source-read wording, current-rule11 single/direct-child constraints, and unclosed lifecycle. Proposal V2 `ee417ece0133773e31dee2fb772e08f0cf4a4b619c1f997542048a00efa394d3` has the same withdrawn state for incomplete write-group reconciliation, A_HEAD-misbound local-effect0 wording, and missing V1 lifecycle continuity. Proposal V3 `e8605d0e466aba64c8e225b6ad745507d9933a6d067597f8abb0c55ecc29d6cc` has the same withdrawn state because continuation after an unknown multi-operation response with a confirmed expected subset was undefined. Current owner is recovery authority V4.
+
+### Counters and necessity
+
+Inspector invocation; source lstat/open/read/EOF/close; new specification read; operational V2 read; canonical output; exact4 verification; target create/execute; V3 access/create; mashos-api effect; V16 technical credit; and Cycle001 technical progress all remain0. Cycle001 remains `NOT_ACCEPTED`.
+
+The review and STOP are necessary because they block malformed and underconstrained generated code from becoming false V3/V16 evidence. The recovery publication only makes that fact and the local mismatch reconstructable. The next material step is an exact-new versioned inspector correcting B_R2/B_R3/B_R4, followed by its pre-source static review and the one-read exact4/program-preparation gate. No newly authorized specification-source access or automatic retry is authorized by this record.
