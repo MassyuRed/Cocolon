@@ -4,92 +4,186 @@ normative_status: CURRENT
 decision_owner: Mash
 operational_owner: Karen
 
-# Purpose
+# これは何か
 
-This rule fixes how Karen chooses between Chat 5.6 Pro and Work Ultra for Cocolon work. Mash must not be required to judge the technical environment. Karen judges the environment before each bounded work unit and reports the result.
+この資料は、Cocolon作業で使用するChat / Work環境と実際のモデルを、華恋が作業単位ごとに判定するためのcurrentルールです。
 
-# Default environment
+目的は次の4点です。
 
-1. `CHAT_5_6_PRO_OK` is the default.
-2. Work Ultra is not selected merely because it is faster, more convenient, or capable of finishing a large task in fewer responses.
-3. Chat remains acceptable when the same required quality, evidence, coverage, and completion conditions can be preserved by decomposition, deterministic verification, durable checkpoints, and fresh postverification.
-4. The quality bar does not change between environments. Only the execution method and decomposition may change.
+1. Mash様へ技術的な環境選択を押しつけない。
+2. Chatで品質を維持できる作業に、高額なWork Ultraを常用しない。
+3. Work Ultraでなければ成立しない独立性・並列性・runtime条件を、Chatで成立したように偽らない。
+4. 実際のモデルが想定と違う状態で、華恋が黙って作業を始めない。
 
-# Required Work Ultra condition
+この資料は、技術authority、実装承認、GitHub write承認、課金承認、自動進行を与えません。環境を選ぶだけのルールです。
 
-Karen must classify a work unit as `WORK_ULTRA_REQUIRED` when at least one of the following is true:
+# 1. 最優先原則
 
-1. independent multiple-agent review itself is an explicit completion condition;
-2. repeating review by the same Karen cannot honestly satisfy the required independence;
-3. independent parallel hypothesis investigation is necessary to preserve evidentiary independence;
-4. repository-wide or cross-repository coverage cannot be safely decomposed while proving full coverage and boundary consistency;
-5. an atomic or single-use authority contains a Work-required stage and splitting the authority would break lifecycle, consumption, identity, or evidence boundaries;
-6. Karen cannot maintain the required quality in Chat despite bounded decomposition and verification.
+1. Cocolonの標準作業環境は、Chatの`GPT-5.6 Pro`です。
+2. Chatで同じ要求品質・証拠性・網羅性・完了条件を維持できるなら、作業量が多い、応答回数が増える、時間がかかるという理由だけでWork Ultraへ移しません。
+3. Work Ultraは、独立した複数agent、並列仮説調査、Work固有runtimeなど、その環境自体が成立条件になる作業へ限定します。
+4. ChatとWorkで品質基準を変えません。変えてよいのは、作業の分割方法、順序、checkpoint頻度、実行時間だけです。
+5. Work Ultraが必要という判定は、追加クレジット購入を推奨・要求する意味ではありません。利用できなければ、そのexact作業単位をpendingまたはSTOPとして保持します。
 
-When `WORK_ULTRA_REQUIRED` applies, Karen must not downgrade the requirement, simulate independent agents by repeated self-review, or report the work complete in Chat.
+# 2. 実際のモデル・環境を毎回確認する
 
-# Work unit and response boundary
+華恋は、Cocolonの技術作業を始める前に、現在の実際の環境とモデルを確認します。
 
-1. Environment selection is made per bounded work unit, not merely per message.
-2. Typical work units include one authority, one bounded correction, one audit, one implementation-plus-verification publication, one STOP recovery, or one design decision.
-3. If one response contains multiple separable work units, Karen may classify them separately.
-4. If the work units are inseparable under one atomic authority, the strictest required environment governs the whole authority.
+Chat作業を`CHAT_5_6_PRO_OK`と判定できるのは、現在の実際のモデルが`GPT-5.6 Pro`であると確認できる場合だけです。
 
-# Required visible report
+次の状態では技術作業を始めません。
 
-Before technical execution, Karen reports:
+- Chatだが、実際のモデルが`GPT-5.6 Pro`ではない。
+- 実際のモデル名またはChat / Workの環境を確認できない。
+- 作業途中でモデルまたは環境が変わった可能性があり、現在状態を再確認できない。
+- Work Ultra必須作業を、通常のWorkまたはChatで代替しようとしている。
 
-- current environment classification: `CHAT_5_6_PRO_OK` or `WORK_ULTRA_REQUIRED`;
-- exact bounded work unit;
-- reason;
-- condition that would change the classification, when applicable.
+この停止状態は`MODEL_OR_ENVIRONMENT_MISMATCH_STOP`とします。
 
-At the end of the work unit, Karen reports the environment classification for the next exact work unit.
+華恋は、モデルが違うことを知らないまま「5.6 Proで実行した」と報告しません。モデル名を推測で埋めません。
 
-Mash only needs to state whether Work Ultra is currently available. Mash is not responsible for deciding whether it is technically required.
+# 3. モデルを勝手に変更しない
 
-# Mid-work reclassification
+1. モデル選択はMash様側のChatGPT画面・契約・利用可能状態に属します。華恋は、モデルを自分で変更した、変更できる、変更済みであるとは扱いません。
+2. 華恋は、作業を進めやすくするためにモデル変更を黙って前提化しません。
+3. 現在のモデルが作業条件に合わない場合、作業開始前に現在モデル・必要モデル・理由・停止するexact作業単位を明示します。
+4. Work Ultraへ移る必要がある場合も、華恋が技術上の必要性を判定し、Mash様へは`Work Ultraが現在利用可能か`だけを確認します。
+5. Mash様が明示していない追加課金、自動補充、クレジット購入を前提にしません。
+6. モデルまたは環境を切り替えた後は、切替前の会話記憶だけで継続せず、latest fresh-verified durable GitHub checkpointから再開します。
 
-If new confirmed facts make a Chat work unit require Work Ultra:
+# 4. 環境判定の状態
 
-1. stop at the nearest safe atomic boundary;
-2. do not classify incomplete work as complete;
-3. durably record current authority lifecycle, confirmed facts, artifacts, exact paths, hashes, performed effects, unperformed effects, and the next Work entry point;
-4. fresh-read verify the checkpoint;
-5. report `WORK_ULTRA_REQUIRED` and the exact restart point.
+## 4.1 CHAT_5_6_PRO_OK
 
-Environment change alone does not authorize automatic progression or a new authority.
+次を全て満たす場合に使用します。
 
-# Work unavailable
+- 現在の実際の環境がChatである。
+- 現在の実際のモデルが`GPT-5.6 Pro`である。
+- boundedな分割、deterministic verification、hash / diff / test、fresh postverification、durable checkpointによって要求品質を維持できる。
+- 独立した複数agentそのものが証拠・完了条件ではない。
+- Work固有runtime、Work固有path、Work固有toolingが成立条件ではない。
 
-When Work Ultra is required but unavailable:
+Chatで複数回に分ける必要があっても、最終品質を維持できるならこの判定です。
 
-1. the Work-required work unit remains STOPPED or pending;
-2. Karen may proceed with a different Chat work unit only when it is already justified, independent of the blocked work, will not require later reversal, and directly connects to Cocolon completion;
-3. Karen must not invent documentation, closure, handoff, or surrounding work merely to avoid stopping;
-4. if no valid independent work exists, the technical path remains stopped until Work becomes available.
+## 4.2 WORK_ULTRA_REQUIRED
 
-# Relationship to subagents
+次のいずれかが成立する場合に使用します。
 
-1. Subagent output remains read-only candidate assistance unless a current authority explicitly defines another permitted role.
-2. Final verification, judgment, write, commit, publication, and reporting remain Karen's responsibility.
-3. `WORK_ULTRA_REQUIRED` does not mean subagents may edit Cocolon code or perform GitHub writes.
-4. When subagents are unavailable but Chat can maintain the required quality, the classification remains `CHAT_5_6_PRO_OK`.
-5. When independent-agent evidence itself is required, Chat self-review is not a substitute.
+1. 独立した複数agentによるreview自体が、authorityまたは完了条件に明記されている。
+2. 同じ華恋が複数回読み直しても、要求される独立性を正直に満たせない。
+3. 複数仮説を互いに汚染せず並列調査することが、証拠条件として必要である。
+4. repository全体または複数repository間の監査を安全に分割できず、Chat単体では全coverageと境界整合を証明できない。
+5. Work Ultra固有のsubagent、runtime、filesystem、tool、absolute locatorがauthorityの成立条件に含まれる。
+6. atomic / single-use authority内にWork必須stageが含まれ、分割するとactivation、consumption、identity、lifecycle、evidence boundaryを壊す。
+7. bounded分割と検証を行っても、華恋がChatで要求品質を維持できない。
 
-# Environment transition source of truth
+`WORK_ULTRA_REQUIRED`の場合、華恋はChatでの自己再確認を独立agent reviewとして数えません。品質条件を弱めず、Chatで完了したとは報告しません。
 
-When switching between Chat and Work, continuation must start from the latest fresh-verified durable GitHub checkpoint, not from chat-only memory, scratch paths, cached containers, or subagent messages.
+## 4.3 MODEL_OR_ENVIRONMENT_MISMATCH_STOP
 
-The checkpoint must identify at least:
+次の場合に使用します。
 
-- repository HEAD/tree;
-- current authority lifecycle;
-- exact paths and hashes;
-- completed and incomplete effects;
-- STOP/PASS state;
-- exact next action and environment classification.
+- Chat作業に必要な`GPT-5.6 Pro`が実際には選択されていない。
+- Chat / Workまたはモデルの実状態を確認できない。
+- Work Ultra必須だが、現在の環境がWork Ultraではない。
+- 作業途中で実際のモデルまたは環境が変わり、再確認前である。
 
-# No automatic progression
+このSTOPは技術失敗、authority消費、成果物完成、Work必須作業の代替実行を意味しません。
 
-This rule chooses the execution environment only. It does not approve implementation, consume an authority, authorize GitHub writes beyond Mash's explicit approval, or permit automatic progression.
+# 5. 判定単位
+
+1. 環境判定は、単なる一応答ごとではなく、boundedな一作業単位ごとに行います。
+2. 一作業単位の例は、一authority、一bounded correction、一監査、一実装＋検証＋公開、一STOP recovery、一設計判断です。
+3. 一応答に分離可能な複数作業単位がある場合、作業単位ごとに別判定できます。
+4. 一つのatomic authorityとして分離不能な場合、最も厳しい環境条件をauthority全体へ適用します。
+5. authorityをChat向けとWork向けに分割する場合は、既存authorityを黙って解釈変更せず、lifecycle・evidence・approval boundaryを保つ別設計とMash様の明示承認を必要とします。
+
+# 6. 作業前後に必ず表示する内容
+
+Cocolonの技術作業前に、華恋は次を表示します。
+
+```text
+実行環境判定:
+現在の実環境・実モデル:
+対象のbounded作業単位:
+判定理由:
+判定が変わる条件:
+```
+
+判定値は原則として次のいずれかです。
+
+```text
+CHAT_5_6_PRO_OK
+WORK_ULTRA_REQUIRED
+MODEL_OR_ENVIRONMENT_MISMATCH_STOP
+```
+
+作業単位の終了時には、次のexact作業単位についても同じ環境判定を出します。
+
+Mash様は、技術的にどの環境が必要かを判断する必要はありません。華恋が判定し、Mash様は必要な場合だけWork Ultraの利用可否または画面上の現在モデルを伝えます。
+
+# 7. 作業途中で判定が変わった場合
+
+Chatで開始した後、新しい確認済み事実によってWork Ultraが必要になった場合は、次を行います。
+
+1. nearest safe atomic boundaryで停止する。
+2. 未完了部分を完了・PASS・creditとして扱わない。
+3. authority lifecycle、確認済み事実、artifact、exact path、hash、実行済み効果、zero effect、未実行事項、次のWork入口をdurable checkpointへ記録する。
+4. GitHubからfresh readしてcheckpoint bytes、changed paths、final headを確認する。
+5. `WORK_ULTRA_REQUIRED`とexact restart pointを報告する。
+
+モデルまたは環境が作業途中で変わった場合も、同じ扱いで`MODEL_OR_ENVIRONMENT_MISMATCH_STOP`とし、再確認前に技術作業を継続しません。
+
+環境変更だけでは、新authority承認、automatic progression、authority再activation、retry、creditを生みません。
+
+# 8. Work Ultraが利用できない場合
+
+1. Work必須のexact作業単位は、未承認なら未承認、承認済み未開始なら未開始、進行中なら実際のlifecycle状態のままpendingまたはSTOPとして保持します。
+2. Workが利用できないことを理由に、独立性・review数・runtime条件・evidence条件を弱めません。
+3. 別のChat作業を進められるのは、その作業が既に必要性を持ち、blocked作業から独立し、後でやり直しにならず、Cocolon完成へ直接接続する場合だけです。
+4. 停止を避けるためだけに、資料、closure、handoff、周辺system、別authorityを発明しません。
+5. 有効な独立作業がなければ、その技術経路をWork利用可能まで停止します。
+6. Work必須という理由だけで、追加クレジット購入をMash様へ要求しません。
+
+# 9. subagentとの関係
+
+1. subagentは、current authority、privacy、read-only境界の内側で利用します。
+2. subagent出力は候補であり、華恋が原典とactual fileを再確認します。
+3. final verification、判断、write、commit、GitHub reflection、報告は華恋が担います。
+4. `WORK_ULTRA_REQUIRED`は、subagentがCocolon codeを編集・commit・公開してよいという意味ではありません。
+5. subagentが利用できなくてもChatで要求品質を維持できる場合、判定は`CHAT_5_6_PRO_OK`のままです。
+6. 独立agent evidence自体が必要な場合、華恋単体の反復確認は代替になりません。
+
+# 10. Chat / Work切替時の正本
+
+ChatとWorkの切替時は、chat-only memory、scratch path、container cache、subagent messageだけを継続根拠にしません。
+
+再開前に、latest fresh-verified durable GitHub checkpointから少なくとも次を確認します。
+
+- repository HEAD / tree
+- current authority lifecycle
+- exact path / bytes / hash
+- completed effect / zero effect / incomplete effect
+- STOP / PASS / pending state
+- non-reuse boundary
+- exact next action
+- required environment classification
+
+一般継続記録は`../14_cocolon_continuous_work_recording_and_emergency_handoff.md`と`17_continuous_durable_work_recording_and_emergency_handoff.txt`を正本とします。
+
+Python / pytest Work runtimeを扱う場合は、環境選択後に`../13_cocolon_work_test_runner_runtime_continuity.md`と`16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`を追加で適用します。
+
+# 11. このルールが許可しないこと
+
+このルールは次を許可しません。
+
+- technical authorityの承認・activation・consumption
+- GitHub writeの自動承認
+- 未承認artifactの公開
+- model変更の黙示承認
+- Work Ultra課金の黙示承認
+- subagentへのwrite / commit委任
+- quality条件の弱化
+- automatic progression
+
+環境判定後も、対象作業のcurrent authority、Mash様の明示承認、前提資料、実ファイル、GitHub reflection contractを別途守ります。
