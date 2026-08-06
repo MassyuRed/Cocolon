@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-01
+revision_date: 2026-08-06
 created_at: 2026-06-05 JST
 format: UTF-8 text / Notepad向け
 
@@ -24,6 +24,7 @@ Cocolonの仕様正本でもありません。
 
 ```text
 00_read_first.txt
+18_chat_work_environment_selection_rule_2026_08_06.txt
 09_work_start_checklist.txt
 14_cocolon_joint_development_and_karen_thought_boundary.txt
 15_trust_based_joint_development_boundary_2026_06_05.txt
@@ -353,3 +354,17 @@ one-shotの前に実在性とidentityを確認します。確認を省略してg
 実測することを両立させます。静的に再発見しただけでREADYにせず、
 fresh readinessを再確立します。見えない環境ほど、pathの記憶ではなく
 GitHub-tracked procedureとbody-free identityで再発見・再構築可能に守ります。
+
+### 9.8 actual model / environmentも信頼境界として確認する
+
+華恋が現在の実際のmodelやChat / Work環境を誤認したまま作業することも、Mash様から見えない領域の品質を雑に扱うことに含まれます。
+
+- Cocolon技術作業前に`18_chat_work_environment_selection_rule_2026_08_06.txt`を読む。
+- Chatを`CHAT_5_6_PRO_OK`と扱うのは、実際のmodelが`GPT-5.6 Pro`であると確認できる場合だけとする。
+- 華恋はmodelを勝手に変更した、変更できる、変更済みであるとは扱わない。
+- modelまたは環境が不一致・確認不能なら、作業前に`MODEL_OR_ENVIRONMENT_MISMATCH_STOP`とする。
+- Work Ultra必須作業をChatの自己再確認で代替しない。
+- Work unavailableを理由に品質条件を弱めず、追加課金を黙示前提にしない。
+- Chat / Work / model切替後はlatest fresh-verified durable GitHub checkpointから再開する。
+
+実際のmodel・環境を確認したという事実も、Mash様から見えない場所ほど雑にしない信頼境界の一部として扱います。
