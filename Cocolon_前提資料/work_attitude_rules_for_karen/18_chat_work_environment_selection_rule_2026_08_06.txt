@@ -1,0 +1,95 @@
+chat_work_environment_selection_rule
+revision_date: 2026-08-06
+normative_status: CURRENT
+decision_owner: Mash
+operational_owner: Karen
+
+# Purpose
+
+This rule fixes how Karen chooses between Chat 5.6 Pro and Work Ultra for Cocolon work. Mash must not be required to judge the technical environment. Karen judges the environment before each bounded work unit and reports the result.
+
+# Default environment
+
+1. `CHAT_5_6_PRO_OK` is the default.
+2. Work Ultra is not selected merely because it is faster, more convenient, or capable of finishing a large task in fewer responses.
+3. Chat remains acceptable when the same required quality, evidence, coverage, and completion conditions can be preserved by decomposition, deterministic verification, durable checkpoints, and fresh postverification.
+4. The quality bar does not change between environments. Only the execution method and decomposition may change.
+
+# Required Work Ultra condition
+
+Karen must classify a work unit as `WORK_ULTRA_REQUIRED` when at least one of the following is true:
+
+1. independent multiple-agent review itself is an explicit completion condition;
+2. repeating review by the same Karen cannot honestly satisfy the required independence;
+3. independent parallel hypothesis investigation is necessary to preserve evidentiary independence;
+4. repository-wide or cross-repository coverage cannot be safely decomposed while proving full coverage and boundary consistency;
+5. an atomic or single-use authority contains a Work-required stage and splitting the authority would break lifecycle, consumption, identity, or evidence boundaries;
+6. Karen cannot maintain the required quality in Chat despite bounded decomposition and verification.
+
+When `WORK_ULTRA_REQUIRED` applies, Karen must not downgrade the requirement, simulate independent agents by repeated self-review, or report the work complete in Chat.
+
+# Work unit and response boundary
+
+1. Environment selection is made per bounded work unit, not merely per message.
+2. Typical work units include one authority, one bounded correction, one audit, one implementation-plus-verification publication, one STOP recovery, or one design decision.
+3. If one response contains multiple separable work units, Karen may classify them separately.
+4. If the work units are inseparable under one atomic authority, the strictest required environment governs the whole authority.
+
+# Required visible report
+
+Before technical execution, Karen reports:
+
+- current environment classification: `CHAT_5_6_PRO_OK` or `WORK_ULTRA_REQUIRED`;
+- exact bounded work unit;
+- reason;
+- condition that would change the classification, when applicable.
+
+At the end of the work unit, Karen reports the environment classification for the next exact work unit.
+
+Mash only needs to state whether Work Ultra is currently available. Mash is not responsible for deciding whether it is technically required.
+
+# Mid-work reclassification
+
+If new confirmed facts make a Chat work unit require Work Ultra:
+
+1. stop at the nearest safe atomic boundary;
+2. do not classify incomplete work as complete;
+3. durably record current authority lifecycle, confirmed facts, artifacts, exact paths, hashes, performed effects, unperformed effects, and the next Work entry point;
+4. fresh-read verify the checkpoint;
+5. report `WORK_ULTRA_REQUIRED` and the exact restart point.
+
+Environment change alone does not authorize automatic progression or a new authority.
+
+# Work unavailable
+
+When Work Ultra is required but unavailable:
+
+1. the Work-required work unit remains STOPPED or pending;
+2. Karen may proceed with a different Chat work unit only when it is already justified, independent of the blocked work, will not require later reversal, and directly connects to Cocolon completion;
+3. Karen must not invent documentation, closure, handoff, or surrounding work merely to avoid stopping;
+4. if no valid independent work exists, the technical path remains stopped until Work becomes available.
+
+# Relationship to subagents
+
+1. Subagent output remains read-only candidate assistance unless a current authority explicitly defines another permitted role.
+2. Final verification, judgment, write, commit, publication, and reporting remain Karen's responsibility.
+3. `WORK_ULTRA_REQUIRED` does not mean subagents may edit Cocolon code or perform GitHub writes.
+4. When subagents are unavailable but Chat can maintain the required quality, the classification remains `CHAT_5_6_PRO_OK`.
+5. When independent-agent evidence itself is required, Chat self-review is not a substitute.
+
+# Environment transition source of truth
+
+When switching between Chat and Work, continuation must start from the latest fresh-verified durable GitHub checkpoint, not from chat-only memory, scratch paths, cached containers, or subagent messages.
+
+The checkpoint must identify at least:
+
+- repository HEAD/tree;
+- current authority lifecycle;
+- exact paths and hashes;
+- completed and incomplete effects;
+- STOP/PASS state;
+- exact next action and environment classification.
+
+# No automatic progression
+
+This rule chooses the execution environment only. It does not approve implementation, consume an authority, authorize GitHub writes beyond Mash's explicit approval, or permit automatic progression.
