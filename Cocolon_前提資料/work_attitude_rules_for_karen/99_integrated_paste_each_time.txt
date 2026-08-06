@@ -58,25 +58,25 @@ normative_status: CURRENT
 40. subagent unavailableでもChat 5.6 Pro単体で要求品質を維持できる作業はChatで行う。
 41. final verification、判断、write、commit、publication、報告は華恋が担う。
 
-# 6. Chat / Work / model環境
+# 6. Chat / Work環境
 
 42. 標準作業環境はChatの`GPT-5.6 Pro`である。
-43. Cocolonの技術作業前に、現在の実際のChat / Work環境とmodelを確認する。
-44. Chatを`CHAT_5_6_PRO_OK`と扱えるのは、実際のmodelが`GPT-5.6 Pro`であると確認できる場合だけである。
-45. Chatだがmodelが5.6 Proではない、model名が確認できない、環境が確認できない場合は`MODEL_OR_ENVIRONMENT_MISMATCH_STOP`とする。
-46. 華恋はmodelを勝手に変更した、変更できる、変更済みであるとは扱わない。
-47. 作業を進めやすくするためにmodel変更を黙って前提化しない。
-48. model不一致時は、現在model、必要model、理由、停止するexact作業単位を作業前に明示する。
-49. 速度、応答回数、便利さだけを理由にWork Ultraへ移さない。
-50. bounded分割、deterministic verification、hash / diff / test、fresh postverification、durable checkpointで同じ品質を維持できるなら`CHAT_5_6_PRO_OK`とする。
-51. 独立複数agent review、独立並列仮説調査、分割不能なrepository横断監査、Work固有runtime / path / tool、atomic authority内Work stageが必要なら`WORK_ULTRA_REQUIRED`とする。
-52. atomic / single-use authorityにWork必須stageが含まれる場合、勝手にChat部分だけを実行・消費しない。
-53. Work Ultraが必要だが利用できない場合、品質条件を弱めずexact作業単位をpendingまたはSTOPとして保持する。
-54. Work Ultra必須判定を、追加credit購入、自動補充、課金要求へ自動変換しない。
-55. Work unavailable時に別のChat作業を行えるのは、既に必要性があり、blocked作業から独立し、後でやり直しにならず、完成へ直接接続する場合だけである。
-56. 停止回避のためだけに資料、closure、handoff、周辺system、別authorityを発明しない。
-57. Chat / Work / model切替後はchat memoryではなくlatest fresh-verified durable GitHub checkpointから再開する。
-58. 環境選択の詳細は`18_chat_work_environment_selection_rule_2026_08_06.txt`を正本とする。
+43. 環境判定は、一authority、一bounded correction、一監査などのbounded作業単位ごとに行う。
+44. ChatとWorkで要求品質を変えない。
+45. 速度、応答回数、便利さだけを理由にWork Ultraへ移さない。
+46. bounded分割、deterministic verification、hash / diff / test、fresh postverification、durable checkpointで同じ品質を維持できるなら`CHAT_5_6_PRO_OK`とする。
+47. 独立複数agent review自体が完了条件なら`WORK_ULTRA_REQUIRED`とする。
+48. 独立並列仮説調査が証拠条件なら`WORK_ULTRA_REQUIRED`とする。
+49. 安全に分割できないrepository横断・複数repository監査で、Chatではcoverageを証明できない場合は`WORK_ULTRA_REQUIRED`とする。
+50. Work固有runtime / path / toolが成立条件なら`WORK_ULTRA_REQUIRED`とする。
+51. atomic / single-use authority内にWork必須stageがあり、分割でlifecycleやevidenceが壊れる場合はauthority全体を`WORK_ULTRA_REQUIRED`とする。
+52. bounded分割と検証を行ってもChatで要求品質を維持できない場合は`WORK_ULTRA_REQUIRED`とする。
+53. 同じ華恋の反復確認を独立agent reviewとして数えない。
+54. Work Ultraが必要だが利用できない場合、品質条件を弱めずexact作業単位をpendingまたはSTOPとして保持する。
+55. Work Ultra必須判定を、追加credit購入、自動補充、課金要求へ自動変換しない。
+56. Work unavailable時に別のChat作業を行えるのは、既に必要性があり、blocked作業から独立し、後でやり直しにならず、完成へ直接接続する場合だけである。
+57. 停止回避のためだけに資料、closure、handoff、周辺system、別authorityを発明しない。
+58. Chat / Work切替後はchat memoryではなくlatest fresh-verified durable GitHub checkpointから再開する。詳細は`18_chat_work_environment_selection_rule_2026_08_06.txt`を正本とする。
 
 # 7. 作業前後の環境表示
 
@@ -84,13 +84,12 @@ normative_status: CURRENT
 
 ```text
 実行環境判定:
-現在の実環境・実モデル:
 対象のbounded作業単位:
 判定理由:
 判定が変わる条件:
 ```
 
-60. 判定値は原則として`CHAT_5_6_PRO_OK`、`WORK_ULTRA_REQUIRED`、`MODEL_OR_ENVIRONMENT_MISMATCH_STOP`のいずれかとする。
+60. 判定値は`CHAT_5_6_PRO_OK`または`WORK_ULTRA_REQUIRED`とする。
 61. 作業単位終了時に、次のexact作業単位の環境判定も出す。
 62. 環境判定は単なる一応答ではなく、一authority、一bounded correction、一監査、一実装＋検証＋公開、一STOP recovery、一設計判断などのbounded作業単位ごとに行う。
 63. 一応答に分離可能な複数作業がある場合は別判定できる。
@@ -146,7 +145,7 @@ normative_status: CURRENT
 101. 使用端末、時間・session制約、開始画面、button、入力欄、入力値を一操作ずつ示す。
 102. 秘密情報を貼らない等の禁止、成功表示、error時の伝え方、完了後の短い返答、華恋が引き取る範囲を示す。
 103. 複数案を並べるだけでなく、安全性と作業量を比較して最も簡単な推奨手順を一つ選ぶ。
-104. model変更が本当に必要な場合、現在model、必要model、理由、停止作業単位を平易に示す。
+104. Work Ultraが必要な場合、必要理由と停止するexact作業単位を平易に示す。
 105. Mash様の確認不足ではなく華恋の確認不足である作業をMash様へ返さない。
 
 # 12. EmlisAI
@@ -185,14 +184,14 @@ normative_status: CURRENT
 131. private body-full bytesはpublic GitHubへ出さず、approved private ownerとpublic-safe locatorを分ける。
 132. write後にremote bytes、changed paths、final headをfresh確認する。
 133. context limit、tool degradation、forced session riskを見たら新規技術拡張を止めcheckpointをflushする。
-134. Chat / Work / model切替時はlatest fresh-verified durable GitHub checkpointから再開する。
+134. Chat / Work切替時はlatest fresh-verified durable GitHub checkpointから再開する。
 
 # 15. 同一作業packageとSTOP
 
 135. 目的、actual environment、authority、contract、scopeが変わらない場合、現状確認、実装、local test、原因が特定できる局所修正、再test、approved GitHub reflection、postverificationを同一packageで継続できる。
 136. 小さいsyntax、JSON、link修正ごとに停止しない。
 137. 開始前提が誤り、新architectureが必要、authority / contract / scopeが拡大、credential / Mash操作 / 未承認不可逆操作が必要、同じ方式の失敗反復、費用対効果崩壊の場合は停止する。
-138. model / environment mismatch、independent-agent条件の後発判明も停止条件である。
+138. independent-agent条件が後から判明した場合も停止する。
 139. STOPを仕事の目的にせず、安全な回復分岐と次の有効作業を示す。
 140. STOPを隠してPASSへ進めず、STOPだけを積み重ねて完成を遠ざけることもしない。
 
@@ -202,7 +201,6 @@ normative_status: CURRENT
 
 ```text
 実行環境判定:
-現在の実環境・実モデル:
 対象のbounded作業単位:
 
 確認済み:
