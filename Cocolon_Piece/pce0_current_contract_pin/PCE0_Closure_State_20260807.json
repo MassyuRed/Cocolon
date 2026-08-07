@@ -1,0 +1,67 @@
+{
+  "schema_version": "cocolon.piece.pce0.closure_state.v1",
+  "created_at": "2026-08-07 JST",
+  "decision_owner": "Mash",
+  "operational_owner": "Karen",
+  "workstream": "Cocolon / Piece",
+  "phase": {
+    "phase_id": "PCE-0",
+    "phase_name": "Current Contract Pin",
+    "formal_completion": true,
+    "state": "PCE0_COMPLETE_CURRENT_CONTRACT_PINNED",
+    "pce1_activated": false,
+    "automatic_progression": false,
+    "next_action": "PCE1_SEPARATE_MASH_APPROVAL_AND_IDENTITY_COMPATIBILITY_DECISION"
+  },
+  "source_identity": {
+    "cocolon_head_before_result": "e23f4c40613fb7cbcb32149416cc87372d784067",
+    "mashos_api_head": "315813c7bd3372462de926ddad74df567254a6b5",
+    "supabase_packet_version": "pce0.current_supabase_piece_catalog.v2",
+    "supabase_captured_at_utc": "2026-08-07T09:41:56.410491",
+    "supabase_packet_utf8_bytes": 26484,
+    "supabase_packet_sha256": "2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e",
+    "supabase_result_bundle": {
+      "path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Catalog_Result_20260807.json.gz.b64",
+      "manifest_path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Catalog_Result_20260807.bundle.json",
+      "gzip_bytes": 2752,
+      "gzip_sha256": "ea292aa744e273c8d7b682102e7bf4a8fdecd63e65bfc73ddae095adcc34fc8a",
+      "base64_ascii_bytes": 3672,
+      "base64_ascii_sha256": "95d2fd13a509ba39c50782fe45921992c19b48bfad0047ea3e969431087c2ee6",
+      "reconstructs_original_sha256": "2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e"
+    }
+  },
+  "resolved": {
+    "PCE0-U001": "RESOLVED_CURRENT_SOURCE_TYPE_CONSTRAINT_INCLUDES_EMOTION_GENERATED",
+    "PCE0-U002": "RESOLVED_BACKEND_APPLICATION_OWNED_ACCESS_RLS_ENABLED_POLICY_EXACT0",
+    "PCE0-U003": "RESOLVED_AS_APPLICATION_MIGRATION_OWNER_ABSENT_CARRY_TO_PCE6",
+    "PCE0-U004": "RESOLVED_PIECES_VIEW_PRESENT_PIECES_READ_ABSENT"
+  },
+  "current_db": {
+    "write_table": "public.mymodel_reflections",
+    "read_view": "public.pieces",
+    "read_view_security_invoker": true,
+    "pieces_read_present": false,
+    "rls_enabled": true,
+    "rls_forced": false,
+    "policy_count": 0,
+    "application_migration_relation_present": false
+  },
+  "deferred_nonblocking": [
+    "PCE0-U009_APPLICATION_ROW_AGGREGATES",
+    "SERVICE_ROLE_ROLE_ATTRIBUTE_AND_DEPLOYED_ENDPOINT_SMOKE_TO_PCE7",
+    "FULL_PIECE_NEXUS_TEST_EXECUTION_TO_PCE7",
+    "TRACKED_APPLICATION_MIGRATION_BASELINE_TO_PCE6"
+  ],
+  "technical_effects": {
+    "cocolon_production_source_change": 0,
+    "mashos_api_production_source_change": 0,
+    "db_change": 0,
+    "api_change": 0,
+    "rn_change": 0,
+    "migration": 0,
+    "test_execution": 0,
+    "runtime_execution": 0,
+    "emlis_ai_state_effect": 0,
+    "release_effect": 0
+  }
+}
