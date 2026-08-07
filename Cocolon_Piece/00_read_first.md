@@ -28,14 +28,32 @@ Piece成果物を`EmlisAIの実装済み資料/`へ混在させません。
 
 ```text
 PieceはQ&Aそのものではない。
-Q&AはPieceの一形式である。
+Q&Aは旧仕様で採用されていた一形式である。
 
 Pieceは、
 ユーザーの考えや価値観を他者に伝えるための文章に整形し、
 画像化する機能である。
 ```
 
-current Q&A implementation / recordは既存formatかつcompatibility基盤です。Piece全体のidentityではありません。
+2026-08-07、Mashはcurrent Q&A Pieceがまだユーザーに利用されておらず、既存Q&A data、旧投稿画面、旧Q&A renderer、old/new coexistenceを保持する必要がないと明示した。
+
+```text
+new Piece cutover:
+  CLEAN_REPLACEMENT_ALLOWED
+
+existing Q&A preservation:
+  NOT_REQUIRED
+
+compatibility renderer / dual run:
+  NOT_REQUIRED
+```
+
+current decision owner:
+
+```text
+Cocolon_Piece/pce1_identity_clean_cutover/
+Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md
+```
 
 ## 3. current phase state
 
@@ -49,9 +67,15 @@ PCE-0:
 current technical state:
   PCE0_COMPLETE_CURRENT_CONTRACT_PINNED
 
+next phase:
+  PCE-1 Piece Identity / Clean Cutover Decision
+
 PCE-1:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
+
+PCE-1 product premise:
+  CLEAN_CUTOVER_FIXED
 
 automatic progression:
   FALSE
@@ -67,6 +91,16 @@ Cocolon_Piece/pce0_current_contract_pin/
 Piece_PCE0_Current_Catalog_Analysis_And_Closure_20260807.md
 PCE0_Closure_State_20260807.json
 Piece_PCE0_Closure_Ledger_20260807.md
+```
+
+PCE-1 prestart decision owner:
+
+```text
+Cocolon_前提資料/
+15C_cocolon_piece_workstream_clean_cutover_product_decision_20260807.md
+
+Cocolon_Piece/pce1_identity_clean_cutover/
+Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md
 ```
 
 ## 4. PCE-0で固定したcurrent actual
@@ -105,15 +139,17 @@ migration history owner不存在は、current catalogを未確認へ戻しませ
 ## 5. 最初に読む順序
 
 1. `Cocolon_前提資料/15B_cocolon_piece_workstream_pce0_closure_20260807.md`
-2. `Cocolon_Piece/pce0_current_contract_pin/PCE0_Closure_State_20260807.json`
-3. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Current_Catalog_Analysis_And_Closure_20260807.md`
-4. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Closure_Ledger_20260807.md`
-5. `Cocolon_Piece/manifest.json`
-6. `Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md`
-7. roadmap partsを番号順に読む
-8. `Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md`
-9. handoff partsを番号順に読む
-10. Phase-specific current成果物を読む
+2. `Cocolon_前提資料/15C_cocolon_piece_workstream_clean_cutover_product_decision_20260807.md`
+3. `Cocolon_Piece/pce1_identity_clean_cutover/Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md`
+4. `Cocolon_Piece/pce0_current_contract_pin/PCE0_Closure_State_20260807.json`
+5. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Current_Catalog_Analysis_And_Closure_20260807.md`
+6. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Closure_Ledger_20260807.md`
+7. `Cocolon_Piece/manifest.json`
+8. `Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md`
+9. roadmap partsを番号順に読む。ただしPCE-1 compatibility / coexistenceのprior recommendationはcurrent overlayで置換する。
+10. `Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md`
+11. handoff partsを番号順に読む
+12. Phase-specific current成果物を読む
 
 Cocolon作業全体の開始時には、これより先に`Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`を読みます。
 
@@ -166,21 +202,42 @@ handoff:
 
 PCE-1は別承認後に開始します。
 
-最初に決める事項:
+既に固定済みで再質問しない事項:
 
 ```text
-existing Q&Aを、
-new Piece導入後もユーザーが選べる現役formatとして残すか、
-既存record表示のcompatibility formatだけにするか。
+old Q&Aを残さない。
+existing Q&A dataをpreserve / content-migrateしない。
+old / new投稿画面を並行運用しない。
+compatibility rendererを作らない。
+Pieceを完全に新構造へ切り替える。
 ```
 
-その後、version、existing record adapter、Nexus renderer、compatibility duration、normative ownerを固定します。
+PCE-1で残る設計事項:
+
+```text
+new Piece identity / record contract
+new storage target
+posting / preview / image / Nexusの単一flow
+old Q&A UI / API / service / renderer / dataのexact removal map
+shared table内のPiece以外を除外するdeletion predicate
+clean cutover順序とSTOP条件
+normative owner update map
+```
+
+次authority候補:
+
+```text
+PCE1_PIECE_IDENTITY_AND_CLEAN_CUTOVER_DESIGN
+```
 
 ## 9. 禁止事項
 
 - PCE-1へautomatic progressionする。
-- Q&AをPiece identityへ戻す。
-- current Q&A recordを確認せず削除・一括migrationする。
+- Q&AをPiece identityまたは将来の現役formatへ戻す。
+- old Q&A preservation / coexistenceをcurrent requirementとして復活させる。
+- product decisionだけを根拠に即時DB DELETE / DROP、code削除、route停止を行う。
+- `mymodel_reflections` shared table全体や、Piece以外のcreate / generated dataを削除対象へ含める。
+- exact writer / reader / quota / metrics / read / resonance / account-delete dependencyを確認せずold Q&A構造を消す。
 - application migration owner不存在を、Supabase内部migration tableで代用する。
 - current catalog snapshotなしでfuture DDLを作る。
 - Emlis visible bodyをPiece本文へコピーする。
@@ -194,13 +251,16 @@ new Piece導入後もユーザーが選べる現役formatとして残すか、
 PCE-0 documentation / evidence:
   GitHub reflected after closure publication
 
+clean cutover product decision:
+  GitHub reflected
+
 Cocolon production source:
   0
 
 mashos-api production source:
   0
 
-DB / API / RN / migration:
+DB / API / RN / migration / data deletion:
   0
 
 test / runtime:
