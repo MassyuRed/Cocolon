@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-## 1. current owner
+## 1. Current owner
 
 ```text
 Piece workstream:
@@ -20,60 +20,49 @@ EmlisAI implementation history:
   EmlisAIの実装済み資料/
 
 current Piece premise:
-  Cocolon_前提資料/15H_cocolon_piece_workstream_pce5_design_closure_20260808.md
+  Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md
 ```
 
-Piece成果物をEmlisAI実装履歴へ混在させない。Piece / EmlisAI / Analysisの内部ownerを統合せず、PCE-2で固定したbody-free source handoffだけで接続する。
+Piece / EmlisAI / Analysisの内部ownerを統合しない。PieceはPCE-2のbody-free source handoffだけでsaved inputと接続する。
 
-## 2. current Piece identity
+## 2. Current Piece identity
 
 ```text
-user-facing name:
-  Piece
-
 Piece:
-  保存済みのユーザー入力を起点に、
-  その考えや価値観を他者へ伝わるcanonical textへ整形し、
-  reproducible visual recipeで画像化できるユーザー所有artifact。
+  保存済みユーザー入力を起点に、
+  考えや価値観を他者へ伝わるcanonical textへ整形し、
+  versioned visual recipeで画像化できるユーザー所有artifact。
 
-record contract:
+record:
   piece.record.v2
+
+public identity:
+  piece:<uuid>
 
 canonical visible body:
   piece_text
 
 image binary:
   derived export artifact
-  record source-of-truth exact0
+  record/feed source-of-truth exact0
 
 Q&A:
-  pre-release legacy specification
-  new active format exact0
-  preservation / migration / compatibility renderer exact0
+  pre-release legacy
+  new active format / migration / compatibility exact0
 ```
 
-## 3. current phase state
+## 3. Phase state
 
 ```text
-PCE-0 Current Contract Pin:
-  COMPLETE
+PCE-0: COMPLETE
+PCE-1: COMPLETE_DESIGN_ONLY
+PCE-2: COMPLETE_DESIGN_ONLY
+PCE-3: COMPLETE_DESIGN_ONLY
+PCE-4: COMPLETE_DESIGN_ONLY
+PCE-5: COMPLETE_DESIGN_ONLY
+PCE-6: COMPLETE_DESIGN_ONLY
 
-PCE-1 Piece Identity / Clean Cutover Decision:
-  COMPLETE_DESIGN_ONLY
-
-PCE-2 Cross-Core Source Handoff:
-  COMPLETE_DESIGN_ONLY
-
-PCE-3 Record Lifecycle / Visibility / Quota:
-  COMPLETE_DESIGN_ONLY
-
-PCE-4 Content / Format / Safety:
-  COMPLETE_DESIGN_ONLY
-
-PCE-5 Visual Recipe / Export Design:
-  COMPLETE_DESIGN_ONLY
-
-PCE-6 API / DB / RN / Migration Design:
+PCE-7 Test / Monitoring / Rollback:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
@@ -85,507 +74,267 @@ automatic progression:
   false
 ```
 
-## 4. current design owners
-
-### roadmap
+## 4. Canonical design owners
 
 ```text
-Cocolon_Piece/roadmap/
-Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/
-  README.md
-  bundle.json
-  Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md.gz.b64
+PCE-1:
+  Cocolon_Piece/pce1_identity_clean_cutover/
+
+PCE-2:
+  Cocolon_Piece/pce2_cross_core_source_handoff/
+
+PCE-3:
+  Cocolon_Piece/pce3_record_lifecycle_visibility_quota/
+
+PCE-4:
+  Cocolon_Piece/pce4_content_format_safety/
+
+PCE-5:
+  Cocolon_Piece/pce5_visual_recipe_export/
+
+PCE-6:
+  Cocolon_Piece/pce6_api_db_rn_migration/
+    Piece_New_Data_Contract_Design_20260808.md
+    Piece_API_CleanCutover_Design_20260808.md
+    Piece_RN_Flow_Design_20260808.md
+    Piece_OldQna_Removal_And_DB_Migration_Design_20260808.md
 ```
 
-### PCE-1
+## 5. PCE-1 through PCE-5 fixed boundary
 
 ```text
-Cocolon_Piece/pce1_identity_clean_cutover/
-  Piece_Identity_CleanCutover_Decision_20260807.md
-  Piece_New_Record_Contract_Matrix_20260807.md
-  Piece_OldQna_Removal_Map_20260807.md
-  Piece_Normative_Definition_Update_Map_20260807.md
-```
+clean cutover:
+  old Q&A preservation / adapter / visible coexistence exact0
 
-### PCE-2
+source:
+  saved input exact1
+  refined supplemental remains distinct
+  Emlis / Analysis body reuse exact0
 
-```text
-Cocolon_Piece/pce2_cross_core_source_handoff/
-  Piece_CrossCore_Source_Handoff_Contract_20260807.md
-  Piece_Source_Role_Matrix_20260807.md
-  Piece_Forbidden_Mixing_Negative_Contract_20260807.md
-```
-
-### PCE-3
-
-```text
-Cocolon_Piece/pce3_record_lifecycle_visibility_quota/
-  Piece_Record_Lifecycle_StateMachine_20260807.md
-  Piece_Visibility_Access_Contract_20260807.md
-  Piece_Quota_Consumption_Contract_20260807.md
-  Piece_Delete_ExternalShare_Boundary_20260807.md
-```
-
-### PCE-4
-
-```text
-Cocolon_Piece/pce4_content_format_safety/
-  Piece_Content_Meaning_Contract_20260807.md
-  Piece_Format_Owner_Decision_20260807.md
-  Piece_Public_Safety_Transformation_Contract_20260807.md
-  Piece_User_Selection_Boundary_20260807.md
-```
-
-### PCE-5
-
-```text
-Cocolon_Piece/pce5_visual_recipe_export/
-  Piece_Visual_Recipe_Contract_20260808.md
-  Piece_Export_Owner_Comparison_20260808.md
-  Piece_Render_Reproducibility_Contract_20260808.md
-  Piece_LongText_Layout_Policy_20260808.md
-
-premise:
-  Cocolon_前提資料/15H_cocolon_piece_workstream_pce5_design_closure_20260808.md
-```
-
-## 5. fixed PCE-1 decisions
-
-```text
-record:
-  piece.record.v2
-
-public identity:
-  piece:<uuid>
-
-new physical owner direction:
-  public.piece_records
-
-read projection after cutover:
-  public.pieces
-
-old current Q&A rows:
-  mymodel_reflections.source_type = emotion_generated
-  -> exact removal candidate after new flow verification
-
-shared data:
-  create / generated / unrelated consumers
-  -> no automatic deletion
-
-rollback:
-  safe-disable new Piece
-  not old Q&A restoration
-```
-
-## 6. fixed PCE-2 decisions
-
-```text
-cross-core handoff:
-  cocolon.cross_core.source_handoff.v1
-
-Piece source lineage:
-  piece.source_lineage.v1
-
-source root:
-  saved input identity exact1
-
-normal:
-  original exact1
-
-pre-question:
-  original exact1
-  question decision control exact1
-  supplemental exact0
-
-refined:
-  original exact1
-  supplemental exact1
-  question decision control exact1
-
-Emlis visible body as Piece source:
-  exact0
-
-Analysis inference as Piece source:
-  exact0
-
-Piece / Analysis mutual completion dependency:
-  exact0
-
-runtime binding:
-  exact0 in PCE-2
-  PCE-9C owner
-```
-
-## 7. fixed PCE-3 decisions
-
-```text
-record lifecycle:
-  piece.record_lifecycle.v1
-
-visibility / access:
-  piece.visibility_access.v1
-
-quota:
-  piece.quota_consumption.v1
-
-delete / external share:
-  piece.delete_external_share_boundary.v1
-```
-
-```text
-lifecycle_status:
+lifecycle:
   preview_draft / saved / cancelled / rejected / expired / deleted
 
-visibility_scope:
-  private / public
-
-default visibility:
-  private
-
-public:
-  current viewer-access relationでallowed viewerのみ
-  world-readable exact0
-
-private:
-  owner-only
-  owner history / export / re-export allowed
-  Nexus / unread / resonance / friend notification exact0
+visibility:
+  private default
+  public only for current allowed viewer relation
 
 quota:
-  first successful PieceRecord save exact1
-  private/public equal
-  visibility change / re-export exact0
-  new text / new format exact1
+  first successful save exact1
+  visibility/re-export exact0
+  new text/format exact1
   delete refund exact0
 
-external copy:
-  private化 / deleteで回収不能
+formats exact3:
+  short_essay / quote / declaration
+
+meaning/safety:
+  equal for every plan and private/public
+  user free text edit exact0
+
+visual:
+  versioned recipe/catalog
+  themes exact2
+  ratios 4:5 / 9:16
+  PNG derived export
+  RN-first prototype, device-gated release
 ```
 
-## 8. fixed PCE-4 decisions
+## 6. PCE-6 fixed contracts
 
 ```text
-content meaning:
-  piece.content_meaning.v1
+data contract:
+  piece.data_contract.v1
 
-content payload:
-  piece.content_payload.v1
+API:
+  piece.api.v2
 
-format owner:
-  piece.format_owner.v1
+RN flow:
+  piece.rn_flow.v1
 
-public safety:
-  piece.public_safety_transformation.v1
-
-user selection:
-  piece.user_selection_boundary.v1
+migration:
+  piece.clean_cutover_migration.v1
 ```
 
+### Data / DB
+
 ```text
-source canonical:
-  saved input
-  refined only: distinct supplemental answer
+selected physical owner:
+  public.piece_records + dedicated Piece family
 
-derived canonical:
-  PieceRecord.piece_text
+legacy shared table:
+  public.mymodel_reflections preserved for create/generated/unrelated owners
 
-active formats exact3:
-  short_essay
-  quote
-  declaration
+legacy read bridge before view cutover:
+  public.mymodel_reflections_read
 
-default / Free:
-  short_essay
+final new Piece view:
+  public.pieces
 
-Plus:
-  eligible formatsからauto recommendation
+quota:
+  dedicated body-free ledger + owner/JST-month lock
 
-Premium:
-  eligible formatsから選択可能
+state:
+  dedicated metrics / reads / resonances
 
-Q&A active:
-  exact0
+receipts:
+  body-free export / delete
 
-fragment initial active:
-  exact0
+atomic functions:
+  piece_save_v2
+  piece_set_visibility_v2
+  piece_delete_v2
 
-meaning fidelity / safety:
-  all plans equal
-
-raw input / Emlis / Analysis body reuse:
-  exact0
-
-user free text edit / safety override:
-  exact0
-
-preview / saved / export text:
-  exact一致
+access:
+  base RLS ENABLE + FORCE
+  RN direct base-table DML exact0
+  backend application-service owner
 ```
 
-## 9. fixed PCE-5 decisions
+`public.pieces` currently serves shared legacy/non-Piece readers. It is replaced only after every such reader moves to `mymodel_reflections_read` and residual caller count is exact0.
+
+### API
 
 ```text
-visual recipe:
-  piece.visual_recipe.v1
+owner routes:
+  GET  /emotion/piece/quota
+  POST /emotion/piece/preview
+  PATCH/DELETE preview resource
+  POST /emotion/piece/save
+  GET  /emotion/piece/history
+  GET/PATCH/DELETE Piece resource
 
-visual catalog:
-  piece.visual_catalog.v1
+public routes:
+  /nexus/pieces resource family
+
+preview source:
+  body-free saved source reference
+  raw payload resend exact0
+
+save:
+  revision + text/content/recipe hashes + visibility + idempotency
+
+backend image render route:
+  initial exact0
+```
+
+Old `publish/cancel`, reflection/Q&A aliases, old `/piece/*` runtime and Q&A wire fields are not release-compatible contracts.
+
+### RN
+
+```text
+entry:
+  saved input + terminal Emlis observation
+
+CTA:
+  この入力をPieceにする
+
+preview:
+  canonical text + visual card + private/public
+
+history:
+  owner-only dedicated flow
+
+Nexus:
+  new Piece payload/card only
 
 export:
-  piece.export_contract.v1
+  saved-record RN-first
 
-renderer interface:
-  piece.render_interface.v1
-
-render reproducibility:
-  piece.render_reproducibility.v1
-
-long-text layout:
-  piece.long_text_layout.v1
-
-export receipt:
-  piece.export_receipt.v1
-```
-
-### visual catalog
-
-```text
-templates exact3:
-  short_essay -> essay_frame v1
-  quote -> focus_frame v1
-  declaration -> stance_frame v1
-
-themes exact2:
-  soft_paper v1
-  quiet_night v1
-
-body font style exact1:
-  system_readable v1
-
-ratios exact2:
-  4:5 -> PNG 1080x1350 sRGB
-  9:16 -> PNG 1080x1920 sRGB
-
-initial MIME:
-  image/png exact1
-
-remote/photo background:
+Q&A preview/card compatibility:
   exact0
 ```
 
-### plan visual boundary
+### Migration
 
 ```text
-Free:
-  soft_paper / 4:5 / required_small branding
-
-Plus:
-  exact2 themes / 4:5 / required_subtle branding
-
-Premium:
-  exact2 themes / 4:5 or 9:16 / required_subtle or off
-
-all plans:
-  same render fidelity
-  same resolution
-  same readability
-  same safety
+M0 tracked migration baseline
+M1 legacy read bridge / caller rebind
+M2 new table foundation
+M3 RLS / RPC / staging projection
+M4 disabled application integration
+M5 single user-visible clean cutover
+M6 body-free old identity capture
+M7 exact destructive cleanup under separate approval
+M8 obsolete contract retirement
 ```
 
-### renderer / export
+Rollback is new Piece safe-disable, never old Q&A restoration.
+
+## 7. Current actual basis
 
 ```text
-record schema:
-  renderer-owner independent
+Cocolon head / tree:
+  96df30f6cdda8f4549065a3b2156c5b75d36026e
+  00196a604415267b45df335220a0b3ff525b910f
 
-code-side prototype:
-  RN_FIRST
-
-release renderer owner:
-  PCE-9E + PCE-11 actual-device gate pending
-
-backend:
-  escalation candidate
-
-hybrid initial active:
-  exact0
-
-silent renderer fallback:
-  exact0
-
-image binary as PieceRecord source-of-truth:
-  exact0
-```
-
-### reproducibility / layout
-
-```text
-release requires:
-  record identity
-  semantic render identity
-  layout equivalence
-
-cross-platform PNG byte identity:
-  diagnostic only
-
-saved recipe/catalog versions:
-  lifetime re-export support required
-
-clipping / ellipsis / content deletion:
-  exact0
-
-font below floor:
-  exact0
-
-fit failure before save:
-  PieceRecord exact0
-  quota exact0
-
-post-save overflow:
-  release blocker
-```
-
-## 10. current actual basis
-
-```text
-Cocolon current design head:
-  b777574b8ca9c5969fba5f78a63ed7b08f272e62
-  tree 0dd930688040534dd57a98099abf3a7d5ef448f3
-
-mashos-api current head:
+mashos-api head / tree:
   315813c7bd3372462de926ddad74df567254a6b5
-  tree a641510e107d52bb910073f36604c85bd57af150
+  a641510e107d52bb910073f36604c85bd57af150
 
-current RN visual primitives:
-  react-native-svg
-  react-native-linear-gradient
+PCE-0 catalog SHA-256:
+  2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e
 
-current file export:
-  react-native-html-to-pdf
-  React Native Share text/PDF pattern
-
-current custom fonts:
-  Cormorant Garamond
-  Space Mono
-
-current Piece image owner:
-  absent
-
-current backend image renderer dependency:
-  absent
-
-PCE-5 runtime / actual-device:
-  exact0 / exact0
+current new Piece implementation / migration / runtime:
+  exact0
 ```
 
-These are design inputs, not PCE-5 implementation results.
+Current actual remains old Q&A over `mymodel_reflections`, raw emotion preview request, question/reflection response, Q&A Nexus payload, compat routes and untracked application migration ownership. PCE-6 is design input, not remediation result.
 
-## 11. first read order
+## 8. Read order
 
 1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-2. `Cocolon_前提資料/15H_cocolon_piece_workstream_pce5_design_closure_20260808.md`
+2. `Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md`
 3. `Cocolon_Piece/manifest.json`
 4. revised clean-cutover roadmap
-5. PCE-1 four design artifacts
-6. PCE-2 three design artifacts
-7. PCE-3 four design artifacts
-8. PCE-4 four design artifacts
-9. PCE-5 four design artifacts
-10. PCE-0 catalog closure when current DB basis is needed
-11. next phase-specific actual files
+5. PCE-1 through PCE-6 canonical artifacts
+6. PCE-0 catalog closure when current DB basis is needed
+7. current mashos-api and RN files for the next phase
 
-## 12. historical material
+## 9. Prohibited
 
-The original additive/compatibility roadmap, pre-clean-cutover handoff, PCE-0 inventory, pre-PCE-1 recommendation, earlier Piece premise checkpoints, and 2026-07-07 Piece design note remain historical evidence.
+- new Pieceを`mymodel_reflections`へQ&A placeholder付きで保存する。
+- `public.pieces`をlegacy caller退避前に置換する。
+- raw input / Emlis / Analysis bodyをPiece request/recordへ複製する。
+- visibilityを`published_at`、quotaをsurviving row countへ戻す。
+- saveとquota、deleteとpurgeを別transactionにする。
+- private owner historyをpublic feed再利用で作る。
+- old Q&A state tablesをnew Pieceへ再利用する。
+- old/new user-visible dual run、compatibility adapter、old Q&A rollbackを作る。
+- tracked migrationなしでSQLを適用する。
+- M7 destructive cleanupを別承認なしに実行する。
+- designをDB/API/RN/migration実装済みと扱う。
+- PCE-7またはAnalysisへautomatic progressionする。
+
+## 10. Next exact actions
 
 ```text
-not current:
-  Q&A preservation / active Q&A
-  compatibility renderer
-  old/new visible coexistence
-  Q&A or fragment initial active format
-  tier-dependent content/render fidelity or safety
-  image binary as feed/record source-of-truth
-  arbitrary user-provided backgrounds/fonts/colors
-  remote image runtime dependency
-  post-save recipe in-place mutation
-  silent latest-template substitution
-  clipping/ellipsis/content deletion as success
-  RN renderer production acceptance without device evidence
+next Piece action:
+  PCE7_TEST_MONITORING_ROLLBACK_DESIGN_ONLY
+
+environment:
+  CHAT_5_6_PRO_OK
+
+state:
+  NOT_ACTIVATED
+  SEPARATE_MASH_APPROVAL_REQUIRED
+
+next cross-workstream action:
+  ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY
 ```
 
-The design note's text/visual separation, export-safe text, recipe versioning, initial RN-first comparison, and external-copy boundary remain reused where consistent with current clean-cutover contracts.
-
-## 13. next exact actions
-
-Next Piece action:
+## 11. Effects
 
 ```text
-PCE6_API_DB_RN_MIGRATION_DESIGN_ONLY
-```
-
-Next cross-workstream queued action:
-
-```text
-ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY
-```
-
-Both require separate Mash approval. PCE-5 closure activates neither.
-
-## 14. prohibited
-
-- image binaryをPieceRecordまたはfeed正本にする。
-- renderer familyをrecord schemaへ埋め込む。
-- raw input / Emlis / Analysis bodyをrecipeや画像hidden layerへ入れる。
-- arbitrary color/font/URL/user backgroundをrecipeへ入れる。
-- same catalog/versionを後から変更する。
-- saved old recipeをlatestへsilent substitutionする。
-- remote photo/textureをinitial runtime必須にする。
-- planにより解像度、可読性、意味保持、安全性を下げる。
-- Freeの長文を低可読fontへ縮小する。
-- template/theme/ratio/branding変更でPiece textを再生成する。
-- post-save recipeをin-place mutationする。
-- export時にPiece textまたはformatを再生成する。
-- silent RN/backend renderer fallbackを行う。
-- clipping、ellipsis、paragraph削除、glyph欠落を成功扱いする。
-- ratioをfitのために無断変更する。
-- owner/metrics/resonance/visibility/quota UIをexport画像へ混入する。
-- PNG filename、EXIF、receipt、metricsへbody/profile/private relationを入れる。
-- actual-device evidenceなしにRN rendererをrelease acceptedとする。
-- PCE-5 designをcapture dependency、renderer、PNG、DB/API/RN実装済みと扱う。
-- PCE-6またはAnalysis roadmapへautomatic progressionする。
-
-## 15. effects
-
-```text
-PCE-5 documentation / premise / checkpoint:
+PCE-6 documentation / premise / checkpoint:
   GitHub reflection required
 
-Cocolon production source:
+production source / DB / API / RN / migration / deletion:
   exact0
 
-mashos-api production source:
+test / runtime / actual device / release:
   exact0
 
-DB / API / RN / migration / data deletion:
-  exact0
-
-capture / share / media-save dependencies:
-  exact0
-
-renderer / PNG generation:
-  exact0
-
-test / runtime / actual device:
-  exact0
-
-EmlisAI technical state:
-  exact0
-
-Analysis runtime state:
-  exact0
-
-release:
+EmlisAI / Analysis technical state:
   exact0
 
 automatic progression:

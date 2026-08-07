@@ -1,48 +1,41 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v9",
+  "schema_version": "cocolon.piece.workstream_manifest.v10",
   "generated_at": "2026-08-08 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_path": "Cocolon_Piece/manifest.json",
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v8",
-    "predecessor_blob": "01067325520c37d2d2738b7c755ec78394bcaad7",
-    "predecessor_head": "b777574b8ca9c5969fba5f78a63ed7b08f272e62",
-    "carry_forward": "PCE-0 through PCE-4 detailed identities remain in immutable predecessor and canonical phase artifacts"
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v9",
+    "predecessor_blob": "daf96ae4cd5bf2d98a46e128fb4b05d63d851084",
+    "predecessor_head": "96df30f6cdda8f4549065a3b2156c5b75d36026e",
+    "carry_forward": "PCE-0 through PCE-5 detailed identities remain in immutable predecessor and canonical phase artifacts"
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "049ab38c5d3fb0d8ba7473ef2c44814b3d0e2868",
-    "utf8_bytes": 12322,
-    "sha256": "bac253de270b5325b1f56037f06dd8e641a5214d8956f5c06374c5ccc0d8a035"
+    "git_blob_sha1": "7b7fef8f5f37c0d3924c4793615572aa15281d8f"
   },
   "current_premise": {
-    "path": "Cocolon_前提資料/15H_cocolon_piece_workstream_pce5_design_closure_20260808.md",
-    "git_blob_sha1": "23411ce07bfbab01c9879a3e0a226a75ccdf2473",
-    "utf8_bytes": 13523,
-    "sha256": "2db75b9ef9f73f3d81739fb7a1c4fcea10f293d98188783dd70dac500ce79d9d"
-  },
-  "separation": {
-    "piece_owner_root": "Cocolon_Piece/",
-    "emlis_history_root": "EmlisAIの実装済み資料/",
-    "analysis_internal_owner_merged": false,
-    "emlis_internal_owner_merged": false,
-    "renderer_owner_embedded_in_record_schema": false,
-    "rule": "Piece成果物をEmlisAI実装履歴へ混在させない"
+    "path": "Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md",
+    "git_blob_sha1": "e00567bdd3a28769c92df0d101b370f06bb9a463"
   },
   "product_definition": {
     "user_facing_name": "Piece",
     "record_contract_id": "piece.record.v2",
-    "current_piece": "保存済みユーザー入力を起点に、考えや価値観を他者へ伝わるcanonical textへ整形し、reproducible visual recipeで画像化できるユーザー所有artifact",
     "canonical_visible_body": "piece_text",
+    "source": "saved input with body-free lineage",
     "image_binary_record_source_of_truth": false,
-    "feed_representation": "piece_text_plus_versioned_visual_recipe",
     "qna_role": "pre_release_legacy_specification",
     "qna_new_active_format": false,
-    "qna_preservation_required": false,
+    "qna_migration_or_compatibility": false,
     "old_new_user_visible_dual_run": false
+  },
+  "separation": {
+    "piece_owner_root": "Cocolon_Piece/",
+    "emlis_history_root": "EmlisAIの実装済み資料/",
+    "emlis_body_reuse": false,
+    "analysis_inference_reuse": false,
+    "renderer_owner_embedded_in_record_schema": false
   },
   "phase_state": {
     "pce0": "COMPLETE",
@@ -51,230 +44,124 @@
     "pce3": "COMPLETE_DESIGN_ONLY",
     "pce4": "COMPLETE_DESIGN_ONLY",
     "pce5": "COMPLETE_DESIGN_ONLY",
-    "pce6": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "pce6": "COMPLETE_DESIGN_ONLY",
+    "pce7": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
-    "next_piece_action": "PCE6_API_DB_RN_MIGRATION_DESIGN_ONLY",
+    "next_piece_action": "PCE7_TEST_MONITORING_ROLLBACK_DESIGN_ONLY",
     "next_cross_workstream_action": "ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY"
   },
   "fixed_contracts": {
-    "pce1_to_pce4_owner": "immutable predecessor manifest v8 and canonical phase artifacts",
-    "pce5": {
-      "visual_recipe_contract_id": "piece.visual_recipe.v1",
-      "visual_catalog_contract_id": "piece.visual_catalog.v1",
-      "export_contract_id": "piece.export_contract.v1",
-      "render_interface_id": "piece.render_interface.v1",
-      "render_reproducibility_contract_id": "piece.render_reproducibility.v1",
-      "long_text_layout_contract_id": "piece.long_text_layout.v1",
-      "export_receipt_contract_id": "piece.export_receipt.v1",
-      "templates": {
-        "short_essay": {
-          "template_id": "essay_frame",
-          "version": 1
-        },
-        "quote": {
-          "template_id": "focus_frame",
-          "version": 1
-        },
-        "declaration": {
-          "template_id": "stance_frame",
-          "version": 1
-        }
-      },
-      "template_count": 3,
-      "themes": [
-        {
-          "theme_id": "soft_paper",
-          "version": 1
-        },
-        {
-          "theme_id": "quiet_night",
-          "version": 1
-        }
+    "pce1_to_pce5_owner": "immutable predecessor manifest v9 and canonical phase artifacts",
+    "pce6": {
+      "data_contract_id": "piece.data_contract.v1",
+      "api_contract_id": "piece.api.v2",
+      "rn_flow_contract_id": "piece.rn_flow.v1",
+      "migration_contract_id": "piece.clean_cutover_migration.v1",
+      "selected_storage_option": "DEDICATED_NEW_PIECE_TABLE_FAMILY",
+      "record_table": "public.piece_records",
+      "final_read_projection": "public.pieces",
+      "legacy_shared_read_bridge": "public.mymodel_reflections_read",
+      "legacy_public_pieces_rebind_required_first": true,
+      "legacy_mymodel_reflections_new_piece_owner": false,
+      "old_qna_child_state_reuse": false,
+      "record_family": [
+        "public.piece_records",
+        "public.piece_quota_month_locks",
+        "public.piece_quota_consumptions",
+        "public.piece_record_metrics",
+        "public.piece_record_reads",
+        "public.piece_record_resonances",
+        "public.piece_export_receipts",
+        "public.piece_delete_receipts"
       ],
-      "theme_count": 2,
-      "body_font_styles": [
-        {
-          "font_style_id": "system_readable",
-          "version": 1
-        }
+      "atomic_functions": [
+        "piece_save_v2",
+        "piece_set_visibility_v2",
+        "piece_delete_v2"
       ],
-      "body_font_style_count": 1,
-      "aspect_ratios": [
-        "4:5",
-        "9:16"
+      "base_rls_enabled": true,
+      "base_rls_forced": true,
+      "rn_direct_base_table_dml": false,
+      "application_service_access_owner": true,
+      "service_role_is_authorization_proof": false,
+      "quota_ledger_body_free": true,
+      "quota_ledger_survives_delete": true,
+      "save_and_quota_atomic": true,
+      "delete_and_purge_atomic": true,
+      "visibility_default": "private",
+      "backend_image_export_initial": false,
+      "preview_source": "body_free_saved_source_reference",
+      "raw_input_resend": false,
+      "owner_history_separate_from_public_feed": true,
+      "old_qna_release_reachability": false,
+      "old_new_visible_dual_run": false,
+      "migration_owner": "mashos-api/supabase/migrations/",
+      "migration_packets": [
+        "M0_TRACKED_BASELINE",
+        "M1_LEGACY_READ_BRIDGE",
+        "M2_NEW_FOUNDATION",
+        "M3_RLS_RPC_STAGING",
+        "M4_DISABLED_INTEGRATION",
+        "M5_SINGLE_CLEAN_CUTOVER",
+        "M6_BODY_FREE_OLD_IDENTITY_CAPTURE",
+        "M7_SEPARATE_APPROVAL_DESTRUCTIVE_CLEANUP",
+        "M8_OBSOLETE_CONTRACT_RETIREMENT"
       ],
-      "aspect_ratio_count": 2,
-      "output_profiles": {
-        "4:5": "png_1080x1350_srgb_v1",
-        "9:16": "png_1080x1920_srgb_v1"
-      },
-      "initial_mime_type": "image/png",
-      "image_binary_record_source_of_truth": false,
-      "remote_asset_runtime_dependency": false,
-      "post_save_recipe_mutation": false,
-      "visual_recipe_hash_required": true,
-      "catalog_immutable_versioned": true,
-      "saved_version_lifetime_reexport_required": true,
-      "release_reproducibility_levels": [
-        0,
-        1,
-        2
-      ],
-      "cross_platform_byte_identity_required": false,
-      "prototype_renderer_owner": "RN_FIRST",
-      "release_renderer_owner": "DEVICE_GATED_PENDING_PCE9E_PCE11",
-      "backend_escalation_candidate": true,
-      "hybrid_initial_active": false,
-      "silent_renderer_fallback": false,
-      "single_image_initial": true,
-      "clipping_allowed": false,
-      "ellipsis_allowed": false,
-      "content_deletion_for_fit": false,
-      "font_below_floor_allowed": false,
-      "save_time_fit_gate_required": true,
-      "fit_failure_record_effect": 0,
-      "fit_failure_quota_effect": 0,
-      "actual_device_acceptance_required": true,
-      "plan_matrix": {
-        "free": {
-          "theme": "soft_paper",
-          "ratio": "4:5",
-          "branding": "required_small"
-        },
-        "plus": {
-          "themes": [
-            "soft_paper",
-            "quiet_night"
-          ],
-          "ratio": "4:5",
-          "branding": "required_subtle"
-        },
-        "premium": {
-          "themes": [
-            "soft_paper",
-            "quiet_night"
-          ],
-          "ratios": [
-            "4:5",
-            "9:16"
-          ],
-          "branding": [
-            "required_subtle",
-            "off"
-          ]
-        }
-      },
-      "all_plans_equal_render_fidelity": true,
-      "all_plans_equal_resolution": true,
-      "all_plans_equal_readability": true,
-      "export_reexport_quota_consumption": 0
+      "old_qna_row_predicate": "public.mymodel_reflections.source_type = emotion_generated",
+      "old_qna_restoration_rollback": false,
+      "destructive_execution_in_pce6": false,
+      "production_effect": 0
     }
   },
-  "pce5_artifacts": {
-    "visual_recipe": {
-      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_Visual_Recipe_Contract_20260808.md",
-      "git_blob_sha1": "19e1af6e390a7c1fcaaa00b050f86897f825aa51",
-      "utf8_bytes": 13957,
-      "sha256": "c53e1e2b7dd0cd9f8f9643e5ba78a8f1277281186954be19f539426069448007"
+  "pce6_artifacts": {
+    "data_contract": {
+      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_New_Data_Contract_Design_20260808.md",
+      "git_blob_sha1": "262921f40536727443359b3d0c28b490cb5c5ed4"
     },
-    "export_owner": {
-      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_Export_Owner_Comparison_20260808.md",
-      "git_blob_sha1": "d8cfef13784dab87bfc7f7821381a055b524a957",
-      "utf8_bytes": 13337,
-      "sha256": "f700861c84ed2e25d5bdf24452ae78361c79033cc916890902181eca1287dbd5"
+    "api_design": {
+      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_API_CleanCutover_Design_20260808.md",
+      "git_blob_sha1": "96757b9ddbae8c2079fd7249d823f2f0d2bf3102"
     },
-    "reproducibility": {
-      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_Render_Reproducibility_Contract_20260808.md",
-      "git_blob_sha1": "7769f2d7ed8e1f59724641fa8a4229a47c90451b",
-      "utf8_bytes": 13180,
-      "sha256": "47df021c1dec8540c43b11392de494e5e70c280effea2f4e23867075aa7ac5b6"
+    "rn_flow": {
+      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_RN_Flow_Design_20260808.md",
+      "git_blob_sha1": "c91a51eff44a89d08d714ece4c90c42ccdd97265"
     },
-    "long_text": {
-      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_LongText_Layout_Policy_20260808.md",
-      "git_blob_sha1": "9c7eb2bbb9c739963195abd715e65d6a9083a98b",
-      "utf8_bytes": 12655,
-      "sha256": "217235dd7e610d51bffea9aacc76f968bf7c7557716d043cf4fbdd8e82594194"
+    "migration_design": {
+      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_OldQna_Removal_And_DB_Migration_Design_20260808.md",
+      "git_blob_sha1": "00dee10809a3b3f713ec038e1f675f3f8c346b8a"
     }
   },
-  "pce5_actual_basis": {
-    "cocolon_head": "b777574b8ca9c5969fba5f78a63ed7b08f272e62",
-    "cocolon_tree": "0dd930688040534dd57a98099abf3a7d5ef448f3",
+  "pce6_actual_basis": {
+    "cocolon_head": "96df30f6cdda8f4549065a3b2156c5b75d36026e",
+    "cocolon_tree": "00196a604415267b45df335220a0b3ff525b910f",
     "mashos_api_head": "315813c7bd3372462de926ddad74df567254a6b5",
     "mashos_api_tree": "a641510e107d52bb910073f36604c85bd57af150",
-    "roadmap_sha256": "2eb8d7b4b58ef5fa21f2643ca381f8efb3bfdf08bde29432e746972f7d4f6939",
-    "cocolon_package": {
-      "path": "package.json",
-      "blob": "bd0a28db98cda639d7d22a10bc63e4b96eff5d87",
-      "react_native": "0.77.3",
-      "visual_primitives": [
-        "react-native-svg",
-        "react-native-linear-gradient"
-      ],
-      "existing_export": "react-native-html-to-pdf"
-    },
-    "existing_export_helper": {
-      "path": "screens/analysisReport/analysisReportHtmlExport.js",
-      "blob": "f21aeb6c2143b9323e17ae3968ed45e3551fefc5",
-      "role": "PDF generation and text share pattern"
-    },
-    "app_theme_owner": {
-      "path": "theme/ThemeContext.js",
-      "blob": "a3f172545001cc3f216f54e023a0bcf5fe958fc7",
-      "current_themes": [
-        "default",
-        "light",
-        "dark"
-      ]
-    },
-    "bundled_fonts": {
-      "android_asset_tree": "current",
-      "font_names": [
-        "CormorantGaramond-Bold",
-        "CormorantGaramond-Regular",
-        "CormorantGaramond-Light",
-        "SpaceMono-Regular"
-      ],
-      "japanese_piece_body_owner": false
-    },
-    "ios_font_registration": {
-      "path": "ios/tempCocolon/Info.plist",
-      "blob": "5022a7bff42c9974df38bdd53ce8984a28bab42d"
-    },
-    "backend_requirements": {
-      "path": "requirements.txt",
-      "blob": "363a29f4b718884d95658d5ed911a54d0c4b55bb",
-      "dependencies": [
-        "fastapi",
-        "uvicorn[standard]",
-        "httpx",
-        "firebase-admin"
-      ],
-      "image_renderer_dependency_present": false
-    },
-    "piece_visual_recipe_runtime_present": false,
-    "piece_image_renderer_present": false,
-    "view_capture_dependency_present": false,
-    "image_file_share_adapter_present": false,
-    "media_save_adapter_present": false,
-    "runtime_binding_in_pce5": false,
-    "test_execution_in_pce5": false,
-    "actual_device_execution_in_pce5": false
-  },
-  "durable_history": {
-    "previous_checkpoint": "Cocolon_前提資料/07J_piece_pce4_design_closure_checkpoint_20260807.md",
-    "previous_checkpoint_blob": "3378ed922cbddb2fa6a32aa945c8efca10a87898",
-    "previous_premise": "Cocolon_前提資料/15G_cocolon_piece_workstream_pce4_design_closure_20260807.md",
-    "previous_premise_blob": "b6bde5a02b7a4c52db5201206769abb099cd9bed",
-    "roadmap_directory": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/",
-    "pce1_owner": "Cocolon_Piece/pce1_identity_clean_cutover/",
-    "pce2_owner": "Cocolon_Piece/pce2_cross_core_source_handoff/",
-    "pce3_owner": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/",
-    "pce4_owner": "Cocolon_Piece/pce4_content_format_safety/"
+    "supabase_catalog_sha256": "2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e",
+    "current_write_table": "public.mymodel_reflections",
+    "current_read_view": "public.pieces",
+    "current_question_answer_not_null": true,
+    "current_rls_enabled": true,
+    "current_rls_forced": false,
+    "current_rls_policy_count": 0,
+    "current_application_migration_owner": "ABSENT",
+    "current_api_shape": "old_qna_preview_publish_cancel",
+    "current_rn_shape": "old_qna_modal_and_card",
+    "current_compat_routes_registered": true,
+    "shared_public_pieces_consumers_present": true,
+    "runtime_binding_in_pce6": false,
+    "test_execution_in_pce6": false
   },
   "unreferenced_candidates": [
     {
-      "blob": "090184ff83c0c7abd5976be5495e836bcefefdd1",
-      "reason": "prepublication manual base64 transport candidate did not match prepared UTF-8 visual recipe bytes",
+      "blob": "131a3e73a2161b88acb8cca34e75287ea5936675",
+      "reason": "first manual UTF-8 data-contract candidate did not match the prepared candidate identity",
+      "tree_inclusion": 0,
+      "ref_effect": 0,
+      "reuse_prohibited": true
+    },
+    {
+      "blob": "1a1a495ac136c15f7aa216c56fe51eabb1bed901",
+      "reason": "manual base64 transfer produced invalid UTF-8 data-contract bytes",
       "tree_inclusion": 0,
       "ref_effect": 0,
       "reuse_prohibited": true
@@ -289,7 +176,6 @@
     "migration": 0,
     "data_deletion": 0,
     "dependency_change": 0,
-    "image_generation": 0,
     "test_execution": 0,
     "runtime_execution": 0,
     "actual_device_execution": 0,
