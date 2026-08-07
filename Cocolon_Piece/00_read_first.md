@@ -54,6 +54,12 @@ formal completion:
 terminal state:
   STOPPED_AT_CURRENT_PRODUCTION_DB_RLS_MIGRATION_IDENTITY
 
+Supabase evidence attempt 001:
+  NONCREDIT_QUERY_DESIGN_FAILURE
+
+confirmed attempt-001 fact:
+  supabase_migrations.schema_migrations -> SQLSTATE 42P01 NOT PRESENT
+
 PCE-1 activation:
   FALSE
 
@@ -63,24 +69,58 @@ automatic progression:
 
 PCE-0のsource-side write / read / storage / access / quota / compatibility / representative test inventoryは作成済みです。
 
-未解消blockerは、current production SupabaseのDDL、RLS、view identity、migration headです。特に、current codeが使う`source_type = emotion_generated`とhistorical DB auditに残るconstraint記録との不一致を、推測で閉じていません。
+未解消blockerは、current production SupabaseのDDL、RLS、view identity、migration ownerです。特に、current codeが使う`source_type = emotion_generated`とhistorical DB auditに残るconstraint記録との不一致を、推測で閉じていません。
+
+Attempt 001で確認できたのは、期待していたmigration history relationがそのsessionに存在しなかったことだけです。migrationが一度も行われていない、別名のmigration ownerも存在しない、current DDLが古い、という意味へ拡張しません。
 
 ## 4. 最初に読む順序
 
 1. `Cocolon_前提資料/15_cocolon_piece_workstream_current_state.md`
-2. `Cocolon_Piece/manifest.json`
-3. `Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md`
-4. roadmap partsを番号順に読む
-5. `Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md`
-6. handoff partsを番号順に読む
-7. `Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Contract_Inventory_20260807.md`
-8. `Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Owner_Map_20260807.md`
-9. `Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Unconfirmed_Ledger_20260807.md`
-10. Supabase evidence取得時だけ`PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql`を使う
+2. `Cocolon_前提資料/15A_cocolon_piece_workstream_current_state_query_correction_20260807.md`
+3. `Cocolon_Piece/manifest.json`
+4. `Cocolon_Piece/pce0_current_contract_pin/PCE0_Query_Correction_Manifest_20260807.json`
+5. `Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md`
+6. roadmap partsを番号順に読む
+7. `Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md`
+8. handoff partsを番号順に読む
+9. `Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Contract_Inventory_20260807.md`
+10. `Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Owner_Map_20260807.md`
+11. `Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Unconfirmed_Ledger_20260807.md`
+12. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Supabase_Query_Attempt001_Result_And_Correction_20260807.md`
+13. Supabase evidence取得時はcurrent V2 queryだけを使う
 
 Cocolon作業全体の開始時には、これより先に`Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`を読みます。
 
-## 5. large artifact preservation rule
+## 5. Supabase evidence query state
+
+### historical noncurrent query
+
+```text
+PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql
+```
+
+state:
+
+```text
+ATTEMPT_001_FAILED_NONCREDIT
+SUPERSEDED_FOR_EXECUTION
+PRESERVED_IN_GIT_HISTORY
+```
+
+V1は、存在しない可能性のある`supabase_migrations.schema_migrations`を同じpacket内で直接参照したため、SQLSTATE 42P01で停止しました。
+
+### current execution query
+
+```text
+Cocolon_Piece/pce0_current_contract_pin/
+PCE0_Current_Supabase_Piece_Catalog_Query_20260807_V2.sql
+```
+
+V2は、一つのSELECTで一つのJSONB packetを返します。catalog-onlyであり、存在が未確認のapplication relationやmigration relationを直接参照しません。
+
+application-row aggregateはPCE0-U009のnon-blocking evidenceなので、exact table / column確認前には実行しません。
+
+## 6. large artifact preservation rule
 
 roadmapとhandoffは、大きな原本をGitHubで読みやすく保存するため、ordered UTF-8 partsとして配置しています。
 
@@ -100,32 +140,37 @@ handoff:
 - 再構成後の原本bytesとSHA-256は検証済みです。
 - current state追記のためにhistorical原本本文を書き換えていません。
 
-原本内の`GITHUB_NOT_REFLECTED`、`LOCAL_DOWNLOAD_ARTIFACT`、`GITHUB_WRITE_EXACT0`等は、原本作成時点のhistorical stateです。current publication stateは、このdirectory、`manifest.json`、前提資料checkpoint、current GitHub commitで判断します。
+原本内の`GITHUB_NOT_REFLECTED`、`LOCAL_DOWNLOAD_ARTIFACT`、`GITHUB_WRITE_EXACT0`等は、原本作成時点のhistorical stateです。current publication stateは、このdirectory、root manifest、PCE-0 correction manifest、前提資料checkpoint、current GitHub commitで判断します。
 
-## 6. next exact action
+## 7. next exact action
 
 Mash側で次のbody-free evidence packetを取得します。
 
 ```text
-CURRENT_SUPABASE_PIECE_SCHEMA_RLS_MIGRATION_BODY_FREE_PACKET
+CURRENT_SUPABASE_PIECE_CATALOG_BODY_FREE_PACKET_V2
 ```
 
 query owner:
 
 ```text
 Cocolon_Piece/pce0_current_contract_pin/
-PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql
+PCE0_Current_Supabase_Piece_Catalog_Query_20260807_V2.sql
 ```
 
 取得後に行うこと:
 
-1. current DDL / constraints / views / RLS / grants / migration identityを照合する。
-2. source-side inventoryとの不一致を分類する。
-3. PCE-0を閉じられるか判定する。
-4. 閉じられた場合だけPCE-1へ進む。
+1. current DDL / constraints / views / RLS / grantsを照合する。
+2. expected migration relationの不存在と、別名candidate relationの有無を分ける。
+3. source-side inventoryとの不一致を分類する。
+4. PCE-0を閉じられるか判定する。
+5. migration history rowの追加readが本当に必要な場合だけ、確認されたexact relation向けの別SELECTを作る。
+6. PCE-0を閉じられた場合だけPCE-1へ進む。
 
-## 7. 禁止事項
+## 8. 禁止事項
 
+- V1 queryを再実行する。
+- Attempt 001でA-IまたはK-Lのevidenceが取得済みだったと推測する。
+- migration relation不存在を「migration実行履歴なし」へ拡張する。
 - PCE-0をcompleteと扱う。
 - PCE-1へautomatic progressionする。
 - Q&AをPieceそのものと再定義する。
@@ -137,7 +182,7 @@ PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql
 - roadmap / handoff原本のcreation-state記述を書き換える。
 - manifestにないnewline restorationを加える。
 
-## 8. publication effect
+## 9. publication effect
 
 ```text
 Piece documentation / evidence files:
@@ -154,6 +199,12 @@ DB / API / RN / migration change:
 
 test / runtime execution:
   0
+
+PCE-0 completion:
+  false
+
+PCE-1 activation:
+  false
 
 release effect:
   0
