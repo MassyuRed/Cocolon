@@ -10,265 +10,156 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-## 1. このdirectoryのowner
-
-`Cocolon_Piece/`は、Pieceのroadmap、handoff、Phase成果物、evidence、checkpointをEmlisAI資料群と分離して保存するcurrent ownerです。
+## 1. current owner
 
 ```text
-Piece:
+Piece workstream:
   Cocolon_Piece/
 
 EmlisAI implementation history:
   EmlisAIの実装済み資料/
 ```
 
-Piece成果物を`EmlisAIの実装済み資料/`へ混在させません。
+Piece成果物をEmlisAI実装履歴へ混在させない。
 
-## 2. Mashが確定したcurrent Piece定義
-
-```text
-PieceはQ&Aそのものではない。
-Q&Aは旧仕様で採用されていた一形式である。
-
-Pieceは、
-ユーザーの考えや価値観を他者に伝えるための文章に整形し、
-画像化する機能である。
-```
-
-2026-08-07、Mashはcurrent Q&A Pieceがまだユーザーに利用されておらず、既存Q&A data、旧投稿画面、旧Q&A renderer、old/new coexistenceを保持する必要がないと明示した。
+## 2. current Piece identity
 
 ```text
-new Piece cutover:
-  CLEAN_REPLACEMENT_ALLOWED
+user-facing name:
+  Piece
 
-existing Q&A preservation:
-  NOT_REQUIRED
+Piece:
+  保存済みのユーザー入力を起点に、
+  その考えや価値観を他者へ伝わるcanonical textへ整形し、
+  reproducible visual recipeで画像化できるユーザー所有artifact。
 
-compatibility renderer / dual run:
-  NOT_REQUIRED
-```
+record contract:
+  piece.record.v2
 
-current decision owner:
-
-```text
-Cocolon_Piece/pce1_identity_clean_cutover/
-Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md
+Q&A:
+  pre-release legacy specification
+  new active format exact0
+  preservation / migration / compatibility renderer exact0
 ```
 
 ## 3. current phase state
 
 ```text
-completed phase:
-  PCE-0 Current Contract Pin
-
-PCE-0:
+PCE-0 Current Contract Pin:
   COMPLETE
 
-current technical state:
-  PCE0_COMPLETE_CURRENT_CONTRACT_PINNED
+PCE-1 Piece Identity / Clean Cutover Decision:
+  COMPLETE_DESIGN_ONLY
 
-next phase:
-  PCE-1 Piece Identity / Clean Cutover Decision
-
-PCE-1:
+PCE-2 Cross-Core Source Handoff:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
-PCE-1 product premise:
-  CLEAN_CUTOVER_FIXED
-
 automatic progression:
-  FALSE
+  false
 ```
 
-PCE-0 completion owner:
-
-```text
-Cocolon_前提資料/
-15B_cocolon_piece_workstream_pce0_closure_20260807.md
-
-Cocolon_Piece/pce0_current_contract_pin/
-Piece_PCE0_Current_Catalog_Analysis_And_Closure_20260807.md
-PCE0_Closure_State_20260807.json
-Piece_PCE0_Closure_Ledger_20260807.md
-```
-
-PCE-1 prestart decision owner:
-
-```text
-Cocolon_前提資料/
-15C_cocolon_piece_workstream_clean_cutover_product_decision_20260807.md
-
-Cocolon_Piece/pce1_identity_clean_cutover/
-Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md
-```
-
-## 4. PCE-0で固定したcurrent actual
-
-```text
-physical write table:
-  public.mymodel_reflections
-
-read view:
-  public.pieces
-  security_invoker=true
-  direct projection
-
-public.pieces_read:
-  absent
-
-source_type:
-  create / generated / emotion_generated
-
-status:
-  draft / ready / rejected / failed / archived
-
-RLS:
-  enabled on mymodel_reflections
-  policy exact0
-
-current access owner:
-  backend application service
-
-application migration history owner:
-  expected relation absent
-```
-
-migration history owner不存在は、current catalogを未確認へ戻しません。PCE-6でDDLへ進む前に、current snapshotへbindしたtracked application migration baselineを作ります。
-
-## 5. 最初に読む順序
-
-1. `Cocolon_前提資料/15B_cocolon_piece_workstream_pce0_closure_20260807.md`
-2. `Cocolon_前提資料/15C_cocolon_piece_workstream_clean_cutover_product_decision_20260807.md`
-3. `Cocolon_Piece/pce1_identity_clean_cutover/Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md`
-4. `Cocolon_Piece/pce0_current_contract_pin/PCE0_Closure_State_20260807.json`
-5. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Current_Catalog_Analysis_And_Closure_20260807.md`
-6. `Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Closure_Ledger_20260807.md`
-7. `Cocolon_Piece/manifest.json`
-8. `Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md`
-9. roadmap partsを番号順に読む。ただしPCE-1 compatibility / coexistenceのprior recommendationはcurrent overlayで置換する。
-10. `Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md`
-11. handoff partsを番号順に読む
-12. Phase-specific current成果物を読む
-
-Cocolon作業全体の開始時には、これより先に`Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`を読みます。
-
-## 6. Supabase evidence lineage
-
-### Attempt 001 — noncredit
-
-```text
-PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql
-
-state:
-  ATTEMPT_001_FAILED_NONCREDIT
-  SUPERSEDED_FOR_EXECUTION
-```
-
-### V2 query and result
-
-```text
-query:
-  PCE0_Current_Supabase_Piece_Catalog_Query_20260807_V2.sql
-
-result bundle:
-  PCE0_Current_Supabase_Piece_Catalog_Result_20260807.json.gz.b64
-  PCE0_Current_Supabase_Piece_Catalog_Result_20260807.bundle.json
-
-result SHA-256:
-  2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e
-```
-
-V2 resultはcatalog / metadataのみで、user input本文、Piece本文、profile、credential、raw user rowを含みません。
-
-## 7. large artifact preservation rule
-
-roadmapとhandoffはordered UTF-8 partsとして保存しています。
+## 4. PCE-1 current owners
 
 ```text
 roadmap:
-  part 1〜7の各末尾へLF exact1を復元。
+  Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/
+  README.md
+  bundle.json
+  Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md.gz.b64
 
-handoff:
-  part 1とpart 2の末尾へLF exact1を復元。
-  part 3は復元なし。
+identity decision:
+  Cocolon_Piece/pce1_identity_clean_cutover/
+  Piece_Identity_CleanCutover_Decision_20260807.md
+
+record contract:
+  Piece_New_Record_Contract_Matrix_20260807.md
+
+old Q&A removal map:
+  Piece_OldQna_Removal_Map_20260807.md
+
+normative update map:
+  Piece_Normative_Definition_Update_Map_20260807.md
+
+premise current state:
+  Cocolon_前提資料/15D_cocolon_piece_workstream_pce1_design_closure_20260807.md
 ```
 
-`manifest.json`と各bundle `README.md`に記録された復元規則以外を追加しません。
+## 5. fixed PCE-1 decisions
 
-原本内の`GITHUB_NOT_REFLECTED`、`LOCAL_DOWNLOAD_ARTIFACT`、`GITHUB_WRITE_EXACT0`は原本作成時点のhistorical stateです。
+```text
+new physical owner direction:
+  public.piece_records
+
+read projection after cutover:
+  public.pieces
+
+old write owner:
+  public.mymodel_reflections
+  -> no new Piece writes after cutover
+
+old current Q&A rows:
+  source_type = emotion_generated
+  -> exact removal candidate after new flow verification
+
+shared data:
+  create / generated / unrelated consumers
+  -> no automatic deletion
+
+public identity:
+  piece:<uuid>
+
+canonical visible body:
+  piece_text
+
+rollback:
+  safe-disable new Piece
+  not old Q&A restoration
+```
+
+## 6. first read order
+
+1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
+2. `Cocolon_前提資料/15D_cocolon_piece_workstream_pce1_design_closure_20260807.md`
+3. `Cocolon_Piece/manifest.json`
+4. revised roadmap
+5. PCE-1 four design artifacts
+6. PCE-0 catalog closure when current DB basis is needed
+7. next phase-specific material
+
+## 7. historical material
+
+The original additive/compatibility roadmap, PCE-0 inventory, and pre-PCE-1 recommendation remain historical evidence. Their Q&A preservation/coexistence direction is not current.
 
 ## 8. next exact action
 
-PCE-1は別承認後に開始します。
-
-既に固定済みで再質問しない事項:
-
 ```text
-old Q&Aを残さない。
-existing Q&A dataをpreserve / content-migrateしない。
-old / new投稿画面を並行運用しない。
-compatibility rendererを作らない。
-Pieceを完全に新構造へ切り替える。
+PCE2_CROSS_CORE_SOURCE_HANDOFF_ABSTRACT_CONTRACT_DESIGN_ONLY
 ```
 
-PCE-1で残る設計事項:
+PCE-2 must fix saved input identity, original/supplemental roles, Emlis observation stage/result identity, eligibility, and no-body-copy negative contract. It must not start runtime binding to Emlis current owner.
+
+## 9. prohibited
+
+- Q&Aをnew active Piece formatへ戻す。
+- old/new user-visible dual runを設計する。
+- old Q&A adapter / rendererを作る。
+- `mymodel_reflections`へplaceholder question/answerでnew Pieceを保存する。
+- `create` / `generated`をold Piece cleanupへ自動包含する。
+- PCE-2へautomatic progressionする。
+- design-only resultをcode/DB removal済みと扱う。
+
+## 10. effects
 
 ```text
-new Piece identity / record contract
-new storage target
-posting / preview / image / Nexusの単一flow
-old Q&A UI / API / service / renderer / dataのexact removal map
-shared table内のPiece以外を除外するdeletion predicate
-clean cutover順序とSTOP条件
-normative owner update map
-```
+PCE-1 documentation / roadmap / checkpoint:
+  GitHub reflection required
 
-次authority候補:
-
-```text
-PCE1_PIECE_IDENTITY_AND_CLEAN_CUTOVER_DESIGN
-```
-
-## 9. 禁止事項
-
-- PCE-1へautomatic progressionする。
-- Q&AをPiece identityまたは将来の現役formatへ戻す。
-- old Q&A preservation / coexistenceをcurrent requirementとして復活させる。
-- product decisionだけを根拠に即時DB DELETE / DROP、code削除、route停止を行う。
-- `mymodel_reflections` shared table全体や、Piece以外のcreate / generated dataを削除対象へ含める。
-- exact writer / reader / quota / metrics / read / resonance / account-delete dependencyを確認せずold Q&A構造を消す。
-- application migration owner不存在を、Supabase内部migration tableで代用する。
-- current catalog snapshotなしでfuture DDLを作る。
-- Emlis visible bodyをPiece本文へコピーする。
-- Piece成果物をEmlisAI実装履歴へ混在させる。
-- roadmap / handoff原本のhistorical stateを書き換える。
-- manifestにないnewline restorationを加える。
-
-## 10. current effects
-
-```text
-PCE-0 documentation / evidence:
-  GitHub reflected after closure publication
-
-clean cutover product decision:
-  GitHub reflected
-
-Cocolon production source:
-  0
-
-mashos-api production source:
-  0
-
-DB / API / RN / migration / data deletion:
-  0
-
-test / runtime:
-  0
-
-PCE-1 activation:
-  false
-
-release:
-  0
+Cocolon production source: exact0
+mashos-api production source: exact0
+DB / API / RN / migration / data deletion: exact0
+test / runtime: exact0
+EmlisAI technical state: exact0
+release: exact0
+automatic progression: false
 ```

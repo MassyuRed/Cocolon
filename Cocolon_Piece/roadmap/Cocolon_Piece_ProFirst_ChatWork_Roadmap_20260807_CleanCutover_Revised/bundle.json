@@ -1,0 +1,39 @@
+{
+  "schema_version": "cocolon.piece.roadmap_bundle.v1",
+  "created_at": "2026-08-07 JST",
+  "decision_owner": "Mash",
+  "operational_owner": "Karen",
+  "workstream": "Cocolon / Piece",
+  "document_status": "CURRENT_REVISED_ROADMAP_LOSSLESS_BUNDLE",
+  "source": {
+    "original_filename": "Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md",
+    "utf8_bytes": 51703,
+    "lines": 1972,
+    "sha256": "2eb8d7b4b58ef5fa21f2643ca381f8efb3bfdf08bde29432e746972f7d4f6939"
+  },
+  "bundle": {
+    "encoding": "deterministic_gzip_mtime0_then_base64_ascii",
+    "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md.gz.b64",
+    "base64_ascii_bytes": 24556,
+    "base64_ascii_sha256": "865ef229b08d24696bfead7b5a4f75b6dec534ffc0af9a5e3ea17f24631cfbbb",
+    "decoded_gzip_bytes": 18416,
+    "decoded_gzip_sha256": "26834c0972333e0b4e0bd7ba1bf33c23d8fd92f31d39bfeda01d42bcc53fb8ea"
+  },
+  "reconstruction": [
+    "Read Base64 ASCII file.",
+    "Base64-decode to gzip bytes.",
+    "Verify gzip byte count and SHA-256.",
+    "Gzip-decompress.",
+    "Verify original UTF-8 byte count and SHA-256."
+  ],
+  "automatic_progression": false,
+  "technical_effects": {
+    "source_change": 0,
+    "db_change": 0,
+    "api_change": 0,
+    "rn_change": 0,
+    "migration": 0,
+    "test_execution": 0,
+    "runtime_execution": 0
+  }
+}

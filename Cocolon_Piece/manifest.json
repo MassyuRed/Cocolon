@@ -1,127 +1,123 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v4",
+  "schema_version": "cocolon.piece.workstream_manifest.v5",
   "generated_at": "2026-08-07 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "current_entry": "Cocolon_Piece/00_read_first.md",
+  "current_entry_blob": "efcc3b6e03eef7b4ca5de5c5a421598b98109879",
   "separation": {
     "piece_owner_root": "Cocolon_Piece/",
     "emlis_history_root": "EmlisAIの実装済み資料/",
     "rule": "Piece成果物をEmlisAI実装履歴へ混在させない"
   },
   "product_definition": {
-    "qna_is_piece_identity": false,
-    "qna_historical_role": "pre_release_legacy_format",
-    "qna_future_active_format": false,
+    "user_facing_name": "Piece",
+    "current_piece": "保存済みユーザー入力を起点に、考えや価値観を他者へ伝わるcanonical textへ整形し、reproducible visual recipeで画像化できるユーザー所有artifact",
+    "qna_role": "pre_release_legacy_specification",
+    "qna_new_active_format": false,
     "qna_preservation_required": false,
-    "current_piece": "ユーザーの考えや価値観を他者に伝えるための文章に整形して画像化する機能",
+    "old_new_user_visible_dual_run": false,
     "decided_by": "Mash",
     "decided_at": "2026-08-07 JST"
   },
-  "current_phase": {
-    "completed_phase_id": "PCE-0",
-    "completed_phase_name": "Current Contract Pin",
-    "formal_completion": true,
-    "state": "PCE0_COMPLETE_CURRENT_CONTRACT_PINNED",
-    "next_phase_id": "PCE-1",
-    "next_phase_name": "Piece Identity / Clean Cutover Decision",
-    "pce1_product_premise": "CLEAN_CUTOVER_FIXED",
-    "pce1_activated": false,
-    "next_action": "PCE1_PIECE_IDENTITY_AND_CLEAN_CUTOVER_DESIGN_SEPARATE_APPROVAL"
+  "phase_state": {
+    "pce0": "COMPLETE",
+    "pce1": "COMPLETE_DESIGN_ONLY",
+    "pce2": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "next_action": "PCE2_CROSS_CORE_SOURCE_HANDOFF_ABSTRACT_CONTRACT_DESIGN_ONLY"
   },
-  "clean_cutover_decision": {
-    "decision_path": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md",
-    "premise_path": "Cocolon_前提資料/15C_cocolon_piece_workstream_clean_cutover_product_decision_20260807.md",
-    "current_qna_user_exposure": false,
-    "existing_qna_data_preservation_required": false,
-    "old_new_dual_run_required": false,
-    "compatibility_renderer_required": false,
-    "old_qna_new_generation_after_cutover": false,
-    "old_qna_content_migration_required": false,
-    "complete_new_structure_replacement_allowed": true,
-    "immediate_destructive_execution_authorized": false,
-    "shared_table_non_piece_data_deletion_authorized": false,
-    "old_qna_removal_requires_exact_dependency_map": true,
-    "supersedes_prior_recommendations": [
-      "KEEP_QNA_AS_ACTIVE_FORMAT",
-      "KEEP_EXISTING_QNA_COMPATIBILITY_RENDERER",
-      "RUN_OLD_AND_NEW_NEXUS_RENDERERS_TOGETHER",
-      "KEEP_OLD_ROUTE_FIELD_STORAGE_UNTIL_RELEASE_STABILITY",
-      "MIGRATE_OR_ADAPT_EXISTING_QNA_CONTENT"
-    ]
+  "pce1_fixed_contract": {
+    "record_contract_id": "piece.record.v2",
+    "public_id_namespace": "piece:<uuid>",
+    "canonical_visible_body": "piece_text",
+    "new_physical_owner_direction": "public.piece_records",
+    "read_projection_after_cutover": "public.pieces",
+    "old_write_owner": "public.mymodel_reflections",
+    "old_current_qna_row_predicate": "source_type = 'emotion_generated'",
+    "old_record_migration": false,
+    "compatibility_renderer": false,
+    "rollback": "SAFE_DISABLE_NEW_PIECE_NOT_OLD_QNA_RESTORATION",
+    "destructive_execution_in_pce1": false
   },
-  "current_db_contract": {
-    "physical_write_table": "public.mymodel_reflections",
+  "roadmap": {
+    "directory": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/",
+    "readme_path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/README.md",
+    "readme_blob": "729b93ede7074e332ed005b146c77b34549e590b",
+    "bundle_manifest_path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/bundle.json",
+    "bundle_manifest_blob": "4b4a3c8a4c354c93e652a6081ef6fe828904edff",
+    "bundle_path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md.gz.b64",
+    "bundle_blob": "6a855b3c4cc2d74937f6c8eebeed0aa594e320b0",
+    "original_utf8_bytes": 51703,
+    "original_lines": 1972,
+    "original_sha256": "2eb8d7b4b58ef5fa21f2643ca381f8efb3bfdf08bde29432e746972f7d4f6939",
+    "lossless_reconstruction": true
+  },
+  "pce1_artifacts": {
+    "identity": {
+      "path": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_Identity_CleanCutover_Decision_20260807.md",
+      "git_blob_sha1": "5dc0dff9c9e3e23c507cd140dbe8b4e1b1944ce5",
+      "utf8_bytes": 5634,
+      "sha256": "6eaf9f1a2c68130e537404ed80552a49d1d983fde1ca352f55e5a983ef2ed2e7"
+    },
+    "record_contract": {
+      "path": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_New_Record_Contract_Matrix_20260807.md",
+      "git_blob_sha1": "9550742bd3feafe4dc3c5242a868576752edc58f",
+      "utf8_bytes": 6524,
+      "sha256": "451f2b17c49d91fa2db3cf9e449eeb845fe318c0fdcf47024290fa1998958cd5"
+    },
+    "old_qna_removal": {
+      "path": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_OldQna_Removal_Map_20260807.md",
+      "git_blob_sha1": "757780de7b43e458abc9c1d69a4d303698ddf006",
+      "utf8_bytes": 10047,
+      "sha256": "e946243abfb22b449c5d33ae69a26886166f7ff0ee68d2cb3e1e49a935f6905f"
+    },
+    "normative_update": {
+      "path": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_Normative_Definition_Update_Map_20260807.md",
+      "git_blob_sha1": "b0661c19a22948579f116570d78f53b5c978a0d3",
+      "utf8_bytes": 6433,
+      "sha256": "0b4891c0106701880a89c03fd14ca710765da4b901529d030d2601e17a7e9963"
+    }
+  },
+  "premise_current_state": {
+    "path": "Cocolon_前提資料/15D_cocolon_piece_workstream_pce1_design_closure_20260807.md",
+    "blob": "63eb95aec8fa419907d8d965d261b760da7ec060"
+  },
+  "pce0_basis": {
+    "catalog_packet_sha256": "2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e",
+    "write_table": "public.mymodel_reflections",
     "read_view": "public.pieces",
-    "read_view_security_invoker": true,
-    "pieces_read_present": false,
-    "accepted_source_types": ["create", "generated", "emotion_generated"],
-    "accepted_statuses": ["draft", "ready", "rejected", "failed", "archived"],
-    "rls_enabled": true,
-    "rls_forced": false,
-    "rls_policy_count": 0,
-    "current_access_owner": "backend_application_service",
-    "expected_application_migration_relation_present": false
-  },
-  "pce0_evidence": {
-    "packet_version": "pce0.current_supabase_piece_catalog.v2",
-    "captured_at_utc": "2026-08-07T09:41:56.410491",
-    "original_utf8_bytes": 26484,
-    "original_sha256": "2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e",
-    "lossless_bundle_path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Catalog_Result_20260807.json.gz.b64",
-    "bundle_manifest_path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Catalog_Result_20260807.bundle.json",
-    "analysis_path": "Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Current_Catalog_Analysis_And_Closure_20260807.md",
-    "closure_state_path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Closure_State_20260807.json",
-    "closure_ledger_path": "Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Closure_Ledger_20260807.md",
-    "premise_current_state_path": "Cocolon_前提資料/15B_cocolon_piece_workstream_pce0_closure_20260807.md",
-    "premise_checkpoint_path": "Cocolon_前提資料/07E_piece_pce0_closure_checkpoint_20260807.md"
-  },
-  "artifact_blob_identities": {
-    "current_entry": "ffbadf2e400b3fb67dd8a8f1d687d02f2d182297",
-    "clean_cutover_decision": "df30001475aba8fe3460d1b0ad79dce0363a9631",
-    "clean_cutover_premise": "66e0d2e69160cac0bc760f2a3727a571206b39e2",
-    "result_base64": "0f137f89bd0f0c08762acc27b36296417ded883d",
-    "result_bundle_manifest": "ef7a2390925b42836955dcfad9843193b426fdc0",
-    "closure_state": "e9b5badebb80cd200596e8c047ac9d087a99de27",
-    "closure_ledger": "ef981af1065b75ee8b1bdec28878aa0c2939f81d",
-    "analysis_and_closure": "052cff047780948cc0f74a0817ffd14f66314d95",
-    "premise_checkpoint": "5d58d9626c63530c5b9621920a7ecfc21ebda7fd",
-    "premise_current_state": "bcc6d1a824f48f450d6b25fb42679663cce70cce"
-  },
-  "historical_artifact_manifest": {
-    "path": "Cocolon_Piece/manifest_v2_historical_snapshot_20260807.json",
-    "git_blob_sha1": "091e209ade3fec593de8680860aff91e6ade55a3",
-    "role": "byte-exact preservation of v2 roadmap/handoff/PCE-0 artifact transport identities",
-    "current_phase_state": false
-  },
-  "large_artifact_reconstruction": {
-    "roadmap_original_sha256": "a8ec1298901839aaf7421dad1942fe94f6cb1b90bad5a8944dc41ac24cdc69bd",
-    "handoff_original_sha256": "82f4f811760fb86767b4f667d7ed653b8c00678101d06a3e2c44948f8c166bd0",
-    "details_owner": "Cocolon_Piece/manifest_v2_historical_snapshot_20260807.json",
-    "rule": "use only the ordered-part and trailing-LF restoration recorded in the preserved v2 manifest and bundle READMEs"
-  },
-  "migration_boundary": {
+    "accepted_source_types": [
+      "create",
+      "generated",
+      "emotion_generated"
+    ],
+    "question_answer_not_null": true,
     "application_migration_owner": "ABSENT_CURRENTLY",
-    "supabase_internal_candidates_are_not_application_owner": true,
     "required_before_future_ddl": "PCE6_TRACKED_APPLICATION_MIGRATION_BASELINE_BOUND_TO_CURRENT_CATALOG"
   },
-  "destructive_change_boundary": {
-    "product_permission_to_discard_old_qna": true,
-    "execution_requires_separate_approval": true,
-    "exact_old_qna_row_predicate_required": true,
-    "actual_writer_reader_dependency_map_required": true,
+  "destructive_boundary": {
     "shared_table_blanket_delete_prohibited": true,
-    "non_piece_consumer_preservation_required": true
+    "create_generated_auto_delete": false,
+    "exact_dependency_map_required": true,
+    "body_free_pre_post_counts_required": true,
+    "new_flow_complete_and_verified_before_old_delete": true,
+    "separate_implementation_approval_required": true
   },
-  "publication_nonreuse": {
-    "unreferenced_commit": "e7494d8d2a1fee3bdb68a6f8d0ccb8a921727d49",
-    "unreferenced_commit_ref_effect": 0,
-    "rejected_candidate_blob": "606697509fa1bac27faeb15d7d46b4ee9d17f6c6",
-    "rejected_candidate_blob_tree_inclusion": 0,
-    "reuse_prohibited": true
+  "historical_owners": {
+    "original_additive_roadmap": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/",
+    "pce0_manifest_snapshot": "Cocolon_Piece/manifest_v2_historical_snapshot_20260807.json",
+    "pce1_prestart_overlay": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md"
   },
+  "unreferenced_candidates": [
+    {
+      "blob": "bc41acf2cab60a1a74cf0b40a8b4bf1c0c774177",
+      "reason": "pre-bundle normative map path version",
+      "tree_inclusion": 0,
+      "reuse_prohibited": true
+    }
+  ],
   "technical_effects": {
     "cocolon_production_source_change": 0,
     "mashos_api_production_source_change": 0,
