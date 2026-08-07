@@ -20,7 +20,7 @@ EmlisAI implementation history:
   EmlisAIの実装済み資料/
 
 current Piece premise:
-  Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md
+  Cocolon_前提資料/15J_cocolon_piece_workstream_pce7_design_closure_20260808.md
 ```
 
 Piece / EmlisAI / Analysisの内部ownerを統合しない。PieceはPCE-2のbody-free source handoffだけでsaved inputと接続する。
@@ -61,8 +61,9 @@ PCE-3: COMPLETE_DESIGN_ONLY
 PCE-4: COMPLETE_DESIGN_ONLY
 PCE-5: COMPLETE_DESIGN_ONLY
 PCE-6: COMPLETE_DESIGN_ONLY
+PCE-7: COMPLETE_DESIGN_ONLY
 
-PCE-7 Test / Monitoring / Rollback:
+PCE-8 Design Freeze / Work Package Split:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
@@ -94,11 +95,16 @@ PCE-5:
 
 PCE-6:
   Cocolon_Piece/pce6_api_db_rn_migration/
-    Piece_New_Data_Contract_Design_20260808.md
-    Piece_API_CleanCutover_Design_20260808.md
-    Piece_RN_Flow_Design_20260808.md
-    Piece_OldQna_Removal_And_DB_Migration_Design_20260808.md
+
+PCE-7:
+  Cocolon_Piece/pce7_test_monitoring_rollback/
+    Piece_RED_Contract_Catalog_20260808.md
+    Piece_Test_Matrix_20260808.md
+    Piece_Monitoring_Privacy_Contract_20260808.md
+    Piece_FeatureFlag_Rollback_Design_20260808.md
 ```
+
+PCE-0 through PCE-6 detailed identities remain in immutable predecessor manifests and each phase's canonical artifacts.
 
 ## 5. PCE-1 through PCE-5 fixed boundary
 
@@ -139,10 +145,10 @@ visual:
   RN-first prototype, device-gated release
 ```
 
-## 6. PCE-6 fixed contracts
+## 6. PCE-6 fixed boundary
 
 ```text
-data contract:
+data:
   piece.data_contract.v1
 
 API:
@@ -158,158 +164,243 @@ migration:
 ### Data / DB
 
 ```text
-selected physical owner:
+physical owner:
   public.piece_records + dedicated Piece family
 
 legacy shared table:
   public.mymodel_reflections preserved for create/generated/unrelated owners
 
-legacy read bridge before view cutover:
+legacy read bridge before final view cutover:
   public.mymodel_reflections_read
 
-final new Piece view:
+final new Piece projection:
   public.pieces
-
-quota:
-  dedicated body-free ledger + owner/JST-month lock
-
-state:
-  dedicated metrics / reads / resonances
-
-receipts:
-  body-free export / delete
 
 atomic functions:
   piece_save_v2
   piece_set_visibility_v2
   piece_delete_v2
 
+quota:
+  body-free ledger + owner/JST-month lock
+  survives physical Piece delete
+
 access:
   base RLS ENABLE + FORCE
-  RN direct base-table DML exact0
-  backend application-service owner
+  RN direct base DML exact0
+  application-service/current-relation authorization
 ```
 
-`public.pieces` currently serves shared legacy/non-Piece readers. It is replaced only after every such reader moves to `mymodel_reflections_read` and residual caller count is exact0.
+`public.pieces` is replaced only after every legacy/shared caller moves to `mymodel_reflections_read` and residual caller count is exact0.
 
-### API
+### API / RN / migration
 
 ```text
-owner routes:
-  GET  /emotion/piece/quota
-  POST /emotion/piece/preview
-  PATCH/DELETE preview resource
-  POST /emotion/piece/save
-  GET  /emotion/piece/history
-  GET/PATCH/DELETE Piece resource
-
-public routes:
-  /nexus/pieces resource family
-
 preview source:
   body-free saved source reference
   raw payload resend exact0
 
-save:
-  revision + text/content/recipe hashes + visibility + idempotency
+canonical operation:
+  save, not publish
+
+RN entry:
+  saved input + terminal Emlis observation
+  -> この入力をPieceにする
+
+owner history:
+  separate from Nexus
 
 backend image render route:
   initial exact0
-```
 
-Old `publish/cancel`, reflection/Q&A aliases, old `/piece/*` runtime and Q&A wire fields are not release-compatible contracts.
-
-### RN
-
-```text
-entry:
-  saved input + terminal Emlis observation
-
-CTA:
-  この入力をPieceにする
-
-preview:
-  canonical text + visual card + private/public
-
-history:
-  owner-only dedicated flow
-
-Nexus:
-  new Piece payload/card only
-
-export:
-  saved-record RN-first
-
-Q&A preview/card compatibility:
-  exact0
-```
-
-### Migration
-
-```text
-M0 tracked migration baseline
-M1 legacy read bridge / caller rebind
-M2 new table foundation
-M3 RLS / RPC / staging projection
-M4 disabled application integration
-M5 single user-visible clean cutover
-M6 body-free old identity capture
-M7 exact destructive cleanup under separate approval
-M8 obsolete contract retirement
+migration:
+  M0 tracked baseline
+  M1 legacy bridge
+  M2 new foundation
+  M3 RLS/RPC/staging
+  M4 disabled integration
+  M5 single clean cutover
+  M6 body-free old identity capture
+  M7 separate-approval destructive cleanup
+  M8 obsolete Q&A retirement
 ```
 
 Rollback is new Piece safe-disable, never old Q&A restoration.
 
-## 7. Current actual basis
+## 7. PCE-7 fixed contracts
+
+```text
+RED catalog:
+  piece.red_contract_catalog.v1
+
+Test matrix:
+  piece.test_matrix.v1
+
+Monitoring privacy:
+  piece.monitoring_privacy.v1
+
+Feature flag / rollback:
+  piece.feature_flag_rollback.v1
+```
+
+### RED / test
+
+```text
+required negative contracts:
+  exact40
+
+causal RED:
+  call-phase invariant failure only
+  collection/import/fixture/environment failure noncredit
+
+suite classes:
+  exact13
+
+actual transaction/RLS claims:
+  actual isolated DB required
+  mocks/source checks insufficient
+
+actual device:
+  PCE-9E packet + PCE-11 Mash evidence
+
+PCE-7 test implementation/execution:
+  exact0 / exact0
+```
+
+The exact40 catalog covers source/body non-mixing, preview/save/export equality, private/public/concealment, atomic quota/idempotency/delete, visual/re-export, old Q&A residual, migration scope, monitoring privacy and safe-disabled rollback.
+
+### Monitoring privacy
+
+```text
+schema:
+  piece.ops_event.v1
+
+mode:
+  strict enum allowlist
+
+free-form message/error/meta from Piece:
+  exact0
+
+forbidden:
+  raw/Piece/Emlis/Analysis body
+  content/recipe hash values
+  Piece/preview/source/user IDs
+  idempotency values
+  filenames/paths/recipients
+  full exception/request/response body
+
+server terminal outcomes:
+  authoritative event owner
+
+RN:
+  UI-only body-free events
+```
+
+The roadmap candidate `piece_record_published_public` is replaced by `piece_record_saved_public` because PCE-6 fixed save as the canonical operation and separated visibility from lifecycle.
+
+### Feature flags / rollback
+
+```text
+flags exact8:
+  piece_v2_preview_enabled
+  piece_v2_save_enabled
+  piece_v2_owner_read_enabled
+  piece_v2_public_write_enabled
+  piece_v2_public_read_enabled
+  piece_v2_visibility_toggle_enabled
+  piece_v2_export_enabled
+  piece_v2_delete_enabled
+
+missing/unknown:
+  false
+
+RN:
+  presentation only
+  every Piece check uses fallback false
+
+backend:
+  authoritative on every affected operation
+
+safe states exact5:
+  PRELAUNCH_OFF
+  OWNER_RECOVERY_ONLY
+  PRIVATE_ONLY
+  FULL
+  READ_ONLY_OWNER
+
+old Q&A rollback:
+  exact0
+
+flag-triggered DB/data effect:
+  exact0
+```
+
+General rollback preserves healthy owner read/delete where possible. A privacy incident disables public write/read/visibility immediately and never routes users to old Q&A.
+
+## 8. Current actual basis
 
 ```text
 Cocolon head / tree:
-  96df30f6cdda8f4549065a3b2156c5b75d36026e
-  00196a604415267b45df335220a0b3ff525b910f
+  cf14b503a4e5087b7ef33a82c8073a93517d5b60
+  4d64aba7bfe63aecf391a0ba3598589699cec6f1
 
 mashos-api head / tree:
   315813c7bd3372462de926ddad74df567254a6b5
   a641510e107d52bb910073f36604c85bd57af150
 
-PCE-0 catalog SHA-256:
-  2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e
+current Piece product:
+  old Q&A flow
 
-current new Piece implementation / migration / runtime:
+current backend Piece tests:
+  old Q&A contract/safety/hash tests
+
+current RN tests:
+  Node source-contract suite requiring old Q&A flow
+
+current monitoring:
+  generic free-form payload + pattern redaction
+
+current bootstrap flags:
+  static boolean map
+  generic RN helper fallback defaults true
+
+current Piece-specific RED/test/monitoring/rollback implementation:
   exact0
 ```
 
-Current actual remains old Q&A over `mymodel_reflections`, raw emotion preview request, question/reflection response, Q&A Nexus payload, compat routes and untracked application migration ownership. PCE-6 is design input, not remediation result.
+These are design inputs, not PCE-7 execution results.
 
-## 8. Read order
+## 9. Read order
 
 1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-2. `Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md`
+2. `Cocolon_前提資料/15J_cocolon_piece_workstream_pce7_design_closure_20260808.md`
 3. `Cocolon_Piece/manifest.json`
 4. revised clean-cutover roadmap
-5. PCE-1 through PCE-6 canonical artifacts
-6. PCE-0 catalog closure when current DB basis is needed
-7. current mashos-api and RN files for the next phase
+5. PCE-1 through PCE-7 canonical artifacts
+6. PCE-0 catalog closure when DB basis is needed
+7. current mashos-api/RN/test/monitoring/bootstrap files for PCE-8
 
-## 9. Prohibited
+## 10. Prohibited
 
-- new Pieceを`mymodel_reflections`へQ&A placeholder付きで保存する。
-- `public.pieces`をlegacy caller退避前に置換する。
-- raw input / Emlis / Analysis bodyをPiece request/recordへ複製する。
-- visibilityを`published_at`、quotaをsurviving row countへ戻す。
-- saveとquota、deleteとpurgeを別transactionにする。
-- private owner historyをpublic feed再利用で作る。
-- old Q&A state tablesをnew Pieceへ再利用する。
-- old/new user-visible dual run、compatibility adapter、old Q&A rollbackを作る。
-- tracked migrationなしでSQLを適用する。
-- M7 destructive cleanupを別承認なしに実行する。
-- designをDB/API/RN/migration実装済みと扱う。
-- PCE-7またはAnalysisへautomatic progressionする。
+- collection/import/environment failureをPiece causal REDと扱う。
+- DB concurrency/RLSをmockだけでGREENにする。
+- production private bodyをtest fixtureへ使う。
+- monitoringへPiece/raw/Emlis/Analysis bodyやhash/IDを入れる。
+- generic redactionがあることをbody送信許可へ変える。
+- missing/unknown Piece flagをtrueにする。
+- RN flagだけでserver operationを許可/禁止する。
+- flagでDDL/data deletionを行う。
+- rollbackでold Q&Aを復活させる。
+- public/private incidentでowner recoveryとpublic pathを混同する。
+- actual-device evidenceをChat/Workの推測で完了にする。
+- PCE-7 designをtest/monitoring/flag実装済みと扱う。
+- PCE-8またはAnalysisへautomatic progressionする。
 
-## 10. Next exact actions
+## 11. Next exact actions
 
 ```text
 next Piece action:
-  PCE7_TEST_MONITORING_ROLLBACK_DESIGN_ONLY
+  PCE8_DESIGN_FREEZE_WORK_PACKAGE_SPLIT_DESIGN_ONLY
 
 environment:
   CHAT_5_6_PRO_OK
@@ -322,16 +413,22 @@ next cross-workstream action:
   ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY
 ```
 
-## 11. Effects
+## 12. Effects
 
 ```text
-PCE-6 documentation / premise / checkpoint:
+PCE-7 documentation / premise / checkpoint:
   GitHub reflection required
 
 production source / DB / API / RN / migration / deletion:
   exact0
 
-test / runtime / actual device / release:
+test files / test execution / CI:
+  exact0
+
+monitoring/feature flag runtime change:
+  exact0
+
+actual device / release:
   exact0
 
 EmlisAI / Analysis technical state:

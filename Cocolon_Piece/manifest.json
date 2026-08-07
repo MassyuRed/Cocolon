@@ -1,23 +1,23 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v10",
+  "schema_version": "cocolon.piece.workstream_manifest.v11",
   "generated_at": "2026-08-08 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v9",
-    "predecessor_blob": "daf96ae4cd5bf2d98a46e128fb4b05d63d851084",
-    "predecessor_head": "96df30f6cdda8f4549065a3b2156c5b75d36026e",
-    "carry_forward": "PCE-0 through PCE-5 detailed identities remain in immutable predecessor and canonical phase artifacts"
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v10",
+    "predecessor_blob": "9ebe1008086518cf0f1d393c8ba5ac51b46698ff",
+    "predecessor_head": "cf14b503a4e5087b7ef33a82c8073a93517d5b60",
+    "carry_forward": "PCE-0 through PCE-6 detailed identities remain in immutable predecessor and canonical phase artifacts"
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "7b7fef8f5f37c0d3924c4793615572aa15281d8f"
+    "git_blob_sha1": "555cf1480346c2bae5d6fb3a851ecad3d4cf0f1a"
   },
   "current_premise": {
-    "path": "Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md",
-    "git_blob_sha1": "e00567bdd3a28769c92df0d101b370f06bb9a463"
+    "path": "Cocolon_前提資料/15J_cocolon_piece_workstream_pce7_design_closure_20260808.md",
+    "git_blob_sha1": "e82b0462deaef4bc169d85e79af122d3ffdede26"
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -35,6 +35,7 @@
     "emlis_history_root": "EmlisAIの実装済み資料/",
     "emlis_body_reuse": false,
     "analysis_inference_reuse": false,
+    "monitoring_body_reuse": false,
     "renderer_owner_embedded_in_record_schema": false
   },
   "phase_state": {
@@ -45,128 +46,147 @@
     "pce4": "COMPLETE_DESIGN_ONLY",
     "pce5": "COMPLETE_DESIGN_ONLY",
     "pce6": "COMPLETE_DESIGN_ONLY",
-    "pce7": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "pce7": "COMPLETE_DESIGN_ONLY",
+    "pce8": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
-    "next_piece_action": "PCE7_TEST_MONITORING_ROLLBACK_DESIGN_ONLY",
+    "next_piece_action": "PCE8_DESIGN_FREEZE_WORK_PACKAGE_SPLIT_DESIGN_ONLY",
     "next_cross_workstream_action": "ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY"
   },
   "fixed_contracts": {
-    "pce1_to_pce5_owner": "immutable predecessor manifest v9 and canonical phase artifacts",
-    "pce6": {
-      "data_contract_id": "piece.data_contract.v1",
-      "api_contract_id": "piece.api.v2",
-      "rn_flow_contract_id": "piece.rn_flow.v1",
-      "migration_contract_id": "piece.clean_cutover_migration.v1",
-      "selected_storage_option": "DEDICATED_NEW_PIECE_TABLE_FAMILY",
-      "record_table": "public.piece_records",
-      "final_read_projection": "public.pieces",
-      "legacy_shared_read_bridge": "public.mymodel_reflections_read",
-      "legacy_public_pieces_rebind_required_first": true,
-      "legacy_mymodel_reflections_new_piece_owner": false,
-      "old_qna_child_state_reuse": false,
-      "record_family": [
-        "public.piece_records",
-        "public.piece_quota_month_locks",
-        "public.piece_quota_consumptions",
-        "public.piece_record_metrics",
-        "public.piece_record_reads",
-        "public.piece_record_resonances",
-        "public.piece_export_receipts",
-        "public.piece_delete_receipts"
+    "pce1_to_pce6_owner": "immutable predecessor manifest v10 and canonical phase artifacts",
+    "pce7": {
+      "red_catalog_contract_id": "piece.red_contract_catalog.v1",
+      "test_matrix_contract_id": "piece.test_matrix.v1",
+      "monitoring_privacy_contract_id": "piece.monitoring_privacy.v1",
+      "feature_flag_rollback_contract_id": "piece.feature_flag_rollback.v1",
+      "required_negative_contract_count": 40,
+      "valid_red_requires_call_phase": true,
+      "collection_import_fixture_environment_failure_red_credit": 0,
+      "required_suite_class_count": 13,
+      "actual_db_transaction_suite_required": true,
+      "actual_db_rls_suite_required": true,
+      "mock_only_transaction_or_rls_green": false,
+      "actual_device_owner": "PCE11_MASH_ACTUAL_DEVICE_REQUIRED",
+      "independent_audit_owner": "PCE_U1_AND_U2_WORK_ULTRA_REQUIRED",
+      "monitoring_schema_version": "piece.ops_event.v1",
+      "monitoring_mode": "STRICT_ENUM_NUMERIC_ALLOWLIST",
+      "piece_free_form_monitoring": false,
+      "monitoring_piece_body": false,
+      "monitoring_raw_input_body": false,
+      "monitoring_emlis_body": false,
+      "monitoring_analysis_body": false,
+      "monitoring_content_hash_values": false,
+      "monitoring_raw_record_source_user_ids": false,
+      "public_saved_event_name": "piece_record_saved_public",
+      "superseded_roadmap_event_name": "piece_record_published_public",
+      "initial_piece_event_database": false,
+      "minimum_release_body_free_log_search_days_target": 14,
+      "piece_feature_flags": [
+        "piece_v2_preview_enabled",
+        "piece_v2_save_enabled",
+        "piece_v2_owner_read_enabled",
+        "piece_v2_public_write_enabled",
+        "piece_v2_public_read_enabled",
+        "piece_v2_visibility_toggle_enabled",
+        "piece_v2_export_enabled",
+        "piece_v2_delete_enabled"
       ],
-      "atomic_functions": [
-        "piece_save_v2",
-        "piece_set_visibility_v2",
-        "piece_delete_v2"
+      "piece_feature_flag_count": 8,
+      "missing_unknown_piece_flag_resolves": false,
+      "rn_feature_flag_is_authorization_owner": false,
+      "backend_feature_gate_authoritative": true,
+      "piece_safe_states": [
+        "P7_FS0_PRELAUNCH_OFF",
+        "P7_FS1_OWNER_RECOVERY_ONLY",
+        "P7_FS2_PRIVATE_ONLY",
+        "P7_FS3_FULL",
+        "P7_FS4_READ_ONLY_OWNER"
       ],
-      "base_rls_enabled": true,
-      "base_rls_forced": true,
-      "rn_direct_base_table_dml": false,
-      "application_service_access_owner": true,
-      "service_role_is_authorization_proof": false,
-      "quota_ledger_body_free": true,
-      "quota_ledger_survives_delete": true,
-      "save_and_quota_atomic": true,
-      "delete_and_purge_atomic": true,
-      "visibility_default": "private",
-      "backend_image_export_initial": false,
-      "preview_source": "body_free_saved_source_reference",
-      "raw_input_resend": false,
-      "owner_history_separate_from_public_feed": true,
-      "old_qna_release_reachability": false,
-      "old_new_visible_dual_run": false,
-      "migration_owner": "mashos-api/supabase/migrations/",
-      "migration_packets": [
-        "M0_TRACKED_BASELINE",
-        "M1_LEGACY_READ_BRIDGE",
-        "M2_NEW_FOUNDATION",
-        "M3_RLS_RPC_STAGING",
-        "M4_DISABLED_INTEGRATION",
-        "M5_SINGLE_CLEAN_CUTOVER",
-        "M6_BODY_FREE_OLD_IDENTITY_CAPTURE",
-        "M7_SEPARATE_APPROVAL_DESTRUCTIVE_CLEANUP",
-        "M8_OBSOLETE_CONTRACT_RETIREMENT"
-      ],
-      "old_qna_row_predicate": "public.mymodel_reflections.source_type = emotion_generated",
-      "old_qna_restoration_rollback": false,
-      "destructive_execution_in_pce6": false,
+      "piece_safe_state_count": 5,
+      "old_qna_rollback": false,
+      "flag_triggered_ddl_or_data_effect": false,
+      "general_rollback_preserves_healthy_owner_delete": true,
+      "test_implementation_in_pce7": false,
+      "test_execution_in_pce7": false,
+      "monitoring_implementation_in_pce7": false,
+      "feature_flag_implementation_in_pce7": false,
       "production_effect": 0
     }
   },
-  "pce6_artifacts": {
-    "data_contract": {
-      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_New_Data_Contract_Design_20260808.md",
-      "git_blob_sha1": "262921f40536727443359b3d0c28b490cb5c5ed4"
+  "pce7_artifacts": {
+    "red_catalog": {
+      "path": "Cocolon_Piece/pce7_test_monitoring_rollback/Piece_RED_Contract_Catalog_20260808.md",
+      "git_blob_sha1": "c42aff5a7f00a81fb09bef1455a10453efc80a0f"
     },
-    "api_design": {
-      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_API_CleanCutover_Design_20260808.md",
-      "git_blob_sha1": "96757b9ddbae8c2079fd7249d823f2f0d2bf3102"
+    "test_matrix": {
+      "path": "Cocolon_Piece/pce7_test_monitoring_rollback/Piece_Test_Matrix_20260808.md",
+      "git_blob_sha1": "cac4ca213133b872867465445bcdc04ae48b9b48"
     },
-    "rn_flow": {
-      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_RN_Flow_Design_20260808.md",
-      "git_blob_sha1": "c91a51eff44a89d08d714ece4c90c42ccdd97265"
+    "monitoring_privacy": {
+      "path": "Cocolon_Piece/pce7_test_monitoring_rollback/Piece_Monitoring_Privacy_Contract_20260808.md",
+      "git_blob_sha1": "9076310d0f27266626685bd3feb814f9e745c4d4"
     },
-    "migration_design": {
-      "path": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_OldQna_Removal_And_DB_Migration_Design_20260808.md",
-      "git_blob_sha1": "00dee10809a3b3f713ec038e1f675f3f8c346b8a"
+    "feature_flag_rollback": {
+      "path": "Cocolon_Piece/pce7_test_monitoring_rollback/Piece_FeatureFlag_Rollback_Design_20260808.md",
+      "git_blob_sha1": "b5b57df5b89fee3ea9f1950fb9cec4cf57f8676f"
     }
   },
-  "pce6_actual_basis": {
-    "cocolon_head": "96df30f6cdda8f4549065a3b2156c5b75d36026e",
-    "cocolon_tree": "00196a604415267b45df335220a0b3ff525b910f",
+  "pce7_actual_basis": {
+    "cocolon_head": "cf14b503a4e5087b7ef33a82c8073a93517d5b60",
+    "cocolon_tree": "4d64aba7bfe63aecf391a0ba3598589699cec6f1",
     "mashos_api_head": "315813c7bd3372462de926ddad74df567254a6b5",
     "mashos_api_tree": "a641510e107d52bb910073f36604c85bd57af150",
-    "supabase_catalog_sha256": "2f51e5e6e4207a186aaacbeb355c07ade3b4f777960f3f46d1dbea9f8f9d810e",
-    "current_write_table": "public.mymodel_reflections",
-    "current_read_view": "public.pieces",
-    "current_question_answer_not_null": true,
-    "current_rls_enabled": true,
-    "current_rls_forced": false,
-    "current_rls_policy_count": 0,
-    "current_application_migration_owner": "ABSENT",
-    "current_api_shape": "old_qna_preview_publish_cancel",
-    "current_rn_shape": "old_qna_modal_and_card",
-    "current_compat_routes_registered": true,
-    "shared_public_pieces_consumers_present": true,
-    "runtime_binding_in_pce6": false,
-    "test_execution_in_pce6": false
-  },
-  "unreferenced_candidates": [
-    {
-      "blob": "131a3e73a2161b88acb8cca34e75287ea5936675",
-      "reason": "first manual UTF-8 data-contract candidate did not match the prepared candidate identity",
-      "tree_inclusion": 0,
-      "ref_effect": 0,
-      "reuse_prohibited": true
+    "roadmap_sha256": "2eb8d7b4b58ef5fa21f2643ca381f8efb3bfdf08bde29432e746972f7d4f6939",
+    "current_backend_piece_test": {
+      "path": "ai/tests/contract/test_new_national_core_piece_contracts.py",
+      "blob": "df9e06df5eb7766ea071c75cb91ef0e7fcd28083",
+      "contract_shape": "old_qna_preview_publish_safety_hash"
     },
-    {
-      "blob": "1a1a495ac136c15f7aa216c56fe51eabb1bed901",
-      "reason": "manual base64 transfer produced invalid UTF-8 data-contract bytes",
-      "tree_inclusion": 0,
-      "ref_effect": 0,
-      "reuse_prohibited": true
-    }
-  ],
+    "current_rn_test": {
+      "path": "tests/rn-screen-contracts.test.js",
+      "blob": "feecf5f692a80a0d0710232f70be4dc38161abb4",
+      "mode": "node_source_contract_old_qna_required"
+    },
+    "current_rn_monitoring": {
+      "path": "lib/monitoring.js",
+      "blob": "74df5bbbf3058e0a82c3f86140ee2cbb5e0862f4",
+      "mode": "generic_free_form_with_pattern_redaction"
+    },
+    "current_backend_client_events": {
+      "path": "ai/services/ai_inference/api_client_events.py",
+      "blob": "5637bbad011c0f29ee70ded1da46c3e76aee211c",
+      "schema": "ops.client_event.v1",
+      "stored": false
+    },
+    "current_backend_observability": {
+      "path": "ai/services/ai_inference/observability.py",
+      "blob": "2262497326f42efe31c5c4ac32d7994f88cfce7f"
+    },
+    "current_request_metrics": {
+      "path": "ai/services/ai_inference/request_metrics.py",
+      "blob": "98d540553aa8f46740d04c102d92aed7f16e4a9d"
+    },
+    "current_bootstrap_flags": {
+      "path": "ai/services/ai_inference/api_app_bootstrap.py",
+      "blob": "be150dec4a9696d57d17ab83ce4aa3925deeb87a",
+      "piece_flags_present": false
+    },
+    "current_rn_runtime": {
+      "path": "AppRuntimeContext.js",
+      "blob": "6522cc98e602af9516b4a43f38e39be288592e30",
+      "generic_is_feature_enabled_default_fallback": true
+    },
+    "runtime_binding_in_pce7": false,
+    "test_execution_in_pce7": false,
+    "actual_device_execution_in_pce7": false
+  },
+  "durable_history": {
+    "previous_checkpoint": "Cocolon_前提資料/07L_piece_pce6_design_closure_checkpoint_20260808.md",
+    "previous_checkpoint_blob": "2278dac37ae477c2f04daf161c4435e71fb3499b",
+    "previous_premise": "Cocolon_前提資料/15I_cocolon_piece_workstream_pce6_design_closure_20260808.md",
+    "previous_premise_blob": "e00567bdd3a28769c92df0d101b370f06bb9a463",
+    "pce6_owner": "Cocolon_Piece/pce6_api_db_rn_migration/"
+  },
   "technical_effects": {
     "cocolon_production_source_change": 0,
     "mashos_api_production_source_change": 0,
@@ -176,7 +196,11 @@
     "migration": 0,
     "data_deletion": 0,
     "dependency_change": 0,
+    "test_file_change": 0,
     "test_execution": 0,
+    "ci_change": 0,
+    "monitoring_runtime_change": 0,
+    "feature_flag_runtime_change": 0,
     "runtime_execution": 0,
     "actual_device_execution": 0,
     "emlis_ai_state_effect": 0,
