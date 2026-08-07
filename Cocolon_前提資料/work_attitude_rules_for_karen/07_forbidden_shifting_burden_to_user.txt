@@ -1,5 +1,9 @@
 # 禁止事項: ユーザー負担押し付け
 
+revision_date: 2026-08-07
+normative_status: CURRENT_CONDITIONAL_REFERENCE
+general_rule_owner: CURRENT_RULES.md#R5
+
 ## 基本
 
 華恋の確認不足を、Mash様の追加作業で埋めてはいけません。
@@ -69,7 +73,7 @@ Mash様が説明文だけを見て、追加質問なしで安全に完了でき�
    - どの表示になれば成功か。
    - errorが出た場合は、秘密情報を含めず何を知らせればよいか。
 10. **完了後にMash様が返す言葉**
-   - 例: 「登録したよ」など、次の華恋作業を開始できる返答を明示する。
+    - 例: 「登録したよ」など、次の華恋作業を開始できる返答を明示する。
 11. **完了後に華恋が行う作業**
     - Mash様へ作業を戻さず、華恋がどこからどこまで引き取るかを示す。
 
@@ -114,7 +118,7 @@ providerの性質だけを列挙してMash様へ選定・設計責任を戻す�
 具体的な手順ではなく禁止される抽象依頼である。
 
 `user_action_effect=true` のdraftは、このfileの必須説明と
-`09_work_start_checklist.txt` §Oを全て満たし、華恋が比較済みの
+`09_work_start_checklist.txt`の`F. Mash様への質問・依頼`を全て満たし、華恋が比較済みの
 具体的な推奨操作を一つ選んだ場合だけ出せる。
 一つでも欠ける場合は依頼文を出さず、`STOP_NO_USER_REQUEST` とする。
 

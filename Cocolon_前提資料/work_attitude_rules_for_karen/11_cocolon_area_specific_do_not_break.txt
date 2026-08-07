@@ -1,5 +1,8 @@
 # Cocolon領域別: 特に壊してはいけないもの
 
+revision_date: 2026-08-07
+normative_status: CURRENT_AREA_REFERENCE
+
 ## 全体
 
 - Cocolonは「感情入力」を中心に回る商品。
@@ -22,11 +25,25 @@
 
 ## Piece
 
-- Pieceは短縮要約ではない。
-- 入力の核を、一問一答として他者に伝わる形に整える。
-- 低情報入力でも、生成不能ではなく低情報Pieceとして扱う方針がある。
-- 表示順・フォロー・共鳴・削除権限などのUI条件を壊さない。
-- 自分のPieceとフォロー中ユーザーのPieceの扱いを混同しない。
+current product definition:
+
+- PieceはQ&Aそのものではない。
+- Q&AはPieceの一形式である。
+- Pieceは、ユーザーの考えや価値観を他者に伝えるための文章へ整形し、画像化する機能である。
+- Pieceを短縮要約へ潰さない。
+
+current owner:
+
+- `Cocolon_Piece/00_read_first.md`
+- `Cocolon_Piece/manifest.json`
+
+compatibility boundary:
+
+- 現在のQ&A preview / draft / publish / Nexus / quota等の実装は、Piece全体のidentityではなく既存formatとcompatibility基盤として扱う。
+- existing Q&A route / field / storage / recordを、actual contractと移行設計なしに削除・一括変換しない。
+- 既存Q&A formatの低情報処理を、current actual file確認なしに一般Piece仕様または廃止対象へ読み替えない。
+- 画像化、visual recipe、format、visibility、export等を、実装確認なしに実装済みと扱わない。
+- 表示順・フォロー・共鳴・削除権限、自分のPieceとフォロー中ユーザーのPieceの境界を壊さない。
 
 ## 分析 / こころ天気
 
