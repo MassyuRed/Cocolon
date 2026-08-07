@@ -1,0 +1,207 @@
+{
+  "schema_version": "cocolon.piece.workstream_manifest.v2",
+  "generated_at": "2026-08-07 JST",
+  "decision_owner": "Mash",
+  "workstream": "Cocolon / Piece",
+  "automatic_progression": false,
+  "separation": {
+    "piece_owner_root": "Cocolon_Piece/",
+    "emlis_history_root": "EmlisAIの実装済み資料/",
+    "rule": "Piece成果物をEmlisAI実装履歴へ混在させない"
+  },
+  "product_definition": {
+    "qna_is_piece_identity": false,
+    "qna_role": "one_piece_format",
+    "current_piece": "ユーザーの考えや価値観を他者に伝えるための文章に整形して画像化する機能",
+    "decided_by": "Mash",
+    "decided_at": "2026-08-07 JST"
+  },
+  "current_phase": {
+    "phase_id": "PCE-0",
+    "phase_name": "Current Contract Pin",
+    "github_actual_inventory": "PRESERVED",
+    "formal_completion": false,
+    "terminal_state": "STOPPED_AT_CURRENT_PRODUCTION_DB_RLS_MIGRATION_IDENTITY",
+    "pce1_activated": false,
+    "next_required_input": "CURRENT_SUPABASE_PIECE_SCHEMA_RLS_MIGRATION_BODY_FREE_PACKET"
+  },
+  "historical_state_rule": {
+    "artifact_creation_state_is_preserved": true,
+    "creation_state_tokens": [
+      "GITHUB_NOT_REFLECTED",
+      "LOCAL_DOWNLOAD_ARTIFACT",
+      "GITHUB_WRITE_EXACT0"
+    ],
+    "current_interpretation": "上記tokenは原本作成時点のhistorical state。current publicationはGitHub path、current commit、前提資料checkpointで判断する"
+  },
+  "artifact_transport": {
+    "representation": "ordered_utf8_parts_with_manifested_trailing_lf_restoration",
+    "rule": "restore_trailing_lf=trueのpartは、原本再構成時にGitHub file bytesの直後へLF exact1を追加する",
+    "roadmap_reconstruction_verified": {
+      "utf8_bytes": 49465,
+      "sha256": "a8ec1298901839aaf7421dad1942fe94f6cb1b90bad5a8944dc41ac24cdc69bd",
+      "match": true
+    },
+    "handoff_reconstruction_verified": {
+      "utf8_bytes": 27677,
+      "sha256": "82f4f811760fb86767b4f667d7ed653b8c00678101d06a3e2c44948f8c166bd0",
+      "match": true
+    }
+  },
+  "artifacts": {
+    "roadmap": {
+      "original_filename": "Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807.md",
+      "original_utf8_bytes": 49465,
+      "original_lines": 1964,
+      "original_sha256": "a8ec1298901839aaf7421dad1942fe94f6cb1b90bad5a8944dc41ac24cdc69bd",
+      "directory": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/",
+      "readme": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md",
+      "parts": [
+        {
+          "order": 1,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_01_context_and_environment_policy.md",
+          "github_utf8_bytes": 10837,
+          "github_lf_count": 313,
+          "github_sha256": "62e1c1b96f89936ab9241337b4e6b8fd3b767e72dd4b01736a4f26ca9ef3d41b",
+          "git_blob_sha1": "46e9f406dfe89be2bb8cb8f9b18c9b6d4241b1b2",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 2,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_02_release_target_decisions_and_overview.md",
+          "github_utf8_bytes": 7320,
+          "github_lf_count": 253,
+          "github_sha256": "6202dcb39c985d1e6c8e998cb063327e39791264e56260eb206617e5b3408814",
+          "git_blob_sha1": "20a9e31998b6fd104519f1c4e8cd81ba50943d78",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 3,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_03_pce0_to_pce3.md",
+          "github_utf8_bytes": 7922,
+          "github_lf_count": 334,
+          "github_sha256": "9367a026b305bb670fe8ee5d6f3e5a4bc68667eb02123053546cad090b97313e",
+          "git_blob_sha1": "4e709facc6fb7120b6882f5cdde5bb9b2742a5f3",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 4,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_04_pce4_to_pce6.md",
+          "github_utf8_bytes": 7206,
+          "github_lf_count": 331,
+          "github_sha256": "ee5fc1176e35dbb1037a1c3d4893170c54254fb363c1f4a80cfcfcf431aa9a2a",
+          "git_blob_sha1": "e52d0a7c8ec5b39094aa2134682aff979b4b4a33",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 5,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_05_pce7_to_pce9.md",
+          "github_utf8_bytes": 5790,
+          "github_lf_count": 270,
+          "github_sha256": "e6a93ba1777fee3cb9b033749774b3efe1288595fb6fbace700bc0b557b23438",
+          "git_blob_sha1": "713fdaeeac8a012e091411ddc34cdf84fea96852",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 6,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_06_u1_to_release_closure.md",
+          "github_utf8_bytes": 4168,
+          "github_lf_count": 228,
+          "github_sha256": "506f54ba280bfc1cda5d5d73dd98c90a33b952a3f04c102f98d67d712fd09bf7",
+          "git_blob_sha1": "e008847186fed2c5d8a021e3d4c0307e5c9ca033",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 7,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_07_queue_relations_decisions_and_closure.md",
+          "github_utf8_bytes": 6215,
+          "github_lf_count": 228,
+          "github_sha256": "0474a80415fa787da6ccfaea2ca5bf93a26bfbefb386fdec8c1cf9687116d0ef",
+          "git_blob_sha1": "fae60ae0bc33262a31c795c3593a30506fd445d9",
+          "restore_trailing_lf": true
+        }
+      ]
+    },
+    "handoff": {
+      "original_filename": "Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807.md",
+      "original_utf8_bytes": 27677,
+      "original_lines": 948,
+      "original_sha256": "82f4f811760fb86767b4f667d7ed653b8c00678101d06a3e2c44948f8c166bd0",
+      "directory": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/",
+      "readme": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md",
+      "parts": [
+        {
+          "order": 1,
+          "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/part_01_context_and_actual.md",
+          "github_utf8_bytes": 10220,
+          "github_lf_count": 298,
+          "github_sha256": "e27bbe15a6f967c469d087c8d68e582413551f4ee244fb0386d397b37ad1aa2f",
+          "git_blob_sha1": "ab3925e43ef94c3e542b4c549bb5dd49f36cfc59",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 2,
+          "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/part_02_piece_and_analysis_policy.md",
+          "github_utf8_bytes": 8804,
+          "github_lf_count": 366,
+          "github_sha256": "1b4ff288c08b8a72002337976956dcae9d9766a56163224a4e799331f775aef6",
+          "git_blob_sha1": "72c27a7ba2f60a6070c1428583391faf5b054757",
+          "restore_trailing_lf": true
+        },
+        {
+          "order": 3,
+          "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/part_03_emlis_state_next_and_closure.md",
+          "github_utf8_bytes": 8651,
+          "github_lf_count": 282,
+          "github_sha256": "df639d8882c5a9cbabeeb4d0006aab9d5cd433752dcfbfa4831ea84555b21b10",
+          "git_blob_sha1": "1d24c1d268d47711bd0b99cf643e1fdcc8de53ea",
+          "restore_trailing_lf": false
+        }
+      ]
+    },
+    "pce0": {
+      "directory": "Cocolon_Piece/pce0_current_contract_pin/",
+      "files": [
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Contract_Inventory_20260807.md",
+          "utf8_bytes": 25797,
+          "lines": 854,
+          "sha256": "63dae6a51a2517997464fc9c37e283c34ca699e2605303c945ed6770a0ce6f18",
+          "git_blob_sha1": "67cc67036f53dddd3a5cc5fe5544c336e2d4cf1d"
+        },
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Owner_Map_20260807.md",
+          "utf8_bytes": 12762,
+          "lines": 201,
+          "sha256": "9e8e72665992e7529122d08de18e777179d4776f5429e97f9f70e9b956533fb7",
+          "git_blob_sha1": "6225c4e6c4a1efe02f110fcea2be25f0309f574f"
+        },
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Unconfirmed_Ledger_20260807.md",
+          "utf8_bytes": 11011,
+          "lines": 506,
+          "sha256": "a0d0ef7d330f3d028dbbf7024b9503530765d28a693c9e003d3072aea275fb8c",
+          "git_blob_sha1": "d58967bfc6f5445ace23faf2d89bad6809d72e38"
+        },
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql",
+          "utf8_bytes": 6903,
+          "lines": 193,
+          "sha256": "ae83c2677b813c96a37015eaf887bbc6713ba1eabf8bf56868ea76cd547bcdd1",
+          "git_blob_sha1": "c173712cadfaf4651f1c99d939c304e6fd7136a0"
+        }
+      ]
+    }
+  },
+  "technical_effects": {
+    "cocolon_production_source_change": 0,
+    "mashos_api_production_source_change": 0,
+    "db_change": 0,
+    "api_change": 0,
+    "rn_change": 0,
+    "migration": 0,
+    "test_execution": 0,
+    "runtime_execution": 0,
+    "release_effect": 0
+  }
+}
