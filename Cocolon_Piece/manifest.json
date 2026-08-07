@@ -1,0 +1,185 @@
+{
+  "schema_version": "cocolon.piece.workstream_manifest.v1",
+  "generated_at": "2026-08-07 JST",
+  "decision_owner": "Mash",
+  "workstream": "Cocolon / Piece",
+  "automatic_progression": false,
+  "separation": {
+    "piece_owner_root": "Cocolon_Piece/",
+    "emlis_history_root": "EmlisAIの実装済み資料/",
+    "rule": "Piece成果物をEmlisAI実装履歴へ混在させない"
+  },
+  "product_definition": {
+    "qna_is_piece_identity": false,
+    "qna_role": "one_piece_format",
+    "current_piece": "ユーザーの考えや価値観を他者に伝えるための文章に整形して画像化する機能",
+    "decided_by": "Mash",
+    "decided_at": "2026-08-07 JST"
+  },
+  "current_phase": {
+    "phase_id": "PCE-0",
+    "phase_name": "Current Contract Pin",
+    "github_actual_inventory": "PRESERVED",
+    "formal_completion": false,
+    "terminal_state": "STOPPED_AT_CURRENT_PRODUCTION_DB_RLS_MIGRATION_IDENTITY",
+    "pce1_activated": false,
+    "next_required_input": "CURRENT_SUPABASE_PIECE_SCHEMA_RLS_MIGRATION_BODY_FREE_PACKET"
+  },
+  "historical_state_rule": {
+    "artifact_creation_state_is_preserved": true,
+    "creation_state_tokens": [
+      "GITHUB_NOT_REFLECTED",
+      "LOCAL_DOWNLOAD_ARTIFACT",
+      "GITHUB_WRITE_EXACT0"
+    ],
+    "current_interpretation": "上記tokenは原本作成時点のhistorical state。current publicationはGitHub path、current commit、前提資料checkpointで判断する"
+  },
+  "artifacts": {
+    "roadmap": {
+      "original_filename": "Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807.md",
+      "original_utf8_bytes": 49465,
+      "original_lines": 1964,
+      "original_sha256": "a8ec1298901839aaf7421dad1942fe94f6cb1b90bad5a8944dc41ac24cdc69bd",
+      "representation": "lossless_ordered_utf8_parts",
+      "directory": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/",
+      "readme": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/README.md",
+      "parts": [
+        {
+          "order": 1,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_01_context_and_environment_policy.md",
+          "utf8_bytes": 10838,
+          "lines": 314,
+          "sha256": "0537af06ecc31a3020ed11dd706cb23bdf43284584c9a89458d6c1367df46788",
+          "publication_commit": "23912c229cadab43f9ada24a644ca4ff52cbd62b"
+        },
+        {
+          "order": 2,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_02_release_target_decisions_and_overview.md",
+          "utf8_bytes": 7321,
+          "lines": 254,
+          "sha256": "41edeedbce3470f7cd85ee067c455ddcba21283566bc81c51a431b208e77bca5",
+          "publication_commit": "652da02f311a53878e6750e1f00e6356199aa05a"
+        },
+        {
+          "order": 3,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_03_pce0_to_pce3.md",
+          "utf8_bytes": 7923,
+          "lines": 335,
+          "sha256": "3fcc73e9e354f8e449450016aece395a899fe4b286ad7c2f122fa327bc589196",
+          "publication_commit": "d400d8c7dba501b1b1ca37828aa8d451b4084cf5"
+        },
+        {
+          "order": 4,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_04_pce4_to_pce6.md",
+          "utf8_bytes": 7207,
+          "lines": 332,
+          "sha256": "6c227fcd69e86a3888c871748c2fccfaaa796ed5e320a85c45f1aa7f42f95618",
+          "publication_commit": "6e7fcbb57704f0b61bf4a6630abd10ff0d09090c"
+        },
+        {
+          "order": 5,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_05_pce7_to_pce9.md",
+          "utf8_bytes": 5791,
+          "lines": 271,
+          "sha256": "18f027db04c97bf9e380e3ef5576b4b209506ad18bc2c7ce3e64b0e030879b84",
+          "publication_commit": "6b2b2abfe5da6f45b53fff669f1a17e6de811414"
+        },
+        {
+          "order": 6,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_06_u1_to_release_closure.md",
+          "utf8_bytes": 4169,
+          "lines": 229,
+          "sha256": "057b25f90c82f69e013dbc8c39860d8b1fd797314cb2bad847b69bc08f796a23",
+          "publication_commit": "af93f060c0182fad87429a5073fc24d5b18aff8d"
+        },
+        {
+          "order": 7,
+          "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_07_queue_relations_decisions_and_closure.md",
+          "utf8_bytes": 6216,
+          "lines": 229,
+          "sha256": "167645b9a1b6bcbe93bbfe91ceb8df0e7686eb98da4f290ec8a625637a8ca123",
+          "publication_commit": "a8b7049c336df4329358f59457120c082edcb25c"
+        }
+      ]
+    },
+    "handoff": {
+      "original_filename": "Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807.md",
+      "original_utf8_bytes": 27677,
+      "original_lines": 948,
+      "original_sha256": "82f4f811760fb86767b4f667d7ed653b8c00678101d06a3e2c44948f8c166bd0",
+      "representation": "lossless_ordered_utf8_parts",
+      "directory": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/",
+      "readme": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/README.md",
+      "parts": [
+        {
+          "order": 1,
+          "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/part_01_context_and_actual.md",
+          "utf8_bytes": 10221,
+          "lines": 299,
+          "sha256": "1dd9932b49544ca667ee34af181ef80bc248e505091700e1e246608492824304",
+          "publication_commit": "fc52e27aafda8b2e396773a5cad3115cdf733401"
+        },
+        {
+          "order": 2,
+          "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/part_02_piece_and_analysis_policy.md",
+          "utf8_bytes": 8805,
+          "lines": 367,
+          "sha256": "d5832b13cba80a848252ba980804bd573956496d61385c79b95b7e914a94c99a",
+          "publication_commit": "17cdd4109e9934749e1e32c3a59c3cddb86528e6"
+        },
+        {
+          "order": 3,
+          "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/part_03_emlis_state_next_and_closure.md",
+          "utf8_bytes": 8651,
+          "lines": 282,
+          "sha256": "df639d8882c5a9cbabeeb4d0006aab9d5cd433752dcfbfa4831ea84555b21b10",
+          "publication_commit": "dcf991b03bee2c71d58dde5429df709082a7035a"
+        }
+      ]
+    },
+    "pce0": {
+      "directory": "Cocolon_Piece/pce0_current_contract_pin/",
+      "files": [
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Contract_Inventory_20260807.md",
+          "utf8_bytes": 25797,
+          "lines": 854,
+          "sha256": "63dae6a51a2517997464fc9c37e283c34ca699e2605303c945ed6770a0ce6f18",
+          "publication_commit": "3e0ce49c438fb5aab91b16bb287f24551a9e2947"
+        },
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Owner_Map_20260807.md",
+          "utf8_bytes": 12762,
+          "lines": 201,
+          "sha256": "9e8e72665992e7529122d08de18e777179d4776f5429e97f9f70e9b956533fb7",
+          "publication_commit": "ab6214afd6629de4aefca1034104ff641db67b71"
+        },
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Unconfirmed_Ledger_20260807.md",
+          "utf8_bytes": 11011,
+          "lines": 506,
+          "sha256": "a0d0ef7d330f3d028dbbf7024b9503530765d28a693c9e003d3072aea275fb8c",
+          "publication_commit": "f1dc9a20f8920692473c0812c8c768f9ee20d166"
+        },
+        {
+          "path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql",
+          "utf8_bytes": 6903,
+          "lines": 193,
+          "sha256": "ae83c2677b813c96a37015eaf887bbc6713ba1eabf8bf56868ea76cd547bcdd1",
+          "publication_commit": "6056d324a2295c19324288b92e1a4cacf06e827b"
+        }
+      ]
+    }
+  },
+  "technical_effects": {
+    "cocolon_production_source_change": 0,
+    "mashos_api_production_source_change": 0,
+    "db_change": 0,
+    "api_change": 0,
+    "rn_change": 0,
+    "migration": 0,
+    "test_execution": 0,
+    "runtime_execution": 0,
+    "release_effect": 0
+  }
+}
