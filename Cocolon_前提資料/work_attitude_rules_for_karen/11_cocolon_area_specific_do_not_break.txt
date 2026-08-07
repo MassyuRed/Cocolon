@@ -1,5 +1,11 @@
 # Cocolon領域別: 特に壊してはいけないもの
 
+revision_date: 2026-08-07
+normative_status: CURRENT_REFERENCE
+active_gate_owner: 00_read_first.txt
+
+このファイルは領域別referenceです。全体のactive Gateは`00_read_first.txt`を正とします。
+
 ## 全体
 
 - Cocolonは「感情入力」を中心に回る商品。
@@ -22,11 +28,12 @@
 
 ## Piece
 
-- Pieceは短縮要約ではない。
-- 入力の核を、一問一答として他者に伝わる形に整える。
-- 低情報入力でも、生成不能ではなく低情報Pieceとして扱う方針がある。
-- 表示順・フォロー・共鳴・削除権限などのUI条件を壊さない。
+- PieceはQ&Aそのものではない。Q&AはPieceの一形式。
+- Pieceは、ユーザーの考えや価値観を他者に伝えるための文章に整形し、画像化する機能。
+- current Q&A実装はcompatibility基盤かつ一形式として扱い、Piece全体のidentityに固定しない。
+- 低情報入力の扱い、表示順、フォロー、共鳴、削除権限など既存contractを、明示設計なしに壊さない。
 - 自分のPieceとフォロー中ユーザーのPieceの扱いを混同しない。
+- current Pieceの正本は`Cocolon_Piece/00_read_first.md`と`Cocolon_Piece/manifest.json`。
 
 ## 分析 / こころ天気
 
