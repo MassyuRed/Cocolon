@@ -1,12 +1,12 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v6",
+  "schema_version": "cocolon.piece.workstream_manifest.v7",
   "generated_at": "2026-08-07 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "current_entry": "Cocolon_Piece/00_read_first.md",
-  "current_entry_blob": "4b24837cab8e6ab88acbf91b0d2203ac29069314",
+  "current_entry_blob": "43990a59f02f06268cb573230eaac9c20e5a6225",
   "separation": {
     "piece_owner_root": "Cocolon_Piece/",
     "emlis_history_root": "EmlisAIの実装済み資料/",
@@ -26,10 +26,11 @@
     "pce0": "COMPLETE",
     "pce1": "COMPLETE_DESIGN_ONLY",
     "pce2": "COMPLETE_DESIGN_ONLY",
-    "pce3": "NOT_ACTIVATED",
+    "pce3": "COMPLETE_DESIGN_ONLY",
+    "pce4": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
     "next_cross_workstream_action": "ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY",
-    "queued_piece_action": "PCE3_RECORD_LIFECYCLE_VISIBILITY_QUOTA_DESIGN_ONLY"
+    "queued_piece_action": "PCE4_CONTENT_FORMAT_SAFETY_DESIGN_ONLY"
   },
   "pce1_fixed_contract": {
     "record_contract_id": "piece.record.v2",
@@ -66,6 +67,52 @@
     "body_free_lineage_required": true,
     "runtime_binding_in_pce2": false,
     "runtime_binding_owner_phase": "PCE-9C"
+  },
+  "pce3_fixed_contract": {
+    "record_lifecycle_contract_id": "piece.record_lifecycle.v1",
+    "visibility_access_contract_id": "piece.visibility_access.v1",
+    "quota_consumption_contract_id": "piece.quota_consumption.v1",
+    "delete_external_share_contract_id": "piece.delete_external_share_boundary.v1",
+    "lifecycle_status_values": [
+      "preview_draft",
+      "saved",
+      "cancelled",
+      "rejected",
+      "expired",
+      "deleted"
+    ],
+    "visibility_scope_values": [
+      "private",
+      "public"
+    ],
+    "lifecycle_visibility_separated": true,
+    "default_visibility": "private",
+    "public_requires_explicit_owner_selection": true,
+    "public_world_readable": false,
+    "private_owner_only": true,
+    "private_owner_history": true,
+    "private_export_reexport_allowed": true,
+    "private_feed_unread_resonance": false,
+    "piece_specific_friend_notification": false,
+    "visibility_change_new_record": false,
+    "visibility_change_quota_consumption": false,
+    "first_successful_save_quota_consumption": 1,
+    "delete_quota_refund": false,
+    "reexport_quota_consumption": false,
+    "quota_limits": {
+      "free": 5,
+      "plus": 30,
+      "premium": null,
+      "window_timezone": "Asia/Tokyo",
+      "window_type": "calendar_month"
+    },
+    "quota_count_owner": "immutable_body_free_first_save_consumption_identity",
+    "old_qna_quota_backfill": false,
+    "delete_restore": false,
+    "delete_body_physical_purge_required": true,
+    "external_copy_recovery": false,
+    "external_share_warning_required": true,
+    "production_effect": 0
   },
   "roadmap": {
     "directory": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/",
@@ -126,7 +173,38 @@
       "sha256": "ee95f7a6638cd922900c7f6b85dec959f979e9c6a8d9bce391353f01615396a0"
     }
   },
+  "pce3_artifacts": {
+    "record_lifecycle": {
+      "path": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/Piece_Record_Lifecycle_StateMachine_20260807.md",
+      "git_blob_sha1": "5ec8c774a699f51c0aef242257f658d18e594ef8",
+      "utf8_bytes": 14244,
+      "sha256": "20781debc92b0764a04173ece35dde863e0ae73a3af72908302593b3d9d6e087"
+    },
+    "visibility_access": {
+      "path": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/Piece_Visibility_Access_Contract_20260807.md",
+      "git_blob_sha1": "ac1f8874ee9a6a624b195eb59a3cbedd248f9259",
+      "utf8_bytes": 16744,
+      "sha256": "fe358af816557997e1a67de078cd5c5144ef06a25189a3654e74bab092c12505"
+    },
+    "quota_consumption": {
+      "path": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/Piece_Quota_Consumption_Contract_20260807.md",
+      "git_blob_sha1": "8020c68c37aea7f434933e00f4055c2262231ea9",
+      "utf8_bytes": 14361,
+      "sha256": "bc7cb2eccf59e694d8b6f877c3c196b60919eaccb4c718f050ee7ece224ad934"
+    },
+    "delete_external_share": {
+      "path": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/Piece_Delete_ExternalShare_Boundary_20260807.md",
+      "git_blob_sha1": "347ebd3ecf571adf136c2d7643dc924da211b2c1",
+      "utf8_bytes": 14471,
+      "sha256": "406c2d360d255c5de1cd0434c896c0966ba34544e88d5baec5f79d0ff141590e"
+    }
+  },
   "premise_current_state": {
+    "path": "Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md",
+    "blob": "6bcdfba901cbecd195659417513473acf32799ba",
+    "sha256": "7aea17186a99f5a680eb5236be6f93046bb5103853c2b6b8e4843133c21dfe70"
+  },
+  "previous_premise_state": {
     "path": "Cocolon_前提資料/15E_cocolon_piece_workstream_pce2_design_closure_20260807.md",
     "blob": "a7a6500bcd4ebe2ace7cdd7d42177c51be11301f",
     "sha256": "7ace1e2a4d9c9fb9830f33763db6b6fd4dcdfdcc0d59e34ef7d189b703360eb5"
@@ -146,11 +224,33 @@
     ],
     "runtime_binding": "DEFERRED_TO_PCE9C"
   },
+  "pce3_actual_basis": {
+    "cocolon_head": "50749566a11bade518add57d07cedbee4f5ab379",
+    "cocolon_tree": "75084995241bea25fb787b79cd691caab4f22dba",
+    "mashos_api_head": "315813c7bd3372462de926ddad74df567254a6b5",
+    "mashos_api_tree": "a641510e107d52bb910073f36604c85bd57af150",
+    "current_write_table": "public.mymodel_reflections",
+    "current_read_view": "public.pieces",
+    "current_rls_enabled": true,
+    "current_rls_forced": false,
+    "current_rls_policy_count": 0,
+    "current_access_owner": "application_service",
+    "current_lifecycle": [
+      "draft_inactive",
+      "ready_active",
+      "rejected_inactive"
+    ],
+    "current_visibility_scope_present": false,
+    "current_quota_owner": "JST_month_published_at_row_count",
+    "current_delete": "physical_piece_row_then_separate_related_state_cleanup",
+    "current_delete_atomicity": "UNCONFIRMED",
+    "design_runtime_binding": false
+  },
   "cross_workstream_sequence": {
     "shared_foundation_completed": true,
     "analysis_roadmap_after_pce2": true,
     "analysis_next_action": "ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY",
-    "queued_piece_phase": "PCE3_RECORD_LIFECYCLE_VISIBILITY_QUOTA_DESIGN_ONLY",
+    "queued_piece_phase": "PCE4_CONTENT_FORMAT_SAFETY_DESIGN_ONLY",
     "analysis_completion_required_for_piece": false,
     "piece_completion_required_for_analysis": false
   },
@@ -173,13 +273,16 @@
     "exact_dependency_map_required": true,
     "body_free_pre_post_counts_required": true,
     "new_flow_complete_and_verified_before_old_delete": true,
-    "separate_implementation_approval_required": true
+    "separate_implementation_approval_required": true,
+    "new_piece_delete_quota_refund": false,
+    "external_copy_recovery": false
   },
   "historical_owners": {
     "original_additive_roadmap": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/",
     "pce0_manifest_snapshot": "Cocolon_Piece/manifest_v2_historical_snapshot_20260807.json",
     "pce1_prestart_overlay": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md",
-    "pre_pce2_handoff": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/"
+    "pre_pce2_handoff": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807/",
+    "pce2_premise": "Cocolon_前提資料/15E_cocolon_piece_workstream_pce2_design_closure_20260807.md"
   },
   "unreferenced_candidates": [
     {

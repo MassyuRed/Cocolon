@@ -19,8 +19,8 @@ Piece workstream:
 EmlisAI implementation history:
   EmlisAIの実装済み資料/
 
-cross-core premise:
-  Cocolon_前提資料/15E_cocolon_piece_workstream_pce2_design_closure_20260807.md
+current Piece premise:
+  Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md
 ```
 
 Piece成果物をEmlisAI実装履歴へ混在させない。PCE-2の共通source boundaryはAnalysis roadmapも再利用するが、Piece / EmlisAI / Analysisの内部ownerを統合しない。
@@ -57,12 +57,16 @@ PCE-1 Piece Identity / Clean Cutover Decision:
 PCE-2 Cross-Core Source Handoff:
   COMPLETE_DESIGN_ONLY
 
-Analysis Pro-First roadmap:
+PCE-3 Record Lifecycle / Visibility / Quota:
+  COMPLETE_DESIGN_ONLY
+
+PCE-4 Content / Format / Safety:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
-PCE-3 Record Lifecycle / Visibility / Quota:
+Analysis Pro-First roadmap:
   NOT_ACTIVATED
+  SEPARATE_MASH_APPROVAL_REQUIRED
 
 automatic progression:
   false
@@ -97,9 +101,19 @@ Cocolon_Piece/pce2_cross_core_source_handoff/
   Piece_CrossCore_Source_Handoff_Contract_20260807.md
   Piece_Source_Role_Matrix_20260807.md
   Piece_Forbidden_Mixing_Negative_Contract_20260807.md
+```
+
+### PCE-3
+
+```text
+Cocolon_Piece/pce3_record_lifecycle_visibility_quota/
+  Piece_Record_Lifecycle_StateMachine_20260807.md
+  Piece_Visibility_Access_Contract_20260807.md
+  Piece_Quota_Consumption_Contract_20260807.md
+  Piece_Delete_ExternalShare_Boundary_20260807.md
 
 premise:
-  Cocolon_前提資料/15E_cocolon_piece_workstream_pce2_design_closure_20260807.md
+  Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md
 ```
 
 ## 5. fixed PCE-1 decisions
@@ -169,20 +183,159 @@ runtime binding:
   PCE-9C owner
 ```
 
-## 7. first read order
+## 7. fixed PCE-3 decisions
+
+```text
+record lifecycle:
+  piece.record_lifecycle.v1
+
+visibility / access:
+  piece.visibility_access.v1
+
+quota:
+  piece.quota_consumption.v1
+
+delete / external share:
+  piece.delete_external_share_boundary.v1
+```
+
+### lifecycle
+
+```text
+lifecycle_status:
+  preview_draft
+  saved
+  cancelled
+  rejected
+  expired
+  deleted
+
+visibility_scope:
+  private
+  public
+
+invariant:
+  lifecycle_status != visibility_scope
+
+valid saved states:
+  saved + private
+  saved + public
+```
+
+default visibility is private. Public requires explicit owner selection. Visibility change does not create a new record, regenerate Piece text, or consume quota.
+
+### access
+
+```text
+private:
+  owner only
+  owner history included
+  owner export / re-export allowed
+  Nexus / public profile / unread / resonance / friend notification exact0
+
+public:
+  current Cocolon viewer-access policyでallowed viewerだけ
+  world-readable exact0
+
+public -> private:
+  source-of-truth deny first
+  feed/cache invalidation follows
+```
+
+Piece-specific friend notification is exact0 for initial release. Source input notification is a separate owner and is not replayed by Piece save/toggle.
+
+### quota
+
+```text
+Free:
+  5 per JST calendar month
+
+Plus:
+  30 per JST calendar month
+
+Premium:
+  unlimited
+
+consume:
+  first successful PieceRecord save exact1
+
+preview / visibility change / re-export / failed export:
+  exact0
+
+delete refund:
+  exact0
+
+count owner:
+  immutable body-free consumption identity
+  not current row existence
+```
+
+Old Q&A rows are not backfilled into the new Piece quota ledger.
+
+### delete / external share
+
+```text
+delete:
+  owner-only
+  terminal
+  normal read exact0
+  canonical body and related state purge required
+  quota event retained
+  restore exact0
+
+external copy:
+  public->private / deleteで回収不能
+  export does not change visibility
+  external share does not consume quota
+  warning required
+```
+
+## 8. current actual basis
+
+```text
+Cocolon design basis:
+  50749566a11bade518add57d07cedbee4f5ab379
+  tree 75084995241bea25fb787b79cd691caab4f22dba
+
+mashos-api basis:
+  315813c7bd3372462de926ddad74df567254a6b5
+  tree a641510e107d52bb910073f36604c85bd57af150
+
+current quota:
+  published_at row count
+  Free 5 / Plus 30 / Premium unlimited
+  JST calendar month
+
+current visibility:
+  user-selectable public/private exact0
+
+current access:
+  application service owner
+  mymodel_reflections RLS enabled / policy exact0
+
+current delete:
+  physical Piece row delete
+  related state cleanup in separate calls
+  transaction atomicity unconfirmed
+```
+
+These are design inputs, not PCE-3 implementation results.
+
+## 9. first read order
 
 1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-2. `Cocolon_前提資料/15E_cocolon_piece_workstream_pce2_design_closure_20260807.md`
+2. `Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md`
 3. `Cocolon_Piece/manifest.json`
 4. revised clean-cutover roadmap
 5. PCE-1 four design artifacts
 6. PCE-2 three design artifacts
-7. PCE-0 catalog closure when current DB basis is needed
-8. next workstream / phase-specific material
+7. PCE-3 four design artifacts
+8. PCE-0 catalog closure when current DB basis is needed
+9. next workstream / phase-specific material
 
-## 8. historical material
+## 10. historical material
 
-The original additive/compatibility roadmap, pre-clean-cutover handoff, PCE-0 inventory, and pre-PCE-1 recommendation remain historical evidence.
+The original additive/compatibility roadmap, pre-clean-cutover handoff, PCE-0 inventory, pre-PCE-1 recommendation, and earlier Piece premise checkpoints remain historical evidence.
 
 ```text
 not current:
@@ -190,25 +343,30 @@ not current:
   active qna format
   compatibility renderer
   old/new user-visible coexistence
+  public state inferred from lifecycle status
+  quota inferred from surviving published row count
+  delete refund
 ```
 
-The pre-PCE-2 handoff remains current only for the cross-workstream sequence that creates the Analysis Pro-First roadmap after PCE-2. Its superseded PCE-1 compatibility recommendation is not current.
+PCE-0 inventory documents that still show the pre-catalog STOP remain historical evidence. `PCE0_Closure_State_20260807.json` owns the later PCE-0 completion.
 
-## 9. next exact action
+## 11. next exact actions
+
+Next Piece action:
+
+```text
+PCE4_CONTENT_FORMAT_SAFETY_DESIGN_ONLY
+```
+
+Next cross-workstream queued action:
 
 ```text
 ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY
 ```
 
-The next queued Piece phase is:
+Both require separate Mash approval. PCE-3 closure activates neither.
 
-```text
-PCE3_RECORD_LIFECYCLE_VISIBILITY_QUOTA_DESIGN_ONLY
-```
-
-Both require separate Mash approval. automatic progression is false.
-
-## 10. prohibited
+## 12. prohibited
 
 - Q&Aをnew active Piece formatへ戻す。
 - old/new user-visible dual runを設計する。
@@ -222,21 +380,42 @@ Both require separate Mash approval. automatic progression is false.
 - Analysis inference / current route / simulated routeをPiece sourceにする。
 - Piece textをAnalysis observed factへ昇格する。
 - PieceとAnalysisを相互completion dependencyにする。
-- PCE-2 designをruntime adapter / API / DB / RN実装済みと扱う。
-- Analysis roadmapまたはPCE-3へautomatic progressionする。
+- lifecycle statusとvisibility scopeを一fieldへ戻す。
+- `published`というstatusだけでpublic accessを許可する。
+- private saveをquota無料にする。
+- visibility toggle / re-exportでquotaを再消費する。
+- deleteでquotaをrefundする。
+- public→private / deleteでexternal copyも回収できると表示する。
+- PCE-3 designをDB / API / RN / migration / runtime実装済みと扱う。
+- PCE-4またはAnalysis roadmapへautomatic progressionする。
 
-## 11. effects
+## 13. effects
 
 ```text
-PCE-2 documentation / premise / checkpoint:
+PCE-3 documentation / premise / checkpoint:
   GitHub reflection required
 
-Cocolon production source: exact0
-mashos-api production source: exact0
-DB / API / RN / migration / data deletion: exact0
-test / runtime: exact0
-EmlisAI technical state: exact0
-Analysis runtime state: exact0
-release: exact0
-automatic progression: false
+Cocolon production source:
+  exact0
+
+mashos-api production source:
+  exact0
+
+DB / API / RN / migration / data deletion:
+  exact0
+
+test / runtime:
+  exact0
+
+EmlisAI technical state:
+  exact0
+
+Analysis runtime state:
+  exact0
+
+release:
+  exact0
+
+automatic progression:
+  false
 ```
