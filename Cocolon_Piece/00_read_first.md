@@ -20,7 +20,7 @@ EmlisAI implementation history:
   EmlisAIの実装済み資料/
 
 current Piece premise:
-  Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md
+  Cocolon_前提資料/15G_cocolon_piece_workstream_pce4_design_closure_20260807.md
 ```
 
 Piece成果物をEmlisAI実装履歴へ混在させない。PCE-2の共通source boundaryはAnalysis roadmapも再利用するが、Piece / EmlisAI / Analysisの内部ownerを統合しない。
@@ -38,6 +38,9 @@ Piece:
 
 record contract:
   piece.record.v2
+
+canonical visible body:
+  piece_text
 
 Q&A:
   pre-release legacy specification
@@ -61,6 +64,9 @@ PCE-3 Record Lifecycle / Visibility / Quota:
   COMPLETE_DESIGN_ONLY
 
 PCE-4 Content / Format / Safety:
+  COMPLETE_DESIGN_ONLY
+
+PCE-5 Visual Recipe / Export Design:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
@@ -111,9 +117,19 @@ Cocolon_Piece/pce3_record_lifecycle_visibility_quota/
   Piece_Visibility_Access_Contract_20260807.md
   Piece_Quota_Consumption_Contract_20260807.md
   Piece_Delete_ExternalShare_Boundary_20260807.md
+```
+
+### PCE-4
+
+```text
+Cocolon_Piece/pce4_content_format_safety/
+  Piece_Content_Meaning_Contract_20260807.md
+  Piece_Format_Owner_Decision_20260807.md
+  Piece_Public_Safety_Transformation_Contract_20260807.md
+  Piece_User_Selection_Boundary_20260807.md
 
 premise:
-  Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md
+  Cocolon_前提資料/15G_cocolon_piece_workstream_pce4_design_closure_20260807.md
 ```
 
 ## 5. fixed PCE-1 decisions
@@ -199,7 +215,7 @@ delete / external share:
   piece.delete_external_share_boundary.v1
 ```
 
-### lifecycle
+### lifecycle / visibility
 
 ```text
 lifecycle_status:
@@ -262,12 +278,15 @@ consume:
 preview / visibility change / re-export / failed export:
   exact0
 
+new canonical text / new format:
+  new record
+  consume exact1
+
 delete refund:
   exact0
 
 count owner:
-  immutable body-free consumption identity
-  not current row existence
+  immutable body-free first-save consumption identity
 ```
 
 Old Q&A rows are not backfilled into the new Piece quota ledger.
@@ -290,72 +309,219 @@ external copy:
   warning required
 ```
 
-## 8. current actual basis
+## 8. fixed PCE-4 decisions
 
 ```text
-Cocolon design basis:
-  50749566a11bade518add57d07cedbee4f5ab379
-  tree 75084995241bea25fb787b79cd691caab4f22dba
+content meaning:
+  piece.content_meaning.v1
 
-mashos-api basis:
+content payload:
+  piece.content_payload.v1
+
+format owner:
+  piece.format_owner.v1
+
+public safety:
+  piece.public_safety_transformation.v1
+
+user selection:
+  piece.user_selection_boundary.v1
+```
+
+### source / meaning
+
+```text
+source canonical:
+  saved input
+  refined only: distinct supplemental answer
+
+derived canonical:
+  PieceRecord.piece_text
+
+raw input overwrite:
+  exact0
+
+Emlis body source:
+  exact0
+
+Analysis inference source:
+  exact0
+
+title:
+  initial exact0
+```
+
+Piece is not a short summary. It preserves applicable subject, stance, relation, scope, uncertainty, negation, source role, and must-keep meaning anchors. It may not add diagnosis, personality, cause, advice, allegation, motive, or future prediction.
+
+### initial active formats
+
+```text
+active exact3:
+  short_essay
+  quote
+  declaration
+
+default:
+  short_essay
+
+Free:
+  short_essay fixed
+
+Plus:
+  auto recommendation among eligible formats
+
+Premium:
+  choose among eligible formats
+
+Q&A:
+  active exact0
+
+fragment:
+  initial active exact0
+  deferred
+```
+
+format is selected from generic meaning shape, relation complexity, context dependency, stance evidence, source length, and safety transform pressure. Case ID, exact sample, focus key, one keyword, tier alone are not format owners.
+
+### tier quality
+
+```text
+meaning preservation:
+  equal for Free / Plus / Premium
+
+public safety:
+  equal for Free / Plus / Premium
+
+no-hallucination:
+  equal for Free / Plus / Premium
+```
+
+Plan difference belongs to quota, format selection breadth, PCE-5 visual customization, and branding—not to how carefully Cocolon handles the user's words.
+
+### public safety
+
+```text
+applies:
+  private / public
+  preview / save / export / re-export
+  all plans
+
+raw input public copy:
+  exact0
+
+Emlis / Analysis body copy:
+  exact0
+
+PII / URL / contact / target / threat / doxxing:
+  remove / abstract / block under contract
+
+internal safety details public:
+  exact0
+```
+
+private Piece can be exported externally, so private visibility is not a safety bypass.
+
+### user selection
+
+```text
+user may:
+  choose whether to create
+  inspect preview
+  cancel
+  choose visibility
+  choose eligible format when plan allows
+  save
+
+user may not:
+  free-edit piece_text
+  paste replacement body
+  show/publish raw input
+  disable safety
+  force ineligible format
+  select Emlis / Analysis body
+  mutate saved text/format in place
+```
+
+pre-save format change creates a new candidate/hash and consumes no quota. Post-save text/format change requires a new PieceRecord and consumes quota exact1.
+
+## 9. current actual basis
+
+```text
+Cocolon current design head:
+  66ca6d3f3b8b81bfee808670d0e96b5a16d48ea3
+  tree 8507d8ccf34e3312a7c194fb9aab4fcce7daa4e6
+
+mashos-api current basis:
   315813c7bd3372462de926ddad74df567254a6b5
   tree a641510e107d52bb910073f36604c85bd57af150
 
-current quota:
-  published_at row count
-  Free 5 / Plus 30 / Premium unlimited
-  JST calendar month
+current format:
+  implicit Q&A
 
-current visibility:
-  user-selectable public/private exact0
+current generation:
+  deterministic fixed question / focus / phrase branches
 
-current access:
-  application service owner
-  mymodel_reflections RLS enabled / policy exact0
+current safety:
+  PII / URL mask
+  attack target abstraction
+  severe threat / doxxing block
 
-current delete:
-  physical Piece row delete
-  related state cleanup in separate calls
-  transaction atomicity unconfirmed
+current policy:
+  text hash
+  safety classification
+  meaning / overcompression metadata
+
+current preview / publish:
+  same text hash
+  mismatch rejected
+
+PCE-4 runtime implementation:
+  exact0
 ```
 
-These are design inputs, not PCE-3 implementation results.
+These are design inputs, not PCE-4 implementation results.
 
-## 9. first read order
+## 10. first read order
 
 1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-2. `Cocolon_前提資料/15F_cocolon_piece_workstream_pce3_design_closure_20260807.md`
+2. `Cocolon_前提資料/15G_cocolon_piece_workstream_pce4_design_closure_20260807.md`
 3. `Cocolon_Piece/manifest.json`
 4. revised clean-cutover roadmap
 5. PCE-1 four design artifacts
 6. PCE-2 three design artifacts
 7. PCE-3 four design artifacts
-8. PCE-0 catalog closure when current DB basis is needed
-9. next workstream / phase-specific material
+8. PCE-4 four design artifacts
+9. PCE-0 catalog closure when current DB basis is needed
+10. next workstream / phase-specific material
 
-## 10. historical material
+## 11. historical material
 
-The original additive/compatibility roadmap, pre-clean-cutover handoff, PCE-0 inventory, pre-PCE-1 recommendation, and earlier Piece premise checkpoints remain historical evidence.
+The original additive/compatibility roadmap, pre-clean-cutover handoff, PCE-0 inventory, pre-PCE-1 recommendation, earlier Piece premise checkpoints, and 2026-07-07 Piece design note remain historical evidence.
 
 ```text
 not current:
   Q&A preservation
-  active qna format
+  active Q&A format
   compatibility renderer
   old/new user-visible coexistence
+  Q&A as future active candidate
+  fragment as initial active format
+  tier-dependent content fidelity / safety
   public state inferred from lifecycle status
   quota inferred from surviving published row count
   delete refund
 ```
 
+The design note's content/visual separation, export-safe text, no free edit, safety boundary, and candidate Quote / Short Essay / Declaration directions remain reused. Its Q&A candidate was superseded by Mash's later clean-cutover decision.
+
 PCE-0 inventory documents that still show the pre-catalog STOP remain historical evidence. `PCE0_Closure_State_20260807.json` owns the later PCE-0 completion.
 
-## 11. next exact actions
+## 12. next exact actions
 
 Next Piece action:
 
 ```text
-PCE4_CONTENT_FORMAT_SAFETY_DESIGN_ONLY
+PCE5_VISUAL_RECIPE_EXPORT_DESIGN_ONLY
 ```
 
 Next cross-workstream queued action:
@@ -364,11 +530,12 @@ Next cross-workstream queued action:
 ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY
 ```
 
-Both require separate Mash approval. PCE-3 closure activates neither.
+Both require separate Mash approval. PCE-4 closure activates neither.
 
-## 12. prohibited
+## 13. prohibited
 
 - Q&Aをnew active Piece formatへ戻す。
+- fragmentをfailure fallbackへする。
 - old/new user-visible dual runを設計する。
 - old Q&A adapter / rendererを作る。
 - `mymodel_reflections`へplaceholder question/answerでnew Pieceを保存する。
@@ -379,20 +546,24 @@ Both require separate Mash approval. PCE-3 closure activates neither.
 - supplemental answerでoriginal inputを上書きする。
 - Analysis inference / current route / simulated routeをPiece sourceにする。
 - Piece textをAnalysis observed factへ昇格する。
-- PieceとAnalysisを相互completion dependencyにする。
 - lifecycle statusとvisibility scopeを一fieldへ戻す。
-- `published`というstatusだけでpublic accessを許可する。
 - private saveをquota無料にする。
 - visibility toggle / re-exportでquotaを再消費する。
 - deleteでquotaをrefundする。
 - public→private / deleteでexternal copyも回収できると表示する。
-- PCE-3 designをDB / API / RN / migration / runtime実装済みと扱う。
-- PCE-4またはAnalysis roadmapへautomatic progressionする。
+- sourceにないdiagnosis / personality / advice / stanceをPieceへ追加する。
+- uncertainty / negation / relationを落として短くする。
+- exact sample / case ID / one keywordだけでformatを決める。
+- planによりmeaning fidelity / safetyを弱める。
+- user free-editでsafetyを迂回する。
+- saved recordのtext / formatをin-place mutationする。
+- PCE-4 designをgeneration / DB / API / RN / runtime実装済みと扱う。
+- PCE-5またはAnalysis roadmapへautomatic progressionする。
 
-## 13. effects
+## 14. effects
 
 ```text
-PCE-3 documentation / premise / checkpoint:
+PCE-4 documentation / premise / checkpoint:
   GitHub reflection required
 
 Cocolon production source:
