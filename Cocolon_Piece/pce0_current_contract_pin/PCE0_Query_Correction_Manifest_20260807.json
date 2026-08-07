@@ -1,0 +1,44 @@
+{
+  "schema_version": "cocolon.piece.pce0.query_correction.v1",
+  "created_at": "2026-08-07 JST",
+  "decision_owner": "Mash",
+  "operational_owner": "Karen",
+  "phase": "PCE-0 Current Contract Pin",
+  "automatic_progression": false,
+  "attempt_001": {
+    "query_path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql",
+    "query_git_blob_sha1": "c173712cadfaf4651f1c99d939c304e6fd7136a0",
+    "result": "NONCREDIT_QUERY_DESIGN_FAILURE",
+    "sqlstate": "42P01",
+    "failed_line": 156,
+    "failed_relation": "supabase_migrations.schema_migrations",
+    "production_effect": 0,
+    "pce0_blockers_closed": 0
+  },
+  "current_execution_query": {
+    "path": "Cocolon_Piece/pce0_current_contract_pin/PCE0_Current_Supabase_Piece_Catalog_Query_20260807_V2.sql",
+    "role": "CURRENT_PCE0_SUPABASE_CATALOG_EVIDENCE_QUERY",
+    "single_statement": true,
+    "single_json_packet": true,
+    "catalog_only": true,
+    "direct_uncertain_relation_reference": false,
+    "application_row_export": false
+  },
+  "result_owner": "Cocolon_Piece/pce0_current_contract_pin/Piece_PCE0_Supabase_Query_Attempt001_Result_And_Correction_20260807.md",
+  "supersession": {
+    "v1_bytes_preserved_in_git_history": true,
+    "v1_execution_current": false,
+    "v2_execution_current": true,
+    "root_manifest_entry_override_scope": "PCE-0 Supabase evidence query only"
+  },
+  "phase_effect": {
+    "pce0_complete": false,
+    "pce1_activated": false,
+    "automatic_progression": false,
+    "db_change": 0,
+    "api_change": 0,
+    "rn_change": 0,
+    "migration_execution": 0,
+    "runtime_execution": 0
+  }
+}
