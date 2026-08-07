@@ -3,7 +3,7 @@ doc_id: cocolon_piece_profirst_roadmap_bundle_20260807
 title: "Cocolon Piece Pro-First Roadmap — GitHub Preservation Bundle"
 created_at: "2026-08-07 JST"
 decision_owner: "Mash"
-publication_state: "GITHUB_REFLECTED_LOSSLESS_ORDERED_UTF8_PARTS"
+publication_state: "GITHUB_REFLECTED_LOSSLESS_WITH_MANIFESTED_TRAILING_LF_RESTORATION"
 automatic_progression: false
 ---
 
@@ -25,7 +25,7 @@ SHA-256:
   a8ec1298901839aaf7421dad1942fe94f6cb1b90bad5a8944dc41ac24cdc69bd
 ```
 
-## 読み順・連結順
+## 読み順
 
 1. `part_01_context_and_environment_policy.md`
 2. `part_02_release_target_decisions_and_overview.md`
@@ -35,43 +35,54 @@ SHA-256:
 6. `part_06_u1_to_release_closure.md`
 7. `part_07_queue_relations_decisions_and_closure.md`
 
-各partは原本の連続したUTF-8 byte範囲であり、内容の要約・修正・再整形ではありません。上記順で単純連結すると原本bytesを再構成できます。
+## GitHub保存形と原本再構成
 
-## part identities
+各GitHub partは、対応する原本区間の本文を保持しています。GitHub publication時に、各part末尾の区切りLFがexact1省略されたため、原本を再構成するときは**各partの後へLF exact1を復元**します。
 
-| part | bytes | lines | SHA-256 |
-|---|---:|---:|---|
-| `part_01_context_and_environment_policy.md` | 10,838 | 314 | `0537af06ecc31a3020ed11dd706cb23bdf43284584c9a89458d6c1367df46788` |
-| `part_02_release_target_decisions_and_overview.md` | 7,321 | 254 | `41edeedbce3470f7cd85ee067c455ddcba21283566bc81c51a431b208e77bca5` |
-| `part_03_pce0_to_pce3.md` | 7,923 | 335 | `3fcc73e9e354f8e449450016aece395a899fe4b286ad7c2f122fa327bc589196` |
-| `part_04_pce4_to_pce6.md` | 7,207 | 332 | `6c227fcd69e86a3888c871748c2fccfaaa796ed5e320a85c45f1aa7f42f95618` |
-| `part_05_pce7_to_pce9.md` | 5,791 | 271 | `18f027db04c97bf9e380e3ef5576b4b209506ad18bc2c7ce3e64b0e030879b84` |
-| `part_06_u1_to_release_closure.md` | 4,169 | 229 | `057b25f90c82f69e013dbc8c39860d8b1fd797314cb2bad847b69bc08f796a23` |
-| `part_07_queue_relations_decisions_and_closure.md` | 6,216 | 229 | `167645b9a1b6bcbe93bbfe91ceb8df0e7686eb98da4f290ec8a625637a8ca123` |
+これは内容補正ではなく、manifested transport restorationです。本文文字・順序・section境界は変更していません。
+
+### GitHub current part identities
+
+| part | GitHub bytes | GitHub LF count | GitHub SHA-256 | Git blob SHA-1 | restore trailing LF |
+|---|---:|---:|---|---|---|
+| `part_01_context_and_environment_policy.md` | 10,837 | 313 | `62e1c1b96f89936ab9241337b4e6b8fd3b767e72dd4b01736a4f26ca9ef3d41b` | `46e9f406dfe89be2bb8cb8f9b18c9b6d4241b1b2` | exact1 |
+| `part_02_release_target_decisions_and_overview.md` | 7,320 | 253 | `6202dcb39c985d1e6c8e998cb063327e39791264e56260eb206617e5b3408814` | `20a9e31998b6fd104519f1c4e8cd81ba50943d78` | exact1 |
+| `part_03_pce0_to_pce3.md` | 7,922 | 334 | `9367a026b305bb670fe8ee5d6f3e5a4bc68667eb02123053546cad090b97313e` | `4e709facc6fb7120b6882f5cdde5bb9b2742a5f3` | exact1 |
+| `part_04_pce4_to_pce6.md` | 7,206 | 331 | `ee5fc1176e35dbb1037a1c3d4893170c54254fb363c1f4a80cfcfcf431aa9a2a` | `e52d0a7c8ec5b39094aa2134682aff979b4b4a33` | exact1 |
+| `part_05_pce7_to_pce9.md` | 5,790 | 270 | `e6a93ba1777fee3cb9b033749774b3efe1288595fb6fbace700bc0b557b23438` | `713fdaeeac8a012e091411ddc34cdf84fea96852` | exact1 |
+| `part_06_u1_to_release_closure.md` | 4,168 | 228 | `506f54ba280bfc1cda5d5d73dd98c90a33b952a3f04c102f98d67d712fd09bf7` | `e008847186fed2c5d8a021e3d4c0307e5c9ca033` | exact1 |
+| `part_07_queue_relations_decisions_and_closure.md` | 6,215 | 228 | `0474a80415fa787da6ccfaea2ca5bf93a26bfbefb386fdec8c1cf9687116d0ef` | `fae60ae0bc33262a31c795c3593a30506fd445d9` | exact1 |
 
 ## reconstruction
 
 repository rootから次を実行します。
 
 ```bash
-cat \
+out='Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807.md'
+: > "$out"
+for part in \
   Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_01_context_and_environment_policy.md \
   Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_02_release_target_decisions_and_overview.md \
   Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_03_pce0_to_pce3.md \
   Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_04_pce4_to_pce6.md \
   Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_05_pce7_to_pce9.md \
   Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_06_u1_to_release_closure.md \
-  Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_07_queue_relations_decisions_and_closure.md \
-  > Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807.md
+  Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807/part_07_queue_relations_decisions_and_closure.md
+do
+  cat "$part" >> "$out"
+  printf '\n' >> "$out"
+done
 
 printf '%s  %s\n' \
   'a8ec1298901839aaf7421dad1942fe94f6cb1b90bad5a8944dc41ac24cdc69bd' \
-  'Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807.md' \
+  "$out" \
   | sha256sum --check --strict
 ```
 
+この復元規則で、49,465 bytesおよび原本SHA-256が一致することをpublication前検証で確認済みです。
+
 ## creation-state note
 
-原本frontmatterとclosureに残る`GITHUB_NOT_REFLECTED`は、原本作成時点のhistorical stateです。原本bytesを改変しないため、その記述自体は残しています。current publication stateは本README、`Cocolon_Piece/manifest.json`、GitHub current pathとcommitで判断します。
+原本frontmatterとclosureに残る`GITHUB_NOT_REFLECTED`は、原本作成時点のhistorical stateです。原本本文を改変しないため、その記述自体は残しています。current publication stateは本README、`Cocolon_Piece/manifest.json`、GitHub current path、current commitで判断します。
 
 この保存はimplementation authority、PCE-0 completion、PCE-1 activation、automatic progressionを与えません。
