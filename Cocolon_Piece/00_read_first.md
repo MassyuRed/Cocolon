@@ -82,13 +82,23 @@ Cocolon作業全体の開始時には、これより先に`Cocolon_前提資料/
 
 ## 5. large artifact preservation rule
 
-roadmapとhandoffは、原本bytesを改変せずGitHubへ保存するため、ordered UTF-8 partsとして配置しています。
+roadmapとhandoffは、大きな原本をGitHubで読みやすく保存するため、ordered UTF-8 partsとして配置しています。
 
-- 各partは原本の連続byte範囲です。
-- part順は各bundleの`README.md`で固定しています。
-- 単純連結で原本を再構成できます。
-- 各part SHA-256、原本bytes、原本lines、原本SHA-256を固定しています。
-- current stateの追記を原本へ混ぜません。
+publication transport上、次のpartでは原本区間末尾のLF exact1をGitHub fileから分離し、manifested restorationとして扱います。
+
+```text
+roadmap:
+  part 1〜7の各末尾へLF exact1を復元する。
+
+handoff:
+  part 1とpart 2の末尾へLF exact1を復元する。
+  part 3はそのまま使う。
+```
+
+- GitHub current part bytes、LF count、SHA-256、git blob SHA-1を`manifest.json`と各bundle `README.md`で固定しています。
+- 指定されたLFだけを復元し、番号順に連結すると原本をbyte-exactに再構成できます。
+- 再構成後の原本bytesとSHA-256は検証済みです。
+- current state追記のためにhistorical原本本文を書き換えていません。
 
 原本内の`GITHUB_NOT_REFLECTED`、`LOCAL_DOWNLOAD_ARTIFACT`、`GITHUB_WRITE_EXACT0`等は、原本作成時点のhistorical stateです。current publication stateは、このdirectory、`manifest.json`、前提資料checkpoint、current GitHub commitで判断します。
 
@@ -125,6 +135,7 @@ PCE0_Current_Supabase_Piece_Schema_RLS_Migration_Query_20260807.sql
 - Piece成果物をEmlisAI実装履歴へ混在させる。
 - local pathやchatだけをdurable preservationと扱う。
 - roadmap / handoff原本のcreation-state記述を書き換える。
+- manifestにないnewline restorationを加える。
 
 ## 8. publication effect
 
