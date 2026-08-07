@@ -1,5 +1,5 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v3",
+  "schema_version": "cocolon.piece.workstream_manifest.v4",
   "generated_at": "2026-08-07 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
@@ -13,7 +13,9 @@
   },
   "product_definition": {
     "qna_is_piece_identity": false,
-    "qna_role": "one_piece_format",
+    "qna_historical_role": "pre_release_legacy_format",
+    "qna_future_active_format": false,
+    "qna_preservation_required": false,
     "current_piece": "ユーザーの考えや価値観を他者に伝えるための文章に整形して画像化する機能",
     "decided_by": "Mash",
     "decided_at": "2026-08-07 JST"
@@ -23,8 +25,32 @@
     "completed_phase_name": "Current Contract Pin",
     "formal_completion": true,
     "state": "PCE0_COMPLETE_CURRENT_CONTRACT_PINNED",
+    "next_phase_id": "PCE-1",
+    "next_phase_name": "Piece Identity / Clean Cutover Decision",
+    "pce1_product_premise": "CLEAN_CUTOVER_FIXED",
     "pce1_activated": false,
-    "next_action": "PCE1_SEPARATE_MASH_APPROVAL_AND_IDENTITY_COMPATIBILITY_DECISION"
+    "next_action": "PCE1_PIECE_IDENTITY_AND_CLEAN_CUTOVER_DESIGN_SEPARATE_APPROVAL"
+  },
+  "clean_cutover_decision": {
+    "decision_path": "Cocolon_Piece/pce1_identity_clean_cutover/Piece_PCE1_Clean_Cutover_Product_Decision_And_Roadmap_Overlay_20260807.md",
+    "premise_path": "Cocolon_前提資料/15C_cocolon_piece_workstream_clean_cutover_product_decision_20260807.md",
+    "current_qna_user_exposure": false,
+    "existing_qna_data_preservation_required": false,
+    "old_new_dual_run_required": false,
+    "compatibility_renderer_required": false,
+    "old_qna_new_generation_after_cutover": false,
+    "old_qna_content_migration_required": false,
+    "complete_new_structure_replacement_allowed": true,
+    "immediate_destructive_execution_authorized": false,
+    "shared_table_non_piece_data_deletion_authorized": false,
+    "old_qna_removal_requires_exact_dependency_map": true,
+    "supersedes_prior_recommendations": [
+      "KEEP_QNA_AS_ACTIVE_FORMAT",
+      "KEEP_EXISTING_QNA_COMPATIBILITY_RENDERER",
+      "RUN_OLD_AND_NEW_NEXUS_RENDERERS_TOGETHER",
+      "KEEP_OLD_ROUTE_FIELD_STORAGE_UNTIL_RELEASE_STABILITY",
+      "MIGRATE_OR_ADAPT_EXISTING_QNA_CONTENT"
+    ]
   },
   "current_db_contract": {
     "physical_write_table": "public.mymodel_reflections",
@@ -53,7 +79,9 @@
     "premise_checkpoint_path": "Cocolon_前提資料/07E_piece_pce0_closure_checkpoint_20260807.md"
   },
   "artifact_blob_identities": {
-    "current_entry": "35ec513d6c4fc7f80bc59fe5338740c2c6265106",
+    "current_entry": "ffbadf2e400b3fb67dd8a8f1d687d02f2d182297",
+    "clean_cutover_decision": "df30001475aba8fe3460d1b0ad79dce0363a9631",
+    "clean_cutover_premise": "66e0d2e69160cac0bc760f2a3727a571206b39e2",
     "result_base64": "0f137f89bd0f0c08762acc27b36296417ded883d",
     "result_bundle_manifest": "ef7a2390925b42836955dcfad9843193b426fdc0",
     "closure_state": "e9b5badebb80cd200596e8c047ac9d087a99de27",
@@ -79,6 +107,14 @@
     "supabase_internal_candidates_are_not_application_owner": true,
     "required_before_future_ddl": "PCE6_TRACKED_APPLICATION_MIGRATION_BASELINE_BOUND_TO_CURRENT_CATALOG"
   },
+  "destructive_change_boundary": {
+    "product_permission_to_discard_old_qna": true,
+    "execution_requires_separate_approval": true,
+    "exact_old_qna_row_predicate_required": true,
+    "actual_writer_reader_dependency_map_required": true,
+    "shared_table_blanket_delete_prohibited": true,
+    "non_piece_consumer_preservation_required": true
+  },
   "publication_nonreuse": {
     "unreferenced_commit": "e7494d8d2a1fee3bdb68a6f8d0ccb8a921727d49",
     "unreferenced_commit_ref_effect": 0,
@@ -93,6 +129,7 @@
     "api_change": 0,
     "rn_change": 0,
     "migration": 0,
+    "data_deletion": 0,
     "test_execution": 0,
     "runtime_execution": 0,
     "emlis_ai_state_effect": 0,
