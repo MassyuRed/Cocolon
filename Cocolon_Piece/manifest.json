@@ -1,34 +1,35 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v8",
-  "generated_at": "2026-08-07 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v9",
+  "generated_at": "2026-08-08 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
     "predecessor_path": "Cocolon_Piece/manifest.json",
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v7",
-    "predecessor_blob": "2eb59e4f7c0427da9ce37f57349e7d31e4715301",
-    "predecessor_head": "66ca6d3f3b8b81bfee808670d0e96b5a16d48ea3",
-    "carry_forward": "PCE-0 through PCE-3 detailed artifact identities remain in immutable predecessor and canonical phase artifacts"
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v8",
+    "predecessor_blob": "01067325520c37d2d2738b7c755ec78394bcaad7",
+    "predecessor_head": "b777574b8ca9c5969fba5f78a63ed7b08f272e62",
+    "carry_forward": "PCE-0 through PCE-4 detailed identities remain in immutable predecessor and canonical phase artifacts"
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "647afd472c799c2909f40de63ed5cc21175da473",
-    "utf8_bytes": 13196,
-    "sha256": "03a0ebb68f7c61933c7ceae892a7887d9d14aeff01371a329fcc621539469732"
+    "git_blob_sha1": "049ab38c5d3fb0d8ba7473ef2c44814b3d0e2868",
+    "utf8_bytes": 12322,
+    "sha256": "bac253de270b5325b1f56037f06dd8e641a5214d8956f5c06374c5ccc0d8a035"
   },
   "current_premise": {
-    "path": "Cocolon_前提資料/15G_cocolon_piece_workstream_pce4_design_closure_20260807.md",
-    "git_blob_sha1": "b6bde5a02b7a4c52db5201206769abb099cd9bed",
-    "utf8_bytes": 13492,
-    "sha256": "23d40271f3b7b35e9d13fa9a10940ed1a4bcb6b204f5c6acf8aba2b5ca2a61c8"
+    "path": "Cocolon_前提資料/15H_cocolon_piece_workstream_pce5_design_closure_20260808.md",
+    "git_blob_sha1": "23411ce07bfbab01c9879a3e0a226a75ccdf2473",
+    "utf8_bytes": 13523,
+    "sha256": "2db75b9ef9f73f3d81739fb7a1c4fcea10f293d98188783dd70dac500ce79d9d"
   },
   "separation": {
     "piece_owner_root": "Cocolon_Piece/",
     "emlis_history_root": "EmlisAIの実装済み資料/",
     "analysis_internal_owner_merged": false,
     "emlis_internal_owner_merged": false,
+    "renderer_owner_embedded_in_record_schema": false,
     "rule": "Piece成果物をEmlisAI実装履歴へ混在させない"
   },
   "product_definition": {
@@ -36,6 +37,8 @@
     "record_contract_id": "piece.record.v2",
     "current_piece": "保存済みユーザー入力を起点に、考えや価値観を他者へ伝わるcanonical textへ整形し、reproducible visual recipeで画像化できるユーザー所有artifact",
     "canonical_visible_body": "piece_text",
+    "image_binary_record_source_of_truth": false,
+    "feed_representation": "piece_text_plus_versioned_visual_recipe",
     "qna_role": "pre_release_legacy_specification",
     "qna_new_active_format": false,
     "qna_preservation_required": false,
@@ -47,159 +50,231 @@
     "pce2": "COMPLETE_DESIGN_ONLY",
     "pce3": "COMPLETE_DESIGN_ONLY",
     "pce4": "COMPLETE_DESIGN_ONLY",
-    "pce5": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "pce5": "COMPLETE_DESIGN_ONLY",
+    "pce6": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
-    "next_piece_action": "PCE5_VISUAL_RECIPE_EXPORT_DESIGN_ONLY",
+    "next_piece_action": "PCE6_API_DB_RN_MIGRATION_DESIGN_ONLY",
     "next_cross_workstream_action": "ANALYSIS_PRO_FIRST_CURRENT_ACTUAL_PRODUCT_QUALITY_CLOSURE_ROADMAP_DESIGN_ONLY"
   },
   "fixed_contracts": {
-    "pce1": {
-      "record_contract_id": "piece.record.v2",
-      "public_id_namespace": "piece:<uuid>",
-      "dedicated_record_owner_direction": "public.piece_records",
-      "old_qna_active_format": false,
-      "old_qna_migration": false,
-      "compatibility_renderer": false
-    },
-    "pce2": {
-      "cross_core_contract_id": "cocolon.cross_core.source_handoff.v1",
-      "source_lineage_contract_id": "piece.source_lineage.v1",
-      "eligibility_contract_id": "piece.generation_eligibility.v1",
-      "saved_source_identity_required": true,
-      "emlis_visible_body_reuse": false,
-      "analysis_inference_as_piece_source": false,
-      "body_free_lineage_required": true,
-      "runtime_binding_owner_phase": "PCE-9C"
-    },
-    "pce3": {
-      "record_lifecycle_contract_id": "piece.record_lifecycle.v1",
-      "visibility_access_contract_id": "piece.visibility_access.v1",
-      "quota_consumption_contract_id": "piece.quota_consumption.v1",
-      "delete_external_share_contract_id": "piece.delete_external_share_boundary.v1",
-      "default_visibility": "private",
-      "first_successful_save_consumption": 1,
-      "visibility_change_consumption": 0,
-      "reexport_consumption": 0,
-      "delete_refund": false
-    },
-    "pce4": {
-      "content_meaning_contract_id": "piece.content_meaning.v1",
-      "content_payload_version": "piece.content_payload.v1",
-      "format_owner_contract_id": "piece.format_owner.v1",
-      "public_safety_contract_id": "piece.public_safety_transformation.v1",
-      "user_selection_contract_id": "piece.user_selection_boundary.v1",
-      "active_formats": [
-        "short_essay",
-        "quote",
-        "declaration"
+    "pce1_to_pce4_owner": "immutable predecessor manifest v8 and canonical phase artifacts",
+    "pce5": {
+      "visual_recipe_contract_id": "piece.visual_recipe.v1",
+      "visual_catalog_contract_id": "piece.visual_catalog.v1",
+      "export_contract_id": "piece.export_contract.v1",
+      "render_interface_id": "piece.render_interface.v1",
+      "render_reproducibility_contract_id": "piece.render_reproducibility.v1",
+      "long_text_layout_contract_id": "piece.long_text_layout.v1",
+      "export_receipt_contract_id": "piece.export_receipt.v1",
+      "templates": {
+        "short_essay": {
+          "template_id": "essay_frame",
+          "version": 1
+        },
+        "quote": {
+          "template_id": "focus_frame",
+          "version": 1
+        },
+        "declaration": {
+          "template_id": "stance_frame",
+          "version": 1
+        }
+      },
+      "template_count": 3,
+      "themes": [
+        {
+          "theme_id": "soft_paper",
+          "version": 1
+        },
+        {
+          "theme_id": "quiet_night",
+          "version": 1
+        }
       ],
-      "active_format_count": 3,
-      "default_format": "short_essay",
-      "free_format": "short_essay",
-      "plus_format_policy": "auto_recommend_among_eligible",
-      "premium_format_policy": "user_select_among_eligible",
-      "qna_active_format": false,
-      "fragment_initial_active": false,
-      "fragment_state": "DEFERRED_POST_RELEASE_CANDIDATE",
-      "initial_title_present": false,
-      "raw_input_overwrite": false,
-      "emlis_visible_body_reuse": false,
-      "analysis_inference_reuse": false,
-      "user_free_text_edit": false,
-      "safety_override": false,
-      "private_public_same_safety": true,
-      "all_tiers_same_meaning_fidelity": true,
-      "preview_save_export_text_equality_required": true,
-      "post_save_format_or_text_change_new_record": true,
-      "post_save_format_or_text_change_quota": 1
+      "theme_count": 2,
+      "body_font_styles": [
+        {
+          "font_style_id": "system_readable",
+          "version": 1
+        }
+      ],
+      "body_font_style_count": 1,
+      "aspect_ratios": [
+        "4:5",
+        "9:16"
+      ],
+      "aspect_ratio_count": 2,
+      "output_profiles": {
+        "4:5": "png_1080x1350_srgb_v1",
+        "9:16": "png_1080x1920_srgb_v1"
+      },
+      "initial_mime_type": "image/png",
+      "image_binary_record_source_of_truth": false,
+      "remote_asset_runtime_dependency": false,
+      "post_save_recipe_mutation": false,
+      "visual_recipe_hash_required": true,
+      "catalog_immutable_versioned": true,
+      "saved_version_lifetime_reexport_required": true,
+      "release_reproducibility_levels": [
+        0,
+        1,
+        2
+      ],
+      "cross_platform_byte_identity_required": false,
+      "prototype_renderer_owner": "RN_FIRST",
+      "release_renderer_owner": "DEVICE_GATED_PENDING_PCE9E_PCE11",
+      "backend_escalation_candidate": true,
+      "hybrid_initial_active": false,
+      "silent_renderer_fallback": false,
+      "single_image_initial": true,
+      "clipping_allowed": false,
+      "ellipsis_allowed": false,
+      "content_deletion_for_fit": false,
+      "font_below_floor_allowed": false,
+      "save_time_fit_gate_required": true,
+      "fit_failure_record_effect": 0,
+      "fit_failure_quota_effect": 0,
+      "actual_device_acceptance_required": true,
+      "plan_matrix": {
+        "free": {
+          "theme": "soft_paper",
+          "ratio": "4:5",
+          "branding": "required_small"
+        },
+        "plus": {
+          "themes": [
+            "soft_paper",
+            "quiet_night"
+          ],
+          "ratio": "4:5",
+          "branding": "required_subtle"
+        },
+        "premium": {
+          "themes": [
+            "soft_paper",
+            "quiet_night"
+          ],
+          "ratios": [
+            "4:5",
+            "9:16"
+          ],
+          "branding": [
+            "required_subtle",
+            "off"
+          ]
+        }
+      },
+      "all_plans_equal_render_fidelity": true,
+      "all_plans_equal_resolution": true,
+      "all_plans_equal_readability": true,
+      "export_reexport_quota_consumption": 0
     }
   },
-  "pce4_artifacts": {
-    "content_meaning": {
-      "path": "Cocolon_Piece/pce4_content_format_safety/Piece_Content_Meaning_Contract_20260807.md",
-      "git_blob_sha1": "cfa23183e26551ed461ee4815a8535f47d92c6c1",
-      "utf8_bytes": 11695,
-      "sha256": "88b7a40280ad3beb3a83caceb85dc74f75662edcf4442aa19c237ae41f63fc1d"
+  "pce5_artifacts": {
+    "visual_recipe": {
+      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_Visual_Recipe_Contract_20260808.md",
+      "git_blob_sha1": "19e1af6e390a7c1fcaaa00b050f86897f825aa51",
+      "utf8_bytes": 13957,
+      "sha256": "c53e1e2b7dd0cd9f8f9643e5ba78a8f1277281186954be19f539426069448007"
     },
-    "format_owner": {
-      "path": "Cocolon_Piece/pce4_content_format_safety/Piece_Format_Owner_Decision_20260807.md",
-      "git_blob_sha1": "546ba60a870f0e8271d15a39d2ae15adc16c0c50",
-      "utf8_bytes": 12123,
-      "sha256": "9239025403fd8c083af684439316ccfb1d8e3a96ea022ed97668077ada4af48b"
+    "export_owner": {
+      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_Export_Owner_Comparison_20260808.md",
+      "git_blob_sha1": "d8cfef13784dab87bfc7f7821381a055b524a957",
+      "utf8_bytes": 13337,
+      "sha256": "f700861c84ed2e25d5bdf24452ae78361c79033cc916890902181eca1287dbd5"
     },
-    "public_safety": {
-      "path": "Cocolon_Piece/pce4_content_format_safety/Piece_Public_Safety_Transformation_Contract_20260807.md",
-      "git_blob_sha1": "45bb3259975fe697d0c2703ef53a90cf5fe68e94",
-      "utf8_bytes": 12212,
-      "sha256": "56db5be17034731b70cabbe646be6bd1e9c615551e53afb342bcf0c9888324da"
+    "reproducibility": {
+      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_Render_Reproducibility_Contract_20260808.md",
+      "git_blob_sha1": "7769f2d7ed8e1f59724641fa8a4229a47c90451b",
+      "utf8_bytes": 13180,
+      "sha256": "47df021c1dec8540c43b11392de494e5e70c280effea2f4e23867075aa7ac5b6"
     },
-    "user_selection": {
-      "path": "Cocolon_Piece/pce4_content_format_safety/Piece_User_Selection_Boundary_20260807.md",
-      "git_blob_sha1": "c74f59e3de64996dba5f1841d23a544a65f4f050",
-      "utf8_bytes": 10436,
-      "sha256": "57928eea103f88566028a46c99dbcff98fbed6159c3566f80296f5714cee7cdf"
+    "long_text": {
+      "path": "Cocolon_Piece/pce5_visual_recipe_export/Piece_LongText_Layout_Policy_20260808.md",
+      "git_blob_sha1": "9c7eb2bbb9c739963195abd715e65d6a9083a98b",
+      "utf8_bytes": 12655,
+      "sha256": "217235dd7e610d51bffea9aacc76f968bf7c7557716d043cf4fbdd8e82594194"
     }
   },
-  "pce4_actual_basis": {
-    "cocolon_head": "66ca6d3f3b8b81bfee808670d0e96b5a16d48ea3",
-    "cocolon_tree": "8507d8ccf34e3312a7c194fb9aab4fcce7daa4e6",
+  "pce5_actual_basis": {
+    "cocolon_head": "b777574b8ca9c5969fba5f78a63ed7b08f272e62",
+    "cocolon_tree": "0dd930688040534dd57a98099abf3a7d5ef448f3",
     "mashos_api_head": "315813c7bd3372462de926ddad74df567254a6b5",
     "mashos_api_tree": "a641510e107d52bb910073f36604c85bd57af150",
     "roadmap_sha256": "2eb8d7b4b58ef5fa21f2643ca381f8efb3bfdf08bde29432e746972f7d4f6939",
-    "current_format": "implicit_qna",
-    "current_generation_owner": {
-      "path": "ai/services/ai_inference/emotion_piece_generation_service.py",
-      "blob": "2deda0357c3b00016f188abab7281eb768816003",
-      "mode": "deterministic_rule_based_fixed_question_focus_phrase_branches"
+    "cocolon_package": {
+      "path": "package.json",
+      "blob": "bd0a28db98cda639d7d22a10bc63e4b96eff5d87",
+      "react_native": "0.77.3",
+      "visual_primitives": [
+        "react-native-svg",
+        "react-native-linear-gradient"
+      ],
+      "existing_export": "react-native-html-to-pdf"
     },
-    "current_display_owner": {
-      "path": "ai/services/ai_inference/piece_generated_display.py",
-      "blob": "a02fe1dc4118833a561523f88039cd01879ba198"
+    "existing_export_helper": {
+      "path": "screens/analysisReport/analysisReportHtmlExport.js",
+      "blob": "f21aeb6c2143b9323e17ae3968ed45e3551fefc5",
+      "role": "PDF generation and text share pattern"
     },
-    "current_formatter_owner": {
-      "path": "ai/services/ai_inference/piece_text_formatter.py",
-      "blob": "2573ea391dba9c84123a4762174bb7978b35ac8a"
+    "app_theme_owner": {
+      "path": "theme/ThemeContext.js",
+      "blob": "a3f172545001cc3f216f54e023a0bcf5fe958fc7",
+      "current_themes": [
+        "default",
+        "light",
+        "dark"
+      ]
     },
-    "current_policy_owner": {
-      "path": "ai/services/ai_inference/piece_generation_policy.py",
-      "blob": "ec2023e33feb7740b51e9dc449b596abf109bbfb"
+    "bundled_fonts": {
+      "android_asset_tree": "current",
+      "font_names": [
+        "CormorantGaramond-Bold",
+        "CormorantGaramond-Regular",
+        "CormorantGaramond-Light",
+        "SpaceMono-Regular"
+      ],
+      "japanese_piece_body_owner": false
     },
-    "current_composer_owner": {
-      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
-      "blob": "f83956a8c26424fc19e48a9f21f1aab075f8f657"
+    "ios_font_registration": {
+      "path": "ios/tempCocolon/Info.plist",
+      "blob": "5022a7bff42c9974df38bdd53ce8984a28bab42d"
     },
-    "current_contract_test_owner": {
-      "path": "ai/tests/contract/test_new_national_core_piece_contracts.py",
-      "blob": "df9e06df5eb7766ea071c75cb91ef0e7fcd28083"
+    "backend_requirements": {
+      "path": "requirements.txt",
+      "blob": "363a29f4b718884d95658d5ed911a54d0c4b55bb",
+      "dependencies": [
+        "fastapi",
+        "uvicorn[standard]",
+        "httpx",
+        "firebase-admin"
+      ],
+      "image_renderer_dependency_present": false
     },
-    "runtime_binding_in_pce4": false,
-    "test_execution_in_pce4": false
+    "piece_visual_recipe_runtime_present": false,
+    "piece_image_renderer_present": false,
+    "view_capture_dependency_present": false,
+    "image_file_share_adapter_present": false,
+    "media_save_adapter_present": false,
+    "runtime_binding_in_pce5": false,
+    "test_execution_in_pce5": false,
+    "actual_device_execution_in_pce5": false
   },
   "durable_history": {
-    "previous_pce4_checkpoint": "Cocolon_前提資料/07I_piece_pce3_design_closure_checkpoint_20260807.md",
-    "previous_pce4_checkpoint_blob": "3b606be067221e80e1bc92eecbc348708fcab7ea",
+    "previous_checkpoint": "Cocolon_前提資料/07J_piece_pce4_design_closure_checkpoint_20260807.md",
+    "previous_checkpoint_blob": "3378ed922cbddb2fa6a32aa945c8efca10a87898",
+    "previous_premise": "Cocolon_前提資料/15G_cocolon_piece_workstream_pce4_design_closure_20260807.md",
+    "previous_premise_blob": "b6bde5a02b7a4c52db5201206769abb099cd9bed",
     "roadmap_directory": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised/",
     "pce1_owner": "Cocolon_Piece/pce1_identity_clean_cutover/",
     "pce2_owner": "Cocolon_Piece/pce2_cross_core_source_handoff/",
-    "pce3_owner": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/"
+    "pce3_owner": "Cocolon_Piece/pce3_record_lifecycle_visibility_quota/",
+    "pce4_owner": "Cocolon_Piece/pce4_content_format_safety/"
   },
   "unreferenced_candidates": [
     {
-      "blob": "bc41acf2cab60a1a74cf0b40a8b4bf1c0c774177",
-      "reason": "pre-bundle normative map path version",
-      "tree_inclusion": 0,
-      "reuse_prohibited": true
-    },
-    {
-      "blob": "d51a4ddb74fc56c7fb479fe0a7609af902735b9f",
-      "reason": "prepublication connector base64 candidate had UTF-8 byte mismatch",
-      "tree_inclusion": 0,
-      "ref_effect": 0,
-      "reuse_prohibited": true
-    },
-    {
-      "blob": "ad92789e8fc5b8bf7ed8b59c0a619c49874151a2",
-      "reason": "prepublication base64 transport candidate did not match prepared UTF-8 bytes",
+      "blob": "090184ff83c0c7abd5976be5495e836bcefefdd1",
+      "reason": "prepublication manual base64 transport candidate did not match prepared UTF-8 visual recipe bytes",
       "tree_inclusion": 0,
       "ref_effect": 0,
       "reuse_prohibited": true
@@ -213,8 +288,11 @@
     "rn_change": 0,
     "migration": 0,
     "data_deletion": 0,
+    "dependency_change": 0,
+    "image_generation": 0,
     "test_execution": 0,
     "runtime_execution": 0,
+    "actual_device_execution": 0,
     "emlis_ai_state_effect": 0,
     "analysis_runtime_effect": 0,
     "release_effect": 0
