@@ -1,29 +1,17 @@
 {
   "doc_id": "cocolon_work_attitude_rules_karen_memo",
   "title": "Cocolonの作業に対する姿勢とルール",
-  "revision_date": "2026-08-07",
+  "revision_date": "2026-08-06",
   "created_at": "2026-05-17 18:58:26 JST",
-  "normative_status": "CURRENT",
-  "active_rule_owner": "00_read_first.txt",
-  "active_gate_count": 6,
-  "active_gates": [
-    "G1 Source / Fact Gate",
-    "G2 Scope / Authority Gate",
-    "G3 User-Burden / Joint-Development Gate",
-    "G4 Durable-Work Gate",
-    "G5 GitHub Reflection Gate",
-    "G6 Environment / Specialized Gate"
+  "format": "UTF-8 text files for Notepad",
+  "purpose": "Cocolon作業前に華恋へ読ませる事故防止用メモ。禁止事項・停止条件・成果物提出ルールを固定する。",
+  "basis": [
+    "この会話でのMash様の指摘",
+    "過去記憶に残っているCocolon作業ルール",
+    "GitHub上の Cocolon_前提資料/00_karen_read_first.md の作業用地図方針"
   ],
-  "technical_canonical_owners": {
-    "github_reflection": "../11_cocolon_github_transport_and_session_continuity.md",
-    "work_pytest_runtime": "../13_cocolon_work_test_runner_runtime_continuity.md",
-    "durable_recording": "../14_cocolon_continuous_work_recording_and_emergency_handoff.md"
-  },
-  "historical_reference_files": [
-    "09_work_start_checklist.txt",
-    "99_integrated_paste_each_time.txt"
-  ],
-  "current_reference_files": [
+  "files": [
+    "00_read_first.txt",
     "01_cocolon_business_life_funding_source.txt",
     "02_forbidden_assumed_understanding_unverified_assertion.txt",
     "03_forbidden_insufficient_premise_and_actual_file_check.txt",
@@ -32,6 +20,7 @@
     "06_forbidden_mentalization_and_template_apology.txt",
     "07_forbidden_shifting_burden_to_user.txt",
     "08_artifact_delivery_rules.txt",
+    "09_work_start_checklist.txt",
     "10_stop_judgment_and_unwritten_rules.txt",
     "11_cocolon_area_specific_do_not_break.txt",
     "12_check_items_not_short_oath.txt",
@@ -40,39 +29,385 @@
     "15_trust_based_joint_development_boundary_2026_06_05.txt",
     "16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
     "17_continuous_durable_work_recording_and_emergency_handoff.txt",
-    "18_chat_work_environment_selection_rule_2026_08_06.txt"
+    "18_chat_work_environment_selection_rule_2026_08_06.txt",
+    "99_integrated_paste_each_time.txt"
   ],
-  "piece_definition": {
-    "qna_is_piece_identity": false,
-    "qna_role": "one_piece_format",
-    "current_piece": "ユーザーの考えや価値観を他者に伝えるための文章に整形し、画像化する機能",
-    "owner": "../../Cocolon_Piece/00_read_first.md and ../../Cocolon_Piece/manifest.json"
-  },
-  "durable_checkpoint_write_boundary": {
-    "standing_authority": true,
-    "scope": "public-safe administrative preservation inside an already Mash-approved task scope and existing durable owner",
-    "does_not_authorize": [
-      "code change",
-      "DB change",
-      "API change",
-      "RN change",
-      "migration",
-      "runtime change",
-      "rule or contract mutation",
-      "scope expansion",
-      "new technical owner",
-      "technical PASS or credit",
-      "automatic progression"
-    ],
-    "canonical_owner": "../11_cocolon_github_transport_and_session_continuity.md"
-  },
-  "rule_simplification_20260807": {
-    "decision_owner": "Mash",
-    "reason": "duplicate rule layers were too large and failed to act as enforceable gates",
-    "deleted_files": 0,
-    "history_preserved": true,
-    "work_start_checklist_active": false,
-    "integrated_copy_active": false,
-    "active_rule_count_reduced_to_gate_set": true
+  "update_notes": [
+    {
+      "date": "2026-05-22",
+      "type": "question_workflow_guard",
+      "summary": "Cocolon質問回で、既出設計をMash様へ再質問しないこと、設計用語で質問しないこと、質問前に現状棚卸しを出すことを追加。",
+      "new_file": "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+      "changed_files": [
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-05-24",
+      "type": "partner_thought_boundary_guard",
+      "summary": "Cocolonの主体はMash様の思想と構想であり、華恋の思想はそれを支える補助思想として扱うことを追加。華恋は指示待ちではなく意見を持つが、未確認断定・勝手な補完・指示外追加へ変換しない境界を固定。",
+      "new_file": "14_cocolon_joint_development_and_karen_thought_boundary.txt",
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "type": "emlis_ai_correction_policy_guard",
+      "summary": "EmlisAI作業では、是正方針を必読化し、Phase19型のcase専用mode/cue/surface、fixture runtime条件化、Gate failureの無反応化、passed-only目的化を禁止。",
+      "required_doc": "emlis_ai_correction_policy_withdrawal_retention_redesign_2026_05_31.md",
+      "changed_files": [
+        "00_read_first.txt",
+        "05_forbidden_unrequested_completion_and_structure_addition.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "13_forbidden_reasking_existing_design_and_design_term_escape.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-06-05",
+      "type": "trust_based_joint_development_boundary_guard",
+      "summary": "Mash様と華恋の雑談・作業が信頼関係の上に成立していることを作業姿勢として固定。華恋は、Mash様がコードやAIの内側を完全に検証できないことに甘えず、言葉もコードも見えない場所ほど雑にしない。華恋の意見を求められた場合は、確認済み事実と華恋の受け取り・判断を分けて答える。",
+      "new_file": "15_trust_based_joint_development_boundary_2026_06_05.txt",
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-06-16",
+      "type": "karen_only_careful_cocolon_work_boundary_guard",
+      "summary": "Cocolonのコード作業者は華恋だけであることを固定。Codex等は原則使わず、使う場合もMash様の明示許可と華恋の検査依頼に基づくread-only検査補助へ限定。華恋は、Mash様から明示指示がなくてもCocolon作業上必要な考え・懸念・違和感・提案を、確認済み事実と分けて常に発言する。Cocolonを大事に作業するとは、未確認を成果化せず、必要箇所だけを直し、影響範囲を確認し、Cocolon思想とユーザー体験を壊さないこととして固定。EmlisAIに限らずCocolon作業全般へ適用。",
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "14_cocolon_joint_development_and_karen_thought_boundary.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-20",
+      "type": "github_pinned_source_and_local_materialization_identity_guard",
+      "summary": "current implementation確認元を原則GitHub上のCocolon / mashos-apiとし、開始時にpredecessor commitを固定する。固定commitからmaterializeしたlocal checkout / ZIP / copyはpath / blob / hash一致時に同じ実ファイルであり、local/cloud差を仕様分岐にしない。不一致、未push overlay、作業中head変化は黙って吸収せずSTOPする。過去local ZIP記録とprivate local-only evidence boundaryは保持する。",
+      "current_source": {
+        "Cocolon": "MassyuRed/Cocolon:main@5a58c4d2573b13944b61c77cba8665faeb261748",
+        "mashos-api": "MassyuRed/mashos-api:main@25b98ec8b59eaff717d1dc3261ff21156ccce7ed"
+      },
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ],
+      "github_reflection_normative_status": "HISTORICAL_NON_NORMATIVE",
+      "source_materialization_identity_rule_retained": true
+    },
+    {
+      "date": "2026-07-21",
+      "type": "karen_direct_github_reflection_guard",
+      "summary": "Mash様の対象checkpointまたは成果物への明示承認後に限り、華恋が接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileをCocolon / mashos-apiへ直接反映できる境界を追加。write直前HEAD / predecessor / path / blob / SHA-256確認、repository/documents mapping、drift時STOP、force push・削除・無関係変更禁止、commit SHA / final HEAD / exact path報告を固定。成果物delivery ruleは同日後続のsuperseding ruleを正とする。別作業者としてのCodex・subagent・他AIはread-only検査補助に限定する。",
+      "superseded_delivery_rule": "2026-07-21 current_authority_incremental_update_and_github_failure_zip_only",
+      "pre_write_heads": {
+        "Cocolon": "MassyuRed/Cocolon:main@97235712a5d8d966a232c0470a4a9716646fdb59",
+        "mashos-api": "MassyuRed/mashos-api:main@9d4e4496144fec24569c913d9ad710aeb653390c"
+      },
+      "mapping": {
+        "repository": "MassyuRed/mashos-api repository root",
+        "documents": "MassyuRed/Cocolon/EmlisAIの実装済み資料/documents/",
+        "premise_policy": "MassyuRed/Cocolon/Cocolon_前提資料/"
+      },
+      "changed_files": [
+        "00_read_first.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ],
+      "normative_status": "HISTORICAL_NON_NORMATIVE",
+      "superseded_by": "../11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT"
+    },
+    {
+      "date": "2026-07-21",
+      "type": "current_authority_incremental_update_and_github_failure_zip_only",
+      "summary": "current authorityは作業成果のGitHub反映と反映後確認が完了するごとに07_latest_snapshot_diff.mdへ小さく更新する。構造資料は構造・owner・contract・必読順・名称境界が変わった時だけ差分更新し、phase・RC・release gate等の節目で全体監査する。GitHub反映成功時はZIPを作成・提出せず、GitHubへ反映できなかった場合だけ新規・修正file限定ZIPを提出する。",
+      "current_authority_owner": "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "04_forbidden_mixing_design_and_implementation.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-23",
+      "type": "subagent_as_needed_standing_permission_guard",
+      "summary": "Mash様の「subagentを必要なら活用する」をCocolon作業の常設許可として固定する。独立確認・並列化が実質的に有効な場合は華恋がcurrent authority・privacy・read-only境界内で活用し、作業ごと・subagentごとの再許可を不要とする。利用は強制せず、実行枠を利用できない場合は華恋が直接確認するが、華恋単体で要求品質を維持できない場合はSTOPする。出力は候補であり、原典再確認、最終判断、write / commit、GitHub反映は華恋が担う。2026-06-16の都度明示許可条件だけをsupersedeし、華恋_only write boundaryは維持する。",
+      "standing_permission_owner": "Mash",
+      "supersedes_condition": "per_use_explicit_permission_for_read_only_subagent_assistance",
+      "preserved_boundaries": [
+        "karen_final_judgment",
+        "karen_write_commit_and_github_reflection",
+        "current_authority",
+        "privacy_and_body_free",
+        "read_only_assistance"
+      ],
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-25",
+      "type": "github_transport_session_continuity_and_exact_lease_guard",
+      "summary": "登録済みCocolon deploy keyの非秘密identityを前提ownerへ保持し、registered identityとcurrent sessionのlocal private counterpart availabilityを分離する。毎sessionのfingerprint / host / exact repository / live H0 / full fetch / exact lease再確認、秘密情報非記録、dry-runとactual updateの分離を固定。禁止するunleased force / history rewriteと、別承認formal contractのexact expected-old-SHA leaseを区別する。",
+      "premise_owner": "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "secret_material_recorded": false,
+      "session_reverification_required": true,
+      "exact_lease_exception": "approved formal contract only; exact ref and H0; verified direct child; exact changed paths; full post-fetch",
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ],
+      "normative_status": "HISTORICAL_NON_NORMATIVE",
+      "superseded_by": "../11_cocolon_github_transport_and_session_continuity.md#CURRENT_NORMATIVE_CONTRACT"
+    },
+    {
+      "date": "2026-07-25",
+      "type": "mash_action_request_detailed_instruction_guard",
+      "summary": "Mash様へ作業を求める場合、華恋側で代行不能かを先に確認し、目的、必要理由、使用端末、開始URL / 画面、fileの保存場所と見つけ方、button・入力欄・入力値の一操作ずつ、禁止事項、完了条件、error時の伝え方、完了後の返答、華恋が引き取る後続作業を省略しない。複数の技術案だけを並べず、華恋が最も簡単な推奨手順を選び、専門用語を平易な操作へ翻訳する。",
+      "primary_owner": "07_forbidden_shifting_burden_to_user.txt",
+      "required_instruction_fields": [
+        "confirmed_current_state",
+        "direct_blocking_cause",
+        "why_requested_action_resolves_cause",
+        "alternatives_checked_and_why_insufficient",
+        "consequence_if_not_done",
+        "scope_resumed_after_completion",
+        "purpose",
+        "why_karen_cannot_complete_alone",
+        "device",
+        "time_or_session_constraint",
+        "start_url_or_screen",
+        "file_location_and_lookup_method_when_applicable",
+        "step_by_step_buttons_and_values",
+        "do_not_share",
+        "completion_condition",
+        "error_reporting_without_secrets",
+        "user_completion_reply",
+        "karen_followup_scope"
+      ],
+      "changed_files": [
+        "00_read_first.txt",
+        "07_forbidden_shifting_burden_to_user.txt",
+        "09_work_start_checklist.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ],
+      "github_reflection_contract_owner": "../11_cocolon_github_transport_and_session_continuity.md",
+      "special_transport_is_normal_prerequisite": false
+    },
+    {
+      "date": "2026-07-26",
+      "type": "actual_environment_first_proportionality_same_package_and_system_retirement",
+      "summary": "current actual environmentを設計前提の最上位に置き、future actor・future scale・一般best practiceをcurrent requirementへ自動昇格させない。最低限の安全境界は維持する。新しいsubsystemはactual risk、既存対策後の残余risk、最小代替、構築費、継続保守費、中止条件を説明できる場合だけ採用する。同一目的・同一scopeの局所修正は一つの承認packageで継続し、結果不明の外部writeは自動retryしない。補助system自身の保守が主作業になった場合はsafe disable、historical preservation、current authority更新だけでretireする。",
+      "decision_owner": "Mash",
+      "primary_actual_environment_owner": "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+      "primary_package_continuation_owner": "09_work_start_checklist.txt",
+      "actual_environment_first_required": true,
+      "general_practice_candidate_only": true,
+      "minimum_security_boundary_preserved": true,
+      "guardian_state": "RETIRED_DISABLED",
+      "guardian_workflow_state": "disabled_manually",
+      "guardian_reactivation_requires_new_mash_authority": true,
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "09_work_start_checklist.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "type": "observable_effect_authority_and_position_consistency_output_guard",
+      "summary": "Cocolonの全draftを意図やlabelではなくobservable effectで分類する。抽象的・時期尚早なMash作業依頼、authorityなしのfrozen contract mutation、new evidence / authority / exact errorなしのposition反転を出力前にblockし、違反出力を無効化して最後に確認できたauthorityへ戻る。gateを通せない場合は作業判断・依頼・contract変更案・次authority・GitHub writeを出さない。",
+      "primary_owners": {
+        "user_action_effect": "07_forbidden_shifting_burden_to_user.txt",
+        "frozen_contract_mutation": "05_forbidden_unrequested_completion_and_structure_addition.txt",
+        "output_gate": "09_work_start_checklist.txt",
+        "stop_and_violation_recovery": "10_stop_judgment_and_unwritten_rules.txt"
+      },
+      "blocked_states": [
+        "STOP_NO_USER_REQUEST",
+        "STOP_PRESERVE_FROZEN_CONTRACT",
+        "STOP_KEEP_PRIOR_POSITION"
+      ],
+      "changed_files": [
+        "00_read_first.txt",
+        "05_forbidden_unrequested_completion_and_structure_addition.txt",
+        "07_forbidden_shifting_burden_to_user.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "type": "single_worker_actual_environment_github_reflection_contract",
+      "normative_status": "CURRENT",
+      "decision_owner": "Mash",
+      "canonical_owner": "../11_cocolon_github_transport_and_session_continuity.md",
+      "canonical_section": "CURRENT_NORMATIVE_CONTRACT",
+      "summary": "華恋単独writeのcurrent actual environmentに合わせ、利用可能なGitHub機能、approved exact paths、target conflict check、target postverification、write-commit changed-path verificationをcurrent条件とする。特定鍵・SSH・expected-old CAS・direct-child・single commit・whole repository verification・future-scale proofを必須にしない。",
+      "stop_conditions": [
+        "approved target changed after confirmation",
+        "unapproved path required",
+        "actual GitHub write failure",
+        "write result unknown after target refetch",
+        "actual write permission absent",
+        "delete history rewrite or unapproved irreversible operation required"
+      ],
+      "head_advance_without_target_conflict_is_stop": false,
+      "multiple_bounded_github_operations_allowed": true,
+      "single_commit_required": false,
+      "whole_repository_verification_required": false,
+      "downstream_docs_tests_receipts_may_tighten": false,
+      "karen_may_change_contract": false,
+      "change_authority": "Mash explicitly identifies the clause and replacement text in separately approved contract-change work",
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "08_artifact_delivery_rules.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "type": "work_test_runner_runtime_continuity_and_one_shot_prelaunch_guard",
+      "normative_status": "CURRENT",
+      "decision_owner": "Mash",
+      "operational_owner": "Karen",
+      "canonical_owner": "../13_cocolon_work_test_runner_runtime_continuity.md",
+      "behavioral_owner": "16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+      "summary": "Work-local Python / pytest test-runnerをsession-local lifecycle前提で再発見・再構築可能にする。session境界ではcurrent continuityを未確認へ戻し、scope付きread-only discoveryだけでREADYにせず、Gate B fresh readinessを必須化する。GitHub-tracked procedureを再構築ownerにし、readiness probeとtarget invocationのcounter、exact admitted entrypointのlaunchとauthority消費を分離する。generic Python / PATH fallbackと、Mash様へのabsolute path・venv・pytest提供要求を禁止する。historical readinessとcurrent eligibilityを分離し、誤ったfuture directionはadditive correctionで非current化する。",
+      "mash_runtime_path_or_environment_request_forbidden": true,
+      "generic_python_or_path_resolution_for_target_forbidden": true,
+      "session_boundary_requires_current_continuity_revalidation": true,
+      "historical_result_reparse": false,
+      "automatic_progression": false,
+      "changed_files": [
+        "00_read_first.txt",
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "07_forbidden_shifting_burden_to_user.txt",
+        "09_work_start_checklist.txt",
+        "10_stop_judgment_and_unwritten_rules.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-08-02",
+      "type": "premise_required_path_reference_correction",
+      "normative_status": "CURRENT_MAINTENANCE",
+      "summary": "前提資料全体監査で、03の必読一覧に存在しない日付placeholder名が残っていたため、実在するcurrent `09_naming_boundary.md`へpathだけを補正。前提確認、更新trigger、subagent read-only、GitHub反映、runtime continuityのrule内容は変更しない。",
+      "rule_semantics_changed": false,
+      "changed_files": [
+        "03_forbidden_insufficient_premise_and_actual_file_check.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "type": "continuous_durable_work_recording_and_emergency_handoff_guard",
+      "normative_status": "CURRENT",
+      "decision_owner": "Mash",
+      "operational_owner": "Karen",
+      "canonical_owner": "../14_cocolon_continuous_work_recording_and_emergency_handoff.md",
+      "behavioral_owner": "17_continuous_durable_work_recording_and_emergency_handoff.txt",
+      "summary": "session終了依頼を待たず、materialなartifact、review blocker、authority lifecycle、execution result、next-action変更ごとにGitHub-backed checkpointを更新する。scratch path・chat・cache・hashだけをpersistenceと扱わず、実bytesまたはlossless bundle、checksum ledger、STOP/noncredit、non-reuse、next exact actionを保存し、remote再読まで完了扱いにしない。",
+      "session_end_request_required": false,
+      "actual_bytes_or_lossless_bundle_required": true,
+      "remote_postread_required": true,
+      "durable_store_as_github_reflection_prerequisite": false,
+      "technical_credit_or_automatic_progression": false,
+      "changed_files": [
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "17_continuous_durable_work_recording_and_emergency_handoff.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    },
+    {
+      "date": "2026-08-06",
+      "type": "chat_work_environment_selection_rule_rewrite_and_full_connection",
+      "normative_status": "CURRENT",
+      "decision_owner": "Mash",
+      "operational_owner": "Karen",
+      "canonical_owner": "18_chat_work_environment_selection_rule_2026_08_06.txt",
+      "external_index_owner": "../05A_cocolon_chat_work_environment_rule_index_20260806.md",
+      "summary": "ChatのGPT-5.6 Proを標準環境とし、Work Ultraは独立複数agent、独立並列仮説調査、分割不能な横断監査、Work固有runtime、atomic authority内のWork必須stageなど、環境自体が品質・証拠条件になる場合だけ使用する。速度だけでWorkへ移行せず、Work unavailable時も品質条件を弱めない。作業前と終了時にbounded作業単位ごとの環境判定を表示し、Chat / Work切替後はlatest fresh-verified durable GitHub checkpointから再開する。",
+      "standard_chat_model": "GPT-5.6 Pro",
+      "environment_states": [
+        "CHAT_5_6_PRO_OK",
+        "WORK_ULTRA_REQUIRED"
+      ],
+      "speed_only_work_ultra_selection_forbidden": true,
+      "independent_self_review_substitution_forbidden": true,
+      "work_unavailable_quality_downgrade_forbidden": true,
+      "automatic_credit_purchase_assumption": false,
+      "environment_transition_uses_fresh_verified_github_checkpoint": true,
+      "automatic_progression": false,
+      "changed_files": [
+        "../05A_cocolon_chat_work_environment_rule_index_20260806.md",
+        "00_read_first.txt",
+        "09_work_start_checklist.txt",
+        "15_trust_based_joint_development_boundary_2026_06_05.txt",
+        "18_chat_work_environment_selection_rule_2026_08_06.txt",
+        "99_integrated_paste_each_time.txt",
+        "manifest.json"
+      ]
+    }
+  ],
+  "folder_name": "work_attitude_rules_for_karen",
+  "filename_policy_2026_06_03": {
+    "all_rule_file_names_ascii": true,
+    "original_japanese_file_names_replaced_by_ascii_names": true
   }
 }
