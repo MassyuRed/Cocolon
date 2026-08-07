@@ -131,3 +131,24 @@ EmlisAI:
 automatic progression:
   false
 ```
+
+## 8. Publication non-reuse boundary
+
+During Git object preparation, the following objects were created but were never attached to the current `main` ref and are not current project artifacts.
+
+```text
+unreferenced commit:
+  e7494d8d2a1fee3bdb68a6f8d0ccb8a921727d49
+  parent: e23f4c40613fb7cbcb32149416cc87372d784067
+  ref attachment: exact0
+  reuse: prohibited
+
+rejected candidate blob:
+  606697509fa1bac27faeb15d7d46b4ee9d17f6c6
+  reason: prepared analysis bytesとのidentity mismatch
+  tree inclusion: exact0
+  ref effect: exact0
+  reuse: prohibited
+```
+
+Current `main` lineage uses the verified publication commits only. The above objects do not change source, DB, API, RN, migration, test, runtime, PCE-0 result, or PCE-1 activation.

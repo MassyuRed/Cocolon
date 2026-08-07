@@ -59,7 +59,7 @@
     "closure_state": "e9b5badebb80cd200596e8c047ac9d087a99de27",
     "closure_ledger": "ef981af1065b75ee8b1bdec28878aa0c2939f81d",
     "analysis_and_closure": "052cff047780948cc0f74a0817ffd14f66314d95",
-    "premise_checkpoint": "54058e995d0599e9810a95c5353f9f501f729640",
+    "premise_checkpoint": "5d58d9626c63530c5b9621920a7ecfc21ebda7fd",
     "premise_current_state": "bcc6d1a824f48f450d6b25fb42679663cce70cce"
   },
   "historical_artifact_manifest": {
@@ -78,6 +78,13 @@
     "application_migration_owner": "ABSENT_CURRENTLY",
     "supabase_internal_candidates_are_not_application_owner": true,
     "required_before_future_ddl": "PCE6_TRACKED_APPLICATION_MIGRATION_BASELINE_BOUND_TO_CURRENT_CATALOG"
+  },
+  "publication_nonreuse": {
+    "unreferenced_commit": "e7494d8d2a1fee3bdb68a6f8d0ccb8a921727d49",
+    "unreferenced_commit_ref_effect": 0,
+    "rejected_candidate_blob": "606697509fa1bac27faeb15d7d46b4ee9d17f6c6",
+    "rejected_candidate_blob_tree_inclusion": 0,
+    "reuse_prohibited": true
   },
   "technical_effects": {
     "cocolon_production_source_change": 0,
