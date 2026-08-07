@@ -183,12 +183,22 @@ Cocolon_Piece/pce0_current_contract_pin/
 
 ## 6. large artifact preservation form
 
-roadmapとhandoffは、原本bytesを変更せず、ordered UTF-8 partsとしてGitHubへ保存しています。
+roadmapとhandoffは、ordered UTF-8 partsとしてGitHubへ保存しています。
 
-- 各partは原本の連続byte範囲です。
-- part順とhashは各bundleの`README.md`と`Cocolon_Piece/manifest.json`で固定しています。
-- 単純連結で原本SHA-256を再現できます。
-- current state追記のためにhistorical原本を書き換えていません。
+publication transport上、part末尾の原本区切りLFを次のとおりmanifested restorationとして分離しています。
+
+```text
+roadmap:
+  part 1〜7の各末尾へLF exact1を復元。
+
+handoff:
+  part 1とpart 2の末尾へLF exact1を復元。
+  part 3は復元なし。
+```
+
+- GitHub current part bytes、LF count、SHA-256、git blob SHA-1を各bundle `README.md`と`Cocolon_Piece/manifest.json`で固定しています。
+- 指定LFを復元して番号順に連結すると、roadmapは49,465 bytes・SHA-256 `a8ec...69bd`、handoffは27,677 bytes・SHA-256 `82f4...6bd0`へbyte-exactに戻ります。
+- current state追記のためにhistorical原本本文を書き換えていません。
 
 原本中の`GITHUB_NOT_REFLECTED`、`LOCAL_DOWNLOAD_ARTIFACT`、`GITHUB_WRITE_EXACT0`は、原本作成時点のhistorical stateです。current publication stateはGitHub current path、manifest、current commit、本前提資料で判断します。
 
@@ -259,6 +269,7 @@ Analysis:
 - production DB actualなしでvisibility / migrationを確定する。
 - Piece資料をEmlisAI実装履歴へ移す。
 - historical原本のcreation-state tokenをcurrent化のために書き換える。
+- manifestに記録されていないLF restorationを加える。
 
 ## 11. 今回のpublication effect
 
