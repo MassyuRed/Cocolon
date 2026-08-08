@@ -1,0 +1,28 @@
+# Cycle001 Inspector V2 boundary1 final authority activation / preflight receipt
+
+receipt_role: BODY_FREE_LIFECYCLE_AND_PREFLIGHT_OWNER
+state: PREFLIGHT_PENDING
+authority_id: SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_BOUNDARY1_FINAL_A_OR_B_DIRECT_VERIFICATION_AND_GATE_CLOSURE_AUTHORITY_V1
+authority_sha256: d9a692c22c056474107811f84e89a7ad3732d6b181138be86027474fdab4a4da
+authority_git_blob: 7e2becbafef0d93fa6fdd8a94a4fa33a8273cf15
+authority_bytes_lf_cr_final_lf: 34242 / 77 / 0 / true
+authority_publication_commit_tree: 542f26bedb104136cf6ebef09f193140a9fbbfb5 / 0babc00e4747d34c0538129cc6889f884418705d
+approval: exact1
+approval_attestation: same active Work UI / Ultra / not Chat
+attempt_consumption: exact1 at first authorized postapproval entry observation
+activation_on_fresh_verified_authority_and_this_receipt: exact1
+automatic_progression: false
+cocolon_entry_commit_tree: 92bc96b18c16c4bebea36dd8cb8ab0151935ef43 / a060583e36d8907fc18dfca3aa425ce4ad2e44bc
+cocolon_current_before_receipt_commit_tree: 542f26bedb104136cf6ebef09f193140a9fbbfb5 / 0babc00e4747d34c0538129cc6889f884418705d
+mashos_api_observed_commit_tree_write: 65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981 / 0
+current_required_rules: READ_AND_VALID
+immutable_metadata: MATCH4
+exact_new_paths_at_entry: ABSENT5
+owner4_complete_preimages: MATCH4_NONCONFLICTING
+review_roles_available: Karen_plus_independent3
+technical_source_body_reads_before_preflight: 0
+scanner_inspector_harness_br_body_captures: 0 / 0 / 0 / 0
+tests_or_technical_execution: 0
+boundary_progress: 0/7 (0%)
+cycle001: NOT_ACCEPTED
+next_state: PREFLIGHT_PASS only after runtime_encoding_file_capture_output_review_delivery_and_GitHub_update_preflights all PASS
