@@ -211,3 +211,24 @@ exact-new versioned inspector that fixes B_R2/B_R3/B_R4 and returns directly to
 the one-read exact4/program-preparation gate. No newly authorized
 specification-source access or automatic
 progression is authorized here.
+
+## 2026-08-08 Cycle001 Inspector V2 direct gate — Stage A published / QA pending
+
+### Confirmed facts
+
+- Authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_GATE_CLOSURE_AUTHORITY_V1` / SHA-256 `5d00c7142e3ff7041b88277c6d08cf88a5097173f251318da35168cb5e5aea08` was explicitly approved in the active Work Ultra session, activated exact1, and consumed exact1.
+- Accepted entry Cocolon head/tree was `162898d85100aeed58a97d2e3006361475b98d2c` / `8f280185966d41f87ffff7f55eddb75e5d2c57db`; mashos-api remained at `65284fef36936d7091262e758e0cc9282909601b` with Karen write0.
+- Current rules passed `16/16`, owner preimages `4/4`, immutable lineage `4/4`, and add-target absence `8/8`.
+- Immutable bundle blob `98af979468f124f8afeca6a119b5092fe3bf3260` passed one fetch, UTF-8 raw roundtrip, schema parse, and exact4 ordered blob attestation.
+- The approved authority, frozen scanner, Inspector V2, synthetic harness, implementation-freeze receipt, and Stage A receipt are now reachable at their authorized GitHub paths with expected blobs and mode100644. Stage A add6 commits are `6ba8ee74f8c9fd5a9ec60c334c0f29b7c6c40e9d`, `aeafc9cefe4633d47b827dd0dd618502df844ed0`, `aae58626670acea6fbcaff8e5c07b9b2a95710cc`, `4b3cb9ec8e4b44af816b2d647f992c4ba362a8fb`, `57c885a3c72bf4c1d0da5b655aa3f427f8df291a`, and `5b4d6ee9767855e3b1a7cff67bf17a95a67bf8b6`.
+- Stage A receipt blob/SHA-256 is `73b6a093f4272c8d6c78fbdeefc93106b0f537ab` / `b849aba14267f1e4ebb24f142d9e3dfb8ff07f6a31ebd55f4fd76c805be9272e`.
+- Specification-source access, real Inspector execution, technical exact4, standalone target action, V3 action, V16 technical credit, and Cycle001 acceptance credit remain0.
+- QA state: `PENDING`. Inspector V2 gate state: `OPEN_PENDING_PUBLISHED_BYTE_QA_AND_B_R1_B_R4`.
+
+### Inference
+
+The exact frozen technical inputs are now durably reachable. The next uncertainty is whether those published bytes pass the fixed scanner/harness QA and all four independent pre-execution review gates.
+
+### Karen judgment and next action
+
+Continue only with the approved published-byte QA and B_R1-B_R4 review. On completion, publish `preexecution_inspector_review_receipt_v2.md` and final owner4 postimages. Do not read the specification source, run the real Inspector, create V3, claim acceptance, retry, or progress automatically.
