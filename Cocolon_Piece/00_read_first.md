@@ -20,7 +20,7 @@ EmlisAI implementation history:
   EmlisAIの実装済み資料/
 
 current Piece premise:
-  Cocolon_前提資料/15K_cocolon_piece_workstream_pce8_design_closure_20260808.md
+  Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md
 ```
 
 Piece / EmlisAI / Analysisの内部ownerを統合しない。PieceはPCE-2のbody-free source handoffだけでsaved inputと接続する。
@@ -64,7 +64,13 @@ PCE-6: COMPLETE_DESIGN_ONLY
 PCE-7: COMPLETE_DESIGN_ONLY
 PCE-8: COMPLETE_DESIGN_ONLY
 
-PCE-9A B01 Contract/Version Causal RED:
+PCE-9A B01-R Contract/Version Causal RED:
+  COMPLETE_TEST_ONLY_CAUSAL_RED
+
+PCE-9A B01-I Contract Owner Implementation:
+  COMPLETE_CODE_DISABLED_TARGETED_GREEN
+
+PCE-9A B02-A M0/M1 Tracked Migration + Legacy Bridge:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
@@ -107,7 +113,7 @@ PCE-8:
     Piece_Environment_Assignment_Ledger_20260808.md
 ```
 
-PCE-0 through PCE-7 detailed identities remain in immutable predecessor manifests and each phase's canonical artifacts.
+PCE-0 through PCE-8の詳細identityはimmutable predecessor manifests、各Phase canonical artifact、07N checkpointに保持される。
 
 ## 5. PCE-1 through PCE-5 fixed boundary
 
@@ -174,7 +180,7 @@ legacy read bridge before final view cutover:
   public.mymodel_reflections_read
 
 final new Piece projection:
-  public.pieces
+  public.pieces after legacy shared caller exact0
 
 atomic functions:
   piece_save_v2
@@ -254,7 +260,7 @@ safe states exact5:
 
 Actual-device evidence belongs to PCE-11/Mash. Independent cross-repository acceptance belongs to PCE-U1/U2 Work Ultra.
 
-## 8. PCE-8 fixed contracts
+## 8. PCE-8 fixed boundary
 
 ```text
 design freeze:
@@ -265,31 +271,25 @@ work-package index:
 
 environment assignment:
   piece.environment_assignment_ledger.v1
-```
 
-### Freeze verdict
-
-```text
 product/design decisions unresolved:
   exact0
 
 runtime/tooling/deployment conditions:
   exact6 with fixed owner
 
-implementation started:
-  false
+work-package groups:
+  B1..B15 exact15
 
-production effect:
-  exact0
+packet lifecycle:
+  R causal RED
+  I bounded implementation + targeted GREEN
+  automatic progression false
 ```
 
-The external conditions are exact source binding, RN capture dependency, isolated DB runner, production flag owner, external log/alert owner and device/independent evidence. They are not product semantics and may not be guessed or replaced with weaker evidence.
-
-### Design-conflict resolution
-
 ```text
-B6 provisional publish API:
-  frozen as Save API
+B6 terminal owner:
+  Save API, not publish
 
 new staged backend API owner:
   api_piece_v2.py
@@ -304,9 +304,8 @@ monitoring public terminal event:
 Piece RN flag fallback:
   explicit false at every call
 
-RN component-test dependency:
-  not added initially
-  existing node:test + pure state model first
+RN initial tests:
+  existing node:test + pure state model
 
 M7 destructive cleanup:
   outside B1-B15
@@ -317,64 +316,117 @@ multirepository B-group:
   separate repository write units
 ```
 
-## 9. Frozen B1–B15 implementation order
+## 9. PCE-9A B01 current implementation state
+
+### B01-R causal RED
 
 ```text
-01 B1  contract/version foundation
-02 B2  tracked migration + legacy bridge + dedicated schema
-03 B3  visibility/access/RLS/staging projection
-04 B4  quota and atomic terminal operations
-05 B8  content/format/generation owner
-06 B9  visual recipe/layout owner
-07 B14-A backend fail-closed flags/monitoring
-08 B5-A saved-source adapter
-09 B5-B preview API
-10 B6  save API
-11 B7  owner history/detail/visibility/delete API
-12 B14-B RN runtime/monitoring projection
-13 B10 RN post-Emlis CTA/preview
-14 B11 RN owner history/visibility/delete
-15 B13 export preflight/receipt/RN prototype
-16 B12-A backend Nexus v2
-17 B12-B RN Nexus v2 and old Q&A UI reachability removal
-18 B12-C clean-cutover registration/view/route packet
-19 B15 integrated staging E2E and U1 entry evidence
-20 PCE-U1 independent cross-repository audit
+repository:
+  MassyuRed/mashos-api
+
+commit:
+  522af8cb66fb8e4d8e1b4b2d6cc82cf10545ce56
+
+tree:
+  37fe412c1f7b342cd521e88fc3b010bbccafa2ae
+
+test path:
+  ai/tests/piece_v2/test_b01_piece_v2_contract_red.py
+
+test blob:
+  00bf4dea9a2321c59265d2bbb211ae5b13b97cde
+
+causal signature:
+  PCE9A_B01_PIECE_V2_CONTRACT_OWNER_IMPLEMENTATION_ABSENT_RED
+
+covered release blockers:
+  PCE7-R008
+  PCE7-R013
+  PCE7-R027
+  PCE7-R037
+
+production source / DB / API / RN / runtime effect:
+  exact0
 ```
 
-Every source/SQL package separates causal RED from implementation/GREEN. Completion never auto-activates the next package.
+B01-Rはcollection/import/environment failureではなく、future owner不存在をtest call phaseのstable causal REDとして固定した。
 
-## 10. Exact future owner roots
-
-### mashos-api
+### B01-I pure contract owner
 
 ```text
-ai/services/ai_inference/piece_v2_*.py
-ai/services/ai_inference/api_piece_v2.py
-ai/services/ai_inference/api_nexus_piece_v2.py
-ai/services/ai_inference/api_piece_events.py
-supabase/migrations/
-ai/tests/piece_v2/
+repository:
+  MassyuRed/mashos-api
+
+commit:
+  7a10fc593b123cb9d9b02147c4b345894dba0c0b
+
+tree:
+  842715d588c0573f0de5411dae62b8b8bb22f3a4
+
+owner path:
+  ai/services/ai_inference/piece_v2_contract.py
+
+owner blob:
+  e4d20c9d0994b0a05f086ff6543de9d5cf2f31aa
+
+classification:
+  CODE_DISABLED
+
+implemented responsibilities:
+  exact contract-version registry
+  canonical UTF-8 compact JSON / SHA-256
+  content payload -> piece_text reconstruction
+  piece_text/hash binding
+  visibility missing -> private / unknown reject
+  public Piece field allowlist
+  strict Piece ops-event allowlist
+
+targeted GREEN recorded by completed B01-I authority:
+  collected exact1
+  passed exact1
+  failed/error/skipped/xfail exact0
+
+existing RED test modification:
+  exact0
+
+API registration / DB / migration / RN / runtime connection:
+  exact0
 ```
 
-### Cocolon
+このDOC_ONLY同期ではpytestを再実行していない。B01-Iの実行結果をcurrent workstreamへ記録し、GitHub上のtest/owner commit・blob identityをfresh確認した。
+
+## 10. Frozen implementation order and current next
 
 ```text
-features/piece/
-components/piece/
-screens/input/InputPieceActionArea.js
-screens/PieceOwnerHistoryScreen.js
-tests/piece-v2-contracts.test.js
-tests/piece-v2-state-models.test.js
-tests/piece-v2-renderer.test.js
+01 B1      COMPLETE
+02 B2-A    NEXT_INACTIVE
+03 B2-B    NOT_ACTIVATED
+04 B3      NOT_ACTIVATED
+05 B4      NOT_ACTIVATED
+06 B8      NOT_ACTIVATED
+07 B9      NOT_ACTIVATED
+08 B14-A   NOT_ACTIVATED
+09 B5-A    NOT_ACTIVATED
+10 B5-B    NOT_ACTIVATED
+11 B6      NOT_ACTIVATED
+12 B7      NOT_ACTIVATED
+13 B14-B   NOT_ACTIVATED
+14 B10     NOT_ACTIVATED
+15 B11     NOT_ACTIVATED
+16 B13     NOT_ACTIVATED
+17 B12-A   NOT_ACTIVATED
+18 B12-B   NOT_ACTIVATED
+19 B12-C   NOT_ACTIVATED
+20 B15     NOT_ACTIVATED
+21 PCE-U1  NOT_ACTIVATED
 ```
 
-Current old Q&A owners are not silently reclassified as new Piece owners. They remain current actual until the M5 cutover and are retired only under the exact B12-C/M8 scope.
+B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。B1完了による自動activationはない。
 
 ## 11. Environment assignment
 
 ```text
-PCE-8 / bounded B1-B15 design-code:
+bounded B1-B15 design/code:
   CHAT_5_6_PRO_OK
 
 actual DB transaction/RLS/migration evidence:
@@ -400,33 +452,29 @@ EmlisAI current executable Work-required task
   > Piece PCE-U1 / PCE-U2
 ```
 
-Additional credit purchase is not presumed. Environment unavailability never weakens the evidence contract.
-
 ## 12. Read order
 
 1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-2. `Cocolon_前提資料/15K_cocolon_piece_workstream_pce8_design_closure_20260808.md`
+2. `Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md`
 3. `Cocolon_Piece/manifest.json`
 4. revised clean-cutover roadmap
 5. PCE-1 through PCE-8 canonical artifacts
-6. PCE-0 catalog closure when DB basis is needed
-7. exact target/current files for the approved B packet
-8. PCE-7 RED/test matrix rows assigned to that packet
+6. B01 RED test and pure contract owner at their pinned mashos-api commits
+7. exact target/current files for the separately approved B2-A packet
+8. PCE-7 RED/test matrix rows assigned to B2-A
 
 ## 13. Prohibited
 
-- PCE-8 design closureをimplementation authorityとして使う。
-- B1-Rの完了からB1-Iまたは次groupへ自動進行する。
-- provisional `publish API`をnew Piece terminal ownerへ戻す。
-- current Q&A routeをM5前にnew v2へ置換・二重登録する。
+- B01 targeted GREENをPiece全体、PCE-9A全体、releaseのGREENへ拡大する。
+- `piece_v2_contract.py`をAPI登録済み、DB接続済み、runtime activeと扱う。
+- B01 RED testを次packetで無承認変更する。
+- B2-AをB01完了から自動activationする。
+- actual migration/RLS claimをmockだけでGREENにする。
 - `public.pieces`をlegacy shared caller exact0前に置換する。
+- current Q&A routeをM5前にnew v2へ置換・二重登録する。
 - B5 source adapterでEmlis visible/internal bodyをコピーする。
-- transaction/RLSをmockだけでGREENにする。
-- RN capture dependencyをB13-A前に追加する。
 - generic free-form monitoringをPiece callerへ開放する。
 - missing/unknown Piece flagをtrueにする。
-- owner historyをpublic Nexus queryで実装する。
-- multirepository groupを一つの無制限authorityへ束ねる。
 - M7/M8をB1-B15へ混在させる。
 - rollbackでold Q&Aを復活させる。
 - actual-device/Work evidenceをChatの推測で完了にする。
@@ -435,55 +483,49 @@ Additional credit purchase is not presumed. Environment unavailability never wea
 ## 14. Current actual basis
 
 ```text
-Cocolon head / tree:
-  5316c8b3a9eef2ae84f6340aab24ee7ec8e654f5
-  ae6964261649492e2186d1ee277956d9d5d12874
+Cocolon pre-sync head / tree:
+  4979d8cf3590ec4e4a34db73dc583a953c89bf4e
+  315d0984c453d428348e33494c487341eba00285
 
-mashos-api head / tree:
-  315813c7bd3372462de926ddad74df567254a6b5
-  a641510e107d52bb910073f36604c85bd57af150
+mashos-api current head / tree:
+  7a10fc593b123cb9d9b02147c4b345894dba0c0b
+  842715d588c0573f0de5411dae62b8b8bb22f3a4
 
-current product:
+current user-visible product:
   old Q&A Piece flow
 
-new Piece production code/SQL/RN/test/runtime:
-  exact0
+new Piece pure contract owner:
+  present, code-disabled
 
-current `COCOLON_PIECES_READ_TABLE` search:
-  exact6 current callers
+new Piece API registration:
+  absent
 
-current RN test framework:
-  Node node:test
+new Piece DB / migration / RN / runtime:
+  absent
 
 current Piece v2 feature flags:
   absent
 ```
 
-These are PCE-8 design inputs, not implementation results.
-
-## 15. Next exact inactive packet
+## 15. Next exact inactive group
 
 ```text
-PCE9A_B01_CONTRACT_VERSION_CAUSAL_RED_FREEZE_ONLY
+group:
+  B2-A M0 Tracked Baseline + M1 Legacy Read Bridge
 
 environment:
   CHAT_5_6_PRO_OK
-
-classification:
-  TEST_ONLY_RED
-
-repository:
-  MassyuRed/mashos-api
-
-allowed new path:
-  ai/tests/piece_v2/test_b01_piece_v2_contract_red.py
-
-production source / DB / runtime effect:
-  exact0
+  ISOLATED_DB_REQUIRED for honest migration GREEN
 
 state:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
+
+expected first lifecycle:
+  packet-scoped causal RED / migration-preflight freeze
+
+production DB apply:
+  exact0 until separately approved
 
 automatic progression:
   false
@@ -492,28 +534,22 @@ automatic progression:
 ## 16. Effects
 
 ```text
-PCE-8 documentation / premise / checkpoint:
-  GitHub reflection required
+B01 mashos-api source addition:
+  exact1 pure contract owner
 
-Cocolon production source:
+B01 API / DB / migration / RN / runtime connection:
   exact0
 
-mashos-api production source:
-  exact0
+this state-sync Cocolon documentation:
+  reflected
 
-DB / API / RN / migration / deletion:
-  exact0
-
-test files / test execution / CI:
-  exact0
-
-monitoring / feature flag runtime:
-  exact0
-
-actual device / Work Ultra / release:
+this state-sync production source / DB / API / RN / runtime:
   exact0
 
 EmlisAI / Analysis technical state:
+  exact0
+
+release effect:
   exact0
 
 automatic progression:
