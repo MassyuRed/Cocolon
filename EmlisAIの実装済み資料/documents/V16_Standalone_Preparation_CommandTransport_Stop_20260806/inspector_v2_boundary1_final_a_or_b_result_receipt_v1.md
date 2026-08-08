@@ -1,0 +1,90 @@
+# Cycle001 Inspector V2 boundary1 final A-or-B direct verification result
+
+receipt_role: BODY_FREE_TECHNICAL_RESULT_PENDING_FINAL_OWNER_POSTVERIFICATION
+recorded_at: 2026-08-09 JST
+authority_id: SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_BOUNDARY1_FINAL_A_OR_B_DIRECT_VERIFICATION_AND_GATE_CLOSURE_AUTHORITY_V1
+authority_sha256: d9a692c22c056474107811f84e89a7ad3732d6b181138be86027474fdab4a4da
+authority_git_blob: 7e2becbafef0d93fa6fdd8a94a4fa33a8273cf15
+authority_publication_commit_tree: 542f26bedb104136cf6ebef09f193140a9fbbfb5 / 0babc00e4747d34c0538129cc6889f884418705d
+activation_preflight_receipt_commit_blob: 3a85d3a7e48cd9c3449db96097654629d0ccbe3e / ee96145e99b152af4462ccfdb5928c19d2710c3c
+approval_activation_consumption_reactivation_reuse: 1 / 1 / 1 / 0 / 0
+approval_attestation: same active Work UI / Ultra / not Chat
+attempt_ordinal: FINAL_EXACT1_FOR_CURRENT_INSPECTOR_V2_BOUNDARY_PATH
+single_use: true
+automatic_progression_retry_reuse_reactivation: false / false / false / false
+
+PROVISIONAL_TECHNICAL_CLASS: WORK_PROCEDURE_OR_ENVIRONMENT_DEFECT
+FINAL_CLASS: PENDING_DURABILITY
+finalization_rule: only fresh verification of this result receipt plus the final Handoff assigns FINAL_CLASS once; any durability failure assigns WORK_PROCEDURE_OR_ENVIRONMENT_DEFECT
+provisional_terminal: SCANNER_V1_KNOWN_STOP_OUTPUT_MISMATCH_WORK_PROCEDURE_OR_ENVIRONMENT_DEFECT
+outcome_a_reached: false
+outcome_b_scanner_reached: false
+outcome_b_inspector_reached: false
+technical_result_credit: 0
+boundary_credit: 0
+cycle001_acceptance_credit: 0
+
+cocolon_entry_commit_tree: 92bc96b18c16c4bebea36dd8cb8ab0151935ef43 / a060583e36d8907fc18dfca3aa425ce4ad2e44bc
+cocolon_pre_result_commit_tree: 3a85d3a7e48cd9c3449db96097654629d0ccbe3e / d96391e21cfe75b8b65ad0ecb0fd3d24c43c2624
+mashos_api_observed_commit_tree_write: 65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981 / 0
+
+entry_rules_immutable_metadata_exact_new_absence_owner4: PASS / MATCH4 / ABSENT5 / MATCH4_NONCONFLICTING
+preflight_state: PASS
+runtime_encoding_preflight: PASS exact1; fixed Node e237a2839d0cbdc9a9a2adda1a184afc0f5b20306ffbe923af5686550472d8a8 / 122466960 / mode0755; Buffer utf8; TextEncoder0
+file_capture_output_wrapper_preflight: PASS exact1; authority Git-object capture PASS; syntax/scanner/harness profiles PASS3
+review_delivery_preflight: PASS4_ROLES; fixtures 9976/60190/8962; missing0; overlap0; body_output0
+github_create_update_fresh_verification_preflight: PASS
+
+retained_scanner_v1_blob_sha256_bytes_lf_mode: ae0648a1af4ad2f4b189bfcda27d84bce66a45c1 / 087c8afdcbb278d7fc0c3d01c322bd64b2c168cec05840403ff4d046a5ff1c45 / 9976 / 315 / 0644
+retained_inspector_v2_blob_sha256_bytes_lf_mode: f45082cd3970e69f980c15e598ace3f49e404003 / db7c36351070487d98c34d6d34710f25ce010bb54f33d744102e00f5fcf5fc31 / 60190 / 1583 / 0644
+retained_harness_blob_sha256_bytes_lf_mode: 99ac7d5b996489060ef7e9f72f95d7d382009855 / 6950bf08242c42d96e2bab53d3dca845cec2b261298e2268cce6a52ffd9734ad / 8962 / 212 / 0644
+retained_b_r_contract_blob_sha256_bytes_lf_mode: ade058821d872cd7f645dd6fb16054a2db4c7e59 / 5d00c7142e3ff7041b88277c6d08cf88a5097173f251318da35168cb5e5aea08 / 40458 / 732 / 0644
+git_object_body_captures_scanner_inspector_harness_b_r: exact1 / exact1 / exact1 / exact1
+identity_utf8_cr_nul_final_lf_checks: PASS4 / PASS4 / 0 / 0 / true4
+b_r_section11_karen_read: exact1; original lines531-561 assigned conditions identified
+b_r_common_schema_and_b_r1_b_r2_b_r3_b_r4_reviewer_local_delivery_identity_verification: 0 / NOT_RUN_AFTER_WORK_CLASS
+
+scanner_v1_invocation: exact1
+scanner_v1_argv: retained Inspector V2 / retained harness
+scanner_v1_timeout_caps_capture_reap: 10000ms / stdout64 / stderr256 / direct private / complete
+scanner_v1_exit_signal_timeout_overflow: 2 / none / false / stdout0_stderr0
+scanner_v1_stdout_bytes_sha256: 0 / e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+scanner_v1_stderr_actual_bytes_sha256: 20 / 21aa06dfdd0858e6c83d2873d9f3412eca83208a15a9c3cf5faaab16526fb1c1
+scanner_v1_required_stderr_bytes_sha256: 37 / 6c96e04cd0944dcce44723a4a7d513a662eed5441c89e838c7a1626b1ad418b5
+scanner_v1_known_stop_exact_match: FAIL
+scanner_v1_rerun_retry_fallback_alternate_node: 0 / 0 / 0 / 0
+
+direct_scanner_inspector_source_localization_reviews: 0
+real_file_causal_verdicts: NOT_RUN_AFTER_WORK_CLASS
+scanner_v2_candidate_create_review_publish: 0 / 0 / 0
+syntax_checks_scanner_v2_inspector_harness: 0 / 0 / 0
+b_r_reviews_completed_pass_fail_unknown: 0 / 0 / 0 / 0
+scanner_v2_runtime_invocation: 0
+harness_71_invocation: 0
+retained_postrun_mutation_check: NOT_RUN
+real_inspector_execution: 0
+specification_source_exact4_target_v3_v16_full_r1_runtime_product_ux_actions: 0
+canonical_real_output_actions: 0
+app_api_db_rn_safety_changes: 0
+mashos_api_write: 0
+actual_device_actions: 0
+diagnostic_helper_analyzer_scanner_of_scanner_create_execute: 0
+expected_answer_case_family_proper_noun_branch_or_allowlist: 0
+fixed_final_text_hidden_metadata_semantic_omission_generic_fallback: 0
+existing_scanner_inspector_harness_b_r_receipt_historical_overwrite_or_owner_prefix_loss: 0
+local_zip_bundle_chat_attachment_handoff: 0
+raw_source_body_stack_secret_token_credential_private_path_environment_value_publication: 0
+
+fact: the pinned scanner process exited2, emitted stdout0, was reaped without timeout or truncation, and produced stderr20 with SHA-256 21aa06dfdd0858e6c83d2873d9f3412eca83208a15a9c3cf5faaab16526fb1c1 rather than the authority-bound stderr37 identity
+inference: this invocation cannot prove either a scanner real-file defect or an Inspector real-file defect
+karen_judgment: section8 requires WORK_PROCEDURE_OR_ENVIRONMENT_DEFECT and prohibits rerun, source localization, correction, and downstream tests on this branch
+
+intended_final_authority_state: CLOSED_CONSUMED_STOP
+intended_final_gate: CURRENT_INSPECTOR_V2_PATH_FAILED_RETIRED
+inspector_v2_gate: OPEN_NOT_CLOSED
+remaining_boundary_progress_before_after_delta: 0/7 (0%) / 0/7 (0%) / +0
+cycle001: NOT_ACCEPTED
+same_series_v4_retry_continuation_authority: PROHIBITED
+permitted_future_direction: only one separately approved simplified direct-verification redesign outside this lineage; creation is not authorized here
+next_exact_real_file_restriction: NONE_BECAUSE_NO_REAL_FILE_DEFECT_WAS_PROVED
+owner_reflection_state: PENDING_OWNER4_POSTVERIFICATION
