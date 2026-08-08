@@ -17998,3 +17998,28 @@ Authority state is `CLOSED_CONSUMED_STOP`; terminal is `STAGE_A_PUBLICATION_MISM
 ### Required next boundary
 
 The next authority must directly repair the current snapshot using the immutable original owner prefix and actual Stage A/STOP facts through a chunk-safe full-byte transport, complete the still-unattempted owner reflection, and then resume the exact published-byte QA and B_R1-B_R4 review gate. Already exact Stage A add6 files must not be regenerated, resent, replaced, or recredited. No preservation-only detour or automatic progression is justified.
+
+## 2026-08-08 Cycle001 Inspector V2 QA/review boundary — consumed STOP
+
+### Verified result
+
+The approved snapshot-repair-and-gate-continuation authority SHA-256 `7284fffefa2ad4d2568877e1b47d9e4fcb9c61cb2b3ff1852d4eb1e6e5c4ec72` repaired the known truncated snapshot and durably published its recovery receipt. The repaired snapshot is blob `ce2582d6325133f82393ee81adb1fc2d573908f1`, SHA-256 `ce73d03677ac1dbd84729d4655c4bce96316d4e623f6205e993814d19fa655df`, 2,345,753 bytes before terminal owner reflection.
+
+Published-byte syntax checks for scanner, Inspector alias, and harness passed once. The required frozen scanner then stopped once at `INSPECTOR_FORBIDDEN_ACTIVE_CALL` (exit2; stdout0; stderr 37 bytes; stderr SHA-256 `6c96e04c800506f24e189179858415610ce14665559278d738a66907f69bc3f2`). The harness was not invoked. Review results B_R1-B_R4 were `PASS / INCOMPLETE / INCOMPLETE / INCOMPLETE`; the independent incomplete results arose because each single permitted read was only partly delivered by the bounded tool output. No read, review, scanner, or QA retry occurred.
+
+Review receipt v3 is commit/blob/SHA-256 `031527458c8e9d953dcda316a1a3ed52f9a93f39` / `0abab74a26e2688f05eec1506df95934d2a80e71` / `3faeb2ac5a7de87b2a6e2472064935fe6e0985e332286fa20349380388686afa`.
+
+### Plan and progress disposition
+
+- terminal/state: `PREEXEC_STATIC_REVIEW_INCOMPLETE / CLOSED_CONSUMED_STOP`
+- QA subterminal: `PREIMPORT_SCAN_FAIL`
+- Inspector V2 gate: `OPEN_STOPPED_NOT_CLOSED`
+- specification source, real Inspector, exact4, standalone target, V3, runtime, product, UX, and mashos-api effects: all0
+- V16 technical credit / Cycle001 acceptance credit: `0 / 0`
+- remaining-boundary progress: `0/7 (0%)` before and after; delta `+0` points
+- G0-G10 top-level state: unchanged; Cycle001 `NOT_ACCEPTED`
+- retry/reuse/reactivation/automatic progression: `0/0/0/false`
+
+### Necessary next work
+
+The next exact-new authority must combine material correction and gate execution: statically locate the forbidden-active-call cause; correct and freeze only the responsible scanner or Inspector artifact; define complete, deterministic, nonoverlapping byte-range delivery for each review so truncation cannot hide regions; and execute one published-byte QA plus B_R1-B_R4 cycle. Its PASS closes boundary1 and raises remaining-boundary progress from `0/7` to `1/7` (`14.3%`, `+14.3` points). It must not perform preservation-only work or access the specification source, real Inspector, exact4, target, or V3 before the repaired pre-execution gate passes.
