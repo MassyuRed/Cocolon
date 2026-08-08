@@ -232,3 +232,21 @@ The exact frozen technical inputs are now durably reachable. The next uncertaint
 ### Karen judgment and next action
 
 Continue only with the approved published-byte QA and B_R1-B_R4 review. On completion, publish `preexecution_inspector_review_receipt_v2.md` and final owner4 postimages. Do not read the specification source, run the real Inspector, create V3, claim acceptance, retry, or progress automatically.
+
+## 2026-08-08 Inspector V2 Stage A publication mismatch STOP
+
+### Confirmed facts
+
+- The snapshot candidate expected blob/SHA-256/bytes was `c0c53a8cc3d799b3b1405089cc4ef36f368e60e6` / `f4fbd70bba243c80f514e3c195af665c5ff1f8e6958ca486e6e3451319b024be` / 2,344,009.
+- Commit `def8ffd741f6804b6b2bbd0be26347dd8bf69077` instead made blob/SHA-256/bytes `05fc89041839e2d8e5dae25ace27eb86c09d9713` / `172eea08f9395b80cdc43c2fbb5e7ab53f0463f9cc48fee89060a266dcdd055b` / 1,048,607 reachable at `Cocolon_前提資料/07_latest_snapshot_diff.md`.
+- The mismatch begins at byte 524,289 and reaches an early EOF. It is a known middle-truncation postimage mismatch.
+- No retry, resend, overwrite, reset, force, or delete was attempted. The Plan Stage A update, published-byte QA, harness, B_R1-B_R4 reviews, and Stage B were not started.
+- Durable STOP receipt commit/blob is `900f134896e5f6ba621357dd714b925e5cdbb53c` / `35256f0c0d99efb4083f81d7bf32a94ae250ab09`.
+
+### Current disposition
+
+Authority state: `CLOSED_CONSUMED_STOP`. Terminal: `STAGE_A_PUBLICATION_MISMATCH_STOP`. Durability: `INCOMPLETE_ACTUAL_SUBSET_PRESERVED`. Inspector V2 gate remains open. V16 technical credit0; Cycle001 acceptance credit0; automatic progression false.
+
+### Required recovery
+
+A distinct Mash-approved authority must bind the actual mismatched snapshot blob, rebuild the correct current owner from the immutable original prefix plus actual execution facts using chunk-safe full-byte transport, complete the unattempted owner reflection, and resume the same QA/review gate without regenerating or republishing the already exact Stage A add6 artifacts.
