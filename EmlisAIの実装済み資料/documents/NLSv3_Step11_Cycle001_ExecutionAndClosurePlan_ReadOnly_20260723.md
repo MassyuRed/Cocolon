@@ -17980,3 +17980,21 @@ Recovery proposals V1 `9dc96589764319c6c6191908c3a41b0b1a9215f7127f982db10239eff
 ### Plan connection
 
 This recovery publication adds no V16 or Cycle001 technical credit. It is needed to avoid erasing or falsely classifying the failed review and patch history. The technical path resumes immediately afterward with an exact-new inspector that fixes the bounded-output, exact C01-C04/outside-proof, and target-path identity blockers. That inspector must be frozen and reviewed before a newly authorized specification read. V3 creation, V16 synthetic validation, Full R1/runtime/product/UX evidence, and Cycle001 acceptance remain later gates.
+
+## 2026-08-08 Cycle001 Inspector V2 direct gate attempt — Stage A publication mismatch STOP
+
+### Confirmed facts
+
+Authority SHA-256 `5d00c7142e3ff7041b88277c6d08cf88a5097173f251318da35168cb5e5aea08` was explicitly approved in Work Ultra, activated exact1, and consumed exact1. Bundle retrieval/raw roundtrip/schema and exact4 frozen blob attestations passed. Stage A add6 are durably present and exact. Stage A Handoff and artifact-ledger postimages were also published exactly.
+
+The authorized snapshot candidate was blob `c0c53a8cc3d799b3b1405089cc4ef36f368e60e6`, SHA-256 `f4fbd70bba243c80f514e3c195af665c5ff1f8e6958ca486e6e3451319b024be`, 2,344,009 bytes. The successful update response instead made commit `def8ffd741f6804b6b2bbd0be26347dd8bf69077` and actual blob `05fc89041839e2d8e5dae25ace27eb86c09d9713`, SHA-256 `172eea08f9395b80cdc43c2fbb5e7ab53f0463f9cc48fee89060a266dcdd055b`, 1,048,607 bytes reachable. Fresh comparison proved a middle truncation beginning at byte 524,289 and early EOF.
+
+No retry, overwrite, force, reset, delete, or second snapshot mutation occurred. The Plan Stage A mutation, QA, harness, B_R1-B_R4 review, Stage B, specification-source access, real Inspector execution, technical exact4, standalone target, and V3 action were all0. STOP receipt commit/blob is `900f134896e5f6ba621357dd714b925e5cdbb53c` / `35256f0c0d99efb4083f81d7bf32a94ae250ab09`.
+
+### Cycle001 disposition
+
+Authority state is `CLOSED_CONSUMED_STOP`; terminal is `STAGE_A_PUBLICATION_MISMATCH_STOP`; durability is `INCOMPLETE_ACTUAL_SUBSET_PRESERVED`. The first boundary in the current seven-boundary remaining dependency chain did not close, so current-chain progress remains `0/7`; G0-G10 top-level progress remains `1/11`; Cycle001 remains `NOT_ACCEPTED`.
+
+### Required next boundary
+
+The next authority must directly repair the current snapshot using the immutable original owner prefix and actual Stage A/STOP facts through a chunk-safe full-byte transport, complete the still-unattempted owner reflection, and then resume the exact published-byte QA and B_R1-B_R4 review gate. Already exact Stage A add6 files must not be regenerated, resent, replaced, or recredited. No preservation-only detour or automatic progression is justified.
