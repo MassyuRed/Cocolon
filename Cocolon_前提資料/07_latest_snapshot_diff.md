@@ -38852,3 +38852,36 @@ Primary terminal is `PREEXEC_STATIC_REVIEW_INCOMPLETE`; confirmed QA subterminal
 ### Next boundary
 
 Only an exact-new Mash-approved authority may locate the scanner terminal cause without executing the Inspector, correct the smallest responsible artifact, freeze it, cover complete Inspector/harness bytes through deterministic nonoverlapping review ranges, and run QA plus four reviews once. PASS would close Inspector V2 gate and move progress to `1/7 (14.3%)`; no preservation-only action or automatic progression is permitted.
+
+## 2026-08-08 CURRENT TECHNICAL CHECKPOINT — INSPECTOR V2 V2 CONSUMED STOP / INPUT BUFFER LOSS AND PROHIBITED READS
+
+Durability state: `PROVISIONAL_PENDING_FINAL_HANDOFF`.
+
+### Confirmed facts
+
+- Mash approved exact authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_PREIMPORT_SCANNER_CAUSE_CORRECTION_AND_GATE_CLOSURE_AUTHORITY_V2`, SHA-256 `415eefed6f720330e7fc776e807f75b283f80a9df652ab764690bc2a947cf837`, in the same active Work UI attested `Ultra` and not Chat. Approval, activation, and consumption are `exact1 / exact1 / exact1`.
+- Accepted entry Cocolon head/tree was `4bcf723a6aa0dca299646fe44d8b13b138b86943 / d80e5e878349ab111e6d9706fb8e085030376926`. The authority source was postverified at commit/tree `859d561bd7f8aa373b381adf3db8e42e60d37666 / fd951e0f934be83020608c487011db2c900ff124`; its lifecycle receipt was postverified at `870f1cb34d38fb534ede0a85d38d5cfe741ce60c / cc280520d1ed6af2d13fc60da7ff1513bead74e8`.
+- Fresh mashos-api read-only head/tree at this checkpoint was `65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981`; write effect remained0.
+- The pinned scanner v1 and Inspector V2 objects were each size-queried once and byte-read once into ephemeral controller variables. Before validation or durable retention, local orchestration stopped with exact error `ReferenceError: TextEncoder is not defined`; retained scanner/Inspector buffers are `0 / 0`.
+- Later incident-audit commands violated the authority's exact-once sequence. Conservative total body-read counts are scanner `5`, Inspector `5`, harness `4`, and frozen B_R authority `10`; internal snippet/range-emitting commands are `7`. Complete-body emission and retained reusable full buffers are `0 / 0`.
+- Diagnostic create/freeze/review/syntax/run, cause classification, scanner-v2, cause/correction receipt, normal receipt v4, syntax3, B_R1-B_R4 formal review, corrected-scanner run, harness invocation, Inspector execution/import/modification, specification source, exact4, standalone target, V3, runtime/product/UX, app/API/DB/RN/Safety, and mashos-api write are all `0` or `NOT_REACHED`.
+- Conditional failure receipt `inspector_v2_scanner_correction_gate_failure_receipt_v1.md` is postverified at commit/tree `7495982ac9298179690414477b4396196a273e36 / e7b8435b7c9eb86f87982e0809d69adb5213bcd7`, blob `92f3be6cb24ebdacb980d9ed99f1838c533351d8`, SHA-256 `b61d2267f5d8c4f7da1434548165b0a07d95c0c213b5930e957aa86a745ab138`, 8910 bytes, 96 LF, CR0, final-LF true.
+
+### Terminal and progress
+
+- primary terminal: `PROHIBITED_TECHNICAL_SOURCE_REREAD_AND_PREMATURE_REVIEW_SOURCE_READ_STOP`
+- subterminals: `STATIC_DIAGNOSTIC_INPUT_BUFFER_UNAVAILABLE_AFTER_EXACT1_FETCH / LOCAL_ORCHESTRATION_TEXTENCODER_UNAVAILABLE`
+- authority state / Inspector V2 gate: `CLOSED_CONSUMED_STOP / OPEN_STOPPED_NOT_CLOSED`
+- V16 technical credit / Cycle001 acceptance credit: `0 / 0`
+- remaining-boundary progress: `0/7 (0%) -> 0/7 (0%)`; delta `+0` points
+- G0-G10 top-level state: unchanged; Cycle001 `NOT_ACCEPTED`; automatic progression `false`
+
+V1 remains permanently `SUPERSEDED_UNAPPROVED_UNACTIVATED_UNCONSUMED_TECHNICAL_EFFECT0_GITHUB_WRITE0`. Review receipt v3's Node SHA-256 `e237a283a5677acb8d1ac1f21cf991403a2d8b3905f87b201490f27da4a19038` is additively superseded for the same path/122466960 bytes/mode0755 by `e237a2839d0cbdc9a9a2adda1a184afc0f5b20306ffbe923af5686550472d8a8`; no prior state or credit changes.
+
+### Inference and Karen judgment
+
+No scanner or Inspector defect is inferred. The controller error and prohibited reads make the V2 exact-once route unsatisfiable and cannot be reused or converted into review evidence. Fail-closed STOP is required.
+
+### Next boundary
+
+Only an exact-new, separately Mash-approved successor may proceed. It must create, freeze, fully review, syntax-check, and encoding-primitive-preflight the bounded diagnostic before any scanner/Inspector source read; only after that preflight may the successor fresh-read each input exact1 as its own attempt and return to boundary1. V2 retry/reactivation/reclassification, preservation-only work, and automatic progression remain prohibited.
