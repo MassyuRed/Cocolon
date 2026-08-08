@@ -38834,3 +38834,21 @@ The predecessor authority SHA-256 `5d00c7142e3ff7041b88277c6d08cf88a5097173f2513
 Authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_SNAPSHOT_CORRUPTION_REPAIR_AND_GATE_CONTINUATION_AUTHORITY_V1` reconstructs this complete owner from immutable pre-corruption blob `3e9edff714e45de3b3d3ae0e4765ce84d2f402d9` plus one frozen suffix, attests the full candidate blob before branch mutation, and replaces only the known malformed current blob. This is an exact-new authorized recovery transition, not predecessor retry, reuse, reactivation, or retroactive PASS.
 
 The already published authority, scanner, Inspector V2, harness, freeze receipt, and Stage A receipt remain unchanged and uncredited again. Snapshot repair alone gives no Inspector V2 gate PASS. Published-byte QA and B_R1-B_R4 remain first-attempt `PENDING`; technical exact4, standalone target, V3, V16 technical credit, Full R1, runtime, product, UX, and Cycle001 acceptance credit remain0. Automatic progression remains false.
+
+## 2026-08-08 CURRENT TECHNICAL CHECKPOINT — INSPECTOR V2 QA/REVIEW STOP
+
+### Confirmed facts
+
+- Snapshot byte recovery completed at commit `d9481f1b1a7bd86c5b92923f02521f0a5dfaa7b8`; current repaired blob/SHA-256/bytes is `ce2582d6325133f82393ee81adb1fc2d573908f1` / `ce73d03677ac1dbd84729d4655c4bce96316d4e623f6205e993814d19fa655df` / `2345753` before this additive terminal section.
+- Authority SHA-256 `7284fffefa2ad4d2568877e1b47d9e4fcb9c61cb2b3ff1852d4eb1e6e5c4ec72` is activated1, consumed1, and closes `CLOSED_CONSUMED_STOP` without retry, reuse, reactivation, or automatic progression.
+- Published-byte syntax checks passed3/3. The frozen scanner invocation1 returned `STOP INSPECTOR_FORBIDDEN_ACTIVE_CALL` with exit2, stdout0, and stderr 37 bytes/SHA-256 `6c96e04c800506f24e189179858415610ce14665559278d738a66907f69bc3f2`. Harness invocation remained0.
+- Independent B_R1-B_R4 results are `PASS / INCOMPLETE / INCOMPLETE / INCOMPLETE`; review aggregate is `INCOMPLETE`. The three incomplete results are bounded-output evidence-delivery failures, not established Inspector defects.
+- Durable review receipt v3 is commit/blob/SHA-256 `031527458c8e9d953dcda316a1a3ed52f9a93f39` / `0abab74a26e2688f05eec1506df95934d2a80e71` / `3faeb2ac5a7de87b2a6e2472064935fe6e0985e332286fa20349380388686afa`.
+
+### Current state
+
+Primary terminal is `PREEXEC_STATIC_REVIEW_INCOMPLETE`; confirmed QA subterminal is `PREIMPORT_SCAN_FAIL`. Inspector V2 gate remains `OPEN_STOPPED_NOT_CLOSED`. Real Inspector, specification source, technical C01-C04/exact4, standalone target, V3, V16 technical credit, runtime/product/UX, mashos-api write, and Cycle001 acceptance credit remain0. Remaining-boundary progress stays `0/7 (0%)`, delta `+0` points. Cycle001 remains `NOT_ACCEPTED`.
+
+### Next boundary
+
+Only an exact-new Mash-approved authority may locate the scanner terminal cause without executing the Inspector, correct the smallest responsible artifact, freeze it, cover complete Inspector/harness bytes through deterministic nonoverlapping review ranges, and run QA plus four reviews once. PASS would close Inspector V2 gate and move progress to `1/7 (14.3%)`; no preservation-only action or automatic progression is permitted.
