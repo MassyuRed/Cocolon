@@ -1,0 +1,398 @@
+AUTHORITY_ID=SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_SNAPSHOT_CORRUPTION_REPAIR_AND_GATE_CONTINUATION_AUTHORITY_V1
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+RETRY=FALSE
+REUSE=FALSE
+REACTIVATION=FALSE
+
+# 1. Purpose and Cycle001 connection
+
+Repair the one known middle-truncated current snapshot created by the consumed
+predecessor authority, prove the repaired full bytes before the branch update,
+and then perform the still-unattempted published-byte QA and B_R1-B_R4 reviews
+needed to close the Inspector V2 gate.  This is one exact-new recovery and
+technical-continuation authority.  It is not predecessor retry or a
+preservation-only detour.
+
+PASS closes `INSPECTOR_V2_GATE_CLOSED`, moving the current seven-boundary
+remaining dependency chain from 0/7 to 1/7, displayed as +14.3 percentage
+points.  It gives V16 technical credit0 and Cycle001 acceptance credit0.
+
+CURRENT_REMAINING_CHAIN_EXACT7
+1 Inspector V2 published-byte QA and B_R1-B_R4 gate;
+2 one-read technical C01-C04 exact4 and standalone-program preparation;
+3 standalone behavior proof and V3 creation;
+4 V16 closed synthetic validation;
+5 Full R1 and runtime readiness;
+6 product and UX validation; and
+7 Cycle001 acceptance recomputation.
+
+This authority may close item1 only.  Items2-7 remain open and separately
+approved.  Displayed progress is exactly closed items divided by7, so PASS is
+0/7 to1/7 = +14.2857 percentage points, rounded only for display to +14.3.
+
+# 2. Approval and lifecycle
+
+Effective approval is one Mash message that states Mash inspected the active
+Work UI, its execution-mode label is Ultra and not Chat, names this exact
+authority ID and exact authority SHA-256, and approves it as single-use.
+Missing or contradicted approval leaves activation0/consumption0/write0.
+
+After effective approval Karen verifies these exact authority bytes, reads the
+authority once, and thereby activates and consumes it once.  Work Ultra is
+required for one fresh isolated QA root plus Karen and three independent
+reviewers.  No subagent reads this authority.  Any STOP closes consumed; no
+retry, reuse, reactivation, or automatic progression follows.
+
+# 3. Bound current state
+
+REPOSITORY=MassyuRed/Cocolon
+BRANCH=main
+PROPOSAL_HEAD=05927926434ae4f91b38d9a58f5747bf4ae53c00
+PROPOSAL_TREE=0d4e9c32aa39ed4aac02861365bba044305adfea
+MASHOS_API_HEAD=65284fef36936d7091262e758e0cc9282909601b
+MASHOS_API_WRITE=0
+
+The proposal head or a protected-path-clean descendant is admissible.  Fresh
+entry verification must prove current rule identities unchanged, the exact
+owner preimages below, the exact published add6/STOP lineage, and every new
+target absent.  Unrelated head advancement alone is not STOP; any protected
+path or target conflict is STOP.
+
+CURRENT_RULES_EXACT16_PATH_BLOB
+1 Cocolon_前提資料/00_karen_read_first.md e746c8e5bf93e19ca024f0b733e3655d57501eef
+2 Cocolon_前提資料/05_cocolon_rule_file_index.md 02181709865d80252c235e969057d7ebf2ec505b
+3 Cocolon_前提資料/08_cocolon_db_rename_boundary.md 7283200a5e2efb78d93a84d917631959d796555a
+4 Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md a8ffd078eac189562004c6e98494156ea6c12582
+5 Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md ea7f96221846e5614431296e00ac481cc00e00a2
+6 Cocolon_前提資料/14_cocolon_continuous_work_recording_and_emergency_handoff.md e2bf065934a76ab6fd536fbdc8a8aab2122cef41
+7 Cocolon_前提資料/manifest.json 2a8120c9fe898073852a8569f08e7cc2a65dd110
+8 Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt 3f6a8a4b4bf3b7016140b4d5fcabce459004c2ee
+9 Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md be4703e328757c252fda9f7a7b5c51b61dbe1d16
+10 Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt d0e621689a12bae4d04a4d1bc137fd3b6794eb90
+11 Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt 5c3b7dd03c84a84a2717f57f0d2c99c39b2ed6d8
+12 Cocolon_前提資料/work_attitude_rules_for_karen/17_continuous_durable_work_recording_and_emergency_handoff.txt b4bf0392028cec42fef39b75bb8a0fbcc1ec046b
+13 Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt 00792f467f13600c7c7cc4f80696c1a4edd1b8e4
+14 Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json 863cef7989f2c0ecc45f4a957e992c9574dec743
+15 Cocolon_前提資料/work_attitude_rules_for_karen/08_artifact_delivery_rules.txt fc5cd36449dcae1cb62e7e51d4ad24f1ba76a21b
+16 Cocolon_前提資料/work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt b102bdb2d7789079b1d8830b831e9dda2b7c73c3
+
+All exact16 must be mode100644 and read once by Karen from one fresh clean
+accepted-head checkout.  A proposal-to-entry diff touching any exact16, owner4,
+published add6, predecessor STOP receipt, or authorized new target is not a
+protected-clean descendant and is STOP.  Subagent current-rule reads are0.
+
+PREDECESSOR_AUTHORITY_SHA256=5d00c7142e3ff7041b88277c6d08cf88a5097173f251318da35168cb5e5aea08
+PREDECESSOR_STATE=CLOSED_CONSUMED_STOP
+PREDECESSOR_TERMINAL=STAGE_A_PUBLICATION_MISMATCH_STOP
+PREDECESSOR_RETRY_REUSE_REACTIVATION=0_0_0
+PREDECESSOR_QA_SCANNER_HARNESS_REVIEWS=0_0_0_0
+
+D=EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806
+HANDOFF_PATH=D/Handoff.md
+HANDOFF_BLOB=3749fe488b87d5301358ea7fe90d7ea8d1b76639
+HANDOFF_SHA256=6c1b0127f575075d9ae91722fea21f1c5df200554aa6e78bacb6fb9b2fc7975f
+HANDOFF_BYTES_LF=16855_252
+LEDGER_PATH=D/artifact_ledger.tsv
+LEDGER_BLOB=e5e65aa0bf6d20643dfbe9ecf6849d9e3f15344f
+LEDGER_SHA256=cc3ab29ee62160b2174bc2191cfd70c458a27da371797b38639262563969bc12
+LEDGER_BYTES_LF=4220_23
+SNAPSHOT_PATH=Cocolon_前提資料/07_latest_snapshot_diff.md
+SNAPSHOT_ACTUAL_BLOB=05fc89041839e2d8e5dae25ace27eb86c09d9713
+SNAPSHOT_ACTUAL_SHA256=172eea08f9395b80cdc43c2fbb5e7ab53f0463f9cc48fee89060a266dcdd055b
+SNAPSHOT_ACTUAL_BYTES_LF=1048607_9381
+PLAN_PATH=EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+PLAN_BLOB=205fdb372a5a8ac5b4e4e3203bda505a787f6aa0
+PLAN_SHA256=7a868e8b2d6ae48649f9817a381ab48a7ea85619e55c2891400f9100a7458393
+PLAN_BYTES_LF=1143326_18000
+
+All four are mode100644, CR0, final-LF true.  The malformed snapshot commit
+`def8ffd741f6804b6b2bbd0be26347dd8bf69077`, blob, hash, bytes, and cause stay
+immutable historical evidence and are never concealed, reset, deleted, or
+reclassified.
+
+PUBLISHED_ADD6_READ_ONLY
+1 D/v16_cycle001_inspector_v2_direct_gate_closure_authority_v1.txt blob ade058821d872cd7f645dd6fb16054a2db4c7e59
+2 D/v16_inspector_v2_preimport_scanner_v1.js blob ae0648a1af4ad2f4b189bfcda27d84bce66a45c1
+3 D/v16_standalone_preparation_noninteractive_inspector_generator_v2.js blob f45082cd3970e69f980c15e598ace3f49e404003
+4 D/v16_standalone_preparation_inspector_v2_synthetic_harness_v1.js blob 99ac7d5b996489060ef7e9f72f95d7d382009855
+5 D/v16_standalone_preparation_inspector_v2_implementation_freeze_receipt_v1.md blob 23e86d6dc3ee01640917b994ebfc5d0b056c1aad
+6 D/stage_a_inspector_v2_direct_gate_publication_receipt_v1.md blob 73b6a093f4272c8d6c78fbdeefc93106b0f537ab
+
+STOP_RECEIPT_PATH=D/v16_inspector_v2_direct_gate_closure_stop_receipt_v1.md
+STOP_RECEIPT_BLOB=35256f0c0d99efb4083f81d7bf32a94ae250ab09
+
+The add6 and STOP receipt are immutable lineage.  New write, resend,
+regeneration, replacement, reattestation, and credit for them are0.
+
+# 4. Snapshot recovery candidate
+
+IMMUTABLE_BASE_BLOB=3e9edff714e45de3b3d3ae0e4765ce84d2f402d9
+IMMUTABLE_BASE_SHA256=c6b13e8297e48072b456c521354db5575857dc323ef760bc54f7fb2b93561925
+IMMUTABLE_BASE_BYTES_LF=2341941_38806
+REPAIR_SUFFIX_SHA256=e0ce08c703028d7e4c91aadc780aba6ae198b7e6ab25ce42a1d67f02f5fac718
+REPAIR_SUFFIX_BYTES_LF=3812_30
+REPAIRED_STAGE_R_BLOB=ce2582d6325133f82393ee81adb1fc2d573908f1
+REPAIRED_STAGE_R_SHA256=ce73d03677ac1dbd84729d4655c4bce96316d4e623f6205e993814d19fa655df
+REPAIRED_STAGE_R_BYTES_LF=2345753_38836
+
+The repair suffix is the exact UTF-8 byte sequence strictly between the two
+delimiter lines below.  Delimiter lines themselves are excluded.  CR0,
+final-LF true, transformation0, normalization0.
+
+SNAPSHOT_REPAIR_SUFFIX_BEGIN
+
+## 2026-08-08 CURRENT TECHNICAL CHECKPOINT — INSPECTOR V2 STAGE A PUBLISHED / QA PENDING
+
+### Confirmed facts
+
+The exact-new approved Inspector V2 gate authority SHA-256 `5d00c7142e3ff7041b88277c6d08cf88a5097173f251318da35168cb5e5aea08` was activated and consumed once in the attested Work Ultra session. Entry Cocolon head/tree was `162898d85100aeed58a97d2e3006361475b98d2c` / `8f280185966d41f87ffff7f55eddb75e5d2c57db`; mashos-api remained `65284fef36936d7091262e758e0cc9282909601b` with write0.
+
+The immutable public bundle blob `98af979468f124f8afeca6a119b5092fe3bf3260` passed exact-one retrieval, raw roundtrip, schema validation, and ordered exact4 blob attestation. The approved authority, frozen scanner, Inspector V2 blob `f45082cd3970e69f980c15e598ace3f49e404003`, harness blob `99ac7d5b996489060ef7e9f72f95d7d382009855`, freeze-receipt blob `23e86d6dc3ee01640917b994ebfc5d0b056c1aad`, and Stage A receipt blob `73b6a093f4272c8d6c78fbdeefc93106b0f537ab` are reachable at their exact authorized paths. Stage A add6 is remotely verified; owner4 Stage A reflection is being completed under current Rule11.
+
+Current technical disposition is `INSPECTOR_V2_STAGE_A_PUBLISHED_QA_PENDING`. Technical credit0, V16 synthetic credit0, Cycle001 acceptance credit0. Specification-source materialize/stat/hash/open/read/execute, real Inspector, canonical real output, exact4 verification, standalone target, V3, runtime, product, UX, and mashos-api effects remain0.
+
+### Inference
+
+Publication identity uncertainty is closed for the frozen Stage A inputs. Inspector correctness remains unproved until fixed published-byte QA and independent B_R1-B_R4 review complete.
+
+### Karen judgment and next boundary
+
+The only authorized next boundary is the fixed Node syntax checks, frozen pre-import scan, 71-assertion harness, and four non-overlapping reviews. PASS will close only the Inspector V2 pre-execution static gate and open a separately approved one-read exact4/standalone-preparation proposal. Cycle001 remains `NOT_ACCEPTED`; automatic progression remains false.
+
+## 2026-08-08 CURRENT SUPERSEDING CORRECTION — SNAPSHOT BYTE REPAIR / QA PENDING
+
+### Confirmed historical mismatch
+
+The predecessor authority SHA-256 `5d00c7142e3ff7041b88277c6d08cf88a5097173f251318da35168cb5e5aea08` is `CLOSED_CONSUMED_STOP` at `STAGE_A_PUBLICATION_MISMATCH_STOP`. Its snapshot update intended blob/SHA-256/bytes `c0c53a8cc3d799b3b1405089cc4ef36f368e60e6` / `f4fbd70bba243c80f514e3c195af665c5ff1f8e6958ca486e6e3451319b024be` / 2,344,009 but commit `def8ffd741f6804b6b2bbd0be26347dd8bf69077` made blob/SHA-256/bytes `05fc89041839e2d8e5dae25ace27eb86c09d9713` / `172eea08f9395b80cdc43c2fbb5e7ab53f0463f9cc48fee89060a266dcdd055b` / 1,048,607 reachable. The mismatch began at byte 524,289 and ended early. The malformed Git object and commit remain immutable history.
+
+### Current repair disposition
+
+Authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_SNAPSHOT_CORRUPTION_REPAIR_AND_GATE_CONTINUATION_AUTHORITY_V1` reconstructs this complete owner from immutable pre-corruption blob `3e9edff714e45de3b3d3ae0e4765ce84d2f402d9` plus one frozen suffix, attests the full candidate blob before branch mutation, and replaces only the known malformed current blob. This is an exact-new authorized recovery transition, not predecessor retry, reuse, reactivation, or retroactive PASS.
+
+The already published authority, scanner, Inspector V2, harness, freeze receipt, and Stage A receipt remain unchanged and uncredited again. Snapshot repair alone gives no Inspector V2 gate PASS. Published-byte QA and B_R1-B_R4 remain first-attempt `PENDING`; technical exact4, standalone target, V3, V16 technical credit, Full R1, runtime, product, UX, and Cycle001 acceptance credit remain0. Automatic progression remains false.
+SNAPSHOT_REPAIR_SUFFIX_END
+
+# 5. Authorized writes and transport
+
+STAGE_R_ADD_EXACT2
+1 D/v16_cycle001_inspector_v2_snapshot_corruption_repair_and_gate_continuation_authority_v1.txt
+2 D/inspector_v2_snapshot_corruption_recovery_receipt_v1.md
+
+STAGE_R_MODIFY_EXACT1
+3 SNAPSHOT_PATH from exact `SNAPSHOT_ACTUAL_BLOB` to exact
+  `REPAIRED_STAGE_R_BLOB`.
+
+STAGE_Q_ADD_EXACT1
+4 D/preexecution_inspector_review_receipt_v3.md
+
+STAGE_Q_MODIFY_EXACT4
+5 HANDOFF_PATH
+6 LEDGER_PATH
+7 SNAPSHOT_PATH
+8 PLAN_PATH
+
+CONDITIONAL_FAILURE_ADD_EXACT1
+9 D/inspector_v2_snapshot_corruption_recovery_stop_receipt_v1.md
+
+At entry the authority, recovery receipt, recovery STOP receipt, and review-v3
+receipt paths must all be absent.  Publish the authority as the first branch
+mutation.  Its content is byte-for-byte the activated same-message
+approval-bound authority buffer: transformation/normalization0, repository
+mode100644, raw SHA-256 exactly the externally approved SHA-256, and the exact
+preactivation bytes/LF/CR/final-LF recorded in the first receipt.  A different
+postimage is STOP and is never overwritten.
+
+Normal unique changed-path union is exact7: new files exact3 plus owner4 exact4.
+mashos-api writes0.  Any extra/delete/rename/force/reset is STOP.
+
+Stage R success effects are authority create1, snapshot update1, recovery
+receipt create1.  The conditional failure receipt target replaces a narrower
+Stage-R-only failure meaning.  It may be created at most once after authority
+publication is confirmed and before final PASS, only when a determinately
+reconciled failure leaves its target fresh-absent and a further body-free
+durable write safe.  It covers Stage R candidate or snapshot failure; snapshot
+PASS followed by recovery-receipt create no-effect or mismatch; QA child
+failure or unproved state; review FAIL or INCOMPLETE; Stage Q review-receipt
+publication failure; Stage Q owner candidate-attestation or update failure;
+and final remote-verification failure.
+
+The conditional STOP receipt schema is closed: authority identity/lifecycle;
+failure stage and terminal; entry/current heads; predecessor STOP and add6
+identities; Stage R repair and recovery-receipt results; QA/review actual
+counters; review-v3 receipt identity or absence; owner4 expected identities
+and confirmed actual subset; failed target and
+`NO_EFFECT|MISMATCH|UNKNOWN` classification; unauthorized effects;
+resend/retry0; durability `VERIFIED|INCOMPLETE`; source/technical/Cycle001
+credit0; and required separate next approval.  QA/review FAIL with a
+successfully published review receipt and terminal owner4 does not additionally
+create this receipt.  If reconciliation leaves head/path/attribution unresolved,
+or authority publication, conditional STOP target, or preimage is unsafe,
+further write0 and durability INCOMPLETE.  The STOP write itself is attempted
+once and reconciled once; resend0.  The conditional failure receipt is
+mutually exclusive only with final `CLOSED_CONSUMED_PASS`.  It may coexist
+with the Stage R recovery receipt when a later Stage Q failure occurs, and may
+coexist with the review-v3 receipt when a later owner-publication or final
+verification failure occurs.  Those earlier receipts remain truthful
+phase-local evidence and are never relabeled or reused.
+
+Every branch mutation uses current Rule11 sequential reflection with a fresh
+exact target preimage and one postverification.  Result unknown is reconciled
+once and never resent.  Direct-child, one-commit, one-tree, fixed commit count,
+update_ref, CAS, and force are not completion conditions.
+
+Snapshot Stage R uses one body-suppressed `functions.exec` pipeline: fetch the
+immutable base by exact Git blob; keep its UTF-8 body inside the isolate; append
+the exact suffix once; call create_blob utf-8; require returned blob exactly
+`REPAIRED_STAGE_R_BLOB`; only then fresh-verify the current target equals
+`SNAPSHOT_ACTUAL_BLOB` and call update_file once with the same unprinted string.
+The body must never pass through exec-command stdout, model context, connector
+fetch_file output, shell, clipboard, or a size-limited intermediate.  The
+handler returns only closed metadata.  Create-blob mismatch gives branch
+effect0 STOP.  Update response unknown is reconciled once, resend0.
+
+The recovery receipt is constructed after snapshot remote PASS and records the
+old/new full identities, historical mismatch, authority lifecycle, actual
+commit locator, add6 unchanged, QA0, source0, credit0, and exact next QA action.
+Only recovery-receipt remote PASS opens Stage Q.
+
+All Stage Q owner candidates are built from fresh full current Git blobs plus
+one finite result suffix inside body-suppressed pipelines.  Each candidate is
+first constructed independently in a fresh local non-repository candidate root
+from the same exact base blob and frozen suffix.  Before any owner update,
+freeze and record per owner: base blob; suffix SHA-256/bytes/LF/schema; complete
+candidate Git blob/SHA-256/bytes/LF/CR/final-LF/mode; and public-safety result.
+The second body-suppressed pipeline independently fetches the base blob,
+appends the suffix once, and calls create_blob.  The returned blob must equal
+the independently frozen complete candidate blob before update_file.  Fresh
+remote verification must then equal every independently frozen full-candidate
+identity.  Any truncation, omission, duplication, normalization, or mismatch
+stops before branch mutation for that owner.  No owner body crosses a
+size-limited stdout boundary.
+
+OWNER_SUFFIX_SCHEMAS
+- Handoff Markdown: one LF-delimited final-result section containing receipt
+  identity, QA summary, four review summaries, terminal/lifecycle, progress,
+  source0, credit0, and next action.
+- Snapshot Markdown: one LF-delimited CURRENT superseding-result section with
+  the same closed fields and explicit retention of the malformed historical
+  commit/blob identity.
+- Plan Markdown: one LF-delimited Cycle001 dependency-result section with the
+  same closed fields, exact 0/7-to-1/7 disposition on PASS only, and remaining
+  boundaries2-7 open.
+- Ledger TSV: preserve the current nine-column body exactly and append exactly
+  two LF-terminated rows in order: review-v3 receipt, then final Handoff
+  postimage.  Each row has exactly nine tab-separated fields and no tabs/newline
+  inside a field.  Construct and freeze Handoff before constructing Ledger.
+
+# 6. QA and reviews
+
+Only after Stage R remote PASS, create one fresh non-repository QA root and
+materialize the published scanner, Inspector V2, and harness once each from
+their exact Git objects.  Require mode0644 and exact blobs/SHA-256/bytes.
+
+QA_LOCAL_PATHS_EXACT3
+QA_SCANNER=${QA_ROOT}/v16_inspector_v2_preimport_scanner_v1.js
+QA_INSPECTOR=${QA_ROOT}/V16_INSPECTOR_V2_SINGLE_CREATE_CANDIDATE.js
+QA_HARNESS=${QA_ROOT}/v16_standalone_preparation_inspector_v2_synthetic_harness_v1.js
+
+All three paths are absolute, initially ENOENT, then regular non-symlink
+mode0644 files in the same fresh mode0755 non-repository QA root.  Materialize
+the published blobs exactly without changing bytes: scanner
+`ae0648a1af4ad2f4b189bfcda27d84bce66a45c1` to QA_SCANNER; Inspector
+`f45082cd3970e69f980c15e598ace3f49e404003` to QA_INSPECTOR; harness
+`99ac7d5b996489060ef7e9f72f95d7d382009855` to QA_HARNESS.
+
+FIXED_NODE=/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node
+NODE_SHA256=e237a2839d0cbdc9a9a2adda1a184afc0f5b20306ffbe923af5686550472d8a8
+NODE_BYTES=122466960
+NODE_MODE=0755
+TIMEOUT_MS=10000
+
+Run once in order with bounded complete captures and confirmed reap.  Syntax
+argv are exactly `[FIXED_NODE,"--check",QA_SCANNER]`,
+`[FIXED_NODE,"--check",QA_INSPECTOR]`, and
+`[FIXED_NODE,"--check",QA_HARNESS]`.  Scanner runtime argv is exactly
+`[FIXED_NODE,QA_SCANNER,QA_INSPECTOR,QA_HARNESS]`; its child cwd is QA_ROOT,
+`process.argv.length=4`, and the two input paths are exact absolute paths.
+Alternate basename, relative input, extra argv, argument reorder, symlink, and
+fallback are0.  Harness runtime argv is exactly `[FIXED_NODE,QA_HARNESS]`; its
+child cwd is QA_ROOT, so its exact relative import
+`./V16_INSPECTOR_V2_SINGLE_CREATE_CANDIDATE.js` resolves to QA_INSPECTOR in the
+harness directory.  Import count is exact1.  The Inspector require.main guard
+keeps production main execution0; real-source access and production effects0.
+Cwd search, NODE_PATH fallback, alternate module, copy, rename after scanning,
+and import-cache substitution are0.
+
+Runtime order is syntax exact3, scanner exact1, then harness exact1 only on all
+prior PASS.  Every child uses cwd QA_ROOT, timeout10000ms, bounded complete
+capture, and confirmed reap.  Scanner stdout must be exact `PASS\n`, stderr0.
+Harness stdout must be exact `PASS 71\n`, stderr0, assertions71.  Rehash all
+three QA files afterward and require mutation0.  Retry, alternate runtime,
+install, network, and fallback are0.
+
+Review ownership is fixed: Karen B_R1, subagent1 B_R2, subagent2 B_R3,
+subagent3 B_R4.  Each reads the verified Inspector and harness once and returns
+gate/reviewer_role/inspector_blob/harness_blob/result/checks/evidence/findings.
+Use the complete B_R1-B_R4 conditions already published in predecessor target1
+blob `ade058821d872cd7f645dd6fb16054a2db4c7e59`; Karen reads those exact sections
+once, subagents receive only their assigned conditions.  PASS requires QA all
+PASS and reviews completed4/PASS4/FAIL0/INCOMPLETE0.  Review retry, owner
+substitution, artifact edit, and shared derived verdict state are0.
+
+# 7. Stage Q result, STOP, and PASS
+
+After QA/reviews construct `preexecution_inspector_review_receipt_v3.md` with
+every invocation/capture metric, four closed review results, facts, inference,
+Karen judgment, lifecycle, source0, credit0, and next action.  Publish it once,
+then append one final actual-result section to each owner4 current full body by
+the body-suppressed attested transport in section5.
+
+If repair or recovery-receipt publication fails or is unobservable,
+QA/reviews0 and publish only the authorized safe conditional STOP receipt; do
+not retry.  If QA or a review fails/incomplete after Stage R, publish the Stage
+Q receipt and owner4 as `CLOSED_CONSUMED_STOP`; a later owner transport,
+publication, or final-verification failure stops remaining owner writes and
+uses the conditional failure receipt when its safety gate passes.  Stage Q
+review-receipt publication failure also uses that conditional target when safe.
+Any update unknown is reconciled once, confirmed subset preserved, resend0,
+durability INCOMPLETE if necessary.  Never delete, reset, force, hide the
+malformed historical blob, or relabel predecessor STOP.
+
+PASS requires: approval/activation/consumption 1/1/1; current rules and bound
+preimages PASS; add6 unchanged6/6; Stage R add2/modify1 PASS; repaired snapshot
+exact blob/hash/bytes/mode PASS; QA syntax3/scanner1/harness1 all PASS; reviews
+4/4 PASS; Stage Q add1/modify4 PASS; unique union exact7/unauthorized0; unknown
+resend/force/update_ref0; specification-source and real technical effects0;
+fresh final Cocolon verification PASS; mashos-api write0.
+
+NORMAL_COUNTERS
+Stage R create_file/update_file=2/1; Stage Q create_file/update_file=1/4;
+normal totals create_file/update_file/branch mutations=3/5/8; body-suppressed
+full-body fetch_blob/create_blob/update_file=5/5/5; unique changed-path union=7;
+confirmed-path resend/update_ref/force=0/0/0.  Commit count is actual and is not
+a completion invariant.  The conditional failure receipt is outside normal
+PASS counters; a failure path adds create_file at most1 and records only actual
+effects.
+
+PASS_STATE
+AUTHORITY_STATE=CLOSED_CONSUMED_PASS
+TERMINAL=INSPECTOR_V2_PREEXEC_STATIC_PASS
+DURABLE_RECORD_STATUS=VERIFIED
+INSPECTOR_V2_GATE=CLOSED
+CURRENT_REMAINING_CHAIN_PROGRESS=1_OF_7
+PROGRESS_CHANGE_PERCENTAGE_POINTS=14.3
+V16_TECHNICAL_CREDIT=0
+CYCLE001_ACCEPTANCE_CREDIT=0
+NEXT_ACTION=SEPARATE_MASH_APPROVED_ONE_READ_EXACT4_AND_STANDALONE_PROGRAM_PREPARATION_AUTHORITY
+NEXT_AUTHORITY_APPROVED=FALSE
+AUTOMATIC_PROGRESSION=FALSE
+
+# 8. Scope exclusions
+
+Specification source resolve/stat/realpath/hash/open/read/execute; real
+Inspector; canonical real output; technical C01-C04 exact4; standalone target;
+V3; private V15; runtime/product/UX; mashos-api write; Cycle001 acceptance;
+artifact regeneration; predecessor retry/reuse/reactivation; and automatic
+progression are all outside this authority and exact0.
