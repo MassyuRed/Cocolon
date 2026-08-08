@@ -1,0 +1,732 @@
+AUTHORITY_ID=SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_GATE_CLOSURE_AUTHORITY_V1
+STATUS=PROPOSED_UNAPPROVED
+SINGLE_USE=TRUE
+AUTOMATIC_PROGRESSION=FALSE
+RETRY=FALSE
+REUSE=FALSE
+REACTIVATION=FALSE
+
+# 1. Purpose and Cycle001 connection
+
+PURPOSE
+Close the currently open Inspector V2 pre-execution static gate that directly
+blocks the next Cycle001 technical step.  Under this one authority, attest the
+existing immutable public bundle, publish the exact frozen Inspector V2,
+synthetic harness, and implementation-freeze receipt to GitHub, run QA against
+freshly fetched published bytes, complete Karen plus three independent reviews
+for B_R1 through B_R4, and durably publish the PASS or STOP result and current
+handoff to GitHub.
+
+WHY_NECESSARY
+Inspector V1 passed B_R1 and failed B_R2, B_R3, and B_R4.  Exact frozen V2,
+harness, and freeze-receipt bytes already exist in the immutable public bundle,
+but they are not yet present at their intended GitHub paths and have not passed
+published-byte QA plus the four-review gate.  Until this gate closes, the next
+one-read exact4 and standalone-program-preparation step cannot safely start.
+
+NEW_INFORMATION_ON_PASS
+1. the immutable bundle and its exact4 artifact identities are independently
+   attested in this execution;
+2. the exact frozen Inspector V2, harness, and freeze receipt are reachable at
+   their intended GitHub paths without regeneration or edit;
+3. freshly fetched published Inspector V2 and harness bytes pass two syntax
+   checks, a fixed pre-import scan, and the exact 71-assertion harness; and
+4. Karen plus three independent reviewers all pass B_R1 through B_R4.
+
+UNCERTAINTY_CLOSED_ON_PASS
+Only the Inspector V2 recovery/publication/fixture-QA/pre-execution-static gate
+is closed.  The real specification-source read, technical C01-C04 exact4,
+standalone program preparation and behavior, V3, V16 synthetic validity,
+Full R1, runtime, product, UX, and Cycle001 acceptance remain unproved.
+
+PRODUCT_CONNECTION
+The inspector gates the future model-free natural-language-surface candidate.
+This work prevents malformed or underconstrained transformation logic from
+becoming false V16 evidence.  It changes no current user-facing behavior.
+
+# 2. Confirmed facts, inference, and Karen judgment
+
+CONFIRMED_FACTS
+- Current technical owner remains the EOF-side V15 STATIC_ONLY_STOP H1.
+- V15 static validity credit is exact1; Full R1 is UNKNOWN_PRESERVED;
+  runtime-ready is false; Formal Source V4 is unmaterialized/unproved;
+  Cycle001 is NOT_ACCEPTED; automatic progression is false.
+- The current dependency chain is Inspector V2 gate closure, followed only by
+  a separately approved one-read exact4 and standalone-program-preparation
+  authority.
+- Historical authority SHA-256
+  f785c5784d31221bdc5f3cbeebc5657899ab02b9f8d9a97ccdef6f9a77682e30
+  was consumed and closed STOP.  It is not this authority and cannot be reused,
+  reactivated, retried, or treated as approval for this work.
+- The immutable failure bundle and frozen artifacts are already public as
+  lineage evidence.  This authority does not regenerate them.
+
+INFERENCE
+The shortest remaining safe route to the next technical step is to close the
+Inspector V2 gate directly.  Re-publishing only historical control-plane files
+would not close this dependency and is outside this authority.
+
+KAREN_JUDGMENT
+This is necessary Cycle001 completion work.  The material objective is the
+published-byte QA and four-review gate, not authority maintenance.  Every
+durable record created here must describe that technical work and its actual
+result.  PASS is claimed only from verified GitHub bytes and completed tests;
+STOP is used only for a concrete unsafe, failed, or unobservable boundary.
+
+# 3. Approval, Work Ultra, and lifecycle
+
+APPROVAL_SOURCE
+The user-visible approval transport is one ZIP containing exactly two regular
+members: this authority and the frozen pre-import scanner.  The ZIP SHA-256 is
+an external approval binding and is not self-recorded in this file.  Both
+members have mode0600.  Their exact bytes, SHA-256, LF/CR/final-LF metrics, and
+Git blobs are frozen before presentation.
+
+SCANNER_MEMBER=v16_inspector_v2_preimport_scanner_v1.js
+SCANNER_SHA256=087c8afdcbb278d7fc0c3d01c322bd64b2c168cec05840403ff4d046a5ff1c45
+SCANNER_GIT_BLOB=ae0648a1af4ad2f4b189bfcda27d84bce66a45c1
+SCANNER_BYTES=9976
+SCANNER_LF=315
+SCANNER_CR=0
+SCANNER_FINAL_LF=TRUE
+
+EFFECTIVE_APPROVAL
+The same user message must:
+1. state that Mash inspected the currently active UI;
+2. state that it is Work, execution-mode label Ultra, not Chat;
+3. name this exact AUTHORITY_ID;
+4. approve this authority's exact SHA-256 as single-use; and
+5. name the exact approval ZIP SHA-256.
+
+Missing, ambiguous, or contradicted approval leaves activation0, consumption0,
+GitHub write0, technical effect0, and the authority reusable only because it
+was never activated.
+
+ACTIVATION
+After effective approval, Karen extracts the exact2 ZIP members into a fresh
+directory, verifies both mode0600 identities, then performs one full authority
+read.  That first approved authority read is activation1 and consumption1.
+Karen then reads the exact frozen scanner once for static scope inspection.
+No subagent reads this authority or scanner source.  Subagents receive only
+bounded review instructions and the verified Inspector V2/harness copies.
+Package or member identity mismatch before the approved authority read leaves
+activation0/write0.  Mismatch discovered by the approved authority read
+consumes and closes local-only
+APPROVED_AUTHORITY_IDENTITY_STOP; untrusted bytes authorize no GitHub write.
+
+WORK_ULTRA_REQUIREMENT
+Work Ultra is required because Karen and three independent agents must review
+the same published bytes independently and because QA uses a fresh isolated
+filesystem root.  Work Ultra does not by itself approve, activate, consume,
+write, credit, or progress this authority.
+
+# 4. Current proposal-time repository bindings
+
+REPOSITORY=MassyuRed/Cocolon
+BRANCH=main
+PROPOSAL_TIME_HEAD=162898d85100aeed58a97d2e3006361475b98d2c
+PROPOSAL_TIME_TREE=UNBOUND_OBSERVATION_FETCH_AT_ACTIVATION
+
+MASHOS_API_REPOSITORY=MassyuRed/mashos-api
+MASHOS_API_BRANCH=main
+MASHOS_API_PROPOSAL_TIME_HEAD=65284fef36936d7091262e758e0cc9282909601b
+MASHOS_API_ROLE=READ_ONLY_HEAD_OBSERVATION_KAREN_WRITE0
+
+The proposal-time heads are observations, not future fixed heads.  At entry,
+latest Cocolon main may be the proposal head or a descendant whose protected
+rules, owner4 preimages, immutable lineage, and authorized target preimages are
+unchanged.  Any change to those protected inputs is STOP.  Unrelated head
+advancement alone is not STOP.
+
+CURRENT_RULE_BINDINGS_EXACT16
+The following table is `path|blob|sha256|bytes|LF`.  Every member is mode0644,
+CR0, final-LF true at the proposal-time head.  Karen reads every exact member
+once after activation from one clean accepted-head checkout.  Subagent reads0.
+
+1|Cocolon_前提資料/00_karen_read_first.md|e746c8e5bf93e19ca024f0b733e3655d57501eef|d2501e5456d408b418bb0046aa90d0a105b6fab5185f684bf1412b8cac16acb5|620578|7897
+2|Cocolon_前提資料/05_cocolon_rule_file_index.md|02181709865d80252c235e969057d7ebf2ec505b|cd6175a6098e1a662dda3e55a0fbbb715008d48acda3964741967d94eb3fe264|320065|3322
+3|Cocolon_前提資料/08_cocolon_db_rename_boundary.md|7283200a5e2efb78d93a84d917631959d796555a|e38bae62ccf47cdef7f4b801e6755d13a24bbc748b6edaf1a8c826d187d36723|79150|943
+4|Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md|a8ffd078eac189562004c6e98494156ea6c12582|1d9f7b9af68d2da0da40f8c5649b0cb5311d44d6cd2fedbca4f9f3a0a47eb59e|44263|892
+5|Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md|ea7f96221846e5614431296e00ac481cc00e00a2|42fcd4d65b0d21b5e41659b6329c55c14ed42c0270838f13be6102b351db7ac9|21926|429
+6|Cocolon_前提資料/14_cocolon_continuous_work_recording_and_emergency_handoff.md|e2bf065934a76ab6fd536fbdc8a8aab2122cef41|36bfc8ef02a2be4397cfd50d63a7b2a9ab57ee394c1bee7148d8e92be9b6e162|5614|85
+7|Cocolon_前提資料/manifest.json|2a8120c9fe898073852a8569f08e7cc2a65dd110|ee962c8e0237037563ef003ddd0771e47b37ed1d958e75ca5d8aff27c81f7367|905582|16743
+8|Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt|3f6a8a4b4bf3b7016140b4d5fcabce459004c2ee|cbb621d253f8b18ddbd53fae87376a6d229d6371df40d506e92740bef7126cde|5079|112
+9|Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md|be4703e328757c252fda9f7a7b5c51b61dbe1d16|25a0ef134e3ba4d67456aaf118fe7df6267f540582fc9cc26155ac8fc02a94ea|13405|197
+10|Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt|d0e621689a12bae4d04a4d1bc137fd3b6794eb90|fee262a30f4128d9cb3011d17f67e09d12f4ebc2d1f450208d0be644454d987b|4691|99
+11|Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt|5c3b7dd03c84a84a2717f57f0d2c99c39b2ed6d8|895ea1f130e331d4e89f857835b4477d949c1ff63c0adea11276bc97b4c717b2|3932|64
+12|Cocolon_前提資料/work_attitude_rules_for_karen/17_continuous_durable_work_recording_and_emergency_handoff.txt|b4bf0392028cec42fef39b75bb8a0fbcc1ec046b|73fba30822cea333e085bb67bfab740e68430185b062079b10da42368d6cb251|1876|15
+13|Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt|00792f467f13600c7c7cc4f80696c1a4edd1b8e4|afe7c4a77be7a59a5bb6585f22cb92496717129df9410685cd2c8d59ae2d460a|2812|59
+14|Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json|863cef7989f2c0ecc45f4a957e992c9574dec743|f5763337fe3b030ed0fcf5534fe839676b7961a2f2900a01ce21f017c0146165|5352|110
+15|Cocolon_前提資料/work_attitude_rules_for_karen/08_artifact_delivery_rules.txt|fc5cd36449dcae1cb62e7e51d4ad24f1ba76a21b|e2f022cc760425469827c88aa2d3da28c7719775edf3ebf3e2166ec0e741ab57|6146|120
+16|Cocolon_前提資料/work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt|b102bdb2d7789079b1d8830b831e9dda2b7c73c3|7e1214a75b91bf7157cef2cf0f5e1e4aa76104296b7a138bc7a28846cd2bfa45|8559|167
+
+All exact16 identities are protected in the baseline-to-entry comparison.  A
+descendant that changes any member is not admitted by this authority.
+
+OWNER4_PREIMAGES
+HANDOFF_PATH=EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/Handoff.md
+HANDOFF_BLOB=b2f04b8c156a423fb36544261cb4c6732c2be804
+HANDOFF_SHA256=a9518c30c43f00cee141651fac3bd73f1dde8172192dc128d39a2ba13c3a657a
+HANDOFF_BYTES=12895
+HANDOFF_LF=213
+LEDGER_PATH=EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/artifact_ledger.tsv
+LEDGER_BLOB=9bf55de5d25dd1ac33ea9ed859b22c281f17e579
+LEDGER_SHA256=b2cf04d3fed01fbf5dd162475dc873553a6b824c0e03256e45d62a9ab684716b
+LEDGER_BYTES=2482
+LEDGER_LF=14
+SNAPSHOT_PATH=Cocolon_前提資料/07_latest_snapshot_diff.md
+SNAPSHOT_BLOB=3e9edff714e45de3b3d3ae0e4765ce84d2f402d9
+SNAPSHOT_SHA256=c6b13e8297e48072b456c521354db5575857dc323ef760bc54f7fb2b93561925
+SNAPSHOT_BYTES=2341941
+SNAPSHOT_LF=38806
+PLAN_PATH=EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+PLAN_BLOB=1cb425e54af1557d57259d0e68ec3777e77f4b40
+PLAN_SHA256=40562a917c589164d66d941aced503f5fd54059814506547faae141bc2dd1b8e
+PLAN_BYTES=1141078
+PLAN_LF=17982
+All owner4 are mode0644, CR0, final-LF true at proposal-time head.
+
+# 5. Immutable technical input
+
+D=EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806
+
+BUNDLE_PATH=EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_inspector_v2_single_create_failure_bundle_v1.json
+BUNDLE_CONTAINING_COMMIT=fe3b040836c94967db7a2c3c3dd5cf6c1594fd66
+BUNDLE_BLOB=98af979468f124f8afeca6a119b5092fe3bf3260
+BUNDLE_SHA256=9adf3666efeef9d1a56de2cb964b94488ae3af103d9a49ab3575aae7390e9110
+BUNDLE_BYTES=104072
+BUNDLE_LF=1
+BUNDLE_CR=0
+BUNDLE_FINAL_LF=TRUE
+BUNDLE_MODE=0644
+BUNDLE_SCHEMA=v16_inspector_v2_single_create_failure_bundle_v1
+BUNDLE_TOP_LEVEL_KEYS_EXACT9=artifacts;authority;exact_error;normal_stage_a_attempt;public_safety;schema;specification_source;status;terminal
+BUNDLE_ARTIFACT_KEYS_EXACT10=bytes;content_b64;cr;final_lf;git_blob;lf;local_path;mode;role;sha256
+
+ROLE1=v4_postverification_receipt
+ROLE1_BLOB=1411f304d1a97569c28f049589d73f60a9f28ab8
+ROLE1_SHA256=d6d621414cd8ebb336ccd0c11e6f5c453eb05f7eab3984338ae00a245f1fe9d5
+ROLE1_BYTES=3635
+ROLE1_LF=52
+ROLE2=inspector_v2
+ROLE2_BLOB=f45082cd3970e69f980c15e598ace3f49e404003
+ROLE2_SHA256=db7c36351070487d98c34d6d34710f25ce010bb54f33d744102e00f5fcf5fc31
+ROLE2_BYTES=60190
+ROLE2_LF=1583
+ROLE3=synthetic_harness
+ROLE3_BLOB=99ac7d5b996489060ef7e9f72f95d7d382009855
+ROLE3_SHA256=6950bf08242c42d96e2bab53d3dca845cec2b261298e2268cce6a52ffd9734ad
+ROLE3_BYTES=8962
+ROLE3_LF=212
+ROLE4=implementation_freeze_receipt
+ROLE4_BLOB=23e86d6dc3ee01640917b994ebfc5d0b056c1aad
+ROLE4_SHA256=eb862bdb03dd64e8765721af30261290f158a244290766d584b461548657bf06
+ROLE4_BYTES=3608
+ROLE4_LF=48
+All exact4 artifacts are mode0644, CR0, final-LF true.  Their existing public-
+safety evidence is reusable only after exact role/order/blob attestation.
+
+SPECIFICATION_SOURCE_METADATA_ONLY
+SPEC_SOURCE_PATH=EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2.js
+SPEC_SOURCE_BLOB=69ca116c3bc8c618792f3da9bd72686a4759fd8d
+SPEC_SOURCE_SHA256=0d2dcffe2d55c08e97dfcf588e8a13b6b26f8e5c337ee549e3ffcf41c300dcca
+The metadata is not permission to resolve, materialize, stat, hash, open, read,
+execute, or search for the specification source.
+
+FINITE_IMMUTABLE_LINEAGE_EXACT4
+1. V4 postverification receipt:
+   path D/stage_b_recovery_v4_postverification_receipt_v1.md
+   blob 1411f304d1a97569c28f049589d73f60a9f28ab8
+   SHA-256 d6d621414cd8ebb336ccd0c11e6f5c453eb05f7eab3984338ae00a245f1fe9d5
+   bytes/LF 3635/52
+2. ROLE1-4 failure bundle: BUNDLE_PATH and BUNDLE identity in this section.
+3. historical f785 durable STOP bundle:
+   path D/v16_inspector_v2_bundle_refetch_stop_bundle_v1.json
+   blob 0a52c48ba09969543aab46a092bb99a7e4adffcf
+   SHA-256 8398dc837ed78a1183a5dbb4699737de366bb8650ef803748c810ec0b7fdfbff
+   bytes/LF 129363/212
+   exact locator $.artifacts[0], role approved_successor_authority,
+   embedded SHA-256 f785c5784d31221bdc5f3cbeebc5657899ab02b9f8d9a97ccdef6f9a77682e30,
+   embedded Git blob d30c422f735e3c2923b9b83a11a22769e85d5dbb,
+   embedded bytes/LF 42008/735.
+4. historical f785 durable STOP receipt:
+   path D/v16_inspector_v2_bundle_refetch_stop_receipt_v1.md
+   blob b2096ca0ff7554d2ff0418c5ba98aeabc21643d8
+   SHA-256 5b99ca7e52e614e4f90f9958cbc60fdee0e92320f0f66fe02546c8befbf8b55a
+   bytes/LF 6313/114
+   required lifecycle CLOSED_CONSUMED_STOP and terminal UNAUTHORIZED_EFFECT_STOP.
+
+All exact4 are mode0644, CR0, final-LF true.  Entry verifies path/blob/mode/hash
+from the clean accepted-head checkout.  Only item4 receipt is Karen-read once to
+confirm lifecycle/terminal.  Item3 body and embedded authority are semantic-read0;
+their frozen locator is accepted from the exact item3 blob plus item4 receipt.
+All four are immutable prerequisites, never write targets, and confer no
+approval, activation, reuse, retry, or technical credit.
+
+# 6. Authorized GitHub targets
+
+STAGE_A_ADD_EXACT6
+1 D/v16_cycle001_inspector_v2_direct_gate_closure_authority_v1.txt
+2 D/v16_inspector_v2_preimport_scanner_v1.js
+3 D/v16_standalone_preparation_noninteractive_inspector_generator_v2.js
+4 D/v16_standalone_preparation_inspector_v2_synthetic_harness_v1.js
+5 D/v16_standalone_preparation_inspector_v2_implementation_freeze_receipt_v1.md
+6 D/stage_a_inspector_v2_direct_gate_publication_receipt_v1.md
+
+STAGE_A_MODIFY_EXACT4
+7 HANDOFF_PATH
+8 LEDGER_PATH
+9 SNAPSHOT_PATH
+10 PLAN_PATH
+
+STAGE_B_ADD_EXACT1
+11 D/preexecution_inspector_review_receipt_v2.md
+
+STAGE_B_MODIFY_EXACT4
+12 HANDOFF_PATH
+13 LEDGER_PATH
+14 SNAPSHOT_PATH
+15 PLAN_PATH
+
+PRE_STAGE_STOP_ADD_EXACT1
+16 D/v16_inspector_v2_direct_gate_closure_stop_receipt_v1.md
+
+At proposal time every add target above is absent.  Existing immutable lineage
+paths are read-only prerequisites and never write targets.  Normal unique
+successor changed-path union is exact11: Stage A unique exact10 plus Stage B
+review receipt exact1, with owner4 overlap.  Any extra, deleted, renamed,
+overwritten, or unauthorized path is STOP.  mashos-api writes are0.
+
+Target 1 content is byte-for-byte the activated approval authority member under
+its approved SHA-256/bytes/Git-blob identity.  Rename from package `.md` basename
+to repository `.txt` path changes no byte.  Transformation, normalization,
+regeneration, and semantic rewrite are0; repository mode is100644.  Target2 is
+byte-for-byte the activated scanner member with SCANNER identity and repository
+mode100644.  The Stage A receipt records both approved member identities and the
+externally approved package SHA-256.
+
+# 7. Actor-wide finite read and effect boundary
+
+Only Karen reads this authority body, exact1, and scanner source, exact1.  From
+one clean accepted-head checkout Karen reads current rules exact16 once each,
+owner4 exact4 once each, and the historical f785 STOP receipt once.  All other
+lineage and target checks are path/blob/mode/commit metadata-only unless a body
+is explicitly named below.  Repository-wide body search, recursive content
+scan, guessed locator traversal, private input, and specification-source access
+are0.
+
+BUNDLE_BODY_FETCH=connector fetch_file utf-8 exact1
+BUNDLE_RAW_ROUNDTRIP_CREATE_BLOB=utf-8 exact1
+BUNDLE_JSON_PARSE=exact1
+BUNDLE_ARTIFACT_CREATE_BLOB=base64 exact4
+BUNDLE_BODY_REFETCH=0
+BUNDLE_BASE64_SEGMENT_SECOND_READ=0
+ARTIFACT_LOCAL_DECODE_BEFORE_PUBLICATION=0
+ROLE2_3_4_BODY_SUPPRESSED_FETCH_BLOB_TRANSPORT=exact3
+ROLE2_3_4_MODEL_SEMANTIC_EXPOSURE=0
+
+After Stage A remote PASS, a fresh Git fetch obtains the published commit.  Git
+object plumbing writes the published scanner, Inspector V2, and harness bodies
+directly to three fresh QA files exact1 each with stdout redirected to the file
+and no body returned to Karen.  Their blob/hash/bytes/mode equality is verified.
+These three files are the only QA inputs.  Karen performs B_R1; subagent1 B_R2;
+subagent2 B_R3; subagent3 B_R4.  Each assigned reviewer reads Inspector and
+harness exact1, giving semantic review reads exact4 per file.  No reviewer reads
+this authority/scanner, fetches repository bodies, or accesses the specification
+source.
+
+QA logical filesystem consumers per Inspector/harness are: initial identity
+hash exact1, Node syntax open exact1, frozen scanner read exact1, harness runtime
+import exact1 only on prior PASS, post-QA identity hash exact1, and reviewer
+semantic reads exact4.  Scanner consumers are initial identity hash exact1,
+Node syntax open exact1, scanner runtime open exact1, post-QA identity hash
+exact1.  Remote Stage A/final verification of these and all other paths is
+Git path/blob/mode metadata-only and causes no additional body fetch.
+
+PUBLIC_SAFETY_SCAN_V1
+Immediately before each write, scan the exact frozen candidate bytes once.  PASS
+requires valid UTF-8 text, CR0, NUL0, final-LF true, no control byte other than
+LF/TAB, and zero matches for these value-bearing patterns: private-key header;
+`AKIA` plus 16 uppercase alphanumerics; `ghp_`, `gho_`, `ghu_`, `ghs_`, or
+`ghr_` plus 36 or more alphanumerics; and a case-insensitive credential name
+`api_key|secret|token|password` followed by `:` or `=` and a nonempty quoted
+value.  Explanatory credential-name literals without a value are permitted and
+counted separately.  Record candidate identity, algorithm version, exact match
+count, and disposition.  Any nonzero or unresolved value-bearing match is
+PUBLIC_SAFETY_UNPROVED_STOP.  ROLE2-4 may reuse their immutable predecessor PASS
+only after exact blob attestation; every newly constructed authority/scanner/
+receipt/owner postimage is scanned directly.
+
+# 8. Entry and Stage 0
+
+1. Verify effective approval and this authority/package exact identity before
+   activation as defined in section 3.
+2. After activation, fresh-observe Cocolon and mashos-api main.  Create one
+   fresh clean Cocolon checkout at the observed head; verify origin, clean
+   status, detached exact head, and complete non-truncated object access.  Read
+   and verify current rules exact16, owner4 exact4, finite lineage exact4, and
+   all add-target absence.  Require proposal identities
+   or a protected-path-clean descendant.  Bind the accepted entry head H0 and
+   its actual tree T0.
+3. Fetch BUNDLE_PATH with connector encoding=utf-8 at ref
+   fe3b040836c94967db7a2c3c3dd5cf6c1594fd66 exact1.  Require returned
+   path/blob/mode/bytes/hash and containing lineage.  Keep its raw string as the
+   sole buffer.  Ambient atob, TextEncoder/TextDecoder/Buffer/crypto globals,
+   shell transport, node -e, heredoc, stdin, fallback, and second fetch are0.
+4. Submit the raw UTF-8 string to GitHub create_blob encoding=utf-8 exact1 and
+   require returned SHA=BUNDLE_BLOB.
+5. JSON.parse exact1.  Require exact schema/status, exact9 top keys, artifact
+   exact4 roles/order, exact10 artifact keys, duplicates0/extras0, canonical
+   base64 alphabet/padding, and all recorded metrics.
+6. Submit each exact4 content_b64 unchanged to GitHub create_blob
+   encoding=base64 exact1, total exact4.  Require returned blobs equal ROLE1-4.
+   ROLE1 must equal the already public V4 receipt.  ROLE2-4 become the only
+   blobs permitted for Stage A publication.  Regenerate/edit/replace/refreeze0.
+7. A create_blob response is PASS only when it explicitly returns the expected
+   SHA.  Failure, unavailable, unknown, or mismatch is
+   BUNDLE_OR_BLOB_ATTESTATION_STOP with retry0.  Orphan objects are not reachable
+   publication and earn technical credit0.
+
+# 9. Stage A GitHub publication
+
+Construct the exact Stage A receipt from actual execution facts.  It records
+approval/activation, entry heads, bundle/schema/exact4 attestation, object versus
+reachable effects, source access0, QA=PENDING, facts/inference/Karen judgment,
+and the exact Stage B action.  Freeze it only after Stage A targets1-5 are
+remotely confirmed; publish it as target6, the final add.
+
+Construct owner4 postimages from the complete clean-checkout bodies, after
+verifying the full preimage hashes and proving no truncation.  Preserve each
+current owner file as an exact byte prefix.  Handoff, snapshot, and Plan append one LF-delimited section that
+states only confirmed Stage A facts, technical credit0, QA=PENDING, and the
+Cycle001 dependency.  Ledger preserves its exact nine-column prefix and appends
+seven rows in this order: authority, scanner, Inspector V2, harness, freeze
+receipt, Stage A receipt, Stage A Handoff postimage.  Ledger self-row, snapshot self-row, and
+Plan self-row are0.  Every output is CR0/final-LF true/mode0644 and passes the
+public-safety scan before publication.
+
+GitHub reflection method and completion are owned by current Rule11.  Publish
+Stage A add6 sequentially with connector create_file and fresh per-target
+preimage checks.  Target1, target2, and target6 use their already frozen UTF-8
+strings.  Targets3-5 use one body-suppressed handler per role: fetch_blob by the
+exact attested ROLE2/ROLE3/ROLE4 SHA, require one UTF-8 content string, pass that
+string unchanged to create_file for the exact target, and return to Karen only
+the commit locator plus closed path/blob/mode metadata.  The handler never
+prints, serializes, or semantically exposes the body to Karen; local decode and
+local artifact materialization remain0.  Fresh reconciliation must prove the
+created path blob equals the same attested role blob.  Missing/unavailable blob
+content, any model-readable body exposure, or identity mismatch is
+ROLE_BLOB_TRANSPORT_STOP with create retry0.
+
+After add6 remote PASS, use connector update_file for owner4 exact4 with the
+freshly observed current blob SHA for each path.  Before every owner call,
+fresh-observe main and the exact target; it must equal its frozen current-stage
+preimage.  Send only frozen bytes.  Existing confirmed paths are never resent
+or overwritten.  After each response, fresh-fetch main and verify the target by
+`git ls-tree` path/blob/mode metadata; the target body is not printed or
+connector-fetched.  Stage A completes only
+when the latest main contains all exact adds6 and owner4 postimages4, their
+expected blobs/modes, missing0, different0, deleted0, and the identified Karen
+write-group exact10/unauthorized0.
+Unrelated other-actor paths may exist and are recorded separately; head advance
+alone is not STOP while every protected and selected preimage remains exact.
+
+For an add6 or owner4 failed/unknown write response, reconcile exactly once
+and never resend:
+1. exact expected target visible with identified connector/Karen commit =>
+   confirmed success; continue only with still-pending paths;
+2. target still at exact preimage with proved Karen effect0 =>
+   STAGE_A_PUBLICATION_NO_EFFECT_STOP;
+3. expected bytes visible but attribution is other/unknown =>
+   HISTORICAL_MUTATION_VISIBILITY_UNKNOWN_STOP;
+4. mismatched/mixed/unreadable target => STAGE_A_PUBLICATION_MISMATCH_STOP;
+5. head or path observation unresolved => STAGE_A_PUBLICATION_UNKNOWN_STOP.
+
+No logical retry, confirmed-path resend, force push, reset, delete, or overwrite
+is authorized.  Ordinary continuation
+to the next never-attempted pending path after a confirmed success is not retry.
+
+Only Stage A remote PASS opens Stage B.
+
+# 10. Published-byte QA
+
+FIXED_NODE=/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node
+NODE_REALPATH=/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node
+NODE_MODE=0755
+NODE_BYTES=122466960
+NODE_SHA256=e237a2839d0cbdc9a9a2adda1a184afc0f5b20306ffbe923af5686550472d8a8
+NODE_CHECK_TIMEOUT_MS=10000
+NODE_CHECK_STDOUT_CAP=4096
+NODE_CHECK_STDERR_CAP=65536
+HARNESS_TIMEOUT_MS=10000
+HARNESS_STDOUT_CAP=64
+HARNESS_STDERR_CAP=65536
+SCANNER_TIMEOUT_MS=10000
+SCANNER_STDOUT_CAP=64
+SCANNER_STDERR_CAP=256
+SCANNER_EXPECTED_STDOUT=PASS_PLUS_LF
+SCANNER_EXPECTED_STDOUT_BYTES=5
+SCANNER_EXPECTED_STDOUT_SHA256=c26de83abdc9496cd1301470918ec39ecca1cf389ef0ae1c6504da1800d1c431
+
+Create one fresh non-repository QA root after lstat ENOENT, mode0755.  Fetch the
+published scanner, Inspector V2, and harness through Git object plumbing as
+defined in section7, one body transport each, and require exact identities.  The
+QA local paths are exact3 mode0644: scanner under SCANNER_MEMBER, Inspector V2
+under alias V16_INSPECTOR_V2_SINGLE_CREATE_CANDIDATE.js, and harness under its
+published basename.  All preimages are ENOENT.  No tracked repo checkout or
+project write is permitted.
+
+Reverify fixed Node as regular, non-symlink, direct-realpath, exact mode/bytes/
+hash.  Alternate Node, npx, install, fallback, and network are0.  Run once each
+in order, with bounded complete stdout/stderr and confirmed reap:
+1. node --check scanner;
+2. node --check Inspector V2;
+3. node --check harness;
+4. scanner runtime with the two exact absolute QA input paths;
+5. harness runtime only if 1-4 PASS.
+
+The pre-import scan implementation is the exact published SCANNER_MEMBER bytes,
+not an improvised algorithm.  It verifies absolute path/basename, regular
+non-symlink mode0644, exact input hashes, UTF-8/CR0/NUL0, lexically active static
+require calls, dynamic-require0, require.main guard exact1 per input, and a
+closed forbidden-active-call set.  Its lexer tracks string/template/regex,
+control-parenthesis, statement-block, comment, and template-expression states;
+unbalanced state is STOP.  Every active `require` identifier must be either one
+canonical static call or the single require.main guard, so alias, comment-gap,
+property, and other noncanonical use is STOP.  Inspector active requires must be ordered
+exact3 node:fs,node:path,node:crypto; harness active requires ordered exact2
+node:path and the exact local alias.  It imports, executes, writes, or mutates
+neither input.  PASS requires exit0, stderr0, stdout byte-exact `PASS\n` with
+the bound bytes/hash.  Any other exit/output is PREIMPORT_SCAN_FAIL.  Scanner
+source identity or syntax mismatch is PREIMPORT_SCANNER_IDENTITY_OR_SYNTAX_STOP.
+
+Harness PASS requires assertions=71, exit0, stderr0, and byte-exact stdout
+"PASS 71\n": bytes8, SHA-256
+ad79e35af6b51d08ffbe246024854228e7750f41d27a622f988ef0595859c640.
+Partial, extra, truncated, unavailable, or grammar-only output is not PASS.
+Rehash local QA exact3 after execution and require mutation0.  No QA retry.
+
+Unknown child state or incomplete reap stops later executable QA calls; reviews
+may continue only if they do not communicate with the uncertain child.  If a
+syntax child is determinately reaped with FAIL, safely reachable remaining
+syntax checks may run for evidence, but scanner/harness runtime0.  Synthetic
+PASS earns no real-source or acceptance credit.
+
+# 11. Four independent reviews
+
+The review ownership is fixed and non-overlapping: Karen owns B_R1, subagent1
+owns B_R2, subagent2 owns B_R3, and subagent3 owns B_R4.  Each owner reads the
+same verified published Inspector V2 and harness copies once and returns the
+closed result schema `gate, reviewer_role, inspector_blob, harness_blob,
+result(PASS|FAIL|INCOMPLETE), checks[], evidence[], findings[]`.  `checks[]`
+contains every condition assigned below with its PASS/FAIL/UNKNOWN result;
+`evidence[]` is nonempty and gives concrete source locations and reasoning for
+every check without copying raw secret/private data.  PASS requires every
+required check PASS, evidence nonempty, and findings empty.  FAIL requires at
+least one concrete violated condition and finding; unavailable or unproved work
+is INCOMPLETE.  The Stage B receipt preserves all four checks/evidence arrays.
+Reviews continue to completion even if QA or an earlier review fails.  No review
+retry, cross-owner substitution, or artifact edit.
+
+B_R1
+Root-only argv; fixed-root source binding; no cwd/env/search/fallback; every
+root/parent component directory/non-symlink/direct-realpath; source regular/
+non-symlink with mode/size and lstat/fstat dev+ino identity; O_RDONLY|O_NOFOLLOW|
+O_NONBLOCK; positional whole-buffer read exact1; EOF exact1; close exact1; raw
+identity after close; main guard; import-side source access0; no V1 regression.
+
+B_R2
+One terminal owner in Inspector and emitted target; bounded complete canonical
+output before emission; writeAll offset advancement; short writes accepted only
+until full capture; zero/noninteger/over-report/throw/final-short typed STOP;
+pre-emission stdout0; partial stdout nonauthoritative; allowlisted sanitized
+stderr; channel-unreportable STOP; no raw stack/path/body/secret leakage.
+
+B_R3
+Exact C01 version/self declarations; C02-C04 independently converge on fixed
+name/ordered params/range/old hash; quote-safe templates; C03 no trim/coercion
+and matching close at exact final byte with closed lexical states; C04 primitive
+strings, one whole literal, quote-specific escaping, full consumption, exact
+marker; C01-C04 occurrence1/nonoverlap; exact five gaps with per-gap and
+aggregate equality/hash; emitted target independently re-extracted,
+reconstructed, and proved.
+
+B_R4
+One absolute normalized direct-realpath root; fixed source/target relative paths
+derive under it; target parent realpath/non-symlink/existing directory/direct-
+realpath; target ENOENT; one target-relative constant owns Add File header;
+patch-memory roundtrip; emitted-target direct write/apply/import/syntax/execute/
+network/child/eval/vm/cwd/env/search/private access0.  Harness imports the QA
+alias once after gates; production main remains0; real Inspector/source/exact4/
+target/V3 actions remain0.
+
+QA PASS is scanner syntax1 + Inspector syntax1 + harness syntax1 + scanner
+runtime1 + harness1 all PASS.  Authority technical gate PASS
+additionally requires reviews completed4/PASS4/FAIL0/INCOMPLETE0.
+
+# 12. Stage B result and GitHub publication
+
+After QA and all reviews, construct one exact review receipt.  It records the
+published identities, every QA invocation/result/capture metric, alias identity,
+each reviewer and evidence, aggregate, source0, technical/acceptance credit0,
+lifecycle, facts/inference/Karen judgment, and next action.
+
+Construct final owner4 by preserving Stage A bytes as exact prefixes.  Handoff,
+snapshot, and Plan append the actual PASS or STOP state without overclaim.
+Ledger appends exactly two rows: review receipt, then final Handoff postimage.
+
+Publish Stage B through current Rule11 using create_file for the exact-new review
+receipt then update_file for owner4, each with fresh target/preimage verification
+and the same no-resend reconciliation matrix as Stage A.  Direct-child, one
+commit, one tree, update_ref, and fixed commit count are not completion
+conditions.  Stage B completes only when current main contains review receipt
+add1 and final owner4 exact4, expected blobs/modes, missing0, different0,
+deleted0, and identified Karen Stage B union exact5/unauthorized0.  Normal identified Karen
+successor union is exact11/unauthorized0; unrelated other-actor paths are not
+silently attributed to Karen and do not alone defeat completion.
+
+If QA or review fails/incomplete after Stage A, Stage B still records that
+technical evidence as CLOSED_CONSUMED_STOP when the exact5 publication and final
+verification succeed.  A failed/unknown response is classified as confirmed
+success, no-effect, historical-mutation-visibility-unknown, mismatch, or unknown
+exactly as in Stage A with `STAGE_B_` terminal prefix.  Do not resend.  Where
+exact current preimages and never-attempted authorized paths permit, publish the
+separate STOP receipt and terminal owner4 postimages.  Otherwise preserve the
+actual subset and close durability INCOMPLETE.  Never overwrite or relabel a
+confirmed path.
+
+# 13. STOP routing
+
+Before activation: ineffective approval or package/authority identity failure
+means activation0/consumption0/write0.
+
+After activation but before Stage A PASS: any rule/owner/lineage/target drift,
+bundle fetch/schema/attestation failure, public-safety failure, tree/commit/head
+verification failure, connector unknown state, or unauthorized effect stops
+technical work.  If the current exact preimages make it safe, the durable STOP
+set is the exact approved authority bytes (add only if still absent and its
+branch mutation was never attempted), one
+sanitized body-free technical STOP receipt at PRE_STAGE_STOP_ADD_EXACT1, and
+terminal owner4 postimages preserving each actual current byte prefix.  Every
+member uses current Rule11 sequential reflection, fresh target checks, and no
+resend.  If any required preimage is unsafe/unknown or a STOP write is unknown,
+preserve the actual GitHub subset and set durability INCOMPLETE.  No local file
+is presented as the durable result.
+
+If any earlier normal publication attempted the authority path and reconciliation
+finds it absent or unknown, the STOP branch must not resend that path.  It may
+publish only the never-attempted STOP receipt and safe owner4 terminal postimages;
+the missing authority is recorded as partial durability INCOMPLETE.
+
+After Stage A PASS: QA or review failure is durably owned by Stage B exact5.
+Stage B publication failure uses the rule in section 12.  No STOP branch may
+delete, reset, overwrite, conceal, or relabel already published technical
+artifacts.  No failure permits authority reuse, test retry, review retry, bundle
+refetch, artifact regeneration, source access, or automatic progression.
+
+MUTUALLY_EXCLUSIVE_TERMINALS_AND_PRECEDENCE
+Choose the first applicable item; later conditions may appear only as
+subterminals:
+1. UNAUTHORIZED_EFFECT_STOP;
+2. FINAL_REMOTE_VERIFICATION_MISMATCH_OR_UNKNOWN_STOP;
+3. STAGE_B_PUBLICATION_NO_EFFECT_OR_MISMATCH_OR_UNKNOWN_STOP;
+4. HISTORICAL_MUTATION_VISIBILITY_UNKNOWN_STOP;
+5. B_R1_FAIL, B_R2_FAIL, B_R3_FAIL, B_R4_FAIL, or
+   PREEXEC_STATIC_REVIEW_INCOMPLETE (lowest gate number wins among failures);
+6. NODE_CHILD_PROCESS_STATE_UNPROVED_STOP;
+7. SYNTHETIC_HARNESS_FAIL;
+8. PREIMPORT_SCAN_FAIL or PREIMPORT_SCANNER_IDENTITY_OR_SYNTAX_STOP;
+9. INSPECTOR_SYNTAX_FAIL or HARNESS_SYNTAX_FAIL;
+10. NODE_RUNTIME_IDENTITY_STOP or QA_MATERIALIZATION_STOP;
+11. ROLE_BLOB_TRANSPORT_STOP or
+    STAGE_A_PUBLICATION_NO_EFFECT_OR_MISMATCH_OR_UNKNOWN_STOP;
+12. PUBLIC_SAFETY_UNPROVED_STOP;
+13. BUNDLE_OR_BLOB_ATTESTATION_STOP, BUNDLE_SCHEMA_STOP, or
+    BUNDLE_FETCH_OR_IDENTITY_STOP;
+14. TARGET_PREIMAGE_STOP, LINEAGE_DRIFT_STOP, or CURRENT_RULE_DRIFT_STOP;
+15. APPROVED_AUTHORITY_IDENTITY_STOP.
+
+For each Stage A/B/STOP connector response, exact target visible with Karen
+locator is confirmed; exact preimage with effect0 is NO_EFFECT; exact expected
+bytes without attributable locator is HISTORICAL_MUTATION_VISIBILITY_UNKNOWN;
+different/mixed bytes is MISMATCH; unresolved head/path is UNKNOWN.  STOP write
+unknown is STOP_DURABILITY_UNKNOWN with resend0 and durability INCOMPLETE.
+
+# 14. Final gates and counters
+
+PASS requires all of the following:
+- approval ZIP members/identity PASS = exact2/exact2;
+- authority/scanner semantic reads by Karen = 1/1; delegated reads = 0/0;
+- authority activation/consumption/reactivation/reuse = 1/1/0/0;
+- current-rule reads/identity PASS = 16/16;
+- owner4 initial full reads/identity PASS = 4/4;
+- finite-lineage presence/identity PASS and f785 receipt read = 4/4 and 1;
+- bundle fetch/raw roundtrip/JSON parse = 1/1/1;
+- artifact blob attestations/PASS = 4/4;
+- bundle fetch retry = 0; ROLE2/3/4 body-suppressed blob fetch/retry/model exposure = 3/0/0;
+- Stage A add6/modify4/union10 remote PASS;
+- Stage B add1/modify4/union5 remote PASS;
+- normal unique successor union exact11/unauthorized0;
+- normal explicit create_blob/tree/commit operations = 5/0/0
+  (bundle raw1 and artifact attestation4);
+- normal branch mutation invocations/PASS = 15/15
+  (Stage A create_file6/update_file4; Stage B create_file1/update_file4);
+  branch commit count = actual;
+- connector unknown-response resend/confirmed-path resend/update_ref/force = 0/0/0/0;
+- scanner/Inspector/harness syntax PASS = 1/1/1;
+- pre-import scanner invocation/PASS/retry = 1/1/0;
+- harness invocation/PASS/retry = 1/1/0;
+- reviews completed/PASS/FAIL/INCOMPLETE/retry = 4/4/0/0/0;
+- reviewer assigned Inspector/harness semantic reads = 4/4;
+- published scanner/Inspector/harness Git-body transports = 1/1/1;
+- public-safety fresh scans/PASS/inherited ROLE scans = 12/12/3;
+- specification-source materialize/stat/hash/open/read/execute = 0;
+- real Inspector, canonical real output, technical exact4, target, V3 = 0;
+- mashos-api Karen write0; and
+- fresh final Cocolon head/authorized path/blob/mode verification PASS.
+
+PASS_STATE
+AUTHORITY_STATE=CLOSED_CONSUMED_PASS
+TERMINAL=INSPECTOR_V2_PREEXEC_STATIC_PASS
+DURABLE_RECORD_STATUS=VERIFIED
+INSPECTOR_V2_STATE=FROZEN_PUBLISHED_QA_PASS_PREEXEC_STATIC_PASS_NONEXECUTED_NONCREDIT
+PREPARATION_DEPENDENCY=INSPECTOR_V2_GATE_CLOSED
+CYCLE001_DEPENDENCY_PROGRESS=INSPECTOR_V2_GATE_CLOSED
+V16_TECHNICAL_CREDIT=0
+CYCLE001_ACCEPTANCE_CREDIT=0
+NEXT_ACTION=SEPARATE_MASH_APPROVED_ONE_READ_EXACT4_AND_STANDALONE_PROGRAM_PREPARATION_AUTHORITY
+NEXT_AUTHORITY_APPROVED=FALSE
+AUTOMATIC_PROGRESSION=FALSE
+
+STOP_STATE
+AUTHORITY_STATE=CLOSED_CONSUMED_STOP
+PREPARATION_DEPENDENCY=OPEN
+DURABLE_RECORD_STATUS=VERIFIED_OR_INCOMPLETE_AS_ACTUAL
+AUTOMATIC_RETRY=FALSE
+AUTOMATIC_REUSE=FALSE
+AUTOMATIC_REACTIVATION=FALSE
+AUTOMATIC_PROGRESSION=FALSE
+
+UNCHANGED_TECHNICAL_STATE
+V15=STATIC_ONLY_STOP
+V15_RECEIPT=CLOSED_UNCONSUMED
+FULL_R1=UNKNOWN_PRESERVED
+RUNTIME_READY=FALSE
+FORMAL_SOURCE_V4=MATERIALIZED_FALSE_AND_UNPROVEN
+CYCLE001=NOT_ACCEPTED
+
+# 15. Scope exclusions
+
+This authority does not materialize, stat, realpath, hash, open, read, EOF,
+close, or execute the specification-source path or body.  It does not access
+candidate windows, run the real Inspector, create canonical real-source output,
+prove technical C01-C04 exact4, create or execute the standalone transformer,
+access or create V3, read private V15 inputs, execute BBEB/carrier, change
+mashos-api, or claim runtime/product/UX/V16-technical/Cycle001-acceptance credit.
+
+# 16. Approval contract
+
+Mash approval must name this exact AUTHORITY_ID, this authority's exact SHA-256,
+and the exact approval ZIP SHA-256, with the same-message Work Ultra attestation
+defined in section 3.  Approval authorizes only sections 8 through 14.  It does
+not approve the next exact4/program-preparation authority or any later action.
