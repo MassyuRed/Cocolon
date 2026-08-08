@@ -38885,3 +38885,33 @@ No scanner or Inspector defect is inferred. The controller error and prohibited 
 ### Next boundary
 
 Only an exact-new, separately Mash-approved successor may proceed. It must create, freeze, fully review, syntax-check, and encoding-primitive-preflight the bounded diagnostic before any scanner/Inspector source read; only after that preflight may the successor fresh-read each input exact1 as its own attempt and return to boundary1. V2 retry/reactivation/reclassification, preservation-only work, and automatic progression remain prohibited.
+
+## 2026-08-09 CURRENT FINAL-ATTEMPT CHECKPOINT — INSPECTOR V2 BOUNDARY1 PATH FAILED / RETIREMENT PENDING FINAL HANDOFF
+
+Durability state: `PROVISIONAL_PENDING_FINAL_HANDOFF`.
+
+### Confirmed facts
+
+- Mash approved exact authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_BOUNDARY1_FINAL_A_OR_B_DIRECT_VERIFICATION_AND_GATE_CLOSURE_AUTHORITY_V1`, SHA-256 `d9a692c22c056474107811f84e89a7ad3732d6b181138be86027474fdab4a4da`, in the same active Work UI attested `Ultra` and not Chat. Approval, activation, and consumption are `exact1 / exact1 / exact1`; this was the final exact1 attempt for the current Inspector V2 boundary path.
+- Entry Cocolon commit/tree was `92bc96b18c16c4bebea36dd8cb8ab0151935ef43 / a060583e36d8907fc18dfca3aa425ce4ad2e44bc`. Authority publication commit/tree/blob was `542f26bedb104136cf6ebef09f193140a9fbbfb5 / 0babc00e4747d34c0538129cc6889f884418705d / 7e2becbafef0d93fa6fdd8a94a4fa33a8273cf15`. The preflight receipt reached verified `PREFLIGHT_PASS` at commit/blob `3a85d3a7e48cd9c3449db96097654629d0ccbe3e / ee96145e99b152af4462ccfdb5928c19d2710c3c`.
+- Runtime/encoding, Git-object capture, all three output-capture profiles, Karen plus three-role synthetic review delivery, and GitHub create/update postverification passed before technical body access. Scanner, Inspector, harness, and frozen B_R contract were then retained from their pinned Git blobs once each with exact identities.
+- The pinned scanner v1 was invoked once with retained Inspector/harness argv. It exited2, emitted stdout0, timed out0, overflowed0, and was determinately reaped. Actual stderr was 20 bytes/SHA-256 `21aa06dfdd0858e6c83d2873d9f3412eca83208a15a9c3cf5faaab16526fb1c1`, not the authority-required 37 bytes/SHA-256 `6c96e04cd0944dcce44723a4a7d513a662eed5441c89e838c7a1626b1ad418b5`.
+- Under authority section8 this mismatch cannot prove either a scanner defect or an Inspector defect and fixes provisional class `WORK_PROCEDURE_OR_ENVIRONMENT_DEFECT`. Scanner/Inspector localization review, scanner-v2 correction/publication, syntax3, B_R1-B_R4 reviews, scanner-v2 execution, and harness71 are all0 or `NOT_RUN_AFTER_WORK_CLASS`; rerun/retry/fallback are0.
+- Body-free result receipt is fresh-verified at commit/tree/blob/SHA-256 `e230a8556f78fd332655e373c7ce79be069f99ad / ffc3652d490e01aa5b3514902618040fa6a05adc / b40c939d21145434f78d3207077c2a7db6c3bbac / bec23f72015eb06162b21ddeab7fde79bfc886f906c11b4a234a2a131b965b43`, 6365 bytes, 90 LF, CR0, final-LF true. It records `FINAL_CLASS=PENDING_DURABILITY` and receives no credit.
+- mashos-api remains observed at commit/tree `65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981`, write0.
+
+### Provisional disposition
+
+- provisional class: `WORK_PROCEDURE_OR_ENVIRONMENT_DEFECT`
+- intended final authority state: `CLOSED_CONSUMED_STOP`
+- intended final gate: `CURRENT_INSPECTOR_V2_PATH_FAILED_RETIRED`
+- Inspector V2 gate: `OPEN_NOT_CLOSED`
+- remaining-boundary progress before/after/delta: `0/7 (0%) / 0/7 (0%) / +0`
+- V16 technical credit / Cycle001 acceptance credit: `0 / 0`
+- Cycle001: `NOT_ACCEPTED`; automatic progression: `false`
+
+Creating the authority and records, passing preflight, capturing files, and updating owners are not technical outcomes or progress. No real file was changed, and no responsible real file was proved.
+
+### Karen judgment and permitted future direction
+
+This current Inspector V2 path is permanently retired when the final Handoff is fresh-verified. No V4+, retry, continuation, or same-series authority may be created. Only one separately approved simplified direct-verification redesign outside this lineage may later be proposed; its creation or execution is not authorized here. There is no authorized next real-file correction because neither scanner nor Inspector was proved defective.
