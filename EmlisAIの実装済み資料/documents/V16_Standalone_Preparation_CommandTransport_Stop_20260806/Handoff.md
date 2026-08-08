@@ -280,3 +280,56 @@ The scanner proves a policy-terminal outcome but not its exact responsible sourc
 ### Karen judgment and next action
 
 This authority cannot be retried, reused, reactivated, or reclassified. The next exact-new authority must directly locate the forbidden-active-call cause without executing the Inspector, correct and freeze only the responsible artifact, replace the failed review transport with deterministic nonoverlapping byte-range coverage of the complete reviewed bytes, and run the published-byte QA plus B_R1-B_R4 once. A PASS there closes the first of seven remaining boundaries and raises progress from `0/7` to `1/7` (`+14.3` points). No preservation-only detour is authorized or needed.
+
+## 2026-08-08 Cycle001 Inspector V2 boundary1 — V2 final consumed-STOP handoff
+
+This section is the sole final lifecycle/progress owner for the authority identified below.
+
+### Authority lifecycle and repository identities
+
+- authority ID: `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_PREIMPORT_SCANNER_CAUSE_CORRECTION_AND_GATE_CLOSURE_AUTHORITY_V2`
+- authority SHA-256 / bytes / LF / CR / final-LF: `415eefed6f720330e7fc776e807f75b283f80a9df652ab764690bc2a947cf837 / 21773 / 51 / 0 / true`
+- Mash environment attestation: same active Work UI, `Ultra`, not Chat
+- approval / activation / consumption: `exact1 / exact1 / exact1`
+- accepted-entry Cocolon head/tree: `4bcf723a6aa0dca299646fe44d8b13b138b86943 / d80e5e878349ab111e6d9706fb8e085030376926`
+- authority publication commit/tree/blob: `859d561bd7f8aa373b381adf3db8e42e60d37666 / fd951e0f934be83020608c487011db2c900ff124 / 34093fd72cca2a9a5e6dae8c1267f47f7020a908`
+- lifecycle receipt commit/tree/blob/SHA-256: `870f1cb34d38fb534ede0a85d38d5cfe741ce60c / cc280520d1ed6af2d13fc60da7ff1513bead74e8 / 6fe62730bdb313dca02ca3d75493cebd5de4a15f / 46582e80b98cde23d89573609b828fb89ecf74af3f81d5b6c47a55f50ebe347b`
+- mashos-api observed head/tree/write: `65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981 / 0`
+- conditional failure receipt commit/tree/blob/SHA-256/bytes/LF/CR/final-LF: `7495982ac9298179690414477b4396196a273e36 / e7b8435b7c9eb86f87982e0809d69adb5213bcd7 / 92f3be6cb24ebdacb980d9ed99f1838c533351d8 / b61d2267f5d8c4f7da1434548165b0a07d95c0c213b5930e957aa86a745ab138 / 8910 / 96 / 0 / true`
+
+The conditional receipt was fresh-postverified before owner construction. Snapshot, Plan, and ledger complete candidates were frozen before the first owner update; the Handoff candidate was frozen before the ledger candidate. This Handoff is written only after Snapshot, Plan, and ledger each pass exact-path remote-byte postverification. Its presence at this suffix therefore records those three prerequisite owner states as `VERIFIED`; it does not embed the ledger candidate identity.
+
+### Confirmed incident facts and conservative counters
+
+1. Scanner v1 and Inspector V2 were each size-queried once and byte-read once from the already-fetched Git object database into ephemeral controller variables.
+2. Before byte validation, durable storage, or frozen materialization, the controller evaluated unavailable global `TextEncoder` and stopped with exact `ReferenceError: TextEncoder is not defined`. Retained scanner/Inspector buffers are `0 / 0`; the V2 same-buffer/no-refetch route became unavailable.
+3. Two later incident-audit assignments exceeded scope. Conservative total body-read counts, including the authorized initial reads, are scanner `5`, Inspector `5`, harness `4`, and frozen B_R authority `10`. Internal source snippet/range-emitting commands are `7`; complete-body emission is0; retained reusable full buffers are0.
+4. Diagnostic create/freeze/full review/syntax/run are `0/0/0/0/0`. Section5C classification is `NOT_REACHED`. Scanner false-positive proof, scanner-v2 create/review/publication, cause/correction receipt, normal terminal receipt v4, syntax3, B_R1-B_R4 valid formal review, corrected-scanner invocation, and harness invocation are all0.
+5. Inspector execution/import/modification; specification-source materialize/read/execute; technical real C01-C04/exact4; standalone target; V3; runtime/product/UX; app/API/DB/RN/Safety; and mashos-api writes are all0.
+6. No scanner defect, Inspector defect, or responsible range is established. No failed buffer, audit read, emitted snippet, or prior action may be reused as successor evidence.
+
+### Final terminal, credit, and progress
+
+- primary terminal: `PROHIBITED_TECHNICAL_SOURCE_REREAD_AND_PREMATURE_REVIEW_SOURCE_READ_STOP`
+- subterminal1: `STATIC_DIAGNOSTIC_INPUT_BUFFER_UNAVAILABLE_AFTER_EXACT1_FETCH`
+- subterminal2: `LOCAL_ORCHESTRATION_TEXTENCODER_UNAVAILABLE`
+- authority state: `CLOSED_CONSUMED_STOP`
+- Inspector V2 gate: `OPEN_STOPPED_NOT_CLOSED`
+- V16 technical credit / Cycle001 acceptance credit: `0 / 0`
+- remaining-boundary progress before / after / delta: `0/7 (0%) / 0/7 (0%) / +0 percentage points`
+- G0-G10 top-level state: unchanged
+- Cycle001: `NOT_ACCEPTED`
+- retry / reuse / reactivation / refetch-reread continuation / reclassification: all0
+- automatic progression: `false`
+
+V1 remains permanently `SUPERSEDED_UNAPPROVED_UNACTIVATED_UNCONSUMED_TECHNICAL_EFFECT0_GITHUB_WRITE0` and cannot be published or used. Review receipt v3's incorrect Node SHA-256 `e237a283a5677acb8d1ac1f21cf991403a2d8b3905f87b201490f27da4a19038` is additively superseded by `e237a2839d0cbdc9a9a2adda1a184afc0f5b20306ffbe923af5686550472d8a8` for the same direct regular file/path, 122466960 bytes, mode0755. The prior STOP and all credits remain unchanged.
+
+### Fact, inference, and Karen judgment
+
+- confirmed fact: lifecycle activation/consumption succeeded; the diagnostic never existed; buffers were lost; prohibited subsequent reads occurred; all technical closure and credit counters remain0.
+- inference: no responsibility is inferred for scanner v1 or Inspector V2 from the orchestration and audit failures.
+- Karen judgment: V2 is irreversibly consumed STOP. Recording the scope violations without credit or reuse is required to preserve the evidence chain.
+
+### Next separate approval boundary
+
+The next authority must be exact-new and separately approved by Mash. Before reading scanner or Inspector, it must create, freeze, fully review, syntax-check, and runtime-primitive-preflight a bounded diagnostic, explicitly using a verified `Buffer` path or an explicitly imported encoding primitive rather than assumed global `TextEncoder`. Only after that preflight passes may the successor fresh-read scanner v1 and Inspector V2 exact1 each as its own non-retry attempt and return directly to boundary1. PASS may close only boundary1 and move `0/7` to `1/7`; exact4/standalone preparation and all later boundaries remain separately controlled.
