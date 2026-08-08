@@ -250,3 +250,33 @@ Authority state: `CLOSED_CONSUMED_STOP`. Terminal: `STAGE_A_PUBLICATION_MISMATCH
 ### Required recovery
 
 A distinct Mash-approved authority must bind the actual mismatched snapshot blob, rebuild the correct current owner from the immutable original prefix plus actual execution facts using chunk-safe full-byte transport, complete the unattempted owner reflection, and resume the same QA/review gate without regenerating or republishing the already exact Stage A add6 artifacts.
+
+## 2026-08-08 Cycle001 Inspector V2 gate continuation — QA/review STOP
+
+### Confirmed facts
+
+- Approved authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_SNAPSHOT_CORRUPTION_REPAIR_AND_GATE_CONTINUATION_AUTHORITY_V1`, SHA-256 `7284fffefa2ad4d2568877e1b47d9e4fcb9c61cb2b3ff1852d4eb1e6e5c4ec72`, was activated and consumed exactly once in the attested Work Ultra session.
+- The malformed snapshot was replaced by the authorized complete reconstruction at commit `d9481f1b1a7bd86c5b92923f02521f0a5dfaa7b8`; repaired blob/SHA-256/bytes are `ce2582d6325133f82393ee81adb1fc2d573908f1` / `ce73d03677ac1dbd84729d4655c4bce96316d4e623f6205e993814d19fa655df` / `2345753`. The malformed predecessor commit/object remain immutable history.
+- Recovery receipt commit/blob/SHA-256 is `39f3c8fe7edf60d1387568c32f12a8dc7ab4607e` / `0b0640c62ccba1e9f45d4fdf91ac99d3f10568ce` / `93087ab51a3281b70316b2396c0590e282ee25a53277b4e3b5ed92d6c40ab479`.
+- Fixed Node syntax checks for scanner, Inspector alias, and harness each passed once. The frozen pre-import scanner then returned exit2 and exact terminal `STOP INSPECTOR_FORBIDDEN_ACTIVE_CALL`; stderr was 37 bytes, SHA-256 `6c96e04c800506f24e189179858415610ce14665559278d738a66907f69bc3f2`; stdout was0.
+- The scanner failure prohibited harness execution, so harness invocation remained0. No QA rerun, fallback, or retry occurred.
+- B_R1/B_R2/B_R3/B_R4 results are `PASS / INCOMPLETE / INCOMPLETE / INCOMPLETE`. Each independent incomplete came from bounded tool-output omission during its single permitted read; no reread or reassignment occurred and no source defect is inferred from those delivery failures.
+- Review receipt v3 commit/blob/SHA-256/bytes is `031527458c8e9d953dcda316a1a3ed52f9a93f39` / `0abab74a26e2688f05eec1506df95934d2a80e71` / `3faeb2ac5a7de87b2a6e2472064935fe6e0985e332286fa20349380388686afa` / `8155`.
+
+### Terminal state and counters
+
+- primary terminal / QA subterminal: `PREEXEC_STATIC_REVIEW_INCOMPLETE / PREIMPORT_SCAN_FAIL`
+- authority state / Inspector V2 gate: `CLOSED_CONSUMED_STOP / OPEN_STOPPED_NOT_CLOSED`
+- reviews PASS/FAIL/INCOMPLETE: `1/0/3`
+- real Inspector, specification-source, technical exact4, standalone target, V3, runtime, product, UX, and mashos-api actions: all0
+- V16 technical credit / Cycle001 acceptance credit: `0 / 0`
+- remaining-boundary progress before/after/delta: `0/7 (0%) / 0/7 (0%) / +0 percentage points`
+- Cycle001: `NOT_ACCEPTED`; automatic progression: `false`
+
+### Inference
+
+The scanner proves a policy-terminal outcome but not its exact responsible source line or whether the smallest defect belongs to the Inspector or scanner rule. The review incompletes prove only that the one-read delivery method did not expose complete review evidence.
+
+### Karen judgment and next action
+
+This authority cannot be retried, reused, reactivated, or reclassified. The next exact-new authority must directly locate the forbidden-active-call cause without executing the Inspector, correct and freeze only the responsible artifact, replace the failed review transport with deterministic nonoverlapping byte-range coverage of the complete reviewed bytes, and run the published-byte QA plus B_R1-B_R4 once. A PASS there closes the first of seven remaining boundaries and raises progress from `0/7` to `1/7` (`+14.3` points). No preservation-only detour is authorized or needed.
