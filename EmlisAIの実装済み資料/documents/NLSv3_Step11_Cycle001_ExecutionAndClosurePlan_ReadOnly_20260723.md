@@ -18023,3 +18023,32 @@ Review receipt v3 is commit/blob/SHA-256 `031527458c8e9d953dcda316a1a3ed52f9a93f
 ### Necessary next work
 
 The next exact-new authority must combine material correction and gate execution: statically locate the forbidden-active-call cause; correct and freeze only the responsible scanner or Inspector artifact; define complete, deterministic, nonoverlapping byte-range delivery for each review so truncation cannot hide regions; and execute one published-byte QA plus B_R1-B_R4 cycle. Its PASS closes boundary1 and raises remaining-boundary progress from `0/7` to `1/7` (`14.3%`, `+14.3` points). It must not perform preservation-only work or access the specification source, real Inspector, exact4, target, or V3 before the repaired pre-execution gate passes.
+
+## 2026-08-08 Cycle001 Inspector V2 boundary1 — V2 consumed STOP
+
+Durability state: `PROVISIONAL_PENDING_FINAL_HANDOFF`.
+
+### Activated authority and confirmed incident
+
+- Authority `SEPARATE_MASH_UI_ATTESTED_WORK_ULTRA_CYCLE001_INSPECTOR_V2_PREIMPORT_SCANNER_CAUSE_CORRECTION_AND_GATE_CLOSURE_AUTHORITY_V2`, SHA-256 `415eefed6f720330e7fc776e807f75b283f80a9df652ab764690bc2a947cf837`, was approved, activated, and consumed `exact1 / exact1 / exact1` in the same Work UI attested Ultra/not-Chat.
+- Accepted entry Cocolon head/tree: `4bcf723a6aa0dca299646fe44d8b13b138b86943 / d80e5e878349ab111e6d9706fb8e085030376926`. Section5B entry head/tree after durable lifecycle publication: `870f1cb34d38fb534ede0a85d38d5cfe741ce60c / cc280520d1ed6af2d13fc60da7ff1513bead74e8`. mashos-api remained `65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981`, write0.
+- The first authorized scanner/Inspector reads completed only into ephemeral variables. `ReferenceError: TextEncoder is not defined` occurred before validation and retention, leaving the required same frozen buffers unavailable.
+- Subsequent incident-audit commands performed prohibited further reads and premature review-source reads. Conservative total body reads are scanner `5`, Inspector `5`, harness `4`, and B_R authority `10`; snippet/range-emitting commands are `7`; complete-body emission and retained reusable buffers remain0.
+- Conditional failure receipt commit/tree/blob/SHA-256 is `7495982ac9298179690414477b4396196a273e36 / e7b8435b7c9eb86f87982e0809d69adb5213bcd7 / 92f3be6cb24ebdacb980d9ed99f1838c533351d8 / b61d2267f5d8c4f7da1434548165b0a07d95c0c213b5930e957aa86a745ab138`.
+
+### Gate and Plan disposition
+
+- primary terminal/state: `PROHIBITED_TECHNICAL_SOURCE_REREAD_AND_PREMATURE_REVIEW_SOURCE_READ_STOP / CLOSED_CONSUMED_STOP`
+- subterminals: `STATIC_DIAGNOSTIC_INPUT_BUFFER_UNAVAILABLE_AFTER_EXACT1_FETCH / LOCAL_ORCHESTRATION_TEXTENCODER_UNAVAILABLE`
+- Inspector V2 gate: `OPEN_STOPPED_NOT_CLOSED`
+- diagnostic/classification/scanner-v2/cause receipt/normal receipt/QA/B_R1-B_R4 formal review/harness/real Inspector/specification source/exact4/target/V3/runtime/product/UX/mashos-api technical action: all0 or `NOT_REACHED`
+- V16 technical credit / Cycle001 acceptance credit: `0 / 0`
+- remaining-boundary progress before/after/delta: `0/7 (0%) / 0/7 (0%) / +0` points
+- G0-G10 top-level state: unchanged; Cycle001 `NOT_ACCEPTED`
+- retry/reuse/reactivation/reclassification/automatic progression: `0/0/0/0/false`
+
+V1 remains permanently `SUPERSEDED_UNAPPROVED_UNACTIVATED_UNCONSUMED_TECHNICAL_EFFECT0_GITHUB_WRITE0`. The Node SHA correction from `e237a283a5677acb8d1ac1f21cf991403a2d8b3905f87b201490f27da4a19038` to `e237a2839d0cbdc9a9a2adda1a184afc0f5b20306ffbe923af5686550472d8a8` is additive for the same direct file/path/122466960 bytes/mode0755 and grants no credit.
+
+### Necessary next work
+
+A separate exact-new Mash-approved successor must prebuild, freeze, fully review, syntax-check, and primitive-preflight its bounded diagnostic before any scanner/Inspector input read. It must use an explicitly verified `Buffer` path or explicitly imported encoding primitive, not an assumed global `TextEncoder`. After preflight PASS only, it may fresh-read the two inputs exact1 each as the successor's own attempt and return directly to this same boundary1 cause-correction/gate-closure contract. Exact4/standalone preparation, V3, V16 synthetic, remaining Full R1, runtime/product/UX, and final acceptance remain separate boundaries.
