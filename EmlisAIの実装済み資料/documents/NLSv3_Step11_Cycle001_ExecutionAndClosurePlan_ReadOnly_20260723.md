@@ -18365,3 +18365,39 @@ This checkpoint is exact6: new Result/Receipt/Handoff plus append-only Plan/07/0
 re-fetch it and rederive the same current-session runtime identity before consuming the user's
 distinct post-READY exact24 authority. Full52, exact100, G6 Product Read, and acceptance remain
 outside scope.
+
+## 2026-08-09 — G5 Gate C exact24 protected-harness causal RED STOP
+
+The READY cut at Cocolon `44fca3acfe0457979b7daaeee183d04dbafdc7d7` was
+postverified. Gate C statically rederived the same runtime, source, candidate,
+protected-test, and ordered-exact24 identities. A first launcher process stopped
+at repository-conftest bootstrap before target import/collection/call because a
+transitive plugin dependency was outside the frozen exact5 runtime. The explicit
+no-conftest corrected launch then executed the frozen exact24 once.
+
+```text
+exact24: 22 PASS / 2 FAIL / exit1 / 904.56 seconds
+failure1: REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED
+failure2: HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED
+G5 machine GREEN / production publish: 0 / 0
+protected-test change: 0
+full52 / exact100 / G6 / acceptance: 0 / 0 / 0 / 0
+```
+
+Body-free diagnosis established that normal production evidence is GREEN:
+contexts10, bindings12, atoms38, modifiers22, declared-head-first12/12,
+role/atom counters exact, Reception11/11, and unparsed/ambiguous0/0. The common
+failure is the frozen G4 controlled helper: its patched public authority builder
+is called once directly and once again by validator per context. Captured20 is
+strict-zipped with contexts10, raising `ValueError`; the outer fail-close returns
+zero tuple exact11.
+
+No safe correction exists inside the G5 mutable production exact3. A test-aware
+production global-state workaround was rejected. The exact24 authority is closed
+at `G5_GATE_C_EXACT24_PROTECTED_HARNESS_CAPTURE_CARDINALITY_CAUSAL_RED_STOP`.
+A separately authorized protected G4 helper correction/refreeze is required
+before any new Gate C execution. G6 and Cycle001 acceptance remain unstarted.
+
+Durable owners are Result blob `24dfbd747aa4a65dcd055f242a2cbf1983405c14`,
+Receipt blob `e6b1a66716d21f8a3fb66aea9f735ded9d63ac8c`, and Handoff blob
+`d4524b71a877044089612c764ecfe18e88dfc0a0`.

@@ -39094,3 +39094,39 @@ JSON role smoke then ran exact1 and passed. Current detailed owners are Result b
 `0e26959f85c18ca50d02ff06de0dcce8fd226a36`, and Handoff blob
 `a120b4f2886962591267524b7047b109a866fd02`. The first unfinished gate is now
 `G5_GATE_C_EXACT24_ONE_SHOT`; full52, exact100, G6, and acceptance remain untouched.
+
+## 2026-08-09 current checkpoint — G5 Gate C protected-harness causal RED
+
+Gate C rederived the READY runtime/source identities and executed the frozen
+ordered exact24. The classified target result is 22 PASS / 2 FAIL in 904.56
+seconds. The two public reason codes are
+`REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED` and
+`HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED`.
+
+The G5 candidate itself has complete body-free GREEN evidence: 10 contexts,
+12 bindings/heads, 38 atoms, 22 construction modifiers, four typed dependents,
+exact role/atom/Reception counters, and zero unparsed/ambiguous rows. The shared
+failure is a frozen G4 helper defect. A patched public authority build is invoked
+twice per context—directly and through validator—so captured20 cannot be
+strict-zipped with contexts10. `ValueError` is caught and projected to zero tuple
+exact11, failing both final nodes independently of the production exact3.
+
+```text
+state: G5_GATE_C_EXACT24_PROTECTED_HARNESS_CAPTURE_CARDINALITY_CAUSAL_RED_STOP
+mashos-api remote change / production publish: 0 / 0
+protected-test change: 0
+G5 machine GREEN: 0
+full52 / exact100 / G6 / acceptance: 0 / 0 / 0 / 0
+automatic progression: false
+```
+
+The first launcher observation stopped before target collection at a conftest
+plugin dependency boundary; it is disclosed separately and not counted as the
+target result. No install, runtime repair, fallback runtime, or interpreter
+switch followed. The corrected no-conftest launch produced the sole collected
+exact24 result above.
+
+Durable owners are Result blob `24dfbd747aa4a65dcd055f242a2cbf1983405c14`,
+Receipt blob `e6b1a66716d21f8a3fb66aea9f735ded9d63ac8c`, and Handoff blob
+`d4524b71a877044089612c764ecfe18e88dfc0a0`. A separately authorized protected
+G4 helper correction/refreeze is required before any new Gate C execution.

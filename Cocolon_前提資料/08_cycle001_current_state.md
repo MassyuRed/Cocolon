@@ -669,3 +669,52 @@ the required canonical role smoke itself ran exact1. Durable owners are Result b
 `a120b4f2886962591267524b7047b109a866fd02`, and append-only Plan/07/08.
 The next action is only Gate C exact24 after remote postverification. Do not run full52, exact100,
 G6 Product Read, or Cycle001 acceptance.
+
+## 11.4 Current override — G5 Gate C protected-harness causal RED (2026-08-09)
+
+The Gate B READY checkpoint was remotely postverified and Gate C was consumed.
+The frozen ordered exact24 target produced 22 PASS / 2 FAIL in 904.56 seconds.
+G5 machine GREEN is not established and the production candidate is not on
+`mashos-api/main`.
+
+```text
+current state:
+G5_GATE_C_EXACT24_PROTECTED_HARNESS_CAPTURE_CARDINALITY_CAUSAL_RED_STOP
+
+mashos-api remote main:
+b0a8c70e5cec08581678b98f2e21571d17674d91
+
+candidate / protected-test blobs:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+25f302a35d9e00df96f69d2eca26cc3caccc0e35
+
+exact24:
+22 PASS / 2 FAIL
+
+production normal evidence:
+OWNER_GREEN / RECOMPOSITION_GREEN / DECLARED_HEAD_12_OF_12
+
+controlled failure:
+CAPTURED_AUTHORITY_20_VS_CONTEXT_10_STRICT_ZIP_VALUE_ERROR_TO_ZERO11
+
+G5 machine GREEN / production publish:
+0 / 0
+
+full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+The protected G4 controlled helper captures both the direct authority build and
+the validator rebuild for every context. Its strict zip therefore fails before
+returning the otherwise valid controlled production evidence. No legitimate
+fix is available within the mutable G5 exact3 bodies, and no production
+global-state workaround was introduced.
+
+Durable owners are Result blob `24dfbd747aa4a65dcd055f242a2cbf1983405c14`,
+Receipt blob `e6b1a66716d21f8a3fb66aea9f735ded9d63ac8c`, and Handoff blob
+`d4524b71a877044089612c764ecfe18e88dfc0a0`. The first required change is a
+separately authorized protected G4 helper correction/refreeze. No new Gate C,
+G6 Product Read, or Cycle001 acceptance follows automatically.
