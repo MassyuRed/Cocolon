@@ -1,6 +1,6 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-08-07
+revision_date: 2026-08-09
 normative_status: CURRENT_EXECUTION_GATE
 general_rule_owner: CURRENT_RULES.md
 
@@ -86,7 +86,21 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] write後のremote bytes / changed paths / final headを確認する。
 - [ ] secret / body-full private evidenceをpublic GitHubへ出さない。
 
-## I. start verdict
+## I. Cycle001 current-state gate
+
+Cycle001作業の場合、次を全て満たす。
+
+- [ ] `../08_cycle001_current_state.md`を読んだ。
+- [ ] current Cocolon HEAD以後の関連changed pathsを確認した。
+- [ ] current recovery lineage、last reusable technical credit、first unfinished technical gateを一意に説明できる。
+- [ ] historical G1 / G2、selected R5、retired Inspector V2系列を次作業へ戻していない。
+- [ ] 今回の作業はfirst unfinished technical gateを直接完了するか、阻害する実source / test / receiptのexact pathを確定する。
+- [ ] authority、STOP、Handoff、snapshot、ledger、Planだけを増やす結果を成果にしていない。
+- [ ] 成功すると減る未完了条件と、直接扱う実ファイル / test / receiptを示した。
+
+一項目でも不成立なら、Workを起動せずauthorityを作らない。別のSTOP保存作業も作らず、Chat GPT-5.6 Proでcurrent GitHubを確認し、必要な場合だけ`08_cycle001_current_state.md`を補正する。
+
+## J. start verdict
 
 次のどちらかを明示する。
 
