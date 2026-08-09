@@ -718,3 +718,38 @@ Receipt blob `e6b1a66716d21f8a3fb66aea9f735ded9d63ac8c`, and Handoff blob
 `d4524b71a877044089612c764ecfe18e88dfc0a0`. The first required change is a
 separately authorized protected G4 helper correction/refreeze. No new Gate C,
 G6 Product Read, or Cycle001 acceptance follows automatically.
+
+## 11.5 Current override — corrected G4 helper refreeze (2026-08-10)
+
+Mash approved the separately required protected-helper correction/refreeze and
+continuation only through Gate C and the G5 GREEN judgment. The corrected
+protected test is remotely present at mashos-api
+`9db636e537955b63fe6f793df91970d031159c34`.
+
+```text
+current state:
+G4_PROTECTED_HELPER_CAPTURE_CARDINALITY_CORRECTED_REFROZEN_CAUSAL_RED_PASS
+
+protected-test blob / static tests / new tests:
+37cdfb8e28ee1ca371dc0af46f080e2028cad86a / 52 / 0
+
+ordered exact24:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+
+production change / runtime mutation / retry:
+0 / 0 / 0
+
+next:
+G5_GATE_C_EXACT24_ONE_SHOT_AFTER_THIS_EXACT6_POSTVERIFY
+
+full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+The exact5 runtime identity is unchanged. This checkpoint closes only the
+protected-helper correction/refreeze; Gate C activates after exact6 remote
+postverification and must turn the same frozen exact24 GREEN with the same
+bounded candidate. G6 remains unstarted and separately unauthorized.

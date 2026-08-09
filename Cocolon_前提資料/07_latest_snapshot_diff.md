@@ -39130,3 +39130,25 @@ Durable owners are Result blob `24dfbd747aa4a65dcd055f242a2cbf1983405c14`,
 Receipt blob `e6b1a66716d21f8a3fb66aea9f735ded9d63ac8c`, and Handoff blob
 `d4524b71a877044089612c764ecfe18e88dfc0a0`. A separately authorized protected
 G4 helper correction/refreeze is required before any new Gate C execution.
+
+## 2026-08-10 current checkpoint — G4 protected-helper corrected/refrozen
+
+The approved protected-test exact1 correction is on mashos-api main at
+`9db636e537955b63fe6f793df91970d031159c34`. The changed helper now projects
+the direct member of each direct/validator capture pair with `captured[::2]`.
+
+```text
+protected-test SHA-256 / blob:
+2828449a1663ca3ca89d9e91f575383ad6404112ca779c47fe3c36c8bc281f1b /
+37cdfb8e28ee1ca371dc0af46f080e2028cad86a
+prefix / suffix / cap: 408068 / 23959 / 24000
+test definitions / new definitions: 52 / 0
+ordered exact24: 22 PASS / 2 CAUSAL_RED
+duration: 1033.49 seconds
+production change: 0
+```
+
+Runtime continuity remained exact; mutation/install/repair/rematerialization,
+fallback, switch, and retry were0. This additive checkpoint is new3 plus
+append-only Plan/07/08 exact6. The new Gate C remains inactive until its remote
+postverification. Full52, exact100, G6, and acceptance remain0.

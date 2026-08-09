@@ -1,0 +1,155 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4.protected_helper_capture_cardinality_correction_refreeze.body_free.v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_G4_PROTECTED_HELPER_CAPTURE_CARDINALITY_CORRECTION_REFREEZE_20260810",
+  "date": "2026-08-10",
+  "body_free": true,
+  "public_safe": true,
+  "automatic_progression": false,
+  "authority": {
+    "decision_owner": "Mash",
+    "operation_owner": "Karen",
+    "kind": "MASH_EXPLICIT_PROTECTED_G4_HELPER_CORRECTION_REFREEZE_THEN_GATE_C_G5_ONLY",
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 1,
+    "retry_count": 0,
+    "reuse_count": 0,
+    "lifecycle": "CLOSED_CONSUMED_CAUSAL_RED_PASS"
+  },
+  "prior_stop": {
+    "cocolon_commit_sha1": "5684d3d5aeed0251bf042a53b7897e4123730ee8",
+    "state": "G5_GATE_C_EXACT24_PROTECTED_HARNESS_CAPTURE_CARDINALITY_CAUSAL_RED_STOP",
+    "historical_artifact_change_count": 0
+  },
+  "correction": {
+    "owner": "PROTECTED_G4_CONTROLLED_CAPTURE_HELPER",
+    "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+    "changed_line_count": 1,
+    "added_byte_count": 5,
+    "old_projection": "captured",
+    "new_projection": "captured[::2]",
+    "context_count": 10,
+    "public_builder_calls_per_context": 2,
+    "captured_preimage_count": 20,
+    "selected_postimage_count": 10,
+    "strict_zip_count": 10,
+    "production_side_workaround_count": 0
+  },
+  "mashos_api": {
+    "repository": "MassyuRed/mashos-api",
+    "parent_commit_sha1": "b0a8c70e5cec08581678b98f2e21571d17674d91",
+    "write_commit_sha1": "9db636e537955b63fe6f793df91970d031159c34",
+    "write_tree_sha1": "bf9489fb7811a0e3544aeff1dbadb239f059196c",
+    "final_main_sha1": "9db636e537955b63fe6f793df91970d031159c34",
+    "changed_path_count": 1,
+    "unauthorized_path_count": 0,
+    "deletion_count": 0,
+    "rename_count": 0,
+    "fast_forward": true,
+    "remote_prepared_byte_equality": true
+  },
+  "protected_test": {
+    "preimage_raw_sha256": "22d59c362210b7020eddf34c43bfbd74f0c83cd78e9c8326ab03abe12fe5f5d6",
+    "preimage_git_blob_sha1": "25f302a35d9e00df96f69d2eca26cc3caccc0e35",
+    "postimage_bytes": 432027,
+    "postimage_lf": 11322,
+    "postimage_cr": 0,
+    "postimage_final_lf": true,
+    "postimage_mode": "100644",
+    "postimage_raw_sha256": "2828449a1663ca3ca89d9e91f575383ad6404112ca779c47fe3c36c8bc281f1b",
+    "postimage_git_blob_sha1": "37cdfb8e28ee1ca371dc0af46f080e2028cad86a",
+    "immutable_prefix_bytes": 408068,
+    "immutable_prefix_raw_sha256": "ac457122e12e87c95fb0f5e9b2d8d2eddc5d7bce7430dcdfb14bdfc03c5a6b19",
+    "immutable_prefix_git_blob_sha1": "0b49a7ae02234a9b8741b6bc7d1c8580630e099b",
+    "suffix_bytes": 23959,
+    "suffix_byte_max": 24000,
+    "static_test_node_count": 52,
+    "new_suffix_test_node_count": 0
+  },
+  "ordered_exact24": {
+    "count": 24,
+    "distinct_count": 24,
+    "resolved_count": 24,
+    "preimage_bytes": 3557,
+    "preimage_lf": 24,
+    "material_rule": "EACH_FULL_REPOSITORY_ROOT_RELATIVE_NODE_ID_PLUS_LF",
+    "raw_sha256": "ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9",
+    "excluded_final_inverse_count": 7,
+    "excluded_disjoint": true
+  },
+  "base_production": {
+    "change_count": 0,
+    "bytes": 548866,
+    "lf": 14394,
+    "raw_sha256": "22295885af5c25d1738988a06846b3c70ab86f8d1ee88a6e6db7767e8774cd39",
+    "git_blob_sha1": "1c19b6c293e20a9094b9180fded8c167daaaf5eb"
+  },
+  "runtime_identity": {
+    "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+    "full_runtime_root_manifest_sha256": "5fbb81380303addd56f75b5e86b01fc3f891360530fc9d72d1847976178883cc",
+    "installed_file_manifest_sha256": "9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6",
+    "runtime_content_identity": "65cc52184bfed4e11f3e5a3686a49c0f6fef9b50040ac8c226e661e3b4039729",
+    "runtime_instance_observation_id": "3de94a120c3a58a72a2a6e3159233ffa47c1b4a9ca5c26373af94f9634a60066",
+    "continuity_chain_sha256": "264a6796dae8e1f05b8dd30557f3ed36f4b6c9b0b10ee07528de0db2ea6d929e",
+    "identity_change_count": 0
+  },
+  "execution": {
+    "target_invocation_count": 1,
+    "collected_count": 24,
+    "called_count": 24,
+    "pass_count": 22,
+    "causal_red_count": 2,
+    "unexpected_count": 0,
+    "error_count": 0,
+    "exit_code": 1,
+    "duration_seconds": 1033.49,
+    "causal_reds": [
+      "REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED",
+      "HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED"
+    ],
+    "full52_count": 0,
+    "exact100_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0
+  },
+  "effects": {
+    "protected_test_changed_path_count": 1,
+    "production_changed_path_count": 0,
+    "fixture_sample_case_change_count": 0,
+    "runtime_mutation_count": 0,
+    "install_count": 0,
+    "repair_count": 0,
+    "rematerialization_count": 0,
+    "g5_machine_green_count": 0,
+    "g6_product_read_count": 0,
+    "cycle001_acceptance_count": 0
+  },
+  "result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_ProtectedHelperCaptureCardinalityCorrectionRefreeze_Result_20260810.md",
+    "bytes": 5233,
+    "lf": 149,
+    "cr": 0,
+    "final_lf": true,
+    "mode": "100644",
+    "raw_sha256": "e812818270968b991ab06dba609c7fda0a5021cede0bd58ac0b478001455c79b",
+    "git_blob_sha1": "59681acd85b3edadf53dcf39f8ee6290997151a2"
+  },
+  "state": "G4_PROTECTED_HELPER_CAPTURE_CARDINALITY_CORRECTED_REFROZEN_CAUSAL_RED_PASS",
+  "next": {
+    "gate_c_authorized_count": 1,
+    "gate_c_activation_count_at_receipt": 0,
+    "gate_c_activation_condition": "THIS_EXACT6_GITHUB_POSTVERIFIED",
+    "required_projection": "24_PASS_0_FAIL",
+    "g6_state": "NOT_STARTED_UNAUTHORIZED",
+    "cycle001_status": "NOT_ACCEPTED"
+  },
+  "privacy": {
+    "absolute_runtime_path_published": false,
+    "raw_private_body_published": false,
+    "input_or_response_body_published": false,
+    "credential_or_environment_value_published": false
+  },
+  "receipt_logical_sha256_rule": "SHA256_UTF8_SORTED_COMPACT_JSON_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "08e23bcfff76ac842ad8c35cfdf9608170fab619a512ae81fd41362ed64ca0b3"
+}

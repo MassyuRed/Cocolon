@@ -18401,3 +18401,37 @@ before any new Gate C execution. G6 and Cycle001 acceptance remain unstarted.
 Durable owners are Result blob `24dfbd747aa4a65dcd055f242a2cbf1983405c14`,
 Receipt blob `e6b1a66716d21f8a3fb66aea9f735ded9d63ac8c`, and Handoff blob
 `d4524b71a877044089612c764ecfe18e88dfc0a0`.
+
+## 2026-08-10 — G4 protected-helper capture-cardinality correction/refreeze
+
+Mash explicitly approved the protected G4 helper correction/refreeze and
+continuation through Gate C and the G5 GREEN judgment only. The helper now
+selects `captured[::2]`, restoring direct-authority exact10 versus context
+exact10 without changing the immutable protected prefix, test denominator, or
+ordered exact24.
+
+```text
+mashos-api correction commit:
+9db636e537955b63fe6f793df91970d031159c34
+protected-test blob:
+37cdfb8e28ee1ca371dc0af46f080e2028cad86a
+protected-test bytes / suffix / static tests / new tests:
+432027 / 23959<=24000 / 52 / 0
+ordered exact24 hash:
+ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9
+base-production exact24:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+duration:
+1033.49 seconds
+```
+
+The RED signatures are unchanged and causal. Production, fixture, sample,
+Parser, Matcher, Hard Gate, API, DB, RN, and runtime bytes changed0. The same
+exact5 runtime manifests and instance were rederived before the one target
+execution; install/repair/rematerialization/fallback/retry were0.
+
+This checkpoint uses new Result/Receipt/Handoff plus append-only Plan/07/08
+exact6. The new Gate C activates only after remote prepared-byte equality,
+changed-path exact6/unauthorized0, and latest-main inclusion are freshly
+postverified. Its required result is the same candidate and exact24 at
+`24 PASS / 0 FAIL`. Full52, exact100, G6, and Cycle001 acceptance remain0.
