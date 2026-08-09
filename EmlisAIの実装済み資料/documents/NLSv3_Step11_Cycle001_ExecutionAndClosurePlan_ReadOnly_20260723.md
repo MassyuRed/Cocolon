@@ -18331,3 +18331,37 @@ The acquired wheel bytes and failed helpers are session-local noncredit and nonr
 closed authority. A corrected recovery requires a new Mash approval and fresh counters. It must
 not reuse or retry this helper, and it must not launch Gate C. Gate C exact24 remains unissued and separately approved only
 after a future READY checkpoint.
+
+## 2026-08-09 — G5 Gate B corrected exact7 fresh runtime READY
+
+Mash's explicit instruction to complete through Gate C and the G5 GREEN judgment supplied a new,
+distinct Gate B recovery authority. The closed prior helper/wheels were not reused. A fresh exact5
+acquisition/network process accepted five lock-matching wheels. The corrected lock-order exact7
+projection was 2,185 bytes and matched
+`f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e`.
+
+Fresh rematerialization exact1 produced distribution closure
+`4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c`.
+Version exact1 reported pytest 8.4.1. One pre-role helper guard stopped before direct-load because it
+used an LF path preimage; this zero-effect guard remains disclosed. The required compact-array role
+smoke then ran exact1, loaded required roles exact3, and called no public API. Owner-before and
+independent-after full runtime derivations matched exact19; the current instance is
+`3de94a120c3a58a72a2a6e3159233ffa47c1b4a9ca5c26373af94f9634a60066`.
+
+```text
+terminal: RUNTIME_READY_CURRENT_SESSION
+Gate B lifecycle: CLOSED_CONSUMED_READY
+target import / collection / call / invocation: 0 / 0 / 0 / 0
+Gate C exact24: ISSUED_INACTIVE_PENDING_READY_CHECKPOINT_POSTVERIFICATION
+G5 machine GREEN / G6 / Cycle001 acceptance: 0 / 0 / 0
+automatic progression: false
+
+Result blob: 5231f83b42d55676610a0476189cf1685ccba971
+Receipt blob: 0e26959f85c18ca50d02ff06de0dcce8fd226a36
+Handoff blob: a120b4f2886962591267524b7047b109a866fd02
+```
+
+This checkpoint is exact6: new Result/Receipt/Handoff plus append-only Plan/07/08. Gate C must
+re-fetch it and rederive the same current-session runtime identity before consuming the user's
+distinct post-READY exact24 authority. Full52, exact100, G6 Product Read, and acceptance remain
+outside scope.

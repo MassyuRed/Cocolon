@@ -1,0 +1,229 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g5.gate_b.corrected_exact7_fresh_runtime_ready_receipt.v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_G5_GATE_B_CORRECTED_EXACT7_FRESH_RUNTIME_READY_20260809",
+  "date": "2026-08-09",
+  "body_free": true,
+  "automatic_progression": false,
+  "authority": {
+    "id": "G5_GATE_B_CORRECTED_EXACT7_FRESH_RECOVERY_20260809",
+    "decision_owner": "Mash",
+    "operation_owner": "Karen",
+    "approval_kind": "MASH_EXPLICIT_COMPLETE_THROUGH_GATE_C_AND_G5_GREEN_DIRECTIVE",
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 1,
+    "classification_count": 1,
+    "close_count": 1,
+    "final_lifecycle": "CLOSED_CONSUMED_READY",
+    "prior_closed_authority_reuse_count": 0,
+    "runtime_repair_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0
+  },
+  "source_cut": {
+    "cocolon_parent_commit_sha1": "8396a96eed4ff30fcd18d358a27074aa8a6720cc",
+    "mashos_api_commit_sha1": "b0a8c70e5cec08581678b98f2e21571d17674d91",
+    "mashos_api_tree_sha1": "ea4bf747b5491c8d993fc2e92515dcffb0c897c3",
+    "detached_clean_before": true,
+    "detached_clean_after": true,
+    "formal_lock": {
+      "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+      "git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+      "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+      "logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4"
+    },
+    "production_git_blob_sha1": "1c19b6c293e20a9094b9180fded8c167daaaf5eb",
+    "production_raw_sha256": "22295885af5c25d1738988a06846b3c70ab86f8d1ee88a6e6db7767e8774cd39",
+    "protected_test_git_blob_sha1": "25f302a35d9e00df96f69d2eca26cc3caccc0e35",
+    "protected_test_raw_sha256": "22d59c362210b7020eddf34c43bfbd74f0c83cd78e9c8326ab03abe12fe5f5d6",
+    "ordered_exact24_sha256": "ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9",
+    "required_source_exact6_match_count": 6,
+    "required_source_mismatch_count": 0
+  },
+  "corrected_projection": {
+    "ordered_distribution_names": [
+      "iniconfig",
+      "packaging",
+      "pluggy",
+      "pygments",
+      "pytest"
+    ],
+    "ordered_row_keys": [
+      "distribution_version",
+      "installed_record_closure_sha256",
+      "normalized_distribution_name",
+      "selected_dependency_names",
+      "wheel_filename",
+      "wheel_record_sha256",
+      "wheel_sha256"
+    ],
+    "excluded_full_row_keys": [
+      "requires_dist",
+      "top_level_imports"
+    ],
+    "canonical_rule": "LOCK_ORDER_EXACT5_ROWS__SELECT_REQUIRED_EXACT7__OBJECT_KEYS_LEXICOGRAPHIC__UTF8_COMPACT_JSON_ARRAY__NO_FINAL_LF",
+    "preimage_bytes": 2185,
+    "sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+    "semantic_verification_count": 1,
+    "full_exact9_hash_consumption_count": 0
+  },
+  "acquisition": {
+    "requirements_raw_sha256": "4f7218509a20e42850afe75597f2abfdf447035001847621d4637faa246065f1",
+    "requirements_bytes": 473,
+    "requirements_lf": 5,
+    "configured_route_acquisition_count": 1,
+    "network_process_count": 1,
+    "exit_code": 0,
+    "accepted_wheel_count": 5,
+    "accepted_wheel_total_bytes": 1724842,
+    "accepted_wheel_manifest_sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d",
+    "rejected_candidate_count": 0,
+    "sdist_count": 0,
+    "build_count": 0,
+    "substitution_count": 0,
+    "unconfigured_source_count": 0,
+    "post_acceptance_package_index_access_count": 0,
+    "private_combined_output_bytes": 64,
+    "private_combined_output_sha256": "1b50500a0a75557c78c4a61d6829101964dc175512c078e26f35a78ae4d2213f"
+  },
+  "helpers": {
+    "semantic_verifier_sha256": "2f4ea15d105a89b590053fac017606020380240d1e313ab585736e0874107396",
+    "materializer_sha256": "4e36e23c23c3c079d845e239c187a05628218af1962af11fcc3804214d58357a",
+    "owner_identity_sha256": "beb4037f5f75f258fef2a2ea590294b0421917d66203c5a8932eddfd773c4b96",
+    "independent_verifier_sha256": "a419f7666748cbe65cb8c874ada9a8b2c318c9994dad6b1b8e0905ec5dd2be4c",
+    "role_probe_final_sha256": "f985f5aad4a6d93e658cd75dcefd863561473e38e3f4d406381fcbed369bf12a",
+    "helper_body_published": false
+  },
+  "materialization": {
+    "fresh_root_nonexistent_before": true,
+    "fresh_isolated_rematerialization_count": 1,
+    "materializer_execution_count": 1,
+    "internal_pip_process_count": 1,
+    "distribution_count": 5,
+    "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+    "record_closure_match_count": 5,
+    "runtime_materialization_state": "VERIFIED_EXACT5_LOCKED_RUNTIME"
+  },
+  "runtime_identity": {
+    "instance_class": "REMATERIALIZED_NEW_INSTANCE",
+    "persistence_class": "SESSION_LOCAL",
+    "recovery_class": "REMATERIALIZABLE_FROM_FROZEN_LOCK",
+    "environment_policy_sha256": "8a43751b49a8db1d024063608405f9b169e829f3c0be3488433b31800d44b1a4",
+    "resolved_interpreter_executable_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+    "pytest_entrypoint_sha256": "a91245b851dd46abaa52d51d5528734325ca87619d788be58a85a08bb3a55285",
+    "pyvenv_cfg_sha256": "110515456ff69498ed18d5699f31da35d785f9d1b57513d2549d726b97ca3c0d",
+    "entrypoint_control_identity_sha256": "04dc7fea0e1bac9909433fd73dac771c4179fae224897a47fb46f3830e647425",
+    "full_runtime_root_manifest_sha256": "5fbb81380303addd56f75b5e86b01fc3f891360530fc9d72d1847976178883cc",
+    "installed_file_manifest_sha256": "9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6",
+    "logical_runtime_id": "00320361206493de793726049563b907c82c28cee4c010ab905874d84b613d50",
+    "runtime_content_identity": "65cc52184bfed4e11f3e5a3686a49c0f6fef9b50040ac8c226e661e3b4039729",
+    "event_entropy_commitment": "0b0603753d05ffe86337edd5868eb9f5a8b3bff2e4ad34480f35ebbe05983d14",
+    "materialization_event_id": "446241c92e55775b000e05756da1bdc875f9c822fb40fb610b453a711fd6fbb9",
+    "runtime_root_identity_sha256": "fa7591872b3a84abd3bceed78dc0199262920c3ea3ebe7c299a4ff67b10196c0",
+    "runtime_instance_observation_id": "3de94a120c3a58a72a2a6e3159233ffa47c1b4a9ca5c26373af94f9634a60066",
+    "continuity_chain_sha256": "264a6796dae8e1f05b8dd30557f3ed36f4b6c9b0b10ee07528de0db2ea6d929e",
+    "runtime_root_file_count": 498,
+    "runtime_root_symlink_count": 1,
+    "site_file_count": 487,
+    "site_symlink_count": 0
+  },
+  "probes": {
+    "working_directory_class": "EMPTY_NON_REPOSITORY_DIRECTORY",
+    "pytest_version": {
+      "process_count": 1,
+      "exit_code": 0,
+      "reported_version": "8.4.1",
+      "stdout_bytes": 13,
+      "stdout_sha256": "b2e1053958c9395fa5cc8f621e613449d36f3cdddc21c7bbba2364493e225064",
+      "result": "VALID"
+    },
+    "pre_role_schema_guard": {
+      "process_count": 1,
+      "direct_role_load_count": 0,
+      "public_api_call_count": 0,
+      "role_effect_count": 0,
+      "safe_code": "ROLE_PATH_PREIMAGE_ENCODING_INVALID_BEFORE_DIRECT_LOAD",
+      "runtime_tree_change_count": 0
+    },
+    "required_role_smoke": {
+      "process_count": 1,
+      "exit_code": 0,
+      "ordered_role_paths_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+      "direct_role_load_count": 3,
+      "public_api_call_count": 0,
+      "role_effect_count": 0,
+      "signature_manifest_sha256": "252e2aea2d093f2a519017ec46e29c114e3e05a3cf9b7af9c0a6d825adbd6f84",
+      "result": "VALID"
+    }
+  },
+  "identity_reconciliation": {
+    "owner_full_identity_derivation_count": 1,
+    "independent_full_identity_derivation_count": 1,
+    "compared_field_count": 19,
+    "mismatch_count": 0,
+    "owner_verdict": "VALID",
+    "independent_verdict": "VALID"
+  },
+  "execution_counters": {
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_test_call_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "ordered_exact24_invocation_count": 0,
+    "full_exact52_invocation_count": 0,
+    "exact100_invocation_count": 0,
+    "gate_c_admission_count": 0,
+    "gate_c_target_authority_issuance_count": 0,
+    "gate_c_target_authority_consumption_count": 0,
+    "challenge_count": 0,
+    "remote_runtime_observation_count": 0
+  },
+  "zero_effects": {
+    "mashos_api_changed_path_count": 0,
+    "production_change_count": 0,
+    "protected_test_change_count": 0,
+    "fixture_change_count": 0,
+    "sample_change_count": 0,
+    "g5_machine_green_count": 0,
+    "g6_product_read_count": 0,
+    "cycle001_acceptance_count": 0,
+    "historical_g4_credit_change_count": 0
+  },
+  "privacy": {
+    "absolute_runtime_or_helper_path_published": false,
+    "configured_route_or_url_published": false,
+    "credential_or_environment_value_published": false,
+    "wheel_or_package_body_published": false,
+    "raw_private_output_or_traceback_published": false,
+    "helper_body_published": false,
+    "production_or_protected_private_body_published": false
+  },
+  "result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G5_GateB_CorrectedExact7FreshRuntimeReady_Result_20260809.md",
+    "bytes": 5384,
+    "lf": 128,
+    "cr": 0,
+    "final_lf": true,
+    "mode": "100644",
+    "raw_sha256": "9c38b0d49a5edef51ad6db3ef5188ef70512e87f98b7c236829fad43d9e37e25",
+    "git_blob_sha1": "5231f83b42d55676610a0476189cf1685ccba971"
+  },
+  "repository_scope": {
+    "cocolon_new_path_count": 3,
+    "cocolon_modified_append_only_path_count": 3,
+    "cocolon_changed_path_count": 6,
+    "mashos_api_changed_path_count": 0,
+    "deletion_count": 0,
+    "rename_count": 0
+  },
+  "state": "RUNTIME_READY_CURRENT_SESSION",
+  "next_authority": {
+    "first_unfinished_gate": "G5_GATE_C_EXACT24_ONE_SHOT",
+    "state": "ISSUED_INACTIVE_PENDING_READY_CHECKPOINT_POSTVERIFICATION",
+    "source": "MASH_EXPLICIT_COMPLETE_THROUGH_GATE_C_AND_G5_GREEN_DIRECTIVE",
+    "automatic_transition": false,
+    "g6_state": "NOT_STARTED_UNAUTHORIZED"
+  },
+  "receipt_logical_sha256_rule": "SHA256_UTF8_SORTED_COMPACT_JSON_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "342a280b8f47dc449f5ed15c8c406e332befafaa4245fe850a919e88137784c1"
+}

@@ -617,3 +617,55 @@ Durable owners are Result blob `a3fa32da423e5a77f00889eac19a407f5e517bef`, Recei
 `1bd9f855ca8384ed8b16e694459dc7e62b77a196`, the Gate B Handoff path, and append-only
 Plan/07/08. GitHub transport is separate from the one completed artifact-acquisition network
 process. No Gate C, target, production, G6, or acceptance action follows automatically.
+
+## 11.3 Current override — G5 Gate B corrected exact7 READY (2026-08-09)
+
+Mash's current explicit completion directive supplied a distinct corrected Gate B recovery
+authority and the separate post-READY Gate C authority. Gate B is now closed at a remotely
+checkpointed READY boundary; it does not automatically activate Gate C.
+
+```text
+current state:
+RUNTIME_READY_CURRENT_SESSION
+
+Gate B lifecycle:
+CLOSED_CONSUMED_READY
+
+source cut:
+b0a8c70e5cec08581678b98f2e21571d17674d91 / clean
+
+corrected exact7 projection:
+f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e
+
+exact5 distribution closure:
+4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c
+
+runtime instance:
+3de94a120c3a58a72a2a6e3159233ffa47c1b4a9ca5c26373af94f9634a60066
+
+owner / independent / version / role:
+VALID / VALID / VALID / VALID
+
+Gate B target import / collection / call / invocation:
+0 / 0 / 0 / 0
+
+first unfinished gate:
+G5_GATE_C_EXACT24_ONE_SHOT
+
+Gate C:
+ISSUED_INACTIVE_PENDING_READY_CHECKPOINT_POSTVERIFICATION
+
+G5 machine GREEN / G6 Product Read / Cycle001:
+0 / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+The disclosed pre-role helper guard failed before direct load and had zero runtime/source effects;
+the required canonical role smoke itself ran exact1. Durable owners are Result blob
+`5231f83b42d55676610a0476189cf1685ccba971`, Receipt blob
+`0e26959f85c18ca50d02ff06de0dcce8fd226a36`, Handoff blob
+`a120b4f2886962591267524b7047b109a866fd02`, and append-only Plan/07/08.
+The next action is only Gate C exact24 after remote postverification. Do not run full52, exact100,
+G6 Product Read, or Cycle001 acceptance.

@@ -39069,3 +39069,28 @@ Current detailed owners are Result blob `a3fa32da423e5a77f00889eac19a407f5e517be
 Receipt blob `1bd9f855ca8384ed8b16e694459dc7e62b77a196`, and the Gate B Handoff path. The
 acquired wheels and failed helpers are session-local noncredit/nonreusable. Corrected G4 remains
 22 PASS / 2 causal RED. Gate C exact24 remains unissued and cannot follow automatically.
+
+## 2026-08-09 current checkpoint — G5 Gate B corrected exact7 READY
+
+The new recovery used fresh acquisition and fresh materialization; no prior closed helper, wheel
+authority, or runtime was reused. Corrected exact7 projection `f501025c...e57e`, exact5
+distribution closure `4d3d6afd...6556c`, pytest 8.4.1, and required-role direct-load exact3 all
+validated. Owner/independent current runtime identities matched exact19.
+
+```text
+state: RUNTIME_READY_CURRENT_SESSION
+instance: REMATERIALIZED_NEW_INSTANCE / SESSION_LOCAL
+runtime instance: 3de94a120c3a58a72a2a6e3159233ffa47c1b4a9ca5c26373af94f9634a60066
+source: b0a8c70e5cec08581678b98f2e21571d17674d91 / clean
+Gate B target: 0
+Gate C: issued inactive until checkpoint postverification
+G5 GREEN / G6 / acceptance: 0 / 0 / 0
+automatic progression: false
+```
+
+A disclosed pre-role schema guard loaded no role and changed no runtime bytes; the actual compact
+JSON role smoke then ran exact1 and passed. Current detailed owners are Result blob
+`5231f83b42d55676610a0476189cf1685ccba971`, Receipt blob
+`0e26959f85c18ca50d02ff06de0dcce8fd226a36`, and Handoff blob
+`a120b4f2886962591267524b7047b109a866fd02`. The first unfinished gate is now
+`G5_GATE_C_EXACT24_ONE_SHOT`; full52, exact100, G6, and acceptance remain untouched.
