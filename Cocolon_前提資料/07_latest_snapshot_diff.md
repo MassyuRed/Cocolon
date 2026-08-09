@@ -39274,3 +39274,77 @@ This checkpoint is new Result/Receipt/Handoff plus append-only Plan/07/08
 exact6. Only after its fresh remote byte/path/latest-main verification may Gate
 C use unchanged candidate blob `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`
 with the corrected protected test and require `24 PASS / 0 FAIL`.
+
+## 2026-08-10 current checkpoint — G5 Gate C exact24 GREEN / production published
+
+The corrected G4 Reception-focus refreeze exact6 at Cocolon
+`006998d229679de1bbf35a5a32316d23048c7ddf` / tree
+`9671c65871132c59956460cdab96a339aea8a283` was freshly postverified. The
+distinct Gate C authority then activated and was consumed once against the
+unchanged candidate, corrected protected test, ordered exact24, and unchanged
+exact5 runtime.
+
+```text
+state:
+G5_GATE_C_EXACT24_GREEN_PRODUCTION_PUBLISHED_CLOSED
+
+target invocation / collected / called:
+1 / 24 / 24
+
+pass / fail / error / unexpected / exit:
+24 / 0 / 0 / 0 / 0
+
+duration / retry / fallback / interpreter switch:
+1052.04 seconds / 0 / 0 / 0
+
+mashos-api publication parent:
+2272215e56e66bb3fa3c3dedb4616be35d8aecfb
+
+publication commit / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+changed paths / unauthorized / deletion / rename:
+1 / 0 / 0 / 0
+
+final production SHA-256 / blob:
+af6f0a818b822381e6b03395b1d1250799d0a1465ac56a9c578eacf3c7e16088 /
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49
+
+protected-test blob / publication change:
+c302dd99e143967fed6edd65b429373e87453fc6 / 0
+
+G5 machine GREEN / production publication:
+1 / 1
+
+full52 / exact100 / G6 Product Read / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+The authority-local static-admission helper ran once and was VALID, with
+prelaunch observation `4762a418e75719fa80af439006304bc9d1a0bea55469f1a5eee9490c1f348736`.
+The exact5 static reverify was VALID and unchanged. Body-free GREEN evidence
+preserved contexts10, bindings12, atoms38/families22・13・1・2, heads12 plus
+other finite4, declared-head-first12/12, typed dependents4, owner24,
+modifier22/locus20 `(18x1+2x2)` depth2, Reception11/rebuild6/reuse1,
+focus `(11,0,0,0)`, capture20/direct10/validator10/pair-equal, root11,
+focus-body11, injection `(11,6,0,11,11,6,10,10,true,true,true)`, controlled
+`(4,4,true,true,true,true,true,true,true,3,true)`, resource `(2,4,2,4)`,
+cluster<=13, load<=4, selector0, and unresolved/unparsed/ambiguous0.
+
+Detailed durable owners are Result SHA-256/blob
+`fe6f6623fa852234936134f1f391da7320429cf0768c685a431d6a42f4f1d22b` /
+`589756472a958baf06f1bfabf573ec37ef038414`, Receipt SHA-256/blob/logical
+SHA-256 `2f27470390c9d177106f338e6bb880de3b47b311a11b9e8a46dcdba0d26c8c65` /
+`0d716942582b54bdc7c643e759ad9185a77b236c` /
+`4136171f81c280521ee0d1ba48abe9cb7e1bf41f43e8049883ca7d5b77acb909`,
+and Handoff SHA-256/blob
+`ba8d7396bf01cb6b604d4cb472bcde6ae5b7711cbc5fa56aaf96cf62c88d298b` /
+`81dffb193dc8f8f4ac18f9f486d18d671c124b13`.
+
+This terminal is new Result/Receipt/Handoff plus append-only Plan/07/08
+exact6. G5 is closed GREEN with production published. G6 Product Read is
+separate, not started, and unauthorized; Cycle001 remains `NOT_ACCEPTED`.

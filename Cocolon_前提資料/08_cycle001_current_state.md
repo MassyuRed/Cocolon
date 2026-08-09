@@ -897,3 +897,72 @@ Handoff SHA-256 / blob:
 45a91460fcef5f1e44dfb83c68d4917dce44212e7fc759a052dcc6adce1fd842 /
 7fd3c92cae7653b8aac256acccf10e7ba6a1661c
 ```
+
+## 11.9 Current override — G5 Gate C exact24 GREEN / production published (2026-08-10)
+
+The G4 Reception-focus correction/refreeze exact6 was remotely postverified at
+Cocolon `006998d229679de1bbf35a5a32316d23048c7ddf`. Gate C then consumed its
+distinct one-shot authority and reached its required terminal projection.
+
+```text
+current state:
+G5_GATE_C_EXACT24_GREEN_PRODUCTION_PUBLISHED_CLOSED
+
+Gate C lifecycle:
+CLOSED_CONSUMED_GREEN
+
+target invocation / collection / call:
+1 / 24 / 24
+
+result / exit / duration:
+24 PASS / 0 FAIL / 0 ERROR / 0 UNEXPECTED / 0 / 1052.04 seconds
+
+retry / fallback / interpreter switch:
+0 / 0 / 0
+
+mashos-api publication commit / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+production blob / protected-test blob:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+changed paths / unauthorized / deletion / rename:
+1 / 0 / 0 / 0
+
+G5 machine GREEN / production publish:
+1 / 1
+
+full52 / exact100 / G6 Product Read / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+Static admission process1 and exact5 reverify process1 were VALID. The public
+GREEN denominator is contexts10/bindings12/atoms38/families22・13・1・2,
+heads12+other finite4, declared-head-first12/12, typed dependents4, owner24,
+modifier22/locus20/depth2, Reception11/rebuild6/reuse1, focus
+`(11,0,0,0)`, capture20/direct10/validator10/pair equality, root11/body11,
+injection `(11,6,0,11,11,6,10,10,true,true,true)`, and controlled
+`(4,4,true,true,true,true,true,true,true,3,true)`. Private body publication is
+zero.
+
+```text
+Result SHA-256 / blob:
+fe6f6623fa852234936134f1f391da7320429cf0768c685a431d6a42f4f1d22b /
+589756472a958baf06f1bfabf573ec37ef038414
+Receipt SHA-256 / blob / logical SHA-256:
+2f27470390c9d177106f338e6bb880de3b47b311a11b9e8a46dcdba0d26c8c65 /
+0d716942582b54bdc7c643e759ad9185a77b236c /
+4136171f81c280521ee0d1ba48abe9cb7e1bf41f43e8049883ca7d5b77acb909
+Handoff SHA-256 / blob:
+ba8d7396bf01cb6b604d4cb472bcde6ae5b7711cbc5fa56aaf96cf62c88d298b /
+81dffb193dc8f8f4ac18f9f486d18d671c124b13
+```
+
+G5 is closed and published. The next technical gate is not automatically
+opened: G6 Product Read requires separate explicit authority. Cycle001 remains
+not accepted.

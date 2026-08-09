@@ -18609,3 +18609,95 @@ blob above, the same exact5 runtime identity, and ordered-exact24 SHA-256
 `ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`.
 Required GREEN is `24 PASS / 0 FAIL`. Production publication and G5 closure
 occur only after that result. Automatic progression remains false.
+
+## 2026-08-10 — G5 Gate C exact24 GREEN / production published
+
+The corrected G4 Reception-focus oracle refreeze exact6 at Cocolon
+`006998d229679de1bbf35a5a32316d23048c7ddf` / tree
+`9671c65871132c59956460cdab96a339aea8a283` passed fresh remote
+prepared-byte/path/latest-main postverification. This satisfied the activation
+condition for the previously issued distinct Gate C authority.
+
+Gate C activated and was consumed exactly once with the unchanged candidate,
+corrected protected test, ordered exact24, and unchanged exact5 runtime:
+
+```text
+target invocation / collected / called: 1 / 24 / 24
+pass / fail / error / unexpected: 24 / 0 / 0 / 0
+exit / duration: 0 / 1052.04 seconds
+retry / fallback / interpreter switch: 0 / 0 / 0
+full52 / exact100: 0 / 0
+```
+
+The authority-local static-admission helper identity remained 16,347 bytes /
+LF268 / SHA-256
+`e0d8b6e9b3fb72ef70ec48ecca8e354878f3036ed8654a3d994cae514ed7fa52`
+/ blob-form `29851d82b80647daa935e25903635406f9999642`, process1/VALID. Gate C
+prelaunch observation SHA-256 was
+`4762a418e75719fa80af439006304bc9d1a0bea55469f1a5eee9490c1f348736`,
+with unchanged launch material
+`2dd56fa0208129de4e6c7467233c00eb0eb67894ac943bae6d4675d3210496ad`.
+The exact5 static reverify was process1/VALID with all five runtime identities
+unchanged.
+
+The terminal body-free GREEN evidence preserved:
+
+```text
+contexts / bindings / atoms / families: 10 / 12 / 38 / (22,13,1,2)
+heads / other finite / declared-head-first / typed dependents:
+12 / 4 / 12-of-12 / 4
+owner grammatical-head: 24 = short19 + long5
+modifier / locus / multiplicity / depth: 22 / 20 / (18x1+2x2) / 2
+Reception / rebuild / reuse: 11 / 6 / 1
+unresolved / unparsed / ambiguous: 0 / 0 / 0
+focus aggregate: (11,0,0,0)
+captures total / direct / validator / pair equality: 20 / 10 / 10 / true
+root shape / focus body: 11 / 11
+Reception injection: (11,6,0,11,11,6,10,10,true,true,true)
+controlled: (4,4,true,true,true,true,true,true,true,3,true)
+owner / recomposition GREEN: true / true
+resource / cluster / load: (2,4,2,4) / <=13 / <=4
+selector count: 0
+```
+
+After GREEN classification, the candidate was published as production:
+
+```text
+mashos-api parent:
+2272215e56e66bb3fa3c3dedb4616be35d8aecfb
+publication commit / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+changed path count / unauthorized / deletion / rename: 1 / 0 / 0 / 0
+production SHA-256 / blob:
+af6f0a818b822381e6b03395b1d1250799d0a1465ac56a9c578eacf3c7e16088 /
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49
+protected-test blob / change:
+c302dd99e143967fed6edd65b429373e87453fc6 / 0
+remote prepared-byte equality / latest-main inclusion: true / true
+```
+
+The Gate C lifecycle is `CLOSED_CONSUMED_GREEN`; the terminal state is
+`G5_GATE_C_EXACT24_GREEN_PRODUCTION_PUBLISHED_CLOSED`. No private body,
+test/fixture/sample/case/input-body, dependency, runtime, Parser/Matcher,
+API/DB/RN/public/shared-runtime mutation was published.
+
+This checkpoint is new Result/Receipt/Handoff plus append-only Plan/07/08
+exact6. Durable owners are:
+
+```text
+Result SHA-256 / blob:
+fe6f6623fa852234936134f1f391da7320429cf0768c685a431d6a42f4f1d22b /
+589756472a958baf06f1bfabf573ec37ef038414
+Receipt SHA-256 / blob / logical SHA-256:
+2f27470390c9d177106f338e6bb880de3b47b311a11b9e8a46dcdba0d26c8c65 /
+0d716942582b54bdc7c643e759ad9185a77b236c /
+4136171f81c280521ee0d1ba48abe9cb7e1bf41f43e8049883ca7d5b77acb909
+Handoff SHA-256 / blob:
+ba8d7396bf01cb6b604d4cb472bcde6ae5b7711cbc5fa56aaf96cf62c88d298b /
+81dffb193dc8f8f4ac18f9f486d18d671c124b13
+```
+
+G5 machine GREEN and production publication are complete. G6 Product Read is
+0 / `NOT_STARTED_UNAUTHORIZED`, and Cycle001 remains `NOT_ACCEPTED`.
+Automatic progression remains false.
