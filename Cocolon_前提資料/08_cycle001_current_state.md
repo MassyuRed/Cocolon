@@ -351,3 +351,28 @@ The current G3 technical details are in these exact paths:
 G3 is durably complete only when those new3 plus the updated Plan, latest snapshot, and this current-state owner are all present with prepared bytes on GitHub; the current write-commit changed-path union is exact6 with unauthorized0; and latest main contains all6. Handoff publication alone is insufficient.
 
 Source/test/fixture mutation, test execution, raw private-body action, mashos-api write, G4/G5/G6 execution, exact24/full52/exact100 execution, Parser/Matcher/final inverse, runtime/product/UX, and Cycle001 acceptance credit remain0. Administrative updates are not the technical result. The technical result is the closed one-owner localization and frozen remediation/RED/Product Read contract.
+
+## 8. G4 B6 remediation design freeze RED-only — current result
+
+```text
+G3: COMPLETE_REMEDIATION_CONTRACT_FROZEN_READ_ONLY
+G4: CLOSED_CONSUMED_CAUSAL_RED_PASS
+mashos-api final commit: dab99efc12907fed82185ed3f9b5a5ba260094c2
+protected test blob: 91bc9a5602f06056fa6f3b9289a3b710698c6b1f
+ordered direct node count: exact24
+ordered-list SHA-256: efad5c20407db72dea12cd726ea3bace95b755efe182c03bd71cd45e49c670fc
+projection: 22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+production change: exact0
+first unfinished technical gate: G5_B6_BOUNDED_IMPLEMENTATION_AND_CAUSAL_GREEN
+G5 state: SEPARATE_MASH_APPROVAL_REQUIRED
+Cycle001: NOT_ACCEPTED
+automatic progression: false
+```
+
+G4 causal RED exact2 is `REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED` and `HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED`. Current next selection is G5 only after separate Mash approval. G5 is bounded to the G3-frozen Natural Surface suffix and must make the same G4 ordered exact24 `24 PASS / 0 FAIL`; G6 Product Read remains separate and unstarted.
+
+Durable G4 owners:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_Addendum_20260809.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_BodyFree_Receipt_20260809.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_Handoff_20260809.md`
