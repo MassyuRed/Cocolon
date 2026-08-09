@@ -753,3 +753,39 @@ The exact5 runtime identity is unchanged. This checkpoint closes only the
 protected-helper correction/refreeze; Gate C activates after exact6 remote
 postverification and must turn the same frozen exact24 GREEN with the same
 bounded candidate. G6 remains unstarted and separately unauthorized.
+
+## 11.6 Current override — G5 Gate C residual causal RED (2026-08-10)
+
+```text
+current state:
+G5_GATE_C_EXACT24_RESIDUAL_HEAD_DOMINANT_TYPED_ATTACHMENT_CAUSAL_RED_STOP
+
+Gate C lifecycle:
+CLOSED_CONSUMED_CAUSAL_RED_STOP
+
+exact24:
+23 PASS / 1 CAUSAL_RED
+
+remaining reason:
+HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED
+
+G5 machine GREEN / production publish:
+0 / 0
+
+mashos-api main:
+9db636e537955b63fe6f793df91970d031159c34
+
+next authority:
+UNSELECTED / SEPARATE_MASH_APPROVAL_REQUIRED
+
+full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+The corrected G4 refreeze remains valid, but the new Gate C did not reach its
+required 24/0 projection. No retry, diagnostic execution, candidate correction,
+production publication, or automatic return gate follows. G6 and acceptance
+remain outside scope and unstarted.

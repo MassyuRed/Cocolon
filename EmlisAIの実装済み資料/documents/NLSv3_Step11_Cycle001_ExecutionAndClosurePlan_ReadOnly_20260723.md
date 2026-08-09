@@ -18435,3 +18435,34 @@ exact6. The new Gate C activates only after remote prepared-byte equality,
 changed-path exact6/unauthorized0, and latest-main inclusion are freshly
 postverified. Its required result is the same candidate and exact24 at
 `24 PASS / 0 FAIL`. Full52, exact100, G6, and Cycle001 acceptance remain0.
+
+## 2026-08-10 — G5 Gate C exact24 residual head-dominant causal RED STOP
+
+The protected-helper refreeze checkpoint at Cocolon
+`b00408d99483881fccb69b352f28b2d6e12fa1f9` was freshly postverified.
+Against mashos-api baseline `9db636e537955b63fe6f793df91970d031159c34`,
+Gate C admitted the unchanged candidate blob `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`,
+new protected-test blob `37cdfb8e28ee1ca371dc0af46f080e2028cad86a`,
+ordered-exact24 hash `ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`,
+and unchanged runtime instance `3de94a120c3a58a72a2a6e3159233ffa47c1b4a9ca5c26373af94f9634a60066`.
+
+```text
+exact24:
+23 PASS / 1 CAUSAL_RED / 0 ERROR
+duration:
+1030.23 seconds
+GREEN node:
+REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED
+remaining RED:
+HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED
+G5 machine GREEN / production publish:
+0 / 0
+```
+
+The Gate C authority is closed and consumed. Retry, rerun, post-consumption
+diagnostic execution, candidate correction, and production publication are not
+authorized by this authority. mashos-api main stays at `9db636e...`; production
+remains blob `1c19b6c...`. The next authority is
+`UNSELECTED / SEPARATE_MASH_APPROVAL_REQUIRED`; no automatic return gate is
+chosen. This STOP is new Result/Receipt/Handoff plus append-only Plan/07/08
+exact6. Full52, exact100, G6 Product Read, and Cycle001 acceptance remain0.

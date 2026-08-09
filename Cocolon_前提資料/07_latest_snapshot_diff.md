@@ -39152,3 +39152,23 @@ Runtime continuity remained exact; mutation/install/repair/rematerialization,
 fallback, switch, and retry were0. This additive checkpoint is new3 plus
 append-only Plan/07/08 exact6. The new Gate C remains inactive until its remote
 postverification. Full52, exact100, G6, and acceptance remain0.
+
+## 2026-08-10 current checkpoint — G5 Gate C residual head-dominant RED
+
+The new Gate C consumed its one-shot authority against the postverified G4
+helper correction/refreeze and unchanged bounded candidate.
+
+```text
+exact24: 23 PASS / 1 CAUSAL_RED
+duration: 1030.23 seconds
+resolved node: REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED
+remaining node: HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED
+G5 machine GREEN / production publish: 0 / 0
+mashos-api main: 9db636e537955b63fe6f793df91970d031159c34
+full52 / exact100 / G6 / acceptance: 0 / 0 / 0 / 0
+```
+
+The Gate C lifecycle is `CLOSED_CONSUMED_CAUSAL_RED_STOP`. No retry, rerun,
+additional diagnostic execution, source correction, or automatic return is
+authorized. The next authority is unselected and separately requires Mash
+approval. This checkpoint is new3 plus append-only Plan/07/08 exact6.
