@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-07
+revision_date: 2026-08-09
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -32,18 +32,25 @@ Work Ultraが必要な作業だけは`18_chat_work_environment_selection_rule_20
    - `memory/mash_and_karen.md`
 2. 本fileを読む。
 3. `CURRENT_RULES.md`を読む。
-4. `09_work_start_checklist.txt`を今回の作業について埋める。
-5. `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionと、latest durable task handoffを確認する。
-6. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
-7. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
-8. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
-9. 出力直前に`99_integrated_paste_each_time.txt`を通す。
+4. Cycle001作業の場合、`../08_cycle001_current_state.md`を読み、current head、current recovery lineage、last reusable technical credit、first unfinished technical gateを固定する。
+5. `09_work_start_checklist.txt`を今回の作業について埋める。
+6. `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionと、latest durable task handoffを確認する。ただしCycle001の次作業は`08_cycle001_current_state.md`から選び、07やhistorical Handoffの古い`next authority`から選ばない。
+7. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
+8. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
+9. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
+10. 出力直前に`99_integrated_paste_each_time.txt`を通す。
 
 # 2. current ownerと優先関係
 
 ## 一般行動rule
 
 - `CURRENT_RULES.md`
+
+## Cycle001 current navigation
+
+- `../08_cycle001_current_state.md`
+- Cycle001の次作業選択では、このfileが唯一のcurrent navigation ownerです。
+- `../07_latest_snapshot_diff.md`、Plan、Handoff、receipt、過去authorityの`next authority`は証拠・履歴であり、このfileと一致しない限りcurrent next actionへ採用しません。
 
 ## 実行Gate
 
@@ -60,9 +67,10 @@ Work Ultraが必要な作業だけは`18_chat_work_environment_selection_rule_20
 
 1. Mash様のcurrentな明示指示。ただし既存contract変更を伴う場合は、変更対象と変更内容が明示されたauthorityを必要とする。
 2. 対象領域のcurrent technical / product canonical owner。
-3. `CURRENT_RULES.md`。
-4. activationされた個別reference rule。
-5. historical / superseded / incident記録。
+3. Cycle001の作業選択に限り`../08_cycle001_current_state.md`。
+4. `CURRENT_RULES.md`。
+5. activationされた個別reference rule。
+6. historical / superseded / incident記録。
 
 矛盾を見つけた場合、黙って都合のよい方を選びません。影響がある作業を止め、owner、相違、必要な判断を示します。
 
@@ -76,6 +84,8 @@ Work Ultraが必要な作業だけは`18_chat_work_environment_selection_rule_20
 - 変更してはいけないcontract。
 - 今回activationする専門rule。
 - material artifactのdurable ownerと、GitHub write承認の有無。
+- Cycle001の場合、current recovery lineage、最後に再利用できる技術credit、最初の未完了技術gate、直接扱う実ファイル / test / receipt。
+- Cycle001の場合、historicalな完了済み判断やretired経路を次作業へ戻していないこと。
 
 # 4. Piece current definition
 
@@ -108,5 +118,6 @@ Piece作業では次をcurrent ownerとして確認します。
 - material artifactがlocal-onlyのまま完成扱いされていない。
 - 必要なGitHub reflectionとfresh verificationが成立している、または承認不足として明示STOPしている。
 - 未確認、未実行、STOPを完了へ変換していない。
+- Cycle001では、`08_cycle001_current_state.md`が示すfirst unfinished technical gate以外へ逸れていない。
 
 これらを満たした場合だけ完了を報告します。
