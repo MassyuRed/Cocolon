@@ -1,0 +1,25 @@
+# NLS v3 Step11 Cycle001 G4 Handoff
+
+```text
+CURRENT GATE: G4 B6 REMEDIATION DESIGN FREEZE RED-ONLY
+STATE: CLOSED_CONSUMED_CAUSAL_RED_PASS
+FINAL PROJECTION: 22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+ORDERED DIRECT NODE COUNT: exact24
+ORDERED LIST SHA-256: efad5c20407db72dea12cd726ea3bace95b755efe182c03bd71cd45e49c670fc
+MASHOS-API FINAL COMMIT: dab99efc12907fed82185ed3f9b5a5ba260094c2
+TEST BLOB: 91bc9a5602f06056fa6f3b9289a3b710698c6b1f
+PRODUCTION CHANGE: exact0
+NEXT UNFINISHED GATE: G5 B6 BOUNDED IMPLEMENTATION AND CAUSAL GREEN
+NEXT GATE AUTHORITY: SEPARATE_MASH_APPROVAL_REQUIRED
+AUTOMATIC PROGRESSION: false
+CYCLE001: NOT_ACCEPTED
+```
+
+G4の2つのcausal REDは次である。
+
+1. `REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED`
+2. `HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED`
+
+G5は別承認なしに開始しない。G5で許されるproduction ownerはG3で凍結された `ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py` のmarker以後suffix exact1だけである。Catalog、Grounded Lexicalization、Reception authority、fixture、case、Parser、Matcher、Hard Gate、API、DB、RN、public/shared runtimeは変更禁止である。
+
+G5 GREENの必要条件は、同じG4 frozen ordered exact24が `24 PASS / 0 FAIL` になることである。G6 Product Readはさらに別承認であり、machine GREENで代替しない。
