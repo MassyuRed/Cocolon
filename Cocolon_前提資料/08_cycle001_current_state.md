@@ -237,3 +237,117 @@ FIRST_UNFINISHED_GATE_V16_CLOSED_SYNTHETIC_PREFLIGHT
 NEXT_WORK_MUST_PRODUCE_TECHNICAL_PASS_OR_EXACT_REAL_FILE_GAP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+# 7. 2026-08-09 current superseding navigation — direct G3 instruction and closure
+
+normative_status: `CURRENT_CYCLE001_NAVIGATION_OWNER_SUFFIX`  
+decision_owner: `Mash`  
+automatic_progression: `false`
+
+## 7.1 why this suffix exists
+
+After the source observation recorded above, Mash issued a newer direct instruction:
+
+```text
+the current position is through G2 in the ExecutionAndClosurePlan;
+the next and only permitted work is G3;
+do not finish the response before G3 is complete;
+G3 completion must be durably confirmed on GitHub.
+```
+
+Under the priority in `work_attitude_rules_for_karen/00_read_first.txt`, this current explicit instruction selects the Plan G3 lane over the earlier §3 V16 navigation. For current navigation only, this suffix supersedes the §2.1 `RECOVERY_EPOCH004` current-lineage selection, the §3 V16 current-next selection, and the corresponding §6 `LAST_REUSABLE_TECHNICAL_CREDIT_V15...` / `FIRST_UNFINISHED_GATE_V16...` lines. It does not erase, invalidate, or reverse those historical bytes or their evidence.
+
+This transition does not re-audit, backfill, or reclassify historical G1/G2. It records Mash's current navigation decision and the completed G3 result. V15 static credit and all V16 evidence remain preserved historical technical inputs, but the Epoch004/V16 lane is paused and is not the current-next lane. V16 was not executed, changed, or credited by this instruction. On verified exact6 publication, the current selected lane is Plan G4 and its last reusable prerequisite is the frozen G3 remediation contract.
+
+## 7.2 current heads and directly handled real files
+
+```text
+Cocolon technical-source observation:
+a0cfae02cacad6aec6e4b98e44c1df38b927970b
+
+Cocolon prewrite current head:
+2a0d4709b72b35603e06c79054ec3dbba03ed02a
+
+prewrite movement from a0cfae:
+exact3 navigation/rule paths; B6 technical source/test/receipt impact none
+
+mashos-api current head/tree:
+65284fef36936d7091262e758e0cc9282909601b /
+d951a520b7686c5bd59fba22f7dd759a0e077981
+
+direct production owner:
+ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+
+direct protected test owner:
+ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py
+
+immutable rejection owner:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ActualOutput_ProductReadAndFreeze_ReadOnly_BodyFree_Receipt_20260723.json
+```
+
+## 7.3 completed G3 result
+
+```text
+G3 prior durable Plan state:
+EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2
+
+current direct authority entry:
+MASH_DIRECT_G3_ONLY_INSTRUCTION
+
+G3 result on verified exact6 publication:
+COMPLETE_REMEDIATION_CONTRACT_FROZEN_READ_ONLY
+
+common broken layer:
+RC0031_PRIVATE_B6_NATURAL_SURFACE_FINAL_SERIALIZER_REALIZATION_CONSUMER
+
+production owner count:
+1
+
+competing remediation design count:
+0
+```
+
+The common cause is the final serializer's flattening of accepted root / owner-role / Reception structure into atom-local peer explanatory clauses and late-spliced text. The protected P3 test also has a direct oracle gap: wrapper-only reachability and a dimension-bundle cue-order mismatch create a false structural GREEN.
+
+The completed G3 contract fixes one bounded future implementation owner and one separate test-only causal RED owner. It preserves semantic atom, owner-range, relation direction, Reception authority, modifier topology, resource, privacy, and safety contracts. It forbids case/family/input-word/fixture-phrase branches, atom omission, semantic neutralization, hidden markers, generic fallback, fixed final text, and scope expansion.
+
+## 7.4 current first unfinished gate after G3
+
+```text
+first unfinished technical gate:
+G4_B6_REMEDIATION_DESIGN_FREEZE_RED_ONLY
+
+state:
+READY_SEPARATE_APPROVAL_REQUIRED
+
+successfully reduced unfinished condition:
+B6_COMMON_FAILURE_OWNER_AND_REMEDIATION_CONTRACT_UNKNOWN -> CLOSED
+
+next direct work when separately approved:
+protected P3 test exact1; freeze current ordered exact24 node IDs and SHA;
+produce 22 PASS / 2 causal RED with no production change
+
+production implementation:
+NOT_AUTHORIZED / NOT_STARTED
+
+V16 closed synthetic preflight:
+NOT_EXECUTED_BY_THIS_INSTRUCTION / NOT_CURRENT_NEXT_SELECTION
+
+Cycle001:
+NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+## 7.5 durable owners and completion rule
+
+The current G3 technical details are in these exact paths:
+
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_Addendum_20260809.md`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_BodyFree_Receipt_20260809.json`
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_Handoff_20260809.md`
+
+G3 is durably complete only when those new3 plus the updated Plan, latest snapshot, and this current-state owner are all present with prepared bytes on GitHub; the current write-commit changed-path union is exact6 with unauthorized0; and latest main contains all6. Handoff publication alone is insufficient.
+
+Source/test/fixture mutation, test execution, raw private-body action, mashos-api write, G4/G5/G6 execution, exact24/full52/exact100 execution, Parser/Matcher/final inverse, runtime/product/UX, and Cycle001 acceptance credit remain0. Administrative updates are not the technical result. The technical result is the closed one-owner localization and frozen remediation/RED/Product Read contract.

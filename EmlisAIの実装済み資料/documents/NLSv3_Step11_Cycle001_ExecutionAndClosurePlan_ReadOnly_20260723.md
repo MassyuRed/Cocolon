@@ -18081,3 +18081,79 @@ Administrative publication and owner reflection grant no technical result or pro
 ### Plan restriction
 
 Final Handoff verification permanently ends this Inspector V2 route. No V4+, same-series, retry, or continuation authority may be created. There is no next real-file correction because no unique real-file defect was proved. Only one separately approved simplified direct-verification redesign outside this lineage may later be proposed, and neither its creation nor execution is authorized by this record.
+
+## 2026-08-09 CURRENT G3 CLOSURE — B6 actual-output failure localized / remediation contract frozen read-only
+
+### Navigation authority
+
+Mash's 2026-08-09 direct instruction establishes the current working position as through G2 and separately authorizes only G3 through durable GitHub reflection. This section does not re-audit, backfill, or reclassify historical G1/G2 evidence. It does not reopen the retired Inspector V2 lineage or authorize a Recovery Epoch, V16, Full R1, Parser, Matcher, final inverse, runtime, product, or Cycle001 acceptance action.
+
+Technical-source observation Cocolon commit/tree was `a0cfae02cacad6aec6e4b98e44c1df38b927970b / 9c72e1470eebf778445f1c045ea46d3cbee47829`. Prewrite remote current advanced to `2a0d4709b72b35603e06c79054ec3dbba03ed02a` through exact3 navigation/rule paths; B6 technical source/test/receipt, this Plan, and snapshot impact was0. Read-only mashos-api commit/tree was `65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981`; write0. The B6 source exact5 remain byte-identical to the frozen Product Read pin.
+
+### G3 technical result
+
+The current B6 Product Read failure is localized to one case-agnostic owner:
+
+```text
+broken layer:
+  rc0031 private B6 Natural Surface final serializer / realization consumer
+
+production owner exact1:
+  ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+
+bounded symbols:
+  _rc0031_rt_cluster
+  _step11_rc0031_product_render_cluster
+  _step11_rc0031_build_owner_role_inflected_typed_recomposition_candidate
+
+common cause:
+  accepted root / owner-role / Reception structure is flattened into
+  atom-local peer explanatory clauses and late string-spliced text.
+```
+
+Direct source inspection proves that every non-construction atom receives an atom-local dimension bundle and peer finite clause; root/head does not own final dominance; owner-role and owner-kind patterns are count-checked but not behaviorally consumed; the final builder appends generic clusters to already-rendered observation and reuses a separately rendered Reception tail. The protected P3 test also has one exact false-GREEN: it inspects only the wrapper rather than the reachable callee loop and counts dimension bundles in `modality + polarity + referent` order while production emits `referent + modality + polarity`.
+
+This one cause covers the frozen body-free concern aggregate: Reception10, owner-role join8, typed density8, main dominance8, relation/temporal8, depth/density8, immediate-observation9, distribution3. Raw input and actual output body were not regenerated, reread, persisted, or published.
+
+### Frozen remediation window
+
+Future G5 may change only Natural Surface. Its first 537,842 bytes remain immutable at SHA-256 `18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4` / blob `478454a1c5fb5b15e0c281ae93a63aa058bf8e26`; the existing private B6 marker suffix may be replaced only within a total 11,090-byte cap. `_rc0031_rt_plan`, Catalog, Grounded Lexicalization, Reception / relation / source authorities, accepted owner-range / modifier topology, fixtures, case rows, Parser, Matcher, Hard Gate, API, DB, RN, public/shared runtime, and every other mashos-api path are forbidden.
+
+The implementation must preserve semantic atom38, families22/13/1/2, heads12, other finite4, owner grammatical-head24, modifiers22, loci20, depth2, Reception11/rebuild6, reuse1, and resource maxima `(2,4,2,4)`. It must produce root-first, typed dependent realization; consume owner-role/kind and accepted Reception fields behaviorally; coordinate dimensions without atom-local full-bundle repetition; and fail closed on a missing mapping. Case/family/input-word/fixture phrase/proper-noun branching, atom omission/duplication, semantic neutralization, hidden markers, generic fallback, and fixed final text remain exact0.
+
+### G4 RED-only candidate and Product Read gate
+
+G4 is ready only for a separate approval. Its change owner is the protected P3 test exact1. The current 408,068 bytes are an immutable prefix at SHA-256 `ac457122e12e87c95fb0f5e9b2d8d2eddc5d7bce7430dcdfb14bdfc03c5a6b19` / blob `0b49a7ae02234a9b8741b6bc7d1c8580630e099b`; one exact-new section may be appended within 24,000 bytes. Test node count stays52; existing body-recovery nodes exact2 are strengthened to causally RED:
+
+```text
+R01 REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED
+R02 HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED
+```
+
+Because historical receipts retain only the direct-exact24 aggregate, G4 must statically enumerate and freeze the current ordered node IDs exact24 plus ordered-list SHA-256 before execution and explicitly exclude P3 final-inverse exact7. Expected RED is ordered direct exact24 `22 PASS / 2 causal RED / 0 unexpected`; focused exact2 is `2 causal RED`. Future G5 must turn that same ordered direct exact24 into `24 PASS / 0 FAIL`. Full exact52 is not executed because it includes unapproved P3 final-inverse / Parser / Matcher scope.
+
+After causal GREEN, G6 alone may fresh-generate and human-read the same fixed exact10 / exact8. Product PASS requires candidate and unique-case MAJOR/BLOCKER0, former-major 5/5 cases and 7/7 contexts PASS/MINOR, controls3/3 not worse, new MAJOR control0, semantic safety, all 12 axes, frozen denominator, privacy, and prohibited counters0. Machine GREEN is not Product Read PASS.
+
+### Durable artifacts
+
+| role | path | bytes | LF | SHA-256 | Git blob |
+|---|---|---:|---:|---|---|
+| G3 Addendum | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_Addendum_20260809.md` | 20,622 | 275 | `7bb837239fd63ee29a699a31076b7a3de93effb4a5af18bd5a64c8b98af2cc04` | `2e74a57c2cd0caa2b2e969922bcabc9461e19b3b` |
+| G3 Receipt | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_BodyFree_Receipt_20260809.json` | 14,512 | 301 | `bed19cd5fa20d9ede10cae53641902ae2f8602a079c357407b3f4c734b6de597` | `fc7af214f4e64d08273e02b49ed3edb1be1e16eb` |
+| G3 final Handoff | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_Handoff_20260809.md` | final owner identity is not embedded here to avoid a hash cycle | final owner identity is not embedded here to avoid a hash cycle | final owner identity is not embedded here to avoid a hash cycle | final owner identity is not embedded here to avoid a hash cycle |
+| Cycle001 current navigation | `Cocolon_前提資料/08_cycle001_current_state.md` | append-only G3 synchronization | append-only G3 synchronization | final candidate identity is bound by the Handoff | final candidate identity is bound by the Handoff |
+
+### Gate-state progress update
+
+```text
+G3 prior durable Plan state: EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2
+current authority entry: MASH_DIRECT_G3_ONLY_INSTRUCTION
+G3 after verified exact6 publication: COMPLETE_REMEDIATION_CONTRACT_FROZEN_READ_ONLY
+next ordered gate: G4 B6 REMEDIATION DESIGN FREEZE RED-ONLY
+G4 state: READY_SEPARATE_APPROVAL_REQUIRED
+G5-G10 change by this authority: 0
+Cycle001: NOT_ACCEPTED
+automatic progression: false
+```
+
+Approval / activation / consumption are `1 / 1 / 1`: current direct instruction received; current rules/navigation/Plan/predecessor/source pins confirmed and G3 technical read started; first postactivation Natural Surface B6 source-body read. The authority is single-use; reactivation/reuse/retry are0. Source/test/fixture mutation, pytest/test execution, raw-body action, mashos-api write, G4/G5/G6 execution, exact24/full52/exact100 execution, Parser/Matcher/final inverse, and Cycle001 acceptance credit are all0. When the three exact G3 artifacts, this Plan postimage, the latest snapshot postimage, and `08_cycle001_current_state.md` postimage are all present on GitHub with prepared bytes, the current write-commit changed-path union is exact6/unauthorized0, and latest main contains all6, the final lifecycle is `CLOSED_CONSUMED_PASS` and G3 is durably complete. Handoff publication alone is insufficient. No automatic G4 execution is authorized.

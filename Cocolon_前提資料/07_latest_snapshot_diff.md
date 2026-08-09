@@ -38915,3 +38915,66 @@ Creating the authority and records, passing preflight, capturing files, and upda
 ### Karen judgment and permitted future direction
 
 This current Inspector V2 path is permanently retired when the final Handoff is fresh-verified. No V4+, retry, continuation, or same-series authority may be created. Only one separately approved simplified direct-verification redesign outside this lineage may later be proposed; its creation or execution is not authorized here. There is no authorized next real-file correction because neither scanner nor Inspector was proved defective.
+
+## 2026-08-09 CURRENT TECHNICAL CHECKPOINT — CYCLE001 G3 B6 FAILURE LOCALIZED / REMEDIATION CONTRACT FROZEN
+
+### Current authority and navigation
+
+Mash's direct 2026-08-09 instruction fixes the current work position through G2 and authorizes G3 only through durable GitHub reflection. Historical G1/G2 evidence is not re-audited, backfilled, or reclassified here. The retired Inspector V2 lineage remains retired and is not an input to this G3 result.
+
+Technical-source observation Cocolon commit/tree was `a0cfae02cacad6aec6e4b98e44c1df38b927970b / 9c72e1470eebf778445f1c045ea46d3cbee47829`. Prewrite remote current advanced to `2a0d4709b72b35603e06c79054ec3dbba03ed02a` through exact3 navigation/rule paths with B6 technical source/test/receipt, Plan, and snapshot impact0. Read-only mashos-api remained `65284fef36936d7091262e758e0cc9282909601b / d951a520b7686c5bd59fba22f7dd759a0e077981`, write0. The B6 Product Read pin and current exact5 technical blobs match.
+
+### G3 result
+
+The exact10 / exact8 body-free failure aggregate is localized to one common owner:
+
+```text
+owner:
+  ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+
+layer:
+  rc0031 private B6 final serializer / realization consumer
+
+cause:
+  structured root, owner-role, dimension, and Reception authority is
+  flattened into atom-local peer explanatory clauses and late-spliced text.
+```
+
+The current consumer renders every non-construction atom as a peer finite clause with a repeated dimension bundle, does not use root/head for final dominance, count-checks but does not behaviorally consume owner-role / owner-kind mappings, and appends generic clusters to already-rendered observation plus a separately rendered Reception tail.
+
+The protected P3 test has a corresponding exact false-GREEN: its static check stops at the wrapper and misses the reachable callee loop; its dynamic bundle counter expects `modality + polarity + referent`, while production emits `referent + modality + polarity`. Thus the forbidden atom-local explanatory bundle is counted as0.
+
+The single remediation contract preserves semantic atom38, family22/13/1/2, heads12 + other finite4, owner24, modifier22/locus20/depth2, Reception11/rebuild6, reuse1, source dimensions, relation direction, and resource `(2,4,2,4)`. It replaces only the existing Natural Surface B6 private suffix with root-first, role-aware, integrated one-pass realization. Case/family/input-word/fixture-phrase branching, atom omission, semantic neutralization, hidden marker, generic fallback, accepted authority/topology change, and fixed final text are forbidden.
+
+### Frozen future boundaries
+
+G4 is now `READY_SEPARATE_APPROVAL_REQUIRED`. It may change only the protected P3 test, preserving its current 408,068 bytes as immutable prefix and appending one section within 24,000 bytes. It must freeze a current ordered node-ID exact24 list and its SHA-256 before execution because historical receipts retain only an aggregate; P3 final-inverse exact7 is excluded. The causal expectation is direct exact24 `22 PASS / 2 causal RED / 0 unexpected`, focused exact2 `2 causal RED`.
+
+G5, under a later separate approval, may change only Natural Surface. Its first 537,842 bytes are immutable; the private B6 marker suffix remains within 11,090 total bytes. It must turn the same ordered direct exact24 into `24 PASS / 0 FAIL`. Full exact52 is not executed because P3 final inverse / Parser / Matcher remain separate and unapproved.
+
+G6 alone may re-read fresh output from the same fixed exact10 / exact8. Product PASS requires candidate and unique-case MAJOR/BLOCKER0, former-major 5/5 cases and 7/7 contexts PASS/MINOR, controls3/3 non-regression, new MAJOR control0, all 12 axes, semantic safety, denominator, privacy, and prohibited counters0. Machine GREEN is not Product PASS.
+
+### Durable G3 owners
+
+| role | path | SHA-256 | Git blob |
+|---|---|---|---|
+| Addendum | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_Addendum_20260809.md` | `7bb837239fd63ee29a699a31076b7a3de93effb4a5af18bd5a64c8b98af2cc04` | `2e74a57c2cd0caa2b2e969922bcabc9461e19b3b` |
+| Receipt | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_BodyFree_Receipt_20260809.json` | `bed19cd5fa20d9ede10cae53641902ae2f8602a079c357407b3f4c734b6de597` | `fc7af214f4e64d08273e02b49ed3edb1be1e16eb` |
+| final Handoff | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G3_B6ActualOutputFailureLocalizationAndRemediationDesign_ReadOnly_Handoff_20260809.md` | final owner identity is intentionally not embedded here to avoid a hash cycle | final owner identity is intentionally not embedded here to avoid a hash cycle |
+| current navigation | `Cocolon_前提資料/08_cycle001_current_state.md` | final candidate identity is bound by the Handoff | final candidate identity is bound by the Handoff |
+
+### Current gate disposition
+
+```text
+approval / activation / consumption: 1 / 1 / 1
+G3 prior durable Plan state: EVIDENCE_EXISTS_EXECUTION_BLOCKED_BY_G1_G2
+current authority entry: MASH_DIRECT_G3_ONLY_INSTRUCTION
+G3 on verified exact6 publication: CLOSED_CONSUMED_PASS
+G3: COMPLETE_REMEDIATION_CONTRACT_FROZEN_READ_ONLY
+G4: READY_SEPARATE_APPROVAL_REQUIRED
+G5-G10: unchanged / not authorized by this instruction
+Cycle001: NOT_ACCEPTED
+automatic progression: false
+```
+
+Source/test/fixture/sample mutation, test execution, raw private-body action, mashos-api write, G4/G5/G6 execution, exact24/full52/exact100 execution, Parser/Matcher/final inverse, API/DB/RN/public/shared/runtime effect, and Cycle001 acceptance credit are0. The G3 Handoff is the final lifecycle owner, but closure requires prepared-byte verification of new3 plus Plan/snapshot/08, exact6 changed-path union/unauthorized0, and latest-main inclusion; Handoff publication alone is insufficient. Administrative publication is not the technical result; the technical result is the one-owner localization plus frozen bounded remediation, causal RED, and Product Read contracts.
