@@ -18228,3 +18228,71 @@ The failed probe is not rolled back or reusable. The observation does not prove 
 Durable STOP owners are Addendum/Receipt/Handoff new3 plus this Plan and append-only 07/08 modified3. Closure requires prepared remote bytes, exact6 changed paths, unauthorized0/deletion0/rename0, and latest-main inclusion. This checkpoint authorizes neither recovery nor G5 production publication.
 
 Recording closure: Addendum section9 contains the lossless 10248-byte/256-LF patch from production preimage blob `1c19b6c293e20a9094b9180fded8c167daaaf5eb` to unpublished candidate blob `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`; hash-only candidate retention is not used. Sections10/11 freeze the path-free Gate A scope, canonical environment/argv materials, raw/sanitized stderr identities, and split lifecycles. The G5 umbrella is `CLOSED_CONSUMED_PREEXECUTION_STOP`; the failed Gate B probe is `CLOSED_CONSUMED_INVALID`. Gate A identity completion, any later Gate B recovery, and post-READY Gate C target execution each require a new explicit Mash authority.
+
+## 2026-08-09 G5 Gate A runtime identity completion — typed INVALID STOP
+
+Mash separately approved manifest/lock/projection/observation-chain identity completion with
+version probe, role probe, target, runtime mutation, and Work-side acquisition network exact0.
+The authority activated at the first declared read and consumed exact1 at the typed classification.
+
+### Gate A identity result
+
+```text
+declared candidate scope / count: PRIOR_G4_RUNTIME_ROOT_EXACT1 / 1
+global locator search: 0
+applicable comparator: tracked RecoveryEpoch004 lock-derived exact5
+expected exact5 matches / mismatches: 4 / 1
+decisive mismatch: packaging 26.2 expected / 26.3 observed
+state: RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE
+typed reason: FROZEN_RUNNER_PROJECTION_IDENTITY_MISMATCH_PACKAGING_26_2_EXPECTED_26_3_OBSERVED_STOP
+persistence / recovery / instance: SESSION_LOCAL / REMATERIALIZABLE_FROM_FROZEN_LOCK / UNKNOWN
+same-instance continuity credit: 0
+READY / machine GREEN: 0 / 0
+```
+
+The exact5 element comparison uses the frozen selector and ordered versions, not a 54-versus-5
+cardinality inference. Current distribution metadata count54 and formal-lock/RECORD closure
+differences are corroborating evidence. Current manifest identities, canonical preimages,
+entrypoint/control identities, and a noncredit observation-chain terminal are stored in the Gate A
+Addendum and Receipt. Absolute Work paths and runtime/package bodies are not public.
+
+The G4 Receipt did not bind a materialization event or no-rematerialization chain. The current
+instance-observation hash explicitly contains `materialization_event_id=NOT_ESTABLISHED` and has
+credit0. Matching G4 subset3 cannot promote it. The historical RecoveryEpoch004 exact5 instance
+identities remain historical and are not assigned to this candidate.
+
+### Execution and effect counters
+
+```text
+Gate A approval/activation/consumption/classification: 1 / 1 / 1 / 1
+lock/projection/distribution/installed/full-root/control/chain derivation: read-only exact1 each
+current-authority pytest/version probe: 0 / 0
+role probe/direct role load/public API/effect: 0 / 0 / 0 / 0
+Gate C/target/ordered24/full52/exact100: 0 / 0 / 0 / 0 / 0
+runtime mutation/install/repair/rematerialization/acquisition/network: 0 / 0 / 0 / 0 / 0 / 0
+retry/fallback/interpreter switch: 0 / 0 / 0
+mashos-api/production/protected-test/fixture/sample changes: 0 / 0 / 0 / 0 / 0
+historical failed version probe: 1 CLOSED_NONCREDIT / retry0
+```
+
+G4 remains `CLOSED_CONSUMED_CAUSAL_RED_PASS`. The local bounded G5 candidate remains unexecuted,
+unpublished, and noncredit; its lossless patch remains owned by the prior G5 STOP Addendum. G6 is
+not started and Cycle001 is `NOT_ACCEPTED`.
+
+### Durable owners and next boundary
+
+```text
+Addendum blob: 8295b0f4bf8e8b157f21d0c47334367f2a094dec
+Receipt blob: 0db06948aa99721a7913c22f540759c363d53935
+Handoff identity: SELF_HASH_OMITTED_TO_AVOID_CYCLE
+Gate A lifecycle: CLOSED_CONSUMED_TYPED_STOP
+automatic progression: false
+```
+
+No Gate B or Gate C action follows automatically. The first possible next action requires a new
+explicit Mash authority for frozen exact5 Gate B recovery only, including isolated
+rematerialization, separately counted acquisition network if needed, fresh exact version and role
+probes, full identity/readiness verification, then STOP. Post-READY G5 exact24 remains a later
+separate Gate C authority. This Gate A checkpoint uses new3 plus append-only Plan/07/08 exact6;
+completion requires remote prepared-byte equality, exact6 changed paths, unauthorized0,
+deletion0, rename0, and latest-main inclusion.

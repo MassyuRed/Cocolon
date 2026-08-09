@@ -39015,3 +39015,32 @@ Corrected G4 exact6 was postverified at Cocolon `c796b0eead99072694062ad4250b6ff
 Gate A matched only the declared entrypoint/interpreter/pytest-package subset. Missing manifest/lock/projection and observation-chain identities leave `CURRENT_CONTINUITY_UNVERIFIED`, recovery `NOT_ESTABLISHED`, instance `UNKNOWN`, and same-instance credit0. The fresh pytest version probe nevertheless consumed exact1 and exited1 with safe signature `PYTEST_MODULE_IMPORT_UNAVAILABLE`; role probe and target invocation are0. Retry/fallback/interpreter switch/rematerialization/install/repair and mashos-api GitHub write are all0. G5 is `PREEXECUTION_STOP_RUNTIME_NOT_READY`; machine GREEN0. G4 credit is unchanged. The first required action is separately approved read-only Gate A identity completion; future Gate B and Gate C each require later explicit approval. G6 remains unstarted and Cycle001 remains `NOT_ACCEPTED`.
 
 Durable detail now includes the unpublished candidate's lossless preimage-relative patch, reproducible path-free discovery/environment/argv materials, and separate lifecycle owners. The G5 umbrella and failed probe are both closed/nonreusable. Gate A identity completion requires a new explicit Mash authority; any later Gate B recovery and post-READY Gate C target execution each require another explicit Mash authority.
+
+## 2026-08-09 latest — G5 Gate A runtime identity completion is INVALID typed STOP
+
+The separately approved Gate A identity-completion authority performed read-only manifest,
+lock, projection, control, and observation-chain derivation only, then closed consumed at one
+typed classification. Candidate count is1 in the declared prior-G4 locator scope; global search0.
+
+The current Gate A selected the existing tracked RecoveryEpoch004 exact5 runner comparator.
+Observed exact5 identities match4/5. The decisive mismatch is frozen `packaging==26.2` versus
+observed `packaging==26.3`; current state is
+`RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE` with reason
+`FROZEN_RUNNER_PROJECTION_IDENTITY_MISMATCH_PACKAGING_26_2_EXPECTED_26_3_OBSERVED_STOP`.
+
+Prior G4 static subset3 remains equal, but materialization event and no-rematerialization chain
+are not established. Instance is `UNKNOWN`, continuity credit0, READY0. Recovery class is
+`REMATERIALIZABLE_FROM_FROZEN_LOCK` only for the frozen expected exact5; the invalid observed
+root is nonreusable and has reconstruction source `NOT_ESTABLISHED`.
+
+Current-authority version probe, role probe, Gate C, target, runtime mutation, installation,
+repair, rematerialization, acquisition, Work-side artifact acquisition network, retry, fallback,
+interpreter switch, mashos-api change, production/test change are all0. The historical failed
+version probe remains count1/closed/noncredit and was not retried or reinterpreted. G4 credit is
+unchanged. G5 GREEN0, G6 unstarted, Cycle001 `NOT_ACCEPTED`.
+
+The next technical boundary is a separately approved frozen-exact5 Gate B recovery only. Even a
+later READY checkpoint must STOP; G5 exact24 target execution remains a later separate Gate C
+authority. Gate A detailed owners are Addendum blob `8295b0f4bf8e8b157f21d0c47334367f2a094dec`,
+Receipt blob `0db06948aa99721a7913c22f540759c363d53935`, and the Gate A Handoff path;
+the Handoff self hash is intentionally omitted to avoid a cycle.

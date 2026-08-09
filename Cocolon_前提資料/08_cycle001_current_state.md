@@ -499,3 +499,67 @@ future Gate B recovery authority:
 post-READY Gate C target authority:
   EXPLICIT_MASH_APPROVAL_REQUIRED
 ```
+
+## 11. 2026-08-09 CURRENT — G5 Gate A runtime identity completion typed STOP
+
+Mash explicitly approved the bounded read-only Gate A identity completion. The declared candidate
+was observed exact1. The applicable frozen runner comparator is the tracked RecoveryEpoch004
+exact5 projection. Four selected distribution identities match, but `packaging==26.3` does not
+match frozen `packaging==26.2`. The typed terminal is therefore
+`RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE`, not READY and not machine GREEN.
+
+The prior G4 entrypoint/interpreter/pytest-control subset exact3 still matches, but the prior G4
+Receipt did not bind a materialization event or no-rematerialization chain. Instance remains
+`UNKNOWN`, same-instance continuity credit0. Persistence is `SESSION_LOCAL`. Recovery is
+`REMATERIALIZABLE_FROM_FROZEN_LOCK` only for the frozen expected exact5 runtime; artifact
+availability is current-session unverified, the invalid observed 54-distribution root has no
+reconstruction source, and it is nonreusable.
+
+```text
+Gate A approval/activation/consumption/classification: 1 / 1 / 1 / 1
+current-authority version probe/role probe/target: 0 / 0 / 0
+runtime mutation/install/repair/rematerialization/acquisition/network: 0 / 0 / 0 / 0 / 0 / 0
+retry/fallback/interpreter switch: 0 / 0 / 0
+mashos-api/production/protected-test change: 0 / 0 / 0
+G5 machine GREEN/G6/Cycle001 acceptance: 0 / 0 / 0
+automatic progression: false
+```
+
+### 11.1 first unfinished gate
+
+```text
+current state:
+G5_PREEXECUTION_STOP_RUNTIME_IDENTITY_INVALID
+
+first unfinished technical action:
+G5_GATE_B_FROZEN_EXACT5_RUNTIME_RECOVERY_ONLY
+
+authority:
+SEPARATE_MASH_APPROVAL_REQUIRED
+
+current invalid candidate reuse:
+FORBIDDEN
+
+future Gate B shape if separately approved:
+frozen exact5 isolated rematerialization + separately counted acquisition network if needed
+fresh exact pytest version probe + fresh required-role probe + full static identities
+STOP at RUNTIME_READY_CURRENT_SESSION if VALID
+
+Gate C target exact24:
+SEPARATE_LATER_MASH_APPROVAL_REQUIRED / NOT_STARTED
+
+G5 production GitHub write / machine GREEN:
+0 / 0
+
+G6 Product Read:
+SEPARATE_APPROVAL_REQUIRED / NOT_STARTED
+
+Cycle001:
+NOT_ACCEPTED
+```
+
+Durable owners are the Gate A Addendum `8295b0f4bf8e8b157f21d0c47334367f2a094dec`,
+Receipt `0db06948aa99721a7913c22f540759c363d53935`, the Gate A Handoff path,
+plus append-only Plan/07/08 exact6. The Handoff omits its self hash to avoid a cycle.
+GitHub transport is separate from runtime acquisition network0. No Gate B or Gate C action is
+authorized by this checkpoint.

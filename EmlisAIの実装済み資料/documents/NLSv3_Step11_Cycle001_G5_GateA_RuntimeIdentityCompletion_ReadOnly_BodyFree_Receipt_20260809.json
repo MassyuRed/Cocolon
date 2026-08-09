@@ -1,0 +1,334 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g5.gate_a.runtime_identity_completion_read_only_receipt.v1",
+  "receipt_id": "NLSV3_STEP11_CYCLE001_G5_GATE_A_RUNTIME_IDENTITY_COMPLETION_READ_ONLY_TYPED_STOP_20260809",
+  "observed_at_date": "2026-08-09",
+  "repository_scope": [
+    "MassyuRed/Cocolon",
+    "MassyuRed/mashos-api"
+  ],
+  "body_free": true,
+  "automatic_progression": false,
+  "authority": {
+    "id": "G5_GATE_A_RUNTIME_IDENTITY_COMPLETION_READ_ONLY_20260809",
+    "decision_owner": "Mash",
+    "operation_owner": "Karen",
+    "approval_kind": "MASH_EXPLICIT_SEPARATE_APPROVAL",
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 1,
+    "classification_count": 1,
+    "final_lifecycle": "CLOSED_CONSUMED_TYPED_STOP",
+    "retry_count": 0,
+    "reuse_count": 0,
+    "reactivation_count": 0
+  },
+  "historical_authorities": {
+    "g5_umbrella": "CLOSED_CONSUMED_PREEXECUTION_STOP",
+    "failed_gate_b_version_probe": "CLOSED_CONSUMED_INVALID",
+    "historical_failed_version_probe_count": 1,
+    "historical_probe_reparse_or_recredit": false
+  },
+  "source_heads": {
+    "cocolon_prewrite_observed": "a3faf0da493da9d7037b3d85af20ee4a260b5b48",
+    "mashos_api_observed": "b0a8c70e5cec08581678b98f2e21571d17674d91",
+    "g4_corrected_test_commit": "b0a8c70e5cec08581678b98f2e21571d17674d91",
+    "g4_corrected_documents_commit": "c796b0eead99072694062ad4250b6ff17d3511f8"
+  },
+  "discovery": {
+    "scope": "DECLARED_PRIOR_G4_RUNTIME_ROOT_EXACT1",
+    "locator_strategy": "DECLARED_LOCATOR_ONLY",
+    "candidate_policy": "EXACT1_OR_TYPED_STOP",
+    "candidate_count": 1,
+    "global_locator_search_count": 0,
+    "relative_entrypoint": "bin/pytest",
+    "custom_static_continuity_verifier_process_count": 0
+  },
+  "frozen_comparator": {
+    "selection": "CURRENT_GATE_A_EXPLICITLY_SELECTS_EXISTING_RECOVERY_EPOCH004_EXACT5_RUNNER_COMPARATOR",
+    "g4_full_identity_owner_claimed": false,
+    "lock": {
+      "repository": "MassyuRed/mashos-api",
+      "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+      "git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+      "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+      "logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4"
+    },
+    "receipt_owner": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeRematerializationAndFreshReadiness_BodyFree_Receipt_20260801.json",
+      "git_blob_sha1": "ce6cfe0217f3e28c88643f4a4f543e069a6b21c6",
+      "raw_sha256": "b80acc68e1d38c734c243031c7d4a13024057eac73f34ed5fe09db7ab945ebe2"
+    },
+    "tracked_procedure": {
+      "path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+      "git_blob_sha1": "ea7f96221846e5614431296e00ac481cc00e00a2",
+      "raw_sha256": "42fcd4d65b0d21b5e41659b6329c55c14ed42c0270838f13be6102b351db7ac9",
+      "section": "7.1"
+    },
+    "runner_projection": {
+      "sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+      "distribution_count": 5,
+      "ordered": [
+        "iniconfig==2.3.0",
+        "packaging==26.2",
+        "pluggy==1.6.0",
+        "pygments==2.20.0",
+        "pytest==8.4.1"
+      ]
+    },
+    "target": {
+      "implementation": "CPYTHON",
+      "python_version": "3.12.13",
+      "platform": "linux-x86_64"
+    },
+    "historical_exact5_instance": {
+      "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+      "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+      "full_runtime_root_manifest_sha256": "e6fb3c42d88897cb5117d993449debe7efef3722f11e6c7e3aff541513120042",
+      "runtime_content_identity": "549da432b1a46b111251fea0d2a822aa5c682012735b782847e22f8a3255ffbc",
+      "materialization_event_id": "2cc41bd9d330bd8977e8bb95dbc03173a7b33e13030394fd6c974e8545a47c6b",
+      "runtime_instance_observation_id": "695a5adf4134966c741491312d0b05887ee2f1da4571132dc06107010da55d80",
+      "continuity_chain_sha256": "4d0b73a8f8c2779f53796db608f87208988d2baed0a015b08ddba46ab3f37fb9",
+      "assigned_to_current_candidate": false,
+      "used_as_same_instance_credit": false
+    }
+  },
+  "current_projection": {
+    "canonical_schema": "RUNNER_PROJECTION_ACTUAL_V1",
+    "ordered": [
+      "iniconfig==2.3.0",
+      "packaging==26.3",
+      "pluggy==1.6.0",
+      "pygments==2.20.0",
+      "pytest==8.4.1"
+    ],
+    "bytes": 106,
+    "lf": 6,
+    "cr": 0,
+    "final_lf": true,
+    "sha256": "3f5f9311360002407b0030c1395bc3c4bb0bd44297a2bcc72f16893ee02886b4",
+    "expected_identity_match_count": 4,
+    "version_mismatch_count": 1,
+    "mismatch": {
+      "distribution": "packaging",
+      "expected_version": "26.2",
+      "observed_version": "26.3"
+    },
+    "missing_expected_name_count": 0,
+    "total_observed_distribution_count": 54,
+    "outside_selector_name_count": 49,
+    "outside_selector_is_primary_failure": false
+  },
+  "current_manifests": {
+    "distribution_metadata": {
+      "schema": "DISTRIBUTION_METADATA_MANIFEST_V1",
+      "count": 54,
+      "bytes": 8007,
+      "lf": 55,
+      "sha256": "54f5617fa773e652c284c2697153808eb5aa4218697a89f0b9afa0dbf6daca8d"
+    },
+    "record_closure_observation": {
+      "schema": "RECORD_CLOSURE_OBSERVATION_V1",
+      "record_owner_count": 54,
+      "record_row_count": 4474,
+      "bytes": 811,
+      "lf": 15,
+      "sha256": "4250959ff0be540029d5cd937ab49a4b98bb9b4f984ecf82fe761de79f1914d2",
+      "distribution_closure_sha256": "NOT_ESTABLISHED:RECORD_CLOSURE_FAILED_DISTRIBUTION_COUNT_10"
+    },
+    "installed_file": {
+      "schema": "INSTALLED_FILE_MANIFEST_V1",
+      "file_count": 4499,
+      "bytes": 527650,
+      "lf": 4500,
+      "sha256": "16115e4c6db422931e1ca128ccd2ce49b1354cbf50ce51ea18ec558508bf9ce8"
+    },
+    "full_root": {
+      "schema": "FULL_RUNTIME_ROOT_MANIFEST_V1",
+      "file_count": 4499,
+      "directory_count": 536,
+      "symlink_count": 0,
+      "other_count": 0,
+      "entry_count": 5035,
+      "bytes": 545671,
+      "lf": 5036,
+      "sha256": "91e6baece2344689b724a96720d058d18acb1da0b71e555014129c94ad3322d6"
+    },
+    "second_read_exact_equal": true,
+    "row_bodies_published": false,
+    "row_bodies_nonreusable_reason": "INVALID_RUNTIME_AND_RUNTIME_PACKAGE_BODY_PUBLICATION_PROHIBITED"
+  },
+  "record_closure_corroboration": {
+    "dist_info_count": 54,
+    "record_file_count": 54,
+    "record_row_count": 4474,
+    "hashed_record_row_count": 2519,
+    "empty_hash_record_row_count": 1955,
+    "record_closed_distribution_count": 44,
+    "record_failed_distribution_count": 10,
+    "present_hashed_or_sized_record_row_mismatch_count": 0,
+    "missing_expected_entrypoint_script_count": 10,
+    "unowned_file_count": 35,
+    "root_local_named_manifest_lock_projection_requirements_pyvenv_pth_direct_url_count": 0,
+    "formal_lock_distribution_count": 46,
+    "current_to_formal_lock_exact_identity_match_count": 31,
+    "missing_formal_lock_identity_count": 15,
+    "extra_current_identity_count": 23,
+    "primary_failure_source": false
+  },
+  "content_identity": {
+    "canonical_preimage_owner": "ADDENDUM_SECTION_6",
+    "preimage_bytes": 676,
+    "preimage_lf": 10,
+    "preimage_cr": 0,
+    "preimage_final_lf": true,
+    "partial_runtime_content_observation_id": "8e91847fa31f212ebaf88eda13d556648ea5eed1bc6380bee5ec3fa4745bd6b2",
+    "runtime_content_identity": "NOT_ESTABLISHED:DISTRIBUTION_RECORD_CLOSURE_INVALID"
+  },
+  "locator_and_control": {
+    "path_free_locator_preimage_owner": "ADDENDUM_SECTION_7",
+    "path_free_locator_observation_id": "6d138087f3b3016754292465fa83d6522c4cb6e8f0896eaee3554f27f82c7bc6",
+    "entrypoint_control_preimage_owner": "ADDENDUM_SECTION_7",
+    "entrypoint_control_identity": "7ad466cea28bd51a8adbb327097bbaead7d1cc591ef53065c244c36d310e32cf",
+    "entrypoint_sha256": "2abdd39dfcbff819df1a26f24d352724759e67317362ed43c3ce2624433ee321",
+    "resolved_interpreter_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+    "pytest_control_sha256": "66993a5e3905005e0981159b4794d10b1adacf341a58a44d696ad2c4442dcdc6",
+    "matched_prior_g4_static_subset_count": 3,
+    "absolute_paths_published": false
+  },
+  "instance_and_continuity": {
+    "materialization_event_id": "NOT_ESTABLISHED:PRIOR_G4_RECEIPT_DID_NOT_BIND_EVENT_OR_INSTANCE",
+    "runtime_instance_observation_preimage_owner": "ADDENDUM_SECTION_8",
+    "noncredit_runtime_instance_observation_terminal_id": "26477213e01c38d510bd41c3f7fd869d2c5d57def46eafc5e6aa2de9edbfd5f3",
+    "runtime_instance_observation_id": "NOT_ESTABLISHED:MATERIALIZATION_EVENT_AND_RUNTIME_CONTENT_IDENTITY_NOT_ESTABLISHED",
+    "runtime_instance_observation_credit": 0,
+    "continuity_observation_chain_identity": "NOT_ESTABLISHED:NO_PRIOR_EVENT_INSTANCE_BINDING_OR_NO_REMATERIALIZATION_PROOF",
+    "noncredit_chain_preimage_owner": "ADDENDUM_SECTION_8",
+    "noncredit_observation_chain_terminal_id": "3d7dd063c516e9870e19f2ee0ee09a030073a591d55c5470865117e7defd63d7",
+    "same_instance_continuity_credit": 0
+  },
+  "composition_terminals": {
+    "logical_runtime_id": "NOT_ESTABLISHED:CURRENT_PROJECTION_MISMATCH_AND_NO_CURRENT_ENVIRONMENT_POLICY_BINDING",
+    "environment_policy_sha256": "NOT_ESTABLISHED:GATE_A_DID_NOT_BIND_OR_EXECUTE_POLICY",
+    "runtime_root_identity_sha256": "NOT_ESTABLISHED:CURRENT_ROOT_INVALID_AND_NO_CURRENT_MATERIALIZATION_OWNER",
+    "current_python_implementation": "UNOBSERVED:GATE_A_NO_VERSION_PROBE",
+    "current_python_version": "UNOBSERVED:GATE_A_NO_VERSION_PROBE",
+    "current_platform": "UNOBSERVED:GATE_A_NO_RUNTIME_PROBE",
+    "accepted_artifact_manifest_sha256": "NOT_ESTABLISHED:NO_CURRENT_ACCEPTED_ARTIFACT_MANIFEST",
+    "accepted_wheel_manifest_sha256": "NOT_ESTABLISHED:NO_CURRENT_ACCEPTED_WHEEL_MANIFEST",
+    "current_materialization_procedure": "NOT_APPLICABLE:NO_CURRENT_MATERIALIZATION_EVENT",
+    "current_custom_helper_identity": "NOT_APPLICABLE:GATE_A_USED_NO_CUSTOM_HELPER_PROCESS",
+    "expiry_trigger": "RUNTIME_IDENTITY_DRIFT_ALREADY_OBSERVED"
+  },
+  "classification": {
+    "state": "RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE",
+    "typed_reason": "FROZEN_RUNNER_PROJECTION_IDENTITY_MISMATCH_PACKAGING_26_2_EXPECTED_26_3_OBSERVED_STOP",
+    "owner_verdict": "INVALID",
+    "owner_verdict_count": 1,
+    "independent_read_only_audit_verdict": "INVALID",
+    "independent_verdict_count": 1,
+    "persistence_class": "SESSION_LOCAL",
+    "recovery_class": "REMATERIALIZABLE_FROM_FROZEN_LOCK",
+    "artifact_availability_class": "CURRENT_SESSION_UNVERIFIED",
+    "recovery_target": "FROZEN_EXPECTED_EXACT5_RUNTIME",
+    "invalid_observed_root_reconstruction_source": "NOT_ESTABLISHED",
+    "invalid_observed_root_reusable": false,
+    "instance_class": "UNKNOWN",
+    "runtime_readiness_observation_id": "NOT_ESTABLISHED:GATE_A_ONLY_NO_VERSION_OR_ROLE_PROBE",
+    "ready_credit": false,
+    "g5_machine_green": false,
+    "g6_started": false,
+    "cycle001_state": "NOT_ACCEPTED"
+  },
+  "derivation_counts": {
+    "candidate_scope_freeze": 1,
+    "candidate_observation": 1,
+    "lock_identity": 1,
+    "runner_projection": 1,
+    "distribution_metadata_manifest": 1,
+    "record_closure_observation_noncredit": 1,
+    "installed_file_manifest": 1,
+    "full_root_manifest": 1,
+    "locator_identity": 1,
+    "control_identity": 1,
+    "partial_runtime_content_observation_noncredit": 1,
+    "runtime_content_identity": 0,
+    "noncredit_runtime_instance_observation_terminal": 1,
+    "runtime_instance_observation_identity": 0,
+    "continuity_chain_terminal_noncredit": 1,
+    "typed_classification": 1
+  },
+  "zero_effects": {
+    "current_authority_pytest_process": 0,
+    "current_authority_version_probe": 0,
+    "role_probe": 0,
+    "direct_role_load": 0,
+    "public_api_call": 0,
+    "role_effect": 0,
+    "gate_c_admission": 0,
+    "target_invocation": 0,
+    "ordered_exact24": 0,
+    "full_exact52": 0,
+    "exact100": 0,
+    "runtime_mutation": 0,
+    "install": 0,
+    "repair": 0,
+    "rematerialization": 0,
+    "acquisition": 0,
+    "work_side_artifact_acquisition_network": 0,
+    "challenge": 0,
+    "remote_runtime_observation": 0,
+    "retry": 0,
+    "fallback": 0,
+    "interpreter_switch": 0,
+    "production_change": 0,
+    "protected_test_change": 0,
+    "fixture_change": 0,
+    "sample_change": 0,
+    "mashos_api_github_change": 0,
+    "raw_protected_or_private_product_test_body_read": 0,
+    "raw_protected_or_private_product_test_body_export": 0,
+    "raw_protected_or_private_product_test_body_publication": 0
+  },
+  "addendum": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G5_GateA_RuntimeIdentityCompletion_ReadOnly_Addendum_20260809.md",
+    "bytes": 20282,
+    "lf": 424,
+    "cr": 0,
+    "final_lf": true,
+    "mode": "100644",
+    "raw_sha256": "1b9d62ff3b9439bbb4c20dd9727ea7243905f4cf588e204e44961a01fa9c120f",
+    "git_blob_sha1": "8295b0f4bf8e8b157f21d0c47334367f2a094dec"
+  },
+  "privacy": {
+    "absolute_runtime_path_published": false,
+    "absolute_interpreter_path_published": false,
+    "scratch_or_session_identifier_published": false,
+    "runtime_or_package_body_published": false,
+    "credential_or_route_published": false,
+    "private_body_durable_locator_required": false,
+    "reason": "INVALID_NONREUSABLE_RUNTIME_OBSERVATION_AND_PUBLIC_BODY_FREE_CHECKPOINT_SUFFICIENT"
+  },
+  "github_reflection": {
+    "state_at_receipt_creation": "PENDING_WRITE_AND_FRESH_POSTVERIFICATION",
+    "repository": "MassyuRed/Cocolon",
+    "base_head": "a3faf0da493da9d7037b3d85af20ee4a260b5b48",
+    "changed_path_count": 6,
+    "new_path_count": 3,
+    "modified_append_only_path_count": 3,
+    "deletion_count": 0,
+    "rename_count": 0,
+    "unauthorized_path_count": 0,
+    "runtime_acquisition_network_count": 0,
+    "github_transport_is_separate_from_runtime_acquisition_network": true,
+    "completion_rule": "REMOTE_EXACT6_BYTES_EQUAL_PREPARED_AND_WRITE_CHANGED_PATH_UNION_EXACT6_AND_LATEST_MAIN_INCLUDES_ALL"
+  },
+  "next_boundary": {
+    "current_gate_a_stopped": true,
+    "invalid_candidate_reuse_allowed": false,
+    "gate_b_rematerialization_authority_approval_count": 0,
+    "gate_b_readiness_authority_approval_count": 0,
+    "gate_c_target_authority_approval_count": 0,
+    "required_next": "SEPARATE_MASH_APPROVAL_FOR_FROZEN_EXACT5_GATE_B_RECOVERY_ONLY",
+    "automatic_progression": false
+  }
+}
