@@ -18296,3 +18296,38 @@ probes, full identity/readiness verification, then STOP. Post-READY G5 exact24 r
 separate Gate C authority. This Gate A checkpoint uses new3 plus append-only Plan/07/08 exact6;
 completion requires remote prepared-byte equality, exact6 changed paths, unauthorized0,
 deletion0, rename0, and latest-main inclusion.
+
+## 2026-08-09 — G5 Gate B frozen-exact5 recovery typed pre-materialization STOP
+
+Mash separately approved `G5_GATE_B_FROZEN_EXACT5_RUNTIME_RECOVERY_AND_FRESH_READINESS_20260809`.
+The authority activated and consumed exact1. Frozen lock/projection/procedure and current required
+source exact6 matched. A single configured-route acquisition/network process obtained the accepted
+exact5 wheel set with manifest `00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d`;
+rejected/sdist/build/substitution/unconfigured source were0.
+
+The new materializer helper then failed before rematerialization. It hashed full exact9 lock rows as
+`0d8c1584d30eb417142e1afac13b776a235def0112ef58e928f8322ad781e13f` instead of the frozen exact7
+projection `f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e` and fail-closed at
+`AUTHORITY_BOUND_MATERIALIZER_PROJECTION_PREIMAGE_SCHEMA_INVALID_PREMATERIALIZATION_STOP`.
+The fresh private root remained empty: rematerialization/owner identity/independent identity/version
+probe/role probe/target were all0. Retry, repair, helper reuse, fallback, interpreter switch,
+production/test/mashos-api change were0.
+
+```text
+terminal: G5_GATE_B_MATERIALIZER_SCHEMA_INVALID_PREMATERIALIZATION_STOP
+authority lifecycle: CLOSED_CONSUMED_TYPED_STOP
+current G5 state: G5_GATE_B_PREMATERIALIZATION_TYPED_STOP
+first unfinished gate: G5_GATE_B_CORRECTED_PROJECTION_SCHEMA_FRESH_RECOVERY_ONLY
+next authority: SEPARATE_MASH_APPROVAL_REQUIRED
+Gate C: UNISSUED_INACTIVE
+automatic progression: false
+
+Result blob: a3fa32da423e5a77f00889eac19a407f5e517bef
+Receipt blob: 1bd9f855ca8384ed8b16e694459dc7e62b77a196
+Handoff path: EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G5_GateB_FrozenExact5RuntimeRecoveryAndFreshReadiness_TypedPreMaterializationStop_Handoff_20260809.md
+```
+
+The acquired wheel bytes and failed helpers are session-local noncredit and nonreusable after the
+closed authority. A corrected recovery requires a new Mash approval and fresh counters. It must
+not reuse or retry this helper, and it must not launch Gate C. Gate C exact24 remains unissued and separately approved only
+after a future READY checkpoint.

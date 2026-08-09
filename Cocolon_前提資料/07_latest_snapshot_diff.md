@@ -39044,3 +39044,28 @@ later READY checkpoint must STOP; G5 exact24 target execution remains a later se
 authority. Gate A detailed owners are Addendum blob `8295b0f4bf8e8b157f21d0c47334367f2a094dec`,
 Receipt blob `0db06948aa99721a7913c22f540759c363d53935`, and the Gate A Handoff path;
 the Handoff self hash is intentionally omitted to avoid a cycle.
+
+## 2026-08-09 current checkpoint — G5 Gate B pre-materialization typed STOP
+
+The separately approved Gate B authority is `CLOSED_CONSUMED_TYPED_STOP`. Frozen exact5 acquisition
+succeeded once with accepted5 and network1, but the newly created materializer used a full exact9
+lock-row hash instead of the frozen exact7 projection. Required `f501025c...` versus helper-observed
+`0d8c1584...` caused fail-close before any venv/runtime entry was created.
+
+```text
+state: G5_GATE_B_PREMATERIALIZATION_TYPED_STOP
+typed reason: AUTHORITY_BOUND_MATERIALIZER_PROJECTION_PREIMAGE_SCHEMA_INVALID_PREMATERIALIZATION_STOP
+fresh root allocation / entries after helper / rematerialization: 1 / 0 / 0
+version probe / role probe / target: 0 / 0 / 0
+retry / reuse / repair / fallback / interpreter switch: 0 / 0 / 0 / 0 / 0
+mashos-api / production / protected-test change: 0 / 0 / 0
+G5 GREEN / G6 / Cycle001 acceptance: 0 / 0 / 0
+first unfinished: G5_GATE_B_CORRECTED_PROJECTION_SCHEMA_FRESH_RECOVERY_ONLY
+next: SEPARATE_MASH_APPROVAL_REQUIRED
+automatic progression: false
+```
+
+Current detailed owners are Result blob `a3fa32da423e5a77f00889eac19a407f5e517bef`,
+Receipt blob `1bd9f855ca8384ed8b16e694459dc7e62b77a196`, and the Gate B Handoff path. The
+acquired wheels and failed helpers are session-local noncredit/nonreusable. Corrected G4 remains
+22 PASS / 2 causal RED. Gate C exact24 remains unissued and cannot follow automatically.

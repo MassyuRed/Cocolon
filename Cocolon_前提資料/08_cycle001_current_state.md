@@ -563,3 +563,57 @@ Receipt `0db06948aa99721a7913c22f540759c363d53935`, the Gate A Handoff path,
 plus append-only Plan/07/08 exact6. The Handoff omits its self hash to avoid a cycle.
 GitHub transport is separate from runtime acquisition network0. No Gate B or Gate C action is
 authorized by this checkpoint.
+
+## 11.2 Current override — G5 Gate B materializer schema invalid STOP (2026-08-09)
+
+The separately approved frozen-exact5 Gate B authority was consumed. Configured-route acquisition
+obtained exact5 valid wheels once, but the new authority-bound materializer hashed full exact9 lock
+rows rather than the frozen exact7 projection and fail-closed before rematerialization.
+
+```text
+current state:
+G5_GATE_B_PREMATERIALIZATION_TYPED_STOP
+
+terminal:
+G5_GATE_B_MATERIALIZER_SCHEMA_INVALID_PREMATERIALIZATION_STOP
+
+typed reason:
+AUTHORITY_BOUND_MATERIALIZER_PROJECTION_PREIMAGE_SCHEMA_INVALID_PREMATERIALIZATION_STOP
+
+Gate B authority:
+CLOSED_CONSUMED_TYPED_STOP / retry0 / reuse0 / reactivation0
+
+acquisition / network / accepted wheels:
+1 / 1 / 5
+
+fresh private root allocation / entries after helper / rematerialization:
+1 / 0 / 0
+
+current Gate B version probe / role probe / target:
+0 / 0 / 0
+
+first unfinished gate:
+G5_GATE_B_CORRECTED_PROJECTION_SCHEMA_FRESH_RECOVERY_ONLY
+
+next authority:
+SEPARATE_MASH_APPROVAL_REQUIRED
+
+Gate C exact24:
+UNISSUED_INACTIVE / separate approval still required after future READY
+
+G5 machine GREEN / G6 Product Read / Cycle001:
+0 / NOT_STARTED / NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+The acquired wheel bytes and failed helpers are noncredit and nonreusable after authority closure.
+A new Gate B approval must create a distinct helper, prove the exact7 projection schema before
+execution, and establish artifact availability under fresh counters. Corrected G4 remains closed
+with 22 PASS / 2 causal RED; production and protected test are unchanged.
+
+Durable owners are Result blob `a3fa32da423e5a77f00889eac19a407f5e517bef`, Receipt blob
+`1bd9f855ca8384ed8b16e694459dc7e62b77a196`, the Gate B Handoff path, and append-only
+Plan/07/08. GitHub transport is separate from the one completed artifact-acquisition network
+process. No Gate C, target, production, G6, or acceptance action follows automatically.
