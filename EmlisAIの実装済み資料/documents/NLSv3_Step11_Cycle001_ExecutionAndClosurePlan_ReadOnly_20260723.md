@@ -18466,3 +18466,56 @@ remains blob `1c19b6c...`. The next authority is
 `UNSELECTED / SEPARATE_MASH_APPROVAL_REQUIRED`; no automatic return gate is
 chosen. This STOP is new Result/Receipt/Handoff plus append-only Plan/07/08
 exact6. Full52, exact100, G6 Product Read, and Cycle001 acceptance remain0.
+
+## 2026-08-10 — G5 residual head-dominant body-free diagnosis / protected G4 oracle scope blocker STOP
+
+Mash separately approved diagnosis, correction, and a new Gate C for the
+residual `HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED` state. The diagnostic
+portion was activated and consumed once. It used the independently reverified
+exact5 runtime, launched no pytest process or target invocation, and emitted
+only body-free scalar evidence.
+
+```text
+diagnostic process / pytest process / target invocation:
+1 / 0 / 0
+only false controlled conjunct:
+reception_exact
+head identity / role / kind / tail / mutation / selector / declared-head-first:
+true / true / true / true / 3 / true / 12
+focus authority / direct-validator pair equality / injection exact:
+(11,0,0,0) / 10 / true
+root shape / primary-root subset / unique-head / combined:
+11 / 2 / 7 / 0
+```
+
+The residual is not caused by the unchanged production candidate. The protected
+G4 helper adds two contract-external assumptions: response-primary Reception
+focus must be a subset of an independently selected leading root, and every
+focus owner must occur in exactly one independently selected declared head.
+Neither predicate is owned by the Reception builder or validator. No lawful
+Natural Surface mutable-exact3 edit can alter these counts.
+
+The current authority did not identify the protected G4 path, the exact
+Reception-focus clause, or additive G4 refreeze as its correction operation.
+It is therefore closed at
+`G5_RESIDUAL_HEAD_DOMINANT_DIAGNOSIS_PROTECTED_G4_RECEPTION_FOCUS_ORACLE_SCOPE_BLOCKER_STOP`.
+mashos-api write, production publish, protected-test change, and new Gate C are
+all0. The next authority must explicitly approve the protected helper correction,
+base-production `22 PASS / 2 CAUSAL_RED` additive refreeze, and the distinct
+post-refreeze Gate C one-shot. Automatic progression remains false.
+
+```text
+Result SHA-256 / blob:
+e744fcc79ca66a537bcfcec3dd0edb6761f74e2e86b8508ee0ba0331f71b2aea /
+71b22829dd05629541efa4286dd3852343a7e347
+Receipt SHA-256 / blob / logical SHA-256:
+9ce9a3e28abdbaafdf2ea8f59913eec5698ac3c1a1b59193297e3d9ec7ce2185 /
+5bcd5be8050fd36c001a3f96d33bf25e68330d81 /
+72252a4d2e8c41a7b03acb202227ddfbcfff909f8074a49fd833975e7e28c9f9
+Handoff SHA-256 / blob:
+aec2bf97321f7f326543aed74f4c6c1e45e5d142fd601ad40c7241e1dda6f952 /
+282af5483f8fb5b4c0bf0a05da7b35b928ff2bd3
+```
+
+This checkpoint is exact6: new Result/Receipt/Handoff plus append-only Plan/07/08.
+Full52, exact100, G6 Product Read, and Cycle001 acceptance remain0 and unstarted.

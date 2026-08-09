@@ -39172,3 +39172,35 @@ The Gate C lifecycle is `CLOSED_CONSUMED_CAUSAL_RED_STOP`. No retry, rerun,
 additional diagnostic execution, source correction, or automatic return is
 authorized. The next authority is unselected and separately requires Mash
 approval. This checkpoint is new3 plus append-only Plan/07/08 exact6.
+
+## 2026-08-10 current checkpoint — residual diagnosis / protected G4 Reception-focus oracle scope blocker
+
+The separately approved body-free diagnostic was consumed exactly once. It
+used the unchanged candidate and corrected protected test, launched no pytest
+or target node, and isolated `reception_exact` as the only false controlled
+conjunct. Head identity and every other production-owned control are true.
+
+```text
+state:
+G5_RESIDUAL_HEAD_DOMINANT_DIAGNOSIS_PROTECTED_G4_RECEPTION_FOCUS_ORACLE_SCOPE_BLOCKER_STOP
+diagnostic / pytest / target invocation: 1 / 0 / 0
+focus authority / root shape / primary-root subset / unique-head / combined:
+(11,0,0,0) / 11 / 2 / 7 / 0
+direct-validator pair equality / injection exact: 10 / true
+production candidate / protected-test change: 0 / 0
+mashos-api write / production publish / new Gate C: 0 / 0 / 0
+G5 GREEN / full52 / exact100 / G6 / acceptance: 0 / 0 / 0 / 0 / 0
+automatic progression: false
+```
+
+The failure is a protected-oracle overconstraint joining response-primary focus
+to independently selected root and head domains. No lawful G5 exact3 correction
+is available. Detailed owners are Result blob
+`71b22829dd05629541efa4286dd3852343a7e347`, Receipt blob
+`5bcd5be8050fd36c001a3f96d33bf25e68330d81` with logical SHA-256
+`72252a4d2e8c41a7b03acb202227ddfbcfff909f8074a49fd833975e7e28c9f9`,
+and Handoff blob `282af5483f8fb5b4c0bf0a05da7b35b928ff2bd3`.
+
+The next authority must explicitly name the protected G4 test path and
+Reception-focus clause, approve the minimal correction and additive causal RED
+refreeze, and separately authorize the post-refreeze Gate C one-shot.

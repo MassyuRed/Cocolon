@@ -789,3 +789,45 @@ The corrected G4 refreeze remains valid, but the new Gate C did not reach its
 required 24/0 projection. No retry, diagnostic execution, candidate correction,
 production publication, or automatic return gate follows. G6 and acceptance
 remain outside scope and unstarted.
+
+## 11.7 Current override — residual diagnosis protected G4 Reception-focus oracle scope blocker (2026-08-10)
+
+```text
+current state:
+G5_RESIDUAL_HEAD_DOMINANT_DIAGNOSIS_PROTECTED_G4_RECEPTION_FOCUS_ORACLE_SCOPE_BLOCKER_STOP
+
+diagnostic lifecycle:
+CLOSED_CONSUMED_DIAGNOSTIC_SCOPE_BLOCKER_STOP
+
+only false controlled conjunct:
+reception_exact
+
+production head identity / declared-head-first:
+true / 12
+
+focus authority / root shape / primary-root subset / unique-head / combined:
+(11,0,0,0) / 11 / 2 / 7 / 0
+
+direct-validator pair equality / injection exact:
+10 / true
+
+mashos-api write / production publish / protected-test change / new Gate C:
+0 / 0 / 0 / 0
+
+next authority:
+EXPLICIT_PROTECTED_G4_RECEPTION_FOCUS_ORACLE_CORRECTION_AND_ADDITIVE_REFREEZE_APPROVAL_REQUIRED
+
+full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+The unchanged G5 candidate is not the residual cause. The protected helper
+imposes unsupported cross-domain subset and unique-head conditions on the
+Reception focus authority. The present approval is closed because it did not
+identify that protected path/clause or additive refreeze as its correction
+operation. A separately explicit protected-helper correction/refreeze authority
+is required before a distinct Gate C one-shot. G6 and acceptance remain
+unstarted and unauthorized.
