@@ -376,3 +376,52 @@ Durable G4 owners:
 - `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_Addendum_20260809.md`
 - `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_BodyFree_Receipt_20260809.json`
 - `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_Handoff_20260809.md`
+
+## 9. G4 additive correction — current authoritative projection
+
+The prior G4 technical-completion claim is withdrawn as NONCREDIT; its closed lifecycle is not reopened. Mash approved and consumed one additive correction authority. Corrected protected test exact1 is now at mashos-api main `b0a8c70e5cec08581678b98f2e21571d17674d91`, blob `25f302a35d9e00df96f69d2eca26cc3caccc0e35`.
+
+```text
+corrected protected test: 432022 bytes / 11322 LF / CR0 / final-LF
+immutable prefix: 408068 bytes
+corrected suffix: 23954 <= 24000 bytes
+static node count / new node count: 52 / 0
+ordered exact24 SHA-256:
+  ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9
+fresh projection: 22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+production change: exact0
+corrected G4: CLOSED_CONSUMED_CAUSAL_RED_PASS
+Cycle001: NOT_ACCEPTED
+automatic progression: false
+```
+
+The corrected RED signatures are `REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED` and `HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED`. The old whole-production-blob pin is removed. Future G5 is bounded by the immutable Natural Surface prefix537,842, suffix cap11,090, body-only masked remainder, and mutable body symbols exact3.
+
+### 9.1 current first unfinished gate
+
+```text
+first unfinished technical gate:
+G5_B6_REMEDIATION_IMPLEMENTATION_GREEN_ONLY
+
+authority:
+DIRECT_MASH_APPROVAL_RECEIVED_EXACT1
+
+activation condition:
+G4_ADDITIVE_CORRECTION_EXACT6_GITHUB_POSTVERIFIED
+
+entry test blob:
+25f302a35d9e00df96f69d2eca26cc3caccc0e35
+
+entry production blob:
+1c19b6c293e20a9094b9180fded8c167daaaf5eb
+
+required machine exit:
+same ordered exact24 = 24 PASS / 0 FAIL
+
+G6 Product Read:
+SEPARATE_APPROVAL_REQUIRED / NOT_STARTED
+```
+
+G5 approval does not authorize protected-test, fixture, case, sample, Catalog, Grounded Lexicalization, Reception/relation/source authority, Parser, Matcher, Hard Gate, API, DB, RN, public/shared runtime, or any other path change. Machine GREEN cannot be converted to Product Read PASS or Cycle001 acceptance.
+
+Correction durable owners are the new additive-correction Addendum, body-free Receipt, Handoff, this current-state append, the Plan append, and `07_latest_snapshot_diff.md` append. Historical G4 files remain immutable.

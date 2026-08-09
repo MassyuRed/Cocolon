@@ -18178,3 +18178,24 @@ automatic progression: false
 ```
 
 Approval / activation / consumption are `1 / 1 / 1`: current direct instruction received; current rules/navigation/Plan/predecessor/source pins confirmed and G3 technical read started; first postactivation Natural Surface B6 source-body read. The authority is single-use; reactivation/reuse/retry are0. Source/test/fixture mutation, pytest/test execution, raw-body action, mashos-api write, G4/G5/G6 execution, exact24/full52/exact100 execution, Parser/Matcher/final inverse, and Cycle001 acceptance credit are all0. When the three exact G3 artifacts, this Plan postimage, the latest snapshot postimage, and `08_cycle001_current_state.md` postimage are all present on GitHub with prepared bytes, the current write-commit changed-path union is exact6/unauthorized0, and latest main contains all6, the final lifecycle is `CLOSED_CONSUMED_PASS` and G3 is durably complete. Handoff publication alone is insufficient. No automatic G4 execution is authorized.
+
+## 2026-08-09 CURRENT G4 ADDITIVE CORRECTION — corrected causal RED refreeze
+
+The prior G4 technical-completion position is withdrawn as NONCREDIT without reopening its closed lifecycle. Mash approved and consumed one additive correction authority, then separately authorized continuation through G5 only after durable corrected refreeze.
+
+The correction changed protected test exact1 at mashos-api commit `b0a8c70e5cec08581678b98f2e21571d17674d91`; production change was0. Corrected test identity is432,022 bytes /11,322 LF/CR0/final-LF/mode100644, SHA-256 `22d59c362210b7020eddf34c43bfbd74f0c83cd78e9c8326ab03abe12fe5f5d6`, blob `25f302a35d9e00df96f69d2eca26cc3caccc0e35`. Prefix408,068 is immutable; corrected suffix23,954<=24,000; static nodes52; new nodes0; existing body-recovery nodes2 strengthened. Ordered exact24 hash is `ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`.
+
+Fresh current-session exact24 execution was target invocation1, retry/fallback/interpreter switch0, wall903.38 seconds, and produced `22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR`. Exact RED signatures remain `REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED` and `HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED`. Full52/exact100/G6 were0.
+
+```text
+prior G4 technical credit: 0 / WITHDRAWN_NONCREDIT
+additive correction: CLOSED_CONSUMED_CAUSAL_RED_PASS
+corrected G4: CLOSED_CONSUMED_CAUSAL_RED_PASS
+G5 authority: RECEIVED_EXACT1_PENDING_CORRECTION_EXACT6_POSTVERIFY
+G5 activation/consumption here: 0/0
+G6: SEPARATE_APPROVAL_REQUIRED_NOT_STARTED
+Cycle001: NOT_ACCEPTED
+automatic progression: false
+```
+
+Correction durable owners are Addendum/Receipt/Handoff new3 plus append-only Plan/07/08 exact6. Historical G4 artifacts stay immutable. Corrected G4 becomes durable only when prepared bytes, exact6 changed-path union/unauthorized0, and latest-main inclusion are fresh-verified. G5 may then activate under the already received direct instruction and only within the G3-frozen Natural Surface exact3 body window.

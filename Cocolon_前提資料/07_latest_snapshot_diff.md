@@ -38997,3 +38997,13 @@ automatic progression: false
 ```
 
 The credited execution used pytest 8.4.1 and the frozen ordered exact24. The prior wrong-node projection was not credited. G5 may use only the G3-bounded Natural Surface suffix under separate Mash approval and must turn the same exact24 into `24 PASS / 0 FAIL`.
+
+## 2026-08-09 G4 additive correction checkpoint
+
+The earlier G4 completion claim is technically superseded as NONCREDIT. Its protected test added two nodes despite the frozen node-count52 contract, pinned the complete pre-G5 production blob and thereby made lawful future GREEN impossible, named a nonexistent excluded exact7, and did not freeze the required causal behavior. The prior closed lifecycle is not reopened.
+
+Mash approved a new additive correction and continuation through G5 after corrected GitHub refreeze. The corrected protected test is reflected at mashos-api `b0a8c70e5cec08581678b98f2e21571d17674d91`, blob `25f302a35d9e00df96f69d2eca26cc3caccc0e35`, SHA-256 `22d59c362210b7020eddf34c43bfbd74f0c83cd78e9c8326ab03abe12fe5f5d6`, bytes432,022, LF11,322, prefix408,068 exact, suffix23,954/24,000, static nodes52, new nodes0. Production remains blob `1c19b6c293e20a9094b9180fded8c167daaaf5eb`, change0.
+
+The corrected ordered exact24 has SHA-256 `ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`; fresh single-use execution returned22 PASS/2 exact causal RED/0 unexpected/0 error in903.38 seconds. Full52/exact100/G6 were0. Correction changed-path union in mashos-api is exact1/unauthorized0 and latest main contains the prepared test blob.
+
+Current authority difference: corrected G4 is `CLOSED_CONSUMED_CAUSAL_RED_PASS`; G5 approval is received exact1 but activates only after correction Addendum/Receipt/Handoff plus Plan/07/08 exact6 are postverified on Cocolon. Automatic progression remains false and Cycle001 remains `NOT_ACCEPTED`.
