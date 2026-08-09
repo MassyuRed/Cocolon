@@ -18199,3 +18199,32 @@ automatic progression: false
 ```
 
 Correction durable owners are Addendum/Receipt/Handoff new3 plus append-only Plan/07/08 exact6. Historical G4 artifacts stay immutable. Corrected G4 becomes durable only when prepared bytes, exact6 changed-path union/unauthorized0, and latest-main inclusion are fresh-verified. G5 may then activate under the already received direct instruction and only within the G3-frozen Natural Surface exact3 body window.
+
+## 2026-08-09 CURRENT G5 PREEXECUTION STOP — runtime readiness version probe failed
+
+Corrected G4 was durably postverified at Cocolon `c796b0eead99072694062ad4250b6ff17d3511f8`, so Mash's received G5 instruction activated. Entry remained mashos-api `b0a8c70e5cec08581678b98f2e21571d17674d91`, protected test blob `25f302a35d9e00df96f69d2eca26cc3caccc0e35`, production preimage blob `1c19b6c293e20a9094b9180fded8c167daaaf5eb`, and corrected ordered exact24 SHA-256 `ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`.
+
+A bounded Natural Surface candidate was prepared locally within the approved exact3 body window and passed static feasibility review, but received no GREEN or publication credit. Past G4 runtime readiness was not inherited. Gate A matched only the entrypoint/interpreter/pytest-package subset; absent manifest/lock/projection and observation-chain owners leave `CURRENT_CONTINUITY_UNVERIFIED`, recovery `NOT_ESTABLISHED`, instance `UNKNOWN`, and same-instance credit0. The separately counted version probe then consumed exact1 and exited1 with `PYTEST_MODULE_IMPORT_UNAVAILABLE`; under the launched policy the declared entrypoint could not import pytest.
+
+```text
+G5 approval / activation / consumption: 1 / 1 / 1
+Gate A discovery: 1
+version probe / exit: 1 / 1
+role probe / Gate C admission / target invocation: 0 / 0 / 0
+ordered exact24 / full52 / exact100 execution: 0 / 0 / 0
+retry / fallback / interpreter switch: 0 / 0 / 0
+rematerialization / install / repair / acquisition / network: 0 / 0 / 0 / 0 / 0
+mashos-api GitHub write / production commit: 0 / 0
+protected-test / fixture / sample change: 0 / 0 / 0
+G5 machine GREEN credit: 0
+G5 state: PREEXECUTION_STOP_RUNTIME_NOT_READY
+G6: NOT_STARTED / SEPARATE_APPROVAL_REQUIRED
+Cycle001: NOT_ACCEPTED
+automatic progression: false
+```
+
+The failed probe is not rolled back or reusable. The observation does not prove a final import-path root cause, and it does not retroactively alter corrected G4 credit. A new explicit Mash authority is first required for read-only Gate A manifest/lock/projection and observation-chain identity completion, with version/role/target/mutation/network0 and STOP after typed classification. Only then may another explicit Gate B authority be considered. Post-READY Gate C target execution requires another explicit Mash authority.
+
+Durable STOP owners are Addendum/Receipt/Handoff new3 plus this Plan and append-only 07/08 modified3. Closure requires prepared remote bytes, exact6 changed paths, unauthorized0/deletion0/rename0, and latest-main inclusion. This checkpoint authorizes neither recovery nor G5 production publication.
+
+Recording closure: Addendum section9 contains the lossless 10248-byte/256-LF patch from production preimage blob `1c19b6c293e20a9094b9180fded8c167daaaf5eb` to unpublished candidate blob `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`; hash-only candidate retention is not used. Sections10/11 freeze the path-free Gate A scope, canonical environment/argv materials, raw/sanitized stderr identities, and split lifecycles. The G5 umbrella is `CLOSED_CONSUMED_PREEXECUTION_STOP`; the failed Gate B probe is `CLOSED_CONSUMED_INVALID`. Gate A identity completion, any later Gate B recovery, and post-READY Gate C target execution each require a new explicit Mash authority.

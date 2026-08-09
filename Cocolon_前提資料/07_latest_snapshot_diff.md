@@ -39007,3 +39007,11 @@ Mash approved a new additive correction and continuation through G5 after correc
 The corrected ordered exact24 has SHA-256 `ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`; fresh single-use execution returned22 PASS/2 exact causal RED/0 unexpected/0 error in903.38 seconds. Full52/exact100/G6 were0. Correction changed-path union in mashos-api is exact1/unauthorized0 and latest main contains the prepared test blob.
 
 Current authority difference: corrected G4 is `CLOSED_CONSUMED_CAUSAL_RED_PASS`; G5 approval is received exact1 but activates only after correction Addendum/Receipt/Handoff plus Plan/07/08 exact6 are postverified on Cocolon. Automatic progression remains false and Cycle001 remains `NOT_ACCEPTED`.
+
+## 2026-08-09 G5 runtime-readiness preexecution STOP checkpoint
+
+Corrected G4 exact6 was postverified at Cocolon `c796b0eead99072694062ad4250b6ff17d3511f8`, activating the received G5 instruction. Entry blobs remained protected test `25f302a35d9e00df96f69d2eca26cc3caccc0e35` and production `1c19b6c293e20a9094b9180fded8c167daaaf5eb`.
+
+Gate A matched only the declared entrypoint/interpreter/pytest-package subset. Missing manifest/lock/projection and observation-chain identities leave `CURRENT_CONTINUITY_UNVERIFIED`, recovery `NOT_ESTABLISHED`, instance `UNKNOWN`, and same-instance credit0. The fresh pytest version probe nevertheless consumed exact1 and exited1 with safe signature `PYTEST_MODULE_IMPORT_UNAVAILABLE`; role probe and target invocation are0. Retry/fallback/interpreter switch/rematerialization/install/repair and mashos-api GitHub write are all0. G5 is `PREEXECUTION_STOP_RUNTIME_NOT_READY`; machine GREEN0. G4 credit is unchanged. The first required action is separately approved read-only Gate A identity completion; future Gate B and Gate C each require later explicit approval. G6 remains unstarted and Cycle001 remains `NOT_ACCEPTED`.
+
+Durable detail now includes the unpublished candidate's lossless preimage-relative patch, reproducible path-free discovery/environment/argv materials, and separate lifecycle owners. The G5 umbrella and failed probe are both closed/nonreusable. Gate A identity completion requires a new explicit Mash authority; any later Gate B recovery and post-READY Gate C target execution each require another explicit Mash authority.

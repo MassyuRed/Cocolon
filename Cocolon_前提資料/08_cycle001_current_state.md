@@ -425,3 +425,77 @@ SEPARATE_APPROVAL_REQUIRED / NOT_STARTED
 G5 approval does not authorize protected-test, fixture, case, sample, Catalog, Grounded Lexicalization, Reception/relation/source authority, Parser, Matcher, Hard Gate, API, DB, RN, public/shared runtime, or any other path change. Machine GREEN cannot be converted to Product Read PASS or Cycle001 acceptance.
 
 Correction durable owners are the new additive-correction Addendum, body-free Receipt, Handoff, this current-state append, the Plan append, and `07_latest_snapshot_diff.md` append. Historical G4 files remain immutable.
+
+## 10. G5 runtime readiness preexecution STOP — current authoritative projection
+
+Corrected G4 durable publication was postverified at Cocolon `c796b0eead99072694062ad4250b6ff17d3511f8`. The received direct G5 instruction therefore activated and was consumed by bounded implementation/readiness work.
+
+```text
+G5 entry mashos-api main:
+  b0a8c70e5cec08581678b98f2e21571d17674d91
+protected test blob:
+  25f302a35d9e00df96f69d2eca26cc3caccc0e35
+production preimage blob:
+  1c19b6c293e20a9094b9180fded8c167daaaf5eb
+ordered exact24 SHA-256:
+  ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9
+```
+
+Past G4 READY was not inherited. Gate A matched only the entrypoint/interpreter/pytest-package identity subset. Required manifest/lock/projection and observation-chain identities were undefined, so current classification is `CURRENT_CONTINUITY_UNVERIFIED`, recovery `NOT_ESTABLISHED`, instance `UNKNOWN`, and same-instance credit0. The separately counted version probe then launched exact1 and exited1 with safe signature `PYTEST_MODULE_IMPORT_UNAVAILABLE`. It consumed that single-use authority. Role probe, Gate C admission, target exact24, full52, exact100, retry, fallback, interpreter switch, rematerialization, install, repair, acquisition, and network are0.
+
+A local Natural Surface exact3 candidate passed static scope/feasibility checks but was not published and has machine GREEN credit0. Remote production and corrected test remain the entry blobs above. The incident does not change G4 credit.
+
+### 10.1 first unfinished gate
+
+```text
+current state:
+G5_PREEXECUTION_STOP_RUNTIME_NOT_READY
+
+first unfinished technical action:
+G5_GATE_A_RUNTIME_IDENTITY_COMPLETION_READ_ONLY
+
+authority:
+SEPARATE_MASH_APPROVAL_REQUIRED
+
+allowed next shape if separately approved:
+manifest/lock/projection and observation-chain identity completion
+version probe/required-role probe/target/mutation/network exact0
+STOP after typed Gate A classification
+
+future Gate B recovery:
+BLOCKED_PENDING_GATE_A / LATER_EXPLICIT_MASH_APPROVAL_REQUIRED
+
+Gate C target exact24:
+SEPARATE_LATER_BOUNDARY / NOT_STARTED
+
+G5 production GitHub write / machine GREEN:
+0 / 0
+
+G6 Product Read:
+SEPARATE_APPROVAL_REQUIRED / NOT_STARTED
+
+Cycle001:
+NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+The exact observation is limited to the entrypoint import failure under the launched policy; no final import-path root cause is claimed. The failed probe is closed and nonreusable. Recovery, target execution, production publication, G6, and Cycle001 acceptance are not authorized by the STOP checkpoint.
+
+Durable STOP owners are the new G5 runtime-readiness Addendum, body-free Receipt, Handoff, plus append-only Plan/07/08 exact6. Closure requires exact prepared bytes on Cocolon `main`, changed-path exact6, unauthorized0/deletion0/rename0, and latest-main inclusion.
+
+### 10.2 durable completeness and authority separation
+
+Addendum section9 stores an exact lossless patch bundle from production preimage blob `1c19b6c293e20a9094b9180fded8c167daaaf5eb` to the unpublished static candidate blob `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`; applying it is not authorized. Gate A discovery scope and the launch environment/argv are recorded as canonical public-safe preimages, not hash-only. Raw stderr is nonpublished session-local material; its bytes/LF/CR/final-LF/hash and the exact sanitized projection are durable.
+
+```text
+G5 umbrella implementation authority:
+  CLOSED_CONSUMED_PREEXECUTION_STOP / reuse0
+failed Gate B version-probe authority:
+  CLOSED_CONSUMED_INVALID / reuse0
+future Gate B recovery authority:
+  BLOCKED_PENDING_GATE_A / EXPLICIT_MASH_APPROVAL_REQUIRED_LATER
+post-READY Gate C target authority:
+  EXPLICIT_MASH_APPROVAL_REQUIRED
+```
