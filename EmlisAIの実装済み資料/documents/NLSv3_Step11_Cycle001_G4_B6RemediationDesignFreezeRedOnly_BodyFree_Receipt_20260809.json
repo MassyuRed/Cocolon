@@ -1,0 +1,81 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4_b6_remediation_design_freeze_red_only.body_free.v1",
+  "created_at_jst": "2026-08-09",
+  "body_free": true,
+  "public_safe": true,
+  "gate": "G4_B6_REMEDIATION_DESIGN_FREEZE_RED_ONLY",
+  "result": "CLOSED_CONSUMED_CAUSAL_RED_PASS",
+  "automatic_progression": false,
+  "authority": {
+    "owner": "Mash",
+    "kind": "DIRECT_USER_G4_COMPLETION_INSTRUCTION",
+    "approved_scope": "G4_ONLY_THROUGH_DURABLE_GITHUB_REFLECTION"
+  },
+  "entry": {
+    "g3": "COMPLETE_REMEDIATION_CONTRACT_FROZEN_READ_ONLY",
+    "cocolon_commit": "8f22a058aa39fe8d7bc2ac744760a4629e3360c8",
+    "mashos_api_commit": "65284fef36936d7091262e758e0cc9282909601b"
+  },
+  "mashos_api_change": {
+    "final_commit": "dab99efc12907fed82185ed3f9b5a5ba260094c2",
+    "intermediate_same_path_commit": "55141ff5f841e38aded6c1fd96d4632dd9f112ff",
+    "changed_path_count": 1,
+    "path": "ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py",
+    "bytes": 418422,
+    "lines": 10897,
+    "sha256": "03eaaa4688c82e1da15829a39d5c50f03db8927e084a7b2c189800d99b97bee6",
+    "git_blob_sha1": "91bc9a5602f06056fa6f3b9289a3b710698c6b1f",
+    "production_natural_surface_git_blob_sha1": "1c19b6c293e20a9094b9180fded8c167daaaf5eb",
+    "production_change_count": 0
+  },
+  "ordered_direct": {
+    "node_count": 24,
+    "existing_control_count": 22,
+    "new_causal_red_count": 2,
+    "p3_final_inverse_excluded_count": 7,
+    "material_contract": "EACH_ORDERED_NODE_ID_PLUS_LF",
+    "sha256": "efad5c20407db72dea12cd726ea3bace95b755efe182c03bd71cd45e49c670fc"
+  },
+  "execution": {
+    "python": "3.12.13",
+    "pytest": "8.4.1",
+    "credited_invocation_count": 1,
+    "wall_seconds": 585.22,
+    "exit": 1,
+    "projection": {
+      "PASS": 22,
+      "CAUSAL_RED": 2,
+      "UNEXPECTED": 0,
+      "ERROR": 0
+    },
+    "causal_reds": [
+      "REACHABLE_DIMENSION_EQUIVALENCE_LOCUS_NOT_PROVED",
+      "HEAD_DOMINANT_TYPED_ATTACHMENT_NOT_PROVED"
+    ],
+    "initial_wrong_node_projection_execution_credit": 0
+  },
+  "addendum": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_B6RemediationDesignFreezeRedOnly_Addendum_20260809.md",
+    "git_blob_sha1": "a1b819e83f00e480108b475e63b1b62d2984f4fa",
+    "bytes": 3750
+  },
+  "effects": {
+    "test_path_change_count": 1,
+    "production_source_change_count": 0,
+    "new_case_fixture_input_body_count": 0,
+    "raw_private_body_read_or_export_count": 0,
+    "helper_scanner_inspector_harness_diagnostic_file_count": 0,
+    "full_exact52_run_count": 0,
+    "exact100_run_count": 0,
+    "g5_implementation_count": 0
+  },
+  "lifecycle": {
+    "approval": 1,
+    "activation": 1,
+    "consumption": 1,
+    "single_use": true,
+    "state": "CLOSED_CONSUMED_CAUSAL_RED_PASS",
+    "g5_state": "READY_SEPARATE_APPROVAL_REQUIRED",
+    "cycle001_status": "NOT_ACCEPTED"
+  }
+}
