@@ -39204,3 +39204,73 @@ and Handoff blob `282af5483f8fb5b4c0bf0a05da7b35b928ff2bd3`.
 The next authority must explicitly name the protected G4 test path and
 Reception-focus clause, approve the minimal correction and additive causal RED
 refreeze, and separately authorize the post-refreeze Gate C one-shot.
+
+## 2026-08-10 current checkpoint — G4 protected-helper Reception-focus oracle corrected/refrozen
+
+Mash explicitly approved the protected G4 Reception-focus evidence helper
+correction, an additive base-production causal RED refreeze, and one distinct
+Gate C only after this Cocolon checkpoint is remotely postverified.
+
+The corrected helper removes the unsupported focus-to-independent-root and
+focus-to-independent-head assumptions. It retains the root `(1,1)` shape,
+requires builder-owned `grounded_response_primary_meaning`, nonempty focus IDs,
+successor actual-nucleus resolution, and exact direct/validator rebuild
+equality. The earlier `captured[::2]` correction is preserved.
+
+```text
+state:
+G4_PROTECTED_HELPER_RECEPTION_FOCUS_ORACLE_CORRECTED_REFROZEN_CAUSAL_RED_PASS
+
+mashos-api correction commit / tree:
+2272215e56e66bb3fa3c3dedb4616be35d8aecfb /
+25a63607685cd9fe8389d3b05b716ff73cddd01e
+
+protected-test SHA-256 / blob:
+c9b27c1ec9cb7c0288a837828e9c1d9b011b0876aaa62347beb5633d6ff5a6d7 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+protected-test bytes / LF / suffix / cap:
+431357 / 11311 / 23289 / 24000
+
+static tests / new suffix tests:
+52 / 0
+
+base ordered exact24:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+
+duration / invocation / retry:
+1009.34 seconds / 1 / 0
+
+base production change / G5 candidate change / candidate publish:
+0 / 0 / 0
+
+authoritative static reverify / result:
+1 / VALID
+
+preliminary wrong-requirements verifier:
+1 / CONTROL_MATERIAL_NONCREDIT_NONREUSABLE
+
+Gate C:
+ISSUED_INACTIVE_PENDING_THIS_EXACT6_REMOTE_POSTVERIFICATION
+
+full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+Detailed durable owners are Result SHA-256/blob
+`fd4916274b301c9acbd56e0f55cf3638f75b43d364d966d4f4a136f609a6d61a` /
+`acc3954cc809294fe616a28577f96b7e2ca5cf75`, Receipt SHA-256/blob/logical
+SHA-256 `d42a24f7fd87140fe33e36c50cf24f428f98878ebae10ca80530fcb4a35c40c2` /
+`3e46d481ab2743125a6d42a1e769615bd11f62b6` /
+`6101781e757b5afade38754e500dfd75cfd3d9f76d4db872aa090c5ec99a3650`,
+and Handoff SHA-256/blob
+`45a91460fcef5f1e44dfb83c68d4917dce44212e7fc759a052dcc6adce1fd842` /
+`7fd3c92cae7653b8aac256acccf10e7ba6a1661c`.
+
+This checkpoint is new Result/Receipt/Handoff plus append-only Plan/07/08
+exact6. Only after its fresh remote byte/path/latest-main verification may Gate
+C use unchanged candidate blob `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`
+with the corrected protected test and require `24 PASS / 0 FAIL`.

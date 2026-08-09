@@ -831,3 +831,69 @@ identify that protected path/clause or additive refreeze as its correction
 operation. A separately explicit protected-helper correction/refreeze authority
 is required before a distinct Gate C one-shot. G6 and acceptance remain
 unstarted and unauthorized.
+
+## 11.8 Current override — corrected/refrozen G4 Reception-focus oracle (2026-08-10)
+
+Mash supplied the exact protected-path and Reception-focus correction authority.
+The helper now counts only builder-owned focus invariants while preserving the
+prior capture-cardinality correction and every production boundary.
+
+```text
+current state:
+G4_PROTECTED_HELPER_RECEPTION_FOCUS_ORACLE_CORRECTED_REFROZEN_CAUSAL_RED_PASS
+
+mashos-api main / tree:
+2272215e56e66bb3fa3c3dedb4616be35d8aecfb /
+25a63607685cd9fe8389d3b05b716ff73cddd01e
+
+protected-test blob:
+c302dd99e143967fed6edd65b429373e87453fc6
+
+protected-test bytes / LF / suffix / cap:
+431357 / 11311 / 23289 / 24000
+
+ordered exact24:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+
+base production / unchanged candidate blobs:
+1c19b6c293e20a9094b9180fded8c167daaaf5eb /
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49
+
+production change / candidate publish:
+0 / 0
+
+authoritative exact5 static reverify:
+1 / VALID
+
+Gate C lifecycle:
+ISSUED_INACTIVE_PENDING_THIS_EXACT6_REMOTE_POSTVERIFICATION
+
+required Gate C projection:
+24 PASS / 0 FAIL
+
+G5 machine GREEN / full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+One preliminary wrong-requirements static process is retained as control-material
+noncredit/nonreusable; it does not alter the authoritative exact5 identity.
+The G4 correction/refreeze subauthority is closed/consumed. The distinct Gate C
+authority is approved but cannot activate until this new3 plus append-only
+Plan/07/08 exact6 is remotely present and freshly verified. G6 remains
+unstarted and unauthorized.
+
+```text
+Result SHA-256 / blob:
+fd4916274b301c9acbd56e0f55cf3638f75b43d364d966d4f4a136f609a6d61a /
+acc3954cc809294fe616a28577f96b7e2ca5cf75
+Receipt SHA-256 / blob / logical SHA-256:
+d42a24f7fd87140fe33e36c50cf24f428f98878ebae10ca80530fcb4a35c40c2 /
+3e46d481ab2743125a6d42a1e769615bd11f62b6 /
+6101781e757b5afade38754e500dfd75cfd3d9f76d4db872aa090c5ec99a3650
+Handoff SHA-256 / blob:
+45a91460fcef5f1e44dfb83c68d4917dce44212e7fc759a052dcc6adce1fd842 /
+7fd3c92cae7653b8aac256acccf10e7ba6a1661c
+```

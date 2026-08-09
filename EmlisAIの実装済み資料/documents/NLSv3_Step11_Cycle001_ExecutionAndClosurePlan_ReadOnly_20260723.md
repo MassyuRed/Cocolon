@@ -18519,3 +18519,93 @@ aec2bf97321f7f326543aed74f4c6c1e45e5d142fd601ad40c7241e1dda6f952 /
 
 This checkpoint is exact6: new Result/Receipt/Handoff plus append-only Plan/07/08.
 Full52, exact100, G6 Product Read, and Cycle001 acceptance remain0 and unstarted.
+
+## 2026-08-10 — G4 protected-helper Reception-focus oracle correction/refreeze
+
+Mash explicitly approved the exact protected G4 path, the Reception-focus
+evidence clause, its minimum correction, additive base-production causal RED
+refreeze, and one distinct post-refreeze Gate C.
+
+The protected helper previously required response-primary focus to be included
+in an independently selected Natural Surface root and every focus owner to
+occur in exactly one independently selected declared head. The builder and
+validator own neither assumption. The correction removes those predicates and
+retains only:
+
+```text
+root complete-base-proposition shape and ordinal (1,1)
+focus_basis grounded_response_primary_meaning
+nonempty source_focus_owner_ids
+focus IDs resolved in successor actual-nucleus IDs
+direct/validator authority pair equality exact10
+focus authority aggregate (11,0,0,0)
+Reception injection aggregate (11,6,0,11,11,6,10,10,true,true,true)
+```
+
+The prior `captured[::2]` correction remains present. No production-side or
+test-aware workaround was introduced.
+
+```text
+mashos-api correction commit / tree:
+2272215e56e66bb3fa3c3dedb4616be35d8aecfb /
+25a63607685cd9fe8389d3b05b716ff73cddd01e
+
+protected-test SHA-256 / blob:
+c9b27c1ec9cb7c0288a837828e9c1d9b011b0876aaa62347beb5633d6ff5a6d7 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+protected-test bytes / LF / suffix / cap / static tests / new tests:
+431357 / 11311 / 23289 / 24000 / 52 / 0
+
+base ordered exact24:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+
+duration / target invocation / collection / call:
+1009.34 seconds / 1 / 24 / 24
+
+authoritative exact5 static reverify:
+1 / VALID
+
+production change / unchanged candidate change / candidate publication:
+0 / 0 / 0
+
+runtime mutation / install / repair / rematerialization / acquisition:
+0 / 0 / 0 / 0 / 0
+
+retry / fallback / interpreter switch:
+0 / 0 / 0
+
+full52 / exact100 / G6 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+```
+
+One preliminary static verifier used a wrong requirements path. Its runtime
+identity matched, but its control-material result is immutable noncredit and
+nonreusable. It launched neither pytest nor the target.
+
+The G4 correction/refreeze lifecycle is
+`CLOSED_CONSUMED_CAUSAL_RED_PASS`. The new Gate C lifecycle is
+`ISSUED_INACTIVE_PENDING_G4_EXACT6_REMOTE_POSTVERIFICATION`. This checkpoint
+uses new Result/Receipt/Handoff plus append-only Plan/07/08 exact6. Only after
+fresh remote prepared-byte equality, union changed-path exact6, unauthorized0,
+deletion0, rename0, and latest-main inclusion may Gate C activate.
+
+```text
+Result SHA-256 / blob:
+fd4916274b301c9acbd56e0f55cf3638f75b43d364d966d4f4a136f609a6d61a /
+acc3954cc809294fe616a28577f96b7e2ca5cf75
+Receipt SHA-256 / blob / logical SHA-256:
+d42a24f7fd87140fe33e36c50cf24f428f98878ebae10ca80530fcb4a35c40c2 /
+3e46d481ab2743125a6d42a1e769615bd11f62b6 /
+6101781e757b5afade38754e500dfd75cfd3d9f76d4db872aa090c5ec99a3650
+Handoff SHA-256 / blob:
+45a91460fcef5f1e44dfb83c68d4917dce44212e7fc759a052dcc6adce1fd842 /
+7fd3c92cae7653b8aac256acccf10e7ba6a1661c
+```
+
+Gate C must use the unchanged candidate blob
+`f10ce7948e5570ee8ad27ee2af00a9caf3867d49`, the corrected protected-test
+blob above, the same exact5 runtime identity, and ordered-exact24 SHA-256
+`ea5f4afb819210eac771db02287c02475afb19cf9cff0408c7ce3dd866df10b9`.
+Required GREEN is `24 PASS / 0 FAIL`. Production publication and G5 closure
+occur only after that result. Automatic progression remains false.
