@@ -39650,3 +39650,66 @@ MassyuRed/mashos-api main remained
 fresh verification, and all six result paths were fresh-refetched equal. This
 verification appendix stays on the already-approved 07 path; its own commit
 identity is omitted to avoid a publication self-reference.
+
+## 2026-08-10 latest checkpoint — G4 Gate B recovery V1 failed-root-unavailable typed STOP
+
+Base latest main was `6d14b1dad31407999a27918873d6aa69e248c456`. Fresh preactivation verification
+matched mashos-api main/tree, production/protected blobs, failed Gate B V1 new3 blobs and state, and the
+previous Cocolon exact6 remote prepared bytes. Previous changed-path union was exact6 with unauthorized,
+deletion, and rename counts 0.
+
+The recovery authority ran Stage R0 read-only. The failed session-local root was absent from the current Work
+session (availability observation 1; candidate 0). V1 helper sources exact5 were present but unexecuted.
+Owner/independent diagnosis was 0/0; actual manifest hash, counts, canonical preimage size, match flags, and
+mismatch digests are `NOT_DERIVABLE_FAILED_ROOT_ABSENT` or `NOT_OBSERVED`.
+
+```text
+exactly-one cause:
+FAILED_ROOT_NOT_AVAILABLE_FOR_CAUSAL_DIAGNOSIS
+
+Stage R1 admission / attempt:
+0 / 0
+
+runtime READY admission:
+0
+```
+
+The V1 materializer static rule is an unversioned exact11 candidate oracle rather than a versioned single
+canonical schema. The prior READY Receipt, failed V1 artifacts, formal lock, tracked procedure, and historical
+generic exact4 rule were compared. Expected `9c6925ed...` remains durable as a value, while a current
+expected-specific canonical-owner binding was not found. This is recorded as a secondary durable conflict;
+it does not replace or add to the exactly-one root-unavailable cause.
+
+Terminal state:
+
+```text
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_RECOVERY_TYPED_FAILURE
+EXACT_TYPED_CAUSE_RECORDED
+CURRENT_GATE_B_RECOVERY_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+SAME_SERIES_FURTHER_RETRY_NOT_AUTHORIZED
+NEXT_AUTHORITY_UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+New artifact identities:
+
+| Role | Path | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---|---:|---:|---|---|
+| Result | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_RecoveryAfterTypedFailure_V1_Result_20260810.md` | 12803 | 295 | `59a65dad6b4ca2838d908cc0f8136aba3e291adcb5819d203a7819495586edaa` | `943db07ae0ce1f33a6a1b152d04acf5b30236d2e` |
+| Receipt | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_RecoveryAfterTypedFailure_V1_BodyFree_Receipt_20260810.json` | 17198 | 354 | `8d47e9f8f1fcbdf00ffac5c39b4d1eeb8c3843520504e9bc98da46a9f3bbcaba` | `5e6e7c08787485ec34de09eb290b08835cbdca11` |
+| Receipt logical | self-empty sorted compact UTF-8 JSON, no LF | — | — | `5803b8809a70073eb6a55329e7779d8ba05ead672526d0b2e87768e444613484` | — |
+| Handoff | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_RecoveryAfterTypedFailure_V1_Handoff_20260810.md` | 8295 | 196 | `bc340088a139f6928e43caed02e5351c9b50a3300b85070d442431ff5957ca57` | `4190d2f05b9b2d638436b7786ce304576dd20a44` |
+
+Modified preimage identities:
+
+| Path | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---:|---:|---|---|
+| ExecutionAndClosurePlan | 1208805 | 19101 | `a1dd18dd12ec4627a9ce2cedd9c9e72a50e9990c27b940ee8921cde006afc242` | `2238e1ab5b4287b67a1cceeabf96e20a52a7c9a7` |
+| 07 latest snapshot | 2397450 | 39652 | `034b91bc7af08cd41d00d2aa7117c310f05437f9103006d630fd2050b5f1b3c9` | `7f6e20d04c97abbca37c46c902267e564f72b0c4` |
+| 08 current state | 50598 | 1434 | `d3d0f38b740935292a24a253dec58349b6e5273d8240c2d869239d3af5c1b59b` | `67e983d8dceae5c12e2b7c4d93c0ddfc32ba8b50` |
+
+All preimages and prepared bytes are LF-only, final-LF true, mode `100644`. Publication changes only the
+approved Cocolon exact6. mashos-api, target/protected test, production, fixture/sample/corpus, runtime, and
+all downstream gates remain unchanged. A separate postwrite verification appendix will record remote byte
+equality, exact6 union, latest inclusion, and final heads without issuing a next authority.
