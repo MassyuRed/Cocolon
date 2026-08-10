@@ -39608,3 +39608,45 @@ Handoff raw/blob: `abbc1dafe708111fedb95a35e4de5844b43cb615da1543f66648d980edb93
 
 This is Cocolon exact6 only. New retry/recovery authority is not issued and
 requires separate Mash approval; current V1 is not reusable.
+
+## 2026-08-10 publication verification — G4 Gate B typed failure V1
+
+The exact6 write group started at
+`97be1644455deb5bd069a9dff02f0440a5c2ad48` and reached terminal write head
+`6cf900008c842c07089e3292d9f57a9cded6bf4a`. Fresh GitHub comparison reported
+ahead7 / changed-path exact6. Each write commit changed one approved path only:
+
+```text
+3c20dcc1d0f43853189b5f6bd47cd9110abc3a5c  Result
+a9453d9eb6495d92cbad4646943d09fe8b1dc884  Receipt
+cb5f920cc67bf8de56149e811ecc8b59075e1b7b  Handoff
+37e077eedbd503d1306503e8e8b0145e2f3ef12c  Plan initial append
+525f9bc5d9e8ebc86d89772ab9f45635b1633946  Plan immutable-blob restore plus append
+a580d310440bbbe42a9722f25a2e54a3ae95afac  07 latest checkpoint
+6cf900008c842c07089e3292d9f57a9cded6bf4a  08 current navigation
+```
+
+The first Plan update encountered the connector's empty-content response for a
+large file. This was detected immediately. The next approved-path-only commit
+reconstructed the Plan from immutable preimage blob
+`4240668b5fe565217493361e6872d6586b3f3884` and appended the prepared section.
+Fresh postfetch proved final Plan content equals that exact old blob plus the
+approved append; no historical Plan byte was lost.
+
+Final path / blob / prepared-byte equality at terminal write head:
+
+| Role | Path | Final blob | Prepared bytes |
+|---|---|---|---|
+| Result | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeRematerializationAndReadinessReconciliation_V1_Result_20260810.md` | `bbd1c96efb02121dcea472423d04a4938d14df6e` | exact |
+| Receipt | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeRematerializationAndReadinessReconciliation_V1_BodyFree_Receipt_20260810.json` | `fe610a3614deac5a1d1961ac276ec6470ef18160` | exact |
+| Handoff | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeRematerializationAndReadinessReconciliation_V1_Handoff_20260810.md` | `1dbad1c85a08124af8aa29ea1836d10641718d91` | exact |
+| Plan | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` | `2238e1ab5b4287b67a1cceeabf96e20a52a7c9a7` | exact old blob + append |
+| 07 | `Cocolon_前提資料/07_latest_snapshot_diff.md` | `b894262ec7faf26f1d306e53edcf15e0ed6da155` | exact old blob + checkpoint append |
+| 08 | `Cocolon_前提資料/08_cycle001_current_state.md` | `67e983d8dceae5c12e2b7c4d93c0ddfc32ba8b50` | exact old blob + current override |
+
+Unauthorized path, deletion, rename, and mashos-api changed path counts are0.
+MassyuRed/mashos-api main remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`. Terminal head was latest main at
+fresh verification, and all six result paths were fresh-refetched equal. This
+verification appendix stays on the already-approved 07 path; its own commit
+identity is omitted to avoid a publication self-reference.
