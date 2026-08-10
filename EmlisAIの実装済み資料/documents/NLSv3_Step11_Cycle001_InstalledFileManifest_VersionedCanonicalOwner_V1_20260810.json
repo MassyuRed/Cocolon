@@ -1,0 +1,380 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.installed_file_manifest.versioned_canonical_owner.v1",
+  "owner_id": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_OWNER_V1",
+  "authority": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_VERSIONED_CANONICAL_OWNER_AND_DIAGNOSTIC_ONLY_FRESH_REPRODUCTION_V1",
+  "date": "2026-08-10",
+  "body_free": true,
+  "public_safe": true,
+  "state": "VERSIONED_CANONICAL_OWNER_FROZEN",
+  "automatic_progression": false,
+  "expected_installed_file_manifest_sha256": "9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6",
+  "owner_document_encoding": {
+    "purpose": "PUBLIC_CONTRACT_DOCUMENT_ONLY",
+    "derived_manifest_preimage_included": false,
+    "concrete_manifest_rows_included": false,
+    "format": "UTF8_PRETTY_JSON_WITH_FINAL_LF"
+  },
+  "frozen_inputs": {
+    "cocolon_entry_commit": "c974f672b7bd3089700e3d7834527995cfff0aa0",
+    "mashos_api_entry_commit": "45bf98f9034261d3adb3e808d6d759f2334e2d25",
+    "mashos_api_entry_tree": "23f1684ed5430cafef955d7af9fc6bde75a4c62f",
+    "formal_lock": {
+      "repository": "MassyuRed/mashos-api",
+      "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+      "blob_sha": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+      "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+      "logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4"
+    },
+    "corrected_exact7_projection": {
+      "bytes": 2185,
+      "raw_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e"
+    },
+    "requirements_exact5": {
+      "bytes": 473,
+      "lf_count": 5,
+      "raw_sha256": "4f7218509a20e42850afe75597f2abfdf447035001847621d4637faa246065f1"
+    },
+    "accepted_wheel_manifest": {
+      "count": 5,
+      "total_bytes": 1724842,
+      "canonical_rule": "SHA256_UTF8_COMPACT_SORTED_KEY_JSON_ARRAY_NO_FINAL_LF_OF_EXACT2_WHEEL_FILENAME_WHEEL_SHA256_IN_FROZEN_DISTRIBUTION_ORDER",
+      "sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d"
+    },
+    "distribution_closure": {
+      "canonical_rule": "SHA256_UTF8_COMPACT_SORTED_KEY_JSON_ARRAY_NO_FINAL_LF_OF_EXACT3_NORMALIZED_DISTRIBUTION_NAME_DISTRIBUTION_VERSION_INSTALLED_RECORD_CLOSURE_SHA256_IN_FROZEN_DISTRIBUTION_ORDER",
+      "sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c"
+    },
+    "base_runtime": {
+      "implementation": "CPython",
+      "version": "3.12.13",
+      "platform": "linux-x86_64",
+      "resolved_interpreter_executable_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+      "selection_rule": "LEXICOGRAPHIC_FIRST_SYSTEM_MANAGED_CANDIDATE_AFTER_EXACT_BYTE_AND_PLATFORM_IDENTITY_MATCH_NO_FALLBACK"
+    },
+    "environment_policy_sha256": "8a43751b49a8db1d024063608405f9b169e829f3c0be3488433b31800d44b1a4",
+    "required_role_path_ordered_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+    "tracked_procedure_exact2": [
+      {
+        "path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+        "blob_sha": "ea7f96221846e5614431296e00ac481cc00e00a2",
+        "raw_sha256": "42fcd4d65b0d21b5e41659b6329c55c14ed42c0270838f13be6102b351db7ac9"
+      },
+      {
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+        "blob_sha": "5c3b7dd03c84a84a2717f57f0d2c99c39b2ed6d8",
+        "raw_sha256": "895ea1f130e331d4e89f857835b4477d949c1ff63c0adea11276bc97b4c717b2"
+      }
+    ],
+    "exact5": [
+      {
+        "slot": 0,
+        "normalized_distribution_name": "iniconfig",
+        "distribution_version": "2.3.0",
+        "wheel_filename": "iniconfig-2.3.0-py3-none-any.whl",
+        "wheel_sha256": "f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12",
+        "wheel_record_sha256": "06144d1d47c00e05c46b66ee3503fc35022bbce0a18089371d0bcd24de9abcad",
+        "installed_record_closure_sha256": "390ff70b72d7d6be5bf03dae9ff546d6a13584704d3078ce0000eded74092e05"
+      },
+      {
+        "slot": 1,
+        "normalized_distribution_name": "packaging",
+        "distribution_version": "26.2",
+        "wheel_filename": "packaging-26.2-py3-none-any.whl",
+        "wheel_sha256": "5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e",
+        "wheel_record_sha256": "f8970ce9313b03142296fcbb8c9db6df7836e66710a71ae07b99939fc49f30cf",
+        "installed_record_closure_sha256": "851cdb430628cce99eb887f87405c6c2bfb24e642a972cdf843267018c82c3a1"
+      },
+      {
+        "slot": 2,
+        "normalized_distribution_name": "pluggy",
+        "distribution_version": "1.6.0",
+        "wheel_filename": "pluggy-1.6.0-py3-none-any.whl",
+        "wheel_sha256": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746",
+        "wheel_record_sha256": "e3f054e6e651035e45561a2f97427e0cd24205e6c1ee6c9c38cc59424b743c90",
+        "installed_record_closure_sha256": "b072098f6cace7afdf1d4759f13b91f805836743a0af3c4f38f40343c60ee942"
+      },
+      {
+        "slot": 3,
+        "normalized_distribution_name": "pygments",
+        "distribution_version": "2.20.0",
+        "wheel_filename": "pygments-2.20.0-py3-none-any.whl",
+        "wheel_sha256": "81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176",
+        "wheel_record_sha256": "cbcfe0f4255177b43aad099d47a0551c6304fa6a3dd8d5d65d6ff0d2f53ff804",
+        "installed_record_closure_sha256": "ce2debc2a42c4274ea75b03e9c0f4dc5bd01c6f25e86da4fac5d76296e3b1a05"
+      },
+      {
+        "slot": 4,
+        "normalized_distribution_name": "pytest",
+        "distribution_version": "8.4.1",
+        "wheel_filename": "pytest-8.4.1-py3-none-any.whl",
+        "wheel_sha256": "539c70ba6fcead8e78eebbf1115e8b589e7565830d7d006a8723f19ac8a0afb7",
+        "wheel_record_sha256": "73ca68976a7a39a5127f1ad03216d55b1f6a1bda49e509543a8288c45310237c",
+        "installed_record_closure_sha256": "5cefca6d1f84bef673818f562c6b63b100d32b51dc26405c5bed8cbd91b11874"
+      }
+    ]
+  },
+  "canonical_manifest_contract": {
+    "schema": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1",
+    "preimage_root": "ARRAY_NO_SCHEMA_WRAPPER",
+    "site_packages_root_included": false,
+    "distribution_order": [
+      "iniconfig",
+      "packaging",
+      "pluggy",
+      "pygments",
+      "pytest"
+    ],
+    "distribution_cardinality_rule": "INSTALLED_METADATA_NAME_AND_VERSION_EXACT1_PER_FROZEN_SLOT_AND_NO_OTHER_INSTALLED_DISTRIBUTION",
+    "record_cardinality_rule": "INSTALLED_RECORD_EXACT1_PER_FROZEN_SLOT",
+    "included_scope": "EXACTLY_IN_SITE_REGULAR_PAYLOADS_OWNED_BY_EACH_FROZEN_INSTALLED_RECORD_CLOSURE",
+    "verification_before_exclusion": [
+      "RECORD_SELF",
+      "EXTERNAL_ENTRYPOINT"
+    ],
+    "excluded_scope": [
+      "SITE_PACKAGES_ROOT",
+      "RECORD_SELF_AFTER_VERIFICATION",
+      "VERIFIED_EXTERNAL_ENTRYPOINT_AFTER_VERIFICATION",
+      "PYC_FILE",
+      "PYCACHE_SUBTREE"
+    ],
+    "external_entrypoint_rule": {
+      "allowed_name_source": "CONSOLE_SCRIPTS_KEYS_FROM_HASH_VERIFIED_ENTRY_POINTS_TXT_IN_FRESH_ACCEPTED_EXACT5_WHEELS",
+      "resolved_scope": "RUNTIME_BIN_DIRECT_CHILD_ONLY",
+      "required_checks": [
+        "RUNTIME_CONTAINMENT",
+        "NO_SYMLINK_COMPONENT_OR_LEAF",
+        "REGULAR_FILE",
+        "RECORD_SIZE_MATCH",
+        "RECORD_SHA256_MATCH",
+        "BASENAME_IN_ALLOWED_CONSOLE_SCRIPT_SET"
+      ],
+      "other_external_record_rows": "TYPED_FAULT"
+    },
+    "file_type_rule": {
+      "allowed_manifest_leaf": "REGULAR_FILE_ONLY",
+      "symlink": "FORBIDDEN_WITH_LSTAT_NOFOLLOW_ON_EVERY_COMPONENT_AND_LEAF",
+      "nonregular": "FORBIDDEN",
+      "directory": "INVENTORY_ONLY_NOT_A_MANIFEST_ROW"
+    },
+    "relative_path_rule": {
+      "encoding": "STRICT_UTF8",
+      "format": "SITE_PACKAGES_RELATIVE_POSIX",
+      "normalization": "LEXICAL_POSIX_NORMPATH",
+      "unicode_normalization": "NONE",
+      "casefold": false,
+      "forbidden": [
+        "ABSOLUTE",
+        "EMPTY",
+        "DOT",
+        "DOT_DOT_ESCAPE",
+        "NUL",
+        "BACKSLASH",
+        "ASCII_CONTROL"
+      ],
+      "containment": "LEXICAL_SITE_AND_RUNTIME_CONTAINMENT_REQUIRED_BEFORE_FILESYSTEM_ACCESS"
+    },
+    "row_semantic_fields_exact4": [
+      "normalized_distribution_name",
+      "relative_path",
+      "byte_count",
+      "raw_sha256"
+    ],
+    "row_object_key_order": [
+      "byte_count",
+      "normalized_distribution_name",
+      "raw_sha256",
+      "relative_path"
+    ],
+    "row_value_rules": {
+      "normalized_distribution_name": "FROZEN_EXACT5_CANONICAL_NAME",
+      "relative_path": "RELATIVE_PATH_RULE_OUTPUT",
+      "byte_count": "NONNEGATIVE_INTEGER_OF_ACTUAL_REGULAR_PAYLOAD_BYTES",
+      "raw_sha256": "LOWERCASE_HEX_SHA256_OF_ACTUAL_REGULAR_PAYLOAD_BYTES"
+    },
+    "row_order": "FROZEN_DISTRIBUTION_SLOT_ASCENDING_THEN_UNICODE_CODEPOINT_RELATIVE_PATH_ASCENDING",
+    "json_rule": {
+      "object_keys": "LEXICOGRAPHIC",
+      "ensure_ascii": false,
+      "separators": [
+        ",",
+        ":"
+      ],
+      "encoding": "UTF8",
+      "final_lf": false
+    },
+    "identity_rule": "SHA256_OF_CANONICAL_MANIFEST_PREIMAGE_BYTES"
+  },
+  "record_closure_contract": {
+    "per_distribution_preimage": {
+      "root": "OBJECT_WITH_RECORD_ENTRIES_ARRAY",
+      "row_exact3": [
+        "path",
+        "sha256",
+        "size"
+      ],
+      "row_order": "UNICODE_CODEPOINT_PATH_ASCENDING",
+      "json_rule": "LEXICOGRAPHIC_KEYS_COMPACT_UTF8_NO_FINAL_LF"
+    },
+    "aggregate_preimage": {
+      "root": "ARRAY",
+      "row_exact3": [
+        "normalized_distribution_name",
+        "distribution_version",
+        "installed_record_closure_sha256"
+      ],
+      "row_order": "FROZEN_EXACT5_DISTRIBUTION_ORDER",
+      "json_rule": "LEXICOGRAPHIC_KEYS_COMPACT_UTF8_NO_FINAL_LF"
+    }
+  },
+  "diagnostic_inventory_contract": {
+    "site_scan": "LEXICAL_RECURSIVE_LSTAT_NOFOLLOW_SITE_PACKAGES_ROOT_EXCLUDED",
+    "site_regular_file_count": "ALL_ACTUAL_REGULAR_LEAF_ENTRIES_UNDER_SITE_PACKAGES",
+    "eligible_regular_payload_count": "ACTUAL_REGULAR_LEAF_ENTRIES_AFTER_RECORD_SELF_PYC_AND_PYCACHE_EXCLUSIONS",
+    "owned_count": "DISTINCT_ELIGIBLE_REGULAR_RELATIVE_PATH_WITH_EXACTLY_ONE_VALID_FROZEN_RECORD_OWNER",
+    "unowned_count": "DISTINCT_ELIGIBLE_REGULAR_RELATIVE_PATH_WITH_ZERO_VALID_FROZEN_RECORD_OWNER",
+    "duplicate_relative_path_count": "DISTINCT_RELATIVE_PATH_WITH_MORE_THAN_ONE_FROZEN_RECORD_OWNER_CLAIM",
+    "missing_count": "DISTINCT_VALID_IN_SITE_RECORD_CLAIM_WITHOUT_AN_ACTUAL_ELIGIBLE_REGULAR_LEAF",
+    "extra_count": "SAME_PATH_SET_AS_UNOWNED_COUNT",
+    "symlink_count": "ALL_ACTUAL_SYMLINK_LEAF_ENTRIES_UNDER_SITE_PACKAGES",
+    "other_count": "ALL_ACTUAL_NON_DIRECTORY_NON_REGULAR_NON_SYMLINK_LEAF_ENTRIES_UNDER_SITE_PACKAGES",
+    "directory_count": "ALL_ACTUAL_DIRECTORY_ENTRIES_UNDER_SITE_PACKAGES",
+    "pyc_count": "ALL_ACTUAL_PYC_REGULAR_LEAF_ENTRIES",
+    "pycache_directory_count": "ALL_ACTUAL_DIRECTORIES_NAMED___PYCACHE__",
+    "verified_external_entrypoint_count": "VALID_EXCLUDED_EXTERNAL_RECORD_ROWS",
+    "verified_external_entrypoint_pathset_digest": "SHA256_OF_COMPACT_UTF8_JSON_ARRAY_NO_FINAL_LF_OF_SORTED_DISTINCT_SHA256_OF_RUNTIME_RELATIVE_EXTERNAL_PATHS",
+    "pathset_digest": "SHA256_OF_COMPACT_UTF8_JSON_ARRAY_NO_FINAL_LF_OF_SORTED_DISTINCT_CANONICAL_RELATIVE_PATH_STRINGS",
+    "mismatch_families_fixed_order": [
+      "DISTRIBUTION_MISSING",
+      "DISTRIBUTION_EXTRA",
+      "DISTRIBUTION_VERSION_MISMATCH",
+      "METADATA_INVALID",
+      "RECORD_MISSING",
+      "RECORD_INVALID",
+      "RECORD_SELF_CARDINALITY_INVALID",
+      "RECORD_PATH_INVALID",
+      "EXTERNAL_ENTRYPOINT_SET_MISMATCH",
+      "RECORD_DIGEST_ALGORITHM_INVALID",
+      "RECORD_EXPECTED_SIZE_INVALID",
+      "MISSING_OWNED_PATH",
+      "OWNED_PATH_BYTE_COUNT_MISMATCH",
+      "OWNED_PATH_RAW_SHA256_MISMATCH",
+      "UNOWNED_EXTRA_PATH",
+      "DUPLICATE_OWNERSHIP",
+      "SYMLINK_FORBIDDEN",
+      "NONREGULAR_FORBIDDEN",
+      "PYC_FILE_PRESENT",
+      "PYCACHE_DIRECTORY_PRESENT",
+      "INSTALLED_RECORD_CLOSURE_MISMATCH",
+      "AGGREGATE_DISTRIBUTION_CLOSURE_MISMATCH"
+    ],
+    "mismatch_row_internal_exact3": [
+      "family",
+      "owner_slot",
+      "subject_sha256"
+    ],
+    "mismatch_subject_rule": "SHA256_UTF8_OF_PRIVATE_NORMALIZED_RELATIVE_PATH_OR_DISTRIBUTION_TOKEN_OR_GLOBAL_TOKEN",
+    "mismatch_row_order": "FIXED_FAMILY_INDEX_THEN_OWNER_SLOT_ASCENDING_THEN_SUBJECT_SHA256_ASCENDING",
+    "mismatch_row_digest": "SHA256_OF_LEXICOGRAPHIC_KEY_COMPACT_UTF8_JSON_ARRAY_NO_FINAL_LF_OF_ORDERED_INTERNAL_EXACT3_ROWS",
+    "empty_array_representation": "[]",
+    "mismatch_family_counts_rule": "OBJECT_WITH_EVERY_FIXED_FAMILY_KEY_PRESENT_INCLUDING_ZERO_SERIALIZED_WITH_LEXICOGRAPHIC_KEYS",
+    "public_report": "COUNTS_AND_DIGESTS_ONLY_NO_PATHS_NO_ROWS_NO_FILE_OR_RECORD_BODIES"
+  },
+  "helper_freeze": {
+    "owner": {
+      "implementation_role": "OWNER_DERIVATION",
+      "final_body_frozen": true,
+      "body_bytes": 31211,
+      "raw_sha256": "cacf1bb15d61943e7934037aec6b5d6e69a27d9a0da93dc07d4ba988e3d2b50e",
+      "body_git_blob_sha1": "acac8c45dafc4f0ed5cbabb24b966f5e4bc264e6",
+      "creation_count": 1,
+      "static_syntax_check_count": 1,
+      "execution_count_before_d1": 0,
+      "planned_execution_count_d1": 1,
+      "prior_helper_reuse_count": 0
+    },
+    "independent": {
+      "implementation_role": "INDEPENDENT_DERIVATION",
+      "final_body_frozen": true,
+      "body_bytes": 30411,
+      "raw_sha256": "071fa8f2225c170cad1f7afc56111d83c4319f593f76d7caa9c40ec4785fc37c",
+      "body_git_blob_sha1": "416a53a48c175f257d66fbb49081729df2cb49fa",
+      "creation_count": 1,
+      "static_syntax_check_count": 1,
+      "execution_count_before_d1": 0,
+      "planned_execution_count_d1": 1,
+      "prior_helper_reuse_count": 0
+    },
+    "independence": {
+      "shared_module_count": 0,
+      "mutual_import_count": 0,
+      "prior_helper_copy_count": 0,
+      "owner_strategy": "DISTRIBUTION_FIRST_RECORD_CLAIM_CONSTRUCTION",
+      "independent_strategy": "FILESYSTEM_FIRST_REVERSE_OWNERSHIP_RECONCILIATION"
+    },
+    "tracked_procedure_binding": "FROZEN_INPUTS_TRACKED_PROCEDURE_EXACT2"
+  },
+  "d1_one_shot_contract": {
+    "failed_root_reuse_count": 0,
+    "prior_root_reuse_count": 0,
+    "prior_wheel_reuse_count": 0,
+    "prior_helper_reuse_count": 0,
+    "readiness_credit_reuse_count": 0,
+    "new_private_staging_count": 1,
+    "new_private_download_count": 1,
+    "new_private_runtime_root_count": 1,
+    "configured_route_count": 1,
+    "network_process_count": 1,
+    "venv_without_pip_copies_count": 1,
+    "hash_required_no_index_no_deps_wheel_only_no_compile_install_count": 1,
+    "owner_derivation_count": 1,
+    "independent_derivation_count": 1,
+    "attempt_two_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0
+  },
+  "classification_precedence": [
+    "DIAGNOSTIC_FRESH_MATERIALIZATION_TYPED_FAILURE",
+    "DIAGNOSTIC_OWNER_INDEPENDENT_DIVERGENCE",
+    "EXPECTED_IDENTITY_REPRODUCED_UNDER_VERSIONED_CANONICAL_OWNER",
+    "EXPECTED_IDENTITY_NOT_REPRODUCED_COMPARATOR_DECISION_REQUIRED"
+  ],
+  "privacy": {
+    "public": [
+      "VERSIONED_SCHEMA_CONTRACT",
+      "RAW_IDENTITIES",
+      "COUNTS",
+      "DIGESTS",
+      "DURABLE_REPOSITORY_RELATIVE_PATHS",
+      "BODY_FREE_VERDICTS"
+    ],
+    "private": [
+      "ABSOLUTE_WORK_PATH",
+      "FRESH_ROOT_LOCATOR",
+      "HELPER_LOCATOR_OR_BODY",
+      "CONCRETE_MANIFEST_ROW_OR_PATH_LIST",
+      "FILE_PACKAGE_RECORD_WHEEL_OR_RUNTIME_BODY",
+      "CONFIGURED_ROUTE_OR_URL_BODY",
+      "CREDENTIAL_OR_ENVIRONMENT_VALUE",
+      "RAW_ACQUISITION_OUTPUT_OR_TRACEBACK"
+    ]
+  },
+  "non_authorizations": {
+    "failed_v1_or_recovery_v1_retry_reuse_reactivation": false,
+    "diagnostic_attempt_two": false,
+    "expected_manifest_hash_change": false,
+    "formal_lock_change": false,
+    "acceptance_weakening": false,
+    "runtime_ready_or_readiness_credit": false,
+    "pytest_probe": false,
+    "role_smoke": false,
+    "full_root_readiness_identity": false,
+    "runtime_admission": false,
+    "gate_b_recovery": false,
+    "gate_c": false,
+    "target_import_collection_call": false,
+    "test_execution": false,
+    "mashos_api_write": false,
+    "automatic_progression": false
+  }
+}
