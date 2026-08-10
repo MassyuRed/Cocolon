@@ -39756,3 +39756,83 @@ remain 0. No next authority was issued.
 This verification appendix stays on the already-approved 07 path. Its own commit identity and resulting 07
 self-identity are omitted to avoid a publication self-reference; the appendix commit is included in the
 subsequent fresh base-to-latest exact6 union and remote-byte verification.
+
+## 2026-08-10 latest checkpoint — installed-manifest canonical V1 did not reproduce current expected
+
+The single-use diagnostic authority entered at Cocolon
+`c974f672b7bd3089700e3d7834527995cfff0aa0` with related drift 0. Stage D0 first durably created the
+versioned canonical owner. The owner remote body matched the prepared 16313 bytes and Git blob
+`cc7c9f5573124aded5f007802ed031d79d92a7d8` at commit
+`e91aece89f5a3e89f7ee788b8cae981862429a1a` before D1.
+
+Stage D1 was one fresh, nonadmitted diagnostic attempt. Prior/failed root, wheel, helper, and readiness-credit
+reuse were all 0. Fresh staging/download/runtime counts were 1/1/1; configured route/network process 1/1;
+fresh wheel exact5 identities, venv creation, and local exact5 install all succeeded. Owner and separately
+implemented independent derivations executed once each and produced the same core
+`a0391ee0f772f4d179b3285d47eb6ef608b1aa5c622384ce1f09ba5a0a6f8ce0`.
+
+```text
+actual canonical identity:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+
+unchanged current expected identity:
+9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6
+
+match:
+false
+
+row / canonical preimage bytes / LF:
+482 / 89653 / 0
+
+site regular / symlink / other:
+487 / 0 / 0
+
+owned / unowned / duplicate / missing / extra:
+482 / 0 / 0 / 0 / 0
+
+installed distribution / RECORD closure matches:
+5 / 5
+
+distribution closure match:
+true
+
+all mismatch-family counts:
+0
+```
+
+The exactly-one classification is
+`EXPECTED_IDENTITY_NOT_REPRODUCED_COMPARATOR_DECISION_REQUIRED`. The expected hash and comparator remain
+unchanged. No runtime READY or readiness credit was issued.
+
+New artifact identities:
+
+| Role | Path | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---|---:|---:|---|---|
+| Owner | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V1_20260810.json` | 16313 | 380 | `ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd` | `cc7c9f5573124aded5f007802ed031d79d92a7d8` |
+| Result | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestVersionedCanonicalOwnerAndDiagnosticOnlyFreshReproduction_V1_Result_20260810.md` | 9066 | 270 | `5efce5eb52ebf1e0eb2f6e2e46049df86808201c138b6db711f1a6f156f1fe22` | `71f35f124ef0061e23d62e54a410b052358e5640` |
+| Receipt | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestVersionedCanonicalOwnerAndDiagnosticOnlyFreshReproduction_V1_BodyFree_Receipt_20260810.json` | 17276 | 393 | `1c1e240d7e5458edb0f6bf0f5abe50433074161ff320470e5b01917d126f9c24` | `33f706029f8dc2962ccfb2af3195b3a76f5bd399` |
+| Receipt logical | — | — | `3b214273db8049b6b589b9fb017b3a8cfd69085f21cfa199f106f2c604a702a5` | — |
+| Handoff | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestVersionedCanonicalOwnerAndDiagnosticOnlyFreshReproduction_V1_Handoff_20260810.md` | 8082 | 220 | `1489850ae9aa2929bc009d17cdd9245ccb7210a538552c55c916709ba4554750` | `87b15ab5a54a2f140051d6467fe18dd8057f5daa` |
+
+Modified preimages before the exact7 write group:
+
+| Path | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---:|---:|---|---|
+| ExecutionAndClosurePlan | 1212602 | 19164 | `5f12a54c1a692f17a125602ada4822b23f14288ae2e7c85a5a4e4c1bafdff222` | `6b1f68cda17e9fdd266220c83df3884710639303` |
+| 07 latest snapshot | 2404367 | 39758 | `18e6001ccfdabc9c88e77be759db9612899bd3b50b2014361ebbb1305871aaea` | `9e569741c4e85b2285587c02685858d324a16444` |
+| 08 current state | 53712 | 1549 | `bee076fe3e0a9f62fea63d54019bd22c385a6a9db9f12e43ebc50dcd3b8823e7` | `96e6a1d0a83d6b234e2f63188a234192d45f1357` |
+
+All are LF-only, final-LF true, mode `100644`. The approved Cocolon scope is exact7: owner/new3 plus
+Plan/07 append-only and 08 current navigation. mashos-api, production, protected tests, fixtures, samples,
+corpus, target, tests, downstream gates, and acceptance remain unchanged. A separate postwrite appendix on
+this approved 07 path will record fresh remote equality, exact7 union, and final heads.
+
+```text
+INSTALLED_FILE_MANIFEST_COMPARATOR_DECISION_REQUIRED
+NO_COMPARATOR_CHANGE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_DIAGNOSTIC_AUTHORITY_CLOSED_CONSUMED_TYPED_STOP
+NEXT_AUTHORITY_UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
