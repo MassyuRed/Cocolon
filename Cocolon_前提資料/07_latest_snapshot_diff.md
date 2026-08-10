@@ -40113,3 +40113,51 @@ NEXT_CORRECTED_INDEPENDENT_VERIFIER_FRESH_GATE_B_SEPARATE_APPROVAL_REQUIRED
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 2026-08-10 publication verification — Gate B comparator V2 independent identity typed failure
+
+The approved exact6 group was published atomically from entry
+`f07e56478ed6429d62fb4415e59de85e57d7a8e4` to terminal write head
+`0421dc4d8cc760c6f21938428cc16de89491c517`, tree
+`4b9982f5407774e2813b8df5c286fd920a9db2bd`. The branch update was non-force.
+
+Fresh GitHub comparison reported `ahead_by: 1`, `behind_by: 0`, `total_commits: 1`, with changed-path union
+exact6: added Result/Receipt/Handoff exact3 and modified Plan/07/08 exact3. Additions/deletions by path were
+`283/0`, `455/0`, `149/0`, `65/0`, `106/0`, and `55/0`. Deletion, rename, unauthorized path, and
+mashos-api changed-path counts were 0.
+
+Fresh remote file fetches returned the exact prepared Git blobs:
+
+| Role | Remote Git blob | Prepared bytes | Prepared LF | Prepared raw SHA-256 | Equality |
+|---|---|---:|---:|---|---|
+| Result | `f24b2b3b80bb2ba284d9f764b75a68dfdd31ccbf` | 12436 | 283 | `4af089e307187972c2b883f5200a58fc49e6b33ad8cf31f4c7afd4e7703c4972` | exact |
+| Receipt | `c2a0ca0c41b4c043d2195b3db1889a76aaab2933` | 20810 | 455 | `dc4ac41272e54686754949dcda27582c5801b0fd20e5e1cb2579e38cd7d6af63` | exact |
+| Handoff | `4816dd05899ce5ffc1037c8a1cbfb1152a2164b7` | 6352 | 149 | `d1c48e002822dde760a5d68f1c9a80240842e6d9926f9f13078a4318bc8b4062` | exact |
+| Plan | `daa92c0a04482177df1f6f68e77c8f3641b084ff` | 1226041 | 19414 | `649297ed9ef53879018cd97a8b9b98a0a0134de271deb2571e858467bb7b3653` | exact |
+| 07 before this appendix | `546ff9db25ee77467591221aac9a51c46295c4dd` | 2425279 | 40115 | `ab5c7b8281cab48f1e996d1c3a681019e489ba26042da6e03b6fa3c7a32aff95` | exact |
+| 08 | `ac2c73aadf57594f16ee836d0dcd3e9bea96cdcd` | 64188 | 1834 | `356e6c4606c38443c840e41489f8386010427bafeb92b9bfc906f50bb29889ab` | exact |
+
+All six prepared files were LF-only, final-LF true, and mode `100644`. New paths were absent before write;
+modified path preimages matched the frozen entry blobs. Cocolon main equaled the terminal write head after
+the atomic update. mashos-api remained at `45bf98f9034261d3adb3e808d6d759f2334e2d25`.
+
+The execution terminal remains exactly `INDEPENDENT_IDENTITY_DERIVATION_INVALID`. The owner comparator
+match and successful probes are preserved as nonadmitting facts; runtime READY/readiness credit remain 0.
+No failure root, wheel, helper, or observation becomes reusable through publication.
+
+```text
+CURRENT_COMPARATOR_V2_0EBA095E_UNCHANGED
+OWNER_MANIFEST_MATCH_AND_PROBES_VALID_NOT_ADMITTED
+INDEPENDENT_IDENTITY_DERIVATION_INVALID
+FAILED_ROOT_UNADMITTED_NO_REUSE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+NEXT_CORRECTED_INDEPENDENT_VERIFIER_FRESH_GATE_B_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+No next authority was issued or activated. This verification appendix is confined to the already-approved
+07 append-only path. Its own commit and resulting 07 self-identity are intentionally omitted to avoid a
+publication self-reference; both are covered by the following fresh base-to-latest exact6 union and remote
+blob verification.
