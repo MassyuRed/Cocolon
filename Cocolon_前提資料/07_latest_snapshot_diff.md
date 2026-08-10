@@ -39836,3 +39836,61 @@ NEXT_AUTHORITY_UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 2026-08-10 publication verification — installed-manifest comparator decision STOP
+
+The approved exact7 write group started at `c974f672b7bd3089700e3d7834527995cfff0aa0`. Stage D0 first
+created the canonical owner, and the remaining six writes reached terminal write head
+`11037be4bdc7cacf3f7284f0f3706ceaad7e9629`. Fresh GitHub comparison reported ahead7, behind0,
+total commits7, and changed-path union exact7. Each write commit changed one approved path only:
+
+```text
+e91aece89f5a3e89f7ee788b8cae981862429a1a  versioned canonical owner
+4ee74798a567a7ead3612f62ec0d06175b0970b7  Result
+a101f36eaf827a99f200cd4fb2dfdf62cb0563b8  Body-free Receipt
+a5fe5334e91b2b006508c91684cf5c29d7874561  Handoff
+cfbf09ab17298b76949c392cb2a023f283c73393  Plan append
+0e45d6f7a303dd7ae3f0d2cedd34a8fedd2e1d40  07 latest checkpoint append
+11037be4bdc7cacf3f7284f0f3706ceaad7e9629  08 current-navigation append
+```
+
+Prewrite manifest raw SHA-256 was
+`dba483ca8383d09dcf812d2cecbdacdccc682eca0b75f7ae3cf66635e84a83b6`. The owner path was absent before
+D0; the remaining new3 paths were absent before their writes; modified preimage blobs and prepared bytes
+matched the frozen manifest.
+
+Final path / blob / prepared-byte identity at terminal write head:
+
+| Role | Blob | Prepared bytes | Prepared LF | Prepared raw SHA-256 | Fresh equality |
+|---|---|---:|---:|---|---|
+| Owner | `cc7c9f5573124aded5f007802ed031d79d92a7d8` | 16313 | 380 | `ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd` | exact |
+| Result | `71f35f124ef0061e23d62e54a410b052358e5640` | 9066 | 270 | `5efce5eb52ebf1e0eb2f6e2e46049df86808201c138b6db711f1a6f156f1fe22` | exact |
+| Receipt | `33f706029f8dc2962ccfb2af3195b3a76f5bd399` | 17276 | 393 | `1c1e240d7e5458edb0f6bf0f5abe50433074161ff320470e5b01917d126f9c24` | exact |
+| Handoff | `87b15ab5a54a2f140051d6467fe18dd8057f5daa` | 8082 | 220 | `1489850ae9aa2929bc009d17cdd9245ccb7210a538552c55c916709ba4554750` | exact |
+| Plan | `77a39ba3ab1ee7d1b3bb9e31cff912c67246f204` | 1217082 | 19257 | `4ff8b7e9eb92568034a99e560458ac345a08abbae2998d9468f271dbceba17e2` | exact preimage + blank LF + append |
+| 07 | `7d5adb01d633105b102245c98b6f074069bedb10` | 2408813 | 39838 | `394c47f785671099f75c2a50d4f5de43f7cc26f2af1fcd0433a00d046f589bd9` | exact preimage + blank LF + checkpoint |
+| 08 | `fa82ab08555251879c6a10d19bcb754c1ef17c1b` | 56911 | 1682 | `502baa4f39157a3e557e95af58f1becf49c3d36999d90f9af8f42d016025625a` | exact preimage + blank LF + navigation |
+
+All seven were fresh-refetched and compared byte-for-byte. They are LF-only, final-LF true, mode `100644`.
+The compare statuses were modified for Plan/07/08 and added for owner/new3. Deletion, rename, unauthorized
+path, and mashos-api changed-path counts were 0. mashos-api main remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`.
+
+At terminal write head, Cocolon main equaled `11037be4bdc7cacf3f7284f0f3706ceaad7e9629`. The body-free
+diagnostic classification remains `EXPECTED_IDENTITY_NOT_REPRODUCED_COMPARATOR_DECISION_REQUIRED` with
+actual `0eba095e...`, unchanged expected `9c6925ed...`, owner-independent equality, distribution/RECORD
+closure exact5 match, and mismatch-family counts all zero.
+
+```text
+INSTALLED_FILE_MANIFEST_COMPARATOR_DECISION_REQUIRED
+NO_COMPARATOR_CHANGE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_DIAGNOSTIC_AUTHORITY_CLOSED_CONSUMED_TYPED_STOP
+NEXT_AUTHORITY_UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+No next authority was issued. This verification appendix stays on the already-approved 07 path. Its own
+commit identity and resulting 07 self-identity are omitted to avoid a publication self-reference; its commit
+is included in the subsequent fresh base-to-latest exact7 union and remote-byte verification.
