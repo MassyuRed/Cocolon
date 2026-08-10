@@ -10,7 +10,7 @@
     "identity_correction_only": true,
     "authority_body_scope_or_method_change_count": 0,
     "single_use": true,
-    "authority_lifecycle": "CURRENT_AUTHORITY_CLOSED_CONSUMED_METHOD_REFLECTION_PREPARED_AWAITING_REMOTE_POSTVERIFY"
+    "authority_lifecycle": "CURRENT_AUTHORITY_CLOSED_CONSUMED_METHOD_REFLECTION_REMOTE_POSTVERIFIED"
   },
   "entry": {
     "cocolon_commit_sha1": "5abf4a211b971f1fe65313e46522bcf5973d7324",
@@ -175,18 +175,18 @@
     "raw_process_output_published": false
   },
   "remote_postverify": {
-    "result": "PENDING_METHOD_REFLECTION_PUBLICATION",
-    "method_reflection_publication_commit_sha1": null,
-    "method_reflection_publication_tree_sha1": null,
-    "changed_paths_exact11": false,
-    "unauthorized_path_count": null,
-    "remote_prepared_byte_mismatch_count": null,
-    "stale_prepared_metadata_count_in_target_exact8": null,
-    "current_08_and_closure_method_next_match": null,
-    "runtime_rules_13_and_16_match": null,
-    "final_head_contains_all": false,
+    "result": "PASS",
+    "method_reflection_publication_commit_sha1": "1bf431feb0a1c34ac28530c7546587c73a4958d0",
+    "method_reflection_publication_tree_sha1": "95494eb2b206758425ac01be4b0b2d6b9ad46549",
+    "changed_paths_exact11": true,
+    "unauthorized_path_count": 0,
+    "remote_prepared_byte_mismatch_count": 0,
+    "stale_prepared_metadata_count_in_target_exact8": 0,
+    "current_08_and_closure_method_next_match": true,
+    "runtime_rules_13_and_16_match": true,
+    "final_head_contains_all": true,
     "receipt_finalization_self_identity": "OMITTED_TO_AVOID_SELF_REFERENCE"
   },
   "receipt_self_hash_schema": "SHA256_UTF8_COMPACT_SORTED_KEY_JSON_NO_FINAL_LF_WITH_receipt_logical_sha256_EMPTY_STRING",
-  "receipt_logical_sha256": "50a9f2c4668db328cffbc3d4419862997f9b56e712cdeea78f55b9478bc35643"
+  "receipt_logical_sha256": "11efc48e3e56d977ec47838a6cae29d1282932a8ae40a6245a466f92a15dc853"
 }
