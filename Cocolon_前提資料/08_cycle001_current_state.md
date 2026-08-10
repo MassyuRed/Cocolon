@@ -1547,3 +1547,136 @@ false
 
 The proposed next text is inactive and does not issue authority. A separate Mash approval is required before
 any diagnostic fresh root, comparator decision, readiness rematerialization, Gate C, or target work.
+
+## 11.15 Current override — installed-manifest comparator decision required (2026-08-10)
+
+This section supersedes only the current navigation at the end of §11.14. It does not reopen or reclassify
+historical G3–G6, post-G6 G3/G4 Gate A, failed Gate B V1, or Recovery V1.
+
+```text
+current state:
+INSTALLED_FILE_MANIFEST_COMPARATOR_DECISION_REQUIRED
+
+current authority:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_VERSIONED_CANONICAL_OWNER_AND_DIAGNOSTIC_ONLY_FRESH_REPRODUCTION_V1
+
+exactly-one classification:
+EXPECTED_IDENTITY_NOT_REPRODUCED_COMPARATOR_DECISION_REQUIRED
+
+authority lifecycle:
+CURRENT_DIAGNOSTIC_AUTHORITY_CLOSED_CONSUMED_TYPED_STOP
+
+Cocolon activation main / D0 owner commit:
+c974f672b7bd3089700e3d7834527995cfff0aa0 /
+e91aece89f5a3e89f7ee788b8cae981862429a1a
+
+mashos-api commit / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+D0 owner create / remote equality:
+1 / true
+
+D1 attempt / retry / fallback / attempt-two:
+1 / 0 / 0 / 0
+
+prior or failed root/wheel/helper/readiness reuse:
+0 / 0 / 0 / 0
+
+fresh staging / download / runtime:
+1 / 1 / 1
+
+network / venv / install:
+1 / 1 / 1
+
+owner / independent derivation / equality:
+1 / 1 / true
+
+actual canonical identity:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+
+unchanged expected identity:
+9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6
+
+expected identity match:
+false
+
+row / preimage bytes / LF:
+482 / 89653 / 0
+
+owned / unowned / duplicate / missing / extra:
+482 / 0 / 0 / 0 / 0
+
+distribution / RECORD closure exact5:
+true / 5
+
+mismatch rows / active families:
+0 / 0
+
+comparator / expected hash / formal lock / acceptance changes:
+0 / 0 / 0 / 0
+
+runtime READY / readiness credit:
+0 / 0
+
+pytest / role / full-root readiness / runtime admission:
+0 / 0 / 0 / 0
+
+Gate B recovery / Gate C / target invocation:
+0 / 0 / 0
+
+protected-test append / mashos-api write:
+0 / 0
+
+G5 / G6 / G7 / Cycle001 acceptance:
+NOT_STARTED_UNAUTHORIZED /
+NOT_STARTED_UNAUTHORIZED /
+NOT_STARTED_UNAUTHORIZED /
+NOT_ACCEPTED
+```
+
+Durable owner raw SHA-256 / blob:
+
+```text
+ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd /
+cc7c9f5573124aded5f007802ed031d79d92a7d8
+```
+
+Result raw SHA-256 / blob:
+
+```text
+5efce5eb52ebf1e0eb2f6e2e46049df86808201c138b6db711f1a6f156f1fe22 /
+71f35f124ef0061e23d62e54a410b052358e5640
+```
+
+Receipt raw / blob / logical SHA-256:
+
+```text
+1c1e240d7e5458edb0f6bf0f5abe50433074161ff320470e5b01917d126f9c24 /
+33f706029f8dc2962ccfb2af3195b3a76f5bd399 /
+3b214273db8049b6b589b9fb017b3a8cfd69085f21cfa199f106f2c604a702a5
+```
+
+Handoff raw SHA-256 / blob:
+
+```text
+1489850ae9aa2929bc009d17cdd9245ccb7210a538552c55c916709ba4554750 /
+87b15ab5a54a2f140051d6467fe18dd8057f5daa
+```
+
+```text
+next authority:
+UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+
+comparator change / expected refreeze / new diagnostic or readiness attempt:
+NOT_AUTHORIZED
+
+Gate B recovery / Gate C / target or protected work:
+NOT_AUTHORIZED
+
+automatic progression:
+false
+```
+
+This current-navigation section issues no next authority. A separate Mash approval is required before any
+comparator decision or subsequent execution.
