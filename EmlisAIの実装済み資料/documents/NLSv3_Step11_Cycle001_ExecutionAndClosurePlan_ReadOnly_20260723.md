@@ -19099,3 +19099,66 @@ Handoff SHA-256/blob is
 The next authority is not issued. A separate Mash approval must define diagnosis
 and a new nonreuse fresh attempt or alternative closure. Current V1 is not
 reusable; automatic progression remains false.
+
+## 2026-08-10 — G4 post-G6 Gate B recovery after typed failure V1: failed root unavailable typed STOP
+
+Mash approved single-use authority
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_RECOVERY_AFTER_TYPED_FAILURE_V1`.
+The fresh entry gate matched Cocolon main `6d14b1dad31407999a27918873d6aa69e248c456`, mashos-api
+main/tree `45bf98f9034261d3adb3e808d6d759f2334e2d25` /
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`, production/protected blobs, current V1 new3
+blobs, state/reason/lifecycle/nonreuse, and previous exact6 publication integrity. Related drift was 0.
+
+Stage R0 observed the failed V1 session-local root availability exact1 and found current-session candidate
+count 0. V1 helper sources exact5 remained, but owner/independent diagnostic executions were 0/0 because the
+failed root was unavailable. No actual manifest hash, row/file-kind/ownership/duplicate counts, canonical
+preimage size, expected match, mismatch counts, pathset digest, or mismatch-row digest could be derived.
+
+The exactly-one cause is:
+
+```text
+FAILED_ROOT_NOT_AVAILABLE_FOR_CAUSAL_DIAGNOSIS
+```
+
+The current V1 materializer rule was statically frozen, without helper execution, as
+`UNVERSIONED_EXPECTED_HASH_CANDIDATE_ORACLE_EXACT11`: RECORD-selected in-site regular payloads, external
+entrypoints and RECORD self excluded after verification, pyc/cache rows excluded, symlink/nonregular
+rejected, candidate-dependent row schema/order, compact sorted-key UTF-8 JSON, no final LF. Helper hash
+difference was not used as causal proof.
+
+The prior G5 READY Receipt, failed V1 Result/Receipt/Handoff, formal lock, tracked procedure exact2, and a
+historical generic exact4 design were compared. Expected `9c6925ed...` is durable as a value, but current
+inspected evidence does not bind it to a versioned aggregate canonical owner. This secondary conflict was not
+promoted to a second causal classification.
+
+Stage R1 admission/attempt, fresh acquisition/network, new helper creation/execution, new root,
+materialization, owner/probe/role/independent operations, and runtime READY admission were all 0. Target and
+protected boundaries, production/mashos-api writes, Product Read, G5/G6/G7, and Cycle001 acceptance were 0.
+
+```text
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_RECOVERY_TYPED_FAILURE
+EXACT_TYPED_CAUSE_RECORDED
+CURRENT_GATE_B_RECOVERY_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+SAME_SERIES_FURTHER_RETRY_NOT_AUTHORIZED
+NEXT_AUTHORITY_UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+Durable new3 owners:
+
+| Role | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---:|---:|---|---|
+| Result | 12803 | 295 | `59a65dad6b4ca2838d908cc0f8136aba3e291adcb5819d203a7819495586edaa` | `943db07ae0ce1f33a6a1b152d04acf5b30236d2e` |
+| Receipt | 17198 | 354 | `8d47e9f8f1fcbdf00ffac5c39b4d1eeb8c3843520504e9bc98da46a9f3bbcaba` | `5e6e7c08787485ec34de09eb290b08835cbdca11` |
+| Receipt logical | — | — | `5803b8809a70073eb6a55329e7779d8ba05ead672526d0b2e87768e444613484` | — |
+| Handoff | 8295 | 196 | `bc340088a139f6928e43caed02e5351c9b50a3300b85070d442431ff5957ca57` | `4190d2f05b9b2d638436b7786ce304576dd20a44` |
+
+The publication scope is Cocolon exact6 only: new3 plus Plan/07 append-only and 08 current-navigation.
+Prewrite new paths were absent; modified preimages and prepared bytes were frozen. Same-series retry,
+comparator refreeze, fresh readiness rematerialization, Gate C, target/protected-test work, and automatic
+progression remain unauthorized.
+
+The next authority is unselected. A future separate Mash proposal should first bind a versioned tracked
+canonical owner, authorize one nonadmitted diagnostic-only fresh root, run owner/independent exact1 each,
+and STOP again before comparator refreeze or readiness rematerialization.
