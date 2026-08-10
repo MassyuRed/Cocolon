@@ -19162,3 +19162,96 @@ progression remain unauthorized.
 The next authority is unselected. A future separate Mash proposal should first bind a versioned tracked
 canonical owner, authorize one nonadmitted diagnostic-only fresh root, run owner/independent exact1 each,
 and STOP again before comparator refreeze or readiness rematerialization.
+
+## 2026-08-10 — installed-file manifest versioned canonical owner and diagnostic-only fresh reproduction V1
+
+Mash approved single-use authority
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_VERSIONED_CANONICAL_OWNER_AND_DIAGNOSTIC_ONLY_FRESH_REPRODUCTION_V1`.
+The entry gate matched Cocolon main `c974f672b7bd3089700e3d7834527995cfff0aa0`, mashos-api
+main/tree `45bf98f9034261d3adb3e808d6d759f2334e2d25` /
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`, and the recovery new3 blobs/state/cause/lifecycle.
+Related drift was 0.
+
+Stage D0 created the versioned owner at
+`EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V1_20260810.json`.
+It is 16313 bytes/LF380, raw SHA-256
+`ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd`, Git blob
+`cc7c9f5573124aded5f007802ed031d79d92a7d8`, and was committed by
+`e91aece89f5a3e89f7ee788b8cae981862429a1a`. Fresh remote bytes matched before D1.
+
+The owner freezes `NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1`: exact5 distribution order, in-site
+RECORD-owned regular payloads, RECORD/external-entrypoint/cache exclusions, row exact4, POSIX paths,
+Unicode-codepoint order, compact sorted-key UTF-8 JSON array, and no final LF. It also freezes inventory,
+pathset, and mismatch-row digest domains without publishing concrete rows or paths.
+
+Owner/independent helper bodies were separately implemented and frozen before D1:
+
+| Role | Bytes | LF | Raw SHA-256 | Creation / execution |
+|---|---:|---:|---|---|
+| Owner | 31211 | 789 | `cacf1bb15d61943e7934037aec6b5d6e69a27d9a0da93dc07d4ba988e3d2b50e` | 1 / 1 |
+| Independent | 30411 | 721 | `071fa8f2225c170cad1f7afc56111d83c4319f593f76d7caa9c40ec4785fc37c` | 1 / 1 |
+
+Stage D1 used no failed/prior root, prior wheel/helper, or readiness credit. New private
+staging/download/runtime were 1/1/1. Configured-route network process was exact1 and succeeded. Fresh
+accepted wheels were exact5/1724842 bytes and every wheel and wheel RECORD identity matched. Venv
+`--without-pip --copies` and hash-required/no-index/no-deps/wheel-only/no-compile installation were exact1
+each and succeeded. Owner/independent derivations were exact1 each and equal.
+
+The canonical body-free observation was:
+
+```text
+actual / unchanged expected:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5 /
+9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6
+
+expected match:
+false
+
+row / preimage bytes / LF:
+482 / 89653 / 0
+
+site regular / directory / symlink / other:
+487 / 27 / 0 / 0
+
+owned / unowned / duplicate / missing / extra:
+482 / 0 / 0 / 0 / 0
+
+distribution / RECORD closure match:
+true / 5
+
+pathset / mismatch-row digest:
+6fb972b20c2c5c776886c53c905bf08e8577fa74284d760c39065b9ba65328f2 /
+4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+
+mismatch rows / active families:
+0 / 0
+```
+
+The exactly-one classification is
+`EXPECTED_IDENTITY_NOT_REPRODUCED_COMPARATOR_DECISION_REQUIRED`. Expected identity, comparator, formal lock,
+and acceptance were not changed. Runtime READY/readiness credit, pytest/role/full-root readiness,
+Gate B recovery, Gate C, target/test execution, production/protected/mashos-api work, downstream gates, and
+automatic progression were all 0.
+
+Durable artifact identities:
+
+| Role | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---:|---:|---|---|
+| Owner | 16313 | 380 | `ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd` | `cc7c9f5573124aded5f007802ed031d79d92a7d8` |
+| Result | 9066 | 270 | `5efce5eb52ebf1e0eb2f6e2e46049df86808201c138b6db711f1a6f156f1fe22` | `71f35f124ef0061e23d62e54a410b052358e5640` |
+| Receipt | 17276 | 393 | `1c1e240d7e5458edb0f6bf0f5abe50433074161ff320470e5b01917d126f9c24` | `33f706029f8dc2962ccfb2af3195b3a76f5bd399` |
+| Receipt logical | — | — | `3b214273db8049b6b589b9fb017b3a8cfd69085f21cfa199f106f2c604a702a5` | — |
+| Handoff | 8082 | 220 | `1489850ae9aa2929bc009d17cdd9245ccb7210a538552c55c916709ba4554750` | `87b15ab5a54a2f140051d6467fe18dd8057f5daa` |
+
+```text
+INSTALLED_FILE_MANIFEST_COMPARATOR_DECISION_REQUIRED
+NO_COMPARATOR_CHANGE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_DIAGNOSTIC_AUTHORITY_CLOSED_CONSUMED_TYPED_STOP
+NEXT_AUTHORITY_UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+The next authority is unselected. A comparator decision or any new diagnostic/readiness/gate/target action
+requires separate Mash approval.
