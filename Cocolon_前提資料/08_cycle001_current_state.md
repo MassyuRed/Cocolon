@@ -1045,3 +1045,161 @@ Handoff SHA-256 / blob:
 G3, G4, and G5 remain closed evidence. The next possible shared structural
 correction requires separate explicit authority and is not started. G7 is
 `NOT_STARTED_UNAUTHORIZED`; Cycle001 remains `NOT_ACCEPTED`.
+
+## 11.11 Current override — new G3 return after G6 REJECT design frozen V1 (2026-08-10)
+
+This section supersedes only the navigation at the end of §11.10. It does not
+reopen or reclassify any prior G3/G4/G5/G6 evidence.
+
+```text
+current state:
+G3_POST_G6_SHARED_STRUCTURAL_CORRECTION_REMEDIATION_CONTRACT_FROZEN_READ_ONLY
+
+authority lifecycle:
+CLOSED_CONSUMED_PASS
+
+Cocolon entry / tree:
+de75848b0579dd91c365de0e4763ab5834cd9555 /
+7848a797fd09cf853bf2c5809d364b91b6c6a691
+
+mashos-api current / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+production / protected-test blobs:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+entry unclassified drift:
+0
+```
+
+The G3 crosswalk closed one final-surface owner and three linked cause codes:
+
+```text
+broken layer:
+FINAL_B6_PLAN_OWNED_INTEGRATED_NATURAL_LANGUAGE_SURFACE_REALIZATION
+
+cause codes:
+PRIOR_G3_RED_SPEC_VALID_MUTATION_DOMAIN_GAP
+G4_BASE_FINAL_BODY_LATE_SPLICE_AND_POSITIVE_REALIZATION_ORACLE_IMPLEMENTATION_GAP
+G5_LEGACY_RENDERER_SELECTION_AND_VALIDATION_GUARD_SUBSTITUTION
+```
+
+The old G3 required behavior and mutable window are not reclassified as
+insufficient. Its limited RED-spec gap was failure to separate valid and invalid
+role/kind mutation domains before allowing output difference or fail-close. The final G4 oracle allowed
+exceptions as positive mutation credit and proved order/separator shape rather
+than valid surface realization. G5 satisfied the old G4 exact24 projection
+while role lookup results were discarded, dependent dimensions were not
+emitted, dependent clauses used a generic peer join, and Reception remained a
+separate generic frame. Kind exact12 is the non-causal identity-coverage /
+missing-fail-close boundary. This explains the body-free G6 concern distribution
+without changing G5 machine GREEN or G6 REJECT.
+
+```text
+future production owner:
+ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+
+future mutable bodies exact3:
+_rc0031_rt_cluster
+second B6 _step11_rc0031_product_render_cluster
+_step11_rc0031_build_owner_role_inflected_typed_recomposition_candidate
+
+immutable prefix bytes / SHA-256:
+537842 /
+18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4
+
+current suffix / cap / masked residual SHA-256 / selector:
+9823 / 11090 /
+c448d8f514669a7b0379e3a85b79fc5aabf29d00cbe002725592f74e9f60fc1d / 0
+
+current body aggregate / fixed non-body / future body cap / feasibility:
+6051 / 3772 / 7318 / UNPROVED_PRE_G5_PREFLIGHT_REQUIRED
+```
+
+The future implementation must make the accepted plan the sole structural
+placement/ownership graph and accepted Reception authority the joint focus/
+aspect typed input, prohibit non-authorized base semantic tail reuse,
+realize root/head and typed dependents, preserve atoms38/owners24/modifiers22/
+locus20/depth2 and all source dimensions, integrate Reception
+controlled target/support/act local delta, focus selection/specificity causality,
+aspect congruence/nonpromotion invariant, and satisfy actual-body budgets and
+structure-derived variation. Valid mutation must render successfully and
+produce an owned-locus delta; an exception receives no positive credit. The
+mutable wrapper must preserve dict→immutable `_RC0031_C0` pre-final exact2
+schema/identity/semantic/resource/privacy differential. The final builder must
+have legacy direct-call0 and verified-reuse-excepted pre-rendered-body
+noninterference. Axes3/4/5/7/11,
+privacy, Safety, authority, and resource invariants remain immutable.
+
+The first unfinished technical gate is now:
+
+```text
+authority:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_REMEDIATION_DESIGN_FREEZE_RED_ONLY_V1
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+test owner:
+ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py
+
+base required projection:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+
+new ordered exact24 ID+LF SHA-256:
+b3ac62fee89d554a2e30e507cfc211cb157130553a9eb7c8d42b762a53c6b0ef
+
+static / collected after append:
+52 / 54
+
+new causal reasons:
+OWNED_ROOT_TYPED_DEPENDENT_SURFACE_REALIZATION_NOT_PROVED
+INTEGRATED_RECEPTION_PRODUCT_SURFACE_REALIZATION_NOT_PROVED
+
+G5 / G6 rerun / G7:
+NOT_STARTED_BY_THIS_AUTHORITY /
+NOT_STARTED_BY_THIS_AUTHORITY /
+NOT_STARTED_UNAUTHORIZED
+
+Cycle001:
+NOT_ACCEPTED
+
+automatic progression:
+false
+```
+
+The new G4 uses first22 controls plus new versioned collected exact2. Historical
+causal exact2 remain unchanged and excluded; historical helper/cache/run credit
+is0. A versioned replacement freeze helper and append-feasibility preflight are
+required. Machine schema/denominator/threshold for owned-locus delta, surface
+signature/equivalence, body budget, typed attachment, and Reception causality
+must be frozen preexecution. Historical full52, future whole-file full54, and ordered exact24外
+whole collection remain unexecuted and unauthorized in this lane.
+
+The same fixed exact10/exact8 Product Read gate remains mandatory after future
+machine GREEN. It requires MAJOR/BLOCKER0, former-MAJOR5/5 and7/7 <=MINOR,
+controls3/3 not worse, new MAJOR0, all eight current concern families MAJOR0,
+and preserved semantic/safety/privacy/authority/resource invariants.
+
+```text
+Addendum SHA-256 / blob:
+7e13d8366ebd35065d737048566c349136bd5e5138920afd07e2b555020a8115 /
+397a55eae57b7c64841c776293340fade2f895b5
+
+Receipt SHA-256 / blob / logical SHA-256:
+4e112a7d3bd195044cc9156fda6a8a68d70a986735a3cd25a001e846ee75e592 /
+613a12564c05ae1e4696ebdc87e690b832737781 /
+cb377a870d9b22d50b43395d7c79b34aa6d76f4862bff5608f2a3fb42cdcf8e4
+
+Handoff SHA-256 / blob:
+6b0305e5416a750b483bc745dbed07e4570c46c6b9923729e94f8b28ae96f586 /
+665b58896c4cd649c8fa1d56c10b7af59e566041
+```
+
+Private-body read, fresh generation, Product Read, pytest/exact24/full52/
+exact100, production/test/fixture/sample change, mashos-api write, Parser/
+Matcher, API/DB/RN/public/shared runtime/Safety change, G4/G5/G6/G7 execution,
+and Cycle001 acceptance are all zero in this G3. Automatic progression is
+false.

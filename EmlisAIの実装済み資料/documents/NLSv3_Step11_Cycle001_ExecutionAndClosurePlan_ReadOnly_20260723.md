@@ -18806,3 +18806,160 @@ shared structural correction requires separate explicit authority; no
 production correction is authorized here. G7 is `NOT_STARTED_UNAUTHORIZED`,
 full52/exact100 remain0, Cycle001 remains `NOT_ACCEPTED`, and automatic
 progression remains false.
+
+## 2026-08-10 — new G3 return after G6 REJECT shared structural correction design V1
+
+Mash separately approved
+`NLS_V3_STEP11_CYCLE001_G3_RETURN_AFTER_G6_REJECT_SHARED_STRUCTURAL_CORRECTION_FAILURE_LOCALIZATION_AND_REMEDIATION_DESIGN_READ_ONLY_V1`.
+Entry was freshly exact at Cocolon
+`de75848b0579dd91c365de0e4763ab5834cd9555` / tree
+`7848a797fd09cf853bf2c5809d364b91b6c6a691` and mashos-api
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`. Production blob
+`f10ce7948e5570ee8ad27ee2af00a9caf3867d49` and protected-test blob
+`c302dd99e143967fed6edd65b429373e87453fc6` matched. G3–G6 evidence,
+Plan/07/08, source, and test had unclassified drift0.
+
+G6 private body was not identity-retained in the current Work session. The
+design therefore used the body-free G6 Result/Receipt/Handoff, current
+source/test, and the G5 production diff only. Fresh exact10 generation,
+private-body reread, Product Read, pytest, direct exact24, full52, and exact100
+were all zero.
+
+The G3→G4→G5→G6 crosswalk closed one shared owner and exact3 cause codes:
+
+```text
+broken layer:
+FINAL_B6_PLAN_OWNED_INTEGRATED_NATURAL_LANGUAGE_SURFACE_REALIZATION
+
+production owner:
+ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+
+cause classification:
+PRIOR_G3_RED_SPEC_VALID_MUTATION_DOMAIN_GAP
+G4_BASE_FINAL_BODY_LATE_SPLICE_AND_POSITIVE_REALIZATION_ORACLE_IMPLEMENTATION_GAP
+G5_LEGACY_RENDERER_SELECTION_AND_VALIDATION_GUARD_SUBSTITUTION
+```
+
+The old G3 required one-pass/no-tail-splice, positive role realization, kind
+identity coverage, typed subordination, dimension coordination, and integrated
+Reception. Those required behaviors and its mutable exact3 are not reclassified
+as insufficient. The limited prior-G3 gap is that its RED spec did not separate
+valid and invalid role/kind mutation domains before allowing output difference
+or fail-close. The final G4 oracle credited valid mutation when either output changed or an
+exception occurred and its stale-tail check did not prohibit appending to
+`base_candidate.final_utf8_bytes`.
+
+G5 therefore reached the old G4 exact24 projection 24/24, but did not realize
+the old G3 positive surface behavior. Role mappings were used as discarded
+lookups; kind exact12 remained the non-causal identity-coverage / missing-
+fail-close boundary. Dependent finite atoms were rendered as
+generic peer clauses, dependent dimension cues as computed-but-not-emitted
+values, and Reception as a separate generic-frame reassembly. This body-free
+fact pattern connects to the G6 MAJOR counts for owner-role join7,
+relation/temporal7, typed-density8, main-dominance8, depth8, Reception8,
+immediate-observation8, and distribution3. It is not a builder reachability
+failure.
+
+The new bounded production window is same path exact1 with signature-fixed
+function-body exact3:
+
+```text
+_rc0031_rt_cluster
+second top-level _step11_rc0031_product_render_cluster after the B6 marker
+_step11_rc0031_build_owner_role_inflected_typed_recomposition_candidate
+```
+
+The current immutable prefix is 537,842 bytes / SHA-256
+`18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4`.
+Current suffix is9,823 bytes, replacement cap11,090, and exact3 body-masked
+residual SHA-256 is
+`c448d8f514669a7b0379e3a85b79fc5aabf29d00cbe002725592f74e9f60fc1d`.
+Current body aggregate6,051 and fixed non-body3,772 leave future body cap7,318.
+Feasibility inside that cap is unimplemented/unproved in G3; future G5 must
+preflight it and typed-STOP without window expansion if it fails.
+Prior run credit is not reused; this current boundary is freshly reauthorized.
+Every other production symbol/path is immutable and selector count is0.
+The shared legacy renderer remains immutable. Its mutable wrapper must preserve
+the current dict-catalog delegate to immutable `_RC0031_C0` and pre-final exact2
+schema/identity/semantic/resource/privacy behavior. Final remediation credit is0
+for those callers. The final private builder must have legacy renderer direct
+call0 and verified-exact-reuse-excepted pre-rendered-body noninterference.
+
+The contract requires plan as sole structural placement/ownership graph and
+accepted Reception authority as joint focus/aspect typed input, verified-reuse-
+only base semantic reuse, root/head main dominance, typed dependent exact4,
+atom38/family22・13・1・2 and owner24/modifier22/locus20/depth2 conservation,
+valid role mutation successful local delta without exception credit, all-
+source dimension-to-owned-locus equivalence, controlled Reception target/support/
+act local delta, focus selection/specificity causality, aspect congruence /
+nonpromotion invariant, actual-body resource budget, structure-derived surface
+variation, privacy/Safety, and axes3/4/5/7/11 preservation.
+
+The next separately approved G4 owner is the protected test exact1. Its current
+431,357 bytes / blob `c302dd99e143967fed6edd65b429373e87453fc6`
+become an immutable prefix; a versioned section of at most24,000 bytes may be
+appended. New static test definitions remain0; dynamic assignment creates new
+versioned collected exact2, yielding static52 / collected54. Historical causal
+exact2 are unchanged and excluded from the new ordered exact24. Its first22 +
+new exact2 ID+LF SHA-256 is
+`b3ac62fee89d554a2e30e507cfc211cb157130553a9eb7c8d42b762a53c6b0ef`.
+The historical freeze helper receives credit0; a versioned helper must pin the
+full431,357-byte test prefix, the new exact3 production window, ordered list,
+masked residual, selector0, and pre-final differential. Append feasibility is
+an activation preflight and failure is typed STOP.
+Owned-locus delta, surface signature/equivalence, actual-body budget, typed
+attachment, and Reception causality schema/denominator/threshold must also be
+version-frozen before execution; undefined/unimplementable means no activation.
+
+```text
+new causal reasons:
+OWNED_ROOT_TYPED_DEPENDENT_SURFACE_REALIZATION_NOT_PROVED
+INTEGRATED_RECEPTION_PRODUCT_SURFACE_REALIZATION_NOT_PROVED
+
+base production required:
+22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR
+
+future G5 required:
+24 PASS / 0 FAIL
+```
+
+Valid mutations must render successfully and change only their owned locus;
+exception credit is prohibited. Missing/invalid mappings retain fail-close.
+The oracle remains a precondition, not a Product Read replacement.
+Historical full52, future whole-file full54, and any whole collection outside
+the ordered exact24 remain unexecuted and unauthorized in this lane.
+
+Future G6 keeps the same fixed exact10/exact8 and exact12 axes. It requires
+candidate/unique MAJOR・BLOCKER0, former-MAJOR 5/5 cases and 7/7 contexts at
+PASS-or-MINOR, controls3/3 not worse, new MAJOR control0, all eight current
+concern families at MAJOR0, and preservation of axes3/4/5/7/11, privacy,
+denominator, authority, and resource invariants. MINOR is not converted into
+automatic failure.
+
+The new G3 terminal is:
+
+```text
+G3_POST_G6_SHARED_STRUCTURAL_CORRECTION_REMEDIATION_CONTRACT_FROZEN_READ_ONLY
+PRIOR_G3_G4_G5_G6_CLOSED_EVIDENCE_PRESERVED
+NEXT_G4_RED_ONLY_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+Durable owners are Addendum SHA-256/blob
+`7e13d8366ebd35065d737048566c349136bd5e5138920afd07e2b555020a8115` /
+`397a55eae57b7c64841c776293340fade2f895b5`, Receipt
+SHA-256/blob/logical SHA-256
+`4e112a7d3bd195044cc9156fda6a8a68d70a986735a3cd25a001e846ee75e592` /
+`613a12564c05ae1e4696ebdc87e690b832737781` /
+`cb377a870d9b22d50b43395d7c79b34aa6d76f4862bff5608f2a3fb42cdcf8e4`,
+and Handoff SHA-256/blob
+`6b0305e5416a750b483bc745dbed07e4570c46c6b9923729e94f8b28ae96f586` /
+`665b58896c4cd649c8fa1d56c10b7af59e566041`.
+
+This checkpoint is new3 plus append-only Plan/07 and current-navigation 08
+exact6. Production/test/fixture/sample changes, mashos-api write, G4/G5/G6/G7
+execution, Parser/Matcher, API/DB/RN/public/shared runtime/Safety changes, and
+Cycle001 acceptance are all zero. The next G4 RED-only authority is defined
+inactive and requires separate Mash approval. Automatic progression is false.
