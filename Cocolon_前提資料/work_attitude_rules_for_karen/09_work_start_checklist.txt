@@ -1,8 +1,8 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-08-10
+revision_date: 2026-08-11
 normative_status: CURRENT_EXECUTION_GATE
-status: PHASE4_PREPARED_NOT_PUBLISHED
+status: CURRENT_EFFECTIVE
 effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 general_rule_owner: CURRENT_RULES.md
 
@@ -69,6 +69,9 @@ Workを起動する前に、次のexact10 fieldsをcurrent actualで埋める。
 - [ ] authority terminalで付与可能なprimary outcome exact4を確認し、複数primaryを予定していない。
 - [ ] `DETOUR_RISK_STOP` exact6条件を確認し、一つでも成立しているのに通常authorityを追加していない。
 - [ ] mechanical repairを含む場合、prior failure closure、Mash様が明示承認したnew authority exact1、`BOUNDED_MECHANICAL_REPAIR`全条件、repair exact1、fresh rerun exact1、second failure STOPを事前固定した。
+- [ ] current G4-Bでは`08_cycle001_current_state.md`のmethod ownerを確認し、`SESSION_LOCAL_HELPER_ROUTE_RETIRE` / `GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`に従っている。
+- [ ] retired helperの修正・V3化・再利用、追加scanner / carrier、third normal helper authority、second method repairを混ぜていない。
+- [ ] direct native processの実装・freeze・preflight・runtime / Gate B実行は、method reflectionと分離されたMash様の明示future technical authorityがある場合に限っている。
 
 ## E. specialized rule activation
 
@@ -124,6 +127,7 @@ Cycle001作業の場合、次を全て満たす。
 - [ ] current Cocolon HEAD以後の関連changed pathsを確認した。
 - [ ] current recovery lineage、last reusable technical credit、first unfinished technical gateを一意に説明できる。
 - [ ] historical G1 / G2、selected R5、retired Inspector V2系列を次作業へ戻していない。
+- [ ] current G4-Bでretiredとなったauthority-local / session-local helper routeをnext actionへ戻していない。
 - [ ] 今回の作業はfirst unfinished technical gateを直接完了するか、阻害する実source / test / receiptのexact pathを確定する。
 - [ ] authority、STOP、Handoff、snapshot、ledger、Planだけを増やす結果を成果にしていない。
 - [ ] 成功すると減る未完了条件と、直接扱う実ファイル / test / receiptを示した。

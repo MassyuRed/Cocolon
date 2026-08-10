@@ -1,8 +1,8 @@
 # Cocolon出力前Gate
 
-revision_date: 2026-08-10
+revision_date: 2026-08-11
 normative_status: CURRENT_OUTPUT_GATE
-status: PHASE4_PREPARED_NOT_PUBLISHED
+status: CURRENT_EFFECTIVE
 effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 general_rule_owner: CURRENT_RULES.md
 
@@ -66,6 +66,8 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] authority terminalならprimary outcomeを`PRODUCT_CREDIT` / `TECHNICAL_CREDIT` / `BLOCKER_NARROWED` / `ADMINISTRATIVE_ONLY`からexact1で報告した。
 - [ ] `DETOUR_RISK_STOP` exact6を確認し、該当時に第三の通常authorityや追加helper chainを提案していない。
 - [ ] `BOUNDED_MECHANICAL_REPAIR`を使った場合、prior failureを閉じ、Mash様が明示承認したnew authority exact1でrepair exact1 + same-Gate fresh rerun exact1の上限とsecond failure STOPを守った。
+- [ ] current G4-Bでは`08_cycle001_current_state.md`のmethod ownerと照合し、retired authority-local / session-local helper route、helper修正 / V3、追加scanner / carrier、third normal helper authorityをcurrent nextに戻していない。
+- [ ] `GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`の技術実行は別のMash明示authorityに分離し、method reflectionをGate B closed、runtime READY、readiness / technical / product creditへ変換していない。
 - [ ] 長い謝罪、宣誓、対策羅列で成果物を代替していない。
 
 一つでも必要項目が不成立なら、該当する完了・反映・判断を報告しません。

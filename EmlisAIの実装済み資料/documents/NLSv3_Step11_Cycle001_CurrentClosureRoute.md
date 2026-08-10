@@ -2,9 +2,9 @@
 doc_id: nlsv3_step11_cycle001_current_closure_route
 title: "NLS v3 Step 11 Cycle001 Current Closure Route"
 canonical_path: "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md"
-revision_date: "2026-08-10"
-status: "PHASE3_PREPARED_NOT_PUBLISHED"
-normative_status: "CURRENT_DERIVATIVE_CANDIDATE"
+revision_date: "2026-08-11"
+status: "CURRENT_EFFECTIVE"
+normative_status: "CURRENT_DERIVATIVE_OWNER"
 effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operation_owner: "Karen"
@@ -14,11 +14,12 @@ body_free: true
 technical_authority: false
 cycle001: "NOT_ACCEPTED"
 current_selected_lane: "POST_G6_SHARED_STRUCTURAL_CORRECTION"
-current_first_unfinished_gate: "G4_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2"
+current_selected_method: "GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1"
+current_first_unfinished_gate: "G4_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1"
 current_runtime_ready: false
 current_readiness_credit: 0
 automatic_progression: false
-phase8_separate_approval_required: true
+next_technical_authority_separate_approval_required: true
 ---
 
 # NLS v3 Step 11 Cycle001 Current Closure Route
@@ -45,19 +46,20 @@ technical authorityではありません。source、test、fixture、runtime、P
 ## 1. source observation
 
 ```text
-Cocolon Phase 2 final commit / tree:
-2afcfb87422334c4fdba9c895d619a64fd9d252a /
-5df5014ea9ae3b2b97173a2bef6df9bea267e8a8
+Cocolon method-reflection entry commit / tree:
+5abf4a211b971f1fe65313e46522bcf5973d7324 /
+7da13adad9c38365b1c7999d8f7cf0265b089d54
 
-Phase 2 parent:
-7548fd47c67bbda2d8c65bab70ea4564218f54c3
+Phase 8 entry / final:
+c5009a2d5281bc74d48fb189e97453367ddacba0 /
+5abf4a211b971f1fe65313e46522bcf5973d7324
 
 mashos-api current head / tree:
 45bf98f9034261d3adb3e808d6d759f2334e2d25 /
 23f1684ed5430cafef955d7af9fc6bde75a4c62f
 ```
 
-Phase 2はoriginal planning baseline exact3だけを追加しました。current same-name Plan、`07`、`08`、rules、source、test、fixture、mashos-api、runtime stateは変更していません。
+Phase 2はoriginal planning baseline exact3だけを追加しました。そのoriginal bytesとoriginal G0〜G10 acceptanceは不変です。Phase 8はpre-freeze actual-call terminalと`08`のbody-free記録だけをpublicationし、source、test、fixture、sample、mashos-api、runtime stateを変更していません。
 
 | baseline | SHA-256 | Git blob |
 |---|---|---|
@@ -148,6 +150,9 @@ false
 | G6 | `CLOSED_CONSUMED_REJECTED` | Product Read REJECT。product acceptance credit 0 |
 | post-G6 G3 | `CLOSED_CONSUMED_PASS` | shared structural correction remediation contract |
 | comparator | `CURRENT_COMPARATOR_V2_REFROZEN` | canonical schema V1不変、current expected identity固定 |
+| Gate B V1 helper route | `CLOSED_CONSUMED_TYPED_FAILURE_RETIRED` | unsupported `Path.read_text(newline=...)`でidentity導出前に停止。readiness credit 0 |
+| Gate B V2 helper route | `CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_RETIRED` | actual `pathlib.PosixPath`拒否をruntime effect前に検出。readiness credit 0 |
+| method decision | `APPROVED_METHOD_REPLACEMENT` | session-local helper routeをretireし、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodとする。product / technical credit 0 |
 
 G5のtechnical credit:
 
@@ -203,8 +208,20 @@ accepted plan / ownership graph、accepted Reception authority、root/head、typ
 current Gate:
 G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B
 
-proposal:
-NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2
+Gate B:
+NOT_CLOSED
+
+DETOUR_RISK_STOP:
+RESOLVED_BY_APPROVED_METHOD_DECISION
+
+retired route:
+SESSION_LOCAL_HELPER_ROUTE
+
+selected method:
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+
+next technical authority candidate exact1:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
 
 state:
 DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
@@ -213,25 +230,28 @@ canonical schema / expected identity:
 NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1 /
 0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
 
-blocker / safe detail:
-INDEPENDENT_IDENTITY_DERIVATION_INVALID /
-INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID
+last terminal / safe detail:
+PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID /
+PROJECTION_HELPER_CONFIG_PATH_RUNTIME_TYPE_CHECK_INVALID
 
 runtime READY / readiness credit:
 false / 0
 
-failed root:
-FAILED_CLOSED_UNADMITTED_SESSION_LOCAL_ROOT / NO_REUSE
+process body implementation / freeze / execution:
+0 / 0 / 0
+
+product credit / technical credit:
+0 / 0
 ```
 
-owner manifest、pytest 8.4.1 probe、required-role smokeはVALIDでした。independent verifierがidentity導出前に`Path.read_text`へunsupported `newline` argumentを渡して停止したため、owner-only observationをreadiness creditへ昇格しません。
+Gate B V2のpre-freeze actual-callはprojection verifierのconcrete Path type拒否を検出し、wheel取得、runtime root、venv、install、pytestより前に停止しました。V1 / V2の個別VALIDまたはblocker narrowingをRuntime READYへ合算しません。approved method decisionはhelper routeをretireし、次のfresh Gate Bに用いるmethodを一意にしただけです。
 
 ---
 
 ## 4. current route and distance
 
 ```text
-CURRENT G4-B  corrected verifier + fully fresh runtime readiness
+CURRENT G4-B  direct native process + fresh runtime readiness
   -> G4-C     post-G6 causal RED freeze
   -> G5       bounded implementation / GREEN-only
   -> G6       representative Product Read
@@ -248,7 +268,7 @@ CURRENT G4-B  corrected verifier + fully fresh runtime readiness
 
 ### Product Read distance
 
-STOP / loopが増えない最短経路は、G4-B、G4-C、G5、G6のexact4 authority boundaryです。Product Read実行前に閉じるtechnical Gateはexact3です。
+STOP / loopが増えない最短経路は、G4-B、G4-C、G5、G6のexact4 authority boundaryです。Product Read実行前に閉じるtechnical Gateはexact3です。helper route退役とdirect native method選定はこのdistanceを増減させず、creditにも変換しません。
 
 ### Cycle acceptance distance
 
@@ -262,7 +282,7 @@ G6 PASS後もG7a、G7b、G7c、G7d、G8、G9、G10が残ります。current Gate
 
 | Gate | Entry | Exit | STOP / branch |
 |---|---|---|---|
-| **G4-B current** | Phase 3〜7 cutover postverified、Phase 8別承認、comparator V2 `0eba095e...`不変、corrected verifier preflight、prior root / wheel / helper / readiness reuse0 | owner / independent `VALID / VALID / FULL_MATCH`、pytest probe / role smoke VALID、full-root reconciliation一致、`RUNTIME_READY_CURRENT_SESSION` | helper再失敗、identity/schema/scope conflict、owner-only admission、second repair。Gate Cへ自動進行0 |
+| **G4-B current** | direct-native technical authority別承認、comparator V2 `0eba095e...`不変、process body exact2 frozen、same bodyのsynthetic mini-root actual-call preflight、prior root / wheel / helper / readiness reuse0 | direct owner / direct independent `VALID / VALID / FULL_MATCH`、pytest probe / role smoke VALID、full-root reconciliation一致、`RUNTIME_READY_CURRENT_SESSION` | `DIRECT_NATIVE_PROCESS_ROUTE_INVALID`、identity/schema/scope conflict、owner-only admission。helper fallback / second method repair / third normal authorityは0。Gate Cへ自動進行0 |
 | **G4-C RED-only** | Gate B READY postverified、post-G6 G3 contract / test preimage / ordered exact24一致、別承認 | first22 PASS + new exact2 causal RED、`22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR`、production change0 | symbol-only / unconditional RED、exceptionをpositive credit化、case cue、historical exact2 / full52混入、scope外変更 |
 | **G5 GREEN-only** | G4 RED bytes / denominator / mutable exact3 / body budget / preimages一致、別承認 | same exact24 `24 PASS / 0 FAIL`、semantic / Safety / privacy / resource非回帰、production exact1 postverified | mutable exact3外、test / fixture / sample / Parser / Matcher / API / DB / RN変更、case branch、machine GREENの商品PASS化 |
 | **G6 Product Read** | G5 production blob、exact10 / exact8 / controls / 12 axes一致、private read + body-free publication、別承認 | §5.1 threshold全成立 | MAJOR残存はshared correctionへreturn。case cue、contract破壊、cumulative rerun不能だけmethod STOP候補 |
@@ -327,6 +347,8 @@ prior mechanical failureを閉じた後、Mash様が明示承認したnew author
 
 product semantics、test意味、acceptance、target、denominator、comparator、input identity、production、protected test、fixture、sampleは変更しません。dependency、network、runtime roleは拡大せず、same Gate / purpose / contractを保持します。
 
+ただしcurrent G4-Bはsecond helper-family failureまで到達したため、このbounded mechanical repairを再適用しません。helper / launcher修正、fresh helper、same helper route rerunは0です。
+
 second failureは次です。
 
 ```text
@@ -348,6 +370,26 @@ CURRENT_AUTHORITY_STOP
 
 商品目的 / acceptance変更、public / Safety / privacy / API / DB / RN変更、actual divergenceのdesign昇格判断、同一claimのevidence conflict、remaining route非一意もdocument STOPです。
 
+### approved direct native method after DETOUR_RISK_STOP
+
+```text
+SESSION_LOCAL_HELPER_ROUTE_RETIRE
+REPLACEMENT_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+
+direct native owner process:
+exact1
+
+direct native independent process:
+exact1
+
+persisted helper / scanner / carrier:
+exact0
+```
+
+future technical authorityは、同じauthority本文にfreezeしたprocess body exact2をstrict UTF-8 JSON stdinとplain string runtime-rootで直接起動します。ownerは`importlib.metadata`側、independentは`dist-info / RECORD / actual filesystem`側から別手順で導出し、implementation、coverage計算、filesystem traversalを共有しません。共有はfrozen comparator schemaだけです。
+
+runtime effect前にsame process body exact2をsynthetic mini-rootへactual-callし、strict output schemaを検証します。preflight不成立時は`DIRECT_NATIVE_PROCESS_ROUTE_INVALID`でSTOPし、helper fallback、別scanner、別carrier、process body修正、second method repair、third normal authorityへ進みません。本fileはprocess bodyを実装・freeze・実行しません。
+
 ---
 
 ## 7. retired / superseded routes
@@ -361,6 +403,10 @@ CURRENT_AUTHORITY_STOP
 | Inspector `0/7` | `HISTORICAL_AUXILIARY_LEDGER` | Cycle001 progress denominator化 |
 | closed single-use authorities | `IMMUTABLE_CLOSED` | retry / reuse / reactivation / reclassification |
 | failed roots / wheels / helpers | `NONREUSABLE` | future Gateでのreuse |
+| Gate B V1 session-local helper route | `CLOSED_CONSUMED_TYPED_FAILURE_RETIRED` | repair、reuse、reactivation、fallback |
+| Gate B V2 session-local helper route | `CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_RETIRED` | helper修正、V3化、reuse、rerun |
+| authority-local / session-local helper method | `RETIRED_BY_APPROVED_METHOD_DECISION` | persisted helper、追加scanner、追加carrierへの名称変更 |
+| direct native process method V1 | `CURRENT_SELECTED_METHOD_NOT_EXECUTED` | method approvalのGate B / readiness creditへの変換 |
 | installed identity `9c6925ed...` | `HISTORICAL_NONCURRENT` | current comparatorへの復帰 |
 | comparator V2 `0eba095e...` | `CURRENT_REFROZEN` | fresh evidenceなしの変更 |
 | initial G3 / G4 / G5 / G6 | `CLOSED_PRESERVED_AS_CLASSIFIED` | post-G6 correctionによるreopen / reclassify |
@@ -371,28 +417,32 @@ retired routeを消去せず、再利用できる事実とcurrent actionとし�
 
 ---
 
-## 8. navigation and Phase 8 boundary
+## 8. navigation and next technical boundary
 
 `08_cycle001_current_state.md`だけが、current observation、recovery lineage、last reusable technical credit、current first unfinished Gate、blocker、next exact1、Product Read distance、Mash decision stateを持ちます。
 
 本fileはGate sequence、entry / exit / STOP、retired route、acceptance distanceが変わる節目だけ更新します。current positionをPlan / 本file / `08`へ三重保持しません。
 
-Phase 3はPhase 8 technical resumeを許可しません。Phase 4 rules / `08` cutover、Phase 5 reflection、Phase 6 postverify、Phase 7 STOP完了後だけ、Phase 8を別承認候補にできます。
-
-current evidence不変時のPhase 8候補scope:
+Phase 8 Gate B V2は実行されましたが、pre-freeze actual-callで`PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`となり、Gate Bを閉じていません。V1 / V2 helper routeの連続STOPによる`DETOUR_RISK_STOP`は、Mashのapproved method decisionにより次のように解消しました。
 
 ```text
-corrected independent verifier
-fully fresh root / wheel / helper
-current comparator V2
-Gate B fresh runtime readiness exact1
-body-free Receipt
-必要なcurrent-only 08 update
+DETOUR_RISK_STOP = RESOLVED_BY_APPROVED_METHOD_DECISION
+SESSION_LOCAL_HELPER_ROUTE = RETIRED
+CURRENT_SELECTED_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
 ```
 
-Phase 8でGate C、protected-test / production mutation、G5 / G6 / G7、Product Read、exact24 / full52 / exact100、mashos-api write、failed artifact reuse、second repair、automatic progressionを行いません。
+次のtechnical authority候補はexact1だけです。
 
-success terminal:
+```text
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+```
+
+本method reflectionは候補を作成・実行・activateしません。次authorityの成功時creditは、direct owner / independent `VALID / VALID / FULL_MATCH`、probe / required-role smoke / full-root reconciliationが完全に成立した場合のruntime readiness exact1 / Gate B closureに限ります。
+
+next technical success terminal candidate:
 
 ```text
 TECHNICAL_CREDIT
@@ -403,12 +453,14 @@ CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
 
+禁止範囲は、Gate C以降、protected-test / production mutation、fixture / sample / corpus変更、Product Read、exact24 / full52 / exact100、mashos-api write、failed artifact reuse、helper / scanner / carrier fallback、second method repair、third normal authority、automatic progressionです。
+
 ---
 
 ## 9. current closure statement
 
 ```text
-PHASE3_CURRENT_CLOSURE_ROUTE_PREPARED_NOT_PUBLISHED
+CURRENT_CLOSURE_ROUTE_EFFECTIVE
 ORIGINAL_G0_G10_ACCEPTANCE_INTENT_PRESERVED
 CYCLE001_NOT_ACCEPTED
 RECOVERY_EPOCH004_CURRENT
@@ -416,15 +468,22 @@ G5_MACHINE_GREEN_PUBLISHED_CREDIT_PRESERVED
 G6_PRODUCT_READ_REJECT_PRESERVED
 CURRENT_LANE_POST_G6_SHARED_STRUCTURAL_CORRECTION
 CURRENT_FIRST_UNFINISHED_GATE_G4_GATE_B
-CURRENT_BLOCKER_INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID
+PHASE8_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_PRESERVED
+DETOUR_RISK_STOP_RESOLVED_BY_APPROVED_METHOD_DECISION
+SESSION_LOCAL_HELPER_ROUTE_RETIRED
+GATE_B_V1_V2_HELPER_ROUTES_RETIRED
+CURRENT_SELECTED_METHOD_GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+NEXT_TECHNICAL_AUTHORITY_DIRECT_NATIVE_GATE_B_V1_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+GATE_B_NOT_CLOSED
 RUNTIME_READY_FALSE
 READINESS_CREDIT_0
+METHOD_REFLECTION_PRODUCT_CREDIT_0
+METHOD_REFLECTION_TECHNICAL_CREDIT_0
 PRODUCT_READ_MINIMUM_BOUNDARY_EXACT4
+PRODUCT_READ_TECHNICAL_GATE_BOUNDARY_EXACT3
 CYCLE_ACCEPTANCE_MINIMUM_KNOWN_BOUNDARY_EXACT11
 RETIRED_ROUTE_NOT_REACTIVATED
 CURRENT_NAVIGATION_OWNER_08
 WORK_TECHNICAL_EXECUTION_NOT_RESUMED
-PHASE4_OWNER_WORKFLOW_CUTOVER_EFFECTIVE_AT_SAME_CHECKPOINT_B
-PHASE8_SEPARATE_APPROVAL_REQUIRED
 AUTOMATIC_PROGRESSION_FALSE
 ```

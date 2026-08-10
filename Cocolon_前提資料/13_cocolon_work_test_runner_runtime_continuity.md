@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_work_test_runner_runtime_continuity
 title: "Cocolon Work test-runner runtime continuity contract"
-revision_date: "2026-08-10"
-status: "PHASE4_PREPARED_NOT_PUBLISHED"
+revision_date: "2026-08-11"
+status: "CURRENT_EFFECTIVE"
 effective_boundary: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
 effective_status_after_boundary: "CURRENT_NORMATIVE_CONTRACT"
 scope: "WORK_LOCAL_PYTHON_PYTEST_TEST_RUNNER_ONLY"
@@ -34,19 +34,22 @@ GitHub反映方法と完了判定の正本は、引き続き
 `work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`
 です。技術定義は本書、毎回の実行checkは`16`を正とし、全文を複製しません。
 
-### 0.1 Phase 4 preparation / effect boundary
+### 0.1 current effect boundary
 
-このrevisionはPhase 4で作成したpostimageです。Phase 5 Checkpoint Bのatomic
-current-owner cutoverがremote postverifyされるまでは`PHASE4_PREPARED_NOT_PUBLISHED`
-であり、technical authority、runtime実行、retry、GitHub writeを発生させません。
-
-Checkpoint B postverify後にだけ、本revisionを`CURRENT_NORMATIVE_CONTRACT`として
-使用します。それ以前はremote predecessor ruleが有効であり、local postimageを
+Phase 5 Checkpoint Bのatomic current-owner cutoverはremote postverify済みです。
+本2026-08-11 revisionは、G4 helper-route retirement / direct-native-process method
+reflectionを含むcommitがremote postverifyされた時点で
+`CURRENT_NORMATIVE_CONTRACT`として有効になります。それ以前はremote predecessor
+ruleが有効であり、local postimageをtechnical authorityまたは実行許可として
 先行適用しません。
+
+本revisionの反映authority自体は文書・metadata同期だけです。process bodyの実装、
+freeze、actual-call、runtime、pytest、network、wheel、venv、install、Gate B、
+Gate C以降を許可しません。
 
 ### 0.2 Cycle001 navigation owner separation
 
-Phase 5 Checkpoint B effective boundary後、Cycle001のownerは次に分離します。
+current effective boundary後、Cycle001のownerは次に分離します。
 
 - `08_cycle001_current_state.md`: current Gate、blocker、next exact1を選ぶ唯一の
   current navigation owner。
@@ -418,6 +421,96 @@ target launch requestをOSへ渡してauthorityがconsumedになった後のfail
 failure、test failure、identity / comparator / denominator conflict、dependency / network /
 runtime-role changeはbounded mechanical repair対象外であり、従来どおりno retryです。
 
+### 7.5 current G4-B direct-native-process method
+
+本sectionは、current G4-B
+`G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B`だけに適用するmethod overrideです。
+§§7.1〜7.4の一般contractとhistorical observationは保持しますが、current G4-Bでは
+authority-local / session-local helper file・helper callable・helper Path API boundaryを
+退役済みとし、helper修正、V3化、再利用へ戻りません。
+
+```text
+method id:
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+
+retired:
+authority-local helper file
+session-local helper callable
+helper Path API boundary
+helper repair / V3 / reuse
+additional scanner
+additional carrier
+
+future technical authority process cardinality:
+direct native owner process exact1
+direct native independent process exact1
+
+persisted helper / scanner / carrier:
+exact0 / exact0 / exact0
+```
+
+future technical authorityは、同じauthority本文でprocess body exact2をfreezeし、各bodyを
+OS processとして直接起動します。入力はstrict UTF-8 JSON stdinだけとし、runtime-rootは
+plain JSON string fieldで渡します。`Path` object、abstract `Path` class、helper callable、
+command-line path coercionをprocess間contractにしません。
+
+owner processは`importlib.metadata`側からidentityを導出します。independent processは
+`dist-info / RECORD / actual filesystem`側から別手順で導出します。両processが共有して
+よいものはfrozen comparator schemaだけです。owner / independent implementation、
+coverage計算、filesystem traversal、intermediate stateを共有しません。
+
+acquisition、materialization、readiness、pytest、role smoke、target effectの前に、freeze対象と
+同じprocess body exact2をsynthetic mini-rootへstrict UTF-8 JSON stdinでactual-callします。
+preflightとfuture runtime derivationは同じprocess body bytesを使用し、preflight専用body、
+alternate reader、mock call、shared derivationへ差し替えません。synthetic mini-rootはprivate
+authority-local materialであり、fixture、sample、corpus、protected test、acceptance denominatorへ
+加えません。
+
+owner / independentの各outputはfuture technical authorityがfreezeするstrict schemaへ個別に
+validateします。required / optional field、type、enum、cardinality、ordering、empty /
+`NOT_APPLICABLE`表現、unknown-field policy、body-free境界の一項目でも不成立ならPASSに
+しません。serialization成功、process exit 0、owner-only resultをvalidityまたはreadinessへ
+変換しません。
+
+preflight不成立時はruntime / target effect 0のまま次でSTOPします。
+
+```text
+DIRECT_NATIVE_PROCESS_ROUTE_INVALID
+HELPER_FALLBACK_0
+ADDITIONAL_SCANNER_0
+ADDITIONAL_CARRIER_0
+PROCESS_BODY_REPAIR_0
+SECOND_METHOD_REPAIR_0
+THIRD_NORMAL_AUTHORITY_0
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+このmethod変更は次を変更しません。
+
+```text
+comparator:
+NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+
+frozen lock / authority-specified exact5 projection:
+UNCHANGED / UNCHANGED
+
+accepted wheel manifest / distribution closure / acceptance denominator:
+UNCHANGED / UNCHANGED / UNCHANGED
+
+configured network route and count / runtime role and required-role order:
+UNCHANGED / UNCHANGED
+
+runtime READY / readiness credit / Gate B:
+false / 0 / NOT_CLOSED
+```
+
+本2026-08-11 reflectionではprocess bodyの実装・freeze・実行を行いません。direct native
+owner / independent process actual-call、runtime、pytest、network、wheel取得、venv、install、
+Gate B executionはすべて0です。future technical authorityは別のMash様明示承認を必要とし、
+本sectionから自動進行しません。
+
 ## 8. Gate C: TARGET_EXECUTION_ADMISSION
 
 targeted authorityは、current-session runtime readinessが別checkpointでVALIDと
@@ -546,11 +639,11 @@ no historical recredit、Mash様へのruntime path / venv / pytest要求禁止�
 - runtime / pytest / target / private analyzer / implementation / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0 / 0`.
 - Only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.
 
-## 14. Phase 4 current-owner and mechanical-preflight cutover candidate
+## 14. Phase 4 current-owner and mechanical-preflight cutover history
 
-本sectionはPhase 5 Checkpoint B remote postverify後に§13のcurrent-navigation pointerと
-front-matter statusに関する旧記述をsupersedeします。§13のincident事実と§§0〜10の
-historical observationsは書き換えません。
+Phase 5 Checkpoint B remote postverifyにより、§13のcurrent-navigation pointerと
+front-matter statusに関する旧記述はsuperseded済みです。§13のincident事実と§§0〜10の
+historical observationsは書き換えません。current G4-B methodは§7.5を正とします。
 
 effective boundary後のroutingは次です。
 
@@ -569,13 +662,15 @@ historical evidence map:
 ```
 
 actual entrypoint signature、production-same read path synthetic execution、UTF-8 /
-newline / bytes、output schemaのpre-freeze proofがないhelper / launcherをfreezeしません。
-mechanical failureの修正は§7.3のnew authority exact1だけです。
+newline / bytes、output schemaのpre-freeze proofがないhelper / launcherを一般contractで
+freezeしません。current G4-Bには§7.5のdirect-native-process actual-call preflightを適用し、
+§7.3のhelper repairまたはsecond method repairへ戻りません。
 
 ```text
-PHASE4_PREPARED_NOT_PUBLISHED
-EFFECTIVE_ONLY_AFTER_PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+CURRENT_EFFECTIVE
+PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+CURRENT_G4_B_METHOD_GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
 TECHNICAL_EXECUTION_0
-GITHUB_WRITE_0
+METHOD_REFLECTION_GITHUB_PUBLICATION_REMOTE_POSTVERIFIED
 AUTOMATIC_PROGRESSION_FALSE
 ```

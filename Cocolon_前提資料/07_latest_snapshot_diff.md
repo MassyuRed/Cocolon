@@ -40191,3 +40191,49 @@ creditは`false / 0`です。
 
 次のcorrected-verifier Gate B proposalはinactiveです。Phase 3〜7完了後のPhase 8別承認なしに、
 runtime、pytest、Gate B、Gate C、source、test、fixture、production、Product Readへ進みません。
+
+# 2026-08-11 milestone — helper route retirement / direct native method decision
+
+```text
+status: METHOD_REFLECTION_PREPARED
+effective_when: METHOD_REFLECTION_PUBLICATION_REMOTE_POSTVERIFIED
+current_navigation_owner: 08_cycle001_current_state.md
+technical_execution: 0
+product_credit / technical_credit: 0 / 0
+automatic_progression: false
+```
+
+Mash approved the single-use authority
+`NLS_V3_STEP11_CYCLE001_G4_DETOUR_RISK_STOP_HELPER_ROUTE_RETIREMENT_DIRECT_NATIVE_PROCESS_METHOD_REFLECTION_AND_CURRENT_METADATA_SYNC_V1`
+with canonical authority SHA-256
+`2450b52410a512db7e9a3703fa09ad870c124cac4d821e16b1e0b3b25496a0ac`.
+Entry Cocolon was `5abf4a211b971f1fe65313e46522bcf5973d7324`; mashos-api remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`.
+
+The approved method decision retires the authority-local / session-local helper route and selects
+`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`. Persisted helper, scanner, and carrier remain exact0. The future
+owner and independent derivations use direct native processes exact1 each, but their bodies, freeze,
+synthetic preflight, runtime derivation, and Gate B execution are not part of this milestone.
+
+The sole current navigation owner remains `08_cycle001_current_state.md`. Current roadmap, alignment,
+Closure Route, runtime owner 13, enforcement rule 16, and general workflow rules are synchronized to the
+same method boundary. This 07 section is milestone-only evidence and does not own the daily next action.
+
+```text
+DETOUR_RISK_STOP: RESOLVED_BY_APPROVED_METHOD_DECISION
+retired: SESSION_LOCAL_HELPER_ROUTE
+selected method: GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+Gate B: NOT_CLOSED
+runtime READY / readiness credit: false / 0
+Cycle001: NOT_ACCEPTED
+next exact1: NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+next state: DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+Gate C authorization: false
+runtime / pytest / network / wheel / venv / install / process execution: 0
+source / test / fixture / sample / corpus / mashos-api change: 0
+current same-name historical Plan change: 0
+automatic progression: false
+```
+
+The body-free Receipt is the durable result owner. This section does not issue or execute the next
+technical authority and does not convert the method decision into product or technical credit.

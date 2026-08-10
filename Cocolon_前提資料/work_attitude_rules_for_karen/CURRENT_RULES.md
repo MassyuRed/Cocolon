@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-08-10
+revision_date: 2026-08-11
 normative_status: CURRENT_GENERAL_RULE_OWNER
-status: PHASE4_PREPARED_NOT_PUBLISHED
+status: CURRENT_EFFECTIVE
 effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 decision_owner: Mash
 operational_owner: Karen
@@ -218,6 +218,19 @@ latest independent verifierのAPI引数failureは`BLOCKER_NARROWED`であり、R
 ```
 
 許可されるのは`mechanical repair exact1`、新しい`fresh root / wheel / helper`、同じGateの`fresh rerun exact1`だけです。成功またはterminal STOPで閉じます。second failureでは追加repairを行わず`DETOUR_RISK_STOP`へ移ります。閉鎖済みauthority、failed root、wheel、helper、readiness creditを遡及修正・再利用しません。
+
+### R10.4 current G4-B method route
+
+Mash様のmethod decisionにより、current G4-Bの`DETOUR_RISK_STOP`は次のrouteで解消します。
+
+```text
+SESSION_LOCAL_HELPER_ROUTE_RETIRE
+REPLACEMENT_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+```
+
+authority-local / session-local helper routeはretiredです。helper修正、helper V3、追加scanner、追加carrier、third normal helper authority、second method repairへ戻りません。replacement methodのprocess body実装、freeze、preflight、runtime effect、Gate B実行は、Mash様が別途明示承認するfuture technical authorityに限ります。method reflectionだけでGate B closed、runtime READY、readiness credit、technical credit、product creditに変換しません。
+
+current method、Gate、next exact1の一意なownerは`../08_cycle001_current_state.md`です。本fileからdaily current navigationを複製せず、このmethod decisionをruntime / manifest / processの日常監視としてMash様へ戻しません。
 
 ## R11. 成果物・完了・報告
 

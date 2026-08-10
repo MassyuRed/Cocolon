@@ -1,9 +1,9 @@
 ---
 document_id: Cocolon_EmlisAI_longterm_roadmap_CURRENT
 canonical_path: Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md
-revision_date: 2026-08-10
-observation_date: 2026-08-10 JST
-status: PHASE3_PREPARED_NOT_PUBLISHED
+revision_date: 2026-08-11
+observation_date: 2026-08-11 JST
+status: CURRENT_EFFECTIVE
 document_role: EmlisAI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT
 effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 decision_owner: Mash
@@ -17,7 +17,7 @@ automatic_progression: false
 
 ## 0. この文書の結論
 
-2026-08-10 JST時点のcurrent product workstreamは、**P3: Product Read Feel v1** です。
+2026-08-11 JST時点のcurrent product workstreamは、**P3: Product Read Feel v1** です。
 
 NLS v3 Step 11 Cycle001は、P3の「読まれた感・自然さ・non-template」を成立させるためのshared structural correction / cumulative product-quality routeです。**Cycle001の累積loopをP7と同一視しません。P7はcurrent Phaseではなく、将来Phaseかつcurrent completion `UNVERIFIED`です。**
 
@@ -29,6 +29,9 @@ NLS_V3_STEP11_CYCLE001 = NOT_ACCEPTED
 G5_TECHNICAL_GATE = GREEN
 G6_PRODUCT_READ_GATE = REJECTED
 CURRENT_CORRECTION_LANE = SHARED_STRUCTURAL_CORRECTION
+CURRENT_GATE_B = NOT_CLOSED
+CURRENT_GATE_B_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+RUNTIME_READY / READINESS_CREDIT = FALSE / 0
 P7_LONG_RUN_PHASE = FUTURE_UNVERIFIED
 PRODUCT_COMPLETE = FALSE
 RELEASE_READY = FALSE
@@ -80,10 +83,10 @@ Git blob: d1c3cdd25e31f0a5a18df4217d0ecac9d243ab3c
 
 | repository | observed head | current meaning |
 |---|---|---|
-| `MassyuRed/Cocolon` | `2afcfb87422334c4fdba9c895d619a64fd9d252a` | Phase 2 exact3 immutable baseline publication後の観測head |
+| `MassyuRed/Cocolon` | `5abf4a211b971f1fe65313e46522bcf5973d7324` | Phase 8 Gate B pre-freeze terminal publication後のentry head |
 | `MassyuRed/mashos-api` | `45bf98f9034261d3adb3e808d6d759f2334e2d25` | G5 typed recomposition production source owner |
 
-`Cocolon`のPhase 2 commitはoriginal exact3の追加だけです。その親 `7548fd47c67bbda2d8c65bab70ea4564218f54c3` から、既存Plan、`07`、`08`、rules、source、test、fixture、`mashos-api`を変更していません。したがって、Phase 2 publication自体を商品品質creditへ変換しません。
+Phase 2がoriginal exact3だけを追加した事実とそのbytesは保持します。Phase 8はGate B pre-freeze actual-callで停止し、runtime、network、wheel、venv、install、pytestへ進んでいません。これらのpublicationまたはmethod reflectionを商品品質credit / technical creditへ変換しません。
 
 ### 2.2 current canonical evidence
 
@@ -93,7 +96,7 @@ Git blob: d1c3cdd25e31f0a5a18df4217d0ecac9d243ab3c
 | append-only evidence | `Cocolon_前提資料/07_latest_snapshot_diff.md` |
 | G5 technical GREEN | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G5_GateC_Exact24Green_ProductionPublished_BodyFree_Receipt_20260810.json` |
 | G6 Product Read REJECT | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G6_B6RepresentativeProductReadRecheck_Rejected_BodyFree_Receipt_20260810.json` |
-| latest Gate B typed failure | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_BodyFree_Receipt_20260810.json` |
+| latest Gate B typed failure | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_CorrectedIndependentVerifierAndFreshRuntimeReadinessUnderComparatorV2_V2_PrefreezeExecutablePreflightInvalid_BodyFree_Receipt_20260810.json` |
 | NLS v3 immutable design | `Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md` |
 | Cycle001 immutable plan | `Cocolon_前提資料/historical_baselines/emlis_ai/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` |
 
@@ -198,20 +201,26 @@ Cycle001 GateをP3完了条件の代用品にしません。原本P3の条件を
 | G5 Gate C exact24 | `24 PASS / 0 FAIL / 0 ERROR / 0 UNEXPECTED`。production ownerは `mashos-api@45bf98f9034261d3adb3e808d6d759f2334e2d25` | technical GREENのみ。Product ReadまたはCycle acceptanceではない |
 | G6 representative Product Read | candidate `0 PASS / 2 MINOR / 8 MAJOR / 0 BLOCKER`、unique `0 / 2 / 6 / 0` | `B6_PRODUCT_READ_GATE_REJECTED`。P3未完了を示すactual nonconformance |
 | G6 recovery disposition | `RETURN_TO_SHARED_STRUCTURAL_CORRECTION`、`CURRENT_AUTHORITY_STOP`、`NLS_V3_METHOD_STOP_FALSE` | model-free方式全体のSTOPではない。通常のshared correction loop |
-| latest Gate B | owner manifest / probeはvalid、independent verifierはinvalid。`Path.read_text`へのunsupported `newline` argumentで停止 | Runtime READY / readiness credit `0 / 0`。technical blocker narrowingであり商品creditではない |
+| Gate B V1 | owner manifest / probeはvalid、independent verifierは`Path.read_text`へのunsupported `newline` argumentでidentity導出前に停止 | Runtime READY / readiness credit `0 / 0`。helper routeの失敗証拠 |
+| latest Gate B V2 | pre-freeze actual-callがprojection verifierのconcrete `pathlib.PosixPath`拒否を検出。wheel取得、venv、install、pytestより前に停止 | `PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`。Runtime READY / readiness credit `0 / 0`。product / technical creditなし |
+| approved method reflection | session-local helper routeをretireし、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodにした | method decisionのみ。Gate B実行、runtime readiness、product / technical creditは発生しない |
 | Cycle001 | G5 technical creditはあるが、G6 reject後のacceptance evidenceなし | `NOT_ACCEPTED` |
 
 ### 5.4 current shared structural correction lane
 
-current technical routeの唯一のownerは `08_cycle001_current_state.md` です。2026-08-10観測時点の次の最小proposalは、corrected independent verifierを使うentirely fresh Gate Bです。
+current technical routeの唯一のownerは `08_cycle001_current_state.md` です。Gate B V1 / V2は同じhelper API / runtime type contract familyで連続STOPしたため、current helper routeはretiredです。Mashのapproved method decisionは次のexact1です。
 
 ```text
-NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2
+SESSION_LOCAL_HELPER_ROUTE_RETIRE
+CURRENT_SELECTED_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+
+next technical authority candidate exact1:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
 
 state = DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 ```
 
-これはproposal identityの記録であり、本書による実行承認ではありません。Gate B、runtime、pytest、Gate Cへ自動進行しません。proposal名、状態、comparator、current headのいずれかが変わった場合は、`08`を再読して本書のstatusを更新します。
+method反映はproduct creditまたはtechnical creditではありません。次候補は本書による実行承認ではなく、process bodyの実装 / freeze / preflight、runtime、Gate B、pytest、Gate Cはすべて未実行です。comparator V2、exact5 projection、denominator、network route、runtime role、acceptanceを変更せず、automatic progressionはfalseのままです。
 
 ### 5.5 current next business / product checkpoint
 
@@ -293,7 +302,8 @@ NLS v3 owner switchだけではEmlisAI全体は完成しません。問いシス
 - P3 Product Read Feel v1はcurrent workstreamで、completion evidenceが成立していません。
 - Cycle001は `NOT_ACCEPTED` です。
 - G5はtechnical GREENですが、G6 Product ReadはREJECTです。
-- latest Gate Bのruntime readiness creditは `0 / 0` です。
+- latest Gate B V2はruntime READY / readiness creditは `false / 0` で、Gate Bは閉じていません。
+- helper route退役とdirect native method選定は管理上のmethod decisionであり、product / technical creditは0です。
 - release-ready条件は成立していません。
 
 ### 9.2 unverified — 完了扱いしない
@@ -357,6 +367,7 @@ current nextは、NLS v3 current alignment、本書、Cycle001 current closure r
 | 2026-07-06 | `UNCHANGED_NORMATIVE` | 問いシステムをcore quality gate + P8 question UXの二層へ正式再配置 |
 | 2026-08-10 | `CONFIRMED_CURRENT_FACT` | Phase 2でoriginal exact3をimmutable baselineとしてpublication / postverify。既存current ownersは不変更 |
 | 2026-08-10 | `CURRENT_ALIGNMENT_JUDGMENT` | current derivative作成。current product workstreamをP3、Cycle001をP3 supporting route、P7をfuture / `UNVERIFIED`として分離。G5 GREEN / G6 REJECT / Gate B credit 0を反映 |
+| 2026-08-11 | `CURRENT_ALIGNMENT_JUDGMENT` | Phase 8 pre-freeze terminalを反映。V1 / V2 helper routeをretireし、approved `GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodとした。Gate B未閉鎖、Runtime READY false、readiness / product / technical credit 0を保持 |
 
 ---
 
@@ -369,7 +380,16 @@ NLS_V3_STEP11_CYCLE001_ROLE = P3_SUPPORTING_TECHNICAL_PRODUCT_ROUTE
 NLS_V3_STEP11_CYCLE001 = NOT_ACCEPTED
 G5_TECHNICAL_GREEN = TRUE
 G6_PRODUCT_READ_PASS = FALSE
-CURRENT_SHARED_STRUCTURAL_CORRECTION = INACTIVE_SEPARATE_APPROVAL_REQUIRED
+CURRENT_SHARED_STRUCTURAL_CORRECTION = CURRENT_G4_B_GATE_NOT_CLOSED
+CURRENT_GATE_B = NOT_CLOSED
+SESSION_LOCAL_HELPER_ROUTE = RETIRED
+CURRENT_GATE_B_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+NEXT_TECHNICAL_AUTHORITY = NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+NEXT_TECHNICAL_AUTHORITY_STATE = DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+RUNTIME_READY = FALSE
+READINESS_CREDIT = 0
+METHOD_REFLECTION_PRODUCT_CREDIT = 0
+METHOD_REFLECTION_TECHNICAL_CREDIT = 0
 P7_CURRENT = FALSE
 P7_STATUS = FUTURE_UNVERIFIED
 QUESTION_SYSTEM_IMPLEMENTATION = UNVERIFIED

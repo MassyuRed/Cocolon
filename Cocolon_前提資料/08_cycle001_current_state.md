@@ -1,10 +1,10 @@
 ---
 doc_id: cocolon_cycle001_current_state
 title: "Cycle001 現在地 — 単一ナビゲーション正本"
-revision_date: "2026-08-10"
-status: "PHASE8_GATE_B_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_TERMINAL"
+revision_date: "2026-08-11"
+status: "G4_DETOUR_METHOD_DECISION_REFLECTED_CURRENT"
 normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER"
-effective_when: "PHASE8_GATE_B_V2_TERMINAL_PUBLICATION_REMOTE_POSTVERIFIED"
+effective_when: "METHOD_REFLECTION_PUBLICATION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operational_owner: "Karen"
 technical_authority: false
@@ -22,10 +22,10 @@ automatic_progression: false
 ## 1. source heads and observation
 
 ```text
-observation date: 2026-08-10 JST
-Cocolon Phase 8 entry: c5009a2d5281bc74d48fb189e97453367ddacba0
+observation date: 2026-08-11 JST
+Cocolon method-reflection entry: 5abf4a211b971f1fe65313e46522bcf5973d7324
 mashos-api: 45bf98f9034261d3adb3e808d6d759f2334e2d25
-Phase 8 publication: resolve from this file's Git history and latest Receipt
+method-reflection publication: resolve from this file's Git history and latest Receipt
 ```
 
 ## 2. product and cycle
@@ -58,11 +58,14 @@ Current derivative owners:
 ```text
 current route: POST_G6_SHARED_STRUCTURAL_CORRECTION
 current Gate: G4
-current subgate: GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS
+current subgate: GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS
 current comparator: NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1 / 0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+current selected method: GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
 current active authority: NONE
-last authority: NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2
-last authority lifecycle: CURRENT_AUTHORITY_CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
+last administrative authority: NLS_V3_STEP11_CYCLE001_G4_DETOUR_RISK_STOP_HELPER_ROUTE_RETIREMENT_DIRECT_NATIVE_PROCESS_METHOD_REFLECTION_AND_CURRENT_METADATA_SYNC_V1
+last administrative authority lifecycle: CLOSED_CONSUMED_METHOD_DECISION_REFLECTED
+last technical authority: NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2
+last technical authority lifecycle: CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
 ```
 
 ## 5. last product, technical, and reusable evidence
@@ -73,42 +76,43 @@ last product credit: 0
 last technical credit: current comparator V2 refreeze
 last reusable evidence: comparator V2 + G5 exact24 = 24 PASS / 0 FAIL / 0 ERROR / 0 UNEXPECTED
 Phase 8 reusable runtime credit: 0
+method-reflection product / technical credit: 0 / 0
 ```
 
 G5 technical GREENは保持しますが、G6 Product Read、Cycle acceptance、runtime READYへ変換しません。
 
-## 6. current exact blocker
+## 6. current method boundary
 
-Phase 8のpre-freeze actual-callは、wheel取得、venv作成、pytestより前に停止しました。
-新しいprojection verifierの`run(Path)`が、CLIから渡されたactual `pathlib.PosixPath`を拒否しました。
-helperはfreeze、修正、再実行していません。
+Gate B V1 / V2で使用したauthority-local / session-local helper routeは退役しました。
+helperの修正、V3化、再利用、別scanner、別carrierへ進みません。
+Mashのapproved method exact1は、保存されないdirect native process exact2を使う
+`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`です。このmethod反映はGate B実行またはcreditではありません。
 
 ```text
-typed reason: PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
-safe detail: PROJECTION_HELPER_CONFIG_PATH_RUNTIME_TYPE_CHECK_INVALID
-helper result: CONFIG_PATH_TYPE_INVALID
-configured-route acquisition / network: 0 / 0
-wheel / runtime root / venv / install: 0 / 0 / 0 / 0
-owner / pytest probe / role smoke / independent / reconciliation: 0 / 0 / 0 / 0 / 0
+DETOUR_RISK_STOP: RESOLVED_BY_APPROVED_METHOD_DECISION
+approved decision: SESSION_LOCAL_HELPER_ROUTE_RETIRE
+approved method: GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+persisted helper / scanner / carrier: exact0
+Gate B: NOT_CLOSED
 runtime READY / readiness credit: false / 0
 ```
 
-このSTOPはpreflightが意図どおり不正なhelperをruntime effect前に検出した結果です。
-一方、prior V1と今回でhelper API/runtime type contract familyのSTOPが連続したため、第三の通常authorityへ進みません。
+method decisionは反映済みですが、direct native process bodyの実装、freeze、preflight、runtime derivationは
+次の別technical authorityが承認されるまで0です。
 
 ## 7. next exact1 and credit boundary
 
 ```text
-next exact1: MASH_METHOD_DECISION_ON_RETIRING_OR_REPLACING_SESSION_LOCAL_HELPER_ROUTE_BEFORE_ANY_FURTHER_GATE_B_ATTEMPT
-state: DETOUR_RISK_STOP / NO_THIRD_NORMAL_AUTHORITY
-bounded mechanical repair remaining: 0
-second repair / helper edit / rerun / alternate helper / fallback: 0
-expected immediate technical credit: 0
+next exact1: NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+state: DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+selected method: GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+helper fallback / second method repair / third normal helper authority: 0 / 0 / 0
+expected success credit: RUNTIME_READY_EXACT1 / GATE_B_CLOSED
 Gate C authorization: false
 ```
 
-通常のGate B再実行authority、別helper、scanner、carrierを自動追加しません。
-次は商品目的を変えずに、本筋へ戻すmethod exact1をMashが判断する地点です。
+次のtechnical authorityは未承認・未実行です。通常helper routeや別補助chainを復活させず、
+direct native Gate B exact1以外へ自動進行しません。
 
 ## 8. distance and blocked downstream
 
@@ -127,22 +131,27 @@ Blocked downstream: Gate C、protected-test append、G5 production change、G6 P
 | Gate B V1 | independent helperがunsupported `Path.read_text(newline=...)`でidentity導出前に停止。Runtime READY / credit 0 | `BLOCKER_NARROWED` |
 | Gate B V2 | pre-freeze actual-callがprojection helperのconcrete Path type拒否を検出。runtime/network/pytest effect 0 | `BLOCKER_NARROWED` |
 
-## 10. primary classification, detour, Mash decision
+上記technical attempt exact2はimmutable historyです。今回のmethod decisionをtechnical attemptやcreditへ数えません。
+
+## 10. primary classification, detour, and approval boundary
 
 ```text
-current primary outcome: BLOCKER_NARROWED
-DETOUR_RISK_STOP: TRIGGERED
-trigger: same helper API/runtime type contract blocker familyで2回連続STOP
+current primary outcome: ADMINISTRATIVE_ONLY
+DETOUR_RISK_STOP: RESOLVED_BY_APPROVED_METHOD_DECISION
+historical trigger: same helper API/runtime type contract blocker familyで2回連続STOP
+approved method: SESSION_LOCAL_HELPER_ROUTE_RETIRE / GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
 reusable credit added: 0
 product goal or acceptance decision required now: false
-method decision required now: true
-third normal authority allowed: false
+method decision required now: false
+direct native technical authority approval required now: true
+third normal helper authority allowed: false
 automatic progression: false
 ```
 
 ## 11. evidence pointers
 
 - Phase 8 terminal: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_CorrectedIndependentVerifierAndFreshRuntimeReadinessUnderComparatorV2_V2_PrefreezeExecutablePreflightInvalid_BodyFree_Receipt_20260810.json`
+- method decision: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_DetourRiskStop_HelperRouteRetirementAndDirectNativeProcessMethodDecision_BodyFree_Receipt_20260811.json`
 - prior Gate B: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_BodyFree_Receipt_20260810.json`
 - comparator V2: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V2_20260810.json`
 - G5: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G5_GateC_Exact24Green_ProductionPublished_BodyFree_Receipt_20260810.json`
@@ -150,12 +159,13 @@ automatic progression: false
 - route details: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md`
 
 ```text
-PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
-DETOUR_RISK_STOP
-NO_SECOND_REPAIR
+DETOUR_RISK_STOP_RESOLVED_BY_APPROVED_METHOD_DECISION
+SESSION_LOCAL_HELPER_ROUTE_RETIRED
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1_SELECTED
+NEXT_DIRECT_NATIVE_GATE_B_TECHNICAL_AUTHORITY_SEPARATE_APPROVAL_REQUIRED
 RUNTIME_READY_CURRENT_SESSION_FALSE
 READINESS_CREDIT_0
 GATE_B_NOT_CLOSED
-CURRENT_AUTHORITY_STOP
+CURRENT_ACTIVE_AUTHORITY_NONE
 AUTOMATIC_PROGRESSION_FALSE
 ```
