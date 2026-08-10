@@ -18963,3 +18963,77 @@ exact6. Production/test/fixture/sample changes, mashos-api write, G4/G5/G6/G7
 execution, Parser/Matcher, API/DB/RN/public/shared runtime/Safety changes, and
 Cycle001 acceptance are all zero. The next G4 RED-only authority is defined
 inactive and requires separate Mash approval. Automatic progression is false.
+
+## 2026-08-10 — G4 post-G6 Gate A runtime identity invalid preactivation STOP V1
+
+Mash approved
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_REMEDIATION_DESIGN_FREEZE_RED_ONLY_V1`.
+The immutable entry matched Cocolon
+`f05bcda3f7ce9166c7ff350d8d1e97d407de41ff` / tree
+`752b45073a548a7b6c01994d8d0aa29c36c30be5`, mashos-api
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`, production blob
+`f10ce7948e5570ee8ad27ee2af00a9caf3867d49`, and protected-test blob
+`c302dd99e143967fed6edd65b429373e87453fc6`.
+
+Before G4 activation, read-only Gate A found the declared exact1 runtime
+candidate but classified it as
+`RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE`. The prior READY
+full-root observation was files498 / site-files487 / symlink1. Current was
+files600 / site-files589 / symlink1, with 16 `__pycache__` directories and
+102 `.pyc` files. The current full-root canonical manifest is650 rows /
+157,431 bytes / SHA-256
+`6371e805b68cb5d27e75e6f7b6ebe64b482e14418d1a0b108a1b62037129a6f1`.
+Cache entries are not excluded from the normative full-root rule.
+
+The static continuity verifier was stdlib-only/read-only process exact3 with
+repository/runtime import0. G4 activation/admission/technical consumption and
+causal classification are0. Pytest version probe, role smoke, target import,
+collection, call, ordered exact24, historical full52, whole-file full54,
+outside-list whole collection, exact100, retry, fallback, runtime mutation,
+repair, install, rematerialization, acquisition, and network are all0.
+
+Protected test remains exactly431,357 bytes / static definitions52. Append,
+new dynamic collected node, replacement helper, oracle candidate, lossless
+patch, unpublished test candidate, and mashos-api write are0. The future
+ordered exact24 identity remains 24 distinct / 3,575 bytes / LF24 / SHA-256
+`b3ac62fee89d554a2e30e507cfc211cb157130553a9eb7c8d42b762a53c6b0ef`
+as a contract identity only, with execution credit0.
+
+```text
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_PREACTIVATION_STOP_RUNTIME_IDENTITY_INVALID
+RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE
+CURRENT_G4_AUTHORITY_CLOSED_UNCONSUMED
+NEXT_G4_GATE_B_FRESH_RUNTIME_REMATERIALIZATION_AND_READINESS_RECONCILIATION_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+The G4 lifecycle is `CLOSED_UNCONSUMED_PREACTIVATION_STOP`: approval1,
+activation0, technical consumption0, retry0, reuse0, reactivation0. This is not
+a causal RED freeze and does not authorize G5. G3 post-G6 and prior G3–G6
+closed evidence remain unchanged; G4 is unfinished, G5/G6/G7 are not started,
+and Cycle001 remains `NOT_ACCEPTED`.
+
+Durable owners are Result SHA-256/blob
+`04967830a2b061239a2f847d5f8073703d38e687b4c03fb483e0daa80b44d538` /
+`7aab4bbb37447468e47fd6e2c2e1a1aba0fe8ab9`, Receipt
+SHA-256/blob/logical SHA-256
+`689b4967935366114291157654b52bbb93094b756fe008c6f5b7abf69c991e98` /
+`77c3b7c012c22bbee2bb0939efc5c15319def484` /
+`28921fc6667a8d75a01c441b454d5e0d5ce2a688ec5cfbff0db555f1a8504cd2`,
+and Handoff SHA-256/blob
+`ff634b0ff736e5d1cfbe752d2743d0a6d6f0cdc89ff88346efcdb7212d1cd5b0` /
+`f83fbe993b7b8efacc19f760cc0212e35e6ef9b4`.
+
+The next inactive authority is
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_REMATERIALIZATION_AND_READINESS_RECONCILIATION_V1`.
+It permits only fresh exact5 runtime rematerialization, exact pytest version
+probe1, required-role smoke1, fresh owner/independent identity reconciliation,
+and Cocolon exact6 closure. It must STOP at READY or typed failure. Protected-
+test append, target execution, mashos-api write, and G5 remain0. READY requires
+a later separate G4 Gate C Mash approval; no automatic progression occurs.
+
+This STOP is Cocolon new3 + Plan/07 append-only modified2 + 08 current-
+navigation modified1 exact6. Unauthorized path, deletion, rename, production,
+test, fixture, sample, corpus, Product Read, G5/G6/G7, and Cycle acceptance are0.

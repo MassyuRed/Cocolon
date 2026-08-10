@@ -1203,3 +1203,110 @@ exact100, production/test/fixture/sample change, mashos-api write, Parser/
 Matcher, API/DB/RN/public/shared runtime/Safety change, G4/G5/G6/G7 execution,
 and Cycle001 acceptance are all zero in this G3. Automatic progression is
 false.
+
+## 11.12 Current override — G4 Gate A runtime identity invalid preactivation STOP V1 (2026-08-10)
+
+This section supersedes only the current navigation at the end of §11.11. It
+does not reopen or reclassify G3–G6 historical evidence.
+
+```text
+current state:
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_PREACTIVATION_STOP_RUNTIME_IDENTITY_INVALID
+
+current typed reason:
+RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE
+
+G4 lifecycle:
+CLOSED_UNCONSUMED_PREACTIVATION_STOP
+
+approval / activation / technical consumption:
+1 / 0 / 0
+
+Cocolon predecessor / tree:
+f05bcda3f7ce9166c7ff350d8d1e97d407de41ff /
+752b45073a548a7b6c01994d8d0aa29c36c30be5
+
+mashos-api current / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+production / protected-test blobs:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+Gate A frozen READY files/site/symlink:
+498 / 487 / 1
+
+Gate A observed files/site/symlink:
+600 / 589 / 1
+
+observed cache directories / pyc files:
+16 / 102
+
+current full-root manifest SHA-256:
+6371e805b68cb5d27e75e6f7b6ebe64b482e14418d1a0b108a1b62037129a6f1
+
+target invocation / protected-test append / mashos-api write:
+0 / 0 / 0
+
+G4 causal RED / G5 / G6 rerun / G7:
+NOT_ESTABLISHED /
+NOT_STARTED /
+NOT_STARTED /
+NOT_STARTED_UNAUTHORIZED
+
+Cycle001:
+NOT_ACCEPTED
+```
+
+The declared runtime candidate is not admitted. Core identity subset matches do
+not override normative full-root manifest drift, and cache entries are not
+excluded. Runtime repair/cache deletion/re-admission, pytest/version probe,
+role smoke, target import/collection/call, retry/fallback/interpreter switch,
+test candidate/helper/patch creation, and all mashos-api changes are0.
+
+```text
+current next authority:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_REMATERIALIZATION_AND_READINESS_RECONCILIATION_V1
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+scope:
+FRESH_EXACT5_RUNTIME_REMATERIALIZATION_AND_READINESS_ONLY
+
+terminal:
+RUNTIME_READY_CURRENT_SESSION_OR_TYPED_FAILURE_STOP
+
+post-READY G4 Gate C:
+SEPARATE_MASH_APPROVAL_REQUIRED
+
+automatic progression:
+false
+```
+
+Durable Result SHA-256/blob:
+
+```text
+04967830a2b061239a2f847d5f8073703d38e687b4c03fb483e0daa80b44d538 /
+7aab4bbb37447468e47fd6e2c2e1a1aba0fe8ab9
+```
+
+Receipt SHA-256/blob/logical SHA-256:
+
+```text
+689b4967935366114291157654b52bbb93094b756fe008c6f5b7abf69c991e98 /
+77c3b7c012c22bbee2bb0939efc5c15319def484 /
+28921fc6667a8d75a01c441b454d5e0d5ce2a688ec5cfbff0db555f1a8504cd2
+```
+
+Handoff SHA-256/blob:
+
+```text
+ff634b0ff736e5d1cfbe752d2743d0a6d6f0cdc89ff88346efcdb7212d1cd5b0 /
+f83fbe993b7b8efacc19f760cc0212e35e6ef9b4
+```
+
+This STOP is Cocolon new3 + Plan/07 append-only modified2 + current-navigation
+08 modified1 exact6. G4 success terminal, G5, G6 rerun, G7, Product Read,
+Cycle001 acceptance, and automatic progression remain false/not established.

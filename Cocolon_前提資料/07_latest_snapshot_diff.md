@@ -39516,3 +39516,51 @@ This is Cocolon exact6 only. Production/test/fixture/sample changes,
 mashos-api write, G4/G5/G6/G7 execution, Parser/Matcher, API/DB/RN/public/shared
 runtime/Safety changes, and Cycle001 acceptance are0. Next G4 is inactive and
 separate-approval-only; automatic progression is false.
+
+## 2026-08-10 latest checkpoint — G4 Gate A runtime identity invalid preactivation STOP V1
+
+The approved post-G6 G4 entered with exact Cocolon
+`f05bcda3f7ce9166c7ff350d8d1e97d407de41ff` and mashos-api
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`. Production/test blobs remained
+`f10ce7948e5570ee8ad27ee2af00a9caf3867d49` /
+`c302dd99e143967fed6edd65b429373e87453fc6`.
+
+Gate A found the declared candidate but rejected current continuity. Frozen
+READY was files498/site487/symlink1; current was600/589/1 with 16
+`__pycache__` directories and102 `.pyc` files. Current full-root canonical
+manifest SHA-256 is
+`6371e805b68cb5d27e75e6f7b6ebe64b482e14418d1a0b108a1b62037129a6f1`.
+The full-root rule excludes no cache entry, so core entrypoint/interpreter/
+pytest-package matches do not admit the executable.
+
+G4 approval1 remained activation/admission/technical-consumption0. Target,
+pytest, repository import/collection/call, protected-test append/candidate,
+mashos-api write, causal RED credit, retry, repair, cache deletion, and
+rematerialization are0. Protected test stays431,357 bytes/static52; the future
+ordered exact24 SHA-256 `b3ac62fee89d554a2e30e507cfc211cb157130553a9eb7c8d42b762a53c6b0ef`
+has current execution credit0.
+
+```text
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_PREACTIVATION_STOP_RUNTIME_IDENTITY_INVALID
+RUNTIME_IDENTITY_INVALID_AT_DECLARED_DISCOVERY_SCOPE
+CURRENT_G4_AUTHORITY_CLOSED_UNCONSUMED
+NEXT_G4_GATE_B_FRESH_RUNTIME_REMATERIALIZATION_AND_READINESS_RECONCILIATION_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+Durable Result SHA-256/blob is
+`04967830a2b061239a2f847d5f8073703d38e687b4c03fb483e0daa80b44d538` /
+`7aab4bbb37447468e47fd6e2c2e1a1aba0fe8ab9`. Receipt SHA-256/blob/logical is
+`689b4967935366114291157654b52bbb93094b756fe008c6f5b7abf69c991e98` /
+`77c3b7c012c22bbee2bb0939efc5c15319def484` /
+`28921fc6667a8d75a01c441b454d5e0d5ce2a688ec5cfbff0db555f1a8504cd2`.
+Handoff SHA-256/blob is
+`ff634b0ff736e5d1cfbe752d2743d0a6d6f0cdc89ff88346efcdb7212d1cd5b0` /
+`f83fbe993b7b8efacc19f760cc0212e35e6ef9b4`.
+
+The first unfinished action is a separate inactive Gate B:
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_REMATERIALIZATION_AND_READINESS_RECONCILIATION_V1`.
+It is fresh-root/readiness-only and STOPs at READY/typed failure. G4 append and
+target require a later separate Gate C approval. G5/G6/G7 and Cycle acceptance
+remain unauthorized/not started; automatic progression is false.
