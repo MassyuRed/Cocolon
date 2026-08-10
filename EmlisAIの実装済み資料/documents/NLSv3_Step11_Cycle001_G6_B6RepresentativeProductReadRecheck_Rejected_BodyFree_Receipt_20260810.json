@@ -1,0 +1,418 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g6_b6_representative_product_read_recheck_rejected.body_free.v1",
+  "created_at_jst": "2026-08-10",
+  "body_free": true,
+  "public_safe": true,
+  "result_finalized": true,
+  "approved_authority": "G6_B6_REPRESENTATIVE_ACTUAL_OUTPUT_PRODUCT_READ_RECHECK_ONLY",
+  "authority_lifecycle": {
+    "state": "CLOSED_CONSUMED_REJECTED",
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 1,
+    "classification_count": 1,
+    "close_count": 1,
+    "retry_count": 0,
+    "reuse_count": 0,
+    "reactivation_count": 0
+  },
+  "outcome": "REJECT",
+  "state_codes": [
+    "B6_PRODUCT_READ_GATE_REJECTED",
+    "RETURN_TO_SHARED_STRUCTURAL_CORRECTION",
+    "CURRENT_AUTHORITY_STOP",
+    "NLS_V3_METHOD_STOP_FALSE"
+  ],
+  "source_pins": {
+    "cocolon_pre_g6_commit_sha1": "6c96736bbb983b0907f40218be2583937e4d2e7c",
+    "cocolon_pre_g6_tree_sha1": "f733045fd3cfbd227e6d6cdb7c2488dfdfb848fd",
+    "mashos_api_commit_sha1": "45bf98f9034261d3adb3e808d6d759f2334e2d25",
+    "mashos_api_tree_sha1": "23f1684ed5430cafef955d7af9fc6bde75a4c62f",
+    "drift_detected": false,
+    "g5_published_production_equals_actual_read_production": true
+  },
+  "g5_terminal_evidence": {
+    "state": "G5_GATE_C_EXACT24_GREEN_PRODUCTION_PUBLISHED_CLOSED",
+    "exact24_pass_count": 24,
+    "exact24_fail_count": 0,
+    "exact24_error_count": 0,
+    "exact24_unexpected_count": 0,
+    "result": {
+      "raw_sha256": "fe6f6623fa852234936134f1f391da7320429cf0768c685a431d6a42f4f1d22b",
+      "git_blob_sha1": "589756472a958baf06f1bfabf573ec37ef038414"
+    },
+    "receipt": {
+      "raw_sha256": "2f27470390c9d177106f338e6bb880de3b47b311a11b9e8a46dcdba0d26c8c65",
+      "git_blob_sha1": "0d716942582b54bdc7c643e759ad9185a77b236c",
+      "logical_sha256": "4136171f81c280521ee0d1ba48abe9cb7e1bf41f43e8049883ca7d5b77acb909"
+    },
+    "handoff": {
+      "raw_sha256": "ba8d7396bf01cb6b604d4cb472bcde6ae5b7711cbc5fa56aaf96cf62c88d298b",
+      "git_blob_sha1": "81dffb193dc8f8f4ac18f9f486d18d671c124b13"
+    }
+  },
+  "entry_integrity": {
+    "natural_surface": {
+      "bytes": 547665,
+      "lf": 14350,
+      "raw_sha256": "af6f0a818b822381e6b03395b1d1250799d0a1465ac56a9c578eacf3c7e16088",
+      "git_blob_sha1": "f10ce7948e5570ee8ad27ee2af00a9caf3867d49"
+    },
+    "protected_helper": {
+      "bytes": 431357,
+      "lf": 11311,
+      "raw_sha256": "c9b27c1ec9cb7c0288a837828e9c1d9b011b0876aaa62347beb5633d6ff5a6d7",
+      "git_blob_sha1": "c302dd99e143967fed6edd65b429373e87453fc6"
+    },
+    "representative8_fixture": {
+      "bytes": 19889,
+      "lf": 279,
+      "raw_sha256": "15e8047cd95b453fba4a7a677b428955ea2819e6738e4e1fc1488d24952b78a8",
+      "git_blob_sha1": "56e4d96f8559e2411305b1dac83b5932df88d1a8"
+    },
+    "surface_catalog": {
+      "bytes": 24564,
+      "lf": 657,
+      "raw_sha256": "75d6d3f673203728d5ed1b3d007ac673edc8569429e14c2e0e68b2d80d6c8609",
+      "git_blob_sha1": "94e87e7bdd58359dd3790e30fcd765151ad792d9"
+    },
+    "grounded_lexicalization": {
+      "bytes": 153831,
+      "lf": 4001,
+      "raw_sha256": "5efc83126afc7edec179b7e623d35bd65ae90ed9e2965c3b8742acc4ffc3dc34",
+      "git_blob_sha1": "f0fe1fe6c376a9a80a16b8a5b8679de97c13fa5d"
+    },
+    "reception_authority": {
+      "bytes": 27280,
+      "lf": 717,
+      "raw_sha256": "af141bc43728f915e19f675f261c18d5381f7da80b3fb1145257965fd3917753",
+      "git_blob_sha1": "7ddd4b62a5a46bf55bb97063d58801228849dd68"
+    }
+  },
+  "runtime_preflight": {
+    "python_version": "CPython 3.12.13",
+    "interpreter_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+    "pytest_entrypoint_sha256": "a91245b851dd46abaa52d51d5528734325ca87619d788be58a85a08bb3a55285",
+    "pyvenv_cfg_sha256": "110515456ff69498ed18d5699f31da35d785f9d1b57513d2549d726b97ca3c0d",
+    "version_observation_count": 1,
+    "exact3_role_import_smoke_count": 1,
+    "static_identity_valid": true,
+    "absolute_runtime_path_published": false
+  },
+  "representative_denominator": {
+    "exact10_ordered_id_lf_sha256": "ae6dcb796656e9450c72d47a4f99c1740dc1396ecbecf973ca93a984506ba77a",
+    "candidate_context_count": 10,
+    "unique_case_count": 8,
+    "control_context_count": 3,
+    "former_major_case_count": 5,
+    "former_major_context_count": 7,
+    "freshly_measured": {
+      "proposition_binding_count": 12,
+      "semantic_atom_count": 38,
+      "verified_reuse_count": 1,
+      "reception_predication_count": 11
+    },
+    "inherited_g5_machine_proof_not_freshly_rerun": {
+      "family_counts": {
+        "construction": 22,
+        "relation": 13,
+        "semantic_link": 1,
+        "explicit_unknown": 2
+      },
+      "accepted_finite_head_count": 12,
+      "other_finite_head_count": 4,
+      "owner_grammatical_head_count": 24,
+      "owner_short_count": 19,
+      "owner_long_count": 5,
+      "construction_modifier_count": 22,
+      "head_owner_locus_count": 20,
+      "maximum_chain_depth": 2,
+      "rebuild_required_count": 6,
+      "resource_maxima": [2, 4, 2, 4]
+    }
+  },
+  "execution": {
+    "non_authoritative_protocol_discovery_process_count": 1,
+    "non_authoritative_final_g5_builder_call_count": 0,
+    "non_authoritative_product_read_credit_count": 0,
+    "authoritative_target_process_count": 1,
+    "target_generation_invocation_count": 1,
+    "private_builder_attempt_count": 10,
+    "private_builder_success_count": 10,
+    "generation_failure_count": 0,
+    "private_body_full_product_read_count": 10,
+    "review_pass_count": 2,
+    "process_exit_code": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "install_count": 0,
+    "repair_count": 0,
+    "rematerialization_count": 0,
+    "network_count": 0,
+    "exact24_test_run_count": 0,
+    "full52_test_run_count": 0,
+    "exact100_test_run_count": 0,
+    "p3_final_inverse_run_count": 0,
+    "parser_matcher_run_count": 0
+  },
+  "private_evidence": {
+    "local_only": true,
+    "in_memory_review_only": true,
+    "private_packet_created": false,
+    "private_packet_persisted": false,
+    "commitment_method": "NONE_IN_MEMORY_REVIEW",
+    "raw_input_exported": false,
+    "raw_output_exported": false,
+    "body_or_quote_exported": false,
+    "identifying_paraphrase_exported": false,
+    "individual_mapping_exported": false,
+    "parsed_span_exported": false,
+    "free_text_review_note_exported": false,
+    "raw_body_digest_exported": false,
+    "packet_digest_exported": false,
+    "verification_key_exported": false
+  },
+  "review_contract": {
+    "revised_cycle_section": "18.4",
+    "axis_count": 12,
+    "axes": {
+      "1": "MAIN_INPUT_MEANING_RETAINED",
+      "2": "THOUGHT_ACTION_RELATION_DIRECTION_CORRECT",
+      "3": "EMOTION_CATEGORY_NOT_PROMOTED",
+      "4": "UNKNOWN_NOT_INVENTED",
+      "5": "SELF_DENIAL_NOT_ADOPTED_AS_FACT",
+      "6": "EMLIS_FROM_INPUT_SPECIFIC",
+      "7": "VISIBLE_AND_EMLIS_PROPOSITIONS_DISTINCT",
+      "8": "NATURAL_NO_REPETITION_OVERQUOTE_EXPLANATORY_PROSE",
+      "9": "SURFACE_DISTRIBUTION_NOT_OVERCONCENTRATED",
+      "10": "DEPTH_FITS_INPUT_AMOUNT_AND_STRUCTURE",
+      "11": "QUESTION_NEEDED_AMBIGUITY_NOT_FALSELY_COMPLETED",
+      "12": "READS_AS_COCOLON_IMMEDIATE_OBSERVATION"
+    },
+    "review_pass_count": 2,
+    "review_passes": ["SEMANTIC_SAFETY", "PRODUCT_SURFACE"],
+    "reviewer_identity_count": 1,
+    "independent_two_reviewer_claimed": false,
+    "advisory_gate_outcome_crosscheck_count": 2,
+    "advisory_reject_outcome_agreement_count": 2,
+    "severity_order": ["PASS", "MINOR", "MAJOR", "BLOCKER"],
+    "severity_merge_rule": "MAXIMUM_PER_CANDIDATE_THEN_MAXIMUM_PER_UNIQUE_CASE",
+    "control_comparator": "PRIOR_B5_COUNTERFACTUAL_DESIGN_PRODUCT_READ"
+  },
+  "candidate_contexts": [
+    {
+      "ordinal": 1,
+      "context_id": "nls3s_b001_0001::candidate_01",
+      "case_id": "nls3s_b001_0001",
+      "role": "control_exact_reuse",
+      "severity": "MINOR",
+      "failed_axes": [6, 8],
+      "closed_reason_codes": ["RECEPTION_PREDICATION_LOCAL_SPECIFICITY_RESIDUE", "RECEPTION_PREDICATION_LOCAL_NATURALNESS_RESIDUE"]
+    },
+    {
+      "ordinal": 2,
+      "context_id": "nls3s_b001_0002::candidate_01",
+      "case_id": "nls3s_b001_0002",
+      "role": "control",
+      "severity": "MINOR",
+      "failed_axes": [8, 12],
+      "closed_reason_codes": ["RECEPTION_PREDICATION_LOCAL_NATURALNESS_RESIDUE", "IMMEDIATE_OBSERVATION_LOCAL_READFEEL_RESIDUE"]
+    },
+    {
+      "ordinal": 3,
+      "context_id": "nls3s_b001_0009::candidate_01",
+      "case_id": "nls3s_b001_0009",
+      "role": "control",
+      "severity": "MAJOR",
+      "failed_axes": [1, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 4,
+      "context_id": "nls3s_b001_0019::candidate_01",
+      "case_id": "nls3s_b001_0019",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 5,
+      "context_id": "nls3s_b001_0019::candidate_02",
+      "case_id": "nls3s_b001_0019",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 6,
+      "context_id": "nls3s_b001_0035::candidate_01",
+      "case_id": "nls3s_b001_0035",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "SURFACE_DISTRIBUTION_OVERCONCENTRATED", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 7,
+      "context_id": "nls3s_b001_0043::candidate_01",
+      "case_id": "nls3s_b001_0043",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 8,
+      "context_id": "nls3s_b001_0043::candidate_02",
+      "case_id": "nls3s_b001_0043",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 9,
+      "context_id": "nls3s_b001_0063::candidate_01",
+      "case_id": "nls3s_b001_0063",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "SURFACE_DISTRIBUTION_OVERCONCENTRATED", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    },
+    {
+      "ordinal": 10,
+      "context_id": "nls3s_b001_0100::candidate_01",
+      "case_id": "nls3s_b001_0100",
+      "role": "former_major",
+      "severity": "MAJOR",
+      "failed_axes": [1, 2, 6, 8, 9, 10, 12],
+      "closed_reason_codes": ["MAIN_MEANING_DOMINANCE_OBSCURED", "RELATION_TEMPORAL_READABILITY_DISTORTED", "RECEPTION_PREDICATION_INSUFFICIENTLY_INPUT_SPECIFIC", "OWNER_ROLE_INFLECTION_GRAMMATICAL_JOIN_FAILURE", "TYPED_RECOMPOSITION_EXPLANATORY_DENSITY", "SURFACE_DISTRIBUTION_OVERCONCENTRATED", "DEPTH_DENSITY_OVERSHOOT", "IMMEDIATE_OBSERVATION_NOT_READ"]
+    }
+  ],
+  "unique_cases": [
+    {"case_id": "nls3s_b001_0001", "candidate_context_ids": ["nls3s_b001_0001::candidate_01"], "severity": "MINOR", "failed_axes_at_maximum": [6, 8]},
+    {"case_id": "nls3s_b001_0002", "candidate_context_ids": ["nls3s_b001_0002::candidate_01"], "severity": "MINOR", "failed_axes_at_maximum": [8, 12]},
+    {"case_id": "nls3s_b001_0009", "candidate_context_ids": ["nls3s_b001_0009::candidate_01"], "severity": "MAJOR", "failed_axes_at_maximum": [1, 6, 8, 10, 12]},
+    {"case_id": "nls3s_b001_0019", "candidate_context_ids": ["nls3s_b001_0019::candidate_01", "nls3s_b001_0019::candidate_02"], "severity": "MAJOR", "failed_axes_at_maximum": [1, 2, 6, 8, 10, 12]},
+    {"case_id": "nls3s_b001_0035", "candidate_context_ids": ["nls3s_b001_0035::candidate_01"], "severity": "MAJOR", "failed_axes_at_maximum": [1, 2, 6, 8, 9, 10, 12]},
+    {"case_id": "nls3s_b001_0043", "candidate_context_ids": ["nls3s_b001_0043::candidate_01", "nls3s_b001_0043::candidate_02"], "severity": "MAJOR", "failed_axes_at_maximum": [1, 2, 6, 8, 10, 12]},
+    {"case_id": "nls3s_b001_0063", "candidate_context_ids": ["nls3s_b001_0063::candidate_01"], "severity": "MAJOR", "failed_axes_at_maximum": [1, 2, 6, 8, 9, 10, 12]},
+    {"case_id": "nls3s_b001_0100", "candidate_context_ids": ["nls3s_b001_0100::candidate_01"], "severity": "MAJOR", "failed_axes_at_maximum": [1, 2, 6, 8, 9, 10, 12]}
+  ],
+  "actual_output_product_read": {
+    "candidate_severity_counts": {"PASS": 0, "MINOR": 2, "MAJOR": 8, "BLOCKER": 0},
+    "unique_case_maximum_severity_counts": {"PASS": 0, "MINOR": 2, "MAJOR": 6, "BLOCKER": 0},
+    "former_major_pass_or_minor_count": 0,
+    "former_major_total": 5,
+    "former_major_context_pass_or_minor_count": 0,
+    "former_major_context_total": 7,
+    "controls_not_worse_count": 1,
+    "control_total": 3,
+    "new_major_control_count": 1,
+    "emotion_category_non_promotion_preserved": true,
+    "unknown_non_invention_preserved": true,
+    "self_denial_non_adoption_preserved": true,
+    "visible_emlis_proposition_distinction_preserved": true,
+    "question_needed_ambiguity_non_completion_preserved": true,
+    "semantic_safety_preserved": true
+  },
+  "control_comparator_evidence": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceGrammar_ProductRead_STOP_BodyFree_Receipt_20260721.json",
+    "raw_sha256": "c64e8715a4e8af69c9ae270730fc7028370aead7318ecb0aafce3a7fba5ac338",
+    "git_blob_sha1": "a8c86b045cbfd69b376785072e8930754468d593"
+  },
+  "control_comparison": [
+    {"context_id": "nls3s_b001_0001::candidate_01", "prior_b5_severity": "MINOR", "current_severity": "MINOR", "not_worse": true},
+    {"context_id": "nls3s_b001_0002::candidate_01", "prior_b5_severity": "PASS", "current_severity": "MINOR", "not_worse": false},
+    {"context_id": "nls3s_b001_0009::candidate_01", "prior_b5_severity": "MINOR", "current_severity": "MAJOR", "not_worse": false}
+  ],
+  "predecessor_b6_evidence": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_rc0031_P3_ProductSurfaceB6_ActualOutput_ProductReadAndFreeze_ReadOnly_BodyFree_Receipt_20260723.json",
+    "raw_sha256": "4d2937cca910e2f6f2b94c0e103e3d589f97f3483a701923d085b1e69e9f0d0f",
+    "git_blob_sha1": "22dc87144e176e7154a9ccfcdc261c5d4e54bd10"
+  },
+  "prior_concern_families": {
+    "reception_specificity_or_naturalness_major_context_count": 8,
+    "owner_role_grammatical_join_failure_major_context_count": 7,
+    "typed_recomposition_explanatory_density_major_context_count": 8,
+    "main_meaning_dominance_obscured_major_context_count": 8,
+    "relation_or_temporal_readability_distortion_major_context_count": 7,
+    "depth_density_overshoot_major_context_count": 8,
+    "immediate_observation_failure_major_context_count": 8,
+    "surface_distribution_overconcentration_major_context_count": 3,
+    "family_at_major_zero": false
+  },
+  "freeze_gate": {
+    "all_candidates_major_blocker_zero": false,
+    "all_unique_cases_major_blocker_zero": false,
+    "former_major_five_of_five_pass_or_minor": false,
+    "former_major_seven_of_seven_contexts_pass_or_minor": false,
+    "controls_three_of_three_not_worse": false,
+    "new_major_control_zero": false,
+    "semantic_truth_safety_preserved": true,
+    "prior_concern_family_at_major_zero": false,
+    "formal_denominator_preserved": true,
+    "privacy_boundary_preserved": true,
+    "gate_pass": false
+  },
+  "effects": {
+    "mashos_api_tracked_change_count": 0,
+    "cocolon_prepublication_tracked_change_count": 0,
+    "fixture_sample_case_input_body_change_count": 0,
+    "source_test_fixture_change_count": 0,
+    "runtime_mutation_count": 0,
+    "api_db_rn_public_shared_runtime_change_count": 0,
+    "g6_product_read_count": 1,
+    "g6_pass_count": 0,
+    "g6_reject_count": 1,
+    "g7_execution_count": 0,
+    "cycle001_acceptance_count": 0
+  },
+  "repository_scope": {
+    "cocolon_base_commit_sha1": "6c96736bbb983b0907f40218be2583937e4d2e7c",
+    "cocolon_base_tree_sha1": "f733045fd3cfbd227e6d6cdb7c2488dfdfb848fd",
+    "changed_path_count": 6,
+    "modified_path_count": 3,
+    "new_path_count": 3,
+    "unauthorized_path_count": 0,
+    "deletion_count": 0,
+    "rename_count": 0,
+    "paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G6_B6RepresentativeProductReadRecheck_Rejected_Result_20260810.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G6_B6RepresentativeProductReadRecheck_Rejected_BodyFree_Receipt_20260810.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G6_B6RepresentativeProductReadRecheck_Rejected_Handoff_20260810.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/08_cycle001_current_state.md"
+    ]
+  },
+  "result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G6_B6RepresentativeProductReadRecheck_Rejected_Result_20260810.md",
+    "bytes": 9398,
+    "lf": 221,
+    "cr": 0,
+    "final_lf": true,
+    "mode": "100644",
+    "raw_sha256": "798e627b302b177a746795f312703d7f59c5bc68058c212790fd3db1fb24125c",
+    "git_blob_sha1": "3899b4b7543c3b74524275e6fc187eaa3109bf09"
+  },
+  "next": {
+    "g5_state_preserved": "G5_GATE_C_EXACT24_GREEN_PRODUCTION_PUBLISHED_CLOSED",
+    "g6_state": "G6_B6_REPRESENTATIVE_PRODUCT_READ_RECHECK_REJECTED_CLOSED",
+    "g6_product_read_count": 1,
+    "shared_structural_correction_state": "SEPARATE_EXPLICIT_AUTHORITY_REQUIRED_NOT_STARTED",
+    "additional_production_mutation_authorized": false,
+    "g7_state": "NOT_STARTED_UNAUTHORIZED",
+    "full52_run_count": 0,
+    "exact100_run_count": 0,
+    "cycle001_status": "NOT_ACCEPTED",
+    "cycle001_acceptance_count": 0,
+    "automatic_progression": false,
+    "nls_v3_method_stop": false
+  },
+  "receipt_logical_sha256_rule": "SHA256_UTF8_SORTED_COMPACT_JSON_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "c634f9687a15c0d58a4dc9104913623c3c7150c2843631b1908e912e9ca4ef69"
+}

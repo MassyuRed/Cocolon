@@ -966,3 +966,82 @@ ba8d7396bf01cb6b604d4cb472bcde6ae5b7711cbc5fa56aaf96cf62c88d298b /
 G5 is closed and published. The next technical gate is not automatically
 opened: G6 Product Read requires separate explicit authority. Cycle001 remains
 not accepted.
+
+## 11.10 Current override — G6 B6 representative Product Read recheck rejected (2026-08-10)
+
+The separately authorized G6 recheck consumed its authority once against the
+unchanged G5-published production source.
+
+```text
+current state:
+G6_B6_REPRESENTATIVE_PRODUCT_READ_RECHECK_REJECTED_CLOSED
+
+G6 lifecycle:
+CLOSED_CONSUMED_REJECTED
+
+Cocolon pre-G6 / mashos-api current:
+6c96736bbb983b0907f40218be2583937e4d2e7c /
+45bf98f9034261d3adb3e808d6d759f2334e2d25
+
+production / protected-helper blob:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+target process / invocation / attempted / built / failure / exit:
+1 / 1 / 10 / 10 / 0 / 0
+
+candidate PASS / MINOR / MAJOR / BLOCKER:
+0 / 2 / 8 / 0
+
+unique PASS / MINOR / MAJOR / BLOCKER:
+0 / 2 / 6 / 0
+
+former-MAJOR cases / contexts <= MINOR:
+0/5 / 0/7
+
+controls not worse / new MAJOR control:
+1/3 / 1
+
+full52 / exact100 / G7 / Cycle001 acceptance:
+0 / 0 / 0 / 0
+
+automatic progression:
+false
+```
+
+All exact10 bodies were read privately in the required one-reviewer/two-pass
+contract; public artifacts contain only identifiers, severities, failed axes,
+closed reason codes, and aggregate counts. Semantic/safety axes 3/4/5/7/11
+were preserved, but MAJOR remained in eight candidate contexts / six unique
+cases. Every one of the eight frozen concern families retained MAJOR.
+
+The current exact decision is:
+
+```text
+B6_PRODUCT_READ_GATE_REJECTED
+RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+CURRENT_AUTHORITY_STOP
+NLS_V3_METHOD_STOP_FALSE
+```
+
+No production, source, test, fixture, sample, corpus, runtime, API, DB, RN,
+public, or shared-runtime mutation was made. No raw input/output, body, quote,
+identifying paraphrase, span, mapping, free-text note, body/packet digest, key,
+or private runtime path is published.
+
+```text
+Result SHA-256 / blob:
+798e627b302b177a746795f312703d7f59c5bc68058c212790fd3db1fb24125c /
+3899b4b7543c3b74524275e6fc187eaa3109bf09
+Receipt SHA-256 / blob / logical SHA-256:
+691577bf099d8ddada3ec613c3d19fe27190c518f420495959994c4ab0a5724a /
+89551f2a1ca1db208130be9fe8f0260535a9deec /
+c634f9687a15c0d58a4dc9104913623c3c7150c2843631b1908e912e9ca4ef69
+Handoff SHA-256 / blob:
+7abf52df063daae02869c2efbb5758e83782ca8b1df441eff0baef1329dd2656 /
+057f146083e00ced5b3fd7af2f627fc5ee7d7e9e
+```
+
+G3, G4, and G5 remain closed evidence. The next possible shared structural
+correction requires separate explicit authority and is not started. G7 is
+`NOT_STARTED_UNAUTHORIZED`; Cycle001 remains `NOT_ACCEPTED`.

@@ -39348,3 +39348,58 @@ and Handoff SHA-256/blob
 This terminal is new Result/Receipt/Handoff plus append-only Plan/07/08
 exact6. G5 is closed GREEN with production published. G6 Product Read is
 separate, not started, and unauthorized; Cycle001 remains `NOT_ACCEPTED`.
+
+## 2026-08-10 current checkpoint — G6 B6 representative Product Read recheck rejected
+
+G5 remote closure was freshly confirmed at Cocolon
+`6c96736bbb983b0907f40218be2583937e4d2e7c` and mashos-api
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`. The actual-read production blob
+was the G5-published `f10ce7948e5570ee8ad27ee2af00a9caf3867d49`; protected
+helper was `c302dd99e143967fed6edd65b429373e87453fc6`. Entry drift was0.
+
+The current private G5 builder generated the frozen exact10 once in one direct
+Python process: attempted10/success10/failure0/exit0/retry0. Exact8 and context
+ordinals matched the comparator. Fresh measured denominator was
+contexts10/unique8/bindings12/atoms38/reuse1/Reception11. No exact24, full52,
+exact100, final-inverse, or Parser/Matcher test was run.
+
+The canonical one-reviewer/two-pass Product Read returned:
+
+```text
+candidate PASS / MINOR / MAJOR / BLOCKER: 0 / 2 / 8 / 0
+unique PASS / MINOR / MAJOR / BLOCKER: 0 / 2 / 6 / 0
+former-MAJOR cases / contexts <= MINOR: 0/5 / 0/7
+controls not worse / new MAJOR control: 1/3 / 1
+semantic/safety axes 3/4/5/7/11: preserved
+```
+
+All eight frozen concern families retained at least one MAJOR context. The G6
+exit gate was rejected with exact projection:
+
+```text
+B6_PRODUCT_READ_GATE_REJECTED
+RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+CURRENT_AUTHORITY_STOP
+NLS_V3_METHOD_STOP_FALSE
+```
+
+Raw input/output, body, quote, identifying paraphrase, span, mapping, free-text
+note, body/packet digest, key, and private runtime path publication are zero.
+mashos-api tracked change, source/test/fixture/sample change, runtime mutation,
+production correction, G7, and Cycle acceptance are zero.
+
+Durable owners are Result SHA-256/blob
+`798e627b302b177a746795f312703d7f59c5bc68058c212790fd3db1fb24125c` /
+`3899b4b7543c3b74524275e6fc187eaa3109bf09`, Receipt
+SHA-256/blob/logical SHA-256
+`691577bf099d8ddada3ec613c3d19fe27190c518f420495959994c4ab0a5724a` /
+`89551f2a1ca1db208130be9fe8f0260535a9deec` /
+`c634f9687a15c0d58a4dc9104913623c3c7150c2843631b1908e912e9ca4ef69`,
+and Handoff SHA-256/blob
+`7abf52df063daae02869c2efbb5758e83782ca8b1df441eff0baef1329dd2656` /
+`057f146083e00ced5b3fd7af2f627fc5ee7d7e9e`.
+
+This is new3 plus append-only owners3 exact6. G6 is
+`CLOSED_CONSUMED_REJECTED`; G3/G4/G5 remain closed historical evidence. The
+next possible shared structural correction is separate-authority-only and is
+not started. G7 remains unauthorized and Cycle001 remains `NOT_ACCEPTED`.
