@@ -39894,3 +39894,70 @@ AUTOMATIC_PROGRESSION_FALSE
 No next authority was issued. This verification appendix stays on the already-approved 07 path. Its own
 commit identity and resulting 07 self-identity are omitted to avoid a publication self-reference; its commit
 is included in the subsequent fresh base-to-latest exact7 union and remote-byte verification.
+
+## 2026-08-10 latest checkpoint — installed-manifest comparator V2 current refrozen
+
+Authority
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_DECISION_AND_V2_ADDITIVE_REFREEZE_V1`
+was activated once, consumed once, and closed at fresh entry Cocolon
+`0507b7274bf31826ba7a410cc3b57095b1d0656f` / tree
+`90a336a924c8011927188bbd686cc1d16b1ae3dd`; mashos-api remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`.
+
+The current expected installed-file manifest for canonical schema
+`NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1` is refrozen to
+`0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5`.
+This is current-expected-binding refreeze exact1. Canonical-schema change is false.
+
+The predecessor owner remains unchanged at blob `cc7c9f5573124aded5f007802ed031d79d92a7d8`, raw
+`ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd`.
+Its expected `9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6`
+is `HISTORICAL_NONCURRENT_FOR_CANONICAL_V1`. Historical 2026-08-09 G5 evidence retains that value only as
+an `UNVERSIONED_OR_ALTERNATE_HISTORICAL` runtime identity. Historical READY, G5 machine GREEN, and G6
+REJECT remain unchanged.
+
+The body-free decision crosswalk is canonical schema V1 -> owner/independent fresh equality -> current
+actual `0eba095e...` -> exact5 wheel/RECORD/installed closure -> mismatch-family zero -> independent
+2026-08-01 historical reproduction `0eba095e...` -> current expected decision `0eba095e...`.
+
+Prepared new exact4 identities:
+
+| Role | Blob | Bytes | LF | Raw SHA-256 |
+|---|---|---:|---:|---|
+| V2 owner | `3b9b332b1eea402dc18b7e7ceb8528e8f3bac678` | 12210 | 255 | `9141231049a10a1d04741d66d6cab09ff3a831bd7bb096f1212f382ac381a808` |
+| Result | `2137a8ef6bf1d78760d65b9c1f691a0ab1ebc202` | 10678 | 143 | `c31032dcb84a6ffc3cab68f59d5eb7c39245c2ec4a3fc5879f1522fe5798b6f0` |
+| Receipt | `d1b838a7caee18b4fbce9030a05ce7f3b00c3f4d` | 15631 | 329 | `cf4376d346489231d09312e439908351efa9767e19f6ae199315bbb78cdc9bdf` |
+| Handoff | `5ca0bbe5bfbf63cddd06d8d4bbc62a8ca61093ca` | 6196 | 87 | `2fb5bdd484b180eac0319aa01fd32ddc446a374ee83914abdc91a3b115adccd8` |
+
+Receipt logical SHA-256 is `f205b6c1f8451753e0f340d822323d2b75abe30bfafdff80e4ca354c9aab0647`.
+
+Prepared modified-path preimages:
+
+| Path role | Entry blob | Entry bytes | Entry LF | Entry raw SHA-256 |
+|---|---|---:|---:|---|
+| Plan | `77a39ba3ab1ee7d1b3bb9e31cff912c67246f204` | 1217082 | 19257 | `4ff8b7e9eb92568034a99e560458ac345a08abbae2998d9468f271dbceba17e2` |
+| 07 | `935252c4ec38d9e3bd0c6634a5310098635095b1` | 2412592 | 39896 | `3d28f1a21aeb7887393a076a75efc70b5c1ccc5a1ea9c8ada60635449a3cee26` |
+| 08 | `fa82ab08555251879c6a10d19bcb754c1ef17c1b` | 56911 | 1682 | `502baa4f39157a3e557e95af58f1becf49c3d36999d90f9af8f42d016025625a` |
+
+New exact4 were absent at entry. Modified exact3 use the entry preimages above; Plan and 07 are append-only,
+and 08 adds a new current-navigation override without rewriting §11.15. The intended changed-path set is
+exact7, with V1 excluded. All prepared files are LF-only, final-LF true, mode `100644`.
+
+Runtime/readiness/Gate/test/production effects and mashos-api write are all 0. Cycle001 remains
+`NOT_ACCEPTED`. The next proposal
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1`
+is inactive and requires separate Mash approval.
+
+```text
+INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_V2_REFROZEN
+CANONICAL_SCHEMA_V1_UNCHANGED
+CURRENT_EXPECTED_IDENTITY_0EBA095E_REFROZEN
+HISTORICAL_9C6925_IDENTITY_PRESERVED_NONCURRENT
+HISTORICAL_READINESS_AND_G5_G6_EVIDENCE_UNCHANGED
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_COMPARATOR_DECISION_AUTHORITY_CLOSED_CONSUMED
+NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```

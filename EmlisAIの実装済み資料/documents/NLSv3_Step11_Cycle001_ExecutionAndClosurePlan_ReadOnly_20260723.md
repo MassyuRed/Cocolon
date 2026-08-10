@@ -19255,3 +19255,95 @@ AUTOMATIC_PROGRESSION_FALSE
 
 The next authority is unselected. A comparator decision or any new diagnostic/readiness/gate/target action
 requires separate Mash approval.
+
+## 2026-08-10 — installed-file manifest current comparator V2 additive refreeze
+
+Mash approved and this record consumed
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_DECISION_AND_V2_ADDITIVE_REFREEZE_V1`.
+Fresh entry was Cocolon `0507b7274bf31826ba7a410cc3b57095b1d0656f` / tree
+`90a336a924c8011927188bbd686cc1d16b1ae3dd` and mashos-api
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`. Prior exact7 latest-main inclusion and prepared-byte
+equality were true; unauthorized/deletion/rename/mashos-api-change/related-drift counts were all 0.
+
+The attached Plan copy was retained only as noncurrent reference material. This append uses the current
+GitHub Plan at the entry commit as its preimage and therefore preserves the full current lineage.
+
+The comparator decision is:
+
+```text
+canonical schema: NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1
+canonical schema change: false
+predecessor expected: 9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6
+predecessor role: HISTORICAL_NONCURRENT_FOR_CANONICAL_V1
+current expected: 0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+current comparator state: CURRENT_REFROZEN
+supersession scope: CURRENT_EXPECTED_BINDING_ONLY
+current expected binding refreeze count: 1
+```
+
+Decision crosswalk:
+
+```text
+canonical schema V1
+-> owner fresh derivation exact1 == independent fresh derivation exact1
+-> actual 0eba095e...
+-> exact5 wheel / RECORD / installed closure
+-> canonical/eligible/owned 482/482/482
+-> unowned/duplicate/missing/extra/symlink/nonregular/pyc/pycache 0
+-> mismatch rows / active mismatch families 0/0
+-> 2026-08-01 independent historical reproduction 0eba095e...
+-> current expected decision 0eba095e...
+```
+
+The 2026-08-09 G5 Gate B identity `9c6925ed...` remains
+`UNVERSIONED_OR_ALTERNATE_HISTORICAL`. It is not claimed to have used the newly named canonical V1
+binding. Historical runtime READY, G5 machine GREEN, and G6 REJECT were not changed or reclassified.
+
+V2 owner:
+
+`EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V2_20260810.json`
+
+It references the exact V1 schema-body owner at blob `cc7c9f5573124aded5f007802ed031d79d92a7d8`,
+raw SHA-256 `ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd`.
+V1 remains immutable and outside the changed-path set. The canonical exact3 schema-body digest remains
+`161b23b5cdf11ec0284bfd0933b2b41feeb3e9a3745d72807d3ea68921ee7fe0`.
+
+Durable new exact4 identities:
+
+| Role | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---:|---:|---|---|
+| V2 owner | 12210 | 255 | `9141231049a10a1d04741d66d6cab09ff3a831bd7bb096f1212f382ac381a808` | `3b9b332b1eea402dc18b7e7ceb8528e8f3bac678` |
+| Result | 10678 | 143 | `c31032dcb84a6ffc3cab68f59d5eb7c39245c2ec4a3fc5879f1522fe5798b6f0` | `2137a8ef6bf1d78760d65b9c1f691a0ab1ebc202` |
+| Receipt | 15631 | 329 | `cf4376d346489231d09312e439908351efa9767e19f6ae199315bbb78cdc9bdf` | `d1b838a7caee18b4fbce9030a05ce7f3b00c3f4d` |
+| Receipt logical | — | — | `f205b6c1f8451753e0f340d822323d2b75abe30bfafdff80e4ca354c9aab0647` | — |
+| Handoff | 6196 | 87 | `2fb5bdd484b180eac0319aa01fd32ddc446a374ee83914abdc91a3b115adccd8` | `5ca0bbe5bfbf63cddd06d8d4bbc62a8ca61093ca` |
+
+All prepared files are LF-only, final-LF true, and mode `100644`. Authorized repository scope is Cocolon
+new exact4 plus modified exact3: this Plan append, 07 append, and 08 additive current-navigation update.
+mashos-api changed-path count is 0.
+
+The only semantic effect is current-expected-binding refreeze exact1. Canonical-schema, row/rule,
+historical-artifact/reclassification, exact5, formal-lock, requirements, distribution-closure,
+environment-policy, and acceptance-weakening effects are 0. Diagnostic/runtime root, network/wheel/install,
+helper, probe, role smoke, readiness derivation, runtime READY/readiness credit, Gate B recovery, Gate C,
+target/test execution, production/protected/mashos-api, Product Read, G5/G6/G7, and Cycle001 acceptance work
+were all 0. Cycle001 remains `NOT_ACCEPTED`.
+
+The next named proposal is
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1`.
+It is `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`; it was not issued, approved, activated, or
+executed by this authority.
+
+```text
+INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_V2_REFROZEN
+CANONICAL_SCHEMA_V1_UNCHANGED
+CURRENT_EXPECTED_IDENTITY_0EBA095E_REFROZEN
+HISTORICAL_9C6925_IDENTITY_PRESERVED_NONCURRENT
+HISTORICAL_READINESS_AND_G5_G6_EVIDENCE_UNCHANGED
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_COMPARATOR_DECISION_AUTHORITY_CLOSED_CONSUMED
+NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```

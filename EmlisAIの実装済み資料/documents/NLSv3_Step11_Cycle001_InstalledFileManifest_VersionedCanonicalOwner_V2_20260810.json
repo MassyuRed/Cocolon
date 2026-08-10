@@ -1,0 +1,255 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.installed_file_manifest.versioned_canonical_owner.v2",
+  "owner_id": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_OWNER_V2",
+  "owner_revision": "V2",
+  "authority": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_DECISION_AND_V2_ADDITIVE_REFREEZE_V1",
+  "date": "2026-08-10",
+  "body_free": true,
+  "public_safe": true,
+  "state": "INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_V2_REFROZEN",
+  "automatic_progression": false,
+  "owner_artifact_state": "VERSIONED_CANONICAL_OWNER_V2_CURRENT_REFROZEN",
+  "expected_installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+  "current_expected_installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+  "canonical_schema": {
+    "id": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1",
+    "change": false,
+    "inheritance": "EXACT_PREDECESSOR_SCHEMA_BODY_REFERENCE_NO_COPY_NO_REWRITE",
+    "schema_body_owner": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V1_20260810.json",
+      "git_blob_sha1": "cc7c9f5573124aded5f007802ed031d79d92a7d8",
+      "raw_sha256": "ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd",
+      "schema_body_reference_state": "RETAINED_CURRENT_SCHEMA_BODY_SOURCE"
+    },
+    "schema_body_sections": [
+      "canonical_manifest_contract",
+      "record_closure_contract",
+      "diagnostic_inventory_contract"
+    ],
+    "schema_body_canonical_sha256_rule": "SHA256_UTF8_JQ_cS_OBJECT_WITH_EXACT3_SCHEMA_BODY_SECTIONS_AND_FINAL_LF",
+    "schema_body_canonical_sha256": "161b23b5cdf11ec0284bfd0933b2b41feeb3e9a3745d72807d3ea68921ee7fe0"
+  },
+  "current_comparator_binding": {
+    "canonical_schema": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1",
+    "expected_installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+    "state": "CURRENT_REFROZEN",
+    "decision_count": 1,
+    "current_expected_binding_refreeze_count": 1,
+    "supersession_scope": "CURRENT_EXPECTED_BINDING_ONLY",
+    "acceptance_weakening": false,
+    "automatic_progression": false
+  },
+  "predecessor_owner": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V1_20260810.json",
+    "git_blob_sha1": "cc7c9f5573124aded5f007802ed031d79d92a7d8",
+    "raw_sha256": "ca2f6aa5de27a01e73d92ebb3b98940f912c201486eb7510c9a3d7a166243acd",
+    "expected_installed_file_manifest_sha256": "9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6",
+    "artifact_state": "IMMUTABLE_HISTORICAL_DIAGNOSTIC_OWNER",
+    "expected_identity_state": "HISTORICAL_NONCURRENT_FOR_CANONICAL_V1",
+    "historical_artifact_rewrite": false
+  },
+  "refreeze_entry": {
+    "cocolon_main_sha1": "0507b7274bf31826ba7a410cc3b57095b1d0656f",
+    "cocolon_tree_sha1": "90a336a924c8011927188bbd686cc1d16b1ae3dd",
+    "mashos_api_main_sha1": "45bf98f9034261d3adb3e808d6d759f2334e2d25",
+    "mashos_api_tree_sha1": "23f1684ed5430cafef955d7af9fc6bde75a4c62f",
+    "prior_exact7_latest_main_inclusion": true,
+    "prior_exact7_remote_prepared_byte_equality": true,
+    "prior_exact7_changed_path_count": 7,
+    "prior_exact7_unauthorized_path_count": 0,
+    "prior_exact7_deletion_count": 0,
+    "prior_exact7_rename_count": 0,
+    "mashos_api_changed_path_count": 0,
+    "related_drift_count": 0
+  },
+  "current_diagnostic_evidence": {
+    "authority": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_INSTALLED_FILE_MANIFEST_VERSIONED_CANONICAL_OWNER_AND_DIAGNOSTIC_ONLY_FRESH_REPRODUCTION_V1",
+    "lifecycle": "CURRENT_DIAGNOSTIC_AUTHORITY_CLOSED_CONSUMED_TYPED_STOP",
+    "classification": "EXPECTED_IDENTITY_NOT_REPRODUCED_COMPARATOR_DECISION_REQUIRED",
+    "result": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestVersionedCanonicalOwnerAndDiagnosticOnlyFreshReproduction_V1_Result_20260810.md",
+      "git_blob_sha1": "71f35f124ef0061e23d62e54a410b052358e5640",
+      "raw_sha256": "5efce5eb52ebf1e0eb2f6e2e46049df86808201c138b6db711f1a6f156f1fe22"
+    },
+    "receipt": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestVersionedCanonicalOwnerAndDiagnosticOnlyFreshReproduction_V1_BodyFree_Receipt_20260810.json",
+      "git_blob_sha1": "33f706029f8dc2962ccfb2af3195b3a76f5bd399",
+      "raw_sha256": "1c1e240d7e5458edb0f6bf0f5abe50433074161ff320470e5b01917d126f9c24",
+      "logical_sha256": "3b214273db8049b6b589b9fb017b3a8cfd69085f21cfa199f106f2c604a702a5"
+    },
+    "handoff": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestVersionedCanonicalOwnerAndDiagnosticOnlyFreshReproduction_V1_Handoff_20260810.md",
+      "git_blob_sha1": "87b15ab5a54a2f140051d6467fe18dd8057f5daa",
+      "raw_sha256": "1489850ae9aa2929bc009d17cdd9245ccb7210a538552c55c916709ba4554750"
+    }
+  },
+  "immutable_runtime_inputs": {
+    "formal_lock": {
+      "repository": "MassyuRed/mashos-api",
+      "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+      "git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+      "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+      "logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+      "changed": false
+    },
+    "corrected_exact7_projection": {
+      "bytes": 2185,
+      "raw_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+      "changed": false
+    },
+    "requirements_exact5": {
+      "bytes": 473,
+      "lf_count": 5,
+      "raw_sha256": "4f7218509a20e42850afe75597f2abfdf447035001847621d4637faa246065f1",
+      "changed": false
+    },
+    "accepted_wheel_manifest": {
+      "count": 5,
+      "total_bytes": 1724842,
+      "sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d",
+      "changed": false
+    },
+    "distribution_closure": {
+      "distribution_count": 5,
+      "record_closure_match_count": 5,
+      "sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+      "changed": false
+    },
+    "tracked_procedure_exact2": [
+      {
+        "path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+        "git_blob_sha1": "ea7f96221846e5614431296e00ac481cc00e00a2",
+        "raw_sha256": "42fcd4d65b0d21b5e41659b6329c55c14ed42c0270838f13be6102b351db7ac9"
+      },
+      {
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+        "git_blob_sha1": "5c3b7dd03c84a84a2717f57f0d2c99c39b2ed6d8",
+        "raw_sha256": "895ea1f130e331d4e89f857835b4477d949c1ff63c0adea11276bc97b4c717b2"
+      }
+    ]
+  },
+  "evidence_crosswalk": {
+    "canonical_schema": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1",
+    "independent_fresh_reproduction": {
+      "owner_derivation_count": 1,
+      "independent_derivation_count": 1,
+      "owner_independent_equality": true,
+      "equal_diagnostic_core_sha256": "a0391ee0f772f4d179b3285d47eb6ef608b1aa5c622384ce1f09ba5a0a6f8ce0",
+      "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5"
+    },
+    "exact5_closure": {
+      "wheel_identity_match_count": 5,
+      "wheel_record_identity_match_count": 5,
+      "installed_record_closure_match_count": 5,
+      "distribution_closure_match": true
+    },
+    "inventory": {
+      "canonical_row_count": 482,
+      "eligible_regular_payload_count": 482,
+      "owned_file_count": 482,
+      "unowned_file_count": 0,
+      "duplicate_relative_path_count": 0,
+      "missing_file_count": 0,
+      "extra_file_count": 0,
+      "symlink_count": 0,
+      "nonregular_count": 0,
+      "pyc_file_count": 0,
+      "pycache_directory_count": 0,
+      "mismatch_row_count": 0,
+      "nonzero_mismatch_family_count": 0
+    },
+    "historical_independent_reproduction": {
+      "date": "2026-08-01",
+      "state": "RUNTIME_READY_CURRENT_SESSION_STOP",
+      "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+      "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+      "record_closure_match_count": 5,
+      "result_git_blob_sha1": "70560281cab822fba22a980cd3220393f39c4625",
+      "receipt_git_blob_sha1": "ce6cfe0217f3e28c88643f4a4f543e069a6b21c6",
+      "handoff_git_blob_sha1": "ce98b142cd279b106c81ae9455748f5aa193bbe5"
+    },
+    "current_expected_decision": {
+      "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+      "decision_owner": "Mash",
+      "state": "CURRENT_REFROZEN"
+    }
+  },
+  "historical_readiness_preservation": {
+    "historical_g5_gate_b_date": "2026-08-09",
+    "historical_installed_file_manifest_sha256": "9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6",
+    "identity_role": "HISTORICAL_UNVERSIONED_OR_ALTERNATE_CANONICALIZATION_RUNTIME_IDENTITY",
+    "current_comparator_for_canonical_v1": false,
+    "result_git_blob_sha1": "5231f83b42d55676610a0476189cf1685ccba971",
+    "receipt_git_blob_sha1": "0e26959f85c18ca50d02ff06de0dcce8fd226a36",
+    "handoff_git_blob_sha1": "a120b4f2886962591267524b7047b109a866fd02",
+    "historical_runtime_ready_reclassification": false,
+    "historical_g5_machine_green_reclassification": false,
+    "historical_g6_reject_reclassification": false
+  },
+  "execution_zero_boundary": {
+    "new_diagnostic_root_creation_count": 0,
+    "runtime_root_creation_count": 0,
+    "network_acquisition_count": 0,
+    "wheel_acquisition_count": 0,
+    "install_count": 0,
+    "helper_execution_count": 0,
+    "pytest_probe_count": 0,
+    "role_smoke_count": 0,
+    "owner_readiness_derivation_count": 0,
+    "independent_readiness_derivation_count": 0,
+    "gate_b_recovery_execution_count": 0,
+    "target_import_collection_call_count": 0,
+    "targeted_pytest_count": 0,
+    "ordered_exact24_count": 0,
+    "historical_full52_count": 0,
+    "whole_file_full54_count": 0,
+    "outside_ordered_exact24_whole_collection_count": 0,
+    "exact100_count": 0
+  },
+  "zero_effect_boundary": {
+    "historical_artifact_rewrite_count": 0,
+    "canonical_schema_change_count": 0,
+    "row_field_change_count": 0,
+    "path_normalization_change_count": 0,
+    "row_order_change_count": 0,
+    "json_rule_change_count": 0,
+    "hash_rule_change_count": 0,
+    "file_ownership_rule_change_count": 0,
+    "formal_lock_change_count": 0,
+    "requirements_change_count": 0,
+    "exact5_change_count": 0,
+    "distribution_closure_change_count": 0,
+    "environment_policy_change_count": 0,
+    "runtime_rematerialization_count": 0,
+    "runtime_ready_count": 0,
+    "readiness_credit_count": 0,
+    "gate_b_readiness_execution_count": 0,
+    "gate_c_count": 0,
+    "protected_test_append_count": 0,
+    "causal_red_execution_count": 0,
+    "production_change_count": 0,
+    "protected_test_change_count": 0,
+    "fixture_sample_corpus_change_count": 0,
+    "mashos_api_changed_path_count": 0,
+    "product_read_count": 0,
+    "g5_implementation_count": 0,
+    "g6_rerun_count": 0,
+    "g7_count": 0,
+    "cycle001_acceptance_count": 0,
+    "api_db_rn_public_shared_runtime_safety_owner_change_count": 0
+  },
+  "privacy": {
+    "concrete_manifest_row_or_path_list_published": false,
+    "absolute_locator_published": false,
+    "file_package_record_wheel_or_runtime_body_published": false,
+    "configured_route_or_url_published": false,
+    "credential_or_environment_value_published": false,
+    "private_process_output_published": false
+  },
+  "next_authority": {
+    "id": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "authorized_by_this_owner": false,
+    "automatic_progression": false
+  }
+}

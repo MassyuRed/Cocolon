@@ -1680,3 +1680,100 @@ false
 
 This current-navigation section issues no next authority. A separate Mash approval is required before any
 comparator decision or subsequent execution.
+
+## 11.16 Current override — installed-manifest comparator V2 refrozen (2026-08-10)
+
+This section supersedes only the navigation position in §11.15. It does not rewrite §11.15 or any
+historical evidence.
+
+```text
+current route:
+post-G6 G4 shared-structural-correction comparator substep CLOSED
+
+current authority lifecycle:
+CURRENT_COMPARATOR_DECISION_AUTHORITY_CLOSED_CONSUMED
+
+canonical schema:
+NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1
+
+canonical schema change:
+false
+
+current expected installed-file manifest:
+0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
+
+current comparator state:
+CURRENT_REFROZEN
+
+current expected binding refreeze count:
+1
+
+predecessor expected identity:
+9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6
+
+predecessor expected role:
+HISTORICAL_NONCURRENT_FOR_CANONICAL_V1
+
+historical READY / G5 GREEN / G6 REJECT reclassification:
+false / false / false
+
+runtime READY / current readiness credit:
+0 / 0
+
+Cycle001:
+NOT_ACCEPTED
+```
+
+Current durable owners:
+
+| Role | Path suffix | Git blob SHA-1 | Raw SHA-256 |
+|---|---|---|---|
+| V2 owner | `InstalledFileManifest_VersionedCanonicalOwner_V2_20260810.json` | `3b9b332b1eea402dc18b7e7ceb8528e8f3bac678` | `9141231049a10a1d04741d66d6cab09ff3a831bd7bb096f1212f382ac381a808` |
+| Result | `InstalledFileManifestCurrentComparatorDecisionAndV2AdditiveRefreeze_V1_Result_20260810.md` | `2137a8ef6bf1d78760d65b9c1f691a0ab1ebc202` | `c31032dcb84a6ffc3cab68f59d5eb7c39245c2ec4a3fc5879f1522fe5798b6f0` |
+| Receipt | `InstalledFileManifestCurrentComparatorDecisionAndV2AdditiveRefreeze_V1_BodyFree_Receipt_20260810.json` | `d1b838a7caee18b4fbce9030a05ce7f3b00c3f4d` | `cf4376d346489231d09312e439908351efa9767e19f6ae199315bbb78cdc9bdf` |
+| Handoff | `InstalledFileManifestCurrentComparatorDecisionAndV2AdditiveRefreeze_V1_Handoff_20260810.md` | `5ca0bbe5bfbf63cddd06d8d4bbc62a8ca61093ca` | `2fb5bdd484b180eac0319aa01fd32ddc446a374ee83914abdc91a3b115adccd8` |
+
+Receipt logical SHA-256 is `f205b6c1f8451753e0f340d822323d2b75abe30bfafdff80e4ca354c9aab0647`.
+V1 remains immutable at blob `cc7c9f5573124aded5f007802ed031d79d92a7d8` and is not part of the
+current authority changed-path set.
+
+The current decision is supported by owner/independent fresh equality at `0eba095e...`, exact5
+distribution/RECORD closure, rows/eligible/owned `482/482/482`, all inventory error classes zero,
+mismatch rows/families `0/0`, and independent 2026-08-01 historical reproduction at `0eba095e...`.
+The 2026-08-09 G5 identity `9c6925ed...` remains an unversioned-or-alternate historical runtime identity;
+its historical READY/GREEN role and G6 REJECT remain unchanged.
+
+No runtime or diagnostic root was created. Network/wheel/install/helper/probe/role/readiness work, Gate B
+recovery, Gate C, protected or target/test work, production, mashos-api write, Product Read, G5/G6/G7,
+and Cycle001 acceptance were not authorized or executed.
+
+```text
+next authority proposal:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1
+
+proposal state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+issued / approved / activated / executed:
+false / false / false / false
+
+automatic progression:
+false
+```
+
+A fresh post-publication entry freeze and separate Mash approval are required before that one-shot Gate B
+readiness authority may begin. No Gate C, protected-test, target, production, or downstream authority is
+implied.
+
+```text
+INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_V2_REFROZEN
+CANONICAL_SCHEMA_V1_UNCHANGED
+CURRENT_EXPECTED_IDENTITY_0EBA095E_REFROZEN
+HISTORICAL_9C6925_IDENTITY_PRESERVED_NONCURRENT
+HISTORICAL_READINESS_AND_G5_G6_EVIDENCE_UNCHANGED
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_COMPARATOR_DECISION_AUTHORITY_CLOSED_CONSUMED
+NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
