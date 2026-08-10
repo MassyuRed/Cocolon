@@ -1310,3 +1310,125 @@ f83fbe993b7b8efacc19f760cc0212e35e6ef9b4
 This STOP is Cocolon new3 + Plan/07 append-only modified2 + current-navigation
 08 modified1 exact6. G4 success terminal, G5, G6 rerun, G7, Product Read,
 Cycle001 acceptance, and automatic progression remain false/not established.
+
+## 11.13 Current override — G4 Gate B typed materialization failure V1 (2026-08-10)
+
+This section supersedes only the current navigation at the end of §11.12. It
+does not reopen or reclassify G3–G6 historical evidence.
+
+```text
+current state:
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_TYPED_MATERIALIZATION_FAILURE
+
+typed reason:
+INSTALLED_FILE_MANIFEST_IDENTITY_MISMATCH
+
+Gate B lifecycle:
+CLOSED_CONSUMED_TYPED_FAILURE
+
+authority approval / activation / technical consumption / retry:
+1 / 1 / 1 / 0
+
+Cocolon predecessor:
+97be1644455deb5bd069a9dff02f0440a5c2ad48
+
+mashos-api commit / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+production / protected-test blobs:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+projection verifier / materializer execution:
+1 / 1
+
+configured-route acquisition / network process:
+1 / 1
+
+accepted wheel count / total bytes:
+5 / 1724842
+
+accepted-wheel manifest:
+00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d
+
+fresh venv / local locked install:
+1 / 1
+
+distribution / RECORD closure matches:
+5 / 5
+
+distribution closure:
+4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c
+
+expected aggregate installed-file manifest:
+9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6
+
+aggregate identity match:
+false
+
+owner / pytest version probe / role smoke / independent:
+0 / 0 / 0 / 0
+
+runtime READY / Gate C admission / target invocation:
+0 / 0 / 0
+
+protected-test append / mashos-api write:
+0 / 0
+
+retry / fallback / repair / cache deletion / interpreter switch:
+0 / 0 / 0 / 0 / 0
+
+G4 causal RED / G5 / G6 rerun / G7:
+NOT_ESTABLISHED /
+NOT_STARTED /
+NOT_STARTED /
+NOT_STARTED_UNAUTHORIZED
+
+Cycle001:
+NOT_ACCEPTED
+```
+
+The failed fresh root is session-local and unadmitted. Its absolute locator,
+runtime/helper bodies, route/URL, credentials, environment values, wheel/package/
+RECORD bodies, raw acquisition output, and traceback are not published.
+
+Durable Result SHA-256/blob:
+
+```text
+870842e33e7b2df8b3073f3a01aecebc79a3aec95ba44eaf561f708c2870cd27 /
+bbd1c96efb02121dcea472423d04a4938d14df6e
+```
+
+Receipt SHA-256/blob/logical SHA-256:
+
+```text
+a1ad0d689abdbb669d652e0007d6fa3023a6a9ea07bc54855457d252a0246aa8 /
+fe610a3614deac5a1d1961ac276ec6470ef18160 /
+a2f978bf7b27f565147eeeaab4fc9e25d5ea3797318924fb376554eef47fb120
+```
+
+Handoff SHA-256/blob:
+
+```text
+abbc1dafe708111fedb95a35e4de5844b43cb615da1543f66648d980edb93495 /
+1dbad1c85a08124af8aa29ea1836d10641718d91
+```
+
+```text
+next authority label:
+NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_RECOVERY_AFTER_TYPED_FAILURE_V1
+
+state:
+NOT_ISSUED_SEPARATE_MASH_APPROVAL_REQUIRED
+
+current V1 reuse:
+false
+
+automatic progression:
+false
+```
+
+The next approval must explicitly define diagnosis and a new nonreuse fresh
+attempt or alternative closure. Gate C, protected-test append, target execution,
+G5/G6/G7, and Cycle001 acceptance remain unauthorized.
