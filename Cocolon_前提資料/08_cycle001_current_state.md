@@ -1432,3 +1432,118 @@ false
 The next approval must explicitly define diagnosis and a new nonreuse fresh
 attempt or alternative closure. Gate C, protected-test append, target execution,
 G5/G6/G7, and Cycle001 acceptance remain unauthorized.
+
+## 11.14 Current override — G4 Gate B recovery V1 failed root unavailable (2026-08-10)
+
+This section supersedes only the current navigation at the end of §11.13. It does not reopen or reclassify
+historical G3–G6, post-G6 G3, Gate A, or the failed Gate B V1.
+
+```text
+current state:
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_RECOVERY_TYPED_FAILURE
+
+exactly-one cause:
+FAILED_ROOT_NOT_AVAILABLE_FOR_CAUSAL_DIAGNOSIS
+
+recovery authority lifecycle:
+CLOSED_CONSUMED_TYPED_FAILURE
+
+authority approval / activation / technical consumption / retry:
+1 / 1 / 1 / 0
+
+Cocolon entry main:
+6d14b1dad31407999a27918873d6aa69e248c456
+
+mashos-api commit / tree:
+45bf98f9034261d3adb3e808d6d759f2334e2d25 /
+23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+production / protected-test blobs:
+f10ce7948e5570ee8ad27ee2af00a9caf3867d49 /
+c302dd99e143967fed6edd65b429373e87453fc6
+
+failed-root availability observation / current-session candidate:
+1 / 0
+
+V1 helper-source presence / current-authority helper execution:
+5 / 0
+
+owner / independent diagnosis:
+0 / 0
+
+actual manifest and required row/count/digest facts:
+NOT_DERIVABLE_FAILED_ROOT_ABSENT
+
+Stage R1 admission / attempt:
+0 / 0
+
+fresh acquisition / network / new runtime / materialization:
+0 / 0 / 0 / 0
+
+owner / pytest probe / role smoke / independent:
+0 / 0 / 0 / 0
+
+runtime READY / Gate C admission / target invocation:
+0 / 0 / 0
+
+protected-test append / mashos-api write:
+0 / 0
+
+same-series retry / comparator refreeze / automatic progression:
+NOT_AUTHORIZED /
+NOT_AUTHORIZED /
+false
+
+G4 causal RED / G5 / G6 rerun / G7:
+NOT_ESTABLISHED /
+NOT_STARTED /
+NOT_STARTED /
+NOT_STARTED_UNAUTHORIZED
+
+Cycle001:
+NOT_ACCEPTED
+```
+
+The V1 materializer canonicalization is statically recorded as an unversioned exact11 expected-hash
+candidate oracle. The failed root is unavailable, so this observation is not used to infer an actual-root
+cause. Expected `9c6925ed...` remains durable as a value, but a current expected-specific versioned canonical
+owner binding is not present in inspected evidence. The next proposal must address that conflict separately.
+
+Durable Result raw SHA-256 / blob:
+
+```text
+59a65dad6b4ca2838d908cc0f8136aba3e291adcb5819d203a7819495586edaa /
+943db07ae0ce1f33a6a1b152d04acf5b30236d2e
+```
+
+Receipt raw SHA-256 / blob / logical SHA-256:
+
+```text
+8d47e9f8f1fcbdf00ffac5c39b4d1eeb8c3843520504e9bc98da46a9f3bbcaba /
+5e6e7c08787485ec34de09eb290b08835cbdca11 /
+5803b8809a70073eb6a55329e7779d8ba05ead672526d0b2e87768e444613484
+```
+
+Handoff raw SHA-256 / blob:
+
+```text
+bc340088a139f6928e43caed02e5351c9b50a3300b85070d442431ff5957ca57 /
+4190d2f05b9b2d638436b7786ce304576dd20a44
+```
+
+```text
+next authority:
+UNSELECTED_SEPARATE_MASH_APPROVAL_REQUIRED
+
+minimum proposal only:
+VERSIONED_INSTALLED_MANIFEST_CANONICAL_OWNER_AND_DIAGNOSTIC_ONLY_FRESH_ROOT
+
+same-series retry / Gate C / target / protected append:
+NOT_AUTHORIZED
+
+automatic progression:
+false
+```
+
+The proposed next text is inactive and does not issue authority. A separate Mash approval is required before
+any diagnostic fresh root, comparator decision, readiness rematerialization, Gate C, or target work.
