@@ -1,0 +1,116 @@
+{
+  "alignment_gaps": {
+    "current_derivative_owners_required": true,
+    "detailed_design_exact_github_baseline_absent": true,
+    "original_baseline_identity_gap_count": 3,
+    "plan_same_path_identity_collision": true,
+    "roadmap_exact_github_baseline_absent": true
+  },
+  "audit_artifact": {
+    "bytes": 22568,
+    "filename": "Cycle001_ThreeDocument_CurrentAlignment_Audit_ReadOnly_20260810.md",
+    "sha256": "9ff132d6c5d730ec059d40ebe393ba1459b1748d1bb037889078665a9d9ddf52"
+  },
+  "automatic_progression": false,
+  "body_free": true,
+  "classification_counts": {
+    "ACTUAL_NONCONFORMANCE": 2,
+    "HISTORICAL_STATUS_ONLY": 5,
+    "IMPLEMENTED_AND_VERIFIED": 5,
+    "IMPLEMENTED_BUT_NOT_ACCEPTED": 4,
+    "REQUIRES_MASH_DECISION": 0,
+    "SUPERSEDED_BY_APPROVED_DESIGN": 5,
+    "UNCHANGED_NORMATIVE": 14,
+    "UNVERIFIED": 4,
+    "total": 39
+  },
+  "current_heads": {
+    "Cocolon": "7548fd47c67bbda2d8c65bab70ea4564218f54c3",
+    "mashos_api": "45bf98f9034261d3adb3e808d6d759f2334e2d25"
+  },
+  "current_plan_identity": {
+    "bytes": 1226041,
+    "equals_original": false,
+    "git_blob": "daa92c0a04482177df1f6f68e77c8f3641b084ff",
+    "lf": 19414,
+    "overwrite_with_original_allowed": false,
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+    "sha256": "649297ed9ef53879018cd97a8b9b98a0a0134de271deb2571e858467bb7b3653"
+  },
+  "current_state": {
+    "cycle001": "NOT_ACCEPTED",
+    "g5_machine_gate": "EXACT24_24_PASS_PUBLISHED_CLOSED",
+    "g6_candidate_pass_minor_major_blocker": [
+      0,
+      2,
+      8,
+      0
+    ],
+    "g6_product_read": "REJECT",
+    "g6_unique_pass_minor_major_blocker": [
+      0,
+      2,
+      6,
+      0
+    ],
+    "latest_gate_b_safe_detail": "INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID",
+    "latest_gate_b_terminal": "INDEPENDENT_IDENTITY_DERIVATION_INVALID",
+    "method_stop": false,
+    "readiness_credit": 0,
+    "runtime_ready": false
+  },
+  "decision_owner": "Mash",
+  "effects": {
+    "current_owner_cutover_count": 0,
+    "github_write_count": 0,
+    "runtime_execution_count": 0,
+    "source_change_count": 0,
+    "test_execution_count": 0,
+    "test_fixture_change_count": 0,
+    "work_execution_count": 0
+  },
+  "operation_owner": "Karen",
+  "revision_date": "2026-08-10",
+  "schema_version": "cocolon.cycle001.three_document_current_alignment_audit_receipt.v1",
+  "scope": "THREE_DOCUMENT_CURRENT_ALIGNMENT_AUDIT_ONLY",
+  "source_identities": {
+    "detailed_design": {
+      "bytes": 132892,
+      "lf": 3009,
+      "sha256": "6aa3fb799919ac30b0eb84571ac4009d62a2bd799c84322272a59bba533f13bc"
+    },
+    "execution_closure_plan_original": {
+      "bytes": 41460,
+      "lf": 798,
+      "sha256": "31682e71ac047ac5f2f329d62ebc51b471bdcb00430a6ab35bcfb934c1438ca7"
+    },
+    "longterm_roadmap": {
+      "bytes": 69980,
+      "lf": 1994,
+      "sha256": "04fb9e4e11af2b1530d03d95d8e959ba644503722f72094a289bde1d4368ce5b"
+    },
+    "work_latest_output": {
+      "bytes": 1138,
+      "lf": 26,
+      "sha256": "79bc8e8d3625eb1082c2b02258fbb17a1d5d978d5daed4f23e31582fbd5079e2"
+    }
+  },
+  "status": "PHASE1_READ_ONLY_AUDIT_COMPLETE_LOCAL_PENDING_PLANNED_GITHUB_REFLECTION",
+  "stop_checks": {
+    "acceptance_weakening_required": false,
+    "current_mash_decision_required": false,
+    "implementation_divergence_requires_unapproved_design_elevation": false,
+    "product_goal_change_required": false,
+    "public_safety_privacy_contract_mutation_required": false,
+    "unresolved_same_claim_evidence_conflict": false
+  },
+  "terminal": [
+    "PHASE1_READ_ONLY_AUDIT_COMPLETE",
+    "PASS_WITH_CURRENTIZATION_REQUIRED",
+    "NO_CURRENT_REQUIRES_MASH_DECISION_ITEM",
+    "ORIGINAL_DOCUMENTS_MUST_REMAIN_IMMUTABLE_BASELINES",
+    "WORK_TECHNICAL_EXECUTION_NOT_RESUMED",
+    "PHASE2_BASELINE_PRESERVATION_SEPARATE_APPROVAL_REQUIRED",
+    "AUTOMATIC_PROGRESSION_FALSE"
+  ]
+}
