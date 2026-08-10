@@ -2,9 +2,9 @@
 doc_id: cocolon_cycle001_current_state
 title: "Cycle001 現在地 — 単一ナビゲーション正本"
 revision_date: "2026-08-10"
-status: "PHASE4_PREPARED_NOT_PUBLISHED"
-normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER_CANDIDATE"
-effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
+status: "PHASE8_GATE_B_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_TERMINAL"
+normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER"
+effective_when: "PHASE8_GATE_B_V2_TERMINAL_PUBLICATION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operational_owner: "Karen"
 technical_authority: false
@@ -23,8 +23,9 @@ automatic_progression: false
 
 ```text
 observation date: 2026-08-10 JST
-Cocolon: 2afcfb87422334c4fdba9c895d619a64fd9d252a
+Cocolon Phase 8 entry: c5009a2d5281bc74d48fb189e97453367ddacba0
 mashos-api: 45bf98f9034261d3adb3e808d6d759f2334e2d25
+Phase 8 publication: resolve from this file's Git history and latest Receipt
 ```
 
 ## 2. product and cycle
@@ -46,7 +47,7 @@ Normative immutable baselines:
 - `historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md`
 - `historical_baselines/emlis_ai/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md`
 
-Current derivative owners after the stated `effective_when`:
+Current derivative owners:
 
 - `Cocolon_EmlisAI_longterm_roadmap_CURRENT.md`
 - `Cocolon_EmlisAI_NLSv3_CurrentAlignment.md`
@@ -60,7 +61,8 @@ current Gate: G4
 current subgate: GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS
 current comparator: NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1 / 0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
 current active authority: NONE
-last authority lifecycle: CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+last authority: NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2
+last authority lifecycle: CURRENT_AUTHORITY_CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
 ```
 
 ## 5. last product, technical, and reusable evidence
@@ -70,46 +72,43 @@ last product evidence: G6_PRODUCT_READ_REJECTED
 last product credit: 0
 last technical credit: current comparator V2 refreeze
 last reusable evidence: comparator V2 + G5 exact24 = 24 PASS / 0 FAIL / 0 ERROR / 0 UNEXPECTED
+Phase 8 reusable runtime credit: 0
 ```
 
 G5 technical GREENは保持しますが、G6 Product Read、Cycle acceptance、runtime READYへ変換しません。
 
-G6 body-free result:
-
-```text
-candidate exact10 PASS / MINOR / MAJOR / BLOCKER: 0 / 2 / 8 / 0
-unique exact8 PASS / MINOR / MAJOR / BLOCKER: 0 / 2 / 6 / 0
-former-MAJOR cases / contexts <= MINOR: 0/5 / 0/7
-controls not worse / new MAJOR control: 1/3 / 1
-disposition: RETURN_TO_SHARED_STRUCTURAL_CORRECTION
-method stop: false
-```
-
 ## 6. current exact blocker
 
-Gate B V1はowner identity、pytest 8.4.1 probe、required-role smokeまでVALIDでした。
-freeze済みindependent verifierがidentity導出前に`Path.read_text(newline=...)`で失敗しました。
+Phase 8のpre-freeze actual-callは、wheel取得、venv作成、pytestより前に停止しました。
+新しいprojection verifierの`run(Path)`が、CLIから渡されたactual `pathlib.PosixPath`を拒否しました。
+helperはfreeze、修正、再実行していません。
 
 ```text
-typed reason: INDEPENDENT_IDENTITY_DERIVATION_INVALID
-safe detail: INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID
-failed root: FAILED_CLOSED_UNADMITTED_SESSION_LOCAL_ROOT / NO_REUSE
+typed reason: PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
+safe detail: PROJECTION_HELPER_CONFIG_PATH_RUNTIME_TYPE_CHECK_INVALID
+helper result: CONFIG_PATH_TYPE_INVALID
+configured-route acquisition / network: 0 / 0
+wheel / runtime root / venv / install: 0 / 0 / 0 / 0
+owner / pytest probe / role smoke / independent / reconciliation: 0 / 0 / 0 / 0 / 0
 runtime READY / readiness credit: false / 0
 ```
 
-owner-only observationはruntime admissionではありません。
+このSTOPはpreflightが意図どおり不正なhelperをruntime effect前に検出した結果です。
+一方、prior V1と今回でhelper API/runtime type contract familyのSTOPが連続したため、第三の通常authorityへ進みません。
 
-## 7. next exact1 and expected credit
+## 7. next exact1 and credit boundary
 
 ```text
-proposal: NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2
-state: DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
-next technical exact1 if Phase 8 is separately approved: corrected helper pre-effect freeze + entirely fresh root/wheel/helper + comparator V2 + Gate B readiness once
-expected success credit: RUNTIME_READY_EXACT1 / GATE_B_CLOSED
-excluded: Gate C and every downstream Gate
+next exact1: MASH_METHOD_DECISION_ON_RETIRING_OR_REPLACING_SESSION_LOCAL_HELPER_ROUTE_BEFORE_ANY_FURTHER_GATE_B_ATTEMPT
+state: DETOUR_RISK_STOP / NO_THIRD_NORMAL_AUTHORITY
+bounded mechanical repair remaining: 0
+second repair / helper edit / rerun / alternate helper / fallback: 0
+expected immediate technical credit: 0
+Gate C authorization: false
 ```
 
-Phase 3〜7のcurrent-owner作成、workflow反映、GitHub reflection、postverify、STOPと、Phase 8の別承認が揃うまで技術実行しません。
+通常のGate B再実行authority、別helper、scanner、carrierを自動追加しません。
+次は商品目的を変えずに、本筋へ戻すmethod exact1をMashが判断する地点です。
 
 ## 8. distance and blocked downstream
 
@@ -125,25 +124,38 @@ Blocked downstream: Gate C、protected-test append、G5 production change、G6 P
 
 | attempt | result | primary outcome |
 |---|---|---|
-| comparator V2 refreeze | current expected identity `0eba095e...`をversioned ownerへ固定。runtime work 0 | `TECHNICAL_CREDIT` |
-| Gate B V1 | independent helper API defectへblockerを一意化。Runtime READY / credit 0 | `BLOCKER_NARROWED` |
+| Gate B V1 | independent helperがunsupported `Path.read_text(newline=...)`でidentity導出前に停止。Runtime READY / credit 0 | `BLOCKER_NARROWED` |
+| Gate B V2 | pre-freeze actual-callがprojection helperのconcrete Path type拒否を検出。runtime/network/pytest effect 0 | `BLOCKER_NARROWED` |
 
 ## 10. primary classification, detour, Mash decision
 
 ```text
 current primary outcome: BLOCKER_NARROWED
-DETOUR_RISK_STOP: NOT_TRIGGERED
-bounded mechanical repair remaining: exact1 under a future explicit authority
-second helper failure: DETOUR_RISK_STOP / NO_SECOND_REPAIR
+DETOUR_RISK_STOP: TRIGGERED
+trigger: same helper API/runtime type contract blocker familyで2回連続STOP
+reusable credit added: 0
 product goal or acceptance decision required now: false
-Phase 8 Gate B approval required: true
-later Gate approval: separate each time
+method decision required now: true
+third normal authority allowed: false
+automatic progression: false
 ```
 
 ## 11. evidence pointers
 
+- Phase 8 terminal: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_CorrectedIndependentVerifierAndFreshRuntimeReadinessUnderComparatorV2_V2_PrefreezeExecutablePreflightInvalid_BodyFree_Receipt_20260810.json`
+- prior Gate B: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_BodyFree_Receipt_20260810.json`
+- comparator V2: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V2_20260810.json`
 - G5: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G5_GateC_Exact24Green_ProductionPublished_BodyFree_Receipt_20260810.json`
 - G6: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G6_B6RepresentativeProductReadRecheck_Rejected_BodyFree_Receipt_20260810.json`
-- comparator V2: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V2_20260810.json`
-- latest Gate B: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_BodyFree_Receipt_20260810.json`
 - route details: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md`
+
+```text
+PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
+DETOUR_RISK_STOP
+NO_SECOND_REPAIR
+RUNTIME_READY_CURRENT_SESSION_FALSE
+READINESS_CREDIT_0
+GATE_B_NOT_CLOSED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
