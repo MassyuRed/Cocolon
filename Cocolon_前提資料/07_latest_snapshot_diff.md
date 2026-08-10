@@ -39961,3 +39961,49 @@ NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 2026-08-10 publication verification — installed-manifest comparator V2 refreeze
+
+The approved exact7 group was published atomically from entry
+`0507b7274bf31826ba7a410cc3b57095b1d0656f` to terminal write head
+`a6b4a9ff8b9d15ac0c63879d0e5e30a907e31fa0`, tree
+`89681e2abd231444f7d3ed4076cb84297d63a459`. Fresh GitHub comparison reported ahead1, behind0,
+total commits1, and changed-path union exact7: added new4 and modified Plan/07/08 exact3.
+
+Fresh-refetched terminal-write identities:
+
+| Role | Blob | Bytes | LF | Raw SHA-256 | Remote prepared-byte equality |
+|---|---|---:|---:|---|---|
+| V2 owner | `3b9b332b1eea402dc18b7e7ceb8528e8f3bac678` | 12210 | 255 | `9141231049a10a1d04741d66d6cab09ff3a831bd7bb096f1212f382ac381a808` | exact |
+| Result | `2137a8ef6bf1d78760d65b9c1f691a0ab1ebc202` | 10678 | 143 | `c31032dcb84a6ffc3cab68f59d5eb7c39245c2ec4a3fc5879f1522fe5798b6f0` | exact |
+| Receipt | `d1b838a7caee18b4fbce9030a05ce7f3b00c3f4d` | 15631 | 329 | `cf4376d346489231d09312e439908351efa9767e19f6ae199315bbb78cdc9bdf` | exact |
+| Handoff | `5ca0bbe5bfbf63cddd06d8d4bbc62a8ca61093ca` | 6196 | 87 | `2fb5bdd484b180eac0319aa01fd32ddc446a374ee83914abdc91a3b115adccd8` | exact |
+| Plan | `5d5b9b5b1489a9711aa0147c093e3b20391dd5e1` | 1221942 | 19349 | `4ce787d54968152b629a86cab3fbffe3c3753abbb8c85eb26188f4def7d04434` | exact |
+| 07 before this appendix | `ae70802fbffda320351ac7f5a5417ee56504d01b` | 2416534 | 39963 | `4d91853dc02f19721518fe5eee4356d3fb002cb351a3d58926ce2fb93c5818e6` | exact |
+| 08 | `f43549b16b41c8a6c8f113bc399ff714937470d8` | 60832 | 1779 | `6e5d9bf18691d82333f7ee42c959dbd2fed7d9783d8b8d2cb38bc428adcaecf4` | exact |
+
+All seven terminal-write files were LF-only, final-LF true, and mode `100644`. Unauthorized path,
+deletion, rename, and related-drift counts were 0. The V1 owner was not changed. mashos-api remained at
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` with changed-path count 0.
+
+The current comparator is `0eba095e...` under unchanged schema V1. Historical `9c6925ed...`, historical
+READY/G5/G6 evidence, exact5 closure, and all prohibited runtime/downstream surfaces remain unchanged.
+Runtime READY and current readiness-credit counts are 0.
+
+```text
+INSTALLED_FILE_MANIFEST_CURRENT_COMPARATOR_V2_REFROZEN
+CANONICAL_SCHEMA_V1_UNCHANGED
+CURRENT_EXPECTED_IDENTITY_0EBA095E_REFROZEN
+HISTORICAL_9C6925_IDENTITY_PRESERVED_NONCURRENT
+HISTORICAL_READINESS_AND_G5_G6_EVIDENCE_UNCHANGED
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_COMPARATOR_DECISION_AUTHORITY_CLOSED_CONSUMED
+NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+No next authority was issued or activated. This verification appendix is confined to the already-approved
+07 append-only path. Its own commit identity and resulting 07 self-identity are intentionally omitted to
+avoid publication self-reference; both are covered by the following fresh base-to-latest exact7 union and
+remote-byte verification.
