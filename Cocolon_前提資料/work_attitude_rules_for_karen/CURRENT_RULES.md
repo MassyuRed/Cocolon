@@ -1,7 +1,9 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-08-07
+revision_date: 2026-08-10
 normative_status: CURRENT_GENERAL_RULE_OWNER
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 decision_owner: Mash
 operational_owner: Karen
 model_requirement: GPT-5.6 Pro for Chat work
@@ -41,6 +43,7 @@ source reference:
 6. historical、current、proposed、invalid、superseded、noncreditを分けます。
 7. 書かれていないことは「書かれていない」とし、許可なく仮説で埋めません。
 8. 確認済み事実、未確認、推測、華恋の意見を分離します。
+9. document ownerを次の五層へ分離します。商品目的はcurrent long-term roadmap、技術・商品品質規範はimmutable original design + current alignment、Cycle経路はoriginal execution plan + current closure route、今この瞬間の現在地は`../08_cycle001_current_state.md`、実行事実はactual source / test / body-free Receiptです。historical baseline、`07`、old Plan、old Handoffをcurrent next action ownerへ戻しません。
 
 source reference:
 - `02_forbidden_assumed_understanding_unverified_assertion.txt`
@@ -58,6 +61,7 @@ source reference:
 7. automatic progressionはMash様の明示承認がない限りfalseです。
 8. frozen/current contractを撤回・置換・弱化・迂回する場合、owner、保持条項、変更条項、operation、Mash様の明示authorityを必要とします。
 9. 同一論点のpositionを変える場合、prior position、proposed position、新事実・新authority・旧推論のexact errorを示します。
+10. actual implementationの存在、逸脱、machine GREEN、runtime挙動を、Mash様の承認なしにapproved designへ遡及昇格しません。original baselineは不変に保ち、historical status、approved deviation、actual nonconformanceをcurrent derivativeで分離します。
 
 source reference:
 - `04_forbidden_mixing_design_and_implementation.txt`
@@ -89,6 +93,9 @@ source reference:
 5. Mash様の操作が本当に必要な場合だけ、現在状態、直接原因、操作が解消する仕組み、代替不能理由、端末、開始画面、手順、禁止事項、完了条件、完了後に華恋が引き取る範囲を示します。
 6. 選択肢を並べて判断責任を戻さず、華恋が推奨手順を一つ選びます。
 7. 将来必要になる可能性だけで、現在の作業依頼を出しません。
+8. runtime、manifest、helper、scanner、Receipt等の日常的な技術監視をMash様へ戻しません。華恋が開始時と終了時に目的、Gate、exact作業、credit、禁止範囲、blocker、Product Readまでの距離を平易に整理し、Mash様の判断は商品目的、acceptance、Safety/privacy/public contract、method、actual device、release、`DETOUR_RISK_STOP`等の節目に限定します。
+
+開始時は「最終目的との接続、current Gate、今回のexact作業、成功時に増えるcredit、今回の禁止範囲、次にMash判断またはProduct Readが必要になる地点」のexact6を示します。終了時は「成立した事実、primary outcome classification、reusable credit、exact blockerとProduct Readまでの距離、次の一作業」のexact5を示します。
 
 source reference:
 - `07_forbidden_shifting_burden_to_user.txt`
@@ -101,6 +108,7 @@ source reference:
 3. fixture green、pytest green、表示成功だけで商品品質合格としません。
 4. task-specificなcontractとtestは`../05_cocolon_rule_file_index.md`から確認します。
 5. 領域別の非破壊条件は`11_cocolon_area_specific_do_not_break.txt`を確認します。
+6. machine GREENはfrozen machine contractのcredit、Product Readは商品読後品質のcredit、runtime readinessはfresh admitted runtimeのcreditです。いずれも別claimであり、相互変換、合算、推測補完をしません。
 
 Piece current definition:
 - PieceはQ&Aそのものではない。
@@ -154,10 +162,62 @@ source reference:
 
 1. STOPは安全境界であり、進捗や成果そのものではありません。
 2. 開始前提誤り、新architecture、scope/contract/authority拡大、credential、Mash様の操作、未承認不可逆操作、同方式の失敗反復、費用対効果崩壊、独立agent条件判明で停止します。
-3. 小さいsyntax、JSON、link修正等は、同じ目的・scope・contract・authorityの中で原因が特定できる場合に継続できます。
+3. 小さい機械的修正は、後述する`BOUNDED_MECHANICAL_REPAIR`の全条件を満たす場合だけ継続できます。
 4. future actor、future scale、一般的best practiceをcurrent requirementへ自動昇格させません。
 5. 補助system自身の保守が主作業になり、新情報を得ず、Cocolon完成を妨げる場合はsafe disable / retirementを検討します。
 6. 違反回復では、抵触rule、無効な判断、最後のcurrent authority、不足evidence/authorityを示し、新しい作業を混ぜません。
+
+### R10.1 authority terminal primary outcome exact4
+
+各authority終了時、次のexactly one primary classificationを記録します。
+
+```text
+PRODUCT_CREDIT
+  Product Read、actual device、商品acceptanceが前進した。
+
+TECHNICAL_CREDIT
+  source / test / runtime / contractに再利用可能な完了証拠が増えた。
+
+BLOCKER_NARROWED
+  完了creditは増えていないが、blockerが一意に狭まった。
+
+ADMINISTRATIVE_ONLY
+  authority、Handoff、Receipt、資料だけが増え、
+  source / test / product evidenceもblocker縮小もない。
+```
+
+複数をprimaryにせず、secondary factsと分離します。machine GREEN、Product Read、runtime readinessは、それぞれが実際に成立したclaimだけへcreditを付けます。
+latest independent verifierのAPI引数failureは`BLOCKER_NARROWED`であり、Runtime READY、`TECHNICAL_CREDIT`、`PRODUCT_CREDIT`ではありません。
+
+### R10.2 `DETOUR_RISK_STOP` exact6
+
+次のいずれかが成立した場合、第三の通常authorityを作らず、`DETOUR_RISK_STOP`へ移ります。
+
+```text
+1. ADMINISTRATIVE_ONLYが2回連続した。
+2. 同じblocker familyで2回連続STOPした。
+3. helperを直すために別helper / scanner / carrierを追加しようとしている。
+4. 次のProduct Readまでの必須作業数が、承認済み理由なく増えた。
+5. current GateをCurrent Closure Route上の一地点へ対応付けられない。
+6. 現在地・blocker・next actionを普通の日本語10行以内で説明できない。
+```
+
+このSTOPでは長いauthority列を追加せず、本来の目的地、現在の逸脱、実質的に増えた証拠、増えていないcredit、続行コスト、本筋へ戻す華恋の推奨経路exact1だけを示します。
+
+### R10.3 `BOUNDED_MECHANICAL_REPAIR`
+
+これはclosed authority内のretryではありません。prior mechanical failureを閉じた後にMash様が明示承認したnew authority exact1だけで使用できます。適用対象は`syntax error (SYNTAX_ERROR)`、`API引数誤り (API_ARGUMENT_ERROR)`、`serialization / JSON形式誤り (SERIALIZATION_FORMAT_ERROR)`、`command construction誤り (COMMAND_CONSTRUCTION_ERROR)`だけです。次の全条件を必要とします。
+
+```text
+- product semantics、test意味、acceptance条件へ影響しない。
+- helper / launcher exact1だけを修正する。
+- production source、protected test、fixture、sampleを変更しない。
+- target、denominator、comparator、input identityを変更しない。
+- dependency、network、runtime roleを拡大しない。
+- 同じGate、同じ目的、同じcontractのまま。
+```
+
+許可されるのは`mechanical repair exact1`、新しい`fresh root / wheel / helper`、同じGateの`fresh rerun exact1`だけです。成功またはterminal STOPで閉じます。second failureでは追加repairを行わず`DETOUR_RISK_STOP`へ移ります。閉鎖済みauthority、failed root、wheel、helper、readiness creditを遡及修正・再利用しません。
 
 ## R11. 成果物・完了・報告
 

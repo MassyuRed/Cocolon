@@ -1,5 +1,9 @@
 # Work test-runner runtime continuity / one-shot prelaunch
 
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_boundary: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+effective_status_after_boundary: CURRENT_ENFORCEMENT_RULE
+
 ## 正本
 
 技術定義のcurrent正本は
@@ -8,6 +12,16 @@
 このfileは、華恋が毎session・毎targeted pytest authorityで行う強制checkだけを
 固定します。GitHub反映契約`../11_cocolon_github_transport_and_session_continuity.md`
 またはproduct runtimeを変更しません。
+
+このpostimageはPhase 5 Checkpoint Bのatomic cutoverがremote postverifyされるまで
+有効化しません。それ以前はremote predecessor ruleを使用します。
+
+Cycle001では、current position / blocker / next exact1は
+`../08_cycle001_current_state.md`からだけ選びます。remaining Gate sequence、entry /
+exit / STOP、retired routeは
+`../../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md`
+をownerとします。`../07_latest_snapshot_diff.md`とcurrent same-name Planはevidence /
+historical ownerであり、古い`next authority`からcurrent actionを選びません。
 
 ## 華恋が必ず行うこと
 
@@ -46,6 +60,20 @@
 13. prelaunch不成立時はtargeted invocation 0のままGate Aまたは別Gate Bへ戻す。
 14. historical Result / Receipt / Handoffを遡及変更・再parse・再creditせず、
     誤ったfuture directionはadditive correctionで非current化する。
+15. helper / launcherをfreezeする前に、actual entrypoint ownerとcallable、positional /
+    keyword-only parameter、required / optional / default、exact invocation、return shapeを
+    actual implementationから導出し、call signatureをpre-freezeする。
+16. freeze対象と同じactual entrypointをauthority-local synthetic file exact1で実callする。
+    import、symbol存在、mock callだけでPASSにしない。
+17. synthetic fileはproductionと同じreader / call chain / argument constructionで実読する。
+    alternate readerやpreflight shortcutで置換しない。
+18. synthetic raw bytes、byte count、SHA-256、strict UTF-8、newline form / count、final LF、
+    normalization expectationを固定し、actual text readとの一致を確認する。
+19. `Path.read_text`等のAPI引数をactual callで確認し、unsupported argumentをfreezeしない。
+20. actual outputをrequired / optional key、type、enum、cardinality、ordering、empty /
+    NOT_APPLICABLE、unknown-field、body-freeのfrozen schemaへvalidateする。
+21. items 15〜20の一つでも不成立ならfreezeせず、runtime / target effect 0のまま
+    `PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`でSTOPする。
 
 ## GitHubへ残すもの / 残さないもの
 
@@ -62,3 +90,51 @@ cache、credential、configured route、raw acquisition outputは残しません
 STOP自体を失敗と扱いません。runtime問題をtargeted one-shot消費前に検出し、
 Work側recoveryへ戻すことが正しいSTOPです。targetを消費した後でMash様へ
 environment準備を求める状態を繰り返しません。
+
+## bounded mechanical repair / no-retry boundary
+
+bounded mechanical repairは、prior authorityを閉じた後のnew Mash-approved authority
+exact1だけで使用します。同authority retryではありません。
+
+対象は`SYNTAX_ERROR`、`API_ARGUMENT_ERROR`、`SERIALIZATION_FORMAT_ERROR`、
+`COMMAND_CONSTRUCTION_ERROR`のexact4です。
+
+次の全条件を満たします。
+
+- helperまたはlauncher exact1だけを修正する。
+- same Gate / purpose / contractを維持する。
+- semantics、test意味、acceptance、production、protected test、fixture、sample、
+  target、denominator、comparator、input identityを変更しない。
+- dependency projection、network route / count、runtime roleを変更しない。
+- prior authority、root、wheel、helper、readinessを再利用しない。
+
+許可sequence:
+
+```text
+new authority exact1
+-> repair exact1
+-> pre-freeze preflight
+-> fully fresh root / wheel / helper
+-> same Gate fresh rerun exact1
+-> success or STOP
+```
+
+fresh rerunはretry例外ではありません。new authorityとfully fresh artifactsを持つ
+別operationです。second failureではrepair / rerun / fallbackを追加しません。
+
+```text
+DETOUR_RISK_STOP
+NO_SECOND_REPAIR
+CURRENT_AUTHORITY_STOP
+```
+
+target authority consumed後のfailure、semantic / test failure、identity / comparator /
+denominator conflict、dependency / network / runtime-role変更はrepair対象外で、no retryです。
+
+```text
+PHASE4_PREPARED_NOT_PUBLISHED
+EFFECTIVE_ONLY_AFTER_PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+TECHNICAL_EXECUTION_0
+GITHUB_WRITE_0
+AUTOMATIC_PROGRESSION_FALSE
+```

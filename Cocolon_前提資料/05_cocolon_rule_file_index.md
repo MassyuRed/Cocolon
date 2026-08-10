@@ -1,12 +1,14 @@
 ---
 doc_id: cocolon_rule_file_index
 title: "Cocolon ルールファイル索引"
-revision_date: "2026-08-05"
+revision_date: "2026-08-10"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_structural_audit"
-current_authority: "07_latest_snapshot_diff.md"
+current_authority: "08_cycle001_current_state.md"
+current_authority_effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
+milestone_evidence_owner: "07_latest_snapshot_diff.md"
 last_structural_audit_source:
   Cocolon: "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3 plus the bounded corrections in the revision containing the 2026-08-02 audit checkpoint"
   mashos-api: "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5"
@@ -3320,3 +3322,25 @@ Cocolon / mashos-apiはcurrent `public`ですが、write ownerと承認scopeは�
 | 同directoryの`artifact_ledger.tsv`と`artifacts/` | exact42 checksum ledgerと実bytes |
 
 `13_cocolon_work_test_runner_runtime_continuity.md`はpytest runtime continuity専用であり、一般的な作業記録ownerではありません。durable checkpointは通常のGitHub反映に追加する前提ではなく、local-only継続依存を失わないためのproject記録です。
+
+# 2026-08-10 PHASE 4 PREPARED current-owner index
+
+```text
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+automatic_progression: false
+```
+
+| owner | current responsibility after activation |
+|---|---|
+| `08_cycle001_current_state.md` | current Gate、blocker、next exact1の唯一のnavigation owner |
+| `Cocolon_EmlisAI_longterm_roadmap_CURRENT.md` | current product Phase、長期商品目的、未完了境界 |
+| `Cocolon_EmlisAI_NLSv3_CurrentAlignment.md` | original NLS v3 designとcurrent actualの8分類alignment |
+| `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md` | remaining Gate、entry / exit / STOP、Product Read / acceptance distance |
+| `historical_baselines/emlis_ai/` | original exact3 immutable baselines |
+| `07_latest_snapshot_diff.md` | milestone-only evidence ledger。current next actionは持たない |
+| current same-name Plan | historical route / evidence map。navigation ownerへ戻さない |
+
+過去の本index内にある`07 current authority`、old Plan / Handoff / Receiptの`next`はhistoricalです。
+pytest依存作業は`13`、rule `16`、rule `09`を追加で読み、GitHub reflectionは`11`に従います。
+Phase 8の別承認前にruntime、pytest、Gate B / C、source、test、fixture、productionへ進みません。

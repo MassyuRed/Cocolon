@@ -1,7 +1,9 @@
 {
   "schema_version": "cocolon.work_attitude_rules.current.v2",
-  "revision_date": "2026-08-07",
+  "revision_date": "2026-08-10",
   "normative_status": "CURRENT",
+  "status": "PHASE4_PREPARED_NOT_PUBLISHED",
+  "effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "model_gate": {
@@ -20,6 +22,36 @@
     "github_reflection": "../11_cocolon_github_transport_and_session_continuity.md",
     "work_pytest_runtime": "../13_cocolon_work_test_runner_runtime_continuity.md",
     "durable_recording": "../14_cocolon_continuous_work_recording_and_emergency_handoff.md"
+  },
+  "current_document_owners": {
+    "product_destination": "../Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+    "technical_and_product_quality_norm": [
+      "../historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
+      "../Cocolon_EmlisAI_NLSv3_CurrentAlignment.md"
+    ],
+    "cycle001_route": [
+      "../historical_baselines/emlis_ai/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "../../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md"
+    ],
+    "current_plan_historical_evidence_map_not_navigation": "../../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+    "current_navigation": "../08_cycle001_current_state.md",
+    "milestone_history_not_navigation": "../07_latest_snapshot_diff.md",
+    "historical_baselines": "../historical_baselines/emlis_ai/",
+    "execution_facts": "actual source / protected test / body-free Receipt"
+  },
+  "current_workflow_policy": {
+    "start_gate": "09_work_start_checklist.txt",
+    "terminal_primary_outcome": "exact1 of PRODUCT_CREDIT / TECHNICAL_CREDIT / BLOCKER_NARROWED / ADMINISTRATIVE_ONLY",
+    "detour_risk_stop": "CURRENT_RULES.md R10.2 exact6",
+    "bounded_mechanical_repair": "CURRENT_RULES.md R10.3 Mash-approved new authority exact1; repair exact1 + same-Gate fresh rerun exact1",
+    "receipt": "body-free exact1 mandatory per authority terminal",
+    "result": "conditional when Receipt cannot restore cause / judgment / restart condition",
+    "handoff": "conditional when actor / environment / session changes and 08 + Receipt are insufficient",
+    "standalone_comparison": "conditional when acceptance gate requires independent evidence",
+    "current_state": "08 current-only replace",
+    "milestone_history": "07 milestone-only append",
+    "execution_plan": "route / evidence history; not daily current owner",
+    "automatic_progression": false
   },
   "current_reference_files": {
     "01_cocolon_business_life_funding_source.txt": "product / life-funding premise",

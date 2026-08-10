@@ -40161,3 +40161,33 @@ No next authority was issued or activated. This verification appendix is confine
 07 append-only path. Its own commit and resulting 07 self-identity are intentionally omitted to avoid a
 publication self-reference; both are covered by the following fresh base-to-latest exact6 union and remote
 blob verification.
+
+# 2026-08-10 Phase 4 milestone — current owner / workflow cutover prepared
+
+```text
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+technical_execution: 0
+automatic_progression: false
+```
+
+Phase 4のcurrent owner / workflow postimageを作成しました。この節はmilestone evidenceだけであり、
+current ownerのactivation、GitHub publication、remote postverify、Phase 5完了を主張しません。
+
+Prepared owner separation:
+
+- `08_cycle001_current_state.md`: current Gate、blocker、next exact1の唯一のnavigation owner。
+- `Cocolon_EmlisAI_longterm_roadmap_CURRENT.md`: current product Phaseと長期商品境界。
+- `Cocolon_EmlisAI_NLSv3_CurrentAlignment.md`: original designとcurrent actualのalignment。
+- `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md`: remaining Gate、entry / exit / STOP、distance。
+- original exact3: immutable historical baselines。
+- current same-name Plan: historical evidence map。current next ownerではない。
+- `07_latest_snapshot_diff.md`: milestone-only evidence ledger。daily current navigationではない。
+
+Prepared current stateはP3 Product Read Feel v1、Cycle001 `NOT_ACCEPTED`、G5 exact24 technical GREEN、
+G6 Product Read REJECT、post-G6 shared structural correctionです。latest Gate Bはindependent helperの
+`Path.read_text(newline=...)` API引数不整合でidentity derivation前に停止し、runtime READY / readiness
+creditは`false / 0`です。
+
+次のcorrected-verifier Gate B proposalはinactiveです。Phase 3〜7完了後のPhase 8別承認なしに、
+runtime、pytest、Gate B、Gate C、source、test、fixture、production、Product Readへ進みません。

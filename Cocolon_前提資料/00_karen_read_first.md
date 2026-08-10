@@ -1,12 +1,14 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-08-05"
+revision_date: "2026-08-10"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_full_audit"
-current_authority_owner: "07_latest_snapshot_diff.md"
+current_authority_owner: "08_cycle001_current_state.md"
+current_authority_effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
+milestone_evidence_owner: "07_latest_snapshot_diff.md"
 source_snapshot:
   historical_premise: "Cocolon_前提資料(335).zip"
   historical_Cocolon: "Cocolon(297).zip (217 files / all paths already covered / prior archive bytes unavailable)"
@@ -7895,3 +7897,28 @@ Cocolon作業では、sessionが予定どおり終わることを前提にしま
 5. current GitHub headと対象checkpoint fileのfresh identity。
 
 scratch path、session ID、chat履歴、hashだけを引継ぎとは扱いません。GitHub保存されたbyteをfresh取得して一致確認するまでcontinuityは`CURRENT_CONTINUITY_UNVERIFIED`です。保存はtechnical success、credit、approval、automatic progressionを意味しません。
+
+# 2026-08-10 PHASE 4 PREPARED — current owner overlay
+
+```text
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+automatic_progression: false
+```
+
+上記`effective_when`成立後、Cycle001のcurrent Gate、blocker、next exact1は
+`08_cycle001_current_state.md`だけから解決します。過去の`07` current-owner記述、Planのcurrent
+navigation宣言、Handoff / Receiptの`next`はhistorical evidenceです。
+
+Current owner read order:
+
+1. `08_cycle001_current_state.md` — current navigation exact1。
+2. `Cocolon_EmlisAI_longterm_roadmap_CURRENT.md` — current product Phase / long-term boundary。
+3. `Cocolon_EmlisAI_NLSv3_CurrentAlignment.md` — original design / current actual alignment。
+4. `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md` — remaining route / distance / STOP。
+5. `historical_baselines/emlis_ai/`のoriginal exact3 — immutable normative / historical baseline。
+6. actual source、protected test、body-free Receipt — 実装・実行fact。
+
+`07_latest_snapshot_diff.md`はmilestone-only evidence ledger、current same-name Planはhistorical evidence
+mapです。技術作業はPhase 8の別承認後だけであり、このoverlayはruntime、pytest、Gate、source、
+test、fixture、Product Read、Phase 5 publicationを許可しません。

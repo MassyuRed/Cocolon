@@ -1,15 +1,28 @@
 Cocolon continuous durable work recording / emergency handoff rule
 
+revision_date: 2026-08-10
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+
 1. Do not wait for Mash to ask for a handoff. A session may end through context or tool limits that Mash cannot control.
 2. Local bytes, chat text, subagent output, container cache, and SHA-256 alone are not durable project accumulation.
-3. After every material artifact, review blocker, authority lifecycle transition, execution result, or next-action change, update a GitHub-backed checkpoint while the confirmed facts are still available.
+3. After every material artifact, review blocker, authority lifecycle transition, execution result, or next-action change, update the smallest applicable GitHub-backed canonical owner while the confirmed facts are still available. Do not create every record type for one event.
 4. Preserve the actual bytes or a lossless durable bundle plus a checksum ledger. An ephemeral local path plus hashes is not enough.
 5. Separate current, accepted, invalid historical, superseded, proposed, noncredit, and chat-only facts. Never promote a STOP artifact merely because it was preserved.
 6. Record performed effects and exact zero-effects, evidence that must not be reused, current blockers, and the next safe action.
 7. Public-safe material goes to Cocolon GitHub. Secret/body-full/private evidence stays out of public GitHub and must use an approved durable private owner if reconstruction requires it.
 8. Verify preservation by fetching the remote file bytes, commit changed paths, and final head. A write response alone is not completion.
 9. When a context-limit or forced-session risk appears, stop new technical work and flush the checkpoint immediately without waiting for a Mash instruction.
-10. At the start of every session, read `../14_cocolon_continuous_work_recording_and_emergency_handoff.md` and the latest durable task handoff before resuming.
-11. Correct a durable checkpoint additively: keep the prior checkpoint unchanged and bind the superseding record to its identity and exact error.
+10. At the start of every session, read `../14_cocolon_continuous_work_recording_and_emergency_handoff.md`, current-only `../08_cycle001_current_state.md`, the Current Closure Route, and the latest relevant Receipt. Read a Handoff only when the current owners show that the conditional Handoff is required.
+11. Correct a historical Receipt / Result / Handoff additively: keep the prior record unchanged and bind the superseding record to its identity and exact error. Correct `08` by current-only replacement; preserve its preimage in Git history instead of adding an override suffix.
+12. A body-free Receipt exact1 is mandatory at each authority terminal. It records exactly one primary outcome: `PRODUCT_CREDIT`, `TECHNICAL_CREDIT`, `BLOCKER_NARROWED`, or `ADMINISTRATIVE_ONLY`.
+13. Create a Result only when the Receipt cannot restore cause, judgment, or restart conditions.
+14. Create a Handoff only when actor, environment, or session changes and `08` + Receipt cannot safely resume the work.
+15. Create a standalone comparison only when an acceptance gate explicitly requires independent comparison evidence.
+16. Maintain `08` by current-only replacement, `07` by milestone-only append, and the current Plan as route / evidence history rather than a daily current-state owner.
+17. Keep product destination, original norm + current alignment, Cycle route, current navigation, and execution facts under their separate owners. Do not restore old Plan / `07` / Handoff as current next-action owner.
+18. Record machine GREEN, Product Read, and runtime readiness as distinct claims and credits; never convert one into another.
+19. If `BOUNDED_MECHANICAL_REPAIR` is used, record prior failure closure, the Mash-approved new authority exact1, repair exact1, a new no-reuse root / wheel / helper, same-Gate fresh rerun exact1, and success or terminal STOP. A second failure is `DETOUR_RISK_STOP`.
+20. Do not promote actual implementation or nonconformance into approved design without Mash authority, and do not return routine runtime / manifest / helper / scanner / Receipt monitoring to Mash.
 
 This rule is mandatory for all Cocolon design, implementation, audit, authority, and GitHub-reflection work. Automatic progression remains false.

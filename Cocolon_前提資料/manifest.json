@@ -1,22 +1,46 @@
 {
-  "revision_date": "2026-08-05",
+  "revision_date": "2026-08-10",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
   ],
   "source_mode": "canonical_current_authority_plus_last_full_audit",
-  "canonical_current_authority": "07_latest_snapshot_diff.md",
+  "canonical_current_authority": "08_cycle001_current_state.md",
+  "canonical_current_authority_effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
+  "milestone_evidence_owner": "07_latest_snapshot_diff.md",
   "authority_resolution": {
     "Cocolon_ref": "MassyuRed/Cocolon:main",
-    "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_07_latest_snapshot_diff.md",
+    "Cocolon_authority_file_commit": "resolve_from_github_revision_containing_08_cycle001_current_state.md_after_phase5_checkpoint_b_atomic_current_owner_cutover",
     "Cocolon_full_audit_prewrite": "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
     "Cocolon_postwrite": "resolve_from_github_revision_containing_the_2026_08_02_full_premise_audit_checkpoint",
-    "mashos-api": "MassyuRed/mashos-api:main@315813c7bd3372462de926ddad74df567254a6b5",
-    "verified_at": "2026-08-02 JST",
-    "current_authority": "last complete EOF latest/current section of 07_latest_snapshot_diff.md + tracked ExecutionAndClosurePlan + 11 CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13 CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime + 14 CURRENT continuous durable recording and emergency handoff"
+    "mashos-api": "MassyuRed/mashos-api:main@45bf98f9034261d3adb3e808d6d759f2334e2d25",
+    "verified_at": "2026-08-10 JST",
+    "current_authority": "08_cycle001_current_state.md for current navigation + current derivative exact3 for product/design/route + 07_latest_snapshot_diff.md for milestone evidence only + 11 CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13 CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime + 14 CURRENT continuous durable recording and emergency handoff"
+  },
+  "phase4_current_owner_map": {
+    "status": "PHASE4_PREPARED_NOT_PUBLISHED",
+    "effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
+    "source_heads": {
+      "Cocolon": "2afcfb87422334c4fdba9c895d619a64fd9d252a",
+      "mashos-api": "45bf98f9034261d3adb3e808d6d759f2334e2d25"
+    },
+    "current_navigation": "08_cycle001_current_state.md",
+    "current_long_term_roadmap": "Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+    "current_nls_v3_alignment": "Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+    "current_cycle001_route": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md",
+    "historical_baselines": "historical_baselines/emlis_ai/",
+    "milestone_evidence": "07_latest_snapshot_diff.md",
+    "historical_plan": "../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+    "github_reflection_contract": "11_cocolon_github_transport_and_session_continuity.md",
+    "runtime_continuity_contract": "13_cocolon_work_test_runner_runtime_continuity.md + work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+    "product_workstream": "P3_PRODUCT_READ_FEEL_V1",
+    "cycle001": "NOT_ACCEPTED",
+    "technical_execution_authority": false,
+    "automatic_progression": false
   },
   "update_policy": {
-    "current_authority": "after_each_completed_github_reflection_and_post_write_verification",
+    "current_authority": "replace_08_only_when_current_gate_blocker_next_exact_action_or_owner_state_changes",
+    "milestone_evidence": "append_07_only_on_product_technical_owner_or_workflow_milestones",
     "structural_docs": "only_on_structure_owner_contract_read_order_or_naming_boundary_change",
     "full_audit": "phase_rc_release_gate_milestones",
     "zip_delivery": "only_when_github_reflection_fails; changed_and_new_files_only",
@@ -1501,7 +1525,7 @@
   "docs": [
     {
       "path": "00_karen_read_first.md",
-      "purpose": "華恋用READ FIRST。07 current authority、11の唯一のGitHub反映契約、単独writerのactual environment、current NLS authority stopを最初に確認する。"
+      "purpose": "華恋用READ FIRST。08のcurrent navigation、current roadmap / alignment / Closure Route、11の唯一のGitHub反映契約、単独writerのactual environment、current NLS authority stopを最初に確認する。"
     },
     {
       "path": "01A_cocolon_overall_structure_app_foundation_home.md",
@@ -1537,11 +1561,11 @@
     },
     {
       "path": "04_cocolon_change_theme_checklist.md",
-      "purpose": "変更テーマ別チェックリスト。07 EOF current解決、Recovery、GitHub reflection、retired Guardian、Work runtimeの読む順を確認する。"
+      "purpose": "historicalな変更テーマ別チェックリスト。内部の07-based current resolverはPhase 5 Checkpoint B後のnavigation ownerではなく、current Work startはwork rule 09 + 08 + Current Closure Routeから解決する。"
     },
     {
       "path": "05_cocolon_rule_file_index.md",
-      "purpose": "rule / policy / guard / test索引。07 EOF current、Recovery owner、11/12/13の責任分離、現行作業ルールを索引化する。"
+      "purpose": "rule / policy / guard / test索引。08 current navigation、current roadmap / alignment / Closure Route、Recovery owner、11/12/13の責任分離、現行作業ルールを索引化する。"
     },
     {
       "path": "06_cocolon_filename_change_hold_ledger.md",
@@ -1549,7 +1573,19 @@
     },
     {
       "path": "07_latest_snapshot_diff.md",
-      "purpose": "canonical current authority。GitHub実測head、Work Unit A/Bの状態、write commit scope、target postverification、次authorityを小差分更新する。"
+      "purpose": "milestone-only evidence ledger。Gate正式閉鎖、RC / production owner変更、Product Read重大判断、Cycle acceptance、owner / workflow cutoverだけをappendし、current next actionを所有しない。"
+    },
+    {
+      "path": "08_cycle001_current_state.md",
+      "purpose": "Cycle001のcurrent Gate、blocker、next exact1の唯一のnavigation owner。current-only full replaceで更新する。"
+    },
+    {
+      "path": "Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+      "purpose": "current product workstream、長期商品目的、未完了境界のcurrent derivative owner。"
+    },
+    {
+      "path": "Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+      "purpose": "immutable original NLS v3 designとcurrent actualの8分類alignment owner。"
     },
     {
       "path": "eai714_diff.csv",
@@ -3611,11 +3647,11 @@
     "verified_at": "2026-08-02 JST",
     "snapshot_status": "SOURCE_AUDIT_SNAPSHOT_PRESERVED_TECHNICAL_STATUS_POINTER_ONLY",
     "historical_latest_reflected_scope_2026_08_02": "NLS v3 Step11 Cycle001 Recovery Epoch004 Gate B exact Node Catalogue Observation V2 activation-binding-invalid pre-network STOP; Full R1 UNKNOWN preserved; premise audit consumes no technical authority",
-    "latest_reflected_scope": "CURRENT_POINTER_ONLY: resolve current Step11 status from canonical_current_authority 07_latest_snapshot_diff.md under latest_resolution_rule; this manifest intentionally duplicates no terminal, observation, next-authority token, Receipt identity, counter, or execution fact",
-    "latest_resolution_rule": "last_complete_EOF_latest_or_current_top_level_section_only",
-    "current_step11_state_owner": "07_latest_snapshot_diff.md",
+    "latest_reflected_scope": "CURRENT_POINTER_ONLY: after PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED, resolve current Step11 status from canonical_current_authority 08_cycle001_current_state.md; this manifest intentionally duplicates no terminal, observation, next-authority token, Receipt identity, counter, or execution fact",
+    "latest_resolution_rule": "current_only_full_body_of_08_cycle001_current_state_md",
+    "current_step11_state_owner": "08_cycle001_current_state.md",
     "incident_id": "NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT",
-    "remediation_state": "RESOLVE_FROM_CANONICAL_07_NOT_CLAIMED_BY_MANIFEST",
+    "remediation_state": "RESOLVE_FROM_07_MILESTONE_EVIDENCE_NOT_CURRENT_NAVIGATION_NOT_CLAIMED_BY_MANIFEST",
     "closure_state": "REMEDIATION_CLOSED_WITH_HISTORICAL_PROCESS_VIOLATIONS_RETAINED",
     "automatic_technical_progression": false,
     "technical_pointer_payload_prepared_at": "2026-08-05 JST"
@@ -16415,7 +16451,9 @@
     "verified_at": "2026-07-21 JST"
   },
   "work_test_runner_runtime_continuity_2026_08_01": {
-    "normative_status": "CURRENT",
+    "normative_status": "HISTORICAL_CHECKPOINT_CURRENT_RULE_SUPERSEDED_BY_PHASE4_POSTIMAGE",
+    "current_rule_effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
+    "current_rule_after_effective_boundary": "13_cocolon_work_test_runner_runtime_continuity.md + work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
     "decision_owner": "Mash",
     "operational_owner": "Karen",
     "execution_substrate": "current Work environment",
@@ -16668,12 +16706,15 @@
     ]
   },
   "work_session_persistent_checkpoint_and_handoff_2026_08_05": {
-    "normative_status": "CURRENT",
+    "normative_status": "HISTORICAL_CHECKPOINT_CURRENT_RECORDING_RULE_SUPERSEDED_BY_PHASE4_POSTIMAGE",
+    "current_rule_effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
     "decision_owner": "Mash",
     "operational_owner": "Karen",
     "canonical_owner": "14_cocolon_continuous_work_recording_and_emergency_handoff.md",
     "github_method_owner": "11_cocolon_github_transport_and_session_continuity.md",
-    "latest_state_owner": "07_latest_snapshot_diff.md",
+    "historical_latest_state_owner_at_checkpoint": "07_latest_snapshot_diff.md",
+    "current_navigation_after_effective_boundary": "08_cycle001_current_state.md",
+    "milestone_evidence_after_effective_boundary": "07_latest_snapshot_diff.md",
     "task_handoff": "../EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/Handoff.md",
     "artifact_ledger": "../EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifact_ledger.tsv",
     "artifact_directory": "../EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/",

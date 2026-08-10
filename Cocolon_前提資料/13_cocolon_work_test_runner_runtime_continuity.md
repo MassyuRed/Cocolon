@@ -1,8 +1,10 @@
 ---
 doc_id: cocolon_work_test_runner_runtime_continuity
 title: "Cocolon Work test-runner runtime continuity contract"
-revision_date: "2026-08-02"
-status: "CURRENT_NORMATIVE_CONTRACT"
+revision_date: "2026-08-10"
+status: "PHASE4_PREPARED_NOT_PUBLISHED"
+effective_boundary: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
+effective_status_after_boundary: "CURRENT_NORMATIVE_CONTRACT"
 scope: "WORK_LOCAL_PYTHON_PYTEST_TEST_RUNNER_ONLY"
 decision_owner: "Mash"
 operation_owner: "Karen"
@@ -31,6 +33,30 @@ GitHub反映方法と完了判定の正本は、引き続き
 華恋用の強制実行規則は
 `work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`
 です。技術定義は本書、毎回の実行checkは`16`を正とし、全文を複製しません。
+
+### 0.1 Phase 4 preparation / effect boundary
+
+このrevisionはPhase 4で作成したpostimageです。Phase 5 Checkpoint Bのatomic
+current-owner cutoverがremote postverifyされるまでは`PHASE4_PREPARED_NOT_PUBLISHED`
+であり、technical authority、runtime実行、retry、GitHub writeを発生させません。
+
+Checkpoint B postverify後にだけ、本revisionを`CURRENT_NORMATIVE_CONTRACT`として
+使用します。それ以前はremote predecessor ruleが有効であり、local postimageを
+先行適用しません。
+
+### 0.2 Cycle001 navigation owner separation
+
+Phase 5 Checkpoint B effective boundary後、Cycle001のownerは次に分離します。
+
+- `08_cycle001_current_state.md`: current Gate、blocker、next exact1を選ぶ唯一の
+  current navigation owner。
+- `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md`:
+  remaining Gate sequence、entry / exit / STOP、retired routeのowner。
+- `07_latest_snapshot_diff.md`: 節目履歴とevidence pointer。
+- current same-name Execution and Closure Plan: historical evidence map。
+
+本書はtest-runner runtime contractだけを所有します。`07`、Plan、historical
+Handoff / Receiptの`next authority`からcurrent actionを選びません。
 
 ## 1. 固定owner
 
@@ -302,6 +328,96 @@ authority-bound local helperのraw hash、creation / execution count、適用し
 procedure blob / raw hashを記録します。local helper本体やabsolute pathはGitHubへ
 残さず、そのhelperの消失時はtracked procedureからnew helperとして再作成します。
 
+### 7.2 actual entrypoint / read path pre-freeze preflight
+
+materializer、independent verifier、launcherをfreezeする前、かつacquisition、
+materialization、readiness、target effectの前に、次をexactにpreflightします。
+
+1. actual entrypoint owner identity、callable名、positional / keyword-only parameter、
+   required / optional field、default shape、return shape、exact invocation formを
+   actual implementationから導出し、call signatureとしてpre-freezeする。
+2. helper / launcherをcompile・importし、freeze対象と同じactual entrypointを
+   authority-local synthetic file exact1に対して実際にcallする。importだけ、
+   symbol存在だけ、mock entrypointだけではpreflight PASSにしない。
+3. synthetic fileはproduction inputと同じreader、同じcall chain、同じargument
+   constructionで実読する。preflight専用のalternate readerやread shortcutで
+   production read pathを代替しない。
+4. synthetic fileについてraw bytes、byte count、SHA-256、strict UTF-8 decode、
+   newline form / count、final LFを固定する。raw bytes identityとactual text readを
+   別々に確認し、newline normalizationの有無と期待値を明示する。
+5. `Path.read_text`または同等APIを使う場合、actual runtimeで受理される引数だけを
+   call signatureへ固定する。unsupported `newline`等のargumentを渡さないことを
+   actual callで確認する。
+6. actual outputをfrozen schemaへvalidateする。required / optional key、type、enum、
+   cardinality、ordering、empty / NOT_APPLICABLE表現、unknown-field policy、
+   body-free boundaryを確認する。serialization成功だけではPASSにしない。
+
+synthetic fileはprivate authority-local preflight materialであり、production fixture、
+sample、protected test、acceptance denominatorへ加えません。synthetic bodyまたは
+absolute locatorをGitHubへ記録しません。
+
+一項目でも不成立ならhelper / launcherをfreezeせず、runtime / target effect 0のまま
+`PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`としてSTOPします。
+
+### 7.3 bounded mechanical repair
+
+bounded mechanical repairは、closed authority内のretryではありません。prior failure
+を閉じた後にMash様が明示承認した**new authority exact1**だけで使用できます。
+
+対象reasonは次のexact4だけです。
+
+```text
+SYNTAX_ERROR
+API_ARGUMENT_ERROR
+SERIALIZATION_FORMAT_ERROR
+COMMAND_CONSTRUCTION_ERROR
+```
+
+全条件:
+
+- repair対象はhelperまたはlauncher exact1だけ。
+- same Gate、same purpose、same contractのまま。
+- product semantics、test意味、acceptance、production、protected test、fixture、sample、
+  target、denominator、comparator、input identityを変更しない。
+- dependency projection、network route / count、runtime roleを変更しない。
+- source / test / fixture / sampleの変更や、別系列helper / scanner / carrierの追加で
+  scopeを広げない。
+
+new authorityが許可できるsequenceは次の一回だけです。
+
+```text
+mechanical repair exact1
+-> repaired helper / launcher pre-freeze preflight
+-> fully fresh root / wheel / helper
+-> same Gate fresh rerun exact1
+-> success or terminal STOP
+```
+
+prior root、wheel、helper、readiness、closed authorityを再利用しません。fresh rerunを
+同authority retry、reactivation、credit inheritanceとして数えません。
+
+repair後のfresh rerunが再び失敗した場合、reason familyを問わずsecond repair、
+third launch、alternate helper、fallbackを0にし、次でSTOPします。
+
+```text
+DETOUR_RISK_STOP
+NO_SECOND_REPAIR
+CURRENT_AUTHORITY_STOP
+```
+
+### 7.4 retry / no-retry vocabulary
+
+本書の`retry禁止`は、同じclosed / consumed authority、同じfailed instance、同じ
+root / wheel / helper、fallback interpreterで再実行することを禁止します。
+
+§7.3の`fresh rerun exact1`は、new authority、same Gate、mechanical repair exact1、
+fully fresh root / wheel / helperという全条件を満たす場合だけの別operationです。
+これはretry例外ではありません。
+
+target launch requestをOSへ渡してauthorityがconsumedになった後のfailure、semantic
+failure、test failure、identity / comparator / denominator conflict、dependency / network /
+runtime-role changeはbounded mechanical repair対象外であり、従来どおりno retryです。
+
 ## 8. Gate C: TARGET_EXECUTION_ADMISSION
 
 targeted authorityは、current-session runtime readinessが別checkpointでVALIDと
@@ -413,17 +529,53 @@ catalogue observation V2はactivation binding invalidによりpre-network STOP�
 probe、engine、verifier/helper、Gate B runtime、pytest、target executionはexact0、Full R1は
 `UNKNOWN_PRESERVED`です。
 
-最新状態と次のdesign-only authorityは07 / tracked Planを正本とします。no retry、no fallback、
+上記effective boundary成立後の最新状態は`08_cycle001_current_state.md`、remaining routeは
+Current Closure Routeを正本とします。`07` / tracked Planはevidence / historical ownerです。
+no retry、no fallback、
 no historical recredit、Mash様へのruntime path / venv / pytest要求禁止は維持します。
 
 ## 13. 2026-08-05 current application pointer correction — exact47 incident remediation
 
 - incident id: `NLSV3_STEP11_CYCLE001_20260804_EXACT47_CROSS_AUDIT`
-- payload role: `STALE_TECHNICAL_SNAPSHOT_SUPERSESSION_POINTER_ONLY`; global remediation state is resolved only from canonical 07 and is not claimed by this file; closure state: `NOT_CLOSED`.
-- §12 is retained byte-for-byte as the 2026-08-02 historical application snapshot. Its exact-Node catalogue observation V2 terminal and related current-state direction are `HISTORICAL_SUPERSEDED_NON_CURRENT`.
-- §§0–10 and the front-matter status `CURRENT_NORMATIVE_CONTRACT` remain current for Work-local test-runner runtime continuity; this correction does not supersede or relax them.
-- Resolve the current Step11 technical state only from the last complete EOF-side `CURRENT` H1 in `Cocolon_前提資料/07_latest_snapshot_diff.md`, then use the tracked Step11 ExecutionAndClosurePlan for detail.
+- payload role: `STALE_TECHNICAL_SNAPSHOT_SUPERSESSION_POINTER_ONLY`; the exact47 administrative remediation / closure history is resolved from `07` as milestone evidence and is not claimed by this file. That historical owner does not select the current Gate or next action; closure state at this 2026-08-05 checkpoint: `NOT_CLOSED`.
+- §12 remains the 2026-08-02 historical application snapshot except for its closing current-navigation pointer, which this Phase 4 postimage corrects to `08` / Current Closure Route. Its exact-Node catalogue observation V2 terminal and prior current-state direction are `HISTORICAL_SUPERSEDED_NON_CURRENT`.
+- §§0–10 remain the Work-local test-runner runtime continuity contract; after the stated effective boundary, the front-matter `effective_status_after_boundary: CURRENT_NORMATIVE_CONTRACT` applies. This correction does not supersede or relax them.
+- After the stated effective boundary, resolve the current Step11 position only from `Cocolon_前提資料/08_cycle001_current_state.md`, then use the Current Closure Route for remaining Gate detail. `07` and the tracked Step11 ExecutionAndClosurePlan are milestone / historical evidence only.
 - This is a pointer only: no terminal, authority token, Receipt identity, counter, or execution fact is duplicated, and this file is not a technical-current owner.
 - technical activation / admission / consumption: `0 / 0 / 0`; V15 start authority: `0`.
 - runtime / pytest / target / private analyzer / implementation / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0 / 0`.
 - Only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.
+
+## 14. Phase 4 current-owner and mechanical-preflight cutover candidate
+
+本sectionはPhase 5 Checkpoint B remote postverify後に§13のcurrent-navigation pointerと
+front-matter statusに関する旧記述をsupersedeします。§13のincident事実と§§0〜10の
+historical observationsは書き換えません。
+
+effective boundary後のroutingは次です。
+
+```text
+current position / blocker / next exact1:
+  Cocolon_前提資料/08_cycle001_current_state.md
+
+remaining Gate sequence / entry / exit / STOP / retired route:
+  EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md
+
+milestone / evidence history:
+  Cocolon_前提資料/07_latest_snapshot_diff.md
+
+historical evidence map:
+  EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md
+```
+
+actual entrypoint signature、production-same read path synthetic execution、UTF-8 /
+newline / bytes、output schemaのpre-freeze proofがないhelper / launcherをfreezeしません。
+mechanical failureの修正は§7.3のnew authority exact1だけです。
+
+```text
+PHASE4_PREPARED_NOT_PUBLISHED
+EFFECTIVE_ONLY_AFTER_PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+TECHNICAL_EXECUTION_0
+GITHUB_WRITE_0
+AUTOMATIC_PROGRESSION_FALSE
+```

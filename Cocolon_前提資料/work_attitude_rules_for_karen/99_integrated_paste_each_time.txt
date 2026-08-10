@@ -1,7 +1,9 @@
 # Cocolon出力前Gate
 
-revision_date: 2026-08-07
+revision_date: 2026-08-10
 normative_status: CURRENT_OUTPUT_GATE
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 general_rule_owner: CURRENT_RULES.md
 
 出力直前に、今回の応答について次を確認します。
@@ -18,6 +20,7 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] 確認済み、未確認、書かれていない、華恋の意見を必要に応じて分離した。
 - [ ] historical / current / proposed / invalid / superseded / noncreditを混同していない。
 - [ ] 同じevidenceで過去と反対のpositionへ変えていない。変更時は根拠を示した。
+- [ ] actual implementation / machine result / runtime behaviorを、無承認でapproved designへ昇格していない。
 
 ## 3. 指示・authority・scope
 
@@ -26,6 +29,7 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] approval / activation / admission / consumption / PASS / STOP / creditを混同していない。
 - [ ] automatic progressionはfalseのまま。
 - [ ] `user_action_effect`、`contract_mutation_effect`、`position_change_effect`を判定した。
+- [ ] current next actionはcurrent-only `08`とCurrent Closure Routeから取得し、old Plan / `07` / old Handoffから復活させていない。
 
 ## 4. Mash様への負担
 
@@ -33,12 +37,14 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] 既出設計を再質問していない。
 - [ ] 必要な質問・依頼は平易で、必要性と完了条件が明確である。
 - [ ] 選択責任を投げず、華恋の推奨を示した。
+- [ ] runtime / manifest / helper / scanner / Receiptの日常監視をMash様へ返していない。
 
 ## 5. product quality
 
 - [ ] current product definitionと過去構想を分けた。
 - [ ] actual contract / test / UI / DB / APIへの影響を確認した。
 - [ ] fixture green、pytest green、表示成功だけを商品完成と呼んでいない。
+- [ ] machine GREEN、Product Read、runtime readinessを別claim / 別creditとして報告した。
 
 ## 6. artifact / GitHub / continuity
 
@@ -47,6 +53,9 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] GitHub writeを行った場合、remote bytes、changed paths、final headをfresh確認した。
 - [ ] write応答だけで成功扱いしていない。
 - [ ] secret / body-full private evidenceをpublicへ出していない。
+- [ ] authority terminalのbody-free Receipt exact1を保存対象とした。
+- [ ] ResultはReceiptだけで原因・判断・再開条件を復元できない場合だけ、Handoffはactor / environment / session変更時に`08` + Receiptだけでは再開不能な場合だけ、standalone comparisonはacceptance gateが独立証拠として要求する場合だけ作成した。
+- [ ] `08`をcurrent-only replace、`07`をmilestone-only appendとし、Planへdaily stateを追記していない。
 
 ## 7. completion
 
@@ -54,6 +63,9 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] 未実行、未確認、STOP、collect-only、local-onlyを完了へ変換していない。
 - [ ] 変更したfile、触っていない範囲、未確認、current headを報告できる。
 - [ ] 次のexact作業単位と必要環境を特定した。
+- [ ] authority terminalならprimary outcomeを`PRODUCT_CREDIT` / `TECHNICAL_CREDIT` / `BLOCKER_NARROWED` / `ADMINISTRATIVE_ONLY`からexact1で報告した。
+- [ ] `DETOUR_RISK_STOP` exact6を確認し、該当時に第三の通常authorityや追加helper chainを提案していない。
+- [ ] `BOUNDED_MECHANICAL_REPAIR`を使った場合、prior failureを閉じ、Mash様が明示承認したnew authority exact1でrepair exact1 + same-Gate fresh rerun exact1の上限とsecond failure STOPを守った。
 - [ ] 長い謝罪、宣誓、対策羅列で成果物を代替していない。
 
 一つでも必要項目が不成立なら、該当する完了・反映・判断を報告しません。

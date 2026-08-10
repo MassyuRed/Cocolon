@@ -1,12 +1,31 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-08-09
+revision_date: 2026-08-10
 normative_status: CURRENT_EXECUTION_GATE
+status: PHASE4_PREPARED_NOT_PUBLISHED
+effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 general_rule_owner: CURRENT_RULES.md
 
 このchecklistは、全ruleの再掲ではありません。
 今回の作業で必要なrule、source、authority、durable ownerを実際に選び、開始可否を判定するGateです。
 一つでも必要項目が未成立なら、その項目に依存する作業を開始しません。
+
+## 0. exact start record
+
+Workを起動する前に、次のexact10 fieldsをcurrent actualで埋める。
+
+- [ ] `product_destination`: 最終商品目的と今回の接続を平易に示した。
+- [ ] `current_gate_or_subgate`: Current Closure Route上のexact1へ対応付けた。
+- [ ] `exact_work`: 今回行う一つのbounded作業を示した。
+- [ ] `success_credit`: 成功時に増えるprimary creditを示した。
+- [ ] `completion_condition`: 今回の完了を観測可能に定義した。
+- [ ] `stop_condition`: terminal STOPと`DETOUR_RISK_STOP`境界を示した。
+- [ ] `prohibited_scope`: 変更・実行・再利用してはいけない対象を示した。
+- [ ] `next_product_read_or_mash_decision_point`: 次にProduct ReadまたはMash判断が必要になる地点を示した。
+- [ ] `current_source_test_receipt`: actual source / protected test / latest relevant Receiptをpathとidentityで固定した。
+- [ ] `current_docs_and_heads`: current roadmap / alignment / Closure Route / `08`とCocolon / mashos-api headsを固定した。
+
+一つでも具体化できなければ、Workを起動せず`START_ALLOWED`を出さない。
 
 ## A. Model / environment
 
@@ -30,10 +49,12 @@ general_rule_owner: CURRENT_RULES.md
 
 - [ ] Karen-Diaryの`00_READ_FIRST.md`、`memory/karen_operating_principles.md`、`memory/mash_and_karen.md`を確認した。
 - [ ] `00_read_first.txt`と`CURRENT_RULES.md`を確認した。
-- [ ] `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionとlatest durable handoffを確認した。
+- [ ] `../08_cycle001_current_state.md`のcurrent-only本文を唯一のcurrent navigation ownerとして確認した。
+- [ ] current long-term roadmap、NLS v3 Current Alignment、Cycle001 Current Closure Routeから今回に必要なnorm / routeを確認した。
 - [ ] Cocolon / mashos-api current headを確認した。
-- [ ] 対象前提資料とactual file / contract / test / logを確認した。
+- [ ] `08` / Current Closure Routeのevidence pointerから、必要なactual source / contract / protected test / latest Receiptだけを確認した。
 - [ ] 指定predecessor、local materialization、未push overlayを分離した。
+- [ ] `07`はmilestone history、Planはroute / evidence mapであり、daily current next action ownerとして読んでいない。
 
 ## D. authority / effect
 
@@ -44,6 +65,10 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] `contract_mutation_effect`の有無を判定した。
 - [ ] `position_change_effect`の有無を判定した。
 - [ ] scope外read / write / execution / private accessを混ぜていない。
+- [ ] actual implementation / machine resultを無承認でapproved designへ昇格していない。
+- [ ] authority terminalで付与可能なprimary outcome exact4を確認し、複数primaryを予定していない。
+- [ ] `DETOUR_RISK_STOP` exact6条件を確認し、一つでも成立しているのに通常authorityを追加していない。
+- [ ] mechanical repairを含む場合、prior failure closure、Mash様が明示承認したnew authority exact1、`BOUNDED_MECHANICAL_REPAIR`全条件、repair exact1、fresh rerun exact1、second failure STOPを事前固定した。
 
 ## E. specialized rule activation
 
@@ -69,12 +94,14 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] 内部設計用語を平易な人間の言葉へ翻訳した。
 - [ ] 操作依頼では、原因、必要性、代替不能理由、端末、開始画面、手順、禁止事項、完了条件、華恋が引き取る範囲を示す。
 - [ ] 選択肢を投げず、推奨手順を一つ選んだ。
+- [ ] runtime、manifest、helper、scanner、Receiptの日常監視をMash様へ戻していない。
 
 ## G. product / contract non-break
 
 - [ ] RN表示、API、DB write、access、subscription、account delete、user data protectionへの影響を確認した。
 - [ ] DB physical name、legacy façade、route、response keyを勝手に変えない。
 - [ ] fixture / test greenだけで商品品質合格としない。
+- [ ] machine GREEN、Product Read、runtime readinessのclaim / denominator / creditを分離した。
 - [ ] current product definitionと過去構想を分けた。
 
 ## H. artifact / GitHub / continuity
@@ -85,6 +112,9 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] write前のlatest head / target path / preimageを確認する。
 - [ ] write後のremote bytes / changed paths / final headを確認する。
 - [ ] secret / body-full private evidenceをpublic GitHubへ出さない。
+- [ ] authority terminalのbody-free Receipt exact1を必須ownerとして予定した。
+- [ ] Result、Handoff、standalone comparisonは各conditional条件が成立する場合だけ予定した。
+- [ ] `08`はcurrent-only replace、`07`はmilestone-only append、Planはdaily current ownerではない境界を維持した。
 
 ## I. Cycle001 current-state gate
 
