@@ -39713,3 +39713,46 @@ All preimages and prepared bytes are LF-only, final-LF true, mode `100644`. Publ
 approved Cocolon exact6. mashos-api, target/protected test, production, fixture/sample/corpus, runtime, and
 all downstream gates remain unchanged. A separate postwrite verification appendix will record remote byte
 equality, exact6 union, latest inclusion, and final heads without issuing a next authority.
+
+## 2026-08-10 publication verification — G4 Gate B recovery V1 typed STOP
+
+The exact6 write group started at `6d14b1dad31407999a27918873d6aa69e248c456` and reached terminal write
+head `6b23a774566f47c62ad7255c8a7ecbd2d4b327fe`. Fresh GitHub comparison reported ahead6,
+behind0, total commits6, and changed-path union exact6. Each write commit changed one approved path only:
+
+```text
+5434f60e46557011fbc5251b406d2ab9de056f87  Result
+b63776054142bd819c2d01798b8f3666c9cfd8e3  Receipt
+8d20a40fcdec9f2cd5dbbe0607fe596741bfad36  Handoff
+9c9dd5aa134a8005705096319d4ab14a1b8fdb2e  Plan append
+12aecb40770b5818af8661eb016b43538e23efc5  07 latest checkpoint append
+6b23a774566f47c62ad7255c8a7ecbd2d4b327fe  08 current-navigation append
+```
+
+Prewrite manifest raw SHA-256 was
+`d79d18cc73324a07848fed527992a334d79f1e652da9610fcb7170ef837e5c7f`. New paths were absent and
+modified preimage blobs matched before the first write.
+
+Final path / blob / prepared-byte identity at terminal write head:
+
+| Role | Blob | Prepared bytes | Prepared LF | Prepared raw SHA-256 | Fresh equality |
+|---|---|---:|---:|---|---|
+| Result | `943db07ae0ce1f33a6a1b152d04acf5b30236d2e` | 12803 | 295 | `59a65dad6b4ca2838d908cc0f8136aba3e291adcb5819d203a7819495586edaa` | exact |
+| Receipt | `5e6e7c08787485ec34de09eb290b08835cbdca11` | 17198 | 354 | `8d47e9f8f1fcbdf00ffac5c39b4d1eeb8c3843520504e9bc98da46a9f3bbcaba` | exact |
+| Handoff | `4190d2f05b9b2d638436b7786ce304576dd20a44` | 8295 | 196 | `bc340088a139f6928e43caed02e5351c9b50a3300b85070d442431ff5957ca57` | exact |
+| Plan | `6b1f68cda17e9fdd266220c83df3884710639303` | 1212602 | 19164 | `5f12a54c1a692f17a125602ada4822b23f14288ae2e7c85a5a4e4c1bafdff222` | exact preimage + blank LF + append |
+| 07 | `a73ee56b925ad9a39f48280fc655c156391265a6` | 2401404 | 39715 | `d691bfbd24f979180740219604c5923f56bf17594c4ef50fdde8809c57f2be1b` | exact preimage + blank LF + checkpoint |
+| 08 | `96e6a1d0a83d6b234e2f63188a234192d45f1357` | 53712 | 1549 | `bee076fe3e0a9f62fea63d54019bd22c385a6a9db9f12e43ebc50dcd3b8823e7` | exact preimage + blank LF + navigation |
+
+All six were fresh-refetched by blob and compared byte-for-byte. They are LF-only, final-LF true, mode
+`100644`. The compare statuses were modified for Plan/07/08 and added for new3, with deletions 0 and renames
+0. Unauthorized paths and mashos-api changed paths were 0. mashos-api main remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`.
+
+Cocolon terminal write head was latest main at fresh verification. The current state is the typed STOP with
+exactly-one cause `FAILED_ROOT_NOT_AVAILABLE_FOR_CAUSAL_DIAGNOSIS`; Stage R1 and runtime READY admission
+remain 0. No next authority was issued.
+
+This verification appendix stays on the already-approved 07 path. Its own commit identity and resulting 07
+self-identity are omitted to avoid a publication self-reference; the appendix commit is included in the
+subsequent fresh base-to-latest exact6 union and remote-byte verification.
