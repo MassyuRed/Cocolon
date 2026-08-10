@@ -1777,3 +1777,58 @@ NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+### 11.17 2026-08-10 current override — Gate B comparator V2 independent identity derivation invalid
+
+§11.16のV2 comparator決定はそのままcurrentである。canonical schemaは
+`NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1`、current expected identityは
+`0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5`であり、変更0である。
+
+Mash様が別承認した
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1`
+はactivation exact1、consumption exact1で実行された。configured acquisition/network `1/1`、accepted
+wheel exact5、fresh rematerialization/venv/install `1/1/1`、owner full identity exact1、pytest 8.4.1
+probe exact1、required-role smoke process/direct-load/API/effect `1/3/0/0`まではVALIDであった。ownerは
+installed-file manifest `0eba095e...`、canonical rows/eligible/owned `482/482/482`、全mismatch family 0
+を再導出した。
+
+その後、freeze済みindependent verifierがexact1 executionでidentity導出前に失敗した。原因はhelper
+内の`Path.read_text`へのunsupported `newline` argumentである。current typed reasonはexactly-one
+`INDEPENDENT_IDENTITY_DERIVATION_INVALID`、safe detailは
+`INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID`である。
+
+同一authority内のhelper修正、再実行、retry、fallback、interpreter switch、root repair/deletion、
+re-acquisitionは0である。owner-independent reconciliation、pre/post full-root reconciliation、readiness
+observation、runtime READY admission、readiness creditは0/not derivedである。fresh rootは
+`FAILED_CLOSED_UNADMITTED_SESSION_LOCAL_ROOT`であり、future authorityは再利用できない。
+
+Current authority lifecycle:
+
+`CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE`
+
+Cycle001は`NOT_ACCEPTED`のまま。Gate C、protected-test append、target import/collection/call、targeted
+pytest、production、mashos-api write、Product Read、G5/G6/G7、acceptanceは全て0である。
+
+Current artifact exact3:
+
+- Result blob `f24b2b3b80bb2ba284d9f764b75a68dfdd31ccbf`, raw `4af089e307187972c2b883f5200a58fc49e6b33ad8cf31f4c7afd4e7703c4972`
+- Receipt blob `c2a0ca0c41b4c043d2195b3db1889a76aaab2933`, raw `dc4ac41272e54686754949dcda27582c5801b0fd20e5e1cb2579e38cd7d6af63`, logical `426d65a146c183fa753b07f7bee97b66b0e8e1102cf26093fac27ab9f63788ae`
+- Handoff blob `4816dd05899ce5ffc1037c8a1cbfb1152a2164b7`, raw `d1c48e002822dde760a5d68f1c9a80240842e6d9926f9f13078a4318bc8b4062`
+
+次のminimal proposalは
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2`。
+stateは`DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`である。承認された場合もcorrected helperを
+effect前にfreezeし、root/wheel/helper/readinessを再利用せず、新しいexact5 Gate Bを一度だけ行う。
+Gate C以降は含まない。
+
+```text
+CURRENT_COMPARATOR_V2_0EBA095E_UNCHANGED
+OWNER_MANIFEST_MATCH_AND_PROBES_VALID_NOT_ADMITTED
+INDEPENDENT_IDENTITY_DERIVATION_INVALID
+FAILED_ROOT_UNADMITTED_NO_REUSE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+NEXT_CORRECTED_INDEPENDENT_VERIFIER_FRESH_GATE_B_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```

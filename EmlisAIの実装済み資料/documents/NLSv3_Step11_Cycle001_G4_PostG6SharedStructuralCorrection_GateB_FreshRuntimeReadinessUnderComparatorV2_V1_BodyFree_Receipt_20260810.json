@@ -1,0 +1,455 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4.post_g6.gate_b.fresh_runtime_readiness_under_comparator_v2.independent_identity_derivation_invalid.v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1_INDEPENDENT_IDENTITY_DERIVATION_INVALID_20260810",
+  "observed_at_jst": "2026-08-10T17:06:39+09:00",
+  "authority": {
+    "id": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1",
+    "activation_count": 1,
+    "consumption_count": 1,
+    "lifecycle": "CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE",
+    "automatic_progression": false,
+    "historical_result_reparse": false,
+    "credit_change": false
+  },
+  "entry": {
+    "cocolon": {
+      "repository": "MassyuRed/Cocolon",
+      "commit_sha1": "f07e56478ed6429d62fb4415e59de85e57d7a8e4",
+      "tree_sha1": "990a2aea4b82946964d43cef92a01fdac4f45ac2"
+    },
+    "mashos_api": {
+      "repository": "MassyuRed/mashos-api",
+      "commit_sha1": "45bf98f9034261d3adb3e808d6d759f2334e2d25",
+      "tree_sha1": "23f1684ed5430cafef955d7af9fc6bde75a4c62f"
+    },
+    "current_v2_owner": {
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_InstalledFileManifest_VersionedCanonicalOwner_V2_20260810.json",
+      "git_blob_sha1": "3b9b332b1eea402dc18b7e7ceb8528e8f3bac678",
+      "raw_sha256": "9141231049a10a1d04741d66d6cab09ff3a831bd7bb096f1212f382ac381a808"
+    },
+    "canonical_installed_manifest_schema": "NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1",
+    "current_expected_installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+    "historical_noncurrent_expected_sha256": "9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6"
+  },
+  "preactivation_contract": {
+    "schema_frozen_before_effects": true,
+    "bytes": 6671,
+    "lf": 97,
+    "raw_sha256": "ca5a890d5de0e53cde126c41a8bd28babdc90198a2ccf5ef9b87d474b9132816",
+    "full_root_manifest_formula_frozen": true,
+    "higher_identity_formulas_frozen": true,
+    "runtime_identity_compared_field_count": 19,
+    "runtime_identity_compared_field_set_frozen": true,
+    "typed_reason_map_frozen": true,
+    "stage_order_frozen": true,
+    "output_path_exact6_frozen": true,
+    "static_syntax_check_count": 1,
+    "static_syntax_checked_helper_count": 5,
+    "result": "VALID"
+  },
+  "frozen_inputs": {
+    "formal_lock": {
+      "repository": "MassyuRed/mashos-api",
+      "path": "ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json",
+      "git_blob_sha1": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+      "raw_sha256": "9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787",
+      "logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4"
+    },
+    "corrected_exact7_projection": {
+      "bytes": 2185,
+      "raw_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e"
+    },
+    "requirements_exact5": {
+      "bytes": 473,
+      "lf": 5,
+      "raw_sha256": "4f7218509a20e42850afe75597f2abfdf447035001847621d4637faa246065f1"
+    },
+    "accepted_wheel_manifest": {
+      "count": 5,
+      "total_bytes": 1724842,
+      "raw_sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d"
+    },
+    "distribution_closure": {
+      "count": 5,
+      "raw_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c"
+    },
+    "base_runtime": {
+      "implementation": "CPython",
+      "version": "3.12.13",
+      "platform": "linux-x86_64",
+      "resolved_interpreter_executable_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488"
+    },
+    "environment_policy_sha256": "8a43751b49a8db1d024063608405f9b169e829f3c0be3488433b31800d44b1a4",
+    "required_role_path_ordered_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+    "tracked_procedure_exact2": [
+      {
+        "path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+        "git_blob_sha1": "ea7f96221846e5614431296e00ac481cc00e00a2",
+        "raw_sha256": "42fcd4d65b0d21b5e41659b6329c55c14ed42c0270838f13be6102b351db7ac9"
+      },
+      {
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+        "git_blob_sha1": "5c3b7dd03c84a84a2717f57f0d2c99c39b2ed6d8",
+        "raw_sha256": "895ea1f130e331d4e89f857835b4477d949c1ff63c0adea11276bc97b4c717b2"
+      }
+    ],
+    "required_role_sources": [
+      {
+        "role": "OWNER",
+        "path": "ai/services/ai_inference/emlis_ai_recovery_epoch002_sequence_ledger_v3.py",
+        "git_blob_sha1": "044287009b1fd155689bded46628b8fc91b73c06",
+        "raw_sha256": "13aa675be1356ab524a69066f861c2d27a8d8e32f0d690811b2b3308f199057d"
+      },
+      {
+        "role": "INDEPENDENT",
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_closure_receipt_verify.py",
+        "git_blob_sha1": "0fae71a29f8fe44d31c18af42aaf53cc34beac6c",
+        "raw_sha256": "634ddb104e0b7630c695e032bb54726912fcfc9ad4351ab0eb6da7901671fc2b"
+      },
+      {
+        "role": "PARENT",
+        "path": "ai/tools/emlis_nls_v3_recovery_epoch002_formal_parent_orchestrator_v3.py",
+        "git_blob_sha1": "fdea3dc18d81ca9ce1e3a842e802d21d0019a8c5",
+        "raw_sha256": "14fedde39823d90253a6adec6fc05ccde29f05a659edbac7edc007b28eab5793"
+      }
+    ]
+  },
+  "helpers": {
+    "authority_bound_new_helper_count": 5,
+    "authority_bound_new_helper_total_creation_count": 5,
+    "authority_bound_new_helper_total_execution_count": 5,
+    "authority_bound_helper_reuse_count": 0,
+    "helper_mutation_after_freeze_count": 0,
+    "roles": [
+      {
+        "role": "PROJECTION_VERIFIER",
+        "bytes": 5589,
+        "raw_sha256": "7c3a6e3fe19f05af0a354339a4da57c840bbb69d00c25ca9fc1d2701c024b4b8",
+        "creation_count": 1,
+        "execution_count": 1,
+        "result": "VALID"
+      },
+      {
+        "role": "MATERIALIZER",
+        "bytes": 11578,
+        "raw_sha256": "ba4f1cd757c75b65178f7de63e2c6eed1068f422209bb2204e3c2df8bdb94c6e",
+        "creation_count": 1,
+        "execution_count": 1,
+        "result": "VALID"
+      },
+      {
+        "role": "OWNER_IDENTITY_VERIFIER",
+        "bytes": 19306,
+        "raw_sha256": "81bbc37074754270297ac6bdebd9b8a7e045a94fe4c46ddaae2dfadc99e74ec6",
+        "creation_count": 1,
+        "execution_count": 1,
+        "result": "VALID"
+      },
+      {
+        "role": "INDEPENDENT_IDENTITY_VERIFIER",
+        "bytes": 17809,
+        "raw_sha256": "dc2e8c3141a67724f4bc2cfd914fffb5795283111791a63124ba54d780ccb71c",
+        "creation_count": 1,
+        "execution_count": 1,
+        "result": "INVALID"
+      },
+      {
+        "role": "ROLE_SMOKE",
+        "bytes": 4032,
+        "raw_sha256": "f649864f6839e17bf861d8ab67ceb7379ccc3da64271a2a5d7386374f0e6be05",
+        "creation_count": 1,
+        "execution_count": 1,
+        "result": "VALID"
+      }
+    ],
+    "helper_body_published": false,
+    "absolute_helper_path_published": false
+  },
+  "acquisition": {
+    "configured_route_acquisition_count": 1,
+    "network_process_count": 1,
+    "exit_code": 0,
+    "path_free_argv_sha256": "ce1b12c2ce238aad9c462e99a86ce12c70f742d955b9ab2c82cf3bc3c9279947",
+    "accepted_wheel_count": 5,
+    "accepted_wheel_total_bytes": 1724842,
+    "accepted_wheel_manifest_sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d",
+    "rejected_candidate_count": 0,
+    "sdist_count": 0,
+    "build_count": 0,
+    "substitution_count": 0,
+    "unconfigured_source_count": 0,
+    "post_acceptance_package_index_access_count": 0,
+    "private_combined_output_bytes": 1356,
+    "private_combined_output_sha256": "e6f9e0fa85ecb5c2886cf6097591e69f04b6192a1e03e32bfcd86a1f2359a104"
+  },
+  "materialization": {
+    "fresh_root_nonexistent_before": true,
+    "fresh_isolated_rematerialization_count": 1,
+    "materializer_execution_count": 1,
+    "venv_creation_count": 1,
+    "venv_argv_contract": "--without-pip --copies",
+    "venv_path_free_argv_sha256": "d2828b6c02fc61f12ba475a4cdd08ea774917c2d72da8a342bbf96f8631133a7",
+    "venv_exit_code": 0,
+    "internal_pip_process_count": 1,
+    "install_path_free_argv_sha256": "fe04261df7dd9705b87a5159e20cc6d96a1005acdd389837e67e02f803ace85e",
+    "install_exit_code": 0,
+    "install_private_combined_output_bytes": 983,
+    "install_private_combined_output_sha256": "52c6285fb1a63614766e42de92838fd267bf9ef92d2761ea29c6172745d48a79",
+    "distribution_count": 5,
+    "record_closure_match_count": 5,
+    "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+    "materialization_event_id": "ce78033a35c7e50c88bb4c29b425f644deaf8c6924ed342ba9b36311af42f78a",
+    "result": "VALID",
+    "runtime_materialization_state": "FRESH_INSTANCE_MATERIALIZED_PENDING_FULL_INDEPENDENT_RECONCILIATION"
+  },
+  "owner_identity": {
+    "execution_count": 1,
+    "result": "VALID",
+    "role": "KAREN_RUNTIME_OWNER",
+    "verdict": "VALID",
+    "reason_code": "ALL_CHECKS_EQUAL",
+    "runtime_identity_exact19": {
+      "logical_runtime_id": "6aeac10945cd15e1ee3b9f40ab3c6367c08114a4ff2032cda56f9165205746cb",
+      "runtime_content_identity": "394d81424265cdc79cbe67dc46ab2952565cd7e3f9a5f78d272773280208e549",
+      "runtime_root_identity_sha256": "9d9b17f9bcd366ef5e5903d35f2a8bfef4da5d7ec0df437746f0fbeb11db0845",
+      "runtime_instance_observation_id": "ebdf69585d726616a87ba1799fb4c24f4d759a49c816e506e3b6ab47261925a8",
+      "materialization_event_id": "ce78033a35c7e50c88bb4c29b425f644deaf8c6924ed342ba9b36311af42f78a",
+      "formal_lock_logical_sha256": "801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4",
+      "runner_projection_sha256": "f501025c1dccef68c47c0a3e52f3ef74d01233f371b16f2b1a0bdfb21089e57e",
+      "accepted_wheel_manifest_sha256": "00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d",
+      "distribution_closure_sha256": "4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c",
+      "installed_file_manifest_sha256": "0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5",
+      "full_runtime_root_manifest_sha256": "f39533f80fb3c1dfd2605e39c9b64d556ac24b4f50a185de703c7c43ed368931",
+      "entrypoint_control_identity_sha256": "7552ff240cb31cc08273f3cf40bd666bf813147c36091e585b2a90826e27a095",
+      "resolved_interpreter_executable_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+      "environment_policy_sha256": "8a43751b49a8db1d024063608405f9b169e829f3c0be3488433b31800d44b1a4",
+      "required_role_path_ordered_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+      "admitted_executable_relative_path": "bin/python",
+      "distribution_count": 5,
+      "record_closure_match_count": 5,
+      "unexpected_entry_count": 0
+    },
+    "canonical_diagnostic": {
+      "canonical_row_count": 482,
+      "canonical_preimage_bytes": 89653,
+      "canonical_preimage_lf": 0,
+      "site_regular_file_count": 487,
+      "site_directory_count": 27,
+      "site_symlink_count": 0,
+      "site_other_count": 0,
+      "eligible_regular_payload_count": 482,
+      "owned_file_count": 482,
+      "unowned_file_count": 0,
+      "duplicate_relative_path_count": 0,
+      "missing_file_count": 0,
+      "extra_file_count": 0,
+      "pyc_file_count": 0,
+      "pycache_directory_count": 0,
+      "record_self_excluded_count": 5,
+      "verified_external_entrypoint_count": 3,
+      "external_entrypoint_pathset_sha256": "e68059e3cc382b66728dfa6fe0a2b0bad4685d105e12f037fd09649e0f4b9b61",
+      "canonical_pathset_sha256": "6fb972b20c2c5c776886c53c905bf08e8577fa74284d760c39065b9ba65328f2",
+      "mismatch_row_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mismatch_row_count": 0,
+      "nonzero_mismatch_family_count": 0
+    },
+    "current_comparator_match": true,
+    "independently_reconciled": false,
+    "admission_effect": false
+  },
+  "pytest_probe": {
+    "execution_count": 1,
+    "path_free_argv_sha256": "4c8c5452cc1b85902df26fa8bc5196b60a4a180f99436626123e0c853426b541",
+    "working_directory_class": "EMPTY_NON_REPOSITORY_DIRECTORY",
+    "exit_code": 0,
+    "reported_version": "8.4.1",
+    "result": "VALID",
+    "stdout_byte_count": 13,
+    "stdout_sha256": "b2e1053958c9395fa5cc8f621e613449d36f3cdddc21c7bbba2364493e225064",
+    "stderr_byte_count": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "role_smoke_probe": {
+    "process_count": 1,
+    "path_free_argv_sha256": "cae3847af147ecd9c1dc0a023221f0401f6594f0b8c3e64350600f79d2b2e35b",
+    "probe_program_sha256": "f649864f6839e17bf861d8ab67ceb7379ccc3da64271a2a5d7386374f0e6be05",
+    "exit_code": 0,
+    "result": "VALID",
+    "direct_role_load_count": 3,
+    "public_api_call_count": 0,
+    "role_effect_count": 0,
+    "ordered_role_paths_sha256": "e01f5e587ba1884b988075eee1c162454d3a6a1d4b10febc3b7111c2b5c1b248",
+    "stdout_byte_count": 707,
+    "stdout_sha256": "7dde425c3f2bb068d594ee2324e8162fab9107b652a104496c6a97b471520ea5",
+    "stderr_byte_count": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "independent_identity": {
+    "execution_count": 1,
+    "result": "INVALID",
+    "role": "INDEPENDENT_RUNTIME_VERIFIER",
+    "verdict": "INVALID",
+    "stage": "INDEPENDENT_IDENTITY",
+    "typed_reason": "INDEPENDENT_IDENTITY_DERIVATION_INVALID",
+    "safe_detail_code": "INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID",
+    "private_failure_observation_bytes": 243,
+    "private_failure_observation_sha256": "a816e0a73a36c4b61aba99d53c60d794f3456de4fd057c617b80e58b8819fde8",
+    "runtime_identity_exact19": "NOT_DERIVED",
+    "helper_edit_after_failure_count": 0,
+    "helper_reexecution_count": 0
+  },
+  "reconciliation": {
+    "owner_valid_count": 1,
+    "independent_valid_count": 0,
+    "owner_independent_reconciliation_count": 0,
+    "owner_independent_equal": "NOT_ESTABLISHED",
+    "pre_post_probe_full_root_reconciliation_count": 0,
+    "pre_post_probe_full_root_equal": "NOT_ESTABLISHED",
+    "readiness_observation_sha256": "NOT_DERIVED",
+    "runtime_readiness_observation_id": "NOT_DERIVED",
+    "continuity_chain_sha256": "NOT_DERIVED"
+  },
+  "runtime_lifecycle": {
+    "state": "FAILED_CLOSED_UNADMITTED_SESSION_LOCAL_ROOT",
+    "instance_class": "REMATERIALIZED_NEW_INSTANCE",
+    "persistence_class": "SESSION_LOCAL",
+    "recovery_class": "REMATERIALIZABLE_FROM_FROZEN_LOCK",
+    "locator_strategy": "CURRENT_AUTHORITY_PRIVATE_ROOT_PLUS_BIN_PYTHON",
+    "artifact_availability_class": "CONFIGURED_ROUTE_EXACT5_ACQUIRED_CURRENT_AUTHORITY_OBSERVATION_ONLY",
+    "admitted_executable_relative_path": "bin/python",
+    "runtime_ready_admission_count": 0,
+    "readiness_credit_count": 0,
+    "failed_root_reuse_permitted": false,
+    "absolute_runtime_root_published": false,
+    "absolute_executable_path_published": false
+  },
+  "execution_cardinalities": {
+    "projection_verifier_count": 1,
+    "configured_route_acquisition_count": 1,
+    "acquisition_network_process_count": 1,
+    "accepted_wheel_count": 5,
+    "fresh_isolated_rematerialization_count": 1,
+    "venv_creation_count": 1,
+    "installation_process_count": 1,
+    "owner_identity_derivation_count": 1,
+    "readiness_pytest_version_probe_count": 1,
+    "required_role_smoke_process_count": 1,
+    "direct_role_load_count": 3,
+    "public_api_call_count": 0,
+    "role_effect_count": 0,
+    "independent_identity_derivation_count": 1,
+    "owner_independent_reconciliation_count": 0,
+    "pre_post_probe_full_root_reconciliation_count": 0,
+    "runtime_ready_admission_count": 0,
+    "readiness_credit_count": 0,
+    "prior_runtime_reuse_count": 0,
+    "prior_wheel_reuse_count": 0,
+    "prior_helper_reuse_count": 0,
+    "prior_readiness_credit_reuse_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "runtime_repair_count": 0,
+    "failed_root_deletion_count": 0
+  },
+  "zero_effects": {
+    "gate_c_count": 0,
+    "protected_test_append_count": 0,
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_test_call_count": 0,
+    "targeted_pytest_invocation_count": 0,
+    "ordered_exact24_count": 0,
+    "historical_full52_count": 0,
+    "whole_file_full54_count": 0,
+    "exact100_count": 0,
+    "production_change_count": 0,
+    "protected_test_change_count": 0,
+    "fixture_sample_corpus_change_count": 0,
+    "mashos_api_changed_path_count": 0,
+    "product_read_count": 0,
+    "g5_count": 0,
+    "g6_count": 0,
+    "g7_count": 0,
+    "cycle001_acceptance_count": 0,
+    "historical_artifact_rewrite_count": 0,
+    "canonical_schema_change_count": 0,
+    "current_comparator_change_count": 0
+  },
+  "failure": {
+    "class": "TYPED_RUNTIME_NOT_READY_STOP",
+    "stage": "INDEPENDENT_IDENTITY",
+    "safe_code": "INDEPENDENT_IDENTITY_DERIVATION_INVALID",
+    "safe_detail_code": "INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID",
+    "exactly_one_typed_reason": true,
+    "root_admitted": false,
+    "runtime_ready": false,
+    "readiness_credit": false
+  },
+  "privacy": {
+    "absolute_runtime_or_helper_path_published": false,
+    "configured_route_or_url_published": false,
+    "credential_or_environment_value_published": false,
+    "concrete_manifest_row_or_path_list_published": false,
+    "wheel_package_record_or_runtime_body_published": false,
+    "raw_acquisition_or_process_output_published": false,
+    "raw_traceback_or_exception_text_published": false,
+    "helper_body_published": false,
+    "production_or_protected_private_body_published": false
+  },
+  "publication": {
+    "repository": "MassyuRed/Cocolon",
+    "entry_commit_sha1": "f07e56478ed6429d62fb4415e59de85e57d7a8e4",
+    "new_path_count": 3,
+    "modified_path_count": 3,
+    "changed_path_count": 6,
+    "deletion_count": 0,
+    "rename_count": 0,
+    "unauthorized_path_count": 0,
+    "mashos_api_changed_path_count": 0,
+    "latest_main_inclusion_required": true,
+    "new_paths_prewrite_state": "ABSENT",
+    "paths": [
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_Result_20260810.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_BodyFree_Receipt_20260810.json",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_Handoff_20260810.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_前提資料/08_cycle001_current_state.md"
+    ]
+  },
+  "result": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_Result_20260810.md",
+    "bytes": 12436,
+    "lf": 283,
+    "raw_sha256": "4af089e307187972c2b883f5200a58fc49e6b33ad8cf31f4c7afd4e7703c4972",
+    "git_blob_sha1": "f24b2b3b80bb2ba284d9f764b75a68dfdd31ccbf"
+  },
+  "handoff": {
+    "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_Handoff_20260810.md",
+    "self_identity_omitted_to_avoid_hash_cycle": true
+  },
+  "next_authority": {
+    "id": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "failed_root_reuse_permitted": false,
+    "prior_wheel_or_helper_reuse_permitted": false,
+    "gate_c_permitted": false,
+    "automatic_progression": false
+  },
+  "state": "G4_GATE_B_COMPARATOR_V2_INDEPENDENT_IDENTITY_DERIVATION_INVALID",
+  "cycle001_state": "NOT_ACCEPTED",
+  "terminal_tokens": [
+    "CURRENT_COMPARATOR_V2_0EBA095E_UNCHANGED",
+    "OWNER_MANIFEST_MATCH_AND_PROBES_VALID_NOT_ADMITTED",
+    "INDEPENDENT_IDENTITY_DERIVATION_INVALID",
+    "FAILED_ROOT_UNADMITTED_NO_REUSE",
+    "NO_RUNTIME_READY_OR_READINESS_CREDIT",
+    "CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE",
+    "NEXT_CORRECTED_INDEPENDENT_VERIFIER_FRESH_GATE_B_SEPARATE_APPROVAL_REQUIRED",
+    "CURRENT_AUTHORITY_STOP",
+    "AUTOMATIC_PROGRESSION_FALSE"
+  ],
+  "receipt_self_hash_schema": "SHA256_UTF8_COMPACT_SORTED_KEY_JSON_NO_FINAL_LF_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "426d65a146c183fa753b07f7bee97b66b0e8e1102cf26093fac27ab9f63788ae"
+}

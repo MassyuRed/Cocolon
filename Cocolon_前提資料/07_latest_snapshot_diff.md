@@ -40007,3 +40007,109 @@ No next authority was issued or activated. This verification appendix is confine
 07 append-only path. Its own commit identity and resulting 07 self-identity are intentionally omitted to
 avoid publication self-reference; both are covered by the following fresh base-to-latest exact7 union and
 remote-byte verification.
+
+## 2026-08-10 latest checkpoint — Gate B comparator V2 independent identity derivation invalid
+
+Authority
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1`
+was approved separately, activated exact1, consumed exact1, and closed in typed failure. Entry Cocolon was
+`f07e56478ed6429d62fb4415e59de85e57d7a8e4` / tree
+`990a2aea4b82946964d43cef92a01fdac4f45ac2`; mashos-api remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`.
+
+The authority froze helper exact5, full-root and higher identity preimages, compared exact19, typed reason
+map, and exact6 output paths before effects. The current installed-file comparator was and remains
+`0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5` under unchanged schema
+`NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1`.
+
+Execution reached the following body-free observations:
+
+```text
+configured acquisition / network / accepted wheel:
+1 / 1 / 5
+
+fresh rematerialization / venv creation / local install:
+1 / 1 / 1
+
+distribution / RECORD-closure match:
+5 / 5
+
+owner identity derivation / result:
+1 / VALID
+
+installed-file rows / eligible / owned / active mismatches:
+482 / 482 / 482 / 0
+
+pytest 8.4.1 probe / result:
+1 / VALID
+
+role smoke process / direct load / API call / effect / result:
+1 / 3 / 0 / 0 / VALID
+
+independent identity derivation / result:
+1 / INVALID
+```
+
+The independent verifier did not derive exact19. Its frozen body supplied an unsupported `newline`
+argument to `Path.read_text`. Exactly one public failure reason is selected:
+`INDEPENDENT_IDENTITY_DERIVATION_INVALID`, with safe detail
+`INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID`.
+
+No helper edit, re-execution, retry, fallback, interpreter switch, root repair, deletion, re-acquisition,
+owner-independent reconciliation, or post-probe full-root reconciliation occurred. The root is
+`FAILED_CLOSED_UNADMITTED_SESSION_LOCAL_ROOT`; runtime READY and readiness credit are 0. Target/Gate C,
+protected test, production, mashos-api write, Product Read, G5/G6/G7, and acceptance counts are 0.
+
+Owner-only current-instance values are retained as nonadmitting observations:
+
+| Field | SHA-256 |
+|---|---|
+| materialization event | `ce78033a35c7e50c88bb4c29b425f644deaf8c6924ed342ba9b36311af42f78a` |
+| logical runtime | `6aeac10945cd15e1ee3b9f40ab3c6367c08114a4ff2032cda56f9165205746cb` |
+| runtime content | `394d81424265cdc79cbe67dc46ab2952565cd7e3f9a5f78d272773280208e549` |
+| runtime root | `9d9b17f9bcd366ef5e5903d35f2a8bfef4da5d7ec0df437746f0fbeb11db0845` |
+| runtime instance observation | `ebdf69585d726616a87ba1799fb4c24f4d759a49c816e506e3b6ab47261925a8` |
+| full runtime-root manifest | `f39533f80fb3c1dfd2605e39c9b64d556ac24b4f50a185de703c7c43ed368931` |
+| installed-file manifest | `0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5` |
+| entrypoint control | `7552ff240cb31cc08273f3cf40bd666bf813147c36091e585b2a90826e27a095` |
+
+Prepared new exact3:
+
+| Role | Path | Bytes | LF | Raw SHA-256 | Git blob |
+|---|---|---:|---:|---|---|
+| Result | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_Result_20260810.md` | 12436 | 283 | `4af089e307187972c2b883f5200a58fc49e6b33ad8cf31f4c7afd4e7703c4972` | `f24b2b3b80bb2ba284d9f764b75a68dfdd31ccbf` |
+| Receipt | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_BodyFree_Receipt_20260810.json` | 20810 | 455 | `dc4ac41272e54686754949dcda27582c5801b0fd20e5e1cb2579e38cd7d6af63` | `c2a0ca0c41b4c043d2195b3db1889a76aaab2933` |
+| Handoff | `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_FreshRuntimeReadinessUnderComparatorV2_V1_Handoff_20260810.md` | 6352 | 149 | `d1c48e002822dde760a5d68f1c9a80240842e6d9926f9f13078a4318bc8b4062` | `4816dd05899ce5ffc1037c8a1cbfb1152a2164b7` |
+
+Receipt logical SHA-256 is `426d65a146c183fa753b07f7bee97b66b0e8e1102cf26093fac27ab9f63788ae`.
+
+Modified-path entry preimages:
+
+| Role | Entry blob | Entry bytes | Entry LF | Entry raw SHA-256 |
+|---|---|---:|---:|---|
+| Plan | `5d5b9b5b1489a9711aa0147c093e3b20391dd5e1` | 1221942 | 19349 | `4ce787d54968152b629a86cab3fbffe3c3753abbb8c85eb26188f4def7d04434` |
+| 07 | `1270d5ebdb5124aaaaedab36fbb27bc661df1c56` | 2419523 | 40009 | `c30f68569abfe5cfae8c1e5ac6501aaf22da96747c207339d18dab25808c3882` |
+| 08 | `f43549b16b41c8a6c8f113bc399ff714937470d8` | 60832 | 1779 | `6e5d9bf18691d82333f7ee42c959dbd2fed7d9783d8b8d2cb38bc428adcaecf4` |
+
+The intended publication union is new exact3 plus modified Plan/07/08 exact3. Unauthorized path,
+deletion, rename, and mashos-api changed-path counts are 0. A postwrite appendix on this approved 07 path
+will record fresh remote equality and final heads.
+
+The minimal next proposal is
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2`.
+It is `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`; it requires a corrected helper frozen before
+effects and an entirely new exact5 attempt. The failed root, wheels, helpers, and observations are not
+reusable. Gate C and later work remain outside it.
+
+```text
+CURRENT_COMPARATOR_V2_0EBA095E_UNCHANGED
+OWNER_MANIFEST_MATCH_AND_PROBES_VALID_NOT_ADMITTED
+INDEPENDENT_IDENTITY_DERIVATION_INVALID
+FAILED_ROOT_UNADMITTED_NO_REUSE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+NEXT_CORRECTED_INDEPENDENT_VERIFIER_FRESH_GATE_B_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```

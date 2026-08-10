@@ -19347,3 +19347,68 @@ NEXT_G4_GATE_B_FRESH_READINESS_UNDER_V2_COMPARATOR_SEPARATE_APPROVAL_REQUIRED
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 2026-08-10 G4 post-G6 Gate B fresh runtime readiness under comparator V2 V1 — independent identity typed failure
+
+Mash separately approved
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V1`.
+The authority entered at Cocolon `f07e56478ed6429d62fb4415e59de85e57d7a8e4` / tree
+`990a2aea4b82946964d43cef92a01fdac4f45ac2`; mashos-api remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`.
+
+Before effects, authority-bound helper exact5, the full-root manifest schema, higher identity preimages,
+compared exact19, closed stage/reason map, and exact6 output paths were frozen. The current comparator was
+V2 `0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5` under unchanged canonical
+schema `NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1`.
+
+Configured-route acquisition/network was `1/1` with exit 0 and accepted wheel exact5. A new root was created
+once with `venv --without-pip --copies`; one no-index/no-deps/hashes-required/wheel-only/no-compile install
+returned 0. Distribution/installed RECORD closure was `5/5` and aggregate closure remained
+`4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c`.
+
+The owner full-identity derivation was VALID. It reproduced installed-file manifest `0eba095e...`, rows/
+eligible/owned `482/482/482`, and every mismatch family 0. The admitted-runtime pytest `8.4.1` version probe
+was VALID at exact1. Required-role smoke was VALID at process/direct-load/API-call/effect `1/3/0/0`.
+
+The frozen independent verifier then executed exact1 and failed before deriving identity because it supplied
+an unsupported `newline` argument to `Path.read_text`. The authority classification is exactly
+`INDEPENDENT_IDENTITY_DERIVATION_INVALID`, safe detail
+`INDEPENDENT_HELPER_TEXT_READ_API_ARGUMENT_INVALID`. No helper edit, re-execution, retry, fallback,
+interpreter switch, root repair, deletion, or re-acquisition occurred.
+
+Owner-independent reconciliation, post-probe root reconciliation, readiness observation, runtime READY,
+and readiness credit are all 0/not derived. The new root is
+`FAILED_CLOSED_UNADMITTED_SESSION_LOCAL_ROOT` and cannot be reused. Gate C, protected-test append, target
+import/collection/call, targeted pytest, production, mashos-api write, Product Read, G5/G6/G7, and Cycle001
+acceptance remain 0. Cycle001 remains `NOT_ACCEPTED`.
+
+Prepared new exact3 identities:
+
+| Role | Git blob | Bytes | LF | Raw SHA-256 |
+|---|---|---:|---:|---|
+| Result | `f24b2b3b80bb2ba284d9f764b75a68dfdd31ccbf` | 12436 | 283 | `4af089e307187972c2b883f5200a58fc49e6b33ad8cf31f4c7afd4e7703c4972` |
+| Receipt | `c2a0ca0c41b4c043d2195b3db1889a76aaab2933` | 20810 | 455 | `dc4ac41272e54686754949dcda27582c5801b0fd20e5e1cb2579e38cd7d6af63` |
+| Handoff | `4816dd05899ce5ffc1037c8a1cbfb1152a2164b7` | 6352 | 149 | `d1c48e002822dde760a5d68f1c9a80240842e6d9926f9f13078a4318bc8b4062` |
+
+Receipt logical SHA-256 is `426d65a146c183fa753b07f7bee97b66b0e8e1102cf26093fac27ab9f63788ae`.
+Publication scope is new Result/Receipt/Handoff exact3 plus Plan/07 append-only and 08 additive navigation
+exact3. Deletion, rename, unauthorized path, and mashos-api changed-path counts are 0.
+
+The minimal next proposal is
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_CORRECTED_INDEPENDENT_VERIFIER_AND_FRESH_RUNTIME_READINESS_UNDER_COMPARATOR_V2_V2`.
+It is `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`. It must freeze the corrected independent helper
+before effects and perform an entirely fresh one-shot Gate B; reuse of this root, wheels, helpers, or
+readiness observations is forbidden. Gate C and later work remain outside it.
+
+```text
+CURRENT_COMPARATOR_V2_0EBA095E_UNCHANGED
+OWNER_MANIFEST_MATCH_AND_PROBES_VALID_NOT_ADMITTED
+INDEPENDENT_IDENTITY_DERIVATION_INVALID
+FAILED_ROOT_UNADMITTED_NO_REUSE
+NO_RUNTIME_READY_OR_READINESS_CREDIT
+CURRENT_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+NEXT_CORRECTED_INDEPENDENT_VERIFIER_FRESH_GATE_B_SEPARATE_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
