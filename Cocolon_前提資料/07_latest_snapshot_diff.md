@@ -39564,3 +39564,47 @@ The first unfinished action is a separate inactive Gate B:
 It is fresh-root/readiness-only and STOPs at READY/typed failure. G4 append and
 target require a later separate Gate C approval. G5/G6/G7 and Cycle acceptance
 remain unauthorized/not started; automatic progression is false.
+
+## 2026-08-10 latest checkpoint — G4 Gate B typed materialization failure V1
+
+Gate B V1 consumed its fresh-runtime authority and stopped body-free at
+`INSTALLED_FILE_MANIFEST_IDENTITY_MISMATCH`. Cocolon predecessor was
+`97be1644455deb5bd069a9dff02f0440a5c2ad48`; mashos-api stayed
+`45bf98f9034261d3adb3e808d6d759f2334e2d25` / tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f` with production/protected blobs
+`f10ce7948e5570ee8ad27ee2af00a9caf3867d49` /
+`c302dd99e143967fed6edd65b429373e87453fc6`.
+
+Corrected exact7 preflight succeeded. Configured-route/network exact1 acquired
+wheel exact5 (1,724,842 bytes), accepted manifest
+`00d2df98c8cda7f1473794892bafe7ccd18cc816c79ccb346f3e21ff629b136d`.
+Fresh venv/local install exact1/exact1 and installed RECORD closure exact5
+matched; distribution closure was
+`4d3d6afdac2b9a606d4797ff5fbe65010faddf0de9788202798ddb8d95e6556c`.
+The aggregate installed-file expected identity
+`9c6925ed94b8eb1ccd22d2d4aeccc5dde35c7c23915ae6d367fcaff17bf09de6`
+did not match.
+
+Owner identity, pytest probe, role smoke, independent identity, target, protected
+append, and mashos-api write are0. Retry/fallback/repair/cache deletion are0.
+Failed root is session-local and unadmitted; READY and Gate C are false.
+
+```text
+G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_TYPED_MATERIALIZATION_FAILURE
+INSTALLED_FILE_MANIFEST_IDENTITY_MISMATCH
+CURRENT_G4_GATE_B_AUTHORITY_CLOSED_CONSUMED_TYPED_FAILURE
+NEXT_G4_GATE_B_RECOVERY_SEPARATE_MASH_APPROVAL_REQUIRED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+Result raw/blob: `870842e33e7b2df8b3073f3a01aecebc79a3aec95ba44eaf561f708c2870cd27` /
+`bbd1c96efb02121dcea472423d04a4938d14df6e`. Receipt raw/blob/logical:
+`a1ad0d689abdbb669d652e0007d6fa3023a6a9ea07bc54855457d252a0246aa8` /
+`fe610a3614deac5a1d1961ac276ec6470ef18160` /
+`a2f978bf7b27f565147eeeaab4fc9e25d5ea3797318924fb376554eef47fb120`.
+Handoff raw/blob: `abbc1dafe708111fedb95a35e4de5844b43cb615da1543f66648d980edb93495` /
+`1dbad1c85a08124af8aa29ea1836d10641718d91`.
+
+This is Cocolon exact6 only. New retry/recovery authority is not issued and
+requires separate Mash approval; current V1 is not reusable.
