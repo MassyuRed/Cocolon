@@ -9,7 +9,7 @@
     "activation_count": 1,
     "consumption_count": 1,
     "single_use": true,
-    "authority_lifecycle": "CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE",
+    "authority_lifecycle": "CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE_REMOTE_POSTVERIFIED",
     "automatic_progression": false
   },
   "entry": {
@@ -191,7 +191,7 @@
   "publication_scope": {
     "repository": "MassyuRed/Cocolon",
     "stage": "STAGE1",
-    "state": "PREPARED_REMOTE_POSTVERIFY_PENDING",
+    "state": "STAGE1_PUBLISHED_REMOTE_POSTVERIFIED",
     "changed_path_count": 6,
     "modified_path_count": 5,
     "new_path_count": 1,
@@ -242,15 +242,15 @@
   },
   "remote_postverify": {
     "stage": "STAGE1",
-    "result": "PENDING",
-    "publication_commit_sha1": null,
-    "publication_tree_sha1": null,
-    "changed_paths_exact6": "PENDING",
-    "unauthorized_path_count": "NOT_ESTABLISHED",
-    "remote_prepared_byte_mismatch_count": "NOT_ESTABLISHED",
-    "final_head_contains_all": "NOT_ESTABLISHED",
+    "result": "PASS",
+    "publication_commit_sha1": "6359533c452f6839246b004b4d2fdd00b9066354",
+    "publication_tree_sha1": "9a2ecb6786462ab446795d76886596cd6d281047",
+    "changed_paths_exact6": true,
+    "unauthorized_path_count": 0,
+    "remote_prepared_byte_mismatch_count": 0,
+    "final_head_contains_all": true,
     "receipt_finalization_self_identity": "OMITTED_TO_AVOID_SELF_REFERENCE"
   },
   "receipt_self_hash_schema": "SHA256_UTF8_COMPACT_SORTED_KEY_JSON_NO_FINAL_LF_WITH_receipt_logical_sha256_EMPTY_STRING",
-  "receipt_logical_sha256": "a9d804c562cfa9611ba6d7667f864944da4aeab694890e2a50eb23b7fc8be960"
+  "receipt_logical_sha256": "f3b6a407aa910a850ce7fde70ebf4d126fd102201204118ba6d5c80eb7c398a1"
 }
