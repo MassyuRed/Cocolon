@@ -4,6 +4,7 @@ revision_date: 2026-08-11
 status: CURRENT_EFFECTIVE
 effective_boundary: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
 effective_status_after_boundary: CURRENT_ENFORCEMENT_RULE
+current_g4b_method_effective_when: G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_IMPLEMENTATION_REMOTE_POSTVERIFIED
 
 ## 正本
 
@@ -15,8 +16,9 @@ effective_status_after_boundary: CURRENT_ENFORCEMENT_RULE
 またはproduct runtimeを変更しません。
 
 Phase 5 Checkpoint Bのatomic cutoverはremote postverify済みであり、このfileは
-`CURRENT_ENFORCEMENT_RULE`です。2026-08-11のcurrent G4-B method reflectionは、
-文書・metadata同期だけでprocess body、runtime、Gateを許可しません。
+`CURRENT_ENFORCEMENT_RULE`です。2026-08-11のcurrent G4-B checker implementation
+reflectionは、tracked exact5 implementationとCocolon exact6同期だけであり、checker /
+test process、runtime、Gateを許可しません。
 
 Cycle001では、current position / blocker / next exact1は
 `../08_cycle001_current_state.md`からだけ選びます。remaining Gate sequence、entry /
@@ -25,11 +27,11 @@ exit / STOP、retired routeは
 をownerとします。`../07_latest_snapshot_diff.md`とcurrent same-name Planはevidence /
 historical ownerであり、古い`next authority`からcurrent actionを選びません。
 
-## current G4-B direct-native-process enforcement
+## historical G4-B direct-native-process enforcement
 
-current G4-B
-`G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B`には、次をmandatory overrideとして
-適用します。他Gateの一般runtime continuity ruleまたはhistorical observationを変更しません。
+次はprior G4-B `G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B`へ適用されたhistorical
+overrideです。このrouteはclosed / nonreusableであり、current enforcementは次sectionを
+正とします。他Gateの一般runtime continuity ruleまたはhistorical observationを変更しません。
 
 ```text
 method id:
@@ -96,6 +98,92 @@ CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
 
+## current G4-B GitHub-tracked admission checker enforcement
+
+```text
+method id:
+GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
+
+tracked checker family:
+exact1
+
+responsibility / file:
+exact5 / exact5
+
+legacy helper / additional scanner / additional carrier:
+exact0 / exact0 / exact0
+```
+
+1. contract、orchestrator、owner、independent、dedicated testを1責務1fileで固定する。
+   existing materialization procedure exact2のordered V1 identifierは
+   `COCOLON_RULE13_RUNTIME_CONTINUITY_V20260811`、
+   `COCOLON_RULE16_ONE_SHOT_PRELAUNCH_V20260811`とし、別label、逆順、historical labelを
+   freshness evidenceへ使用しない。
+2. ownerとindependentは別file、別OS process、別PID、別call graph、別導出とする。
+   導出関数、filesystem traversal、coverage計算、intermediate stateを共有しない。
+3. 共有はversioned immutable contract / schemaと同一raw inputだけとする。
+4. checkerはRule 13 / Rule 16のexisting procedureでexternal materialization済みのfresh
+   instanceだけを受け取り、acquisition / materialization / install / downloadを行わない。
+   historical nonexistence / completionはexisting procedure exact2のexternal attestation ownerとし、
+   checker単独のfreshness proofへ変換しない。root locator / expected full-rootを含むversioned
+   materialization eventを再導出し、actual orchestrator / owner / independent full-rootのexact matchを
+   要求する。
+5. strict UTF-8 JSON stdin / stdoutだけを使用し、external service、daemon、CI control
+   plane、DB、API、新transport、stdlib外dependencyを追加しない。
+   admission-credit surfaceはunmodified tracked CLI exact1に限定し、library invocation、runner
+   injection、monkeypatch、fake process resultをcreditへ変換しない。actual child PIDとchild result
+   PIDを照合し、ordered stage ledger exact4からcountを導出する。
+   parent argvはrepo-root cwdの`python -E -s -S -B -m <checker-module>`だけを許可し、checkerが
+   flags / module spec / cwdを再確認する。delta packed HEADまたはunsupported Git formはrepack / git
+   subprocessへfallbackせずtyped STOPする。
+6. checkerはtarget filesystemをread-onlyで扱い、mkdir、write、delete、repair、retry、
+   fallback、alternate interpreterを行わない。
+7. ownerはdistribution-first、independentはfilesystem-first reverse ownershipで別導出する。
+8. input schema、freshness、frozen identities、owner、pytest probe、role smoke、independent、
+   reconciliation / post-root、same-instance handoffの固定順でfail-closed判定する。
+   HEAD / treeはactual Git metadata、tracked index、actual tracked bytesからread-only再導出する。
+   formal lock tracked JSONのactual raw SHA-256もpre / smoke後 / postでfrozen identityへ照合する。
+   role smokeのeffect 0はfilesystem write / process / network deny observationとsource pre/post一致を
+   根拠とし、literal counterだけを根拠にしない。
+9. same-instanceは`HANDOFF_BOUND_CURRENT_SESSION`までをGate B claimとし、future Gate Cの
+   直前再導出とexact executable launchなしに`HANDOFF_CONSUMED`をclaimしない。
+   current-session callerがprivate locatorを保持するbindingであり、receiver processによるfuture
+   consumptionをclaimしない。
+   binding preimageへabsolute root / executable locator SHA-256を含め、locatorまたはその単体digestを
+   public resultへ出さない。
+10. production EmlisAI source、100件runner、sample、fixture、corpusを変更・import・実行
+    せず、100件生成・実行・評価を0にする。
+11. implementation reflectionとverification / live admissionを分離する。本reflectionでは
+    checker / dedicated test process、synthetic actual-call、network、runtime、wheel、fresh
+    root、venv、install、pytest probe、role smoke、target、Gate B executionを0にする。
+12. implementation reflectionではRuntime READY false、readiness ID `NOT_DERIVED`、Gate B
+    open、credit 0を保持し、別のMash様明示承認なしにverification、live admission、Gate Cへ
+    進まない。
+
+current STOP terminal:
+
+```text
+METHOD_OVERRIDE_NOT_AUTHORIZED
+BASE_OR_PREIMAGE_DRIFT
+PATH_BUDGET_OR_SCOPE_EXCEEDED
+PROHIBITED_EFFECT_REQUIRED
+INPUT_SCHEMA_INVALID
+SCHEMA_OR_VERSION_INVALID
+FRESHNESS_UNPROVED
+PAST_ARTIFACT_REUSE_DETECTED
+PROCESS_CARDINALITY_OR_LAUNCH_INVALID
+OWNER_INVALID
+PROBE_OR_SMOKE_INVALID
+INDEPENDENT_INVALID
+DERIVATION_DIVERGENCE
+ROOT_DRIFT
+HANDOFF_INVALID
+PRIVACY_VIOLATION
+INTERNAL_FAIL_CLOSED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
 ## 華恋が必ず行うこと
 
 1. Python / pytest test-runnerの発見、materialization、verification、
@@ -117,7 +205,8 @@ AUTOMATIC_PROGRESSION_FALSE
 7. rematerializationはfrozen lockとGitHub-tracked procedureから行う別authority
    候補として華恋が整理する。current G4-B以外でtracked helperがない場合は
    authority-bound local helperのraw hash / countとprocedure identityを固定する。
-   current G4-Bでは上記overrideに従いpersisted helper / scanner / carrierをexact0とする。
+   current G4-Bでは上記overrideに従いtracked checker family exact1を使用し、legacy helper /
+   additional scanner / additional carrierをexact0とする。
    新instanceのreadinessを再確立してSTOPする。
 8. `python -m pytest --version`もpytest process invocationとして数え、
    targeted invocationとは別のreadiness authority / counterにする。
@@ -134,7 +223,7 @@ AUTOMATIC_PROGRESSION_FALSE
 13. prelaunch不成立時はtargeted invocation 0のままGate Aまたは別Gate Bへ戻す。
 14. historical Result / Receipt / Handoffを遡及変更・再parse・再creditせず、
     誤ったfuture directionはadditive correctionで非current化する。
-15. current G4-Bでは上記direct-native-process overrideを使用し、items 16〜21の
+15. current G4-Bでは上記GitHub-tracked admission checker overrideを使用し、items 16〜21の
     helper / launcher branchを適用しない。それ以外でhelper / launcherをfreezeする前に、
     actual entrypoint ownerとcallable、positional /
     keyword-only parameter、required / optional / default、exact invocation、return shapeを
@@ -158,10 +247,11 @@ relative executable path、persistence class、expiry trigger、tracked material
 verification procedure identity、tracked helperまたはauthority-bound local helper identity、
 rematerialization手順です。
 
-current G4-Bでは、helper / scanner / carrier identityを新規作成・保存せず、future
-technical authorityがfreezeするdirect native process body exact2のbody-free identityだけを
-そのauthorityの許可範囲で記録します。本reflection authorityではprocess body identityも
-未作成です。
+current G4-Bでは、tracked checker family exact1のrepository-relative path、Git blob / raw
+hash、contract version、logical responsibility exact5、owner / independent separate-process
+identityをbody-freeで記録します。legacy helper / additional scanner / additional carrier
+identityは新規作成・保存しません。本implementation reflectionではprocess execution
+identity、runtime identity、readiness observation IDは未作成です。
 
 absolute Work path、scratch / session identifier、runtime / venv本体、wheel body、
 cache、credential、configured route、raw acquisition outputは残しません。
@@ -177,10 +267,11 @@ environment準備を求める状態を繰り返しません。
 bounded mechanical repairは、prior authorityを閉じた後のnew Mash-approved authority
 exact1だけで使用します。同authority retryではありません。
 
-current G4-Bは、同じhelper API / runtime type blocker familyのsecond failureにより
+historical G4-Bは、同じhelper API / runtime type blocker familyのsecond failureにより
 `DETOUR_RISK_STOP`へ到達し、helper routeがretiredです。したがって以下の一般mechanical
 repair sequenceはcurrent G4-Bへ適用せず、helper repair、second method repair、third normal
-authorityを0にします。direct native routeのfuture preflight failureにもrepairを追加しません。
+authorityを0にします。closed direct-native routeを再利用せず、current tracked checkerにも
+approval外のrepair / retry / fallbackを追加しません。
 
 対象は`SYNTAX_ERROR`、`API_ARGUMENT_ERROR`、`SERIALIZATION_FORMAT_ERROR`、
 `COMMAND_CONSTRUCTION_ERROR`のexact4です。

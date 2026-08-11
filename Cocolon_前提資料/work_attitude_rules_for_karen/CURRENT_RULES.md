@@ -3,7 +3,7 @@ doc_id: cocolon_current_work_rules
 revision_date: 2026-08-11
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
-effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+effective_when: G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_IMPLEMENTATION_REMOTE_POSTVERIFIED
 decision_owner: Mash
 operational_owner: Karen
 model_requirement: GPT-5.6 Pro for Chat work
@@ -221,16 +221,58 @@ latest independent verifierのAPI引数failureは`BLOCKER_NARROWED`であり、R
 
 ### R10.4 current G4-B method route
 
-Mash様のmethod decisionにより、current G4-Bの`DETOUR_RISK_STOP`は次のrouteで解消します。
+Mash様の2026-08-11 explicit approvalにより、current G4-Bのcurrent methodを次へ
+置換します。これはretired helper routeまたはclosed direct-native authorityのrename / retry /
+reuseではなく、GitHub-tracked read-only admission checker family exact1を導入する
+明示的method replacementです。
 
 ```text
-SESSION_LOCAL_HELPER_ROUTE_RETIRE
-REPLACEMENT_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+SESSION_LOCAL_HELPER_ROUTE_REMAINS_RETIRED
+DIRECT_NATIVE_PROCESS_ROUTE_V1_REMAINS_CLOSED_NONREUSABLE
+REPLACEMENT_METHOD = GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
+
+checker family:
+tracked exact1
+
+logical responsibility / file:
+exact5 / exact5
+
+legacy helper / additional scanner / additional carrier:
+exact0 / exact0 / exact0
 ```
 
-authority-local / session-local helper routeはretiredです。helper修正、helper V3、追加scanner、追加carrier、third normal helper authority、second method repairへ戻りません。replacement methodのprocess body実装、freeze、preflight、runtime effect、Gate B実行は、Mash様が別途明示承認するfuture technical authorityに限ります。method reflectionだけでGate B closed、runtime READY、readiness credit、technical credit、product creditに変換しません。
+責務はcontract / schema、orchestrator、owner derivation、independent derivation、dedicated
+testのexact5です。ownerとindependentは別file・別OS process・別導出とし、導出関数、
+filesystem traversal、coverage計算、intermediate stateを共有しません。共有可能なのは
+versioned immutable contract / schemaと同一raw inputだけです。
 
-current method、Gate、next exact1の一意なownerは`../08_cycle001_current_state.md`です。本fileからdaily current navigationを複製せず、このmethod decisionをruntime / manifest / processの日常監視としてMash様へ戻しません。
+checkerはenvironment acquisitionまたはmaterializationを再実装せず、Rule 13 / Rule 16に
+従って外部でfreshに作られたinstanceだけをread-only確認します。checker自身のfilesystem
+write、repair、retry、fallback、install、download、target runner、100件生成・実行・評価は0です。
+
+freshnessの過去不存在とmaterialization完了を観測するownerはexisting procedure exact2です。
+checkerは、そのexternal body-free attestationに含まれるauthority / session、ordered procedure
+exact2、root locator digest、expected full-root manifest、fresh true、prior reuse 0をversioned
+canonical materialization eventへ再導出し、actual rootをowner / independent / orchestratorの
+別導出でexpected full-rootへexact matchさせます。従ってchecker単独による過去不存在証明とは
+claimしません。actual mashos-api HEAD / treeはGit metadataとtracked bytesからread-onlyで照合し、
+formal lock actual raw identityもpre/postで固定値へ照合します。role smokeはeffect deny observationと
+source pre/post一致を満たす場合だけVALIDです。
+
+credit対象entrypointはunmodified tracked CLI exact1だけです。library呼出し、runner injection、
+monkeypatch、child自己申告countだけからVALIDを発行しません。orchestratorはactual child PIDと
+child result PIDを照合し、ordered stage ledgerからprocess cardinalityを導出します。
+parent invocationはrepository rootをcwdとする`python -E -s -S -B -m <checker-module>`だけを
+admissibleとし、environment / user-site / site startup / bytecode writeを開始前から無効化します。
+
+本methodのimplementation / GitHub reflectionと、checker process、dedicated test process、
+fresh runtime admission、pytest probe、role smoke、same-instance handoff consumption、Gate B
+closureは別境界です。implementation反映だけでGate B closed、runtime READY、readiness credit、
+technical credit、product creditへ変換せず、Gate C以降へ自動進行しません。
+
+current method、Gate、next exact1の一意なownerは`../08_cycle001_current_state.md`です。
+本fileからdaily current navigationを複製せず、このmethodをMash様の日常監視作業へ
+変換しません。
 
 ## R11. 成果物・完了・報告
 

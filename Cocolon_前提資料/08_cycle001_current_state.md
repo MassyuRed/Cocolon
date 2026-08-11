@@ -2,9 +2,9 @@
 doc_id: cocolon_cycle001_current_state
 title: "Cycle001 現在地 — 単一ナビゲーション正本"
 revision_date: "2026-08-11"
-status: "G4_GATE_B_CANONICAL_PREIMAGE_AUTHORITY_ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR_CURRENT"
+status: "G4_GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_IMPLEMENTED_UNEXECUTED_CURRENT"
 normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER"
-effective_when: "GATE_B_CANONICAL_PREIMAGE_AUTHORITY_PHASE1_COMMAND_STOP_REMOTE_POSTVERIFIED"
+effective_when: "G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_IMPLEMENTATION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operational_owner: "Karen"
 technical_authority: false
@@ -25,9 +25,11 @@ automatic_progression: false
 observation date: 2026-08-11 JST
 authority entry Cocolon head: 14958298fde2b394aba13b706710fb5fcf944f4e
 authority entry Cocolon tree: e4af8002e14acab08846f4931430b6a4216ad64b
-mashos-api head: 45bf98f9034261d3adb3e808d6d759f2334e2d25
-mashos-api tree: 23f1684ed5430cafef955d7af9fc6bde75a4c62f
-terminal publication: resolve from this file's Git history and latest Receipt
+checker implementation base mashos-api head: 45bf98f9034261d3adb3e808d6d759f2334e2d25
+checker implementation base mashos-api tree: 23f1684ed5430cafef955d7af9fc6bde75a4c62f
+checker implementation current mashos-api head: 00a8979e08c7ac4a131cfdf9ada21aaa57d73676
+checker implementation current mashos-api tree: 3ac627bceacf902e5cc55f1258604e9232c350b9
+terminal Cocolon / mashos-api publication: resolve from Git history and latest Receipt
 related owner / target preimage drift: 0
 ```
 
@@ -44,7 +46,8 @@ Product Read、Cycle acceptance、actual-device、pilot、release-readyのcredit
 
 ## 3. normative and derivative owners
 
-Detailed Design、current rules、Rule 13、Rule 16、production source、protected test、comparator owner、mashos-api formal lockは変更していません。
+Detailed Design、production source、protected test、comparator owner、mashos-api formal lockは変更していません。
+current rules、Rule 13、Rule 16は、Mash様が承認したGitHub-tracked checker V1 methodへ同期しました。
 current navigationは本file、current derivative routeはCurrent Closure Route、current product alignmentはCurrent Alignmentとcurrent roadmapです。
 
 ## 4. current route, Gate, subgate, authority
@@ -60,7 +63,10 @@ current subgate:
 GATE_B_RUNTIME_READINESS_ADMISSION
 
 last selected method:
-GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
+
+current implementation:
+TRACKED_CHECKER_FAMILY_EXACT1_RESPONSIBILITY_FILE_EXACT5_IMPLEMENTED_UNEXECUTED
 
 last authority:
 NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_RUNTIME_READINESS_CANONICAL_PREIMAGE_FROZEN_FRESH_ADMISSION_V1
@@ -88,6 +94,10 @@ Cycle001 accepted: false
 
 private process body exact2はentry時にlossless identity full matchでしたが、current authorityは終了済みです。
 prior root、wheel、runtime output、runtime identity、readiness observation、readiness credit、Gate credit、および今回のprivate preparationは再利用不可です。
+
+GitHub-tracked checker V1のsource / test exact5はimplementation artifactです。checker process、
+dedicated test process、runtime evidence、readiness evidenceとしては未消費であり、実行前に
+current Git identityとstrict contractを別authorityで固定する必要があります。
 
 ## 6. latest Gate B actual and terminal
 
@@ -138,22 +148,87 @@ runtime effect:
 
 authorityの `NO_RETRY_NO_FALLBACK_NO_REPAIR` に従い、retry、reacquisition、root repair、fallback、interpreter switch、process body repair、second method repair、third normal authorityは全て0のままSTOPしました。
 
+### 6.1 current implementation reflection
+
+Mash様は、Pro華恋とUltra華恋の共同final candidateをexact11の1責務1file案へ更新し、
+implementationとGitHub reflectionを明示承認しました。反映対象はtracked checker / test
+exact5とCocolon current owner / Receipt exact6だけです。
+
+```text
+primary:
+BLOCKER_NARROWED
+
+terminal:
+GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_IMPLEMENTED_UNEXECUTED_REMOTE_POSTVERIFIED
+
+changed paths:
+exact11
+
+mashos-api ADD / MODIFY / DELETE:
+exact5 / 0 / 0
+
+Cocolon ADD / MODIFY / DELETE:
+exact1 / exact5 / 0
+
+checker / dedicated test process:
+0 / 0
+
+owner / independent process:
+0 / 0
+
+synthetic actual-call / network / runtime:
+0 / 0 / 0
+
+wheel / fresh root / venv / install:
+0 / 0 / 0 / 0
+
+pytest probe / required-role smoke / target / 100-case:
+0 / 0 / 0 / 0
+
+readiness observation id:
+NOT_DERIVED
+
+Gate B / Gate C:
+OPEN / NOT_AUTHORIZED
+
+automatic progression:
+false
+```
+
+このimplementationはreadiness admissionの実行結果ではありません。source / testの存在を
+PASS、Runtime READY、same-instance handoff、Gate B closure、またはcreditへ変換しません。
+
 ## 7. next exact1 and approval boundary
 
 ```text
 next exact1:
-NLS_V3_STEP11_CYCLE001_G4_GATE_B_EXTERNAL_PHASE1_INVOCATION_CONSTRUCTION_EXACT1_SINGLE_EXCEPTION_AND_ONE_FRESH_CANONICAL_PREIMAGE_ADMISSION_METHOD_OR_PRODUCT_DECISION_V1
+NLS_V3_STEP11_CYCLE001_G4_GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_VERIFICATION_AND_FRESH_READINESS_ADMISSION_CANDIDATE
 
 classification:
-METHOD_OR_PRODUCT_DECISION_CANDIDATE
+TECHNICAL_AUTHORITY_CANDIDATE
 
 state:
 DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 ```
 
-このcandidateは承認済みauthorityではありません。Mashがcurrent G4-B固有のno-repair境界に対し、外部phase1 invocation / launcher construction exact1だけのsingle exceptionと、同一candidate内のone fresh single-use Gate B operationを許可するかを決める境界です。
+このcandidateは承認済みauthorityではありません。tracked exact5のcurrent Git identityを
+freezeし、dedicated verificationとfully fresh instanceに対するread-only admissionを
+行うかをMash様が別途決める境界です。
 
-承認される場合もprocess body exact2、40-field schema、technical contract、comparator、formal lock、owner/independent意味の変更は0です。repeat failureはreasonを問わず `DETOUR_RISK_STOP_NO_FURTHER_NORMAL_AUTHORITY` です。
+実装済みV1は、existing procedure exact2が所有するexternal freshness / expected-full-root
+attestationをcanonical materialization eventへ拘束し、actual HEAD / tree、orchestrator / owner /
+independent full-root、role-smoke effect deny observationへ照合する設計です。checker単独のhistorical
+nonexistence proofまたはfuture handoff consumption proofではありません。
+credit surfaceはunmodified CLIに限定し、actual child PID / ordered ledgerを検査します。handoff
+bindingはprivate root / executable locator digestを含み、current-session callerだけが保持中の
+private requestから再計算します。
+official parentはrepo-root cwdの`python -E -s -S -B -m <checker-module>`です。unsupported / delta
+packed HEADはGit write、repack、subprocess fallbackなしでtyped STOPする既知のsafe ceilingです。
+
+承認される場合も40-field schema、comparator、formal lock、exact5 projection、
+owner / independentの意味、production source、100件runner、sample / fixture / corpusの変更は0です。
+checkerはmaterializationを再実装せず、same-instance claimはcurrent-session handoff bindingまでです。
+不成立時はrepair、retry、fallback、追加scanner / carrierなしでtyped STOPします。
 
 ## 8. distance and blocked downstream
 
@@ -170,27 +245,35 @@ G4-C、Gate C以降、Product Read、Cycle acceptanceへのautomatic progression
 1. Phase8 prefreeze executable preflight invalid — historical typed STOP。
 2. direct-native fresh runtime readiness — component evidence valid、canonical preimage schema欠落でpost-preflight typed STOP。
 3. canonical-preimage frozen fresh admission — activated、unconsumed、external phase1 launcher construction errorでtyped STOP。
+4. GitHub-tracked runtime admission checker V1 exact11 implementation — remote reflected、process / runtime / credit 0。
 
 各attemptのruntime root、wheel、output、identity、creditは次attemptへ再利用していません。
 
 ## 10. effect and STOP boundary
 
-production source、protected test、fixture、sample、corpus、mashos-api、CURRENT_RULES、Rule 13、Rule 16、historical baselineの変更は0です。
-GitHub publicationはauthority許可のexact6とReceipt-only finalizationだけです。
+production source、protected test、fixture、sample、corpus、100件runner、historical baselineの変更は0です。
+GitHub publicationはMash様が承認したexact11です。mashos-apiはtracked checker / test exact5、
+CocolonはCURRENT_RULES、Rule 13、Rule 16、本file、Current Closure Route、body-free Receipt exact6です。
 current authority終了後は `CURRENT_AUTHORITY_STOP`、`AUTOMATIC_PROGRESSION_FALSE` です。
 
 ## 11. evidence pointers
 
-- latest Receipt: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessRuntimeReadinessCanonicalPreimageFrozenFreshAdmission_V1_BodyFree_Receipt_20260811.json`
-- predecessor Receipt: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessFreshRuntimeReadiness_V1_BodyFree_Receipt_20260811.json`
+- latest Receipt: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_GateB_GitHubTrackedRuntimeAdmissionCheckerV1_BodyFree_Receipt_20260811.json`
+- predecessor Receipt: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessRuntimeReadinessCanonicalPreimageFrozenFreshAdmission_V1_BodyFree_Receipt_20260811.json`
 - route details: `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md`
 
 ```text
 CANONICAL_PREIMAGE_SCHEMA_FROZEN_BEFORE_EFFECT
 PROCESS_BODY_EXACT2_AVAILABLE_FULL_MATCH_AT_ENTRY
-AUTHORITY_ACTIVATED_EXACT1
-AUTHORITY_CONSUMED_0
-STATIC_COMPILE_COMMAND_CONSTRUCTION_ERROR
+HISTORICAL_AUTHORITY_ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR
+GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_CURRENT
+TRACKED_CHECKER_FAMILY_EXACT1
+RESPONSIBILITY_FILE_EXACT5
+IMPLEMENTED_UNEXECUTED_REMOTE_POSTVERIFIED
+CHANGED_PATHS_EXACT11
+CHECKER_PROCESS_0
+DEDICATED_TEST_PROCESS_0
+RUNTIME_EFFECT_0
 BLOCKER_NARROWED
 GATE_B_NOT_CLOSED
 RUNTIME_READY_FALSE
@@ -198,7 +281,7 @@ READINESS_CREDIT_0
 TECHNICAL_CREDIT_0
 PRODUCT_CREDIT_0
 CYCLE001_NOT_ACCEPTED
-METHOD_OR_PRODUCT_DECISION_CANDIDATE_INACTIVE
+NEXT_TECHNICAL_AUTHORITY_CANDIDATE_INACTIVE
 CURRENT_ACTIVE_AUTHORITY_NONE
 GATE_C_NOT_AUTHORIZED
 CURRENT_AUTHORITY_STOP

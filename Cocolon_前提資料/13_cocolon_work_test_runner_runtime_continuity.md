@@ -5,6 +5,7 @@ revision_date: "2026-08-11"
 status: "CURRENT_EFFECTIVE"
 effective_boundary: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
 effective_status_after_boundary: "CURRENT_NORMATIVE_CONTRACT"
+current_g4b_method_effective_when: "G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_IMPLEMENTATION_REMOTE_POSTVERIFIED"
 scope: "WORK_LOCAL_PYTHON_PYTEST_TEST_RUNNER_ONLY"
 decision_owner: "Mash"
 operation_owner: "Karen"
@@ -37,15 +38,15 @@ GitHub反映方法と完了判定の正本は、引き続き
 ### 0.1 current effect boundary
 
 Phase 5 Checkpoint Bのatomic current-owner cutoverはremote postverify済みです。
-本2026-08-11 revisionは、G4 helper-route retirement / direct-native-process method
-reflectionを含むcommitがremote postverifyされた時点で
+本2026-08-11 revisionは、G4 GitHub-tracked runtime admission checker V1のexact11
+implementation reflectionを含むcommitがremote postverifyされた時点で
 `CURRENT_NORMATIVE_CONTRACT`として有効になります。それ以前はremote predecessor
 ruleが有効であり、local postimageをtechnical authorityまたは実行許可として
 先行適用しません。
 
-本revisionの反映authority自体は文書・metadata同期だけです。process bodyの実装、
-freeze、actual-call、runtime、pytest、network、wheel、venv、install、Gate B、
-Gate C以降を許可しません。
+本revisionの反映authorityはtracked checker / test exact5の実装とCocolon exact6の同期だけです。
+checker / test process、synthetic actual-call、runtime、pytest、network、wheel、fresh root、venv、
+install、Gate B execution、Gate C以降を許可しません。
 
 ### 0.2 Cycle001 navigation owner separation
 
@@ -421,10 +422,11 @@ target launch requestをOSへ渡してauthorityがconsumedになった後のfail
 failure、test failure、identity / comparator / denominator conflict、dependency / network /
 runtime-role changeはbounded mechanical repair対象外であり、従来どおりno retryです。
 
-### 7.5 current G4-B direct-native-process method
+### 7.5 historical G4-B direct-native-process method
 
-本sectionは、current G4-B
-`G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B`だけに適用するmethod overrideです。
+本sectionは、2026-08-11のprior G4-B
+`G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B`に適用されたhistorical method overrideです。
+このrouteはclosed / nonreusableであり、current methodは§7.6を正とします。
 §§7.1〜7.4の一般contractとhistorical observationは保持しますが、current G4-Bでは
 authority-local / session-local helper file・helper callable・helper Path API boundaryを
 退役済みとし、helper修正、V3化、再利用へ戻りません。
@@ -506,10 +508,131 @@ runtime READY / readiness credit / Gate B:
 false / 0 / NOT_CLOSED
 ```
 
-本2026-08-11 reflectionではprocess bodyの実装・freeze・実行を行いません。direct native
+このhistorical 2026-08-11 reflectionではprocess bodyの実装・freeze・実行を行いませんでした。direct native
 owner / independent process actual-call、runtime、pytest、network、wheel取得、venv、install、
 Gate B executionはすべて0です。future technical authorityは別のMash様明示承認を必要とし、
 本sectionから自動進行しません。
+
+### 7.6 current G4-B GitHub-tracked runtime admission checker method
+
+Mash様の2026-08-11 explicit approvalにより、current G4-Bのmethodを次へ置換します。
+
+```text
+method id:
+GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
+
+tracked checker family:
+exact1
+
+logical responsibility / file:
+exact5 / exact5
+
+owner / independent execution design:
+separate file / separate OS process / separate derivation
+
+legacy helper / additional scanner / additional carrier:
+exact0 / exact0 / exact0
+```
+
+V1のtracked filesは次のexact5です。
+
+```text
+ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_contract_v1.py
+ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py
+ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_owner_v1.py
+ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_independent_v1.py
+ai/tests/test_emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py
+```
+
+existing materialization procedure exact2のV1 input identifierは、順序を含めて次へ固定します。
+
+```text
+COCOLON_RULE13_RUNTIME_CONTINUITY_V20260811
+COCOLON_RULE16_ONE_SHOT_PRELAUNCH_V20260811
+```
+
+このidentifierは手順本体の代替ではなく、このRule 13とcurrent Rule 16に従って外部で
+materializationしたfresh instanceのprovenanceをchecker inputへ束縛するlabelです。
+
+contractはstrict UTF-8 JSON、unknown-field rejection、fixed check order、canonical
+serialization、versioned request / owner result / independent result / public result /
+private handoff schemaを所有します。V1のfield意味とcheck順序は変更せず、V2はPro華恋と
+Ultra華恋の相互確認、変更理由、Mash様の別承認がある場合だけ追加します。
+
+orchestratorは、external existing procedureでfresh materialization済みのinstanceと
+body-free materialization evidenceだけを入力にします。acquisition、materialization、
+install、download、venv作成をcheckerへ再実装しません。ownerは`importlib.metadata`起点の
+distribution-first record claim、independentは`dist-info / RECORD / actual filesystem`起点の
+filesystem-first reverse ownershipから導出します。両者は別file・別OS process・別PID・
+別call graphとし、導出関数、filesystem traversal、coverage計算、intermediate stateを
+共有しません。共有可能なのはimmutable contract / schemaと同一raw inputだけです。
+
+freshnessのhistorical nonexistence / materialization completionはexisting procedure exact2が
+観測するexternal trust boundaryです。private requestはroot locator SHA-256とexpected
+full-root manifest SHA-256を持ち、materialization event IDはauthority、observation session、
+ordered procedure exact2、fresh true、prior reuse 0、root locator、expected full-root、fixed
+site / executable relative locatorのversioned canonical preimageからcheckerが再導出します。
+checkerはこのattestationを受理したうえでactual full-rootをorchestrator / owner / independentの
+別実装から導出し、expectedを含む4者のexact matchとpre/post不変を要求します。checker単独が
+materialization前のroot不存在を再観測した、または過去artifact不存在を証明したとはclaimしません。
+
+`INPUT_SCHEMA_AND_HEAD_BINDING`はrequest内の40-hex label確認ではありません。actual checkoutの
+HEAD commitをGit metadataから、treeをtracked indexとactual tracked bytesからstdlibだけで
+read-only再導出し、request frozen commit / treeへexact matchさせます。Git subprocess、network、
+write、unsupported Git formへのfallbackは0で、解決不能または不一致はfail-closed STOPです。
+formal lock tracked JSONのactual raw SHA-256もpre / smoke後 / post bindingでfrozen identityへ照合します。
+required-role smokeはPython audit hookでfilesystem write / process launch / networkをdenyし、
+required source exact3のpre/post identityも一致した場合だけeffect 0をclaimします。
+
+admission creditを発行できるsurfaceはtracked bytesのunmodified CLI exact1だけです。
+library call、injected runner、monkeypatch、fake completed processはnon-admissibleです。CLIは
+actual Popen child PIDを取得してchild result PIDへ照合し、owner / pytest / smoke / independentの
+ordered stage ledger exact4からprocess countと順序を導出します。hardcoded countまたはchildの
+自己申告だけから別process成立をclaimしません。
+
+official parent argvはrepository rootをcwdとする
+`python -E -s -S -B -m ai.tools.emlis_nls_v3_s11_g4b_runtime_admission_checker_v1`です。
+checkerはignore-environment / no-user-site / no-site / dont-write-bytecode flags、module spec、cwdを
+開始時に再確認します。この形以外のscript / import / library invocationはcredit 0です。
+
+Git object readerはloose commitまたはnon-delta packed commitをstdlibで検証します。delta packed
+HEAD、unsupported index / Git object form、commit-tree結合を証明できない状態ではfallback、git
+subprocess、repackを行わず`BASE_OR_PREIMAGE_DRIFT`でSTOPします。
+
+check orderは次のexact9です。
+
+```text
+INPUT_SCHEMA_AND_HEAD_BINDING
+FRESH_MATERIALIZATION_EVIDENCE
+PRE_ROOT_AND_FROZEN_IDENTITIES
+OWNER_DERIVATION
+PYTEST_VERSION_PROBE
+REQUIRED_ROLE_SMOKE
+INDEPENDENT_DERIVATION
+RECONCILIATION_AND_POST_ROOT
+SAME_INSTANCE_HANDOFF_BINDING
+```
+
+checkerは全modeでtarget filesystemへwriteしません。repair、retry、fallback、alternate
+interpreter、external service、daemon、CI control plane、DB、API、新transport、stdlib外
+dependency、production EmlisAI import、100件runner、sample / fixture / corpusの変更または
+100件生成・実行・評価は0です。
+
+same-instance claimはcurrent sessionのprivate locator、materialization event、root / executable /
+control identity、pre/post full-root identityを結んだ`HANDOFF_BOUND_CURRENT_SESSION`までです。
+future Gate Cがexact admitted executableとidentityを直前再導出して実launchした場合だけ
+`HANDOFF_CONSUMED`をclaimできます。checker成功だけでfuture consumptionをclaimしません。
+private locatorを保持するcurrent-session callerがbindingの受領境界です。public resultはlocatorを
+返さずbinding digestだけを返すため、receiver processによるfuture consumption事実は証明しません。
+binding preimageはabsolute root / executableのlocator SHA-256を含み、current-session callerは
+保持中のprivate requestからbindingを再計算できます。locator digest単体もpublicへ出しません。
+
+このimplementation reflectionではtracked exact5の実装とCocolon exact6の同期だけを行います。
+checker process、dedicated test process、synthetic actual-call、network、runtime、wheel取得、
+materialization、pytest probe、role smoke、target、100件、Gate B executionは0です。したがって
+Runtime READYはfalse、readiness observation IDは`NOT_DERIVED`、Gate Bはopen、readiness /
+technical / product creditは0で、future verification / fresh admissionはMash様の別承認を
+必要とし、Gate C以降へ自動進行しません。
 
 ## 8. Gate C: TARGET_EXECUTION_ADMISSION
 
@@ -643,7 +766,7 @@ no historical recredit、Mash様へのruntime path / venv / pytest要求禁止�
 
 Phase 5 Checkpoint B remote postverifyにより、§13のcurrent-navigation pointerと
 front-matter statusに関する旧記述はsuperseded済みです。§13のincident事実と§§0〜10の
-historical observationsは書き換えません。current G4-B methodは§7.5を正とします。
+historical observationsは書き換えません。current G4-B methodは§7.6を正とします。
 
 effective boundary後のroutingは次です。
 
@@ -663,8 +786,8 @@ historical evidence map:
 
 actual entrypoint signature、production-same read path synthetic execution、UTF-8 /
 newline / bytes、output schemaのpre-freeze proofがないhelper / launcherを一般contractで
-freezeしません。current G4-Bには§7.5のdirect-native-process actual-call preflightを適用し、
-§7.3のhelper repairまたはsecond method repairへ戻りません。
+freezeしません。current G4-Bには§7.6のGitHub-tracked admission checker contractを適用し、
+§7.3のhelper repair、closed §7.5 route、second method repairへ戻りません。
 
 ```text
 CURRENT_EFFECTIVE

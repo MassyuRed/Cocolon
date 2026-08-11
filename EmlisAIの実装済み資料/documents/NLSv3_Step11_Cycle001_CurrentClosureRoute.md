@@ -5,7 +5,7 @@ canonical_path: "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Cu
 revision_date: "2026-08-11"
 status: "CURRENT_EFFECTIVE"
 normative_status: "CURRENT_DERIVATIVE_OWNER"
-effective_when: "GATE_B_CANONICAL_PREIMAGE_AUTHORITY_PHASE1_COMMAND_STOP_REMOTE_POSTVERIFIED"
+effective_when: "G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_IMPLEMENTATION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operation_owner: "Karen"
 repository: "MassyuRed/Cocolon"
@@ -14,12 +14,12 @@ body_free: true
 technical_authority: false
 cycle001: "NOT_ACCEPTED"
 current_selected_lane: "POST_G6_SHARED_STRUCTURAL_CORRECTION"
-current_selected_method: "NONE_PENDING_MASH_METHOD_OR_PRODUCT_DECISION"
+current_selected_method: "GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1"
 current_first_unfinished_gate: "G4_GATE_B_RUNTIME_READINESS_ADMISSION"
 current_runtime_ready: false
 current_readiness_credit: 0
 automatic_progression: false
-next_method_or_product_decision_separate_approval_required: true
+next_technical_authority_separate_approval_required: true
 ---
 
 # NLS v3 Step 11 Cycle001 Current Closure Route
@@ -54,9 +54,13 @@ Phase 8 entry / final:
 c5009a2d5281bc74d48fb189e97453367ddacba0 /
 5abf4a211b971f1fe65313e46522bcf5973d7324
 
-mashos-api current head / tree:
+mashos-api checker implementation base head / tree:
 45bf98f9034261d3adb3e808d6d759f2334e2d25 /
 23f1684ed5430cafef955d7af9fc6bde75a4c62f
+
+mashos-api checker implementation current head / tree:
+00a8979e08c7ac4a131cfdf9ada21aaa57d73676 /
+3ac627bceacf902e5cc55f1258604e9232c350b9
 ```
 
 Phase 2はoriginal planning baseline exact3だけを追加しました。そのoriginal bytesとoriginal G0〜G10 acceptanceは不変です。Phase 8はpre-freeze actual-call terminalと`08`のbody-free記録だけをpublicationし、source、test、fixture、sample、mashos-api、runtime stateを変更していません。
@@ -112,6 +116,119 @@ SATURATION_1000_NOT_REACHED
 ACTUAL_DEVICE_NOT_AUTHORIZED
 CYCLE002_SEPARATE_APPROVAL_REQUIRED
 CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+## 2.1 2026-08-11 current method update — GitHub-tracked checker V1 exact11 implementation
+
+本sectionはこのfileのhistorical factsを消さず、current method / implementation / next boundaryだけを
+current actualへ更新します。
+
+Mash様はPro華恋とUltra華恋の共同final candidateについて、変更path上限7を解除し、
+1責務1fileのexact11案によるimplementationとGitHub reflectionを明示承認しました。
+
+```text
+current method:
+GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
+
+tracked checker family:
+exact1
+
+responsibility / file:
+exact5 / exact5
+
+changed paths:
+exact11
+
+mashos-api ADD:
+exact5
+
+Cocolon ADD / MODIFY:
+exact1 / exact5
+```
+
+tracked exact5はcontract / schema、orchestrator、owner derivation、independent derivation、
+dedicated testをそれぞれ別fileへ置きます。ownerとindependentは別OS process・別PID・別導出とし、
+導出関数、filesystem traversal、coverage計算、intermediate stateを共有しません。共有は
+versioned immutable contract / schemaと同一raw inputだけです。
+
+checkerはRule 13 / Rule 16のexisting procedureでexternal materialization済みのfresh instanceを
+read-only確認します。acquisition、materialization、install、download、repair、retry、fallback、
+external service、daemon、CI control plane、DB、API、新transport、stdlib外dependencyをcheckerへ
+追加しません。production EmlisAI source、100件runner、sample、fixture、corpusの変更と、100件の
+生成・実行・評価は0です。
+
+freshness / expected full-rootはexisting procedure exact2のexternal attestation boundaryです。
+checkerはversioned event IDを再導出してroot locatorへ結び、actual Git HEAD / treeと、別実装の
+orchestrator / owner / independent full-rootをexpectedへexact matchさせます。role smokeのeffect 0は
+write / process / network deny observationとsource pre/post同一を根拠にします。checker単独で過去の
+root不存在を再観測したとはclaimしません。
+
+admission creditはunmodified tracked CLI exact1だけが発行でき、actual Popen PIDとchild result PID、
+ordered stage ledger exact4を照合します。handoff bindingはprivate absolute root / executable locatorの
+SHA-256をpreimageへ含めますが、locator、locator digest単体、private envelopeはpublicへ出しません。
+official parent argvはrepo-root cwdの`python -E -s -S -B -m <checker-module>`です。delta packed
+HEAD / unsupported Git formはGit write、repack、git subprocessへfallbackせずtyped STOPします。
+
+same-instance claimはGate Bでは`HANDOFF_BOUND_CURRENT_SESSION`までです。Gate Cは別承認の下で
+current identityを直前再導出し、exact admitted executableをlaunchした場合だけ
+`HANDOFF_CONSUMED`をclaimできます。checker successからGate Cへ自動進行しません。
+
+今回のimplementation reflectionは次でterminalです。
+
+```text
+terminal:
+GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_IMPLEMENTED_UNEXECUTED_REMOTE_POSTVERIFIED
+
+checker / dedicated test process:
+0 / 0
+
+owner / independent process:
+0 / 0
+
+synthetic actual-call / network / runtime effect:
+0 / 0 / 0
+
+wheel / fresh root / venv / install:
+0 / 0 / 0 / 0
+
+pytest probe / role smoke / target / exact100:
+0 / 0 / 0 / 0
+
+Runtime READY / readiness id / Gate B / credit:
+false / NOT_DERIVED / OPEN / 0
+
+Gate C:
+NOT_AUTHORIZED
+
+current active authority:
+NONE
+
+automatic progression:
+false
+```
+
+next exact1は
+`NLS_V3_STEP11_CYCLE001_G4_GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_VERIFICATION_AND_FRESH_READINESS_ADMISSION_CANDIDATE`
+です。これは`TECHNICAL_AUTHORITY_CANDIDATE / DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED`
+であり、本reflectionからactivateまたはexecuteしません。
+
+routeは引き続き `G4-B → G4-C → G5 → G6 Product Read` exact4です。
+
+```text
+CURRENT_FIRST_UNFINISHED_GATE_G4_GATE_B
+CURRENT_METHOD_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
+TRACKED_CHECKER_FAMILY_EXACT1
+RESPONSIBILITY_FILE_EXACT5
+IMPLEMENTED_UNEXECUTED_REMOTE_POSTVERIFIED
+CHANGED_PATHS_EXACT11
+RUNTIME_READY_FALSE
+READINESS_CREDIT_0
+GATE_B_NOT_CLOSED
+TECHNICAL_CREDIT_0
+PRODUCT_CREDIT_0
+NEXT_TECHNICAL_AUTHORITY_CANDIDATE_INACTIVE
+GATE_C_NOT_AUTHORIZED
 AUTOMATIC_PROGRESSION_FALSE
 ```
 
@@ -296,7 +413,7 @@ current GateからG10までの最短known sequential boundaryはexact11です。
 
 | Gate | Entry | Exit | STOP / branch |
 |---|---|---|---|
-| **G4-B current** | authority-bound comparator/process/input/output/readiness identity schemas、same-body synthetic preflight、prior reuse0 | direct owner / independent `VALID / VALID / FULL_MATCH`、probe/smoke VALID、full-root一致、authority-frozen readiness observation identity、`RUNTIME_READY_CURRENT_SESSION` | current authorityはreadiness preimage未freezeでtyped STOP。retry / reacquisition / root repair / fallback / body repair / third normal authority0 |
+| **G4-B current** | current tracked checker exact5 identity、versioned strict schema、external existing procedureによるfresh instance、prior reuse0、別承認 | separate-process owner / independent `VALID / VALID / FULL_MATCH`、probe/smoke VALID、pre/post full-root一致、readiness observation identity、`HANDOFF_BOUND_CURRENT_SESSION`、`RUNTIME_READY_CURRENT_SESSION` | checker implementationだけでは未実行。repair / retry / fallback / additional scanner / carrier / Gate C progression 0 |
 | **G4-C blocked RED-only** | Gate B READY postverified、post-G6 G3 contract / test preimage / ordered exact24一致、別承認 | first22 PASS + new exact2 causal RED、`22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR`、production change0 | Gate B未閉鎖中は候補化・実行しない。symbol-only / unconditional RED、case cue、historical exact2 / full52混入禁止 |
 | **G5 GREEN-only** | G4 RED bytes / denominator / mutable exact3 / body budget / preimages一致、別承認 | same exact24 `24 PASS / 0 FAIL`、semantic / Safety / privacy / resource非回帰、production exact1 postverified | mutable exact3外、test / fixture / sample / Parser / Matcher / API / DB / RN変更、case branch、machine GREENの商品PASS化 |
 | **G6 Product Read** | G5 production blob、exact10 / exact8 / controls / 12 axes一致、private read + body-free publication、別承認 | §5.1 threshold全成立 | MAJOR残存はshared correctionへreturn。case cue、contract破壊、cumulative rerun不能だけmethod STOP候補 |
@@ -485,7 +602,7 @@ third normal authority、automatic progressionは0です。
 
 ---
 
-## 9. current closure statement
+## 9. historical closure statement before tracked checker V1
 
 ```text
 CURRENT_CLOSURE_ROUTE_EFFECTIVE
@@ -520,9 +637,9 @@ CURRENT_NAVIGATION_OWNER_08
 AUTOMATIC_PROGRESSION_FALSE
 ```
 
-## 10. 2026-08-11 current terminal update — canonical-preimage authority phase1 command STOP
+## 10. historical terminal update — canonical-preimage authority phase1 command STOP
 
-本sectionは、上記のhistorical factsを消さず、これより前のcurrent method / next-candidate表記だけをcurrent actualへ更新します。
+本sectionは、GitHub-tracked checker V1導入前のhistorical current actualを保持します。current method / next boundaryは§2.1を正とします。
 
 - latest authority: `NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_RUNTIME_READINESS_CANONICAL_PREIMAGE_FROZEN_FRESH_ADMISSION_V1`
 - lifecycle: `CLOSED_ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR_REMOTE_POSTVERIFIED`
