@@ -1,0 +1,192 @@
+{
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_IMPLEMENTATION_BODY_FREE_RECEIPT_20260811",
+  "receipt_version": 1,
+  "recorded_at_jst_date": "2026-08-11",
+  "body_free": true,
+  "decision_owner": "Mash",
+  "operation_owner": "Karen",
+  "approval": {
+    "kind": "MASH_EXPLICIT_IMPLEMENTATION_AND_GITHUB_REFLECTION_APPROVAL",
+    "candidate_id": "G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_20260811",
+    "approved_scope": "ONE_RESPONSIBILITY_ONE_FILE_EXACT11_IMPLEMENTATION_AND_GITHUB_REFLECTION",
+    "changed_path_limit": 11,
+    "automatic_progression": false
+  },
+  "effective_boundary": {
+    "required": "BOTH_REPOSITORY_WRITES_AND_REMOTE_READ_BACK_POSTVERIFY_COMPLETE",
+    "local_postimage_is_authority": false,
+    "historical_authority_reuse": false
+  },
+  "base": {
+    "Cocolon_commit": "1cc5ace42e937b196e56b0705eb842969389f5ea",
+    "mashos_api_commit": "45bf98f9034261d3adb3e808d6d759f2334e2d25",
+    "mashos_api_tree": "23f1684ed5430cafef955d7af9fc6bde75a4c62f"
+  },
+  "publication_identities": {
+    "mashos_api_commit": "00a8979e08c7ac4a131cfdf9ada21aaa57d73676",
+    "mashos_api_tree": "3ac627bceacf902e5cc55f1258604e9232c350b9",
+    "mashos_api_blobs": {
+      "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_contract_v1.py": "39bb37cf83d9e7fea15ed537df069dd9057b5b12",
+      "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py": "c86fdd2e8fc843eb0a25964b4fe9b9cf92cd6d2a",
+      "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_owner_v1.py": "43a90bc0416aa564de014f4f140bdc801b5eeb0b",
+      "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_independent_v1.py": "42cfb13bf553714409b45539738e3e492f9fe388",
+      "ai/tests/test_emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py": "7086adc197993d1e458b8fbfc45137ccf779e95d"
+    },
+    "Cocolon_content_commit_before_receipt_finalization": "c3f013e90a8b484b619a4c8e770faa242d21b794",
+    "Cocolon_content_tree_before_receipt_finalization": "d60f0967ac0e85a9d68b198150dfe24fc871b324",
+    "Cocolon_content_blobs": {
+      "Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md": "487be1582d4cd08f8ac5172df6e5b8946e9ee51b",
+      "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md": "5554dc5b715ca815efa531e57ba2459716e40cdb",
+      "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt": "4f07b91eab9f6bfda7c822e735d1eda91b5e7de8",
+      "Cocolon_前提資料/08_cycle001_current_state.md": "17d62f93fd5a057244ff8a7e13961af06a080c3a",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md": "1b65b7e2418c5c2929b963bbeec102812919dcdc"
+    },
+    "receipt_final_commit_tree_and_blob": "RESOLVE_FROM_FINAL_GIT_HISTORY_AND_CANONICAL_PATH_TO_AVOID_SELF_REFERENCE"
+  },
+  "method_replacement": {
+    "prior_current_method": "GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1",
+    "prior_method_treatment": "CLOSED_NONREUSABLE_HISTORICAL",
+    "current_method": "GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1",
+    "replacement_is_explicit": true,
+    "rename_or_retry_of_retired_helper_route": false,
+    "tracked_checker_family_count": 1,
+    "legacy_helper_count": 0,
+    "additional_scanner_count": 0,
+    "additional_carrier_count": 0
+  },
+  "changed_paths": {
+    "total": 11,
+    "mashos_api_add": 5,
+    "mashos_api_modify": 0,
+    "mashos_api_delete": 0,
+    "Cocolon_add": 1,
+    "Cocolon_modify": 5,
+    "Cocolon_delete": 0,
+    "paths": [
+      "MassyuRed/mashos-api:ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_contract_v1.py",
+      "MassyuRed/mashos-api:ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py",
+      "MassyuRed/mashos-api:ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_owner_v1.py",
+      "MassyuRed/mashos-api:ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_independent_v1.py",
+      "MassyuRed/mashos-api:ai/tests/test_emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py",
+      "MassyuRed/Cocolon:Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md",
+      "MassyuRed/Cocolon:Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+      "MassyuRed/Cocolon:Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+      "MassyuRed/Cocolon:Cocolon_前提資料/08_cycle001_current_state.md",
+      "MassyuRed/Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md",
+      "MassyuRed/Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_GateB_GitHubTrackedRuntimeAdmissionCheckerV1_BodyFree_Receipt_20260811.json"
+    ]
+  },
+  "responsibility_files": {
+    "count": 5,
+    "contract_schema": "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_contract_v1.py",
+    "orchestrator": "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py",
+    "owner_derivation": "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_owner_v1.py",
+    "independent_derivation": "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_independent_v1.py",
+    "dedicated_test": "ai/tests/test_emlis_nls_v3_s11_g4b_runtime_admission_checker_v1.py"
+  },
+  "fixed_contract": {
+    "standard_library_only": true,
+    "strict_utf8_json_existing_stdin_stdout": true,
+    "unknown_field_policy": "REJECT",
+    "versioned_contract": true,
+    "owner_and_independent_separate_file": true,
+    "owner_and_independent_separate_process_design": true,
+    "owner_and_independent_separate_derivation": true,
+    "shared_derivation_function_count": 0,
+    "shared_intermediate_state_count": 0,
+    "materialization_procedure_ids_ordered_exact2": [
+      "COCOLON_RULE13_RUNTIME_CONTINUITY_V20260811",
+      "COCOLON_RULE16_ONE_SHOT_PRELAUNCH_V20260811"
+    ],
+    "freshness_observation_owner": "EXTERNAL_EXISTING_PROCEDURE_EXACT2",
+    "checker_freshness_claim_ceiling": "CANONICAL_EXTERNAL_ATTESTATION_ACCEPTED_AND_ACTUAL_ROOT_MATCHED_NOT_HISTORICAL_NONEXISTENCE_PROVED_BY_CHECKER",
+    "materialization_event_binds": [
+      "authority_id",
+      "observation_session_id",
+      "ordered_procedure_exact2",
+      "fresh_root_nonexistent_before_true",
+      "prior_artifact_reuse_count_zero",
+      "root_locator_sha256",
+      "expected_full_root_manifest_sha256",
+      "fixed_site_and_executable_relative_locators"
+    ],
+    "actual_head_tree_binding": "GIT_METADATA_PLUS_TRACKED_INDEX_PLUS_ACTUAL_TRACKED_BYTES_READ_ONLY",
+    "formal_lock_actual_raw_binding": "TRACKED_JSON_PRE_SMOKE_POST_RAW_SHA256_EXACT_MATCH",
+    "full_root_reconciliation": "EXPECTED_EXTERNAL_ATTESTATION_PLUS_ORCHESTRATOR_PLUS_OWNER_PLUS_INDEPENDENT_EXACT_MATCH_AND_PRE_POST_UNCHANGED",
+    "role_smoke_effect_zero_basis": "AUDIT_HOOK_DENY_FILESYSTEM_WRITE_PROCESS_NETWORK_PLUS_REQUIRED_SOURCE_EXACT3_PRE_POST_MATCH",
+    "admission_credit_surface": "UNMODIFIED_TRACKED_CLI_EXACT1_ONLY",
+    "official_parent_invocation": "REPO_ROOT_CWD_PYTHON_-E_-s_-S_-B_-m_ai.tools.emlis_nls_v3_s11_g4b_runtime_admission_checker_v1",
+    "official_parent_required_flags": [
+      "IGNORE_ENVIRONMENT",
+      "NO_USER_SITE",
+      "NO_SITE",
+      "DONT_WRITE_BYTECODE"
+    ],
+    "noncredit_surfaces": [
+      "LIBRARY_INVOCATION",
+      "INJECTED_RUNNER",
+      "MONKEYPATCHED_PROCESS",
+      "FAKE_COMPLETED_PROCESS"
+    ],
+    "process_cardinality_basis": "ACTUAL_POPEN_PID_EQUALS_CHILD_RESULT_PID_PLUS_ORDERED_STAGE_LEDGER_EXACT4",
+    "unsupported_git_object_policy": "DELTA_PACKED_HEAD_OR_UNSUPPORTED_INDEX_OR_OBJECT_FORM_TYPED_STOP_NO_GIT_SUBPROCESS_REPACK_OR_FALLBACK",
+    "checker_filesystem_effect": "READ_ONLY",
+    "acquisition_or_materialization_reimplementation": false,
+    "same_instance_gate_b_claim_ceiling": "HANDOFF_BOUND_CURRENT_SESSION",
+    "handoff_private_locator_owner": "CURRENT_SESSION_CALLER",
+    "handoff_locator_binding": "ABSOLUTE_ROOT_AND_EXECUTABLE_LOCATOR_SHA256_INCLUDED_ONLY_INSIDE_BINDING_PREIMAGE",
+    "handoff_consumed_requires_future_gate_c_exact_launch": true
+  },
+  "forbidden_change_counts": {
+    "production_EmlisAI_source": 0,
+    "one_hundred_case_runner": 0,
+    "sample": 0,
+    "fixture": 0,
+    "corpus": 0,
+    "external_service": 0,
+    "daemon": 0,
+    "CI_control_plane": 0,
+    "DB": 0,
+    "API": 0,
+    "new_transport": 0,
+    "non_stdlib_dependency": 0
+  },
+  "execution_counts": {
+    "checker_process": 0,
+    "dedicated_test_process": 0,
+    "owner_process": 0,
+    "independent_process": 0,
+    "synthetic_actual_call": 0,
+    "network": 0,
+    "runtime_effect": 0,
+    "wheel_acquisition": 0,
+    "fresh_root": 0,
+    "venv": 0,
+    "install": 0,
+    "pytest_probe": 0,
+    "required_role_smoke": 0,
+    "target_execution": 0,
+    "one_hundred_case_generation_execution_evaluation": 0
+  },
+  "current_state_after_effective_boundary": {
+    "primary": "BLOCKER_NARROWED",
+    "implementation": "IMPLEMENTED_UNEXECUTED",
+    "runtime_ready": false,
+    "readiness_observation_id": "NOT_DERIVED",
+    "readiness_credit": 0,
+    "Gate_B_closed": false,
+    "Gate_B_technical_credit": 0,
+    "Gate_B_product_credit": 0,
+    "Gate_C_authorized": false,
+    "Cycle001_accepted": false,
+    "current_active_authority": "NONE",
+    "automatic_progression": false
+  },
+  "next_boundary": {
+    "candidate": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_VERIFICATION_AND_FRESH_READINESS_ADMISSION_CANDIDATE",
+    "classification": "TECHNICAL_AUTHORITY_CANDIDATE",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "activation": 0,
+    "execution": 0
+  }
+}
