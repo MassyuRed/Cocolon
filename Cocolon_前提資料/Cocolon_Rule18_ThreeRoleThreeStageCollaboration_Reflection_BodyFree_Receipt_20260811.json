@@ -1,0 +1,294 @@
+{
+  "schema_version": "cocolon.rules.rule18.three_role_three_stage_collaboration.reflection.body_free_receipt.v1",
+  "date": "2026-08-11",
+  "body_free": true,
+  "public_safe": true,
+  "request_basis": {
+    "request_owner": "Mash",
+    "request_type": "EXPLICIT_POLICY_UPDATE_AND_GITHUB_REFLECTION_REQUEST",
+    "requested_result": "MIX_PRO_KAREN_OPINION_WITH_ULTRA_KAREN_OPINION_AND_UPDATE_CURRENT_COLLABORATION_POLICY",
+    "technical_execution_authority_created": false,
+    "cycle001_authority_created": false,
+    "approval_or_identity_inheritance_count": 0
+  },
+  "source_material": {
+    "source_count": 2,
+    "sources": [
+      {
+        "name": "三者の役割.txt",
+        "utf8_bytes": 3210,
+        "lf_count": 110,
+        "final_lf": true,
+        "raw_sha256": "40b9a4b62eda86519e0692afc5023f6a8cf89391f8c0deb0f0cf5c184ea538f2"
+      },
+      {
+        "name": "作業の流れ三段階.txt",
+        "utf8_bytes": 8345,
+        "lf_count": 210,
+        "final_lf": false,
+        "raw_sha256": "ff3565996d7cc5a49cc4a72a5d783ddfa3c0e8f9f720bc86d5e392955a836f09"
+      }
+    ]
+  },
+  "entry": {
+    "repository": "MassyuRed/Cocolon",
+    "base_head_sha1": "9df1ed253a9d29bd58b023026907aba8fc0a862a",
+    "base_tree_sha1": "137e590e8d715c6072deb5d8017ff8aec5880229",
+    "stage1_commit_sha1": "7dc8693f13c95de13e6229d439d262eca76ae18e",
+    "stage1_tree_sha1": "dac3aba52ba3f4550c857573bb9719ec0ece5d50",
+    "receipt_path": "Cocolon_前提資料/Cocolon_Rule18_ThreeRoleThreeStageCollaboration_Reflection_BodyFree_Receipt_20260811.json",
+    "receipt_path_preexisting": false
+  },
+  "approved_scope": {
+    "authorized_path_count": 10,
+    "modify_path_count": 9,
+    "add_path_count": 1,
+    "delete_path_count": 0,
+    "rename_path_count": 0,
+    "authorized_paths": [
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/05A_cocolon_chat_work_environment_rule_index_20260806.md"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/08_artifact_delivery_rules.txt"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt"
+      },
+      {
+        "change": "ADD",
+        "path": "Cocolon_前提資料/Cocolon_Rule18_ThreeRoleThreeStageCollaboration_Reflection_BodyFree_Receipt_20260811.json"
+      }
+    ]
+  },
+  "changed_owner_postimages": [
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt",
+      "preimage_blob_sha1": "b2f04b5449a7b2e7bebc4d6006cb1c6faad0e7bd",
+      "postimage_blob_sha1": "bee844aeae4ff1bb2d0f475081ef309f114f4b19",
+      "postimage_raw_sha256": "ed77e1b520061ba572123c23b7b1e2b6655cbbdcb41f93b563ec03b44d2dc1fb",
+      "postimage_utf8_bytes": 6543,
+      "postimage_lf_count": 123,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/05A_cocolon_chat_work_environment_rule_index_20260806.md",
+      "preimage_blob_sha1": "502bca2ea202b51ed4a3e11e14833e6e2402a800",
+      "postimage_blob_sha1": "30bbaf7931af98eae726aff60b717b3d71243fc4",
+      "postimage_raw_sha256": "75832f31608ab2101a280d9d778fabe8148e0d409cb403539eaa77edbc437bec",
+      "postimage_utf8_bytes": 3397,
+      "postimage_lf_count": 63,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/08_artifact_delivery_rules.txt",
+      "preimage_blob_sha1": "fc5cd36449dcae1cb62e7e51d4ad24f1ba76a21b",
+      "postimage_blob_sha1": "d14f0957cf9d5a4fd0a7192ac28e6916e9c0b836",
+      "postimage_raw_sha256": "7e89b7129f73df4295443b968ea42ad3a8530a439d2d461e0380a7b2e8af06f5",
+      "postimage_utf8_bytes": 6308,
+      "postimage_lf_count": 120,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/09_work_start_checklist.txt",
+      "preimage_blob_sha1": "469ae1dd09679da6d3afc6ea496d19f7156a9939",
+      "postimage_blob_sha1": "4384248427092835a75a01bf40994d614804558c",
+      "postimage_raw_sha256": "d8b8fe28b29b18d22b2c975ad97dd3819a8c4e1b36f592fcd1d02b4ec71088fa",
+      "postimage_utf8_bytes": 10614,
+      "postimage_lf_count": 160,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md",
+      "preimage_blob_sha1": "a8ffd078eac189562004c6e98494156ea6c12582",
+      "postimage_blob_sha1": "8ce653592976ad51a4fa053ca83ea26f0472e5d6",
+      "postimage_raw_sha256": "8ab12c195bb86357f0a4b757f1644c515aa00d6ea2f5998eb11bd427066b1a70",
+      "postimage_utf8_bytes": 45132,
+      "postimage_lf_count": 894,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/99_integrated_paste_each_time.txt",
+      "preimage_blob_sha1": "b22f59e56aac92ec27e77ffcb4729b18b6c50ce0",
+      "postimage_blob_sha1": "97e2a2364d2906c9508b0ae461f7c38d9280e4ae",
+      "postimage_raw_sha256": "6e7adc7a9204c46bdf1c9b318f4d62156a05462e9b9f387eefbb9f14eca8d1b9",
+      "postimage_utf8_bytes": 5616,
+      "postimage_lf_count": 81,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md",
+      "preimage_blob_sha1": "9cb9e42e1d50963c94ca6faaf6800b9918587f61",
+      "postimage_blob_sha1": "969a6c3d3c5c95164b1bc27ddfb941dac2cb1270",
+      "postimage_raw_sha256": "24fe54dc7755d9254bf4126d3bf1698b0634936b5726da81714ec9abbbdafe16",
+      "postimage_utf8_bytes": 19854,
+      "postimage_lf_count": 270,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/manifest.json",
+      "preimage_blob_sha1": "03e0023fee38c0bf5783665e9bc3d6c33aa861b9",
+      "postimage_blob_sha1": "9310ac825d435107bee786148842c67c20ee2431",
+      "postimage_raw_sha256": "fe5566acf6281e6c84bcd46798154c0c6f4f072cb3e0de7b4843122c0e23b82d",
+      "postimage_utf8_bytes": 8427,
+      "postimage_lf_count": 149,
+      "postimage_final_lf": true
+    },
+    {
+      "path": "Cocolon_前提資料/work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt",
+      "preimage_blob_sha1": "f28e40f2d3441d2278d51a44b35cb209550f857b",
+      "postimage_blob_sha1": "154dbcbd5d1c9c7d734e04bdf8f7923442ac93d3",
+      "postimage_raw_sha256": "13a91de752067f95cf5bed85bae1bb2ee8509d1e1429a931d60df64420614e3e",
+      "postimage_utf8_bytes": 33694,
+      "postimage_lf_count": 460,
+      "postimage_final_lf": true
+    }
+  ],
+  "historical_receipt_preservation": {
+    "path": "Cocolon_前提資料/Cocolon_Rule18_ProUltraMutualCollaboration_Reflection_BodyFree_Receipt_20260811.json",
+    "blob_sha1": "f3a849f33df697072dd9d624ddcea1fb4d7d816a",
+    "immutable": true,
+    "mutation_count": 0,
+    "approval_identity_lifecycle_inheritance_count": 0
+  },
+  "reflected_policy": {
+    "role_count": 3,
+    "roles": {
+      "Pro_Karen": "PRODUCT_PURPOSE_ROUTE_COORDINATION_FIRST_DRAFT_AND_POST_WORK_EXPLANATION",
+      "Ultra_Karen": "INDEPENDENT_ACTUAL_TECHNICAL_GO_NO_GO_MINIMAL_DESIGN_EXECUTION_AND_POSTVERIFY",
+      "Mash": "PRODUCT_NORMATIVE_METHOD_FAMILY_CONTRACT_ACCEPTANCE_SAFETY_PRIVACY_PUBLIC_RELEASE_DECISION_AND_APPROVAL_OWNER"
+    },
+    "scope_level_count": 3,
+    "scope_levels": [
+      "ROUTINE_SINGLE_OWNER_SCOPE",
+      "JOINT_WITHIN_EXISTING_DELEGATION_SCOPE",
+      "MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE"
+    ],
+    "level_1_and_2_standing_delegation": "LIMITED_REVERSIBLE_BOUNDED_CURRENT_APPROVED_ENVELOPE_ONLY",
+    "classification_creates_blank_permission": false,
+    "separate_owner_or_separate_approval_requirement_precedence": true,
+    "method_family_owned_by_mash": true,
+    "implementation_technique_inside_unchanged_approved_family_owned_by_ultra": true,
+    "pro_product_route_alignment_required_for_level_2": true,
+    "ultra_technical_admission_required_for_level_2": true,
+    "duplicate_execution_allowed": false,
+    "parallel_write_allowed": false,
+    "silent_scope_expansion_allowed": false,
+    "post_work_report_is_retrospective_approval": false,
+    "automatic_progression": false
+  },
+  "standing_delegation_boundary": {
+    "allowed_only_when": [
+      "CURRENT_USER_INITIATED_BOUNDED_TASK_OR_CURRENT_DURABLE_OWNER_EXISTS",
+      "PRODUCT_GOAL_METHOD_FAMILY_CONTRACT_ACCEPTANCE_SAFETY_PRIVACY_PUBLIC_BOUNDARY_UNCHANGED",
+      "EXACT_REPOSITORY_PATH_EFFECT_VERIFICATION_STOP_AND_OWNER_FIXED_BEFORE_FIRST_EFFECT",
+      "PRO_PRODUCT_ROUTE_ALIGNED_AND_ULTRA_TECHNICALLY_ADMISSIBLE",
+      "CURRENT_PERMISSION_OR_VALID_DELEGATION_COVERS_THE_EXACT_EFFECT"
+    ],
+    "allowed_effect_classes": [
+      "REVERSIBLE_MINIMAL_NON_PROTECTED_SOURCE_TEST_DOCUMENT_OR_CONFIG_CHANGE",
+      "TEST_OR_RUNTIME_INSIDE_EXISTING_APPROVED_CONTRACT",
+      "AUTHORIZED_GITHUB_REFLECTION_AND_REMOTE_POSTVERIFICATION"
+    ],
+    "excluded_effect_classes": [
+      "RULE_CURRENT_NAVIGATION_AUTHORITY_APPROVAL_ENVELOPE_GATE_CREDIT_OR_CLOSURE_CHANGE",
+      "PROTECTED_OR_FROZEN_ACCEPTANCE_TEST_DENOMINATOR_COMPARATOR_OR_TARGET_PREIMAGE_CHANGE",
+      "NEW_METHOD_FAMILY_CONTRACT_ACCEPTANCE_QUALITY_SAFETY_PRIVACY_OR_PUBLIC_BOUNDARY",
+      "NEW_EXTERNAL_SERVICE_DEPENDENCY_SUBSYSTEM_HELPER_SCANNER_CARRIER_OR_SECRET",
+      "PRODUCTION_DEPLOYMENT_USER_DATA_DATABASE_ACCOUNT_PAYMENT_OR_RELEASE_EFFECT",
+      "DELETE_RENAME_HISTORY_REWRITE_OR_PUBLIC_API_CONTRACT_CHANGE",
+      "REUSE_RETRY_REACTIVATION_REPAIR_FALLBACK_NONREUSE_OR_STOP_BOUNDARY_CHANGE",
+      "SEPARATE_APPROVAL_OWNER_SCOPE",
+      "MEANINGFUL_COST_TIME_OPERATIONAL_BURDEN_OR_MANDATORY_WORK_INCREASE",
+      "NEXT_BOUNDED_WORK_AUTHORITY_OR_GATE"
+    ]
+  },
+  "terminal": {
+    "primary_outcome": "ADMINISTRATIVE_ONLY",
+    "collaboration_policy_reflected": true,
+    "product_credit_count": 0,
+    "technical_credit_count": 0,
+    "blocker_narrowed_count": 0,
+    "cycle001_state_change_count": 0,
+    "current_gate_change_count": 0,
+    "runtime_readiness_change_count": 0,
+    "authority_lifecycle_change_count": 0,
+    "automatic_progression": false
+  },
+  "zero_effects": {
+    "cycle001_current_state_change_count": 0,
+    "roadmap_change_count": 0,
+    "current_alignment_change_count": 0,
+    "current_closure_route_change_count": 0,
+    "source_change_count": 0,
+    "test_change_count": 0,
+    "fixture_change_count": 0,
+    "sample_change_count": 0,
+    "mashos_api_change_count": 0,
+    "karen_diary_change_count": 0,
+    "runtime_execution_count": 0,
+    "pytest_execution_count": 0,
+    "gate_b_authority_activation_count": 0,
+    "gate_b_authority_consumption_count": 0,
+    "next_technical_work_execution_count": 0
+  },
+  "publication_scope": {
+    "repository": "MassyuRed/Cocolon",
+    "stage1_state": "EXACT9_CURRENT_OWNER_CUTOVER_PUBLISHED_REMOTE_POSTVERIFIED",
+    "stage1_commit_sha1": "7dc8693f13c95de13e6229d439d262eca76ae18e",
+    "stage1_changed_path_count": 9,
+    "stage1_changed_paths_exact9": true,
+    "stage2_change": "RECEIPT_ONLY_ADD_EXACT1",
+    "stage2_receipt_path": "Cocolon_前提資料/Cocolon_Rule18_ThreeRoleThreeStageCollaboration_Reflection_BodyFree_Receipt_20260811.json",
+    "base_to_final_expected_path_count": 10,
+    "unauthorized_path_count": 0
+  },
+  "remote_postverify_at_receipt_creation": {
+    "stage1_result": "PASS",
+    "stage1_head_matches": true,
+    "stage1_exact9_remote_blob_match": true,
+    "stage1_changed_paths_exact9": true,
+    "historical_receipt_blob_unchanged": true,
+    "receipt_preexisting": false,
+    "final_head_recording": "OMITTED_FROM_RECEIPT_TO_AVOID_SELF_REFERENCE",
+    "receipt_physical_identity": "OMITTED_FROM_RECEIPT_TO_AVOID_SELF_REFERENCE"
+  },
+  "next_boundary": {
+    "current_cycle001_navigation_owner_unchanged": true,
+    "current_gate_b_status_unchanged": true,
+    "current_runtime_ready_status_unchanged": true,
+    "current_authority_status_unchanged": true,
+    "existing_separate_mash_approval_requirements_preserved": true,
+    "next_bounded_work_authorized_by_this_receipt": false,
+    "automatic_progression": false
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_PRETTY_JSON_LF_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "c625540872594823e3fc2b208a534efe3968b03b03f6ff7e6794caa8cf59ba1d"
+}
